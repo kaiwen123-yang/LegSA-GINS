@@ -2,8 +2,8 @@
 
 | Phase | Branch | Status | Solver Modified | Large Files Allowed | Main Output | Notes |
 |---|---|---|---|---|---|---|
-| N0 Bootstrap | stage/N0-bootstrap | in_progress | no | no | repo structure + governance docs | current |
-| N1 final_v23 wrapper | stage/N1-final-v23-wrapper | not_started | no | no | baseline wrapper | final_v23 not proposed |
+| N0 Bootstrap | stage/N0-bootstrap | done | no | no | repo structure + governance docs | completed |
+| N1 final_v23 wrapper | stage/N1-final-v23-wrapper | in_progress | no | no | baseline wrapper | current; final_v23 not proposed |
 | N2 frame/writer/evaluator | stage/N2-frame-writer-evaluator | not_started | limited infrastructure only | no | frame + writer + evaluator | hard frame gates |
 | N3 LegSA-ESKF | stage/N3-legsa-eskf | not_started | yes | no | source-aware ESKF | proposed begins |
 | N4 raw Doppler factor | stage/N4-raw-doppler-factor | not_started | yes | no | Doppler factor | sign convention required |

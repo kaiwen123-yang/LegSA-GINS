@@ -14,6 +14,10 @@ Add final_v23-style baseline wrapper as strong baseline and evaluator oracle.
 
 final_v23 is not proposed.
 
+N1 only creates baseline wrapper, manifest, oracle audit, and separation tests.
+
+No numerical claim is allowed before real final_v23 output is connected.
+
 ## Stage N2: Frame / Writer / Evaluator Infrastructure
 
 Goal:

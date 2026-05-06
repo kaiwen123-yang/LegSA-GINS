@@ -1,0 +1,40 @@
+title: final_v23_style_baseline_run_manifest
+type: object
+required:
+  - phase
+  - algorithm_role
+  - algorithm_name
+  - final_v23_is_proposed
+  - proposed_reads_final_v23_output
+  - final_v23_output_substitution
+  - trace_solver_input
+  - trace_used_for_tuning
+  - output_only_correction
+  - bad_epoch_deletion_for_metric
+  - raw_data_committed
+  - evidence_status
+properties:
+  phase:
+    const: N1
+  algorithm_role:
+    const: baseline
+  algorithm_name:
+    const: final_v23_style_baseline
+  final_v23_is_proposed:
+    const: false
+  proposed_reads_final_v23_output:
+    const: false
+  final_v23_output_substitution:
+    const: false
+  trace_solver_input:
+    const: false
+  trace_used_for_tuning:
+    const: false
+  output_only_correction:
+    const: false
+  bad_epoch_deletion_for_metric:
+    const: false
+  raw_data_committed:
+    const: false
+  evidence_status:
+    const: wrapper_only_until_real_final_v23_output_is_connected

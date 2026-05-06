@@ -5,6 +5,7 @@
 The project may claim, if supported by experiments:
 
 - a final_v23-style mature GNSS/INS backbone is used as the baseline/backbone reference;
+- final_v23-style baseline wrapper may be used as strong baseline and evaluator oracle;
 - a new LegSA-ESKF framework is developed for legged-state augmented source-aware filtering;
 - raw Doppler auxiliary factors are used;
 - Go2 yaw-rate and attitude can be used as weak priors through frame-safe adapters;
@@ -42,6 +43,7 @@ Do not claim:
 - outperforming final_v23 unless independently proven;
 - independent ground truth unless independently collected;
 - formal closure of old LegTC-FGO;
+- final_v23 output substitution as proposed result;
 - output-only correction;
 - trace-tuned performance;
 - metric passing by bad-epoch deletion.

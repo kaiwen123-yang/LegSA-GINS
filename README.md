@@ -38,9 +38,9 @@ LegSA-GINS will be developed as:
 
 Current phase:
 
-N0 bootstrap.
+N1 final_v23-style baseline wrapper.
 
-No solver implementation is included in this phase.
+The current N1 task builds the final_v23 baseline wrapper only; it does not implement the proposed LegSA-GINS solver.
 
 ## Strict Phase-I Non-goals
 
