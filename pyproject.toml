@@ -1,0 +1,9 @@
+[project]
+name = "legsa-gins"
+version = "0.0.1"
+description = "Legged State-Augmented Source-Aware GNSS/INS Smoothing"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

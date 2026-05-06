@@ -1,0 +1,29 @@
+from pathlib import Path
+
+
+FORBIDDEN_EXTENSIONS = {
+    ".bag",
+    ".ubx",
+    ".obs",
+    ".nav",
+    ".rnx",
+    ".rtcm",
+    ".bin",
+    ".raw",
+    ".pcap",
+}
+
+
+def test_no_forbidden_raw_data_extensions_in_working_tree():
+    """
+    N0 audit:
+    Fail if forbidden raw-data files appear in the repository working tree.
+    """
+    root = Path(__file__).resolve().parents[2]
+    forbidden = []
+    for path in root.rglob("*"):
+        if ".git" in path.parts or "__pycache__" in path.parts:
+            continue
+        if path.is_file() and path.suffix.lower() in FORBIDDEN_EXTENSIONS:
+            forbidden.append(path.relative_to(root))
+    assert forbidden == []

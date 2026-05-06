@@ -1,0 +1,17 @@
+*.md text eol=lf
+*.py text eol=lf
+*.cpp text eol=lf
+*.hpp text eol=lf
+*.h text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.sh text eol=lf
+
+*.bag binary
+*.ubx binary
+*.bin binary
+*.rtcm binary
+*.rnx binary
+*.obs binary
+*.nav binary
