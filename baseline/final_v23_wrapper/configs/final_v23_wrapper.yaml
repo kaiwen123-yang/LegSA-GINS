@@ -1,0 +1,20 @@
+phase: N1
+algorithm_role: baseline
+algorithm_name: final_v23_style_baseline
+description: final_v23 is used only as strong baseline and evaluator oracle
+final_v23_is_proposed: false
+proposed_reads_final_v23_output: false
+output_dir_rule: results/baselines/final_v23/
+dry_run_supported: true
+
+forbidden:
+  - final_v23_as_proposed
+  - final_v23_output_substitution
+  - proposed_solver_reads_final_v23_output
+  - trace_tuning
+  - output_only_correction
+  - rtk_fixed_claim
+  - carrier_ambiguity_fixed_claim
+  - self_raw_heading_claim
+  - full_raw_gnss_tight_coupling_claim
+  - fgo_feedback_claim
