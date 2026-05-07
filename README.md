@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N4E BY2 real-data input adapters and source-role manifest.
+N4F BY2 filter-core diagnostic trial.
 
 Current working phase:
 
-N4F BY2 filter-core diagnostic trial.
+N4G BY2 time-domain, Unitree IMU, and transverse heading diagnostic.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -61,6 +61,8 @@ N4 implements a toy-run-capable receiver-native position/velocity/heading filter
 N4E standardizes BY2 receiver-native GNSS status, raw-message summaries, trace evaluation-only reference, and Go2 body-state diagnostic data. N4E does not implement raw Doppler, Go2 priors, source-aware weighting, or FGO.
 
 N4F runs the current filter core on BY2 real data for diagnostic evaluation only. It does not implement raw Doppler, Go2 priors, source-aware weighting, or FGO.
+
+N4G audits BY2 time-domain usage, Unitree sportmodestate IMU semantics, event-normalized `algo_time_sec`, and transverse dual-antenna heading candidates. N4G does not claim hardware clock sync, physical time offset, formal heading offset, or numerical performance.
 
 ## Strict Phase-I Non-goals
 

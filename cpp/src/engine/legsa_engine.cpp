@@ -103,6 +103,14 @@ double asDouble(const Row& row, const std::string& key) {
   return std::stod(required(row, key));
 }
 
+double trialTime(const Row& row) {
+  const auto iter = row.find("algo_time_sec");
+  if (iter != row.end() && !iter->second.empty()) {
+    return std::stod(iter->second);
+  }
+  return asDouble(row, "timestamp");
+}
+
 bool asBool(const Row& row, const std::string& key) {
   const auto value = required(row, key);
   return value == "1" || value == "true" || value == "True" || value == "TRUE";
@@ -116,8 +124,8 @@ std::vector<types::ReceiverNativeMeasurement> readReceiverTrialCsv(
   bool has_previous = false;
   for (const auto& row : rows) {
     types::ReceiverNativeMeasurement meas;
-    // N4F schedules receiver updates on the standardized timestamp time axis.
-    meas.tow = asDouble(row, "timestamp");
+    // N4G schedules receiver updates on event-normalized algo_time_sec.
+    meas.tow = trialTime(row);
     meas.has_position = asBool(row, "has_position");
     meas.has_velocity = asBool(row, "has_velocity");
     meas.has_heading = asBool(row, "has_heading");
@@ -169,7 +177,7 @@ types::LegSAFilterState makeInitialState(
     const std::vector<types::LegSAImuSample>& imu_samples,
     const std::vector<types::ReceiverNativeMeasurement>& receiver_measurements) {
   if (imu_samples.empty()) {
-    throw std::runtime_error("N4F filter CSV trial requires IMU samples.");
+    throw std::runtime_error("N4G filter CSV trial requires IMU samples.");
   }
   types::LegSAFilterState initial;
   initial.pva.tow = imu_samples.front().tow;
@@ -189,7 +197,7 @@ types::LegSAFilterState makeInitialState(
     }
   }
   if (!found_position) {
-    throw std::runtime_error("N4F receiver trial CSV has no position for initialization.");
+    throw std::runtime_error("N4G receiver trial CSV has no position for initialization.");
   }
   initial.pva.euler_rad.x = 0.0;
   initial.pva.euler_rad.y = 0.0;
@@ -209,18 +217,22 @@ void writeBy2TrialRunManifest(const config::RuntimeConfig& config,
   const auto path = output_dir / "RUN_MANIFEST.json";
   std::ofstream stream(path);
   if (!stream) {
-    throw std::runtime_error("Failed to open N4F RUN_MANIFEST output: " + path.string());
+    throw std::runtime_error("Failed to open N4G RUN_MANIFEST output: " + path.string());
   }
   stream << "{\n";
-  stream << "  \"phase\": \"N4F\",\n";
+  stream << "  \"phase\": \"N4G\",\n";
   stream << "  \"algorithm_role\": \"proposed\",\n";
   stream << "  \"algorithm_name\": \"LegSA-GINS-filter-core-BY2-trial\",\n";
   stream << "  \"dataset_name\": \"" << config.dataset_name << "\",\n";
   stream << "  \"output_dir\": \"" << output_dir.string() << "\",\n";
   stream << "  \"imu_increment_rows\": " << imu_count << ",\n";
   stream << "  \"receiver_measurement_rows\": " << receiver_count << ",\n";
-  stream << "  \"evidence_status\": \"by2_filter_core_diagnostic_only_no_performance_claim\",\n";
+  stream << "  \"evidence_status\": \"by2_filter_core_event_normalized_diagnostic_only_no_performance_claim\",\n";
+  stream << "  \"event_normalized_time_axis\": true,\n";
+  stream << "  \"clock_sync_claim\": false,\n";
+  stream << "  \"physical_time_offset_claim\": false,\n";
   stream << "  \"trace_solver_input\": false,\n";
+  stream << "  \"trace_used_for_alignment\": false,\n";
   stream << "  \"trace_used_for_tuning\": false,\n";
   stream << "  \"output_only_correction\": false,\n";
   stream << "  \"bad_epoch_deletion_for_metric\": false,\n";
@@ -229,6 +241,10 @@ void writeBy2TrialRunManifest(const config::RuntimeConfig& config,
   stream << "  \"source_aware_weighting_claim\": false,\n";
   stream << "  \"fgo_smoother_claim\": false,\n";
   stream << "  \"numerical_performance_claim\": false,\n";
+  stream << "  \"imu_propagation_mode\": \"" << config.imu_propagation_mode << "\",\n";
+  stream << "  \"heading_offset_mode\": \"" << config.heading_offset_mode << "\",\n";
+  stream << "  \"heading_mounting_diagnostic_only\": true,\n";
+  stream << "  \"formal_heading_offset_selected\": false,\n";
   stream << "  \"body_imu_source\": \"go2_body_state_diagnostic_converted_to_imu_increment\",\n";
   stream << "  \"go2_body_state_used_as_imu_propagation_diagnostic\": true,\n";
   stream << "  \"receiver_imu_as_body_imu\": false,\n";
@@ -432,10 +448,10 @@ void LegSAEngine::runFilterCsvTrial(const std::filesystem::path& imu_csv,
   auto imu_samples = readers::readStandardImuIncrementCsv(imu_csv, max_epochs);
   const auto receiver_measurements = readReceiverTrialCsv(receiver_csv);
   if (imu_samples.empty()) {
-    throw std::runtime_error("N4F filter CSV trial found no IMU increments.");
+    throw std::runtime_error("N4G filter CSV trial found no IMU increments.");
   }
   if (receiver_measurements.empty()) {
-    throw std::runtime_error("N4F filter CSV trial found no receiver measurements.");
+    throw std::runtime_error("N4G filter CSV trial found no receiver measurements.");
   }
 
   filter::LegSAFilter filter;

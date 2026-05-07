@@ -1,5 +1,5 @@
-// 中文说明：N4F IMU increment reader 只读取 Go2 body-state diagnostic 转换结果；
-// 不读取 receiver imu-data.csv，不读取 trace，不做 Go2 prior claim。
+// 中文说明：N4G IMU increment reader 只读取 Go2 body-state diagnostic 转换结果；
+// 优先使用 algo_time_sec，不读取 receiver imu-data.csv，不读取 trace，不做 Go2 prior claim。
 // English note: The CSV is a propagation source for diagnostic filter-core trials only.
 
 #pragma once
@@ -17,4 +17,3 @@ std::vector<types::LegSAImuSample> readStandardImuIncrementCsv(
     std::size_t max_rows = 0);
 
 }  // namespace legsa_gins::readers
-

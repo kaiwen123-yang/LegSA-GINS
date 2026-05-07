@@ -1,10 +1,15 @@
-# Stage N4F: BY2 Filter-Core Diagnostic Trial
+# Stage N4F/N4G: BY2 Filter-Core Diagnostic Trial
 
 Stage N4F runs the current LegSA-GINS C++ filter core on BY2 real-data inputs and
 generates diagnostic evaluation artifacts. It answers whether the current filter
 core can complete a BY2 runtime and produce `LegSA_NAV.nav`, `LegSA_STD.csv`,
 `EVAL_NAV.csv`, `RUN_MANIFEST.json`, `error_series.csv`, `summary.json`, and a
 case-review-style `case_review.md`.
+
+Stage N4G keeps the same diagnostic boundary but repairs the time policy and
+input semantics. It audits Go2/GNSS time domains, builds event-normalized
+`algo_time_sec`, and runs IMU/heading candidates without claiming physical clock
+offset, formal heading offset, or performance.
 
 This trial is diagnostic only. It does not make a performance claim and it does
 not tune to the final_v23 nominal reference context.
@@ -13,13 +18,22 @@ not tune to the final_v23 nominal reference context.
 
 - Go2 body-state gyro/accel is converted into diagnostic IMU increments for
   propagation input.
+- Go2 and GNSS raw times are retained as `raw_time`; the filter uses
+  event-normalized `algo_time_sec`.
+- Go2 stamp may look like Unix epoch, but hardware clock sync is not claimed.
 - The Go2 body / IMU source frame is FLU; the adapter applies FLU to FRD exactly
   once and writes `IMU_FRD_COMPATIBLE`.
+- Unitree quaternion order is `wxyz`; RPY order is `roll, pitch, yaw`.
+- Unitree accelerometer contains gravity, so raw accel direct dvel is deprecated
+  diagnostic only.
 - Receiver `imu-data.csv` is not used as body IMU.
 - Receiver-native GNSS status is used as the trial measurement source.
 - `gnss2-status` is selected by default when it has position rows; otherwise the
   trial falls back to `gnss1-status`.
 - Trace is evaluation-only and is read only after C++ runtime output exists.
+- Transverse dual-antenna mounting is evaluated with `no_offset`, `plus90`, and
+  `minus90` candidates; formal heading offset remains evidence-missing until
+  antenna order is confirmed.
 
 ## Explicit Non-Goals
 
@@ -33,6 +47,9 @@ not tune to the final_v23 nominal reference context.
 - no output-only correction
 - no bad-epoch deletion for metrics
 - no final_v23 output substitution
+- no physical clock offset claim
+- no trace time alignment for solver
+- no formal heading offset selection
 
 ## Benchmark Context
 
@@ -56,5 +73,4 @@ The report carries these user-provided reference values as context only:
 - `final_v23_close`: horizontal RMSE <= 2.0 m and yaw RMSE <= 2.5 deg.
 - `final_v23_oracle_level`: horizontal RMSE <= 0.5 m and yaw RMSE <= 2.0 deg.
 
-Even if a threshold is met, N4F remains a diagnostic trial until later review.
-
+Even if a threshold is met, N4F/N4G remains a diagnostic trial until later review.

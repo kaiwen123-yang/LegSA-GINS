@@ -34,6 +34,14 @@ def _as_float(value: Any, field: str) -> float:
     return float(value)
 
 
+def _value_from(raw: dict[str, str], input_name: str) -> Any:
+    for candidate in input_name.split("|"):
+        value = raw.get(candidate)
+        if value is not None and str(value).strip() != "":
+            return value
+    return raw.get(input_name)
+
+
 def _load_rows(path: str | Path, field_map: dict[str, str]) -> list[dict[str, float]]:
     rows: list[dict[str, float]] = []
     with Path(path).open("r", encoding="utf-8-sig", newline="") as handle:
@@ -41,7 +49,7 @@ def _load_rows(path: str | Path, field_map: dict[str, str]) -> list[dict[str, fl
         for raw in reader:
             row: dict[str, float] = {}
             for output_name, input_name in field_map.items():
-                row[output_name] = _as_float(raw.get(input_name), input_name)
+                row[output_name] = _as_float(_value_from(raw, input_name), input_name)
             rows.append(row)
     rows.sort(key=lambda item: item["timestamp"])
     return rows
@@ -51,7 +59,7 @@ def load_eval_nav(path: str | Path) -> list[dict[str, float]]:
     return _load_rows(
         path,
         {
-            "timestamp": "timestamp",
+            "timestamp": "algo_time_sec|timestamp",
             "lat_deg": "lat_deg",
             "lon_deg": "lon_deg",
             "height_m": "height_m",
@@ -66,7 +74,7 @@ def load_trace_reference(path: str | Path) -> list[dict[str, float]]:
     return _load_rows(
         path,
         {
-            "timestamp": "timestamp",
+            "timestamp": "algo_time_sec|timestamp",
             "lat_deg": "lat_deg",
             "lon_deg": "lon_deg",
             "height_m": "height_m",
@@ -200,4 +208,3 @@ def write_summary(summary: dict[str, Any], path: str | Path) -> None:
     output = Path(path)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-

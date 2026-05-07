@@ -1,4 +1,4 @@
-// 中文说明：本 reader 只消费 N4F 标准 IMU increment CSV；frame 必须已经是
+// 中文说明：本 reader 只消费 N4G 标准 IMU increment CSV；优先使用 algo_time_sec；
 // IMU_FRD_COMPATIBLE，避免 C++ runtime 内再次做 FLU->FRD。
 // English note: No receiver IMU, trace, raw Doppler, or Go2 prior input is read here.
 
@@ -17,7 +17,6 @@ using Row = std::unordered_map<std::string, std::string>;
 
 const std::vector<std::string> kRequiredFields = {
     "timestamp",
-    "tow",
     "dt",
     "dtheta_x",
     "dtheta_y",
@@ -106,6 +105,14 @@ double asDouble(const Row& row, const std::string& key) {
   return std::stod(required(row, key));
 }
 
+double sampleTime(const Row& row) {
+  const auto iter = row.find("algo_time_sec");
+  if (iter != row.end() && !iter->second.empty()) {
+    return std::stod(iter->second);
+  }
+  return asDouble(row, "timestamp");
+}
+
 }  // namespace
 
 std::vector<types::LegSAImuSample> readStandardImuIncrementCsv(
@@ -118,16 +125,16 @@ std::vector<types::LegSAImuSample> readStandardImuIncrementCsv(
   for (const auto& row : rows) {
     const auto frame = required(row, "frame");
     if (frame != "IMU_FRD_COMPATIBLE") {
-      throw std::runtime_error("N4F IMU increment frame must be IMU_FRD_COMPATIBLE.");
+      throw std::runtime_error("N4G IMU increment frame must be IMU_FRD_COMPATIBLE.");
     }
     types::LegSAImuSample sample;
-    sample.tow = asDouble(row, "timestamp");
+    sample.tow = sampleTime(row);
     sample.dt = asDouble(row, "dt");
     if (sample.dt <= 0.0) {
-      throw std::runtime_error("N4F IMU increment dt must be positive.");
+      throw std::runtime_error("N4G IMU increment dt must be positive.");
     }
     if (has_previous && sample.tow < previous_tow) {
-      throw std::runtime_error("N4F IMU increment timestamp must be monotonic.");
+      throw std::runtime_error("N4G IMU increment algo_time_sec must be monotonic.");
     }
     previous_tow = sample.tow;
     has_previous = true;

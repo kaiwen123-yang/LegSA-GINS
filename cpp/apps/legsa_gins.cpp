@@ -14,7 +14,8 @@ namespace {
 void printUsage(const char* program) {
   std::cerr << "Usage: " << program
             << " (--dry-run | --dry-filter-demo | --run-filter-csv) [--output-dir PATH] "
-               "[--imu-csv PATH --receiver-csv PATH --max-epochs N]\n";
+               "[--imu-csv PATH --receiver-csv PATH --max-epochs N "
+               "--imu-propagation-mode MODE --heading-offset-mode MODE]\n";
 }
 
 }  // namespace
@@ -65,6 +66,18 @@ int main(int argc, char** argv) {
         return 2;
       }
       max_epochs = static_cast<std::size_t>(std::stoull(argv[++index]));
+    } else if (arg == "--imu-propagation-mode") {
+      if (index + 1 >= argc) {
+        printUsage(argv[0]);
+        return 2;
+      }
+      config.imu_propagation_mode = argv[++index];
+    } else if (arg == "--heading-offset-mode") {
+      if (index + 1 >= argc) {
+        printUsage(argv[0]);
+        return 2;
+      }
+      config.heading_offset_mode = argv[++index];
     } else if (arg == "--output-dir") {
       if (index + 1 >= argc) {
         printUsage(argv[0]);
