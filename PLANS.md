@@ -56,40 +56,45 @@ Read-only audit of /home/kaiwen/KF-GINS and define N3C reproduction contract.
 
 No algorithm implementation.
 
-## Stage N3C: final_v23-style Runtime Reproduction Connection
+## Stage N3C: final_v23-style Reproduction Connection and BY2 Data Contract
 
 Goal:
-Build or run final_v23 baseline through wrapper, standardize NAV/STD/EVAL_NAV,
-and perform oracle checks when real data/config are available.
+Connect final_v23/KF-GINS baseline outputs to LegSA-GINS standardized baseline outputs, and define BY2 source-role/path contract.
 
-final_v23 remains baseline, not the proposed LegSA-GINS solver.
+No proposed solver implementation.
 
 ## Stage N3: LegSA-ESKF
 
 Goal:
 Implement a legged state-augmented source-aware error-state filter.
 
-## Stage N4: Raw Doppler Factor
+## Stage N4: final_v23-style Filtering Runtime / Receiver-Native Update Reproduction
+
+Goal:
+Implement later filtering-runtime reproduction steps only after N3C contracts are
+closed.
+
+## Stage N5: Raw Doppler Factor
 
 Goal:
 Implement raw Doppler auxiliary residual and sign/unit tests.
 
-## Stage N5: Source-Aware Weighting
+## Stage N6: Source-Aware Weighting
 
 Goal:
 Implement source-aware measurement weighting using GNSS status, Doppler residual, Go2 body-state, and support integrity cues.
 
-## Stage N6: No-Feedback Fixed-Lag Smoother
+## Stage N7: No-Feedback Fixed-Lag Smoother
 
 Goal:
 Implement fixed-lag smoothing without feedback to the filter.
 
-## Stage N7: Ablation and Degraded-GNSS Evaluation
+## Stage N8: Ablation and Degraded-GNSS Evaluation
 
 Goal:
 Run proposed vs pure INS, single-antenna GNSS/INS, final_v23-style baseline, and ablations.
 
-## Stage N8: Paper Package
+## Stage N9: Paper Package
 
 Goal:
 Generate paper-ready figures, tables, manifests, and claim-audit reports.

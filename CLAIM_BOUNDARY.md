@@ -30,6 +30,11 @@ Allowed N3B source-audit statement:
 - External final_v23 / KF-GINS source may be audited for baseline reproduction planning.
 - N3B may document source maps, runtime flow, output contracts, and reproduction requirements.
 
+Allowed N3C reproduction-connection statement:
+
+- final_v23/KF-GINS baseline outputs may be parsed and standardized for baseline evaluation.
+- BY2 local data paths may be probed through ignored local config for source-role validation.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -69,6 +74,12 @@ Do not claim:
 - Source audit as numerical performance evidence.
 - final_v23 reproduction before N3C oracle pass.
 - improved navigation performance in N3B.
+- N3C standardized final_v23 outputs as proposed output.
+- N3C parser output-only correction.
+- N3C numerical reproduction before oracle pass.
+- Proposed solver reading final_v23 baseline outputs.
+- Trace reference as solver input.
+- Receiver internal IMU treated as Go2 body-state IMU.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
@@ -85,6 +96,18 @@ Source audit must not be used as numerical performance evidence.
 N3B must not claim final_v23 reproduction before N3C oracle pass.
 
 N3B must not claim improved navigation performance.
+
+N3C standardized final_v23 outputs must not be used as proposed output.
+
+N3C parsers must not perform output-only correction.
+
+N3C must not claim numerical reproduction before oracle pass.
+
+N3C must not allow proposed solver to read final_v23 baseline outputs.
+
+Trace reference must not be used as solver input.
+
+Receiver internal IMU must not be treated as Go2 body-state IMU.
 
 ## Evidence Rule
 

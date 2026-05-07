@@ -1,0 +1,18 @@
+phase: N3C
+dataset_name: configure_dataset_name
+external_source:
+  source_root: "configure_in_configs/local/final_v23_repro.local.yaml"
+  build_dir: "configure_outside_source_root"
+  executable: "configure_external_executable"
+  config: "configure_external_runtime_config"
+outputs:
+  output_dir: "configure_local_output_dir"
+rules:
+  final_v23_is_proposed: false
+  proposed_reads_final_v23_output: false
+  final_v23_output_substitution: false
+  trace_solver_input: false
+  trace_used_for_tuning: false
+  output_only_correction: false
+  numerical_claim_without_oracle_pass: false
+  raw_data_committed: false
