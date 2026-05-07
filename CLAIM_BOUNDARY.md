@@ -39,6 +39,10 @@ Allowed N3D readability statement:
 
 - N3D may add Chinese comments and readability documentation.
 
+Allowed N4 filter-core statement:
+
+- N4 may implement LegSA-GINS C++ filter core with receiver-native position, velocity, and heading updates.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -88,6 +92,14 @@ Do not claim:
 - Code comments describing dry-run outputs as numerical evidence.
 - Code comments describing baseline parsers as proposed solver implementation.
 - Code comments weakening trace_evaluation_only or receiver_imu_as_body_imu=false rules.
+- N4 toy filter output as numerical performance evidence.
+- N4 final_v23 parity.
+- N4 raw Doppler.
+- N4 Go2 priors.
+- N4 source-aware weighting.
+- N4 FGO smoothing.
+- N4 trace solver input.
+- N4 final_v23 output as proposed solver input.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
@@ -124,6 +136,22 @@ Code comments must not describe dry-run outputs as numerical evidence.
 Code comments must not describe baseline parsers as proposed solver implementation.
 
 Code comments must not weaken trace_evaluation_only or receiver_imu_as_body_imu=false rules.
+
+N4 toy filter output must not be used as numerical performance evidence.
+
+N4 must not claim final_v23 parity.
+
+N4 must not claim raw Doppler.
+
+N4 must not claim Go2 priors.
+
+N4 must not claim source-aware weighting.
+
+N4 must not claim FGO smoothing.
+
+N4 must not use trace as solver input.
+
+N4 must not use final_v23 output as proposed solver input.
 
 ## Evidence Rule
 

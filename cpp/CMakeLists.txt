@@ -7,6 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 file(GLOB_RECURSE LEGSA_GINS_RUNTIME_SOURCES CONFIGURE_DEPENDS
+  # N4 math/filter/mechanization/updates/readers sources stay under cpp/src
+  # and are picked up here without adding external dependencies.
   "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
 )
 

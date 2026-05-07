@@ -28,6 +28,7 @@ class LegSAEngine {
   double timestamp() const;
   void writeCurrentOutputs();
   void runDryDemo();
+  void runFilterToyDemo();
 
  private:
   void applyConfigToRegistry();

@@ -7,9 +7,33 @@
 #include <stdexcept>
 #include <utility>
 
+#include "legsa_gins/filter/diag_covariance.hpp"
+#include "legsa_gins/filter/legsa_filter.hpp"
 #include "legsa_gins/io/run_manifest_writer.hpp"
+#include "legsa_gins/math/constants.hpp"
+#include "legsa_gins/math/rotation.hpp"
 
 namespace legsa_gins::engine {
+namespace {
+
+types::NavState navFromFilterState(const types::LegSAFilterState& state) {
+  types::NavState nav;
+  nav.tow = state.pva.tow;
+  nav.lat_deg = state.pva.blh_rad_m.x * math::rad_to_deg;
+  nav.lon_deg = state.pva.blh_rad_m.y * math::rad_to_deg;
+  nav.height_m = state.pva.blh_rad_m.z;
+  nav.vn_mps = state.pva.vel_ned_mps.x;
+  nav.ve_mps = state.pva.vel_ned_mps.y;
+  nav.vd_mps = state.pva.vel_ned_mps.z;
+  nav.roll_deg = state.pva.euler_rad.x * math::rad_to_deg;
+  nav.pitch_deg = state.pva.euler_rad.y * math::rad_to_deg;
+  nav.yaw_deg = state.pva.euler_rad.z * math::rad_to_deg;
+  nav.status = "legsa_filter_core_toy_only";
+  nav.source_role = "proposed_filter_core";
+  return nav;
+}
+
+}  // namespace
 
 LegSAEngine::LegSAEngine(config::RuntimeConfig config) : config_(std::move(config)) {
   applyConfigToRegistry();
@@ -132,6 +156,69 @@ void LegSAEngine::runDryDemo() {
   writeCurrentOutputs();
 }
 
+void LegSAEngine::runFilterToyDemo() {
+  const std::filesystem::path output_dir(config_.output_dir);
+
+  // N4 toy demo 构造内部 IMU 与 receiver-native 测量，不读取 trace/final_v23/BY2 raw data。
+  // The N4 toy demo uses synthetic inputs only and never consumes trace or final_v23 output.
+  types::LegSAFilterState initial;
+  initial.pva.tow = 100000.0;
+  initial.pva.blh_rad_m = {30.0 * math::deg_to_rad, 120.0 * math::deg_to_rad, 15.0};
+  initial.pva.vel_ned_mps = {0.10, 0.20, -0.05};
+  initial.pva.euler_rad = {0.0, 0.0, 85.0 * math::deg_to_rad};
+  initial.pva.qbn = math::eulerRadToQuaternion(
+      initial.pva.euler_rad.x, initial.pva.euler_rad.y, initial.pva.euler_rad.z);
+  initial.status = "legsa_filter_core_toy_only";
+
+  std::vector<types::LegSAImuSample> imu_samples;
+  for (int index = 0; index < 5; ++index) {
+    types::LegSAImuSample sample;
+    sample.tow = 100000.0 + static_cast<double>(index);
+    sample.dt = index == 0 ? 0.0 : 1.0;
+    sample.dtheta_rad = {0.0, 0.0, 0.0005};
+    sample.dvel_mps = {0.01, 0.00, 0.00};
+    imu_samples.push_back(sample);
+  }
+
+  std::vector<types::ReceiverNativeMeasurement> receiver_measurements;
+  for (int index = 1; index <= 3; ++index) {
+    types::ReceiverNativeMeasurement meas;
+    meas.tow = 100000.0 + static_cast<double>(index);
+    meas.has_position = true;
+    meas.has_velocity = true;
+    meas.has_heading = true;
+    meas.blh_rad_m = {
+        (30.0 + 0.000001 * index) * math::deg_to_rad,
+        (120.0 + 0.0000015 * index) * math::deg_to_rad,
+        15.0 + 0.02 * index,
+    };
+    meas.pos_std_m = {1.5, 1.5, 2.0};
+    meas.vel_ned_mps = {0.10 + 0.01 * index, 0.20 + 0.005 * index, -0.05};
+    meas.vel_std_mps = {0.2, 0.2, 0.3};
+    meas.yaw_heading_rad = (85.0 + 0.1 * index) * math::deg_to_rad;
+    meas.yaw_std_rad = 2.0 * math::deg_to_rad;
+    meas.source = "toy_receiver_native";
+    receiver_measurements.push_back(meas);
+  }
+
+  filter::LegSAFilter filter;
+  filter.initialize(initial, filter::makeConservativeDefaultCovariance());
+  filter.process(imu_samples, receiver_measurements);
+
+  io::NavWriter nav_writer(output_dir);
+  io::StdWriter std_writer(output_dir);
+  io::EvalNavWriterBridge eval_writer(output_dir);
+  types::StdState std_state = filter.getStdState();
+  for (const auto& state : filter.getHistory()) {
+    const types::NavState nav_state = navFromFilterState(state);
+    std_state.tow = state.pva.tow;
+    nav_writer.write(nav_state);
+    std_writer.write(std_state);
+    eval_writer.write(nav_state);
+  }
+  io::RunManifestWriter::writeFilterCoreToyManifest(config_, output_dir);
+}
+
 void LegSAEngine::applyConfigToRegistry() {
   // ReceiverPosition/Velocity/Heading 是 backbone slot；高级 proposed factor 默认关闭。
   // Receiver slots are backbone placeholders; advanced proposed factors remain disabled by default.
@@ -152,8 +239,8 @@ void LegSAEngine::applyConfigToRegistry() {
   }
 
   if (config_.enable_raw_doppler) {
-    // 注册开关不等于 residual 实现；N3D 只加注释，不启用新算法。
-    // Enabling a registry flag is not a residual implementation; N3D adds comments only.
+    // 注册开关不等于 residual 实现；N4 不启用 raw Doppler 算法。
+    // Enabling a registry flag is not a residual implementation; N4 keeps raw Doppler off.
     registry_.enable(factors::FactorKind::RawDoppler);
   }
   if (config_.enable_go2_yawrate_prior) {

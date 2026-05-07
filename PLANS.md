@@ -75,11 +75,12 @@ No algorithm implementation.
 Goal:
 Implement a legged state-augmented source-aware error-state filter.
 
-## Stage N4: final_v23-style Filtering Runtime / Receiver-Native Update Reproduction
+## Stage N4: LegSA-GINS C++ Filter Core
 
 Goal:
-Implement later filtering-runtime reproduction steps only after N3C contracts are
-closed.
+Implement the first self-owned LegSA-GINS filter core with IMU propagation foundation and receiver-native position/velocity/heading updates.
+
+No raw Doppler, no Go2 priors, no source-aware weighting, no FGO.
 
 ## Stage N5: Raw Doppler Factor
 

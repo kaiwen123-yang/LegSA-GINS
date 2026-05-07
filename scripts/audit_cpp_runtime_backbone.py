@@ -58,7 +58,10 @@ FORBIDDEN_CPP_PATTERNS = [
     r"class\s+\w*Smoother\w*",
     r"optimizeFixedLag",
     r"factor_graph",
-    r"final_v23_output_substitution",
+    # N4 manifest may contain the boundary field when it is false; only true/enabled substitution is forbidden.
+    # N4 以后 manifest 允许记录 false 字段，但仍禁止打开 final_v23 输出替代。
+    r"final_v23_output_substitution\s*[:=]\s*true",
+    r"substituteFinalV23",
 ]
 
 
