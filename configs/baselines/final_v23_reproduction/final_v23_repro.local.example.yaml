@@ -1,0 +1,30 @@
+phase: N3B
+algorithm_role: baseline
+algorithm_name: final_v23_reproduction
+description: "Local example config for final_v23/KF-GINS reproduction planning. Do not commit raw data."
+external_source:
+  local_path: "/home/kaiwen/KF-GINS"
+  github_repo_name: "kaiwen123-yang/KF-GINS-graduation-design"
+runtime:
+  build_dir: "build/final_v23"
+  build_command: "evidence_missing"
+  run_command: "evidence_missing"
+dataset:
+  name: "evidence_missing"
+  config_path: "evidence_missing"
+  imu_path: "evidence_missing"
+  gnss_path: "evidence_missing"
+outputs:
+  nav: "evidence_missing"
+  std: "evidence_missing"
+  imu_err: "evidence_missing"
+  eval_nav: "evidence_missing"
+rules:
+  final_v23_is_proposed: false
+  proposed_reads_final_v23_output: false
+  final_v23_output_substitution: false
+  trace_solver_input: false
+  trace_used_for_tuning: false
+  output_only_correction: false
+  raw_data_committed: false
+  numerical_claim_without_oracle_pass: false

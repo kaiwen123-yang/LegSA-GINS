@@ -6,7 +6,8 @@
 | N1 final_v23 wrapper | stage/N1-final-v23-wrapper | done | no | no | baseline wrapper | completed; final_v23 not proposed |
 | N2 frame/writer/evaluator | stage/N2-frame-writer-evaluator | done | no | no | frame + writer + evaluator | frame/writer/evaluator infrastructure completed as lightweight standard-library utilities |
 | N3A C++ runtime backbone | stage/N3A-cpp-runtime-backbone | done | no | no | C++ runtime scaffold | dry-run NAV/STD/EVAL_NAV contracts only; not a validated solver |
-| N3B final_v23 reproduction connection | stage/N3B-final-v23-reproduction | not_started | no | no | baseline reproduction bridge | final_v23 remains baseline/backbone reference, not proposed |
+| N3B final_v23 / KF-GINS source audit | stage/N3B-final-v23-source-audit | done | no | no | source map + reproduction contract | read-only external source audit; no external source copied |
+| N3C final_v23 runtime reproduction connection | stage/N3C-final-v23-runtime-reproduction | not_started | no | no | baseline runtime bridge | final_v23 remains baseline/backbone reference, not proposed |
 | N3 LegSA-ESKF Python skeleton | stage/N3-legsa-eskf | side_branch_not_mainline | yes | no | source-aware ESKF skeleton | not merged into mainline N3A path |
 | N4 raw Doppler factor | stage/N4-raw-doppler-factor | not_started | yes | no | Doppler factor | sign convention required |
 | N5 source-aware weighting | stage/N5-source-aware-weighting | not_started | yes | no | weighting module | no trace tuning |

@@ -38,17 +38,19 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N2 frame / writer / evaluator infrastructure.
+N3A C++ runtime backbone.
 
 Current working phase:
 
-N3A C++ runtime backbone.
+N3B final_v23 / KF-GINS source audit and reproduction contract.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
 N2 builds frame utilities, writer contracts, manifest contracts, evaluator utilities, and audits. N2 does not implement the proposed solver.
 
 N3A adds a C++ runtime skeleton with dry-run NAV/STD/EVAL_NAV output contracts. It does not implement a validated navigation solver, final_v23 reproduction, or any numerical performance claim.
+
+N3B reads external source only for audit and reproduction planning. N3B does not copy external source into LegSA-GINS. N3B does not implement proposed factors or numerical performance evaluation.
 
 ## Strict Phase-I Non-goals
 
