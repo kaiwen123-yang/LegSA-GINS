@@ -1,0 +1,19 @@
+# Example config for the N4F BY2 filter-core diagnostic trial.
+# Fill local BY2 paths only in a private runtime command or local copy.
+
+phase: N4F
+algorithm_name: LegSA-GINS-filter-core-BY2-trial
+diagnostic_only: true
+trace_solver_input: false
+trace_evaluation_only: true
+output_only_correction: false
+bad_epoch_deletion_for_metric: false
+receiver_imu_as_body_imu: false
+go2_body_state_used_as_imu_propagation_diagnostic: true
+raw_doppler_claim: false
+go2_prior_claim: false
+source_aware_weighting_claim: false
+fgo_smoother_claim: false
+numerical_performance_claim: false
+final_v23_reference_context_only: true
+

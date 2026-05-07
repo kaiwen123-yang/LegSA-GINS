@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N4 LegSA-GINS C++ filter core.
+N4E BY2 real-data input adapters and source-role manifest.
 
 Current working phase:
 
-N4E BY2 real-data input adapters and source-role manifest.
+N4F BY2 filter-core diagnostic trial.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -59,6 +59,8 @@ N3D improves code readability with Chinese comments only. N3D does not implement
 N4 implements a toy-run-capable receiver-native position/velocity/heading filter core only. N4 does not implement raw Doppler, Go2 priors, source-aware weighting, or FGO smoothing.
 
 N4E standardizes BY2 receiver-native GNSS status, raw-message summaries, trace evaluation-only reference, and Go2 body-state diagnostic data. N4E does not implement raw Doppler, Go2 priors, source-aware weighting, or FGO.
+
+N4F runs the current filter core on BY2 real data for diagnostic evaluation only. It does not implement raw Doppler, Go2 priors, source-aware weighting, or FGO.
 
 ## Strict Phase-I Non-goals
 

@@ -48,6 +48,10 @@ Allowed N4E input-adapter statement:
 - N4E may create BY2 input adapters and source-role manifests.
 - N4E may standardize receiver-native GNSS status and Go2 body-state diagnostic data.
 
+Allowed N4F diagnostic-trial statement:
+
+- N4F may generate diagnostic BY2 filter-core trial metrics.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -112,6 +116,11 @@ Do not claim:
 - N4E must not claim source-aware weighting.
 - N4E must not claim FGO smoothing.
 - N4E standardized data must not be used as performance evidence.
+- N4F metrics must not be written as formal performance claim.
+- N4F must not tune to final_v23.
+- N4F must not delete bad epochs to pass metrics.
+- N4F must not use trace as solver input.
+- N4F must not claim final_v23 parity.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
@@ -178,6 +187,16 @@ N4E must not claim source-aware weighting.
 N4E must not claim FGO smoothing.
 
 N4E standardized data must not be used as performance evidence.
+
+N4F metrics must not be written as formal performance claim.
+
+N4F must not tune to final_v23.
+
+N4F must not delete bad epochs to pass metrics.
+
+N4F must not use trace as solver input.
+
+N4F must not claim final_v23 parity.
 
 ## Evidence Rule
 

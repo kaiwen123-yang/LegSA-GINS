@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <cstddef>
+#include <filesystem>
 #include <memory>
 #include <vector>
 
@@ -29,6 +31,9 @@ class LegSAEngine {
   void writeCurrentOutputs();
   void runDryDemo();
   void runFilterToyDemo();
+  void runFilterCsvTrial(const std::filesystem::path& imu_csv,
+                         const std::filesystem::path& receiver_csv,
+                         std::size_t max_epochs);
 
  private:
   void applyConfigToRegistry();

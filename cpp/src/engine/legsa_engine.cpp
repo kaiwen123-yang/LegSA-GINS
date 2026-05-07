@@ -4,7 +4,12 @@
 #include "legsa_gins/engine/legsa_engine.hpp"
 
 #include <filesystem>
+#include <fstream>
+#include <iomanip>
+#include <sstream>
 #include <stdexcept>
+#include <string>
+#include <unordered_map>
 #include <utility>
 
 #include "legsa_gins/filter/diag_covariance.hpp"
@@ -12,9 +17,136 @@
 #include "legsa_gins/io/run_manifest_writer.hpp"
 #include "legsa_gins/math/constants.hpp"
 #include "legsa_gins/math/rotation.hpp"
+#include "legsa_gins/readers/standard_imu_increment_reader.hpp"
 
 namespace legsa_gins::engine {
 namespace {
+
+using Row = std::unordered_map<std::string, std::string>;
+
+std::vector<std::string> splitCsvLine(const std::string& line) {
+  std::vector<std::string> fields;
+  std::stringstream stream(line);
+  std::string item;
+  while (std::getline(stream, item, ',')) {
+    if (!item.empty() && item.back() == '\r') {
+      item.pop_back();
+    }
+    fields.push_back(item);
+  }
+  return fields;
+}
+
+void requireReceiverTrialHeader(const std::vector<std::string>& header,
+                                const std::filesystem::path& path) {
+  const std::vector<std::string> required = {
+      "timestamp",     "tow",          "lat_deg",      "lon_deg",
+      "height_m",      "vn_mps",       "ve_mps",       "vd_mps",
+      "yaw_deg",       "pos_std_m",    "vel_std_mps",  "yaw_std_deg",
+      "has_position",  "has_velocity", "has_heading",  "source_name",
+  };
+  for (const auto& field : required) {
+    bool present = false;
+    for (const auto& candidate : header) {
+      if (candidate == field) {
+        present = true;
+        break;
+      }
+    }
+    if (!present) {
+      throw std::runtime_error("Receiver trial CSV missing field " + field + ": " +
+                               path.string());
+    }
+  }
+}
+
+std::vector<Row> readReceiverTrialRows(const std::filesystem::path& path) {
+  std::ifstream stream(path);
+  if (!stream) {
+    throw std::runtime_error("Failed to open receiver trial CSV: " + path.string());
+  }
+  std::string line;
+  if (!std::getline(stream, line)) {
+    throw std::runtime_error("Receiver trial CSV is empty: " + path.string());
+  }
+  const auto header = splitCsvLine(line);
+  requireReceiverTrialHeader(header, path);
+
+  std::vector<Row> rows;
+  while (std::getline(stream, line)) {
+    if (line.empty()) {
+      continue;
+    }
+    const auto fields = splitCsvLine(line);
+    if (fields.size() != header.size()) {
+      throw std::runtime_error("Receiver trial CSV row has wrong field count: " +
+                               path.string());
+    }
+    Row row;
+    for (std::size_t index = 0; index < header.size(); ++index) {
+      row[header[index]] = fields[index];
+    }
+    rows.push_back(row);
+  }
+  return rows;
+}
+
+std::string required(const Row& row, const std::string& key) {
+  const auto iter = row.find(key);
+  if (iter == row.end() || iter->second.empty()) {
+    throw std::runtime_error("Receiver trial CSV missing required value: " + key);
+  }
+  return iter->second;
+}
+
+double asDouble(const Row& row, const std::string& key) {
+  return std::stod(required(row, key));
+}
+
+bool asBool(const Row& row, const std::string& key) {
+  const auto value = required(row, key);
+  return value == "1" || value == "true" || value == "True" || value == "TRUE";
+}
+
+std::vector<types::ReceiverNativeMeasurement> readReceiverTrialCsv(
+    const std::filesystem::path& path) {
+  const auto rows = readReceiverTrialRows(path);
+  std::vector<types::ReceiverNativeMeasurement> measurements;
+  double previous_timestamp = 0.0;
+  bool has_previous = false;
+  for (const auto& row : rows) {
+    types::ReceiverNativeMeasurement meas;
+    // N4F schedules receiver updates on the standardized timestamp time axis.
+    meas.tow = asDouble(row, "timestamp");
+    meas.has_position = asBool(row, "has_position");
+    meas.has_velocity = asBool(row, "has_velocity");
+    meas.has_heading = asBool(row, "has_heading");
+    meas.blh_rad_m = {
+        asDouble(row, "lat_deg") * math::deg_to_rad,
+        asDouble(row, "lon_deg") * math::deg_to_rad,
+        asDouble(row, "height_m"),
+    };
+    const double pos_std = asDouble(row, "pos_std_m");
+    const double vel_std = asDouble(row, "vel_std_mps");
+    meas.pos_std_m = {pos_std, pos_std, pos_std};
+    meas.vel_ned_mps = {
+        asDouble(row, "vn_mps"),
+        asDouble(row, "ve_mps"),
+        asDouble(row, "vd_mps"),
+    };
+    meas.vel_std_mps = {vel_std, vel_std, vel_std};
+    meas.yaw_heading_rad = asDouble(row, "yaw_deg") * math::deg_to_rad;
+    meas.yaw_std_rad = asDouble(row, "yaw_std_deg") * math::deg_to_rad;
+    meas.source = required(row, "source_name");
+    if (has_previous && meas.tow < previous_timestamp) {
+      throw std::runtime_error("Receiver trial timestamp must be monotonic.");
+    }
+    previous_timestamp = meas.tow;
+    has_previous = true;
+    measurements.push_back(meas);
+  }
+  return measurements;
+}
 
 types::NavState navFromFilterState(const types::LegSAFilterState& state) {
   types::NavState nav;
@@ -31,6 +163,79 @@ types::NavState navFromFilterState(const types::LegSAFilterState& state) {
   nav.status = "legsa_filter_core_toy_only";
   nav.source_role = "proposed_filter_core";
   return nav;
+}
+
+types::LegSAFilterState makeInitialState(
+    const std::vector<types::LegSAImuSample>& imu_samples,
+    const std::vector<types::ReceiverNativeMeasurement>& receiver_measurements) {
+  if (imu_samples.empty()) {
+    throw std::runtime_error("N4F filter CSV trial requires IMU samples.");
+  }
+  types::LegSAFilterState initial;
+  initial.pva.tow = imu_samples.front().tow;
+  bool found_position = false;
+  bool found_heading = false;
+  for (const auto& measurement : receiver_measurements) {
+    if (!found_position && measurement.has_position) {
+      initial.pva.blh_rad_m = measurement.blh_rad_m;
+      found_position = true;
+    }
+    if (!found_heading && measurement.has_heading) {
+      initial.pva.euler_rad.z = measurement.yaw_heading_rad;
+      found_heading = true;
+    }
+    if (found_position && found_heading) {
+      break;
+    }
+  }
+  if (!found_position) {
+    throw std::runtime_error("N4F receiver trial CSV has no position for initialization.");
+  }
+  initial.pva.euler_rad.x = 0.0;
+  initial.pva.euler_rad.y = 0.0;
+  initial.pva.qbn = math::eulerRadToQuaternion(
+      initial.pva.euler_rad.x, initial.pva.euler_rad.y, initial.pva.euler_rad.z);
+  initial.status = "legsa_filter_core_by2_trial_diagnostic";
+  return initial;
+}
+
+std::string jsonBool(bool value) { return value ? "true" : "false"; }
+
+void writeBy2TrialRunManifest(const config::RuntimeConfig& config,
+                              const std::filesystem::path& output_dir,
+                              std::size_t imu_count,
+                              std::size_t receiver_count) {
+  std::filesystem::create_directories(output_dir);
+  const auto path = output_dir / "RUN_MANIFEST.json";
+  std::ofstream stream(path);
+  if (!stream) {
+    throw std::runtime_error("Failed to open N4F RUN_MANIFEST output: " + path.string());
+  }
+  stream << "{\n";
+  stream << "  \"phase\": \"N4F\",\n";
+  stream << "  \"algorithm_role\": \"proposed\",\n";
+  stream << "  \"algorithm_name\": \"LegSA-GINS-filter-core-BY2-trial\",\n";
+  stream << "  \"dataset_name\": \"" << config.dataset_name << "\",\n";
+  stream << "  \"output_dir\": \"" << output_dir.string() << "\",\n";
+  stream << "  \"imu_increment_rows\": " << imu_count << ",\n";
+  stream << "  \"receiver_measurement_rows\": " << receiver_count << ",\n";
+  stream << "  \"evidence_status\": \"by2_filter_core_diagnostic_only_no_performance_claim\",\n";
+  stream << "  \"trace_solver_input\": false,\n";
+  stream << "  \"trace_used_for_tuning\": false,\n";
+  stream << "  \"output_only_correction\": false,\n";
+  stream << "  \"bad_epoch_deletion_for_metric\": false,\n";
+  stream << "  \"raw_doppler_claim\": false,\n";
+  stream << "  \"go2_prior_claim\": false,\n";
+  stream << "  \"source_aware_weighting_claim\": false,\n";
+  stream << "  \"fgo_smoother_claim\": false,\n";
+  stream << "  \"numerical_performance_claim\": false,\n";
+  stream << "  \"body_imu_source\": \"go2_body_state_diagnostic_converted_to_imu_increment\",\n";
+  stream << "  \"go2_body_state_used_as_imu_propagation_diagnostic\": true,\n";
+  stream << "  \"receiver_imu_as_body_imu\": false,\n";
+  stream << "  \"final_v23_output_substitution\": false,\n";
+  stream << "  \"proposed_reads_final_v23_output\": false,\n";
+  stream << "  \"raw_data_committed\": false\n";
+  stream << "}\n";
 }
 
 }  // namespace
@@ -217,6 +422,47 @@ void LegSAEngine::runFilterToyDemo() {
     eval_writer.write(nav_state);
   }
   io::RunManifestWriter::writeFilterCoreToyManifest(config_, output_dir);
+}
+
+void LegSAEngine::runFilterCsvTrial(const std::filesystem::path& imu_csv,
+                                    const std::filesystem::path& receiver_csv,
+                                    std::size_t max_epochs) {
+  const std::filesystem::path output_dir(config_.output_dir);
+
+  auto imu_samples = readers::readStandardImuIncrementCsv(imu_csv, max_epochs);
+  const auto receiver_measurements = readReceiverTrialCsv(receiver_csv);
+  if (imu_samples.empty()) {
+    throw std::runtime_error("N4F filter CSV trial found no IMU increments.");
+  }
+  if (receiver_measurements.empty()) {
+    throw std::runtime_error("N4F filter CSV trial found no receiver measurements.");
+  }
+
+  filter::LegSAFilter filter;
+  filter.initialize(makeInitialState(imu_samples, receiver_measurements),
+                    filter::makeConservativeDefaultCovariance());
+  filter.process(imu_samples, receiver_measurements);
+
+  io::NavWriter nav_writer(output_dir);
+  io::StdWriter std_writer(output_dir);
+  io::EvalNavWriterBridge eval_writer(output_dir);
+  types::StdState std_state = filter.getStdState();
+  std::size_t written = 0;
+  for (const auto& state : filter.getHistory()) {
+    if (max_epochs > 0 && written >= max_epochs) {
+      break;
+    }
+    types::NavState nav_state = navFromFilterState(state);
+    nav_state.status = "legsa_filter_core_by2_trial_diagnostic";
+    nav_state.source_role = "proposed_filter_core";
+    std_state.tow = state.pva.tow;
+    nav_writer.write(nav_state);
+    std_writer.write(std_state);
+    eval_writer.write(nav_state);
+    ++written;
+  }
+  writeBy2TrialRunManifest(config_, output_dir, imu_samples.size(),
+                           receiver_measurements.size());
 }
 
 void LegSAEngine::applyConfigToRegistry() {
