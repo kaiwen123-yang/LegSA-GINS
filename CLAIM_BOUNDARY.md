@@ -43,6 +43,11 @@ Allowed N4 filter-core statement:
 
 - N4 may implement LegSA-GINS C++ filter core with receiver-native position, velocity, and heading updates.
 
+Allowed N4E input-adapter statement:
+
+- N4E may create BY2 input adapters and source-role manifests.
+- N4E may standardize receiver-native GNSS status and Go2 body-state diagnostic data.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -100,6 +105,13 @@ Do not claim:
 - N4 FGO smoothing.
 - N4 trace solver input.
 - N4 final_v23 output as proposed solver input.
+- N4E must not use trace as solver input.
+- N4E must not treat receiver internal IMU as Go2 body IMU.
+- N4E must not claim raw Doppler extraction.
+- N4E must not claim Go2 prior integration.
+- N4E must not claim source-aware weighting.
+- N4E must not claim FGO smoothing.
+- N4E standardized data must not be used as performance evidence.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
@@ -152,6 +164,20 @@ N4 must not claim FGO smoothing.
 N4 must not use trace as solver input.
 
 N4 must not use final_v23 output as proposed solver input.
+
+N4E must not use trace as solver input.
+
+N4E must not treat receiver internal IMU as Go2 body IMU.
+
+N4E must not claim raw Doppler extraction.
+
+N4E must not claim Go2 prior integration.
+
+N4E must not claim source-aware weighting.
+
+N4E must not claim FGO smoothing.
+
+N4E standardized data must not be used as performance evidence.
 
 ## Evidence Rule
 
