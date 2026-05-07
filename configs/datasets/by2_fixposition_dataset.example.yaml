@@ -1,0 +1,21 @@
+dataset_name: BY2
+phase: N3C
+paths:
+  fixposition_root: "configure_in_configs/local/by2_fixposition.local.yaml"
+  body_imu_text: "configure_in_configs/local/by2_fixposition.local.yaml"
+receiver_data_roles:
+  gnss1_raw: "gnss1-raw.csv"
+  gnss1_status: "gnss1-status.csv"
+  gnss2_raw: "gnss2-raw.csv"
+  gnss2_status: "gnss2-status.csv"
+  trace_reference: "trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv"
+  receiver_imu_data: "imu-data.csv"
+  receiver_imu_biases: "imu-biases.csv"
+  receiver_imu_temp: "imu-temp.csv"
+body_state_roles:
+  body_imu_text: "by2.txt"
+rules:
+  trace_solver_input: false
+  trace_evaluation_only: true
+  receiver_imu_as_body_imu: false
+  raw_data_committed: false

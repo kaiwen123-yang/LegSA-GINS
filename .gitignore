@@ -8,6 +8,10 @@ ubx/
 logs/
 cache/
 tmp/
+configs/local/
+*.local.yaml
+*.local.json
+*.local.toml
 
 results/full/
 results/raw_logs/
@@ -42,4 +46,9 @@ cmake-build-*/
 !results/.gitkeep
 !paper_package/.gitkeep
 !configs/datasets/
+!configs/datasets/**
 !configs/datasets/.gitkeep
+!scripts/datasets/
+!scripts/datasets/**
+!docs/datasets/
+!docs/datasets/**
