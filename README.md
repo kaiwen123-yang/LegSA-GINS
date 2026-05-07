@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N3C final_v23-style reproduction connection and BY2 data path contract.
+N3D Chinese code comments and readability pass.
 
 Current working phase:
 
-N3D Chinese code comments and readability pass.
+N4 LegSA-GINS C++ filter core.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -55,6 +55,8 @@ N3B reads external source only for audit and reproduction planning. N3B does not
 N3C creates baseline output parsers/standardizers and a BY2 data source-role contract only. N3C does not implement proposed factors or numerical performance claims.
 
 N3D improves code readability with Chinese comments only. N3D does not implement new algorithms or make performance claims.
+
+N4 implements a toy-run-capable receiver-native position/velocity/heading filter core only. N4 does not implement raw Doppler, Go2 priors, source-aware weighting, or FGO smoothing.
 
 ## Strict Phase-I Non-goals
 

@@ -16,6 +16,9 @@ class RunManifestWriter {
       const config::RuntimeConfig& config,
       const factors::FactorRegistry& registry,
       const std::filesystem::path& output_dir);
+  static std::filesystem::path writeFilterCoreToyManifest(
+      const config::RuntimeConfig& config,
+      const std::filesystem::path& output_dir);
 };
 
 }  // namespace legsa_gins::io

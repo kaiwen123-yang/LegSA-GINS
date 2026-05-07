@@ -72,4 +72,41 @@ std::filesystem::path RunManifestWriter::writePlaceholder(
   return path;
 }
 
+std::filesystem::path RunManifestWriter::writeFilterCoreToyManifest(
+    const config::RuntimeConfig& config,
+    const std::filesystem::path& output_dir) {
+  std::filesystem::create_directories(output_dir);
+  const auto path = output_dir / "RUN_MANIFEST.json";
+  std::ofstream stream(path);
+  if (!stream) {
+    throw std::runtime_error("Failed to open RUN_MANIFEST output: " + path.string());
+  }
+
+  // N4 toy filter manifest 明确禁止高级因子和性能 claim，避免 demo 输出被过度解释。
+  // The N4 toy manifest keeps all advanced-factor and performance flags false.
+  stream << "{\n";
+  stream << "  \"phase\": \"N4\",\n";
+  stream << "  \"algorithm_role\": \"proposed\",\n";
+  stream << "  \"algorithm_name\": \"LegSA-GINS-filter-core\",\n";
+  stream << "  \"dataset_name\": \"" << jsonEscape(config.dataset_name) << "\",\n";
+  stream << "  \"output_dir\": \"" << jsonEscape(output_dir.string()) << "\",\n";
+  stream << "  \"dry_filter_demo\": true,\n";
+  stream << "  \"final_v23_is_proposed\": false,\n";
+  stream << "  \"proposed_reads_final_v23_output\": false,\n";
+  stream << "  \"final_v23_output_substitution\": false,\n";
+  stream << "  \"trace_solver_input\": false,\n";
+  stream << "  \"trace_used_for_tuning\": false,\n";
+  stream << "  \"output_only_correction\": false,\n";
+  stream << "  \"bad_epoch_deletion_for_metric\": false,\n";
+  stream << "  \"raw_data_committed\": false,\n";
+  stream << "  \"raw_doppler_claim\": false,\n";
+  stream << "  \"go2_prior_claim\": false,\n";
+  stream << "  \"source_aware_weighting_claim\": false,\n";
+  stream << "  \"fgo_smoother_claim\": false,\n";
+  stream << "  \"numerical_performance_claim\": false,\n";
+  stream << "  \"evidence_status\": \"filter_core_toy_only_no_performance_claim\"\n";
+  stream << "}\n";
+  return path;
+}
+
 }  // namespace legsa_gins::io
