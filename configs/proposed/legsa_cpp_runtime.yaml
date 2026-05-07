@@ -1,0 +1,23 @@
+dataset_name: dry_demo
+output_dir: results/proposed/n3a_cpp_runtime
+dry_run: true
+algorithm_role: proposed
+algorithm_name: LegSA-GINS-CPP-Runtime
+final_v23_is_proposed: false
+proposed_reads_final_v23_output: false
+
+factors:
+  receiver_position: true
+  receiver_velocity: true
+  receiver_heading: true
+  raw_doppler: false
+  go2_yawrate_prior: false
+  go2_attitude_prior: false
+  support_integrity: false
+  source_aware_weighting: false
+  fixed_lag_smoother: false
+
+notes:
+  yaml_parsing_in_cpp: not_implemented_in_N3A
+  runtime_status: cpp_runtime_skeleton_only
+  numerical_performance_claim: false

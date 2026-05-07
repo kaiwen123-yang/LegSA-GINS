@@ -36,6 +36,24 @@ Hard gates:
 - NED/ENU/ECEF/BLH clarity;
 - complete state history writer.
 
+## Stage N3A: C++ Runtime Backbone
+
+Goal:
+Create the standard-library C++ runtime scaffold, executable entrypoint,
+engine shell, state types, writer contracts, config skeleton, factor registry
+placeholder, run manifest placeholder, dry-run demo, and CMake smoke path.
+
+N3A does not implement mechanization, EKF filtering, innovation factors,
+smoothing, final_v23 numerical reproduction, or numerical performance claims.
+
+## Stage N3B: final_v23 Reproduction Connection
+
+Goal:
+Connect final_v23 reproduction as a baseline/backbone reference path while
+preserving strict baseline/proposed separation.
+
+final_v23 remains baseline, not the proposed LegSA-GINS solver.
+
 ## Stage N3: LegSA-ESKF
 
 Goal:
