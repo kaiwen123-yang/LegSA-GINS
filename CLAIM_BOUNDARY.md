@@ -16,6 +16,10 @@ The project may claim, if supported by experiments:
 - no output-only correction;
 - no deletion of bad epochs for passing metrics.
 
+Allowed N2 infrastructure statement:
+
+- Frame, writer, manifest, and evaluator utilities may be implemented in N2.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -47,6 +51,9 @@ Do not claim:
 - output-only correction;
 - trace-tuned performance;
 - metric passing by bad-epoch deletion.
+- frame/evaluator utilities as a solved navigation algorithm.
+
+Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
 ## Evidence Rule
 

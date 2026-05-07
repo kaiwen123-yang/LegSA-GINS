@@ -26,6 +26,10 @@ N1 is complete as a wrapper, manifest writer, oracle audit, and separation-test 
 Goal:
 Implement frame adapters, writer contracts, evaluator contracts, and manifest schemas.
 
+N2 builds frame utilities, writer contracts, manifest contracts, evaluator utilities, and audits.
+
+N2 does not implement LegSA-ESKF or algorithmic factors.
+
 Hard gates:
 - no double FLU-to-FRD transform;
 - Go2 body/odom/map separation;
