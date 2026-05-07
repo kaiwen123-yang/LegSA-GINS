@@ -2,6 +2,8 @@
 // English note: comments define module responsibility and safety boundaries only.
 
 #include <iostream>
+#include <cstddef>
+#include <filesystem>
 #include <string>
 
 #include "legsa_gins/config/runtime_config.hpp"
@@ -11,7 +13,8 @@ namespace {
 
 void printUsage(const char* program) {
   std::cerr << "Usage: " << program
-            << " (--dry-run | --dry-filter-demo) [--output-dir PATH]\n";
+            << " (--dry-run | --dry-filter-demo | --run-filter-csv) [--output-dir PATH] "
+               "[--imu-csv PATH --receiver-csv PATH --max-epochs N]\n";
 }
 
 }  // namespace
@@ -20,6 +23,10 @@ int main(int argc, char** argv) {
   auto config = legsa_gins::config::defaultRuntimeConfig();
   bool dry_run_requested = false;
   bool dry_filter_demo_requested = false;
+  bool run_filter_csv_requested = false;
+  std::filesystem::path imu_csv;
+  std::filesystem::path receiver_csv;
+  std::size_t max_epochs = 0;
 
   // 参数只允许 dry-run / dry-filter-demo 链路。
   // Arguments only expose dry-run and toy filter demo paths.
@@ -34,6 +41,30 @@ int main(int argc, char** argv) {
       config.dataset_name = "n4_filter_toy_demo";
       config.algorithm_role = "proposed";
       config.algorithm_name = "LegSA-GINS-filter-core";
+    } else if (arg == "--run-filter-csv") {
+      run_filter_csv_requested = true;
+      config.dry_run = false;
+      config.dataset_name = "by2_filter_core_trial";
+      config.algorithm_role = "proposed";
+      config.algorithm_name = "LegSA-GINS-filter-core-BY2-trial";
+    } else if (arg == "--imu-csv") {
+      if (index + 1 >= argc) {
+        printUsage(argv[0]);
+        return 2;
+      }
+      imu_csv = argv[++index];
+    } else if (arg == "--receiver-csv") {
+      if (index + 1 >= argc) {
+        printUsage(argv[0]);
+        return 2;
+      }
+      receiver_csv = argv[++index];
+    } else if (arg == "--max-epochs") {
+      if (index + 1 >= argc) {
+        printUsage(argv[0]);
+        return 2;
+      }
+      max_epochs = static_cast<std::size_t>(std::stoull(argv[++index]));
     } else if (arg == "--output-dir") {
       if (index + 1 >= argc) {
         printUsage(argv[0]);
@@ -46,15 +77,21 @@ int main(int argc, char** argv) {
     }
   }
 
-  if (dry_run_requested && dry_filter_demo_requested) {
-    std::cerr << "--dry-run and --dry-filter-demo are mutually exclusive.\n";
+  const int mode_count = static_cast<int>(dry_run_requested) +
+                         static_cast<int>(dry_filter_demo_requested) +
+                         static_cast<int>(run_filter_csv_requested);
+  if (mode_count > 1) {
+    std::cerr << "Runtime modes are mutually exclusive.\n";
     return 2;
   }
 
-  if (!dry_run_requested && !dry_filter_demo_requested) {
-    // 非 dry-run 真数据入口留给后续 N4/N5；这里不读取 final_v23 输出作为 proposed input。
-    // Real-data runtime is deferred to later stages; final_v23 outputs are not proposed inputs.
-    std::cerr << "Real data runtime is not implemented. Use --dry-run or --dry-filter-demo.\n";
+  if (mode_count == 0) {
+    std::cerr << "Select one runtime mode.\n";
+    printUsage(argv[0]);
+    return 1;
+  }
+  if (run_filter_csv_requested && (imu_csv.empty() || receiver_csv.empty())) {
+    std::cerr << "--run-filter-csv requires --imu-csv and --receiver-csv.\n";
     return 1;
   }
 
@@ -64,11 +101,13 @@ int main(int argc, char** argv) {
     legsa_gins::engine::LegSAEngine engine(config);
     if (dry_filter_demo_requested) {
       engine.runFilterToyDemo();
+    } else if (run_filter_csv_requested) {
+      engine.runFilterCsvTrial(imu_csv, receiver_csv, max_epochs);
     } else {
       engine.initialize();
       engine.runDryDemo();
     }
-    std::cout << "Generated dry-run outputs in: " << config.output_dir << '\n';
+    std::cout << "Generated outputs in: " << config.output_dir << '\n';
   } catch (const std::exception& exc) {
     std::cerr << "legsa_gins failed: " << exc.what() << '\n';
     return 1;

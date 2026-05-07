@@ -89,6 +89,13 @@ Create real-data input adapters and source-role manifests for BY2, including rec
 
 No solver performance evaluation.
 
+## Stage N4F: BY2 Filter-Core Diagnostic Trial
+
+Goal:
+Run current LegSA-GINS filter core on BY2 real data and generate case_review-style diagnostic evaluation.
+
+No formal performance claim.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

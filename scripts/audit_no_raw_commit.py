@@ -20,7 +20,7 @@ FORBIDDEN_EXTENSIONS = {
     ".pcap",
 }
 
-SKIP_DIRS = {".git", "__pycache__"}
+SKIP_DIRS = {".git", "__pycache__", ".pytest_cache", "build"}
 
 
 def find_forbidden_files(root: Path) -> list[Path]:
