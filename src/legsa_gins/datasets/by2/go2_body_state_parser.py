@@ -13,6 +13,8 @@ import re
 from pathlib import Path
 from typing import Any
 
+from legsa_gins.datasets.by2.unitree_imu_semantics import check_quaternion_rpy_consistency
+
 
 SOURCE_ROLE = "go2_body_state_diagnostic"
 
@@ -33,6 +35,10 @@ STANDARD_HEADER = [
     "stamp_sec",
     "stamp_nanosec",
     "error_code",
+    "quat_w",
+    "quat_x",
+    "quat_y",
+    "quat_z",
     "quat_0",
     "quat_1",
     "quat_2",
@@ -63,6 +69,19 @@ STANDARD_HEADER = [
     "foot_force_3",
     *[f"foot_position_body_{index}" for index in range(12)],
     *[f"foot_speed_body_{index}" for index in range(12)],
+    "quaternion_order",
+    "gyro_unit",
+    "accel_unit",
+    "accel_contains_gravity",
+    "rpy_order",
+    "rpy_unit",
+    "go2_body_frame",
+    "sportmodestate_position_frame",
+    "sportmodestate_velocity_frame",
+    "foot_position_body_frame",
+    "foot_speed_body_frame",
+    "quaternion_rpy_consistency_status",
+    "max_quat_rpy_delta_rad",
     "source_role",
     "body_frame",
     "frame_adapter_required",
@@ -200,6 +219,10 @@ def _message_to_row(lines: list[str]) -> dict[str, Any]:
         "stamp_sec": sec,
         "stamp_nanosec": nanosec,
         "error_code": _to_int(_scalar(lines, ["error_code"])),
+        "quat_w": quat[0],
+        "quat_x": quat[1],
+        "quat_y": quat[2],
+        "quat_z": quat[3],
         "quat_0": quat[0],
         "quat_1": quat[1],
         "quat_2": quat[2],
@@ -228,6 +251,17 @@ def _message_to_row(lines: list[str]) -> dict[str, Any]:
         "foot_force_1": foot_force[1],
         "foot_force_2": foot_force[2],
         "foot_force_3": foot_force[3],
+        "quaternion_order": "wxyz",
+        "gyro_unit": "rad_per_sec",
+        "accel_unit": "m_per_s2",
+        "accel_contains_gravity": True,
+        "rpy_order": "roll_pitch_yaw",
+        "rpy_unit": "rad",
+        "go2_body_frame": "FLU",
+        "sportmodestate_position_frame": "go2_odom",
+        "sportmodestate_velocity_frame": "go2_odom_or_body_evidence_missing",
+        "foot_position_body_frame": "body_relative",
+        "foot_speed_body_frame": "body_relative",
         "source_role": SOURCE_ROLE,
         "body_frame": "FLU",
         "frame_adapter_required": True,
@@ -237,6 +271,7 @@ def _message_to_row(lines: list[str]) -> dict[str, Any]:
         row[f"foot_position_body_{index}"] = value
     for index, value in enumerate(foot_speed_body):
         row[f"foot_speed_body_{index}"] = value
+    row.update(check_quaternion_rpy_consistency(row))
     return row
 
 

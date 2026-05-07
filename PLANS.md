@@ -96,6 +96,13 @@ Run current LegSA-GINS filter core on BY2 real data and generate case_review-sty
 
 No formal performance claim.
 
+## Stage N4G: BY2 Time-Domain and Heading Diagnostics
+
+Goal:
+Audit BY2 GNSS/Go2 time-domain usage, Unitree sportmodestate IMU semantics, event-normalized algorithm time, and transverse dual-antenna heading offset candidates.
+
+No physical clock offset claim. No formal heading offset selection. No raw Doppler, Go2 priors, source-aware weighting, LSIM/OIM, or FGO.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

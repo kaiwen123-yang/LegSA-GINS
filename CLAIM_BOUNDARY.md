@@ -52,6 +52,10 @@ Allowed N4F diagnostic-trial statement:
 
 - N4F may generate diagnostic BY2 filter-core trial metrics.
 
+Allowed N4G diagnostic statement:
+
+- N4G may generate event-normalized BY2 diagnostic candidates for time-domain, Unitree IMU semantics, and transverse dual-antenna heading review.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -121,6 +125,11 @@ Do not claim:
 - N4F must not delete bad epochs to pass metrics.
 - N4F must not use trace as solver input.
 - N4F must not claim final_v23 parity.
+- N4G must not claim hardware clock synchronization.
+- N4G must not claim a physical Go2-to-GNSS clock offset.
+- N4G must not use trace for solver time alignment.
+- N4G must not select a formal heading offset without antenna order evidence.
+- N4G must not write diagnostic candidates as numerical performance claims.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
@@ -197,6 +206,16 @@ N4F must not delete bad epochs to pass metrics.
 N4F must not use trace as solver input.
 
 N4F must not claim final_v23 parity.
+
+N4G must not claim hardware clock synchronization.
+
+N4G must not claim a physical Go2-to-GNSS clock offset.
+
+N4G must not use trace for solver time alignment.
+
+N4G must not select a formal heading offset without antenna order evidence.
+
+N4G must not write diagnostic candidates as numerical performance claims.
 
 ## Evidence Rule
 

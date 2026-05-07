@@ -13,6 +13,8 @@ struct RuntimeConfig {
   bool dry_run = true;
   std::string algorithm_role = "proposed";
   std::string algorithm_name = "LegSA-GINS-CPP-Runtime";
+  std::string imu_propagation_mode = "gyro_only_zero_dvel";
+  std::string heading_offset_mode = "no_offset";
   bool final_v23_is_proposed = false;
   bool proposed_reads_final_v23_output = false;
   bool enable_receiver_position = true;

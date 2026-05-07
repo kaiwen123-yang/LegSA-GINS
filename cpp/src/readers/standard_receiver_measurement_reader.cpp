@@ -34,6 +34,9 @@ std::vector<std::string> splitCsvLine(const std::string& line) {
   std::stringstream stream(line);
   std::string item;
   while (std::getline(stream, item, ',')) {
+    if (!item.empty() && item.back() == '\r') {
+      item.pop_back();
+    }
     fields.push_back(item);
   }
   return fields;
@@ -99,6 +102,14 @@ double asDouble(const Row& row, const std::string& key) {
   return std::stod(required(row, key));
 }
 
+double measurementTime(const Row& row) {
+  const auto iter = row.find("algo_time_sec");
+  if (iter != row.end() && !iter->second.empty()) {
+    return std::stod(iter->second);
+  }
+  return asDouble(row, "tow");
+}
+
 bool asBool(const Row& row, const std::string& key) {
   const auto value = required(row, key);
   return value == "1" || value == "true" || value == "True" || value == "TRUE";
@@ -123,7 +134,7 @@ std::vector<types::ReceiverNativeMeasurement> readStandardReceiverStatusCsv(
   bool has_previous = false;
   for (const auto& row : rows) {
     types::ReceiverNativeMeasurement meas;
-    meas.tow = asDouble(row, "tow");
+    meas.tow = measurementTime(row);
     meas.blh_rad_m = {
         asDouble(row, "lat_deg") * math::deg_to_rad,
         asDouble(row, "lon_deg") * math::deg_to_rad,

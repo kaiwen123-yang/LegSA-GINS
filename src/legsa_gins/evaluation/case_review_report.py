@@ -10,6 +10,8 @@ import math
 from pathlib import Path
 from typing import Any
 
+from legsa_gins.evaluation.target_gates import evaluate_target_gates
+
 
 FINAL_V23_CONTEXT = {
     "dual_final_v23": {
@@ -109,6 +111,11 @@ def generate_case_review(
     input_manifest_path: str | Path,
     trial_manifest_path: str | Path,
     summary_path: str | Path,
+    event_report_path: str | Path | None = None,
+    imu_report_path: str | Path | None = None,
+    heading_report_path: str | Path | None = None,
+    gate_report_path: str | Path | None = None,
+    gap_screen_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Write the N4F case_review.md and return the classification."""
 
@@ -119,6 +126,13 @@ def generate_case_review(
     classification = classify_trial(summary, run_dir=run_path)
     run_manifest = _json_load(run_path / "RUN_MANIFEST.json")
     trial_manifest_data = _json_load(trial_manifest)
+    event_report = _json_load(Path(event_report_path)) if event_report_path else {}
+    imu_report = _json_load(Path(imu_report_path)) if imu_report_path else {}
+    heading_report = _json_load(Path(heading_report_path)) if heading_report_path else {}
+    gate_report = (
+        _json_load(Path(gate_report_path)) if gate_report_path else evaluate_target_gates(summary)
+    )
+    gap_screen = _json_load(Path(gap_screen_path)) if gap_screen_path else {}
 
     lines = [
         "# BY2_filter_core_trial case_review",
@@ -152,14 +166,15 @@ def generate_case_review(
         f"- yaw_p95_deg: {_fmt(summary.get('yaw_p95_deg'))}",
         "",
         "## Benchmark Context",
+        "- primary_benchmark: dual_final_v23_reference_context",
         "- dual_final_v23 horizontal_rmse_m = 0.353",
         "- dual_final_v23 up_rmse_m = 0.818",
         "- dual_final_v23 yaw_rmse_deg = 1.814",
         "- dual_final_v23 roll_rmse_deg = 1.025",
         "- dual_final_v23 pitch_rmse_deg = 1.524",
-        "- single_antenna horizontal_rmse_m = 38.947",
-        "- single_antenna yaw_rmse_deg = 41.375",
-        "- pure_ins horizontal_rmse_m = 59240.252",
+        "- context_only_single_antenna horizontal_rmse_m = 38.947",
+        "- context_only_single_antenna yaw_rmse_deg = 41.375",
+        "- context_only_pure_ins horizontal_rmse_m = 59240.252",
         "",
         "## Diagnostic Classification",
         f"- runtime_pass: {str(classification['runtime_pass']).lower()}",
@@ -171,8 +186,12 @@ def generate_case_review(
         "",
         "## Claim Boundary",
         "- trace_solver_input: false",
+        "- trace_used_for_alignment: false",
         "- trace_used_for_tuning: false",
         "- trace_evaluation_only: true",
+        "- clock_sync_claim: false",
+        "- physical_time_offset_claim: false",
+        "- event_normalized_time_axis: true",
         "- output_only_correction: false",
         "- bad_epoch_deletion_for_metric: false",
         "- raw_doppler_claim: false",
@@ -187,6 +206,52 @@ def generate_case_review(
         f"- selected_receiver_source: {_fmt(trial_manifest_data.get('selected_receiver_source'))}",
         f"- body_imu_source: {_fmt(run_manifest.get('body_imu_source'))}",
         f"- receiver_imu_as_body_imu: {_fmt(run_manifest.get('receiver_imu_as_body_imu'))}",
+        f"- imu_propagation_mode: {_fmt(run_manifest.get('imu_propagation_mode', trial_manifest_data.get('imu_propagation_mode')))}",
+        f"- heading_offset_mode: {_fmt(run_manifest.get('heading_offset_mode', trial_manifest_data.get('heading_offset_mode')))}",
+        "",
+        "## Time Policy",
+        "- hardware_clock_sync: false",
+        "- time_axis: event_normalized_algo_time_sec",
+        f"- go2_time_domain: {_fmt(event_report.get('go2_time_domain'))}",
+        f"- gnss_time_domain: {_fmt(event_report.get('gnss_time_domain'))}",
+        f"- go2_formal_start_raw_time: {_fmt(event_report.get('go2_formal_start_raw_time'))}",
+        f"- gnss_formal_start_raw_time: {_fmt(event_report.get('gnss_formal_start_raw_time'))}",
+        f"- end_algo_time_sec: {_fmt(event_report.get('end_algo_time_sec'))}",
+        "- physical_time_offset_claim: false",
+        "- trace evaluation-only: true",
+        "",
+        "## Unitree IMU Semantics",
+        f"- quaternion_order: {_fmt(imu_report.get('quaternion_order'))}",
+        f"- quaternion_rpy_consistency_status: {_fmt(imu_report.get('quaternion_rpy_consistency_status'))}",
+        f"- accel_contains_gravity: {_fmt(imu_report.get('accel_contains_gravity'))}",
+        f"- go2_body_frame: {_fmt(imu_report.get('go2_body_frame'))}",
+        "- raw accelerometer direct dvel: deprecated diagnostic only",
+        "",
+        "## Heading Mounting",
+        "- mounting: transverse_dual_antenna",
+        "- receiver rel_pos heading: antenna baseline heading",
+        "- body heading candidates: no_offset, plus90, minus90",
+        f"- heading_offset_mode: {_fmt(trial_manifest_data.get('heading_offset_mode'))}",
+        f"- formal_heading_offset_selected: {_fmt(heading_report.get('formal_heading_offset_selected', False))}",
+        "",
+        "## Target Gate",
+        f"- target_gate_pass: {_fmt(gate_report.get('target_gate_pass'))}",
+        f"- ready_for_factor_stacking: {_fmt(gate_report.get('ready_for_factor_stacking'))}",
+        f"- horizontal_gate_m: {_fmt(gate_report.get('gates', {}).get('horizontal_rmse_m'))}",
+        f"- up_gate_m: {_fmt(gate_report.get('gates', {}).get('up_rmse_m'))}",
+        f"- yaw_gate_deg: {_fmt(gate_report.get('gates', {}).get('yaw_rmse_deg'))}",
+        f"- roll_pitch_strict_gate_deg: 1.0",
+        f"- roll_pitch_relaxed_gate_deg: 1.6",
+        "",
+        "## Gap Screen",
+        f"- possible_time_domain_issue: {_fmt(gap_screen.get('possible_time_domain_issue'))}",
+        f"- possible_imu_semantics_issue: {_fmt(gap_screen.get('possible_imu_semantics_issue'))}",
+        f"- possible_heading_mounting_issue: {_fmt(gap_screen.get('possible_heading_mounting_issue'))}",
+        f"- possible_full_mechanization_missing_issue: {_fmt(gap_screen.get('possible_full_mechanization_missing_issue'))}",
+        f"- severe_horizontal_error: {_fmt(gap_screen.get('severe_horizontal_error'))}",
+        f"- severe_vertical_error: {_fmt(gap_screen.get('severe_vertical_error'))}",
+        f"- severe_yaw_error: {_fmt(gap_screen.get('severe_yaw_error'))}",
+        f"- recommended_next_stage: {_fmt(gap_screen.get('recommended_next_stage'))}",
         "",
         "## Interpretation",
         "- This report is diagnostic-only and records whether the current filter core can run on BY2 real-data inputs.",
