@@ -38,6 +38,9 @@ Hard gates:
 
 ## Stage N3A: C++ Runtime Backbone
 
+Status:
+completed.
+
 Goal:
 Create the standard-library C++ runtime scaffold, executable entrypoint,
 engine shell, state types, writer contracts, config skeleton, factor registry
@@ -46,11 +49,18 @@ placeholder, run manifest placeholder, dry-run demo, and CMake smoke path.
 N3A does not implement mechanization, EKF filtering, innovation factors,
 smoothing, final_v23 numerical reproduction, or numerical performance claims.
 
-## Stage N3B: final_v23 Reproduction Connection
+## Stage N3B: final_v23 / KF-GINS Source Audit and Reproduction Contract
 
 Goal:
-Connect final_v23 reproduction as a baseline/backbone reference path while
-preserving strict baseline/proposed separation.
+Read-only audit of /home/kaiwen/KF-GINS and define N3C reproduction contract.
+
+No algorithm implementation.
+
+## Stage N3C: final_v23-style Runtime Reproduction Connection
+
+Goal:
+Build or run final_v23 baseline through wrapper, standardize NAV/STD/EVAL_NAV,
+and perform oracle checks when real data/config are available.
 
 final_v23 remains baseline, not the proposed LegSA-GINS solver.
 
