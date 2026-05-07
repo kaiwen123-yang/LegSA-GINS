@@ -20,6 +20,11 @@ Allowed N2 infrastructure statement:
 
 - Frame, writer, manifest, and evaluator utilities may be implemented in N2.
 
+Allowed N3A infrastructure statement:
+
+- A C++ runtime skeleton may be implemented in N3A.
+- N3A may write dry-run NAV, STD, EVAL_NAV, and RUN_MANIFEST contract artifacts.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -52,8 +57,14 @@ Do not claim:
 - trace-tuned performance;
 - metric passing by bad-epoch deletion.
 - frame/evaluator utilities as a solved navigation algorithm.
+- C++ runtime skeleton as a validated navigation solver.
+- dry-run output as performance evidence.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
+
+C++ runtime skeleton must not be described as a validated navigation solver.
+
+Dry-run output must not be used as performance evidence.
 
 ## Evidence Rule
 
