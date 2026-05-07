@@ -63,6 +63,13 @@ Connect final_v23/KF-GINS baseline outputs to LegSA-GINS standardized baseline o
 
 No proposed solver implementation.
 
+## Stage N3D: Chinese Code Comments and Readability Pass
+
+Goal:
+Add Chinese comments to code modules, clarify module responsibility, data roles, frame conventions, and claim boundaries.
+
+No algorithm implementation.
+
 ## Stage N3: LegSA-ESKF
 
 Goal:

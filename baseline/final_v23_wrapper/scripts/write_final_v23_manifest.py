@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Write the Stage N1 final_v23-style baseline RUN_MANIFEST.json."""
+"""Write the Stage N1 final_v23-style baseline RUN_MANIFEST.json.
+
+中文说明：final_v23 wrapper 只服务 baseline/oracle/backbone reference；final_v23 不是 proposed，wrapper 不允许 output substitution。
+"""
 
 from __future__ import annotations
 
@@ -18,6 +21,8 @@ def build_manifest(
     final_v23_root: str,
     dry_run: bool,
 ) -> dict[str, Any]:
+    # 中文说明：manifest 用布尔字段锁定 final_v23 baseline 身份，不允许变成 proposed。
+    # Boolean flags pin final_v23 as baseline, not proposed.
     return {
         "phase": "N1",
         "dataset_name": dataset_name,

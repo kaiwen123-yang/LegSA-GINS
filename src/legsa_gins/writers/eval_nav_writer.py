@@ -1,4 +1,7 @@
-"""EVAL_NAV writer contract for standardized evaluation outputs."""
+"""EVAL_NAV writer contract for standardized evaluation outputs.
+
+中文说明：writer 只写合同化输出给后续验证或 evaluator；不做 output-only correction，不删除 bad epochs，也不参与 solver。
+"""
 
 import csv
 from pathlib import Path
@@ -22,6 +25,8 @@ EVAL_NAV_COLUMNS = [
 
 
 def write_eval_nav(rows: list[dict], output_path: str | Path) -> None:
+    # 中文说明：EVAL_NAV 是评价输出合同，writer 不做输出修正或 bad epoch 删除。
+    # EVAL_NAV is an evaluation contract; writer does not correct or filter.
     validated_rows = _validate_rows(rows)
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -32,6 +37,8 @@ def write_eval_nav(rows: list[dict], output_path: str | Path) -> None:
 
 
 def validate_eval_nav_file(path: str | Path) -> bool:
+    # 中文说明：验证字段和时间单调性，避免 raw/debug 字段混入评价文件。
+    # Validate schema and monotonic time to keep raw/debug fields out.
     file_path = Path(path)
     if not file_path.exists():
         raise ValueError(f"EVAL_NAV file does not exist: {file_path}")

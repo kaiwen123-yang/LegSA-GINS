@@ -1,4 +1,7 @@
-"""Go2 body-frame adapter with explicit no-double-transform guard."""
+"""Go2 body-frame adapter with explicit no-double-transform guard.
+
+中文说明：frame 模块固定 Go2 FLU、NED/ENU/ECEF/BLH、qbn/qeb 与 yaw 约定，防止 Go2 body/odom/map/navigation frame 混用和双重 FLU->FRD。
+"""
 
 from dataclasses import dataclass
 
@@ -27,6 +30,8 @@ class Go2FrameAdapter:
         input_frame: str | FrameName,
         already_frd_compatible: bool = False,
     ) -> FrameAdaptResult:
+        # 中文说明：Go2 body-state 必须通过 frame adapter，禁止 body/odom/map/navigation 混用。
+        # Go2 body-state must pass through this adapter before future solver use.
         frame = _frame_value(input_frame)
 
         if already_frd_compatible and frame == FrameName.GO2_BODY_FLU.value:

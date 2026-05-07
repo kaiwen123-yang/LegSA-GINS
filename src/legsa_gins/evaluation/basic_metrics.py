@@ -1,9 +1,14 @@
-"""Basic scalar error metrics for evaluation reports."""
+"""Basic scalar error metrics for evaluation reports.
+
+中文说明：evaluation 模块只处理评价指标和 reference uncertainty 边界，不是 solver gate，也不允许 trace tuning。
+"""
 
 import math
 
 
 def rmse(errors: list[float]) -> float:
+    # 中文说明：基础指标函数只计算输入序列，不声明任何算法性能结论。
+    # Metric helpers compute provided sequences only.
     values = _values(errors)
     return math.sqrt(sum(value * value for value in values) / len(values))
 

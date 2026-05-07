@@ -1,3 +1,6 @@
+// 中文说明：writer 只写合同化输出给后续验证或 evaluator；不做 output-only correction，不删除 bad epochs，也不参与 solver。
+// English note: comments define module responsibility and safety boundaries only.
+
 #include "legsa_gins/io/eval_nav_writer_bridge.hpp"
 
 #include <iomanip>
@@ -26,6 +29,8 @@ void EvalNavWriterBridge::write(const types::NavState& state) {
   has_last_timestamp_ = true;
   last_timestamp_ = state.tow;
 
+  // EVAL_NAV 字段必须稳定，后续 evaluator 依赖这个格式；writer 不参与 solver。
+  // EVAL_NAV columns stay stable for evaluator compatibility; writer is not solver logic.
   stream_ << std::fixed << std::setprecision(9) << state.tow << ','
           << std::setprecision(12) << state.lat_deg << ',' << state.lon_deg << ','
           << std::setprecision(6) << state.height_m << ',' << state.vn_mps << ','

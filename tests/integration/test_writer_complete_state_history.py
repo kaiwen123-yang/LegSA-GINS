@@ -1,3 +1,6 @@
+"""中文说明：integration 测试验证输出链路和合同文件，不依赖真实 raw data，不代表性能评价。
+"""
+
 import pytest
 
 from legsa_gins.writers.eval_nav_writer import write_eval_nav, validate_eval_nav_file

@@ -1,4 +1,7 @@
-"""Reference uncertainty boundary classification."""
+"""Reference uncertainty boundary classification.
+
+中文说明：evaluation 模块只处理评价指标和 reference uncertainty 边界，不是 solver gate，也不允许 trace tuning。
+"""
 
 from dataclasses import dataclass
 
@@ -15,6 +18,8 @@ def classify_reference_uncertainty(
     has_covariance: bool,
     has_mount_log: bool,
 ) -> ReferenceUncertaintyStatus:
+    # 中文说明：reference uncertainty 是评价边界标签，不是 solver gate 或调参入口。
+    # Reference uncertainty is an evaluation label, not a solver gate.
     if has_independent_reference and has_covariance and has_mount_log:
         return ReferenceUncertaintyStatus(
             status="strong_reference",

@@ -1,3 +1,6 @@
+// 中文说明：LegSAEngine 是自主 runtime skeleton；本阶段只保持最小 dry-run 链路，不实现 INS mechanization、EKF、raw Doppler、Go2、weighting 或 FGO。
+// English note: comments define module responsibility and safety boundaries only.
+
 #pragma once
 
 #include <memory>

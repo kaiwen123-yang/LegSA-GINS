@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Stage N1 final_v23-style baseline wrapper skeleton."""
+"""Stage N1 final_v23-style baseline wrapper skeleton.
+
+中文说明：final_v23 wrapper 只服务 baseline/oracle/backbone reference；final_v23 不是 proposed，wrapper 不允许 output substitution。
+"""
 
 from __future__ import annotations
 
@@ -29,6 +32,8 @@ def contains_proposed_marker(value: str) -> bool:
 
 
 def validate_not_proposed_output(output_dir: Path) -> None:
+    # 中文说明：final_v23 baseline 输出不能写入 proposed 目录，避免 output substitution。
+    # Keep final_v23 baseline outputs out of proposed paths.
     output_text = str(output_dir).replace("\\", "/")
     if contains_proposed_marker(output_text):
         raise SystemExit(f"final_v23 baseline output must not be written under proposed output paths: {output_dir}")
@@ -55,6 +60,8 @@ def main() -> int:
     if contains_proposed_marker(args.dataset_config):
         raise SystemExit("dataset config for final_v23 baseline must not be a proposed-output path")
 
+    # 中文说明：dry-run 只写 baseline manifest；非 dry-run 也不能让 proposed solver 读取 final_v23 输出。
+    # Dry-run writes baseline provenance only; final_v23 never becomes proposed input.
     output_dir.mkdir(parents=True, exist_ok=True)
     command = shlex.split(args.final_v23_command)
     if not command:

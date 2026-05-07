@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Parse KF_GINS_Navresult.nav into a standardized baseline CSV."""
+"""Parse KF_GINS_Navresult.nav into a standardized baseline CSV.
+
+中文说明：本模块只处理 final_v23/KF-GINS baseline 输出或只读外部源码探测；不修改外部源码、不复制源码、不做数值修正或性能结论。
+"""
 
 from __future__ import annotations
 
@@ -40,6 +43,8 @@ def _parse_gps_week(value: str) -> int | float:
 def parse_nav_file(input_path: str | Path) -> list[dict[str, Any]]:
     """Return baseline rows without correcting or filtering any epochs."""
 
+    # 中文说明：KF_GINS_Navresult.nav 是 baseline NAV；这里只检查列数和时间单调性。
+    # This parser validates the NAV contract only and never corrects coordinates.
     path = Path(input_path)
     rows: list[dict[str, Any]] = []
     previous_tow: float | None = None
@@ -70,6 +75,8 @@ def parse_nav_file(input_path: str | Path) -> list[dict[str, Any]]:
 
 
 def write_nav_csv(rows: list[dict[str, Any]], output_csv: str | Path) -> Path:
+    # 中文说明：写出的 FINAL_V23_NAV.csv 仍是 baseline，不是 proposed solver 输出。
+    # The standardized NAV remains a baseline artifact.
     output_path = Path(output_csv)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with output_path.open("w", newline="", encoding="utf-8") as handle:

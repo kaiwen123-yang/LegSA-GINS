@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Dry-run-safe external final_v23/KF-GINS build wrapper."""
+"""Dry-run-safe external final_v23/KF-GINS build wrapper.
+
+中文说明：本模块只处理 final_v23/KF-GINS baseline 输出或只读外部源码探测；不修改外部源码、不复制源码、不做数值修正或性能结论。
+"""
 
 from __future__ import annotations
 
@@ -25,6 +28,8 @@ def build_external(
     dry_run: bool,
     allow_build: bool,
 ) -> dict[str, Any]:
+    # 中文说明：默认 dry-run；真实 build 必须显式 allow，且 build_dir 不能在 source-root 内。
+    # Default dry-run; real builds require explicit allow and an out-of-source build dir.
     source = Path(source_root).resolve()
     build = Path(build_dir).resolve()
     result: dict[str, Any] = {

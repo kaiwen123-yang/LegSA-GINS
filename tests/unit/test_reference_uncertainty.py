@@ -1,3 +1,6 @@
+"""中文说明：unit 测试验证小模块约定和边界，不做 numerical performance claim。
+"""
+
 from legsa_gins.evaluation.reference_uncertainty import classify_reference_uncertainty
 
 

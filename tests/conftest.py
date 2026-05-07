@@ -1,4 +1,7 @@
-"""Test import path setup for the src-layout package."""
+"""Test import path setup for the src-layout package.
+
+中文说明：测试辅助模块只服务测试导入和合同验证，不依赖 raw data。
+"""
 
 from pathlib import Path
 import sys

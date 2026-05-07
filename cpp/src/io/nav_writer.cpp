@@ -1,3 +1,6 @@
+// 中文说明：writer 只写合同化输出给后续验证或 evaluator；不做 output-only correction，不删除 bad epochs，也不参与 solver。
+// English note: comments define module responsibility and safety boundaries only.
+
 #include "legsa_gins/io/nav_writer.hpp"
 
 #include <iomanip>
@@ -26,6 +29,8 @@ void NavWriter::write(const types::NavState& state) {
   has_last_tow_ = true;
   last_tow_ = state.tow;
 
+  // NAV writer 只序列化当前状态字段；不做坐标修正、不删 bad epoch。
+  // NAV writer serializes contract fields only; no correction or epoch deletion.
   stream_ << gps_week_ << ' ' << std::fixed << std::setprecision(9) << state.tow
           << ' ' << std::setprecision(12) << state.lat_deg << ' ' << state.lon_deg
           << ' ' << std::setprecision(6) << state.height_m << ' ' << state.vn_mps

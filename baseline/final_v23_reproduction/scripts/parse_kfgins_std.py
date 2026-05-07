@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Parse KF_GINS_STD.txt into a standardized baseline CSV."""
+"""Parse KF_GINS_STD.txt into a standardized baseline CSV.
+
+中文说明：本模块只处理 final_v23/KF-GINS baseline 输出或只读外部源码探测；不修改外部源码、不复制源码、不做数值修正或性能结论。
+"""
 
 from __future__ import annotations
 
@@ -40,6 +43,8 @@ def _split_fields(line: str) -> list[str]:
 
 
 def parse_std_file(input_path: str | Path) -> list[dict[str, Any]]:
+    # 中文说明：KF_GINS_STD.txt 是 baseline STD 输出；std 字段只校验非负，不重估不调参。
+    # Baseline STD parsing validates non-negative standard deviations only.
     path = Path(input_path)
     rows: list[dict[str, Any]] = []
     previous_tow: float | None = None
@@ -70,6 +75,8 @@ def parse_std_file(input_path: str | Path) -> list[dict[str, Any]]:
 
 
 def write_std_csv(rows: list[dict[str, Any]], output_csv: str | Path) -> Path:
+    # 中文说明：标准化只改变容器格式，不改变数值含义。
+    # Standardization changes file shape only, not values.
     output_path = Path(output_csv)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with output_path.open("w", newline="", encoding="utf-8") as handle:
