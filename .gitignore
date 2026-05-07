@@ -1,5 +1,7 @@
 data/
 datasets/
+!src/legsa_gins/datasets/
+!src/legsa_gins/datasets/**
 raw/
 bags/
 rinex/

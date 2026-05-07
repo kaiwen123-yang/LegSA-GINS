@@ -82,6 +82,13 @@ Implement the first self-owned LegSA-GINS filter core with IMU propagation found
 
 No raw Doppler, no Go2 priors, no source-aware weighting, no FGO.
 
+## Stage N4E: BY2 Real-Data Input Adapters
+
+Goal:
+Create real-data input adapters and source-role manifests for BY2, including receiver-native GNSS status, raw message summaries, trace reference, and Go2 body-state diagnostic source.
+
+No solver performance evaluation.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:
