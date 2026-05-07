@@ -18,6 +18,9 @@ N1 only creates baseline wrapper, manifest, oracle audit, and separation tests.
 
 No numerical claim is allowed before real final_v23 output is connected.
 
+Completion note:
+N1 is complete as a wrapper, manifest writer, oracle audit, and separation-test stage only. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
+
 ## Stage N2: Frame / Writer / Evaluator Infrastructure
 
 Goal:

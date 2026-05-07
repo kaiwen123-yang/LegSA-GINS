@@ -36,11 +36,15 @@ LegSA-GINS will be developed as:
 
 ## Phase Status
 
-Current phase:
+Current completed phase:
 
 N1 final_v23-style baseline wrapper.
 
-The current N1 task builds the final_v23 baseline wrapper only; it does not implement the proposed LegSA-GINS solver.
+Next planned phase:
+
+N2 frame / writer / evaluator infrastructure.
+
+N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
 ## Strict Phase-I Non-goals
 
