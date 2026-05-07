@@ -58,10 +58,15 @@ FORBIDDEN_CPP_PATTERNS = [
     r"class\s+\w*Smoother\w*",
     r"optimizeFixedLag",
     r"factor_graph",
-    # N4 manifest may contain the boundary field when it is false; only true/enabled substitution is forbidden.
-    # N4 以后 manifest 允许记录 false 字段，但仍禁止打开 final_v23 输出替代。
-    r"final_v23_output_substitution\s*[:=]\s*true",
     r"substituteFinalV23",
+]
+
+FORBIDDEN_TRUE_FLAGS = [
+    "final_v23_output_substitution",
+    "proposed_reads_final_v23_output",
+    "trace_solver_input",
+    "trace_used_for_tuning",
+    "output_only_correction",
 ]
 
 
@@ -76,6 +81,22 @@ def _cpp_runtime_text(root: Path) -> str:
             if path.is_file() and path.suffix in {".hpp", ".cpp", ".txt", ".yaml"}:
                 chunks.append(_read_text(path))
     return "\n".join(chunks)
+
+
+def forbidden_true_flag_hits(text: str) -> list[str]:
+    # 允许 manifest/config 记录 false 边界字段；只要这些字段被打开为 true 就失败。
+    # This prevents final_v23 baseline output or trace from contaminating proposed solver paths.
+    normalized = text.replace('\\"', '"')
+    hits: list[str] = []
+    for flag in FORBIDDEN_TRUE_FLAGS:
+        pattern = rf'["\']?{re.escape(flag)}["\']?\s*[:=]\s*true\b'
+        if re.search(pattern, normalized, flags=re.IGNORECASE):
+            hits.append(flag)
+    return hits
+
+
+def contains_forbidden_true_flag(text: str) -> bool:
+    return bool(forbidden_true_flag_hits(text))
 
 
 def main() -> int:
@@ -100,6 +121,7 @@ def main() -> int:
     for pattern in FORBIDDEN_CPP_PATTERNS:
         if re.search(pattern, text):
             forbidden_hits.append(pattern)
+    forbidden_hits.extend(forbidden_true_flag_hits(text))
 
     if forbidden_hits:
         print("C++ runtime backbone audit failed. Forbidden N3A implementation patterns:")
