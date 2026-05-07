@@ -4,7 +4,7 @@
 |---|---|---|---|---|---|---|
 | N0 Bootstrap | stage/N0-bootstrap | done | no | no | repo structure + governance docs | completed |
 | N1 final_v23 wrapper | stage/N1-final-v23-wrapper | done | no | no | baseline wrapper | completed; final_v23 not proposed |
-| N2 frame/writer/evaluator | stage/N2-frame-writer-evaluator | not_started | limited infrastructure only | no | frame + writer + evaluator | hard frame gates |
+| N2 frame/writer/evaluator | stage/N2-frame-writer-evaluator | done | no | no | frame + writer + evaluator | frame/writer/evaluator infrastructure completed as lightweight standard-library utilities |
 | N3 LegSA-ESKF | stage/N3-legsa-eskf | not_started | yes | no | source-aware ESKF | proposed begins |
 | N4 raw Doppler factor | stage/N4-raw-doppler-factor | not_started | yes | no | Doppler factor | sign convention required |
 | N5 source-aware weighting | stage/N5-source-aware-weighting | not_started | yes | no | weighting module | no trace tuning |
