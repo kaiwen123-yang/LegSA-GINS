@@ -1,3 +1,6 @@
+"""中文说明：unit 测试验证小模块约定和边界，不做 numerical performance claim。
+"""
+
 from legsa_gins.frames.transforms import enu_to_ned, flu_to_frd, frd_to_flu, ned_to_enu
 
 

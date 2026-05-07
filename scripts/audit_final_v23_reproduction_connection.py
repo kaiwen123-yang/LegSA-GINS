@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Audit the Stage N3C final_v23 reproduction connection."""
+"""Audit the Stage N3C final_v23 reproduction connection.
+
+中文说明：audit 脚本用于工程边界检查，不能通过删除测试或绕过 audit 让阶段过线。
+"""
 
 from __future__ import annotations
 

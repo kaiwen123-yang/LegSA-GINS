@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Standardize observed KF-GINS final_v23 outputs for baseline evaluation."""
+"""Standardize observed KF-GINS final_v23 outputs for baseline evaluation.
+
+中文说明：本模块只处理 final_v23/KF-GINS baseline 输出或只读外部源码探测；不修改外部源码、不复制源码、不做数值修正或性能结论。
+"""
 
 from __future__ import annotations
 
@@ -36,6 +39,8 @@ EVAL_NAV_COLUMNS = [
 
 
 def write_eval_nav_csv(nav_rows: list[dict[str, object]], output_csv: str | Path) -> Path:
+    # 中文说明：FINAL_V23_EVAL_NAV.csv 只进入 evaluator；不得作为 proposed solver 输入。
+    # FINAL_V23_EVAL_NAV is evaluator-only, never proposed-solver input.
     output_path = Path(output_csv)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with output_path.open("w", newline="", encoding="utf-8") as handle:
@@ -70,6 +75,8 @@ def standardize_outputs(
     dataset_name: str,
     source_root: str,
 ) -> dict[str, Path]:
+    # 中文说明：标准化只调用 parser 和 writer，不做 trace tuning、bad epoch deletion 或 output-only correction。
+    # Standardization keeps raw values unchanged and makes no numerical claim.
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
 

@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Dry-run-safe external final_v23/KF-GINS run wrapper."""
+"""Dry-run-safe external final_v23/KF-GINS run wrapper.
+
+中文说明：本模块只处理 final_v23/KF-GINS baseline 输出或只读外部源码探测；不修改外部源码、不复制源码、不做数值修正或性能结论。
+"""
 
 from __future__ import annotations
 
@@ -21,6 +24,8 @@ def run_external(
     dry_run: bool,
     allow_run: bool,
 ) -> dict[str, Any]:
+    # 中文说明：运行 wrapper 不读取 trace，不做 output-only correction，也不生成性能结论。
+    # The run wrapper avoids trace input, output correction, and numerical claims.
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
     result: dict[str, Any] = {

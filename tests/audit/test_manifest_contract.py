@@ -1,3 +1,6 @@
+"""中文说明：audit 测试验证工程边界，不依赖 raw data，也不产生 numerical performance claim。
+"""
+
 import subprocess
 import sys
 from pathlib import Path

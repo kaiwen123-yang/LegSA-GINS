@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N3B final_v23 / KF-GINS source audit and reproduction contract.
+N3C final_v23-style reproduction connection and BY2 data path contract.
 
 Current working phase:
 
-N3C final_v23-style reproduction connection and BY2 data path contract.
+N3D Chinese code comments and readability pass.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -53,6 +53,8 @@ N3A adds a C++ runtime skeleton with dry-run NAV/STD/EVAL_NAV output contracts. 
 N3B reads external source only for audit and reproduction planning. N3B does not copy external source into LegSA-GINS. N3B does not implement proposed factors or numerical performance evaluation.
 
 N3C creates baseline output parsers/standardizers and a BY2 data source-role contract only. N3C does not implement proposed factors or numerical performance claims.
+
+N3D improves code readability with Chinese comments only. N3D does not implement new algorithms or make performance claims.
 
 ## Strict Phase-I Non-goals
 

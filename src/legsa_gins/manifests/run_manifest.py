@@ -1,4 +1,7 @@
-"""RUN_MANIFEST helpers with N2 forbidden-claim guards."""
+"""RUN_MANIFEST helpers with N2 forbidden-claim guards.
+
+中文说明：manifest 模块记录 claim boundary 和输出合同，禁止把 dry-run 或 baseline parser 写成数值性能证据。
+"""
 
 import json
 from pathlib import Path
@@ -72,6 +75,8 @@ def default_run_manifest(
 
 
 def write_run_manifest(manifest: dict, output_path: str | Path) -> None:
+    # 中文说明：RUN_MANIFEST 固化 claim boundary，不能把 dry-run 写成性能证据。
+    # RUN_MANIFEST pins claim boundaries; dry-run is not performance evidence.
     validate_run_manifest(manifest)
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -79,6 +84,8 @@ def write_run_manifest(manifest: dict, output_path: str | Path) -> None:
 
 
 def validate_run_manifest(manifest: dict) -> bool:
+    # 中文说明：检查 baseline/proposed 边界布尔值，防止 final_v23 output substitution。
+    # Check boundary booleans to prevent final_v23 output substitution.
     missing = [field for field in RUN_MANIFEST_REQUIRED_FIELDS if field not in manifest]
     if missing:
         raise ValueError(f"RUN_MANIFEST missing required fields: {missing}")

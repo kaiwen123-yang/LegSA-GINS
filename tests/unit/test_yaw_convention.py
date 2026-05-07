@@ -1,3 +1,6 @@
+"""中文说明：unit 测试验证小模块约定和边界，不做 numerical performance claim。
+"""
+
 from legsa_gins.frames.transforms import wrap_angle_deg, wrap_heading_deg
 from legsa_gins.frames.yaw import heading_to_yaw_math_deg, yaw_math_to_heading_deg
 

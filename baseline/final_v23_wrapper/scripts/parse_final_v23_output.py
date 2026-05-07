@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Parse final_v23-style output into a conservative baseline CSV.
+中文说明：final_v23 wrapper 只服务 baseline/oracle/backbone reference；final_v23 不是 proposed，wrapper 不允许 output substitution。
 
 This parser is an N1 wrapper skeleton. The real field mapping will be completed
 after the actual final_v23 output format is connected.
@@ -35,6 +36,8 @@ def first_present(fieldnames: list[str], candidates: tuple[str, ...]) -> str | N
 
 
 def parse_csv(input_path: Path, output_path: Path) -> None:
+    # 中文说明：N1 wrapper 只做保守字段抽取，不做数值修正或 final_v23 output substitution。
+    # N1 parsing is conservative field extraction only.
     with input_path.open(newline="", encoding="utf-8") as src:
         reader = csv.DictReader(src)
         if reader.fieldnames is None:

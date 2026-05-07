@@ -1,3 +1,6 @@
+// 中文说明：LegSAEngine 是自主 runtime skeleton；本阶段只保持最小 dry-run 链路，不实现 INS mechanization、EKF、raw Doppler、Go2、weighting 或 FGO。
+// English note: comments define module responsibility and safety boundaries only.
+
 #include "legsa_gins/engine/legsa_engine.hpp"
 
 #include <filesystem>
@@ -14,6 +17,8 @@ LegSAEngine::LegSAEngine(config::RuntimeConfig config) : config_(std::move(confi
 
 void LegSAEngine::initialize() {
   const std::filesystem::path output_dir(config_.output_dir);
+  // 初始化最小状态容器，保持 skeleton 标记，避免被误读为已验证 solver。
+  // Initialize minimal state only; the skeleton status prevents solver overclaiming.
   nav_state_ = types::NavState{};
   nav_state_.status = "cpp_runtime_skeleton_only";
   nav_state_.source_role = "proposed_skeleton";
@@ -38,6 +43,8 @@ void LegSAEngine::processNext() {
   }
   if (gnss_buffer_.empty()) {
     if (!imu_buffer_.empty()) {
+      // 当前不做 INS mechanization，仅保留时间推进合同。
+      // No INS mechanization is applied; this only preserves timestamp flow.
       nav_state_.tow = imu_buffer_.front().tow;
       std_state_.tow = nav_state_.tow;
       imu_buffer_.erase(imu_buffer_.begin());
@@ -47,6 +54,8 @@ void LegSAEngine::processNext() {
 
   const auto gnss = gnss_buffer_.front();
   gnss_buffer_.erase(gnss_buffer_.begin());
+  // 最小 receiver-native dry-run：只搬运已有 GNSS 字段，不做 EKF 更新或输出修正。
+  // Minimal receiver-native dry-run: copy available GNSS fields without EKF or correction.
   nav_state_.tow = gnss.tow;
   nav_state_.status = "cpp_runtime_skeleton_only";
   nav_state_.source_role = "proposed_skeleton";
@@ -79,6 +88,8 @@ void LegSAEngine::writeCurrentOutputs() {
   }
   nav_writer_->write(nav_state_);
   std_writer_->write(std_state_);
+  // EVAL_NAV bridge 只服务 evaluator，不回流 solver，也不替代 proposed 输出。
+  // EVAL_NAV bridge is evaluator-only and never feeds back into the solver.
   eval_nav_writer_->write(nav_state_);
 }
 
@@ -87,6 +98,8 @@ void LegSAEngine::runDryDemo() {
     initialize();
   }
 
+  // toy GNSS 样例只用于证明输出文件能写出，不作为轨迹或精度证据。
+  // Toy GNSS samples only prove output plumbing, not trajectory quality.
   types::GnssNativeMeasurement first;
   first.tow = 100000.0;
   first.lat_deg = 30.0000001;
@@ -120,6 +133,8 @@ void LegSAEngine::runDryDemo() {
 }
 
 void LegSAEngine::applyConfigToRegistry() {
+  // ReceiverPosition/Velocity/Heading 是 backbone slot；高级 proposed factor 默认关闭。
+  // Receiver slots are backbone placeholders; advanced proposed factors remain disabled by default.
   if (config_.enable_receiver_position) {
     registry_.enable(factors::FactorKind::ReceiverPosition);
   } else {
@@ -137,6 +152,8 @@ void LegSAEngine::applyConfigToRegistry() {
   }
 
   if (config_.enable_raw_doppler) {
+    // 注册开关不等于 residual 实现；N3D 只加注释，不启用新算法。
+    // Enabling a registry flag is not a residual implementation; N3D adds comments only.
     registry_.enable(factors::FactorKind::RawDoppler);
   }
   if (config_.enable_go2_yawrate_prior) {

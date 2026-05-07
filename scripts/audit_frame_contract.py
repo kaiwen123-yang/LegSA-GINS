@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Audit N2 frame convention contract files and hard-rule text."""
+"""Audit N2 frame convention contract files and hard-rule text.
+
+中文说明：audit 脚本用于工程边界检查，不能通过删除测试或绕过 audit 让阶段过线。
+"""
 
 from pathlib import Path
 import sys

@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Write the Stage N3C final_v23 reproduction RUN_MANIFEST.json."""
+"""Write the Stage N3C final_v23 reproduction RUN_MANIFEST.json.
+
+中文说明：本模块只处理 final_v23/KF-GINS baseline 输出或只读外部源码探测；不修改外部源码、不复制源码、不做数值修正或性能结论。
+"""
 
 from __future__ import annotations
 
@@ -18,6 +21,8 @@ def build_manifest(
     source_root: str,
     evidence_missing: list[str] | None = None,
 ) -> dict[str, Any]:
+    # 中文说明：N3C manifest 明确 baseline 身份和 forbidden flags，防止后续误用。
+    # The N3C manifest preserves baseline identity and forbidden flags.
     manifest: dict[str, Any] = {
         "phase": "N3C",
         "algorithm_role": "baseline",

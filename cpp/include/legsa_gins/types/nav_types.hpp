@@ -1,3 +1,6 @@
+// 中文说明：类型定义只承载状态和观测字段合同，不隐含滤波器、平滑器或性能结论。
+// English note: comments define module responsibility and safety boundaries only.
+
 #pragma once
 
 #include <string>

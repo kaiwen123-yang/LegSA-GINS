@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Probe BY2 local dataset paths and source roles without reading raw files fully."""
+"""Probe BY2 local dataset paths and source roles without reading raw files fully.
+
+中文说明：BY2 path probe 只验证路径、header 和 source role；不读取全量 raw data，trace 只能 evaluation-only，receiver IMU 不是 Go2 body IMU。
+"""
 
 from __future__ import annotations
 
@@ -45,6 +48,8 @@ BODY_MARKERS = [
 
 
 def read_csv_header(path: Path) -> list[str]:
+    # 中文说明：只读取第一行 header，避免把 BY2 raw data 读入或复制到仓库。
+    # Read only the CSV header; never ingest or vendor raw data.
     with path.open("r", newline="", encoding="utf-8-sig") as handle:
         reader = csv.reader(handle)
         try:
@@ -84,6 +89,8 @@ def body_marker_check(path: Path) -> dict[str, Any]:
 
 
 def probe_paths(fix_root: str | Path, body_imu: str | Path) -> dict[str, Any]:
+    # 中文说明：路径探测只确认 source role；trace evaluation-only，receiver IMU 不是 Go2 body IMU。
+    # Path probing validates source roles only.
     root = Path(fix_root)
     body_path = Path(body_imu)
     file_roles: dict[str, dict[str, Any]] = {}

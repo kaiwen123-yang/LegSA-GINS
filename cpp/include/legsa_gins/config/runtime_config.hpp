@@ -1,3 +1,6 @@
+// 中文说明：RuntimeConfig 是配置骨架；final_v23_is_proposed 与 proposed_reads_final_v23_output 必须保持 false，高级因子默认关闭。
+// English note: comments define module responsibility and safety boundaries only.
+
 #pragma once
 
 #include <string>

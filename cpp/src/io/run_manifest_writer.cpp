@@ -1,3 +1,6 @@
+// 中文说明：writer 只写合同化输出给后续验证或 evaluator；不做 output-only correction，不删除 bad epochs，也不参与 solver。
+// English note: comments define module responsibility and safety boundaries only.
+
 #include "legsa_gins/io/run_manifest_writer.hpp"
 
 #include <fstream>
@@ -21,6 +24,8 @@ std::string jsonEscape(const std::string& value) {
 }
 
 void writeFactorArray(std::ofstream& stream, const factors::FactorRegistry& registry) {
+  // Manifest 只记录开关状态，不声明任何因子 residual 已经完成。
+  // The manifest records registry flags only, not implemented residuals.
   const auto kinds = registry.enabledKinds();
   stream << "  \"enabled_factors\": [";
   for (std::size_t index = 0; index < kinds.size(); ++index) {
@@ -56,6 +61,8 @@ std::filesystem::path RunManifestWriter::writePlaceholder(
          << jsonBool(config.final_v23_is_proposed) << ",\n";
   stream << "  \"proposed_reads_final_v23_output\": "
          << jsonBool(config.proposed_reads_final_v23_output) << ",\n";
+  // final_v23 边界必须在 manifest 中显式保留，防止 baseline 污染 proposed。
+  // Keep final_v23 boundary flags explicit to avoid baseline/proposed contamination.
   writeFactorArray(stream, registry);
   stream << "  \"raw_data_committed\": false,\n";
   stream << "  \"numerical_performance_claim\": false,\n";

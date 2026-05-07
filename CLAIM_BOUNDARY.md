@@ -35,6 +35,10 @@ Allowed N3C reproduction-connection statement:
 - final_v23/KF-GINS baseline outputs may be parsed and standardized for baseline evaluation.
 - BY2 local data paths may be probed through ignored local config for source-role validation.
 
+Allowed N3D readability statement:
+
+- N3D may add Chinese comments and readability documentation.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -80,6 +84,10 @@ Do not claim:
 - Proposed solver reading final_v23 baseline outputs.
 - Trace reference as solver input.
 - Receiver internal IMU treated as Go2 body-state IMU.
+- Code comments introducing unsupported performance claims.
+- Code comments describing dry-run outputs as numerical evidence.
+- Code comments describing baseline parsers as proposed solver implementation.
+- Code comments weakening trace_evaluation_only or receiver_imu_as_body_imu=false rules.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
@@ -108,6 +116,14 @@ N3C must not allow proposed solver to read final_v23 baseline outputs.
 Trace reference must not be used as solver input.
 
 Receiver internal IMU must not be treated as Go2 body-state IMU.
+
+Code comments must not introduce unsupported performance claims.
+
+Code comments must not describe dry-run outputs as numerical evidence.
+
+Code comments must not describe baseline parsers as proposed solver implementation.
+
+Code comments must not weaken trace_evaluation_only or receiver_imu_as_body_imu=false rules.
 
 ## Evidence Rule
 

@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Probe an external final_v23/KF-GINS source tree without modifying it."""
+"""Probe an external final_v23/KF-GINS source tree without modifying it.
+
+中文说明：本模块只处理 final_v23/KF-GINS baseline 输出或只读外部源码探测；不修改外部源码、不复制源码、不做数值修正或性能结论。
+"""
 
 from __future__ import annotations
 
@@ -53,6 +56,8 @@ def find_named_files(source_root: Path, filenames: list[str]) -> dict[str, list[
 
 
 def probe_source(source_root: str | Path) -> dict[str, Any]:
+    # 中文说明：只读探测外部 KF-GINS，不执行 checkout/pull/build，也不复制源码。
+    # Read-only probe: no checkout, pull, build, or vendoring.
     root = Path(source_root)
     exists = root.exists()
     result: dict[str, Any] = {
