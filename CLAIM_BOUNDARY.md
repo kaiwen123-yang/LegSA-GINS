@@ -352,6 +352,20 @@ Old stale summary must not be used as formal evidence.
 
 Yaw gate remains <= 2.0.
 
+N4H2E visual validation figures are diagnostic baseline replay evidence only.
+
+N4H2E generated figures are not proposed solver performance.
+
+N4H2E visual validation does not modify solver output.
+
+N4H2E requires manual visual review.
+
+N4H2E roll/pitch relaxed pass is not strict pass.
+
+N4H2E yaw near-boundary evidence must be reported honestly.
+
+Generated figures under the visual output role must not be committed.
+
 ## Evidence Rule
 
 If evidence is missing, write:
