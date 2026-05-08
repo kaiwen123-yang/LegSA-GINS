@@ -17,11 +17,13 @@ def _toy_pvt_frame(vn, ve, vd, sacc):
     return bytes(frame)
 
 
-def _write_status(path, receiver, base_time):
+def _write_status(path, receiver, base_time, row_count):
     header = [
         "Time",
         "header.stamp.secs",
         "header.stamp.nsecs",
+        "sys_stamp.secs",
+        "sys_stamp.nsecs",
         "pos_lat",
         "pos_lon",
         "pos_height",
@@ -40,7 +42,7 @@ def _write_status(path, receiver, base_time):
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=header)
         writer.writeheader()
-        for index in range(4):
+        for index in range(row_count):
             stamp = base_time + index * 0.1
             secs = int(stamp)
             nsecs = int(round((stamp - secs) * 1.0e9))
@@ -51,6 +53,8 @@ def _write_status(path, receiver, base_time):
                     "Time": f"{stamp:.9f}",
                     "header.stamp.secs": secs,
                     "header.stamp.nsecs": nsecs,
+                    "sys_stamp.secs": secs,
+                    "sys_stamp.nsecs": nsecs,
                     "pos_lat": 30.0,
                     "pos_lon": 120.0,
                     "pos_height": 15.0,
@@ -76,8 +80,8 @@ def _write_raw(path, base_time):
             fieldnames=["Time", "stamp.secs", "stamp.nsecs", "protocol", "data", "name", "seq", "info"],
         )
         writer.writeheader()
-        for index in range(4):
-            stamp = base_time + index * 0.1
+        for index, offset in enumerate([0.0, 0.9]):
+            stamp = base_time + offset
             secs = int(stamp)
             nsecs = int(round((stamp - secs) * 1.0e9))
             writer.writerow(
@@ -118,8 +122,8 @@ def _write_body(path, base_time):
 def _make_toy_inputs(tmp_path, base_time=1772784000.0):
     fix = tmp_path / "fix"
     fix.mkdir()
-    _write_status(fix / "gnss1-status.csv", "gnss1", base_time)
-    _write_status(fix / "gnss2-status.csv", "gnss2", base_time)
+    _write_status(fix / "gnss1-status.csv", "gnss1", base_time, row_count=10)
+    _write_status(fix / "gnss2-status.csv", "gnss2", base_time, row_count=9)
     _write_raw(fix / "gnss1-raw.csv", base_time)
     body = tmp_path / "by2.txt"
     _write_body(body, base_time)
@@ -134,12 +138,25 @@ def test_generate_process_data_compat_inputs_toy(tmp_path):
     gnss_lines = (output / "BY2_PROCESS_DATA_COMPAT.gnss").read_text().strip().splitlines()
     imu_lines = (output / "BY2_PROCESS_DATA_COMPAT.imu").read_text().strip().splitlines()
     report = json.loads((output / "PROCESS_DATA_COMPAT_REPORT.json").read_text())
+    coverage = json.loads((output / "PROCESS_DATA_COVERAGE_REPORT.json").read_text())
 
     assert result["report"]["runtime_input_reconstructed"] is True
+    assert len(gnss_lines) == 10
     assert len(gnss_lines[0].split()) == 15
     assert len(imu_lines[0].split()) == 7
+    assert report["status_base_row_count"] == 10
+    assert report["pvt_velocity_row_count"] == 2
+    assert report["yaw_row_count"] == 9
+    assert report["gnss_output_row_count"] == 10
+    assert report["output_to_status_ratio"] >= 0.8
+    assert 0 < report["pvt_merge_match_count_before_fill"] < report["status_base_row_count"]
+    assert report["yaw_merge_match_count_before_fill"] >= 9
+    assert report["coverage_status"] == "passed"
+    assert coverage["coverage_status"] == "passed"
     assert report["enable_outage"] is False
     assert report["outlier_mode"] == "none"
     assert report["yaw_noise_injection"] is False
+    assert report["yaw_noise_std_deg"] == 0.0
     assert report["trace_solver_input"] is False
     assert report["trace_yaw_for_solver"] is False
+    assert report["velocity_std_policy"] == "fixed_0p05_observed_in_uploaded_code"

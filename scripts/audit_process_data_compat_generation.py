@@ -25,6 +25,7 @@ if str(SRC_ROOT) not in sys.path:
 
 REQUIRED_FILES = [
     "src/legsa_gins/input_generation/process_data_compat.py",
+    "src/legsa_gins/input_generation/process_data_coverage.py",
     "src/legsa_gins/input_generation/ubx_nav_pvt.py",
     "src/legsa_gins/input_generation/status_yaw_builder.py",
     "src/legsa_gins/input_generation/imu_txt_builder.py",
@@ -41,7 +42,7 @@ def _toy_pvt_frame(vn: int, ve: int, vd: int, sacc: int) -> bytes:
     return bytes(frame)
 
 
-def _write_status(path: Path, *, receiver: str, base_time: float) -> None:
+def _write_status(path: Path, *, receiver: str, base_time: float, row_count: int) -> None:
     header = [
         "Time",
         "header.stamp.secs",
@@ -66,7 +67,7 @@ def _write_status(path: Path, *, receiver: str, base_time: float) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=header)
         writer.writeheader()
-        for index in range(5):
+        for index in range(row_count):
             stamp = base_time + index * 0.1
             secs = int(stamp)
             nsecs = int(round((stamp - secs) * 1.0e9))
@@ -104,8 +105,8 @@ def _write_raw(path: Path, *, base_time: float) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=header)
         writer.writeheader()
-        for index in range(5):
-            stamp = base_time + index * 0.1
+        for index, offset in enumerate([0.0, 0.9]):
+            stamp = base_time + offset
             secs = int(stamp)
             nsecs = int(round((stamp - secs) * 1.0e9))
             writer.writerow(
@@ -165,8 +166,12 @@ def main() -> int:
         fix_root.mkdir()
         body = tmp / "by2.txt"
         base_time = 1772784000.0
-        _write_status(fix_root / "gnss1-status.csv", receiver="gnss1", base_time=base_time)
-        _write_status(fix_root / "gnss2-status.csv", receiver="gnss2", base_time=base_time)
+        _write_status(
+            fix_root / "gnss1-status.csv", receiver="gnss1", base_time=base_time, row_count=10
+        )
+        _write_status(
+            fix_root / "gnss2-status.csv", receiver="gnss2", base_time=base_time, row_count=9
+        )
         _write_raw(fix_root / "gnss1-raw.csv", base_time=base_time)
         _write_body(body, base_time=base_time)
         completed = subprocess.run(
@@ -194,6 +199,7 @@ def main() -> int:
             "BY2_PROCESS_DATA_COMPAT.gnss",
             "BY2_PROCESS_DATA_COMPAT.imu",
             "PROCESS_DATA_COMPAT_REPORT.json",
+            "PROCESS_DATA_COVERAGE_REPORT.json",
             "STATUS_YAW_A1_AUDIT.json",
             "IMU_PROCESS_DATA_COMPAT_REPORT.json",
         ]
@@ -228,6 +234,25 @@ def main() -> int:
             return 1
         if report.get("outlier_mode") != "none":
             print("N4H1P audit failed. outlier_mode is not none.")
+            return 1
+        coverage = json.loads((output_dir / "PROCESS_DATA_COVERAGE_REPORT.json").read_text())
+        if report.get("status_base_row_count") != 10 or report.get("pvt_velocity_row_count") != 2:
+            print("N4H1P audit failed. Toy row counts do not exercise status-master merge.")
+            return 1
+        if report.get("yaw_row_count") != 9:
+            print("N4H1P audit failed. Toy yaw row count is not 9.")
+            return 1
+        if report.get("gnss_output_row_count") < 8:
+            print("N4H1P audit failed. GNSS output row count suggests PVT-master regression.")
+            return 1
+        if report.get("coverage_status") != "passed" or coverage.get("coverage_status") != "passed":
+            print("N4H1P audit failed. Coverage status is not passed.")
+            return 1
+        if report.get("output_to_status_ratio", 0.0) < 0.8:
+            print("N4H1P audit failed. output_to_status_ratio is below 0.8.")
+            return 1
+        if report.get("yaw_noise_std_deg") != 0.0:
+            print("N4H1P audit failed. yaw_noise_std_deg default is not zero.")
             return 1
     finally:
         shutil.rmtree(tmp, ignore_errors=True)

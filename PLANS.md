@@ -120,6 +120,11 @@ Add a process_data-compatible input generator that reconstructs final_v23-style
 `.gnss` and `.imu` runtime inputs from BY2 upstream fields for baseline/parity
 testing only.
 
+N4H1P2:
+Match process_data row-retention behavior by keeping `gnss1-status` as the
+`.gnss` main table, treating PVT velocity and status yaw as merge-asof
+auxiliary fields, applying fill, and reporting coverage.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:
