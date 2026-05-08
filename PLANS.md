@@ -299,6 +299,28 @@ Fill `insPropagation`, `buildFGPhiQd`, and `EKFPredict` math while preserving
 N4H4A input/output and claim-boundary contracts.
 
 Status:
+completed as N4H4B propagation foundation.
+
+## Stage N4H4B: INS mechanization and EKF propagation
+
+Goal:
+Implement LegSA-owned Earth/Rotation math, process_data-compatible IMU
+compensation, INS velocity/position/attitude mechanization, 21-state/18-noise
+`F/G/Phi/Qd` prediction matrices, EKF covariance prediction, covariance checks,
+STD sqrt output, propagation toy dry-run, audit, and tests.
+
+N4H4B is propagation foundation only. It does not implement GNSS measurement
+updates, `EKFUpdate`, `stateFeedback`, raw Doppler, Go2 priors, LSIM/OIM,
+source-aware weighting, FGO, final_v23 parity, clean replay parity, or
+performance claims.
+
+## Stage N4H4C: GNSS updates, EKFUpdate, and stateFeedback
+
+Goal:
+Implement GNSS position/velocity/yaw update, EKF measurement update, and error
+state feedback after N4H4B prediction propagation is closed.
+
+Status:
 not_started.
 
 ## Stage N5: Raw Doppler Factor

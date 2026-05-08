@@ -98,6 +98,16 @@ Allowed N4H4A framework statement:
 - Critical C++ functions require Chinese comments.
 - Factor flags remain false in N4H4A.
 
+Allowed N4H4B propagation statement:
+
+- N4H4B may implement LegSA-owned Earth/Rotation math, IMU compensation, INS
+  mechanization, `F/G/Phi/Qd`, EKF prediction, covariance checks, STD sqrt
+  output, propagation toy dry-run, audit, and tests.
+- N4H4B is propagation foundation only.
+- N4H4B does not implement GNSS measurement updates.
+- N4H4B does not implement `EKFUpdate` or `stateFeedback`.
+- N4H4B factor flags remain false.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -203,6 +213,14 @@ Do not claim:
 - N4H4A enabling raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting,
   FGO, FGO feedback, output-only correction, or bad-epoch deletion.
 - N4H4A factor flags set to true.
+- N4H4B as complete EKF parity.
+- N4H4B as final_v23 parity.
+- N4H4B as numerical performance evidence.
+- N4H4B implementing GNSS measurement updates.
+- N4H4B implementing `EKFUpdate` or `stateFeedback`.
+- N4H4B enabling raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting,
+  FGO, FGO feedback, output-only correction, bad-epoch deletion, or trace
+  solver input.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 

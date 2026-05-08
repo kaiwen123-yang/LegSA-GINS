@@ -13,6 +13,7 @@ const char* boolText(bool value) { return value ? "true" : "false"; }
 }  // namespace
 
 // 中文说明：RUN_MANIFEST 是 claim-boundary 证据，不包含性能结论或 final_v23 输出替代。
+// 中文说明：默认会写出 "phase": "N4H4A" 和 "solver_role": "legsa_v23_core_skeleton"。
 void RunManifestWriter::write(const std::string& path, const GINSOptions& options) {
   std::ofstream output(path);
   if (!output) {
@@ -20,8 +21,13 @@ void RunManifestWriter::write(const std::string& path, const GINSOptions& option
   }
 
   output << "{\n";
-  output << "  \"phase\": \"N4H4A\",\n";
-  output << "  \"solver_role\": \"legsa_v23_core_skeleton\",\n";
+  output << "  \"phase\": \"" << options.phase << "\",\n";
+  output << "  \"solver_role\": \"" << options.solver_role << "\",\n";
+  output << "  \"mechanization_predict_implemented\": " << boolText(options.mechanization_predict_implemented)
+         << ",\n";
+  output << "  \"measurement_update_implemented\": " << boolText(options.measurement_update_implemented)
+         << ",\n";
+  output << "  \"state_feedback_implemented\": " << boolText(options.state_feedback_implemented) << ",\n";
   output << "  \"final_v23_reference_used_as_solver_input\": "
          << boolText(options.final_v23_reference_used_as_solver_input) << ",\n";
   output << "  \"proposed_reads_final_v23_output\": " << boolText(options.proposed_reads_final_v23_output)

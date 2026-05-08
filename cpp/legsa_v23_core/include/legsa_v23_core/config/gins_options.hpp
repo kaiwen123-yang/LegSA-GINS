@@ -37,10 +37,15 @@ struct GINSOptions {
   Vector3 imu_noise = zeroVector3();
   Vector3 antlever = zeroVector3();
   std::string clean_input_provenance_label = "evidence_missing";
+  std::string phase = "N4H4A";
+  std::string solver_role = "legsa_v23_core_skeleton";
   FactorFlags factor_flags;
   bool final_v23_reference_used_as_solver_input = false;
   bool proposed_reads_final_v23_output = false;
   bool trace_solver_input = false;
+  bool measurement_update_implemented = false;
+  bool state_feedback_implemented = false;
+  bool mechanization_predict_implemented = false;
 };
 
 }  // namespace legsa_v23_core

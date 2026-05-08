@@ -15,4 +15,6 @@ struct NavState {
   Vector3 acc_scale = zeroVector3();
 };
 
+using PVAState = NavState;
+
 }  // namespace legsa_v23_core
