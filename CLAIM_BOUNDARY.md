@@ -88,6 +88,16 @@ Allowed N4R diagnostic statement:
 - Trace remains evaluation-only.
 - Yaw transform candidates are evaluator diagnostics, not solver tuning.
 
+Allowed N4H4A framework statement:
+
+- N4H4A may create the LegSA-owned v23-core C++ full-framework foundation.
+- N4H4A may define types, options, config loader, 7-column `.imu` reader,
+  15-column `.gnss` reader, runtime engine skeleton, writers, manifest, audit,
+  tests, and toy dry-run.
+- N4H4A may expose KF-GINS-style function names as skeleton hooks only.
+- Critical C++ functions require Chinese comments.
+- Factor flags remain false in N4H4A.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -185,6 +195,14 @@ Do not claim:
 - N4R metrics as proposed solver performance.
 - N4R official artifacts as solver input.
 - N4R yaw transform candidates as solver tuning.
+- N4H4A as EKF parity.
+- N4H4A as final_v23 reproduction.
+- N4H4A as proposed numerical performance evidence.
+- N4H4A reading final_v23 output as solver input.
+- N4H4A compiling `reference/final_v23_repo` source into proposed code.
+- N4H4A enabling raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting,
+  FGO, FGO feedback, output-only correction, or bad-epoch deletion.
+- N4H4A factor flags set to true.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 

@@ -278,6 +278,29 @@ N4H4 must not be a wrapper, must not perform output substitution, must not use
 final_v23 outputs as proposed solver input, and must keep trace evaluation-only.
 Chinese comments are required for critical functions.
 
+## Stage N4H4A: LegSA-v23-core full-framework foundation
+
+Goal:
+Create the LegSA-owned C++ v23-core framework foundation: types, options,
+config loader, 7-column `.imu` reader, 15-column `.gnss` reader, runtime engine
+class, KF-GINS-style function skeleton, writers, manifest, demo, audit, and
+tests.
+
+N4H4A is framework foundation only. It is not a final_v23 wrapper, not
+final_v23 output substitution, not complete EKF parity, not raw Doppler, not Go2
+prior integration, not LSIM/OIM, not FGO, and not numerical-performance
+evidence. The older N4 toy filter remains diagnostic/foundation code rather
+than the final backbone.
+
+## Stage N4H4B: Mechanization and EKF propagation fill-in
+
+Goal:
+Fill `insPropagation`, `buildFGPhiQd`, and `EKFPredict` math while preserving
+N4H4A input/output and claim-boundary contracts.
+
+Status:
+not_started.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

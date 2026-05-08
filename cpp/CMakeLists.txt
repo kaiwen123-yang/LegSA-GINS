@@ -22,3 +22,31 @@ target_include_directories(legsa_gins
   PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
+
+file(GLOB_RECURSE LEGSA_V23_CORE_SOURCES CONFIGURE_DEPENDS
+  # N4H4A LegSA-owned v23-core sources are intentionally isolated from
+  # the final_v23 reference submodule.  That submodule is documentation/audit
+  # evidence only and is never compiled into the proposed runtime.
+  "${CMAKE_CURRENT_SOURCE_DIR}/legsa_v23_core/src/*.cpp"
+)
+list(REMOVE_ITEM LEGSA_V23_CORE_SOURCES
+  "${CMAKE_CURRENT_SOURCE_DIR}/legsa_v23_core/src/legsa_v23_core_demo.cpp"
+)
+
+add_library(legsa_v23_core STATIC
+  ${LEGSA_V23_CORE_SOURCES}
+)
+
+target_include_directories(legsa_v23_core
+  PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/legsa_v23_core/include"
+)
+
+add_executable(legsa_v23_core_demo
+  "${CMAKE_CURRENT_SOURCE_DIR}/legsa_v23_core/src/legsa_v23_core_demo.cpp"
+)
+
+target_link_libraries(legsa_v23_core_demo
+  PRIVATE
+    legsa_v23_core
+)
