@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N4G BY2 diagnostic gap screen.
+N4H0 receiver-native measurement floor and evaluator sanity.
 
 Current working phase:
 
-N4H0 receiver-native measurement floor and evaluator sanity.
+N4H1 final_v23 input source-chain and yaw-generation audit.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -65,6 +65,8 @@ N4F runs the current filter core on BY2 real data for diagnostic evaluation only
 N4G audits BY2 time-domain usage, Unitree sportmodestate IMU semantics, event-normalized `algo_time_sec`, and transverse dual-antenna heading candidates. N4G does not claim hardware clock sync, physical time offset, formal heading offset, or numerical performance.
 
 N4H0 evaluates direct BY2 receiver-native GNSS status against trace reference to separate input/evaluator issues from filter-core issues. N4H0 does not implement proposed solver logic or make proposed solver performance claims.
+
+N4H1 audits the two-layer final_v23 input source chain: runtime 15-column `.gnss` input and upstream generation fields. N4H1 does not implement proposed solver logic or make performance claims.
 
 ## Strict Phase-I Non-goals
 
