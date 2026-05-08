@@ -28,7 +28,9 @@
 | N4H2G clean status-yaw no-noise replay audit | stage/N4H2G-clean-status-yaw-replay | done | no | no | clean replay provenance report | N4H2F done; N4H2G done; next recommended stage determined by N4H2G_DECISION_REPORT |
 | N4H2G2 clean replay independence and yaw sensitivity audit | stage/N4H2G-clean-status-yaw-replay | done | no | no | clean replay independence report | N4H2G done; N4H2G2 done; next recommended stage determined by N4H2G2_DECISION_REPORT |
 | N4H3 controlled final_v23 reference import and transplant plan | stage/N4H3-controlled-final-v23-reference-import | done | no | no | reference import + transplant matrix | final_v23 reference import/provenance/boundary docs, clean/noisy policy, N4H4 plan, interface contract, and roadmap |
-| N4H4 LegSA-v23-core full EKF / unified filter implementation | stage/N4H4-legsa-v23-core | not_started | yes | no | LegSA-owned EKF/unified filter | not_started; no wrapper, no output substitution, no final_v23 output as proposed solver input |
+| N4H4A LegSA-v23-core full-framework foundation | stage/N4H4A-legsa-v23-core-foundation | done | yes | no | C++ framework foundation | types/readers/config/runtime skeleton/writers/manifest/audit/tests; no full EKF parity, no final_v23 output substitution, no performance claim |
+| N4H4B mechanization and EKF propagation | stage/N4H4B-legsa-v23-mechanization-propagation | not_started | yes | no | mechanization + prediction math | not_started; fill propagation math after N4H4A framework foundation |
+| N4H4 LegSA-v23-core full EKF / unified filter implementation | stage/N4H4-legsa-v23-core | in_progress | yes | no | LegSA-owned EKF/unified filter | staged through N4H4A/B/C; no wrapper, no output substitution, no final_v23 output as proposed solver input |
 | N5 raw Doppler factor | stage/N5-raw-doppler-factor | not_started | yes | no | Doppler factor | sign convention required |
 | N6 source-aware weighting / Go2 weak priors | stage/N6-source-aware-weighting | not_started | yes | no | weighting module | no trace tuning |
 | N7 no-feedback smoother | stage/N7-no-feedback-smoother | not_started | yes | no | fixed-lag smoother | no feedback |

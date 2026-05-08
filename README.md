@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N4H2G2 clean replay independence and yaw sensitivity audit.
+N4H3 controlled final_v23 reference import and transplant plan.
 
 Current working phase:
 
-N4H3 controlled final_v23 reference import and transplant plan.
+N4H4A LegSA-v23-core full-framework foundation.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -128,6 +128,12 @@ the LegSA-v23-core transplant matrix, provenance policy, boundary docs, and
 N4H4 implementation contracts. N4H3 does not copy external source into the
 superproject, does not implement proposed solver logic, and does not make
 performance claims.
+
+N4H4A creates the LegSA-owned v23-core C++ full-framework foundation with
+types, options, 7-column `.imu` reader, 15-column `.gnss` reader, config loader,
+KF-GINS-style engine function skeleton, writers, manifest, demo, audit, and
+tests. N4H4A is not final_v23 reproduction, not final_v23 output substitution,
+not full EKF parity, and not performance evidence.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace
