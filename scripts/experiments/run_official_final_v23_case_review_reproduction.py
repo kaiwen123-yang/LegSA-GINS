@@ -29,6 +29,9 @@ from legsa_gins.evaluation.official_case_review_reproduction import (  # noqa: E
 from legsa_gins.evaluation.dual_final_v23_evaluator_parity import (  # noqa: E402
     evaluate_dual_final_v23_evaluator_parity,
 )
+from legsa_gins.evaluation.dual_final_v23_official_parity_lock import (  # noqa: E402
+    lock_dual_final_v23_official_parity,
+)
 from legsa_gins.evaluation.n4h2_replay_profile_revaluation import (  # noqa: E402
     reevaluate_n4h2_replay_profiles,
 )
@@ -40,6 +43,9 @@ from legsa_gins.evaluation.yaw_evaluator_convention_policy import (  # noqa: E40
 )
 from legsa_gins.source_audit.dual_final_v23_artifact_recovery import (  # noqa: E402
     recover_dual_final_v23_artifacts,
+)
+from legsa_gins.source_audit.dual_final_v23_artifact_intake import (  # noqa: E402
+    run_dual_artifact_intake,
 )
 
 
@@ -196,6 +202,72 @@ def _n4r2_decide(
     }
 
 
+def _n4r3_decide(
+    *,
+    intake_report: dict[str, Any],
+    parity_lock_report: dict[str, Any] | None,
+    replay_profile_report: dict[str, Any],
+) -> dict[str, Any]:
+    classification = intake_report.get("summary_classification") or {}
+    confirmed_artifact = bool(intake_report.get("dual_final_v23_confirmed"))
+    single_like = bool(classification.get("single_like"))
+    parity_lock_report = parity_lock_report or {}
+    evaluator_confirmed = bool(parity_lock_report.get("evaluator_profile_confirmed"))
+    confirmed_profile_name = parity_lock_report.get("confirmed_profile_name")
+    confirmed_yaw = replay_profile_report.get("confirmed_profile_yaw_rmse_deg")
+    candidate_yaw = replay_profile_report.get("official_candidate_yaw_rmse_deg")
+    formal_yaw_pass = bool(evaluator_confirmed and isinstance(confirmed_yaw, (int, float)) and float(confirmed_yaw) <= 2.0)
+    confirmed_near_gate = bool(evaluator_confirmed and isinstance(confirmed_yaw, (int, float)) and 2.0 < float(confirmed_yaw) <= 2.2)
+
+    if single_like:
+        recommended = "N4R_wrong_artifact_group"
+    elif not confirmed_artifact:
+        recommended = "N4R_manual_dual_artifact_required"
+    elif not evaluator_confirmed:
+        recommended = "N4R_yaw_reference_schema_audit"
+    elif formal_yaw_pass:
+        recommended = "N4H3_controlled_final_v23_reference_import"
+    elif confirmed_near_gate:
+        recommended = "N4H3_reference_import_with_yaw_near_gate_caveat"
+    else:
+        recommended = "N4H2C_runtime_yaw_update_config_audit"
+
+    blocking: list[str] = []
+    if recommended == "N4R_wrong_artifact_group":
+        blocking.append("manual_artifact_single_antenna_like")
+    elif recommended == "N4R_manual_dual_artifact_required":
+        blocking.append("manual_dual_artifact_missing_or_incomplete")
+    elif recommended == "N4R_yaw_reference_schema_audit":
+        blocking.append("official_profile_not_confirmed")
+    elif recommended == "N4H2C_runtime_yaw_update_config_audit":
+        blocking.append("confirmed_profile_replay_yaw_above_gate")
+    if isinstance(candidate_yaw, (int, float)) and float(candidate_yaw) > 2.0:
+        blocking.append("diagnostic_candidate_yaw_above_strict_gate")
+
+    return {
+        "phase": "N4R3",
+        "dual_final_v23_confirmed": confirmed_artifact,
+        "manual_artifact_required": bool(intake_report.get("manual_artifact_required")),
+        "single_like": single_like,
+        "evaluator_profile_confirmed": evaluator_confirmed,
+        "confirmed_profile_name": confirmed_profile_name,
+        "official_candidate_replay_yaw_rmse_deg": candidate_yaw,
+        "confirmed_profile_replay_yaw_rmse_deg": confirmed_yaw,
+        "formal_yaw_pass": formal_yaw_pass,
+        "near_gate_status": replay_profile_report.get("near_gate_status", {}),
+        "recommended_next_stage": recommended,
+        "blocking_issues": blocking,
+        "trace_solver_input": False,
+        "trace_evaluation_only": True,
+        "solver_input_modified": False,
+        "solver_output_changed": False,
+        "evaluator_only": True,
+        "output_only_correction": False,
+        "bad_epoch_deletion_for_metric": False,
+        "numerical_performance_claim": False,
+    }
+
+
 def _write_markdown(path: Path, official_report: dict[str, Any], replay_report: dict[str, Any], decision: dict[str, Any]) -> None:
     official = official_report.get("official_summary", {})
     direct = official_report.get("direct_recompute_summary", {})
@@ -338,14 +410,36 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     )
     n4r2_decision["policy_formal_profile_patch_allowed"] = policy_report.get("formal_profile_patch_allowed")
     _write_json(out / "N4R2_DECISION_REPORT.json", n4r2_decision)
+
+    intake_report = run_dual_artifact_intake(args.dual_root, output_dir=out)
+    parity_lock_report: dict[str, Any] | None = None
+    if intake_report.get("dual_final_v23_confirmed"):
+        parity_lock_report = lock_dual_final_v23_official_parity(args.dual_root, output_dir=out)
+    confirmed_lock_profile = (
+        parity_lock_report.get("confirmed_profile")
+        if parity_lock_report and parity_lock_report.get("evaluator_profile_confirmed")
+        else None
+    )
+    replay_profile_report = reevaluate_n4h2_replay_profiles(
+        n4h2_root,
+        output_dir=out,
+        confirmed_dual_profile=confirmed_lock_profile,
+    )
+    n4r3_decision = _n4r3_decide(
+        intake_report=intake_report,
+        parity_lock_report=parity_lock_report,
+        replay_profile_report=replay_profile_report,
+    )
+    _write_json(out / "N4R3_DECISION_REPORT.json", n4r3_decision)
     _write_markdown(out / "official_final_v23_case_review_reproduction.md", official_report, replay_report, decision)
-    return n4r2_decision
+    return n4r3_decision
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--external-source-root", default=str(Path.home() / "KF-GINS"))
     parser.add_argument("--n4h2-artifacts-root", default=str(Path.home() / "legsa_n4h2_artifacts"))
+    parser.add_argument("--dual-root", default=None)
     parser.add_argument("--recovery-report", default=None)
     parser.add_argument("--output-dir", required=True)
     return parser.parse_args(argv)

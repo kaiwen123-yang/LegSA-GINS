@@ -42,7 +42,7 @@ N4H2 process_data-compatible external KF-GINS replay.
 
 Current working phase:
 
-N4R2 yaw evaluator convention policy and dual_final_v23 artifact verification.
+N4R3 dual_final_v23 manual artifact intake and official evaluator parity lock.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -83,6 +83,12 @@ dual_final_v23 artifact recovery, dual artifact evaluator parity, and N4H2
 replay profile re-evaluation. The yaw candidate remains diagnostic until
 dual_final_v23 parity confirms it, and a yaw result slightly above 2 deg remains
 near-boundary rather than a formal pass.
+
+N4R3 intakes a manually provided dual_final_v23 artifact group outside the
+repository, confirms its summary envelope, locks the official evaluator profile,
+and re-evaluates N4H2 replay under controlled profiles. N4R3 does not commit
+artifact files, does not modify solver output, and does not make a performance
+claim.
 
 ## Strict Phase-I Non-goals
 

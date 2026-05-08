@@ -25,3 +25,8 @@ If the official candidate gives yaw around 2.06 deg, the report must mark the
 strict yaw gate as false because the project gate is yaw_rmse_deg <= 2.0. Such a
 result is near-boundary diagnostic evidence only, not a pass and not proposed
 solver performance.
+
+N4R3 adds `confirmed_dual_profile` when the official parity lock confirms one.
+Formal yaw pass is false unless that confirmed profile also gives
+yaw_rmse_deg <= 2.0. If the confirmed profile fails the replay yaw gate, the
+diagnostic candidate remains informative but not formal.

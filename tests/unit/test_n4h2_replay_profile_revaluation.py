@@ -28,6 +28,8 @@ def test_candidate_yaw_206_does_not_pass_strict_gate(tmp_path) -> None:
     assert report["direct_yaw_rmse_deg"] == 92.06
     assert abs(report["official_candidate_yaw_rmse_deg"] - 2.06) < 1.0e-9
     assert report["yaw_gate_pass_for_each_profile"]["official_candidate_ref_heading_to_math"] is False
+    assert report["near_gate_status"]["official_candidate_ref_heading_to_math"] is True
+    assert report["formal_yaw_pass"] is False
     assert report["recommended_profile_status"] == "near_gate_candidate_only"
     assert report["solver_output_changed"] is False
     assert report["evaluator_only"] is True
