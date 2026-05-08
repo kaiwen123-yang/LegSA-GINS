@@ -27,7 +27,8 @@
 | N4H2F startup transient, yaw-STD source, and process_data yaw-noise provenance audit | stage/N4H2D-replay-reference-mapping-audit | done | no | no | startup transient + yaw provenance reports | N4H2F transient and yaw provenance audit completed; manual visual review and provenance caveat review required before merging PR #15 or moving to N4H3 |
 | N4H2G clean status-yaw no-noise replay audit | stage/N4H2G-clean-status-yaw-replay | done | no | no | clean replay provenance report | N4H2F done; N4H2G done; next recommended stage determined by N4H2G_DECISION_REPORT |
 | N4H2G2 clean replay independence and yaw sensitivity audit | stage/N4H2G-clean-status-yaw-replay | done | no | no | clean replay independence report | N4H2G done; N4H2G2 done; next recommended stage determined by N4H2G2_DECISION_REPORT |
-| N4H full KF-GINS-style EKF reconstruction | stage/N4H-full-kfgins-style-ekf | not_started | yes | no | EKF reconstruction | N4H full KF-GINS-style EKF reconstruction not_started |
+| N4H3 controlled final_v23 reference import and transplant plan | stage/N4H3-controlled-final-v23-reference-import | done | no | no | reference import + transplant matrix | final_v23 reference import/provenance/boundary docs, clean/noisy policy, N4H4 plan, interface contract, and roadmap |
+| N4H4 LegSA-v23-core full EKF / unified filter implementation | stage/N4H4-legsa-v23-core | not_started | yes | no | LegSA-owned EKF/unified filter | not_started; no wrapper, no output substitution, no final_v23 output as proposed solver input |
 | N5 raw Doppler factor | stage/N5-raw-doppler-factor | not_started | yes | no | Doppler factor | sign convention required |
 | N6 source-aware weighting / Go2 weak priors | stage/N6-source-aware-weighting | not_started | yes | no | weighting module | no trace tuning |
 | N7 no-feedback smoother | stage/N7-no-feedback-smoother | not_started | yes | no | fixed-lag smoother | no feedback |

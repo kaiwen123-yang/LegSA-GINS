@@ -21,15 +21,21 @@ FORBIDDEN_EXTENSIONS = {
 }
 
 SKIP_DIRS = {".git", "__pycache__", ".pytest_cache", "build"}
+SKIP_PREFIXES = {
+    Path("reference/final_v23_repo"),
+}
 
 
 def find_forbidden_files(root: Path) -> list[Path]:
     forbidden: list[Path] = []
     for path in root.rglob("*"):
+        rel = path.relative_to(root)
         if any(part in SKIP_DIRS for part in path.parts):
             continue
+        if any(rel == prefix or prefix in rel.parents for prefix in SKIP_PREFIXES):
+            continue
         if path.is_file() and path.suffix.lower() in FORBIDDEN_EXTENSIONS:
-            forbidden.append(path.relative_to(root))
+            forbidden.append(rel)
     return sorted(forbidden)
 
 

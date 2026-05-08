@@ -26,12 +26,18 @@ FORBIDDEN_LOCAL_PATH_STRINGS = [
     "/mnt/c/Users" + "/ykw/Desktop",
     "C:" + "\\Users\\ykw",
 ]
+SKIP_PREFIXES = {
+    Path("reference/final_v23_repo"),
+}
 
 
 def tracked_text_files(root: Path) -> list[Path]:
     files: list[Path] = []
     for path in root.rglob("*"):
+        rel = path.relative_to(root)
         if any(part in {".git", "__pycache__", ".pytest_cache"} for part in path.parts):
+            continue
+        if any(rel == prefix or prefix in rel.parents for prefix in SKIP_PREFIXES):
             continue
         if "configs" in path.parts and "local" in path.parts:
             continue

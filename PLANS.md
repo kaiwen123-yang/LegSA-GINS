@@ -257,6 +257,27 @@ NAV, and runs a +30 deg yaw-input sensitivity smoke test. It is diagnostic only:
 no solver modification, no output correction, no epoch deletion, no trace solver
 input, and no formal performance claim.
 
+## Stage N4H3: Controlled final_v23 Reference Import and Transplant Plan
+
+Goal:
+Import final_v23/KF-GINS as a controlled reference submodule or record a blocked
+import, document provenance and claim boundaries, codify clean/noisy input
+provenance, and create the final_v23 to LegSA-v23-core transplant matrix.
+
+N4H3 is planning and governance only. It does not implement proposed solver
+logic, raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting, FGO, full EKF,
+or performance claims.
+
+## Stage N4H4: LegSA-v23-core Full EKF / Unified Filter Implementation
+
+Goal:
+Implement LegSA-owned full EKF / unified filter code for v23-framework parity on
+clean status-yaw replay input.
+
+N4H4 must not be a wrapper, must not perform output substitution, must not use
+final_v23 outputs as proposed solver input, and must keep trace evaluation-only.
+Chinese comments are required for critical functions.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

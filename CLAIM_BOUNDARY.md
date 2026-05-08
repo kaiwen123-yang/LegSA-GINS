@@ -396,6 +396,30 @@ Yaw sensitivity probe is diagnostic only and not a factor experiment.
 
 N4H2G2 does not modify solver output or make a performance claim.
 
+N4H3 final_v23 reference import is not proposed solver implementation.
+
+N4H3 final_v23 source must not be described as novelty.
+
+N4H3 future port/refactor must preserve provenance.
+
+N4H3 final_v23 outputs must not be used as proposed solver input.
+
+N4H3 raw data/results must not be committed.
+
+N4H3 clean replay is reconstructed clean variant, not historical exact artifact.
+
+N4H3 noisy historical artifact must not be called clean nominal.
+
+N4H4 must implement LegSA-owned code and Chinese comments for critical functions.
+
+N4H4 must not be a wrapper.
+
+N4H4 must not use final_v23 output as proposed solver input.
+
+N4H4 must not use trace as solver input.
+
+N4H4 must not make a performance claim before validation.
+
 ## Evidence Rule
 
 If evidence is missing, write:
