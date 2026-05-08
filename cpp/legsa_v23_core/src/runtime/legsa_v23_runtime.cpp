@@ -61,7 +61,7 @@ void LegSAV23Runtime::runDryToy(const std::string& output_dir) {
   engine.addGnssData(gnss);
   engine.newImuProcess();
 
-  writeOutputs(output_dir, options, engine.timestamp(), engine.getNavState(), engine.getFilterState());
+  writeOutputs(output_dir, engine.getRunOptions(), engine.timestamp(), engine.getNavState(), engine.getFilterState());
 }
 
 // 中文说明：propagation toy 构造 200 条 IMU increment，只验证预测传播，不做量测更新或性能声明。
@@ -103,7 +103,68 @@ void LegSAV23Runtime::runDryPropagationToy(const std::string& output_dir) {
     previous = current;
   }
 
-  writeOutputs(output_dir, options, engine.timestamp(), engine.getNavState(), engine.getFilterState());
+  writeOutputs(output_dir, engine.getRunOptions(), engine.timestamp(), engine.getNavState(), engine.getFilterState());
+}
+
+// 中文说明：update toy 触发 GNSS position/velocity/yaw 量测更新、EKFUpdate 和 stateFeedback；不代表真实性能。
+void LegSAV23Runtime::runDryUpdateToy(const std::string& output_dir) {
+  GINSOptions options;
+  options.output_path = output_dir;
+  options.phase = "N4H4C";
+  options.solver_role = "legsa_v23_core_update_feedback_foundation";
+  options.mechanization_predict_implemented = true;
+  options.measurement_update_implemented = true;
+  options.state_feedback_implemented = true;
+  options.position_update_implemented = true;
+  options.velocity_update_implemented = true;
+  options.yaw_update_implemented = true;
+  options.velocity_lever_correction = false;
+  options.yaw_H_mapping_conservative = true;
+  options.yaw_residual_sign = "evidence_missing_default_obs_pred";
+  options.start_time = 0.0;
+  options.end_time = 0.05;
+  options.imu_data_rate = 100.0;
+  options.clean_input_provenance_label = "toy_update_no_real_data";
+  options.init_state.pos_blh_rad_m = {31.0 * kDegToRad, 121.0 * kDegToRad, 10.0};
+  options.init_state.vel_ned_mps = {0.0, 0.0, 0.0};
+  options.init_state.euler_rpy_rad = {0.0, 0.0, 10.0 * kDegToRad};
+  options.init_pos_std = {1.0, 1.0, 1.5};
+  options.init_vel_std = {0.2, 0.2, 0.3};
+  options.init_att_std = {0.5 * kDegToRad, 0.5 * kDegToRad, 1.0 * kDegToRad};
+
+  LegSAV23Engine engine(options);
+  engine.initialize();
+
+  for (int i = 0; i <= 5; ++i) {
+    IMUData imu;
+    imu.time = static_cast<double>(i) * 0.01;
+    imu.dt = 0.01;
+    imu.dtheta = {0.0, 0.0, 0.0};
+    imu.dvel = {0.0, 0.0, -9.80665 * imu.dt};
+    engine.addImuData(imu, true);
+  }
+
+  const Vector3 base_blh = options.init_state.pos_blh_rad_m;
+  const Vector3 base_vel = options.init_state.vel_ned_mps;
+  const double yaw_values[3] = {10.5, 18.0, 40.0};
+  const double gnss_times[3] = {0.005, 0.015, 0.025};
+  for (std::size_t i = 0; i < 3; ++i) {
+    GNSSData gnss;
+    gnss.time = gnss_times[i];
+    gnss.blh = base_blh;
+    gnss.std = {1.0, 1.0, 1.5};
+    gnss.vel = base_vel;
+    gnss.vel_std = {0.1, 0.1, 0.2};
+    gnss.yaw_deg = yaw_values[i];
+    gnss.yaw_std_deg = 1.5;
+    gnss.has_velocity = true;
+    gnss.has_yaw = true;
+    gnss.isvalid = true;
+    engine.addGnssData(gnss);
+  }
+
+  engine.newImuProcess();
+  writeOutputs(output_dir, engine.getRunOptions(), engine.timestamp(), engine.getNavState(), engine.getFilterState());
 }
 
 // 中文说明：真实配置运行目前只读 process_data-compatible 输入并生成 skeleton 输出，不做 parity claim。
@@ -125,7 +186,8 @@ void LegSAV23Runtime::runFromConfig(const std::string& config_path) {
     engine.newImuProcess();
   }
 
-  writeOutputs(options.output_path, options, engine.timestamp(), engine.getNavState(), engine.getFilterState());
+  writeOutputs(options.output_path, engine.getRunOptions(), engine.timestamp(), engine.getNavState(),
+               engine.getFilterState());
 }
 
 // 中文说明：统一写 NAV/STD/EVAL_NAV/RUN_MANIFEST；manifest 固化 forbidden flags=false。

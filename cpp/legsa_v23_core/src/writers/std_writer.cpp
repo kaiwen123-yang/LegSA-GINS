@@ -9,7 +9,7 @@
 
 namespace legsa_v23_core {
 
-// 中文说明：STD writer 输出预测协方差 sqrt；N4H4B 不把它写成性能或 parity 证据。
+// 中文说明：STD writer 输出 EKF 协方差对角线 sqrt；N4H4C 不把它写成性能或 parity 证据。
 StdWriter::StdWriter(const std::string& path) : output_(path) {
   if (!output_) {
     throw std::runtime_error("failed to open STD output: " + path);
@@ -21,7 +21,7 @@ StdWriter::StdWriter(const std::string& path) : output_(path) {
   output_ << "\n";
 }
 
-// 中文说明：写协方差对角线平方根；姿态标准差转 deg，bias/scale 保持 KF-GINS-style 内部单位。
+// 中文说明：写协方差对角线平方根；位置/速度为 m/mps，姿态标准差转 deg，bias/scale 保持内部单位。
 void StdWriter::write(double time, const FilterState& state) {
   output_ << std::fixed << std::setprecision(9) << time;
   for (std::size_t i = 0; i < kStateSize; ++i) {

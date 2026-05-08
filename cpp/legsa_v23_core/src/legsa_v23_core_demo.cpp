@@ -9,6 +9,7 @@ namespace {
 struct DemoArgs {
   bool dry_run_toy = false;
   bool dry_run_propagation_toy = false;
+  bool dry_run_update_toy = false;
   std::string config_path;
   std::string output_dir = ".";
 };
@@ -22,6 +23,8 @@ DemoArgs parseArgs(int argc, char** argv) {
       args.dry_run_toy = true;
     } else if (token == "--dry-run-propagation-toy") {
       args.dry_run_propagation_toy = true;
+    } else if (token == "--dry-run-update-toy") {
+      args.dry_run_update_toy = true;
     } else if (token == "--config" && i + 1 < argc) {
       args.config_path = argv[++i];
     } else if (token == "--output-dir" && i + 1 < argc) {
@@ -47,12 +50,17 @@ int main(int argc, char** argv) {
       legsa_v23_core::LegSAV23Runtime::runDryPropagationToy(args.output_dir);
       return 0;
     }
+    if (args.dry_run_update_toy) {
+      legsa_v23_core::LegSAV23Runtime::runDryUpdateToy(args.output_dir);
+      return 0;
+    }
     if (!args.config_path.empty()) {
       legsa_v23_core::LegSAV23Runtime::runFromConfig(args.config_path);
       return 0;
     }
     std::cerr << "usage: legsa_v23_core_demo --dry-run-toy --output-dir <dir>\n"
               << "   or: legsa_v23_core_demo --dry-run-propagation-toy --output-dir <dir>\n"
+              << "   or: legsa_v23_core_demo --dry-run-update-toy --output-dir <dir>\n"
               << "   or: legsa_v23_core_demo --config <path>\n";
     return 2;
   } catch (const std::exception& error) {

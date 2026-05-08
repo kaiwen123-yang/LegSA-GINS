@@ -321,7 +321,12 @@ Implement GNSS position/velocity/yaw update, EKF measurement update, and error
 state feedback after N4H4B prediction propagation is closed.
 
 Status:
-not_started.
+completed as N4H4C update-feedback foundation.
+
+N4H4C implements the LegSA-owned loose-coupled measurement update framework
+only. It does not implement raw Doppler, Go2 priors, LSIM/OIM, source-aware
+weighting, FGO, final_v23 numerical parity, clean replay parity, or performance
+claims. N4H4D is the clean replay parity stage.
 
 ## Stage N5: Raw Doppler Factor
 

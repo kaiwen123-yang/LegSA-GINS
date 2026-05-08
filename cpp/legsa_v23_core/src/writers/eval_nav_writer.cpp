@@ -15,7 +15,7 @@ EvalNavWriter::EvalNavWriter(const std::string& path) : output_(path) {
   output_ << "time,lat_deg,lon_deg,height_m,vn,ve,vd,roll_deg,pitch_deg,yaw_deg\n";
 }
 
-// 中文说明：评价输出按 writer 统一转 deg，保持 runtime 内部 BLH(rad,rad,m)。
+// 中文说明：评价输出按 writer 统一转 deg；roll/pitch/yaw 不做 output-only correction。
 void EvalNavWriter::write(double time, const NavState& state) {
   output_ << std::fixed << std::setprecision(9) << time << "," << state.pos_blh_rad_m[0] * kRadToDeg
           << "," << state.pos_blh_rad_m[1] * kRadToDeg << "," << state.pos_blh_rad_m[2] << ","
