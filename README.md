@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N4H1 final_v23 input source-chain, yaw-generation audit, and process_data-compatible input reconstruction.
+N4H2 process_data-compatible external KF-GINS replay.
 
 Current working phase:
 
-N4H2 process_data-compatible external KF-GINS replay.
+N4H2C yaw config parity audit.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -69,6 +69,8 @@ N4H0 evaluates direct BY2 receiver-native GNSS status against trace reference to
 N4H1 audits the two-layer final_v23 input source chain: runtime 15-column `.gnss` input and upstream generation fields. N4H1P/N4H1P2 reconstruct process_data-compatible `.gnss` and `.imu` inputs for baseline/parity testing only, with row-retention coverage reporting. N4H1 does not implement proposed solver logic or make performance claims.
 
 N4H2 runs those process_data-compatible BY2 runtime inputs through the external KF-GINS baseline executable, parses NAV/STD/IMU_ERR outputs, and writes an evaluation-only replay report. N4H2 does not claim final_v23 parity or proposed LegSA-GINS performance.
+
+N4H2C is the decision-driven yaw config parity audit after N4H2: position replay passed, yaw replay failed, so the next work audits yaw sign, install offset, yaw standard deviation mode, A1 dual-difference convention, trace yaw convention, and antenna order before any full EKF stage.
 
 ## Strict Phase-I Non-goals
 

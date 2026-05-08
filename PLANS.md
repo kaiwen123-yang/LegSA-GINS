@@ -134,6 +134,16 @@ external KF-GINS baseline replay, then parse and evaluate outputs.
 No proposed solver implementation. No final_v23 parity claim. No trace as
 solver input. No generated real-data artifacts committed.
 
+## Stage N4H2C: Yaw Config Parity Audit
+
+Goal:
+Audit why N4H2 position replay passed while yaw replay failed, focusing on
+`yaw_sign`, `yaw_install_offset_deg`, `yaw_std_mode`, A1 dual-difference yaw,
+`yaw_ned = 90 - yaw_body`, trace yaw convention, and antlever / antenna order.
+
+No full EKF implementation. No trace solver input. No output-only correction.
+No formal offset selection without physical antenna-order evidence.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:
