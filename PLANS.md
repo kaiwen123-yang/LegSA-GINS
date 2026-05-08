@@ -232,6 +232,19 @@ evidence rather than clean nominal proof, and records whether final_v23 nominal
 evidence needs a yaw-noise caveat. It does not modify solver output, crop
 startup epochs, relax the yaw gate, or make a formal performance claim.
 
+## Stage N4H2G: Clean status-yaw no-noise replay audit
+
+Goal:
+Generate and replay a clean status-yaw no-noise/no-outlier/no-outage
+process_data-compatible input variant, then evaluate it against the dual
+official reference.
+
+N4H2G compares clean replay with the noisy historical dual_final_v23 artifact
+and records clean/noisy provenance policy. The clean replay is a reconstructed
+clean variant, not a historical exact final_v23 artifact. It is baseline replay
+diagnostic evidence only and does not implement proposed solver logic or make a
+formal performance claim.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

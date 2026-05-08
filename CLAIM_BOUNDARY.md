@@ -378,6 +378,16 @@ Roll/pitch relaxed pass is not strict pass.
 
 Generated figures and reports under the visual output role must not be committed.
 
+Historical final_v23 artifact likely includes Gaussian yaw-noise provenance.
+
+Clean replay is reconstructed clean variant, not historical exact final_v23 artifact.
+
+Clean/noisy input provenance must be labeled in later experiments.
+
+N4H2G clean replay metrics are baseline replay diagnostics only.
+
+N4H2G clean replay metrics are not proposed solver performance.
+
 ## Evidence Rule
 
 If evidence is missing, write:

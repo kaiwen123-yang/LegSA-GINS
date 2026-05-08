@@ -25,6 +25,7 @@
 | N4H2D replay reference mapping and stale summary audit | stage/N4H2D-replay-reference-mapping-audit | done | no | no | fresh replay dual-reference evaluation | N4H2D done; next recommended stage determined by N4H2D_DECISION_REPORT |
 | N4H2E dual_final_v23-only visual validation | stage/N4H2D-replay-reference-mapping-audit | done | no | no | dual-only visual validation bundle | N4H2D numerical replay parity passed; N4H2E visual validation bundle generated; manual visual review required before merging PR #15 or moving to N4H3 |
 | N4H2F startup transient, yaw-STD source, and process_data yaw-noise provenance audit | stage/N4H2D-replay-reference-mapping-audit | done | no | no | startup transient + yaw provenance reports | N4H2F transient and yaw provenance audit completed; manual visual review and provenance caveat review required before merging PR #15 or moving to N4H3 |
+| N4H2G clean status-yaw no-noise replay audit | stage/N4H2G-clean-status-yaw-replay | done | no | no | clean replay provenance report | N4H2F done; N4H2G done; next recommended stage determined by N4H2G_DECISION_REPORT |
 | N4H full KF-GINS-style EKF reconstruction | stage/N4H-full-kfgins-style-ekf | not_started | yes | no | EKF reconstruction | N4H full KF-GINS-style EKF reconstruction not_started |
 | N5 raw Doppler factor | stage/N5-raw-doppler-factor | not_started | yes | no | Doppler factor | sign convention required |
 | N6 source-aware weighting / Go2 weak priors | stage/N6-source-aware-weighting | not_started | yes | no | weighting module | no trace tuning |
