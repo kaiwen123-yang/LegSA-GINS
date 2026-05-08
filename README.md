@@ -42,7 +42,7 @@ N4H2 process_data-compatible external KF-GINS replay.
 
 Current working phase:
 
-N4H2C final_v23 deep source and yaw-config parity audit.
+N4H2C final_v23 artifact recovery, process_data runtime-parameter audit, and yaw runtime parity audit.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 

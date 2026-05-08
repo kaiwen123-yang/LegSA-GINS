@@ -144,6 +144,10 @@ The yaw-specific checks include `yaw_sign`, `yaw_install_offset_deg`,
 `yaw_std_mode`, A1 dual-difference yaw, `yaw_ned = 90 - yaw_body`, trace yaw
 convention, and antlever / antenna order.
 
+N4H2C-2 deepens this with actual final_v23 artifact recovery, process_data
+runtime-parameter audit, yaw input variant matrix, runtime yaw update audit, and
+replay yaw diagnostics.
+
 No full EKF implementation. No trace solver input. No output-only correction.
 No formal offset selection without physical antenna-order evidence.
 

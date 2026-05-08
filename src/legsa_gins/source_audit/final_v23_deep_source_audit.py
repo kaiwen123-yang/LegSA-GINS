@@ -246,7 +246,14 @@ def search_process_data_and_run_scripts(source_root: str | Path) -> dict[str, An
     """Search process_data and runtime/config scripts by keyword, read-only."""
 
     root = Path(source_root)
-    process_data_candidates = sorted(str(path) for path in root.rglob("process_data.py")) if root.exists() else []
+    process_data_candidates: list[str] = []
+    direct_process_data = root / "bin" / "process_data.py"
+    if direct_process_data.exists():
+        process_data_candidates.append(str(direct_process_data))
+    else:
+        process_data_candidates = [
+            str(path) for path in _iter_text_files(root) if path.name == "process_data.py"
+        ]
     hits, found = _search_keywords(root, PROCESS_DATA_KEYWORDS)
     run_scripts = _candidate_paths(
         root,
