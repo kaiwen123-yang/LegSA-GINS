@@ -388,6 +388,14 @@ N4H2G clean replay metrics are baseline replay diagnostics only.
 
 N4H2G clean replay metrics are not proposed solver performance.
 
+Clean replay must be independently rerun before it can support next-stage decisions.
+
+Exact metric equality must be checked for cache/stale summary risk.
+
+Yaw sensitivity probe is diagnostic only and not a factor experiment.
+
+N4H2G2 does not modify solver output or make a performance claim.
+
 ## Evidence Rule
 
 If evidence is missing, write:
