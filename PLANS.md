@@ -161,6 +161,17 @@ N4R uses actual official artifacts as runtime-only evaluator evidence. It does
 not implement proposed solver logic, does not tune yaw, does not use trace as
 solver input, and does not make a formal numerical performance claim.
 
+## Stage N4R2: Yaw Evaluator Convention Policy and dual_final_v23 Verification
+
+Goal:
+Add a controlled evaluator yaw convention policy and verify the N4R candidate
+against dual_final_v23 artifacts before any formal evaluator patch.
+
+N4R2 performs directed dual_final_v23 artifact recovery, dual evaluator parity,
+and N4H2 replay profile re-evaluation. It does not modify solver output, does
+not relax the yaw gate, does not use trace as solver input, and does not make a
+formal numerical performance claim.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

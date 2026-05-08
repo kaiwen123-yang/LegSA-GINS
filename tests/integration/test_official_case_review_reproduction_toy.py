@@ -67,9 +67,17 @@ def test_runner_with_toy_artifacts(tmp_path) -> None:
         "OFFICIAL_ERROR_SERIES_PARITY_REPORT.json",
         "REPLAY_OFFICIAL_YAW_PARITY_REPORT.json",
         "N4R_DECISION_REPORT.json",
+        "YAW_EVALUATOR_CONVENTION_POLICY_REPORT.json",
+        "DUAL_FINAL_V23_ARTIFACT_RECOVERY_REPORT.json",
+        "N4H2_REPLAY_PROFILE_REEVALUATION_REPORT.json",
+        "N4R2_DECISION_REPORT.json",
         "official_final_v23_case_review_reproduction.md",
     ]:
         assert (out / name).exists()
     decision = json.loads((out / "N4R_DECISION_REPORT.json").read_text(encoding="utf-8"))
     assert decision["trace_solver_input"] is False
     assert decision["numerical_performance_claim"] is False
+    n4r2 = json.loads((out / "N4R2_DECISION_REPORT.json").read_text(encoding="utf-8"))
+    assert n4r2["solver_output_changed"] is False
+    assert n4r2["evaluator_only"] is True
+    assert n4r2["trace_solver_input"] is False
