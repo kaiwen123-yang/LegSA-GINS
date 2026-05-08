@@ -342,6 +342,16 @@ Runtime yaw audit must not relax yaw > 2 deg.
 
 Full KF-GINS-style framework remains future work until runtime/config parity is resolved.
 
+N4H2D is evaluation/reference-mapping audit only.
+
+Fresh replay metrics are baseline replay diagnostics, not proposed solver performance.
+
+Solver output is not modified by N4H2D.
+
+Old stale summary must not be used as formal evidence.
+
+Yaw gate remains <= 2.0.
+
 ## Evidence Rule
 
 If evidence is missing, write:
