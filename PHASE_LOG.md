@@ -14,6 +14,8 @@
 | N4E BY2 real-data input adapters | stage/N4E-by2-input-adapters | done | no | no | BY2 source-role manifest | input adapters and diagnostic standardization only; no performance claim |
 | N4F BY2 filter-core diagnostic trial | stage/N4F-by2-filter-core-trial | done | yes | no | BY2 diagnostic trial report | diagnostic runtime/evaluation only; no formal performance claim |
 | N4G BY2 time/IMU/heading diagnostics | stage/N4F-by2-filter-core-trial | done | yes | no | event-normalized candidate reports | diagnostic only; no clock-sync/heading/performance claim |
+| N4H0 receiver-native measurement floor sanity | stage/N4H0-measurement-floor-sanity | done | no | no | measurement floor sanity reports | direct receiver status vs trace evaluation-only; no proposed solver performance claim |
+| N4H full KF-GINS-style EKF reconstruction | stage/N4H-full-kfgins-style-ekf | not_started | yes | no | EKF reconstruction | pending N4H0 measurement-floor decision |
 | N5 raw Doppler factor | stage/N5-raw-doppler-factor | not_started | yes | no | Doppler factor | sign convention required |
 | N6 source-aware weighting / Go2 weak priors | stage/N6-source-aware-weighting | not_started | yes | no | weighting module | no trace tuning |
 | N7 no-feedback smoother | stage/N7-no-feedback-smoother | not_started | yes | no | fixed-lag smoother | no feedback |

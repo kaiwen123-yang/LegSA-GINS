@@ -103,6 +103,13 @@ Audit BY2 GNSS/Go2 time-domain usage, Unitree sportmodestate IMU semantics, even
 
 No physical clock offset claim. No formal heading offset selection. No raw Doppler, Go2 priors, source-aware weighting, LSIM/OIM, or FGO.
 
+## Stage N4H0: Receiver-Native Measurement Floor and Evaluator Sanity
+
+Goal:
+Evaluate direct receiver-native GNSS status against trace reference to distinguish input/evaluator issues from filter-core issues.
+
+No proposed solver implementation.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

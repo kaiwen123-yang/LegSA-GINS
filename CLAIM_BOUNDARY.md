@@ -56,6 +56,10 @@ Allowed N4G diagnostic statement:
 
 - N4G may generate event-normalized BY2 diagnostic candidates for time-domain, Unitree IMU semantics, and transverse dual-antenna heading review.
 
+Allowed N4H0 diagnostic statement:
+
+- N4H0 may generate diagnostic receiver-native measurement-floor metrics for BY2.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -130,6 +134,9 @@ Do not claim:
 - N4G must not use trace for solver time alignment.
 - N4G must not select a formal heading offset without antenna order evidence.
 - N4G must not write diagnostic candidates as numerical performance claims.
+- N4H0 metrics are diagnostic measurement-floor metrics only.
+- N4H0 must not be described as proposed solver performance.
+- N4H0 must not use trace as solver input.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
@@ -216,6 +223,12 @@ N4G must not use trace for solver time alignment.
 N4G must not select a formal heading offset without antenna order evidence.
 
 N4G must not write diagnostic candidates as numerical performance claims.
+
+N4H0 metrics are diagnostic measurement-floor metrics only.
+
+N4H0 must not be described as proposed solver performance.
+
+N4H0 must not use trace as solver input.
 
 ## Evidence Rule
 
