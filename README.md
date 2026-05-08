@@ -42,7 +42,7 @@ N4H0 receiver-native measurement floor and evaluator sanity.
 
 Current working phase:
 
-N4H1 final_v23 input source-chain and yaw-generation audit.
+N4H1 final_v23 input source-chain, yaw-generation audit, and process_data-compatible input reconstruction.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -66,7 +66,7 @@ N4G audits BY2 time-domain usage, Unitree sportmodestate IMU semantics, event-no
 
 N4H0 evaluates direct BY2 receiver-native GNSS status against trace reference to separate input/evaluator issues from filter-core issues. N4H0 does not implement proposed solver logic or make proposed solver performance claims.
 
-N4H1 audits the two-layer final_v23 input source chain: runtime 15-column `.gnss` input and upstream generation fields. N4H1 does not implement proposed solver logic or make performance claims.
+N4H1 audits the two-layer final_v23 input source chain: runtime 15-column `.gnss` input and upstream generation fields. N4H1P reconstructs process_data-compatible `.gnss` and `.imu` inputs for baseline/parity testing only. N4H1 does not implement proposed solver logic or make performance claims.
 
 ## Strict Phase-I Non-goals
 

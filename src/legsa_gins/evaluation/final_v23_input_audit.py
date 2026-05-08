@@ -90,6 +90,21 @@ def parse_final_v23_gnss_file(path: str | Path) -> list[dict[str, float]]:
 
 def _status_time_candidates(status_rows: list[dict[str, Any]]) -> list[tuple[str, list[float]]]:
     candidates: list[tuple[str, list[float]]] = []
+    header_values: list[float] = []
+    sys_values: list[float] = []
+    for row in status_rows:
+        header_secs = _row_value(row, ["header.stamp.secs"])
+        header_nsecs = _row_value(row, ["header.stamp.nsecs"]) or 0.0
+        sys_secs = _row_value(row, ["sys_stamp.secs"])
+        sys_nsecs = _row_value(row, ["sys_stamp.nsecs"]) or 0.0
+        if header_secs is not None:
+            header_values.append(float(header_secs) + float(header_nsecs) * 1.0e-9)
+        if sys_secs is not None:
+            sys_values.append(float(sys_secs) + float(sys_nsecs) * 1.0e-9)
+    if len(header_values) == len(status_rows) and header_values:
+        candidates.append(("header.stamp", header_values))
+    if len(sys_values) == len(status_rows) and sys_values:
+        candidates.append(("sys_stamp", sys_values))
     for field in ["time", "algo_time_sec", "aligned_time", "tow", "time_unix", "timestamp"]:
         values = [_row_value(row, [field]) for row in status_rows]
         values = [value for value in values if value is not None]
@@ -114,7 +129,18 @@ def _align_rows_by_time(
             offset = median(raw_source_times[: min(50, len(raw_source_times))]) - median(
                 final_times[: min(50, len(final_times))]
             )
-            source_variants.append(("constant_file_time_offset", offset, [value - offset for value in raw_source_times]))
+            offset_candidates = {offset, round(offset)}
+            if abs(offset) > 1000.0:
+                rounded = round(offset)
+                offset_candidates.update({rounded - 1.0, rounded + 1.0})
+            for candidate_offset in sorted(offset_candidates):
+                source_variants.append(
+                    (
+                        "constant_file_time_offset",
+                        candidate_offset,
+                        [value - candidate_offset for value in raw_source_times],
+                    )
+                )
         for transform, offset, source_times in source_variants:
             pairs: list[tuple[dict[str, Any], dict[str, Any], float]] = []
             source_index = 0
@@ -254,17 +280,34 @@ def make_final_v23_input_source_report(
     velocity_report: dict[str, Any],
     yaw_report: dict[str, Any],
     process_data_source_map: dict[str, Any],
+    reconstructed_process_data_compat_report: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     position_status = position_report.get("position_source_status", "evidence_missing")
     std_status = position_std_report.get("position_std_source_status", "evidence_missing")
     velocity_status = velocity_report.get("velocity_source_status", "evidence_missing")
     yaw_status = yaw_report.get("yaw_column_source_status", "evidence_missing")
     statuses = [position_status, std_status, velocity_status, yaw_status]
+    reconstructed_available = bool(
+        reconstructed_process_data_compat_report
+        and reconstructed_process_data_compat_report.get("runtime_input_reconstructed") is True
+    )
+    reconstructed_status = (
+        "generated_process_data_compat_15_column_gnss"
+        if reconstructed_available
+        else "not_requested_or_evidence_missing"
+    )
     return {
         "phase": "N4H1",
         "runtime_input_layer": "final_v23_reads_15_column_gnss_file",
         "upstream_generation_layer": "process_data_py_generates_gnss_from_status_raw_and_status_yaw",
         "final_v23_gnss_file_status": final_gnss_file_status,
+        "historical_final_v23_gnss_file_status": final_gnss_file_status,
+        "reconstructed_process_data_compat_gnss_status": reconstructed_status,
+        "reconstructed_process_data_compat_available": reconstructed_available,
+        "reconstructed_runtime_input_is_historical_exact_final_v23_file": False,
+        "runtime_input_reconstruction_layer": "process_data_compat_generated_from_upstream_fields"
+        if reconstructed_available
+        else "evidence_missing",
         "final_v23_gnss_columns": FINAL_V23_GNSS_COLUMNS,
         "position_source_status": position_status,
         "position_std_source_status": std_status,
@@ -285,6 +328,19 @@ def make_final_v23_input_source_report(
             "found_velocity_mapping": process_data_source_map.get("found_velocity_mapping"),
             "found_yaw_mapping": process_data_source_map.get("found_yaw_mapping"),
             "found_final_status_output": process_data_source_map.get("found_final_status_output"),
+        },
+        "process_data_compat_summary": {
+            "gnss_row_count": (reconstructed_process_data_compat_report or {}).get("gnss_row_count"),
+            "imu_row_count": (reconstructed_process_data_compat_report or {}).get("imu_row_count"),
+            "position_source": (reconstructed_process_data_compat_report or {}).get("position_source"),
+            "velocity_source": (reconstructed_process_data_compat_report or {}).get("velocity_source"),
+            "velocity_std_policy": (reconstructed_process_data_compat_report or {}).get(
+                "velocity_std_policy"
+            ),
+            "yaw_source": (reconstructed_process_data_compat_report or {}).get("yaw_source"),
+            "trace_solver_input": (reconstructed_process_data_compat_report or {}).get(
+                "trace_solver_input", False
+            ),
         },
         "trace_solver_input": False,
         "trace_evaluation_only": True,
