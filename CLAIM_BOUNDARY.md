@@ -320,6 +320,16 @@ No solver output is modified by evaluator profile re-evaluation.
 
 Trace remains evaluation-only.
 
+dual_final_v23 artifact must be confirmed before formal evaluator yaw profile patch.
+
+yaw=2.06058 is near-gate evidence, not yaw pass.
+
+evaluator profile re-evaluation does not modify solver output.
+
+no artifact files may be committed.
+
+trace remains evaluation-only.
+
 ## Evidence Rule
 
 If evidence is missing, write:

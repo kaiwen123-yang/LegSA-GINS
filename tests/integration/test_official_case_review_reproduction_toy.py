@@ -52,6 +52,8 @@ def test_runner_with_toy_artifacts(tmp_path) -> None:
             str(tmp_path / "external"),
             "--n4h2-artifacts-root",
             str(n4h2),
+            "--dual-root",
+            str(tmp_path / "missing_dual"),
             "--output-dir",
             str(out),
         ],
@@ -71,6 +73,8 @@ def test_runner_with_toy_artifacts(tmp_path) -> None:
         "DUAL_FINAL_V23_ARTIFACT_RECOVERY_REPORT.json",
         "N4H2_REPLAY_PROFILE_REEVALUATION_REPORT.json",
         "N4R2_DECISION_REPORT.json",
+        "DUAL_FINAL_V23_ARTIFACT_INTAKE_REPORT.json",
+        "N4R3_DECISION_REPORT.json",
         "official_final_v23_case_review_reproduction.md",
     ]:
         assert (out / name).exists()
@@ -81,3 +85,7 @@ def test_runner_with_toy_artifacts(tmp_path) -> None:
     assert n4r2["solver_output_changed"] is False
     assert n4r2["evaluator_only"] is True
     assert n4r2["trace_solver_input"] is False
+    n4r3 = json.loads((out / "N4R3_DECISION_REPORT.json").read_text(encoding="utf-8"))
+    assert n4r3["solver_output_changed"] is False
+    assert n4r3["evaluator_only"] is True
+    assert n4r3["trace_solver_input"] is False

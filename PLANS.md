@@ -172,6 +172,17 @@ and N4H2 replay profile re-evaluation. It does not modify solver output, does
 not relax the yaw gate, does not use trace as solver input, and does not make a
 formal numerical performance claim.
 
+## Stage N4R3: dual_final_v23 Manual Artifact Intake and Official Parity Lock
+
+Goal:
+Validate a manually provided dual_final_v23 artifact group outside the
+repository and lock the official evaluator profile against its official summary
+and error_series.
+
+N4R3 does not commit artifact files, does not modify solver output, does not use
+trace as solver input, and does not turn near-gate yaw evidence into a formal
+pass.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

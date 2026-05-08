@@ -83,6 +83,11 @@ def _yaw_gate(summary: dict[str, Any]) -> bool:
     return isinstance(yaw, (int, float)) and float(yaw) <= 2.0
 
 
+def _near_gate(summary: dict[str, Any]) -> bool:
+    yaw = summary.get("yaw_rmse_deg")
+    return isinstance(yaw, (int, float)) and 2.0 < float(yaw) <= 2.2
+
+
 def _write_review(path: Path, report: dict[str, Any]) -> None:
     lines = [
         "# N4R2 N4H2 replay profile re-evaluation",
@@ -105,6 +110,8 @@ def _write_review(path: Path, report: dict[str, Any]) -> None:
         f"- horizontal_rmse_m: {report.get('horizontal_rmse_m')}",
         f"- up_rmse_m: {report.get('up_rmse_m')}",
         f"- yaw_gate_pass_for_each_profile: {report.get('yaw_gate_pass_for_each_profile')}",
+        f"- near_gate_status: {report.get('near_gate_status')}",
+        f"- formal_yaw_pass: {report.get('formal_yaw_pass')}",
         f"- recommended_profile_status: {report.get('recommended_profile_status')}",
         "",
     ]
@@ -126,13 +133,15 @@ def reevaluate_n4h2_replay_profiles(
     replay_errors = _find_replay_errors(root)
     if replay_nav is None or replay_errors is None:
         report = {
-            "phase": "N4R2",
+            "phase": "N4R3",
             "evidence_status": "evidence_missing",
             "evidence_missing": ["n4h2_replay_nav_or_error_series"],
             "direct_yaw_rmse_deg": None,
             "official_candidate_yaw_rmse_deg": None,
             "confirmed_profile_yaw_rmse_deg": None,
             "yaw_gate_pass_for_each_profile": {},
+            "near_gate_status": {},
+            "formal_yaw_pass": False,
             "recommended_profile_status": "evidence_missing",
             "solver_output_changed": False,
             "evaluator_only": True,
@@ -148,13 +157,15 @@ def reevaluate_n4h2_replay_profiles(
     reference_rows = reconstruct_reference_from_error_series(replay_rows, error_rows)
     if not reference_rows:
         report = {
-            "phase": "N4R2",
+            "phase": "N4R3",
             "evidence_status": "reference_missing",
             "evidence_missing": ["reconstructed_reference_rows"],
             "direct_yaw_rmse_deg": None,
             "official_candidate_yaw_rmse_deg": None,
             "confirmed_profile_yaw_rmse_deg": None,
             "yaw_gate_pass_for_each_profile": {},
+            "near_gate_status": {},
+            "formal_yaw_pass": False,
             "recommended_profile_status": "evidence_missing",
             "solver_output_changed": False,
             "evaluator_only": True,
@@ -179,28 +190,39 @@ def reevaluate_n4h2_replay_profiles(
     candidate = profile_summaries.get("official_candidate_ref_heading_to_math", {})
     confirmed = profile_summaries.get("confirmed_dual_profile")
     yaw_gate_pass = {name: _yaw_gate(summary) for name, summary in profile_summaries.items()}
+    near_gate_status = {name: _near_gate(summary) for name, summary in profile_summaries.items()}
     candidate_yaw = candidate.get("yaw_rmse_deg")
-    if confirmed is not None:
-        recommended_status = "confirmed_profile_available"
+    confirmed_yaw = confirmed.get("yaw_rmse_deg") if confirmed else None
+    formal_yaw_pass = bool(confirmed is not None and _yaw_gate(confirmed))
+    if confirmed is not None and formal_yaw_pass:
+        recommended_status = "confirmed_profile_gate_pass"
+    elif confirmed is not None and _near_gate(confirmed):
+        recommended_status = "confirmed_profile_near_gate"
+    elif confirmed is not None:
+        recommended_status = "confirmed_profile_gate_fail"
     elif isinstance(candidate_yaw, (int, float)) and float(candidate_yaw) <= 2.0:
         recommended_status = "candidate_gate_pass_but_unconfirmed"
+    elif isinstance(candidate_yaw, (int, float)) and 2.0 < float(candidate_yaw) <= 2.2:
+        recommended_status = "near_gate_candidate_only"
     elif isinstance(candidate_yaw, (int, float)) and float(candidate_yaw) <= 3.0:
         recommended_status = "near_gate_candidate_only"
     else:
         recommended_status = "diagnostic_only"
 
-    base_summary = candidate or direct
+    base_summary = confirmed or candidate or direct
     report = {
-        "phase": "N4R2",
+        "phase": "N4R3",
         "evidence_status": "n4h2_replay_profile_reevaluated",
         "profile_summaries": profile_summaries,
         "direct_yaw_rmse_deg": direct.get("yaw_rmse_deg"),
         "official_candidate_yaw_rmse_deg": candidate.get("yaw_rmse_deg"),
-        "confirmed_profile_yaw_rmse_deg": confirmed.get("yaw_rmse_deg") if confirmed else None,
+        "confirmed_profile_yaw_rmse_deg": confirmed_yaw,
         "horizontal_rmse_m": base_summary.get("horizontal_rmse_m"),
         "up_rmse_m": base_summary.get("up_rmse_m"),
         "yaw_gate_pass_for_each_profile": yaw_gate_pass,
+        "near_gate_status": near_gate_status,
         "yaw_replay_gate_pass_candidate": bool(yaw_gate_pass.get("official_candidate_ref_heading_to_math", False)),
+        "formal_yaw_pass": formal_yaw_pass,
         "recommended_profile_status": recommended_status,
         "solver_output_changed": False,
         "evaluator_only": True,
