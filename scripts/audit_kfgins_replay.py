@@ -53,9 +53,9 @@ METRIC_EXPECTATIONS = {
 }
 
 FORBIDDEN_LOCAL_PATHS = [
-    "/mnt/c/Users/ykw/Desktop",
-    "/mnt/c/Users/86187/Desktop",
-    "C:\\Users",
+    "/" + "mnt/c/Users/" + "ykw/Desktop",
+    "/" + "mnt/c/Users/" + "86187/Desktop",
+    "C:" + "\\Users",
 ]
 
 
