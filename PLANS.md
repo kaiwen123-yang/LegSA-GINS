@@ -207,6 +207,18 @@ compares the old summary to the fresh summary. It is evaluation/reference
 mapping only: no solver output modification, no trace solver input, no output
 correction, no epoch deletion, and no formal proposed solver performance claim.
 
+## Stage N4H2E: dual_final_v23-only Visual Validation
+
+Goal:
+Generate a dual_final_v23-only visual validation bundle for fresh replay parity
+before treating the numerical result as ready for the next stage.
+
+N4H2E plots trajectory, position error, velocity, attitude, consistency,
+observation quality, and summary panels for manual review. It does not draw pure
+INS, single-antenna, or multi-line comparison figures; does not modify solver
+output; does not commit generated figures; and does not make a formal
+performance claim.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:
