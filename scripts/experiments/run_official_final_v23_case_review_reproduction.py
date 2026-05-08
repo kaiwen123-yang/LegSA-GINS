@@ -26,8 +26,20 @@ from legsa_gins.evaluation.official_case_review_reproduction import (  # noqa: E
     locate_actual_final_v23_artifact_group,
     reproduce_official_case_review,
 )
+from legsa_gins.evaluation.dual_final_v23_evaluator_parity import (  # noqa: E402
+    evaluate_dual_final_v23_evaluator_parity,
+)
+from legsa_gins.evaluation.n4h2_replay_profile_revaluation import (  # noqa: E402
+    reevaluate_n4h2_replay_profiles,
+)
 from legsa_gins.evaluation.replay_official_yaw_parity import (  # noqa: E402
     apply_official_yaw_transform_to_replay,
+)
+from legsa_gins.evaluation.yaw_evaluator_convention_policy import (  # noqa: E402
+    write_yaw_convention_policy_report,
+)
+from legsa_gins.source_audit.dual_final_v23_artifact_recovery import (  # noqa: E402
+    recover_dual_final_v23_artifacts,
 )
 
 
@@ -119,6 +131,71 @@ def _decide(
     }
 
 
+def _n4r2_decide(
+    *,
+    official_report: dict[str, Any],
+    recovery_report: dict[str, Any],
+    dual_report: dict[str, Any] | None,
+    replay_profile_report: dict[str, Any],
+) -> dict[str, Any]:
+    dual_report = dual_report or {}
+    candidate_yaw = replay_profile_report.get("official_candidate_yaw_rmse_deg")
+    confirmed_yaw = replay_profile_report.get("confirmed_profile_yaw_rmse_deg")
+    yaw_replay_gate_pass_candidate = bool(replay_profile_report.get("yaw_replay_gate_pass_candidate"))
+    dual_confirmed = bool(dual_report.get("dual_evaluator_profile_confirmed"))
+    direct_identity_works = bool(dual_report.get("direct_identity_matches"))
+    dual_found = bool(recovery_report.get("dual_artifact_found"))
+
+    if dual_confirmed:
+        recommended = "N4R_apply_confirmed_evaluator_profile_then_N4H3"
+    elif not dual_found:
+        recommended = "N4R_dual_artifact_recovery_needed"
+    elif direct_identity_works:
+        recommended = "N4R_keep_direct_evaluator_then_runtime_yaw_audit"
+    elif official_report.get("evaluator_yaw_transform_needed") and isinstance(candidate_yaw, (int, float)):
+        recommended = "N4R_yaw_reference_schema_audit"
+    else:
+        recommended = "N4R_yaw_reference_schema_audit"
+
+    formal_yaw_pass = bool(
+        dual_confirmed
+        and (
+            (isinstance(confirmed_yaw, (int, float)) and float(confirmed_yaw) <= 2.0)
+            or (confirmed_yaw is None and yaw_replay_gate_pass_candidate)
+        )
+    )
+    blocking: list[str] = []
+    if recommended == "N4R_dual_artifact_recovery_needed":
+        blocking.append("dual_final_v23_artifact_missing_or_unconfirmed")
+    elif recommended == "N4R_yaw_reference_schema_audit":
+        blocking.append("dual_profile_not_confirmed")
+    if isinstance(candidate_yaw, (int, float)) and float(candidate_yaw) > 2.0:
+        blocking.append("candidate_yaw_above_strict_gate")
+
+    return {
+        "phase": "N4R2",
+        "dual_artifact_found": dual_found,
+        "dual_evaluator_profile_confirmed": dual_confirmed,
+        "dual_direct_identity_works": direct_identity_works,
+        "dual_official_candidate_matches": bool(dual_report.get("official_candidate_matches")),
+        "official_candidate_replay_yaw_rmse_deg": candidate_yaw,
+        "confirmed_profile_replay_yaw_rmse_deg": confirmed_yaw,
+        "yaw_replay_gate_pass_candidate": yaw_replay_gate_pass_candidate,
+        "formal_yaw_pass": formal_yaw_pass,
+        "evaluator_profile_formal_status": dual_report.get("evaluator_profile_formal_status", "diagnostic_only"),
+        "recommended_next_stage": recommended,
+        "blocking_issues": blocking,
+        "trace_solver_input": False,
+        "trace_evaluation_only": True,
+        "solver_input_modified": False,
+        "solver_output_changed": False,
+        "evaluator_only": True,
+        "output_only_correction": False,
+        "bad_epoch_deletion_for_metric": False,
+        "numerical_performance_claim": False,
+    }
+
+
 def _write_markdown(path: Path, official_report: dict[str, Any], replay_report: dict[str, Any], decision: dict[str, Any]) -> None:
     official = official_report.get("official_summary", {})
     direct = official_report.get("direct_recompute_summary", {})
@@ -189,6 +266,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     artifact_group["n4h2_artifacts_root"] = str(n4h2_root)
 
     official_report = reproduce_official_case_review(artifact_group, output_dir=out)
+    policy_report = write_yaw_convention_policy_report(out)
     reference_bundle = load_trace_reference_for_case(artifact_group, external_root)
     replay_nav = _find_replay_nav(n4h2_root)
     transform_report = {
@@ -227,8 +305,41 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         error_series_parse_status=error_status,
     )
     _write_json(out / "N4R_DECISION_REPORT.json", decision)
+
+    dual_roots = {
+        "EXTERNAL_KFGINS_ROOT": external_root,
+        "HOME_ROOT": Path.home(),
+        "WINDOWS_YKW_ROOT": Path("/mnt") / "c" / "Users" / "ykw",
+        "WINDOWS_86187_ROOT": Path("/mnt") / "c" / "Users" / "86187",
+    }
+    dual_recovery = recover_dual_final_v23_artifacts(dual_roots)
+    _write_json(out / "DUAL_FINAL_V23_ARTIFACT_RECOVERY_REPORT.json", dual_recovery)
+    dual_report = evaluate_dual_final_v23_evaluator_parity(
+        dual_recovery.get("best_dual_candidate_group") if dual_recovery.get("dual_artifact_found") else None,
+        external_source_root=external_root,
+        n4h2_artifacts_root=n4h2_root,
+        output_dir=out,
+    )
+    confirmed_profile = (
+        dual_report.get("confirmed_profile")
+        if dual_report.get("dual_evaluator_profile_confirmed")
+        else None
+    )
+    replay_profile_report = reevaluate_n4h2_replay_profiles(
+        n4h2_root,
+        output_dir=out,
+        confirmed_dual_profile=confirmed_profile,
+    )
+    n4r2_decision = _n4r2_decide(
+        official_report=official_report,
+        recovery_report=dual_recovery,
+        dual_report=dual_report,
+        replay_profile_report=replay_profile_report,
+    )
+    n4r2_decision["policy_formal_profile_patch_allowed"] = policy_report.get("formal_profile_patch_allowed")
+    _write_json(out / "N4R2_DECISION_REPORT.json", n4r2_decision)
     _write_markdown(out / "official_final_v23_case_review_reproduction.md", official_report, replay_report, decision)
-    return decision
+    return n4r2_decision
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:

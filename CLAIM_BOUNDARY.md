@@ -304,6 +304,22 @@ N4H2 trace alignment is evaluation-only and must not be used for replay tuning.
 
 N4H2 position/yaw metrics must not be described as final_v23 parity or proposed-method performance.
 
+N4R is evaluator-parity diagnostic only.
+
+N4R metrics are not proposed solver performance.
+
+Official artifacts are not solver input.
+
+N4R yaw transform candidates are evaluator diagnostics, not solver tuning.
+
+N4R2 evaluator yaw convention profile is diagnostic until dual_final_v23 parity confirms it.
+
+A yaw result slightly above 2 deg is near-boundary, not pass.
+
+No solver output is modified by evaluator profile re-evaluation.
+
+Trace remains evaluation-only.
+
 ## Evidence Rule
 
 If evidence is missing, write:
