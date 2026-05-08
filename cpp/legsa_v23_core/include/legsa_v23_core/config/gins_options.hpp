@@ -46,6 +46,15 @@ struct GINSOptions {
   bool measurement_update_implemented = false;
   bool state_feedback_implemented = false;
   bool mechanization_predict_implemented = false;
+  bool position_update_implemented = false;
+  bool velocity_update_implemented = false;
+  bool yaw_update_implemented = false;
+  bool velocity_lever_correction = false;
+  bool yaw_H_mapping_conservative = false;
+  std::string yaw_residual_sign = "not_used";
+  int yaw_normal_count = 0;
+  int yaw_downweight_count = 0;
+  int yaw_reject_count = 0;
 };
 
 }  // namespace legsa_v23_core

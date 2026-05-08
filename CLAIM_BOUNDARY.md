@@ -108,6 +108,19 @@ Allowed N4H4B propagation statement:
 - N4H4B does not implement `EKFUpdate` or `stateFeedback`.
 - N4H4B factor flags remain false.
 
+Allowed N4H4C update-feedback statement:
+
+- N4H4C may implement LegSA-owned GNSS position/velocity/yaw measurement
+  updates, scheme_C yaw gate, Joseph-form `EKFUpdate`, error-state
+  `stateFeedback`, update-branch routing in `newImuProcess`, update toy
+  dry-run, audit, and tests.
+- N4H4C implements measurement update framework but not parity claim.
+- N4H4C toy update is not performance evidence.
+- Raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting, FGO, and FGO
+  feedback remain disabled.
+- final_v23 outputs are not solver input.
+- Clean replay parity remains N4H4D.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -218,6 +231,13 @@ Do not claim:
 - N4H4B as numerical performance evidence.
 - N4H4B implementing GNSS measurement updates.
 - N4H4B implementing `EKFUpdate` or `stateFeedback`.
+- N4H4C as final_v23 numerical parity.
+- N4H4C toy update as numerical performance evidence.
+- N4H4C reading final_v23 outputs as solver input.
+- N4H4C enabling raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting,
+  FGO, FGO feedback, or Neural Gate.
+- N4H4C using trace as solver input.
+- N4H4C relaxing yaw evaluator gates or deleting epochs to pass metrics.
 - N4H4B enabling raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting,
   FGO, FGO feedback, output-only correction, bad-epoch deletion, or trace
   solver input.

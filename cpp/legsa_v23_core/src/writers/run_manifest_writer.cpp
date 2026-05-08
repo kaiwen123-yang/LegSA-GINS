@@ -28,6 +28,15 @@ void RunManifestWriter::write(const std::string& path, const GINSOptions& option
   output << "  \"measurement_update_implemented\": " << boolText(options.measurement_update_implemented)
          << ",\n";
   output << "  \"state_feedback_implemented\": " << boolText(options.state_feedback_implemented) << ",\n";
+  output << "  \"position_update_implemented\": " << boolText(options.position_update_implemented) << ",\n";
+  output << "  \"velocity_update_implemented\": " << boolText(options.velocity_update_implemented) << ",\n";
+  output << "  \"yaw_update_implemented\": " << boolText(options.yaw_update_implemented) << ",\n";
+  output << "  \"velocity_lever_correction\": " << boolText(options.velocity_lever_correction) << ",\n";
+  output << "  \"yaw_H_mapping_conservative\": " << boolText(options.yaw_H_mapping_conservative) << ",\n";
+  output << "  \"yaw_residual_sign\": \"" << options.yaw_residual_sign << "\",\n";
+  output << "  \"yaw_normal_count\": " << options.yaw_normal_count << ",\n";
+  output << "  \"yaw_downweight_count\": " << options.yaw_downweight_count << ",\n";
+  output << "  \"yaw_reject_count\": " << options.yaw_reject_count << ",\n";
   output << "  \"final_v23_reference_used_as_solver_input\": "
          << boolText(options.final_v23_reference_used_as_solver_input) << ",\n";
   output << "  \"proposed_reads_final_v23_output\": " << boolText(options.proposed_reads_final_v23_output)
