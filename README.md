@@ -42,7 +42,7 @@ N4H2F visual validation and yaw-noise provenance.
 
 Current working phase:
 
-N4H2G clean status-yaw no-noise replay audit.
+N4H2G2 clean replay independence and yaw sensitivity audit.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -116,6 +116,12 @@ variant and evaluates it against the dual official reference. It compares clean
 and noisy provenance while preserving that the historical noisy artifact is not
 a clean nominal baseline. N4H2G does not modify solver output or make proposed
 solver performance claims.
+
+N4H2G2 checks that the clean replay is an independent fresh rerun rather than a
+cache or stale-summary artifact. It hashes clean/noisy inputs and outputs,
+recomputes clean summary from NAV, and runs a diagnostic yaw-input sensitivity
+probe. N4H2G2 does not modify solver output or make proposed solver performance
+claims.
 
 ## Strict Phase-I Non-goals
 

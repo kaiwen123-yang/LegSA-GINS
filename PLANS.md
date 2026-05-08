@@ -245,6 +245,18 @@ clean variant, not a historical exact final_v23 artifact. It is baseline replay
 diagnostic evidence only and does not implement proposed solver logic or make a
 formal performance claim.
 
+## Stage N4H2G2: Clean replay independence and yaw sensitivity audit
+
+Goal:
+Verify that the clean status-yaw replay is a fresh independent rerun and not a
+cache/stale-summary artifact before N4H3.
+
+N4H2G2 hashes clean/noisy inputs and replay outputs, forces a fresh clean replay
+in a repository-external output root, recomputes summary directly from clean
+NAV, and runs a +30 deg yaw-input sensitivity smoke test. It is diagnostic only:
+no solver modification, no output correction, no epoch deletion, no trace solver
+input, and no formal performance claim.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:
