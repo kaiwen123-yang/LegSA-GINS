@@ -121,6 +121,18 @@ Allowed N4H4C update-feedback statement:
 - final_v23 outputs are not solver input.
 - Clean replay parity remains N4H4D.
 
+Allowed N4H4D clean replay statement:
+
+- N4H4D may run LegSA-owned v23-core on clean status-yaw runtime input and
+  evaluate against the dual official reference.
+- N4H4D may compare engineering metrics to external clean replay and produce a
+  parity/gap-screen decision.
+- N4H4D is engineering baseline parity, not paper performance.
+- N4H4D makes no proposed factor claim.
+- Trace remains evaluation-only and must not enter solver input.
+- No output-only correction and no bad epoch deletion are allowed.
+- If parity fails, the gap screen controls the next work.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -238,6 +250,12 @@ Do not claim:
   FGO, FGO feedback, or Neural Gate.
 - N4H4C using trace as solver input.
 - N4H4C relaxing yaw evaluator gates or deleting epochs to pass metrics.
+- N4H4D as paper performance evidence.
+- N4H4D as proposed factor evidence.
+- N4H4D using trace as solver input.
+- N4H4D using final_v23 outputs as proposed solver input.
+- N4H4D applying output-only correction or deleting epochs to pass metrics.
+- N4H4D relaxing yaw above 2 deg or reporting relaxed roll/pitch as strict pass.
 - N4H4B enabling raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting,
   FGO, FGO feedback, output-only correction, bad-epoch deletion, or trace
   solver input.

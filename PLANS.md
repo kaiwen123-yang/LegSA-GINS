@@ -328,6 +328,21 @@ only. It does not implement raw Doppler, Go2 priors, LSIM/OIM, source-aware
 weighting, FGO, final_v23 numerical parity, clean replay parity, or performance
 claims. N4H4D is the clean replay parity stage.
 
+## Stage N4H4D: LegSA-v23-core clean replay parity
+
+Goal:
+Run LegSA-owned v23-core on clean status-yaw runtime input, evaluate against the
+dual official reference, compare with external clean replay, and classify
+engineering parity or gap-screen blockers.
+
+Status:
+completed as N4H4D clean replay parity / gap screen.
+
+N4H4D is engineering baseline parity only. It does not implement proposed
+factors, does not use trace as solver input, does not use final_v23 output as
+solver input, does not delete epochs, and does not make paper performance
+claims. The next stage is determined by `LEGSA_V23_CLEAN_REPLAY_DECISION`.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

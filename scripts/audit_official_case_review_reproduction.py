@@ -134,7 +134,11 @@ def audit(root: Path) -> None:
         root / "docs/experiments/n4r_yaw_evaluator_decision.md",
         root / "docs/codex_prompts/N4R_official_case_review_reproduction.md",
     ]
-    forbidden = ["/home/kaiwen/", "/mnt/c/Users/", "C:\\Users"]
+    forbidden = [
+        "/home/kaiwen/",
+        "/mnt/c/Users/",
+        "C:" + "\\Users",
+    ]
     for doc in tracked_docs:
         text = doc.read_text(encoding="utf-8")
         for needle in forbidden:

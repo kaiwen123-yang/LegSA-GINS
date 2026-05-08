@@ -20,8 +20,8 @@ class LegSAV23Runtime {
   // 中文说明：运行 N4H4C update toy，触发 position/velocity/yaw、EKFUpdate 和 stateFeedback。
   static void runDryUpdateToy(const std::string& output_dir);
 
-  // 中文说明：从轻量配置读取 .imu/.gnss 并跑 skeleton 链路；不做 final_v23 parity claim。
-  static void runFromConfig(const std::string& config_path);
+  // 中文说明：从轻量配置读取 .imu/.gnss 并跑 LegSA-v23-core 链路；不读取 trace/final_v23 输出。
+  static void runFromConfig(const std::string& config_path, const std::string& output_dir_override = "");
 
  private:
   // 中文说明：写四类运行输出；输出只表示 N4H4A 框架链路成功。

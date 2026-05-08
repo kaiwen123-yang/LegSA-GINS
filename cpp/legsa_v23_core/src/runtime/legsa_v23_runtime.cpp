@@ -168,26 +168,77 @@ void LegSAV23Runtime::runDryUpdateToy(const std::string& output_dir) {
 }
 
 // 中文说明：真实配置运行目前只读 process_data-compatible 输入并生成 skeleton 输出，不做 parity claim。
-void LegSAV23Runtime::runFromConfig(const std::string& config_path) {
+void LegSAV23Runtime::runFromConfig(const std::string& config_path, const std::string& output_dir_override) {
   GINSOptions options = ConfigLoader::load(config_path);
+  if (!output_dir_override.empty()) {
+    options.output_path = output_dir_override;
+  }
+  options.phase = "N4H4D";
+  options.solver_role = "legsa_v23_core_clean_replay_gap_screen";
+  options.mechanization_predict_implemented = true;
+  options.measurement_update_implemented = true;
+  options.state_feedback_implemented = true;
+  options.position_update_implemented = true;
+  options.velocity_update_implemented = true;
+  options.yaw_update_implemented = true;
+  options.velocity_lever_correction = false;
+  options.yaw_H_mapping_conservative = true;
+  options.yaw_residual_sign = "evidence_missing_default_obs_pred";
+  if (options.clean_input_provenance_label == "evidence_missing") {
+    options.clean_input_provenance_label = "clean_status_yaw_runtime_input";
+  }
   const auto imu_samples = IMUFileLoader::load(options.imu_path);
   const auto gnss_samples = GNSSFileLoader::load(options.gnss_path);
   if (imu_samples.size() < 2) {
-    throw std::runtime_error("N4H4A runtime requires at least two IMU samples");
+    throw std::runtime_error("N4H4D runtime requires at least two IMU samples");
   }
 
   LegSAV23Engine engine(options);
   engine.initialize();
-  for (const auto& gnss : gnss_samples) {
-    engine.addGnssData(gnss);
+  std::filesystem::create_directories(options.output_path);
+  NavWriter nav_writer(outputPath(options.output_path, "LegSA_V23_NAV.nav"));
+  StdWriter std_writer(outputPath(options.output_path, "LegSA_V23_STD.csv"));
+  EvalNavWriter eval_writer(outputPath(options.output_path, "EVAL_NAV.csv"));
+
+  std::size_t imu_index = 0;
+  while (imu_index < imu_samples.size() && imu_samples[imu_index].time < options.start_time) {
+    ++imu_index;
   }
-  for (const auto& imu : imu_samples) {
-    engine.addImuData(imu);
-    engine.newImuProcess();
+  if (imu_index >= imu_samples.size()) {
+    throw std::runtime_error("N4H4D runtime starttime is after all IMU samples");
   }
 
-  writeOutputs(options.output_path, engine.getRunOptions(), engine.timestamp(), engine.getNavState(),
-               engine.getFilterState());
+  std::size_t gnss_index = 0;
+  while (gnss_index < gnss_samples.size() && gnss_samples[gnss_index].time < options.start_time) {
+    ++gnss_index;
+  }
+
+  // 中文说明：KF-GINS-style 主循环先对齐 start time，再加入第一帧 IMU；trace 不进入 solver。
+  engine.addImuData(imu_samples[imu_index], true);
+  const double end_time = options.end_time > options.start_time ? options.end_time : imu_samples.back().time;
+  for (++imu_index; imu_index < imu_samples.size(); ++imu_index) {
+    const IMUData& imu = imu_samples[imu_index];
+    if (imu.time > end_time) {
+      break;
+    }
+
+    // 中文说明：把不晚于当前 IMU 的 GNSS 高层状态送入 buffer；它是 15 列 .gnss，不是 raw/trace。
+    while (gnss_index < gnss_samples.size() && gnss_samples[gnss_index].time <= imu.time) {
+      engine.addGnssData(gnss_samples[gnss_index]);
+      ++gnss_index;
+    }
+
+    // 中文说明：IMU 输入为 process_data-compatible 增量，补偿后进入 newImuProcess 主循环。
+    engine.addImuData(imu, true);
+    engine.newImuProcess();
+
+    // 中文说明：每个传播后的状态都写 NAV/STD/EVAL_NAV；不做 output-only correction。
+    nav_writer.write(engine.timestamp(), engine.getNavState());
+    std_writer.write(engine.timestamp(), engine.getFilterState());
+    eval_writer.write(engine.timestamp(), engine.getNavState());
+  }
+
+  RunManifestWriter::write(outputPath(options.output_path, "RUN_MANIFEST.json"), engine.getRunOptions());
 }
 
 // 中文说明：统一写 NAV/STD/EVAL_NAV/RUN_MANIFEST；manifest 固化 forbidden flags=false。

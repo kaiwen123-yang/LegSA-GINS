@@ -37,6 +37,12 @@ void RunManifestWriter::write(const std::string& path, const GINSOptions& option
   output << "  \"yaw_normal_count\": " << options.yaw_normal_count << ",\n";
   output << "  \"yaw_downweight_count\": " << options.yaw_downweight_count << ",\n";
   output << "  \"yaw_reject_count\": " << options.yaw_reject_count << ",\n";
+  output << "  \"propagation_count\": " << options.propagation_count << ",\n";
+  output << "  \"measurement_update_count\": " << options.measurement_update_count << ",\n";
+  output << "  \"position_update_count\": " << options.position_update_count << ",\n";
+  output << "  \"velocity_update_count\": " << options.velocity_update_count << ",\n";
+  output << "  \"yaw_update_count\": " << options.yaw_update_count << ",\n";
+  output << "  \"rejected_update_count\": " << options.rejected_update_count << ",\n";
   output << "  \"final_v23_reference_used_as_solver_input\": "
          << boolText(options.final_v23_reference_used_as_solver_input) << ",\n";
   output << "  \"proposed_reads_final_v23_output\": " << boolText(options.proposed_reads_final_v23_output)

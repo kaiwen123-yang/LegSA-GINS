@@ -192,6 +192,7 @@ void LegSAV23Engine::insPropagation(const IMUData& imupre, const IMUData& imucur
   filter_state_.previous_pva = pvapre;
   filter_state_.current_pva = pvacur;
   current_time_ = imucur.time;
+  ++options_.propagation_count;
 }
 
 // 中文说明：F/G/Phi/Qd 构建只服务 EKF predict；N4H4B 不构建量测 H/R/K。
@@ -212,6 +213,7 @@ void LegSAV23Engine::gnssUpdate(const GNSSData& gnss) {
     (void)gnss;
     return;
   }
+  ++options_.measurement_update_count;
   this->gnssPositionUpdate (gnss);
   if (gnss.has_velocity) {
     this->gnssVelocityUpdate (gnss);
@@ -225,18 +227,21 @@ void LegSAV23Engine::gnssUpdate(const GNSSData& gnss) {
 // 中文说明：位置更新构建 predicted antenna minus observed GNSS 的 NED 残差；输入不是 raw GNSS。
 // 中文说明：历史边界保留：TODO(N4H4C): GNSS position update not implemented in N4H4B.
 void LegSAV23Engine::gnssPositionUpdate(const GNSSData& gnss) {
+  ++options_.position_update_count;
   pending_measurements_.push_back(buildGnssPositionMeasurement(filter_state_.current_pva, gnss, options_));
 }
 
 // 中文说明：速度更新使用 15 列 .gnss 的 vn/ve/vd，高层状态量测；N4H4C 不实现 raw Doppler。
 // 中文说明：历史边界保留：TODO(N4H4C): GNSS velocity update not implemented in N4H4B.
 void LegSAV23Engine::gnssVelocityUpdate(const GNSSData& gnss) {
+  ++options_.velocity_update_count;
   pending_measurements_.push_back(buildGnssVelocityMeasurement(filter_state_.current_pva, gnss, options_));
 }
 
 // 中文说明：yaw 更新采用 scheme_C 规则门控；NORMAL/DOWNWEIGHT/REJECT 只记录求解器量测处理。
 // 中文说明：历史边界保留：TODO(N4H4C): GNSS yaw update not implemented in N4H4B.
 void LegSAV23Engine::gnssYawUpdate(const GNSSData& gnss) {
+  ++options_.yaw_update_count;
   const double pred_yaw_deg = Rotation::wrapAngleDeg(filter_state_.current_pva.euler_rpy_rad[2] * kRadToDeg);
   const double residual_deg = Rotation::wrapAngleDeg(gnss.yaw_deg - pred_yaw_deg);
   const YawSchemeCDecision decision = applyYawSchemeC(residual_deg, gnss.yaw_std_deg);
@@ -246,6 +251,7 @@ void LegSAV23Engine::gnssYawUpdate(const GNSSData& gnss) {
     ++options_.yaw_downweight_count;
   } else {
     ++options_.yaw_reject_count;
+    ++options_.rejected_update_count;
   }
   const auto block = buildGnssYawMeasurement(filter_state_.current_pva, gnss, options_);
   if (block.has_value()) {

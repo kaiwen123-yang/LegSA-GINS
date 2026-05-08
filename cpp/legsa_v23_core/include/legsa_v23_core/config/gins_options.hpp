@@ -55,6 +55,12 @@ struct GINSOptions {
   int yaw_normal_count = 0;
   int yaw_downweight_count = 0;
   int yaw_reject_count = 0;
+  int propagation_count = 0;
+  int measurement_update_count = 0;
+  int position_update_count = 0;
+  int velocity_update_count = 0;
+  int yaw_update_count = 0;
+  int rejected_update_count = 0;
 };
 
 }  // namespace legsa_v23_core

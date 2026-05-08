@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
       return 0;
     }
     if (!args.config_path.empty()) {
-      legsa_v23_core::LegSAV23Runtime::runFromConfig(args.config_path);
+      legsa_v23_core::LegSAV23Runtime::runFromConfig(args.config_path, args.output_dir == "." ? "" : args.output_dir);
       return 0;
     }
     std::cerr << "usage: legsa_v23_core_demo --dry-run-toy --output-dir <dir>\n"
