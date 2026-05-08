@@ -30,6 +30,25 @@ std::string outputPath(const std::string& output_dir, const std::string& filenam
 // 中文说明：JSON bool 仅用于诊断文件；诊断文件不作为性能证据。
 const char* boolText(bool value) { return value ? "true" : "false"; }
 
+// 中文说明：D2 model variant 只允许在 diagnostic_mode 下启用，用来隔离公式符号/反馈侧的问题。
+bool isAllowedDiagnosticModelVariant(const std::string& name) {
+  static const std::vector<std::string> allowed = {
+      "baseline_current",
+      "position_residual_sign_flip",
+      "position_H_phi_sign_flip",
+      "position_no_H_phi",
+      "velocity_residual_sign_flip",
+      "yaw_residual_sign_flip",
+      "yaw_H_sign_flip",
+      "state_feedback_pos_vel_add",
+      "state_feedback_phi_negative",
+      "state_feedback_phi_right_multiply",
+      "state_feedback_no_phi",
+      "ekf_update_residual_sign_flip",
+  };
+  return std::find(allowed.begin(), allowed.end(), name) != allowed.end();
+}
+
 // 中文说明：三维向量范数用于输入流快照，不进入求解器状态。
 double norm3(const Vector3& values) {
   double sum = 0.0;
@@ -208,8 +227,12 @@ void writeRuntimeDebugManifest(const std::string& path, const GINSOptions& optio
   output << "  \"phase\": \"N4H4D1\",\n";
   output << "  \"diagnostic_mode\": " << boolText(options.diagnostic_mode) << ",\n";
   output << "  \"diagnostic_run_label\": \"" << options.diagnostic_run_label << "\",\n";
+  output << "  \"diagnostic_model_variant\": \"" << options.diagnostic_model_variant << "\",\n";
+  output << "  \"diagnostic_only\": " << boolText(options.diagnostic_only) << ",\n";
   output << "  \"solver_output_changed_by_diagnostic_switches\": "
          << boolText(options.solver_output_changed_by_diagnostic_switches) << ",\n";
+  output << "  \"solver_output_changed_by_diagnostic_variant\": "
+         << boolText(options.solver_output_changed_by_diagnostic_variant) << ",\n";
   output << "  \"not_for_performance_claim\": true,\n";
   output << "  \"trace_solver_input\": false,\n";
   output << "  \"final_v23_output_substitution\": false,\n";
@@ -396,11 +419,22 @@ void LegSAV23Runtime::runFromConfig(const std::string& config_path, const std::s
     options.disable_measurement_update = diagnostic_options.disable_measurement_update;
     options.disable_state_feedback = diagnostic_options.disable_state_feedback;
     options.diagnostic_run_label = diagnostic_options.diagnostic_run_label;
+    options.diagnostic_model_variant = diagnostic_options.diagnostic_model_variant.empty()
+                                           ? "baseline_current"
+                                           : diagnostic_options.diagnostic_model_variant;
+    if (!isAllowedDiagnosticModelVariant(options.diagnostic_model_variant)) {
+      throw std::runtime_error("unknown D2 diagnostic model variant: " + options.diagnostic_model_variant);
+    }
     options.not_for_performance_claim = true;
+    options.diagnostic_only = true;
     options.solver_output_changed_by_diagnostic_switches =
         diagnostic_options.disable_position_update || diagnostic_options.disable_velocity_update ||
         diagnostic_options.disable_yaw_update || diagnostic_options.disable_measurement_update ||
         diagnostic_options.disable_state_feedback;
+    options.solver_output_changed_by_diagnostic_variant = options.diagnostic_model_variant != "baseline_current";
+  } else if (!diagnostic_options.diagnostic_model_variant.empty() &&
+             diagnostic_options.diagnostic_model_variant != "baseline_current") {
+    throw std::runtime_error("D2 diagnostic model variants require --debug-output-dir diagnostic mode");
   }
   if (options.clean_input_provenance_label == "evidence_missing") {
     options.clean_input_provenance_label = "clean_status_yaw_runtime_input";

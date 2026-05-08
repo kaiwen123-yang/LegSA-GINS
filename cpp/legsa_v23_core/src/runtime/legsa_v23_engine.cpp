@@ -46,6 +46,14 @@ void covarianceStats(const Matrix21& covariance, double& trace, double& min_diag
   }
 }
 
+// 中文说明：D2 yaw residual variant 必须同时影响 yaw gate 计数和 MeasurementBlock，保证诊断记录自洽。
+double diagnosticYawResidualDeg(const GINSOptions& options, double obs_yaw_deg, double pred_yaw_deg) {
+  if (options.diagnostic_mode && options.diagnostic_model_variant == "yaw_residual_sign_flip") {
+    return Rotation::wrapAngleDeg(pred_yaw_deg - obs_yaw_deg);
+  }
+  return Rotation::wrapAngleDeg(obs_yaw_deg - pred_yaw_deg);
+}
+
 }  // namespace
 
 // 中文说明：构造函数只接收 LegSA 自有配置，不读取 final_v23 输出，也不绑定 trace。
@@ -299,7 +307,7 @@ void LegSAV23Engine::gnssVelocityUpdate(const GNSSData& gnss) {
 void LegSAV23Engine::gnssYawUpdate(const GNSSData& gnss) {
   ++options_.yaw_update_count;
   const double pred_yaw_deg = Rotation::wrapAngleDeg(filter_state_.current_pva.euler_rpy_rad[2] * kRadToDeg);
-  const double residual_deg = Rotation::wrapAngleDeg(gnss.yaw_deg - pred_yaw_deg);
+  const double residual_deg = diagnosticYawResidualDeg(options_, gnss.yaw_deg, pred_yaw_deg);
   const YawSchemeCDecision decision = applyYawSchemeC(residual_deg, gnss.yaw_std_deg);
   if (decision.mode == YawSchemeCMode::NORMAL) {
     ++options_.yaw_normal_count;
@@ -319,7 +327,16 @@ void LegSAV23Engine::gnssYawUpdate(const GNSSData& gnss) {
 // 中文说明：历史边界保留：TODO(N4H4C): EKF measurement update not implemented in N4H4B.
 void LegSAV23Engine::EKFUpdate() {
   for (const auto& measurement : pending_measurements_) {
-    legsa_v23_core::EKFUpdate(filter_state_, measurement);
+    if (options_.diagnostic_mode && options_.diagnostic_model_variant == "ekf_update_residual_sign_flip") {
+      // 中文说明：D2 诊断：临时翻转量测 residual 后进入 Joseph form，用来隔离 EKF innovation 符号。
+      MeasurementBlock flipped = measurement;
+      for (double& value : flipped.residual) {
+        value = -value;
+      }
+      legsa_v23_core::EKFUpdate(filter_state_, flipped);
+    } else {
+      legsa_v23_core::EKFUpdate(filter_state_, measurement);
+    }
   }
   pending_measurements_.clear();
 }
@@ -327,7 +344,7 @@ void LegSAV23Engine::EKFUpdate() {
 // 中文说明：stateFeedback 将 dx 反馈到 BLH/NED/姿态/bias/scale；反馈后 dx 清零。
 // 中文说明：历史边界保留：TODO(N4H4C): state feedback not implemented in N4H4B.
 void LegSAV23Engine::stateFeedback() {
-  legsa_v23_core::stateFeedback(filter_state_);
+  legsa_v23_core::stateFeedback(filter_state_, options_);
 }
 
 // 中文说明：协方差检查保持有限、近似对称、对角非负；不伪造量测约束。
@@ -373,7 +390,7 @@ void LegSAV23Engine::recordDiagnosticUpdate(const GNSSData& gnss, int update_sta
   }
   record.yaw_obs_deg = gnss.yaw_deg;
   record.yaw_pred_deg = Rotation::wrapAngleDeg(filter_state_.current_pva.euler_rpy_rad[2] * kRadToDeg);
-  record.yaw_residual_deg = Rotation::wrapAngleDeg(gnss.yaw_deg - record.yaw_pred_deg);
+  record.yaw_residual_deg = diagnosticYawResidualDeg(options_, gnss.yaw_deg, record.yaw_pred_deg);
   if (gnss.has_yaw) {
     const YawSchemeCDecision decision = applyYawSchemeC(record.yaw_residual_deg, gnss.yaw_std_deg);
     record.yaw_scheme_mode = decision.label;

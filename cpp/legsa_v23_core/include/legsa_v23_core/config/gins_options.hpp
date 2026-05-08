@@ -69,8 +69,11 @@ struct GINSOptions {
   bool disable_state_feedback = false;
   int diagnostic_debug_max_updates = 30;
   std::string diagnostic_run_label;
+  std::string diagnostic_model_variant = "baseline_current";
   bool not_for_performance_claim = false;
+  bool diagnostic_only = false;
   bool solver_output_changed_by_diagnostic_switches = false;
+  bool solver_output_changed_by_diagnostic_variant = false;
 };
 
 }  // namespace legsa_v23_core

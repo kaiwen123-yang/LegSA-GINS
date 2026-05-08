@@ -513,3 +513,11 @@ If evidence is missing, write:
 evidence_missing
 
 Do not invent evidence.
+
+N4H4D2 diagnostic variants are not performance results.
+
+N4H4D2 formula parity audit does not modify solver by default.
+
+N4H4D2 must not use output-only correction, tuning, or epoch deletion.
+
+Any future fix must be evidence-backed by N4H4D2.

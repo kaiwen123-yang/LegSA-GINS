@@ -18,6 +18,7 @@ struct RuntimeDiagnosticOptions {
   bool disable_measurement_update = false;
   bool disable_state_feedback = false;
   std::string diagnostic_run_label;
+  std::string diagnostic_model_variant = "baseline_current";
 };
 
 // 中文说明：LegSA-v23-core runtime 负责 reader-engine-writer 串联，不实现完整 EKF 数学。

@@ -45,6 +45,8 @@ void RunManifestWriter::write(const std::string& path, const GINSOptions& option
   output << "  \"rejected_update_count\": " << options.rejected_update_count << ",\n";
   output << "  \"diagnostic_mode\": " << boolText(options.diagnostic_mode) << ",\n";
   output << "  \"diagnostic_run_label\": \"" << options.diagnostic_run_label << "\",\n";
+  output << "  \"diagnostic_model_variant\": \"" << options.diagnostic_model_variant << "\",\n";
+  output << "  \"diagnostic_only\": " << boolText(options.diagnostic_only) << ",\n";
   output << "  \"diagnostic_update_switches\": {\n";
   output << "    \"disable_position_update\": " << boolText(options.disable_position_update) << ",\n";
   output << "    \"disable_velocity_update\": " << boolText(options.disable_velocity_update) << ",\n";
@@ -55,6 +57,8 @@ void RunManifestWriter::write(const std::string& path, const GINSOptions& option
   output << "  \"not_for_performance_claim\": " << boolText(options.not_for_performance_claim) << ",\n";
   output << "  \"solver_output_changed_by_diagnostic_switches\": "
          << boolText(options.solver_output_changed_by_diagnostic_switches) << ",\n";
+  output << "  \"solver_output_changed_by_diagnostic_variant\": "
+         << boolText(options.solver_output_changed_by_diagnostic_variant) << ",\n";
   output << "  \"final_v23_reference_used_as_solver_input\": "
          << boolText(options.final_v23_reference_used_as_solver_input) << ",\n";
   output << "  \"proposed_reads_final_v23_output\": " << boolText(options.proposed_reads_final_v23_output)

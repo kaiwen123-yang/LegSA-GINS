@@ -358,6 +358,21 @@ output-only correction, or make performance claims. Isolation variants are
 diagnostic routes only and must not be reported as improved results. The next
 stage is determined by `N4H4D1_FAILURE_DECISION_REPORT`.
 
+## Stage N4H4D2: Formula parity and diagnostic update variants
+
+Goal:
+Audit LegSA-v23-core mechanization, update, EKFUpdate, and stateFeedback formula
+parity against read-only reference evidence, then run controlled diagnostic
+model variants to identify the most likely fix direction.
+
+Status:
+in progress on PR #21.
+
+N4H4D2 does not permanently fix solver mathematics, tune parameters, delete
+epochs, apply output-only correction, or make performance claims. Diagnostic
+variants are not formal results. The next stage is determined by
+`N4H4D2_DECISION_REPORT`.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

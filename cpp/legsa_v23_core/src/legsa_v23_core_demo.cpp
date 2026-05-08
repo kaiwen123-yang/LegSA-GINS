@@ -21,6 +21,7 @@ struct DemoArgs {
   bool disable_measurement_update = false;
   bool disable_state_feedback = false;
   std::string diagnostic_run_label;
+  std::string diagnostic_model_variant = "baseline_current";
 };
 
 // 中文说明：最小命令行 parser，N4H4A 不引入额外 CLI 依赖。
@@ -54,6 +55,8 @@ DemoArgs parseArgs(int argc, char** argv) {
       args.disable_state_feedback = true;
     } else if (token == "--diagnostic-run-label" && i + 1 < argc) {
       args.diagnostic_run_label = argv[++i];
+    } else if (token == "--diagnostic-model-variant" && i + 1 < argc) {
+      args.diagnostic_model_variant = argv[++i];
     } else {
       throw std::runtime_error("unknown or incomplete argument: " + token);
     }
@@ -89,6 +92,7 @@ int main(int argc, char** argv) {
       diagnostic_options.disable_measurement_update = args.disable_measurement_update;
       diagnostic_options.disable_state_feedback = args.disable_state_feedback;
       diagnostic_options.diagnostic_run_label = args.diagnostic_run_label;
+      diagnostic_options.diagnostic_model_variant = args.diagnostic_model_variant;
       legsa_v23_core::LegSAV23Runtime::runFromConfig(args.config_path, args.output_dir == "." ? "" : args.output_dir,
                                                      diagnostic_options);
       return 0;
@@ -98,7 +102,8 @@ int main(int argc, char** argv) {
               << "   or: legsa_v23_core_demo --dry-run-update-toy --output-dir <dir>\n"
               << "   or: legsa_v23_core_demo --config <path> [--debug-output-dir <dir>] "
               << "[--disable-position-update|--disable-velocity-update|--disable-yaw-update|"
-              << "--disable-measurement-update|--disable-state-feedback]\n";
+              << "--disable-measurement-update|--disable-state-feedback] "
+              << "[--diagnostic-model-variant <name>]\n";
     return 2;
   } catch (const std::exception& error) {
     std::cerr << "legsa_v23_core_demo failed: " << error.what() << "\n";
