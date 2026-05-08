@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N4H3 controlled final_v23 reference import and transplant plan.
+N4H4A LegSA-v23-core framework foundation.
 
 Current working phase:
 
-N4H4A LegSA-v23-core full-framework foundation.
+N4H4B INS mechanization and EKF propagation.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -134,6 +134,13 @@ types, options, 7-column `.imu` reader, 15-column `.gnss` reader, config loader,
 KF-GINS-style engine function skeleton, writers, manifest, demo, audit, and
 tests. N4H4A is not final_v23 reproduction, not final_v23 output substitution,
 not full EKF parity, and not performance evidence.
+
+N4H4B implements the LegSA-owned v23-core INS mechanization and EKF prediction
+foundation, including Earth/Rotation utilities, IMU compensation, velocity,
+position, attitude propagation, `F/G/Phi/Qd`, covariance prediction, covariance
+checks, STD sqrt output, propagation toy dry-run, audit, and tests. N4H4B does
+not implement GNSS measurement updates, `EKFUpdate`, `stateFeedback`, final_v23
+parity, or performance claims.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace

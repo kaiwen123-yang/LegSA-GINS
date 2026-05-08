@@ -5,9 +5,10 @@
 
 namespace {
 
-// 中文说明：demo 参数解析只支持 --dry-run-toy、--config 和 --output-dir，避免隐式读取 trace。
+// 中文说明：demo 参数解析支持 skeleton toy、propagation toy、config 和 output-dir，避免隐式读取 trace。
 struct DemoArgs {
   bool dry_run_toy = false;
+  bool dry_run_propagation_toy = false;
   std::string config_path;
   std::string output_dir = ".";
 };
@@ -19,6 +20,8 @@ DemoArgs parseArgs(int argc, char** argv) {
     const std::string token = argv[i];
     if (token == "--dry-run-toy") {
       args.dry_run_toy = true;
+    } else if (token == "--dry-run-propagation-toy") {
+      args.dry_run_propagation_toy = true;
     } else if (token == "--config" && i + 1 < argc) {
       args.config_path = argv[++i];
     } else if (token == "--output-dir" && i + 1 < argc) {
@@ -32,7 +35,7 @@ DemoArgs parseArgs(int argc, char** argv) {
 
 }  // namespace
 
-// 中文说明：LegSA-v23-core demo 只跑框架链路，不实现 raw Doppler/Go2/LSIM/OIM/FGO。
+// 中文说明：LegSA-v23-core demo 只跑框架或预测传播链路，不实现 raw Doppler/Go2/LSIM/OIM/FGO。
 int main(int argc, char** argv) {
   try {
     const DemoArgs args = parseArgs(argc, argv);
@@ -40,11 +43,16 @@ int main(int argc, char** argv) {
       legsa_v23_core::LegSAV23Runtime::runDryToy(args.output_dir);
       return 0;
     }
+    if (args.dry_run_propagation_toy) {
+      legsa_v23_core::LegSAV23Runtime::runDryPropagationToy(args.output_dir);
+      return 0;
+    }
     if (!args.config_path.empty()) {
       legsa_v23_core::LegSAV23Runtime::runFromConfig(args.config_path);
       return 0;
     }
     std::cerr << "usage: legsa_v23_core_demo --dry-run-toy --output-dir <dir>\n"
+              << "   or: legsa_v23_core_demo --dry-run-propagation-toy --output-dir <dir>\n"
               << "   or: legsa_v23_core_demo --config <path>\n";
     return 2;
   } catch (const std::exception& error) {

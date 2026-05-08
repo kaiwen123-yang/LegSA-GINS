@@ -14,6 +14,9 @@ class LegSAV23Runtime {
   // 中文说明：运行 toy dry-run，生成 NAV/STD/EVAL_NAV/RUN_MANIFEST 骨架文件。
   static void runDryToy(const std::string& output_dir);
 
+  // 中文说明：运行 N4H4B propagation toy，验证 mechanization + EKF predict 传播链路。
+  static void runDryPropagationToy(const std::string& output_dir);
+
   // 中文说明：从轻量配置读取 .imu/.gnss 并跑 skeleton 链路；不做 final_v23 parity claim。
   static void runFromConfig(const std::string& config_path);
 

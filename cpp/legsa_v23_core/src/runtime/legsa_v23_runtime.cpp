@@ -64,6 +64,48 @@ void LegSAV23Runtime::runDryToy(const std::string& output_dir) {
   writeOutputs(output_dir, options, engine.timestamp(), engine.getNavState(), engine.getFilterState());
 }
 
+// 中文说明：propagation toy 构造 200 条 IMU increment，只验证预测传播，不做量测更新或性能声明。
+void LegSAV23Runtime::runDryPropagationToy(const std::string& output_dir) {
+  GINSOptions options;
+  options.output_path = output_dir;
+  options.phase = "N4H4B";
+  options.solver_role = "legsa_v23_core_propagation_foundation";
+  options.mechanization_predict_implemented = true;
+  options.measurement_update_implemented = false;
+  options.state_feedback_implemented = false;
+  options.start_time = 0.0;
+  options.end_time = 2.0;
+  options.imu_data_rate = 100.0;
+  options.clean_input_provenance_label = "toy_propagation_no_real_data";
+  options.init_state.pos_blh_rad_m = {31.0 * kDegToRad, 121.0 * kDegToRad, 10.0};
+  options.init_state.vel_ned_mps = {0.0, 0.0, 0.0};
+  options.init_state.euler_rpy_rad = {0.0, 0.0, 10.0 * kDegToRad};
+  options.init_pos_std = {1.0, 1.0, 1.5};
+  options.init_vel_std = {0.1, 0.1, 0.2};
+  options.init_att_std = {0.5 * kDegToRad, 0.5 * kDegToRad, 1.0 * kDegToRad};
+
+  LegSAV23Engine engine(options);
+  engine.initialize();
+
+  IMUData previous;
+  previous.time = 0.0;
+  previous.dt = 0.01;
+  previous.dvel = {0.0, 0.0, -9.80665 * previous.dt};
+  engine.addImuData(previous);
+  for (int i = 1; i <= 200; ++i) {
+    IMUData current;
+    current.time = static_cast<double>(i) * 0.01;
+    current.dt = 0.01;
+    current.dtheta = {0.0, 0.0, 0.00005};
+    current.dvel = {0.001, 0.0, -9.80665 * current.dt};
+    engine.addImuData(current, true);
+    engine.newImuProcess();
+    previous = current;
+  }
+
+  writeOutputs(output_dir, options, engine.timestamp(), engine.getNavState(), engine.getFilterState());
+}
+
 // 中文说明：真实配置运行目前只读 process_data-compatible 输入并生成 skeleton 输出，不做 parity claim。
 void LegSAV23Runtime::runFromConfig(const std::string& config_path) {
   GINSOptions options = ConfigLoader::load(config_path);
