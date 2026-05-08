@@ -66,6 +66,14 @@ Allowed N4H1 diagnostic statement:
 - N4H1P may reconstruct process_data-compatible `.gnss` and `.imu` runtime inputs for baseline/parity testing only.
 - N4H1P2 may report row-retention coverage for process_data-compatible input reconstruction.
 
+Allowed N4H2C diagnostic statement:
+
+- N4H2C may audit actual final_v23 runtime input, process_data generation evidence, external KF-GINS runtime source support, and LegSA vs KF-GINS framework parity.
+- N4H2C is diagnostic source/input/runtime audit only.
+- N4H2C must not be described as proposed solver implementation.
+- N4H2C must not use trace as solver input.
+- N4H2C must not formal-select yaw offset without physical or actual-input evidence.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -152,6 +160,10 @@ Do not claim:
 - trace yaw mode is diagnostic-only.
 - nominal process_data-compatible generation must not inject artificial outage, outlier, or noise by default.
 - process_data-compatible coverage reports are input-construction diagnostics, not performance evidence.
+- N4H2C deep source/input/runtime parity audit is diagnostic only.
+- N4H2C must not be described as proposed solver implementation.
+- N4H2C must not use trace as solver input.
+- N4H2C must not formal-select yaw offset without physical or actual-input evidence.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
