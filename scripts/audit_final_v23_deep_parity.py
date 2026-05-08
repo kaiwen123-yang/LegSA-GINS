@@ -48,7 +48,7 @@ REQUIRED_OUTPUTS = [
 FORBIDDEN_PATH_SNIPPETS = [
     "/mnt/c/Users",
     "C:" + "\\Users",
-    "/home/kaiwen/legsa_n4h2_artifacts",
+    "/home/kaiwen/" + "legsa_n4h2_artifacts",
 ]
 
 
