@@ -78,6 +78,16 @@ Allowed N4H2C diagnostic statement:
 - Auto-best install based on trace is diagnostic-only unless supported by physical or actual final_v23 input evidence.
 - Missing actual final_v23 artifacts must be reported as evidence_missing.
 
+Allowed N4R diagnostic statement:
+
+- N4R may reproduce official final_v23 case-review summary and error_series
+  definitions for evaluator parity.
+- N4R is evaluator-parity diagnostic only.
+- N4R metrics are not proposed solver performance.
+- Official artifacts are not solver input.
+- Trace remains evaluation-only.
+- Yaw transform candidates are evaluator diagnostics, not solver tuning.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -172,6 +182,9 @@ Do not claim:
 - Trace yaw must not become formal solver input.
 - Auto-best install based on trace must remain diagnostic-only unless supported by physical or actual final_v23 input evidence.
 - Missing actual final_v23 artifacts must be reported as evidence_missing.
+- N4R metrics as proposed solver performance.
+- N4R official artifacts as solver input.
+- N4R yaw transform candidates as solver tuning.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 

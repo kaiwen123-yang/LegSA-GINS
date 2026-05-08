@@ -151,6 +151,16 @@ replay yaw diagnostics.
 No full EKF implementation. No trace solver input. No output-only correction.
 No formal offset selection without physical antenna-order evidence.
 
+## Stage N4R: official final_v23 Case-Review Reproduction
+
+Goal:
+Reproduce official final_v23 case_review metrics and identify yaw evaluator
+convention before full framework transplant or factor stacking.
+
+N4R uses actual official artifacts as runtime-only evaluator evidence. It does
+not implement proposed solver logic, does not tune yaw, does not use trace as
+solver input, and does not make a formal numerical performance claim.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

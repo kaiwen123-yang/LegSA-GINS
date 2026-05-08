@@ -42,7 +42,7 @@ N4H2 process_data-compatible external KF-GINS replay.
 
 Current working phase:
 
-N4H2C final_v23 artifact recovery, process_data runtime-parameter audit, and yaw runtime parity audit.
+N4R official final_v23 case-review reproduction and yaw evaluator parity.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -71,6 +71,12 @@ N4H1 audits the two-layer final_v23 input source chain: runtime 15-column `.gnss
 N4H2 runs those process_data-compatible BY2 runtime inputs through the external KF-GINS baseline executable, parses NAV/STD/IMU_ERR outputs, and writes an evaluation-only replay report. N4H2 does not claim final_v23 parity or proposed LegSA-GINS performance.
 
 N4H2C is the decision-driven final_v23 deep source and yaw-config parity audit after N4H2: position replay passed, yaw replay failed, so the next work audits the actual final_v23 runtime `input.gnss`, process_data generation logic, run/config evidence, GNSS loader and GIEngine velocity/yaw support, KF-GINS core flow, and the current LegSA vs KF-GINS framework gap before any full EKF stage.
+
+N4R reproduces official final_v23 case-review metrics from runtime-only
+artifacts and identifies yaw evaluator convention before runtime yaw-config
+repair, full KF-GINS-style EKF reconstruction, or factor stacking. N4R remains
+diagnostic evaluator parity only and does not make proposed solver performance
+claims.
 
 ## Strict Phase-I Non-goals
 
