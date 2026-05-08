@@ -32,6 +32,7 @@
 | N4H4B INS mechanization and EKF propagation | stage/N4H4B-ins-mechanization-ekf-predict | done | yes | no | mechanization + EKF predict | Earth/Rotation, IMU compensation, INS propagation, F/G/Phi/Qd, EKFPredict, covariance checks, toy propagation; no measurement update or performance claim |
 | N4H4C GNSS updates / EKFUpdate / stateFeedback | stage/N4H4C-gnss-updates-ekf-feedback | done | yes | no | GNSS measurement update + feedback | position/velocity/yaw updates, scheme_C, EKFUpdate, stateFeedback, update toy; no final_v23 parity or performance claim |
 | N4H4D clean replay parity | stage/N4H4D-clean-replay-parity | done | yes | no | clean replay parity audit | engineering parity/gap screen completed; next stage determined by LEGSA_V23_CLEAN_REPLAY_DECISION |
+| N4H4D1 first-epoch/config/update-isolation diagnostics | stage/N4H4D-clean-replay-parity | done | no | no | first-epoch diagnostics | N4H4D failed honestly; N4H4D1 diagnostics completed; next stage determined by N4H4D1_FAILURE_DECISION_REPORT |
 | N4H4 LegSA-v23-core full EKF / unified filter implementation | stage/N4H4-legsa-v23-core | in_progress | yes | no | LegSA-owned EKF/unified filter | staged through N4H4A/B/C; no wrapper, no output substitution, no final_v23 output as proposed solver input |
 | N5 raw Doppler factor | stage/N5-raw-doppler-factor | not_started | yes | no | Doppler factor | sign convention required |
 | N6 source-aware weighting / Go2 weak priors | stage/N6-source-aware-weighting | not_started | yes | no | weighting module | no trace tuning |

@@ -61,6 +61,16 @@ struct GINSOptions {
   int velocity_update_count = 0;
   int yaw_update_count = 0;
   int rejected_update_count = 0;
+  bool diagnostic_mode = false;
+  bool disable_position_update = false;
+  bool disable_velocity_update = false;
+  bool disable_yaw_update = false;
+  bool disable_measurement_update = false;
+  bool disable_state_feedback = false;
+  int diagnostic_debug_max_updates = 30;
+  std::string diagnostic_run_label;
+  bool not_for_performance_claim = false;
+  bool solver_output_changed_by_diagnostic_switches = false;
 };
 
 }  // namespace legsa_v23_core

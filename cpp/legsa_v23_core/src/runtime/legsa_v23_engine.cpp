@@ -13,6 +13,40 @@
 #include <stdexcept>
 
 namespace legsa_v23_core {
+namespace {
+
+// 中文说明：三维向量范数用于诊断残差/IMU 增量大小，不参与滤波更新。
+double norm3(const Vector3& values) {
+  double sum = 0.0;
+  for (double value : values) {
+    sum += value * value;
+  }
+  return std::sqrt(sum);
+}
+
+// 中文说明：21 维 dx 范数仅用于 first-epoch/update 诊断，不改变误差状态。
+double norm21(const Vector21& values) {
+  double sum = 0.0;
+  for (double value : values) {
+    sum += value * value;
+  }
+  return std::sqrt(sum);
+}
+
+// 中文说明：协方差对角统计用于判断塌缩/爆炸，不伪造 covariance。
+void covarianceStats(const Matrix21& covariance, double& trace, double& min_diag, double& max_diag) {
+  trace = 0.0;
+  min_diag = matrix21At(covariance, 0, 0);
+  max_diag = matrix21At(covariance, 0, 0);
+  for (std::size_t i = 0; i < kStateSize; ++i) {
+    const double value = matrix21At(covariance, i, i);
+    trace += value;
+    min_diag = std::min(min_diag, value);
+    max_diag = std::max(max_diag, value);
+  }
+}
+
+}  // namespace
 
 // 中文说明：构造函数只接收 LegSA 自有配置，不读取 final_v23 输出，也不绑定 trace。
 LegSAV23Engine::LegSAV23Engine(const GINSOptions& options) : options_(options) {}
@@ -76,10 +110,19 @@ void LegSAV23Engine::newImuProcess() {
     filter_state_.previous_pva = filter_state_.current_pva;
 
     bool consumed_update = false;
-    auto runUpdateAndFeedback = [&](const GNSSData& gnss) {
+    auto runUpdateAndFeedback = [&](const GNSSData& gnss, int update_status, double imu_pre_time, double imu_cur_time) {
       this->gnssUpdate(gnss);
-      if (options_.measurement_update_implemented && options_.state_feedback_implemented) {
-        this->stateFeedback ();
+      if (options_.diagnostic_mode) {
+        this->recordDiagnosticUpdate(gnss, update_status, imu_pre_time, imu_cur_time,
+                                     options_.measurement_update_implemented &&
+                                         !options_.disable_measurement_update);
+      }
+      if (options_.measurement_update_implemented && options_.state_feedback_implemented &&
+          !options_.disable_measurement_update && !options_.disable_state_feedback) {
+        if (options_.diagnostic_mode) {
+          this->markLatestDiagnosticFeedbackApplied();
+        }
+        this->stateFeedback();
       }
       gnss_buffer_.pop_front();
     };
@@ -88,14 +131,14 @@ void LegSAV23Engine::newImuProcess() {
       const int update_status = isToUpdate(imupre.time, imucur.time, gnss.time);
       if (update_status == 1) {
         // 中文说明：GNSS 时间在当前 IMU 区间左端，先执行量测更新和误差反馈，再继续 INS propagation。
-        runUpdateAndFeedback(gnss);
+        runUpdateAndFeedback(gnss, update_status, imupre.time, imucur.time);
         filter_state_.previous_pva = filter_state_.current_pva;
       } else if (update_status == 2) {
         // 中文说明：GNSS 时间在区间右端，先传播到 imucur，再执行量测更新和 stateFeedback。
         insPropagation(imupre, imucur);
         buildFGPhiQd(imucur);
         EKFPredict();
-        runUpdateAndFeedback(gnss);
+        runUpdateAndFeedback(gnss, update_status, imupre.time, imucur.time);
         consumed_update = true;
       } else if (update_status == 3) {
         // 中文说明：GNSS 落在 IMU 区间内时插值，前半段预测、量测更新反馈、后半段继续预测。
@@ -105,7 +148,7 @@ void LegSAV23Engine::newImuProcess() {
         insPropagation(imupre, midimu);
         buildFGPhiQd(midimu);
         EKFPredict();
-        runUpdateAndFeedback(gnss);
+        runUpdateAndFeedback(gnss, update_status, imupre.time, imucur.time);
         insPropagation(midimu, split_cur);
         buildFGPhiQd(split_cur);
         EKFPredict();
@@ -134,6 +177,16 @@ FilterState LegSAV23Engine::getFilterState() const { return filter_state_; }
 
 // 中文说明：返回 manifest 运行证据；包含 N4H4C yaw gate 计数，不包含性能指标。
 GINSOptions LegSAV23Engine::getRunOptions() const { return options_; }
+
+// 中文说明：返回前若干 GNSS 更新诊断记录；diagnostic-only，不作为性能依据。
+const std::vector<DiagnosticUpdateRecord>& LegSAV23Engine::getDiagnosticUpdateRecords() const {
+  return diagnostic_updates_;
+}
+
+// 中文说明：返回前若干传播诊断记录；diagnostic-only，不作为性能依据。
+const std::vector<DiagnosticPropagationRecord>& LegSAV23Engine::getDiagnosticPropagationRecords() const {
+  return diagnostic_propagations_;
+}
 
 // 中文说明：更新时间与 IMU 区间的四态判定；NED/BLH 状态在对应分支中保持 KF-GINS-style 顺序。
 int LegSAV23Engine::isToUpdate(double imu_time_1, double imu_time_2, double update_time) const {
@@ -193,6 +246,7 @@ void LegSAV23Engine::insPropagation(const IMUData& imupre, const IMUData& imucur
   filter_state_.current_pva = pvacur;
   current_time_ = imucur.time;
   ++options_.propagation_count;
+  recordDiagnosticPropagation(imupre, imucur);
 }
 
 // 中文说明：F/G/Phi/Qd 构建只服务 EKF predict；N4H4B 不构建量测 H/R/K。
@@ -209,19 +263,21 @@ void LegSAV23Engine::EKFPredict() {
 // 中文说明：历史边界保留：TODO(N4H4C): measurement update not implemented in N4H4B.
 void LegSAV23Engine::gnssUpdate(const GNSSData& gnss) {
   pending_measurements_.clear();
-  if (!options_.measurement_update_implemented) {
+  if (!options_.measurement_update_implemented || options_.disable_measurement_update) {
     (void)gnss;
     return;
   }
   ++options_.measurement_update_count;
-  this->gnssPositionUpdate (gnss);
-  if (gnss.has_velocity) {
-    this->gnssVelocityUpdate (gnss);
+  if (!options_.disable_position_update) {
+    this->gnssPositionUpdate(gnss);
   }
-  if (gnss.has_yaw) {
-    this->gnssYawUpdate (gnss);
+  if (gnss.has_velocity && !options_.disable_velocity_update) {
+    this->gnssVelocityUpdate(gnss);
   }
-  EKFUpdate ();
+  if (gnss.has_yaw && !options_.disable_yaw_update) {
+    this->gnssYawUpdate(gnss);
+  }
+  EKFUpdate();
 }
 
 // 中文说明：位置更新构建 predicted antenna minus observed GNSS 的 NED 残差；输入不是 raw GNSS。
@@ -288,6 +344,82 @@ void LegSAV23Engine::checkCov() const {
         throw std::runtime_error("LegSAV23Engine covariance symmetry check failed");
       }
     }
+  }
+}
+
+// 中文说明：构造 first-update 诊断记录；残差来自当前名义状态与 GNSS 高层观测，不读取 trace。
+void LegSAV23Engine::recordDiagnosticUpdate(const GNSSData& gnss, int update_status, double imu_pre_time,
+                                            double imu_cur_time, bool measurement_enabled) {
+  if (!options_.diagnostic_mode ||
+      diagnostic_updates_.size() >= static_cast<std::size_t>(std::max(0, options_.diagnostic_debug_max_updates))) {
+    return;
+  }
+  DiagnosticUpdateRecord record;
+  record.update_index = static_cast<int>(diagnostic_updates_.size()) + 1;
+  record.gnss_time = gnss.time;
+  record.imu_pre_time = imu_pre_time;
+  record.imu_cur_time = imu_cur_time;
+  record.is_to_update_res = update_status;
+
+  const MeasurementBlock position_block = buildGnssPositionMeasurement(filter_state_.current_pva, gnss, options_);
+  for (std::size_t i = 0; i < kVector3Size; ++i) {
+    record.position_residual[i] = position_block.residual[i];
+  }
+  if (gnss.has_velocity) {
+    const MeasurementBlock velocity_block = buildGnssVelocityMeasurement(filter_state_.current_pva, gnss, options_);
+    for (std::size_t i = 0; i < kVector3Size; ++i) {
+      record.velocity_residual[i] = velocity_block.residual[i];
+    }
+  }
+  record.yaw_obs_deg = gnss.yaw_deg;
+  record.yaw_pred_deg = Rotation::wrapAngleDeg(filter_state_.current_pva.euler_rpy_rad[2] * kRadToDeg);
+  record.yaw_residual_deg = Rotation::wrapAngleDeg(gnss.yaw_deg - record.yaw_pred_deg);
+  if (gnss.has_yaw) {
+    const YawSchemeCDecision decision = applyYawSchemeC(record.yaw_residual_deg, gnss.yaw_std_deg);
+    record.yaw_scheme_mode = decision.label;
+    record.yaw_effective_std_deg = decision.effective_std_deg;
+    record.yaw_update_applied = measurement_enabled && !options_.disable_yaw_update && decision.accepted;
+  }
+  record.position_update_applied = measurement_enabled && !options_.disable_position_update;
+  record.velocity_update_applied = measurement_enabled && gnss.has_velocity && !options_.disable_velocity_update;
+  record.dx_norm_before_feedback = norm21(filter_state_.dx);
+  Vector3 dx_pos = zeroVector3();
+  Vector3 dx_vel = zeroVector3();
+  Vector3 dx_phi = zeroVector3();
+  for (std::size_t i = 0; i < kVector3Size; ++i) {
+    dx_pos[i] = filter_state_.dx[P_ID + i];
+    dx_vel[i] = filter_state_.dx[V_ID + i];
+    dx_phi[i] = filter_state_.dx[PHI_ID + i];
+  }
+  record.dx_pos_norm = norm3(dx_pos);
+  record.dx_vel_norm = norm3(dx_vel);
+  record.dx_phi_norm_deg = norm3(dx_phi) * kRadToDeg;
+  diagnostic_updates_.push_back(record);
+}
+
+// 中文说明：记录传播后的状态与协方差统计；只保留前 N 条，避免大文件进入运行目录。
+void LegSAV23Engine::recordDiagnosticPropagation(const IMUData& imupre, const IMUData& imucur) {
+  if (!options_.diagnostic_mode ||
+      diagnostic_propagations_.size() >=
+          static_cast<std::size_t>(std::max(0, options_.diagnostic_debug_max_updates))) {
+    return;
+  }
+  DiagnosticPropagationRecord record;
+  record.propagation_index = static_cast<int>(diagnostic_propagations_.size()) + 1;
+  record.time_pre = imupre.time;
+  record.time_cur = imucur.time;
+  record.dt = imucur.time - imupre.time;
+  record.nav_state = filter_state_.current_pva;
+  record.dtheta_norm = norm3(imucur.dtheta);
+  record.dvel_norm = norm3(imucur.dvel);
+  covarianceStats(filter_state_.covariance, record.cov_trace, record.cov_min_diag, record.cov_max_diag);
+  diagnostic_propagations_.push_back(record);
+}
+
+// 中文说明：stateFeedback 是否发生只写入诊断记录；不影响反馈数学和正式输出。
+void LegSAV23Engine::markLatestDiagnosticFeedbackApplied() {
+  if (!diagnostic_updates_.empty()) {
+    diagnostic_updates_.back().state_feedback_applied = true;
   }
 }
 

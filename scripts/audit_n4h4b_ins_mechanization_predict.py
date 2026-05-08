@@ -176,13 +176,8 @@ def _check_engine_boundary() -> int:
     missing = [item for item in required if item not in engine]
     if missing:
         return _fail("engine propagation path or N4H4C TODO boundary missing", missing)
-    forbidden = [
-        r"gnssPositionUpdate\(gnss\);",
-        r"EKFUpdate\(\);\s*stateFeedback\(\);",
-    ]
-    hits = [pattern for pattern in forbidden if re.search(pattern, engine)]
-    if hits:
-        return _fail("measurement update appears active in N4H4B engine", hits)
+    # 中文说明：N4H4C 之后 engine 源码中允许存在 active GNSS update 调用；
+    # N4H4B 边界由 propagation toy manifest 的 measurement/state-feedback=false 来约束。
     return 0
 
 

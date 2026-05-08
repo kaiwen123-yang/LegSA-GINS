@@ -12,6 +12,44 @@
 
 namespace legsa_v23_core {
 
+// 中文说明：诊断更新记录只用于 N4H4D1 first-epoch/update-isolation，不作为性能结果。
+struct DiagnosticUpdateRecord {
+  int update_index = 0;
+  double gnss_time = 0.0;
+  double imu_pre_time = 0.0;
+  double imu_cur_time = 0.0;
+  int is_to_update_res = 0;
+  Vector3 position_residual = zeroVector3();
+  Vector3 velocity_residual = zeroVector3();
+  double yaw_obs_deg = 0.0;
+  double yaw_pred_deg = 0.0;
+  double yaw_residual_deg = 0.0;
+  std::string yaw_scheme_mode = "NONE";
+  double yaw_effective_std_deg = 0.0;
+  bool position_update_applied = false;
+  bool velocity_update_applied = false;
+  bool yaw_update_applied = false;
+  double dx_norm_before_feedback = 0.0;
+  double dx_pos_norm = 0.0;
+  double dx_vel_norm = 0.0;
+  double dx_phi_norm_deg = 0.0;
+  bool state_feedback_applied = false;
+};
+
+// 中文说明：传播记录只保留前若干帧，帮助判断机械编排是否一开始就跳变。
+struct DiagnosticPropagationRecord {
+  int propagation_index = 0;
+  double time_pre = 0.0;
+  double time_cur = 0.0;
+  double dt = 0.0;
+  NavState nav_state;
+  double dtheta_norm = 0.0;
+  double dvel_norm = 0.0;
+  double cov_trace = 0.0;
+  double cov_min_diag = 0.0;
+  double cov_max_diag = 0.0;
+};
+
 // 中文说明：LegSA 自有 v23-core EKF 主框架。N4H4C 已打通 GNSS 松组合更新和误差反馈。
 class LegSAV23Engine {
  public:
@@ -41,6 +79,12 @@ class LegSAV23Engine {
 
   // 中文说明：返回运行后 manifest 选项；包含 yaw scheme_C 计数和 N4H4C 更新实现标记。
   GINSOptions getRunOptions() const;
+
+  // 中文说明：返回 N4H4D1 诊断更新记录；默认运行不会生成性能声明。
+  const std::vector<DiagnosticUpdateRecord>& getDiagnosticUpdateRecords() const;
+
+  // 中文说明：返回 N4H4D1 诊断传播记录；用于定位 first-epoch 机械编排跳变。
+  const std::vector<DiagnosticPropagationRecord>& getDiagnosticPropagationRecords() const;
 
  private:
   // 中文说明：判断 GNSS 更新时间与相邻 IMU 区间关系；N4H4C 使用 0/1/2/3 区分传播/更新顺序。
@@ -82,6 +126,16 @@ class LegSAV23Engine {
   // 中文说明：协方差健康检查；N4H4B 检查有限值、对称性和非负对角线。
   void checkCov() const;
 
+  // 中文说明：记录一次 GNSS update 前后的残差和 dx，仅用于诊断开关，不改变默认求解器数学。
+  void recordDiagnosticUpdate(const GNSSData& gnss, int update_status, double imu_pre_time, double imu_cur_time,
+                              bool measurement_enabled);
+
+  // 中文说明：记录一次传播后的 PVA 和协方差统计，仅用于 first-epoch/mechanization 诊断。
+  void recordDiagnosticPropagation(const IMUData& imupre, const IMUData& imucur);
+
+  // 中文说明：标记最近一次诊断更新是否执行 stateFeedback；不修改 dx/P 数值。
+  void markLatestDiagnosticFeedbackApplied();
+
   GINSOptions options_;
   FilterState filter_state_;
   std::deque<IMUData> imu_buffer_;
@@ -89,6 +143,8 @@ class LegSAV23Engine {
   std::vector<MeasurementBlock> pending_measurements_;
   ErrorStateMatrices last_matrices_;
   NoiseMatrix continuous_noise_ = diagonalNoiseMatrix(1.0e-6);
+  std::vector<DiagnosticUpdateRecord> diagnostic_updates_;
+  std::vector<DiagnosticPropagationRecord> diagnostic_propagations_;
   double current_time_ = 0.0;
   bool initialized_ = false;
 };

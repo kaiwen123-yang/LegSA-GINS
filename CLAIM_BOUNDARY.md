@@ -133,6 +133,15 @@ Allowed N4H4D clean replay statement:
 - No output-only correction and no bad epoch deletion are allowed.
 - If parity fails, the gap screen controls the next work.
 
+Allowed N4H4D1 diagnostic statement:
+
+- N4H4D1 may add first-epoch, config/init, residual, runtime trace, and
+  update-isolation diagnostics for the failed N4H4D replay.
+- N4H4D1 is diagnostic only.
+- Isolation variants are not performance results.
+- No tuning, no epoch deletion, and no output correction are allowed.
+- Failed parity must not be hidden.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -256,6 +265,9 @@ Do not claim:
 - N4H4D using final_v23 outputs as proposed solver input.
 - N4H4D applying output-only correction or deleting epochs to pass metrics.
 - N4H4D relaxing yaw above 2 deg or reporting relaxed roll/pitch as strict pass.
+- N4H4D1 diagnostic isolation variants as performance results.
+- N4H4D1 hiding failed parity, tuning parameters, deleting epochs, or applying
+  output-only correction.
 - N4H4B enabling raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting,
   FGO, FGO feedback, output-only correction, bad-epoch deletion, or trace
   solver input.

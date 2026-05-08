@@ -42,7 +42,7 @@ N4H4C GNSS updates, EKFUpdate, and stateFeedback.
 
 Current working phase:
 
-N4H4D LegSA-v23-core clean replay parity.
+N4H4D1 first-epoch/config/update-isolation diagnostics.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -153,6 +153,11 @@ against the dual official reference, compares to external clean replay, and
 reports engineering parity or gap-screen diagnostics. N4H4D is not a proposed
 factor result, not paper performance evidence, and not final_v23 output
 substitution.
+
+N4H4D1 adds first-epoch, config/init, update residual, and update-isolation
+diagnostics for the failed N4H4D replay. It is diagnostic only: no solver math
+fix, no tuning, no epoch deletion, no output-only correction, and no performance
+claim.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace

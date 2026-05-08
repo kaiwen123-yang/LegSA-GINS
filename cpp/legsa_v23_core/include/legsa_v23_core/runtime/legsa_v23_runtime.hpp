@@ -8,6 +8,18 @@
 
 namespace legsa_v23_core {
 
+// 中文说明：运行期诊断开关只用于 N4H4D1 isolation，不是性能配置，也不进入常规 parity claim。
+struct RuntimeDiagnosticOptions {
+  std::string debug_output_dir;
+  int debug_max_updates = 30;
+  bool disable_position_update = false;
+  bool disable_velocity_update = false;
+  bool disable_yaw_update = false;
+  bool disable_measurement_update = false;
+  bool disable_state_feedback = false;
+  std::string diagnostic_run_label;
+};
+
 // 中文说明：LegSA-v23-core runtime 负责 reader-engine-writer 串联，不实现完整 EKF 数学。
 class LegSAV23Runtime {
  public:
@@ -21,7 +33,8 @@ class LegSAV23Runtime {
   static void runDryUpdateToy(const std::string& output_dir);
 
   // 中文说明：从轻量配置读取 .imu/.gnss 并跑 LegSA-v23-core 链路；不读取 trace/final_v23 输出。
-  static void runFromConfig(const std::string& config_path, const std::string& output_dir_override = "");
+  static void runFromConfig(const std::string& config_path, const std::string& output_dir_override = "",
+                            const RuntimeDiagnosticOptions& diagnostic_options = RuntimeDiagnosticOptions{});
 
  private:
   // 中文说明：写四类运行输出；输出只表示 N4H4A 框架链路成功。

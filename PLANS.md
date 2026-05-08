@@ -343,6 +343,21 @@ factors, does not use trace as solver input, does not use final_v23 output as
 solver input, does not delete epochs, and does not make paper performance
 claims. The next stage is determined by `LEGSA_V23_CLEAN_REPLAY_DECISION`.
 
+## Stage N4H4D1: First-epoch and update-isolation diagnostics
+
+Goal:
+Diagnose the failed N4H4D replay before any fix stage by adding first-epoch,
+config/init parity, update residual, runtime trace, and update-isolation
+evidence.
+
+Status:
+completed as diagnostic-only PR #21 update.
+
+N4H4D1 does not fix solver mathematics, tune parameters, delete epochs, apply
+output-only correction, or make performance claims. Isolation variants are
+diagnostic routes only and must not be reported as improved results. The next
+stage is determined by `N4H4D1_FAILURE_DECISION_REPORT`.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:
