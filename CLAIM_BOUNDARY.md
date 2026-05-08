@@ -60,6 +60,10 @@ Allowed N4H0 diagnostic statement:
 
 - N4H0 may generate diagnostic receiver-native measurement-floor metrics for BY2.
 
+Allowed N4H1 diagnostic statement:
+
+- N4H1 may audit the final_v23 runtime `.gnss` input source chain and yaw generation chain.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -137,6 +141,10 @@ Do not claim:
 - N4H0 metrics are diagnostic measurement-floor metrics only.
 - N4H0 must not be described as proposed solver performance.
 - N4H0 must not use trace as solver input.
+- final_v23 input source-chain audit is diagnostic only.
+- final_v23 runtime .gnss input must not be confused with raw GNSS observations.
+- final_v23 input audit must not be described as proposed solver implementation.
+- trace remains evaluation-only.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
@@ -229,6 +237,14 @@ N4H0 metrics are diagnostic measurement-floor metrics only.
 N4H0 must not be described as proposed solver performance.
 
 N4H0 must not use trace as solver input.
+
+final_v23 input source-chain audit is diagnostic only.
+
+final_v23 runtime .gnss input must not be confused with raw GNSS observations.
+
+final_v23 input audit must not be described as proposed solver implementation.
+
+trace remains evaluation-only.
 
 ## Evidence Rule
 

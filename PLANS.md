@@ -110,6 +110,11 @@ Evaluate direct receiver-native GNSS status against trace reference to distingui
 
 No proposed solver implementation.
 
+## Stage N4H1: final_v23 Input Source-Chain and Yaw-Generation Audit
+
+Goal:
+Audit the two-layer final_v23 input source chain: runtime 15-column .gnss input and upstream generation fields, including gnss1-status position, gnss1-raw UBX-NAV-PVT velocity, and gnss1/gnss2-status A1_dual_diff yaw.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:
