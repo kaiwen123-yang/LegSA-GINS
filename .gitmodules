@@ -1,0 +1,4 @@
+[submodule "reference/final_v23_repo"]
+	path = reference/final_v23_repo
+	url = git@github.com:kaiwen123-yang/KF-GINS-graduation-design.git
+	branch = feature/v4-raw-gnss
