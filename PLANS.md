@@ -195,6 +195,18 @@ read-only, and searches yaw update source history for branch/version mismatch
 evidence. It is diagnostic only: no solver output modification, no trace solver
 input, no yaw-gate relaxation, and no formal performance claim.
 
+## Stage N4H2D: Replay Reference Mapping and Stale Summary Audit
+
+Goal:
+Audit why the old N4H2 replay summary reported yaw near 93 deg even though
+actual dual_final_v23 NAV and replay NAV are nearly identical.
+
+N4H2D reconstructs the official dual_final_v23 reference from official NAV plus
+official error_series, freshly evaluates replay NAV against that reference, and
+compares the old summary to the fresh summary. It is evaluation/reference
+mapping only: no solver output modification, no trace solver input, no output
+correction, no epoch deletion, and no formal proposed solver performance claim.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:
