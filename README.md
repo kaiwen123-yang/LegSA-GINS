@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N4H2 process_data-compatible external KF-GINS replay.
+N4R3 dual_final_v23 artifact intake and evaluator parity lock.
 
 Current working phase:
 
-N4R3 dual_final_v23 manual artifact intake and official evaluator parity lock.
+N4H2C runtime yaw update/config/source-version parity audit.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -89,6 +89,11 @@ repository, confirms its summary envelope, locks the official evaluator profile,
 and re-evaluates N4H2 replay under controlled profiles. N4R3 does not commit
 artifact files, does not modify solver output, and does not make a performance
 claim.
+
+N4H2C-runtime audits why actual dual_final_v23 yaw passes while the N4H2 replay
+yaw fails under the confirmed direct evaluator profile. It compares actual and
+replay input/NAV yaw paths, runtime config evidence, current yaw update source,
+and source history. It is diagnostic only and does not modify solver output.
 
 ## Strict Phase-I Non-goals
 

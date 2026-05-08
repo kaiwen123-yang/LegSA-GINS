@@ -330,6 +330,18 @@ no artifact files may be committed.
 
 trace remains evaluation-only.
 
+Runtime yaw audit is diagnostic only.
+
+Runtime yaw audit must not modify solver output.
+
+Runtime yaw audit must not modify external KF-GINS source.
+
+Runtime yaw audit must not claim performance.
+
+Runtime yaw audit must not relax yaw > 2 deg.
+
+Full KF-GINS-style framework remains future work until runtime/config parity is resolved.
+
 ## Evidence Rule
 
 If evidence is missing, write:
