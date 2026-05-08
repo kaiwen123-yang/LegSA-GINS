@@ -14,11 +14,15 @@ from pathlib import Path
 from typing import Any
 
 from legsa_gins.input_generation.imu_txt_builder import build_process_data_imu_rows
+from legsa_gins.input_generation.process_data_coverage import (
+    make_process_data_coverage_report,
+    write_process_data_coverage_report,
+)
 from legsa_gins.input_generation.status_yaw_builder import (
     apply_yaw_install_and_ned,
     build_a1_dual_diff_yaw_rows,
     compute_yaw_std,
-    status_time_header,
+    status_time_sys,
 )
 from legsa_gins.input_generation.ubx_nav_pvt import extract_pvt_velocity_rows
 
@@ -105,6 +109,45 @@ def _nearest(
     return best if abs(float(best[key]) - time_value) <= tolerance else None
 
 
+def _ffill_bfill(rows: list[dict[str, Any]], fields: list[str]) -> None:
+    for field in fields:
+        last: Any = None
+        for row in rows:
+            value = row.get(field)
+            if value is None:
+                if last is not None:
+                    row[field] = last
+            else:
+                last = value
+        next_value: Any = None
+        for row in reversed(rows):
+            value = row.get(field)
+            if value is None:
+                if next_value is not None:
+                    row[field] = next_value
+            else:
+                next_value = value
+
+
+def _missing_count(rows: list[dict[str, Any]], fields: list[str]) -> int:
+    return sum(1 for row in rows if any(row.get(field) is None for field in fields))
+
+
+def _dropna_key_fields(
+    rows: list[dict[str, Any]], fields: list[str]
+) -> tuple[list[dict[str, Any]], dict[str, int]]:
+    kept: list[dict[str, Any]] = []
+    reason_counts = {field: 0 for field in fields}
+    for row in rows:
+        missing = [field for field in fields if row.get(field) is None]
+        if missing:
+            for field in missing:
+                reason_counts[field] += 1
+            continue
+        kept.append(row)
+    return kept, {key: value for key, value in reason_counts.items() if value}
+
+
 def _status_base_rows(
     gnss1_status_path: str | Path, *, base_time: float, max_rows: int | None
 ) -> tuple[list[dict[str, Any]], int]:
@@ -118,7 +161,7 @@ def _status_base_rows(
         acc_h = _as_float(row.get("pos_acc_h"), _as_float(row.get("pos_acc_h_m")))
         acc_v = _as_float(row.get("pos_acc_v"), _as_float(row.get("pos_acc_v_m")))
         try:
-            timestamp = status_time_header(row)
+            timestamp = status_time_sys(row)
         except ValueError:
             timestamp = _as_float(row.get("Time"), _as_float(row.get("time_unix")))
         if None in {lat, lon, height, acc_h, acc_v, timestamp}:
@@ -204,7 +247,8 @@ def generate_process_data_compat_inputs(
     base_rows, missing_status_count = _status_base_rows(
         gnss1_status, base_time=base_time, max_rows=max_status_rows
     )
-    pvt_rows = extract_pvt_velocity_rows(gnss1_raw, base_time=base_time, max_rows=max_raw_rows)
+    raw_limit = None if max_raw_rows in {None, 0} else max_raw_rows
+    pvt_rows = extract_pvt_velocity_rows(gnss1_raw, base_time=base_time, max_rows=raw_limit)
     yaw_rows, yaw_audit = build_a1_dual_diff_yaw_rows(
         gnss1_status,
         gnss2_status,
@@ -221,33 +265,70 @@ def generate_process_data_compat_inputs(
     )
     yaw_rows.sort(key=lambda item: float(item["aligned_time"]))
 
-    gnss_rows: list[dict[str, Any]] = []
-    missing_velocity_count = 0
-    missing_yaw_count = 0
+    pvt_merge_match_count_before_fill = 0
+    yaw_merge_match_count_before_fill = 0
+    merged_rows: list[dict[str, Any]] = []
     for base in base_rows:
         t = float(base["time"])
-        vel = _nearest(pvt_rows, t, key="time", tolerance=0.1)
-        if vel is None:
-            missing_velocity_count += 1
-            continue
-        yaw = _nearest(yaw_rows, t, key="aligned_time", tolerance=0.6)
-        if yaw is None:
-            missing_yaw_count += 1
-            continue
         row = dict(base)
-        row.update(
-            {
-                "vn": float(vel["vn"]),
-                "ve": float(vel["ve"]),
-                "vd": float(vel["vd"]),
-                "std_vn": 0.05,
-                "std_ve": 0.05,
-                "std_vd": 0.05,
-                "yaw": float(yaw["yaw_ned_deg"]),
-                "yaw_std": float(yaw["yaw_std"]),
-            }
-        )
-        gnss_rows.append(row)
+        vel = _nearest(pvt_rows, t, key="time", tolerance=0.1)
+        if vel is not None:
+            pvt_merge_match_count_before_fill += 1
+            row.update(
+                {
+                    "vn": float(vel["vn"]),
+                    "ve": float(vel["ve"]),
+                    "vd": float(vel["vd"]),
+                    "sAcc": float(vel["sAcc"]),
+                }
+            )
+        else:
+            row.update({"vn": None, "ve": None, "vd": None, "sAcc": None})
+        yaw = _nearest(yaw_rows, t, key="aligned_time", tolerance=0.6)
+        if yaw is not None:
+            yaw_merge_match_count_before_fill += 1
+            row.update(
+                {
+                    "yaw_body_deg": float(yaw["yaw_body_deg"]),
+                    "yaw_std_for_merge_deg": float(yaw["yaw_std"]),
+                }
+            )
+        else:
+            row.update({"yaw_body_deg": None, "yaw_std_for_merge_deg": None})
+        merged_rows.append(row)
+
+    _ffill_bfill(merged_rows, ["vn", "ve", "vd", "sAcc"])
+    pvt_missing_after_fill_count = _missing_count(merged_rows, ["vn", "ve", "vd", "sAcc"])
+    _ffill_bfill(merged_rows, ["yaw_body_deg", "yaw_std_for_merge_deg"])
+    yaw_missing_after_fill_count = _missing_count(
+        merged_rows, ["yaw_body_deg", "yaw_std_for_merge_deg"]
+    )
+    for row in merged_rows:
+        if row.get("yaw_body_deg") is not None:
+            row["yaw"] = float(90.0 - float(row["yaw_body_deg"])) % 360.0
+        else:
+            row["yaw"] = None
+        row["yaw_std"] = row.get("yaw_std_for_merge_deg")
+        row["std_vn"] = 0.05
+        row["std_ve"] = 0.05
+        row["std_vd"] = 0.05
+
+    key_fields = [
+        "time",
+        "lat",
+        "lon",
+        "height",
+        "std_n",
+        "std_e",
+        "std_d",
+        "vn",
+        "ve",
+        "vd",
+        "yaw",
+        "yaw_std",
+    ]
+    gnss_rows, dropna_reason_counts = _dropna_key_fields(merged_rows, key_fields)
+    dropna_count = len(merged_rows) - len(gnss_rows)
 
     imu_rows, imu_report = build_process_data_imu_rows(
         body_imu,
@@ -262,10 +343,23 @@ def generate_process_data_compat_inputs(
     gnss_path = out / "BY2_PROCESS_DATA_COMPAT.gnss"
     imu_path = out / "BY2_PROCESS_DATA_COMPAT.imu"
     report_path = out / "PROCESS_DATA_COMPAT_REPORT.json"
+    coverage_report_path = out / "PROCESS_DATA_COVERAGE_REPORT.json"
     yaw_audit_path = out / "STATUS_YAW_A1_AUDIT.json"
     imu_report_path = out / "IMU_PROCESS_DATA_COMPAT_REPORT.json"
     _write_table(gnss_path, gnss_rows, GNSS_COLUMNS)
     _write_table(imu_path, imu_rows, IMU_COLUMNS)
+
+    coverage_report = make_process_data_coverage_report(
+        status_base_row_count=len(base_rows),
+        pvt_velocity_row_count=len(pvt_rows),
+        yaw_row_count=len(yaw_rows),
+        gnss_output_row_count=len(gnss_rows),
+        pvt_merge_match_count_before_fill=pvt_merge_match_count_before_fill,
+        yaw_merge_match_count_before_fill=yaw_merge_match_count_before_fill,
+        dropna_count=dropna_count,
+        pvt_missing_after_fill_count=pvt_missing_after_fill_count,
+        yaw_missing_after_fill_count=yaw_missing_after_fill_count,
+    )
 
     yaw_audit.update(
         {
@@ -279,7 +373,7 @@ def generate_process_data_compat_inputs(
         }
     )
     report = {
-        "phase": "N4H1P",
+        "phase": "N4H1P2",
         "runtime_input_reconstructed": True,
         "base_time": float(base_time),
         "time_mode": "legacy_base_time_process_data_compat",
@@ -287,6 +381,22 @@ def generate_process_data_compat_inputs(
         "imu_columns": 7,
         "gnss_row_count": len(gnss_rows),
         "imu_row_count": len(imu_rows),
+        "status_base_row_count": len(base_rows),
+        "pvt_velocity_row_count": len(pvt_rows),
+        "yaw_row_count": len(yaw_rows),
+        "gnss_output_row_count": len(gnss_rows),
+        "output_to_status_ratio": coverage_report["output_to_status_ratio"],
+        "output_to_yaw_ratio": coverage_report["output_to_yaw_ratio"],
+        "pvt_merge_match_count_before_fill": pvt_merge_match_count_before_fill,
+        "pvt_missing_after_fill_count": pvt_missing_after_fill_count,
+        "yaw_merge_match_count_before_fill": yaw_merge_match_count_before_fill,
+        "yaw_missing_after_fill_count": yaw_missing_after_fill_count,
+        "dropna_count": dropna_count,
+        "dropna_reason_counts": dropna_reason_counts,
+        "coverage_status": coverage_report["coverage_status"],
+        "coverage_warning": coverage_report["coverage_warning"],
+        "raw_scan_limited": raw_limit is not None,
+        "max_raw_rows_used": raw_limit,
         "position_source": "gnss1_status_pos_lat_lon_height",
         "position_std_source": "gnss1_status_pos_acc_h_v",
         "velocity_source": "gnss1_raw_UBX_NAV_PVT",
@@ -315,12 +425,13 @@ def generate_process_data_compat_inputs(
         "status_missing_position_or_time_count": missing_status_count,
         "pvt_velocity_rows": len(pvt_rows),
         "status_yaw_rows": len(yaw_rows),
-        "rows_without_pvt_velocity_match": missing_velocity_count,
-        "rows_without_status_yaw_match": missing_yaw_count,
+        "rows_without_pvt_velocity_match": len(base_rows) - pvt_merge_match_count_before_fill,
+        "rows_without_status_yaw_match": len(base_rows) - yaw_merge_match_count_before_fill,
         "generated_files": {
             "gnss": gnss_path.name,
             "imu": imu_path.name,
             "process_data_compat_report": report_path.name,
+            "process_data_coverage_report": coverage_report_path.name,
             "status_yaw_a1_audit": yaw_audit_path.name,
             "imu_report": imu_report_path.name,
         },
@@ -328,6 +439,7 @@ def generate_process_data_compat_inputs(
         "generated_inputs_are_baseline_parity_only": True,
     }
     _write_json(report_path, report)
+    write_process_data_coverage_report(coverage_report, coverage_report_path)
     _write_json(yaw_audit_path, yaw_audit)
     _write_json(imu_report_path, imu_report)
     return {
@@ -335,9 +447,11 @@ def generate_process_data_compat_inputs(
         "gnss_path": str(gnss_path),
         "imu_path": str(imu_path),
         "report_path": str(report_path),
+        "coverage_report_path": str(coverage_report_path),
         "status_yaw_a1_audit_path": str(yaw_audit_path),
         "imu_report_path": str(imu_report_path),
         "report": report,
+        "coverage_report": coverage_report,
         "status_yaw_a1_audit": yaw_audit,
         "imu_report": imu_report,
     }

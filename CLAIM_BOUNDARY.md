@@ -64,6 +64,7 @@ Allowed N4H1 diagnostic statement:
 
 - N4H1 may audit the final_v23 runtime `.gnss` input source chain and yaw generation chain.
 - N4H1P may reconstruct process_data-compatible `.gnss` and `.imu` runtime inputs for baseline/parity testing only.
+- N4H1P2 may report row-retention coverage for process_data-compatible input reconstruction.
 
 ## Diagnostic / Exploratory Only
 
@@ -150,6 +151,7 @@ Do not claim:
 - generated `.gnss` / `.imu` files must not be described as proposed algorithm output.
 - trace yaw mode is diagnostic-only.
 - nominal process_data-compatible generation must not inject artificial outage, outlier, or noise by default.
+- process_data-compatible coverage reports are input-construction diagnostics, not performance evidence.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
@@ -258,6 +260,8 @@ generated `.gnss` / `.imu` files must not be described as proposed algorithm out
 trace yaw mode is diagnostic-only.
 
 nominal process_data-compatible generation must not inject artificial outage, outlier, or noise by default.
+
+process_data-compatible coverage reports are input-construction diagnostics, not performance evidence.
 
 ## Evidence Rule
 

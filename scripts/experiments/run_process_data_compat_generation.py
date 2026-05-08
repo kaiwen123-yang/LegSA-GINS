@@ -50,7 +50,12 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--imu-install-yaw-deg", type=float, default=0.0)
     parser.add_argument("--imu-gnss-time-offset", type=float, default=0.0)
     parser.add_argument("--max-status-rows", type=int, default=None)
-    parser.add_argument("--max-raw-rows", type=int, default=None)
+    parser.add_argument(
+        "--max-raw-rows",
+        type=int,
+        default=None,
+        help="Optional diagnostic raw CSV row limit; omit or pass 0 for unlimited scan.",
+    )
     parser.add_argument("--max-imu-messages", type=int, default=None)
     return parser.parse_args()
 

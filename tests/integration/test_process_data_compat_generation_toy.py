@@ -1,6 +1,7 @@
 """中文说明：runner toy integration 只验证生成合同，不读取真实 BY2。"""
 
 import csv
+import json
 import struct
 import subprocess
 import sys
@@ -42,7 +43,8 @@ def _write_inputs(root, base_time=1772784000.0):
         with (fix / f"{name}-status.csv").open("w", encoding="utf-8", newline="") as handle:
             writer = csv.DictWriter(handle, fieldnames=status_header)
             writer.writeheader()
-            for index in range(3):
+            row_count = 10 if name == "gnss1" else 9
+            for index in range(row_count):
                 stamp = base_time + index * 0.1
                 secs = int(stamp)
                 nsecs = int(round((stamp - secs) * 1.0e9))
@@ -73,8 +75,8 @@ def _write_inputs(root, base_time=1772784000.0):
             fieldnames=["Time", "stamp.secs", "stamp.nsecs", "protocol", "data", "name", "seq", "info"],
         )
         writer.writeheader()
-        for index in range(3):
-            stamp = base_time + index * 0.1
+        for index, offset in enumerate([0.0, 0.9]):
+            stamp = base_time + offset
             secs = int(stamp)
             nsecs = int(round((stamp - secs) * 1.0e9))
             writer.writerow(
@@ -135,7 +137,14 @@ def test_runner_generates_process_data_compat_outputs(tmp_path):
         "BY2_PROCESS_DATA_COMPAT.gnss",
         "BY2_PROCESS_DATA_COMPAT.imu",
         "PROCESS_DATA_COMPAT_REPORT.json",
+        "PROCESS_DATA_COVERAGE_REPORT.json",
         "STATUS_YAW_A1_AUDIT.json",
         "IMU_PROCESS_DATA_COMPAT_REPORT.json",
     ]:
         assert (output / name).exists()
+    report = json.loads((output / "PROCESS_DATA_COMPAT_REPORT.json").read_text())
+    assert report["status_base_row_count"] == 10
+    assert report["pvt_velocity_row_count"] == 2
+    assert report["yaw_row_count"] == 9
+    assert report["gnss_output_row_count"] == 10
+    assert report["coverage_status"] == "passed"

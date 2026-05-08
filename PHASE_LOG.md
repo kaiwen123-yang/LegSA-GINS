@@ -15,7 +15,7 @@
 | N4F BY2 filter-core diagnostic trial | stage/N4F-by2-filter-core-trial | done | yes | no | BY2 diagnostic trial report | diagnostic runtime/evaluation only; no formal performance claim |
 | N4G BY2 time/IMU/heading diagnostics | stage/N4F-by2-filter-core-trial | done | yes | no | event-normalized candidate reports | diagnostic only; no clock-sync/heading/performance claim |
 | N4H0 receiver-native measurement floor sanity | stage/N4H0-measurement-floor-sanity | done | no | no | measurement floor sanity reports | direct receiver status vs trace evaluation-only; no proposed solver performance claim |
-| N4H1 final_v23 input source-chain, yaw audit, and process_data-compatible input reconstruction | stage/N4H1-final-v23-input-yaw-audit | done | no | no | final_v23 source-chain + N4H1P input reconstruction reports | N4H1P done; diagnostic input/yaw audit and runtime input reconstruction only; no proposed solver implementation |
+| N4H1 final_v23 input source-chain, yaw audit, and process_data-compatible input reconstruction | stage/N4H1-final-v23-input-yaw-audit | done | no | no | final_v23 source-chain + N4H1P/N4H1P2 input reconstruction reports | N4H1P2 row-retention coverage done; diagnostic input/yaw audit and runtime input reconstruction only; no proposed solver implementation |
 | N4H full KF-GINS-style EKF reconstruction | stage/N4H-full-kfgins-style-ekf | not_started | yes | no | EKF reconstruction | N4H full KF-GINS-style EKF reconstruction not_started |
 | N5 raw Doppler factor | stage/N5-raw-doppler-factor | not_started | yes | no | Doppler factor | sign convention required |
 | N6 source-aware weighting / Go2 weak priors | stage/N6-source-aware-weighting | not_started | yes | no | weighting module | no trace tuning |

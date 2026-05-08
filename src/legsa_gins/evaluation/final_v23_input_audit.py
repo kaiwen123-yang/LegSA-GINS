@@ -332,6 +332,8 @@ def make_final_v23_input_source_report(
         "process_data_compat_summary": {
             "gnss_row_count": (reconstructed_process_data_compat_report or {}).get("gnss_row_count"),
             "imu_row_count": (reconstructed_process_data_compat_report or {}).get("imu_row_count"),
+            "coverage_status": (reconstructed_process_data_compat_report or {}).get("coverage_status"),
+            "coverage_warning": (reconstructed_process_data_compat_report or {}).get("coverage_warning"),
             "position_source": (reconstructed_process_data_compat_report or {}).get("position_source"),
             "velocity_source": (reconstructed_process_data_compat_report or {}).get("velocity_source"),
             "velocity_std_policy": (reconstructed_process_data_compat_report or {}).get(
@@ -342,6 +344,17 @@ def make_final_v23_input_source_report(
                 "trace_solver_input", False
             ),
         },
+        "reconstructed_process_data_compat_coverage_status": (
+            reconstructed_process_data_compat_report or {}
+        ).get("coverage_status"),
+        "coverage_suspicious": bool(
+            reconstructed_process_data_compat_report
+            and reconstructed_process_data_compat_report.get("coverage_status") != "passed"
+        ),
+        "process_data_compat_row_parity_claim": bool(
+            reconstructed_process_data_compat_report
+            and reconstructed_process_data_compat_report.get("coverage_status") == "passed"
+        ),
         "trace_solver_input": False,
         "trace_evaluation_only": True,
         "final_v23_is_proposed": False,

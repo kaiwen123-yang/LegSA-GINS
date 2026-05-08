@@ -66,7 +66,7 @@ N4G audits BY2 time-domain usage, Unitree sportmodestate IMU semantics, event-no
 
 N4H0 evaluates direct BY2 receiver-native GNSS status against trace reference to separate input/evaluator issues from filter-core issues. N4H0 does not implement proposed solver logic or make proposed solver performance claims.
 
-N4H1 audits the two-layer final_v23 input source chain: runtime 15-column `.gnss` input and upstream generation fields. N4H1P reconstructs process_data-compatible `.gnss` and `.imu` inputs for baseline/parity testing only. N4H1 does not implement proposed solver logic or make performance claims.
+N4H1 audits the two-layer final_v23 input source chain: runtime 15-column `.gnss` input and upstream generation fields. N4H1P/N4H1P2 reconstruct process_data-compatible `.gnss` and `.imu` inputs for baseline/parity testing only, with row-retention coverage reporting. N4H1 does not implement proposed solver logic or make performance claims.
 
 ## Strict Phase-I Non-goals
 
