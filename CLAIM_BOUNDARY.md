@@ -263,6 +263,14 @@ nominal process_data-compatible generation must not inject artificial outage, ou
 
 process_data-compatible coverage reports are input-construction diagnostics, not performance evidence.
 
+N4H2 external KF-GINS replay is baseline replay evidence only.
+
+N4H2 parsed NAV/STD/IMU_ERR outputs must not be used as proposed solver input.
+
+N4H2 trace alignment is evaluation-only and must not be used for replay tuning.
+
+N4H2 position/yaw metrics must not be described as final_v23 parity or proposed-method performance.
+
 ## Evidence Rule
 
 If evidence is missing, write:

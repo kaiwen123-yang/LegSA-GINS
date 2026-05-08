@@ -125,6 +125,15 @@ Match process_data row-retention behavior by keeping `gnss1-status` as the
 `.gnss` main table, treating PVT velocity and status yaw as merge-asof
 auxiliary fields, applying fill, and reporting coverage.
 
+## Stage N4H2: process_data-Compatible External KF-GINS Replay
+
+Goal:
+Use the N4H1P2 real BY2 `.gnss` / `.imu` reconstruction as runtime input for an
+external KF-GINS baseline replay, then parse and evaluate outputs.
+
+No proposed solver implementation. No final_v23 parity claim. No trace as
+solver input. No generated real-data artifacts committed.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:
