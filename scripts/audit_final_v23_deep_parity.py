@@ -17,28 +17,50 @@ import tempfile
 
 REQUIRED_FILES = [
     "src/legsa_gins/source_audit/__init__.py",
+    "src/legsa_gins/source_audit/final_v23_artifact_recovery.py",
     "src/legsa_gins/source_audit/final_v23_deep_source_audit.py",
+    "src/legsa_gins/source_audit/process_data_runtime_audit.py",
+    "src/legsa_gins/source_audit/yaw_update_runtime_audit.py",
     "src/legsa_gins/evaluation/final_v23_input_diff.py",
     "src/legsa_gins/evaluation/kfgins_framework_parity.py",
+    "src/legsa_gins/evaluation/replay_yaw_diagnostics.py",
+    "src/legsa_gins/evaluation/yaw_input_variant_matrix.py",
+    "scripts/experiments/run_final_v23_artifact_recovery.py",
     "scripts/experiments/run_final_v23_deep_parity_audit.py",
+    "scripts/experiments/run_yaw_input_variant_matrix.py",
     "scripts/audit_final_v23_deep_parity.py",
+    "docs/source_audit/final_v23_artifact_recovery.md",
     "docs/source_audit/final_v23_deep_source_map.md",
     "docs/source_audit/process_data_deep_audit.md",
+    "docs/source_audit/process_data_runtime_parameter_audit.md",
     "docs/experiments/final_v23_actual_input_diff.md",
     "docs/experiments/n4h2c_yaw_config_parity_decision.md",
     "docs/experiments/kfgins_framework_parity_matrix.md",
+    "docs/experiments/replay_yaw_diagnostics.md",
+    "docs/experiments/yaw_input_variant_matrix.md",
+    "docs/experiments/yaw_update_runtime_audit.md",
     "docs/codex_prompts/N4H2C_deep_final_v23_parity_audit.md",
+    "tests/unit/test_final_v23_artifact_recovery.py",
     "tests/unit/test_final_v23_input_diff.py",
     "tests/unit/test_kfgins_framework_parity.py",
+    "tests/unit/test_process_data_runtime_audit.py",
+    "tests/unit/test_replay_yaw_diagnostics.py",
+    "tests/unit/test_yaw_input_variant_matrix.py",
+    "tests/unit/test_yaw_update_runtime_audit.py",
     "tests/integration/test_final_v23_deep_parity_toy.py",
     "tests/audit/test_final_v23_deep_parity.py",
 ]
 
 REQUIRED_OUTPUTS = [
     "FINAL_V23_CASE_ROOT_PROBE.json",
+    "FINAL_V23_ARTIFACT_RECOVERY_REPORT.json",
     "FINAL_V23_INPUT_DIFF_REPORT.json",
+    "PROCESS_DATA_RUNTIME_PARAMETER_REPORT.json",
     "PROCESS_DATA_DEEP_AUDIT.json",
     "FINAL_V23_ENGINE_SOURCE_AUDIT.json",
+    "YAW_INPUT_VARIANT_MATRIX_REPORT.json",
+    "YAW_UPDATE_RUNTIME_AUDIT.json",
+    "REPLAY_YAW_DIAGNOSTICS_REPORT.json",
     "KFGINS_CORE_FLOW_AUDIT.json",
     "LEGSA_KFGINS_FRAMEWORK_PARITY_MATRIX.json",
     "N4H2C_DECISION_REPORT.json",
@@ -88,8 +110,24 @@ def _write_toy_source(root: Path) -> None:
                 "# toy process_data.py",
                 "yaw_source_mode = 'status_yaw'",
                 "yaw_std_mode = 'fixed_1p5'",
+                "BASE_TIME = 1772784000.0",
+                "USE_STATUS_YAW = True",
                 "YAW_SIGN = 1",
                 "YAW_INSTALL_OFFSET_DEG = 0",
+                "AUTO_APPLY_BEST_INSTALL = False",
+                "YAW_SOURCE_MODE = 'status'",
+                "YAW_NOISE_STD_DEG = 0.0",
+                "OUTAGE_DURATION_SEC = 0.0",
+                "OUTLIER_RATIO_DEFAULT = 0.0",
+                "OUTLIER_MODE_DEFAULT = 'none'",
+                "STATUS_YAW_STD_MODE_DEFAULT = 'fixed_1p5'",
+                "STATUS_FIXED_YAW_STD_DEG_DEFAULT = 1.5",
+                "YAW_STD_MODE_DEFAULT = 'fixed_1p5'",
+                "IMU_INSTALL_ROLL_DEG_DEFAULT = -1.0",
+                "IMU_INSTALL_PITCH_DEG_DEFAULT = 0.0",
+                "IMU_INSTALL_YAW_DEG_DEFAULT = 0.0",
+                "IMU_GNSS_TIME_OFFSET_SEC_DEFAULT = 0.0",
+                "# process_data.py --generate_both_gnss --yaw_source_mode status --outlier_mode none --yaw_noise_std_deg 0",
                 "def generate_both_gnss(): pass",
                 "final_status_fixed1p5 = True",
                 "antlever = [0, 0, 0]",
@@ -177,6 +215,21 @@ def main() -> int:
         summary_path = artifacts_root / "replay" / "evaluation" / "FINAL_V23_TRACE_EVAL_SUMMARY.json"
         summary_path.parent.mkdir(parents=True, exist_ok=True)
         summary_path.write_text('{"yaw_rmse_deg": 93.0}\n', encoding="utf-8")
+        replay_nav = artifacts_root / "replay" / "standardized" / "FINAL_V23_NAV.csv"
+        replay_nav.parent.mkdir(parents=True, exist_ok=True)
+        replay_nav.write_text(
+            "gps_week,tow,lat_deg,lon_deg,height_m,vn_mps,ve_mps,vd_mps,roll_deg,pitch_deg,yaw_deg,status,source_role\n"
+            + "\n".join(f"0,{i},0,0,0,0,0,0,0,0,10,baseline,baseline" for i in range(20))
+            + "\n",
+            encoding="utf-8",
+        )
+        error_series = artifacts_root / "replay" / "evaluation" / "FINAL_V23_TRACE_ERROR_SERIES.csv"
+        error_series.write_text(
+            "timestamp,reference_timestamp,dt,north_error_m,east_error_m,up_error_m,horizontal_error_m,roll_error_deg,pitch_error_deg,yaw_error_deg\n"
+            + "\n".join(f"{i},{i},0,0,0,0,0,0,0,0" for i in range(20))
+            + "\n",
+            encoding="utf-8",
+        )
         _write_toy_source(source_root)
 
         out = tmp / "out"

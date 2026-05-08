@@ -25,15 +25,18 @@ exist. Required fields are:
 
 Current N4H2C runtime probe:
 
-- actual input exists: false
+- supplied actual case root input exists: false
+- recovered actual candidate input exists: true
 - reconstructed input exists: true
-- input_diff_status: `evidence_missing`
-- position_diff_rmse_m: `null`
-- height_diff_rmse_m: `null`
-- velocity_diff_rmse_mps: `null`
-- yaw_diff_rmse_deg: `null`
-- yaw_diff_mean_deg: `null`
-- yaw_std_diff_mean_deg: `null`
+- recovered candidate group: `EXTERNAL_KFGINS_ROOT:10`
+- matched_count: 303
+- input_diff_status: `yaw_input_matched`
+- position_diff_rmse_m: 0.04087297923984076
+- height_diff_rmse_m: 2.911876689989946e-07
+- velocity_diff_rmse_mps: 0.0
+- yaw_diff_rmse_deg: 1.4706893995962274
+- yaw_diff_mean_deg: -0.011152765078168928
+- yaw_std_diff_mean_deg: 0.0
 
 ## Yaw Diff Analysis
 

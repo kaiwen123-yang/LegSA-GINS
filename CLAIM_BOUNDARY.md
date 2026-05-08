@@ -73,6 +73,10 @@ Allowed N4H2C diagnostic statement:
 - N4H2C must not be described as proposed solver implementation.
 - N4H2C must not use trace as solver input.
 - N4H2C must not formal-select yaw offset without physical or actual-input evidence.
+- N4H2C yaw variant matrix is diagnostic-only.
+- Trace yaw must not become formal solver input.
+- Auto-best install based on trace is diagnostic-only unless supported by physical or actual final_v23 input evidence.
+- Missing actual final_v23 artifacts must be reported as evidence_missing.
 
 ## Diagnostic / Exploratory Only
 
@@ -164,6 +168,10 @@ Do not claim:
 - N4H2C must not be described as proposed solver implementation.
 - N4H2C must not use trace as solver input.
 - N4H2C must not formal-select yaw offset without physical or actual-input evidence.
+- N4H2C yaw variant matrix must remain diagnostic-only.
+- Trace yaw must not become formal solver input.
+- Auto-best install based on trace must remain diagnostic-only unless supported by physical or actual final_v23 input evidence.
+- Missing actual final_v23 artifacts must be reported as evidence_missing.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 

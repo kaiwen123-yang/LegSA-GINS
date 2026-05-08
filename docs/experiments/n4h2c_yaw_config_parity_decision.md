@@ -23,17 +23,22 @@ exist, the runner computes position, height, velocity, yaw, yaw-std, and
 standard-deviation diffs. If either input is missing, the decision is
 `evidence_missing`.
 
-Current N4H2C runtime probe:
+Current N4H2C-2 runtime probe:
 
-- actual input.gnss exists: false
+- supplied `ACTUAL_FINAL_V23_CASE_ROOT`: `evidence_missing`
+- recovered candidate group: `EXTERNAL_KFGINS_ROOT:10`
+- actual candidate input.gnss exists: true
 - reconstructed input.gnss exists: true
-- input_diff_status: `evidence_missing`
-- position_diff_rmse_m: `null`
-- height_diff_rmse_m: `null`
-- velocity_diff_rmse_mps: `null`
-- yaw_diff_rmse_deg: `null`
-- yaw_diff_mean_deg: `null`
-- yaw_std_diff_mean_deg: `null`
+- actual candidate input.gnss lines: 303
+- reconstructed input.gnss lines: 303
+- input_diff_status: `yaw_input_matched`
+- matched_count: 303
+- position_diff_rmse_m: 0.04087297923984076
+- height_diff_rmse_m: 2.911876689989946e-07
+- velocity_diff_rmse_mps: 0.0
+- yaw_diff_rmse_deg: 1.4706893995962274
+- yaw_diff_mean_deg: -0.011152765078168928
+- yaw_std_diff_mean_deg: 0.0
 
 ## process_data / Runtime Source Conclusion
 
@@ -58,6 +63,56 @@ Current N4H2C runtime probe:
   `newImuProcess`, `isToUpdate`, `imuInterpolate`, `imuCompensate`,
   `F/G/Phi/Qd`, `EKFPredict`, `EKFUpdate`, `stateFeedback`
 
+## N4H2C-2 Added Audits
+
+N4H2C-2 adds:
+
+- actual final_v23 artifact recovery
+- process_data runtime-parameter audit
+- yaw input variant matrix
+- runtime yaw update audit
+- replay yaw diagnostics
+
+Runtime artifact recovery found a nominal-none candidate group, so the current
+tracked blocker is no longer "no candidate input at all." The exact historical
+case root supplied to the runner still reports `evidence_missing`, and the
+recovered candidate remains runtime evidence only.
+
+Process_data defaults may include disturbance/noise/outage behavior, so nominal
+replay must be justified by explicit safe flags or equivalent invocation
+evidence.
+
+Trace yaw and auto-best install selected by trace are diagnostic-only. Status
+yaw physical sign/offset still needs actual input, process_data invocation, or
+physical mounting evidence.
+
+N4H2C-2 runtime observations:
+
+- artifact_groups_found: 71
+- actual candidate input recovered: true
+- actual candidate summary recovered: true
+- process_data `BASE_TIME`: 1772784000.0
+- process_data `YAW_SOURCE_MODE`: `status`
+- process_data `USE_STATUS_YAW`: true
+- process_data `YAW_SIGN`: 1.0
+- process_data `YAW_INSTALL_OFFSET_DEG`: 0.0
+- process_data `AUTO_APPLY_BEST_INSTALL`: false
+- process_data `STATUS_YAW_STD_MODE_DEFAULT`: `fixed_1p5`
+- process_data `OUTLIER_MODE_DEFAULT`: `legacy15`
+- process_data `YAW_NOISE_STD_DEG`: 1.5
+- explicit nominal safe flags found: false
+- best status variant: `status_A1_sign-1_offset+90_yawstd_fixed1p5_noise0`
+- best status yaw_vs_trace_rmse_deg: 4.9973634253532975
+- best trace diagnostic yaw_vs_trace_rmse_deg: 92.93107029020553
+- yaw_measurement_loaded: true
+- yaw_residual_formula: true
+- yaw_wrap_formula: true
+- scheme_C_gate_used: true
+- replay yaw diagnostic classification: `likely_input_yaw_generation_issue`
+
+Full KF-GINS framework reconstruction is needed later, but yaw input/runtime
+parity comes first.
+
 ## Decision Rules
 
 - If actual input is missing:
@@ -74,11 +129,11 @@ Current N4H2C runtime probe:
 
 Current recommended_next_stage:
 
-`N4H2C_actual_input_artifact_recovery_or_run_script_audit`
+`N4H2C_runtime_yaw_update_config_audit`
 
 Current blocking_issues:
 
-- `actual_final_v23_input_missing`
+- none
 
 ## Claim Boundary
 
