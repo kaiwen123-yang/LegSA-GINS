@@ -14,6 +14,9 @@ Check:
 8. 3-sigma consistency figures do not show obvious missing-field or scale problems.
 9. Observation yaw and reported standard deviations do not have strange jumps.
 10. Summary panel values match the JSON metrics snapshot.
+11. Opening bumps are marked as startup/convergence transients, not cropped away.
+12. Yaw STD figures are interpreted as observation/state uncertainty, not automatic proof of injected yaw noise.
+13. Process-data provenance report identifies whether actual input is closer to no-noise or noisy variants.
+14. final mainline degradation/stress batch evidence is not reused as clean nominal evidence.
 
 This checklist is visual evidence only. It does not modify solver output, does not relax gates, and does not make a formal performance claim.
-

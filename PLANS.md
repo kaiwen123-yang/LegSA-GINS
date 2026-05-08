@@ -219,6 +219,19 @@ INS, single-antenna, or multi-line comparison figures; does not modify solver
 output; does not commit generated figures; and does not make a formal
 performance claim.
 
+## Stage N4H2F: Startup transient and yaw/noise provenance audit
+
+Goal:
+Audit the visible startup transient, yaw observation-STD source, and
+process_data yaw-noise provenance before PR #15 is considered ready for human
+visual review and any N4H3 transition.
+
+N4H2F distinguishes fixed yaw_std observation columns from actual yaw-value
+noise injection, treats run_final_mainline degradation batches as provenance
+evidence rather than clean nominal proof, and records whether final_v23 nominal
+evidence needs a yaw-noise caveat. It does not modify solver output, crop
+startup epochs, relax the yaw gate, or make a formal performance claim.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:
