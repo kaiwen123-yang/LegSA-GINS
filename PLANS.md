@@ -183,6 +183,18 @@ N4R3 does not commit artifact files, does not modify solver output, does not use
 trace as solver input, and does not turn near-gate yaw evidence into a formal
 pass.
 
+## Stage N4H2C-runtime: Runtime Yaw Update / Config / Source-Version Parity Audit
+
+Goal:
+Audit why actual dual_final_v23 yaw passes under the confirmed direct evaluator
+profile while N4H2 replay yaw fails under the same formal evaluator.
+
+N4H2C-runtime compares actual and replay input/NAV yaw paths, recovers runtime
+config evidence when available, audits current KF-GINS yaw update logic
+read-only, and searches yaw update source history for branch/version mismatch
+evidence. It is diagnostic only: no solver output modification, no trace solver
+input, no yaw-gate relaxation, and no formal performance claim.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:
