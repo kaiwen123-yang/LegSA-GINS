@@ -35,8 +35,12 @@ from legsa_gins.evaluation.final_v23_input_audit import (  # noqa: E402
 from legsa_gins.evaluation.final_v23_yaw_chain_audit import (  # noqa: E402
     compare_final_v23_yaw_column,
     compute_a1_dual_diff_yaw,
+    summarize_process_data_compat_yaw_audit,
 )
 from legsa_gins.experiments.by2_filter_trial import write_toy_standardized_inputs  # noqa: E402
+from legsa_gins.input_generation.process_data_compat import (  # noqa: E402
+    generate_process_data_compat_inputs,
+)
 
 
 PROCESS_KEYWORDS = [
@@ -69,7 +73,7 @@ def _standardize_inputs(args: argparse.Namespace, inputs_dir: Path) -> None:
         output_dir=inputs_dir,
         max_status_rows=args.max_status_rows,
         max_raw_rows=args.max_raw_rows,
-        max_body_messages=None,
+        max_body_messages=args.max_imu_messages,
     )
 
 
@@ -251,6 +255,9 @@ def _make_review(path: Path, input_report: dict[str, Any], yaw_report: dict[str,
         "- final_v23 reads a 15-column `.gnss` file through gnsspath.",
         "- runtime columns: time, lat, lon, height, std_n, std_e, std_d, vn, ve, vd, std_vn, std_ve, std_vd, yaw, yaw_std.",
         f"- final_v23_gnss_file_status: {input_report.get('final_v23_gnss_file_status')}",
+        f"- historical_final_v23_gnss_file_status: {input_report.get('historical_final_v23_gnss_file_status')}",
+        f"- reconstructed_process_data_compat_available: {str(input_report.get('reconstructed_process_data_compat_available')).lower()}",
+        f"- reconstructed_process_data_compat_gnss_status: {input_report.get('reconstructed_process_data_compat_gnss_status')}",
         "",
         "## upstream generation fields",
         "- position: gnss1-status pos_lat / pos_lon / pos_height.",
@@ -312,9 +319,34 @@ def run_audit(args: argparse.Namespace) -> dict[str, Any]:
     gnss2_rows = load_status_rows(inputs_dir / "BY2_GNSS2_STATUS_STANDARD.csv")
     final_rows: list[dict[str, Any]] = []
     final_status = "evidence_missing"
+    reconstructed_report: dict[str, Any] | None = None
+    reconstructed_yaw_summary: dict[str, Any] | None = None
+    using_reconstructed_runtime_input = False
     if final_v23_gnss is not None and final_v23_gnss.exists():
         final_rows = parse_final_v23_gnss_file(final_v23_gnss)
         final_status = "parsed_15_column_gnss"
+    elif not args.toy:
+        reconstruction = generate_process_data_compat_inputs(
+            args.fix_root,
+            args.body_imu,
+            output_dir / "process_data_compat_reconstruction",
+            base_time=args.base_time,
+            yaw_source_mode="status",
+            yaw_std_mode="fixed_1p5",
+            max_status_rows=args.max_status_rows,
+            max_raw_rows=args.max_raw_rows,
+            max_imu_messages=args.max_imu_messages,
+        )
+        reconstructed_report = reconstruction["report"]
+        reconstructed_yaw_summary = summarize_process_data_compat_yaw_audit(
+            reconstruction["status_yaw_a1_audit"]
+        )
+        final_rows = parse_final_v23_gnss_file(reconstruction["gnss_path"])
+        using_reconstructed_runtime_input = True
+
+    if using_reconstructed_runtime_input:
+        gnss1_rows = load_status_rows(Path(args.fix_root) / "gnss1-status.csv")
+        gnss2_rows = load_status_rows(Path(args.fix_root) / "gnss2-status.csv")
 
     if final_rows:
         position_report = audit_position_source(final_rows, gnss1_rows)
@@ -344,11 +376,14 @@ def run_audit(args: argparse.Namespace) -> dict[str, Any]:
         velocity_report=velocity_report,
         yaw_report=yaw_report,
         process_data_source_map=source_map,
+        reconstructed_process_data_compat_report=reconstructed_report,
     )
     input_report["final_v23_gnss_row_count"] = len(final_rows)
     input_report["raw_gnss_observation_input_claim"] = False
     write_json(output_dir / "FINAL_V23_INPUT_SOURCE_REPORT.json", input_report)
     yaw_report_for_write = dict(yaw_report)
+    if reconstructed_yaw_summary is not None:
+        yaw_report_for_write["process_data_compat_yaw_summary"] = reconstructed_yaw_summary
     yaw_report_for_write.pop("candidate_rows", None)
     write_json(output_dir / "FINAL_V23_YAW_CHAIN_REPORT.json", yaw_report_for_write)
     _make_review(output_dir / "final_v23_input_source_chain_review.md", input_report, yaw_report_for_write, source_map)
@@ -368,6 +403,8 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--max-status-rows", type=int, default=None)
     parser.add_argument("--max-raw-rows", type=int, default=None)
+    parser.add_argument("--max-imu-messages", type=int, default=None)
+    parser.add_argument("--base-time", type=float, default=1772784000.0)
     parser.add_argument("--process-data-root", default="/home/kaiwen/KF-GINS")
     parser.add_argument("--toy", action="store_true", help="Use toy standardized inputs and toy process_data evidence.")
     args = parser.parse_args()

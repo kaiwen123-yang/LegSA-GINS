@@ -115,6 +115,11 @@ No proposed solver implementation.
 Goal:
 Audit the two-layer final_v23 input source chain: runtime 15-column .gnss input and upstream generation fields, including gnss1-status position, gnss1-raw UBX-NAV-PVT velocity, and gnss1/gnss2-status A1_dual_diff yaw.
 
+N4H1P:
+Add a process_data-compatible input generator that reconstructs final_v23-style
+`.gnss` and `.imu` runtime inputs from BY2 upstream fields for baseline/parity
+testing only.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

@@ -63,6 +63,7 @@ Allowed N4H0 diagnostic statement:
 Allowed N4H1 diagnostic statement:
 
 - N4H1 may audit the final_v23 runtime `.gnss` input source chain and yaw generation chain.
+- N4H1P may reconstruct process_data-compatible `.gnss` and `.imu` runtime inputs for baseline/parity testing only.
 
 ## Diagnostic / Exploratory Only
 
@@ -145,6 +146,10 @@ Do not claim:
 - final_v23 runtime .gnss input must not be confused with raw GNSS observations.
 - final_v23 input audit must not be described as proposed solver implementation.
 - trace remains evaluation-only.
+- process_data-compatible input generation is input reconstruction only.
+- generated `.gnss` / `.imu` files must not be described as proposed algorithm output.
+- trace yaw mode is diagnostic-only.
+- nominal process_data-compatible generation must not inject artificial outage, outlier, or noise by default.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
@@ -245,6 +250,14 @@ final_v23 runtime .gnss input must not be confused with raw GNSS observations.
 final_v23 input audit must not be described as proposed solver implementation.
 
 trace remains evaluation-only.
+
+process_data-compatible input generation is input reconstruction only.
+
+generated `.gnss` / `.imu` files must not be described as proposed algorithm output.
+
+trace yaw mode is diagnostic-only.
+
+nominal process_data-compatible generation must not inject artificial outage, outlier, or noise by default.
 
 ## Evidence Rule
 

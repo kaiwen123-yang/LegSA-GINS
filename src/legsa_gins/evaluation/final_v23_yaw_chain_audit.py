@@ -56,6 +56,10 @@ def _rel_e(row: dict[str, Any]) -> float | None:
 
 
 def _time(row: dict[str, Any]) -> float | None:
+    header_secs = _row_value(row, ["header.stamp.secs"])
+    if header_secs is not None:
+        header_nsecs = _row_value(row, ["header.stamp.nsecs"]) or 0.0
+        return float(header_secs) + float(header_nsecs) * 1.0e-9
     return _row_value(row, ["time", "algo_time_sec", "aligned_time", "tow", "time_unix", "timestamp"])
 
 
@@ -198,6 +202,28 @@ def compare_final_v23_yaw_column(
         "trace_solver_input": False,
         "final_v23_is_proposed": False,
         "diagnostic_only": True,
+    }
+
+
+def summarize_process_data_compat_yaw_audit(status_yaw_audit: dict[str, Any]) -> dict[str, Any]:
+    """Summarize N4H1P reconstructed status-yaw evidence without using trace.
+
+    中文说明：这个摘要只描述 A1_dual_diff status yaw 重建证据，不能把 trace
+    写成 solver input，也不能作为 performance claim。
+    """
+
+    return {
+        "phase": "N4H1P",
+        "yaw_source": status_yaw_audit.get("yaw_source", "A1_dual_diff_status"),
+        "yaw_formula": status_yaw_audit.get("yaw_formula", "-atan2(rel_e,rel_n)"),
+        "yaw_ned_formula": status_yaw_audit.get("yaw_ned_formula", "90_minus_yaw_body"),
+        "yaw_row_count": status_yaw_audit.get("yaw_row_count"),
+        "yaw_ned_row_count": status_yaw_audit.get("yaw_ned_row_count"),
+        "trace_solver_input": False,
+        "trace_yaw_for_solver": False,
+        "formal_selection_allowed": True,
+        "diagnostic_trace_yaw_only": True,
+        "numerical_performance_claim": False,
     }
 
 
