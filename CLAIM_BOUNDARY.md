@@ -366,6 +366,18 @@ N4H2E yaw near-boundary evidence must be reported honestly.
 
 Generated figures under the visual output role must not be committed.
 
+yaw_std=1.5 is measurement standard deviation unless actual yaw-noise injection is proven.
+
+process_data yaw_noise injection must be distinguished from yaw_std.
+
+run_final_mainline degradation batch must not be treated as clean nominal evidence.
+
+If actual input matches an injected-noise variant, final_v23 nominal claims must carry a provenance caveat.
+
+Roll/pitch relaxed pass is not strict pass.
+
+Generated figures and reports under the visual output role must not be committed.
+
 ## Evidence Rule
 
 If evidence is missing, write:

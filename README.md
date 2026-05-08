@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N4H2D replay reference mapping and stale summary audit.
+N4H2E dual_final_v23-only visual validation.
 
 Current working phase:
 
-N4H2E dual_final_v23-only visual validation.
+N4H2F startup transient, yaw-STD source, and process_data yaw-noise provenance audit.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -105,6 +105,11 @@ N4H2 replay parity result. It plots trajectory, position errors, velocity,
 attitude, consistency, observation quality, and summary panels for manual review.
 N4H2E does not modify solver output, does not commit generated figures, and does
 not make formal paper performance claims.
+
+N4H2F audits the startup visual transient, distinguishes observation yaw STD
+from yaw-noise injection, and checks process_data / final mainline provenance
+for the dual_final_v23 replay evidence. It does not crop epochs, relax gates,
+modify solver output, or turn visual diagnostics into formal performance claims.
 
 ## Strict Phase-I Non-goals
 

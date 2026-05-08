@@ -54,7 +54,7 @@ def _run_rg(source_root: Path, pattern: str) -> list[str]:
 
 
 def _git_grep(source_root: Path, pattern: str) -> list[str]:
-    completed = _run_git(source_root, ["grep", "-n", pattern])
+    completed = _run_git(source_root, ["grep", "-n", "-E", pattern])
     if completed.returncode not in {0, 1}:
         return []
     return [line for line in completed.stdout.splitlines() if line.strip()]
@@ -233,7 +233,8 @@ def search_yaw_update_history(source_root: str | Path) -> dict[str, Any]:
         [
             "grep",
             "-n",
-            r"gnssdata.yaw\|yaw_std\|scheme_C\|heading_to_math\|90.*yaw\|yaw.*90",
+            "-E",
+            r"gnssdata\.yaw|yaw_std|scheme_C|heading_to_math|90.*yaw|yaw.*90",
         ],
     )
     path_commits = _parse_commit_lines(path_log.stdout)

@@ -12,6 +12,7 @@ import json
 import shutil
 from pathlib import Path
 import sys
+import tempfile
 from typing import Any
 
 
@@ -47,6 +48,27 @@ from legsa_gins.visualization.visual_sanity_checks import (  # noqa: E402
     build_visual_sanity_report,
     write_visual_sanity_report,
 )
+from legsa_gins.visualization.startup_transient_audit import (  # noqa: E402
+    analyze_startup_transient,
+    update_visual_case_review_with_audits,
+    write_startup_transient_report,
+)
+from legsa_gins.visualization.yaw_std_source_audit import (  # noqa: E402
+    analyze_yaw_std_source,
+    write_yaw_std_source_report,
+)
+from legsa_gins.evaluation.actual_input_yaw_variant_match import (  # noqa: E402
+    compare_actual_input_to_variants,
+    write_actual_input_yaw_variant_match_report,
+)
+from legsa_gins.source_audit.process_data_noise_provenance import (  # noqa: E402
+    audit_process_data_script,
+    audit_run_final_mainline,
+    generate_yaw_variant_inputs,
+    make_process_data_noise_provenance_report,
+    write_json_report,
+)
+from legsa_gins.evaluation.replay_reference_mapping_audit import locate_n4h2_replay_outputs  # noqa: E402
 
 
 EXPECTED_N4H2D = {
@@ -255,6 +277,36 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "numerical_performance_claim": False,
         "formal_paper_performance_claim": False,
     }
+    if args.include_n4h2f_audits:
+        review_dir = output_dir / "09_case_review"
+        startup_report = analyze_startup_transient(
+            evaluation_dir / "FRESH_REPLAY_ERROR_SERIES.csv",
+            evaluation_dir / "FRESH_REPLAY_SUMMARY.json",
+        )
+        write_startup_transient_report(review_dir / "STARTUP_TRANSIENT_AUDIT_REPORT.json", startup_report)
+        yaw_std_report = analyze_yaw_std_source(dual_root / "input.gnss", dual_root / "KF_GINS_STD.txt")
+        write_yaw_std_source_report(review_dir / "YAW_STD_SOURCE_AUDIT_REPORT.json", yaw_std_report)
+        external = Path(args.external_source_root)
+        process_audit = audit_process_data_script(external / "bin" / "process_data.py")
+        run_audit = audit_run_final_mainline(external / "scripts" / "run_final_mainline.py")
+        variant_output = Path(tempfile.gettempdir()) / "legsa_n4h2f_yaw_variants"
+        replay_locations = locate_n4h2_replay_outputs(n4h2_root)
+        fallback_input = (replay_locations.get("located_files") or {}).get("input_gnss")
+        generation = generate_yaw_variant_inputs(
+            variant_output,
+            process_data_path=external / "bin" / "process_data.py",
+            fallback_input_gnss=fallback_input,
+        )
+        match = compare_actual_input_to_variants(dual_root / "input.gnss", generation.get("variant_inputs") or {})
+        provenance = make_process_data_noise_provenance_report(process_audit, run_audit, generation, match)
+        write_json_report(review_dir / "RUN_FINAL_MAINLINE_PROVENANCE_REPORT.json", run_audit)
+        write_actual_input_yaw_variant_match_report(review_dir / "ACTUAL_INPUT_YAW_VARIANT_MATCH_REPORT.json", match)
+        write_json_report(review_dir / "PROCESS_DATA_NOISE_PROVENANCE_REPORT.json", provenance)
+        update_visual_case_review_with_audits(review_dir)
+        validation_report["startup_transient_audit"] = startup_report
+        validation_report["yaw_std_source_audit"] = yaw_std_report
+        validation_report["process_data_noise_provenance"] = provenance
+        validation_report["actual_input_yaw_variant_match"] = match
     _write_json(output_dir / "VISUAL_VALIDATION_REPORT.json", validation_report)
     return validation_report
 
@@ -266,6 +318,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--output-dir", default=str(_default_visual_output_dir()))
     parser.add_argument("--case-name", default="nominal_none")
     parser.add_argument("--line-name", default="dual_final_v23_replay")
+    parser.add_argument("--external-source-root", default=str(Path.home() / "KF-GINS"))
+    parser.add_argument("--include-n4h2f-audits", action="store_true")
     return parser.parse_args(argv)
 
 
