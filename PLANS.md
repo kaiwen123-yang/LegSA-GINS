@@ -427,6 +427,18 @@ residual/gain over-tightness before any visual validation or performance claim.
 
 R3B diagnostics are not performance results and do not add proposed factors.
 
+## Stage N4H4R3C: Metric namespace and parity-vs-absolute evaluation split
+
+Goal:
+Split source-backed port metrics into `port_vs_final_v23_nav_parity`,
+`port_vs_trace_absolute`, and `final_v23_vs_trace_absolute` before any visual
+validation decision.
+
+R3C corrects the R3B external-closeness interpretation by preventing
+port-vs-final_v23 parity metrics from being compared directly with absolute
+trace/reference metrics. R3C does not modify solver logic, tune, delete epochs,
+perform output-only correction, add factors, or make a paper performance claim.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

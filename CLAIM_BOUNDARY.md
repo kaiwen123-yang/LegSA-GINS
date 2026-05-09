@@ -145,6 +145,16 @@ Allowed N4H4R1 source-backed port-core statement:
 - The old `cpp/legsa_v23_core` remains a diagnostic attempt.
 - No factor claims until port parity.
 
+Allowed N4H4R3C metric namespace statement:
+
+- N4H4R3C may split source-backed port metrics into parity and absolute
+  namespaces for decision safety.
+- Port-vs-final_v23 parity metrics are not absolute performance metrics.
+- Absolute trace/reference evaluation must be separated from parity-to-baseline
+  evaluation.
+- Metric gate pass alone is insufficient without namespace clarity.
+- N4H4R3C reports are engineering backbone diagnostics only.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -277,6 +287,12 @@ Do not claim:
 - N4H4R1 toy run as numerical performance evidence.
 - N4H4R1 source-backed port-core as proposed novelty.
 - N4H4R1 enabling raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting, or FGO.
+- Port-vs-final_v23 parity metrics as absolute performance metrics.
+- Metric gate pass as a paper performance claim.
+- Direct comparison of parity-to-baseline metrics with absolute trace metrics.
+- N4H4R3C as outperforming final_v23.
+- N4H4R3C as a proposed factor claim.
+- N4H4R3C output-only correction, tuning, or epoch deletion.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
