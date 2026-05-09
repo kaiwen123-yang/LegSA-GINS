@@ -10,6 +10,7 @@
 #include "legsa_v23_core/writers/run_manifest_writer.hpp"
 #include "legsa_v23_core/writers/std_writer.hpp"
 
+#include <array>
 #include <algorithm>
 #include <cmath>
 #include <filesystem>
@@ -175,6 +176,42 @@ void writeFirstUpdatesCsv(const std::string& path, const std::vector<DiagnosticU
   }
 }
 
+// 中文说明：ALL_UPDATES 是 D4 全量更新轨迹；外部 clean NAV 只能用于离线诊断，不能回灌求解器。
+void writeAllUpdatesCsv(const std::string& path, const std::vector<DiagnosticUpdateRecord>& records) {
+  std::ofstream output(path);
+  if (!output) {
+    throw std::runtime_error("failed to open ALL_UPDATES output: " + path);
+  }
+  output << "update_index,gnss_time,imu_pre_time,imu_cur_time,isToUpdate_res,"
+         << "position_residual_n,position_residual_e,position_residual_d,position_residual_norm,"
+         << "velocity_residual_n,velocity_residual_e,velocity_residual_d,velocity_residual_norm,"
+         << "yaw_obs_deg,yaw_pred_deg,yaw_residual_deg,yaw_scheme_mode,yaw_effective_std_deg,"
+         << "H_pos_phi_norm,H_yaw_phi_value_or_norm,R_pos_diag_n,R_pos_diag_e,R_pos_diag_d,"
+         << "R_vel_diag_n,R_vel_diag_e,R_vel_diag_d,R_yaw,K_norm_pos,K_norm_vel,K_norm_yaw,"
+         << "dx_norm_before_update,dx_norm_after_update,dx_pos_norm,dx_vel_norm,dx_phi_norm_deg,"
+         << "cov_trace_before,cov_trace_after,cov_min_diag_before,cov_min_diag_after,"
+         << "position_update_applied,velocity_update_applied,yaw_update_applied,state_feedback_applied\n";
+  for (const auto& record : records) {
+    output << record.update_index << "," << std::setprecision(16) << record.gnss_time << "," << record.imu_pre_time
+           << "," << record.imu_cur_time << "," << record.is_to_update_res << "," << record.position_residual[0]
+           << "," << record.position_residual[1] << "," << record.position_residual[2] << ","
+           << record.position_residual_norm << "," << record.velocity_residual[0] << ","
+           << record.velocity_residual[1] << "," << record.velocity_residual[2] << ","
+           << record.velocity_residual_norm << "," << record.yaw_obs_deg << "," << record.yaw_pred_deg << ","
+           << record.yaw_residual_deg << "," << record.yaw_scheme_mode << "," << record.yaw_effective_std_deg
+           << "," << record.h_pos_phi_norm << "," << record.h_yaw_phi_value_or_norm << ","
+           << record.r_pos_diag[0] << "," << record.r_pos_diag[1] << "," << record.r_pos_diag[2] << ","
+           << record.r_vel_diag[0] << "," << record.r_vel_diag[1] << "," << record.r_vel_diag[2] << ","
+           << record.r_yaw << "," << record.k_norm_pos << "," << record.k_norm_vel << "," << record.k_norm_yaw
+           << "," << record.dx_norm_before_update << "," << record.dx_norm_after_update << ","
+           << record.dx_pos_norm << "," << record.dx_vel_norm << "," << record.dx_phi_norm_deg << ","
+           << record.cov_trace_before << "," << record.cov_trace_after << "," << record.cov_min_diag_before
+           << "," << record.cov_min_diag_after << "," << boolText(record.position_update_applied) << ","
+           << boolText(record.velocity_update_applied) << "," << boolText(record.yaw_update_applied) << ","
+           << boolText(record.state_feedback_applied) << "\n";
+  }
+}
+
 // 中文说明：写首批传播诊断；姿态输出为 deg，便于和 reference/EVAL_NAV 对照。
 void writeFirstPropagationsCsv(const std::string& path, const std::vector<DiagnosticPropagationRecord>& records) {
   std::ofstream output(path);
@@ -202,6 +239,12 @@ void writeStateTraceHeader(std::ofstream& output) {
          << "propagation_count,measurement_update_count,position_update_count,velocity_update_count,yaw_update_count\n";
 }
 
+// 中文说明：D4 全量/稀疏状态轨迹字段贴合外部 trace parity，不进入 solver 输入。
+void writeAllStateTraceHeader(std::ofstream& output) {
+  output << "time,pos_lat_deg,pos_lon_deg,height_m,vel_n,vel_e,vel_d,roll_deg,pitch_deg,yaw_deg,cov_trace,"
+         << "cov_min_diag,update_count,yaw_reject_count\n";
+}
+
 void writeStateTraceRow(std::ofstream& output, double time, const NavState& nav, const FilterState& filter,
                         const GINSOptions& options) {
   double cov_trace = 0.0;
@@ -217,6 +260,107 @@ void writeStateTraceRow(std::ofstream& output, double time, const NavState& nav,
          << options.velocity_update_count << "," << options.yaw_update_count << "\n";
 }
 
+void writeAllStateTraceRow(std::ofstream& output, double time, const NavState& nav, const FilterState& filter,
+                           const GINSOptions& options) {
+  double cov_trace = 0.0;
+  double cov_min_diag = matrix21At(filter.covariance, 0, 0);
+  for (std::size_t i = 0; i < kStateSize; ++i) {
+    const double value = matrix21At(filter.covariance, i, i);
+    cov_trace += value;
+    cov_min_diag = std::min(cov_min_diag, value);
+  }
+  output << std::setprecision(16) << time << "," << nav.pos_blh_rad_m[0] * kRadToDeg << ","
+         << nav.pos_blh_rad_m[1] * kRadToDeg << "," << nav.pos_blh_rad_m[2] << "," << nav.vel_ned_mps[0]
+         << "," << nav.vel_ned_mps[1] << "," << nav.vel_ned_mps[2] << ","
+         << nav.euler_rpy_rad[0] * kRadToDeg << "," << nav.euler_rpy_rad[1] * kRadToDeg << ","
+         << nav.euler_rpy_rad[2] * kRadToDeg << "," << cov_trace << "," << cov_min_diag << ","
+         << options.measurement_update_count << "," << options.yaw_reject_count << "\n";
+}
+
+// 中文说明：FIRST_DIVERGENCE_MARKERS 只给诊断定位初次异常时间，不能作为调参输入。
+void writeFirstDivergenceMarkers(const std::string& path, const std::vector<DiagnosticUpdateRecord>& updates,
+                                 const std::vector<DiagnosticPropagationRecord>& propagations) {
+  double first_update_time = updates.empty() ? 0.0 : updates.front().gnss_time;
+  double first_yaw_reject_time = 0.0;
+  double first_cov_warning_time = 0.0;
+  double first_attitude_large_time = 0.0;
+  double first_position_large_time = 0.0;
+  double first_velocity_large_time = 0.0;
+  for (const auto& update : updates) {
+    if (first_yaw_reject_time == 0.0 && update.yaw_scheme_mode == "REJECT") {
+      first_yaw_reject_time = update.gnss_time;
+    }
+    if (first_cov_warning_time == 0.0 && update.cov_min_diag_after < 0.0) {
+      first_cov_warning_time = update.gnss_time;
+    }
+  }
+  for (const auto& propagation : propagations) {
+    const double roll = std::abs(propagation.nav_state.euler_rpy_rad[0] * kRadToDeg);
+    const double pitch = std::abs(propagation.nav_state.euler_rpy_rad[1] * kRadToDeg);
+    const double velocity_norm = norm3(propagation.nav_state.vel_ned_mps);
+    if (first_attitude_large_time == 0.0 && std::max(roll, pitch) > 5.0) {
+      first_attitude_large_time = propagation.time_cur;
+    }
+    if (first_position_large_time == 0.0 && std::abs(propagation.nav_state.pos_blh_rad_m[2]) > 1000.0) {
+      first_position_large_time = propagation.time_cur;
+    }
+    if (first_velocity_large_time == 0.0 && velocity_norm > 20.0) {
+      first_velocity_large_time = propagation.time_cur;
+    }
+  }
+  std::ofstream output(path);
+  if (!output) {
+    throw std::runtime_error("failed to open FIRST_DIVERGENCE_MARKERS output: " + path);
+  }
+  output << "{\n";
+  output << "  \"first_update_time\": " << std::setprecision(16) << first_update_time << ",\n";
+  output << "  \"first_yaw_reject_time\": " << first_yaw_reject_time << ",\n";
+  output << "  \"first_cov_warning_time\": " << first_cov_warning_time << ",\n";
+  output << "  \"first_attitude_large_time\": " << first_attitude_large_time << ",\n";
+  output << "  \"first_position_large_time\": " << first_position_large_time << ",\n";
+  output << "  \"first_velocity_large_time\": " << first_velocity_large_time << ",\n";
+  output << "  \"trace_solver_input\": false,\n";
+  output << "  \"numerical_performance_claim\": false\n";
+  output << "}\n";
+}
+
+// 中文说明：runtime loop trace 用于核对 GNSS 行是否被看到/应用；不会读取 external trace 做求解器输入。
+void writeRuntimeLoopParityTrace(const std::string& path, const GINSOptions& options,
+                                 const std::vector<IMUData>& imu_samples, const std::vector<GNSSData>& gnss_samples,
+                                 const std::vector<DiagnosticUpdateRecord>& updates) {
+  std::array<int, 4> res_counts{0, 0, 0, 0};
+  for (const auto& record : updates) {
+    if (record.is_to_update_res >= 0 && record.is_to_update_res < static_cast<int>(res_counts.size())) {
+      ++res_counts[static_cast<std::size_t>(record.is_to_update_res)];
+    }
+  }
+  std::ofstream output(path);
+  if (!output) {
+    throw std::runtime_error("failed to open RUNTIME_LOOP_PARITY_TRACE output: " + path);
+  }
+  output << "{\n";
+  output << "  \"imu_rows_processed\": " << options.propagation_count + 1 << ",\n";
+  output << "  \"gnss_rows_seen\": " << gnss_samples.size() << ",\n";
+  output << "  \"gnss_updates_applied\": " << options.measurement_update_count << ",\n";
+  output << "  \"gnss_rows_missed\": "
+         << (gnss_samples.size() > static_cast<std::size_t>(options.measurement_update_count)
+                 ? gnss_samples.size() - static_cast<std::size_t>(options.measurement_update_count)
+                 : 0)
+         << ",\n";
+  output << "  \"res_counts\": {\"0\": " << res_counts[0] << ", \"1\": " << res_counts[1] << ", \"2\": "
+         << res_counts[2] << ", \"3\": " << res_counts[3] << "},\n";
+  output << "  \"time_align_tolerance\": 0.005,\n";
+  output << "  \"starttime\": " << std::setprecision(16) << options.start_time << ",\n";
+  output << "  \"endtime\": " << options.end_time << ",\n";
+  output << "  \"first_imu_time\": " << (imu_samples.empty() ? 0.0 : imu_samples.front().time) << ",\n";
+  output << "  \"first_gnss_time\": " << (gnss_samples.empty() ? 0.0 : gnss_samples.front().time) << ",\n";
+  output << "  \"last_imu_time\": " << (imu_samples.empty() ? 0.0 : imu_samples.back().time) << ",\n";
+  output << "  \"last_gnss_time\": " << (gnss_samples.empty() ? 0.0 : gnss_samples.back().time) << ",\n";
+  output << "  \"trace_solver_input\": false,\n";
+  output << "  \"shadow_external_nav_solver_input\": false\n";
+  output << "}\n";
+}
+
 // 中文说明：RUNTIME_DEBUG_MANIFEST 明确诊断开关和 forbidden flags，防止 isolation 被误写成性能结果。
 void writeRuntimeDebugManifest(const std::string& path, const GINSOptions& options) {
   std::ofstream output(path);
@@ -224,7 +368,7 @@ void writeRuntimeDebugManifest(const std::string& path, const GINSOptions& optio
     throw std::runtime_error("failed to open RUNTIME_DEBUG_MANIFEST output: " + path);
   }
   output << "{\n";
-  output << "  \"phase\": \"N4H4D1\",\n";
+  output << "  \"phase\": \"" << options.phase << "\",\n";
   output << "  \"diagnostic_mode\": " << boolText(options.diagnostic_mode) << ",\n";
   output << "  \"diagnostic_run_label\": \"" << options.diagnostic_run_label << "\",\n";
   output << "  \"diagnostic_model_variant\": \"" << options.diagnostic_model_variant << "\",\n";
@@ -234,8 +378,13 @@ void writeRuntimeDebugManifest(const std::string& path, const GINSOptions& optio
   output << "  \"solver_output_changed_by_diagnostic_variant\": "
          << boolText(options.solver_output_changed_by_diagnostic_variant) << ",\n";
   output << "  \"not_for_performance_claim\": true,\n";
+  output << "  \"debug_full_update_trace\": " << boolText(options.debug_full_update_trace) << ",\n";
+  output << "  \"debug_full_state_trace\": " << boolText(options.debug_full_state_trace) << ",\n";
+  output << "  \"debug_measurement_matrix_trace\": " << boolText(options.debug_measurement_matrix_trace) << ",\n";
+  output << "  \"debug_gain_trace\": " << boolText(options.debug_gain_trace) << ",\n";
   output << "  \"trace_solver_input\": false,\n";
   output << "  \"final_v23_output_substitution\": false,\n";
+  output << "  \"shadow_external_nav_solver_input\": false,\n";
   output << "  \"output_only_correction\": false,\n";
   output << "  \"bad_epoch_deletion_for_metric\": false,\n";
   output << "  \"numerical_performance_claim\": false,\n";
@@ -413,6 +562,11 @@ void LegSAV23Runtime::runFromConfig(const std::string& config_path, const std::s
   if (!diagnostic_options.debug_output_dir.empty()) {
     options.diagnostic_mode = true;
     options.diagnostic_debug_max_updates = diagnostic_options.debug_max_updates;
+    options.diagnostic_debug_max_rows = diagnostic_options.debug_max_rows;
+    options.debug_full_update_trace = diagnostic_options.debug_full_update_trace;
+    options.debug_full_state_trace = diagnostic_options.debug_full_state_trace;
+    options.debug_measurement_matrix_trace = diagnostic_options.debug_measurement_matrix_trace;
+    options.debug_gain_trace = diagnostic_options.debug_gain_trace;
     options.disable_position_update = diagnostic_options.disable_position_update;
     options.disable_velocity_update = diagnostic_options.disable_velocity_update;
     options.disable_yaw_update = diagnostic_options.disable_yaw_update;
@@ -455,6 +609,7 @@ void LegSAV23Runtime::runFromConfig(const std::string& config_path, const std::s
   StdWriter std_writer(outputPath(options.output_path, "LegSA_V23_STD.csv"));
   EvalNavWriter eval_writer(outputPath(options.output_path, "EVAL_NAV.csv"));
   std::ofstream state_trace;
+  std::ofstream all_state_trace;
   double next_state_trace_time = options.start_time;
   if (options.diagnostic_mode) {
     state_trace.open(outputPath(diagnostic_options.debug_output_dir, "STATE_TRACE_1HZ.csv"));
@@ -462,6 +617,13 @@ void LegSAV23Runtime::runFromConfig(const std::string& config_path, const std::s
       throw std::runtime_error("failed to open STATE_TRACE_1HZ output");
     }
     writeStateTraceHeader(state_trace);
+    if (options.debug_full_state_trace) {
+      all_state_trace.open(outputPath(diagnostic_options.debug_output_dir, "ALL_STATES_1HZ.csv"));
+      if (!all_state_trace) {
+        throw std::runtime_error("failed to open ALL_STATES_1HZ output");
+      }
+      writeAllStateTraceHeader(all_state_trace);
+    }
   }
 
   std::size_t imu_index = 0;
@@ -503,6 +665,10 @@ void LegSAV23Runtime::runFromConfig(const std::string& config_path, const std::s
     if (options.diagnostic_mode && engine.timestamp() + 1.0e-9 >= next_state_trace_time) {
       writeStateTraceRow(state_trace, engine.timestamp(), engine.getNavState(), engine.getFilterState(),
                          engine.getRunOptions());
+      if (options.debug_full_state_trace) {
+        writeAllStateTraceRow(all_state_trace, engine.timestamp(), engine.getNavState(), engine.getFilterState(),
+                              engine.getRunOptions());
+      }
       while (next_state_trace_time <= engine.timestamp() + 1.0e-9) {
         next_state_trace_time += 1.0;
       }
@@ -516,8 +682,16 @@ void LegSAV23Runtime::runFromConfig(const std::string& config_path, const std::s
                              imu_samples, gnss_samples);
     writeFirstUpdatesCsv(outputPath(diagnostic_options.debug_output_dir, "FIRST_UPDATES.csv"),
                          engine.getDiagnosticUpdateRecords());
+    if (options.debug_full_update_trace) {
+      writeAllUpdatesCsv(outputPath(diagnostic_options.debug_output_dir, "ALL_UPDATES.csv"),
+                         engine.getDiagnosticUpdateRecords());
+    }
     writeFirstPropagationsCsv(outputPath(diagnostic_options.debug_output_dir, "FIRST_PROPAGATIONS.csv"),
                               engine.getDiagnosticPropagationRecords());
+    writeFirstDivergenceMarkers(outputPath(diagnostic_options.debug_output_dir, "FIRST_DIVERGENCE_MARKERS.json"),
+                                engine.getDiagnosticUpdateRecords(), engine.getDiagnosticPropagationRecords());
+    writeRuntimeLoopParityTrace(outputPath(diagnostic_options.debug_output_dir, "RUNTIME_LOOP_PARITY_TRACE.json"),
+                                engine.getRunOptions(), imu_samples, gnss_samples, engine.getDiagnosticUpdateRecords());
     writeRuntimeDebugManifest(outputPath(diagnostic_options.debug_output_dir, "RUNTIME_DEBUG_MANIFEST.json"),
                               engine.getRunOptions());
   }

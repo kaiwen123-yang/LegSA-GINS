@@ -68,6 +68,11 @@ struct GINSOptions {
   bool disable_measurement_update = false;
   bool disable_state_feedback = false;
   int diagnostic_debug_max_updates = 30;
+  int diagnostic_debug_max_rows = 100000;
+  bool debug_full_update_trace = false;
+  bool debug_full_state_trace = false;
+  bool debug_measurement_matrix_trace = false;
+  bool debug_gain_trace = false;
   std::string diagnostic_run_label;
   std::string diagnostic_model_variant = "baseline_current";
   bool not_for_performance_claim = false;

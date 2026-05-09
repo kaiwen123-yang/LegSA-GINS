@@ -366,7 +366,7 @@ parity against read-only reference evidence, then run controlled diagnostic
 model variants to identify the most likely fix direction.
 
 Status:
-in progress on PR #21.
+completed as diagnostic-only PR #21 update.
 
 N4H4D2 does not permanently fix solver mathematics, tune parameters, delete
 epochs, apply output-only correction, or make performance claims. Diagnostic
@@ -381,12 +381,27 @@ height sign, GNSS position H_phi, EKFUpdate innovation, and stateFeedback, then
 rerun the default LegSA-v23-core clean replay gap screen.
 
 Status:
-in progress on PR #21.
+completed as source-backed guarded formula PR #21 update.
 
 N4H4D3 is not a factor contribution and guarded replay is not paper performance
 evidence. It does not tune, delete epochs, apply output-only correction, or
 promote diagnostic variants. yaw_H_mapping remains secondary unless fixed later
 with source-backed evidence.
+
+## Stage N4H4D4: External-clean trace parity and shadow measurement audit
+
+Goal:
+Compare LegSA-v23-core runtime output against external clean NAV as a
+diagnostic/evaluation reference, audit runtime update timing, compute shadow
+measurement residuals, and inspect gain/feedback behavior to locate the first
+divergence source.
+
+Status:
+completed as diagnostic-only PR #21 update.
+
+N4H4D4 does not fix solver mathematics, tune parameters, delete epochs, apply
+output-only correction, or make performance claims. External clean NAV is not
+solver input. The next stage is determined by `N4H4D4_DECISION_REPORT`.
 
 ## Stage N5: Raw Doppler Factor
 

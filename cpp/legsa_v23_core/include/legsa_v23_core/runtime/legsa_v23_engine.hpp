@@ -20,12 +20,24 @@ struct DiagnosticUpdateRecord {
   double imu_cur_time = 0.0;
   int is_to_update_res = 0;
   Vector3 position_residual = zeroVector3();
+  double position_residual_norm = 0.0;
   Vector3 velocity_residual = zeroVector3();
+  double velocity_residual_norm = 0.0;
   double yaw_obs_deg = 0.0;
   double yaw_pred_deg = 0.0;
   double yaw_residual_deg = 0.0;
   std::string yaw_scheme_mode = "NONE";
   double yaw_effective_std_deg = 0.0;
+  double h_pos_phi_norm = 0.0;
+  double h_yaw_phi_value_or_norm = 0.0;
+  Vector3 r_pos_diag = zeroVector3();
+  Vector3 r_vel_diag = zeroVector3();
+  double r_yaw = 0.0;
+  double k_norm_pos = 0.0;
+  double k_norm_vel = 0.0;
+  double k_norm_yaw = 0.0;
+  double dx_norm_before_update = 0.0;
+  double dx_norm_after_update = 0.0;
   bool position_update_applied = false;
   bool velocity_update_applied = false;
   bool yaw_update_applied = false;
@@ -33,6 +45,10 @@ struct DiagnosticUpdateRecord {
   double dx_pos_norm = 0.0;
   double dx_vel_norm = 0.0;
   double dx_phi_norm_deg = 0.0;
+  double cov_trace_before = 0.0;
+  double cov_trace_after = 0.0;
+  double cov_min_diag_before = 0.0;
+  double cov_min_diag_after = 0.0;
   bool state_feedback_applied = false;
 };
 
@@ -145,6 +161,9 @@ class LegSAV23Engine {
   NoiseMatrix continuous_noise_ = diagonalNoiseMatrix(1.0e-6);
   std::vector<DiagnosticUpdateRecord> diagnostic_updates_;
   std::vector<DiagnosticPropagationRecord> diagnostic_propagations_;
+  double diagnostic_pre_dx_norm_ = 0.0;
+  double diagnostic_pre_cov_trace_ = 0.0;
+  double diagnostic_pre_cov_min_diag_ = 0.0;
   double current_time_ = 0.0;
   bool initialized_ = false;
 };

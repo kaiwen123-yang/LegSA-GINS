@@ -532,3 +532,11 @@ N4H4D3 must not use output-only correction, tuning, or epoch deletion.
 
 N4H4D3 keeps yaw_H_mapping as a secondary issue unless a later source-backed
 stage fixes it.
+
+N4H4D4 external clean NAV is diagnostic/evaluation reference only.
+
+N4H4D4 shadow measurement audit must not feed the solver.
+
+N4H4D4 trace parity diagnostics are not performance results.
+
+N4H4D4 must not use output correction, tuning, or epoch deletion.

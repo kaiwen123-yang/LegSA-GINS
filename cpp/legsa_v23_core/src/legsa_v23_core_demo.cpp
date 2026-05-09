@@ -15,6 +15,11 @@ struct DemoArgs {
   std::string output_dir = ".";
   std::string debug_output_dir;
   int debug_max_updates = 30;
+  int debug_max_rows = 100000;
+  bool debug_full_update_trace = false;
+  bool debug_full_state_trace = false;
+  bool debug_measurement_matrix_trace = false;
+  bool debug_gain_trace = false;
   bool disable_position_update = false;
   bool disable_velocity_update = false;
   bool disable_yaw_update = false;
@@ -43,6 +48,16 @@ DemoArgs parseArgs(int argc, char** argv) {
       args.debug_output_dir = argv[++i];
     } else if (token == "--debug-max-updates" && i + 1 < argc) {
       args.debug_max_updates = std::stoi(argv[++i]);
+    } else if (token == "--debug-max-rows" && i + 1 < argc) {
+      args.debug_max_rows = std::stoi(argv[++i]);
+    } else if (token == "--debug-full-update-trace") {
+      args.debug_full_update_trace = true;
+    } else if (token == "--debug-full-state-trace") {
+      args.debug_full_state_trace = true;
+    } else if (token == "--debug-measurement-matrix-trace") {
+      args.debug_measurement_matrix_trace = true;
+    } else if (token == "--debug-gain-trace") {
+      args.debug_gain_trace = true;
     } else if (token == "--disable-position-update") {
       args.disable_position_update = true;
     } else if (token == "--disable-velocity-update") {
@@ -86,6 +101,11 @@ int main(int argc, char** argv) {
       legsa_v23_core::RuntimeDiagnosticOptions diagnostic_options;
       diagnostic_options.debug_output_dir = args.debug_output_dir;
       diagnostic_options.debug_max_updates = args.debug_max_updates;
+      diagnostic_options.debug_max_rows = args.debug_max_rows;
+      diagnostic_options.debug_full_update_trace = args.debug_full_update_trace;
+      diagnostic_options.debug_full_state_trace = args.debug_full_state_trace;
+      diagnostic_options.debug_measurement_matrix_trace = args.debug_measurement_matrix_trace;
+      diagnostic_options.debug_gain_trace = args.debug_gain_trace;
       diagnostic_options.disable_position_update = args.disable_position_update;
       diagnostic_options.disable_velocity_update = args.disable_velocity_update;
       diagnostic_options.disable_yaw_update = args.disable_yaw_update;
@@ -101,6 +121,8 @@ int main(int argc, char** argv) {
               << "   or: legsa_v23_core_demo --dry-run-propagation-toy --output-dir <dir>\n"
               << "   or: legsa_v23_core_demo --dry-run-update-toy --output-dir <dir>\n"
               << "   or: legsa_v23_core_demo --config <path> [--debug-output-dir <dir>] "
+              << "[--debug-full-update-trace|--debug-full-state-trace|--debug-measurement-matrix-trace|"
+              << "--debug-gain-trace] "
               << "[--disable-position-update|--disable-velocity-update|--disable-yaw-update|"
               << "--disable-measurement-update|--disable-state-feedback] "
               << "[--diagnostic-model-variant <name>]\n";

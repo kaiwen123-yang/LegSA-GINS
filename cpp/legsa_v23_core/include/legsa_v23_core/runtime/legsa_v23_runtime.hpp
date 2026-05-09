@@ -12,6 +12,11 @@ namespace legsa_v23_core {
 struct RuntimeDiagnosticOptions {
   std::string debug_output_dir;
   int debug_max_updates = 30;
+  int debug_max_rows = 100000;
+  bool debug_full_update_trace = false;
+  bool debug_full_state_trace = false;
+  bool debug_measurement_matrix_trace = false;
+  bool debug_gain_trace = false;
   bool disable_position_update = false;
   bool disable_velocity_update = false;
   bool disable_yaw_update = false;

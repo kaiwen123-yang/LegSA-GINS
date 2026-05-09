@@ -46,6 +46,26 @@ void covarianceStats(const Matrix21& covariance, double& trace, double& min_diag
   }
 }
 
+// 中文说明：量测矩阵局部范数只写入 D4 shadow/gain 诊断，不参与 EKF 数值。
+double hBlockNorm(const MeasurementBlock& block, std::size_t col_begin, std::size_t col_end) {
+  double sum = 0.0;
+  for (std::size_t row = 0; row < block.rows; ++row) {
+    for (std::size_t col = col_begin; col < col_end; ++col) {
+      const double value = measurementHAt(block, row, col);
+      sum += value * value;
+    }
+  }
+  return std::sqrt(sum);
+}
+
+// 中文说明：诊断用增益近似只帮助定位 K/dx 尖峰；真实 EKFUpdate 仍使用 filter/ekf_update.cpp。
+double diagnosticGainProxy(double dx_norm, double residual_norm) {
+  if (residual_norm <= 1.0e-12) {
+    return 0.0;
+  }
+  return dx_norm / residual_norm;
+}
+
 // 中文说明：D2 yaw residual variant 必须同时影响 yaw gate 计数和 MeasurementBlock，保证诊断记录自洽。
 double diagnosticYawResidualDeg(const GINSOptions& options, double obs_yaw_deg, double pred_yaw_deg) {
   if (options.diagnostic_mode && options.diagnostic_model_variant == "yaw_residual_sign_flip") {
@@ -119,6 +139,12 @@ void LegSAV23Engine::newImuProcess() {
 
     bool consumed_update = false;
     auto runUpdateAndFeedback = [&](const GNSSData& gnss, int update_status, double imu_pre_time, double imu_cur_time) {
+      if (options_.diagnostic_mode) {
+        double unused_max_diag = 0.0;
+        diagnostic_pre_dx_norm_ = norm21(filter_state_.dx);
+        covarianceStats(filter_state_.covariance, diagnostic_pre_cov_trace_, diagnostic_pre_cov_min_diag_,
+                        unused_max_diag);
+      }
       this->gnssUpdate(gnss);
       if (options_.diagnostic_mode) {
         this->recordDiagnosticUpdate(gnss, update_status, imu_pre_time, imu_cur_time,
@@ -367,8 +393,12 @@ void LegSAV23Engine::checkCov() const {
 // 中文说明：构造 first-update 诊断记录；残差来自当前名义状态与 GNSS 高层观测，不读取 trace。
 void LegSAV23Engine::recordDiagnosticUpdate(const GNSSData& gnss, int update_status, double imu_pre_time,
                                             double imu_cur_time, bool measurement_enabled) {
-  if (!options_.diagnostic_mode ||
-      diagnostic_updates_.size() >= static_cast<std::size_t>(std::max(0, options_.diagnostic_debug_max_updates))) {
+  if (!options_.diagnostic_mode) {
+    return;
+  }
+  const int limit = options_.debug_full_update_trace ? options_.diagnostic_debug_max_rows
+                                                     : options_.diagnostic_debug_max_updates;
+  if (diagnostic_updates_.size() >= static_cast<std::size_t>(std::max(0, limit))) {
     return;
   }
   DiagnosticUpdateRecord record;
@@ -381,12 +411,17 @@ void LegSAV23Engine::recordDiagnosticUpdate(const GNSSData& gnss, int update_sta
   const MeasurementBlock position_block = buildGnssPositionMeasurement(filter_state_.current_pva, gnss, options_);
   for (std::size_t i = 0; i < kVector3Size; ++i) {
     record.position_residual[i] = position_block.residual[i];
+    record.r_pos_diag[i] = measurementRAt(position_block, i, i);
   }
+  record.position_residual_norm = norm3(record.position_residual);
+  record.h_pos_phi_norm = hBlockNorm(position_block, PHI_ID, PHI_ID + kVector3Size);
   if (gnss.has_velocity) {
     const MeasurementBlock velocity_block = buildGnssVelocityMeasurement(filter_state_.current_pva, gnss, options_);
     for (std::size_t i = 0; i < kVector3Size; ++i) {
       record.velocity_residual[i] = velocity_block.residual[i];
+      record.r_vel_diag[i] = measurementRAt(velocity_block, i, i);
     }
+    record.velocity_residual_norm = norm3(record.velocity_residual);
   }
   record.yaw_obs_deg = gnss.yaw_deg;
   record.yaw_pred_deg = Rotation::wrapAngleDeg(filter_state_.current_pva.euler_rpy_rad[2] * kRadToDeg);
@@ -396,10 +431,21 @@ void LegSAV23Engine::recordDiagnosticUpdate(const GNSSData& gnss, int update_sta
     record.yaw_scheme_mode = decision.label;
     record.yaw_effective_std_deg = decision.effective_std_deg;
     record.yaw_update_applied = measurement_enabled && !options_.disable_yaw_update && decision.accepted;
+    const auto yaw_block = buildGnssYawMeasurement(filter_state_.current_pva, gnss, options_);
+    if (yaw_block.has_value()) {
+      record.h_yaw_phi_value_or_norm = hBlockNorm(yaw_block.value(), PHI_ID, PHI_ID + kVector3Size);
+      record.r_yaw = measurementRAt(yaw_block.value(), 0, 0);
+    }
   }
   record.position_update_applied = measurement_enabled && !options_.disable_position_update;
   record.velocity_update_applied = measurement_enabled && gnss.has_velocity && !options_.disable_velocity_update;
-  record.dx_norm_before_feedback = norm21(filter_state_.dx);
+  record.dx_norm_before_update = diagnostic_pre_dx_norm_;
+  record.dx_norm_after_update = norm21(filter_state_.dx);
+  record.dx_norm_before_feedback = record.dx_norm_after_update;
+  record.cov_trace_before = diagnostic_pre_cov_trace_;
+  record.cov_min_diag_before = diagnostic_pre_cov_min_diag_;
+  double unused_cov_max = 0.0;
+  covarianceStats(filter_state_.covariance, record.cov_trace_after, record.cov_min_diag_after, unused_cov_max);
   Vector3 dx_pos = zeroVector3();
   Vector3 dx_vel = zeroVector3();
   Vector3 dx_phi = zeroVector3();
@@ -411,14 +457,20 @@ void LegSAV23Engine::recordDiagnosticUpdate(const GNSSData& gnss, int update_sta
   record.dx_pos_norm = norm3(dx_pos);
   record.dx_vel_norm = norm3(dx_vel);
   record.dx_phi_norm_deg = norm3(dx_phi) * kRadToDeg;
+  record.k_norm_pos = diagnosticGainProxy(record.dx_pos_norm, record.position_residual_norm);
+  record.k_norm_vel = diagnosticGainProxy(record.dx_vel_norm, record.velocity_residual_norm);
+  record.k_norm_yaw = diagnosticGainProxy(norm3(dx_phi), std::abs(record.yaw_residual_deg * kDegToRad));
   diagnostic_updates_.push_back(record);
 }
 
 // 中文说明：记录传播后的状态与协方差统计；只保留前 N 条，避免大文件进入运行目录。
 void LegSAV23Engine::recordDiagnosticPropagation(const IMUData& imupre, const IMUData& imucur) {
-  if (!options_.diagnostic_mode ||
-      diagnostic_propagations_.size() >=
-          static_cast<std::size_t>(std::max(0, options_.diagnostic_debug_max_updates))) {
+  if (!options_.diagnostic_mode) {
+    return;
+  }
+  const int limit = options_.debug_full_state_trace ? options_.diagnostic_debug_max_rows
+                                                    : options_.diagnostic_debug_max_updates;
+  if (diagnostic_propagations_.size() >= static_cast<std::size_t>(std::max(0, limit))) {
     return;
   }
   DiagnosticPropagationRecord record;
