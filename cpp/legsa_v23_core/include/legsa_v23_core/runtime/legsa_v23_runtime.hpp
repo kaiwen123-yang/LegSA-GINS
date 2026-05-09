@@ -20,6 +20,9 @@ struct RuntimeDiagnosticOptions {
   bool debug_update_blocks = false;
   bool debug_feedback_delta = false;
   bool debug_covariance_gain = false;
+  bool debug_imu_error_feedback = false;
+  bool debug_imu_compensation = false;
+  bool debug_cross_covariance = false;
   bool disable_position_update = false;
   bool disable_velocity_update = false;
   bool disable_yaw_update = false;

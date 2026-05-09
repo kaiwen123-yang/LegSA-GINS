@@ -5,6 +5,7 @@
 
 #include <cstddef>
 #include <cmath>
+#include <initializer_list>
 #include <string>
 
 namespace legsa_v23_core {
@@ -29,6 +30,19 @@ bool diagnosticVariantActive(const GINSOptions& options, const std::string& name
 // 中文说明：D5 feedback mode 只在 diagnostic_mode 下生效，用于隔离 pos/vel/att/bias-scale 反馈贡献。
 bool feedbackModeActive(const GINSOptions& options, const std::string& name) {
   return options.diagnostic_mode && options.diagnostic_feedback_mode == name;
+}
+
+// 中文说明：D6 反馈开关只用于定位 IMU error-state 与姿态耦合，默认 normal 不进入任何分支。
+bool anyFeedbackModeActive(const GINSOptions& options, const std::initializer_list<const char*> names) {
+  if (!options.diagnostic_mode) {
+    return false;
+  }
+  for (const char* name : names) {
+    if (options.diagnostic_feedback_mode == name) {
+      return true;
+    }
+  }
+  return false;
 }
 
 // 中文说明：D5 dx_phi clamp 是诊断限幅，不允许作为正式 solver 修复或性能结论。
@@ -71,7 +85,7 @@ void stateFeedback(FilterState& state, const GINSOptions& options) {
 
   const Vector3 delta_blh = mat3Vec(Earth::DRi(state.current_pva.pos_blh_rad_m), delta_position);
   for (std::size_t i = 0; i < kVector3Size; ++i) {
-    if (feedbackModeActive(options, "attitude_only")) {
+    if (anyFeedbackModeActive(options, {"attitude_only"})) {
       // 中文说明：D5 诊断：只反馈姿态，跳过位置/速度，定位反馈块贡献。
       continue;
     }
@@ -87,7 +101,9 @@ void stateFeedback(FilterState& state, const GINSOptions& options) {
 
   const bool allow_attitude_feedback =
       !diagnosticVariantActive(options, "state_feedback_no_phi") &&
-      !feedbackModeActive(options, "pos_vel_only") && !feedbackModeActive(options, "no_attitude_feedback");
+      !anyFeedbackModeActive(options,
+                             {"pos_vel_only", "no_attitude_feedback", "pos_vel_bias_scale_only",
+                              "no_attitude_no_bias_scale"});
   if (allow_attitude_feedback) {
     // 中文说明：baseline_current 姿态误差采用左乘 qpn*qbn；D2 诊断允许临时改符号或右乘定位问题。
     Vector3 feedback_phi = delta_phi;
@@ -109,13 +125,40 @@ void stateFeedback(FilterState& state, const GINSOptions& options) {
     state.current_pva.euler_rpy_rad = Rotation::matrix2euler(Rotation::quaternion2matrix(feedback_qbn));
   }
 
-  if (!feedbackModeActive(options, "pos_vel_only") && !feedbackModeActive(options, "attitude_only") &&
-      !feedbackModeActive(options, "no_bias_scale_feedback")) {
+  const bool allow_gyro_bias =
+      !anyFeedbackModeActive(options, {"pos_vel_only", "attitude_only", "pos_vel_attitude_only",
+                                       "no_bias_scale_feedback", "no_bias_feedback", "no_gyrbias_feedback",
+                                       "no_imu_error_feedback", "freeze_imu_error_states",
+                                       "no_imu_error_feedback_but_keep_attitude", "no_attitude_no_bias_scale"});
+  const bool allow_acc_bias =
+      !anyFeedbackModeActive(options, {"pos_vel_only", "attitude_only", "pos_vel_attitude_only",
+                                       "no_bias_scale_feedback", "no_bias_feedback", "no_accbias_feedback",
+                                       "no_imu_error_feedback", "freeze_imu_error_states",
+                                       "no_imu_error_feedback_but_keep_attitude", "no_attitude_no_bias_scale"});
+  const bool allow_gyro_scale =
+      !anyFeedbackModeActive(options, {"pos_vel_only", "attitude_only", "pos_vel_attitude_only",
+                                       "no_bias_scale_feedback", "no_scale_feedback", "no_gyrscale_feedback",
+                                       "no_imu_error_feedback", "freeze_imu_error_states",
+                                       "no_imu_error_feedback_but_keep_attitude", "no_attitude_no_bias_scale"});
+  const bool allow_acc_scale =
+      !anyFeedbackModeActive(options, {"pos_vel_only", "attitude_only", "pos_vel_attitude_only",
+                                       "no_bias_scale_feedback", "no_scale_feedback", "no_accscale_feedback",
+                                       "no_imu_error_feedback", "freeze_imu_error_states",
+                                       "no_imu_error_feedback_but_keep_attitude", "no_attitude_no_bias_scale"});
+  if (allow_gyro_bias || allow_acc_bias || allow_gyro_scale || allow_acc_scale) {
     for (std::size_t i = 0; i < kVector3Size; ++i) {
-      state.current_pva.gyro_bias[i] += state.dx[BG_ID + i];
-      state.current_pva.acc_bias[i] += state.dx[BA_ID + i];
-      state.current_pva.gyro_scale[i] += state.dx[SG_ID + i];
-      state.current_pva.acc_scale[i] += state.dx[SA_ID + i];
+      if (allow_gyro_bias) {
+        state.current_pva.gyro_bias[i] += state.dx[BG_ID + i];
+      }
+      if (allow_acc_bias) {
+        state.current_pva.acc_bias[i] += state.dx[BA_ID + i];
+      }
+      if (allow_gyro_scale) {
+        state.current_pva.gyro_scale[i] += state.dx[SG_ID + i];
+      }
+      if (allow_acc_scale) {
+        state.current_pva.acc_scale[i] += state.dx[SA_ID + i];
+      }
     }
   }
   state.dx = zeroVector21();

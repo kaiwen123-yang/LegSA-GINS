@@ -42,7 +42,7 @@ N4H4C GNSS updates, EKFUpdate, and stateFeedback.
 
 Current working phase:
 
-N4H4D5 one-step propagation and gain/feedback isolation.
+N4H4D6 IMU error-state feedback and compensation audit.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -163,6 +163,11 @@ N4H4D5 isolates one-step propagation, measurement block contribution,
 covariance/gain scaling, and stateFeedback effects after D4 localized divergence
 to post-update state behavior. It uses external clean state only as a diagnostic
 shadow reference and does not make performance claims.
+
+N4H4D6 audits IMU error-state feedback, compensation timing, covariance-unit
+parity, and bias/scale diagnostic variants. It is diagnostic only: variants are
+not performance results, external clean reference is not solver input, and no
+output correction, tuning, or epoch deletion is allowed.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace

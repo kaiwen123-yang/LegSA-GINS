@@ -548,3 +548,13 @@ N4H4D5 diagnostic feedback/covariance variants are not performance results.
 N4H4D5 must not use output-only correction, tuning, or epoch deletion.
 
 Any D6 fix must be evidence-backed by N4H4D5.
+
+N4H4D6 diagnostic variants are not performance results.
+
+N4H4D6 bias/scale feedback variants are diagnostic only.
+
+N4H4D6 external clean reference must not enter the solver.
+
+N4H4D6 must not use output-only correction, tuning, or epoch deletion.
+
+Any D7 fix must be evidence-backed by N4H4D6.

@@ -23,6 +23,9 @@ struct DemoArgs {
   bool debug_update_blocks = false;
   bool debug_feedback_delta = false;
   bool debug_covariance_gain = false;
+  bool debug_imu_error_feedback = false;
+  bool debug_imu_compensation = false;
+  bool debug_cross_covariance = false;
   bool disable_position_update = false;
   bool disable_velocity_update = false;
   bool disable_yaw_update = false;
@@ -70,6 +73,12 @@ DemoArgs parseArgs(int argc, char** argv) {
       args.debug_feedback_delta = true;
     } else if (token == "--debug-covariance-gain") {
       args.debug_covariance_gain = true;
+    } else if (token == "--debug-imu-error-feedback") {
+      args.debug_imu_error_feedback = true;
+    } else if (token == "--debug-imu-compensation") {
+      args.debug_imu_compensation = true;
+    } else if (token == "--debug-cross-covariance") {
+      args.debug_cross_covariance = true;
     } else if (token == "--disable-position-update") {
       args.disable_position_update = true;
     } else if (token == "--disable-velocity-update") {
@@ -127,6 +136,9 @@ int main(int argc, char** argv) {
       diagnostic_options.debug_update_blocks = args.debug_update_blocks;
       diagnostic_options.debug_feedback_delta = args.debug_feedback_delta;
       diagnostic_options.debug_covariance_gain = args.debug_covariance_gain;
+      diagnostic_options.debug_imu_error_feedback = args.debug_imu_error_feedback;
+      diagnostic_options.debug_imu_compensation = args.debug_imu_compensation;
+      diagnostic_options.debug_cross_covariance = args.debug_cross_covariance;
       diagnostic_options.disable_position_update = args.disable_position_update;
       diagnostic_options.disable_velocity_update = args.disable_velocity_update;
       diagnostic_options.disable_yaw_update = args.disable_yaw_update;
@@ -146,7 +158,8 @@ int main(int argc, char** argv) {
               << "   or: legsa_v23_core_demo --dry-run-update-toy --output-dir <dir>\n"
               << "   or: legsa_v23_core_demo --config <path> [--debug-output-dir <dir>] "
               << "[--debug-full-update-trace|--debug-full-state-trace|--debug-measurement-matrix-trace|"
-              << "--debug-gain-trace|--debug-update-blocks|--debug-feedback-delta|--debug-covariance-gain] "
+              << "--debug-gain-trace|--debug-update-blocks|--debug-feedback-delta|--debug-covariance-gain|"
+              << "--debug-imu-error-feedback|--debug-imu-compensation|--debug-cross-covariance] "
               << "[--disable-position-update|--disable-velocity-update|--disable-yaw-update|"
               << "--disable-measurement-update|--disable-state-feedback] "
               << "[--diagnostic-model-variant <name>] [--diagnostic-feedback-mode <mode>] "

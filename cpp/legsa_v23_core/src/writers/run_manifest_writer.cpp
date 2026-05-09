@@ -49,6 +49,9 @@ void RunManifestWriter::write(const std::string& path, const GINSOptions& option
   output << "  \"diagnostic_feedback_mode\": \"" << options.diagnostic_feedback_mode << "\",\n";
   output << "  \"diagnostic_update_block_mode\": \"" << options.diagnostic_update_block_mode << "\",\n";
   output << "  \"diagnostic_covariance_mode\": \"" << options.diagnostic_covariance_mode << "\",\n";
+  output << "  \"debug_imu_error_feedback\": " << boolText(options.debug_imu_error_feedback) << ",\n";
+  output << "  \"debug_imu_compensation\": " << boolText(options.debug_imu_compensation) << ",\n";
+  output << "  \"debug_cross_covariance\": " << boolText(options.debug_cross_covariance) << ",\n";
   output << "  \"diagnostic_only\": " << boolText(options.diagnostic_only) << ",\n";
   output << "  \"diagnostic_update_switches\": {\n";
   output << "    \"disable_position_update\": " << boolText(options.disable_position_update) << ",\n";

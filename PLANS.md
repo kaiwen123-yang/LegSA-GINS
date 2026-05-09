@@ -419,6 +419,22 @@ diagnostic shadow reference only. Diagnostic feedback/covariance variants are
 not performance results. The next stage is determined by
 `N4H4D5_DECISION_REPORT`.
 
+## Stage N4H4D6: IMU error-state feedback and compensation audit
+
+Goal:
+Audit IMU error-state feedback, bias/scale compensation timing, covariance-unit
+parity, cross-covariance coupling, and bias/scale diagnostic variants after D5
+showed `pos_vel_only` feedback is the strongest diagnostic clue.
+
+Status:
+completed as diagnostic-only PR #21 update if validation passes.
+
+N4H4D6 does not fix solver mathematics unless later evidence explicitly backs a
+guarded fix. Diagnostic bias/scale variants are not performance results.
+External clean reference is not solver input. No output-only correction, tuning,
+or epoch deletion is allowed. The next stage is determined by
+`N4H4D6_DECISION_REPORT`.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

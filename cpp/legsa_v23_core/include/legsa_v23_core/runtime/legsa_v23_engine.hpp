@@ -8,6 +8,7 @@
 #include "legsa_v23_core/updates/measurement_update.hpp"
 
 #include <deque>
+#include <map>
 #include <vector>
 
 namespace legsa_v23_core {
@@ -133,6 +134,66 @@ struct DiagnosticCovarianceRecord {
   double dx_phi_norm_deg_if_update = 0.0;
 };
 
+// 中文说明：D6 IMU compensation trace 只记录补偿时序/次数，不能作为调参或 solver 输入。
+struct DiagnosticImuCompensationRecord {
+  int propagation_index = 0;
+  double imu_time = 0.0;
+  double imu_dt = 0.0;
+  double dtheta_norm_before = 0.0;
+  double dtheta_norm_after = 0.0;
+  double dvel_norm_before = 0.0;
+  double dvel_norm_after = 0.0;
+  double gyrbias_norm = 0.0;
+  double accbias_norm = 0.0;
+  double gyrscale_norm = 0.0;
+  double accscale_norm = 0.0;
+  bool compensation_applied = false;
+  int compensation_count_for_current_imu = 0;
+  bool repeated_compensation_detected = false;
+  bool imupre_compensated = false;
+  bool imucur_compensated = false;
+};
+
+// 中文说明：D6 IMU error feedback trace 记录 bias/scale 反馈前后变化，variants 仍是 diagnostic-only。
+struct DiagnosticImuErrorFeedbackRecord {
+  int update_index = 0;
+  double gnss_time = 0.0;
+  double dx_bg_norm = 0.0;
+  double dx_ba_norm = 0.0;
+  double dx_sg_norm = 0.0;
+  double dx_sa_norm = 0.0;
+  double gyrbias_norm_before = 0.0;
+  double accbias_norm_before = 0.0;
+  double gyrscale_norm_before = 0.0;
+  double accscale_norm_before = 0.0;
+  double gyrbias_norm_after = 0.0;
+  double accbias_norm_after = 0.0;
+  double gyrscale_norm_after = 0.0;
+  double accscale_norm_after = 0.0;
+  bool bias_scale_feedback_applied = false;
+  bool attitude_feedback_applied = false;
+  bool pos_vel_feedback_applied = false;
+};
+
+// 中文说明：D6 cross-covariance trace 记录姿态与 IMU 误差状态耦合，默认不改变协方差。
+struct DiagnosticCrossCovarianceRecord {
+  double time = 0.0;
+  std::string event_type;
+  double P_phi_trace = 0.0;
+  double P_bg_trace = 0.0;
+  double P_ba_trace = 0.0;
+  double P_sg_trace = 0.0;
+  double P_sa_trace = 0.0;
+  double P_phi_bg_norm = 0.0;
+  double P_phi_ba_norm = 0.0;
+  double P_phi_sg_norm = 0.0;
+  double P_phi_sa_norm = 0.0;
+  double P_pos_phi_norm = 0.0;
+  double P_vel_phi_norm = 0.0;
+  double P_pos_ba_norm = 0.0;
+  double P_vel_ba_norm = 0.0;
+};
+
 // 中文说明：LegSA 自有 v23-core EKF 主框架。N4H4C 已打通 GNSS 松组合更新和误差反馈。
 class LegSAV23Engine {
  public:
@@ -177,6 +238,15 @@ class LegSAV23Engine {
 
   // 中文说明：返回 D5 covariance/gain 诊断记录；不作为调参或性能结果。
   const std::vector<DiagnosticCovarianceRecord>& getDiagnosticCovarianceRecords() const;
+
+  // 中文说明：返回 D6 IMU compensation 时序诊断；只写 runtime-only debug CSV。
+  const std::vector<DiagnosticImuCompensationRecord>& getDiagnosticImuCompensationRecords() const;
+
+  // 中文说明：返回 D6 IMU error feedback 诊断；不改变默认 solver claim 边界。
+  const std::vector<DiagnosticImuErrorFeedbackRecord>& getDiagnosticImuErrorFeedbackRecords() const;
+
+  // 中文说明：返回 D6 cross-covariance 诊断；用于判断姿态/bias/scale 耦合。
+  const std::vector<DiagnosticCrossCovarianceRecord>& getDiagnosticCrossCovarianceRecords() const;
 
  private:
   // 中文说明：判断 GNSS 更新时间与相邻 IMU 区间关系；N4H4C 使用 0/1/2/3 区分传播/更新顺序。
@@ -240,6 +310,21 @@ class LegSAV23Engine {
   void recordDiagnosticCovariance(const std::string& event_type, double k_norm = 0.0,
                                   double dx_phi_norm_deg = 0.0);
 
+  // 中文说明：D6 记录 IMU 补偿是否重复/遗漏；process_data 已完成 FLU->FRD，补偿不做坐标变换。
+  void recordDiagnosticImuCompensation(const IMUData& imu_before, const IMUData& imu_after, bool applied,
+                                       bool imupre_compensated, bool imucur_compensated);
+
+  // 中文说明：D6 记录 bias/scale 反馈前后范数，定位 IMU error-state 是否导致闭环发散。
+  void recordDiagnosticImuErrorFeedback(const FilterState& before_state, const FilterState& after_state,
+                                        bool pos_vel_feedback_applied, bool attitude_feedback_applied,
+                                        bool bias_scale_feedback_applied);
+
+  // 中文说明：D6 记录 cross covariance 分块范数；诊断默认不改变 P。
+  void recordDiagnosticCrossCovariance(const std::string& event_type);
+
+  // 中文说明：D6 covariance variant 可临时清零 bias/scale 交叉项，用于隔离耦合，不是正式修复。
+  void applyDiagnosticCovariancePostProcess();
+
   GINSOptions options_;
   FilterState filter_state_;
   std::deque<IMUData> imu_buffer_;
@@ -252,6 +337,10 @@ class LegSAV23Engine {
   std::vector<DiagnosticUpdateBlockRecord> diagnostic_update_blocks_;
   std::vector<DiagnosticFeedbackDeltaRecord> diagnostic_feedback_deltas_;
   std::vector<DiagnosticCovarianceRecord> diagnostic_covariances_;
+  std::vector<DiagnosticImuCompensationRecord> diagnostic_imu_compensations_;
+  std::vector<DiagnosticImuErrorFeedbackRecord> diagnostic_imu_error_feedbacks_;
+  std::vector<DiagnosticCrossCovarianceRecord> diagnostic_cross_covariances_;
+  std::map<double, int> imu_compensation_counts_;
   double diagnostic_pre_dx_norm_ = 0.0;
   double diagnostic_pre_cov_trace_ = 0.0;
   double diagnostic_pre_cov_min_diag_ = 0.0;

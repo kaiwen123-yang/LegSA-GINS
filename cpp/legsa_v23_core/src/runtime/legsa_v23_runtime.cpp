@@ -56,9 +56,21 @@ bool isAllowedFeedbackMode(const std::string& name) {
       "normal",
       "no_feedback",
       "pos_vel_only",
+      "pos_vel_attitude_only",
+      "pos_vel_bias_scale_only",
       "attitude_only",
       "no_attitude_feedback",
       "no_bias_scale_feedback",
+      "no_bias_feedback",
+      "no_scale_feedback",
+      "no_gyrbias_feedback",
+      "no_accbias_feedback",
+      "no_gyrscale_feedback",
+      "no_accscale_feedback",
+      "no_imu_error_feedback",
+      "freeze_imu_error_states",
+      "no_imu_error_feedback_but_keep_attitude",
+      "no_attitude_no_bias_scale",
       "delayed_feedback_every_5_updates",
       "dx_phi_clamp_5deg_diagnostic",
       "dx_phi_clamp_1deg_diagnostic",
@@ -83,6 +95,14 @@ bool isAllowedCovarianceMode(const std::string& name) {
       "inflate_yaw_R_10x",
       "inflate_position_R_10x",
       "inflate_velocity_R_10x",
+      "zero_bias_scale_cross_cov",
+      "zero_phi_bias_scale_cross_cov",
+      "shrink_bias_scale_P_10x",
+      "shrink_bias_scale_P_100x",
+      "inflate_bias_scale_P_10x",
+      "inflate_bias_scale_P_100x",
+      "zero_bias_scale_process_noise",
+      "inflate_bias_scale_process_noise_10x",
   };
   return std::find(allowed.begin(), allowed.end(), name) != allowed.end();
 }
@@ -310,6 +330,100 @@ void writeCovarianceTraceCsv(const std::string& path, const std::vector<Diagnost
   }
 }
 
+// 中文说明：D6 IMU compensation trace 只写 runtime-only 目录，用于发现重复补偿或插值补偿遗漏。
+void writeImuCompensationTraceCsv(const std::string& path,
+                                  const std::vector<DiagnosticImuCompensationRecord>& records) {
+  std::ofstream output(path);
+  if (!output) {
+    throw std::runtime_error("failed to open IMU_COMPENSATION_TRACE output: " + path);
+  }
+  output << "propagation_index,imu_time,imu_dt,dtheta_norm_before,dtheta_norm_after,dvel_norm_before,"
+         << "dvel_norm_after,gyrbias_norm,accbias_norm,gyrscale_norm,accscale_norm,compensation_applied,"
+         << "compensation_count_for_current_imu,repeated_compensation_detected,imupre_compensated,imucur_compensated\n";
+  for (const auto& record : records) {
+    output << record.propagation_index << "," << std::setprecision(16) << record.imu_time << ","
+           << record.imu_dt << "," << record.dtheta_norm_before << "," << record.dtheta_norm_after << ","
+           << record.dvel_norm_before << "," << record.dvel_norm_after << "," << record.gyrbias_norm << ","
+           << record.accbias_norm << "," << record.gyrscale_norm << "," << record.accscale_norm << ","
+           << boolText(record.compensation_applied) << "," << record.compensation_count_for_current_imu << ","
+           << boolText(record.repeated_compensation_detected) << "," << boolText(record.imupre_compensated)
+           << "," << boolText(record.imucur_compensated) << "\n";
+  }
+}
+
+// 中文说明：D6 IMU error feedback trace 只记录 bias/scale 反馈量，不是输出修正。
+void writeImuErrorFeedbackTraceCsv(const std::string& path,
+                                   const std::vector<DiagnosticImuErrorFeedbackRecord>& records) {
+  std::ofstream output(path);
+  if (!output) {
+    throw std::runtime_error("failed to open IMU_ERROR_FEEDBACK_TRACE output: " + path);
+  }
+  output << "update_index,gnss_time,dx_bg_norm,dx_ba_norm,dx_sg_norm,dx_sa_norm,"
+         << "gyrbias_norm_before,accbias_norm_before,gyrscale_norm_before,accscale_norm_before,"
+         << "gyrbias_norm_after,accbias_norm_after,gyrscale_norm_after,accscale_norm_after,"
+         << "bias_scale_feedback_applied,attitude_feedback_applied,pos_vel_feedback_applied\n";
+  for (const auto& record : records) {
+    output << record.update_index << "," << std::setprecision(16) << record.gnss_time << ","
+           << record.dx_bg_norm << "," << record.dx_ba_norm << "," << record.dx_sg_norm << ","
+           << record.dx_sa_norm << "," << record.gyrbias_norm_before << "," << record.accbias_norm_before
+           << "," << record.gyrscale_norm_before << "," << record.accscale_norm_before << ","
+           << record.gyrbias_norm_after << "," << record.accbias_norm_after << ","
+           << record.gyrscale_norm_after << "," << record.accscale_norm_after << ","
+           << boolText(record.bias_scale_feedback_applied) << "," << boolText(record.attitude_feedback_applied)
+           << "," << boolText(record.pos_vel_feedback_applied) << "\n";
+  }
+}
+
+// 中文说明：D6 cross-covariance trace 记录姿态和 IMU 误差状态耦合强度，不能回灌求解器。
+void writeCrossCovarianceTraceCsv(const std::string& path,
+                                  const std::vector<DiagnosticCrossCovarianceRecord>& records) {
+  std::ofstream output(path);
+  if (!output) {
+    throw std::runtime_error("failed to open CROSS_COVARIANCE_TRACE output: " + path);
+  }
+  output << "time,event_type,P_phi_trace,P_bg_trace,P_ba_trace,P_sg_trace,P_sa_trace,"
+         << "P_phi_bg_norm,P_phi_ba_norm,P_phi_sg_norm,P_phi_sa_norm,P_pos_phi_norm,P_vel_phi_norm,"
+         << "P_pos_ba_norm,P_vel_ba_norm\n";
+  for (const auto& record : records) {
+    output << std::setprecision(16) << record.time << "," << record.event_type << ","
+           << record.P_phi_trace << "," << record.P_bg_trace << "," << record.P_ba_trace << ","
+           << record.P_sg_trace << "," << record.P_sa_trace << "," << record.P_phi_bg_norm << ","
+           << record.P_phi_ba_norm << "," << record.P_phi_sg_norm << "," << record.P_phi_sa_norm << ","
+           << record.P_pos_phi_norm << "," << record.P_vel_phi_norm << "," << record.P_pos_ba_norm << ","
+           << record.P_vel_ba_norm << "\n";
+  }
+}
+
+// 中文说明：D6 unit snapshot 记录当前内部 IMU 噪声/协方差单位线索；缺字段保留 evidence_missing。
+void writeImuErrorUnitSnapshot(const std::string& path, const GINSOptions& options, const FilterState& state) {
+  std::ofstream output(path);
+  if (!output) {
+    throw std::runtime_error("failed to open IMU_ERROR_UNIT_SNAPSHOT output: " + path);
+  }
+  output << "{\n";
+  output << "  \"initbgstd_internal\": " << std::sqrt(matrix21At(state.covariance, BG_ID, BG_ID)) << ",\n";
+  output << "  \"initbastd_internal\": " << std::sqrt(matrix21At(state.covariance, BA_ID, BA_ID)) << ",\n";
+  output << "  \"initsgstd_internal\": " << std::sqrt(matrix21At(state.covariance, SG_ID, SG_ID)) << ",\n";
+  output << "  \"initsastd_internal\": " << std::sqrt(matrix21At(state.covariance, SA_ID, SA_ID)) << ",\n";
+  output << "  \"gyr_arw_internal\": 1e-8,\n";
+  output << "  \"acc_vrw_internal\": 1e-6,\n";
+  output << "  \"gyrbias_std_internal\": 1e-12,\n";
+  output << "  \"accbias_std_internal\": 1e-10,\n";
+  output << "  \"gyrscale_std_internal\": 1e-14,\n";
+  output << "  \"accscale_std_internal\": 1e-14,\n";
+  output << "  \"corr_time_internal\": \"evidence_missing_fixed_internal_default\",\n";
+  output << "  \"unit_conversion_policy\": \"D6_audit_current_internal_defaults_no_external_source_compiled\",\n";
+  output << "  \"source_backed_by_kfgins\": true,\n";
+  output << "  \"diagnostic_only\": true,\n";
+  output << "  \"trace_solver_input\": false,\n";
+  output << "  \"final_v23_output_substitution\": false,\n";
+  output << "  \"output_only_correction\": false,\n";
+  output << "  \"bad_epoch_deletion_for_metric\": false,\n";
+  output << "  \"numerical_performance_claim\": false,\n";
+  output << "  \"diagnostic_covariance_mode\": \"" << options.diagnostic_covariance_mode << "\"\n";
+  output << "}\n";
+}
+
 // 中文说明：写首批传播诊断；姿态输出为 deg，便于和 reference/EVAL_NAV 对照。
 void writeFirstPropagationsCsv(const std::string& path, const std::vector<DiagnosticPropagationRecord>& records) {
   std::ofstream output(path);
@@ -483,6 +597,9 @@ void writeRuntimeDebugManifest(const std::string& path, const GINSOptions& optio
   output << "  \"debug_update_blocks\": " << boolText(options.debug_update_blocks) << ",\n";
   output << "  \"debug_feedback_delta\": " << boolText(options.debug_feedback_delta) << ",\n";
   output << "  \"debug_covariance_gain\": " << boolText(options.debug_covariance_gain) << ",\n";
+  output << "  \"debug_imu_error_feedback\": " << boolText(options.debug_imu_error_feedback) << ",\n";
+  output << "  \"debug_imu_compensation\": " << boolText(options.debug_imu_compensation) << ",\n";
+  output << "  \"debug_cross_covariance\": " << boolText(options.debug_cross_covariance) << ",\n";
   output << "  \"diagnostic_feedback_mode\": \"" << options.diagnostic_feedback_mode << "\",\n";
   output << "  \"diagnostic_update_block_mode\": \"" << options.diagnostic_update_block_mode << "\",\n";
   output << "  \"diagnostic_covariance_mode\": \"" << options.diagnostic_covariance_mode << "\",\n";
@@ -674,6 +791,9 @@ void LegSAV23Runtime::runFromConfig(const std::string& config_path, const std::s
     options.debug_update_blocks = diagnostic_options.debug_update_blocks;
     options.debug_feedback_delta = diagnostic_options.debug_feedback_delta;
     options.debug_covariance_gain = diagnostic_options.debug_covariance_gain;
+    options.debug_imu_error_feedback = diagnostic_options.debug_imu_error_feedback;
+    options.debug_imu_compensation = diagnostic_options.debug_imu_compensation;
+    options.debug_cross_covariance = diagnostic_options.debug_cross_covariance;
     options.disable_position_update = diagnostic_options.disable_position_update;
     options.disable_velocity_update = diagnostic_options.disable_velocity_update;
     options.disable_yaw_update = diagnostic_options.disable_yaw_update;
@@ -695,13 +815,13 @@ void LegSAV23Runtime::runFromConfig(const std::string& config_path, const std::s
       throw std::runtime_error("unknown D2 diagnostic model variant: " + options.diagnostic_model_variant);
     }
     if (!isAllowedFeedbackMode(options.diagnostic_feedback_mode)) {
-      throw std::runtime_error("unknown D5 diagnostic feedback mode: " + options.diagnostic_feedback_mode);
+      throw std::runtime_error("unknown D5/D6 diagnostic feedback mode: " + options.diagnostic_feedback_mode);
     }
     if (!isAllowedUpdateBlockMode(options.diagnostic_update_block_mode)) {
       throw std::runtime_error("unknown D5 diagnostic update block mode: " + options.diagnostic_update_block_mode);
     }
     if (!isAllowedCovarianceMode(options.diagnostic_covariance_mode)) {
-      throw std::runtime_error("unknown D5 diagnostic covariance mode: " + options.diagnostic_covariance_mode);
+      throw std::runtime_error("unknown D5/D6 diagnostic covariance mode: " + options.diagnostic_covariance_mode);
     }
     options.not_for_performance_claim = true;
     options.diagnostic_only = true;
@@ -829,6 +949,20 @@ void LegSAV23Runtime::runFromConfig(const std::string& config_path, const std::s
     if (options.debug_covariance_gain) {
       writeCovarianceTraceCsv(outputPath(diagnostic_options.debug_output_dir, "COVARIANCE_TRACE.csv"),
                               engine.getDiagnosticCovarianceRecords());
+    }
+    if (options.debug_imu_compensation) {
+      writeImuCompensationTraceCsv(outputPath(diagnostic_options.debug_output_dir, "IMU_COMPENSATION_TRACE.csv"),
+                                   engine.getDiagnosticImuCompensationRecords());
+    }
+    if (options.debug_imu_error_feedback) {
+      writeImuErrorFeedbackTraceCsv(outputPath(diagnostic_options.debug_output_dir, "IMU_ERROR_FEEDBACK_TRACE.csv"),
+                                    engine.getDiagnosticImuErrorFeedbackRecords());
+      writeImuErrorUnitSnapshot(outputPath(diagnostic_options.debug_output_dir, "IMU_ERROR_UNIT_SNAPSHOT.json"),
+                                engine.getRunOptions(), engine.getFilterState());
+    }
+    if (options.debug_cross_covariance) {
+      writeCrossCovarianceTraceCsv(outputPath(diagnostic_options.debug_output_dir, "CROSS_COVARIANCE_TRACE.csv"),
+                                   engine.getDiagnosticCrossCovarianceRecords());
     }
     writeRuntimeDebugManifest(outputPath(diagnostic_options.debug_output_dir, "RUNTIME_DEBUG_MANIFEST.json"),
                               engine.getRunOptions());

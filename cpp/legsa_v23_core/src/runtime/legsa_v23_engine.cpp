@@ -11,6 +11,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <initializer_list>
 #include <stdexcept>
 
 namespace legsa_v23_core {
@@ -84,6 +85,73 @@ double subVectorNorm3(const Vector21& values, std::size_t offset) {
     local[i] = values[offset + i];
   }
   return norm3(local);
+}
+
+// 中文说明：从 PVAState 取 IMU bias/scale 子块范数，用于 D6 feedback trace。
+double pvaVectorNorm3(const PVAState& state, const std::string& name) {
+  if (name == "gyrbias") {
+    return norm3(state.gyro_bias);
+  }
+  if (name == "accbias") {
+    return norm3(state.acc_bias);
+  }
+  if (name == "gyrscale") {
+    return norm3(state.gyro_scale);
+  }
+  if (name == "accscale") {
+    return norm3(state.acc_scale);
+  }
+  return 0.0;
+}
+
+bool feedbackModeIs(const GINSOptions& options, const std::initializer_list<const char*> names) {
+  if (!options.diagnostic_mode) {
+    return false;
+  }
+  for (const char* name : names) {
+    if (options.diagnostic_feedback_mode == name) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool posVelFeedbackEnabled(const GINSOptions& options) {
+  return !feedbackModeIs(options, {"attitude_only"});
+}
+
+bool attitudeFeedbackEnabled(const GINSOptions& options) {
+  return !feedbackModeIs(options,
+                         {"pos_vel_only", "no_attitude_feedback", "pos_vel_bias_scale_only",
+                          "no_attitude_no_bias_scale"});
+}
+
+bool biasScaleFeedbackEnabled(const GINSOptions& options) {
+  return !feedbackModeIs(options,
+                         {"pos_vel_only", "attitude_only", "pos_vel_attitude_only", "no_bias_scale_feedback",
+                          "no_imu_error_feedback", "freeze_imu_error_states",
+                          "no_imu_error_feedback_but_keep_attitude", "no_attitude_no_bias_scale"});
+}
+
+// 中文说明：协方差分块 Frobenius 范数只用于 D6 cross-covariance 诊断。
+double covarianceBlockNorm(const Matrix21& covariance, std::size_t row_begin, std::size_t row_count,
+                           std::size_t col_begin, std::size_t col_count) {
+  double sum = 0.0;
+  for (std::size_t row = 0; row < row_count; ++row) {
+    for (std::size_t col = 0; col < col_count; ++col) {
+      const double value = matrix21At(covariance, row_begin + row, col_begin + col);
+      sum += value * value;
+    }
+  }
+  return std::sqrt(sum);
+}
+
+double covarianceTrace3(const Matrix21& covariance, std::size_t offset) {
+  double trace = 0.0;
+  for (std::size_t i = 0; i < kVector3Size; ++i) {
+    trace += matrix21At(covariance, offset + i, offset + i);
+  }
+  return trace;
 }
 
 // 中文说明：量测残差/H/R 范数仅用于 D5 block contribution，不进入 EKF 计算。
@@ -223,6 +291,26 @@ void LegSAV23Engine::initialize() {
       matrix21At(filter_state_.covariance, PHI_ID + i, PHI_ID + i) *= 100.0;
     }
   }
+  if (options_.diagnostic_mode) {
+    double bias_scale_p_scale = 1.0;
+    if (options_.diagnostic_covariance_mode == "shrink_bias_scale_P_10x") {
+      bias_scale_p_scale = 0.1;
+    } else if (options_.diagnostic_covariance_mode == "shrink_bias_scale_P_100x") {
+      bias_scale_p_scale = 0.01;
+    } else if (options_.diagnostic_covariance_mode == "inflate_bias_scale_P_10x") {
+      bias_scale_p_scale = 10.0;
+    } else if (options_.diagnostic_covariance_mode == "inflate_bias_scale_P_100x") {
+      bias_scale_p_scale = 100.0;
+    }
+    if (bias_scale_p_scale != 1.0) {
+      // 中文说明：D6 诊断：只缩放 bias/scale 初始 P，用于单位审计，不是调参结果。
+      for (std::size_t offset : {BG_ID, BA_ID, SG_ID, SA_ID}) {
+        for (std::size_t i = 0; i < kVector3Size; ++i) {
+          matrix21At(filter_state_.covariance, offset + i, offset + i) *= bias_scale_p_scale;
+        }
+      }
+    }
+  }
   continuous_noise_ = diagonalNoiseMatrix(1.0e-6);
   for (std::size_t i = 0; i < kVector3Size; ++i) {
     noiseAt(continuous_noise_, ARW_ID + i, ARW_ID + i) = 1.0e-8;
@@ -231,6 +319,24 @@ void LegSAV23Engine::initialize() {
     noiseAt(continuous_noise_, BASTD_ID + i, BASTD_ID + i) = 1.0e-10;
     noiseAt(continuous_noise_, SGSTD_ID + i, SGSTD_ID + i) = 1.0e-14;
     noiseAt(continuous_noise_, SASTD_ID + i, SASTD_ID + i) = 1.0e-14;
+  }
+  if (options_.diagnostic_mode && options_.diagnostic_covariance_mode == "zero_bias_scale_process_noise") {
+    // 中文说明：D6 诊断：临时冻结 bias/scale 过程噪声，判断 Qc 单位/耦合是否驱动发散。
+    for (std::size_t i = 0; i < kVector3Size; ++i) {
+      noiseAt(continuous_noise_, BGSTD_ID + i, BGSTD_ID + i) = 0.0;
+      noiseAt(continuous_noise_, BASTD_ID + i, BASTD_ID + i) = 0.0;
+      noiseAt(continuous_noise_, SGSTD_ID + i, SGSTD_ID + i) = 0.0;
+      noiseAt(continuous_noise_, SASTD_ID + i, SASTD_ID + i) = 0.0;
+    }
+  } else if (options_.diagnostic_mode &&
+             options_.diagnostic_covariance_mode == "inflate_bias_scale_process_noise_10x") {
+    // 中文说明：D6 诊断：只放大 bias/scale 过程噪声 10 倍，结果不能作为性能声明。
+    for (std::size_t i = 0; i < kVector3Size; ++i) {
+      noiseAt(continuous_noise_, BGSTD_ID + i, BGSTD_ID + i) *= 10.0;
+      noiseAt(continuous_noise_, BASTD_ID + i, BASTD_ID + i) *= 10.0;
+      noiseAt(continuous_noise_, SGSTD_ID + i, SGSTD_ID + i) *= 10.0;
+      noiseAt(continuous_noise_, SASTD_ID + i, SASTD_ID + i) *= 10.0;
+    }
   }
   current_time_ = options_.start_time;
   initialized_ = true;
@@ -367,6 +473,18 @@ const std::vector<DiagnosticCovarianceRecord>& LegSAV23Engine::getDiagnosticCova
   return diagnostic_covariances_;
 }
 
+const std::vector<DiagnosticImuCompensationRecord>& LegSAV23Engine::getDiagnosticImuCompensationRecords() const {
+  return diagnostic_imu_compensations_;
+}
+
+const std::vector<DiagnosticImuErrorFeedbackRecord>& LegSAV23Engine::getDiagnosticImuErrorFeedbackRecords() const {
+  return diagnostic_imu_error_feedbacks_;
+}
+
+const std::vector<DiagnosticCrossCovarianceRecord>& LegSAV23Engine::getDiagnosticCrossCovarianceRecords() const {
+  return diagnostic_cross_covariances_;
+}
+
 // 中文说明：更新时间与 IMU 区间的四态判定；NED/BLH 状态在对应分支中保持 KF-GINS-style 顺序。
 int LegSAV23Engine::isToUpdate(double imu_time_1, double imu_time_2, double update_time) const {
   const double eps = 1.0e-10;
@@ -407,6 +525,7 @@ void LegSAV23Engine::imuInterpolate(const IMUData& imu1, IMUData& imu2, double t
 
 // 中文说明：IMU 补偿使用当前 bias/scale；输入是 process_data-compatible FRD 增量，不做二次坐标转换。
 void LegSAV23Engine::imuCompensate(IMUData& imu) {
+  const IMUData before = imu;
   const double dt = std::max(imu.dt, 1.0e-6);
   for (std::size_t i = 0; i < kVector3Size; ++i) {
     const double gyro_scale = 1.0 + filter_state_.current_pva.gyro_scale[i];
@@ -414,6 +533,8 @@ void LegSAV23Engine::imuCompensate(IMUData& imu) {
     imu.dtheta[i] = imu.dtheta[i] / gyro_scale - filter_state_.current_pva.gyro_bias[i] * dt;
     imu.dvel[i] = imu.dvel[i] / acc_scale - filter_state_.current_pva.acc_bias[i] * dt;
   }
+  ++imu_compensation_counts_[imu.time];
+  recordDiagnosticImuCompensation(before, imu, true, false, true);
 }
 
 // 中文说明：INS propagation 执行 vel/pos/att 机械编排；GNSS update 和 feedback 留给 N4H4C。
@@ -426,6 +547,8 @@ void LegSAV23Engine::insPropagation(const IMUData& imupre, const IMUData& imucur
   current_time_ = imucur.time;
   ++options_.propagation_count;
   recordDiagnosticPropagation(imupre, imucur);
+  recordDiagnosticImuCompensation(imucur, imucur, false, imu_compensation_counts_[imupre.time] > 0,
+                                  imu_compensation_counts_[imucur.time] > 0);
 }
 
 // 中文说明：F/G/Phi/Qd 构建只服务 EKF predict；N4H4B 不构建量测 H/R/K。
@@ -436,7 +559,9 @@ void LegSAV23Engine::buildFGPhiQd(const IMUData& imucur) {
 // 中文说明：EKF predict 执行 dx/P 预测传播；N4H4B 不做 GNSS update、EKFUpdate 或 stateFeedback。
 void LegSAV23Engine::EKFPredict() {
   legsa_v23_core::EKFPredict(filter_state_, last_matrices_.Phi, last_matrices_.Qd);
+  applyDiagnosticCovariancePostProcess();
   recordDiagnosticCovariance("predict");
+  recordDiagnosticCrossCovariance("predict");
 }
 
 // 中文说明：GNSS 更新调度入口；N4H4C 顺序构建 position/velocity/yaw 量测并交给 EKFUpdate。
@@ -518,7 +643,9 @@ void LegSAV23Engine::EKFUpdate() {
       }
     }
     legsa_v23_core::EKFUpdate(filter_state_, effective);
+    applyDiagnosticCovariancePostProcess();
     recordDiagnosticUpdateBlock(effective, dx_before, cov_before, filter_state_.dx, filter_state_.covariance, true);
+    recordDiagnosticCrossCovariance("update");
   }
   pending_measurements_.clear();
 }
@@ -538,7 +665,10 @@ void LegSAV23Engine::stateFeedback() {
   const FilterState before_state = filter_state_;
   legsa_v23_core::stateFeedback(filter_state_, options_);
   recordDiagnosticFeedbackDelta(before_state, filter_state_);
+  recordDiagnosticImuErrorFeedback(before_state, filter_state_, posVelFeedbackEnabled(options_),
+                                   attitudeFeedbackEnabled(options_), biasScaleFeedbackEnabled(options_));
   recordDiagnosticCovariance("feedback");
+  recordDiagnosticCrossCovariance("feedback");
 }
 
 // 中文说明：协方差检查保持有限、近似对称、对角非负；不伪造量测约束。
@@ -784,6 +914,131 @@ void LegSAV23Engine::recordDiagnosticCovariance(const std::string& event_type, d
   record.K_norm_if_update = k_norm;
   record.dx_phi_norm_deg_if_update = dx_phi_norm_deg;
   diagnostic_covariances_.push_back(record);
+}
+
+// 中文说明：D6 IMU compensation trace 记录补偿次数和前后增量范数；debug CSV 不进入 solver 输入。
+void LegSAV23Engine::recordDiagnosticImuCompensation(const IMUData& imu_before, const IMUData& imu_after,
+                                                     bool applied, bool imupre_compensated,
+                                                     bool imucur_compensated) {
+  if (!options_.diagnostic_mode || !options_.debug_imu_compensation) {
+    return;
+  }
+  if (diagnostic_imu_compensations_.size() >=
+      static_cast<std::size_t>(std::max(0, options_.diagnostic_debug_max_rows))) {
+    return;
+  }
+  DiagnosticImuCompensationRecord record;
+  record.propagation_index = options_.propagation_count;
+  record.imu_time = imu_after.time;
+  record.imu_dt = imu_after.dt;
+  record.dtheta_norm_before = norm3(imu_before.dtheta);
+  record.dtheta_norm_after = norm3(imu_after.dtheta);
+  record.dvel_norm_before = norm3(imu_before.dvel);
+  record.dvel_norm_after = norm3(imu_after.dvel);
+  record.gyrbias_norm = norm3(filter_state_.current_pva.gyro_bias);
+  record.accbias_norm = norm3(filter_state_.current_pva.acc_bias);
+  record.gyrscale_norm = norm3(filter_state_.current_pva.gyro_scale);
+  record.accscale_norm = norm3(filter_state_.current_pva.acc_scale);
+  record.compensation_applied = applied;
+  const auto found = imu_compensation_counts_.find(imu_after.time);
+  record.compensation_count_for_current_imu = found == imu_compensation_counts_.end() ? 0 : found->second;
+  record.repeated_compensation_detected = record.compensation_count_for_current_imu > 1;
+  record.imupre_compensated = imupre_compensated;
+  record.imucur_compensated = imucur_compensated;
+  diagnostic_imu_compensations_.push_back(record);
+}
+
+// 中文说明：D6 IMU error feedback trace 只记录 bias/scale 反馈大小，不能作为性能或调参证据。
+void LegSAV23Engine::recordDiagnosticImuErrorFeedback(const FilterState& before_state,
+                                                      const FilterState& after_state,
+                                                      bool pos_vel_feedback_applied,
+                                                      bool attitude_feedback_applied,
+                                                      bool bias_scale_feedback_applied) {
+  if (!options_.diagnostic_mode || !options_.debug_imu_error_feedback) {
+    return;
+  }
+  if (diagnostic_imu_error_feedbacks_.size() >=
+      static_cast<std::size_t>(std::max(0, options_.diagnostic_debug_max_rows))) {
+    return;
+  }
+  DiagnosticImuErrorFeedbackRecord record;
+  record.update_index = diagnostic_current_update_index_;
+  record.gnss_time = diagnostic_current_gnss_time_;
+  record.dx_bg_norm = subVectorNorm3(before_state.dx, BG_ID);
+  record.dx_ba_norm = subVectorNorm3(before_state.dx, BA_ID);
+  record.dx_sg_norm = subVectorNorm3(before_state.dx, SG_ID);
+  record.dx_sa_norm = subVectorNorm3(before_state.dx, SA_ID);
+  record.gyrbias_norm_before = pvaVectorNorm3(before_state.current_pva, "gyrbias");
+  record.accbias_norm_before = pvaVectorNorm3(before_state.current_pva, "accbias");
+  record.gyrscale_norm_before = pvaVectorNorm3(before_state.current_pva, "gyrscale");
+  record.accscale_norm_before = pvaVectorNorm3(before_state.current_pva, "accscale");
+  record.gyrbias_norm_after = pvaVectorNorm3(after_state.current_pva, "gyrbias");
+  record.accbias_norm_after = pvaVectorNorm3(after_state.current_pva, "accbias");
+  record.gyrscale_norm_after = pvaVectorNorm3(after_state.current_pva, "gyrscale");
+  record.accscale_norm_after = pvaVectorNorm3(after_state.current_pva, "accscale");
+  record.bias_scale_feedback_applied = bias_scale_feedback_applied;
+  record.attitude_feedback_applied = attitude_feedback_applied;
+  record.pos_vel_feedback_applied = pos_vel_feedback_applied;
+  diagnostic_imu_error_feedbacks_.push_back(record);
+}
+
+// 中文说明：D6 cross covariance trace 记录 P 的耦合强度，external clean reference 不进入 solver。
+void LegSAV23Engine::recordDiagnosticCrossCovariance(const std::string& event_type) {
+  if (!options_.diagnostic_mode || !options_.debug_cross_covariance) {
+    return;
+  }
+  if (diagnostic_cross_covariances_.size() >=
+      static_cast<std::size_t>(std::max(0, options_.diagnostic_debug_max_rows))) {
+    return;
+  }
+  DiagnosticCrossCovarianceRecord record;
+  record.time = current_time_;
+  record.event_type = event_type;
+  record.P_phi_trace = covarianceTrace3(filter_state_.covariance, PHI_ID);
+  record.P_bg_trace = covarianceTrace3(filter_state_.covariance, BG_ID);
+  record.P_ba_trace = covarianceTrace3(filter_state_.covariance, BA_ID);
+  record.P_sg_trace = covarianceTrace3(filter_state_.covariance, SG_ID);
+  record.P_sa_trace = covarianceTrace3(filter_state_.covariance, SA_ID);
+  record.P_phi_bg_norm = covarianceBlockNorm(filter_state_.covariance, PHI_ID, kVector3Size, BG_ID, kVector3Size);
+  record.P_phi_ba_norm = covarianceBlockNorm(filter_state_.covariance, PHI_ID, kVector3Size, BA_ID, kVector3Size);
+  record.P_phi_sg_norm = covarianceBlockNorm(filter_state_.covariance, PHI_ID, kVector3Size, SG_ID, kVector3Size);
+  record.P_phi_sa_norm = covarianceBlockNorm(filter_state_.covariance, PHI_ID, kVector3Size, SA_ID, kVector3Size);
+  record.P_pos_phi_norm = covarianceBlockNorm(filter_state_.covariance, P_ID, kVector3Size, PHI_ID, kVector3Size);
+  record.P_vel_phi_norm = covarianceBlockNorm(filter_state_.covariance, V_ID, kVector3Size, PHI_ID, kVector3Size);
+  record.P_pos_ba_norm = covarianceBlockNorm(filter_state_.covariance, P_ID, kVector3Size, BA_ID, kVector3Size);
+  record.P_vel_ba_norm = covarianceBlockNorm(filter_state_.covariance, V_ID, kVector3Size, BA_ID, kVector3Size);
+  diagnostic_cross_covariances_.push_back(record);
+}
+
+// 中文说明：D6 covariance variant 在 predict/update 后临时清零交叉项，只用于定位 coupling，不是正式修复。
+void LegSAV23Engine::applyDiagnosticCovariancePostProcess() {
+  if (!options_.diagnostic_mode) {
+    return;
+  }
+  const std::string mode = options_.diagnostic_covariance_mode;
+  if (mode == "zero_phi_bias_scale_cross_cov") {
+    for (std::size_t offset : {BG_ID, BA_ID, SG_ID, SA_ID}) {
+      for (std::size_t i = 0; i < kVector3Size; ++i) {
+        for (std::size_t j = 0; j < kVector3Size; ++j) {
+          matrix21At(filter_state_.covariance, PHI_ID + i, offset + j) = 0.0;
+          matrix21At(filter_state_.covariance, offset + j, PHI_ID + i) = 0.0;
+        }
+      }
+    }
+  } else if (mode == "zero_bias_scale_cross_cov") {
+    for (std::size_t offset : {BG_ID, BA_ID, SG_ID, SA_ID}) {
+      for (std::size_t i = 0; i < kVector3Size; ++i) {
+        const std::size_t index = offset + i;
+        for (std::size_t j = 0; j < kStateSize; ++j) {
+          if (j == index) {
+            continue;
+          }
+          matrix21At(filter_state_.covariance, index, j) = 0.0;
+          matrix21At(filter_state_.covariance, j, index) = 0.0;
+        }
+      }
+    }
+  }
 }
 
 }  // namespace legsa_v23_core

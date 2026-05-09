@@ -76,6 +76,9 @@ struct GINSOptions {
   bool debug_update_blocks = false;
   bool debug_feedback_delta = false;
   bool debug_covariance_gain = false;
+  bool debug_imu_error_feedback = false;
+  bool debug_imu_compensation = false;
+  bool debug_cross_covariance = false;
   std::string diagnostic_feedback_mode = "normal";
   std::string diagnostic_update_block_mode = "all";
   std::string diagnostic_covariance_mode = "normal";
