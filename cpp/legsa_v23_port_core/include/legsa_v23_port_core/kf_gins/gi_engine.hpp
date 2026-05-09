@@ -48,6 +48,9 @@ class GIEngine {
   double timestamp() const;
   std::size_t propagationCount() const;
   std::size_t updateCount() const;
+  std::size_t positionUpdateCount() const;
+  std::size_t velocityUpdateCount() const;
+  std::size_t yawUpdateCount() const;
   std::size_t yawNormalCount() const;
   std::size_t yawDownweightCount() const;
   std::size_t yawRejectCount() const;
@@ -76,6 +79,9 @@ class GIEngine {
   double timestamp_ = 0.0;
   std::size_t propagation_count_ = 0;
   std::size_t update_count_ = 0;
+  std::size_t position_update_count_ = 0;
+  std::size_t velocity_update_count_ = 0;
+  std::size_t yaw_update_count_ = 0;
   std::size_t yaw_normal_count_ = 0;
   std::size_t yaw_downweight_count_ = 0;
   std::size_t yaw_reject_count_ = 0;

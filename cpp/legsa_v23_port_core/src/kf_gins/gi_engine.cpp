@@ -304,6 +304,18 @@ std::size_t GIEngine::updateCount() const {
   return update_count_;
 }
 
+std::size_t GIEngine::positionUpdateCount() const {
+  return position_update_count_;
+}
+
+std::size_t GIEngine::velocityUpdateCount() const {
+  return velocity_update_count_;
+}
+
+std::size_t GIEngine::yawUpdateCount() const {
+  return yaw_update_count_;
+}
+
 std::size_t GIEngine::yawNormalCount() const {
   return yaw_normal_count_;
 }
@@ -395,6 +407,7 @@ void GIEngine::applyPositionUpdate(GnssData& gnss) {
   setBlock(H, 0, PHI_ID, Rotation::skewSymmetric(lever_n));
   Matrix R = diagonalMatrix(cwiseProduct(positiveStd(gnss.std_ned_m, 1.0e-3), positiveStd(gnss.std_ned_m, 1.0e-3)));
   EKFUpdate(std::vector<double>{dz_vec[0], dz_vec[1], dz_vec[2]}, H, R);
+  ++position_update_count_;
 }
 
 // 中文说明：velocity update 使用 antenna velocity - GNSS velocity；若 lever velocity evidence 缺失则保持保守项。
@@ -409,10 +422,12 @@ void GIEngine::applyVelocityUpdate(GnssData& gnss) {
   Vec3 stdv = add(positiveStd(gnss.vel_std_mps, 1.0e-3), makeVec3(0.05, 0.05, 0.05));
   Matrix R = diagonalMatrix(cwiseProduct(stdv, stdv));
   EKFUpdate(std::vector<double>{dz_vec[0], dz_vec[1], dz_vec[2]}, H, R);
+  ++velocity_update_count_;
 }
 
 // 中文说明：scheme_C 只对 dual-antenna yaw 观测做鲁棒门控，不放宽 hard=15 deg。
 void GIEngine::applyYawUpdate(GnssData& gnss) {
+  ++yaw_update_count_;
   const double yaw_obs = gnss.yaw_rad;
   const double yaw_pred = pvacur_.euler_rad[2];
   const double yaw_std = std::max(gnss.yaw_std_rad, options_.yaw_std_min_deg * D2R);

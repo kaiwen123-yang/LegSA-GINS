@@ -35,7 +35,7 @@
 | N4H4R0 route reset and source-backed port readiness | stage/N4H4R0-route-reset-source-backed-port | done | no | no | route reset docs + readiness audits | source-backed controlled port selected; final_v23 is not proposed; no solver implementation or factors |
 | N4H4R1 source-backed port-core foundation | stage/N4H4R1-source-backed-port-core-foundation | done | yes | no | port-core foundation | minimal compileable source-backed port-core foundation with provenance headers, toy dry-run, audits, and tests; PR #21 remains evidence branch |
 | N4H4R2 complete source-backed mathematical port | stage/N4H4R2-source-backed-math-port | done | yes | no | complete port | source-backed math chain completed with synthetic smoke only; no clean replay parity or performance claim |
-| N4H4R3 clean replay parity | stage/N4H4R3-clean-replay-parity | not_started | yes | no | clean replay parity | N4H4R3 not_started; must report pass/fail honestly |
+| N4H4R3 clean replay parity | stage/N4H4R3-port-clean-replay-parity | done | yes | no | clean replay parity | N4H4R2 done; N4H4R3 done with engineering-only parity/gap decision; N4H4E not_started if parity passed; PR #21 remains evidence branch |
 | N4H4 LegSA-v23-core full EKF / unified filter implementation | stage/N4H4-legsa-v23-core | in_progress | yes | no | LegSA-owned EKF/unified filter | staged through N4H4A/B/C; no wrapper, no output substitution, no final_v23 output as proposed solver input |
 | N5 raw Doppler factor | stage/N5-raw-doppler-factor | not_started | yes | no | Doppler factor | sign convention required |
 | N6 source-aware weighting / Go2 weak priors | stage/N6-source-aware-weighting | not_started | yes | no | weighting module | no trace tuning |
