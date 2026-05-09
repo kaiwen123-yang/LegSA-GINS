@@ -13,6 +13,9 @@ namespace legsa_v23_port_core {
 
 struct PortRuntimeDebugOptions {
   bool update_timeline = false;
+  bool overclose_audit = false;
+  bool measurement_copy_guard = false;
+  bool covariance_gain = false;
   std::string output_dir;
   std::size_t max_rows = 100000;
 };

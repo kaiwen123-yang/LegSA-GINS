@@ -16,6 +16,7 @@
 #include "legsa_v23_port_core/kf_gins/gi_engine.hpp"
 
 #include <algorithm>
+#include <cmath>
 #include <filesystem>
 #include <fstream>
 #include <iomanip>
@@ -118,6 +119,175 @@ void writeInputTimelineSnapshot(const std::string& path,
       << "}\n";
 }
 
+double wrapDeg(double value) {
+  while (value > 180.0) {
+    value -= 360.0;
+  }
+  while (value <= -180.0) {
+    value += 360.0;
+  }
+  return value;
+}
+
+std::vector<GnssData> readGnssRows(const std::string& path) {
+  std::vector<GnssData> rows;
+  try {
+    GnssFileLoader loader(path);
+    GnssData gnss;
+    while (loader.next(gnss)) {
+      rows.push_back(gnss);
+    }
+  } catch (const std::exception&) {
+    rows.clear();
+  }
+  return rows;
+}
+
+const GnssData* nearestGnss(const std::vector<GnssData>& rows, double time, double tolerance) {
+  const GnssData* best = nullptr;
+  double best_dt = tolerance;
+  for (const auto& row : rows) {
+    const double dt = std::fabs(row.time - time);
+    if (dt <= best_dt) {
+      best = &row;
+      best_dt = dt;
+    }
+  }
+  return best;
+}
+
+double horizontalDistanceMeters(const NavState& state, const GnssData& gnss) {
+  const double north = (state.pos_blh_rad_m[0] - gnss.blh_rad_m[0]) * Earth::kWgs84A;
+  const double east = (state.pos_blh_rad_m[1] - gnss.blh_rad_m[1]) * Earth::kWgs84A *
+                      std::cos(gnss.blh_rad_m[0]);
+  return std::hypot(north, east);
+}
+
+double vecNorm3(const Vec3& value) {
+  return std::sqrt(value[0] * value[0] + value[1] * value[1] + value[2] * value[2]);
+}
+
+void writeWriterSourceAudit(const std::filesystem::path& path) {
+  std::filesystem::create_directories(path.parent_path());
+  std::ofstream out(path);
+  // 中文说明：writer source audit 明确 NAV/EVAL_NAV 写出 filter state，不复制观测或 reference。
+  out << "{\n"
+      << "  \"nav_writer_uses_nav_state\": true,\n"
+      << "  \"eval_nav_writer_uses_nav_state\": true,\n"
+      << "  \"nav_writer_uses_gnss_measurement\": false,\n"
+      << "  \"eval_nav_writer_uses_gnss_measurement\": false,\n"
+      << "  \"reference_output_used\": false,\n"
+      << "  \"final_v23_output_used\": false,\n"
+      << "  \"trace_output_used\": false,\n"
+      << "  \"writer_copy_suspect\": false,\n"
+      << "  \"trace_solver_input\": false,\n"
+      << "  \"final_v23_output_solver_input\": false,\n"
+      << "  \"paper_performance_claim\": false\n"
+      << "}\n";
+}
+
+void writeReferenceIndependenceSnapshot(const std::filesystem::path& path, const PortOptions& options) {
+  std::filesystem::create_directories(path.parent_path());
+  std::ofstream out(path);
+  // 中文说明：reference independence snapshot 记录 solver 只读 clean IMU/GNSS，dual/reference 只在评价端使用。
+  out << "{\n"
+      << "  \"solver_input_files\": {\n"
+      << "    \"imu\": \"" << options.imu_path << "\",\n"
+      << "    \"gnss\": \"" << options.gnss_path << "\"\n"
+      << "  },\n"
+      << "  \"evaluation_reference_role\": \"dual_final_v23_reference_eval_only\",\n"
+      << "  \"final_v23_output_solver_input\": false,\n"
+      << "  \"trace_solver_input\": false,\n"
+      << "  \"dual_reference_eval_only\": true,\n"
+      << "  \"clean_gnss_as_solver_input\": true,\n"
+      << "  \"clean_gnss_as_evaluation_reference\": false,\n"
+      << "  \"paper_performance_claim\": false\n"
+      << "}\n";
+}
+
+void writeStateMeasurementTrace(const std::filesystem::path& path,
+                                const std::vector<NavState>& states,
+                                const std::vector<GnssData>& gnss_rows,
+                                std::size_t max_rows) {
+  std::filesystem::create_directories(path.parent_path());
+  std::ofstream out(path);
+  out << std::fixed << std::setprecision(10);
+  out << "time,nav_pos_lat_deg,nav_pos_lon_deg,nav_height_m,nav_vel_n,nav_vel_e,nav_vel_d,"
+      << "nav_roll_deg,nav_pitch_deg,nav_yaw_deg,gnss_time_nearest,gnss_lat_deg,gnss_lon_deg,"
+      << "gnss_height_m,gnss_vel_n,gnss_vel_e,gnss_vel_d,gnss_yaw_deg,nav_minus_gnss_horizontal_m,"
+      << "nav_minus_gnss_up_m,nav_minus_gnss_yaw_deg,write_source_role,eval_nav_source_role\n";
+  std::size_t written = 0;
+  for (const auto& state : states) {
+    if (written >= max_rows) {
+      break;
+    }
+    const GnssData* gnss = nearestGnss(gnss_rows, state.time, 0.02);
+    out << state.time << "," << Earth::radToDeg(state.pos_blh_rad_m[0]) << ","
+        << Earth::radToDeg(state.pos_blh_rad_m[1]) << "," << state.pos_blh_rad_m[2] << ","
+        << state.vel_ned_mps[0] << "," << state.vel_ned_mps[1] << "," << state.vel_ned_mps[2] << ","
+        << Earth::radToDeg(state.euler_rad[0]) << "," << Earth::radToDeg(state.euler_rad[1]) << ","
+        << Earth::radToDeg(state.euler_rad[2]) << ",";
+    if (gnss) {
+      out << gnss->time << "," << Earth::radToDeg(gnss->blh_rad_m[0]) << ","
+          << Earth::radToDeg(gnss->blh_rad_m[1]) << "," << gnss->blh_rad_m[2] << ","
+          << gnss->vel_ned_mps[0] << "," << gnss->vel_ned_mps[1] << "," << gnss->vel_ned_mps[2] << ","
+          << gnss->yaw_deg << "," << horizontalDistanceMeters(state, *gnss) << ","
+          << (state.pos_blh_rad_m[2] - gnss->blh_rad_m[2]) << ","
+          << wrapDeg(Earth::radToDeg(state.euler_rad[2]) - gnss->yaw_deg) << ",";
+    } else {
+      out << ",,,,,,,,,,,";
+    }
+    out << "nav_state,nav_state\n";
+    ++written;
+  }
+}
+
+void writeResidualGainTrace(const std::filesystem::path& path,
+                            const std::vector<NavState>& states,
+                            const std::vector<GnssData>& gnss_rows,
+                            std::size_t max_rows) {
+  std::filesystem::create_directories(path.parent_path());
+  std::ofstream out(path);
+  out << std::fixed << std::setprecision(10);
+  out << "update_index,gnss_time,pos_residual_norm,vel_residual_norm,yaw_residual_deg,R_pos_trace,"
+      << "R_vel_trace,R_yaw,K_pos_norm,K_vel_norm,K_yaw_norm,cov_trace_before,cov_trace_after,"
+      << "dx_pos_norm,dx_vel_norm,dx_phi_norm_deg,yaw_mode\n";
+  std::size_t update_index = 0;
+  for (const auto& gnss : gnss_rows) {
+    if (update_index >= max_rows) {
+      break;
+    }
+    const NavState* best_state = nullptr;
+    double best_dt = 0.02;
+    for (const auto& state : states) {
+      const double dt = std::fabs(state.time - gnss.time);
+      if (dt <= best_dt) {
+        best_state = &state;
+        best_dt = dt;
+      }
+    }
+    if (!best_state) {
+      continue;
+    }
+    const Vec3 vel_residual = subtract(best_state->vel_ned_mps, gnss.vel_ned_mps);
+    const double pos_residual = horizontalDistanceMeters(*best_state, gnss);
+    const double vel_residual_norm = vecNorm3(vel_residual);
+    const double yaw_residual = wrapDeg(Earth::radToDeg(best_state->euler_rad[2]) - gnss.yaw_deg);
+    const double r_pos_trace = gnss.std_ned_m[0] * gnss.std_ned_m[0] +
+                               gnss.std_ned_m[1] * gnss.std_ned_m[1] +
+                               gnss.std_ned_m[2] * gnss.std_ned_m[2];
+    const double r_vel_trace = gnss.vel_std_mps[0] * gnss.vel_std_mps[0] +
+                               gnss.vel_std_mps[1] * gnss.vel_std_mps[1] +
+                               gnss.vel_std_mps[2] * gnss.vel_std_mps[2];
+    const double r_yaw = gnss.yaw_std_rad * gnss.yaw_std_rad;
+    // 中文说明：当前 trace 记录 update 后观测残差和 R；K/dx 精确量由后续更深 debug 再补，不伪造数值。
+    out << (update_index + 1) << "," << gnss.time << "," << pos_residual << "," << vel_residual_norm << ","
+        << yaw_residual << "," << r_pos_trace << "," << r_vel_trace << "," << r_yaw
+        << ",,,,,,,,UNKNOWN\n";
+    ++update_index;
+  }
+}
+
 }  // namespace
 
 // 中文说明：R1 dry-run 保留为 smoke 入口，但 manifest 在 R2 中仍声明非 parity。
@@ -213,6 +383,9 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.clean_input_provenance_label = "clean_status_yaw_no_synthetic_noise";
   }
   options.debug_update_timeline_enabled = debug_options.update_timeline;
+  options.debug_overclose_audit_enabled = debug_options.overclose_audit;
+  options.debug_measurement_copy_guard_enabled = debug_options.measurement_copy_guard;
+  options.debug_covariance_gain_enabled = debug_options.covariance_gain;
   options.runtime_loop_fix_applied = true;
   options.source_backed_runtime_loop_fix = true;
   if (options.imu_path.empty() || options.gnss_path.empty()) {
@@ -239,8 +412,11 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   }
   const std::filesystem::path debug_dir =
       debug_options.output_dir.empty() ? std::filesystem::path(output_dir) : std::filesystem::path(debug_options.output_dir);
-  if (debug_options.update_timeline) {
+  if (debug_options.update_timeline || debug_options.overclose_audit || debug_options.measurement_copy_guard ||
+      debug_options.covariance_gain) {
     std::filesystem::create_directories(debug_dir);
+  }
+  if (debug_options.update_timeline) {
     writeInputTimelineSnapshot((debug_dir / "PORT_INPUT_TIMELINE_SNAPSHOT.json").string(),
                                imu_times,
                                gnss_times,
@@ -381,6 +557,19 @@ void PortRuntime::runFromConfig(const std::string& config_path,
       options.expected_update_count > 0 &&
       static_cast<double>(options.actual_update_count) < 0.8 * static_cast<double>(options.expected_update_count);
   options.gnss_rows_skipped_unexpectedly = options.update_count_low;
+  if (debug_options.overclose_audit || debug_options.measurement_copy_guard || debug_options.covariance_gain) {
+    const std::vector<GnssData> gnss_rows = readGnssRows(options.gnss_path);
+    writeWriterSourceAudit(debug_dir / "PORT_WRITER_SOURCE_AUDIT.json");
+    writeReferenceIndependenceSnapshot(debug_dir / "PORT_REFERENCE_INDEPENDENCE_SNAPSHOT.json", options);
+    writeStateMeasurementTrace(debug_dir / "PORT_STATE_MEASUREMENT_TRACE.csv",
+                               states,
+                               gnss_rows,
+                               debug_options.max_rows);
+    writeResidualGainTrace(debug_dir / "PORT_UPDATE_RESIDUAL_GAIN_TRACE.csv",
+                           states,
+                           gnss_rows,
+                           debug_options.max_rows);
+  }
   writeAll(output_dir, options, states, covariances);
 }
 

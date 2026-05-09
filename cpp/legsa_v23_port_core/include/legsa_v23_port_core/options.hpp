@@ -61,6 +61,9 @@ struct PortOptions {
   std::size_t yaw_downweight_count = 0;
   std::size_t yaw_reject_count = 0;
   bool debug_update_timeline_enabled = false;
+  bool debug_overclose_audit_enabled = false;
+  bool debug_measurement_copy_guard_enabled = false;
+  bool debug_covariance_gain_enabled = false;
   std::size_t gnss_rows_total = 0;
   std::size_t gnss_rows_in_overlap = 0;
   std::size_t expected_update_count = 0;
