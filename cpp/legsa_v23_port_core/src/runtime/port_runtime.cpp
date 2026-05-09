@@ -15,7 +15,14 @@
 #include "legsa_v23_port_core/fileio/imu_file_loader.hpp"
 #include "legsa_v23_port_core/kf_gins/gi_engine.hpp"
 
+#include <algorithm>
+#include <filesystem>
+#include <fstream>
+#include <iomanip>
+#include <limits>
+#include <sstream>
 #include <stdexcept>
+#include <string>
 #include <vector>
 
 namespace legsa_v23_port_core {
@@ -48,6 +55,67 @@ void writeAll(const std::string& output_dir,
   FileSaver::writeStd(output_dir, covariances);
   FileSaver::writeEvalNav(output_dir, states);
   FileSaver::writeRunManifest(output_dir, options);
+}
+
+std::vector<double> readFirstColumnTimes(const std::string& path) {
+  std::ifstream input(path);
+  std::vector<double> times;
+  std::string line;
+  while (std::getline(input, line)) {
+    if (line.empty() || line[0] == '#') {
+      continue;
+    }
+    std::istringstream stream(line);
+    double time = 0.0;
+    if (stream >> time) {
+      times.push_back(time);
+    }
+  }
+  return times;
+}
+
+std::size_t countInRange(const std::vector<double>& times, double start, double end) {
+  return static_cast<std::size_t>(
+      std::count_if(times.begin(), times.end(), [start, end](double time) { return time > start && time <= end; }));
+}
+
+void writeInputTimelineSnapshot(const std::string& path,
+                                const std::vector<double>& imu_times,
+                                const std::vector<double>& gnss_times,
+                                const PortOptions& options,
+                                double effective_start,
+                                double effective_end,
+                                std::size_t gnss_rows_in_overlap) {
+  std::filesystem::create_directories(std::filesystem::path(path).parent_path());
+  std::ofstream out(path);
+  const double first_imu = imu_times.empty() ? 0.0 : imu_times.front();
+  const double last_imu = imu_times.empty() ? 0.0 : imu_times.back();
+  const double first_gnss = gnss_times.empty() ? 0.0 : gnss_times.front();
+  const double last_gnss = gnss_times.empty() ? 0.0 : gnss_times.back();
+  out << std::fixed << std::setprecision(10)
+      << "{\n"
+      << "  \"imu_row_count\": " << imu_times.size() << ",\n"
+      << "  \"gnss_row_count\": " << gnss_times.size() << ",\n"
+      << "  \"first_imu_time\": " << first_imu << ",\n"
+      << "  \"last_imu_time\": " << last_imu << ",\n"
+      << "  \"first_gnss_time\": " << first_gnss << ",\n"
+      << "  \"last_gnss_time\": " << last_gnss << ",\n"
+      << "  \"config_starttime\": " << options.starttime << ",\n"
+      << "  \"config_endtime\": " << options.endtime << ",\n"
+      << "  \"effective_starttime\": " << effective_start << ",\n"
+      << "  \"effective_endtime\": " << effective_end << ",\n"
+      << "  \"imu_duration\": " << (last_imu - first_imu) << ",\n"
+      << "  \"gnss_duration\": " << (last_gnss - first_gnss) << ",\n"
+      << "  \"overlap_start\": " << effective_start << ",\n"
+      << "  \"overlap_end\": " << effective_end << ",\n"
+      << "  \"overlap_duration\": " << (effective_end - effective_start) << ",\n"
+      << "  \"gnss_rows_in_overlap\": " << gnss_rows_in_overlap << ",\n"
+      << "  \"gnss_rows_after_start_before_end\": " << gnss_rows_in_overlap << ",\n"
+      << "  \"expected_update_count_policy\": \"gnss rows inside effective IMU/config overlap\",\n"
+      << "  \"trace_solver_input\": false,\n"
+      << "  \"final_v23_output_solver_input\": false,\n"
+      << "  \"paper_performance_claim\": false\n"
+      << "}\n";
 }
 
 }  // namespace
@@ -123,6 +191,14 @@ void PortRuntime::runSyntheticMath(const std::string& output_dir) {
 
 // 中文说明：真实输入 runner 只建立 R2 运行链路；R3 才允许 clean replay parity 判定。
 void PortRuntime::runFromConfig(const std::string& config_path, const std::string& output_dir) {
+  PortRuntimeDebugOptions debug_options;
+  runFromConfig(config_path, output_dir, debug_options);
+}
+
+// 中文说明：真实输入 runner 采用 source-backed 主循环；debug timeline 仅写 runtime output dir。
+void PortRuntime::runFromConfig(const std::string& config_path,
+                                const std::string& output_dir,
+                                const PortRuntimeDebugOptions& debug_options) {
   PortOptions options = PortConfigLoader::loadYamlLike(config_path);
   options.phase = "N4H4R3";
   options.port_role = "source_backed_clean_replay_candidate";
@@ -136,13 +212,42 @@ void PortRuntime::runFromConfig(const std::string& config_path, const std::strin
   if (options.clean_input_provenance_label.empty()) {
     options.clean_input_provenance_label = "clean_status_yaw_no_synthetic_noise";
   }
+  options.debug_update_timeline_enabled = debug_options.update_timeline;
+  options.runtime_loop_fix_applied = true;
+  options.source_backed_runtime_loop_fix = true;
   if (options.imu_path.empty() || options.gnss_path.empty()) {
     throw std::runtime_error("config must provide imu_path/imupath and gnss_path/gnsspath");
   }
+  const std::vector<double> imu_times = readFirstColumnTimes(options.imu_path);
+  const std::vector<double> gnss_times = readFirstColumnTimes(options.gnss_path);
+  const double first_imu = imu_times.empty() ? 0.0 : imu_times.front();
+  const double last_imu = imu_times.empty() ? 0.0 : imu_times.back();
+  const double first_gnss = gnss_times.empty() ? 0.0 : gnss_times.front();
+  const double last_gnss = gnss_times.empty() ? 0.0 : gnss_times.back();
+  const double config_end = options.endtime > 0.0 ? options.endtime : std::min(last_imu, last_gnss);
+  const double effective_start = std::max(options.starttime, first_imu);
+  const double effective_end = std::min(config_end, std::min(last_imu, last_gnss));
+  const std::size_t expected_updates = countInRange(gnss_times, effective_start, effective_end);
+  options.gnss_rows_total = gnss_times.size();
+  options.gnss_rows_in_overlap = expected_updates;
+  options.expected_update_count = expected_updates;
+
   ImuFileLoader imu_loader(options.imu_path);
   GnssFileLoader gnss_loader(options.gnss_path);
   if (!imu_loader.isOpen() || !gnss_loader.isOpen()) {
     throw std::runtime_error("failed to open configured IMU/GNSS inputs");
+  }
+  const std::filesystem::path debug_dir =
+      debug_options.output_dir.empty() ? std::filesystem::path(output_dir) : std::filesystem::path(debug_options.output_dir);
+  if (debug_options.update_timeline) {
+    std::filesystem::create_directories(debug_dir);
+    writeInputTimelineSnapshot((debug_dir / "PORT_INPUT_TIMELINE_SNAPSHOT.json").string(),
+                               imu_times,
+                               gnss_times,
+                               options,
+                               effective_start,
+                               effective_end,
+                               expected_updates);
   }
 
   GIEngine engine(options);
@@ -152,30 +257,111 @@ void PortRuntime::runFromConfig(const std::string& config_path, const std::strin
   appendState(engine, states, covariances);
 
   ImuData imu;
-  if (!imu_loader.next(imu)) {
+  bool has_imu = false;
+  while (imu_loader.next(imu)) {
+    if (imu.time >= options.starttime) {
+      has_imu = true;
+      break;
+    }
+  }
+  if (!has_imu) {
     throw std::runtime_error("empty IMU input");
   }
   engine.addImuData(imu, true);
+  double current_imu_time = imu.time;
 
   GnssData gnss;
-  bool has_gnss = gnss_loader.next(gnss);
+  bool has_gnss = false;
+  std::ofstream skipped_trace;
+  if (debug_options.update_timeline) {
+    skipped_trace.open(debug_dir / "PORT_SKIPPED_GNSS_TRACE.csv");
+    skipped_trace << "gnss_time,reason,nearest_imu_pre_time,nearest_imu_cur_time\n";
+  }
+  while (gnss_loader.next(gnss)) {
+    if (gnss.time > options.starttime) {
+      has_gnss = true;
+      break;
+    }
+    if (skipped_trace) {
+      skipped_trace << gnss.time << ",before_start,," << current_imu_time << "\n";
+    }
+  }
   if (has_gnss) {
     engine.addGnssData(gnss);
   }
 
+  std::ofstream loop_trace;
+  std::ofstream update_trace;
+  if (debug_options.update_timeline) {
+    loop_trace.open(debug_dir / "PORT_RUNTIME_LOOP_TRACE.csv");
+    loop_trace << "loop_index,imu_pre_time,imu_cur_time,current_gnss_time_before_loop,"
+               << "current_gnss_time_after_refresh,gnss_refresh_count_this_loop,gnss_added_time,"
+               << "gnss_valid_before_newImuProcess,isToUpdate_res,update_applied,update_type,"
+               << "timestamp_after_process,nav_written,gnss_eof,imu_eof\n";
+    update_trace.open(debug_dir / "PORT_GNSS_UPDATE_TRACE.csv");
+    update_trace << "update_index,gnss_time,imu_pre_time,imu_cur_time,res,position_update,velocity_update,"
+                 << "yaw_update,yaw_mode,yaw_residual_deg,residual_pos_norm,residual_vel_norm\n";
+  }
+
+  std::size_t loop_index = 0;
   while (imu_loader.next(imu)) {
-    while (has_gnss && gnss.time < imu.time && !gnss_loader.isEof()) {
+    if (options.endtime > 0.0 && imu.time > options.endtime) {
+      break;
+    }
+    const double gnss_before_loop = has_gnss ? gnss.time : -1.0;
+    std::size_t refresh_count = 0;
+    double gnss_added_time = has_gnss ? gnss.time : -1.0;
+    // 中文说明：复现 KF-GINS 主循环，只在上一帧 IMU 之后 GNSS 已陈旧时读取一条新 GNSS，避免 while 覆盖待更新观测。
+    if (has_gnss && gnss.time < current_imu_time && !gnss_loader.isEof()) {
+      const double stale_time = gnss.time;
       has_gnss = gnss_loader.next(gnss);
       if (has_gnss) {
         engine.addGnssData(gnss);
+        gnss_added_time = gnss.time;
+        refresh_count = 1;
+      }
+      if (skipped_trace) {
+        skipped_trace << stale_time << ",stale," << current_imu_time << "," << imu.time << "\n";
       }
     }
     engine.addImuData(imu);
+    const int res = engine.isToUpdate();
+    const std::size_t updates_before = engine.updateCount();
+    const std::size_t pos_before = engine.positionUpdateCount();
+    const std::size_t vel_before = engine.velocityUpdateCount();
+    const std::size_t yaw_before = engine.yawUpdateCount();
+    const std::size_t yaw_normal_before = engine.yawNormalCount();
+    const std::size_t yaw_down_before = engine.yawDownweightCount();
+    const std::size_t yaw_reject_before = engine.yawRejectCount();
     engine.newImuProcess();
     if (!engine.checkCov()) {
       throw std::runtime_error("configured run covariance check failed");
     }
     appendState(engine, states, covariances);
+    const bool update_applied = engine.updateCount() > updates_before;
+    if (loop_trace && loop_index < debug_options.max_rows) {
+      loop_trace << loop_index << "," << current_imu_time << "," << imu.time << "," << gnss_before_loop << ","
+                 << (has_gnss ? gnss.time : -1.0) << "," << refresh_count << "," << gnss_added_time << ","
+                 << (has_gnss ? 1 : 0) << "," << res << "," << (update_applied ? 1 : 0) << ","
+                 << (update_applied ? "position_velocity_yaw" : "none") << "," << engine.timestamp() << ",1,"
+                 << (gnss_loader.isEof() ? 1 : 0) << "," << (imu_loader.isEof() ? 1 : 0) << "\n";
+    }
+    if (update_trace && update_applied) {
+      std::string yaw_mode = "NONE";
+      if (engine.yawNormalCount() > yaw_normal_before) {
+        yaw_mode = "NORMAL";
+      } else if (engine.yawDownweightCount() > yaw_down_before) {
+        yaw_mode = "DOWNWEIGHT";
+      } else if (engine.yawRejectCount() > yaw_reject_before) {
+        yaw_mode = "REJECT";
+      }
+      update_trace << engine.updateCount() << "," << gnss_before_loop << "," << current_imu_time << "," << imu.time
+                   << "," << res << "," << (engine.positionUpdateCount() > pos_before ? 1 : 0) << ","
+                   << (engine.velocityUpdateCount() > vel_before ? 1 : 0) << ","
+                   << (engine.yawUpdateCount() > yaw_before ? 1 : 0) << "," << yaw_mode << ",,,\n";
+    }
+    current_imu_time = imu.time;
+    ++loop_index;
   }
 
   options.propagation_count = engine.propagationCount();
@@ -186,6 +372,15 @@ void PortRuntime::runFromConfig(const std::string& config_path, const std::strin
   options.yaw_normal_count = engine.yawNormalCount();
   options.yaw_downweight_count = engine.yawDownweightCount();
   options.yaw_reject_count = engine.yawRejectCount();
+  options.actual_update_count = engine.updateCount();
+  options.update_count_ratio =
+      options.expected_update_count == 0
+          ? 0.0
+          : static_cast<double>(options.actual_update_count) / static_cast<double>(options.expected_update_count);
+  options.update_count_low =
+      options.expected_update_count > 0 &&
+      static_cast<double>(options.actual_update_count) < 0.8 * static_cast<double>(options.expected_update_count);
+  options.gnss_rows_skipped_unexpectedly = options.update_count_low;
   writeAll(output_dir, options, states, covariances);
 }
 

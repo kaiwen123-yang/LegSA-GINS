@@ -11,12 +11,21 @@
 
 namespace legsa_v23_port_core {
 
+struct PortRuntimeDebugOptions {
+  bool update_timeline = false;
+  std::string output_dir;
+  std::size_t max_rows = 100000;
+};
+
 // 中文说明：PortRuntime 支持 R2 synthetic math 和真实输入形态，但 R2 不运行 clean parity。
 class PortRuntime {
  public:
   static void runDryToy(const std::string& output_dir);
   static void runSyntheticMath(const std::string& output_dir);
   static void runFromConfig(const std::string& config_path, const std::string& output_dir);
+  static void runFromConfig(const std::string& config_path,
+                            const std::string& output_dir,
+                            const PortRuntimeDebugOptions& debug_options);
 };
 
 }  // namespace legsa_v23_port_core

@@ -566,6 +566,16 @@ Roll/pitch relaxed pass is not strict pass.
 
 If parity fails, gap screen controls next work.
 
+R3A timeline diagnostics are not performance results.
+
+GNSS total row count must not be treated as expected update count without overlap audit.
+
+No output-only correction, no tuning, no epoch deletion.
+
+Runtime loop fixes must be source-backed.
+
+No proposed factor claim.
+
 ## Evidence Rule
 
 If evidence is missing, write:

@@ -138,9 +138,9 @@ def run_pipeline(args: argparse.Namespace) -> dict:
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--clean-root", default="/home/kaiwen/legsa_n4h2g_clean_replay")
-    parser.add_argument("--dual-root", default="/home/kaiwen/legsa_external_artifacts/dual_final_v23_nominal")
-    parser.add_argument("--output-dir", default="/home/kaiwen/legsa_n4h4r3_port_clean_parity")
+    parser.add_argument("--clean-root", default=str(Path.home() / "legsa_n4h2g_clean_replay"))
+    parser.add_argument("--dual-root", default=str(Path.home() / "legsa_external_artifacts" / "dual_final_v23_nominal"))
+    parser.add_argument("--output-dir", default=str(Path.home() / "legsa_n4h4r3_port_clean_parity"))
     parser.add_argument("--build-dir", default="build/cpp")
     parser.add_argument("--exe", default="./build/cpp/legsa_v23_port_core_demo")
     parser.add_argument("--allow-run", action="store_true")
