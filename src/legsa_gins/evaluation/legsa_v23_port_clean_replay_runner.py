@@ -60,6 +60,25 @@ def _read_yaml_like_config(path: Path) -> dict[str, str]:
     return data
 
 
+def _first_last_time(path: Path | None) -> tuple[float | None, float | None]:
+    if not path or not path.exists():
+        return None, None
+    first: float | None = None
+    last: float | None = None
+    for line in path.read_text(encoding="utf-8", errors="ignore").splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        try:
+            time = float(stripped.replace(",", " ").split()[0])
+        except (IndexError, ValueError):
+            continue
+        if first is None:
+            first = time
+        last = time
+    return first, last
+
+
 def locate_clean_inputs(clean_root: str | Path) -> dict[str, Any]:
     root = Path(clean_root)
     imu_candidates = [root / "CLEAN_STATUS_YAW.imu", *root.glob("**/CLEAN_STATUS_YAW.imu")]
@@ -80,12 +99,18 @@ def locate_clean_inputs(clean_root: str | Path) -> dict[str, Any]:
             for line in imu.read_text(encoding="utf-8", errors="ignore").splitlines()
             if line.strip() and not line.lstrip().startswith("#")
         )
+    first_imu, last_imu = _first_last_time(imu)
+    first_gnss, last_gnss = _first_last_time(gnss)
     return {
         "clean_root": str(root),
         "imu_path": str(imu) if imu else None,
         "gnss_path": str(gnss) if gnss else None,
         "clean_imu_row_count": imu_count,
         "clean_gnss_row_count": gnss_count,
+        "first_imu_time": first_imu,
+        "last_imu_time": last_imu,
+        "first_gnss_time": first_gnss,
+        "last_gnss_time": last_gnss,
         "clean_input_missing": imu is None or gnss is None,
         "clean_input_provenance_label": "clean_status_yaw_no_synthetic_noise",
     }
@@ -102,6 +127,15 @@ def write_port_clean_config(clean_inputs: dict[str, Any], output_dir: str | Path
     for key in values:
         if key in source_policy:
             values[key] = source_policy[key]
+    if not source_policy:
+        first_imu = clean_inputs.get("first_imu_time")
+        last_imu = clean_inputs.get("last_imu_time")
+        first_gnss = clean_inputs.get("first_gnss_time")
+        last_gnss = clean_inputs.get("last_gnss_time")
+        if isinstance(first_imu, (int, float)) and isinstance(first_gnss, (int, float)):
+            values["starttime"] = str(max(float(first_imu), float(first_gnss)) - 0.01)
+        if isinstance(last_imu, (int, float)) and isinstance(last_gnss, (int, float)):
+            values["endtime"] = str(min(float(last_imu), float(last_gnss)) + 0.01)
     config_policy_evidence_status = (
         "n4h2g_clean_config_policy_found" if source_policy else "config_policy_evidence_missing_source_backed_default"
     )

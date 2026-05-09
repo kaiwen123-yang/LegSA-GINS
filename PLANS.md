@@ -409,6 +409,15 @@ Goal:
 If N4H4R3 passes, prepare visual validation for the source-backed port while
 preserving that the ported backbone is not novelty.
 
+## Stage N4H4R3A: Update timeline and overlap parity audit
+
+Goal:
+Audit whether R3 update count should be compared with total GNSS rows or only
+effective IMU/GNSS/config overlap rows, and apply a source-backed runtime-loop
+compatibility fix only if timeline evidence supports it.
+
+R3A diagnostics are not performance results and do not add proposed factors.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

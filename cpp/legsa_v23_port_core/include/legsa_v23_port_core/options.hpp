@@ -60,6 +60,16 @@ struct PortOptions {
   std::size_t yaw_normal_count = 0;
   std::size_t yaw_downweight_count = 0;
   std::size_t yaw_reject_count = 0;
+  bool debug_update_timeline_enabled = false;
+  std::size_t gnss_rows_total = 0;
+  std::size_t gnss_rows_in_overlap = 0;
+  std::size_t expected_update_count = 0;
+  std::size_t actual_update_count = 0;
+  double update_count_ratio = 0.0;
+  bool update_count_low = false;
+  bool gnss_rows_skipped_unexpectedly = false;
+  bool runtime_loop_fix_applied = false;
+  bool source_backed_runtime_loop_fix = false;
   bool yaw_scheme_C_enabled = true;
   double yaw_std_min_deg = 0.5;
   double yaw_std_soft_deg = 3.0;

@@ -7,6 +7,7 @@
 
 #include "legsa_v23_port_core/runtime/port_runtime.hpp"
 
+#include <cstddef>
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -16,8 +17,11 @@ namespace {
 struct Args {
   bool dry_run_toy = false;
   bool dry_run_synthetic_math = false;
+  bool debug_update_timeline = false;
   std::string config_path;
   std::string output_dir = ".";
+  std::string debug_output_dir;
+  std::size_t debug_max_rows = 100000;
 };
 
 // 中文说明：命令行只接受 toy/synthetic/config 和 output-dir，不接受 trace 或 final_v23 输出作为输入。
@@ -33,6 +37,12 @@ Args parseArgs(int argc, char** argv) {
       args.config_path = argv[++i];
     } else if (token == "--output-dir" && i + 1 < argc) {
       args.output_dir = argv[++i];
+    } else if (token == "--debug-update-timeline") {
+      args.debug_update_timeline = true;
+    } else if (token == "--debug-output-dir" && i + 1 < argc) {
+      args.debug_output_dir = argv[++i];
+    } else if (token == "--debug-max-rows" && i + 1 < argc) {
+      args.debug_max_rows = static_cast<std::size_t>(std::stoull(argv[++i]));
     } else {
       throw std::runtime_error("unknown or incomplete argument: " + token);
     }
@@ -55,11 +65,16 @@ int main(int argc, char** argv) {
       return 0;
     }
     if (!args.config_path.empty()) {
-      legsa_v23_port_core::PortRuntime::runFromConfig(args.config_path, args.output_dir);
+      legsa_v23_port_core::PortRuntimeDebugOptions debug_options;
+      debug_options.update_timeline = args.debug_update_timeline;
+      debug_options.output_dir = args.debug_output_dir.empty() ? args.output_dir : args.debug_output_dir;
+      debug_options.max_rows = args.debug_max_rows;
+      legsa_v23_port_core::PortRuntime::runFromConfig(args.config_path, args.output_dir, debug_options);
       return 0;
     }
     std::cerr << "usage: legsa_v23_port_core_demo "
-              << "--dry-run-toy|--dry-run-synthetic-math|--config <path> --output-dir <dir>\n";
+              << "--dry-run-toy|--dry-run-synthetic-math|--config <path> --output-dir <dir> "
+              << "[--debug-update-timeline --debug-output-dir <dir> --debug-max-rows <N>]\n";
     return 2;
   } catch (const std::exception& error) {
     std::cerr << "legsa_v23_port_core_demo failed: " << error.what() << "\n";
