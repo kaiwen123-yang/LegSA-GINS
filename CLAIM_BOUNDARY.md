@@ -550,6 +550,22 @@ No factor claims before R3.
 
 Ported backbone is not novelty.
 
+N4H4R3 is engineering backbone parity only.
+
+N4H4R3 is not a proposed factor result.
+
+No paper performance claim.
+
+No raw Doppler/Go2/LSIM/OIM/FGO claims.
+
+Trace evaluation-only.
+
+final_v23 output not solver input.
+
+Roll/pitch relaxed pass is not strict pass.
+
+If parity fails, gap screen controls next work.
+
 ## Evidence Rule
 
 If evidence is missing, write:

@@ -392,6 +392,23 @@ Goal:
 Run the clean replay against external clean and dual_final_v23 references and
 report pass/fail honestly.
 
+## Stage N4H4R3: Source-backed port clean replay parity
+
+Goal:
+Run the source-backed `cpp/legsa_v23_port_core` on clean status-yaw inputs,
+freshly evaluate against the dual final_v23 official reference, compare against
+external clean replay, and publish an engineering backbone parity or gap-screen
+decision.
+
+N4H4R3 is not a proposed factor result and does not make a paper performance
+claim.
+
+## Stage N4H4E: Visual validation for source-backed port
+
+Goal:
+If N4H4R3 passes, prepare visual validation for the source-backed port while
+preserving that the ported backbone is not novelty.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

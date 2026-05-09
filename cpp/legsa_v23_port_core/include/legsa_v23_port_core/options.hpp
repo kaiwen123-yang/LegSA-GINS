@@ -15,6 +15,8 @@ namespace legsa_v23_port_core {
 
 // 中文说明：R1 options 只保存最小 backbone 配置和边界旗标，不读取 trace 或 final_v23 输出。
 struct PortOptions {
+  std::string phase = "N4H4R2";
+  std::string port_role = "source_backed_math_port";
   std::string run_label = "N4H4R2_synthetic_math";
   std::string imu_path;
   std::string gnss_path;
@@ -45,6 +47,19 @@ struct PortOptions {
   bool lsim_oim = false;
   bool fgo = false;
   bool performance_claim = false;
+  bool paper_performance_claim = false;
+  bool proposed_factor_claim = false;
+  bool engineering_backbone_parity_only = false;
+  std::string clean_input_provenance_label;
+  std::string config_policy_evidence_status = "source_backed_runtime_config";
+  std::size_t propagation_count = 0;
+  std::size_t measurement_update_count = 0;
+  std::size_t position_update_count = 0;
+  std::size_t velocity_update_count = 0;
+  std::size_t yaw_update_count = 0;
+  std::size_t yaw_normal_count = 0;
+  std::size_t yaw_downweight_count = 0;
+  std::size_t yaw_reject_count = 0;
   bool yaw_scheme_C_enabled = true;
   double yaw_std_min_deg = 0.5;
   double yaw_std_soft_deg = 3.0;

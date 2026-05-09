@@ -14,6 +14,7 @@
 #include <fstream>
 #include <iomanip>
 #include <stdexcept>
+#include <string>
 
 namespace legsa_v23_port_core {
 namespace {
@@ -21,6 +22,17 @@ namespace {
 // 中文说明：统一创建输出目录；toy 输出只写 runtime output dir，不进入 Git。
 void ensureOutputDir(const std::string& output_dir) {
   std::filesystem::create_directories(output_dir);
+}
+
+std::string escapeJson(const std::string& value) {
+  std::string out;
+  for (char ch : value) {
+    if (ch == '\\' || ch == '"') {
+      out.push_back('\\');
+    }
+    out.push_back(ch);
+  }
+  return out;
 }
 
 }  // namespace
@@ -77,7 +89,7 @@ void FileSaver::writeEvalNav(const std::string& output_dir, const std::vector<Na
   }
 }
 
-// 中文说明：RUN_MANIFEST 锁定 R2 禁用项，明确 synthetic run 不是 clean parity。
+// 中文说明：RUN_MANIFEST 记录 R2/R3 运行边界和计数；reference 输出不进入 solver。
 void FileSaver::writeRunManifest(const std::string& output_dir, const PortOptions& options) {
   ensureOutputDir(output_dir);
   std::ofstream out(std::filesystem::path(output_dir) / "RUN_MANIFEST.json");
@@ -85,11 +97,15 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
     throw std::runtime_error("failed to write RUN_MANIFEST");
   }
   out << "{\n"
-      << "  \"phase\": \"N4H4R2\",\n"
-      << "  \"port_role\": \"source_backed_math_port\",\n"
+      << "  \"phase\": \"" << escapeJson(options.phase) << "\",\n"
+      << "  \"port_role\": \"" << escapeJson(options.port_role) << "\",\n"
       << "  \"math_port_completed\": " << (options.math_port_completed ? "true" : "false") << ",\n"
       << "  \"parity_attempted\": " << (options.parity_attempted ? "true" : "false") << ",\n"
       << "  \"real_clean_replay_attempted\": " << (options.real_clean_replay_attempted ? "true" : "false") << ",\n"
+      << "  \"engineering_backbone_parity_only\": "
+      << (options.engineering_backbone_parity_only ? "true" : "false") << ",\n"
+      << "  \"paper_performance_claim\": " << (options.paper_performance_claim ? "true" : "false") << ",\n"
+      << "  \"proposed_factor_claim\": " << (options.proposed_factor_claim ? "true" : "false") << ",\n"
       << "  \"final_v23_output_solver_input\": " << (options.final_v23_output_solver_input ? "true" : "false") << ",\n"
       << "  \"trace_solver_input\": " << (options.trace_solver_input ? "true" : "false") << ",\n"
       << "  \"output_only_correction\": " << (options.output_only_correction ? "true" : "false") << ",\n"
@@ -100,9 +116,19 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << "  \"fgo\": " << (options.fgo ? "true" : "false") << ",\n"
       << "  \"performance_claim\": " << (options.performance_claim ? "true" : "false") << ",\n"
       << "  \"yaw_scheme_C_enabled\": " << (options.yaw_scheme_C_enabled ? "true" : "false") << ",\n"
+      << "  \"clean_input_provenance_label\": \"" << escapeJson(options.clean_input_provenance_label) << "\",\n"
+      << "  \"config_policy_evidence_status\": \"" << escapeJson(options.config_policy_evidence_status) << "\",\n"
+      << "  \"propagation_count\": " << options.propagation_count << ",\n"
+      << "  \"measurement_update_count\": " << options.measurement_update_count << ",\n"
+      << "  \"position_update_count\": " << options.position_update_count << ",\n"
+      << "  \"velocity_update_count\": " << options.velocity_update_count << ",\n"
+      << "  \"yaw_update_count\": " << options.yaw_update_count << ",\n"
+      << "  \"yaw_NORMAL\": " << options.yaw_normal_count << ",\n"
+      << "  \"yaw_DOWNWEIGHT\": " << options.yaw_downweight_count << ",\n"
+      << "  \"yaw_REJECT\": " << options.yaw_reject_count << ",\n"
       << "  \"source_commit\": \"5a4471efd4fcfcdc31e258a677af354c652ff16f\",\n"
       << "  \"final_v23_is_proposed\": false,\n"
-      << "  \"run_label\": \"" << options.run_label << "\"\n"
+      << "  \"run_label\": \"" << escapeJson(options.run_label) << "\"\n"
       << "}\n";
 }
 

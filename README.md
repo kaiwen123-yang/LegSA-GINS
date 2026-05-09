@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N4H4R0 route reset and source-backed port readiness.
+N4H4R2 complete source-backed mathematical port.
 
 Current working phase:
 
-N4H4R1 source-backed port-core foundation.
+N4H4R3 source-backed port clean replay parity.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 

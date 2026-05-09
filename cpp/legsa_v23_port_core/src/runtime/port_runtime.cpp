@@ -60,6 +60,8 @@ void PortRuntime::runDryToy(const std::string& output_dir) {
 // 中文说明：synthetic math run 只验证 R2 数学链路可运行，不做真实 clean replay parity。
 void PortRuntime::runSyntheticMath(const std::string& output_dir) {
   PortOptions options;
+  options.phase = "N4H4R2";
+  options.port_role = "source_backed_math_port";
   options.run_label = "N4H4R2_synthetic_math";
   options.starttime = 0.0;
   options.init_pos_blh_rad_m = makeVec3(Earth::degToRad(30.0), Earth::degToRad(120.0), 10.0);
@@ -108,12 +110,32 @@ void PortRuntime::runSyntheticMath(const std::string& output_dir) {
     appendState(engine, states, covariances);
   }
 
+  options.propagation_count = engine.propagationCount();
+  options.measurement_update_count = engine.updateCount();
+  options.position_update_count = engine.positionUpdateCount();
+  options.velocity_update_count = engine.velocityUpdateCount();
+  options.yaw_update_count = engine.yawUpdateCount();
+  options.yaw_normal_count = engine.yawNormalCount();
+  options.yaw_downweight_count = engine.yawDownweightCount();
+  options.yaw_reject_count = engine.yawRejectCount();
   writeAll(output_dir, options, states, covariances);
 }
 
 // 中文说明：真实输入 runner 只建立 R2 运行链路；R3 才允许 clean replay parity 判定。
 void PortRuntime::runFromConfig(const std::string& config_path, const std::string& output_dir) {
   PortOptions options = PortConfigLoader::loadYamlLike(config_path);
+  options.phase = "N4H4R3";
+  options.port_role = "source_backed_clean_replay_candidate";
+  options.run_label = "N4H4R3_clean_replay";
+  options.parity_attempted = true;
+  options.real_clean_replay_attempted = true;
+  options.engineering_backbone_parity_only = true;
+  options.paper_performance_claim = false;
+  options.proposed_factor_claim = false;
+  options.performance_claim = false;
+  if (options.clean_input_provenance_label.empty()) {
+    options.clean_input_provenance_label = "clean_status_yaw_no_synthetic_noise";
+  }
   if (options.imu_path.empty() || options.gnss_path.empty()) {
     throw std::runtime_error("config must provide imu_path/imupath and gnss_path/gnsspath");
   }
@@ -156,6 +178,14 @@ void PortRuntime::runFromConfig(const std::string& config_path, const std::strin
     appendState(engine, states, covariances);
   }
 
+  options.propagation_count = engine.propagationCount();
+  options.measurement_update_count = engine.updateCount();
+  options.position_update_count = engine.positionUpdateCount();
+  options.velocity_update_count = engine.velocityUpdateCount();
+  options.yaw_update_count = engine.yawUpdateCount();
+  options.yaw_normal_count = engine.yawNormalCount();
+  options.yaw_downweight_count = engine.yawDownweightCount();
+  options.yaw_reject_count = engine.yawRejectCount();
   writeAll(output_dir, options, states, covariances);
 }
 

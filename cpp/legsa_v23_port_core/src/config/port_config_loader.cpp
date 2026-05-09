@@ -60,6 +60,24 @@ Vec3 vecOrDefault(const std::unordered_map<std::string, std::string>& kv, const 
   return makeVec3(values[0], values[1], values[2]);
 }
 
+Vec3 vecOrDefault(const std::unordered_map<std::string, std::string>& kv,
+                  const std::string& key,
+                  const std::string& alias,
+                  Vec3 fallback) {
+  auto it = kv.find(key);
+  if (it == kv.end()) {
+    it = kv.find(alias);
+  }
+  if (it == kv.end()) {
+    return fallback;
+  }
+  const std::vector<double> values = parseVector(it->second);
+  if (values.size() < 3) {
+    return fallback;
+  }
+  return makeVec3(values[0], values[1], values[2]);
+}
+
 double scalarOrDefault(const std::unordered_map<std::string, std::string>& kv, const std::string& key, double fallback) {
   auto it = kv.find(key);
   if (it == kv.end()) {
@@ -115,6 +133,10 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   options.run_label = stringOrDefault(kv, "run_label", "N4H4R2_config_run");
   options.imu_path = stringOrDefault(kv, "imupath", stringOrDefault(kv, "imu_path", ""));
   options.gnss_path = stringOrDefault(kv, "gnsspath", stringOrDefault(kv, "gnss_path", ""));
+  options.clean_input_provenance_label =
+      stringOrDefault(kv, "clean_input_provenance_label", options.clean_input_provenance_label);
+  options.config_policy_evidence_status =
+      stringOrDefault(kv, "config_policy_evidence_status", options.config_policy_evidence_status);
 
   Vec3 initpos = vecOrDefault(kv, "initpos", options.init_pos_blh_rad_m);
   initpos[0] *= D2R;
@@ -141,13 +163,16 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   options.imunoise.corr_time = scalarOrDefault(kv, "corrtime", options.imunoise.corr_time / 3600.0) * 3600.0;
 
   options.init_imu_error_std.gyrbias =
-      scale(vecOrDefault(kv, "initgyrbiasstd", scale(options.imunoise.gyrbias_std, 3600.0 / D2R)), D2R / 3600.0);
+      scale(vecOrDefault(kv, "initgyrbiasstd", "initbgstd", scale(options.imunoise.gyrbias_std, 3600.0 / D2R)),
+            D2R / 3600.0);
   options.init_imu_error_std.accbias =
-      scale(vecOrDefault(kv, "initaccbiasstd", scale(options.imunoise.accbias_std, 1.0e5)), 1.0e-5);
+      scale(vecOrDefault(kv, "initaccbiasstd", "initbastd", scale(options.imunoise.accbias_std, 1.0e5)), 1.0e-5);
   options.init_imu_error_std.gyrscale =
-      scale(vecOrDefault(kv, "initgyrscalestd", scale(options.imunoise.gyrscale_std, 1.0e6)), 1.0e-6);
+      scale(vecOrDefault(kv, "initgyrscalestd", "initsgstd", scale(options.imunoise.gyrscale_std, 1.0e6)),
+            1.0e-6);
   options.init_imu_error_std.accscale =
-      scale(vecOrDefault(kv, "initaccscalestd", scale(options.imunoise.accscale_std, 1.0e6)), 1.0e-6);
+      scale(vecOrDefault(kv, "initaccscalestd", "initsastd", scale(options.imunoise.accscale_std, 1.0e6)),
+            1.0e-6);
 
   options.starttime = scalarOrDefault(kv, "starttime", options.starttime);
   options.endtime = scalarOrDefault(kv, "endtime", options.endtime);
