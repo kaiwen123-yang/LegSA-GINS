@@ -328,6 +328,27 @@ only. It does not implement raw Doppler, Go2 priors, LSIM/OIM, source-aware
 weighting, FGO, final_v23 numerical parity, clean replay parity, or performance
 claims. N4H4D is the clean replay parity stage.
 
+## Stage N4H4R0: Route reset and source-backed port readiness
+
+Goal:
+Freeze PR #21 as the self-written LegSA-v23-core parity failure evidence
+branch, keep it open and unmerged, document the route reset, and add
+source-backed controlled port readiness checks.
+
+N4H4R0 does not implement solver code, does not copy final_v23 source files,
+does not add factors, and does not make a performance claim. final_v23 is not
+proposed; it is a reference/backbone source for a controlled port.
+
+## Stage N4H4R1: Controlled source-backed KF-GINS/final_v23 core port
+
+Goal:
+Create `cpp/legsa_v23_port_core` as a provenance-preserving port of the
+final_v23/KF-GINS core backbone.
+
+N4H4R1 ports the backbone before factor extensions. It does not implement raw
+Doppler, Go2 priors, LSIM/OIM, source-aware weighting, FGO, or paper
+performance claims.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

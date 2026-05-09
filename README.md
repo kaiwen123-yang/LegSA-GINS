@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N4H4B INS mechanization and EKF propagation.
+N4H4C GNSS updates, EKFUpdate, and stateFeedback.
 
 Current working phase:
 
-N4H4C GNSS updates, EKFUpdate, and stateFeedback.
+N4H4R0 route reset and source-backed port readiness.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -147,6 +147,12 @@ measurement update framework, scheme_C yaw gate, Joseph-form `EKFUpdate`,
 error-state `stateFeedback`, update-branch routing in `newImuProcess`, update
 toy dry-run, audit, and tests. N4H4C does not implement raw Doppler, Go2
 priors, LSIM/OIM, FGO, final_v23 numerical parity, or performance claims.
+
+N4H4R0 freezes PR #21 as a self-written LegSA-v23-core parity failure evidence
+branch, keeps PR #21 open and unmerged, and resets the route toward a
+source-backed controlled final_v23/KF-GINS core port. N4H4R0 does not implement
+solver code, does not copy final_v23 source files, does not add factors, and
+does not make performance claims. final_v23 is not proposed.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace
