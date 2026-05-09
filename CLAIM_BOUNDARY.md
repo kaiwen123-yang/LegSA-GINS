@@ -121,6 +121,18 @@ Allowed N4H4C update-feedback statement:
 - final_v23 outputs are not solver input.
 - Clean replay parity remains N4H4D.
 
+Allowed N4H4R0 route-reset statement:
+
+- N4H4R0 may freeze PR #21 as self-written v23-core parity failure evidence.
+- PR #21 may remain open and unmerged as an evidence branch.
+- N4H4R0 may select a source-backed controlled final_v23/KF-GINS core port as
+  the next route.
+- Source-backed port readiness, provenance, license, and module-manifest
+  checks may be added.
+- The ported final_v23/KF-GINS backbone is not paper novelty.
+- final_v23 is not proposed.
+- Factor claims start only after backbone parity.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -241,6 +253,15 @@ Do not claim:
 - N4H4B enabling raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting,
   FGO, FGO feedback, output-only correction, bad-epoch deletion, or trace
   solver input.
+- PR #21 self-written v23-core failure evidence as proposed performance claim.
+- PR #21 self-written v23-core failure evidence as a clean parity pass.
+- Source-backed port as paper novelty.
+- final_v23/KF-GINS reference described as proposed.
+- final_v23 source copied without provenance and license controls.
+- final_v23 output used as proposed solver input.
+- Factor claims before backbone parity.
+- Nine-factor claims before ablation evidence.
+- N4H4R0 implementing solver code or factor logic.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
@@ -475,6 +496,22 @@ N4H4 must not use final_v23 output as proposed solver input.
 N4H4 must not use trace as solver input.
 
 N4H4 must not make a performance claim before validation.
+
+PR #21 self-written v23-core parity failure is an evidence branch only.
+
+PR #21 must not be used for proposed performance claim.
+
+Source-backed port is a backbone implementation, not novelty.
+
+final_v23/KF-GINS reference must not be described as proposed.
+
+Ported backbone must preserve provenance.
+
+Clean/noisy input provenance remains mandatory.
+
+Factor claims start only after backbone parity.
+
+No nine-factor claim before ablation evidence.
 
 ## Evidence Rule
 
