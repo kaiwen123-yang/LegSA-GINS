@@ -35,8 +35,12 @@ void stateFeedback(FilterState& state) {
   stateFeedback(state, options);
 }
 
-// 中文说明：位置/速度 residual 使用 predicted-observed，因此 baseline_current 中 pos/vel 采用负号修正。
-// 中文说明：D2 variant 分支是诊断用的可逆公式探针，不是永久 solver fix 或性能实验。
+// 中文说明：位置误差反馈：位置 residual 使用 predicted-observed，pos -= DRi(pos)*dx[P_ID]。
+// 中文说明：速度误差反馈：速度 residual 使用 predicted-observed，vel -= dx[V_ID]。
+// 中文说明：姿态误差反馈：baseline 使用正的 dx[PHI_ID] 构造 qpn，并采用左乘 qpn*qbn。
+// 中文说明：IMU零偏误差反馈：gyrbias/accbias 按误差状态定义直接加 dx。
+// 中文说明：IMU比例因子误差反馈：gyrscale/accscale 按误差状态定义直接加 dx。
+// 中文说明：D2 variant 分支是诊断用探针，不是永久 solver fix 或性能实验；反馈后误差状态清零。
 void stateFeedback(FilterState& state, const GINSOptions& options) {
   Vector3 delta_position = zeroVector3();
   Vector3 delta_velocity = zeroVector3();

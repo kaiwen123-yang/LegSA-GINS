@@ -31,7 +31,8 @@ Vector3 Earth::meridianPrimeVerticalRadius(double lat) {
 // 中文说明：卯酉圈半径 RN，单位 m。
 double Earth::RN(double lat) { return meridianPrimeVerticalRadius(lat)[1]; }
 
-// 中文说明：DRi 描述 NED 位移到 BLH 增量的线性关系，height 向上为正所以 Down 位移取负号。
+// 中文说明：DRi 描述 NED 位移到 BLH 增量的线性关系，NED 的 D 轴向下而 BLH height 向上。
+// 中文说明：因此第三个对角元必须为 -1，这是 position residual 与 stateFeedback 共享的高程约定。
 Matrix3 Earth::DRi(const Vector3& blh) {
   const Vector3 rmn = meridianPrimeVerticalRadius(blh[0]);
   const double rm_h = rmn[0] + blh[2];
@@ -44,7 +45,7 @@ Matrix3 Earth::DRi(const Vector3& blh) {
   return matrix;
 }
 
-// 中文说明：DR 描述 BLH 增量到 NED 位移的线性关系，是 DRi 的近似逆。
+// 中文说明：DR 描述 BLH 增量到 NED 位移的线性关系，是 DRi 的近似逆；height 仍按 Down=-height 处理。
 Matrix3 Earth::DR(const Vector3& blh) {
   const Vector3 rmn = meridianPrimeVerticalRadius(blh[0]);
   Matrix3 matrix{};

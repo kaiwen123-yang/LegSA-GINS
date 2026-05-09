@@ -373,6 +373,21 @@ epochs, apply output-only correction, or make performance claims. Diagnostic
 variants are not formal results. The next stage is determined by
 `N4H4D2_DECISION_REPORT`.
 
+## Stage N4H4D3: Source-backed guarded formula fix
+
+Goal:
+Apply only source-backed engineering formula parity checks/fixes for DR/DRi
+height sign, GNSS position H_phi, EKFUpdate innovation, and stateFeedback, then
+rerun the default LegSA-v23-core clean replay gap screen.
+
+Status:
+in progress on PR #21.
+
+N4H4D3 is not a factor contribution and guarded replay is not paper performance
+evidence. It does not tune, delete epochs, apply output-only correction, or
+promote diagnostic variants. yaw_H_mapping remains secondary unless fixed later
+with source-backed evidence.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

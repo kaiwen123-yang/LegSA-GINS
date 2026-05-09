@@ -64,8 +64,9 @@ double measurementRAt(const MeasurementBlock& block, std::size_t row, std::size_
   return block.R[row * block.rows + col];
 }
 
-// 中文说明：位置残差采用 predicted antenna position minus GNSS observed position。
+// 中文说明：位置残差采用 predicted antenna position minus GNSS observed position，不做 output correction。
 // 中文说明：BLH 小差通过 DR 转为 NED(m)，杆臂在 body/IMU(FRD) 坐标系，不能直接当导航系量。
+// 中文说明：默认 H_phi 使用 +skew(Cbn*antlever)，这是 D3 保留的 source-backed 位置杆臂姿态耦合。
 MeasurementBlock buildGnssPositionMeasurement(const NavState& nav, const GNSSData& gnss,
                                                const GINSOptions& options) {
   MeasurementBlock block = makeBlock("gnss_position", 3);

@@ -42,7 +42,7 @@ N4H4C GNSS updates, EKFUpdate, and stateFeedback.
 
 Current working phase:
 
-N4H4D2 formula parity and diagnostic variants.
+N4H4D3 source-backed guarded formula fix.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 

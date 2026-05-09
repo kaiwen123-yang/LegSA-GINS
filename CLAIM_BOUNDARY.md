@@ -521,3 +521,14 @@ N4H4D2 formula parity audit does not modify solver by default.
 N4H4D2 must not use output-only correction, tuning, or epoch deletion.
 
 Any future fix must be evidence-backed by N4H4D2.
+
+N4H4D3 applies evidence-backed engineering fixes only.
+
+N4H4D3 is not a factor contribution.
+
+N4H4D3 guarded fix replay is not paper performance.
+
+N4H4D3 must not use output-only correction, tuning, or epoch deletion.
+
+N4H4D3 keeps yaw_H_mapping as a secondary issue unless a later source-backed
+stage fixes it.
