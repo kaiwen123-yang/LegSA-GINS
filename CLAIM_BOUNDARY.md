@@ -576,6 +576,18 @@ Runtime loop fixes must be source-backed.
 
 No proposed factor claim.
 
+Metric-gate pass is not sufficient if external-clean closeness fails.
+
+Too-good results require over-close audit.
+
+Measurement-copy and reference-independence checks are mandatory.
+
+No outperform final_v23 claim before evidence-backed paper evaluation.
+
+No proposed factor claim.
+
+No output-only correction, no tuning, no epoch deletion.
+
 ## Evidence Rule
 
 If evidence is missing, write:

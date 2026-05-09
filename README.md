@@ -42,7 +42,7 @@ N4H4R2 complete source-backed mathematical port.
 
 Current working phase:
 
-N4H4R3A update timeline and overlap parity audit.
+N4H4R3B over-close, reference-independence, and covariance/config parity audit.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 

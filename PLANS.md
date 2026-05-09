@@ -418,6 +418,15 @@ compatibility fix only if timeline evidence supports it.
 
 R3A diagnostics are not performance results and do not add proposed factors.
 
+## Stage N4H4R3B: Over-close and reference-independence audit
+
+Goal:
+Audit the R3A metric-gate-pass but external-closeness-failed result for
+measurement-copy, reference-independence, covariance/config parity, and
+residual/gain over-tightness before any visual validation or performance claim.
+
+R3B diagnostics are not performance results and do not add proposed factors.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:
