@@ -4,6 +4,7 @@
 #include "legsa_v23_core/common/rotation.hpp"
 
 #include <cstddef>
+#include <cmath>
 #include <string>
 
 namespace legsa_v23_core {
@@ -23,6 +24,23 @@ Vector3 mat3Vec(const Matrix3& matrix, const Vector3& vector) {
 // 中文说明：D2 diagnostic variant 只临时改变反馈符号/反馈侧，默认 baseline_current 完全保持原路径。
 bool diagnosticVariantActive(const GINSOptions& options, const std::string& name) {
   return options.diagnostic_mode && options.diagnostic_model_variant == name;
+}
+
+// 中文说明：D5 feedback mode 只在 diagnostic_mode 下生效，用于隔离 pos/vel/att/bias-scale 反馈贡献。
+bool feedbackModeActive(const GINSOptions& options, const std::string& name) {
+  return options.diagnostic_mode && options.diagnostic_feedback_mode == name;
+}
+
+// 中文说明：D5 dx_phi clamp 是诊断限幅，不允许作为正式 solver 修复或性能结论。
+void clampPhiDiagnostic(Vector3& phi, double limit_deg) {
+  const double norm = std::sqrt(phi[0] * phi[0] + phi[1] * phi[1] + phi[2] * phi[2]);
+  const double limit = limit_deg * kDegToRad;
+  if (norm > limit && norm > 1.0e-12) {
+    const double scale = limit / norm;
+    for (double& value : phi) {
+      value *= scale;
+    }
+  }
 }
 
 }  // namespace
@@ -53,6 +71,10 @@ void stateFeedback(FilterState& state, const GINSOptions& options) {
 
   const Vector3 delta_blh = mat3Vec(Earth::DRi(state.current_pva.pos_blh_rad_m), delta_position);
   for (std::size_t i = 0; i < kVector3Size; ++i) {
+    if (feedbackModeActive(options, "attitude_only")) {
+      // 中文说明：D5 诊断：只反馈姿态，跳过位置/速度，定位反馈块贡献。
+      continue;
+    }
     if (diagnosticVariantActive(options, "state_feedback_pos_vel_add")) {
       // 中文说明：D2 诊断：临时改为加号，排查位置/速度反馈符号，不作为正式结果。
       state.current_pva.pos_blh_rad_m[i] += delta_blh[i];
@@ -63,13 +85,21 @@ void stateFeedback(FilterState& state, const GINSOptions& options) {
     }
   }
 
-  if (!diagnosticVariantActive(options, "state_feedback_no_phi")) {
+  const bool allow_attitude_feedback =
+      !diagnosticVariantActive(options, "state_feedback_no_phi") &&
+      !feedbackModeActive(options, "pos_vel_only") && !feedbackModeActive(options, "no_attitude_feedback");
+  if (allow_attitude_feedback) {
     // 中文说明：baseline_current 姿态误差采用左乘 qpn*qbn；D2 诊断允许临时改符号或右乘定位问题。
     Vector3 feedback_phi = delta_phi;
     if (diagnosticVariantActive(options, "state_feedback_phi_negative")) {
       for (double& value : feedback_phi) {
         value = -value;
       }
+    }
+    if (feedbackModeActive(options, "dx_phi_clamp_5deg_diagnostic")) {
+      clampPhiDiagnostic(feedback_phi, 5.0);
+    } else if (feedbackModeActive(options, "dx_phi_clamp_1deg_diagnostic")) {
+      clampPhiDiagnostic(feedback_phi, 1.0);
     }
     const Quaternion qbn = Rotation::euler2quaternion(state.current_pva.euler_rpy_rad);
     const Quaternion qpn = Rotation::rotvec2quaternion(feedback_phi);
@@ -79,11 +109,14 @@ void stateFeedback(FilterState& state, const GINSOptions& options) {
     state.current_pva.euler_rpy_rad = Rotation::matrix2euler(Rotation::quaternion2matrix(feedback_qbn));
   }
 
-  for (std::size_t i = 0; i < kVector3Size; ++i) {
-    state.current_pva.gyro_bias[i] += state.dx[BG_ID + i];
-    state.current_pva.acc_bias[i] += state.dx[BA_ID + i];
-    state.current_pva.gyro_scale[i] += state.dx[SG_ID + i];
-    state.current_pva.acc_scale[i] += state.dx[SA_ID + i];
+  if (!feedbackModeActive(options, "pos_vel_only") && !feedbackModeActive(options, "attitude_only") &&
+      !feedbackModeActive(options, "no_bias_scale_feedback")) {
+    for (std::size_t i = 0; i < kVector3Size; ++i) {
+      state.current_pva.gyro_bias[i] += state.dx[BG_ID + i];
+      state.current_pva.acc_bias[i] += state.dx[BA_ID + i];
+      state.current_pva.gyro_scale[i] += state.dx[SG_ID + i];
+      state.current_pva.acc_scale[i] += state.dx[SA_ID + i];
+    }
   }
   state.dx = zeroVector21();
 }

@@ -20,6 +20,9 @@ struct DemoArgs {
   bool debug_full_state_trace = false;
   bool debug_measurement_matrix_trace = false;
   bool debug_gain_trace = false;
+  bool debug_update_blocks = false;
+  bool debug_feedback_delta = false;
+  bool debug_covariance_gain = false;
   bool disable_position_update = false;
   bool disable_velocity_update = false;
   bool disable_yaw_update = false;
@@ -27,6 +30,9 @@ struct DemoArgs {
   bool disable_state_feedback = false;
   std::string diagnostic_run_label;
   std::string diagnostic_model_variant = "baseline_current";
+  std::string diagnostic_feedback_mode = "normal";
+  std::string diagnostic_update_block_mode = "all";
+  std::string diagnostic_covariance_mode = "normal";
 };
 
 // 中文说明：最小命令行 parser，N4H4A 不引入额外 CLI 依赖。
@@ -58,6 +64,12 @@ DemoArgs parseArgs(int argc, char** argv) {
       args.debug_measurement_matrix_trace = true;
     } else if (token == "--debug-gain-trace") {
       args.debug_gain_trace = true;
+    } else if (token == "--debug-update-blocks") {
+      args.debug_update_blocks = true;
+    } else if (token == "--debug-feedback-delta") {
+      args.debug_feedback_delta = true;
+    } else if (token == "--debug-covariance-gain") {
+      args.debug_covariance_gain = true;
     } else if (token == "--disable-position-update") {
       args.disable_position_update = true;
     } else if (token == "--disable-velocity-update") {
@@ -72,6 +84,12 @@ DemoArgs parseArgs(int argc, char** argv) {
       args.diagnostic_run_label = argv[++i];
     } else if (token == "--diagnostic-model-variant" && i + 1 < argc) {
       args.diagnostic_model_variant = argv[++i];
+    } else if (token == "--diagnostic-feedback-mode" && i + 1 < argc) {
+      args.diagnostic_feedback_mode = argv[++i];
+    } else if (token == "--diagnostic-update-block-mode" && i + 1 < argc) {
+      args.diagnostic_update_block_mode = argv[++i];
+    } else if (token == "--diagnostic-covariance-mode" && i + 1 < argc) {
+      args.diagnostic_covariance_mode = argv[++i];
     } else {
       throw std::runtime_error("unknown or incomplete argument: " + token);
     }
@@ -106,6 +124,9 @@ int main(int argc, char** argv) {
       diagnostic_options.debug_full_state_trace = args.debug_full_state_trace;
       diagnostic_options.debug_measurement_matrix_trace = args.debug_measurement_matrix_trace;
       diagnostic_options.debug_gain_trace = args.debug_gain_trace;
+      diagnostic_options.debug_update_blocks = args.debug_update_blocks;
+      diagnostic_options.debug_feedback_delta = args.debug_feedback_delta;
+      diagnostic_options.debug_covariance_gain = args.debug_covariance_gain;
       diagnostic_options.disable_position_update = args.disable_position_update;
       diagnostic_options.disable_velocity_update = args.disable_velocity_update;
       diagnostic_options.disable_yaw_update = args.disable_yaw_update;
@@ -113,6 +134,9 @@ int main(int argc, char** argv) {
       diagnostic_options.disable_state_feedback = args.disable_state_feedback;
       diagnostic_options.diagnostic_run_label = args.diagnostic_run_label;
       diagnostic_options.diagnostic_model_variant = args.diagnostic_model_variant;
+      diagnostic_options.diagnostic_feedback_mode = args.diagnostic_feedback_mode;
+      diagnostic_options.diagnostic_update_block_mode = args.diagnostic_update_block_mode;
+      diagnostic_options.diagnostic_covariance_mode = args.diagnostic_covariance_mode;
       legsa_v23_core::LegSAV23Runtime::runFromConfig(args.config_path, args.output_dir == "." ? "" : args.output_dir,
                                                      diagnostic_options);
       return 0;
@@ -122,10 +146,11 @@ int main(int argc, char** argv) {
               << "   or: legsa_v23_core_demo --dry-run-update-toy --output-dir <dir>\n"
               << "   or: legsa_v23_core_demo --config <path> [--debug-output-dir <dir>] "
               << "[--debug-full-update-trace|--debug-full-state-trace|--debug-measurement-matrix-trace|"
-              << "--debug-gain-trace] "
+              << "--debug-gain-trace|--debug-update-blocks|--debug-feedback-delta|--debug-covariance-gain] "
               << "[--disable-position-update|--disable-velocity-update|--disable-yaw-update|"
               << "--disable-measurement-update|--disable-state-feedback] "
-              << "[--diagnostic-model-variant <name>]\n";
+              << "[--diagnostic-model-variant <name>] [--diagnostic-feedback-mode <mode>] "
+              << "[--diagnostic-update-block-mode <mode>] [--diagnostic-covariance-mode <mode>]\n";
     return 2;
   } catch (const std::exception& error) {
     std::cerr << "legsa_v23_core_demo failed: " << error.what() << "\n";

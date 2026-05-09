@@ -403,6 +403,22 @@ N4H4D4 does not fix solver mathematics, tune parameters, delete epochs, apply
 output-only correction, or make performance claims. External clean NAV is not
 solver input. The next stage is determined by `N4H4D4_DECISION_REPORT`.
 
+## Stage N4H4D5: One-step propagation and gain/feedback isolation
+
+Goal:
+Isolate one-step propagation parity, measurement block contribution,
+covariance/gain scaling, external-state shadow update, and stateFeedback
+diagnostic variants after D4 localized divergence to post-update state behavior.
+
+Status:
+completed as diagnostic-only PR #21 update if validation passes.
+
+N4H4D5 does not fix solver mathematics, tune parameters, delete epochs, apply
+output-only correction, or make performance claims. External clean state is a
+diagnostic shadow reference only. Diagnostic feedback/covariance variants are
+not performance results. The next stage is determined by
+`N4H4D5_DECISION_REPORT`.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

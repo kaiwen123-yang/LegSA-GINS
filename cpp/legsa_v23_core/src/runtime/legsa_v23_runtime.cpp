@@ -50,6 +50,43 @@ bool isAllowedDiagnosticModelVariant(const std::string& name) {
   return std::find(allowed.begin(), allowed.end(), name) != allowed.end();
 }
 
+// 中文说明：D5 diagnostic modes 只在 debug-output-dir 下允许，防止误作正式结果。
+bool isAllowedFeedbackMode(const std::string& name) {
+  static const std::vector<std::string> allowed = {
+      "normal",
+      "no_feedback",
+      "pos_vel_only",
+      "attitude_only",
+      "no_attitude_feedback",
+      "no_bias_scale_feedback",
+      "delayed_feedback_every_5_updates",
+      "dx_phi_clamp_5deg_diagnostic",
+      "dx_phi_clamp_1deg_diagnostic",
+  };
+  return std::find(allowed.begin(), allowed.end(), name) != allowed.end();
+}
+
+bool isAllowedUpdateBlockMode(const std::string& name) {
+  static const std::vector<std::string> allowed = {
+      "all",        "position_only", "velocity_only", "yaw_only", "position_velocity",
+      "position_yaw", "velocity_yaw", "no_yaw",        "no_velocity", "no_position",
+  };
+  return std::find(allowed.begin(), allowed.end(), name) != allowed.end();
+}
+
+bool isAllowedCovarianceMode(const std::string& name) {
+  static const std::vector<std::string> allowed = {
+      "normal",
+      "inflate_attitude_10x",
+      "inflate_attitude_100x",
+      "inflate_measurement_R_10x",
+      "inflate_yaw_R_10x",
+      "inflate_position_R_10x",
+      "inflate_velocity_R_10x",
+  };
+  return std::find(allowed.begin(), allowed.end(), name) != allowed.end();
+}
+
 // 中文说明：三维向量范数用于输入流快照，不进入求解器状态。
 double norm3(const Vector3& values) {
   double sum = 0.0;
@@ -209,6 +246,67 @@ void writeAllUpdatesCsv(const std::string& path, const std::vector<DiagnosticUpd
            << "," << record.cov_min_diag_after << "," << boolText(record.position_update_applied) << ","
            << boolText(record.velocity_update_applied) << "," << boolText(record.yaw_update_applied) << ","
            << boolText(record.state_feedback_applied) << "\n";
+  }
+}
+
+// 中文说明：D5 update-block CSV 记录每个量测块的 dz/H/R/K/dx/P 变化，只用于诊断。
+void writeUpdateBlockTraceCsv(const std::string& path, const std::vector<DiagnosticUpdateBlockRecord>& records) {
+  std::ofstream output(path);
+  if (!output) {
+    throw std::runtime_error("failed to open UPDATE_BLOCK_TRACE output: " + path);
+  }
+  output << "update_index,block_type,gnss_time,dz_norm,dz_0,dz_1,dz_2,H_norm,R_trace,S_condition_estimate,"
+         << "K_norm,dx_before_norm,dx_after_norm,dx_delta_norm,dx_delta_pos_norm,dx_delta_vel_norm,"
+         << "dx_delta_phi_norm_deg,cov_trace_before,cov_trace_after,cov_min_diag_before,cov_min_diag_after,"
+         << "accepted,yaw_scheme_mode\n";
+  for (const auto& record : records) {
+    output << record.update_index << "," << record.block_type << "," << std::setprecision(16) << record.gnss_time
+           << "," << record.dz_norm << "," << record.dz_0 << "," << record.dz_1 << "," << record.dz_2 << ","
+           << record.H_norm << "," << record.R_trace << "," << record.S_condition_estimate << ","
+           << record.K_norm << "," << record.dx_before_norm << "," << record.dx_after_norm << ","
+           << record.dx_delta_norm << "," << record.dx_delta_pos_norm << "," << record.dx_delta_vel_norm << ","
+           << record.dx_delta_phi_norm_deg << "," << record.cov_trace_before << "," << record.cov_trace_after
+           << "," << record.cov_min_diag_before << "," << record.cov_min_diag_after << ","
+           << boolText(record.accepted) << "," << record.yaw_scheme_mode << "\n";
+  }
+}
+
+// 中文说明：D5 feedback delta CSV 记录 stateFeedback 前后状态变化；不能作为 output correction。
+void writeFeedbackDeltaTraceCsv(const std::string& path, const std::vector<DiagnosticFeedbackDeltaRecord>& records) {
+  std::ofstream output(path);
+  if (!output) {
+    throw std::runtime_error("failed to open FEEDBACK_DELTA_TRACE output: " + path);
+  }
+  output << "update_index,gnss_time,dx_pos_norm_before,dx_vel_norm_before,dx_phi_norm_deg_before,"
+         << "pos_delta_ned_norm,vel_delta_norm,phi_delta_deg_norm,roll_before,pitch_before,yaw_before,"
+         << "roll_after,pitch_after,yaw_after,roll_delta,pitch_delta,yaw_delta,bias_delta_norm,"
+         << "scale_delta_norm,dx_reset_after_feedback\n";
+  for (const auto& record : records) {
+    output << record.update_index << "," << std::setprecision(16) << record.gnss_time << ","
+           << record.dx_pos_norm_before << "," << record.dx_vel_norm_before << ","
+           << record.dx_phi_norm_deg_before << "," << record.pos_delta_ned_norm << ","
+           << record.vel_delta_norm << "," << record.phi_delta_deg_norm << "," << record.roll_before << ","
+           << record.pitch_before << "," << record.yaw_before << "," << record.roll_after << ","
+           << record.pitch_after << "," << record.yaw_after << "," << record.roll_delta << ","
+           << record.pitch_delta << "," << record.yaw_delta << "," << record.bias_delta_norm << ","
+           << record.scale_delta_norm << "," << boolText(record.dx_reset_after_feedback) << "\n";
+  }
+}
+
+// 中文说明：D5 covariance trace CSV 记录 predict/update/feedback 的协方差分块统计。
+void writeCovarianceTraceCsv(const std::string& path, const std::vector<DiagnosticCovarianceRecord>& records) {
+  std::ofstream output(path);
+  if (!output) {
+    throw std::runtime_error("failed to open COVARIANCE_TRACE output: " + path);
+  }
+  output << "time,event_type,cov_trace,cov_min_diag,cov_max_diag,P_pos_trace,P_vel_trace,P_phi_trace,"
+         << "P_bg_trace,P_ba_trace,K_norm_if_update,dx_phi_norm_deg_if_update\n";
+  for (const auto& record : records) {
+    output << std::setprecision(16) << record.time << "," << record.event_type << "," << record.cov_trace
+           << "," << record.cov_min_diag << "," << record.cov_max_diag << "," << record.P_pos_trace << ","
+           << record.P_vel_trace << "," << record.P_phi_trace << "," << record.P_bg_trace << ","
+           << record.P_ba_trace << "," << record.K_norm_if_update << "," << record.dx_phi_norm_deg_if_update
+           << "\n";
   }
 }
 
@@ -382,6 +480,12 @@ void writeRuntimeDebugManifest(const std::string& path, const GINSOptions& optio
   output << "  \"debug_full_state_trace\": " << boolText(options.debug_full_state_trace) << ",\n";
   output << "  \"debug_measurement_matrix_trace\": " << boolText(options.debug_measurement_matrix_trace) << ",\n";
   output << "  \"debug_gain_trace\": " << boolText(options.debug_gain_trace) << ",\n";
+  output << "  \"debug_update_blocks\": " << boolText(options.debug_update_blocks) << ",\n";
+  output << "  \"debug_feedback_delta\": " << boolText(options.debug_feedback_delta) << ",\n";
+  output << "  \"debug_covariance_gain\": " << boolText(options.debug_covariance_gain) << ",\n";
+  output << "  \"diagnostic_feedback_mode\": \"" << options.diagnostic_feedback_mode << "\",\n";
+  output << "  \"diagnostic_update_block_mode\": \"" << options.diagnostic_update_block_mode << "\",\n";
+  output << "  \"diagnostic_covariance_mode\": \"" << options.diagnostic_covariance_mode << "\",\n";
   output << "  \"trace_solver_input\": false,\n";
   output << "  \"final_v23_output_substitution\": false,\n";
   output << "  \"shadow_external_nav_solver_input\": false,\n";
@@ -567,6 +671,9 @@ void LegSAV23Runtime::runFromConfig(const std::string& config_path, const std::s
     options.debug_full_state_trace = diagnostic_options.debug_full_state_trace;
     options.debug_measurement_matrix_trace = diagnostic_options.debug_measurement_matrix_trace;
     options.debug_gain_trace = diagnostic_options.debug_gain_trace;
+    options.debug_update_blocks = diagnostic_options.debug_update_blocks;
+    options.debug_feedback_delta = diagnostic_options.debug_feedback_delta;
+    options.debug_covariance_gain = diagnostic_options.debug_covariance_gain;
     options.disable_position_update = diagnostic_options.disable_position_update;
     options.disable_velocity_update = diagnostic_options.disable_velocity_update;
     options.disable_yaw_update = diagnostic_options.disable_yaw_update;
@@ -576,8 +683,25 @@ void LegSAV23Runtime::runFromConfig(const std::string& config_path, const std::s
     options.diagnostic_model_variant = diagnostic_options.diagnostic_model_variant.empty()
                                            ? "baseline_current"
                                            : diagnostic_options.diagnostic_model_variant;
+    options.diagnostic_feedback_mode =
+        diagnostic_options.diagnostic_feedback_mode.empty() ? "normal" : diagnostic_options.diagnostic_feedback_mode;
+    options.diagnostic_update_block_mode = diagnostic_options.diagnostic_update_block_mode.empty()
+                                               ? "all"
+                                               : diagnostic_options.diagnostic_update_block_mode;
+    options.diagnostic_covariance_mode = diagnostic_options.diagnostic_covariance_mode.empty()
+                                             ? "normal"
+                                             : diagnostic_options.diagnostic_covariance_mode;
     if (!isAllowedDiagnosticModelVariant(options.diagnostic_model_variant)) {
       throw std::runtime_error("unknown D2 diagnostic model variant: " + options.diagnostic_model_variant);
+    }
+    if (!isAllowedFeedbackMode(options.diagnostic_feedback_mode)) {
+      throw std::runtime_error("unknown D5 diagnostic feedback mode: " + options.diagnostic_feedback_mode);
+    }
+    if (!isAllowedUpdateBlockMode(options.diagnostic_update_block_mode)) {
+      throw std::runtime_error("unknown D5 diagnostic update block mode: " + options.diagnostic_update_block_mode);
+    }
+    if (!isAllowedCovarianceMode(options.diagnostic_covariance_mode)) {
+      throw std::runtime_error("unknown D5 diagnostic covariance mode: " + options.diagnostic_covariance_mode);
     }
     options.not_for_performance_claim = true;
     options.diagnostic_only = true;
@@ -585,7 +709,9 @@ void LegSAV23Runtime::runFromConfig(const std::string& config_path, const std::s
         diagnostic_options.disable_position_update || diagnostic_options.disable_velocity_update ||
         diagnostic_options.disable_yaw_update || diagnostic_options.disable_measurement_update ||
         diagnostic_options.disable_state_feedback;
-    options.solver_output_changed_by_diagnostic_variant = options.diagnostic_model_variant != "baseline_current";
+    options.solver_output_changed_by_diagnostic_variant =
+        options.diagnostic_model_variant != "baseline_current" || options.diagnostic_feedback_mode != "normal" ||
+        options.diagnostic_update_block_mode != "all" || options.diagnostic_covariance_mode != "normal";
   } else if (!diagnostic_options.diagnostic_model_variant.empty() &&
              diagnostic_options.diagnostic_model_variant != "baseline_current") {
     throw std::runtime_error("D2 diagnostic model variants require --debug-output-dir diagnostic mode");
@@ -692,6 +818,18 @@ void LegSAV23Runtime::runFromConfig(const std::string& config_path, const std::s
                                 engine.getDiagnosticUpdateRecords(), engine.getDiagnosticPropagationRecords());
     writeRuntimeLoopParityTrace(outputPath(diagnostic_options.debug_output_dir, "RUNTIME_LOOP_PARITY_TRACE.json"),
                                 engine.getRunOptions(), imu_samples, gnss_samples, engine.getDiagnosticUpdateRecords());
+    if (options.debug_update_blocks) {
+      writeUpdateBlockTraceCsv(outputPath(diagnostic_options.debug_output_dir, "UPDATE_BLOCK_TRACE.csv"),
+                               engine.getDiagnosticUpdateBlockRecords());
+    }
+    if (options.debug_feedback_delta) {
+      writeFeedbackDeltaTraceCsv(outputPath(diagnostic_options.debug_output_dir, "FEEDBACK_DELTA_TRACE.csv"),
+                                 engine.getDiagnosticFeedbackDeltaRecords());
+    }
+    if (options.debug_covariance_gain) {
+      writeCovarianceTraceCsv(outputPath(diagnostic_options.debug_output_dir, "COVARIANCE_TRACE.csv"),
+                              engine.getDiagnosticCovarianceRecords());
+    }
     writeRuntimeDebugManifest(outputPath(diagnostic_options.debug_output_dir, "RUNTIME_DEBUG_MANIFEST.json"),
                               engine.getRunOptions());
   }

@@ -66,6 +66,73 @@ struct DiagnosticPropagationRecord {
   double cov_max_diag = 0.0;
 };
 
+// 中文说明：D5 block trace 记录每个 position/velocity/yaw 量测块对 dx/P 的诊断贡献。
+struct DiagnosticUpdateBlockRecord {
+  int update_index = 0;
+  std::string block_type;
+  double gnss_time = 0.0;
+  double dz_norm = 0.0;
+  double dz_0 = 0.0;
+  double dz_1 = 0.0;
+  double dz_2 = 0.0;
+  double H_norm = 0.0;
+  double R_trace = 0.0;
+  double S_condition_estimate = 1.0;
+  double K_norm = 0.0;
+  double dx_before_norm = 0.0;
+  double dx_after_norm = 0.0;
+  double dx_delta_norm = 0.0;
+  double dx_delta_pos_norm = 0.0;
+  double dx_delta_vel_norm = 0.0;
+  double dx_delta_phi_norm_deg = 0.0;
+  double cov_trace_before = 0.0;
+  double cov_trace_after = 0.0;
+  double cov_min_diag_before = 0.0;
+  double cov_min_diag_after = 0.0;
+  bool accepted = false;
+  std::string yaw_scheme_mode = "NONE";
+};
+
+// 中文说明：D5 feedback trace 只记录 stateFeedback 前后名义状态变化，不进行 output-only correction。
+struct DiagnosticFeedbackDeltaRecord {
+  int update_index = 0;
+  double gnss_time = 0.0;
+  double dx_pos_norm_before = 0.0;
+  double dx_vel_norm_before = 0.0;
+  double dx_phi_norm_deg_before = 0.0;
+  double pos_delta_ned_norm = 0.0;
+  double vel_delta_norm = 0.0;
+  double phi_delta_deg_norm = 0.0;
+  double roll_before = 0.0;
+  double pitch_before = 0.0;
+  double yaw_before = 0.0;
+  double roll_after = 0.0;
+  double pitch_after = 0.0;
+  double yaw_after = 0.0;
+  double roll_delta = 0.0;
+  double pitch_delta = 0.0;
+  double yaw_delta = 0.0;
+  double bias_delta_norm = 0.0;
+  double scale_delta_norm = 0.0;
+  bool dx_reset_after_feedback = false;
+};
+
+// 中文说明：D5 covariance trace 记录 predict/update/feedback 事件的协方差分块统计。
+struct DiagnosticCovarianceRecord {
+  double time = 0.0;
+  std::string event_type;
+  double cov_trace = 0.0;
+  double cov_min_diag = 0.0;
+  double cov_max_diag = 0.0;
+  double P_pos_trace = 0.0;
+  double P_vel_trace = 0.0;
+  double P_phi_trace = 0.0;
+  double P_bg_trace = 0.0;
+  double P_ba_trace = 0.0;
+  double K_norm_if_update = 0.0;
+  double dx_phi_norm_deg_if_update = 0.0;
+};
+
 // 中文说明：LegSA 自有 v23-core EKF 主框架。N4H4C 已打通 GNSS 松组合更新和误差反馈。
 class LegSAV23Engine {
  public:
@@ -101,6 +168,15 @@ class LegSAV23Engine {
 
   // 中文说明：返回 N4H4D1 诊断传播记录；用于定位 first-epoch 机械编排跳变。
   const std::vector<DiagnosticPropagationRecord>& getDiagnosticPropagationRecords() const;
+
+  // 中文说明：返回 D5 update block 诊断记录；所有 variant 都是 diagnostic-only。
+  const std::vector<DiagnosticUpdateBlockRecord>& getDiagnosticUpdateBlockRecords() const;
+
+  // 中文说明：返回 D5 feedback delta 诊断记录；external clean state 不进入 solver。
+  const std::vector<DiagnosticFeedbackDeltaRecord>& getDiagnosticFeedbackDeltaRecords() const;
+
+  // 中文说明：返回 D5 covariance/gain 诊断记录；不作为调参或性能结果。
+  const std::vector<DiagnosticCovarianceRecord>& getDiagnosticCovarianceRecords() const;
 
  private:
   // 中文说明：判断 GNSS 更新时间与相邻 IMU 区间关系；N4H4C 使用 0/1/2/3 区分传播/更新顺序。
@@ -152,6 +228,18 @@ class LegSAV23Engine {
   // 中文说明：标记最近一次诊断更新是否执行 stateFeedback；不修改 dx/P 数值。
   void markLatestDiagnosticFeedbackApplied();
 
+  // 中文说明：D5 记录单个量测块 EKFUpdate 前后的 dx/P 变化。
+  void recordDiagnosticUpdateBlock(const MeasurementBlock& measurement, const Vector21& dx_before,
+                                   const Matrix21& cov_before, const Vector21& dx_after,
+                                   const Matrix21& cov_after, bool accepted);
+
+  // 中文说明：D5 记录 stateFeedback 前后名义状态差异，只用于定位反馈过修正。
+  void recordDiagnosticFeedbackDelta(const FilterState& before_state, const FilterState& after_state);
+
+  // 中文说明：D5 记录协方差事件分块 trace；不改变 covariance 数值。
+  void recordDiagnosticCovariance(const std::string& event_type, double k_norm = 0.0,
+                                  double dx_phi_norm_deg = 0.0);
+
   GINSOptions options_;
   FilterState filter_state_;
   std::deque<IMUData> imu_buffer_;
@@ -161,9 +249,16 @@ class LegSAV23Engine {
   NoiseMatrix continuous_noise_ = diagonalNoiseMatrix(1.0e-6);
   std::vector<DiagnosticUpdateRecord> diagnostic_updates_;
   std::vector<DiagnosticPropagationRecord> diagnostic_propagations_;
+  std::vector<DiagnosticUpdateBlockRecord> diagnostic_update_blocks_;
+  std::vector<DiagnosticFeedbackDeltaRecord> diagnostic_feedback_deltas_;
+  std::vector<DiagnosticCovarianceRecord> diagnostic_covariances_;
   double diagnostic_pre_dx_norm_ = 0.0;
   double diagnostic_pre_cov_trace_ = 0.0;
   double diagnostic_pre_cov_min_diag_ = 0.0;
+  int diagnostic_current_update_index_ = 0;
+  double diagnostic_current_gnss_time_ = 0.0;
+  std::string diagnostic_current_yaw_mode_ = "NONE";
+  int diagnostic_feedback_counter_ = 0;
   double current_time_ = 0.0;
   bool initialized_ = false;
 };

@@ -540,3 +540,11 @@ N4H4D4 shadow measurement audit must not feed the solver.
 N4H4D4 trace parity diagnostics are not performance results.
 
 N4H4D4 must not use output correction, tuning, or epoch deletion.
+
+N4H4D5 uses external clean state only as a diagnostic shadow reference.
+
+N4H4D5 diagnostic feedback/covariance variants are not performance results.
+
+N4H4D5 must not use output-only correction, tuning, or epoch deletion.
+
+Any D6 fix must be evidence-backed by N4H4D5.

@@ -42,7 +42,7 @@ N4H4C GNSS updates, EKFUpdate, and stateFeedback.
 
 Current working phase:
 
-N4H4D4 external-clean trace parity and shadow measurement audit.
+N4H4D5 one-step propagation and gain/feedback isolation.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -158,6 +158,11 @@ N4H4D1 adds first-epoch, config/init, update residual, and update-isolation
 diagnostics for the failed N4H4D replay. It is diagnostic only: no solver math
 fix, no tuning, no epoch deletion, no output-only correction, and no performance
 claim.
+
+N4H4D5 isolates one-step propagation, measurement block contribution,
+covariance/gain scaling, and stateFeedback effects after D4 localized divergence
+to post-update state behavior. It uses external clean state only as a diagnostic
+shadow reference and does not make performance claims.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace

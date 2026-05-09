@@ -46,6 +46,9 @@ void RunManifestWriter::write(const std::string& path, const GINSOptions& option
   output << "  \"diagnostic_mode\": " << boolText(options.diagnostic_mode) << ",\n";
   output << "  \"diagnostic_run_label\": \"" << options.diagnostic_run_label << "\",\n";
   output << "  \"diagnostic_model_variant\": \"" << options.diagnostic_model_variant << "\",\n";
+  output << "  \"diagnostic_feedback_mode\": \"" << options.diagnostic_feedback_mode << "\",\n";
+  output << "  \"diagnostic_update_block_mode\": \"" << options.diagnostic_update_block_mode << "\",\n";
+  output << "  \"diagnostic_covariance_mode\": \"" << options.diagnostic_covariance_mode << "\",\n";
   output << "  \"diagnostic_only\": " << boolText(options.diagnostic_only) << ",\n";
   output << "  \"diagnostic_update_switches\": {\n";
   output << "    \"disable_position_update\": " << boolText(options.disable_position_update) << ",\n";

@@ -73,6 +73,12 @@ struct GINSOptions {
   bool debug_full_state_trace = false;
   bool debug_measurement_matrix_trace = false;
   bool debug_gain_trace = false;
+  bool debug_update_blocks = false;
+  bool debug_feedback_delta = false;
+  bool debug_covariance_gain = false;
+  std::string diagnostic_feedback_mode = "normal";
+  std::string diagnostic_update_block_mode = "all";
+  std::string diagnostic_covariance_mode = "normal";
   std::string diagnostic_run_label;
   std::string diagnostic_model_variant = "baseline_current";
   bool not_for_performance_claim = false;

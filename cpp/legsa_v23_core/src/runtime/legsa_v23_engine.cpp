@@ -1,6 +1,7 @@
 #include "legsa_v23_core/runtime/legsa_v23_engine.hpp"
 
 #include "legsa_v23_core/common/constants.hpp"
+#include "legsa_v23_core/common/earth.hpp"
 #include "legsa_v23_core/common/rotation.hpp"
 #include "legsa_v23_core/filter/ekf_update.hpp"
 #include "legsa_v23_core/filter/ekf_predictor.hpp"
@@ -66,12 +67,133 @@ double diagnosticGainProxy(double dx_norm, double residual_norm) {
   return dx_norm / residual_norm;
 }
 
+// 中文说明：D5 block trace 使用 21 维向量差分定位单块量测的 dx 贡献。
+Vector21 vectorDiff(const Vector21& after, const Vector21& before) {
+  Vector21 diff{};
+  diff.fill(0.0);
+  for (std::size_t i = 0; i < kStateSize; ++i) {
+    diff[i] = after[i] - before[i];
+  }
+  return diff;
+}
+
+// 中文说明：从 21 维误差状态取三维子块范数，用于 position/velocity/attitude 贡献诊断。
+double subVectorNorm3(const Vector21& values, std::size_t offset) {
+  Vector3 local = zeroVector3();
+  for (std::size_t i = 0; i < kVector3Size; ++i) {
+    local[i] = values[offset + i];
+  }
+  return norm3(local);
+}
+
+// 中文说明：量测残差/H/R 范数仅用于 D5 block contribution，不进入 EKF 计算。
+double measurementResidualNorm(const MeasurementBlock& block) {
+  double sum = 0.0;
+  for (double value : block.residual) {
+    sum += value * value;
+  }
+  return std::sqrt(sum);
+}
+
+double measurementHNorm(const MeasurementBlock& block) {
+  double sum = 0.0;
+  for (double value : block.H) {
+    sum += value * value;
+  }
+  return std::sqrt(sum);
+}
+
+double measurementRTrace(const MeasurementBlock& block) {
+  double trace = 0.0;
+  for (std::size_t i = 0; i < block.rows; ++i) {
+    trace += measurementRAt(block, i, i);
+  }
+  return trace;
+}
+
+// 中文说明：D5 condition estimate 用 R 对角最大/最小近似 S 条件数，避免引入重型矩阵工具。
+double measurementConditionEstimate(const MeasurementBlock& block) {
+  if (block.rows == 0) {
+    return 1.0;
+  }
+  double min_diag = std::abs(measurementRAt(block, 0, 0));
+  double max_diag = min_diag;
+  for (std::size_t i = 0; i < block.rows; ++i) {
+    const double value = std::abs(measurementRAt(block, i, i));
+    min_diag = std::min(min_diag, value);
+    max_diag = std::max(max_diag, value);
+  }
+  return max_diag / std::max(min_diag, 1.0e-18);
+}
+
 // 中文说明：D2 yaw residual variant 必须同时影响 yaw gate 计数和 MeasurementBlock，保证诊断记录自洽。
 double diagnosticYawResidualDeg(const GINSOptions& options, double obs_yaw_deg, double pred_yaw_deg) {
   if (options.diagnostic_mode && options.diagnostic_model_variant == "yaw_residual_sign_flip") {
     return Rotation::wrapAngleDeg(pred_yaw_deg - obs_yaw_deg);
   }
   return Rotation::wrapAngleDeg(obs_yaw_deg - pred_yaw_deg);
+}
+
+// 中文说明：D5 update-block mode 是 diagnostic-only 开关，默认 all 不改变 baseline。
+bool updateBlockAllowed(const GINSOptions& options, const std::string& block_name) {
+  if (!options.diagnostic_mode) {
+    return true;
+  }
+  const std::string mode = options.diagnostic_update_block_mode;
+  if (mode == "all") {
+    return true;
+  }
+  if (mode == "position_only") {
+    return block_name == "position";
+  }
+  if (mode == "velocity_only") {
+    return block_name == "velocity";
+  }
+  if (mode == "yaw_only") {
+    return block_name == "yaw";
+  }
+  if (mode == "position_velocity") {
+    return block_name == "position" || block_name == "velocity";
+  }
+  if (mode == "position_yaw") {
+    return block_name == "position" || block_name == "yaw";
+  }
+  if (mode == "velocity_yaw") {
+    return block_name == "velocity" || block_name == "yaw";
+  }
+  if (mode == "no_yaw") {
+    return block_name != "yaw";
+  }
+  if (mode == "no_velocity") {
+    return block_name != "velocity";
+  }
+  if (mode == "no_position") {
+    return block_name != "position";
+  }
+  return true;
+}
+
+// 中文说明：D5 covariance mode 只在诊断中放大量测 R，用于判断 K/dx 是否由噪声尺度驱动。
+void applyDiagnosticCovarianceMode(const GINSOptions& options, MeasurementBlock& measurement) {
+  if (!options.diagnostic_mode) {
+    return;
+  }
+  double scale = 1.0;
+  const std::string mode = options.diagnostic_covariance_mode;
+  if (mode == "inflate_measurement_R_10x") {
+    scale = 10.0;
+  } else if (mode == "inflate_yaw_R_10x" && measurement.name == "gnss_yaw") {
+    scale = 10.0;
+  } else if (mode == "inflate_position_R_10x" && measurement.name == "gnss_position") {
+    scale = 10.0;
+  } else if (mode == "inflate_velocity_R_10x" && measurement.name == "gnss_velocity") {
+    scale = 10.0;
+  }
+  if (scale != 1.0) {
+    for (double& value : measurement.R) {
+      value *= scale;
+    }
+  }
 }
 
 }  // namespace
@@ -89,6 +211,17 @@ void LegSAV23Engine::initialize() {
     matrix21At(filter_state_.covariance, P_ID + i, P_ID + i) = options_.init_pos_std[i] * options_.init_pos_std[i];
     matrix21At(filter_state_.covariance, V_ID + i, V_ID + i) = options_.init_vel_std[i] * options_.init_vel_std[i];
     matrix21At(filter_state_.covariance, PHI_ID + i, PHI_ID + i) = options_.init_att_std[i] * options_.init_att_std[i];
+  }
+  if (options_.diagnostic_mode && options_.diagnostic_covariance_mode == "inflate_attitude_10x") {
+    // 中文说明：D5 诊断：仅放大初始姿态协方差 10 倍，观察 K/dx 敏感性，不作为调参结果。
+    for (std::size_t i = 0; i < kVector3Size; ++i) {
+      matrix21At(filter_state_.covariance, PHI_ID + i, PHI_ID + i) *= 10.0;
+    }
+  } else if (options_.diagnostic_mode && options_.diagnostic_covariance_mode == "inflate_attitude_100x") {
+    // 中文说明：D5 诊断：仅放大初始姿态协方差 100 倍，定位 covariance/gain 尺度问题。
+    for (std::size_t i = 0; i < kVector3Size; ++i) {
+      matrix21At(filter_state_.covariance, PHI_ID + i, PHI_ID + i) *= 100.0;
+    }
   }
   continuous_noise_ = diagonalNoiseMatrix(1.0e-6);
   for (std::size_t i = 0; i < kVector3Size; ++i) {
@@ -222,6 +355,18 @@ const std::vector<DiagnosticPropagationRecord>& LegSAV23Engine::getDiagnosticPro
   return diagnostic_propagations_;
 }
 
+const std::vector<DiagnosticUpdateBlockRecord>& LegSAV23Engine::getDiagnosticUpdateBlockRecords() const {
+  return diagnostic_update_blocks_;
+}
+
+const std::vector<DiagnosticFeedbackDeltaRecord>& LegSAV23Engine::getDiagnosticFeedbackDeltaRecords() const {
+  return diagnostic_feedback_deltas_;
+}
+
+const std::vector<DiagnosticCovarianceRecord>& LegSAV23Engine::getDiagnosticCovarianceRecords() const {
+  return diagnostic_covariances_;
+}
+
 // 中文说明：更新时间与 IMU 区间的四态判定；NED/BLH 状态在对应分支中保持 KF-GINS-style 顺序。
 int LegSAV23Engine::isToUpdate(double imu_time_1, double imu_time_2, double update_time) const {
   const double eps = 1.0e-10;
@@ -291,24 +436,30 @@ void LegSAV23Engine::buildFGPhiQd(const IMUData& imucur) {
 // 中文说明：EKF predict 执行 dx/P 预测传播；N4H4B 不做 GNSS update、EKFUpdate 或 stateFeedback。
 void LegSAV23Engine::EKFPredict() {
   legsa_v23_core::EKFPredict(filter_state_, last_matrices_.Phi, last_matrices_.Qd);
+  recordDiagnosticCovariance("predict");
 }
 
 // 中文说明：GNSS 更新调度入口；N4H4C 顺序构建 position/velocity/yaw 量测并交给 EKFUpdate。
 // 中文说明：历史边界保留：TODO(N4H4C): measurement update not implemented in N4H4B.
 void LegSAV23Engine::gnssUpdate(const GNSSData& gnss) {
   pending_measurements_.clear();
+  if (options_.diagnostic_mode) {
+    diagnostic_current_update_index_ = static_cast<int>(diagnostic_updates_.size()) + 1;
+    diagnostic_current_gnss_time_ = gnss.time;
+    diagnostic_current_yaw_mode_ = "NONE";
+  }
   if (!options_.measurement_update_implemented || options_.disable_measurement_update) {
     (void)gnss;
     return;
   }
   ++options_.measurement_update_count;
-  if (!options_.disable_position_update) {
+  if (!options_.disable_position_update && updateBlockAllowed(options_, "position")) {
     this->gnssPositionUpdate(gnss);
   }
-  if (gnss.has_velocity && !options_.disable_velocity_update) {
+  if (gnss.has_velocity && !options_.disable_velocity_update && updateBlockAllowed(options_, "velocity")) {
     this->gnssVelocityUpdate(gnss);
   }
-  if (gnss.has_yaw && !options_.disable_yaw_update) {
+  if (gnss.has_yaw && !options_.disable_yaw_update && updateBlockAllowed(options_, "yaw")) {
     this->gnssYawUpdate(gnss);
   }
   EKFUpdate();
@@ -343,6 +494,9 @@ void LegSAV23Engine::gnssYawUpdate(const GNSSData& gnss) {
     ++options_.yaw_reject_count;
     ++options_.rejected_update_count;
   }
+  if (options_.diagnostic_mode) {
+    diagnostic_current_yaw_mode_ = decision.label;
+  }
   const auto block = buildGnssYawMeasurement(filter_state_.current_pva, gnss, options_);
   if (block.has_value()) {
     pending_measurements_.push_back(block.value());
@@ -353,16 +507,18 @@ void LegSAV23Engine::gnssYawUpdate(const GNSSData& gnss) {
 // 中文说明：历史边界保留：TODO(N4H4C): EKF measurement update not implemented in N4H4B.
 void LegSAV23Engine::EKFUpdate() {
   for (const auto& measurement : pending_measurements_) {
+    MeasurementBlock effective = measurement;
+    applyDiagnosticCovarianceMode(options_, effective);
+    const Vector21 dx_before = filter_state_.dx;
+    const Matrix21 cov_before = filter_state_.covariance;
     if (options_.diagnostic_mode && options_.diagnostic_model_variant == "ekf_update_residual_sign_flip") {
       // 中文说明：D2 诊断：临时翻转量测 residual 后进入 Joseph form，用来隔离 EKF innovation 符号。
-      MeasurementBlock flipped = measurement;
-      for (double& value : flipped.residual) {
+      for (double& value : effective.residual) {
         value = -value;
       }
-      legsa_v23_core::EKFUpdate(filter_state_, flipped);
-    } else {
-      legsa_v23_core::EKFUpdate(filter_state_, measurement);
     }
+    legsa_v23_core::EKFUpdate(filter_state_, effective);
+    recordDiagnosticUpdateBlock(effective, dx_before, cov_before, filter_state_.dx, filter_state_.covariance, true);
   }
   pending_measurements_.clear();
 }
@@ -370,7 +526,19 @@ void LegSAV23Engine::EKFUpdate() {
 // 中文说明：stateFeedback 将 dx 反馈到 BLH/NED/姿态/bias/scale；反馈后 dx 清零。
 // 中文说明：历史边界保留：TODO(N4H4C): state feedback not implemented in N4H4B.
 void LegSAV23Engine::stateFeedback() {
+  ++diagnostic_feedback_counter_;
+  if (options_.diagnostic_mode) {
+    const std::string mode = options_.diagnostic_feedback_mode;
+    if (mode == "no_feedback" || (mode == "delayed_feedback_every_5_updates" && diagnostic_feedback_counter_ % 5 != 0)) {
+      // 中文说明：D5 诊断：跳过 stateFeedback 只为隔离反馈路径，不是正式 solver 行为。
+      recordDiagnosticCovariance("feedback", 0.0, subVectorNorm3(filter_state_.dx, PHI_ID) * kRadToDeg);
+      return;
+    }
+  }
+  const FilterState before_state = filter_state_;
   legsa_v23_core::stateFeedback(filter_state_, options_);
+  recordDiagnosticFeedbackDelta(before_state, filter_state_);
+  recordDiagnosticCovariance("feedback");
 }
 
 // 中文说明：协方差检查保持有限、近似对称、对角非负；不伪造量测约束。
@@ -490,6 +658,132 @@ void LegSAV23Engine::markLatestDiagnosticFeedbackApplied() {
   if (!diagnostic_updates_.empty()) {
     diagnostic_updates_.back().state_feedback_applied = true;
   }
+}
+
+// 中文说明：D5 量测块贡献记录真实 EKFUpdate 前后差分；只写 debug CSV。
+void LegSAV23Engine::recordDiagnosticUpdateBlock(const MeasurementBlock& measurement, const Vector21& dx_before,
+                                                 const Matrix21& cov_before, const Vector21& dx_after,
+                                                 const Matrix21& cov_after, bool accepted) {
+  if (!options_.diagnostic_mode || !options_.debug_update_blocks) {
+    return;
+  }
+  if (diagnostic_update_blocks_.size() >= static_cast<std::size_t>(std::max(0, options_.diagnostic_debug_max_rows))) {
+    return;
+  }
+  DiagnosticUpdateBlockRecord record;
+  record.update_index = diagnostic_current_update_index_;
+  record.gnss_time = diagnostic_current_gnss_time_;
+  record.block_type = measurement.name == "gnss_position" ? "position"
+                      : measurement.name == "gnss_velocity" ? "velocity"
+                      : measurement.name == "gnss_yaw"      ? "yaw"
+                                                            : measurement.name;
+  record.dz_norm = measurementResidualNorm(measurement);
+  if (!measurement.residual.empty()) {
+    record.dz_0 = measurement.residual[0];
+  }
+  if (measurement.residual.size() > 1) {
+    record.dz_1 = measurement.residual[1];
+  }
+  if (measurement.residual.size() > 2) {
+    record.dz_2 = measurement.residual[2];
+  }
+  record.H_norm = measurementHNorm(measurement);
+  record.R_trace = measurementRTrace(measurement);
+  record.S_condition_estimate = measurementConditionEstimate(measurement);
+  record.dx_before_norm = norm21(dx_before);
+  record.dx_after_norm = norm21(dx_after);
+  const Vector21 dx_delta = vectorDiff(dx_after, dx_before);
+  record.dx_delta_norm = norm21(dx_delta);
+  record.dx_delta_pos_norm = subVectorNorm3(dx_delta, P_ID);
+  record.dx_delta_vel_norm = subVectorNorm3(dx_delta, V_ID);
+  record.dx_delta_phi_norm_deg = subVectorNorm3(dx_delta, PHI_ID) * kRadToDeg;
+  double cov_max_before = 0.0;
+  double cov_max_after = 0.0;
+  covarianceStats(cov_before, record.cov_trace_before, record.cov_min_diag_before, cov_max_before);
+  covarianceStats(cov_after, record.cov_trace_after, record.cov_min_diag_after, cov_max_after);
+  record.K_norm = diagnosticGainProxy(record.dx_delta_norm, record.dz_norm);
+  record.accepted = accepted;
+  record.yaw_scheme_mode = record.block_type == "yaw" ? diagnostic_current_yaw_mode_ : "NONE";
+  diagnostic_update_blocks_.push_back(record);
+  recordDiagnosticCovariance("update_" + record.block_type, record.K_norm, record.dx_delta_phi_norm_deg);
+}
+
+// 中文说明：D5 feedback delta 记录反馈前后名义状态差分，帮助判断 dx_phi 是否过修正。
+void LegSAV23Engine::recordDiagnosticFeedbackDelta(const FilterState& before_state, const FilterState& after_state) {
+  if (!options_.diagnostic_mode || !options_.debug_feedback_delta) {
+    return;
+  }
+  if (diagnostic_feedback_deltas_.size() >= static_cast<std::size_t>(std::max(0, options_.diagnostic_debug_max_rows))) {
+    return;
+  }
+  DiagnosticFeedbackDeltaRecord record;
+  record.update_index = diagnostic_current_update_index_;
+  record.gnss_time = diagnostic_current_gnss_time_;
+  record.dx_pos_norm_before = subVectorNorm3(before_state.dx, P_ID);
+  record.dx_vel_norm_before = subVectorNorm3(before_state.dx, V_ID);
+  record.dx_phi_norm_deg_before = subVectorNorm3(before_state.dx, PHI_ID) * kRadToDeg;
+  Vector3 pos_delta_blh = zeroVector3();
+  for (std::size_t i = 0; i < kVector3Size; ++i) {
+    pos_delta_blh[i] = after_state.current_pva.pos_blh_rad_m[i] - before_state.current_pva.pos_blh_rad_m[i];
+  }
+  const Matrix3 dr = Earth::DR(before_state.current_pva.pos_blh_rad_m);
+  Vector3 pos_delta_ned = zeroVector3();
+  for (std::size_t row = 0; row < kVector3Size; ++row) {
+    for (std::size_t col = 0; col < kVector3Size; ++col) {
+      pos_delta_ned[row] += matrix3At(dr, row, col) * pos_delta_blh[col];
+    }
+  }
+  record.pos_delta_ned_norm = norm3(pos_delta_ned);
+  Vector3 vel_delta = zeroVector3();
+  Vector3 bias_delta = zeroVector3();
+  Vector3 scale_delta = zeroVector3();
+  for (std::size_t i = 0; i < kVector3Size; ++i) {
+    vel_delta[i] = after_state.current_pva.vel_ned_mps[i] - before_state.current_pva.vel_ned_mps[i];
+    bias_delta[i] = after_state.current_pva.gyro_bias[i] - before_state.current_pva.gyro_bias[i];
+    scale_delta[i] = after_state.current_pva.gyro_scale[i] - before_state.current_pva.gyro_scale[i];
+  }
+  record.vel_delta_norm = norm3(vel_delta);
+  record.bias_delta_norm = norm3(bias_delta);
+  record.scale_delta_norm = norm3(scale_delta);
+  record.roll_before = before_state.current_pva.euler_rpy_rad[0] * kRadToDeg;
+  record.pitch_before = before_state.current_pva.euler_rpy_rad[1] * kRadToDeg;
+  record.yaw_before = before_state.current_pva.euler_rpy_rad[2] * kRadToDeg;
+  record.roll_after = after_state.current_pva.euler_rpy_rad[0] * kRadToDeg;
+  record.pitch_after = after_state.current_pva.euler_rpy_rad[1] * kRadToDeg;
+  record.yaw_after = after_state.current_pva.euler_rpy_rad[2] * kRadToDeg;
+  record.roll_delta = Rotation::wrapAngleDeg(record.roll_after - record.roll_before);
+  record.pitch_delta = Rotation::wrapAngleDeg(record.pitch_after - record.pitch_before);
+  record.yaw_delta = Rotation::wrapAngleDeg(record.yaw_after - record.yaw_before);
+  record.phi_delta_deg_norm =
+      std::sqrt(record.roll_delta * record.roll_delta + record.pitch_delta * record.pitch_delta +
+                record.yaw_delta * record.yaw_delta);
+  record.dx_reset_after_feedback = norm21(after_state.dx) < 1.0e-12;
+  diagnostic_feedback_deltas_.push_back(record);
+}
+
+// 中文说明：D5 covariance trace 分块统计只用于定位 P/K/dx 尺度，不改变滤波结果。
+void LegSAV23Engine::recordDiagnosticCovariance(const std::string& event_type, double k_norm,
+                                                double dx_phi_norm_deg) {
+  if (!options_.diagnostic_mode || !options_.debug_covariance_gain) {
+    return;
+  }
+  if (diagnostic_covariances_.size() >= static_cast<std::size_t>(std::max(0, options_.diagnostic_debug_max_rows))) {
+    return;
+  }
+  DiagnosticCovarianceRecord record;
+  record.time = current_time_;
+  record.event_type = event_type;
+  covarianceStats(filter_state_.covariance, record.cov_trace, record.cov_min_diag, record.cov_max_diag);
+  for (std::size_t i = 0; i < kVector3Size; ++i) {
+    record.P_pos_trace += matrix21At(filter_state_.covariance, P_ID + i, P_ID + i);
+    record.P_vel_trace += matrix21At(filter_state_.covariance, V_ID + i, V_ID + i);
+    record.P_phi_trace += matrix21At(filter_state_.covariance, PHI_ID + i, PHI_ID + i);
+    record.P_bg_trace += matrix21At(filter_state_.covariance, BG_ID + i, BG_ID + i);
+    record.P_ba_trace += matrix21At(filter_state_.covariance, BA_ID + i, BA_ID + i);
+  }
+  record.K_norm_if_update = k_norm;
+  record.dx_phi_norm_deg_if_update = dx_phi_norm_deg;
+  diagnostic_covariances_.push_back(record);
 }
 
 }  // namespace legsa_v23_core
