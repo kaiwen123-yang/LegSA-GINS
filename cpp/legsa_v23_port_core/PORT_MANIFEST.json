@@ -1,0 +1,43 @@
+{
+  "phase": "N4H4R1",
+  "port_role": "source_backed_backbone_foundation",
+  "source_commit": "5a4471efd4fcfcdc31e258a677af354c652ff16f",
+  "final_v23_is_proposed": false,
+  "final_v23_output_solver_input": false,
+  "trace_solver_input": false,
+  "output_only_correction": false,
+  "bad_epoch_deletion_for_metric": false,
+  "raw_doppler": false,
+  "go2_prior": false,
+  "lsim_oim": false,
+  "fgo": false,
+  "performance_claim": false,
+  "parity_attempted": false,
+  "copied_or_refactored_files": [
+    "common/earth",
+    "common/rotation",
+    "kf_gins/types",
+    "fileio/imu_file_loader",
+    "fileio/gnss_file_loader",
+    "fileio/file_saver",
+    "config/port_config_loader",
+    "kf_gins/insmech",
+    "kf_gins/gi_engine",
+    "runtime/port_runtime",
+    "demo/port_demo"
+  ],
+  "excluded_files": [
+    "raw data",
+    "final_results",
+    "extended_degradation_results",
+    "tmp outputs",
+    "runtime clean replay outputs",
+    "generated figures"
+  ],
+  "license_status": {
+    "LICENSE": "found",
+    "README": "found",
+    "COPYING": "evidence_missing"
+  }
+}
+
