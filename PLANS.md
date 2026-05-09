@@ -349,6 +349,29 @@ N4H4R1 ports the backbone before factor extensions. It does not implement raw
 Doppler, Go2 priors, LSIM/OIM, source-aware weighting, FGO, or paper
 performance claims.
 
+## Stage N4H4R1: Source-backed port-core foundation
+
+Goal:
+Add the minimal compileable `cpp/legsa_v23_port_core` foundation with
+provenance headers, port manifest, CMake targets, toy dry-run, docs, audits,
+and tests.
+
+N4H4R1 does not attempt real clean parity and does not claim performance.
+
+## Stage N4H4R2: Complete source-backed mathematical port
+
+Goal:
+Complete the source-backed KF-GINS/final_v23 math and runtime port inside
+`cpp/legsa_v23_port_core`.
+
+No proposed factors are enabled in R2.
+
+## Stage N4H4R3: Clean replay parity
+
+Goal:
+Run clean status-yaw replay parity with the source-backed port-core backbone and
+write an honest pass/fail gap report.
+
 ## Stage N5: Raw Doppler Factor
 
 Goal:

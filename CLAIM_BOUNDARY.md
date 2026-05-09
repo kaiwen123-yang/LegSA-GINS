@@ -133,6 +133,18 @@ Allowed N4H4R0 route-reset statement:
 - final_v23 is not proposed.
 - Factor claims start only after backbone parity.
 
+Allowed N4H4R1 source-backed port-core statement:
+
+- N4H4R1 may create `cpp/legsa_v23_port_core` as a controlled source-backed
+  port-core foundation.
+- N4H4R1 may add CMake targets, toy dry-run, provenance headers, port manifest,
+  docs, audits, and tests.
+- Source-backed port-core is backbone, not novelty.
+- Ported core must preserve provenance.
+- N4H4R1 toy run is not performance evidence.
+- The old `cpp/legsa_v23_core` remains a diagnostic attempt.
+- No factor claims until port parity.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -262,6 +274,9 @@ Do not claim:
 - Factor claims before backbone parity.
 - Nine-factor claims before ablation evidence.
 - N4H4R0 implementing solver code or factor logic.
+- N4H4R1 toy run as numerical performance evidence.
+- N4H4R1 source-backed port-core as proposed novelty.
+- N4H4R1 enabling raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting, or FGO.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 
@@ -512,6 +527,18 @@ Clean/noisy input provenance remains mandatory.
 Factor claims start only after backbone parity.
 
 No nine-factor claim before ablation evidence.
+
+Source-backed port-core is backbone, not novelty.
+
+Ported core must preserve provenance.
+
+No factor claims until port parity.
+
+N4H4R1 toy run is not performance evidence.
+
+final_v23 output cannot be solver input.
+
+old cpp/legsa_v23_core remains diagnostic attempt.
 
 ## Evidence Rule
 

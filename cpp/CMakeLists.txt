@@ -50,3 +50,31 @@ target_link_libraries(legsa_v23_core_demo
   PRIVATE
     legsa_v23_core
 )
+
+file(GLOB_RECURSE LEGSA_V23_PORT_CORE_SOURCES CONFIGURE_DEPENDS
+  # N4H4R1 source-backed port files are LegSA-owned copies/refactors under
+  # cpp/legsa_v23_port_core.  The external reference submodule remains
+  # provenance evidence only and is never compiled by this target.
+  "${CMAKE_CURRENT_SOURCE_DIR}/legsa_v23_port_core/src/*.cpp"
+)
+list(REMOVE_ITEM LEGSA_V23_PORT_CORE_SOURCES
+  "${CMAKE_CURRENT_SOURCE_DIR}/legsa_v23_port_core/src/demo/port_demo.cpp"
+)
+
+add_library(legsa_v23_port_core STATIC
+  ${LEGSA_V23_PORT_CORE_SOURCES}
+)
+
+target_include_directories(legsa_v23_port_core
+  PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/legsa_v23_port_core/include"
+)
+
+add_executable(legsa_v23_port_core_demo
+  "${CMAKE_CURRENT_SOURCE_DIR}/legsa_v23_port_core/src/demo/port_demo.cpp"
+)
+
+target_link_libraries(legsa_v23_port_core_demo
+  PRIVATE
+    legsa_v23_port_core
+)

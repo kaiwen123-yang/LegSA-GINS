@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N4H4C GNSS updates, EKFUpdate, and stateFeedback.
+N4H4R0 route reset and source-backed port readiness.
 
 Current working phase:
 
-N4H4R0 route reset and source-backed port readiness.
+N4H4R1 source-backed port-core foundation.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -153,6 +153,12 @@ branch, keeps PR #21 open and unmerged, and resets the route toward a
 source-backed controlled final_v23/KF-GINS core port. N4H4R0 does not implement
 solver code, does not copy final_v23 source files, does not add factors, and
 does not make performance claims. final_v23 is not proposed.
+
+N4H4R1 adds `cpp/legsa_v23_port_core` as a controlled source-backed port-core
+foundation with provenance headers, manifest, CMake targets, toy dry-run, docs,
+audits, and tests. N4H4R1 does not run clean replay parity, does not add
+proposed factors, and does not make performance claims. The old
+`cpp/legsa_v23_core` remains a diagnostic/self-written attempt.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace
