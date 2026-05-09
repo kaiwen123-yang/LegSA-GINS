@@ -11,11 +11,12 @@
 
 namespace legsa_v23_port_core {
 
-// 中文说明：PortRuntime 只跑 R1 toy dry-run，不运行真实 clean parity。
+// 中文说明：PortRuntime 支持 R2 synthetic math 和真实输入形态，但 R2 不运行 clean parity。
 class PortRuntime {
  public:
   static void runDryToy(const std::string& output_dir);
+  static void runSyntheticMath(const std::string& output_dir);
+  static void runFromConfig(const std::string& config_path, const std::string& output_dir);
 };
 
 }  // namespace legsa_v23_port_core
-

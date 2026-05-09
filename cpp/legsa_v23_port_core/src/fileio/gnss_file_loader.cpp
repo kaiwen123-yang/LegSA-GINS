@@ -7,11 +7,17 @@
 
 #include "legsa_v23_port_core/fileio/gnss_file_loader.hpp"
 
+#include "legsa_v23_port_core/common/earth.hpp"
+
+#include <algorithm>
+#include <cmath>
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
 
 namespace legsa_v23_port_core {
+
+GnssFileLoader::GnssFileLoader(const std::string& path) : rows_(loadFifteenColumn(path)) {}
 
 // 中文说明：读取 process_data-compatible 15 列高层 GNSS；R1 不读取 raw GNSS。
 std::vector<GnssData> GnssFileLoader::loadFifteenColumn(const std::string& path) {
@@ -33,11 +39,35 @@ std::vector<GnssData> GnssFileLoader::loadFifteenColumn(const std::string& path)
         gnss.vel_std_mps[0] >> gnss.vel_std_mps[1] >> gnss.vel_std_mps[2] >>
         gnss.yaw_deg >> gnss.yaw_std_deg;
     if (stream) {
+      if (std::fabs(gnss.blh_rad_m[0]) > kPi / 2.0 || std::fabs(gnss.blh_rad_m[1]) > kPi) {
+        gnss.blh_rad_m[0] = Earth::degToRad(gnss.blh_rad_m[0]);
+        gnss.blh_rad_m[1] = Earth::degToRad(gnss.blh_rad_m[1]);
+      }
+      gnss.yaw_rad = Earth::degToRad(gnss.yaw_deg);
+      gnss.yaw_std_rad = Earth::degToRad(std::max(gnss.yaw_std_deg, 0.001));
+      gnss.has_velocity = true;
+      gnss.has_yaw = true;
+      gnss.isvalid = false;
       rows.push_back(gnss);
     }
   }
   return rows;
 }
 
-}  // namespace legsa_v23_port_core
+bool GnssFileLoader::next(GnssData& gnss) {
+  if (index_ >= rows_.size()) {
+    return false;
+  }
+  gnss = rows_[index_++];
+  return true;
+}
 
+bool GnssFileLoader::isEof() const {
+  return index_ >= rows_.size();
+}
+
+bool GnssFileLoader::isOpen() const {
+  return !rows_.empty();
+}
+
+}  // namespace legsa_v23_port_core

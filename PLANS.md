@@ -364,13 +364,33 @@ Goal:
 Complete the source-backed KF-GINS/final_v23 math and runtime port inside
 `cpp/legsa_v23_port_core`.
 
-No proposed factors are enabled in R2.
+Status:
+completed as N4H4R2 math port foundation.
+
+N4H4R2 implements the backbone math and runtime chain only. It does not run real
+clean parity, does not implement raw Doppler, Go2 priors, LSIM/OIM,
+source-aware weighting, FGO, or performance claims.
 
 ## Stage N4H4R3: Clean replay parity
 
 Goal:
 Run clean status-yaw replay parity with the source-backed port-core backbone and
 write an honest pass/fail gap report.
+
+## Stage N4H4R2: Complete source-backed mathematical port
+
+Goal:
+Close the source-backed mathematical backbone in `cpp/legsa_v23_port_core` with
+config/unit conversion, readers, INS mechanization, GIEngine update routing,
+EKF predict/update, feedback, writers, audits, tests, and synthetic math smoke.
+
+R2 synthetic output is not parity evidence.
+
+## Stage N4H4R3: Clean replay parity for source-backed port
+
+Goal:
+Run the clean replay against external clean and dual_final_v23 references and
+report pass/fail honestly.
 
 ## Stage N5: Raw Doppler Factor
 

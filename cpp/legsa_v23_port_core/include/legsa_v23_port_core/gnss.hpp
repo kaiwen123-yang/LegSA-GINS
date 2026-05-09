@@ -20,7 +20,11 @@ struct GnssData {
   Vec3 vel_std_mps = makeVec3(1.0, 1.0, 1.0);
   double yaw_deg = 0.0;
   double yaw_std_deg = 1.0;
+  double yaw_rad = 0.0;
+  double yaw_std_rad = D2R;
+  bool has_velocity = true;
+  bool has_yaw = true;
+  bool isvalid = false;
 };
 
 }  // namespace legsa_v23_port_core
-

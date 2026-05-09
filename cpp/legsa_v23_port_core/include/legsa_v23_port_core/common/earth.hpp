@@ -9,19 +9,35 @@
 
 #include "legsa_v23_port_core/types.hpp"
 
+#include <utility>
+
 namespace legsa_v23_port_core {
 
-// 中文说明：Earth 提供 R1 toy 所需的基础地球常数和 BLH/NED 高度符号合同。
+// 中文说明：Earth 保持 KF-GINS/final_v23 的 WGS84、NED、BLH 高程符号约定。
 class Earth {
  public:
+  static constexpr double kWgs84Wie = 7.2921151467E-5;
+  static constexpr double kWgs84F = 0.0033528106647474805;
   static constexpr double kWgs84A = 6378137.0;
-  static constexpr double kWgs84E2 = 6.6943799901413165e-3;
+  static constexpr double kWgs84B = 6356752.3142451793;
+  static constexpr double kWgs84E1 = 0.0066943799901413156;
+  static constexpr double kWgs84E2 = 0.0067394967422764341;
 
   static double degToRad(double deg);
   static double radToDeg(double rad);
+  static double gravity(const Vec3& blh_rad_m);
+  static std::pair<double, double> meridianPrimeVerticalRadius(double lat_rad);
+  static double RN(double lat_rad);
+  static Matrix3 cne(const Vec3& blh_rad_m);
+  static Quaternion qne(const Vec3& blh_rad_m);
+  static Vec3 blh(const Quaternion& qne_value, double height_m);
+  static Vec3 blh2ecef(const Vec3& blh_rad_m);
+  static Vec3 ecef2blh(const Vec3& ecef_m);
   static Matrix3 DR(const Vec3& blh_rad_m);
   static Matrix3 DRi(const Vec3& blh_rad_m);
+  static Vec3 iewe();
+  static Vec3 iewn(const Vec3& blh_rad_m);
+  static Vec3 enwn(const Vec3& blh_rad_m, const Vec3& vel_ned_mps);
 };
 
 }  // namespace legsa_v23_port_core
-

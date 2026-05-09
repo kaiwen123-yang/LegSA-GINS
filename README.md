@@ -160,6 +160,18 @@ audits, and tests. N4H4R1 does not run clean replay parity, does not add
 proposed factors, and does not make performance claims. The old
 `cpp/legsa_v23_core` remains a diagnostic/self-written attempt.
 
+Current completed phase:
+N4H4R1 source-backed port-core foundation.
+
+Current working phase:
+N4H4R2 complete source-backed mathematical port.
+
+N4H4R2 completes the source-backed port-core math surface inside
+`cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,
+GIEngine, GNSS updates, EKF predict/update, feedback, writers, and synthetic
+math smoke. N4H4R2 does not run real clean replay parity, does not add proposed
+factors, and does not make performance claims.
+
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace
 evaluation-only.

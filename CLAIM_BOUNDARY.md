@@ -540,6 +540,16 @@ final_v23 output cannot be solver input.
 
 old cpp/legsa_v23_core remains diagnostic attempt.
 
+N4H4R2 completes backbone math port but does not claim performance.
+
+R2 synthetic run is not parity.
+
+R3 required for clean replay parity.
+
+No factor claims before R3.
+
+Ported backbone is not novelty.
+
 ## Evidence Rule
 
 If evidence is missing, write:

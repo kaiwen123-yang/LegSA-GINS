@@ -40,7 +40,7 @@ void FileSaver::writeNav(const std::string& output_dir, const std::vector<NavSta
   }
 }
 
-// 中文说明：STD writer 只写协方差对角 sqrt，R1 不声明真实统计一致性。
+// 中文说明：STD writer 只写协方差对角 sqrt，R2 synthetic 仍不声明 parity/performance。
 void FileSaver::writeStd(const std::string& output_dir, const std::vector<std::vector<double>>& covariances) {
   ensureOutputDir(output_dir);
   std::ofstream out(std::filesystem::path(output_dir) / "LegSA_PORT_STD.csv");
@@ -51,7 +51,11 @@ void FileSaver::writeStd(const std::string& output_dir, const std::vector<std::v
   out << '\n';
   for (std::size_t row = 0; row < covariances.size(); ++row) {
     out << row;
-    for (double value : covariances[row]) {
+    for (std::size_t i = 0; i < kErrorStateSize; ++i) {
+      const std::size_t diagonal_index = covariances[row].size() == kErrorStateSize
+                                             ? i
+                                             : i * kErrorStateSize + i;
+      const double value = diagonal_index < covariances[row].size() ? covariances[row][diagonal_index] : 0.0;
       out << ',' << std::sqrt(std::max(0.0, value));
     }
     out << '\n';
@@ -73,7 +77,7 @@ void FileSaver::writeEvalNav(const std::string& output_dir, const std::vector<Na
   }
 }
 
-// 中文说明：RUN_MANIFEST 锁定 R1 禁用项，明确 parity_not_attempted。
+// 中文说明：RUN_MANIFEST 锁定 R2 禁用项，明确 synthetic run 不是 clean parity。
 void FileSaver::writeRunManifest(const std::string& output_dir, const PortOptions& options) {
   ensureOutputDir(output_dir);
   std::ofstream out(std::filesystem::path(output_dir) / "RUN_MANIFEST.json");
@@ -81,22 +85,25 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
     throw std::runtime_error("failed to write RUN_MANIFEST");
   }
   out << "{\n"
-      << "  \"phase\": \"N4H4R1\",\n"
-      << "  \"port_role\": \"source_backed_port_foundation\",\n"
-      << "  \"parity_attempted\": false,\n"
-      << "  \"final_v23_output_solver_input\": false,\n"
-      << "  \"trace_solver_input\": false,\n"
-      << "  \"output_only_correction\": false,\n"
-      << "  \"bad_epoch_deletion_for_metric\": false,\n"
-      << "  \"raw_doppler\": false,\n"
-      << "  \"go2_prior\": false,\n"
-      << "  \"lsim_oim\": false,\n"
-      << "  \"fgo\": false,\n"
-      << "  \"performance_claim\": false,\n"
+      << "  \"phase\": \"N4H4R2\",\n"
+      << "  \"port_role\": \"source_backed_math_port\",\n"
+      << "  \"math_port_completed\": " << (options.math_port_completed ? "true" : "false") << ",\n"
+      << "  \"parity_attempted\": " << (options.parity_attempted ? "true" : "false") << ",\n"
+      << "  \"real_clean_replay_attempted\": " << (options.real_clean_replay_attempted ? "true" : "false") << ",\n"
+      << "  \"final_v23_output_solver_input\": " << (options.final_v23_output_solver_input ? "true" : "false") << ",\n"
+      << "  \"trace_solver_input\": " << (options.trace_solver_input ? "true" : "false") << ",\n"
+      << "  \"output_only_correction\": " << (options.output_only_correction ? "true" : "false") << ",\n"
+      << "  \"bad_epoch_deletion_for_metric\": " << (options.bad_epoch_deletion_for_metric ? "true" : "false") << ",\n"
+      << "  \"raw_doppler\": " << (options.raw_doppler ? "true" : "false") << ",\n"
+      << "  \"go2_prior\": " << (options.go2_prior ? "true" : "false") << ",\n"
+      << "  \"lsim_oim\": " << (options.lsim_oim ? "true" : "false") << ",\n"
+      << "  \"fgo\": " << (options.fgo ? "true" : "false") << ",\n"
+      << "  \"performance_claim\": " << (options.performance_claim ? "true" : "false") << ",\n"
+      << "  \"yaw_scheme_C_enabled\": " << (options.yaw_scheme_C_enabled ? "true" : "false") << ",\n"
+      << "  \"source_commit\": \"5a4471efd4fcfcdc31e258a677af354c652ff16f\",\n"
       << "  \"final_v23_is_proposed\": false,\n"
       << "  \"run_label\": \"" << options.run_label << "\"\n"
       << "}\n";
 }
 
 }  // namespace legsa_v23_port_core
-

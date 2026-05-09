@@ -12,6 +12,11 @@ novelty and not the proposed factor contribution. final_v23 output is not
 solver input. Trace remains evaluation-only. Generated data and generated
 results are excluded from Git. Clean/noisy provenance must be preserved.
 
-N4H4R1 is a minimal compileable foundation and toy dry-run stage. Clean replay
-parity is not attempted in R1.
+N4H4R1 was the minimal compileable foundation and toy dry-run stage.
 
+N4H4R2 completes the source-backed mathematical port surface inside the
+LegSA-owned port target: Earth/Rotation, unit conversion, 7-column IMU loading,
+15-column GNSS loading, INS mechanization, GIEngine update flow, EKF
+predict/update, state feedback, writers, and synthetic mathematical smoke.
+Clean replay parity is still not attempted in R2; N4H4R3 is the first stage
+allowed to make an honest clean replay pass/fail decision.

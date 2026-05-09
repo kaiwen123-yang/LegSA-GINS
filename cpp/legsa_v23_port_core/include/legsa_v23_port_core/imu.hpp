@@ -17,7 +17,8 @@ struct ImuData {
   double dt = 0.0;
   Vec3 dtheta = makeVec3(0.0, 0.0, 0.0);
   Vec3 dvel = makeVec3(0.0, 0.0, 0.0);
+  double odovel = 0.0;
+  bool compensated = false;
 };
 
 }  // namespace legsa_v23_port_core
-

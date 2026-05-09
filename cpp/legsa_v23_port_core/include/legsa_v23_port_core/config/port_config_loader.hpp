@@ -13,11 +13,11 @@
 
 namespace legsa_v23_port_core {
 
-// 中文说明：R1 config reader 支持最小 key-value；YAML parity 留给 R2。
+// 中文说明：R2 config reader 支持 KF-GINS 常用单位转换；完整 YAML parity 留给 R3。
 class PortConfigLoader {
  public:
   static PortOptions loadKeyValue(const std::string& path);
+  static PortOptions loadYamlLike(const std::string& path);
 };
 
 }  // namespace legsa_v23_port_core
-
