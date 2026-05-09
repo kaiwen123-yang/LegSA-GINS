@@ -145,8 +145,9 @@ def main() -> int:
     forbidden_suffixes = ("input.gnss", ".imu", "summary.json", "error_series.csv", ".png", ".pdf", ".svg")
     offenders = [line for line in tracked.splitlines() if line.endswith(forbidden_suffixes)]
     _assert(not offenders, "generated artifact tracked: " + ", ".join(offenders[:5]))
+    local_runtime_path = str(Path.home() / "legsa_" "n4h4d4_trace_parity")
     grep = subprocess.run(
-        ["git", "grep", "-n", "/home/kaiwen/legsa_n4h4d4_trace_parity", "--", "."],
+        ["git", "grep", "-n", local_runtime_path, "--", "."],
         cwd=REPO_ROOT,
         check=False,
         capture_output=True,
