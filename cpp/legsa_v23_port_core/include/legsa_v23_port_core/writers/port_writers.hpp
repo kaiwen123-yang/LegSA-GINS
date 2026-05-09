@@ -7,26 +7,21 @@
 
 #pragma once
 
-#include "legsa_v23_port_core/gnss.hpp"
+#include "legsa_v23_port_core/nav_state.hpp"
+#include "legsa_v23_port_core/options.hpp"
 
 #include <string>
 #include <vector>
 
 namespace legsa_v23_port_core {
 
-// 中文说明：GNSS loader 面向高层 loose-coupled 输入；R1 不实现 raw Doppler/raw pseudorange。
-class GnssFileLoader {
+// 中文说明：writer helper 对应 writeNavResult/writeSTD 合同，不做输出修正。
+class PortWriters {
  public:
-  GnssFileLoader() = default;
-  explicit GnssFileLoader(const std::string& path);
-  static std::vector<GnssData> loadFifteenColumn(const std::string& path);
-  bool next(GnssData& gnss);
-  bool isEof() const;
-  bool isOpen() const;
-
- private:
-  std::vector<GnssData> rows_;
-  std::size_t index_ = 0;
+  static void writeAll(const std::string& output_dir,
+                       const PortOptions& options,
+                       const std::vector<NavState>& states,
+                       const std::vector<std::vector<double>>& covariances);
 };
 
 }  // namespace legsa_v23_port_core

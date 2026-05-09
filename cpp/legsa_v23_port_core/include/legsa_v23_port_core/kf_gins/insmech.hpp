@@ -12,11 +12,14 @@
 
 namespace legsa_v23_port_core {
 
-// 中文说明：INSMech 是 R1 source-backed skeleton，完整 KF-GINS 数学对齐留到 R2。
+// 中文说明：INSMech 按 KF-GINS 的 vel->pos->att 顺序完成机械编排。
 class INSMech {
  public:
+  static void insMech(const NavState& pvapre, NavState& pvacur, const ImuData& imupre, const ImuData& imucur);
+  static void velUpdate(const NavState& pvapre, NavState& pvacur, const ImuData& imupre, const ImuData& imucur);
+  static void posUpdate(const NavState& pvapre, NavState& pvacur, const ImuData& imupre, const ImuData& imucur);
+  static void attUpdate(const NavState& pvapre, NavState& pvacur, const ImuData& imupre, const ImuData& imucur);
   static NavState propagateOneStep(const NavState& previous, const ImuData& imu);
 };
 
 }  // namespace legsa_v23_port_core
-

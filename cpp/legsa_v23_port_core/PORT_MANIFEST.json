@@ -1,7 +1,10 @@
 {
-  "phase": "N4H4R1",
-  "port_role": "source_backed_backbone_foundation",
+  "phase": "N4H4R2",
+  "port_role": "source_backed_math_port",
   "source_commit": "5a4471efd4fcfcdc31e258a677af354c652ff16f",
+  "math_port_completed": true,
+  "parity_attempted": false,
+  "real_clean_replay_attempted": false,
   "final_v23_is_proposed": false,
   "final_v23_output_solver_input": false,
   "trace_solver_input": false,
@@ -12,14 +15,26 @@
   "lsim_oim": false,
   "fgo": false,
   "performance_claim": false,
-  "parity_attempted": false,
+  "source_mapping": {
+    "Earth": "reference/final_v23_repo/src/common/earth.h",
+    "Rotation": "reference/final_v23_repo/src/common/rotation.h",
+    "GINSOptions": "reference/final_v23_repo/src/kf-gins/kf_gins_types.h",
+    "FileLoader": "reference/final_v23_repo/src/fileio/fileloader.*",
+    "FileSaver": "reference/final_v23_repo/src/fileio/filesaver.*",
+    "INSMech": "reference/final_v23_repo/src/kf-gins/insmech.*",
+    "GIEngine": "reference/final_v23_repo/src/kf-gins/gi_engine.*",
+    "kf_gins main loop": "reference/final_v23_repo/src/kf_gins.cpp",
+    "writeNavResult": "reference/final_v23_repo/src/fileio/filesaver.*",
+    "writeSTD": "reference/final_v23_repo/src/fileio/filesaver.*"
+  },
   "copied_or_refactored_files": [
     "common/earth",
     "common/rotation",
-    "kf_gins/types",
+    "types/options/nav_state/imu/gnss",
     "fileio/imu_file_loader",
     "fileio/gnss_file_loader",
     "fileio/file_saver",
+    "writers/port_writers",
     "config/port_config_loader",
     "kf_gins/insmech",
     "kf_gins/gi_engine",
@@ -40,4 +55,3 @@
     "COPYING": "evidence_missing"
   }
 }
-

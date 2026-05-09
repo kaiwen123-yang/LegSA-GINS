@@ -17,8 +17,18 @@ namespace legsa_v23_port_core {
 // 中文说明：IMU loader 只读取本阶段 toy/未来 runtime 输入，不允许读取 trace 或 reference 输出。
 class ImuFileLoader {
  public:
+  ImuFileLoader() = default;
+  explicit ImuFileLoader(const std::string& path);
   static std::vector<ImuData> loadSevenColumn(const std::string& path);
+  bool next(ImuData& imu);
+  bool isEof() const;
+  bool isOpen() const;
+  double starttime() const;
+  double endtime() const;
+
+ private:
+  std::vector<ImuData> rows_;
+  std::size_t index_ = 0;
 };
 
 }  // namespace legsa_v23_port_core
-

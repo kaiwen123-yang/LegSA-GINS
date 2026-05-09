@@ -35,3 +35,21 @@ reference.
 Ported/refactored core files carry provenance headers and Chinese comments.
 Generated data, generated results, raw inputs, and runtime parity artifacts are
 not part of the port and must not be committed.
+
+## N4H4R2 Source-Backed Mathematical Port
+
+N4H4R2 extends the same controlled port target with the mathematical backbone
+surface:
+
+- Earth / Rotation
+- GINS options and state/noise indices
+- IMU and GNSS high-level loaders
+- INSMech velocity, position, and attitude mechanization
+- GIEngine runtime flow, EKF predict/update, GNSS position/velocity/yaw update,
+  and state feedback
+- NAV / STD / EVAL_NAV / RUN_MANIFEST writers
+
+The source commit remains `5a4471efd4fcfcdc31e258a677af354c652ff16f`.
+License status remains `LICENSE` found, `README.md` found, `COPYING`
+evidence_missing. The ported/refactored core is backbone implementation only,
+not paper novelty, and the R2 synthetic run is not performance evidence.

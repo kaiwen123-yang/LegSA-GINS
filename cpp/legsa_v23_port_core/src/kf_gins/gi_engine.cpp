@@ -7,120 +7,293 @@
 
 #include "legsa_v23_port_core/kf_gins/gi_engine.hpp"
 
+#include "legsa_v23_port_core/common/earth.hpp"
+#include "legsa_v23_port_core/common/rotation.hpp"
 #include "legsa_v23_port_core/kf_gins/insmech.hpp"
 
 #include <algorithm>
+#include <cmath>
+#include <stdexcept>
 #include <utility>
 
 namespace legsa_v23_port_core {
+namespace {
 
-// 中文说明：构造 source-backed engine skeleton；完整 KF-GINS GIEngine port 留给 R2。
+Vec3 vecFromDx(const std::vector<double>& dx, std::size_t offset) {
+  return makeVec3(dx.at(offset), dx.at(offset + 1), dx.at(offset + 2));
+}
+
+void setDiagonalBlock(Matrix& matrix, std::size_t offset, const Vec3& std_value) {
+  for (std::size_t i = 0; i < 3; ++i) {
+    matrix(offset + i, offset + i) = std_value[i] * std_value[i];
+  }
+}
+
+void setDiagonalBlockValue(Matrix& matrix, std::size_t offset, const Vec3& value) {
+  for (std::size_t i = 0; i < 3; ++i) {
+    matrix(offset + i, offset + i) = value[i];
+  }
+}
+
+Matrix3 diag3(const Vec3& value) {
+  Matrix3 out = zeroMatrix3();
+  out[0][0] = value[0];
+  out[1][1] = value[1];
+  out[2][2] = value[2];
+  return out;
+}
+
+Vec3 positiveStd(const Vec3& value, double floor_value) {
+  return makeVec3(std::max(std::fabs(value[0]), floor_value),
+                  std::max(std::fabs(value[1]), floor_value),
+                  std::max(std::fabs(value[2]), floor_value));
+}
+
+}  // namespace
+
 GIEngine::GIEngine(PortOptions options)
     : options_(std::move(options)),
-      covariance_(makeCovarianceDiagonal(options_.init_cov_diag)),
-      dx_(kErrorStateSize, 0.0) {}
+      Cov_(RANK, RANK, 0.0),
+      Qc_(NOISERANK, NOISERANK, 0.0),
+      dx_(RANK, 0.0) {
+  initializeQc();
+}
 
-// 中文说明：初始化只使用 config/toy 初值，不读取 final_v23 输出。
+// 中文说明：初始化 PVA、姿态四元数、IMU 误差和协方差，不读取 final_v23 输出。
 void GIEngine::initialize(const NavState& initial_state) {
-  state_ = initial_state;
+  pvacur_ = initial_state;
+  pvacur_.time = initial_state.time;
+  pvacur_.qbn = Rotation::euler2quaternion(pvacur_.euler_rad);
+  pvacur_.cbn = Rotation::quaternion2matrix(pvacur_.qbn);
+  imuerror_ = options_.init_imu_error;
+  pvacur_.imu_error = imuerror_;
+  pvapre_ = pvacur_;
+  timestamp_ = pvacur_.time;
+  initializeCovariance();
+  zeroVector(dx_);
   initialized_ = true;
 }
 
-// 中文说明：IMU 缓冲合同保留 addImuData 函数名，后续对齐 reference buffering。
-void GIEngine::addImuData(const ImuData& imu) {
-  imu_buffer_.push_back(imu);
+// 中文说明：addImuData 保持 reference 的 imupre/imucur 滚动缓冲；首帧可选择预补偿。
+void GIEngine::addImuData(const ImuData& imu, bool compensate) {
+  imupre_ = imucur_;
+  imucur_ = imu;
+  if (compensate) {
+    imuCompensateInPlace(imucur_);
+  }
 }
 
-// 中文说明：GNSS 缓冲合同保留 addGnssData 函数名，R1 不实现 raw GNSS 因子。
+// 中文说明：GNSS 是 15 列松组合观测，不是 raw pseudorange/Doppler。
 void GIEngine::addGnssData(const GnssData& gnss) {
-  gnss_buffer_.push_back(gnss);
+  gnssdata_ = gnss;
+  gnssdata_.isvalid = true;
 }
 
-// 中文说明：R1 toy 中有 GNSS 即返回 3，真实 isToUpdate timing parity 留给 R2。
 int GIEngine::isToUpdate() const {
-  if (!gnss_buffer_.empty() && imu_buffer_.size() >= 2) {
+  const double updatetime = gnssdata_.isvalid ? gnssdata_.time : -1.0;
+  return isToUpdate(imupre_.time, imucur_.time, updatetime);
+}
+
+// 中文说明：res=0/1/2/3 与 KF-GINS runtime loop 对齐，控制 update 插入位置。
+int GIEngine::isToUpdate(double imutime1, double imutime2, double updatetime) const {
+  if (std::fabs(imutime1 - updatetime) < TIME_ALIGN_ERR) {
+    return 1;
+  }
+  if (std::fabs(imutime2 - updatetime) <= TIME_ALIGN_ERR) {
+    return 2;
+  }
+  if (imutime1 < updatetime && updatetime < imutime2) {
     return 3;
   }
   return 0;
 }
 
-// 中文说明：线性插值仅用于函数合同占位，不能作为 clean parity 证据。
-ImuData GIEngine::imuInterpolate(const ImuData& previous, const ImuData& current, double time) const {
-  const double denom = current.time - previous.time;
-  const double ratio = denom > 0.0 ? (time - previous.time) / denom : 0.0;
-  ImuData mid = current;
-  mid.time = time;
-  mid.dt = time - previous.time;
-  mid.dtheta = add(previous.dtheta, scale(add(current.dtheta, scale(previous.dtheta, -1.0)), ratio));
-  mid.dvel = add(previous.dvel, scale(add(current.dvel, scale(previous.dvel, -1.0)), ratio));
-  return mid;
+// 中文说明：IMU 内插只拆分增量，不在这里做补偿；res=3 的补偿由后续传播负责。
+ImuData GIEngine::imuInterpolate(const ImuData& previous, ImuData& current, double time) const {
+  if (previous.time > time || current.time < time) {
+    return current;
+  }
+  const double lambda = (time - previous.time) / (current.time - previous.time);
+  ImuData midimu = current;
+  midimu.time = time;
+  midimu.dtheta = scale(current.dtheta, lambda);
+  midimu.dvel = scale(current.dvel, lambda);
+  midimu.dt = time - previous.time;
+  midimu.compensated = false;
+  current.dtheta = subtract(current.dtheta, midimu.dtheta);
+  current.dvel = subtract(current.dvel, midimu.dvel);
+  current.dt = current.dt - midimu.dt;
+  current.compensated = false;
+  return midimu;
 }
 
-// 中文说明：R1 不反馈 IMU error states，补偿函数保持恒等并标记 TODO_R2_SOURCE_PORT。
 ImuData GIEngine::imuCompensate(const ImuData& imu) const {
-  return imu;
+  ImuData out = imu;
+  imuCompensateInPlace(out);
+  return out;
 }
 
-// 中文说明：预测传播调用 INSMech skeleton；完整 F/G/Phi/Qd 和 mechanization parity 留给 R2。
-void GIEngine::insPropagation() {
-  if (!initialized_ || imu_buffer_.empty()) {
+// 中文说明：IMU compensation 按 bias*dt 和 scale 分母补偿；process_data 已完成 FLU->FRD，不能二次转换。
+void GIEngine::imuCompensateInPlace(ImuData& imu) const {
+  if (imu.compensated) {
     return;
   }
-  const ImuData compensated = imuCompensate(imu_buffer_.back());
-  state_ = INSMech::propagateOneStep(state_, compensated);
+  imu.dtheta = subtract(imu.dtheta, scale(imuerror_.gyrbias, imu.dt));
+  imu.dvel = subtract(imu.dvel, scale(imuerror_.accbias, imu.dt));
+  imu.dtheta = cwiseDivide(imu.dtheta, add(makeVec3(1.0, 1.0, 1.0), imuerror_.gyrscale));
+  imu.dvel = cwiseDivide(imu.dvel, add(makeVec3(1.0, 1.0, 1.0), imuerror_.accscale));
+  imu.compensated = true;
+}
+
+void GIEngine::insPropagation() {
+  insPropagation(imupre_, imucur_);
+}
+
+// 中文说明：传播先补偿 imucur，再机械编排，再构造 F/G/Phi/Qd 并 EKFPredict。
+void GIEngine::insPropagation(ImuData& imupre, ImuData& imucur) {
+  imuCompensateInPlace(imucur);
+  INSMech::insMech(pvapre_, pvacur_, imupre, imucur);
+  Matrix F(RANK, RANK, 0.0);
+  Matrix G(RANK, NOISERANK, 0.0);
+  Matrix Phi(RANK, RANK, 0.0);
+  Matrix Qd(RANK, RANK, 0.0);
+  buildErrorStateMatrices(imucur, F, G, Phi, Qd);
+  EKFPredict(Phi, Qd);
+  timestamp_ = imucur.time;
   ++propagation_count_;
 }
 
-// 中文说明：GNSS update 仅增加 toy 计数，不进行真实 measurement update 或性能宣称。
 void GIEngine::gnssUpdate() {
-  if (!gnss_buffer_.empty()) {
-    ++update_count_;
-    gnss_buffer_.erase(gnss_buffer_.begin());
-  }
+  gnssUpdate(gnssdata_);
 }
 
-// 中文说明：R1 EKFPredict 只轻微扩展对角协方差；完整 source-backed P/Q parity 留给 R2。
-void GIEngine::EKFPredict() {
-  for (double& value : covariance_) {
-    value += 1.0e-6;
-  }
-}
-
-// 中文说明：R1 EKFUpdate 不做正式量测更新，避免伪造 clean replay parity。
-void GIEngine::EKFUpdate() {
-  std::fill(dx_.begin(), dx_.end(), 0.0);
-}
-
-// 中文说明：R1 stateFeedback 只清零误差状态；完整反馈移植留给 R2。
-void GIEngine::stateFeedback() {
-  std::fill(dx_.begin(), dx_.end(), 0.0);
-}
-
-// 中文说明：newImuProcess 保留 KF-GINS 风格入口，但 R1 只跑 toy skeleton 分支。
-void GIEngine::newImuProcess() {
-  if (!initialized_ || imu_buffer_.empty()) {
+// 中文说明：GNSS update 顺序为 position、velocity、yaw；yaw 使用 scheme_C gate，不是 raw heading 因子。
+void GIEngine::gnssUpdate(GnssData& gnss) {
+  if (!gnss.isvalid) {
     return;
   }
-  insPropagation();
-  EKFPredict();
-  if (isToUpdate() != 0) {
-    gnssUpdate();
-    EKFUpdate();
-    stateFeedback();
+  applyPositionUpdate(gnss);
+  if (gnss.has_velocity) {
+    applyVelocityUpdate(gnss);
   }
+  if (gnss.has_yaw && options_.yaw_scheme_C_enabled) {
+    applyYawUpdate(gnss);
+  }
+  gnss.isvalid = false;
+  ++update_count_;
 }
 
-// 中文说明：协方差检查只确认对角非负，R1 不声明统计一致性。
+void GIEngine::EKFPredict() {
+  Matrix F(RANK, RANK, 0.0);
+  Matrix G(RANK, NOISERANK, 0.0);
+  Matrix Phi(RANK, RANK, 0.0);
+  Matrix Qd(RANK, RANK, 0.0);
+  buildErrorStateMatrices(imucur_, F, G, Phi, Qd);
+  EKFPredict(Phi, Qd);
+}
+
+// 中文说明：EKFPredict: Cov = Phi Cov Phi^T + Qd, dx = Phi dx。
+void GIEngine::EKFPredict(const Matrix& Phi, const Matrix& Qd) {
+  Cov_ = add(multiply(multiply(Phi, Cov_), transpose(Phi)), Qd);
+  dx_ = multiply(Phi, dx_);
+}
+
+// 中文说明：EKFUpdate 使用 dx += K(dz-Hdx) 和 Joseph covariance form。
+void GIEngine::EKFUpdate(const std::vector<double>& dz, const Matrix& H, const Matrix& R) {
+  if (H.cols != RANK || dz.size() != H.rows || R.rows != H.rows || R.cols != H.rows) {
+    throw std::runtime_error("EKFUpdate dimension mismatch");
+  }
+  const Matrix Ht = transpose(H);
+  const Matrix S = add(multiply(multiply(H, Cov_), Ht), R);
+  const Matrix K = multiply(multiply(Cov_, Ht), inverse(S));
+  const std::vector<double> Hdx = multiply(H, dx_);
+  std::vector<double> residual(dz.size(), 0.0);
+  for (std::size_t i = 0; i < dz.size(); ++i) {
+    residual[i] = dz[i] - Hdx[i];
+  }
+  const std::vector<double> delta = multiply(K, residual);
+  for (std::size_t i = 0; i < dx_.size(); ++i) {
+    dx_[i] += delta[i];
+  }
+  const Matrix I = identityMatrix(RANK);
+  const Matrix IKH = subtract(I, multiply(K, H));
+  Cov_ = add(multiply(multiply(IKH, Cov_), transpose(IKH)), multiply(multiply(K, R), transpose(K)));
+}
+
+// 中文说明：stateFeedback 将误差状态反馈到导航状态；位置/速度减，姿态 qpn 左乘，bias/scale 加。
+void GIEngine::stateFeedback() {
+  const Vec3 dx_pos = vecFromDx(dx_, P_ID);
+  const Vec3 dx_vel = vecFromDx(dx_, V_ID);
+  const Vec3 dx_phi = vecFromDx(dx_, PHI_ID);
+  pvacur_.pos_blh_rad_m = subtract(pvacur_.pos_blh_rad_m, multiply(Earth::DRi(pvacur_.pos_blh_rad_m), dx_pos));
+  pvacur_.vel_ned_mps = subtract(pvacur_.vel_ned_mps, dx_vel);
+  const Quaternion qpn = Rotation::rotvec2quaternion(dx_phi);
+  pvacur_.qbn = Rotation::multiply(qpn, pvacur_.qbn);
+  pvacur_.cbn = Rotation::quaternion2matrix(pvacur_.qbn);
+  pvacur_.euler_rad = Rotation::matrix2euler(pvacur_.cbn);
+  imuerror_.gyrbias = add(imuerror_.gyrbias, vecFromDx(dx_, BG_ID));
+  imuerror_.accbias = add(imuerror_.accbias, vecFromDx(dx_, BA_ID));
+  imuerror_.gyrscale = add(imuerror_.gyrscale, vecFromDx(dx_, SG_ID));
+  imuerror_.accscale = add(imuerror_.accscale, vecFromDx(dx_, SA_ID));
+  pvacur_.imu_error = imuerror_;
+  zeroVector(dx_);
+}
+
+// 中文说明：newImuProcess 完整处理 res=0/1/2/3，R2 只做 synthetic smoke，不声明 real clean parity。
+void GIEngine::newImuProcess() {
+  if (!initialized_) {
+    return;
+  }
+  timestamp_ = imucur_.time;
+  const double updatetime = gnssdata_.isvalid ? gnssdata_.time : -1.0;
+  const int res = isToUpdate(imupre_.time, imucur_.time, updatetime);
+  if (res == 0) {
+    insPropagation(imupre_, imucur_);
+  } else if (res == 1) {
+    gnssUpdate(gnssdata_);
+    stateFeedback();
+    pvapre_ = pvacur_;
+    insPropagation(imupre_, imucur_);
+  } else if (res == 2) {
+    insPropagation(imupre_, imucur_);
+    gnssUpdate(gnssdata_);
+    stateFeedback();
+  } else {
+    ImuData midimu = imuInterpolate(imupre_, imucur_, updatetime);
+    insPropagation(imupre_, midimu);
+    gnssUpdate(gnssdata_);
+    stateFeedback();
+    pvapre_ = pvacur_;
+    insPropagation(midimu, imucur_);
+  }
+  checkCov();
+  pvapre_ = pvacur_;
+  imupre_ = imucur_;
+}
+
 bool GIEngine::checkCov() const {
-  return std::all_of(covariance_.begin(), covariance_.end(), [](double value) { return value >= 0.0; });
+  for (std::size_t i = 0; i < RANK; ++i) {
+    if (!std::isfinite(Cov_(i, i)) || Cov_(i, i) < 0.0) {
+      return false;
+    }
+  }
+  return true;
 }
 
 const NavState& GIEngine::navState() const {
-  return state_;
+  return pvacur_;
+}
+
+NavState GIEngine::getNavState() const {
+  return pvacur_;
 }
 
 const std::vector<double>& GIEngine::getCovariance() const {
-  return covariance_;
+  return Cov_.data;
+}
+
+double GIEngine::timestamp() const {
+  return timestamp_;
 }
 
 std::size_t GIEngine::propagationCount() const {
@@ -129,6 +302,149 @@ std::size_t GIEngine::propagationCount() const {
 
 std::size_t GIEngine::updateCount() const {
   return update_count_;
+}
+
+std::size_t GIEngine::yawNormalCount() const {
+  return yaw_normal_count_;
+}
+
+std::size_t GIEngine::yawDownweightCount() const {
+  return yaw_downweight_count_;
+}
+
+std::size_t GIEngine::yawRejectCount() const {
+  return yaw_reject_count_;
+}
+
+void GIEngine::initializeCovariance() {
+  Cov_ = Matrix(RANK, RANK, 0.0);
+  setDiagonalBlock(Cov_, P_ID, positiveStd(options_.init_pos_std_m, 1.0e-6));
+  setDiagonalBlock(Cov_, V_ID, positiveStd(options_.init_vel_std_mps, 1.0e-6));
+  setDiagonalBlock(Cov_, PHI_ID, positiveStd(options_.init_att_std_rad, 1.0e-9));
+  setDiagonalBlock(Cov_, BG_ID, positiveStd(options_.init_imu_error_std.gyrbias, options_.imunoise.gyrbias_std[0]));
+  setDiagonalBlock(Cov_, BA_ID, positiveStd(options_.init_imu_error_std.accbias, options_.imunoise.accbias_std[0]));
+  setDiagonalBlock(Cov_, SG_ID, positiveStd(options_.init_imu_error_std.gyrscale, options_.imunoise.gyrscale_std[0]));
+  setDiagonalBlock(Cov_, SA_ID, positiveStd(options_.init_imu_error_std.accscale, options_.imunoise.accscale_std[0]));
+}
+
+// 中文说明：Qc bias/scale blocks 按 2/corr_time * std^2，corr_time 单位为秒。
+void GIEngine::initializeQc() {
+  Qc_ = Matrix(NOISERANK, NOISERANK, 0.0);
+  const ImuNoise& n = options_.imunoise;
+  setDiagonalBlockValue(Qc_, ARW_ID, cwiseProduct(n.gyr_arw, n.gyr_arw));
+  setDiagonalBlockValue(Qc_, VRW_ID, cwiseProduct(n.acc_vrw, n.acc_vrw));
+  const double corr = std::max(n.corr_time, 1.0);
+  setDiagonalBlockValue(Qc_, BGSTD_ID, scale(cwiseProduct(n.gyrbias_std, n.gyrbias_std), 2.0 / corr));
+  setDiagonalBlockValue(Qc_, BASTD_ID, scale(cwiseProduct(n.accbias_std, n.accbias_std), 2.0 / corr));
+  setDiagonalBlockValue(Qc_, SGSTD_ID, scale(cwiseProduct(n.gyrscale_std, n.gyrscale_std), 2.0 / corr));
+  setDiagonalBlockValue(Qc_, SASTD_ID, scale(cwiseProduct(n.accscale_std, n.accscale_std), 2.0 / corr));
+}
+
+// 中文说明：F/G/Phi/Qd 采用 KF-GINS error-state 结构；此处保留 key block 以便静态审计。
+void GIEngine::buildErrorStateMatrices(const ImuData& imu, Matrix& F, Matrix& G, Matrix& Phi, Matrix& Qd) const {
+  const double dt = imu.dt > 0.0 ? imu.dt : 0.01;
+  const auto rmn = Earth::meridianPrimeVerticalRadius(pvapre_.pos_blh_rad_m[0]);
+  const double rmh = rmn.first + pvapre_.pos_blh_rad_m[2];
+  const double rnh = rmn.second + pvapre_.pos_blh_rad_m[2];
+  const Vec3 accel = scale(imu.dvel, 1.0 / dt);
+  const Vec3 omega = scale(imu.dtheta, 1.0 / dt);
+  (void)rmh;
+  (void)rnh;
+
+  // F.block(P_ID,V_ID) = I: 位置误差由速度误差积分。
+  setBlockIdentity(F, P_ID, V_ID);
+  // F.block(V_ID,PHI_ID): 比力投影对姿态误差敏感。
+  setBlock(F, V_ID, PHI_ID, Rotation::skewSymmetric(multiply(pvapre_.cbn, accel)));
+  setBlock(F, V_ID, BA_ID, pvapre_.cbn);
+  setBlock(F, V_ID, SA_ID, multiply(pvapre_.cbn, diag3(accel)));
+  setBlock(F, PHI_ID, PHI_ID, scale(Rotation::skewSymmetric(add(Earth::iewn(pvapre_.pos_blh_rad_m),
+                                                              Earth::enwn(pvapre_.pos_blh_rad_m,
+                                                                          pvapre_.vel_ned_mps))),
+                                     -1.0));
+  setBlock(F, PHI_ID, BG_ID, scale(pvapre_.cbn, -1.0));
+  setBlock(F, PHI_ID, SG_ID, scale(multiply(pvapre_.cbn, diag3(omega)), -1.0));
+  const double corr = std::max(options_.imunoise.corr_time, 1.0);
+  setBlock(F, BG_ID, BG_ID, scale(identityMatrix3(), -1.0 / corr));
+  setBlock(F, BA_ID, BA_ID, scale(identityMatrix3(), -1.0 / corr));
+  setBlock(F, SG_ID, SG_ID, scale(identityMatrix3(), -1.0 / corr));
+  setBlock(F, SA_ID, SA_ID, scale(identityMatrix3(), -1.0 / corr));
+
+  // G.block(V_ID,VRW_ID) 与 G.block(PHI_ID,ARW_ID) 对齐 reference 噪声驱动矩阵。
+  setBlock(G, V_ID, VRW_ID, pvapre_.cbn);
+  setBlock(G, PHI_ID, ARW_ID, pvapre_.cbn);
+  setBlockIdentity(G, BG_ID, BGSTD_ID);
+  setBlockIdentity(G, BA_ID, BASTD_ID);
+  setBlockIdentity(G, SG_ID, SGSTD_ID);
+  setBlockIdentity(G, SA_ID, SASTD_ID);
+
+  Phi = add(identityMatrix(RANK), scale(F, dt));
+  const Matrix GQG = multiply(multiply(G, Qc_), transpose(G));
+  Qd = scale(add(multiply(multiply(Phi, GQG), transpose(Phi)), GQG), 0.5 * dt);
+}
+
+// 中文说明：position update 使用 predicted antenna position minus GNSS observed position。
+void GIEngine::applyPositionUpdate(GnssData& gnss) {
+  const Matrix3 dr = Earth::DR(pvacur_.pos_blh_rad_m);
+  const Matrix3 dri = Earth::DRi(pvacur_.pos_blh_rad_m);
+  const Vec3 lever_n = multiply(pvacur_.cbn, options_.antlever_m);
+  const Vec3 antenna_pos = add(pvacur_.pos_blh_rad_m, multiply(dri, lever_n));
+  const Vec3 dz_vec = multiply(dr, subtract(antenna_pos, gnss.blh_rad_m));
+  Matrix H(3, RANK, 0.0);
+  setBlockIdentity(H, 0, P_ID);
+  // H_gnsspos / H_pos_phi: reference 使用 +skew(Cbn * antlever)。
+  setBlock(H, 0, PHI_ID, Rotation::skewSymmetric(lever_n));
+  Matrix R = diagonalMatrix(cwiseProduct(positiveStd(gnss.std_ned_m, 1.0e-3), positiveStd(gnss.std_ned_m, 1.0e-3)));
+  EKFUpdate(std::vector<double>{dz_vec[0], dz_vec[1], dz_vec[2]}, H, R);
+}
+
+// 中文说明：velocity update 使用 antenna velocity - GNSS velocity；若 lever velocity evidence 缺失则保持保守项。
+void GIEngine::applyVelocityUpdate(GnssData& gnss) {
+  const double dt = imucur_.dt > 0.0 ? imucur_.dt : 0.01;
+  const Vec3 omega_b = scale(imucur_.dtheta, 1.0 / dt);
+  const Vec3 antenna_vel = add(pvacur_.vel_ned_mps, multiply(pvacur_.cbn, cross(omega_b, options_.antlever_m)));
+  const Vec3 dz_vec = subtract(antenna_vel, gnss.vel_ned_mps);
+  Matrix H(3, RANK, 0.0);
+  setBlockIdentity(H, 0, V_ID);
+  setBlock(H, 0, PHI_ID, Rotation::skewSymmetric(multiply(pvacur_.cbn, cross(omega_b, options_.antlever_m))));
+  Vec3 stdv = add(positiveStd(gnss.vel_std_mps, 1.0e-3), makeVec3(0.05, 0.05, 0.05));
+  Matrix R = diagonalMatrix(cwiseProduct(stdv, stdv));
+  EKFUpdate(std::vector<double>{dz_vec[0], dz_vec[1], dz_vec[2]}, H, R);
+}
+
+// 中文说明：scheme_C 只对 dual-antenna yaw 观测做鲁棒门控，不放宽 hard=15 deg。
+void GIEngine::applyYawUpdate(GnssData& gnss) {
+  const double yaw_obs = gnss.yaw_rad;
+  const double yaw_pred = pvacur_.euler_rad[2];
+  const double yaw_std = std::max(gnss.yaw_std_rad, options_.yaw_std_min_deg * D2R);
+  const double residual = wrapYawResidual(yaw_pred - yaw_obs);
+  const double abs_res = std::fabs(residual);
+  if (yaw_std >= options_.yaw_std_hard_deg * D2R || abs_res >= options_.yaw_res_hard_deg * D2R) {
+    ++yaw_reject_count_;
+    return;
+  }
+  double scale_value = 1.0;
+  if (yaw_std >= options_.yaw_std_soft_deg * D2R || abs_res >= options_.yaw_res_soft_deg * D2R) {
+    scale_value = options_.yaw_downweight_scale;
+    ++yaw_downweight_count_;
+  } else {
+    ++yaw_normal_count_;
+  }
+  Matrix H(1, RANK, 0.0);
+  H(0, PHI_ID + 2) = -1.0;
+  Matrix R(1, 1, scale_value * yaw_std * yaw_std);
+  EKFUpdate(std::vector<double>{residual}, H, R);
+}
+
+double GIEngine::wrapYawResidual(double residual_rad) const {
+  return Rotation::wrapRad(residual_rad);
+}
+
+Matrix GIEngine::covarianceMatrix() const {
+  return Cov_;
+}
+
+void GIEngine::setCovarianceMatrix(const Matrix& matrix) {
+  Cov_ = matrix;
 }
 
 }  // namespace legsa_v23_port_core

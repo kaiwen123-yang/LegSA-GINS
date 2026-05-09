@@ -13,6 +13,8 @@
 
 namespace legsa_v23_port_core {
 
+ImuFileLoader::ImuFileLoader(const std::string& path) : rows_(loadSevenColumn(path)) {}
+
 // 中文说明：读取 7 列 IMU 增量输入；本函数不会读取 final_v23 输出或 trace。
 std::vector<ImuData> ImuFileLoader::loadSevenColumn(const std::string& path) {
   std::ifstream input(path);
@@ -33,11 +35,35 @@ std::vector<ImuData> ImuFileLoader::loadSevenColumn(const std::string& path) {
       if (!rows.empty()) {
         imu.dt = imu.time - rows.back().time;
       }
+      // 中文说明：process_data 已完成 Go2 FLU->FRD，这里只读取增量，不做坐标二次转换。
       rows.push_back(imu);
     }
   }
   return rows;
 }
 
-}  // namespace legsa_v23_port_core
+bool ImuFileLoader::next(ImuData& imu) {
+  if (index_ >= rows_.size()) {
+    return false;
+  }
+  imu = rows_[index_++];
+  return true;
+}
 
+bool ImuFileLoader::isEof() const {
+  return index_ >= rows_.size();
+}
+
+bool ImuFileLoader::isOpen() const {
+  return !rows_.empty();
+}
+
+double ImuFileLoader::starttime() const {
+  return rows_.empty() ? 0.0 : rows_.front().time;
+}
+
+double ImuFileLoader::endtime() const {
+  return rows_.empty() ? 0.0 : rows_.back().time;
+}
+
+}  // namespace legsa_v23_port_core

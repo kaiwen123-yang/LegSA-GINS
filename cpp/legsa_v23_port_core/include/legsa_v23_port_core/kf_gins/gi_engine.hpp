@@ -12,45 +12,74 @@
 #include "legsa_v23_port_core/nav_state.hpp"
 #include "legsa_v23_port_core/options.hpp"
 
+#include <cstddef>
+#include <string>
 #include <vector>
 
 namespace legsa_v23_port_core {
 
-// 中文说明：GIEngine 保留 KF-GINS 核心函数名，R1 只提供可编译 source-backed skeleton。
+// 中文说明：GIEngine 是 source-backed loose-coupled GNSS/INS EKF backbone，不包含九类创新因子。
 class GIEngine {
  public:
   explicit GIEngine(PortOptions options);
 
   void initialize(const NavState& initial_state);
-  void addImuData(const ImuData& imu);
+  void addImuData(const ImuData& imu, bool compensate = false);
   void addGnssData(const GnssData& gnss);
   int isToUpdate() const;
-  ImuData imuInterpolate(const ImuData& previous, const ImuData& current, double time) const;
+  int isToUpdate(double imutime1, double imutime2, double updatetime) const;
+  ImuData imuInterpolate(const ImuData& previous, ImuData& current, double time) const;
   ImuData imuCompensate(const ImuData& imu) const;
+  void imuCompensateInPlace(ImuData& imu) const;
   void insPropagation();
+  void insPropagation(ImuData& imupre, ImuData& imucur);
   void gnssUpdate();
+  void gnssUpdate(GnssData& gnss);
   void EKFPredict();
-  void EKFUpdate();
+  void EKFPredict(const Matrix& Phi, const Matrix& Qd);
+  void EKFUpdate(const std::vector<double>& dz, const Matrix& H, const Matrix& R);
   void stateFeedback();
   void newImuProcess();
   bool checkCov() const;
 
   const NavState& navState() const;
+  NavState getNavState() const;
   const std::vector<double>& getCovariance() const;
+  double timestamp() const;
   std::size_t propagationCount() const;
   std::size_t updateCount() const;
+  std::size_t yawNormalCount() const;
+  std::size_t yawDownweightCount() const;
+  std::size_t yawRejectCount() const;
 
  private:
+  void initializeCovariance();
+  void initializeQc();
+  void buildErrorStateMatrices(const ImuData& imu, Matrix& F, Matrix& G, Matrix& Phi, Matrix& Qd) const;
+  void applyPositionUpdate(GnssData& gnss);
+  void applyVelocityUpdate(GnssData& gnss);
+  void applyYawUpdate(GnssData& gnss);
+  double wrapYawResidual(double residual_rad) const;
+  Matrix covarianceMatrix() const;
+  void setCovarianceMatrix(const Matrix& matrix);
+
   PortOptions options_;
-  NavState state_;
-  std::vector<ImuData> imu_buffer_;
-  std::vector<GnssData> gnss_buffer_;
-  std::vector<double> covariance_;
+  NavState pvapre_;
+  NavState pvacur_;
+  ImuError imuerror_;
+  ImuData imupre_;
+  ImuData imucur_;
+  GnssData gnssdata_;
+  Matrix Cov_;
+  Matrix Qc_;
   std::vector<double> dx_;
+  double timestamp_ = 0.0;
   std::size_t propagation_count_ = 0;
   std::size_t update_count_ = 0;
+  std::size_t yaw_normal_count_ = 0;
+  std::size_t yaw_downweight_count_ = 0;
+  std::size_t yaw_reject_count_ = 0;
   bool initialized_ = false;
 };
 
 }  // namespace legsa_v23_port_core
-
