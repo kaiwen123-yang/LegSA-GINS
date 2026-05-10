@@ -742,3 +742,35 @@ No LSIM/OIM, Go2 prior, or FGO claim in N5D.
 No paper performance claim.
 
 No outperform final_v23 claim.
+
+## N5D1 Visual Coverage and Spike-Audit Boundary
+
+N5D1 fixes visual validation and plot semantics only.
+
+N5D1 does not change solver math.
+
+Mandatory figures must be non-empty before visual validation passes.
+
+Raw Doppler spikes are audited, not removed or tuned away.
+
+Raw-vs-receiver velocity consistency is not truth error.
+
+Receiver-native velocity is not raw Doppler truth.
+
+No NAV-PVT velocity as raw Doppler.
+
+No `.gnss vn/ve/vd` as raw Doppler.
+
+No RTKLIB position solution as solver input.
+
+No final_v23 output solver input.
+
+No trace solver input.
+
+No output-only correction, no tuning, no epoch deletion.
+
+No LSIM/OIM, Go2 prior, or FGO claim in N5D1.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
