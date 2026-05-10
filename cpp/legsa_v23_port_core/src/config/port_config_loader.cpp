@@ -206,6 +206,22 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   // 中文说明：receiver-native velocity 是 baseline 松组合速度观测，N5C 仅为诊断可关闭。
   options.enable_receiver_velocity_update =
       boolOrDefault(kv, "enable_receiver_velocity_update", options.enable_receiver_velocity_update);
+  // 中文说明：N5D velocity stress 只诊断 raw Doppler 独立约束能力，不代表真实传感器故障模型。
+  options.receiver_velocity_stress_mode =
+      stringOrDefault(kv, "receiver_velocity_stress_mode", options.receiver_velocity_stress_mode);
+  options.receiver_velocity_std_scale =
+      scalarOrDefault(kv, "receiver_velocity_std_scale", options.receiver_velocity_std_scale);
+  options.receiver_velocity_outage_start_sec =
+      scalarOrDefault(kv, "receiver_velocity_outage_start_sec", options.receiver_velocity_outage_start_sec);
+  options.receiver_velocity_outage_duration_sec =
+      scalarOrDefault(kv, "receiver_velocity_outage_duration_sec", options.receiver_velocity_outage_duration_sec);
+  options.receiver_velocity_additive_noise_std_mps =
+      scalarOrDefault(kv, "receiver_velocity_additive_noise_std_mps",
+                      options.receiver_velocity_additive_noise_std_mps);
+  options.receiver_velocity_additive_noise_seed =
+      static_cast<int>(scalarOrDefault(kv, "receiver_velocity_additive_noise_seed",
+                                       static_cast<double>(options.receiver_velocity_additive_noise_seed)));
+  options.diagnostic_stress_only = boolOrDefault(kv, "diagnostic_stress_only", options.diagnostic_stress_only);
   options.diagnostic_only = boolOrDefault(kv, "diagnostic_only", options.diagnostic_only);
   options.no_outperform_final_v23_claim =
       boolOrDefault(kv, "no_outperform_final_v23_claim", options.no_outperform_final_v23_claim);

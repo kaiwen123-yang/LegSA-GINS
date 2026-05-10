@@ -716,3 +716,29 @@ No trace solver input.
 No output-only correction, no tuning, no epoch deletion.
 
 No LSIM/OIM, Go2 prior, or FGO claim in N5C.
+
+## N5D Raw Doppler Visual/Stress Boundary
+
+N5D visual/stress protocol is diagnostic engineering evidence.
+
+Receiver velocity stress variants are diagnostic-only.
+
+R-scale and STD-scale screens are not tuning claims.
+
+NAV-PVT velocity is not raw Doppler.
+
+.gnss vn/ve/vd is not raw Doppler.
+
+RTKLIB position solution must not be used as LegSA solver input.
+
+No final_v23 output solver input.
+
+No trace solver input.
+
+No output-only correction, no tuning, no epoch deletion.
+
+No LSIM/OIM, Go2 prior, or FGO claim in N5D.
+
+No paper performance claim.
+
+No outperform final_v23 claim.

@@ -71,6 +71,9 @@ class GIEngine {
   void initializeQc();
   void buildErrorStateMatrices(const ImuData& imu, Matrix& F, Matrix& G, Matrix& Phi, Matrix& Qd) const;
   void applyPositionUpdate(GnssData& gnss);
+  bool receiverVelocityUpdateEnabledForTime(double time) const;
+  GnssData receiverVelocityStressView(const GnssData& gnss) const;
+  double deterministicVelocityNoise(double time, int axis) const;
   void applyVelocityUpdate(GnssData& gnss);
   void applyYawUpdate(GnssData& gnss);
   void applyRawDopplerUpdateForTime(double update_time);
