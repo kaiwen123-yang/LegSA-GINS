@@ -42,7 +42,9 @@
 | N4H4E source-backed port visual validation | stage/N4H4E-source-backed-port-visual-validation | done | no | no | visual validation reports | N4H4R3C backbone parity completed; N4H4E visual validation completed; N5 remains not_started unless visual_candidate_passed and manual visual review supports moving forward; PR #21 remains evidence branch |
 | N4H4E1 STD unit and plot semantics fix | stage/N4H4E-source-backed-port-visual-validation | done | no | no | STD unit audit + corrected visual reports | N4H4E visual validation generated; N4H4E1 STD/plot semantics fix completed; N5 not_started unless manual review approves; PR #21 remains evidence branch |
 | N4H4 LegSA-v23-core full EKF / unified filter implementation | stage/N4H4-legsa-v23-core | in_progress | yes | no | LegSA-owned EKF/unified filter | staged through N4H4A/B/C; no wrapper, no output substitution, no final_v23 output as proposed solver input |
-| N5 raw Doppler factor foundation | stage/N5-raw-doppler-factor | not_started | yes | no | Doppler factor foundation | not_started until visual_candidate_passed evidence and manual visual review support entering N5 |
+| N5 raw Doppler factor foundation | stage/N5-raw-doppler-factor | in_progress | yes | no | Doppler factor foundation | entered through N5A after N4H4E1 merge/tag; no N5 tag |
+| N5A RTKLIB-backed raw Doppler auxiliary factor activation | stage/N5A-raw-doppler-factor-activation | done | yes | no | raw Doppler factor path + readiness trial | first proposed factor integration attempt; RAWX/RTKLIB/ephemeris/provider gated; provider missing blocks real activation; PR #21 remains evidence branch |
+| N5B raw Doppler ablation or satellite-state provider fix | stage/N5B-raw-doppler-provider-or-ablation | not_started | yes | no | provider fix or ablation | next stage depends on N5A readiness decision; no N5A tag |
 | N6 source-aware weighting / Go2 weak priors | stage/N6-source-aware-weighting | not_started | yes | no | weighting module | no trace tuning |
 | N7 no-feedback smoother | stage/N7-no-feedback-smoother | not_started | yes | no | fixed-lag smoother | no feedback |
 

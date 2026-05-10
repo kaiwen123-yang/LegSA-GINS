@@ -55,6 +55,7 @@ file(GLOB_RECURSE LEGSA_V23_PORT_CORE_SOURCES CONFIGURE_DEPENDS
   # N4H4R1 source-backed port files are LegSA-owned copies/refactors under
   # cpp/legsa_v23_port_core.  The external reference submodule remains
   # provenance evidence only and is never compiled by this target.
+  # N5A raw Doppler factor sources are also LegSA-owned port-core extensions.
   "${CMAKE_CURRENT_SOURCE_DIR}/legsa_v23_port_core/src/*.cpp"
 )
 list(REMOVE_ITEM LEGSA_V23_PORT_CORE_SOURCES

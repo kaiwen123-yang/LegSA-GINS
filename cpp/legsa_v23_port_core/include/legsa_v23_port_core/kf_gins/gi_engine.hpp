@@ -11,6 +11,7 @@
 #include "legsa_v23_port_core/imu.hpp"
 #include "legsa_v23_port_core/nav_state.hpp"
 #include "legsa_v23_port_core/options.hpp"
+#include "legsa_v23_port_core/factors/raw_doppler_types.hpp"
 
 #include <cstddef>
 #include <string>
@@ -24,6 +25,8 @@ class GIEngine {
   explicit GIEngine(PortOptions options);
 
   void initialize(const NavState& initial_state);
+  void setRawDopplerVelocityMeasurements(const std::vector<RawDopplerVelocityMeasurement>& measurements,
+                                         const RawDopplerFactorStatus& status);
   void addImuData(const ImuData& imu, bool compensate = false);
   void addGnssData(const GnssData& gnss);
   int isToUpdate() const;
@@ -54,6 +57,14 @@ class GIEngine {
   std::size_t yawNormalCount() const;
   std::size_t yawDownweightCount() const;
   std::size_t yawRejectCount() const;
+  std::size_t rawDopplerUpdateCount() const;
+  std::size_t rawDopplerRejectCount() const;
+  std::size_t rawDopplerEpochCount() const;
+  std::size_t rawDopplerSatCountMin() const;
+  std::size_t rawDopplerSatCountMedian() const;
+  std::size_t rawDopplerSatCountMax() const;
+  double rawDopplerResidualP95() const;
+  RawDopplerFactorStatus rawDopplerStatus() const;
 
  private:
   void initializeCovariance();
@@ -62,6 +73,7 @@ class GIEngine {
   void applyPositionUpdate(GnssData& gnss);
   void applyVelocityUpdate(GnssData& gnss);
   void applyYawUpdate(GnssData& gnss);
+  void applyRawDopplerUpdateForTime(double update_time);
   double wrapYawResidual(double residual_rad) const;
   Matrix covarianceMatrix() const;
   void setCovarianceMatrix(const Matrix& matrix);
@@ -85,6 +97,9 @@ class GIEngine {
   std::size_t yaw_normal_count_ = 0;
   std::size_t yaw_downweight_count_ = 0;
   std::size_t yaw_reject_count_ = 0;
+  std::vector<RawDopplerVelocityMeasurement> raw_doppler_measurements_;
+  RawDopplerFactorStatus raw_doppler_status_;
+  std::vector<double> raw_doppler_residual_norms_;
   bool initialized_ = false;
 };
 

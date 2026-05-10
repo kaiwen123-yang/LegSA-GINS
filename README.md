@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N4H4R3C metric namespace split and source-backed port backbone parity.
+N4H4E1 STD unit and visual validation fix.
 
 Current working phase:
 
-N4H4E1 STD unit consistency and visual plot semantics fix.
+N5A RTKLIB-backed raw Doppler auxiliary factor activation.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -161,10 +161,10 @@ proposed factors, and does not make performance claims. The old
 `cpp/legsa_v23_core` remains a diagnostic/self-written attempt.
 
 Current completed phase:
-N4H4R3C metric namespace split and source-backed port backbone parity.
+N4H4E1 STD unit and visual validation fix.
 
 Current working phase:
-N4H4E1 STD unit consistency and visual plot semantics fix.
+N5A RTKLIB-backed raw Doppler auxiliary factor activation.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,
@@ -187,6 +187,14 @@ N5 transition. It corrects source-backed port STD writer common-unit output,
 regenerates scatter/error-vector and 3sigma diagnostic figures, keeps runtime
 figures untracked, and does not modify solver logic, tune, delete epochs, or
 make performance claims.
+
+N5A is the first proposed factor integration attempt after source-backed
+backbone parity. It adds raw GNSS scans, RTKLIB/ephemeris discovery, RAWX
+`doMes` parsing, provider-backed Doppler velocity factor gates, and a C++ EKF
+auxiliary velocity-factor path. NAV-PVT velocity is not raw Doppler, `.gnss`
+`vn/ve/vd` remains baseline receiver-native velocity, and provider-missing
+evidence blocks real activation instead of being reported as an applied factor.
+N5A makes no paper performance claim and no outperform final_v23 claim.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace

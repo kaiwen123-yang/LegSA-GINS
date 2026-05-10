@@ -10,6 +10,7 @@
 #include "legsa_v23_port_core/common/earth.hpp"
 #include "legsa_v23_port_core/common/rotation.hpp"
 #include "legsa_v23_port_core/config/port_config_loader.hpp"
+#include "legsa_v23_port_core/factors/raw_doppler_factor_loader.hpp"
 #include "legsa_v23_port_core/fileio/file_saver.hpp"
 #include "legsa_v23_port_core/fileio/gnss_file_loader.hpp"
 #include "legsa_v23_port_core/fileio/imu_file_loader.hpp"
@@ -56,6 +57,14 @@ void writeAll(const std::string& output_dir,
   FileSaver::writeStd(output_dir, covariances);
   FileSaver::writeEvalNav(output_dir, states);
   FileSaver::writeRunManifest(output_dir, options);
+}
+
+void copyRawDopplerStatus(const GIEngine& engine, PortOptions& options) {
+  options.raw_doppler_status = engine.rawDopplerStatus();
+  options.raw_doppler_factor_code_present = options.raw_doppler_status.code_present;
+  options.raw_doppler_toy_factor_applied = options.raw_doppler_status.toy_factor_applied;
+  options.raw_doppler_config.raw_doppler_solver_enabled = options.raw_doppler_status.solver_enabled;
+  options.raw_doppler = options.raw_doppler_status.update_count > 0;
 }
 
 std::vector<double> readFirstColumnTimes(const std::string& path) {
@@ -359,6 +368,89 @@ void PortRuntime::runSyntheticMath(const std::string& output_dir) {
   writeAll(output_dir, options, states, covariances);
 }
 
+// 中文说明：N5A toy 使用合成 provider-backed raw Doppler velocity，证明 EKF 链路真实调用。
+void PortRuntime::runRawDopplerToy(const std::string& output_dir) {
+  PortOptions options;
+  options.phase = "N5A";
+  options.port_role = "raw_doppler_auxiliary_factor_toy";
+  options.run_label = "N5A_raw_doppler_toy";
+  options.starttime = 0.0;
+  options.init_pos_blh_rad_m = makeVec3(Earth::degToRad(30.0), Earth::degToRad(120.0), 10.0);
+  options.init_vel_ned_mps = makeVec3(0.2, 0.0, 0.0);
+  options.init_att_rad = makeVec3(0.0, 0.0, Earth::degToRad(5.0));
+  options.raw_doppler_factor_code_present = true;
+  options.raw_doppler_config.enable_raw_doppler = true;
+  options.raw_doppler_config.raw_doppler_solver_enabled = true;
+  options.raw_doppler_config.raw_doppler_min_sat = 5;
+  options.raw_doppler_config.raw_doppler_residual_gate_mps = 3.0;
+  options.raw_doppler_config.raw_doppler_factor_path = "synthetic_runtime_only";
+  options.paper_performance_claim = false;
+  options.proposed_factor_claim = false;
+
+  RawDopplerVelocityMeasurement raw;
+  raw.time = 0.5;
+  raw.velocity_ned_mps = options.init_vel_ned_mps;
+  raw.std_ned_mps = makeVec3(0.05, 0.05, 0.05);
+  raw.sat_count = 8;
+  raw.gdop_like = 1.5;
+  raw.provider_status = "available";
+  RawDopplerFactorStatus raw_status;
+  raw_status.solver_enabled = true;
+  raw_status.provider_status = "available";
+  raw_status.epoch_count = 1;
+
+  GIEngine engine(options);
+  engine.setRawDopplerVelocityMeasurements(std::vector<RawDopplerVelocityMeasurement>{raw}, raw_status);
+  engine.initialize(makeInitialState(options));
+  std::vector<NavState> states;
+  std::vector<std::vector<double>> covariances;
+  appendState(engine, states, covariances);
+
+  ImuData first;
+  first.time = 0.0;
+  first.dt = 0.01;
+  engine.addImuData(first, true);
+  for (int i = 1; i <= 80; ++i) {
+    ImuData imu;
+    imu.time = 0.01 * static_cast<double>(i);
+    imu.dt = 0.01;
+    imu.dtheta = makeVec3(0.0, 0.0, 0.0);
+    imu.dvel = makeVec3(0.0, 0.0, -Earth::gravity(options.init_pos_blh_rad_m) * imu.dt);
+    if (i == 50) {
+      GnssData gnss;
+      gnss.time = imu.time;
+      gnss.blh_rad_m = engine.navState().pos_blh_rad_m;
+      gnss.std_ned_m = makeVec3(0.5, 0.5, 0.8);
+      gnss.vel_ned_mps = engine.navState().vel_ned_mps;
+      gnss.vel_std_mps = makeVec3(0.1, 0.1, 0.1);
+      gnss.has_yaw = false;
+      gnss.isvalid = true;
+      engine.addGnssData(gnss);
+    }
+    engine.addImuData(imu);
+    engine.newImuProcess();
+    if (!engine.checkCov()) {
+      throw std::runtime_error("raw Doppler toy covariance check failed");
+    }
+    appendState(engine, states, covariances);
+  }
+  RawDopplerFactorStatus final_status = engine.rawDopplerStatus();
+  final_status.toy_factor_applied = final_status.update_count > 0;
+  engine.setRawDopplerVelocityMeasurements(std::vector<RawDopplerVelocityMeasurement>{raw}, final_status);
+  options.propagation_count = engine.propagationCount();
+  options.measurement_update_count = engine.updateCount();
+  options.position_update_count = engine.positionUpdateCount();
+  options.velocity_update_count = engine.velocityUpdateCount();
+  options.yaw_update_count = engine.yawUpdateCount();
+  options.raw_doppler_status = engine.rawDopplerStatus();
+  options.raw_doppler_status.toy_factor_applied = options.raw_doppler_status.update_count > 0;
+  options.raw_doppler_factor_code_present = true;
+  options.raw_doppler_toy_factor_applied = options.raw_doppler_status.toy_factor_applied;
+  options.raw_doppler_config.raw_doppler_solver_enabled = options.raw_doppler_status.solver_enabled;
+  options.raw_doppler = options.raw_doppler_status.update_count > 0;
+  writeAll(output_dir, options, states, covariances);
+}
+
 // 中文说明：真实输入 runner 只建立 R2 运行链路；R3 才允许 clean replay parity 判定。
 void PortRuntime::runFromConfig(const std::string& config_path, const std::string& output_dir) {
   PortRuntimeDebugOptions debug_options;
@@ -390,6 +482,14 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   options.source_backed_runtime_loop_fix = true;
   if (options.imu_path.empty() || options.gnss_path.empty()) {
     throw std::runtime_error("config must provide imu_path/imupath and gnss_path/gnsspath");
+  }
+  RawDopplerFactorLoadResult raw_doppler_load;
+  if (options.raw_doppler_config.enable_raw_doppler) {
+    raw_doppler_load =
+        RawDopplerFactorLoader::loadCsv(options.raw_doppler_config.raw_doppler_factor_path, options.raw_doppler_config);
+    options.raw_doppler_status = raw_doppler_load.status;
+    options.raw_doppler_factor_code_present = true;
+    options.raw_doppler_config.raw_doppler_solver_enabled = raw_doppler_load.status.solver_enabled;
   }
   const std::vector<double> imu_times = readFirstColumnTimes(options.imu_path);
   const std::vector<double> gnss_times = readFirstColumnTimes(options.gnss_path);
@@ -427,6 +527,9 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   }
 
   GIEngine engine(options);
+  if (options.raw_doppler_config.enable_raw_doppler) {
+    engine.setRawDopplerVelocityMeasurements(raw_doppler_load.measurements, raw_doppler_load.status);
+  }
   engine.initialize(makeInitialState(options));
   std::vector<NavState> states;
   std::vector<std::vector<double>> covariances;
@@ -548,6 +651,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   options.yaw_normal_count = engine.yawNormalCount();
   options.yaw_downweight_count = engine.yawDownweightCount();
   options.yaw_reject_count = engine.yawRejectCount();
+  copyRawDopplerStatus(engine, options);
   options.actual_update_count = engine.updateCount();
   options.update_count_ratio =
       options.expected_update_count == 0
