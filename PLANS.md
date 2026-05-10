@@ -510,6 +510,19 @@ N5D does not delete epochs, tune from trace, perform output-only correction,
 claim paper performance, claim outperforming final_v23, implement Go2 priors,
 implement LSIM/OIM, implement source-aware weighting, or implement FGO.
 
+## Stage N5D1: Visual data coverage and raw Doppler spike audit
+
+Goal:
+Repair N5D visual validation by requiring plotted sample coverage, regenerating
+non-empty clean ablation plots, auditing raw Doppler velocity spikes
+epoch-by-epoch, fixing raw-vs-receiver velocity semantics, and de-duplicating
+stress evidence pairs.
+
+N5D1 does not change solver math, tune gates, delete epochs, apply output-only
+correction, claim paper performance, claim outperforming final_v23, implement
+Go2 priors, implement LSIM/OIM, implement source-aware weighting, or implement
+FGO.
+
 ## Stage N6A: Source-aware LSIM/OIM weighting foundation
 
 Goal:
