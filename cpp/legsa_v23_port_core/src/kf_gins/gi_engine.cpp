@@ -14,6 +14,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <numeric>
 #include <stdexcept>
 #include <utility>
 
@@ -50,13 +51,31 @@ Vec3 positiveStd(const Vec3& value, double floor_value) {
                   std::max(std::fabs(value[2]), floor_value));
 }
 
+double matrixTrace(const Matrix& matrix) {
+  const std::size_t n = std::min(matrix.rows, matrix.cols);
+  double out = 0.0;
+  for (std::size_t i = 0; i < n; ++i) {
+    out += matrix(i, i);
+  }
+  return out;
+}
+
+double vectorNorm(const std::vector<double>& values) {
+  double sum = 0.0;
+  for (double value : values) {
+    sum += value * value;
+  }
+  return std::sqrt(sum);
+}
+
 }  // namespace
 
 GIEngine::GIEngine(PortOptions options)
     : options_(std::move(options)),
       Cov_(RANK, RANK, 0.0),
       Qc_(NOISERANK, NOISERANK, 0.0),
-      dx_(RANK, 0.0) {
+      dx_(RANK, 0.0),
+      source_aware_policy_(options_.source_aware_policy_config) {
   initializeQc();
 }
 
@@ -389,6 +408,17 @@ RawDopplerFactorStatus GIEngine::rawDopplerStatus() const {
   return raw_doppler_status_;
 }
 
+source_aware::SourceAwareRuntimeStats GIEngine::sourceAwareStats() const {
+  return source_aware_trace_.stats();
+}
+
+void GIEngine::writeSourceAwareTrace(const std::string& output_dir) const {
+  // 中文说明：SOURCE_AWARE_WEIGHT_TRACE 是 runtime-only 审计文件，不允许作为 solver 输入。
+  if (options_.source_aware_policy_config.source_aware_trace_enabled) {
+    source_aware_trace_.writeCsv(output_dir);
+  }
+}
+
 void GIEngine::initializeCovariance() {
   Cov_ = Matrix(RANK, RANK, 0.0);
   setDiagonalBlock(Cov_, P_ID, positiveStd(options_.init_pos_std_m, 1.0e-6));
@@ -467,7 +497,19 @@ void GIEngine::applyPositionUpdate(GnssData& gnss) {
   // H_gnsspos / H_pos_phi: reference 使用 +skew(Cbn * antlever)。
   setBlock(H, 0, PHI_ID, Rotation::skewSymmetric(lever_n));
   Matrix R = diagonalMatrix(cwiseProduct(positiveStd(gnss.std_ned_m, 1.0e-3), positiveStd(gnss.std_ned_m, 1.0e-3)));
-  EKFUpdate(std::vector<double>{dz_vec[0], dz_vec[1], dz_vec[2]}, H, R);
+  const std::vector<double> dz{dz_vec[0], dz_vec[1], dz_vec[2]};
+  source_aware::SourceMetadata metadata;
+  metadata.source = source_aware::MeasurementSource::kReceiverPosition;
+  metadata.time = gnss.time;
+  metadata.valid = gnss.isvalid;
+  metadata.std_xyz = gnss.std_ned_m;
+  metadata.quality_flag = gnss.isvalid ? "nominal" : "invalid";
+  Matrix scaled_R = R;
+  const auto weight = applySourceAwareWeighting(metadata.source, metadata, dz, H, R, scaled_R);
+  if (weight.rejected) {
+    return;
+  }
+  EKFUpdate(dz, H, scaled_R);
   ++position_update_count_;
 }
 
@@ -523,7 +565,19 @@ void GIEngine::applyVelocityUpdate(GnssData& gnss) {
   setBlock(H, 0, PHI_ID, Rotation::skewSymmetric(multiply(pvacur_.cbn, cross(omega_b, options_.antlever_m))));
   Vec3 stdv = add(positiveStd(gnss.vel_std_mps, 1.0e-3), makeVec3(0.05, 0.05, 0.05));
   Matrix R = diagonalMatrix(cwiseProduct(stdv, stdv));
-  EKFUpdate(std::vector<double>{dz_vec[0], dz_vec[1], dz_vec[2]}, H, R);
+  const std::vector<double> dz{dz_vec[0], dz_vec[1], dz_vec[2]};
+  source_aware::SourceMetadata metadata;
+  metadata.source = source_aware::MeasurementSource::kReceiverVelocity;
+  metadata.time = gnss.time;
+  metadata.valid = gnss.has_velocity;
+  metadata.std_xyz = gnss.vel_std_mps;
+  metadata.quality_flag = gnss.has_velocity ? "nominal" : "invalid";
+  Matrix scaled_R = R;
+  const auto weight = applySourceAwareWeighting(metadata.source, metadata, dz, H, R, scaled_R);
+  if (weight.rejected) {
+    return;
+  }
+  EKFUpdate(dz, H, scaled_R);
   ++velocity_update_count_;
 }
 
@@ -535,12 +589,14 @@ void GIEngine::applyYawUpdate(GnssData& gnss) {
   const double yaw_std = std::max(gnss.yaw_std_rad, options_.yaw_std_min_deg * D2R);
   const double residual = wrapYawResidual(yaw_pred - yaw_obs);
   const double abs_res = std::fabs(residual);
-  if (yaw_std >= options_.yaw_std_hard_deg * D2R || abs_res >= options_.yaw_res_hard_deg * D2R) {
+  if (!options_.source_aware_policy_config.enable_source_aware_weighting &&
+      (yaw_std >= options_.yaw_std_hard_deg * D2R || abs_res >= options_.yaw_res_hard_deg * D2R)) {
     ++yaw_reject_count_;
     return;
   }
   double scale_value = 1.0;
-  if (yaw_std >= options_.yaw_std_soft_deg * D2R || abs_res >= options_.yaw_res_soft_deg * D2R) {
+  if (!options_.source_aware_policy_config.enable_source_aware_weighting &&
+      (yaw_std >= options_.yaw_std_soft_deg * D2R || abs_res >= options_.yaw_res_soft_deg * D2R)) {
     scale_value = options_.yaw_downweight_scale;
     ++yaw_downweight_count_;
   } else {
@@ -549,7 +605,24 @@ void GIEngine::applyYawUpdate(GnssData& gnss) {
   Matrix H(1, RANK, 0.0);
   H(0, PHI_ID + 2) = -1.0;
   Matrix R(1, 1, scale_value * yaw_std * yaw_std);
-  EKFUpdate(std::vector<double>{residual}, H, R);
+  const std::vector<double> dz{residual};
+  source_aware::SourceMetadata metadata;
+  metadata.source = source_aware::MeasurementSource::kDualAntennaYaw;
+  metadata.time = gnss.time;
+  metadata.valid = gnss.has_yaw;
+  metadata.yaw_std_rad = yaw_std;
+  metadata.std_xyz = makeVec3(yaw_std, yaw_std, yaw_std);
+  metadata.quality_flag = gnss.has_yaw ? "nominal" : "invalid";
+  Matrix scaled_R = R;
+  const auto weight = applySourceAwareWeighting(metadata.source, metadata, dz, H, R, scaled_R);
+  if (weight.rejected) {
+    ++yaw_reject_count_;
+    return;
+  }
+  if (options_.source_aware_policy_config.enable_source_aware_weighting && weight.combined_R_scale > 1.0) {
+    ++yaw_downweight_count_;
+  }
+  EKFUpdate(dz, H, scaled_R);
 }
 
 void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
@@ -574,7 +647,8 @@ void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
   }
   const Vec3 residual_vec = subtract(pvacur_.vel_ned_mps, best->velocity_ned_mps);
   const double residual = norm(residual_vec);
-  if (residual > options_.raw_doppler_config.raw_doppler_residual_gate_mps) {
+  if (!options_.source_aware_policy_config.enable_source_aware_weighting &&
+      residual > options_.raw_doppler_config.raw_doppler_residual_gate_mps) {
     ++raw_doppler_status_.reject_count;
     raw_doppler_residual_norms_.push_back(residual);
     return;
@@ -584,7 +658,27 @@ void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
   const Vec3 stdv = RawDopplerFactor::positiveStd(*best);
   Matrix R = diagonalMatrix(scale(cwiseProduct(stdv, stdv), options_.raw_doppler_config.raw_doppler_R_scale));
   // 中文说明：dz = nav.vel - raw_doppler_velocity_ned，与现有 receiver-native velocity residual 同号。
-  EKFUpdate(std::vector<double>{residual_vec[0], residual_vec[1], residual_vec[2]}, H, R);
+  const std::vector<double> dz{residual_vec[0], residual_vec[1], residual_vec[2]};
+  source_aware::SourceMetadata metadata;
+  metadata.source = source_aware::MeasurementSource::kRawDopplerVelocity;
+  metadata.time = best->time;
+  metadata.valid = RawDopplerFactor::isProviderBacked(*best);
+  metadata.std_xyz = stdv;
+  metadata.residual_norm = residual;
+  metadata.time_diff_sec = best->time - update_time;
+  metadata.sat_count = best->sat_count;
+  metadata.provider_status = best->provider_status;
+  metadata.quality_flag = best->provider_status == "available" ? "nominal" : best->provider_status;
+  metadata.covariance_available = true;
+  metadata.spike_candidate = residual > options_.raw_doppler_config.raw_doppler_residual_gate_mps;
+  Matrix scaled_R = R;
+  const auto weight = applySourceAwareWeighting(metadata.source, metadata, dz, H, R, scaled_R);
+  if (weight.rejected) {
+    ++raw_doppler_status_.reject_count;
+    raw_doppler_residual_norms_.push_back(residual);
+    return;
+  }
+  EKFUpdate(dz, H, scaled_R);
   raw_doppler_residual_norms_.push_back(residual);
   ++raw_doppler_status_.update_count;
   if (raw_doppler_status_.sat_count_min == 0 || best->sat_count < raw_doppler_status_.sat_count_min) {
@@ -607,6 +701,35 @@ void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
     const std::size_t index = static_cast<std::size_t>(0.95 * static_cast<double>(sorted.size() - 1));
     raw_doppler_status_.residual_p95_mps = sorted[index];
   }
+}
+
+source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(
+    source_aware::MeasurementSource source,
+    const source_aware::SourceMetadata& metadata,
+    const std::vector<double>& dz,
+    const Matrix& H,
+    const Matrix& R,
+    Matrix& scaled_R) {
+  scaled_R = R;
+  source_aware::ObservationInnovation innovation;
+  innovation.residual = dz;
+  innovation.residual_norm = vectorNorm(dz);
+  innovation.base_R_trace = matrixTrace(R);
+  innovation.hph_trace = matrixTrace(multiply(multiply(H, Cov_), transpose(H)));
+  innovation.normalized_innovation =
+      innovation.residual_norm / std::sqrt(std::max(1.0e-12, innovation.base_R_trace + innovation.hph_trace));
+  source_aware::SourceMetadata metadata_copy = metadata;
+  metadata_copy.source = source;
+  metadata_copy.residual_norm = innovation.residual_norm;
+  source_aware::SourceWeightResult result = source_aware_policy_.evaluate(metadata_copy, innovation);
+  if (source_aware_policy_.enabledFor(source)) {
+    scaled_R = scale(R, result.combined_R_scale);
+    result.scaled_R_trace = matrixTrace(scaled_R);
+    if (options_.source_aware_policy_config.source_aware_trace_enabled) {
+      source_aware_trace_.add(metadata_copy.time, update_count_ + 1, result);
+    }
+  }
+  return result;
 }
 
 double GIEngine::wrapYawResidual(double residual_rad) const {

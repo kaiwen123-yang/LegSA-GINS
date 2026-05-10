@@ -54,6 +54,32 @@ double stdOutputScale(std::size_t index) {
   return 1.0;
 }
 
+void writeSourceAwareCountObject(std::ostream& out, const std::array<std::size_t, source_aware::kMeasurementSourceCount>& counts) {
+  out << "{";
+  for (std::size_t i = 0; i < source_aware::kMeasurementSourceCount; ++i) {
+    if (i > 0) {
+      out << ", ";
+    }
+    out << "\"" << source_aware::toString(static_cast<source_aware::MeasurementSource>(i)) << "\": " << counts[i];
+  }
+  out << "}";
+}
+
+void writeSourceAwareScaleStats(std::ostream& out, const source_aware::SourceAwareRuntimeStats& stats) {
+  out << "{";
+  for (std::size_t i = 0; i < source_aware::kMeasurementSourceCount; ++i) {
+    if (i > 0) {
+      out << ", ";
+    }
+    const auto source = static_cast<source_aware::MeasurementSource>(i);
+    out << "\"" << source_aware::toString(source) << "\": {"
+        << "\"p50\": " << stats.scale_p50_by_source[i] << ", "
+        << "\"p95\": " << stats.scale_p95_by_source[i] << ", "
+        << "\"max\": " << stats.scale_max_by_source[i] << "}";
+  }
+  out << "}";
+}
+
 const char* stdOutputName(std::size_t index) {
   static constexpr const char* kNames[kErrorStateSize] = {
       "std_pos_n_m",        "std_pos_e_m",        "std_pos_d_m",
@@ -189,7 +215,28 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << "  \"raw_doppler_provider_status\": \""
       << escapeJson(options.raw_doppler_status.provider_status) << "\",\n"
       << "  \"go2_prior\": " << (options.go2_prior ? "true" : "false") << ",\n"
-      << "  \"lsim_oim\": " << (options.lsim_oim ? "true" : "false") << ",\n"
+      << "  \"lsim_oim\": " << (options.lsim_oim ? "true" : "false") << ",\n";
+  out << "  \"source_aware_weighting_enabled\": "
+      << (options.source_aware_policy_config.enable_source_aware_weighting ? "true" : "false") << ",\n"
+      << "  \"source_aware_mode\": \""
+      << escapeJson(options.source_aware_policy_config.source_aware_mode) << "\",\n"
+      << "  \"source_aware_max_R_scale\": "
+      << options.source_aware_policy_config.source_aware_max_R_scale << ",\n"
+      << "  \"source_aware_reject_extreme\": "
+      << (options.source_aware_policy_config.source_aware_reject_extreme ? "true" : "false") << ",\n"
+      << "  \"source_aware_no_R_shrink\": "
+      << (options.source_aware_policy_config.source_aware_no_R_shrink ? "true" : "false") << ",\n"
+      << "  \"source_aware_trace_enabled\": "
+      << (options.source_aware_policy_config.source_aware_trace_enabled ? "true" : "false") << ",\n"
+      << "  \"source_aware_update_count_by_source\": ";
+  writeSourceAwareCountObject(out, options.source_aware_runtime_stats.update_count_by_source);
+  out << ",\n  \"source_aware_reject_count_by_source\": ";
+  writeSourceAwareCountObject(out, options.source_aware_runtime_stats.reject_count_by_source);
+  out << ",\n  \"source_aware_R_scale_p50_p95_max_by_source\": ";
+  writeSourceAwareScaleStats(out, options.source_aware_runtime_stats);
+  out << ",\n"
+      << "  \"source_aware_spike_response_evaluated\": "
+      << (options.source_aware_runtime_stats.spike_response_evaluated ? "true" : "false") << ",\n"
       << "  \"fgo\": " << (options.fgo ? "true" : "false") << ",\n"
       << "  \"performance_claim\": " << (options.performance_claim ? "true" : "false") << ",\n"
       << "  \"yaw_scheme_C_enabled\": " << (options.yaw_scheme_C_enabled ? "true" : "false") << ",\n"

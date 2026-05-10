@@ -12,6 +12,8 @@
 #include "legsa_v23_port_core/nav_state.hpp"
 #include "legsa_v23_port_core/options.hpp"
 #include "legsa_v23_port_core/factors/raw_doppler_types.hpp"
+#include "legsa_v23_port_core/source_aware/source_aware_policy.hpp"
+#include "legsa_v23_port_core/source_aware/source_aware_trace.hpp"
 
 #include <cstddef>
 #include <string>
@@ -65,6 +67,8 @@ class GIEngine {
   std::size_t rawDopplerSatCountMax() const;
   double rawDopplerResidualP95() const;
   RawDopplerFactorStatus rawDopplerStatus() const;
+  source_aware::SourceAwareRuntimeStats sourceAwareStats() const;
+  void writeSourceAwareTrace(const std::string& output_dir) const;
 
  private:
   void initializeCovariance();
@@ -77,6 +81,13 @@ class GIEngine {
   void applyVelocityUpdate(GnssData& gnss);
   void applyYawUpdate(GnssData& gnss);
   void applyRawDopplerUpdateForTime(double update_time);
+  source_aware::SourceWeightResult applySourceAwareWeighting(
+      source_aware::MeasurementSource source,
+      const source_aware::SourceMetadata& metadata,
+      const std::vector<double>& dz,
+      const Matrix& H,
+      const Matrix& R,
+      Matrix& scaled_R);
   double wrapYawResidual(double residual_rad) const;
   Matrix covarianceMatrix() const;
   void setCovarianceMatrix(const Matrix& matrix);
@@ -103,6 +114,8 @@ class GIEngine {
   std::vector<RawDopplerVelocityMeasurement> raw_doppler_measurements_;
   RawDopplerFactorStatus raw_doppler_status_;
   std::vector<double> raw_doppler_residual_norms_;
+  source_aware::SourceAwarePolicy source_aware_policy_;
+  source_aware::SourceAwareTrace source_aware_trace_;
   bool initialized_ = false;
 };
 
