@@ -210,6 +210,18 @@ Allowed N6A source-aware LSIM/OIM weighting statement:
 - No Go2 prior, FGO, or smoothing claim in N6A.
 - Source-aware weighting changes EKF measurement R, not output.
 
+Allowed N6B source-aware policy refinement statement:
+
+- N6B refines source-aware policy after N6A over-aggressive R scaling.
+- N6B uses innovation covariance `S=HPH^T+R` for OIM.
+- N6B does not use trace or final_v23 output for weights.
+- N6B does not hardcode spike times into solver policy.
+- N6B does not shrink R below baseline.
+- Stress variants are diagnostic-only.
+- No paper performance claim.
+- No outperform final_v23 claim.
+- No Go2 prior, FGO, or smoothing claim in N6B.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:

@@ -80,6 +80,15 @@ void writeSourceAwareScaleStats(std::ostream& out, const source_aware::SourceAwa
   out << "}";
 }
 
+void writeSourceCaps(std::ostream& out, const source_aware::SourceAwarePolicyConfig& config) {
+  out << "{"
+      << "\"receiver_position\": " << config.source_aware_receiver_position_cap << ", "
+      << "\"receiver_velocity\": " << config.source_aware_receiver_velocity_cap << ", "
+      << "\"dual_antenna_yaw\": " << config.source_aware_dual_yaw_cap << ", "
+      << "\"raw_doppler_velocity\": " << config.source_aware_raw_doppler_cap << ", "
+      << "\"global\": " << config.source_aware_global_cap << "}";
+}
+
 const char* stdOutputName(std::size_t index) {
   static constexpr const char* kNames[kErrorStateSize] = {
       "std_pos_n_m",        "std_pos_e_m",        "std_pos_d_m",
@@ -218,21 +227,49 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << "  \"lsim_oim\": " << (options.lsim_oim ? "true" : "false") << ",\n";
   out << "  \"source_aware_weighting_enabled\": "
       << (options.source_aware_policy_config.enable_source_aware_weighting ? "true" : "false") << ",\n"
+      << "  \"source_aware_policy_version\": \""
+      << escapeJson(options.source_aware_policy_config.source_aware_policy_version) << "\",\n"
+      << "  \"source_aware_use_innovation_covariance\": "
+      << (options.source_aware_policy_config.source_aware_use_innovation_covariance ? "true" : "false") << ",\n"
       << "  \"source_aware_mode\": \""
       << escapeJson(options.source_aware_policy_config.source_aware_mode) << "\",\n"
       << "  \"source_aware_max_R_scale\": "
       << options.source_aware_policy_config.source_aware_max_R_scale << ",\n"
+      << "  \"source_aware_global_cap\": "
+      << options.source_aware_policy_config.source_aware_global_cap << ",\n"
+      << "  \"source_aware_deadband_normalized\": "
+      << options.source_aware_policy_config.source_aware_deadband_normalized << ",\n"
+      << "  \"source_aware_moderate_normalized\": "
+      << options.source_aware_policy_config.source_aware_moderate_normalized << ",\n"
+      << "  \"source_aware_strong_normalized\": "
+      << options.source_aware_policy_config.source_aware_strong_normalized << ",\n"
       << "  \"source_aware_reject_extreme\": "
       << (options.source_aware_policy_config.source_aware_reject_extreme ? "true" : "false") << ",\n"
       << "  \"source_aware_no_R_shrink\": "
       << (options.source_aware_policy_config.source_aware_no_R_shrink ? "true" : "false") << ",\n"
       << "  \"source_aware_trace_enabled\": "
       << (options.source_aware_policy_config.source_aware_trace_enabled ? "true" : "false") << ",\n"
+      << "  \"source_aware_enable_rolling_innovation_baseline\": "
+      << (options.source_aware_policy_config.source_aware_enable_rolling_innovation_baseline ? "true" : "false") << ",\n"
+      << "  \"source_aware_rolling_window_size\": "
+      << options.source_aware_policy_config.source_aware_rolling_window_size << ",\n"
+      << "  \"source_aware_rolling_mad_floor\": "
+      << options.source_aware_policy_config.source_aware_rolling_mad_floor << ",\n"
+      << "  \"source_caps\": ";
+  writeSourceCaps(out, options.source_aware_policy_config);
+  out << ",\n"
+      << "  \"source_aware_clean_neutral_gate\": {"
+      << "\"horizontal_delta_m_max\": 0.10, \"up_delta_m_max\": 0.20, "
+      << "\"yaw_delta_deg_max\": 0.30, \"roll_delta_deg_max\": 0.15, "
+      << "\"pitch_delta_deg_max\": 0.15},\n"
+      << "  \"source_aware_trace_rows\": " << options.source_aware_runtime_stats.trace_row_count << ",\n"
       << "  \"source_aware_update_count_by_source\": ";
   writeSourceAwareCountObject(out, options.source_aware_runtime_stats.update_count_by_source);
   out << ",\n  \"source_aware_reject_count_by_source\": ";
   writeSourceAwareCountObject(out, options.source_aware_runtime_stats.reject_count_by_source);
   out << ",\n  \"source_aware_R_scale_p50_p95_max_by_source\": ";
+  writeSourceAwareScaleStats(out, options.source_aware_runtime_stats);
+  out << ",\n  \"source_aware_R_scale_stats_by_source\": ";
   writeSourceAwareScaleStats(out, options.source_aware_runtime_stats);
   out << ",\n"
       << "  \"source_aware_spike_response_evaluated\": "

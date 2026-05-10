@@ -12,6 +12,9 @@
 
 #include "legsa_v23_port_core/source_aware/measurement_source.hpp"
 
+#include <array>
+#include <deque>
+
 namespace legsa_v23_port_core::source_aware {
 
 class SourceAwarePolicy {
@@ -20,16 +23,20 @@ class SourceAwarePolicy {
 
   const SourceAwarePolicyConfig& config() const;
   bool enabledFor(MeasurementSource source) const;
-  SourceWeightResult evaluate(const SourceMetadata& metadata, const ObservationInnovation& innovation) const;
+  SourceWeightResult evaluate(const SourceMetadata& metadata, const ObservationInnovation& innovation);
 
  private:
-  double capScale(double value) const;
+  double sourceCap(MeasurementSource source) const;
+  double capScale(double value, MeasurementSource source) const;
+  bool n6bPolicyEnabled() const;
+  void applyRollingBaseline(MeasurementSource source, double normalized, SourceWeightResult& result);
   double lsimScale(const SourceMetadata& metadata, SourceWeightResult& result) const;
   double oimScale(const SourceMetadata& metadata,
                   const ObservationInnovation& innovation,
                   SourceWeightResult& result) const;
 
   SourceAwarePolicyConfig config_;
+  std::array<std::deque<double>, kMeasurementSourceCount> rolling_normalized_by_source_;
 };
 
 }  // namespace legsa_v23_port_core::source_aware

@@ -37,6 +37,7 @@ def _percentile(values: list[float], q: float) -> float:
 
 def summarize_source_weight_trace(rows: list[dict[str, Any]]) -> dict[str, Any]:
     stats: dict[str, Any] = {}
+    policy_versions = sorted({row.get("policy_version", "") for row in rows if row.get("policy_version")})
     for source_id in OBSERVATION_SOURCE_IDS:
         source_rows = [row for row in rows if row.get("source_id") == source_id]
         scales = [_float(row, "combined_R_scale", 1.0) for row in source_rows]
@@ -51,6 +52,11 @@ def summarize_source_weight_trace(rows: list[dict[str, Any]]) -> dict[str, Any]:
         }
     return {
         "trace_row_count": len(rows),
+        "sources_covered": sorted({row.get("source_id", "") for row in rows if row.get("source_id")}),
+        "policy_versions": policy_versions,
+        "used_innovation_covariance_count": sum(
+            1 for row in rows if str(row.get("used_innovation_covariance", "0")).lower() in {"1", "true"}
+        ),
         "stats_by_source": stats,
         "source_aware_trace_generated": bool(rows),
         "paper_performance_claim": False,

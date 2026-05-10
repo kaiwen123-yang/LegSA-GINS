@@ -72,6 +72,7 @@ const std::vector<SourceAwareTraceRow>& SourceAwareTrace::rows() const {
 
 SourceAwareRuntimeStats SourceAwareTrace::stats() const {
   SourceAwareRuntimeStats out;
+  out.trace_row_count = rows_.size();
   std::array<std::vector<double>, kMeasurementSourceCount> scales;
   for (const auto& row : rows_) {
     const std::size_t index = sourceIndex(row.result.source);
@@ -95,16 +96,21 @@ void SourceAwareTrace::writeCsv(const std::string& output_dir) const {
   }
   std::filesystem::create_directories(output_dir);
   std::ofstream out(std::filesystem::path(output_dir) / "SOURCE_AWARE_WEIGHT_TRACE.csv");
-  out << "time,update_index,source_id,mode,lsim_score,oim_score,lsim_R_scale,oim_R_scale,"
-      << "combined_R_scale,residual_norm,normalized_innovation,base_R_trace,scaled_R_trace,"
-      << "accepted,rejected,reason_codes,metadata_summary\n";
+  out << "time,update_index,source_id,policy_version,mode,lsim_score,oim_score,lsim_R_scale,oim_R_scale,"
+      << "combined_R_scale,residual_norm,normalized_innovation,nis,dof,innovation_cov_trace,"
+      << "used_innovation_covariance,source_cap,rolling_normalized_median,rolling_normalized_mad,"
+      << "relative_anomaly_score,base_R_trace,scaled_R_trace,accepted,rejected,reason_codes,metadata_summary\n";
   out << std::fixed << std::setprecision(10);
   for (const auto& row : rows_) {
     const auto& result = row.result;
     out << row.time << "," << row.update_index << "," << toString(result.source) << ","
-        << result.mode << "," << result.lsim_score << "," << result.oim_score << ","
+        << result.policy_version << "," << result.mode << "," << result.lsim_score << "," << result.oim_score << ","
         << result.lsim_R_scale << "," << result.oim_R_scale << "," << result.combined_R_scale << ","
         << result.residual_norm << "," << result.normalized_innovation << ","
+        << result.nis << "," << result.dof << "," << result.innovation_cov_trace << ","
+        << (result.used_innovation_covariance ? 1 : 0) << "," << result.source_cap << ","
+        << result.rolling_normalized_median << "," << result.rolling_normalized_mad << ","
+        << result.relative_anomaly_score << ","
         << result.base_R_trace << "," << result.scaled_R_trace << ","
         << (result.accepted ? 1 : 0) << "," << (result.rejected ? 1 : 0) << ","
         << escapeCsv(joinReasons(result.reason_codes)) << ","

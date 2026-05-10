@@ -461,13 +461,13 @@ void PortRuntime::runRawDopplerToy(const std::string& output_dir) {
   writeAll(output_dir, options, states, covariances);
 }
 
-// 中文说明：N6A toy 同时覆盖 position/velocity/yaw/raw Doppler 四类观测源，
+// 中文说明：N6B toy 同时覆盖 position/velocity/yaw/raw Doppler 四类观测源，
 // 用于证明 source-aware R inflation 真实进入 EKFUpdate 前的 R 矩阵。
 void PortRuntime::runSourceAwareToy(const std::string& output_dir) {
   PortOptions options;
-  options.phase = "N6A";
-  options.port_role = "source_aware_lsim_oim_weighting_toy";
-  options.run_label = "N6A_source_aware_toy";
+  options.phase = "N6B";
+  options.port_role = "source_aware_lsim_oim_policy_refinement_toy";
+  options.run_label = "N6B_source_aware_toy";
   options.starttime = 0.0;
   options.init_pos_blh_rad_m = makeVec3(Earth::degToRad(30.0), Earth::degToRad(120.0), 10.0);
   options.init_vel_ned_mps = makeVec3(0.2, 0.0, 0.0);
@@ -479,10 +479,23 @@ void PortRuntime::runSourceAwareToy(const std::string& output_dir) {
   options.raw_doppler_config.raw_doppler_residual_gate_mps = 3.0;
   options.raw_doppler_config.raw_doppler_factor_source = "SYNTHETIC_RAW_DOPPLER_TOY";
   options.source_aware_policy_config.enable_source_aware_weighting = true;
+  options.source_aware_policy_config.source_aware_policy_version = "n6b_conservative_innovation_covariance";
   options.source_aware_policy_config.source_aware_mode = "lsim_oim";
   options.source_aware_policy_config.source_aware_max_R_scale = 25.0;
+  options.source_aware_policy_config.source_aware_global_cap = 25.0;
+  options.source_aware_policy_config.source_aware_use_innovation_covariance = true;
+  options.source_aware_policy_config.source_aware_deadband_normalized = 1.5;
+  options.source_aware_policy_config.source_aware_moderate_normalized = 2.5;
+  options.source_aware_policy_config.source_aware_strong_normalized = 4.0;
+  options.source_aware_policy_config.source_aware_receiver_position_cap = 5.0;
+  options.source_aware_policy_config.source_aware_receiver_velocity_cap = 8.0;
+  options.source_aware_policy_config.source_aware_dual_yaw_cap = 10.0;
+  options.source_aware_policy_config.source_aware_raw_doppler_cap = 15.0;
   options.source_aware_policy_config.source_aware_no_R_shrink = true;
   options.source_aware_policy_config.source_aware_trace_enabled = true;
+  options.source_aware_policy_config.source_aware_enable_rolling_innovation_baseline = true;
+  options.source_aware_policy_config.source_aware_rolling_window_size = 31;
+  options.source_aware_policy_config.source_aware_rolling_mad_floor = 0.5;
   options.lsim_oim = true;
   options.paper_performance_claim = false;
   options.proposed_factor_claim = false;
@@ -589,10 +602,13 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   options.runtime_loop_fix_applied = true;
   options.source_backed_runtime_loop_fix = true;
   if (options.source_aware_policy_config.enable_source_aware_weighting) {
-    // 中文说明：N6A 是在 source-backed port-core 上真实启用 LSIM/OIM R scaling 的诊断阶段。
-    options.phase = "N6A";
-    options.port_role = "source_aware_lsim_oim_weighting";
-    options.run_label = options.ablation_variant.empty() ? "N6A_source_aware_run" : options.ablation_variant;
+    // 中文说明：N6B 是在 source-backed port-core 上真实启用保守 LSIM/OIM R scaling 的诊断阶段。
+    options.phase = options.source_aware_policy_config.source_aware_policy_version == "n6a_original_residual_ratio"
+                        ? "N6A"
+                        : "N6B";
+    options.port_role = options.phase == "N6A" ? "source_aware_lsim_oim_weighting"
+                                                : "source_aware_lsim_oim_policy_refinement";
+    options.run_label = options.ablation_variant.empty() ? options.phase + "_source_aware_run" : options.ablation_variant;
     options.lsim_oim = true;
   }
   if (options.imu_path.empty() || options.gnss_path.empty()) {
