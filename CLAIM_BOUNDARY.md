@@ -197,6 +197,19 @@ Allowed N5A raw Doppler activation statement:
 - No paper performance claim.
 - Diagnostic trial is not paper performance.
 
+Allowed N6A source-aware LSIM/OIM weighting statement:
+
+- N6A source-aware LSIM/OIM weighting is diagnostic engineering evidence.
+- LSIM/OIM uses solver-visible metadata and innovations only.
+- No trace or final_v23 output is used for weighting.
+- N6A default policy only inflates R; it does not shrink R below baseline.
+- N5D1 spike epochs are evaluation sentinels only, not tuning inputs.
+- Stress variants are diagnostic-only.
+- No paper performance claim.
+- No outperform final_v23 claim.
+- No Go2 prior, FGO, or smoothing claim in N6A.
+- Source-aware weighting changes EKF measurement R, not output.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:

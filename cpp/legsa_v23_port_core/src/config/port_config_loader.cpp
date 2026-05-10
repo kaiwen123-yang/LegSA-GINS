@@ -10,11 +10,13 @@
 #include "legsa_v23_port_core/common/earth.hpp"
 
 #include <algorithm>
+#include <array>
 #include <cctype>
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
 #include <unordered_map>
+#include <utility>
 
 namespace legsa_v23_port_core {
 namespace {
@@ -247,6 +249,45 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       scalarOrDefault(kv, "raw_doppler_R_scale", options.raw_doppler_config.raw_doppler_R_scale);
   options.raw_doppler_config.raw_doppler_mode =
       stringOrDefault(kv, "raw_doppler_mode", options.raw_doppler_config.raw_doppler_mode);
+  // 中文说明：N6A source-aware 默认关闭；启用后只在 EKFUpdate 前放大 R，不读取 trace/final_v23 输出。
+  options.source_aware_policy_config.enable_source_aware_weighting =
+      boolOrDefault(kv,
+                    "enable_source_aware_weighting",
+                    options.source_aware_policy_config.enable_source_aware_weighting);
+  options.source_aware_policy_config.source_aware_mode =
+      stringOrDefault(kv, "source_aware_mode", options.source_aware_policy_config.source_aware_mode);
+  options.source_aware_policy_config.source_aware_max_R_scale =
+      scalarOrDefault(kv,
+                      "source_aware_max_R_scale",
+                      options.source_aware_policy_config.source_aware_max_R_scale);
+  options.source_aware_policy_config.source_aware_reject_extreme =
+      boolOrDefault(kv,
+                    "source_aware_reject_extreme",
+                    options.source_aware_policy_config.source_aware_reject_extreme);
+  options.source_aware_policy_config.source_aware_no_R_shrink =
+      boolOrDefault(kv,
+                    "source_aware_no_R_shrink",
+                    options.source_aware_policy_config.source_aware_no_R_shrink);
+  options.source_aware_policy_config.source_aware_trace_enabled =
+      boolOrDefault(kv,
+                    "source_aware_trace_enabled",
+                    options.source_aware_policy_config.source_aware_trace_enabled);
+  const std::array<std::pair<source_aware::MeasurementSource, const char*>, source_aware::kMeasurementSourceCount>
+      source_keys{{
+          {source_aware::MeasurementSource::kReceiverPosition, "receiver_position"},
+          {source_aware::MeasurementSource::kReceiverVelocity, "receiver_velocity"},
+          {source_aware::MeasurementSource::kDualAntennaYaw, "dual_antenna_yaw"},
+          {source_aware::MeasurementSource::kRawDopplerVelocity, "raw_doppler_velocity"},
+      }};
+  for (const auto& item : source_keys) {
+    auto& source_config = options.source_aware_policy_config.sources[source_aware::sourceIndex(item.first)];
+    const std::string prefix = std::string("source_aware_") + item.second + "_";
+    source_config.enabled = boolOrDefault(kv, prefix + "enabled", source_config.enabled);
+    source_config.lsim_enabled = boolOrDefault(kv, prefix + "lsim_enabled", source_config.lsim_enabled);
+    source_config.oim_enabled = boolOrDefault(kv, prefix + "oim_enabled", source_config.oim_enabled);
+  }
+  options.lsim_oim = options.source_aware_policy_config.enable_source_aware_weighting &&
+                     options.source_aware_policy_config.source_aware_mode != "off";
   return options;
 }
 

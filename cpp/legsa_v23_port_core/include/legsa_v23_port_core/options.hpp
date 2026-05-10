@@ -8,6 +8,7 @@
 #pragma once
 
 #include "legsa_v23_port_core/factors/raw_doppler_types.hpp"
+#include "legsa_v23_port_core/source_aware/measurement_source.hpp"
 #include "legsa_v23_port_core/types.hpp"
 
 #include <string>
@@ -61,6 +62,9 @@ struct PortOptions {
   RawDopplerFactorStatus raw_doppler_status;
   bool go2_prior = false;
   bool lsim_oim = false;
+  // 中文说明：N6A source-aware LSIM/OIM 默认关闭；打开后只基于 solver 可见 metadata/innovation 放大 R。
+  source_aware::SourceAwarePolicyConfig source_aware_policy_config;
+  source_aware::SourceAwareRuntimeStats source_aware_runtime_stats;
   bool fgo = false;
   bool performance_claim = false;
   bool paper_performance_claim = false;

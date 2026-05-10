@@ -526,9 +526,23 @@ FGO.
 ## Stage N6A: Source-aware LSIM/OIM weighting foundation
 
 Goal:
-If N5D visual/stress evidence is ready, start the source-aware LSIM/OIM
-weighting foundation as a new stage. N6A must preserve N5D's diagnostic-only
-stress boundary and must not treat N5D stress results as paper performance.
+Implement source-aware LSIM/OIM weighting in the source-backed port-core EKF.
+N6A must apply solver-visible source metadata and innovation-based conservative
+R scaling for receiver position, receiver velocity, dual-antenna yaw, and raw
+Doppler velocity updates.
+
+N6A emits source-aware traces, clean/stress diagnostic ablations, spike-response
+sentinel reports, and a decision report. It does not use trace or final_v23
+output for weighting, does not shrink R below baseline, does not implement Go2
+priors or FGO, and does not make paper performance claims.
+
+## Stage N6B: Source-aware policy refinement or Go2 weak prior preparation
+
+Goal:
+If N6A evidence is weak or degraded, refine LSIM/OIM thresholds and source
+metadata handling while preserving no-trace/no-output-correction boundaries. If
+N6A is ready, prepare the Go2 weak-prior foundation without merging policy
+refinement into a paper claim.
 
 ## Stage N6: Source-Aware Weighting
 

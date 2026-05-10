@@ -67,6 +67,13 @@ void copyRawDopplerStatus(const GIEngine& engine, PortOptions& options) {
   options.raw_doppler = options.raw_doppler_status.update_count > 0;
 }
 
+void copySourceAwareStatus(const GIEngine& engine, PortOptions& options) {
+  // 中文说明：source-aware stats 来自 EKFUpdate 前的 R scale trace；不是评价结果反向调参。
+  options.source_aware_runtime_stats = engine.sourceAwareStats();
+  options.lsim_oim = options.source_aware_policy_config.enable_source_aware_weighting &&
+                     options.source_aware_policy_config.source_aware_mode != "off";
+}
+
 std::vector<double> readFirstColumnTimes(const std::string& path) {
   std::ifstream input(path);
   std::vector<double> times;
@@ -454,6 +461,104 @@ void PortRuntime::runRawDopplerToy(const std::string& output_dir) {
   writeAll(output_dir, options, states, covariances);
 }
 
+// 中文说明：N6A toy 同时覆盖 position/velocity/yaw/raw Doppler 四类观测源，
+// 用于证明 source-aware R inflation 真实进入 EKFUpdate 前的 R 矩阵。
+void PortRuntime::runSourceAwareToy(const std::string& output_dir) {
+  PortOptions options;
+  options.phase = "N6A";
+  options.port_role = "source_aware_lsim_oim_weighting_toy";
+  options.run_label = "N6A_source_aware_toy";
+  options.starttime = 0.0;
+  options.init_pos_blh_rad_m = makeVec3(Earth::degToRad(30.0), Earth::degToRad(120.0), 10.0);
+  options.init_vel_ned_mps = makeVec3(0.2, 0.0, 0.0);
+  options.init_att_rad = makeVec3(0.0, 0.0, Earth::degToRad(5.0));
+  options.raw_doppler_factor_code_present = true;
+  options.raw_doppler_config.enable_raw_doppler = true;
+  options.raw_doppler_config.raw_doppler_solver_enabled = true;
+  options.raw_doppler_config.raw_doppler_min_sat = 5;
+  options.raw_doppler_config.raw_doppler_residual_gate_mps = 3.0;
+  options.raw_doppler_config.raw_doppler_factor_source = "SYNTHETIC_RAW_DOPPLER_TOY";
+  options.source_aware_policy_config.enable_source_aware_weighting = true;
+  options.source_aware_policy_config.source_aware_mode = "lsim_oim";
+  options.source_aware_policy_config.source_aware_max_R_scale = 25.0;
+  options.source_aware_policy_config.source_aware_no_R_shrink = true;
+  options.source_aware_policy_config.source_aware_trace_enabled = true;
+  options.lsim_oim = true;
+  options.paper_performance_claim = false;
+  options.proposed_factor_claim = false;
+
+  std::vector<RawDopplerVelocityMeasurement> raw_measurements;
+  for (double time : {0.5, 0.6}) {
+    RawDopplerVelocityMeasurement raw;
+    raw.time = time;
+    raw.velocity_ned_mps = time < 0.55 ? options.init_vel_ned_mps : makeVec3(4.2, -2.8, 0.0);
+    raw.std_ned_mps = makeVec3(0.05, 0.05, 0.05);
+    raw.sat_count = 8;
+    raw.gdop_like = 1.5;
+    raw.provider_status = "available";
+    raw_measurements.push_back(raw);
+  }
+  RawDopplerFactorStatus raw_status;
+  raw_status.solver_enabled = true;
+  raw_status.provider_status = "available";
+  raw_status.epoch_count = raw_measurements.size();
+  raw_status.valid_epoch_count = raw_measurements.size();
+  raw_status.factor_source = "SYNTHETIC_RAW_DOPPLER_TOY";
+
+  GIEngine engine(options);
+  engine.setRawDopplerVelocityMeasurements(raw_measurements, raw_status);
+  engine.initialize(makeInitialState(options));
+  std::vector<NavState> states;
+  std::vector<std::vector<double>> covariances;
+  appendState(engine, states, covariances);
+
+  ImuData first;
+  first.time = 0.0;
+  first.dt = 0.01;
+  engine.addImuData(first, true);
+  for (int i = 1; i <= 80; ++i) {
+    ImuData imu;
+    imu.time = 0.01 * static_cast<double>(i);
+    imu.dt = 0.01;
+    imu.dtheta = makeVec3(0.0, 0.0, 0.0);
+    imu.dvel = makeVec3(0.0, 0.0, -Earth::gravity(options.init_pos_blh_rad_m) * imu.dt);
+    if (i == 50 || i == 60) {
+      GnssData gnss;
+      gnss.time = imu.time;
+      gnss.blh_rad_m = engine.navState().pos_blh_rad_m;
+      gnss.std_ned_m = i == 60 ? makeVec3(8.0, 8.0, 10.0) : makeVec3(0.5, 0.5, 0.8);
+      gnss.vel_ned_mps = i == 60 ? makeVec3(2.5, -1.5, 0.2) : engine.navState().vel_ned_mps;
+      gnss.vel_std_mps = i == 60 ? makeVec3(1.0, 1.0, 1.0) : makeVec3(0.1, 0.1, 0.1);
+      gnss.yaw_rad = i == 60 ? engine.navState().euler_rad[2] + Earth::degToRad(8.0)
+                              : engine.navState().euler_rad[2];
+      gnss.yaw_deg = Earth::radToDeg(gnss.yaw_rad);
+      gnss.yaw_std_rad = i == 60 ? Earth::degToRad(4.0) : Earth::degToRad(1.0);
+      gnss.yaw_std_deg = Earth::radToDeg(gnss.yaw_std_rad);
+      gnss.isvalid = true;
+      engine.addGnssData(gnss);
+    }
+    engine.addImuData(imu);
+    engine.newImuProcess();
+    if (!engine.checkCov()) {
+      throw std::runtime_error("source-aware toy covariance check failed");
+    }
+    appendState(engine, states, covariances);
+  }
+
+  copyRawDopplerStatus(engine, options);
+  copySourceAwareStatus(engine, options);
+  options.propagation_count = engine.propagationCount();
+  options.measurement_update_count = engine.updateCount();
+  options.position_update_count = engine.positionUpdateCount();
+  options.velocity_update_count = engine.velocityUpdateCount();
+  options.yaw_update_count = engine.yawUpdateCount();
+  options.yaw_normal_count = engine.yawNormalCount();
+  options.yaw_downweight_count = engine.yawDownweightCount();
+  options.yaw_reject_count = engine.yawRejectCount();
+  writeAll(output_dir, options, states, covariances);
+  engine.writeSourceAwareTrace(output_dir);
+}
+
 // 中文说明：真实输入 runner 只建立 R2 运行链路；R3 才允许 clean replay parity 判定。
 void PortRuntime::runFromConfig(const std::string& config_path, const std::string& output_dir) {
   PortRuntimeDebugOptions debug_options;
@@ -483,6 +588,13 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   options.debug_covariance_gain_enabled = debug_options.covariance_gain;
   options.runtime_loop_fix_applied = true;
   options.source_backed_runtime_loop_fix = true;
+  if (options.source_aware_policy_config.enable_source_aware_weighting) {
+    // 中文说明：N6A 是在 source-backed port-core 上真实启用 LSIM/OIM R scaling 的诊断阶段。
+    options.phase = "N6A";
+    options.port_role = "source_aware_lsim_oim_weighting";
+    options.run_label = options.ablation_variant.empty() ? "N6A_source_aware_run" : options.ablation_variant;
+    options.lsim_oim = true;
+  }
   if (options.imu_path.empty() || options.gnss_path.empty()) {
     throw std::runtime_error("config must provide imu_path/imupath and gnss_path/gnsspath");
   }
@@ -655,6 +767,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   options.yaw_downweight_count = engine.yawDownweightCount();
   options.yaw_reject_count = engine.yawRejectCount();
   copyRawDopplerStatus(engine, options);
+  copySourceAwareStatus(engine, options);
   options.actual_update_count = engine.updateCount();
   options.update_count_ratio =
       options.expected_update_count == 0
@@ -678,6 +791,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
                            debug_options.max_rows);
   }
   writeAll(output_dir, options, states, covariances);
+  engine.writeSourceAwareTrace(output_dir);
 }
 
 }  // namespace legsa_v23_port_core
