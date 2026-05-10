@@ -155,6 +155,20 @@ Allowed N4H4R3C metric namespace statement:
 - Metric gate pass alone is insufficient without namespace clarity.
 - N4H4R3C reports are engineering backbone diagnostics only.
 
+Allowed N4H4E visual validation statement:
+
+- N4H4E may generate source-backed-port visual validation figures and reports
+  for engineering review only.
+- N4H4E visual validation is engineering evidence only.
+- N4H4E may compare source-backed port, dual_final_v23, and evaluation
+  reference roles.
+- Figures are runtime-only and are not committed.
+- Manual visual review is required before N5.
+- No paper performance claim.
+- No outperform final_v23 claim.
+- No proposed factor claim.
+- No raw Doppler, Go2 prior, LSIM/OIM, source-aware weighting, or FGO claim.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -293,6 +307,13 @@ Do not claim:
 - N4H4R3C as outperforming final_v23.
 - N4H4R3C as a proposed factor claim.
 - N4H4R3C output-only correction, tuning, or epoch deletion.
+- N4H4E visual validation as a paper performance claim.
+- N4H4E visual validation as outperforming final_v23.
+- N4H4E visual validation as a proposed factor claim.
+- N4H4E figures as committed repository artifacts.
+- N4H4E pure INS or single-antenna comparison plots.
+- N4H4E enabling raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting,
+  FGO, output-only correction, tuning, or epoch deletion.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 

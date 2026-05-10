@@ -406,8 +406,13 @@ claim.
 ## Stage N4H4E: Visual validation for source-backed port
 
 Goal:
-If N4H4R3 passes, prepare visual validation for the source-backed port while
-preserving that the ported backbone is not novelty.
+Generate runtime-only visual validation figures and reports for source-backed
+port-core clean replay results.
+
+N4H4E plots only source-backed port, dual_final_v23, and evaluation reference
+roles. It does not draw pure INS or single-antenna comparisons, does not commit
+generated figures, does not add raw Doppler, Go2, LSIM/OIM, source-aware
+weighting, or FGO factors, and does not make a paper performance claim.
 
 ## Stage N4H4R3A: Update timeline and overlap parity audit
 
@@ -439,10 +444,11 @@ port-vs-final_v23 parity metrics from being compared directly with absolute
 trace/reference metrics. R3C does not modify solver logic, tune, delete epochs,
 perform output-only correction, add factors, or make a paper performance claim.
 
-## Stage N5: Raw Doppler Factor
+## Stage N5: Raw Doppler factor foundation
 
 Goal:
-Implement raw Doppler auxiliary residual and sign/unit tests.
+Begin raw Doppler factor foundation only after N4H4E visual validation and
+manual visual review support moving forward.
 
 ## Stage N6: Source-Aware Weighting
 
