@@ -672,3 +672,23 @@ If evidence is missing, write:
 evidence_missing
 
 Do not invent evidence.
+
+## N5B Raw Doppler Boundary
+
+N5B aims to activate raw Doppler in EKF using RTKLIB-derived Doppler velocity factors.
+
+RTKLIB position solution must not be used as LegSA solver input.
+
+`raw_doppler_update_count > 0` is required for activation.
+
+Diagnostic delta is not paper performance.
+
+No final_v23 output solver input.
+
+No trace solver input.
+
+No NAV-PVT velocity as raw Doppler.
+
+No `.gnss vn/ve/vd` as raw Doppler.
+
+No LSIM/OIM, Go2 prior, or FGO claim in N5B.

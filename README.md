@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N4H4E1 STD unit and visual validation fix.
+N5A raw Doppler activation path with provider blocker.
 
 Current working phase:
 
-N5A RTKLIB-backed raw Doppler auxiliary factor activation.
+N5B RTKLIB Doppler velocity provider and real activation.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 

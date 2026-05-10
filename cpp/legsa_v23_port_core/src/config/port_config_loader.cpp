@@ -109,7 +109,16 @@ std::string stringOrDefault(const std::unordered_map<std::string, std::string>& 
                             const std::string& key,
                             const std::string& fallback) {
   auto it = kv.find(key);
-  return it == kv.end() ? fallback : trim(it->second);
+  if (it == kv.end()) {
+    return fallback;
+  }
+  std::string value = trim(it->second);
+  // 中文说明：runtime yaml-like 配置可能给路径加引号；去掉外层引号后再打开文件。
+  if (value.size() >= 2 && ((value.front() == '"' && value.back() == '"') ||
+                            (value.front() == '\'' && value.back() == '\''))) {
+    value = value.substr(1, value.size() - 2);
+  }
+  return value;
 }
 
 std::unordered_map<std::string, std::string> readKeyValues(const std::string& path) {
@@ -199,6 +208,8 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       boolOrDefault(kv, "enable_raw_doppler", options.raw_doppler_config.enable_raw_doppler);
   options.raw_doppler_config.raw_doppler_factor_path =
       stringOrDefault(kv, "raw_doppler_factor_path", options.raw_doppler_config.raw_doppler_factor_path);
+  options.raw_doppler_config.raw_doppler_factor_source =
+      stringOrDefault(kv, "raw_doppler_factor_source", options.raw_doppler_config.raw_doppler_factor_source);
   options.raw_doppler_config.raw_doppler_time_tolerance_sec =
       scalarOrDefault(kv, "raw_doppler_time_tolerance_sec",
                       options.raw_doppler_config.raw_doppler_time_tolerance_sec);
