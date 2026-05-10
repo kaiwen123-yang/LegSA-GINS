@@ -45,7 +45,8 @@
 | N5 raw Doppler factor foundation | stage/N5-raw-doppler-factor | in_progress | yes | no | Doppler factor foundation | entered through N5A after N4H4E1 merge/tag; no N5 tag |
 | N5A RTKLIB-backed raw Doppler auxiliary factor activation | stage/N5A-raw-doppler-factor-activation | done | yes | no | raw Doppler factor path + readiness trial | first proposed factor integration attempt; RAWX/RTKLIB/ephemeris/provider gated; provider missing blocks real activation; PR #21 remains evidence branch |
 | N5B RTKLIB Doppler velocity provider and real activation | stage/N5B-rtklib-doppler-provider-activation | done | yes | no | RTKLIB Doppler provider + activation decision | N5A done with real activation blocked by missing satellite-state export; N5B builds helper/provider and records completed activation or concrete blocker; PR #21 remains evidence branch |
-| N5C raw Doppler ablation protocol or provider blocker follow-up | stage/N5C-raw-doppler-ablation-or-blocker-followup | not_started | yes | no | ablation protocol or blocker fix | starts only after N5B activation decision; no N5B tag |
+| N5C raw Doppler ablation protocol | stage/N5C-raw-doppler-ablation-protocol | done | yes | no | raw Doppler ablation decision | N5B done with raw_doppler_update_count=274; N5C runs diagnostic ablation only; PR #21 remains evidence branch |
+| N5D raw Doppler visual validation / noise model follow-up | stage/N5D-raw-doppler-followup | not_started | yes | no | visual validation or bounded blocker fix | selected by N5C decision; no N5C tag |
 | N6 source-aware weighting / Go2 weak priors | stage/N6-source-aware-weighting | not_started | yes | no | weighting module | no trace tuning |
 | N7 no-feedback smoother | stage/N7-no-feedback-smoother | not_started | yes | no | fixed-lag smoother | no feedback |
 

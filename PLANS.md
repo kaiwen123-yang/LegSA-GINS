@@ -488,12 +488,23 @@ Activation requires `raw_doppler_update_count > 0`. RTKLIB position solution,
 NAV-PVT velocity, `.gnss vn/ve/vd`, trace, and final_v23 output cannot be solver
 input.
 
-## Stage N5C: Raw Doppler ablation protocol or provider blocker follow-up
+## Stage N5C: Raw Doppler ablation protocol
 
 Goal:
-If N5B reaches real activation, define the raw Doppler ablation protocol. If
-N5B is blocked, resolve the concrete helper/provider/time-alignment/covariance
-blocker before any ablation or performance claim.
+After N5B real activation, run a controlled ablation protocol that separates the
+baseline receiver-native velocity factor, the raw Doppler auxiliary velocity
+factor, diagnostic velocity-isolation variants, and R-scale diagnostic screen.
+
+N5C is diagnostic engineering evidence only. It does not tune from trace, delete
+epochs, perform output-only correction, claim paper performance, or claim
+outperforming final_v23.
+
+## Stage N5D: Raw Doppler visual validation / noise model follow-up
+
+Goal:
+Continue from the N5C decision: visual validation and stress protocol if ready,
+or a bounded time-alignment, source-integrity, noise-model, or gating follow-up
+if the diagnostic ablation exposes a blocker.
 
 ## Stage N6: Source-Aware Weighting
 
