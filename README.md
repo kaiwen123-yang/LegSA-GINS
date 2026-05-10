@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N5B RTKLIB Doppler velocity provider and real activation.
+N5C raw Doppler ablation protocol.
 
 Current working phase:
 
-N5C raw Doppler ablation protocol.
+N5D raw Doppler visual validation and velocity-stress protocol.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -161,10 +161,10 @@ proposed factors, and does not make performance claims. The old
 `cpp/legsa_v23_core` remains a diagnostic/self-written attempt.
 
 Current completed phase:
-N4H4E1 STD unit and visual validation fix.
+N5C raw Doppler ablation protocol.
 
 Current working phase:
-N5A RTKLIB-backed raw Doppler auxiliary factor activation.
+N5D raw Doppler visual validation and velocity-stress protocol.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,
@@ -195,6 +195,20 @@ auxiliary velocity-factor path. NAV-PVT velocity is not raw Doppler, `.gnss`
 `vn/ve/vd` remains baseline receiver-native velocity, and provider-missing
 evidence blocks real activation instead of being reported as an applied factor.
 N5A makes no paper performance claim and no outperform final_v23 claim.
+
+N5B builds the runtime-only RTKLIB Doppler velocity provider and activates the
+raw Doppler auxiliary velocity factor in the source-backed EKF. N5B keeps
+NAV-PVT velocity, `.gnss` velocity, RTKLIB position solutions, trace, and
+final_v23 outputs out of solver-input roles.
+
+N5C runs diagnostic ablation for clean baseline, baseline plus raw Doppler,
+velocity-isolation variants, and R-scale screens. N5C is engineering evidence
+only and does not make paper performance or outperform-final_v23 claims.
+
+N5D adds raw Doppler visual validation and receiver-native velocity stress
+protocols. Receiver velocity stress variants are diagnostic-only; R-scale and
+STD-scale screens are not tuning claims; N5D does not implement LSIM/OIM,
+source-aware weighting, Go2 priors, or FGO.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace

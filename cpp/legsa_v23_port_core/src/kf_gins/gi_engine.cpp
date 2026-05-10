@@ -192,15 +192,16 @@ void GIEngine::gnssUpdate() {
   gnssUpdate(gnssdata_);
 }
 
-// 中文说明：GNSS update 顺序为 position、receiver-native velocity、yaw；N5C 可关闭 receiver velocity
-// 仅用于诊断隔离，raw Doppler velocity 仍是另一类卫星级 Doppler 衍生观测。
+// 中文说明：GNSS update 顺序为 position、receiver-native velocity、yaw；N5D velocity stress
+// 只用于诊断 raw Doppler 独立约束能力，不代表真实传感器故障模型，也不作为论文性能结果。
 void GIEngine::gnssUpdate(GnssData& gnss) {
   if (!gnss.isvalid) {
     return;
   }
   applyPositionUpdate(gnss);
-  if (gnss.has_velocity && options_.enable_receiver_velocity_update) {
-    applyVelocityUpdate(gnss);
+  if (gnss.has_velocity && receiverVelocityUpdateEnabledForTime(gnss.time)) {
+    GnssData stressed_gnss = receiverVelocityStressView(gnss);
+    applyVelocityUpdate(stressed_gnss);
   }
   if (gnss.has_yaw && options_.yaw_scheme_C_enabled) {
     applyYawUpdate(gnss);
@@ -468,6 +469,47 @@ void GIEngine::applyPositionUpdate(GnssData& gnss) {
   Matrix R = diagonalMatrix(cwiseProduct(positiveStd(gnss.std_ned_m, 1.0e-3), positiveStd(gnss.std_ned_m, 1.0e-3)));
   EKFUpdate(std::vector<double>{dz_vec[0], dz_vec[1], dz_vec[2]}, H, R);
   ++position_update_count_;
+}
+
+bool GIEngine::receiverVelocityUpdateEnabledForTime(double time) const {
+  if (!options_.enable_receiver_velocity_update) {
+    return false;
+  }
+  if (options_.receiver_velocity_stress_mode == "disabled") {
+    return false;
+  }
+  if (options_.receiver_velocity_stress_mode == "outage") {
+    const double start = options_.receiver_velocity_outage_start_sec;
+    const double end = start + std::max(0.0, options_.receiver_velocity_outage_duration_sec);
+    return !(time >= start && time <= end);
+  }
+  return true;
+}
+
+double GIEngine::deterministicVelocityNoise(double time, int axis) const {
+  const double std_mps = options_.receiver_velocity_additive_noise_std_mps;
+  if (std_mps <= 0.0) {
+    return 0.0;
+  }
+  const double seed = static_cast<double>(options_.receiver_velocity_additive_noise_seed + axis * 97);
+  const double raw = std::sin(time * 12.9898 + seed * 78.233) * 43758.5453;
+  const double frac = raw - std::floor(raw);
+  return (2.0 * frac - 1.0) * std_mps;
+}
+
+GnssData GIEngine::receiverVelocityStressView(const GnssData& gnss) const {
+  GnssData out = gnss;
+  if (options_.receiver_velocity_stress_mode == "std_scale") {
+    // 中文说明：STD scale 只降低 receiver-native velocity 权重以做诊断筛查，不是调参结论。
+    out.vel_std_mps = scale(out.vel_std_mps, std::max(1.0e-6, options_.receiver_velocity_std_scale));
+  } else if (options_.receiver_velocity_stress_mode == "additive_noise") {
+    // 中文说明：固定 seed 的 additive noise 是 stress protocol，不代表真实传感器故障模型。
+    out.vel_ned_mps = add(out.vel_ned_mps,
+                          makeVec3(deterministicVelocityNoise(gnss.time, 0),
+                                   deterministicVelocityNoise(gnss.time, 1),
+                                   deterministicVelocityNoise(gnss.time, 2)));
+  }
+  return out;
 }
 
 // 中文说明：velocity update 使用 antenna velocity - GNSS velocity；若 lever velocity evidence 缺失则保持保守项。

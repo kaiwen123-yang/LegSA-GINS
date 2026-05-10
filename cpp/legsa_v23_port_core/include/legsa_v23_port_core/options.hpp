@@ -44,6 +44,13 @@ struct PortOptions {
   bool output_only_correction = false;
   bool bad_epoch_deletion_for_metric = false;
   bool enable_receiver_velocity_update = true;
+  std::string receiver_velocity_stress_mode = "none";
+  double receiver_velocity_std_scale = 1.0;
+  double receiver_velocity_outage_start_sec = 0.0;
+  double receiver_velocity_outage_duration_sec = 0.0;
+  double receiver_velocity_additive_noise_std_mps = 0.0;
+  int receiver_velocity_additive_noise_seed = 20260510;
+  bool diagnostic_stress_only = false;
   bool diagnostic_only = false;
   bool no_outperform_final_v23_claim = true;
   std::string ablation_variant = "baseline_full";

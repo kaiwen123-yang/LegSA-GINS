@@ -499,12 +499,23 @@ N5C is diagnostic engineering evidence only. It does not tune from trace, delete
 epochs, perform output-only correction, claim paper performance, or claim
 outperforming final_v23.
 
-## Stage N5D: Raw Doppler visual validation / noise model follow-up
+## Stage N5D: Raw Doppler visual validation and velocity-stress protocol
 
 Goal:
-Continue from the N5C decision: visual validation and stress protocol if ready,
-or a bounded time-alignment, source-integrity, noise-model, or gating follow-up
-if the diagnostic ablation exposes a blocker.
+Continue from the N5C ablation-ready decision by adding raw Doppler factor
+visual validation, receiver-native velocity stress variants, diagnostic-only
+stress comparisons, visual sanity checks, and a next-stage decision report.
+
+N5D does not delete epochs, tune from trace, perform output-only correction,
+claim paper performance, claim outperforming final_v23, implement Go2 priors,
+implement LSIM/OIM, implement source-aware weighting, or implement FGO.
+
+## Stage N6A: Source-aware LSIM/OIM weighting foundation
+
+Goal:
+If N5D visual/stress evidence is ready, start the source-aware LSIM/OIM
+weighting foundation as a new stage. N6A must preserve N5D's diagnostic-only
+stress boundary and must not treat N5D stress results as paper performance.
 
 ## Stage N6: Source-Aware Weighting
 
