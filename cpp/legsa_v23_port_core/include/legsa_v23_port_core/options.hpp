@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "legsa_v23_port_core/factors/raw_doppler_types.hpp"
 #include "legsa_v23_port_core/types.hpp"
 
 #include <string>
@@ -43,6 +44,10 @@ struct PortOptions {
   bool output_only_correction = false;
   bool bad_epoch_deletion_for_metric = false;
   bool raw_doppler = false;
+  bool raw_doppler_factor_code_present = false;
+  bool raw_doppler_toy_factor_applied = false;
+  RawDopplerFactorConfig raw_doppler_config;
+  RawDopplerFactorStatus raw_doppler_status;
   bool go2_prior = false;
   bool lsim_oim = false;
   bool fgo = false;

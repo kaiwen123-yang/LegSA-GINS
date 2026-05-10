@@ -462,6 +462,28 @@ Goal:
 Begin raw Doppler factor foundation only after N4H4E visual validation and
 manual visual review support moving forward.
 
+## Stage N5A: RTKLIB-backed raw Doppler auxiliary factor activation
+
+Goal:
+Activate the first proposed factor after backbone parity: a RAWX doMes based
+raw-Doppler-derived velocity auxiliary factor with RTKLIB/ephemeris discovery,
+provider readiness gates, C++ EKF integration, toy activation, and real
+diagnostic trial boundary reporting.
+
+Boundaries:
+NAV-PVT velocity is not raw Doppler. `.gnss vn/ve/vd` remains baseline
+receiver-native velocity. RAWX plus satellite-state provider is required. If
+provider is missing, raw Doppler must not be reported as applied. No trace
+solver input, no final_v23 output solver input, no LSIM/OIM, no Go2 prior, no
+FGO, and no paper performance claim.
+
+## Stage N5B: Raw Doppler ablation or satellite-state provider fix
+
+Goal:
+If N5A provider is available, run raw Doppler ablation and diagnostic replay.
+If N5A blocks on satellite-state export, build or bind the RTKLIB-backed
+satellite-state provider needed before real activation can be claimed.
+
 ## Stage N6: Source-Aware Weighting
 
 Goal:

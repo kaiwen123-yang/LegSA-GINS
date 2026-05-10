@@ -89,6 +89,22 @@ double scalarOrDefault(const std::unordered_map<std::string, std::string>& kv, c
   return value;
 }
 
+bool boolOrDefault(const std::unordered_map<std::string, std::string>& kv, const std::string& key, bool fallback) {
+  auto it = kv.find(key);
+  if (it == kv.end()) {
+    return fallback;
+  }
+  std::string value = trim(it->second);
+  std::transform(value.begin(), value.end(), value.begin(), [](unsigned char ch) { return std::tolower(ch); });
+  if (value == "true" || value == "1" || value == "yes" || value == "on") {
+    return true;
+  }
+  if (value == "false" || value == "0" || value == "no" || value == "off") {
+    return false;
+  }
+  return fallback;
+}
+
 std::string stringOrDefault(const std::unordered_map<std::string, std::string>& kv,
                             const std::string& key,
                             const std::string& fallback) {
@@ -178,6 +194,24 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   options.endtime = scalarOrDefault(kv, "endtime", options.endtime);
   options.imudatalen = static_cast<int>(scalarOrDefault(kv, "imudatalen", options.imudatalen));
   options.imudatarate = scalarOrDefault(kv, "imudatarate", options.imudatarate);
+  // 中文说明：raw Doppler 默认关闭；只有 runtime config 明确启用且 provider-backed CSV 有效时才进入 EKF。
+  options.raw_doppler_config.enable_raw_doppler =
+      boolOrDefault(kv, "enable_raw_doppler", options.raw_doppler_config.enable_raw_doppler);
+  options.raw_doppler_config.raw_doppler_factor_path =
+      stringOrDefault(kv, "raw_doppler_factor_path", options.raw_doppler_config.raw_doppler_factor_path);
+  options.raw_doppler_config.raw_doppler_time_tolerance_sec =
+      scalarOrDefault(kv, "raw_doppler_time_tolerance_sec",
+                      options.raw_doppler_config.raw_doppler_time_tolerance_sec);
+  options.raw_doppler_config.raw_doppler_min_sat =
+      static_cast<std::size_t>(std::max(0.0, scalarOrDefault(kv, "raw_doppler_min_sat",
+                                                             static_cast<double>(options.raw_doppler_config.raw_doppler_min_sat))));
+  options.raw_doppler_config.raw_doppler_residual_gate_mps =
+      scalarOrDefault(kv, "raw_doppler_residual_gate_mps",
+                      options.raw_doppler_config.raw_doppler_residual_gate_mps);
+  options.raw_doppler_config.raw_doppler_R_scale =
+      scalarOrDefault(kv, "raw_doppler_R_scale", options.raw_doppler_config.raw_doppler_R_scale);
+  options.raw_doppler_config.raw_doppler_mode =
+      stringOrDefault(kv, "raw_doppler_mode", options.raw_doppler_config.raw_doppler_mode);
   return options;
 }
 

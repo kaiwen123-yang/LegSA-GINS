@@ -9,6 +9,7 @@
 
 #include "legsa_v23_port_core/common/earth.hpp"
 #include "legsa_v23_port_core/common/rotation.hpp"
+#include "legsa_v23_port_core/factors/raw_doppler_factor.hpp"
 #include "legsa_v23_port_core/kf_gins/insmech.hpp"
 
 #include <algorithm>
@@ -72,6 +73,21 @@ void GIEngine::initialize(const NavState& initial_state) {
   initializeCovariance();
   zeroVector(dx_);
   initialized_ = true;
+}
+
+// 中文说明：raw Doppler velocity measurements 必须来自 RAWX+satellite-state provider，
+// 不能来自 NAV-PVT velocity、.gnss vn/ve/vd、trace 或 final_v23 输出。
+void GIEngine::setRawDopplerVelocityMeasurements(const std::vector<RawDopplerVelocityMeasurement>& measurements,
+                                                 const RawDopplerFactorStatus& status) {
+  raw_doppler_measurements_ = measurements;
+  raw_doppler_status_ = status;
+  raw_doppler_status_.code_present = true;
+  raw_doppler_status_.epoch_count = measurements.size();
+  raw_doppler_status_.solver_enabled =
+      options_.raw_doppler_config.enable_raw_doppler && status.solver_enabled && status.provider_status == "available";
+  if (!raw_doppler_status_.solver_enabled && raw_doppler_status_.provider_status.empty()) {
+    raw_doppler_status_.provider_status = "provider_missing_sat_state_export";
+  }
 }
 
 // 中文说明：addImuData 保持 reference 的 imupre/imucur 滚动缓冲；首帧可选择预补偿。
@@ -179,6 +195,8 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
   if (gnss.has_yaw && options_.yaw_scheme_C_enabled) {
     applyYawUpdate(gnss);
   }
+  // 中文说明：raw Doppler auxiliary velocity factor 与 GNSS epoch 对齐，并在 stateFeedback 前进入 EKF。
+  applyRawDopplerUpdateForTime(gnss.time);
   gnss.isvalid = false;
   ++update_count_;
 }
@@ -328,6 +346,38 @@ std::size_t GIEngine::yawRejectCount() const {
   return yaw_reject_count_;
 }
 
+std::size_t GIEngine::rawDopplerUpdateCount() const {
+  return raw_doppler_status_.update_count;
+}
+
+std::size_t GIEngine::rawDopplerRejectCount() const {
+  return raw_doppler_status_.reject_count;
+}
+
+std::size_t GIEngine::rawDopplerEpochCount() const {
+  return raw_doppler_status_.epoch_count;
+}
+
+std::size_t GIEngine::rawDopplerSatCountMin() const {
+  return raw_doppler_status_.sat_count_min;
+}
+
+std::size_t GIEngine::rawDopplerSatCountMedian() const {
+  return raw_doppler_status_.sat_count_median;
+}
+
+std::size_t GIEngine::rawDopplerSatCountMax() const {
+  return raw_doppler_status_.sat_count_max;
+}
+
+double GIEngine::rawDopplerResidualP95() const {
+  return raw_doppler_status_.residual_p95_mps;
+}
+
+RawDopplerFactorStatus GIEngine::rawDopplerStatus() const {
+  return raw_doppler_status_;
+}
+
 void GIEngine::initializeCovariance() {
   Cov_ = Matrix(RANK, RANK, 0.0);
   setDiagonalBlock(Cov_, P_ID, positiveStd(options_.init_pos_std_m, 1.0e-6));
@@ -448,6 +498,63 @@ void GIEngine::applyYawUpdate(GnssData& gnss) {
   H(0, PHI_ID + 2) = -1.0;
   Matrix R(1, 1, scale_value * yaw_std * yaw_std);
   EKFUpdate(std::vector<double>{residual}, H, R);
+}
+
+void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
+  if (!options_.raw_doppler_config.enable_raw_doppler || !raw_doppler_status_.solver_enabled) {
+    return;
+  }
+  const RawDopplerVelocityMeasurement* best = nullptr;
+  double best_dt = options_.raw_doppler_config.raw_doppler_time_tolerance_sec;
+  for (const auto& measurement : raw_doppler_measurements_) {
+    const double dt = std::fabs(measurement.time - update_time);
+    if (dt <= best_dt) {
+      best = &measurement;
+      best_dt = dt;
+    }
+  }
+  if (!best) {
+    return;
+  }
+  if (!RawDopplerFactor::isProviderBacked(*best) || best->sat_count < options_.raw_doppler_config.raw_doppler_min_sat) {
+    ++raw_doppler_status_.reject_count;
+    return;
+  }
+  const Vec3 residual_vec = subtract(pvacur_.vel_ned_mps, best->velocity_ned_mps);
+  const double residual = norm(residual_vec);
+  if (residual > options_.raw_doppler_config.raw_doppler_residual_gate_mps) {
+    ++raw_doppler_status_.reject_count;
+    raw_doppler_residual_norms_.push_back(residual);
+    return;
+  }
+  Matrix H(3, RANK, 0.0);
+  setBlockIdentity(H, 0, V_ID);
+  const Vec3 stdv = RawDopplerFactor::positiveStd(*best);
+  Matrix R = diagonalMatrix(scale(cwiseProduct(stdv, stdv), options_.raw_doppler_config.raw_doppler_R_scale));
+  // 中文说明：dz = nav.vel - raw_doppler_velocity_ned，与现有 receiver-native velocity residual 同号。
+  EKFUpdate(std::vector<double>{residual_vec[0], residual_vec[1], residual_vec[2]}, H, R);
+  raw_doppler_residual_norms_.push_back(residual);
+  ++raw_doppler_status_.update_count;
+  if (raw_doppler_status_.sat_count_min == 0 || best->sat_count < raw_doppler_status_.sat_count_min) {
+    raw_doppler_status_.sat_count_min = best->sat_count;
+  }
+  raw_doppler_status_.sat_count_max = std::max(raw_doppler_status_.sat_count_max, best->sat_count);
+  std::vector<std::size_t> sat_counts;
+  for (const auto& measurement : raw_doppler_measurements_) {
+    if (measurement.provider_status == "available" && measurement.sat_count >= options_.raw_doppler_config.raw_doppler_min_sat) {
+      sat_counts.push_back(measurement.sat_count);
+    }
+  }
+  if (!sat_counts.empty()) {
+    std::sort(sat_counts.begin(), sat_counts.end());
+    raw_doppler_status_.sat_count_median = sat_counts[sat_counts.size() / 2];
+  }
+  if (!raw_doppler_residual_norms_.empty()) {
+    std::vector<double> sorted = raw_doppler_residual_norms_;
+    std::sort(sorted.begin(), sorted.end());
+    const std::size_t index = static_cast<std::size_t>(0.95 * static_cast<double>(sorted.size() - 1));
+    raw_doppler_status_.residual_p95_mps = sorted[index];
+  }
 }
 
 double GIEngine::wrapYawResidual(double residual_rad) const {

@@ -182,6 +182,21 @@ Allowed N4H4E1 STD/plot fix statement:
 - No outperform final_v23 claim.
 - No proposed factor claim.
 
+Allowed N5A raw Doppler activation statement:
+
+- N5A is the first proposed factor integration attempt after backbone parity.
+- Raw Doppler must be satellite-level Doppler, not NAV-PVT velocity.
+- `.gnss vn/ve/vd` remains baseline receiver-native velocity.
+- Raw Doppler solver activation requires RAWX and satellite-state provider.
+- RTKLIB is allowed as mature provider/tool but must be runtime-only.
+- If provider is missing, raw Doppler must not be reported as applied.
+- No trace solver input.
+- No final_v23 output solver input.
+- No output-only correction, no tuning, no epoch deletion.
+- No LSIM/OIM, Go2 prior, or FGO claim in N5A.
+- No paper performance claim.
+- Diagnostic trial is not paper performance.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -298,6 +313,12 @@ Do not claim:
 - N4H4C enabling raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting,
   FGO, FGO feedback, or Neural Gate.
 - N4H4C using trace as solver input.
+- N5A treating NAV-PVT velocity as raw Doppler.
+- N5A treating `.gnss vn/ve/vd` as raw Doppler.
+- N5A reporting raw Doppler applied when satellite-state provider is missing.
+- N5A using rnx2rtkp final positioning output as LegSA solver input.
+- N5A using trace or final_v23 output as solver input.
+- N5A making LSIM/OIM, Go2 prior, FGO, paper performance, or outperform final_v23 claims.
 - N4H4C relaxing yaw evaluator gates or deleting epochs to pass metrics.
 - N4H4B enabling raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting,
   FGO, FGO feedback, output-only correction, bad-epoch deletion, or trace

@@ -78,6 +78,11 @@ def _cpp_runtime_text(root: Path) -> str:
     chunks: list[str] = []
     for directory in [root / "cpp", root / "configs/proposed"]:
         for path in sorted(directory.rglob("*")):
+            rel_parts = path.relative_to(root).parts
+            # 中文说明：N3A scaffold 审计只检查原始 runtime scaffold；后续 N4H4/N5A port-core
+            # 可以实现真实 EKF/因子，但仍由各自阶段审计约束。
+            if "legsa_v23_port_core" in rel_parts or "legsa_v23_core" in rel_parts:
+                continue
             if path.is_file() and path.suffix in {".hpp", ".cpp", ".txt", ".yaml"}:
                 chunks.append(_read_text(path))
     return "\n".join(chunks)
