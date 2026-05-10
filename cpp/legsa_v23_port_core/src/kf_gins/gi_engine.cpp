@@ -68,6 +68,15 @@ double vectorNorm(const std::vector<double>& values) {
   return std::sqrt(sum);
 }
 
+double dotVector(const std::vector<double>& lhs, const std::vector<double>& rhs) {
+  const std::size_t n = std::min(lhs.size(), rhs.size());
+  double out = 0.0;
+  for (std::size_t i = 0; i < n; ++i) {
+    out += lhs[i] * rhs[i];
+  }
+  return out;
+}
+
 }  // namespace
 
 GIEngine::GIEngine(PortOptions options)
@@ -589,14 +598,12 @@ void GIEngine::applyYawUpdate(GnssData& gnss) {
   const double yaw_std = std::max(gnss.yaw_std_rad, options_.yaw_std_min_deg * D2R);
   const double residual = wrapYawResidual(yaw_pred - yaw_obs);
   const double abs_res = std::fabs(residual);
-  if (!options_.source_aware_policy_config.enable_source_aware_weighting &&
-      (yaw_std >= options_.yaw_std_hard_deg * D2R || abs_res >= options_.yaw_res_hard_deg * D2R)) {
+  if (yaw_std >= options_.yaw_std_hard_deg * D2R || abs_res >= options_.yaw_res_hard_deg * D2R) {
     ++yaw_reject_count_;
     return;
   }
   double scale_value = 1.0;
-  if (!options_.source_aware_policy_config.enable_source_aware_weighting &&
-      (yaw_std >= options_.yaw_std_soft_deg * D2R || abs_res >= options_.yaw_res_soft_deg * D2R)) {
+  if (yaw_std >= options_.yaw_std_soft_deg * D2R || abs_res >= options_.yaw_res_soft_deg * D2R) {
     scale_value = options_.yaw_downweight_scale;
     ++yaw_downweight_count_;
   } else {
@@ -715,9 +722,28 @@ source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(
   innovation.residual = dz;
   innovation.residual_norm = vectorNorm(dz);
   innovation.base_R_trace = matrixTrace(R);
-  innovation.hph_trace = matrixTrace(multiply(multiply(H, Cov_), transpose(H)));
-  innovation.normalized_innovation =
-      innovation.residual_norm / std::sqrt(std::max(1.0e-12, innovation.base_R_trace + innovation.hph_trace));
+  const Matrix hph = multiply(multiply(H, Cov_), transpose(H));
+  const Matrix innovation_covariance = add(hph, R);
+  innovation.hph_trace = matrixTrace(hph);
+  innovation.innovation_cov_trace = matrixTrace(innovation_covariance);
+  innovation.dof = dz.size();
+  // 中文说明：N6B OIM 使用创新协方差 S=H*P*H^T+R 计算 NIS；不从 trace 或评价结果取权重。
+  if (options_.source_aware_policy_config.source_aware_use_innovation_covariance && !dz.empty()) {
+    try {
+      const Matrix s_inv = inverse(innovation_covariance);
+      const std::vector<double> weighted_residual = multiply(s_inv, dz);
+      innovation.nis = std::max(0.0, dotVector(dz, weighted_residual));
+      innovation.normalized_innovation =
+          std::sqrt(std::max(0.0, innovation.nis / static_cast<double>(std::max<std::size_t>(1, innovation.dof))));
+      innovation.used_innovation_covariance = true;
+    } catch (const std::exception&) {
+      innovation.used_innovation_covariance = false;
+    }
+  }
+  if (!innovation.used_innovation_covariance) {
+    innovation.normalized_innovation =
+        innovation.residual_norm / std::sqrt(std::max(1.0e-12, innovation.base_R_trace + innovation.hph_trace));
+  }
   source_aware::SourceMetadata metadata_copy = metadata;
   metadata_copy.source = source;
   metadata_copy.residual_norm = innovation.residual_norm;

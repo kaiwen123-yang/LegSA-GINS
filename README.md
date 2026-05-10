@@ -42,7 +42,7 @@ N5D1 visual data coverage and raw Doppler spike audit.
 
 Current working phase:
 
-N6A source-aware LSIM/OIM weighting.
+N6B source-aware policy refinement.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -164,7 +164,7 @@ Current completed phase:
 N5D1 visual data coverage and raw Doppler spike audit.
 
 Current working phase:
-N6A source-aware LSIM/OIM weighting.
+N6B source-aware policy refinement.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,
@@ -223,6 +223,12 @@ updates, emits `SOURCE_AWARE_WEIGHT_TRACE.csv` as runtime-only evidence, and
 checks N5D1 spike sentinels after the run. N6A does not use trace or final_v23
 outputs for weighting, does not shrink R below baseline, does not implement Go2
 prior or FGO, and makes no paper performance or outperform-final_v23 claim.
+
+N6B refines the source-aware policy after N6A over-aggressive R scaling. OIM now
+uses innovation covariance `S=HPH^T+R` with a deadband and conservative
+per-source caps; LSIM is metadata-only. N6B remains diagnostic-only, does not
+use trace or final_v23 output for weights, does not hardcode spike times, does
+not shrink R, and does not implement Go2 prior or FGO.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace

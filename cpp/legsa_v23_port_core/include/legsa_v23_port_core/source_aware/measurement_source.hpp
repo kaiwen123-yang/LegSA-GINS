@@ -58,11 +58,16 @@ struct ObservationInnovation {
   double residual_norm = 0.0;
   double base_R_trace = 0.0;
   double hph_trace = 0.0;
+  double innovation_cov_trace = 0.0;
+  double nis = 0.0;
+  std::size_t dof = 0;
   double normalized_innovation = 0.0;
+  bool used_innovation_covariance = false;
 };
 
 struct SourceWeightResult {
   MeasurementSource source = MeasurementSource::kReceiverPosition;
+  std::string policy_version = "n6b_conservative_innovation_covariance";
   std::string mode = "off";
   double lsim_score = 1.0;
   double oim_score = 1.0;
@@ -71,6 +76,14 @@ struct SourceWeightResult {
   double combined_R_scale = 1.0;
   double residual_norm = 0.0;
   double normalized_innovation = 0.0;
+  double nis = 0.0;
+  std::size_t dof = 0;
+  double innovation_cov_trace = 0.0;
+  bool used_innovation_covariance = false;
+  double source_cap = 25.0;
+  double rolling_normalized_median = 0.0;
+  double rolling_normalized_mad = 0.0;
+  double relative_anomaly_score = 0.0;
   double base_R_trace = 0.0;
   double scaled_R_trace = 0.0;
   bool accepted = true;
@@ -87,15 +100,29 @@ struct SourceAwareSourceConfig {
 
 struct SourceAwarePolicyConfig {
   bool enable_source_aware_weighting = false;
+  std::string source_aware_policy_version = "n6b_conservative_innovation_covariance";
   std::string source_aware_mode = "off";
   double source_aware_max_R_scale = 25.0;
+  double source_aware_global_cap = 25.0;
+  bool source_aware_use_innovation_covariance = true;
+  double source_aware_deadband_normalized = 1.5;
+  double source_aware_moderate_normalized = 2.5;
+  double source_aware_strong_normalized = 4.0;
+  double source_aware_receiver_position_cap = 5.0;
+  double source_aware_receiver_velocity_cap = 8.0;
+  double source_aware_dual_yaw_cap = 10.0;
+  double source_aware_raw_doppler_cap = 15.0;
   bool source_aware_reject_extreme = false;
   bool source_aware_no_R_shrink = true;
   bool source_aware_trace_enabled = true;
+  bool source_aware_enable_rolling_innovation_baseline = true;
+  std::size_t source_aware_rolling_window_size = 31;
+  double source_aware_rolling_mad_floor = 0.5;
   std::array<SourceAwareSourceConfig, kMeasurementSourceCount> sources{};
 };
 
 struct SourceAwareRuntimeStats {
+  std::size_t trace_row_count = 0;
   std::array<std::size_t, kMeasurementSourceCount> update_count_by_source{};
   std::array<std::size_t, kMeasurementSourceCount> reject_count_by_source{};
   std::array<double, kMeasurementSourceCount> scale_p50_by_source{};

@@ -536,13 +536,20 @@ sentinel reports, and a decision report. It does not use trace or final_v23
 output for weighting, does not shrink R below baseline, does not implement Go2
 priors or FGO, and does not make paper performance claims.
 
-## Stage N6B: Source-aware policy refinement or Go2 weak prior preparation
+## Stage N6B: Source-aware policy refinement
 
 Goal:
-If N6A evidence is weak or degraded, refine LSIM/OIM thresholds and source
-metadata handling while preserving no-trace/no-output-correction boundaries. If
-N6A is ready, prepare the Go2 weak-prior foundation without merging policy
-refinement into a paper claim.
+Refine N6A over-aggressive LSIM/OIM R scaling while preserving real EKF
+activation. OIM must use innovation covariance `S=HPH^T+R`, LSIM must stay
+metadata-only, source caps must be conservative, N5D1 spike response must remain
+after-run audit only, and no paper performance claim is allowed.
+
+## Stage N7A: Go2 body-state weak prior foundation
+
+Goal:
+Open Go2 body-state weak-prior foundation only after N6B/N6C evidence is clean
+neutral enough to justify a new stage. N6B itself does not implement Go2 prior,
+FGO, smoothing, output-only correction, or performance claims.
 
 ## Stage N6: Source-Aware Weighting
 

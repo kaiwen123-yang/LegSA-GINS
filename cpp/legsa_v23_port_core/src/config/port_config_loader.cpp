@@ -254,12 +254,52 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       boolOrDefault(kv,
                     "enable_source_aware_weighting",
                     options.source_aware_policy_config.enable_source_aware_weighting);
+  options.source_aware_policy_config.source_aware_policy_version =
+      stringOrDefault(kv,
+                      "source_aware_policy_version",
+                      options.source_aware_policy_config.source_aware_policy_version);
   options.source_aware_policy_config.source_aware_mode =
       stringOrDefault(kv, "source_aware_mode", options.source_aware_policy_config.source_aware_mode);
   options.source_aware_policy_config.source_aware_max_R_scale =
       scalarOrDefault(kv,
                       "source_aware_max_R_scale",
                       options.source_aware_policy_config.source_aware_max_R_scale);
+  options.source_aware_policy_config.source_aware_global_cap =
+      scalarOrDefault(kv,
+                      "source_aware_global_cap",
+                      options.source_aware_policy_config.source_aware_max_R_scale);
+  options.source_aware_policy_config.source_aware_use_innovation_covariance =
+      boolOrDefault(kv,
+                    "source_aware_use_innovation_covariance",
+                    options.source_aware_policy_config.source_aware_use_innovation_covariance);
+  options.source_aware_policy_config.source_aware_deadband_normalized =
+      scalarOrDefault(kv,
+                      "source_aware_deadband_normalized",
+                      options.source_aware_policy_config.source_aware_deadband_normalized);
+  options.source_aware_policy_config.source_aware_moderate_normalized =
+      scalarOrDefault(kv,
+                      "source_aware_moderate_normalized",
+                      options.source_aware_policy_config.source_aware_moderate_normalized);
+  options.source_aware_policy_config.source_aware_strong_normalized =
+      scalarOrDefault(kv,
+                      "source_aware_strong_normalized",
+                      options.source_aware_policy_config.source_aware_strong_normalized);
+  options.source_aware_policy_config.source_aware_receiver_position_cap =
+      scalarOrDefault(kv,
+                      "source_aware_receiver_position_cap",
+                      options.source_aware_policy_config.source_aware_receiver_position_cap);
+  options.source_aware_policy_config.source_aware_receiver_velocity_cap =
+      scalarOrDefault(kv,
+                      "source_aware_receiver_velocity_cap",
+                      options.source_aware_policy_config.source_aware_receiver_velocity_cap);
+  options.source_aware_policy_config.source_aware_dual_yaw_cap =
+      scalarOrDefault(kv,
+                      "source_aware_dual_yaw_cap",
+                      options.source_aware_policy_config.source_aware_dual_yaw_cap);
+  options.source_aware_policy_config.source_aware_raw_doppler_cap =
+      scalarOrDefault(kv,
+                      "source_aware_raw_doppler_cap",
+                      options.source_aware_policy_config.source_aware_raw_doppler_cap);
   options.source_aware_policy_config.source_aware_reject_extreme =
       boolOrDefault(kv,
                     "source_aware_reject_extreme",
@@ -272,6 +312,18 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       boolOrDefault(kv,
                     "source_aware_trace_enabled",
                     options.source_aware_policy_config.source_aware_trace_enabled);
+  options.source_aware_policy_config.source_aware_enable_rolling_innovation_baseline =
+      boolOrDefault(kv,
+                    "source_aware_enable_rolling_innovation_baseline",
+                    options.source_aware_policy_config.source_aware_enable_rolling_innovation_baseline);
+  options.source_aware_policy_config.source_aware_rolling_window_size =
+      static_cast<std::size_t>(std::max(1.0, scalarOrDefault(kv,
+                                                             "source_aware_rolling_window_size",
+                                                             static_cast<double>(options.source_aware_policy_config.source_aware_rolling_window_size))));
+  options.source_aware_policy_config.source_aware_rolling_mad_floor =
+      scalarOrDefault(kv,
+                      "source_aware_rolling_mad_floor",
+                      options.source_aware_policy_config.source_aware_rolling_mad_floor);
   const std::array<std::pair<source_aware::MeasurementSource, const char*>, source_aware::kMeasurementSourceCount>
       source_keys{{
           {source_aware::MeasurementSource::kReceiverPosition, "receiver_position"},
