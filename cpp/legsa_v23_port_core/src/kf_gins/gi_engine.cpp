@@ -83,8 +83,17 @@ void GIEngine::setRawDopplerVelocityMeasurements(const std::vector<RawDopplerVel
   raw_doppler_status_ = status;
   raw_doppler_status_.code_present = true;
   raw_doppler_status_.epoch_count = measurements.size();
+  if (raw_doppler_status_.valid_epoch_count == 0) {
+    raw_doppler_status_.valid_epoch_count = static_cast<std::size_t>(std::count_if(
+        measurements.begin(), measurements.end(), [](const RawDopplerVelocityMeasurement& measurement) {
+          return measurement.provider_status == "available";
+        }));
+  }
   raw_doppler_status_.solver_enabled =
       options_.raw_doppler_config.enable_raw_doppler && status.solver_enabled && status.provider_status == "available";
+  if (raw_doppler_status_.factor_source.empty() || raw_doppler_status_.factor_source == "none") {
+    raw_doppler_status_.factor_source = options_.raw_doppler_config.raw_doppler_factor_source;
+  }
   if (!raw_doppler_status_.solver_enabled && raw_doppler_status_.provider_status.empty()) {
     raw_doppler_status_.provider_status = "provider_missing_sat_state_export";
   }

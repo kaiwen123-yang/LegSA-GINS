@@ -68,6 +68,9 @@ RawDopplerFactorLoadResult RawDopplerFactorLoader::loadCsv(const std::string& pa
   RawDopplerFactorLoadResult result;
   result.status.code_present = true;
   result.status.solver_enabled = false;
+  result.status.factor_source = config.raw_doppler_factor_source;
+  result.status.velocity_not_nav_pvt = true;
+  result.status.velocity_not_gnss_15col = true;
   if (path.empty()) {
     result.status.provider_status = "factor_path_missing";
     return result;
@@ -84,6 +87,7 @@ RawDopplerFactorLoadResult RawDopplerFactorLoader::loadCsv(const std::string& pa
   }
   const std::vector<std::string> header = splitCsvLine(line);
   std::size_t provider_missing_count = 0;
+  std::size_t valid_epoch_count = 0;
   while (std::getline(input, line)) {
     if (line.empty()) {
       continue;
@@ -103,10 +107,13 @@ RawDopplerFactorLoadResult RawDopplerFactorLoader::loadCsv(const std::string& pa
     measurement.provider_status = stringValue(row, "provider_status", "provider_missing");
     if (measurement.provider_status != "available") {
       ++provider_missing_count;
+    } else {
+      ++valid_epoch_count;
     }
     result.measurements.push_back(measurement);
   }
   result.status.epoch_count = result.measurements.size();
+  result.status.valid_epoch_count = valid_epoch_count;
   if (result.measurements.empty()) {
     result.status.provider_status = "factor_file_no_rows";
     return result;

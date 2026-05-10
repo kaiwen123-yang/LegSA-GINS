@@ -44,7 +44,8 @@
 | N4H4 LegSA-v23-core full EKF / unified filter implementation | stage/N4H4-legsa-v23-core | in_progress | yes | no | LegSA-owned EKF/unified filter | staged through N4H4A/B/C; no wrapper, no output substitution, no final_v23 output as proposed solver input |
 | N5 raw Doppler factor foundation | stage/N5-raw-doppler-factor | in_progress | yes | no | Doppler factor foundation | entered through N5A after N4H4E1 merge/tag; no N5 tag |
 | N5A RTKLIB-backed raw Doppler auxiliary factor activation | stage/N5A-raw-doppler-factor-activation | done | yes | no | raw Doppler factor path + readiness trial | first proposed factor integration attempt; RAWX/RTKLIB/ephemeris/provider gated; provider missing blocks real activation; PR #21 remains evidence branch |
-| N5B raw Doppler ablation or satellite-state provider fix | stage/N5B-raw-doppler-provider-or-ablation | not_started | yes | no | provider fix or ablation | next stage depends on N5A readiness decision; no N5A tag |
+| N5B RTKLIB Doppler velocity provider and real activation | stage/N5B-rtklib-doppler-provider-activation | done | yes | no | RTKLIB Doppler provider + activation decision | N5A done with real activation blocked by missing satellite-state export; N5B builds helper/provider and records completed activation or concrete blocker; PR #21 remains evidence branch |
+| N5C raw Doppler ablation protocol or provider blocker follow-up | stage/N5C-raw-doppler-ablation-or-blocker-followup | not_started | yes | no | ablation protocol or blocker fix | starts only after N5B activation decision; no N5B tag |
 | N6 source-aware weighting / Go2 weak priors | stage/N6-source-aware-weighting | not_started | yes | no | weighting module | no trace tuning |
 | N7 no-feedback smoother | stage/N7-no-feedback-smoother | not_started | yes | no | fixed-lag smoother | no feedback |
 

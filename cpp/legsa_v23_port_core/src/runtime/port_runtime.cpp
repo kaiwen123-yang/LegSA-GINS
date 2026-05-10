@@ -384,6 +384,7 @@ void PortRuntime::runRawDopplerToy(const std::string& output_dir) {
   options.raw_doppler_config.raw_doppler_min_sat = 5;
   options.raw_doppler_config.raw_doppler_residual_gate_mps = 3.0;
   options.raw_doppler_config.raw_doppler_factor_path = "synthetic_runtime_only";
+  options.raw_doppler_config.raw_doppler_factor_source = "SYNTHETIC_RAW_DOPPLER_TOY";
   options.paper_performance_claim = false;
   options.proposed_factor_claim = false;
 
@@ -398,6 +399,8 @@ void PortRuntime::runRawDopplerToy(const std::string& output_dir) {
   raw_status.solver_enabled = true;
   raw_status.provider_status = "available";
   raw_status.epoch_count = 1;
+  raw_status.valid_epoch_count = 1;
+  raw_status.factor_source = "SYNTHETIC_RAW_DOPPLER_TOY";
 
   GIEngine engine(options);
   engine.setRawDopplerVelocityMeasurements(std::vector<RawDopplerVelocityMeasurement>{raw}, raw_status);

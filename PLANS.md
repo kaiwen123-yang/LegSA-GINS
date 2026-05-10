@@ -477,12 +477,23 @@ provider is missing, raw Doppler must not be reported as applied. No trace
 solver input, no final_v23 output solver input, no LSIM/OIM, no Go2 prior, no
 FGO, and no paper performance claim.
 
-## Stage N5B: Raw Doppler ablation or satellite-state provider fix
+## Stage N5B: RTKLIB Doppler velocity provider and real raw Doppler EKF activation
 
 Goal:
-If N5A provider is available, run raw Doppler ablation and diagnostic replay.
-If N5A blocks on satellite-state export, build or bind the RTKLIB-backed
-satellite-state provider needed before real activation can be claimed.
+Follow the N5A provider blocker by building a runtime-only RTKLIB Doppler
+velocity helper/provider, generating `RAW_DOPPLER_VELOCITY_FACTORS.csv`, and
+feeding it into the source-backed EKF as a real auxiliary velocity factor.
+
+Activation requires `raw_doppler_update_count > 0`. RTKLIB position solution,
+NAV-PVT velocity, `.gnss vn/ve/vd`, trace, and final_v23 output cannot be solver
+input.
+
+## Stage N5C: Raw Doppler ablation protocol or provider blocker follow-up
+
+Goal:
+If N5B reaches real activation, define the raw Doppler ablation protocol. If
+N5B is blocked, resolve the concrete helper/provider/time-alignment/covariance
+blocker before any ablation or performance claim.
 
 ## Stage N6: Source-Aware Weighting
 
