@@ -692,3 +692,27 @@ No NAV-PVT velocity as raw Doppler.
 No `.gnss vn/ve/vd` as raw Doppler.
 
 No LSIM/OIM, Go2 prior, or FGO claim in N5B.
+
+## N5C Raw Doppler Ablation Boundary
+
+N5C ablation is diagnostic engineering evidence, not paper performance.
+
+Raw Doppler beneficial, neutral, or degraded labels are diagnostic only.
+
+R_scale screen is diagnostic-only and not tuning.
+
+Velocity-isolation variants are diagnostic-only.
+
+No RTKLIB position solution as solver input.
+
+No NAV-PVT velocity as raw Doppler.
+
+No `.gnss vn/ve/vd` as raw Doppler.
+
+No final_v23 output solver input.
+
+No trace solver input.
+
+No output-only correction, no tuning, no epoch deletion.
+
+No LSIM/OIM, Go2 prior, or FGO claim in N5C.

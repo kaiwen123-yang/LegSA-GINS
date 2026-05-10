@@ -192,13 +192,14 @@ void GIEngine::gnssUpdate() {
   gnssUpdate(gnssdata_);
 }
 
-// 中文说明：GNSS update 顺序为 position、velocity、yaw；yaw 使用 scheme_C gate，不是 raw heading 因子。
+// 中文说明：GNSS update 顺序为 position、receiver-native velocity、yaw；N5C 可关闭 receiver velocity
+// 仅用于诊断隔离，raw Doppler velocity 仍是另一类卫星级 Doppler 衍生观测。
 void GIEngine::gnssUpdate(GnssData& gnss) {
   if (!gnss.isvalid) {
     return;
   }
   applyPositionUpdate(gnss);
-  if (gnss.has_velocity) {
+  if (gnss.has_velocity && options_.enable_receiver_velocity_update) {
     applyVelocityUpdate(gnss);
   }
   if (gnss.has_yaw && options_.yaw_scheme_C_enabled) {

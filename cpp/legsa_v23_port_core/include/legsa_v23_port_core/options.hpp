@@ -43,6 +43,10 @@ struct PortOptions {
   bool trace_solver_input = false;
   bool output_only_correction = false;
   bool bad_epoch_deletion_for_metric = false;
+  bool enable_receiver_velocity_update = true;
+  bool diagnostic_only = false;
+  bool no_outperform_final_v23_claim = true;
+  std::string ablation_variant = "baseline_full";
   bool raw_doppler = false;
   bool raw_doppler_factor_code_present = false;
   bool raw_doppler_toy_factor_applied = false;

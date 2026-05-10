@@ -203,6 +203,14 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   options.endtime = scalarOrDefault(kv, "endtime", options.endtime);
   options.imudatalen = static_cast<int>(scalarOrDefault(kv, "imudatalen", options.imudatalen));
   options.imudatarate = scalarOrDefault(kv, "imudatarate", options.imudatarate);
+  // 中文说明：receiver-native velocity 是 baseline 松组合速度观测，N5C 仅为诊断可关闭。
+  options.enable_receiver_velocity_update =
+      boolOrDefault(kv, "enable_receiver_velocity_update", options.enable_receiver_velocity_update);
+  options.diagnostic_only = boolOrDefault(kv, "diagnostic_only", options.diagnostic_only);
+  options.no_outperform_final_v23_claim =
+      boolOrDefault(kv, "no_outperform_final_v23_claim", options.no_outperform_final_v23_claim);
+  options.ablation_variant = stringOrDefault(kv, "raw_doppler_diagnostic_variant_label", options.ablation_variant);
+  options.ablation_variant = stringOrDefault(kv, "ablation_variant", options.ablation_variant);
   // 中文说明：raw Doppler 默认关闭；只有 runtime config 明确启用且 provider-backed CSV 有效时才进入 EKF。
   options.raw_doppler_config.enable_raw_doppler =
       boolOrDefault(kv, "enable_raw_doppler", options.raw_doppler_config.enable_raw_doppler);
