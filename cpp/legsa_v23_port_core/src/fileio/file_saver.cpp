@@ -35,6 +35,38 @@ std::string escapeJson(const std::string& value) {
   return out;
 }
 
+double stdOutputScale(std::size_t index) {
+  if (index >= PHI_ID && index < PHI_ID + 3) {
+    return R2D;
+  }
+  if (index >= BG_ID && index < BG_ID + 3) {
+    return R2D * 3600.0;
+  }
+  if (index >= BA_ID && index < BA_ID + 3) {
+    return 1.0e5;
+  }
+  if (index >= SG_ID && index < SG_ID + 3) {
+    return 1.0e6;
+  }
+  if (index >= SA_ID && index < SA_ID + 3) {
+    return 1.0e6;
+  }
+  return 1.0;
+}
+
+const char* stdOutputName(std::size_t index) {
+  static constexpr const char* kNames[kErrorStateSize] = {
+      "std_pos_n_m",        "std_pos_e_m",        "std_pos_d_m",
+      "std_vel_n_mps",      "std_vel_e_mps",      "std_vel_d_mps",
+      "std_roll_deg",       "std_pitch_deg",      "std_yaw_deg",
+      "std_gyrbias_x_dph",  "std_gyrbias_y_dph",  "std_gyrbias_z_dph",
+      "std_accbias_x_mgal", "std_accbias_y_mgal", "std_accbias_z_mgal",
+      "std_gyrscale_x_ppm", "std_gyrscale_y_ppm", "std_gyrscale_z_ppm",
+      "std_accscale_x_ppm", "std_accscale_y_ppm", "std_accscale_z_ppm",
+  };
+  return kNames[index];
+}
+
 }  // namespace
 
 // 中文说明：NAV writer 输出 toy 状态，不做 output-only correction。
@@ -52,13 +84,13 @@ void FileSaver::writeNav(const std::string& output_dir, const std::vector<NavSta
   }
 }
 
-// 中文说明：STD writer 只写协方差对角 sqrt，R2 synthetic 仍不声明 parity/performance。
+// 中文说明：STD writer 只写协方差对角 sqrt 的 common-unit 输出，R2 synthetic 仍不声明 parity/performance。
 void FileSaver::writeStd(const std::string& output_dir, const std::vector<std::vector<double>>& covariances) {
   ensureOutputDir(output_dir);
   std::ofstream out(std::filesystem::path(output_dir) / "LegSA_PORT_STD.csv");
   out << "row";
   for (std::size_t i = 0; i < kErrorStateSize; ++i) {
-    out << ",std_" << i;
+    out << ',' << stdOutputName(i);
   }
   out << '\n';
   for (std::size_t row = 0; row < covariances.size(); ++row) {
@@ -68,7 +100,8 @@ void FileSaver::writeStd(const std::string& output_dir, const std::vector<std::v
                                              ? i
                                              : i * kErrorStateSize + i;
       const double value = diagonal_index < covariances[row].size() ? covariances[row][diagonal_index] : 0.0;
-      out << ',' << std::sqrt(std::max(0.0, value));
+      // 中文说明：姿态协方差内部单位为 rad²，输出 STD 转为 deg，便于与 KF-GINS_STD.txt 对齐。
+      out << ',' << std::sqrt(std::max(0.0, value)) * stdOutputScale(i);
     }
     out << '\n';
   }

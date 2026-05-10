@@ -42,7 +42,7 @@ N4H4R3C metric namespace split and source-backed port backbone parity.
 
 Current working phase:
 
-N4H4E visual validation for source-backed port.
+N4H4E1 STD unit consistency and visual plot semantics fix.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -164,7 +164,7 @@ Current completed phase:
 N4H4R3C metric namespace split and source-backed port backbone parity.
 
 Current working phase:
-N4H4E visual validation for source-backed port.
+N4H4E1 STD unit consistency and visual plot semantics fix.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,
@@ -181,6 +181,12 @@ manual engineering review. It only compares source-backed port, dual_final_v23,
 and evaluation reference roles; it does not draw pure INS or single-antenna
 comparisons, commit generated figures, add factors, or make paper performance
 claims.
+
+N4H4E1 audits STD unit consistency and fixes visual plot semantics before any
+N5 transition. It corrects source-backed port STD writer common-unit output,
+regenerates scatter/error-vector and 3sigma diagnostic figures, keeps runtime
+figures untracked, and does not modify solver logic, tune, delete epochs, or
+make performance claims.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace

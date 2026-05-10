@@ -414,6 +414,18 @@ roles. It does not draw pure INS or single-antenna comparisons, does not commit
 generated figures, does not add raw Doppler, Go2, LSIM/OIM, source-aware
 weighting, or FGO factors, and does not make a paper performance claim.
 
+## Stage N4H4E1: STD unit consistency and visual plot semantics fix
+
+Goal:
+Audit source-backed port and dual_final_v23 STD units, fix common-unit writer
+or visual-loader policy if evidence requires it, and regenerate corrected
+scatter/error-vector and 3sigma figures.
+
+N4H4E1 is a visual semantics and STD consistency fix only. It does not modify
+solver logic, tune by trace, delete epochs, add raw Doppler, Go2, LSIM/OIM,
+source-aware weighting, or FGO factors, and does not make a paper performance
+claim.
+
 ## Stage N4H4R3A: Update timeline and overlap parity audit
 
 Goal:
