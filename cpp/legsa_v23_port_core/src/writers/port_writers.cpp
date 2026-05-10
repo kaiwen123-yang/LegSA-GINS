@@ -11,7 +11,7 @@
 
 namespace legsa_v23_port_core {
 
-// 中文说明：统一写 NAV/STD/EVAL_NAV/RUN_MANIFEST；R2 synthetic 输出不是 performance evidence。
+// 中文说明：统一写 NAV/STD/EVAL_NAV/RUN_MANIFEST；STD 由 FileSaver 转为 KF-GINS common unit。
 void PortWriters::writeAll(const std::string& output_dir,
                            const PortOptions& options,
                            const std::vector<NavState>& states,

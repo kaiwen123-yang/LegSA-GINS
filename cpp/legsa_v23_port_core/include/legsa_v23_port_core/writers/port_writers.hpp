@@ -15,7 +15,7 @@
 
 namespace legsa_v23_port_core {
 
-// 中文说明：writer helper 对应 writeNavResult/writeSTD 合同，不做输出修正。
+// 中文说明：writer helper 对应 writeNavResult/writeSTD 合同，只做 common-unit 输出，不做结果修正。
 class PortWriters {
  public:
   static void writeAll(const std::string& output_dir,

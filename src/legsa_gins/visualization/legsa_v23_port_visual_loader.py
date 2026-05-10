@@ -83,6 +83,7 @@ def _normalize_std_row(row: dict[str, str], index: int) -> dict[str, float]:
         "std_roll_deg": value("std_roll_deg", "std_6"),
         "std_pitch_deg": value("std_pitch_deg", "std_7"),
         "std_yaw_deg": value("std_yaw_deg", "std_8"),
+        "std_attitude_unit_input": "deg" if any(name in row for name in ("std_roll_deg", "std_pitch_deg", "std_yaw_deg")) else "unlabeled_legacy",
     }
 
 
@@ -192,6 +193,14 @@ def load_visual_inputs(
         "source_backed_port_core_role": "source_backed_port_core",
         "final_v23_role": "final_v23_reference_baseline",
         "trace_role": "evaluation_reference_only",
+        "unit_policy": {
+            "port_attitude_std_unit_input": "common_unit_deg_or_unlabeled_legacy",
+            "finalv23_attitude_std_unit_input": "deg",
+            "plot_attitude_std_unit": "deg",
+            "conversion_applied_to_port": "none_in_N4H4E_loader",
+            "conversion_applied_to_finalv23": "none",
+            "std_unit_audit_followup": "N4H4E1",
+        },
         "final_v23_output_solver_input": False,
         "trace_solver_input": False,
         "reference_eval_only": True,

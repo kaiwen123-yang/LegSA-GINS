@@ -169,6 +169,19 @@ Allowed N4H4E visual validation statement:
 - No proposed factor claim.
 - No raw Doppler, Go2 prior, LSIM/OIM, source-aware weighting, or FGO claim.
 
+Allowed N4H4E1 STD/plot fix statement:
+
+- N4H4E1 may fix STD writer common-unit output and visual-loader/plot
+  semantics when unit evidence requires it.
+- N4H4E1 visual fixes are not solver performance improvements.
+- STD/3sigma figures require unit consistency.
+- Vector error clouds must not be misread as trajectories.
+- Figures and runtime reports are not committed.
+- Manual visual review is required before N5.
+- No paper performance claim.
+- No outperform final_v23 claim.
+- No proposed factor claim.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -314,6 +327,12 @@ Do not claim:
 - N4H4E pure INS or single-antenna comparison plots.
 - N4H4E enabling raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting,
   FGO, output-only correction, tuning, or epoch deletion.
+- N4H4E1 visual fixes as solver performance improvements.
+- N4H4E1 corrected STD/3sigma figures as paper performance claims.
+- N4H4E1 vector error clouds as trajectories.
+- N4H4E1 as outperforming final_v23.
+- N4H4E1 as a proposed factor claim.
+- N4H4E1 committed generated figures or runtime reports.
 
 Frame/evaluator utilities must not be described as a solved navigation algorithm.
 

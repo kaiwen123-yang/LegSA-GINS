@@ -157,6 +157,26 @@ def _save_xy(plt, path: Path, series: list[tuple[str, list[float], list[float]]]
     plt.close(fig)
 
 
+def _save_xy_scatter(plt, path: Path, series: list[tuple[str, list[float], list[float]]], title: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fig, ax = plt.subplots(figsize=(6, 6))
+    for label, east, north in series:
+        sx, sy = _sample_xy(east, north)
+        ax.scatter(sx, sy, s=4, alpha=0.55, label=label)
+    ax.axhline(0.0, linewidth=0.6, alpha=0.55)
+    ax.axvline(0.0, linewidth=0.6, alpha=0.55)
+    ax.set_aspect("equal", adjustable="datalim")
+    ax.set_title(title)
+    ax.set_xlabel("east error (m)")
+    ax.set_ylabel("north error (m)")
+    ax.grid(True, linewidth=0.3, alpha=0.45)
+    if len(series) > 1:
+        ax.legend(loc="best", fontsize=8)
+    fig.tight_layout()
+    fig.savefig(path, dpi=140)
+    plt.close(fig)
+
+
 def _save_hist(plt, path: Path, series: list[tuple[str, list[float]]], title: str, xlabel: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fig, ax = plt.subplots(figsize=(8, 4.8))
@@ -310,8 +330,8 @@ def generate_visual_plots(
     _save_xy(plt, add("01_trajectory/trajectory_xy_port_finalv23_reference.png"), [("port", port_e, port_n), ("dual_final_v23", final_e, final_n), ("reference", trace_e, trace_n)], "trajectory: port, dual_final_v23, reference")
     _save_line(plt, add("01_trajectory/trajectory_height_time_port_finalv23_reference.png"), [("port", t_port, _values(port, "height_m")), ("dual_final_v23", t_final, _values(final, "height_m")), ("reference", t_trace, _values(trace, "height_m"))], "height over time", "height (m)")
     parity = errors["port_vs_final_v23"]
-    _save_xy(plt, add("01_trajectory/trajectory_xy_port_minus_finalv23_zoom.png"), [("port - dual_final_v23", [row["east_error_m"] for row in parity], [row["north_error_m"] for row in parity])], "port minus dual_final_v23 horizontal diff")
-    _save_xy(plt, add("01_trajectory/trajectory_xy_error_to_reference.png"), [("port error", [row["east_error_m"] for row in errors["port_vs_trace"]], [row["north_error_m"] for row in errors["port_vs_trace"]]), ("dual_final_v23 error", [row["east_error_m"] for row in errors["final_v23_vs_trace"]], [row["north_error_m"] for row in errors["final_v23_vs_trace"]])], "horizontal error to reference")
+    _save_xy_scatter(plt, add("01_trajectory/trajectory_xy_port_minus_finalv23_zoom.png"), [("port - dual_final_v23", [row["east_error_m"] for row in parity], [row["north_error_m"] for row in parity])], "port minus dual_final_v23 horizontal diff vector cloud")
+    _save_xy_scatter(plt, add("01_trajectory/trajectory_xy_error_to_reference.png"), [("port error", [row["east_error_m"] for row in errors["port_vs_trace"]], [row["north_error_m"] for row in errors["port_vs_trace"]]), ("dual_final_v23 error", [row["east_error_m"] for row in errors["final_v23_vs_trace"]], [row["north_error_m"] for row in errors["final_v23_vs_trace"]])], "horizontal error vector cloud to reference")
 
     pvst = errors["port_vs_trace"]
     fvst = errors["final_v23_vs_trace"]
@@ -413,6 +433,11 @@ def generate_visual_plots(
         "figure_paths": generated,
         "figure_count_total": len(generated),
         "figure_count_by_folder": {},
+        "plot_semantics_policy": {
+            "horizontal_error_vectors_are_scatter": True,
+            "vector_xy_line_removed": True,
+            "trajectory_xy_lines_only_for_position_trajectories": True,
+        },
         "evidence_missing": evidence_missing,
         "pure_single_comparison_absent": not any(("pure" in path.lower() or "single" in path.lower()) for path in generated),
         "paper_performance_claim": False,
