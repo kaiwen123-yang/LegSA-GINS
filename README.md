@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N4H4R3B over-close, reference-independence, and covariance/config parity audit.
+N4H4R3C metric namespace split and source-backed port backbone parity.
 
 Current working phase:
 
-N4H4R3C metric namespace and parity-vs-absolute evaluation split.
+N4H4E visual validation for source-backed port.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -161,10 +161,10 @@ proposed factors, and does not make performance claims. The old
 `cpp/legsa_v23_core` remains a diagnostic/self-written attempt.
 
 Current completed phase:
-N4H4R3B over-close and reference-independence audit.
+N4H4R3C metric namespace split and source-backed port backbone parity.
 
 Current working phase:
-N4H4R3C metric namespace and parity-vs-absolute evaluation split.
+N4H4E visual validation for source-backed port.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,
@@ -175,6 +175,12 @@ factors, and does not make performance claims.
 N4H4R3C splits port-vs-final_v23 NAV parity from trace/reference absolute
 evaluation before visual validation. It does not modify solver logic, tune,
 delete epochs, add factors, or make paper performance claims.
+
+N4H4E generates source-backed-port visual validation figures and reports for
+manual engineering review. It only compares source-backed port, dual_final_v23,
+and evaluation reference roles; it does not draw pure INS or single-antenna
+comparisons, commit generated figures, add factors, or make paper performance
+claims.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace
