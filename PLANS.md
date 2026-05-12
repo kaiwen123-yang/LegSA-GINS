@@ -579,15 +579,29 @@ diagnostic defaults and do not use trace. N7B does not activate Go2 velocity
 prior, does not activate Go2 yaw prior, does not implement FGO, does not delete
 epochs, and makes no paper performance or outperform-final_v23 claim.
 
+## Stage N7B2: Go2 contact threshold review
+
+Goal:
+Review Go2 foot-force and foot-speed distributions, build a diagnostic
+contact-state v2 candidate, apply fixed window smoothing, and evaluate
+contact-conditioned velocity source consistency before any N7C activation.
+
+N7B2 is contact threshold readiness only. Thresholds are derived from Go2 field
+distributions, not trace, final_v23 output, or navigation metrics. Go2 velocity
+is not truth and contact-conditioned velocity comparison is not truth error.
+N7B2 does not activate Go2 velocity prior, does not activate Go2 yaw prior,
+does not implement FGO, does not delete epochs, and makes no paper performance
+or outperform-final_v23 claim.
+
 ## Stage N7C: Go2 velocity/contact weak-prior activation or N8A FGO preparation
 
 Goal:
-Proceed only from the N7B decision report. If contact and velocity readiness
+Proceed only from the N7B2 decision report. If contact and velocity readiness
 passes, review a future conservative Go2 velocity/contact weak prior. If
 yaw-speed is the stronger signal, review a future yaw-rate weak prior. If
 extended Go2 priors remain weak, prepare N8A no-feedback FGO foundation instead.
 
-N7C is not started in N7B.
+N7C is not started in N7B2.
 
 ## Stage N6: Source-Aware Weighting
 
