@@ -288,6 +288,25 @@ Allowed N7B2 Go2 contact threshold review statement:
 - No output-only correction.
 - No epoch deletion.
 
+Allowed N7B2A Go2 metric namespace and contact physical sanity statement:
+
+- 5deg Go2 attitude prior std is weak-prior measurement uncertainty, not gate
+  threshold.
+- Go2 RPY/quaternion consistency is internal consistency, not absolute truth.
+- N7A parity metrics must not be read as absolute accuracy.
+- Go2 velocity is not truth.
+- Contact-conditioned velocity comparison is not truth error.
+- Contact v2 physical sanity is required before any future Go2 velocity/contact
+  activation review.
+- N7B2A does not activate Go2 velocity prior.
+- N7B2A does not activate Go2 yaw prior.
+- No trace/final_v23 threshold tuning in N7B2A.
+- No FGO claim in N7B2A.
+- No paper performance claim in N7B2A.
+- No outperform final_v23 claim in N7B2A.
+- No output-only correction.
+- No epoch deletion.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
