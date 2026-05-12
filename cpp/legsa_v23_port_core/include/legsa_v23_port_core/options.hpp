@@ -8,6 +8,7 @@
 #pragma once
 
 #include "legsa_v23_port_core/factors/raw_doppler_types.hpp"
+#include "legsa_v23_port_core/factors/go2_weak_prior_types.hpp"
 #include "legsa_v23_port_core/source_aware/measurement_source.hpp"
 #include "legsa_v23_port_core/types.hpp"
 
@@ -61,6 +62,9 @@ struct PortOptions {
   RawDopplerFactorConfig raw_doppler_config;
   RawDopplerFactorStatus raw_doppler_status;
   bool go2_prior = false;
+  // 中文说明：N7A Go2 roll/pitch weak prior 默认关闭；开启后仍不把 Go2 position/velocity/yaw 当 solver prior。
+  Go2AttitudeWeakPriorConfig go2_attitude_prior_config;
+  Go2AttitudeWeakPriorStatus go2_attitude_prior_status;
   bool lsim_oim = false;
   // 中文说明：N6A source-aware LSIM/OIM 默认关闭；打开后只基于 solver 可见 metadata/innovation 放大 R。
   source_aware::SourceAwarePolicyConfig source_aware_policy_config;

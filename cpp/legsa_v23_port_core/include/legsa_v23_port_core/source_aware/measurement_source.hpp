@@ -25,9 +25,10 @@ enum class MeasurementSource : std::size_t {
   kReceiverVelocity = 1,
   kDualAntennaYaw = 2,
   kRawDopplerVelocity = 3,
+  kGo2AttitudeRollPitch = 4,
 };
 
-constexpr std::size_t kMeasurementSourceCount = 4;
+constexpr std::size_t kMeasurementSourceCount = 5;
 
 const char* toString(MeasurementSource source);
 MeasurementSource measurementSourceFromString(const std::string& value);
@@ -112,6 +113,7 @@ struct SourceAwarePolicyConfig {
   double source_aware_receiver_velocity_cap = 8.0;
   double source_aware_dual_yaw_cap = 10.0;
   double source_aware_raw_doppler_cap = 15.0;
+  double source_aware_go2_attitude_cap = 10.0;
   bool source_aware_reject_extreme = false;
   bool source_aware_no_R_shrink = true;
   bool source_aware_trace_enabled = true;

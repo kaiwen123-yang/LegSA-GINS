@@ -27,6 +27,7 @@ class PortRuntime {
   static void runSyntheticMath(const std::string& output_dir);
   static void runRawDopplerToy(const std::string& output_dir);
   static void runSourceAwareToy(const std::string& output_dir);
+  static void runGo2WeakPriorToy(const std::string& output_dir);
   static void runFromConfig(const std::string& config_path, const std::string& output_dir);
   static void runFromConfig(const std::string& config_path,
                             const std::string& output_dir,

@@ -52,7 +52,9 @@
 | N6B source-aware policy refinement | stage/N6A-source-aware-lsim-oim-weighting | done | yes | no | innovation-covariance OIM + metadata-only LSIM policy refinement | PR #31 merged and N6B tag created; clean neutrality passed and decision was ready_with_weak_stress_evidence; PR #21 remains evidence branch |
 | N6B1 source-aware visual validation | stage/N6B1-source-aware-visual-validation | done | no | no | visual validation + plotted-data coverage | N6B table diagnostics passed; N6B1 validates clean curves, R-scale traces, spike response, stress variants, and mandatory figure data coverage; PR #32 remains open/unmerged; PR #21 remains evidence branch |
 | N6C source-aware threshold/stress/spike review | stage/N6C-source-aware-threshold-review | not_started | yes | no | threshold/stress/spike refinement if needed | only if N6B decision remains needs_policy_fix or spike/stress caveat |
-| N7A Go2 body-state weak prior review | stage/N7A-go2-body-state-weak-prior | review_open | yes | no | weak-prior foundation PR | PR #32 remains open/unmerged during N6B1; not advanced to N7B |
+| N7A Go2 body-state weak prior foundation | stage/N7A-go2-body-state-weak-prior | done | yes | no | Go2 roll/pitch weak prior + source/time/frame audits | activates only `go2_attitude_roll_pitch`; Go2 body-state is not truth; no Go2 position/velocity/yaw prior, no FGO, no paper claim; PR #21 remains evidence branch |
+| N7B Go2 velocity/contact readiness or prior refinement | stage/N7B-go2-velocity-contact-readiness | not_started | yes | no | future Go2 readiness/refinement | depends on N7A decision; no claim opened yet |
+| N8A no-feedback FGO foundation | stage/N8A-no-feedback-fgo-foundation | not_started | yes | no | future no-feedback FGO foundation | not implemented by N7A |
 | N6 source-aware weighting / Go2 weak priors | stage/N6-source-aware-weighting | not_started | yes | no | weighting module | no trace tuning |
 | N7 no-feedback smoother | stage/N7-no-feedback-smoother | not_started | yes | no | fixed-lag smoother | no feedback |
 

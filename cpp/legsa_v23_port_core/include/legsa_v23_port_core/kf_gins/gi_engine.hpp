@@ -11,6 +11,7 @@
 #include "legsa_v23_port_core/imu.hpp"
 #include "legsa_v23_port_core/nav_state.hpp"
 #include "legsa_v23_port_core/options.hpp"
+#include "legsa_v23_port_core/factors/go2_weak_prior_types.hpp"
 #include "legsa_v23_port_core/factors/raw_doppler_types.hpp"
 #include "legsa_v23_port_core/source_aware/source_aware_policy.hpp"
 #include "legsa_v23_port_core/source_aware/source_aware_trace.hpp"
@@ -29,6 +30,8 @@ class GIEngine {
   void initialize(const NavState& initial_state);
   void setRawDopplerVelocityMeasurements(const std::vector<RawDopplerVelocityMeasurement>& measurements,
                                          const RawDopplerFactorStatus& status);
+  void setGo2AttitudeWeakPriors(const std::vector<Go2AttitudeWeakPriorMeasurement>& measurements,
+                                const Go2AttitudeWeakPriorStatus& status);
   void addImuData(const ImuData& imu, bool compensate = false);
   void addGnssData(const GnssData& gnss);
   int isToUpdate() const;
@@ -67,6 +70,9 @@ class GIEngine {
   std::size_t rawDopplerSatCountMax() const;
   double rawDopplerResidualP95() const;
   RawDopplerFactorStatus rawDopplerStatus() const;
+  std::size_t go2AttitudeWeakPriorUpdateCount() const;
+  std::size_t go2AttitudeWeakPriorRejectCount() const;
+  Go2AttitudeWeakPriorStatus go2AttitudeWeakPriorStatus() const;
   source_aware::SourceAwareRuntimeStats sourceAwareStats() const;
   void writeSourceAwareTrace(const std::string& output_dir) const;
 
@@ -81,6 +87,7 @@ class GIEngine {
   void applyVelocityUpdate(GnssData& gnss);
   void applyYawUpdate(GnssData& gnss);
   void applyRawDopplerUpdateForTime(double update_time);
+  void applyGo2AttitudeWeakPriorForTime(double update_time);
   source_aware::SourceWeightResult applySourceAwareWeighting(
       source_aware::MeasurementSource source,
       const source_aware::SourceMetadata& metadata,
@@ -114,6 +121,10 @@ class GIEngine {
   std::vector<RawDopplerVelocityMeasurement> raw_doppler_measurements_;
   RawDopplerFactorStatus raw_doppler_status_;
   std::vector<double> raw_doppler_residual_norms_;
+  std::vector<Go2AttitudeWeakPriorMeasurement> go2_attitude_priors_;
+  Go2AttitudeWeakPriorStatus go2_attitude_prior_status_;
+  std::vector<double> go2_roll_residuals_;
+  std::vector<double> go2_pitch_residuals_;
   source_aware::SourceAwarePolicy source_aware_policy_;
   source_aware::SourceAwareTrace source_aware_trace_;
   bool initialized_ = false;

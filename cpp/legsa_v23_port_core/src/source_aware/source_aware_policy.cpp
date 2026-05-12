@@ -83,6 +83,8 @@ const char* toString(MeasurementSource source) {
       return "dual_antenna_yaw";
     case MeasurementSource::kRawDopplerVelocity:
       return "raw_doppler_velocity";
+    case MeasurementSource::kGo2AttitudeRollPitch:
+      return "go2_attitude_roll_pitch";
   }
   return "unknown";
 }
@@ -96,6 +98,9 @@ MeasurementSource measurementSourceFromString(const std::string& value) {
   }
   if (value == "raw_doppler_velocity") {
     return MeasurementSource::kRawDopplerVelocity;
+  }
+  if (value == "go2_attitude_roll_pitch") {
+    return MeasurementSource::kGo2AttitudeRollPitch;
   }
   return MeasurementSource::kReceiverPosition;
 }
@@ -130,6 +135,8 @@ double SourceAwarePolicy::sourceCap(MeasurementSource source) const {
       return std::max(1.0, config_.source_aware_dual_yaw_cap);
     case MeasurementSource::kRawDopplerVelocity:
       return std::max(1.0, config_.source_aware_raw_doppler_cap);
+    case MeasurementSource::kGo2AttitudeRollPitch:
+      return std::max(1.0, config_.source_aware_go2_attitude_cap);
   }
   return std::max(1.0, config_.source_aware_global_cap);
 }
@@ -229,6 +236,18 @@ double SourceAwarePolicy::lsimScale(const SourceMetadata& metadata, SourceWeight
         scale_value = std::max(scale_value, 2.0);
         addReason(result, "lsim_solver_visible_spike_candidate");
       }
+    } else if (metadata.source == MeasurementSource::kGo2AttitudeRollPitch) {
+      // 中文说明：Go2 attitude 只作为弱先验；质量异常时放大 R，不把 rpy 当 truth。
+      if (metadata.provider_status != "available") {
+        result.rejected = true;
+        result.accepted = false;
+        addReason(result, "lsim_go2_attitude_prior_unavailable");
+        return capScale(config_.source_aware_global_cap, metadata.source);
+      }
+      if (metadata.yaw_std_rad > 15.0 * D2R) {
+        scale_value = std::max(scale_value, 2.0);
+        addReason(result, "lsim_go2_attitude_std_high");
+      }
     }
     result.lsim_score = std::max(0.0, std::min(1.0, 1.0 / scale_value));
     return capScale(scale_value, metadata.source);
@@ -315,6 +334,18 @@ double SourceAwarePolicy::lsimScale(const SourceMetadata& metadata, SourceWeight
         addReason(result, "lsim_solver_visible_spike_candidate");
       }
       break;
+    case MeasurementSource::kGo2AttitudeRollPitch:
+      if (metadata.provider_status != "available") {
+        result.rejected = true;
+        result.accepted = false;
+        addReason(result, "lsim_go2_attitude_prior_unavailable");
+        return capScale(sourceCap(metadata.source), metadata.source);
+      }
+      if (metadata.yaw_std_rad > 15.0 * D2R) {
+        scale_value = std::max(scale_value, 2.0);
+        addReason(result, "lsim_go2_attitude_std_high");
+      }
+      break;
   }
   result.lsim_score = std::max(0.0, std::min(1.0, 1.0 / scale_value));
   return capScale(scale_value, metadata.source);
@@ -367,6 +398,8 @@ double SourceAwarePolicy::oimScale(const SourceMetadata& metadata,
     alpha = 0.35;
   } else if (metadata.source == MeasurementSource::kDualAntennaYaw) {
     alpha = 0.25;
+  } else if (metadata.source == MeasurementSource::kGo2AttitudeRollPitch) {
+    alpha = 0.06;
   }
   if (metadata.source == MeasurementSource::kReceiverPosition) {
     alpha = 0.00003;
@@ -374,6 +407,8 @@ double SourceAwarePolicy::oimScale(const SourceMetadata& metadata,
     alpha = 0.04;
   } else if (metadata.source == MeasurementSource::kDualAntennaYaw) {
     alpha = 0.03;
+  } else if (metadata.source == MeasurementSource::kGo2AttitudeRollPitch) {
+    alpha = 0.02;
   }
   double scale_value = 1.0 + alpha * delta * delta;
   if (normalized > config_.source_aware_strong_normalized) {
@@ -387,6 +422,9 @@ double SourceAwarePolicy::oimScale(const SourceMetadata& metadata,
   }
   if (metadata.source == MeasurementSource::kRawDopplerVelocity && normalized > 2.0) {
     addReason(result, "oim_raw_doppler_innovation_suspicious");
+  }
+  if (metadata.source == MeasurementSource::kGo2AttitudeRollPitch && normalized > 2.0) {
+    addReason(result, "oim_go2_attitude_innovation_suspicious");
   }
   if (config_.source_aware_reject_extreme && normalized > 10.0) {
     result.rejected = true;
