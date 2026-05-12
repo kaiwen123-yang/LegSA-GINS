@@ -1,7 +1,7 @@
 """N6A measurement-source types.
 
-中文说明：四类 source ID 对应 EKF 中真实观测更新路径；N6A 只做 R inflation，
-不是输出修正，也不读取评价 trace 或 final_v23 输出。
+中文说明：source ID 对应 EKF 中真实观测更新路径；N7A 新增 Go2 roll/pitch
+弱先验，但仍只做 R inflation，不是输出修正，也不读取评价 trace 或 final_v23 输出。
 """
 
 from __future__ import annotations
@@ -14,12 +14,14 @@ RECEIVER_POSITION = "receiver_position"
 RECEIVER_VELOCITY = "receiver_velocity"
 DUAL_ANTENNA_YAW = "dual_antenna_yaw"
 RAW_DOPPLER_VELOCITY = "raw_doppler_velocity"
+GO2_ATTITUDE_ROLL_PITCH = "go2_attitude_roll_pitch"
 
 OBSERVATION_SOURCE_IDS = [
     RECEIVER_POSITION,
     RECEIVER_VELOCITY,
     DUAL_ANTENNA_YAW,
     RAW_DOPPLER_VELOCITY,
+    GO2_ATTITUDE_ROLL_PITCH,
 ]
 
 

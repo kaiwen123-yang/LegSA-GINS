@@ -249,6 +249,47 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       scalarOrDefault(kv, "raw_doppler_R_scale", options.raw_doppler_config.raw_doppler_R_scale);
   options.raw_doppler_config.raw_doppler_mode =
       stringOrDefault(kv, "raw_doppler_mode", options.raw_doppler_config.raw_doppler_mode);
+  // 中文说明：N7A Go2 attitude weak prior 默认关闭；只读取 builder 生成的 runtime-only CSV。
+  options.go2_attitude_prior_config.enable_go2_attitude_weak_prior =
+      boolOrDefault(kv,
+                    "enable_go2_attitude_weak_prior",
+                    options.go2_attitude_prior_config.enable_go2_attitude_weak_prior);
+  options.go2_attitude_prior_config.go2_attitude_prior_path =
+      stringOrDefault(kv,
+                      "go2_attitude_prior_path",
+                      options.go2_attitude_prior_config.go2_attitude_prior_path);
+  options.go2_attitude_prior_config.go2_attitude_prior_time_tolerance_sec =
+      scalarOrDefault(kv,
+                      "go2_attitude_prior_time_tolerance_sec",
+                      options.go2_attitude_prior_config.go2_attitude_prior_time_tolerance_sec);
+  options.go2_attitude_prior_config.go2_attitude_prior_std_roll_deg =
+      scalarOrDefault(kv,
+                      "go2_attitude_prior_std_roll_deg",
+                      options.go2_attitude_prior_config.go2_attitude_prior_std_roll_deg);
+  options.go2_attitude_prior_config.go2_attitude_prior_std_pitch_deg =
+      scalarOrDefault(kv,
+                      "go2_attitude_prior_std_pitch_deg",
+                      options.go2_attitude_prior_config.go2_attitude_prior_std_pitch_deg);
+  options.go2_attitude_prior_config.go2_attitude_prior_sourceaware =
+      boolOrDefault(kv,
+                    "go2_attitude_prior_sourceaware",
+                    options.go2_attitude_prior_config.go2_attitude_prior_sourceaware);
+  options.go2_attitude_prior_config.go2_attitude_prior_diagnostic_only =
+      boolOrDefault(kv,
+                    "go2_attitude_prior_diagnostic_only",
+                    options.go2_attitude_prior_config.go2_attitude_prior_diagnostic_only);
+  options.go2_attitude_prior_config.go2_position_prior_enabled =
+      boolOrDefault(kv,
+                    "go2_position_prior_enabled",
+                    options.go2_attitude_prior_config.go2_position_prior_enabled);
+  options.go2_attitude_prior_config.go2_velocity_prior_enabled =
+      boolOrDefault(kv,
+                    "go2_velocity_prior_enabled",
+                    options.go2_attitude_prior_config.go2_velocity_prior_enabled);
+  options.go2_attitude_prior_config.go2_yaw_prior_enabled =
+      boolOrDefault(kv,
+                    "go2_yaw_prior_enabled",
+                    options.go2_attitude_prior_config.go2_yaw_prior_enabled);
   // 中文说明：N6A source-aware 默认关闭；启用后只在 EKFUpdate 前放大 R，不读取 trace/final_v23 输出。
   options.source_aware_policy_config.enable_source_aware_weighting =
       boolOrDefault(kv,
@@ -300,6 +341,10 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       scalarOrDefault(kv,
                       "source_aware_raw_doppler_cap",
                       options.source_aware_policy_config.source_aware_raw_doppler_cap);
+  options.source_aware_policy_config.source_aware_go2_attitude_cap =
+      scalarOrDefault(kv,
+                      "source_aware_go2_attitude_cap",
+                      options.source_aware_policy_config.source_aware_go2_attitude_cap);
   options.source_aware_policy_config.source_aware_reject_extreme =
       boolOrDefault(kv,
                     "source_aware_reject_extreme",
@@ -330,6 +375,7 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
           {source_aware::MeasurementSource::kReceiverVelocity, "receiver_velocity"},
           {source_aware::MeasurementSource::kDualAntennaYaw, "dual_antenna_yaw"},
           {source_aware::MeasurementSource::kRawDopplerVelocity, "raw_doppler_velocity"},
+          {source_aware::MeasurementSource::kGo2AttitudeRollPitch, "go2_attitude_roll_pitch"},
       }};
   for (const auto& item : source_keys) {
     auto& source_config = options.source_aware_policy_config.sources[source_aware::sourceIndex(item.first)];

@@ -236,6 +236,20 @@ Allowed N6B1 source-aware visual validation statement:
 - No paper performance claim.
 - No outperform final_v23 claim.
 
+Allowed N7A Go2 body-state weak prior statement:
+
+- N7A activates only Go2 roll/pitch weak prior by default.
+- Go2 body-state is not truth.
+- Go2 position is not truth.
+- Go2 velocity is not truth.
+- Go2 position and velocity priors are disabled by default in N7A.
+- Go2 yaw prior is disabled in N7A.
+- No trace/final_v23 output is used for Go2 prior construction.
+- No paper performance claim.
+- No outperform final_v23 claim.
+- No FGO claim in N7A.
+- Go2 weak prior changes EKF measurement update through conservative R, not output-only correction.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:

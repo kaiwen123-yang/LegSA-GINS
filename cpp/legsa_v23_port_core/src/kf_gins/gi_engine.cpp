@@ -9,6 +9,7 @@
 
 #include "legsa_v23_port_core/common/earth.hpp"
 #include "legsa_v23_port_core/common/rotation.hpp"
+#include "legsa_v23_port_core/factors/go2_weak_prior_factor.hpp"
 #include "legsa_v23_port_core/factors/raw_doppler_factor.hpp"
 #include "legsa_v23_port_core/kf_gins/insmech.hpp"
 
@@ -127,6 +128,24 @@ void GIEngine::setRawDopplerVelocityMeasurements(const std::vector<RawDopplerVel
   }
 }
 
+// 中文说明：Go2 attitude weak prior 只接收 builder 生成的 roll/pitch runtime CSV，不读取 by2.txt/raw trace 进 solver。
+void GIEngine::setGo2AttitudeWeakPriors(const std::vector<Go2AttitudeWeakPriorMeasurement>& measurements,
+                                        const Go2AttitudeWeakPriorStatus& status) {
+  go2_attitude_priors_ = measurements;
+  go2_attitude_prior_status_ = status;
+  go2_attitude_prior_status_.code_present = true;
+  go2_attitude_prior_status_.prior_count = measurements.size();
+  if (go2_attitude_prior_status_.valid_prior_count == 0) {
+    go2_attitude_prior_status_.valid_prior_count = static_cast<std::size_t>(std::count_if(
+        measurements.begin(), measurements.end(), [](const Go2AttitudeWeakPriorMeasurement& measurement) {
+          return measurement.source_status == "active";
+        }));
+  }
+  go2_attitude_prior_status_.solver_enabled =
+      options_.go2_attitude_prior_config.enable_go2_attitude_weak_prior && status.solver_enabled &&
+      status.provider_status == "available";
+}
+
 // 中文说明：addImuData 保持 reference 的 imupre/imucur 滚动缓冲；首帧可选择预补偿。
 void GIEngine::addImuData(const ImuData& imu, bool compensate) {
   imupre_ = imucur_;
@@ -236,6 +255,8 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
   }
   // 中文说明：raw Doppler auxiliary velocity factor 与 GNSS epoch 对齐，并在 stateFeedback 前进入 EKF。
   applyRawDopplerUpdateForTime(gnss.time);
+  // 中文说明：Go2 roll/pitch weak prior 与 GNSS epoch 对齐进入 EKF；不启用 Go2 position/velocity/yaw prior。
+  applyGo2AttitudeWeakPriorForTime(gnss.time);
   gnss.isvalid = false;
   ++update_count_;
 }
@@ -415,6 +436,18 @@ double GIEngine::rawDopplerResidualP95() const {
 
 RawDopplerFactorStatus GIEngine::rawDopplerStatus() const {
   return raw_doppler_status_;
+}
+
+std::size_t GIEngine::go2AttitudeWeakPriorUpdateCount() const {
+  return go2_attitude_prior_status_.update_count;
+}
+
+std::size_t GIEngine::go2AttitudeWeakPriorRejectCount() const {
+  return go2_attitude_prior_status_.reject_count;
+}
+
+Go2AttitudeWeakPriorStatus GIEngine::go2AttitudeWeakPriorStatus() const {
+  return go2_attitude_prior_status_;
 }
 
 source_aware::SourceAwareRuntimeStats GIEngine::sourceAwareStats() const {
@@ -708,6 +741,63 @@ void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
     const std::size_t index = static_cast<std::size_t>(0.95 * static_cast<double>(sorted.size() - 1));
     raw_doppler_status_.residual_p95_mps = sorted[index];
   }
+}
+
+void GIEngine::applyGo2AttitudeWeakPriorForTime(double update_time) {
+  if (!options_.go2_attitude_prior_config.enable_go2_attitude_weak_prior ||
+      !go2_attitude_prior_status_.solver_enabled) {
+    return;
+  }
+  const Go2AttitudeWeakPriorMeasurement* best = nullptr;
+  double best_dt = options_.go2_attitude_prior_config.go2_attitude_prior_time_tolerance_sec;
+  for (const auto& measurement : go2_attitude_priors_) {
+    const double dt = std::fabs(measurement.time - update_time);
+    if (dt <= best_dt) {
+      best = &measurement;
+      best_dt = dt;
+    }
+  }
+  if (!best) {
+    return;
+  }
+  if (!Go2WeakPriorFactor::isActive(*best)) {
+    ++go2_attitude_prior_status_.reject_count;
+    return;
+  }
+  const std::vector<double> dz = Go2WeakPriorFactor::residual(pvacur_, *best);
+  Matrix H = Go2WeakPriorFactor::designMatrix();
+  Matrix R = Go2WeakPriorFactor::covariance(*best, options_.go2_attitude_prior_config);
+  source_aware::SourceMetadata metadata;
+  metadata.source = source_aware::MeasurementSource::kGo2AttitudeRollPitch;
+  metadata.time = best->time;
+  metadata.valid = best->source_status == "active";
+  metadata.std_xyz = makeVec3(best->std_roll_rad, best->std_pitch_rad, best->std_pitch_rad);
+  metadata.yaw_std_rad = std::max(best->std_roll_rad, best->std_pitch_rad);
+  metadata.time_diff_sec = best->time - update_time;
+  metadata.provider_status = best->source_status == "active" ? "available" : best->source_status;
+  metadata.quality_flag = best->quality_flag;
+  metadata.covariance_available = true;
+  Matrix scaled_R = R;
+  if (options_.go2_attitude_prior_config.go2_attitude_prior_sourceaware) {
+    const auto weight = applySourceAwareWeighting(metadata.source, metadata, dz, H, R, scaled_R);
+    if (weight.rejected) {
+      ++go2_attitude_prior_status_.reject_count;
+      return;
+    }
+  }
+  EKFUpdate(dz, H, scaled_R);
+  go2_roll_residuals_.push_back(std::fabs(dz[0]));
+  go2_pitch_residuals_.push_back(std::fabs(dz[1]));
+  ++go2_attitude_prior_status_.update_count;
+  auto p95 = [](std::vector<double> values) {
+    if (values.empty()) {
+      return 0.0;
+    }
+    std::sort(values.begin(), values.end());
+    return values[static_cast<std::size_t>(0.95 * static_cast<double>(values.size() - 1))];
+  };
+  go2_attitude_prior_status_.residual_roll_p95_rad = p95(go2_roll_residuals_);
+  go2_attitude_prior_status_.residual_pitch_p95_rad = p95(go2_pitch_residuals_);
 }
 
 source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(
