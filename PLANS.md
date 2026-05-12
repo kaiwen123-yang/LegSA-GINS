@@ -544,7 +544,16 @@ activation. OIM must use innovation covariance `S=HPH^T+R`, LSIM must stay
 metadata-only, source caps must be conservative, N5D1 spike response must remain
 after-run audit only, and no paper performance claim is allowed.
 
-## Stage N7A: Go2 body-state weak prior foundation
+## Stage N6B1: Source-aware visual validation
+
+Goal:
+Validate the N6B source-aware LSIM/OIM policy with runtime-only figures and
+plotted-data coverage checks. N6B1 checks clean curves, R-scale traces, spike
+response, stress variants, and mandatory figure non-emptiness. It does not
+modify solver math, tune from trace/final_v23 output, delete epochs, add Go2
+priors, add FGO, or make paper performance claims.
+
+## Stage N7A: Go2 body-state weak prior review
 
 Goal:
 Open Go2 body-state weak-prior foundation only after N6B/N6C evidence is clean

@@ -222,6 +222,20 @@ Allowed N6B source-aware policy refinement statement:
 - No outperform final_v23 claim.
 - No Go2 prior, FGO, or smoothing claim in N6B.
 
+Allowed N6B1 source-aware visual validation statement:
+
+- N6B1 is visual validation only.
+- Figure existence is not sufficient; plotted data coverage is required.
+- N6B1 may generate runtime-only figures and reports for clean curves,
+  source-aware R-scale traces, spike response, stress variants, and policy
+  diagnostics.
+- N6B1 does not modify solver math.
+- N6B1 does not use trace or final_v23 output for tuning.
+- N6B1 does not delete epochs or apply output-only correction.
+- N6B1 does not implement Go2 prior, FGO, or smoothing.
+- No paper performance claim.
+- No outperform final_v23 claim.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
@@ -763,6 +777,31 @@ No trace solver input.
 No output-only correction, no tuning, no epoch deletion.
 
 No LSIM/OIM, Go2 prior, or FGO claim in N5D.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
+## N6B1 Source-Aware Visual Validation Boundary
+
+N6B1 is visual validation only.
+
+Figure existence is not sufficient; plotted data coverage is required.
+
+Mandatory figures must be non-empty and must report plotted row counts, time
+axis coverage, source IDs, and reason codes for suspected empty plots.
+
+N6B1 does not change solver math.
+
+N6B1 does not tune from trace or final_v23 output.
+
+N6B1 does not delete epochs.
+
+N6B1 does not apply output-only correction.
+
+No Go2 prior in N6B1.
+
+No FGO claim in N6B1.
 
 No paper performance claim.
 

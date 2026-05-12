@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N5D1 visual data coverage and raw Doppler spike audit.
+N6B source-aware policy refinement.
 
 Current working phase:
 
-N6B source-aware policy refinement.
+N6B1 source-aware visual validation.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -161,10 +161,10 @@ proposed factors, and does not make performance claims. The old
 `cpp/legsa_v23_core` remains a diagnostic/self-written attempt.
 
 Current completed phase:
-N5D1 visual data coverage and raw Doppler spike audit.
+N6B source-aware policy refinement.
 
 Current working phase:
-N6B source-aware policy refinement.
+N6B1 source-aware visual validation.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,
@@ -229,6 +229,11 @@ uses innovation covariance `S=HPH^T+R` with a deadband and conservative
 per-source caps; LSIM is metadata-only. N6B remains diagnostic-only, does not
 use trace or final_v23 output for weights, does not hardcode spike times, does
 not shrink R, and does not implement Go2 prior or FGO.
+
+N6B1 is the post-N6B visual validation and plotted-data coverage audit. It
+checks clean curves, R-scale traces, spike response, stress variants, and
+mandatory figure non-emptiness. N6B1 does not modify solver math, tune, delete
+epochs, add Go2 prior, add FGO, or make paper performance claims.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace
