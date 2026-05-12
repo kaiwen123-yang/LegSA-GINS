@@ -566,13 +566,28 @@ default in N7A. Go2 yaw prior is disabled in N7A. No trace/final_v23 output is
 used for Go2 prior construction. N7A does not implement FGO, output-only
 correction, paper performance claims, or outperform-final_v23 claims.
 
-## Stage N7B: Go2 velocity/contact readiness or prior refinement
+## Stage N7B: Go2 velocity/contact readiness
 
 Goal:
-Use N7A evidence to decide whether to refine the roll/pitch weak-prior noise
-policy or add readiness-only Go2 velocity/contact checks for a later weak prior.
-Any future velocity/contact source remains weak, conservative, source-aware, and
-diagnostic until frame/time/source evidence is sufficient.
+Use N7A body-state evidence to audit Go2 contact labels, motion state, velocity
+quality, yaw-rate readiness, and cross-source consistency before any later Go2
+velocity/contact weak prior.
+
+N7B is readiness only. Go2 position is not truth. Go2 velocity is not truth.
+Cross-source velocity comparison is not truth error. Contact thresholds are
+diagnostic defaults and do not use trace. N7B does not activate Go2 velocity
+prior, does not activate Go2 yaw prior, does not implement FGO, does not delete
+epochs, and makes no paper performance or outperform-final_v23 claim.
+
+## Stage N7C: Go2 velocity/contact weak-prior activation or N8A FGO preparation
+
+Goal:
+Proceed only from the N7B decision report. If contact and velocity readiness
+passes, review a future conservative Go2 velocity/contact weak prior. If
+yaw-speed is the stronger signal, review a future yaw-rate weak prior. If
+extended Go2 priors remain weak, prepare N8A no-feedback FGO foundation instead.
+
+N7C is not started in N7B.
 
 ## Stage N6: Source-Aware Weighting
 

@@ -250,6 +250,24 @@ Allowed N7A Go2 body-state weak prior statement:
 - No FGO claim in N7A.
 - Go2 weak prior changes EKF measurement update through conservative R, not output-only correction.
 
+Allowed N7B Go2 velocity/contact readiness statement:
+
+- N7B is readiness only.
+- Go2 position is not truth.
+- Go2 velocity is not truth.
+- Cross-source velocity comparison is not truth error.
+- Contact state thresholds use diagnostic defaults and do not use trace.
+- N7B may compare Go2 velocity with receiver-native velocity and raw Doppler
+  velocity for source-consistency review only.
+- N7B may classify contact, motion state, and yaw-rate readiness.
+- No Go2 velocity prior activation in N7B.
+- No Go2 yaw prior activation in N7B.
+- No FGO claim in N7B.
+- No paper performance claim in N7B.
+- No outperform final_v23 claim in N7B.
+- No output-only correction.
+- No epoch deletion.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:
