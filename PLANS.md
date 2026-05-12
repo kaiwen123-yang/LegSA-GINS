@@ -547,9 +547,23 @@ after-run audit only, and no paper performance claim is allowed.
 ## Stage N7A: Go2 body-state weak prior foundation
 
 Goal:
-Open Go2 body-state weak-prior foundation only after N6B/N6C evidence is clean
-neutral enough to justify a new stage. N6B itself does not implement Go2 prior,
-FGO, smoothing, output-only correction, or performance claims.
+Parse Go2 body-state / sportmodestate high-level state, verify source integrity,
+time alignment, quaternion/rpy consistency, and frame contracts, then activate
+one conservative roll/pitch weak attitude prior in the source-backed EKF.
+
+Boundaries:
+Go2 body-state is not truth. Go2 position and velocity priors are disabled by
+default in N7A. Go2 yaw prior is disabled in N7A. No trace/final_v23 output is
+used for Go2 prior construction. N7A does not implement FGO, output-only
+correction, paper performance claims, or outperform-final_v23 claims.
+
+## Stage N7B: Go2 velocity/contact readiness or prior refinement
+
+Goal:
+Use N7A evidence to decide whether to refine the roll/pitch weak-prior noise
+policy or add readiness-only Go2 velocity/contact checks for a later weak prior.
+Any future velocity/contact source remains weak, conservative, source-aware, and
+diagnostic until frame/time/source evidence is sufficient.
 
 ## Stage N6: Source-Aware Weighting
 

@@ -38,11 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phase:
 
-N5D1 visual data coverage and raw Doppler spike audit.
+N6B source-aware policy refinement.
 
 Current working phase:
 
-N6B source-aware policy refinement.
+N7A Go2 body-state weak prior foundation.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -161,10 +161,10 @@ proposed factors, and does not make performance claims. The old
 `cpp/legsa_v23_core` remains a diagnostic/self-written attempt.
 
 Current completed phase:
-N5D1 visual data coverage and raw Doppler spike audit.
+N6B source-aware policy refinement.
 
 Current working phase:
-N6B source-aware policy refinement.
+N7A Go2 body-state weak prior foundation.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,
@@ -229,6 +229,14 @@ uses innovation covariance `S=HPH^T+R` with a deadband and conservative
 per-source caps; LSIM is metadata-only. N6B remains diagnostic-only, does not
 use trace or final_v23 output for weights, does not hardcode spike times, does
 not shrink R, and does not implement Go2 prior or FGO.
+
+N7A parses Go2 body-state / sportmodestate high-level state and activates only a
+conservative roll/pitch weak attitude prior through the EKFUpdate path. Go2
+body-state is not truth; Go2 position and velocity priors are disabled by
+default in N7A, Go2 yaw prior is disabled in N7A, and no trace/final_v23 output
+is used for Go2 prior construction. N7A is diagnostic engineering evidence
+only, with no paper performance claim, no outperform final_v23 claim, and no
+FGO.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace

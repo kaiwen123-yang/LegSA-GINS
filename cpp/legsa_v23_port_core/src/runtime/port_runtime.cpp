@@ -10,6 +10,7 @@
 #include "legsa_v23_port_core/common/earth.hpp"
 #include "legsa_v23_port_core/common/rotation.hpp"
 #include "legsa_v23_port_core/config/port_config_loader.hpp"
+#include "legsa_v23_port_core/factors/go2_weak_prior_loader.hpp"
 #include "legsa_v23_port_core/factors/raw_doppler_factor_loader.hpp"
 #include "legsa_v23_port_core/fileio/file_saver.hpp"
 #include "legsa_v23_port_core/fileio/gnss_file_loader.hpp"
@@ -72,6 +73,12 @@ void copySourceAwareStatus(const GIEngine& engine, PortOptions& options) {
   options.source_aware_runtime_stats = engine.sourceAwareStats();
   options.lsim_oim = options.source_aware_policy_config.enable_source_aware_weighting &&
                      options.source_aware_policy_config.source_aware_mode != "off";
+}
+
+void copyGo2AttitudePriorStatus(const GIEngine& engine, PortOptions& options) {
+  // 中文说明：Go2 prior status 只记录 roll/pitch weak prior 是否真实进入 EKF，不声明性能提升。
+  options.go2_attitude_prior_status = engine.go2AttitudeWeakPriorStatus();
+  options.go2_prior = options.go2_attitude_prior_status.update_count > 0;
 }
 
 std::vector<double> readFirstColumnTimes(const std::string& path) {
@@ -572,6 +579,95 @@ void PortRuntime::runSourceAwareToy(const std::string& output_dir) {
   engine.writeSourceAwareTrace(output_dir);
 }
 
+// 中文说明：N7A toy 验证 Go2 roll/pitch weak prior 的 EKF pull，不使用 trace/final_v23 输出。
+void PortRuntime::runGo2WeakPriorToy(const std::string& output_dir) {
+  PortOptions options;
+  options.phase = "N7A";
+  options.port_role = "go2_body_state_weak_prior_toy";
+  options.run_label = "N7A_go2_attitude_weak_prior_toy";
+  options.starttime = 0.0;
+  options.init_pos_blh_rad_m = makeVec3(Earth::degToRad(30.0), Earth::degToRad(120.0), 10.0);
+  options.init_vel_ned_mps = makeVec3(0.0, 0.0, 0.0);
+  options.init_att_rad = makeVec3(Earth::degToRad(3.0), Earth::degToRad(-2.0), Earth::degToRad(5.0));
+  options.go2_attitude_prior_config.enable_go2_attitude_weak_prior = true;
+  options.go2_attitude_prior_config.go2_attitude_prior_sourceaware = true;
+  options.go2_attitude_prior_config.go2_attitude_prior_diagnostic_only = true;
+  options.source_aware_policy_config.enable_source_aware_weighting = true;
+  options.source_aware_policy_config.source_aware_policy_version = "n6b_conservative_innovation_covariance";
+  options.source_aware_policy_config.source_aware_mode = "lsim_oim";
+  options.source_aware_policy_config.source_aware_trace_enabled = true;
+  options.lsim_oim = true;
+  options.paper_performance_claim = false;
+
+  Go2AttitudeWeakPriorMeasurement prior;
+  prior.time = 0.5;
+  prior.roll_rad = Earth::degToRad(0.5);
+  prior.pitch_rad = Earth::degToRad(-0.4);
+  prior.std_roll_rad = Earth::degToRad(5.0);
+  prior.std_pitch_rad = Earth::degToRad(5.0);
+  prior.source_status = "active";
+  prior.quality_flag = "nominal";
+  Go2AttitudeWeakPriorStatus prior_status;
+  prior_status.solver_enabled = true;
+  prior_status.provider_status = "available";
+  prior_status.prior_count = 1;
+  prior_status.valid_prior_count = 1;
+
+  GIEngine engine(options);
+  engine.setGo2AttitudeWeakPriors(std::vector<Go2AttitudeWeakPriorMeasurement>{prior}, prior_status);
+  engine.initialize(makeInitialState(options));
+  std::vector<NavState> states;
+  std::vector<std::vector<double>> covariances;
+  appendState(engine, states, covariances);
+
+  ImuData first;
+  first.time = 0.0;
+  first.dt = 0.01;
+  engine.addImuData(first, true);
+  const double initial_roll_abs = std::fabs(engine.navState().euler_rad[0] - prior.roll_rad);
+  const double initial_pitch_abs = std::fabs(engine.navState().euler_rad[1] - prior.pitch_rad);
+  for (int i = 1; i <= 80; ++i) {
+    ImuData imu;
+    imu.time = 0.01 * static_cast<double>(i);
+    imu.dt = 0.01;
+    imu.dtheta = makeVec3(0.0, 0.0, 0.0);
+    imu.dvel = makeVec3(0.0, 0.0, -Earth::gravity(options.init_pos_blh_rad_m) * imu.dt);
+    if (i == 50) {
+      GnssData gnss;
+      gnss.time = imu.time;
+      gnss.blh_rad_m = engine.navState().pos_blh_rad_m;
+      gnss.std_ned_m = makeVec3(0.5, 0.5, 0.8);
+      gnss.vel_ned_mps = engine.navState().vel_ned_mps;
+      gnss.vel_std_mps = makeVec3(0.1, 0.1, 0.1);
+      gnss.has_yaw = false;
+      gnss.isvalid = true;
+      engine.addGnssData(gnss);
+    }
+    engine.addImuData(imu);
+    engine.newImuProcess();
+    if (!engine.checkCov()) {
+      throw std::runtime_error("Go2 weak prior toy covariance check failed");
+    }
+    appendState(engine, states, covariances);
+  }
+  copyGo2AttitudePriorStatus(engine, options);
+  copySourceAwareStatus(engine, options);
+  options.propagation_count = engine.propagationCount();
+  options.measurement_update_count = engine.updateCount();
+  options.position_update_count = engine.positionUpdateCount();
+  options.velocity_update_count = engine.velocityUpdateCount();
+  options.yaw_update_count = engine.yawUpdateCount();
+  const double final_roll_abs = std::fabs(engine.navState().euler_rad[0] - prior.roll_rad);
+  const double final_pitch_abs = std::fabs(engine.navState().euler_rad[1] - prior.pitch_rad);
+  if (options.go2_attitude_prior_status.update_count == 0 ||
+      final_roll_abs >= initial_roll_abs ||
+      final_pitch_abs >= initial_pitch_abs) {
+    throw std::runtime_error("Go2 weak prior toy pull test failed");
+  }
+  writeAll(output_dir, options, states, covariances);
+  engine.writeSourceAwareTrace(output_dir);
+}
+
 // 中文说明：真实输入 runner 只建立 R2 运行链路；R3 才允许 clean replay parity 判定。
 void PortRuntime::runFromConfig(const std::string& config_path, const std::string& output_dir) {
   PortRuntimeDebugOptions debug_options;
@@ -611,6 +707,13 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.run_label = options.ablation_variant.empty() ? options.phase + "_source_aware_run" : options.ablation_variant;
     options.lsim_oim = true;
   }
+  if (options.go2_attitude_prior_config.enable_go2_attitude_weak_prior) {
+    // 中文说明：N7A 在 N6B source-aware layer 后激活 Go2 roll/pitch weak prior，仍不声明 paper performance。
+    options.phase = "N7A";
+    options.port_role = "go2_body_state_weak_prior_foundation";
+    options.run_label = options.ablation_variant.empty() ? "N7A_go2_weak_prior_run" : options.ablation_variant;
+    options.go2_attitude_prior_status.body_state_not_truth = true;
+  }
   if (options.imu_path.empty() || options.gnss_path.empty()) {
     throw std::runtime_error("config must provide imu_path/imupath and gnss_path/gnsspath");
   }
@@ -621,6 +724,13 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.raw_doppler_status = raw_doppler_load.status;
     options.raw_doppler_factor_code_present = true;
     options.raw_doppler_config.raw_doppler_solver_enabled = raw_doppler_load.status.solver_enabled;
+  }
+  Go2AttitudeWeakPriorLoadResult go2_prior_load;
+  if (options.go2_attitude_prior_config.enable_go2_attitude_weak_prior) {
+    go2_prior_load =
+        Go2WeakPriorLoader::loadCsv(options.go2_attitude_prior_config.go2_attitude_prior_path,
+                                    options.go2_attitude_prior_config);
+    options.go2_attitude_prior_status = go2_prior_load.status;
   }
   const std::vector<double> imu_times = readFirstColumnTimes(options.imu_path);
   const std::vector<double> gnss_times = readFirstColumnTimes(options.gnss_path);
@@ -660,6 +770,9 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   GIEngine engine(options);
   if (options.raw_doppler_config.enable_raw_doppler) {
     engine.setRawDopplerVelocityMeasurements(raw_doppler_load.measurements, raw_doppler_load.status);
+  }
+  if (options.go2_attitude_prior_config.enable_go2_attitude_weak_prior) {
+    engine.setGo2AttitudeWeakPriors(go2_prior_load.measurements, go2_prior_load.status);
   }
   engine.initialize(makeInitialState(options));
   std::vector<NavState> states;
@@ -784,6 +897,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   options.yaw_reject_count = engine.yawRejectCount();
   copyRawDopplerStatus(engine, options);
   copySourceAwareStatus(engine, options);
+  copyGo2AttitudePriorStatus(engine, options);
   options.actual_update_count = engine.updateCount();
   options.update_count_ratio =
       options.expected_update_count == 0
