@@ -268,6 +268,26 @@ Allowed N7B Go2 velocity/contact readiness statement:
 - No output-only correction.
 - No epoch deletion.
 
+Allowed N7B2 Go2 contact threshold review statement:
+
+- N7B2 is contact threshold readiness only.
+- Go2 contact thresholds are derived from Go2 field distributions, not trace.
+- Threshold candidates are diagnostic and must not be tuned to navigation
+  metrics.
+- Go2 velocity is not truth.
+- Contact-conditioned velocity comparison is not truth error.
+- N7B2 may build a diagnostic contact-state v2 candidate and fixed window
+  smoother for readiness review only.
+- N7B2 may compare contact-conditioned Go2 velocity with receiver-native
+  velocity and raw Doppler velocity for source-consistency review only.
+- No Go2 velocity prior activation in N7B2.
+- No Go2 yaw prior activation in N7B2.
+- No FGO claim in N7B2.
+- No paper performance claim in N7B2.
+- No outperform final_v23 claim in N7B2.
+- No output-only correction.
+- No epoch deletion.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:

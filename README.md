@@ -38,12 +38,11 @@ LegSA-GINS will be developed as:
 
 Current completed phases:
 
-N6B1 source-aware visual validation.
-N7A Go2 roll/pitch weak prior.
+N7B Go2 velocity/contact readiness.
 
 Current working phase:
 
-N7B Go2 velocity/contact readiness.
+N7B2 Go2 contact threshold review.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -162,11 +161,10 @@ proposed factors, and does not make performance claims. The old
 `cpp/legsa_v23_core` remains a diagnostic/self-written attempt.
 
 Current completed phases:
-N6B1 source-aware visual validation.
-N7A Go2 roll/pitch weak prior.
+N7B Go2 velocity/contact readiness.
 
 Current working phase:
-N7B Go2 velocity/contact readiness.
+N7B2 Go2 contact threshold review.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,
@@ -250,6 +248,13 @@ velocity is not truth, and cross-source velocity comparison is not truth error.
 Contact thresholds are diagnostic defaults and do not use trace. N7B does not
 activate Go2 velocity prior, does not activate Go2 yaw prior, does not implement
 FGO, and makes no paper performance or outperform-final_v23 claim.
+
+N7B2 reviews Go2 contact thresholds and contact-state v2 readiness only. It
+derives thresholds from Go2 field distributions, not trace or final_v23 output,
+and compares contact-conditioned velocity consistency as source consistency,
+not truth error. N7B2 does not activate Go2 velocity prior, does not activate
+Go2 yaw prior, does not implement FGO, and makes no paper performance or
+outperform-final_v23 claim.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace
