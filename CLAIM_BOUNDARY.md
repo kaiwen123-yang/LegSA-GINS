@@ -307,6 +307,26 @@ Allowed N7B2A Go2 metric namespace and contact physical sanity statement:
 - No output-only correction.
 - No epoch deletion.
 
+Allowed N7B3 Go2 contact/velocity diagnostic activation statement:
+
+- N7B3 diagnostic Go2 velocity/yaw-rate activation is not a formal prior.
+- Go2 position is not truth.
+- Go2 velocity is not truth.
+- Cross-source velocity comparison is not truth error.
+- Contact model candidates are derived from Go2 fields only.
+- Trace/final_v23 are not used for thresholds or frame selection.
+- Diagnostic activation results are not paper performance.
+- N7B3 may attempt diagnostic-only Go2 velocity/contact EKF updates through
+  runtime-only CSVs.
+- N7B3 does not enable a formal Go2 velocity prior.
+- N7B3 does not enable a formal Go2 yaw prior.
+- The current state model has no yaw-rate state, so yaw-rate remains
+  diagnostic unless a future state model explicitly supports it.
+- No output-only correction.
+- No FGO claim.
+- No paper performance claim.
+- No outperform final_v23 claim.
+
 ## Diagnostic / Exploratory Only
 
 The following can only be diagnostic unless future evidence is available:

@@ -81,6 +81,19 @@ void copyGo2AttitudePriorStatus(const GIEngine& engine, PortOptions& options) {
   options.go2_prior = options.go2_attitude_prior_status.update_count > 0;
 }
 
+void copyGo2DiagnosticPriorStatus(const GIEngine& engine, PortOptions& options) {
+  // 中文说明：N7B3 velocity/contact activation 是 diagnostic-only，不改变 formal Go2 prior 边界。
+  options.go2_velocity_prior_diagnostic_status = engine.go2VelocityDiagnosticPriorStatus();
+  if (options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic) {
+    options.go2_yaw_rate_prior_diagnostic_status.code_present = true;
+    options.go2_yaw_rate_prior_diagnostic_status.solver_enabled = false;
+    options.go2_yaw_rate_prior_diagnostic_status.provider_status =
+        "yaw_rate_prior_not_activated_due_to_state_model";
+    options.go2_yaw_rate_prior_diagnostic_status.activation_status =
+        "yaw_rate_prior_not_activated_due_to_state_model";
+  }
+}
+
 std::vector<double> readFirstColumnTimes(const std::string& path) {
   std::ifstream input(path);
   std::vector<double> times;
@@ -714,6 +727,18 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.run_label = options.ablation_variant.empty() ? "N7A_go2_weak_prior_run" : options.ablation_variant;
     options.go2_attitude_prior_status.body_state_not_truth = true;
   }
+  if (options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic ||
+      options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic) {
+    // 中文说明：N7B3 允许 diagnostic-only activation attempt，但不声明 formal proposed Go2 velocity/yaw prior。
+    options.phase = "N7B3";
+    options.port_role = "go2_contact_velocity_diagnostic_activation";
+    options.run_label = options.ablation_variant.empty() ? "N7B3_go2_diagnostic_activation" : options.ablation_variant;
+    options.diagnostic_only = true;
+    options.go2_diagnostic_prior_only = true;
+    options.paper_performance_claim = false;
+    options.proposed_factor_claim = false;
+    options.performance_claim = false;
+  }
   if (options.imu_path.empty() || options.gnss_path.empty()) {
     throw std::runtime_error("config must provide imu_path/imupath and gnss_path/gnsspath");
   }
@@ -731,6 +756,21 @@ void PortRuntime::runFromConfig(const std::string& config_path,
         Go2WeakPriorLoader::loadCsv(options.go2_attitude_prior_config.go2_attitude_prior_path,
                                     options.go2_attitude_prior_config);
     options.go2_attitude_prior_status = go2_prior_load.status;
+  }
+  Go2VelocityDiagnosticPriorLoadResult go2_velocity_prior_load;
+  if (options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic) {
+    go2_velocity_prior_load = Go2WeakPriorLoader::loadVelocityDiagnosticCsv(
+        options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path,
+        options.go2_velocity_prior_diagnostic_config);
+    options.go2_velocity_prior_diagnostic_status = go2_velocity_prior_load.status;
+  }
+  if (options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic) {
+    options.go2_yaw_rate_prior_diagnostic_status.code_present = true;
+    options.go2_yaw_rate_prior_diagnostic_status.solver_enabled = false;
+    options.go2_yaw_rate_prior_diagnostic_status.provider_status =
+        "yaw_rate_prior_not_activated_due_to_state_model";
+    options.go2_yaw_rate_prior_diagnostic_status.activation_status =
+        "yaw_rate_prior_not_activated_due_to_state_model";
   }
   const std::vector<double> imu_times = readFirstColumnTimes(options.imu_path);
   const std::vector<double> gnss_times = readFirstColumnTimes(options.gnss_path);
@@ -773,6 +813,9 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   }
   if (options.go2_attitude_prior_config.enable_go2_attitude_weak_prior) {
     engine.setGo2AttitudeWeakPriors(go2_prior_load.measurements, go2_prior_load.status);
+  }
+  if (options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic) {
+    engine.setGo2VelocityDiagnosticPriors(go2_velocity_prior_load.measurements, go2_velocity_prior_load.status);
   }
   engine.initialize(makeInitialState(options));
   std::vector<NavState> states;
@@ -898,6 +941,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   copyRawDopplerStatus(engine, options);
   copySourceAwareStatus(engine, options);
   copyGo2AttitudePriorStatus(engine, options);
+  copyGo2DiagnosticPriorStatus(engine, options);
   options.actual_update_count = engine.updateCount();
   options.update_count_ratio =
       options.expected_update_count == 0

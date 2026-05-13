@@ -65,6 +65,12 @@ struct PortOptions {
   // 中文说明：N7A Go2 roll/pitch weak prior 默认关闭；开启后仍不把 Go2 position/velocity/yaw 当 solver prior。
   Go2AttitudeWeakPriorConfig go2_attitude_prior_config;
   Go2AttitudeWeakPriorStatus go2_attitude_prior_status;
+  // 中文说明：N7B3 Go2 velocity/contact 只允许 diagnostic-only activation；默认关闭，且不是正式 proposed result。
+  Go2VelocityDiagnosticPriorConfig go2_velocity_prior_diagnostic_config;
+  Go2VelocityDiagnosticPriorStatus go2_velocity_prior_diagnostic_status;
+  Go2YawRateDiagnosticPriorConfig go2_yaw_rate_prior_diagnostic_config;
+  Go2YawRateDiagnosticPriorStatus go2_yaw_rate_prior_diagnostic_status;
+  bool go2_diagnostic_prior_only = true;
   bool lsim_oim = false;
   // 中文说明：N6A source-aware LSIM/OIM 默认关闭；打开后只基于 solver 可见 metadata/innovation 放大 R。
   source_aware::SourceAwarePolicyConfig source_aware_policy_config;

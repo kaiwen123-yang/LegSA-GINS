@@ -32,6 +32,8 @@ class GIEngine {
                                          const RawDopplerFactorStatus& status);
   void setGo2AttitudeWeakPriors(const std::vector<Go2AttitudeWeakPriorMeasurement>& measurements,
                                 const Go2AttitudeWeakPriorStatus& status);
+  void setGo2VelocityDiagnosticPriors(const std::vector<Go2VelocityDiagnosticPriorMeasurement>& measurements,
+                                      const Go2VelocityDiagnosticPriorStatus& status);
   void addImuData(const ImuData& imu, bool compensate = false);
   void addGnssData(const GnssData& gnss);
   int isToUpdate() const;
@@ -73,6 +75,9 @@ class GIEngine {
   std::size_t go2AttitudeWeakPriorUpdateCount() const;
   std::size_t go2AttitudeWeakPriorRejectCount() const;
   Go2AttitudeWeakPriorStatus go2AttitudeWeakPriorStatus() const;
+  std::size_t go2VelocityDiagnosticPriorUpdateCount() const;
+  std::size_t go2VelocityDiagnosticPriorRejectCount() const;
+  Go2VelocityDiagnosticPriorStatus go2VelocityDiagnosticPriorStatus() const;
   source_aware::SourceAwareRuntimeStats sourceAwareStats() const;
   void writeSourceAwareTrace(const std::string& output_dir) const;
 
@@ -88,6 +93,7 @@ class GIEngine {
   void applyYawUpdate(GnssData& gnss);
   void applyRawDopplerUpdateForTime(double update_time);
   void applyGo2AttitudeWeakPriorForTime(double update_time);
+  void applyGo2VelocityDiagnosticPriorForTime(double update_time);
   source_aware::SourceWeightResult applySourceAwareWeighting(
       source_aware::MeasurementSource source,
       const source_aware::SourceMetadata& metadata,
@@ -125,6 +131,8 @@ class GIEngine {
   Go2AttitudeWeakPriorStatus go2_attitude_prior_status_;
   std::vector<double> go2_roll_residuals_;
   std::vector<double> go2_pitch_residuals_;
+  std::vector<Go2VelocityDiagnosticPriorMeasurement> go2_velocity_diagnostic_priors_;
+  Go2VelocityDiagnosticPriorStatus go2_velocity_diagnostic_prior_status_;
   source_aware::SourceAwarePolicy source_aware_policy_;
   source_aware::SourceAwareTrace source_aware_trace_;
   bool initialized_ = false;

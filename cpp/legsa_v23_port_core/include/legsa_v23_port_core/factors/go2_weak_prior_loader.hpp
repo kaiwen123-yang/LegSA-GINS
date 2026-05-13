@@ -20,10 +20,18 @@ struct Go2AttitudeWeakPriorLoadResult {
   Go2AttitudeWeakPriorStatus status;
 };
 
+struct Go2VelocityDiagnosticPriorLoadResult {
+  std::vector<Go2VelocityDiagnosticPriorMeasurement> measurements;
+  Go2VelocityDiagnosticPriorStatus status;
+};
+
 class Go2WeakPriorLoader {
  public:
   static Go2AttitudeWeakPriorLoadResult loadCsv(const std::string& path,
                                                 const Go2AttitudeWeakPriorConfig& config);
+  static Go2VelocityDiagnosticPriorLoadResult loadVelocityDiagnosticCsv(
+      const std::string& path,
+      const Go2VelocityDiagnosticPriorConfig& config);
 };
 
 }  // namespace legsa_v23_port_core

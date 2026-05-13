@@ -40,10 +40,11 @@ Current completed phases:
 
 N7B Go2 velocity/contact readiness.
 N7B2 Go2 contact threshold review.
+N7B3 Go2 contact/velocity diagnostic activation.
 
 Current working phase:
 
-N7B2A Go2 metric namespace and contact physical sanity audit.
+N7B3 Go2 contact/velocity diagnostic activation.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -264,6 +265,15 @@ guards, contact v2 physical plausibility, and N7B2 visual data coverage. The
 gate threshold. N7A parity metrics are not absolute accuracy. N7B2A does not
 activate Go2 velocity prior, does not activate Go2 yaw prior, does not
 implement FGO, and makes no paper performance or outperform-final_v23 claim.
+
+N7B3 continues Go2 contact/velocity investigation with diagnostic-only
+activation attempts. It reviews velocity frame hypotheses using cross-source
+consistency, tests multiple Go2-field-only contact models, builds runtime-only
+diagnostic velocity/yaw-rate prior CSVs, and attempts diagnostic EKF variants.
+Go2 velocity is not truth, contact thresholds are not trace/final_v23 tuned,
+diagnostic activation is not a formal prior, no Go2 yaw prior is formally
+enabled, no FGO is implemented, and no paper performance or outperform-final_v23
+claim is made.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace

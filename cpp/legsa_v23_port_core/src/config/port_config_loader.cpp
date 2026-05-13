@@ -290,6 +290,40 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       boolOrDefault(kv,
                     "go2_yaw_prior_enabled",
                     options.go2_attitude_prior_config.go2_yaw_prior_enabled);
+  // 中文说明：N7B3 diagnostic velocity prior 默认关闭；只能读取 builder 生成的 runtime-only CSV。
+  options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic =
+      boolOrDefault(kv,
+                    "enable_go2_velocity_prior_diagnostic",
+                    options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic);
+  options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path =
+      stringOrDefault(kv,
+                      "go2_velocity_prior_diagnostic_path",
+                      options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path);
+  options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_tolerance_sec =
+      scalarOrDefault(kv,
+                      "go2_velocity_prior_time_tolerance_sec",
+                      options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_tolerance_sec);
+  options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_std_scale =
+      scalarOrDefault(kv,
+                      "go2_velocity_prior_std_scale",
+                      options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_std_scale);
+  options.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only =
+      boolOrDefault(kv,
+                    "go2_diagnostic_prior_only",
+                    options.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only);
+  options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic =
+      boolOrDefault(kv,
+                    "enable_go2_yaw_rate_prior_diagnostic",
+                    options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic);
+  options.go2_yaw_rate_prior_diagnostic_config.go2_yaw_rate_prior_diagnostic_path =
+      stringOrDefault(kv,
+                      "go2_yaw_rate_prior_diagnostic_path",
+                      options.go2_yaw_rate_prior_diagnostic_config.go2_yaw_rate_prior_diagnostic_path);
+  options.go2_yaw_rate_prior_diagnostic_config.go2_diagnostic_prior_only =
+      boolOrDefault(kv,
+                    "go2_diagnostic_prior_only",
+                    options.go2_yaw_rate_prior_diagnostic_config.go2_diagnostic_prior_only);
+  options.go2_diagnostic_prior_only = boolOrDefault(kv, "go2_diagnostic_prior_only", options.go2_diagnostic_prior_only);
   // 中文说明：N6A source-aware 默认关闭；启用后只在 EKFUpdate 前放大 R，不读取 trace/final_v23 输出。
   options.source_aware_policy_config.enable_source_aware_weighting =
       boolOrDefault(kv,
