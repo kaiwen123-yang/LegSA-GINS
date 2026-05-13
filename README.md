@@ -38,6 +38,8 @@ LegSA-GINS will be developed as:
 
 Current completed phases:
 
+N7C6A Go2 proprioceptive joint observation factor final review.
+
 N7B Go2 velocity/contact readiness.
 N7B2 Go2 contact threshold review.
 N7B3 Go2 contact/velocity diagnostic activation.
@@ -46,7 +48,7 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current working phase:
 
-N7C6A Go2 proprioceptive joint factor final review.
+N8A no-feedback FGO foundation.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 

@@ -873,6 +873,40 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8A No-Feedback FGO Foundation Boundary
+
+N8A FGO is no-feedback.
+
+FGO output is not fed back into EKF.
+
+FGO output does not replace EKF NAV.
+
+Trace and final_v23 outputs are evaluation-only.
+
+Trace is not used as an FGO factor.
+
+final_v23 output is not used as an FGO factor.
+
+Go2 proprioceptive joint factor is allowed.
+
+Go2 foot kinematic velocity, yaw-rate, and relative odometry are diagnostic FGO candidate factors.
+
+Go2 contact probability is weighting-only unless a later stage formally reopens it.
+
+Go2 vertical velocity factor is not used as default.
+
+Go2 yaw factor is not used as default.
+
+Go2 absolute position factor is not used as default.
+
+N8A is diagnostic engineering evidence, not paper performance.
+
+No output-only correction.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N7C6A Go2 Proprioceptive Joint Factor Final Review Boundary
 
 N7C6A is final visual/metric sanity review.

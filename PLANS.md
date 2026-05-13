@@ -1,5 +1,9 @@
 # PLANS.md
 
+## N8A No-Feedback FGO Foundation
+
+N8A starts from the N7C6A-finalized Go2 proprioceptive joint observation factor and builds a no-feedback diagnostic FGO foundation. It must not feed FGO output back into EKF, must not replace EKF NAV, and must keep trace/final_v23 outputs evaluation-only.
+
 ## Stage N0: Bootstrap
 
 Goal:
