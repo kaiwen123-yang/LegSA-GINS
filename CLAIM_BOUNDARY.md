@@ -873,6 +873,38 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N7C6A Go2 Proprioceptive Joint Factor Final Review Boundary
+
+N7C6A is final visual/metric sanity review.
+
+N7C6A does not change solver math.
+
+N7C6A does not tune weights, delete epochs, or alter N7C6 results.
+
+N7C6A clarifies metric semantics and plot readability.
+
+Go2 proprioceptive joint factor remains observation, not truth.
+
+Go2 position prior remains disabled.
+
+Go2 yaw prior remains disabled.
+
+Go2 vertical velocity prior remains disabled.
+
+No trace/final_v23 tuning.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output-only correction.
+
+No FGO claim in N7C6A.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N7C5A / N7C6 Go2 Proprioceptive Joint Observation Boundary
 
 N7C5A reviews N7C5 Go2 full-field mining figures before any additional
