@@ -155,22 +155,27 @@ void GIEngine::setGo2VelocityDiagnosticPriors(
   go2_velocity_diagnostic_prior_status_.code_present = true;
   go2_velocity_diagnostic_prior_status_.prior_count = measurements.size();
   if (go2_velocity_diagnostic_prior_status_.valid_prior_count == 0) {
+    const bool controlled_horizontal =
+        options_.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior;
     go2_velocity_diagnostic_prior_status_.valid_prior_count = static_cast<std::size_t>(std::count_if(
-        measurements.begin(), measurements.end(), [](const Go2VelocityDiagnosticPriorMeasurement& measurement) {
-          return measurement.source_status == "active" && measurement.diagnostic_only &&
-                 !measurement.go2_velocity_truth_claim;
+        measurements.begin(), measurements.end(), [controlled_horizontal](const Go2VelocityDiagnosticPriorMeasurement& measurement) {
+          return measurement.source_status == "active" && !measurement.go2_velocity_truth_claim &&
+                 (measurement.diagnostic_only || controlled_horizontal);
         }));
   }
   go2_velocity_diagnostic_prior_status_.solver_enabled =
       options_.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic &&
       status.solver_enabled && status.provider_status == "available" &&
-      options_.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only;
+      (options_.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only ||
+       options_.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior);
   go2_velocity_diagnostic_prior_status_.horizontal_only =
       std::any_of(measurements.begin(), measurements.end(), [](const Go2VelocityDiagnosticPriorMeasurement& measurement) {
         return measurement.std_ned_mps[2] >= 999.0 ||
                measurement.prior_policy.find("horizontal") != std::string::npos;
       });
   go2_velocity_diagnostic_prior_status_.vertical_disabled = go2_velocity_diagnostic_prior_status_.horizontal_only;
+  go2_velocity_diagnostic_prior_status_.controlled_activation =
+      options_.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior;
 }
 
 // 中文说明：addImuData 保持 reference 的 imupre/imucur 滚动缓冲；首帧可选择预补偿。
@@ -842,9 +847,11 @@ void GIEngine::applyGo2AttitudeWeakPriorForTime(double update_time) {
 }
 
 void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
+  const bool controlled_horizontal =
+      options_.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior;
   if (!options_.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic ||
       !go2_velocity_diagnostic_prior_status_.solver_enabled ||
-      !options_.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only) {
+      (!options_.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only && !controlled_horizontal)) {
     return;
   }
   const Go2VelocityDiagnosticPriorMeasurement* best = nullptr;
@@ -859,7 +866,9 @@ void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
   if (!best) {
     return;
   }
-  if (best->source_status != "active" || !best->diagnostic_only || best->go2_velocity_truth_claim) {
+  if (best->source_status != "active" ||
+      (!best->diagnostic_only && !controlled_horizontal) ||
+      best->go2_velocity_truth_claim) {
     ++go2_velocity_diagnostic_prior_status_.reject_count;
     return;
   }
@@ -867,11 +876,44 @@ void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
       scale(best->std_ned_mps, std::max(1.0e-6, options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_std_scale)),
       1.0e-3);
   const Vec3 residual_vec = subtract(pvacur_.vel_ned_mps, best->velocity_ned_mps);
-  Matrix H(3, RANK, 0.0);
-  setBlockIdentity(H, 0, V_ID);
-  Matrix R = diagonalMatrix(cwiseProduct(stdv, stdv));
-  const std::vector<double> dz{residual_vec[0], residual_vec[1], residual_vec[2]};
-  EKFUpdate(dz, H, R);
+  const bool horizontal_2d =
+      controlled_horizontal &&
+      options_.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_mode == "horizontal_2d";
+  Matrix H(horizontal_2d ? 2 : 3, RANK, 0.0);
+  Matrix R(horizontal_2d ? 2 : 3, horizontal_2d ? 2 : 3, 0.0);
+  std::vector<double> dz;
+  if (horizontal_2d) {
+    H(0, V_ID + 0) = 1.0;
+    H(1, V_ID + 1) = 1.0;
+    R(0, 0) = stdv[0] * stdv[0];
+    R(1, 1) = stdv[1] * stdv[1];
+    dz = {residual_vec[0], residual_vec[1]};
+  } else {
+    setBlockIdentity(H, 0, V_ID);
+    R = diagonalMatrix(cwiseProduct(stdv, stdv));
+    dz = {residual_vec[0], residual_vec[1], residual_vec[2]};
+  }
+  Matrix scaled_R = R;
+  if (controlled_horizontal &&
+      options_.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_source_aware_enabled) {
+    source_aware::SourceMetadata metadata;
+    metadata.source = source_aware::MeasurementSource::kGo2HorizontalVelocity;
+    metadata.time = best->time;
+    metadata.valid = best->source_status == "active";
+    metadata.std_xyz = makeVec3(stdv[0], stdv[1], options_.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_vertical_disabled ? 999.0 : stdv[2]);
+    metadata.residual_norm = horizontal_2d ? std::sqrt(residual_vec[0] * residual_vec[0] + residual_vec[1] * residual_vec[1])
+                                           : norm(residual_vec);
+    metadata.time_diff_sec = best->time - update_time;
+    metadata.provider_status = best->source_status == "active" ? "available" : best->source_status;
+    metadata.quality_flag = best->quality_flag.empty() ? "nominal" : best->quality_flag;
+    metadata.covariance_available = true;
+    const auto weight = applySourceAwareWeighting(metadata.source, metadata, dz, H, R, scaled_R);
+    if (weight.rejected) {
+      ++go2_velocity_diagnostic_prior_status_.reject_count;
+      return;
+    }
+  }
+  EKFUpdate(dz, H, scaled_R);
   ++go2_velocity_diagnostic_prior_status_.update_count;
   if (best->std_ned_mps[2] >= 999.0 || best->prior_policy.find("horizontal") != std::string::npos) {
     go2_velocity_diagnostic_prior_status_.horizontal_only = true;

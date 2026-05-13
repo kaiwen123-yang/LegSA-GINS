@@ -873,6 +873,32 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N7C Go2 Horizontal Velocity Weak-Prior Boundary
+
+N7C uses Go2 horizontal velocity weak prior only.
+
+N7C uses vn and ve only.
+
+Go2 vertical velocity disabled.
+
+Go2 position/yaw priors disabled.
+
+Go2 velocity is not truth.
+
+N7C is engineering diagnostic evidence, not paper performance.
+
+No FGO claim.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output-only correction, no tuning, no epoch deletion.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N6B1 Source-Aware Visual Validation Boundary
 
 N6B1 is visual validation only.

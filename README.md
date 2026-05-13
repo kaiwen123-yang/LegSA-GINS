@@ -42,10 +42,11 @@ N7B Go2 velocity/contact readiness.
 N7B2 Go2 contact threshold review.
 N7B3 Go2 contact/velocity diagnostic activation.
 N7B4 literature-informed Go2 contact/velocity diagnostics.
+N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current working phase:
 
-N7B5 Go2 velocity frame horizontal diagnostic.
+N7C Go2 horizontal velocity weak prior.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 

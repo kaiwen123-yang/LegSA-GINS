@@ -87,6 +87,7 @@ void writeSourceCaps(std::ostream& out, const source_aware::SourceAwarePolicyCon
       << "\"dual_antenna_yaw\": " << config.source_aware_dual_yaw_cap << ", "
       << "\"raw_doppler_velocity\": " << config.source_aware_raw_doppler_cap << ", "
       << "\"go2_attitude_roll_pitch\": " << config.source_aware_go2_attitude_cap << ", "
+      << "\"go2_horizontal_velocity\": " << config.source_aware_go2_horizontal_velocity_cap << ", "
       << "\"global\": " << config.source_aware_global_cap << "}";
 }
 
@@ -254,6 +255,8 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << "  \"go2_yaw_prior_enabled\": false,\n"
       << "  \"go2_velocity_prior_diagnostic_enabled\": "
       << (options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic ? "true" : "false") << ",\n"
+      << "  \"go2_horizontal_velocity_prior_enabled\": "
+      << (options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior ? "true" : "false") << ",\n"
       << "  \"go2_velocity_prior_update_count\": "
       << options.go2_velocity_prior_diagnostic_status.update_count << ",\n"
       << "  \"go2_velocity_prior_reject_count\": "
@@ -266,6 +269,12 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << escapeJson(options.go2_velocity_prior_diagnostic_status.provider_status) << "\",\n"
       << "  \"go2_velocity_prior_std_scale\": "
       << options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_std_scale << ",\n"
+      << "  \"go2_horizontal_velocity_prior_std_scale\": "
+      << options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_std_scale << ",\n"
+      << "  \"go2_horizontal_velocity_prior_mode\": \""
+      << escapeJson(options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_mode) << "\",\n"
+      << "  \"go2_horizontal_velocity_prior_source_aware_enabled\": "
+      << (options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_source_aware_enabled ? "true" : "false") << ",\n"
       << "  \"go2_horizontal_velocity_prior_diagnostic_enabled\": "
       << ((options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic &&
            options.go2_velocity_prior_diagnostic_status.horizontal_only)
@@ -276,6 +285,8 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << options.go2_velocity_prior_diagnostic_status.horizontal_update_count << ",\n"
       << "  \"go2_horizontal_velocity_prior_vertical_disabled\": "
       << (options.go2_velocity_prior_diagnostic_status.vertical_disabled ? "true" : "false") << ",\n"
+      << "  \"go2_horizontal_velocity_prior_controlled_activation\": "
+      << (options.go2_velocity_prior_diagnostic_status.controlled_activation ? "true" : "false") << ",\n"
       << "  \"formal_go2_velocity_prior\": false,\n"
       << "  \"go2_yaw_rate_prior_diagnostic_enabled\": "
       << (options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic ? "true" : "false") << ",\n"

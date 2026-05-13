@@ -727,7 +727,18 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.run_label = options.ablation_variant.empty() ? "N7A_go2_weak_prior_run" : options.ablation_variant;
     options.go2_attitude_prior_status.body_state_not_truth = true;
   }
-  if (options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic ||
+  if (options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior) {
+    // 中文说明：N7C 只受控激活 Go2 horizontal velocity weak prior；vertical/yaw/position/FGO 仍关闭。
+    options.phase = "N7C";
+    options.port_role = "go2_horizontal_velocity_weak_prior_activation";
+    options.run_label = options.ablation_variant.empty() ? "N7C_go2_horizontal_velocity_weak_prior"
+                                                         : options.ablation_variant;
+    options.diagnostic_only = false;
+    options.go2_diagnostic_prior_only = false;
+    options.paper_performance_claim = false;
+    options.proposed_factor_claim = false;
+    options.performance_claim = false;
+  } else if (options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic ||
       options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic) {
     // 中文说明：N7B3 允许 diagnostic-only activation attempt，但不声明 formal proposed Go2 velocity/yaw prior。
     options.phase = "N7B3";
@@ -763,7 +774,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
         options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path,
         options.go2_velocity_prior_diagnostic_config);
     options.go2_velocity_prior_diagnostic_status = go2_velocity_prior_load.status;
-    if (go2_velocity_prior_load.status.horizontal_only) {
+    if (go2_velocity_prior_load.status.horizontal_only && !options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior) {
       // 中文说明：N7B5 只标注 horizontal-only diagnostic activation，不升级为 formal Go2 velocity prior。
       options.phase = "N7B5";
       options.port_role = "go2_velocity_frame_horizontal_diagnostic";
