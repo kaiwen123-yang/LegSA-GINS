@@ -877,23 +877,58 @@ No outperform final_v23 claim.
 
 N7C uses Go2 horizontal velocity weak prior only.
 
-N7C uses vn and ve only.
+Only `vn` and `ve` are valid Go2 velocity measurement components.
 
-Go2 vertical velocity disabled.
+Go2 vertical velocity remains disabled.
 
-Go2 position/yaw priors disabled.
+Go2 position prior remains disabled.
+
+Go2 yaw prior remains disabled.
 
 Go2 velocity is not truth.
 
-N7C is engineering diagnostic evidence, not paper performance.
+N7C is engineering diagnostic evidence, not paper performance evidence.
 
-No FGO claim.
+No trace tuning.
+
+No final_v23 output tuning.
 
 No trace solver input.
 
 No final_v23 output solver input.
 
 No output-only correction, no tuning, no epoch deletion.
+
+No FGO claim.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
+## N7C1 Go2 Horizontal Velocity Visual Validation Boundary
+
+N7C1 is visual validation only.
+
+Figure existence is not sufficient; plotted data coverage is required.
+
+Mandatory figures must report plotted row counts, time-axis coverage, source
+roles, and reason codes for suspected empty plots.
+
+Go2 horizontal velocity weak prior remains engineering diagnostic evidence.
+
+Go2 velocity is not truth.
+
+Go2 vertical velocity, Go2 position prior, and Go2 yaw prior remain disabled.
+
+N7C1 does not change solver math.
+
+N7C1 does not tune from trace or final_v23 output.
+
+N7C1 does not delete epochs.
+
+N7C1 does not apply output-only correction.
+
+No FGO claim in N7C1.
 
 No paper performance claim.
 
