@@ -62,6 +62,14 @@ struct PortOptions {
   RawDopplerFactorConfig raw_doppler_config;
   RawDopplerFactorStatus raw_doppler_status;
   bool go2_prior = false;
+  // 中文说明：N7C6 Go2 joint observation factor 是 roll/pitch + horizontal velocity
+  // sequential-equivalent；不启用 Go2 position、yaw 或 vertical velocity prior。
+  bool enable_go2_proprioceptive_joint_factor = false;
+  std::string go2_proprioceptive_joint_factor_path;
+  std::string go2_proprioceptive_joint_factor_mode = "sequential_equivalent";
+  std::string go2_proprioceptive_joint_factor_policy;
+  bool go2_proprioceptive_source_aware_enabled = true;
+  bool go2_vertical_velocity_prior_enabled = false;
   // 中文说明：N7A Go2 roll/pitch weak prior 默认关闭；开启后仍不把 Go2 position/velocity/yaw 当 solver prior。
   Go2AttitudeWeakPriorConfig go2_attitude_prior_config;
   Go2AttitudeWeakPriorStatus go2_attitude_prior_status;
