@@ -873,6 +873,36 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N7C5 Go2 Full Proprioceptive Factor Mining Boundary
+
+N7C5 mines Go2 proprioceptive fields for candidate factors.
+
+Foot kinematic velocity candidate is diagnostic unless later activated.
+
+Go2 position, velocity, contact, roll, and pitch are not truth.
+
+Go2 position prior remains disabled.
+
+Go2 yaw prior remains disabled.
+
+Go2 vertical velocity prior remains disabled.
+
+No trace/final_v23 tuning.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output-only correction.
+
+No formal new factor activation in N7C5 except existing validated factors.
+
+No FGO claim.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N7C4 Go2 Horizontal Velocity Prior Strength Boundary
 
 N7C4 scans Go2 horizontal velocity prior strength.
