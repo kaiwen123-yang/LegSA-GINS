@@ -350,6 +350,10 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       stringOrDefault(kv,
                       "go2_horizontal_velocity_bounded_std_policy",
                       options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_bounded_std_policy);
+  options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_strength_policy =
+      stringOrDefault(kv,
+                      "go2_horizontal_velocity_strength_policy",
+                      options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_strength_policy);
   options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic =
       boolOrDefault(kv,
                     "enable_go2_yaw_rate_prior_diagnostic",

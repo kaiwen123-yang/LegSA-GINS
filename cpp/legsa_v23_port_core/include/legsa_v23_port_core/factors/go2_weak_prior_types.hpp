@@ -89,6 +89,7 @@ struct Go2VelocityDiagnosticPriorConfig {
   std::string go2_horizontal_velocity_prior_mode = "horizontal_2d";
   bool go2_horizontal_velocity_adaptive_std_enabled = false;
   std::string go2_horizontal_velocity_bounded_std_policy;
+  std::string go2_horizontal_velocity_strength_policy;
 };
 
 struct Go2VelocityDiagnosticPriorStatus {

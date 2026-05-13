@@ -873,6 +873,34 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N7C4 Go2 Horizontal Velocity Prior Strength Boundary
+
+N7C4 scans Go2 horizontal velocity prior strength.
+
+Stronger std policies are diagnostic unless selected by non-trace consistency gates.
+
+Go2 velocity remains not truth.
+
+Vertical Go2 velocity remains disabled.
+
+Go2 yaw prior remains disabled.
+
+Go2 position prior remains disabled.
+
+No trace/final_v23 tuning.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output-only correction, no tuning, no epoch deletion.
+
+No FGO claim.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N7C Go2 Horizontal Velocity Weak-Prior Boundary
 
 N7C uses Go2 horizontal velocity weak prior only.
