@@ -14,6 +14,7 @@
 #include <fstream>
 #include <sstream>
 #include <unordered_map>
+#include <vector>
 
 namespace legsa_v23_port_core {
 namespace {
@@ -65,6 +66,44 @@ std::string stringValue(const std::unordered_map<std::string, std::string>& row,
                         const std::string& fallback) {
   auto it = row.find(key);
   return it == row.end() ? fallback : it->second;
+}
+
+bool boolValue(const std::unordered_map<std::string, std::string>& row,
+               const std::string& key,
+               bool fallback) {
+  auto it = row.find(key);
+  if (it == row.end() || it->second.empty()) {
+    return fallback;
+  }
+  std::string value = it->second;
+  std::transform(value.begin(), value.end(), value.begin(), [](unsigned char ch) {
+    return static_cast<char>(std::tolower(ch));
+  });
+  return value == "true" || value == "1" || value == "yes" || value == "on";
+}
+
+double percentile(std::vector<double> values, double p) {
+  if (values.empty()) {
+    return 0.0;
+  }
+  std::sort(values.begin(), values.end());
+  const auto index = static_cast<std::size_t>(p * static_cast<double>(values.size() - 1));
+  return values[std::min(index, values.size() - 1)];
+}
+
+void countConfidenceLevel(Go2VelocityDiagnosticPriorStatus& status, std::string level) {
+  std::transform(level.begin(), level.end(), level.begin(), [](unsigned char ch) {
+    return static_cast<char>(std::tolower(ch));
+  });
+  if (level == "high") {
+    ++status.confidence_high_count;
+  } else if (level == "medium") {
+    ++status.confidence_medium_count;
+  } else if (level == "low") {
+    ++status.confidence_low_count;
+  } else if (level == "invalid") {
+    ++status.confidence_invalid_count;
+  }
 }
 
 }  // namespace
@@ -169,6 +208,8 @@ Go2VelocityDiagnosticPriorLoadResult Go2WeakPriorLoader::loadVelocityDiagnosticC
     return result;
   }
   const std::vector<std::string> header = splitCsvLine(line);
+  std::vector<double> std_vn_values;
+  std::vector<double> std_ve_values;
   while (std::getline(input, line)) {
     if (line.empty()) {
       continue;
@@ -192,8 +233,10 @@ Go2VelocityDiagnosticPriorLoadResult Go2WeakPriorLoader::loadVelocityDiagnosticC
     measurement.contact_label = stringValue(row, "contact_label", "");
     measurement.frame_candidate = stringValue(row, "frame_candidate", "");
     measurement.prior_policy = stringValue(row, "prior_policy", "");
+    measurement.update_flag = boolValue(row, "update_flag", true);
     measurement.diagnostic_only = stringValue(row, "diagnostic_only", "true") != "false";
     measurement.go2_velocity_truth_claim = stringValue(row, "go2_velocity_truth_claim", "false") == "true";
+    countConfidenceLevel(result.status, stringValue(row, "confidence_level", ""));
     if (measurement.std_ned_mps[2] >= 999.0 ||
         measurement.prior_policy.find("horizontal") != std::string::npos) {
       result.status.horizontal_only = true;
@@ -201,10 +244,16 @@ Go2VelocityDiagnosticPriorLoadResult Go2WeakPriorLoader::loadVelocityDiagnosticC
     }
     const bool row_allowed =
         measurement.source_status == "active" &&
+        measurement.update_flag &&
         !measurement.go2_velocity_truth_claim &&
         (measurement.diagnostic_only || config.enable_go2_horizontal_velocity_prior);
+    if (!measurement.update_flag) {
+      ++result.status.skip_count;
+    }
     if (row_allowed) {
       ++result.status.valid_prior_count;
+      std_vn_values.push_back(measurement.std_ned_mps[0]);
+      std_ve_values.push_back(measurement.std_ned_mps[1]);
     }
     result.measurements.push_back(measurement);
   }
@@ -219,6 +268,13 @@ Go2VelocityDiagnosticPriorLoadResult Go2WeakPriorLoader::loadVelocityDiagnosticC
   }
   result.status.provider_status = "available";
   result.status.solver_enabled = true;
+  result.status.std_vn_p50 = percentile(std_vn_values, 0.50);
+  result.status.std_vn_p95 = percentile(std_vn_values, 0.95);
+  result.status.std_vn_max = std_vn_values.empty() ? 0.0 : *std::max_element(std_vn_values.begin(), std_vn_values.end());
+  result.status.std_ve_p50 = percentile(std_ve_values, 0.50);
+  result.status.std_ve_p95 = percentile(std_ve_values, 0.95);
+  result.status.std_ve_max = std_ve_values.empty() ? 0.0 : *std::max_element(std_ve_values.begin(), std_ve_values.end());
+  result.status.max_std_le_5 = result.status.std_vn_max <= 5.0 && result.status.std_ve_max <= 5.0;
   return result;
 }
 

@@ -46,7 +46,7 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current working phase:
 
-N7C2 Go2 horizontal velocity visual readability and Jacobian audit.
+N7C3 bounded adaptive Go2 horizontal velocity std.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 

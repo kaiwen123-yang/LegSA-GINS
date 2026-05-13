@@ -159,7 +159,7 @@ void GIEngine::setGo2VelocityDiagnosticPriors(
         options_.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior;
     go2_velocity_diagnostic_prior_status_.valid_prior_count = static_cast<std::size_t>(std::count_if(
         measurements.begin(), measurements.end(), [controlled_horizontal](const Go2VelocityDiagnosticPriorMeasurement& measurement) {
-          return measurement.source_status == "active" && !measurement.go2_velocity_truth_claim &&
+          return measurement.source_status == "active" && measurement.update_flag && !measurement.go2_velocity_truth_claim &&
                  (measurement.diagnostic_only || controlled_horizontal);
         }));
   }
@@ -857,6 +857,9 @@ void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
   const Go2VelocityDiagnosticPriorMeasurement* best = nullptr;
   double best_dt = options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_tolerance_sec;
   for (const auto& measurement : go2_velocity_diagnostic_priors_) {
+    if (!measurement.update_flag) {
+      continue;
+    }
     const double dt = std::fabs(measurement.time - update_time);
     if (dt <= best_dt) {
       best = &measurement;

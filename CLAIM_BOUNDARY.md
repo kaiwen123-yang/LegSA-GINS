@@ -1081,3 +1081,33 @@ No FGO claim.
 No paper performance claim.
 
 No outperform final_v23 claim.
+
+## N7C3 Bounded Adaptive Go2 Horizontal Velocity Std Boundary
+
+N7C3 adaptive std is bounded by robot-appropriate diagnostic limits.
+
+std is measurement uncertainty, not speed command.
+
+No std > 5 m/s in bounded policy.
+
+Go2 velocity is not truth.
+
+Vertical Go2 velocity remains disabled.
+
+Go2 yaw prior remains disabled.
+
+Go2 position prior remains disabled.
+
+No trace/final_v23 tuning.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output-only correction, no tuning, no epoch deletion.
+
+No FGO claim.
+
+No paper performance claim.
+
+No outperform final_v23 claim.

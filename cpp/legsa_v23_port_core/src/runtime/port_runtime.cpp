@@ -729,10 +729,17 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   }
   if (options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior) {
     // 中文说明：N7C 只受控激活 Go2 horizontal velocity weak prior；vertical/yaw/position/FGO 仍关闭。
-    options.phase = "N7C";
-    options.port_role = "go2_horizontal_velocity_weak_prior_activation";
-    options.run_label = options.ablation_variant.empty() ? "N7C_go2_horizontal_velocity_weak_prior"
-                                                         : options.ablation_variant;
+    if (options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_adaptive_std_enabled) {
+      options.phase = "N7C3";
+      options.port_role = "go2_horizontal_velocity_bounded_adaptive_std";
+      options.run_label = options.ablation_variant.empty() ? "N7C3_go2_horizontal_velocity_bounded_adaptive_std"
+                                                           : options.ablation_variant;
+    } else {
+      options.phase = "N7C";
+      options.port_role = "go2_horizontal_velocity_weak_prior_activation";
+      options.run_label = options.ablation_variant.empty() ? "N7C_go2_horizontal_velocity_weak_prior"
+                                                           : options.ablation_variant;
+    }
     options.diagnostic_only = false;
     options.go2_diagnostic_prior_only = false;
     options.paper_performance_claim = false;
