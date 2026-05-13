@@ -277,6 +277,8 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << (options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_adaptive_std_enabled ? "true" : "false") << ",\n"
       << "  \"go2_horizontal_velocity_bounded_std_policy\": \""
       << escapeJson(options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_bounded_std_policy) << "\",\n"
+      << "  \"go2_horizontal_velocity_strength_policy\": \""
+      << escapeJson(options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_strength_policy) << "\",\n"
       << "  \"go2_horizontal_velocity_prior_source_aware_enabled\": "
       << (options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_source_aware_enabled ? "true" : "false") << ",\n"
       << "  \"go2_horizontal_velocity_prior_diagnostic_enabled\": "
