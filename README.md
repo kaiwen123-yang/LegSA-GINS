@@ -41,10 +41,11 @@ Current completed phases:
 N7B Go2 velocity/contact readiness.
 N7B2 Go2 contact threshold review.
 N7B3 Go2 contact/velocity diagnostic activation.
+N7B4 literature-informed Go2 contact/velocity diagnostics.
 
 Current working phase:
 
-N7B3 Go2 contact/velocity diagnostic activation.
+N7B4 literature-informed Go2 contact/velocity diagnostic activation.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
