@@ -104,6 +104,8 @@ def write_n7c_variant_config(base_config: str | Path, variant: dict[str, Any], o
         f"go2_horizontal_velocity_prior_vertical_disabled: {str(bool(variant['go2_horizontal_velocity_prior_vertical_disabled'])).lower()}",
         f"go2_horizontal_velocity_prior_source_aware_enabled: {str(bool(variant['go2_horizontal_velocity_prior_source_aware_enabled'])).lower()}",
         f"go2_horizontal_velocity_prior_mode: {variant['go2_horizontal_velocity_prior_mode']}",
+        f"go2_horizontal_velocity_adaptive_std_enabled: {str(bool(variant.get('go2_horizontal_velocity_adaptive_std_enabled', False))).lower()}",
+        f"go2_horizontal_velocity_bounded_std_policy: {variant.get('go2_horizontal_velocity_bounded_std_policy', '')}",
         "enable_go2_velocity_prior_diagnostic: false",
         'go2_velocity_prior_diagnostic_path: ""',
         "go2_position_prior_enabled: false",

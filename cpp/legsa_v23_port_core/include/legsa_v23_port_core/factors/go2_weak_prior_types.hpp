@@ -71,6 +71,7 @@ struct Go2VelocityDiagnosticPriorMeasurement {
   std::string contact_label;
   std::string frame_candidate;
   std::string prior_policy;
+  bool update_flag = true;
   bool diagnostic_only = true;
   bool go2_velocity_truth_claim = false;
 };
@@ -86,6 +87,8 @@ struct Go2VelocityDiagnosticPriorConfig {
   bool go2_horizontal_velocity_prior_vertical_disabled = true;
   bool go2_horizontal_velocity_prior_source_aware_enabled = true;
   std::string go2_horizontal_velocity_prior_mode = "horizontal_2d";
+  bool go2_horizontal_velocity_adaptive_std_enabled = false;
+  std::string go2_horizontal_velocity_bounded_std_policy;
 };
 
 struct Go2VelocityDiagnosticPriorStatus {
@@ -95,6 +98,7 @@ struct Go2VelocityDiagnosticPriorStatus {
   std::size_t valid_prior_count = 0;
   std::size_t update_count = 0;
   std::size_t reject_count = 0;
+  std::size_t skip_count = 0;
   std::size_t horizontal_update_count = 0;
   std::string provider_status = "prior_path_missing";
   std::string source_id = "go2_velocity_diagnostic";
@@ -104,6 +108,17 @@ struct Go2VelocityDiagnosticPriorStatus {
   bool controlled_activation = false;
   bool paper_performance_claim = false;
   bool go2_velocity_truth_claim = false;
+  double std_vn_p50 = 0.0;
+  double std_vn_p95 = 0.0;
+  double std_vn_max = 0.0;
+  double std_ve_p50 = 0.0;
+  double std_ve_p95 = 0.0;
+  double std_ve_max = 0.0;
+  bool max_std_le_5 = true;
+  std::size_t confidence_high_count = 0;
+  std::size_t confidence_medium_count = 0;
+  std::size_t confidence_low_count = 0;
+  std::size_t confidence_invalid_count = 0;
 };
 
 struct Go2YawRateDiagnosticPriorConfig {
