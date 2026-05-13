@@ -929,3 +929,32 @@ No LSIM/OIM, Go2 prior, or FGO claim in N5D1.
 No paper performance claim.
 
 No outperform final_v23 claim.
+
+## N7B4 Literature-Informed Go2 Contact/Velocity Boundary
+
+N7B4 contact probability is diagnostic.
+
+Go2 velocity diagnostic activation is not a formal prior.
+
+Literature-inspired contact probability uses Go2 fields only and does not use
+trace/final_v23 output for threshold, frame, or prior tuning.
+
+Go2 velocity is not truth.
+
+Go2 contact probability is not truth.
+
+No formal Go2 velocity prior.
+
+No formal Go2 yaw prior.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output-only correction, no tuning, no epoch deletion.
+
+No FGO claim.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
