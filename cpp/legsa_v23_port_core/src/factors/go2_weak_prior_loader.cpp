@@ -193,6 +193,11 @@ Go2VelocityDiagnosticPriorLoadResult Go2WeakPriorLoader::loadVelocityDiagnosticC
     measurement.prior_policy = stringValue(row, "prior_policy", "");
     measurement.diagnostic_only = stringValue(row, "diagnostic_only", "true") != "false";
     measurement.go2_velocity_truth_claim = stringValue(row, "go2_velocity_truth_claim", "false") == "true";
+    if (measurement.std_ned_mps[2] >= 999.0 ||
+        measurement.prior_policy.find("horizontal") != std::string::npos) {
+      result.status.horizontal_only = true;
+      result.status.vertical_disabled = true;
+    }
     if (measurement.source_status == "active" && measurement.diagnostic_only &&
         !measurement.go2_velocity_truth_claim) {
       ++result.status.valid_prior_count;

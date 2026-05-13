@@ -45,7 +45,7 @@ N7B4 literature-informed Go2 contact/velocity diagnostics.
 
 Current working phase:
 
-N7B4 literature-informed Go2 contact/velocity diagnostic activation.
+N7B5 Go2 velocity frame horizontal diagnostic.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -166,9 +166,11 @@ proposed factors, and does not make performance claims. The old
 Current completed phases:
 N7B Go2 velocity/contact readiness.
 N7B2 Go2 contact threshold review.
+N7B3 Go2 contact/velocity diagnostic activation.
+N7B4 literature-informed Go2 contact/velocity diagnostics.
 
 Current working phase:
-N7B2A Go2 metric namespace and contact physical sanity audit.
+N7B5 Go2 velocity frame horizontal diagnostic.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,
@@ -275,6 +277,19 @@ Go2 velocity is not truth, contact thresholds are not trace/final_v23 tuned,
 diagnostic activation is not a formal prior, no Go2 yaw prior is formally
 enabled, no FGO is implemented, and no paper performance or outperform-final_v23
 claim is made.
+
+N7B4 adopts literature-informed contact probability and internal/external
+velocity-frame scoring for diagnostic-only Go2 velocity activation. Contact
+probability is diagnostic, Go2 velocity remains not truth, trace/final_v23
+output is not used for threshold, frame, or prior tuning, and no formal Go2
+velocity/yaw prior, FGO, paper performance claim, or outperform-final_v23 claim
+is made.
+
+N7B5 reviews whether the top Go2 velocity frame candidates are equivalent for
+horizontal velocity and runs horizontal-only diagnostic priors with vertical
+Go2 velocity disabled. N7B5 does not formal-enable Go2 velocity or yaw priors,
+does not use trace/final_v23 for frame tuning, and makes no paper performance
+or outperform-final_v23 claim.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace
