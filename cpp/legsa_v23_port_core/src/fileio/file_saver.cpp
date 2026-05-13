@@ -266,6 +266,17 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << escapeJson(options.go2_velocity_prior_diagnostic_status.provider_status) << "\",\n"
       << "  \"go2_velocity_prior_std_scale\": "
       << options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_std_scale << ",\n"
+      << "  \"go2_horizontal_velocity_prior_diagnostic_enabled\": "
+      << ((options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic &&
+           options.go2_velocity_prior_diagnostic_status.horizontal_only)
+              ? "true"
+              : "false")
+      << ",\n"
+      << "  \"go2_horizontal_velocity_prior_update_count\": "
+      << options.go2_velocity_prior_diagnostic_status.horizontal_update_count << ",\n"
+      << "  \"go2_horizontal_velocity_prior_vertical_disabled\": "
+      << (options.go2_velocity_prior_diagnostic_status.vertical_disabled ? "true" : "false") << ",\n"
+      << "  \"formal_go2_velocity_prior\": false,\n"
       << "  \"go2_yaw_rate_prior_diagnostic_enabled\": "
       << (options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic ? "true" : "false") << ",\n"
       << "  \"go2_yaw_rate_prior_update_count\": "

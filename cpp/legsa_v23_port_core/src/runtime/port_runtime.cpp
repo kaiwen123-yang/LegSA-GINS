@@ -763,6 +763,13 @@ void PortRuntime::runFromConfig(const std::string& config_path,
         options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path,
         options.go2_velocity_prior_diagnostic_config);
     options.go2_velocity_prior_diagnostic_status = go2_velocity_prior_load.status;
+    if (go2_velocity_prior_load.status.horizontal_only) {
+      // 中文说明：N7B5 只标注 horizontal-only diagnostic activation，不升级为 formal Go2 velocity prior。
+      options.phase = "N7B5";
+      options.port_role = "go2_velocity_frame_horizontal_diagnostic";
+      options.run_label = options.ablation_variant.empty() ? "N7B5_go2_horizontal_velocity_diagnostic"
+                                                           : options.ablation_variant;
+    }
   }
   if (options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic) {
     options.go2_yaw_rate_prior_diagnostic_status.code_present = true;

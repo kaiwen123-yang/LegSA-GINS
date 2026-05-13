@@ -958,3 +958,32 @@ No FGO claim.
 No paper performance claim.
 
 No outperform final_v23 claim.
+
+## N7B5 Go2 Velocity Frame Horizontal Diagnostic Boundary
+
+N7B5 horizontal-only Go2 velocity diagnostic is not a formal prior.
+
+Vertical Go2 velocity is not activated in horizontal-only diagnostic priors.
+
+Go2 velocity is not truth.
+
+Frame equivalence uses Go2/internal and receiver/raw cross-source consistency
+only.
+
+No trace/final_v23 frame tuning.
+
+No formal Go2 velocity prior.
+
+No formal Go2 yaw prior.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output-only correction, no tuning, no epoch deletion.
+
+No FGO claim.
+
+No paper performance claim.
+
+No outperform final_v23 claim.

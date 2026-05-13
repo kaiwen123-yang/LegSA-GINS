@@ -165,6 +165,12 @@ void GIEngine::setGo2VelocityDiagnosticPriors(
       options_.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic &&
       status.solver_enabled && status.provider_status == "available" &&
       options_.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only;
+  go2_velocity_diagnostic_prior_status_.horizontal_only =
+      std::any_of(measurements.begin(), measurements.end(), [](const Go2VelocityDiagnosticPriorMeasurement& measurement) {
+        return measurement.std_ned_mps[2] >= 999.0 ||
+               measurement.prior_policy.find("horizontal") != std::string::npos;
+      });
+  go2_velocity_diagnostic_prior_status_.vertical_disabled = go2_velocity_diagnostic_prior_status_.horizontal_only;
 }
 
 // 中文说明：addImuData 保持 reference 的 imupre/imucur 滚动缓冲；首帧可选择预补偿。
@@ -867,6 +873,11 @@ void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
   const std::vector<double> dz{residual_vec[0], residual_vec[1], residual_vec[2]};
   EKFUpdate(dz, H, R);
   ++go2_velocity_diagnostic_prior_status_.update_count;
+  if (best->std_ned_mps[2] >= 999.0 || best->prior_policy.find("horizontal") != std::string::npos) {
+    go2_velocity_diagnostic_prior_status_.horizontal_only = true;
+    go2_velocity_diagnostic_prior_status_.vertical_disabled = true;
+    ++go2_velocity_diagnostic_prior_status_.horizontal_update_count;
+  }
 }
 
 source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(

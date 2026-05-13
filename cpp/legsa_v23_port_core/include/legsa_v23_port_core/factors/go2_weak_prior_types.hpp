@@ -90,8 +90,11 @@ struct Go2VelocityDiagnosticPriorStatus {
   std::size_t valid_prior_count = 0;
   std::size_t update_count = 0;
   std::size_t reject_count = 0;
+  std::size_t horizontal_update_count = 0;
   std::string provider_status = "prior_path_missing";
   std::string source_id = "go2_velocity_diagnostic";
+  bool horizontal_only = false;
+  bool vertical_disabled = false;
   bool diagnostic_only = true;
   bool paper_performance_claim = false;
   bool go2_velocity_truth_claim = false;
