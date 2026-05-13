@@ -295,10 +295,25 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       boolOrDefault(kv,
                     "enable_go2_velocity_prior_diagnostic",
                     options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic);
+  options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior =
+      boolOrDefault(kv,
+                    "enable_go2_horizontal_velocity_prior",
+                    options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior);
+  if (options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior) {
+    options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic = true;
+  }
   options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path =
       stringOrDefault(kv,
                       "go2_velocity_prior_diagnostic_path",
                       options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path);
+  options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_path =
+      stringOrDefault(kv,
+                      "go2_horizontal_velocity_prior_path",
+                      options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_path);
+  if (!options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_path.empty()) {
+    options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path =
+        options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_path;
+  }
   options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_tolerance_sec =
       scalarOrDefault(kv,
                       "go2_velocity_prior_time_tolerance_sec",
@@ -307,10 +322,26 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       scalarOrDefault(kv,
                       "go2_velocity_prior_std_scale",
                       options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_std_scale);
+  options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_std_scale =
+      scalarOrDefault(kv,
+                      "go2_horizontal_velocity_prior_std_scale",
+                      options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_std_scale);
   options.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only =
       boolOrDefault(kv,
                     "go2_diagnostic_prior_only",
                     options.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only);
+  options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_vertical_disabled =
+      boolOrDefault(kv,
+                    "go2_horizontal_velocity_prior_vertical_disabled",
+                    options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_vertical_disabled);
+  options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_source_aware_enabled =
+      boolOrDefault(kv,
+                    "go2_horizontal_velocity_prior_source_aware_enabled",
+                    options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_source_aware_enabled);
+  options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_mode =
+      stringOrDefault(kv,
+                      "go2_horizontal_velocity_prior_mode",
+                      options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_mode);
   options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic =
       boolOrDefault(kv,
                     "enable_go2_yaw_rate_prior_diagnostic",
@@ -379,6 +410,10 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       scalarOrDefault(kv,
                       "source_aware_go2_attitude_cap",
                       options.source_aware_policy_config.source_aware_go2_attitude_cap);
+  options.source_aware_policy_config.source_aware_go2_horizontal_velocity_cap =
+      scalarOrDefault(kv,
+                      "source_aware_go2_horizontal_velocity_cap",
+                      options.source_aware_policy_config.source_aware_go2_horizontal_velocity_cap);
   options.source_aware_policy_config.source_aware_reject_extreme =
       boolOrDefault(kv,
                     "source_aware_reject_extreme",
@@ -410,6 +445,7 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
           {source_aware::MeasurementSource::kDualAntennaYaw, "dual_antenna_yaw"},
           {source_aware::MeasurementSource::kRawDopplerVelocity, "raw_doppler_velocity"},
           {source_aware::MeasurementSource::kGo2AttitudeRollPitch, "go2_attitude_roll_pitch"},
+          {source_aware::MeasurementSource::kGo2HorizontalVelocity, "go2_horizontal_velocity"},
       }};
   for (const auto& item : source_keys) {
     auto& source_config = options.source_aware_policy_config.sources[source_aware::sourceIndex(item.first)];

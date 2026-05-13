@@ -77,10 +77,15 @@ struct Go2VelocityDiagnosticPriorMeasurement {
 
 struct Go2VelocityDiagnosticPriorConfig {
   bool enable_go2_velocity_prior_diagnostic = false;
+  bool enable_go2_horizontal_velocity_prior = false;
   std::string go2_velocity_prior_diagnostic_path;
+  std::string go2_horizontal_velocity_prior_path;
   double go2_velocity_prior_time_tolerance_sec = 0.08;
   double go2_velocity_prior_std_scale = 1.0;
   bool go2_diagnostic_prior_only = true;
+  bool go2_horizontal_velocity_prior_vertical_disabled = true;
+  bool go2_horizontal_velocity_prior_source_aware_enabled = true;
+  std::string go2_horizontal_velocity_prior_mode = "horizontal_2d";
 };
 
 struct Go2VelocityDiagnosticPriorStatus {
@@ -96,6 +101,7 @@ struct Go2VelocityDiagnosticPriorStatus {
   bool horizontal_only = false;
   bool vertical_disabled = false;
   bool diagnostic_only = true;
+  bool controlled_activation = false;
   bool paper_performance_claim = false;
   bool go2_velocity_truth_claim = false;
 };

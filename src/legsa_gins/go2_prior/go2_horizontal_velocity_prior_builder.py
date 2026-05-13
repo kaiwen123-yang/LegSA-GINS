@@ -23,6 +23,14 @@ from .go2_probability_weighted_prior_builder import (
 )
 from .go2_velocity_frame_internal_external_score import _candidate_velocity
 from .go2_velocity_quality import _nearest_from_index
+from .go2_horizontal_velocity_prior_policy import (
+    POLICY_FRAME,
+    POLICY_NAME,
+    STD_VD_DISABLED,
+    build_n7c_policy,
+    confidence_bucket_from_quality,
+    validate_n7c_policy,
+)
 
 
 HORIZONTAL_STD_VD_DISABLED = 999.0
@@ -257,6 +265,178 @@ def build_horizontal_velocity_diagnostic_priors(
         "final_v23_frame_tuning": False,
         "paper_performance_claim": False,
         "fgo": False,
+    }
+    (out / "GO2_HORIZONTAL_VELOCITY_PRIOR_BUILD_REPORT.json").write_text(
+        json.dumps(report, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return paths, report
+
+
+N7C_PRIOR_FIELDS = PRIOR_FIELDS
+
+
+def _read_csv_rows(path: str | Path) -> list[dict[str, Any]]:
+    source = Path(path)
+    if not source.exists():
+        return []
+    with source.open("r", encoding="utf-8-sig", newline="") as handle:
+        return [dict(row) for row in csv.DictReader(handle)]
+
+
+def _n7c_source_rows(n7b5_root: str | Path, name: str) -> list[dict[str, Any]]:
+    root = Path(n7b5_root)
+    return _read_csv_rows(root / name)
+
+
+def _coerce_float(value: Any, fallback: float = 0.0) -> float:
+    try:
+        out = float(value)
+    except (TypeError, ValueError):
+        return fallback
+    return out if math.isfinite(out) else fallback
+
+
+def _convert_n7c_rows(
+    rows: list[dict[str, Any]],
+    *,
+    prior_policy: str,
+    include_buckets: set[str],
+    diagnostic_variant: bool,
+) -> list[dict[str, Any]]:
+    converted: list[dict[str, Any]] = []
+    for row in rows:
+        bucket = confidence_bucket_from_quality(str(row.get("quality_flag") or ""))
+        if bucket not in include_buckets:
+            continue
+        std_vn = max(2.0, _coerce_float(row.get("std_vn"), 2.0))
+        std_ve = max(2.0, _coerce_float(row.get("std_ve"), 2.0))
+        converted.append(
+            {
+                "time": _coerce_float(row.get("time")),
+                "vn": _coerce_float(row.get("vn")),
+                "ve": _coerce_float(row.get("ve")),
+                "vd": 0.0,
+                "std_vn": std_vn,
+                "std_ve": std_ve,
+                "std_vd": STD_VD_DISABLED,
+                "source_status": "active",
+                "quality_flag": f"n7c_horizontal_{bucket}_confidence",
+                "contact_model": row.get("contact_model", ""),
+                "contact_label": row.get("contact_label", ""),
+                "frame_candidate": row.get("frame_candidate") or POLICY_FRAME,
+                "prior_policy": prior_policy,
+                "diagnostic_only": bool(diagnostic_variant),
+                "go2_velocity_truth_claim": False,
+            }
+        )
+    return converted
+
+
+def _n7c_counts(rows: list[dict[str, Any]]) -> dict[str, int]:
+    counts = {"high": 0, "medium": 0, "low": 0}
+    for row in rows:
+        counts[confidence_bucket_from_quality(str(row.get("quality_flag") or ""))] += 1
+    return counts
+
+
+def build_n7c_horizontal_velocity_weak_priors(
+    *,
+    n7b5_root: str | Path,
+    output_dir: str | Path,
+    policy: dict[str, Any] | None = None,
+) -> tuple[dict[str, Path], dict[str, Any]]:
+    """Write N7C runtime-only horizontal velocity weak-prior CSV variants.
+
+    N7C consumes N7B5 diagnostic priors as upstream evidence, but writes a new
+    runtime CSV set. Only vn/ve are effective; vd is zeroed and disabled with
+    std_vd=999 for any internal 3D fallback.
+    """
+
+    out = Path(output_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    n7b5_report_path = Path(n7b5_root) / "GO2_HORIZONTAL_VELOCITY_PRIOR_BUILD_REPORT.json"
+    n7b5_report = json.loads(n7b5_report_path.read_text(encoding="utf-8")) if n7b5_report_path.exists() else {}
+    policy_data = policy or build_n7c_policy(n7b5_report)
+    policy_ok, policy_blockers = validate_n7c_policy(policy_data)
+    main_source = _n7c_source_rows(n7b5_root, "GO2_HORIZONTAL_VELOCITY_PRIORS_DIAGNOSTIC.csv")
+    probability_source = _n7c_source_rows(n7b5_root, "GO2_HORIZONTAL_VELOCITY_PROBABILITY_WEIGHTED_PRIORS_DIAGNOSTIC.csv")
+    contact_source = _n7c_source_rows(n7b5_root, "GO2_HORIZONTAL_VELOCITY_CONTACT_WEIGHTED_PRIORS_DIAGNOSTIC.csv")
+    if not main_source:
+        main_source = probability_source or contact_source
+    if not probability_source:
+        probability_source = main_source
+    if not contact_source:
+        contact_source = [row for row in probability_source if confidence_bucket_from_quality(str(row.get("quality_flag") or "")) in {"high", "medium"}]
+
+    rows = {
+        "main": _convert_n7c_rows(
+            main_source,
+            prior_policy=POLICY_NAME,
+            include_buckets={"high", "medium", "low"},
+            diagnostic_variant=False,
+        ),
+        "probability_weighted": _convert_n7c_rows(
+            probability_source,
+            prior_policy="n7c_go2_horizontal_velocity_probability_weighted_diagnostic",
+            include_buckets={"high", "medium", "low"},
+            diagnostic_variant=True,
+        ),
+        "contact_weighted": _convert_n7c_rows(
+            contact_source,
+            prior_policy="n7c_go2_horizontal_velocity_contact_weighted_diagnostic",
+            include_buckets={"high", "medium"},
+            diagnostic_variant=True,
+        ),
+        "high_confidence_only": _convert_n7c_rows(
+            probability_source,
+            prior_policy="n7c_go2_horizontal_velocity_high_confidence_only_diagnostic",
+            include_buckets={"high"},
+            diagnostic_variant=True,
+        ),
+    }
+    paths = {
+        "main": out / "GO2_HORIZONTAL_VELOCITY_WEAK_PRIORS.csv",
+        "probability_weighted": out / "GO2_HORIZONTAL_VELOCITY_PROBABILITY_WEIGHTED_PRIORS_N7C.csv",
+        "contact_weighted": out / "GO2_HORIZONTAL_VELOCITY_CONTACT_WEIGHTED_PRIORS_N7C.csv",
+        "high_confidence_only": out / "GO2_HORIZONTAL_VELOCITY_HIGH_CONFIDENCE_PRIORS_N7C.csv",
+    }
+    for key, path in paths.items():
+        _write_csv(path, rows[key])
+    counts = _n7c_counts(rows["main"])
+    report = {
+        "stage": "N7C_go2_horizontal_velocity_weak_prior",
+        "csv_generated": bool(rows["main"]),
+        "epoch_count": len(rows["main"]),
+        "variant_epoch_counts": {key: len(value) for key, value in rows.items()},
+        "high_confidence_count": counts["high"],
+        "medium_confidence_count": counts["medium"],
+        "low_confidence_count": counts["low"],
+        "std_policy": {
+            "base_std_mps": float(policy_data.get("base_horizontal_std_mps", 2.0)),
+            "main_rule": "N7B5 horizontal rows with conservative std; no R shrink",
+            "source_aware_inflation_allowed": True,
+            "trace_tuning": False,
+            "final_v23_tuning": False,
+            "vertical_component": f"disabled_with_std_vd_{STD_VD_DISABLED}",
+        },
+        "policy": policy_data,
+        "policy_valid": policy_ok,
+        "policy_blockers": policy_blockers,
+        "selected_frame": POLICY_FRAME,
+        "measurement_components": ["vn", "ve"],
+        "vertical_velocity_disabled": True,
+        "std_vd_disabled_threshold": STD_VD_DISABLED,
+        "go2_position_prior_enabled": False,
+        "go2_yaw_prior_enabled": False,
+        "go2_velocity_truth_claim": False,
+        "controlled_activation_allowed": policy_ok and bool(rows["main"]),
+        "paper_performance_claim": False,
+        "no_outperform_final_v23_claim": True,
+        "trace_solver_input": False,
+        "final_v23_output_solver_input": False,
+        "fgo": False,
+        "prior_csv_paths": {key: path.name for key, path in paths.items()},
     }
     (out / "GO2_HORIZONTAL_VELOCITY_PRIOR_BUILD_REPORT.json").write_text(
         json.dumps(report, indent=2, sort_keys=True) + "\n",

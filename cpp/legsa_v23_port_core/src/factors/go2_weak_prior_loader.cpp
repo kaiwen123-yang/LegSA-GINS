@@ -145,11 +145,12 @@ Go2VelocityDiagnosticPriorLoadResult Go2WeakPriorLoader::loadVelocityDiagnosticC
   Go2VelocityDiagnosticPriorLoadResult result;
   result.status.code_present = true;
   result.status.solver_enabled = false;
-  result.status.source_id = "go2_velocity_diagnostic";
-  result.status.diagnostic_only = true;
+  result.status.source_id = config.enable_go2_horizontal_velocity_prior ? "go2_horizontal_velocity" : "go2_velocity_diagnostic";
+  result.status.diagnostic_only = !config.enable_go2_horizontal_velocity_prior;
+  result.status.controlled_activation = config.enable_go2_horizontal_velocity_prior;
   result.status.paper_performance_claim = false;
   result.status.go2_velocity_truth_claim = false;
-  if (!config.enable_go2_velocity_prior_diagnostic) {
+  if (!config.enable_go2_velocity_prior_diagnostic && !config.enable_go2_horizontal_velocity_prior) {
     result.status.provider_status = "disabled_by_config";
     return result;
   }
@@ -198,8 +199,11 @@ Go2VelocityDiagnosticPriorLoadResult Go2WeakPriorLoader::loadVelocityDiagnosticC
       result.status.horizontal_only = true;
       result.status.vertical_disabled = true;
     }
-    if (measurement.source_status == "active" && measurement.diagnostic_only &&
-        !measurement.go2_velocity_truth_claim) {
+    const bool row_allowed =
+        measurement.source_status == "active" &&
+        !measurement.go2_velocity_truth_claim &&
+        (measurement.diagnostic_only || config.enable_go2_horizontal_velocity_prior);
+    if (row_allowed) {
       ++result.status.valid_prior_count;
     }
     result.measurements.push_back(measurement);
