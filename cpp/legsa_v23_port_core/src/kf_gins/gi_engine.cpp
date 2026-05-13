@@ -146,6 +146,27 @@ void GIEngine::setGo2AttitudeWeakPriors(const std::vector<Go2AttitudeWeakPriorMe
       status.provider_status == "available";
 }
 
+// 中文说明：N7B3 Go2 velocity prior 是 diagnostic-only activation，Go2 velocity 不是 truth，也不是正式 proposed result。
+void GIEngine::setGo2VelocityDiagnosticPriors(
+    const std::vector<Go2VelocityDiagnosticPriorMeasurement>& measurements,
+    const Go2VelocityDiagnosticPriorStatus& status) {
+  go2_velocity_diagnostic_priors_ = measurements;
+  go2_velocity_diagnostic_prior_status_ = status;
+  go2_velocity_diagnostic_prior_status_.code_present = true;
+  go2_velocity_diagnostic_prior_status_.prior_count = measurements.size();
+  if (go2_velocity_diagnostic_prior_status_.valid_prior_count == 0) {
+    go2_velocity_diagnostic_prior_status_.valid_prior_count = static_cast<std::size_t>(std::count_if(
+        measurements.begin(), measurements.end(), [](const Go2VelocityDiagnosticPriorMeasurement& measurement) {
+          return measurement.source_status == "active" && measurement.diagnostic_only &&
+                 !measurement.go2_velocity_truth_claim;
+        }));
+  }
+  go2_velocity_diagnostic_prior_status_.solver_enabled =
+      options_.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic &&
+      status.solver_enabled && status.provider_status == "available" &&
+      options_.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only;
+}
+
 // 中文说明：addImuData 保持 reference 的 imupre/imucur 滚动缓冲；首帧可选择预补偿。
 void GIEngine::addImuData(const ImuData& imu, bool compensate) {
   imupre_ = imucur_;
@@ -255,6 +276,8 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
   }
   // 中文说明：raw Doppler auxiliary velocity factor 与 GNSS epoch 对齐，并在 stateFeedback 前进入 EKF。
   applyRawDopplerUpdateForTime(gnss.time);
+  // 中文说明：N7B3 Go2 velocity diagnostic prior 默认关闭；开启时仍为 diagnostic-only，不构成正式 prior。
+  applyGo2VelocityDiagnosticPriorForTime(gnss.time);
   // 中文说明：Go2 roll/pitch weak prior 与 GNSS epoch 对齐进入 EKF；不启用 Go2 position/velocity/yaw prior。
   applyGo2AttitudeWeakPriorForTime(gnss.time);
   gnss.isvalid = false;
@@ -448,6 +471,18 @@ std::size_t GIEngine::go2AttitudeWeakPriorRejectCount() const {
 
 Go2AttitudeWeakPriorStatus GIEngine::go2AttitudeWeakPriorStatus() const {
   return go2_attitude_prior_status_;
+}
+
+std::size_t GIEngine::go2VelocityDiagnosticPriorUpdateCount() const {
+  return go2_velocity_diagnostic_prior_status_.update_count;
+}
+
+std::size_t GIEngine::go2VelocityDiagnosticPriorRejectCount() const {
+  return go2_velocity_diagnostic_prior_status_.reject_count;
+}
+
+Go2VelocityDiagnosticPriorStatus GIEngine::go2VelocityDiagnosticPriorStatus() const {
+  return go2_velocity_diagnostic_prior_status_;
 }
 
 source_aware::SourceAwareRuntimeStats GIEngine::sourceAwareStats() const {
@@ -798,6 +833,40 @@ void GIEngine::applyGo2AttitudeWeakPriorForTime(double update_time) {
   };
   go2_attitude_prior_status_.residual_roll_p95_rad = p95(go2_roll_residuals_);
   go2_attitude_prior_status_.residual_pitch_p95_rad = p95(go2_pitch_residuals_);
+}
+
+void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
+  if (!options_.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic ||
+      !go2_velocity_diagnostic_prior_status_.solver_enabled ||
+      !options_.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only) {
+    return;
+  }
+  const Go2VelocityDiagnosticPriorMeasurement* best = nullptr;
+  double best_dt = options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_tolerance_sec;
+  for (const auto& measurement : go2_velocity_diagnostic_priors_) {
+    const double dt = std::fabs(measurement.time - update_time);
+    if (dt <= best_dt) {
+      best = &measurement;
+      best_dt = dt;
+    }
+  }
+  if (!best) {
+    return;
+  }
+  if (best->source_status != "active" || !best->diagnostic_only || best->go2_velocity_truth_claim) {
+    ++go2_velocity_diagnostic_prior_status_.reject_count;
+    return;
+  }
+  const Vec3 stdv = positiveStd(
+      scale(best->std_ned_mps, std::max(1.0e-6, options_.go2_velocity_prior_diagnostic_config.go2_velocity_prior_std_scale)),
+      1.0e-3);
+  const Vec3 residual_vec = subtract(pvacur_.vel_ned_mps, best->velocity_ned_mps);
+  Matrix H(3, RANK, 0.0);
+  setBlockIdentity(H, 0, V_ID);
+  Matrix R = diagonalMatrix(cwiseProduct(stdv, stdv));
+  const std::vector<double> dz{residual_vec[0], residual_vec[1], residual_vec[2]};
+  EKFUpdate(dz, H, R);
+  ++go2_velocity_diagnostic_prior_status_.update_count;
 }
 
 source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(

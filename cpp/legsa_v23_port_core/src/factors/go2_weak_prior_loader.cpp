@@ -139,4 +139,78 @@ Go2AttitudeWeakPriorLoadResult Go2WeakPriorLoader::loadCsv(const std::string& pa
   return result;
 }
 
+Go2VelocityDiagnosticPriorLoadResult Go2WeakPriorLoader::loadVelocityDiagnosticCsv(
+    const std::string& path,
+    const Go2VelocityDiagnosticPriorConfig& config) {
+  Go2VelocityDiagnosticPriorLoadResult result;
+  result.status.code_present = true;
+  result.status.solver_enabled = false;
+  result.status.source_id = "go2_velocity_diagnostic";
+  result.status.diagnostic_only = true;
+  result.status.paper_performance_claim = false;
+  result.status.go2_velocity_truth_claim = false;
+  if (!config.enable_go2_velocity_prior_diagnostic) {
+    result.status.provider_status = "disabled_by_config";
+    return result;
+  }
+  if (path.empty()) {
+    result.status.provider_status = "prior_path_missing";
+    return result;
+  }
+  std::ifstream input(path);
+  if (!input) {
+    result.status.provider_status = "prior_file_missing";
+    return result;
+  }
+  std::string line;
+  if (!std::getline(input, line)) {
+    result.status.provider_status = "prior_file_empty";
+    return result;
+  }
+  const std::vector<std::string> header = splitCsvLine(line);
+  while (std::getline(input, line)) {
+    if (line.empty()) {
+      continue;
+    }
+    const std::vector<std::string> cells = splitCsvLine(line);
+    std::unordered_map<std::string, std::string> row;
+    for (std::size_t i = 0; i < header.size() && i < cells.size(); ++i) {
+      row[header[i]] = cells[i];
+    }
+    Go2VelocityDiagnosticPriorMeasurement measurement;
+    measurement.time = scalar(row, "time", 0.0);
+    measurement.velocity_ned_mps = makeVec3(scalar(row, "vn", 0.0),
+                                            scalar(row, "ve", 0.0),
+                                            scalar(row, "vd", 0.0));
+    measurement.std_ned_mps = makeVec3(scalar(row, "std_vn", 2.0),
+                                       scalar(row, "std_ve", 2.0),
+                                       scalar(row, "std_vd", 2.0));
+    measurement.source_status = stringValue(row, "source_status", "inactive");
+    measurement.quality_flag = stringValue(row, "quality_flag", "diagnostic_only");
+    measurement.contact_model = stringValue(row, "contact_model", "");
+    measurement.contact_label = stringValue(row, "contact_label", "");
+    measurement.frame_candidate = stringValue(row, "frame_candidate", "");
+    measurement.prior_policy = stringValue(row, "prior_policy", "");
+    measurement.diagnostic_only = stringValue(row, "diagnostic_only", "true") != "false";
+    measurement.go2_velocity_truth_claim = stringValue(row, "go2_velocity_truth_claim", "false") == "true";
+    if (measurement.source_status == "active" && measurement.diagnostic_only &&
+        !measurement.go2_velocity_truth_claim) {
+      ++result.status.valid_prior_count;
+    }
+    result.measurements.push_back(measurement);
+  }
+  result.status.prior_count = result.measurements.size();
+  if (result.measurements.empty()) {
+    result.status.provider_status = "prior_file_no_rows";
+    return result;
+  }
+  if (result.status.valid_prior_count == 0) {
+    result.status.provider_status = "no_active_diagnostic_prior_rows";
+    return result;
+  }
+  result.status.provider_status = "available";
+  result.status.solver_enabled = true;
+  return result;
+}
+
 }  // namespace legsa_v23_port_core

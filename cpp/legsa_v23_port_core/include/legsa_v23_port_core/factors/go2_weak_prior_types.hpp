@@ -9,6 +9,8 @@
 
 #pragma once
 
+#include "legsa_v23_port_core/types.hpp"
+
 #include <cstddef>
 #include <string>
 
@@ -57,6 +59,60 @@ struct Go2AttitudeWeakPriorStatus {
   bool position_prior_enabled = false;
   bool velocity_prior_enabled = false;
   bool yaw_prior_enabled = false;
+};
+
+struct Go2VelocityDiagnosticPriorMeasurement {
+  double time = 0.0;
+  Vec3 velocity_ned_mps = makeVec3(0.0, 0.0, 0.0);
+  Vec3 std_ned_mps = makeVec3(2.0, 2.0, 2.0);
+  std::string source_status = "inactive";
+  std::string quality_flag = "diagnostic_only";
+  std::string contact_model;
+  std::string contact_label;
+  std::string frame_candidate;
+  std::string prior_policy;
+  bool diagnostic_only = true;
+  bool go2_velocity_truth_claim = false;
+};
+
+struct Go2VelocityDiagnosticPriorConfig {
+  bool enable_go2_velocity_prior_diagnostic = false;
+  std::string go2_velocity_prior_diagnostic_path;
+  double go2_velocity_prior_time_tolerance_sec = 0.08;
+  double go2_velocity_prior_std_scale = 1.0;
+  bool go2_diagnostic_prior_only = true;
+};
+
+struct Go2VelocityDiagnosticPriorStatus {
+  bool code_present = true;
+  bool solver_enabled = false;
+  std::size_t prior_count = 0;
+  std::size_t valid_prior_count = 0;
+  std::size_t update_count = 0;
+  std::size_t reject_count = 0;
+  std::string provider_status = "prior_path_missing";
+  std::string source_id = "go2_velocity_diagnostic";
+  bool diagnostic_only = true;
+  bool paper_performance_claim = false;
+  bool go2_velocity_truth_claim = false;
+};
+
+struct Go2YawRateDiagnosticPriorConfig {
+  bool enable_go2_yaw_rate_prior_diagnostic = false;
+  std::string go2_yaw_rate_prior_diagnostic_path;
+  bool go2_diagnostic_prior_only = true;
+};
+
+struct Go2YawRateDiagnosticPriorStatus {
+  bool code_present = true;
+  bool solver_enabled = false;
+  std::size_t prior_count = 0;
+  std::size_t update_count = 0;
+  std::size_t reject_count = 0;
+  std::string provider_status = "disabled_by_config";
+  std::string activation_status = "yaw_rate_prior_not_activated_due_to_state_model";
+  bool diagnostic_only = true;
+  bool paper_performance_claim = false;
 };
 
 }  // namespace legsa_v23_port_core
