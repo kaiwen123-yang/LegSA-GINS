@@ -229,6 +229,31 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       boolOrDefault(kv, "no_outperform_final_v23_claim", options.no_outperform_final_v23_claim);
   options.ablation_variant = stringOrDefault(kv, "raw_doppler_diagnostic_variant_label", options.ablation_variant);
   options.ablation_variant = stringOrDefault(kv, "ablation_variant", options.ablation_variant);
+  // 中文说明：N7C6 joint factor 默认关闭；开启时只复用 roll/pitch 2D 与 horizontal velocity 2D update。
+  options.enable_go2_proprioceptive_joint_factor =
+      boolOrDefault(kv,
+                    "enable_go2_proprioceptive_joint_factor",
+                    options.enable_go2_proprioceptive_joint_factor);
+  options.go2_proprioceptive_joint_factor_path =
+      stringOrDefault(kv,
+                      "go2_proprioceptive_joint_factor_path",
+                      options.go2_proprioceptive_joint_factor_path);
+  options.go2_proprioceptive_joint_factor_mode =
+      stringOrDefault(kv,
+                      "go2_proprioceptive_joint_factor_mode",
+                      options.go2_proprioceptive_joint_factor_mode);
+  options.go2_proprioceptive_joint_factor_policy =
+      stringOrDefault(kv,
+                      "go2_proprioceptive_joint_factor_policy",
+                      options.go2_proprioceptive_joint_factor_policy);
+  options.go2_proprioceptive_source_aware_enabled =
+      boolOrDefault(kv,
+                    "go2_proprioceptive_source_aware_enabled",
+                    options.go2_proprioceptive_source_aware_enabled);
+  options.go2_vertical_velocity_prior_enabled =
+      boolOrDefault(kv,
+                    "go2_vertical_velocity_prior_enabled",
+                    options.go2_vertical_velocity_prior_enabled);
   // 中文说明：raw Doppler 默认关闭；只有 runtime config 明确启用且 provider-backed CSV 有效时才进入 EKF。
   options.raw_doppler_config.enable_raw_doppler =
       boolOrDefault(kv, "enable_raw_doppler", options.raw_doppler_config.enable_raw_doppler);

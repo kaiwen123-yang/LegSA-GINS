@@ -873,6 +873,48 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N7C5A / N7C6 Go2 Proprioceptive Joint Observation Boundary
+
+N7C5A reviews N7C5 Go2 full-field mining figures before any additional
+activation.
+
+N7C5A does not change solver math.
+
+N7C6 tests Go2 roll/pitch + horizontal velocity joint proprioceptive
+observation factors.
+
+The current N7C6 implementation may use sequential-equivalent roll/pitch and
+horizontal velocity EKF updates while documenting the combined 4D observation
+contract.
+
+Go2 body-state is proprioceptive observation, not truth.
+
+Go2 roll/pitch are not truth.
+
+Go2 horizontal velocity is not truth.
+
+Go2 contact probability is not truth.
+
+Go2 position prior remains disabled.
+
+Go2 yaw prior remains disabled.
+
+Go2 vertical velocity prior remains disabled.
+
+No trace/final_v23 tuning.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output-only correction, no epoch deletion.
+
+No FGO claim.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N7C5 Go2 Full Proprioceptive Factor Mining Boundary
 
 N7C5 mines Go2 proprioceptive fields for candidate factors.

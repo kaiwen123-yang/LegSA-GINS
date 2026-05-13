@@ -46,7 +46,7 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current working phase:
 
-N7C5 Go2 full proprioceptive factor mining.
+N7C6 Go2 proprioceptive joint observation factor.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 

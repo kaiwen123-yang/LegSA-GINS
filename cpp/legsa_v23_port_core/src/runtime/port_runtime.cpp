@@ -750,8 +750,27 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.paper_performance_claim = false;
     options.proposed_factor_claim = false;
     options.performance_claim = false;
-  } else if (options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic ||
-      options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic) {
+  }
+  if (options.enable_go2_proprioceptive_joint_factor) {
+    // 中文说明：N7C6 将已有 Go2 roll/pitch 与 horizontal velocity update 作为联合观测的
+    // sequential-equivalent 受控激活；Go2 position/yaw/vertical velocity 仍关闭。
+    options.phase = "N7C6";
+    options.port_role = "go2_proprioceptive_joint_observation_factor";
+    options.run_label = options.ablation_variant.empty() ? "N7C6_go2_proprioceptive_joint_factor"
+                                                         : options.ablation_variant;
+    options.diagnostic_only = false;
+    options.go2_diagnostic_prior_only = false;
+    options.go2_attitude_prior_config.go2_position_prior_enabled = false;
+    options.go2_attitude_prior_config.go2_velocity_prior_enabled = false;
+    options.go2_attitude_prior_config.go2_yaw_prior_enabled = false;
+    options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_vertical_disabled = true;
+    options.go2_vertical_velocity_prior_enabled = false;
+    options.paper_performance_claim = false;
+    options.proposed_factor_claim = false;
+    options.performance_claim = false;
+  } else if (!options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior &&
+      (options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic ||
+       options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic)) {
     // 中文说明：N7B3 允许 diagnostic-only activation attempt，但不声明 formal proposed Go2 velocity/yaw prior。
     options.phase = "N7B3";
     options.port_role = "go2_contact_velocity_diagnostic_activation";

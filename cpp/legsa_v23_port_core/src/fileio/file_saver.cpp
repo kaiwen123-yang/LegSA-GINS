@@ -9,6 +9,7 @@
 
 #include "legsa_v23_port_core/common/earth.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <filesystem>
 #include <fstream>
@@ -226,6 +227,33 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << "  \"raw_doppler_provider_status\": \""
       << escapeJson(options.raw_doppler_status.provider_status) << "\",\n"
       << "  \"go2_prior\": " << (options.go2_prior ? "true" : "false") << ",\n"
+      << "  \"go2_proprioceptive_joint_factor_enabled\": "
+      << (options.enable_go2_proprioceptive_joint_factor ? "true" : "false") << ",\n"
+      << "  \"go2_proprioceptive_joint_factor_update_count\": "
+      << (options.enable_go2_proprioceptive_joint_factor
+              ? std::min(options.go2_attitude_prior_status.update_count,
+                         options.go2_velocity_prior_diagnostic_status.horizontal_update_count)
+              : 0)
+      << ",\n"
+      << "  \"go2_proprioceptive_joint_factor_reject_count\": "
+      << (options.enable_go2_proprioceptive_joint_factor
+              ? options.go2_attitude_prior_status.reject_count + options.go2_velocity_prior_diagnostic_status.reject_count
+              : 0)
+      << ",\n"
+      << "  \"go2_proprioceptive_joint_factor_mode\": \""
+      << escapeJson(options.go2_proprioceptive_joint_factor_mode) << "\",\n"
+      << "  \"go2_proprioceptive_joint_factor_policy\": \""
+      << escapeJson(options.go2_proprioceptive_joint_factor_policy) << "\",\n"
+      << "  \"go2_proprioceptive_joint_factor_path_role\": \""
+      << (options.go2_proprioceptive_joint_factor_path.empty() ? "" : "runtime_joint_prior_csv") << "\",\n"
+      << "  \"go2_proprioceptive_joint_factor_sequential_equivalent\": "
+      << ((options.enable_go2_proprioceptive_joint_factor &&
+           options.go2_proprioceptive_joint_factor_mode == "sequential_equivalent")
+              ? "true"
+              : "false")
+      << ",\n"
+      << "  \"go2_proprioceptive_source_aware_enabled\": "
+      << (options.go2_proprioceptive_source_aware_enabled ? "true" : "false") << ",\n"
       << "  \"go2_attitude_weak_prior_enabled\": "
       << (options.go2_attitude_prior_config.enable_go2_attitude_weak_prior ? "true" : "false") << ",\n"
       << "  \"go2_attitude_weak_prior_update_count\": "
@@ -253,6 +281,7 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << "  \"go2_position_prior_enabled\": false,\n"
       << "  \"go2_velocity_prior_enabled\": false,\n"
       << "  \"go2_yaw_prior_enabled\": false,\n"
+      << "  \"go2_vertical_velocity_prior_enabled\": false,\n"
       << "  \"go2_velocity_prior_diagnostic_enabled\": "
       << (options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic ? "true" : "false") << ",\n"
       << "  \"go2_horizontal_velocity_prior_enabled\": "
