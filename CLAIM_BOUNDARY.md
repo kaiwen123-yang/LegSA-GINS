@@ -934,6 +934,39 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N7C2 Go2 Horizontal Velocity Visual Readability and Jacobian Boundary
+
+N7C2 does not change solver math.
+
+N7C2 does not tune Go2 horizontal velocity prior std.
+
+N7C2 clarifies curve overlap in plots using source-data metrics, alpha/style
+overlays, and delta/zoom figures.
+
+N7C2 documents Jacobian contracts for active measurement/update factors.
+
+Go2 horizontal velocity touches only horizontal velocity states.
+
+Go2 vertical velocity remains disabled.
+
+Go2 position prior remains disabled.
+
+Go2 yaw prior remains disabled.
+
+Go2 velocity is not truth.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output-only correction, no tuning, no epoch deletion.
+
+No FGO claim.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N6B1 Source-Aware Visual Validation Boundary
 
 N6B1 is visual validation only.
