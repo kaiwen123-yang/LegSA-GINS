@@ -907,6 +907,30 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8A1 FGO Yaw-Delta Policy Review Boundary
+
+N8A1 diagnoses FGO yaw delta before merging N8A.
+
+Large FGO-vs-EKF yaw delta is not a performance claim.
+
+FGO output remains no-feedback and non-substitution.
+
+Trace/final_v23 are not solver inputs.
+
+Trace/final_v23 are not used to tune FGO weights.
+
+Diagnostic ablations are engineering probes only.
+
+Runtime figures and reports are not committed.
+
+No EKF modification.
+
+No output-only correction.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N7C6A Go2 Proprioceptive Joint Factor Final Review Boundary
 
 N7C6A is final visual/metric sanity review.

@@ -48,7 +48,7 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current working phase:
 
-N8A no-feedback FGO foundation.
+N8A1 FGO yaw-delta policy review.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -293,6 +293,17 @@ horizontal velocity and runs horizontal-only diagnostic priors with vertical
 Go2 velocity disabled. N7B5 does not formal-enable Go2 velocity or yaw priors,
 does not use trace/final_v23 for frame tuning, and makes no paper performance
 or outperform-final_v23 claim.
+
+N8A builds a diagnostic no-feedback FGO foundation. FGO output is not fed back
+into EKF, does not replace EKF NAV, trace/final_v23 outputs are evaluation-only,
+Go2 candidate factors remain diagnostic, and no paper performance or
+outperform-final_v23 claim is made.
+
+N8A1 audits the large FGO-vs-EKF yaw delta before merging N8A. It diagnoses yaw
+convention/wrap, state-epoch mapping, factor policy, diagnostic ablation
+proxies, and runtime-only figures. N8A1 does not modify EKF logic, does not feed
+FGO output back, does not substitute EKF NAV, and does not use trace/final_v23
+output as FGO solver input or weight-tuning evidence.
 
 N4H4 will be the LegSA-owned full EKF / unified filter implementation stage.
 It must not use final_v23 outputs as proposed solver input and must keep trace
