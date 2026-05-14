@@ -232,6 +232,15 @@ Allowed N8C2 FGO factor activation review statement:
 - No FGO feedback/substitution.
 - No paper performance claim.
 
+Allowed N8C3 Raw Doppler FGO factor activation fix statement:
+
+- N8C3 fixes Raw Doppler FGO factor activation.
+- Proxy residual is not sufficient; solver residual vector inclusion is required.
+- Raw Doppler weight sensitivity is diagnostic only.
+- No trace/final_v23 tuning.
+- No FGO feedback/substitution.
+- No paper performance claim.
+
 Allowed N6B1 source-aware visual validation statement:
 
 - N6B1 is visual validation only.
