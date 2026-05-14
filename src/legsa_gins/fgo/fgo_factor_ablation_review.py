@@ -114,23 +114,34 @@ def run_factor_ablation_review(
         results.append(
             {
                 "variant": name,
+                "ablation_mode": "diagnostic_proxy_from_n8a_runtime_outputs",
                 "yaw_delta_rmse_deg": yaw_rmse,
                 "horizontal_delta_rmse_m": horizontal_rmse,
                 "solve_status": solve_status,
                 "finite_output": finite,
                 "gross_degradation": gross_degradation,
                 "notes": note,
+                "trace_solver_input": False,
+                "final_v23_output_solver_input": False,
+                "fgo_output_feedback_to_ekf": False,
+                "fgo_output_replaces_ekf_nav": False,
             }
         )
     best = min(results, key=lambda row: as_float(row.get("yaw_delta_rmse_deg")), default={})
     return {
         "stage": "N8A1_fgo_yaw_delta_policy_review",
         "source_role_alias": "N8A_REPORT_OUTPUT_DIR",
+        "ablation_mode": "diagnostic_proxy_from_n8a_runtime_outputs",
+        "separate_variant_runtime_outputs_available": False,
+        "real_solver_rerun": False,
+        "diagnostic_proxy_note": "Variants are bounded runtime-output probes used to localize yaw-delta sources; they are not final weight selection.",
         "variant_count": len(results),
         "variants": results,
         "best_yaw_delta_variant": best.get("variant"),
         "best_yaw_delta_rmse_deg": best.get("yaw_delta_rmse_deg", 0.0),
         "diagnostic_only": True,
+        "fgo_output_feedback_to_ekf": False,
+        "fgo_output_replaces_ekf_nav": False,
         "uses_trace_for_weight_selection": False,
         "uses_final_v23_for_weight_selection": False,
         "trace_solver_input": False,
