@@ -892,6 +892,33 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8E Formal Engineering Ablation Boundary
+
+N8E is formal engineering ablation with caveats.
+
+N8E is not a paper performance claim.
+
+Raw Doppler FGO factor is active but low marginal value in current no-feedback
+FGO.
+
+Raw Doppler low marginal value is a caveat, not an activation failure.
+
+Candidate factors remain diagnostic unless explicitly promoted later.
+
+No FGO feedback/substitution.
+
+FGO output is not fed back into EKF.
+
+FGO output does not replace EKF NAV.
+
+No trace/final_v23 tuning.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No outperform final_v23 claim.
+
 ## N8D FGO Factor Weight Policy Boundary
 
 N8D reviews FGO factor weights using solver-visible diagnostics only.
