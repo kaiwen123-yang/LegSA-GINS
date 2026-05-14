@@ -222,6 +222,16 @@ Allowed N6B source-aware policy refinement statement:
 - No outperform final_v23 claim.
 - No Go2 prior, FGO, or smoothing claim in N6B.
 
+Allowed N8C2 FGO factor activation review statement:
+
+- N8C2 checks factor activation, whitening, and contribution.
+- Raw Doppler no-effect is reviewed before claim.
+- Smoothness dominance is reviewed component-wise.
+- Weight sensitivity is diagnostic only.
+- No trace/final_v23 tuning.
+- No FGO feedback/substitution.
+- No paper performance claim.
+
 Allowed N6B1 source-aware visual validation statement:
 
 - N6B1 is visual validation only.
