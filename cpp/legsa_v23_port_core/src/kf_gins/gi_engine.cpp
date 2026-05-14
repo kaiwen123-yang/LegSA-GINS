@@ -15,6 +15,9 @@
 
 #include <algorithm>
 #include <cmath>
+#include <filesystem>
+#include <fstream>
+#include <iomanip>
 #include <numeric>
 #include <stdexcept>
 #include <utility>
@@ -76,6 +79,16 @@ double dotVector(const std::vector<double>& lhs, const std::vector<double>& rhs)
     out += lhs[i] * rhs[i];
   }
   return out;
+}
+
+double percentile(std::vector<double> values, double q) {
+  if (values.empty()) {
+    return 0.0;
+  }
+  std::sort(values.begin(), values.end());
+  const double clamped = std::max(0.0, std::min(1.0, q));
+  const std::size_t index = static_cast<std::size_t>(clamped * static_cast<double>(values.size() - 1));
+  return values[index];
 }
 
 }  // namespace
@@ -176,6 +189,25 @@ void GIEngine::setGo2VelocityDiagnosticPriors(
   go2_velocity_diagnostic_prior_status_.vertical_disabled = go2_velocity_diagnostic_prior_status_.horizontal_only;
   go2_velocity_diagnostic_prior_status_.controlled_activation =
       options_.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior;
+}
+
+// 中文说明：N8G FGO feedback observations 只允许作为 EKF pseudo-measurement，不允许直接覆盖 NAV。
+void GIEngine::setFgoFeedbackObservations(
+    const std::vector<fgo_feedback::FgoFeedbackObservation>& observations,
+    const fgo_feedback::FgoFeedbackStatus& status) {
+  fgo_feedback_observations_ = observations;
+  fgo_feedback_status_ = status;
+  fgo_feedback_status_.code_present = true;
+  fgo_feedback_status_.observation_count = observations.size();
+  if (fgo_feedback_status_.valid_observation_count == 0) {
+    fgo_feedback_status_.valid_observation_count = static_cast<std::size_t>(std::count_if(
+        observations.begin(), observations.end(), [](const fgo_feedback::FgoFeedbackObservation& obs) {
+          return obs.feedback_valid;
+        }));
+  }
+  fgo_feedback_status_.solver_enabled =
+      options_.fgo_feedback_config.enable_fgo_feedback && status.solver_enabled &&
+      (!options_.fgo_feedback_config.fgo_feedback_no_future_data_required || status.no_future_data);
 }
 
 // 中文说明：addImuData 保持 reference 的 imupre/imucur 滚动缓冲；首帧可选择预补偿。
@@ -291,6 +323,8 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
   applyGo2VelocityDiagnosticPriorForTime(gnss.time);
   // 中文说明：Go2 roll/pitch weak prior 与 GNSS epoch 对齐进入 EKF；不启用 Go2 position/velocity/yaw prior。
   applyGo2AttitudeWeakPriorForTime(gnss.time);
+  // 中文说明：N8G FGO feedback 在 stateFeedback 前作为 EKF pseudo-measurement 进入，不覆盖 NAV 输出。
+  applyFgoFeedbackForTime(gnss.time);
   gnss.isvalid = false;
   ++update_count_;
 }
@@ -494,6 +528,28 @@ std::size_t GIEngine::go2VelocityDiagnosticPriorRejectCount() const {
 
 Go2VelocityDiagnosticPriorStatus GIEngine::go2VelocityDiagnosticPriorStatus() const {
   return go2_velocity_diagnostic_prior_status_;
+}
+
+fgo_feedback::FgoFeedbackStatus GIEngine::fgoFeedbackStatus() const {
+  return fgo_feedback_status_;
+}
+
+void GIEngine::writeFgoFeedbackTrace(const std::string& output_dir) const {
+  if (!options_.fgo_feedback_config.enable_fgo_feedback) {
+    return;
+  }
+  std::filesystem::create_directories(output_dir);
+  std::ofstream out(std::filesystem::path(output_dir) / "FGO_FEEDBACK_UPDATE_TRACE.csv");
+  out << std::fixed << std::setprecision(10);
+  out << "update_time,observation_time,accepted,reject_reason,position_norm_m,velocity_norm_mps,"
+      << "attitude_norm_deg,yaw_residual_deg,source_window_start,source_window_end,"
+      << "trace_solver_input,final_v23_output_solver_input,output_substitution,direct_nav_override\n";
+  for (const auto& row : fgo_feedback_trace_) {
+    out << row.update_time << "," << row.observation_time << "," << row.accepted << ","
+        << row.reject_reason << "," << row.position_norm_m << "," << row.velocity_norm_mps << ","
+        << row.attitude_norm_deg << "," << row.yaw_residual_deg << "," << row.source_window_start << ","
+        << row.source_window_end << ",0,0,0,0\n";
+  }
 }
 
 source_aware::SourceAwareRuntimeStats GIEngine::sourceAwareStats() const {
@@ -923,6 +979,151 @@ void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
     go2_velocity_diagnostic_prior_status_.vertical_disabled = true;
     ++go2_velocity_diagnostic_prior_status_.horizontal_update_count;
   }
+}
+
+void GIEngine::applyFgoFeedbackForTime(double update_time) {
+  if (!options_.fgo_feedback_config.enable_fgo_feedback || !fgo_feedback_status_.solver_enabled) {
+    return;
+  }
+  const fgo_feedback::FgoFeedbackObservation* best = nullptr;
+  double best_dt = options_.fgo_feedback_config.fgo_feedback_time_tolerance_sec;
+  for (const auto& obs : fgo_feedback_observations_) {
+    const double dt = std::fabs(obs.time - update_time);
+    if (dt <= best_dt) {
+      best = &obs;
+      best_dt = dt;
+    }
+  }
+  if (!best) {
+    return;
+  }
+  fgo_feedback::FgoFeedbackTraceRow trace;
+  trace.update_time = update_time;
+  trace.observation_time = best->time;
+  trace.source_window_start = best->source_window_start;
+  trace.source_window_end = best->source_window_end;
+
+  const Vec3 current_ned = multiply(Earth::DR(options_.init_pos_blh_rad_m),
+                                    subtract(pvacur_.pos_blh_rad_m, options_.init_pos_blh_rad_m));
+  const Vec3 position_residual = subtract(current_ned, best->position_ned_m);
+  const Vec3 velocity_residual = subtract(pvacur_.vel_ned_mps, best->velocity_ned_mps);
+  const Vec3 attitude_residual = makeVec3(
+      fgo_feedback::wrapRadians(pvacur_.euler_rad[0] - best->attitude_rad[0]),
+      fgo_feedback::wrapRadians(pvacur_.euler_rad[1] - best->attitude_rad[1]),
+      fgo_feedback::wrapRadians(pvacur_.euler_rad[2] - best->attitude_rad[2]));
+  trace.position_norm_m = norm(position_residual);
+  trace.velocity_norm_mps = norm(velocity_residual);
+  trace.attitude_norm_deg = R2D * norm(attitude_residual);
+  trace.yaw_residual_deg = fgo_feedback::wrapDegrees(R2D * attitude_residual[2]);
+
+  auto reject = [&](const std::string& reason) {
+    trace.accepted = 0;
+    trace.reject_reason = reason;
+    fgo_feedback_trace_.push_back(trace);
+    ++fgo_feedback_status_.reject_count;
+    if (reason == "future_data") {
+      ++fgo_feedback_status_.future_data_reject_count;
+      fgo_feedback_status_.no_future_data = false;
+    }
+  };
+
+  if (!best->feedback_valid) {
+    reject("feedback_valid_false");
+    return;
+  }
+  if (options_.fgo_feedback_config.fgo_feedback_no_future_data_required &&
+      best->source_window_end > update_time + 1.0e-9) {
+    reject("future_data");
+    return;
+  }
+  if (update_time - last_fgo_feedback_time_ <
+      options_.fgo_feedback_config.fgo_feedback_min_interval_s - 1.0e-9) {
+    reject("min_interval");
+    return;
+  }
+  if (options_.fgo_feedback_config.fgo_feedback_position_enabled &&
+      trace.position_norm_m > options_.fgo_feedback_config.fgo_feedback_max_position_correction_m) {
+    reject("position_gate");
+    return;
+  }
+  if (options_.fgo_feedback_config.fgo_feedback_velocity_enabled &&
+      trace.velocity_norm_mps > options_.fgo_feedback_config.fgo_feedback_max_velocity_correction_mps) {
+    reject("velocity_gate");
+    return;
+  }
+  if (options_.fgo_feedback_config.fgo_feedback_attitude_enabled &&
+      trace.attitude_norm_deg > options_.fgo_feedback_config.fgo_feedback_max_attitude_correction_deg) {
+    reject("attitude_gate");
+    return;
+  }
+
+  std::size_t rows = 0;
+  if (options_.fgo_feedback_config.fgo_feedback_position_enabled) {
+    rows += 3;
+  }
+  if (options_.fgo_feedback_config.fgo_feedback_velocity_enabled) {
+    rows += 3;
+  }
+  if (options_.fgo_feedback_config.fgo_feedback_attitude_enabled) {
+    rows += 3;
+  }
+  if (rows == 0) {
+    reject("no_state_block_enabled");
+    return;
+  }
+  Matrix H(rows, RANK, 0.0);
+  Matrix R(rows, rows, 0.0);
+  std::vector<double> dz(rows, 0.0);
+  std::size_t row = 0;
+  const double r_scale = std::max(1.0, options_.fgo_feedback_config.fgo_feedback_covariance_scale);
+  if (options_.fgo_feedback_config.fgo_feedback_position_enabled) {
+    for (std::size_t i = 0; i < 3; ++i) {
+      H(row, P_ID + i) = 1.0;
+      R(row, row) = best->position_std_m[i] * best->position_std_m[i] * r_scale;
+      dz[row] = position_residual[i];
+      ++row;
+    }
+  }
+  if (options_.fgo_feedback_config.fgo_feedback_velocity_enabled) {
+    for (std::size_t i = 0; i < 3; ++i) {
+      H(row, V_ID + i) = 1.0;
+      R(row, row) = best->velocity_std_mps[i] * best->velocity_std_mps[i] * r_scale;
+      dz[row] = velocity_residual[i];
+      ++row;
+    }
+  }
+  if (options_.fgo_feedback_config.fgo_feedback_attitude_enabled) {
+    for (std::size_t i = 0; i < 3; ++i) {
+      H(row, PHI_ID + i) = -1.0;
+      R(row, row) = best->attitude_std_rad[i] * best->attitude_std_rad[i] * r_scale;
+      dz[row] = attitude_residual[i];
+      ++row;
+    }
+  }
+  // 中文说明：N8G 通过 EKFUpdate 累积误差状态，随后由统一 stateFeedback 生效；这里不直接改 pvacur_。
+  EKFUpdate(dz, H, R);
+  trace.accepted = 1;
+  trace.reject_reason = "";
+  fgo_feedback_trace_.push_back(trace);
+  last_fgo_feedback_time_ = update_time;
+  ++fgo_feedback_status_.update_count;
+  ++fgo_feedback_status_.accept_count;
+  fgo_feedback_position_norms_.push_back(trace.position_norm_m);
+  fgo_feedback_velocity_norms_.push_back(trace.velocity_norm_mps);
+  fgo_feedback_attitude_norms_deg_.push_back(trace.attitude_norm_deg);
+  fgo_feedback_status_.correction_position_p50_m = percentile(fgo_feedback_position_norms_, 0.50);
+  fgo_feedback_status_.correction_position_p95_m = percentile(fgo_feedback_position_norms_, 0.95);
+  fgo_feedback_status_.correction_position_max_m =
+      fgo_feedback_position_norms_.empty() ? 0.0 : *std::max_element(fgo_feedback_position_norms_.begin(), fgo_feedback_position_norms_.end());
+  fgo_feedback_status_.correction_velocity_p50_mps = percentile(fgo_feedback_velocity_norms_, 0.50);
+  fgo_feedback_status_.correction_velocity_p95_mps = percentile(fgo_feedback_velocity_norms_, 0.95);
+  fgo_feedback_status_.correction_velocity_max_mps =
+      fgo_feedback_velocity_norms_.empty() ? 0.0 : *std::max_element(fgo_feedback_velocity_norms_.begin(), fgo_feedback_velocity_norms_.end());
+  fgo_feedback_status_.correction_attitude_p50_deg = percentile(fgo_feedback_attitude_norms_deg_, 0.50);
+  fgo_feedback_status_.correction_attitude_p95_deg = percentile(fgo_feedback_attitude_norms_deg_, 0.95);
+  fgo_feedback_status_.correction_attitude_max_deg =
+      fgo_feedback_attitude_norms_deg_.empty() ? 0.0 : *std::max_element(fgo_feedback_attitude_norms_deg_.begin(), fgo_feedback_attitude_norms_deg_.end());
+  fgo_feedback_status_.residual_p95 = percentile(fgo_feedback_velocity_norms_, 0.95);
 }
 
 source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(

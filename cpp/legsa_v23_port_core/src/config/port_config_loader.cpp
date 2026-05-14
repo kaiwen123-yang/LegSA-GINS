@@ -493,6 +493,49 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   }
   options.lsim_oim = options.source_aware_policy_config.enable_source_aware_weighting &&
                      options.source_aware_policy_config.source_aware_mode != "off";
+  // 中文说明：N8G feedback 默认关闭；打开后只读取 runtime-only FGO_FEEDBACK_OBSERVATIONS.csv。
+  options.fgo_feedback_config.enable_fgo_feedback =
+      boolOrDefault(kv, "enable_fgo_feedback", options.fgo_feedback_config.enable_fgo_feedback);
+  options.fgo_feedback_config.fgo_feedback_path =
+      stringOrDefault(kv, "fgo_feedback_path", options.fgo_feedback_config.fgo_feedback_path);
+  options.fgo_feedback_config.fgo_feedback_mode =
+      stringOrDefault(kv, "fgo_feedback_mode", options.fgo_feedback_config.fgo_feedback_mode);
+  options.fgo_feedback_config.fgo_feedback_position_enabled =
+      boolOrDefault(kv,
+                    "fgo_feedback_position_enabled",
+                    options.fgo_feedback_config.fgo_feedback_position_enabled);
+  options.fgo_feedback_config.fgo_feedback_velocity_enabled =
+      boolOrDefault(kv,
+                    "fgo_feedback_velocity_enabled",
+                    options.fgo_feedback_config.fgo_feedback_velocity_enabled);
+  options.fgo_feedback_config.fgo_feedback_attitude_enabled =
+      boolOrDefault(kv,
+                    "fgo_feedback_attitude_enabled",
+                    options.fgo_feedback_config.fgo_feedback_attitude_enabled);
+  options.fgo_feedback_config.fgo_feedback_covariance_scale =
+      scalarOrDefault(kv,
+                      "fgo_feedback_covariance_scale",
+                      options.fgo_feedback_config.fgo_feedback_covariance_scale);
+  options.fgo_feedback_config.fgo_feedback_max_position_correction_m =
+      scalarOrDefault(kv,
+                      "fgo_feedback_max_position_correction_m",
+                      options.fgo_feedback_config.fgo_feedback_max_position_correction_m);
+  options.fgo_feedback_config.fgo_feedback_max_velocity_correction_mps =
+      scalarOrDefault(kv,
+                      "fgo_feedback_max_velocity_correction_mps",
+                      options.fgo_feedback_config.fgo_feedback_max_velocity_correction_mps);
+  options.fgo_feedback_config.fgo_feedback_max_attitude_correction_deg =
+      scalarOrDefault(kv,
+                      "fgo_feedback_max_attitude_correction_deg",
+                      options.fgo_feedback_config.fgo_feedback_max_attitude_correction_deg);
+  options.fgo_feedback_config.fgo_feedback_min_interval_s =
+      scalarOrDefault(kv,
+                      "fgo_feedback_min_interval_s",
+                      options.fgo_feedback_config.fgo_feedback_min_interval_s);
+  options.fgo_feedback_config.fgo_feedback_no_future_data_required =
+      boolOrDefault(kv,
+                    "fgo_feedback_no_future_data_required",
+                    options.fgo_feedback_config.fgo_feedback_no_future_data_required);
   return options;
 }
 

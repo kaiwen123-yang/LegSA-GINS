@@ -13,6 +13,7 @@
 #include "legsa_v23_port_core/options.hpp"
 #include "legsa_v23_port_core/factors/go2_weak_prior_types.hpp"
 #include "legsa_v23_port_core/factors/raw_doppler_types.hpp"
+#include "legsa_v23_port_core/fgo_feedback/fgo_feedback.hpp"
 #include "legsa_v23_port_core/source_aware/source_aware_policy.hpp"
 #include "legsa_v23_port_core/source_aware/source_aware_trace.hpp"
 
@@ -34,6 +35,8 @@ class GIEngine {
                                 const Go2AttitudeWeakPriorStatus& status);
   void setGo2VelocityDiagnosticPriors(const std::vector<Go2VelocityDiagnosticPriorMeasurement>& measurements,
                                       const Go2VelocityDiagnosticPriorStatus& status);
+  void setFgoFeedbackObservations(const std::vector<fgo_feedback::FgoFeedbackObservation>& observations,
+                                  const fgo_feedback::FgoFeedbackStatus& status);
   void addImuData(const ImuData& imu, bool compensate = false);
   void addGnssData(const GnssData& gnss);
   int isToUpdate() const;
@@ -78,6 +81,8 @@ class GIEngine {
   std::size_t go2VelocityDiagnosticPriorUpdateCount() const;
   std::size_t go2VelocityDiagnosticPriorRejectCount() const;
   Go2VelocityDiagnosticPriorStatus go2VelocityDiagnosticPriorStatus() const;
+  fgo_feedback::FgoFeedbackStatus fgoFeedbackStatus() const;
+  void writeFgoFeedbackTrace(const std::string& output_dir) const;
   source_aware::SourceAwareRuntimeStats sourceAwareStats() const;
   void writeSourceAwareTrace(const std::string& output_dir) const;
 
@@ -94,6 +99,7 @@ class GIEngine {
   void applyRawDopplerUpdateForTime(double update_time);
   void applyGo2AttitudeWeakPriorForTime(double update_time);
   void applyGo2VelocityDiagnosticPriorForTime(double update_time);
+  void applyFgoFeedbackForTime(double update_time);
   source_aware::SourceWeightResult applySourceAwareWeighting(
       source_aware::MeasurementSource source,
       const source_aware::SourceMetadata& metadata,
@@ -133,6 +139,13 @@ class GIEngine {
   std::vector<double> go2_pitch_residuals_;
   std::vector<Go2VelocityDiagnosticPriorMeasurement> go2_velocity_diagnostic_priors_;
   Go2VelocityDiagnosticPriorStatus go2_velocity_diagnostic_prior_status_;
+  std::vector<fgo_feedback::FgoFeedbackObservation> fgo_feedback_observations_;
+  fgo_feedback::FgoFeedbackStatus fgo_feedback_status_;
+  std::vector<fgo_feedback::FgoFeedbackTraceRow> fgo_feedback_trace_;
+  std::vector<double> fgo_feedback_position_norms_;
+  std::vector<double> fgo_feedback_velocity_norms_;
+  std::vector<double> fgo_feedback_attitude_norms_deg_;
+  double last_fgo_feedback_time_ = -1.0e100;
   source_aware::SourceAwarePolicy source_aware_policy_;
   source_aware::SourceAwareTrace source_aware_trace_;
   bool initialized_ = false;
