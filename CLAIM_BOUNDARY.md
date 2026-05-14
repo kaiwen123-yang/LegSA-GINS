@@ -955,6 +955,24 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8B FGO Factor Graph Policy Review Boundary
+
+N8B reviews FGO factor policies without trace/final_v23 tuning.
+
+Smoothness is not deleted as a final shortcut.
+
+Candidate factors remain diagnostic unless promoted in a later stage.
+
+FGO remains no-feedback and non-substitution.
+
+Trace/final_v23 are not solver inputs.
+
+Runtime figures and reports are not committed.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N7C6A Go2 Proprioceptive Joint Factor Final Review Boundary
 
 N7C6A is final visual/metric sanity review.

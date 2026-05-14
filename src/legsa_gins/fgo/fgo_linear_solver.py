@@ -31,25 +31,32 @@ def solve_no_feedback_linear_system(
     series: list[list[float]],
     *,
     smoothness_weight: float = DEFAULT_SMOOTHNESS_WEIGHT,
+    column_smoothness_weights: dict[int, float] | None = None,
     angle_column_indices: tuple[int, ...] = tuple(),
     window: int = 3,
 ) -> dict[str, Any]:
     """中文说明：对状态序列做离线平滑诊断；yaw 列使用 shortest-angle 约定。"""
     if not series:
         return {"solved": False, "state_count": 0, "smoothed": [], "finite_output": True, "residual_proxy_p95": 0.0}
-    alpha = 0.0 if smoothness_weight <= 0.0 else min(1.0, smoothness_weight / DEFAULT_SMOOTHNESS_WEIGHT)
+
+    def _alpha(weight: float) -> float:
+        return 0.0 if weight <= 0.0 else min(1.0, weight / DEFAULT_SMOOTHNESS_WEIGHT)
+
+    alpha = _alpha(smoothness_weight)
+    column_weights = column_smoothness_weights or {}
     angle_columns = set(angle_column_indices)
     columns = list(zip(*series))
     smoothed_columns: list[list[float]] = []
     for index, col in enumerate(columns):
         values = [float(value) for value in col]
+        column_alpha = _alpha(float(column_weights.get(index, smoothness_weight)))
         if index in angle_columns:
             unwrapped = unwrap_series_deg(values)
             averaged = moving_average(unwrapped, window=window)
-            smoothed_columns.append([normalize_deg_0_360(value) for value in _blend(unwrapped, averaged, alpha)])
+            smoothed_columns.append([normalize_deg_0_360(value) for value in _blend(unwrapped, averaged, column_alpha)])
         else:
             averaged = moving_average(values, window=window)
-            smoothed_columns.append(_blend(values, averaged, alpha))
+            smoothed_columns.append(_blend(values, averaged, column_alpha))
     smoothed = [list(row) for row in zip(*smoothed_columns)]
     residuals: list[float] = []
     for raw_row, smooth_row in zip(series, smoothed):
@@ -71,6 +78,7 @@ def solve_no_feedback_linear_system(
         "final_cost": final_cost,
         "smoothness_weight": smoothness_weight,
         "smoothness_alpha": alpha,
+        "column_smoothness_weights": {str(key): value for key, value in sorted(column_weights.items())},
         "angle_column_indices": sorted(angle_columns),
         "yaw_wrap_residuals_enabled": 5 in angle_columns,
         "no_feedback": True,
