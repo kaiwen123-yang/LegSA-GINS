@@ -973,6 +973,24 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8C No-Feedback FGO Visual Validation Boundary
+
+N8C is no-feedback FGO visual validation.
+
+FGO visual improvements are diagnostic engineering evidence only.
+
+Candidate factor contribution is reviewed but not formalized.
+
+No FGO output feedback or substitution.
+
+Trace/final_v23 are not solver inputs.
+
+Runtime figures and reports are not committed.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N7C6A Go2 Proprioceptive Joint Factor Final Review Boundary
 
 N7C6A is final visual/metric sanity review.
