@@ -152,6 +152,53 @@ def count_wrap_averaging_artifacts(ekf_yaw: list[float], fgo_yaw: list[float]) -
     return count
 
 
+def wrap_averaging_artifact_events(
+    ekf_yaw: list[float],
+    fgo_yaw: list[float],
+    times: list[float] | None = None,
+    *,
+    limit: int = 12,
+) -> list[dict[str, Any]]:
+    events: list[dict[str, Any]] = []
+    for index, (ekf_value, fgo_value) in enumerate(zip(ekf_yaw, fgo_yaw)):
+        near_wrap = ekf_value % 360.0 <= 20.0 or ekf_value % 360.0 >= 340.0
+        wrapped_delta = yaw_delta_deg(fgo_value, ekf_value)
+        if near_wrap and abs(wrapped_delta) > 90.0:
+            events.append(
+                {
+                    "index": index,
+                    "time": times[index] if times and index < len(times) else None,
+                    "ekf_yaw_deg": ekf_value,
+                    "fgo_yaw_deg": fgo_value,
+                    "raw_delta_deg": fgo_value - ekf_value,
+                    "wrapped_delta_deg": wrapped_delta,
+                }
+            )
+        if len(events) >= limit:
+            break
+    return events
+
+
+def yaw_jump_events(values: list[float], times: list[float] | None = None, *, threshold_deg: float = 90.0, limit: int = 12) -> list[dict[str, Any]]:
+    events: list[dict[str, Any]] = []
+    for index, (left, right) in enumerate(zip(values, values[1:]), start=1):
+        wrapped_step = wrap_delta_deg(right - left)
+        if abs(wrapped_step) > threshold_deg:
+            events.append(
+                {
+                    "index": index,
+                    "time": times[index] if times and index < len(times) else None,
+                    "previous_yaw_deg": left,
+                    "current_yaw_deg": right,
+                    "raw_step_deg": right - left,
+                    "wrapped_step_deg": wrapped_step,
+                }
+            )
+        if len(events) >= limit:
+            break
+    return events
+
+
 def _heading_math_transform_rmse(ekf_yaw: list[float], fgo_yaw: list[float]) -> dict[str, float]:
     count = min(len(ekf_yaw), len(fgo_yaw))
     pairs = list(zip(ekf_yaw[:count], fgo_yaw[:count]))
@@ -179,9 +226,11 @@ def audit_yaw_convention(
     smoother = smoother_report or {}
     ekf_yaw = yaw_series(ekf_rows)
     fgo_yaw = yaw_series(fgo_rows)
+    times = time_series(ekf_rows)
     count = min(len(ekf_yaw), len(fgo_yaw))
     ekf_yaw = ekf_yaw[:count]
     fgo_yaw = fgo_yaw[:count]
+    times = times[:count]
     raw_deltas = [fgo - ekf for ekf, fgo in zip(ekf_yaw, fgo_yaw)]
     wrapped_deltas = [yaw_delta_deg(fgo, ekf) for ekf, fgo in zip(ekf_yaw, fgo_yaw)]
     raw_rmse = rmse(raw_deltas)
@@ -221,9 +270,11 @@ def audit_yaw_convention(
         "yaw_delta_rmse_after_best_wrap": wrapped_rmse,
         "n8a_reported_yaw_delta_rmse_deg": evaluation.get("yaw_delta_rmse_deg"),
         "yaw_jump_count": yaw_jump_count,
+        "yaw_jump_events_sample": yaw_jump_events(fgo_yaw, times),
         "ekf_yaw_jump_count": ekf_jump_count,
         "ekf_wrap_boundary_pair_count": wrap_boundary_pair_count,
         "wrap_averaging_artifact_count": wrap_averaging_artifact_count,
+        "wrap_averaging_artifact_events_sample": wrap_averaging_artifact_events(ekf_yaw, fgo_yaw, times),
         "transform_rmse_deg": transform_rmse,
         "initial_ekf_yaw_deg": ekf_yaw[0] if ekf_yaw else None,
         "initial_fgo_yaw_deg": fgo_yaw[0] if fgo_yaw else None,

@@ -15,4 +15,5 @@ def test_yaw_convention_flags_wrap_averaging_artifact() -> None:
     assert report["yaw_unit_consistent"] is True
     assert report["yaw_wrap_consistent"] is False
     assert report["yaw_residual_wrap_used"] is False
+    assert report["wrap_averaging_artifact_events_sample"][0]["index"] == 0
     assert report["blocker_status"] == "yaw_wrap_residual_blocker"
