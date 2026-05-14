@@ -38,6 +38,8 @@ LegSA-GINS will be developed as:
 
 Current completed phases:
 
+N8C3 Raw Doppler FGO solver factor fixed.
+
 N8B FGO factor graph policy review.
 
 N8A2 no-feedback FGO yaw wrap fixed.
@@ -52,7 +54,7 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current working phase:
 
-N8C3 Raw Doppler FGO factor activation fix.
+N8D FGO factor weight policy review.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 

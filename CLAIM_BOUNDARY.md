@@ -892,6 +892,25 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8D FGO Factor Weight Policy Boundary
+
+N8D reviews FGO factor weights using solver-visible diagnostics only.
+
+Trace/final_v23 are not used for weight tuning.
+
+Smoothness is not deleted as a final shortcut.
+
+Weight sensitivity and ablation are engineering diagnostics.
+
+Raw Doppler, receiver velocity, Go2 joint, dual yaw, and smoothness balance is
+reviewed without feeding FGO output back into EKF.
+
+No FGO feedback/substitution.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N8A No-Feedback FGO Foundation Boundary
 
 N8A FGO is no-feedback.
