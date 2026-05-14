@@ -11,10 +11,16 @@ from legsa_gins.fgo.fgo_linear_solver import solve_no_feedback_linear_system
 from legsa_gins.fgo.fgo_state_types import FGOStateDataset
 
 
-def run_no_feedback_smoother(dataset: FGOStateDataset) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def run_no_feedback_smoother(
+    dataset: FGOStateDataset,
+    *,
+    smoothness_weight: float = 0.15,
+    stage: str = "N8A_no_feedback_fgo_foundation",
+    variant: str = "default_active_stack",
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """中文说明：离线 smoother 输出只用于诊断，不回写 EKF，不替换 NAV。"""
     raw = [state.vector() for state in dataset.states]
-    solved = solve_no_feedback_linear_system(raw, smoothness_weight=0.15)
+    solved = solve_no_feedback_linear_system(raw, smoothness_weight=smoothness_weight, angle_column_indices=(5,))
     rows: list[dict[str, Any]] = []
     for state, vector in zip(dataset.states, solved.get("smoothed", [])):
         rows.append(
@@ -33,17 +39,26 @@ def run_no_feedback_smoother(dataset: FGOStateDataset) -> tuple[list[dict[str, A
             }
         )
     report = {
-        "stage": "N8A_no_feedback_fgo_foundation",
+        "stage": stage,
+        "variant": variant,
         "solve_status": "solved" if solved.get("solved") and solved.get("finite_output") else "not_solved",
         "state_count": dataset.state_count,
         "output_state_count": len(rows),
         "residual_proxy_p95": solved.get("residual_proxy_p95", 0.0),
+        "iteration_count": solved.get("iteration_count", 0),
+        "final_cost": solved.get("final_cost", 0.0),
+        "smoothness_weight": solved.get("smoothness_weight", smoothness_weight),
+        "smoothness_alpha": solved.get("smoothness_alpha", 0.0),
+        "yaw_wrap_residuals_enabled": bool(solved.get("yaw_wrap_residuals_enabled", False)),
+        "angle_column_indices": solved.get("angle_column_indices", []),
         "finite_output": bool(solved.get("finite_output", True)),
         "fixed_weights": True,
         "limited_iterations": True,
+        "smoothness_factor_deleted": False,
         "fgo_output_feedback_to_ekf": False,
         "fgo_output_replaces_ekf_nav": False,
         "output_only_correction": False,
+        "output_only_yaw_correction": False,
         "trace_solver_input": False,
         "final_v23_output_solver_input": False,
         "paper_performance_claim": False,

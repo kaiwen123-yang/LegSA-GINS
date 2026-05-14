@@ -7,6 +7,8 @@ import math
 from pathlib import Path
 from typing import Any
 
+from legsa_gins.fgo.fgo_angle_utils import shortest_angle_residual_deg
+
 
 def _rmse(values: list[float]) -> float:
     return math.sqrt(sum(value * value for value in values) / len(values)) if values else 0.0
@@ -15,21 +17,31 @@ def _rmse(values: list[float]) -> float:
 def evaluate_no_feedback_fgo(*, ekf_states: list[dict[str, Any]], fgo_states: list[dict[str, Any]]) -> dict[str, Any]:
     """中文说明：只评价 FGO 与 EKF diagnostic delta，不把 FGO 输出替换 EKF。"""
     count = min(len(ekf_states), len(fgo_states))
-    deltas = []
+    raw_deltas = []
+    wrapped_deltas = []
     for index in range(count):
         ekf = ekf_states[index]
         fgo = fgo_states[index]
-        deltas.append(float(fgo.get("yaw_deg", 0.0)) - float(ekf.get("yaw_deg", 0.0)))
+        fgo_yaw = float(fgo.get("yaw_deg", 0.0))
+        ekf_yaw = float(ekf.get("yaw_deg", 0.0))
+        raw_deltas.append(fgo_yaw - ekf_yaw)
+        wrapped_deltas.append(shortest_angle_residual_deg(fgo_yaw, ekf_yaw))
+    raw_rmse = _rmse(raw_deltas)
+    wrapped_rmse = _rmse(wrapped_deltas)
     return {
         "stage": "N8A_no_feedback_fgo_foundation",
         "metric_namespace": "FGO_vs_EKF_delta",
         "aligned_state_count": count,
-        "yaw_delta_rmse_deg": _rmse(deltas),
+        "yaw_delta_rmse_deg": wrapped_rmse,
+        "primary_yaw_metric": "wrapped_delta_rmse_deg",
+        "yaw_delta_raw_rmse_deg": raw_rmse,
+        "yaw_delta_wrapped_rmse_deg": wrapped_rmse,
         "evaluation_only_reference": True,
         "trace_solver_input": False,
         "final_v23_output_solver_input": False,
         "fgo_output_feedback_to_ekf": False,
         "fgo_output_replaces_ekf_nav": False,
+        "output_only_yaw_correction": False,
         "paper_performance_claim": False,
     }
 
