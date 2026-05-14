@@ -892,6 +892,38 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8F Legged Candidate Factor Activation Boundary
+
+N8F formally activates legged candidate factors in no-feedback FGO.
+
+Contact probability is a weighting layer, not truth.
+
+Foot kinematic velocity is a proprioceptive factor, not truth.
+
+Yaw-rate and relative odometry are between factors, not absolute truth.
+
+No Go2 absolute position factor.
+
+No Go2 absolute yaw factor.
+
+No Go2 vertical velocity factor by default.
+
+No hard contact truth.
+
+No FGO feedback/substitution in N8F.
+
+No trace/final_v23 tuning.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output-only correction, no tuning, no epoch deletion.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N8E Formal Engineering Ablation Boundary
 
 N8E is formal engineering ablation with caveats.
