@@ -892,6 +892,32 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8G FGO Feedback EKF Boundary
+
+N8G introduces controlled FGO feedback to EKF.
+
+FGO feedback is an EKF update / pseudo-measurement, not output substitution.
+
+FGO output does not directly replace NAV.
+
+Feedback uses no future data.
+
+Feedback covariance and gates are conservative and not trace/final_v23 tuned.
+
+N8G is engineering diagnostic evidence, not paper performance claim.
+
+No direct NAV overwrite.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output-only correction.
+
+No epoch deletion for metric.
+
+No outperform final_v23 claim.
+
 ## N8F1 Legged Candidate Factor Visual Validation Boundary
 
 N8F1 visually validates legged candidate FGO factors.

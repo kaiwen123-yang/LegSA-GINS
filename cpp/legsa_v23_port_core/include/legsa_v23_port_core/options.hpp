@@ -9,6 +9,7 @@
 
 #include "legsa_v23_port_core/factors/raw_doppler_types.hpp"
 #include "legsa_v23_port_core/factors/go2_weak_prior_types.hpp"
+#include "legsa_v23_port_core/fgo_feedback/fgo_feedback.hpp"
 #include "legsa_v23_port_core/source_aware/measurement_source.hpp"
 #include "legsa_v23_port_core/types.hpp"
 
@@ -84,6 +85,9 @@ struct PortOptions {
   source_aware::SourceAwarePolicyConfig source_aware_policy_config;
   source_aware::SourceAwareRuntimeStats source_aware_runtime_stats;
   bool fgo = false;
+  // 中文说明：N8G FGO feedback 默认关闭；开启时只能作为 EKF pseudo-measurement update。
+  fgo_feedback::FgoFeedbackConfig fgo_feedback_config;
+  fgo_feedback::FgoFeedbackStatus fgo_feedback_status;
   bool performance_claim = false;
   bool paper_performance_claim = false;
   bool proposed_factor_claim = false;

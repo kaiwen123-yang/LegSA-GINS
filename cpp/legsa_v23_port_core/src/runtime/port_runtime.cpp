@@ -12,6 +12,7 @@
 #include "legsa_v23_port_core/config/port_config_loader.hpp"
 #include "legsa_v23_port_core/factors/go2_weak_prior_loader.hpp"
 #include "legsa_v23_port_core/factors/raw_doppler_factor_loader.hpp"
+#include "legsa_v23_port_core/fgo_feedback/fgo_feedback.hpp"
 #include "legsa_v23_port_core/fileio/file_saver.hpp"
 #include "legsa_v23_port_core/fileio/gnss_file_loader.hpp"
 #include "legsa_v23_port_core/fileio/imu_file_loader.hpp"
@@ -92,6 +93,12 @@ void copyGo2DiagnosticPriorStatus(const GIEngine& engine, PortOptions& options) 
     options.go2_yaw_rate_prior_diagnostic_status.activation_status =
         "yaw_rate_prior_not_activated_due_to_state_model";
   }
+}
+
+void copyFgoFeedbackStatus(const GIEngine& engine, PortOptions& options) {
+  // 中文说明：N8G feedback status 只来自 EKF update interface，不来自输出后处理。
+  options.fgo_feedback_status = engine.fgoFeedbackStatus();
+  options.fgo = options.fgo_feedback_status.update_count > 0;
 }
 
 std::vector<double> readFirstColumnTimes(const std::string& path) {
@@ -781,6 +788,20 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.proposed_factor_claim = false;
     options.performance_claim = false;
   }
+  if (options.fgo_feedback_config.enable_fgo_feedback) {
+    // 中文说明：N8G 开启 FGO feedback-to-EKF；FGO 输出不直接写 NAV。
+    options.phase = "N8G";
+    options.port_role = "fgo_feedback_ekf_foundation";
+    options.run_label = options.ablation_variant.empty() ? "N8G_fgo_feedback_ekf_foundation"
+                                                         : options.ablation_variant;
+    options.fgo_feedback_status.code_present = true;
+    options.fgo_feedback_status.output_substitution = false;
+    options.fgo_feedback_status.direct_nav_override = false;
+    options.output_only_correction = false;
+    options.paper_performance_claim = false;
+    options.proposed_factor_claim = false;
+    options.performance_claim = false;
+  }
   if (options.imu_path.empty() || options.gnss_path.empty()) {
     throw std::runtime_error("config must provide imu_path/imupath and gnss_path/gnsspath");
   }
@@ -820,6 +841,13 @@ void PortRuntime::runFromConfig(const std::string& config_path,
         "yaw_rate_prior_not_activated_due_to_state_model";
     options.go2_yaw_rate_prior_diagnostic_status.activation_status =
         "yaw_rate_prior_not_activated_due_to_state_model";
+  }
+  fgo_feedback::FgoFeedbackLoadResult fgo_feedback_load;
+  if (options.fgo_feedback_config.enable_fgo_feedback) {
+    fgo_feedback_load =
+        fgo_feedback::FgoFeedbackLoader::loadCsv(options.fgo_feedback_config.fgo_feedback_path,
+                                                 options.fgo_feedback_config);
+    options.fgo_feedback_status = fgo_feedback_load.status;
   }
   const std::vector<double> imu_times = readFirstColumnTimes(options.imu_path);
   const std::vector<double> gnss_times = readFirstColumnTimes(options.gnss_path);
@@ -865,6 +893,9 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   }
   if (options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic) {
     engine.setGo2VelocityDiagnosticPriors(go2_velocity_prior_load.measurements, go2_velocity_prior_load.status);
+  }
+  if (options.fgo_feedback_config.enable_fgo_feedback) {
+    engine.setFgoFeedbackObservations(fgo_feedback_load.observations, fgo_feedback_load.status);
   }
   engine.initialize(makeInitialState(options));
   std::vector<NavState> states;
@@ -991,6 +1022,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   copySourceAwareStatus(engine, options);
   copyGo2AttitudePriorStatus(engine, options);
   copyGo2DiagnosticPriorStatus(engine, options);
+  copyFgoFeedbackStatus(engine, options);
   options.actual_update_count = engine.updateCount();
   options.update_count_ratio =
       options.expected_update_count == 0
@@ -1015,6 +1047,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   }
   writeAll(output_dir, options, states, covariances);
   engine.writeSourceAwareTrace(output_dir);
+  engine.writeFgoFeedbackTrace(output_dir);
 }
 
 }  // namespace legsa_v23_port_core
