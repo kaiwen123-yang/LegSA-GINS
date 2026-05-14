@@ -892,6 +892,32 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8F1 Legged Candidate Factor Visual Validation Boundary
+
+N8F1 visually validates legged candidate FGO factors.
+
+Visual validation is diagnostic engineering evidence only.
+
+Foot kinematic velocity, yaw-rate, and relative odometry factors are not truth.
+
+Contact probability is a weighting signal, not truth.
+
+No FGO feedback/substitution in N8F1.
+
+No trace/final_v23 tuning.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No Go2 contact, velocity, yaw, or position truth claim.
+
+No output-only correction, no tuning, no epoch deletion.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N8F Legged Candidate Factor Activation Boundary
 
 N8F formally activates legged candidate factors in no-feedback FGO.
