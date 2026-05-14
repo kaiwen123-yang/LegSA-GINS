@@ -931,6 +931,30 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8A2 FGO Yaw Convention Fix Boundary
+
+N8A2 fixes FGO yaw residual wrapping.
+
+Dual-yaw, yaw smoothness, and yaw-rate diagnostic residuals use shortest-angle wrapping.
+
+N8A2 does not use output-only yaw correction.
+
+Smoothness factor is not deleted to pass metrics.
+
+Trace/final_v23 are not solver inputs.
+
+Trace/final_v23 are not used to tune FGO weights.
+
+FGO remains no-feedback.
+
+FGO output does not replace EKF NAV.
+
+No EKF modification.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N7C6A Go2 Proprioceptive Joint Factor Final Review Boundary
 
 N7C6A is final visual/metric sanity review.

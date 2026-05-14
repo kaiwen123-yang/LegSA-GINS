@@ -60,7 +60,14 @@ def generate_n8a_figures(
     generated.append(_save(fig, out / REQUIRED_N8A_FIGURES[1], plt))
 
     fig, ax = plt.subplots(figsize=(8, 4.6))
-    ax.bar(["yaw delta RMSE", "smoother residual p95"], [evaluation.get("yaw_delta_rmse_deg", 0.0), smoother.get("residual_proxy_p95", 0.0)])
+    ax.bar(
+        ["yaw raw RMSE", "yaw wrapped RMSE", "smoother residual p95"],
+        [
+            evaluation.get("yaw_delta_raw_rmse_deg", evaluation.get("yaw_delta_rmse_deg", 0.0)),
+            evaluation.get("yaw_delta_wrapped_rmse_deg", evaluation.get("yaw_delta_rmse_deg", 0.0)),
+            smoother.get("residual_proxy_p95", 0.0),
+        ],
+    )
     ax.set_title("N8A no-feedback diagnostic deltas")
     ax.set_ylabel("diagnostic units")
     ax.grid(True, axis="y", alpha=0.35)

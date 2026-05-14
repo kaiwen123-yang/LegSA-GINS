@@ -18,6 +18,7 @@ class FGOFactorContract:
     state_blocks_touched: tuple[str, ...]
     measurement_source: str
     covariance_policy: str
+    residual_formula: str = ""
     truth_claim: bool = False
     trace_input: bool = False
     finalv23_input: bool = False
