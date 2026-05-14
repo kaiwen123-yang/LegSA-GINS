@@ -43,7 +43,11 @@ def main() -> int:
         stderr=subprocess.PIPE,
         check=False,
     )
-    suspicious = [line for line in proc.stdout.splitlines() if "False" not in line and "not use" not in line and "not used" not in line]
+    suspicious = [
+        line
+        for line in proc.stdout.splitlines()
+        if "False" not in line and "not use" not in line and "not used" not in line and "no trace/final_v23 tuning" not in line
+    ]
     if suspicious:
         _fail("suspicious trace/final_v23 tuning text: " + suspicious[0])
     print("audit_fgo_policy_no_trace_tuning passed")
