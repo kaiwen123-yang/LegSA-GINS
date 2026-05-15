@@ -1479,6 +1479,40 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8J Feedback Final Validation Boundary
+
+N8J validates the selected FGO feedback EKF policy.
+
+The selected feedback policy is locked from N8I.
+
+N8J does not tune feedback using trace/final_v23.
+
+FGO feedback remains an EKF update, not output substitution.
+
+FGO feedback is not a direct NAV overwrite.
+
+Runtime NAV/STD/EVAL/RUN_MANIFEST artifacts may be generated but are not
+committed.
+
+Primary position feedback remains disabled unless a diagnostic PVA reference is
+explicitly labeled.
+
+Reject-all sanity must match the no-feedback baseline.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output-only correction.
+
+No future-data feedback.
+
+N8J is BY2 engineering validation only.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N7B4 Literature-Informed Go2 Contact/Velocity Boundary
 
 N7B4 contact probability is diagnostic.
