@@ -38,6 +38,8 @@ LegSA-GINS will be developed as:
 
 Current completed phases:
 
+N8I feedback ablation and gate/covariance refinement.
+
 N8H FGO feedback EKF visual validation.
 
 N8G FGO feedback EKF foundation.
@@ -64,7 +66,7 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current working phase:
 
-N8I feedback ablation and gate/covariance refinement.
+N8J feedback final validation.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -183,6 +185,10 @@ proposed factors, and does not make performance claims. The old
 `cpp/legsa_v23_core` remains a diagnostic/self-written attempt.
 
 Current completed phases:
+N8I feedback ablation and gate/covariance refinement.
+N8H FGO feedback EKF visual validation.
+N8G FGO feedback EKF foundation.
+N8F1 legged candidate factor visual validation.
 N8E formal engineering ablation with caveats.
 N8D FGO factor weight policy review.
 N8C3 Raw Doppler FGO solver factor fixed.
@@ -195,7 +201,7 @@ N7B3 Go2 contact/velocity diagnostic activation.
 N7B4 literature-informed Go2 contact/velocity diagnostics.
 
 Current working phase:
-N8F1 legged candidate factor visual validation.
+N8J feedback final validation.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,
