@@ -1660,6 +1660,34 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8K Final Merge Review Boundary
+
+N8K final merge review is a pre-merge gate for PR #48.
+
+It does not merge PR #48.
+
+It does not create an N8K tag.
+
+It does not start N9A or N9B.
+
+It does not run the full degradation matrix.
+
+It does not modify algorithm math or feedback policy.
+
+The review must re-scan N8K5 figures instead of trusting only report fields.
+
+The review must treat no-feedback baseline variants as merge blockers if they
+are incorrectly classified as feedback-applicable.
+
+Ready-to-merge and ready-to-tag are explicit booleans and may be false even
+when lower-level plot audits pass.
+
+No trace/final_v23 tuning.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N7B4 Literature-Informed Go2 Contact/Velocity Boundary
 
 N7B4 contact probability is diagnostic.
