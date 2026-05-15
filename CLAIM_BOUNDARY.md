@@ -1674,13 +1674,19 @@ It does not run the full degradation matrix.
 
 It does not modify algorithm math or feedback policy.
 
-The review must re-scan N8K5 figures instead of trusting only report fields.
+The review must re-scan the current N8K review figure root instead of trusting
+only report fields. After N8K6, this means the N8K6 figure root.
 
 The review must treat no-feedback baseline variants as merge blockers if they
 are incorrectly classified as feedback-applicable.
 
 Ready-to-merge and ready-to-tag are explicit booleans and may be false even
 when lower-level plot audits pass.
+
+After the N8K6 rerun, the final merge review status is
+`N8K_final_merge_review_passed`, with `ready_to_merge=true` and
+`ready_to_tag=true`. That status authorizes only the next explicit merge/tag
+stage; it does not merge PR #48 or create a tag by itself.
 
 No trace/final_v23 tuning.
 
