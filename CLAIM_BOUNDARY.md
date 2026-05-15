@@ -1423,6 +1423,33 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8H FGO Feedback EKF Visual Validation Boundary
+
+N8H visually validates FGO feedback EKF behavior.
+
+FGO feedback remains an EKF update, not output substitution.
+
+FGO feedback is not a direct NAV overwrite.
+
+Position feedback remains disabled for the primary feedback variant unless a
+diagnostic PVA variant is explicitly labeled.
+
+Reject-all sanity must match the no-feedback baseline.
+
+No trace/final_v23 tuning.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output-only correction.
+
+No future-data feedback.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N7B4 Literature-Informed Go2 Contact/Velocity Boundary
 
 N7B4 contact probability is diagnostic.
