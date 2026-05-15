@@ -68,7 +68,16 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current working phase:
 
-N9A BY2 full plot audit and full figure generation.
+N9A_R1 BY2 source-aligned normal-condition plot audit.
+
+N9A initial PR #49 output is treated as a scope mismatch: it audited the
+N8K-N8K6 formal ablation archive and counted 30 ablation variants as cases.
+N9A_R1 corrects the model to one main case, `BY2_normal_clean`, with algorithm
+comparison series. It uses `<GNSS1_RAW>`, `<GNSS2_RAW>`, `<GNSS1_STATUS>`,
+`<GNSS2_STATUS>`, `<TRACE_TRUTH>`, and `<GO2_BODY_IMU_HIGHLEVEL>` as runtime
+source roles. Trace remains evaluation-only, Fixposition receiver IMU is
+diagnostic-only, N9B is not run, algorithms are not changed, and no paper
+performance claim is made.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -204,7 +213,7 @@ N7B3 Go2 contact/velocity diagnostic activation.
 N7B4 literature-informed Go2 contact/velocity diagnostics.
 
 Current working phase:
-N9A BY2 full plot audit and full figure generation.
+N9A_R1 BY2 source-aligned normal-condition plot audit.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,

@@ -182,6 +182,23 @@ Allowed N4H4E1 STD/plot fix statement:
 - No outperform final_v23 claim.
 - No proposed factor claim.
 
+Allowed N9A_R1 source-aligned normal plot audit statement:
+
+- N9A_R1 may audit BY2 normal-condition source paths and generate source-aligned
+  plots for `BY2_normal_clean`.
+- N9A_R1 may mark initial N9A as `N9A_initial_audit_scope_mismatch` when the
+  initial run only audited N8K-N8K6 ablation outputs and counted ablation
+  variants as cases.
+- N9A_R1 may document `<GNSS1_RAW>`, `<GNSS2_RAW>`, `<GNSS1_STATUS>`,
+  `<GNSS2_STATUS>`, `<TRACE_TRUTH>`, and `<GO2_BODY_IMU_HIGHLEVEL>` roles.
+- Trace remains truth/reference/evaluation only and is not solver input.
+- `by2.txt` is the fused Go2 body IMU/high-level source.
+- Fixposition receiver IMU files are diagnostic-only and are not fused body IMU.
+- N8K formal ablation variants are archive context only, not BY2 normal cases.
+- N9A_R1 does not run N9B.
+- N9A_R1 does not modify algorithms, tune trace/final_v23, substitute solver
+  output, or make paper performance claims.
+
 Allowed N5A raw Doppler activation statement:
 
 - N5A is the first proposed factor integration attempt after backbone parity.
