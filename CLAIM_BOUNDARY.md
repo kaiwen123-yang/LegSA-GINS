@@ -1513,6 +1513,37 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8K BY2 Formal Ablation Plot Audit Boundary
+
+N8K is BY2 formal ablation and ablation plot audit.
+
+N8K does not run the full degradation matrix.
+
+N8K does not modify algorithm math or feedback policy.
+
+N8K figures are engineering audit figures, not paper performance claims.
+
+All BY2 plotting outputs are generated under the BY2 plot audit root.
+
+N8K only generates the N9B degradation plan; it does not run N9B degradation
+runtime outputs.
+
+No trace/final_v23 tuning.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output substitution.
+
+No output-only correction.
+
+No future-data feedback.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N7B4 Literature-Informed Go2 Contact/Velocity Boundary
 
 N7B4 contact probability is diagnostic.
