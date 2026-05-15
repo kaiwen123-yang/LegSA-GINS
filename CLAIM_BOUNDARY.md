@@ -1719,6 +1719,45 @@ N8K6 does not use trace/final_v23 for tuning.
 
 N8K6 makes no paper performance claim and no outperform final_v23 claim.
 
+## N9A BY2 Full Plot Audit Boundary
+
+N9A starts from `main` after tag
+`N8K-v0.1-BY2-formal-ablation-plot-audit`.
+
+N9A uses the user-defined unified 01-14 category schema rooted at
+`<BY2_PLOT_AUDIT_ROOT>`.
+
+N9A is a full BY2 plot generation and plot-audit stage, not N9B.
+
+N9A does not run the full degradation matrix.
+
+N9A does not modify algorithm math, `gi_engine.cpp`, yaw gates, covariance, or
+feedback policy.
+
+N9A does not use trace as solver input.
+
+N9A does not use final_v23 output as solver input.
+
+N9A does not perform output-only correction or NAV substitution.
+
+N9A does not delete epochs or bad data to improve metrics.
+
+N9A does not treat Go2 position, velocity, contact, or yaw as truth.
+
+N9A does not make a paper performance claim.
+
+N9A does not claim outperform final_v23.
+
+N9A does not claim RTK fixed.
+
+N9A does not claim raw dual-antenna heading.
+
+N9A does not claim tight coupling.
+
+N9A does not claim full raw GNSS factor.
+
+N9A does not claim full pose FGO.
+
 ## N7B4 Literature-Informed Go2 Contact/Velocity Boundary
 
 N7B4 contact probability is diagnostic.

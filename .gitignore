@@ -14,6 +14,7 @@ configs/local/
 *.local.yaml
 *.local.json
 *.local.toml
+.legsa_runtime/
 
 results/full/
 results/raw_logs/

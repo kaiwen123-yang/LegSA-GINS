@@ -28,6 +28,7 @@ FORBIDDEN_LOCAL_PATH_STRINGS = [
 ]
 SKIP_PREFIXES = {
     Path("reference/final_v23_repo"),
+    Path(".legsa_runtime"),
 }
 
 
