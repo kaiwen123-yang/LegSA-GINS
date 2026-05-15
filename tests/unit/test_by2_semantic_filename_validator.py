@@ -23,3 +23,21 @@ def test_validate_semantic_filename_entries_after_fix():
         {"variant_id": "A", "category": "07_compare", "filename": "reject_all_sanity_compare.png", "semantic_role": "reject_all_sanity_compare", "title": "Reject-all sanity not applicable", "documented_not_applicable": True, "not_applicable_reason": "reject-all sanity only applies to feedback variants / no feedback rows"},
     ]
     assert validate_semantic_filename_entries(entries) == []
+
+
+def test_validate_n8k5_cross_category_semantic_entries():
+    entries = [
+        {"variant_id": "A", "category": "07_compare", "filename": "compare_velocity_error.png", "semantic_role": "velocity_error_comparison", "title": "Compare baseline vs variant velocity error", "documented_not_applicable": False},
+        {"variant_id": "A", "category": "06_observation_quality", "filename": "feedback_accept_reject_time.png", "semantic_role": "feedback_observation_quality_timeline", "title": "Feedback observation quality not applicable", "documented_not_applicable": True, "not_applicable_reason": "no feedback rows / feedback disabled for this variant"},
+        {"variant_id": "A", "category": "07_compare", "filename": "compare_feedback_delta.png", "semantic_role": "feedback_delta_comparison", "title": "Feedback delta comparison not applicable", "documented_not_applicable": True, "not_applicable_reason": "feedback delta comparison only applies to feedback variants / no feedback rows"},
+    ]
+    assert validate_semantic_filename_entries(entries) == []
+
+
+def test_validate_rejects_cross_category_role_leakage():
+    entries = [
+        {"variant_id": "A", "category": "07_compare", "filename": "compare_velocity_error.png", "semantic_role": "velocity_residual_time_series", "title": "Velocity residual time series", "documented_not_applicable": False},
+        {"variant_id": "A", "category": "07_compare", "filename": "compare_feedback_delta.png", "semantic_role": "feedback_observation_quality_timeline", "title": "Feedback accept/reject timeline", "documented_not_applicable": False},
+    ]
+    mismatches = validate_semantic_filename_entries(entries)
+    assert {item["reason"] for item in mismatches} >= {"semantic_role_mismatch", "compare_velocity_error_mapped_to_velocity_residual", "compare_feedback_delta_mapped_to_feedback_timeline"}

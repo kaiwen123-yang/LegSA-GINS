@@ -1623,6 +1623,43 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8K5 BY2 Formal Ablation Cross-Category Plot Semantic Fix Boundary
+
+N8K2 fixed placeholder-like applicable plots.
+
+N8K3 fixed same-category exact duplicate plots.
+
+N8K4 fixed semantic filename mismatches.
+
+N8K5 fixes same-variant cross-category exact duplicate and semantic leakage.
+
+Exact duplicate checks must include same-variant cross-category blocking pairs,
+not only same-category groups.
+
+`compare_velocity_error` must not copy `velocity_residual_time`.
+
+`compare_feedback_delta` must not copy `feedback_accept_reject_time`.
+
+For non-feedback variants, feedback observation and feedback delta plots must be
+documented not-applicable instead of empty accepted/rejected axes.
+
+`derived_from_n8k_metrics_and_baseline_nav` is derived/surrogate visualization
+data, not complete runtime variant NAV.
+
+N8K5 does not modify algorithm math or feedback policy.
+
+N8K5 does not run the full degradation matrix.
+
+No trace/final_v23 tuning.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N7B4 Literature-Informed Go2 Contact/Velocity Boundary
 
 N7B4 contact probability is diagnostic.

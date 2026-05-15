@@ -23,6 +23,9 @@ def build_real_plot_decision(coverage: dict[str, Any]) -> dict[str, Any]:
     elif coverage.get("semantic_filename_mismatch_count", 0) > 0:
         status = "real_plot_fix_failed_semantic_filename_mismatch"
         next_stage = "N8K4_semantic_filename_plot_fix"
+    elif coverage.get("blocking_cross_category_duplicate_count", 0) > 0:
+        status = "real_plot_fix_failed_cross_category_semantic_duplicate"
+        next_stage = "N8K5_cross_category_plot_semantic_fix"
     elif coverage.get("all_categories_complete") is not True:
         status = "real_plot_fix_failed_coverage_incomplete"
         next_stage = "N8K3_plot_coverage_recovery"
@@ -35,6 +38,8 @@ def build_real_plot_decision(coverage: dict[str, Any]) -> dict[str, Any]:
         "recommended_next_stage": next_stage,
         "applicable_placeholder_count": coverage.get("applicable_placeholder_count", 0),
         "duplicate_template_suspect_count": coverage.get("duplicate_template_suspect_count", 0),
+        "same_variant_cross_category_duplicate_count": coverage.get("same_variant_cross_category_duplicate_count", 0),
+        "blocking_cross_category_duplicate_count": coverage.get("blocking_cross_category_duplicate_count", 0),
         "missing_real_plot_count": coverage.get("missing_real_plot_count", 0),
         "unresolved_missing_data_count": coverage.get("unresolved_missing_data_count", 0),
         "low_information_unresolved_count": coverage.get("low_information_unresolved_count", 0),

@@ -33,6 +33,11 @@ def generate_real_timeseries_plot(variant_id: str, data: dict[str, Any], categor
     path.parent.mkdir(parents=True, exist_ok=True)
     rows = data["series"]
     metrics = data.get("metrics", {})
+    feedback = data.get("feedback_series", [])
+    if category == "06_observation_quality" and filename == "feedback_accept_reject_time.png" and not feedback:
+        return write_not_applicable_panel(path, variant_id, category, filename, "no feedback rows / feedback disabled for this variant")
+    if category == "07_compare" and filename == "compare_feedback_delta.png" and not feedback:
+        return write_not_applicable_panel(path, variant_id, category, filename, "feedback delta comparison only applies to feedback variants / no feedback rows")
     if category == "02_position_errors":
         _plot_position(filename, rows, metrics, path, variant_id)
     elif category == "03_velocity":
@@ -214,8 +219,13 @@ def _plot_compare(filename: str, rows: list[dict[str, float]], feedback: list[di
         _line(path, variant_id, "Compare yaw delta", time, {"yaw delta": [_wrap_deg(r["yaw_deg"] - r["baseline_yaw_deg"]) for r in rows]}, "deg")
     elif "roll_pitch" in filename:
         _line(path, variant_id, "Compare roll/pitch delta", time, {"roll delta": [r["roll_deg"] - r["baseline_roll_deg"] for r in rows], "pitch delta": [r["pitch_deg"] - r["baseline_pitch_deg"] for r in rows]}, "deg")
+    elif filename == "compare_velocity_error.png":
+        baseline_speed = [_speed(r["baseline_vn"], r["baseline_ve"], r["baseline_vd"]) for r in rows]
+        variant_speed = [_speed(r["vn"], r["ve"], r["vd"]) for r in rows]
+        delta = [abs(v - b) for b, v in zip(baseline_speed, variant_speed)]
+        _line(path, variant_id, "Compare baseline vs variant velocity error", time, {"baseline speed": baseline_speed, "variant speed": variant_speed, "speed delta": delta}, "m/s")
     elif "velocity" in filename:
-        _plot_velocity("velocity_residual_time.png", rows, metrics, path, variant_id)
+        _line(path, variant_id, "Compare velocity delta", time, {"vN delta": [r["vn"] - r["baseline_vn"] for r in rows], "vE delta": [r["ve"] - r["baseline_ve"] for r in rows], "vD delta": [r["vd"] - r["baseline_vd"] for r in rows]}, "m/s")
     elif filename == "reject_all_sanity_compare.png":
         if not feedback:
             write_not_applicable_panel(path, variant_id, "07_compare", filename, "reject-all sanity comparison only applies to feedback variants")
@@ -223,6 +233,12 @@ def _plot_compare(filename: str, rows: list[dict[str, float]], feedback: list[di
             accepted = sum(1 for row in feedback if row.get("accepted"))
             rejected = len(feedback) - accepted
             _bar(path, variant_id, "Reject-all sanity comparison", {"selected accepted": accepted, "selected rejected": rejected, "reject-all accepted": 0, "reject-all rejected": len(feedback)}, "count")
+    elif filename == "compare_feedback_delta.png":
+        accepted = sum(1 for row in feedback if row.get("accepted"))
+        rejected = len(feedback) - accepted
+        velocity = [float(row.get("velocity_norm", 0.0)) for row in feedback]
+        attitude = [float(row.get("attitude_norm", 0.0)) for row in feedback]
+        _bar(path, variant_id, "Compare feedback delta", {"selected accepted": accepted, "selected rejected": rejected, "velocity correction p95": _p95(velocity), "attitude correction p95": _p95(attitude)}, "count / norm")
     elif "feedback" in filename:
         _feedback_timeline(path, variant_id, feedback)
     else:
@@ -335,6 +351,17 @@ def _diff(values: list[float]) -> list[float]:
 
 def _wrap_deg(value: float) -> float:
     return (value + 180.0) % 360.0 - 180.0
+
+
+def _speed(vn: float, ve: float, vd: float) -> float:
+    return math.sqrt(vn * vn + ve * ve + vd * vd)
+
+
+def _p95(values: list[float]) -> float:
+    if not values:
+        return 0.0
+    ordered = sorted(values)
+    return ordered[min(len(ordered) - 1, int(0.95 * (len(ordered) - 1)))]
 
 
 def _entry(variant_id: str, category: str, filename: str, path: Path, rows: list[dict[str, float]], plot_kind: str) -> dict[str, Any]:

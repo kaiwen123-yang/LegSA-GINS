@@ -53,6 +53,8 @@ def build_real_plot_coverage(
         "applicable_placeholder_count": placeholder_report.get("applicable_placeholder_remaining", 0),
         "duplicate_template_suspect_count": placeholder_report.get("duplicate_template_suspect_count", 0),
         "semantic_filename_mismatch_count": placeholder_report.get("semantic_filename_mismatch_count", 0),
+        "same_variant_cross_category_duplicate_count": placeholder_report.get("same_variant_cross_category_duplicate_count", 0),
+        "blocking_cross_category_duplicate_count": placeholder_report.get("blocking_cross_category_duplicate_count", 0),
         "missing_real_plot_count": len(missing_real),
         "missing_real_plots": missing_real,
         "unresolved_missing_data_count": data_report.get("unresolved_missing_data_count", 0),

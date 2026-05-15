@@ -60,6 +60,12 @@ def validate_semantic_filename_entries(entries: list[dict[str, Any]]) -> list[di
             mismatches.append(_mismatch(entry, "not_applicable_not_allowed_for_filename"))
         if filename == "compare_horizontal_error.png" and reason and "feedback" in reason:
             mismatches.append(_mismatch(entry, "horizontal_compare_marked_not_applicable_by_feedback_reason"))
+        if filename == "compare_velocity_error.png" and role == "velocity_residual_time_series":
+            mismatches.append(_mismatch(entry, "compare_velocity_error_mapped_to_velocity_residual"))
+        if filename == "compare_feedback_delta.png" and role in {"feedback_observation_quality_timeline", "feedback_accept_reject_timeline"}:
+            mismatches.append(_mismatch(entry, "compare_feedback_delta_mapped_to_feedback_timeline"))
+        if filename == "feedback_accept_reject_time.png" and entry.get("documented_not_applicable") and "feedback" not in reason:
+            mismatches.append(_mismatch(entry, "feedback_observation_not_applicable_reason_missing"))
         for keyword in spec.required_title_keywords:
             if not entry.get("documented_not_applicable") and keyword.lower() not in title:
                 mismatches.append(_mismatch(entry, f"missing_title_keyword:{keyword}"))
