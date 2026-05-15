@@ -20,6 +20,9 @@ def build_real_plot_decision(coverage: dict[str, Any]) -> dict[str, Any]:
     elif coverage.get("duplicate_template_suspect_count", 0) > 0:
         status = "real_plot_fix_failed_duplicate_templates"
         next_stage = "N8K3_duplicate_plot_fix"
+    elif coverage.get("semantic_filename_mismatch_count", 0) > 0:
+        status = "real_plot_fix_failed_semantic_filename_mismatch"
+        next_stage = "N8K4_semantic_filename_plot_fix"
     elif coverage.get("all_categories_complete") is not True:
         status = "real_plot_fix_failed_coverage_incomplete"
         next_stage = "N8K3_plot_coverage_recovery"

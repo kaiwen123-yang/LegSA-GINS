@@ -12,6 +12,8 @@ import matplotlib
 matplotlib.use("Agg")
 from matplotlib import pyplot as plt
 
+from .by2_plot_semantic_spec import SEMANTIC_SPECS
+
 
 FEEDBACK_FILES = {
     "feedback_window_timeline.png",
@@ -59,6 +61,8 @@ def generate_real_feedback_plot(variant_id: str, data: dict[str, Any], filename:
         "placeholder_allowed": False,
         "plot_kind": "real_feedback",
         "row_count": len(feedback),
+        "semantic_role": _semantic_role("11_feedback", filename),
+        "documented_not_applicable": False,
     }
 
 
@@ -157,3 +161,8 @@ def _bar(path: Path, variant_id: str, title: str, values: dict[str, int], ylabel
     fig.tight_layout()
     fig.savefig(path)
     plt.close(fig)
+
+
+def _semantic_role(category: str, filename: str) -> str:
+    spec = SEMANTIC_SPECS.get((category, filename))
+    return spec.expected_semantic_role if spec else ""

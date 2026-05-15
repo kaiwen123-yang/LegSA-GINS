@@ -892,6 +892,42 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8K4 Semantic Filename Plot Fix Boundary
+
+N8K2 eliminated the original placeholder-like formal ablation figures.
+
+N8K3 eliminated same-category exact duplicate plots.
+
+N8K4 fixes semantic filename mismatches left by N8K3.
+
+Exact duplicate equals zero does not prove figure semantics are correct.
+
+Figure filename, title, semantic_role, data_source, and not-applicable reason
+must agree.
+
+compare_horizontal_error must remain a horizontal error comparison and must not
+be occupied by reject-all not-applicable content.
+
+reject_all_sanity_compare handles reject-all sanity semantics.
+
+yaw_residual_time and yaw_wrap_check must be distinct semantic products.
+
+feedback_accept_reject_timeline and reject_all_sanity must be distinct semantic
+products.
+
+derived_from_n8k_metrics_and_baseline_nav is derived/surrogate visualization
+data, not complete runtime variant NAV.
+
+N8K4 does not change algorithm math or feedback policy.
+
+N8K4 does not run the degradation matrix.
+
+No trace/final_v23 tuning.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N8K3 Duplicate Plot Fix Boundary
 
 N8K2 eliminated the original placeholder-like formal ablation figures.

@@ -14,6 +14,8 @@ matplotlib.use("Agg")
 from matplotlib import pyplot as plt
 from PIL import Image, ImageDraw
 
+from .by2_plot_semantic_spec import SEMANTIC_SPECS
+
 
 REAL_TIMESERIES_CATEGORIES = {
     "02_position_errors",
@@ -82,6 +84,9 @@ def write_not_applicable_panel(path: str | Path, variant_id: str, category: str,
         "placeholder_allowed": True,
         "plot_kind": "documented_not_applicable_panel",
         "row_count": 0,
+        "semantic_role": _semantic_role(category, filename),
+        "documented_not_applicable": True,
+        "not_applicable_reason": reason,
     }
 
 
@@ -345,4 +350,11 @@ def _entry(variant_id: str, category: str, filename: str, path: Path, rows: list
         "placeholder_allowed": category in {"13_ablation_meta", "14_audit_sanity"},
         "plot_kind": plot_kind,
         "row_count": len(rows),
+        "semantic_role": _semantic_role(category, filename),
+        "documented_not_applicable": False,
     }
+
+
+def _semantic_role(category: str, filename: str) -> str:
+    spec = SEMANTIC_SPECS.get((category, filename))
+    return spec.expected_semantic_role if spec else ""
