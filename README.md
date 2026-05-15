@@ -38,6 +38,8 @@ LegSA-GINS will be developed as:
 
 Current completed phases:
 
+N8G FGO feedback EKF foundation.
+
 N8F1 legged candidate factor activation and visual validation.
 
 N8E formal engineering ablation with caveats.
@@ -60,7 +62,7 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current working phase:
 
-N8G FGO feedback EKF foundation.
+N8H FGO feedback EKF visual validation.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
