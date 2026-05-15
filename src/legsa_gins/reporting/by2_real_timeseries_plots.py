@@ -157,9 +157,14 @@ def _plot_attitude(filename: str, rows: list[dict[str, float]], metrics: dict[st
     elif filename == "yaw_truth_obs_estimate.png":
         obs = [(r["baseline_yaw_deg"] + r["yaw_deg"]) / 2.0 for r in rows]
         _line(path, variant_id, "Yaw observation/evaluation overlay", time, {"evaluation baseline": [r["baseline_yaw_deg"] for r in rows], "yaw observation proxy": obs, "variant yaw": [r["yaw_deg"] for r in rows]}, "deg")
-    elif filename in {"yaw_residual_time.png", "yaw_wrap_check.png"}:
+    elif filename == "yaw_residual_time.png":
         residual = [_wrap_deg(r["yaw_deg"] - r["baseline_yaw_deg"]) for r in rows]
-        _line(path, variant_id, "Yaw wrapped residual", time, {"wrapped yaw residual": residual}, "deg")
+        _line(path, variant_id, "Yaw residual time series", time, {"wrapped yaw residual": residual}, "deg")
+    elif filename == "yaw_wrap_check.png":
+        raw = [r["yaw_deg"] - r["baseline_yaw_deg"] for r in rows]
+        wrapped = [_wrap_deg(value) for value in raw]
+        jumps = [0.0] + [abs(wrapped[index] - wrapped[index - 1]) for index in range(1, len(wrapped))]
+        _line(path, variant_id, "Yaw wrap consistency check", time, {"raw yaw residual": raw, "wrapped yaw residual": wrapped, "abs wrapped jump": jumps, "+180 deg boundary": [180.0 for _ in rows], "-180 deg boundary": [-180.0 for _ in rows]}, "deg")
     elif filename == "yawrate_between_residual.png":
         residual = _diff([_wrap_deg(r["yaw_deg"] - r["baseline_yaw_deg"]) for r in rows])
         _line(path, variant_id, "Yaw-rate residual proxy", time[: len(residual)], {"yaw-rate residual proxy": residual}, "deg/sample")
@@ -206,6 +211,13 @@ def _plot_compare(filename: str, rows: list[dict[str, float]], feedback: list[di
         _line(path, variant_id, "Compare roll/pitch delta", time, {"roll delta": [r["roll_deg"] - r["baseline_roll_deg"] for r in rows], "pitch delta": [r["pitch_deg"] - r["baseline_pitch_deg"] for r in rows]}, "deg")
     elif "velocity" in filename:
         _plot_velocity("velocity_residual_time.png", rows, metrics, path, variant_id)
+    elif filename == "reject_all_sanity_compare.png":
+        if not feedback:
+            write_not_applicable_panel(path, variant_id, "07_compare", filename, "reject-all sanity comparison only applies to feedback variants")
+        else:
+            accepted = sum(1 for row in feedback if row.get("accepted"))
+            rejected = len(feedback) - accepted
+            _bar(path, variant_id, "Reject-all sanity comparison", {"selected accepted": accepted, "selected rejected": rejected, "reject-all accepted": 0, "reject-all rejected": len(feedback)}, "count")
     elif "feedback" in filename:
         _feedback_timeline(path, variant_id, feedback)
     else:

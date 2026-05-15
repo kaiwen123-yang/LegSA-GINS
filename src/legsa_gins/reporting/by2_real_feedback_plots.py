@@ -46,7 +46,7 @@ def generate_real_feedback_plot(variant_id: str, data: dict[str, Any], filename:
     elif filename == "selected_feedback_vs_baseline.png":
         _selected_vs_baseline(path, variant_id, data)
     else:
-        _accept_reject(path, variant_id, feedback)
+        _reject_all_sanity(path, variant_id, feedback)
     return {
         "variant_id": variant_id,
         "category": "11_feedback",
@@ -88,7 +88,9 @@ def _accept_reject(path: Path, variant_id: str, feedback: list[dict[str, Any]]) 
     x = _times(feedback)
     accepted = [1 if row.get("accepted") else 0 for row in feedback]
     rejected = [1 - value for value in accepted]
-    _line(path, variant_id, "Feedback accept/reject", x, {"accepted": accepted, "rejected": rejected}, "state")
+    accepted_count = sum(accepted)
+    rejected_count = sum(rejected)
+    _line(path, variant_id, f"Feedback accept/reject timeline accepted={accepted_count} rejected={rejected_count}", x, {"accepted": accepted, "rejected": rejected}, "state")
 
 
 def _correction_norm(path: Path, variant_id: str, feedback: list[dict[str, Any]]) -> None:
@@ -122,6 +124,12 @@ def _selected_vs_baseline(path: Path, variant_id: str, data: dict[str, Any]) -> 
     x = [row["time"] - rows[0]["time"] for row in rows]
     horizontal = [((row["north_m"] - row["baseline_north_m"]) ** 2 + (row["east_m"] - row["baseline_east_m"]) ** 2) ** 0.5 for row in rows]
     _line(path, variant_id, "Selected feedback vs baseline delta", x, {"horizontal delta": horizontal}, "m")
+
+
+def _reject_all_sanity(path: Path, variant_id: str, feedback: list[dict[str, Any]]) -> None:
+    accepted = sum(1 for row in feedback if row.get("accepted"))
+    rejected = len(feedback) - accepted
+    _bar(path, variant_id, "Reject-all sanity comparison", {"selected accepted": accepted, "selected rejected": rejected, "reject-all accepted": 0, "reject-all rejected": len(feedback)}, "count")
 
 
 def _line(path: Path, variant_id: str, title: str, x: list[float], series: dict[str, list[float]], ylabel: str) -> None:

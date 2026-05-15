@@ -892,6 +892,31 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8K3 Duplicate Plot Fix Boundary
+
+N8K2 eliminated the original placeholder-like formal ablation figures.
+
+N8K3 fixes same-category exact duplicate plots missed by the N8K2 detector.
+
+Duplicate hashes across different figure names in the same category are not
+acceptable unless documented as not-applicable or allowed with reason.
+
+The focus categories are 01_trajectory, 04_attitude, 07_compare, and
+11_feedback.
+
+derived_from_n8k_metrics_and_baseline_nav is derived/surrogate visualization
+data, not complete runtime variant NAV.
+
+N8K3 does not change algorithm math or feedback policy.
+
+N8K3 does not run the degradation matrix.
+
+No trace/final_v23 tuning.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N8K2 BY2 Formal Ablation Real Plot Fix Boundary
 
 N8K2 fixes formal ablation plots that were placeholder-like.

@@ -30,7 +30,7 @@ def generate_real_trajectory_plot(variant_id: str, data: dict[str, Any], filenam
     if filename == "local_trajectory_overlay.png":
         _plot_overlay(path, variant_id, rows, include_reference=False)
     elif filename == "baseline_vs_variant_trajectory.png":
-        _plot_overlay(path, variant_id, rows, include_reference=False)
+        _plot_baseline_vs_variant(path, variant_id, rows, data)
     elif filename == "trajectory_delta_vector.png":
         _plot_delta_vectors(path, variant_id, rows)
     elif filename == "start_end_marker_trajectory.png":
@@ -81,6 +81,34 @@ def _plot_overlay(path: Path, variant_id: str, rows: list[dict[str, float]], *, 
     ax.axis("equal")
     ax.grid(True, alpha=0.3)
     ax.legend(loc="best", fontsize=8)
+    fig.tight_layout()
+    fig.savefig(path)
+    plt.close(fig)
+
+
+def _plot_baseline_vs_variant(path: Path, variant_id: str, rows: list[dict[str, float]], data: dict[str, Any]) -> None:
+    fig, ax = plt.subplots(figsize=(7.8, 7.0), dpi=115)
+    ax.plot([r["baseline_east_m"] for r in rows], [r["baseline_north_m"] for r in rows], label="baseline no-feedback", linewidth=1.8, color="#2b8cbe")
+    ax.plot([r["east_m"] for r in rows], [r["north_m"] for r in rows], "--", label="ablation variant", linewidth=1.5, color="#e34a33")
+    deltas = [math.hypot(r["east_m"] - r["baseline_east_m"], r["north_m"] - r["baseline_north_m"]) for r in rows]
+    metrics = data.get("metrics", {})
+    source = data.get("data_source", "")
+    text = "\n".join(
+        [
+            f"horizontal RMSE delta: {float(metrics.get('horizontal_rmse', 0.0)):.4g} m",
+            f"horizontal P95 delta: {float(metrics.get('horizontal_p95', 0.0)):.4g} m",
+            f"max sampled delta: {max(deltas or [0.0]):.4g} m",
+            f"reference available: {'yes' if data.get('reference_rows', 0) else 'no'}",
+            f"data source: {source}",
+        ]
+    )
+    ax.text(0.02, 0.98, text, transform=ax.transAxes, va="top", ha="left", fontsize=7.5, bbox={"boxstyle": "round", "facecolor": "white", "alpha": 0.86, "edgecolor": "#636363"})
+    ax.set_title(f"{variant_id}: baseline vs variant trajectory")
+    ax.set_xlabel("East (m)")
+    ax.set_ylabel("North (m)")
+    ax.axis("equal")
+    ax.grid(True, alpha=0.3)
+    ax.legend(loc="lower right", fontsize=8)
     fig.tight_layout()
     fig.savefig(path)
     plt.close(fig)
