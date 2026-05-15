@@ -1688,6 +1688,31 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8K6 A0 Feedback Applicability Boundary
+
+N8K6 is a targeted reporting and plot-classification fix for the A0 feedback
+applicability blocker found by the N8K final merge review.
+
+`A0_source_backed_ekf_baseline` remains `baseline_no_feedback`.
+
+A0 feedback accept/reject remains `0/0`.
+
+Raw detected feedback rows for A0 are audit evidence only; they do not make A0
+feedback-applicable.
+
+A0 effective feedback rows for plotting must be zero.
+
+A0 feedback-specific plots must be documented not-applicable and must record
+the ignored raw-row reason.
+
+N8K6 does not modify algorithm math or feedback policy.
+
+N8K6 does not run the full degradation matrix.
+
+N8K6 does not use trace/final_v23 for tuning.
+
+N8K6 makes no paper performance claim and no outperform final_v23 claim.
+
 ## N7B4 Literature-Informed Go2 Contact/Velocity Boundary
 
 N7B4 contact probability is diagnostic.

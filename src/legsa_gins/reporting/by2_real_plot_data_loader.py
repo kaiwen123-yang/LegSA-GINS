@@ -12,6 +12,8 @@ from typing import Any
 
 from legsa_gins.fgo_feedback.fgo_feedback_visual_loader import read_json, safe_float, write_json
 
+from .by2_feedback_applicability import get_feedback_applicability
+
 
 MAX_PLOT_ROWS = 720
 
@@ -31,6 +33,8 @@ def load_real_plot_data(n8k_root: str | Path, n8j_root: str | Path) -> dict[str,
     std_rows: dict[str, int] = {}
     eval_rows: dict[str, int] = {}
     feedback_rows: dict[str, int] = {}
+    raw_feedback_rows: dict[str, int] = {}
+    feedback_applicability: dict[str, dict[str, Any]] = {}
     missing: dict[str, str] = {}
     for row in matrix.get("rows", []):
         variant_id = str(row.get("variant_id"))
@@ -50,13 +54,18 @@ def load_real_plot_data(n8k_root: str | Path, n8j_root: str | Path) -> dict[str,
             total_eval_rows = baseline_rows
             total_std_rows = baseline_runtime["std_rows"]
             missing[variant_id] = reason
+        raw_feedback_series = runtime.get("feedback_rows") or _derive_feedback_rows(series, metrics, row)
+        applicability = get_feedback_applicability(variant_id, row, raw_feedback_series, metrics)
+        effective_feedback_series = raw_feedback_series[: applicability.effective_feedback_rows_for_plotting]
         variants[variant_id] = {
             "variant_id": variant_id,
             "matrix_row": row,
             "metrics": metrics,
             "series": series,
             "std_series": runtime.get("std_series") or baseline_runtime.get("std_series", []),
-            "feedback_series": runtime.get("feedback_rows") or _derive_feedback_rows(series, metrics, row),
+            "feedback_series": effective_feedback_series,
+            "raw_feedback_series": raw_feedback_series,
+            "feedback_applicability": applicability.to_dict(),
             "data_source": data_source,
             "missing_data_reason": reason,
             "derived_from_runtime_metrics": data_source.startswith("derived"),
@@ -65,7 +74,9 @@ def load_real_plot_data(n8k_root: str | Path, n8j_root: str | Path) -> dict[str,
         nav_rows[variant_id] = total_eval_rows
         std_rows[variant_id] = total_std_rows
         eval_rows[variant_id] = total_eval_rows
-        feedback_rows[variant_id] = len(variants[variant_id]["feedback_series"])
+        raw_feedback_rows[variant_id] = len(raw_feedback_series)
+        feedback_rows[variant_id] = len(effective_feedback_series)
+        feedback_applicability[variant_id] = applicability.to_dict()
     blockers = [
         {"variant_id": variant_id, "reason": reason}
         for variant_id, reason in missing.items()
@@ -80,6 +91,9 @@ def load_real_plot_data(n8k_root: str | Path, n8j_root: str | Path) -> dict[str,
         "reference_rows": 0,
         "observation_rows_per_variant": feedback_rows,
         "feedback_rows_per_variant": feedback_rows,
+        "raw_feedback_rows_per_variant": raw_feedback_rows,
+        "effective_feedback_rows_per_variant": feedback_rows,
+        "feedback_applicability_by_variant": feedback_applicability,
         "missing_data_reason": missing,
         "rerun_needed": False,
         "rerun_performed": False,

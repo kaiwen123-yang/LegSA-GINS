@@ -1,7 +1,9 @@
 # N8K Final Merge Review
 
-This review is the pre-merge gate for PR #48. It is not N9A, not N9B, not a
-new N8K6 repair stage, and it does not merge or tag anything.
+This review is the pre-merge gate for PR #48. The original review failed on
+the A0 feedback applicability blocker. N8K6 is the targeted follow-up fix for
+that blocker; PR #48 still must go through a fresh final merge review before
+merge/tag.
 
 ## Git State
 
@@ -92,3 +94,20 @@ before merge.
 - ready_to_merge: `false`
 - ready_to_tag: `false`
 - recommended_next_stage: `targeted_fix_only_if_blocker_is_real`
+
+## N8K6 Targeted Follow-Up
+
+N8K6 resolves the A0 feedback applicability classification error without
+changing algorithms or runtime results:
+
+- A0 variant role: `baseline_no_feedback`
+- A0 raw feedback rows detected: `175`
+- A0 effective feedback rows for plotting after fix: `0`
+- A0 feedback accept/reject: `0/0`
+- A0 raw rows ignored reason: `variant_role_baseline_no_feedback`
+- A0 feedback-specific figures are documented not-applicable
+- N8K6 decision: `A0_feedback_applicability_fix_complete`
+- N8K6 recommended next stage: `rerun_N8K_final_merge_review`
+
+This document remains the record of the failed review; the merge/tag readiness
+booleans should only be set by the rerun final review.

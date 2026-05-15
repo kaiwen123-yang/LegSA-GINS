@@ -65,7 +65,9 @@ def materialize_real_plots(
                     entry = write_semantic_panel(path, variant_id, category, filename, data)
                 else:
                     entry = generate_real_timeseries_plot(variant_id, data, "08_summary_panels", filename, path)
-                entry["not_applicable_reason"] = item.get("not_applicable_reason", "")
+                catalog_reason = item.get("not_applicable_reason", "")
+                if catalog_reason:
+                    entry["not_applicable_reason"] = catalog_reason
                 generated.append(entry)
             elif filename.endswith(".csv"):
                 _write_case_csv(path, data)

@@ -39,20 +39,22 @@ def formal_ablation_variants() -> list[FormalAblationVariant]:
         ("A7_feedback_default_gate", ("source_backed_ekf", "fgo_feedback"), "default_gate_feedback_for_reference"),
         ("A8_feedback_selected_conservative_gate", ("source_backed_ekf", "fgo_feedback_selected"), "n8j_selected_conservative_feedback"),
     ]
-    variants = [
-        FormalAblationVariant(
-            variant_id=name,
-            group="core_additive_chain",
-            description=name,
-            active_modules=modules,
-            feedback_mode="horizontal_velocity_attitude_feedback" if source else "none",
-            gate_policy="combined_conservative_gate" if source == "n8j_selected_conservative_feedback" else ("default_gate" if source else "none"),
-            covariance_policy="inflation_auto_from_residual_proxy" if source else "none",
-            n8j_source_variant=source,
-            runtime_outputs_applicable=bool(source),
+    variants = []
+    for name, modules, source in core:
+        feedback_source = source not in {"", "baseline_no_feedback"}
+        variants.append(
+            FormalAblationVariant(
+                variant_id=name,
+                group="core_additive_chain",
+                description=name,
+                active_modules=modules,
+                feedback_mode="horizontal_velocity_attitude_feedback" if feedback_source else "none",
+                gate_policy="combined_conservative_gate" if source == "n8j_selected_conservative_feedback" else ("default_gate" if feedback_source else "none"),
+                covariance_policy="inflation_auto_from_residual_proxy" if feedback_source else "none",
+                n8j_source_variant=source,
+                runtime_outputs_applicable=bool(source),
+            )
         )
-        for name, modules, source in core
-    ]
     feedback = [
         ("B0_reject_all_sanity", "reject_all_sanity"),
         ("B1_velocity_only_feedback", "velocity_only_reference"),

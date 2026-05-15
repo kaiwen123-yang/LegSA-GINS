@@ -11,6 +11,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 from matplotlib import pyplot as plt
+from PIL import Image, ImageDraw
 
 from .by2_plot_semantic_spec import SEMANTIC_SPECS
 
@@ -32,7 +33,25 @@ def generate_real_feedback_plot(variant_id: str, data: dict[str, Any], filename:
     path.parent.mkdir(parents=True, exist_ok=True)
     feedback = data.get("feedback_series", [])
     if not feedback:
-        feedback = [{"time": data["series"][0]["time"], "accepted": False, "velocity_norm": 0.0, "attitude_norm": 0.0, "position_norm": 0.0, "reason": "no_feedback"}]
+        applicability = data.get("feedback_applicability", {})
+        reason = str(applicability.get("not_applicable_reason") or "feedback disabled for this variant / no feedback rows")
+        _not_applicable_panel(path, variant_id, filename, reason, data)
+        return {
+            "variant_id": variant_id,
+            "category": "11_feedback",
+            "filename": filename,
+            "path_role": "N8K2_FIGURE_OUTPUT_DIR",
+            "present": path.exists(),
+            "nonempty": path.exists() and path.stat().st_size > 0,
+            "applicable": False,
+            "real_data": False,
+            "placeholder_allowed": True,
+            "plot_kind": "documented_not_applicable",
+            "row_count": 0,
+            "semantic_role": _semantic_role("11_feedback", filename),
+            "documented_not_applicable": True,
+            "not_applicable_reason": reason,
+        }
     if filename == "feedback_window_timeline.png":
         _window_timeline(path, variant_id, feedback)
     elif filename == "feedback_accept_reject_timeline.png":
@@ -161,6 +180,30 @@ def _bar(path: Path, variant_id: str, title: str, values: dict[str, int], ylabel
     fig.tight_layout()
     fig.savefig(path)
     plt.close(fig)
+
+
+def _not_applicable_panel(path: Path, variant_id: str, filename: str, reason: str, data: dict[str, Any]) -> None:
+    image = Image.new("RGB", (980, 560), "white")
+    draw = ImageDraw.Draw(image)
+    app = data.get("feedback_applicability", {})
+    lines = [
+        f"N8K2 documented not-applicable: {variant_id}",
+        f"variant = {variant_id}",
+        "category = 11_feedback",
+        f"figure = {filename}",
+        f"reason = {reason}",
+        f"variant_role = {app.get('variant_role', 'unknown')}",
+        f"raw_feedback_rows_detected = {app.get('raw_feedback_rows_detected', 0)}",
+        f"effective_feedback_rows_for_plotting = {app.get('effective_feedback_rows_for_plotting', 0)}",
+        f"feedback_accept/reject = {app.get('feedback_accept_count', 0)}/{app.get('feedback_reject_count', 0)}",
+        f"raw_rows_ignored_reason = {app.get('raw_rows_ignored_reason', '')}",
+        "No algorithm change. No degradation matrix. No paper performance claim.",
+    ]
+    for index, line in enumerate(lines):
+        draw.text((36, 42 + 38 * index), line[:130], fill=(0, 0, 0))
+    draw.rectangle((36, 386, 944, 498), outline=(110, 110, 110), width=2)
+    draw.text((54, 430), "feedback-specific plot is not applicable for this variant", fill=(50, 50, 50))
+    image.save(path)
 
 
 def _semantic_role(category: str, filename: str) -> str:

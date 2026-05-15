@@ -73,8 +73,6 @@ def _slim_catalog(matrix: dict) -> dict:
         for item in variant["files"]:
             if item["category"] in keep and item["filename"] in keep[item["category"]]:
                 copied = dict(item)
-                copied["applicable"] = True
-                copied["not_applicable_reason"] = ""
                 files.append(copied)
         variants.append({"variant_id": variant["variant_id"], "group": variant["group"], "files": files})
     return {"stage": "N8K", "variant_count": len(variants), "category_count": 14, "variants": variants, "paper_performance_claim": False}
