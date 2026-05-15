@@ -892,6 +892,24 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8K2 BY2 Formal Ablation Real Plot Fix Boundary
+
+N8K2 fixes formal ablation plots that were placeholder-like.
+
+Applicable plots must use real or runtime-derived data rows.
+
+Placeholder panels are allowed only for documented not-applicable cases.
+
+N8K2 does not change algorithm math or feedback policy.
+
+N8K2 does not run the degradation matrix.
+
+No trace/final_v23 tuning.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N8G FGO Feedback EKF Boundary
 
 N8G introduces controlled FGO feedback to EKF.
