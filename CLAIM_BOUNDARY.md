@@ -892,6 +892,85 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## N8K4 Semantic Filename Plot Fix Boundary
+
+N8K2 eliminated the original placeholder-like formal ablation figures.
+
+N8K3 eliminated same-category exact duplicate plots.
+
+N8K4 fixes semantic filename mismatches left by N8K3.
+
+Exact duplicate equals zero does not prove figure semantics are correct.
+
+Figure filename, title, semantic_role, data_source, and not-applicable reason
+must agree.
+
+compare_horizontal_error must remain a horizontal error comparison and must not
+be occupied by reject-all not-applicable content.
+
+reject_all_sanity_compare handles reject-all sanity semantics.
+
+yaw_residual_time and yaw_wrap_check must be distinct semantic products.
+
+feedback_accept_reject_timeline and reject_all_sanity must be distinct semantic
+products.
+
+derived_from_n8k_metrics_and_baseline_nav is derived/surrogate visualization
+data, not complete runtime variant NAV.
+
+N8K4 does not change algorithm math or feedback policy.
+
+N8K4 does not run the degradation matrix.
+
+No trace/final_v23 tuning.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
+## N8K3 Duplicate Plot Fix Boundary
+
+N8K2 eliminated the original placeholder-like formal ablation figures.
+
+N8K3 fixes same-category exact duplicate plots missed by the N8K2 detector.
+
+Duplicate hashes across different figure names in the same category are not
+acceptable unless documented as not-applicable or allowed with reason.
+
+The focus categories are 01_trajectory, 04_attitude, 07_compare, and
+11_feedback.
+
+derived_from_n8k_metrics_and_baseline_nav is derived/surrogate visualization
+data, not complete runtime variant NAV.
+
+N8K3 does not change algorithm math or feedback policy.
+
+N8K3 does not run the degradation matrix.
+
+No trace/final_v23 tuning.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
+## N8K2 BY2 Formal Ablation Real Plot Fix Boundary
+
+N8K2 fixes formal ablation plots that were placeholder-like.
+
+Applicable plots must use real or runtime-derived data rows.
+
+Placeholder panels are allowed only for documented not-applicable cases.
+
+N8K2 does not change algorithm math or feedback policy.
+
+N8K2 does not run the degradation matrix.
+
+No trace/final_v23 tuning.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
 ## N8G FGO Feedback EKF Boundary
 
 N8G introduces controlled FGO feedback to EKF.
@@ -1512,6 +1591,133 @@ N8J is BY2 engineering validation only.
 No paper performance claim.
 
 No outperform final_v23 claim.
+
+## N8K BY2 Formal Ablation Plot Audit Boundary
+
+N8K is BY2 formal ablation and ablation plot audit.
+
+N8K does not run the full degradation matrix.
+
+N8K does not modify algorithm math or feedback policy.
+
+N8K figures are engineering audit figures, not paper performance claims.
+
+All BY2 plotting outputs are generated under the BY2 plot audit root.
+
+N8K only generates the N9B degradation plan; it does not run N9B degradation
+runtime outputs.
+
+No trace/final_v23 tuning.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No output substitution.
+
+No output-only correction.
+
+No future-data feedback.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
+## N8K5 BY2 Formal Ablation Cross-Category Plot Semantic Fix Boundary
+
+N8K2 fixed placeholder-like applicable plots.
+
+N8K3 fixed same-category exact duplicate plots.
+
+N8K4 fixed semantic filename mismatches.
+
+N8K5 fixes same-variant cross-category exact duplicate and semantic leakage.
+
+Exact duplicate checks must include same-variant cross-category blocking pairs,
+not only same-category groups.
+
+`compare_velocity_error` must not copy `velocity_residual_time`.
+
+`compare_feedback_delta` must not copy `feedback_accept_reject_time`.
+
+For non-feedback variants, feedback observation and feedback delta plots must be
+documented not-applicable instead of empty accepted/rejected axes.
+
+`derived_from_n8k_metrics_and_baseline_nav` is derived/surrogate visualization
+data, not complete runtime variant NAV.
+
+N8K5 does not modify algorithm math or feedback policy.
+
+N8K5 does not run the full degradation matrix.
+
+No trace/final_v23 tuning.
+
+No trace solver input.
+
+No final_v23 output solver input.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
+## N8K Final Merge Review Boundary
+
+N8K final merge review is a pre-merge gate for PR #48.
+
+It does not merge PR #48.
+
+It does not create an N8K tag.
+
+It does not start N9A or N9B.
+
+It does not run the full degradation matrix.
+
+It does not modify algorithm math or feedback policy.
+
+The review must re-scan the current N8K review figure root instead of trusting
+only report fields. After N8K6, this means the N8K6 figure root.
+
+The review must treat no-feedback baseline variants as merge blockers if they
+are incorrectly classified as feedback-applicable.
+
+Ready-to-merge and ready-to-tag are explicit booleans and may be false even
+when lower-level plot audits pass.
+
+After the N8K6 rerun, the final merge review status is
+`N8K_final_merge_review_passed`, with `ready_to_merge=true` and
+`ready_to_tag=true`. That status authorizes only the next explicit merge/tag
+stage; it does not merge PR #48 or create a tag by itself.
+
+No trace/final_v23 tuning.
+
+No paper performance claim.
+
+No outperform final_v23 claim.
+
+## N8K6 A0 Feedback Applicability Boundary
+
+N8K6 is a targeted reporting and plot-classification fix for the A0 feedback
+applicability blocker found by the N8K final merge review.
+
+`A0_source_backed_ekf_baseline` remains `baseline_no_feedback`.
+
+A0 feedback accept/reject remains `0/0`.
+
+Raw detected feedback rows for A0 are audit evidence only; they do not make A0
+feedback-applicable.
+
+A0 effective feedback rows for plotting must be zero.
+
+A0 feedback-specific plots must be documented not-applicable and must record
+the ignored raw-row reason.
+
+N8K6 does not modify algorithm math or feedback policy.
+
+N8K6 does not run the full degradation matrix.
+
+N8K6 does not use trace/final_v23 for tuning.
+
+N8K6 makes no paper performance claim and no outperform final_v23 claim.
 
 ## N7B4 Literature-Informed Go2 Contact/Velocity Boundary
 
