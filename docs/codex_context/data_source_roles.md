@@ -88,7 +88,7 @@ Not allowed:
 
 ## Algorithm Outputs
 
-NAV, STD, EVAL_NAV, summary, runtime manifests, feedback observations, and factor tables are algorithm outputs. They must be classified by role before plotting:
+NAV, STD, EVAL_NAV, summary files, and RUN_MANIFEST records are the core algorithm output and evaluation chain. Feedback observation CSVs, smoothed FGO NAV, and factor tables are runtime/factor diagnostics. All must be classified by role before plotting:
 
 - estimate.
 - covariance/uncertainty.
@@ -97,3 +97,20 @@ NAV, STD, EVAL_NAV, summary, runtime manifests, feedback observations, and facto
 - runtime diagnostic.
 - factor diagnostic.
 - forbidden/substitution risk.
+
+None of these runtime outputs are committable by default.
+
+## final_v23 / KF-GINS Reference
+
+Allowed:
+
+- reference comparison after role classification and alignment.
+- sanity oracle for scale and convention checks.
+- evaluation boundary when documenting what LegSA-GINS does or does not match.
+
+Not allowed:
+
+- solver input.
+- tuning source for gates, weights, covariance, or feedback.
+- hidden output substitution.
+- basis for outperforming or paper-performance claims without a later approved audit.
