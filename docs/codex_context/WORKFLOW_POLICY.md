@@ -19,4 +19,6 @@
 
 ## Current N9A_R0 Boundary
 
-Documentation/context rebuild only. No WSL algorithm work, no generated figures, no runtime artifacts, no degradation matrix, no merge/tag, no Git commit/push/PR.
+Documentation/context rebuild only. No WSL algorithm work, no generated figures, no runtime artifacts, no degradation matrix, and no merge/tag.
+
+Worker and reviewer must not run Git write operations. Supervisor may commit, push, or open a documentation-only PR only after the user explicitly requests that exact operation.
