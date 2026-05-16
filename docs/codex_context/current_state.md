@@ -23,7 +23,9 @@ Some older user-provided context said PR #48 was still open and N8K2 was next. T
 
 ## Current Decision
 
-No merge, no tag, no PR operation, no Git commit/push, no generated figures, no runtime artifacts, no WSL algorithm work, and no degradation matrix are allowed for N9A_R0.
+No merge, no tag, no generated figures, no runtime artifacts, no WSL algorithm work, and no degradation matrix are allowed for N9A_R0.
+
+Worker and reviewer must not perform Git write operations. Supervisor may commit, push, or open a documentation-only PR for the N9A_R0 context branch only after an explicit user request for that exact operation.
 
 The required state after this context rebuild remains:
 
