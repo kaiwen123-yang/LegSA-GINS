@@ -122,8 +122,8 @@ Unless explicitly requested by the human, never do the following:
 - Do not commit FGO_FACTOR_TABLE.csv.
 - Do not commit generated degradation CSV / summary / case review runtime files.
 - Do not write local absolute paths into tracked docs/config/scripts.
-- Do not modify /home/kaiwen/KF-GINS.
-- Do not run git add / commit / checkout / reset / pull / push inside /home/kaiwen/KF-GINS.
+- Do not modify <WSL_ALGO_REPO>.
+- Do not run git add / commit / checkout / reset / pull / push inside <WSL_ALGO_REPO>.
 - Do not compile reference/final_v23_repo itself.
 - Do not use trace as solver input.
 - Do not use final_v23 output as solver input.
@@ -634,3 +634,4 @@ N8K2 must:
 - not change algorithms;
 - not tune feedback or FGO policies;
 - not make paper claims.
+
