@@ -89,7 +89,7 @@ Resolution chain:
 - N8K2: remove applicable placeholders.
 - N8K3: fix same-category duplicate semantic plots.
 - N8K4: fix semantic filename alignment.
-- N8K5: fix same-variant cross-category duplicates.
+- N8K5: fix same-variant cross-category duplicate outputs.
 - N8K6: fix A0 feedback applicability blocker.
 
 Final state:
@@ -115,7 +115,7 @@ N9A_R2 found eight algorithm series but still failed:
 
 ## N9A_R0: Context Rebuild
 
-Current task. Rebuild multi-agent context and documentation only. No algorithm work, no generated figures, no runtime artifacts, no Git operations.
+Current task. Rebuild multi-agent context and documentation only. No algorithm work, no generated figures, and no runtime artifacts. Documentation branch Git publication is a supervisor/human-final-decision action only, never a planner/worker/reviewer action.
 
 ## Next: N9A_R3
 
