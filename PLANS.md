@@ -1,722 +1,602 @@
-# PLANS.md - LegSA-GINS planning template
+# PLANS.md — LegSA-GINS Current Plan and Stage Roadmap
 
-<<<<<<< HEAD
-## N8A No-Feedback FGO Foundation
+## 0. Purpose of this file
 
-N8A starts from the N7C6A-finalized Go2 proprioceptive joint observation factor and builds a no-feedback diagnostic FGO foundation. It must not feed FGO output back into EKF, must not replace EKF NAV, and must keep trace/final_v23 outputs evaluation-only.
+This file records the active project roadmap, completed stages, current blockers, future stages, and Codex multi-agent workflow for the LegSA-GINS project.
 
-## Stage N0: Bootstrap
+This file is not a runtime report.
+This file is not an algorithm output.
+This file is not a paper claim.
+This file is not a place to store local absolute paths.
 
-Goal:
-Create clean repository structure, governance files, phase log, claim boundary, Git ignore rules, and placeholder tests.
+The goal of this file is to prevent context loss and phase confusion when using Codex App, Codex CLI, ChatGPT, or multi-agent workflows.
 
-No algorithm implementation.
+---
 
-## Stage N1: final_v23-style baseline wrapper
+## 1. Project identity
 
-Goal:
-Add final_v23-style baseline wrapper as strong baseline and evaluator oracle.
-
-final_v23 is not proposed.
-
-N1 only creates baseline wrapper, manifest, oracle audit, and separation tests.
-
-No numerical claim is allowed before real final_v23 output is connected.
-
-Completion note:
-N1 is complete as a wrapper, manifest writer, oracle audit, and separation-test stage only. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
-
-## Stage N2: Frame / Writer / Evaluator Infrastructure
-
-Goal:
-Implement frame adapters, writer contracts, evaluator contracts, and manifest schemas.
-
-N2 builds frame utilities, writer contracts, manifest contracts, evaluator utilities, and audits.
-
-N2 does not implement LegSA-ESKF or algorithmic factors.
-
-Hard gates:
-- no double FLU-to-FRD transform;
-- Go2 body/odom/map separation;
-- NED/ENU/ECEF/BLH clarity;
-- complete state history writer.
-
-## Stage N3A: C++ Runtime Backbone
-
-Status:
-completed.
-
-Goal:
-Create the standard-library C++ runtime scaffold, executable entrypoint,
-engine shell, state types, writer contracts, config skeleton, factor registry
-placeholder, run manifest placeholder, dry-run demo, and CMake smoke path.
-
-N3A does not implement mechanization, EKF filtering, innovation factors,
-smoothing, final_v23 numerical reproduction, or numerical performance claims.
-
-## Stage N3B: final_v23 / KF-GINS Source Audit and Reproduction Contract
-
-Goal:
-Read-only audit of /home/kaiwen/KF-GINS and define N3C reproduction contract.
-
-No algorithm implementation.
-
-## Stage N3C: final_v23-style Reproduction Connection and BY2 Data Contract
-
-Goal:
-Connect final_v23/KF-GINS baseline outputs to LegSA-GINS standardized baseline outputs, and define BY2 source-role/path contract.
-
-No proposed solver implementation.
-
-## Stage N3D: Chinese Code Comments and Readability Pass
-
-Goal:
-Add Chinese comments to code modules, clarify module responsibility, data roles, frame conventions, and claim boundaries.
-
-No algorithm implementation.
-
-## Stage N3: LegSA-ESKF
-
-Goal:
-Implement a legged state-augmented source-aware error-state filter.
-
-## Stage N4: LegSA-GINS C++ Filter Core
-
-Goal:
-Implement the first self-owned LegSA-GINS filter core with IMU propagation foundation and receiver-native position/velocity/heading updates.
-
-No raw Doppler, no Go2 priors, no source-aware weighting, no FGO.
-
-## Stage N4E: BY2 Real-Data Input Adapters
-
-Goal:
-Create real-data input adapters and source-role manifests for BY2, including receiver-native GNSS status, raw message summaries, trace reference, and Go2 body-state diagnostic source.
-
-No solver performance evaluation.
-
-## Stage N4F: BY2 Filter-Core Diagnostic Trial
-
-Goal:
-Run current LegSA-GINS filter core on BY2 real data and generate case_review-style diagnostic evaluation.
-
-No formal performance claim.
-
-## Stage N4G: BY2 Time-Domain and Heading Diagnostics
-
-Goal:
-Audit BY2 GNSS/Go2 time-domain usage, Unitree sportmodestate IMU semantics, event-normalized algorithm time, and transverse dual-antenna heading offset candidates.
-
-No physical clock offset claim. No formal heading offset selection. No raw Doppler, Go2 priors, source-aware weighting, LSIM/OIM, or FGO.
-
-## Stage N4H0: Receiver-Native Measurement Floor and Evaluator Sanity
-
-Goal:
-Evaluate direct receiver-native GNSS status against trace reference to distinguish input/evaluator issues from filter-core issues.
-
-No proposed solver implementation.
-
-## Stage N4H1: final_v23 Input Source-Chain and Yaw-Generation Audit
-
-Goal:
-Audit the two-layer final_v23 input source chain: runtime 15-column .gnss input and upstream generation fields, including gnss1-status position, gnss1-raw UBX-NAV-PVT velocity, and gnss1/gnss2-status A1_dual_diff yaw.
-
-N4H1P:
-Add a process_data-compatible input generator that reconstructs final_v23-style
-`.gnss` and `.imu` runtime inputs from BY2 upstream fields for baseline/parity
-testing only.
-
-N4H1P2:
-Match process_data row-retention behavior by keeping `gnss1-status` as the
-`.gnss` main table, treating PVT velocity and status yaw as merge-asof
-auxiliary fields, applying fill, and reporting coverage.
-
-## Stage N4H2: process_data-Compatible External KF-GINS Replay
-
-Goal:
-Use the N4H1P2 real BY2 `.gnss` / `.imu` reconstruction as runtime input for an
-external KF-GINS baseline replay, then parse and evaluate outputs.
-
-No proposed solver implementation. No final_v23 parity claim. No trace as
-solver input. No generated real-data artifacts committed.
-
-## Stage N4H2C: final_v23 Deep Source and Yaw Config Parity Audit
-
-Goal:
-Audit why N4H2 position replay passed while yaw replay failed. Deep audit of
-actual final_v23 `input.gnss`, `process_data.py`, run scripts, GNSS loader,
-GIEngine yaw/velocity update support, and LegSA vs KF-GINS framework parity.
-The yaw-specific checks include `yaw_sign`, `yaw_install_offset_deg`,
-`yaw_std_mode`, A1 dual-difference yaw, `yaw_ned = 90 - yaw_body`, trace yaw
-convention, and antlever / antenna order.
-
-N4H2C-2 deepens this with actual final_v23 artifact recovery, process_data
-runtime-parameter audit, yaw input variant matrix, runtime yaw update audit, and
-replay yaw diagnostics.
-
-No full EKF implementation. No trace solver input. No output-only correction.
-No formal offset selection without physical antenna-order evidence.
-
-## Stage N4R: official final_v23 Case-Review Reproduction
-
-Goal:
-Reproduce official final_v23 case_review metrics and identify yaw evaluator
-convention before full framework transplant or factor stacking.
-
-N4R uses actual official artifacts as runtime-only evaluator evidence. It does
-not implement proposed solver logic, does not tune yaw, does not use trace as
-solver input, and does not make a formal numerical performance claim.
-
-## Stage N4R2: Yaw Evaluator Convention Policy and dual_final_v23 Verification
-
-Goal:
-Add a controlled evaluator yaw convention policy and verify the N4R candidate
-against dual_final_v23 artifacts before any formal evaluator patch.
-
-N4R2 performs directed dual_final_v23 artifact recovery, dual evaluator parity,
-and N4H2 replay profile re-evaluation. It does not modify solver output, does
-not relax the yaw gate, does not use trace as solver input, and does not make a
-formal numerical performance claim.
-
-## Stage N4R3: dual_final_v23 Manual Artifact Intake and Official Parity Lock
-
-Goal:
-Validate a manually provided dual_final_v23 artifact group outside the
-repository and lock the official evaluator profile against its official summary
-and error_series.
-
-N4R3 does not commit artifact files, does not modify solver output, does not use
-trace as solver input, and does not turn near-gate yaw evidence into a formal
-pass.
-
-## Stage N4H2C-runtime: Runtime Yaw Update / Config / Source-Version Parity Audit
-
-Goal:
-Audit why actual dual_final_v23 yaw passes under the confirmed direct evaluator
-profile while N4H2 replay yaw fails under the same formal evaluator.
-
-N4H2C-runtime compares actual and replay input/NAV yaw paths, recovers runtime
-config evidence when available, audits current KF-GINS yaw update logic
-read-only, and searches yaw update source history for branch/version mismatch
-evidence. It is diagnostic only: no solver output modification, no trace solver
-input, no yaw-gate relaxation, and no formal performance claim.
-
-## Stage N4H2D: Replay Reference Mapping and Stale Summary Audit
-
-Goal:
-Audit why the old N4H2 replay summary reported yaw near 93 deg even though
-actual dual_final_v23 NAV and replay NAV are nearly identical.
-
-N4H2D reconstructs the official dual_final_v23 reference from official NAV plus
-official error_series, freshly evaluates replay NAV against that reference, and
-compares the old summary to the fresh summary. It is evaluation/reference
-mapping only: no solver output modification, no trace solver input, no output
-correction, no epoch deletion, and no formal proposed solver performance claim.
-
-## Stage N4H2E: dual_final_v23-only Visual Validation
-
-Goal:
-Generate a dual_final_v23-only visual validation bundle for fresh replay parity
-before treating the numerical result as ready for the next stage.
-
-N4H2E plots trajectory, position error, velocity, attitude, consistency,
-observation quality, and summary panels for manual review. It does not draw pure
-INS, single-antenna, or multi-line comparison figures; does not modify solver
-output; does not commit generated figures; and does not make a formal
-performance claim.
-
-## Stage N4H2F: Startup transient and yaw/noise provenance audit
-
-Goal:
-Audit the visible startup transient, yaw observation-STD source, and
-process_data yaw-noise provenance before PR #15 is considered ready for human
-visual review and any N4H3 transition.
-
-N4H2F distinguishes fixed yaw_std observation columns from actual yaw-value
-noise injection, treats run_final_mainline degradation batches as provenance
-evidence rather than clean nominal proof, and records whether final_v23 nominal
-evidence needs a yaw-noise caveat. It does not modify solver output, crop
-startup epochs, relax the yaw gate, or make a formal performance claim.
-
-## Stage N4H2G: Clean status-yaw no-noise replay audit
-
-Goal:
-Generate and replay a clean status-yaw no-noise/no-outlier/no-outage
-process_data-compatible input variant, then evaluate it against the dual
-official reference.
-
-N4H2G compares clean replay with the noisy historical dual_final_v23 artifact
-and records clean/noisy provenance policy. The clean replay is a reconstructed
-clean variant, not a historical exact final_v23 artifact. It is baseline replay
-diagnostic evidence only and does not implement proposed solver logic or make a
-formal performance claim.
-
-## Stage N4H2G2: Clean replay independence and yaw sensitivity audit
-
-Goal:
-Verify that the clean status-yaw replay is a fresh independent rerun and not a
-cache/stale-summary artifact before N4H3.
-
-N4H2G2 hashes clean/noisy inputs and replay outputs, forces a fresh clean replay
-in a repository-external output root, recomputes summary directly from clean
-NAV, and runs a +30 deg yaw-input sensitivity smoke test. It is diagnostic only:
-no solver modification, no output correction, no epoch deletion, no trace solver
-input, and no formal performance claim.
-
-## Stage N4H3: Controlled final_v23 Reference Import and Transplant Plan
-
-Goal:
-Import final_v23/KF-GINS as a controlled reference submodule or record a blocked
-import, document provenance and claim boundaries, codify clean/noisy input
-provenance, and create the final_v23 to LegSA-v23-core transplant matrix.
-
-N4H3 is planning and governance only. It does not implement proposed solver
-logic, raw Doppler, Go2 priors, LSIM/OIM, source-aware weighting, FGO, full EKF,
-or performance claims.
-
-## Stage N4H4: LegSA-v23-core Full EKF / Unified Filter Implementation
-
-Goal:
-Implement LegSA-owned full EKF / unified filter code for v23-framework parity on
-clean status-yaw replay input.
-
-N4H4 must not be a wrapper, must not perform output substitution, must not use
-final_v23 outputs as proposed solver input, and must keep trace evaluation-only.
-Chinese comments are required for critical functions.
-
-## Stage N4H4A: LegSA-v23-core full-framework foundation
-
-Goal:
-Create the LegSA-owned C++ v23-core framework foundation: types, options,
-config loader, 7-column `.imu` reader, 15-column `.gnss` reader, runtime engine
-class, KF-GINS-style function skeleton, writers, manifest, demo, audit, and
-tests.
-
-N4H4A is framework foundation only. It is not a final_v23 wrapper, not
-final_v23 output substitution, not complete EKF parity, not raw Doppler, not Go2
-prior integration, not LSIM/OIM, not FGO, and not numerical-performance
-evidence. The older N4 toy filter remains diagnostic/foundation code rather
-than the final backbone.
-
-## Stage N4H4B: Mechanization and EKF propagation fill-in
-
-Goal:
-Fill `insPropagation`, `buildFGPhiQd`, and `EKFPredict` math while preserving
-N4H4A input/output and claim-boundary contracts.
-
-Status:
-completed as N4H4B propagation foundation.
-
-## Stage N4H4B: INS mechanization and EKF propagation
-
-Goal:
-Implement LegSA-owned Earth/Rotation math, process_data-compatible IMU
-compensation, INS velocity/position/attitude mechanization, 21-state/18-noise
-`F/G/Phi/Qd` prediction matrices, EKF covariance prediction, covariance checks,
-STD sqrt output, propagation toy dry-run, audit, and tests.
-
-N4H4B is propagation foundation only. It does not implement GNSS measurement
-updates, `EKFUpdate`, `stateFeedback`, raw Doppler, Go2 priors, LSIM/OIM,
-source-aware weighting, FGO, final_v23 parity, clean replay parity, or
-performance claims.
-
-## Stage N4H4C: GNSS updates, EKFUpdate, and stateFeedback
-
-Goal:
-Implement GNSS position/velocity/yaw update, EKF measurement update, and error
-state feedback after N4H4B prediction propagation is closed.
-
-Status:
-completed as N4H4C update-feedback foundation.
-
-N4H4C implements the LegSA-owned loose-coupled measurement update framework
-only. It does not implement raw Doppler, Go2 priors, LSIM/OIM, source-aware
-weighting, FGO, final_v23 numerical parity, clean replay parity, or performance
-claims. N4H4D is the clean replay parity stage.
-
-## Stage N4H4R0: Route reset and source-backed port readiness
-
-Goal:
-Freeze PR #21 as the self-written LegSA-v23-core parity failure evidence
-branch, keep it open and unmerged, document the route reset, and add
-source-backed controlled port readiness checks.
-
-N4H4R0 does not implement solver code, does not copy final_v23 source files,
-does not add factors, and does not make a performance claim. final_v23 is not
-proposed; it is a reference/backbone source for a controlled port.
-
-## Stage N4H4R1: Controlled source-backed KF-GINS/final_v23 core port
-
-Goal:
-Create `cpp/legsa_v23_port_core` as a provenance-preserving port of the
-final_v23/KF-GINS core backbone.
-
-N4H4R1 ports the backbone before factor extensions. It does not implement raw
-Doppler, Go2 priors, LSIM/OIM, source-aware weighting, FGO, or paper
-performance claims.
-
-## Stage N4H4R1: Source-backed port-core foundation
-
-Goal:
-Add the minimal compileable `cpp/legsa_v23_port_core` foundation with
-provenance headers, port manifest, CMake targets, toy dry-run, docs, audits,
-and tests.
-
-N4H4R1 does not attempt real clean parity and does not claim performance.
-
-## Stage N4H4R2: Complete source-backed mathematical port
-
-Goal:
-Complete the source-backed KF-GINS/final_v23 math and runtime port inside
-`cpp/legsa_v23_port_core`.
-
-Status:
-completed as N4H4R2 math port foundation.
-
-N4H4R2 implements the backbone math and runtime chain only. It does not run real
-clean parity, does not implement raw Doppler, Go2 priors, LSIM/OIM,
-source-aware weighting, FGO, or performance claims.
-
-## Stage N4H4R3: Clean replay parity
-
-Goal:
-Run clean status-yaw replay parity with the source-backed port-core backbone and
-write an honest pass/fail gap report.
-
-## Stage N4H4R2: Complete source-backed mathematical port
-
-Goal:
-Close the source-backed mathematical backbone in `cpp/legsa_v23_port_core` with
-config/unit conversion, readers, INS mechanization, GIEngine update routing,
-EKF predict/update, feedback, writers, audits, tests, and synthetic math smoke.
-
-R2 synthetic output is not parity evidence.
-
-## Stage N4H4R3: Clean replay parity for source-backed port
-
-Goal:
-Run the clean replay against external clean and dual_final_v23 references and
-report pass/fail honestly.
-
-## Stage N4H4R3: Source-backed port clean replay parity
-
-Goal:
-Run the source-backed `cpp/legsa_v23_port_core` on clean status-yaw inputs,
-freshly evaluate against the dual final_v23 official reference, compare against
-external clean replay, and publish an engineering backbone parity or gap-screen
-decision.
-
-N4H4R3 is not a proposed factor result and does not make a paper performance
-claim.
-
-## Stage N4H4E: Visual validation for source-backed port
-
-Goal:
-Generate runtime-only visual validation figures and reports for source-backed
-port-core clean replay results.
-
-N4H4E plots only source-backed port, dual_final_v23, and evaluation reference
-roles. It does not draw pure INS or single-antenna comparisons, does not commit
-generated figures, does not add raw Doppler, Go2, LSIM/OIM, source-aware
-weighting, or FGO factors, and does not make a paper performance claim.
-
-## Stage N4H4E1: STD unit consistency and visual plot semantics fix
-
-Goal:
-Audit source-backed port and dual_final_v23 STD units, fix common-unit writer
-or visual-loader policy if evidence requires it, and regenerate corrected
-scatter/error-vector and 3sigma figures.
-
-N4H4E1 is a visual semantics and STD consistency fix only. It does not modify
-solver logic, tune by trace, delete epochs, add raw Doppler, Go2, LSIM/OIM,
-source-aware weighting, or FGO factors, and does not make a paper performance
-claim.
-
-## Stage N4H4R3A: Update timeline and overlap parity audit
-
-Goal:
-Audit whether R3 update count should be compared with total GNSS rows or only
-effective IMU/GNSS/config overlap rows, and apply a source-backed runtime-loop
-compatibility fix only if timeline evidence supports it.
-
-R3A diagnostics are not performance results and do not add proposed factors.
-
-## Stage N4H4R3B: Over-close and reference-independence audit
-
-Goal:
-Audit the R3A metric-gate-pass but external-closeness-failed result for
-measurement-copy, reference-independence, covariance/config parity, and
-residual/gain over-tightness before any visual validation or performance claim.
-
-R3B diagnostics are not performance results and do not add proposed factors.
-
-## Stage N4H4R3C: Metric namespace and parity-vs-absolute evaluation split
-
-Goal:
-Split source-backed port metrics into `port_vs_final_v23_nav_parity`,
-`port_vs_trace_absolute`, and `final_v23_vs_trace_absolute` before any visual
-validation decision.
-
-R3C corrects the R3B external-closeness interpretation by preventing
-port-vs-final_v23 parity metrics from being compared directly with absolute
-trace/reference metrics. R3C does not modify solver logic, tune, delete epochs,
-perform output-only correction, add factors, or make a paper performance claim.
-
-## Stage N5: Raw Doppler factor foundation
-
-Goal:
-Begin raw Doppler factor foundation only after N4H4E visual validation and
-manual visual review support moving forward.
-
-## Stage N5A: RTKLIB-backed raw Doppler auxiliary factor activation
-
-Goal:
-Activate the first proposed factor after backbone parity: a RAWX doMes based
-raw-Doppler-derived velocity auxiliary factor with RTKLIB/ephemeris discovery,
-provider readiness gates, C++ EKF integration, toy activation, and real
-diagnostic trial boundary reporting.
-
-Boundaries:
-NAV-PVT velocity is not raw Doppler. `.gnss vn/ve/vd` remains baseline
-receiver-native velocity. RAWX plus satellite-state provider is required. If
-provider is missing, raw Doppler must not be reported as applied. No trace
-solver input, no final_v23 output solver input, no LSIM/OIM, no Go2 prior, no
-FGO, and no paper performance claim.
-
-## Stage N5B: RTKLIB Doppler velocity provider and real raw Doppler EKF activation
-
-Goal:
-Follow the N5A provider blocker by building a runtime-only RTKLIB Doppler
-velocity helper/provider, generating `RAW_DOPPLER_VELOCITY_FACTORS.csv`, and
-feeding it into the source-backed EKF as a real auxiliary velocity factor.
-
-Activation requires `raw_doppler_update_count > 0`. RTKLIB position solution,
-NAV-PVT velocity, `.gnss vn/ve/vd`, trace, and final_v23 output cannot be solver
-input.
-
-## Stage N5C: Raw Doppler ablation protocol
-
-Goal:
-After N5B real activation, run a controlled ablation protocol that separates the
-baseline receiver-native velocity factor, the raw Doppler auxiliary velocity
-factor, diagnostic velocity-isolation variants, and R-scale diagnostic screen.
-
-N5C is diagnostic engineering evidence only. It does not tune from trace, delete
-epochs, perform output-only correction, claim paper performance, or claim
-outperforming final_v23.
-
-## Stage N5D: Raw Doppler visual validation and velocity-stress protocol
-
-Goal:
-Continue from the N5C ablation-ready decision by adding raw Doppler factor
-visual validation, receiver-native velocity stress variants, diagnostic-only
-stress comparisons, visual sanity checks, and a next-stage decision report.
-
-N5D does not delete epochs, tune from trace, perform output-only correction,
-claim paper performance, claim outperforming final_v23, implement Go2 priors,
-implement LSIM/OIM, implement source-aware weighting, or implement FGO.
-
-## Stage N5D1: Visual data coverage and raw Doppler spike audit
-
-Goal:
-Repair N5D visual validation by requiring plotted sample coverage, regenerating
-non-empty clean ablation plots, auditing raw Doppler velocity spikes
-epoch-by-epoch, fixing raw-vs-receiver velocity semantics, and de-duplicating
-stress evidence pairs.
-
-N5D1 does not change solver math, tune gates, delete epochs, apply output-only
-correction, claim paper performance, claim outperforming final_v23, implement
-Go2 priors, implement LSIM/OIM, implement source-aware weighting, or implement
-FGO.
-
-## Stage N6A: Source-aware LSIM/OIM weighting foundation
-
-Goal:
-Implement source-aware LSIM/OIM weighting in the source-backed port-core EKF.
-N6A must apply solver-visible source metadata and innovation-based conservative
-R scaling for receiver position, receiver velocity, dual-antenna yaw, and raw
-Doppler velocity updates.
-
-N6A emits source-aware traces, clean/stress diagnostic ablations, spike-response
-sentinel reports, and a decision report. It does not use trace or final_v23
-output for weighting, does not shrink R below baseline, does not implement Go2
-priors or FGO, and does not make paper performance claims.
-
-## Stage N6B: Source-aware policy refinement
-
-Goal:
-Refine N6A over-aggressive LSIM/OIM R scaling while preserving real EKF
-activation. OIM must use innovation covariance `S=HPH^T+R`, LSIM must stay
-metadata-only, source caps must be conservative, N5D1 spike response must remain
-after-run audit only, and no paper performance claim is allowed.
-
-## Stage N6B1: Source-aware visual validation
-
-Goal:
-Validate the N6B source-aware LSIM/OIM policy with runtime-only figures and
-plotted-data coverage checks. N6B1 checks clean curves, R-scale traces, spike
-response, stress variants, and mandatory figure non-emptiness. It does not
-modify solver math, tune from trace/final_v23 output, delete epochs, add Go2
-priors, add FGO, or make paper performance claims.
-
-## Stage N7A: Go2 body-state weak prior review
-
-Goal:
-Parse Go2 body-state / sportmodestate high-level state, verify source integrity,
-time alignment, quaternion/rpy consistency, and frame contracts, then activate
-one conservative roll/pitch weak attitude prior in the source-backed EKF.
-
-Boundaries:
-Go2 body-state is not truth. Go2 position and velocity priors are disabled by
-default in N7A. Go2 yaw prior is disabled in N7A. No trace/final_v23 output is
-used for Go2 prior construction. N7A does not implement FGO, output-only
-correction, paper performance claims, or outperform-final_v23 claims.
-
-## Stage N7B: Go2 velocity/contact readiness
-
-Goal:
-Use N7A body-state evidence to audit Go2 contact labels, motion state, velocity
-quality, yaw-rate readiness, and cross-source consistency before any later Go2
-velocity/contact weak prior.
-
-N7B is readiness only. Go2 position is not truth. Go2 velocity is not truth.
-Cross-source velocity comparison is not truth error. Contact thresholds are
-diagnostic defaults and do not use trace. N7B does not activate Go2 velocity
-prior, does not activate Go2 yaw prior, does not implement FGO, does not delete
-epochs, and makes no paper performance or outperform-final_v23 claim.
-
-## Stage N7B2: Go2 contact threshold review
-
-Goal:
-Review Go2 foot-force and foot-speed distributions, build a diagnostic
-contact-state v2 candidate, apply fixed window smoothing, and evaluate
-contact-conditioned velocity source consistency before any N7C activation.
-
-N7B2 is contact threshold readiness only. Thresholds are derived from Go2 field
-distributions, not trace, final_v23 output, or navigation metrics. Go2 velocity
-is not truth and contact-conditioned velocity comparison is not truth error.
-N7B2 does not activate Go2 velocity prior, does not activate Go2 yaw prior,
-does not implement FGO, does not delete epochs, and makes no paper performance
-or outperform-final_v23 claim.
-
-## Stage N7C: Go2 velocity/contact weak-prior activation or N8A FGO preparation
-
-Goal:
-Proceed only from the N7B2 decision report. If contact and velocity readiness
-passes, review a future conservative Go2 velocity/contact weak prior. If
-yaw-speed is the stronger signal, review a future yaw-rate weak prior. If
-extended Go2 priors remain weak, prepare N8A no-feedback FGO foundation instead.
-
-N7C is not started in N7B2.
-
-## Stage N6: Source-Aware Weighting
-
-Goal:
-Implement source-aware measurement weighting using GNSS status, Doppler residual, Go2 body-state, and support integrity cues.
-
-## Stage N7: No-Feedback Fixed-Lag Smoother
-
-Goal:
-Implement fixed-lag smoothing without feedback to the filter.
-
-## Stage N8: Ablation and Degraded-GNSS Evaluation
-
-Goal:
-Run proposed vs pure INS, single-antenna GNSS/INS, final_v23-style baseline, and ablations.
-
-## Stage N9: Paper Package
-
-Goal:
-Generate paper-ready figures, tables, manifests, and claim-audit reports.
-=======
-Every non-trivial LegSA-GINS task must be planned before execution and reviewed after execution. For this workspace, planner is read-only, worker follows the approved plan, and reviewer is read-only.
-
-## Current Route
-
-Verified current documentation stage:
+Project name:
 
 ```text
+LegSA-GINS
+
+Project direction:
+
+Legged robot GNSS/INS fusion with Raw Doppler, source-aware weighting, Go2 proprioceptive observations, legged FGO candidate factors, no-feedback FGO, and FGO-feedback EKF joint filtering.
+
+Research objective:
+
+Build a robust legged-robot positioning and attitude estimation framework that combines EKF front-end filtering and sliding-window FGO feedback, while preserving strict source roles, evaluation boundaries, and reproducible engineering evidence.
+
+Current data focus:
+
+BY2 normal/clean data first.
+After BY2 is fully audited, move to BY3, indoor-outdoor transition, and poor-GNSS data.
+2. Global working principles
+
+The project must follow these principles:
+
+Do not confuse source observations with algorithm outputs.
+Do not confuse evaluation reference with solver input.
+Do not confuse PNG existence with valid plotting.
+Do not confuse clean BY2 engineering validation with paper-level performance claims.
+Do not proceed to degradation or generalization before the BY2 output/plot/evaluation chain is audited.
+Do not change algorithm code during reporting or plot audit stages.
+Do not tune using trace or final_v23 output.
+Do not make unsupported claims.
+Do not merge, tag, close PRs, delete branches, or force push without human approval.
+The human user is always the final decision maker.
+3. Required multi-agent workflow
+
+Future work should use the following multi-agent structure:
+
+supervisor -> planner -> worker -> reviewer -> human final decision
+3.1 supervisor
+
+The supervisor coordinates the task.
+
+Responsibilities:
+
+Read the human task.
+Verify the current stage.
+Check the hard boundaries.
+Spawn planner first.
+Review the planner's read-only plan.
+Approve or reject the worker scope.
+Spawn worker only after the scope is clear.
+Spawn reviewer after worker finishes.
+Summarize results.
+Never self-merge.
+Never self-tag.
+Never close PRs.
+Never delete branches.
+Never force push.
+Never skip the human final decision.
+3.2 planner
+
+Planner is read-only.
+
+Responsibilities:
+
+Inspect branch, PR, git status, docs, reports, runtime roots, and risks.
+Identify required files, required reports, validation commands, and forbidden actions.
+Return a concrete execution plan.
+Never edit files.
+Never create runtime outputs.
+Never commit.
+3.3 worker
+
+Worker executes only the approved plan.
+
+Responsibilities:
+
+Edit only approved tracked files.
+Generate runtime outputs only under approved runtime folders.
+Do not commit raw data.
+Do not commit generated figures.
+Do not commit NAV / STD / EVAL_NAV / RUN_MANIFEST runtime artifacts.
+Do not change algorithm code unless explicitly approved.
+Do not tune using trace or final_v23.
+Report exactly what was done.
+3.4 reviewer
+
+Reviewer is read-only.
+
+Responsibilities:
+
+Review git diff.
+Check hard boundaries.
+Check no runtime artifacts were committed.
+Check no path leaks exist.
+Check claim boundaries.
+Check whether generated reports match actual outputs.
+For plotting tasks, verify that applicable plots use real data.
+Do not edit files.
+3.5 human
+
+The human user decides:
+
+whether to merge;
+whether to tag;
+whether to close PRs;
+whether to delete branches;
+whether to proceed to the next stage.
+
+No agent may bypass the human final decision.
+
+4. Global hard boundaries
+
+Unless explicitly approved by the human, never do the following:
+
+Do not merge PR #21.
+Do not close PR #21.
+Do not delete remote branches.
+Do not force push.
+Do not submit raw data.
+Do not submit by2.txt.
+Do not submit NAV / STD / EVAL_NAV / RUN_MANIFEST runtime outputs.
+Do not submit generated PNG/PDF/SVG/JPG/JPEG figures.
+Do not submit FGO_FEEDBACK_OBSERVATIONS.csv.
+Do not submit FGO_SMOOTHED_NAV.csv.
+Do not submit FGO_FACTOR_TABLE.csv.
+Do not submit generated degradation CSV / summary / case review runtime files.
+Do not write local absolute paths into tracked docs/config/scripts.
+Do not modify /home/kaiwen/KF-GINS.
+Do not run git add / commit / checkout / reset / pull / push inside /home/kaiwen/KF-GINS.
+Do not compile reference/final_v23_repo itself.
+Do not use trace as solver input.
+Do not use final_v23 output as solver input.
+Do not tune using trace or final_v23.
+Do not perform output-only correction.
+Do not directly overwrite EKF NAV with FGO output.
+Do not delete bad epochs to pass metrics.
+Do not treat Go2 position, velocity, contact, or yaw as truth.
+Do not treat GNSS source observations as algorithm estimates.
+Do not treat placeholder PNG generation as successful plotting.
+Do not make paper performance claims unless explicitly approved after sufficient evidence.
+Do not claim outperform final_v23.
+5. Fixed data source roles
+5.1 trace
+
+Role:
+
+evaluation-only reference / truth
+
+Never:
+
+solver input
+tuning source
+algorithm estimate
+5.2 gnss1 / gnss2 raw/status
+
+Role:
+
+GNSS source observations
+yaw observation source
+Raw Doppler source diagnostics
+observation quality diagnostics
+
+Never:
+
+algorithm estimate
+trajectory estimate
+direct error metric source
+5.3 by2.txt
+
+Role:
+
+Go2 body / high-level source data
+Go2 IMU/body state
+Go2 velocity source
+Go2 contact / foot / mode / gait source
+
+Never:
+
+truth
+absolute pose reference
+absolute yaw truth
+5.4 receiver IMU data
+
+Role:
+
+diagnostic source only unless explicitly reviewed and approved
+
+Never:
+
+implicit replacement for Go2 body IMU
+5.5 NAV / EVAL_NAV / STD / RUN_MANIFEST
+
+Role:
+
+algorithm output
+evaluation chain
+plot source for estimates, errors, metrics, and algorithm comparisons
+
+Trajectory, error, metric, and compare figures must be based on verified algorithm outputs.
+
+5.6 final_v23 output
+
+Role:
+
+reference comparison
+sanity check
+lineage comparison
+
+Never:
+
+solver input
+tuning source
+hidden target
+6. Completed stage summary
+6.1 N0 — final_v23 source baseline
+
+N0 established the final_v23 / KF-GINS-style source baseline.
+
+Key conclusions:
+
+final_v23 is the strong baseline and lineage source.
+final_v23 outputs can be used for comparison and sanity checks.
+final_v23 outputs must not be used as solver input.
+The project must not silently modify the original /home/kaiwen/KF-GINS repository.
+6.2 N1 — repository and governance setup
+
+N1 established the LegSA-GINS repository direction, phase log, claim boundary, and PR discipline.
+
+Key conclusions:
+
+The repository must track stage decisions.
+PR #21 remains open/unmerged as historical evidence.
+Branches, tags, PR merges, and scope changes require human final decision.
+6.3 N2 — BY2 data source role clarification
+
+N2 clarified BY2 source roles.
+
+Key conclusions:
+
+trace is evaluation-only.
+gnss1/gnss2 are source observations.
+by2.txt is Go2 source data, not truth.
+NAV/EVAL_NAV/STD/RUN_MANIFEST are algorithm output files.
+6.4 N3 — audit and source-lineage groundwork
+
+N3 prepared the audit structure.
+
+Key conclusions:
+
+Source availability is not algorithm output.
+A figure must not be called complete only because a PNG exists.
+Output lineage, frame alignment, time alignment, and metric sanity must be audited before plotting.
+6.5 N4 — source-backed EKF port
+
+N4 ported the source-backed EKF backbone.
+
+Key conclusions:
+
+EKF propagation/update structure was established.
+final_v23 parity and source-backed lineage were audited.
+The source-backed EKF is the base engineering backbone.
+6.6 N5 — Raw Doppler EKF factor
+
+N5 activated Raw Doppler in the EKF front-end.
+
+Key conclusions:
+
+Raw Doppler is not NAV-PVT velocity.
+Raw Doppler is not .gnss velocity.
+Raw Doppler was activated as a real EKF velocity factor.
+Raw Doppler EKF contribution is engineering evidence, not a final paper performance claim.
+6.7 N6 — source-aware weighting
+
+N6 developed source-aware LSIM/OIM weighting.
+
+Key conclusions:
+
+N6A was too aggressive.
+N6B conservative policy stabilized source-aware weighting.
+Source-aware weighting is an active R-scaling layer.
+Stress evidence remains limited.
+6.8 N7 — Go2 proprioceptive observations
+
+N7 developed Go2 proprioceptive observations.
+
+Key conclusions:
+
+Go2 roll/pitch and horizontal velocity were used as proprioceptive observations.
+Go2 position, yaw, contact, and velocity are not truth.
+Go2 proprioceptive joint factor is active.
+Candidate foot/contact/yaw-rate/relative odometry sources require separate review.
+6.9 N8A-N8E — no-feedback FGO
+
+N8A-N8E built and audited the no-feedback FGO backend.
+
+Key conclusions:
+
+N8A built the initial no-feedback FGO.
+N8A1 found yaw wrap problems.
+N8A2 fixed yaw residual wrapping.
+N8C2 found Raw Doppler proxy existed but was not in solver residual.
+N8C3 fixed Raw Doppler FGO solver injection.
+N8D reviewed FGO weight policy.
+N8E produced formal engineering ablation with caveats.
+Raw Doppler FGO is active but low marginal value in clean BY2.
+6.10 N8F-N8F1 — legged candidate factors
+
+N8F formally activated candidate legged factors inside no-feedback FGO.
+
+Activated factors:
+
+contact-aware weighting
+foot kinematic velocity factor
+Go2 yaw-rate between factor
+Go2 relative odometry between factor
+
+Key conclusions:
+
+These factors have rows/residuals/Jacobians/toggles.
+N8F1 visual validation passed.
+They remain engineering factors/candidates, not truth.
+6.11 N8G-N8J — FGO feedback EKF joint filter
+
+N8G introduced controlled FGO feedback into EKF.
+
+Selected N8J policy:
+
+feedback_mode = horizontal_velocity_attitude_feedback
+gate = combined_conservative_gate
+covariance = inflation_auto_from_residual_proxy
+window = 5s / 1s
+position_feedback = disabled
+
+Key conclusions:
+
+FGO feedback enters EKF as a controlled update.
+It is not output substitution.
+It is not direct NAV overwrite.
+It uses no future data.
+N8J decision: feedback_joint_filter_ready_for_BY2_packaging.
+Clean BY2 selected-vs-baseline deltas are tiny, so no performance claim is allowed.
+6.12 N8K — BY2 formal ablation and plot audit
+
+N8K ran BY2 formal ablation and ablation plot audit.
+
+Key conclusions:
+
+30 variants completed.
+Metrics were generated.
+A large plot set was generated.
+Follow-up N8K2-N8K6 repairs addressed plot materialization, duplicate, semantic filename, cross-category duplicate, and applicability issues.
+The main lesson remains active: PNG existence is not figure validity.
+7. Current documentation stage
+
+Current documentation stage:
+
 N9A_R0_MULTI_AGENT_CONTEXT_REBUILD
-```
 
-Current technical blocker after R0:
+Purpose:
 
-```text
+Rebuild persistent multi-agent context so future Codex work does not lose the project route, data source roles, claim boundaries, and plotting rules.
+
+N9A_R0 does not:
+
+validate algorithm outputs
+draw figures
+run degradation
+grant plot permission
+allow N9B
+8. Current technical next gate
+
+The next technical gate after N9A_R0 is:
+
 N9A_R3_REAL_OUTPUT_AND_FRAME_ALIGNMENT_GATE
-```
 
-Historical prompt fragments may still describe N8K2 as the next step. That was true when N8K applicable figures still contained placeholder, low-information, duplicate, and applicability errors. The verified current state is that N8K2-N8K6 repaired that chain and PR #48 is merged.
+N9A_R3 must audit:
 
-## Completed Stage Summary
+algorithm output lineage
+output role classification
+frame alignment
+time alignment
+metric sanity
+trace/reference usage
+velocity source validity
+attitude source validity
+feedback source validity
+legged source validity
+plot permission matrix
 
-- N0-N3: project boundaries, data roles, solver input policy, Windows/WSL workspace separation.
-- N4: source-backed EKF backbone.
-- N5: Raw Doppler EKF factor.
-- N6: source-aware LSIM/OIM weighting.
-- N7: Go2 roll/pitch and horizontal velocity joint factor.
-- N8A-N8E: no-feedback FGO backend, yaw wrap fix, Raw Doppler solver injection fix, formal engineering ablation.
-- N8F: legged candidate factors.
-- N8G-N8J: conservative FGO feedback EKF closure.
-- N8K-N8K6: formal BY2 ablation plot audit and placeholder/duplicate/applicability repair, merged in PR #48.
+N9A_R3 must not draw formal figures.
 
-## Next Planned Stages
+N9A_R3 must keep:
 
-- N9A_R3: audit real algorithm output lineage, frame/time alignment, metric sanity, source roles, and plot permission. Do not draw formal figures. Keep `ready_for_N9B=false`.
-- N9A_R4: draw only BY2 normal figures with `allowed_to_plot=true`; mark all others missing or documented not-applicable.
-- N9A final review: decide whether N9A can merge/tag and whether N9B can be proposed.
-- N9B: run the full BY2 degradation matrix only after explicit user approval.
-- N9C: convert real degradation outputs into 01-14 figures and case review.
-- N9D: audit math, output evaluation, and filter-chain construction.
-- N9E: package BY2 paper-grade results with claim limits.
-- N10A: BY3 same-scenario replication.
-- N10B: indoor-outdoor transition.
-- N10C: poor-GNSS environment validation.
+ready_for_N9B = false
 
-## Required Plan Sections
+If N9A_R3 passes, the next stage is:
 
-### 1. Task Goal
+N9A_R4_draw_allowed_BY2_normal_figures
 
-State the exact target stage and outcome. Distinguish documentation/context rebuilds from algorithm runs, figure generation, audits, or Git operations.
+not N9B.
 
-### 2. Verified Current State
+9. N9A_R4 expected role
 
-List the branch, relevant PR/tag status, current stage, known blocker, and whether any statements are historical/stale. Do not rely only on prior memory when live verification is cheap.
+N9A_R4 will draw BY2 normal-condition figures only for allowed_to_plot=true entries from N9A_R3.
 
-### 3. Scope
+N9A_R4 must:
 
-List:
+save algorithm outputs runtime-only;
+draw real data figures;
+block missing sources;
+document not-applicable figures;
+avoid placeholders for applicable figures;
+avoid degradation matrix execution.
 
-- Windows audit workspace files that may be modified.
-- Windows audit workspace files/directories that are read-only.
-- WSL algorithm repository access level.
-- Whether `DATA_PATHS.local.md` may be read.
-- Explicitly forbidden files, outputs, and Git actions.
+N9A_R4 must not:
 
-### 4. Execution Steps
+modify algorithms;
+tune feedback policy;
+run full degradation;
+make paper claims.
+10. N9B expected role
 
-For each step, specify input files, commands, expected changed files, and validation method. WSL commands, if approved, must use:
+N9B is the full BY2 degradation matrix.
 
-```powershell
-.\scripts\run_wsl_legsa.ps1 -Task status -Distro Ubuntu-22.04
-.\scripts\run_wsl_legsa.ps1 -Task check-output-roots -Distro Ubuntu-22.04
-.\scripts\run_wsl_legsa.ps1 -Task bash -Command "<command>" -Distro Ubuntu-22.04
-```
+It must wait until:
 
-### 5. Validation
+N9A_R3 passes
+N9A_R4 completes allowed normal-condition plotting
+N9A final review is accepted
+human explicitly approves N9B
 
-Explain how to verify:
+N9B degradation families include:
 
-- Required files exist.
-- No forbidden generated outputs were created.
-- `DATA_PATHS.local.md` was not edited or staged.
-- WSL algorithm source was not modified, if WSL was touched.
-- Git write actions were not performed.
-- Stage conclusions preserve `ready_for_N9B=false` unless explicitly approved otherwise.
+GNSS outage
+sampling / timing degradation
+GNSS position noise
+position spikes / outliers
+std inflation
+receiver velocity degradation
+Raw Doppler degradation
+dual yaw degradation
+Go2 attitude degradation
+Go2 horizontal velocity degradation
+contact probability degradation
+foot kinematic degradation
+yaw-rate / relative odometry degradation
+combined degradation
 
-### 6. Risks
+Randomized cases should use seeds:
 
-Call out risks such as stale PR state, path leakage, data role confusion, generated artifact leakage, false plot completeness, frame/time alignment failure, metric sanity failure, and accidental WSL source edits.
+0..9
 
-### 7. Completion Criteria
+and record:
 
-Define done/not done. For N9A_R0 context rebuild, done means documentation context is coherent and current, but no algorithm output is validated and no plotting permission is granted.
->>>>>>> 8e40c33 (docs(N9A_R0): rebuild multi-agent project context)
+seed
+trigger count
+mask count
+effective observation count
+11. N9C expected role
+
+N9C generates degradation plots and case review.
+
+N9C must apply the 01-14 taxonomy to every degradation case.
+
+12. N9D expected role
+
+N9D audits the full technical chain:
+
+mathematical residuals
+Jacobians
+coordinate frames
+time alignment
+output evaluation chain
+filter construction
+feedback update chain
+no future data
+no output substitution
+plot semantics
+13. N9E expected role
+
+N9E packages BY2 paper-level results with strict claim boundaries.
+
+N9E must distinguish:
+
+engineering evidence
+diagnostic evidence
+paper candidate evidence
+forbidden claims
+future generalization tasks
+14. N10 expected role
+
+N10 performs generalization after BY2 is fully audited.
+
+Planned stages:
+
+N10A: BY3 same-scene replication
+N10B: indoor-outdoor transition
+N10C: poor-GNSS environment
+
+No BY3/indoor-outdoor/poor-GNSS claim is allowed before those stages run.
+
+15. Plot taxonomy
+
+All BY2, degradation, BY3, indoor-outdoor, and poor-GNSS work must use:
+
+01_trajectory
+02_position_errors
+03_velocity
+04_attitude
+05_consistency
+06_observation_quality
+07_compare
+08_summary_panels
+09_case_review
+10_fgo_factors
+11_feedback
+12_legged_factors
+13_degradation_meta or 13_ablation_meta
+14_audit_sanity
+
+If applicable=True, the figure must use real data.
+
+If not_applicable=True, a documented placeholder panel is allowed only with a clear reason.
+
+Forbidden figure types:
+
+metadata-only panel marked applicable
+duplicate template image with only title changed
+fake zero-line plot
+availability bar pretending to be contact/feedback data
+source observation pretending to be algorithm estimate
+unaligned trajectory comparison
+16. Claim boundary
+
+Allowed at the current stage:
+
+BY2 FGO-feedback EKF joint filter engineering chain has been validated.
+FGO feedback enters EKF as a controlled update.
+No output substitution, no direct NAV overwrite, no future-data feedback.
+Raw Doppler EKF is active.
+Raw Doppler FGO is active but low marginal value in clean BY2.
+Go2 proprioceptive joint factor is active.
+Legged candidate factors are activated in no-feedback FGO.
+N8K formal ablation chain exists, with plot validity requiring real-output gates.
+
+Forbidden:
+
+outperform final_v23
+paper performance improvement claim
+Go2 truth claim
+FGO replaces EKF
+trace/final_v23 tuning
+source observations as algorithm estimates
+placeholder plots as real figures
+degradation generalization before N9B/N10 evidence
+17. Required plan format
+
+Every future plan must include:
+
+Goal.
+Verified current state.
+Scope.
+Inputs.
+Outputs.
+Execution steps.
+Validation.
+Prohibited actions.
+Risks.
+Completion criteria.
+Final report requirements.
+18. Completion criteria for N9A_R0
+
+N9A_R0 is complete only when:
+
+AGENTS.md is coherent.
+PLANS.md is coherent.
+.codex/agents files exist.
+docs/codex_context files exist.
+No conflict markers exist.
+No local path leaks exist.
+No runtime artifacts are committed.
+No algorithm files are changed.
+The current route is clear.
+The immediate next technical gate is N9A_R3.
+
+N9A_R0 completion does not authorize N9B.
