@@ -197,7 +197,22 @@ Allowed N9A_R1 source-aligned normal plot audit statement:
 - N8K formal ablation variants are archive context only, not BY2 normal cases.
 - N9A_R1 does not run N9B.
 - N9A_R1 does not modify algorithms, tune trace/final_v23, substitute solver
-  output, or make paper performance claims.
+  output, and makes no paper performance claims.
+
+Allowed N9A_R2 real plot materialization statement:
+
+- N9A_R2 acknowledges N9A_R1 as source-lineage-only when
+  `available_algorithm_series_count = 0`.
+- N9A_R2 must discover real BY2 normal algorithm NAV/STD/EVAL/RUN_MANIFEST
+  outputs before counting trajectory, position-error, consistency, or compare
+  figures as complete.
+- Source/proxy figures from raw/status GNSS, trace, Go2 high-level data, or
+  receiver IMU diagnostics are excluded from algorithm completion.
+- `07_compare` requires at least two real algorithm output series.
+- Missing real outputs force `ready_for_N9B = false`.
+- N9A_R2 does not run N9B or the degradation matrix.
+- N9A_R2 does not modify algorithms, tune trace/final_v23, substitute solver
+  output, and makes no paper performance claims.
 
 Allowed N5A raw Doppler activation statement:
 
@@ -1774,6 +1789,11 @@ N9A does not claim tight coupling.
 N9A does not claim full raw GNSS factor.
 
 N9A does not claim full pose FGO.
+
+N9A_R2 adds a stricter materialization gate for `BY2_normal_clean`: source
+lineage and source-aligned plots are not enough. Real algorithm NAV/EVAL/STD
+outputs must be discovered before normal-condition algorithm figures or compare
+figures can be complete.
 
 ## N7B4 Literature-Informed Go2 Contact/Velocity Boundary
 
