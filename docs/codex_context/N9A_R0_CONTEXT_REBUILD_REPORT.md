@@ -8,6 +8,7 @@ Rebuild multi-agent documentation/context only in the Windows audit workspace.
 
 - Rewrote top-level `AGENTS.md` and `PLANS.md` for current N9A_R0/N9A_R3 context.
 - Added operational Markdown agent files for supervisor, planner, worker, and reviewer.
+- Added/refreshed Codex TOML agent definitions for supervisor, planner, worker, and reviewer.
 - Added current-state, stage-history, data-role, plot-taxonomy, degradation-plan, blocker-history, claim-boundary, runbook, and data-path template context files.
 - Refreshed existing context policy files for consistency.
 
@@ -19,6 +20,10 @@ Rebuild multi-agent documentation/context only in the Windows audit workspace.
 - `.codex/agents/planner.md`: read-only planner scope and required outputs.
 - `.codex/agents/worker.md`: approved-scope execution limits for documentation and future WSL bridge work.
 - `.codex/agents/reviewer.md`: read-only review checks for diff, path leaks, artifacts, and claim boundary.
+- `.codex/agents/supervisor.toml`: Codex App supervisor agent definition.
+- `.codex/agents/planner.toml`: Codex App read-only planner agent definition.
+- `.codex/agents/worker.toml`: Codex App approved-scope worker agent definition.
+- `.codex/agents/reviewer.toml`: Codex App read-only reviewer agent definition.
 - `docs/codex_context/current_state.md`: verified current PR/stage/next-step state.
 - `docs/codex_context/stage_history_N0_to_current.md`: N0 through N9A_R0 history summary.
 - `docs/codex_context/data_source_roles.md`: trace/GNSS/by2/final_v23/NAV/EVAL/STD role boundaries.
@@ -59,16 +64,19 @@ Rebuild multi-agent documentation/context only in the Windows audit workspace.
 - No runtime artifacts.
 - No degradation matrix.
 - No merge or tag.
+- No worker/reviewer Git write operation.
 - No PR #21 or PR #49 action.
 - No edits to `DATA_PATHS.local.md`.
 
-Git add/commit/push/PR creation, if performed, is a separate publish step after validation. It must include only the documentation/context files listed in this report.
+Git add/commit/push/PR creation, if performed by supervisor after explicit user request, is a separate publish step after validation. It must include only the documentation/context files listed in this report.
 
 ## Validation Performed
 
 - Required files exist.
 - `git diff --check` passed.
 - Tracked context docs use aliases instead of local absolute machine paths; scanned tracked Markdown context excluding `DATA_PATHS.local.md`.
+- Required context file presence audit passed for AGENTS, PLANS, Markdown agent files, TOML agent files, and `docs/codex_context` files.
+- Changed-file audit found no `DATA_PATHS.local.md`, runtime artifacts, generated figures, algorithm source, final_v23, raw data, or archive modifications.
 - No generated output directories were modified by this task.
 - `DATA_PATHS.local.md` remains local-only and unchanged.
 - `python3 -m pytest tests` was attempted but could not run because `python3` resolves to the WindowsApps stub and no `tests` directory exists in this checkout.
@@ -92,6 +100,5 @@ N9A_R3_REAL_OUTPUT_AND_FRAME_ALIGNMENT_GATE
 ## Human Confirmation Still Required
 
 - Whether to accept this documentation-only context rebuild.
-- Whether to push/open a PR for the R0 context branch.
 - Whether and when to start N9A_R3.
 - No merge, tag, N9B start, or PR #21 action is authorized by this report.
