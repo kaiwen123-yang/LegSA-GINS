@@ -1,4 +1,4 @@
-# PLANS.md — LegSA-GINS Current Plan and Stage Roadmap
+﻿# PLANS.md 鈥?LegSA-GINS Current Plan and Stage Roadmap
 
 ## 0. Purpose of this file
 
@@ -141,8 +141,8 @@ Do not submit FGO_SMOOTHED_NAV.csv.
 Do not submit FGO_FACTOR_TABLE.csv.
 Do not submit generated degradation CSV / summary / case review runtime files.
 Do not write local absolute paths into tracked docs/config/scripts.
-Do not modify /home/kaiwen/KF-GINS.
-Do not run git add / commit / checkout / reset / pull / push inside /home/kaiwen/KF-GINS.
+Do not modify <WSL_ALGO_REPO>.
+Do not run git add / commit / checkout / reset / pull / push inside <WSL_ALGO_REPO>.
 Do not compile reference/final_v23_repo itself.
 Do not use trace as solver input.
 Do not use final_v23 output as solver input.
@@ -228,7 +228,7 @@ solver input
 tuning source
 hidden target
 6. Completed stage summary
-6.1 N0 — final_v23 source baseline
+6.1 N0 鈥?final_v23 source baseline
 
 N0 established the final_v23 / KF-GINS-style source baseline.
 
@@ -237,8 +237,8 @@ Key conclusions:
 final_v23 is the strong baseline and lineage source.
 final_v23 outputs can be used for comparison and sanity checks.
 final_v23 outputs must not be used as solver input.
-The project must not silently modify the original /home/kaiwen/KF-GINS repository.
-6.2 N1 — repository and governance setup
+The project must not silently modify the original <WSL_ALGO_REPO> repository.
+6.2 N1 鈥?repository and governance setup
 
 N1 established the LegSA-GINS repository direction, phase log, claim boundary, and PR discipline.
 
@@ -247,7 +247,7 @@ Key conclusions:
 The repository must track stage decisions.
 PR #21 remains open/unmerged as historical evidence.
 Branches, tags, PR merges, and scope changes require human final decision.
-6.3 N2 — BY2 data source role clarification
+6.3 N2 鈥?BY2 data source role clarification
 
 N2 clarified BY2 source roles.
 
@@ -257,7 +257,7 @@ trace is evaluation-only.
 gnss1/gnss2 are source observations.
 by2.txt is Go2 source data, not truth.
 NAV/EVAL_NAV/STD/RUN_MANIFEST are algorithm output files.
-6.4 N3 — audit and source-lineage groundwork
+6.4 N3 鈥?audit and source-lineage groundwork
 
 N3 prepared the audit structure.
 
@@ -266,7 +266,7 @@ Key conclusions:
 Source availability is not algorithm output.
 A figure must not be called complete only because a PNG exists.
 Output lineage, frame alignment, time alignment, and metric sanity must be audited before plotting.
-6.5 N4 — source-backed EKF port
+6.5 N4 鈥?source-backed EKF port
 
 N4 ported the source-backed EKF backbone.
 
@@ -275,7 +275,7 @@ Key conclusions:
 EKF propagation/update structure was established.
 final_v23 parity and source-backed lineage were audited.
 The source-backed EKF is the base engineering backbone.
-6.6 N5 — Raw Doppler EKF factor
+6.6 N5 鈥?Raw Doppler EKF factor
 
 N5 activated Raw Doppler in the EKF front-end.
 
@@ -285,7 +285,7 @@ Raw Doppler is not NAV-PVT velocity.
 Raw Doppler is not .gnss velocity.
 Raw Doppler was activated as a real EKF velocity factor.
 Raw Doppler EKF contribution is engineering evidence, not a final paper performance claim.
-6.7 N6 — source-aware weighting
+6.7 N6 鈥?source-aware weighting
 
 N6 developed source-aware LSIM/OIM weighting.
 
@@ -295,7 +295,7 @@ N6A was too aggressive.
 N6B conservative policy stabilized source-aware weighting.
 Source-aware weighting is an active R-scaling layer.
 Stress evidence remains limited.
-6.8 N7 — Go2 proprioceptive observations
+6.8 N7 鈥?Go2 proprioceptive observations
 
 N7 developed Go2 proprioceptive observations.
 
@@ -305,7 +305,7 @@ Go2 roll/pitch and horizontal velocity were used as proprioceptive observations.
 Go2 position, yaw, contact, and velocity are not truth.
 Go2 proprioceptive joint factor is active.
 Candidate foot/contact/yaw-rate/relative odometry sources require separate review.
-6.9 N8A-N8E — no-feedback FGO
+6.9 N8A-N8E 鈥?no-feedback FGO
 
 N8A-N8E built and audited the no-feedback FGO backend.
 
@@ -319,7 +319,7 @@ N8C3 fixed Raw Doppler FGO solver injection.
 N8D reviewed FGO weight policy.
 N8E produced formal engineering ablation with caveats.
 Raw Doppler FGO is active but low marginal value in clean BY2.
-6.10 N8F-N8F1 — legged candidate factors
+6.10 N8F-N8F1 鈥?legged candidate factors
 
 N8F formally activated candidate legged factors inside no-feedback FGO.
 
@@ -335,7 +335,7 @@ Key conclusions:
 These factors have rows/residuals/Jacobians/toggles.
 N8F1 visual validation passed.
 They remain engineering factors/candidates, not truth.
-6.11 N8G-N8J — FGO feedback EKF joint filter
+6.11 N8G-N8J 鈥?FGO feedback EKF joint filter
 
 N8G introduced controlled FGO feedback into EKF.
 
@@ -355,7 +355,7 @@ It is not direct NAV overwrite.
 It uses no future data.
 N8J decision: feedback_joint_filter_ready_for_BY2_packaging.
 Clean BY2 selected-vs-baseline deltas are tiny, so no performance claim is allowed.
-6.12 N8K — BY2 formal ablation and plot audit
+6.12 N8K 鈥?BY2 formal ablation and plot audit
 
 N8K ran BY2 formal ablation and ablation plot audit.
 
@@ -600,3 +600,4 @@ The current route is clear.
 The immediate next technical gate is N9A_R3.
 
 N9A_R0 completion does not authorize N9B.
+
