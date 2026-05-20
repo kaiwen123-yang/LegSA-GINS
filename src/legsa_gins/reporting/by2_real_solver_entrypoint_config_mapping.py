@@ -151,9 +151,17 @@ def run_real_solver_entrypoint_config_mapping(
     ready_matrix = _build_ready_matrix(mapping_rows)
     validation = validate_n9b1c_result(runtime_root, mapping_rows, ready_matrix, blocked_rows, wsl_rows, runtime_written=False)
     all_selected_mapped = all(row["mapping_status"] == "mapped" for row in mapping_rows if row["selected_for_N9B1C_mapping"])
-    ready_for_n9b1d = validation["status"] == "pass" and all_selected_mapped and bool(mapping_rows)
-    decision_status = "N9B1C_mapping_ready_for_N9B1D_solver_review" if ready_for_n9b1d else "N9B1C_mapping_blocked_before_solver_execution"
     blockers = [row for row in blocked_rows if row["mapping_status"] not in {"fixed_reference", "marker_only"}]
+    ready_for_n9b1d = validation["status"] == "pass" and all_selected_mapped and bool(mapping_rows)
+    if validation["status"] != "pass":
+        decision_status = "N9B1C_safety_gate_failed"
+        recommended_next_stage = "repair_safety_violation"
+    elif ready_for_n9b1d:
+        decision_status = "N9B1C_real_solver_mapping_ready"
+        recommended_next_stage = "human_review_N9B1C_then_N9B1D_solver_execution"
+    else:
+        decision_status = "N9B1C_solver_mapping_partial_with_blockers"
+        recommended_next_stage = "fix_solver_mapping_blockers"
 
     result = {
         "solver_entrypoint_inventory_report": {
@@ -198,6 +206,7 @@ def run_real_solver_entrypoint_config_mapping(
             "ready_for_N9B1D_solver_execution": ready_for_n9b1d,
             "ready_for_N9B2_execution": False,
             "ready_for_full_N9B_execution": False,
+            "recommended_next_stage": recommended_next_stage,
             "solver_run": False,
             "official_evaluator_run": False,
             "figures_generated": False,
