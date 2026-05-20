@@ -57,6 +57,9 @@ def test_n9b1c_maps_real_entrypoints_and_blocks_reference_algorithms(tmp_path):
     assert all("N9B1C_REAL_SOLVER_ENTRYPOINT_AND_CONFIG_MAPPING" not in row["future_output_root"] for row in mapped)
     assert any(row["algorithm"] == "final_v23_dual_antenna_EKF" and row["mapping_status"] == "fixed_reference" for row in result["command_mapping_matrix"])
     assert any(row["algorithm"] == "true_no_feedback_FGO" and row["mapping_status"] == "diagnostic_blocked" for row in result["command_mapping_matrix"])
+    assert result["decision_report"]["status"] == "N9B1C_solver_mapping_partial_with_blockers"
+    assert result["decision_report"]["recommended_next_stage"] == "fix_solver_mapping_blockers"
+    assert result["decision_report"]["ready_for_N9B1D_solver_execution"] is False
     assert result["decision_report"]["ready_for_N9B2_execution"] is False
     assert not list(runtime_root.rglob("NAV*"))
     assert not list(runtime_root.rglob("STD*"))
