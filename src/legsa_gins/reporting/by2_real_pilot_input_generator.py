@@ -548,7 +548,7 @@ def _build_solver_plans(
                 continue
         plan_dir = runtime_root / "solver_command_plan" / case_id / algorithm
         command = (
-            "python -m legsa_gins.future_solver_entry "
+            "N9B1C_REAL_SOLVER_ENTRYPOINT_AND_CONFIG_MAPPING_REQUIRED "
             f"--case {case_id} --algorithm {algorithm} "
             f"--input-root ${{WSL_AUDIT_ROOT}}/{AUDIT_ROOT_NAME}/{STAGE}/degraded_inputs/{case_id} "
             f"--output-root ${{WSL_AUDIT_ROOT}}/{AUDIT_ROOT_NAME}/{STAGE}/future_solver_outputs/{case_id}/{algorithm}"

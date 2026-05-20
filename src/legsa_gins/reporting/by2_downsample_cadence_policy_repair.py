@@ -642,7 +642,7 @@ def _build_repaired_solver_plan(
             routing_status = old_route_lookup.get(route_key, {}).get("routing_status") or ("diagnostic_only" if algorithm in _split_algorithms(row.get("diagnostic_only_algorithms", "")) else "applicable")
             plan_dir = runtime_root / "solver_command_plan" / case_id / algorithm
             command = (
-                "python -m legsa_gins.future_solver_entry "
+                "N9B1C_REAL_SOLVER_ENTRYPOINT_AND_CONFIG_MAPPING_REQUIRED "
                 f"--case {case_id} --algorithm {algorithm} "
                 f"--input-root ${{WSL_AUDIT_ROOT}}/{AUDIT_ROOT_NAME}/{STAGE}/repaired_inputs/{case_id} "
                 f"--output-root ${{WSL_AUDIT_ROOT}}/{AUDIT_ROOT_NAME}/{STAGE}/future_solver_outputs/{case_id}/{algorithm}"
