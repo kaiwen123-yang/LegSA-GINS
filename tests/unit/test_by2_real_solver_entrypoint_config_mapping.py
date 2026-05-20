@@ -2,8 +2,6 @@ from pathlib import Path
 
 from legsa_gins.reporting.by2_real_pilot_input_generator import SourcePaths
 from legsa_gins.reporting.by2_real_solver_entrypoint_config_mapping import (
-    KF_GINS_BASELINE_ENTRYPOINT,
-    LEGSA_ENTRYPOINT,
     RuntimeDependencyPaths,
     default_n9b1c_runtime_root,
     run_real_solver_entrypoint_config_mapping,
@@ -21,7 +19,15 @@ def _deps(tmp_path: Path) -> RuntimeDependencyPaths:
     feedback = tmp_path / "FGO_FEEDBACK_OBSERVATIONS.csv"
     for path in [imu, go2, raw, feedback]:
         path.write_text("placeholder dependency for static mapping test\n", encoding="utf-8")
-    return RuntimeDependencyPaths(imu=imu, go2=go2, raw_doppler=raw, feedback_observations=feedback, source="unit_test")
+    return RuntimeDependencyPaths(
+        imu=imu,
+        go2=go2,
+        raw_doppler=raw,
+        feedback_observations=feedback,
+        legsa_wsl_repo="$WSL_LEGSA_REPO",
+        kf_gins_baseline_wsl_repo="$WSL_KF_GINS_BASELINE_REPO",
+        source="unit_test",
+    )
 
 
 def test_default_runtime_root_uses_n9b1c_stage():
@@ -51,8 +57,8 @@ def test_n9b1c_maps_real_entrypoints_and_blocks_reference_algorithms(tmp_path):
     commands = [row["command"] for row in result["command_mapping_matrix"]]
     assert not any("python -m legsa_gins.future_solver_entry" in command for command in commands)
     mapped = [row for row in result["command_mapping_matrix"] if row["mapping_status"] == "mapped"]
-    assert any(row["algorithm"] == "single_antenna_gnss1_status_KF_GINS" and row["entrypoint"] == KF_GINS_BASELINE_ENTRYPOINT for row in mapped)
-    assert any(row["algorithm"] == "source_backed_EKF" and row["entrypoint"] == LEGSA_ENTRYPOINT for row in mapped)
+    assert any(row["algorithm"] == "single_antenna_gnss1_status_KF_GINS" and row["entrypoint"].endswith("/bin/KF-GINS") for row in mapped)
+    assert any(row["algorithm"] == "source_backed_EKF" and row["entrypoint"].endswith("/build/cpp/legsa_gins") for row in mapped)
     assert all("N9B1D_PILOT_SOLVER_EXECUTION" in row["future_output_root"] for row in mapped)
     assert all("N9B1C_REAL_SOLVER_ENTRYPOINT_AND_CONFIG_MAPPING" not in row["future_output_root"] for row in mapped)
     assert any(row["algorithm"] == "final_v23_dual_antenna_EKF" and row["mapping_status"] == "fixed_reference" for row in result["command_mapping_matrix"])

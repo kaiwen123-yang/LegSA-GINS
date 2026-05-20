@@ -11,7 +11,7 @@ from __future__ import annotations
 import csv
 import json
 from dataclasses import dataclass
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 from legsa_gins.reporting.by2_degradation_runner_precheck import (
@@ -33,12 +33,9 @@ from legsa_gins.reporting.by2_real_pilot_input_generator import (
 
 STAGE = "N9B1C_REAL_SOLVER_ENTRYPOINT_AND_CONFIG_MAPPING"
 FUTURE_SOLVER_STAGE = "N9B1D_PILOT_SOLVER_EXECUTION"
-_WSL_HOME_PREFIX = "/" + "home"
-_WSL_USER_NAME = "kaiwen"
-KF_GINS_BASELINE_WORKING_DIRECTORY = f"{_WSL_HOME_PREFIX}/{_WSL_USER_NAME}/KF-GINS-Baseline"
-LEGSA_WORKING_DIRECTORY = f"{_WSL_HOME_PREFIX}/{_WSL_USER_NAME}/LegSA-GINS"
-KF_GINS_BASELINE_ENTRYPOINT = f"{KF_GINS_BASELINE_WORKING_DIRECTORY}/bin/KF-GINS"
-LEGSA_ENTRYPOINT = f"{LEGSA_WORKING_DIRECTORY}/build/cpp/legsa_gins"
+KF_GINS_BASELINE_REPO_NAME = "KF-GINS-Baseline"
+KF_GINS_BASELINE_ENTRYPOINT_REL = "bin/KF-GINS"
+LEGSA_ENTRYPOINT_REL = "build/cpp/legsa_gins"
 WSL_AUDIT_ROOT = "${WSL_AUDIT_ROOT}"
 REQUIRED_SUBDIRS = [
     "solver_entrypoint_inventory",
@@ -96,6 +93,8 @@ class RuntimeDependencyPaths:
     go2: Path | None
     raw_doppler: Path | None
     feedback_observations: Path | None
+    legsa_wsl_repo: str | None
+    kf_gins_baseline_wsl_repo: str | None
     source: str
 
 
@@ -232,6 +231,8 @@ def discover_runtime_dependencies(workspace_root: Path, sources: SourcePaths | N
     sources = sources or discover_runtime_sources(workspace_root)
     local = workspace_root / "docs" / "codex_context" / "DATA_PATHS.local.md"
     candidates = _extract_windows_paths(local) if local.exists() else []
+    legsa_wsl_repo = _extract_marker_value(local, "WSL_ALGO_REPO")
+    kf_gins_baseline_wsl_repo = _extract_marker_value(local, "WSL_KF_GINS_BASELINE_REPO") or _derive_kf_gins_baseline_repo(legsa_wsl_repo)
     go2 = _first_existing(candidates, "by2.txt")
     raw_doppler = (
         _first_existing(candidates, "RAW_DOPPLER_VELOCITY_FACTORS.csv")
@@ -244,6 +245,8 @@ def discover_runtime_dependencies(workspace_root: Path, sources: SourcePaths | N
         go2=go2,
         raw_doppler=raw_doppler,
         feedback_observations=feedback,
+        legsa_wsl_repo=legsa_wsl_repo,
+        kf_gins_baseline_wsl_repo=kf_gins_baseline_wsl_repo,
         source="DATA_PATHS.local.md" if local.exists() else "workspace_search",
     )
 
@@ -427,18 +430,24 @@ def _map_row(
             reason = "7-col GNSS1-status degraded input missing"
         elif not _path_exists(deps.imu):
             reason = "real IMU input missing"
+        elif not deps.kf_gins_baseline_wsl_repo:
+            reason = "KF-GINS-Baseline WSL repo path missing from local path mapping"
         else:
             mapping_status = "mapped"
-            entrypoint = KF_GINS_BASELINE_ENTRYPOINT
+            entrypoint = _kf_gins_baseline_entrypoint(deps)
             config = _kf_config(case_id, algorithm, input_choice, deps, future_output_root, wsl_audit_root)
             command_type = "external_kf_gins"
-            working_directory = KF_GINS_BASELINE_WORKING_DIRECTORY
+            working_directory = deps.kf_gins_baseline_wsl_repo or ""
     elif algorithm in LEGSA_EKF_GROUPS:
-        mapping_status, reason, config = _legsa_config_status(case_id, algorithm, input_choice, input_exists, deps, future_output_root, wsl_audit_root)
+        if not deps.legsa_wsl_repo:
+            mapping_status = "blocked"
+            reason = "LegSA WSL repo path missing from local path mapping"
+        else:
+            mapping_status, reason, config = _legsa_config_status(case_id, algorithm, input_choice, input_exists, deps, future_output_root, wsl_audit_root)
         if mapping_status == "mapped":
-            entrypoint = LEGSA_ENTRYPOINT
+            entrypoint = _legsa_entrypoint(deps)
             command_type = "wsl_command"
-            working_directory = LEGSA_WORKING_DIRECTORY
+            working_directory = deps.legsa_wsl_repo or ""
     elif algorithm == "reject_all_sanity":
         mapping_status = "diagnostic_blocked"
         reason = "reject_all_sanity requires a real reject-all runner/config dependency; none is registered for N9B1C"
@@ -861,8 +870,8 @@ def _config_diff(case_id: str, algorithm: str, mapping_status: str, reason: str)
 
 def _build_inventory(deps: RuntimeDependencyPaths) -> list[dict[str, Any]]:
     return [
-        {"entrypoint": KF_GINS_BASELINE_ENTRYPOINT, "mapping_role": "solver_entrypoint", "algorithm_group": "single_antenna_gnss1_status_KF_GINS", "execution_checked": False, "dryrun_only": True},
-        {"entrypoint": LEGSA_ENTRYPOINT, "mapping_role": "solver_entrypoint", "algorithm_group": "LegSA_EKF_groups", "execution_checked": False, "dryrun_only": True},
+        {"entrypoint": _kf_gins_baseline_entrypoint(deps), "mapping_role": "solver_entrypoint", "algorithm_group": "single_antenna_gnss1_status_KF_GINS", "execution_checked": False, "dryrun_only": True},
+        {"entrypoint": _legsa_entrypoint(deps), "mapping_role": "solver_entrypoint", "algorithm_group": "LegSA_EKF_groups", "execution_checked": False, "dryrun_only": True},
         {"entrypoint": _display_path(deps.imu), "mapping_role": "input_dependency", "algorithm_group": "all_mapped_solvers", "exists": _path_exists(deps.imu), "dryrun_only": True},
         {"entrypoint": _display_path(deps.go2), "mapping_role": "input_dependency", "algorithm_group": "Go2_joint_EKF", "exists": _path_exists(deps.go2), "dryrun_only": True},
         {"entrypoint": _display_path(deps.raw_doppler), "mapping_role": "input_dependency", "algorithm_group": "Raw_Doppler_EKF", "exists": _path_exists(deps.raw_doppler), "dryrun_only": True},
@@ -948,8 +957,11 @@ def _write_outputs(runtime_root: Path, result: dict[str, Any]) -> None:
         _write_table_pair(runtime_root / "matrix" / stem, rows)
     _write_table_pair(runtime_root / "solver_entrypoint_inventory" / "N9B1C_SOLVER_ENTRYPOINT_INVENTORY", result["solver_entrypoint_inventory"])
     _write_table_pair(runtime_root / "wsl_dryrun" / "N9B1C_WSL_DRYRUN_COMMAND_MATRIX", result["wsl_dryrun_command_matrix"])
+    inventory = result["solver_entrypoint_inventory"]
+    kf_entrypoint = next((row["entrypoint"] for row in inventory if row["algorithm_group"] == "single_antenna_gnss1_status_KF_GINS"), "")
+    legsa_entrypoint = next((row["entrypoint"] for row in inventory if row["algorithm_group"] == "LegSA_EKF_groups"), "")
     summaries = {
-        "n9b1c_solver_entrypoint_inventory.md": f"# N9B1C solver entrypoint inventory\n\n- KF-GINS baseline: `{KF_GINS_BASELINE_ENTRYPOINT}`\n- LegSA C++: `{LEGSA_ENTRYPOINT}`\n- Solver run: false\n",
+        "n9b1c_solver_entrypoint_inventory.md": f"# N9B1C solver entrypoint inventory\n\n- KF-GINS baseline: `{kf_entrypoint}`\n- LegSA C++: `{legsa_entrypoint}`\n- Solver run: false\n",
         "n9b1c_command_mapping_summary.md": f"# N9B1C command mapping\n\n- mapped_command_rows={result['command_mapping_report']['mapped_command_rows']}\n- blocked_mapping_rows={result['command_mapping_report']['blocked_mapping_rows']}\n- ready_for_N9B2_execution=false\n",
         "n9b1c_next_stage_recommendation.md": f"# N9B1C next stage recommendation\n\n- status={result['decision_report']['status']}\n- ready_for_N9B1D_solver_execution={str(result['decision_report']['ready_for_N9B1D_solver_execution']).lower()}\n- ready_for_N9B2_execution=false\n",
     }
@@ -981,6 +993,43 @@ def _extract_windows_paths(path: Path) -> list[Path]:
         if len(text) > 3 and text[1:3] == ":\\":
             paths.append(Path(text))
     return paths
+
+
+def _extract_marker_value(path: Path, marker: str) -> str | None:
+    if not path.exists():
+        return None
+    lines = path.read_text(encoding="utf-8-sig").splitlines()
+    for index, line in enumerate(lines):
+        if line.strip() != f"<{marker}>":
+            continue
+        for candidate in lines[index + 1:]:
+            value = candidate.strip()
+            if not value or value.startswith("```"):
+                continue
+            if value.startswith("<") and value.endswith(">"):
+                break
+            return value
+    return None
+
+
+def _derive_kf_gins_baseline_repo(legsa_wsl_repo: str | None) -> str | None:
+    if not legsa_wsl_repo:
+        return None
+    return str(PurePosixPath(legsa_wsl_repo).parent / KF_GINS_BASELINE_REPO_NAME)
+
+
+def _kf_gins_baseline_entrypoint(deps: RuntimeDependencyPaths) -> str:
+    return _posix_join(deps.kf_gins_baseline_wsl_repo, KF_GINS_BASELINE_ENTRYPOINT_REL)
+
+
+def _legsa_entrypoint(deps: RuntimeDependencyPaths) -> str:
+    return _posix_join(deps.legsa_wsl_repo, LEGSA_ENTRYPOINT_REL)
+
+
+def _posix_join(root: str | None, relative: str) -> str:
+    if not root:
+        return ""
+    return str(PurePosixPath(root) / PurePosixPath(relative))
 
 
 def _first_existing(candidates: list[Path], name: str | None = None) -> Path | None:
