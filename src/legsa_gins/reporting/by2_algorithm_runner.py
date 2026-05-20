@@ -422,6 +422,48 @@ def write_algorithm_config(workspace_root: Path, algorithm: str, config_path: Pa
     }
 
 
+def append_case_level_overrides(config_path: Path, overrides: dict[str, str | None]) -> None:
+    """Append explicit case-level input overrides to a generated runtime config."""
+    clean = {key: value for key, value in overrides.items() if value not in {None, ""}}
+    if not clean:
+        return
+    lines = ["", "# Case-level N9B input overrides."]
+    for key, value in sorted(clean.items()):
+        lines.append(f'{key}: "{str(value)}"')
+    with config_path.open("a", encoding="utf-8") as handle:
+        handle.write("\n".join(lines) + "\n")
+
+
+def build_solver_command_record(
+    algorithm: str,
+    runtime_config: str | Path,
+    output_dir: str | Path,
+    *,
+    workspace_root: Path,
+    port_core_exe: str | None = None,
+    dry_run: bool = True,
+) -> dict[str, Any]:
+    probe = resolve_port_core_executable(workspace_root)
+    exe = port_core_exe or probe.get("selected_path") or "legsa_v23_port_core_demo"
+    command = [exe, "--config", repo_to_wsl(runtime_config), "--output-dir", repo_to_wsl(output_dir)]
+    return {
+        "algorithm": algorithm,
+        "command": command,
+        "runner_surface": "legsa_v23_port_core_demo --config <runtime_config> --output-dir <output_dir>",
+        "runtime_config": str(runtime_config),
+        "runtime_config_wsl": repo_to_wsl(runtime_config),
+        "output_dir": str(output_dir),
+        "output_dir_wsl": repo_to_wsl(output_dir),
+        "runner_probe": probe,
+        "dry_run": dry_run,
+        "executed_solver": False if dry_run else None,
+        "trace_solver_input": False,
+        "final_v23_output_solver_input": False,
+        "normal_parity_mode": False,
+        "future_solver_entry": False,
+    }
+
+
 def run_formal_algorithm(
     workspace_root: Path,
     algorithm: str,
@@ -429,11 +471,29 @@ def run_formal_algorithm(
     *,
     port_core_exe: str | None = None,
     dry_run: bool = False,
+    runtime_config: Path | None = None,
+    case_overrides: dict[str, str | None] | None = None,
 ) -> dict[str, Any]:
     if algorithm not in ALGORITHM_SPECS:
         raise ValueError(f"unsupported algorithm: {algorithm}")
     output_dir.mkdir(parents=True, exist_ok=True)
-    config_info = write_algorithm_config(workspace_root, algorithm, output_dir / "config" / "runtime_config.yaml", output_dir)
+    if runtime_config:
+        runtime_config = Path(runtime_config)
+        clean_overrides = {key: value for key, value in (case_overrides or {}).items() if value not in {None, ""}}
+        config_info = {
+            "algorithm": algorithm,
+            "config_path": str(runtime_config),
+            "config_path_wsl": repo_to_wsl(runtime_config),
+            "base_config_path": None,
+            "missing_inputs": [],
+            "case_overrides": clean_overrides,
+            "trace_solver_input": False,
+            "final_v23_output_solver_input": False,
+            "case_level_runtime_config": True,
+        }
+    else:
+        config_info = write_algorithm_config(workspace_root, algorithm, output_dir / "config" / "runtime_config.yaml", output_dir)
+        append_case_level_overrides(Path(config_info["config_path"]), case_overrides or {})
     probe = resolve_port_core_executable(workspace_root)
     exe = port_core_exe or probe.get("selected_path")
     if not exe:
@@ -446,15 +506,17 @@ def run_formal_algorithm(
             "trace_solver_input": False,
             "final_v23_output_solver_input": False,
         }
-    command = [exe, "--config", config_info["config_path_wsl"], "--output-dir", repo_to_wsl(output_dir)]
-    command_record = {
-        "algorithm": algorithm,
-        "command": command,
-        "runner_surface": "legsa_v23_port_core_demo --config --output-dir",
-        "dry_run": dry_run,
-        "trace_solver_input": False,
-        "final_v23_output_solver_input": False,
-    }
+    command_record = build_solver_command_record(
+        algorithm,
+        config_info["config_path"],
+        output_dir,
+        workspace_root=workspace_root,
+        port_core_exe=exe,
+        dry_run=dry_run,
+    )
+    if case_overrides:
+        command_record["case_overrides"] = {key: value for key, value in case_overrides.items() if value not in {None, ""}}
+    command = command_record["command"]
     write_json(output_dir / "solver_command.json", command_record)
     write_json(
         output_dir / "source_role.json",
@@ -556,6 +618,20 @@ def main(argv: list[str] | None = None) -> int:
         args.algorithm,
         Path(args.output_dir),
         dry_run=args.dry_run,
+        runtime_config=Path(args.config_json) if args.config_json else None,
+        case_overrides={
+            "case_id": args.case_id,
+            "imu_source_override": args.imu_source,
+            "gnss_input_override": args.gnss_input,
+            "receiver_input_override": args.receiver_input,
+            "velocity_input_override": args.velocity_input,
+            "yaw_input_override": args.yaw_input,
+            "raw_doppler_input_override": args.raw_doppler_input,
+            "go2_input_override": args.go2_input,
+            "feedback_input_override": args.feedback_input,
+            "source_aware_input_override": args.source_aware_input,
+            "max_epochs": args.max_epochs,
+        },
     )
     print(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))
     return 0 if result.get("run_status") in {"completed", "dry_run"} else 1
