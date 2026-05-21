@@ -767,7 +767,11 @@ def _wsl_dryrun_report(rows: list[dict[str, Any]], invoked: bool) -> dict[str, A
 
 
 def _decision_report(validation: dict[str, Any], reports: dict[str, Any]) -> dict[str, Any]:
-    status = "N9B1G1_ready_for_human_review_before_N9B1D" if validation["status"] == "pass" else "N9B1G1_validation_failed"
+    status = (
+        "N9B1G1_selected_feedback_eval_dependency_fixed_single_position_noise_preserved"
+        if validation["status"] == "pass"
+        else "N9B1G1_validation_failed"
+    )
     return {
         "stage": STAGE,
         "created_utc": now_utc(),
