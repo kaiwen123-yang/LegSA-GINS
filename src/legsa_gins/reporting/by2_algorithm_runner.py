@@ -151,6 +151,12 @@ def repo_to_wsl(path: str | Path) -> str:
     return text.replace(chr(92), "/")
 
 
+def running_inside_wsl() -> bool:
+    return Path("/proc/sys/kernel/osrelease").exists() and (
+        "microsoft" in Path("/proc/sys/kernel/osrelease").read_text(encoding="utf-8", errors="ignore").lower()
+    )
+
+
 def read_json(path: str | Path, default: Any = None) -> Any:
     source = Path(path)
     if not source.exists():
@@ -218,9 +224,14 @@ def resolve_port_core_executable(workspace_root: Path, data_paths_local: Path | 
 
     probe_rows = []
     selected = None
+    in_wsl = running_inside_wsl()
     for item in dict.fromkeys(candidates):
         if item.startswith("/"):
-            check = subprocess.run(["wsl", "bash", "-lc", f"test -x {shlex.quote(item)}"], check=False)
+            probe_cmd = f"test -x {shlex.quote(item)}"
+            if in_wsl:
+                check = subprocess.run(["bash", "-lc", probe_cmd], check=False)
+            else:
+                check = subprocess.run(["wsl", "bash", "-lc", probe_cmd], check=False)
             exists = check.returncode == 0
         else:
             exists = Path(item).exists()
@@ -480,16 +491,33 @@ def run_formal_algorithm(
     if runtime_config:
         runtime_config = Path(runtime_config)
         clean_overrides = {key: value for key, value in (case_overrides or {}).items() if value not in {None, ""}}
+        core_overrides = {
+            "imupath": clean_overrides.get("imu_source_override"),
+            "gnsspath": clean_overrides.get("gnss_input_override"),
+            "outputpath": repo_to_wsl(output_dir),
+            "fgo_feedback_path": clean_overrides.get("feedback_input_override"),
+        }
+        clean_core_overrides = {key: value for key, value in core_overrides.items() if value not in {None, ""}}
+        effective_config = output_dir / "config" / "runtime_config.yaml"
+        effective_config.parent.mkdir(parents=True, exist_ok=True)
+        if runtime_config.exists():
+            effective_config.write_text(runtime_config.read_text(encoding="utf-8", errors="ignore"), encoding="utf-8")
+        else:
+            effective_config.write_text("", encoding="utf-8")
+        append_case_level_overrides(effective_config, clean_core_overrides)
+        append_case_level_overrides(effective_config, clean_overrides)
         config_info = {
             "algorithm": algorithm,
-            "config_path": str(runtime_config),
-            "config_path_wsl": repo_to_wsl(runtime_config),
-            "base_config_path": None,
+            "config_path": str(effective_config),
+            "config_path_wsl": repo_to_wsl(effective_config),
+            "base_config_path": str(runtime_config),
             "missing_inputs": [],
             "case_overrides": clean_overrides,
+            "core_config_overrides": clean_core_overrides,
             "trace_solver_input": False,
             "final_v23_output_solver_input": False,
             "case_level_runtime_config": True,
+            "source_runtime_config_copied": True,
         }
     else:
         config_info = write_algorithm_config(workspace_root, algorithm, output_dir / "config" / "runtime_config.yaml", output_dir)
@@ -559,8 +587,9 @@ def run_formal_algorithm(
             "runner_probe": probe,
             "command": command_record,
         }
+    shell_argv = ["bash", "-lc", shlex.join(command)] if running_inside_wsl() else ["wsl", "bash", "-lc", shlex.join(command)]
     completed = subprocess.run(
-        ["wsl", "bash", "-lc", shlex.join(command)],
+        shell_argv,
         check=False,
         capture_output=True,
         text=True,
