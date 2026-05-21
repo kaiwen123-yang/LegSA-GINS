@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+"""Audit N9B1G2 selected-feedback command JSON sync outputs."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from legsa_gins.reporting.by2_n9b1g2_selected_feedback_command_json_sync_fix import (  # noqa: E402
+    default_n9b1g2_runtime_root,
+    validate_n9b1g2_result,
+)
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--runtime-root", "--output-dir", default=None)
+    return parser.parse_args()
+
+
+def _load_json(path: Path, default):
+    if not path.exists():
+        return default
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def _load_rows(path: Path) -> list[dict]:
+    data = _load_json(path, [])
+    rows = data.get("rows", data) if isinstance(data, dict) else data
+    return rows if isinstance(rows, list) else []
+
+
+def main() -> int:
+    args = parse_args()
+    runtime_root = Path(args.runtime_root) if args.runtime_root else default_n9b1g2_runtime_root(ROOT)
+    command_rows = _load_rows(runtime_root / "matrix" / "N9B1G2_N9B1D_READY_COMMAND_MATRIX.json")
+    sync_rows = _load_rows(runtime_root / "matrix" / "N9B1G2_COMMAND_JSON_SYNC_MATRIX.json")
+    dryrun_rows = _load_rows(runtime_root / "matrix" / "N9B1G2_WSL_DRYRUN_COMMANDS.json")
+    safety_report = _load_json(runtime_root / "reports" / "N9B1G2_FEEDBACK_EVAL_NAV_SAFETY_AUDIT_REPORT.json", {})
+    validation = validate_n9b1g2_result(
+        ROOT,
+        runtime_root,
+        command_rows,
+        sync_rows,
+        dryrun_rows,
+        safety_report,
+        runtime_written=True,
+    )
+    print("audit_n9b1g2_selected_feedback_command_json_sync_fix", validation["status"])
+    print("runtime_root:", runtime_root)
+    print("active_command_rows:", validation["active_command_rows"])
+    print("command_json_sync_rows:", validation["command_json_sync_rows"])
+    print("wsl_dryrun_rows:", validation["wsl_dryrun_rows"])
+    print("feedback_eval_nav_safety_status:", validation["feedback_eval_nav_safety_status"])
+    if validation["issues"]:
+        print("issues:")
+        for issue in validation["issues"]:
+            print("-", issue)
+    return 0 if validation["status"] == "pass" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
