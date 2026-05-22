@@ -31,7 +31,7 @@ Allowed:
 
 Not allowed:
 
-- `receiver_velocity.png` when velocity columns are absent.
+- raw GNSS baseline claim for `single_antenna_gnss1_status_KF_GINS`; that baseline is GNSS1-status, not raw GNSS.
 - estimate substitution.
 
 ## Trace Reference
@@ -49,6 +49,7 @@ Not allowed:
 
 - solver input.
 - tuning parameters, gates, weights, covariance, or feedback.
+- EVAL_NAV feedback corrections.
 
 ## Fixposition Receiver IMU
 
@@ -99,6 +100,19 @@ NAV, STD, EVAL_NAV, summary files, and RUN_MANIFEST records are the core algorit
 - forbidden/substitution risk.
 
 None of these runtime outputs are committable by default.
+
+Final-only metrics rule: metrics must come from final algorithm output/evaluation files for the same case, not from intermediate source diagnostics or source observations.
+
+Selected-feedback same-case rule: `selected_feedback` requires feedback generated for the same degraded or clean case. Clean feedback cannot be reused for degraded cases.
+
+EVAL_NAV feedback generation uses state/estimate columns only and must not use trace/error feedback corrections.
+
+## Baseline Roles
+
+- `single_antenna_gnss1_status_KF_GINS`: GNSS1-status baseline, not raw GNSS.
+- `pure_INS_reference_initialized`: fixed/reference baseline.
+- `final_v23_dual_antenna_EKF`: reference/comparison only.
+- `true_no_feedback_FGO`: diagnostic unless full comparable output exists.
 
 ## final_v23 / KF-GINS Reference
 

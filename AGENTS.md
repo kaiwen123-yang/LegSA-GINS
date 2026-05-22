@@ -1,4 +1,4 @@
-﻿# AGENTS.md  LegSA-GINS Multi-Agent Working Rules
+# AGENTS.md - LegSA-GINS Multi-Agent Working Rules
 
 ## 0. Purpose
 
@@ -6,7 +6,7 @@ This repository is used for the LegSA-GINS project: a legged-robot GNSS/INS fusi
 
 This file is the persistent project context for Codex multi-agent work. It must prevent repeated context loss, phase confusion, false plot completion, unsafe merges, unsupported claims, and accidental algorithm changes.
 
-The project should be developed with a supervised multi-agent workflow:
+The project uses a supervised multi-agent workflow:
 
 - supervisor
 - planner
@@ -16,115 +16,67 @@ The project should be developed with a supervised multi-agent workflow:
 
 The human user is the final decision maker for merge, tag, branch deletion, PR closure, and stage transitions.
 
----
+## 1. Required Multi-Agent Workflow
 
-## 1. Required multi-agent workflow
+### 1.1 Supervisor
 
-All future Codex work should use the following workflow.
+The supervisor coordinates the task, checks stage boundaries, spawns planner first, approves or rejects worker scope, spawns reviewer after worker finishes, and asks the human before any merge, tag, force push, PR closure, branch deletion, or stage transition.
 
-### 1.1 supervisor
+The supervisor must prevent phase confusion:
 
-The supervisor is the main coordinator.
+- N8K: BY2 formal ablation and ablation plot audit.
+- N8K2-N8K6: real plot materialization and plot audit repairs.
+- N9A: BY2 normal clean full plot audit.
+- N9B: BY2 full degradation matrix.
+- N9B1D4: current technical pilot source for deterministic degradation preparation.
+- N9B1E: current pilot visual/go-no-go source, passed with the C yaw caution.
+- N9B2A/N9B2A1: full-matrix preparation sources.
+- N9B2B: path lock stage; locks Windows plus WSL aliases and future by2-huitu output alias.
+- N9B2B1: documentation/context update after path lock.
+- N9B2C: batch0 smoke plan and optional execution precheck.
+- N9B2D: batch0 normal parity smoke.
+- N9B2E: batch1 deterministic execution after human approval.
+- N9C: degradation plotting and case review.
+- N9D: mathematical / evaluation / filter construction full-chain audit.
+- N9E: BY2 paper-level packaging.
 
-Responsibilities:
+### 1.2 Planner
 
-- Read the human task.
-- Check current stage and boundaries.
-- Spawn planner first.
-- Review planner output.
-- Approve or reject worker scope.
-- Spawn worker only after the scope is clear.
-- Spawn reviewer after worker finishes.
-- Summarize the final result.
-- Never self-merge, self-tag, force push, close PRs, or delete branches without explicit human approval.
+Planner is read-only. It inspects branch, PR, git status, reports, docs, runtime roots, and risks; creates an execution plan; identifies required files, expected outputs, blockers, validation commands, and forbidden actions; and never edits files, creates runtime outputs, or commits.
 
-The supervisor must prevent phase confusion.
+### 1.3 Worker
 
-Important examples:
+Worker executes only the supervisor-approved plan. It edits only approved tracked files, creates runtime reports only in approved runtime folders, never commits raw data or generated artifacts, never changes algorithms unless explicitly approved, never tunes using trace/final_v23, and reports exactly what was done.
 
-- N8K is BY2 formal ablation and ablation plot audit.
-- N8K2 fixes real plot materialization for N8K placeholder plots.
-- N9A is BY2 full plot audit.
-- N9B is the BY2 full degradation matrix.
-- N9C is degradation plotting and case review.
-- N9D is mathematical / evaluation / filter construction full-chain audit.
-- N9E is BY2 paper-level packaging.
+### 1.4 Reviewer
 
-### 1.2 planner
+Reviewer is read-only. It reviews git diff, checks hard boundaries, checks runtime artifacts were not committed, checks no local path leaks exist, checks claim boundaries, verifies reports match actual outputs, and never edits files.
 
-Planner is read-only.
+### 1.5 Human
 
-Responsibilities:
+The human user decides whether to merge, tag, close PRs, delete branches, proceed to the next stage, or authorize N9B2 execution. No agent may bypass the human final decision.
 
-- Inspect branch, PR, git status, reports, docs, runtime roots, and risks.
-- Create an execution plan.
-- Identify required files, expected outputs, blockers, validation commands, and forbidden actions.
-- Never edit files.
-- Never create runtime outputs.
-- Never commit.
-
-### 1.3 worker
-
-Worker executes only the supervisor-approved plan.
-
-Responsibilities:
-
-- Edit only approved tracked files.
-- Generate runtime outputs only in approved runtime folders.
-- Never commit raw data, figures, NAV/STD/EVAL, RUN_MANIFEST, FGO tables, or generated runtime artifacts.
-- Never change algorithms unless the task explicitly permits it.
-- Never tune using trace/final_v23.
-- Report exactly what was done.
-
-### 1.4 reviewer
-
-Reviewer is read-only.
-
-Responsibilities:
-
-- Review git diff.
-- Check hard boundaries.
-- Check runtime artifacts were not committed.
-- Check no local path leaks exist.
-- Check claim boundaries.
-- Check whether reports match actual outputs.
-- For plotting tasks, verify applicable=True plots are real data, not placeholders.
-- Never edit files.
-
-### 1.5 human
-
-The human user decides:
-
-- whether to merge;
-- whether to tag;
-- whether to close PRs;
-- whether to delete branches;
-- whether to proceed to the next stage.
-
-No agent may bypass human final decision.
-
----
-
-## 2. Global hard boundaries
+## 2. Global Hard Boundaries
 
 Unless explicitly requested by the human, never do the following:
 
-- Do not merge PR #21.
-- Do not close PR #21.
+- Do not merge PR #21 or PR #52.
+- Do not close PR #21 or PR #52.
 - Do not delete remote branches.
 - Do not force push.
-- Do not commit raw data.
-- Do not commit by2.txt.
+- Do not stage, commit, push, merge, tag, or create PRs from worker/reviewer roles.
+- Do not commit raw data or `by2.txt`.
 - Do not commit NAV / STD / EVAL_NAV / RUN_MANIFEST runtime outputs.
 - Do not commit generated figures.
-- Do not commit FGO_FEEDBACK_OBSERVATIONS.csv.
-- Do not commit FGO_SMOOTHED_NAV.csv.
-- Do not commit FGO_FACTOR_TABLE.csv.
+- Do not commit `FGO_FEEDBACK_OBSERVATIONS.csv`.
+- Do not commit `FGO_SMOOTHED_NAV.csv`.
+- Do not commit `FGO_FACTOR_TABLE.csv`.
 - Do not commit generated degradation CSV / summary / case review runtime files.
 - Do not write local absolute paths into tracked docs/config/scripts.
-- Do not modify <WSL_ALGO_REPO>.
-- Do not run git add / commit / checkout / reset / pull / push inside <WSL_ALGO_REPO>.
-- Do not compile reference/final_v23_repo itself.
+- Do not edit `docs/codex_context/DATA_PATHS.local.md` unless explicitly requested.
+- Do not modify `<WSL_ALGO_REPO>`.
+- Do not run git add / commit / checkout / reset / pull / push inside `<WSL_ALGO_REPO>`.
+- Do not compile reference/final_v23 itself.
 - Do not use trace as solver input.
 - Do not use final_v23 output as solver input.
 - Do not tune using trace or final_v23.
@@ -136,462 +88,114 @@ Unless explicitly requested by the human, never do the following:
 - Do not treat Go2 position, velocity, contact, or yaw as truth.
 - Do not treat GNSS source observations as algorithm estimates.
 - Do not treat placeholder PNG generation as successful plotting.
+- Do not run N9B2 execution until explicit stage approval.
+- Do not run solvers, evaluators, random generation, degraded-input generation, degradation matrices, or figures during N9B2B1.
 
----
+## 3. Path And Output Policy
 
-## 3. Data source roles
+Tracked docs must use aliases only:
 
-These source roles are fixed.
+- `<WINDOWS_AUDIT_ROOT>`
+- `<WSL_AUDIT_ROOT>`
+- `<WSL_ALGO_REPO>`
+- `<BY2_N9B2_WINDOWS_ROOT>`
+- `<BY2_N9B2_WSL_ROOT>`
+- `<BY2_N9B2_FULL_MATRIX_ROOT>`
+- `<BY2_N9B2_DEFERRED_EXT4_ROOT>`
 
-### 3.1 trace
+Actual local absolute paths belong only in ignored `docs/codex_context/DATA_PATHS.local.md`.
 
-Role:
+N9B2B locks the Windows and WSL path aliases and the future by2-huitu output alias. Future BY2/N9B outputs must use the `BY2_N9B2_*` aliases. The old Chinese output root is read-only historical evidence, not the future output root. Native Ubuntu migration is deferred.
 
-- evaluation-only reference/truth.
+Runtime outputs remain untracked. The N9B2B1 runtime root is represented in tracked docs only by the alias `<BY2_N9B2_WINDOWS_ROOT>/N9B2B1_CONTEXT_UPDATE_AFTER_PATH_LOCK`.
 
-Never:
+## 4. Data Source Roles
 
-- solver input;
-- tuning source;
-- algorithm estimate.
+### 4.1 Trace
 
-### 3.2 gnss1 / gnss2 raw/status
+Role: evaluation-only reference/truth after alignment.
 
-Role:
+Never: solver input, tuning source, algorithm estimate, feedback correction source.
 
-- source observations;
-- GNSS observation quality;
-- yaw observation;
-- Raw Doppler source diagnostics.
+### 4.2 GNSS Raw And Status
 
-Never:
+Role: source observations, GNSS observation quality, yaw observation, Raw Doppler source diagnostics.
 
-- algorithm estimate;
-- trajectory estimate;
-- direct metric source.
+Never: algorithm estimate, trajectory estimate, direct metric source.
 
-### 3.3 by2.txt
+### 4.3 `by2.txt`
 
-Role:
+Role: Go2 body/high-level source data, Go2 IMU/body state, Go2 velocity/contact/foot/mode/gait diagnostic source.
 
-- Go2 body/high-level source data;
-- Go2 IMU/body state;
-- Go2 velocity, contact, foot, mode/gait diagnostic source.
+Never: truth or absolute pose reference.
 
-Never:
+### 4.4 Receiver IMU Data
 
-- truth;
-- absolute pose reference.
+Role: diagnostic source unless explicitly approved.
 
-### 3.4 receiver IMU data
+Never: replacement for Go2 body IMU without explicit review.
 
-Role:
+### 4.5 NAV / EVAL_NAV / STD / RUN_MANIFEST
 
-- diagnostic source unless explicitly approved.
+Role: algorithm outputs, evaluation chain, plot source for estimates/errors/metrics/comparisons.
 
-Never:
+Trajectory, error, and metric plots must use verified algorithm outputs, not source observations. Final-only metrics rule: reported metrics must come from final algorithm output/evaluation files for the case under review, not intermediate source diagnostics.
 
-- replacement for Go2 body IMU without explicit review.
+### 4.6 final_v23 Output
 
-### 3.5 NAV / EVAL_NAV / STD / RUN_MANIFEST
+Role: reference comparison / sanity check only.
 
-Role:
+Never: solver input, tuning source, hidden target, or performance-claim basis by itself.
 
-- algorithm outputs;
-- evaluation chain;
-- plot source for estimates, errors, metrics, and comparisons.
+## 5. Runner Rules
 
-Trajectory/error/metric plots must use verified algorithm outputs, not source observations.
+- Formal execution must use `legsa_v23_port_core_demo` plus `by2_algorithm_runner`.
+- `legsa_gins --run-filter-csv` is diagnostic only.
+- `selected_feedback` requires same-case feedback.
+- Clean feedback cannot be reused for degraded cases.
+- EVAL_NAV feedback generation uses state/estimate columns only.
+- EVAL_NAV feedback generation must not use trace/error feedback corrections.
+- No N9B2 execution is allowed until a later stage explicitly approves it.
 
-### 3.6 final_v23 output
+## 6. Baseline Roles
 
-Role:
+- `single_antenna_gnss1_status_KF_GINS`: GNSS1-status baseline, not raw GNSS.
+- `pure_INS_reference_initialized`: fixed/reference baseline.
+- `final_v23_dual_antenna_EKF`: reference/comparison only.
+- `true_no_feedback_FGO`: diagnostic unless full comparable output exists.
 
-- reference comparison / sanity check only.
+## 7. Matrix Cautions
 
-Never:
+- `B_gnss_downsample_2Hz` is invalid and superseded.
+- Ratio downsample cases `every2`, `every5`, and `every10` are the active downsample family.
+- `C_position_noise` has a yaw caution.
+- `H_dual_yaw_noise` has a single-seed caveat.
+- C and H require multi-seed treatment in N9B2.
+- D position spike multi-seed is recommended.
+- Superseded rows must never be used for active conclusions.
 
-- solver input;
-- tuning source.
+## 8. Current Route
 
----
+Current completed route:
 
-## 4. Current route
+- N9A normal clean completed.
+- N9B0, N9B0A, N9B0A1, N9B0A2 completed.
+- N9B0B and N9B0C completed.
+- N9B1A and N9B1A1 completed.
+- N9B1C through N9B1G2 completed.
+- N9B1D through N9B1D4 completed.
+- N9B1E passed with C yaw caution.
+- N9B2A completed.
+- N9B2A1 completed.
+- N9B2B completed.
+- Current stage: `N9B2B1_CONTEXT_UPDATE_AFTER_PATH_LOCK`.
+- Recommended next stage: `human_review_N9B2B1_then_N9B2C_batch0_smoke_plan`.
 
-The current route is:
+N9B2 full execution is not approved. N9B2 full execution may occur only after staged batch reviews and explicit human approval.
 
-N8J: feedback joint filter BY2 final validation
-N8K: BY2 paper-required formal ablation and ablation plot audit
-N8K2: real plot materialization fix for N8K placeholder plots
-N9A: BY2 full plot audit
-N9B: BY2 full degradation matrix
-N9C: BY2 degradation plot and case review
-N9D: mathematical / output evaluation / filter construction full-chain audit
-N9E: BY2 paper-level result packaging
-N10A: BY3 same-scene replication
-N10B: indoor-outdoor transition
-N10C: poor-GNSS environment
+## 9. Claim Boundary
 
-Do not mix these stages.
-
-Important:
-
-- N8K is formal ablation and ablation plot audit.
-- N8K is not degradation.
-- N9B is degradation.
-- N8K2 is required before N9A because N8K plots were found to include placeholder-like applicable figures.
-
----
-
-## 5. Stage history summary
-
-### N0
-
-Original final_v23 / KF-GINS-style thesis mainline was the source-backed algorithm base.
-
-Key facts:
-
-- final_v23 is the strong EKF baseline.
-- It uses GNSS position, velocity, dual-yaw, IMU propagation, and error-state feedback.
-- It is reference lineage, not something to silently modify.
-- Its outputs may be used for comparison only, not as solver input.
-
-### N1
-
-LegSA-GINS repository and engineering boundaries were established.
-
-Key facts:
-
-- The repo must track phase logs, claim boundaries, audits, and reproducibility.
-- PR #21 remains an old open/unmerged branch and must not be touched.
-
-### N2
-
-BY2 data source roles were clarified.
-
-Key facts:
-
-- trace is evaluation-only.
-- gnss1/gnss2 are source observations.
-- by2.txt is Go2 body/high-level data.
-- NAV/EVAL/STD/RUN_MANIFEST are algorithm outputs.
-
-### N3
-
-Audit framework and source-lineage checks were prepared.
-
-Key facts:
-
-- The project must not rely on source/proxy availability bars as algorithm output.
-- Plotting must be gated by real algorithm output and frame/time alignment.
-
-### N4
-
-Source-backed EKF port and final_v23 parity were established.
-
-### N5
-
-Raw Doppler EKF factor was activated and audited.
-
-### N6
-
-Source-aware LSIM/OIM weighting was activated as an R-scaling layer.
-
-### N7
-
-Go2 roll/pitch and horizontal velocity were developed into a Go2 proprioceptive joint observation factor.
-
-### N8A-N8E
-
-No-feedback FGO backend was built, yaw wrap was fixed, Raw Doppler FGO activation was fixed, and formal engineering ablation with caveats was produced.
-
-### N8F-N8F1
-
-Legged candidate FGO factors were formally activated and visually validated:
-
-- contact-aware weighting;
-- foot kinematic velocity;
-- yaw-rate between factor;
-- relative odometry between factor.
-
-### N8G-N8J
-
-FGO feedback EKF joint filter was implemented and validated.
-
-Selected policy:
-
-- horizontal_velocity_attitude_feedback;
-- combined_conservative_gate;
-- inflation_auto_from_residual_proxy;
-- 5s window / 1s stride;
-- primary position feedback disabled.
-
-N8J decision:
-
-- feedback_joint_filter_ready_for_BY2_packaging.
-
-### N8K
-
-BY2 formal ablation and ablation plot audit was run.
-
-Reported:
-
-- 30 variants complete;
-- 2850 PNGs generated;
-- categories 01-14 covered.
-
-Manual inspection found a serious issue:
-
-- Some applicable=True figures were placeholder-like templates rather than real plots.
-
-### N8K2
-
-Immediate next stage.
-
-Goal:
-
-- Fix N8K placeholder-like applicable plots by materializing real plots from real algorithm outputs.
-
----
-
-## 6. Current blocker
-
-N8K generated many PNGs and reported 01-14 coverage, but manual inspection found that some applicable=True figures are not real plots.
-
-Problem examples:
-
-- baseline_vs_variant_trajectory.png
-- local_trajectory_overlay.png
-- start_end_marker_trajectory.png
-- trajectory_delta_vector.png
-- zoomed_trajectory_key_region.png
-
-Observed issue:
-
-- Figures are nearly identical.
-- Only figure names/titles change.
-- They contain metadata text and a small template line.
-- They do not plot real baseline, variant, reference, start/end markers, delta vectors, or zoomed regions.
-
-Required fix:
-
-- N8K2 must materialize real plots from real algorithm outputs.
-- PR #48 must not be merged before N8K2 passes.
-- N9A must not start before N8K2 passes.
-
----
-
-## 7. Plot taxonomy
-
-All BY2 / degradation / BY3 / indoor-outdoor / poor-GNSS figures must follow the 01-14 taxonomy.
-
-### 01_trajectory
-
-- local trajectory ENU
-- baseline vs selected feedback
-- EKF only vs no-feedback FGO vs feedback EKF
-- truth/reference/estimate overlay
-- start-end marker
-- zoomed key region
-- trajectory delta vector
-- global compare figure
-
-### 02_position_errors
-
-- North/East/Up error
-- horizontal error
-- RMSE / P95 / max
-- CDF / ECDF
-- outage shaded error if applicable
-- recovery time if applicable
-
-### 03_velocity
-
-- vN/vE/vD estimate
-- receiver velocity
-- Raw Doppler velocity
-- Go2 horizontal velocity
-- foot kinematic velocity
-- residuals
-- source deltas
-- Doppler residual
-
-### 04_attitude
-
-- roll/pitch/yaw estimate
-- yaw observation/reference
-- yaw residual
-- yaw wrap check
-- yaw-rate between residual
-- attitude RMSE/P95
-
-### 05_consistency
-
-- error + 3sigma
-- innovation/residual
-- whitened residual
-- NIS proxy
-- coverage ratio
-- covariance diagonal
-- feedback covariance inflation
-
-### 06_observation_quality
-
-- GNSS position/velocity observations
-- GNSS std
-- yaw observation/yaw_std
-- Raw Doppler quality
-- Go2 contact weight
-- foot kinematic quality
-- feedback accept/reject
-- source-aware R scale
-
-### 07_compare
-
-- baseline EKF
-- Raw Doppler EKF
-- source-aware EKF
-- Go2 joint EKF
-- no-feedback FGO
-- feedback EKF
-- reject-all sanity
-- selected feedback
-
-### 08_summary_panels
-
-- horizontal RMSE heatmap
-- yaw RMSE heatmap
-- up RMSE heatmap
-- pass/fail boundary
-- degradation strength curve
-- algorithm rank summary
-- contribution stack summary
-
-### 09_case_review
-
-- case summary
-- key metrics
-- worst segment
-- degradation input explanation
-- anomalies
-- pass/fail
-- recommended figures
-- conclusion suggestions
-
-### 10_fgo_factors
-
-- factor residual by type
-- whitened residual
-- factor contribution
-- factor rows
-- Jacobian nonzero
-- FGO cost
-- smoothness residual
-- Raw Doppler FGO residual
-- Go2 joint FGO residual
-- candidate factor residual
-
-### 11_feedback
-
-- feedback window timeline
-- accept/reject timeline
-- correction norm
-- covariance
-- gate threshold
-- reject reason
-- selected feedback vs baseline
-- reject-all sanity
-
-### 12_legged_factors
-
-- contact probability
-- slip risk
-- foot kinematic velocity
-- yaw-rate between residual
-- relative odometry residual
-- Go2 joint residual
-- contact-aware weight scale
-
-### 13_degradation_meta / 13_ablation_meta
-
-- degradation mask
-- degradation interval
-- injected noise
-- spike triggers
-- sampling drop points
-- std inflation
-- yaw degradation meta
-- active module list
-- variant configuration
-- factor enable/disable panel
-
-### 14_audit_sanity
-
-- row count
-- time monotonic
-- NaN/Inf check
-- input/output alignment
-- runtime manifest
-- no future data
-- no output substitution
-- path leak check
-
----
-
-## 8. Plot rules
-
-If applicable=True:
-
-- plot must use real data;
-- must have real rows;
-- must not be metadata-only;
-- must not be a repeated template with only title changed;
-- must not use fake zero lines;
-- must not use source/proxy availability as algorithm output;
-- must be blocked if real data is missing.
-
-If not_applicable=True:
-
-- placeholder panel is allowed;
-- reason must be documented.
-
----
-
-## 9. N9B degradation plan
-
-N9B will run the full BY2 degradation matrix.
-
-N8K2 and N9A must not run the degradation matrix.
-
-N9B degradation families include:
-
-- GNSS outage
-- sampling / timing degradation
-- GNSS position noise
-- position spikes/outliers
-- std inflation
-- receiver velocity degradation
-- Raw Doppler degradation
-- dual yaw degradation
-- Go2 attitude degradation
-- Go2 horizontal velocity degradation
-- contact probability degradation
-- foot kinematic degradation
-- yaw-rate and relative odometry degradation
-- combined degradation
-
-Randomized degradations use seeds 0..9 and must record:
-
-- seed
-- trigger count
-- mask count
-- effective observation count
-
----
-
-## 10. Claim boundary
-
-Allowed at the current stage:
+Allowed now:
 
 - BY2 FGO-feedback EKF joint filter engineering chain has been validated.
 - FGO feedback enters EKF as a controlled update.
@@ -600,38 +204,31 @@ Allowed at the current stage:
 - Raw Doppler FGO is active but low marginal value in clean BY2.
 - Go2 proprioceptive joint factor is active.
 - Legged candidate factors are activated in no-feedback FGO.
-- N8K formal ablation has runtime outputs, but plot materialization needs N8K2.
+- N9B pilot/preparation evidence exists through N9B2B, with cautions recorded above.
 
-Forbidden:
+Forbidden now:
 
-- outperform final_v23
-- paper performance improvement claim
-- Go2 truth claim
-- FGO replaces EKF
-- trace/final_v23 tuning
-- source observations as algorithm estimates
-- placeholder plots as real figures
-- degradation generalization before N9B/N10 evidence
+- paper performance improvement claim.
+- outperform final_v23 claim.
+- Go2 truth claim.
+- FGO replaces EKF claim.
+- trace/final_v23 tuning claim.
+- source observations as algorithm estimates.
+- placeholder plots as real figures.
+- degradation generalization before N9B/N10 evidence.
+- automatic PR #52 merge/tag authorization.
 
----
+## 10. N9B2B1 Decision Lock
 
-## 11. Immediate next stage
+N9B2B1 is documentation/context update only.
 
-The immediate next stage is:
+Expected decision if validation passes:
 
-N8K2_BY2_formal_ablation_real_plot_fix
-
-N8K2 must:
-
-- detect placeholder and duplicate-template plots;
-- load real algorithm outputs;
-- re-render applicable=True plots using real data;
-- keep documented placeholders only for not-applicable plots;
-- ensure applicable_placeholder_count = 0;
-- ensure duplicate_template_suspect_count = 0 or resolved;
-- ensure fake_zero_line_suspect_count = 0;
-- not run degradation matrix;
-- not change algorithms;
-- not tune feedback or FGO policies;
-- not make paper claims.
-
+```text
+status=N9B2B1_context_update_after_path_lock_complete
+ready_for_N9B2_preparation=true
+ready_for_N9B2_environment_smoke=true
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=human_review_N9B2B1_then_N9B2C_batch0_smoke_plan
+```

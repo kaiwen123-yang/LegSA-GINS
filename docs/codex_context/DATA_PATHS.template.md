@@ -8,7 +8,10 @@ Copy this template to `DATA_PATHS.local.md` for local machine use. Do not commit
 <WINDOWS_AUDIT_ROOT>=
 <WSL_AUDIT_ROOT>=
 <WSL_ALGO_REPO>=
-<BY2_PLOT_AUDIT_ROOT>=
+<BY2_N9B2_WINDOWS_ROOT>=
+<BY2_N9B2_WSL_ROOT>=
+<BY2_N9B2_FULL_MATRIX_ROOT>=
+<BY2_N9B2_DEFERRED_EXT4_ROOT>=
 ```
 
 ## BY2 Fixposition / GNSS Sources
@@ -51,4 +54,6 @@ Copy this template to `DATA_PATHS.local.md` for local machine use. Do not commit
 
 - Keep real absolute paths only in `DATA_PATHS.local.md`.
 - Use aliases in tracked docs and reports.
+- Runtime outputs remain untracked.
+- Future BY2/N9B outputs use the `BY2_N9B2_*` aliases.
 - Do not use local paths in claim text or committed scripts unless the user explicitly approves.

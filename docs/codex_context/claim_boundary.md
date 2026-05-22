@@ -10,19 +10,29 @@ LegSA-GINS claims must track what the audits actually prove.
 - Go2 proprioceptive joint factor covers roll/pitch and horizontal velocity when parseable source fields exist.
 - FGO feedback EKF achieved engineering closure on BY2 clean under the selected conservative policy.
 - N8K formal ablation plot audit was repaired through N8K2-N8K6 and merged.
-- N9A_R2 is incomplete/failure and needs a real-output/frame-alignment gate.
+- N9A normal clean completed.
+- N9B1D4 is the current technical pilot source.
+- N9B1E passed with the C yaw caution and is the current pilot visual/go-no-go source.
+- N9B2A/N9B2A1 are full-matrix preparation sources.
+- N9B2B completed path lock for Windows/WSL and future by2-huitu output aliases.
+- N9B2B1 may update context and recommend human review followed by N9B2C.
 
 ## Not Allowed Current Claims
 
-- Do not claim N9A plotting is complete.
-- Do not claim BY2_normal_clean has valid full 01-14 formal figures.
-- Do not claim N9B degradation results exist.
-- Do not claim performance improvement on BY2 clean beyond the limited evidence.
+- Do not claim N9B2 execution is approved.
+- Do not claim full N9B degradation results exist from N9B2B1.
+- Do not claim paper-level performance improvement.
 - Do not claim outperforming final_v23.
-- Do not claim Raw Doppler/FGO/Go2/feedback contribution from unaligned or metric-insane outputs.
-- Do not claim receiver velocity, Go2 velocity, contact probability, or feedback timelines when only availability bars or zero-line placeholders exist.
-- Do not claim trace or final_v23 were solver-free unless the current audit verifies it for the relevant output.
+- Do not claim Go2 position, velocity, contact, or yaw as truth.
+- Do not claim FGO replaces EKF.
+- Do not claim trace/final_v23 tuning.
+- Do not claim source observations are algorithm estimates.
+- Do not claim placeholder plots are real figures.
+- Do not claim clean feedback can be reused for degraded cases.
+- Do not claim `B_gnss_downsample_2Hz` is valid.
+- Do not use superseded rows for active conclusions.
+- Do not authorize PR #52 merge/tag without explicit human approval.
 
 ## Paper Boundary
 
-Paper-grade claims require source lineage, frame/time alignment, metric sanity, semantic sanity, and reviewer approval. N9A_R3 can only grant plot permission or identify missing/not-applicable figures; it cannot by itself justify broad performance claims.
+Paper-grade claims require source lineage, frame/time alignment, metric sanity, semantic sanity, same-case feedback validation for feedback cases, and reviewer approval across the relevant evidence. N9B2B1 is context-only and cannot justify broad performance claims.

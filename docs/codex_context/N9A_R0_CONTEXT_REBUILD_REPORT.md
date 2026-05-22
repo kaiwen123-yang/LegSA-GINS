@@ -1,5 +1,7 @@
 # N9A_R0 Context Rebuild Report
 
+Historical report only. This file records the old N9A_R0 documentation rebuild and must not be used as the current operational state after N9B2B1. Current state, readiness flags, path aliases, PR boundary, and next-stage guidance are recorded in `current_state.md`, `PROJECT_CONTEXT.md`, `PLANS.md`, and `N9B2B1_CONTEXT_UPDATE_REPORT.md`.
+
 ## Scope
 
 Rebuild multi-agent documentation/context only in the Windows audit workspace.

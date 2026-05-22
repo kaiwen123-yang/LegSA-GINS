@@ -16,13 +16,13 @@ Key boundaries:
 Built and audited the EKF backbone:
 
 - IMU mechanization.
-- State and covariance propagation.
+- state and covariance propagation.
 - GNSS position update.
-- Receiver velocity update where valid.
-- Dual yaw update.
-- State feedback.
+- receiver velocity update where valid.
+- dual yaw update.
+- state feedback.
 - NAV / STD / EVAL_NAV / RUN_MANIFEST outputs.
-- Provenance and no-trace/no-final_v23 input boundary checks.
+- provenance and no-trace/no-final_v23 input boundary checks.
 
 ## N5: Raw Doppler EKF Factor
 
@@ -98,25 +98,53 @@ Final state:
 - PR #48 merged.
 - Tag `N8K-v0.1-BY2-formal-ablation-plot-audit` exists.
 
-## N9A Initial/R1/R2 Failure Chain
+## N9A: BY2 Normal Clean
 
-Initial N9A incorrectly treated N8K formal ablation outputs as BY2_normal_clean and treated 30 formal variants as 30 normal cases.
+N9A completed the BY2 normal clean audit route after earlier failed attempts exposed output lineage, frame alignment, metric sanity, zero-line, feedback/contact, and yaw convention risks.
 
-N9A_R1 fixed source lineage but did not produce true algorithm NAV/STD/EVAL output validation.
+## N9B0-N9B0C: Degradation Groundwork
 
-N9A_R2 found eight algorithm series but still failed:
+N9B0, N9B0A, N9B0A1, N9B0A2, N9B0B, and N9B0C completed the initial degradation preparation route.
 
-- frame alignment not passed.
-- horizontal RMSE had abnormal scale.
-- velocity plots looked like zero lines.
-- feedback/contact timelines were availability bars.
-- yaw wrap/unit/convention remained confused.
-- multiple figures were treated as complete because PNG files existed.
+## N9B1A-N9B1G2: Pilot And Preparation Route
 
-## N9A_R0: Context Rebuild
+Completed:
 
-Current task. Rebuild multi-agent context and documentation only. No algorithm work, no generated figures, and no runtime artifacts. Documentation branch Git publication is a supervisor/human-final-decision action only, never a planner/worker/reviewer action.
+- N9B1A and N9B1A1.
+- N9B1C through N9B1G2.
+- N9B1D through N9B1D4.
 
-## Next: N9A_R3
+Current pilot sources:
 
-Run real output and frame alignment gate before any further formal plotting. N9A_R3 must keep `ready_for_N9B=false`.
+- N9B1D4 is the current technical pilot source.
+- N9B1E passed with C yaw caution and is the current pilot visual/go-no-go source.
+
+## N9B2A-N9B2B: Full-Matrix Preparation And Path Lock
+
+- N9B2A completed.
+- N9B2A1 completed.
+- N9B2A/N9B2A1 are full-matrix preparation sources.
+- N9B2B completed path lock.
+- N9B2B locks Windows plus WSL aliases and the future by2-huitu output alias.
+- Native Ubuntu migration is deferred.
+- Old Chinese output root is read-only historical evidence.
+- Future BY2/N9B outputs use `BY2_N9B2_*` aliases.
+
+## Current: N9B2B1
+
+`N9B2B1_CONTEXT_UPDATE_AFTER_PATH_LOCK` updates tracked docs/context and writes audit reports only. It does not authorize solver, evaluator, N9B2, random generation, degraded-input generation, degradation matrix execution, or figure generation.
+
+Readiness after pass:
+
+```text
+ready_for_N9B2_preparation=true
+ready_for_N9B2_environment_smoke=true
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+```
+
+Recommended next stage:
+
+```text
+human_review_N9B2B1_then_N9B2C_batch0_smoke_plan
+```
