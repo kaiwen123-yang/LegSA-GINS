@@ -1,13 +1,16 @@
 # PATH_POLICY.md
 
-Tracked docs should use aliases instead of local absolute paths.
+Tracked docs must use aliases instead of local absolute paths.
 
 ## Core Aliases
 
-- `<WINDOWS_AUDIT_ROOT>`: Windows output audit workspace.
+- `<WINDOWS_AUDIT_ROOT>`: Windows audit workspace.
 - `<WSL_AUDIT_ROOT>`: WSL path to the Windows audit workspace.
 - `<WSL_ALGO_REPO>`: WSL algorithm source repository.
-- `<BY2_PLOT_AUDIT_ROOT>`: BY2 plot audit area under the audit workspace.
+- `<BY2_N9B2_WINDOWS_ROOT>`: locked Windows root for future BY2/N9B2 outputs and audit reports.
+- `<BY2_N9B2_WSL_ROOT>`: locked WSL view of the BY2/N9B2 output root.
+- `<BY2_N9B2_FULL_MATRIX_ROOT>`: locked full-matrix output root alias.
+- `<BY2_N9B2_DEFERRED_EXT4_ROOT>`: deferred native Ubuntu/ext4 output root alias.
 
 ## Data Aliases
 
@@ -18,8 +21,14 @@ Tracked docs should use aliases instead of local absolute paths.
 - `<FIXPOSITION_IMU_DATA>`, `<FIXPOSITION_IMU_BIASES>`, `<FIXPOSITION_IMU_TEMP>`: receiver IMU diagnostics.
 - `<GO2_BODY_IMU_HIGHLEVEL>`: fused Go2 body IMU / high-level source.
 
+## N9B2 Path Lock
+
+N9B2B locked Windows plus WSL aliases and the future by2-huitu output alias. Future BY2/N9B outputs must use `BY2_N9B2_*` aliases in tracked docs and reports.
+
+Native Ubuntu migration is deferred. The old Chinese output root is read-only historical evidence and must not become the active future output root.
+
 ## Local Path File
 
-`docs/codex_context/DATA_PATHS.local.md` may contain real local absolute paths for this machine. It is local-only by default and must not be staged or committed unless the user explicitly requests it.
+`docs/codex_context/DATA_PATHS.local.md` may contain real local absolute paths for this machine. It is local-only by default, ignored, and must not be staged or committed unless the user explicitly requests it.
 
 Use `docs/codex_context/DATA_PATHS.template.md` as an alias-only template.

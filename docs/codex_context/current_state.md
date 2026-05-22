@@ -1,35 +1,55 @@
-# Current State - N9A_R0 Context Rebuild
+# Current State - N9B2B1 Context Update After Path Lock
 
-This file records current verified state for the Windows audit workspace. It replaces stale prompt fragments as the operational source of truth for multi-agent runs.
+This file records the current verified operational state for the Windows audit workspace. It supersedes stale N9A_R0/R3/PR49/N9B-not-started text except where that text is explicitly historical.
 
 ## Verified Current State
 
-- Current branch for this context rebuild: `stage/N9A-R0-multi-agent-context-rebuild`.
-- PR #48: closed and merged on 2026-05-15.
-- PR #48 merge commit: `02f2aa30e8255bffd4a1f0a5781b868535eef6e1`.
-- N8K tag exists: `N8K-v0.1-BY2-formal-ablation-plot-audit`.
-- PR #21: open and unmerged. It is a historical evidence branch and must not be touched.
-- PR #49: open and unmerged.
-- PR #49 head: `stage/N9A-BY2-full-plot-audit`.
-- PR #49 latest verified head commit: `d5dd6ee5cce9f93827c93c27ae0a88c44a7a3c13`.
-- PR #49 status context: N9A_R2 incomplete/failure.
-- Current task stage: `N9A_R0_MULTI_AGENT_CONTEXT_REBUILD`.
-- Next recommended technical stage: `N9A_R3_REAL_OUTPUT_AND_FRAME_ALIGNMENT_GATE`.
-- N9B: not started.
-
-## Historical Prompt Text
-
-Some older user-provided context said PR #48 was still open and N8K2 was next. That was true for an earlier blocker period only. It must be preserved as history but not repeated as current state.
+- Current task stage: `N9B2B1_CONTEXT_UPDATE_AFTER_PATH_LOCK`.
+- N9A normal clean: completed.
+- N9B0/N9B0A/N9B0A1/N9B0A2: completed.
+- N9B0B/N9B0C: completed.
+- N9B1A/N9B1A1: completed.
+- N9B1C through N9B1G2: completed.
+- N9B1D through N9B1D4: completed.
+- N9B1D4 is the current technical pilot source.
+- N9B1E passed with C yaw caution and is the current pilot visual/go-no-go source.
+- N9B2A: completed.
+- N9B2A1: completed.
+- N9B2A/N9B2A1 are full-matrix preparation sources.
+- N9B2B: completed path lock.
+- N9B2B locks Windows plus WSL aliases and the future by2-huitu output alias.
+- Native Ubuntu migration: deferred.
+- Old Chinese output root: read-only historical evidence.
+- Future BY2/N9B outputs use the `BY2_N9B2_*` aliases.
+- Actual local paths belong only in ignored `docs/codex_context/DATA_PATHS.local.md`.
+- PR #52 remains open/unmerged unless the human explicitly approves otherwise.
 
 ## Current Decision
 
-No merge, no tag, no generated figures, no runtime artifacts, no WSL algorithm work, and no degradation matrix are allowed for N9A_R0.
+N9B2B1 is documentation/context update only. It does not authorize solver, evaluator, N9B2, random generation, degraded-input generation, degradation matrix execution, or figure generation.
 
-Worker and reviewer must not perform Git write operations. Supervisor may commit, push, or open a documentation-only PR for the N9A_R0 context branch only after an explicit user request for that exact operation.
+Worker and reviewer must not perform Git write operations. PR #52 must remain open/unmerged during this stage unless the human explicitly approves a later Git decision.
 
-The required state after this context rebuild remains:
+## Next Stage
 
 ```text
-ready_for_N9B=false
-next=N9A_R3_REAL_OUTPUT_AND_FRAME_ALIGNMENT_GATE
+recommended_next_stage=human_review_N9B2B1_then_N9B2C_batch0_smoke_plan
+```
+
+Planned sequence after human review:
+
+```text
+N9B2C_BATCH0_SMOKE_PLAN_AND_OPTIONAL_EXECUTION_PRECHECK
+N9B2D_BATCH0_NORMAL_PARITY_SMOKE
+N9B2E_BATCH1_DETERMINISTIC_EXECUTION after human approval
+N9B2 full execution only after staged batch reviews
+```
+
+## Readiness Flags
+
+```text
+ready_for_N9B2_preparation=true
+ready_for_N9B2_environment_smoke=true
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
 ```
