@@ -6,18 +6,29 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 
 ## Current Stage
 
-- Current documentation task: `N9B2B1_CONTEXT_UPDATE_AFTER_PATH_LOCK`.
-- Current technical pilot source: `N9B1D4`.
-- Current pilot visual/go-no-go source: `N9B1E`, passed with C yaw caution.
-- Full-matrix preparation sources: `N9B2A` and `N9B2A1`.
-- Current path-lock source: `N9B2B`.
-- Current recommended next stage: `human_review_N9B2B1_then_N9B2C_batch0_smoke_plan`.
+- Current context-update stage: `N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION`.
+- Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
+- Current metrics source: `<N9C0_CONSOLIDATED_PRECHECK_ROOT>/matrix/N9C0_ACTIVE_FINAL_ONLY_METRICS_TABLE`.
+- Active final-only metrics row count: 825.
+- Current recommended next stage: `human_review_N9C0A_then_N9C1_consolidated_figure_generation`.
+
+## Current Batch State
+
+- Batch 0 normal smoke complete.
+- Batch 1 deterministic complete.
+- Batch 2 position noise complete.
+- Batch 3 position spike complete.
+- Batch 4 yaw noise complete.
+- Batch 5 core module-disable complete; module-stress deferred.
+- Batch 6 selected mixed cases complete.
+- final_v23 external baseline complete and integrated.
+- No full monolithic N9B2 was run.
 
 ## Current Decision Flags
 
 ```text
-ready_for_N9B2_preparation=true
-ready_for_N9B2_environment_smoke=true
+ready_for_N9C1_consolidated_figure_generation=true
+ready_for_paper_claims=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 ```
@@ -29,8 +40,8 @@ ready_for_full_N9B_execution=false
 
 ## Current Technical Boundary
 
-N9B2B1 is docs/context update only. Do not run solvers, evaluators, N9B2, random generation, degraded-input generation, degradation matrices, or figures. Do not modify algorithm math, FGO factor math, feedback policy, final_v23, or `<WSL_ALGO_REPO>`.
+N9C0A is docs/context update only. Do not run solvers, official evaluators, N9B2, N9C1 figure generation, random generation, degraded-input generation, final paper figure generation, or paper-claim drafting. Do not modify algorithm math, FGO factor math, feedback policy, final_v23, KF-GINS-Baseline math, or `<WSL_ALGO_REPO>`.
 
 ## Path Boundary
 
-Tracked docs use aliases only. Actual local paths belong only in ignored `docs/codex_context/DATA_PATHS.local.md`.
+Tracked docs use aliases only. Actual local paths belong only in ignored `docs/codex_context/DATA_PATHS.local.md`. Runtime roots remain untracked.

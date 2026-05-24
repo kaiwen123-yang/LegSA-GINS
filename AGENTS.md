@@ -36,7 +36,16 @@ The supervisor must prevent phase confusion:
 - N9B2C: batch0 smoke plan and optional execution precheck.
 - N9B2D: batch0 normal parity smoke.
 - N9B2E: batch1 deterministic execution after human approval.
-- N9C: degradation plotting and case review.
+- N9B2F/N9B2F1: batch1 deterministic execution and review.
+- N9B2G through N9B2K1: batch2 position-noise review and batch3 position-spike pipeline.
+- N9B2L through N9B2M1: batch4 yaw-noise parameter lock, execution, and review.
+- N9B2N through N9B2Q1: batch5 core module-disable and batch6 mixed long-pipeline preparation.
+- N9B2R: final_v23 external baseline degradation control.
+- N9B2S: batch6 selected mixed case definition and parameter lock.
+- N9B2T0 through N9C0: batch6 mixed execution, review, and global staged consolidation precheck.
+- N9C0A: documentation/context update after global consolidation precheck.
+- N9C1: next planned consolidated figure generation stage; not yet run.
+- N9C: degradation plotting, case review, and consolidated figure package stages.
 - N9D: mathematical / evaluation / filter construction full-chain audit.
 - N9E: BY2 paper-level packaging.
 
@@ -88,8 +97,9 @@ Unless explicitly requested by the human, never do the following:
 - Do not treat Go2 position, velocity, contact, or yaw as truth.
 - Do not treat GNSS source observations as algorithm estimates.
 - Do not treat placeholder PNG generation as successful plotting.
-- Do not run N9B2 execution until explicit stage approval.
-- Do not run solvers, evaluators, random generation, degraded-input generation, degradation matrices, or figures during N9B2B1.
+- Do not run more N9B2 execution unless the human defines a new follow-up.
+- Do not run N9C1 figure generation until the human explicitly approves N9C1.
+- Do not run solvers, evaluators, random generation, degraded-input generation, degradation matrices, or figures during context-only stages such as N9C0A.
 
 ## 3. Path And Output Policy
 
@@ -102,12 +112,14 @@ Tracked docs must use aliases only:
 - `<BY2_N9B2_WSL_ROOT>`
 - `<BY2_N9B2_FULL_MATRIX_ROOT>`
 - `<BY2_N9B2_DEFERRED_EXT4_ROOT>`
+- `<N9C0_CONSOLIDATED_PRECHECK_ROOT>`
+- `<FINALV23_EXTERNAL_BASELINE_ROOT>`
 
 Actual local absolute paths belong only in ignored `docs/codex_context/DATA_PATHS.local.md`.
 
-N9B2B locks the Windows and WSL path aliases and the future by2-huitu output alias. Future BY2/N9B outputs must use the `BY2_N9B2_*` aliases. The old Chinese output root is read-only historical evidence, not the future output root. Native Ubuntu migration is deferred.
+N9B2B locks the Windows and WSL path aliases and the current BY2/N9 runtime alias root. Future BY2/N9 outputs must use the `BY2_N9B2_*` aliases. N9C0 consolidated precheck artifacts are represented by `<N9C0_CONSOLIDATED_PRECHECK_ROOT>`, under `<BY2_N9B2_FULL_MATRIX_ROOT>`. The old Chinese output root is read-only historical evidence, not the active output root. Native Ubuntu migration is deferred.
 
-Runtime outputs remain untracked. The N9B2B1 runtime root is represented in tracked docs only by the alias `<BY2_N9B2_WINDOWS_ROOT>/N9B2B1_CONTEXT_UPDATE_AFTER_PATH_LOCK`.
+Runtime outputs remain untracked. The N9C0A runtime root is represented in tracked docs only by the alias `<BY2_N9B2_WINDOWS_ROOT>/N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION`.
 
 ## 4. Data Source Roles
 
@@ -141,9 +153,11 @@ Role: algorithm outputs, evaluation chain, plot source for estimates/errors/metr
 
 Trajectory, error, and metric plots must use verified algorithm outputs, not source observations. Final-only metrics rule: reported metrics must come from final algorithm output/evaluation files for the case under review, not intermediate source diagnostics.
 
+Current active global metrics source after N9C0: `<N9C0_CONSOLIDATED_PRECHECK_ROOT>/matrix/N9C0_ACTIVE_FINAL_ONLY_METRICS_TABLE`. The N9C0 active final-only metrics table has 825 rows. Do not use superseded rows, `historical_nominal_none`, or source diagnostics for current claims.
+
 ### 4.6 final_v23 Output
 
-Role: reference comparison / sanity check only.
+Role: external reference comparison / sanity check only.
 
 Never: solver input, tuning source, hidden target, or performance-claim basis by itself.
 
@@ -155,13 +169,14 @@ Never: solver input, tuning source, hidden target, or performance-claim basis by
 - Clean feedback cannot be reused for degraded cases.
 - EVAL_NAV feedback generation uses state/estimate columns only.
 - EVAL_NAV feedback generation must not use trace/error feedback corrections.
-- No N9B2 execution is allowed until a later stage explicitly approves it.
+- No additional N9B2 execution is allowed unless a later stage explicitly approves it.
+- N9C1 is figure generation and package preparation only; it is not paper-claim authorization.
 
 ## 6. Baseline Roles
 
 - `single_antenna_gnss1_status_KF_GINS`: GNSS1-status baseline, not raw GNSS.
 - `pure_INS_reference_initialized`: fixed/reference baseline.
-- `final_v23_dual_antenna_EKF`: reference/comparison only.
+- `final_v23_dual_antenna_EKF`: `external_reference_baseline` only.
 - `true_no_feedback_FGO`: diagnostic unless full comparable output exists.
 
 ## 7. Matrix Cautions
@@ -188,10 +203,21 @@ Current completed route:
 - N9B2A completed.
 - N9B2A1 completed.
 - N9B2B completed.
-- Current stage: `N9B2B1_CONTEXT_UPDATE_AFTER_PATH_LOCK`.
-- Recommended next stage: `human_review_N9B2B1_then_N9B2C_batch0_smoke_plan`.
+- N9B2B1 completed.
+- Batch 0 normal smoke completed.
+- Batch 1 deterministic completed.
+- Batch 2 position noise completed.
+- Batch 3 position spike completed.
+- Batch 4 yaw noise completed.
+- Batch 5 core module-disable completed; module-stress remains deferred.
+- Batch 6 selected mixed cases completed.
+- final_v23 external baseline completed and integrated.
+- N9C0 global staged consolidation precheck completed.
+- Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
+- Current context-update stage: `N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION`.
+- Recommended next stage: `human_review_N9C0A_then_N9C1_consolidated_figure_generation`.
 
-N9B2 full execution is not approved. N9B2 full execution may occur only after staged batch reviews and explicit human approval.
+No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation is ready for human review, but it has not been run.
 
 ## 9. Claim Boundary
 
@@ -205,6 +231,9 @@ Allowed now:
 - Go2 proprioceptive joint factor is active.
 - Legged candidate factors are activated in no-feedback FGO.
 - N9B pilot/preparation evidence exists through N9B2B, with cautions recorded above.
+- N9B staged execution is complete through N9C0 global consolidated precheck.
+- N9C0 active final-only metrics table exists with 825 rows.
+- N9C1 consolidated figure generation readiness passed.
 
 Forbidden now:
 
@@ -215,20 +244,21 @@ Forbidden now:
 - trace/final_v23 tuning claim.
 - source observations as algorithm estimates.
 - placeholder plots as real figures.
-- degradation generalization before N9B/N10 evidence.
+- paper claims before N9C visual review and N9D claim-boundary review.
+- using superseded rows, `historical_nominal_none`, or `B_gnss_downsample_2Hz` for active conclusions.
 - automatic PR #52 merge/tag authorization.
 
-## 10. N9B2B1 Decision Lock
+## 10. N9C0A Decision Lock
 
-N9B2B1 is documentation/context update only.
+N9C0A is documentation/context update only.
 
 Expected decision if validation passes:
 
 ```text
-status=N9B2B1_context_update_after_path_lock_complete
-ready_for_N9B2_preparation=true
-ready_for_N9B2_environment_smoke=true
+status=N9C0A_context_update_after_global_consolidation_complete
+ready_for_N9C1_consolidated_figure_generation=true
+ready_for_paper_claims=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
-recommended_next_stage=human_review_N9B2B1_then_N9B2C_batch0_smoke_plan
+recommended_next_stage=human_review_N9C0A_then_N9C1_consolidated_figure_generation
 ```

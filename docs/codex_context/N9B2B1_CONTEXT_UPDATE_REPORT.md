@@ -1,6 +1,8 @@
 # N9B2B1 Context Update Report
 
-## Scope
+Historical report only. This file records the old N9B2B1 documentation/context update after N9B2B path lock. It is superseded by `N9C0_CURRENT_STATE.md`, `current_state.md`, `PROJECT_CONTEXT.md`, and `N9C0A_CONTEXT_UPDATE_REPORT.md`.
+
+## Historical Scope
 
 This tracked report records the N9B2B1 documentation/context update after N9B2B path lock.
 
@@ -22,15 +24,22 @@ Forbidden scope preserved:
 - no `DATA_PATHS.local.md` edits.
 - no git stage/commit/push/merge/tag.
 
-## Decision
+## Historical Decision
 
 ```text
 status=N9B2B1_context_update_after_path_lock_complete
-ready_for_N9B2_preparation=true
-ready_for_N9B2_environment_smoke=true
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
-recommended_next_stage=human_review_N9B2B1_then_N9B2C_batch0_smoke_plan
+```
+
+This historical decision is not the current next-stage recommendation. Current state after N9C0:
+
+```text
+ready_for_N9C1_consolidated_figure_generation=true
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=human_review_N9C0A_then_N9C1_consolidated_figure_generation
 ```
 
 ## Reviewer Focus

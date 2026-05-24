@@ -103,6 +103,10 @@ None of these runtime outputs are committable by default.
 
 Final-only metrics rule: metrics must come from final algorithm output/evaluation files for the same case, not from intermediate source diagnostics or source observations.
 
+Current active global metrics source after N9C0: `<N9C0_CONSOLIDATED_PRECHECK_ROOT>/matrix/N9C0_ACTIVE_FINAL_ONLY_METRICS_TABLE`.
+
+The N9C0 active final-only metrics table has 825 rows. It is the current global metric source for context and planning, but it is not paper-claim authorization.
+
 Selected-feedback same-case rule: `selected_feedback` requires feedback generated for the same degraded or clean case. Clean feedback cannot be reused for degraded cases.
 
 EVAL_NAV feedback generation uses state/estimate columns only and must not use trace/error feedback corrections.
@@ -111,7 +115,7 @@ EVAL_NAV feedback generation uses state/estimate columns only and must not use t
 
 - `single_antenna_gnss1_status_KF_GINS`: GNSS1-status baseline, not raw GNSS.
 - `pure_INS_reference_initialized`: fixed/reference baseline.
-- `final_v23_dual_antenna_EKF`: reference/comparison only.
+- `final_v23_dual_antenna_EKF`: `external_reference_baseline` only.
 - `true_no_feedback_FGO`: diagnostic unless full comparable output exists.
 
 ## final_v23 / KF-GINS Reference
@@ -128,3 +132,5 @@ Not allowed:
 - tuning source for gates, weights, covariance, or feedback.
 - hidden output substitution.
 - basis for outperforming or paper-performance claims without a later approved audit.
+
+The external final_v23 baseline is integrated into N9C0 for reference comparison only. It must not become LegSA solver input, tuning source, hidden target, or the sole basis for paper-facing claims.

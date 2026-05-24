@@ -39,26 +39,39 @@ Completed or accepted for current planning:
 - N9B2A1 completed.
 - N9B2A/N9B2A1 are the full-matrix preparation sources.
 - N9B2B completed and locked Windows plus WSL aliases and the future by2-huitu output alias.
-- Current stage: `N9B2B1_CONTEXT_UPDATE_AFTER_PATH_LOCK`.
+- N9B2B1 context update after path lock completed.
+- Batch 0 normal smoke completed.
+- Batch 1 deterministic completed.
+- Batch 2 position noise completed.
+- Batch 3 position spike completed.
+- Batch 4 yaw noise completed.
+- Batch 5 core module-disable completed; module-stress remains deferred.
+- Batch 6 selected mixed cases completed.
+- final_v23 external baseline completed and integrated.
+- N9C0 global staged consolidation precheck completed.
+- Current context-update stage: `N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION`.
 
 Immediate next stages:
 
-- `human_review_N9B2B1_then_N9B2C_batch0_smoke_plan`
-- `N9B2C_BATCH0_SMOKE_PLAN_AND_OPTIONAL_EXECUTION_PRECHECK`
-- `N9B2D_BATCH0_NORMAL_PARITY_SMOKE`
-- `N9B2E_BATCH1_DETERMINISTIC_EXECUTION` after human approval
-- N9B2 full execution only after staged batch reviews and explicit human approval
+- `human_review_N9C0A_then_N9C1_consolidated_figure_generation`
+- `N9C1_CONSOLIDATED_FIGURE_GENERATION`
+- `N9C2_FIGURE_VISUAL_REVIEW_AND_REPAIR`
+- `N9C3_CONSOLIDATED_CASE_REVIEW_AND_REPORT_PACKAGE`
+- `N9D_CLAIM_BOUNDARY_AND_PAPER_WRITING_READINESS_REVIEW`
+- Paper-facing claims only after N9D review and explicit human approval.
+
+Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 is consolidated figure generation and package preparation; it is not paper-claim authorization.
 
 ## 4. Readiness Flags
 
 ```text
-ready_for_N9B2_preparation=true
-ready_for_N9B2_environment_smoke=true
+ready_for_N9C1_consolidated_figure_generation=true
+ready_for_paper_claims=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 ```
 
-These flags do not authorize solver/evaluator/N9B2/random/degraded-input execution during N9B2B1.
+These flags do not authorize solver/evaluator/N9B2/random/degraded-input execution, paper claims, or N9C1 figure generation during N9C0A.
 
 ## 5. Path And Runtime Policy
 
@@ -77,6 +90,7 @@ Actual local absolute paths belong only in ignored `docs/codex_context/DATA_PATH
 N9B2B locks the Windows and WSL path aliases and the future by2-huitu output alias. Future BY2/N9B outputs must use the `BY2_N9B2_*` aliases. Native Ubuntu migration is deferred. The old Chinese output root is read-only historical evidence.
 
 Runtime outputs remain untracked. N9B2B1 runtime reports belong under `<BY2_N9B2_WINDOWS_ROOT>/N9B2B1_CONTEXT_UPDATE_AFTER_PATH_LOCK`.
+N9C0A runtime reports belong under `<BY2_N9B2_WINDOWS_ROOT>/N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION`. N9C0 consolidated precheck artifacts are represented by `<N9C0_CONSOLIDATED_PRECHECK_ROOT>` under `<BY2_N9B2_FULL_MATRIX_ROOT>`.
 
 ## 6. Runner And Evaluation Rules
 
@@ -87,13 +101,16 @@ Runtime outputs remain untracked. N9B2B1 runtime reports belong under `<BY2_N9B2
 - EVAL_NAV feedback generation uses state/estimate columns only.
 - EVAL_NAV feedback generation must not use trace/error feedback corrections.
 - Final-only metrics rule: metrics must come from final algorithm output/evaluation files for the same case.
-- N9B2 execution is forbidden until explicit stage approval.
+- Current active global metrics source after N9C0: `<N9C0_CONSOLIDATED_PRECHECK_ROOT>/matrix/N9C0_ACTIVE_FINAL_ONLY_METRICS_TABLE`.
+- The N9C0 active final-only metrics table has 825 rows.
+- Do not use superseded rows, `historical_nominal_none`, or `B_gnss_downsample_2Hz` for active conclusions.
+- Additional N9B2 execution is forbidden until explicit stage approval.
 
 ## 7. Baseline Roles
 
 - `single_antenna_gnss1_status_KF_GINS`: GNSS1-status baseline, not raw GNSS.
 - `pure_INS_reference_initialized`: fixed/reference baseline.
-- `final_v23_dual_antenna_EKF`: reference/comparison only.
+- `final_v23_dual_antenna_EKF`: `external_reference_baseline` only.
 - `true_no_feedback_FGO`: diagnostic unless full comparable output exists.
 
 ## 8. Matrix Cautions
@@ -118,6 +135,9 @@ Allowed now:
 - Go2 proprioceptive joint factor is active.
 - Legged candidate factors are activated in no-feedback FGO.
 - N9B pilot/preparation evidence exists through N9B2B, with the recorded cautions.
+- N9B staged execution is complete through N9C0 global consolidated precheck.
+- N9C0 active final-only metrics table exists with 825 rows.
+- N9C1 consolidated figure generation readiness passed.
 
 Forbidden now:
 
@@ -128,7 +148,8 @@ Forbidden now:
 - trace/final_v23 tuning claim.
 - source observations as algorithm estimates.
 - placeholder plots as real figures.
-- degradation generalization before full approved N9B/N10 evidence.
+- paper claims before N9C visual review and N9D claim-boundary review.
+- active conclusions from superseded rows, `historical_nominal_none`, or `B_gnss_downsample_2Hz`.
 - automatic PR #52 merge/tag authorization.
 
 ## 10. Multi-Agent Workflow
@@ -157,17 +178,17 @@ Every future plan must include:
 - Completion criteria.
 - Final report requirements.
 
-## 12. N9B2B1 Completion Criteria
+## 12. N9C0A Completion Criteria
 
-N9B2B1 is complete only when:
+N9C0A is complete only when:
 
-- Approved tracked context docs are updated away from stale N9A_R0/R3/PR49/N9B-not-started current-state text.
+- Approved tracked context docs are updated away from stale N8K/N9A/N9B2B1 current-state text.
 - No local absolute path leaks exist in tracked docs touched by the stage or core context docs.
 - `DATA_PATHS.local.md` remains ignored/local-only and is not staged.
 - Runtime reports, matrices, and summaries are created under the approved runtime root.
-- No solver/evaluator/N9B2/random/degraded-input/figure execution occurred.
-- `ready_for_N9B2_preparation=true`.
-- `ready_for_N9B2_environment_smoke=true`.
+- No solver/evaluator/N9B2/random/degraded-input/N9C1 figure execution occurred.
+- `ready_for_N9C1_consolidated_figure_generation=true`.
+- `ready_for_paper_claims=false`.
 - `ready_for_N9B2_execution=false`.
 - `ready_for_full_N9B_execution=false`.
-- Recommended next stage is `human_review_N9B2B1_then_N9B2C_batch0_smoke_plan`.
+- Recommended next stage is `human_review_N9C0A_then_N9C1_consolidated_figure_generation`.
