@@ -39,6 +39,17 @@ Allowed N3D readability statement:
 
 - N3D may add Chinese comments and readability documentation.
 
+Allowed N9C0 global consolidation statement:
+
+- N9B staged execution is complete through N9C0 global consolidated precheck.
+- N9C0 may be cited as the current consolidation source of truth for staged BY2 degradation evidence.
+- The N9C0 active final-only metrics table contains 825 rows.
+- Batch 6 selected mixed cases completed.
+- Batch 5 core module-disable completed while module-stress remains deferred.
+- final_v23 is integrated only as `external_reference_baseline`.
+- N9C1 consolidated figure generation readiness passed.
+- N9C0A may update context docs after N9C0, but it must not run N9C1 or make paper claims.
+
 Allowed N4 filter-core statement:
 
 - N4 may implement LegSA-GINS C++ filter core with receiver-native position, velocity, and heading updates.
@@ -357,6 +368,7 @@ The following can only be diagnostic unless future evidence is available:
 - FGO feedback;
 - BY3-only generalization;
 - reference-limited yaw boundary.
+- N9C0 global comparison classifications until N9C visual review and N9D claim-boundary review complete.
 
 ## Forbidden Phase-I Claims
 
@@ -377,6 +389,10 @@ Do not claim:
 - output-only correction;
 - trace-tuned performance;
 - metric passing by bad-epoch deletion.
+- N9C0 readiness as paper-claim authorization.
+- full monolithic N9B2 execution.
+- additional N9B2 execution without a later human-defined follow-up.
+- active conclusions from superseded rows, `historical_nominal_none`, or `B_gnss_downsample_2Hz`.
 - frame/evaluator utilities as a solved navigation algorithm.
 - C++ runtime skeleton as a validated navigation solver.
 - dry-run output as performance evidence.

@@ -15,12 +15,17 @@ LegSA-GINS claims must track what the audits actually prove.
 - N9B1E passed with the C yaw caution and is the current pilot visual/go-no-go source.
 - N9B2A/N9B2A1 are full-matrix preparation sources.
 - N9B2B completed path lock for Windows/WSL and future by2-huitu output aliases.
-- N9B2B1 may update context and recommend human review followed by N9B2C.
+- N9B2B1 completed context update after path lock.
+- N9B staged execution is complete through N9C0 global consolidated precheck.
+- N9C0 active final-only metrics table exists with 825 rows.
+- Batch 6 selected mixed cases completed.
+- final_v23 external baseline completed and is integrated as `external_reference_baseline`.
+- N9C1 consolidated figure generation readiness passed.
 
 ## Not Allowed Current Claims
 
-- Do not claim N9B2 execution is approved.
-- Do not claim full N9B degradation results exist from N9B2B1.
+- Do not claim additional N9B2 execution is approved unless a later human-defined follow-up authorizes it.
+- Do not claim full monolithic N9B2 was run.
 - Do not claim paper-level performance improvement.
 - Do not claim outperforming final_v23.
 - Do not claim Go2 position, velocity, contact, or yaw as truth.
@@ -31,8 +36,10 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not claim clean feedback can be reused for degraded cases.
 - Do not claim `B_gnss_downsample_2Hz` is valid.
 - Do not use superseded rows for active conclusions.
+- Do not use `historical_nominal_none` for current claims.
+- Do not treat N9C0 readiness for N9C1 as paper-claim authorization.
 - Do not authorize PR #52 merge/tag without explicit human approval.
 
 ## Paper Boundary
 
-Paper-grade claims require source lineage, frame/time alignment, metric sanity, semantic sanity, same-case feedback validation for feedback cases, and reviewer approval across the relevant evidence. N9B2B1 is context-only and cannot justify broad performance claims.
+Paper-grade claims require source lineage, frame/time alignment, metric sanity, semantic sanity, same-case feedback validation for feedback cases, N9C visual review, N9D claim-boundary review, and explicit human approval. N9C0A is context-only and cannot justify broad performance claims.

@@ -11,6 +11,8 @@ Tracked docs must use aliases instead of local absolute paths.
 - `<BY2_N9B2_WSL_ROOT>`: locked WSL view of the BY2/N9B2 output root.
 - `<BY2_N9B2_FULL_MATRIX_ROOT>`: locked full-matrix output root alias.
 - `<BY2_N9B2_DEFERRED_EXT4_ROOT>`: deferred native Ubuntu/ext4 output root alias.
+- `<N9C0_CONSOLIDATED_PRECHECK_ROOT>`: N9C0 consolidated precheck root under `<BY2_N9B2_FULL_MATRIX_ROOT>`.
+- `<FINALV23_EXTERNAL_BASELINE_ROOT>`: final_v23 external baseline runtime root under `<BY2_N9B2_FULL_MATRIX_ROOT>`.
 
 ## Data Aliases
 
@@ -23,7 +25,9 @@ Tracked docs must use aliases instead of local absolute paths.
 
 ## N9B2 Path Lock
 
-N9B2B locked Windows plus WSL aliases and the future by2-huitu output alias. Future BY2/N9B outputs must use `BY2_N9B2_*` aliases in tracked docs and reports.
+N9B2B locked Windows plus WSL aliases and the BY2/N9 runtime alias root. Future BY2/N9 outputs must use `BY2_N9B2_*` aliases in tracked docs and reports.
+
+N9C0 consolidated precheck artifacts are represented in tracked docs as `<N9C0_CONSOLIDATED_PRECHECK_ROOT>`, not as concrete local paths.
 
 Native Ubuntu migration is deferred. The old Chinese output root is read-only historical evidence and must not become the active future output root.
 

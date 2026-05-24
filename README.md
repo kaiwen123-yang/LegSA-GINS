@@ -66,9 +66,15 @@ N7B3 Go2 contact/velocity diagnostic activation.
 N7B4 literature-informed Go2 contact/velocity diagnostics.
 N7B5 Go2 velocity frame horizontal diagnostic.
 
-Current working phase:
+Current operational state:
 
-N8K final merge review rerun after N8K6.
+After `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
+
+Next planned stage:
+
+`N9C1_CONSOLIDATED_FIGURE_GENERATION`.
+
+The current operational state is maintained in `AGENTS.md`, `PLANS.md`, and `docs/codex_context/current_state.md`. N9C0 is a consolidation precheck and N9C1 readiness gate, not paper-claim authorization.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -203,8 +209,8 @@ N7B2 Go2 contact threshold review.
 N7B3 Go2 contact/velocity diagnostic activation.
 N7B4 literature-informed Go2 contact/velocity diagnostics.
 
-Current working phase:
-N8K final merge review rerun after N8K6.
+Current operational state:
+After `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`; next planned stage is `N9C1_CONSOLIDATED_FIGURE_GENERATION`.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,
