@@ -326,6 +326,12 @@ def _build_implementation_inventory(
             "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp",
             "src/legsa_gins/fgo_feedback/fgo_feedback_final_runner.py",
         ],
+        "LegSA_full_EKF": [
+            "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp",
+            "cpp/legsa_v23_port_core/src/factors/raw_doppler_factor.cpp",
+            "cpp/legsa_v23_port_core/src/factors/go2_weak_prior_loader.cpp",
+            "src/legsa_gins/fgo_feedback/fgo_feedback_final_runner.py",
+        ],
     }
     components = {
         "source_backed_EKF": ["GNSS position", "receiver velocity", "dual yaw", "INS propagation"],
@@ -334,6 +340,13 @@ def _build_implementation_inventory(
         "source_aware_EKF": ["Raw Doppler EKF", "source-aware LSIM/OIM R scaling"],
         "Go2_joint_EKF": ["source-aware EKF", "Go2 roll/pitch", "Go2 horizontal velocity", "joint observation"],
         "selected_feedback_EKF": ["source-backed EKF", "runtime-only selected FGO feedback observations"],
+        "LegSA_full_EKF": [
+            "Raw Doppler EKF",
+            "source-aware LSIM/OIM R scaling",
+            "Go2 roll/pitch and horizontal velocity",
+            "Go2 joint observation",
+            "same-case selected FGO feedback observations",
+        ],
     }
     for algorithm in FORMAL_ALGORITHMS:
         paths = source_paths[algorithm]
