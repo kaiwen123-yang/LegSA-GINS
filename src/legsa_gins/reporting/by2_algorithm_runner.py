@@ -26,6 +26,7 @@ FORMAL_ALGORITHMS = [
     "source_aware_EKF",
     "Go2_joint_EKF",
     "selected_feedback_EKF",
+    "LegSA_full_EKF",
 ]
 
 REPO_RELATIVE_REQUIRED_INPUTS = {
@@ -138,6 +139,16 @@ ALGORITHM_SPECS = {
             "raw_doppler": False,
             "source_aware": False,
             "go2_joint": False,
+            "feedback": True,
+        },
+    ),
+    "LegSA_full_EKF": AlgorithmRunnerSpec(
+        algorithm="LegSA_full_EKF",
+        ablation_variant="n9c0c_LegSA_full_EKF",
+        component_flags={
+            "raw_doppler": True,
+            "source_aware": True,
+            "go2_joint": True,
             "feedback": True,
         },
     ),
