@@ -68,13 +68,15 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current operational state:
 
-After `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
+After `N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
+
+N9E completed with a logging-blocked active nine-factor FGO/legged evidence decision: `complete_nine_factor_FGO_claim=false`.
 
 Next planned stage:
 
-`N9C1_CONSOLIDATED_FIGURE_GENERATION`.
+`N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN`.
 
-The current operational state is maintained in `AGENTS.md`, `PLANS.md`, and `docs/codex_context/current_state.md`. N9C0 is a consolidation precheck and N9C1 readiness gate, not paper-claim authorization.
+The current operational state is maintained in `AGENTS.md`, `PLANS.md`, and `docs/codex_context/current_state.md`. N9F is a design-materialization and context-sync stage. It concludes that current evidence requires a new active nine-factor FGO algorithm design; `LegSA_full_EKF` must not be relabeled as active nine-factor FGO.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -210,7 +212,7 @@ N7B3 Go2 contact/velocity diagnostic activation.
 N7B4 literature-informed Go2 contact/velocity diagnostics.
 
 Current operational state:
-After `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`; next planned stage is `N9C1_CONSOLIDATED_FIGURE_GENERATION`.
+After `N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`; next planned stage is `N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN`.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,

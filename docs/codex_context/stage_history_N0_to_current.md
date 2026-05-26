@@ -155,9 +155,9 @@ rows=825
 
 No full monolithic N9B2 was run. `B_gnss_downsample_2Hz` remains invalid and superseded.
 
-## Current: N9C0A
+## Historical N9C0A: Context Update After Global Consolidation
 
-`N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION` updates tracked docs/context and writes audit reports only. It does not authorize solver, evaluator, N9B2, random generation, degraded-input generation, N9C1 figure generation, or paper claims.
+`N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION` updated tracked docs/context and wrote audit reports only. It did not authorize solver, evaluator, N9B2, random generation, degraded-input generation, N9C1 figure generation, or paper claims. Its immediate next-stage recommendation is historical after the later N9E/N9F evidence review.
 
 Readiness after pass:
 
@@ -173,3 +173,32 @@ Recommended next stage:
 ```text
 human_review_N9C0A_then_N9C1_consolidated_figure_generation
 ```
+
+## N9E: Active Nine-Factor FGO/Legged Logger Review
+
+N9E reviewed active nine-factor FGO and legged logger evidence after the N9C figure/evidence repair route. It completed with a blocked-logger decision:
+
+```text
+N9E_logging_blocked_report_and_obsidian_sync_complete
+complete_nine_factor_FGO_claim=false
+ready_for_paper_claims=false
+```
+
+N9E did not authorize relabeling `LegSA_full_EKF` as active nine-factor FGO. It found aggregate/provider/candidate/missing evidence classes that require a new reviewed algorithm design before complete active evidence claims.
+
+## N9F0_TO_N9F2: Active Nine-Factor FGO Legged Design Materialization
+
+N9F0_TO_N9F2 reviewed N9E, N9C1F, N9C0D, and code-context evidence for active nine-factor FGO claims. The stage produced runtime-only design matrices and an export-clean design package.
+
+Decision:
+
+```text
+status=N9F_legsa_9f_design_package_complete
+ready_for_implementation_review=true
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN
+```
+
+N9F did not run solvers, evaluators, degradation generation, random generation, representative active-nine-factor runs, or figure generation. It did not modify algorithm source, math, or config wiring. The central conclusion is that `LegSA_full_EKF` must not be relabeled as active nine-factor FGO; current evidence requires a new active nine-factor FGO algorithm design and implementation review before representative runs.

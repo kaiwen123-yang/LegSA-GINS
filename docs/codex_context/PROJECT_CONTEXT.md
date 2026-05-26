@@ -6,11 +6,14 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 
 ## Current Stage
 
-- Current context-update stage: `N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION`.
+- Current design/context stage: `N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
+- Current active nine-factor FGO design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
+- Current export-clean design package: `<BY2_N9B2_FULL_MATRIX_ROOT>/N9F_EXPORT_CLEAN_DESIGN_PACKAGE`.
 - Current metrics source: `<N9C0_CONSOLIDATED_PRECHECK_ROOT>/matrix/N9C0_ACTIVE_FINAL_ONLY_METRICS_TABLE`.
 - Active final-only metrics row count: 825.
-- Current recommended next stage: `human_review_N9C0A_then_N9C1_consolidated_figure_generation`.
+- N9E completed with a logging-blocked decision and `complete_nine_factor_FGO_claim=false`.
+- Current recommended next stage: `N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN`.
 
 ## Current Batch State
 
@@ -27,6 +30,7 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 ## Current Decision Flags
 
 ```text
+ready_for_implementation_review=true
 ready_for_N9C1_consolidated_figure_generation=true
 ready_for_paper_claims=false
 ready_for_N9B2_execution=false
@@ -40,7 +44,7 @@ ready_for_full_N9B_execution=false
 
 ## Current Technical Boundary
 
-N9C0A is docs/context update only. Do not run solvers, official evaluators, N9B2, N9C1 figure generation, random generation, degraded-input generation, final paper figure generation, or paper-claim drafting. Do not modify algorithm math, FGO factor math, feedback policy, final_v23, KF-GINS-Baseline math, or `<WSL_ALGO_REPO>`.
+N9F0_TO_N9F2 is design/context sync only. Do not run solvers, official evaluators, N9B2, representative active-nine-factor FGO runs, N9C1 figure generation, random generation, degraded-input generation, final paper figure generation, or paper-claim drafting. Do not modify algorithm math, FGO factor math, feedback policy, final_v23, KF-GINS-Baseline math, or `<WSL_ALGO_REPO>`. Do not relabel `LegSA_full_EKF` as active nine-factor FGO.
 
 ## Path Boundary
 

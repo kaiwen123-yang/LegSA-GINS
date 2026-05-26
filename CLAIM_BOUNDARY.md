@@ -50,6 +50,21 @@ Allowed N9C0 global consolidation statement:
 - N9C1 consolidated figure generation readiness passed.
 - N9C0A may update context docs after N9C0, but it must not run N9C1 or make paper claims.
 
+Allowed N9E logging-blocked statement:
+
+- N9E may state that active nine-factor FGO/legged logger review completed.
+- N9E may state that current `LegSA_full_EKF` lacks accepted row-level active FGO residual/cost evidence for all nine factors.
+- N9E must keep `complete_nine_factor_FGO_claim=false` and `ready_for_paper_claims=false`.
+
+Allowed N9F design materialization statement:
+
+- N9F may state that the active nine-factor FGO design package is complete.
+- N9F may state that current evidence requires a new active nine-factor FGO algorithm design before representative runs.
+- N9F may state that current `LegSA_full_EKF` evidence is provider/update-level or candidate/no-feedback diagnostic evidence, not accepted current active nine-factor FGO residual/cost evidence for all nine factors.
+- N9F may create export-clean design material under `<BY2_N9B2_FULL_MATRIX_ROOT>/N9F_EXPORT_CLEAN_DESIGN_PACKAGE`.
+- N9F may set `ready_for_implementation_review=true`.
+- N9F must keep `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
+
 Allowed N4 filter-core statement:
 
 - N4 may implement LegSA-GINS C++ filter core with receiver-native position, velocity, and heading updates.
@@ -390,6 +405,11 @@ Do not claim:
 - trace-tuned performance;
 - metric passing by bad-epoch deletion.
 - N9C0 readiness as paper-claim authorization.
+- N9F design readiness as paper-claim authorization.
+- Relabeling `LegSA_full_EKF` as active nine-factor FGO.
+- Treating provider/update counts as active FGO residual/cost evidence.
+- Treating historical candidate no-feedback rows as current active `LegSA_full_EKF` nine-factor evidence.
+- Representative active-nine-factor FGO runs before human-approved implementation review.
 - full monolithic N9B2 execution.
 - additional N9B2 execution without a later human-defined follow-up.
 - active conclusions from superseded rows, `historical_nominal_none`, or `B_gnss_downsample_2Hz`.

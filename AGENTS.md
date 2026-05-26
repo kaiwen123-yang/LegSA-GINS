@@ -48,6 +48,7 @@ The supervisor must prevent phase confusion:
 - N9C: degradation plotting, case review, and consolidated figure package stages.
 - N9D: mathematical / evaluation / filter construction full-chain audit.
 - N9E: BY2 paper-level packaging.
+- N9F0_TO_N9F2: active nine-factor FGO legged design materialization and context sync; design/package stage only, no representative runs.
 
 ### 1.2 Planner
 
@@ -213,11 +214,13 @@ Current completed route:
 - Batch 6 selected mixed cases completed.
 - final_v23 external baseline completed and integrated.
 - N9C0 global staged consolidation precheck completed.
+- N9E active nine-factor FGO/legged logger review completed with the logging-blocked decision.
+- N9E decision: `complete_nine_factor_FGO_claim=false`; current `LegSA_full_EKF` lacks accepted row-level active FGO residual/cost evidence for all nine factors.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
-- Current context-update stage: `N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION`.
-- Recommended next stage: `human_review_N9C0A_then_N9C1_consolidated_figure_generation`.
+- Current design/context stage: `N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
+- Recommended next stage: `N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN`.
 
-No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation is ready for human review, but it has not been run.
+No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
 
 ## 9. Claim Boundary
 
@@ -234,6 +237,9 @@ Allowed now:
 - N9B staged execution is complete through N9C0 global consolidated precheck.
 - N9C0 active final-only metrics table exists with 825 rows.
 - N9C1 consolidated figure generation readiness passed.
+- N9E may be cited only as a logging-blocked evidence review and Obsidian sync; it does not support a complete active nine-factor FGO claim.
+- N9F design package is complete and concludes that current evidence requires a new active nine-factor FGO algorithm design.
+- `LegSA_full_EKF` is not accepted as active nine-factor FGO and must not be relabeled as such.
 
 Forbidden now:
 
@@ -247,10 +253,12 @@ Forbidden now:
 - paper claims before N9C visual review and N9D claim-boundary review.
 - using superseded rows, `historical_nominal_none`, or `B_gnss_downsample_2Hz` for active conclusions.
 - automatic PR #52 merge/tag authorization.
+- representative active nine-factor FGO runs before N9F implementation review.
+- treating provider/update counts or historical candidate no-feedback rows as current active nine-factor FGO residual/cost evidence.
 
-## 10. N9C0A Decision Lock
+## 10. Historical N9C0A Decision Lock
 
-N9C0A is documentation/context update only.
+N9C0A was documentation/context update only. This historical lock remains for provenance and does not supersede the current N9F decision lock.
 
 Expected decision if validation passes:
 
@@ -261,4 +269,19 @@ ready_for_paper_claims=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 recommended_next_stage=human_review_N9C0A_then_N9C1_consolidated_figure_generation
+```
+
+## 11. N9F Decision Lock
+
+N9F0_TO_N9F2 is design materialization and context sync only. It does not authorize solver execution, evaluator execution, degradation generation, figure generation, representative active-nine-factor runs, paper claims, or relabeling `LegSA_full_EKF` as active nine-factor FGO.
+
+Expected decision if validation passes:
+
+```text
+status=N9F_legsa_9f_design_package_complete
+ready_for_implementation_review=true
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN
 ```
