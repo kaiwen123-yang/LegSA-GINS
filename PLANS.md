@@ -49,12 +49,16 @@ Completed or accepted for current planning:
 - Batch 6 selected mixed cases completed.
 - final_v23 external baseline completed and integrated.
 - N9C0 global staged consolidation precheck completed.
-- Current context-update stage: `N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION`.
+- N9E active nine-factor FGO/legged logger review completed with `complete_nine_factor_FGO_claim=false`.
+- N9E outcome: logging blocked for current `LegSA_full_EKF`; no complete active nine-factor FGO claim.
+- Current design/context stage: `N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
+- N9F design materialization completed: current evidence requires a new active nine-factor FGO algorithm design before representative runs.
 
 Immediate next stages:
 
-- `human_review_N9C0A_then_N9C1_consolidated_figure_generation`
-- `N9C1_CONSOLIDATED_FIGURE_GENERATION`
+- `N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN`
+- `N9F_IMPLEMENTATION_REVIEW_AND_APPROVAL`
+- `N9C1_CONSOLIDATED_FIGURE_GENERATION` only after the correct human-approved route confirms the implementation/figure scope.
 - `N9C2_FIGURE_VISUAL_REVIEW_AND_REPAIR`
 - `N9C3_CONSOLIDATED_CASE_REVIEW_AND_REPORT_PACKAGE`
 - `N9D_CLAIM_BOUNDARY_AND_PAPER_WRITING_READINESS_REVIEW`
@@ -66,12 +70,13 @@ Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 is
 
 ```text
 ready_for_N9C1_consolidated_figure_generation=true
+ready_for_implementation_review=true
 ready_for_paper_claims=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 ```
 
-These flags do not authorize solver/evaluator/N9B2/random/degraded-input execution, paper claims, or N9C1 figure generation during N9C0A.
+These flags do not authorize solver/evaluator/N9B2/random/degraded-input execution, paper claims, representative active-nine-factor FGO runs, or N9C1 figure generation during N9F design/context sync.
 
 ## 5. Path And Runtime Policy
 
@@ -91,6 +96,7 @@ N9B2B locks the Windows and WSL path aliases and the future by2-huitu output ali
 
 Runtime outputs remain untracked. N9B2B1 runtime reports belong under `<BY2_N9B2_WINDOWS_ROOT>/N9B2B1_CONTEXT_UPDATE_AFTER_PATH_LOCK`.
 N9C0A runtime reports belong under `<BY2_N9B2_WINDOWS_ROOT>/N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION`. N9C0 consolidated precheck artifacts are represented by `<N9C0_CONSOLIDATED_PRECHECK_ROOT>` under `<BY2_N9B2_FULL_MATRIX_ROOT>`.
+N9F design/context outputs belong under `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`, with export-clean design material under `<BY2_N9B2_FULL_MATRIX_ROOT>/N9F_EXPORT_CLEAN_DESIGN_PACKAGE`.
 
 ## 6. Runner And Evaluation Rules
 
@@ -138,6 +144,9 @@ Allowed now:
 - N9B staged execution is complete through N9C0 global consolidated precheck.
 - N9C0 active final-only metrics table exists with 825 rows.
 - N9C1 consolidated figure generation readiness passed.
+- N9E logging-blocked review completed with no complete active nine-factor FGO claim.
+- N9F design package is complete and requires a new active nine-factor FGO algorithm design.
+- Current evidence supports provider/update or candidate-only diagnostics, not a complete current active nine-factor FGO claim.
 
 Forbidden now:
 
@@ -151,6 +160,8 @@ Forbidden now:
 - paper claims before N9C visual review and N9D claim-boundary review.
 - active conclusions from superseded rows, `historical_nominal_none`, or `B_gnss_downsample_2Hz`.
 - automatic PR #52 merge/tag authorization.
+- relabeling `LegSA_full_EKF` as active nine-factor FGO.
+- representative active-nine-factor FGO runs before human-approved implementation review.
 
 ## 10. Multi-Agent Workflow
 
@@ -178,7 +189,21 @@ Every future plan must include:
 - Completion criteria.
 - Final report requirements.
 
-## 12. N9C0A Completion Criteria
+## 12. N9F Completion Criteria
+
+N9F0_TO_N9F2 is complete only when:
+
+- Runtime reports/matrices/summaries exist under `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
+- Design and export-clean packages exist under `<BY2_N9B2_FULL_MATRIX_ROOT>/N9F_ACTIVE_FGO_LEGGED_DESIGN_AND_EVIDENCE` and `<BY2_N9B2_FULL_MATRIX_ROOT>/N9F_EXPORT_CLEAN_DESIGN_PACKAGE`.
+- Obsidian public notes use aliases only, with private paths confined to `99_LOCAL_PATHS.private.md`.
+- No solver/evaluator/degradation/random/figure execution occurred.
+- `ready_for_implementation_review=true`.
+- `ready_for_paper_claims=false`.
+- `ready_for_N9B2_execution=false`.
+- `ready_for_full_N9B_execution=false`.
+- Recommended next stage is `N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN`.
+
+## 13. Historical N9C0A Completion Criteria
 
 N9C0A is complete only when:
 

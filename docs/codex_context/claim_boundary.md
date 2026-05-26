@@ -21,6 +21,9 @@ LegSA-GINS claims must track what the audits actually prove.
 - Batch 6 selected mixed cases completed.
 - final_v23 external baseline completed and is integrated as `external_reference_baseline`.
 - N9C1 consolidated figure generation readiness passed.
+- N9E logging-blocked review completed and kept `complete_nine_factor_FGO_claim=false`.
+- N9F active nine-factor FGO design package completed with `ready_for_implementation_review=true`.
+- Current evidence requires a new active nine-factor FGO algorithm design before representative runs.
 
 ## Not Allowed Current Claims
 
@@ -39,7 +42,10 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not use `historical_nominal_none` for current claims.
 - Do not treat N9C0 readiness for N9C1 as paper-claim authorization.
 - Do not authorize PR #52 merge/tag without explicit human approval.
+- Do not relabel `LegSA_full_EKF` as active nine-factor FGO.
+- Do not claim provider/update counts or historical candidate no-feedback rows are current active nine-factor FGO residual/cost evidence.
+- Do not run representative active-nine-factor FGO before human-approved implementation review.
 
 ## Paper Boundary
 
-Paper-grade claims require source lineage, frame/time alignment, metric sanity, semantic sanity, same-case feedback validation for feedback cases, N9C visual review, N9D claim-boundary review, and explicit human approval. N9C0A is context-only and cannot justify broad performance claims.
+Paper-grade claims require source lineage, frame/time alignment, metric sanity, semantic sanity, same-case feedback validation for feedback cases, N9C visual review, N9D claim-boundary review, and explicit human approval. N9F design readiness is not paper-claim authorization.
