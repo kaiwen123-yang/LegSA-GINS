@@ -6,7 +6,7 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 
 ## Current Stage
 
-- Current design/context stage: `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION`.
+- Current implementation/context stage: `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY`.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -22,7 +22,9 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 - N9G0 manual design review completed for a separate future `LegSA_9F_FGO_EKF` candidate.
 - N9G0A completed Git boundary resolution; PR #52 head is synced to `9ceba928`.
 - N9G1 is split into N9G1A context lock and later N9G1B Phase 1 provider/factor/logger/normal-smoke only.
-- Current recommended next stage: human review of N9G1A, then explicit N9G1B decision.
+- N9G1A context lock passed reviewer gate and was pushed to PR #52 at `f1e80f1`.
+- N9G1B created candidate identity/config, provider/factor audit helper, logger schemas, and safety gate, but normal smoke was not run because provider contracts and the active FGO backend are blocked.
+- Current recommended next stage: `fix_provider_or_factor_model`.
 
 ## Current Batch State
 
@@ -41,8 +43,8 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 ```text
 ready_for_algorithm_design_review=true
 ready_for_implementation_review=false
-ready_for_N9G1A_context_lock=true
-ready_for_N9G1B_phase1_provider_factor_logger_normal_smoke=human_decision_required
+ready_for_N9G1A_context_lock=complete
+ready_for_N9G1B_phase1_provider_factor_logger_normal_smoke=blocked_provider_or_factor_model
 ready_for_representative_validation=false
 ready_for_N9C1_consolidated_figure_generation=true
 complete_nine_factor_FGO_claim=false
@@ -59,9 +61,9 @@ ready_for_full_N9B_execution=false
 
 ## Current Technical Boundary
 
-N9G1A is context-lock only. Do not run solvers, official evaluators, N9B2, representative active-nine-factor FGO runs, N9C1 figure generation, random generation, degraded-input generation, final paper figure generation, implementation, or paper-claim drafting. Do not modify algorithm math, FGO factor math, feedback policy, final_v23, KF-GINS-Baseline math, or `<WSL_ALGO_REPO>`. Do not relabel `LegSA_full_EKF` as active nine-factor FGO. Do not treat PR #52 head sync as merge, closure, tag, or paper-claim authorization.
+N9G1B Phase 1 is candidate identity/config, provider/factor/logger schema, audit, and safety-gate work only. It did not run solvers, official evaluators, N9B2, representative active-nine-factor FGO runs, N9C1 figure generation, random generation, degraded-input generation, final paper figure generation, or paper-claim drafting. Do not modify algorithm math, feedback policy, final_v23, KF-GINS-Baseline math, or `<WSL_ALGO_REPO>` without a later explicit stage. Do not relabel `LegSA_full_EKF` as active nine-factor FGO. Do not treat PR #52 head sync as merge, closure, tag, or paper-claim authorization.
 
-N9G1B, if later approved, is limited to Phase 1 provider/factor/logger/normal-smoke work. Representative validation is deferred to N9G2. Full matrix, replot, and report stages are deferred to N9G3/N9G4 only if applicable and explicitly approved.
+N9G2 representative validation is blocked until provider/factor and active FGO backend gaps are fixed and reviewed. Full matrix, replot, and report stages are deferred to N9G3/N9G4 only if applicable and explicitly approved.
 
 ## Path Boundary
 

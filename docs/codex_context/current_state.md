@@ -1,10 +1,10 @@
-# Current State - N9G1A Context Lock Before LegSA 9F Implementation
+# Current State - N9G1B Phase 1 Blocked Before Normal Smoke
 
 This file records the current verified operational state for the Windows audit workspace. It supersedes stale N8K, N9A, N9B2B1, and N9B-not-started text except where that text is explicitly historical.
 
 ## Verified Current State
 
-- Current design/context stage: `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION`.
+- Current implementation/context stage: `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY`.
 - Current operational source of truth for degradation metrics remains `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design source: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code forensic audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -26,6 +26,9 @@ This file records the current verified operational state for the Windows audit w
 - N9F7A historical decision: publish was blocked pending human review because the branch contained an existing unpushed non-doc reporting/test commit before the docs lock.
 - N9G0 decision: manual design review completed for a separate `LegSA_9F_FGO_EKF` candidate; no implementation or solver/evaluator/figure execution.
 - N9G1 split decision: `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION` is separate from later `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY`.
+- N9G1A context lock passed reviewer gate and was pushed to PR #52 at `f1e80f1`.
+- N9G1B Phase 1 created the separate `LegSA_9F_FGO_EKF` candidate identity, provider/factor contract audit helpers, logger schemas, safety gate, and runtime decision artifacts.
+- N9G1B normal smoke was not run. The gate blocked it because provider contracts are not ready for active factors, the active nine-factor FGO backend is unavailable, and candidate solver execution is disabled.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
 - `LegSA_9F_FGO_EKF` is a separate new candidate.
 - `complete_nine_factor_FGO_claim=false`.
@@ -45,19 +48,19 @@ This file records the current verified operational state for the Windows audit w
 
 ## Current Decision
 
-N9G1A is context lock only. It does not authorize implementation, solver execution, official evaluator execution, N9B2 execution, representative active-nine-factor FGO runs, N9C1 figure generation, random generation, degraded-input generation, final paper figure generation, PR merge/closure, tag creation, or paper claims.
+N9G1B Phase 1 is candidate identity/config, provider/factor/logger schema, audit, and safety-gate work only. It does not provide active nine-factor FGO residual/Jacobian/cost rows and did not run solver, official evaluator, representative degradation, full matrix, random/degraded-input generation, figure generation, PR merge/closure, tag creation, or paper claims.
 
 ## Next Stage
 
 ```text
-recommended_next_stage=human_review_N9G1A_then_decide_N9G1B
+recommended_next_stage=fix_provider_or_factor_model
 ```
 
 Planned sequence after human review:
 
 ```text
-N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY after human approval
-N9G2_REPRESENTATIVE_VALIDATION after N9G1B review if approved and successful
+fix_provider_or_factor_model
+N9G2_REPRESENTATIVE_VALIDATION only after active backend/provider/factor gaps are fixed and reviewed
 N9G3_FULL_MATRIX if applicable and explicitly approved
 N9G4_REPLOT_AND_REPORT if applicable and explicitly approved
 N9C1_CONSOLIDATED_FIGURE_GENERATION
@@ -71,8 +74,8 @@ N9D_CLAIM_BOUNDARY_AND_PAPER_WRITING_READINESS_REVIEW
 ```text
 ready_for_algorithm_design_review=true
 ready_for_implementation_review=false
-ready_for_N9G1A_context_lock=true
-ready_for_N9G1B_phase1_provider_factor_logger_normal_smoke=human_decision_required
+ready_for_N9G1A_context_lock=complete
+ready_for_N9G1B_phase1_provider_factor_logger_normal_smoke=blocked_provider_or_factor_model
 ready_for_representative_validation=false
 ready_for_paper_claims=false
 ready_for_N9B2_execution=false

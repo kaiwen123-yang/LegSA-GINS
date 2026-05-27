@@ -93,7 +93,9 @@ Allowed N9G0A/N9G1A context-lock statement:
 - N9G1A may state that `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
 - N9G1A may state that `LegSA_9F_FGO_EKF` is a separate new candidate.
 - N9G1A must keep `complete_nine_factor_FGO_claim=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
-- N9G1B may be described only as planned Phase 1 provider/factor/logger/normal-smoke work.
+- N9G1B may state that the separate `LegSA_9F_FGO_EKF` candidate identity/config, provider/factor audit helper, active-FGO logger schema, legged diagnostic logger schema, and normal-smoke safety gate exist.
+- N9G1B may state that normal smoke was not run because provider contracts are blocked, the active nine-factor FGO backend is unavailable, and candidate solver execution is disabled.
+- N9G1B must keep `complete_nine_factor_FGO_claim=false`, `ready_for_N9G2_representative_validation=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
 - N9G2 may be described as the later representative validation stage.
 - N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
 - N9G1A and N9G1B must not claim representative degradation/full-matrix validation.

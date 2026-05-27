@@ -51,7 +51,7 @@ Completed or accepted for current planning:
 - N9C0 global staged consolidation precheck completed.
 - N9E active nine-factor FGO/legged logger review completed with `complete_nine_factor_FGO_claim=false`.
 - N9E outcome: logging blocked for current `LegSA_full_EKF`; no complete active nine-factor FGO claim.
-- Current design/context stage: `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION`.
+- Current implementation/context stage: `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY`.
 - N9F design materialization completed: current evidence requires a new active nine-factor FGO algorithm design before representative runs.
 - N9F6A source-code forensic audit completed from real Windows/WSL source evidence and passed reviewer gate.
 - N9F7 followed Path C only: substantial algorithm design package required; no implementation, solver/evaluator execution, representative run, full matrix, or replot was performed.
@@ -59,14 +59,16 @@ Completed or accepted for current planning:
 - N9G0 manual `LegSA_9F_FGO_EKF` design review completed as design only.
 - N9G0A Git boundary resolution completed; PR #52 head is synced to `9ceba928`.
 - N9G1 is split into `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION` and later `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY`.
+- N9G1A context lock passed reviewer gate and was pushed to PR #52 at `f1e80f1`.
+- N9G1B Phase 1 created the separate `LegSA_9F_FGO_EKF` candidate identity, runner/config boundary, provider/factor audit helper, logger schemas, safety gate, and runtime decision artifacts.
+- N9G1B normal smoke was not run because the gate blocked it: provider contracts are not ready for active factors, the active nine-factor FGO backend is unavailable, and candidate solver execution is disabled.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
 - `LegSA_9F_FGO_EKF` is a separate new candidate, not a relabeling of `LegSA_full_EKF`.
 
 Immediate next stages:
 
-- `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION`
-- `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY` only after explicit human approval.
-- `N9G2_REPRESENTATIVE_VALIDATION` later, after N9G1B review if approved and successful.
+- `fix_provider_or_factor_model`
+- `N9G2_REPRESENTATIVE_VALIDATION` later, only after active backend/provider/factor gaps are fixed and reviewed.
 - `N9G3_FULL_MATRIX` and `N9G4_REPLOT_AND_REPORT` later only if applicable and explicitly approved.
 - `N9C1_CONSOLIDATED_FIGURE_GENERATION` only after the correct human-approved route confirms the implementation/figure scope.
 - `N9C2_FIGURE_VISUAL_REVIEW_AND_REPAIR`
@@ -82,15 +84,15 @@ Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 is
 ready_for_N9C1_consolidated_figure_generation=true
 ready_for_algorithm_design_review=true
 ready_for_implementation_review=false
-ready_for_N9G1A_context_lock=true
-ready_for_N9G1B_phase1_provider_factor_logger_normal_smoke=human_decision_required
+ready_for_N9G1A_context_lock=complete
+ready_for_N9G1B_phase1_provider_factor_logger_normal_smoke=blocked_provider_or_factor_model
 ready_for_representative_validation=false
 ready_for_paper_claims=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 ```
 
-These flags do not authorize solver/evaluator/N9B2/random/degraded-input execution, paper claims, representative active-nine-factor FGO degradation/full-matrix runs, or N9C1 figure generation during N9G1A context lock.
+These flags do not authorize solver/evaluator/N9B2/random/degraded-input execution, paper claims, representative active-nine-factor FGO degradation/full-matrix runs, or N9C1 figure generation from N9G1B Phase 1.
 
 ## 5. Path And Runtime Policy
 

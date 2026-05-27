@@ -106,3 +106,19 @@ ready_for_paper_claims=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 ```
+
+## N9G1B Phase 1 Update
+
+N9G1B created the separate `LegSA_9F_FGO_EKF` candidate identity/config boundary, provider/factor audit helper, active-FGO logger schema, legged diagnostic logger schema, and normal-smoke safety gate. It did not relabel `LegSA_full_EKF`.
+
+Normal smoke was not run. The gate blocks execution because provider contracts are not ready for active factors, the active nine-factor FGO backend is unavailable, and candidate solver execution is disabled. No active nine-factor FGO residual/Jacobian/cost rows were produced.
+
+```text
+status=N9G1_context_locked_provider_or_factor_blocked
+complete_nine_factor_FGO_claim=false
+ready_for_N9G2_representative_validation=false
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=fix_provider_or_factor_model
+```
