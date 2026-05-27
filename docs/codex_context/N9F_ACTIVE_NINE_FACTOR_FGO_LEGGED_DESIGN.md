@@ -63,7 +63,7 @@ The current N9F7 package is `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORE
 
 ## N9F7A/N9G0 Manual Design Review Update
 
-N9F7A locked the Git/PR boundary before implementation. PR #52 remains open and unmerged. The local branch has existing unpushed history, including a reporting/test code commit, so push remains blocked until human review resolves that boundary.
+N9F7A locked the Git/PR boundary before implementation. It recorded that PR #52 remained open and unmerged and that the local branch had existing unpushed history, including a reporting/test code commit. N9G0A later resolved that Git boundary and synced PR #52 head to `9ceba928`; PR #52 still requires explicit human approval for merge, closure, or tag actions.
 
 N9G0 completed a manual design review for a separate future `LegSA_9F_FGO_EKF` candidate. The design package defines:
 
@@ -77,10 +77,32 @@ N9G0 completed a manual design review for a separate future `LegSA_9F_FGO_EKF` c
 N9G0 is still design-only:
 
 ```text
-status=N9G0_publish_blocked_by_git_boundary
+status=N9G0_design_review_complete_then_N9G0A_git_boundary_resolved
+pr_52_head_synced_to=9ceba928
 ready_for_N9G1_phase1_implementation=human_decision_required
 ready_for_paper_claims=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
-recommended_next_stage=resolve_git_boundary
+recommended_next_stage=N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION
+```
+
+## N9G1A Context Lock Update
+
+N9G1A splits N9G1 into a context-lock stage and a later implementation/smoke stage:
+
+```text
+N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION
+N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY
+N9G2_REPRESENTATIVE_VALIDATION
+N9G3_FULL_MATRIX
+N9G4_REPLOT_AND_REPORT
+```
+
+`LegSA_full_EKF` remains the current verified EKF/feedback algorithm. `LegSA_9F_FGO_EKF` is a separate new candidate. N9G1B, if approved later, is limited to Phase 1 provider/factor/logger/normal-smoke work. Representative degradation/full-matrix validation is deferred to N9G2 and later N9G3/N9G4 stages if applicable.
+
+```text
+complete_nine_factor_FGO_claim=false
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
 ```

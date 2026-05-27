@@ -223,7 +223,7 @@ The source answer is that robot kinematics/contact/legged modeling exists, but m
 
 ## N9F7A_TO_N9G0: Git Boundary And Manual LegSA 9F FGO EKF Design Review
 
-N9F7A audited the current Git/PR publication boundary. The local branch is ahead of the PR #52 remote head and includes an existing unpushed reporting/test code commit before the current docs lock. Runtime roots and Obsidian roots remain untracked. Current-stage docs are alias-only, but PR push remains blocked until the human resolves the non-doc ahead commit boundary.
+N9F7A audited the then-current Git/PR publication boundary. The local branch was ahead of the PR #52 remote head and included an existing unpushed reporting/test code commit before the docs lock. Runtime roots and Obsidian roots remained untracked. Current-stage docs were alias-only, and PR push was blocked until the human resolved the non-doc ahead commit boundary.
 
 N9G0 produced a manual design package for the future `LegSA_9F_FGO_EKF` candidate. It distinguishes the current verified `LegSA_full_EKF` EKF/feedback algorithm from a separate active-FGO candidate and defines the state/window design, nine-factor design, matrix/residual model, provider contracts, logger schema, implementation roadmap, validation protocol, and risk register.
 
@@ -240,3 +240,38 @@ recommended_next_stage=resolve_git_boundary
 ```
 
 N9G0 did not implement `LegSA_9F_FGO_EKF`, run solvers, run evaluators, generate random or degraded inputs, run N9B2, generate figures, merge or close PR #52, create tags, or make paper claims.
+
+## N9G0A: Git Boundary Resolution
+
+N9G0A resolved the Git boundary recorded by N9F7A/N9G0. PR #52 head is synced to `9ceba928`. PR #52 remains open/unmerged unless the human explicitly approves merge, closure, or tag actions.
+
+Decision:
+
+```text
+status=N9G0A_git_boundary_resolved
+pr_52_head_synced_to=9ceba928
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION
+```
+
+## N9G1A: Context Lock Before LegSA 9F Implementation
+
+N9G1A locks the context before any `LegSA_9F_FGO_EKF` implementation. It splits N9G1 into `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION` and later `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY`.
+
+`LegSA_full_EKF` remains the current verified EKF/feedback algorithm. `LegSA_9F_FGO_EKF` is a separate new candidate. `complete_nine_factor_FGO_claim=false` and `ready_for_paper_claims=false` remain locked.
+
+N9G1B, if approved later, is limited to Phase 1 provider/factor/logger/normal-smoke work. Representative validation is deferred to N9G2. Full matrix, replot, and report stages are deferred to N9G3/N9G4 if applicable.
+
+Decision:
+
+```text
+status=N9G1A_context_lock_complete_after_validation
+ready_for_N9G1B_phase1_provider_factor_logger_normal_smoke=human_decision_required
+ready_for_representative_validation=false
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=human_review_N9G1A_then_decide_N9G1B
+```
