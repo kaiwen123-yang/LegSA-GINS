@@ -275,3 +275,22 @@ ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 recommended_next_stage=human_review_N9G1A_then_decide_N9G1B
 ```
+
+## N9G1B: LegSA 9F Phase 1 Provider/Factor/Logger
+
+N9G1B created a separate `LegSA_9F_FGO_EKF` candidate identity/config boundary, provider/factor audit helper, active-FGO logger schema, legged diagnostic logger schema, safety gate, and runtime reports.
+
+Normal smoke was not run. The gate blocks execution because provider contracts are not ready for active factors, the active nine-factor FGO backend is unavailable, and candidate solver execution is disabled. `LegSA_full_EKF` remains the current verified EKF/feedback algorithm and is not relabeled.
+
+Decision:
+
+```text
+status=N9G1_context_locked_provider_or_factor_blocked
+normal_smoke_status=N9G1B_normal_smoke_not_run_blocked_by_gate
+complete_nine_factor_FGO_claim=false
+ready_for_N9G2_representative_validation=false
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=fix_provider_or_factor_model
+```

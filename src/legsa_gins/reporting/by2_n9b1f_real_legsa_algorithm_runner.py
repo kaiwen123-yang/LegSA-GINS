@@ -332,6 +332,10 @@ def _build_implementation_inventory(
             "cpp/legsa_v23_port_core/src/factors/go2_weak_prior_loader.cpp",
             "src/legsa_gins/fgo_feedback/fgo_feedback_final_runner.py",
         ],
+        "LegSA_9F_FGO_EKF": [
+            "src/legsa_gins/fgo/fgo_n9g1b_legsa_9f_phase1.py",
+            "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp",
+        ],
     }
     components = {
         "source_backed_EKF": ["GNSS position", "receiver velocity", "dual yaw", "INS propagation"],
@@ -347,13 +351,22 @@ def _build_implementation_inventory(
             "Go2 joint observation",
             "same-case selected FGO feedback observations",
         ],
+        "LegSA_9F_FGO_EKF": [
+            "separate new algorithm candidate",
+            "nine-factor provider contract and logger schema",
+            "blocked until active FGO backend emits residual/Jacobian/cost rows",
+        ],
     }
     for algorithm in FORMAL_ALGORITHMS:
+        spec = ALGORITHM_SPECS[algorithm]
         paths = source_paths[algorithm]
         implementation_exists = all((workspace_root / path).exists() for path in paths)
         missing_inputs = validate_algorithm_inputs(workspace_root, algorithm, base_values)
         runner_exists = bool(runner_probe.get("exists"))
-        if implementation_exists and runner_exists and not missing_inputs:
+        if not spec.solver_execution_allowed:
+            status = spec.status
+            blocked_reason = "active nine-factor FGO backend unavailable for phase-1 candidate"
+        elif implementation_exists and runner_exists and not missing_inputs:
             status = "runnable_with_wrapper"
             blocked_reason = ""
         elif not implementation_exists:

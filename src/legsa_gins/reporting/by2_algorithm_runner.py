@@ -27,6 +27,7 @@ FORMAL_ALGORITHMS = [
     "Go2_joint_EKF",
     "selected_feedback_EKF",
     "LegSA_full_EKF",
+    "LegSA_9F_FGO_EKF",
 ]
 
 REPO_RELATIVE_REQUIRED_INPUTS = {
@@ -79,6 +80,10 @@ class AlgorithmRunnerSpec:
     ablation_variant: str
     component_flags: dict[str, bool]
     status: str = "runnable_with_wrapper"
+    role: str = "formal_algorithm"
+    active_fgo_backend_available: bool = False
+    solver_execution_allowed: bool = True
+    complete_nine_factor_fgo_claim: bool = False
 
 
 ALGORITHM_SPECS = {
@@ -151,6 +156,21 @@ ALGORITHM_SPECS = {
             "go2_joint": True,
             "feedback": True,
         },
+    ),
+    "LegSA_9F_FGO_EKF": AlgorithmRunnerSpec(
+        algorithm="LegSA_9F_FGO_EKF",
+        ablation_variant="n9g1b_LegSA_9F_FGO_EKF_phase1_candidate",
+        component_flags={
+            "raw_doppler": True,
+            "source_aware": True,
+            "go2_joint": True,
+            "feedback": True,
+        },
+        status="phase1_candidate_backend_blocked",
+        role="new_algorithm_candidate",
+        active_fgo_backend_available=False,
+        solver_execution_allowed=False,
+        complete_nine_factor_fgo_claim=False,
     ),
 }
 
@@ -331,7 +351,12 @@ def build_algorithm_config_text(workspace_root: Path, algorithm: str, output_dir
         [
             "",
             "# N9B1F runtime-only formal LegSA runner config.",
+            f"algorithm_id: {spec.algorithm}",
+            f"algorithm_role: {spec.role}",
             f"ablation_variant: {spec.ablation_variant}",
+            f"active_fgo_backend_available: {str(spec.active_fgo_backend_available).lower()}",
+            f"solver_execution_allowed: {str(spec.solver_execution_allowed).lower()}",
+            f"complete_nine_factor_FGO_claim: {str(spec.complete_nine_factor_fgo_claim).lower()}",
             "enable_receiver_velocity_update: true",
             "receiver_velocity_stress_mode: none",
             "receiver_velocity_std_scale: 1.0",
@@ -533,6 +558,18 @@ def run_formal_algorithm(
     else:
         config_info = write_algorithm_config(workspace_root, algorithm, output_dir / "config" / "runtime_config.yaml", output_dir)
         append_case_level_overrides(Path(config_info["config_path"]), case_overrides or {})
+    spec = ALGORITHM_SPECS[algorithm]
+    if not dry_run and not spec.solver_execution_allowed:
+        return {
+            "algorithm": algorithm,
+            "run_status": "blocked",
+            "blocked_reason": "active nine-factor FGO backend unavailable for this phase-1 candidate",
+            "config": config_info,
+            "trace_solver_input": False,
+            "final_v23_output_solver_input": False,
+            "output_only_correction": False,
+            "complete_nine_factor_FGO_claim": False,
+        }
     probe = resolve_port_core_executable(workspace_root)
     exe = port_core_exe or probe.get("selected_path")
     if not exe:

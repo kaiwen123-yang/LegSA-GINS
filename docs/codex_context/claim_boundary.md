@@ -34,6 +34,8 @@ LegSA-GINS claims must track what the audits actually prove.
 - N9G1A may state that `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
 - N9G1A may state that `LegSA_9F_FGO_EKF` is a separate new candidate.
 - N9G1A must keep `complete_nine_factor_FGO_claim=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
+- N9G1B may state that the separate `LegSA_9F_FGO_EKF` candidate ID, config boundary, provider/factor audit helper, logger schemas, and normal-smoke safety gate exist.
+- N9G1B may state that normal smoke was not run because provider contracts are blocked, the active nine-factor FGO backend is unavailable, and candidate solver execution is disabled.
 - Current evidence requires a new active nine-factor FGO algorithm design before representative runs.
 
 ## Not Allowed Current Claims
@@ -57,6 +59,8 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not claim provider/update counts or historical candidate no-feedback rows are current active nine-factor FGO residual/cost evidence.
 - Do not run representative active-nine-factor FGO before human-approved implementation review.
 - Do not run representative degradation or full-matrix validation during N9G1B.
+- Do not claim N9G1B produced active nine-factor FGO residual/Jacobian/cost rows.
+- Do not start N9G2 until provider/factor model and active backend gaps are fixed and reviewed.
 - Do not treat PR #52 head sync as merge, closure, tag, or paper-claim authorization.
 
 ## Paper Boundary

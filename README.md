@@ -68,7 +68,7 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current operational state:
 
-After `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION`.
+After `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY`.
 
 N9E completed with a logging-blocked active nine-factor FGO/legged evidence decision: `complete_nine_factor_FGO_claim=false`.
 
@@ -80,13 +80,13 @@ N9G0 completed a manual design review for the future `LegSA_9F_FGO_EKF` candidat
 
 N9G0A resolved the Git boundary. PR #52 head is synced to `9ceba928`; PR #52 remains open/unmerged unless the human explicitly approves merge, closure, or tag actions.
 
-N9G1 is split into `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION` and later `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY`. N9G1A is documentation/context lock only. N9G1B, if approved later, is limited to provider/factor/logger/normal-smoke work. Representative validation is deferred to N9G2, with N9G3/N9G4 later full matrix, replot, and report stages only if applicable.
+N9G1 is split into `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION` and `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY`. N9G1A passed reviewer gate. N9G1B created the separate `LegSA_9F_FGO_EKF` candidate identity, provider/factor audit helper, logger schemas, and safety gate. Normal smoke was not run because provider/factor contracts and the active nine-factor FGO backend are still blocked. Representative validation is deferred to N9G2, with N9G3/N9G4 later full matrix, replot, and report stages only if applicable.
 
 Next planned stage:
 
-Human review of N9G1A, then explicit decision on N9G1B.
+Fix provider or active factor model gaps before any N9G2 representative validation.
 
-The current operational state is maintained in `AGENTS.md`, `PLANS.md`, and `docs/codex_context/current_state.md`. The N9G1A decision keeps `complete_nine_factor_FGO_claim=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
+The current operational state is maintained in `AGENTS.md`, `PLANS.md`, and `docs/codex_context/current_state.md`. The N9G1B decision keeps `complete_nine_factor_FGO_claim=false`, `ready_for_representative_validation=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
