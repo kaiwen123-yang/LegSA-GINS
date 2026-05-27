@@ -68,15 +68,23 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current operational state:
 
-After `N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
+After `N9F7A_TO_N9G0_GIT_BOUNDARY_AND_MANUAL_LEGSA_9F_FGO_EKF_DESIGN_REVIEW`.
 
 N9E completed with a logging-blocked active nine-factor FGO/legged evidence decision: `complete_nine_factor_FGO_claim=false`.
 
+N9F6A re-audited the real Windows/WSL source code from zero. It confirmed that robot kinematics/contact/legged modeling exists, but mainly as provider, diagnostic, offline no-feedback, or candidate factor code. `LegSA_full_EKF` remains an EKF/update/feedback algorithm and must not be relabeled as complete active nine-factor FGO.
+
+N9F7 followed Path C only and produced a design/data-provider package. No implementation, solver, evaluator, representative run, full matrix, or figure generation was performed.
+
+N9G0 completed a manual design review for the future `LegSA_9F_FGO_EKF` candidate. The design is separate from `LegSA_full_EKF`; it defines required window state, nine factors, residual/Jacobian/cost evidence, provider contracts, logger schema, roadmap, validation protocol, and risks. It is not implementation evidence.
+
+The Git publication boundary remains locked: PR #52 is open/unmerged, and pushing is blocked until the existing non-doc ahead commit boundary is resolved by human decision.
+
 Next planned stage:
 
-`N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN`.
+`resolve_git_boundary`.
 
-The current operational state is maintained in `AGENTS.md`, `PLANS.md`, and `docs/codex_context/current_state.md`. N9F is a design-materialization and context-sync stage. It concludes that current evidence requires a new active nine-factor FGO algorithm design; `LegSA_full_EKF` must not be relabeled as active nine-factor FGO.
+The current operational state is maintained in `AGENTS.md`, `PLANS.md`, and `docs/codex_context/current_state.md`. The N9G0 decision keeps `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -212,7 +220,7 @@ N7B3 Go2 contact/velocity diagnostic activation.
 N7B4 literature-informed Go2 contact/velocity diagnostics.
 
 Current operational state:
-After `N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`; next planned stage is `N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN`.
+After `N9F7A_TO_N9G0_GIT_BOUNDARY_AND_MANUAL_LEGSA_9F_FGO_EKF_DESIGN_REVIEW`; next planned stage is `resolve_git_boundary`.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,

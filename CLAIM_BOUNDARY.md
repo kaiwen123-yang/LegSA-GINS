@@ -65,6 +65,26 @@ Allowed N9F design materialization statement:
 - N9F may set `ready_for_implementation_review=true`.
 - N9F must keep `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
 
+Allowed N9F6A/N9F7 source-audit and design-package statement:
+
+- N9F6A may state that a source-code forensic audit found robot kinematics/contact/legged modeling in provider, diagnostic, offline no-feedback, and candidate factor code.
+- N9F6A may state that active `LegSA_full_EKF` uses provider-dependent Go2 weak attitude / horizontal velocity EKF updates and selected-feedback EKF pseudo-measurements, but not a complete active nine-factor FGO solver.
+- N9F7 may state that Path C was taken and a data-provider / substantial algorithm design package was produced.
+- N9F7 may set `ready_for_algorithm_design_review=true`.
+- N9F7 must set `ready_for_implementation_review=false` unless a later human-approved design review explicitly authorizes implementation.
+- N9F7 must keep `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
+- N9F7 must not claim active row-level nine-factor FGO residual, Jacobian, or cost evidence from provider/update counts or candidate no-feedback logs.
+
+Allowed N9F7A/N9G0 Git-boundary and manual-design-review statement:
+
+- N9F7A may state that PR #52 remains open/unmerged and that local publish is blocked until the existing non-doc ahead commit boundary is reviewed by the human.
+- N9G0 may state that a manual design review package exists for a future, separate `LegSA_9F_FGO_EKF` candidate.
+- N9G0 may define state/window, nine-factor, residual/matrix, provider, logger, roadmap, validation, and risk requirements.
+- N9G0 must state that `LegSA_9F_FGO_EKF` remains design-only and is not implemented in this stage.
+- N9G0 must state that `LegSA_full_EKF` remains the verified EKF/feedback algorithm and is not relabeled.
+- N9G0 must keep `complete_nine_factor_FGO_claim=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
+- N9G0 must not claim active factor residual, Jacobian, cost, normal-equation, or feedback-producer evidence until a later implementation and validation stage produces real logs.
+
 Allowed N4 filter-core statement:
 
 - N4 may implement LegSA-GINS C++ filter core with receiver-native position, velocity, and heading updates.

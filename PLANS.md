@@ -51,13 +51,17 @@ Completed or accepted for current planning:
 - N9C0 global staged consolidation precheck completed.
 - N9E active nine-factor FGO/legged logger review completed with `complete_nine_factor_FGO_claim=false`.
 - N9E outcome: logging blocked for current `LegSA_full_EKF`; no complete active nine-factor FGO claim.
-- Current design/context stage: `N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
+- Current design/context stage: `N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
 - N9F design materialization completed: current evidence requires a new active nine-factor FGO algorithm design before representative runs.
+- N9F6A source-code forensic audit completed from real Windows/WSL source evidence and passed reviewer gate.
+- N9F7 followed Path C only: substantial algorithm design package required; no implementation, solver/evaluator execution, representative run, full matrix, or replot was performed.
+- N9F7A Git boundary audit completed: the current branch has existing unpushed local history, including a reporting/test code commit that blocks automatic push until human review.
+- N9G0 manual `LegSA_9F_FGO_EKF` design review completed as design only.
 
 Immediate next stages:
 
-- `N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN`
-- `N9F_IMPLEMENTATION_REVIEW_AND_APPROVAL`
+- `resolve_git_boundary`
+- `N9G1_IMPLEMENT_LEGSA_9F_FGO_EKF_PHASE1_PROVIDER_AND_FACTOR_WIRING` only after the Git boundary and human implementation approval are resolved.
 - `N9C1_CONSOLIDATED_FIGURE_GENERATION` only after the correct human-approved route confirms the implementation/figure scope.
 - `N9C2_FIGURE_VISUAL_REVIEW_AND_REPAIR`
 - `N9C3_CONSOLIDATED_CASE_REVIEW_AND_REPORT_PACKAGE`
@@ -70,7 +74,9 @@ Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 is
 
 ```text
 ready_for_N9C1_consolidated_figure_generation=true
-ready_for_implementation_review=true
+ready_for_algorithm_design_review=true
+ready_for_implementation_review=false
+ready_for_N9G1_phase1_implementation=human_decision_required
 ready_for_paper_claims=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
@@ -97,6 +103,9 @@ N9B2B locks the Windows and WSL path aliases and the future by2-huitu output ali
 Runtime outputs remain untracked. N9B2B1 runtime reports belong under `<BY2_N9B2_WINDOWS_ROOT>/N9B2B1_CONTEXT_UPDATE_AFTER_PATH_LOCK`.
 N9C0A runtime reports belong under `<BY2_N9B2_WINDOWS_ROOT>/N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION`. N9C0 consolidated precheck artifacts are represented by `<N9C0_CONSOLIDATED_PRECHECK_ROOT>` under `<BY2_N9B2_FULL_MATRIX_ROOT>`.
 N9F design/context outputs belong under `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`, with export-clean design material under `<BY2_N9B2_FULL_MATRIX_ROOT>/N9F_EXPORT_CLEAN_DESIGN_PACKAGE`.
+N9F6A/N9F7 source-audit and design-package outputs belong under `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
+N9F7A/N9G0 Git-boundary and manual-design-review outputs belong under `<BY2_N9B2_WINDOWS_ROOT>/N9F7A_TO_N9G0_GIT_BOUNDARY_AND_MANUAL_LEGSA_9F_FGO_EKF_DESIGN_REVIEW`.
+N9G0 design packages belong under `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_LEGSA_9F_FGO_EKF_DESIGN_PACKAGE` and `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_EXPORT_CLEAN_DESIGN_PACKAGE`.
 
 ## 6. Runner And Evaluation Rules
 
@@ -146,6 +155,9 @@ Allowed now:
 - N9C1 consolidated figure generation readiness passed.
 - N9E logging-blocked review completed with no complete active nine-factor FGO claim.
 - N9F design package is complete and requires a new active nine-factor FGO algorithm design.
+- N9F6A source audit confirms robot kinematics/contact/legged modeling exists, but mainly as provider, diagnostic, offline no-feedback, or candidate factor code.
+- N9F7 design package is complete and requires manual algorithm design review before implementation.
+- N9G0 manual design review defines `LegSA_9F_FGO_EKF` as a separate future candidate, not an alias for `LegSA_full_EKF`.
 - Current evidence supports provider/update or candidate-only diagnostics, not a complete current active nine-factor FGO claim.
 
 Forbidden now:
@@ -162,6 +174,9 @@ Forbidden now:
 - automatic PR #52 merge/tag authorization.
 - relabeling `LegSA_full_EKF` as active nine-factor FGO.
 - representative active-nine-factor FGO runs before human-approved implementation review.
+- treating N9F6A/N9F7 design artifacts as active solver residual/cost evidence.
+- treating N9G0 design artifacts as implemented solver evidence.
+- pushing PR #52 while the non-doc ahead commit boundary remains unresolved.
 
 ## 10. Multi-Agent Workflow
 
@@ -203,7 +218,39 @@ N9F0_TO_N9F2 is complete only when:
 - `ready_for_full_N9B_execution=false`.
 - Recommended next stage is `N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN`.
 
-## 13. Historical N9C0A Completion Criteria
+## 13. N9F6A/N9F7 Completion Criteria
+
+N9F6A/N9F7 is complete only when:
+
+- Source-root discovery, source inventory, runner mapping, EKF/FGO/legged/selected-feedback audits, evidence matrices, and decision reports exist under `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
+- Step 1 reviewer passes before Step 2 begins.
+- Step 2 follows only the Step 1 decision path.
+- For the current Path C decision, no implementation, solver, evaluator, degradation generation, representative run, full matrix, or figure generation occurs.
+- Robot kinematics/contact modeling is classified from source evidence as provider, diagnostic, offline no-feedback, candidate, EKF-update, or missing.
+- Public docs and Obsidian notes use aliases only.
+- `ready_for_algorithm_design_review=true`.
+- `ready_for_implementation_review=false`.
+- `ready_for_paper_claims=false`.
+- `ready_for_N9B2_execution=false`.
+- `ready_for_full_N9B_execution=false`.
+- Recommended next stage is `manual_algorithm_design_review`.
+
+## 14. N9F7A/N9G0 Completion Criteria
+
+N9F7A/N9G0 is complete only when:
+
+- Git status, ahead commit, PR #52, publish safety, protected-root, staging, and path-leak audits exist under `<BY2_N9B2_WINDOWS_ROOT>/N9F7A_TO_N9G0_GIT_BOUNDARY_AND_MANUAL_LEGSA_9F_FGO_EKF_DESIGN_REVIEW`.
+- Manual `LegSA_9F_FGO_EKF` design reports exist for algorithm identity, state/window, nine factors, matrix/residual model, provider contracts, logger schema, implementation roadmap, validation protocol, and risk register.
+- `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
+- `LegSA_9F_FGO_EKF` remains design-only until a later human-approved implementation stage.
+- No implementation, solver, evaluator, random generation, degraded-input generation, N9B2 execution, representative validation, full matrix, figure generation, paper claim, PR merge, PR closure, or tag creation occurs.
+- `ready_for_N9G1_phase1_implementation=human_decision_required`.
+- `ready_for_paper_claims=false`.
+- `ready_for_N9B2_execution=false`.
+- `ready_for_full_N9B_execution=false`.
+- Recommended next stage is `resolve_git_boundary`.
+
+## 15. Historical N9C0A Completion Criteria
 
 N9C0A is complete only when:
 
