@@ -11,7 +11,8 @@
 
 - PR #21 remains open/unmerged and must not be touched.
 - PR #52 remains open/unmerged unless the human explicitly approves merge/tag/closure.
-- PR #52 push is blocked after N9F7A/N9G0 until the human resolves the existing non-doc ahead commit boundary.
+- N9G0A resolved the earlier PR #52 push boundary; PR #52 head is synced to `9ceba928`.
+- PR #52 head sync is not merge, tag, closure, or paper-claim authorization.
 - No N9B2 tag until staged reviews pass and the human explicitly approves.
 - No N9B2 execution branch/run/PR action may be treated as authorized by N9B2B1.
 
@@ -48,4 +49,8 @@ N9B2B1 must not stage, commit, push, merge, tag, checkout, reset, or pull. It ma
 
 ## N9F7A/N9G0 Git Boundary
 
-N9F7A/N9G0 may commit safe tracked docs after reviewer pass if supervisor policy allows it. It must not push PR #52 while the local branch contains unresolved non-doc ahead commits. It must not stage runtime roots, Obsidian roots, `DATA_PATHS.local.md`, generated outputs, raw data, figures, or archives.
+N9F7A/N9G0 recorded the historical publish block and produced the manual design review package. N9G0A later resolved the Git boundary and synced PR #52 head to `9ceba928`.
+
+## N9G1A Git Boundary
+
+N9G1A worker must not stage, commit, push, merge, tag, checkout, reset, or pull. It may run read-only git status/diff validation. It must not stage runtime roots, Obsidian roots, `DATA_PATHS.local.md`, generated outputs, raw data, figures, or archives.

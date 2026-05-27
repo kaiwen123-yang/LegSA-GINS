@@ -23,6 +23,7 @@ N8K initial formal ablation plotting produced many figures, but manual review fo
 
 ## Current State
 
+- This file is historical provenance only and is superseded for current operations by `current_state.md`, `PROJECT_CONTEXT.md`, `PLANS.md`, `AGENTS.md`, and `N9G1A_CONTEXT_LOCK_REPORT.md`.
 - PR #48 is merged.
 - N8K final merge review passed.
 - Tag `N8K-v0.1-BY2-formal-ablation-plot-audit` exists.

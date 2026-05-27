@@ -17,17 +17,16 @@
 - Reviewer: no edits; checks diff, scope, paths, data roles, claim boundaries, runtime-artifact boundaries, and Git readiness.
 - User: final authority for commit, push, PR, merge, close, tag, and stage approval.
 
-## Current N9F7A/N9G0 Boundary
+## Current N9G1A Boundary
 
-`N9F7A_TO_N9G0_GIT_BOUNDARY_AND_MANUAL_LEGSA_9F_FGO_EKF_DESIGN_REVIEW` is Git-boundary and manual design-review only.
+`N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION` is context lock only.
 
 Allowed:
 
 - Approved tracked docs/context updates.
-- Approved runtime report/matrix/summary outputs under `<BY2_N9B2_WINDOWS_ROOT>/N9F7A_TO_N9G0_GIT_BOUNDARY_AND_MANUAL_LEGSA_9F_FGO_EKF_DESIGN_REVIEW`.
-- Manual design-review material under `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_LEGSA_9F_FGO_EKF_DESIGN_PACKAGE` and `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_EXPORT_CLEAN_DESIGN_PACKAGE`.
+- Approved runtime report/matrix/summary outputs under `<BY2_N9B2_WINDOWS_ROOT>/N9G1A_TO_N9G1B_CONTEXT_LOCK_AND_LEGSA_9F_PHASE1_IMPLEMENTATION`.
 - Read-only validation commands.
-- Commit tracked docs only after reviewer passes, if the supervisor policy allows it.
+- Public Obsidian notes using aliases only, with private local paths confined to `99_LOCAL_PATHS.private.md`.
 
 Forbidden:
 
@@ -44,19 +43,24 @@ Forbidden:
 - `docs/codex_context/DATA_PATHS.local.md` edits or staging.
 - `by2-huitu/` staging.
 - `obsidian_knowledge/` or `.obsidian/` staging.
-- PR #52 push while the existing non-doc ahead commit boundary remains unresolved.
+- staging, committing, pushing, checkout, reset, pull, or PR creation from the worker role.
 - PR #52 merge, close, or tag creation.
+- representative degradation or full-matrix validation during N9G1B.
 
 ## Current Decision
 
-N9G0 may set:
+N9G1A may set:
 
 ```text
-design_review_complete=true
-ready_for_N9G1_phase1_implementation=human_decision_required
+status=N9G1A_context_lock_complete
+git_boundary_resolved=true
+pr_52_head_synced_to=9ceba928
+complete_nine_factor_FGO_claim=false
+ready_for_N9G1B_phase1_provider_factor_logger_normal_smoke=human_decision_required
+ready_for_representative_validation=false
 ready_for_paper_claims=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 ```
 
-It may recommend `resolve_git_boundary`, but it must not implement N9G1 or authorize PR #52 push/merge/tag without the required reviewer and human boundary decision.
+It may recommend human review of N9G1A, then explicit N9G1B decision. It must not implement N9G1B or authorize PR #52 merge/tag/closure.

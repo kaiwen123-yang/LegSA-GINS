@@ -26,9 +26,14 @@ LegSA-GINS claims must track what the audits actually prove.
 - N9F6A/N9F7 source-code audit and design package completed with `N9F7_substantial_algorithm_design_required`.
 - N9F6A may state that robot kinematics/contact/legged modeling exists in provider, diagnostic, offline no-feedback, and candidate factor code, but this is not complete active FGO residual/cost evidence.
 - N9F7 must keep `ready_for_implementation_review=false` until a later manual algorithm design review approves implementation.
-- N9F7A/N9G0 Git-boundary and manual design review completed with publish blocked pending human review of the existing non-doc ahead commit.
+- N9F7A/N9G0 Git-boundary and manual design review completed; the earlier publish block is historical after N9G0A.
 - N9G0 may state that `LegSA_9F_FGO_EKF` has a manual design package, but it remains design-only and separate from `LegSA_full_EKF`.
 - N9G0 must keep `complete_nine_factor_FGO_claim=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
+- N9G0A completed Git boundary resolution and PR #52 head is synced to `9ceba928`.
+- N9G1A may state that N9G1 is split into context lock and later Phase 1 provider/factor/logger/normal-smoke only.
+- N9G1A may state that `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
+- N9G1A may state that `LegSA_9F_FGO_EKF` is a separate new candidate.
+- N9G1A must keep `complete_nine_factor_FGO_claim=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
 - Current evidence requires a new active nine-factor FGO algorithm design before representative runs.
 
 ## Not Allowed Current Claims
@@ -51,6 +56,8 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not relabel `LegSA_full_EKF` as active nine-factor FGO.
 - Do not claim provider/update counts or historical candidate no-feedback rows are current active nine-factor FGO residual/cost evidence.
 - Do not run representative active-nine-factor FGO before human-approved implementation review.
+- Do not run representative degradation or full-matrix validation during N9G1B.
+- Do not treat PR #52 head sync as merge, closure, tag, or paper-claim authorization.
 
 ## Paper Boundary
 

@@ -1,6 +1,6 @@
 # N9A_R0 Context Rebuild Report
 
-Historical report only. This file records the old N9A_R0 documentation rebuild and must not be used as the current operational state after N9B2B1. Current state, readiness flags, path aliases, PR boundary, and next-stage guidance are recorded in `current_state.md`, `PROJECT_CONTEXT.md`, `PLANS.md`, and `N9B2B1_CONTEXT_UPDATE_REPORT.md`.
+Historical report only. This file records the old N9A_R0 documentation rebuild and must not be used as the current operational state after N9G1A. Current state, readiness flags, path aliases, PR boundary, and next-stage guidance are recorded in `current_state.md`, `PROJECT_CONTEXT.md`, `PLANS.md`, `AGENTS.md`, and `N9G1A_CONTEXT_LOCK_REPORT.md`.
 
 ## Scope
 
@@ -37,14 +37,14 @@ Rebuild multi-agent documentation/context only in the Windows audit workspace.
 - `docs/codex_context/DATA_PATHS.template.md`: alias-only local path template.
 - Existing policy docs: refreshed path, workflow, review, Git, and project context rules.
 
-## Current State Preserved
+## Historical State Preserved
 
-- PR #48 is merged.
-- PR #21 is open/unmerged and untouched.
-- PR #49 is open/unmerged and must not be merged/tagged.
-- N9A_R2 is incomplete/failure.
-- N9A_R3 real output and frame alignment gate is next.
-- N9B remains not started.
+- At the N9A_R0 snapshot, PR #48 had merged.
+- At the N9A_R0 snapshot, PR #21 was open/unmerged and untouched.
+- At the N9A_R0 snapshot, PR #49 was open/unmerged and required no merge/tag action.
+- At the N9A_R0 snapshot, N9A_R2 was incomplete/failure.
+- At the N9A_R0 snapshot, N9A_R3 real-output and frame-alignment gate was the next planned step.
+- At the N9A_R0 snapshot, N9B had not started.
 
 ## Stage Boundaries Written
 

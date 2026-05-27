@@ -68,7 +68,7 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current operational state:
 
-After `N9F7A_TO_N9G0_GIT_BOUNDARY_AND_MANUAL_LEGSA_9F_FGO_EKF_DESIGN_REVIEW`.
+After `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION`.
 
 N9E completed with a logging-blocked active nine-factor FGO/legged evidence decision: `complete_nine_factor_FGO_claim=false`.
 
@@ -78,13 +78,15 @@ N9F7 followed Path C only and produced a design/data-provider package. No implem
 
 N9G0 completed a manual design review for the future `LegSA_9F_FGO_EKF` candidate. The design is separate from `LegSA_full_EKF`; it defines required window state, nine factors, residual/Jacobian/cost evidence, provider contracts, logger schema, roadmap, validation protocol, and risks. It is not implementation evidence.
 
-The Git publication boundary remains locked: PR #52 is open/unmerged, and pushing is blocked until the existing non-doc ahead commit boundary is resolved by human decision.
+N9G0A resolved the Git boundary. PR #52 head is synced to `9ceba928`; PR #52 remains open/unmerged unless the human explicitly approves merge, closure, or tag actions.
+
+N9G1 is split into `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION` and later `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY`. N9G1A is documentation/context lock only. N9G1B, if approved later, is limited to provider/factor/logger/normal-smoke work. Representative validation is deferred to N9G2, with N9G3/N9G4 later full matrix, replot, and report stages only if applicable.
 
 Next planned stage:
 
-`resolve_git_boundary`.
+Human review of N9G1A, then explicit decision on N9G1B.
 
-The current operational state is maintained in `AGENTS.md`, `PLANS.md`, and `docs/codex_context/current_state.md`. The N9G0 decision keeps `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
+The current operational state is maintained in `AGENTS.md`, `PLANS.md`, and `docs/codex_context/current_state.md`. The N9G1A decision keeps `complete_nine_factor_FGO_claim=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 
@@ -219,8 +221,8 @@ N7B2 Go2 contact threshold review.
 N7B3 Go2 contact/velocity diagnostic activation.
 N7B4 literature-informed Go2 contact/velocity diagnostics.
 
-Current operational state:
-After `N9F7A_TO_N9G0_GIT_BOUNDARY_AND_MANUAL_LEGSA_9F_FGO_EKF_DESIGN_REVIEW`; next planned stage is `resolve_git_boundary`.
+Historical note:
+The earlier `N9F7A_TO_N9G0_GIT_BOUNDARY_AND_MANUAL_LEGSA_9F_FGO_EKF_DESIGN_REVIEW` publish boundary is superseded by `N9G0A_GIT_BOUNDARY_RESOLUTION_AND_PR_SYNC`. Current operational state is the N9G1 split: `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION`, then `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY` only after the context-lock reviewer gate and explicit approval.
 
 N4H4R2 completes the source-backed port-core math surface inside
 `cpp/legsa_v23_port_core`: config/unit conversion, loaders, INS mechanization,

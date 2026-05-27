@@ -77,13 +77,26 @@ Allowed N9F6A/N9F7 source-audit and design-package statement:
 
 Allowed N9F7A/N9G0 Git-boundary and manual-design-review statement:
 
-- N9F7A may state that PR #52 remains open/unmerged and that local publish is blocked until the existing non-doc ahead commit boundary is reviewed by the human.
+- N9F7A may state historically that local publish was blocked until the existing non-doc ahead commit boundary was reviewed by the human.
 - N9G0 may state that a manual design review package exists for a future, separate `LegSA_9F_FGO_EKF` candidate.
 - N9G0 may define state/window, nine-factor, residual/matrix, provider, logger, roadmap, validation, and risk requirements.
 - N9G0 must state that `LegSA_9F_FGO_EKF` remains design-only and is not implemented in this stage.
 - N9G0 must state that `LegSA_full_EKF` remains the verified EKF/feedback algorithm and is not relabeled.
 - N9G0 must keep `complete_nine_factor_FGO_claim=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
 - N9G0 must not claim active factor residual, Jacobian, cost, normal-equation, or feedback-producer evidence until a later implementation and validation stage produces real logs.
+
+Allowed N9G0A/N9G1A context-lock statement:
+
+- N9G0A may state that the Git boundary was resolved and PR #52 head is synced to `9ceba928`.
+- N9G0A must not treat PR #52 head sync as merge, closure, tag, or paper-claim authorization.
+- N9G1A may state that N9G1 is split into `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION` and later `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY`.
+- N9G1A may state that `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
+- N9G1A may state that `LegSA_9F_FGO_EKF` is a separate new candidate.
+- N9G1A must keep `complete_nine_factor_FGO_claim=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
+- N9G1B may be described only as planned Phase 1 provider/factor/logger/normal-smoke work.
+- N9G2 may be described as the later representative validation stage.
+- N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
+- N9G1A and N9G1B must not claim representative degradation/full-matrix validation.
 
 Allowed N4 filter-core statement:
 
