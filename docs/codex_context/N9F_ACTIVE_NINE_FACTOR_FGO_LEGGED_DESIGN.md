@@ -37,3 +37,50 @@ The current evidence does not prove all nine factors are active row-level FGO so
 - Export-clean design package: `<BY2_N9B2_FULL_MATRIX_ROOT>/N9F_EXPORT_CLEAN_DESIGN_PACKAGE`
 
 No solver, evaluator, degradation, random generation, representative active-nine-factor run, or figure generation is authorized by this design package.
+
+## N9F6A/N9F7 Source-Code Audit Update
+
+N9F6A re-audited the real source code from zero and passed reviewer gate. The audit found:
+
+- `LegSA_full_EKF` is defined as an EKF/update/feedback algorithm, not as `LegSA_9F_FGO_EKF`.
+- C++ runtime evidence supports active EKF Raw Doppler, source-aware weighting, Go2 weak attitude / horizontal velocity updates, and selected-feedback EKF pseudo-measurement ingestion.
+- Python FGO/legged code contains no-feedback, offline, diagnostic, provider, and candidate factor paths for robot kinematics/contact/legged modeling.
+- No active production FGO window/factor graph with row-level residual, Jacobian, and cost logging for all nine factors was accepted.
+
+N9F7 therefore followed Path C only:
+
+```text
+status=N9F7_substantial_algorithm_design_required
+ready_for_algorithm_design_review=true
+ready_for_implementation_review=false
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=manual_algorithm_design_review
+```
+
+The current N9F7 package is `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`. It is not solver evidence and must not be used as paper-claim support.
+
+## N9F7A/N9G0 Manual Design Review Update
+
+N9F7A locked the Git/PR boundary before implementation. PR #52 remains open and unmerged. The local branch has existing unpushed history, including a reporting/test code commit, so push remains blocked until human review resolves that boundary.
+
+N9G0 completed a manual design review for a separate future `LegSA_9F_FGO_EKF` candidate. The design package defines:
+
+- algorithm identity and separation from `LegSA_full_EKF`;
+- EKF state and future FGO window policy;
+- nine factor residual, Jacobian, covariance, gate, provider, logger, and minimum-test requirements;
+- residual/matrix model including `r_i`, `J_i`, `R_i`, `W_i`, whitened residual, `r_i^T W_i r_i`, `J_i^T W_i J_i`, and `J_i^T W_i r_i`;
+- provider contracts for GNSS, dual yaw, Raw Doppler, Go2, foot kinematics, yaw-rate, relative odometry, contact/slip, and feedback observations;
+- logger schema, roadmap, validation protocol, and risk register.
+
+N9G0 is still design-only:
+
+```text
+status=N9G0_publish_blocked_by_git_boundary
+ready_for_N9G1_phase1_implementation=human_decision_required
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=resolve_git_boundary
+```

@@ -49,6 +49,8 @@ The supervisor must prevent phase confusion:
 - N9D: mathematical / evaluation / filter construction full-chain audit.
 - N9E: BY2 paper-level packaging.
 - N9F0_TO_N9F2: active nine-factor FGO legged design materialization and context sync; design/package stage only, no representative runs.
+- N9F6A_TO_N9F7: source-code forensic audit and active FGO/legged completion review; Step 1 passed from source evidence, Step 2 took design-package-only Path C with no implementation or runs.
+- N9F7A_TO_N9G0: Git/PR boundary lock and manual LegSA_9F_FGO_EKF design review; design package complete, implementation not started, push blocked pending human review of the existing non-doc ahead commit.
 
 ### 1.2 Planner
 
@@ -121,6 +123,10 @@ Actual local absolute paths belong only in ignored `docs/codex_context/DATA_PATH
 N9B2B locks the Windows and WSL path aliases and the current BY2/N9 runtime alias root. Future BY2/N9 outputs must use the `BY2_N9B2_*` aliases. N9C0 consolidated precheck artifacts are represented by `<N9C0_CONSOLIDATED_PRECHECK_ROOT>`, under `<BY2_N9B2_FULL_MATRIX_ROOT>`. The old Chinese output root is read-only historical evidence, not the active output root. Native Ubuntu migration is deferred.
 
 Runtime outputs remain untracked. The N9C0A runtime root is represented in tracked docs only by the alias `<BY2_N9B2_WINDOWS_ROOT>/N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION`.
+The N9F6A/N9F7 runtime root is represented in tracked docs only by the alias `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
+The N9F7A/N9G0 runtime root is represented in tracked docs only by the alias `<BY2_N9B2_WINDOWS_ROOT>/N9F7A_TO_N9G0_GIT_BOUNDARY_AND_MANUAL_LEGSA_9F_FGO_EKF_DESIGN_REVIEW`.
+The N9G0 design package root is represented in tracked docs only by the alias `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_LEGSA_9F_FGO_EKF_DESIGN_PACKAGE`.
+The N9G0 export-clean package root is represented in tracked docs only by the alias `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_EXPORT_CLEAN_DESIGN_PACKAGE`.
 
 ## 4. Data Source Roles
 
@@ -216,9 +222,14 @@ Current completed route:
 - N9C0 global staged consolidation precheck completed.
 - N9E active nine-factor FGO/legged logger review completed with the logging-blocked decision.
 - N9E decision: `complete_nine_factor_FGO_claim=false`; current `LegSA_full_EKF` lacks accepted row-level active FGO residual/cost evidence for all nine factors.
+- N9F0_TO_N9F2 active nine-factor FGO legged design materialization and context sync completed.
+- N9F6A source-code forensic audit from zero completed and passed reviewer gate.
+- N9F7 took Path C only: data-pipeline / substantial algorithm design package; no implementation, solver, evaluator, representative run, full matrix, replot, or figure generation.
+- N9F7A Git boundary audit completed: current branch contains an existing unpushed reporting/test commit and a docs commit before the current docs lock; PR #52 remains open/unmerged and remote head does not include the local ahead commits.
+- N9G0 manual `LegSA_9F_FGO_EKF` design review completed as design only: algorithm identity, state/window, nine-factor, matrix/residual, provider, logger, roadmap, validation, and risk packages exist.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
-- Current design/context stage: `N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
-- Recommended next stage: `N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN`.
+- Current design/context stage: `N9F7A_TO_N9G0_GIT_BOUNDARY_AND_MANUAL_LEGSA_9F_FGO_EKF_DESIGN_REVIEW`.
+- Recommended next stage: `resolve_git_boundary`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
 
@@ -239,6 +250,11 @@ Allowed now:
 - N9C1 consolidated figure generation readiness passed.
 - N9E may be cited only as a logging-blocked evidence review and Obsidian sync; it does not support a complete active nine-factor FGO claim.
 - N9F design package is complete and concludes that current evidence requires a new active nine-factor FGO algorithm design.
+- N9F6A source audit may state that robot kinematics/contact/legged modeling exists in provider, diagnostic, offline no-feedback, and candidate factor code, while active `LegSA_full_EKF` only uses provider-dependent Go2 weak attitude / horizontal velocity EKF updates and selected-feedback EKF pseudo-measurements.
+- N9F7 may state that `LegSA_9F_FGO_EKF` still requires a separate active FGO window/factor graph, provider contracts, and row-level residual/Jacobian/cost logging before smoke or representative validation.
+- N9G0 may state that a manual design review package exists for a future, separate `LegSA_9F_FGO_EKF` candidate.
+- N9G0 may state that `LegSA_full_EKF` remains the verified EKF/feedback algorithm and is not relabeled.
+- N9G0 may state that phase-1 implementation is blocked until the Git boundary and human design/implementation approval are resolved.
 - `LegSA_full_EKF` is not accepted as active nine-factor FGO and must not be relabeled as such.
 
 Forbidden now:
@@ -254,6 +270,9 @@ Forbidden now:
 - using superseded rows, `historical_nominal_none`, or `B_gnss_downsample_2Hz` for active conclusions.
 - automatic PR #52 merge/tag authorization.
 - representative active nine-factor FGO runs before N9F implementation review.
+- treating the N9F6A/N9F7 design package as active solver implementation.
+- treating the N9G0 design package as implementation or active factor evidence.
+- pushing PR #52 while the existing non-doc ahead commit boundary remains unresolved.
 - treating provider/update counts or historical candidate no-feedback rows as current active nine-factor FGO residual/cost evidence.
 
 ## 10. Historical N9C0A Decision Lock
@@ -284,4 +303,36 @@ ready_for_paper_claims=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 recommended_next_stage=N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN
+```
+
+## 12. N9F6A/N9F7 Decision Lock
+
+N9F6A_TO_N9F7 completed a source-code forensic audit and then followed Path C only. It does not authorize code implementation, solver execution, evaluator execution, degradation generation, representative validation, full matrix execution, figure generation, paper claims, or relabeling `LegSA_full_EKF` as active nine-factor FGO.
+
+Expected decision if validation passes:
+
+```text
+status=N9F7_substantial_algorithm_design_required
+ready_for_algorithm_design_review=true
+ready_for_implementation_review=false
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=manual_algorithm_design_review
+```
+
+## 13. N9F7A/N9G0 Decision Lock
+
+N9F7A_TO_N9G0 completed a Git boundary audit and manual `LegSA_9F_FGO_EKF` design review. It does not authorize implementation, solver execution, evaluator execution, random generation, degraded-input generation, N9B2 execution, representative validation, full matrix execution, figure generation, paper claims, PR #52 merge, PR #52 closure, or tag creation.
+
+Expected decision if validation passes:
+
+```text
+status=N9G0_publish_blocked_by_git_boundary
+design_review_complete=true
+ready_for_N9G1_phase1_implementation=human_decision_required
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=resolve_git_boundary
 ```

@@ -202,3 +202,41 @@ recommended_next_stage=N9F6_HUMAN_REVIEW_LEGSA_9F_IMPLEMENTATION_PLAN
 ```
 
 N9F did not run solvers, evaluators, degradation generation, random generation, representative active-nine-factor runs, or figure generation. It did not modify algorithm source, math, or config wiring. The central conclusion is that `LegSA_full_EKF` must not be relabeled as active nine-factor FGO; current evidence requires a new active nine-factor FGO algorithm design and implementation review before representative runs.
+
+## N9F6A_TO_N9F7: Source-Code Forensic Audit And Design Package
+
+N9F6A re-audited the real Windows/WSL source code from zero and passed reviewer gate before Step 2. The audit distinguished code existence, provider existence, config enablement, runner mapping, solver instantiation, factor/update rows, and residual/cost/log evidence.
+
+Decision:
+
+```text
+status=N9F7_substantial_algorithm_design_required
+ready_for_algorithm_design_review=true
+ready_for_implementation_review=false
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=manual_algorithm_design_review
+```
+
+The source answer is that robot kinematics/contact/legged modeling exists, but mainly as provider, diagnostic, offline no-feedback, or candidate factor code. Active `LegSA_full_EKF` uses provider-dependent Go2 weak attitude / horizontal velocity EKF updates and selected-feedback EKF pseudo-measurements; it does not instantiate a complete active nine-factor FGO solver with row-level residual, Jacobian, and cost logs. N9F7 therefore produced a Path C design/data-provider package only and did not implement code, run solvers/evaluators, generate figures, run representative cases, or run a full matrix.
+
+## N9F7A_TO_N9G0: Git Boundary And Manual LegSA 9F FGO EKF Design Review
+
+N9F7A audited the current Git/PR publication boundary. The local branch is ahead of the PR #52 remote head and includes an existing unpushed reporting/test code commit before the current docs lock. Runtime roots and Obsidian roots remain untracked. Current-stage docs are alias-only, but PR push remains blocked until the human resolves the non-doc ahead commit boundary.
+
+N9G0 produced a manual design package for the future `LegSA_9F_FGO_EKF` candidate. It distinguishes the current verified `LegSA_full_EKF` EKF/feedback algorithm from a separate active-FGO candidate and defines the state/window design, nine-factor design, matrix/residual model, provider contracts, logger schema, implementation roadmap, validation protocol, and risk register.
+
+Decision:
+
+```text
+status=N9G0_publish_blocked_by_git_boundary
+design_review_complete=true
+ready_for_N9G1_phase1_implementation=human_decision_required
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=resolve_git_boundary
+```
+
+N9G0 did not implement `LegSA_9F_FGO_EKF`, run solvers, run evaluators, generate random or degraded inputs, run N9B2, generate figures, merge or close PR #52, create tags, or make paper claims.

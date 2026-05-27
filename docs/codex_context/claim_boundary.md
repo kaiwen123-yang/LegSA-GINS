@@ -23,6 +23,12 @@ LegSA-GINS claims must track what the audits actually prove.
 - N9C1 consolidated figure generation readiness passed.
 - N9E logging-blocked review completed and kept `complete_nine_factor_FGO_claim=false`.
 - N9F active nine-factor FGO design package completed with `ready_for_implementation_review=true`.
+- N9F6A/N9F7 source-code audit and design package completed with `N9F7_substantial_algorithm_design_required`.
+- N9F6A may state that robot kinematics/contact/legged modeling exists in provider, diagnostic, offline no-feedback, and candidate factor code, but this is not complete active FGO residual/cost evidence.
+- N9F7 must keep `ready_for_implementation_review=false` until a later manual algorithm design review approves implementation.
+- N9F7A/N9G0 Git-boundary and manual design review completed with publish blocked pending human review of the existing non-doc ahead commit.
+- N9G0 may state that `LegSA_9F_FGO_EKF` has a manual design package, but it remains design-only and separate from `LegSA_full_EKF`.
+- N9G0 must keep `complete_nine_factor_FGO_claim=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
 - Current evidence requires a new active nine-factor FGO algorithm design before representative runs.
 
 ## Not Allowed Current Claims

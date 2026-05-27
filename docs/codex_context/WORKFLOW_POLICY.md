@@ -17,19 +17,21 @@
 - Reviewer: no edits; checks diff, scope, paths, data roles, claim boundaries, runtime-artifact boundaries, and Git readiness.
 - User: final authority for commit, push, PR, merge, close, tag, and stage approval.
 
-## Current N9C0A Boundary
+## Current N9F7A/N9G0 Boundary
 
-`N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION` is documentation/context update only.
+`N9F7A_TO_N9G0_GIT_BOUNDARY_AND_MANUAL_LEGSA_9F_FGO_EKF_DESIGN_REVIEW` is Git-boundary and manual design-review only.
 
 Allowed:
 
 - Approved tracked docs/context updates.
-- Approved runtime report/matrix/summary outputs under `<BY2_N9B2_WINDOWS_ROOT>/N9C0A_CONTEXT_UPDATE_AFTER_GLOBAL_CONSOLIDATION`.
+- Approved runtime report/matrix/summary outputs under `<BY2_N9B2_WINDOWS_ROOT>/N9F7A_TO_N9G0_GIT_BOUNDARY_AND_MANUAL_LEGSA_9F_FGO_EKF_DESIGN_REVIEW`.
+- Manual design-review material under `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_LEGSA_9F_FGO_EKF_DESIGN_PACKAGE` and `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_EXPORT_CLEAN_DESIGN_PACKAGE`.
 - Read-only validation commands.
-- Commit and push tracked docs only after reviewer passes, if the supervisor policy allows it.
+- Commit tracked docs only after reviewer passes, if the supervisor policy allows it.
 
 Forbidden:
 
+- implementation of `LegSA_9F_FGO_EKF`.
 - solver execution.
 - official evaluator execution.
 - N9B2 execution.
@@ -41,17 +43,20 @@ Forbidden:
 - algorithm math, FGO factor math, feedback policy, final_v23, KF-GINS-Baseline, or `<WSL_ALGO_REPO>` edits.
 - `docs/codex_context/DATA_PATHS.local.md` edits or staging.
 - `by2-huitu/` staging.
+- `obsidian_knowledge/` or `.obsidian/` staging.
+- PR #52 push while the existing non-doc ahead commit boundary remains unresolved.
 - PR #52 merge, close, or tag creation.
 
 ## Current Decision
 
-N9C0A may set:
+N9G0 may set:
 
 ```text
-ready_for_N9C1_consolidated_figure_generation=true
+design_review_complete=true
+ready_for_N9G1_phase1_implementation=human_decision_required
 ready_for_paper_claims=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 ```
 
-It may recommend `human_review_N9C0A_then_N9C1_consolidated_figure_generation`, but it must not run N9C1 or authorize PR #52 merge/tag.
+It may recommend `resolve_git_boundary`, but it must not implement N9G1 or authorize PR #52 push/merge/tag without the required reviewer and human boundary decision.
