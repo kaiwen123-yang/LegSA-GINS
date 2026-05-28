@@ -49,6 +49,9 @@ LegSA-GINS claims must track what the audits actually prove.
 - BY3A2 may state that historical BY2 WSL Raw Doppler, Go2, single-baseline, final_v23, and selected-feedback chains were recovered.
 - BY3A2 may state that BY3 Raw Doppler provider files were materialized through the accepted N5A/N5B RTKLIB/RINEX/helper path without GNSS receiver velocity, NAV-PVT velocity, RTKLIB position solution, trace, final_v23 output, or LegSA output substitution.
 - BY3A2 may state that BY3 same-case selected feedback remains blocked and no BY3 solver/evaluator/degradation/metric figure run was performed.
+- BY3A3 may state that BY3 same-case selected feedback was generated from stage1 official-eval state/estimate columns only.
+- BY3A3 may state that BY3 normal-only `LegSA_full_EKF`, `single_antenna_gnss1_status_KF_GINS`, and `final_v23_dual_antenna_EKF` solver/evaluator runs completed if backed by the BY3A3 runtime decision report.
+- BY3A3 may state that BY3 degradation planning is ready for a dedicated planning/precheck stage, while paper claims remain disabled.
 
 ## Not Allowed Current Claims
 
@@ -76,12 +79,13 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not claim N9G1E normal smoke passed.
 - Do not start N9G2 until provider/factor model and active backend gaps are fixed and reviewed.
 - Do not treat PR #52 head sync as merge, closure, tag, or paper-claim authorization.
-- Do not claim BY3 normal generalization passed until BY3 solvers and official evaluation complete from accepted inputs.
-- Do not claim BY3 degradation matrix readiness from BY3A0_TO_BY3E because the solver/evaluator gate remains blocked.
+- Do not claim BY3 paper-ready generalization, final_v23 outperformance, or degradation/full-matrix completion from BY3A3 normal-only metrics.
+- Do not claim BY3 degradation execution until a later explicitly approved BY3 degradation stage runs.
 - Do not treat BY3 receiver `imu-data.csv` as Go2 body IMU.
 - Do not treat BY3 candidate input files as solver success, evaluation evidence, or paper evidence.
 - Do not treat BY3A1 repaired input files or materialized Go2 prior files as BY3 normal solver/evaluator success, metric evidence, or paper evidence.
 - Do not treat BY3A2 Raw Doppler provider materialization or baseline handoff configs as BY3 normal solver/evaluator success, metric evidence, or paper evidence.
+- Do not treat BY3A3 normal-only runtime evidence as complete nine-factor FGO evidence, LegSA_9F_FGO_EKF evidence, or paper performance evidence.
 - Do not treat BY2 text-summary/archive reorganization as new BY2 execution or new performance evidence.
 
 ## Paper Boundary

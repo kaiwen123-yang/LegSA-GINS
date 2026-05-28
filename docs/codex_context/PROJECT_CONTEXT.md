@@ -7,7 +7,7 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 ## Current Stage
 
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A2_HISTORICAL_WSL_PIPELINE_RECOVERY_AND_RUNNER_GATE_REPAIR`.
+- Current BY3/reporting stage: `BY3A3_SELECTED_FEEDBACK_STAGE1_CHAIN_AND_NORMAL_GENERALIZATION_EXECUTION`.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -18,6 +18,7 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 - Current BY3 stage root: `<BY3_STAGE_ROOT>`.
 - Current BY3A1 parity/provider-gate root: `<BY3A1_STAGE_ROOT>`.
 - Current BY3A2 historical recovery/provider-gate root: `<BY3A2_STAGE_ROOT>`.
+- Current BY3A3 selected-feedback/normal execution root: `<BY3A3_STAGE_ROOT>`.
 - Current BY3 full-matrix placeholder root: `<BY3_FULL_MATRIX_ROOT>`.
 - Current export-clean design package: `<BY2_N9B2_FULL_MATRIX_ROOT>/N9F_EXPORT_CLEAN_DESIGN_PACKAGE`.
 - Current metrics source: `<N9C0_CONSOLIDATED_PRECHECK_ROOT>/matrix/N9C0_ACTIVE_FINAL_ONLY_METRICS_TABLE`.
@@ -33,8 +34,9 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 - N9G1C-E resolved locked normal and core providers for `LegSA_9F_FGO_EKF`, but active backend and solver execution remain blocked, so normal smoke was not run.
 - BY3A0_TO_BY3E completed BY3A0 context lock, BY3A inventory/body IMU audit, BY3B alignment, BY3C candidate input generation, BY2T text summaries, and BY2F copy-only figure archive. BY3D/E were blocked before solver/evaluator execution.
 - BY3A1 repaired BY3 input-chain parity where BY2 policy was clear and materialized BY3 Go2 priors.
-- BY3A2 recovered the historical BY2 WSL Raw Doppler, Go2, single-baseline, final_v23, and selected-feedback chains; BY3 Raw Doppler is now materialized through the accepted N5A/N5B path, while BY3 same-case selected feedback remains blocked.
-- Current BY3 recommended next stage: `repair_BY3_stage1_feedback_chain`.
+- BY3A2 recovered the historical BY2 WSL Raw Doppler, Go2, single-baseline, final_v23, and selected-feedback chains; BY3 Raw Doppler is now materialized through the accepted N5A/N5B path.
+- BY3A3 generated same-case BY3 selected feedback from stage1 official-eval state/estimate columns only, then completed normal-only LegSA_full_EKF, GNSS1-status single-baseline, and final_v23 external-baseline official evaluation.
+- Current BY3 recommended next stage: `BY3B_DEGRADATION_MATRIX_PLANNING_AND_PRECHECK`.
 - Current active-FGO recommended next stage: `implement_active_fgo_backend_or_reframe_scope`.
 
 ## Current Batch State
@@ -56,12 +58,12 @@ ready_for_algorithm_design_review=true
 ready_for_implementation_review=false
 ready_for_N9G1A_context_lock=complete
 ready_for_N9G1C_E_provider_backend_normal_smoke=blocked_active_backend
-ready_for_BY3_degradation_matrix_planning=false
-ready_for_BY3_solver_evaluator=blocked_same_case_feedback_gate
-ready_for_BY3_input_chain=partial_repaired
+ready_for_BY3_degradation_matrix_planning=true
+ready_for_BY3_solver_evaluator=normal_completed
+ready_for_BY3_input_chain=repaired
 ready_for_BY3_go2_priors=true
 ready_for_BY3_raw_doppler_provider=true
-ready_for_BY3_same_case_feedback=false
+ready_for_BY3_same_case_feedback=true
 ready_for_BY3_paper_claims=false
 ready_for_representative_validation=false
 ready_for_N9C1_consolidated_figure_generation=true
@@ -83,7 +85,7 @@ N9G1C-E is provider contract resolution, active-backend audit, logger schema con
 
 N9G2 representative validation is blocked until provider/factor and active FGO backend gaps are fixed and reviewed. Full matrix, replot, and report stages are deferred to N9G3/N9G4 only if applicable and explicitly approved.
 
-BY3 degradation planning is blocked until BY3 same-case feedback and runner gates are repaired and a BY3 normal solver/evaluator pass exists. BY3A1 repaired inputs, BY3A1 Go2 priors, and BY3A2 Raw Doppler provider materialization are not performance evidence.
+BY3 degradation planning is now ready for a dedicated planning/precheck stage after BY3A3 normal-only solver/evaluator completion. BY3A3 metrics are runtime evidence for review only, not paper claims, final_v23 outperformance claims, or BY3 degradation/full-matrix completion.
 
 ## Path Boundary
 

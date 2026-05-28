@@ -424,6 +424,7 @@ The following can only be diagnostic unless future evidence is available:
 - BY3-only generalization;
 - BY3A0_TO_BY3E source inventory, alignment, candidate input generation, BY2 text summary, and BY2 copy-only archive reporting, with no BY3 solver/evaluator performance claim;
 - BY3A1 input-chain parity repair and BY3 Go2 prior materialization, with no BY3 solver/evaluator performance claim;
+- BY3A3 normal-only solver/evaluator completion as runtime evidence for BY3 generalization review, not as a paper claim or final_v23 outperformance claim;
 - reference-limited yaw boundary.
 - N9C0 global comparison classifications until N9C visual review and N9D claim-boundary review complete.
 
@@ -455,6 +456,7 @@ Do not claim:
 - Treating N9G1E as normal-smoke pass evidence.
 - Treating BY3A/B source inventory, BY3B alignment reports, or BY3C candidate inputs as BY3 solver/evaluator validation.
 - Treating BY3A1 repaired inputs or materialized BY3 Go2 priors as BY3 solver/evaluator validation, metric evidence, or paper evidence.
+- Treating BY3A3 normal-only metrics as BY3 degradation/full-matrix completion, active nine-factor FGO evidence, paper evidence, or final_v23 outperformance evidence.
 - Claiming BY3 degradation/full-matrix completion from the BY3 full-matrix placeholder root.
 - Representative active-nine-factor FGO runs before human-approved implementation review.
 - full monolithic N9B2 execution.
@@ -864,6 +866,18 @@ N4H4R3 is engineering backbone parity only.
 N4H4R3 is not a proposed factor result.
 
 No paper performance claim.
+
+## BY3A3 Normal Generalization Execution Boundary
+
+BY3A3 may state that BY3 same-case selected feedback was generated from BY3 stage1 official-eval state/estimate columns only.
+
+BY3A3 may state that `LegSA_full_EKF`, `single_antenna_gnss1_status_KF_GINS`, and `final_v23_dual_antenna_EKF` normal-only BY3 solver/evaluator runs completed if the BY3A3 runtime decision report says so.
+
+BY3A3 may report normal BY3 metrics as runtime evidence for human review and BY3 degradation planning.
+
+BY3A3 may not claim paper performance readiness, final_v23 outperformance, BY3 degradation/full-matrix completion, complete nine-factor FGO, or active LegSA_9F_FGO_EKF evidence.
+
+BY3A3 keeps `ready_for_paper_claims=false`.
 
 No raw Doppler/Go2/LSIM/OIM/FGO claims.
 
