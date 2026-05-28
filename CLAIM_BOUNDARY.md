@@ -975,6 +975,26 @@ No paper performance claim.
 
 No outperform final_v23 claim.
 
+## BY3A2 Historical Pipeline Recovery Boundary
+
+BY3A2 may state only that the historical BY2 WSL chains were recovered and applied as gate checks for BY3.
+
+BY3A2 may state that BY3 raw receiver CSVs can rebuild UBX/RAWX evidence and that Raw Doppler provider materialization succeeded only if the reviewed BY3A2 runtime report contains fresh accepted RINEX/nav/provider factor CSV evidence.
+
+BY3A2 may state that BY3 Go2 priors were validated as proprioceptive observations, not truth.
+
+BY3A2 may state that single-baseline and final_v23 handoff configs were generated for review if the BY3A2 handoff reports say so. This is not solver output.
+
+BY3A2 may not claim BY3 normal generalization success.
+
+BY3A2 may not claim Raw Doppler was supplied by GNSS receiver velocity, NAV-PVT velocity, RTKLIB position solution, trace, final_v23 output, or LegSA output.
+
+BY3A2 may not claim selected-feedback readiness until same-case BY3 stage1 official EVAL_NAV exists and the feedback file is generated from state/estimate columns only.
+
+No BY3 degradation claim.
+
+No paper performance claim.
+
 ## N8K4 Semantic Filename Plot Fix Boundary
 
 N8K2 eliminated the original placeholder-like formal ablation figures.

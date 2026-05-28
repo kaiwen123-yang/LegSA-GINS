@@ -11,6 +11,10 @@ logs/
 cache/
 tmp/
 configs/local/
+by2-huitu/
+by3-huiti/
+obsidian_knowledge/
+.obsidian/
 *.local.yaml
 *.local.json
 *.local.toml

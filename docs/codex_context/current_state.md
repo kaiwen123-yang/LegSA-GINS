@@ -1,11 +1,11 @@
-# Current State - BY3A1 Input Parity Repaired, Providers Still Blocked
+# Current State - BY3A2 Raw Doppler Recovered, Feedback Still Blocked
 
 This file records the current verified operational state for the Windows audit workspace. It supersedes stale N8K, N9A, N9B2B1, and N9B-not-started text except where that text is explicitly historical.
 
 ## Verified Current State
 
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A1_BY2_PARITY_AUDIT_AND_PROVIDER_GATE_REPAIR`.
+- Current BY3/reporting stage: `BY3A2_HISTORICAL_WSL_PIPELINE_RECOVERY_AND_RUNNER_GATE_REPAIR`.
 - Current operational source of truth for degradation metrics remains `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design source: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code forensic audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -16,6 +16,7 @@ This file records the current verified operational state for the Windows audit w
 - Current N9G1C-E runtime root: `<BY2_N9B2_WINDOWS_ROOT>/N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 - Current BY3 stage root: `<BY3_STAGE_ROOT>`.
 - Current BY3A1 parity/provider-gate root: `<BY3A1_STAGE_ROOT>`.
+- Current BY3A2 historical recovery/provider-gate root: `<BY3A2_STAGE_ROOT>`.
 - Current BY3 full-matrix placeholder root: `<BY3_FULL_MATRIX_ROOT>`.
 - Current BY3 receiver source alias: `<BY3_RECEIVER_ROOT>`.
 - Current BY3 Go2 body/high-level source alias: `<BY3_GO2_BODY_SOURCE>`.
@@ -52,6 +53,10 @@ This file records the current verified operational state for the Windows audit w
 - BY3A1 repaired BY3 IMU, dual-GNSS, and single-GNSS1 runtime input files to BY2-compatible no-header whitespace numeric conventions using a common BY3 body-source time zero without trace tuning.
 - BY3A1 materialized BY3 Go2 attitude, horizontal velocity, and joint prior provider files from the BY3 Go2 body source, with Go2 truth claims disabled.
 - BY3A1 did not materialize BY3 Raw Doppler because the accepted BY2 RTKLIB provider logic requires RINEX observation/navigation inputs that were not available in the receiver CSV tree.
+- BY3A2 recovered the historical BY2 WSL chains for Raw Doppler, Go2 priors, single-baseline handoff, final_v23 external handoff, and selected-feedback same-case dependency.
+- BY3A2 rebuilt BY3 UBX/RAWX evidence and materialized the BY3 Raw Doppler provider through the accepted N5A/N5B RTKLIB/RINEX/helper path.
+- BY3A2 validated BY3 Go2 priors and generated single/final_v23 runtime handoff configs for review.
+- BY3A2 did not run BY3 solvers, official evaluators, degradation, metrics, or metric figures because same-case selected feedback remains blocked.
 - BY3A1 did not materialize same-case selected feedback because no real BY3 stage1 solver and official EVAL_NAV exist.
 - BY3A1 did not run BY3 solvers, official evaluators, degradation, metrics, or metric figures.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
@@ -77,11 +82,13 @@ N9G1C-E is provider contract resolution, active-backend audit, logger schema con
 
 BY3A1 is an input-chain parity and provider-gate repair stage only. It repaired BY3 runtime input format/time conventions and materialized BY3 Go2 priors, but the final decision remains `BY3A1_provider_or_feedback_blocked`.
 
+BY3A2 is a historical WSL recovery and runner-gate repair stage. It recovered BY3 Raw Doppler provider materialization using the accepted BY2 N5A/N5B path, validated BY3 Go2 priors, and generated single/final_v23 handoff configs for review. The final decision remains `BY3A2_selected_feedback_blocked` because no real same-case BY3 stage1 official EVAL_NAV exists. No BY3 solver, official evaluator, degradation matrix, metric figure generation, parameter retuning, final_v23 algorithm change, selected-feedback generation, or paper claim was performed.
+
 ## Next Stage
 
 ```text
 recommended_next_stage=implement_active_fgo_backend_or_reframe_scope
-recommended_BY3_next_stage=repair_BY3_providers_or_feedback
+recommended_BY3_next_stage=repair_BY3_stage1_feedback_chain
 ```
 
 Planned sequence after human review:
@@ -105,10 +112,10 @@ ready_for_implementation_review=false
 ready_for_N9G1A_context_lock=complete
 ready_for_N9G1C_E_provider_backend_normal_smoke=blocked_active_backend
 ready_for_BY3_degradation_matrix_planning=false
-ready_for_BY3_solver_evaluator=blocked_provider_or_feedback_gate
+ready_for_BY3_solver_evaluator=blocked_same_case_feedback_gate
 ready_for_BY3_input_chain=partial_repaired
 ready_for_BY3_go2_priors=true
-ready_for_BY3_raw_doppler_provider=false
+ready_for_BY3_raw_doppler_provider=true
 ready_for_BY3_same_case_feedback=false
 ready_for_BY3_paper_claims=false
 ready_for_representative_validation=false

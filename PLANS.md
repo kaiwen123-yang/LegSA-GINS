@@ -10,7 +10,7 @@ This file is not a runtime report, algorithm output, paper claim, or place to st
 
 LegSA-GINS is a legged-robot GNSS/INS fusion project with source-backed EKF, Raw Doppler, source-aware weighting, Go2 proprioception, legged FGO candidate factors, no-feedback FGO, and FGO-feedback EKF joint filtering.
 
-Current data focus has expanded to BY3 normal-generalization gates. BY3A0_TO_BY3E created source inventory, alignment reports, candidate BY3 normal inputs, BY2 degradation text summaries, and a copy-only BY2 figure archive. BY3A1 repaired BY3 input-chain parity where BY2 policy was clear and materialized BY3 Go2 priors, but BY3 solver/evaluator execution and degradation/full-matrix validation remain blocked until BY3 Raw Doppler, same-case feedback, and runner handoff gates are repaired.
+Current data focus has expanded to BY3 normal-generalization gates. BY3A0_TO_BY3E created source inventory, alignment reports, candidate BY3 normal inputs, BY2 degradation text summaries, and a copy-only BY2 figure archive. BY3A1 repaired BY3 input-chain parity where BY2 policy was clear and materialized BY3 Go2 priors. BY3A2 recovered the historical BY2 WSL Raw Doppler pipeline and materialized the BY3 Raw Doppler provider, but BY3 solver/evaluator execution and degradation/full-matrix validation remain blocked until same-case selected feedback is repaired and reviewed.
 
 ## 2. Global Working Principles
 
@@ -52,7 +52,7 @@ Completed or accepted for current planning:
 - N9E active nine-factor FGO/legged logger review completed with `complete_nine_factor_FGO_claim=false`.
 - N9E outcome: logging blocked for current `LegSA_full_EKF`; no complete active nine-factor FGO claim.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A1_BY2_PARITY_AUDIT_AND_PROVIDER_GATE_REPAIR`; solver/evaluator execution remains blocked after parity repair because provider/feedback/runner gates did not all pass.
+- Current BY3/reporting stage: `BY3A2_HISTORICAL_WSL_PIPELINE_RECOVERY_AND_RUNNER_GATE_REPAIR`; solver/evaluator execution remains blocked after Raw Doppler recovery because same-case selected feedback is not materialized.
 - N9F design materialization completed: current evidence requires a new active nine-factor FGO algorithm design before representative runs.
 - N9F6A source-code forensic audit completed from real Windows/WSL source evidence and passed reviewer gate.
 - N9F7 followed Path C only: substantial algorithm design package required; no implementation, solver/evaluator execution, representative run, full matrix, or replot was performed.
@@ -65,13 +65,14 @@ Completed or accepted for current planning:
 - N9G1B normal smoke was not run because the gate blocked it: provider contracts are not ready for active factors, the active nine-factor FGO backend is unavailable, and candidate solver execution is disabled.
 - N9G1C-E resolved the locked normal source and core provider contracts for `LegSA_9F_FGO_EKF` as partial accepted provider evidence, but the active nine-factor FGO backend remains unavailable and candidate solver execution remains disabled.
 - N9G1C-E normal smoke was not run because the gate blocked it: active backend unavailable, candidate solver disabled, and no active factor wiring rows.
-- BY3A1 extracted the accepted BY2 input chain, repaired BY3 candidate IMU/GNSS files to BY2 runtime conventions, materialized BY3 Go2 attitude/horizontal/joint priors, and blocked solvers because BY3 Raw Doppler and same-case feedback are still unavailable under accepted gates.
+- BY3A1 extracted the accepted BY2 input chain, repaired BY3 candidate IMU/GNSS files to BY2 runtime conventions, and materialized BY3 Go2 attitude/horizontal/joint priors.
+- BY3A2 recovered the historical BY2 WSL Raw Doppler, Go2, single-baseline, final_v23, and selected-feedback chains; BY3 Raw Doppler is now materialized through the accepted N5A/N5B path, while BY3 same-case selected feedback remains unavailable under accepted gates.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
 - `LegSA_9F_FGO_EKF` is a separate new candidate, not a relabeling of `LegSA_full_EKF`.
 
 Immediate next stages:
 
-- `repair_BY3_providers_or_feedback`
+- `repair_BY3_stage1_feedback_chain`
 - `implement_active_fgo_backend_or_reframe_scope`
 - `N9G2_REPRESENTATIVE_VALIDATION` later, only after active backend/provider/factor gaps are fixed and reviewed.
 - `N9G3_FULL_MATRIX` and `N9G4_REPLOT_AND_REPORT` later only if applicable and explicitly approved.
@@ -92,10 +93,10 @@ ready_for_implementation_review=false
 ready_for_N9G1A_context_lock=complete
 ready_for_N9G1C_E_provider_backend_normal_smoke=blocked_active_backend
 ready_for_BY3_degradation_matrix_planning=false
-ready_for_BY3_solver_evaluator=blocked_provider_or_feedback_gate
+ready_for_BY3_solver_evaluator=blocked_same_case_feedback_gate
 ready_for_BY3_input_chain=partial_repaired
 ready_for_BY3_go2_priors=true
-ready_for_BY3_raw_doppler_provider=false
+ready_for_BY3_raw_doppler_provider=true
 ready_for_BY3_same_case_feedback=false
 ready_for_representative_validation=false
 ready_for_paper_claims=false
@@ -350,4 +351,25 @@ status=BY3A1_provider_or_feedback_blocked
 ready_for_BY3_degradation_matrix_planning=false
 ready_for_paper_claims=false
 recommended_next_stage=repair_BY3_providers_or_feedback
+```
+
+## 19. BY3A2 Completion Criteria
+
+BY3A2 is complete only when:
+
+- historical BY2 WSL chains for Raw Doppler, Go2 priors, single-baseline handoff, final_v23 handoff, and selected-feedback same-case dependency are recovered from real artifacts;
+- BY3 Raw Doppler provider materialization uses the accepted N5A/N5B logic or records a concrete blocker;
+- BY3 Go2 priors remain source observations, not truth;
+- single-baseline and final_v23 handoffs are validated as runtime configs/commands only unless all solver gates pass;
+- selected-feedback remains blocked unless a real same-case BY3 stage1 official EVAL_NAV exists;
+- no BY3 degradation matrix, artificial degradation, parameter retuning, trace tuning, final_v23 algorithm change, fabricated output, metric figure package, or paper claim is produced;
+- runtime outputs and Obsidian notes remain untracked.
+
+Current BY3A2 decision:
+
+```text
+status=BY3A2_selected_feedback_blocked
+ready_for_BY3_degradation_matrix_planning=false
+ready_for_paper_claims=false
+recommended_next_stage=repair_BY3_stage1_feedback_chain
 ```

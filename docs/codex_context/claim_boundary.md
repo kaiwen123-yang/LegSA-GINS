@@ -46,6 +46,9 @@ LegSA-GINS claims must track what the audits actually prove.
 - BY3A1 may state that BY3A0 candidate inputs failed strict BY2 parity in delimiter/header, IMU column count, single-baseline schema, and original time-normalization policy.
 - BY3A1 may state that repaired BY3 runtime input files and BY3 Go2 priors were generated from BY3 source data without trace tuning, parameter retuning, or receiver-IMU substitution.
 - BY3A1 may state that BY3 Raw Doppler and BY3 same-case selected feedback remain blocked, so solvers/evaluators were not run.
+- BY3A2 may state that historical BY2 WSL Raw Doppler, Go2, single-baseline, final_v23, and selected-feedback chains were recovered.
+- BY3A2 may state that BY3 Raw Doppler provider files were materialized through the accepted N5A/N5B RTKLIB/RINEX/helper path without GNSS receiver velocity, NAV-PVT velocity, RTKLIB position solution, trace, final_v23 output, or LegSA output substitution.
+- BY3A2 may state that BY3 same-case selected feedback remains blocked and no BY3 solver/evaluator/degradation/metric figure run was performed.
 
 ## Not Allowed Current Claims
 
@@ -78,6 +81,7 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not treat BY3 receiver `imu-data.csv` as Go2 body IMU.
 - Do not treat BY3 candidate input files as solver success, evaluation evidence, or paper evidence.
 - Do not treat BY3A1 repaired input files or materialized Go2 prior files as BY3 normal solver/evaluator success, metric evidence, or paper evidence.
+- Do not treat BY3A2 Raw Doppler provider materialization or baseline handoff configs as BY3 normal solver/evaluator success, metric evidence, or paper evidence.
 - Do not treat BY2 text-summary/archive reorganization as new BY2 execution or new performance evidence.
 
 ## Paper Boundary
