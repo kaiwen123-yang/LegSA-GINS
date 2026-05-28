@@ -423,6 +423,7 @@ The following can only be diagnostic unless future evidence is available:
 - FGO feedback;
 - BY3-only generalization;
 - BY3A0_TO_BY3E source inventory, alignment, candidate input generation, BY2 text summary, and BY2 copy-only archive reporting, with no BY3 solver/evaluator performance claim;
+- BY3A1 input-chain parity repair and BY3 Go2 prior materialization, with no BY3 solver/evaluator performance claim;
 - reference-limited yaw boundary.
 - N9C0 global comparison classifications until N9C visual review and N9D claim-boundary review complete.
 
@@ -453,6 +454,7 @@ Do not claim:
 - Treating N9G1C-E provider resolution as active nine-factor FGO residual/Jacobian/cost evidence.
 - Treating N9G1E as normal-smoke pass evidence.
 - Treating BY3A/B source inventory, BY3B alignment reports, or BY3C candidate inputs as BY3 solver/evaluator validation.
+- Treating BY3A1 repaired inputs or materialized BY3 Go2 priors as BY3 solver/evaluator validation, metric evidence, or paper evidence.
 - Claiming BY3 degradation/full-matrix completion from the BY3 full-matrix placeholder root.
 - Representative active-nine-factor FGO runs before human-approved implementation review.
 - full monolithic N9B2 execution.

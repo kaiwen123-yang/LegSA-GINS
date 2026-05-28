@@ -10,7 +10,7 @@ This file is not a runtime report, algorithm output, paper claim, or place to st
 
 LegSA-GINS is a legged-robot GNSS/INS fusion project with source-backed EKF, Raw Doppler, source-aware weighting, Go2 proprioception, legged FGO candidate factors, no-feedback FGO, and FGO-feedback EKF joint filtering.
 
-Current data focus has expanded to BY3 normal-generalization gates. BY3A0_TO_BY3E created source inventory, alignment reports, candidate BY3 normal inputs, BY2 degradation text summaries, and a copy-only BY2 figure archive, but BY3 solver/evaluator execution and degradation/full-matrix validation remain blocked until BY3 provider/input gates are repaired.
+Current data focus has expanded to BY3 normal-generalization gates. BY3A0_TO_BY3E created source inventory, alignment reports, candidate BY3 normal inputs, BY2 degradation text summaries, and a copy-only BY2 figure archive. BY3A1 repaired BY3 input-chain parity where BY2 policy was clear and materialized BY3 Go2 priors, but BY3 solver/evaluator execution and degradation/full-matrix validation remain blocked until BY3 Raw Doppler, same-case feedback, and runner handoff gates are repaired.
 
 ## 2. Global Working Principles
 
@@ -52,7 +52,7 @@ Completed or accepted for current planning:
 - N9E active nine-factor FGO/legged logger review completed with `complete_nine_factor_FGO_claim=false`.
 - N9E outcome: logging blocked for current `LegSA_full_EKF`; no complete active nine-factor FGO claim.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A0_TO_BY3E_GENERALIZATION_AND_BY2_DEGRADATION_REPORT_REORG`; BY3D/E are blocked before solver/evaluator.
+- Current BY3/reporting stage: `BY3A1_BY2_PARITY_AUDIT_AND_PROVIDER_GATE_REPAIR`; solver/evaluator execution remains blocked after parity repair because provider/feedback/runner gates did not all pass.
 - N9F design materialization completed: current evidence requires a new active nine-factor FGO algorithm design before representative runs.
 - N9F6A source-code forensic audit completed from real Windows/WSL source evidence and passed reviewer gate.
 - N9F7 followed Path C only: substantial algorithm design package required; no implementation, solver/evaluator execution, representative run, full matrix, or replot was performed.
@@ -65,11 +65,13 @@ Completed or accepted for current planning:
 - N9G1B normal smoke was not run because the gate blocked it: provider contracts are not ready for active factors, the active nine-factor FGO backend is unavailable, and candidate solver execution is disabled.
 - N9G1C-E resolved the locked normal source and core provider contracts for `LegSA_9F_FGO_EKF` as partial accepted provider evidence, but the active nine-factor FGO backend remains unavailable and candidate solver execution remains disabled.
 - N9G1C-E normal smoke was not run because the gate blocked it: active backend unavailable, candidate solver disabled, and no active factor wiring rows.
+- BY3A1 extracted the accepted BY2 input chain, repaired BY3 candidate IMU/GNSS files to BY2 runtime conventions, materialized BY3 Go2 attitude/horizontal/joint priors, and blocked solvers because BY3 Raw Doppler and same-case feedback are still unavailable under accepted gates.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
 - `LegSA_9F_FGO_EKF` is a separate new candidate, not a relabeling of `LegSA_full_EKF`.
 
 Immediate next stages:
 
+- `repair_BY3_providers_or_feedback`
 - `implement_active_fgo_backend_or_reframe_scope`
 - `N9G2_REPRESENTATIVE_VALIDATION` later, only after active backend/provider/factor gaps are fixed and reviewed.
 - `N9G3_FULL_MATRIX` and `N9G4_REPLOT_AND_REPORT` later only if applicable and explicitly approved.
@@ -90,7 +92,11 @@ ready_for_implementation_review=false
 ready_for_N9G1A_context_lock=complete
 ready_for_N9G1C_E_provider_backend_normal_smoke=blocked_active_backend
 ready_for_BY3_degradation_matrix_planning=false
-ready_for_BY3_solver_evaluator=blocked_provider_input_gate
+ready_for_BY3_solver_evaluator=blocked_provider_or_feedback_gate
+ready_for_BY3_input_chain=partial_repaired
+ready_for_BY3_go2_priors=true
+ready_for_BY3_raw_doppler_provider=false
+ready_for_BY3_same_case_feedback=false
 ready_for_representative_validation=false
 ready_for_paper_claims=false
 ready_for_N9B2_execution=false
@@ -124,6 +130,7 @@ N9G0 design packages belong under `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_LEGSA_9F_FGO
 N9G1A/N9G1B context-lock and Phase 1 outputs belong under `<BY2_N9B2_WINDOWS_ROOT>/N9G1A_TO_N9G1B_CONTEXT_LOCK_AND_LEGSA_9F_PHASE1_IMPLEMENTATION`.
 N9G1C-E provider/backend/logger gate outputs belong under `<BY2_N9B2_WINDOWS_ROOT>/N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 BY3A0_TO_BY3E outputs belong under `<BY3_STAGE_ROOT>`.
+BY3A1 parity/provider-gate outputs belong under `<BY3A1_STAGE_ROOT>`.
 BY3 full-matrix placeholders belong under `<BY3_FULL_MATRIX_ROOT>` and do not mean BY3 full matrix was run.
 BY3 receiver source is represented by `<BY3_RECEIVER_ROOT>`.
 BY3 Go2 body/high-level source is represented by `<BY3_GO2_BODY_SOURCE>`.
@@ -322,3 +329,25 @@ BY3A0_TO_BY3E is complete only when:
 - BY3D/E are marked blocked if solver/evaluator readiness is not genuinely established.
 
 Completion does not authorize BY3 solver/evaluator execution, BY3 degradation/full matrix, figures, representative validation, paper claims, or final_v23/algorithm changes.
+
+## 18. BY3A1 Completion Criteria
+
+BY3A1 is complete only when:
+
+- accepted BY2 input-chain references are extracted from current evidence;
+- BY3A0 candidate inputs are audited against BY2 delimiter/header/schema/time policy;
+- BY3 input repair is limited to BY2-compatible file conventions and no trace-tuned offset search;
+- BY3 Go2 priors are materialized only from the BY3 Go2 body source and marked as non-truth observations;
+- BY3 Raw Doppler provider and selected-feedback dependency are either materially generated from accepted logic or explicitly blocked;
+- solver/evaluator execution remains blocked unless parity, provider, feedback, and runner gates all pass;
+- no BY3 degradation matrix, artificial degradation, figure-from-metric package, parameter retuning, final_v23 mutation, or paper claim is produced;
+- runtime outputs and Obsidian notes remain untracked.
+
+Current BY3A1 decision:
+
+```text
+status=BY3A1_provider_or_feedback_blocked
+ready_for_BY3_degradation_matrix_planning=false
+ready_for_paper_claims=false
+recommended_next_stage=repair_BY3_providers_or_feedback
+```

@@ -43,6 +43,9 @@ LegSA-GINS claims must track what the audits actually prove.
 - BY3A0_TO_BY3E may state that BY3 context lock, receiver inventory, BY3 `by3.txt` body-IMU audit, BY2 kick-alignment method recovery, BY3 no-trace kick-event alignment, and BY3 candidate input generation were completed.
 - BY3A0_TO_BY3E may state that BY3 normal solver/evaluator execution was blocked by provider and runner gates, so no BY3 normal metrics or BY3 generalization success claim exists yet.
 - BY3A0_TO_BY3E may state that BY2 three-scheme text summaries and the BY2 degradation figure archive were generated from existing BY2 evidence as reporting/organization work only.
+- BY3A1 may state that BY3A0 candidate inputs failed strict BY2 parity in delimiter/header, IMU column count, single-baseline schema, and original time-normalization policy.
+- BY3A1 may state that repaired BY3 runtime input files and BY3 Go2 priors were generated from BY3 source data without trace tuning, parameter retuning, or receiver-IMU substitution.
+- BY3A1 may state that BY3 Raw Doppler and BY3 same-case selected feedback remain blocked, so solvers/evaluators were not run.
 
 ## Not Allowed Current Claims
 
@@ -74,6 +77,7 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not claim BY3 degradation matrix readiness from BY3A0_TO_BY3E because the solver/evaluator gate remains blocked.
 - Do not treat BY3 receiver `imu-data.csv` as Go2 body IMU.
 - Do not treat BY3 candidate input files as solver success, evaluation evidence, or paper evidence.
+- Do not treat BY3A1 repaired input files or materialized Go2 prior files as BY3 normal solver/evaluator success, metric evidence, or paper evidence.
 - Do not treat BY2 text-summary/archive reorganization as new BY2 execution or new performance evidence.
 
 ## Paper Boundary

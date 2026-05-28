@@ -56,6 +56,7 @@ The supervisor must prevent phase confusion:
 - N9G1B: planned Phase 1 provider/factor/logger/normal-smoke stage only after approval; no representative degradation or full matrix.
 - N9G1C-E: current provider contract resolution, active backend audit, logger connection, and normal-smoke gate; normal smoke blocked by active backend.
 - BY3A0_TO_BY3E: current BY3 normal-generalization and BY2 degradation report reorganization stage; BY3A0/A/B are complete, BY3C generated candidate inputs with provider blockers, BY3D/E solver/evaluator execution is blocked, and BY2T/BY2F summaries/archive were generated copy-only.
+- BY3A1: current BY3-vs-BY2 parity and provider-gate repair stage; BY3 candidate inputs were repaired to BY2-compatible runtime schemas, BY3 Go2 priors were materialized, Raw Doppler and same-case feedback remain blocked, and solvers/evaluators were not run.
 
 ### 1.2 Planner
 
@@ -135,6 +136,7 @@ The N9G0 export-clean package root is represented in tracked docs only by the al
 The N9G1A/N9G1B runtime root is represented in tracked docs only by the alias `<BY2_N9B2_WINDOWS_ROOT>/N9G1A_TO_N9G1B_CONTEXT_LOCK_AND_LEGSA_9F_PHASE1_IMPLEMENTATION`.
 The N9G1C-E runtime root is represented in tracked docs only by the alias `<BY2_N9B2_WINDOWS_ROOT>/N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 The BY3A0_TO_BY3E runtime root is represented in tracked docs only by the alias `<BY3_STAGE_ROOT>`.
+The BY3A1 runtime/audit root is represented in tracked docs only by the alias `<BY3A1_STAGE_ROOT>`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
 The BY3 Go2 body/high-level source is represented in tracked docs only by `<BY3_GO2_BODY_SOURCE>`.
@@ -248,8 +250,9 @@ Current completed route:
 - N9G1C-E found the active nine-factor FGO backend still unavailable and candidate solver execution still disabled; normal smoke was not run.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A0_TO_BY3E_GENERALIZATION_AND_BY2_DEGRADATION_REPORT_REORG`; BY3 solver/evaluator execution is blocked by input/provider gates.
-- Recommended next stage: `implement_active_fgo_backend_or_reframe_scope`.
+- Current BY3/reporting stage: `BY3A1_BY2_PARITY_AUDIT_AND_PROVIDER_GATE_REPAIR`; BY3 input parity repair and Go2 prior materialization are complete, but Raw Doppler, same-case feedback, single-baseline handoff, and final_v23 handoff remain blocked.
+- Recommended BY3 next stage: `repair_BY3_providers_or_feedback`.
+- Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
 
@@ -282,6 +285,9 @@ Allowed now:
 - N9G1C-E may state that active backend and solver execution remain blocked and normal smoke was not run.
 - BY3A0_TO_BY3E may state that BY3A0 context lock, BY3A inventory/body IMU audit, BY3B alignment, BY3C candidate input generation, BY2T text summaries, and BY2F copy-only figure archive are complete.
 - BY3A0_TO_BY3E may state that BY3D/E were not executed because BY3 raw Doppler/Go2 prior/same-case feedback, single-baseline runner handoff, and final_v23 external-baseline input gates were not satisfied.
+- BY3A1 may state that BY3A0 candidate inputs failed BY2 parity in delimiter/header, IMU column count, single-baseline schema, and original time-normalization policy.
+- BY3A1 may state that repaired BY3 IMU, dual-GNSS, and single-GNSS1 inputs now match BY2 runtime file conventions, and that BY3 Go2 attitude/horizontal/joint priors were materialized from the BY3 Go2 body source.
+- BY3A1 may state that BY3 Raw Doppler remains blocked under the accepted BY2 RTKLIB/RINEX provider logic, same-case selected feedback remains blocked until a real BY3 stage1 solver/evaluator exists, and no solver/evaluator/figure/degradation run was performed.
 - N9G2 may be described as the later representative validation stage.
 - N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
 - `LegSA_full_EKF` is not accepted as active nine-factor FGO and must not be relabeled as such.
@@ -307,6 +313,7 @@ Forbidden now:
 - treating PR #52 head sync as merge, tag, or closure authorization.
 - treating provider/update counts or historical candidate no-feedback rows as current active nine-factor FGO residual/cost evidence.
 - treating BY3 source inventory, BY3B alignment reports, or BY3C candidate inputs as BY3 solver/evaluator performance evidence.
+- treating BY3A1 repaired input files or materialized BY3 Go2 priors as BY3 solver/evaluator performance evidence.
 - claiming BY3 degradation/full-matrix completion before explicit BY3 execution approval.
 
 ## 10. Historical N9C0A Decision Lock
@@ -455,4 +462,25 @@ by2f_archive=complete_copy_only
 ready_for_BY3_degradation_full_matrix=false
 ready_for_paper_claims=false
 recommended_next_stage=repair_BY3_solver_or_evaluator
+```
+
+## 18. BY3A1 Decision Lock
+
+BY3A1_BY2_PARITY_AUDIT_AND_PROVIDER_GATE_REPAIR completed a strict BY3-vs-BY2 input-chain parity audit after BY3A0_TO_BY3E was blocked. It extracted the accepted BY2 input-chain reference, audited BY3A0 candidate inputs, found parity mismatches, repaired BY3 IMU/GNSS runtime file conventions where the BY2 policy was clear, materialized BY3 Go2 priors from the BY3 Go2 body source, and recorded remaining provider/feedback/runner blockers.
+
+BY3A1 did not run BY3 solvers, official evaluators, artificial degradation, BY3 degradation matrix, figure generation from metrics, parameter retuning, trace tuning, final_v23 config mutation, or paper-claim work.
+
+Expected decision if validation passes:
+
+```text
+status=BY3A1_provider_or_feedback_blocked
+by2_reference_chain=extracted
+by3_input_parity=partial_repaired
+by3_repaired_inputs_ready=true
+by3_go2_priors_materialized=true
+by3_raw_doppler_provider=blocked_missing_accepted_BY2_RTKLIB_inputs
+by3_same_case_feedback=blocked_until_stage1_solver_eval
+ready_for_BY3_degradation_matrix_planning=false
+ready_for_paper_claims=false
+recommended_next_stage=repair_BY3_providers_or_feedback
 ```
