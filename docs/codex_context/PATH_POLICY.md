@@ -13,6 +13,10 @@ Tracked docs must use aliases instead of local absolute paths.
 - `<BY2_N9B2_DEFERRED_EXT4_ROOT>`: deferred native Ubuntu/ext4 output root alias.
 - `<N9C0_CONSOLIDATED_PRECHECK_ROOT>`: N9C0 consolidated precheck root under `<BY2_N9B2_FULL_MATRIX_ROOT>`.
 - `<FINALV23_EXTERNAL_BASELINE_ROOT>`: final_v23 external baseline runtime root under `<BY2_N9B2_FULL_MATRIX_ROOT>`.
+- `<BY3_OUTPUT_ROOT>`: locked Windows root for BY3 generalization outputs.
+- `<BY3_STAGE_ROOT>`: BY3A0_TO_BY3E stage output root under `<BY3_OUTPUT_ROOT>`.
+- `<BY3_FULL_MATRIX_ROOT>`: placeholder BY3 full-matrix root; not authorized for degradation execution in BY3A0_TO_BY3E.
+- `<BY2_DEGRADATION_ARCHIVE_ROOT>`: copy-only BY2 degradation figure/text archive root.
 
 ## Data Aliases
 
@@ -22,6 +26,10 @@ Tracked docs must use aliases instead of local absolute paths.
 - `<TRACE_TRUTH>`: trace reference, evaluation-only.
 - `<FIXPOSITION_IMU_DATA>`, `<FIXPOSITION_IMU_BIASES>`, `<FIXPOSITION_IMU_TEMP>`: receiver IMU diagnostics.
 - `<GO2_BODY_IMU_HIGHLEVEL>`: fused Go2 body IMU / high-level source.
+- `<BY3_RECEIVER_ROOT>`: BY3 Fixposition receiver source root.
+- `<BY3_GO2_BODY_SOURCE>`: BY3 Go2 body/high-level `by3.txt` source.
+- `<BY3_TRACE_TRUTH>`: BY3 trace reference, evaluation-only.
+- `<BY3_FIXPOSITION_IMU_DATA>`: BY3 receiver IMU diagnostics only, not Go2 body IMU.
 
 ## N9B2 Path Lock
 
@@ -30,6 +38,14 @@ N9B2B locked Windows plus WSL aliases and the BY2/N9 runtime alias root. Future 
 N9C0 consolidated precheck artifacts are represented in tracked docs as `<N9C0_CONSOLIDATED_PRECHECK_ROOT>`, not as concrete local paths.
 
 Native Ubuntu migration is deferred. The old Chinese output root is read-only historical evidence and must not become the active future output root.
+
+## BY3 Path Lock
+
+BY3A0 locked `<BY3_OUTPUT_ROOT>` for BY3 generalization outputs. BY3A0_TO_BY3E artifacts are represented in tracked docs as `<BY3_STAGE_ROOT>`. BY3 normal generalization must complete before any BY3 degradation matrix planning or execution is allowed.
+
+BY3 tracked docs must refer to receiver data through `<BY3_RECEIVER_ROOT>` and Go2 body/high-level data through `<BY3_GO2_BODY_SOURCE>`. The BY3 receiver `imu-data.csv` is diagnostic only and must not be documented as the Go2 body IMU source.
+
+BY2 degradation text summaries and reorganized figures are represented by `<BY2_DEGRADATION_ARCHIVE_ROOT>`. That archive is copy-only runtime evidence and must not be staged by default.
 
 ## Local Path File
 

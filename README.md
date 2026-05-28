@@ -68,7 +68,7 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current operational state:
 
-After `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
+After `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE` and `BY3A0_TO_BY3E_GENERALIZATION_AND_BY2_DEGRADATION_REPORT_REORG`.
 
 N9E completed with a logging-blocked active nine-factor FGO/legged evidence decision: `complete_nine_factor_FGO_claim=false`.
 
@@ -84,11 +84,14 @@ N9G1 is split into `N9G1A_CONTEXT_LOCK_BEFORE_LEGSA_9F_IMPLEMENTATION` and `N9G1
 
 N9G1C-E resolved the locked normal clean config and core providers for `LegSA_9F_FGO_EKF` from verified prior evidence, including GNSS position/velocity/yaw, Raw Doppler, Go2 joint/attitude/horizontal velocity, and same-case feedback observations. Candidate legged providers were found only as candidate or aggregate evidence. The active nine-factor FGO backend remains unavailable and candidate solver execution remains disabled, so normal smoke was blocked and not run.
 
+BY3A0_TO_BY3E completed BY3 normal-generalization gates through candidate input generation: BY3A0 context lock, BY3A receiver/body inventory, BY3B alignment with the BY2 event-normalized kick policy and no trace tuning, BY3C candidate Go2 IMU/GNSS inputs, BY2T text summaries from existing active final-only metrics, and BY2F copy-only reorganization of existing BY2 degradation figures. BY3D/E solver and official evaluation outputs were blocked and not fabricated because BY3 raw Doppler/Go2 prior/same-case feedback, single-baseline runner handoff, and final_v23 external-baseline input gates were not satisfied.
+
 Next planned stage:
 
 Implement active FGO backend or reframe scope before any N9G2 representative validation.
 
 The current operational state is maintained in `AGENTS.md`, `PLANS.md`, and `docs/codex_context/current_state.md`. The N9G1C-E decision keeps `complete_nine_factor_FGO_claim=false`, `ready_for_representative_validation=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
+The BY3 decision is `BY3_solver_or_evaluator_blocked`, keeping `ready_for_BY3_degradation_matrix_planning=false` and `ready_for_paper_claims=false`.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 

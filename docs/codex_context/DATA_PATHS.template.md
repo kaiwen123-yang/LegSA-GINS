@@ -12,6 +12,10 @@ Copy this template to `DATA_PATHS.local.md` for local machine use. Do not commit
 <BY2_N9B2_WSL_ROOT>=
 <BY2_N9B2_FULL_MATRIX_ROOT>=
 <BY2_N9B2_DEFERRED_EXT4_ROOT>=
+<BY3_OUTPUT_ROOT>=
+<BY3_STAGE_ROOT>=
+<BY3_FULL_MATRIX_ROOT>=
+<BY2_DEGRADATION_ARCHIVE_ROOT>=
 ```
 
 ## BY2 Fixposition / GNSS Sources
@@ -32,6 +36,19 @@ Copy this template to `DATA_PATHS.local.md` for local machine use. Do not commit
 
 ```text
 <GO2_BODY_IMU_HIGHLEVEL>=
+```
+
+## BY3 Sources
+
+```text
+<BY3_RECEIVER_ROOT>=
+<BY3_GO2_BODY_SOURCE>=
+<BY3_TRACE_TRUTH>=
+<BY3_FIXPOSITION_IMU_DATA>=
+<BY3_GNSS1_RAW>=
+<BY3_GNSS2_RAW>=
+<BY3_GNSS1_STATUS>=
+<BY3_GNSS2_STATUS>=
 ```
 
 ## Auxiliary Sources
@@ -56,4 +73,6 @@ Copy this template to `DATA_PATHS.local.md` for local machine use. Do not commit
 - Use aliases in tracked docs and reports.
 - Runtime outputs remain untracked.
 - Future BY2/N9B outputs use the `BY2_N9B2_*` aliases.
+- BY3 generalization outputs use the `BY3_*` aliases.
+- BY2 degradation reporting/archive outputs use `<BY2_DEGRADATION_ARCHIVE_ROOT>`.
 - Do not use local paths in claim text or committed scripts unless the user explicitly approves.
