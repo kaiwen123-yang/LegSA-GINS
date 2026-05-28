@@ -294,3 +294,24 @@ ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 recommended_next_stage=fix_provider_or_factor_model
 ```
+
+## N9G1C-E: Provider Contract Resolution, Backend Audit, Normal-Smoke Gate
+
+N9G1C-E resolved the locked normal clean source and core provider contracts for the separate `LegSA_9F_FGO_EKF` candidate. The provider contract decision is partial accepted: GNSS position/velocity/yaw, Raw Doppler, Go2 joint/attitude/horizontal velocity, and same-case feedback observations are resolved. Foot kinematic velocity, yaw-rate, relative odometry, contact probability, and slip risk remain candidate-only or aggregate evidence and are not active factor claims.
+
+The active backend audit found only offline/no-feedback/candidate FGO support. The active nine-factor FGO backend remains unavailable, candidate solver execution remains disabled, no factor wiring rows are active, and normal smoke was not run.
+
+Decision:
+
+```text
+status=N9G1E_active_backend_blocked
+provider_contract_decision=N9G1C_provider_contracts_partial_accepted
+backend_decision=N9G1D_active_backend_blocked
+normal_smoke_status=N9G1E_normal_smoke_not_run_blocked_by_gate
+complete_nine_factor_FGO_claim=false
+ready_for_N9G2_representative_validation=false
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=implement_active_fgo_backend_or_reframe_scope
+```

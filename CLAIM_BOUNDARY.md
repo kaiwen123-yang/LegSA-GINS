@@ -96,9 +96,14 @@ Allowed N9G0A/N9G1A context-lock statement:
 - N9G1B may state that the separate `LegSA_9F_FGO_EKF` candidate identity/config, provider/factor audit helper, active-FGO logger schema, legged diagnostic logger schema, and normal-smoke safety gate exist.
 - N9G1B may state that normal smoke was not run because provider contracts are blocked, the active nine-factor FGO backend is unavailable, and candidate solver execution is disabled.
 - N9G1B must keep `complete_nine_factor_FGO_claim=false`, `ready_for_N9G2_representative_validation=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
+- N9G1C-E may state that the locked normal clean source and core provider contracts were resolved for the separate `LegSA_9F_FGO_EKF` candidate.
+- N9G1C-E may state that provider contracts are partial accepted: GNSS position/velocity/yaw, Raw Doppler, Go2 joint/attitude/horizontal velocity, and same-case feedback observations are resolved, while candidate legged providers remain candidate-only or aggregate evidence.
+- N9G1C-E may state that the active nine-factor FGO backend remains unavailable, candidate solver execution remains disabled, and normal smoke was not run.
+- N9G1C-E must keep `complete_nine_factor_FGO_claim=false`, `ready_for_N9G2_representative_validation=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
 - N9G2 may be described as the later representative validation stage.
 - N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
 - N9G1A and N9G1B must not claim representative degradation/full-matrix validation.
+- N9G1C-E must not claim representative degradation/full-matrix validation or normal-smoke success.
 
 Allowed N4 filter-core statement:
 
@@ -444,6 +449,8 @@ Do not claim:
 - Relabeling `LegSA_full_EKF` as active nine-factor FGO.
 - Treating provider/update counts as active FGO residual/cost evidence.
 - Treating historical candidate no-feedback rows as current active `LegSA_full_EKF` nine-factor evidence.
+- Treating N9G1C-E provider resolution as active nine-factor FGO residual/Jacobian/cost evidence.
+- Treating N9G1E as normal-smoke pass evidence.
 - Representative active-nine-factor FGO runs before human-approved implementation review.
 - full monolithic N9B2 execution.
 - additional N9B2 execution without a later human-defined follow-up.

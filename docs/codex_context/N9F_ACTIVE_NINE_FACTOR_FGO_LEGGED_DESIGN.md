@@ -122,3 +122,22 @@ ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 recommended_next_stage=fix_provider_or_factor_model
 ```
+
+## N9G1C-E Provider/Backend Gate Update
+
+N9G1C-E resolved locked normal and core provider contracts for the separate `LegSA_9F_FGO_EKF` candidate, but the active nine-factor FGO backend remains unavailable and candidate solver execution remains disabled. Normal smoke was not run.
+
+The provider decision is partial accepted: core GNSS, Raw Doppler, Go2 joint/attitude/horizontal velocity, and same-case feedback observations are resolved. Candidate legged providers remain candidate-only or aggregate evidence and do not support active factor claims.
+
+```text
+status=N9G1E_active_backend_blocked
+provider_contract_decision=N9G1C_provider_contracts_partial_accepted
+backend_decision=N9G1D_active_backend_blocked
+normal_smoke_status=N9G1E_normal_smoke_not_run_blocked_by_gate
+complete_nine_factor_FGO_claim=false
+ready_for_N9G2_representative_validation=false
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=implement_active_fgo_backend_or_reframe_scope
+```

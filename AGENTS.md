@@ -54,6 +54,7 @@ The supervisor must prevent phase confusion:
 - N9G0A: Git boundary resolution completed; PR #52 head is synced to `9ceba928`.
 - N9G1A: current context-lock stage before LegSA_9F_FGO_EKF implementation; documentation and audit reports only.
 - N9G1B: planned Phase 1 provider/factor/logger/normal-smoke stage only after approval; no representative degradation or full matrix.
+- N9G1C-E: current provider contract resolution, active backend audit, logger connection, and normal-smoke gate; normal smoke blocked by active backend.
 
 ### 1.2 Planner
 
@@ -131,6 +132,7 @@ The N9F7A/N9G0 runtime root is represented in tracked docs only by the alias `<B
 The N9G0 design package root is represented in tracked docs only by the alias `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_LEGSA_9F_FGO_EKF_DESIGN_PACKAGE`.
 The N9G0 export-clean package root is represented in tracked docs only by the alias `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_EXPORT_CLEAN_DESIGN_PACKAGE`.
 The N9G1A/N9G1B runtime root is represented in tracked docs only by the alias `<BY2_N9B2_WINDOWS_ROOT>/N9G1A_TO_N9G1B_CONTEXT_LOCK_AND_LEGSA_9F_PHASE1_IMPLEMENTATION`.
+The N9G1C-E runtime root is represented in tracked docs only by the alias `<BY2_N9B2_WINDOWS_ROOT>/N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 
 ## 4. Data Source Roles
 
@@ -236,9 +238,11 @@ Current completed route:
 - N9G1A context lock passed reviewer gate and was pushed to PR #52 at `f1e80f1`.
 - N9G1B Phase 1 created the separate `LegSA_9F_FGO_EKF` candidate ID, runner/config boundary, provider/factor audit helper, logger schemas, safety gate, and runtime reports.
 - N9G1B normal smoke was not run because provider contracts are blocked, the active nine-factor FGO backend is unavailable, and candidate solver execution is disabled.
+- N9G1C-E resolved the locked normal clean source and core providers for `LegSA_9F_FGO_EKF`; provider contracts are partial accepted.
+- N9G1C-E found the active nine-factor FGO backend still unavailable and candidate solver execution still disabled; normal smoke was not run.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
-- Current implementation/context stage: `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY`.
-- Recommended next stage: `fix_provider_or_factor_model`.
+- Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
+- Recommended next stage: `implement_active_fgo_backend_or_reframe_scope`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
 
@@ -267,6 +271,8 @@ Allowed now:
 - N9G1A may state that N9G1 was split into context lock and a later limited Phase 1 implementation/smoke stage.
 - N9G1B may state that the separate `LegSA_9F_FGO_EKF` candidate identity/config, provider/factor audit helper, logger schemas, and safety gate exist.
 - N9G1B may state that normal smoke was not run because provider/factor contracts and the active nine-factor FGO backend are blocked.
+- N9G1C-E may state that locked normal and core providers are resolved with partial provider acceptance.
+- N9G1C-E may state that active backend and solver execution remain blocked and normal smoke was not run.
 - N9G2 may be described as the later representative validation stage.
 - N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
 - `LegSA_full_EKF` is not accepted as active nine-factor FGO and must not be relabeled as such.
@@ -285,6 +291,8 @@ Forbidden now:
 - automatic PR #52 merge/tag authorization.
 - representative active nine-factor FGO degradation/full-matrix runs during N9G1A or N9G1B.
 - treating N9G1B schema/gate outputs as active nine-factor FGO residual/Jacobian/cost evidence.
+- treating N9G1C-E provider resolution as active nine-factor FGO residual/Jacobian/cost evidence.
+- treating N9G1E as normal-smoke pass evidence.
 - treating the N9F6A/N9F7 design package as active solver implementation.
 - treating the N9G0 design package as implementation or active factor evidence.
 - treating PR #52 head sync as merge, tag, or closure authorization.
@@ -394,4 +402,25 @@ ready_for_paper_claims=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 recommended_next_stage=fix_provider_or_factor_model
+```
+
+## 16. N9G1C-E Decision Lock
+
+N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE resolved the locked normal clean source and core provider contracts for the separate `LegSA_9F_FGO_EKF` candidate. It created provider, backend, factor wiring, logger, normal-smoke gate, validation, and decision reports. It does not authorize representative validation, full matrix execution, figure generation, paper claims, PR #52 merge, PR #52 closure, or tag creation.
+
+N9G1C-E did not run normal smoke because the safety gate blocked execution: the active nine-factor FGO backend remains unavailable, candidate solver execution remains disabled, and no active factor wiring rows exist. No active nine-factor FGO residual/Jacobian/cost rows were produced.
+
+Expected decision if validation passes:
+
+```text
+status=N9G1E_active_backend_blocked
+provider_contract_decision=N9G1C_provider_contracts_partial_accepted
+backend_decision=N9G1D_active_backend_blocked
+normal_smoke_status=N9G1E_normal_smoke_not_run_blocked_by_gate
+complete_nine_factor_FGO_claim=false
+ready_for_N9G2_representative_validation=false
+ready_for_paper_claims=false
+ready_for_N9B2_execution=false
+ready_for_full_N9B_execution=false
+recommended_next_stage=implement_active_fgo_backend_or_reframe_scope
 ```
