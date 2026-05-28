@@ -1,11 +1,11 @@
-# Current State - BY3C Inputs Generated, BY3D/E Blocked Before Solver
+# Current State - BY3A1 Input Parity Repaired, Providers Still Blocked
 
 This file records the current verified operational state for the Windows audit workspace. It supersedes stale N8K, N9A, N9B2B1, and N9B-not-started text except where that text is explicitly historical.
 
 ## Verified Current State
 
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A0_TO_BY3E_GENERALIZATION_AND_BY2_DEGRADATION_REPORT_REORG`.
+- Current BY3/reporting stage: `BY3A1_BY2_PARITY_AUDIT_AND_PROVIDER_GATE_REPAIR`.
 - Current operational source of truth for degradation metrics remains `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design source: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code forensic audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -15,6 +15,7 @@ This file records the current verified operational state for the Windows audit w
 - Current N9G1A/N9G1B runtime root: `<BY2_N9B2_WINDOWS_ROOT>/N9G1A_TO_N9G1B_CONTEXT_LOCK_AND_LEGSA_9F_PHASE1_IMPLEMENTATION`.
 - Current N9G1C-E runtime root: `<BY2_N9B2_WINDOWS_ROOT>/N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 - Current BY3 stage root: `<BY3_STAGE_ROOT>`.
+- Current BY3A1 parity/provider-gate root: `<BY3A1_STAGE_ROOT>`.
 - Current BY3 full-matrix placeholder root: `<BY3_FULL_MATRIX_ROOT>`.
 - Current BY3 receiver source alias: `<BY3_RECEIVER_ROOT>`.
 - Current BY3 Go2 body/high-level source alias: `<BY3_GO2_BODY_SOURCE>`.
@@ -47,6 +48,12 @@ This file records the current verified operational state for the Windows audit w
 - BY2T text summaries were generated from existing active final-only metrics.
 - BY2F reorganization completed as a copy-only archive of existing BY2 figure evidence.
 - BY3D/E were blocked before solver/comparison/decision outputs because BY3 raw Doppler/Go2 prior/same-case feedback, single-baseline runner handoff, and final_v23 external-baseline input gates were not satisfied.
+- BY3A1 extracted the accepted BY2 input chain and found BY3A0 candidate input mismatches in delimiter/header, IMU column count, single-baseline schema, and original event-normalized time policy.
+- BY3A1 repaired BY3 IMU, dual-GNSS, and single-GNSS1 runtime input files to BY2-compatible no-header whitespace numeric conventions using a common BY3 body-source time zero without trace tuning.
+- BY3A1 materialized BY3 Go2 attitude, horizontal velocity, and joint prior provider files from the BY3 Go2 body source, with Go2 truth claims disabled.
+- BY3A1 did not materialize BY3 Raw Doppler because the accepted BY2 RTKLIB provider logic requires RINEX observation/navigation inputs that were not available in the receiver CSV tree.
+- BY3A1 did not materialize same-case selected feedback because no real BY3 stage1 solver and official EVAL_NAV exist.
+- BY3A1 did not run BY3 solvers, official evaluators, degradation, metrics, or metric figures.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
 - `LegSA_9F_FGO_EKF` is a separate new candidate.
 - `complete_nine_factor_FGO_claim=false`.
@@ -68,10 +75,13 @@ This file records the current verified operational state for the Windows audit w
 
 N9G1C-E is provider contract resolution, active-backend audit, logger schema connection, and normal-smoke gate work only. It does not provide active nine-factor FGO residual/Jacobian/cost rows and did not run solver, official evaluator, representative degradation, full matrix, random/degraded-input generation, figure generation, PR merge/closure, tag creation, or paper claims.
 
+BY3A1 is an input-chain parity and provider-gate repair stage only. It repaired BY3 runtime input format/time conventions and materialized BY3 Go2 priors, but the final decision remains `BY3A1_provider_or_feedback_blocked`.
+
 ## Next Stage
 
 ```text
 recommended_next_stage=implement_active_fgo_backend_or_reframe_scope
+recommended_BY3_next_stage=repair_BY3_providers_or_feedback
 ```
 
 Planned sequence after human review:
@@ -95,7 +105,11 @@ ready_for_implementation_review=false
 ready_for_N9G1A_context_lock=complete
 ready_for_N9G1C_E_provider_backend_normal_smoke=blocked_active_backend
 ready_for_BY3_degradation_matrix_planning=false
-ready_for_BY3_solver_evaluator=blocked_provider_input_gate
+ready_for_BY3_solver_evaluator=blocked_provider_or_feedback_gate
+ready_for_BY3_input_chain=partial_repaired
+ready_for_BY3_go2_priors=true
+ready_for_BY3_raw_doppler_provider=false
+ready_for_BY3_same_case_feedback=false
 ready_for_BY3_paper_claims=false
 ready_for_representative_validation=false
 ready_for_paper_claims=false
