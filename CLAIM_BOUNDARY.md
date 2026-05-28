@@ -422,6 +422,7 @@ The following can only be diagnostic unless future evidence is available:
 - Neural Gate;
 - FGO feedback;
 - BY3-only generalization;
+- BY3A0_TO_BY3E source inventory, alignment, candidate input generation, BY2 text summary, and BY2 copy-only archive reporting, with no BY3 solver/evaluator performance claim;
 - reference-limited yaw boundary.
 - N9C0 global comparison classifications until N9C visual review and N9D claim-boundary review complete.
 
@@ -451,6 +452,8 @@ Do not claim:
 - Treating historical candidate no-feedback rows as current active `LegSA_full_EKF` nine-factor evidence.
 - Treating N9G1C-E provider resolution as active nine-factor FGO residual/Jacobian/cost evidence.
 - Treating N9G1E as normal-smoke pass evidence.
+- Treating BY3A/B source inventory, BY3B alignment reports, or BY3C candidate inputs as BY3 solver/evaluator validation.
+- Claiming BY3 degradation/full-matrix completion from the BY3 full-matrix placeholder root.
 - Representative active-nine-factor FGO runs before human-approved implementation review.
 - full monolithic N9B2 execution.
 - additional N9B2 execution without a later human-defined follow-up.

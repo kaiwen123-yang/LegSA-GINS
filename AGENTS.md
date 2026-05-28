@@ -55,6 +55,7 @@ The supervisor must prevent phase confusion:
 - N9G1A: current context-lock stage before LegSA_9F_FGO_EKF implementation; documentation and audit reports only.
 - N9G1B: planned Phase 1 provider/factor/logger/normal-smoke stage only after approval; no representative degradation or full matrix.
 - N9G1C-E: current provider contract resolution, active backend audit, logger connection, and normal-smoke gate; normal smoke blocked by active backend.
+- BY3A0_TO_BY3E: current BY3 normal-generalization and BY2 degradation report reorganization stage; BY3A0/A/B are complete, BY3C generated candidate inputs with provider blockers, BY3D/E solver/evaluator execution is blocked, and BY2T/BY2F summaries/archive were generated copy-only.
 
 ### 1.2 Planner
 
@@ -133,6 +134,11 @@ The N9G0 design package root is represented in tracked docs only by the alias `<
 The N9G0 export-clean package root is represented in tracked docs only by the alias `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_EXPORT_CLEAN_DESIGN_PACKAGE`.
 The N9G1A/N9G1B runtime root is represented in tracked docs only by the alias `<BY2_N9B2_WINDOWS_ROOT>/N9G1A_TO_N9G1B_CONTEXT_LOCK_AND_LEGSA_9F_PHASE1_IMPLEMENTATION`.
 The N9G1C-E runtime root is represented in tracked docs only by the alias `<BY2_N9B2_WINDOWS_ROOT>/N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
+The BY3A0_TO_BY3E runtime root is represented in tracked docs only by the alias `<BY3_STAGE_ROOT>`.
+The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
+The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
+The BY3 Go2 body/high-level source is represented in tracked docs only by `<BY3_GO2_BODY_SOURCE>`.
+The BY2 degradation report archive source is represented in tracked docs only by `<BY2_DEGRADATION_ARCHIVE_ROOT>`.
 
 ## 4. Data Source Roles
 
@@ -242,6 +248,7 @@ Current completed route:
 - N9G1C-E found the active nine-factor FGO backend still unavailable and candidate solver execution still disabled; normal smoke was not run.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
+- Current BY3/reporting stage: `BY3A0_TO_BY3E_GENERALIZATION_AND_BY2_DEGRADATION_REPORT_REORG`; BY3 solver/evaluator execution is blocked by input/provider gates.
 - Recommended next stage: `implement_active_fgo_backend_or_reframe_scope`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
@@ -273,6 +280,8 @@ Allowed now:
 - N9G1B may state that normal smoke was not run because provider/factor contracts and the active nine-factor FGO backend are blocked.
 - N9G1C-E may state that locked normal and core providers are resolved with partial provider acceptance.
 - N9G1C-E may state that active backend and solver execution remain blocked and normal smoke was not run.
+- BY3A0_TO_BY3E may state that BY3A0 context lock, BY3A inventory/body IMU audit, BY3B alignment, BY3C candidate input generation, BY2T text summaries, and BY2F copy-only figure archive are complete.
+- BY3A0_TO_BY3E may state that BY3D/E were not executed because BY3 raw Doppler/Go2 prior/same-case feedback, single-baseline runner handoff, and final_v23 external-baseline input gates were not satisfied.
 - N9G2 may be described as the later representative validation stage.
 - N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
 - `LegSA_full_EKF` is not accepted as active nine-factor FGO and must not be relabeled as such.
@@ -297,6 +306,8 @@ Forbidden now:
 - treating the N9G0 design package as implementation or active factor evidence.
 - treating PR #52 head sync as merge, tag, or closure authorization.
 - treating provider/update counts or historical candidate no-feedback rows as current active nine-factor FGO residual/cost evidence.
+- treating BY3 source inventory, BY3B alignment reports, or BY3C candidate inputs as BY3 solver/evaluator performance evidence.
+- claiming BY3 degradation/full-matrix completion before explicit BY3 execution approval.
 
 ## 10. Historical N9C0A Decision Lock
 
@@ -423,4 +434,25 @@ ready_for_paper_claims=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 recommended_next_stage=implement_active_fgo_backend_or_reframe_scope
+```
+
+## 17. BY3A0_TO_BY3E Decision Lock
+
+BY3A0_TO_BY3E_GENERALIZATION_AND_BY2_DEGRADATION_REPORT_REORG completed as a partial normal-generalization gate and BY2 report/archive organization stage. It updated context boundaries, created BY3A inventory/body IMU audit reports, created BY3B alignment reports using the BY2 event-normalized kick policy without trace tuning, generated BY3C candidate Go2 IMU and GNSS status inputs, generated BY2T text summaries from existing active final-only metrics, and reorganized BY2 degradation figures as a copy-only archive.
+
+BY3D and BY3E did not run because solver/evaluator gates remained blocked. No BY3 solver, official evaluator, degradation generation, full matrix, random generation, degraded-input generation, BY3 normal metric figure package, or paper claim was produced.
+
+Expected decision if validation passes:
+
+```text
+status=BY3_solver_or_evaluator_blocked
+by3a0_context_lock=complete
+by3a_inventory=complete_read_only_inventory
+by3b_alignment=BY3B_alignment_passed_no_trace_tuning
+by3c_input_generation=partial_with_provider_blockers
+by2t_text_summaries=complete_from_active_final_only_metrics
+by2f_archive=complete_copy_only
+ready_for_BY3_degradation_full_matrix=false
+ready_for_paper_claims=false
+recommended_next_stage=repair_BY3_solver_or_evaluator
 ```

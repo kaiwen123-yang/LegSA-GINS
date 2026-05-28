@@ -1,10 +1,10 @@
 # Data Source Roles
 
-This file defines what each BY2 source may and may not support.
+This file defines what each BY2 and BY3 source may and may not support.
 
 ## GNSS Raw
 
-Aliases: `<GNSS1_RAW>`, `<GNSS2_RAW>`.
+Aliases: `<GNSS1_RAW>`, `<GNSS2_RAW>`, `<BY3_GNSS1_RAW>`, `<BY3_GNSS2_RAW>`.
 
 Allowed:
 
@@ -20,7 +20,7 @@ Not allowed:
 
 ## GNSS Status
 
-Aliases: `<GNSS1_STATUS>`, `<GNSS2_STATUS>`.
+Aliases: `<GNSS1_STATUS>`, `<GNSS2_STATUS>`, `<BY3_GNSS1_STATUS>`, `<BY3_GNSS2_STATUS>`.
 
 Allowed:
 
@@ -36,7 +36,7 @@ Not allowed:
 
 ## Trace Reference
 
-Alias: `<TRACE_TRUTH>`.
+Aliases: `<TRACE_TRUTH>`, `<BY3_TRACE_TRUTH>`.
 
 Allowed:
 
@@ -67,9 +67,11 @@ Not allowed:
 - replacement for `by2.txt`.
 - truth or algorithm estimate.
 
+BY3 receiver IMU alias: `<BY3_FIXPOSITION_IMU_DATA>`. It is diagnostic only and must not be used as the BY3 Go2 body IMU source.
+
 ## Go2 Body IMU / High-Level
 
-Alias: `<GO2_BODY_IMU_HIGHLEVEL>`.
+Aliases: `<GO2_BODY_IMU_HIGHLEVEL>`, `<BY3_GO2_BODY_SOURCE>`.
 
 Allowed when fields are explicitly parseable:
 
@@ -86,6 +88,8 @@ Not allowed:
 - algorithm NAV.
 - GNSS receiver IMU replacement.
 - absolute position truth.
+
+BY3 `by3.txt` has the same source role as BY2 `by2.txt`: Go2 body/high-level/body-IMU source for inventory, kick-event detection, and candidate algorithm input generation when fields are parseable. It is not truth and does not authorize retuning against trace.
 
 ## Algorithm Outputs
 
@@ -106,6 +110,8 @@ Final-only metrics rule: metrics must come from final algorithm output/evaluatio
 Current active global metrics source after N9C0: `<N9C0_CONSOLIDATED_PRECHECK_ROOT>/matrix/N9C0_ACTIVE_FINAL_ONLY_METRICS_TABLE`.
 
 The N9C0 active final-only metrics table has 825 rows. It is the current global metric source for context and planning, but it is not paper-claim authorization.
+
+BY3A0_TO_BY3E produced candidate BY3 input files and blocked solver/evaluator execution before BY3 normal metrics. Those candidate files are not paper evidence and do not authorize BY3 degradation planning until the solver/evaluator gate is repaired and reviewed.
 
 Selected-feedback same-case rule: `selected_feedback` requires feedback generated for the same degraded or clean case. Clean feedback cannot be reused for degraded cases.
 

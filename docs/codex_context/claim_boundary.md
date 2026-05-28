@@ -40,6 +40,9 @@ LegSA-GINS claims must track what the audits actually prove.
 - N9G1C-E may state that provider contracts are partial accepted, with candidate legged providers still candidate-only or aggregate evidence.
 - N9G1C-E may state that active backend and solver execution remain blocked and normal smoke was not run.
 - Current evidence requires a new active nine-factor FGO algorithm design before representative runs.
+- BY3A0_TO_BY3E may state that BY3 context lock, receiver inventory, BY3 `by3.txt` body-IMU audit, BY2 kick-alignment method recovery, BY3 no-trace kick-event alignment, and BY3 candidate input generation were completed.
+- BY3A0_TO_BY3E may state that BY3 normal solver/evaluator execution was blocked by provider and runner gates, so no BY3 normal metrics or BY3 generalization success claim exists yet.
+- BY3A0_TO_BY3E may state that BY2 three-scheme text summaries and the BY2 degradation figure archive were generated from existing BY2 evidence as reporting/organization work only.
 
 ## Not Allowed Current Claims
 
@@ -67,6 +70,11 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not claim N9G1E normal smoke passed.
 - Do not start N9G2 until provider/factor model and active backend gaps are fixed and reviewed.
 - Do not treat PR #52 head sync as merge, closure, tag, or paper-claim authorization.
+- Do not claim BY3 normal generalization passed until BY3 solvers and official evaluation complete from accepted inputs.
+- Do not claim BY3 degradation matrix readiness from BY3A0_TO_BY3E because the solver/evaluator gate remains blocked.
+- Do not treat BY3 receiver `imu-data.csv` as Go2 body IMU.
+- Do not treat BY3 candidate input files as solver success, evaluation evidence, or paper evidence.
+- Do not treat BY2 text-summary/archive reorganization as new BY2 execution or new performance evidence.
 
 ## Paper Boundary
 

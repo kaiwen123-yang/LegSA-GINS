@@ -10,7 +10,7 @@ This file is not a runtime report, algorithm output, paper claim, or place to st
 
 LegSA-GINS is a legged-robot GNSS/INS fusion project with source-backed EKF, Raw Doppler, source-aware weighting, Go2 proprioception, legged FGO candidate factors, no-feedback FGO, and FGO-feedback EKF joint filtering.
 
-Current data focus remains BY2. Later generalization to BY3, indoor-outdoor transition, and poor-GNSS environments requires separate stages and evidence.
+Current data focus has expanded to BY3 normal-generalization gates. BY3A0_TO_BY3E created source inventory, alignment reports, candidate BY3 normal inputs, BY2 degradation text summaries, and a copy-only BY2 figure archive, but BY3 solver/evaluator execution and degradation/full-matrix validation remain blocked until BY3 provider/input gates are repaired.
 
 ## 2. Global Working Principles
 
@@ -52,6 +52,7 @@ Completed or accepted for current planning:
 - N9E active nine-factor FGO/legged logger review completed with `complete_nine_factor_FGO_claim=false`.
 - N9E outcome: logging blocked for current `LegSA_full_EKF`; no complete active nine-factor FGO claim.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
+- Current BY3/reporting stage: `BY3A0_TO_BY3E_GENERALIZATION_AND_BY2_DEGRADATION_REPORT_REORG`; BY3D/E are blocked before solver/evaluator.
 - N9F design materialization completed: current evidence requires a new active nine-factor FGO algorithm design before representative runs.
 - N9F6A source-code forensic audit completed from real Windows/WSL source evidence and passed reviewer gate.
 - N9F7 followed Path C only: substantial algorithm design package required; no implementation, solver/evaluator execution, representative run, full matrix, or replot was performed.
@@ -88,6 +89,8 @@ ready_for_algorithm_design_review=true
 ready_for_implementation_review=false
 ready_for_N9G1A_context_lock=complete
 ready_for_N9G1C_E_provider_backend_normal_smoke=blocked_active_backend
+ready_for_BY3_degradation_matrix_planning=false
+ready_for_BY3_solver_evaluator=blocked_provider_input_gate
 ready_for_representative_validation=false
 ready_for_paper_claims=false
 ready_for_N9B2_execution=false
@@ -120,6 +123,11 @@ N9F7A/N9G0 Git-boundary and manual-design-review outputs belong under `<BY2_N9B2
 N9G0 design packages belong under `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_LEGSA_9F_FGO_EKF_DESIGN_PACKAGE` and `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_EXPORT_CLEAN_DESIGN_PACKAGE`.
 N9G1A/N9G1B context-lock and Phase 1 outputs belong under `<BY2_N9B2_WINDOWS_ROOT>/N9G1A_TO_N9G1B_CONTEXT_LOCK_AND_LEGSA_9F_PHASE1_IMPLEMENTATION`.
 N9G1C-E provider/backend/logger gate outputs belong under `<BY2_N9B2_WINDOWS_ROOT>/N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
+BY3A0_TO_BY3E outputs belong under `<BY3_STAGE_ROOT>`.
+BY3 full-matrix placeholders belong under `<BY3_FULL_MATRIX_ROOT>` and do not mean BY3 full matrix was run.
+BY3 receiver source is represented by `<BY3_RECEIVER_ROOT>`.
+BY3 Go2 body/high-level source is represented by `<BY3_GO2_BODY_SOURCE>`.
+BY2 degradation archive evidence is represented by `<BY2_DEGRADATION_ARCHIVE_ROOT>`.
 
 ## 6. Runner And Evaluation Rules
 
@@ -302,3 +310,15 @@ N9G1A is complete only when:
 - Recommended next stage is human review of N9G1A, then explicit decision on N9G1B.
 
 N9G1A completion alone does not authorize implementation. N9G1B may start only when a human request explicitly authorizes it and the N9G1A reviewer gate passes.
+
+## 17. BY3A0_TO_BY3E Completion Criteria
+
+BY3A0_TO_BY3E is complete only when:
+
+- tracked context docs use aliases only and record BY3 as normal-generalization gate work;
+- `<BY3_STAGE_ROOT>` contains BY3A inventory/body IMU audit reports, BY3B alignment reports, BY3C candidate input generation reports, BY2T text summary reports, BY2F copy-only archive manifests, gate matrices, summaries, and validation manifests;
+- `<BY3_FULL_MATRIX_ROOT>` records that BY3 degradation/full matrix was not run;
+- public Obsidian BY3 notes use aliases only, while private local paths remain in an untracked private note;
+- BY3D/E are marked blocked if solver/evaluator readiness is not genuinely established.
+
+Completion does not authorize BY3 solver/evaluator execution, BY3 degradation/full matrix, figures, representative validation, paper claims, or final_v23/algorithm changes.

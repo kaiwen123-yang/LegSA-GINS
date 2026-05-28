@@ -1,10 +1,11 @@
-# Current State - N9G1C-E Active Backend Blocked Before Normal Smoke
+# Current State - BY3C Inputs Generated, BY3D/E Blocked Before Solver
 
 This file records the current verified operational state for the Windows audit workspace. It supersedes stale N8K, N9A, N9B2B1, and N9B-not-started text except where that text is explicitly historical.
 
 ## Verified Current State
 
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
+- Current BY3/reporting stage: `BY3A0_TO_BY3E_GENERALIZATION_AND_BY2_DEGRADATION_REPORT_REORG`.
 - Current operational source of truth for degradation metrics remains `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design source: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code forensic audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -13,6 +14,11 @@ This file records the current verified operational state for the Windows audit w
 - Current N9G0 export-clean design package: `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_EXPORT_CLEAN_DESIGN_PACKAGE`.
 - Current N9G1A/N9G1B runtime root: `<BY2_N9B2_WINDOWS_ROOT>/N9G1A_TO_N9G1B_CONTEXT_LOCK_AND_LEGSA_9F_PHASE1_IMPLEMENTATION`.
 - Current N9G1C-E runtime root: `<BY2_N9B2_WINDOWS_ROOT>/N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
+- Current BY3 stage root: `<BY3_STAGE_ROOT>`.
+- Current BY3 full-matrix placeholder root: `<BY3_FULL_MATRIX_ROOT>`.
+- Current BY3 receiver source alias: `<BY3_RECEIVER_ROOT>`.
+- Current BY3 Go2 body/high-level source alias: `<BY3_GO2_BODY_SOURCE>`.
+- Current BY2 degradation report archive alias: `<BY2_DEGRADATION_ARCHIVE_ROOT>`.
 - Current export-clean design package: `<BY2_N9B2_FULL_MATRIX_ROOT>/N9F_EXPORT_CLEAN_DESIGN_PACKAGE`.
 - N9C0 consolidated precheck root: `<N9C0_CONSOLIDATED_PRECHECK_ROOT>`.
 - N9C0 active metrics source: `<N9C0_CONSOLIDATED_PRECHECK_ROOT>/matrix/N9C0_ACTIVE_FINAL_ONLY_METRICS_TABLE`.
@@ -34,6 +40,13 @@ This file records the current verified operational state for the Windows audit w
 - N9G1C-E provider decision: `N9G1C_provider_contracts_partial_accepted`.
 - N9G1C-E backend decision: `N9G1D_active_backend_blocked`.
 - N9G1E normal smoke gate decision: `N9G1E_normal_smoke_gate_blocked`; normal smoke was not run.
+- BY3A0 context lock completed as report-only bootstrap.
+- BY3A inventory/body IMU audit completed as source inventory only.
+- BY3B alignment passed using the BY2 event-normalized kick policy with no trace tuning.
+- BY3C candidate Go2 IMU and GNSS status inputs were generated, but runtime configs remain `execution_allowed=false`.
+- BY2T text summaries were generated from existing active final-only metrics.
+- BY2F reorganization completed as a copy-only archive of existing BY2 figure evidence.
+- BY3D/E were blocked before solver/comparison/decision outputs because BY3 raw Doppler/Go2 prior/same-case feedback, single-baseline runner handoff, and final_v23 external-baseline input gates were not satisfied.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
 - `LegSA_9F_FGO_EKF` is a separate new candidate.
 - `complete_nine_factor_FGO_claim=false`.
@@ -81,6 +94,9 @@ ready_for_algorithm_design_review=true
 ready_for_implementation_review=false
 ready_for_N9G1A_context_lock=complete
 ready_for_N9G1C_E_provider_backend_normal_smoke=blocked_active_backend
+ready_for_BY3_degradation_matrix_planning=false
+ready_for_BY3_solver_evaluator=blocked_provider_input_gate
+ready_for_BY3_paper_claims=false
 ready_for_representative_validation=false
 ready_for_paper_claims=false
 ready_for_N9B2_execution=false
