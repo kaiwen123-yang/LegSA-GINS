@@ -51,7 +51,7 @@ Completed or accepted for current planning:
 - N9C0 global staged consolidation precheck completed.
 - N9E active nine-factor FGO/legged logger review completed with `complete_nine_factor_FGO_claim=false`.
 - N9E outcome: logging blocked for current `LegSA_full_EKF`; no complete active nine-factor FGO claim.
-- Current implementation/context stage: `N9G1B_PHASE1_PROVIDER_FACTOR_LOGGER_NORMAL_SMOKE_ONLY`.
+- Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 - N9F design materialization completed: current evidence requires a new active nine-factor FGO algorithm design before representative runs.
 - N9F6A source-code forensic audit completed from real Windows/WSL source evidence and passed reviewer gate.
 - N9F7 followed Path C only: substantial algorithm design package required; no implementation, solver/evaluator execution, representative run, full matrix, or replot was performed.
@@ -62,12 +62,14 @@ Completed or accepted for current planning:
 - N9G1A context lock passed reviewer gate and was pushed to PR #52 at `f1e80f1`.
 - N9G1B Phase 1 created the separate `LegSA_9F_FGO_EKF` candidate identity, runner/config boundary, provider/factor audit helper, logger schemas, safety gate, and runtime decision artifacts.
 - N9G1B normal smoke was not run because the gate blocked it: provider contracts are not ready for active factors, the active nine-factor FGO backend is unavailable, and candidate solver execution is disabled.
+- N9G1C-E resolved the locked normal source and core provider contracts for `LegSA_9F_FGO_EKF` as partial accepted provider evidence, but the active nine-factor FGO backend remains unavailable and candidate solver execution remains disabled.
+- N9G1C-E normal smoke was not run because the gate blocked it: active backend unavailable, candidate solver disabled, and no active factor wiring rows.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
 - `LegSA_9F_FGO_EKF` is a separate new candidate, not a relabeling of `LegSA_full_EKF`.
 
 Immediate next stages:
 
-- `fix_provider_or_factor_model`
+- `implement_active_fgo_backend_or_reframe_scope`
 - `N9G2_REPRESENTATIVE_VALIDATION` later, only after active backend/provider/factor gaps are fixed and reviewed.
 - `N9G3_FULL_MATRIX` and `N9G4_REPLOT_AND_REPORT` later only if applicable and explicitly approved.
 - `N9C1_CONSOLIDATED_FIGURE_GENERATION` only after the correct human-approved route confirms the implementation/figure scope.
@@ -85,7 +87,7 @@ ready_for_N9C1_consolidated_figure_generation=true
 ready_for_algorithm_design_review=true
 ready_for_implementation_review=false
 ready_for_N9G1A_context_lock=complete
-ready_for_N9G1B_phase1_provider_factor_logger_normal_smoke=blocked_provider_or_factor_model
+ready_for_N9G1C_E_provider_backend_normal_smoke=blocked_active_backend
 ready_for_representative_validation=false
 ready_for_paper_claims=false
 ready_for_N9B2_execution=false
@@ -117,6 +119,7 @@ N9F6A/N9F7 source-audit and design-package outputs belong under `<BY2_N9B2_WINDO
 N9F7A/N9G0 Git-boundary and manual-design-review outputs belong under `<BY2_N9B2_WINDOWS_ROOT>/N9F7A_TO_N9G0_GIT_BOUNDARY_AND_MANUAL_LEGSA_9F_FGO_EKF_DESIGN_REVIEW`.
 N9G0 design packages belong under `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_LEGSA_9F_FGO_EKF_DESIGN_PACKAGE` and `<BY2_N9B2_FULL_MATRIX_ROOT>/N9G0_EXPORT_CLEAN_DESIGN_PACKAGE`.
 N9G1A/N9G1B context-lock and Phase 1 outputs belong under `<BY2_N9B2_WINDOWS_ROOT>/N9G1A_TO_N9G1B_CONTEXT_LOCK_AND_LEGSA_9F_PHASE1_IMPLEMENTATION`.
+N9G1C-E provider/backend/logger gate outputs belong under `<BY2_N9B2_WINDOWS_ROOT>/N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 
 ## 6. Runner And Evaluation Rules
 
