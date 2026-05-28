@@ -58,6 +58,7 @@ The supervisor must prevent phase confusion:
 - BY3A0_TO_BY3E: current BY3 normal-generalization and BY2 degradation report reorganization stage; BY3A0/A/B are complete, BY3C generated candidate inputs with provider blockers, BY3D/E solver/evaluator execution is blocked, and BY2T/BY2F summaries/archive were generated copy-only.
 - BY3A1: current BY3-vs-BY2 parity and provider-gate repair stage; BY3 candidate inputs were repaired to BY2-compatible runtime schemas, BY3 Go2 priors were materialized, Raw Doppler and same-case feedback remain blocked, and solvers/evaluators were not run.
 - BY3A2: current historical WSL pipeline recovery and runner-gate repair stage; historical BY2 Raw Doppler/Go2/single/final_v23/feedback chains were recovered, BY3 UBX/RAWX rebuild and accepted Raw Doppler provider materialization succeeded, same-case selected feedback remains blocked, and solvers/evaluators were not run.
+- BY3A3: current BY3 selected-feedback stage1 chain and normal-generalization execution stage; BY3 same-case stage1 solver/evaluator/feedback generation, LegSA_full_EKF stage2, single baseline, final_v23 external baseline, official evaluation, figures, and case review completed for normal BY3 only.
 
 ### 1.2 Planner
 
@@ -139,6 +140,7 @@ The N9G1C-E runtime root is represented in tracked docs only by the alias `<BY2_
 The BY3A0_TO_BY3E runtime root is represented in tracked docs only by the alias `<BY3_STAGE_ROOT>`.
 The BY3A1 runtime/audit root is represented in tracked docs only by the alias `<BY3A1_STAGE_ROOT>`.
 The BY3A2 runtime/audit root is represented in tracked docs only by the alias `<BY3A2_STAGE_ROOT>`.
+The BY3A3 runtime/audit root is represented in tracked docs only by the alias `<BY3A3_STAGE_ROOT>`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
 The BY3 Go2 body/high-level source is represented in tracked docs only by `<BY3_GO2_BODY_SOURCE>`.
@@ -252,8 +254,8 @@ Current completed route:
 - N9G1C-E found the active nine-factor FGO backend still unavailable and candidate solver execution still disabled; normal smoke was not run.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A2_HISTORICAL_WSL_PIPELINE_RECOVERY_AND_RUNNER_GATE_REPAIR`; historical BY2 WSL chains were recovered, BY3 Raw Doppler and Go2 priors are materialized, baseline handoff configs are available for review, but same-case selected feedback remains blocked.
-- Recommended BY3 next stage: `repair_BY3_stage1_feedback_chain`.
+- Current BY3/reporting stage: `BY3A3_SELECTED_FEEDBACK_STAGE1_CHAIN_AND_NORMAL_GENERALIZATION_EXECUTION`; same-case BY3 stage1 feedback, LegSA_full_EKF stage2, single baseline, final_v23 external baseline, official evaluation, figures, and case review completed for normal BY3 only.
+- Recommended BY3 next stage: `BY3B_DEGRADATION_MATRIX_PLANNING_AND_PRECHECK`.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
@@ -293,6 +295,9 @@ Allowed now:
 - BY3A2 may state that historical BY2 WSL processing chains were recovered and indexed, including N5A/N5B Raw Doppler, N7C6 Go2 priors, R4J single-baseline handoff, final_v23 external-baseline handoff, and selected-feedback same-case policy.
 - BY3A2 may state that BY3 raw receiver CSVs rebuild UBX/RAWX evidence and that accepted Raw Doppler provider materialization succeeded only when backed by fresh BY3A2 RINEX/nav/provider factor reports.
 - BY3A2 may state that no BY3 solver, official evaluator, degradation matrix, metric figure generation, selected-feedback generation, or paper claim was performed.
+- BY3A3 may state that BY3 same-case selected feedback was generated from the BY3 stage1 official-eval state/estimate table only, with no BY2 feedback reuse and no trace/error/final_v23 columns used.
+- BY3A3 may state that BY3 normal LegSA_full_EKF, single_antenna_gnss1_status_KF_GINS, and final_v23_dual_antenna_EKF official evaluations completed, and may report BY3A3 normal metrics as runtime evidence only.
+- BY3A3 may state that `ready_for_BY3_degradation_matrix_planning=true` for human review, while `ready_for_paper_claims=false`.
 - N9G2 may be described as the later representative validation stage.
 - N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
 - `LegSA_full_EKF` is not accepted as active nine-factor FGO and must not be relabeled as such.
@@ -320,6 +325,7 @@ Forbidden now:
 - treating BY3 source inventory, BY3B alignment reports, or BY3C candidate inputs as BY3 solver/evaluator performance evidence.
 - treating BY3A1 repaired input files or materialized BY3 Go2 priors as BY3 solver/evaluator performance evidence.
 - treating BY3A2 historical pipeline recovery, UBX/RAWX rebuild evidence, or baseline handoff configs as BY3 solver/evaluator performance evidence.
+- treating BY3A3 normal-only metrics as paper claims, final_v23 outperformance claims, BY3 degradation/full-matrix completion, or active nine-factor FGO evidence.
 - claiming BY3 degradation/full-matrix completion before explicit BY3 execution approval.
 
 ## 10. Historical N9C0A Decision Lock
@@ -511,4 +517,24 @@ by3_same_case_feedback=blocked_until_stage1_solver_eval
 ready_for_BY3_degradation_matrix_planning=false
 ready_for_paper_claims=false
 recommended_next_stage=repair_BY3_stage1_feedback_chain
+```
+
+## 20. BY3A3 Decision Lock
+
+BY3A3_SELECTED_FEEDBACK_STAGE1_CHAIN_AND_NORMAL_GENERALIZATION_EXECUTION repaired the BY3 same-case selected-feedback dependency and ran the normal BY3 comparison only. It recovered the accepted BY2 selected-feedback policy, ran a BY3 stage1 `baseline_no_feedback_EKF`, ran official evaluation, materialized BY3 same-case feedback from the stage1 official-eval state/estimate table, ran BY3 `LegSA_full_EKF` stage2 selected-feedback, ran the GNSS1-status single baseline, ran the final_v23 external baseline, and generated official normal metrics, figures, and a case review.
+
+BY3A3 did not run BY3 degradation, artificial degradations, branch ablations, LegSA_9F_FGO_EKF, nonredundant FGO extension, parameter retuning, trace tuning, final_v23 output solver input, BY2 feedback reuse, output substitution, paper claims, PR merge/closure, or tag creation.
+
+Expected decision if validation passes:
+
+```text
+status=BY3A3_normal_generalization_completed
+by3_same_case_feedback=generated_from_stage1_official_eval_state_estimate_columns_only
+legsa_full_stage2=completed
+single_baseline=completed
+finalv23_external_baseline=completed
+official_evaluation=completed
+ready_for_BY3_degradation_matrix_planning=true
+ready_for_paper_claims=false
+recommended_next_stage=BY3B_DEGRADATION_MATRIX_PLANNING_AND_PRECHECK
 ```
