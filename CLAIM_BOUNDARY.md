@@ -919,6 +919,22 @@ BY3A4A may not claim repaired BY3 yaw metrics, BY3 degradation readiness, paper 
 
 BY3A4A keeps `ready_for_BY3_degradation_matrix_planning=false` and `ready_for_paper_claims=false`.
 
+## BY3A4C Git-History Yaw Reference Boundary
+
+BY3A4C may state that the historical BY2/N4 yaw-reference repair was recovered from git history, tracked docs/source, PR metadata, and runtime evidence.
+
+BY3A4C may state that N4H2 old yaw around 93 deg was invalidated by N4H2D, that N4H2D selected `official_ref_sign_minus`, and that fresh replay yaw was about 1.98 deg under the reconstructed dual official reference.
+
+BY3A4C may state that recovered and diagnostic yaw profiles were applied to existing BY3A3 outputs only, with no solver rerun, no degradation run, no retuning, no output correction, and no RMSE-only policy selection.
+
+BY3A4C may state that no BY3 yaw truth/reference profile was accepted, so BY3 yaw is `not_evaluable` and BY3A3/BY3A4A yaw metrics are preserved as historical invalid-reference evidence.
+
+BY3A4C may state that BY3 position/up metrics can support position/up-only planning, with `yaw_degradation_claims=false`.
+
+BY3A4C may not claim repaired BY3 yaw metrics, BY3 yaw degradation readiness, paper performance readiness, final_v23 outperformance, solver rerun, degradation matrix completion, parameter retuning, or trace/final_v23/algorithm output use as solver input.
+
+BY3A4C keeps `ready_for_BY3_degradation_matrix_planning=true` only for `position_up_only`, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.
+
 Metric-gate pass is not sufficient if external-clean closeness fails.
 
 Too-good results require over-close audit.

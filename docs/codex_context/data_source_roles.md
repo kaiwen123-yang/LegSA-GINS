@@ -119,7 +119,9 @@ Selected-feedback same-case rule: `selected_feedback` requires feedback generate
 
 EVAL_NAV feedback generation uses state/estimate columns only and must not use trace/error feedback corrections.
 
-BY3A4A yaw rule: BY2/BY3 dual-antenna yaw evaluation must account for lateral antenna mounting. The antenna baseline is perpendicular to robot forward/head direction, so baseline heading is not body heading. Body heading requires a plus/minus 90 degree correction depending on antenna order and coordinate/frame convention; unwrap yaw before interpolation and wrap after differencing. BY3A4A did not accept repaired yaw metrics, so BY3 degradation planning remains blocked pending manual yaw-policy review.
+BY3A4A yaw rule: BY2/BY3 dual-antenna yaw evaluation must account for lateral antenna mounting. The antenna baseline is perpendicular to robot forward/head direction, so baseline heading is not body heading. Body heading requires a plus/minus 90 degree correction depending on antenna order and coordinate/frame convention; unwrap yaw before interpolation and wrap after differencing. BY3A4A did not accept repaired yaw metrics.
+
+BY3A4C yaw-reference rule: do not repeat blind plus/minus 90 searches. First recover the historical N4H2C/N4H2D/N4R/N4R2/N4R3 reference mapping. BY2 old yaw around 93 deg was invalidated by N4H2D through `official_ref_sign_minus` and direct identity against the reconstructed dual official reference. BY3A4C did not find a BY3 yaw truth/reference profile that transfers, so BY3 yaw is `not_evaluable`; position/up metrics can be used only for position/up-only planning, and yaw degradation claims remain false.
 
 ## Baseline Roles
 

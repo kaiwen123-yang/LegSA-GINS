@@ -315,3 +315,20 @@ ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 recommended_next_stage=implement_active_fgo_backend_or_reframe_scope
 ```
+
+## BY3A4C: Git-History Yaw Reference Reconstruction
+
+BY3A4C recovered the historical BY2/N4 yaw-reference repair from git history, tracked docs/source, PR metadata, and runtime evidence. It verified that N4H2 old yaw around 93 deg was invalidated by N4H2D, that N4H2D selected `official_ref_sign_minus`, and that fresh replay yaw was about 1.98 deg against the reconstructed dual official reference.
+
+Recovered and diagnostic profiles were applied to existing BY3A3 outputs only. No BY3 yaw truth/reference profile was accepted, so BY3 yaw is `not_evaluable`; BY3A3/BY3A4A yaw metrics remain historical invalid-reference evidence. Position/up metrics may support position/up-only planning, with yaw degradation claims disabled.
+
+Decision:
+
+```text
+status=BY3A4C_yaw_not_evaluable_position_only_generalization_ready
+ready_for_BY3_degradation_matrix_planning=true
+ready_for_BY3_degradation_matrix_planning_scope=position_up_only
+yaw_degradation_claims=false
+ready_for_paper_claims=false
+recommended_next_stage=BY3B_POSITION_ONLY_DEGRADATION_PLANNING_OR_HUMAN_REVIEW
+```
