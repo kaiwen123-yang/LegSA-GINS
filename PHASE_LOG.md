@@ -127,3 +127,4 @@
 - Placeholder tests exist.
 - No raw data or large files committed.
 - Git branch stage/N0-bootstrap is ready to push.
+| BY3A5 dual yaw input source repair | stage/N9A-R3-real-output-frame-alignment-gate | blocked | no | no | yaw-source audit + corrected normal rerun | current status long-baseline yaw misuse audited; HDT/fixed_1p5 policy gated; no degradation or paper claim |
