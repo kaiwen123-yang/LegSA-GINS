@@ -72,6 +72,9 @@ LegSA-GINS claims must track what the audits actually prove.
 - BY3A7 may state that BY3 Go2 IMU preprocessing estimated gyro bias from a moving segment after selected Go2 start and that the BY3A7-local repair uses pre-motion source gyro bias while preserving FLU-to-FRD conversion, A1 yaw source, fixed_1p5 yaw_std, and yaw gate thresholds.
 - BY3A7 may state that BY3 normal-only rerun after the IMU preprocessing repair completed and dual-yaw yaw sanity passed: LegSA_full_EKF yaw RMSE is about 5.26 deg and final_v23_dual_antenna_EKF yaw RMSE is about 4.30 deg.
 - BY3A7 may set `ready_for_BY3_degradation_matrix_planning=true` only with `scope=full_after_human_review`; `ready_for_paper_claims=false` remains mandatory.
+- BY3A8 may state that the remaining BY3 dual-yaw error is limited by A1 observation quality: A1-vs-trace heading RMSE is about 24.06 deg, p95 about 31.78 deg, and max about 167.29 deg in the evaluation-only lower-bound audit.
+- BY3A8 may state that no safe additional repair passed: objective A1 mask is insufficient, BY3A7 IMU bias remains accepted, time-lag scans have no metadata support, yaw-gate behavior is acceptable, and feedback policy changes require a separate review.
+- BY3A8 may set `ready_for_BY3_degradation_matrix_planning=true` only with `scope=position_up_with_diagnostic_yaw`; `yaw_claim_scope=diagnostic_only` and `ready_for_paper_claims=false`.
 
 ## Not Allowed Current Claims
 
@@ -111,6 +114,7 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not treat BY3A6 initatt repair as repaired BY3 yaw, BY3 degradation readiness, or paper-ready evidence.
 - Do not treat BY3A7 normal-only yaw sanity as paper-ready evidence, final_v23 outperformance, completed BY3 degradation/full-matrix execution, or PR #52 merge/tag/closure authorization.
 - Do not turn BY3A7 A1 quality masks into RMSE-selected bad-epoch deletion.
+- Do not treat BY3A8 diagnostic yaw scope as a paper yaw claim, full yaw degradation readiness, trace-based correction permission, feedback-policy authorization, or permission to relax yaw gates.
 - Do not claim BY3 degradation execution until a later explicitly approved BY3 degradation stage runs.
 - Do not treat BY3 receiver `imu-data.csv` as Go2 body IMU.
 - Do not treat BY3 candidate input files as solver success, evaluation evidence, or paper evidence.
