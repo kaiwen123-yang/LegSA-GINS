@@ -20,8 +20,10 @@ ready_for_BY3C_position_up_degradation_execution=true
 human_final_decision_required_before_execution=true
 yaw_claim_scope=diagnostic_only
 ready_for_paper_claims=false
-recommended_next_stage=BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_AND_BATCH1
+recommended_next_stage=BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_TO_BATCH3_LONG_PIPELINE
 ```
+
+Supersession note: BY3C later executed the approved Batch0-Batch3 position/up subset. BY3B remains planning/precheck evidence only and still does not itself contain degraded inputs, random arrays, solver outputs, evaluator outputs, figures, degradation outputs, or paper claims.
 
 Planning scope:
 

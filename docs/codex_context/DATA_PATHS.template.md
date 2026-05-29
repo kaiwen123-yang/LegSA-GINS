@@ -24,6 +24,7 @@ Copy this template to `DATA_PATHS.local.md` for local machine use. Do not commit
 <BY3A7_STAGE_ROOT>=
 <BY3A8_STAGE_ROOT>=
 <BY3B_STAGE_ROOT>=
+<BY3C_STAGE_ROOT>=
 <BY3_FULL_MATRIX_ROOT>=
 <BY2_DEGRADATION_ARCHIVE_ROOT>=
 <BY2_DEGRADATION_TEXT_SUMMARY_ROOT>=
@@ -84,6 +85,6 @@ Copy this template to `DATA_PATHS.local.md` for local machine use. Do not commit
 - Use aliases in tracked docs and reports.
 - Runtime outputs remain untracked.
 - Future BY2/N9B outputs use the `BY2_N9B2_*` aliases.
-- BY3 generalization outputs use the `BY3_*` aliases, including `<BY3A4A_STAGE_ROOT>` for the lateral yaw repair memory-lock stage, `<BY3A4C_STAGE_ROOT>` for the git-history yaw-reference reconstruction stage, `<BY3A5B_STAGE_ROOT>` for the A1 dual-diff yaw-input repair stage, `<BY3A6_STAGE_ROOT>` for the trace-truth/initatt/gate forensic stage, `<BY3A7_STAGE_ROOT>` for the A1 yaw dynamic-quality / IMU gate repair stage, `<BY3A8_STAGE_ROOT>` for the yaw error-budget safe-repair stage, and `<BY3B_STAGE_ROOT>` for position/up degradation planning with diagnostic yaw.
+- BY3 generalization outputs use the `BY3_*` aliases, including `<BY3A4A_STAGE_ROOT>` for the lateral yaw repair memory-lock stage, `<BY3A4C_STAGE_ROOT>` for the git-history yaw-reference reconstruction stage, `<BY3A5B_STAGE_ROOT>` for the A1 dual-diff yaw-input repair stage, `<BY3A6_STAGE_ROOT>` for the trace-truth/initatt/gate forensic stage, `<BY3A7_STAGE_ROOT>` for the A1 yaw dynamic-quality / IMU gate repair stage, `<BY3A8_STAGE_ROOT>` for the yaw error-budget safe-repair stage, `<BY3B_STAGE_ROOT>` for position/up degradation planning with diagnostic yaw, and `<BY3C_STAGE_ROOT>` for approved Batch0-Batch3 position/up degradation execution.
 - BY2 degradation reporting/archive outputs use `<BY2_DEGRADATION_ARCHIVE_ROOT>` and text-summary outputs use `<BY2_DEGRADATION_TEXT_SUMMARY_ROOT>`.
 - Do not use local paths in claim text or committed scripts unless the user explicitly approves.

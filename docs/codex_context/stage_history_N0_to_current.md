@@ -415,5 +415,21 @@ ready_for_BY3C_position_up_degradation_execution=true
 human_final_decision_required_before_execution=true
 yaw_claim_scope=diagnostic_only
 ready_for_paper_claims=false
-recommended_next_stage=BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_AND_BATCH1
+recommended_next_stage=BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_TO_BATCH3_LONG_PIPELINE
+```
+
+## BY3C Position Up Degradation Execution Batch0-Batch3
+
+BY3C executed the human-approved position/up-primary degradation subset after BY3B. It locked BY3A7 repaired IMU preprocessing, BY3A5B/BY3A7 A1_dual_diff short-baseline yaw input, BY3A2 Raw Doppler provider, BY3 Go2 priors, trace as evaluation-only reference, single-baseline input, final_v23 external-baseline pattern, and selected-feedback same-case policy.
+
+BY3C completed Batch 0 normal parity, Batch 1 deterministic A_outage/B_ratio_downsample/E_position_std_inflation, Batch 2 C_position_noise mild/medium/strong seeds 0..9, and Batch 3 D_position_spike mild/medium/strong seeds 0..9. It produced degraded inputs, approved random arrays for Batch 2/3 only, solver outputs, official evaluations, same-case feedback, 213 final metric rows, figures, case reviews, consolidated review, context updates, and Obsidian notes. It did not execute H_dual_yaw_noise, E_yaw_std_inflation, mixed cases, module-disable cases, `LegSA_9F_FGO_EKF`, nonredundant FGO extension, or a full monolithic BY3 matrix.
+
+Current BY3C decision:
+
+```text
+status=BY3C_batch0_to_batch3_position_up_degradation_complete
+ready_for_BY3D_diagnostic_yaw_or_mixed_planning=true_after_human_review
+yaw_claim_scope=diagnostic_only
+ready_for_paper_claims=false
+recommended_next_stage=human_review_BY3C_then_BY3D_DIAGNOSTIC_YAW_OR_MIXED_PLANNING
 ```

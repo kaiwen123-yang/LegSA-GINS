@@ -2036,3 +2036,13 @@ Allowed BY3B evidence: BY3A8 scope import, accepted-source lock, position/up fam
 Allowed BY3B planning counts: 118 planned case-seed units, including 75 position/up-primary units and 43 diagnostic-yaw units, with 311 future solver rows planned if later human-approved.
 
 Still forbidden after BY3B: treating planning artifacts as generated degraded inputs, random arrays, solver/evaluator execution, generated figures, BY3 degradation completion, yaw robustness evidence, paper claims, final_v23 outperformance, HDT or long-baseline rel_pos fallback, old BY3 IMU use, BY2 feedback reuse, BY3 normal feedback reuse for degraded cases, PR #52 merge/closure/tag authorization, or automatic BY3C execution without human review.
+
+## BY3C Position Up Degradation Batch0-Batch3 Execution
+
+Allowed BY3C evidence: accepted-source lock, Batch 0 normal parity, Batch 1 deterministic A_outage/B_ratio_downsample/E_position_std_inflation, Batch 2 C_position_noise seeds 0..9, Batch 3 D_position_spike seeds 0..9, official evaluations, same-case feedback generated from each case's stage1 official EVAL_NAV state/estimate columns, figures, case reviews, consolidated metrics, and validation reports under `<BY3C_STAGE_ROOT>` and `<BY3_FULL_MATRIX_ROOT>/BY3C_POSITION_UP_DEGRADATION_EXECUTION`.
+
+Allowed BY3C counts: 71 executed case units, 213 final metric rows across `LegSA_full_EKF`, `single_antenna_gnss1_status_KF_GINS`, and `final_v23_dual_antenna_EKF`, 30 Batch 2 case reviews, 30 Batch 3 case reviews, and 12 consolidated figure rows.
+
+BY3C keeps horizontal/up metrics primary and yaw diagnostic-only. BY3C may state `ready_for_BY3D_diagnostic_yaw_or_mixed_planning=true` only as a human-review-gated planning readiness flag, not as authorization to execute yaw, mixed, module-disable, LegSA_9F_FGO_EKF, nonredundant-FGO, or full monolithic BY3 matrix cases.
+
+Still forbidden after BY3C: paper performance claims, paper yaw claims, final_v23 outperformance claims, full BY3 matrix completion claims, yaw robustness claims, treating diagnostic yaw columns as primary metrics, using BY3C outputs as solver inputs, reusing BY3 normal feedback for degraded cases, or treating PR #52 as merge/closure/tag approved.

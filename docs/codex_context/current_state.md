@@ -1,4 +1,4 @@
-# Current State - BY3B Position/Up Degradation Planning With Diagnostic Yaw
+# Current State - BY3C Position/Up Degradation Execution Batch0-Batch3
 
 This file records the current verified operational state for the Windows audit workspace. It supersedes stale N8K, N9A, N9B2B1, and N9B-not-started text except where that text is explicitly historical.
 
@@ -86,6 +86,7 @@ This file records the current verified operational state for the Windows audit w
 - BY3A7 confirmed the remaining yaw failure was dominated by a BY3 Go2 IMU preprocessing bug: gyro bias was estimated from a moving segment after selected Go2 start. BY3A7 repaired a BY3A7-local IMU with pre-motion source gyro bias, kept A1 yaw source/gates unchanged, reran BY3 normal only, and dual-yaw yaw sanity passed.
 - BY3A8 accepted BY3A7 and computed the remaining yaw error budget. A1 yaw versus trace heading has RMSE about 24.06 deg and p95 about 31.78 deg, so the raw A1 observation quality does not support a robust 2 deg normal-yaw expectation. No source-backed A1 mask, IMU bias refinement, metadata-backed time-lag fix, yaw-gate change, or feedback change passed the safe repair gate.
 - BY3B imported the BY3A8 decision and completed planning/precheck only: accepted-source lock, position/up family scope, case matrix, seed plan, provider/feedback dependency plan, dry-run command templates, evaluator/metric policy, figure/case-review plan, and batch plan. BY3B did not generate degraded inputs, random arrays, solver/evaluator outputs, figures, degradation results, or paper claims.
+- BY3C executed the approved Batch0-Batch3 position/up subset only: normal parity, A/B/E_position_std deterministic cases, C_position_noise seeds 0..9, and D_position_spike seeds 0..9. BY3C produced official evaluations, same-case feedback, 213 final metric rows, figures, case reviews, and consolidated review; yaw remains diagnostic-only and paper claims remain false.
 - BY3A1 did not materialize same-case selected feedback because no real BY3 stage1 solver and official EVAL_NAV exist.
 - BY3A1 did not run BY3 solvers, official evaluators, degradation, metrics, or metric figures.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
@@ -113,13 +114,13 @@ BY3A1 is an input-chain parity and provider-gate repair stage only. It repaired 
 
 BY3A3 is a normal-only selected-feedback and comparison execution stage. Its normal comparison completed, but its earlier BY3 degradation-planning readiness is superseded by BY3A4A.
 
-BY3B is the active BY3 planning decision. The final decision is `BY3B_position_up_diagnostic_yaw_plan_complete`: A1 dual-diff remains mainline with dynamic-quality caution, BY3A7's IMU repair remains accepted, BY3A8 yaw remains diagnostic-only, and future BY3 degradation execution is ready only as a human-reviewed position/up-primary plan. Paper claims remain disabled.
+BY3C is the active BY3 execution decision. The final decision is `BY3C_batch0_to_batch3_position_up_degradation_complete`: A1 dual-diff remains mainline with dynamic-quality caution, BY3A7's IMU repair remains accepted, BY3A8 yaw remains diagnostic-only, and only approved Batch0-Batch3 position/up execution is complete. Paper claims remain disabled.
 
 ## Next Stage
 
 ```text
 recommended_next_stage=implement_active_fgo_backend_or_reframe_scope
-recommended_BY3_next_stage=BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_AND_BATCH1_after_human_review
+recommended_BY3_next_stage=human_review_BY3C_then_BY3D_DIAGNOSTIC_YAW_OR_MIXED_PLANNING
 ```
 
 Planned sequence after human review:
@@ -144,7 +145,8 @@ ready_for_N9G1A_context_lock=complete
 ready_for_N9G1C_E_provider_backend_normal_smoke=blocked_active_backend
 ready_for_BY3_degradation_matrix_planning=true
 ready_for_BY3_degradation_matrix_planning_scope=position_up_with_diagnostic_yaw
-ready_for_BY3C_position_up_degradation_execution=true_after_human_review
+ready_for_BY3C_position_up_degradation_execution=complete_batch0_to_batch3
+ready_for_BY3D_diagnostic_yaw_or_mixed_planning=true_after_human_review
 ready_for_BY3_solver_evaluator=normal_completed
 ready_for_BY3_input_chain=repaired
 ready_for_BY3_go2_priors=true
@@ -196,4 +198,8 @@ BY3A8 is the accepted yaw error-budget decision. It computed the A1 observation 
 
 ## BY3B Position Up With Diagnostic Yaw Planning
 
-BY3B is the current BY3 planning state. It locks future BY3 degradation execution to the BY3A7 repaired IMU and the BY3A5B/BY3A7 A1_dual_diff yaw input. It plans 118 case-seed units: 75 position/up-primary units and 43 diagnostic-yaw units, with 311 future solver rows if later human-approved. All command templates are dry-run only with `execute_now=false`. BY3B did not generate random arrays, degraded inputs, solver outputs, evaluator outputs, figures, or paper claims. The recommended next stage is `BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_AND_BATCH1` after human review.
+BY3B is the historical BY3 planning state. It locked future BY3 degradation execution to the BY3A7 repaired IMU and the BY3A5B/BY3A7 A1_dual_diff yaw input. It planned 118 case-seed units: 75 position/up-primary units and 43 diagnostic-yaw units, with 311 future solver rows if later human-approved. BY3B itself did not generate random arrays, degraded inputs, solver outputs, evaluator outputs, figures, or paper claims.
+
+## BY3C Position Up Degradation Execution
+
+BY3C is the current BY3 execution state. It completed only the human-approved Batch0-Batch3 position/up subset: 1 normal parity case, 10 deterministic A/B/E_position_std cases, 30 C_position_noise case-seed units, and 30 D_position_spike case-seed units. It used BY3A7 repaired IMU, BY3A5B/BY3A7 A1_dual_diff yaw, BY3A2 Raw Doppler, BY3 Go2 priors, same-case degraded feedback from each stage1 official EVAL_NAV state/estimate table, and trace as evaluation-only reference. It produced 213 final metric rows, figures, case reviews, consolidated metrics, and final validation. It did not run H_dual_yaw_noise, E_yaw_std_inflation, mixed, module-disable, LegSA_9F_FGO_EKF, nonredundant-FGO, or full monolithic BY3 matrix cases. Current decision: `BY3C_batch0_to_batch3_position_up_degradation_complete`; `ready_for_BY3D_diagnostic_yaw_or_mixed_planning=true_after_human_review`; `ready_for_paper_claims=false`.
