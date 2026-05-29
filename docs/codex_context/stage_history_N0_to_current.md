@@ -400,3 +400,20 @@ yaw_claim_scope=diagnostic_only
 ready_for_paper_claims=false
 recommended_next_stage=BY3B_POSITION_UP_WITH_DIAGNOSTIC_YAW_PLANNING
 ```
+
+## BY3B Position Up With Diagnostic Yaw Planning
+
+BY3B imported the BY3A8 decision and completed the BY3 degradation planning/precheck stage. It locked BY3A7 repaired IMU preprocessing and the BY3A5B/BY3A7 A1_dual_diff short-baseline yaw input for future BY3 execution; HDT, GNSS status long-baseline `rel_pos_n/e/d`, old BY3 IMU, BY2 feedback, and BY3 normal feedback reuse remain forbidden.
+
+BY3B planned 118 case-seed units: 75 position/up-primary units and 43 diagnostic-yaw units, with 311 future solver rows if a later human-approved execution stage runs them. It created family scope, case matrix, seed plan, provider/feedback dependency plan, dry-run command templates, evaluator/metric policy, figure/case-review plan, batch plan, context updates, and Obsidian notes. It did not run degradation, generate degraded inputs, generate random arrays, run solvers, run evaluators, generate figures, retune parameters, make paper claims, merge PR #52, close PR #52, or create a tag.
+
+Current BY3B decision:
+
+```text
+status=BY3B_position_up_diagnostic_yaw_plan_complete
+ready_for_BY3C_position_up_degradation_execution=true
+human_final_decision_required_before_execution=true
+yaw_claim_scope=diagnostic_only
+ready_for_paper_claims=false
+recommended_next_stage=BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_AND_BATCH1
+```
