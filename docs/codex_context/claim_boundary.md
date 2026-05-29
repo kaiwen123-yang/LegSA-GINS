@@ -51,7 +51,11 @@ LegSA-GINS claims must track what the audits actually prove.
 - BY3A2 may state that BY3 same-case selected feedback remains blocked and no BY3 solver/evaluator/degradation/metric figure run was performed.
 - BY3A3 may state that BY3 same-case selected feedback was generated from stage1 official-eval state/estimate columns only.
 - BY3A3 may state that BY3 normal-only `LegSA_full_EKF`, `single_antenna_gnss1_status_KF_GINS`, and `final_v23_dual_antenna_EKF` solver/evaluator runs completed if backed by the BY3A3 runtime decision report.
-- BY3A3 may state that BY3 degradation planning is ready for a dedicated planning/precheck stage, while paper claims remain disabled.
+- BY3A3 may state that its normal-only comparison completed, but its degradation-planning readiness is superseded by BY3A4A.
+- BY3A4A may state that BY2 lateral dual-antenna yaw policy evidence was recovered as partial and that the physical dual-antenna baseline is lateral/perpendicular to the robot forward/head direction.
+- BY3A4A may state that body heading requires a plus/minus 90 degree correction from antenna-baseline heading depending on antenna order and frame convention, and that +90/-90 must not be selected by RMSE alone.
+- BY3A4A may state that existing BY3A3 outputs were used to audit yaw candidates, compute common-overlap metrics, regenerate diagnostic figures, generate seed0-9 explanation files, and update context memory.
+- BY3A4A may state that repaired yaw metrics were not accepted and BY3 degradation planning is blocked pending manual yaw-policy review.
 
 ## Not Allowed Current Claims
 
@@ -80,6 +84,8 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not start N9G2 until provider/factor model and active backend gaps are fixed and reviewed.
 - Do not treat PR #52 head sync as merge, closure, tag, or paper-claim authorization.
 - Do not claim BY3 paper-ready generalization, final_v23 outperformance, or degradation/full-matrix completion from BY3A3 normal-only metrics.
+- Do not claim BY3A4A repaired BY3 yaw metrics, BY3 degradation readiness, paper-ready BY3 generalization, or final_v23 outperformance.
+- Do not choose or describe BY3/BY2 lateral +90/-90 dual-antenna yaw conversion by yaw RMSE minimization alone.
 - Do not claim BY3 degradation execution until a later explicitly approved BY3 degradation stage runs.
 - Do not treat BY3 receiver `imu-data.csv` as Go2 body IMU.
 - Do not treat BY3 candidate input files as solver success, evaluation evidence, or paper evidence.

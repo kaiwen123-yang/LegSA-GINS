@@ -6,7 +6,7 @@ BY3A3 completed the BY3 normal-only selected-feedback dependency repair and comp
 
 ```text
 status=BY3A3_normal_generalization_completed
-ready_for_BY3_degradation_matrix_planning=true
+ready_for_BY3_degradation_matrix_planning=superseded_by_BY3A4A_false
 ready_for_paper_claims=false
 recommended_next_stage=BY3B_DEGRADATION_MATRIX_PLANNING_AND_PRECHECK
 ```
@@ -42,3 +42,5 @@ final_v23_dual_antenna_EKF horizontal_rmse_m=0.47005123236485347
 ```
 
 Yaw metrics remain cautionary and reference-limited; do not claim paper-ready attitude performance from BY3A3 alone.
+
+BY3A4A supersedes the BY3A3 degradation-planning flag. BY3A4A locked the lateral dual-antenna yaw rule and found the repaired yaw policy inconclusive, so `ready_for_BY3_degradation_matrix_planning=false` until manual dual-antenna yaw-policy review.

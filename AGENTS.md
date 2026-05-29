@@ -59,6 +59,7 @@ The supervisor must prevent phase confusion:
 - BY3A1: current BY3-vs-BY2 parity and provider-gate repair stage; BY3 candidate inputs were repaired to BY2-compatible runtime schemas, BY3 Go2 priors were materialized, Raw Doppler and same-case feedback remain blocked, and solvers/evaluators were not run.
 - BY3A2: current historical WSL pipeline recovery and runner-gate repair stage; historical BY2 Raw Doppler/Go2/single/final_v23/feedback chains were recovered, BY3 UBX/RAWX rebuild and accepted Raw Doppler provider materialization succeeded, same-case selected feedback remains blocked, and solvers/evaluators were not run.
 - BY3A3: current BY3 selected-feedback stage1 chain and normal-generalization execution stage; BY3 same-case stage1 solver/evaluator/feedback generation, LegSA_full_EKF stage2, single baseline, final_v23 external baseline, official evaluation, figures, and case review completed for normal BY3 only.
+- BY3A4A: current BY3 lateral dual-antenna yaw repair and context-memory-lock stage; BY2 lateral yaw policy was recovered as partial, lateral antenna geometry was encoded, existing BY3A3 outputs were audited without solver rerun, no physically/BY2-backed yaw policy passed sanity, and BY3 degradation planning is blocked pending manual yaw-reference review.
 
 ### 1.2 Planner
 
@@ -141,10 +142,12 @@ The BY3A0_TO_BY3E runtime root is represented in tracked docs only by the alias 
 The BY3A1 runtime/audit root is represented in tracked docs only by the alias `<BY3A1_STAGE_ROOT>`.
 The BY3A2 runtime/audit root is represented in tracked docs only by the alias `<BY3A2_STAGE_ROOT>`.
 The BY3A3 runtime/audit root is represented in tracked docs only by the alias `<BY3A3_STAGE_ROOT>`.
+The BY3A4A runtime/audit root is represented in tracked docs only by the alias `<BY3A4A_STAGE_ROOT>`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
 The BY3 Go2 body/high-level source is represented in tracked docs only by `<BY3_GO2_BODY_SOURCE>`.
 The BY2 degradation report archive source is represented in tracked docs only by `<BY2_DEGRADATION_ARCHIVE_ROOT>`.
+The BY2 degradation text-summary root is represented in tracked docs only by `<BY2_DEGRADATION_TEXT_SUMMARY_ROOT>`.
 
 ## 4. Data Source Roles
 
@@ -254,8 +257,8 @@ Current completed route:
 - N9G1C-E found the active nine-factor FGO backend still unavailable and candidate solver execution still disabled; normal smoke was not run.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A3_SELECTED_FEEDBACK_STAGE1_CHAIN_AND_NORMAL_GENERALIZATION_EXECUTION`; same-case BY3 stage1 feedback, LegSA_full_EKF stage2, single baseline, final_v23 external baseline, official evaluation, figures, and case review completed for normal BY3 only.
-- Recommended BY3 next stage: `BY3B_DEGRADATION_MATRIX_PLANNING_AND_PRECHECK`.
+- Current BY3/reporting stage: `BY3A4A_LATERAL_DUAL_ANTENNA_YAW_REPAIR_SEED_EXPLANATION_AND_CONTEXT_MEMORY_LOCK`; lateral dual-antenna geometry and seed0-9 memory were locked, but repaired BY3 yaw metrics were not accepted because all physically meaningful trace/lateral candidates remained around 100 deg yaw RMSE.
+- Recommended BY3 next stage: `manual_review_dual_antenna_yaw_policy`.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
@@ -297,7 +300,10 @@ Allowed now:
 - BY3A2 may state that no BY3 solver, official evaluator, degradation matrix, metric figure generation, selected-feedback generation, or paper claim was performed.
 - BY3A3 may state that BY3 same-case selected feedback was generated from the BY3 stage1 official-eval state/estimate table only, with no BY2 feedback reuse and no trace/error/final_v23 columns used.
 - BY3A3 may state that BY3 normal LegSA_full_EKF, single_antenna_gnss1_status_KF_GINS, and final_v23_dual_antenna_EKF official evaluations completed, and may report BY3A3 normal metrics as runtime evidence only.
-- BY3A3 may state that `ready_for_BY3_degradation_matrix_planning=true` for human review, while `ready_for_paper_claims=false`.
+- BY3A3 may state that its own normal comparison completed, but its earlier `ready_for_BY3_degradation_matrix_planning=true` is superseded by BY3A4A.
+- BY3A4A may state that BY2 lateral yaw policy evidence was recovered as partial, dual antennas are lateral/perpendicular to robot forward direction, body heading requires a plus/minus 90 degree correction from antenna-baseline heading depending on antenna order/frame convention, and +90/-90 must not be selected by RMSE alone.
+- BY3A4A may state that existing BY3A3 outputs were used for yaw-policy candidate tests, common-overlap metrics, diagnostic figures, seed0-9 explanation, and context/Obsidian memory updates, with no solver rerun, no degradation matrix, no retuning, and no paper claims.
+- BY3A4A may state that no tested physically meaningful yaw policy was accepted; therefore repaired yaw metrics are blocked, `ready_for_BY3_degradation_matrix_planning=false`, and `recommended_next_stage=manual_review_dual_antenna_yaw_policy`.
 - N9G2 may be described as the later representative validation stage.
 - N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
 - `LegSA_full_EKF` is not accepted as active nine-factor FGO and must not be relabeled as such.
@@ -326,6 +332,8 @@ Forbidden now:
 - treating BY3A1 repaired input files or materialized BY3 Go2 priors as BY3 solver/evaluator performance evidence.
 - treating BY3A2 historical pipeline recovery, UBX/RAWX rebuild evidence, or baseline handoff configs as BY3 solver/evaluator performance evidence.
 - treating BY3A3 normal-only metrics as paper claims, final_v23 outperformance claims, BY3 degradation/full-matrix completion, or active nine-factor FGO evidence.
+- treating BY3A4A diagnostic figures or common-overlap metrics as repaired yaw metrics, paper claims, BY3 degradation readiness, or final_v23 outperformance evidence.
+- choosing BY3/BY2 lateral dual-antenna +90/-90 yaw conversion only by lowest yaw RMSE.
 - claiming BY3 degradation/full-matrix completion before explicit BY3 execution approval.
 
 ## 10. Historical N9C0A Decision Lock
@@ -534,7 +542,28 @@ legsa_full_stage2=completed
 single_baseline=completed
 finalv23_external_baseline=completed
 official_evaluation=completed
-ready_for_BY3_degradation_matrix_planning=true
+ready_for_BY3_degradation_matrix_planning=superseded_by_BY3A4A_false
 ready_for_paper_claims=false
-recommended_next_stage=BY3B_DEGRADATION_MATRIX_PLANNING_AND_PRECHECK
+recommended_next_stage=manual_review_dual_antenna_yaw_policy
+```
+
+## 21. BY3A4A Decision Lock
+
+BY3A4A_LATERAL_DUAL_ANTENNA_YAW_REPAIR_SEED_EXPLANATION_AND_CONTEXT_MEMORY_LOCK recovered the BY2 lateral dual-antenna yaw policy evidence as partial, encoded that the dual antennas are mounted laterally and perpendicular to the robot forward/head direction, audited physically meaningful +90/-90 and baseline-reversal yaw candidates using existing BY3A3 solver outputs only, recomputed strict common-overlap metrics, regenerated diagnostic comparison figures, generated the seed0-9 explanation files under the BY2 text-summary index, and updated context/Obsidian memory.
+
+BY3A4A did not run BY3 degradation, rerun solvers, retune parameters, use trace/final_v23/single/LegSA outputs as solver inputs, select +90/-90 by RMSE alone, hide the original BY3A3 bad yaw metrics, make paper claims, merge PR #52, close PR #52, or create a tag.
+
+Expected decision if validation passes:
+
+```text
+status=BY3A4A_yaw_policy_inconclusive
+lateral_dual_antenna_geometry_locked=true
+by2_lateral_yaw_policy_recovered=partial
+original_BY3A3_yaw_metrics_preserved=true
+repaired_yaw_metrics_accepted=false
+common_overlap_metrics_ready=true
+seed0_9_explanation_created=true
+ready_for_BY3_degradation_matrix_planning=false
+ready_for_paper_claims=false
+recommended_next_stage=manual_review_dual_antenna_yaw_policy
 ```

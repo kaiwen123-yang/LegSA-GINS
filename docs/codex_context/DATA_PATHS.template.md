@@ -17,8 +17,10 @@ Copy this template to `DATA_PATHS.local.md` for local machine use. Do not commit
 <BY3A1_STAGE_ROOT>=
 <BY3A2_STAGE_ROOT>=
 <BY3A3_STAGE_ROOT>=
+<BY3A4A_STAGE_ROOT>=
 <BY3_FULL_MATRIX_ROOT>=
 <BY2_DEGRADATION_ARCHIVE_ROOT>=
+<BY2_DEGRADATION_TEXT_SUMMARY_ROOT>=
 ```
 
 ## BY2 Fixposition / GNSS Sources
@@ -76,6 +78,6 @@ Copy this template to `DATA_PATHS.local.md` for local machine use. Do not commit
 - Use aliases in tracked docs and reports.
 - Runtime outputs remain untracked.
 - Future BY2/N9B outputs use the `BY2_N9B2_*` aliases.
-- BY3 generalization outputs use the `BY3_*` aliases.
-- BY2 degradation reporting/archive outputs use `<BY2_DEGRADATION_ARCHIVE_ROOT>`.
+- BY3 generalization outputs use the `BY3_*` aliases, including `<BY3A4A_STAGE_ROOT>` for the lateral yaw repair memory-lock stage.
+- BY2 degradation reporting/archive outputs use `<BY2_DEGRADATION_ARCHIVE_ROOT>` and text-summary outputs use `<BY2_DEGRADATION_TEXT_SUMMARY_ROOT>`.
 - Do not use local paths in claim text or committed scripts unless the user explicitly approves.
