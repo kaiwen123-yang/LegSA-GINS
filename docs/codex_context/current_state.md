@@ -1,11 +1,11 @@
-# Current State - BY3A8 Yaw Error Budget, Position/Up Planning With Diagnostic Yaw
+# Current State - BY3B Position/Up Degradation Planning With Diagnostic Yaw
 
 This file records the current verified operational state for the Windows audit workspace. It supersedes stale N8K, N9A, N9B2B1, and N9B-not-started text except where that text is explicitly historical.
 
 ## Verified Current State
 
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A8_YAW_ERROR_BUDGET_AND_SAFE_REPAIR`.
+- Current BY3/reporting stage: `BY3B_POSITION_UP_WITH_DIAGNOSTIC_YAW_PLANNING`.
 - Current operational source of truth for degradation metrics remains `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design source: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code forensic audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -24,6 +24,7 @@ This file records the current verified operational state for the Windows audit w
 - Current BY3A6 trace-truth/initatt/gate forensic root: `<BY3A6_STAGE_ROOT>`.
 - Current BY3A7 A1 yaw dynamic-quality/IMU gate repair root: `<BY3A7_STAGE_ROOT>`.
 - Current BY3A8 yaw error-budget safe-repair root: `<BY3A8_STAGE_ROOT>`.
+- Current BY3B position/up diagnostic-yaw planning root: `<BY3B_STAGE_ROOT>`.
 - Current BY3 full-matrix placeholder root: `<BY3_FULL_MATRIX_ROOT>`.
 - Current BY3 receiver source alias: `<BY3_RECEIVER_ROOT>`.
 - Current BY3 Go2 body/high-level source alias: `<BY3_GO2_BODY_SOURCE>`.
@@ -84,6 +85,7 @@ This file records the current verified operational state for the Windows audit w
 - BY3A6 confirmed a stale first-row initatt bug for stage1 and `LegSA_full_EKF`; the safe repair uses the first dual GNSS/A1 yaw row at or after the requested starttime and does not use trace.
 - BY3A7 confirmed the remaining yaw failure was dominated by a BY3 Go2 IMU preprocessing bug: gyro bias was estimated from a moving segment after selected Go2 start. BY3A7 repaired a BY3A7-local IMU with pre-motion source gyro bias, kept A1 yaw source/gates unchanged, reran BY3 normal only, and dual-yaw yaw sanity passed.
 - BY3A8 accepted BY3A7 and computed the remaining yaw error budget. A1 yaw versus trace heading has RMSE about 24.06 deg and p95 about 31.78 deg, so the raw A1 observation quality does not support a robust 2 deg normal-yaw expectation. No source-backed A1 mask, IMU bias refinement, metadata-backed time-lag fix, yaw-gate change, or feedback change passed the safe repair gate.
+- BY3B imported the BY3A8 decision and completed planning/precheck only: accepted-source lock, position/up family scope, case matrix, seed plan, provider/feedback dependency plan, dry-run command templates, evaluator/metric policy, figure/case-review plan, and batch plan. BY3B did not generate degraded inputs, random arrays, solver/evaluator outputs, figures, degradation results, or paper claims.
 - BY3A1 did not materialize same-case selected feedback because no real BY3 stage1 solver and official EVAL_NAV exist.
 - BY3A1 did not run BY3 solvers, official evaluators, degradation, metrics, or metric figures.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
@@ -111,13 +113,13 @@ BY3A1 is an input-chain parity and provider-gate repair stage only. It repaired 
 
 BY3A3 is a normal-only selected-feedback and comparison execution stage. Its normal comparison completed, but its earlier BY3 degradation-planning readiness is superseded by BY3A4A.
 
-BY3A8 is the active BY3 forensic decision. The final decision is `BY3A8_yaw_limited_but_position_up_ready`: A1 dual-diff remains mainline with dynamic-quality caution, BY3A7's IMU repair remains accepted, and BY3A8 found no safe additional repair because the raw A1 yaw observation lower bound is much worse than the 4-5 deg dual-yaw outputs. BY3 degradation planning is ready as position/up with diagnostic yaw only. Paper claims remain disabled.
+BY3B is the active BY3 planning decision. The final decision is `BY3B_position_up_diagnostic_yaw_plan_complete`: A1 dual-diff remains mainline with dynamic-quality caution, BY3A7's IMU repair remains accepted, BY3A8 yaw remains diagnostic-only, and future BY3 degradation execution is ready only as a human-reviewed position/up-primary plan. Paper claims remain disabled.
 
 ## Next Stage
 
 ```text
 recommended_next_stage=implement_active_fgo_backend_or_reframe_scope
-recommended_BY3_next_stage=BY3B_POSITION_UP_WITH_DIAGNOSTIC_YAW_PLANNING_after_human_review
+recommended_BY3_next_stage=BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_AND_BATCH1_after_human_review
 ```
 
 Planned sequence after human review:
@@ -142,6 +144,7 @@ ready_for_N9G1A_context_lock=complete
 ready_for_N9G1C_E_provider_backend_normal_smoke=blocked_active_backend
 ready_for_BY3_degradation_matrix_planning=true
 ready_for_BY3_degradation_matrix_planning_scope=position_up_with_diagnostic_yaw
+ready_for_BY3C_position_up_degradation_execution=true_after_human_review
 ready_for_BY3_solver_evaluator=normal_completed
 ready_for_BY3_input_chain=repaired
 ready_for_BY3_go2_priors=true
@@ -189,4 +192,8 @@ BY3A7 is the accepted IMU repair decision. It audited A1 yaw jumps/baseline qual
 
 ## BY3A8 Yaw Error Budget Safe Repair
 
-BY3A8 is the current BY3 decision. It computed the A1 observation lower bound against the BY3 trace as evaluation-only reference and found A1-vs-trace heading RMSE about 24.06 deg, p95 about 31.78 deg, max about 167.29 deg, and circular mean about -15.06 deg. A1 objective source-quality checks found only 6 invalid solver-candidate epochs, so an objective mask would not repair the broad observation error. BY3A8 found no safe IMU bias refinement, no metadata-backed time-lag repair, and no yaw-gate repair. Feedback worsened yaw relative to stage1 and is left for a separate human-approved review. Current BY3 planning scope is `position_up_with_diagnostic_yaw`; `ready_for_paper_claims=false`.
+BY3A8 is the accepted yaw error-budget decision. It computed the A1 observation lower bound against the BY3 trace as evaluation-only reference and found A1-vs-trace heading RMSE about 24.06 deg, p95 about 31.78 deg, max about 167.29 deg, and circular mean about -15.06 deg. A1 objective source-quality checks found only 6 invalid solver-candidate epochs, so an objective mask would not repair the broad observation error. BY3A8 found no safe IMU bias refinement, no metadata-backed time-lag repair, and no yaw-gate repair. Feedback worsened yaw relative to stage1 and is left for a separate human-approved review. Current BY3 planning scope is `position_up_with_diagnostic_yaw`; `ready_for_paper_claims=false`.
+
+## BY3B Position Up With Diagnostic Yaw Planning
+
+BY3B is the current BY3 planning state. It locks future BY3 degradation execution to the BY3A7 repaired IMU and the BY3A5B/BY3A7 A1_dual_diff yaw input. It plans 118 case-seed units: 75 position/up-primary units and 43 diagnostic-yaw units, with 311 future solver rows if later human-approved. All command templates are dry-run only with `execute_now=false`. BY3B did not generate random arrays, degraded inputs, solver outputs, evaluator outputs, figures, or paper claims. The recommended next stage is `BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_AND_BATCH1` after human review.

@@ -2028,3 +2028,11 @@ Still forbidden: paper performance claims, final_v23 outperformance claims, PR #
 Allowed BY3A8 runtime evidence: A1-vs-trace heading lower-bound RMSE about 24.06 deg and p95 about 31.78 deg, A1 objective invalid epoch count of 6, no safe additional repair, no BY3A8 normal rerun, and planning scope `position_up_with_diagnostic_yaw`.
 
 Still forbidden after BY3A8: paper yaw claims, final_v23 outperformance claims, full yaw degradation readiness without human review, HDT or long-baseline rel_pos fallback, trace-based yaw correction, metadata-free time shifting, yaw-gate relaxation, feedback-policy changes, RMSE-selected masks, and treating BY3A8 as completed BY3 degradation/full-matrix execution.
+
+## BY3B Position Up With Diagnostic Yaw Planning
+
+Allowed BY3B evidence: BY3A8 scope import, accepted-source lock, position/up family scope, case matrix, seed plan, provider/feedback dependency plan, dry-run command templates, evaluator/metric policy, figure/case-review plan, batch plan, and validation reports under `<BY3B_STAGE_ROOT>`.
+
+Allowed BY3B planning counts: 118 planned case-seed units, including 75 position/up-primary units and 43 diagnostic-yaw units, with 311 future solver rows planned if later human-approved.
+
+Still forbidden after BY3B: treating planning artifacts as generated degraded inputs, random arrays, solver/evaluator execution, generated figures, BY3 degradation completion, yaw robustness evidence, paper claims, final_v23 outperformance, HDT or long-baseline rel_pos fallback, old BY3 IMU use, BY2 feedback reuse, BY3 normal feedback reuse for degraded cases, PR #52 merge/closure/tag authorization, or automatic BY3C execution without human review.

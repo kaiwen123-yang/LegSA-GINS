@@ -173,3 +173,11 @@ BY3A8 treats the BY3 trace as evaluation-only reference and the A1_dual_diff GNS
 BY3A8 keeps invalid epoch criteria source-quality only. Baseline-length and yaw-jump checks may identify objective invalid solver-candidate epochs; trace disagreement, final_v23 output, LegSA output, and RMSE outcomes must not be used to delete, mask, or tune yaw observations.
 
 BY3A8 found no safe additional repair: no IMU bias refinement, metadata-backed time-lag fix, yaw-gate change, continuity preprocessing, HDT fallback, long-relpos fallback, or feedback policy change passed the gate. Current BY3 degradation planning can proceed only as position/up with diagnostic yaw; paper claims remain false.
+
+## BY3B Position Up With Diagnostic Yaw Planning
+
+BY3B locks future BY3 degradation planning to accepted source roles. The BY3A7 repaired IMU is the future BY3 IMU input; the BY3A5B/BY3A7 A1_dual_diff 15-column GNSS remains the dual-yaw source with diagnostic-yaw caveats. HDT and GNSS status long-baseline `rel_pos_n/e/d` remain rejected as solver yaw sources.
+
+BY3B treats BY3 normal feedback only as a pattern reference. Future degraded LegSA cases must generate same-case feedback from that degraded case's stage1 official EVAL_NAV state/estimate columns only. BY2 feedback and BY3 normal feedback reuse are forbidden.
+
+BY3B creates planning artifacts only. It does not create degraded inputs, random arrays, solver outputs, evaluator outputs, figures, or paper claims. Future BY3C execution must preserve trace as evaluation-only and keep yaw diagnostic-only unless a later human-approved stage changes the scope.
