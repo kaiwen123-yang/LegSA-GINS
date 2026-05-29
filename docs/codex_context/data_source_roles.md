@@ -156,4 +156,12 @@ BY3A6 validated that the BY3 trace file is the evaluation truth reference and th
 
 BY3A6 confirmed and repaired stale first-row initatt for stage1/LegSA by using the first dual GNSS/A1 yaw row at or after requested starttime. Trace remains evaluation-only and must not be used for solver initatt or tuning.
 
-BY3A6 completed BY3 normal-only solver/evaluator reruns after initatt repair. Position/up remains sane, but yaw still fails and likely needs a separate yaw-gate/A1-dynamics review. BY3 degradation planning is false pending human review; yaw degradation claims and paper claims remain false.
+BY3A6 completed BY3 normal-only solver/evaluator reruns after initatt repair. Position/up remained sane, but yaw still failed before BY3A7; this is now historical pre-BY3A7 evidence.
+
+## BY3A7 IMU Preprocessing Repair
+
+BY3A7 keeps the BY3 trace as evaluation-only and keeps A1_dual_diff as the mainline short-baseline yaw observation source with dynamic-quality caution. A1 invalid epoch criteria are source quality only: baseline-length and yaw-jump checks, not trace RMSE or final metrics.
+
+BY3A7 identifies the BY3 Go2 body IMU as a source observation stream that must be converted FLU-to-FRD exactly once. The repaired BY3A7 IMU input changes only the preprocessing bias source: gyro bias comes from the pre-motion BY3 body-state segment before selected Go2 start, rather than from a moving segment after selected Go2 start. This is not a Go2 truth claim and not a trace-tuned correction.
+
+BY3A7 normal-only yaw sanity passed for dual-yaw algorithms. BY3 degradation planning can proceed only after human review; paper claims remain false.

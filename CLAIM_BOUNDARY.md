@@ -967,6 +967,16 @@ BY3A6 may state that position/up sanity remains acceptable but yaw still fails a
 
 BY3A6 may not claim repaired BY3 yaw, BY3 degradation readiness, final_v23 outperformance, paper readiness, trace invalidity, A1 invalidity, evaluator invalidity, or yaw-gate repair without a later evidence-backed stage.
 
+## BY3A7 A1 Yaw Dynamic Quality IMU Gate Boundary
+
+BY3A7 may state that A1_dual_diff remains the mainline short-baseline yaw source with dynamic-quality caution and that invalid epoch criteria are based on source baseline/jump quality, not RMSE.
+
+BY3A7 may state that the remaining BY3 yaw failure after BY3A6 was dominated by a BY3 Go2 IMU preprocessing bug: gyro bias was estimated from a moving segment after selected Go2 start. The BY3A7 repair uses a BY3A7-local IMU input with pre-motion source gyro bias and preserves FLU-to-FRD conversion, A1 yaw source, fixed_1p5 yaw_std, yaw gate thresholds, and solver parameters.
+
+BY3A7 may state that normal-only yaw sanity passed for dual-yaw algorithms after the repair: LegSA_full_EKF yaw RMSE about 5.26 deg and final_v23_dual_antenna_EKF yaw RMSE about 4.30 deg.
+
+BY3A7 may set `ready_for_BY3_degradation_matrix_planning=true` only with `scope=full_after_human_review`. BY3A7 may not claim paper readiness, final_v23 outperformance, completed BY3 degradation/full-matrix execution, trace tuning, gate relaxation, HDT mainline acceptance, or PR #52 merge/tag/closure authorization.
+
 Metric-gate pass is not sufficient if external-clean closeness fails.
 
 Too-good results require over-close audit.
@@ -1995,4 +2005,12 @@ No outperform final_v23 claim.
 
 BY3A5 audits the BY3 dual-yaw input source and correctly confirms the old BY3 15-column yaw was wrong-source. BY3A5's HDT replacement policy is diagnostic/rejected/superseded for mainline BY3 and must not be used as solver yaw input.
 
-BY3A5B repairs the mainline yaw input with A1_dual_diff short-baseline yaw from GNSS1/GNSS2 absolute positions, BY2 sign/lateral conversion, and fixed_1p5 yaw_std. GNSS status long-baseline `rel_pos_n/e/d` and NMEA HDT are rejected as mainline solver yaw sources. BY3A6 supersedes the BY3A5B readiness decision: trace/evaluator/base_time were validated and stale first-row initatt was repaired, but yaw still fails after normal-only rerun; `ready_for_BY3_degradation_matrix_planning=false`, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.
+BY3A5B repairs the mainline yaw input with A1_dual_diff short-baseline yaw from GNSS1/GNSS2 absolute positions, BY2 sign/lateral conversion, and fixed_1p5 yaw_std. GNSS status long-baseline `rel_pos_n/e/d` and NMEA HDT are rejected as mainline solver yaw sources. BY3A6 superseded the BY3A5B readiness decision by validating trace/evaluator/base_time and repairing stale first-row initatt. BY3A7 then repaired the remaining BY3 Go2 IMU preprocessing issue; `ready_for_BY3_degradation_matrix_planning=true` only with `scope=full_after_human_review`, and `ready_for_paper_claims=false`.
+
+## BY3A7 A1 Yaw Dynamic Quality IMU Gate Repair
+
+BY3A7 may state that A1_dual_diff remains the mainline short-baseline yaw source with dynamic-quality caution, and that BY3 yaw failure after BY3A6 was dominated by a BY3 Go2 IMU preprocessing bug: gyro bias was estimated from a moving segment after selected Go2 start. BY3A7 repaired only a BY3A7-local IMU input using pre-motion source gyro bias, preserved FLU-to-FRD conversion, A1 yaw source, fixed_1p5 yaw_std, and yaw gate thresholds, and reran BY3 normal only.
+
+Allowed BY3A7 runtime evidence: LegSA_full_EKF yaw RMSE about 5.26 deg and final_v23_dual_antenna_EKF yaw RMSE about 4.30 deg after the BY3A7 IMU preprocessing repair. This supports `ready_for_BY3_degradation_matrix_planning=true` only with `scope=full_after_human_review`.
+
+Still forbidden: paper performance claims, final_v23 outperformance claims, PR #52 merge/tag/closure authorization, HDT or long-baseline rel_pos mainline yaw input, yaw-gate relaxation, trace solver input, RMSE-selected epoch deletion, and treating BY3A7 normal-only evidence as completed BY3 degradation/full-matrix execution.
