@@ -127,4 +127,5 @@
 - Placeholder tests exist.
 - No raw data or large files committed.
 - Git branch stage/N0-bootstrap is ready to push.
-| BY3A5 dual yaw input source repair | stage/N9A-R3-real-output-frame-alignment-gate | blocked | no | no | yaw-source audit + corrected normal rerun | current status long-baseline yaw misuse audited; HDT/fixed_1p5 policy gated; no degradation or paper claim |
+| BY3A5 dual yaw input source repair | stage/N9A-R3-real-output-frame-alignment-gate | superseded_diagnostic | no | no | yaw-source audit + HDT diagnostic rerun | current status long-baseline yaw misuse audited; HDT/fixed_1p5 policy is superseded/rejected for mainline BY3; no degradation or paper claim |
+| BY3A5B A1 dual-diff yaw input repair and normal rerun | stage/N9A-R3-real-output-frame-alignment-gate | input_repaired_reference_issue | yes | no | A1 short-baseline yaw input repair, normal-only solver/eval/figures, context memory | BY3A5 HDT policy superseded; GNSS1/GNSS2 short-baseline A1 yaw generated with BY2 lateral conversion and fixed_1p5 yaw_std; normal rerun completed for LegSA, single, and final_v23; yaw reference/evaluator issue remains, position/up-only planning allowed, yaw degradation claims false |
