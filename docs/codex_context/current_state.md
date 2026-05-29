@@ -1,11 +1,11 @@
-# Current State - BY3A3 Normal Generalization Completed, No Paper Claims
+# Current State - BY3A4A Lateral Yaw Policy Inconclusive, No Paper Claims
 
 This file records the current verified operational state for the Windows audit workspace. It supersedes stale N8K, N9A, N9B2B1, and N9B-not-started text except where that text is explicitly historical.
 
 ## Verified Current State
 
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A3_SELECTED_FEEDBACK_STAGE1_CHAIN_AND_NORMAL_GENERALIZATION_EXECUTION`.
+- Current BY3/reporting stage: `BY3A4A_LATERAL_DUAL_ANTENNA_YAW_REPAIR_SEED_EXPLANATION_AND_CONTEXT_MEMORY_LOCK`.
 - Current operational source of truth for degradation metrics remains `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design source: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code forensic audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -18,6 +18,7 @@ This file records the current verified operational state for the Windows audit w
 - Current BY3A1 parity/provider-gate root: `<BY3A1_STAGE_ROOT>`.
 - Current BY3A2 historical recovery/provider-gate root: `<BY3A2_STAGE_ROOT>`.
 - Current BY3A3 selected-feedback/normal execution root: `<BY3A3_STAGE_ROOT>`.
+- Current BY3A4A yaw-repair/context-memory root: `<BY3A4A_STAGE_ROOT>`.
 - Current BY3 full-matrix placeholder root: `<BY3_FULL_MATRIX_ROOT>`.
 - Current BY3 receiver source alias: `<BY3_RECEIVER_ROOT>`.
 - Current BY3 Go2 body/high-level source alias: `<BY3_GO2_BODY_SOURCE>`.
@@ -62,6 +63,10 @@ This file records the current verified operational state for the Windows audit w
 - BY3A3 completed BY3 normal-only solver/evaluator execution for `LegSA_full_EKF`, `single_antenna_gnss1_status_KF_GINS`, and `final_v23_dual_antenna_EKF`.
 - BY3A3 produced official normal metrics, figures, and a case review under `<BY3A3_STAGE_ROOT>` while keeping trace evaluation-only, final_v23 external-only, and no paper claims.
 - BY3A3 did not run BY3 degradation, artificial degradations, LegSA_9F_FGO_EKF, nonredundant FGO extension, branch ablations, parameter retuning, trace tuning, BY2 feedback reuse, output substitution, PR merge/closure, or tag creation.
+- BY3A4A recovered BY2 lateral dual-antenna yaw policy evidence as partial and locked the physical rule that the dual antennas are lateral/perpendicular to robot forward direction.
+- BY3A4A requires body heading to account for a plus/minus 90 degree correction from antenna-baseline heading depending on antenna direction and coordinate convention; +90/-90 must not be selected by RMSE alone.
+- BY3A4A tested current BY3A3, BY2-recovered lateral, plus/minus 90, and baseline-reversal yaw policies using existing BY3A3 solver outputs only. No policy produced sane yaw across all three normal algorithms, so repaired yaw metrics were not accepted.
+- BY3A4A recomputed strict common-overlap metrics, regenerated diagnostic figures, generated the seed0-9 explanation files, and updated context/Obsidian memory. It did not run solvers, degradation, parameter retuning, or paper-claim work.
 - BY3A1 did not materialize same-case selected feedback because no real BY3 stage1 solver and official EVAL_NAV exist.
 - BY3A1 did not run BY3 solvers, official evaluators, degradation, metrics, or metric figures.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
@@ -87,13 +92,15 @@ N9G1C-E is provider contract resolution, active-backend audit, logger schema con
 
 BY3A1 is an input-chain parity and provider-gate repair stage only. It repaired BY3 runtime input format/time conventions and materialized BY3 Go2 priors, but the final decision remains `BY3A1_provider_or_feedback_blocked`.
 
-BY3A3 is a normal-only selected-feedback and comparison execution stage. The final decision is `BY3A3_normal_generalization_completed`; BY3 degradation planning can proceed through a dedicated planning/precheck stage, but paper claims remain disabled.
+BY3A3 is a normal-only selected-feedback and comparison execution stage. Its normal comparison completed, but its earlier BY3 degradation-planning readiness is superseded by BY3A4A.
+
+BY3A4A is a lateral dual-antenna yaw-repair and context-memory-lock stage. The final decision is `BY3A4A_yaw_policy_inconclusive`; BY3 degradation planning is blocked until manual dual-antenna yaw-reference review resolves the yaw policy. Paper claims remain disabled.
 
 ## Next Stage
 
 ```text
 recommended_next_stage=implement_active_fgo_backend_or_reframe_scope
-recommended_BY3_next_stage=BY3B_DEGRADATION_MATRIX_PLANNING_AND_PRECHECK
+recommended_BY3_next_stage=manual_review_dual_antenna_yaw_policy
 ```
 
 Planned sequence after human review:
@@ -116,12 +123,13 @@ ready_for_algorithm_design_review=true
 ready_for_implementation_review=false
 ready_for_N9G1A_context_lock=complete
 ready_for_N9G1C_E_provider_backend_normal_smoke=blocked_active_backend
-ready_for_BY3_degradation_matrix_planning=true
+ready_for_BY3_degradation_matrix_planning=false
 ready_for_BY3_solver_evaluator=normal_completed
 ready_for_BY3_input_chain=repaired
 ready_for_BY3_go2_priors=true
 ready_for_BY3_raw_doppler_provider=true
 ready_for_BY3_same_case_feedback=true
+ready_for_BY3_yaw_policy=manual_review_required
 ready_for_BY3_paper_claims=false
 ready_for_representative_validation=false
 ready_for_paper_claims=false

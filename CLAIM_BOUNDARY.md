@@ -875,6 +875,8 @@ BY3A3 may state that `LegSA_full_EKF`, `single_antenna_gnss1_status_KF_GINS`, an
 
 BY3A3 may report normal BY3 metrics as runtime evidence for human review and BY3 degradation planning.
 
+BY3A3's degradation-planning readiness is superseded by BY3A4A.
+
 BY3A3 may not claim paper performance readiness, final_v23 outperformance, BY3 degradation/full-matrix completion, complete nine-factor FGO, or active LegSA_9F_FGO_EKF evidence.
 
 BY3A3 keeps `ready_for_paper_claims=false`.
@@ -898,6 +900,24 @@ No output-only correction, no tuning, no epoch deletion.
 Runtime loop fixes must be source-backed.
 
 No proposed factor claim.
+
+## BY3A4A Lateral Dual-Antenna Yaw Policy Boundary
+
+BY3A4A may state that BY2 lateral dual-antenna yaw policy evidence was recovered as partial.
+
+BY3A4A may state that the dual antennas are mounted laterally, perpendicular to the robot forward/head direction, so antenna-baseline heading is not body heading.
+
+BY3A4A may state that body heading requires a plus/minus 90 degree correction from antenna-baseline heading depending on antenna order and coordinate/frame convention.
+
+BY3A4A may state that +90/-90 selection must not be made by yaw RMSE minimization alone.
+
+BY3A4A may state that existing BY3A3 solver outputs were used to audit current, BY2-recovered lateral, plus/minus 90, and baseline-reversal yaw candidates, and that no policy was accepted because the tested candidates did not pass yaw sanity across the three normal algorithms.
+
+BY3A4A may state that common-overlap metrics, diagnostic figures, seed0-9 explanation, context updates, and Obsidian notes were generated.
+
+BY3A4A may not claim repaired BY3 yaw metrics, BY3 degradation readiness, paper performance readiness, final_v23 outperformance, solver rerun, degradation matrix completion, parameter retuning, or trace/final_v23/algorithm output use as solver input.
+
+BY3A4A keeps `ready_for_BY3_degradation_matrix_planning=false` and `ready_for_paper_claims=false`.
 
 Metric-gate pass is not sufficient if external-clean closeness fails.
 

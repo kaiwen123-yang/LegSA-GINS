@@ -28,11 +28,13 @@ Allowed:
 - GNSS standard deviation / quality fields.
 - yaw observation and yaw_std if explicit fields exist.
 - receiver velocity only if explicit velocity columns exist.
+- dual-antenna baseline heading diagnostics, with lateral mounting correction documented separately.
 
 Not allowed:
 
 - raw GNSS baseline claim for `single_antenna_gnss1_status_KF_GINS`; that baseline is GNSS1-status, not raw GNSS.
 - estimate substitution.
+- selecting a lateral dual-antenna plus/minus 90 degree yaw correction by RMSE alone.
 
 ## Trace Reference
 
@@ -116,6 +118,8 @@ BY3A0_TO_BY3E produced candidate BY3 input files and blocked solver/evaluator ex
 Selected-feedback same-case rule: `selected_feedback` requires feedback generated for the same degraded or clean case. Clean feedback cannot be reused for degraded cases.
 
 EVAL_NAV feedback generation uses state/estimate columns only and must not use trace/error feedback corrections.
+
+BY3A4A yaw rule: BY2/BY3 dual-antenna yaw evaluation must account for lateral antenna mounting. The antenna baseline is perpendicular to robot forward/head direction, so baseline heading is not body heading. Body heading requires a plus/minus 90 degree correction depending on antenna order and coordinate/frame convention; unwrap yaw before interpolation and wrap after differencing. BY3A4A did not accept repaired yaw metrics, so BY3 degradation planning remains blocked pending manual yaw-policy review.
 
 ## Baseline Roles
 
