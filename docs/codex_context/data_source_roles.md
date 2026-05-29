@@ -164,4 +164,12 @@ BY3A7 keeps the BY3 trace as evaluation-only and keeps A1_dual_diff as the mainl
 
 BY3A7 identifies the BY3 Go2 body IMU as a source observation stream that must be converted FLU-to-FRD exactly once. The repaired BY3A7 IMU input changes only the preprocessing bias source: gyro bias comes from the pre-motion BY3 body-state segment before selected Go2 start, rather than from a moving segment after selected Go2 start. This is not a Go2 truth claim and not a trace-tuned correction.
 
-BY3A7 normal-only yaw sanity passed for dual-yaw algorithms. BY3 degradation planning can proceed only after human review; paper claims remain false.
+BY3A7 normal-only yaw sanity passed for dual-yaw algorithms, but BY3A8 later narrowed the planning scope.
+
+## BY3A8 Yaw Error Budget
+
+BY3A8 treats the BY3 trace as evaluation-only reference and the A1_dual_diff GNSS as the accepted mainline dual-yaw observation source. The A1 observation lower-bound audit found A1-vs-trace heading RMSE about 24.06 deg and p95 about 31.78 deg; this is diagnostic evidence about observation quality, not a solver input or correction source.
+
+BY3A8 keeps invalid epoch criteria source-quality only. Baseline-length and yaw-jump checks may identify objective invalid solver-candidate epochs; trace disagreement, final_v23 output, LegSA output, and RMSE outcomes must not be used to delete, mask, or tune yaw observations.
+
+BY3A8 found no safe additional repair: no IMU bias refinement, metadata-backed time-lag fix, yaw-gate change, continuity preprocessing, HDT fallback, long-relpos fallback, or feedback policy change passed the gate. Current BY3 degradation planning can proceed only as position/up with diagnostic yaw; paper claims remain false.

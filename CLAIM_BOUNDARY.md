@@ -977,6 +977,14 @@ BY3A7 may state that normal-only yaw sanity passed for dual-yaw algorithms after
 
 BY3A7 may set `ready_for_BY3_degradation_matrix_planning=true` only with `scope=full_after_human_review`. BY3A7 may not claim paper readiness, final_v23 outperformance, completed BY3 degradation/full-matrix execution, trace tuning, gate relaxation, HDT mainline acceptance, or PR #52 merge/tag/closure authorization.
 
+## BY3A8 Yaw Error Budget Boundary
+
+BY3A8 may state that the remaining BY3 dual-yaw normal error is limited by A1 observation quality. The evaluation-only A1 lower-bound audit found A1-vs-trace heading RMSE about 24.06 deg, p95 about 31.78 deg, max about 167.29 deg, circular mean about -15.06 deg, and circular std about 17.17 deg.
+
+BY3A8 may state that source-quality-only A1 checks found 6 objective invalid solver-candidate epochs, but an objective mask is insufficient for the broad observation error. BY3A8 may state that BY3A7 IMU bias remains accepted, time-lag diagnostics do not support a metadata-backed repair, yaw-gate behavior is acceptable under unchanged thresholds, and feedback worsens yaw relative to stage1 but requires a separate human-approved review.
+
+BY3A8 may set `ready_for_BY3_degradation_matrix_planning=true` only with `scope=position_up_with_diagnostic_yaw`; `yaw_claim_scope=diagnostic_only` and `ready_for_paper_claims=false`. BY3A8 may not claim paper yaw success, final_v23 outperformance, completed BY3 degradation/full-matrix execution, trace-based correction, yaw-gate relaxation, HDT/long-relpos fallback, feedback-policy authorization, or RMSE-selected epoch deletion.
+
 Metric-gate pass is not sufficient if external-clean closeness fails.
 
 Too-good results require over-close audit.
@@ -2005,7 +2013,7 @@ No outperform final_v23 claim.
 
 BY3A5 audits the BY3 dual-yaw input source and correctly confirms the old BY3 15-column yaw was wrong-source. BY3A5's HDT replacement policy is diagnostic/rejected/superseded for mainline BY3 and must not be used as solver yaw input.
 
-BY3A5B repairs the mainline yaw input with A1_dual_diff short-baseline yaw from GNSS1/GNSS2 absolute positions, BY2 sign/lateral conversion, and fixed_1p5 yaw_std. GNSS status long-baseline `rel_pos_n/e/d` and NMEA HDT are rejected as mainline solver yaw sources. BY3A6 superseded the BY3A5B readiness decision by validating trace/evaluator/base_time and repairing stale first-row initatt. BY3A7 then repaired the remaining BY3 Go2 IMU preprocessing issue; `ready_for_BY3_degradation_matrix_planning=true` only with `scope=full_after_human_review`, and `ready_for_paper_claims=false`.
+BY3A5B repairs the mainline yaw input with A1_dual_diff short-baseline yaw from GNSS1/GNSS2 absolute positions, BY2 sign/lateral conversion, and fixed_1p5 yaw_std. GNSS status long-baseline `rel_pos_n/e/d` and NMEA HDT are rejected as mainline solver yaw sources. BY3A6 superseded the BY3A5B readiness decision by validating trace/evaluator/base_time and repairing stale first-row initatt. BY3A7 then repaired the remaining BY3 Go2 IMU preprocessing issue. BY3A8 found the residual yaw error is limited by A1 observation quality; `ready_for_BY3_degradation_matrix_planning=true` only with `scope=position_up_with_diagnostic_yaw`, and `ready_for_paper_claims=false`.
 
 ## BY3A7 A1 Yaw Dynamic Quality IMU Gate Repair
 
@@ -2014,3 +2022,9 @@ BY3A7 may state that A1_dual_diff remains the mainline short-baseline yaw source
 Allowed BY3A7 runtime evidence: LegSA_full_EKF yaw RMSE about 5.26 deg and final_v23_dual_antenna_EKF yaw RMSE about 4.30 deg after the BY3A7 IMU preprocessing repair. This supports `ready_for_BY3_degradation_matrix_planning=true` only with `scope=full_after_human_review`.
 
 Still forbidden: paper performance claims, final_v23 outperformance claims, PR #52 merge/tag/closure authorization, HDT or long-baseline rel_pos mainline yaw input, yaw-gate relaxation, trace solver input, RMSE-selected epoch deletion, and treating BY3A7 normal-only evidence as completed BY3 degradation/full-matrix execution.
+
+## BY3A8 Yaw Error Budget Safe Repair
+
+Allowed BY3A8 runtime evidence: A1-vs-trace heading lower-bound RMSE about 24.06 deg and p95 about 31.78 deg, A1 objective invalid epoch count of 6, no safe additional repair, no BY3A8 normal rerun, and planning scope `position_up_with_diagnostic_yaw`.
+
+Still forbidden after BY3A8: paper yaw claims, final_v23 outperformance claims, full yaw degradation readiness without human review, HDT or long-baseline rel_pos fallback, trace-based yaw correction, metadata-free time shifting, yaw-gate relaxation, feedback-policy changes, RMSE-selected masks, and treating BY3A8 as completed BY3 degradation/full-matrix execution.

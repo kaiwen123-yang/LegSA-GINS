@@ -64,7 +64,8 @@ The supervisor must prevent phase confusion:
 - BY3A5: historical BY3 dual-yaw input source audit; it correctly confirmed the old BY3 15-column yaw was wrong-source, but its HDT replacement policy is superseded for mainline BY3.
 - BY3A5B: historical BY3 A1 dual-diff yaw-input repair and normal rerun stage; BY3 dual yaw is generated from GNSS1/GNSS2 short-baseline position difference with BY2 sign/lateral conversion and fixed_1p5 yaw std. Normal rerun completed, but official yaw remained unresolved.
 - BY3A6: historical BY3 trace-truth, initatt, and yaw-gate forensic repair stage; trace truth/parser/base_time were validated, stage1/LegSA stale first-row initatt was repaired to starttime-aligned A1 yaw, BY3 normal-only rerun completed, and yaw still failed before BY3A7.
-- BY3A7: current BY3 A1 yaw dynamic-quality, IMU sign-axis, and yaw-gate repair stage; A1 remains valid with dynamic-quality caution, BY3 Go2 IMU preprocessing bias from a moving segment was confirmed and repaired with a pre-motion source-bias BY3A7-local IMU, BY3 normal-only rerun passed yaw sanity for dual-yaw algorithms, and BY3 degradation planning is ready only after human review. Paper claims remain false.
+- BY3A7: historical BY3 A1 yaw dynamic-quality, IMU sign-axis, and yaw-gate repair stage; A1 remains valid with dynamic-quality caution, BY3 Go2 IMU preprocessing bias from a moving segment was confirmed and repaired with a pre-motion source-bias BY3A7-local IMU, and BY3 normal-only rerun passed yaw sanity for dual-yaw algorithms.
+- BY3A8: current BY3 yaw error-budget and safe-repair stage; A1 observation lower-bound RMSE is about 24.06 deg versus trace as evaluation-only reference, no source-backed additional repair passed, no normal rerun/degradation was run, and BY3 degradation planning is position/up with diagnostic yaw only. Paper claims remain false.
 
 ### 1.2 Planner
 
@@ -152,6 +153,7 @@ The BY3A4C runtime/audit root is represented in tracked docs only by the alias `
 The BY3A5B runtime/audit root is represented in tracked docs only by the alias `<BY3A5B_STAGE_ROOT>`, with execution artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3A5B_A1_DUAL_DIFF_REPAIR`.
 The BY3A6 runtime/audit root is represented in tracked docs only by the alias `<BY3A6_STAGE_ROOT>`, with execution artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3A6_TRACE_TRUTH_INITATT_GATE_FORENSIC`.
 The BY3A7 runtime/audit root is represented in tracked docs only by the alias `<BY3A7_STAGE_ROOT>`, with execution artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3A7_YAW_DYNAMIC_GATE_REPAIR`.
+The BY3A8 runtime/audit root is represented in tracked docs only by the alias `<BY3A8_STAGE_ROOT>`, with execution artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3A8_YAW_ERROR_BUDGET_REPAIR`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
 The BY3 Go2 body/high-level source is represented in tracked docs only by `<BY3_GO2_BODY_SOURCE>`.
@@ -266,8 +268,8 @@ Current completed route:
 - N9G1C-E found the active nine-factor FGO backend still unavailable and candidate solver execution still disabled; normal smoke was not run.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A7_A1_YAW_DYNAMIC_QUALITY_IMU_SIGN_AND_GATE_REPAIR`; BY3 trace truth/parser/base_time and initatt repair remain valid, A1 yaw source remains valid with dynamic-quality caution, and the BY3 Go2 IMU moving-segment gyro-bias preprocessing bug was repaired with a BY3A7-local pre-motion source-bias IMU.
-- Recommended BY3 next stage: `BY3B_DEGRADATION_MATRIX_PLANNING_AND_PRECHECK` after human review; BY3A7 normal yaw sanity passed for dual-yaw algorithms, but paper claims remain false and PR #52 merge/tag/closure still require explicit human approval.
+- Current BY3/reporting stage: `BY3A8_YAW_ERROR_BUDGET_AND_SAFE_REPAIR`; BY3 trace truth/parser/base_time and initatt repair remain valid, A1 yaw source remains valid with dynamic-quality caution, BY3A7 IMU repair remains accepted, and BY3A8 found the remaining yaw error is limited by A1 observation quality.
+- Recommended BY3 next stage: `BY3B_POSITION_UP_WITH_DIAGNOSTIC_YAW_PLANNING`; BY3A8 allows only position/up planning with diagnostic yaw, paper claims remain false, and PR #52 merge/tag/closure still require explicit human approval.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
@@ -329,6 +331,9 @@ Allowed now:
 - BY3A7 may state that the BY3A0/BY3A1 Go2 IMU input used a gyro bias estimated from a moving segment after selected Go2 start; BY3A7 repairs this by using a pre-motion BY3 source-bias segment while preserving the FLU-to-FRD conversion and all yaw gate parameters.
 - BY3A7 may state that BY3 normal-only rerun with the BY3A7-local static-bias IMU completed; `LegSA_full_EKF` yaw RMSE is about 5.26 deg and `final_v23_dual_antenna_EKF` yaw RMSE is about 4.30 deg, while the single-antenna baseline yaw remains poor.
 - BY3A7 may set `ready_for_BY3_degradation_matrix_planning=true` only with `scope=full_after_human_review`; `ready_for_paper_claims=false` always remains in force.
+- BY3A8 may state that the remaining dual-yaw error is limited by A1 observation quality: A1-vs-trace heading RMSE about 24.06 deg, p95 about 31.78 deg, and max about 167.29 deg in an evaluation-only lower-bound audit.
+- BY3A8 may state that no safe additional repair passed: objective A1 mask is insufficient, BY3A7 IMU bias remains accepted, time-lag scans lack metadata support, yaw gate behavior is acceptable under unchanged thresholds, and feedback policy changes require a separate review.
+- BY3A8 may set `ready_for_BY3_degradation_matrix_planning=true` only with `scope=position_up_with_diagnostic_yaw`; `yaw_claim_scope=diagnostic_only` and `ready_for_paper_claims=false` always remain in force.
 - N9G2 may be described as the later representative validation stage.
 - N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
 - `LegSA_full_EKF` is not accepted as active nine-factor FGO and must not be relabeled as such.
@@ -367,6 +372,7 @@ Forbidden now:
 - treating BY3A6 initatt repair as repaired BY3 yaw metrics, BY3 degradation readiness, paper readiness, or proof that trace/A1/evaluator/gate are fully solved.
 - treating BY3A7 normal yaw sanity as paper-ready evidence, final_v23 outperformance, PR #52 merge/tag/closure authorization, or completed BY3 degradation/full-matrix execution.
 - treating BY3A7 A1 dynamic-quality masks as RMSE-selected epoch deletion; any invalid epoch policy must stay source-quality based.
+- treating BY3A8 diagnostic yaw scope as a paper yaw claim, full yaw degradation readiness, trace-based correction permission, feedback-policy authorization, or permission to relax yaw gates.
 - claiming BY3 degradation/full-matrix completion before explicit BY3 execution approval.
 
 ## 10. Historical N9C0A Decision Lock
@@ -627,7 +633,7 @@ recommended_next_stage=BY3B_POSITION_ONLY_DEGRADATION_PLANNING_OR_HUMAN_REVIEW
 
 BY3A5 remains valid only as the wrong-source audit: the old BY3 15-column yaw input used a wrong source, likely GNSS1 status heading or a long-baseline status rel_pos vector. BY3A5's HDT repaired-input policy is diagnostic/rejected/superseded for mainline BY3 generalization and must not be reused as the main solver yaw source.
 
-BY3A5B repairs BY3 mainline dual yaw with A1_dual_diff short-baseline yaw from GNSS1/GNSS2 absolute positions, not status long-baseline `rel_pos_n/e/d` and not HDT. The accepted policy is `gnss2_minus_gnss1`, BY2 sign/lateral conversion equivalent to `baseline_heading+90`, and fixed_1p5 yaw_std. BY3A6 then validated the trace/evaluator/base_time chain and repaired stale first-row initatt for stage1/LegSA. BY3A7 repaired the remaining BY3 Go2 IMU preprocessing issue; `ready_for_BY3_degradation_matrix_planning=true` only with `scope=full_after_human_review`, and `ready_for_paper_claims=false`.
+BY3A5B repairs BY3 mainline dual yaw with A1_dual_diff short-baseline yaw from GNSS1/GNSS2 absolute positions, not status long-baseline `rel_pos_n/e/d` and not HDT. The accepted policy is `gnss2_minus_gnss1`, BY2 sign/lateral conversion equivalent to `baseline_heading+90`, and fixed_1p5 yaw_std. BY3A6 then validated the trace/evaluator/base_time chain and repaired stale first-row initatt for stage1/LegSA. BY3A7 repaired the remaining BY3 Go2 IMU preprocessing issue. BY3A8 found the residual yaw error is limited by A1 observation quality; `ready_for_BY3_degradation_matrix_planning=true` only with `scope=position_up_with_diagnostic_yaw`, and `ready_for_paper_claims=false`.
 
 ## 23. BY3A7 Decision Lock
 
@@ -649,4 +655,24 @@ ready_for_BY3_degradation_matrix_planning=true
 ready_for_BY3_degradation_matrix_planning_scope=full_after_human_review
 ready_for_paper_claims=false
 recommended_next_stage=BY3B_DEGRADATION_MATRIX_PLANNING_AND_PRECHECK
+```
+
+## 24. BY3A8 Decision Lock
+
+BY3A8_YAW_ERROR_BUDGET_AND_SAFE_REPAIR accepted BY3A7's trace/base-time/initatt/A1/IMU findings and audited the residual 4-5 deg dual-yaw normal error. The A1 observation lower-bound audit used the BY3 trace as evaluation-only reference and found A1-vs-trace heading RMSE about 24.06 deg, p95 about 31.78 deg, max about 167.29 deg, circular mean about -15.06 deg, and circular std about 17.17 deg.
+
+BY3A8 found that source-quality-only A1 checks identify 6 objective invalid solver-candidate epochs, but an objective mask is insufficient for the broad observation error. BY3A7 pre-motion IMU bias remains accepted, no metadata-backed time-lag repair exists, yaw gate behavior is acceptable under unchanged thresholds, and feedback worsens yaw relative to stage1 but requires a separate human-approved review. BY3A8 did not run BY3 normal solvers, official evaluators, degradation, artificial degradation, trace solver input, HDT/long-relpos fallback, gate relaxation, parameter retuning, paper claims, PR #52 merge/closure, or tag creation.
+
+Expected decision if validation passes:
+
+```text
+status=BY3A8_yaw_limited_but_position_up_ready
+a1_observation_lower_bound=BY3A8_a1_observation_quality_poor
+safe_repair_plan=BY3A8_no_safe_repair_accept_yaw_limit
+normal_rerun=BY3A8_normal_rerun_not_run_no_safe_repair
+ready_for_BY3_degradation_matrix_planning=true
+ready_for_BY3_degradation_matrix_planning_scope=position_up_with_diagnostic_yaw
+yaw_claim_scope=diagnostic_only
+ready_for_paper_claims=false
+recommended_next_stage=BY3B_POSITION_UP_WITH_DIAGNOSTIC_YAW_PLANNING
 ```

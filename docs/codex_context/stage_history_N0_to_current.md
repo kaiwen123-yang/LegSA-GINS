@@ -383,3 +383,20 @@ ready_for_BY3_degradation_matrix_planning_scope=full_after_human_review
 ready_for_paper_claims=false
 recommended_next_stage=BY3B_DEGRADATION_MATRIX_PLANNING_AND_PRECHECK
 ```
+
+## BY3A8 Yaw Error Budget Safe Repair
+
+BY3A8 accepted BY3A7 and audited the remaining 4-5 deg dual-yaw normal error. The A1 observation lower-bound audit used the BY3 trace as evaluation-only reference and found A1-vs-trace heading RMSE about 24.06 deg, p95 about 31.78 deg, max about 167.29 deg, and circular mean about -15.06 deg. Source-quality-only checks found 6 objective invalid A1 solver-candidate epochs, so an objective mask cannot explain or repair the broad observation error.
+
+BY3A8 found no safe additional repair: BY3A7 pre-motion IMU bias remains accepted, no metadata-backed time-lag issue was found, yaw gate behavior is acceptable under unchanged thresholds, yaw continuity/code was not identified as a bug, and feedback worsened yaw relative to stage1 but requires a separate human-approved review. No BY3 normal rerun, solver/evaluator run, degradation, trace solver input, HDT/long-relpos fallback, gate relaxation, parameter retuning, PR merge/closure, tag, or paper claim was performed.
+
+Current BY3A8 decision:
+
+```text
+status=BY3A8_yaw_limited_but_position_up_ready
+ready_for_BY3_degradation_matrix_planning=true
+ready_for_BY3_degradation_matrix_planning_scope=position_up_with_diagnostic_yaw
+yaw_claim_scope=diagnostic_only
+ready_for_paper_claims=false
+recommended_next_stage=BY3B_POSITION_UP_WITH_DIAGNOSTIC_YAW_PLANNING
+```
