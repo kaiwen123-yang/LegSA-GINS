@@ -180,4 +180,12 @@ BY3B locks future BY3 degradation planning to accepted source roles. The BY3A7 r
 
 BY3B treats BY3 normal feedback only as a pattern reference. Future degraded LegSA cases must generate same-case feedback from that degraded case's stage1 official EVAL_NAV state/estimate columns only. BY2 feedback and BY3 normal feedback reuse are forbidden.
 
-BY3B creates planning artifacts only. It does not create degraded inputs, random arrays, solver outputs, evaluator outputs, figures, or paper claims. Future BY3C execution must preserve trace as evaluation-only and keep yaw diagnostic-only unless a later human-approved stage changes the scope.
+BY3B creates planning artifacts only. It does not create degraded inputs, random arrays, solver outputs, evaluator outputs, figures, or paper claims.
+
+## BY3C Position Up Degradation Execution
+
+BY3C uses the BY3A7 repaired IMU as the accepted body-IMU source, the BY3A5B/BY3A7 A1_dual_diff 15-column GNSS as the dual-yaw observation source, BY3A2 Raw Doppler as the Raw Doppler provider, and BY3 Go2 priors as source observations. Trace remains evaluation-only.
+
+BY3C degraded cases generate same-case feedback only from that same case's stage1 official EVAL_NAV state/estimate columns. BY2 feedback, BY3 normal feedback reuse for degraded cases, trace/error feedback columns, final_v23 output, single-baseline output, and LegSA output are not solver inputs.
+
+BY3C completed only position/up-primary Batch0-Batch3 execution. Yaw fields in BY3C are diagnostic-only and must not be used for paper yaw claims, yaw robustness claims, or RMSE-selected source repair. Later yaw-diagnostic or mixed stages require separate human review.

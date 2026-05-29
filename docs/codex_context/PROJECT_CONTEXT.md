@@ -7,7 +7,7 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 ## Current Stage
 
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3B_POSITION_UP_WITH_DIAGNOSTIC_YAW_PLANNING`.
+- Current BY3/reporting stage: `BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_TO_BATCH3_LONG_PIPELINE`.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -26,6 +26,7 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 - Current BY3A7 A1 yaw dynamic-quality/IMU gate repair root: `<BY3A7_STAGE_ROOT>`.
 - Current BY3A8 yaw error-budget safe-repair root: `<BY3A8_STAGE_ROOT>`.
 - Current BY3B position/up diagnostic-yaw planning root: `<BY3B_STAGE_ROOT>`.
+- Current BY3C position/up Batch0-Batch3 execution root: `<BY3C_STAGE_ROOT>`.
 - Current BY3 full-matrix placeholder root: `<BY3_FULL_MATRIX_ROOT>`.
 - Current export-clean design package: `<BY2_N9B2_FULL_MATRIX_ROOT>/N9F_EXPORT_CLEAN_DESIGN_PACKAGE`.
 - Current metrics source: `<N9C0_CONSOLIDATED_PRECHECK_ROOT>/matrix/N9C0_ACTIVE_FINAL_ONLY_METRICS_TABLE`.
@@ -49,7 +50,8 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 - BY3A6 validated the BY3 trace truth/evaluator/base_time chain, confirmed processed trace lat/lon are unsafe for blind evaluation, repaired stale first-row initatt for stage1/LegSA, and completed a BY3 normal-only rerun. Yaw still failed before BY3A7.
 - BY3A7 confirmed the remaining yaw failure came from BY3 Go2 IMU preprocessing: gyro bias was estimated from a moving segment after selected Go2 start. BY3A7 repaired a BY3A7-local IMU using the pre-motion source gyro-bias segment, preserved A1 yaw source and yaw gates, reran BY3 normal only, and dual-yaw yaw sanity passed.
 - BY3A8 computed the remaining BY3 yaw error budget and found A1 observation quality is the limiting factor: A1-vs-trace heading RMSE is about 24.06 deg and p95 about 31.78 deg. No safe additional repair passed and no normal rerun was run.
-- BY3B imported the BY3A8 scope, locked BY3A7 repaired IMU plus A1_dual_diff as future accepted sources, and created position/up-primary degradation plans with diagnostic yaw only. BY3B did not generate degraded inputs, random arrays, solvers, evaluators, figures, or paper claims. Current BY3 recommended next stage is `BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_AND_BATCH1` after human review.
+- BY3B imported the BY3A8 scope, locked BY3A7 repaired IMU plus A1_dual_diff as future accepted sources, and created position/up-primary degradation plans with diagnostic yaw only. BY3B did not generate degraded inputs, random arrays, solvers, evaluators, figures, or paper claims.
+- BY3C completed the approved Batch0-Batch3 position/up execution subset: normal parity, deterministic A/B/E_position_std, C_position_noise seeds 0..9, and D_position_spike seeds 0..9. It produced 213 final metric rows, figures, case reviews, consolidated review, and final validation; yaw remains diagnostic-only and paper claims remain false.
 - Current active-FGO recommended next stage: `implement_active_fgo_backend_or_reframe_scope`.
 
 ## Current Batch State
@@ -73,7 +75,8 @@ ready_for_N9G1A_context_lock=complete
 ready_for_N9G1C_E_provider_backend_normal_smoke=blocked_active_backend
 ready_for_BY3_degradation_matrix_planning=true
 ready_for_BY3_degradation_matrix_planning_scope=position_up_with_diagnostic_yaw
-ready_for_BY3C_position_up_degradation_execution=true_after_human_review
+ready_for_BY3C_position_up_degradation_execution=complete_batch0_to_batch3
+ready_for_BY3D_diagnostic_yaw_or_mixed_planning=true_after_human_review
 ready_for_BY3_solver_evaluator=normal_completed
 ready_for_BY3_input_chain=repaired
 ready_for_BY3_go2_priors=true
@@ -103,7 +106,7 @@ N9G1C-E is provider contract resolution, active-backend audit, logger schema con
 
 N9G2 representative validation is blocked until provider/factor and active FGO backend gaps are fixed and reviewed. Full matrix, replot, and report stages are deferred to N9G3/N9G4 only if applicable and explicitly approved.
 
-BY3 degradation planning after BY3B is ready only as a human-reviewed position/up-primary plan with diagnostic yaw. BY3 yaw input remains A1_dual_diff short baseline, stale first-row initatt was repaired in BY3A6, BY3A7 repaired a BY3-local IMU preprocessing bias bug without changing yaw gates or tuning parameters, and BY3A8 found the remaining yaw error is limited by A1 observation quality with no safe additional repair. BY3B did not execute degradation or generate degraded inputs/random arrays. BY3A3/BY3A4A/BY3A5/BY3A5B/BY3A6 yaw metrics remain historical bad-input, invalid-reference, or pre-BY3A7 evidence and must not support paper claims or final_v23 outperformance.
+BY3C executed only the human-approved position/up-primary Batch0-Batch3 subset with diagnostic yaw. BY3 yaw input remains A1_dual_diff short baseline, stale first-row initatt was repaired in BY3A6, BY3A7 repaired a BY3-local IMU preprocessing bias bug without changing yaw gates or tuning parameters, and BY3A8 found the remaining yaw error is limited by A1 observation quality with no safe additional repair. BY3A3/BY3A4A/BY3A5/BY3A5B/BY3A6 yaw metrics remain historical bad-input, invalid-reference, or pre-BY3A7 evidence and must not support paper claims or final_v23 outperformance. BY3C does not authorize H_dual_yaw_noise, E_yaw_std_inflation, mixed, module-disable, LegSA_9F_FGO_EKF, nonredundant-FGO, or full monolithic BY3 matrix execution.
 
 ## Path Boundary
 
@@ -128,4 +131,8 @@ BY3A8 accepts the BY3A7 normal-only outputs and budgets the remaining 4-5 deg du
 
 ## BY3B Position Up With Diagnostic Yaw Planning
 
-BY3B completes planning/precheck only. It locks future BY3 degradation execution to BY3A7 repaired IMU and BY3A5B/BY3A7 A1_dual_diff yaw source, defines 75 position/up-primary case-seed units plus 43 diagnostic-yaw units, preserves same-seed fairness, requires same-case degraded feedback generation for LegSA, and writes dry-run command templates with `execute_now=false`. No random arrays, degraded inputs, solvers, evaluators, figures, or paper claims were produced. Next recommended stage is `BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_AND_BATCH1` after human review.
+BY3B completed planning/precheck only. It locked future BY3 degradation execution to BY3A7 repaired IMU and BY3A5B/BY3A7 A1_dual_diff yaw source, defined 75 position/up-primary case-seed units plus 43 diagnostic-yaw units, preserved same-seed fairness, required same-case degraded feedback generation for LegSA, and wrote dry-run command templates with `execute_now=false`.
+
+## BY3C Position Up Degradation Execution
+
+BY3C completed only approved Batch0-Batch3 position/up execution. It used BY3A7 repaired IMU, BY3A5B/BY3A7 A1_dual_diff yaw, BY3A2 Raw Doppler, BY3 Go2 priors, trace as evaluation-only reference, and same-case degraded feedback generated from each case's stage1 official EVAL_NAV state/estimate columns. It produced 71 executed case units, 213 final metric rows, 12 consolidated figure rows, and batch/case-review packages. Current decision is `BY3C_batch0_to_batch3_position_up_degradation_complete`; `ready_for_BY3D_diagnostic_yaw_or_mixed_planning=true_after_human_review`; `ready_for_paper_claims=false`.

@@ -41,4 +41,10 @@ Future batch plan:
 
 Execution gate:
 
-`BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_AND_BATCH1` may start only after human review. BY3B itself did not generate random arrays, degraded inputs, solver outputs, evaluator outputs, figures, or paper claims.
+`BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_TO_BATCH3_LONG_PIPELINE` was executed after human review for Batch 0 through Batch 3 only. BY3B itself did not generate random arrays, degraded inputs, solver outputs, evaluator outputs, figures, or paper claims.
+
+Post-BY3C state:
+
+- Batch 0 normal parity, Batch 1 deterministic, Batch 2 C_position_noise seeds 0..9, and Batch 3 D_position_spike seeds 0..9 are complete.
+- H_dual_yaw_noise, E_yaw_std_inflation, mixed, module-disable, LegSA_9F_FGO_EKF, nonredundant-FGO, and full monolithic BY3 matrix execution remain unapproved.
+- Horizontal/up metrics remain primary, yaw remains diagnostic-only, and paper claims remain false.

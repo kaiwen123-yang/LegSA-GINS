@@ -66,7 +66,8 @@ The supervisor must prevent phase confusion:
 - BY3A6: historical BY3 trace-truth, initatt, and yaw-gate forensic repair stage; trace truth/parser/base_time were validated, stage1/LegSA stale first-row initatt was repaired to starttime-aligned A1 yaw, BY3 normal-only rerun completed, and yaw still failed before BY3A7.
 - BY3A7: historical BY3 A1 yaw dynamic-quality, IMU sign-axis, and yaw-gate repair stage; A1 remains valid with dynamic-quality caution, BY3 Go2 IMU preprocessing bias from a moving segment was confirmed and repaired with a pre-motion source-bias BY3A7-local IMU, and BY3 normal-only rerun passed yaw sanity for dual-yaw algorithms.
 - BY3A8: current BY3 yaw error-budget and safe-repair stage; A1 observation lower-bound RMSE is about 24.06 deg versus trace as evaluation-only reference, no source-backed additional repair passed, no normal rerun/degradation was run, and BY3 degradation planning is position/up with diagnostic yaw only. Paper claims remain false.
-- BY3B: current BY3 position/up degradation planning and precheck stage; BY3A8 position/up-with-diagnostic-yaw scope was imported, BY3A7 repaired IMU and BY3A5B A1_dual_diff yaw were locked for future execution, case/seed/provider/command/evaluator/figure/batch plans were created only, and no degraded inputs, random arrays, solvers, evaluators, figures, or paper claims were produced.
+- BY3B: historical BY3 position/up degradation planning and precheck stage; BY3A8 position/up-with-diagnostic-yaw scope was imported, BY3A7 repaired IMU and BY3A5B A1_dual_diff yaw were locked for future execution, case/seed/provider/command/evaluator/figure/batch plans were created only, and no degraded inputs, random arrays, solvers, evaluators, figures, or paper claims were produced.
+- BY3C: current BY3 position/up degradation execution stage for approved Batch 0 through Batch 3 only; normal parity, deterministic A/B/E_position_std, C_position_noise seed0-9, and D_position_spike seed0-9 completed with official evaluations, same-case feedback, figures, case reviews, and consolidated review. H/yaw-std/mixed/module/full-matrix/LegSA_9F/nonredundant cases were not executed; yaw remains diagnostic-only and paper claims remain false.
 
 ### 1.2 Planner
 
@@ -155,7 +156,8 @@ The BY3A5B runtime/audit root is represented in tracked docs only by the alias `
 The BY3A6 runtime/audit root is represented in tracked docs only by the alias `<BY3A6_STAGE_ROOT>`, with execution artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3A6_TRACE_TRUTH_INITATT_GATE_FORENSIC`.
 The BY3A7 runtime/audit root is represented in tracked docs only by the alias `<BY3A7_STAGE_ROOT>`, with execution artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3A7_YAW_DYNAMIC_GATE_REPAIR`.
 The BY3A8 runtime/audit root is represented in tracked docs only by the alias `<BY3A8_STAGE_ROOT>`, with execution artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3A8_YAW_ERROR_BUDGET_REPAIR`.
-The BY3B runtime/audit root is represented in tracked docs only by the alias `<BY3B_STAGE_ROOT>`, with future execution artifacts planned under `<BY3_FULL_MATRIX_ROOT>/BY3B_POSITION_UP_DEGRADATION_MATRIX`.
+The BY3B runtime/audit root is represented in tracked docs only by the alias `<BY3B_STAGE_ROOT>`, with planning artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3B_POSITION_UP_DEGRADATION_MATRIX`.
+The BY3C runtime/audit root is represented in tracked docs only by the alias `<BY3C_STAGE_ROOT>`, with executed Batch0-Batch3 artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3C_POSITION_UP_DEGRADATION_EXECUTION`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
 The BY3 Go2 body/high-level source is represented in tracked docs only by `<BY3_GO2_BODY_SOURCE>`.
@@ -270,8 +272,8 @@ Current completed route:
 - N9G1C-E found the active nine-factor FGO backend still unavailable and candidate solver execution still disabled; normal smoke was not run.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3B_POSITION_UP_WITH_DIAGNOSTIC_YAW_PLANNING`; BY3B imported BY3A8's position/up-with-diagnostic-yaw decision, locked BY3A7 repaired IMU and BY3A5B A1_dual_diff yaw for future execution, and created planning/precheck artifacts only.
-- Recommended BY3 next stage: `BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_AND_BATCH1` after human review; BY3B did not authorize automatic execution, paper claims remain false, and PR #52 merge/tag/closure still require explicit human approval.
+- Current BY3/reporting stage: `BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_TO_BATCH3_LONG_PIPELINE`; BY3C executed only approved Batch 0 normal parity, Batch 1 A/B/E_position_std deterministic, Batch 2 C_position_noise seeds 0..9, and Batch 3 D_position_spike seeds 0..9.
+- Recommended BY3 next stage: human review of BY3C, then `BY3D_DIAGNOSTIC_YAW_OR_MIXED_PLANNING` only if explicitly approved; BY3C does not authorize paper claims, PR #52 merge/tag/closure, or additional yaw/mixed/module/full-matrix execution.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
@@ -338,6 +340,8 @@ Allowed now:
 - BY3A8 may set `ready_for_BY3_degradation_matrix_planning=true` only with `scope=position_up_with_diagnostic_yaw`; `yaw_claim_scope=diagnostic_only` and `ready_for_paper_claims=false` always remain in force.
 - BY3B may state that BY3 position/up degradation planning/precheck is complete with 75 position/up-primary case-seed units and 43 diagnostic-yaw units, dry-run command templates, same-seed fairness rules, same-case feedback dependencies, and no generated degraded inputs, random arrays, solvers, evaluators, figures, or paper claims.
 - BY3B may set `ready_for_BY3C_position_up_degradation_execution=true` only as a human-review-gated planning readiness flag; `yaw_claim_scope=diagnostic_only` and `ready_for_paper_claims=false` remain in force.
+- BY3C may state that Batch0-Batch3 position/up-primary execution completed for 71 case units and 213 final metric rows across `LegSA_full_EKF`, `single_antenna_gnss1_status_KF_GINS`, and `final_v23_dual_antenna_EKF`, using BY3A7 repaired IMU, BY3A5B/BY3A7 A1_dual_diff yaw, BY3A2 Raw Doppler, BY3 Go2 priors, and same-case feedback generated from each case's stage1 official EVAL_NAV state/estimate columns.
+- BY3C may state that Batch 2 and Batch 3 random arrays were generated only for approved C_position_noise and D_position_spike seeds 0..9 with structured hashes and same-seed fairness. BY3C may set `ready_for_BY3D_diagnostic_yaw_or_mixed_planning=true` only as a human-review-gated planning readiness flag; `yaw_claim_scope=diagnostic_only` and `ready_for_paper_claims=false` remain in force.
 - N9G2 may be described as the later representative validation stage.
 - N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
 - `LegSA_full_EKF` is not accepted as active nine-factor FGO and must not be relabeled as such.
@@ -378,7 +382,8 @@ Forbidden now:
 - treating BY3A7 A1 dynamic-quality masks as RMSE-selected epoch deletion; any invalid epoch policy must stay source-quality based.
 - treating BY3A8 diagnostic yaw scope as a paper yaw claim, full yaw degradation readiness, trace-based correction permission, feedback-policy authorization, or permission to relax yaw gates.
 - treating BY3B planning artifacts as degraded inputs, random arrays, solver/evaluator execution, generated figures, completed BY3 degradation/full-matrix evidence, yaw robustness evidence, paper claims, PR #52 merge/tag/closure authorization, or permission to reuse BY2/normal feedback.
-- claiming BY3 degradation/full-matrix completion before explicit BY3 execution approval.
+- treating BY3C Batch0-Batch3 position/up results as yaw robustness evidence, paper-ready performance evidence, final_v23 outperformance evidence, full monolithic BY3 matrix completion, or authorization for H_dual_yaw_noise, E_yaw_std_inflation, mixed, module-disable, LegSA_9F_FGO_EKF, or nonredundant-FGO execution.
+- claiming BY3 full-matrix completion before explicit full-matrix execution approval.
 
 ## 10. Historical N9C0A Decision Lock
 
@@ -705,5 +710,23 @@ ready_for_BY3C_position_up_degradation_execution=true
 human_final_decision_required_before_execution=true
 yaw_claim_scope=diagnostic_only
 ready_for_paper_claims=false
-recommended_next_stage=BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_AND_BATCH1
+recommended_next_stage=BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_TO_BATCH3_LONG_PIPELINE
+```
+
+## 26. BY3C Decision Lock
+
+BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_TO_BATCH3_LONG_PIPELINE executed only the human-approved BY3 position/up-primary subset after BY3B. It locked BY3A7 repaired IMU, BY3A5B/BY3A7 A1_dual_diff yaw, BY3A2 Raw Doppler, BY3 Go2 priors, trace as evaluation-only reference, and same-case degraded feedback policy.
+
+BY3C completed Batch 0 normal parity, Batch 1 deterministic A/B/E_position_std, Batch 2 C_position_noise seeds 0..9, and Batch 3 D_position_spike seeds 0..9. It generated degraded inputs, Batch 2/3 random arrays with structured hashes, stage1 and final solver outputs, official evaluations, same-case feedback, figures, case reviews, consolidated metrics, context updates, and Obsidian notes. It did not run H_dual_yaw_noise, E_yaw_std_inflation, mixed cases, module-disable cases, `LegSA_9F_FGO_EKF`, nonredundant FGO extension, or a full monolithic BY3 matrix.
+
+Expected decision if validation passes:
+
+```text
+status=BY3C_batch0_to_batch3_position_up_degradation_complete
+case_units_executed=71
+final_metric_rows=213
+ready_for_BY3D_diagnostic_yaw_or_mixed_planning=true_after_human_review
+yaw_claim_scope=diagnostic_only
+ready_for_paper_claims=false
+recommended_next_stage=human_review_BY3C_then_BY3D_DIAGNOSTIC_YAW_OR_MIXED_PLANNING
 ```
