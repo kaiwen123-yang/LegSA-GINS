@@ -338,7 +338,7 @@ BY3A5 audits the BY3 dual-yaw input source and correctly confirms the old BY3 15
 
 BY3A5B supersedes BY3A5 for mainline yaw input repair. It reconstructs BY3 dual yaw from GNSS1/GNSS2 A1_dual_diff short-baseline absolute positions, rejects GNSS status long-baseline `rel_pos_n/e/d`, applies BY2 sign/lateral conversion equivalent to `baseline_heading+90`, and uses fixed_1p5 yaw_std.
 
-BY3A5B normal-only rerun completed for LegSA_full_EKF, single_antenna_gnss1_status_KF_GINS, and final_v23_dual_antenna_EKF. The final decision is:
+BY3A5B normal-only rerun completed for LegSA_full_EKF, single_antenna_gnss1_status_KF_GINS, and final_v23_dual_antenna_EKF. The final decision was:
 
 ```text
 status=BY3A5B_a1_dual_diff_input_repaired_but_yaw_reference_issue_remains
@@ -347,4 +347,23 @@ ready_for_BY3_degradation_matrix_planning_scope=position_up_only
 yaw_degradation_claims=false
 ready_for_paper_claims=false
 recommended_next_stage=human_review_yaw_reference_or_position_only_BY3B
+```
+
+BY3A5B is superseded by BY3A6 for current BY3 readiness.
+
+## BY3A6 Trace Truth Initatt Gate Forensic
+
+BY3A6 locked the trace file as the BY3 evaluation truth reference, confirmed the evaluator uses raw numeric trace fields rather than unsafe processed trace lat/lon fields, validated base_time alignment, audited BY3A5B A1_dual_diff input, confirmed stale first-row initatt in stage1/LegSA, and repaired initatt to use the first dual GNSS/A1 yaw at or after the requested starttime.
+
+BY3A6 reran BY3 normal only for LegSA_full_EKF, single_antenna_gnss1_status_KF_GINS, and final_v23_dual_antenna_EKF. No degradation, artificial degradation, parameter retuning, trace solver input, output substitution, or paper-claim work was performed. Yaw still fails after initatt repair, while position/up remains sane.
+
+The current BY3 decision is:
+
+```text
+status=BY3A6_position_up_ready_yaw_issue_remaining
+ready_for_BY3_degradation_matrix_planning=false
+ready_for_BY3_degradation_matrix_planning_scope=none_pending_human_review
+yaw_degradation_claims=false
+ready_for_paper_claims=false
+recommended_next_stage=human_review_yaw_issue_or_position_only_BY3B
 ```

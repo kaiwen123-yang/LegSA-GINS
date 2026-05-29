@@ -2,6 +2,8 @@
 
 Stage: `BY3A5B_A1_DUAL_DIFF_YAW_INPUT_REPAIR_AND_NORMAL_RERUN`
 
+Current status: superseded for readiness by BY3A6.
+
 Runtime aliases:
 
 - Stage root: `<BY3A5B_STAGE_ROOT>`
@@ -17,8 +19,8 @@ yaw_input_source=A1_dual_diff_short_baseline_from_GNSS1_GNSS2_absolute_positions
 status_rel_pos_policy=rejected_long_baseline_base_vector
 yaw_std_policy=fixed_1p5
 normal_rerun_status=completed
-ready_for_BY3_degradation_matrix_planning=true
-ready_for_BY3_degradation_matrix_planning_scope=position_up_only
+ready_for_BY3_degradation_matrix_planning=superseded_by_BY3A6_false
+ready_for_BY3_degradation_matrix_planning_scope=superseded_by_BY3A6_none_pending_human_review
 yaw_degradation_claims=false
 ready_for_paper_claims=false
 recommended_next_stage=human_review_yaw_reference_or_position_only_BY3B
@@ -32,11 +34,12 @@ recommended_next_stage=human_review_yaw_reference_or_position_only_BY3B
 - GNSS1 status `rel_pos_n/e/d` has median length about 3062.8 m and is rejected as a long-baseline/base-vector source.
 - Repaired BY3 dual yaw uses BY2 A1 logic: GNSS2 interpolated to GNSS1 epoch, `gnss2_minus_gnss1`, lateral conversion equivalent to `baseline_heading+90`, and fixed_1p5 yaw_std.
 - BY3 normal-only rerun completed for `LegSA_full_EKF`, `single_antenna_gnss1_status_KF_GINS`, and `final_v23_dual_antenna_EKF`.
+- BY3A6 later validated trace/evaluator/base_time and repaired stale first-row initatt, but yaw still failed after normal-only rerun.
 
 ## Claim Boundary
 
 - Do not use NMEA HDT as mainline BY3 solver yaw input.
 - Do not use GNSS status long-baseline `rel_pos_n/e/d` as antenna heading.
 - Do not choose antenna order or lateral sign by yaw RMSE minimization.
-- Do not treat BY3A5B as repaired official BY3 yaw-reference evidence. The yaw input is repaired; the official yaw reference/evaluator remains unresolved.
+- Do not treat BY3A5B as repaired official BY3 yaw-reference evidence. The yaw input is repaired, but BY3A6 shows yaw remains unresolved after initatt repair.
 - Do not run BY3 degradation or make paper claims without explicit human approval.

@@ -64,7 +64,10 @@ LegSA-GINS claims must track what the audits actually prove.
 - BY3A5B may state that BY3A5 correctly confirmed the old BY3 15-column yaw input was wrong-source, while BY3A5's HDT replacement policy is diagnostic/rejected/superseded for mainline BY3.
 - BY3A5B may state that BY3 mainline dual yaw was regenerated from GNSS1/GNSS2 A1_dual_diff short-baseline absolute positions with BY2 sign/lateral conversion and fixed_1p5 yaw_std.
 - BY3A5B may state that BY3 normal-only solver/evaluator reruns completed for LegSA_full_EKF, single_antenna_gnss1_status_KF_GINS, and final_v23_dual_antenna_EKF, with no degradation, no HDT solver input, no trace/final_v23/solver-output input, and no parameter retuning.
-- BY3A5B may state that A1 input repair is complete but official yaw remains a reference/evaluator issue; position/up-only planning is allowed for human review, while yaw degradation claims and paper claims remain false.
+- BY3A5B may state that A1 input repair completed but yaw remained unresolved before BY3A6.
+- BY3A6 may state that the BY3 trace file is the evaluation truth reference, evaluator raw-field/base_time/yaw_truth_mode behavior is valid, and processed trace lat/lon fields are unsafe for blind evaluation.
+- BY3A6 may state that stage1 and LegSA_full_EKF had stale first-row initatt before repair and now use starttime-aligned A1 yaw without trace or RMSE tuning.
+- BY3A6 may state that BY3 normal-only rerun after initatt repair completed, but yaw still fails and likely needs a separate yaw-gate/A1-dynamics review; `ready_for_BY3_degradation_matrix_planning=false`, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.
 
 ## Not Allowed Current Claims
 
@@ -101,6 +104,7 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not treat BY3A5 HDT as mainline BY3 solver yaw input.
 - Do not use GNSS status long-baseline `rel_pos_n/e/d` as BY3 dual-antenna yaw.
 - Do not treat BY3A5B A1 input repair as repaired official BY3 yaw-reference metrics, BY3 yaw degradation readiness, or paper-ready evidence.
+- Do not treat BY3A6 initatt repair as repaired BY3 yaw, BY3 degradation readiness, or paper-ready evidence.
 - Do not claim BY3 degradation execution until a later explicitly approved BY3 degradation stage runs.
 - Do not treat BY3 receiver `imu-data.csv` as Go2 body IMU.
 - Do not treat BY3 candidate input files as solver success, evaluation evidence, or paper evidence.

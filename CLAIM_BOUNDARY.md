@@ -945,9 +945,27 @@ BY3A5B may state that the reconstructed GNSS1/GNSS2 baseline is physically plaus
 
 BY3A5B may state that the BY3 normal-only rerun completed for LegSA_full_EKF, single_antenna_gnss1_status_KF_GINS, and final_v23_dual_antenna_EKF with no degradation, no trace/final_v23/solver-output input, no HDT solver input, and no parameter retuning.
 
-BY3A5B may state that A1 input repair is complete but official yaw remains a reference/evaluator issue; `ready_for_BY3_degradation_matrix_planning=true` only for `position_up_only`, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.
+BY3A5B may state that A1 input repair completed but yaw remained unresolved before BY3A6.
 
 BY3A5B may not claim repaired official BY3 yaw metrics, BY3 yaw degradation readiness, final_v23 outperformance, paper performance readiness, HDT mainline acceptance, trace/final_v23/output tuning, or BY3 degradation/full-matrix completion.
+
+## BY3A6 Trace Truth Initatt Yaw Gate Boundary
+
+BY3A6 may state that the BY3 trace file is the evaluation truth reference and that trace is evaluation-only, never solver input, tuning input, or initatt source.
+
+BY3A6 may state that the evaluator selects raw numeric `lat`, `lon`, `height`, `yaw`, `pitch`, and `roll` for the current trace, while `processed_lat` and `processed_lon` are unsafe/string-like or swapped and must not be used blindly.
+
+BY3A6 may state that base_time alignment is valid for the current BY3 normal chain, with first trace-relative time matching first A1 dual-diff GNSS time within milliseconds.
+
+BY3A6 may state that BY3A5B A1_dual_diff remains the mainline dual-yaw input with caution: source/schema/start coverage are valid, but A1-vs-trace heading and yaw-gate behavior remain unresolved.
+
+BY3A6 may state that stage1 and LegSA_full_EKF initatt had a confirmed stale first-row yaw bug before repair, and that the safe repair uses the first dual GNSS/A1 yaw row at or after the requested starttime without using trace or output metrics.
+
+BY3A6 may state that BY3 normal-only rerun completed after initatt repair for LegSA_full_EKF, single_antenna_gnss1_status_KF_GINS, and final_v23_dual_antenna_EKF, with no degradation, no trace/final_v23/solver-output input, no HDT solver input, and no parameter retuning.
+
+BY3A6 may state that position/up sanity remains acceptable but yaw still fails after initatt repair, with likely yaw-gate/A1-dynamics follow-up required. `ready_for_BY3_degradation_matrix_planning=false`, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.
+
+BY3A6 may not claim repaired BY3 yaw, BY3 degradation readiness, final_v23 outperformance, paper readiness, trace invalidity, A1 invalidity, evaluator invalidity, or yaw-gate repair without a later evidence-backed stage.
 
 Metric-gate pass is not sufficient if external-clean closeness fails.
 
@@ -1977,4 +1995,4 @@ No outperform final_v23 claim.
 
 BY3A5 audits the BY3 dual-yaw input source and correctly confirms the old BY3 15-column yaw was wrong-source. BY3A5's HDT replacement policy is diagnostic/rejected/superseded for mainline BY3 and must not be used as solver yaw input.
 
-BY3A5B repairs the mainline yaw input with A1_dual_diff short-baseline yaw from GNSS1/GNSS2 absolute positions, BY2 sign/lateral conversion, and fixed_1p5 yaw_std. GNSS status long-baseline `rel_pos_n/e/d` and NMEA HDT are rejected as mainline solver yaw sources. BY3A5B normal-only rerun completed, but official yaw remains a reference/evaluator issue; `ready_for_BY3_degradation_matrix_planning=true` only for `position_up_only`, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.
+BY3A5B repairs the mainline yaw input with A1_dual_diff short-baseline yaw from GNSS1/GNSS2 absolute positions, BY2 sign/lateral conversion, and fixed_1p5 yaw_std. GNSS status long-baseline `rel_pos_n/e/d` and NMEA HDT are rejected as mainline solver yaw sources. BY3A6 supersedes the BY3A5B readiness decision: trace/evaluator/base_time were validated and stale first-row initatt was repaired, but yaw still fails after normal-only rerun; `ready_for_BY3_degradation_matrix_planning=false`, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.
