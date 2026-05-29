@@ -63,7 +63,8 @@ The supervisor must prevent phase confusion:
 - BY3A4C: current BY3 git-history yaw-reference reconstruction and visual-validation stage; the historical N4H2C/N4H2D/N4R/N4R2/N4R3 yaw-reference fix was recovered from git/docs/runtime evidence, BY2 `official_ref_sign_minus` direct-reference logic was verified, BY3 yaw remains `not_evaluable`, and any BY3 degradation planning is position/up-only until yaw source mapping is confirmed.
 - BY3A5: historical BY3 dual-yaw input source audit; it correctly confirmed the old BY3 15-column yaw was wrong-source, but its HDT replacement policy is superseded for mainline BY3.
 - BY3A5B: historical BY3 A1 dual-diff yaw-input repair and normal rerun stage; BY3 dual yaw is generated from GNSS1/GNSS2 short-baseline position difference with BY2 sign/lateral conversion and fixed_1p5 yaw std. Normal rerun completed, but official yaw remained unresolved.
-- BY3A6: current BY3 trace-truth, initatt, and yaw-gate forensic repair stage; trace truth/parser/base_time were validated, stage1/LegSA stale first-row initatt was repaired to starttime-aligned A1 yaw, BY3 normal-only rerun completed, and yaw still fails with likely gate/A1-dynamics issue. BY3 degradation planning remains false pending human review.
+- BY3A6: historical BY3 trace-truth, initatt, and yaw-gate forensic repair stage; trace truth/parser/base_time were validated, stage1/LegSA stale first-row initatt was repaired to starttime-aligned A1 yaw, BY3 normal-only rerun completed, and yaw still failed before BY3A7.
+- BY3A7: current BY3 A1 yaw dynamic-quality, IMU sign-axis, and yaw-gate repair stage; A1 remains valid with dynamic-quality caution, BY3 Go2 IMU preprocessing bias from a moving segment was confirmed and repaired with a pre-motion source-bias BY3A7-local IMU, BY3 normal-only rerun passed yaw sanity for dual-yaw algorithms, and BY3 degradation planning is ready only after human review. Paper claims remain false.
 
 ### 1.2 Planner
 
@@ -150,6 +151,7 @@ The BY3A4A runtime/audit root is represented in tracked docs only by the alias `
 The BY3A4C runtime/audit root is represented in tracked docs only by the alias `<BY3A4C_STAGE_ROOT>`.
 The BY3A5B runtime/audit root is represented in tracked docs only by the alias `<BY3A5B_STAGE_ROOT>`, with execution artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3A5B_A1_DUAL_DIFF_REPAIR`.
 The BY3A6 runtime/audit root is represented in tracked docs only by the alias `<BY3A6_STAGE_ROOT>`, with execution artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3A6_TRACE_TRUTH_INITATT_GATE_FORENSIC`.
+The BY3A7 runtime/audit root is represented in tracked docs only by the alias `<BY3A7_STAGE_ROOT>`, with execution artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3A7_YAW_DYNAMIC_GATE_REPAIR`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
 The BY3 Go2 body/high-level source is represented in tracked docs only by `<BY3_GO2_BODY_SOURCE>`.
@@ -264,8 +266,8 @@ Current completed route:
 - N9G1C-E found the active nine-factor FGO backend still unavailable and candidate solver execution still disabled; normal smoke was not run.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A6_LONG_TRACE_TRUTH_INITATT_YAW_GATE_FORENSIC_AND_SAFE_REPAIR`; BY3 trace truth/parser/base_time are validated and stale stage1/LegSA initatt was repaired, but yaw still fails after normal-only rerun.
-- Recommended BY3 next stage: `human_review_yaw_issue_or_position_only_BY3B`; BY3 degradation planning remains false pending human review, and yaw degradation claims remain false until a valid yaw chain is confirmed.
+- Current BY3/reporting stage: `BY3A7_A1_YAW_DYNAMIC_QUALITY_IMU_SIGN_AND_GATE_REPAIR`; BY3 trace truth/parser/base_time and initatt repair remain valid, A1 yaw source remains valid with dynamic-quality caution, and the BY3 Go2 IMU moving-segment gyro-bias preprocessing bug was repaired with a BY3A7-local pre-motion source-bias IMU.
+- Recommended BY3 next stage: `BY3B_DEGRADATION_MATRIX_PLANNING_AND_PRECHECK` after human review; BY3A7 normal yaw sanity passed for dual-yaw algorithms, but paper claims remain false and PR #52 merge/tag/closure still require explicit human approval.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
@@ -323,6 +325,10 @@ Allowed now:
 - BY3A6 may state that stage1 and LegSA_full_EKF initatt used stale first-row A1 yaw before repair, while the safe repair uses the first dual GNSS/A1 yaw row at or after the requested starttime and does not use trace for initatt.
 - BY3A6 may state that the BY3 normal-only rerun after initatt repair completed with no degradation, no trace/final_v23/solver-output input, and no parameter retuning.
 - BY3A6 may state that position/up sanity remains acceptable, but yaw still fails and likely requires a separate yaw-gate/A1-dynamics review; `ready_for_BY3_degradation_matrix_planning=false`, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.
+- BY3A7 may state that A1_dual_diff remains the mainline short-baseline yaw source with dynamic-quality caution; invalid-epoch criteria are based on source baseline/jump quality, not RMSE.
+- BY3A7 may state that the BY3A0/BY3A1 Go2 IMU input used a gyro bias estimated from a moving segment after selected Go2 start; BY3A7 repairs this by using a pre-motion BY3 source-bias segment while preserving the FLU-to-FRD conversion and all yaw gate parameters.
+- BY3A7 may state that BY3 normal-only rerun with the BY3A7-local static-bias IMU completed; `LegSA_full_EKF` yaw RMSE is about 5.26 deg and `final_v23_dual_antenna_EKF` yaw RMSE is about 4.30 deg, while the single-antenna baseline yaw remains poor.
+- BY3A7 may set `ready_for_BY3_degradation_matrix_planning=true` only with `scope=full_after_human_review`; `ready_for_paper_claims=false` always remains in force.
 - N9G2 may be described as the later representative validation stage.
 - N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
 - `LegSA_full_EKF` is not accepted as active nine-factor FGO and must not be relabeled as such.
@@ -359,6 +365,8 @@ Forbidden now:
 - using GNSS status long-baseline `rel_pos_n/e/d` as BY3 antenna heading.
 - treating BY3A5B's A1 input repair as repaired official BY3 yaw-reference metrics or yaw degradation readiness.
 - treating BY3A6 initatt repair as repaired BY3 yaw metrics, BY3 degradation readiness, paper readiness, or proof that trace/A1/evaluator/gate are fully solved.
+- treating BY3A7 normal yaw sanity as paper-ready evidence, final_v23 outperformance, PR #52 merge/tag/closure authorization, or completed BY3 degradation/full-matrix execution.
+- treating BY3A7 A1 dynamic-quality masks as RMSE-selected epoch deletion; any invalid epoch policy must stay source-quality based.
 - claiming BY3 degradation/full-matrix completion before explicit BY3 execution approval.
 
 ## 10. Historical N9C0A Decision Lock
@@ -619,4 +627,26 @@ recommended_next_stage=BY3B_POSITION_ONLY_DEGRADATION_PLANNING_OR_HUMAN_REVIEW
 
 BY3A5 remains valid only as the wrong-source audit: the old BY3 15-column yaw input used a wrong source, likely GNSS1 status heading or a long-baseline status rel_pos vector. BY3A5's HDT repaired-input policy is diagnostic/rejected/superseded for mainline BY3 generalization and must not be reused as the main solver yaw source.
 
-BY3A5B repairs BY3 mainline dual yaw with A1_dual_diff short-baseline yaw from GNSS1/GNSS2 absolute positions, not status long-baseline `rel_pos_n/e/d` and not HDT. The accepted policy is `gnss2_minus_gnss1`, BY2 sign/lateral conversion equivalent to `baseline_heading+90`, and fixed_1p5 yaw_std. BY3A6 then validated the trace/evaluator/base_time chain and repaired stale first-row initatt for stage1/LegSA, but yaw still fails after normal-only rerun; `ready_for_BY3_degradation_matrix_planning=false`, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.
+BY3A5B repairs BY3 mainline dual yaw with A1_dual_diff short-baseline yaw from GNSS1/GNSS2 absolute positions, not status long-baseline `rel_pos_n/e/d` and not HDT. The accepted policy is `gnss2_minus_gnss1`, BY2 sign/lateral conversion equivalent to `baseline_heading+90`, and fixed_1p5 yaw_std. BY3A6 then validated the trace/evaluator/base_time chain and repaired stale first-row initatt for stage1/LegSA. BY3A7 repaired the remaining BY3 Go2 IMU preprocessing issue; `ready_for_BY3_degradation_matrix_planning=true` only with `scope=full_after_human_review`, and `ready_for_paper_claims=false`.
+
+## 23. BY3A7 Decision Lock
+
+BY3A7_A1_YAW_DYNAMIC_QUALITY_IMU_SIGN_AND_GATE_REPAIR accepted BY3A6 trace/evaluator/base_time/initatt findings, audited A1 dual-diff yaw dynamics, audited BY3 Go2 IMU sign/axis/yaw-rate preprocessing, audited yaw gate residuals, and audited yaw update code. It confirmed that the BY3A0/BY3A1 IMU input estimated gyro bias from a moving segment after selected Go2 start; the z bias was about -8.58 deg/s versus about -0.074 deg/s from the pre-motion source segment.
+
+BY3A7 repaired only a BY3A7-local IMU input using pre-motion source gyro bias and the existing FLU-to-FRD conversion. It did not change A1 yaw source, yaw_std, yaw gate thresholds, final_v23 code, solver parameters, trace/evaluator policy, or output values. It then ran BY3 normal only. No BY3 degradation, artificial degradation, trace solver input, HDT solver input, final_v23 solver input, gate relaxation, parameter retuning, paper claims, PR #52 merge/closure, or tag creation was performed.
+
+Expected decision if validation passes:
+
+```text
+status=BY3A7_yaw_salvaged_ready_for_full_BY3_degradation
+a1_yaw_quality=BY3A7_a1_yaw_quality_acceptable_with_mask
+imu_sign_axis=BY3A7_imu_sign_axis_bug_confirmed
+yaw_update_code=BY3A7_yaw_update_code_valid
+normal_rerun=BY3A7_normal_rerun_completed
+LegSA_full_EKF_yaw_rmse_about_deg=5.26
+final_v23_dual_antenna_EKF_yaw_rmse_about_deg=4.30
+ready_for_BY3_degradation_matrix_planning=true
+ready_for_BY3_degradation_matrix_planning_scope=full_after_human_review
+ready_for_paper_claims=false
+recommended_next_stage=BY3B_DEGRADATION_MATRIX_PLANNING_AND_PRECHECK
+```

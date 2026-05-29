@@ -68,6 +68,10 @@ LegSA-GINS claims must track what the audits actually prove.
 - BY3A6 may state that the BY3 trace file is the evaluation truth reference, evaluator raw-field/base_time/yaw_truth_mode behavior is valid, and processed trace lat/lon fields are unsafe for blind evaluation.
 - BY3A6 may state that stage1 and LegSA_full_EKF had stale first-row initatt before repair and now use starttime-aligned A1 yaw without trace or RMSE tuning.
 - BY3A6 may state that BY3 normal-only rerun after initatt repair completed, but yaw still fails and likely needs a separate yaw-gate/A1-dynamics review; `ready_for_BY3_degradation_matrix_planning=false`, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.
+- BY3A7 may state that A1_dual_diff remains the mainline short-baseline yaw source with dynamic-quality caution and source-quality-only invalid epoch criteria.
+- BY3A7 may state that BY3 Go2 IMU preprocessing estimated gyro bias from a moving segment after selected Go2 start and that the BY3A7-local repair uses pre-motion source gyro bias while preserving FLU-to-FRD conversion, A1 yaw source, fixed_1p5 yaw_std, and yaw gate thresholds.
+- BY3A7 may state that BY3 normal-only rerun after the IMU preprocessing repair completed and dual-yaw yaw sanity passed: LegSA_full_EKF yaw RMSE is about 5.26 deg and final_v23_dual_antenna_EKF yaw RMSE is about 4.30 deg.
+- BY3A7 may set `ready_for_BY3_degradation_matrix_planning=true` only with `scope=full_after_human_review`; `ready_for_paper_claims=false` remains mandatory.
 
 ## Not Allowed Current Claims
 
@@ -105,6 +109,8 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not use GNSS status long-baseline `rel_pos_n/e/d` as BY3 dual-antenna yaw.
 - Do not treat BY3A5B A1 input repair as repaired official BY3 yaw-reference metrics, BY3 yaw degradation readiness, or paper-ready evidence.
 - Do not treat BY3A6 initatt repair as repaired BY3 yaw, BY3 degradation readiness, or paper-ready evidence.
+- Do not treat BY3A7 normal-only yaw sanity as paper-ready evidence, final_v23 outperformance, completed BY3 degradation/full-matrix execution, or PR #52 merge/tag/closure authorization.
+- Do not turn BY3A7 A1 quality masks into RMSE-selected bad-epoch deletion.
 - Do not claim BY3 degradation execution until a later explicitly approved BY3 degradation stage runs.
 - Do not treat BY3 receiver `imu-data.csv` as Go2 body IMU.
 - Do not treat BY3 candidate input files as solver success, evaluation evidence, or paper evidence.

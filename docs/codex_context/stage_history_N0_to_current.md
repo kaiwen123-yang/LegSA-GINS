@@ -349,7 +349,7 @@ ready_for_paper_claims=false
 recommended_next_stage=human_review_yaw_reference_or_position_only_BY3B
 ```
 
-BY3A5B is superseded by BY3A6 for current BY3 readiness.
+BY3A5B is superseded by BY3A6/BY3A7 for current BY3 readiness.
 
 ## BY3A6 Trace Truth Initatt Gate Forensic
 
@@ -357,7 +357,7 @@ BY3A6 locked the trace file as the BY3 evaluation truth reference, confirmed the
 
 BY3A6 reran BY3 normal only for LegSA_full_EKF, single_antenna_gnss1_status_KF_GINS, and final_v23_dual_antenna_EKF. No degradation, artificial degradation, parameter retuning, trace solver input, output substitution, or paper-claim work was performed. Yaw still fails after initatt repair, while position/up remains sane.
 
-The current BY3 decision is:
+The BY3A6 decision was:
 
 ```text
 status=BY3A6_position_up_ready_yaw_issue_remaining
@@ -366,4 +366,20 @@ ready_for_BY3_degradation_matrix_planning_scope=none_pending_human_review
 yaw_degradation_claims=false
 ready_for_paper_claims=false
 recommended_next_stage=human_review_yaw_issue_or_position_only_BY3B
+```
+
+## BY3A7 A1 Yaw Dynamic Quality IMU Gate Repair
+
+BY3A7 accepted BY3A6 trace/evaluator/base_time/initatt findings and audited the remaining yaw failure. A1_dual_diff remained source-valid with dynamic-quality caution. Yaw update code/wrap/gate configuration was valid; the confirmed root cause was BY3 Go2 IMU preprocessing, where gyro bias was estimated from a moving segment after selected Go2 start.
+
+BY3A7 repaired a BY3A7-local IMU input using pre-motion source gyro bias, preserved the existing FLU-to-FRD conversion, A1 yaw source, fixed_1p5 yaw_std, yaw gate thresholds, and solver parameters, and reran BY3 normal only. LegSA_full_EKF yaw RMSE was about 5.26 deg and final_v23_dual_antenna_EKF yaw RMSE was about 4.30 deg. No BY3 degradation, trace solver input, HDT solver input, final_v23 solver input, gate relaxation, parameter retuning, output substitution, PR merge/closure, tag, or paper claim was performed.
+
+The current BY3 decision is:
+
+```text
+status=BY3A7_yaw_salvaged_ready_for_full_BY3_degradation
+ready_for_BY3_degradation_matrix_planning=true
+ready_for_BY3_degradation_matrix_planning_scope=full_after_human_review
+ready_for_paper_claims=false
+recommended_next_stage=BY3B_DEGRADATION_MATRIX_PLANNING_AND_PRECHECK
 ```

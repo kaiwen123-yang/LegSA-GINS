@@ -4,6 +4,8 @@ Stage: `BY3A6_LONG_TRACE_TRUTH_INITATT_YAW_GATE_FORENSIC_AND_SAFE_REPAIR`
 
 Purpose: audit BY3 yaw failure from trace truth through evaluator parsing/base_time, A1 dual-diff yaw input, initatt selection, yaw-update gate behavior, normal NAV output, and final metrics. This stage was normal-only and safety-gated.
 
+Current status: superseded by BY3A7 for BY3 yaw readiness. BY3A6 remains the accepted trace/evaluator/base_time/initatt forensic reference, but BY3A7 repaired the later IMU yaw propagation failure.
+
 Runtime aliases:
 
 - Stage root: `<BY3A6_STAGE_ROOT>`
