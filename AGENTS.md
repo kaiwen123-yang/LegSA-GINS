@@ -59,7 +59,8 @@ The supervisor must prevent phase confusion:
 - BY3A1: current BY3-vs-BY2 parity and provider-gate repair stage; BY3 candidate inputs were repaired to BY2-compatible runtime schemas, BY3 Go2 priors were materialized, Raw Doppler and same-case feedback remain blocked, and solvers/evaluators were not run.
 - BY3A2: current historical WSL pipeline recovery and runner-gate repair stage; historical BY2 Raw Doppler/Go2/single/final_v23/feedback chains were recovered, BY3 UBX/RAWX rebuild and accepted Raw Doppler provider materialization succeeded, same-case selected feedback remains blocked, and solvers/evaluators were not run.
 - BY3A3: current BY3 selected-feedback stage1 chain and normal-generalization execution stage; BY3 same-case stage1 solver/evaluator/feedback generation, LegSA_full_EKF stage2, single baseline, final_v23 external baseline, official evaluation, figures, and case review completed for normal BY3 only.
-- BY3A4A: current BY3 lateral dual-antenna yaw repair and context-memory-lock stage; BY2 lateral yaw policy was recovered as partial, lateral antenna geometry was encoded, existing BY3A3 outputs were audited without solver rerun, no physically/BY2-backed yaw policy passed sanity, and BY3 degradation planning is blocked pending manual yaw-reference review.
+- BY3A4A: BY3 lateral dual-antenna yaw repair and context-memory-lock stage; BY2 lateral yaw policy was recovered as partial, lateral antenna geometry was encoded, existing BY3A3 outputs were audited without solver rerun, and no physically/BY2-backed yaw policy passed sanity.
+- BY3A4C: current BY3 git-history yaw-reference reconstruction and visual-validation stage; the historical N4H2C/N4H2D/N4R/N4R2/N4R3 yaw-reference fix was recovered from git/docs/runtime evidence, BY2 `official_ref_sign_minus` direct-reference logic was verified, BY3 yaw remains `not_evaluable`, and any BY3 degradation planning is position/up-only until yaw source mapping is confirmed.
 
 ### 1.2 Planner
 
@@ -143,6 +144,7 @@ The BY3A1 runtime/audit root is represented in tracked docs only by the alias `<
 The BY3A2 runtime/audit root is represented in tracked docs only by the alias `<BY3A2_STAGE_ROOT>`.
 The BY3A3 runtime/audit root is represented in tracked docs only by the alias `<BY3A3_STAGE_ROOT>`.
 The BY3A4A runtime/audit root is represented in tracked docs only by the alias `<BY3A4A_STAGE_ROOT>`.
+The BY3A4C runtime/audit root is represented in tracked docs only by the alias `<BY3A4C_STAGE_ROOT>`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
 The BY3 Go2 body/high-level source is represented in tracked docs only by `<BY3_GO2_BODY_SOURCE>`.
@@ -257,8 +259,8 @@ Current completed route:
 - N9G1C-E found the active nine-factor FGO backend still unavailable and candidate solver execution still disabled; normal smoke was not run.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A4A_LATERAL_DUAL_ANTENNA_YAW_REPAIR_SEED_EXPLANATION_AND_CONTEXT_MEMORY_LOCK`; lateral dual-antenna geometry and seed0-9 memory were locked, but repaired BY3 yaw metrics were not accepted because all physically meaningful trace/lateral candidates remained around 100 deg yaw RMSE.
-- Recommended BY3 next stage: `manual_review_dual_antenna_yaw_policy`.
+- Current BY3/reporting stage: `BY3A4C_GIT_HISTORY_YAW_REFERENCE_RECONSTRUCTION_AND_VISUAL_VALIDATION`; BY2 historical yaw-reference repair was recovered, but no valid BY3 yaw truth/reference transferred, so BY3 yaw is `not_evaluable`.
+- Recommended BY3 next stage: `BY3B_POSITION_ONLY_DEGRADATION_PLANNING_OR_HUMAN_REVIEW`; yaw degradation claims remain false until BY3 yaw source mapping is confirmed.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
@@ -304,6 +306,9 @@ Allowed now:
 - BY3A4A may state that BY2 lateral yaw policy evidence was recovered as partial, dual antennas are lateral/perpendicular to robot forward direction, body heading requires a plus/minus 90 degree correction from antenna-baseline heading depending on antenna order/frame convention, and +90/-90 must not be selected by RMSE alone.
 - BY3A4A may state that existing BY3A3 outputs were used for yaw-policy candidate tests, common-overlap metrics, diagnostic figures, seed0-9 explanation, and context/Obsidian memory updates, with no solver rerun, no degradation matrix, no retuning, and no paper claims.
 - BY3A4A may state that no tested physically meaningful yaw policy was accepted; therefore repaired yaw metrics are blocked, `ready_for_BY3_degradation_matrix_planning=false`, and `recommended_next_stage=manual_review_dual_antenna_yaw_policy`.
+- BY3A4C may state that the historical BY2/N4 yaw repair was recovered from git/docs/runtime evidence: N4H2 old yaw around 93 deg was invalidated by N4H2D, N4H2D selected `official_ref_sign_minus`, and the fresh replay yaw RMSE was about 1.98 deg under the reconstructed dual official reference.
+- BY3A4C may state that BY3A3/BY3A4A yaw metrics are preserved as historical invalid-reference evidence, BY3 yaw is `not_evaluable` under current evidence, and position/up normal metrics may support position/up-only planning.
+- BY3A4C may set `ready_for_BY3_degradation_matrix_planning=true` only with `scope=position_up_only`, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.
 - N9G2 may be described as the later representative validation stage.
 - N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
 - `LegSA_full_EKF` is not accepted as active nine-factor FGO and must not be relabeled as such.
@@ -334,6 +339,8 @@ Forbidden now:
 - treating BY3A3 normal-only metrics as paper claims, final_v23 outperformance claims, BY3 degradation/full-matrix completion, or active nine-factor FGO evidence.
 - treating BY3A4A diagnostic figures or common-overlap metrics as repaired yaw metrics, paper claims, BY3 degradation readiness, or final_v23 outperformance evidence.
 - choosing BY3/BY2 lateral dual-antenna +90/-90 yaw conversion only by lowest yaw RMSE.
+- treating BY3A4C diagnostic yaw-source figures or position-only planning readiness as repaired BY3 yaw metrics or yaw degradation readiness.
+- claiming BY3 yaw degradation or yaw generalization while `yaw_status=not_evaluable`.
 - claiming BY3 degradation/full-matrix completion before explicit BY3 execution approval.
 
 ## 10. Historical N9C0A Decision Lock
@@ -566,4 +573,27 @@ seed0_9_explanation_created=true
 ready_for_BY3_degradation_matrix_planning=false
 ready_for_paper_claims=false
 recommended_next_stage=manual_review_dual_antenna_yaw_policy
+```
+
+## 22. BY3A4C Decision Lock
+
+BY3A4C_GIT_HISTORY_YAW_REFERENCE_RECONSTRUCTION_AND_VISUAL_VALIDATION recovered the historical BY2/N4 yaw-reference repair from git history, tracked docs, source, PR metadata, and runtime evidence. It verified that N4H2D invalidated the old N4H2 roughly 93 deg yaw result as a stale/wrong-reference mapping, selected `official_ref_sign_minus`, and evaluated fresh replay yaw with direct identity against the reconstructed dual official reference.
+
+BY3A4C applied the recovered and diagnostic profiles to existing BY3A3 outputs only. It did not rerun BY3 solvers, run BY3 degradation, modify BY3 inputs or solver outputs, retune parameters, use trace/final_v23/LegSA/single outputs as solver inputs, select policy by RMSE alone, hide original bad yaw metrics, make paper claims, merge PR #52, close PR #52, or create a tag.
+
+Expected decision if validation passes:
+
+```text
+status=BY3A4C_yaw_not_evaluable_position_only_generalization_ready
+historical_BY2_yaw_fix_recovered=true
+selected_reference_sign=official_ref_sign_minus
+old_BY2_yaw_around_93_deg_invalidated=true
+fresh_BY2_yaw_rmse_about_deg=1.98
+BY3_yaw_status=not_evaluable
+original_BY3A3_yaw_metrics_preserved=historical_invalid_reference
+ready_for_BY3_degradation_matrix_planning=true
+ready_for_BY3_degradation_matrix_planning_scope=position_up_only
+yaw_degradation_claims=false
+ready_for_paper_claims=false
+recommended_next_stage=BY3B_POSITION_ONLY_DEGRADATION_PLANNING_OR_HUMAN_REVIEW
 ```

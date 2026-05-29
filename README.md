@@ -68,7 +68,7 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current operational state:
 
-After `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE` and `BY3A4A_LATERAL_DUAL_ANTENNA_YAW_REPAIR_SEED_EXPLANATION_AND_CONTEXT_MEMORY_LOCK`.
+After `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE` and `BY3A4C_GIT_HISTORY_YAW_REFERENCE_RECONSTRUCTION_AND_VISUAL_VALIDATION`.
 
 N9E completed with a logging-blocked active nine-factor FGO/legged evidence decision: `complete_nine_factor_FGO_claim=false`.
 
@@ -94,12 +94,14 @@ BY3A3 repaired the same-case selected-feedback chain. It ran a BY3 stage1 baseli
 
 BY3A4A locked the lateral dual-antenna yaw rule: the dual antennas are mounted laterally and perpendicular to the robot forward/head direction, so antenna-baseline heading is not body heading and requires a plus/minus 90 degree correction depending on antenna order and frame convention. BY3A4A recovered BY2 policy evidence as partial and audited physically meaningful yaw candidates using existing BY3A3 outputs only. No candidate passed yaw sanity without RMSE-only selection, so repaired yaw metrics were not accepted and BY3 degradation planning is blocked pending manual yaw-policy review.
 
+BY3A4C recovered the historical BY2/N4 yaw-reference repair from git/docs/runtime evidence. N4H2 old yaw around 93 deg was invalidated by N4H2D; N4H2D selected `official_ref_sign_minus` and fresh replay yaw was about 1.98 deg against the reconstructed dual official reference. Applying recovered and diagnostic profiles to existing BY3A3 outputs did not produce an accepted BY3 yaw reference, so BY3 yaw is `not_evaluable`; original BY3A3/BY3A4A bad yaw metrics are preserved as historical invalid-reference evidence. Position/up metrics remain available only for position/up-only planning and no paper claims are authorized.
+
 Next planned stage:
 
-For BY3, run `manual_review_dual_antenna_yaw_policy` before any BY3 degradation planning or execution. For active FGO, implement the active FGO backend or reframe scope before any N9G2 representative validation.
+For BY3, run `BY3B_POSITION_ONLY_DEGRADATION_PLANNING_OR_HUMAN_REVIEW`, with yaw degradation claims disabled until a valid BY3 yaw source/reference mapping is confirmed. For active FGO, implement the active FGO backend or reframe scope before any N9G2 representative validation.
 
 The current operational state is maintained in `AGENTS.md`, `PLANS.md`, and `docs/codex_context/current_state.md`. The N9G1C-E decision keeps `complete_nine_factor_FGO_claim=false`, `ready_for_representative_validation=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
-The BY3 decision is `BY3A4A_yaw_policy_inconclusive`, setting `ready_for_BY3_degradation_matrix_planning=false` and `ready_for_paper_claims=false`.
+The BY3 decision is `BY3A4C_yaw_not_evaluable_position_only_generalization_ready`, setting `ready_for_BY3_degradation_matrix_planning=true` only for `position_up_only`, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.
 
 N1 only provides the final_v23-style baseline wrapper, manifest writer, oracle audit, and separation tests. It does not implement the proposed LegSA-GINS solver or any numerical performance claim.
 

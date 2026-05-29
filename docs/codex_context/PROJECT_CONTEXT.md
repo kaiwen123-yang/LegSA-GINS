@@ -7,7 +7,7 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 ## Current Stage
 
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A4A_LATERAL_DUAL_ANTENNA_YAW_REPAIR_SEED_EXPLANATION_AND_CONTEXT_MEMORY_LOCK`.
+- Current BY3/reporting stage: `BY3A4C_GIT_HISTORY_YAW_REFERENCE_RECONSTRUCTION_AND_VISUAL_VALIDATION`.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -20,6 +20,7 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 - Current BY3A2 historical recovery/provider-gate root: `<BY3A2_STAGE_ROOT>`.
 - Current BY3A3 selected-feedback/normal execution root: `<BY3A3_STAGE_ROOT>`.
 - Current BY3A4A yaw-repair/context-memory root: `<BY3A4A_STAGE_ROOT>`.
+- Current BY3A4C yaw-history reconstruction root: `<BY3A4C_STAGE_ROOT>`.
 - Current BY3 full-matrix placeholder root: `<BY3_FULL_MATRIX_ROOT>`.
 - Current export-clean design package: `<BY2_N9B2_FULL_MATRIX_ROOT>/N9F_EXPORT_CLEAN_DESIGN_PACKAGE`.
 - Current metrics source: `<N9C0_CONSOLIDATED_PRECHECK_ROOT>/matrix/N9C0_ACTIVE_FINAL_ONLY_METRICS_TABLE`.
@@ -38,7 +39,8 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 - BY3A2 recovered the historical BY2 WSL Raw Doppler, Go2, single-baseline, final_v23, and selected-feedback chains; BY3 Raw Doppler is now materialized through the accepted N5A/N5B path.
 - BY3A3 generated same-case BY3 selected feedback from stage1 official-eval state/estimate columns only, then completed normal-only LegSA_full_EKF, GNSS1-status single-baseline, and final_v23 external-baseline official evaluation.
 - BY3A4A recovered BY2 lateral dual-antenna yaw policy evidence as partial, encoded that lateral antennas are perpendicular to the robot forward/head direction, audited +90/-90 and baseline-reversal policies using existing BY3A3 outputs only, and blocked repaired yaw metrics because no physical/BY2-backed policy passed sanity without RMSE-only selection.
-- Current BY3 recommended next stage: `manual_review_dual_antenna_yaw_policy`.
+- BY3A4C recovered the historical BY2/N4 yaw-reference repair from git/docs/runtime evidence, including the N4H2D `official_ref_sign_minus` reference mapping that invalidated the old 93 deg yaw result and produced about 1.98 deg fresh replay yaw. Applying recovered and diagnostic profiles to existing BY3A3 outputs did not produce an accepted BY3 yaw reference, so BY3 yaw is `not_evaluable`.
+- Current BY3 recommended next stage: `BY3B_POSITION_ONLY_DEGRADATION_PLANNING_OR_HUMAN_REVIEW`.
 - Current active-FGO recommended next stage: `implement_active_fgo_backend_or_reframe_scope`.
 
 ## Current Batch State
@@ -60,13 +62,15 @@ ready_for_algorithm_design_review=true
 ready_for_implementation_review=false
 ready_for_N9G1A_context_lock=complete
 ready_for_N9G1C_E_provider_backend_normal_smoke=blocked_active_backend
-ready_for_BY3_degradation_matrix_planning=false
+ready_for_BY3_degradation_matrix_planning=true
+ready_for_BY3_degradation_matrix_planning_scope=position_up_only
 ready_for_BY3_solver_evaluator=normal_completed
 ready_for_BY3_input_chain=repaired
 ready_for_BY3_go2_priors=true
 ready_for_BY3_raw_doppler_provider=true
 ready_for_BY3_same_case_feedback=true
-ready_for_BY3_yaw_policy=manual_review_required
+ready_for_BY3_yaw_policy=not_evaluable
+yaw_degradation_claims=false
 ready_for_BY3_paper_claims=false
 ready_for_representative_validation=false
 ready_for_N9C1_consolidated_figure_generation=true
@@ -88,7 +92,7 @@ N9G1C-E is provider contract resolution, active-backend audit, logger schema con
 
 N9G2 representative validation is blocked until provider/factor and active FGO backend gaps are fixed and reviewed. Full matrix, replot, and report stages are deferred to N9G3/N9G4 only if applicable and explicitly approved.
 
-BY3 degradation planning is blocked after BY3A4A until manual dual-antenna yaw-policy review resolves the BY3 yaw truth/reference convention. BY3A3 metrics remain runtime evidence for review only, not paper claims, final_v23 outperformance claims, or BY3 degradation/full-matrix completion.
+BY3 degradation planning after BY3A4C is position/up-only. BY3 yaw remains `not_evaluable` until a valid BY3 yaw truth/source mapping is confirmed; BY3A3/BY3A4A yaw metrics remain historical invalid-reference evidence and must not support yaw degradation, final_v23 outperformance, or paper claims.
 
 ## Path Boundary
 

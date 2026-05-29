@@ -56,6 +56,11 @@ LegSA-GINS claims must track what the audits actually prove.
 - BY3A4A may state that body heading requires a plus/minus 90 degree correction from antenna-baseline heading depending on antenna order and frame convention, and that +90/-90 must not be selected by RMSE alone.
 - BY3A4A may state that existing BY3A3 outputs were used to audit yaw candidates, compute common-overlap metrics, regenerate diagnostic figures, generate seed0-9 explanation files, and update context memory.
 - BY3A4A may state that repaired yaw metrics were not accepted and BY3 degradation planning is blocked pending manual yaw-policy review.
+- BY3A4C may state that the historical BY2/N4 yaw-reference repair was recovered from git history, tracked docs/source, PR metadata, and runtime evidence.
+- BY3A4C may state that N4H2 old yaw around 93 deg was invalidated by N4H2D, N4H2D selected `official_ref_sign_minus`, and fresh replay yaw was about 1.98 deg under the reconstructed dual official reference.
+- BY3A4C may state that recovered and diagnostic profiles were applied to existing BY3A3 outputs only, but no BY3 yaw truth/reference profile was accepted.
+- BY3A4C may state that BY3 yaw is `not_evaluable`, BY3A3/BY3A4A yaw metrics are historical invalid-reference evidence, and position/up metrics can support position/up-only planning.
+- BY3A4C must keep `yaw_degradation_claims=false` and `ready_for_paper_claims=false`.
 
 ## Not Allowed Current Claims
 
@@ -86,6 +91,9 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not claim BY3 paper-ready generalization, final_v23 outperformance, or degradation/full-matrix completion from BY3A3 normal-only metrics.
 - Do not claim BY3A4A repaired BY3 yaw metrics, BY3 degradation readiness, paper-ready BY3 generalization, or final_v23 outperformance.
 - Do not choose or describe BY3/BY2 lateral +90/-90 dual-antenna yaw conversion by yaw RMSE minimization alone.
+- Do not claim BY3A4C repaired BY3 yaw metrics or authorized yaw degradation planning.
+- Do not treat BY3A4C position/up-only planning readiness as yaw generalization or paper-ready BY3 evidence.
+- Do not use BY3A4C diagnostic yaw-source figures as a substitute for a confirmed BY3 yaw truth/reference mapping.
 - Do not claim BY3 degradation execution until a later explicitly approved BY3 degradation stage runs.
 - Do not treat BY3 receiver `imu-data.csv` as Go2 body IMU.
 - Do not treat BY3 candidate input files as solver success, evaluation evidence, or paper evidence.
