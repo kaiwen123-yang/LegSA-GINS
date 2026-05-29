@@ -61,6 +61,8 @@ The supervisor must prevent phase confusion:
 - BY3A3: current BY3 selected-feedback stage1 chain and normal-generalization execution stage; BY3 same-case stage1 solver/evaluator/feedback generation, LegSA_full_EKF stage2, single baseline, final_v23 external baseline, official evaluation, figures, and case review completed for normal BY3 only.
 - BY3A4A: BY3 lateral dual-antenna yaw repair and context-memory-lock stage; BY2 lateral yaw policy was recovered as partial, lateral antenna geometry was encoded, existing BY3A3 outputs were audited without solver rerun, and no physically/BY2-backed yaw policy passed sanity.
 - BY3A4C: current BY3 git-history yaw-reference reconstruction and visual-validation stage; the historical N4H2C/N4H2D/N4R/N4R2/N4R3 yaw-reference fix was recovered from git/docs/runtime evidence, BY2 `official_ref_sign_minus` direct-reference logic was verified, BY3 yaw remains `not_evaluable`, and any BY3 degradation planning is position/up-only until yaw source mapping is confirmed.
+- BY3A5: historical BY3 dual-yaw input source audit; it correctly confirmed the old BY3 15-column yaw was wrong-source, but its HDT replacement policy is superseded for mainline BY3.
+- BY3A5B: current BY3 A1 dual-diff yaw-input repair and normal rerun stage; BY3 dual yaw is generated from GNSS1/GNSS2 short-baseline position difference with BY2 sign/lateral conversion and fixed_1p5 yaw std. Normal rerun completed, but official yaw remains a reference/evaluator issue, so BY3 planning is position/up-only and yaw degradation claims remain false.
 
 ### 1.2 Planner
 
@@ -145,6 +147,7 @@ The BY3A2 runtime/audit root is represented in tracked docs only by the alias `<
 The BY3A3 runtime/audit root is represented in tracked docs only by the alias `<BY3A3_STAGE_ROOT>`.
 The BY3A4A runtime/audit root is represented in tracked docs only by the alias `<BY3A4A_STAGE_ROOT>`.
 The BY3A4C runtime/audit root is represented in tracked docs only by the alias `<BY3A4C_STAGE_ROOT>`.
+The BY3A5B runtime/audit root is represented in tracked docs only by the alias `<BY3A5B_STAGE_ROOT>`, with execution artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3A5B_A1_DUAL_DIFF_REPAIR`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
 The BY3 Go2 body/high-level source is represented in tracked docs only by `<BY3_GO2_BODY_SOURCE>`.
@@ -259,8 +262,8 @@ Current completed route:
 - N9G1C-E found the active nine-factor FGO backend still unavailable and candidate solver execution still disabled; normal smoke was not run.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3A4C_GIT_HISTORY_YAW_REFERENCE_RECONSTRUCTION_AND_VISUAL_VALIDATION`; BY2 historical yaw-reference repair was recovered, but no valid BY3 yaw truth/reference transferred, so BY3 yaw is `not_evaluable`.
-- Recommended BY3 next stage: `BY3B_POSITION_ONLY_DEGRADATION_PLANNING_OR_HUMAN_REVIEW`; yaw degradation claims remain false until BY3 yaw source mapping is confirmed.
+- Current BY3/reporting stage: `BY3A5B_A1_DUAL_DIFF_YAW_INPUT_REPAIR_AND_NORMAL_RERUN`; BY3 dual-yaw input is repaired from GNSS1/GNSS2 A1 short-baseline position difference, but official yaw still has a reference/evaluator issue.
+- Recommended BY3 next stage: `human_review_yaw_reference_or_position_only_BY3B`; yaw degradation claims remain false until a valid BY3 yaw reference is confirmed.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
@@ -309,6 +312,11 @@ Allowed now:
 - BY3A4C may state that the historical BY2/N4 yaw repair was recovered from git/docs/runtime evidence: N4H2 old yaw around 93 deg was invalidated by N4H2D, N4H2D selected `official_ref_sign_minus`, and the fresh replay yaw RMSE was about 1.98 deg under the reconstructed dual official reference.
 - BY3A4C may state that BY3A3/BY3A4A yaw metrics are preserved as historical invalid-reference evidence, BY3 yaw is `not_evaluable` under current evidence, and position/up normal metrics may support position/up-only planning.
 - BY3A4C may set `ready_for_BY3_degradation_matrix_planning=true` only with `scope=position_up_only`, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.
+- BY3A5B may state that BY3A5 correctly confirmed the old BY3 15-column yaw input was wrong-source, while BY3A5's HDT replacement policy is diagnostic/rejected/superseded for mainline BY3.
+- BY3A5B may state that GNSS1/GNSS2 absolute positions reconstruct a physically plausible short baseline with median length about 0.383 m, while GNSS1 status `rel_pos_n/e/d` is a long-baseline/base-vector source with median length about 3062.8 m and is rejected.
+- BY3A5B may state that repaired BY3 dual yaw uses A1_dual_diff short-baseline yaw with BY2 accepted `gnss2_minus_gnss1`, lateral conversion equivalent to `baseline_heading+90`, and fixed_1p5 yaw_std.
+- BY3A5B may state that BY3 normal-only rerun completed for LegSA_full_EKF, single_antenna_gnss1_status_KF_GINS, and final_v23_dual_antenna_EKF with no degradation, no trace/final_v23/solver-output input, and no parameter retuning.
+- BY3A5B may state that the A1 input was repaired but official yaw remains a reference/evaluator issue; `ready_for_BY3_degradation_matrix_planning=true` only for position/up, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.
 - N9G2 may be described as the later representative validation stage.
 - N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
 - `LegSA_full_EKF` is not accepted as active nine-factor FGO and must not be relabeled as such.
@@ -341,6 +349,9 @@ Forbidden now:
 - choosing BY3/BY2 lateral dual-antenna +90/-90 yaw conversion only by lowest yaw RMSE.
 - treating BY3A4C diagnostic yaw-source figures or position-only planning readiness as repaired BY3 yaw metrics or yaw degradation readiness.
 - claiming BY3 yaw degradation or yaw generalization while `yaw_status=not_evaluable`.
+- treating BY3A5 HDT as mainline BY3 solver yaw input.
+- using GNSS status long-baseline `rel_pos_n/e/d` as BY3 antenna heading.
+- treating BY3A5B's A1 input repair as repaired official BY3 yaw-reference metrics or yaw degradation readiness.
 - claiming BY3 degradation/full-matrix completion before explicit BY3 execution approval.
 
 ## 10. Historical N9C0A Decision Lock
@@ -597,6 +608,8 @@ yaw_degradation_claims=false
 ready_for_paper_claims=false
 recommended_next_stage=BY3B_POSITION_ONLY_DEGRADATION_PLANNING_OR_HUMAN_REVIEW
 ```
-## BY3A5 Dual Yaw Input Source Repair
+## BY3A5/BY3A5B Dual Yaw Input Source Repair
 
-BY3A5 audits the BY3 dual-yaw input source. The current BY3A3 yaw problem is not treated as final yaw non-evaluable until the input source is checked. GNSS status long-baseline `rel_pos_n/e` must not be used as dual-antenna yaw when the norm is not a physical short antenna baseline. A corrected BY3 yaw input may use real receiver NMEA HDT only when source semantics and lateral short-baseline geometry support it; yaw_std follows BY2 `fixed_1p5` unless a better physical covariance is proven. The HDT/fixed_1p5 repaired input did not pass official yaw sanity, so no accepted BY3 yaw replacement exists yet. BY3 degradation planning readiness after BY3A5 is `false` for normal repaired yaw only, and `ready_for_paper_claims=false`.
+BY3A5 remains valid only as the wrong-source audit: the old BY3 15-column yaw input used a wrong source, likely GNSS1 status heading or a long-baseline status rel_pos vector. BY3A5's HDT repaired-input policy is diagnostic/rejected/superseded for mainline BY3 generalization and must not be reused as the main solver yaw source.
+
+BY3A5B repairs BY3 mainline dual yaw with A1_dual_diff short-baseline yaw from GNSS1/GNSS2 absolute positions, not status long-baseline `rel_pos_n/e/d` and not HDT. The accepted policy is `gnss2_minus_gnss1`, BY2 sign/lateral conversion equivalent to `baseline_heading+90`, and fixed_1p5 yaw_std. BY3A5B normal-only rerun completed, but official yaw still indicates a reference/evaluator issue, so `ready_for_BY3_degradation_matrix_planning=true` only for `position_up_only`, `yaw_degradation_claims=false`, and `ready_for_paper_claims=false`.

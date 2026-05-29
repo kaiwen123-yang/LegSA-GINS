@@ -61,6 +61,10 @@ LegSA-GINS claims must track what the audits actually prove.
 - BY3A4C may state that recovered and diagnostic profiles were applied to existing BY3A3 outputs only, but no BY3 yaw truth/reference profile was accepted.
 - BY3A4C may state that BY3 yaw is `not_evaluable`, BY3A3/BY3A4A yaw metrics are historical invalid-reference evidence, and position/up metrics can support position/up-only planning.
 - BY3A4C must keep `yaw_degradation_claims=false` and `ready_for_paper_claims=false`.
+- BY3A5B may state that BY3A5 correctly confirmed the old BY3 15-column yaw input was wrong-source, while BY3A5's HDT replacement policy is diagnostic/rejected/superseded for mainline BY3.
+- BY3A5B may state that BY3 mainline dual yaw was regenerated from GNSS1/GNSS2 A1_dual_diff short-baseline absolute positions with BY2 sign/lateral conversion and fixed_1p5 yaw_std.
+- BY3A5B may state that BY3 normal-only solver/evaluator reruns completed for LegSA_full_EKF, single_antenna_gnss1_status_KF_GINS, and final_v23_dual_antenna_EKF, with no degradation, no HDT solver input, no trace/final_v23/solver-output input, and no parameter retuning.
+- BY3A5B may state that A1 input repair is complete but official yaw remains a reference/evaluator issue; position/up-only planning is allowed for human review, while yaw degradation claims and paper claims remain false.
 
 ## Not Allowed Current Claims
 
@@ -94,6 +98,9 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not claim BY3A4C repaired BY3 yaw metrics or authorized yaw degradation planning.
 - Do not treat BY3A4C position/up-only planning readiness as yaw generalization or paper-ready BY3 evidence.
 - Do not use BY3A4C diagnostic yaw-source figures as a substitute for a confirmed BY3 yaw truth/reference mapping.
+- Do not treat BY3A5 HDT as mainline BY3 solver yaw input.
+- Do not use GNSS status long-baseline `rel_pos_n/e/d` as BY3 dual-antenna yaw.
+- Do not treat BY3A5B A1 input repair as repaired official BY3 yaw-reference metrics, BY3 yaw degradation readiness, or paper-ready evidence.
 - Do not claim BY3 degradation execution until a later explicitly approved BY3 degradation stage runs.
 - Do not treat BY3 receiver `imu-data.csv` as Go2 body IMU.
 - Do not treat BY3 candidate input files as solver success, evaluation evidence, or paper evidence.

@@ -332,6 +332,19 @@ yaw_degradation_claims=false
 ready_for_paper_claims=false
 recommended_next_stage=BY3B_POSITION_ONLY_DEGRADATION_PLANNING_OR_HUMAN_REVIEW
 ```
-## BY3A5 Dual Yaw Input Source Repair
+## BY3A5/BY3A5B Dual Yaw Input Source Repair
 
-BY3A5 audits the BY3 dual-yaw input source. The current BY3A3 yaw problem is not treated as final yaw non-evaluable until the input source is checked. GNSS status long-baseline `rel_pos_n/e` must not be used as dual-antenna yaw when the norm is not a physical short antenna baseline. A corrected BY3 yaw input may use real receiver NMEA HDT only when source semantics and lateral short-baseline geometry support it; yaw_std follows BY2 `fixed_1p5` unless a better physical covariance is proven. The HDT/fixed_1p5 repaired input did not pass official yaw sanity, so no accepted BY3 yaw replacement exists yet. BY3 degradation planning readiness after BY3A5 is `false` for normal repaired yaw only, and `ready_for_paper_claims=false`.
+BY3A5 audits the BY3 dual-yaw input source and correctly confirms the old BY3 15-column yaw was wrong-source. BY3A5's HDT replacement policy is diagnostic/rejected/superseded for mainline BY3 and must not be reused as solver yaw input.
+
+BY3A5B supersedes BY3A5 for mainline yaw input repair. It reconstructs BY3 dual yaw from GNSS1/GNSS2 A1_dual_diff short-baseline absolute positions, rejects GNSS status long-baseline `rel_pos_n/e/d`, applies BY2 sign/lateral conversion equivalent to `baseline_heading+90`, and uses fixed_1p5 yaw_std.
+
+BY3A5B normal-only rerun completed for LegSA_full_EKF, single_antenna_gnss1_status_KF_GINS, and final_v23_dual_antenna_EKF. The final decision is:
+
+```text
+status=BY3A5B_a1_dual_diff_input_repaired_but_yaw_reference_issue_remains
+ready_for_BY3_degradation_matrix_planning=true
+ready_for_BY3_degradation_matrix_planning_scope=position_up_only
+yaw_degradation_claims=false
+ready_for_paper_claims=false
+recommended_next_stage=human_review_yaw_reference_or_position_only_BY3B
+```
