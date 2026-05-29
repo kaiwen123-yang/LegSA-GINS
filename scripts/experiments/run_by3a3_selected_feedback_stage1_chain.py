@@ -355,17 +355,22 @@ def build_context(paths: Paths) -> dict[str, Any]:
     repair_report = read_json(paths.by3a1_root / "reports" / "BY3A1_INPUT_REPAIR_REPORT.json", {}) or {}
     offsets = repair_report.get("offsets", {})
     base_time = float(offsets.get("body_time_zero_raw_timestamp") or 0.0)
-    algorithm_start = float(offsets.get("recommended_algorithm_start_time") or file_time_min(paths.imu) or 0.0)
-    gnss_first = first_numeric_row(paths.gnss_dual)
-    init_pos = [float(gnss_first[1]), float(gnss_first[2]), float(gnss_first[3])] if len(gnss_first) >= 4 else [0.0, 0.0, 0.0]
-    init_yaw = float(gnss_first[13]) if len(gnss_first) >= 14 and math.isfinite(float(gnss_first[13])) else 0.0
+    requested_start = float(offsets.get("recommended_algorithm_start_time") or file_time_min(paths.imu) or 0.0)
+    gnss_init = first_numeric_row_at_or_after(paths.gnss_dual, requested_start) or first_numeric_row(paths.gnss_dual)
+    algorithm_start = float(gnss_init[0]) if gnss_init else requested_start
+    init_pos = [float(gnss_init[1]), float(gnss_init[2]), float(gnss_init[3])] if len(gnss_init) >= 4 else [0.0, 0.0, 0.0]
+    init_yaw = float(gnss_init[13]) if len(gnss_init) >= 14 and math.isfinite(float(gnss_init[13])) else 0.0
     end_time = min(v for v in [file_time_max(paths.imu), file_time_max(paths.gnss_dual)] if v is not None)
     return {
         "base_time": base_time,
+        "requested_algorithm_start_time": requested_start,
         "algorithm_start_time": algorithm_start,
         "end_time": end_time,
         "initpos": init_pos,
         "initatt": [0.0, 0.0, init_yaw],
+        "initatt_source_policy": "first_dual_gnss_row_at_or_after_requested_start",
+        "initatt_source_time": algorithm_start,
+        "initatt_starttime_aligned": bool(gnss_init and abs(float(gnss_init[0]) - algorithm_start) <= 1.0e-9),
         "source": "BY3A1 common body-clock input repair report, not trace tuning",
         "no_trace_tuning": True,
         "no_parameter_retuning": True,
@@ -1558,6 +1563,13 @@ def first_numeric_row(path: Path) -> list[float]:
                 return [float(x) for x in parts]
             except ValueError:
                 continue
+    return []
+
+
+def first_numeric_row_at_or_after(path: Path, start_time: float) -> list[float]:
+    for row in numeric_rows(path):
+        if row and row[0] >= start_time:
+            return row
     return []
 
 

@@ -152,4 +152,8 @@ BY3A5 audits the BY3 dual-yaw input source and correctly confirms the old BY3 15
 
 BY3A5B repairs the mainline dual-yaw input with GNSS1/GNSS2 A1_dual_diff short-baseline absolute positions, BY2 sign/lateral conversion, and fixed_1p5 yaw_std. GNSS status long-baseline `rel_pos_n/e/d` and NMEA HDT must not be used as mainline solver yaw sources. HDT is diagnostic/legacy only unless a later human-approved stage explicitly changes the policy.
 
-BY3A5B completed BY3 normal-only solver/evaluator reruns, but official yaw remains a reference/evaluator issue. Position/up-only planning is allowed for human review; yaw degradation claims and paper claims remain false.
+BY3A6 validated that the BY3 trace file is the evaluation truth reference and that the current evaluator uses raw numeric trace fields with valid base_time alignment. Processed trace lat/lon fields are unsafe for blind evaluation.
+
+BY3A6 confirmed and repaired stale first-row initatt for stage1/LegSA by using the first dual GNSS/A1 yaw row at or after requested starttime. Trace remains evaluation-only and must not be used for solver initatt or tuning.
+
+BY3A6 completed BY3 normal-only solver/evaluator reruns after initatt repair. Position/up remains sane, but yaw still fails and likely needs a separate yaw-gate/A1-dynamics review. BY3 degradation planning is false pending human review; yaw degradation claims and paper claims remain false.

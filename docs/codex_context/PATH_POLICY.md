@@ -18,6 +18,7 @@ Tracked docs must use aliases instead of local absolute paths.
 - `<BY3A4A_STAGE_ROOT>`: BY3A4A lateral yaw repair and context-memory-lock output root under `<BY3_OUTPUT_ROOT>`.
 - `<BY3A4C_STAGE_ROOT>`: BY3A4C git-history yaw-reference reconstruction and visual-validation output root under `<BY3_OUTPUT_ROOT>`.
 - `<BY3A5B_STAGE_ROOT>`: BY3A5B A1 dual-diff yaw-input repair output root under `<BY3_OUTPUT_ROOT>`.
+- `<BY3A6_STAGE_ROOT>`: BY3A6 trace-truth/initatt/gate forensic output root under `<BY3_OUTPUT_ROOT>`.
 - `<BY3_FULL_MATRIX_ROOT>`: placeholder BY3 full-matrix root; not authorized for degradation execution in BY3A0_TO_BY3E.
 - `<BY2_DEGRADATION_ARCHIVE_ROOT>`: copy-only BY2 degradation figure/text archive root.
 - `<BY2_DEGRADATION_TEXT_SUMMARY_ROOT>`: BY2 degradation text-summary root containing the seed0-9 explanation index.
@@ -45,7 +46,7 @@ Native Ubuntu migration is deferred. The old Chinese output root is read-only hi
 
 ## BY3 Path Lock
 
-BY3A0 locked `<BY3_OUTPUT_ROOT>` for BY3 generalization outputs. BY3A0_TO_BY3E artifacts are represented in tracked docs as `<BY3_STAGE_ROOT>`. BY3A4A artifacts are represented as `<BY3A4A_STAGE_ROOT>` and `<BY3_FULL_MATRIX_ROOT>/BY3A4A_YAW_REPAIR`. BY3A4C artifacts are represented as `<BY3A4C_STAGE_ROOT>` and `<BY3_FULL_MATRIX_ROOT>/BY3A4C_YAW_HISTORY_RECONSTRUCTION`. BY3A5B artifacts are represented as `<BY3A5B_STAGE_ROOT>` and `<BY3_FULL_MATRIX_ROOT>/BY3A5B_A1_DUAL_DIFF_REPAIR`. BY3 degradation planning after BY3A5B is position/up-only until a valid BY3 yaw reference mapping is confirmed.
+BY3A0 locked `<BY3_OUTPUT_ROOT>` for BY3 generalization outputs. BY3A0_TO_BY3E artifacts are represented in tracked docs as `<BY3_STAGE_ROOT>`. BY3A4A artifacts are represented as `<BY3A4A_STAGE_ROOT>` and `<BY3_FULL_MATRIX_ROOT>/BY3A4A_YAW_REPAIR`. BY3A4C artifacts are represented as `<BY3A4C_STAGE_ROOT>` and `<BY3_FULL_MATRIX_ROOT>/BY3A4C_YAW_HISTORY_RECONSTRUCTION`. BY3A5B artifacts are represented as `<BY3A5B_STAGE_ROOT>` and `<BY3_FULL_MATRIX_ROOT>/BY3A5B_A1_DUAL_DIFF_REPAIR`. BY3A6 artifacts are represented as `<BY3A6_STAGE_ROOT>` and `<BY3_FULL_MATRIX_ROOT>/BY3A6_TRACE_TRUTH_INITATT_GATE_FORENSIC`. BY3 degradation planning after BY3A6 is false pending human review.
 
 BY3 tracked docs must refer to receiver data through `<BY3_RECEIVER_ROOT>` and Go2 body/high-level data through `<BY3_GO2_BODY_SOURCE>`. The BY3 receiver `imu-data.csv` is diagnostic only and must not be documented as the Go2 body IMU source.
 
