@@ -67,3 +67,11 @@ All four repeats are classified as `quality_aware_branch_candidate`, with `posit
 ## Boundaries
 
 PG_MULTI_A0 does not authorize frozen dual-yaw mainline runs, solver/evaluator execution, artificial degradation, random arrays, parameter retuning, quality-aware execution, paper claims, PR #52 merge/closure/tag, or poor-GNSS robustness claims.
+
+## QA0 Follow-On
+
+`PG_QA0_QUALITY_AWARE_FALLBACK_DESIGN_AND_PAPER_MAINLINE_DECISION` is complete as the design-only follow-on. It uses PG_MULTI_A0 as the source/runnability evidence import, keeps `LegSA_full_EKF` as the frozen verified mainline, and defines `LegSA_QA_Fallback_EKF` as a separate future candidate for severe GNSS and unavailable A1 dual-yaw cases.
+
+QA0 recommends Option B for the near-term paper: continue the BY2/BY3 position-up generalization mainline and describe QA as a design/limitation extension with no QA performance claim. Option C, a secondary QA contribution, requires later human-approved QA1 classifier/logging, QA2 measurement/R-scale behavior, and QA3 validation.
+
+QA0 does not authorize quality-aware implementation, solver/evaluator execution, degraded inputs, random arrays, retuning, paper claims, or QA1 without human review.

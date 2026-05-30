@@ -523,3 +523,22 @@ ready_for_quality_aware_branch_planning=true_after_human_review
 ready_for_paper_claims=false
 recommended_next_stage=human_review_PG_MULTI_A0_then_quality_aware_branch_or_position_only_diagnostic_or_stop
 ```
+
+## PG_QA0 Quality-Aware Fallback Design And Paper Mainline Decision
+
+PG_QA0_QUALITY_AWARE_FALLBACK_DESIGN_AND_PAPER_MAINLINE_DECISION completed a design-only follow-on after PG_MULTI_A0 and XB1A2. It imported BY2 full-metric evidence, BY3 position/up-with-diagnostic-yaw evidence, and PG1-PG4 severe GNSS source/runnability evidence. It defined `LegSA_QA_Fallback_EKF` as a separate future candidate, not a relabeling of `LegSA_full_EKF` or final_v23.
+
+The stage designed the quality-state machine, measurement enable/disable policy, R-scale threshold-source policy, Raw Doppler policy, Go2 bridge policy, logging schema, implementation roadmap, validation protocol, risk register, and paper-mainline decision matrix. It did not implement a fallback branch, run solvers, run evaluators, generate degraded inputs, generate random arrays, retune parameters, or create paper claims.
+
+Current PG_QA0 decision:
+
+```text
+status=PG_QA0_design_complete_human_review_before_QA1
+paper_mainline_recommendation=Option_B_design_extension_now
+optional_high_tier_route=Option_C_after_QA1_QA2_QA3
+legsa_full_ekf_status=frozen_verified_mainline
+legsa_qa_fallback_ekf_status=design_only_not_implemented_not_validated
+ready_for_QA1=false
+ready_for_paper_claims=false
+recommended_next_stage=human_review_PG_QA0_then_keep_future_work_or_approve_PG_QA1
+```

@@ -1,4 +1,4 @@
-# Current State - GEN1 BY2-BY3 Generalization And PG Multi-Repeat Poor-GNSS Review
+# Current State - GEN1 BY2-BY3 Generalization And PG QA0 Design
 
 This file records the current verified operational state for the Windows audit workspace. It supersedes stale N8K, N9A, N9B2B1, and N9B-not-started text except where that text is explicitly historical.
 
@@ -6,7 +6,7 @@ This file records the current verified operational state for the Windows audit w
 
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 - Current BY3/reporting stage: `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`.
-- Current poor-GNSS stage: `PG_MULTI_A0_POOR_GNSS_REPEATED_DATASET_SOURCE_REVIEW_AND_RUNNABILITY_CLASSIFICATION_WITH_LOCKED_XB2_XB3_XB4_BODY_PATHS`.
+- Current poor-GNSS stage: `PG_QA0_QUALITY_AWARE_FALLBACK_DESIGN_AND_PAPER_MAINLINE_DECISION`.
 - Current operational source of truth for degradation metrics remains `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design source: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code forensic audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -45,6 +45,7 @@ This file records the current verified operational state for the Windows audit w
 - Current XB1 body/high-level source alias: `<XB1_BODY_SOURCE>`.
 - Current PG multi-repeat review root: `<PG_MULTI_REVIEW_ROOT>`.
 - Current PG_MULTI_A0 stage root: `<PG_MULTI_A0_STAGE_ROOT>`.
+- Current PG_QA0 design root: `<PG_QA0_STAGE_ROOT>`.
 - Current PG2/XB2 receiver source alias: `<PG2_XB2_RECEIVER_ROOT>`.
 - Current PG2/XB2 body/high-level source alias: `<PG2_XB2_BODY_SOURCE>`.
 - Current PG3/XB3 receiver source alias: `<PG3_XB3_RECEIVER_ROOT>`.
@@ -128,6 +129,10 @@ This file records the current verified operational state for the Windows audit w
 - PG_MULTI_A0 A1 result: PG2/PG3/PG4 `gnss2_minus_gnss1` relpos-diff candidates all have zero physical-band epochs. Median lengths are about 14.27 m for PG2, 14.84 m for PG3, and 36.63 m for PG4; all are nonphysical for the robot antenna baseline.
 - PG_MULTI_A0 provider result: PG1 Raw Doppler provider feasibility is imported-ready from XB1A1; PG2/PG3/PG4 have the required raw/correction/status files and are likely-ready for the accepted RTKLIB/RINEX/helper path, but no full provider generation was run in PG_MULTI_A0.
 - PG_MULTI_A0 classification result: PG1-PG4 are all `quality_aware_branch_candidate` with position-only fallback as diagnostic only. Frozen dual-yaw mainline normal execution is not recommended for any repeat.
+- PG_QA0 completed a design-only quality-aware fallback package. It imported BY2, BY3, and PG1-PG4 evidence; preserved BY2/BY3 position-up generalization as the main proven line; kept BY3 yaw diagnostic-only; and treated PG1-PG4 severe GNSS data as motivation for a future fallback branch.
+- PG_QA0 algorithm identity result: `LegSA_full_EKF` remains the frozen verified mainline for normal/moderate GNSS and BY2/BY3 position-up evidence. `LegSA_QA_Fallback_EKF` is a separate future candidate, design-only, not implemented, not validated, and not a relabeling of `LegSA_full_EKF` or final_v23.
+- PG_QA0 design result: states S0-S6 define normal dual-yaw, degraded dual-yaw caution, yaw unavailable, poor GNSS position downweight, Raw Doppler velocity-aided, IMU+Go2 bridge, and hold/reject behavior. A1 dual-yaw is disabled when relpos-diff baseline geometry is nonphysical. Trace RMSE and final_v23 outputs are forbidden online quality indicators.
+- PG_QA0 paper decision: Option B is recommended for the near-term paper, keeping QA as a design/limitation extension with no QA performance claim. Option C is a later high-tier route only after human-approved QA1 logging, QA2 behavior implementation, and QA3 validation.
 - BY3A1 did not materialize same-case selected feedback because no real BY3 stage1 solver and official EVAL_NAV exist.
 - BY3A1 did not run BY3 solvers, official evaluators, degradation, metrics, or metric figures.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
@@ -157,14 +162,14 @@ BY3A3 is a normal-only selected-feedback and comparison execution stage. Its nor
 
 GEN1 is the active BY3 reporting decision. The final decision is `GEN1_cross_dataset_report_and_BY3_figure_organization_complete`: BY2 and BY3 inventories each have 213 comparable metric rows across 71 case units, cross-dataset review tables and figures were generated from existing metrics only, BY3 figures were organized copy-only, BY3 yaw remains diagnostic-only, and paper claims remain disabled.
 
-PG_MULTI_A0 is the active poor-GNSS multi-repeat decision. The final decision is `PG_MULTI_A0_all_repeats_severe_quality_aware_branch_recommended`: PG1/XB1 remains imported from XB1A2, PG2/PG3/PG4 receiver and body/high-level paths are registered through aliases, all PG1-PG4 A1 relpos-diff audits are invalid/nonphysical, no frozen dual-yaw mainline normal run is recommended, quality-aware branch planning may be considered only after human review, and paper claims remain disabled.
+PG_QA0 is the active poor-GNSS design decision. The final decision is `PG_QA0_design_complete_human_review_before_QA1`: PG_MULTI_A0 remains the evidence import, PG1-PG4 remain severe quality-aware branch candidates, `LegSA_full_EKF` remains frozen mainline, `LegSA_QA_Fallback_EKF` remains design-only, QA1 is not authorized until human review, and paper claims remain disabled.
 
 ## Next Stage
 
 ```text
 recommended_next_stage=implement_active_fgo_backend_or_reframe_scope
 recommended_BY3_next_stage=human_review_GEN1_then_decide_BY3D_or_other_dataset
-recommended_poor_GNSS_next_stage=human_review_PG_MULTI_A0_then_quality_aware_branch_or_position_only_diagnostic_or_stop
+recommended_poor_GNSS_next_stage=human_review_PG_QA0_then_keep_future_work_or_approve_PG_QA1
 ```
 
 Planned sequence after human review:
@@ -205,6 +210,10 @@ ready_for_PG2_PG3_PG4_a1_relpos_diff=audited_invalid
 ready_for_PG_frozen_dual_yaw_mainline_normal=false
 ready_for_PG_quality_aware_branch_planning=true_after_human_review
 ready_for_PG_position_only_fallback_planning=diagnostic_only_after_human_review
+ready_for_PG_QA0_design=complete
+ready_for_PG_QA1_classifier_logging=false_pending_human_review
+PG_QA0_paper_mainline_recommendation=Option_B_design_extension_now
+PG_QA0_optional_high_tier_route=Option_C_after_QA1_QA2_QA3
 ready_for_PG_degradation_planning=false
 ready_for_BY3D_or_other_dataset_planning=true_after_human_review
 ready_for_BY3D_diagnostic_yaw_or_mixed_planning=requires_new_human_approval
@@ -278,3 +287,11 @@ Current decision: `BY3C1_position_up_review_and_yaw_diagnostic_complete`; `ready
 GEN1 is the current BY3 cross-dataset reporting and figure-organization state. It completed metric inventory, mapping, cross-dataset summaries, existing-metric figures, BY3 figure inventory, copy-only BY3 figure organization, export-clean packaging, context sync, and validation. The organized BY3 figure view is copy-only; original runtime figures remain in their source roots. BY3 yaw remains diagnostic-only, and `ready_for_paper_claims=false`.
 
 Current decision: `GEN1_cross_dataset_report_and_BY3_figure_organization_complete`; `ready_for_next_stage=true_after_human_review`; `yaw_claim_scope=diagnostic_only`; `ready_for_paper_claims=false`; `recommended_next_stage=human_review_GEN1_then_decide_BY3D_or_other_dataset`.
+
+## PG_QA0 Quality-Aware Fallback Design
+
+PG_QA0 is the current poor-GNSS design state. It used PG_MULTI_A0 and XB1A2 as source/runnability evidence, imported BY2 and BY3 evidence for paper-mainline context, and produced a design-only quality-aware fallback package. It did not implement a fallback branch, run solvers, run evaluators, generate degraded inputs, generate random arrays, retune parameters, or create paper claims.
+
+The design keeps `LegSA_full_EKF` as the frozen verified mainline for normal/moderate GNSS and BY2/BY3 position-up evidence. It defines `LegSA_QA_Fallback_EKF` as a separate future candidate with its own future `algorithm_id`, quality-state logs, and validation package. The fallback state machine disables A1 dual-yaw when relpos-diff geometry is nonphysical, downweights or rejects poor GNSS position using online source-quality indicators, retains Raw Doppler only when provider/residual quality is acceptable, and uses IMU+Go2 bridge mode only as a low-confidence short-interval fallback.
+
+Current decision: `PG_QA0_design_complete_human_review_before_QA1`; `paper_mainline_recommendation=Option_B_design_extension_now`; `optional_high_tier_route=Option_C_after_QA1_QA2_QA3`; `ready_for_QA1=false`; `ready_for_paper_claims=false`; `recommended_next_stage=human_review_PG_QA0_then_keep_future_work_or_approve_PG_QA1`.

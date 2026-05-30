@@ -192,6 +192,12 @@ For all future poor-GNSS repeats, A1 dual-yaw invalidity must audit the BY2-comp
 
 PG_MULTI_A0 found PG2/PG3/PG4 relpos-diff A1 candidates nonphysical with zero physical-band epochs. This blocks frozen dual-yaw mainline execution on PG1-PG4 and supports only a later human-approved quality-aware diagnostic branch or diagnostic position-only fallback. It does not support paper claims.
 
+## PG_QA0 Quality-Aware Fallback Source Rules
+
+PG_QA0 keeps trace and final_v23 outputs out of online quality decisions. Future quality-aware thresholds may use online source indicators, sensor-reported uncertainty, physical baseline geometry, BY2/BY3 accepted source statistics, PG_MULTI_A0 source-quality profiles, literature/engineering defaults, or explicit human-approved threshold decisions, but not PG trace RMSE or final-metric-only labels.
+
+`LegSA_QA_Fallback_EKF` is a separate design-only candidate. When implemented later, it must use its own `algorithm_id`, quality-state logs, measurement enable/disable logs, and R-scale logs. `LegSA_full_EKF` remains the frozen verified mainline and must not be relabeled as the quality-aware fallback.
+
 ## BY3C Position Up Degradation Execution
 
 BY3C uses the BY3A7 repaired IMU as the accepted body-IMU source, the BY3A5B/BY3A7 A1_dual_diff 15-column GNSS as the dual-yaw observation source, BY3A2 Raw Doppler as the Raw Doppler provider, and BY3 Go2 priors as source observations. Trace remains evaluation-only.
