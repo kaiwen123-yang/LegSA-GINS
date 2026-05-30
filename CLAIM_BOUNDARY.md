@@ -2046,3 +2046,13 @@ Allowed BY3C counts: 71 executed case units, 213 final metric rows across `LegSA
 BY3C keeps horizontal/up metrics primary and yaw diagnostic-only. BY3C may state `ready_for_BY3D_diagnostic_yaw_or_mixed_planning=true` only as a human-review-gated planning readiness flag, not as authorization to execute yaw, mixed, module-disable, LegSA_9F_FGO_EKF, nonredundant-FGO, or full monolithic BY3 matrix cases.
 
 Still forbidden after BY3C: paper performance claims, paper yaw claims, final_v23 outperformance claims, full BY3 matrix completion claims, yaw robustness claims, treating diagnostic yaw columns as primary metrics, using BY3C outputs as solver inputs, reusing BY3 normal feedback for degraded cases, or treating PR #52 as merge/closure/tag approved.
+
+## BY3C1/BY3Y1 Position/Up Review And Yaw Diagnostic Explanation
+
+Allowed BY3C1/BY3Y1 evidence: result-integrity audit, BY3 three-scheme position/up comparison tables, family reviews, overlapping BY2-vs-BY3 generalization summaries, review figures generated from existing metrics only, export-clean summaries, and BY3Y1 yaw diagnostic explanation under `<BY3C1_STAGE_ROOT>`, `<BY3C1_REVIEW_PACKAGE_ROOT>`, `<BY3Y1_STAGE_ROOT>`, and `<BY3C1_EXPORT_CLEAN_ROOT>`.
+
+Allowed BY3C1/BY3Y1 statements: 71 BY3 case units and 213 final metric rows were reviewed; BY3 position/up behavior is family-dependent; B downsample is classified as `generalizes_consistently` in the review package; normal, A outage, E position std, C position noise, and D position spike are same-order or mixed and do not support paper-ready advantage claims; BY3 yaw remains diagnostic-only.
+
+Allowed BY3Y1 yaw explanation: wrong-source yaw, stale first-row initatt, and BY3 Go2 IMU moving-segment gyro-bias issues were repaired before BY3C; BY3A8 shows A1 observation quality remains the limiting factor, with A1-vs-trace heading RMSE about 24.06 deg and p95 about 31.78 deg; selected feedback worsened normal diagnostic yaw relative to stage1 by about 1.03 deg.
+
+Still forbidden after BY3C1/BY3Y1: paper performance claims, paper yaw claims, final_v23 outperformance claims, BY3 yaw robustness claims, treating review figures as new solver/evaluator evidence, treating BY3C1/BY3Y1 as authorization for BY3D execution, running H_dual_yaw_noise/E_yaw_std/mixed/module/full-matrix/LegSA_9F/nonredundant cases without explicit human approval, or treating PR #52 as merge/closure/tag approved.

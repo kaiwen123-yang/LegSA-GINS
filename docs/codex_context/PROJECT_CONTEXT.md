@@ -7,7 +7,7 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 ## Current Stage
 
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3C_POSITION_UP_DEGRADATION_EXECUTION_BATCH0_TO_BATCH3_LONG_PIPELINE`.
+- Current BY3/reporting stage: `BY3C1_TO_BY3Y1_POSITION_UP_GENERALIZATION_REVIEW_AND_YAW_DIAGNOSTIC_EXPLANATION`.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -27,6 +27,10 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 - Current BY3A8 yaw error-budget safe-repair root: `<BY3A8_STAGE_ROOT>`.
 - Current BY3B position/up diagnostic-yaw planning root: `<BY3B_STAGE_ROOT>`.
 - Current BY3C position/up Batch0-Batch3 execution root: `<BY3C_STAGE_ROOT>`.
+- Current BY3C1/BY3Y1 review root: `<BY3C1_STAGE_ROOT>`.
+- Current BY3C1 review package root: `<BY3C1_REVIEW_PACKAGE_ROOT>`.
+- Current BY3Y1 yaw diagnostic package root: `<BY3Y1_STAGE_ROOT>`.
+- Current BY3C1 export-clean root: `<BY3C1_EXPORT_CLEAN_ROOT>`.
 - Current BY3 full-matrix placeholder root: `<BY3_FULL_MATRIX_ROOT>`.
 - Current export-clean design package: `<BY2_N9B2_FULL_MATRIX_ROOT>/N9F_EXPORT_CLEAN_DESIGN_PACKAGE`.
 - Current metrics source: `<N9C0_CONSOLIDATED_PRECHECK_ROOT>/matrix/N9C0_ACTIVE_FINAL_ONLY_METRICS_TABLE`.
@@ -52,6 +56,7 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 - BY3A8 computed the remaining BY3 yaw error budget and found A1 observation quality is the limiting factor: A1-vs-trace heading RMSE is about 24.06 deg and p95 about 31.78 deg. No safe additional repair passed and no normal rerun was run.
 - BY3B imported the BY3A8 scope, locked BY3A7 repaired IMU plus A1_dual_diff as future accepted sources, and created position/up-primary degradation plans with diagnostic yaw only. BY3B did not generate degraded inputs, random arrays, solvers, evaluators, figures, or paper claims.
 - BY3C completed the approved Batch0-Batch3 position/up execution subset: normal parity, deterministic A/B/E_position_std, C_position_noise seeds 0..9, and D_position_spike seeds 0..9. It produced 213 final metric rows, figures, case reviews, consolidated review, and final validation; yaw remains diagnostic-only and paper claims remain false.
+- BY3C1/BY3Y1 completed a review-only package over existing BY3C/BY3A8/BY2 N9C0D/N9C2B evidence: BY3 result integrity passed for 71 case units and 213 final metric rows, BY3 three-scheme and BY2-vs-BY3 tables/figures were generated from existing metrics, and BY3 yaw was explained as diagnostic-only. No solvers, evaluators, degraded inputs, random arrays, retuning, or paper claims were run.
 - Current active-FGO recommended next stage: `implement_active_fgo_backend_or_reframe_scope`.
 
 ## Current Batch State
@@ -76,6 +81,8 @@ ready_for_N9G1C_E_provider_backend_normal_smoke=blocked_active_backend
 ready_for_BY3_degradation_matrix_planning=true
 ready_for_BY3_degradation_matrix_planning_scope=position_up_with_diagnostic_yaw
 ready_for_BY3C_position_up_degradation_execution=complete_batch0_to_batch3
+ready_for_BY3C1_BY3Y1_review=complete
+ready_for_BY3D_or_other_dataset_planning=true_after_human_review
 ready_for_BY3D_diagnostic_yaw_or_mixed_planning=true_after_human_review
 ready_for_BY3_solver_evaluator=normal_completed
 ready_for_BY3_input_chain=repaired
@@ -136,3 +143,7 @@ BY3B completed planning/precheck only. It locked future BY3 degradation executio
 ## BY3C Position Up Degradation Execution
 
 BY3C completed only approved Batch0-Batch3 position/up execution. It used BY3A7 repaired IMU, BY3A5B/BY3A7 A1_dual_diff yaw, BY3A2 Raw Doppler, BY3 Go2 priors, trace as evaluation-only reference, and same-case degraded feedback generated from each case's stage1 official EVAL_NAV state/estimate columns. It produced 71 executed case units, 213 final metric rows, 12 consolidated figure rows, and batch/case-review packages. Current decision is `BY3C_batch0_to_batch3_position_up_degradation_complete`; `ready_for_BY3D_diagnostic_yaw_or_mixed_planning=true_after_human_review`; `ready_for_paper_claims=false`.
+
+## BY3C1/BY3Y1 Position Up Review And Yaw Diagnostic Explanation
+
+BY3C1/BY3Y1 completed a reporting-only review of existing BY3C Batch0-Batch3 metrics, existing BY3A8 yaw-error-budget evidence, and existing BY2 N9C0D/N9C2B comparison material. It produced result-integrity reports, BY3 three-scheme position/up tables, family reviews, BY2-vs-BY3 trend classification, existing-metric figures, case-review packages, an export-clean package, and BY3Y1 yaw diagnostic explanation. B downsample is classified as `generalizes_consistently`; normal, A outage, E position std, C position noise, and D position spike remain same-order or mixed. BY3 yaw remains diagnostic-only because A1 observation quality remains the limiting factor after wrong-source yaw, initatt, and IMU preprocessing repairs. Current decision is `BY3C1_position_up_review_and_yaw_diagnostic_complete`; `ready_for_BY3D_or_other_dataset_planning=true_after_human_review`; `ready_for_paper_claims=false`.
