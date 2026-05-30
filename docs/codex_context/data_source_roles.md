@@ -184,6 +184,14 @@ BY3B treats BY3 normal feedback only as a pattern reference. Future degraded Leg
 
 BY3B creates planning artifacts only. It does not create degraded inputs, random arrays, solver outputs, evaluator outputs, figures, or paper claims.
 
+## PG_MULTI_A0 Poor-GNSS Multi-Repeat Source Rules
+
+PG_MULTI_A0 locks PG2/PG3/PG4 body/high-level sources to the user-provided `PG*_XB*` body aliases. Do not auto-remap these body logs to other datasets unless a later source-time audit proves the mapping impossible. Receiver `imu-data.csv` remains receiver diagnostic only and must not be used as body IMU.
+
+For all future poor-GNSS repeats, A1 dual-yaw invalidity must audit the BY2-compatible status relpos-difference path first: interpolate GNSS2 status rel_pos to GNSS1 time and compute `rel_pos_gnss2 - rel_pos_gnss1`. A single status `rel_pos_n/e/d` row, HDT, or absolute LLH difference is not an accepted BY2 status-yaw substitute.
+
+PG_MULTI_A0 found PG2/PG3/PG4 relpos-diff A1 candidates nonphysical with zero physical-band epochs. This blocks frozen dual-yaw mainline execution on PG1-PG4 and supports only a later human-approved quality-aware diagnostic branch or diagnostic position-only fallback. It does not support paper claims.
+
 ## BY3C Position Up Degradation Execution
 
 BY3C uses the BY3A7 repaired IMU as the accepted body-IMU source, the BY3A5B/BY3A7 A1_dual_diff 15-column GNSS as the dual-yaw observation source, BY3A2 Raw Doppler as the Raw Doppler provider, and BY3 Go2 priors as source observations. Trace remains evaluation-only.

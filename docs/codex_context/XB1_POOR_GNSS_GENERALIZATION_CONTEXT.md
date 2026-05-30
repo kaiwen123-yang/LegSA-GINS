@@ -5,6 +5,7 @@
 - Stage: `XB1A0_TO_XB1E_POOR_GNSS_GENERALIZATION_CONTEXT_QUALITY_AUDIT_ALIGNMENT_AND_NORMAL_RUN`
 - Follow-on triage stage: `XB1A1_BLOCKER_TRIAGE_RAW_DOPPLER_A1_YAW_AND_MAINLINE_NORMAL_GATE`
 - Correction stage: `XB1A2_A1_DUAL_DIFF_RELPOS_DIFFERENCE_REAUDIT_AND_NORMAL_RERUN`
+- Current multi-repeat follow-on: `PG_MULTI_A0_POOR_GNSS_REPEATED_DATASET_SOURCE_REVIEW_AND_RUNNABILITY_CLASSIFICATION_WITH_LOCKED_XB2_XB3_XB4_BODY_PATHS`
 - Engineering alias: `XB1`
 - Experiment alias: `PG1_20260105_122513`
 - Dataset meaning: first of four poor-GNSS repeated experiments
@@ -107,8 +108,23 @@ ready_for_paper_claims=false
 recommended_next_stage=human_review_XB1A2_then_quality_aware_branch_or_PG2_source_review
 ```
 
+PG_MULTI_A0 follow-on decision:
+
+```text
+status=PG_MULTI_A0_all_repeats_severe_quality_aware_branch_recommended
+pg1_imported_from_XB1A2=true
+pg2_pg3_pg4_receiver_roots_registered=true
+pg2_pg3_pg4_body_paths_locked=true
+a1_relpos_diff=invalid_all_repeats
+runnability_classification=quality_aware_branch_candidate_all_repeats
+ready_for_selected_PG_normal_run_planning=false
+ready_for_quality_aware_branch_planning=true_after_human_review
+ready_for_paper_claims=false
+recommended_next_stage=human_review_PG_MULTI_A0_then_quality_aware_branch_or_position_only_diagnostic_or_stop
+```
+
 ## Claim Boundary
 
 Allowed: describe the quality profile, alignment result, source-role policy, input/provider blockers, XB1A2 relpos-difference re-audit, and quality-aware branch planning need.
 
-Forbidden: paper claims, poor-GNSS robustness claims, final_v23 outperformance claims, artificial degradation, parameter retuning, trace-tuned thresholds, receiver IMU as body IMU, single-relpos/long-relpos/HDT yaw fallback, output-only correction, forcing dual-yaw normal runs without valid A1, treating absent normal figures as real result figures, PR #52 merge/closure/tag, or running PG2/degradation/adaptation without explicit human approval.
+Forbidden: paper claims, poor-GNSS robustness claims, final_v23 outperformance claims, artificial degradation, parameter retuning, trace-tuned thresholds, receiver IMU as body IMU, single-relpos/long-relpos/HDT yaw fallback, output-only correction, forcing dual-yaw normal runs without valid A1, treating absent normal figures as real result figures, PR #52 merge/closure/tag, or running PG follow-up solver/degradation/adaptation work without explicit human approval.

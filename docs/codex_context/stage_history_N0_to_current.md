@@ -501,3 +501,25 @@ ready_for_XB1_degradation_or_PG2_planning=false
 ready_for_paper_claims=false
 recommended_next_stage=human_review_XB1A2_then_quality_aware_branch_or_PG2_source_review
 ```
+
+## PG_MULTI_A0 Poor-GNSS Multi-Repeat Source Review
+
+PG_MULTI_A0_POOR_GNSS_REPEATED_DATASET_SOURCE_REVIEW_AND_RUNNABILITY_CLASSIFICATION_WITH_LOCKED_XB2_XB3_XB4_BODY_PATHS completed a review-only four-repeat source audit. PG1/XB1 was imported from XB1A2. PG2/XB2, PG3/XB3, and PG4/XB4 receiver roots were registered by alias, and their body/high-level source paths were locked by alias and parsed successfully. The stage generated data inventory, role classification, GNSS quality profiles, A1 dual-yaw availability audits, provider/body feasibility reviews, runnability classification, recommendation, validation, context updates, and untracked Obsidian notes. No solvers, evaluators, degraded inputs, random arrays, retuning, quality-aware branch implementation, or paper claims were run or produced.
+
+The A1 audit used the BY2 status-yaw rule requiring relpos dual difference before invalidity decisions. PG2/XB2 through PG4/XB4 all had zero physical-band epochs in the primary `gnss2.rel_pos_interp - gnss1.rel_pos` audit, while PG1/XB1 retained the XB1A2 result of 7 physical-band epochs out of 356. Direct single rel_pos, long-relpos, HDT, absolute-LLH-only fallback, receiver IMU as body IMU, trace, final_v23 output, and solver output remain rejected as mainline yaw/body sources.
+
+Current PG_MULTI_A0 decision:
+
+```text
+status=PG_MULTI_A0_all_repeats_severe_quality_aware_branch_recommended
+pg1_imported_from_XB1A2=true
+pg2_pg3_pg4_receiver_roots_registered=true
+pg2_pg3_pg4_body_paths_locked=true
+pg2_pg3_pg4_body_parseable=true
+a1_relpos_diff=invalid_all_repeats
+runnability_classification=quality_aware_branch_candidate_all_repeats
+ready_for_selected_PG_normal_run_planning=false
+ready_for_quality_aware_branch_planning=true_after_human_review
+ready_for_paper_claims=false
+recommended_next_stage=human_review_PG_MULTI_A0_then_quality_aware_branch_or_position_only_diagnostic_or_stop
+```

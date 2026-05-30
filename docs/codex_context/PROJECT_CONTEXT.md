@@ -8,6 +8,7 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 - Current BY3/reporting stage: `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`.
+- Current poor-GNSS stage: `PG_MULTI_A0_POOR_GNSS_REPEATED_DATASET_SOURCE_REVIEW_AND_RUNNABILITY_CLASSIFICATION_WITH_LOCKED_XB2_XB3_XB4_BODY_PATHS`.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -34,6 +35,10 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 - Current GEN1 cross-dataset review root: `<GEN1_STAGE_ROOT>`.
 - Current BY3 figure organization root: `<BY3_FIGURE_SUMMARY_ROOT>`.
 - Current GEN1 export-clean root: `<GEN1_EXPORT_CLEAN_ROOT>`.
+- Current PG multi-repeat review root: `<PG_MULTI_A0_STAGE_ROOT>`.
+- Current PG2/XB2 receiver/body sources: `<PG2_XB2_RECEIVER_ROOT>` and `<PG2_XB2_BODY_SOURCE>`.
+- Current PG3/XB3 receiver/body sources: `<PG3_XB3_RECEIVER_ROOT>` and `<PG3_XB3_BODY_SOURCE>`.
+- Current PG4/XB4 receiver/body sources: `<PG4_XB4_RECEIVER_ROOT>` and `<PG4_XB4_BODY_SOURCE>`.
 - Current BY3 full-matrix placeholder root: `<BY3_FULL_MATRIX_ROOT>`.
 - Current export-clean design package: `<BY2_N9B2_FULL_MATRIX_ROOT>/N9F_EXPORT_CLEAN_DESIGN_PACKAGE`.
 - Current metrics source: `<N9C0_CONSOLIDATED_PRECHECK_ROOT>/matrix/N9C0_ACTIVE_FINAL_ONLY_METRICS_TABLE`.
@@ -61,7 +66,9 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 - BY3C completed the approved Batch0-Batch3 position/up execution subset: normal parity, deterministic A/B/E_position_std, C_position_noise seeds 0..9, and D_position_spike seeds 0..9. It produced 213 final metric rows, figures, case reviews, consolidated review, and final validation; yaw remains diagnostic-only and paper claims remain false.
 - BY3C1/BY3Y1 completed a review-only package over existing BY3C/BY3A8/BY2 N9C0D/N9C2B evidence: BY3 result integrity passed for 71 case units and 213 final metric rows, BY3 three-scheme and BY2-vs-BY3 tables/figures were generated from existing metrics, and BY3 yaw was explained as diagnostic-only. No solvers, evaluators, degraded inputs, random arrays, retuning, or paper claims were run.
 - GEN1 completed a reporting-only cross-dataset review and figure organization over existing BY2/BY3 evidence: BY2 and BY3 inventories each have 213 comparable metric rows across 71 case units, cross-dataset tables and figures were generated from existing metrics only, and 874 unique nonempty BY3 figures were copied into `<BY3_FIGURE_SUMMARY_ROOT>` without moving or deleting originals. No solvers, evaluators, degraded inputs, random arrays, retuning, or paper claims were run.
+- PG_MULTI_A0 completed a review-only four-repeat poor-GNSS source review. PG1/XB1 was imported from XB1A2, PG2/XB2 through PG4/XB4 receiver roots were registered, their body/high-level source files were locked and parseable, GNSS quality profiles were generated, and A1 dual-yaw availability was audited with the required status `gnss2.rel_pos_interp - gnss1.rel_pos` dual-difference logic. All four repeats are classified as `quality_aware_branch_candidate`, with no frozen dual-yaw mainline normal run recommended from this review stage.
 - Current active-FGO recommended next stage: `implement_active_fgo_backend_or_reframe_scope`.
+- Current poor-GNSS recommended next stage: human review of PG_MULTI_A0, then choose quality-aware branch planning, position-only diagnostic fallback planning, or stop the poor-GNSS line for now.
 
 ## Current Batch State
 
@@ -96,6 +103,14 @@ ready_for_BY3_raw_doppler_provider=true
 ready_for_BY3_same_case_feedback=true
 ready_for_BY3_yaw_input_policy=A1_dual_diff_repaired
 ready_for_BY3_yaw_reference=diagnostic_only_after_BY3A8_A1_lower_bound
+ready_for_PG_MULTI_A0_review=complete
+ready_for_PG2_PG3_PG4_receiver_registration=complete
+ready_for_PG2_PG3_PG4_body_lock=complete
+ready_for_PG2_PG3_PG4_a1_relpos_diff=audited_invalid
+ready_for_PG_frozen_dual_yaw_mainline_normal=false
+ready_for_PG_quality_aware_branch_planning=true_after_human_review
+ready_for_PG_position_only_fallback_planning=diagnostic_only_after_human_review
+ready_for_PG_degradation_planning=false
 yaw_degradation_claims=diagnostic_only
 ready_for_BY3_paper_claims=false
 ready_for_representative_validation=false
@@ -120,7 +135,7 @@ N9G2 representative validation is blocked until provider/factor and active FGO b
 
 BY3C executed only the human-approved position/up-primary Batch0-Batch3 subset with diagnostic yaw. BY3 yaw input remains A1_dual_diff short baseline, stale first-row initatt was repaired in BY3A6, BY3A7 repaired a BY3-local IMU preprocessing bias bug without changing yaw gates or tuning parameters, and BY3A8 found the remaining yaw error is limited by A1 observation quality with no safe additional repair. BY3A3/BY3A4A/BY3A5/BY3A5B/BY3A6 yaw metrics remain historical bad-input, invalid-reference, or pre-BY3A7 evidence and must not support paper claims or final_v23 outperformance. BY3C does not authorize H_dual_yaw_noise, E_yaw_std_inflation, mixed, module-disable, LegSA_9F_FGO_EKF, nonredundant-FGO, or full monolithic BY3 matrix execution.
 
-XB1A2 is the current poor-GNSS correction boundary. It suspends/supersedes XB1A1's A1 source-provenance conclusion, audits the BY2/process_data-compatible status `rel_pos_gnss2-rel_pos_gnss1` dual-difference path and the BY3A5B absolute-position repair path, and finds both nonphysical for XB1. No repaired dual-yaw input was generated, no dual-yaw normal rerun was forced, and quality-aware diagnostic branch planning is recommended only after human review. Do not use single status rel_pos direct, long-relpos, HDT, trace, final_v23 output, or solver output as mainline yaw.
+PG_MULTI_A0 is the current poor-GNSS review boundary. It imports XB1A2 as PG1/XB1, locks PG2/XB2 through PG4/XB4 receiver and body/high-level sources by alias, audits quality and A1 dual-yaw feasibility without solver/evaluator execution, and classifies all four repeats as `quality_aware_branch_candidate`. The A1 audit uses status relpos dual difference before invalidity decisions; single status rel_pos direct, long-relpos, HDT, absolute-LLH fallback, receiver IMU as body IMU, trace, final_v23 output, or solver output must not be used as mainline yaw or body input. PG_MULTI_A0 does not authorize paper claims, frozen dual-yaw mainline normal runs, degradation, random arrays, retuning, or quality-aware implementation.
 
 ## Path Boundary
 
