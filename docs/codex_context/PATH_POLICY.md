@@ -42,6 +42,8 @@ Tracked docs must use aliases instead of local absolute paths.
 - `<PG_MULTI_REVIEW_ROOT>`: locked Windows root for PG multi-repeat poor-GNSS review outputs.
 - `<PG_MULTI_A0_STAGE_ROOT>`: PG_MULTI_A0 review-only stage output root under `<PG_MULTI_REVIEW_ROOT>`.
 - `<PG_QA0_STAGE_ROOT>`: PG_QA0 quality-aware fallback design package root under `<PG_MULTI_REVIEW_ROOT>`.
+- `<PAPER_EVIDENCE_REVIEW_ROOT>`: locked root for paper-facing evidence review outputs.
+- `<PAPER0_STAGE_ROOT>`: PAPER0 mainline evidence package and claim-boundary review root under `<PAPER_EVIDENCE_REVIEW_ROOT>`.
 - `<BY2_DEGRADATION_ARCHIVE_ROOT>`: copy-only BY2 degradation figure/text archive root.
 - `<BY2_DEGRADATION_TEXT_SUMMARY_ROOT>`: BY2 degradation text-summary root containing the seed0-9 explanation index.
 
@@ -93,6 +95,12 @@ PG_MULTI_A0 outputs are represented in tracked docs by `<PG_MULTI_A0_STAGE_ROOT>
 PG_MULTI_A0 classified PG1-PG4 as quality-aware branch candidates because all available relpos-diff A1 audits are invalid/nonphysical. This path lock does not authorize solver/evaluator execution, frozen dual-yaw mainline normal runs, quality-aware execution, degradation, retuning, or paper claims.
 
 PG_QA0 is design-only. It does not authorize implementation, solver/evaluator execution, degraded-input generation, random-array generation, retuning, or paper claims. Export-clean QA0 material must use aliases only and must not contain local absolute paths.
+
+## Paper Evidence Review Path Lock
+
+PAPER0 outputs are represented in tracked docs by `<PAPER0_STAGE_ROOT>` under `<PAPER_EVIDENCE_REVIEW_ROOT>`. PAPER0 may organize existing BY2, BY3, PG_MULTI_A0, and PG_QA0 evidence into paper-facing tables, figure recommendations, narrative drafts, missing-work decisions, and claim-boundary matrices. It does not authorize solver/evaluator execution, degraded-input generation, random-array generation, QA implementation, retuning, metric alteration, final paper figures, final paper claims, PR #52 merge/closure/tag, or staging runtime/Obsidian outputs.
+
+PAPER0 export-clean material must use aliases only and must not contain local absolute paths.
 
 ## Local Path File
 

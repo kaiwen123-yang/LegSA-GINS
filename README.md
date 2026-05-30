@@ -68,9 +68,9 @@ N7B5 Go2 velocity frame horizontal diagnostic.
 
 Current operational state:
 
-After `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE` and `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`.
+After `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`, `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`, `PG_QA0_QUALITY_AWARE_FALLBACK_DESIGN_AND_PAPER_MAINLINE_DECISION`, and `PAPER0_MAINLINE_EVIDENCE_PACKAGE_AND_CLAIM_BOUNDARY_REVIEW`.
 
-XB1 / PG1_20260105_122513 has also completed the first poor-GNSS repeated-experiment bootstrap, blocker triage, and A1 relpos-difference correction audit. PG_MULTI_A0 then reviewed PG1-PG4 source quality and runnability, registered PG2-PG4 receiver/body aliases, and found all four repeats blocked for frozen dual-yaw mainline execution because A1 relpos-diff geometry is invalid/nonphysical. PG_QA0 is now complete as design-only: it defines the separate future `LegSA_QA_Fallback_EKF` candidate and keeps `LegSA_full_EKF` as the frozen mainline. No degradation, retuning, quality-aware execution, paper claims, or poor-GNSS robustness claims are authorized.
+XB1 / PG1_20260105_122513 has also completed the first poor-GNSS repeated-experiment bootstrap, blocker triage, and A1 relpos-difference correction audit. PG_MULTI_A0 then reviewed PG1-PG4 source quality and runnability, registered PG2-PG4 receiver/body aliases, and found all four repeats blocked for frozen dual-yaw mainline execution because A1 relpos-diff geometry is invalid/nonphysical. PG_QA0 is complete as design-only: it defines the separate future `LegSA_QA_Fallback_EKF` candidate and keeps `LegSA_full_EKF` as the frozen mainline. PAPER0 is complete as evidence organization: it supports starting a near-term manuscript from BY2 full-metric evidence and BY3 position/up generalization while keeping PG/QA as limitation/design extension. No degradation, retuning, quality-aware execution, final figures, paper claims, or poor-GNSS robustness claims are authorized.
 
 N9E completed with a logging-blocked active nine-factor FGO/legged evidence decision: `complete_nine_factor_FGO_claim=false`.
 

@@ -75,6 +75,7 @@ The supervisor must prevent phase confusion:
 - XB1A2_A1_DUAL_DIFF_RELPOS_DIFFERENCE_REAUDIT_AND_NORMAL_RERUN: current XB1 correction stage; it suspends/supersedes XB1A1's A1 source-provenance conclusion, recovers both the BY2/process_data-compatible status `rel_pos_gnss2-rel_pos_gnss1` path and the BY3A5B absolute-position repair path, audits both for XB1, and finds no valid A1 source. The accepted BY2 rel_pos-difference candidate remains nonphysical for XB1 with about 1.97 percent physical-band epochs, median length about 9.18 m, and p95 about 50.96 m. Dual-yaw normal remains blocked; quality-aware diagnostic branch planning is recommended after human review. No degradation, retuning, quality-aware execution, dual-yaw solver forcing, or paper claim was performed.
 - PG_MULTI_A0_POOR_GNSS_REPEATED_DATASET_SOURCE_REVIEW_AND_RUNNABILITY_CLASSIFICATION_WITH_LOCKED_XB2_XB3_XB4_BODY_PATHS: current poor-GNSS multi-repeat source review; PG1/XB1 was imported from XB1A2, PG2/PG3/PG4 receiver roots and user-locked body/high-level paths were registered, GNSS quality profiles/body feasibility/provider feasibility were audited, and the BY2-compatible status relpos-difference A1 path was audited for all repeats. PG2/PG3/PG4 all have nonphysical relpos-diff A1 baselines, so PG1-PG4 are classified as `quality_aware_branch_candidate` with position-only fallback as diagnostic only. No solvers, evaluators, degraded inputs, random arrays, retuning, quality-aware branch implementation, or paper claims were performed.
 - PG_QA0_QUALITY_AWARE_FALLBACK_DESIGN_AND_PAPER_MAINLINE_DECISION: current poor-GNSS design-only follow-on after PG_MULTI_A0 and XB1A2; it organizes BY2, BY3, and PG1-PG4 evidence, defines the separate future candidate `LegSA_QA_Fallback_EKF`, designs quality-state, measurement, R-scale, Raw Doppler, Go2 bridge, logging, validation, and paper-positioning policies, and recommends Option B for the near-term paper with Option C only after human-reviewed QA1/QA2/QA3 work. No implementation, solver, evaluator, degraded input, random array, retuning, quality-aware execution, or paper claim was performed.
+- PAPER0_MAINLINE_EVIDENCE_PACKAGE_AND_CLAIM_BOUNDARY_REVIEW: current paper-facing evidence package after PG_QA0; it organizes BY2 as the full-metric main dataset, BY3 as independent position/up generalization with diagnostic-only yaw, PG1-PG4 as severe-GNSS boundary/QA motivation, and PG_QA0 as design extension. It generated paper table drafts, figure recommendations, narrative outline, journal-positioning notes, missing-work decision, export-clean material, and claim-boundary matrices from existing evidence only. No solver, evaluator, degraded input, random array, QA1 implementation, retuning, metric alteration, final figure, or final paper claim was performed.
 
 ### 1.2 Planner
 
@@ -161,6 +162,8 @@ Tracked docs must use aliases only:
 - `<PG_MULTI_REVIEW_ROOT>`
 - `<PG_MULTI_A0_STAGE_ROOT>`
 - `<PG_QA0_STAGE_ROOT>`
+- `<PAPER_EVIDENCE_REVIEW_ROOT>`
+- `<PAPER0_STAGE_ROOT>`
 - `<PG2_XB2_RECEIVER_ROOT>`
 - `<PG2_XB2_BODY_SOURCE>`
 - `<PG3_XB3_RECEIVER_ROOT>`
@@ -197,6 +200,7 @@ The XB1 / PG1 poor-GNSS generalization bootstrap is represented in tracked docs 
 The XB1A1 blocker-triage and normal-gate repair stage is represented in tracked docs only by `<XB1A1_STAGE_ROOT>`, with its normal-gate runtime material under `<XB1A1_NORMAL_GATE_ROOT>`.
 The XB1A2 rel_pos-difference A1 re-audit stage is represented in tracked docs only by `<XB1A2_STAGE_ROOT>`, with its relpos-diff repair runtime material under `<XB1A2_RELPOS_DIFF_REPAIR_ROOT>`.
 The PG multi-repeat poor-GNSS review root is represented in tracked docs only by `<PG_MULTI_REVIEW_ROOT>`, with the PG_MULTI_A0 runtime reports under `<PG_MULTI_A0_STAGE_ROOT>` and the PG_QA0 design package under `<PG_QA0_STAGE_ROOT>`. PG2/PG3/PG4 receiver and body/high-level sources are represented only by `<PG2_XB2_RECEIVER_ROOT>`, `<PG2_XB2_BODY_SOURCE>`, `<PG3_XB3_RECEIVER_ROOT>`, `<PG3_XB3_BODY_SOURCE>`, `<PG4_XB4_RECEIVER_ROOT>`, and `<PG4_XB4_BODY_SOURCE>`.
+The paper-facing evidence review root is represented in tracked docs only by `<PAPER_EVIDENCE_REVIEW_ROOT>`, with PAPER0 runtime material under `<PAPER0_STAGE_ROOT>`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
 The BY3 Go2 body/high-level source is represented in tracked docs only by `<BY3_GO2_BODY_SOURCE>`.
@@ -315,8 +319,9 @@ Current completed route:
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 - Current BY3/reporting stage: `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`; GEN1 built BY2/BY3 metric inventories, canonical family mapping, three-scheme cross-dataset summaries, existing-metric cross-dataset figures, a BY3 figure inventory, and a copy-only BY3 figure organization without solver/evaluator/degradation/random execution.
 - Current poor-GNSS stage: `PG_QA0_QUALITY_AWARE_FALLBACK_DESIGN_AND_PAPER_MAINLINE_DECISION`; PG_MULTI_A0 remains the source/runnability evidence import, and QA0 is design-only. QA0 keeps `LegSA_full_EKF` as the frozen verified mainline for normal/moderate GNSS and defines `LegSA_QA_Fallback_EKF` as a separate future candidate for severe GNSS, unavailable A1 dual-yaw, degraded position quality, Raw Doppler availability, and short IMU+Go2 bridge intervals. No implementation, solver, evaluator, degraded-input generation, random arrays, retuning, quality-aware execution, or paper claim was performed.
+- Current paper-facing evidence stage: `PAPER0_MAINLINE_EVIDENCE_PACKAGE_AND_CLAIM_BOUNDARY_REVIEW`; it supports starting manuscript experiment-section drafting from existing BY2/BY3 evidence while keeping PG/QA as limitation/design extension and keeping `ready_for_paper_claims=false`.
 - Recommended BY3 next stage: human review of GEN1, then decide `BY3D_MIXED_POSITION_UP_PLANNING`, separate diagnostic-yaw planning, or another-dataset planning only if explicitly approved; GEN1 does not authorize paper claims, PR #52 merge/tag/closure, or additional yaw/mixed/module/full-matrix execution.
-- Recommended poor-GNSS next stage: human review of PG_QA0, then either keep QA as future work/design extension for the near-term BY2/BY3 paper, approve `PG_QA1_CLASSIFIER_LOGGING_ONLY`, or stop the poor-GNSS line. QA0 recommends Option B now and Option C only if a later human-reviewed QA1/QA2/QA3 implementation and PG validation route is chosen. PG_QA0 does not authorize frozen mainline execution on PG1-PG4, quality-aware implementation, solver/evaluator execution, artificial degradation, random arrays, retuning, paper claims, PR #52 merge/closure/tag, or poor-GNSS robustness claims.
+- Recommended paper next stage: `PAPER1_MANUSCRIPT_EXPERIMENT_SECTION_DRAFT`. QA1 remains optional for a stronger secondary-contribution route and is not required before starting the near-term Option B manuscript. PAPER0 does not authorize frozen mainline execution on PG1-PG4, quality-aware implementation, solver/evaluator execution, artificial degradation, random arrays, retuning, final paper figures, paper claims, PR #52 merge/closure/tag, or poor-GNSS robustness claims.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
@@ -394,6 +399,9 @@ Allowed now:
 - PG_QA0 may state that `LegSA_QA_Fallback_EKF` is a separate design-only candidate, not a relabeling of `LegSA_full_EKF` or final_v23.
 - PG_QA0 may state that the fallback design includes states S0 through S6, disables A1 dual-yaw when relpos-diff geometry is nonphysical, downweights or rejects poor GNSS position by online source-quality indicators, retains Raw Doppler only when provider/residual quality is acceptable, and uses IMU+Go2 bridge mode only as a low-confidence short-interval fallback.
 - PG_QA0 may state that the near-term paper recommendation is Option B: keep `LegSA_full_EKF` as the mainline and describe QA as a design/limitation extension with no QA performance claim. Option C requires later human-approved QA1/QA2/QA3 implementation and validation.
+- PAPER0 may state that a paper-facing evidence package is complete and that manuscript drafting can begin from existing BY2/BY3 evidence while keeping PG/QA as limitation/design extension.
+- PAPER0 may state that BY2 is the full-metric main dataset, BY3 is position/up generalization with diagnostic-only yaw, PG1-PG4 are severe-GNSS boundary datasets, and PG_QA0 is design-only.
+- PAPER0 must keep `ready_for_manuscript_drafting=true`, `ready_for_QA1=false`, and `ready_for_paper_claims=false`.
 - N9G2 may be described as the later representative validation stage.
 - N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
 - `LegSA_full_EKF` is not accepted as active nine-factor FGO and must not be relabeled as such.
@@ -439,6 +447,7 @@ Forbidden now:
 - treating GEN1 cross-dataset reports, organized figure folders, copied figures, or export-clean tables as new solver/evaluator evidence, paper performance claims, BY3 yaw success, final_v23 outperformance, or authorization for BY3D execution without explicit human approval.
 - claiming BY3 full-matrix completion before explicit full-matrix execution approval.
 - treating PG_QA0 as quality-aware implementation, solver/evaluator evidence, PG robustness evidence, paper-ready QA performance evidence, trace-tuned threshold approval, relabeling approval for `LegSA_full_EKF`, or authorization to start QA1 without human review.
+- treating PAPER0 as final paper-claim authorization, final figure authorization, QA1 authorization, BY3 yaw main-claim support, PG performance proof, or comprehensive final_v23 superiority support.
 
 ## 10. Historical N9C0A Decision Lock
 
@@ -886,3 +895,21 @@ recommended_next_stage=human_review_PG_QA0_then_keep_future_work_or_approve_PG_Q
 ```
 
 PG_QA0 does not authorize implementation, solver execution, evaluator execution, degraded-input generation, random-array generation, parameter retuning, quality-aware execution, trace-tuned thresholds, poor-GNSS robustness claims, paper performance claims, PR #52 merge/closure/tag, or any relabeling of `LegSA_full_EKF`.
+
+## 32. PAPER0 Mainline Evidence Package Lock
+
+PAPER0_MAINLINE_EVIDENCE_PACKAGE_AND_CLAIM_BOUNDARY_REVIEW is complete as a paper-facing evidence organization and claim-boundary review stage after PG_QA0. It uses existing evidence only: BY2 full-metric main evidence, BY3 independent position/up generalization with diagnostic-only yaw, PG1-PG4 severe-GNSS boundary/motivation evidence, and PG_QA0 design-extension evidence.
+
+Current PAPER0 decision:
+
+```text
+status=PAPER0_evidence_package_complete_ready_for_manuscript_drafting
+paper_mainline=LegSA_full_EKF_with_BY2_BY3_evidence
+qa_role=design_extension_or_future_work
+ready_for_manuscript_drafting=true
+ready_for_QA1=false
+ready_for_paper_claims=false
+recommended_next_stage=PAPER1_MANUSCRIPT_EXPERIMENT_SECTION_DRAFT
+```
+
+PAPER0 does not authorize solver execution, evaluator execution, degraded-input generation, random-array generation, QA1 implementation, parameter retuning, metric alteration, final paper figures, final paper claims, PR #52 merge/closure/tag, staging runtime outputs, or staging Obsidian notes.
