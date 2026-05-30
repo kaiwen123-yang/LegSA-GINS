@@ -31,6 +31,10 @@ Tracked docs must use aliases instead of local absolute paths.
 - `<GEN1_STAGE_ROOT>`: GEN1 BY2-BY3 generalization report and BY3 figure-organization root under `<BY3_OUTPUT_ROOT>`.
 - `<BY3_FIGURE_SUMMARY_ROOT>`: copy-only organized BY3 figure summary root under `<BY3_OUTPUT_ROOT>`.
 - `<GEN1_EXPORT_CLEAN_ROOT>`: GEN1 export-clean BY2-BY3 generalization package root under `<BY3_OUTPUT_ROOT>`.
+- `<XB1_OUTPUT_ROOT>`: locked Windows root for XB1 / PG1 poor-GNSS generalization outputs.
+- `<XB1_STAGE_ROOT>`: XB1A0_TO_XB1E poor-GNSS stage output root under `<XB1_OUTPUT_ROOT>`.
+- `<XB1_FULL_MATRIX_ROOT>`: XB1 normal-bootstrap runtime root family; current stage used only `XB1A_NORMAL_BOOTSTRAP`, not a degradation matrix.
+- `<XB1_EXPORT_CLEAN_ROOT>`: XB1 export-clean package root under `<XB1_OUTPUT_ROOT>`.
 - `<BY2_DEGRADATION_ARCHIVE_ROOT>`: copy-only BY2 degradation figure/text archive root.
 - `<BY2_DEGRADATION_TEXT_SUMMARY_ROOT>`: BY2 degradation text-summary root containing the seed0-9 explanation index.
 
@@ -46,6 +50,10 @@ Tracked docs must use aliases instead of local absolute paths.
 - `<BY3_GO2_BODY_SOURCE>`: BY3 Go2 body/high-level `by3.txt` source.
 - `<BY3_TRACE_TRUTH>`: BY3 trace reference, evaluation-only.
 - `<BY3_FIXPOSITION_IMU_DATA>`: BY3 receiver IMU diagnostics only, not Go2 body IMU.
+- `<XB1_RECEIVER_ROOT>`: XB1 Fixposition receiver source root.
+- `<XB1_BODY_SOURCE>`: XB1 robot body/high-level `xb1.txt` source and body-IMU source.
+- `<XB1_TRACE_TRUTH>`: XB1 trace reference, evaluation-only.
+- `<XB1_FIXPOSITION_IMU_DATA>`: XB1 receiver IMU diagnostics only, not body IMU.
 
 ## N9B2 Path Lock
 
@@ -62,6 +70,12 @@ BY3A0 locked `<BY3_OUTPUT_ROOT>` for BY3 generalization outputs. BY3A0_TO_BY3E a
 BY3 tracked docs must refer to receiver data through `<BY3_RECEIVER_ROOT>` and Go2 body/high-level data through `<BY3_GO2_BODY_SOURCE>`. The BY3 receiver `imu-data.csv` is diagnostic only and must not be documented as the Go2 body IMU source.
 
 BY2 degradation text summaries and reorganized figures are represented by `<BY2_DEGRADATION_ARCHIVE_ROOT>`. That archive is copy-only runtime evidence and must not be staged by default.
+
+## XB1 Path Lock
+
+XB1A0_TO_XB1E locked XB1 / PG1 poor-GNSS outputs under `<XB1_OUTPUT_ROOT>`. Runtime reports and quality figures are represented by `<XB1_STAGE_ROOT>`, normal-bootstrap runtime material by `<XB1_FULL_MATRIX_ROOT>/XB1A_NORMAL_BOOTSTRAP`, and export-clean material by `<XB1_EXPORT_CLEAN_ROOT>`.
+
+XB1 tracked docs must refer to receiver data through `<XB1_RECEIVER_ROOT>` and body/high-level data through `<XB1_BODY_SOURCE>`. The XB1 receiver `imu-data.csv` is diagnostic only and must not be documented as the robot body IMU source. XB1 normal solver/evaluator execution remains blocked until the A1 yaw and provider gates are reviewed or repaired.
 
 ## Local Path File
 

@@ -70,6 +70,8 @@ Current operational state:
 
 After `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE` and `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`.
 
+XB1 / PG1_20260105_122513 has also completed the first poor-GNSS repeated-experiment bootstrap: literature criteria, inventory, GNSS quality profile, kick-event alignment, body-IMU input generation, Go2 priors, provider gate reports, quality figures, case review, and export-clean material were produced. XB1 GNSS quality is classified severe, A1 short-baseline yaw and Raw Doppler/provider gates blocked normal solver/evaluator execution, and no paper claims or poor-GNSS robustness claims are authorized.
+
 N9E completed with a logging-blocked active nine-factor FGO/legged evidence decision: `complete_nine_factor_FGO_claim=false`.
 
 N9F6A re-audited the real Windows/WSL source code from zero. It confirmed that robot kinematics/contact/legged modeling exists, but mainly as provider, diagnostic, offline no-feedback, or candidate factor code. `LegSA_full_EKF` remains an EKF/update/feedback algorithm and must not be relabeled as complete active nine-factor FGO.

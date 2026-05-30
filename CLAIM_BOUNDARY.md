@@ -2064,3 +2064,11 @@ Allowed GEN1 evidence: BY2 and BY3 metric inventories with 213 rows each across 
 Allowed GEN1 statements: BY3 already has normal and degradation figure material, but figure classification is only partial for paper-facing use; BY3 yaw figures remain diagnostic-only; original BY3 runtime figures were not moved or deleted; 874 unique nonempty BY3 figure files were copied into the organized view; `ready_for_paper_claims=false`.
 
 Still forbidden after GEN1: paper performance claims, paper yaw claims, final_v23 outperformance claims, comprehensive LegSA superiority claims, treating copied or generated figures as new solver/evaluator evidence, treating export-clean tables as paper approval, running BY3D/mixed/yaw/module/full-matrix/LegSA_9F/nonredundant cases without explicit human approval, or treating PR #52 as merge/closure/tag approved.
+
+## XB1 Poor-GNSS Generalization Bootstrap
+
+Allowed XB1 evidence: literature-backed GNSS quality criteria, receiver/body inventory, GNSS quality profile, kick-event alignment without trace tuning, repaired body IMU generated from `<XB1_BODY_SOURCE>`, Go2 attitude/horizontal velocity/joint priors, A1 short-baseline quality audit, Raw Doppler provider failure report, real GNSS quality figures, case review, and export-clean material under `<XB1_STAGE_ROOT>` and `<XB1_EXPORT_CLEAN_ROOT>`.
+
+Allowed XB1 statements: XB1 / PG1_20260105_122513 is the first poor-GNSS repeated experiment; GNSS quality is classified `severe`; kick-event alignment passed; trace is evaluation-only; receiver `imu-data.csv` is diagnostic-only; status long-baseline `rel_pos_n/e/d` and HDT were rejected as mainline yaw sources; normal solver/evaluator execution did not run because input/provider gates blocked it; a future quality-aware branch may be planned only after human review.
+
+Still forbidden after XB1: paper performance claims, poor-GNSS robustness claims, final_v23 outperformance claims, artificial degradation matrix execution, parameter retuning, trace-tuned thresholds, trace solver input, final_v23 or single-output solver input, receiver IMU as body IMU, long-relpos/HDT yaw fallback, output-only correction, treating blocked normal figures as real result figures, PR #52 merge/closure/tag approval, or treating XB1 as authorization to run PG2/degradation/adaptation without explicit human approval.
