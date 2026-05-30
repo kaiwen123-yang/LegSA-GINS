@@ -84,6 +84,9 @@ LegSA-GINS claims must track what the audits actually prove.
 - PG_QA0 may state that BY2/BY3 position-up generalization remains the main proven line, BY3 yaw remains diagnostic-only, and PG1-PG4 severe GNSS data motivate a future quality-aware fallback branch.
 - PG_QA0 may state that `LegSA_QA_Fallback_EKF` is a separate design-only future candidate, not implemented, not validated, and not a relabeling of `LegSA_full_EKF` or final_v23.
 - PG_QA0 may state that Option B is recommended for the near-term paper with QA as a design/limitation extension and no QA performance claim; Option C requires later human-approved QA1/QA2/QA3 implementation and validation.
+- PAPER0 may state that a paper-facing evidence package exists under `<PAPER0_STAGE_ROOT>`, organized from existing BY2, BY3, PG_MULTI_A0, and PG_QA0 evidence only.
+- PAPER0 may state that the near-term manuscript can start with BY2 as the full-metric main dataset, BY3 as independent position/up generalization with diagnostic-only yaw, and PG/QA as limitation/design-extension material.
+- PAPER0 may state that table drafts, figure recommendations, narrative outline, claim-boundary matrix, journal-positioning notes, and missing-work decisions were generated with `ready_for_paper_claims=false`.
 
 ## Not Allowed Current Claims
 
@@ -141,6 +144,8 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not stage PG_MULTI_A0 runtime outputs or Obsidian notes.
 - Do not treat PG_QA0 as quality-aware implementation, solver/evaluator evidence, poor-GNSS robustness evidence, paper-ready QA performance evidence, trace-tuned threshold approval, relabeling approval for `LegSA_full_EKF`, or QA1 authorization without human review.
 - Do not stage PG_QA0 runtime outputs or Obsidian notes.
+- Do not treat PAPER0 as final paper-claim authorization, final figure authorization, QA1 authorization, PG performance proof, BY3 yaw claim support, or comprehensive final_v23 superiority support.
+- Do not stage PAPER0 runtime outputs or Obsidian notes.
 
 ## XB1A1 Allowed Boundary
 

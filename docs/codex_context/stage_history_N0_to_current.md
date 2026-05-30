@@ -542,3 +542,21 @@ ready_for_QA1=false
 ready_for_paper_claims=false
 recommended_next_stage=human_review_PG_QA0_then_keep_future_work_or_approve_PG_QA1
 ```
+
+## PAPER0 Mainline Evidence Package And Claim-Boundary Review
+
+PAPER0_MAINLINE_EVIDENCE_PACKAGE_AND_CLAIM_BOUNDARY_REVIEW completed a paper-facing evidence organization stage after PG_QA0. It imported existing BY2, BY3, PG_MULTI_A0, and PG_QA0 evidence only. BY2 is organized as the full-metric main dataset. BY3 is organized as independent position/up generalization with yaw diagnostic-only. PG1-PG4 are organized as severe-GNSS boundary and quality-aware fallback motivation, not performance datasets. PG_QA0 is organized as a design extension, not an implemented contribution.
+
+The stage generated evidence inventory, BY2 main-evidence synthesis, BY3 generalization synthesis, BY2-vs-BY3 cross-dataset synthesis, PG severe-GNSS boundary synthesis, QA0 extension synthesis, paper table drafts, figure recommendations, claim-boundary matrix, journal-positioning notes, missing-work decision, export-clean package, validation reports, and untracked Obsidian notes. It did not run solvers, run evaluators, generate degraded inputs, generate random arrays, implement QA1, retune parameters, alter metrics, fabricate missing figures/tables, or make final paper claims.
+
+Current PAPER0 decision:
+
+```text
+status=PAPER0_evidence_package_complete_ready_for_manuscript_drafting
+paper_mainline=LegSA_full_EKF_with_BY2_BY3_evidence
+qa_role=design_extension_or_future_work
+ready_for_manuscript_drafting=true
+ready_for_QA1=false
+ready_for_paper_claims=false
+recommended_next_stage=PAPER1_MANUSCRIPT_EXPERIMENT_SECTION_DRAFT
+```

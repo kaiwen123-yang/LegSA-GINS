@@ -1,4 +1,4 @@
-# Current State - GEN1 BY2-BY3 Generalization And PG QA0 Design
+# Current State - PAPER0 Mainline Evidence Review
 
 This file records the current verified operational state for the Windows audit workspace. It supersedes stale N8K, N9A, N9B2B1, and N9B-not-started text except where that text is explicitly historical.
 
@@ -7,6 +7,7 @@ This file records the current verified operational state for the Windows audit w
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 - Current BY3/reporting stage: `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`.
 - Current poor-GNSS stage: `PG_QA0_QUALITY_AWARE_FALLBACK_DESIGN_AND_PAPER_MAINLINE_DECISION`.
+- Current paper-facing evidence stage: `PAPER0_MAINLINE_EVIDENCE_PACKAGE_AND_CLAIM_BOUNDARY_REVIEW`.
 - Current operational source of truth for degradation metrics remains `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design source: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code forensic audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -46,6 +47,8 @@ This file records the current verified operational state for the Windows audit w
 - Current PG multi-repeat review root: `<PG_MULTI_REVIEW_ROOT>`.
 - Current PG_MULTI_A0 stage root: `<PG_MULTI_A0_STAGE_ROOT>`.
 - Current PG_QA0 design root: `<PG_QA0_STAGE_ROOT>`.
+- Current paper evidence review root: `<PAPER_EVIDENCE_REVIEW_ROOT>`.
+- Current PAPER0 stage root: `<PAPER0_STAGE_ROOT>`.
 - Current PG2/XB2 receiver source alias: `<PG2_XB2_RECEIVER_ROOT>`.
 - Current PG2/XB2 body/high-level source alias: `<PG2_XB2_BODY_SOURCE>`.
 - Current PG3/XB3 receiver source alias: `<PG3_XB3_RECEIVER_ROOT>`.
@@ -133,6 +136,8 @@ This file records the current verified operational state for the Windows audit w
 - PG_QA0 algorithm identity result: `LegSA_full_EKF` remains the frozen verified mainline for normal/moderate GNSS and BY2/BY3 position-up evidence. `LegSA_QA_Fallback_EKF` is a separate future candidate, design-only, not implemented, not validated, and not a relabeling of `LegSA_full_EKF` or final_v23.
 - PG_QA0 design result: states S0-S6 define normal dual-yaw, degraded dual-yaw caution, yaw unavailable, poor GNSS position downweight, Raw Doppler velocity-aided, IMU+Go2 bridge, and hold/reject behavior. A1 dual-yaw is disabled when relpos-diff baseline geometry is nonphysical. Trace RMSE and final_v23 outputs are forbidden online quality indicators.
 - PG_QA0 paper decision: Option B is recommended for the near-term paper, keeping QA as a design/limitation extension with no QA performance claim. Option C is a later high-tier route only after human-approved QA1 logging, QA2 behavior implementation, and QA3 validation.
+- PAPER0 completed a paper-facing evidence organization and claim-boundary review after PG_QA0. It built evidence inventory, BY2 main-evidence synthesis, BY3 position/up generalization synthesis, BY2-vs-BY3 cross-dataset synthesis, PG severe-GNSS boundary synthesis, QA0 design-extension synthesis, eight paper table drafts, figure recommendations, journal-positioning notes, missing-work decisions, export-clean material, and local Obsidian notes from existing evidence only.
+- PAPER0 decision: the near-term paper can start manuscript drafting without QA1 by using BY2 as the full-metric main dataset, BY3 as independent position/up generalization with diagnostic-only yaw, and PG1-PG4 plus PG_QA0 as severe-GNSS limitation/design-extension material. Final paper claims remain disabled.
 - BY3A1 did not materialize same-case selected feedback because no real BY3 stage1 solver and official EVAL_NAV exist.
 - BY3A1 did not run BY3 solvers, official evaluators, degradation, metrics, or metric figures.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
@@ -164,10 +169,12 @@ GEN1 is the active BY3 reporting decision. The final decision is `GEN1_cross_dat
 
 PG_QA0 is the active poor-GNSS design decision. The final decision is `PG_QA0_design_complete_human_review_before_QA1`: PG_MULTI_A0 remains the evidence import, PG1-PG4 remain severe quality-aware branch candidates, `LegSA_full_EKF` remains frozen mainline, `LegSA_QA_Fallback_EKF` remains design-only, QA1 is not authorized until human review, and paper claims remain disabled.
 
+PAPER0 is the active paper-facing evidence decision. The final decision is `PAPER0_evidence_package_complete_ready_for_manuscript_drafting`: BY2/BY3 evidence is organized for manuscript drafting, PG/QA remains limitation/design extension, QA1 is optional rather than required for the near-term Option B paper, and `ready_for_paper_claims=false`.
+
 ## Next Stage
 
 ```text
-recommended_next_stage=implement_active_fgo_backend_or_reframe_scope
+recommended_next_stage=PAPER1_MANUSCRIPT_EXPERIMENT_SECTION_DRAFT
 recommended_BY3_next_stage=human_review_GEN1_then_decide_BY3D_or_other_dataset
 recommended_poor_GNSS_next_stage=human_review_PG_QA0_then_keep_future_work_or_approve_PG_QA1
 ```
@@ -228,6 +235,8 @@ yaw_degradation_claims=diagnostic_only
 ready_for_BY3_paper_claims=false
 ready_for_representative_validation=false
 ready_for_paper_claims=false
+ready_for_manuscript_drafting=true
+ready_for_QA1=false
 ready_for_N9B2_execution=false
 ready_for_full_N9B_execution=false
 ```
