@@ -69,6 +69,7 @@ The supervisor must prevent phase confusion:
 - BY3B: historical BY3 position/up degradation planning and precheck stage; BY3A8 position/up-with-diagnostic-yaw scope was imported, BY3A7 repaired IMU and BY3A5B A1_dual_diff yaw were locked for future execution, case/seed/provider/command/evaluator/figure/batch plans were created only, and no degraded inputs, random arrays, solvers, evaluators, figures, or paper claims were produced.
 - BY3C: current BY3 position/up degradation execution stage for approved Batch 0 through Batch 3 only; normal parity, deterministic A/B/E_position_std, C_position_noise seed0-9, and D_position_spike seed0-9 completed with official evaluations, same-case feedback, figures, case reviews, and consolidated review. H/yaw-std/mixed/module/full-matrix/LegSA_9F/nonredundant cases were not executed; yaw remains diagnostic-only and paper claims remain false.
 - BY3C1_TO_BY3Y1: current review-only BY3 position/up generalization and yaw diagnostic explanation stage; it audited BY3C Batch0-Batch3 results, built three-scheme BY3 and overlapping BY2-vs-BY3 summaries, generated review figures from existing metrics only, explained BY3 yaw as diagnostic-only from existing BY3A5B-BY3A8 evidence, and ran no solvers/evaluators/degraded-input/random-generation work.
+- GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION: current cross-dataset report and BY3 figure-organization stage; it built BY2/BY3 three-scheme inventories and summaries from existing metrics, generated cross-dataset figures from existing metrics only, created a copy-only BY3 figure summary view, and preserved BY3 yaw as diagnostic-only with `ready_for_paper_claims=false`.
 
 ### 1.2 Planner
 
@@ -139,6 +140,9 @@ Tracked docs must use aliases only:
 - `<BY3C1_REVIEW_PACKAGE_ROOT>`
 - `<BY3Y1_STAGE_ROOT>`
 - `<BY3C1_EXPORT_CLEAN_ROOT>`
+- `<GEN1_STAGE_ROOT>`
+- `<BY3_FIGURE_SUMMARY_ROOT>`
+- `<GEN1_EXPORT_CLEAN_ROOT>`
 
 Actual local absolute paths belong only in ignored `docs/codex_context/DATA_PATHS.local.md`.
 
@@ -164,6 +168,7 @@ The BY3A8 runtime/audit root is represented in tracked docs only by the alias `<
 The BY3B runtime/audit root is represented in tracked docs only by the alias `<BY3B_STAGE_ROOT>`, with planning artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3B_POSITION_UP_DEGRADATION_MATRIX`.
 The BY3C runtime/audit root is represented in tracked docs only by the alias `<BY3C_STAGE_ROOT>`, with executed Batch0-Batch3 artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3C_POSITION_UP_DEGRADATION_EXECUTION`.
 The BY3C1/BY3Y1 review runtime root is represented in tracked docs only by `<BY3C1_STAGE_ROOT>`, with the review package under `<BY3C1_REVIEW_PACKAGE_ROOT>`, yaw diagnostic package under `<BY3Y1_STAGE_ROOT>`, and export-clean package under `<BY3C1_EXPORT_CLEAN_ROOT>`.
+The GEN1 cross-dataset review runtime root is represented in tracked docs only by `<GEN1_STAGE_ROOT>`, with the copy-only BY3 figure organization under `<BY3_FIGURE_SUMMARY_ROOT>` and the export-clean package under `<GEN1_EXPORT_CLEAN_ROOT>`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
 The BY3 Go2 body/high-level source is represented in tracked docs only by `<BY3_GO2_BODY_SOURCE>`.
@@ -278,8 +283,8 @@ Current completed route:
 - N9G1C-E found the active nine-factor FGO backend still unavailable and candidate solver execution still disabled; normal smoke was not run.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3C1_TO_BY3Y1_POSITION_UP_GENERALIZATION_REVIEW_AND_YAW_DIAGNOSTIC_EXPLANATION`; BY3C1 audited BY3C Batch0-Batch3, produced position/up review tables and existing-metric figures, compared overlapping BY2/BY3 families, and completed BY3Y1 yaw diagnostic explanation without new solver/evaluator/degradation/random execution.
-- Recommended BY3 next stage: human review of BY3C1/BY3Y1, then either `BY3D_MIXED_POSITION_UP_PLANNING`, a separate diagnostic-yaw planning stage, or another-dataset planning only if explicitly approved; BY3C1/BY3Y1 does not authorize paper claims, PR #52 merge/tag/closure, or additional yaw/mixed/module/full-matrix execution.
+- Current BY3/reporting stage: `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`; GEN1 built BY2/BY3 metric inventories, canonical family mapping, three-scheme cross-dataset summaries, existing-metric cross-dataset figures, a BY3 figure inventory, and a copy-only BY3 figure organization without solver/evaluator/degradation/random execution.
+- Recommended BY3 next stage: human review of GEN1, then decide `BY3D_MIXED_POSITION_UP_PLANNING`, separate diagnostic-yaw planning, or another-dataset planning only if explicitly approved; GEN1 does not authorize paper claims, PR #52 merge/tag/closure, or additional yaw/mixed/module/full-matrix execution.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
@@ -350,6 +355,9 @@ Allowed now:
 - BY3C may state that Batch 2 and Batch 3 random arrays were generated only for approved C_position_noise and D_position_spike seeds 0..9 with structured hashes and same-seed fairness. BY3C may set `ready_for_BY3D_diagnostic_yaw_or_mixed_planning=true` only as a human-review-gated planning readiness flag; `yaw_claim_scope=diagnostic_only` and `ready_for_paper_claims=false` remain in force.
 - BY3C1/BY3Y1 may state that review integrity passed for 71 BY3 case units and 213 final metric rows, that BY3 position/up behavior is family-dependent, that B downsample is the only overlapping family classified as `generalizes_consistently`, and that normal/A/E/C/D are `same_order_no_clear_advantage` or mixed rather than paper-ready wins.
 - BY3C1/BY3Y1 may state that BY3 yaw is diagnostic-only: prior wrong-source yaw, stale initatt, and IMU bias issues were repaired, but BY3A8 shows A1 observation quality remains the main limitation and selected feedback worsens normal diagnostic yaw slightly versus stage1.
+- GEN1 may state that BY2 and BY3 inventories each contain 213 comparable final metric rows across 71 case units for the three schemes, with BY2 final_v23 rows sourced from the accepted external-baseline review table where needed.
+- GEN1 may state that BY3 already has normal and degradation figure material, that the organized BY3 figure view is copy-only, and that 874 unique nonempty figure files were copied into `<BY3_FIGURE_SUMMARY_ROOT>` while original runtime figures remained untouched.
+- GEN1 may state that BY3 figure classification is partial rather than fully paper-facing, because diagnostic yaw and audit-sanity figures remain separate from position/up-primary review material.
 - N9G2 may be described as the later representative validation stage.
 - N9G3/N9G4 may be described as later full matrix/replot/report stages if applicable.
 - `LegSA_full_EKF` is not accepted as active nine-factor FGO and must not be relabeled as such.
@@ -392,6 +400,7 @@ Forbidden now:
 - treating BY3B planning artifacts as degraded inputs, random arrays, solver/evaluator execution, generated figures, completed BY3 degradation/full-matrix evidence, yaw robustness evidence, paper claims, PR #52 merge/tag/closure authorization, or permission to reuse BY2/normal feedback.
 - treating BY3C Batch0-Batch3 position/up results as yaw robustness evidence, paper-ready performance evidence, final_v23 outperformance evidence, full monolithic BY3 matrix completion, or authorization for H_dual_yaw_noise, E_yaw_std_inflation, mixed, module-disable, LegSA_9F_FGO_EKF, or nonredundant-FGO execution.
 - treating BY3C1/BY3Y1 review tables or diagnostic-yaw figures as new solver/evaluator evidence, paper performance claims, yaw robustness claims, or authorization for BY3D execution without explicit human approval.
+- treating GEN1 cross-dataset reports, organized figure folders, copied figures, or export-clean tables as new solver/evaluator evidence, paper performance claims, BY3 yaw success, final_v23 outperformance, or authorization for BY3D execution without explicit human approval.
 - claiming BY3 full-matrix completion before explicit full-matrix execution approval.
 
 ## 10. Historical N9C0A Decision Lock
@@ -754,4 +763,20 @@ ready_for_BY3D_or_other_dataset_planning=true_after_human_review
 yaw_claim_scope=diagnostic_only
 ready_for_paper_claims=false
 recommended_next_stage=human_review_BY3C1_then_BY3D_mixed_position_up_or_other_dataset_planning
+```
+
+## 28. GEN1 BY2-BY3 Generalization Report And BY3 Figure Organization Lock
+
+GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION is complete as a reporting, review, and copy-only organization stage. It read existing BY2 N9C0D/N9B2R3/N9C2B metrics, existing BY3C metrics, existing BY3C1/BY3Y1 summaries, and existing BY3 figures. It did not run solvers, evaluators, degraded-input generation, random generation, parameter retuning, or paper-claim work.
+
+GEN1 metric inventory passed with 213 BY2 rows and 213 BY3 rows across 71 comparable case units for `LegSA_full_EKF`, `single_antenna_gnss1_status_KF_GINS`, and `final_v23_dual_antenna_EKF`. GEN1 generated cross-dataset tables and metric figures from existing metrics only. BY3 figure inventory found existing normal and degradation figures; GEN1 copied 874 unique nonempty figure files into `<BY3_FIGURE_SUMMARY_ROOT>` as an organized view without moving or deleting originals.
+
+Current decision:
+
+```text
+status=GEN1_cross_dataset_report_and_BY3_figure_organization_complete
+ready_for_next_stage=true_after_human_review
+yaw_claim_scope=diagnostic_only
+ready_for_paper_claims=false
+recommended_next_stage=human_review_GEN1_then_decide_BY3D_or_other_dataset
 ```
