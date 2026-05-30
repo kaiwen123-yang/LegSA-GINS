@@ -465,3 +465,23 @@ yaw_claim_scope=diagnostic_only
 ready_for_paper_claims=false
 recommended_next_stage=human_review_GEN1_then_decide_BY3D_or_other_dataset
 ```
+
+## XB1A0-E Poor-GNSS Bootstrap And XB1A1 Blocker Triage
+
+XB1A0_TO_XB1E completed the first poor-GNSS repeated-experiment bootstrap for XB1 / PG1_20260105_122513. It generated literature criteria, data inventory, GNSS quality profile, kick-event alignment, body IMU from `<XB1_BODY_SOURCE>`, Go2 priors, input/provider reports, figures, case review, Obsidian notes, and export-clean material. XB1 GNSS quality was classified severe, and A1 dual-yaw plus Raw Doppler/provider gates blocked normal solver/evaluator execution.
+
+XB1A1_BLOCKER_TRIAGE_RAW_DOPPLER_A1_YAW_AND_MAINLINE_NORMAL_GATE then repaired the Raw Doppler provider blocker through the accepted RTKLIB/RINEX/helper path using WSL gcc/helper execution. The source-backed provider is schema-valid with 1809 rows. A1 short-baseline dual yaw remained invalid due GNSS quality/geometry, with about 1.95 percent objective valid epochs and nonphysical short-baseline length. `LegSA_full_EKF` and `final_v23_dual_antenna_EKF` normal runs remained blocked/not applicable; `single_antenna_gnss1_status_KF_GINS` completed normal official evaluation as a diagnostic baseline only.
+
+Current XB1A1 decision:
+
+```text
+status=XB1A1_partial_baseline_only_completed
+raw_doppler_provider=XB1A1_raw_doppler_provider_ready
+a1_dual_yaw=XB1A1_A1_dual_yaw_invalid_due_GNSS_quality
+normal_run_status=XB1A1_normal_partial_completed
+quality_aware_branch=XB1A1_quality_aware_branch_recommended
+ready_for_quality_aware_branch_planning=true_after_human_review
+ready_for_XB1_degradation_or_PG2_planning=false
+ready_for_paper_claims=false
+recommended_next_stage=human_review_XB1A1_then_quality_aware_branch_or_PG2_source_review
+```

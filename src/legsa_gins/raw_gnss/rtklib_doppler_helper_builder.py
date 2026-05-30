@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shlex
 import shutil
 import subprocess
 from pathlib import Path
@@ -203,6 +204,66 @@ def _classify_compile_failure(stderr: str, missing: list[str]) -> list[str]:
     return sorted(set(blockers or ["unknown"]))
 
 
+def _wsl_path(path: Path) -> str:
+    path_text = str(path.resolve()).replace("\\", "/")
+    proc = subprocess.run(
+        ["wsl", "wslpath", "-a", path_text],
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if proc.returncode != 0 or not proc.stdout.strip():
+        raise RuntimeError(f"wslpath failed for {path}: {proc.stderr.strip()}")
+    return proc.stdout.strip()
+
+
+def _wsl_gcc_available() -> bool:
+    if os.name != "nt" or not shutil.which("wsl"):
+        return False
+    proc = subprocess.run(
+        ["wsl", "bash", "-lc", "command -v gcc >/dev/null 2>&1"],
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    return proc.returncode == 0
+
+
+def _run_compile(command: list[str], helper_exe: Path, source_copy: Path, helper_source: Path, c_files: list[str]) -> tuple[subprocess.CompletedProcess[str], list[str], str]:
+    if shutil.which(command[0]):
+        proc = subprocess.run(command, text=True, encoding="utf-8", errors="replace", stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
+        return proc, command, "native_gcc"
+    if _wsl_gcc_available():
+        source_copy_wsl = _wsl_path(source_copy)
+        helper_exe_wsl = _wsl_path(helper_exe)
+        helper_source_wsl = _wsl_path(helper_source)
+        c_files_wsl = [_wsl_path(Path(path)) for path in c_files]
+        inner = " ".join(
+            [
+                "gcc",
+                "-O2",
+                "-I",
+                shlex.quote(source_copy_wsl),
+                "-o",
+                shlex.quote(helper_exe_wsl),
+                shlex.quote(helper_source_wsl),
+                *[shlex.quote(path) for path in c_files_wsl],
+                "-lm",
+                "-lpthread",
+            ]
+        )
+        wsl_command = ["wsl", "bash", "-lc", inner]
+        proc = subprocess.run(wsl_command, text=True, encoding="utf-8", errors="replace", stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
+        return proc, wsl_command, "wsl_gcc"
+    raise FileNotFoundError(command[0])
+
+
 def build_rtklib_doppler_helper(rtklib_root: str | Path, build_dir: str | Path | None, output_dir: str | Path) -> dict[str, Any]:
     layout = discover_rtklib_source_layout(rtklib_root)
     out = Path(output_dir)
@@ -253,7 +314,25 @@ def build_rtklib_doppler_helper(rtklib_root: str | Path, build_dir: str | Path |
         "-lm",
         "-lpthread",
     ]
-    proc = subprocess.run(command, text=True, encoding="utf-8", errors="replace", stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
+    try:
+        proc, compile_command, compiler_mode = _run_compile(command, helper_exe, source_copy, helper_source, c_files)
+    except FileNotFoundError:
+        blockers.append("compile_tool_missing")
+        return {
+            **layout,
+            "build_dir_argument": str(build_dir) if build_dir else "",
+            "helper_source_generated": helper_source.exists(),
+            "helper_compile_attempted": True,
+            "helper_compile_status": "failed",
+            "helper_executable_path": "",
+            "helper_uses_rtklib_source": True,
+            "runtime_patch_applied": patches,
+            "compile_command": command,
+            "compile_stdout_tail": "",
+            "compile_stderr_tail": "gcc executable not found",
+            "compiler_mode": "missing",
+            "blocker_reasons": sorted(set(blockers)),
+        }
     success = proc.returncode == 0 and helper_exe.exists()
     if not success:
         blockers.extend(_classify_compile_failure(proc.stderr, layout["missing_source_files"]))
@@ -266,9 +345,10 @@ def build_rtklib_doppler_helper(rtklib_root: str | Path, build_dir: str | Path |
         "helper_executable_path": str(helper_exe) if success else "",
         "helper_uses_rtklib_source": True,
         "runtime_patch_applied": patches,
-        "compile_command": command,
+        "compile_command": compile_command,
         "compile_stdout_tail": _tail(proc.stdout),
         "compile_stderr_tail": _tail(proc.stderr),
+        "compiler_mode": compiler_mode,
         "blocker_reasons": sorted(set(blockers)),
     }
 

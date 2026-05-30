@@ -9,6 +9,9 @@ from __future__ import annotations
 
 import csv
 import math
+import os
+import shlex
+import shutil
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -43,6 +46,37 @@ def _approx_position(source: str | Path | dict[str, Any] | None) -> dict[str, An
 
 def _gdop_like(sat_count: int) -> float:
     return 99.0 if sat_count <= 4 else round(math.sqrt(1.0 / max(1, sat_count - 4)), 6)
+
+
+def _wsl_path(path: Path) -> str:
+    path_text = str(path.resolve()).replace("\\", "/")
+    proc = subprocess.run(
+        ["wsl", "wslpath", "-a", path_text],
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if proc.returncode != 0 or not proc.stdout.strip():
+        raise RuntimeError(f"wslpath failed for {path}: {proc.stderr.strip()}")
+    return proc.stdout.strip()
+
+
+def _should_run_helper_through_wsl(helper: Path) -> bool:
+    return os.name == "nt" and helper.exists() and helper.suffix.lower() != ".exe" and bool(shutil.which("wsl"))
+
+
+def _run_helper(helper: Path, obs: Path, nav: Path, helper_csv: Path) -> tuple[subprocess.CompletedProcess[str], list[str], str]:
+    if _should_run_helper_through_wsl(helper):
+        inner = " ".join(shlex.quote(_wsl_path(path)) for path in [helper, obs, nav, helper_csv])
+        command = ["wsl", "bash", "-lc", inner]
+        proc = subprocess.run(command, text=True, encoding="utf-8", errors="replace", stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False, timeout=180)
+        return proc, command, "wsl_helper"
+    command = [str(helper), str(obs), str(nav), str(helper_csv)]
+    proc = subprocess.run(command, text=True, encoding="utf-8", errors="replace", stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False, timeout=180)
+    return proc, command, "native_helper"
 
 
 def run_rtklib_doppler_velocity_provider(
@@ -102,8 +136,7 @@ def run_rtklib_doppler_velocity_provider(
             "blocker_reasons": sorted(set(blockers)),
         }
 
-    command = [str(helper), str(obs), str(nav), str(helper_csv)]
-    proc = subprocess.run(command, text=True, encoding="utf-8", errors="replace", stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False, timeout=180)
+    proc, command, helper_execution_mode = _run_helper(helper, obs, nav, helper_csv)
     stdout, stderr, returncode = proc.stdout, proc.stderr, proc.returncode
     raw_rows = parse_helper_velocity_csv(helper_csv)
     valid_rows: list[dict[str, Any]] = []
@@ -159,6 +192,7 @@ def run_rtklib_doppler_velocity_provider(
         "helper_stdout_tail": _tail(stdout),
         "helper_stderr_tail": _tail(stderr),
         "helper_returncode": returncode,
+        "helper_execution_mode": helper_execution_mode,
         "helper_raw_csv_path": str(helper_csv),
         "approx_position_source_role": approx["source_role"],
         "external_sp3_path": str(sp3_path or ""),

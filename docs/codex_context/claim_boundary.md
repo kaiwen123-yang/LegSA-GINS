@@ -126,6 +126,15 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not treat BY3A2 Raw Doppler provider materialization or baseline handoff configs as BY3 normal solver/evaluator success, metric evidence, or paper evidence.
 - Do not treat BY3A3 normal-only runtime evidence as complete nine-factor FGO evidence, LegSA_9F_FGO_EKF evidence, or paper performance evidence.
 - Do not treat BY2 text-summary/archive reorganization as new BY2 execution or new performance evidence.
+- Do not treat XB1A1 Raw Doppler provider repair as proof that XB1 has valid dual-antenna yaw or LegSA_full normal evidence.
+- Do not treat the XB1A1 single-baseline normal evaluation as LegSA_full_EKF evidence, final_v23 evidence, poor-GNSS robustness evidence, or paper-ready performance evidence.
+- Do not execute XB1 quality-aware adaptation, degradation, or PG2 follow-up without explicit human approval.
+
+## XB1A1 Allowed Boundary
+
+XB1A1 may state that Raw Doppler provider materialization was repaired for XB1 through the accepted RTKLIB/RINEX/helper chain using WSL gcc/helper execution, and that the resulting provider is schema-valid with 1809 rows. XB1A1 may also state that A1 short-baseline dual yaw remains invalid due GNSS quality/geometry, so `LegSA_full_EKF` and `final_v23_dual_antenna_EKF` normal runs remain blocked/not applicable. The only completed normal solver/evaluator result is the diagnostic `single_antenna_gnss1_status_KF_GINS` baseline.
+
+XB1A1 must keep `ready_for_paper_claims=false`, `ready_for_XB1_degradation_or_PG2_planning=false` unless a later human review explicitly changes route, and `ready_for_quality_aware_branch_planning=true_after_human_review`.
 
 ## Paper Boundary
 
