@@ -33,7 +33,9 @@ Tracked docs must use aliases instead of local absolute paths.
 - `<GEN1_EXPORT_CLEAN_ROOT>`: GEN1 export-clean BY2-BY3 generalization package root under `<BY3_OUTPUT_ROOT>`.
 - `<XB1_OUTPUT_ROOT>`: locked Windows root for XB1 / PG1 poor-GNSS generalization outputs.
 - `<XB1_STAGE_ROOT>`: XB1A0_TO_XB1E poor-GNSS stage output root under `<XB1_OUTPUT_ROOT>`.
+- `<XB1A1_STAGE_ROOT>`: XB1A1 blocker-triage and normal-gate repair stage output root under `<XB1_OUTPUT_ROOT>`.
 - `<XB1_FULL_MATRIX_ROOT>`: XB1 normal-bootstrap runtime root family; current stage used only `XB1A_NORMAL_BOOTSTRAP`, not a degradation matrix.
+- `<XB1A1_NORMAL_GATE_ROOT>`: XB1A1 normal-gate runtime material under `<XB1_FULL_MATRIX_ROOT>`.
 - `<XB1_EXPORT_CLEAN_ROOT>`: XB1 export-clean package root under `<XB1_OUTPUT_ROOT>`.
 - `<BY2_DEGRADATION_ARCHIVE_ROOT>`: copy-only BY2 degradation figure/text archive root.
 - `<BY2_DEGRADATION_TEXT_SUMMARY_ROOT>`: BY2 degradation text-summary root containing the seed0-9 explanation index.
@@ -73,9 +75,9 @@ BY2 degradation text summaries and reorganized figures are represented by `<BY2_
 
 ## XB1 Path Lock
 
-XB1A0_TO_XB1E locked XB1 / PG1 poor-GNSS outputs under `<XB1_OUTPUT_ROOT>`. Runtime reports and quality figures are represented by `<XB1_STAGE_ROOT>`, normal-bootstrap runtime material by `<XB1_FULL_MATRIX_ROOT>/XB1A_NORMAL_BOOTSTRAP`, and export-clean material by `<XB1_EXPORT_CLEAN_ROOT>`.
+XB1A0_TO_XB1E locked XB1 / PG1 poor-GNSS outputs under `<XB1_OUTPUT_ROOT>`. Runtime reports and quality figures are represented by `<XB1_STAGE_ROOT>`, normal-bootstrap runtime material by `<XB1_FULL_MATRIX_ROOT>/XB1A_NORMAL_BOOTSTRAP`, and export-clean material by `<XB1_EXPORT_CLEAN_ROOT>`. XB1A1 blocker-triage and normal-gate repair outputs are represented by `<XB1A1_STAGE_ROOT>` and `<XB1A1_NORMAL_GATE_ROOT>`.
 
-XB1 tracked docs must refer to receiver data through `<XB1_RECEIVER_ROOT>` and body/high-level data through `<XB1_BODY_SOURCE>`. The XB1 receiver `imu-data.csv` is diagnostic only and must not be documented as the robot body IMU source. XB1 normal solver/evaluator execution remains blocked until the A1 yaw and provider gates are reviewed or repaired.
+XB1 tracked docs must refer to receiver data through `<XB1_RECEIVER_ROOT>` and body/high-level data through `<XB1_BODY_SOURCE>`. The XB1 receiver `imu-data.csv` is diagnostic only and must not be documented as the robot body IMU source. After XB1A1, Raw Doppler provider materialization is repaired, but dual-yaw normal solvers remain blocked/not applicable until a valid A1 short-baseline source exists or a later human-approved separate branch changes scope.
 
 ## Local Path File
 

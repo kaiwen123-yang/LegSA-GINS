@@ -70,7 +70,7 @@ Current operational state:
 
 After `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE` and `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`.
 
-XB1 / PG1_20260105_122513 has also completed the first poor-GNSS repeated-experiment bootstrap: literature criteria, inventory, GNSS quality profile, kick-event alignment, body-IMU input generation, Go2 priors, provider gate reports, quality figures, case review, and export-clean material were produced. XB1 GNSS quality is classified severe, A1 short-baseline yaw and Raw Doppler/provider gates blocked normal solver/evaluator execution, and no paper claims or poor-GNSS robustness claims are authorized.
+XB1 / PG1_20260105_122513 has also completed the first poor-GNSS repeated-experiment bootstrap and blocker triage. XB1 GNSS quality is classified severe. Body IMU was generated from `<XB1_BODY_SOURCE>`, and Go2 priors were materialized. XB1A1 repaired Raw Doppler provider materialization through the accepted RTKLIB/RINEX/helper path using WSL gcc/helper execution, but A1 short-baseline dual yaw remains invalid due source geometry/quality. `LegSA_full_EKF` and `final_v23_dual_antenna_EKF` normal runs remain blocked/not applicable, while `single_antenna_gnss1_status_KF_GINS` completed normal official evaluation as a diagnostic baseline only. No degradation, retuning, quality-aware execution, paper claims, or poor-GNSS robustness claims are authorized.
 
 N9E completed with a logging-blocked active nine-factor FGO/legged evidence decision: `complete_nine_factor_FGO_claim=false`.
 
@@ -100,7 +100,7 @@ BY3A4C recovered the historical BY2/N4 yaw-reference repair from git/docs/runtim
 
 Next planned stage:
 
-For BY3, review `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION` before any later mixed position/up planning, diagnostic-yaw planning, or other-dataset planning. For active FGO, implement the active FGO backend or reframe scope before any N9G2 representative validation.
+For BY3, review `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION` before any later mixed position/up planning, diagnostic-yaw planning, or other-dataset planning. For XB1, review `XB1A1_BLOCKER_TRIAGE_RAW_DOPPLER_A1_YAW_AND_MAINLINE_NORMAL_GATE` before deciding whether to plan a separate quality-aware diagnostic branch or inspect PG2 source quality. For active FGO, implement the active FGO backend or reframe scope before any N9G2 representative validation.
 
 The current operational state is maintained in `AGENTS.md`, `PLANS.md`, and `docs/codex_context/current_state.md`. The N9G1C-E decision keeps `complete_nine_factor_FGO_claim=false`, `ready_for_representative_validation=false`, `ready_for_paper_claims=false`, `ready_for_N9B2_execution=false`, and `ready_for_full_N9B_execution=false`.
 The BY3 decision is `GEN1_cross_dataset_report_and_BY3_figure_organization_complete`, setting `ready_for_next_stage=true` only after human review, `yaw_claim_scope=diagnostic_only`, and `ready_for_paper_claims=false`.
