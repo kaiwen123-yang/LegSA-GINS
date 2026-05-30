@@ -70,6 +70,7 @@ The supervisor must prevent phase confusion:
 - BY3C: current BY3 position/up degradation execution stage for approved Batch 0 through Batch 3 only; normal parity, deterministic A/B/E_position_std, C_position_noise seed0-9, and D_position_spike seed0-9 completed with official evaluations, same-case feedback, figures, case reviews, and consolidated review. H/yaw-std/mixed/module/full-matrix/LegSA_9F/nonredundant cases were not executed; yaw remains diagnostic-only and paper claims remain false.
 - BY3C1_TO_BY3Y1: current review-only BY3 position/up generalization and yaw diagnostic explanation stage; it audited BY3C Batch0-Batch3 results, built three-scheme BY3 and overlapping BY2-vs-BY3 summaries, generated review figures from existing metrics only, explained BY3 yaw as diagnostic-only from existing BY3A5B-BY3A8 evidence, and ran no solvers/evaluators/degraded-input/random-generation work.
 - GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION: current cross-dataset report and BY3 figure-organization stage; it built BY2/BY3 three-scheme inventories and summaries from existing metrics, generated cross-dataset figures from existing metrics only, created a copy-only BY3 figure summary view, and preserved BY3 yaw as diagnostic-only with `ready_for_paper_claims=false`.
+- XB1A0_TO_XB1E_POOR_GNSS_GENERALIZATION_CONTEXT_QUALITY_AUDIT_ALIGNMENT_AND_NORMAL_RUN: current first poor-GNSS repeated-experiment stage for engineering alias XB1 / experiment alias PG1_20260105_122513; context, literature criteria, inventory, GNSS quality profile, kick alignment, input/provider gates, export-clean, and review package were created under `<XB1_STAGE_ROOT>`, but normal solver/evaluator execution was blocked by severe GNSS quality/input/provider gates.
 
 ### 1.2 Planner
 
@@ -143,6 +144,12 @@ Tracked docs must use aliases only:
 - `<GEN1_STAGE_ROOT>`
 - `<BY3_FIGURE_SUMMARY_ROOT>`
 - `<GEN1_EXPORT_CLEAN_ROOT>`
+- `<XB1_OUTPUT_ROOT>`
+- `<XB1_STAGE_ROOT>`
+- `<XB1_FULL_MATRIX_ROOT>`
+- `<XB1_EXPORT_CLEAN_ROOT>`
+- `<XB1_RECEIVER_ROOT>`
+- `<XB1_BODY_SOURCE>`
 
 Actual local absolute paths belong only in ignored `docs/codex_context/DATA_PATHS.local.md`.
 
@@ -169,6 +176,7 @@ The BY3B runtime/audit root is represented in tracked docs only by the alias `<B
 The BY3C runtime/audit root is represented in tracked docs only by the alias `<BY3C_STAGE_ROOT>`, with executed Batch0-Batch3 artifacts under `<BY3_FULL_MATRIX_ROOT>/BY3C_POSITION_UP_DEGRADATION_EXECUTION`.
 The BY3C1/BY3Y1 review runtime root is represented in tracked docs only by `<BY3C1_STAGE_ROOT>`, with the review package under `<BY3C1_REVIEW_PACKAGE_ROOT>`, yaw diagnostic package under `<BY3Y1_STAGE_ROOT>`, and export-clean package under `<BY3C1_EXPORT_CLEAN_ROOT>`.
 The GEN1 cross-dataset review runtime root is represented in tracked docs only by `<GEN1_STAGE_ROOT>`, with the copy-only BY3 figure organization under `<BY3_FIGURE_SUMMARY_ROOT>` and the export-clean package under `<GEN1_EXPORT_CLEAN_ROOT>`.
+The XB1 / PG1 poor-GNSS generalization stage is represented in tracked docs only by `<XB1_STAGE_ROOT>`, with normal bootstrap runtime material under `<XB1_FULL_MATRIX_ROOT>/XB1A_NORMAL_BOOTSTRAP`, export-clean material under `<XB1_EXPORT_CLEAN_ROOT>`, receiver data under `<XB1_RECEIVER_ROOT>`, and body/high-level data under `<XB1_BODY_SOURCE>`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
 The BY3 Go2 body/high-level source is represented in tracked docs only by `<BY3_GO2_BODY_SOURCE>`.
@@ -284,7 +292,9 @@ Current completed route:
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 - Current BY3/reporting stage: `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`; GEN1 built BY2/BY3 metric inventories, canonical family mapping, three-scheme cross-dataset summaries, existing-metric cross-dataset figures, a BY3 figure inventory, and a copy-only BY3 figure organization without solver/evaluator/degradation/random execution.
+- Current poor-GNSS stage: `XB1A0_TO_XB1E_POOR_GNSS_GENERALIZATION_CONTEXT_QUALITY_AUDIT_ALIGNMENT_AND_NORMAL_RUN`; XB1 / PG1 is the first of four poor-GNSS repeated experiments. It completed literature criteria, inventory, GNSS quality profile, kick-event alignment, input generation, Go2 priors, quality figures, case review, and export-clean material. It did not run normal solvers/evaluators because A1 short-baseline yaw and Raw Doppler/provider gates did not pass.
 - Recommended BY3 next stage: human review of GEN1, then decide `BY3D_MIXED_POSITION_UP_PLANNING`, separate diagnostic-yaw planning, or another-dataset planning only if explicitly approved; GEN1 does not authorize paper claims, PR #52 merge/tag/closure, or additional yaw/mixed/module/full-matrix execution.
+- Recommended XB1 next stage: human review of XB1 quality/input blockers, then either repair the XB1 provider/toolchain and A1 yaw source gate, plan a separate quality-aware branch, or move to PG2 only after explicit approval. XB1 does not authorize artificial degradation, retuning, paper claims, PR #52 merge/closure/tag, or poor-GNSS robustness claims.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
@@ -779,4 +789,25 @@ ready_for_next_stage=true_after_human_review
 yaw_claim_scope=diagnostic_only
 ready_for_paper_claims=false
 recommended_next_stage=human_review_GEN1_then_decide_BY3D_or_other_dataset
+```
+
+## 29. XB1 Poor-GNSS Generalization Bootstrap Lock
+
+XB1A0_TO_XB1E_POOR_GNSS_GENERALIZATION_CONTEXT_QUALITY_AUDIT_ALIGNMENT_AND_NORMAL_RUN is complete as the first poor-GNSS repeated-experiment bootstrap for XB1 / PG1_20260105_122513. It created context, literature-backed GNSS quality criteria, data inventory, GNSS quality profile, kick-event alignment, input/provider reports, quality figures, case review, Obsidian notes, and export-clean material under `<XB1_STAGE_ROOT>` and `<XB1_EXPORT_CLEAN_ROOT>`.
+
+XB1 uses `<XB1_BODY_SOURCE>` as the robot body/high-level/body-IMU source. Receiver `imu-data.csv` is diagnostic-only. Trace is evaluation-only. A1 dual-diff yaw must come from GNSS1/GNSS2 short-baseline absolute positions with lateral antenna conversion and fixed_1p5 yaw std; status long-baseline `rel_pos_n/e/d` and HDT are forbidden as mainline yaw sources. Initatt yaw must be starttime-aligned. IMU preprocessing must use a pre-motion stationary bias, not a moving segment.
+
+XB1 GNSS quality was classified `severe`: both receivers show PDOP p95 at the 99.99 sentinel, sol_num_sat p05 of 0, large position-accuracy tails, and invalid A1 short-baseline geometry. The A1 short-baseline median length was about 9.14 m with p95 about 51.68 m, while status long-baseline `rel_pos_n/e/d` had median length about 2925.69 m and was rejected. Kick-event alignment passed without trace tuning, with recommended algorithm start about 16.646 s and end about 390.640 s relative to the body-source time zero.
+
+XB1 input/provider generation was partial. The repaired body IMU was generated from `<XB1_BODY_SOURCE>` using pre-motion stationary gyro bias. Go2 attitude, horizontal velocity, and joint priors were materialized. Raw Doppler provider materialization attempted the accepted N5A/N5B-style RTKLIB/RINEX/helper path but failed because the RTKLIB Doppler helper compile tool was unavailable in the current Windows runtime. Normal solvers and official evaluators were not run because `inputs_not_ready_for_normal`, `A1_short_baseline_yaw_gate_blocked`, and `providers_not_ready_for_LegSA_full` gates blocked execution.
+
+Current XB1 decision:
+
+```text
+status=XB1_severe_GNSS_quality_mainline_limited
+normal_run_status=XB1F_failed_before_solver
+ready_for_quality_aware_branch_planning=true_after_human_review
+ready_for_PG2_or_XB1_degradation_planning=false
+ready_for_paper_claims=false
+recommended_next_stage=human_review_XB1_then_repair_provider_or_plan_quality_aware_branch
 ```

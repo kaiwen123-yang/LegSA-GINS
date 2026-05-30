@@ -10,7 +10,7 @@ This file is not a runtime report, algorithm output, paper claim, or place to st
 
 LegSA-GINS is a legged-robot GNSS/INS fusion project with source-backed EKF, Raw Doppler, source-aware weighting, Go2 proprioception, legged FGO candidate factors, no-feedback FGO, and FGO-feedback EKF joint filtering.
 
-Current data focus has expanded to BY3 normal-generalization, position/up degradation gates, and cross-dataset review packaging. BY3A0_TO_BY3E created source inventory, alignment reports, candidate BY3 normal inputs, BY2 degradation text summaries, and a copy-only BY2 figure archive. BY3A1 repaired BY3 input-chain parity where BY2 policy was clear and materialized BY3 Go2 priors. BY3A2 recovered the historical BY2 WSL Raw Doppler pipeline and materialized the BY3 Raw Doppler provider. BY3A3 repaired same-case selected feedback and completed the BY3 normal-only comparison for LegSA_full_EKF, the GNSS1-status single baseline, and final_v23 external baseline. BY3A4A then locked the lateral dual-antenna yaw geometry and seed0-9 memory, but found the BY3 yaw reference policy inconclusive. BY3A4C recovered the historical N4H2D yaw-reference solution from git/docs/runtime evidence. BY3A5 confirmed the old BY3 dual-yaw input was wrong-source but its HDT repair is superseded. BY3A5B repaired the mainline yaw input with A1_dual_diff GNSS1/GNSS2 short-baseline yaw. BY3A6 then validated trace truth/evaluator/base_time, repaired stale first-row initatt for stage1/LegSA, and reran BY3 normal only. BY3A7 confirmed and repaired the BY3 Go2 IMU moving-segment gyro-bias preprocessing bug with a BY3A7-local pre-motion source-bias IMU. BY3A8 budgeted the remaining 4-5 deg dual-yaw error and found it is limited by A1 observation quality. BY3B completed position/up degradation planning with diagnostic yaw only. BY3C then executed only the approved Batch 0 normal parity, Batch 1 A/B/E_position_std deterministic, Batch 2 C_position_noise seeds 0..9, and Batch 3 D_position_spike seeds 0..9. BY3C1/BY3Y1 reviewed those existing results, generated position/up review tables and figures from existing metrics, compared overlapping BY2/BY3 families, and explained BY3 yaw as diagnostic-only. GEN1 then built BY2/BY3 metric inventories, mapping, cross-dataset tables, existing-metric figures, export-clean material, and a copy-only BY3 figure organization; no yaw diagnostic execution, mixed, module-disable, LegSA_9F, nonredundant-FGO, full monolithic BY3 matrix, solver, evaluator, degraded-input, or random-generation work was executed in GEN1, and paper claims remain false.
+Current data focus has expanded to BY3 normal-generalization, position/up degradation gates, cross-dataset review packaging, and the first poor-GNSS repeated-experiment bootstrap. BY3A0_TO_BY3E created source inventory, alignment reports, candidate BY3 normal inputs, BY2 degradation text summaries, and a copy-only BY2 figure archive. BY3A1 repaired BY3 input-chain parity where BY2 policy was clear and materialized BY3 Go2 priors. BY3A2 recovered the historical BY2 WSL Raw Doppler pipeline and materialized the BY3 Raw Doppler provider. BY3A3 repaired same-case selected feedback and completed the BY3 normal-only comparison for LegSA_full_EKF, the GNSS1-status single baseline, and final_v23 external baseline. BY3A4A then locked the lateral dual-antenna yaw geometry and seed0-9 memory, but found the BY3 yaw reference policy inconclusive. BY3A4C recovered the historical N4H2D yaw-reference solution from git/docs/runtime evidence. BY3A5 confirmed the old BY3 dual-yaw input was wrong-source but its HDT repair is superseded. BY3A5B repaired the mainline yaw input with A1_dual_diff GNSS1/GNSS2 short-baseline yaw. BY3A6 then validated trace truth/evaluator/base_time, repaired stale first-row initatt for stage1/LegSA, and reran BY3 normal only. BY3A7 confirmed and repaired the BY3 Go2 IMU moving-segment gyro-bias preprocessing bug with a BY3A7-local pre-motion source-bias IMU. BY3A8 budgeted the remaining 4-5 deg dual-yaw error and found it is limited by A1 observation quality. BY3B completed position/up degradation planning with diagnostic yaw only. BY3C then executed only the approved Batch 0 normal parity, Batch 1 A/B/E_position_std deterministic, Batch 2 C_position_noise seeds 0..9, and Batch 3 D_position_spike seeds 0..9. BY3C1/BY3Y1 reviewed those existing results, generated position/up review tables and figures from existing metrics, compared overlapping BY2/BY3 families, and explained BY3 yaw as diagnostic-only. GEN1 then built BY2/BY3 metric inventories, mapping, cross-dataset tables, existing-metric figures, export-clean material, and a copy-only BY3 figure organization; no yaw diagnostic execution, mixed, module-disable, LegSA_9F, nonredundant-FGO, full monolithic BY3 matrix, solver, evaluator, degraded-input, or random-generation work was executed in GEN1. XB1 / PG1_20260105_122513 then completed poor-GNSS context, quality, inventory, alignment, input/provider, export-clean, and review reports, but normal solver/evaluator execution was blocked by severe GNSS quality/input/provider gates. Paper claims remain false.
 
 ## 2. Global Working Principles
 
@@ -53,6 +53,7 @@ Completed or accepted for current planning:
 - N9E outcome: logging blocked for current `LegSA_full_EKF`; no complete active nine-factor FGO claim.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 - Current BY3/reporting stage: `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`; GEN1 built BY2/BY3 three-scheme inventories and summaries from existing metrics, generated cross-dataset figures from existing metrics only, and created a copy-only BY3 figure organization. Paper claims remain false.
+- Current poor-GNSS stage: `XB1A0_TO_XB1E_POOR_GNSS_GENERALIZATION_CONTEXT_QUALITY_AUDIT_ALIGNMENT_AND_NORMAL_RUN`; XB1 is the first of four poor-GNSS repeated experiments. It completed the quality/audit/bootstrap package, classified GNSS quality as severe, passed kick-event alignment without trace tuning, generated body IMU and Go2 priors, blocked A1 dual-yaw normal input, failed Raw Doppler provider materialization because the helper compile tool was unavailable, and did not run normal solvers or official evaluators.
 - N9F design materialization completed: current evidence requires a new active nine-factor FGO algorithm design before representative runs.
 - N9F6A source-code forensic audit completed from real Windows/WSL source evidence and passed reviewer gate.
 - N9F7 followed Path C only: substantial algorithm design package required; no implementation, solver/evaluator execution, representative run, full matrix, or replot was performed.
@@ -78,6 +79,7 @@ Completed or accepted for current planning:
 Immediate next stages:
 
 - Human review of `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`
+- Human review of `XB1A0_TO_XB1E_POOR_GNSS_GENERALIZATION_CONTEXT_QUALITY_AUDIT_ALIGNMENT_AND_NORMAL_RUN`, then decide whether to repair the XB1 provider/A1 yaw gates, plan a separate quality-aware branch, or move to PG2 only after explicit approval
 - `BY3D_MIXED_POSITION_UP_PLANNING`, separate diagnostic-yaw planning, or other-dataset planning only after explicit human approval; GEN1 does not authorize H_dual_yaw_noise, E_yaw_std_inflation, mixed execution, module-disable, LegSA_9F_FGO_EKF, nonredundant-FGO, or full monolithic BY3 matrix execution
 - `implement_active_fgo_backend_or_reframe_scope`
 - `N9G2_REPRESENTATIVE_VALIDATION` later, only after active backend/provider/factor gaps are fixed and reviewed.
@@ -103,6 +105,10 @@ ready_for_BY3_degradation_matrix_planning_scope=position_up_with_diagnostic_yaw
 ready_for_BY3C_position_up_degradation_execution=complete_batch0_to_batch3
 ready_for_BY3C1_BY3Y1_review=complete
 ready_for_GEN1_BY2_BY3_generalization_report_and_BY3_figure_organization=complete
+ready_for_XB1_quality_audit=complete
+ready_for_XB1_normal_solver=false
+ready_for_XB1_quality_aware_branch_planning=true_after_human_review
+ready_for_PG2_or_XB1_degradation_planning=false
 ready_for_BY3D_or_other_dataset_planning=true_after_human_review
 ready_for_BY3D_diagnostic_yaw_or_mixed_planning=requires_new_human_approval
 ready_for_BY3_solver_evaluator=normal_completed
@@ -135,6 +141,12 @@ Tracked docs must use aliases only:
 - `<GEN1_STAGE_ROOT>`
 - `<BY3_FIGURE_SUMMARY_ROOT>`
 - `<GEN1_EXPORT_CLEAN_ROOT>`
+- `<XB1_OUTPUT_ROOT>`
+- `<XB1_STAGE_ROOT>`
+- `<XB1_FULL_MATRIX_ROOT>`
+- `<XB1_EXPORT_CLEAN_ROOT>`
+- `<XB1_RECEIVER_ROOT>`
+- `<XB1_BODY_SOURCE>`
 
 Actual local absolute paths belong only in ignored `docs/codex_context/DATA_PATHS.local.md`.
 
@@ -160,6 +172,7 @@ BY3B position/up diagnostic-yaw planning outputs belong under `<BY3B_STAGE_ROOT>
 BY3C execution outputs belong under `<BY3C_STAGE_ROOT>` and `<BY3_FULL_MATRIX_ROOT>/BY3C_POSITION_UP_DEGRADATION_EXECUTION`.
 BY3C1/BY3Y1 review outputs belong under `<BY3C1_STAGE_ROOT>`, with the review package under `<BY3C1_REVIEW_PACKAGE_ROOT>`, the yaw diagnostic package under `<BY3Y1_STAGE_ROOT>`, and the export-clean package under `<BY3C1_EXPORT_CLEAN_ROOT>`.
 GEN1 cross-dataset review outputs belong under `<GEN1_STAGE_ROOT>`, with the copy-only BY3 figure organization under `<BY3_FIGURE_SUMMARY_ROOT>` and export-clean material under `<GEN1_EXPORT_CLEAN_ROOT>`.
+XB1 / PG1 poor-GNSS generalization outputs belong under `<XB1_STAGE_ROOT>`, with normal-bootstrap runtime material under `<XB1_FULL_MATRIX_ROOT>/XB1A_NORMAL_BOOTSTRAP`, export-clean material under `<XB1_EXPORT_CLEAN_ROOT>`, receiver data represented by `<XB1_RECEIVER_ROOT>`, and body/high-level data represented by `<XB1_BODY_SOURCE>`.
 BY3 full-matrix placeholders belong under `<BY3_FULL_MATRIX_ROOT>` and do not mean BY3 full matrix was run.
 BY3 receiver source is represented by `<BY3_RECEIVER_ROOT>`.
 BY3 Go2 body/high-level source is represented by `<BY3_GO2_BODY_SOURCE>`.
@@ -533,4 +546,23 @@ ready_for_next_stage=true_after_human_review
 yaw_claim_scope=diagnostic_only
 ready_for_paper_claims=false
 recommended_next_stage=human_review_GEN1_then_decide_BY3D_or_other_dataset
+```
+
+## XB1 Poor-GNSS Generalization Bootstrap
+
+XB1A0_TO_XB1E_POOR_GNSS_GENERALIZATION_CONTEXT_QUALITY_AUDIT_ALIGNMENT_AND_NORMAL_RUN is complete as the first poor-GNSS repeated-experiment bootstrap for XB1 / PG1_20260105_122513. It generated literature-backed quality criteria, receiver/body inventory, GNSS quality profile, kick-event alignment, input/provider reports, quality figures, case review, Obsidian notes, and export-clean material. It did not run artificial degradation, parameter retuning, paper-claim work, or normal solvers/evaluators.
+
+Current XB1 decision:
+
+```text
+status=XB1_severe_GNSS_quality_mainline_limited
+quality_class=severe
+alignment_status=XB1D_alignment_passed
+input_status=XB1E_inputs_ready_providers_partial
+normal_run_status=XB1F_failed_before_solver
+normal_run_blockers=inputs_not_ready_for_normal,A1_short_baseline_yaw_gate_blocked,providers_not_ready_for_LegSA_full
+ready_for_quality_aware_branch_planning=true_after_human_review
+ready_for_PG2_or_XB1_degradation_planning=false
+ready_for_paper_claims=false
+recommended_next_stage=human_review_XB1_then_repair_provider_or_plan_quality_aware_branch
 ```
