@@ -449,3 +449,19 @@ yaw_claim_scope=diagnostic_only
 ready_for_paper_claims=false
 recommended_next_stage=human_review_BY3C1_then_BY3D_mixed_position_up_or_other_dataset_planning
 ```
+
+## GEN1 BY2-BY3 Generalization Report And BY3 Figure Organization
+
+GEN1 reviewed existing BY2 and BY3 metric/figure evidence only. It built BY2 and BY3 metric inventories with 213 comparable rows each across 71 case units, mapped normal/A/B/E/C/D families, produced cross-dataset three-scheme family/case/delta summaries, generated cross-dataset figures from existing metrics only, inventoried existing BY3 figures, and created a copy-only organized BY3 figure summary.
+
+The stage copied 874 unique nonempty BY3 figure files into `<BY3_FIGURE_SUMMARY_ROOT>` while preserving original runtime figures. It also created export-clean tables/reports and local Obsidian notes. BY3 yaw remained diagnostic-only throughout.
+
+Current GEN1 decision:
+
+```text
+status=GEN1_cross_dataset_report_and_BY3_figure_organization_complete
+ready_for_next_stage=true_after_human_review
+yaw_claim_scope=diagnostic_only
+ready_for_paper_claims=false
+recommended_next_stage=human_review_GEN1_then_decide_BY3D_or_other_dataset
+```

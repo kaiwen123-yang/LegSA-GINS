@@ -7,7 +7,7 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 ## Current Stage
 
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
-- Current BY3/reporting stage: `BY3C1_TO_BY3Y1_POSITION_UP_GENERALIZATION_REVIEW_AND_YAW_DIAGNOSTIC_EXPLANATION`.
+- Current BY3/reporting stage: `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`.
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -31,6 +31,9 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 - Current BY3C1 review package root: `<BY3C1_REVIEW_PACKAGE_ROOT>`.
 - Current BY3Y1 yaw diagnostic package root: `<BY3Y1_STAGE_ROOT>`.
 - Current BY3C1 export-clean root: `<BY3C1_EXPORT_CLEAN_ROOT>`.
+- Current GEN1 cross-dataset review root: `<GEN1_STAGE_ROOT>`.
+- Current BY3 figure organization root: `<BY3_FIGURE_SUMMARY_ROOT>`.
+- Current GEN1 export-clean root: `<GEN1_EXPORT_CLEAN_ROOT>`.
 - Current BY3 full-matrix placeholder root: `<BY3_FULL_MATRIX_ROOT>`.
 - Current export-clean design package: `<BY2_N9B2_FULL_MATRIX_ROOT>/N9F_EXPORT_CLEAN_DESIGN_PACKAGE`.
 - Current metrics source: `<N9C0_CONSOLIDATED_PRECHECK_ROOT>/matrix/N9C0_ACTIVE_FINAL_ONLY_METRICS_TABLE`.
@@ -57,6 +60,7 @@ This checkout is the Windows audit workspace, not the default WSL algorithm sour
 - BY3B imported the BY3A8 scope, locked BY3A7 repaired IMU plus A1_dual_diff as future accepted sources, and created position/up-primary degradation plans with diagnostic yaw only. BY3B did not generate degraded inputs, random arrays, solvers, evaluators, figures, or paper claims.
 - BY3C completed the approved Batch0-Batch3 position/up execution subset: normal parity, deterministic A/B/E_position_std, C_position_noise seeds 0..9, and D_position_spike seeds 0..9. It produced 213 final metric rows, figures, case reviews, consolidated review, and final validation; yaw remains diagnostic-only and paper claims remain false.
 - BY3C1/BY3Y1 completed a review-only package over existing BY3C/BY3A8/BY2 N9C0D/N9C2B evidence: BY3 result integrity passed for 71 case units and 213 final metric rows, BY3 three-scheme and BY2-vs-BY3 tables/figures were generated from existing metrics, and BY3 yaw was explained as diagnostic-only. No solvers, evaluators, degraded inputs, random arrays, retuning, or paper claims were run.
+- GEN1 completed a reporting-only cross-dataset review and figure organization over existing BY2/BY3 evidence: BY2 and BY3 inventories each have 213 comparable metric rows across 71 case units, cross-dataset tables and figures were generated from existing metrics only, and 874 unique nonempty BY3 figures were copied into `<BY3_FIGURE_SUMMARY_ROOT>` without moving or deleting originals. No solvers, evaluators, degraded inputs, random arrays, retuning, or paper claims were run.
 - Current active-FGO recommended next stage: `implement_active_fgo_backend_or_reframe_scope`.
 
 ## Current Batch State
@@ -82,6 +86,7 @@ ready_for_BY3_degradation_matrix_planning=true
 ready_for_BY3_degradation_matrix_planning_scope=position_up_with_diagnostic_yaw
 ready_for_BY3C_position_up_degradation_execution=complete_batch0_to_batch3
 ready_for_BY3C1_BY3Y1_review=complete
+ready_for_GEN1_BY2_BY3_generalization_report_and_BY3_figure_organization=complete
 ready_for_BY3D_or_other_dataset_planning=true_after_human_review
 ready_for_BY3D_diagnostic_yaw_or_mixed_planning=true_after_human_review
 ready_for_BY3_solver_evaluator=normal_completed
@@ -147,3 +152,7 @@ BY3C completed only approved Batch0-Batch3 position/up execution. It used BY3A7 
 ## BY3C1/BY3Y1 Position Up Review And Yaw Diagnostic Explanation
 
 BY3C1/BY3Y1 completed a reporting-only review of existing BY3C Batch0-Batch3 metrics, existing BY3A8 yaw-error-budget evidence, and existing BY2 N9C0D/N9C2B comparison material. It produced result-integrity reports, BY3 three-scheme position/up tables, family reviews, BY2-vs-BY3 trend classification, existing-metric figures, case-review packages, an export-clean package, and BY3Y1 yaw diagnostic explanation. B downsample is classified as `generalizes_consistently`; normal, A outage, E position std, C position noise, and D position spike remain same-order or mixed. BY3 yaw remains diagnostic-only because A1 observation quality remains the limiting factor after wrong-source yaw, initatt, and IMU preprocessing repairs. Current decision is `BY3C1_position_up_review_and_yaw_diagnostic_complete`; `ready_for_BY3D_or_other_dataset_planning=true_after_human_review`; `ready_for_paper_claims=false`.
+
+## GEN1 BY2-BY3 Generalization Report And BY3 Figure Organization
+
+GEN1 completed a reporting, review, and copy-only organization package over existing BY2/BY3 metric and figure evidence. It produced metric inventories, canonical mapping, family/case/delta summaries, cross-dataset figures from existing metrics only, BY3 figure inventory, a copy-only organized figure view, export-clean material, and Obsidian notes. Current decision is `GEN1_cross_dataset_report_and_BY3_figure_organization_complete`; `ready_for_next_stage=true_after_human_review`; `yaw_claim_scope=diagnostic_only`; `ready_for_paper_claims=false`.

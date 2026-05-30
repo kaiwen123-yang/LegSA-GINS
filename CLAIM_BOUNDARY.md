@@ -2056,3 +2056,11 @@ Allowed BY3C1/BY3Y1 statements: 71 BY3 case units and 213 final metric rows were
 Allowed BY3Y1 yaw explanation: wrong-source yaw, stale first-row initatt, and BY3 Go2 IMU moving-segment gyro-bias issues were repaired before BY3C; BY3A8 shows A1 observation quality remains the limiting factor, with A1-vs-trace heading RMSE about 24.06 deg and p95 about 31.78 deg; selected feedback worsened normal diagnostic yaw relative to stage1 by about 1.03 deg.
 
 Still forbidden after BY3C1/BY3Y1: paper performance claims, paper yaw claims, final_v23 outperformance claims, BY3 yaw robustness claims, treating review figures as new solver/evaluator evidence, treating BY3C1/BY3Y1 as authorization for BY3D execution, running H_dual_yaw_noise/E_yaw_std/mixed/module/full-matrix/LegSA_9F/nonredundant cases without explicit human approval, or treating PR #52 as merge/closure/tag approved.
+
+## GEN1 BY2-BY3 Generalization Report And BY3 Figure Organization
+
+Allowed GEN1 evidence: BY2 and BY3 metric inventories with 213 rows each across 71 comparable case units, canonical BY2-BY3 family mapping, cross-dataset three-scheme family/case/delta summaries, cross-dataset metric figures generated from existing metrics only, BY3 figure inventory, copy-only BY3 figure organization under `<BY3_FIGURE_SUMMARY_ROOT>`, export-clean reports/tables, and Obsidian notes.
+
+Allowed GEN1 statements: BY3 already has normal and degradation figure material, but figure classification is only partial for paper-facing use; BY3 yaw figures remain diagnostic-only; original BY3 runtime figures were not moved or deleted; 874 unique nonempty BY3 figure files were copied into the organized view; `ready_for_paper_claims=false`.
+
+Still forbidden after GEN1: paper performance claims, paper yaw claims, final_v23 outperformance claims, comprehensive LegSA superiority claims, treating copied or generated figures as new solver/evaluator evidence, treating export-clean tables as paper approval, running BY3D/mixed/yaw/module/full-matrix/LegSA_9F/nonredundant cases without explicit human approval, or treating PR #52 as merge/closure/tag approved.
