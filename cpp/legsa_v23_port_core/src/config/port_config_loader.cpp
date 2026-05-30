@@ -158,6 +158,8 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   const auto kv = readKeyValues(path);
   PortOptions options;
   options.run_label = stringOrDefault(kv, "run_label", "N4H4R2_config_run");
+  options.algorithm_id = stringOrDefault(kv, "algorithm_id", options.algorithm_id);
+  options.qa_fallback_config.algorithm_id = options.algorithm_id;
   options.imu_path = stringOrDefault(kv, "imupath", stringOrDefault(kv, "imu_path", ""));
   options.gnss_path = stringOrDefault(kv, "gnsspath", stringOrDefault(kv, "gnss_path", ""));
   options.clean_input_provenance_label =
@@ -229,6 +231,93 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       boolOrDefault(kv, "no_outperform_final_v23_claim", options.no_outperform_final_v23_claim);
   options.ablation_variant = stringOrDefault(kv, "raw_doppler_diagnostic_variant_label", options.ablation_variant);
   options.ablation_variant = stringOrDefault(kv, "ablation_variant", options.ablation_variant);
+  options.qa_fallback_config.qa_passive_logging_enabled =
+      boolOrDefault(kv, "qa_passive_logging_enabled", options.qa_fallback_config.qa_passive_logging_enabled);
+  options.qa_fallback_config.enable_qa_fallback =
+      boolOrDefault(kv, "enable_qa_fallback", options.qa_fallback_config.enable_qa_fallback);
+  options.qa_fallback_config.qa_active_mode =
+      boolOrDefault(kv, "qa_active_mode", options.qa_fallback_config.qa_active_mode);
+  if (options.algorithm_id == quality_aware::kLegsaQaFallbackEkf) {
+    options.qa_fallback_config.enable_qa_fallback = true;
+    options.qa_fallback_config.qa_active_mode = true;
+    options.qa_fallback_config.qa_passive_logging_enabled = true;
+  }
+  options.qa_fallback_config.expected_a1_baseline_m =
+      scalarOrDefault(kv, "qa_expected_a1_baseline_m", options.qa_fallback_config.expected_a1_baseline_m);
+  options.qa_fallback_config.a1_baseline_tolerance_m =
+      scalarOrDefault(kv, "qa_a1_baseline_tolerance_m", options.qa_fallback_config.a1_baseline_tolerance_m);
+  options.qa_fallback_config.a1_min_valid_ratio =
+      scalarOrDefault(kv, "qa_a1_min_valid_ratio", options.qa_fallback_config.a1_min_valid_ratio);
+  options.qa_fallback_config.a1_yaw_std_degraded_deg =
+      scalarOrDefault(kv, "qa_a1_yaw_std_degraded_deg", options.qa_fallback_config.a1_yaw_std_degraded_deg);
+  options.qa_fallback_config.a1_yaw_std_invalid_deg =
+      scalarOrDefault(kv, "qa_a1_yaw_std_invalid_deg", options.qa_fallback_config.a1_yaw_std_invalid_deg);
+  options.qa_fallback_config.a1_yaw_residual_degraded_deg =
+      scalarOrDefault(kv, "qa_a1_yaw_residual_degraded_deg",
+                      options.qa_fallback_config.a1_yaw_residual_degraded_deg);
+  options.qa_fallback_config.a1_yaw_residual_invalid_deg =
+      scalarOrDefault(kv, "qa_a1_yaw_residual_invalid_deg",
+                      options.qa_fallback_config.a1_yaw_residual_invalid_deg);
+  options.qa_fallback_config.a1_yaw_jump_invalid_deg =
+      scalarOrDefault(kv, "qa_a1_yaw_jump_invalid_deg", options.qa_fallback_config.a1_yaw_jump_invalid_deg);
+  options.qa_fallback_config.gnss_pos_std_h_degraded_m =
+      scalarOrDefault(kv, "qa_gnss_pos_std_h_degraded_m",
+                      options.qa_fallback_config.gnss_pos_std_h_degraded_m);
+  options.qa_fallback_config.gnss_pos_std_u_degraded_m =
+      scalarOrDefault(kv, "qa_gnss_pos_std_u_degraded_m",
+                      options.qa_fallback_config.gnss_pos_std_u_degraded_m);
+  options.qa_fallback_config.gnss_pos_std_h_invalid_m =
+      scalarOrDefault(kv, "qa_gnss_pos_std_h_invalid_m", options.qa_fallback_config.gnss_pos_std_h_invalid_m);
+  options.qa_fallback_config.gnss_pos_std_u_invalid_m =
+      scalarOrDefault(kv, "qa_gnss_pos_std_u_invalid_m", options.qa_fallback_config.gnss_pos_std_u_invalid_m);
+  options.qa_fallback_config.raw_doppler_min_count =
+      scalarOrDefault(kv, "qa_raw_doppler_min_count", options.qa_fallback_config.raw_doppler_min_count);
+  options.qa_fallback_config.recovery_required_consecutive_a1 =
+      static_cast<int>(scalarOrDefault(kv,
+                                       "qa_recovery_required_consecutive_a1",
+                                       static_cast<double>(options.qa_fallback_config.recovery_required_consecutive_a1)));
+  options.qa_fallback_config.recovery_yaw_residual_gate_deg =
+      scalarOrDefault(kv, "qa_recovery_yaw_residual_gate_deg",
+                      options.qa_fallback_config.recovery_yaw_residual_gate_deg);
+  options.qa_fallback_config.recovery_yaw_jump_gate_deg =
+      scalarOrDefault(kv, "qa_recovery_yaw_jump_gate_deg", options.qa_fallback_config.recovery_yaw_jump_gate_deg);
+  options.qa_fallback_config.recovery_initial_yaw_r_scale =
+      scalarOrDefault(kv, "qa_recovery_initial_yaw_r_scale",
+                      options.qa_fallback_config.recovery_initial_yaw_r_scale);
+  options.qa_fallback_config.s1_yaw_r_scale =
+      scalarOrDefault(kv, "qa_s1_yaw_r_scale", options.qa_fallback_config.s1_yaw_r_scale);
+  options.qa_fallback_config.s3_gnss_pos_r_scale =
+      scalarOrDefault(kv, "qa_s3_gnss_pos_r_scale", options.qa_fallback_config.s3_gnss_pos_r_scale);
+  options.qa_fallback_config.s4_gnss_pos_r_scale =
+      scalarOrDefault(kv, "qa_s4_gnss_pos_r_scale", options.qa_fallback_config.s4_gnss_pos_r_scale);
+  options.qa_fallback_config.a1_relpos_diff_valid_default =
+      boolOrDefault(kv, "qa_a1_relpos_diff_valid_default",
+                    options.qa_fallback_config.a1_relpos_diff_valid_default);
+  options.qa_fallback_config.a1_baseline_m_default =
+      scalarOrDefault(kv, "qa_a1_baseline_m_default", options.qa_fallback_config.a1_baseline_m_default);
+  options.qa_fallback_config.a1_baseline_default_available =
+      boolOrDefault(kv, "qa_a1_baseline_default_available",
+                    options.qa_fallback_config.a1_baseline_default_available);
+  options.qa_fallback_config.a1_valid_ratio_default =
+      scalarOrDefault(kv, "qa_a1_valid_ratio_default", options.qa_fallback_config.a1_valid_ratio_default);
+  options.qa_fallback_config.a1_valid_ratio_default_available =
+      boolOrDefault(kv, "qa_a1_valid_ratio_default_available",
+                    options.qa_fallback_config.a1_valid_ratio_default_available);
+  options.qa_fallback_config.recovery_max_yaw_correction_deg =
+      scalarOrDefault(kv, "qa_recovery_max_yaw_correction_deg",
+                      options.qa_fallback_config.recovery_max_yaw_correction_deg);
+  options.qa_fallback_config.a1_quality_source =
+      stringOrDefault(kv, "qa_a1_quality_source", options.qa_fallback_config.a1_quality_source);
+  options.qa_fallback_layer_present =
+      options.qa_fallback_config.qa_passive_logging_enabled ||
+      options.qa_fallback_config.enable_qa_fallback ||
+      options.qa_fallback_config.qa_active_mode ||
+      options.algorithm_id == quality_aware::kLegsaQaFallbackEkf;
+  options.qa_fallback_active =
+      options.qa_fallback_config.enable_qa_fallback ||
+      options.qa_fallback_config.qa_active_mode ||
+      options.algorithm_id == quality_aware::kLegsaQaFallbackEkf;
+  options.qa_passive_logging_enabled = options.qa_fallback_config.qa_passive_logging_enabled;
   // 中文说明：N7C6 joint factor 默认关闭；开启时只复用 roll/pitch 2D 与 horizontal velocity 2D update。
   options.enable_go2_proprioceptive_joint_factor =
       boolOrDefault(kv,
