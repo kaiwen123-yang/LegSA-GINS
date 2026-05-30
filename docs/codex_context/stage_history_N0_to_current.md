@@ -433,3 +433,19 @@ yaw_claim_scope=diagnostic_only
 ready_for_paper_claims=false
 recommended_next_stage=human_review_BY3C_then_BY3D_DIAGNOSTIC_YAW_OR_MIXED_PLANNING
 ```
+
+## BY3C1/BY3Y1 Position Up Review And Yaw Diagnostic Explanation
+
+BY3C1/BY3Y1 reviewed existing BY3C Batch0-Batch3 evidence only. It audited result integrity, built BY3 three-scheme position/up tables, compared overlapping BY2/BY3 families using active BY2 N9C0D/N9C2B material, generated review figures from existing metrics only, wrote family and case-review packages, produced export-clean summaries, and explained BY3 yaw as diagnostic-only from BY3A5B-BY3A8 evidence.
+
+The stage did not run solvers, evaluators, degraded-input generation, random generation, parameter retuning, trace/final_v23 solver input, PR merge/closure/tag actions, or paper-claim work. Result integrity passed for 71 BY3 case units and 213 final metric rows. BY3C1 classified B downsample as `generalizes_consistently`; normal, A outage, E position std, C position noise, and D position spike remained same-order or mixed. BY3Y1 preserved the yaw diagnostic boundary: wrong-source yaw, stale initatt, and moving-segment IMU bias had been repaired, while A1 observation quality remained the main limitation.
+
+Current BY3C1/BY3Y1 decision:
+
+```text
+status=BY3C1_position_up_review_and_yaw_diagnostic_complete
+ready_for_BY3D_or_other_dataset_planning=true_after_human_review
+yaw_claim_scope=diagnostic_only
+ready_for_paper_claims=false
+recommended_next_stage=human_review_BY3C1_then_BY3D_mixed_position_up_or_other_dataset_planning
+```
