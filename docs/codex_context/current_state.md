@@ -1,4 +1,4 @@
-# Current State - GEN1 BY2-BY3 Generalization And XB1A1 Poor-GNSS Blocker Triage
+# Current State - GEN1 BY2-BY3 Generalization And XB1A2 Poor-GNSS A1 Reaudit
 
 This file records the current verified operational state for the Windows audit workspace. It supersedes stale N8K, N9A, N9B2B1, and N9B-not-started text except where that text is explicitly historical.
 
@@ -6,7 +6,7 @@ This file records the current verified operational state for the Windows audit w
 
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 - Current BY3/reporting stage: `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`.
-- Current poor-GNSS stage: `XB1A1_BLOCKER_TRIAGE_RAW_DOPPLER_A1_YAW_AND_MAINLINE_NORMAL_GATE`.
+- Current poor-GNSS stage: `XB1A2_A1_DUAL_DIFF_RELPOS_DIFFERENCE_REAUDIT_AND_NORMAL_RERUN`.
 - Current operational source of truth for degradation metrics remains `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design source: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code forensic audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -36,8 +36,10 @@ This file records the current verified operational state for the Windows audit w
 - Current GEN1 export-clean root: `<GEN1_EXPORT_CLEAN_ROOT>`.
 - Current XB1 poor-GNSS stage root: `<XB1_STAGE_ROOT>`.
 - Current XB1A1 blocker-triage stage root: `<XB1A1_STAGE_ROOT>`.
+- Current XB1A2 A1 relpos-difference reaudit root: `<XB1A2_STAGE_ROOT>`.
 - Current XB1 normal-bootstrap runtime root: `<XB1_FULL_MATRIX_ROOT>/XB1A_NORMAL_BOOTSTRAP`.
 - Current XB1A1 normal-gate runtime root: `<XB1A1_NORMAL_GATE_ROOT>`.
+- Current XB1A2 relpos-difference repair runtime root: `<XB1A2_RELPOS_DIFF_REPAIR_ROOT>`.
 - Current XB1 export-clean root: `<XB1_EXPORT_CLEAN_ROOT>`.
 - Current XB1 receiver source alias: `<XB1_RECEIVER_ROOT>`.
 - Current XB1 body/high-level source alias: `<XB1_BODY_SOURCE>`.
@@ -110,6 +112,9 @@ This file records the current verified operational state for the Windows audit w
 - XB1A1 repaired the Raw Doppler provider blocker as an environment/toolchain issue. The accepted RTKLIB/RINEX/helper path now runs through WSL gcc/helper execution when native Windows gcc is unavailable. The XB1 Raw Doppler factor provider is schema-valid with 1809 rows and did not substitute GNSS receiver velocity, NAV-PVT velocity, trace, final_v23 output, or LegSA output.
 - XB1A1 re-audited A1 short-baseline yaw. The A1 gate remains blocked by GNSS quality/geometry: objective valid epochs are about 1.95 percent, and baseline length statistics are nonphysical for the robot antennas with median about 9.14 m, p95 about 51.68 m, and max about 120.50 m.
 - XB1A1 algorithm applicability is partial. `LegSA_full_EKF` remains blocked because forcing it without valid A1 dual yaw would change algorithm identity. `final_v23_dual_antenna_EKF` is not applicable without valid dual-yaw input. `single_antenna_gnss1_status_KF_GINS` completed normal official evaluation as a diagnostic baseline only.
+- XB1A2 suspends/supersedes XB1A1's A1 source-provenance conclusion because XB1A1 did not audit the BY2/process_data-compatible status `rel_pos_gnss2-rel_pos_gnss1` dual-difference path.
+- XB1A2 recovered two A1 implementation families: BY2 status relpos-difference and BY3A5B absolute-position short-baseline repair. Both were audited for XB1, and neither passed the physical baseline gate.
+- XB1A2 relpos-difference audit result: 356 rows, 7 physical-band epochs, valid ratio about 1.97 percent, median length about 9.18 m, p95 about 50.96 m, and max about 131.70 m. The absolute-position candidate also remains nonphysical. No repaired dual-yaw input was generated and no dual-yaw normal rerun was forced.
 - BY3A1 did not materialize same-case selected feedback because no real BY3 stage1 solver and official EVAL_NAV exist.
 - BY3A1 did not run BY3 solvers, official evaluators, degradation, metrics, or metric figures.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
@@ -139,14 +144,14 @@ BY3A3 is a normal-only selected-feedback and comparison execution stage. Its nor
 
 GEN1 is the active BY3 reporting decision. The final decision is `GEN1_cross_dataset_report_and_BY3_figure_organization_complete`: BY2 and BY3 inventories each have 213 comparable metric rows across 71 case units, cross-dataset review tables and figures were generated from existing metrics only, BY3 figures were organized copy-only, BY3 yaw remains diagnostic-only, and paper claims remain disabled.
 
-XB1A1 is the active poor-GNSS blocker-triage decision. The final decision is `XB1A1_partial_baseline_only_completed`: Raw Doppler provider materialization is repaired, A1 dual yaw remains invalid, LegSA_full_EKF and final_v23 dual-yaw normal runs remain blocked/not applicable, the GNSS1-status single baseline completed normal official evaluation only, quality-aware branch planning is recommended after human review, and paper claims remain disabled.
+XB1A2 is the active poor-GNSS A1 correction decision. The final decision is `XB1A2_no_valid_A1_source_quality_aware_recommended`: Raw Doppler provider materialization remains repaired from XB1A1, the BY2 status relpos-difference and BY3A5B absolute-position candidates are both nonphysical for XB1, no repaired dual-yaw input was generated, LegSA_full_EKF and final_v23 dual-yaw normal runs remain blocked/not applicable, quality-aware branch planning is recommended after human review, and paper claims remain disabled.
 
 ## Next Stage
 
 ```text
 recommended_next_stage=implement_active_fgo_backend_or_reframe_scope
 recommended_BY3_next_stage=human_review_GEN1_then_decide_BY3D_or_other_dataset
-recommended_XB1_next_stage=human_review_XB1A1_then_quality_aware_branch_or_PG2_source_review
+recommended_XB1_next_stage=human_review_XB1A2_then_quality_aware_branch_or_PG2_source_review
 ```
 
 Planned sequence after human review:
@@ -177,7 +182,8 @@ ready_for_GEN1_BY2_BY3_generalization_report_and_BY3_figure_organization=complet
 ready_for_XB1_quality_audit=complete
 ready_for_XB1_raw_doppler_provider=true
 ready_for_XB1_dual_yaw=false
-ready_for_XB1_normal_solver=single_baseline_only_completed
+ready_for_XB1_a1_relpos_diff=audited_invalid
+ready_for_XB1_normal_solver=dual_yaw_blocked_single_baseline_historical_only
 ready_for_XB1_quality_aware_branch_planning=true_after_human_review
 ready_for_PG2_or_XB1_degradation_planning=false
 ready_for_BY3D_or_other_dataset_planning=true_after_human_review

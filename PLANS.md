@@ -595,3 +595,30 @@ ready_for_XB1_degradation_or_PG2_planning=false
 ready_for_paper_claims=false
 recommended_next_stage=human_review_XB1A1_then_quality_aware_branch_or_PG2_source_review
 ```
+
+## XB1A2 A1 Relpos-Difference Reaudit
+
+XB1A2_A1_DUAL_DIFF_RELPOS_DIFFERENCE_REAUDIT_AND_NORMAL_RERUN is complete as a correction stage after XB1A1. It suspends the XB1A1 A1 source-provenance conclusion because XB1A1 used the absolute-position A1 audit path and did not audit the BY2/process_data-compatible status rel_pos dual-difference path.
+
+Recovered implementation evidence now distinguishes two families:
+
+- BY2/process_data-compatible status yaw: interpolate GNSS2 status to GNSS1 time, compute `rel_pos_gnss2 - rel_pos_gnss1`, then `yaw_baseline=-atan2(rel_e,rel_n)`, `yaw_ned=90-yaw_body`, and fixed_1p5 yaw_std.
+- BY3A5B repair: use GNSS1/GNSS2 absolute-position short baseline projected to local ENU because BY3 status rel_pos was rejected as a long-base vector.
+
+XB1A2 audited both families for XB1. The BY2 relpos-difference candidate remains nonphysical with 356 rows, 7 physical-band epochs, valid epoch ratio about 0.0197, median length about 9.18 m, p95 about 50.96 m, and max about 131.70 m. The absolute-position candidate also remains nonphysical with median about 9.14 m and p95 about 51.70 m. Single rel_pos direct remains rejected as a long RTK base-vector source, and HDT remains diagnostic-only.
+
+Current XB1A2 decision:
+
+```text
+status=XB1A2_no_valid_A1_source_quality_aware_recommended
+xb1a1_a1_source_provenance=suspended_or_superseded
+by2_status_relpos_diff=XB1A2_relpos_diff_invalid
+absolute_position_candidate=nonphysical
+repaired_dual_input=XB1A2_repaired_dual_input_blocked
+normal_run_status=XB1A2_normal_blocked
+quality_aware_branch=quality_aware_recommended_due_no_valid_A1
+ready_for_quality_aware_branch_planning=true_after_human_review
+ready_for_XB1_degradation_or_PG2_planning=false
+ready_for_paper_claims=false
+recommended_next_stage=human_review_XB1A2_then_quality_aware_branch_or_PG2_source_review
+```

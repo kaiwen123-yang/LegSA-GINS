@@ -466,11 +466,13 @@ ready_for_paper_claims=false
 recommended_next_stage=human_review_GEN1_then_decide_BY3D_or_other_dataset
 ```
 
-## XB1A0-E Poor-GNSS Bootstrap And XB1A1 Blocker Triage
+## XB1A0-E Poor-GNSS Bootstrap, XB1A1 Blocker Triage, And XB1A2 A1 Reaudit
 
 XB1A0_TO_XB1E completed the first poor-GNSS repeated-experiment bootstrap for XB1 / PG1_20260105_122513. It generated literature criteria, data inventory, GNSS quality profile, kick-event alignment, body IMU from `<XB1_BODY_SOURCE>`, Go2 priors, input/provider reports, figures, case review, Obsidian notes, and export-clean material. XB1 GNSS quality was classified severe, and A1 dual-yaw plus Raw Doppler/provider gates blocked normal solver/evaluator execution.
 
 XB1A1_BLOCKER_TRIAGE_RAW_DOPPLER_A1_YAW_AND_MAINLINE_NORMAL_GATE then repaired the Raw Doppler provider blocker through the accepted RTKLIB/RINEX/helper path using WSL gcc/helper execution. The source-backed provider is schema-valid with 1809 rows. A1 short-baseline dual yaw remained invalid due GNSS quality/geometry, with about 1.95 percent objective valid epochs and nonphysical short-baseline length. `LegSA_full_EKF` and `final_v23_dual_antenna_EKF` normal runs remained blocked/not applicable; `single_antenna_gnss1_status_KF_GINS` completed normal official evaluation as a diagnostic baseline only.
+
+XB1A2_A1_DUAL_DIFF_RELPOS_DIFFERENCE_REAUDIT_AND_NORMAL_RERUN then corrected the A1 source-provenance issue. XB1A1 had not audited the BY2/process_data-compatible status `rel_pos_gnss2-rel_pos_gnss1` dual-difference path. XB1A2 recovered that BY2 status path and the BY3A5B absolute-position repair path, audited both for XB1, and found both nonphysical. The BY2 relpos-difference candidate had 356 rows, 7 physical-band epochs, valid ratio about 1.97 percent, median length about 9.18 m, p95 about 50.96 m, and max about 131.70 m. No repaired dual-yaw input was generated, and no dual-yaw normal rerun was forced.
 
 Current XB1A1 decision:
 
@@ -484,4 +486,18 @@ ready_for_quality_aware_branch_planning=true_after_human_review
 ready_for_XB1_degradation_or_PG2_planning=false
 ready_for_paper_claims=false
 recommended_next_stage=human_review_XB1A1_then_quality_aware_branch_or_PG2_source_review
+```
+
+Current XB1A2 decision:
+
+```text
+status=XB1A2_no_valid_A1_source_quality_aware_recommended
+by2_status_relpos_diff=XB1A2_relpos_diff_invalid
+absolute_position_candidate=nonphysical
+normal_run_status=XB1A2_normal_blocked
+quality_aware_branch=quality_aware_recommended_due_no_valid_A1
+ready_for_quality_aware_branch_planning=true_after_human_review
+ready_for_XB1_degradation_or_PG2_planning=false
+ready_for_paper_claims=false
+recommended_next_stage=human_review_XB1A2_then_quality_aware_branch_or_PG2_source_review
 ```
