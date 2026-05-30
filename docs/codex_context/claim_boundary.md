@@ -78,6 +78,9 @@ LegSA-GINS claims must track what the audits actually prove.
 - BY3B may state that position/up degradation planning/precheck is complete with accepted-source lock, case matrix, seed plan, dependency plan, dry-run command templates, evaluator/metric policy, figure/case-review plan, and batch plan.
 - BY3B may state that 118 case-seed units are planned, including 75 position/up-primary units and 43 diagnostic-yaw units, with 311 future solver rows if later human-approved.
 - BY3B may set `ready_for_BY3C_position_up_degradation_execution=true` only as human-review-gated planning readiness; `yaw_claim_scope=diagnostic_only` and `ready_for_paper_claims=false` remain mandatory.
+- PG_MULTI_A0 may state that PG1/XB1 was imported from XB1A2, PG2/XB2 through PG4/XB4 receiver roots were registered, and the PG2/XB2 through PG4/XB4 body/high-level source files are locked by alias and parseable.
+- PG_MULTI_A0 may state that GNSS quality profiles, A1 status-relpos dual-difference audits, Raw Doppler/provider feasibility reviews, body/alignment feasibility reviews, and runnability classifications were generated from source files only.
+- PG_MULTI_A0 may state that all four poor-GNSS repeats are currently `quality_aware_branch_candidate`; this is planning guidance only, not an implementation, solver, evaluator, degradation, retuning, or paper-claim result.
 
 ## Not Allowed Current Claims
 
@@ -129,6 +132,10 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not treat XB1A1 Raw Doppler provider repair as proof that XB1 has valid dual-antenna yaw or LegSA_full normal evidence.
 - Do not treat the XB1A1 single-baseline normal evaluation as LegSA_full_EKF evidence, final_v23 evidence, poor-GNSS robustness evidence, or paper-ready performance evidence.
 - Do not execute XB1 quality-aware adaptation, degradation, or PG2 follow-up without explicit human approval.
+- Do not treat PG_MULTI_A0 as frozen dual-yaw mainline run authorization, quality-aware implementation authorization, degradation authorization, random-array authorization, retuning authorization, or paper-claim evidence.
+- Do not use PG_MULTI_A0 A1-invalid decisions unless status relpos dual difference was audited first; do not declare A1 invalid from single status rel_pos, long-relpos, HDT, or absolute-LLH-only evidence.
+- Do not treat receiver `imu-data.csv` as PG body IMU; only the locked PG body/high-level source aliases may serve that role.
+- Do not stage PG_MULTI_A0 runtime outputs or Obsidian notes.
 
 ## XB1A1 Allowed Boundary
 

@@ -39,6 +39,8 @@ Tracked docs must use aliases instead of local absolute paths.
 - `<XB1A1_NORMAL_GATE_ROOT>`: XB1A1 normal-gate runtime material under `<XB1_FULL_MATRIX_ROOT>`.
 - `<XB1A2_RELPOS_DIFF_REPAIR_ROOT>`: XB1A2 relpos-difference repair runtime material under `<XB1_FULL_MATRIX_ROOT>`.
 - `<XB1_EXPORT_CLEAN_ROOT>`: XB1 export-clean package root under `<XB1_OUTPUT_ROOT>`.
+- `<PG_MULTI_REVIEW_ROOT>`: locked Windows root for PG multi-repeat poor-GNSS review outputs.
+- `<PG_MULTI_A0_STAGE_ROOT>`: PG_MULTI_A0 review-only stage output root under `<PG_MULTI_REVIEW_ROOT>`.
 - `<BY2_DEGRADATION_ARCHIVE_ROOT>`: copy-only BY2 degradation figure/text archive root.
 - `<BY2_DEGRADATION_TEXT_SUMMARY_ROOT>`: BY2 degradation text-summary root containing the seed0-9 explanation index.
 
@@ -58,6 +60,8 @@ Tracked docs must use aliases instead of local absolute paths.
 - `<XB1_BODY_SOURCE>`: XB1 robot body/high-level `xb1.txt` source and body-IMU source.
 - `<XB1_TRACE_TRUTH>`: XB1 trace reference, evaluation-only.
 - `<XB1_FIXPOSITION_IMU_DATA>`: XB1 receiver IMU diagnostics only, not body IMU.
+- `<PG2_XB2_RECEIVER_ROOT>`, `<PG3_XB3_RECEIVER_ROOT>`, `<PG4_XB4_RECEIVER_ROOT>`: PG2/PG3/PG4 poor-GNSS Fixposition receiver roots.
+- `<PG2_XB2_BODY_SOURCE>`, `<PG3_XB3_BODY_SOURCE>`, `<PG4_XB4_BODY_SOURCE>`: user-locked PG2/PG3/PG4 body/high-level sources and body-IMU sources.
 
 ## N9B2 Path Lock
 
@@ -80,6 +84,12 @@ BY2 degradation text summaries and reorganized figures are represented by `<BY2_
 XB1A0_TO_XB1E locked XB1 / PG1 poor-GNSS outputs under `<XB1_OUTPUT_ROOT>`. Runtime reports and quality figures are represented by `<XB1_STAGE_ROOT>`, normal-bootstrap runtime material by `<XB1_FULL_MATRIX_ROOT>/XB1A_NORMAL_BOOTSTRAP`, and export-clean material by `<XB1_EXPORT_CLEAN_ROOT>`. XB1A1 blocker-triage and normal-gate repair outputs are represented by `<XB1A1_STAGE_ROOT>` and `<XB1A1_NORMAL_GATE_ROOT>`. XB1A2 A1 relpos-difference re-audit outputs are represented by `<XB1A2_STAGE_ROOT>` and `<XB1A2_RELPOS_DIFF_REPAIR_ROOT>`.
 
 XB1 tracked docs must refer to receiver data through `<XB1_RECEIVER_ROOT>` and body/high-level data through `<XB1_BODY_SOURCE>`. The XB1 receiver `imu-data.csv` is diagnostic only and must not be documented as the robot body IMU source. After XB1A2, Raw Doppler provider materialization is repaired, but dual-yaw normal solvers remain blocked/not applicable because both the BY2 status relpos-difference candidate and the BY3A5B absolute-position candidate are nonphysical for XB1. A valid A1 source or a later human-approved separate branch is required before dual-yaw runs.
+
+## PG Multi-Repeat Poor-GNSS Path Lock
+
+PG_MULTI_A0 outputs are represented in tracked docs by `<PG_MULTI_A0_STAGE_ROOT>` under `<PG_MULTI_REVIEW_ROOT>`. PG2/PG3/PG4 tracked docs must refer to receiver data and body/high-level data only through the `PG*_XB*` aliases. The PG2/PG3/PG4 receiver `imu-data.csv` files are diagnostic only and must not be documented as body IMU sources.
+
+PG_MULTI_A0 classified PG1-PG4 as quality-aware branch candidates because all available relpos-diff A1 audits are invalid/nonphysical. This path lock does not authorize solver/evaluator execution, frozen dual-yaw mainline normal runs, quality-aware execution, degradation, retuning, or paper claims.
 
 ## Local Path File
 

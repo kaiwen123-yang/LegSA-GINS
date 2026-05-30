@@ -1,4 +1,4 @@
-# Current State - GEN1 BY2-BY3 Generalization And XB1A2 Poor-GNSS A1 Reaudit
+# Current State - GEN1 BY2-BY3 Generalization And PG Multi-Repeat Poor-GNSS Review
 
 This file records the current verified operational state for the Windows audit workspace. It supersedes stale N8K, N9A, N9B2B1, and N9B-not-started text except where that text is explicitly historical.
 
@@ -6,7 +6,7 @@ This file records the current verified operational state for the Windows audit w
 
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 - Current BY3/reporting stage: `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`.
-- Current poor-GNSS stage: `XB1A2_A1_DUAL_DIFF_RELPOS_DIFFERENCE_REAUDIT_AND_NORMAL_RERUN`.
+- Current poor-GNSS stage: `PG_MULTI_A0_POOR_GNSS_REPEATED_DATASET_SOURCE_REVIEW_AND_RUNNABILITY_CLASSIFICATION_WITH_LOCKED_XB2_XB3_XB4_BODY_PATHS`.
 - Current operational source of truth for degradation metrics remains `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current active nine-factor FGO design source: `<BY2_N9B2_WINDOWS_ROOT>/N9F0_TO_N9F2_ACTIVE_NINE_FACTOR_FGO_LEGGED_DESIGN_MATERIALIZATION_AND_CONTEXT_SYNC`.
 - Current source-code forensic audit and N9F7 design package: `<BY2_N9B2_WINDOWS_ROOT>/N9F6A_TO_N9F7_CODEBASE_FORENSIC_AUDIT_AND_ACTIVE_FGO_LEGGED_COMPLETION`.
@@ -43,6 +43,14 @@ This file records the current verified operational state for the Windows audit w
 - Current XB1 export-clean root: `<XB1_EXPORT_CLEAN_ROOT>`.
 - Current XB1 receiver source alias: `<XB1_RECEIVER_ROOT>`.
 - Current XB1 body/high-level source alias: `<XB1_BODY_SOURCE>`.
+- Current PG multi-repeat review root: `<PG_MULTI_REVIEW_ROOT>`.
+- Current PG_MULTI_A0 stage root: `<PG_MULTI_A0_STAGE_ROOT>`.
+- Current PG2/XB2 receiver source alias: `<PG2_XB2_RECEIVER_ROOT>`.
+- Current PG2/XB2 body/high-level source alias: `<PG2_XB2_BODY_SOURCE>`.
+- Current PG3/XB3 receiver source alias: `<PG3_XB3_RECEIVER_ROOT>`.
+- Current PG3/XB3 body/high-level source alias: `<PG3_XB3_BODY_SOURCE>`.
+- Current PG4/XB4 receiver source alias: `<PG4_XB4_RECEIVER_ROOT>`.
+- Current PG4/XB4 body/high-level source alias: `<PG4_XB4_BODY_SOURCE>`.
 - Current BY3 full-matrix placeholder root: `<BY3_FULL_MATRIX_ROOT>`.
 - Current BY3 receiver source alias: `<BY3_RECEIVER_ROOT>`.
 - Current BY3 Go2 body/high-level source alias: `<BY3_GO2_BODY_SOURCE>`.
@@ -115,6 +123,11 @@ This file records the current verified operational state for the Windows audit w
 - XB1A2 suspends/supersedes XB1A1's A1 source-provenance conclusion because XB1A1 did not audit the BY2/process_data-compatible status `rel_pos_gnss2-rel_pos_gnss1` dual-difference path.
 - XB1A2 recovered two A1 implementation families: BY2 status relpos-difference and BY3A5B absolute-position short-baseline repair. Both were audited for XB1, and neither passed the physical baseline gate.
 - XB1A2 relpos-difference audit result: 356 rows, 7 physical-band epochs, valid ratio about 1.97 percent, median length about 9.18 m, p95 about 50.96 m, and max about 131.70 m. The absolute-position candidate also remains nonphysical. No repaired dual-yaw input was generated and no dual-yaw normal rerun was forced.
+- PG_MULTI_A0 completed a review-only source/runnability classification for PG1/XB1 through PG4/XB4. It imported PG1 from XB1A2, registered PG2/PG3/PG4 receiver roots and user-locked body/high-level sources through aliases, parsed the PG2/PG3/PG4 body logs, generated GNSS quality profiles, audited Raw Doppler provider feasibility, and audited BY2-compatible status relpos-difference A1 availability for all repeats.
+- PG_MULTI_A0 body lock result: PG2, PG3, and PG4 body/high-level logs are parseable and overlap receiver time ranges. Receiver `imu-data.csv` remains receiver diagnostic only and was not used as body IMU.
+- PG_MULTI_A0 A1 result: PG2/PG3/PG4 `gnss2_minus_gnss1` relpos-diff candidates all have zero physical-band epochs. Median lengths are about 14.27 m for PG2, 14.84 m for PG3, and 36.63 m for PG4; all are nonphysical for the robot antenna baseline.
+- PG_MULTI_A0 provider result: PG1 Raw Doppler provider feasibility is imported-ready from XB1A1; PG2/PG3/PG4 have the required raw/correction/status files and are likely-ready for the accepted RTKLIB/RINEX/helper path, but no full provider generation was run in PG_MULTI_A0.
+- PG_MULTI_A0 classification result: PG1-PG4 are all `quality_aware_branch_candidate` with position-only fallback as diagnostic only. Frozen dual-yaw mainline normal execution is not recommended for any repeat.
 - BY3A1 did not materialize same-case selected feedback because no real BY3 stage1 solver and official EVAL_NAV exist.
 - BY3A1 did not run BY3 solvers, official evaluators, degradation, metrics, or metric figures.
 - `LegSA_full_EKF` remains the current verified EKF/feedback algorithm.
@@ -144,14 +157,14 @@ BY3A3 is a normal-only selected-feedback and comparison execution stage. Its nor
 
 GEN1 is the active BY3 reporting decision. The final decision is `GEN1_cross_dataset_report_and_BY3_figure_organization_complete`: BY2 and BY3 inventories each have 213 comparable metric rows across 71 case units, cross-dataset review tables and figures were generated from existing metrics only, BY3 figures were organized copy-only, BY3 yaw remains diagnostic-only, and paper claims remain disabled.
 
-XB1A2 is the active poor-GNSS A1 correction decision. The final decision is `XB1A2_no_valid_A1_source_quality_aware_recommended`: Raw Doppler provider materialization remains repaired from XB1A1, the BY2 status relpos-difference and BY3A5B absolute-position candidates are both nonphysical for XB1, no repaired dual-yaw input was generated, LegSA_full_EKF and final_v23 dual-yaw normal runs remain blocked/not applicable, quality-aware branch planning is recommended after human review, and paper claims remain disabled.
+PG_MULTI_A0 is the active poor-GNSS multi-repeat decision. The final decision is `PG_MULTI_A0_all_repeats_severe_quality_aware_branch_recommended`: PG1/XB1 remains imported from XB1A2, PG2/PG3/PG4 receiver and body/high-level paths are registered through aliases, all PG1-PG4 A1 relpos-diff audits are invalid/nonphysical, no frozen dual-yaw mainline normal run is recommended, quality-aware branch planning may be considered only after human review, and paper claims remain disabled.
 
 ## Next Stage
 
 ```text
 recommended_next_stage=implement_active_fgo_backend_or_reframe_scope
 recommended_BY3_next_stage=human_review_GEN1_then_decide_BY3D_or_other_dataset
-recommended_XB1_next_stage=human_review_XB1A2_then_quality_aware_branch_or_PG2_source_review
+recommended_poor_GNSS_next_stage=human_review_PG_MULTI_A0_then_quality_aware_branch_or_position_only_diagnostic_or_stop
 ```
 
 Planned sequence after human review:
@@ -185,7 +198,14 @@ ready_for_XB1_dual_yaw=false
 ready_for_XB1_a1_relpos_diff=audited_invalid
 ready_for_XB1_normal_solver=dual_yaw_blocked_single_baseline_historical_only
 ready_for_XB1_quality_aware_branch_planning=true_after_human_review
-ready_for_PG2_or_XB1_degradation_planning=false
+ready_for_PG_MULTI_A0_review=complete
+ready_for_PG2_PG3_PG4_receiver_registration=complete
+ready_for_PG2_PG3_PG4_body_lock=complete
+ready_for_PG2_PG3_PG4_a1_relpos_diff=audited_invalid
+ready_for_PG_frozen_dual_yaw_mainline_normal=false
+ready_for_PG_quality_aware_branch_planning=true_after_human_review
+ready_for_PG_position_only_fallback_planning=diagnostic_only_after_human_review
+ready_for_PG_degradation_planning=false
 ready_for_BY3D_or_other_dataset_planning=true_after_human_review
 ready_for_BY3D_diagnostic_yaw_or_mixed_planning=requires_new_human_approval
 ready_for_BY3_solver_evaluator=normal_completed
