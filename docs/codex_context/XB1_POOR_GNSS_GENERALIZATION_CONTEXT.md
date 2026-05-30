@@ -123,8 +123,20 @@ ready_for_paper_claims=false
 recommended_next_stage=human_review_PG_MULTI_A0_then_quality_aware_branch_or_position_only_diagnostic_or_stop
 ```
 
+PG_QA0 follow-on decision:
+
+```text
+status=PG_QA0_design_complete_human_review_before_QA1
+legsa_full_ekf_status=frozen_verified_mainline
+legsa_qa_fallback_ekf_status=design_only_not_implemented_not_validated
+paper_mainline_recommendation=Option_B_design_extension_now
+ready_for_QA1=false
+ready_for_paper_claims=false
+recommended_next_stage=human_review_PG_QA0_then_keep_future_work_or_approve_PG_QA1
+```
+
 ## Claim Boundary
 
-Allowed: describe the quality profile, alignment result, source-role policy, input/provider blockers, XB1A2 relpos-difference re-audit, and quality-aware branch planning need.
+Allowed: describe the quality profile, alignment result, source-role policy, input/provider blockers, XB1A2 relpos-difference re-audit, PG_MULTI_A0 multi-repeat source review, and PG_QA0 quality-aware fallback design need.
 
-Forbidden: paper claims, poor-GNSS robustness claims, final_v23 outperformance claims, artificial degradation, parameter retuning, trace-tuned thresholds, receiver IMU as body IMU, single-relpos/long-relpos/HDT yaw fallback, output-only correction, forcing dual-yaw normal runs without valid A1, treating absent normal figures as real result figures, PR #52 merge/closure/tag, or running PG follow-up solver/degradation/adaptation work without explicit human approval.
+Forbidden: paper claims, poor-GNSS robustness claims, final_v23 outperformance claims, artificial degradation, parameter retuning, trace-tuned thresholds, receiver IMU as body IMU, single-relpos/long-relpos/HDT yaw fallback, output-only correction, forcing dual-yaw normal runs without valid A1, treating absent normal figures as real result figures, PR #52 merge/closure/tag, relabeling `LegSA_full_EKF`, or running PG follow-up solver/degradation/adaptation/QA1 work without explicit human approval.

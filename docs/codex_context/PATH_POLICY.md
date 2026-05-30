@@ -41,6 +41,7 @@ Tracked docs must use aliases instead of local absolute paths.
 - `<XB1_EXPORT_CLEAN_ROOT>`: XB1 export-clean package root under `<XB1_OUTPUT_ROOT>`.
 - `<PG_MULTI_REVIEW_ROOT>`: locked Windows root for PG multi-repeat poor-GNSS review outputs.
 - `<PG_MULTI_A0_STAGE_ROOT>`: PG_MULTI_A0 review-only stage output root under `<PG_MULTI_REVIEW_ROOT>`.
+- `<PG_QA0_STAGE_ROOT>`: PG_QA0 quality-aware fallback design package root under `<PG_MULTI_REVIEW_ROOT>`.
 - `<BY2_DEGRADATION_ARCHIVE_ROOT>`: copy-only BY2 degradation figure/text archive root.
 - `<BY2_DEGRADATION_TEXT_SUMMARY_ROOT>`: BY2 degradation text-summary root containing the seed0-9 explanation index.
 
@@ -87,9 +88,11 @@ XB1 tracked docs must refer to receiver data through `<XB1_RECEIVER_ROOT>` and b
 
 ## PG Multi-Repeat Poor-GNSS Path Lock
 
-PG_MULTI_A0 outputs are represented in tracked docs by `<PG_MULTI_A0_STAGE_ROOT>` under `<PG_MULTI_REVIEW_ROOT>`. PG2/PG3/PG4 tracked docs must refer to receiver data and body/high-level data only through the `PG*_XB*` aliases. The PG2/PG3/PG4 receiver `imu-data.csv` files are diagnostic only and must not be documented as body IMU sources.
+PG_MULTI_A0 outputs are represented in tracked docs by `<PG_MULTI_A0_STAGE_ROOT>` under `<PG_MULTI_REVIEW_ROOT>`. PG_QA0 design outputs are represented by `<PG_QA0_STAGE_ROOT>` under `<PG_MULTI_REVIEW_ROOT>`. PG2/PG3/PG4 tracked docs must refer to receiver data and body/high-level data only through the `PG*_XB*` aliases. The PG2/PG3/PG4 receiver `imu-data.csv` files are diagnostic only and must not be documented as body IMU sources.
 
 PG_MULTI_A0 classified PG1-PG4 as quality-aware branch candidates because all available relpos-diff A1 audits are invalid/nonphysical. This path lock does not authorize solver/evaluator execution, frozen dual-yaw mainline normal runs, quality-aware execution, degradation, retuning, or paper claims.
+
+PG_QA0 is design-only. It does not authorize implementation, solver/evaluator execution, degraded-input generation, random-array generation, retuning, or paper claims. Export-clean QA0 material must use aliases only and must not contain local absolute paths.
 
 ## Local Path File
 

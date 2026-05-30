@@ -36,6 +36,7 @@ Copy this template to `DATA_PATHS.local.md` for local machine use. Do not commit
 <XB1_EXPORT_CLEAN_ROOT>=
 <PG_MULTI_REVIEW_ROOT>=
 <PG_MULTI_A0_STAGE_ROOT>=
+<PG_QA0_STAGE_ROOT>=
 <PG2_XB2_RECEIVER_ROOT>=
 <PG2_XB2_BODY_SOURCE>=
 <PG3_XB3_RECEIVER_ROOT>=
@@ -127,6 +128,6 @@ Copy this template to `DATA_PATHS.local.md` for local machine use. Do not commit
 - Future BY2/N9B outputs use the `BY2_N9B2_*` aliases.
 - BY3 generalization outputs use the `BY3_*` aliases, including `<BY3A4A_STAGE_ROOT>` for the lateral yaw repair memory-lock stage, `<BY3A4C_STAGE_ROOT>` for the git-history yaw-reference reconstruction stage, `<BY3A5B_STAGE_ROOT>` for the A1 dual-diff yaw-input repair stage, `<BY3A6_STAGE_ROOT>` for the trace-truth/initatt/gate forensic stage, `<BY3A7_STAGE_ROOT>` for the A1 yaw dynamic-quality / IMU gate repair stage, `<BY3A8_STAGE_ROOT>` for the yaw error-budget safe-repair stage, `<BY3B_STAGE_ROOT>` for position/up degradation planning with diagnostic yaw, and `<BY3C_STAGE_ROOT>` for approved Batch0-Batch3 position/up degradation execution.
 - XB1 poor-GNSS generalization outputs use `<XB1_OUTPUT_ROOT>`, `<XB1_STAGE_ROOT>`, `<XB1A1_STAGE_ROOT>`, `<XB1A2_STAGE_ROOT>`, `<XB1_FULL_MATRIX_ROOT>`, `<XB1A1_NORMAL_GATE_ROOT>`, `<XB1A2_RELPOS_DIFF_REPAIR_ROOT>`, and `<XB1_EXPORT_CLEAN_ROOT>`. XB1 receiver/body sources use `<XB1_RECEIVER_ROOT>` and `<XB1_BODY_SOURCE>`.
-- PG multi-repeat poor-GNSS review outputs use `<PG_MULTI_REVIEW_ROOT>` and `<PG_MULTI_A0_STAGE_ROOT>`. PG2/PG3/PG4 receiver/body sources use only their `PG*_XB*` aliases in tracked docs.
+- PG multi-repeat poor-GNSS review outputs use `<PG_MULTI_REVIEW_ROOT>`, `<PG_MULTI_A0_STAGE_ROOT>`, and `<PG_QA0_STAGE_ROOT>`. PG2/PG3/PG4 receiver/body sources use only their `PG*_XB*` aliases in tracked docs.
 - BY2 degradation reporting/archive outputs use `<BY2_DEGRADATION_ARCHIVE_ROOT>` and text-summary outputs use `<BY2_DEGRADATION_TEXT_SUMMARY_ROOT>`.
 - Do not use local paths in claim text or committed scripts unless the user explicitly approves.

@@ -81,6 +81,9 @@ LegSA-GINS claims must track what the audits actually prove.
 - PG_MULTI_A0 may state that PG1/XB1 was imported from XB1A2, PG2/XB2 through PG4/XB4 receiver roots were registered, and the PG2/XB2 through PG4/XB4 body/high-level source files are locked by alias and parseable.
 - PG_MULTI_A0 may state that GNSS quality profiles, A1 status-relpos dual-difference audits, Raw Doppler/provider feasibility reviews, body/alignment feasibility reviews, and runnability classifications were generated from source files only.
 - PG_MULTI_A0 may state that all four poor-GNSS repeats are currently `quality_aware_branch_candidate`; this is planning guidance only, not an implementation, solver, evaluator, degradation, retuning, or paper-claim result.
+- PG_QA0 may state that BY2/BY3 position-up generalization remains the main proven line, BY3 yaw remains diagnostic-only, and PG1-PG4 severe GNSS data motivate a future quality-aware fallback branch.
+- PG_QA0 may state that `LegSA_QA_Fallback_EKF` is a separate design-only future candidate, not implemented, not validated, and not a relabeling of `LegSA_full_EKF` or final_v23.
+- PG_QA0 may state that Option B is recommended for the near-term paper with QA as a design/limitation extension and no QA performance claim; Option C requires later human-approved QA1/QA2/QA3 implementation and validation.
 
 ## Not Allowed Current Claims
 
@@ -136,6 +139,8 @@ LegSA-GINS claims must track what the audits actually prove.
 - Do not use PG_MULTI_A0 A1-invalid decisions unless status relpos dual difference was audited first; do not declare A1 invalid from single status rel_pos, long-relpos, HDT, or absolute-LLH-only evidence.
 - Do not treat receiver `imu-data.csv` as PG body IMU; only the locked PG body/high-level source aliases may serve that role.
 - Do not stage PG_MULTI_A0 runtime outputs or Obsidian notes.
+- Do not treat PG_QA0 as quality-aware implementation, solver/evaluator evidence, poor-GNSS robustness evidence, paper-ready QA performance evidence, trace-tuned threshold approval, relabeling approval for `LegSA_full_EKF`, or QA1 authorization without human review.
+- Do not stage PG_QA0 runtime outputs or Obsidian notes.
 
 ## XB1A1 Allowed Boundary
 
