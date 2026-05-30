@@ -120,6 +120,8 @@ N9G2 representative validation is blocked until provider/factor and active FGO b
 
 BY3C executed only the human-approved position/up-primary Batch0-Batch3 subset with diagnostic yaw. BY3 yaw input remains A1_dual_diff short baseline, stale first-row initatt was repaired in BY3A6, BY3A7 repaired a BY3-local IMU preprocessing bias bug without changing yaw gates or tuning parameters, and BY3A8 found the remaining yaw error is limited by A1 observation quality with no safe additional repair. BY3A3/BY3A4A/BY3A5/BY3A5B/BY3A6 yaw metrics remain historical bad-input, invalid-reference, or pre-BY3A7 evidence and must not support paper claims or final_v23 outperformance. BY3C does not authorize H_dual_yaw_noise, E_yaw_std_inflation, mixed, module-disable, LegSA_9F_FGO_EKF, nonredundant-FGO, or full monolithic BY3 matrix execution.
 
+XB1A2 is the current poor-GNSS correction boundary. It suspends/supersedes XB1A1's A1 source-provenance conclusion, audits the BY2/process_data-compatible status `rel_pos_gnss2-rel_pos_gnss1` dual-difference path and the BY3A5B absolute-position repair path, and finds both nonphysical for XB1. No repaired dual-yaw input was generated, no dual-yaw normal rerun was forced, and quality-aware diagnostic branch planning is recommended only after human review. Do not use single status rel_pos direct, long-relpos, HDT, trace, final_v23 output, or solver output as mainline yaw.
+
 ## Path Boundary
 
 Tracked docs use aliases only. Actual local paths belong only in ignored `docs/codex_context/DATA_PATHS.local.md`. Runtime roots remain untracked.

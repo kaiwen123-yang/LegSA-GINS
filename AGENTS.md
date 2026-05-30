@@ -71,7 +71,8 @@ The supervisor must prevent phase confusion:
 - BY3C1_TO_BY3Y1: current review-only BY3 position/up generalization and yaw diagnostic explanation stage; it audited BY3C Batch0-Batch3 results, built three-scheme BY3 and overlapping BY2-vs-BY3 summaries, generated review figures from existing metrics only, explained BY3 yaw as diagnostic-only from existing BY3A5B-BY3A8 evidence, and ran no solvers/evaluators/degraded-input/random-generation work.
 - GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION: current cross-dataset report and BY3 figure-organization stage; it built BY2/BY3 three-scheme inventories and summaries from existing metrics, generated cross-dataset figures from existing metrics only, created a copy-only BY3 figure summary view, and preserved BY3 yaw as diagnostic-only with `ready_for_paper_claims=false`.
 - XB1A0_TO_XB1E_POOR_GNSS_GENERALIZATION_CONTEXT_QUALITY_AUDIT_ALIGNMENT_AND_NORMAL_RUN: completed first poor-GNSS repeated-experiment bootstrap for engineering alias XB1 / experiment alias PG1_20260105_122513; context, literature criteria, inventory, GNSS quality profile, kick alignment, input/provider gates, export-clean, and review package were created under `<XB1_STAGE_ROOT>`, but normal solver/evaluator execution was blocked by severe GNSS quality/input/provider gates.
-- XB1A1_BLOCKER_TRIAGE_RAW_DOPPLER_A1_YAW_AND_MAINLINE_NORMAL_GATE: current XB1 blocker-triage stage; Raw Doppler provider materialization was repaired through the accepted RTKLIB/RINEX/helper path using the WSL gcc/helper bridge, A1 short-baseline dual yaw remained invalid due GNSS quality/geometry, LegSA_full_EKF and final_v23 dual-yaw normal runs remained blocked/not applicable, and only the GNSS1-status single baseline completed normal official evaluation. No degradation, retuning, quality-aware execution, or paper claim was performed.
+- XB1A1_BLOCKER_TRIAGE_RAW_DOPPLER_A1_YAW_AND_MAINLINE_NORMAL_GATE: historical XB1 blocker-triage stage; Raw Doppler provider materialization was repaired through the accepted RTKLIB/RINEX/helper path using the WSL gcc/helper bridge, A1 short-baseline dual yaw was reported invalid, LegSA_full_EKF and final_v23 dual-yaw normal runs remained blocked/not applicable, and only the GNSS1-status single baseline completed normal official evaluation. No degradation, retuning, quality-aware execution, or paper claim was performed.
+- XB1A2_A1_DUAL_DIFF_RELPOS_DIFFERENCE_REAUDIT_AND_NORMAL_RERUN: current XB1 correction stage; it suspends/supersedes XB1A1's A1 source-provenance conclusion, recovers both the BY2/process_data-compatible status `rel_pos_gnss2-rel_pos_gnss1` path and the BY3A5B absolute-position repair path, audits both for XB1, and finds no valid A1 source. The accepted BY2 rel_pos-difference candidate remains nonphysical for XB1 with about 1.97 percent physical-band epochs, median length about 9.18 m, and p95 about 50.96 m. Dual-yaw normal remains blocked; quality-aware diagnostic branch planning is recommended after human review. No degradation, retuning, quality-aware execution, dual-yaw solver forcing, or paper claim was performed.
 
 ### 1.2 Planner
 
@@ -148,8 +149,10 @@ Tracked docs must use aliases only:
 - `<XB1_OUTPUT_ROOT>`
 - `<XB1_STAGE_ROOT>`
 - `<XB1A1_STAGE_ROOT>`
+- `<XB1A2_STAGE_ROOT>`
 - `<XB1_FULL_MATRIX_ROOT>`
 - `<XB1A1_NORMAL_GATE_ROOT>`
+- `<XB1A2_RELPOS_DIFF_REPAIR_ROOT>`
 - `<XB1_EXPORT_CLEAN_ROOT>`
 - `<XB1_RECEIVER_ROOT>`
 - `<XB1_BODY_SOURCE>`
@@ -181,6 +184,7 @@ The BY3C1/BY3Y1 review runtime root is represented in tracked docs only by `<BY3
 The GEN1 cross-dataset review runtime root is represented in tracked docs only by `<GEN1_STAGE_ROOT>`, with the copy-only BY3 figure organization under `<BY3_FIGURE_SUMMARY_ROOT>` and the export-clean package under `<GEN1_EXPORT_CLEAN_ROOT>`.
 The XB1 / PG1 poor-GNSS generalization bootstrap is represented in tracked docs only by `<XB1_STAGE_ROOT>`, with normal bootstrap runtime material under `<XB1_FULL_MATRIX_ROOT>/XB1A_NORMAL_BOOTSTRAP`, export-clean material under `<XB1_EXPORT_CLEAN_ROOT>`, receiver data under `<XB1_RECEIVER_ROOT>`, and body/high-level data under `<XB1_BODY_SOURCE>`.
 The XB1A1 blocker-triage and normal-gate repair stage is represented in tracked docs only by `<XB1A1_STAGE_ROOT>`, with its normal-gate runtime material under `<XB1A1_NORMAL_GATE_ROOT>`.
+The XB1A2 rel_pos-difference A1 re-audit stage is represented in tracked docs only by `<XB1A2_STAGE_ROOT>`, with its relpos-diff repair runtime material under `<XB1A2_RELPOS_DIFF_REPAIR_ROOT>`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
 The BY3 Go2 body/high-level source is represented in tracked docs only by `<BY3_GO2_BODY_SOURCE>`.
@@ -200,6 +204,8 @@ Never: solver input, tuning source, algorithm estimate, feedback correction sour
 Role: source observations, GNSS observation quality, yaw observation, Raw Doppler source diagnostics.
 
 Never: algorithm estimate, trajectory estimate, direct metric source.
+
+A1 dual-yaw invalid conclusions must audit the actual dual-difference construction before rejection. For BY2/process_data-compatible status yaw this means auditing `rel_pos_gnss2 - rel_pos_gnss1` after GNSS2 interpolation to GNSS1 time; a single status `rel_pos_n/e/d` row may be a long RTK base vector and must not be used directly as antenna heading. BY3A5B's accepted BY3 repair used GNSS1/GNSS2 absolute-position short baseline because BY3 status rel_pos was rejected as a long-base vector. XB1A2 audited both families for XB1 and found both nonphysical, so no dual-yaw fallback is authorized.
 
 ### 4.3 `by2.txt`
 
@@ -296,9 +302,9 @@ Current completed route:
 - Current operational source of truth: `N9C0_GLOBAL_STAGED_N9B2_CONSOLIDATION_PRECHECK`.
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 - Current BY3/reporting stage: `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`; GEN1 built BY2/BY3 metric inventories, canonical family mapping, three-scheme cross-dataset summaries, existing-metric cross-dataset figures, a BY3 figure inventory, and a copy-only BY3 figure organization without solver/evaluator/degradation/random execution.
-- Current poor-GNSS stage: `XB1A1_BLOCKER_TRIAGE_RAW_DOPPLER_A1_YAW_AND_MAINLINE_NORMAL_GATE`; XB1 / PG1 is the first of four poor-GNSS repeated experiments. XB1A0-E completed literature criteria, inventory, severe GNSS quality profile, kick-event alignment, input generation, Go2 priors, quality figures, case review, and export-clean material. XB1A1 repaired Raw Doppler provider materialization through the WSL gcc/helper bridge, but A1 short-baseline yaw remained invalid; therefore LegSA_full_EKF and final_v23 dual-yaw normal runs stayed blocked/not applicable and only the GNSS1-status single baseline completed normal official evaluation.
+- Current poor-GNSS stage: `XB1A2_A1_DUAL_DIFF_RELPOS_DIFFERENCE_REAUDIT_AND_NORMAL_RERUN`; XB1 / PG1 is the first of four poor-GNSS repeated experiments. XB1A0-E completed literature criteria, inventory, severe GNSS quality profile, kick-event alignment, input generation, Go2 priors, quality figures, case review, and export-clean material. XB1A1 repaired Raw Doppler provider materialization through the WSL gcc/helper bridge. XB1A2 corrected the A1 provenance question: BY2 status rel_pos-difference and BY3A5B absolute-position short-baseline paths were both audited for XB1, neither passed the physical baseline gate, so LegSA_full_EKF and final_v23 dual-yaw normal runs remain blocked/not applicable.
 - Recommended BY3 next stage: human review of GEN1, then decide `BY3D_MIXED_POSITION_UP_PLANNING`, separate diagnostic-yaw planning, or another-dataset planning only if explicitly approved; GEN1 does not authorize paper claims, PR #52 merge/tag/closure, or additional yaw/mixed/module/full-matrix execution.
-- Recommended XB1 next stage: human review of XB1A1, then decide whether to plan a separate quality-aware diagnostic branch or inspect PG2 source quality. XB1A1 does not authorize artificial degradation, retuning, quality-aware execution, paper claims, PR #52 merge/closure/tag, or poor-GNSS robustness claims.
+- Recommended XB1 next stage: human review of XB1A2, then decide whether to plan a separate quality-aware diagnostic branch or inspect PG2 source quality. XB1A2 does not authorize artificial degradation, retuning, quality-aware execution, dual-yaw solver forcing, paper claims, PR #52 merge/closure/tag, or poor-GNSS robustness claims.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
 
 No full monolithic N9B2 was run. Do not run more N9B2 execution unless the human defines a new follow-up. N9C1 consolidated figure generation was ready after N9C0, but N9F evidence review now requires human review of the LegSA active nine-factor FGO implementation plan before representative active nine-factor FGO runs.
