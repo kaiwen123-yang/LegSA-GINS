@@ -17,6 +17,7 @@
 #include "legsa_v23_port_core/fileio/gnss_file_loader.hpp"
 #include "legsa_v23_port_core/fileio/imu_file_loader.hpp"
 #include "legsa_v23_port_core/kf_gins/gi_engine.hpp"
+#include "legsa_v23_port_core/quality_aware/qa_fallback.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -688,6 +689,91 @@ void PortRuntime::runGo2WeakPriorToy(const std::string& output_dir) {
   engine.writeSourceAwareTrace(output_dir);
 }
 
+// 中文说明：QA fallback toy 只验证状态机、测量动作和日志，不代表真实数据性能。
+void PortRuntime::runQaFallbackToy(const std::string& output_dir) {
+  PortOptions options;
+  options.phase = "QA2_ACTIVE_FALLBACK_MINIMAL_EKF_INTEGRATION";
+  options.port_role = "quality_aware_supervisory_fallback_candidate_toy";
+  options.run_label = "QA2_qa_fallback_toy";
+  options.algorithm_id = quality_aware::kLegsaQaFallbackEkf;
+  options.qa_fallback_config.algorithm_id = quality_aware::kLegsaQaFallbackEkf;
+  options.qa_fallback_config.enable_qa_fallback = true;
+  options.qa_fallback_config.qa_active_mode = true;
+  options.qa_fallback_config.qa_passive_logging_enabled = true;
+  options.qa_fallback_config.a1_relpos_diff_valid_default = true;
+  options.qa_fallback_config.a1_baseline_m_default = 0.5;
+  options.qa_fallback_config.a1_baseline_default_available = true;
+  options.qa_fallback_config.a1_valid_ratio_default = 1.0;
+  options.qa_fallback_config.a1_valid_ratio_default_available = true;
+  options.qa_fallback_config.a1_quality_source = "synthetic_status_yaw_relpos_diff_toy";
+  options.qa_fallback_layer_present = true;
+  options.qa_fallback_active = true;
+  options.qa_passive_logging_enabled = true;
+  options.starttime = 0.0;
+  options.init_pos_blh_rad_m = makeVec3(Earth::degToRad(30.0), Earth::degToRad(120.0), 10.0);
+  options.init_vel_ned_mps = makeVec3(0.0, 0.0, 0.0);
+  options.init_att_rad = makeVec3(0.0, 0.0, Earth::degToRad(5.0));
+  options.init_pos_std_m = makeVec3(1.0, 1.0, 1.5);
+  options.init_vel_std_mps = makeVec3(0.2, 0.2, 0.2);
+  options.init_att_std_rad = makeVec3(Earth::degToRad(1.0), Earth::degToRad(1.0), Earth::degToRad(1.0));
+  options.paper_performance_claim = false;
+  options.proposed_factor_claim = false;
+  options.performance_claim = false;
+
+  GIEngine engine(options);
+  engine.initialize(makeInitialState(options));
+  std::vector<NavState> states;
+  std::vector<std::vector<double>> covariances;
+  appendState(engine, states, covariances);
+
+  ImuData first;
+  first.time = 0.0;
+  first.dt = 0.01;
+  engine.addImuData(first, true);
+
+  for (int i = 1; i <= 100; ++i) {
+    ImuData imu;
+    imu.time = 0.01 * static_cast<double>(i);
+    imu.dt = 0.01;
+    imu.dtheta = makeVec3(0.0, 0.0, 0.0);
+    imu.dvel = makeVec3(0.0, 0.0, -Earth::gravity(options.init_pos_blh_rad_m) * imu.dt);
+    if (i == 20 || i == 40 || i == 60 || i == 70 || i == 80 || i == 90 || i == 100) {
+      GnssData gnss;
+      gnss.time = imu.time;
+      gnss.blh_rad_m = engine.navState().pos_blh_rad_m;
+      gnss.std_ned_m = i == 60 ? makeVec3(20.0, 20.0, 30.0) : makeVec3(0.5, 0.5, 0.8);
+      gnss.vel_ned_mps = engine.navState().vel_ned_mps;
+      gnss.vel_std_mps = makeVec3(0.1, 0.1, 0.1);
+      gnss.yaw_rad = i == 40 ? engine.navState().euler_rad[2] + Earth::degToRad(40.0)
+                             : engine.navState().euler_rad[2];
+      gnss.yaw_deg = Earth::radToDeg(gnss.yaw_rad);
+      gnss.yaw_std_rad = i == 40 ? Earth::degToRad(20.0) : Earth::degToRad(1.5);
+      gnss.yaw_std_deg = Earth::radToDeg(gnss.yaw_std_rad);
+      gnss.has_yaw = true;
+      gnss.isvalid = true;
+      engine.addGnssData(gnss);
+    }
+    engine.addImuData(imu);
+    engine.newImuProcess();
+    if (!engine.checkCov()) {
+      throw std::runtime_error("QA fallback toy covariance check failed");
+    }
+    appendState(engine, states, covariances);
+  }
+
+  options.propagation_count = engine.propagationCount();
+  options.measurement_update_count = engine.updateCount();
+  options.position_update_count = engine.positionUpdateCount();
+  options.velocity_update_count = engine.velocityUpdateCount();
+  options.yaw_update_count = engine.yawUpdateCount();
+  options.yaw_normal_count = engine.yawNormalCount();
+  options.yaw_downweight_count = engine.yawDownweightCount();
+  options.yaw_reject_count = engine.yawRejectCount();
+  options.qa_log_row_count = engine.qaFallbackTraceRowCount();
+  writeAll(output_dir, options, states, covariances);
+  engine.writeQAFallbackTrace(output_dir);
+}
+
 // 中文说明：真实输入 runner 只建立 R2 运行链路；R3 才允许 clean replay parity 判定。
 void PortRuntime::runFromConfig(const std::string& config_path, const std::string& output_dir) {
   PortRuntimeDebugOptions debug_options;
@@ -798,6 +884,22 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.fgo_feedback_status.output_substitution = false;
     options.fgo_feedback_status.direct_nav_override = false;
     options.output_only_correction = false;
+    options.paper_performance_claim = false;
+    options.proposed_factor_claim = false;
+    options.performance_claim = false;
+  }
+  if (options.qa_fallback_config.enable_qa_fallback ||
+      options.qa_fallback_config.qa_active_mode ||
+      options.algorithm_id == quality_aware::kLegsaQaFallbackEkf) {
+    options.phase = "QA2_ACTIVE_FALLBACK_MINIMAL_EKF_INTEGRATION";
+    options.port_role = "quality_aware_supervisory_fallback_candidate";
+    options.run_label = options.ablation_variant.empty() ? "LegSA_QA_Fallback_EKF" : options.ablation_variant;
+    options.qa_fallback_layer_present = true;
+    options.qa_fallback_active = true;
+    options.qa_passive_logging_enabled = true;
+    options.qa_fallback_config.enable_qa_fallback = true;
+    options.qa_fallback_config.qa_active_mode = true;
+    options.qa_fallback_config.qa_passive_logging_enabled = true;
     options.paper_performance_claim = false;
     options.proposed_factor_claim = false;
     options.performance_claim = false;
@@ -1023,6 +1125,13 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   copyGo2AttitudePriorStatus(engine, options);
   copyGo2DiagnosticPriorStatus(engine, options);
   copyFgoFeedbackStatus(engine, options);
+  options.qa_log_row_count = engine.qaFallbackTraceRowCount();
+  options.qa_fallback_active =
+      options.qa_fallback_config.enable_qa_fallback || options.qa_fallback_config.qa_active_mode ||
+      options.algorithm_id == quality_aware::kLegsaQaFallbackEkf;
+  options.qa_passive_logging_enabled = options.qa_fallback_config.qa_passive_logging_enabled;
+  options.qa_fallback_layer_present =
+      options.qa_passive_logging_enabled || options.qa_fallback_active || options.qa_log_row_count > 0;
   options.actual_update_count = engine.updateCount();
   options.update_count_ratio =
       options.expected_update_count == 0
@@ -1048,6 +1157,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   writeAll(output_dir, options, states, covariances);
   engine.writeSourceAwareTrace(output_dir);
   engine.writeFgoFeedbackTrace(output_dir);
+  engine.writeQAFallbackTrace(output_dir);
 }
 
 }  // namespace legsa_v23_port_core

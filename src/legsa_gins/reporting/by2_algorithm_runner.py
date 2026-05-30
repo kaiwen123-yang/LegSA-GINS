@@ -27,6 +27,7 @@ FORMAL_ALGORITHMS = [
     "Go2_joint_EKF",
     "selected_feedback_EKF",
     "LegSA_full_EKF",
+    "LegSA_QA_Fallback_EKF",
     "LegSA_9F_FGO_EKF",
 ]
 
@@ -156,6 +157,21 @@ ALGORITHM_SPECS = {
             "go2_joint": True,
             "feedback": True,
         },
+    ),
+    "LegSA_QA_Fallback_EKF": AlgorithmRunnerSpec(
+        algorithm="LegSA_QA_Fallback_EKF",
+        ablation_variant="qa2_LegSA_QA_Fallback_EKF",
+        component_flags={
+            "raw_doppler": True,
+            "source_aware": True,
+            "go2_joint": True,
+            "feedback": True,
+        },
+        status="qa_fallback_candidate",
+        role="new_algorithm_candidate",
+        active_fgo_backend_available=False,
+        solver_execution_allowed=True,
+        complete_nine_factor_fgo_claim=False,
     ),
     "LegSA_9F_FGO_EKF": AlgorithmRunnerSpec(
         algorithm="LegSA_9F_FGO_EKF",
@@ -345,6 +361,7 @@ def build_algorithm_config_text(workspace_root: Path, algorithm: str, output_dir
     go2_velocity = repo_to_wsl(workspace_root / REPO_RELATIVE_REQUIRED_INPUTS["go2_horizontal_velocity"])
     go2_joint = repo_to_wsl(workspace_root / REPO_RELATIVE_REQUIRED_INPUTS["go2_joint"])
     feedback = repo_to_wsl(workspace_root / REPO_RELATIVE_REQUIRED_INPUTS["selected_feedback"])
+    qa_enabled = spec.algorithm == "LegSA_QA_Fallback_EKF"
 
     lines = _base_config_lines(base_values, output_dir_wsl)
     lines.extend(
@@ -354,6 +371,36 @@ def build_algorithm_config_text(workspace_root: Path, algorithm: str, output_dir
             f"algorithm_id: {spec.algorithm}",
             f"algorithm_role: {spec.role}",
             f"ablation_variant: {spec.ablation_variant}",
+            f"qa_passive_logging_enabled: {str(qa_enabled).lower()}",
+            f"enable_qa_fallback: {str(qa_enabled).lower()}",
+            f"qa_active_mode: {str(qa_enabled).lower()}",
+            "qa_expected_a1_baseline_m: 0.5",
+            "qa_a1_baseline_tolerance_m: 0.35",
+            "qa_a1_min_valid_ratio: 0.6",
+            "qa_a1_yaw_std_degraded_deg: 3.0",
+            "qa_a1_yaw_std_invalid_deg: 10.0",
+            "qa_a1_yaw_residual_degraded_deg: 6.0",
+            "qa_a1_yaw_residual_invalid_deg: 15.0",
+            "qa_a1_yaw_jump_invalid_deg: 20.0",
+            "qa_gnss_pos_std_h_degraded_m: 3.0",
+            "qa_gnss_pos_std_u_degraded_m: 5.0",
+            "qa_gnss_pos_std_h_invalid_m: 15.0",
+            "qa_gnss_pos_std_u_invalid_m: 25.0",
+            "qa_raw_doppler_min_count: 5",
+            "qa_recovery_required_consecutive_a1: 3",
+            "qa_recovery_yaw_residual_gate_deg: 8.0",
+            "qa_recovery_yaw_jump_gate_deg: 12.0",
+            "qa_recovery_initial_yaw_r_scale: 6.0",
+            "qa_recovery_max_yaw_correction_deg: 5.0",
+            "qa_s1_yaw_r_scale: 4.0",
+            "qa_s3_gnss_pos_r_scale: 9.0",
+            "qa_s4_gnss_pos_r_scale: 25.0",
+            "qa_a1_relpos_diff_valid_default: false",
+            "qa_a1_baseline_m_default: 0.0",
+            "qa_a1_baseline_default_available: false",
+            "qa_a1_valid_ratio_default: 0.0",
+            "qa_a1_valid_ratio_default_available: false",
+            "qa_a1_quality_source: explicit_quality_missing_reject_yaw",
             f"active_fgo_backend_available: {str(spec.active_fgo_backend_available).lower()}",
             f"solver_execution_allowed: {str(spec.solver_execution_allowed).lower()}",
             f"complete_nine_factor_FGO_claim: {str(spec.complete_nine_factor_fgo_claim).lower()}",

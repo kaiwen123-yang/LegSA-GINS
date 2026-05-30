@@ -19,6 +19,7 @@
 #include <fstream>
 #include <iomanip>
 #include <numeric>
+#include <sstream>
 #include <stdexcept>
 #include <utility>
 
@@ -98,6 +99,7 @@ GIEngine::GIEngine(PortOptions options)
       Cov_(RANK, RANK, 0.0),
       Qc_(NOISERANK, NOISERANK, 0.0),
       dx_(RANK, 0.0),
+      qa_fallback_supervisor_(options_.qa_fallback_config),
       source_aware_policy_(options_.source_aware_policy_config) {
   initializeQc();
 }
@@ -309,22 +311,53 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
   if (!gnss.isvalid) {
     return;
   }
-  applyPositionUpdate(gnss);
-  if (gnss.has_velocity && receiverVelocityUpdateEnabledForTime(gnss.time)) {
-    GnssData stressed_gnss = receiverVelocityStressView(gnss);
+  GnssData policy_gnss = gnss;
+  bool qa_active = false;
+  quality_aware::QADecision qa_decision;
+  if (qa_fallback_supervisor_.loggingEnabled()) {
+    qa_decision = qa_fallback_supervisor_.evaluate(buildQAObservation(gnss));
+    qa_active = qa_decision.active_mode;
+    if (qa_active && qa_decision.gnss_position_action == "DOWNWEIGHT") {
+      policy_gnss.std_ned_m = scale(policy_gnss.std_ned_m, std::sqrt(std::max(1.0, qa_decision.gnss_pos_R_scale)));
+    }
+    if (qa_active &&
+        (qa_decision.a1_measurement_action == "DOWNWEIGHT" ||
+         qa_decision.a1_measurement_action == "RECOVERY_RAMP")) {
+      policy_gnss.yaw_std_rad *= std::sqrt(std::max(1.0, qa_decision.yaw_R_scale));
+      policy_gnss.yaw_std_deg = policy_gnss.yaw_std_rad * R2D;
+    }
+  }
+
+  const bool qa_reject_position =
+      qa_active && (qa_decision.gnss_position_action == "REJECT" ||
+                    qa_decision.gnss_position_action == "HOLD");
+  if (!qa_reject_position) {
+    applyPositionUpdate(policy_gnss);
+  }
+  if (!qa_reject_position && policy_gnss.has_velocity && receiverVelocityUpdateEnabledForTime(policy_gnss.time)) {
+    GnssData stressed_gnss = receiverVelocityStressView(policy_gnss);
     applyVelocityUpdate(stressed_gnss);
   }
-  if (gnss.has_yaw && options_.yaw_scheme_C_enabled) {
-    applyYawUpdate(gnss);
+  const bool qa_reject_yaw = qa_active && qa_decision.a1_measurement_action == "REJECT";
+  if (!qa_reject_yaw && policy_gnss.has_yaw && options_.yaw_scheme_C_enabled) {
+    applyYawUpdate(policy_gnss);
   }
   // 中文说明：raw Doppler auxiliary velocity factor 与 GNSS epoch 对齐，并在 stateFeedback 前进入 EKF。
-  applyRawDopplerUpdateForTime(gnss.time);
+  if (!qa_active || qa_decision.raw_doppler_action == "ACCEPT") {
+    applyRawDopplerUpdateForTime(policy_gnss.time);
+  }
   // 中文说明：N7B3 Go2 velocity diagnostic prior 默认关闭；开启时仍为 diagnostic-only，不构成正式 prior。
-  applyGo2VelocityDiagnosticPriorForTime(gnss.time);
+  if (!qa_active || qa_decision.go2_aux_action == "ACCEPT") {
+    applyGo2VelocityDiagnosticPriorForTime(policy_gnss.time);
+  }
   // 中文说明：Go2 roll/pitch weak prior 与 GNSS epoch 对齐进入 EKF；不启用 Go2 position/velocity/yaw prior。
-  applyGo2AttitudeWeakPriorForTime(gnss.time);
+  if (!qa_active || qa_decision.go2_aux_action == "ACCEPT") {
+    applyGo2AttitudeWeakPriorForTime(policy_gnss.time);
+  }
   // 中文说明：N8G FGO feedback 在 stateFeedback 前作为 EKF pseudo-measurement 进入，不覆盖 NAV 输出。
-  applyFgoFeedbackForTime(gnss.time);
+  if (!qa_active || qa_decision.selected_feedback_action == "ACCEPT") {
+    applyFgoFeedbackForTime(policy_gnss.time);
+  }
   gnss.isvalid = false;
   ++update_count_;
 }
@@ -370,7 +403,16 @@ void GIEngine::EKFUpdate(const std::vector<double>& dz, const Matrix& H, const M
 void GIEngine::stateFeedback() {
   const Vec3 dx_pos = vecFromDx(dx_, P_ID);
   const Vec3 dx_vel = vecFromDx(dx_, V_ID);
-  const Vec3 dx_phi = vecFromDx(dx_, PHI_ID);
+  Vec3 dx_phi = vecFromDx(dx_, PHI_ID);
+  const double requested_yaw_correction_deg = -dx_phi[2] * R2D;
+  bool yaw_correction_clipped = false;
+  if (qa_fallback_supervisor_.activeMode() && qa_fallback_supervisor_.lastDecisionRecoveryRampActive()) {
+    const double max_yaw = qa_fallback_supervisor_.recoveryMaxYawCorrectionDeg() * D2R;
+    if (max_yaw > 0.0 && std::fabs(dx_phi[2]) > max_yaw) {
+      dx_phi[2] = dx_phi[2] > 0.0 ? max_yaw : -max_yaw;
+      yaw_correction_clipped = true;
+    }
+  }
   pvacur_.pos_blh_rad_m = subtract(pvacur_.pos_blh_rad_m, multiply(Earth::DRi(pvacur_.pos_blh_rad_m), dx_pos));
   pvacur_.vel_ned_mps = subtract(pvacur_.vel_ned_mps, dx_vel);
   const Quaternion qpn = Rotation::rotvec2quaternion(dx_phi);
@@ -382,6 +424,9 @@ void GIEngine::stateFeedback() {
   imuerror_.gyrscale = add(imuerror_.gyrscale, vecFromDx(dx_, SG_ID));
   imuerror_.accscale = add(imuerror_.accscale, vecFromDx(dx_, SA_ID));
   pvacur_.imu_error = imuerror_;
+  qa_fallback_supervisor_.setYawCorrectionOnLastDecision(requested_yaw_correction_deg,
+                                                         -dx_phi[2] * R2D,
+                                                         yaw_correction_clipped);
   zeroVector(dx_);
 }
 
@@ -534,6 +579,10 @@ fgo_feedback::FgoFeedbackStatus GIEngine::fgoFeedbackStatus() const {
   return fgo_feedback_status_;
 }
 
+std::size_t GIEngine::qaFallbackTraceRowCount() const {
+  return qa_fallback_supervisor_.trace().size();
+}
+
 void GIEngine::writeFgoFeedbackTrace(const std::string& output_dir) const {
   if (!options_.fgo_feedback_config.enable_fgo_feedback) {
     return;
@@ -549,6 +598,68 @@ void GIEngine::writeFgoFeedbackTrace(const std::string& output_dir) const {
         << row.reject_reason << "," << row.position_norm_m << "," << row.velocity_norm_mps << ","
         << row.attitude_norm_deg << "," << row.yaw_residual_deg << "," << row.source_window_start << ","
         << row.source_window_end << ",0,0,0,0\n";
+  }
+}
+
+void GIEngine::writeQAFallbackTrace(const std::string& output_dir) const {
+  const auto& rows = qa_fallback_supervisor_.trace();
+  if (rows.empty()) {
+    return;
+  }
+  std::filesystem::create_directories(output_dir);
+  std::ofstream out(std::filesystem::path(output_dir) / "QA_FALLBACK_TRACE.csv");
+  out << std::fixed << std::setprecision(10);
+  out << "time,dataset_id,case_id,algorithm_id,qa_state,previous_qa_state,state_transition_flag,"
+      << "reason_bits,a1_available,a1_valid,a1_baseline_m,a1_baseline_expected_m,"
+      << "a1_valid_ratio_window,a1_yaw_std_deg,a1_yaw_residual_deg,a1_yaw_jump_deg,"
+      << "time_since_last_trusted_a1_s,consecutive_valid_a1_count,gnss_pos_available,"
+      << "gnss_pos_valid,gnss_status_or_fix,gnss_pos_std_h_m,gnss_pos_std_u_m,"
+      << "time_since_last_trusted_gnss_s,raw_doppler_available,raw_doppler_count,"
+      << "raw_doppler_residual,go2_body_state_available,go2_imu_available,"
+      << "selected_feedback_allowed_nominal,passive_only,trace_used_for_QA,active_mode,"
+      << "measurement_policy_id,a1_measurement_action,gnss_position_action,raw_doppler_action,"
+      << "go2_aux_action,selected_feedback_action,yaw_R_scale,gnss_pos_R_scale,doppler_R_scale,"
+      << "recovery_ramp_active,recovery_consecutive_valid_a1_count,requested_yaw_correction_deg,"
+      << "yaw_correction_applied_deg,recovery_yaw_correction_cap_deg,yaw_correction_clipped,"
+      << "state_transition_reason\n";
+  auto optional = [](bool present, double value) -> std::string {
+    if (!present) {
+      return "";
+    }
+    std::ostringstream text;
+    text << std::fixed << std::setprecision(10) << value;
+    return text.str();
+  };
+  for (const auto& row : rows) {
+    out << row.time << "," << row.dataset_id << "," << row.case_id << "," << row.algorithm_id << ","
+        << quality_aware::qaStateName(row.qa_state) << ","
+        << (row.has_previous_qa_state ? quality_aware::qaStateName(row.previous_qa_state) : "") << ","
+        << (row.state_transition_flag ? 1 : 0) << "," << quality_aware::joinReasons(row.reason_bits) << ","
+        << (row.a1_available ? 1 : 0) << "," << (row.a1_valid ? 1 : 0) << ","
+        << optional(row.a1_baseline_available, row.a1_baseline_m) << ","
+        << optional(row.a1_baseline_expected_available, row.a1_baseline_expected_m) << ","
+        << optional(row.a1_valid_ratio_available, row.a1_valid_ratio_window) << ","
+        << optional(row.a1_yaw_std_available, row.a1_yaw_std_deg) << ","
+        << optional(row.a1_yaw_residual_available, row.a1_yaw_residual_deg) << ","
+        << optional(row.a1_yaw_jump_available, row.a1_yaw_jump_deg) << ","
+        << optional(row.time_since_last_trusted_a1_available, row.time_since_last_trusted_a1_s) << ","
+        << row.consecutive_valid_a1_count << "," << (row.gnss_pos_available ? 1 : 0) << ","
+        << (row.gnss_pos_valid ? 1 : 0) << "," << row.gnss_status_or_fix << ","
+        << optional(row.gnss_pos_std_h_available, row.gnss_pos_std_h_m) << ","
+        << optional(row.gnss_pos_std_u_available, row.gnss_pos_std_u_m) << ","
+        << optional(row.time_since_last_trusted_gnss_available, row.time_since_last_trusted_gnss_s) << ","
+        << (row.raw_doppler_available ? 1 : 0) << "," << row.raw_doppler_count << ","
+        << optional(row.raw_doppler_residual_available, row.raw_doppler_residual) << ","
+        << (row.go2_body_state_available ? 1 : 0) << "," << (row.go2_imu_available ? 1 : 0) << ","
+        << (row.selected_feedback_allowed_nominal ? 1 : 0) << "," << (row.passive_only ? 1 : 0) << ","
+        << (row.trace_used_for_QA ? 1 : 0) << "," << (row.active_mode ? 1 : 0) << ","
+        << row.measurement_policy_id << "," << row.a1_measurement_action << ","
+        << row.gnss_position_action << "," << row.raw_doppler_action << "," << row.go2_aux_action << ","
+        << row.selected_feedback_action << "," << row.yaw_R_scale << "," << row.gnss_pos_R_scale << ","
+        << row.doppler_R_scale << "," << (row.recovery_ramp_active ? 1 : 0) << ","
+        << row.recovery_consecutive_valid_a1_count << "," << row.requested_yaw_correction_deg << ","
+        << row.yaw_correction_applied_deg << "," << row.recovery_yaw_correction_cap_deg << ","
+        << (row.yaw_correction_clipped ? 1 : 0) << "," << row.state_transition_reason << "\n";
   }
 }
 
@@ -1124,6 +1235,62 @@ void GIEngine::applyFgoFeedbackForTime(double update_time) {
   fgo_feedback_status_.correction_attitude_max_deg =
       fgo_feedback_attitude_norms_deg_.empty() ? 0.0 : *std::max_element(fgo_feedback_attitude_norms_deg_.begin(), fgo_feedback_attitude_norms_deg_.end());
   fgo_feedback_status_.residual_p95 = percentile(fgo_feedback_velocity_norms_, 0.95);
+}
+
+quality_aware::QAObservation GIEngine::buildQAObservation(const GnssData& gnss) const {
+  quality_aware::QAObservation observation;
+  observation.time = gnss.time;
+  observation.algorithm_id = options_.algorithm_id.empty() ? options_.run_label : options_.algorithm_id;
+  observation.case_id = options_.ablation_variant;
+  observation.dataset_id = options_.clean_input_provenance_label;
+  observation.a1_available = gnss.has_yaw && std::isfinite(gnss.yaw_rad) && std::isfinite(gnss.yaw_std_rad);
+  const bool explicit_a1_quality =
+      options_.qa_fallback_config.a1_quality_source.find("relpos_diff") != std::string::npos ||
+      options_.qa_fallback_config.a1_quality_source.find("status_yaw") != std::string::npos;
+  observation.a1_relpos_diff_valid =
+      observation.a1_available && explicit_a1_quality &&
+      options_.qa_fallback_config.a1_relpos_diff_valid_default;
+  observation.a1_baseline_m = options_.qa_fallback_config.a1_baseline_m_default;
+  observation.a1_baseline_available = options_.qa_fallback_config.a1_baseline_default_available;
+  observation.a1_baseline_expected_m = options_.qa_fallback_config.expected_a1_baseline_m;
+  observation.a1_baseline_expected_available = true;
+  observation.a1_valid_ratio_window = options_.qa_fallback_config.a1_valid_ratio_default;
+  observation.a1_valid_ratio_available = options_.qa_fallback_config.a1_valid_ratio_default_available;
+  observation.a1_yaw_std_deg = std::fabs(gnss.yaw_std_rad) * R2D;
+  observation.a1_yaw_std_available = observation.a1_available;
+  observation.a1_yaw_residual_deg = wrapYawResidual(pvacur_.euler_rad[2] - gnss.yaw_rad) * R2D;
+  observation.a1_yaw_residual_available = observation.a1_available;
+  observation.gnss_pos_available = gnss.isvalid;
+  observation.gnss_pos_valid = gnss.isvalid;
+  observation.gnss_status_or_fix = gnss.isvalid ? "runtime_15col_valid" : "invalid";
+  observation.gnss_pos_std_h_m =
+      std::hypot(std::fabs(gnss.std_ned_m[0]), std::fabs(gnss.std_ned_m[1]));
+  observation.gnss_pos_std_h_available = true;
+  observation.gnss_pos_std_u_m = std::fabs(gnss.std_ned_m[2]);
+  observation.gnss_pos_std_u_available = true;
+  const Matrix3 dr = Earth::DR(pvacur_.pos_blh_rad_m);
+  const Matrix3 dri = Earth::DRi(pvacur_.pos_blh_rad_m);
+  const Vec3 lever_n = multiply(pvacur_.cbn, options_.antlever_m);
+  const Vec3 antenna_pos = add(pvacur_.pos_blh_rad_m, multiply(dri, lever_n));
+  const Vec3 pos_residual = multiply(dr, subtract(antenna_pos, gnss.blh_rad_m));
+  observation.gnss_pos_innovation_m = std::sqrt(pos_residual[0] * pos_residual[0] +
+                                                pos_residual[1] * pos_residual[1] +
+                                                pos_residual[2] * pos_residual[2]);
+  observation.gnss_pos_innovation_available = true;
+  observation.raw_doppler_available = raw_doppler_status_.solver_enabled;
+  observation.raw_doppler_count = raw_doppler_status_.valid_epoch_count;
+  observation.raw_doppler_residual = raw_doppler_status_.residual_p95_mps;
+  observation.raw_doppler_residual_available = raw_doppler_status_.residual_p95_mps > 0.0;
+  observation.go2_body_state_available = go2_velocity_diagnostic_prior_status_.solver_enabled ||
+                                         go2_attitude_prior_status_.solver_enabled;
+  observation.go2_imu_available = go2_attitude_prior_status_.solver_enabled;
+  observation.selected_feedback_allowed_nominal = options_.fgo_feedback_config.enable_fgo_feedback &&
+                                                  fgo_feedback_status_.solver_enabled;
+  observation.filter_output_finite =
+      std::isfinite(pvacur_.pos_blh_rad_m[0]) && std::isfinite(pvacur_.pos_blh_rad_m[1]) &&
+      std::isfinite(pvacur_.pos_blh_rad_m[2]) && std::isfinite(pvacur_.euler_rad[2]);
+  observation.covariance_finite = checkCov();
+  return observation;
 }
 
 source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(

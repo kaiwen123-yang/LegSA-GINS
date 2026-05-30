@@ -20,6 +20,7 @@ struct Args {
   bool dry_run_raw_doppler_toy = false;
   bool dry_run_source_aware_toy = false;
   bool dry_run_go2_weak_prior_toy = false;
+  bool dry_run_qa_fallback_toy = false;
   bool debug_update_timeline = false;
   bool debug_overclose_audit = false;
   bool debug_measurement_copy_guard = false;
@@ -45,6 +46,8 @@ Args parseArgs(int argc, char** argv) {
       args.dry_run_source_aware_toy = true;
     } else if (token == "--dry-run-go2-weak-prior-toy") {
       args.dry_run_go2_weak_prior_toy = true;
+    } else if (token == "--dry-run-qa-fallback-toy") {
+      args.dry_run_qa_fallback_toy = true;
     } else if (token == "--config" && i + 1 < argc) {
       args.config_path = argv[++i];
     } else if (token == "--output-dir" && i + 1 < argc) {
@@ -94,6 +97,10 @@ int main(int argc, char** argv) {
       legsa_v23_port_core::PortRuntime::runGo2WeakPriorToy(args.output_dir);
       return 0;
     }
+    if (args.dry_run_qa_fallback_toy) {
+      legsa_v23_port_core::PortRuntime::runQaFallbackToy(args.output_dir);
+      return 0;
+    }
     if (!args.config_path.empty()) {
       legsa_v23_port_core::PortRuntimeDebugOptions debug_options;
       debug_options.update_timeline = args.debug_update_timeline;
@@ -107,7 +114,7 @@ int main(int argc, char** argv) {
     }
     std::cerr << "usage: legsa_v23_port_core_demo "
               << "--dry-run-toy|--dry-run-synthetic-math|--dry-run-raw-doppler-toy|"
-              << "--dry-run-source-aware-toy|--dry-run-go2-weak-prior-toy|--config <path> --output-dir <dir> "
+              << "--dry-run-source-aware-toy|--dry-run-go2-weak-prior-toy|--dry-run-qa-fallback-toy|--config <path> --output-dir <dir> "
               << "[--debug-update-timeline --debug-overclose-audit --debug-measurement-copy-guard "
               << "--debug-covariance-gain --debug-output-dir <dir> --debug-max-rows <N>]\n";
     return 2;

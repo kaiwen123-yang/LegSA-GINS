@@ -82,7 +82,9 @@ class GIEngine {
   std::size_t go2VelocityDiagnosticPriorRejectCount() const;
   Go2VelocityDiagnosticPriorStatus go2VelocityDiagnosticPriorStatus() const;
   fgo_feedback::FgoFeedbackStatus fgoFeedbackStatus() const;
+  std::size_t qaFallbackTraceRowCount() const;
   void writeFgoFeedbackTrace(const std::string& output_dir) const;
+  void writeQAFallbackTrace(const std::string& output_dir) const;
   source_aware::SourceAwareRuntimeStats sourceAwareStats() const;
   void writeSourceAwareTrace(const std::string& output_dir) const;
 
@@ -100,6 +102,7 @@ class GIEngine {
   void applyGo2AttitudeWeakPriorForTime(double update_time);
   void applyGo2VelocityDiagnosticPriorForTime(double update_time);
   void applyFgoFeedbackForTime(double update_time);
+  quality_aware::QAObservation buildQAObservation(const GnssData& gnss) const;
   source_aware::SourceWeightResult applySourceAwareWeighting(
       source_aware::MeasurementSource source,
       const source_aware::SourceMetadata& metadata,
@@ -146,6 +149,7 @@ class GIEngine {
   std::vector<double> fgo_feedback_velocity_norms_;
   std::vector<double> fgo_feedback_attitude_norms_deg_;
   double last_fgo_feedback_time_ = -1.0e100;
+  quality_aware::QAFallbackSupervisor qa_fallback_supervisor_;
   source_aware::SourceAwarePolicy source_aware_policy_;
   source_aware::SourceAwareTrace source_aware_trace_;
   bool initialized_ = false;

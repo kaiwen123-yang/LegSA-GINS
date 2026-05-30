@@ -10,6 +10,7 @@
 #include "legsa_v23_port_core/factors/raw_doppler_types.hpp"
 #include "legsa_v23_port_core/factors/go2_weak_prior_types.hpp"
 #include "legsa_v23_port_core/fgo_feedback/fgo_feedback.hpp"
+#include "legsa_v23_port_core/quality_aware/qa_fallback.hpp"
 #include "legsa_v23_port_core/source_aware/measurement_source.hpp"
 #include "legsa_v23_port_core/types.hpp"
 
@@ -22,6 +23,7 @@ struct PortOptions {
   std::string phase = "N4H4R2";
   std::string port_role = "source_backed_math_port";
   std::string run_label = "N4H4R2_synthetic_math";
+  std::string algorithm_id;
   std::string imu_path;
   std::string gnss_path;
   Vec3 antlever_m = makeVec3(0.0, 0.0, 0.0);
@@ -91,6 +93,11 @@ struct PortOptions {
   bool performance_claim = false;
   bool paper_performance_claim = false;
   bool proposed_factor_claim = false;
+  quality_aware::QAFallbackConfig qa_fallback_config;
+  bool qa_fallback_layer_present = false;
+  bool qa_fallback_active = false;
+  bool qa_passive_logging_enabled = false;
+  std::size_t qa_log_row_count = 0;
   bool engineering_backbone_parity_only = false;
   std::string clean_input_provenance_label;
   std::string config_policy_evidence_status = "source_backed_runtime_config";
