@@ -46,7 +46,8 @@ def test_qa_fallback_config_enables_supervisor_without_paper_claim(tmp_path) -> 
     assert "qa_active_mode: true" in config
     assert "qa_a1_relpos_diff_valid_default: false" in config
     assert "qa_a1_quality_source: explicit_quality_missing_reject_yaw" in config
-    assert "qa_recovery_max_yaw_correction_deg: 5.0" in config
+    assert "qa_recovery_max_yaw_correction_deg: 1.0" in config
+    assert "qa_s1_yaw_r_scale: 2.0" in config
     assert "paper_performance_claim: false" in config
     assert "no_outperform_final_v23_claim: true" in config
     assert "trace_solver_input: false" in config

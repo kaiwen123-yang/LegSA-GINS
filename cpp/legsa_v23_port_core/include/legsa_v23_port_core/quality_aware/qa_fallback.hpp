@@ -42,7 +42,7 @@ struct QAFallbackConfig {
   double recovery_yaw_jump_gate_deg = 12.0;
   double recovery_initial_yaw_r_scale = 6.0;
   double recovery_final_yaw_r_scale = 1.0;
-  double s1_yaw_r_scale = 4.0;
+  double s1_yaw_r_scale = 2.0;
   double s3_gnss_pos_r_scale = 9.0;
   double s4_gnss_pos_r_scale = 25.0;
   double s5_hold_timeout_s = 5.0;
@@ -51,7 +51,7 @@ struct QAFallbackConfig {
   bool a1_baseline_default_available = false;
   double a1_valid_ratio_default = 0.0;
   bool a1_valid_ratio_default_available = false;
-  double recovery_max_yaw_correction_deg = 5.0;
+  double recovery_max_yaw_correction_deg = 1.0;
   std::string a1_quality_source = "explicit_quality_missing_reject_yaw";
 };
 
