@@ -27,6 +27,29 @@ bool go2Available(const QAObservation& observation) {
   return observation.go2_body_state_available || observation.go2_imu_available;
 }
 
+bool hasReason(const QADecision& decision, const std::string& reason) {
+  return std::find(decision.reason_bits.begin(), decision.reason_bits.end(), reason) !=
+         decision.reason_bits.end();
+}
+
+bool a1PhysicalQualityNominal(const QADecision& decision) {
+  return decision.a1_available &&
+         !hasReason(decision, "A1_MISSING") &&
+         !hasReason(decision, "A1_BASELINE_INVALID") &&
+         !hasReason(decision, "A1_VALID_RATIO_LOW") &&
+         !hasReason(decision, "A1_YAW_STD_HIGH") &&
+         !hasReason(decision, "A1_YAW_JUMP");
+}
+
+bool s1NominalTransparent(const QADecision& decision) {
+  return a1PhysicalQualityNominal(decision) &&
+         !hasReason(decision, "RECOVERY_PENDING_AFTER_INVALID");
+}
+
+double conservativeS1YawRScale(const QAFallbackConfig& config) {
+  return std::max(1.0, std::min(config.s1_yaw_r_scale, 2.0));
+}
+
 void copyObservation(QADecision& decision, const QAObservation& observation) {
   decision.time = observation.time;
   decision.dataset_id = observation.dataset_id;
@@ -69,9 +92,15 @@ void applyMeasurementPolicy(QADecision& decision, const QAFallbackConfig& config
     case QAState::S0_NORMAL_A1_VALID:
       break;
     case QAState::S1_A1_DEGRADED_BUT_USABLE:
-      decision.a1_measurement_action = "DOWNWEIGHT";
-      decision.yaw_R_scale = std::max(1.0, config.s1_yaw_r_scale);
-      decision.selected_feedback_action = "DISABLED";
+      if (s1NominalTransparent(decision)) {
+        decision.a1_measurement_action = "ACCEPT";
+        decision.yaw_R_scale = 1.0;
+        decision.selected_feedback_action = "ACCEPT";
+      } else {
+        decision.a1_measurement_action = "DOWNWEIGHT";
+        decision.yaw_R_scale = conservativeS1YawRScale(config);
+        decision.selected_feedback_action = "DISABLED";
+      }
       break;
     case QAState::S2_A1_INVALID_GNSS_USABLE:
       decision.a1_measurement_action = "REJECT";
@@ -101,8 +130,10 @@ void applyMeasurementPolicy(QADecision& decision, const QAFallbackConfig& config
       decision.recovery_ramp_active = true;
       decision.recovery_yaw_correction_cap_deg = std::max(0.0, config.recovery_max_yaw_correction_deg);
       const double required = std::max(1, config.recovery_required_consecutive_a1);
-      const double progress =
-          std::min(required, static_cast<double>(std::max(0, decision.consecutive_valid_a1_count))) / required;
+      const double ramp_count = std::max(
+          1.0,
+          static_cast<double>(decision.consecutive_valid_a1_count - config.recovery_required_consecutive_a1 + 1));
+      const double progress = std::min(required, ramp_count) / required;
       decision.yaw_R_scale =
           std::max(config.recovery_final_yaw_r_scale,
                    config.recovery_initial_yaw_r_scale -
@@ -177,22 +208,26 @@ QADecision QAFallbackSupervisor::evaluate(const QAObservation& observation) {
     addReason(decision.reason_bits, "A1_YAW_JUMP");
   }
 
-  const bool a1_hard_invalid =
+  const bool a1_yaw_std_invalid =
+      observation.a1_yaw_std_available &&
+      observation.a1_yaw_std_deg > config_.a1_yaw_std_invalid_deg;
+  const bool a1_yaw_residual_invalid =
+      observation.a1_yaw_residual_available &&
+      std::fabs(observation.a1_yaw_residual_deg) > config_.a1_yaw_residual_invalid_deg;
+  const bool a1_yaw_jump_invalid =
+      observation.a1_yaw_jump_available &&
+      std::fabs(observation.a1_yaw_jump_deg) > config_.a1_yaw_jump_invalid_deg;
+  const bool a1_physical_invalid =
       !observation.a1_available || !observation.a1_relpos_diff_valid || a1_baseline_invalid ||
-      (observation.a1_yaw_std_available &&
-       observation.a1_yaw_std_deg > config_.a1_yaw_std_invalid_deg) ||
-      (observation.a1_yaw_residual_available &&
-       std::fabs(observation.a1_yaw_residual_deg) > config_.a1_yaw_residual_invalid_deg) ||
-      (observation.a1_yaw_jump_available &&
-       std::fabs(observation.a1_yaw_jump_deg) > config_.a1_yaw_jump_invalid_deg);
-  const bool a1_degraded =
-      !a1_hard_invalid &&
+      a1_yaw_std_invalid || a1_yaw_jump_invalid;
+  const bool a1_physical_degraded =
+      !a1_physical_invalid &&
       ((observation.a1_valid_ratio_available &&
         observation.a1_valid_ratio_window < config_.a1_min_valid_ratio) ||
        (observation.a1_yaw_std_available &&
-        observation.a1_yaw_std_deg > config_.a1_yaw_std_degraded_deg) ||
-       (observation.a1_yaw_residual_available &&
-        std::fabs(observation.a1_yaw_residual_deg) > config_.a1_yaw_residual_degraded_deg));
+        observation.a1_yaw_std_deg > config_.a1_yaw_std_degraded_deg));
+  const bool a1_hard_invalid = a1_physical_invalid || (a1_physical_degraded && a1_yaw_residual_invalid);
+  const bool a1_degraded = !a1_hard_invalid && a1_physical_degraded;
   decision.a1_valid = !a1_hard_invalid && !a1_degraded;
 
   if (!observation.gnss_pos_available) {
@@ -250,18 +285,19 @@ QADecision QAFallbackSupervisor::evaluate(const QAObservation& observation) {
     decision.time_since_last_trusted_gnss_available = true;
   }
 
-  const bool previous_degraded =
+  const bool previous_recovery_source =
       has_previous_state_ &&
-      previous_state_ != QAState::S0_NORMAL_A1_VALID &&
-      previous_state_ != QAState::S6_RECOVERY_FAST_A1_REACQUISITION;
+      (previous_state_ == QAState::S2_A1_INVALID_GNSS_USABLE ||
+       previous_state_ == QAState::S4_DOPPLER_IMU_GO2_BRIDGE ||
+       previous_state_ == QAState::S5_HOLD_OR_DEAD_RECKONING);
   if (has_previous_state_ && previous_state_ == QAState::S6_RECOVERY_FAST_A1_REACQUISITION &&
       decision.a1_valid && decision.gnss_pos_valid) {
     recovery_candidate_active_ = false;
-  } else if (previous_degraded && decision.a1_valid && decision.gnss_pos_valid) {
+  } else if (previous_recovery_source && decision.a1_valid && decision.gnss_pos_valid) {
     recovery_candidate_active_ = true;
   }
   if (!decision.a1_valid || !decision.gnss_pos_valid) {
-    recovery_candidate_active_ = previous_degraded;
+    recovery_candidate_active_ = previous_recovery_source;
   }
   const bool recovery_ready =
       recovery_candidate_active_ &&
@@ -278,6 +314,7 @@ QADecision QAFallbackSupervisor::evaluate(const QAObservation& observation) {
     addReason(decision.reason_bits, "RECOVERY_CONSECUTIVE_A1_VALID");
     decision.qa_state = QAState::S6_RECOVERY_FAST_A1_REACQUISITION;
   } else if (recovery_candidate_active_ && decision.a1_valid && decision.gnss_pos_valid) {
+    addReason(decision.reason_bits, "RECOVERY_PENDING_AFTER_INVALID");
     decision.qa_state = QAState::S1_A1_DEGRADED_BUT_USABLE;
   } else if (decision.a1_valid && decision.gnss_pos_valid) {
     decision.qa_state = QAState::S0_NORMAL_A1_VALID;

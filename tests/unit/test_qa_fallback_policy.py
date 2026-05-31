@@ -1,3 +1,5 @@
+from dataclasses import replace
+
 from legsa_gins.quality_aware.qa_fallback_policy import (
     LEGSA_FULL_EKF,
     LEGSA_QA_FALLBACK_EKF,
@@ -45,6 +47,22 @@ def test_qa1_nominal_maps_to_s0_without_active_changes() -> None:
     assert QAReason.TRACE_NOT_USED in decision.reason_bits
     assert decision.a1_measurement_action == MeasurementAction.ACCEPT
     assert decision.gnss_position_action == MeasurementAction.ACCEPT
+
+
+def test_qa8a_residual_only_nominal_a1_stays_transparent() -> None:
+    decision = PassiveQualityClassifier().classify(
+        replace(
+            _nominal(time=1.0, algorithm_id=LEGSA_QA_FALLBACK_EKF),
+            a1_yaw_residual_deg=20.0,
+        ),
+        active_mode=True,
+    )
+
+    assert QAReason.A1_RESIDUAL_HIGH in decision.reason_bits
+    assert decision.qa_state == QAState.S0_NORMAL_A1_VALID
+    assert decision.a1_measurement_action == MeasurementAction.ACCEPT
+    assert decision.yaw_R_scale == 1.0
+    assert decision.selected_feedback_action == MeasurementAction.ACCEPT
 
 
 def test_qa1_invalid_a1_with_good_gnss_maps_to_s2() -> None:
@@ -122,9 +140,9 @@ def test_qa2_recovery_requires_consecutive_valid_a1_epochs() -> None:
     assert decisions[-1].qa_state == QAState.S6_RECOVERY_FAST_A1_REACQUISITION
     assert decisions[-1].a1_measurement_action == MeasurementAction.RECOVERY_RAMP
     assert decisions[-1].recovery_ramp_active is True
-    assert decisions[-1].yaw_R_scale >= 1.0
+    assert decisions[-1].yaw_R_scale > 1.0
     assert decisions[-1].selected_feedback_action == MeasurementAction.DISABLED
-    assert decisions[-1].recovery_yaw_correction_cap_deg == 5.0
+    assert decisions[-1].recovery_yaw_correction_cap_deg == 1.0
     assert QAReason.RECOVERY_CONSECUTIVE_A1_VALID in decisions[-1].reason_bits
     post_recovery = classifier.classify(
         _nominal(time=4.0, algorithm_id=LEGSA_QA_FALLBACK_EKF),
@@ -132,6 +150,27 @@ def test_qa2_recovery_requires_consecutive_valid_a1_epochs() -> None:
     )
     assert post_recovery.qa_state == QAState.S0_NORMAL_A1_VALID
 
+
+
+
+def test_qa8a_s1_jitter_does_not_enter_s6_recovery() -> None:
+    classifier = PassiveQualityClassifier()
+    degraded = replace(
+        _nominal(time=0.0, algorithm_id=LEGSA_QA_FALLBACK_EKF),
+        a1_yaw_std_deg=4.0,
+    )
+    first = classifier.classify(degraded, active_mode=True)
+    decisions = [
+        classifier.classify(
+            _nominal(time=float(idx), algorithm_id=LEGSA_QA_FALLBACK_EKF),
+            active_mode=True,
+        )
+        for idx in (1, 2, 3)
+    ]
+
+    assert first.qa_state == QAState.S1_A1_DEGRADED_BUT_USABLE
+    assert all(row.qa_state != QAState.S6_RECOVERY_FAST_A1_REACQUISITION for row in decisions)
+    assert decisions[-1].qa_state == QAState.S0_NORMAL_A1_VALID
 
 def test_qa3_summary_tracks_state_ratios_and_trace_boundary() -> None:
     classifier = PassiveQualityClassifier()

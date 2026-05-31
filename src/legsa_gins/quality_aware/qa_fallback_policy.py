@@ -36,6 +36,7 @@ class QAReason(Enum):
     GO2_BODY_STATE_MISSING = "GO2_BODY_STATE_MISSING"
     RECOVERY_CONSECUTIVE_A1_VALID = "RECOVERY_CONSECUTIVE_A1_VALID"
     RECOVERY_A1_REJECTED = "RECOVERY_A1_REJECTED"
+    RECOVERY_PENDING_AFTER_INVALID = "RECOVERY_PENDING_AFTER_INVALID"
     HOLD_TIMEOUT_RISK = "HOLD_TIMEOUT_RISK"
     TRACE_NOT_USED = "TRACE_NOT_USED"
 
@@ -72,8 +73,8 @@ class QAConfig:
     recovery_yaw_jump_gate_deg: float = 12.0
     recovery_initial_yaw_r_scale: float = 6.0
     recovery_final_yaw_r_scale: float = 1.0
-    recovery_max_yaw_correction_deg: float = 5.0
-    s1_yaw_r_scale: float = 4.0
+    recovery_max_yaw_correction_deg: float = 1.0
+    s1_yaw_r_scale: float = 2.0
     s3_gnss_pos_r_scale: float = 9.0
     s4_gnss_pos_r_scale: float = 25.0
     s5_hold_timeout_s: float = 5.0
@@ -320,34 +321,36 @@ class PassiveQualityClassifier:
         ):
             reasons.append(QAReason.A1_YAW_JUMP)
 
-        hard_invalid = (
+        yaw_std_invalid = (
+            inputs.a1_yaw_std_deg is not None
+            and inputs.a1_yaw_std_deg > self.config.a1_yaw_std_invalid_deg
+        )
+        yaw_residual_invalid = (
+            inputs.a1_yaw_residual_deg is not None
+            and abs(inputs.a1_yaw_residual_deg)
+            > self.config.a1_yaw_residual_invalid_deg
+        )
+        yaw_jump_invalid = (
+            inputs.a1_yaw_jump_deg is not None
+            and abs(inputs.a1_yaw_jump_deg) > self.config.a1_yaw_jump_invalid_deg
+        )
+        physical_invalid = (
             not inputs.a1_relpos_diff_valid
             or baseline_invalid
-            or (
-                inputs.a1_yaw_std_deg is not None
-                and inputs.a1_yaw_std_deg > self.config.a1_yaw_std_invalid_deg
-            )
-            or (
-                inputs.a1_yaw_residual_deg is not None
-                and abs(inputs.a1_yaw_residual_deg)
-                > self.config.a1_yaw_residual_invalid_deg
-            )
-            or (
-                inputs.a1_yaw_jump_deg is not None
-                and abs(inputs.a1_yaw_jump_deg)
-                > self.config.a1_yaw_jump_invalid_deg
-            )
+            or yaw_std_invalid
+            or yaw_jump_invalid
         )
-        degraded = any(
+        physical_degraded = any(
             reason
             in {
                 QAReason.A1_VALID_RATIO_LOW,
                 QAReason.A1_YAW_STD_HIGH,
-                QAReason.A1_RESIDUAL_HIGH,
             }
             for reason in reasons
         )
-        return not hard_invalid and not degraded, (not hard_invalid and degraded)
+        hard_invalid = physical_invalid or (physical_degraded and yaw_residual_invalid)
+        degraded = not hard_invalid and physical_degraded
+        return not hard_invalid and not degraded, degraded
 
     def _classify_gnss(
         self, inputs: QAClassifierInput, reasons: list[QAReason]
@@ -425,23 +428,21 @@ class PassiveQualityClassifier:
         if not inputs.filter_output_finite or not inputs.covariance_finite:
             reasons.append(QAReason.HOLD_TIMEOUT_RISK)
             return QAState.S5_HOLD_OR_DEAD_RECKONING
-        degraded_states = {
-                QAState.S1_A1_DEGRADED_BUT_USABLE,
-                QAState.S2_A1_INVALID_GNSS_USABLE,
-                QAState.S3_GNSS_POSITION_DEGRADED,
-                QAState.S4_DOPPLER_IMU_GO2_BRIDGE,
-                QAState.S5_HOLD_OR_DEAD_RECKONING,
-            }
+        recovery_source_states = {
+            QAState.S2_A1_INVALID_GNSS_USABLE,
+            QAState.S4_DOPPLER_IMU_GO2_BRIDGE,
+            QAState.S5_HOLD_OR_DEAD_RECKONING,
+        }
         if (
             self.previous_state == QAState.S6_RECOVERY_FAST_A1_REACQUISITION
             and a1_valid
             and gnss_valid
         ):
             self.recovery_candidate_active = False
-        elif self.previous_state in degraded_states and a1_valid and gnss_valid:
+        elif self.previous_state in recovery_source_states and a1_valid and gnss_valid:
             self.recovery_candidate_active = True
         if not a1_valid or not gnss_valid:
-            self.recovery_candidate_active = self.previous_state in degraded_states
+            self.recovery_candidate_active = self.previous_state in recovery_source_states
         recovery_ready = (
             self.recovery_candidate_active
             and a1_valid
@@ -470,6 +471,7 @@ class PassiveQualityClassifier:
         } and inputs.a1_available and not a1_valid:
             reasons.append(QAReason.RECOVERY_A1_REJECTED)
         if self.recovery_candidate_active and a1_valid and gnss_valid:
+            reasons.append(QAReason.RECOVERY_PENDING_AFTER_INVALID)
             return QAState.S1_A1_DEGRADED_BUT_USABLE
         if a1_valid and gnss_valid:
             return QAState.S0_NORMAL_A1_VALID
@@ -512,9 +514,14 @@ def apply_measurement_policy(
     if state == QAState.S0_NORMAL_A1_VALID:
         pass
     elif state == QAState.S1_A1_DEGRADED_BUT_USABLE:
-        decision.a1_measurement_action = MeasurementAction.DOWNWEIGHT
-        decision.yaw_R_scale = cfg.s1_yaw_r_scale
-        decision.selected_feedback_action = MeasurementAction.DISABLED
+        if _s1_nominal_transparent(decision):
+            decision.a1_measurement_action = MeasurementAction.ACCEPT
+            decision.yaw_R_scale = 1.0
+            decision.selected_feedback_action = MeasurementAction.ACCEPT
+        else:
+            decision.a1_measurement_action = MeasurementAction.DOWNWEIGHT
+            decision.yaw_R_scale = max(1.0, min(cfg.s1_yaw_r_scale, 2.0))
+            decision.selected_feedback_action = MeasurementAction.DISABLED
     elif state == QAState.S2_A1_INVALID_GNSS_USABLE:
         decision.a1_measurement_action = MeasurementAction.REJECT
         decision.selected_feedback_action = MeasurementAction.DISABLED
@@ -545,24 +552,33 @@ def apply_measurement_policy(
         decision.a1_measurement_action = MeasurementAction.RECOVERY_RAMP
         decision.recovery_ramp_active = True
         decision.recovery_yaw_correction_cap_deg = cfg.recovery_max_yaw_correction_deg
-        extra = max(
-            0,
-            cfg.recovery_required_consecutive_a1
-            - min(
-                decision.consecutive_valid_a1_count,
-                cfg.recovery_required_consecutive_a1,
-            ),
+        required = max(1, cfg.recovery_required_consecutive_a1)
+        ramp_count = max(
+            1,
+            decision.consecutive_valid_a1_count - cfg.recovery_required_consecutive_a1 + 1,
         )
-        step = (
-            cfg.recovery_initial_yaw_r_scale - cfg.recovery_final_yaw_r_scale
-        ) / max(1, cfg.recovery_required_consecutive_a1)
+        progress = min(required, ramp_count) / required
         decision.yaw_R_scale = max(
             cfg.recovery_final_yaw_r_scale,
-            cfg.recovery_initial_yaw_r_scale - step * (cfg.recovery_required_consecutive_a1 - extra),
+            cfg.recovery_initial_yaw_r_scale
+            - (cfg.recovery_initial_yaw_r_scale - cfg.recovery_final_yaw_r_scale) * progress,
         )
         decision.selected_feedback_action = MeasurementAction.DISABLED
     decision.state_transition_reason = decision.reason_text()
     return decision
+
+def _s1_nominal_transparent(decision: QADecision) -> bool:
+    reasons = set(decision.reason_bits)
+    return (
+        decision.source is not None
+        and decision.source.a1_available
+        and QAReason.A1_MISSING not in reasons
+        and QAReason.A1_BASELINE_INVALID not in reasons
+        and QAReason.A1_VALID_RATIO_LOW not in reasons
+        and QAReason.A1_YAW_STD_HIGH not in reasons
+        and QAReason.A1_YAW_JUMP not in reasons
+        and QAReason.RECOVERY_PENDING_AFTER_INVALID not in reasons
+    )
 
 
 def write_qa_log(path: str | Path, decisions: Iterable[QADecision]) -> None:
