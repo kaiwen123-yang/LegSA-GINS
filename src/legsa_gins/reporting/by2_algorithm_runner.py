@@ -14,7 +14,7 @@ import os
 import re
 import shlex
 import subprocess
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -29,6 +29,9 @@ FORMAL_ALGORITHMS = [
     "LegSA_full_EKF",
     "LegSA_QA_Fallback_EKF",
     "LegSA_9F_FGO_EKF",
+    "robust_innovation_reject_EKF",
+    "nis_adaptive_R_EKF",
+    "doppler_consistency_gate_EKF",
 ]
 
 REPO_RELATIVE_REQUIRED_INPUTS = {
@@ -85,6 +88,7 @@ class AlgorithmRunnerSpec:
     active_fgo_backend_available: bool = False
     solver_execution_allowed: bool = True
     complete_nine_factor_fgo_claim: bool = False
+    config_overrides: dict[str, str] = field(default_factory=dict)
 
 
 ALGORITHM_SPECS = {
@@ -187,6 +191,66 @@ ALGORITHM_SPECS = {
         active_fgo_backend_available=False,
         solver_execution_allowed=False,
         complete_nine_factor_fgo_claim=False,
+    ),
+    "robust_innovation_reject_EKF": AlgorithmRunnerSpec(
+        algorithm="robust_innovation_reject_EKF",
+        ablation_variant="qa10b_method_inspired_innovation_threshold_reject",
+        component_flags={
+            "raw_doppler": False,
+            "source_aware": True,
+            "go2_joint": False,
+            "feedback": False,
+        },
+        status="method_inspired_baseline",
+        role="literature_inspired_baseline",
+        config_overrides={
+            "source_aware_mode": "oim_only",
+            "source_aware_policy_version": "n6b_conservative_innovation_covariance",
+            "source_aware_use_innovation_covariance": "true",
+            "source_aware_reject_extreme": "true",
+            "source_aware_trace_enabled": "true",
+        },
+    ),
+    "nis_adaptive_R_EKF": AlgorithmRunnerSpec(
+        algorithm="nis_adaptive_R_EKF",
+        ablation_variant="qa10b_method_inspired_nis_adaptive_R",
+        component_flags={
+            "raw_doppler": False,
+            "source_aware": True,
+            "go2_joint": False,
+            "feedback": False,
+        },
+        status="method_inspired_baseline",
+        role="literature_inspired_baseline",
+        config_overrides={
+            "source_aware_mode": "oim_only",
+            "source_aware_policy_version": "n6b_conservative_innovation_covariance",
+            "source_aware_use_innovation_covariance": "true",
+            "source_aware_reject_extreme": "false",
+            "source_aware_trace_enabled": "true",
+        },
+    ),
+    "doppler_consistency_gate_EKF": AlgorithmRunnerSpec(
+        algorithm="doppler_consistency_gate_EKF",
+        ablation_variant="qa10b_method_inspired_raw_doppler_consistency_gate",
+        component_flags={
+            "raw_doppler": True,
+            "source_aware": True,
+            "go2_joint": False,
+            "feedback": False,
+        },
+        status="method_inspired_baseline_partial_doppler_gate",
+        role="literature_inspired_baseline",
+        config_overrides={
+            "source_aware_mode": "lsim_oim",
+            "source_aware_policy_version": "n6b_conservative_innovation_covariance",
+            "source_aware_use_innovation_covariance": "true",
+            "source_aware_reject_extreme": "true",
+            "raw_doppler_min_sat": "5",
+            "raw_doppler_residual_gate_mps": "3.0",
+            "raw_doppler_R_scale": "1.0",
+            "source_aware_trace_enabled": "true",
+        },
     ),
 }
 
@@ -497,6 +561,18 @@ def build_algorithm_config_text(workspace_root: Path, algorithm: str, output_dir
             "fgo: false",
         ]
     )
+    if spec.config_overrides:
+        pending = dict(spec.config_overrides)
+        rewritten: list[str] = []
+        for line in lines:
+            key = line.split(":", 1)[0].strip() if ":" in line else ""
+            if key in pending:
+                rewritten.append(f"{key}: {pending.pop(key)}")
+            else:
+                rewritten.append(line)
+        for key in sorted(pending):
+            rewritten.append(f"{key}: {pending[key]}")
+        lines = rewritten
     return "\n".join(lines) + "\n"
 
 
