@@ -564,6 +564,34 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       scalarOrDefault(kv,
                       "source_aware_rolling_mad_floor",
                       options.source_aware_policy_config.source_aware_rolling_mad_floor);
+  options.source_aware_policy_config.source_aware_method_family =
+      stringOrDefault(kv,
+                      "source_aware_method_family",
+                      options.source_aware_policy_config.source_aware_method_family);
+  options.source_aware_policy_config.source_aware_method_k0 =
+      scalarOrDefault(kv,
+                      "source_aware_method_k0",
+                      options.source_aware_policy_config.source_aware_method_k0);
+  options.source_aware_policy_config.source_aware_method_k1 =
+      scalarOrDefault(kv,
+                      "source_aware_method_k1",
+                      options.source_aware_policy_config.source_aware_method_k1);
+  options.source_aware_policy_config.source_aware_method_c =
+      scalarOrDefault(kv,
+                      "source_aware_method_c",
+                      options.source_aware_policy_config.source_aware_method_c);
+  options.source_aware_policy_config.source_aware_method_alpha =
+      scalarOrDefault(kv,
+                      "source_aware_method_alpha",
+                      options.source_aware_policy_config.source_aware_method_alpha);
+  options.source_aware_policy_config.source_aware_method_phi =
+      scalarOrDefault(kv,
+                      "source_aware_method_phi",
+                      options.source_aware_policy_config.source_aware_method_phi);
+  options.source_aware_policy_config.source_aware_method_base_gain =
+      scalarOrDefault(kv,
+                      "source_aware_method_base_gain",
+                      options.source_aware_policy_config.source_aware_method_base_gain);
   const std::array<std::pair<source_aware::MeasurementSource, const char*>, source_aware::kMeasurementSourceCount>
       source_keys{{
           {source_aware::MeasurementSource::kReceiverPosition, "receiver_position"},
