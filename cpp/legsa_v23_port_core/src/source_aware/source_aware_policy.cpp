@@ -382,6 +382,123 @@ double SourceAwarePolicy::lsimScale(const SourceMetadata& metadata, SourceWeight
   return capScale(scale_value, metadata.source);
 }
 
+double SourceAwarePolicy::methodFamilyOimScale(const SourceMetadata& metadata,
+                                               double normalized,
+                                               SourceWeightResult& result) const {
+  const std::string& family = config_.source_aware_method_family;
+  const double abs_normalized = std::fabs(normalized);
+  const double k0 = std::max(1.0e-6, config_.source_aware_method_k0);
+  const double k1 = std::max(k0 + 1.0e-6, config_.source_aware_method_k1);
+  const double c = std::max(1.0e-6, config_.source_aware_method_c);
+  const double alpha = config_.source_aware_method_alpha;
+  const double phi = std::max(1.0e-6, config_.source_aware_method_phi);
+  const double gain = std::max(0.0, config_.source_aware_method_base_gain);
+  double scale_value = 1.0;
+
+  if (!std::isfinite(abs_normalized) || abs_normalized <= 0.0) {
+    result.oim_score = 1.0;
+    addReason(result, "qa11e_oim_nonfinite_or_zero_innovation");
+    return 1.0;
+  }
+
+  if (family == "nis_chi_square" || family == "mahalanobis_gate") {
+    if (abs_normalized <= k0) {
+      result.oim_score = 1.0;
+      addReason(result, "qa11e_gate_inside_deadband");
+      return 1.0;
+    }
+    const double delta = abs_normalized - k0;
+    scale_value = 1.0 + gain * delta * delta;
+    if (abs_normalized >= k1) {
+      scale_value = sourceCap(metadata.source);
+      addReason(result, family == "nis_chi_square" ? "qa11e_nis_gate_high" : "qa11e_mahalanobis_gate_high");
+      if (config_.source_aware_reject_extreme) {
+        result.rejected = true;
+        result.accepted = false;
+        addReason(result, "qa11e_gate_reject");
+      }
+    } else {
+      addReason(result, family == "nis_chi_square" ? "qa11e_nis_adaptive_R" : "qa11e_mahalanobis_adaptive_R");
+    }
+  } else if (family == "covariance_matching") {
+    const double delta = std::max(0.0, abs_normalized - k0);
+    scale_value = 1.0 + gain * delta * delta;
+    addReason(result, "qa11e_covariance_matching_adaptive_R");
+  } else if (family == "huber") {
+    const double weight = abs_normalized <= c ? 1.0 : c / abs_normalized;
+    scale_value = 1.0 / std::max(1.0e-3, weight);
+    addReason(result, "qa11e_huber_equivalent_weight");
+  } else if (family == "cauchy") {
+    const double ratio = abs_normalized / c;
+    scale_value = 1.0 + ratio * ratio;
+    addReason(result, "qa11e_cauchy_equivalent_weight");
+  } else if (family == "tukey") {
+    if (abs_normalized >= c) {
+      scale_value = sourceCap(metadata.source);
+      addReason(result, "qa11e_tukey_redescending_cap");
+      if (config_.source_aware_reject_extreme) {
+        result.rejected = true;
+        result.accepted = false;
+        addReason(result, "qa11e_tukey_reject");
+      }
+    } else {
+      const double ratio = abs_normalized / c;
+      const double weight = std::pow(1.0 - ratio * ratio, 2.0);
+      scale_value = 1.0 / std::max(1.0e-3, weight);
+      addReason(result, "qa11e_tukey_biweight");
+    }
+  } else if (family == "igg3") {
+    if (abs_normalized <= k0) {
+      result.oim_score = 1.0;
+      addReason(result, "qa11e_igg3_inside_k0");
+      return 1.0;
+    }
+    if (abs_normalized >= k1) {
+      scale_value = sourceCap(metadata.source);
+      addReason(result, "qa11e_igg3_outside_k1");
+      if (config_.source_aware_reject_extreme) {
+        result.rejected = true;
+        result.accepted = false;
+        addReason(result, "qa11e_igg3_reject");
+      }
+    } else {
+      const double ramp = (k1 - abs_normalized) / (k1 - k0);
+      const double weight = (k0 / abs_normalized) * ramp * ramp;
+      scale_value = 1.0 / std::max(1.0e-3, weight);
+      addReason(result, "qa11e_igg3_equivalent_weight");
+    }
+  } else if (family == "barron") {
+    const double ratio2 = (abs_normalized * abs_normalized) / (c * c);
+    if (std::fabs(alpha - 2.0) < 1.0e-6) {
+      scale_value = 1.0 + gain * ratio2;
+    } else if (std::fabs(alpha) < 1.0e-6) {
+      scale_value = 1.0 + ratio2;
+    } else {
+      const double beta = std::max(1.0e-6, std::fabs(alpha - 2.0));
+      const double influence = std::pow(1.0 + ratio2 / beta, alpha / 2.0 - 1.0);
+      scale_value = 1.0 / std::max(1.0e-3, std::min(1.0, influence));
+    }
+    addReason(result, "qa11e_barron_robust_loss_analogue");
+  } else if (family == "dcs") {
+    const double r2 = abs_normalized * abs_normalized;
+    const double weight = phi / (phi + r2);
+    scale_value = 1.0 / std::max(1.0e-3, weight);
+    addReason(result, "qa11e_dynamic_covariance_scaling_analogue");
+  } else if (family == "switchable") {
+    const double ratio = abs_normalized / c;
+    const double switch_weight = 1.0 / (1.0 + ratio * ratio);
+    scale_value = 1.0 / std::max(1.0e-3, switch_weight);
+    addReason(result, "qa11e_switchable_constraint_analogue");
+  } else {
+    const double delta = std::max(0.0, abs_normalized - config_.source_aware_deadband_normalized);
+    scale_value = 1.0 + gain * delta * delta;
+    addReason(result, "qa11e_generic_quadratic_adaptive_R");
+  }
+
+  result.oim_score = std::max(0.0, std::min(1.0, 1.0 / std::max(1.0, scale_value)));
+  return capScale(scale_value, metadata.source);
+}
+
 double SourceAwarePolicy::oimScale(const SourceMetadata& metadata,
                                    const ObservationInnovation& innovation,
                                    SourceWeightResult& result) const {
@@ -397,6 +514,10 @@ double SourceAwarePolicy::oimScale(const SourceMetadata& metadata,
   result.dof = innovation.dof;
   result.innovation_cov_trace = innovation.innovation_cov_trace;
   result.used_innovation_covariance = innovation.used_innovation_covariance;
+  if (!config_.source_aware_method_family.empty() &&
+      config_.source_aware_method_family != "n6b_conservative_quadratic") {
+    return methodFamilyOimScale(metadata, normalized, result);
+  }
   if (!n6bPolicyEnabled()) {
     if (normalized <= 1.5) {
       result.oim_score = 1.0;

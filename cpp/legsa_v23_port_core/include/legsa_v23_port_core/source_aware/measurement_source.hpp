@@ -122,6 +122,13 @@ struct SourceAwarePolicyConfig {
   bool source_aware_enable_rolling_innovation_baseline = true;
   std::size_t source_aware_rolling_window_size = 31;
   double source_aware_rolling_mad_floor = 0.5;
+  std::string source_aware_method_family = "n6b_conservative_quadratic";
+  double source_aware_method_k0 = 1.5;
+  double source_aware_method_k1 = 4.0;
+  double source_aware_method_c = 2.5;
+  double source_aware_method_alpha = 0.0;
+  double source_aware_method_phi = 1.0;
+  double source_aware_method_base_gain = 1.0;
   std::array<SourceAwareSourceConfig, kMeasurementSourceCount> sources{};
 };
 

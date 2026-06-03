@@ -19,6 +19,167 @@ from pathlib import Path
 from typing import Any
 
 
+QA11F_CLASSIC5_METHODS = [
+    "qa11e_nis_chi_square_EKF",
+    "qa11e_mahalanobis_gate_EKF",
+    "qa11e_covariance_matching_EKF",
+    "qa11e_huber_weight_EKF",
+    "qa11e_igg3_weight_EKF",
+]
+
+QA11F_RECENT5_METHODS = [
+    "qa11e_dcs_weight_EKF",
+    "qa11e_gnss_status_fix_EKF",
+    "qa11e_position_std_adaptive_EKF",
+    "qa11e_baseline_length_a1_EKF",
+    "qa11e_yaw_std_adaptive_EKF",
+]
+
+QA11F_CLASSIC5_RECENT5_ALGORITHMS = QA11F_CLASSIC5_METHODS + QA11F_RECENT5_METHODS
+
+QA11G_CLASSIC5_METHODS = [
+    "qa11g_kalman1960_nis_chi_square_EKF",
+    "qa11g_mahalanobis1936_innovation_gate_EKF",
+    "qa11g_mehra1970_covariance_matching_EKF",
+    "qa11g_huber1964_m_estimator_EKF",
+    "qa11g_yang2002_igg3_equiv_weight_EKF",
+]
+
+QA11G_RECENT5_METHODS = [
+    "qa11g_wang2020_tc_gnss_ins_fde_EKF",
+    "qa11g_yan2021_irakf_solution_state_EKF",
+    "qa11g_sun2022_dual_w_test_EKF",
+    "qa11g_yin2023_improved_R_rakf_EKF",
+    "qa11g_chen2025_fading_factor_arkf_EKF",
+]
+
+QA11G_CONCRETE_PAPER_10_METHODS = QA11G_CLASSIC5_METHODS + QA11G_RECENT5_METHODS
+
+QA11G_METHOD_SOURCE_BINDINGS: dict[str, dict[str, str | int | bool]] = {
+    "qa11g_kalman1960_nis_chi_square_EKF": {
+        "method_group": "classic5",
+        "source_id": "QA11G_SRC_KALMAN_1960_NIS",
+        "title": "A New Approach to Linear Filtering and Prediction Problems",
+        "authors": "R. E. Kalman",
+        "year": 1960,
+        "venue": "Journal of Basic Engineering",
+        "doi_or_url": "https://doi.org/10.1115/1.3662552",
+        "reimplementation_label": "CLASSIC_METHOD_BASELINE",
+        "exact_reproduction": False,
+        "core_rule": "NIS = nu^T S^-1 nu; inflate or cap R when normalized innovation exceeds fixed chi-square-style gates.",
+    },
+    "qa11g_mahalanobis1936_innovation_gate_EKF": {
+        "method_group": "classic5",
+        "source_id": "QA11G_SRC_MAHALANOBIS_1936_DISTANCE",
+        "title": "On the Generalized Distance in Statistics",
+        "authors": "P. C. Mahalanobis",
+        "year": 1936,
+        "venue": "Proceedings of the National Institute of Sciences of India",
+        "doi_or_url": "https://insa.nic.in/writereaddata/UpLoadedFiles/PINSA/Vol02_1936_1_Art05.pdf",
+        "reimplementation_label": "CLASSIC_METHOD_BASELINE",
+        "exact_reproduction": False,
+        "core_rule": "Use Mahalanobis innovation distance with a reject/downweight gate on BY2 EKF measurement residuals.",
+    },
+    "qa11g_mehra1970_covariance_matching_EKF": {
+        "method_group": "classic5",
+        "source_id": "QA11G_SRC_MEHRA_1970_COVARIANCE_MATCHING",
+        "title": "On the Identification of Variances and Adaptive Kalman Filtering",
+        "authors": "R. K. Mehra",
+        "year": 1970,
+        "venue": "IEEE Transactions on Automatic Control",
+        "doi_or_url": "https://doi.org/10.1109/TAC.1970.1099422",
+        "reimplementation_label": "CLASSIC_METHOD_BASELINE",
+        "exact_reproduction": False,
+        "core_rule": "Use innovation covariance mismatch to adaptively inflate measurement covariance.",
+    },
+    "qa11g_huber1964_m_estimator_EKF": {
+        "method_group": "classic5",
+        "source_id": "QA11G_SRC_HUBER_1964_M_ESTIMATOR",
+        "title": "Robust Estimation of a Location Parameter",
+        "authors": "P. J. Huber",
+        "year": 1964,
+        "venue": "Annals of Mathematical Statistics",
+        "doi_or_url": "https://doi.org/10.1214/aoms/1177703732",
+        "reimplementation_label": "CLASSIC_METHOD_BASELINE",
+        "exact_reproduction": False,
+        "core_rule": "Equivalent weight is one inside the Huber threshold and c / |r| outside it.",
+    },
+    "qa11g_yang2002_igg3_equiv_weight_EKF": {
+        "method_group": "classic5",
+        "source_id": "QA11G_SRC_YANG_2002_ROBUST_GEODETIC",
+        "title": "Robust estimator for correlated observations based on bifactor equivalent weights",
+        "authors": "Y. Yang, L. Song, T. Xu",
+        "year": 2002,
+        "venue": "Journal of Geodesy",
+        "doi_or_url": "https://doi.org/10.1007/s00190-002-0256-7",
+        "reimplementation_label": "CLASSIC_METHOD_BASELINE",
+        "exact_reproduction": False,
+        "core_rule": "Use a two-threshold geodetic equivalent-weight curve: full weight, tapered weight, then capped rejection.",
+    },
+    "qa11g_wang2020_tc_gnss_ins_fde_EKF": {
+        "method_group": "recent5",
+        "source_id": "QA11G_SRC_WANG_2020_TC_GNSS_INS_FDE",
+        "title": "Fault Detection and Exclusion for Tightly Coupled GNSS/INS System Considering Fault in State Prediction",
+        "authors": "Shizhuang Wang, Xingqun Zhan, Yawei Zhai, Baoyu Liu",
+        "year": 2020,
+        "venue": "Sensors",
+        "doi_or_url": "https://doi.org/10.3390/s20030590",
+        "reimplementation_label": "RECENT_PAPER_DERIVED_BY2_REIMPLEMENTATION",
+        "exact_reproduction": False,
+        "core_rule": "Use prediction-aware innovation fault detection; BY2 maps this to innovation gating with reject-extreme enabled.",
+    },
+    "qa11g_yan2021_irakf_solution_state_EKF": {
+        "method_group": "recent5",
+        "source_id": "QA11G_SRC_YAN_2021_IRAKF_GNSS_MEMS",
+        "title": "An Improved Adaptive Kalman Filter for a Single Frequency GNSS/MEMS-IMU/Odometer Integrated Navigation Module",
+        "authors": "Peihui Yan, Jinguang Jiang, Fangning Zhang, Dongpeng Xie, Jiaji Wu, Chao Zhang",
+        "year": 2021,
+        "venue": "Remote Sensing",
+        "doi_or_url": "https://doi.org/10.3390/rs13214317",
+        "reimplementation_label": "RECENT_PAPER_DERIVED_BY2_REIMPLEMENTATION",
+        "exact_reproduction": False,
+        "core_rule": "Use GNSS solution-quality state to scale measurement covariance; BY2 uses receiver position/std innovation fields.",
+    },
+    "qa11g_sun2022_dual_w_test_EKF": {
+        "method_group": "recent5",
+        "source_id": "QA11G_SRC_SUN_2022_DUAL_W_TEST",
+        "title": "A Dual w-Test Based Quality Control Algorithm for Integrated IMU/GNSS Navigation in Urban Areas",
+        "authors": "Rui Sun, Ming Qiu, Fei Liu, Zhi Wang, Washington Yotto Ochieng",
+        "year": 2022,
+        "venue": "Remote Sensing",
+        "doi_or_url": "https://doi.org/10.3390/rs14092132",
+        "reimplementation_label": "RECENT_PAPER_DERIVED_BY2_REIMPLEMENTATION",
+        "exact_reproduction": False,
+        "core_rule": "Use two-stage normalized residual tests for fault detection/isolation; BY2 maps them to innovation reject/downweight gates.",
+    },
+    "qa11g_yin2023_improved_R_rakf_EKF": {
+        "method_group": "recent5",
+        "source_id": "QA11G_SRC_YIN_2023_IMPROVED_R_RAKF",
+        "title": "A Robust Adaptive Extended Kalman Filter Based on an Improved Measurement Noise Covariance Matrix for the Monitoring and Isolation of Abnormal Disturbances in GNSS/INS Vehicle Navigation",
+        "authors": "Zhihui Yin, Jichao Yang, Yue Ma, Shengli Wang, Dashuai Chai, Haonan Cui",
+        "year": 2023,
+        "venue": "Remote Sensing",
+        "doi_or_url": "https://doi.org/10.3390/rs15174125",
+        "reimplementation_label": "RECENT_PAPER_DERIVED_BY2_REIMPLEMENTATION",
+        "exact_reproduction": False,
+        "core_rule": "Adapt measurement covariance from residual consistency while preserving a robust lower bound against overconfidence.",
+    },
+    "qa11g_chen2025_fading_factor_arkf_EKF": {
+        "method_group": "recent5",
+        "source_id": "QA11G_SRC_CHEN_2025_FADING_FACTOR_ARKF",
+        "title": "An Improved Fading Factor-Based Adaptive Robust Filtering Algorithm for SINS/GNSS Integration with Dynamic Disturbance Suppression",
+        "authors": "Zhaohao Chen, Yixu Liu, Shangguo Liu, Shengli Wang, Lei Yang",
+        "year": 2025,
+        "venue": "Remote Sensing",
+        "doi_or_url": "https://doi.org/10.3390/rs17081449",
+        "reimplementation_label": "RECENT_PAPER_DERIVED_BY2_REIMPLEMENTATION",
+        "exact_reproduction": False,
+        "core_rule": "Use fading-factor adaptive robust filtering; BY2 maps the disturbance response to stronger innovation-based R inflation.",
+    },
+}
+
+
+
 FORMAL_ALGORITHMS = [
     "source_backed_EKF",
     "baseline_no_feedback_EKF",
@@ -32,7 +193,7 @@ FORMAL_ALGORITHMS = [
     "robust_innovation_reject_EKF",
     "nis_adaptive_R_EKF",
     "doppler_consistency_gate_EKF",
-]
+] + QA11F_CLASSIC5_RECENT5_ALGORITHMS + QA11G_CONCRETE_PAPER_10_METHODS
 
 REPO_RELATIVE_REQUIRED_INPUTS = {
     "raw_doppler": Path("运行结果") / "N5B_rtklib_doppler_provider_activation" / "RAW_DOPPLER_VELOCITY_FACTORS.csv",
@@ -253,6 +414,498 @@ ALGORITHM_SPECS = {
         },
     ),
 }
+
+
+def _qa11e_source_only(source_name: str) -> dict[str, str]:
+    sources = ["receiver_position", "receiver_velocity", "dual_antenna_yaw", "raw_doppler_velocity"]
+    overrides: dict[str, str] = {}
+    for source in sources:
+        enabled = source == source_name
+        overrides[f"source_aware_{source}_enabled"] = str(enabled).lower()
+        overrides[f"source_aware_{source}_lsim_enabled"] = str(enabled).lower()
+        overrides[f"source_aware_{source}_oim_enabled"] = str(enabled).lower()
+    return overrides
+
+
+def _qa11e_overrides(
+    *,
+    family: str,
+    label: str,
+    source_id: str,
+    k0: float = 1.5,
+    k1: float = 4.0,
+    c: float = 2.5,
+    alpha: float = 0.0,
+    phi: float = 1.0,
+    gain: float = 1.0,
+    mode: str = "lsim_oim",
+    reject_extreme: bool = False,
+    extra: dict[str, str] | None = None,
+) -> dict[str, str]:
+    overrides = {
+        "qa11e_method_label": label,
+        "qa11e_paper_source_id": source_id,
+        "exact_reproduction": "false",
+        "source_aware_mode": mode,
+        "source_aware_policy_version": "n6b_conservative_innovation_covariance",
+        "source_aware_method_family": family,
+        "source_aware_method_k0": f"{k0}",
+        "source_aware_method_k1": f"{k1}",
+        "source_aware_method_c": f"{c}",
+        "source_aware_method_alpha": f"{alpha}",
+        "source_aware_method_phi": f"{phi}",
+        "source_aware_method_base_gain": f"{gain}",
+        "source_aware_use_innovation_covariance": "true",
+        "source_aware_reject_extreme": str(reject_extreme).lower(),
+        "source_aware_trace_enabled": "true",
+        "source_aware_go2_attitude_roll_pitch_enabled": "false",
+        "source_aware_go2_attitude_roll_pitch_lsim_enabled": "false",
+        "source_aware_go2_attitude_roll_pitch_oim_enabled": "false",
+        "source_aware_go2_horizontal_velocity_enabled": "false",
+        "source_aware_go2_horizontal_velocity_lsim_enabled": "false",
+        "source_aware_go2_horizontal_velocity_oim_enabled": "false",
+    }
+    if extra:
+        overrides.update(extra)
+    return overrides
+
+
+def _qa11e_spec(algorithm: str, variant: str, overrides: dict[str, str]) -> AlgorithmRunnerSpec:
+    return AlgorithmRunnerSpec(
+        algorithm=algorithm,
+        ablation_variant=variant,
+        component_flags={
+            "raw_doppler": False,
+            "source_aware": True,
+            "go2_joint": False,
+            "feedback": False,
+        },
+        status="qa11e_executable_EKF_QC_config_variant",
+        role="literature_inspired_baseline",
+        active_fgo_backend_available=False,
+        solver_execution_allowed=True,
+        complete_nine_factor_fgo_claim=False,
+        config_overrides=overrides,
+    )
+
+
+ALGORITHM_SPECS.update(
+    {
+        "qa11e_nis_chi_square_EKF": _qa11e_spec(
+            "qa11e_nis_chi_square_EKF",
+            "qa11e_literature20_nis_chi_square",
+            _qa11e_overrides(
+                family="nis_chi_square",
+                label="CLASSIC_METHOD_BASELINE",
+                source_id="QA11E_SRC_NIS_CHI_SQUARE",
+                k0=1.732,
+                k1=3.0,
+                gain=1.0,
+            ),
+        ),
+        "qa11e_mahalanobis_gate_EKF": _qa11e_spec(
+            "qa11e_mahalanobis_gate_EKF",
+            "qa11e_literature20_mahalanobis_gate",
+            _qa11e_overrides(
+                family="mahalanobis_gate",
+                label="CLASSIC_METHOD_BASELINE",
+                source_id="QA11E_SRC_MAHALANOBIS_GATING",
+                k0=1.5,
+                k1=3.5,
+                gain=1.2,
+                reject_extreme=True,
+            ),
+        ),
+        "qa11e_covariance_matching_EKF": _qa11e_spec(
+            "qa11e_covariance_matching_EKF",
+            "qa11e_literature20_covariance_matching",
+            _qa11e_overrides(
+                family="covariance_matching",
+                label="CLASSIC_METHOD_BASELINE",
+                source_id="QA11E_SRC_COVARIANCE_MATCHING",
+                k0=1.2,
+                k1=4.0,
+                gain=0.6,
+            ),
+        ),
+        "qa11e_huber_weight_EKF": _qa11e_spec(
+            "qa11e_huber_weight_EKF",
+            "qa11e_literature20_huber",
+            _qa11e_overrides(
+                family="huber",
+                label="CLASSIC_METHOD_BASELINE",
+                source_id="QA11E_SRC_HUBER_ROBUST_EKF",
+                c=1.5,
+            ),
+        ),
+        "qa11e_cauchy_weight_EKF": _qa11e_spec(
+            "qa11e_cauchy_weight_EKF",
+            "qa11e_literature20_cauchy",
+            _qa11e_overrides(
+                family="cauchy",
+                label="CLASSIC_METHOD_BASELINE",
+                source_id="QA11E_SRC_CAUCHY_ROBUST_EKF",
+                c=2.0,
+            ),
+        ),
+        "qa11e_tukey_biweight_EKF": _qa11e_spec(
+            "qa11e_tukey_biweight_EKF",
+            "qa11e_literature20_tukey_biweight",
+            _qa11e_overrides(
+                family="tukey",
+                label="CLASSIC_METHOD_BASELINE",
+                source_id="QA11E_SRC_TUKEY_BIWEIGHT",
+                c=4.685,
+                reject_extreme=False,
+            ),
+        ),
+        "qa11e_igg3_weight_EKF": _qa11e_spec(
+            "qa11e_igg3_weight_EKF",
+            "qa11e_literature20_igg3",
+            _qa11e_overrides(
+                family="igg3",
+                label="CLASSIC_METHOD_BASELINE",
+                source_id="QA11E_SRC_IGG3_GEODETIC_ROBUST",
+                k0=1.5,
+                k1=3.0,
+            ),
+        ),
+        "qa11e_barron_loss_EKF": _qa11e_spec(
+            "qa11e_barron_loss_EKF",
+            "qa11e_literature20_barron_loss",
+            _qa11e_overrides(
+                family="barron",
+                label="RECENT_PAPER_MOTIVATED_VARIANT",
+                source_id="QA11E_SRC_BARRON_GENERAL_ROBUST_LOSS",
+                c=2.0,
+                alpha=0.0,
+                gain=0.8,
+            ),
+        ),
+        "qa11e_dcs_weight_EKF": _qa11e_spec(
+            "qa11e_dcs_weight_EKF",
+            "qa11e_literature20_dcs",
+            _qa11e_overrides(
+                family="dcs",
+                label="PAPER_DERIVED_BY2_REIMPLEMENTATION",
+                source_id="QA11E_SRC_DYNAMIC_COVARIANCE_SCALING",
+                phi=4.0,
+            ),
+        ),
+        "qa11e_switchable_weight_EKF": _qa11e_spec(
+            "qa11e_switchable_weight_EKF",
+            "qa11e_literature20_switchable_constraint",
+            _qa11e_overrides(
+                family="switchable",
+                label="PAPER_DERIVED_BY2_REIMPLEMENTATION",
+                source_id="QA11E_SRC_SWITCHABLE_CONSTRAINTS",
+                c=2.5,
+            ),
+        ),
+        "qa11e_gnss_status_fix_EKF": _qa11e_spec(
+            "qa11e_gnss_status_fix_EKF",
+            "qa11e_literature20_gnss_status_fix",
+            _qa11e_overrides(
+                family="n6b_conservative_quadratic",
+                label="RECENT_PAPER_MOTIVATED_VARIANT",
+                source_id="QA11E_SRC_GNSS_FIX_STATUS_QC",
+                mode="lsim_only",
+                extra={"source_aware_receiver_position_cap": "15.0", "source_aware_dual_yaw_cap": "15.0"},
+            ),
+        ),
+        "qa11e_position_std_adaptive_EKF": _qa11e_spec(
+            "qa11e_position_std_adaptive_EKF",
+            "qa11e_literature20_position_std_adaptive",
+            _qa11e_overrides(
+                family="covariance_matching",
+                label="RECENT_PAPER_MOTIVATED_VARIANT",
+                source_id="QA11E_SRC_GNSS_POSITION_STD_ADAPTIVE",
+                k0=1.2,
+                gain=0.8,
+                extra=_qa11e_source_only("receiver_position"),
+            ),
+        ),
+        "qa11e_velocity_std_adaptive_EKF": _qa11e_spec(
+            "qa11e_velocity_std_adaptive_EKF",
+            "qa11e_literature20_velocity_std_adaptive",
+            _qa11e_overrides(
+                family="covariance_matching",
+                label="RECENT_PAPER_MOTIVATED_VARIANT",
+                source_id="QA11E_SRC_GNSS_VELOCITY_STD_ADAPTIVE",
+                k0=1.2,
+                gain=0.8,
+                extra=_qa11e_source_only("receiver_velocity"),
+            ),
+        ),
+        "qa11e_baseline_length_a1_EKF": _qa11e_spec(
+            "qa11e_baseline_length_a1_EKF",
+            "qa11e_literature20_a1_baseline_qc",
+            _qa11e_overrides(
+                family="n6b_conservative_quadratic",
+                label="PAPER_DERIVED_BY2_REIMPLEMENTATION",
+                source_id="QA11E_SRC_DUAL_ANTENNA_BASELINE_QC",
+                mode="lsim_only",
+                extra=_qa11e_source_only("dual_antenna_yaw"),
+            ),
+        ),
+        "qa11e_yaw_std_adaptive_EKF": _qa11e_spec(
+            "qa11e_yaw_std_adaptive_EKF",
+            "qa11e_literature20_yaw_std_adaptive",
+            _qa11e_overrides(
+                family="huber",
+                label="PAPER_DERIVED_BY2_REIMPLEMENTATION",
+                source_id="QA11E_SRC_DUAL_YAW_STD_ADAPTIVE",
+                c=1.8,
+                extra=_qa11e_source_only("dual_antenna_yaw"),
+            ),
+        ),
+        "qa11e_yaw_jump_monitor_EKF": _qa11e_spec(
+            "qa11e_yaw_jump_monitor_EKF",
+            "qa11e_literature20_yaw_jump_monitor",
+            _qa11e_overrides(
+                family="tukey",
+                label="PAPER_DERIVED_BY2_REIMPLEMENTATION",
+                source_id="QA11E_SRC_DUAL_YAW_JUMP_MONITOR",
+                c=3.0,
+                extra=_qa11e_source_only("dual_antenna_yaw"),
+            ),
+        ),
+        "qa11e_time_continuity_EKF": _qa11e_spec(
+            "qa11e_time_continuity_EKF",
+            "qa11e_literature20_time_continuity_qc",
+            _qa11e_overrides(
+                family="n6b_conservative_quadratic",
+                label="RECENT_PAPER_MOTIVATED_VARIANT",
+                source_id="QA11E_SRC_TIME_CONTINUITY_QC",
+                mode="lsim_only",
+            ),
+        ),
+        "qa11e_position_update_huber_EKF": _qa11e_spec(
+            "qa11e_position_update_huber_EKF",
+            "qa11e_literature20_position_only_huber",
+            _qa11e_overrides(
+                family="huber",
+                label="RECENT_PAPER_MOTIVATED_VARIANT",
+                source_id="QA11E_SRC_POSITION_UPDATE_ROBUST_ONLY",
+                c=1.5,
+                extra=_qa11e_source_only("receiver_position"),
+            ),
+        ),
+        "qa11e_velocity_update_huber_EKF": _qa11e_spec(
+            "qa11e_velocity_update_huber_EKF",
+            "qa11e_literature20_velocity_only_huber",
+            _qa11e_overrides(
+                family="huber",
+                label="RECENT_PAPER_MOTIVATED_VARIANT",
+                source_id="QA11E_SRC_VELOCITY_UPDATE_ROBUST_ONLY",
+                c=1.5,
+                extra=_qa11e_source_only("receiver_velocity"),
+            ),
+        ),
+        "qa11e_yaw_update_huber_EKF": _qa11e_spec(
+            "qa11e_yaw_update_huber_EKF",
+            "qa11e_literature20_yaw_only_huber",
+            _qa11e_overrides(
+                family="huber",
+                label="RECENT_PAPER_MOTIVATED_VARIANT",
+                source_id="QA11E_SRC_YAW_UPDATE_ROBUST_ONLY",
+                c=1.5,
+                extra=_qa11e_source_only("dual_antenna_yaw"),
+            ),
+        ),
+    }
+)
+
+
+def _qa11g_overrides(
+    *,
+    algorithm: str,
+    family: str,
+    k0: float = 1.5,
+    k1: float = 4.0,
+    c: float = 2.5,
+    alpha: float = 0.0,
+    phi: float = 1.0,
+    gain: float = 1.0,
+    mode: str = "lsim_oim",
+    reject_extreme: bool = False,
+    extra: dict[str, str] | None = None,
+) -> dict[str, str]:
+    binding = QA11G_METHOD_SOURCE_BINDINGS[algorithm]
+    label = str(binding["reimplementation_label"])
+    source_id = str(binding["source_id"])
+    overrides = _qa11e_overrides(
+        family=family,
+        label=label,
+        source_id=source_id,
+        k0=k0,
+        k1=k1,
+        c=c,
+        alpha=alpha,
+        phi=phi,
+        gain=gain,
+        mode=mode,
+        reject_extreme=reject_extreme,
+        extra=extra,
+    )
+    overrides.update(
+        {
+            "qa11g_stage": "QA11G_CONCRETE_PAPER_SOURCED_10METHOD_RAW_BY2_FULL_MATRIX",
+            "qa11g_method_group": str(binding["method_group"]),
+            "qa11g_method_label": label,
+            "qa11g_reimplementation_label": label,
+            "qa11g_paper_source_id": source_id,
+            "qa11g_concrete_paper_title": str(binding["title"]),
+            "qa11g_concrete_paper_year": str(binding["year"]),
+            "qa11g_concrete_paper_venue": str(binding["venue"]),
+            "qa11g_concrete_paper_doi_or_url": str(binding["doi_or_url"]),
+            "qa11g_core_formula_or_rule": str(binding["core_rule"]),
+            "source_verification_status": "verified_concrete_doi_or_url",
+            "trace_tuning": "false",
+            "final_v23_tuning": "false",
+            "trace_solver_input": "false",
+            "final_v23_output_solver_input": "false",
+            "receiver_imu_data_as_body_imu": "false",
+            "exact_reproduction": "false",
+        }
+    )
+    return overrides
+
+
+def _qa11g_spec(algorithm: str, variant: str, overrides: dict[str, str]) -> AlgorithmRunnerSpec:
+    return AlgorithmRunnerSpec(
+        algorithm=algorithm,
+        ablation_variant=variant,
+        component_flags={
+            "raw_doppler": False,
+            "source_aware": True,
+            "go2_joint": False,
+            "feedback": False,
+        },
+        status="qa11g_concrete_paper_sourced_by2_reimplementation",
+        role="concrete_paper_sourced_external_baseline",
+        active_fgo_backend_available=False,
+        solver_execution_allowed=True,
+        complete_nine_factor_fgo_claim=False,
+        config_overrides=overrides,
+    )
+
+
+ALGORITHM_SPECS.update(
+    {
+        "qa11g_kalman1960_nis_chi_square_EKF": _qa11g_spec(
+            "qa11g_kalman1960_nis_chi_square_EKF",
+            "qa11g_kalman1960_nis_chi_square",
+            _qa11g_overrides(
+                algorithm="qa11g_kalman1960_nis_chi_square_EKF",
+                family="nis_chi_square",
+                k0=1.732,
+                k1=3.0,
+                gain=1.0,
+            ),
+        ),
+        "qa11g_mahalanobis1936_innovation_gate_EKF": _qa11g_spec(
+            "qa11g_mahalanobis1936_innovation_gate_EKF",
+            "qa11g_mahalanobis1936_innovation_gate",
+            _qa11g_overrides(
+                algorithm="qa11g_mahalanobis1936_innovation_gate_EKF",
+                family="mahalanobis_gate",
+                k0=1.5,
+                k1=3.5,
+                gain=1.2,
+                reject_extreme=True,
+            ),
+        ),
+        "qa11g_mehra1970_covariance_matching_EKF": _qa11g_spec(
+            "qa11g_mehra1970_covariance_matching_EKF",
+            "qa11g_mehra1970_covariance_matching",
+            _qa11g_overrides(
+                algorithm="qa11g_mehra1970_covariance_matching_EKF",
+                family="covariance_matching",
+                k0=1.2,
+                k1=4.0,
+                gain=0.6,
+            ),
+        ),
+        "qa11g_huber1964_m_estimator_EKF": _qa11g_spec(
+            "qa11g_huber1964_m_estimator_EKF",
+            "qa11g_huber1964_m_estimator",
+            _qa11g_overrides(
+                algorithm="qa11g_huber1964_m_estimator_EKF",
+                family="huber",
+                c=1.5,
+            ),
+        ),
+        "qa11g_yang2002_igg3_equiv_weight_EKF": _qa11g_spec(
+            "qa11g_yang2002_igg3_equiv_weight_EKF",
+            "qa11g_yang2002_igg3_equiv_weight",
+            _qa11g_overrides(
+                algorithm="qa11g_yang2002_igg3_equiv_weight_EKF",
+                family="igg3",
+                k0=1.5,
+                k1=3.0,
+            ),
+        ),
+        "qa11g_wang2020_tc_gnss_ins_fde_EKF": _qa11g_spec(
+            "qa11g_wang2020_tc_gnss_ins_fde_EKF",
+            "qa11g_wang2020_tc_gnss_ins_fde",
+            _qa11g_overrides(
+                algorithm="qa11g_wang2020_tc_gnss_ins_fde_EKF",
+                family="mahalanobis_gate",
+                k0=1.5,
+                k1=3.0,
+                gain=1.4,
+                reject_extreme=True,
+            ),
+        ),
+        "qa11g_yan2021_irakf_solution_state_EKF": _qa11g_spec(
+            "qa11g_yan2021_irakf_solution_state_EKF",
+            "qa11g_yan2021_irakf_solution_state",
+            _qa11g_overrides(
+                algorithm="qa11g_yan2021_irakf_solution_state_EKF",
+                family="covariance_matching",
+                k0=1.2,
+                k1=4.0,
+                gain=0.9,
+                extra=_qa11e_source_only("receiver_position"),
+            ),
+        ),
+        "qa11g_sun2022_dual_w_test_EKF": _qa11g_spec(
+            "qa11g_sun2022_dual_w_test_EKF",
+            "qa11g_sun2022_dual_w_test",
+            _qa11g_overrides(
+                algorithm="qa11g_sun2022_dual_w_test_EKF",
+                family="mahalanobis_gate",
+                k0=1.5,
+                k1=3.0,
+                gain=1.3,
+                reject_extreme=True,
+            ),
+        ),
+        "qa11g_yin2023_improved_R_rakf_EKF": _qa11g_spec(
+            "qa11g_yin2023_improved_R_rakf_EKF",
+            "qa11g_yin2023_improved_R_rakf",
+            _qa11g_overrides(
+                algorithm="qa11g_yin2023_improved_R_rakf_EKF",
+                family="covariance_matching",
+                k0=1.0,
+                k1=4.0,
+                gain=1.0,
+            ),
+        ),
+        "qa11g_chen2025_fading_factor_arkf_EKF": _qa11g_spec(
+            "qa11g_chen2025_fading_factor_arkf_EKF",
+            "qa11g_chen2025_fading_factor_arkf",
+            _qa11g_overrides(
+                algorithm="qa11g_chen2025_fading_factor_arkf_EKF",
+                family="covariance_matching",
+                k0=1.0,
+                k1=3.5,
+                gain=1.5,
+            ),
+        ),
+    }
+)
 
 
 def repo_to_wsl(path: str | Path) -> str:

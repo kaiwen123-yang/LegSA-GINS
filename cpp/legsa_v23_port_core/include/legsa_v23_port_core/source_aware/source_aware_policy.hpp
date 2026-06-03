@@ -31,6 +31,7 @@ class SourceAwarePolicy {
   bool n6bPolicyEnabled() const;
   void applyRollingBaseline(MeasurementSource source, double normalized, SourceWeightResult& result);
   double lsimScale(const SourceMetadata& metadata, SourceWeightResult& result) const;
+  double methodFamilyOimScale(const SourceMetadata& metadata, double normalized, SourceWeightResult& result) const;
   double oimScale(const SourceMetadata& metadata,
                   const ObservationInnovation& innovation,
                   SourceWeightResult& result) const;
