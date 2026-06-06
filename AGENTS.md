@@ -943,3 +943,39 @@ diagnostic_only=PAPER1F_adapters; yaw_frame_sensitivity; RTKLIB_movingbase; BY3_
 ready_for_manuscript_drafting=true_bounded_by_claim_boundary
 ready_for_paper_claims=false
 ```
+## 35. PAPER4B_R2 Physical Frame Close And Offline Yaw Reevaluation Lock
+
+`PAPER4B_R2_PHYSICAL_FRAME_CLOSE_AND_YAW_REEVALUATION` records the user-confirmed Fixposition/Go2 antenna installation evidence and accepts the physical frame policy for the BY2 dual-antenna baseline. This stage closes the physical antenna-to-body geometry only; it does not close exact reproduction, full faithful external algorithms, same-evaluator superiority, BY3 yaw generalization, or XB severe-GNSS high-precision proof.
+
+PAPER4B_R2 accepted physical facts:
+
+- Fixposition receiver front faces the Go2 forward direction.
+- Official GNSS extrinsics are used.
+- GNSS1 has negative y and is the robot-right antenna.
+- GNSS2 has positive y and is the robot-left antenna.
+- Under Go2 FLU, GNSS1->GNSS2 is body `+Y_left`.
+- The fixed physical transform is `body_yaw_NED_deg = wrap360(baseline_heading_NED_deg + 90 deg)`.
+
+PAPER4B_R2 allowed evidence:
+
+- `FRAME_POLICY_ACCEPTED.yaml` under `<PAPER4B_R2_STAGE_ROOT>`;
+- user-confirmed physical-frame statement, photo/PDF/STEP/STL evidence indices, trace-generation audit, and mount geometry reports;
+- derived offline yaw reevaluation for PAPER3F/PAPER3G/PAPER3H rows whose native baseline heading semantics are explicit `atan2(E,N)` and whose baseline direction is GNSS1->GNSS2;
+- lightweight summary tables, render-QA reports, and figure/table indices under `<PAPER4B_R2_STAGE_ROOT>` and `<PAPER4B_R2_EXPORT_ROOT>`.
+
+PAPER4B_R2 diagnostic/blocked evidence:
+
+- PAPER3I Wu EQKF DD/LOS row headings remain diagnostic and are not case-level baseline-state body-yaw outputs.
+- PAPER3I Pavlasek IEKF remains innovation/provider diagnostic without a baseline-heading epoch output for body-yaw reevaluation.
+- PDF machine text extraction may be unavailable; official extrinsics values are recorded from the user-provided official tutorial excerpt and the present PDF asset path.
+
+PAPER4B_R2 hard prohibitions:
+
+- no modification of historical `epoch_output.csv`;
+- no per-case offset, no RMSE-selected transform, and no method-specific trace tuning;
+- no trace online use;
+- no receiver `imu-data.csv` as Go2 body IMU;
+- no exact/full faithful external reproduction claim;
+- no final_v23, LegSA_QA, LegSA_full, or universal superiority claim;
+- no raw/RINEX/UBX/RTCM/runtime payload or external-code staging;
+- no push.

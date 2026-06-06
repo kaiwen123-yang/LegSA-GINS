@@ -1,0 +1,6 @@
+figure,pdf,category,description
+BY2_body_yaw_recomputed_rmse_bar.png,BY2_body_yaw_recomputed_rmse_bar.pdf,APPENDIX_OR_DIAGNOSTIC,RMSE by method after fixed physical +90 deg transform
+BY2_body_yaw_recomputed_family_heatmap.png,BY2_body_yaw_recomputed_family_heatmap.pdf,APPENDIX_OR_DIAGNOSTIC,Family heatmap of body-yaw RMSE after fixed transform
+BY2_body_yaw_recomputed_case_boxplot.png,BY2_body_yaw_recomputed_case_boxplot.pdf,APPENDIX_OR_DIAGNOSTIC,Case-level RMSE distribution by family
+frame_policy_before_after_dashboard.png,frame_policy_before_after_dashboard.pdf,MAIN_TEXT_CANDIDATE,Accepted physical frame policy and boundary dashboard
+yaw_reevaluation_coverage_dashboard.png,yaw_reevaluation_coverage_dashboard.pdf,MAIN_TEXT_CANDIDATE,Completed vs blocked yaw reevaluation rows

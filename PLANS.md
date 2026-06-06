@@ -743,3 +743,40 @@ BLOCKED_WITH_PROOF=physical body-yaw frame; same-evaluator superiority; non-GPS 
 FORBIDDEN_CLAIM=body-yaw RMSE; yaw superiority; exact reproduction; five faithful external dual-antenna algorithms; final_v23/LegSA superiority; BY3 yaw generalization; XB severe-GNSS high-precision proof; trace online; receiver IMU as Go2 body IMU; full contact/joint-foot claim
 ```
 PAPER4A does not authorize solver/evaluator execution, degraded-input generation, random arrays, figure rendering, retuning, algorithm changes, RTKLIB source modification, external-code modification, runtime/raw/RINEX/UBX/RTCM staging, final paper figures, final paper claims, PR merge/closure/tag, or push.
+
+## PAPER4B_R2 Physical Frame Close And Yaw Reevaluation
+
+Active/completed stage:
+
+```text
+PAPER4B_R2_PHYSICAL_FRAME_CLOSE_AND_YAW_REEVALUATION
+```
+
+PAPER4B_R2 closes the physical antenna-to-body frame using user-confirmed installation evidence. It does not close exact reproduction, full faithful external algorithms, same-evaluator superiority, BY3 yaw generalization, XB severe-GNSS high-precision proof, or final paper claims.
+
+PAPER4B_R2 output roots are represented in tracked docs by `<PAPER4B_R2_STAGE_ROOT>` and `<PAPER4B_R2_EXPORT_ROOT>`. The stage keeps full derived epoch payloads in the runtime root and exports only lightweight reports, summary CSVs, render-QA outputs, figure/table indices, and context summaries.
+
+PAPER4B_R2 accepted frame policy:
+
+```text
+physical_geometry_status=PHYSICAL_BASELINE_GEOMETRY_CLOSED
+body_frame=Go2_FLU
+GNSS1=robot_right_y_negative
+GNSS2=robot_left_y_positive
+GNSS1_to_GNSS2=body_plus_Y_left
+fixed_transform=body_yaw_NED_deg = wrap360(baseline_heading_NED_deg + 90 deg)
+trace_used_online=false
+receiver_imu_data_as_body_imu=false
+```
+
+PAPER4B_R2 reevaluation policy:
+
+- PAPER3F/PAPER3G/PAPER3H rows with explicit native `atan2(E,N)` baseline-heading semantics may be reevaluated offline as derived body-yaw metrics.
+- PAPER3I Wu EQKF DD/LOS row headings and Pavlasek IEKF innovation diagnostics remain diagnostic/blocked unless a later stage provides case-level baseline-state epoch outputs.
+- The +90 deg transform is fixed by physical installation evidence and cannot be selected, varied, or tuned by trace/RMSE.
+
+Recommended next actions:
+
+- Use PAPER4B_R2 summaries as appendix or boundary-safe evidence unless the manuscript needs a dedicated yaw-frame subsection.
+- Keep PAPER3I diagnostic outputs out of main-text body-yaw metric claims.
+- Do not introduce superiority claims without a separate same-evaluator internal-baseline join and reviewer approval.

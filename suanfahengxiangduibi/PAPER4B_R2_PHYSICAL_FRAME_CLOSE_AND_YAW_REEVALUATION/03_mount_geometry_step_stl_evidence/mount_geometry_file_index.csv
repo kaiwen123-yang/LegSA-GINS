@@ -1,0 +1,4 @@
+asset,path,exists,size_bytes,status
+mount_stl,<USER_DESKTOP_MOUNT_PRINT>/b3-亚克力板.STL,True,98084,FOUND
+mount_step_a,<USER_DESKTOP_MOUNT_PRINT>/a1-底座a.STEP,True,194544,FOUND
+mount_step_b,<USER_DESKTOP_MOUNT_PRINT>/a1-底座b.STEP,True,147312,FOUND

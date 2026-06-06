@@ -1,0 +1,55 @@
+# PAPER4B_R2 Export Index
+
+- final_status: `CONDITIONAL_PASS_PHYSICAL_FRAME_CLOSED_METHOD_YAW_PARTIAL`
+- generated_at: `2026-06-07T02:52:48.114412+08:00`
+- WSL runtime root: `<PAPER4B_R2_WSL_RUNTIME_ROOT>`
+- C export root: `<PAPER4B_R2_C_EXPORT_ROOT>`
+- repo lightweight root: `<REPO_ROOT>/suanfahengxiangduibi/PAPER4B_R2_PHYSICAL_FRAME_CLOSE_AND_YAW_REEVALUATION`
+
+## Files
+
+- `PAPER4B_R2_SUPERVISOR_FINAL_REPORT.md`
+- `00_context_reading/GIT_SAFETY_START.md`
+- `00_context_reading/context_reading_report.md`
+- `00_context_reading/paper4a_precheck_report.md`
+- `00_context_reading/context_input_file_index.csv`
+- `00_context_reading/missing_input_stage_paths.csv`
+- `01_asset_and_physical_evidence_intake/user_confirmed_physical_frame_statement.md`
+- `01_asset_and_physical_evidence_intake/photo_evidence_report.md`
+- `01_asset_and_physical_evidence_intake/photo_evidence_index.csv`
+- `01_asset_and_physical_evidence_intake/asset_evidence_index.csv`
+- `02_fixposition_official_config_evidence/fixposition_official_config_report.md`
+- `02_fixposition_official_config_evidence/fixposition_gnss_extrinsics_extracted.csv`
+- `02_fixposition_official_config_evidence/pdf_text_probe_results.csv`
+- `02_fixposition_official_config_evidence/fixposition_step5_page_snapshot_NOT_GENERATED.md`
+- `03_mount_geometry_step_stl_evidence/mount_geometry_report.md`
+- `03_mount_geometry_step_stl_evidence/mount_geometry_file_index.csv`
+- `03_mount_geometry_step_stl_evidence/mount_geometry_dimensions.csv`
+- `04_trace_generation_script_audit/trace_generation_script_audit.md`
+- `04_trace_generation_script_audit/evaluator_trace_field_usage_audit.csv`
+- `05_frame_policy_decision/FRAME_POLICY_ACCEPTED.yaml`
+- `05_frame_policy_decision/FRAME_POLICY_ACCEPTED.md`
+- `06_method_yaw_semantics_audit/method_yaw_semantics_master_table.csv`
+- `06_method_yaw_semantics_audit/method_yaw_semantics_report.md`
+- `07_offline_yaw_reevaluation/PAPER4B_R2_YAW_REEVALUATION_ROW_LEVEL.csv`
+- `07_offline_yaw_reevaluation/PAPER4B_R2_YAW_REEVALUATION_SUMMARY_BY_METHOD.csv`
+- `07_offline_yaw_reevaluation/PAPER4B_R2_YAW_REEVALUATION_SUMMARY_BY_FAMILY.csv`
+- `07_offline_yaw_reevaluation/yaw_reevaluation_blocked_with_reason.csv`
+- `08_joined_tables_and_figures/render_QA_report.csv`
+- `08_joined_tables_and_figures/figure_index.csv`
+- `08_joined_tables_and_figures/table_index.csv`
+- `09_claim_boundary_update/claim_boundary_delta.md`
+- `09_claim_boundary_update/allowed_claims_after_R2.md`
+- `09_claim_boundary_update/still_forbidden_claims_after_R2.md`
+- `10_reviewer_supervisor/PAPER4B_R2_REVIEWER_REPORT.md`
+- `10_reviewer_supervisor/PAPER4B_R2_SUPERVISOR_FINAL_REPORT.md`
+- `08_joined_tables_and_figures/BY2_body_yaw_recomputed_rmse_bar.png`
+- `08_joined_tables_and_figures/BY2_body_yaw_recomputed_rmse_bar.pdf`
+- `08_joined_tables_and_figures/BY2_body_yaw_recomputed_family_heatmap.png`
+- `08_joined_tables_and_figures/BY2_body_yaw_recomputed_family_heatmap.pdf`
+- `08_joined_tables_and_figures/BY2_body_yaw_recomputed_case_boxplot.png`
+- `08_joined_tables_and_figures/BY2_body_yaw_recomputed_case_boxplot.pdf`
+- `08_joined_tables_and_figures/frame_policy_before_after_dashboard.png`
+- `08_joined_tables_and_figures/frame_policy_before_after_dashboard.pdf`
+- `08_joined_tables_and_figures/yaw_reevaluation_coverage_dashboard.png`
+- `08_joined_tables_and_figures/yaw_reevaluation_coverage_dashboard.pdf`

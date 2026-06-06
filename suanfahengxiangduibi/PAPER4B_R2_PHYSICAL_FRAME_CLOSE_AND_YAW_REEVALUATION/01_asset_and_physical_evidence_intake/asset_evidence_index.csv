@@ -1,0 +1,7 @@
+asset,path,exists,size_bytes,status
+installation_photo,<USER_DESKTOP>/3ea6720b5e477e28ce8bec9d475423f5.jpg,True,309781,FOUND
+fixposition_tutorial_pdf,<USER_DESKTOP>/快速开启保姆级教程.pdf,True,12172232,FOUND
+mount_stl,<USER_DESKTOP_MOUNT_PRINT>/b3-亚克力板.STL,True,98084,FOUND
+mount_step_a,<USER_DESKTOP_MOUNT_PRINT>/a1-底座a.STEP,True,194544,FOUND
+mount_step_b,<USER_DESKTOP_MOUNT_PRINT>/a1-底座b.STEP,True,147312,FOUND
+by2_trace_reference,<BY2_RECEIVER_ROOT>/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv,True,1081436,FOUND

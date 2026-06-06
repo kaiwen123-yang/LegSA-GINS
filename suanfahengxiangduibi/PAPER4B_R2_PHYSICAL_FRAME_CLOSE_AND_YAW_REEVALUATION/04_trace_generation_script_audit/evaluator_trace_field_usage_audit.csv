@@ -1,0 +1,2 @@
+trace_file,exists,columns,selected_reference_fields,processed_lat_lon_status,trace_used_online
+<BY2_RECEIVER_ROOT>/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv,True,time;lat;lon;height;processed_lat;processed_lon;processed_height;yaw;pitch;roll,"time,yaw",processed_lat/processed_lon string-like and swapped in sample; do not use blindly,False
