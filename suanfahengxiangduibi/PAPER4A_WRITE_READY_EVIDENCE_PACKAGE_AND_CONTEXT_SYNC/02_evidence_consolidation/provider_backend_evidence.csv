@@ -1,0 +1,7 @@
+stage,category,evidence,status,paper_use,source
+PAPER3A,DIAGNOSTIC_ONLY,"RAWX common-epoch provider without LOS/DD backend.",SUPPORTED_AS_EVOLUTION_START,provider evolution figure,"PAPER3A_SUPERVISOR_FINAL_REPORT.md"
+PAPER3D_R2,MAIN_TEXT_ALLOWED,"Linux RTKLIB build, RINEX reconstruction, 1509 BY2 common epochs, 10182 GPS broadcast DD/LOS provider rows.",SUPPORTED,main text provider construction,"PAPER3D_R2_WSL_CLI_FINAL_REPORT.md"
+PAPER3G,MAIN_TEXT_ALLOWED,"Provider v2 GPS-only DD/LOS with covariance ready; multi-GNSS observation/LOS partial.",SUPPORTED_WITH_LIMIT,provider evolution figure,"PAPER3G_SUPERVISOR_FINAL_REPORT.md"
+PAPER3H,MAIN_TEXT_ALLOWED,"Provider v3 GPS+BDS LOS covariance ready.",SUPPORTED,provider evolution figure,"PAPER3H_SUPERVISOR_FINAL_REPORT.md"
+PAPER3I,MAIN_TEXT_ALLOWED,"Provider v4 GPS+BDS LOS-ready residual partial: 28356 rows, 13995 GPS LOS-ready, 7382 BDS LOS-ready, 21932 residual-ready.",SUPPORTED,main text provider v4 table,"PAPER3I_SUPERVISOR_FINAL_REPORT.md"
+Non-GPS blockers,BLOCKED_WITH_PROOF,"Galileo NAV missing, GLONASS FDMA channel/satpos helper not matrix-ready, SBAS model missing.",BLOCKED,appendix blocker table,"PAPER3I_PROVIDER_V4_SYSTEM_FREQUENCY_SUMMARY.csv"

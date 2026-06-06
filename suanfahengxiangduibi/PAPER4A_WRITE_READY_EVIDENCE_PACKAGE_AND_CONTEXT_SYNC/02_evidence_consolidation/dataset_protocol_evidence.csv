@@ -1,0 +1,5 @@
+topic,category,evidence,status,paper_use,source
+dataset-role-aware protocol,MAIN_TEXT_ALLOWED,"BY2 is the full-metric main dataset; BY3 is poor-heading/position-up generalization with diagnostic-only yaw; XB/PG are poor-GNSS stress and QA motivation.",SUPPORTED,main text protocol overview,"AGENTS.md; PLANS.md; CLAIM_BOUNDARY.md; PAPER0 boundary"
+BY2 canonical degradation families,MAIN_TEXT_ALLOWED,"PAPER3E/F/G and related stages reuse BY2 120 canonical cases; PAPER2A completed BY2 7 x 120 QA rows.",SUPPORTED,main text dataset/matrix description,"PAPER2A; PAPER3E; PAPER3F; PAPER3G"
+BY3 role,DIAGNOSTIC_ONLY,"BY3 position/up evidence is useful for generalization discussion, but yaw remains diagnostic-only.",SUPPORTED_WITH_LIMIT,limitations and protocol notes,"BY3C/BY3C1/GEN1 context; PAPER4A boundary"
+XB/PG role,DIAGNOSTIC_ONLY,"XB/PG severe GNSS data motivate QA fallback and stress protocol; they do not prove high-precision severe-GNSS performance.",SUPPORTED_WITH_LIMIT,limitations and future work,"XB1A2; PG_MULTI_A0; PG_QA0 context"

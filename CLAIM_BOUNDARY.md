@@ -2112,3 +2112,41 @@ Allowed PAPER0 evidence: paper-facing evidence inventory, BY2 main evidence synt
 Allowed PAPER0 statements: BY2 is organized as the full-metric main dataset for near-term manuscript drafting; BY3 is organized as an independent position/up generalization dataset with yaw diagnostic-only; PG1-PG4 are severe-GNSS boundary datasets and motivate QA fallback but do not prove algorithm performance; PG_QA0 remains a design extension, not an implemented contribution; the near-term paper can start manuscript drafting without QA1; QA1 is optional for a stronger secondary-contribution route; `ready_for_manuscript_drafting=true`; `ready_for_QA1=false`; `ready_for_paper_claims=false`.
 
 Still forbidden after PAPER0: final paper performance claims, final paper figure authorization, solver/evaluator execution, artificial degradation, random array generation, QA1 implementation, parameter retuning, metric alteration, fabricated figures/tables, BY3 yaw main claim, PG performance claim, comprehensive final_v23 superiority claim, quality-aware implementation or validation claim, PR #52 merge/closure/tag approval, staging PAPER0 runtime outputs, or staging Obsidian notes.
+
+## PAPER4A Write-Ready Evidence Package Boundary
+
+Allowed PAPER4A evidence: completed-stage final reports, row-level master tables, provider summaries, claim-boundary tables, render QA summaries, export indices, and consolidated PAPER2B secondary proof for PAPER1F if direct PAPER1F paths are missing. PAPER4A outputs are lightweight reports and context updates under `<PAPER4A_STAGE_ROOT>`.
+
+PAPER4A consolidates completed evidence; it does not close body-yaw, exact reproduction, or same-evaluator superiority.
+
+Allowed PAPER4A main-text statements:
+
+- BY2 is the full-metric main dataset, BY3 is poor-heading/position-up stress with diagnostic-only yaw, and XB/PG are poor-GNSS stress and QA-fallback motivation.
+- PAPER2A supports quality-aware measurement management behavior with seven recognized GNSS/INS QA methods across BY2/BY3/XB, while preserving `trace_used_online=false` and `receiver_imu_data_as_body_imu=false`.
+- PAPER3D-R2 through PAPER3I support provider construction from RTKLIB/RINEX/common epoch/satellite to GPS/BDS DD/LOS/covariance/residual-ready evidence, with non-GPS blockers stated.
+- PAPER3E/F/G/H/I external literature modules may be described as PDF-grounded native/proxy/backend-level implementations and DD/LOS-backed literature module diagnostics, not exact reproductions.
+
+Allowed PAPER4A appendix statements:
+
+- PAPER2A row-level QA behavior can be tabulated with common-backend QA-wrapper wording.
+- PAPER3E/F/G/H/I native/proxy/backend-level metrics, LAMBDA/MLAMBDA helper integration, provider v4 system/frequency coverage, Pavlasek/Wu diagnostics, RTKLIB moving-base diagnostics, and internal baseline error-series coverage may be shown with implementation-level and diagnostic labels.
+
+Diagnostic-only after PAPER4A:
+
+- yaw transform sensitivity, baseline-heading diagnostics, RTKLIB moving-base output, BY3 yaw, XB/PG severe-GNSS outputs, Pavlasek IEKF provider diagnostics, Wu EQKF/PAR/ADOP diagnostics, and PAPER1F adapter evidence.
+
+Still forbidden after PAPER4A:
+
+- body-yaw RMSE from external methods;
+- yaw superiority;
+- final_v23, LegSA_QA, or LegSA_full same-evaluator superiority;
+- exact reproduction of external algorithms;
+- five full faithful external dual-antenna algorithms;
+- BY3 ordinary yaw generalization;
+- XB severe-GNSS high-precision proof;
+- RTKLIB moving-base equals Teunissen/Yang/Liu/Wu reproduction;
+- trace online use, trace-tuned thresholds, or trace-derived feedback;
+- receiver `imu-data.csv` as Go2 body IMU;
+- full contact-aided or joint-foot kinematic constraint claims without backend and ablation proof;
+- full Galileo/GLONASS/SBAS provider closure.
+PAPER4A does not authorize solver/evaluator execution, degraded-input generation, random array generation, figure rendering, parameter retuning, algorithm changes, RTKLIB source modification, external-code modification, runtime/raw/RINEX/UBX/RTCM staging, Obsidian staging, push, PR merge/closure/tag, final paper figures, or final paper claims.

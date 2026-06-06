@@ -1,0 +1,4 @@
+stage,category,evidence,status,paper_use,source
+PAPER3A_R1,BLOCKED_WITH_PROOF,"Internal baseline join partial_by3_join; main BY2 comparison figures blocked.",BLOCKED,blocked figure list,"PAPER3A_R1_SUPERVISOR_FINAL_REPORT.md"
+PAPER3B,MAIN_TEXT_ALLOWED,"PAPER3B joined 3 internal baseline algorithms, 360 rows, 120 unique BY2 cases.",SUPPORTED_FOR_COVERAGE_ONLY,main text coverage statement,"PAPER3B_SUPERVISOR_FINAL_REPORT.md"
+PAPER3I,DIAGNOSTIC_ONLY,"final_v23, single_antenna, pure_INS have JOINABLE_ERROR_SERIES; LegSA_full and LegSA_QA missing provenance; superiority forbidden.",SUPPORTED_DIAGNOSTIC_ONLY,appendix coverage note,"PAPER3I_JOINED_EVIDENCE_TABLE.csv"

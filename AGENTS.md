@@ -913,3 +913,33 @@ recommended_next_stage=PAPER1_MANUSCRIPT_EXPERIMENT_SECTION_DRAFT
 ```
 
 PAPER0 does not authorize solver execution, evaluator execution, degraded-input generation, random-array generation, QA1 implementation, parameter retuning, metric alteration, final paper figures, final paper claims, PR #52 merge/closure/tag, staging runtime outputs, or staging Obsidian notes.
+
+## 34. PAPER4A Write-Ready Evidence Package Lock
+
+`PAPER4A_WRITE_READY_EVIDENCE_PACKAGE_AND_CONTEXT_SYNC` consolidates completed evidence from PAPER1F, PAPER2A, PAPER2B, PAPER3A-R1, PAPER3B, PAPER3D-R2, PAPER3E, PAPER3F, PAPER3G, PAPER3H, and PAPER3I into a writing-ready evidence package. It is a consolidation/context-sync stage only.
+
+PAPER4A consolidates completed evidence; it does not close body-yaw, exact reproduction, or same-evaluator superiority.
+
+PAPER4A allowed work:
+
+- classify evidence as `MAIN_TEXT_ALLOWED`, `APPENDIX_ALLOWED`, `DIAGNOSTIC_ONLY`, `BLOCKED_WITH_PROOF`, or `FORBIDDEN_CLAIM`;
+- create lightweight evidence ledgers, writing scaffold, figure/table plan, claim-boundary tables, reviewer/supervisor reports, and context updates under `<PAPER4A_STAGE_ROOT>`;
+- use PAPER2B as secondary proof for PAPER1F if direct PAPER1F files are not found;
+- use PAPER3I as the latest provider/backend evidence while preserving PAPER3G/PAPER3H lineage.
+
+PAPER4A forbidden work:
+
+- no solver, evaluator, degraded-input generation, random generation, figure rendering, algorithm execution, parameter retuning, RTKLIB source modification, RINEX/UBX/RTCM/raw/runtime mutation, external-code modification, or push;
+- no runtime/raw/RINEX/UBX/RTCM/external-code artifact may be staged;
+- no body-yaw RMSE, yaw superiority, exact/full faithful reproduction, five faithful external dual-antenna algorithms, same-evaluator superiority, BY3 yaw generalization, XB severe-GNSS high-precision proof, trace-online, receiver-IMU-as-Go2-body-IMU, or full contact/joint-foot kinematic claim may be introduced.
+
+PAPER4A paper-use decision:
+
+```text
+status=PAPER4A_write_ready_evidence_package_context_sync
+main_text_allowed=dataset_protocol_BY2_BY3_XB_roles; BY2_120_case_design; PAPER2A_QA_behavior_and_coverage; RTKLIB_RINEX_DDLOS_provider_chain; provider_v4_GPS_BDS_residual_ready; evidence_classification_matrix; forbidden_claim_boundary_table
+appendix_allowed=PAPER2A_row_level_QA; PAPER3E_to_PAPER3I_native_proxy_backend_level_literature_module_diagnostics; LAMBDA_MLAMBDA_helper_evidence; provider_v4_system_frequency_blockers; internal_baseline_error_series_coverage
+diagnostic_only=PAPER1F_adapters; yaw_frame_sensitivity; RTKLIB_movingbase; BY3_yaw; XB_PG_severe_GNSS; Pavlasek_IEKF_and_Wu_EQKF_diagnostics
+ready_for_manuscript_drafting=true_bounded_by_claim_boundary
+ready_for_paper_claims=false
+```
