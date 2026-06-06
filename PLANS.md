@@ -713,3 +713,33 @@ ready_for_QA1=false
 ready_for_paper_claims=false
 recommended_next_stage=PAPER1_MANUSCRIPT_EXPERIMENT_SECTION_DRAFT
 ```
+
+## PAPER4A Write-Ready Evidence Package And Context Sync
+
+Active/consolidated stage:
+
+```text
+PAPER4A_WRITE_READY_EVIDENCE_PACKAGE_AND_CONTEXT_SYNC
+```
+
+PAPER4A consolidates completed evidence; it does not close body-yaw, exact reproduction, or same-evaluator superiority.
+
+PAPER4A output root is represented in tracked docs by `<PAPER4A_STAGE_ROOT>`. It contains only lightweight reports, evidence ledgers, writing scaffold, figure/table planning, git-safety notes, reviewer/supervisor reports, and context-sync summaries.
+
+PAPER4A input policy:
+
+- PAPER1F direct files may be marked `MISSING_DIRECT_WITH_SECONDARY_PROOF` if only PAPER2B evidence is available.
+- PAPER2A and PAPER2B are the governing QA and consolidation sources.
+- PAPER3A-R1 and PAPER3B are governing frame-gap/physical-closure sources.
+- PAPER3D-R2 through PAPER3I are provider/backend/literature-module evidence sources, with PAPER3I as the latest provider v4 boundary.
+
+PAPER4A classification policy:
+
+```text
+MAIN_TEXT_ALLOWED=dataset protocol; BY2 120 canonical case design; PAPER2A QA behavior and coverage; RTKLIB/RINEX/DDLOS provider construction; provider v4 GPS+BDS residual-ready evidence; evidence classification matrix; forbidden-claim boundary table
+APPENDIX_ALLOWED=PAPER2A row-level QA; PAPER3E/F/G/H/I native/proxy/backend-level literature-module diagnostics; LAMBDA/MLAMBDA helper evidence; provider v4 system/frequency blockers; internal baseline coverage
+DIAGNOSTIC_ONLY=PAPER1F adapters; yaw transform sensitivity; baseline-heading diagnostics; RTKLIB moving-base diagnostics; BY3 yaw; XB/PG severe-GNSS stress; Pavlasek IEKF and Wu EQKF diagnostics
+BLOCKED_WITH_PROOF=physical body-yaw frame; same-evaluator superiority; non-GPS provider closure; direct PAPER1F source if no path is found
+FORBIDDEN_CLAIM=body-yaw RMSE; yaw superiority; exact reproduction; five faithful external dual-antenna algorithms; final_v23/LegSA superiority; BY3 yaw generalization; XB severe-GNSS high-precision proof; trace online; receiver IMU as Go2 body IMU; full contact/joint-foot claim
+```
+PAPER4A does not authorize solver/evaluator execution, degraded-input generation, random arrays, figure rendering, retuning, algorithm changes, RTKLIB source modification, external-code modification, runtime/raw/RINEX/UBX/RTCM staging, final paper figures, final paper claims, PR merge/closure/tag, or push.

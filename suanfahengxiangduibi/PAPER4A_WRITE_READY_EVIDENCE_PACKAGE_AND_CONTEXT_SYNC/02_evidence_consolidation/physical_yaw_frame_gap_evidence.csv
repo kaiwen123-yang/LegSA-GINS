@@ -1,0 +1,8 @@
+stage,category,evidence,status,paper_use,source
+PAPER3A_R1,BLOCKED_WITH_PROOF,"Yaw metrics invalid for claims; discrepancy consistent with frame transform problem.",BLOCKED,limitations,"PAPER3A_R1_SUPERVISOR_FINAL_REPORT.md"
+PAPER3B,BLOCKED_WITH_PROOF,"Final status FAIL_FRAME_CLOSURE_NOT_MET; yaw_frame_status=NOT_PHYSICALLY_CLOSED.",BLOCKED,limitations and blocked figure list,"PAPER3B_SUPERVISOR_FINAL_REPORT.md"
+PAPER3E,DIAGNOSTIC_ONLY,"baseline_heading_deg diagnostic only; yaw_metric_valid=false.",SUPPORTED_DIAGNOSTIC_ONLY,appendix caution,"PAPER3E_SUPERVISOR_FINAL_REPORT.md"
+PAPER3F,DIAGNOSTIC_ONLY,"yaw_physical_closure=NOT_CLOSED; baseline heading diagnostic only.",SUPPORTED_DIAGNOSTIC_ONLY,appendix caution,"PAPER3F_SUPERVISOR_FINAL_REPORT.md"
+PAPER3G,DIAGNOSTIC_ONLY,"yaw_metric_valid=false; body-yaw claim forbidden.",SUPPORTED_DIAGNOSTIC_ONLY,appendix caution,"PAPER3G_SUPERVISOR_FINAL_REPORT.md"
+PAPER3H,DIAGNOSTIC_ONLY,"yaw_metric_valid=false; body-yaw claim forbidden.",SUPPORTED_DIAGNOSTIC_ONLY,appendix caution,"PAPER3H_SUPERVISOR_FINAL_REPORT.md"
+PAPER3I,BLOCKED_WITH_PROOF,"Physical yaw frame requires user evidence with precise list before body-yaw claim.",BLOCKED,blocked evidence list,"PAPER3I_SUPERVISOR_FINAL_REPORT.md"

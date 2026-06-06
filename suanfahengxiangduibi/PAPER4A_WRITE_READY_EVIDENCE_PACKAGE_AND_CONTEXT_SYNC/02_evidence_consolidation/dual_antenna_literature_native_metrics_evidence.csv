@@ -1,0 +1,7 @@
+stage,category,evidence,status,paper_use,source
+PAPER3A,APPENDIX_ALLOWED,"Six module/reduced methods completed selected rows; exact faithful algorithm reproductions=0.",SUPPORTED_WITH_LIMIT,appendix method classification,"PAPER3A_SUPERVISOR_FINAL_REPORT.md"
+PAPER3E,APPENDIX_ALLOWED,"DD/LOS-backed BY2 module matrix completed 720/720 rows; three methods marked faithful module reproduction at module level, reduced/software diagnostics clearly separated.",SUPPORTED_WITH_LIMIT,appendix module metrics,"PAPER3E_SUPERVISOR_FINAL_REPORT.md"
+PAPER3F,APPENDIX_ALLOWED,"Backend-upgraded Teunissen/Liu/Yang partial/proxy/native results completed 720/720 rows; Pavlasek/Wu/RTKLIB remain limited.",SUPPORTED_WITH_LIMIT,appendix backend metrics,"PAPER3F_SUPERVISOR_FINAL_REPORT.md"
+PAPER3G,APPENDIX_ALLOWED,"LAMBDA/MLAMBDA helper and Python C-LAMBDA proxy integration evidence plus native metrics are available.",SUPPORTED_WITH_LIMIT,appendix ambiguity metrics,"PAPER3G_SUPERVISOR_FINAL_REPORT.md"
+PAPER3H,APPENDIX_ALLOWED,"GPS+BDS provider v3 supports partial native/proxy fourth-layer matrix; 600/720 rows completed and 120 blocked with proof.",SUPPORTED_WITH_LIMIT,appendix native metrics,"PAPER3H_SUPERVISOR_FINAL_REPORT.md"
+PAPER3I,DIAGNOSTIC_ONLY,"Pavlasek IEKF and Wu EQKF/PAR/ADOP native diagnostics exist, but physical extrinsics/time alignment/body-yaw frame remain blocked.",SUPPORTED_DIAGNOSTIC_ONLY,diagnostic appendix only,"PAPER3I_SUPERVISOR_FINAL_REPORT.md"
