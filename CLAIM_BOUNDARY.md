@@ -2150,3 +2150,28 @@ Still forbidden after PAPER4A:
 - full contact-aided or joint-foot kinematic constraint claims without backend and ablation proof;
 - full Galileo/GLONASS/SBAS provider closure.
 PAPER4A does not authorize solver/evaluator execution, degraded-input generation, random array generation, figure rendering, parameter retuning, algorithm changes, RTKLIB source modification, external-code modification, runtime/raw/RINEX/UBX/RTCM staging, Obsidian staging, push, PR merge/closure/tag, final paper figures, or final paper claims.
+
+## PAPER4B_R2 Physical Frame And Offline Body-Yaw Boundary
+
+Allowed PAPER4B_R2 evidence: user-confirmed physical installation facts, official GNSS extrinsics values recorded from the PAPER4B_R2 prompt excerpt, photo/PDF/STEP/STL evidence indices, `FRAME_POLICY_ACCEPTED.yaml`, method yaw semantics audit, fixed-transform derived offline yaw reevaluation summaries, render-QA reports, figure/table indices, and reviewer/supervisor reports under `<PAPER4B_R2_STAGE_ROOT>` and `<PAPER4B_R2_EXPORT_ROOT>`.
+
+Allowed PAPER4B_R2 statements:
+
+- The physical antenna-to-body geometry is closed for the user-confirmed BY2 installation: receiver front faces Go2 forward, GNSS1 is robot-right with negative y, GNSS2 is robot-left with positive y, and GNSS1->GNSS2 points to body `+Y_left` under Go2 FLU.
+- The fixed physical transform from a GNSS1->GNSS2 NED baseline heading to Go2 body yaw is `body_yaw_NED_deg = wrap360(baseline_heading_NED_deg + 90 deg)`.
+- PAPER3F/PAPER3G/PAPER3H rows whose native heading semantics are explicit `atan2(E,N)` may be reported as derived offline body-yaw reevaluation results, with trace used only by the offline evaluator.
+- PAPER3I Wu EQKF DD/LOS row headings and Pavlasek IEKF innovation diagnostics remain diagnostic/blocked for case-level body-yaw metrics unless a later stage provides baseline-state epoch outputs with closed semantics.
+
+Still forbidden after PAPER4B_R2:
+
+- exact reproduction of external algorithms;
+- five full faithful external dual-antenna algorithms;
+- RTKLIB moving-base equals Teunissen/Yang/Liu/Wu reproduction;
+- final_v23, LegSA_QA, LegSA_full, or universal same-evaluator superiority;
+- BY3 ordinary yaw generalization unless BY3 frame/reference is separately closed;
+- XB severe-GNSS high-precision proof;
+- trace online use, trace-tuned thresholds, trace-selected yaw transforms, or per-case RMSE offset selection;
+- receiver `imu-data.csv` as Go2 body IMU;
+- mutation or replacement of historical `epoch_output.csv`;
+- raw/runtime/RINEX/UBX/RTCM/external-code staging;
+- final paper claims without later reviewer approval.

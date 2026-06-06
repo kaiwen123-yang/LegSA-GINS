@@ -1,0 +1,13 @@
+{
+  "final_status": "CONDITIONAL_PASS_PHYSICAL_FRAME_CLOSED_METHOD_YAW_PARTIAL",
+  "branch": "paper4b-r2/physical-frame-close-yaw-reevaluation",
+  "head_start": "21e863085cff72c653db24d9a011f16f7d14ab44",
+  "runtime_root": "<PAPER4B_R2_WSL_RUNTIME_ROOT>",
+  "c_export_root": "<PAPER4B_R2_C_EXPORT_ROOT>",
+  "repo_export_root": "<REPO_ROOT>/suanfahengxiangduibi/PAPER4B_R2_PHYSICAL_FRAME_CLOSE_AND_YAW_REEVALUATION",
+  "completed_reevaluation_rows": 2160,
+  "blocked_rows": 2,
+  "render_qa_passed": true,
+  "trace_found": true,
+  "frame_policy": "FRAME_POLICY_ACCEPTED.yaml"
+}

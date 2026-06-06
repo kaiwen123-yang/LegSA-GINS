@@ -1,0 +1,37 @@
+stage: PAPER4B_R2_PHYSICAL_FRAME_CLOSE_AND_YAW_REEVALUATION
+policy_id: PAPER4B_R2_FRAME_POLICY_ACCEPTED_GNSS1_RIGHT_GNSS2_LEFT_PLUS90
+physical_geometry_status: PHYSICAL_BASELINE_GEOMETRY_CLOSED
+method_yaw_semantics_partial: true
+user_confirmation:
+  receiver_front_faces_go2_forward: true
+  official_gnss_extrinsics_used: true
+  gnss1_y_negative: true
+  gnss2_y_positive: true
+  gnss1_physical_side: robot_right
+  gnss2_physical_side: robot_left
+body_frame_assumption:
+  convention: FLU
+  x: forward
+  y: left
+  z: up
+baseline_definition:
+  baseline_from: GNSS1
+  baseline_to: GNSS2
+  vector_body_flu: [0, +L, 0]
+  meaning: right_to_left_lateral_baseline
+canonical_heading:
+  baseline_heading_ned_deg: atan2(E, N)
+  body_yaw_ned_deg: wrap360(baseline_heading_ned_deg + 90.0)
+  fixed_physical_transform_deg: 90.0
+trace_policy:
+  trace_used_online: false
+  trace_used_offline_evaluator_only: true
+  trace_reference_fields: [time, yaw]
+forbidden:
+  - no_per_case_offset
+  - no_rmse_selected_transform
+  - no_method_specific_tuning_against_trace
+  - no_mutation_of_original_epoch_outputs
+  - no_receiver_imu_as_go2_body_imu
+  - no_exact_external_algorithm_reproduction_claim
+  - no_final_v23_or_legsa_superiority_claim

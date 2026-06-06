@@ -1,0 +1,6 @@
+table,role
+06_method_yaw_semantics_audit/method_yaw_semantics_master_table.csv,method yaw semantics audit
+07_offline_yaw_reevaluation/PAPER4B_R2_YAW_REEVALUATION_ROW_LEVEL.csv,row-level body-yaw offline metrics
+07_offline_yaw_reevaluation/PAPER4B_R2_YAW_REEVALUATION_SUMMARY_BY_METHOD.csv,method summary
+07_offline_yaw_reevaluation/PAPER4B_R2_YAW_REEVALUATION_SUMMARY_BY_FAMILY.csv,family summary
+07_offline_yaw_reevaluation/yaw_reevaluation_blocked_with_reason.csv,blocked proof
