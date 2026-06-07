@@ -1,0 +1,18 @@
+method_id,paper_source,external_family,body_yaw_allowed,native_metrics_available,paper_use_classification,claim_boundary
+G01_TEUNISSEN_STANDARD_LAMBDA_FLOAT_FIXED,PAPER3G,Teunissen/LAMBDA/C-LAMBDA/QC-ILS,False,True,appendix_or_main_supporting_evidence,native backend metrics only; no body-yaw claim; no exact/full reproduction claim
+G02_TEUNISSEN_CLAMBDA_QCILS_BACKEND,PAPER3G,Teunissen/LAMBDA/C-LAMBDA/QC-ILS,False,True,appendix_or_main_supporting_evidence,native backend metrics only; no body-yaw claim; no exact/full reproduction claim
+G03_LIU_CWLS_FULLER_WRAPPED_SEARCH,PAPER3G,Liu C-WLS,False,True,appendix_or_main_supporting_evidence,native backend metrics only; no body-yaw claim; no exact/full reproduction claim
+G04_YANG_LENGTH_CONSTRAINED_KF_MLAMBDA,PAPER3G,Yang length-constrained KF/MLAMBDA,False,True,appendix_or_main_supporting_evidence,native backend metrics only; no body-yaw claim; no exact/full reproduction claim
+G05_WU_PAR_ADOP_CONSTRAINED_AMBIGUITY_MODULE,PAPER3G,Wu PAR/ADOP/EQKF,False,True,appendix_or_main_supporting_evidence,native backend metrics only; no body-yaw claim; no exact/full reproduction claim
+G06_PAVLASEK_TWO_RECEIVER_IEKF_MEASUREMENT_READY,PAPER3G,Pavlasek IEKF,False,True,appendix_or_main_supporting_evidence,native backend metrics only; no body-yaw claim; no exact/full reproduction claim
+H01_TEUNISSEN_STANDARD_LAMBDA_HELPER,PAPER3H,Teunissen/LAMBDA/C-LAMBDA/QC-ILS,False,True,appendix_or_main_supporting_evidence,native backend metrics only; no body-yaw claim; no exact/full reproduction claim
+H02_TEUNISSEN_CLAMBDA_SEARCH_SHRINK,PAPER3H,Teunissen/LAMBDA/C-LAMBDA/QC-ILS,False,True,appendix_or_main_supporting_evidence,native backend metrics only; no body-yaw claim; no exact/full reproduction claim
+H03_LIU_CWLS_REFINED_SEARCH,PAPER3H,Liu C-WLS,False,True,appendix_or_main_supporting_evidence,native backend metrics only; no body-yaw claim; no exact/full reproduction claim
+H04_YANG_KF_MLAMBDA_FULLER,PAPER3H,Yang length-constrained KF/MLAMBDA,False,True,appendix_or_main_supporting_evidence,native backend metrics only; no body-yaw claim; no exact/full reproduction claim
+H05_WU_PAR_ADOP_EQKF_MODULE,PAPER3H,Wu PAR/ADOP/EQKF,False,True,appendix_or_main_supporting_evidence,native backend metrics only; no body-yaw claim; no exact/full reproduction claim
+H06_PAVLASEK_FULL_IEKF_ATTEMPT,PAPER3H,Pavlasek IEKF,False,True,appendix_or_main_supporting_evidence,native backend metrics only; no body-yaw claim; no exact/full reproduction claim
+P3F_DD06_RTKLIB_MOVING_BASELINE_EXTERNAL_DIAGNOSTIC,PAPER3F/PAPER4F_R2,RTKLIB moving-base,False,True,diagnostic_native_external_baseline_only,external RTKLIB diagnostic; not exact Teunissen/Yang/Liu/Wu reproduction; no body-yaw claim
+PAPER3I_PROVIDER_V4_GPS_BDS_LOS_READY_RESIDUAL_PARTIAL,PAPER3I,provider/native diagnostic,False,True,main_supporting_provider_evidence,provider residual metadata only; no body-yaw or superiority claim
+PAVLASEK_IEKF_PAVLASEK_NATIVE_DIAGNOSTIC_WITH_PROVISIONAL_EXTRINSIC,PAPER3I,Pavlasek IEKF,False,True,diagnostic_only_or_blocked,Pavlasek IEKF full claim blocked; native diagnostic only
+PAVLASEK_IEKF_PAVLASEK_BLOCKED_STRICT_PHYSICAL_EXTRINSIC_REQUIRED,PAPER3I,Pavlasek IEKF,False,True,diagnostic_only_or_blocked,Pavlasek IEKF full claim blocked; native diagnostic only
+WU_EQKF_MISALIGNMENT_NATIVE_DIAGNOSTIC,PAPER3I,Wu PAR/ADOP/EQKF,False,True,diagnostic_only,Wu misalignment/body-yaw claim disabled; native residual diagnostic only

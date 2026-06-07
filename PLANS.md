@@ -780,3 +780,26 @@ Recommended next actions:
 - Use PAPER4B_R2 summaries as appendix or boundary-safe evidence unless the manuscript needs a dedicated yaw-frame subsection.
 - Keep PAPER3I diagnostic outputs out of main-text body-yaw metric claims.
 - Do not introduce superiority claims without a separate same-evaluator internal-baseline join and reviewer approval.
+
+## PAPER4G Yaw Boundary Freeze And Native Metrics Write Package
+
+Completed stage:
+
+```text
+PAPER4G_YAW_BOUNDARY_FREEZE_NATIVE_METRICS_WRITE_PACKAGE
+```
+
+PAPER4G freezes the external-method body-yaw boundary after PAPER4F_R2. The user-declared BY2 minimal-export reference policy `trace_body_yaw_NED_deg = wrap360(trace_yaw_deg + 90 deg)` was evaluated on all 2160 PAPER3F/PAPER3G/PAPER3H vector-closed method-case rows, but the systematic 90 deg-class discrepancy remained. Therefore, body-yaw RMSE and yaw-superiority claims stay diagnostic-only.
+
+Current paper route:
+
+- report physical GNSS1-right/GNSS2-left frame closure as an accepted setup fact;
+- keep trace yaw source and Fixposition output-frame audits in the appendix;
+- use native DD/LOS baseline, residual, ambiguity, provider-readiness, ratio/ADOP, and fix-rate-proxy evidence for external literature method discussion;
+- keep PAPER4F_R2 row-level body-yaw reevaluation as diagnostic-only evidence.
+
+Recommended next actions:
+
+- draft the experiment section around native DD/LOS evidence and dataset-role-aware protocol;
+- avoid main-text external-method body-yaw RMSE plots;
+- use `PAPER4G_NATIVE_DDLOS_METRICS_LEDGER.csv` and `PAPER4G_EXTERNAL_LITERATURE_METHOD_STATUS.csv` as the method-status source for Teunissen/Liu/Yang/Wu/Pavlasek/RTKLIB discussion.
