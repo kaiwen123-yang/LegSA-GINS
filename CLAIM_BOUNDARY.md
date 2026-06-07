@@ -2175,3 +2175,36 @@ Still forbidden after PAPER4B_R2:
 - mutation or replacement of historical `epoch_output.csv`;
 - raw/runtime/RINEX/UBX/RTCM/external-code staging;
 - final paper claims without later reviewer approval.
+
+## PAPER4G Frozen Yaw Boundary And Native Metrics Route
+
+PAPER4G freezes the post-PAPER4F_R2 yaw claim boundary.
+
+Frozen facts:
+
+- PAPER4B_R2 closes the physical GNSS1-right/GNSS2-left lateral frame.
+- PAPER4D/E close trace yaw source to `user_io-out-poi_geodetic.csv:ypr.vector3.x`.
+- PAPER4F_R2 applies the user-declared BY2 minimal-export policy `trace_body_yaw_NED_deg = wrap360(trace_yaw_deg + 90 deg)`.
+- PAPER4F_R2 reevaluates 2160/2160 vector-closed PAPER3F/PAPER3G/PAPER3H method-case rows.
+- The systematic yaw discrepancy remains: median previous-policy RMSE about 94.65 deg, median user-policy RMSE about 106.09 deg, and 90-degree-like systematic case ratio about 0.9875.
+
+Allowed after PAPER4G:
+
+- physical GNSS1-right/GNSS2-left frame closure as an installation/setup fact;
+- trace yaw source and minimal-export policy audit as appendix evidence;
+- native DD/LOS baseline, residual, ambiguity, provider-readiness, ratio/ADOP, and fix-rate-proxy metrics as external literature method supporting evidence;
+- PAPER4F_R2 body-yaw reevaluation tables only as diagnostic-only evidence.
+
+Still forbidden after PAPER4G:
+
+- body-yaw RMSE claim;
+- external-method yaw superiority;
+- final_v23 / LegSA_QA / LegSA_full superiority;
+- same-evaluator superiority unless separately proven;
+- BY3 yaw generalization;
+- XB severe-GNSS high-precision proof;
+- exact/full faithful external reproduction;
+- RTKLIB as Teunissen/Yang/Liu/Wu exact reproduction;
+- trace online use;
+- receiver IMU as Go2 body IMU;
+- full Galileo/GLONASS/SBAS provider closure.

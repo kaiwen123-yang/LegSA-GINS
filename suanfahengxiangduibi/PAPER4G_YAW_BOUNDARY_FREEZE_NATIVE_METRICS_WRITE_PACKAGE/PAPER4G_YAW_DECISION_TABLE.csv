@@ -1,0 +1,7 @@
+decision_item,value,evidence
+physical_baseline_frame_closed,True,PAPER4B_R2 GNSS1-right/GNSS2-left physical frame closure
+trace_yaw_source_closed,True,PAPER4D/E trace.yaw == user_io-out-poi_geodetic.csv:ypr.vector3.x
+trace_body_yaw_reference_final_authorized,False,PAPER4F_R2 trace+90 policy did not remove systematic yaw discrepancy
+external_method_body_yaw_final_authorized,False,PAPER4F_R2 median user-policy RMSE remains high and systematic_90deg ratio remains ~0.9875
+external_method_yaw_metrics_paper_use,diagnostic_only,body yaw reference/method yaw semantics not jointly closed for final claim
+native_ddlos_metrics_paper_use,appendix_or_main_supporting_evidence,native baseline/residual/ambiguity metrics remain valid backend evidence

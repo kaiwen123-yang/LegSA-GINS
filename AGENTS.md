@@ -979,3 +979,35 @@ PAPER4B_R2 hard prohibitions:
 - no final_v23, LegSA_QA, LegSA_full, or universal superiority claim;
 - no raw/RINEX/UBX/RTCM/runtime payload or external-code staging;
 - no push.
+
+## 36. PAPER4G Yaw Boundary Freeze And Native Metrics Route
+
+`PAPER4G_YAW_BOUNDARY_FREEZE_NATIVE_METRICS_WRITE_PACKAGE` freezes the external-method body-yaw claim boundary after PAPER4F_R2. PAPER4F_R2 applied the user-declared BY2 minimal-export yaw policy `trace_body_yaw_NED_deg = wrap360(trace_yaw_deg + 90 deg)` to 2160/2160 PAPER3F/PAPER3G/PAPER3H vector-closed method-case rows, but the systematic yaw discrepancy remained: median previous-policy RMSE was about 94.65 deg, median user-policy RMSE was about 106.09 deg, and the 90-degree-like systematic case ratio was about 0.9875.
+
+PAPER4G frozen decisions:
+
+- physical GNSS1-right/GNSS2-left baseline frame remains closed from PAPER4B_R2;
+- trace yaw source remains closed to `user_io-out-poi_geodetic.csv:ypr.vector3.x`;
+- status `rel_pos` and LLH position-diff remain invalid as physical short-baseline truth;
+- final body-yaw RMSE and yaw-superiority claims for external literature methods remain diagnostic-only;
+- external literature method comparison must use native DD/LOS baseline, residual, ambiguity, provider-readiness, ratio/ADOP, and fix-rate-proxy evidence.
+
+PAPER4G allowed evidence:
+
+- `PAPER4G_YAW_CLAIM_BOUNDARY_FREEZE.md`;
+- `PAPER4G_YAW_DECISION_TABLE.csv`;
+- `PAPER4G_NATIVE_DDLOS_METRICS_LEDGER.csv`;
+- `PAPER4G_EXTERNAL_LITERATURE_METHOD_STATUS.csv`;
+- writing package files that route external method discussion to native metrics only.
+
+PAPER4G hard prohibitions:
+
+- no body-yaw RMSE claim;
+- no external-method yaw superiority claim;
+- no exact/full faithful external reproduction claim;
+- no RTKLIB-as-Teunissen/Yang/Liu/Wu exact reproduction claim;
+- no final_v23, LegSA_QA, LegSA_full, BY3 yaw generalization, or XB severe-GNSS high-precision claim;
+- no trace online use;
+- no receiver `imu-data.csv` as Go2 body IMU;
+- no raw/RINEX/UBX/RTCM/runtime payload or external-code staging;
+- no push.
