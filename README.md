@@ -417,3 +417,13 @@ BY3A5B repairs the mainline BY3 dual yaw with A1_dual_diff short-baseline yaw fr
 ## XB1A2 A1 Relpos-Difference Correction
 
 XB1A2 prevents an A1-source misunderstanding from recurring. A single status `rel_pos_n/e/d` row may be a long RTK base vector and must not be used directly as antenna heading, but the BY2/process_data-compatible status A1 path is a dual difference: `rel_pos_gnss2 - rel_pos_gnss1` after GNSS2 interpolation to GNSS1 time. XB1A2 audited that relpos-difference path for XB1 and found it still nonphysical: 356 rows, 7 physical-band epochs, valid epoch ratio about 0.0197, median length about 9.18 m, p95 about 50.96 m, and max about 131.70 m. It also audited the BY3A5B absolute-position candidate, which remains nonphysical for XB1. Therefore no repaired dual-yaw input was generated, no dual-yaw normal rerun was forced, and quality-aware diagnostic branch planning remains the recommended next step after human review.
+
+## PAPER10X Git Context And Next Direction Freeze
+
+The active cleanup stage is `PAPER10X_GIT_CONTEXT_CLEANUP_AND_COMMIT`.
+
+PAPER10X is not an experiment stage. It cleans the repository context, classifies dirty tracked/untracked files, hardens `.gitignore`, syncs the project Obsidian notes, and freezes the next experiment direction. Runtime directories, raw data, NAV/STD/EVAL_NAV/RUN_MANIFEST outputs, figures, archives, installers, and local path manifests remain untracked.
+
+Current paper-facing baseline: `LegSA_full_EKF` is the main algorithm, `final_v23_dual_antenna_EKF` is the strong external baseline, Raw Doppler and source-aware LSIM/OIM R scaling are accepted modules, BY2 source-aware 120 x 5 is closed, and BY3 source-aware 120 x 5 is closed only with poor-heading-stress and yaw diagnostic-only wording.
+
+Next recommended route: run PAPER10C for Go2 high-level prior evidence freeze, then PAPER10E for the final proposed-method matrix, then PAPER10F for figures and manuscript experiment text. Add PAPER10B2 only if the paper keeps a multi-state quality-management contribution; keep selected FGO feedback as optional PAPER10D rather than the first priority.

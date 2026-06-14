@@ -1,0 +1,6 @@
+dataset,role,current_status,allowed_wording,forbidden_wording
+BY2,main_full_metric_dataset,source-aware_120x5_complete,main controlled-degradation and source-aware evidence,not sole universal proof
+BY3,independent_repeat_and_poor_heading_stress,source-aware_120x5_complete,position/up generalization and poor-heading stress,BY3 ordinary yaw generalization
+XB_PG,severe_GNSS_boundary_and_QA_motivation,reviewed_as_boundary,quality-aware motivation and fallback behavior discussion,high-precision poor-GNSS robustness proof
+external_DA,literature_comparison_context,bounded_completed,formula-level or bounded comparison,official exact reproduction if not proven
+external_LC,literature_comparison_context,bounded_completed with five high-quality unique papers,broad LC superiority or official exact if not proven

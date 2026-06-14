@@ -2113,6 +2113,16 @@ Allowed PAPER0 statements: BY2 is organized as the full-metric main dataset for 
 
 Still forbidden after PAPER0: final paper performance claims, final paper figure authorization, solver/evaluator execution, artificial degradation, random array generation, QA1 implementation, parameter retuning, metric alteration, fabricated figures/tables, BY3 yaw main claim, PG performance claim, comprehensive final_v23 superiority claim, quality-aware implementation or validation claim, PR #52 merge/closure/tag approval, staging PAPER0 runtime outputs, or staging Obsidian notes.
 
+## PAPER10X Git Context Cleanup And Next Direction Boundary
+
+Allowed PAPER10X work: Git dirty-state audit, tracked and untracked context review, `.gitignore` hardening, alias-safe context-doc updates, lightweight C export, Obsidian project-vault sync, current content summary, next-experiment direction freeze, and local context commit after staged-file safety scan.
+
+Allowed PAPER10X statements: `LegSA_full_EKF` is the verified main algorithm identity; `final_v23_dual_antenna_EKF` is a strong external Dual-Antenna GNSS/INS EKF baseline; Raw Doppler and source-aware LSIM/OIM R scaling are accepted mainline modules; BY2 source-aware 120 x 5 is closed; BY3 source-aware 120 x 5 is closed as position/up and poor-heading-stress evidence with yaw diagnostic-only; default `python3` and conda were repaired in PAPER10B_R2C.
+
+PAPER10X must keep `ready_for_paper_claims=false`. It may recommend PAPER10C, PAPER10B2, PAPER10D, PAPER10E, and PAPER10F, but it does not authorize running any of them.
+
+Still forbidden after PAPER10X unless later reviewed evidence proves otherwise: universal source-aware superiority, comprehensive final_v23 outperform claims, BY3 ordinary yaw generalization, complete nine-factor FGO, completed `LegSA_QA_Fallback_EKF`, full contact-aided InEKF, source-aware as complete multi-state quality management, external DA/LC official-exact reproduction claims, trace online, receiver `imu-data.csv` as Go2 body IMU, per-case tuning, staging runtime outputs, staging raw data, staging generated figures, staging archives, or staging local path manifests.
+
 ## PAPER4A Write-Ready Evidence Package Boundary
 
 Allowed PAPER4A evidence: completed-stage final reports, row-level master tables, provider summaries, claim-boundary tables, render QA summaries, export indices, and consolidated PAPER2B secondary proof for PAPER1F if direct PAPER1F paths are missing. PAPER4A outputs are lightweight reports and context updates under `<PAPER4A_STAGE_ROOT>`.
@@ -2149,6 +2159,7 @@ Still forbidden after PAPER4A:
 - receiver `imu-data.csv` as Go2 body IMU;
 - full contact-aided or joint-foot kinematic constraint claims without backend and ablation proof;
 - full Galileo/GLONASS/SBAS provider closure.
+
 PAPER4A does not authorize solver/evaluator execution, degraded-input generation, random array generation, figure rendering, parameter retuning, algorithm changes, RTKLIB source modification, external-code modification, runtime/raw/RINEX/UBX/RTCM staging, Obsidian staging, push, PR merge/closure/tag, final paper figures, or final paper claims.
 
 ## PAPER4B_R2 Physical Frame And Offline Body-Yaw Boundary

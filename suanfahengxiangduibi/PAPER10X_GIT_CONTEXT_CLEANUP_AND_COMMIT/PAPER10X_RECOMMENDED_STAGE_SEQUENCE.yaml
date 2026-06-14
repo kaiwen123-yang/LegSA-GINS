@@ -1,0 +1,24 @@
+steady_submission_route:
+  - stage_id: PAPER10C_GO2_HIGH_LEVEL_PRIOR_EVIDENCE_FREEZE
+    priority: mandatory
+  - stage_id: PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE
+    priority: mandatory
+  - stage_id: PAPER10F_FIGURE_TABLE_AND_MANUSCRIPT_EXPERIMENT_SECTION
+    priority: mandatory
+strong_innovation_route:
+  - stage_id: PAPER10C_GO2_HIGH_LEVEL_PRIOR_EVIDENCE_FREEZE
+    priority: mandatory
+  - stage_id: PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE
+    priority: conditional
+    condition: retain_multi_state_quality_management_claim
+  - stage_id: PAPER10D_SELECTED_FGO_FEEDBACK_EVIDENCE_FREEZE
+    priority: optional
+  - stage_id: PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE
+    priority: mandatory
+  - stage_id: PAPER10F_FIGURE_TABLE_AND_MANUSCRIPT_EXPERIMENT_SECTION
+    priority: mandatory
+hard_boundaries:
+  no_solver_in_paper10x: true
+  by3_yaw_diagnostic_only: true
+  no_universal_source_aware_superiority: true
+  no_complete_nine_factor_fgo_claim: true

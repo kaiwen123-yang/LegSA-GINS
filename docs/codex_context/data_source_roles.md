@@ -205,3 +205,13 @@ BY3C uses the BY3A7 repaired IMU as the accepted body-IMU source, the BY3A5B/BY3
 BY3C degraded cases generate same-case feedback only from that same case's stage1 official EVAL_NAV state/estimate columns. BY2 feedback, BY3 normal feedback reuse for degraded cases, trace/error feedback columns, final_v23 output, single-baseline output, and LegSA output are not solver inputs.
 
 BY3C completed only position/up-primary Batch0-Batch3 execution. Yaw fields in BY3C are diagnostic-only and must not be used for paper yaw claims, yaw robustness claims, or RMSE-selected source repair. Later yaw-diagnostic or mixed stages require separate human review.
+
+## PAPER10X Source-Role Lock
+
+PAPER10X preserves the trace evaluation-only rule: trace may be used for official evaluation, metric calculation, and post-run diagnostic analysis only. It must not be used for solver input, quality-state threshold tuning, provider generation, feedback generation, yaw sign selection, or time-offset tuning.
+
+Receiver `imu-data.csv` remains receiver diagnostic data and is not Go2 body IMU. Go2 body/high-level data are source observations and weak-prior inputs, not truth or absolute pose reference.
+
+BY3 yaw remains diagnostic-only after the PAPER10B_R2B source-aware closure. BY3 may support position/up generalization and poor-heading stress wording, but not ordinary yaw generalization or yaw performance claims.
+
+XB1-XB4 remain severe poor-GNSS boundary and QA-motivation datasets. They may support fallback-behavior discussion, but not high-precision performance or broad poor-GNSS robustness claims.
