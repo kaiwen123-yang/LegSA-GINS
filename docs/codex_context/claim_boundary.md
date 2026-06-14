@@ -156,3 +156,11 @@ XB1A1 must keep `ready_for_paper_claims=false`, `ready_for_XB1_degradation_or_PG
 ## Paper Boundary
 
 Paper-grade claims require source lineage, frame/time alignment, metric sanity, semantic sanity, same-case feedback validation for feedback cases, N9C visual review, N9D claim-boundary review, and explicit human approval. N9F design readiness is not paper-claim authorization.
+
+## PAPER10X Claim Boundary
+
+PAPER10X may summarize completed evidence and recommend next stages, but it does not authorize final paper claims.
+
+Allowed wording: `LegSA_full_EKF` is the verified main algorithm; `final_v23_dual_antenna_EKF` is the strong external baseline; Raw Doppler and source-aware LSIM/OIM R scaling are accepted modules; BY2 source-aware 120 x 5 is closed; BY3 source-aware 120 x 5 is closed as poor-heading stress with yaw diagnostic-only; DA/LC comparisons are bounded rather than official-exact.
+
+Forbidden wording: universal superiority, comprehensive outperform-final_v23 conclusions, BY3 ordinary yaw generalization, complete nine-factor FGO, completed `LegSA_QA_Fallback_EKF`, full contact-aided InEKF, source-aware as complete multi-state quality management, trace online, receiver `imu-data.csv` as Go2 body IMU, and per-case tuning.

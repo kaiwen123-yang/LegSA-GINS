@@ -304,3 +304,11 @@ PG_QA0 is the current poor-GNSS design state. It used PG_MULTI_A0 and XB1A2 as s
 The design keeps `LegSA_full_EKF` as the frozen verified mainline for normal/moderate GNSS and BY2/BY3 position-up evidence. It defines `LegSA_QA_Fallback_EKF` as a separate future candidate with its own future `algorithm_id`, quality-state logs, and validation package. The fallback state machine disables A1 dual-yaw when relpos-diff geometry is nonphysical, downweights or rejects poor GNSS position using online source-quality indicators, retains Raw Doppler only when provider/residual quality is acceptable, and uses IMU+Go2 bridge mode only as a low-confidence short-interval fallback.
 
 Current decision: `PG_QA0_design_complete_human_review_before_QA1`; `paper_mainline_recommendation=Option_B_design_extension_now`; `optional_high_tier_route=Option_C_after_QA1_QA2_QA3`; `ready_for_QA1=false`; `ready_for_paper_claims=false`; `recommended_next_stage=human_review_PG_QA0_then_keep_future_work_or_approve_PG_QA1`.
+
+## PAPER10X Git Context Cleanup
+
+PAPER10X is the active current state. It cleans the Git dirty context after PAPER10A/PAPER10B/PAPER10B_R1/PAPER10B_R2B/PAPER10B_R2C without running experiments. The branch is `paper10x/git-context-cleanup-and-commit`.
+
+Current evidence state: BY2 is the main full-metric dataset; BY2 source-aware 120 x 5 is complete; BY3 source-aware 120 x 5 is complete as poor-heading stress with yaw diagnostic-only; source-aware LSIM/OIM is a bounded main innovation; Go2 high-level priors still require PAPER10C freeze; selected FGO feedback remains bounded and optional; complete active nine-factor FGO and `LegSA_QA_Fallback_EKF` are not completed mainline claims.
+
+Recommended route: PAPER10C first, then PAPER10E, then PAPER10F. Add PAPER10B2 only if the paper keeps a multi-state quality-management contribution. Add PAPER10D only if selected FGO feedback needs a separate evidence-freeze appendix or secondary contribution.

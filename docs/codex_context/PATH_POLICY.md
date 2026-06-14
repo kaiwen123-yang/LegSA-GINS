@@ -107,3 +107,11 @@ PAPER0 export-clean material must use aliases only and must not contain local ab
 `docs/codex_context/DATA_PATHS.local.md` may contain real local absolute paths for this machine. It is local-only by default, ignored, and must not be staged or committed unless the user explicitly requests it.
 
 Use `docs/codex_context/DATA_PATHS.template.md` as an alias-only template.
+
+## PAPER10X Path Alias
+
+PAPER10X runtime reports are represented in tracked docs only by `<PAPER10X_STAGE_ROOT>`. The lightweight export is represented only by `<PAPER10X_C_EXPORT_ROOT>`, and project knowledgebase notes are represented only by `<PROJECT_OBSIDIAN_VAULT>`.
+
+Tracked docs must not contain local absolute paths. Use aliases for project root, runtime roots, C exports, Obsidian vaults, BY2/BY3 data roots, XB/PG review roots, and any historical evidence root.
+
+PAPER10X export-clean material must exclude raw data, NAV/STD/EVAL_NAV, RUN_MANIFEST outputs, generated figures, archives, installers, core dumps, conda caches, local-only path manifests, and `.obsidian` internal configs. Runtime-only directories such as `.legsa_runtime/` and `qa_fallback_review/` must remain untracked or ignored.

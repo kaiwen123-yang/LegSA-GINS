@@ -2,6 +2,7 @@
 
 | Phase | Branch | Status | Solver Modified | Large Files Allowed | Main Output | Notes |
 |---|---|---|---|---|---|---|
+| PAPER10X Git context cleanup and next experiment direction freeze | paper10x/git-context-cleanup-and-commit | active | no | no | safe context commit + current content summary + next-stage route | No solver/evaluator or experiment execution; classify dirty files, keep runtime directories untracked/ignored, update claim boundary, sync project Obsidian notes, commit safe context docs only, no push |
 | N0 Bootstrap | stage/N0-bootstrap | done | no | no | repo structure + governance docs | completed |
 | N1 final_v23 wrapper | stage/N1-final-v23-wrapper | done | no | no | baseline wrapper | completed; final_v23 not proposed |
 | N2 frame/writer/evaluator | stage/N2-frame-writer-evaluator | done | no | no | frame + writer + evaluator | frame/writer/evaluator infrastructure completed as lightweight standard-library utilities |

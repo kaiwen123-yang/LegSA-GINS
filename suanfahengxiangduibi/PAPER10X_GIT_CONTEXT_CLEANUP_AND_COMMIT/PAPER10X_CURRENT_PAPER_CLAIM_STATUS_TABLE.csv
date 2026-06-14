@@ -1,0 +1,9 @@
+claim,status,allowed_wording,forbidden_wording,next_gate
+source_aware_LSIM_OIM,bounded_main_supported,BY2 closed and BY3 stress-tested source-aware R scaling,universal superiority or complete multi-state QM,PAPER10E
+Raw_Doppler,mainline_supported,Raw Doppler velocity update is active,standalone universal dominance,PAPER10E
+Go2_high_level_prior,partial_needs_freeze,Go2 weak prior evidence under review,full contact-aided InEKF or full leg odometry,PAPER10C
+selected_FGO_feedback,bounded_optional,same-case feedback if provenance holds,complete active FGO or cross-case feedback,PAPER10D optional
+BY3_generalization,position_up_only,BY3 position/up generalization under poor-heading stress,BY3 yaw generalization,PAPER10E wording review
+QA_fallback,future_candidate,quality-aware fallback motivation,completed main algorithm or performance claim,PAPER10B2 conditional
+complete_nine_factor_FGO,forbidden_currently,design/future work only,completed active nine-factor FGO,defer
+final_v23_comparison,bounded_baseline,strong external baseline comparison,comprehensive outperform-final_v23,PAPER10E

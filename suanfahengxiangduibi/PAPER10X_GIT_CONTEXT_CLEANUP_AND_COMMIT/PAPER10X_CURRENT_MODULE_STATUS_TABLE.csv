@@ -1,0 +1,12 @@
+module,status,evidence_role,claim_boundary,next_action
+LegSA_full_EKF,verified_main_algorithm,current proposed method identity,bounded mainline claim allowed,PAPER10E final matrix
+final_v23_dual_antenna_EKF,strong_external_baseline,external reference and sanity baseline,not solver input and no comprehensive superiority claim,PAPER10E comparison table
+short_lateral_dual_antenna_body_yaw,confirmed_module,semantic observation modeling,BY3 yaw remains diagnostic-only,PAPER10E wording review
+Raw_Doppler_velocity_update,confirmed_module,EKF velocity update,do not overclaim standalone dominance,PAPER10E final matrix
+source_aware_LSIM_OIM_R_scaling,confirmed_module,BY2 main innovation and BY3 stress evidence,no universal superiority and not complete multi-state QM,PAPER10E final matrix
+Go2_roll_pitch_weak_prior,needs_freeze,high-level prior evidence,not full contact-aided InEKF,PAPER10C
+Go2_horizontal_velocity_weak_prior,needs_freeze,high-level prior evidence,not full leg odometry,PAPER10C
+Go2_contact_readiness_candidate_factors,needs_freeze_or_downgrade,candidate factor/provenance evidence,no active joint-foot claim without code and ablation,PAPER10C
+selected_FGO_feedback,bounded_optional,same-case factor-derived feedback,not complete active FGO and no cross-case reuse,PAPER10D optional
+LegSA_QA_Fallback_EKF,future_candidate,quality-aware fallback motivation,not implemented main algorithm,PAPER10B2 only if claim retained
+complete_nine_factor_FGO,unsupported_for_current_claim,design/future candidate only,forbidden as completed claim,defer or reframe

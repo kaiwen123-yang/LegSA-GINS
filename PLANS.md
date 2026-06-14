@@ -714,6 +714,59 @@ ready_for_paper_claims=false
 recommended_next_stage=PAPER1_MANUSCRIPT_EXPERIMENT_SECTION_DRAFT
 ```
 
+## PAPER10X Git Context Cleanup And Next Experiment Direction Freeze
+
+Active stage:
+
+```text
+PAPER10X_GIT_CONTEXT_CLEANUP_AND_COMMIT
+```
+
+PAPER10X is a Git hygiene, context-doc, claim-boundary, Obsidian sync, and next-experiment planning stage. It must not run solvers, evaluators, degradation generation, DA, LC, GINav, MATLAB, RTKLIB, contact-aided experiments, complete FGO, or any PAPER10B_R2 continuation.
+
+PAPER10X deliverables:
+
+- classify tracked and untracked dirty files;
+- keep `.legsa_runtime/` and `qa_fallback_review/` untracked or ignored;
+- update `.gitignore` for runtime/raw/archive/figure/core payloads;
+- update AGENTS, PLANS, PHASE_LOG, README, CLAIM_BOUNDARY, and `docs/codex_context`;
+- summarize current algorithm, module, dataset, experiment, and claim status;
+- sync the correct project Obsidian vault;
+- create lightweight C export;
+- stage only safe context docs and commit locally without push.
+
+Current evidence baseline:
+
+```text
+main_algorithm=LegSA_full_EKF
+strong_baseline=final_v23_dual_antenna_EKF
+source_aware_status=BY2_120x5_closed; BY3_120x5_closed_with_yaw_diagnostic_only
+go2_status=weak_prior_evidence_requires_PAPER10C_freeze
+fgo_status=selected_feedback_bounded; complete_nine_factor_FGO_forbidden
+qa_fallback_status=future_candidate_not_main_algorithm
+ready_for_paper_claims=false
+```
+
+Recommended steady submission route:
+
+```text
+PAPER10C_GO2_HIGH_LEVEL_PRIOR_EVIDENCE_FREEZE
+PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE
+PAPER10F_FIGURE_TABLE_AND_MANUSCRIPT_EXPERIMENT_SECTION
+```
+
+Recommended stronger innovation route:
+
+```text
+PAPER10C_GO2_HIGH_LEVEL_PRIOR_EVIDENCE_FREEZE
+PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE
+PAPER10D_SELECTED_FGO_FEEDBACK_EVIDENCE_FREEZE_optional
+PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE
+PAPER10F_FIGURE_TABLE_AND_MANUSCRIPT_EXPERIMENT_SECTION
+```
+
+PAPER10C is mandatory before final method freezing. PAPER10B2 is only recommended if the manuscript keeps a multi-state quality-management contribution. PAPER10D is optional and should not outrank Go2 and final proposed-method closure.
+
 ## PAPER4A Write-Ready Evidence Package And Context Sync
 
 Active/consolidated stage:
@@ -742,6 +795,7 @@ DIAGNOSTIC_ONLY=PAPER1F adapters; yaw transform sensitivity; baseline-heading di
 BLOCKED_WITH_PROOF=physical body-yaw frame; same-evaluator superiority; non-GPS provider closure; direct PAPER1F source if no path is found
 FORBIDDEN_CLAIM=body-yaw RMSE; yaw superiority; exact reproduction; five faithful external dual-antenna algorithms; final_v23/LegSA superiority; BY3 yaw generalization; XB severe-GNSS high-precision proof; trace online; receiver IMU as Go2 body IMU; full contact/joint-foot claim
 ```
+
 PAPER4A does not authorize solver/evaluator execution, degraded-input generation, random arrays, figure rendering, retuning, algorithm changes, RTKLIB source modification, external-code modification, runtime/raw/RINEX/UBX/RTCM staging, final paper figures, final paper claims, PR merge/closure/tag, or push.
 
 ## PAPER4B_R2 Physical Frame Close And Yaw Reevaluation

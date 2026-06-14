@@ -1,0 +1,14 @@
+experiment_block,current_status,usable_for,claim_boundary,next_action
+PAPER10A_mainline_memory_and_code_freeze,completed,algorithm identity and source boundary,no new execution authorized,use as context
+PAPER10A_R1_obsidian_sync,completed,project knowledge graph and vault alignment,Git commit was skipped then,PAPER10X sync refresh
+PAPER10B_source_aware_code_math_freeze,conditional_completed,source-aware code chain and math definition,full ablation was not closed there,use R1/R2B closures
+PAPER10B_R1_BY2_source_aware_120x5,completed,BY2 source-aware main innovation,Different evaluator scope explains 0.057m vs 0.348m,PAPER10E final table
+PAPER10B_R2B_BY3_source_aware_120x5,completed,BY3 stress evidence,yaw diagnostic-only and no universal superiority,PAPER10E final table
+PAPER10B_R2C_env_repair,completed,default python3 and conda health,no new default env created,use for future project baseline
+DA_horizontal_comparison,bounded_completed,external DA context,not official exact unless proven,keep bounded
+LC_horizontal_comparison,bounded_completed,external LC context with OiSAM-FGO,GINav diagnostic and Yin fallback downgraded,keep bounded
+Go2_high_level_prior_evidence,not_final_frozen,Go2 weak prior contribution,not contact-aided InEKF,PAPER10C mandatory
+multi_state_quality_management,not_closed,possible stronger innovation,not equivalent to source-aware alone,PAPER10B2 conditional
+selected_FGO_feedback,not_final_frozen,secondary hybrid feedback evidence,not complete active FGO,PAPER10D optional
+final_proposed_method_matrix,not_done,final internal comparison,required before paper claims,PAPER10E
+figure_table_manuscript_section,not_done,paper-facing presentation,requires final matrix first,PAPER10F

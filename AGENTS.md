@@ -914,6 +914,40 @@ recommended_next_stage=PAPER1_MANUSCRIPT_EXPERIMENT_SECTION_DRAFT
 
 PAPER0 does not authorize solver execution, evaluator execution, degraded-input generation, random-array generation, QA1 implementation, parameter retuning, metric alteration, final paper figures, final paper claims, PR #52 merge/closure/tag, staging runtime outputs, or staging Obsidian notes.
 
+## 33. PAPER10X Git Context Cleanup And Next Experiment Direction Freeze
+
+`PAPER10X_GIT_CONTEXT_CLEANUP_AND_COMMIT` is the active Git/context cleanup stage after PAPER10A, PAPER10A_R1, PAPER10B, PAPER10B_R1, PAPER10B_R2B, and PAPER10B_R2C. It is a documentation, Git hygiene, claim-boundary, Obsidian sync, and next-experiment planning stage only.
+
+PAPER10X must not run solvers, evaluators, DA, LC, GINav, MATLAB, RTKLIB, contact-aided variants, complete FGO, random generation, degraded-input generation, or any continuation of PAPER10B_R2. It must not modify receiver CSV, Go2 body text, trace, raw data, or existing runtime outputs.
+
+PAPER10X Git handling rules:
+
+- classify every tracked and untracked dirty item before staging;
+- keep `.legsa_runtime/` and `qa_fallback_review/` untracked or ignored;
+- stage only safe context docs, lightweight reports, `.gitignore`, and alias-safe summaries;
+- never stage raw/RINEX/UBX/RTCM/bag/NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, archives, conda installers, core dumps, or files over 50 MB;
+- never write local absolute paths into tracked docs;
+- do not reset, clean, stash, push, merge, tag, close PRs, or delete branches.
+
+Current PAPER10X evidence summary:
+
+- `LegSA_full_EKF` remains the verified main algorithm identity.
+- `final_v23_dual_antenna_EKF` remains a strong Dual-Antenna GNSS/INS EKF baseline and external reference, not solver input.
+- Raw Doppler velocity update and source-aware LSIM/OIM R scaling are accepted mainline modules.
+- BY2 is the main full-metric dataset; PAPER10B_R1 closed BY2 120 x 5 source-aware full ablation.
+- BY3 is position/up generalization plus poor-heading stress; PAPER10B_R2B closed BY3 120 x 5 source-aware rows, but BY3 yaw remains diagnostic-only.
+- PAPER10B_R2C repaired default `python3` and reinstalled conda without creating a new default env.
+
+PAPER10X next-stage decision:
+
+```text
+steady_submission_route=PAPER10C -> PAPER10E -> PAPER10F
+strong_innovation_route=PAPER10C -> PAPER10B2 -> optional PAPER10D -> PAPER10E -> PAPER10F
+ready_for_paper_claims=false_until_final_method_matrix_and_claim_review
+```
+
+PAPER10X keeps these claim boundaries: source-aware can be a bounded main innovation supported by BY2 and stress-tested by BY3, but it must not be written as universal superiority; BY3 must not be written as ordinary yaw generalization; `LegSA_QA_Fallback_EKF`, complete nine-factor FGO, and full contact-aided InEKF remain future or unsupported claims unless later reviewed evidence closes them.
+
 ## 34. PAPER4A Write-Ready Evidence Package Lock
 
 `PAPER4A_WRITE_READY_EVIDENCE_PACKAGE_AND_CONTEXT_SYNC` consolidates completed evidence from PAPER1F, PAPER2A, PAPER2B, PAPER3A-R1, PAPER3B, PAPER3D-R2, PAPER3E, PAPER3F, PAPER3G, PAPER3H, and PAPER3I into a writing-ready evidence package. It is a consolidation/context-sync stage only.
@@ -943,6 +977,7 @@ diagnostic_only=PAPER1F_adapters; yaw_frame_sensitivity; RTKLIB_movingbase; BY3_
 ready_for_manuscript_drafting=true_bounded_by_claim_boundary
 ready_for_paper_claims=false
 ```
+
 ## 35. PAPER4B_R2 Physical Frame Close And Offline Yaw Reevaluation Lock
 
 `PAPER4B_R2_PHYSICAL_FRAME_CLOSE_AND_YAW_REEVALUATION` records the user-confirmed Fixposition/Go2 antenna installation evidence and accepts the physical frame policy for the BY2 dual-antenna baseline. This stage closes the physical antenna-to-body geometry only; it does not close exact reproduction, full faithful external algorithms, same-evaluator superiority, BY3 yaw generalization, or XB severe-GNSS high-precision proof.

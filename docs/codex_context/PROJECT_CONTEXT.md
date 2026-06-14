@@ -187,3 +187,11 @@ BY3C1/BY3Y1 completed a reporting-only review of existing BY3C Batch0-Batch3 met
 ## GEN1 BY2-BY3 Generalization Report And BY3 Figure Organization
 
 GEN1 completed a reporting, review, and copy-only organization package over existing BY2/BY3 metric and figure evidence. It produced metric inventories, canonical mapping, family/case/delta summaries, cross-dataset figures from existing metrics only, BY3 figure inventory, a copy-only organized figure view, export-clean material, and Obsidian notes. Current decision is `GEN1_cross_dataset_report_and_BY3_figure_organization_complete`; `ready_for_next_stage=true_after_human_review`; `yaw_claim_scope=diagnostic_only`; `ready_for_paper_claims=false`.
+
+## PAPER10X Context
+
+PAPER10X is the active Git/context cleanup and next-direction freeze after PAPER10A, PAPER10A_R1, PAPER10B, PAPER10B_R1, PAPER10B_R2B, and PAPER10B_R2C. It does not run algorithms. It records what is already closed, cleans safe context docs, keeps runtime outputs out of Git, and freezes the next experiment sequence.
+
+The current main algorithm identity is `LegSA_full_EKF`. `final_v23_dual_antenna_EKF` remains the strong external baseline. Raw Doppler and source-aware LSIM/OIM R scaling are accepted mainline modules. BY2 is the full-metric main dataset. BY3 is position/up generalization plus poor-heading stress, with yaw diagnostic-only. XB/PG remain severe-GNSS boundary and QA-motivation datasets.
+
+The next decision is not whether to run more source-aware rows; BY2 and BY3 source-aware 120 x 5 closures are already complete. The next required evidence freeze is PAPER10C for Go2 high-level priors, followed by PAPER10E and PAPER10F, with PAPER10B2 and PAPER10D only if their stronger-innovation claims are kept.

@@ -62,3 +62,11 @@ ready_for_full_N9B_execution=false
 ```
 
 It may recommend implementing an active FGO backend or reframing the scope. It must not authorize PR #52 merge/tag/closure, N9G2 representative validation, or paper claims.
+
+## PAPER10X Workflow Policy
+
+PAPER10X is a no-execution cleanup stage. It may inspect Git, read reports, update context docs, create lightweight summaries, sync the project Obsidian vault, and commit safe context files locally. It must not run solvers, evaluators, DA, LC, GINav, MATLAB, RTKLIB, contact-aided execution, complete FGO, random generation, degraded-input generation, or source-aware matrix continuation.
+
+The required workflow is: snapshot Git status, back up diffs, classify dirty files, review tracked diffs, review untracked runtime directories, update `.gitignore`, sanitize context docs, generate current-content and next-experiment summaries, sync Obsidian, generate export-clean material, scan candidate staged files, commit only safe files, and verify post-commit status.
+
+The final reviewer must check that staged files contain no local absolute path leaks, raw/runtime payloads, archives, generated figures, files over 50 MB, or forbidden claims. `push=false` is mandatory.
