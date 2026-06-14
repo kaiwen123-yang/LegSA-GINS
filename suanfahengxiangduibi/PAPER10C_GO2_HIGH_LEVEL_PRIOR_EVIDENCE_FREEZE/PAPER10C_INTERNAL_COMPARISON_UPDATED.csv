@@ -1,0 +1,7 @@
+dataset,method,evidence,status,mean_h_rmse
+BY2,LegSA-GINS source-aware without Go2,"PAPER10C G00, 120 rows",completed,1.4410323767505917
+BY2,LegSA-GINS + Go2 RP,"PAPER10C G01, 120 rows",completed,1.437855813025
+BY2,LegSA-GINS + Go2 HVel,"PAPER10C G02, 120 rows",completed,1.4407746121014695
+BY2,LegSA-GINS + Go2 RP+HVel,"PAPER10C G04, 120 rows",completed,1.4376256955474118
+BY2,LegSA-GINS + Go2 readiness metadata,PAPER10C G03/G05,blocked_with_proof,
+BY3,Go2 all modes,PAPER10C provider search,blocked_with_proof_by3_provider_missing,

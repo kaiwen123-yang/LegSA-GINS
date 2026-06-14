@@ -1,0 +1,8 @@
+file,symbol,decision
+cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/gi_engine.hpp,setGo2AttitudeWeakPriors / setGo2VelocityDiagnosticPriors,CODE_PRESENT
+cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp,applyGo2AttitudeWeakPriorForTime -> EKFUpdate,EKF_ACTIVATED_WHEN_CONFIG_AND_PROVIDER_ENABLED
+cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp,applyGo2VelocityDiagnosticPriorForTime -> EKFUpdate,HORIZONTAL_EKF_ACTIVATED_WHEN_CONTROLLED_HVEL_ENABLED
+cpp/legsa_v23_port_core/include/legsa_v23_port_core/factors/go2_weak_prior_types.hpp,Go2 attitude/velocity schema,ROLL_PITCH_AND_HORIZONTAL_ONLY; POSITION_YAW_FALSE; VERTICAL_DISABLED
+cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/measurement_source.hpp,MeasurementSource Go2 source IDs,SOURCE_AWARE_SOURCE_IDS_PRESENT
+cpp/legsa_v23_port_core/src/source_aware/source_aware_policy.cpp,Go2 LSIM/OIM branches,SOURCE_AWARE_SCALING_PRESENT_FOR_GO2_SOURCES
+src/legsa_gins/go2_prior/go2_motion_state.py,diagnostic motion-state labeling,DIAGNOSTIC_ONLY; NOT_FIRST_CLASS_LSIM_METADATA

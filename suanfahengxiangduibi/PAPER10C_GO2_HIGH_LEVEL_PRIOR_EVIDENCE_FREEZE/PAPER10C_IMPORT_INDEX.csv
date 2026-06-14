@@ -1,0 +1,6 @@
+source_stage,artifact,status,role
+PAPER10X,PAPER10X_SUPERVISOR_FINAL_REPORT.md,READ,next-route and claim-boundary import
+PAPER10A,12_go2_weak_prior_and_legged_evidence,READ,Go2 code/runtime evidence import
+PAPER10B_R1,BY2 source-aware 120x5 evidence,READ,fixed SA04_N6B_POLICY and BY2 run matrix
+PAPER10B_R2B,BY3 source-aware 600/600 closure,READ,BY3 yaw diagnostic-only boundary
+N7C6,Go2 proprioceptive joint factor priors and reports,READ,BY2 Go2 prior provider

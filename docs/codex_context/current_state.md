@@ -312,3 +312,18 @@ PAPER10X is the active current state. It cleans the Git dirty context after PAPE
 Current evidence state: BY2 is the main full-metric dataset; BY2 source-aware 120 x 5 is complete; BY3 source-aware 120 x 5 is complete as poor-heading stress with yaw diagnostic-only; source-aware LSIM/OIM is a bounded main innovation; Go2 high-level priors still require PAPER10C freeze; selected FGO feedback remains bounded and optional; complete active nine-factor FGO and `LegSA_QA_Fallback_EKF` are not completed mainline claims.
 
 Recommended route: PAPER10C first, then PAPER10E, then PAPER10F. Add PAPER10B2 only if the paper keeps a multi-state quality-management contribution. Add PAPER10D only if selected FGO feedback needs a separate evidence-freeze appendix or secondary contribution.
+
+## PAPER10C Go2 High-Level Prior State
+
+PAPER10C is conditionally closed as `CONDITIONAL_PASS_GO2_BY2_CLOSED_BY3_PARTIAL`.
+
+Current Go2 status:
+
+- roll/pitch weak prior: code-proven and BY2 runtime-proven;
+- horizontal velocity weak prior: code-proven and BY2 runtime-proven;
+- readiness/contact/motion-state LSIM metadata: blocked because it is not first-class metadata in the current source-aware implementation;
+- BY2 Go2 ablation: 720 planned rows, 480 completed-evaluable and 240 readiness-blocked rows;
+- BY3 Go2 ablation: blocked because BY3 Go2 prior provider CSVs were not found in the current workspace;
+- Go2 role: bounded auxiliary weak-prior cue, not truth and not full contact-aided odometry.
+
+Next stage recommendation: run `PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` only if multi-state quality management remains a claimed contribution; otherwise proceed to `PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE`.

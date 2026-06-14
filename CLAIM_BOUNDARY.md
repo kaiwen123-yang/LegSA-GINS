@@ -2219,3 +2219,29 @@ Still forbidden after PAPER4G:
 - trace online use;
 - receiver IMU as Go2 body IMU;
 - full Galileo/GLONASS/SBAS provider closure.
+
+## PAPER10C Go2 High-Level Prior Boundary
+
+Allowed after PAPER10C:
+
+- Go2 roll/pitch weak prior code is implemented and can enter EKF update through source-aware `go2_attitude_roll_pitch` when enabled.
+- Go2 horizontal velocity weak prior code is implemented and can enter EKF update through source-aware `go2_horizontal_velocity` when controlled horizontal mode is enabled.
+- BY2 Go2 weak-prior ablation is closed for runnable modes G00/G01/G02/G04 under fixed `SA04_N6B_POLICY`.
+- Go2 can be described as a bounded auxiliary weak-prior cue for the legged platform, with BY2 evidence and explicit boundaries.
+
+Boundary after PAPER10C:
+
+- Go2 readiness/contact/motion-state metadata is diagnostic or future work until first-class LSIM metadata integration is implemented and validated.
+- BY3 Go2 weak-prior runtime is blocked by missing BY3 Go2 prior provider evidence in the current workspace; BY3 yaw remains diagnostic-only.
+- Performance effects are small and mixed; do not write universal metric improvement.
+
+Still forbidden after PAPER10C:
+
+- Go2 position or Go2 yaw as truth;
+- Go2 vertical velocity as a main constraint;
+- receiver `imu-data.csv` as Go2 body IMU;
+- Go2 weak prior as full contact-aided InEKF, full leg odometry, or support-foot FK;
+- BY3 ordinary yaw generalization;
+- universal superiority or comprehensive final_v23 outperformance;
+- trace online use, final_v23/LegSA output solver input, bad-epoch deletion, or per-case tuning;
+- complete nine-factor FGO or completed `LegSA_QA_Fallback_EKF` claims.

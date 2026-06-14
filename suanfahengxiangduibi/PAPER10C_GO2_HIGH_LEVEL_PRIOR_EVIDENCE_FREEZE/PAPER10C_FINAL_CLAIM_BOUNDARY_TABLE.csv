@@ -1,0 +1,6 @@
+claim,status,evidence
+Go2 roll/pitch weak prior enters EKF,allowed,"code chain + BY2 31,562 updates"
+Go2 horizontal velocity weak prior enters EKF,allowed,"code chain + BY2 31,562 updates"
+Go2 readiness metadata enters LSIM,boundary_blocked,current code lacks first-class metadata
+Go2 position/yaw truth,forbidden,schema flags false; not used
+BY3 Go2 generalization,blocked,BY3 provider not found; yaw diagnostic-only

@@ -1,0 +1,5 @@
+parameter,value,role
+roll_pitch_std,1.6 deg from N7C6 provider,conservative weak prior
+horizontal_velocity_std,"1.0 m/s N/E, vd std=999 disabled",conservative horizontal weak prior
+source_aware_policy,SA04_N6B_POLICY fixed,PAPER10B final policy
+readiness_metadata,not first-class LSIM metadata,blocked/boundary
