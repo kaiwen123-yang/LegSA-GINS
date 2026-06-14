@@ -164,3 +164,11 @@ PAPER10X may summarize completed evidence and recommend next stages, but it does
 Allowed wording: `LegSA_full_EKF` is the verified main algorithm; `final_v23_dual_antenna_EKF` is the strong external baseline; Raw Doppler and source-aware LSIM/OIM R scaling are accepted modules; BY2 source-aware 120 x 5 is closed; BY3 source-aware 120 x 5 is closed as poor-heading stress with yaw diagnostic-only; DA/LC comparisons are bounded rather than official-exact.
 
 Forbidden wording: universal superiority, comprehensive outperform-final_v23 conclusions, BY3 ordinary yaw generalization, complete nine-factor FGO, completed `LegSA_QA_Fallback_EKF`, full contact-aided InEKF, source-aware as complete multi-state quality management, trace online, receiver `imu-data.csv` as Go2 body IMU, and per-case tuning.
+
+## PAPER10C Go2 Claim Boundary
+
+PAPER10C may state that Go2 roll/pitch and Go2 horizontal velocity weak priors are implemented and can enter EKF update through source-aware Go2 measurement sources. It may state that BY2 120 Go2 weak-prior ablation closed for G00/G01/G02/G04 under fixed `SA04_N6B_POLICY`.
+
+PAPER10C must keep readiness/contact/motion-state metadata as blocked or diagnostic until first-class LSIM metadata integration is implemented and validated. It must keep BY3 Go2 runtime as blocked because BY3 Go2 prior provider evidence is missing in the current workspace. BY3 yaw remains diagnostic-only.
+
+PAPER10C forbids Go2 position/yaw truth claims, Go2 vertical velocity as a main constraint, receiver `imu-data.csv` as Go2 body IMU, full contact-aided InEKF, full leg odometry, support-foot FK, universal superiority, comprehensive final_v23 outperformance, BY3 ordinary yaw generalization, trace online use, final_v23/LegSA output solver input, and per-case tuning.

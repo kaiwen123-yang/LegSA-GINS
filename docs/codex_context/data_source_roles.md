@@ -215,3 +215,15 @@ Receiver `imu-data.csv` remains receiver diagnostic data and is not Go2 body IMU
 BY3 yaw remains diagnostic-only after the PAPER10B_R2B source-aware closure. BY3 may support position/up generalization and poor-heading stress wording, but not ordinary yaw generalization or yaw performance claims.
 
 XB1-XB4 remain severe poor-GNSS boundary and QA-motivation datasets. They may support fallback-behavior discussion, but not high-precision performance or broad poor-GNSS robustness claims.
+
+## PAPER10C Go2 Source Roles
+
+Go2 roll/pitch may be used only as a conservative weak prior.
+
+Go2 horizontal velocity may be used only as a conservative horizontal weak prior. Go2 vertical velocity remains disabled or diagnostic-only.
+
+Go2 contact/readiness/motion-state fields may be used as diagnostic metadata and future LSIM metadata candidates, but PAPER10C does not prove first-class LSIM metadata integration.
+
+Go2 position and Go2 yaw must not be used as truth, solver target, hidden reference, or replacement for dual-antenna GNSS yaw. Receiver `imu-data.csv` must not be used as Go2 body IMU.
+
+BY3 Go2 runtime must remain blocked until BY3 Go2 prior provider evidence is materialized and audited without trace tuning, final_v23/LegSA output input, or per-case parameter selection.

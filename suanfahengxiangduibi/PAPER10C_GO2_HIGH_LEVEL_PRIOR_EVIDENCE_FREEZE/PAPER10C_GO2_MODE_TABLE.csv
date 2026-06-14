@@ -1,0 +1,7 @@
+go2_mode,roll_pitch,horizontal_velocity,readiness_metadata,runtime_status,claim_role,source_aware_policy,config_hash
+G00_NO_GO2,False,False,False,COMPLETED_EVALUABLE,source-aware without Go2,SA04_N6B_POLICY,05b019eaf96caab3
+G01_GO2_RP_ONLY,True,False,False,COMPLETED_EVALUABLE,roll/pitch weak prior,SA04_N6B_POLICY,52d5b73b249790ca
+G02_GO2_HVEL_ONLY,False,True,False,COMPLETED_EVALUABLE,horizontal velocity weak prior,SA04_N6B_POLICY,48a41246a7aba6e0
+G03_GO2_READINESS_ONLY,False,False,True,BLOCKED_WITH_PROOF,readiness metadata blocked,SA04_N6B_POLICY,e853bf5b1290afe6
+G04_GO2_RP_HVEL,True,True,False,COMPLETED_EVALUABLE,current runnable Go2 auxiliary candidate,SA04_N6B_POLICY,d4a6ba6dd6e31cc2
+G05_GO2_FULL_AUX,True,True,True,BLOCKED_WITH_PROOF,full aux blocked by readiness metadata,SA04_N6B_POLICY,aa0805edc99f6820

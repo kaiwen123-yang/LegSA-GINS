@@ -1046,3 +1046,22 @@ PAPER4G hard prohibitions:
 - no receiver `imu-data.csv` as Go2 body IMU;
 - no raw/RINEX/UBX/RTCM/runtime payload or external-code staging;
 - no push.
+
+## 37. PAPER10C Go2 High-Level Prior Evidence Freeze
+
+`PAPER10C_GO2_HIGH_LEVEL_PRIOR_EVIDENCE_FREEZE` is closed as a conditional Go2 auxiliary-prior freeze. It imports the PAPER10X route decision, PAPER10A Go2/source-aware code evidence, PAPER10B_R1/BY2 source-aware policy, PAPER10B_R2B/BY3 source-aware closure, and N7C6 Go2 prior provider evidence.
+
+PAPER10C proven code/runtime facts:
+
+- Go2 roll/pitch weak prior is code-present and enters `EKFUpdate` through the source-aware `go2_attitude_roll_pitch` source when enabled.
+- Go2 horizontal velocity weak prior is code-present and enters `EKFUpdate` through the source-aware `go2_horizontal_velocity` source when controlled horizontal mode is enabled.
+- Go2 vertical velocity is disabled or diagnostic-only; Go2 position and Go2 yaw are not truth inputs.
+- BY2 Go2 ablation used fixed `SA04_N6B_POLICY` and completed 480 evaluable rows for G00/G01/G02/G04; G03/G05 readiness metadata rows are blocked with proof because readiness/motion-state is not first-class LSIM metadata.
+- BY3 Go2 ablation was not launched because the current workspace did not contain the required BY3 Go2 prior provider CSVs; BY3 yaw remains diagnostic-only.
+
+PAPER10C claim boundary:
+
+- Go2 can be described as a BY2-supported bounded auxiliary weak-prior module.
+- Do not write Go2 as full contact-aided InEKF, full leg odometry, support-foot FK, Go2-yaw truth, or Go2-position truth.
+- Do not write universal improvement, comprehensive final_v23 outperformance, BY3 ordinary yaw generalization, trace online use, final_v23/LegSA output solver input, or per-case tuning.
+- PAPER10B2 is required only if the paper keeps a multi-state quality-management claim; otherwise PAPER10E may use Go2 as a bounded auxiliary prior while leaving readiness metadata and BY3 Go2 provider generation as future work.

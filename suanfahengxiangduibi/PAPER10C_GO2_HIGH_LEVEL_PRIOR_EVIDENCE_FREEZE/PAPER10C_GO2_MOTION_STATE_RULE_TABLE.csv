@@ -1,0 +1,6 @@
+motion_state,rule,inputs,status
+STANCE_STABLE,speed_h < 0.03 m/s and support/contact label indicates support,Go2 horizontal velocity provider contact_label/confidence; no trace; no RMSE tuning,diagnostic_rule_not_first_class_LSIM
+IN_PLACE_TURN,requires Go2 yaw-rate/angular velocity with low speed; not available in current provider table,not available in N7C6 provider,UNKNOWN_WITH_PROOF
+IMPACT_OR_ROUGH,low support/contact label or confidence < 0.35,Go2 contact_label/confidence; no trace,diagnostic_rule_not_first_class_LSIM
+NORMAL_MOTION,otherwise valid active Go2 horizontal velocity provider row,Go2 horizontal velocity provider,diagnostic_rule_not_first_class_LSIM
+UNKNOWN,provider unavailable or unsupported fields,field audit,blocked_or_unknown
