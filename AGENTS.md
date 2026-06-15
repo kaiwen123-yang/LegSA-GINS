@@ -339,7 +339,8 @@ Current completed route:
 - Current poor-GNSS stage: `PG_QA0_QUALITY_AWARE_FALLBACK_DESIGN_AND_PAPER_MAINLINE_DECISION`; PG_MULTI_A0 remains the source/runnability evidence import, and QA0 is design-only. QA0 keeps `LegSA_full_EKF` as the frozen verified mainline for normal/moderate GNSS and defines `LegSA_QA_Fallback_EKF` as a separate future candidate for severe GNSS, unavailable A1 dual-yaw, degraded position quality, Raw Doppler availability, and short IMU+Go2 bridge intervals. No implementation, solver, evaluator, degraded-input generation, random arrays, retuning, quality-aware execution, or paper claim was performed.
 - Current paper-facing evidence stage: `PAPER0_MAINLINE_EVIDENCE_PACKAGE_AND_CLAIM_BOUNDARY_REVIEW`; it supports starting manuscript experiment-section drafting from existing BY2/BY3 evidence while keeping PG/QA as limitation/design extension and keeping `ready_for_paper_claims=false`.
 - Current Go2 recovery status: `PAPER10C_R1B_LOW_SPACE_BY3_MISSING_ONLY_RESUME` passed after missing-only BY3 resume. BY2 and BY3 Go2 120x6 are both closed at 720/720, BY3 providers are `by3.txt` derived, readiness/motion-state LSIM metadata is first-class for G03/G05 runtime evidence, and BY3 yaw remains diagnostic-only.
-- Current maintenance status: `PAPER10Y_POST_R1B_GIT_ARCHIVE_AND_WSL_SPACE_CLEANUP` archived verified completed WSL runtime/worktree material, deleted only verified WSL sources, generated a Windows compact script, and recommends `PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` if the paper keeps multi-state quality management as a contribution.
+- Current maintenance status: `PAPER10Y_POST_R1B_GIT_ARCHIVE_AND_WSL_SPACE_CLEANUP` archived verified completed WSL runtime/worktree material, deleted only verified WSL sources, generated a Windows compact script, and recommended PAPER10B2 if the paper kept multi-state quality management as a contribution.
+- Current QM status: `PAPER10B2_R1_MISSING_ONLY_RESUME_AND_FINAL_QM_CLOSURE` closed the remaining BY3 QM missing-only rows. BY2 remains 600/600, BY3 is now 600/600, 7 unindexed complete artifacts were harvested, 14 missing-only rows were executed with jobs=8 and E/WSL emergency stops of 2GB/20GB, and final status is `CONDITIONAL_PASS_QM_FULL_MATRIX_COMPLETED_PERFORMANCE_MIXED`.
 - Recommended BY3 next stage: human review of GEN1, then decide `BY3D_MIXED_POSITION_UP_PLANNING`, separate diagnostic-yaw planning, or another-dataset planning only if explicitly approved; GEN1 does not authorize paper claims, PR #52 merge/tag/closure, or additional yaw/mixed/module/full-matrix execution.
 - Recommended paper next stage: `PAPER1_MANUSCRIPT_EXPERIMENT_SECTION_DRAFT`. QA1 remains optional for a stronger secondary-contribution route and is not required before starting the near-term Option B manuscript. PAPER0 does not authorize frozen mainline execution on PG1-PG4, quality-aware implementation, solver/evaluator execution, artificial degradation, random arrays, retuning, final paper figures, paper claims, PR #52 merge/closure/tag, or poor-GNSS robustness claims.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
@@ -1154,7 +1155,7 @@ PAPER10C claim boundary:
 
 ## 41. PAPER10B2 Multi-State Quality Management Closure
 
-`PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` is closed as a conditional hard-stop stage, not a full PASS. It implemented the source-level multi-state QM mechanism and closed BY2, but BY3 stopped at the user-defined E drive hard-stop.
+`PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` first closed as a conditional hard-stop stage: it implemented the source-level multi-state QM mechanism and closed BY2, but BY3 stopped at the user-defined E drive hard-stop. `PAPER10B2_R1_MISSING_ONLY_RESUME_AND_FINAL_QM_CLOSURE` then resumed only the BY3 missing-only manifest and closed the full BY3 matrix.
 
 PAPER10B2 proven facts:
 
@@ -1164,18 +1165,18 @@ PAPER10B2 proven facts:
 - QM is default-off through `enable_multi_state_qm=false` / `QM00_OFF`, and `QM_STATE_ACTION_TRACE.csv` records source/action/recovery evidence when enabled.
 - Targeted unit/integration tests and `legsa_v23_port_core_demo` build passed.
 - BY2 QM matrix completed 600/600 rows with state/action trace evidence.
-- BY3 QM matrix completed 579/600 rows before `E_DRIVE_HARD_STOP`; the missing-only resume manifest has 21 rows: 16 mixed rows and 5 normal rows.
+- BY3 QM matrix completed 579/600 rows before `E_DRIVE_HARD_STOP`; R1 processed only the 21 missing-manifest rows, harvested 7 complete-but-unindexed artifacts, executed 14 missing-only rows, and closed BY3 at 600/600.
 - BY3 yaw remains diagnostic-only. Trace online, final_v23/LegSA output solver input, Go2 position/yaw truth, per-case tuning, and external DA/LC/GINav/MATLAB/RTKLIB/contact-aided/complete FGO remained false.
 
 PAPER10B2 decision:
 
-- Final status is `CONDITIONAL_PASS_QM_RUNTIME_STOPPED_BY_10GB_HARD_STOP`.
-- Current QM evidence enum is `QM_MECHANISM_READY_PERFORMANCE_MIXED`.
-- QM is not yet main-innovation-ready for final paper claims because BY3 did not reach 600/600 and BY2 vertical performance is mixed.
-- The next safe action is to restore E drive space and run only the BY3 missing-only resume manifest, or have the human explicitly accept the hard-stop boundary before PAPER10E.
+- R1 final status is `CONDITIONAL_PASS_QM_FULL_MATRIX_COMPLETED_PERFORMANCE_MIXED`.
+- Current QM evidence enum is `QM_MAIN_MECHANISM_READY_AS_BOUNDED_METHOD_NOT_UNIVERSAL_PERFORMANCE_CLAIM`.
+- QM may be treated as a bounded deterministic mechanism contribution after human wording review, but not as universal superiority or final_v23 outperformance.
+- The next safe action is human review of the mixed-performance boundary before PAPER10E.
 
 PAPER10B2 boundaries:
 
-- Do not claim BY3 full QM matrix completion until the 21 missing rows are resumed.
+- BY3 full QM matrix completion may now be claimed only as 600/600 runtime closure, not as yaw generalization or universal performance improvement.
 - Do not write universal superiority, final_v23 outperformance, BY3 ordinary yaw generalization, trace online use, final_v23/LegSA output solver input, Go2 pose/yaw truth, output substitution, per-case tuning, complete nine-factor FGO, or full contact-aided InEKF.
 - Do not treat fallback as output substitution or source-aware LSIM/OIM alone as the complete multi-state QM mechanism.

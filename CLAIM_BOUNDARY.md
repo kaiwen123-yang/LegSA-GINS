@@ -2340,12 +2340,15 @@ Allowed after PAPER10B2:
 - PAPER10B2 may state that targeted unit/integration tests and `legsa_v23_port_core_demo` build passed.
 - PAPER10B2 may state that BY2 QM matrix completed 600/600 rows.
 - PAPER10B2 may state that BY3 completed 579/600 rows before the user-defined `E_DRIVE_HARD_STOP=10GB` stopped the runner, with 21 missing-only resume rows preserved.
+- PAPER10B2_R1 may state that the 10GB hard-stop was cancelled by human instruction, emergency stops were set to E=2GB and WSL root=20GB, and only the prior BY3 missing-only manifest was processed.
+- PAPER10B2_R1 may state that 7 complete-but-unindexed BY3 artifacts were harvested, 14 missing-only rows were executed with jobs=8, BY3 closed at 600/600, and BY2 remained 600/600 without rerun.
+- PAPER10B2_R1 may state that the final status is `CONDITIONAL_PASS_QM_FULL_MATRIX_COMPLETED_PERFORMANCE_MIXED`.
 
 Boundary after PAPER10B2:
 
-- Final status is `CONDITIONAL_PASS_QM_RUNTIME_STOPPED_BY_10GB_HARD_STOP`.
-- Current QM evidence enum is `QM_MECHANISM_READY_PERFORMANCE_MIXED`, not `QM_MAIN_INNOVATION_READY`.
-- BY3 full-matrix closure and final positive paper claims require the 21 missing-only BY3 rows to be resumed or an explicit human decision to accept the hard-stop boundary.
+- The old `CONDITIONAL_PASS_QM_RUNTIME_STOPPED_BY_10GB_HARD_STOP` status is superseded by R1 for matrix completion, but remains historical evidence of why R1 was needed.
+- Current QM evidence enum is `QM_MAIN_MECHANISM_READY_AS_BOUNDED_METHOD_NOT_UNIVERSAL_PERFORMANCE_CLAIM`.
+- BY3 full-matrix closure may be claimed as 600/600 runtime completion only; final positive paper wording still requires human review because performance remains mixed.
 - BY3 yaw remains diagnostic-only and cannot be written as ordinary yaw generalization.
 - Performance wording must be bounded by dataset and family; BY2 horizontal behavior and vertical behavior are mixed.
 - Fallback means conservative partial-source fusion, not output substitution.
@@ -2354,7 +2357,7 @@ Boundary after PAPER10B2:
 Still forbidden after PAPER10B2:
 
 - claiming universal superiority or final_v23 outperformance;
-- claiming `QM_MAIN_INNOVATION_READY` before BY3 missing-only resume/review;
+- claiming universal `QM_MAIN_INNOVATION_READY` or all-family performance superiority from R1;
 - claiming BY3 ordinary yaw generalization;
 - claiming trace online use, final_v23/LegSA output as solver input, output substitution, bad-epoch deletion, or per-case tuning;
 - claiming Go2 position or Go2 yaw as truth;
