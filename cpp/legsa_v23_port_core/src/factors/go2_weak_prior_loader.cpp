@@ -278,4 +278,77 @@ Go2VelocityDiagnosticPriorLoadResult Go2WeakPriorLoader::loadVelocityDiagnosticC
   return result;
 }
 
+Go2ReadinessLsimMetadataLoadResult Go2WeakPriorLoader::loadReadinessLsimMetadataCsv(
+    const std::string& path,
+    const Go2ReadinessLsimMetadataConfig& config) {
+  Go2ReadinessLsimMetadataLoadResult result;
+  result.status.code_present = true;
+  result.status.solver_enabled = false;
+  result.status.source_id = "go2_readiness_motion_state";
+  result.status.readiness_metadata_first_class_lsim = false;
+  result.status.trace_solver_input = false;
+  result.status.final_v23_output_solver_input = false;
+  result.status.go2_position_truth_claim = false;
+  result.status.go2_yaw_truth_claim = false;
+  if (!config.enable_go2_readiness_lsim_metadata) {
+    result.status.provider_status = "disabled_by_config";
+    return result;
+  }
+  if (path.empty()) {
+    result.status.provider_status = "metadata_path_missing";
+    return result;
+  }
+  std::ifstream input(path);
+  if (!input) {
+    result.status.provider_status = "metadata_file_missing";
+    return result;
+  }
+  std::string line;
+  if (!std::getline(input, line)) {
+    result.status.provider_status = "metadata_file_empty";
+    return result;
+  }
+  const std::vector<std::string> header = splitCsvLine(line);
+  while (std::getline(input, line)) {
+    if (line.empty()) {
+      continue;
+    }
+    const std::vector<std::string> cells = splitCsvLine(line);
+    std::unordered_map<std::string, std::string> row;
+    for (std::size_t i = 0; i < header.size() && i < cells.size(); ++i) {
+      row[header[i]] = cells[i];
+    }
+    Go2ReadinessLsimMetadataMeasurement measurement;
+    measurement.time = scalar(row, "time", 0.0);
+    measurement.source_status = stringValue(row, "source_status", "inactive");
+    measurement.motion_state = stringValue(row, "motion_state", "UNKNOWN");
+    measurement.contact_label = stringValue(row, "contact_label", "");
+    measurement.quality_flag = stringValue(row, "quality_flag", "nominal");
+    measurement.readiness_score = scalar(row, "readiness_score", 1.0);
+    measurement.readiness_flag = boolValue(row, "readiness_flag", true);
+    measurement.stance_stable = boolValue(row, "stance_stable", false);
+    measurement.in_place_turn = boolValue(row, "in_place_turn", false);
+    measurement.impact_or_rough = boolValue(row, "impact_or_rough", false);
+    measurement.readiness_low = boolValue(row, "readiness_low", false);
+    measurement.source_valid = boolValue(row, "source_valid", measurement.source_status == "active");
+    if (measurement.source_status == "active" && measurement.source_valid) {
+      ++result.status.valid_metadata_count;
+    }
+    result.measurements.push_back(measurement);
+  }
+  result.status.metadata_count = result.measurements.size();
+  if (result.measurements.empty()) {
+    result.status.provider_status = "metadata_file_no_rows";
+    return result;
+  }
+  if (result.status.valid_metadata_count == 0) {
+    result.status.provider_status = "no_active_metadata_rows";
+    return result;
+  }
+  result.status.provider_status = "available";
+  result.status.solver_enabled = true;
+  result.status.readiness_metadata_first_class_lsim = true;
+  return result;
+}
+
 }  // namespace legsa_v23_port_core

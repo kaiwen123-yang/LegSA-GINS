@@ -76,6 +76,7 @@ The supervisor must prevent phase confusion:
 - PG_MULTI_A0_POOR_GNSS_REPEATED_DATASET_SOURCE_REVIEW_AND_RUNNABILITY_CLASSIFICATION_WITH_LOCKED_XB2_XB3_XB4_BODY_PATHS: current poor-GNSS multi-repeat source review; PG1/XB1 was imported from XB1A2, PG2/PG3/PG4 receiver roots and user-locked body/high-level paths were registered, GNSS quality profiles/body feasibility/provider feasibility were audited, and the BY2-compatible status relpos-difference A1 path was audited for all repeats. PG2/PG3/PG4 all have nonphysical relpos-diff A1 baselines, so PG1-PG4 are classified as `quality_aware_branch_candidate` with position-only fallback as diagnostic only. No solvers, evaluators, degraded inputs, random arrays, retuning, quality-aware branch implementation, or paper claims were performed.
 - PG_QA0_QUALITY_AWARE_FALLBACK_DESIGN_AND_PAPER_MAINLINE_DECISION: current poor-GNSS design-only follow-on after PG_MULTI_A0 and XB1A2; it organizes BY2, BY3, and PG1-PG4 evidence, defines the separate future candidate `LegSA_QA_Fallback_EKF`, designs quality-state, measurement, R-scale, Raw Doppler, Go2 bridge, logging, validation, and paper-positioning policies, and recommends Option B for the near-term paper with Option C only after human-reviewed QA1/QA2/QA3 work. No implementation, solver, evaluator, degraded input, random array, retuning, quality-aware execution, or paper claim was performed.
 - PAPER0_MAINLINE_EVIDENCE_PACKAGE_AND_CLAIM_BOUNDARY_REVIEW: current paper-facing evidence package after PG_QA0; it organizes BY2 as the full-metric main dataset, BY3 as independent position/up generalization with diagnostic-only yaw, PG1-PG4 as severe-GNSS boundary/QA motivation, and PG_QA0 as design extension. It generated paper table drafts, figure recommendations, narrative outline, journal-positioning notes, missing-work decision, export-clean material, and claim-boundary matrices from existing evidence only. No solver, evaluator, degraded input, random array, QA1 implementation, retuning, metric alteration, final figure, or final paper claim was performed.
+- PAPER10C_R1A_RESUME_INTERRUPTED_GO2_BY3_MATRIX_AND_COMPLETE_STAGE: current interrupted-stage recovery for PAPER10C_R1. It recovered BY3 Go2 provider evidence and a resume manifest, preserved completed rows, found BY2 720/720 closed and BY3 543/720 completed-evaluable, identified 169 missing and 8 partial/corrupted BY3 rows, created a missing-only wrapper, but did not execute it because Windows E free space failed the runner gate. No completed output was overwritten, no trace-online/per-case tuning/DA/LC/GINav/MATLAB/RTKLIB/contact-aided/complete FGO was run, and BY3 yaw remains diagnostic-only.
 
 ### 1.2 Planner
 
@@ -164,6 +165,11 @@ Tracked docs must use aliases only:
 - `<PG_QA0_STAGE_ROOT>`
 - `<PAPER_EVIDENCE_REVIEW_ROOT>`
 - `<PAPER0_STAGE_ROOT>`
+- `<PAPER10C_R1_STAGE_ROOT>`
+- `<PAPER10C_R1A_STAGE_ROOT>`
+- `<PAPER10C_R1A_C_EXPORT_ROOT>`
+- `<PAPER10C_R1A_OBSIDIAN_SYNC_ROOT>`
+- `<PAPER10B_R2_STAGE_ROOT>`
 - `<PG2_XB2_RECEIVER_ROOT>`
 - `<PG2_XB2_BODY_SOURCE>`
 - `<PG3_XB3_RECEIVER_ROOT>`
@@ -201,6 +207,9 @@ The XB1A1 blocker-triage and normal-gate repair stage is represented in tracked 
 The XB1A2 rel_pos-difference A1 re-audit stage is represented in tracked docs only by `<XB1A2_STAGE_ROOT>`, with its relpos-diff repair runtime material under `<XB1A2_RELPOS_DIFF_REPAIR_ROOT>`.
 The PG multi-repeat poor-GNSS review root is represented in tracked docs only by `<PG_MULTI_REVIEW_ROOT>`, with the PG_MULTI_A0 runtime reports under `<PG_MULTI_A0_STAGE_ROOT>` and the PG_QA0 design package under `<PG_QA0_STAGE_ROOT>`. PG2/PG3/PG4 receiver and body/high-level sources are represented only by `<PG2_XB2_RECEIVER_ROOT>`, `<PG2_XB2_BODY_SOURCE>`, `<PG3_XB3_RECEIVER_ROOT>`, `<PG3_XB3_BODY_SOURCE>`, `<PG4_XB4_RECEIVER_ROOT>`, and `<PG4_XB4_BODY_SOURCE>`.
 The paper-facing evidence review root is represented in tracked docs only by `<PAPER_EVIDENCE_REVIEW_ROOT>`, with PAPER0 runtime material under `<PAPER0_STAGE_ROOT>`.
+The PAPER10C_R1 interrupted Go2/LSIM recovery source is represented in tracked docs only by `<PAPER10C_R1_STAGE_ROOT>`.
+The PAPER10C_R1A resume stage is represented in tracked docs only by `<PAPER10C_R1A_STAGE_ROOT>`, with export-clean material under `<PAPER10C_R1A_C_EXPORT_ROOT>` and vault notes under `<PAPER10C_R1A_OBSIDIAN_SYNC_ROOT>`.
+Prior BY3 source-aware source material imported by PAPER10C_R1 is represented only by `<PAPER10B_R2_STAGE_ROOT>`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
 The BY3 Go2 body/high-level source is represented in tracked docs only by `<BY3_GO2_BODY_SOURCE>`.
@@ -320,6 +329,7 @@ Current completed route:
 - Current BY3/reporting stage: `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`; GEN1 built BY2/BY3 metric inventories, canonical family mapping, three-scheme cross-dataset summaries, existing-metric cross-dataset figures, a BY3 figure inventory, and a copy-only BY3 figure organization without solver/evaluator/degradation/random execution.
 - Current poor-GNSS stage: `PG_QA0_QUALITY_AWARE_FALLBACK_DESIGN_AND_PAPER_MAINLINE_DECISION`; PG_MULTI_A0 remains the source/runnability evidence import, and QA0 is design-only. QA0 keeps `LegSA_full_EKF` as the frozen verified mainline for normal/moderate GNSS and defines `LegSA_QA_Fallback_EKF` as a separate future candidate for severe GNSS, unavailable A1 dual-yaw, degraded position quality, Raw Doppler availability, and short IMU+Go2 bridge intervals. No implementation, solver, evaluator, degraded-input generation, random arrays, retuning, quality-aware execution, or paper claim was performed.
 - Current paper-facing evidence stage: `PAPER0_MAINLINE_EVIDENCE_PACKAGE_AND_CLAIM_BOUNDARY_REVIEW`; it supports starting manuscript experiment-section drafting from existing BY2/BY3 evidence while keeping PG/QA as limitation/design extension and keeping `ready_for_paper_claims=false`.
+- Current Go2 recovery stage: `PAPER10C_R1A_RESUME_INTERRUPTED_GO2_BY3_MATRIX_AND_COMPLETE_STAGE`; BY3 `by3.txt` provider generation/readiness metadata evidence was recovered, BY2 Go2 120x6 is closed, and BY3 Go2 full matrix is not closed because the missing-only runner was blocked by the Windows E space gate.
 - Recommended BY3 next stage: human review of GEN1, then decide `BY3D_MIXED_POSITION_UP_PLANNING`, separate diagnostic-yaw planning, or another-dataset planning only if explicitly approved; GEN1 does not authorize paper claims, PR #52 merge/tag/closure, or additional yaw/mixed/module/full-matrix execution.
 - Recommended paper next stage: `PAPER1_MANUSCRIPT_EXPERIMENT_SECTION_DRAFT`. QA1 remains optional for a stronger secondary-contribution route and is not required before starting the near-term Option B manuscript. PAPER0 does not authorize frozen mainline execution on PG1-PG4, quality-aware implementation, solver/evaluator execution, artificial degradation, random arrays, retuning, final paper figures, paper claims, PR #52 merge/closure/tag, or poor-GNSS robustness claims.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
@@ -336,6 +346,7 @@ Allowed now:
 - Raw Doppler EKF is active.
 - Raw Doppler FGO is active but low marginal value in clean BY2.
 - Go2 proprioceptive joint factor is active.
+- Go2 high-level roll/pitch and horizontal-velocity weak-prior evidence is bounded; PAPER10C_R1A recovered BY3 Go2 providers and partial readiness-LSIM runtime evidence, but Go2 is not a closed main innovation.
 - Legged candidate factors are activated in no-feedback FGO.
 - N9B pilot/preparation evidence exists through N9B2B, with cautions recorded above.
 - N9B staged execution is complete through N9C0 global consolidated precheck.
@@ -1014,6 +1025,27 @@ PAPER4B_R2 hard prohibitions:
 - no final_v23, LegSA_QA, LegSA_full, or universal superiority claim;
 - no raw/RINEX/UBX/RTCM/runtime payload or external-code staging;
 - no push.
+
+## 38. PAPER10C_R1A Interrupted Go2 BY3 Matrix Resume
+
+`PAPER10C_R1A_RESUME_INTERRUPTED_GO2_BY3_MATRIX_AND_COMPLETE_STAGE` is closed as a conditional resume-manifest package, not a completed matrix package.
+
+PAPER10C_R1A recovered facts:
+
+- BY3 Go2 source `by3.txt` exists and matches the R1 provider QA hash.
+- BY3 roll/pitch, horizontal velocity, and readiness/motion-state providers exist and are generated from BY3, not BY2.
+- BY2 Go2 120x6 is closed at 720/720 completed-evaluable rows.
+- BY3 Go2 120x6 is partial: 543/720 completed-evaluable rows, 169 missing rows, and 8 partial/corrupted rows.
+- A resume manifest and missing-only wrapper exist; the wrapper must not run `SKIP_ALREADY_COMPLETED` rows.
+- Runner execution was not performed in R1A because the Windows E free-space gate failed.
+
+PAPER10C_R1A claim boundary:
+
+- Go2 high-level motion-state data may be described only as bounded weak-prior and LSIM metadata support under verified source roles.
+- Readiness/motion-state is first-class LSIM metadata in completed G03/G05 runtime rows, but BY3 readiness modes are not globally closed until the missing/partial BY3 rows are resumed and validated.
+- BY3 yaw remains diagnostic-only.
+- Do not claim full BY2/BY3 Go2 matrix closure, full contact-aided InEKF, full leg odometry, Go2 position/yaw truth, universal superiority, complete nine-factor FGO, or completed PAPER10B2 multi-state quality management from R1A.
+- Next safe route is either a space-gated `PAPER10C_R1B` missing-only resume, or a human-approved PAPER10B2 design/validation stage if the paper keeps multi-state quality management as a contribution.
 
 ## 36. PAPER4G Yaw Boundary Freeze And Native Metrics Route
 

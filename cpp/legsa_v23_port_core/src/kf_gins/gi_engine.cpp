@@ -193,6 +193,27 @@ void GIEngine::setGo2VelocityDiagnosticPriors(
       options_.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior;
 }
 
+void GIEngine::setGo2ReadinessLsimMetadata(
+    const std::vector<Go2ReadinessLsimMetadataMeasurement>& measurements,
+    const Go2ReadinessLsimMetadataStatus& status) {
+  go2_readiness_lsim_metadata_ = measurements;
+  go2_readiness_lsim_metadata_status_ = status;
+  go2_readiness_lsim_metadata_status_.code_present = true;
+  go2_readiness_lsim_metadata_status_.metadata_count = measurements.size();
+  if (go2_readiness_lsim_metadata_status_.valid_metadata_count == 0) {
+    go2_readiness_lsim_metadata_status_.valid_metadata_count = static_cast<std::size_t>(std::count_if(
+        measurements.begin(), measurements.end(), [](const Go2ReadinessLsimMetadataMeasurement& measurement) {
+          return measurement.source_status == "active" && measurement.source_valid;
+        }));
+  }
+  go2_readiness_lsim_metadata_status_.solver_enabled =
+      options_.go2_readiness_lsim_metadata_config.enable_go2_readiness_lsim_metadata &&
+      status.solver_enabled && status.provider_status == "available";
+  go2_readiness_lsim_metadata_status_.readiness_metadata_first_class_lsim =
+      go2_readiness_lsim_metadata_status_.solver_enabled &&
+      options_.source_aware_policy_config.source_aware_go2_readiness_lsim_enabled;
+}
+
 // 中文说明：N8G FGO feedback observations 只允许作为 EKF pseudo-measurement，不允许直接覆盖 NAV。
 void GIEngine::setFgoFeedbackObservations(
     const std::vector<fgo_feedback::FgoFeedbackObservation>& observations,
@@ -573,6 +594,10 @@ std::size_t GIEngine::go2VelocityDiagnosticPriorRejectCount() const {
 
 Go2VelocityDiagnosticPriorStatus GIEngine::go2VelocityDiagnosticPriorStatus() const {
   return go2_velocity_diagnostic_prior_status_;
+}
+
+Go2ReadinessLsimMetadataStatus GIEngine::go2ReadinessLsimMetadataStatus() const {
+  return go2_readiness_lsim_metadata_status_;
 }
 
 fgo_feedback::FgoFeedbackStatus GIEngine::fgoFeedbackStatus() const {
@@ -1293,6 +1318,39 @@ quality_aware::QAObservation GIEngine::buildQAObservation(const GnssData& gnss) 
   return observation;
 }
 
+void GIEngine::enrichGo2ReadinessMetadata(source_aware::SourceMetadata& metadata, double update_time) {
+  if (!options_.go2_readiness_lsim_metadata_config.enable_go2_readiness_lsim_metadata ||
+      !go2_readiness_lsim_metadata_status_.solver_enabled ||
+      !options_.source_aware_policy_config.source_aware_go2_readiness_lsim_enabled) {
+    return;
+  }
+  const Go2ReadinessLsimMetadataMeasurement* best = nullptr;
+  double best_dt = options_.go2_readiness_lsim_metadata_config.go2_readiness_lsim_time_tolerance_sec;
+  for (const auto& measurement : go2_readiness_lsim_metadata_) {
+    if (measurement.source_status != "active" || !measurement.source_valid) {
+      continue;
+    }
+    const double dt = std::fabs(measurement.time - update_time);
+    if (dt <= best_dt) {
+      best = &measurement;
+      best_dt = dt;
+    }
+  }
+  if (!best) {
+    return;
+  }
+  metadata.go2_readiness_metadata_available = true;
+  metadata.go2_motion_state = best->motion_state.empty() ? "UNKNOWN" : best->motion_state;
+  metadata.go2_contact_label = best->contact_label;
+  metadata.go2_readiness_score = best->readiness_score;
+  metadata.go2_readiness_flag = best->readiness_flag;
+  metadata.go2_stance_stable = best->stance_stable;
+  metadata.go2_in_place_turn = best->in_place_turn;
+  metadata.go2_impact_or_rough = best->impact_or_rough;
+  metadata.go2_readiness_low = best->readiness_low;
+  ++go2_readiness_lsim_metadata_status_.matched_metadata_count;
+}
+
 source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(
     source_aware::MeasurementSource source,
     const source_aware::SourceMetadata& metadata,
@@ -1330,6 +1388,7 @@ source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(
   source_aware::SourceMetadata metadata_copy = metadata;
   metadata_copy.source = source;
   metadata_copy.residual_norm = innovation.residual_norm;
+  enrichGo2ReadinessMetadata(metadata_copy, metadata_copy.time);
   source_aware::SourceWeightResult result = source_aware_policy_.evaluate(metadata_copy, innovation);
   if (source_aware_policy_.enabledFor(source)) {
     scaled_R = scale(R, result.combined_R_scale);

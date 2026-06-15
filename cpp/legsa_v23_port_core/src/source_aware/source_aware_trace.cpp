@@ -99,7 +99,9 @@ void SourceAwareTrace::writeCsv(const std::string& output_dir) const {
   out << "time,update_index,source_id,policy_version,mode,lsim_score,oim_score,lsim_R_scale,oim_R_scale,"
       << "combined_R_scale,residual_norm,normalized_innovation,nis,dof,innovation_cov_trace,"
       << "used_innovation_covariance,source_cap,rolling_normalized_median,rolling_normalized_mad,"
-      << "relative_anomaly_score,base_R_trace,scaled_R_trace,accepted,rejected,reason_codes,metadata_summary\n";
+      << "relative_anomaly_score,base_R_trace,scaled_R_trace,accepted,rejected,"
+      << "go2_readiness_metadata_available,go2_motion_state,go2_contact_label,"
+      << "go2_readiness_score,go2_readiness_flag,reason_codes,metadata_summary\n";
   out << std::fixed << std::setprecision(10);
   for (const auto& row : rows_) {
     const auto& result = row.result;
@@ -113,6 +115,11 @@ void SourceAwareTrace::writeCsv(const std::string& output_dir) const {
         << result.relative_anomaly_score << ","
         << result.base_R_trace << "," << result.scaled_R_trace << ","
         << (result.accepted ? 1 : 0) << "," << (result.rejected ? 1 : 0) << ","
+        << (result.go2_readiness_metadata_available ? 1 : 0) << ","
+        << escapeCsv(result.go2_motion_state) << ","
+        << escapeCsv(result.go2_contact_label) << ","
+        << result.go2_readiness_score << ","
+        << (result.go2_readiness_flag ? 1 : 0) << ","
         << escapeCsv(joinReasons(result.reason_codes)) << ","
         << escapeCsv(result.metadata_summary) << "\n";
   }

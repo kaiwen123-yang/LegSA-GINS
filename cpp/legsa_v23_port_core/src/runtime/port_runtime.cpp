@@ -96,6 +96,11 @@ void copyGo2DiagnosticPriorStatus(const GIEngine& engine, PortOptions& options) 
   }
 }
 
+void copyGo2ReadinessLsimStatus(const GIEngine& engine, PortOptions& options) {
+  // 中文说明：Go2 readiness/motion-state 只作为 source-aware LSIM metadata，不是 Go2 truth。
+  options.go2_readiness_lsim_metadata_status = engine.go2ReadinessLsimMetadataStatus();
+}
+
 void copyFgoFeedbackStatus(const GIEngine& engine, PortOptions& options) {
   // 中文说明：N8G feedback status 只来自 EKF update interface，不来自输出后处理。
   options.fgo_feedback_status = engine.fgoFeedbackStatus();
@@ -936,6 +941,13 @@ void PortRuntime::runFromConfig(const std::string& config_path,
                                                            : options.ablation_variant;
     }
   }
+  Go2ReadinessLsimMetadataLoadResult go2_readiness_metadata_load;
+  if (options.go2_readiness_lsim_metadata_config.enable_go2_readiness_lsim_metadata) {
+    go2_readiness_metadata_load = Go2WeakPriorLoader::loadReadinessLsimMetadataCsv(
+        options.go2_readiness_lsim_metadata_config.go2_readiness_lsim_metadata_path,
+        options.go2_readiness_lsim_metadata_config);
+    options.go2_readiness_lsim_metadata_status = go2_readiness_metadata_load.status;
+  }
   if (options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic) {
     options.go2_yaw_rate_prior_diagnostic_status.code_present = true;
     options.go2_yaw_rate_prior_diagnostic_status.solver_enabled = false;
@@ -995,6 +1007,10 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   }
   if (options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic) {
     engine.setGo2VelocityDiagnosticPriors(go2_velocity_prior_load.measurements, go2_velocity_prior_load.status);
+  }
+  if (options.go2_readiness_lsim_metadata_config.enable_go2_readiness_lsim_metadata) {
+    engine.setGo2ReadinessLsimMetadata(go2_readiness_metadata_load.measurements,
+                                       go2_readiness_metadata_load.status);
   }
   if (options.fgo_feedback_config.enable_fgo_feedback) {
     engine.setFgoFeedbackObservations(fgo_feedback_load.observations, fgo_feedback_load.status);
@@ -1124,6 +1140,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   copySourceAwareStatus(engine, options);
   copyGo2AttitudePriorStatus(engine, options);
   copyGo2DiagnosticPriorStatus(engine, options);
+  copyGo2ReadinessLsimStatus(engine, options);
   copyFgoFeedbackStatus(engine, options);
   options.qa_log_row_count = engine.qaFallbackTraceRowCount();
   options.qa_fallback_active =

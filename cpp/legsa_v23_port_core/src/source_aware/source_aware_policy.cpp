@@ -67,8 +67,45 @@ std::string metadataSummary(const SourceMetadata& metadata) {
          << ";provider_status=" << metadata.provider_status
          << ";quality_flag=" << metadata.quality_flag
          << ";time_diff_sec=" << metadata.time_diff_sec
-         << ";covariance_available=" << (metadata.covariance_available ? "true" : "false");
+         << ";covariance_available=" << (metadata.covariance_available ? "true" : "false")
+         << ";go2_readiness_metadata_available="
+         << (metadata.go2_readiness_metadata_available ? "true" : "false")
+         << ";go2_motion_state=" << metadata.go2_motion_state
+         << ";go2_contact_label=" << metadata.go2_contact_label
+         << ";go2_readiness_score=" << metadata.go2_readiness_score
+         << ";go2_readiness_flag=" << (metadata.go2_readiness_flag ? "true" : "false");
   return stream.str();
+}
+
+void applyGo2ReadinessLsimMetadata(const SourceAwarePolicyConfig& config,
+                                   const SourceMetadata& metadata,
+                                   SourceWeightResult& result,
+                                   double& scale_value) {
+  if (!config.source_aware_go2_readiness_lsim_enabled ||
+      !metadata.go2_readiness_metadata_available) {
+    return;
+  }
+  const std::string state = metadata.go2_motion_state;
+  if (metadata.go2_stance_stable || state == "STANCE_STABLE") {
+    addReason(result, "GO2_STANCE_STABLE");
+  }
+  if (metadata.go2_in_place_turn || state == "IN_PLACE_TURN") {
+    scale_value = std::max(scale_value, config.source_aware_go2_in_place_turn_scale);
+    addReason(result, "GO2_IN_PLACE_TURN");
+  }
+  if (metadata.go2_impact_or_rough || state == "IMPACT_OR_ROUGH") {
+    scale_value = std::max(scale_value, config.source_aware_go2_impact_or_rough_scale);
+    addReason(result, "GO2_IMPACT_OR_ROUGH");
+  }
+  if (metadata.go2_readiness_low || !metadata.go2_readiness_flag ||
+      (std::isfinite(metadata.go2_readiness_score) && metadata.go2_readiness_score < 0.5)) {
+    scale_value = std::max(scale_value, config.source_aware_go2_readiness_low_scale);
+    addReason(result, "GO2_READINESS_LOW");
+  }
+  if (state.empty() || state == "UNKNOWN") {
+    scale_value = std::max(scale_value, config.source_aware_go2_motion_unknown_scale);
+    addReason(result, "GO2_MOTION_UNKNOWN");
+  }
 }
 
 }  // namespace
@@ -209,6 +246,7 @@ double SourceAwarePolicy::lsimScale(const SourceMetadata& metadata, SourceWeight
       scale_value = std::max(scale_value, 2.0);
       addReason(result, "lsim_quality_flag_suspicious");
     }
+    applyGo2ReadinessLsimMetadata(config_, metadata, result, scale_value);
     if (metadata.source == MeasurementSource::kReceiverPosition && std_max > 5.0) {
       scale_value = std::max(scale_value, std::min(10.0, std_max / 0.5));
       addReason(result, "lsim_receiver_position_std_high");
@@ -294,6 +332,7 @@ double SourceAwarePolicy::lsimScale(const SourceMetadata& metadata, SourceWeight
     scale_value = std::max(scale_value, 1.5);
     addReason(result, "lsim_quality_flag_suspicious");
   }
+  applyGo2ReadinessLsimMetadata(config_, metadata, result, scale_value);
 
   switch (metadata.source) {
     case MeasurementSource::kReceiverPosition:
@@ -608,6 +647,11 @@ SourceWeightResult SourceAwarePolicy::evaluate(const SourceMetadata& metadata,
   result.used_innovation_covariance = innovation.used_innovation_covariance;
   result.source_cap = sourceCap(metadata.source);
   result.base_R_trace = innovation.base_R_trace;
+  result.go2_readiness_metadata_available = metadata.go2_readiness_metadata_available;
+  result.go2_motion_state = metadata.go2_motion_state;
+  result.go2_contact_label = metadata.go2_contact_label;
+  result.go2_readiness_score = metadata.go2_readiness_score;
+  result.go2_readiness_flag = metadata.go2_readiness_flag;
   result.metadata_summary = metadataSummary(metadata);
   const auto& source_config = config_.sources[sourceIndex(metadata.source)];
   if (!enabledFor(metadata.source)) {
