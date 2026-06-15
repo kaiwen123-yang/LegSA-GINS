@@ -326,4 +326,22 @@ Current Go2 status:
 - BY3 Go2 ablation: blocked because BY3 Go2 prior provider CSVs were not found in the current workspace;
 - Go2 role: bounded auxiliary weak-prior cue, not truth and not full contact-aided odometry.
 
-Next stage recommendation: run `PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` only if multi-state quality management remains a claimed contribution; otherwise proceed to `PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE`.
+Next stage recommendation superseded by PAPER10C_R1B, PAPER10Y, and PAPER10B2. PAPER10B2 has now executed as a conditional hard-stop stage: source-level multi-state QM is implemented, BY2 QM matrix is 600/600 complete, BY3 QM matrix stopped at 579/600 due to `E_DRIVE_HARD_STOP=10GB`, and 21 BY3 missing-only rows remain before final main-innovation-ready claims.
+
+## PAPER10B2 Multi-State Quality Management State
+
+PAPER10B2 is conditionally closed as `CONDITIONAL_PASS_QM_RUNTIME_STOPPED_BY_10GB_HARD_STOP`.
+
+Current QM status:
+
+- source-level multi-state QM implemented above source-aware `SA04_N6B` LSIM/OIM and Go2 `G05_FULL_AUX` readiness/motion-state metadata;
+- fixed states: `NORMAL`, `DOWNWEIGHT`, `REJECT`, `HOLD`, `RECOVERY`, `FALLBACK`;
+- QM default-off under `QM00_OFF`;
+- targeted tests and `legsa_v23_port_core_demo` build passed;
+- BY2 QM matrix: 600/600 completed;
+- BY3 QM matrix: 579/600 completed, stopped by the user-defined 10GB E drive hard-stop;
+- missing-only BY3 resume manifest: 21 rows;
+- BY3 yaw remains diagnostic-only;
+- no external DA/LC/GINav/MATLAB/RTKLIB/contact-aided/complete FGO, trace online, final_v23/LegSA solver input, per-case tuning, output substitution, or Go2 position/yaw truth.
+
+Next stage recommendation: restore E drive space and run only the BY3 missing-only resume manifest, or have the human explicitly accept the hard-stop boundary before entering `PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE`.

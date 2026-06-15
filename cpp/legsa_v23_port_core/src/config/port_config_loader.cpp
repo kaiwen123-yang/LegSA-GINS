@@ -644,6 +644,53 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
     source_config.lsim_enabled = boolOrDefault(kv, prefix + "lsim_enabled", source_config.lsim_enabled);
     source_config.oim_enabled = boolOrDefault(kv, prefix + "oim_enabled", source_config.oim_enabled);
   }
+  auto& qm = options.quality_state_manager_config;
+  qm.enable_multi_state_qm = boolOrDefault(kv, "enable_multi_state_qm", qm.enable_multi_state_qm);
+  qm.multi_state_qm_mode = stringOrDefault(kv, "multi_state_qm_mode", qm.multi_state_qm_mode);
+  qm.multi_state_qm_trace_enabled =
+      boolOrDefault(kv, "multi_state_qm_trace_enabled", qm.multi_state_qm_trace_enabled);
+  qm.multi_state_qm_trace_only =
+      boolOrDefault(kv, "multi_state_qm_trace_only", qm.multi_state_qm_trace_only);
+  qm.multi_state_qm_enable_downweight_reject =
+      boolOrDefault(kv, "multi_state_qm_enable_downweight_reject", qm.multi_state_qm_enable_downweight_reject);
+  qm.multi_state_qm_enable_hold_recovery =
+      boolOrDefault(kv, "multi_state_qm_enable_hold_recovery", qm.multi_state_qm_enable_hold_recovery);
+  qm.multi_state_qm_enable_fallback =
+      boolOrDefault(kv, "multi_state_qm_enable_fallback", qm.multi_state_qm_enable_fallback);
+  qm.qm_downweight_threshold = scalarOrDefault(kv, "qm_downweight_threshold", qm.qm_downweight_threshold);
+  qm.qm_reject_threshold = scalarOrDefault(kv, "qm_reject_threshold", qm.qm_reject_threshold);
+  qm.qm_downweight_R_scale = scalarOrDefault(kv, "qm_downweight_R_scale", qm.qm_downweight_R_scale);
+  qm.qm_recovery_initial_R_scale =
+      scalarOrDefault(kv, "qm_recovery_initial_R_scale", qm.qm_recovery_initial_R_scale);
+  qm.qm_hold_R_scale = scalarOrDefault(kv, "qm_hold_R_scale", qm.qm_hold_R_scale);
+  qm.qm_fallback_R_scale = scalarOrDefault(kv, "qm_fallback_R_scale", qm.qm_fallback_R_scale);
+  qm.qm_hold_enter_count = static_cast<std::size_t>(
+      std::max(1.0, scalarOrDefault(kv, "qm_hold_enter_count", static_cast<double>(qm.qm_hold_enter_count))));
+  qm.qm_hold_length = static_cast<std::size_t>(
+      std::max(1.0, scalarOrDefault(kv, "qm_hold_length", static_cast<double>(qm.qm_hold_length))));
+  qm.qm_recovery_count = static_cast<std::size_t>(
+      std::max(1.0, scalarOrDefault(kv, "qm_recovery_count", static_cast<double>(qm.qm_recovery_count))));
+  qm.qm_fallback_enter_count = static_cast<std::size_t>(
+      std::max(1.0, scalarOrDefault(kv, "qm_fallback_enter_count", static_cast<double>(qm.qm_fallback_enter_count))));
+  qm.qm_fallback_exit_count = static_cast<std::size_t>(
+      std::max(1.0, scalarOrDefault(kv, "qm_fallback_exit_count", static_cast<double>(qm.qm_fallback_exit_count))));
+  qm.qm_fallback_max_duration = static_cast<std::size_t>(
+      std::max(1.0, scalarOrDefault(kv, "qm_fallback_max_duration", static_cast<double>(qm.qm_fallback_max_duration))));
+  qm.qm_timestamp_gap_hold_sec =
+      scalarOrDefault(kv, "qm_timestamp_gap_hold_sec", qm.qm_timestamp_gap_hold_sec);
+  qm.qm_invalid_hold_enter_count = static_cast<std::size_t>(
+      std::max(1.0, scalarOrDefault(kv,
+                                    "qm_invalid_hold_enter_count",
+                                    static_cast<double>(qm.qm_invalid_hold_enter_count))));
+  qm.qm_source_cap = scalarOrDefault(kv, "qm_source_cap", qm.qm_source_cap);
+  qm.qm_global_cap = scalarOrDefault(kv, "qm_global_cap", qm.qm_global_cap);
+  qm.qm_go2_readiness_low_health =
+      scalarOrDefault(kv, "qm_go2_readiness_low_health", qm.qm_go2_readiness_low_health);
+  qm.qm_min_stable_epochs = static_cast<std::size_t>(
+      std::max(1.0, scalarOrDefault(kv, "qm_min_stable_epochs", static_cast<double>(qm.qm_min_stable_epochs))));
+  qm.qm_go2_motion_state_influence =
+      boolOrDefault(kv, "qm_go2_motion_state_influence", qm.qm_go2_motion_state_influence);
+  qm.qm_readiness_influence = boolOrDefault(kv, "qm_readiness_influence", qm.qm_readiness_influence);
   options.lsim_oim = options.source_aware_policy_config.enable_source_aware_weighting &&
                      options.source_aware_policy_config.source_aware_mode != "off";
   // 中文说明：N8G feedback 默认关闭；打开后只读取 runtime-only FGO_FEEDBACK_OBSERVATIONS.csv。

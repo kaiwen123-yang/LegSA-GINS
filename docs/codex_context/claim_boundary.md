@@ -172,3 +172,11 @@ PAPER10C may state that Go2 roll/pitch and Go2 horizontal velocity weak priors a
 PAPER10C must keep readiness/contact/motion-state metadata as blocked or diagnostic until first-class LSIM metadata integration is implemented and validated. It must keep BY3 Go2 runtime as blocked because BY3 Go2 prior provider evidence is missing in the current workspace. BY3 yaw remains diagnostic-only.
 
 PAPER10C forbids Go2 position/yaw truth claims, Go2 vertical velocity as a main constraint, receiver `imu-data.csv` as Go2 body IMU, full contact-aided InEKF, full leg odometry, support-foot FK, universal superiority, comprehensive final_v23 outperformance, BY3 ordinary yaw generalization, trace online use, final_v23/LegSA output solver input, and per-case tuning.
+
+## PAPER10B2 Multi-State QM Claim Boundary
+
+PAPER10B2 may state that source-level multi-state QM is implemented above source-aware `SA04_N6B` LSIM/OIM and Go2 `G05_FULL_AUX` readiness/motion-state metadata. It may state that fixed states are `NORMAL`, `DOWNWEIGHT`, `REJECT`, `HOLD`, `RECOVERY`, and `FALLBACK`, that QM is default-off under `QM00_OFF`, that state/action/recovery trace was generated, and that BY2 QM matrix completed 600/600 rows.
+
+PAPER10B2 must state that final status is `CONDITIONAL_PASS_QM_RUNTIME_STOPPED_BY_10GB_HARD_STOP`. BY3 completed 579/600 rows before the user-defined `E_DRIVE_HARD_STOP=10GB`; 21 BY3 missing-only resume rows remain. Current QM evidence enum is `QM_MECHANISM_READY_PERFORMANCE_MIXED`, not `QM_MAIN_INNOVATION_READY`.
+
+PAPER10B2 forbids claiming BY3 full QM matrix completion, final positive QM main-innovation readiness before BY3 resume/review, universal superiority, final_v23 outperformance, BY3 ordinary yaw generalization, trace online use, final_v23/LegSA output solver input, output substitution, bad-epoch deletion, per-case tuning, Go2 position/yaw truth, complete nine-factor FGO, full contact-aided InEKF, or external DA/LC/GINav/MATLAB/RTKLIB reproduction from this stage.

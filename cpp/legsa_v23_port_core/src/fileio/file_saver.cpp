@@ -461,6 +461,51 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
   out << ",\n"
       << "  \"source_aware_spike_response_evaluated\": "
       << (options.source_aware_runtime_stats.spike_response_evaluated ? "true" : "false") << ",\n"
+      << "  \"multi_state_qm\": " << (options.multi_state_qm ? "true" : "false") << ",\n"
+      << "  \"enable_multi_state_qm\": "
+      << (options.quality_state_manager_config.enable_multi_state_qm ? "true" : "false") << ",\n"
+      << "  \"multi_state_qm_mode\": \""
+      << escapeJson(options.quality_state_manager_config.multi_state_qm_mode) << "\",\n"
+      << "  \"multi_state_qm_trace_enabled\": "
+      << (options.quality_state_manager_config.multi_state_qm_trace_enabled ? "true" : "false") << ",\n"
+      << "  \"multi_state_qm_trace_only\": "
+      << (options.quality_state_manager_config.multi_state_qm_trace_only ? "true" : "false") << ",\n"
+      << "  \"qm_downweight_threshold\": " << options.quality_state_manager_config.qm_downweight_threshold << ",\n"
+      << "  \"qm_reject_threshold\": " << options.quality_state_manager_config.qm_reject_threshold << ",\n"
+      << "  \"qm_hold_enter_count\": " << options.quality_state_manager_config.qm_hold_enter_count << ",\n"
+      << "  \"qm_hold_length\": " << options.quality_state_manager_config.qm_hold_length << ",\n"
+      << "  \"qm_recovery_count\": " << options.quality_state_manager_config.qm_recovery_count << ",\n"
+      << "  \"qm_fallback_enter_count\": " << options.quality_state_manager_config.qm_fallback_enter_count << ",\n"
+      << "  \"qm_fallback_exit_count\": " << options.quality_state_manager_config.qm_fallback_exit_count << ",\n"
+      << "  \"qm_fallback_max_duration\": " << options.quality_state_manager_config.qm_fallback_max_duration << ",\n"
+      << "  \"qm_timestamp_gap_hold_sec\": " << options.quality_state_manager_config.qm_timestamp_gap_hold_sec << ",\n"
+      << "  \"qm_source_cap\": " << options.quality_state_manager_config.qm_source_cap << ",\n"
+      << "  \"qm_global_cap\": " << options.quality_state_manager_config.qm_global_cap << ",\n"
+      << "  \"qm_go2_motion_state_influence\": "
+      << (options.quality_state_manager_config.qm_go2_motion_state_influence ? "true" : "false") << ",\n"
+      << "  \"qm_readiness_influence\": "
+      << (options.quality_state_manager_config.qm_readiness_influence ? "true" : "false") << ",\n"
+      << "  \"qm_trace_rows\": " << options.quality_state_runtime_stats.trace_row_count << ",\n"
+      << "  \"qm_state_transition_count\": " << options.quality_state_runtime_stats.state_transition_count << ",\n"
+      << "  \"qm_normal_count_by_source\": ";
+  writeSourceAwareCountObject(out, options.quality_state_runtime_stats.normal_count_by_source);
+  out << ",\n  \"qm_downweight_count_by_source\": ";
+  writeSourceAwareCountObject(out, options.quality_state_runtime_stats.downweight_count_by_source);
+  out << ",\n  \"qm_reject_count_by_source\": ";
+  writeSourceAwareCountObject(out, options.quality_state_runtime_stats.reject_count_by_source);
+  out << ",\n  \"qm_hold_count_by_source\": ";
+  writeSourceAwareCountObject(out, options.quality_state_runtime_stats.hold_count_by_source);
+  out << ",\n  \"qm_recovery_count_by_source\": ";
+  writeSourceAwareCountObject(out, options.quality_state_runtime_stats.recovery_count_by_source);
+  out << ",\n  \"qm_fallback_count_by_source\": ";
+  writeSourceAwareCountObject(out, options.quality_state_runtime_stats.fallback_count_by_source);
+  out << ",\n  \"qm_action_count_by_source\": ";
+  writeSourceAwareCountObject(out, options.quality_state_runtime_stats.action_count_by_source);
+  out << ",\n"
+      << "  \"qm_trace_used_online\": false,\n"
+      << "  \"qm_final_v23_output_solver_input\": false,\n"
+      << "  \"qm_legsa_output_solver_input\": false,\n"
+      << "  \"qm_no_per_case_tuning\": true,\n"
       << "  \"fgo\": " << (options.fgo ? "true" : "false") << ",\n"
       << "  \"fgo_feedback_enabled\": "
       << (options.fgo_feedback_config.enable_fgo_feedback ? "true" : "false") << ",\n"

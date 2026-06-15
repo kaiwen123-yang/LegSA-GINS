@@ -2328,3 +2328,35 @@ Still forbidden after PAPER10Y:
 - claiming Go2 position or Go2 yaw as truth;
 - using trace online, final_v23/LegSA output as solver input, bad-epoch deletion, or per-case tuning;
 - treating archive/cleanup success as paper performance evidence.
+
+## PAPER10B2 Multi-State Quality Management Boundary
+
+Allowed after PAPER10B2:
+
+- PAPER10B2 may state that a source-level multi-state QM state machine was implemented above source-aware `SA04_N6B` LSIM/OIM and Go2 `G05_FULL_AUX` readiness/motion-state metadata.
+- PAPER10B2 may state that the fixed states are `NORMAL`, `DOWNWEIGHT`, `REJECT`, `HOLD`, `RECOVERY`, and `FALLBACK`.
+- PAPER10B2 may state that QM is default-off under `QM00_OFF` / `enable_multi_state_qm=false`.
+- PAPER10B2 may state that state/action/recovery traces were generated.
+- PAPER10B2 may state that targeted unit/integration tests and `legsa_v23_port_core_demo` build passed.
+- PAPER10B2 may state that BY2 QM matrix completed 600/600 rows.
+- PAPER10B2 may state that BY3 completed 579/600 rows before the user-defined `E_DRIVE_HARD_STOP=10GB` stopped the runner, with 21 missing-only resume rows preserved.
+
+Boundary after PAPER10B2:
+
+- Final status is `CONDITIONAL_PASS_QM_RUNTIME_STOPPED_BY_10GB_HARD_STOP`.
+- Current QM evidence enum is `QM_MECHANISM_READY_PERFORMANCE_MIXED`, not `QM_MAIN_INNOVATION_READY`.
+- BY3 full-matrix closure and final positive paper claims require the 21 missing-only BY3 rows to be resumed or an explicit human decision to accept the hard-stop boundary.
+- BY3 yaw remains diagnostic-only and cannot be written as ordinary yaw generalization.
+- Performance wording must be bounded by dataset and family; BY2 horizontal behavior and vertical behavior are mixed.
+- Fallback means conservative partial-source fusion, not output substitution.
+- Source-aware LSIM/OIM and Go2 readiness are inputs/layers, not synonyms for the full multi-state QM mechanism.
+
+Still forbidden after PAPER10B2:
+
+- claiming universal superiority or final_v23 outperformance;
+- claiming `QM_MAIN_INNOVATION_READY` before BY3 missing-only resume/review;
+- claiming BY3 ordinary yaw generalization;
+- claiming trace online use, final_v23/LegSA output as solver input, output substitution, bad-epoch deletion, or per-case tuning;
+- claiming Go2 position or Go2 yaw as truth;
+- claiming external DA/LC/GINav/MATLAB/RTKLIB/contact-aided/full InEKF/complete nine-factor FGO reproduction from this stage;
+- committing raw data, by2/by3 text, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, archives, or runtime-heavy outputs.
