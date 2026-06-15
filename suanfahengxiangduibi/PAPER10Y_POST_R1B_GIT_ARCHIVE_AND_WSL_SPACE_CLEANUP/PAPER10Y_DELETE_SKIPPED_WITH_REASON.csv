@@ -1,0 +1,68 @@
+source_path,package,kind,source_exists_before,source_size_bytes_before,archive_verified,dry_run_action,planned_method,reason,skip_reason
+<WSL_PREFLIGHT_ROOT>/PAPER10A_MAINLINE_MEMORY_RECONCILIATION_AND_CODE_EVIDENCE_FREEZE,,runtime,,868637516,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER10B_R1_SOURCE_AWARE_FULL_120_ABLATION_AND_METRIC_PROVENANCE_CLOSURE,,runtime,,15451105524,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER10B_R2A_WSL_SPACE_ARCHIVE_COMPACT_AND_RESUME_GUARD,,runtime,,2524466,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER10B_R2_BY3_SOURCE_AWARE_FULL_120_ABLATION_AND_CROSS_DATASET_CLOSURE,,runtime,,19185771324,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER10B_SOURCE_AWARE_LSIM_OIM_PAPER_EVIDENCE_FREEZE,,runtime,,1256537,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<PAPER10Y_STAGE_ROOT>,,runtime,,77027,not_applicable,SKIP,,current PAPER10Y runtime,SKIP_ACTIVE_OR_RECENT_UNVERIFIED
+<WSL_PREFLIGHT_ROOT>/PAPER3D_R2_WSL_CLI_RTKLIB_REBUILD_RINEX_DDLOS,,runtime,,830012707,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER3D_WSL_CLI_PREFLIGHT_DDLOS_FRAME_INTERNAL_BASELINE,,runtime,,94262032,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER3E_DDLOS_BACKED_TRUE_LIT_FULL_MATRIX,,runtime,,422927108,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER3F_FULL_BACKEND_UPGRADE_AND_FINAL_EVIDENCE,,runtime,,434971961,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER3G_LAMBDA_MLAMBDA_CLAMBDA_BACKEND_AND_MULTIGNSS_DDLOS_REPAIR,,runtime,,459947294,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER3H_MULTIGNSS_DDLOS_AND_FOURTH_LAYER_REPAIR,,runtime,,511089578,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER3I_PHYSICAL_YAW_SATPOS_IEKF_EQKF_INTERNAL_JOIN,,runtime,,16170646,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER4B_R2_PHYSICAL_FRAME_CLOSE_AND_YAW_REEVALUATION,,runtime,,1107832734,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER4C_BASELINE_VECTOR_YAW_SEMANTICS_REPAIR_AND_REEVALUATION,,runtime,,7914118,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER4D_TRACE_REFERENCE_YAW_FRAME_AND_STATUS_RELPOS_AUDIT,,runtime,,604805,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER4E_FIXPOSITION_OUTPUT_ROTATION_AND_MESSAGE_SEMANTICS_CLOSURE,,runtime,,1224259,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER4F_R2_USER_DECLARED_MINIMAL_EXPORT_YAW_POLICY_REEVALUATION,,runtime,,6877008,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER4G_YAW_BOUNDARY_FREEZE_NATIVE_METRICS_WRITE_PACKAGE,,runtime,,109799,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER4I_EPHEMERIS_AIDED_DDLOS_PROVIDER_REPAIR_AND_FULL_DIAGNOSTIC_PLOTTING,,runtime,,134931753,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER4J_ACTUAL_EPHEMERIS_SATPOS_LAMBDA_PROVIDER_V5_REPAIR,,runtime,,1185039962,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER4K_PROVIDER_V5_NON_GPS_AND_CN0_COMPLETION,,runtime,,392460005,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER5M_PARALLEL_DUAL_ANTENNA_PROVIDER_V5_AND_LOOSE_COUPLED_FULL_MATRIX_MEGARUN,,runtime,,107967970,not_applicable,SKIP,,not selected for PAPER10Y cleanup,SKIP_UNKNOWN
+<WSL_PREFLIGHT_ROOT>/PAPER6A_MAINLINE_FULL_EVIDENCE_AUDIT_AND_SUBMISSION_DECISION_PACKAGE,,runtime,,801081383,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER7R1_EXECUTION_LOCKED_MAINLINE_DA_LC_BY3_COMPLETION,,runtime,,793917482,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER7R2A_YAW_EVALUATOR_SEMANTICS_REPAIR,,runtime,,7246254,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER7R2C0_BY3_120_DEGRADATION_MATRIX_PROVIDER_FREEZE,,runtime,,12830104530,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER7R2C1_PROJECT_METHOD_YAW_SOURCE_CHAIN_REPAIR,,runtime,,2424103,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER7R2C2_PROJECT_METHOD_OFFICIAL_YAW_FULL_MATRIX_RERUN_OR_JOIN,,runtime,,8106751,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER7R2E_DA_TRUE_LITERATURE_FULL_ALGORITHM_REPRODUCTION,,runtime,,85429472,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER7R2E_R1_BY2_DA_MIN5_FULL_FAITHFUL_REPRODUCTION,,runtime,,11743445,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER7R2E_R2_DA04_WU2025_REALTIME_MISALIGNMENT_CLOSURE,,runtime,,4616818,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER7R2E_R3_DA_EVIDENCE_FREEZE_AND_CONTEXT_SYNC,,runtime,,1405356,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER8A_CONTEXT_GIT_SYNC_AND_GLOBAL_EVIDENCE_DETAILED_METRICS_FREEZE,,runtime,,566383070,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER8B_METHOD_IDENTITY_OFFICIAL_YAW_CLOSURE_AND_LC_TRUE_LITERATURE_FULL_MATRIX,,runtime,,855043715,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER8C_OBSIDIAN_SYNC_AND_INTERNAL_OFFICIAL_YAW_MATRIX_RECOVERY_OR_RECOMPUTE,,runtime,,132380506,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER8D_GLOBAL_CONTEXT_COMMIT_AND_EARLY_DESIGN_CHAT_RECONCILIATION,,runtime,,151822,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER8E_IMPORT_AND_VERIFY_N9_OFFICIAL_YAW_AND_LEGSA_FULL_MATRIX,,runtime,,304483,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER8F_PAPER_FACING_EXPERIMENT_TABLE_AND_SAFE_WORDING_PACKAGE,,runtime,,175083,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER9A_LEGSA_GINS_QA_FINAL_METHOD_OFFICIAL_MATRIX_CLOSURE,,runtime,,202457104,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER9B_BY3_DA_PROVIDER_V5_ACTUAL_AND_DA_FULL_COMPARISON,,runtime,,1169934210,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER9B_R1_DA04_BY2_JOIN_CN0_BOUNDARY_AND_PAPER_TABLE_REPAIR,,runtime,,485589,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER9C_LC_CLEAN_FULL_REPRODUCTION_AND_MIN5_CLOSURE,,runtime,,85171757,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER9C_R1_LC_FIFTH_UNIQUE_PAPER_GINAV_BY2_120_OR_REPLACEMENT_CLOSURE,,runtime,,14969328,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER9C_R2_GINAV_ADAPTER_CONTRACT_DEBUG_AND_NATIVE_ROUTE_DECISION,,runtime,,398833,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER9C_R3A_OBSIDIAN_PATH_REPAIR_AND_OISAM_INPUT_LOCK,,runtime,,61440,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<WSL_PREFLIGHT_ROOT>/PAPER9C_R3_LC_FIFTH_HIGH_QUALITY_UNIQUE_PAPER_OISAM_FGO_TRUE_REPRODUCTION,,runtime,,96834743,not_applicable,SKIP,,completed historical runtime; not selected for deletion in this low-risk pass,ARCHIVE_ONLY_KEEP_SOURCE
+<WSL_PREFLIGHT_ROOT>/PAPER9D_GLOBAL_EXPERIMENT_SECTION_ASSET_LOCK_AND_TEACHER_PACKAGE,,runtime,,437355,not_applicable,SKIP,,too small to matter for WSL cleanup,SKIP_TOO_SMALL
+<LEGSA_WORKTREE_ROOT>/PAPER10A_MAINLINE_MEMORY_RECONCILIATION_AND_CODE_EVIDENCE_FREEZE,,worktree,,20338863,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER10B_R1_SOURCE_AWARE_FULL_120_ABLATION_AND_METRIC_PROVENANCE_CLOSURE,,worktree,,22169906,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER10B_R2_BY3_SOURCE_AWARE_FULL_120_ABLATION_AND_CROSS_DATASET_CLOSURE,,worktree,,23151293,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER10B_SOURCE_AWARE_LSIM_OIM_PAPER_EVIDENCE_FREEZE,,worktree,,20754328,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER8A_CONTEXT_GIT_SYNC_AND_GLOBAL_EVIDENCE_DETAILED_METRICS_FREEZE,,worktree,,211552248,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER8B_METHOD_IDENTITY_OFFICIAL_YAW_CLOSURE_AND_LC_TRUE_LITERATURE_FULL_MATRIX,,worktree,,18583657,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER8C_OBSIDIAN_SYNC_AND_INTERNAL_OFFICIAL_YAW_MATRIX_RECOVERY_OR_RECOMPUTE,,worktree,,145102817,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER8D_GLOBAL_CONTEXT_COMMIT_AND_EARLY_DESIGN_CHAT_RECONCILIATION,,worktree,,12820344,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER8E_IMPORT_AND_VERIFY_N9_OFFICIAL_YAW_AND_LEGSA_FULL_MATRIX,,worktree,,12972902,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER8F_PAPER_FACING_EXPERIMENT_TABLE_AND_SAFE_WORDING_PACKAGE,,worktree,,12829714,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER9A_LEGSA_GINS_QA_FINAL_METHOD_OFFICIAL_MATRIX_CLOSURE,,worktree,,214310528,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER9B_BY3_DA_PROVIDER_V5_ACTUAL_AND_DA_FULL_COMPARISON,,worktree,,26374389,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER9B_R1_DA04_BY2_JOIN_CN0_BOUNDARY_AND_PAPER_TABLE_REPAIR,,worktree,,12760427,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER9C_LC_CLEAN_FULL_REPRODUCTION_AND_MIN5_CLOSURE,,worktree,,14756834,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER9C_R1_LC_FIFTH_UNIQUE_PAPER_GINAV_BY2_120_OR_REPLACEMENT_CLOSURE,,worktree,,13776901,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER9C_R2_GINAV_ADAPTER_CONTRACT_DEBUG_AND_NATIVE_ROUTE_DECISION,,worktree,,12721502,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER9C_R3A_OBSIDIAN_PATH_REPAIR_AND_OISAM_INPUT_LOCK,,worktree,,12770903,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER9C_R3_LC_FIFTH_HIGH_QUALITY_UNIQUE_PAPER_OISAM_FGO_TRUE_REPRODUCTION,,worktree,,13038514,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE
+<LEGSA_WORKTREE_ROOT>/PAPER9D_GLOBAL_EXPERIMENT_SECTION_ASSET_LOCK_AND_TEACHER_PACKAGE,,worktree,,13041154,not_applicable,SKIP,,older worktree not requested for deletion in PAPER10Y,ARCHIVE_ONLY_KEEP_SOURCE

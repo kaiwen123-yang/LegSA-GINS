@@ -169,6 +169,13 @@ Tracked docs must use aliases only:
 - `<PAPER10C_R1A_STAGE_ROOT>`
 - `<PAPER10C_R1A_C_EXPORT_ROOT>`
 - `<PAPER10C_R1A_OBSIDIAN_SYNC_ROOT>`
+- `<PAPER10C_R1B_STAGE_ROOT>`
+- `<PAPER10C_R1B_C_EXPORT_ROOT>`
+- `<PAPER10C_R1B_OBSIDIAN_SYNC_ROOT>`
+- `<PAPER10Y_STAGE_ROOT>`
+- `<PAPER10Y_C_EXPORT_ROOT>`
+- `<PAPER10Y_ARCHIVE_ROOT>`
+- `<PAPER10Y_OBSIDIAN_SYNC_ROOT>`
 - `<PAPER10B_R2_STAGE_ROOT>`
 - `<PG2_XB2_RECEIVER_ROOT>`
 - `<PG2_XB2_BODY_SOURCE>`
@@ -209,6 +216,8 @@ The PG multi-repeat poor-GNSS review root is represented in tracked docs only by
 The paper-facing evidence review root is represented in tracked docs only by `<PAPER_EVIDENCE_REVIEW_ROOT>`, with PAPER0 runtime material under `<PAPER0_STAGE_ROOT>`.
 The PAPER10C_R1 interrupted Go2/LSIM recovery source is represented in tracked docs only by `<PAPER10C_R1_STAGE_ROOT>`.
 The PAPER10C_R1A resume stage is represented in tracked docs only by `<PAPER10C_R1A_STAGE_ROOT>`, with export-clean material under `<PAPER10C_R1A_C_EXPORT_ROOT>` and vault notes under `<PAPER10C_R1A_OBSIDIAN_SYNC_ROOT>`.
+The PAPER10C_R1B low-space missing-only resume stage is represented in tracked docs only by `<PAPER10C_R1B_STAGE_ROOT>`, with export-clean material under `<PAPER10C_R1B_C_EXPORT_ROOT>` and vault notes under `<PAPER10C_R1B_OBSIDIAN_SYNC_ROOT>`.
+The PAPER10Y post-R1B maintenance/archive stage is represented in tracked docs only by `<PAPER10Y_STAGE_ROOT>`, with lightweight export material under `<PAPER10Y_C_EXPORT_ROOT>`, archive bodies under `<PAPER10Y_ARCHIVE_ROOT>`, and vault notes under `<PAPER10Y_OBSIDIAN_SYNC_ROOT>`.
 Prior BY3 source-aware source material imported by PAPER10C_R1 is represented only by `<PAPER10B_R2_STAGE_ROOT>`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
@@ -329,7 +338,8 @@ Current completed route:
 - Current BY3/reporting stage: `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`; GEN1 built BY2/BY3 metric inventories, canonical family mapping, three-scheme cross-dataset summaries, existing-metric cross-dataset figures, a BY3 figure inventory, and a copy-only BY3 figure organization without solver/evaluator/degradation/random execution.
 - Current poor-GNSS stage: `PG_QA0_QUALITY_AWARE_FALLBACK_DESIGN_AND_PAPER_MAINLINE_DECISION`; PG_MULTI_A0 remains the source/runnability evidence import, and QA0 is design-only. QA0 keeps `LegSA_full_EKF` as the frozen verified mainline for normal/moderate GNSS and defines `LegSA_QA_Fallback_EKF` as a separate future candidate for severe GNSS, unavailable A1 dual-yaw, degraded position quality, Raw Doppler availability, and short IMU+Go2 bridge intervals. No implementation, solver, evaluator, degraded-input generation, random arrays, retuning, quality-aware execution, or paper claim was performed.
 - Current paper-facing evidence stage: `PAPER0_MAINLINE_EVIDENCE_PACKAGE_AND_CLAIM_BOUNDARY_REVIEW`; it supports starting manuscript experiment-section drafting from existing BY2/BY3 evidence while keeping PG/QA as limitation/design extension and keeping `ready_for_paper_claims=false`.
-- Current Go2 recovery stage: `PAPER10C_R1A_RESUME_INTERRUPTED_GO2_BY3_MATRIX_AND_COMPLETE_STAGE`; BY3 `by3.txt` provider generation/readiness metadata evidence was recovered, BY2 Go2 120x6 is closed, and BY3 Go2 full matrix is not closed because the missing-only runner was blocked by the Windows E space gate.
+- Current Go2 recovery status: `PAPER10C_R1B_LOW_SPACE_BY3_MISSING_ONLY_RESUME` passed after missing-only BY3 resume. BY2 and BY3 Go2 120x6 are both closed at 720/720, BY3 providers are `by3.txt` derived, readiness/motion-state LSIM metadata is first-class for G03/G05 runtime evidence, and BY3 yaw remains diagnostic-only.
+- Current maintenance status: `PAPER10Y_POST_R1B_GIT_ARCHIVE_AND_WSL_SPACE_CLEANUP` archived verified completed WSL runtime/worktree material, deleted only verified WSL sources, generated a Windows compact script, and recommends `PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` if the paper keeps multi-state quality management as a contribution.
 - Recommended BY3 next stage: human review of GEN1, then decide `BY3D_MIXED_POSITION_UP_PLANNING`, separate diagnostic-yaw planning, or another-dataset planning only if explicitly approved; GEN1 does not authorize paper claims, PR #52 merge/tag/closure, or additional yaw/mixed/module/full-matrix execution.
 - Recommended paper next stage: `PAPER1_MANUSCRIPT_EXPERIMENT_SECTION_DRAFT`. QA1 remains optional for a stronger secondary-contribution route and is not required before starting the near-term Option B manuscript. PAPER0 does not authorize frozen mainline execution on PG1-PG4, quality-aware implementation, solver/evaluator execution, artificial degradation, random arrays, retuning, final paper figures, paper claims, PR #52 merge/closure/tag, or poor-GNSS robustness claims.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
@@ -346,7 +356,7 @@ Allowed now:
 - Raw Doppler EKF is active.
 - Raw Doppler FGO is active but low marginal value in clean BY2.
 - Go2 proprioceptive joint factor is active.
-- Go2 high-level roll/pitch and horizontal-velocity weak-prior evidence is bounded; PAPER10C_R1A recovered BY3 Go2 providers and partial readiness-LSIM runtime evidence, but Go2 is not a closed main innovation.
+- Go2 high-level roll/pitch, horizontal-velocity weak-prior, and readiness/motion-state LSIM metadata evidence is bounded and closed for BY2/BY3 Go2 120x6 after PAPER10C_R1B; Go2 remains a supporting mechanism, not Go2 position/yaw truth, full contact-aided InEKF, full leg odometry, universal superiority, or complete nine-factor FGO.
 - Legged candidate factors are activated in no-feedback FGO.
 - N9B pilot/preparation evidence exists through N9B2B, with cautions recorded above.
 - N9B staged execution is complete through N9C0 global consolidated precheck.
@@ -1070,6 +1080,26 @@ PAPER10C_R1B claim boundary:
 - Performance is mixed, so Go2 is a supporting/secondary innovation candidate, not a universal superiority or standalone main-performance claim.
 - PAPER10B2 multi-state quality management is motivated by R1B but remains future work unless separately executed.
 - Do not claim full contact-aided InEKF, full leg odometry, complete nine-factor FGO, Go2 position/yaw truth, trace online use, per-case tuning, or BY3 ordinary yaw generalization from R1B.
+
+## 40. PAPER10Y Post-R1B Git Archive And WSL Space Cleanup
+
+`PAPER10Y_POST_R1B_GIT_ARCHIVE_AND_WSL_SPACE_CLEANUP` is a maintenance-only closeout after PAPER10C_R1B. It is not a new experiment stage.
+
+PAPER10Y recovered facts:
+
+- PAPER10C_R1B evidence remains accepted: BY2 Go2 120x6 and BY3 Go2 120x6 are both closed at 720/720.
+- Selected completed WSL runtime/worktree material was archived under `<PAPER10Y_ARCHIVE_ROOT>` using tar.xz fallback archives.
+- Archive SHA256 recording and integrity verification passed for all selected packages.
+- Only verified WSL source directories or clean verified worktrees were deleted; about 67.1 GB of WSL internal space was released.
+- `fstrim` was attempted but sudo required a password.
+- A Windows Administrator PowerShell compact script was generated; VHDX compact remains manual and pending.
+
+PAPER10Y boundaries:
+
+- No solver/evaluator, DA, LC, GINav, MATLAB, RTKLIB, contact-aided reproduction, complete FGO, PAPER10B2, or PAPER10E execution was run.
+- No raw data, by2.txt, by3.txt, trace, main repo, C/G project data, C export, or Obsidian vault was deleted.
+- PAPER10Y supports the next-route recommendation `PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE`, but it does not complete PAPER10B2.
+- Do not treat archive/cleanup success as algorithm-performance evidence.
 
 ## 36. PAPER4G Yaw Boundary Freeze And Native Metrics Route
 
