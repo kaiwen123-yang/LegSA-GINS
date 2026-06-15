@@ -1047,6 +1047,30 @@ PAPER10C_R1A claim boundary:
 - Do not claim full BY2/BY3 Go2 matrix closure, full contact-aided InEKF, full leg odometry, Go2 position/yaw truth, universal superiority, complete nine-factor FGO, or completed PAPER10B2 multi-state quality management from R1A.
 - Next safe route is either a space-gated `PAPER10C_R1B` missing-only resume, or a human-approved PAPER10B2 design/validation stage if the paper keeps multi-state quality management as a contribution.
 
+## 39. PAPER10C_R1B Low-Space BY3 Missing-Only Resume
+
+`PAPER10C_R1B_LOW_SPACE_BY3_MISSING_ONLY_RESUME` closes the R1A low-space blocker with a human-approved lower Windows E hard-stop.
+
+PAPER10C_R1B recovered facts:
+
+- User-approved runner gate: Windows E hard-stop 5 GB and WSL root hard-stop 20 GB.
+- R1B imported the R1A resume manifest and selected only BY3 rows marked missing/partial/corrupted.
+- R1B quarantined the 8 partial/corrupted BY3 rows before rerun.
+- R1B reran 177/177 selected BY3 rows with jobs=8 and zero runtime failures.
+- BY2 Go2 120x6 remains closed at 720/720 completed-evaluable rows and was not rerun.
+- BY3 Go2 120x6 is now closed at 720/720 completed-evaluable rows.
+- BY3 provider evidence remains `by3.txt`-derived; BY2 providers were not reused as BY3.
+- Readiness/motion-state metadata is first-class LSIM metadata for G03/G05 runtime rows.
+- Completed rows were not overwritten; trace online, per-case tuning, final_v23/LegSA solver input, and Go2 position/yaw truth remain false.
+
+PAPER10C_R1B claim boundary:
+
+- Go2 high-level roll/pitch, horizontal velocity, and readiness/motion-state metadata may be described as a bounded source-aware auxiliary-prior/LSIM metadata mechanism.
+- BY3 yaw remains diagnostic-only.
+- Performance is mixed, so Go2 is a supporting/secondary innovation candidate, not a universal superiority or standalone main-performance claim.
+- PAPER10B2 multi-state quality management is motivated by R1B but remains future work unless separately executed.
+- Do not claim full contact-aided InEKF, full leg odometry, complete nine-factor FGO, Go2 position/yaw truth, trace online use, per-case tuning, or BY3 ordinary yaw generalization from R1B.
+
 ## 36. PAPER4G Yaw Boundary Freeze And Native Metrics Route
 
 `PAPER4G_YAW_BOUNDARY_FREEZE_NATIVE_METRICS_WRITE_PACKAGE` freezes the external-method body-yaw claim boundary after PAPER4F_R2. PAPER4F_R2 applied the user-declared BY2 minimal-export yaw policy `trace_body_yaw_NED_deg = wrap360(trace_yaw_deg + 90 deg)` to 2160/2160 PAPER3F/PAPER3G/PAPER3H vector-closed method-case rows, but the systematic yaw discrepancy remained: median previous-policy RMSE was about 94.65 deg, median user-policy RMSE was about 106.09 deg, and the 90-degree-like systematic case ratio was about 0.9875.

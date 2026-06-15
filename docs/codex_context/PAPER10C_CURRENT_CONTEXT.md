@@ -1,29 +1,30 @@
 # PAPER10C Current Context
 
-Stage: `PAPER10C_R1A_RESUME_INTERRUPTED_GO2_BY3_MATRIX_AND_COMPLETE_STAGE`
+Stage: `PAPER10C_R1B_LOW_SPACE_BY3_MISSING_ONLY_RESUME`
 
-Status: `CONDITIONAL_PASS_RESUME_MANIFEST_READY_BUT_NOT_EXECUTED`
+Status: `PASS_PAPER10C_R1B_BY3_GO2_MATRIX_COMPLETED_LOW_SPACE_RESUME`
 
-PAPER10C freezes Go2 high-level state as a bounded auxiliary weak-prior evidence line. It does not claim Go2 truth, full contact-aided odometry, or BY3 yaw generalization.
+PAPER10C freezes Go2 high-level state as a bounded auxiliary weak-prior and LSIM metadata evidence line. It does not claim Go2 truth, full contact-aided odometry, universal superiority, or BY3 ordinary yaw generalization.
 
 Closed evidence:
 
 - Go2 roll/pitch weak prior enters EKF update through source-aware `go2_attitude_roll_pitch`.
 - Go2 horizontal velocity weak prior enters EKF update through source-aware `go2_horizontal_velocity`.
-- PAPER10C_R1A supersedes the original PAPER10C BY3 provider-blocked state for provider existence: BY3 `by3.txt` was used to build BY3 roll/pitch, horizontal velocity, and readiness/motion-state providers.
-- BY2 120x6 Go2 matrix is closed at 720/720 completed-evaluable rows.
-- BY3 normal six-mode smoke is closed in the interrupted R1 runtime.
-- Go2 position/yaw truth flags remain false; vertical velocity is disabled or diagnostic-only.
+- Readiness/motion-state metadata is first-class LSIM metadata for G03/G05 runtime rows.
+- BY2 Go2 120x6 matrix is closed at 720/720 completed-evaluable rows.
+- BY3 Go2 120x6 matrix is closed at 720/720 completed-evaluable rows after the R1B missing-only resume.
+- R1B reran only 177 BY3 missing/partial rows and did not rerun BY2 or completed BY3 rows.
+- BY3 `by3.txt` was used to build BY3 roll/pitch, horizontal velocity, and readiness/motion-state providers; BY2 providers were not reused as BY3.
+- Go2 position/yaw truth flags remain false; trace online, final_v23/LegSA solver input, and per-case tuning remain false.
 
-Blocked or boundary evidence:
+Claim boundary:
 
-- PAPER10C original G03/G05 readiness block is superseded by R1/R1A code/provider evidence for completed rows: readiness/motion-state can enter first-class LSIM metadata.
-- BY3 Go2 120x6 remains incomplete: 543/720 completed-evaluable, 169 missing, and 8 partial/corrupted rows at R1A.
-- PAPER10C_R1A did not execute the missing-only wrapper because Windows E free space failed the runner gate.
+- Go2 can be described as bounded source-aware auxiliary-prior and LSIM metadata support.
+- Go2 may be treated as a supporting/secondary innovation candidate, not as a universal performance or standalone main-innovation claim.
 - BY3 yaw remains diagnostic-only.
+- Complete nine-factor FGO and PAPER10B2 multi-state quality management are not completed by this stage.
 
 Next route:
 
-- Run `PAPER10C_R1B_CLEAR_SPACE_AND_RUN_MISSING_ONLY_GO2_BY3_ROWS` if full BY3 Go2 matrix closure is required.
-- Run `PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` only if the paper keeps a multi-state quality-management claim.
-- Use Go2 only as bounded auxiliary weak-prior/LSIM metadata evidence until BY3 missing/partial rows and PAPER10B2, if needed, are closed.
+- Run `PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` only if the manuscript keeps multi-state quality management as a contribution.
+- Otherwise, proceed toward `PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE` with Go2 kept as bounded auxiliary-prior evidence.

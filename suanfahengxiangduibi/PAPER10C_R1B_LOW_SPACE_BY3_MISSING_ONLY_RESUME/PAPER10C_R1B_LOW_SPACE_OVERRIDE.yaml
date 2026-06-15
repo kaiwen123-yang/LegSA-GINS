@@ -1,0 +1,8 @@
+stage: PAPER10C_R1B_LOW_SPACE_BY3_MISSING_ONLY_RESUME
+e_drive_hard_stop_gb: 5
+wsl_root_hard_stop_gb: 20
+jobs: 8
+cleanup_before_run: false
+vhdx_compact: false
+minimum_observed_e_free_gib: 29.59
+final_status: PASS_PAPER10C_R1B_BY3_GO2_MATRIX_COMPLETED_LOW_SPACE_RESUME
