@@ -126,6 +126,14 @@ PAPER10C_R1A_BY3_go2_120x6=partial_543_of_720
 PAPER10C_R1A_BY3_go2_missing_rows=169
 PAPER10C_R1A_BY3_go2_partial_rows=8
 PAPER10C_R1A_go2_claim=bounded_auxiliary_candidate_not_closed_main_innovation
+PAPER10C_R1B_BY2_go2_120x6=closed_720_of_720
+PAPER10C_R1B_BY3_go2_120x6=closed_720_of_720
+PAPER10C_R1B_readiness_lsim=closed_first_class_runtime_metadata
+PAPER10C_R1B_go2_claim=bounded_auxiliary_prior_and_metadata_mechanism
+PAPER10Y_archive_verified=true
+PAPER10Y_verified_wsl_cleanup=true
+PAPER10Y_vhdx_compact=pending_windows_manual
+ready_for_PAPER10B2_multi_state_quality_management_closure=true_after_human_review
 ready_for_QA1=false
 ready_for_PG2_or_XB1_degradation_planning=false
 ready_for_BY3D_or_other_dataset_planning=true_after_human_review
@@ -941,3 +949,27 @@ Next route:
 - `PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` is recommended only if the manuscript needs a multi-state quality-management contribution beyond bounded Go2 auxiliary priors.
 - `PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE` can proceed if Go2 is kept as a bounded supporting mechanism.
 - Do not use R1B to claim universal superiority, BY3 ordinary yaw generalization, Go2 position/yaw truth, full contact-aided InEKF, full leg odometry, complete nine-factor FGO, trace online use, final_v23/LegSA solver input, or per-case tuning.
+
+## PAPER10Y Post-R1B Git Archive And WSL Space Cleanup
+
+Completed maintenance stage:
+
+```text
+PAPER10Y_POST_R1B_GIT_ARCHIVE_AND_WSL_SPACE_CLEANUP
+```
+
+PAPER10Y is a maintenance-only closeout after PAPER10C_R1B. It rechecked the R1B evidence package, generated current-content and next-direction summaries, created tar.xz archives for selected completed WSL runtime/worktree material, verified those archives, deleted only verified WSL source directories or clean verified worktrees, and generated a Windows-side VHDX compact script.
+
+Current PAPER10Y evidence:
+
+- R1B remains accepted: BY2 Go2 120x6 and BY3 Go2 120x6 are both closed at 720/720.
+- Archive verification passed for all selected tar.xz packages under `<PAPER10Y_ARCHIVE_ROOT>`.
+- Verified WSL cleanup released about 67.1 GB of WSL internal space.
+- `fstrim` was attempted but sudo required a password; VHDX compact remains a Windows Administrator PowerShell manual step.
+- No solver/evaluator, DA, LC, GINav, MATLAB, RTKLIB, contact-aided reproduction, complete FGO, PAPER10B2, or PAPER10E execution was run.
+- No raw data, C/G project data, main repo, C export, Obsidian vault, by2.txt, by3.txt, or trace source was deleted.
+
+Next route:
+
+- `PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` is recommended if the manuscript keeps multi-state quality management as one of the three main innovations.
+- `PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE` remains the conservative route if multi-state quality management is downgraded.

@@ -2301,3 +2301,30 @@ Still forbidden after PAPER10C_R1B:
 - claiming universal superiority or final_v23 outperformance;
 - using trace online, final_v23/LegSA output as solver input, bad-epoch deletion, or per-case tuning;
 - claiming external DA/LC/GINav/MATLAB/RTKLIB/contact-aided reproduction from this stage.
+
+## PAPER10Y Post-R1B Archive And Cleanup Boundary
+
+Allowed after PAPER10Y:
+
+- PAPER10Y may state that PAPER10C_R1B evidence was rechecked and accepted as the current Go2 closure source.
+- PAPER10Y may state that selected completed WSL runtime/worktree material was archived under `<PAPER10Y_ARCHIVE_ROOT>` using tar.xz fallback archives.
+- PAPER10Y may state that all selected archives passed integrity verification and SHA256 recording.
+- PAPER10Y may state that only verified WSL source directories or clean verified worktrees were removed, releasing about 67.1 GB of WSL internal space.
+- PAPER10Y may state that a Windows Administrator PowerShell compact script was generated.
+- PAPER10Y may recommend `PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` as the next route if the paper keeps multi-state quality management as a main innovation.
+
+Boundary after PAPER10Y:
+
+- PAPER10Y is maintenance evidence, not algorithm or performance evidence.
+- `fstrim` was attempted but not completed because sudo required a password.
+- VHDX compact is pending a manual Windows Administrator PowerShell step and was not executed inside WSL.
+- Source-aware LSIM/OIM and Go2 evidence remain bounded by prior stages; PAPER10Y does not expand their claims.
+- PAPER10B2 remains future work until separately executed.
+
+Still forbidden after PAPER10Y:
+
+- claiming any new solver/evaluator, DA, LC, GINav, MATLAB, RTKLIB, contact-aided, complete FGO, PAPER10B2, or PAPER10E evidence from this stage;
+- claiming universal superiority, complete nine-factor FGO, full contact-aided InEKF, full leg odometry, BY3 ordinary yaw generalization, or completed `LegSA_QA_Fallback_EKF`;
+- claiming Go2 position or Go2 yaw as truth;
+- using trace online, final_v23/LegSA output as solver input, bad-epoch deletion, or per-case tuning;
+- treating archive/cleanup success as paper performance evidence.
