@@ -133,7 +133,7 @@ PAPER10C_R1B_go2_claim=bounded_auxiliary_prior_and_metadata_mechanism
 PAPER10Y_archive_verified=true
 PAPER10Y_verified_wsl_cleanup=true
 PAPER10Y_vhdx_compact=pending_windows_manual
-ready_for_PAPER10B2_multi_state_quality_management_closure=true_after_human_review
+ready_for_PAPER10B2_multi_state_quality_management_closure=closed_by_R1_performance_mixed
 ready_for_QA1=false
 ready_for_PG2_or_XB1_degradation_planning=false
 ready_for_BY3D_or_other_dataset_planning=true_after_human_review
@@ -971,8 +971,8 @@ Current PAPER10Y evidence:
 
 Next route:
 
-- `PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` is recommended if the manuscript keeps multi-state quality management as one of the three main innovations.
-- `PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE` remains the conservative route if multi-state quality management is downgraded.
+- `PAPER10B2_R1_MISSING_ONLY_RESUME_AND_FINAL_QM_CLOSURE` has closed the BY3 missing-only blocker and completed BY2/BY3 QM matrices.
+- `PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE` can proceed after human review if QM is worded as a bounded mechanism with mixed performance, not universal superiority.
 
 ## PAPER10B2 Multi-State Quality Management Closure
 
@@ -980,6 +980,7 @@ Conditional hard-stop stage:
 
 ```text
 PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE
+PAPER10B2_R1_MISSING_ONLY_RESUME_AND_FINAL_QM_CLOSURE
 ```
 
 PAPER10B2 implemented a real source-level multi-state QM layer above `SA04_N6B` source-aware LSIM/OIM and Go2 `G05_FULL_AUX` readiness/motion-state metadata. The fixed states are `NORMAL`, `DOWNWEIGHT`, `REJECT`, `HOLD`, `RECOVERY`, and `FALLBACK`; sources keep independent state/action/recovery traces. The mechanism is default-off under `QM00_OFF`.
@@ -988,20 +989,18 @@ Current evidence:
 
 - Targeted PAPER10B2 unit/integration tests passed and `legsa_v23_port_core_demo` built successfully.
 - BY2 QM matrix completed 600/600 rows.
-- BY3 QM matrix stopped at 579/600 rows because `E_DRIVE_HARD_STOP` triggered at the user-defined 10 GB threshold.
-- Missing-only BY3 resume manifest contains 21 rows: 16 mixed rows and 5 normal rows.
+- BY3 QM matrix first stopped at 579/600 rows because `E_DRIVE_HARD_STOP` triggered at the user-defined 10 GB threshold.
+- R1 cancelled the 10GB hard-stop, kept E/WSL emergency stops at 2GB/20GB, processed only the 21 BY3 missing-manifest rows, harvested 7 complete-but-unindexed artifacts, executed 14 rows, and closed BY3 at 600/600.
 - BY3 yaw remains diagnostic-only.
 - No external DA/LC/GINav/MATLAB/RTKLIB/contact-aided/complete FGO, trace online, final_v23/LegSA solver input, per-case tuning, output substitution, or Go2 position/yaw truth was used.
 
 Current route decision:
 
-- Final status: `CONDITIONAL_PASS_QM_RUNTIME_STOPPED_BY_10GB_HARD_STOP`.
-- QM evidence enum: `QM_MECHANISM_READY_PERFORMANCE_MIXED`.
-- Do not promote QM to `QM_MAIN_INNOVATION_READY` until BY3 missing-only rows are resumed and the mixed BY2/BY3 effects are reviewed.
+- R1 final status: `CONDITIONAL_PASS_QM_FULL_MATRIX_COMPLETED_PERFORMANCE_MIXED`.
+- QM evidence enum: `QM_MAIN_MECHANISM_READY_AS_BOUNDED_METHOD_NOT_UNIVERSAL_PERFORMANCE_CLAIM`.
+- Do not promote QM to universal performance superiority; keep it as a bounded deterministic mechanism unless human review approves stronger wording.
 
 Recommended next actions:
 
-- Restore E drive free space above the hard-stop margin.
-- Run only the BY3 missing-only resume manifest; do not overwrite completed rows.
-- Re-run export QA and update the final claim decision.
-- Enter `PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE` only after human review of the hard-stop boundary and QM wording.
+- Human-review the mixed-performance QM wording.
+- Enter `PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE` only with BY3 yaw diagnostic-only and family/dataset/mode-bounded QM claims.
