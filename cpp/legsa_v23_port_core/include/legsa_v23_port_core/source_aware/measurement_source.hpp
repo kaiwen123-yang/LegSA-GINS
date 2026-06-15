@@ -53,6 +53,15 @@ struct SourceMetadata {
   double baseline_length_m = 0.0;
   double rel_acc_m = 0.0;
   bool spike_candidate = false;
+  bool go2_readiness_metadata_available = false;
+  std::string go2_motion_state = "UNKNOWN";
+  std::string go2_contact_label;
+  double go2_readiness_score = 1.0;
+  bool go2_readiness_flag = true;
+  bool go2_stance_stable = false;
+  bool go2_in_place_turn = false;
+  bool go2_impact_or_rough = false;
+  bool go2_readiness_low = false;
 };
 
 struct ObservationInnovation {
@@ -90,6 +99,11 @@ struct SourceWeightResult {
   double scaled_R_trace = 0.0;
   bool accepted = true;
   bool rejected = false;
+  bool go2_readiness_metadata_available = false;
+  std::string go2_motion_state = "UNKNOWN";
+  std::string go2_contact_label;
+  double go2_readiness_score = 1.0;
+  bool go2_readiness_flag = true;
   std::vector<std::string> reason_codes;
   std::string metadata_summary;
 };
@@ -116,6 +130,11 @@ struct SourceAwarePolicyConfig {
   double source_aware_raw_doppler_cap = 15.0;
   double source_aware_go2_attitude_cap = 10.0;
   double source_aware_go2_horizontal_velocity_cap = 10.0;
+  bool source_aware_go2_readiness_lsim_enabled = false;
+  double source_aware_go2_readiness_low_scale = 2.0;
+  double source_aware_go2_impact_or_rough_scale = 2.0;
+  double source_aware_go2_motion_unknown_scale = 1.25;
+  double source_aware_go2_in_place_turn_scale = 1.15;
   bool source_aware_reject_extreme = false;
   bool source_aware_no_R_shrink = true;
   bool source_aware_trace_enabled = true;

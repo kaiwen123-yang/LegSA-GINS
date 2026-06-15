@@ -35,6 +35,8 @@ class GIEngine {
                                 const Go2AttitudeWeakPriorStatus& status);
   void setGo2VelocityDiagnosticPriors(const std::vector<Go2VelocityDiagnosticPriorMeasurement>& measurements,
                                       const Go2VelocityDiagnosticPriorStatus& status);
+  void setGo2ReadinessLsimMetadata(const std::vector<Go2ReadinessLsimMetadataMeasurement>& measurements,
+                                   const Go2ReadinessLsimMetadataStatus& status);
   void setFgoFeedbackObservations(const std::vector<fgo_feedback::FgoFeedbackObservation>& observations,
                                   const fgo_feedback::FgoFeedbackStatus& status);
   void addImuData(const ImuData& imu, bool compensate = false);
@@ -81,6 +83,7 @@ class GIEngine {
   std::size_t go2VelocityDiagnosticPriorUpdateCount() const;
   std::size_t go2VelocityDiagnosticPriorRejectCount() const;
   Go2VelocityDiagnosticPriorStatus go2VelocityDiagnosticPriorStatus() const;
+  Go2ReadinessLsimMetadataStatus go2ReadinessLsimMetadataStatus() const;
   fgo_feedback::FgoFeedbackStatus fgoFeedbackStatus() const;
   std::size_t qaFallbackTraceRowCount() const;
   void writeFgoFeedbackTrace(const std::string& output_dir) const;
@@ -103,6 +106,7 @@ class GIEngine {
   void applyGo2VelocityDiagnosticPriorForTime(double update_time);
   void applyFgoFeedbackForTime(double update_time);
   quality_aware::QAObservation buildQAObservation(const GnssData& gnss) const;
+  void enrichGo2ReadinessMetadata(source_aware::SourceMetadata& metadata, double update_time);
   source_aware::SourceWeightResult applySourceAwareWeighting(
       source_aware::MeasurementSource source,
       const source_aware::SourceMetadata& metadata,
@@ -142,6 +146,8 @@ class GIEngine {
   std::vector<double> go2_pitch_residuals_;
   std::vector<Go2VelocityDiagnosticPriorMeasurement> go2_velocity_diagnostic_priors_;
   Go2VelocityDiagnosticPriorStatus go2_velocity_diagnostic_prior_status_;
+  std::vector<Go2ReadinessLsimMetadataMeasurement> go2_readiness_lsim_metadata_;
+  Go2ReadinessLsimMetadataStatus go2_readiness_lsim_metadata_status_;
   std::vector<fgo_feedback::FgoFeedbackObservation> fgo_feedback_observations_;
   fgo_feedback::FgoFeedbackStatus fgo_feedback_status_;
   std::vector<fgo_feedback::FgoFeedbackTraceRow> fgo_feedback_trace_;

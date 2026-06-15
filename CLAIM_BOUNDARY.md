@@ -2245,3 +2245,32 @@ Still forbidden after PAPER10C:
 - universal superiority or comprehensive final_v23 outperformance;
 - trace online use, final_v23/LegSA output solver input, bad-epoch deletion, or per-case tuning;
 - complete nine-factor FGO or completed `LegSA_QA_Fallback_EKF` claims.
+
+## PAPER10C_R1A Interrupted Go2 BY3 Matrix Resume Boundary
+
+Allowed after PAPER10C_R1A:
+
+- PAPER10C_R1A may state that the interrupted PAPER10C_R1 runtime was scanned without overwriting completed rows.
+- PAPER10C_R1A may state that BY2 Go2 120x6 is closed at 720/720 completed-evaluable rows.
+- PAPER10C_R1A may state that BY3 Go2 providers were recovered from BY3 `by3.txt`, including roll/pitch, horizontal velocity, and readiness/motion-state providers.
+- PAPER10C_R1A may state that BY3 readiness/motion-state enters first-class LSIM metadata in completed G03/G05 rows.
+- PAPER10C_R1A may state that a resume manifest and missing-only wrapper are ready.
+
+Boundary after PAPER10C_R1A:
+
+- BY3 Go2 120x6 remains partial: 543/720 completed-evaluable, 169 missing, and 8 partial/corrupted rows.
+- The missing-only wrapper was not executed because the Windows E free-space gate failed.
+- Go2 can be described as bounded weak-prior and LSIM metadata support, not as a closed main paper innovation.
+- PAPER10B2 multi-state quality management remains future work.
+- BY3 yaw remains diagnostic-only.
+
+Still forbidden after PAPER10C_R1A:
+
+- claiming full BY2/BY3 Go2 full-ablation closure;
+- claiming Go2 position or Go2 yaw as truth;
+- claiming full contact-aided InEKF, full leg odometry, or support-foot FK;
+- claiming BY3 ordinary yaw generalization;
+- claiming universal superiority or final_v23 outperformance;
+- claiming completed PAPER10B2 multi-state quality management;
+- claiming complete nine-factor FGO;
+- using trace online, final_v23/LegSA output as solver input, bad-epoch deletion, or per-case tuning.

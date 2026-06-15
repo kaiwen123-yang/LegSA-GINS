@@ -122,6 +122,43 @@ struct Go2VelocityDiagnosticPriorStatus {
   std::size_t confidence_invalid_count = 0;
 };
 
+struct Go2ReadinessLsimMetadataMeasurement {
+  double time = 0.0;
+  std::string source_status = "inactive";
+  std::string motion_state = "UNKNOWN";
+  std::string contact_label;
+  std::string quality_flag = "nominal";
+  double readiness_score = 1.0;
+  bool readiness_flag = true;
+  bool stance_stable = false;
+  bool in_place_turn = false;
+  bool impact_or_rough = false;
+  bool readiness_low = false;
+  bool source_valid = false;
+};
+
+struct Go2ReadinessLsimMetadataConfig {
+  bool enable_go2_readiness_lsim_metadata = false;
+  std::string go2_readiness_lsim_metadata_path;
+  double go2_readiness_lsim_time_tolerance_sec = 0.10;
+  bool go2_readiness_lsim_default_closed = false;
+};
+
+struct Go2ReadinessLsimMetadataStatus {
+  bool code_present = true;
+  bool solver_enabled = false;
+  std::size_t metadata_count = 0;
+  std::size_t valid_metadata_count = 0;
+  std::size_t matched_metadata_count = 0;
+  std::string provider_status = "metadata_path_missing";
+  std::string source_id = "go2_readiness_motion_state";
+  bool readiness_metadata_first_class_lsim = false;
+  bool trace_solver_input = false;
+  bool final_v23_output_solver_input = false;
+  bool go2_position_truth_claim = false;
+  bool go2_yaw_truth_claim = false;
+};
+
 struct Go2YawRateDiagnosticPriorConfig {
   bool enable_go2_yaw_rate_prior_diagnostic = false;
   std::string go2_yaw_rate_prior_diagnostic_path;

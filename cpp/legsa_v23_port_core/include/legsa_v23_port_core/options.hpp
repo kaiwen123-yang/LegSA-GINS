@@ -79,6 +79,8 @@ struct PortOptions {
   // 中文说明：N7B3 Go2 velocity/contact 只允许 diagnostic-only activation；默认关闭，且不是正式 proposed result。
   Go2VelocityDiagnosticPriorConfig go2_velocity_prior_diagnostic_config;
   Go2VelocityDiagnosticPriorStatus go2_velocity_prior_diagnostic_status;
+  Go2ReadinessLsimMetadataConfig go2_readiness_lsim_metadata_config;
+  Go2ReadinessLsimMetadataStatus go2_readiness_lsim_metadata_status;
   Go2YawRateDiagnosticPriorConfig go2_yaw_rate_prior_diagnostic_config;
   Go2YawRateDiagnosticPriorStatus go2_yaw_rate_prior_diagnostic_status;
   bool go2_diagnostic_prior_only = true;

@@ -25,6 +25,11 @@ struct Go2VelocityDiagnosticPriorLoadResult {
   Go2VelocityDiagnosticPriorStatus status;
 };
 
+struct Go2ReadinessLsimMetadataLoadResult {
+  std::vector<Go2ReadinessLsimMetadataMeasurement> measurements;
+  Go2ReadinessLsimMetadataStatus status;
+};
+
 class Go2WeakPriorLoader {
  public:
   static Go2AttitudeWeakPriorLoadResult loadCsv(const std::string& path,
@@ -32,6 +37,9 @@ class Go2WeakPriorLoader {
   static Go2VelocityDiagnosticPriorLoadResult loadVelocityDiagnosticCsv(
       const std::string& path,
       const Go2VelocityDiagnosticPriorConfig& config);
+  static Go2ReadinessLsimMetadataLoadResult loadReadinessLsimMetadataCsv(
+      const std::string& path,
+      const Go2ReadinessLsimMetadataConfig& config);
 };
 
 }  // namespace legsa_v23_port_core

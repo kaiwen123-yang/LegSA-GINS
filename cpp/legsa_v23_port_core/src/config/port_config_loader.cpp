@@ -468,6 +468,22 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       stringOrDefault(kv,
                       "go2_horizontal_velocity_strength_policy",
                       options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_strength_policy);
+  options.go2_readiness_lsim_metadata_config.enable_go2_readiness_lsim_metadata =
+      boolOrDefault(kv,
+                    "enable_go2_readiness_lsim_metadata",
+                    options.go2_readiness_lsim_metadata_config.enable_go2_readiness_lsim_metadata);
+  options.go2_readiness_lsim_metadata_config.go2_readiness_lsim_metadata_path =
+      stringOrDefault(kv,
+                      "go2_readiness_lsim_metadata_path",
+                      options.go2_readiness_lsim_metadata_config.go2_readiness_lsim_metadata_path);
+  options.go2_readiness_lsim_metadata_config.go2_readiness_lsim_time_tolerance_sec =
+      scalarOrDefault(kv,
+                      "go2_readiness_lsim_time_tolerance_sec",
+                      options.go2_readiness_lsim_metadata_config.go2_readiness_lsim_time_tolerance_sec);
+  options.go2_readiness_lsim_metadata_config.go2_readiness_lsim_default_closed =
+      boolOrDefault(kv,
+                    "go2_readiness_lsim_default_closed",
+                    options.go2_readiness_lsim_metadata_config.go2_readiness_lsim_default_closed);
   options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic =
       boolOrDefault(kv,
                     "enable_go2_yaw_rate_prior_diagnostic",
@@ -540,6 +556,26 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       scalarOrDefault(kv,
                       "source_aware_go2_horizontal_velocity_cap",
                       options.source_aware_policy_config.source_aware_go2_horizontal_velocity_cap);
+  options.source_aware_policy_config.source_aware_go2_readiness_lsim_enabled =
+      boolOrDefault(kv,
+                    "source_aware_go2_readiness_lsim_enabled",
+                    options.source_aware_policy_config.source_aware_go2_readiness_lsim_enabled);
+  options.source_aware_policy_config.source_aware_go2_readiness_low_scale =
+      scalarOrDefault(kv,
+                      "source_aware_go2_readiness_low_scale",
+                      options.source_aware_policy_config.source_aware_go2_readiness_low_scale);
+  options.source_aware_policy_config.source_aware_go2_impact_or_rough_scale =
+      scalarOrDefault(kv,
+                      "source_aware_go2_impact_or_rough_scale",
+                      options.source_aware_policy_config.source_aware_go2_impact_or_rough_scale);
+  options.source_aware_policy_config.source_aware_go2_motion_unknown_scale =
+      scalarOrDefault(kv,
+                      "source_aware_go2_motion_unknown_scale",
+                      options.source_aware_policy_config.source_aware_go2_motion_unknown_scale);
+  options.source_aware_policy_config.source_aware_go2_in_place_turn_scale =
+      scalarOrDefault(kv,
+                      "source_aware_go2_in_place_turn_scale",
+                      options.source_aware_policy_config.source_aware_go2_in_place_turn_scale);
   options.source_aware_policy_config.source_aware_reject_extreme =
       boolOrDefault(kv,
                     "source_aware_reject_extreme",
