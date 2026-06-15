@@ -1,0 +1,29 @@
+timestamp,wsl_root_available_gib,windows_e_free_gib,e_drive_hard_stop_gb,wsl_root_hard_stop_gb,runner_allowed,note
+2026-06-15T11:49:53,763.90,36.31,5.00,20.00,true,pre-run guard
+2026-06-15T11:49:53,763.90,36.31,5.00,20.00,true,before_batch_offset=0
+2026-06-15T11:50:35,763.59,36.25,5.00,20.00,true,before_batch_offset=8
+2026-06-15T11:51:17,763.28,36.00,5.00,20.00,true,before_batch_offset=16
+2026-06-15T11:52:02,762.98,35.72,5.00,20.00,true,before_batch_offset=24
+2026-06-15T11:52:44,762.67,35.41,5.00,20.00,true,before_batch_offset=32
+2026-06-15T11:53:26,762.37,35.09,5.00,20.00,true,before_batch_offset=40
+2026-06-15T11:54:09,762.06,34.78,5.00,20.00,true,before_batch_offset=48
+2026-06-15T11:54:51,761.75,34.50,5.00,20.00,true,before_batch_offset=56
+2026-06-15T11:55:32,761.72,34.19,5.00,20.00,true,rows_done=57
+2026-06-15T11:55:37,761.45,34.19,5.00,20.00,true,before_batch_offset=64
+2026-06-15T11:56:21,761.14,33.87,5.00,20.00,true,before_batch_offset=72
+2026-06-15T11:57:02,760.84,33.56,5.00,20.00,true,before_batch_offset=80
+2026-06-15T11:57:45,760.53,33.25,5.00,20.00,true,before_batch_offset=88
+2026-06-15T11:58:26,760.23,32.97,5.00,20.00,true,before_batch_offset=96
+2026-06-15T11:59:11,759.92,32.66,5.00,20.00,true,before_batch_offset=104
+2026-06-15T11:59:53,759.61,32.34,5.00,20.00,true,before_batch_offset=112
+2026-06-15T12:00:37,759.31,32.03,5.00,20.00,true,rows_done=120
+2026-06-15T12:00:38,759.31,32.03,5.00,20.00,true,before_batch_offset=120
+2026-06-15T12:01:20,759.00,31.72,5.00,20.00,true,before_batch_offset=128
+2026-06-15T12:02:03,758.70,31.44,5.00,20.00,true,before_batch_offset=136
+2026-06-15T12:02:42,758.39,31.12,5.00,20.00,true,before_batch_offset=144
+2026-06-15T12:03:27,758.09,30.81,5.00,20.00,true,before_batch_offset=152
+2026-06-15T12:04:07,757.78,30.50,5.00,20.00,true,before_batch_offset=160
+2026-06-15T12:04:53,757.47,30.22,5.00,20.00,true,before_batch_offset=168
+2026-06-15T12:05:34,757.17,29.91,5.00,20.00,true,before_batch_offset=176
+2026-06-15T12:06:13,757.13,29.59,5.00,20.00,true,rows_done=177
+2026-06-15T12:06:13,757.13,29.59,5.00,20.00,true,post-run guard

@@ -179,6 +179,9 @@ Tracked docs must use aliases only:
 - `<PAPER10C_R1A_STAGE_ROOT>`
 - `<PAPER10C_R1A_C_EXPORT_ROOT>`
 - `<PAPER10C_R1A_OBSIDIAN_SYNC_ROOT>`
+- `<PAPER10C_R1B_STAGE_ROOT>`
+- `<PAPER10C_R1B_C_EXPORT_ROOT>`
+- `<PAPER10C_R1B_OBSIDIAN_SYNC_ROOT>`
 - `<PAPER10B_R2_STAGE_ROOT>`
 
 Actual local absolute paths belong only in ignored `docs/codex_context/DATA_PATHS.local.md`.
@@ -206,7 +209,7 @@ BY3C execution outputs belong under `<BY3C_STAGE_ROOT>` and `<BY3_FULL_MATRIX_RO
 BY3C1/BY3Y1 review outputs belong under `<BY3C1_STAGE_ROOT>`, with the review package under `<BY3C1_REVIEW_PACKAGE_ROOT>`, the yaw diagnostic package under `<BY3Y1_STAGE_ROOT>`, and the export-clean package under `<BY3C1_EXPORT_CLEAN_ROOT>`.
 GEN1 cross-dataset review outputs belong under `<GEN1_STAGE_ROOT>`, with the copy-only BY3 figure organization under `<BY3_FIGURE_SUMMARY_ROOT>` and export-clean material under `<GEN1_EXPORT_CLEAN_ROOT>`.
 XB1 / PG1 poor-GNSS bootstrap outputs belong under `<XB1_STAGE_ROOT>`, with normal-bootstrap runtime material under `<XB1_FULL_MATRIX_ROOT>/XB1A_NORMAL_BOOTSTRAP`, export-clean material under `<XB1_EXPORT_CLEAN_ROOT>`, receiver data represented by `<XB1_RECEIVER_ROOT>`, and body/high-level data represented by `<XB1_BODY_SOURCE>`. XB1A1 blocker-triage and normal-gate repair outputs belong under `<XB1A1_STAGE_ROOT>`, with normal-gate runtime material under `<XB1A1_NORMAL_GATE_ROOT>`. XB1A2 A1 relpos-difference re-audit outputs belong under `<XB1A2_STAGE_ROOT>` and `<XB1A2_RELPOS_DIFF_REPAIR_ROOT>`. PG_MULTI_A0 review outputs belong under `<PG_MULTI_A0_STAGE_ROOT>`, PG_QA0 design outputs belong under `<PG_QA0_STAGE_ROOT>`, and PAPER0 evidence-review outputs belong under `<PAPER0_STAGE_ROOT>`.
-PAPER10C_R1 interrupted Go2/readiness runtime evidence is represented by `<PAPER10C_R1_STAGE_ROOT>`. PAPER10C_R1A resume outputs are represented by `<PAPER10C_R1A_STAGE_ROOT>`, with export-clean material under `<PAPER10C_R1A_C_EXPORT_ROOT>` and vault notes under `<PAPER10C_R1A_OBSIDIAN_SYNC_ROOT>`. Imported PAPER10B_R2 BY3 source-aware material is represented by `<PAPER10B_R2_STAGE_ROOT>`.
+PAPER10C_R1 interrupted Go2/readiness runtime evidence is represented by `<PAPER10C_R1_STAGE_ROOT>`. PAPER10C_R1A resume outputs are represented by `<PAPER10C_R1A_STAGE_ROOT>`, with export-clean material under `<PAPER10C_R1A_C_EXPORT_ROOT>` and vault notes under `<PAPER10C_R1A_OBSIDIAN_SYNC_ROOT>`. PAPER10C_R1B low-space missing-only resume outputs are represented by `<PAPER10C_R1B_STAGE_ROOT>`, with export-clean material under `<PAPER10C_R1B_C_EXPORT_ROOT>` and vault notes under `<PAPER10C_R1B_OBSIDIAN_SYNC_ROOT>`. Imported PAPER10B_R2 BY3 source-aware material is represented by `<PAPER10B_R2_STAGE_ROOT>`.
 BY3 full-matrix placeholders belong under `<BY3_FULL_MATRIX_ROOT>` and do not mean BY3 full matrix was run.
 BY3 receiver source is represented by `<BY3_RECEIVER_ROOT>`.
 BY3 Go2 body/high-level source is represented by `<BY3_GO2_BODY_SOURCE>`.
@@ -912,3 +915,29 @@ Next route:
 - `PAPER10C_R1B_CLEAR_SPACE_AND_RUN_MISSING_ONLY_GO2_BY3_ROWS` after the human clears the space gate and confirms missing-only execution.
 - `PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` only if the manuscript keeps multi-state quality management as a contribution.
 - Do not use R1A to claim full BY2/BY3 Go2 closure, full contact-aided InEKF, full leg odometry, universal superiority, Go2 truth, or completed PAPER10B2.
+
+## PAPER10C_R1B Low-Space BY3 Missing-Only Resume
+
+Completed recovery/execution stage:
+
+```text
+PAPER10C_R1B_LOW_SPACE_BY3_MISSING_ONLY_RESUME
+```
+
+PAPER10C_R1B used the human-approved low-space policy to lower the Windows E hard-stop to 5 GB and WSL root hard-stop to 20 GB. It imported the R1A resume manifest, quarantined only the 8 partial/corrupted BY3 rows, and reran only the 169 missing plus 8 partial/corrupted BY3 rows.
+
+Current R1B evidence:
+
+- BY2 Go2 120x6 remains closed: 720/720 completed-evaluable.
+- BY3 Go2 120x6 is closed: 720/720 completed-evaluable.
+- R1B selected-row runtime: 177/177 completed-evaluable, 0 runtime failures.
+- Completed rows were not overwritten.
+- BY3 Go2 providers remain generated from BY3 `by3.txt`, not BY2.
+- Readiness/motion-state is resolved as first-class LSIM metadata for G03/G05.
+- BY3 yaw remains diagnostic-only.
+
+Next route:
+
+- `PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` is recommended only if the manuscript needs a multi-state quality-management contribution beyond bounded Go2 auxiliary priors.
+- `PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE` can proceed if Go2 is kept as a bounded supporting mechanism.
+- Do not use R1B to claim universal superiority, BY3 ordinary yaw generalization, Go2 position/yaw truth, full contact-aided InEKF, full leg odometry, complete nine-factor FGO, trace online use, final_v23/LegSA solver input, or per-case tuning.

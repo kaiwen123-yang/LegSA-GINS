@@ -2274,3 +2274,30 @@ Still forbidden after PAPER10C_R1A:
 - claiming completed PAPER10B2 multi-state quality management;
 - claiming complete nine-factor FGO;
 - using trace online, final_v23/LegSA output as solver input, bad-epoch deletion, or per-case tuning.
+
+## PAPER10C_R1B Low-Space BY3 Missing-Only Resume Boundary
+
+Allowed after PAPER10C_R1B:
+
+- PAPER10C_R1B may state that the R1A low-space blocker was resolved by a human-approved E hard-stop of 5 GB and WSL root hard-stop of 20 GB.
+- PAPER10C_R1B may state that only BY3 rows marked missing/partial/corrupted were rerun.
+- PAPER10C_R1B may state that BY2 Go2 120x6 remains closed at 720/720 and BY3 Go2 120x6 is now closed at 720/720.
+- PAPER10C_R1B may state that BY3 Go2 providers are by3.txt-derived and not BY2-provider reuse.
+- PAPER10C_R1B may state that readiness/motion-state metadata is first-class LSIM metadata in G03/G05 rows.
+- PAPER10C_R1B may describe Go2 roll/pitch, horizontal velocity, and readiness/motion-state metadata as bounded source-aware auxiliary-prior/LSIM metadata support.
+
+Boundary after PAPER10C_R1B:
+
+- Go2 is a supporting or secondary innovation candidate, not a universal performance-superiority claim.
+- BY3 yaw remains diagnostic-only.
+- Performance effects are mixed, so wording must emphasize mechanism and bounded metadata routing.
+- PAPER10B2 multi-state quality management remains separate future work unless explicitly executed.
+
+Still forbidden after PAPER10C_R1B:
+
+- claiming Go2 position or Go2 yaw as truth;
+- claiming BY3 ordinary yaw generalization;
+- claiming full contact-aided InEKF, full leg odometry, support-foot FK, or complete nine-factor FGO;
+- claiming universal superiority or final_v23 outperformance;
+- using trace online, final_v23/LegSA output as solver input, bad-epoch deletion, or per-case tuning;
+- claiming external DA/LC/GINav/MATLAB/RTKLIB/contact-aided reproduction from this stage.
