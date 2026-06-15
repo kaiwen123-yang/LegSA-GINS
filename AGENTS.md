@@ -1151,3 +1151,31 @@ PAPER10C claim boundary:
 - Do not write Go2 as full contact-aided InEKF, full leg odometry, support-foot FK, Go2-yaw truth, or Go2-position truth.
 - Do not write universal improvement, comprehensive final_v23 outperformance, BY3 ordinary yaw generalization, trace online use, final_v23/LegSA output solver input, or per-case tuning.
 - PAPER10B2 is required only if the paper keeps a multi-state quality-management claim; otherwise PAPER10E may use Go2 as a bounded auxiliary prior while leaving readiness metadata and BY3 Go2 provider generation as future work.
+
+## 41. PAPER10B2 Multi-State Quality Management Closure
+
+`PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` is closed as a conditional hard-stop stage, not a full PASS. It implemented the source-level multi-state QM mechanism and closed BY2, but BY3 stopped at the user-defined E drive hard-stop.
+
+PAPER10B2 proven facts:
+
+- Multi-state QM is implemented as a deterministic source-level state/action/recovery layer above source-aware `SA04_N6B` LSIM/OIM and Go2 `G05_FULL_AUX` readiness/motion-state metadata.
+- Fixed states are `NORMAL`, `DOWNWEIGHT`, `REJECT`, `HOLD`, `RECOVERY`, and `FALLBACK`; each source keeps independent state and counters.
+- Managed sources are `receiver_position`, `receiver_velocity`, `dual_antenna_yaw`, `raw_doppler_velocity`, `go2_attitude_roll_pitch`, and `go2_horizontal_velocity`.
+- QM is default-off through `enable_multi_state_qm=false` / `QM00_OFF`, and `QM_STATE_ACTION_TRACE.csv` records source/action/recovery evidence when enabled.
+- Targeted unit/integration tests and `legsa_v23_port_core_demo` build passed.
+- BY2 QM matrix completed 600/600 rows with state/action trace evidence.
+- BY3 QM matrix completed 579/600 rows before `E_DRIVE_HARD_STOP`; the missing-only resume manifest has 21 rows: 16 mixed rows and 5 normal rows.
+- BY3 yaw remains diagnostic-only. Trace online, final_v23/LegSA output solver input, Go2 position/yaw truth, per-case tuning, and external DA/LC/GINav/MATLAB/RTKLIB/contact-aided/complete FGO remained false.
+
+PAPER10B2 decision:
+
+- Final status is `CONDITIONAL_PASS_QM_RUNTIME_STOPPED_BY_10GB_HARD_STOP`.
+- Current QM evidence enum is `QM_MECHANISM_READY_PERFORMANCE_MIXED`.
+- QM is not yet main-innovation-ready for final paper claims because BY3 did not reach 600/600 and BY2 vertical performance is mixed.
+- The next safe action is to restore E drive space and run only the BY3 missing-only resume manifest, or have the human explicitly accept the hard-stop boundary before PAPER10E.
+
+PAPER10B2 boundaries:
+
+- Do not claim BY3 full QM matrix completion until the 21 missing rows are resumed.
+- Do not write universal superiority, final_v23 outperformance, BY3 ordinary yaw generalization, trace online use, final_v23/LegSA output solver input, Go2 pose/yaw truth, output substitution, per-case tuning, complete nine-factor FGO, or full contact-aided InEKF.
+- Do not treat fallback as output substitution or source-aware LSIM/OIM alone as the complete multi-state QM mechanism.

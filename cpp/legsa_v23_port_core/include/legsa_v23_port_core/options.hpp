@@ -12,6 +12,7 @@
 #include "legsa_v23_port_core/fgo_feedback/fgo_feedback.hpp"
 #include "legsa_v23_port_core/quality_aware/qa_fallback.hpp"
 #include "legsa_v23_port_core/source_aware/measurement_source.hpp"
+#include "legsa_v23_port_core/source_aware/quality_state_manager.hpp"
 #include "legsa_v23_port_core/types.hpp"
 
 #include <string>
@@ -88,6 +89,9 @@ struct PortOptions {
   // 中文说明：N6A source-aware LSIM/OIM 默认关闭；打开后只基于 solver 可见 metadata/innovation 放大 R。
   source_aware::SourceAwarePolicyConfig source_aware_policy_config;
   source_aware::SourceAwareRuntimeStats source_aware_runtime_stats;
+  source_aware::QualityStateManagerConfig quality_state_manager_config;
+  source_aware::QualityStateRuntimeStats quality_state_runtime_stats;
+  bool multi_state_qm = false;
   bool fgo = false;
   // 中文说明：N8G FGO feedback 默认关闭；开启时只能作为 EKF pseudo-measurement update。
   fgo_feedback::FgoFeedbackConfig fgo_feedback_config;

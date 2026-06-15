@@ -15,6 +15,8 @@
 #include "legsa_v23_port_core/factors/raw_doppler_types.hpp"
 #include "legsa_v23_port_core/fgo_feedback/fgo_feedback.hpp"
 #include "legsa_v23_port_core/source_aware/source_aware_policy.hpp"
+#include "legsa_v23_port_core/source_aware/quality_state_manager.hpp"
+#include "legsa_v23_port_core/source_aware/quality_state_trace.hpp"
 #include "legsa_v23_port_core/source_aware/source_aware_trace.hpp"
 
 #include <cstddef>
@@ -89,6 +91,7 @@ class GIEngine {
   void writeFgoFeedbackTrace(const std::string& output_dir) const;
   void writeQAFallbackTrace(const std::string& output_dir) const;
   source_aware::SourceAwareRuntimeStats sourceAwareStats() const;
+  source_aware::QualityStateRuntimeStats qualityStateStats() const;
   void writeSourceAwareTrace(const std::string& output_dir) const;
 
  private:
@@ -157,7 +160,9 @@ class GIEngine {
   double last_fgo_feedback_time_ = -1.0e100;
   quality_aware::QAFallbackSupervisor qa_fallback_supervisor_;
   source_aware::SourceAwarePolicy source_aware_policy_;
+  source_aware::QualityStateManager quality_state_manager_;
   source_aware::SourceAwareTrace source_aware_trace_;
+  source_aware::QualityStateTrace quality_state_trace_;
   bool initialized_ = false;
 };
 

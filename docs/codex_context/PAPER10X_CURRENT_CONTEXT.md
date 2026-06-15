@@ -52,4 +52,11 @@ PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE
 PAPER10F_FIGURE_TABLE_AND_MANUSCRIPT_EXPERIMENT_SECTION
 ```
 
-PAPER10C is mandatory. PAPER10B2 is conditional on keeping multi-state quality management as a contribution. PAPER10D is optional and should not be the first priority.
+PAPER10C was mandatory and later closed through PAPER10C_R1B. PAPER10B2 was executed after PAPER10Y as `CONDITIONAL_PASS_QM_RUNTIME_STOPPED_BY_10GB_HARD_STOP`: QM code and BY2 600/600 are closed, but BY3 stopped at 579/600 with 21 missing-only rows. PAPER10D remains optional and should not be the first priority.
+
+## Later PAPER10B2 Status
+
+- Multi-state QM is implemented above source-aware `SA04_N6B` and Go2 `G05_FULL_AUX` readiness/motion-state metadata.
+- Current QM enum is `QM_MECHANISM_READY_PERFORMANCE_MIXED`, not `QM_MAIN_INNOVATION_READY`.
+- BY3 yaw remains diagnostic-only.
+- Do not enter final PAPER10E claim wording as if BY3 600/600 were complete unless the missing-only resume is run or the human explicitly accepts the hard-stop boundary.

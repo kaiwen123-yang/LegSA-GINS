@@ -19,6 +19,7 @@ struct Args {
   bool dry_run_synthetic_math = false;
   bool dry_run_raw_doppler_toy = false;
   bool dry_run_source_aware_toy = false;
+  bool dry_run_quality_state_toy = false;
   bool dry_run_go2_weak_prior_toy = false;
   bool dry_run_qa_fallback_toy = false;
   bool debug_update_timeline = false;
@@ -44,6 +45,8 @@ Args parseArgs(int argc, char** argv) {
       args.dry_run_raw_doppler_toy = true;
     } else if (token == "--dry-run-source-aware-toy") {
       args.dry_run_source_aware_toy = true;
+    } else if (token == "--dry-run-quality-state-toy") {
+      args.dry_run_quality_state_toy = true;
     } else if (token == "--dry-run-go2-weak-prior-toy") {
       args.dry_run_go2_weak_prior_toy = true;
     } else if (token == "--dry-run-qa-fallback-toy") {
@@ -93,6 +96,10 @@ int main(int argc, char** argv) {
       legsa_v23_port_core::PortRuntime::runSourceAwareToy(args.output_dir);
       return 0;
     }
+    if (args.dry_run_quality_state_toy) {
+      legsa_v23_port_core::PortRuntime::runQualityStateToy(args.output_dir);
+      return 0;
+    }
     if (args.dry_run_go2_weak_prior_toy) {
       legsa_v23_port_core::PortRuntime::runGo2WeakPriorToy(args.output_dir);
       return 0;
@@ -114,7 +121,8 @@ int main(int argc, char** argv) {
     }
     std::cerr << "usage: legsa_v23_port_core_demo "
               << "--dry-run-toy|--dry-run-synthetic-math|--dry-run-raw-doppler-toy|"
-              << "--dry-run-source-aware-toy|--dry-run-go2-weak-prior-toy|--dry-run-qa-fallback-toy|--config <path> --output-dir <dir> "
+              << "--dry-run-source-aware-toy|--dry-run-quality-state-toy|--dry-run-go2-weak-prior-toy|"
+              << "--dry-run-qa-fallback-toy|--config <path> --output-dir <dir> "
               << "[--debug-update-timeline --debug-overclose-audit --debug-measurement-copy-guard "
               << "--debug-covariance-gain --debug-output-dir <dir> --debug-max-rows <N>]\n";
     return 2;

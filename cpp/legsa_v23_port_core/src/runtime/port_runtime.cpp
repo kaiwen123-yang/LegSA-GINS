@@ -73,6 +73,9 @@ void copyRawDopplerStatus(const GIEngine& engine, PortOptions& options) {
 void copySourceAwareStatus(const GIEngine& engine, PortOptions& options) {
   // 中文说明：source-aware stats 来自 EKFUpdate 前的 R scale trace；不是评价结果反向调参。
   options.source_aware_runtime_stats = engine.sourceAwareStats();
+  options.quality_state_runtime_stats = engine.qualityStateStats();
+  options.multi_state_qm = options.quality_state_manager_config.enable_multi_state_qm &&
+                           options.quality_state_manager_config.multi_state_qm_mode != "QM00_OFF";
   options.lsim_oim = options.source_aware_policy_config.enable_source_aware_weighting &&
                      options.source_aware_policy_config.source_aware_mode != "off";
 }
@@ -605,6 +608,204 @@ void PortRuntime::runSourceAwareToy(const std::string& output_dir) {
   engine.writeSourceAwareTrace(output_dir);
 }
 
+void PortRuntime::runQualityStateToy(const std::string& output_dir) {
+  PortOptions options;
+  options.phase = "PAPER10B2";
+  options.port_role = "source_level_multi_state_quality_management_toy";
+  options.run_label = "PAPER10B2_quality_state_toy";
+  options.algorithm_id = "LegSA-GINS_multi_state_QM";
+  options.starttime = 0.0;
+  options.init_pos_blh_rad_m = makeVec3(Earth::degToRad(30.0), Earth::degToRad(120.0), 10.0);
+  options.init_vel_ned_mps = makeVec3(0.2, 0.0, 0.0);
+  options.init_att_rad = makeVec3(0.0, 0.0, Earth::degToRad(5.0));
+  options.raw_doppler_factor_code_present = true;
+  options.raw_doppler_config.enable_raw_doppler = true;
+  options.raw_doppler_config.raw_doppler_solver_enabled = true;
+  options.raw_doppler_config.raw_doppler_min_sat = 5;
+  options.raw_doppler_config.raw_doppler_residual_gate_mps = 30.0;
+  options.raw_doppler_config.raw_doppler_time_tolerance_sec = 0.03;
+  options.raw_doppler_config.raw_doppler_factor_source = "SYNTHETIC_QM_TOY";
+  options.go2_attitude_prior_config.enable_go2_attitude_weak_prior = true;
+  options.go2_attitude_prior_config.go2_attitude_prior_sourceaware = true;
+  options.go2_attitude_prior_config.go2_attitude_prior_time_tolerance_sec = 0.03;
+  options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic = true;
+  options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior = true;
+  options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_source_aware_enabled = true;
+  options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_time_tolerance_sec = 0.03;
+  options.go2_readiness_lsim_metadata_config.enable_go2_readiness_lsim_metadata = true;
+  options.go2_readiness_lsim_metadata_config.go2_readiness_lsim_time_tolerance_sec = 0.04;
+  options.source_aware_policy_config.enable_source_aware_weighting = true;
+  options.source_aware_policy_config.source_aware_policy_version = "n6b_conservative_innovation_covariance";
+  options.source_aware_policy_config.source_aware_mode = "lsim_oim";
+  options.source_aware_policy_config.source_aware_max_R_scale = 25.0;
+  options.source_aware_policy_config.source_aware_global_cap = 25.0;
+  options.source_aware_policy_config.source_aware_use_innovation_covariance = true;
+  options.source_aware_policy_config.source_aware_deadband_normalized = 1.5;
+  options.source_aware_policy_config.source_aware_moderate_normalized = 2.5;
+  options.source_aware_policy_config.source_aware_strong_normalized = 4.0;
+  options.source_aware_policy_config.source_aware_no_R_shrink = true;
+  options.source_aware_policy_config.source_aware_trace_enabled = true;
+  options.source_aware_policy_config.source_aware_go2_readiness_lsim_enabled = true;
+  options.quality_state_manager_config.enable_multi_state_qm = true;
+  options.quality_state_manager_config.multi_state_qm_mode = "QM04_FULL";
+  options.quality_state_manager_config.multi_state_qm_trace_enabled = true;
+  options.quality_state_manager_config.qm_downweight_threshold = 2.0;
+  options.quality_state_manager_config.qm_reject_threshold = 3.5;
+  options.quality_state_manager_config.qm_hold_enter_count = 3;
+  options.quality_state_manager_config.qm_hold_length = 3;
+  options.quality_state_manager_config.qm_recovery_count = 2;
+  options.quality_state_manager_config.qm_fallback_enter_count = 2;
+  options.quality_state_manager_config.qm_fallback_exit_count = 2;
+  options.quality_state_manager_config.qm_fallback_max_duration = 3;
+  options.lsim_oim = true;
+  options.multi_state_qm = true;
+  options.paper_performance_claim = false;
+  options.proposed_factor_claim = false;
+
+  std::vector<RawDopplerVelocityMeasurement> raw_measurements;
+  std::vector<Go2AttitudeWeakPriorMeasurement> attitude_priors;
+  std::vector<Go2VelocityDiagnosticPriorMeasurement> velocity_priors;
+  std::vector<Go2ReadinessLsimMetadataMeasurement> readiness_metadata;
+  for (int k = 2; k <= 10; ++k) {
+    const double time = 0.1 * static_cast<double>(k);
+    const bool anomaly = k >= 4 && k <= 6;
+    const bool recovery = k >= 8;
+    RawDopplerVelocityMeasurement raw;
+    raw.time = time;
+    raw.velocity_ned_mps = anomaly ? makeVec3(6.5, -4.0, 0.0) : options.init_vel_ned_mps;
+    raw.std_ned_mps = makeVec3(0.05, 0.05, 0.05);
+    raw.sat_count = anomaly ? 4 : 8;
+    raw.gdop_like = anomaly ? 8.0 : 1.5;
+    raw.provider_status = anomaly ? "available" : "available";
+    raw_measurements.push_back(raw);
+
+    Go2AttitudeWeakPriorMeasurement attitude;
+    attitude.time = time;
+    attitude.roll_rad = anomaly ? Earth::degToRad(20.0) : Earth::degToRad(0.2);
+    attitude.pitch_rad = anomaly ? Earth::degToRad(-15.0) : Earth::degToRad(-0.2);
+    attitude.std_roll_rad = Earth::degToRad(anomaly ? 1.0 : 5.0);
+    attitude.std_pitch_rad = Earth::degToRad(anomaly ? 1.0 : 5.0);
+    attitude.source_status = "active";
+    attitude.quality_flag = anomaly ? "rough_motion" : "nominal";
+    attitude_priors.push_back(attitude);
+
+    Go2VelocityDiagnosticPriorMeasurement velocity;
+    velocity.time = time;
+    velocity.velocity_ned_mps = anomaly ? makeVec3(-3.0, 3.5, 0.0) : options.init_vel_ned_mps;
+    velocity.std_ned_mps = makeVec3(0.3, 0.3, 999.0);
+    velocity.source_status = "active";
+    velocity.quality_flag = anomaly ? "rough_motion" : "nominal";
+    velocity.contact_label = recovery ? "stable_stance" : "nominal";
+    velocity.prior_policy = "horizontal_2d_qm_toy";
+    velocity.diagnostic_only = true;
+    velocity.go2_velocity_truth_claim = false;
+    velocity_priors.push_back(velocity);
+
+    Go2ReadinessLsimMetadataMeasurement readiness;
+    readiness.time = time;
+    readiness.source_status = "active";
+    readiness.source_valid = true;
+    readiness.motion_state = anomaly ? "impact_or_rough" : "steady_walk";
+    readiness.contact_label = recovery ? "stable_stance" : "nominal";
+    readiness.readiness_score = anomaly ? 0.2 : 0.95;
+    readiness.readiness_flag = !anomaly;
+    readiness.stance_stable = recovery;
+    readiness.in_place_turn = k == 7;
+    readiness.impact_or_rough = anomaly;
+    readiness.readiness_low = anomaly;
+    readiness_metadata.push_back(readiness);
+  }
+  RawDopplerFactorStatus raw_status;
+  raw_status.solver_enabled = true;
+  raw_status.provider_status = "available";
+  raw_status.epoch_count = raw_measurements.size();
+  raw_status.valid_epoch_count = raw_measurements.size();
+  raw_status.factor_source = "SYNTHETIC_QM_TOY";
+  Go2AttitudeWeakPriorStatus attitude_status;
+  attitude_status.solver_enabled = true;
+  attitude_status.provider_status = "available";
+  attitude_status.prior_count = attitude_priors.size();
+  attitude_status.valid_prior_count = attitude_priors.size();
+  Go2VelocityDiagnosticPriorStatus velocity_status;
+  velocity_status.solver_enabled = true;
+  velocity_status.provider_status = "available";
+  velocity_status.prior_count = velocity_priors.size();
+  velocity_status.valid_prior_count = velocity_priors.size();
+  velocity_status.horizontal_only = true;
+  velocity_status.vertical_disabled = true;
+  velocity_status.controlled_activation = true;
+  Go2ReadinessLsimMetadataStatus readiness_status;
+  readiness_status.solver_enabled = true;
+  readiness_status.provider_status = "available";
+  readiness_status.metadata_count = readiness_metadata.size();
+  readiness_status.valid_metadata_count = readiness_metadata.size();
+
+  GIEngine engine(options);
+  engine.setRawDopplerVelocityMeasurements(raw_measurements, raw_status);
+  engine.setGo2AttitudeWeakPriors(attitude_priors, attitude_status);
+  engine.setGo2VelocityDiagnosticPriors(velocity_priors, velocity_status);
+  engine.setGo2ReadinessLsimMetadata(readiness_metadata, readiness_status);
+  engine.initialize(makeInitialState(options));
+  std::vector<NavState> states;
+  std::vector<std::vector<double>> covariances;
+  appendState(engine, states, covariances);
+
+  ImuData first;
+  first.time = 0.0;
+  first.dt = 0.01;
+  engine.addImuData(first, true);
+  for (int i = 1; i <= 120; ++i) {
+    ImuData imu;
+    imu.time = 0.01 * static_cast<double>(i);
+    imu.dt = 0.01;
+    imu.dtheta = makeVec3(0.0, 0.0, 0.0);
+    imu.dvel = makeVec3(0.0, 0.0, -Earth::gravity(options.init_pos_blh_rad_m) * imu.dt);
+    if (i % 10 == 0 && i >= 20 && i <= 100) {
+      const bool anomaly = i >= 40 && i <= 60;
+      GnssData gnss;
+      gnss.time = imu.time;
+      const double north_offset = anomaly ? 35.0 : 0.0;
+      const double east_offset = anomaly ? -25.0 : 0.0;
+      const Matrix3 dri = Earth::DRi(engine.navState().pos_blh_rad_m);
+      gnss.blh_rad_m = add(engine.navState().pos_blh_rad_m, multiply(dri, makeVec3(north_offset, east_offset, 0.0)));
+      gnss.std_ned_m = anomaly ? makeVec3(0.2, 0.2, 0.3) : makeVec3(0.5, 0.5, 0.8);
+      gnss.vel_ned_mps = anomaly ? makeVec3(4.0, -3.0, 0.0) : engine.navState().vel_ned_mps;
+      gnss.vel_std_mps = anomaly ? makeVec3(0.05, 0.05, 0.05) : makeVec3(0.1, 0.1, 0.1);
+      gnss.yaw_rad = anomaly ? engine.navState().euler_rad[2] + Earth::degToRad(12.0)
+                              : engine.navState().euler_rad[2];
+      gnss.yaw_deg = Earth::radToDeg(gnss.yaw_rad);
+      gnss.yaw_std_rad = anomaly ? Earth::degToRad(2.0) : Earth::degToRad(1.0);
+      gnss.yaw_std_deg = Earth::radToDeg(gnss.yaw_std_rad);
+      gnss.has_yaw = true;
+      gnss.has_velocity = true;
+      gnss.isvalid = true;
+      engine.addGnssData(gnss);
+    }
+    engine.addImuData(imu);
+    engine.newImuProcess();
+    if (!engine.checkCov()) {
+      throw std::runtime_error("quality state toy covariance check failed");
+    }
+    appendState(engine, states, covariances);
+  }
+
+  copyRawDopplerStatus(engine, options);
+  copySourceAwareStatus(engine, options);
+  copyGo2AttitudePriorStatus(engine, options);
+  copyGo2DiagnosticPriorStatus(engine, options);
+  copyGo2ReadinessLsimStatus(engine, options);
+  options.propagation_count = engine.propagationCount();
+  options.measurement_update_count = engine.updateCount();
+  options.position_update_count = engine.positionUpdateCount();
+  options.velocity_update_count = engine.velocityUpdateCount();
+  options.yaw_update_count = engine.yawUpdateCount();
+  options.yaw_normal_count = engine.yawNormalCount();
+  options.yaw_downweight_count = engine.yawDownweightCount();
+  options.yaw_reject_count = engine.yawRejectCount();
+  writeAll(output_dir, options, states, covariances);
+  engine.writeSourceAwareTrace(output_dir);
+}
+
 // 中文说明：N7A toy 验证 Go2 roll/pitch weak prior 的 EKF pull，不使用 trace/final_v23 输出。
 void PortRuntime::runGo2WeakPriorToy(const std::string& output_dir) {
   PortOptions options;
@@ -817,6 +1018,17 @@ void PortRuntime::runFromConfig(const std::string& config_path,
                                                 : "source_aware_lsim_oim_policy_refinement";
     options.run_label = options.ablation_variant.empty() ? options.phase + "_source_aware_run" : options.ablation_variant;
     options.lsim_oim = true;
+  }
+  if (options.quality_state_manager_config.enable_multi_state_qm &&
+      options.quality_state_manager_config.multi_state_qm_mode != "QM00_OFF") {
+    options.phase = "PAPER10B2";
+    options.port_role = "source_level_multi_state_quality_management";
+    options.run_label = options.ablation_variant.empty() ? "PAPER10B2_multi_state_qm_run" : options.ablation_variant;
+    options.algorithm_id = options.algorithm_id.empty() ? "LegSA-GINS_multi_state_QM" : options.algorithm_id;
+    options.multi_state_qm = true;
+    options.paper_performance_claim = false;
+    options.proposed_factor_claim = false;
+    options.performance_claim = false;
   }
   if (options.go2_attitude_prior_config.enable_go2_attitude_weak_prior) {
     // 中文说明：N7A 在 N6B source-aware layer 后激活 Go2 roll/pitch weak prior，仍不声明 paper performance。

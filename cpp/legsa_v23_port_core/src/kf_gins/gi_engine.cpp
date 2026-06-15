@@ -100,7 +100,8 @@ GIEngine::GIEngine(PortOptions options)
       Qc_(NOISERANK, NOISERANK, 0.0),
       dx_(RANK, 0.0),
       qa_fallback_supervisor_(options_.qa_fallback_config),
-      source_aware_policy_(options_.source_aware_policy_config) {
+      source_aware_policy_(options_.source_aware_policy_config),
+      quality_state_manager_(options_.quality_state_manager_config) {
   initializeQc();
 }
 
@@ -692,10 +693,17 @@ source_aware::SourceAwareRuntimeStats GIEngine::sourceAwareStats() const {
   return source_aware_trace_.stats();
 }
 
+source_aware::QualityStateRuntimeStats GIEngine::qualityStateStats() const {
+  return quality_state_trace_.stats();
+}
+
 void GIEngine::writeSourceAwareTrace(const std::string& output_dir) const {
   // 中文说明：SOURCE_AWARE_WEIGHT_TRACE 是 runtime-only 审计文件，不允许作为 solver 输入。
   if (options_.source_aware_policy_config.source_aware_trace_enabled) {
     source_aware_trace_.writeCsv(output_dir);
+  }
+  if (quality_state_manager_.traceEnabled()) {
+    quality_state_trace_.writeCsv(output_dir);
   }
 }
 
@@ -1390,12 +1398,28 @@ source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(
   metadata_copy.residual_norm = innovation.residual_norm;
   enrichGo2ReadinessMetadata(metadata_copy, metadata_copy.time);
   source_aware::SourceWeightResult result = source_aware_policy_.evaluate(metadata_copy, innovation);
-  if (source_aware_policy_.enabledFor(source)) {
+  source_aware::QualityStateDecision quality_decision;
+  if (quality_state_manager_.enabled()) {
+    quality_decision = quality_state_manager_.evaluate(metadata_copy, innovation, result);
+    if (quality_decision.action_alters_update) {
+      result.accepted = quality_decision.accepted;
+      result.rejected = quality_decision.rejected;
+      result.combined_R_scale =
+          std::min(result.source_cap, std::max(1.0, result.combined_R_scale * quality_decision.r_scale_multiplier));
+    }
+  }
+  const bool source_aware_active = source_aware_policy_.enabledFor(source);
+  const bool qm_active_scaling =
+      quality_state_manager_.enabled() && quality_decision.action_alters_update && !quality_decision.rejected;
+  if (source_aware_active || qm_active_scaling) {
     scaled_R = scale(R, result.combined_R_scale);
     result.scaled_R_trace = matrixTrace(scaled_R);
-    if (options_.source_aware_policy_config.source_aware_trace_enabled) {
+    if (source_aware_active && options_.source_aware_policy_config.source_aware_trace_enabled) {
       source_aware_trace_.add(metadata_copy.time, update_count_ + 1, result);
     }
+  }
+  if (quality_state_manager_.traceEnabled()) {
+    quality_state_trace_.add(metadata_copy.time, update_count_ + 1, result, quality_decision);
   }
   return result;
 }

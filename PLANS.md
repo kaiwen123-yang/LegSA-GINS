@@ -973,3 +973,35 @@ Next route:
 
 - `PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE` is recommended if the manuscript keeps multi-state quality management as one of the three main innovations.
 - `PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE` remains the conservative route if multi-state quality management is downgraded.
+
+## PAPER10B2 Multi-State Quality Management Closure
+
+Conditional hard-stop stage:
+
+```text
+PAPER10B2_MULTI_STATE_QUALITY_MANAGEMENT_CLOSURE
+```
+
+PAPER10B2 implemented a real source-level multi-state QM layer above `SA04_N6B` source-aware LSIM/OIM and Go2 `G05_FULL_AUX` readiness/motion-state metadata. The fixed states are `NORMAL`, `DOWNWEIGHT`, `REJECT`, `HOLD`, `RECOVERY`, and `FALLBACK`; sources keep independent state/action/recovery traces. The mechanism is default-off under `QM00_OFF`.
+
+Current evidence:
+
+- Targeted PAPER10B2 unit/integration tests passed and `legsa_v23_port_core_demo` built successfully.
+- BY2 QM matrix completed 600/600 rows.
+- BY3 QM matrix stopped at 579/600 rows because `E_DRIVE_HARD_STOP` triggered at the user-defined 10 GB threshold.
+- Missing-only BY3 resume manifest contains 21 rows: 16 mixed rows and 5 normal rows.
+- BY3 yaw remains diagnostic-only.
+- No external DA/LC/GINav/MATLAB/RTKLIB/contact-aided/complete FGO, trace online, final_v23/LegSA solver input, per-case tuning, output substitution, or Go2 position/yaw truth was used.
+
+Current route decision:
+
+- Final status: `CONDITIONAL_PASS_QM_RUNTIME_STOPPED_BY_10GB_HARD_STOP`.
+- QM evidence enum: `QM_MECHANISM_READY_PERFORMANCE_MIXED`.
+- Do not promote QM to `QM_MAIN_INNOVATION_READY` until BY3 missing-only rows are resumed and the mixed BY2/BY3 effects are reviewed.
+
+Recommended next actions:
+
+- Restore E drive free space above the hard-stop margin.
+- Run only the BY3 missing-only resume manifest; do not overwrite completed rows.
+- Re-run export QA and update the final claim decision.
+- Enter `PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE` only after human review of the hard-stop boundary and QM wording.
