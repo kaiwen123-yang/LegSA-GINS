@@ -2446,3 +2446,28 @@ Still forbidden after PAPER10G_R2A:
 - claiming author-official exact reproduction, raw joint FK, full contact-aided exact reproduction, full GTSAM/iSAM2 graph, or Teng tracking-camera branch execution;
 - claiming LSE absolute yaw/global position, LegSA-GINS universal superiority, final_v23 outperformance, BY3 ordinary yaw generalization, Go2 yaw/position truth, GNSS dual-yaw input to LSE, trace online use, final_v23/LegSA output as solver input, output substitution, bad-epoch deletion, per-case tuning, DA, LC, GINav, MATLAB, RTKLIB, LegSA final matrix, degradation matrix, or complete nine-factor FGO;
 - committing raw PDF, by2/by3 text, receiver raw files, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, archives, core dumps, runtime-heavy outputs, or files over 50 MB.
+
+## PAPER10G_R3 LSE Fidelity Upgrade Boundary
+
+Allowed after PAPER10G_R3:
+
+- PAPER10G_R3 may state that the Go2 URDF zip was hash-locked, extracted in runtime-only storage, parsed, and used to lock the four Go2 base-to-foot FK chains.
+- PAPER10G_R3 may state that FL/FR/RL/RR each have hip, thigh, calf, and foot fixed-link chain evidence in the parsed URDF.
+- PAPER10G_R3 may state that the raw-FK upgrade was attempted but blocked because timestamped BY2/BY3 raw lowstate `motor_state.q/dq` was not found.
+- PAPER10G_R3 may state that `sportmodestate.foot_position_body` remains a high-level kinematic proxy and is not raw joint FK.
+- PAPER10G_R3 may state that C1-C9 claim repair was generated and that C6-C9 remain forbidden by physics/data contract.
+
+Boundary after PAPER10G_R3:
+
+- URDF/FK-chain identity is upgraded; BY2/BY3 raw FK execution is not upgraded.
+- Hartley official code availability does not close author-official exact reproduction because no compatible Go2 official adapter/sample run was executed.
+- LSE04 remains below full GTSAM/iSAM2 contact factor graph reproduction because local GTSAM was not available and raw FK is blocked.
+- LSE05 tracking-camera branch remains blocked because no synchronized tracking-camera/VIO velocity source was proven.
+- R2A repaired proxy metrics remain the numeric LSE comparison source unless a later raw joint data source closes the raw-FK provider.
+
+Still forbidden after PAPER10G_R3:
+
+- claiming author-official exact reproduction, raw joint FK, full Hartley official adapter, full GTSAM/iSAM2 factor graph, or Teng tracking-camera branch execution;
+- relabeling high-level `foot_position_body` / `foot_speed_body` as raw joint encoder FK;
+- claiming LSE absolute yaw/global position, LegSA-GINS universal superiority over LSE, BY3 ordinary yaw generalization, Go2 yaw/position truth, GNSS dual-yaw input to LSE, trace online use, final_v23/LegSA output as solver input, output substitution, bad-epoch deletion, per-case tuning, DA, LC, GINav, MATLAB, RTKLIB, LegSA final matrix, degradation matrix, or complete nine-factor FGO;
+- committing raw PDF, raw lowstate/rosbag, by2/by3 text, Go2 URDF zip, extracted URDF trees, generated images/PDFs, archives, core dumps, runtime-heavy outputs, or files over 50 MB.

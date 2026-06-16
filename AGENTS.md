@@ -1261,3 +1261,25 @@ PAPER10G_R2A boundaries:
 - Absolute yaw RMSE remains `NOT_APPLICABLE_WITH_PROOF`; LSE methods provide local proprioceptive odometry/attitude/velocity context and cannot replace short lateral dual-antenna GNSS yaw.
 - No Go2 yaw/position truth, GNSS dual-yaw input to LSE, trace online use, final_v23/LegSA output solver input, DA, LC, GINav, MATLAB, RTKLIB, LegSA final matrix, degradation matrix, complete FGO, per-case tuning, output substitution, or bad-epoch deletion was used.
 - Generated figures and full recompute result CSVs remain runtime/C-export artifacts only and must not be staged.
+
+## 45. PAPER10G_R3 LSE Fidelity Upgrade Raw FK Official Adapters
+
+`PAPER10G_R3_LSE_FIDELITY_UPGRADE_RAW_FK_OFFICIAL_ADAPTERS` is a fidelity-upgrade audit after PAPER10G_R2A. It uses the user-provided Go2 URDF zip as read-only runtime material, locks the URDF identity and Go2 leg FK chains, scans for raw lowstate joint `q/dq`, checks official-code/GTSAM/Teng tracking-camera feasibility, and repairs C1-C9 claim boundaries.
+
+PAPER10G_R3 proven facts:
+
+- The Go2 URDF zip is hash-locked and extracted runtime-only; the primary URDF parses successfully.
+- The URDF contains four base-to-foot Go2 leg chains with hip, thigh, and calf joints for FL/FR/RL/RR.
+- Lowstate motor order remains unconfirmed because BY2/BY3 timestamped raw `motor_state.q/dq` streams were not found.
+- Raw FK provider generation is `BLOCKED_WITH_PROOF`; `sportmodestate.foot_position_body` remains a high-level proxy, not raw joint FK.
+- Hartley author-official exact reproduction is not closed; MATLAB/Simulink official example availability does not equal a Go2 official adapter run.
+- LSE04 remains below full GTSAM/iSAM2 closure because local GTSAM was not available and raw FK is blocked.
+- Teng tracking-camera branch remains blocked because no synchronized tracking-camera/VIO velocity source was proven.
+- Absolute yaw remains `NOT_APPLICABLE_WITH_PROOF`; Go2 yaw/position remain forbidden as truth; BY3 yaw remains diagnostic-only.
+
+PAPER10G_R3 boundaries:
+
+- Do not claim author-official exact reproduction, raw joint FK, full Hartley InEKF official adapter, full GTSAM/iSAM2 factor graph, or Teng tracking-camera branch execution from R3.
+- Do not relabel high-level `foot_position_body` / `foot_speed_body` as raw FK or raw joint encoder output.
+- Do not write LSE absolute yaw/global position, LegSA-GINS universal superiority over LSE, BY3 ordinary yaw generalization, Go2 yaw/position truth, trace online use, GNSS dual-yaw as LSE input, final_v23/LegSA output as solver input, DA, LC, GINav, MATLAB, RTKLIB, LegSA final matrix, degradation matrix, complete FGO, per-case tuning, or output substitution.
+- URDF zip, extracted URDF trees, raw data, by2/by3 files, images/PDFs, and runtime-heavy outputs must remain untracked.

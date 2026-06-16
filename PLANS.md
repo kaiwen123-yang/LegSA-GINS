@@ -134,6 +134,10 @@ PAPER10Y_archive_verified=true
 PAPER10Y_verified_wsl_cleanup=true
 PAPER10Y_vhdx_compact=pending_windows_manual
 ready_for_PAPER10B2_multi_state_quality_management_closure=closed_by_R1_performance_mixed
+ready_for_PAPER10G_R3_fidelity_upgrade=complete_urdf_locked_raw_joint_blocked
+PAPER10G_R3_raw_fk_provider=blocked_no_by2_by3_raw_joint_qdq
+PAPER10G_R3_official_adapters=blocked_or_partial_no_exact_run
+PAPER10G_R3_absolute_yaw=not_applicable_with_proof
 ready_for_QA1=false
 ready_for_PG2_or_XB1_degradation_planning=false
 ready_for_BY3D_or_other_dataset_planning=true_after_human_review
@@ -191,6 +195,9 @@ Tracked docs must use aliases only:
 - `<PAPER10C_R1B_C_EXPORT_ROOT>`
 - `<PAPER10C_R1B_OBSIDIAN_SYNC_ROOT>`
 - `<PAPER10B_R2_STAGE_ROOT>`
+- `<PAPER10G_R3_STAGE_ROOT>`
+- `<PAPER10G_R3_C_EXPORT_ROOT>`
+- `<PAPER10G_R3_OBSIDIAN_SYNC_ROOT>`
 
 Actual local absolute paths belong only in ignored `docs/codex_context/DATA_PATHS.local.md`.
 
@@ -218,6 +225,7 @@ BY3C1/BY3Y1 review outputs belong under `<BY3C1_STAGE_ROOT>`, with the review pa
 GEN1 cross-dataset review outputs belong under `<GEN1_STAGE_ROOT>`, with the copy-only BY3 figure organization under `<BY3_FIGURE_SUMMARY_ROOT>` and export-clean material under `<GEN1_EXPORT_CLEAN_ROOT>`.
 XB1 / PG1 poor-GNSS bootstrap outputs belong under `<XB1_STAGE_ROOT>`, with normal-bootstrap runtime material under `<XB1_FULL_MATRIX_ROOT>/XB1A_NORMAL_BOOTSTRAP`, export-clean material under `<XB1_EXPORT_CLEAN_ROOT>`, receiver data represented by `<XB1_RECEIVER_ROOT>`, and body/high-level data represented by `<XB1_BODY_SOURCE>`. XB1A1 blocker-triage and normal-gate repair outputs belong under `<XB1A1_STAGE_ROOT>`, with normal-gate runtime material under `<XB1A1_NORMAL_GATE_ROOT>`. XB1A2 A1 relpos-difference re-audit outputs belong under `<XB1A2_STAGE_ROOT>` and `<XB1A2_RELPOS_DIFF_REPAIR_ROOT>`. PG_MULTI_A0 review outputs belong under `<PG_MULTI_A0_STAGE_ROOT>`, PG_QA0 design outputs belong under `<PG_QA0_STAGE_ROOT>`, and PAPER0 evidence-review outputs belong under `<PAPER0_STAGE_ROOT>`.
 PAPER10C_R1 interrupted Go2/readiness runtime evidence is represented by `<PAPER10C_R1_STAGE_ROOT>`. PAPER10C_R1A resume outputs are represented by `<PAPER10C_R1A_STAGE_ROOT>`, with export-clean material under `<PAPER10C_R1A_C_EXPORT_ROOT>` and vault notes under `<PAPER10C_R1A_OBSIDIAN_SYNC_ROOT>`. PAPER10C_R1B low-space missing-only resume outputs are represented by `<PAPER10C_R1B_STAGE_ROOT>`, with export-clean material under `<PAPER10C_R1B_C_EXPORT_ROOT>` and vault notes under `<PAPER10C_R1B_OBSIDIAN_SYNC_ROOT>`. Imported PAPER10B_R2 BY3 source-aware material is represented by `<PAPER10B_R2_STAGE_ROOT>`.
+PAPER10G_R3 fidelity-upgrade outputs are represented by `<PAPER10G_R3_STAGE_ROOT>`, with lightweight export material under `<PAPER10G_R3_C_EXPORT_ROOT>` and project-vault notes under `<PAPER10G_R3_OBSIDIAN_SYNC_ROOT>`. URDF zip and extracted URDF material are runtime-only and must not be staged.
 BY3 full-matrix placeholders belong under `<BY3_FULL_MATRIX_ROOT>` and do not mean BY3 full matrix was run.
 BY3 receiver source is represented by `<BY3_RECEIVER_ROOT>`.
 BY3 Go2 body/high-level source is represented by `<BY3_GO2_BODY_SOURCE>`.

@@ -204,3 +204,13 @@ PAPER10G_R2A may state that the R2 method-distinctness suspicion was partially c
 PAPER10G_R2A may report repaired method-output metrics, but must preserve the formula-level/proxy/subset ceiling: no author-official exact reproduction, no raw joint FK, no full contact-aided exact reproduction, no full GTSAM/iSAM2 factor graph, and no Teng tracking-camera branch.
 
 PAPER10G_R2A forbids claiming R2 pre-repair method-distinctness, LSE absolute yaw/global position, Go2 yaw/position truth, GNSS dual-yaw input to LSE, BY3 ordinary yaw generalization, universal superiority, final_v23 outperformance, trace online use, final_v23/LegSA output as solver input, output substitution, per-case tuning, DA/LC/Ginav/MATLAB/RTKLIB/LegSA final matrix/degradation matrix/complete FGO claims, and staging raw/runtime-heavy/generated-figure artifacts.
+
+## PAPER10G_R3 LSE Fidelity Upgrade Claim Boundary
+
+PAPER10G_R3 may state that Go2 URDF identity and four leg FK-chain structure were upgraded: the URDF zip was hash-locked, extracted runtime-only, parsed, and FL/FR/RL/RR base-to-foot chains were locked.
+
+PAPER10G_R3 must state that raw FK remains blocked because timestamped BY2/BY3 raw lowstate `motor_state.q/dq` was not found. `sportmodestate.foot_position_body` remains a high-level kinematic proxy, not raw joint FK.
+
+PAPER10G_R3 must keep author-official exact reproduction, full Hartley official adapter, full GTSAM/iSAM2 contact graph, and Teng tracking-camera branch as blocked/proxy-bounded unless a later stage actually runs compatible official adapters or provides the missing sensors.
+
+PAPER10G_R3 forbids claiming LSE absolute yaw/global position, LegSA-GINS universal superiority over LSE, Go2 yaw/position truth, BY3 ordinary yaw generalization, GNSS dual-yaw input to LSE, trace online use, final_v23/LegSA output as solver input, output substitution, per-case tuning, DA/LC/Ginav/MATLAB/RTKLIB/LegSA final matrix/degradation matrix/complete FGO claims, and staging raw URDF/lowstate/by2/by3/runtime-heavy/generated-figure artifacts.
