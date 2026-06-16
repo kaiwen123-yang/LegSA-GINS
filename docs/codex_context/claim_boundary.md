@@ -188,3 +188,11 @@ PAPER10G may state that IMU plus legged proprioceptive/contact/high-level sensin
 PAPER10G must remain a theory/diagnostic and paper-packaging stage. It does not implement full contact-aided InEKF, full leg odometry, Hartley reproduction, complete nine-factor FGO, DA, LC, GINav, MATLAB, RTKLIB, or any large matrix.
 
 PAPER10G forbids Go2 yaw/position truth claims, legged-only absolute yaw claims, BY3 ordinary yaw generalization, universal superiority, final_v23 outperformance, trace online use, final_v23/LegSA output as solver input, output substitution, bad-epoch deletion, per-case tuning, receiver `imu-data.csv` as Go2 body IMU, and staging raw/runtime-heavy/generated-figure artifacts.
+
+## PAPER10G_R2 Real LSE Reproduction Claim Boundary
+
+PAPER10G_R2 may state that five independent LSE backends ran on BY2/BY3 real Go2 high-level data under formula-level/proxy-bounded fidelity. It may state that LSE methods provide local proprioceptive odometry/attitude/velocity support and can support Go2 weak-prior/QM motivation.
+
+PAPER10G_R2 must state that `foot_position_body` is a high-level FK-like proxy, not raw joint FK; Rotella flat-foot branch is not applicable to Go2; Teng tracking-camera branch is blocked; author-official exact reproduction is not claimed; trace is offline evaluation-only; and absolute yaw RMSE is `NOT_APPLICABLE_WITH_PROOF`.
+
+PAPER10G_R2 forbids LSE absolute yaw/global position claims, Go2 yaw/position truth, BY3 ordinary yaw generalization, universal superiority, final_v23 outperformance, trace online use, final_v23/LegSA output as solver input, output substitution, per-case tuning, DA/LC/Ginav/MATLAB/RTKLIB/complete FGO/LegSA final matrix claims, and staging raw/runtime-heavy/generated-figure artifacts.
