@@ -2363,3 +2363,31 @@ Still forbidden after PAPER10B2:
 - claiming Go2 position or Go2 yaw as truth;
 - claiming external DA/LC/GINav/MATLAB/RTKLIB/contact-aided/full InEKF/complete nine-factor FGO reproduction from this stage;
 - committing raw data, by2/by3 text, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, archives, or runtime-heavy outputs.
+
+## PAPER10G Legged Observability Diagnostic Boundary
+
+Allowed after PAPER10G:
+
+- PAPER10G may state that IMU plus legged proprioceptive/contact/high-level sensing alone leaves global translation and gravity-axis yaw unobservable without an external/global reference.
+- PAPER10G may state that gravity constrains tilt but does not define absolute heading.
+- PAPER10G may state that Go2 high-level roll/pitch is a weak tilt prior, Go2 horizontal velocity is a weak/diagnostic motion constraint, and Go2 readiness/motion-state is LSIM/QM metadata.
+- PAPER10G may state that short lateral dual-antenna GNSS yaw is required as the absolute heading source and must be interpreted through body-yaw semantic conversion.
+- PAPER10G may state that source-aware weighting and multi-state QM are motivated by heterogeneous source observability and reliability.
+- PAPER10G may recommend PAPER10H XB/PG boundary diagnostics for severe-GNSS source-risk and QM state/action/recovery visualization.
+
+Boundary after PAPER10G:
+
+- PAPER10G is a theory/diagnostic and paper-packaging stage, not a new estimator or new algorithm-performance matrix.
+- The symmetry/gauge demo and yaw-rate diagnostic are lightweight offline diagnostics; they are not solver inputs and do not use trace online.
+- Go2 high-level state is not full contact-aided InEKF, support-foot FK odometry, or complete proprioceptive odometry.
+- Literature claims are limited to observability/motivation boundaries; they do not assert that contact-aided InEKF is ineffective.
+- BY3 yaw remains diagnostic-only and cannot be converted into ordinary yaw generalization by PAPER10G.
+
+Still forbidden after PAPER10G:
+
+- claiming Go2 yaw or Go2 position as truth;
+- claiming legged-only sensing provides absolute yaw or global position;
+- claiming full contact-aided InEKF, full leg odometry, Hartley full reproduction, or complete nine-factor FGO was completed;
+- claiming universal superiority, final_v23 outperformance, BY3 ordinary yaw generalization, trace online use, final_v23/LegSA output solver input, output substitution, bad-epoch deletion, or per-case tuning;
+- using receiver `imu-data.csv` as Go2 body IMU;
+- staging raw data, by2/by3 text, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, archives, core dumps, runtime-heavy outputs, or files over 50 MB.

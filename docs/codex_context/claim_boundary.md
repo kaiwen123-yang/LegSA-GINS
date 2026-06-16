@@ -180,3 +180,11 @@ PAPER10B2 may state that source-level multi-state QM is implemented above source
 PAPER10B2 must state that final status is `CONDITIONAL_PASS_QM_RUNTIME_STOPPED_BY_10GB_HARD_STOP`. BY3 completed 579/600 rows before the user-defined `E_DRIVE_HARD_STOP=10GB`; 21 BY3 missing-only resume rows remain. Current QM evidence enum is `QM_MECHANISM_READY_PERFORMANCE_MIXED`, not `QM_MAIN_INNOVATION_READY`.
 
 PAPER10B2 forbids claiming BY3 full QM matrix completion, final positive QM main-innovation readiness before BY3 resume/review, universal superiority, final_v23 outperformance, BY3 ordinary yaw generalization, trace online use, final_v23/LegSA output solver input, output substitution, bad-epoch deletion, per-case tuning, Go2 position/yaw truth, complete nine-factor FGO, full contact-aided InEKF, or external DA/LC/GINav/MATLAB/RTKLIB reproduction from this stage.
+
+## PAPER10G Legged Observability Claim Boundary
+
+PAPER10G may state that IMU plus legged proprioceptive/contact/high-level sensing alone cannot observe global translation or gravity-axis yaw without a global reference. It may state that Go2 roll/pitch, Go2 horizontal velocity, and readiness/motion-state are weak-prior or metadata sources, while short lateral dual-antenna GNSS yaw remains the absolute heading source requiring body-yaw semantic conversion and source-quality handling.
+
+PAPER10G must remain a theory/diagnostic and paper-packaging stage. It does not implement full contact-aided InEKF, full leg odometry, Hartley reproduction, complete nine-factor FGO, DA, LC, GINav, MATLAB, RTKLIB, or any large matrix.
+
+PAPER10G forbids Go2 yaw/position truth claims, legged-only absolute yaw claims, BY3 ordinary yaw generalization, universal superiority, final_v23 outperformance, trace online use, final_v23/LegSA output as solver input, output substitution, bad-epoch deletion, per-case tuning, receiver `imu-data.csv` as Go2 body IMU, and staging raw/runtime-heavy/generated-figure artifacts.

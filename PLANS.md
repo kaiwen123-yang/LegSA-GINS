@@ -1004,3 +1004,29 @@ Recommended next actions:
 
 - Human-review the mixed-performance QM wording.
 - Enter `PAPER10E_FINAL_PROPOSED_METHOD_MATRIX_AND_COMPARISON_FREEZE` only with BY3 yaw diagnostic-only and family/dataset/mode-bounded QM claims.
+
+## PAPER10G Legged Observability Diagnostic
+
+Completed diagnostic/theory stage:
+
+```text
+PAPER10G_LEGGED_STATE_ESTIMATION_OBSERVABILITY_DIAGNOSTIC
+```
+
+PAPER10G establishes the theory and project boundary for legged high-level state use in LegSA-GINS. It imports PAPER10B/PAPER10C/PAPER10B2/PAPER10Y evidence, audits the Go2/source-aware/QM/dual-yaw code contracts, reviews primary legged-observability literature, reads BY2/BY3 Go2 high-level logs in read-only mode, runs a lightweight yaw-rate offset diagnostic, and generates a toy symmetry/gauge demo.
+
+Current PAPER10G evidence:
+
+- Global translation and gravity-axis yaw remain gauge freedoms for IMU plus legged proprioceptive/contact/high-level sensing without a global reference.
+- Go2 roll/pitch may be used as a weak tilt prior, Go2 horizontal velocity as a weak/diagnostic motion constraint, and readiness/motion-state as source-aware/QM metadata.
+- Go2 yaw and Go2 position remain forbidden as truth or absolute global-reference measurements.
+- Short lateral dual-antenna GNSS yaw is the absolute heading source; its short-baseline and source-quality risks motivate source-aware weighting and multi-state QM.
+- BY3 yaw remains diagnostic-only, and PAPER10G does not upgrade BY3 to ordinary yaw generalization.
+
+Next route:
+
+- `PAPER10H_XB_PG_QM_BOUNDARY_DIAGNOSTIC` is recommended to show severe-GNSS XB/PG source-risk boundaries and QM state/action/recovery timelines.
+- PAPER10H should remain boundary/diagnostic evidence unless the human separately approves any larger execution.
+- PAPER10E0/PAPER10E should preserve the Go2 not-truth, dual-yaw-required, and QM bounded-mechanism wording from PAPER10G.
+
+PAPER10G does not authorize DA, LC, GINav, MATLAB, RTKLIB, contact-aided full reproduction, full leg odometry, complete nine-factor FGO, trace online use, final_v23/LegSA solver input, per-case tuning, output substitution, universal superiority, or any Go2 yaw/position truth claim.

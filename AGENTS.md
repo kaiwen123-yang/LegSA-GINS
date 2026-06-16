@@ -1180,3 +1180,29 @@ PAPER10B2 boundaries:
 - BY3 full QM matrix completion may now be claimed only as 600/600 runtime closure, not as yaw generalization or universal performance improvement.
 - Do not write universal superiority, final_v23 outperformance, BY3 ordinary yaw generalization, trace online use, final_v23/LegSA output solver input, Go2 pose/yaw truth, output substitution, per-case tuning, complete nine-factor FGO, or full contact-aided InEKF.
 - Do not treat fallback as output substitution or source-aware LSIM/OIM alone as the complete multi-state QM mechanism.
+
+## 42. PAPER10G Legged State Estimation Observability Diagnostic
+
+`PAPER10G_LEGGED_STATE_ESTIMATION_OBSERVABILITY_DIAGNOSTIC` is a theory/diagnostic and paper-packaging stage. It imports PAPER10B/PAPER10C/PAPER10B2/PAPER10Y evidence, audits Go2/source-aware/QM/dual-yaw code contracts, reviews primary legged-observability literature, reads BY2/BY3 Go2 high-level logs in read-only mode, runs lightweight yaw-rate and symmetry/gauge diagnostics, and generates paper-facing tables, figures, claim boundaries, C export, and Obsidian notes.
+
+PAPER10G proven facts:
+
+- IMU plus legged proprioceptive/contact/high-level sensing alone leaves global translation and gravity-axis yaw unobservable without an external/global reference.
+- Gravity can constrain roll/pitch but cannot define absolute heading.
+- Go2 roll/pitch is a weak attitude prior, Go2 horizontal velocity is a weak or diagnostic motion constraint, and Go2 readiness/motion-state is LSIM/QM metadata.
+- Go2 yaw and Go2 position are not truth and are not absolute global-reference measurements.
+- Short lateral dual-antenna GNSS yaw remains the absolute heading source, with body-yaw semantic conversion and source-quality management required.
+- Source-aware weighting and multi-state QM are motivated by heterogeneous source observability and reliability.
+- BY3 yaw remains diagnostic-only.
+
+PAPER10G boundaries:
+
+- Do not claim full contact-aided InEKF, full leg odometry, Hartley reproduction, complete nine-factor FGO, DA, LC, GINav, MATLAB, RTKLIB, or large-matrix execution from PAPER10G.
+- Do not use trace online, final_v23/LegSA output as solver input, Go2 yaw/position truth, receiver `imu-data.csv` as Go2 body IMU, output substitution, bad-epoch deletion, or per-case tuning.
+- Do not write legged-only absolute yaw/global position, BY3 ordinary yaw generalization, universal superiority, or final_v23 outperformance.
+- Generated figures are runtime/export artifacts only and must not be staged.
+
+PAPER10G next route:
+
+- `PAPER10H_XB_PG_QM_BOUNDARY_DIAGNOSTIC` is recommended for severe-GNSS XB/PG source-risk and QM state/action/recovery visualization.
+- PAPER10H should remain boundary/diagnostic evidence unless the human explicitly approves a broader execution stage.
