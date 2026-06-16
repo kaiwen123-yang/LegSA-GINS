@@ -1055,3 +1055,33 @@ Next route:
 - PAPER10E/PAPER10F should use PAPER10G_R2 only as local-LSE/supporting-method evidence, not as an absolute-yaw or universal-superiority claim.
 
 PAPER10G_R2 does not authorize Go2 yaw/position truth, legged-only absolute yaw, author-official exact claims, raw-joint-FK claims, full contact-aided exact reproduction, DA, LC, GINav, MATLAB, RTKLIB, complete FGO, LegSA final matrix, per-case tuning, output substitution, BY3 ordinary yaw generalization, or push.
+
+## PAPER10G_R2A LSE Method Distinctness Audit And Recompute Gate
+
+Completed audit/repair stage:
+
+```text
+PAPER10G_R2A_LSE_METHOD_DISTINCTNESS_AUDIT_AND_REAL_RECOMPUTE_GATE
+```
+
+PAPER10G_R2A was required because PAPER10G_R2's method results looked too similar and needed independent backend proof. The audit confirmed the initial weakness: R2 used one `run_backend(provider, method)` dispatch function and reused provider roll/pitch fields for method metrics. Therefore R2's original method-distinctness wording is superseded.
+
+Current PAPER10G_R2A evidence:
+
+- Full recompute was executed for BY2/BY3 and LSE01-LSE05.
+- Each repaired method has a separate top-level backend function, backend hash, output file, output hash, update-count summary, and fidelity decision.
+- Perturbation tests passed after repair: contact-off and foot-position perturbations change the expected contact/FK methods, and LSE05 velocity-disable changes the velocity-update backend.
+- Short-segment reruns on BY2/BY3 produce method-distinct outputs.
+- Metrics are now read from method output columns; R2 provider-substituted roll/pitch metrics are superseded.
+- Absolute yaw remains `NOT_APPLICABLE_WITH_PROOF`; trace remains offline evaluation-only.
+
+Current route decision:
+
+- Final status: `PASS_LSE_METHOD_DISTINCTNESS_REPAIRED_AND_RECOMPUTED`.
+- Use R2A repaired/recomputed metrics for any LSE method-distinct comparison.
+- Preserve the fidelity ceiling: formula-level/proxy-bounded backends only, not author-official exact reproduction.
+
+Recommended next actions:
+
+- Proceed to `PAPER10H_XB_PG_QM_BOUNDARY_DIAGNOSTIC`.
+- PAPER10H should focus on severe-GNSS boundary evidence and QM state/action/recovery, not high-precision main-performance or universal-superiority claims.

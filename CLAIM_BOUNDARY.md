@@ -2396,7 +2396,7 @@ Still forbidden after PAPER10G:
 
 Allowed after PAPER10G_R2:
 
-- PAPER10G_R2 may state that five independent legged-state-estimation backends were executed on BY2/BY3 real Go2 high-level sequences under formula-level/proxy-bounded fidelity.
+- PAPER10G_R2 may state that initial formula-level/proxy-bounded legged-state-estimation method labels were executed on BY2/BY3 real Go2 high-level sequences, but its original method-distinctness evidence is superseded by PAPER10G_R2A.
 - PAPER10G_R2 may state that PDF identity and duplicate decisions were locked for Teng 2104.04238, Rotella 1402.5450, Hartley 1805/1904, Hartley/Mangelson/Gan 1712, and Rotella dissertation support material.
 - PAPER10G_R2 may state that BY2/BY3 Go2 providers were built from IMUState, `foot_force`, `foot_position_body`, `foot_speed_body`, velocity, mode/gait, and body-height fields.
 - PAPER10G_R2 may state that LSE outputs are local proprioceptive odometry/attitude/velocity support and can motivate Go2 weak priors or QM metadata.
@@ -2418,4 +2418,31 @@ Still forbidden after PAPER10G_R2:
 - claiming LegSA-GINS universally outperforms LSE methods;
 - claiming author-official exact reproduction, raw joint FK, full contact-aided exact reproduction, or tracking-camera branch execution from PAPER10G_R2;
 - claiming Go2 yaw/position truth, BY3 ordinary yaw generalization, trace online use, final_v23/LegSA output as solver input, output substitution, bad-epoch deletion, per-case tuning, complete nine-factor FGO, DA, LC, GINav, MATLAB, RTKLIB, LegSA final matrix, or degradation matrix execution;
+- committing raw PDF, by2/by3 text, receiver raw files, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, archives, core dumps, runtime-heavy outputs, or files over 50 MB.
+
+## PAPER10G_R2A LSE Method Distinctness Audit Boundary
+
+Allowed after PAPER10G_R2A:
+
+- PAPER10G_R2A may state that the user suspicion was partially confirmed: PAPER10G_R2 used one `run_backend(provider, method)` dispatch path and provider-substituted roll/pitch metrics.
+- PAPER10G_R2A may state that R2 method-distinctness evidence and R2 method-specific roll/pitch metrics are superseded by R2A.
+- PAPER10G_R2A may state that LSE01-LSE05 were repaired and recomputed on BY2/BY3 with separate backend functions, backend hashes, output hashes, update-count summaries, perturbation tests, and short-segment validation.
+- PAPER10G_R2A may report repaired/recomputed aligned relative trajectory, relative yaw drift after initial alignment, roll/pitch diagnostics, velocity diagnostics, update counts, and output-provenance evidence.
+- PAPER10G_R2A may state that perturbation tests passed: contact/foot-position perturbations changed expected contact/FK methods and LSE05 velocity-disable changed the velocity-update backend.
+- PAPER10G_R2A may state final status `PASS_LSE_METHOD_DISTINCTNESS_REPAIRED_AND_RECOMPUTED`.
+
+Boundary after PAPER10G_R2A:
+
+- Repaired LSE methods remain formula-level/proxy/subset implementations, not author-official exact reproductions.
+- `foot_position_body` remains a Go2 high-level FK-like proxy, not raw joint encoder FK.
+- LSE04 remains a fixed-window contact-factor smoothing proxy, not a full GTSAM/iSAM2 factor graph reproduction.
+- LSE05 remains a camera-off velocity-update subset; the tracking-camera branch is blocked.
+- Trace is offline evaluation-only and does not enter backend execution, segmentation, thresholds, covariance, or tuning.
+- LSE methods remain local proprioceptive odometry/attitude/velocity support and cannot replace short lateral dual-antenna GNSS absolute yaw.
+
+Still forbidden after PAPER10G_R2A:
+
+- claiming R2 pre-repair metrics as method-distinct evidence;
+- claiming author-official exact reproduction, raw joint FK, full contact-aided exact reproduction, full GTSAM/iSAM2 graph, or Teng tracking-camera branch execution;
+- claiming LSE absolute yaw/global position, LegSA-GINS universal superiority, final_v23 outperformance, BY3 ordinary yaw generalization, Go2 yaw/position truth, GNSS dual-yaw input to LSE, trace online use, final_v23/LegSA output as solver input, output substitution, bad-epoch deletion, per-case tuning, DA, LC, GINav, MATLAB, RTKLIB, LegSA final matrix, degradation matrix, or complete nine-factor FGO;
 - committing raw PDF, by2/by3 text, receiver raw files, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, archives, core dumps, runtime-heavy outputs, or files over 50 MB.
