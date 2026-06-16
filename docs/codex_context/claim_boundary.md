@@ -191,8 +191,16 @@ PAPER10G forbids Go2 yaw/position truth claims, legged-only absolute yaw claims,
 
 ## PAPER10G_R2 Real LSE Reproduction Claim Boundary
 
-PAPER10G_R2 may state that five independent LSE backends ran on BY2/BY3 real Go2 high-level data under formula-level/proxy-bounded fidelity. It may state that LSE methods provide local proprioceptive odometry/attitude/velocity support and can support Go2 weak-prior/QM motivation.
+PAPER10G_R2 may state that initial LSE method labels ran on BY2/BY3 real Go2 high-level data under formula-level/proxy-bounded fidelity, but its original method-distinctness evidence is superseded by PAPER10G_R2A. It may state that LSE methods provide local proprioceptive odometry/attitude/velocity support and can support Go2 weak-prior/QM motivation.
 
 PAPER10G_R2 must state that `foot_position_body` is a high-level FK-like proxy, not raw joint FK; Rotella flat-foot branch is not applicable to Go2; Teng tracking-camera branch is blocked; author-official exact reproduction is not claimed; trace is offline evaluation-only; and absolute yaw RMSE is `NOT_APPLICABLE_WITH_PROOF`.
 
-PAPER10G_R2 forbids LSE absolute yaw/global position claims, Go2 yaw/position truth, BY3 ordinary yaw generalization, universal superiority, final_v23 outperformance, trace online use, final_v23/LegSA output as solver input, output substitution, per-case tuning, DA/LC/Ginav/MATLAB/RTKLIB/complete FGO/LegSA final matrix claims, and staging raw/runtime-heavy/generated-figure artifacts.
+PAPER10G_R2 forbids using R2 pre-repair metrics as method-distinct evidence, LSE absolute yaw/global position claims, Go2 yaw/position truth, BY3 ordinary yaw generalization, universal superiority, final_v23 outperformance, trace online use, final_v23/LegSA output as solver input, output substitution, per-case tuning, DA/LC/Ginav/MATLAB/RTKLIB/complete FGO/LegSA final matrix claims, and staging raw/runtime-heavy/generated-figure artifacts.
+
+## PAPER10G_R2A LSE Method Distinctness Claim Boundary
+
+PAPER10G_R2A may state that the R2 method-distinctness suspicion was partially confirmed: R2 used a single `run_backend(provider, method)` dispatch path and provider-substituted roll/pitch metrics. It may state that R2A repaired this by recomputing BY2/BY3 for LSE01-LSE05 with separate backend functions, backend hashes, output hashes, update-count summaries, perturbation tests, and short-segment validation.
+
+PAPER10G_R2A may report repaired method-output metrics, but must preserve the formula-level/proxy/subset ceiling: no author-official exact reproduction, no raw joint FK, no full contact-aided exact reproduction, no full GTSAM/iSAM2 factor graph, and no Teng tracking-camera branch.
+
+PAPER10G_R2A forbids claiming R2 pre-repair method-distinctness, LSE absolute yaw/global position, Go2 yaw/position truth, GNSS dual-yaw input to LSE, BY3 ordinary yaw generalization, universal superiority, final_v23 outperformance, trace online use, final_v23/LegSA output as solver input, output substitution, per-case tuning, DA/LC/Ginav/MATLAB/RTKLIB/LegSA final matrix/degradation matrix/complete FGO claims, and staging raw/runtime-heavy/generated-figure artifacts.

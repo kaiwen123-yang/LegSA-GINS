@@ -177,6 +177,9 @@ Tracked docs must use aliases only:
 - `<PAPER10Y_ARCHIVE_ROOT>`
 - `<PAPER10Y_OBSIDIAN_SYNC_ROOT>`
 - `<PAPER10B_R2_STAGE_ROOT>`
+- `<PAPER10G_R2A_STAGE_ROOT>`
+- `<PAPER10G_R2A_C_EXPORT_ROOT>`
+- `<PAPER10G_R2A_OBSIDIAN_SYNC_ROOT>`
 - `<PG2_XB2_RECEIVER_ROOT>`
 - `<PG2_XB2_BODY_SOURCE>`
 - `<PG3_XB3_RECEIVER_ROOT>`
@@ -218,6 +221,7 @@ The PAPER10C_R1 interrupted Go2/LSIM recovery source is represented in tracked d
 The PAPER10C_R1A resume stage is represented in tracked docs only by `<PAPER10C_R1A_STAGE_ROOT>`, with export-clean material under `<PAPER10C_R1A_C_EXPORT_ROOT>` and vault notes under `<PAPER10C_R1A_OBSIDIAN_SYNC_ROOT>`.
 The PAPER10C_R1B low-space missing-only resume stage is represented in tracked docs only by `<PAPER10C_R1B_STAGE_ROOT>`, with export-clean material under `<PAPER10C_R1B_C_EXPORT_ROOT>` and vault notes under `<PAPER10C_R1B_OBSIDIAN_SYNC_ROOT>`.
 The PAPER10Y post-R1B maintenance/archive stage is represented in tracked docs only by `<PAPER10Y_STAGE_ROOT>`, with lightweight export material under `<PAPER10Y_C_EXPORT_ROOT>`, archive bodies under `<PAPER10Y_ARCHIVE_ROOT>`, and vault notes under `<PAPER10Y_OBSIDIAN_SYNC_ROOT>`.
+The PAPER10G_R2A LSE method-distinctness audit and recompute gate is represented in tracked docs only by `<PAPER10G_R2A_STAGE_ROOT>`, with export-clean material under `<PAPER10G_R2A_C_EXPORT_ROOT>` and vault notes under `<PAPER10G_R2A_OBSIDIAN_SYNC_ROOT>`.
 Prior BY3 source-aware source material imported by PAPER10C_R1 is represented only by `<PAPER10B_R2_STAGE_ROOT>`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
@@ -1232,3 +1236,28 @@ PAPER10G_R2 boundaries:
 - Do not claim author-official exact reproduction, raw-joint-FK reproduction, full contact-aided exact reproduction, or tracking-camera branch execution from PAPER10G_R2.
 - Do not claim legged-only absolute yaw, Go2 yaw/position truth, BY3 ordinary yaw generalization, universal superiority, final_v23 outperformance, trace online use, output substitution, or per-case tuning.
 - Runtime provider CSVs over 50 MB stay runtime-only and must not be committed or included in lightweight C export.
+
+## 44. PAPER10G_R2A LSE Method Distinctness Audit And Recompute Gate
+
+`PAPER10G_R2A_LSE_METHOD_DISTINCTNESS_AUDIT_AND_REAL_RECOMPUTE_GATE` is the mandatory audit and repair stage for PAPER10G_R2 method-distinctness claims. It treats PAPER10G_R2 as untrusted evidence, audits backend code, output provenance, metric sources, perturbation sensitivity, and short-segment reruns, then triggers recomputation because the initial R2 implementation used a single dispatch backend.
+
+PAPER10G_R2A proven facts:
+
+- The user suspicion was partially correct: the initial PAPER10G_R2 script used one `run_backend(provider, method)` dispatcher with method branches, so R2 alone cannot support the phrase "one independent backend per literature method".
+- R2 roll/pitch metrics were not method-specific because they directly reused Go2 provider roll/pitch fields; those R2 roll/pitch metrics are superseded.
+- R2A executed a full repaired recompute for BY2/BY3 and LSE01-LSE05 using separate top-level backend functions, separate backend hashes, separate output files, update-count summaries, output-provenance hashes, perturbation tests, and short-segment validation.
+- Repaired LSE01 is a Hartley/RIEKF-style contact velocity proxy; LSE02 is a standard QEKF/kinematic-contact proxy; LSE03 is a Rotella point-foot subset with flat-foot branch not applicable; LSE04 is a fixed-window contact-factor smoothing proxy; LSE05 is a Teng camera-off velocity-update subset.
+- All repaired key metrics are finite, output pairs are method-distinct, LSE05 velocity-disable perturbation changes output, and contact/foot-position perturbation gates pass for the methods expected to consume those fields.
+- R2A final status is `PASS_LSE_METHOD_DISTINCTNESS_REPAIRED_AND_RECOMPUTED`.
+
+PAPER10G_R2A decision:
+
+- PAPER10G_R2 initial method-distinctness evidence is superseded by PAPER10G_R2A.
+- Use only R2A repaired/recomputed metrics for LSE method-distinct comparison.
+- The fidelity ceiling remains formula-level/proxy-bounded; no author-official exact, raw joint FK, full GTSAM/iSAM2 factor graph, full contact-aided exact reproduction, or Teng tracking-camera branch is claimed.
+
+PAPER10G_R2A boundaries:
+
+- Absolute yaw RMSE remains `NOT_APPLICABLE_WITH_PROOF`; LSE methods provide local proprioceptive odometry/attitude/velocity context and cannot replace short lateral dual-antenna GNSS yaw.
+- No Go2 yaw/position truth, GNSS dual-yaw input to LSE, trace online use, final_v23/LegSA output solver input, DA, LC, GINav, MATLAB, RTKLIB, LegSA final matrix, degradation matrix, complete FGO, per-case tuning, output substitution, or bad-epoch deletion was used.
+- Generated figures and full recompute result CSVs remain runtime/C-export artifacts only and must not be staged.

@@ -4,13 +4,15 @@ Stage: `PAPER10G_R2_REAL_LEGGED_STATE_ESTIMATION_LITERATURE_REPRODUCTION`
 
 Status: `CONDITIONAL_PASS_REAL_LSE_COMPLETED_WITH_PROXY_BOUNDARIES`
 
+Supersession note: PAPER10G_R2A later audited this stage and found that the original R2 method-distinctness evidence was not sufficient because the R2 script used a single `run_backend(provider, method)` dispatch path and provider-substituted roll/pitch metrics. Use PAPER10G_R2A repaired/recomputed metrics for method-distinct LSE comparisons.
+
 ## What R2 Closed
 
 - Locked identity, SHA256, pages, title/author/venue, duplicate decisions, and primary/source roles for the user-provided LSE PDFs.
 - Extracted state definitions, process models, measurement models, contact models, sensor contracts, observability boundaries, and fidelity decisions for LSE01-LSE05.
 - Built BY2 and BY3 Go2 legged providers from read-only `sportmodestate` logs.
-- Executed five independent LSE backends on BY2/BY3 real sequences.
-- Reported gauge-aware metrics: relative trajectory error after initial SE(2) alignment, drift per meter/second, end-to-end drift, relative yaw drift after initial alignment, roll/pitch/velocity diagnostics, divergence count, and runtime.
+- Executed five LSE method labels on BY2/BY3 real sequences; the original independent-backend wording is superseded by PAPER10G_R2A.
+- Reported gauge-aware metrics, but the R2 method-specific roll/pitch metrics are superseded by PAPER10G_R2A because R2 directly reused provider roll/pitch.
 - Generated paper-facing tables, figures, render QA, claim boundaries, teacher package, C export, and Obsidian notes.
 
 ## Method Fidelity
