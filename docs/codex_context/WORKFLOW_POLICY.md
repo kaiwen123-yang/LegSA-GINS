@@ -70,3 +70,9 @@ PAPER10X is a no-execution cleanup stage. It may inspect Git, read reports, upda
 The required workflow is: snapshot Git status, back up diffs, classify dirty files, review tracked diffs, review untracked runtime directories, update `.gitignore`, sanitize context docs, generate current-content and next-experiment summaries, sync Obsidian, generate export-clean material, scan candidate staged files, commit only safe files, and verify post-commit status.
 
 The final reviewer must check that staged files contain no local absolute path leaks, raw/runtime payloads, archives, generated figures, files over 50 MB, or forbidden claims. `push=false` is mandatory.
+
+## PAPER10X_R2 Git Freeze Workflow Policy
+
+PAPER10X_R2 is Git-only. It may fetch remote refs, audit local/remote branches, audit PRs, classify merge decisions, create missing local annotated stage tags, create and verify `git bundle --all`, generate restore/new-drive policy, sync lightweight Obsidian notes, and commit safe reports locally.
+
+PAPER10X_R2 must not automatically merge, close, delete, force-push, reset, clean, stash, rebase, or push main. PR #21 and PR #52 remain protected by explicit human-decision gates. Any future PR push or merge must happen after bundle verification and a branch-specific safety scan.

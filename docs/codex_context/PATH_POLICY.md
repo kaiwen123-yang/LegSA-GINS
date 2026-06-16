@@ -50,6 +50,10 @@ Tracked docs must use aliases instead of local absolute paths.
 - `<PAPER10G_R3_STAGE_ROOT>`: PAPER10G_R3 LSE fidelity-upgrade runtime root.
 - `<PAPER10G_R3_C_EXPORT_ROOT>`: PAPER10G_R3 lightweight C export root.
 - `<PAPER10G_R3_OBSIDIAN_SYNC_ROOT>`: PAPER10G_R3 Obsidian stage sync root.
+- `<PAPER10X_R2_STAGE_ROOT>`: PAPER10X_R2 Git-freeze runtime root.
+- `<PAPER10X_R2_C_EXPORT_ROOT>`: PAPER10X_R2 lightweight C export root.
+- `<PAPER10X_R2_OBSIDIAN_SYNC_ROOT>`: PAPER10X_R2 Obsidian stage sync root.
+- `<PAPER10X_R2_BUNDLE_ARCHIVE_ROOT>`: PAPER10X_R2 git bundle archive directory.
 - `<BY2_DEGRADATION_ARCHIVE_ROOT>`: copy-only BY2 degradation figure/text archive root.
 - `<BY2_DEGRADATION_TEXT_SUMMARY_ROOT>`: BY2 degradation text-summary root containing the seed0-9 explanation index.
 
@@ -119,6 +123,12 @@ PAPER10G_R2A export-clean material must exclude raw PDFs, raw by2/by3 files, NAV
 PAPER10G_R3 outputs are represented in tracked docs by `<PAPER10G_R3_STAGE_ROOT>`. Lightweight export-clean material is represented by `<PAPER10G_R3_C_EXPORT_ROOT>`, and project vault notes are represented by `<PAPER10G_R3_OBSIDIAN_SYNC_ROOT>`.
 
 PAPER10G_R3 may read the user-provided Go2 URDF zip and extract it only into runtime-only storage. The zip, extracted URDF tree, meshes, raw lowstate/rosbag candidates, by2/by3 files, generated images/PDFs, and runtime-heavy outputs must not be staged. Export-clean material must exclude local absolute path content and files over 50 MB.
+
+## PAPER10X_R2 Path Lock
+
+PAPER10X_R2 outputs are represented in tracked docs by `<PAPER10X_R2_STAGE_ROOT>`. Lightweight export-clean material is represented by `<PAPER10X_R2_C_EXPORT_ROOT>`, project vault notes by `<PAPER10X_R2_OBSIDIAN_SYNC_ROOT>`, and git bundles by `<PAPER10X_R2_BUNDLE_ARCHIVE_ROOT>`.
+
+Tracked reports must use aliases only. The bundle binary, checksum files, verify logs, `show-ref` snapshots, and post-commit bundle records are runtime/C-export/archive artifacts and must not be committed. This avoids self-referential bundle hashes in tracked files.
 
 ## Local Path File
 

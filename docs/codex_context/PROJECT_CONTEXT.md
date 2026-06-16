@@ -195,3 +195,15 @@ PAPER10X is the active Git/context cleanup and next-direction freeze after PAPER
 The current main algorithm identity is `LegSA_full_EKF`. `final_v23_dual_antenna_EKF` remains the strong external baseline. Raw Doppler and source-aware LSIM/OIM R scaling are accepted mainline modules. BY2 is the full-metric main dataset. BY3 is position/up generalization plus poor-heading stress, with yaw diagnostic-only. XB/PG remain severe-GNSS boundary and QA-motivation datasets.
 
 The next decision is not whether to run more source-aware rows; BY2 and BY3 source-aware 120 x 5 closures are already complete. The next required evidence freeze is PAPER10C for Go2 high-level priors, followed by PAPER10E and PAPER10F, with PAPER10B2 and PAPER10D only if their stronger-innovation claims are kept.
+
+## PAPER10X_R2 Git Freeze Context
+
+PAPER10X_R2 is the current Git migration-safety stage. It audits all branches, remotes, worktrees, tags, PRs, unpushed commits, merge decisions, stage-to-commit mappings, and bundle/restore policy before any new-drive migration.
+
+Current policy:
+
+- No experiments or solver/evaluator work are authorized by PAPER10X_R2.
+- No PR or branch is merged automatically.
+- No main push is authorized.
+- Local-only PAPER10 evidence branches are preserved in the verified bundle until the human decides PR/merge/delete policy.
+- The active repository root on the new drive remains the authority for `AGENTS.md`, `PLANS.md`, `CLAIM_BOUNDARY.md`, and `PHASE_LOG.md`.
