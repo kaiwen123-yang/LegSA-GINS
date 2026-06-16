@@ -1206,3 +1206,29 @@ PAPER10G next route:
 
 - `PAPER10H_XB_PG_QM_BOUNDARY_DIAGNOSTIC` is recommended for severe-GNSS XB/PG source-risk and QM state/action/recovery visualization.
 - PAPER10H should remain boundary/diagnostic evidence unless the human explicitly approves a broader execution stage.
+
+## 43. PAPER10G_R2 Real Legged State Estimation Literature Reproduction
+
+`PAPER10G_R2_REAL_LEGGED_STATE_ESTIMATION_LITERATURE_REPRODUCTION` is a bounded real-sequence literature-reproduction stage. It locks the user-provided legged-state-estimation PDFs, deduplicates repeated sources, extracts method formulas/input contracts/fidelity boundaries, builds BY2/BY3 Go2 high-level legged providers, and runs independent LSE01-LSE05 backends on real BY2/BY3 sequences.
+
+PAPER10G_R2 proven facts:
+
+- `2104.04238v1` duplicate copies are byte-identical; `1805.10410v1` and `1904.09251v2` are the original/extended Hartley InEKF method family and are not counted as two independent methods.
+- LSE01 is Hartley contact-aided InEKF; LSE02 is QEKF/kinematic contact EKF; LSE03 is Rotella point-foot subset with humanoid flat-foot branch not applicable to Go2; LSE04 is FK plus preintegrated contact factor graph; LSE05 is Teng slippery InEKF velocity-update camera-off subset.
+- BY2 and BY3 Go2 legged providers are built from read-only `sportmodestate` logs using IMUState, `foot_force`, `foot_position_body`, `foot_speed_body`, velocity, mode/gait, and body-height fields.
+- `foot_position_body` is a high-level FK-like proxy, not raw joint encoder FK.
+- No Go2 yaw/position truth, GNSS dual-yaw input, trace online input, final_v23/LegSA solver input, DA, LC, GINav, MATLAB, RTKLIB, complete FGO, LegSA final matrix, degradation matrix, or per-case tuning was used.
+- BY2/BY3 LSE comparison is valid only as formula-level/proxy-bounded local proprioceptive odometry evidence.
+- Absolute yaw RMSE remains `NOT_APPLICABLE_WITH_PROOF`; relative yaw drift after initial alignment is diagnostic only.
+
+PAPER10G_R2 decision:
+
+- Final status is `CONDITIONAL_PASS_REAL_LSE_COMPLETED_WITH_PROXY_BOUNDARIES`.
+- LSE methods support the Go2 weak-prior/QM context and local odometry discussion, but they do not replace short lateral dual-antenna GNSS absolute yaw or LegSA-GINS global PNT.
+- The next recommended stage remains `PAPER10H_XB_PG_QM_BOUNDARY_DIAGNOSTIC`.
+
+PAPER10G_R2 boundaries:
+
+- Do not claim author-official exact reproduction, raw-joint-FK reproduction, full contact-aided exact reproduction, or tracking-camera branch execution from PAPER10G_R2.
+- Do not claim legged-only absolute yaw, Go2 yaw/position truth, BY3 ordinary yaw generalization, universal superiority, final_v23 outperformance, trace online use, output substitution, or per-case tuning.
+- Runtime provider CSVs over 50 MB stay runtime-only and must not be committed or included in lightweight C export.

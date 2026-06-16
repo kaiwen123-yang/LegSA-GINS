@@ -1030,3 +1030,28 @@ Next route:
 - PAPER10E0/PAPER10E should preserve the Go2 not-truth, dual-yaw-required, and QM bounded-mechanism wording from PAPER10G.
 
 PAPER10G does not authorize DA, LC, GINav, MATLAB, RTKLIB, contact-aided full reproduction, full leg odometry, complete nine-factor FGO, trace online use, final_v23/LegSA solver input, per-case tuning, output substitution, universal superiority, or any Go2 yaw/position truth claim.
+
+## PAPER10G_R2 Real Legged State Estimation Literature Reproduction
+
+Completed bounded reproduction stage:
+
+```text
+PAPER10G_R2_REAL_LEGGED_STATE_ESTIMATION_LITERATURE_REPRODUCTION
+```
+
+PAPER10G_R2 responds to the gap that PAPER10G was theory/diagnostic only. It reads and fingerprints the user-provided LSE PDFs, locks duplicate/source decisions, extracts method formulas and input contracts, builds BY2/BY3 Go2 legged providers from `sportmodestate`, and executes five independent LSE backends on real BY2/BY3 sequences.
+
+Current PAPER10G_R2 evidence:
+
+- LSE01 Hartley contact-aided InEKF, LSE02 QEKF/kinematic contact EKF, LSE03 Rotella point-foot subset, LSE04 FK/preintegrated contact factor graph, and LSE05 Teng slippery InEKF camera-off velocity-update subset all ran on BY2 and BY3.
+- Fidelity is proxy-bounded: raw joint encoder FK is unavailable, `foot_position_body` is a high-level FK-like proxy, Rotella flat-foot rotational constraints are not applicable to Go2, Teng tracking-camera branch is blocked, and official exact reproduction is not claimed.
+- Metrics are gauge-aware: aligned relative trajectory error, local drift, relative yaw drift after initial alignment, roll/pitch/velocity diagnostics, divergence count, and runtime.
+- Absolute yaw RMSE is `NOT_APPLICABLE_WITH_PROOF`, and global position RMSE is alignment-only diagnostic.
+- Trace is offline evaluation-only and did not enter any backend, gate, covariance, threshold, initialization tuning, or parameter choice.
+
+Next route:
+
+- `PAPER10H_XB_PG_QM_BOUNDARY_DIAGNOSTIC` remains recommended for severe-GNSS XB/PG source-risk and QM state/action/recovery visualization.
+- PAPER10E/PAPER10F should use PAPER10G_R2 only as local-LSE/supporting-method evidence, not as an absolute-yaw or universal-superiority claim.
+
+PAPER10G_R2 does not authorize Go2 yaw/position truth, legged-only absolute yaw, author-official exact claims, raw-joint-FK claims, full contact-aided exact reproduction, DA, LC, GINav, MATLAB, RTKLIB, complete FGO, LegSA final matrix, per-case tuning, output substitution, BY3 ordinary yaw generalization, or push.

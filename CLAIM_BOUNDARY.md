@@ -2391,3 +2391,31 @@ Still forbidden after PAPER10G:
 - claiming universal superiority, final_v23 outperformance, BY3 ordinary yaw generalization, trace online use, final_v23/LegSA output solver input, output substitution, bad-epoch deletion, or per-case tuning;
 - using receiver `imu-data.csv` as Go2 body IMU;
 - staging raw data, by2/by3 text, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, archives, core dumps, runtime-heavy outputs, or files over 50 MB.
+
+## PAPER10G_R2 Real LSE Reproduction Boundary
+
+Allowed after PAPER10G_R2:
+
+- PAPER10G_R2 may state that five independent legged-state-estimation backends were executed on BY2/BY3 real Go2 high-level sequences under formula-level/proxy-bounded fidelity.
+- PAPER10G_R2 may state that PDF identity and duplicate decisions were locked for Teng 2104.04238, Rotella 1402.5450, Hartley 1805/1904, Hartley/Mangelson/Gan 1712, and Rotella dissertation support material.
+- PAPER10G_R2 may state that BY2/BY3 Go2 providers were built from IMUState, `foot_force`, `foot_position_body`, `foot_speed_body`, velocity, mode/gait, and body-height fields.
+- PAPER10G_R2 may state that LSE outputs are local proprioceptive odometry/attitude/velocity support and can motivate Go2 weak priors or QM metadata.
+- PAPER10G_R2 may report aligned relative trajectory/drift metrics and relative-yaw-drift diagnostics.
+- PAPER10G_R2 may mark absolute yaw RMSE as `NOT_APPLICABLE_WITH_PROOF`.
+
+Boundary after PAPER10G_R2:
+
+- `foot_position_body` is a high-level FK-like proxy, not raw joint encoder FK.
+- Hartley official code availability does not imply author-official exact reproduction because no compatible Go2 official adapter was executed.
+- Rotella flat-foot rotational constraints are not applicable to Go2 high-level point-foot/quadruped data.
+- Teng tracking-camera velocity/angular-velocity branch is blocked; only a camera-off adapted subset ran.
+- Trace was used offline for evaluation after initial alignment only, not as a backend input or tuning source.
+- LSE methods remain complementary to LegSA-GINS and do not replace short lateral dual-antenna GNSS yaw.
+
+Still forbidden after PAPER10G_R2:
+
+- claiming LSE methods provide absolute yaw or global position without a global reference;
+- claiming LegSA-GINS universally outperforms LSE methods;
+- claiming author-official exact reproduction, raw joint FK, full contact-aided exact reproduction, or tracking-camera branch execution from PAPER10G_R2;
+- claiming Go2 yaw/position truth, BY3 ordinary yaw generalization, trace online use, final_v23/LegSA output as solver input, output substitution, bad-epoch deletion, per-case tuning, complete nine-factor FGO, DA, LC, GINav, MATLAB, RTKLIB, LegSA final matrix, or degradation matrix execution;
+- committing raw PDF, by2/by3 text, receiver raw files, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, archives, core dumps, runtime-heavy outputs, or files over 50 MB.
