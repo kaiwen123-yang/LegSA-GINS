@@ -47,6 +47,9 @@ Tracked docs must use aliases instead of local absolute paths.
 - `<PAPER10G_R2A_STAGE_ROOT>`: PAPER10G_R2A LSE method-distinctness audit and recompute runtime root.
 - `<PAPER10G_R2A_C_EXPORT_ROOT>`: PAPER10G_R2A lightweight C export root.
 - `<PAPER10G_R2A_OBSIDIAN_SYNC_ROOT>`: PAPER10G_R2A Obsidian stage sync root.
+- `<PAPER10G_R3_STAGE_ROOT>`: PAPER10G_R3 LSE fidelity-upgrade runtime root.
+- `<PAPER10G_R3_C_EXPORT_ROOT>`: PAPER10G_R3 lightweight C export root.
+- `<PAPER10G_R3_OBSIDIAN_SYNC_ROOT>`: PAPER10G_R3 Obsidian stage sync root.
 - `<BY2_DEGRADATION_ARCHIVE_ROOT>`: copy-only BY2 degradation figure/text archive root.
 - `<BY2_DEGRADATION_TEXT_SUMMARY_ROOT>`: BY2 degradation text-summary root containing the seed0-9 explanation index.
 
@@ -110,6 +113,12 @@ PAPER0 export-clean material must use aliases only and must not contain local ab
 PAPER10G_R2A outputs are represented in tracked docs by `<PAPER10G_R2A_STAGE_ROOT>`. Lightweight export-clean material is represented by `<PAPER10G_R2A_C_EXPORT_ROOT>`, and project vault notes are represented by `<PAPER10G_R2A_OBSIDIAN_SYNC_ROOT>`.
 
 PAPER10G_R2A export-clean material must exclude raw PDFs, raw by2/by3 files, NAV/STD/EVAL_NAV/RUN_MANIFEST outputs, generated heavy runtime files, archives, core dumps, files over 50 MB, and local absolute path content. Environment/space logs containing machine paths are runtime-only unless sanitized.
+
+## PAPER10G_R3 Path Lock
+
+PAPER10G_R3 outputs are represented in tracked docs by `<PAPER10G_R3_STAGE_ROOT>`. Lightweight export-clean material is represented by `<PAPER10G_R3_C_EXPORT_ROOT>`, and project vault notes are represented by `<PAPER10G_R3_OBSIDIAN_SYNC_ROOT>`.
+
+PAPER10G_R3 may read the user-provided Go2 URDF zip and extract it only into runtime-only storage. The zip, extracted URDF tree, meshes, raw lowstate/rosbag candidates, by2/by3 files, generated images/PDFs, and runtime-heavy outputs must not be staged. Export-clean material must exclude local absolute path content and files over 50 MB.
 
 ## Local Path File
 
