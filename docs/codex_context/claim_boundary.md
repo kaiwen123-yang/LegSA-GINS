@@ -214,3 +214,11 @@ PAPER10G_R3 must state that raw FK remains blocked because timestamped BY2/BY3 r
 PAPER10G_R3 must keep author-official exact reproduction, full Hartley official adapter, full GTSAM/iSAM2 contact graph, and Teng tracking-camera branch as blocked/proxy-bounded unless a later stage actually runs compatible official adapters or provides the missing sensors.
 
 PAPER10G_R3 forbids claiming LSE absolute yaw/global position, LegSA-GINS universal superiority over LSE, Go2 yaw/position truth, BY3 ordinary yaw generalization, GNSS dual-yaw input to LSE, trace online use, final_v23/LegSA output as solver input, output substitution, per-case tuning, DA/LC/Ginav/MATLAB/RTKLIB/LegSA final matrix/degradation matrix/complete FGO claims, and staging raw URDF/lowstate/by2/by3/runtime-heavy/generated-figure artifacts.
+
+## PAPER10X_R2 Git Freeze Claim Boundary
+
+PAPER10X_R2 may state that full branch/ref/worktree/tag/PR/unpushed/no-upstream/merge-decision audit was performed and that a post-commit `git bundle --all` was created and verified for migration safety.
+
+PAPER10X_R2 must keep PR and merge output as decision support only. It does not authorize main push, PR merge, PR closure, branch deletion, tag deletion, force-push, reset, clean, stash, or rebase.
+
+PAPER10X_R2 forbids solver/evaluator/DA/LC/Ginav/MATLAB/RTKLIB/contact-aided/complete FGO/random/degraded-input execution, raw data modification, unsafe branch merge, committing bundles or runtime-heavy files, and writing local absolute paths into tracked docs.

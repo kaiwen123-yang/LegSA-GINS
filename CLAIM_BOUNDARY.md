@@ -2471,3 +2471,26 @@ Still forbidden after PAPER10G_R3:
 - relabeling high-level `foot_position_body` / `foot_speed_body` as raw joint encoder FK;
 - claiming LSE absolute yaw/global position, LegSA-GINS universal superiority over LSE, BY3 ordinary yaw generalization, Go2 yaw/position truth, GNSS dual-yaw input to LSE, trace online use, final_v23/LegSA output as solver input, output substitution, bad-epoch deletion, per-case tuning, DA, LC, GINav, MATLAB, RTKLIB, LegSA final matrix, degradation matrix, or complete nine-factor FGO;
 - committing raw PDF, raw lowstate/rosbag, by2/by3 text, Go2 URDF zip, extracted URDF trees, generated images/PDFs, archives, core dumps, runtime-heavy outputs, or files over 50 MB.
+
+## PAPER10X_R2 Git Freeze Boundary
+
+Allowed after PAPER10X_R2:
+
+- PAPER10X_R2 may state that a full local/remote branch, ref, worktree, tag, PR, unpushed-commit, no-upstream, and merge-decision audit was completed.
+- PAPER10X_R2 may state that no PR/branch merge was executed because all merge candidates require explicit human approval and safety scans.
+- PAPER10X_R2 may state that annotated stage tags were created locally only if they were missing and never overwritten.
+- PAPER10X_R2 may state that a post-commit `git bundle --all` was created and verified as the pre-migration Git safety artifact.
+- PAPER10X_R2 may state that new-drive Git policy keeps the active repository root as the authority for `AGENTS.md`, `PLANS.md`, `CLAIM_BOUNDARY.md`, and `PHASE_LOG.md`.
+
+Boundary after PAPER10X_R2:
+
+- Bundle path, SHA256, and verify logs are runtime/C-export/archive artifacts, not tracked Git content.
+- PR and merge recommendations are decision support only; they do not authorize main push, PR merge, PR closure, branch deletion, tag deletion, or force-push.
+- `stage/PAPER10X_R2` marks the local Git-freeze commit and bundle baseline; it is not a paper-performance or experiment tag.
+
+Still forbidden after PAPER10X_R2:
+
+- running solver/evaluator, DA, LC, GINav, MATLAB, RTKLIB, contact-aided reproduction, complete FGO, random/degraded-input generation, or any experiment;
+- deleting branches/tags/worktrees/old directories or modifying raw receiver/by2/by3/trace data;
+- merging unsafe branches, pushing main, force-pushing, rebasing, resetting, cleaning, stashing, or closing PRs without human approval;
+- committing raw/RINEX/UBX/RTCM/bag/NAV/STD/EVAL_NAV/RUN_MANIFEST, generated images/PDFs, archives, bundles, files over 50 MB, local absolute paths, or forbidden claims.

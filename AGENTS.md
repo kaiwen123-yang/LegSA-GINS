@@ -1283,3 +1283,24 @@ PAPER10G_R3 boundaries:
 - Do not relabel high-level `foot_position_body` / `foot_speed_body` as raw FK or raw joint encoder output.
 - Do not write LSE absolute yaw/global position, LegSA-GINS universal superiority over LSE, BY3 ordinary yaw generalization, Go2 yaw/position truth, trace online use, GNSS dual-yaw as LSE input, final_v23/LegSA output as solver input, DA, LC, GINav, MATLAB, RTKLIB, LegSA final matrix, degradation matrix, complete FGO, per-case tuning, or output substitution.
 - URDF zip, extracted URDF trees, raw data, by2/by3 files, images/PDFs, and runtime-heavy outputs must remain untracked.
+
+## 46. PAPER10X_R2 Git Remote Branch PR Merge And Bundle Freeze
+
+`PAPER10X_R2_GIT_REMOTE_BRANCH_PR_MERGE_AND_BUNDLE_FREEZE` is a Git-only safety-freeze stage before new-drive migration. It audits local branches, remote branches, worktrees, tags, unpushed commits, GitHub PRs, merge decisions, stage-to-commit maps, and bundle/restore policy. It does not run experiments or modify raw/project data.
+
+PAPER10X_R2 proven facts:
+
+- Full local/remote ref audit is required; current evidence must not rely on a spot check of the active branch only.
+- Existing open PRs are audited but not merged, closed, or force-updated automatically.
+- Branches are classified for human-reviewed merge, evidence-only retention, or bundle-only retention; no blind merge of experimental/runtime branches is allowed.
+- The current Git freeze branch remains local unless the human explicitly authorizes a push or draft PR.
+- `git bundle --all` is the migration safety artifact; the bundle binary and checksum/verify output are runtime/C-export/archive artifacts, not tracked Git files.
+- `AGENTS.md`, `PLANS.md`, `CLAIM_BOUNDARY.md`, and `PHASE_LOG.md` remain authoritative only in the active repository root on the new drive.
+
+PAPER10X_R2 boundaries:
+
+- Do not run solver/evaluator, DA, LC, GINav, MATLAB, RTKLIB, contact-aided reproduction, complete FGO, random/degraded-input generation, or any experiment.
+- Do not delete branches, tags, worktrees, old directories, raw data, archives, or migration sources.
+- Do not use `git reset`, `git clean`, `git stash`, force-push, or rebase.
+- Do not push main or merge PRs without explicit human approval and a safety scan.
+- Do not stage raw/RINEX/UBX/RTCM/bag/NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, archives, bundles, files over 50 MB, or local absolute path content.
