@@ -1102,3 +1102,29 @@ Recommended next actions:
 
 - Proceed to `PAPER10H_XB_PG_QM_BOUNDARY_DIAGNOSTIC`.
 - PAPER10H should focus on severe-GNSS boundary evidence and QM state/action/recovery, not high-precision main-performance or universal-superiority claims.
+
+## PAPER10E0 Basic Dual-Yaw EKF Baseline Freeze
+
+Completed baseline-freeze stage:
+
+```text
+PAPER10E0_BASIC_DUAL_YAW_EKF_BASELINE_FREEZE
+```
+
+PAPER10E0 constructs the Basic Dual-Yaw EKF baseline requested for later PAPER10E/PAPER10H comparison. It reuses the KF-GINS-style `cpp/legsa_v23_port_core` backbone, adds only a 1D dual-antenna body-yaw measurement update, and keeps state dimension, INS propagation, covariance propagation, and `stateFeedback` unchanged.
+
+Current PAPER10E0 evidence:
+
+- Active codebase: `paper10e0/basic-dual-yaw-ekf-baseline-freeze` from the PAPER10X_R2 base, with no large branch merge.
+- KF-GINS PDF source parse was read and indexed; `gnssUpdate`/`EKFUpdate`/`stateFeedback` reuse is documented.
+- final_v23 input scripts were audited read-only; `process_data.py` contains noise/outage logic, so smoke input assembly bypassed it and used existing normal-only 15-column provider files.
+- `applyBasicDualYawUpdate` enters the existing EKF update path with fixed 1.5 degree yaw covariance, no robust gates, and no downweight/reject/hold/fallback.
+- Basic-specific tests and C++ build passed; yaw Jacobian sign validation passed.
+- BY2 normal B00/B01 smoke completed; B01 dual-yaw update count is 274 with 0 reject and 0 downweight.
+- BY3 normal B00/B01 smoke completed as diagnostic-only; B01 dual-yaw update count is 286 with 0 reject and 0 downweight.
+
+Recommended next actions:
+
+- Human review should decide whether to proceed to PAPER10E/PAPER10H full unified matrix.
+- The next stage must add official offline evaluator metrics under a separate approved full-matrix or validation plan.
+- Keep BY3 yaw diagnostic-only until a source-backed yaw quality decision changes that boundary.

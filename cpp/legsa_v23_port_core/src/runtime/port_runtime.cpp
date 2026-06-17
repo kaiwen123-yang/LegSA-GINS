@@ -1009,6 +1009,15 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   options.debug_covariance_gain_enabled = debug_options.covariance_gain;
   options.runtime_loop_fix_applied = true;
   options.source_backed_runtime_loop_fix = true;
+  if (options.enable_basic_dual_yaw_baseline) {
+    // 中文说明：PAPER10E0 只冻结 Basic Dual-Yaw EKF 基线，不进入 source-aware/Go2/QM/Raw Doppler/FGO 阶段路由。
+    options.phase = "PAPER10E0";
+    options.port_role = "basic_dual_yaw_ekf_baseline";
+    options.run_label = options.ablation_variant.empty() ? "B01_BASIC_DUAL_YAW_EKF" : options.ablation_variant;
+    options.parity_attempted = false;
+    options.real_clean_replay_attempted = true;
+    options.engineering_backbone_parity_only = true;
+  }
   if (options.source_aware_policy_config.enable_source_aware_weighting) {
     // 中文说明：N6B 是在 source-backed port-core 上真实启用保守 LSIM/OIM R scaling 的诊断阶段。
     options.phase = options.source_aware_policy_config.source_aware_policy_version == "n6a_original_residual_ratio"
@@ -1105,9 +1114,10 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.proposed_factor_claim = false;
     options.performance_claim = false;
   }
-  if (options.qa_fallback_config.enable_qa_fallback ||
-      options.qa_fallback_config.qa_active_mode ||
-      options.algorithm_id == quality_aware::kLegsaQaFallbackEkf) {
+  if (!options.enable_basic_dual_yaw_baseline &&
+      (options.qa_fallback_config.enable_qa_fallback ||
+       options.qa_fallback_config.qa_active_mode ||
+       options.algorithm_id == quality_aware::kLegsaQaFallbackEkf)) {
     options.phase = "QA2_ACTIVE_FALLBACK_MINIMAL_EKF_INTEGRATION";
     options.port_role = "quality_aware_supervisory_fallback_candidate";
     options.run_label = options.ablation_variant.empty() ? "LegSA_QA_Fallback_EKF" : options.ablation_variant;

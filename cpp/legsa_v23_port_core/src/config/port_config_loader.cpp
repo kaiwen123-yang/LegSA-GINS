@@ -231,6 +231,18 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       boolOrDefault(kv, "no_outperform_final_v23_claim", options.no_outperform_final_v23_claim);
   options.ablation_variant = stringOrDefault(kv, "raw_doppler_diagnostic_variant_label", options.ablation_variant);
   options.ablation_variant = stringOrDefault(kv, "ablation_variant", options.ablation_variant);
+  options.enable_basic_dual_yaw_baseline =
+      boolOrDefault(kv, "enable_basic_dual_yaw_baseline", options.enable_basic_dual_yaw_baseline);
+  options.enable_dual_yaw_update = boolOrDefault(kv, "enable_dual_yaw_update", options.enable_dual_yaw_update);
+  options.basic_dual_yaw_fixed_std_deg =
+      scalarOrDefault(kv, "basic_dual_yaw_fixed_std_deg", options.basic_dual_yaw_fixed_std_deg);
+  options.disable_source_aware = boolOrDefault(kv, "disable_source_aware", options.disable_source_aware);
+  options.disable_go2 = boolOrDefault(kv, "disable_go2", options.disable_go2);
+  options.disable_qm = boolOrDefault(kv, "disable_qm", options.disable_qm);
+  options.disable_raw_doppler = boolOrDefault(kv, "disable_raw_doppler", options.disable_raw_doppler);
+  options.disable_fgo_feedback = boolOrDefault(kv, "disable_fgo_feedback", options.disable_fgo_feedback);
+  options.basic_dual_yaw_residual_sign =
+      stringOrDefault(kv, "basic_dual_yaw_residual_sign", options.basic_dual_yaw_residual_sign);
   options.qa_fallback_config.qa_passive_logging_enabled =
       boolOrDefault(kv, "qa_passive_logging_enabled", options.qa_fallback_config.qa_passive_logging_enabled);
   options.qa_fallback_config.enable_qa_fallback =
@@ -736,6 +748,57 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       boolOrDefault(kv,
                     "fgo_feedback_no_future_data_required",
                     options.fgo_feedback_config.fgo_feedback_no_future_data_required);
+  if (options.enable_basic_dual_yaw_baseline) {
+    // 中文说明：PAPER10E0 Basic 基线强制关闭 LegSA-GINS-Full 复杂模块；
+    // 即使配置误写启用项，也不得让 source-aware/Go2/QM/Raw Doppler/FGO 进入 solver。
+    options.phase = "PAPER10E0";
+    options.port_role = "basic_dual_yaw_ekf_baseline";
+    if (options.algorithm_id.empty() || options.algorithm_id == quality_aware::kLegsaQaFallbackEkf) {
+      // 中文说明：Basic baseline 不能被 algorithm_id 误写重新路由到 QA fallback。
+      options.algorithm_id = "Basic_Dual_Yaw_EKF";
+    }
+    options.ablation_variant = options.ablation_variant.empty() ? "B01_BASIC_DUAL_YAW_EKF" : options.ablation_variant;
+    options.enable_receiver_velocity_update = false;
+    options.receiver_velocity_stress_mode = "disabled";
+    options.receiver_velocity_additive_noise_std_mps = 0.0;
+    options.diagnostic_stress_only = false;
+    options.disable_source_aware = true;
+    options.disable_go2 = true;
+    options.disable_qm = true;
+    options.disable_raw_doppler = true;
+    options.disable_fgo_feedback = true;
+    options.raw_doppler = false;
+    options.raw_doppler_config.enable_raw_doppler = false;
+    options.raw_doppler_config.raw_doppler_solver_enabled = false;
+    options.go2_prior = false;
+    options.enable_go2_proprioceptive_joint_factor = false;
+    options.go2_attitude_prior_config.enable_go2_attitude_weak_prior = false;
+    options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic = false;
+    options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior = false;
+    options.go2_readiness_lsim_metadata_config.enable_go2_readiness_lsim_metadata = false;
+    options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic = false;
+    options.go2_diagnostic_prior_only = true;
+    options.source_aware_policy_config.enable_source_aware_weighting = false;
+    options.source_aware_policy_config.source_aware_mode = "off";
+    options.source_aware_policy_config.source_aware_trace_enabled = false;
+    options.lsim_oim = false;
+    options.quality_state_manager_config.enable_multi_state_qm = false;
+    options.quality_state_manager_config.multi_state_qm_mode = "QM00_OFF";
+    options.quality_state_manager_config.multi_state_qm_trace_enabled = false;
+    options.multi_state_qm = false;
+    options.fgo = false;
+    options.fgo_feedback_config.enable_fgo_feedback = false;
+    options.qa_fallback_config.enable_qa_fallback = false;
+    options.qa_fallback_config.qa_active_mode = false;
+    options.qa_fallback_config.qa_passive_logging_enabled = false;
+    options.qa_fallback_layer_present = false;
+    options.qa_fallback_active = false;
+    options.qa_passive_logging_enabled = false;
+    options.yaw_scheme_C_enabled = false;
+    options.paper_performance_claim = false;
+    options.proposed_factor_claim = false;
+    options.performance_claim = false;
+  }
   return options;
 }
 
