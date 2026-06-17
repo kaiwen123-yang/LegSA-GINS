@@ -336,7 +336,7 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
   GnssData policy_gnss = gnss;
   bool qa_active = false;
   quality_aware::QADecision qa_decision;
-  if (qa_fallback_supervisor_.loggingEnabled()) {
+  if (!options_.enable_basic_dual_yaw_baseline && qa_fallback_supervisor_.loggingEnabled()) {
     qa_decision = qa_fallback_supervisor_.evaluate(buildQAObservation(gnss));
     qa_active = qa_decision.active_mode;
     if (qa_active && qa_decision.gnss_position_action == "DOWNWEIGHT") {
@@ -355,6 +355,14 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
                     qa_decision.gnss_position_action == "HOLD");
   if (!qa_reject_position) {
     applyPositionUpdate(policy_gnss);
+  }
+  if (options_.enable_basic_dual_yaw_baseline) {
+    if (policy_gnss.has_yaw && options_.enable_dual_yaw_update) {
+      applyBasicDualYawUpdate(policy_gnss);
+    }
+    gnss.isvalid = false;
+    ++update_count_;
+    return;
   }
   if (!qa_reject_position && policy_gnss.has_velocity && receiverVelocityUpdateEnabledForTime(policy_gnss.time)) {
     GnssData stressed_gnss = receiverVelocityStressView(policy_gnss);
@@ -786,6 +794,13 @@ void GIEngine::applyPositionUpdate(GnssData& gnss) {
   setBlock(H, 0, PHI_ID, Rotation::skewSymmetric(lever_n));
   Matrix R = diagonalMatrix(cwiseProduct(positiveStd(gnss.std_ned_m, 1.0e-3), positiveStd(gnss.std_ned_m, 1.0e-3)));
   const std::vector<double> dz{dz_vec[0], dz_vec[1], dz_vec[2]};
+  if (options_.enable_basic_dual_yaw_baseline) {
+    // 中文说明：PAPER10E0 Basic 基线保持 KF-GINS 原始 GNSS 位置 3D 更新，
+    // 不经过 source-aware/QM R scaling，避免把 LegSA-GINS-Full 模块混入基础对比。
+    EKFUpdate(dz, H, R);
+    ++position_update_count_;
+    return;
+  }
   source_aware::SourceMetadata metadata;
   metadata.source = source_aware::MeasurementSource::kReceiverPosition;
   metadata.time = gnss.time;
@@ -909,6 +924,27 @@ void GIEngine::applyYawUpdate(GnssData& gnss) {
     ++yaw_downweight_count_;
   }
   EKFUpdate(dz, H, scaled_R);
+}
+
+// 中文说明：PAPER10E0 Basic Dual-Yaw EKF 的唯一新增观测。
+// 该函数复用 KF-GINS 的 21 维误差状态、EKFUpdate 和 stateFeedback；
+// 不改变 INS 机械编排、误差传播或状态反馈机制，也不做 robust gate、downweight、reject、hold 或 fallback。
+void GIEngine::applyBasicDualYawUpdate(GnssData& gnss) {
+  ++yaw_update_count_;
+  const double yaw_obs = gnss.yaw_rad;
+  const double yaw_pred = pvacur_.euler_rad[2];
+  // 中文说明：残差定义为 pred - obs；结合 H_phi_z=-1 后，EKFUpdate 内部的 dz-Hdx 与
+  // stateFeedback 的 qpn 左乘反馈符号一致。该符号由 PAPER10E0 数值扰动测试验证。
+  const double residual = wrapYawResidual(yaw_pred - yaw_obs);
+  const double yaw_std = std::max(options_.basic_dual_yaw_fixed_std_deg * D2R, 1.0e-6);
+  Matrix H(1, RANK, 0.0);
+  // 中文说明：H_yaw 只作用于姿态误差状态块的 yaw 分量，列数等于 KF-GINS 21 维误差状态。
+  H(0, PHI_ID + 2) = -1.0;
+  // 中文说明：R_yaw 使用固定角度标准差，内部单位为 rad^2；不使用 dynamic yaw_std 或 source-aware 放大。
+  Matrix R(1, 1, yaw_std * yaw_std);
+  const std::vector<double> dz{residual};
+  EKFUpdate(dz, H, R);
+  ++yaw_normal_count_;
 }
 
 void GIEngine::applyRawDopplerUpdateForTime(double update_time) {

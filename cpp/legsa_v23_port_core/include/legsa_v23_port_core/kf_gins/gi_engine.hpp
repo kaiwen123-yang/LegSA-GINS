@@ -104,6 +104,7 @@ class GIEngine {
   double deterministicVelocityNoise(double time, int axis) const;
   void applyVelocityUpdate(GnssData& gnss);
   void applyYawUpdate(GnssData& gnss);
+  void applyBasicDualYawUpdate(GnssData& gnss);
   void applyRawDopplerUpdateForTime(double update_time);
   void applyGo2AttitudeWeakPriorForTime(double update_time);
   void applyGo2VelocityDiagnosticPriorForTime(double update_time);

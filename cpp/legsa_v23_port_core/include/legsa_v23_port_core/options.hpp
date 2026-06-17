@@ -60,6 +60,17 @@ struct PortOptions {
   bool diagnostic_only = false;
   bool no_outperform_final_v23_claim = true;
   std::string ablation_variant = "baseline_full";
+  // 中文说明：PAPER10E0 Basic Dual-Yaw EKF 是 KF-GINS 原始松组合基础基线；
+  // 只允许 GNSS 位置更新和 1D 双天线 body-yaw 更新，不启用后续复杂模块。
+  bool enable_basic_dual_yaw_baseline = false;
+  bool enable_dual_yaw_update = true;
+  double basic_dual_yaw_fixed_std_deg = 1.5;
+  bool disable_source_aware = false;
+  bool disable_go2 = false;
+  bool disable_qm = false;
+  bool disable_raw_doppler = false;
+  bool disable_fgo_feedback = false;
+  std::string basic_dual_yaw_residual_sign = "pred_minus_obs";
   bool raw_doppler = false;
   bool raw_doppler_factor_code_present = false;
   bool raw_doppler_toy_factor_applied = false;

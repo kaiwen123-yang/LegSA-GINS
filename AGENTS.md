@@ -180,6 +180,9 @@ Tracked docs must use aliases only:
 - `<PAPER10G_R2A_STAGE_ROOT>`
 - `<PAPER10G_R2A_C_EXPORT_ROOT>`
 - `<PAPER10G_R2A_OBSIDIAN_SYNC_ROOT>`
+- `<PAPER10E0_STAGE_ROOT>`
+- `<PAPER10E0_C_EXPORT_ROOT>`
+- `<PAPER10E0_OBSIDIAN_SYNC_ROOT>`
 - `<PG2_XB2_RECEIVER_ROOT>`
 - `<PG2_XB2_BODY_SOURCE>`
 - `<PG3_XB3_RECEIVER_ROOT>`
@@ -222,6 +225,7 @@ The PAPER10C_R1A resume stage is represented in tracked docs only by `<PAPER10C_
 The PAPER10C_R1B low-space missing-only resume stage is represented in tracked docs only by `<PAPER10C_R1B_STAGE_ROOT>`, with export-clean material under `<PAPER10C_R1B_C_EXPORT_ROOT>` and vault notes under `<PAPER10C_R1B_OBSIDIAN_SYNC_ROOT>`.
 The PAPER10Y post-R1B maintenance/archive stage is represented in tracked docs only by `<PAPER10Y_STAGE_ROOT>`, with lightweight export material under `<PAPER10Y_C_EXPORT_ROOT>`, archive bodies under `<PAPER10Y_ARCHIVE_ROOT>`, and vault notes under `<PAPER10Y_OBSIDIAN_SYNC_ROOT>`.
 The PAPER10G_R2A LSE method-distinctness audit and recompute gate is represented in tracked docs only by `<PAPER10G_R2A_STAGE_ROOT>`, with export-clean material under `<PAPER10G_R2A_C_EXPORT_ROOT>` and vault notes under `<PAPER10G_R2A_OBSIDIAN_SYNC_ROOT>`.
+The PAPER10E0 Basic Dual-Yaw EKF baseline freeze is represented in tracked docs only by `<PAPER10E0_STAGE_ROOT>`, with lightweight export material under `<PAPER10E0_C_EXPORT_ROOT>` and vault notes under `<PAPER10E0_OBSIDIAN_SYNC_ROOT>`.
 Prior BY3 source-aware source material imported by PAPER10C_R1 is represented only by `<PAPER10B_R2_STAGE_ROOT>`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
@@ -1304,3 +1308,26 @@ PAPER10X_R2 boundaries:
 - Do not use `git reset`, `git clean`, `git stash`, force-push, or rebase.
 - Do not push main or merge PRs without explicit human approval and a safety scan.
 - Do not stage raw/RINEX/UBX/RTCM/bag/NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, archives, bundles, files over 50 MB, or local absolute path content.
+
+## 47. PAPER10E0 Basic Dual-Yaw EKF Baseline Freeze
+
+`PAPER10E0_BASIC_DUAL_YAW_EKF_BASELINE_FREEZE` freezes a minimal Basic Dual-Yaw EKF baseline for later PAPER10E/PAPER10H comparison. The active codebase is `paper10e0/basic-dual-yaw-ekf-baseline-freeze` using `cpp/legsa_v23_port_core` from the PAPER10X_R2 base commit. This stage does not merge other branches.
+
+PAPER10E0 proven facts:
+
+- The KF-GINS source parse PDF was read and indexed. The reused backbone is the original loose-coupled GNSS/INS flow: IMU mechanization/propagation, GNSS position update, generic `EKFUpdate`, and `stateFeedback`.
+- final_v23 `process_data.py`, `run_final_mainline.py`, and config docs were audited read-only. `process_data.py` contains semi-physical yaw noise/outlier/outage logic and no dedicated PAPER10E0 normal-only gate, so PAPER10E0 did not call it for smoke input assembly.
+- Basic Dual-Yaw EKF is formally defined as KF-GINS original propagation plus original 3D GNSS position update plus one optional 1D dual-antenna body-yaw update. The state dimension, INS propagation, and state feedback are unchanged.
+- `applyBasicDualYawUpdate` uses `dz = wrap(yaw_INS - yaw_dual)`, `H(0, PHI_ID + 2) = -1`, and fixed `R_yaw = (1.5 deg)^2` in radians squared through the existing `EKFUpdate`.
+- source-aware, Go2, QM, Raw Doppler, FGO feedback, QA fallback, and final_v23 robust yaw gate/downweight/reject/hold/fallback are hard-disabled under `enable_basic_dual_yaw_baseline=true`.
+- The yaw Jacobian sign test passed, Basic-specific unit tests passed, and the C++ `legsa_v23_port_core_demo` target built successfully.
+- BY2 normal smoke completed for B00 position-only and B01 Basic Dual-Yaw; B01 applied 274 yaw updates with 0 reject and 0 downweight.
+- BY3 normal smoke completed for B00 and B01 as diagnostic-only; B01 applied 286 yaw updates with 0 reject and 0 downweight. BY3 yaw remains poor-heading diagnostic-only and is not ordinary yaw generalization.
+
+PAPER10E0 boundaries:
+
+- This stage is smoke-only and does not authorize paper performance claims, final method claims, final_v23 outperformance, or BY3 ordinary yaw generalization.
+- No BY2/BY3 120 degradation matrix, source-aware LSIM/OIM, Go2 weak prior/readiness, QM, Raw Doppler, selected feedback, complete FGO, DA, LC, GINav, MATLAB, RTKLIB, trace online, per-case tuning, or output substitution was run.
+- Official trace RMSE was not run in PAPER10E0; smoke evidence is runtime closure, update counts, disabled-module manifests, and diagnostic yaw residual QA only.
+- Runtime outputs under `<PAPER10E0_STAGE_ROOT>`, C export material under `<PAPER10E0_C_EXPORT_ROOT>`, and Obsidian notes under `<PAPER10E0_OBSIDIAN_SYNC_ROOT>` are not solver inputs and must not be confused with tracked algorithm sources.
+- Do not stage NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, raw/by2/by3/trace data, archives, files over 50 MB, or local absolute paths.

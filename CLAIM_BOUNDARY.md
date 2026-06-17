@@ -2494,3 +2494,27 @@ Still forbidden after PAPER10X_R2:
 - deleting branches/tags/worktrees/old directories or modifying raw receiver/by2/by3/trace data;
 - merging unsafe branches, pushing main, force-pushing, rebasing, resetting, cleaning, stashing, or closing PRs without human approval;
 - committing raw/RINEX/UBX/RTCM/bag/NAV/STD/EVAL_NAV/RUN_MANIFEST, generated images/PDFs, archives, bundles, files over 50 MB, local absolute paths, or forbidden claims.
+
+## PAPER10E0 Basic Dual-Yaw EKF Baseline Boundary
+
+Allowed after PAPER10E0:
+
+- PAPER10E0 may state that Basic Dual-Yaw EKF is implemented as a minimal KF-GINS extension: original propagation, original 3D GNSS position update, and one optional 1D dual-antenna body-yaw update.
+- PAPER10E0 may state that the dual-yaw update enters the existing `EKFUpdate` path and uses `dz = wrap(yaw_INS - yaw_dual)`, `H(0, PHI_ID + 2) = -1`, and fixed `R_yaw = (1.5 deg)^2` in radians squared.
+- PAPER10E0 may state that state dimension, INS mechanization, covariance propagation, and `stateFeedback` were not changed.
+- PAPER10E0 may state that source-aware, Go2, QM, Raw Doppler, FGO feedback, QA fallback, and final_v23 robust yaw logic were disabled under the Basic baseline.
+- PAPER10E0 may state that BY2 normal smoke completed and that BY3 normal smoke completed as diagnostic-only.
+
+Boundary after PAPER10E0:
+
+- Smoke evidence is runtime closure and update activation, not final performance evidence.
+- Official trace RMSE was not run in this stage.
+- BY3 yaw remains poor-heading diagnostic-only and cannot support ordinary yaw generalization.
+- final_v23 remains a strong external baseline with different robust logic; it is not Basic Dual-Yaw and was not used as solver input.
+
+Still forbidden after PAPER10E0:
+
+- claiming Basic Dual-Yaw is the final proposed method or outperforms final_v23;
+- claiming Basic Dual-Yaw uses source-aware, Go2, QM, Raw Doppler, FGO, QA fallback, or final_v23 robust gate/downweight/reject/hold/fallback;
+- claiming BY3 ordinary yaw generalization, full degradation matrix completion, paper performance readiness, trace online use, final_v23/LegSA output solver input, output substitution, bad-epoch deletion, or per-case tuning;
+- committing raw/by2/by3/trace data, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated images/PDFs/SVGs, archives, runtime-heavy outputs, files over 50 MB, or local absolute paths.
