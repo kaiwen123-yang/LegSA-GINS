@@ -1128,3 +1128,16 @@ Recommended next actions:
 - Human review should decide whether to proceed to PAPER10E/PAPER10H full unified matrix.
 - The next stage must add official offline evaluator metrics under a separate approved full-matrix or validation plan.
 - Keep BY3 yaw diagnostic-only until a source-backed yaw quality decision changes that boundary.
+## PAPER10Z3 Remote/Local Reconciliation And exFAT Migration
+
+PAPER10Z3 creates the post-migration operating model:
+
+- active code stays under `<LEGSA_CODE_ROOT>` on WSL/ext4;
+- project assets, raw-data copies, archives, reports, registry files, and Obsidian stay under `<LEGSA_PROJECT_ROOT>`;
+- the Obsidian vault is `<LEGSA_OBSIDIAN_ROOT>`;
+- Git bundles and restore guides are kept under `<LEGSA_PROJECT_ROOT>/backups`;
+- stage reports are kept under `<PAPER10Z3_STAGE_REPORT_ROOT>`.
+
+The stage is migration/governance only. It may reconcile local and remote code capabilities, create verified bundles, clone and validate the new WSL code root, copy raw datasets with hash verification, archive legacy Windows/WSL directories, quarantine Obsidian conflicts, create registry/path-map files, and write lightweight context docs. It must not run algorithms, tune with trace/final_v23, execute degradation matrices, push, merge, force-push, reset, clean, stash, or delete any source before validation gates pass.
+
+PAPER10H may start only after the final PAPER10Z3 report records a pass or a non-critical conditional pass, verified bundle, validated new code root, readable Obsidian vault, readable raw data from the new project root, complete registry, no unaccounted files, archived legacy runtime, and sufficient project-root free space.
