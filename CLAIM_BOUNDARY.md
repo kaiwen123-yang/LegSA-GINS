@@ -2518,3 +2518,25 @@ Still forbidden after PAPER10E0:
 - claiming Basic Dual-Yaw uses source-aware, Go2, QM, Raw Doppler, FGO, QA fallback, or final_v23 robust gate/downweight/reject/hold/fallback;
 - claiming BY3 ordinary yaw generalization, full degradation matrix completion, paper performance readiness, trace online use, final_v23/LegSA output solver input, output substitution, bad-epoch deletion, or per-case tuning;
 - committing raw/by2/by3/trace data, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated images/PDFs/SVGs, archives, runtime-heavy outputs, files over 50 MB, or local absolute paths.
+## PAPER10Z3 Migration Claim Boundary
+
+Allowed after PAPER10Z3:
+
+- State that the project uses a dual-root layout: active code under `<LEGSA_CODE_ROOT>` and project assets under `<LEGSA_PROJECT_ROOT>`.
+- State that `<LEGSA_OBSIDIAN_ROOT>` is the active Obsidian vault after safe merge/quarantine.
+- State that raw-data copies under `<LEGSA_PROJECT_ROOT>/data/raw` are governed as immutable-by-policy copies when the final report records matching file counts, byte counts, and SHA256 manifests.
+- State that remote/local code capability status is documented by the PAPER10Z3 capability matrix under `<PAPER10Z3_STAGE_REPORT_ROOT>`.
+- State that Git restore is backed by verified bundle artifacts only when `bundle verify` and SHA256 are recorded in the final report.
+
+Boundary after PAPER10Z3:
+
+- Migration/archive evidence is operational provenance, not algorithm performance evidence.
+- Obsidian conflicts, dirty worktrees, compression-level fallbacks, full-test failures, or retained legacy paths must remain explicitly reported and cannot be converted into a clean pass.
+- New project-root registries and aliases explain historical paths; they do not authorize rewriting immutable historical reports.
+
+Still forbidden after PAPER10Z3:
+
+- claiming any new BY2/BY3/XB/PG algorithm result, degradation-matrix completion, performance improvement, final_v23 outperformance, or paper-ready metric from migration evidence;
+- treating raw source observations, Go2 state, trace, final_v23 output, or archived runtime as solver input authorization;
+- committing raw data, archives, bundles, generated figures, runtime payloads, local absolute paths, NAV/STD/EVAL_NAV/RUN_MANIFEST, or large artifacts;
+- pushing, merging, closing protected PRs, deleting branches, force-pushing, resetting, cleaning, stashing, or deleting legacy directories before the final gate report and human approval.

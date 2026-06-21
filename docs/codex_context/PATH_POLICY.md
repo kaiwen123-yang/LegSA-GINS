@@ -4,6 +4,11 @@ Tracked docs must use aliases instead of local absolute paths.
 
 ## Core Aliases
 
+- `<LEGSA_CODE_ROOT>`: active WSL/ext4 code root after PAPER10Z3.
+- `<LEGSA_PROJECT_ROOT>`: exFAT project asset root after PAPER10Z3; not an active Git checkout or C++ build root.
+- `<LEGSA_OBSIDIAN_ROOT>`: Obsidian vault under `<LEGSA_PROJECT_ROOT>`.
+- `<PAPER10Z3_STAGE_REPORT_ROOT>`: PAPER10Z3 final stage report directory under `<LEGSA_PROJECT_ROOT>/reports/stages`.
+- `<PAPER10Z3_RUNTIME_ROOT>`: local runtime root for PAPER10Z3 migration manifests and gate evidence; tracked docs must reference it by alias only.
 - `<WINDOWS_AUDIT_ROOT>`: Windows audit workspace.
 - `<WSL_AUDIT_ROOT>`: WSL path to the Windows audit workspace.
 - `<WSL_ALGO_REPO>`: WSL algorithm source repository.

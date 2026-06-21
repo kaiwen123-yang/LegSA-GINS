@@ -76,3 +76,17 @@ The final reviewer must check that staged files contain no local absolute path l
 PAPER10X_R2 is Git-only. It may fetch remote refs, audit local/remote branches, audit PRs, classify merge decisions, create missing local annotated stage tags, create and verify `git bundle --all`, generate restore/new-drive policy, sync lightweight Obsidian notes, and commit safe reports locally.
 
 PAPER10X_R2 must not automatically merge, close, delete, force-push, reset, clean, stash, rebase, or push main. PR #21 and PR #52 remain protected by explicit human-decision gates. Any future PR push or merge must happen after bundle verification and a branch-specific safety scan.
+## PAPER10Z3 Workflow Policy
+
+PAPER10Z3 is a supervised reconciliation and migration workflow:
+
+1. Reconcile remote, local, tags, branches, worktrees, and local-only PAPER10 capabilities.
+2. Create and verify a full-refs Git bundle before any cleanup.
+3. Create `<LEGSA_CODE_ROOT>` from the old local repository and validate HEAD, refs, `git fsck`, CMake configure, and required build targets.
+4. Create `<LEGSA_PROJECT_ROOT>` structure, copy raw datasets, and verify count, byte, and SHA256 parity.
+5. Merge Obsidian into `<LEGSA_OBSIDIAN_ROOT>` without overwriting conflicting files; quarantine conflicts.
+6. Archive Windows and WSL legacy paths with SHA256 and archive readability tests.
+7. Preserve dirty worktree status, diffs, cached diffs, and untracked lists; dirty worktrees are not automatically deleted.
+8. Generate registry, path map, archive index, deletion index, conflict index, final smoke, and next-stage gate reports.
+
+The worker must not run solvers/evaluators, generate degradation inputs, call MATLAB/RTKLIB/Ginav solvers, change algorithm math, push, merge, reset, clean, stash, force-push, or delete any source before the corresponding validation gates pass. Human approval remains required for merge, tag, PR closure, branch deletion, and any stage transition.

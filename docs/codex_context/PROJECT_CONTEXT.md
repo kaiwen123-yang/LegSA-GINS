@@ -207,3 +207,14 @@ Current policy:
 - No main push is authorized.
 - Local-only PAPER10 evidence branches are preserved in the verified bundle until the human decides PR/merge/delete policy.
 - The active repository root on the new drive remains the authority for `AGENTS.md`, `PLANS.md`, `CLAIM_BOUNDARY.md`, and `PHASE_LOG.md`.
+## PAPER10Z3 Dual-Root Project Context
+
+After PAPER10Z3, LegSA-GINS uses two separate authority roots:
+
+- `<LEGSA_CODE_ROOT>` is the only active code root for Git checkout, C++ build, Python tests, and code edits.
+- `<LEGSA_PROJECT_ROOT>` is the project asset root for raw-data copies, reports, registry files, archives, restore guides, literature, exports, and experiment assets.
+- `<LEGSA_OBSIDIAN_ROOT>` is the active project vault inside the asset root.
+
+The exFAT project asset root is not used for active Git development, CMake build directories, or high-frequency runtime work. WSL worktrees and runtime directories must be archived and verified before any cleanup decision. Raw source directories copied into the project root remain retained pending human approval and are not deleted by PAPER10Z3.
+
+PAPER10Z3 records remote/local module status in `<PAPER10Z3_STAGE_REPORT_ROOT>` and does not merge local-only branches. The stage has no algorithm-math scope and does not create new solver/evaluator evidence.

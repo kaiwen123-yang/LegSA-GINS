@@ -1331,3 +1331,14 @@ PAPER10E0 boundaries:
 - Official trace RMSE was not run in PAPER10E0; smoke evidence is runtime closure, update counts, disabled-module manifests, and diagnostic yaw residual QA only.
 - Runtime outputs under `<PAPER10E0_STAGE_ROOT>`, C export material under `<PAPER10E0_C_EXPORT_ROOT>`, and Obsidian notes under `<PAPER10E0_OBSIDIAN_SYNC_ROOT>` are not solver inputs and must not be confused with tracked algorithm sources.
 - Do not stage NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, raw/by2/by3/trace data, archives, files over 50 MB, or local absolute paths.
+## PAPER10Z3 Migration And Dual-Root Policy
+
+PAPER10Z3 establishes a dual-root operating model:
+
+- `<LEGSA_CODE_ROOT>` is the active WSL/ext4 code root.
+- `<LEGSA_PROJECT_ROOT>` is the exFAT project asset root.
+- `<LEGSA_OBSIDIAN_ROOT>` is the Obsidian vault inside the project asset root.
+
+The project asset root is not an active Git checkout, C++ build root, or high-frequency experiment workspace. Raw datasets copied into `<LEGSA_PROJECT_ROOT>/data/raw` are immutable by policy and their original source directories remain retained until explicit human approval. Runtime outputs, generated figures, archives, bundles, raw data, NAV/STD/EVAL_NAV/RUN_MANIFEST files, and local absolute paths remain forbidden in Git.
+
+PAPER10Z3 is a reconciliation, migration, archive, and cleanup stage only. It does not authorize algorithm-math changes, solver/evaluator runs, BY2/BY3 matrices, XB/PG execution, MATLAB, RTKLIB/Ginav solver use, PR merge, force push, or push.
