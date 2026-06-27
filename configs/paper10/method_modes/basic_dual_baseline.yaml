@@ -1,0 +1,60 @@
+{
+  "method_mode_id": "basic_dual_baseline",
+  "description": "Controlled Basic Dual-Yaw EKF baseline comparator for PAPER10L/PAPER10M queues.",
+  "role": "baseline comparator",
+  "allowed_dataset_roles": [
+    "BY2_main_dataset",
+    "BY3_position_up_stress_with_diagnostic_yaw"
+  ],
+  "solver_core": "legsa_v23_port_core_demo",
+  "feature_flags": {
+    "enable_raw_doppler": false,
+    "enable_source_aware": false,
+    "enable_go2_roll_pitch_prior": false,
+    "enable_go2_horizontal_velocity_prior": false,
+    "enable_go2_joint_factor": false,
+    "enable_go2_readiness_motion_metadata": false,
+    "enable_multi_state_qm": false,
+    "enable_fgo_no_feedback": false,
+    "enable_fgo_feedback": false,
+    "enable_benchmark_methods": false,
+    "enable_qa_fallback": false,
+    "enable_trace_online": false,
+    "enable_final_v23_output_input": false,
+    "enable_legsa_output_input": false,
+    "enable_per_case_tuning": false,
+    "enable_output_only_correction": false
+  },
+  "required_inputs": [
+    "gnss_position",
+    "dual_antenna_yaw"
+  ],
+  "forbidden_inputs": [
+    "trace_vrtk2_online",
+    "final_v23_output",
+    "legsa_output",
+    "benchmark_output",
+    "external_method_output",
+    "per_case_tuned_config",
+    "hand_edited_nav_std",
+    "output_only_corrected_trajectory"
+  ],
+  "output_contract": [
+    "NAV",
+    "STD",
+    "EVAL_NAV_or_metric_csv_json",
+    "RUN_MANIFEST",
+    "FEATURE_FLAG_DUMP",
+    "DATASET_ROLE_DUMP"
+  ],
+  "claim_level": "baseline_only_not_proposed_innovation",
+  "paper10m_allowed_after_human_approval": true,
+  "paper10h_allowed_after_human_approval": false,
+  "run_allowed_now": false,
+  "trace_online_allowed": false,
+  "final_v23_output_solver_input_allowed": false,
+  "legsa_output_solver_input_allowed": false,
+  "per_case_tuning_allowed": false,
+  "output_only_correction_allowed": false,
+  "benchmark_code_allowed_in_solver": false
+}

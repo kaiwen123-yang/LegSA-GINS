@@ -2385,7 +2385,7 @@ Boundary after PAPER10G:
 
 Still forbidden after PAPER10G:
 
-- claiming Go2 yaw or Go2 position as truth;
+- claiming Go2 yaw or Go2 position as ground truth;
 - claiming legged-only sensing provides absolute yaw or global position;
 - claiming full contact-aided InEKF, full leg odometry, Hartley full reproduction, or complete nine-factor FGO was completed;
 - claiming universal superiority, final_v23 outperformance, BY3 ordinary yaw generalization, trace online use, final_v23/LegSA output solver input, output substitution, bad-epoch deletion, or per-case tuning;

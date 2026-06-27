@@ -1,0 +1,18 @@
+{
+  "contract_id": "paper10l_evaluator_contract",
+  "evaluator_allowed": [
+    "trace_as_evaluation_only_reference",
+    "NAV_STD_EVAL_output_comparison",
+    "post_run_error_analysis"
+  ],
+  "evaluator_forbidden": [
+    "feeding_trace_back_into_solver_provider_or_config",
+    "choosing_method_mode_by_metric",
+    "deleting_epochs_after_evaluation",
+    "retuning_with_final_v23_output",
+    "retuning_with_legsa_output"
+  ],
+  "trace_feedback_to_solver_allowed": false,
+  "metric_driven_mode_selection_allowed": false,
+  "delete_epochs_after_evaluation_allowed": false
+}

@@ -1,0 +1,25 @@
+{
+  "contract_id": "paper10l_output_contract",
+  "required_outputs": [
+    "NAV",
+    "STD",
+    "EVAL_NAV_or_metric_csv_json",
+    "RUN_MANIFEST",
+    "SOURCE_TRACE_if_enabled",
+    "QM_TRACE_if_enabled",
+    "FEATURE_FLAG_DUMP",
+    "DATASET_ROLE_DUMP",
+    "NO_HIDDEN_CONFIG"
+  ],
+  "forbidden_outputs_in_git": [
+    "NAV",
+    "STD",
+    "EVAL_NAV",
+    "RUN_MANIFEST_full_runtime",
+    "generated_figures",
+    "raw_data",
+    "old_zip"
+  ],
+  "hidden_config_allowed": false,
+  "hand_edited_nav_std_allowed": false
+}

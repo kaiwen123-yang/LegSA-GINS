@@ -1,0 +1,35 @@
+{
+  "contract_id": "paper10l_claim_boundary_contract",
+  "allowed_bounded_claims": [
+    "source_backed_backbone_as_engineering_baseline",
+    "basic_dual_as_baseline_comparator",
+    "raw_doppler_auxiliary_observation_if_provider_valid",
+    "source_aware_lsim_oim_active_r_scaling_if_frozen",
+    "go2_roll_pitch_weak_prior",
+    "go2_horizontal_velocity_weak_prior",
+    "go2_joint_proprioceptive_factor_supporting_or_appendix",
+    "multi_state_qm_bounded_mechanism_with_mixed_evidence_caveat",
+    "fgo_feedback_ekf_secondary_or_appendix_if_policy_frozen"
+  ],
+  "forbidden_claims": [
+    "comprehensive_final_v23_superiority",
+    "universal_superiority",
+    "BY3_yaw_generalization",
+    "XB_PG_high_precision_severe_GNSS_proof",
+    "Go2_position_truth",
+    "Go2_yaw_truth",
+    "Go2_velocity_truth",
+    "trace_online",
+    "final_v23_output_as_solver_input",
+    "LegSA_output_as_solver_input",
+    "QA_fallback_as_final_method",
+    "LSE_as_absolute_yaw_method",
+    "complete_nine_factor_FGO_as_fully_paper_validated",
+    "exact_external_reproduction_unless_proven",
+    "per_case_tuning",
+    "output_only_correction",
+    "deleting_bad_epochs",
+    "benchmark_method_mixed_into_solver",
+    "FGO_output_substitution"
+  ]
+}
