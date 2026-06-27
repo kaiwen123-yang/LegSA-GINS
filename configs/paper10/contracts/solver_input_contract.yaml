@@ -1,0 +1,28 @@
+{
+  "contract_id": "paper10l_solver_input_contract",
+  "solver_input_allowed": [
+    "raw_BY2_BY3_XB_PG_data_through_approved_providers",
+    "gnss_position_status",
+    "gnss_dual_antenna_yaw_or_A1_relpos_yaw_if_provider_passes",
+    "raw_doppler_provider_output_if_regenerated_or_verified",
+    "go2_body_state_high_level_data_through_parser",
+    "go2_weak_priors_generated_from_body_state_only",
+    "fgo_feedback_same_case_only_if_policy_frozen"
+  ],
+  "solver_input_forbidden": [
+    "trace_vrtk2_online_input",
+    "final_v23_output_as_input",
+    "legsa_output_as_input",
+    "benchmark_output_as_input",
+    "external_method_output_as_input",
+    "per_case_tuned_config",
+    "hand_edited_NAV_STD",
+    "output_only_corrected_trajectories"
+  ],
+  "trace_online_allowed": false,
+  "final_v23_output_solver_input_allowed": false,
+  "legsa_output_solver_input_allowed": false,
+  "benchmark_output_solver_input_allowed": false,
+  "per_case_tuning_allowed": false,
+  "output_only_correction_allowed": false
+}

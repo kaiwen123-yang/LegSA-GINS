@@ -1,0 +1,20 @@
+{
+  "contract_id": "paper10l_runner_contract",
+  "formal_execution_entrypoints": [
+    "legsa_v23_port_core_demo",
+    "by2_algorithm_runner"
+  ],
+  "diagnostic_only_entrypoints": [
+    "legsa_gins_run_filter_csv"
+  ],
+  "paper10m_queue_locked_by_default": true,
+  "paper10h_queue_locked_by_default": true,
+  "large_run_allowed_now": false,
+  "degradation_matrix_allowed_now": false,
+  "literature_benchmark_full_matrix_allowed_now": false,
+  "run_allowed_now": false,
+  "requires_human_approval_to_unlock": true,
+  "same_case_feedback_required": true,
+  "clean_feedback_reuse_for_degraded_cases_allowed": false,
+  "eval_nav_feedback_uses_trace_or_error_corrections": false
+}

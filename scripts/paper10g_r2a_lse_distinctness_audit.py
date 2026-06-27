@@ -5,6 +5,8 @@ The script is path-argument driven so tracked source does not embed local data
 roots. It audits PAPER10G_R2 as evidence, repairs the backend-distinctness
 failure by recomputing independent proxy backends, and writes runtime/export
 artifacts for the R2A gate.
+
+中文说明：本脚本只用于 LSE 方法差异性审计，不把 LSE 写成绝对航向方法。
 """
 
 from __future__ import annotations
@@ -1225,7 +1227,7 @@ def write_recompute_plan(runtime: Path) -> None:
 def write_claims_and_roles(runtime: Path, metric_rows: list[dict[str, Any]]) -> None:
     write_text(
         runtime / "17_absolute_yaw_NA_revalidation/PAPER10G_R2A_ABSOLUTE_YAW_NA_REVALIDATION.md",
-        "# PAPER10G_R2A Absolute Yaw N/A Revalidation\n\nAll repaired LSE backends use Go2 IMU/high-level leg kinematic proxies only. They do not ingest GNSS dual-yaw, Go2 yaw as truth, Go2 position as truth, final_v23 output, or LegSA-GINS output. Therefore they provide local relative yaw only; absolute yaw RMSE remains `NOT_APPLICABLE_WITH_PROOF`.\n",
+        "# PAPER10G_R2A Absolute Yaw N/A Revalidation\n\nAll repaired LSE backends use Go2 IMU/high-level leg kinematic proxies only. They do not ingest GNSS dual-yaw, Go2 yaw as ground truth, Go2 position as ground truth, final_v23 output, or LegSA-GINS output. Therefore they provide local relative yaw only; absolute yaw RMSE remains `NOT_APPLICABLE_WITH_PROOF`.\n",
     )
     role_rows = [
         {"source_or_method": "LSE01-LSE05", "role": "local proprioceptive odometry/attitude/velocity proxy", "absolute_yaw": "not observable without global reference", "LegSA_GINS_relation": "can support Go2/QM context, cannot replace dual-yaw"},

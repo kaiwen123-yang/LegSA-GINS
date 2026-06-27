@@ -1,0 +1,14 @@
+{
+  "contract_id": "paper10l_benchmark_isolation_contract",
+  "benchmark_methods": [
+    "DA",
+    "LC",
+    "LSE"
+  ],
+  "benchmark_code_allowed_in_solver": false,
+  "benchmark_output_solver_input_allowed": false,
+  "enable_benchmark_methods_default": false,
+  "lse_absolute_yaw_method_claim_allowed": false,
+  "official_exact_reproduction_claim_allowed_without_proof": false,
+  "notes": "Benchmark comparison code remains isolated from the main solver and from final candidate feature flags."
+}

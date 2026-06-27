@@ -1,0 +1,24 @@
+{
+  "contract_id": "paper10l_path_guard_contract",
+  "tracked_docs_configs_scripts_must_use_aliases": true,
+  "local_absolute_paths_allowed_in_tracked_docs_configs_scripts": false,
+  "raw_data_copy_allowed": false,
+  "runtime_output_commit_allowed": false,
+  "paper10m_run_queue_default_locked": true,
+  "paper10h_run_queue_default_locked": true,
+  "allowed_aliases": [
+    "<LEGSA_CODE_ROOT>",
+    "<LEGSA_PROJECT_ROOT>",
+    "<PAPER10L_STAGE_ROOT>",
+    "<PAPER10L0_STAGE_ROOT>",
+    "<BY2_FIX_ROOT>",
+    "<BY2_GO2_BODY_ROOT>",
+    "<EXPORT_ROOT>"
+  ],
+  "forbidden_path_patterns": [
+    "WINDOWS_USER_PROFILE_ABSOLUTE_PATH",
+    "WSL_WINDOWS_USER_PROFILE_ABSOLUTE_PATH",
+    "LOCAL_HOME_USER_ABSOLUTE_PATH",
+    "LOCAL_MEDIA_USER_ABSOLUTE_PATH"
+  ]
+}
