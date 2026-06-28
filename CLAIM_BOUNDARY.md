@@ -2565,3 +2565,26 @@ Still forbidden after PAPER10M1R2A V2:
 - treating trace, final_v23 output, LegSA output, benchmark output, or Go2 source fields as solver truth/input authorization;
 - modifying or copying raw data, overwriting raw data with degraded providers, running solver/evaluator/full matrix/internal ablation/horizontal benchmark, deleting epochs, tuning per case, or performing output-only correction;
 - committing raw data, by2/by3 source files, degraded provider payloads, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, archives, local absolute paths, or secrets.
+
+## PAPER10M1R2B V2 Provider Generation Claim Boundary
+
+Allowed after PAPER10M1R2B V2, only if the final report records a pass:
+
+- State that degraded provider packages were generated from the M1R2A locked BY2 541-case manifest.
+- State that every provider-ready case has seed replay, input SHA256, generated provider SHA256, case spec dump, and effect-validation summary.
+- State that effect validation passed for provider-ready cases.
+- State that M1R2C and M1R2D queue drafts were refreshed from provider-ready cases with `run_allowed_now=false`.
+
+Boundary after PAPER10M1R2B V2:
+
+- M1R2B has no algorithm performance result, no solver result, no evaluator result, no full algorithm matrix result, and no internal ablation result.
+- BY2 controlled degradation is still a controlled provider stress protocol, not independent real-world severe-environment generalization.
+- Provider generation/effect validation can support reproducibility and execution readiness only; it cannot support algorithm superiority by itself.
+- Algorithm conclusions must wait for M1R2C/M1R2D execution and human review.
+
+Still forbidden after PAPER10M1R2B V2:
+
+- claiming paper performance, universal superiority, final_v23 comprehensive superiority, final paper readiness, BY3 yaw generalization, XB/PG high-precision severe-GNSS proof, exact external reproduction, or complete nine-factor FGO validation;
+- treating trace, final_v23 output, LegSA output, benchmark output, or Go2 source fields as provider-generation truth or solver input authorization;
+- modifying/copying raw data, overwriting raw data with degraded providers, running solver/evaluator/full algorithm matrix/internal ablation/PAPER10H without a later approved stage, deleting epochs, tuning per case, or performing output-only correction;
+- committing raw data, by2/by3 source files, degraded provider payloads, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, export-clean zips, local absolute paths, or secrets.

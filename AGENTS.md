@@ -1365,3 +1365,23 @@ Downstream route:
 - `PAPER10M1R2C` may run the four frozen method modes only after M1R2B passes.
 - `PAPER10M1R2D` may run internal ablations only after M1R2C review.
 - PAPER10H remains blocked and separate.
+
+## 49. PAPER10M1R2B V2 BY2 Degraded Provider Generation
+
+`PAPER10M1R2B_V2_BY2_DEGRADED_PROVIDER_GENERATION_AND_EFFECT_VALIDATION_541CASES` must follow the M1R2A frozen 541-case manifest exactly. Codex must not redesign degradation types, seeds, anchors, case counts, or claim boundaries during provider generation.
+
+PAPER10M1R2B fixed rules:
+
+- Every degraded provider package must be defined by the M1R2A `case_id`, `degradation_type_id`, seed replay, anchor realization, and effect-validation rule.
+- Every provider package must include seed replay, input source SHA256 manifest, generated provider SHA256 manifest, case spec dump, provider generation log, and effect-validation summary.
+- Trace remains evaluation-only and must not enter provider generation, anchor realization, solver input, tuning, or feedback.
+- final_v23 and LegSA outputs must not be used for provider generation, anchor realization, or effect adjustment.
+- Raw Doppler and receiver velocity remain separate provider channels; receiver velocity must not be substituted for Raw Doppler.
+- Go2 high-level/body-state data remain weak-prior or metadata sources only, never truth.
+- Degraded providers must never overwrite raw data and must remain runtime artifacts outside tracked Git.
+- Provider runtime directories, degraded provider CSV payloads, raw/by2 source files, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, and export-clean zips must not be committed.
+
+PAPER10M1R2B boundaries:
+
+- This stage may generate provider runtime packages and effect-validation reports only.
+- It does not authorize solver runs, evaluator runs, full algorithm matrices, internal ablations, horizontal benchmark matrices, PAPER10H, BY3/XB/PG execution, performance claims, final paper claims, or universal-superiority wording.
