@@ -1141,3 +1141,30 @@ PAPER10Z3 creates the post-migration operating model:
 The stage is migration/governance only. It may reconcile local and remote code capabilities, create verified bundles, clone and validate the new WSL code root, copy raw datasets with hash verification, archive legacy Windows/WSL directories, quarantine Obsidian conflicts, create registry/path-map files, and write lightweight context docs. It must not run algorithms, tune with trace/final_v23, execute degradation matrices, push, merge, force-push, reset, clean, stash, or delete any source before validation gates pass.
 
 PAPER10H may start only after the final PAPER10Z3 report records a pass or a non-critical conditional pass, verified bundle, validated new code root, readable Obsidian vault, readable raw data from the new project root, complete registry, no unaccounted files, archived legacy runtime, and sufficient project-root free space.
+
+## PAPER10M1R2A V2 BY2 Degradation Matrix Spec Lock
+
+Current stage:
+
+```text
+PAPER10M1R2A_V2_BY2_DEGRADATION_MATRIX_SPEC_LOCK_60TYPES_9SEEDS
+```
+
+PAPER10M1R2A V2 is a no-run specification-lock stage. It locks the canonical BY2 controlled-degradation manifest as 60 fixed degradation types, 9 fixed seeds per type, and one clean case:
+
+- degraded cases: 540
+- clean cases: 1
+- total cases: 541
+- RNG: `numpy.random.PCG64`
+- trace role: evaluation-only
+- Go2 role: weak-prior/metadata source, not truth
+- module-disable: not a case axis
+
+Next stages:
+
+- `PAPER10M1R2B_PROVIDER_GENERATION_AND_EFFECT_VALIDATION`: generate degraded providers from the locked 541-case manifest and validate each effect rule; no solver/evaluator.
+- `PAPER10M1R2C_FULL_ALGORITHM_BY2_DEGRADATION_EXECUTION`: after M1R2B passes, run four frozen method modes over 541 cases.
+- `PAPER10M1R2D_INTERNAL_ABLATION_BY2_DEGRADATION_EXECUTION`: after M1R2C review, run nine internal ablation method rows over 541 cases.
+- PAPER10H remains blocked until human review and explicit authorization.
+
+This route does not authorize performance claims, final paper claims, universal superiority, final_v23 superiority, BY3 yaw generalization, XB/PG severe-GNSS claims, trace-online use, or output-only correction.

@@ -1342,3 +1342,26 @@ PAPER10Z3 establishes a dual-root operating model:
 The project asset root is not an active Git checkout, C++ build root, or high-frequency experiment workspace. Raw datasets copied into `<LEGSA_PROJECT_ROOT>/data/raw` are immutable by policy and their original source directories remain retained until explicit human approval. Runtime outputs, generated figures, archives, bundles, raw data, NAV/STD/EVAL_NAV/RUN_MANIFEST files, and local absolute paths remain forbidden in Git.
 
 PAPER10Z3 is a reconciliation, migration, archive, and cleanup stage only. It does not authorize algorithm-math changes, solver/evaluator runs, BY2/BY3 matrices, XB/PG execution, MATLAB, RTKLIB/Ginav solver use, PR merge, force push, or push.
+
+## 48. PAPER10M1R2A V2 BY2 Degradation Matrix Spec Lock
+
+`PAPER10M1R2A_V2_BY2_DEGRADATION_MATRIX_SPEC_LOCK_60TYPES_9SEEDS` locks the canonical BY2 controlled-degradation matrix specification. Codex must not invent, trim, merge, or re-plan the degradation matrix in this stage or in downstream provider-generation stages unless the human explicitly replaces the locked spec.
+
+PAPER10M1R2A V2 fixed rules:
+
+- A BY2 degradation case is defined only by `degradation_type_id`, fixed `seed_index` / `seed_value`, canonical anchor policy, and the matching effect-validation rule.
+- V2 is fixed as 60 degradation types x 9 seeds plus one clean case: 540 degraded cases, 1 clean case, 541 total cases.
+- Mixed cases must have an explicit component list in `degradation_parameters_json`; placeholder mixed cases are forbidden.
+- `module-disable` is not a case axis. Module-disable style comparisons belong to internal ablation method queues, not degradation case definitions.
+- Trace remains evaluation-only and must not be used for degradation parameter choice, anchor choice, provider generation, solver input, tuning, or feedback.
+- Go2 position, yaw, velocity, contact, and metadata remain weak-prior or diagnostic sources only, never truth.
+- Raw Doppler and receiver velocity are separate source channels and must not be collapsed into one axis.
+- Degraded providers must be generated only in approved runtime/provider roots and must never overwrite raw data.
+- M1R2A is no-run: no solver, evaluator, full matrix, provider generation, internal ablation, horizontal benchmark, random provider payload, figure generation, raw modification, or raw copy is authorized.
+
+Downstream route:
+
+- `PAPER10M1R2B` may generate degraded providers only after human approval and must validate each provider against the locked effect-validation rule.
+- `PAPER10M1R2C` may run the four frozen method modes only after M1R2B passes.
+- `PAPER10M1R2D` may run internal ablations only after M1R2C review.
+- PAPER10H remains blocked and separate.

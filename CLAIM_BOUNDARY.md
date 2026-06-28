@@ -2540,3 +2540,28 @@ Still forbidden after PAPER10Z3:
 - treating raw source observations, Go2 state, trace, final_v23 output, or archived runtime as solver input authorization;
 - committing raw data, archives, bundles, generated figures, runtime payloads, local absolute paths, NAV/STD/EVAL_NAV/RUN_MANIFEST, or large artifacts;
 - pushing, merging, closing protected PRs, deleting branches, force-pushing, resetting, cleaning, stashing, or deleting legacy directories before the final gate report and human approval.
+
+## PAPER10M1R2A V2 BY2 Degradation Matrix Spec Lock Boundary
+
+Allowed after PAPER10M1R2A V2:
+
+- State that the BY2 controlled-degradation matrix V2 specification is locked as 60 fixed degradation types, 9 seeds per type, 540 degraded cases, 1 clean case, and 541 total cases.
+- State that each degradation case is defined by fixed `degradation_type_id`, seed, anchor policy, parameters, affected sources, and effect-validation rule.
+- State that module-disable is not a degradation case axis and that internal ablations are separate downstream method queues.
+- State that mixed cases D57-D60 have explicit component lists instead of placeholders.
+- State that M1R2B/M1R2C/M1R2D queue drafts were generated with `run_allowed_now=false`.
+
+Boundary after PAPER10M1R2A V2:
+
+- BY2 controlled degradation is not independent real-world severe-environment generalization by itself.
+- This stage has no provider generation, solver execution, evaluator execution, degraded-provider payloads, runtime metrics, figures, or algorithm performance experiment.
+- Trace is evaluation-only and is forbidden for degradation parameter choice, anchor choice, provider generation, solver input, tuning, or feedback.
+- Go2 remains a weak-prior/metadata/diagnostic source and is not position, yaw, velocity, or contact truth.
+- Raw Doppler and receiver velocity are separate source channels.
+
+Still forbidden after PAPER10M1R2A V2:
+
+- claiming algorithm superiority, universal superiority, final paper readiness, final_v23 comprehensive superiority, BY3 yaw generalization, XB/PG high-precision severe-GNSS proof, exact external reproduction, or complete nine-factor FGO validation;
+- treating trace, final_v23 output, LegSA output, benchmark output, or Go2 source fields as solver truth/input authorization;
+- modifying or copying raw data, overwriting raw data with degraded providers, running solver/evaluator/full matrix/internal ablation/horizontal benchmark, deleting epochs, tuning per case, or performing output-only correction;
+- committing raw data, by2/by3 source files, degraded provider payloads, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, archives, local absolute paths, or secrets.
