@@ -1385,3 +1385,26 @@ PAPER10M1R2B boundaries:
 
 - This stage may generate provider runtime packages and effect-validation reports only.
 - It does not authorize solver runs, evaluator runs, full algorithm matrices, internal ablations, horizontal benchmark matrices, PAPER10H, BY3/XB/PG execution, performance claims, final paper claims, or universal-superiority wording.
+
+## 50. PAPER10M1R2C V2 BY2 Full Algorithm Matrix
+
+`PAPER10M1R2C_V2_BY2_FULL_ALGORITHM_MATRIX_EXECUTION_2164ROWS` is the approved BY2 controlled-degradation full-algorithm execution stage after M1R2B provider generation/effect validation passed. It must consume only the M1R2B provider-ready manifest and provider packages.
+
+PAPER10M1R2C fixed rules:
+
+- The executable queue is fixed as four PAPER10L frozen method modes x 541 M1R2B provider-ready cases = 2164 rows.
+- The only allowed method modes are `basic_dual_baseline`, `strong_dual_yaw_baseline`, `legsa_without_qm`, and `legsa_full_candidate_with_qm`.
+- The queue must be locked locally for M1R2C; M1R2B queue drafts remain unchanged and have `run_allowed_now=false`.
+- M1R2C must not redesign the degradation matrix, regenerate providers, or modify M1R2B provider packages.
+- Every row must write RUN_MANIFEST, feature flag dump, dataset role dump, method mode dump, case spec dump, provider-ready reference, config hash, forbidden-input audit, and evaluator summary.
+- Trace remains evaluation-only and must never enter solver input, tuning, provider selection, method selection, or feedback.
+- final_v23, LegSA, benchmark, and external-method outputs must not enter solver input.
+- Go2 high-level/body-state providers remain weak-prior or metadata sources only, never truth.
+- Receiver IMU must not be treated as Go2 body IMU.
+- QA fallback must remain disabled as a final method.
+- Runtime NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, provider payloads, and export-clean zip files remain outside tracked Git.
+
+PAPER10M1R2C boundaries:
+
+- This stage authorizes BY2 full-algorithm matrix execution only.
+- It does not authorize M1R2D internal ablation, horizontal benchmark comparison, PAPER10H, BY3/XB/PG execution, performance-claim finalization, final paper readiness, universal superiority, final_v23 comprehensive superiority, or complete 9F FGO validation.
