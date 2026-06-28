@@ -1168,3 +1168,29 @@ Next stages:
 - PAPER10H remains blocked until human review and explicit authorization.
 
 This route does not authorize performance claims, final paper claims, universal superiority, final_v23 superiority, BY3 yaw generalization, XB/PG severe-GNSS claims, trace-online use, or output-only correction.
+
+## PAPER10M1R2B V2 BY2 Degraded Provider Generation
+
+Current stage:
+
+```text
+PAPER10M1R2B_V2_BY2_DEGRADED_PROVIDER_GENERATION_AND_EFFECT_VALIDATION_541CASES
+```
+
+PAPER10M1R2B uses the M1R2A locked 541-case BY2 controlled-degradation manifest to generate degraded provider packages and run effect validation. It is a provider-generation gate only:
+
+- expected cases: 541
+- degraded cases: 540
+- clean pointer case: 1
+- effect validation required for every case
+- trace role: evaluation-only
+- final_v23/LegSA output role: not provider input
+- Go2 role: weak-prior/metadata source, not truth
+
+Next stages:
+
+- `PAPER10M1R2C_FULL_ALGORITHM_BY2_DEGRADATION_EXECUTION`: run four frozen method modes over provider-ready cases only after M1R2B passes and human approval is recorded.
+- `PAPER10M1R2D_INTERNAL_ABLATION_BY2_DEGRADATION_EXECUTION`: run nine internal ablation methods only after M1R2C review.
+- PAPER10H remains blocked and separate.
+
+This stage does not authorize solver/evaluator execution, full algorithm matrix execution, internal ablation execution, performance claims, final paper claims, trace-online use, output-only correction, raw-data modification, or raw-data copy into export-clean.
