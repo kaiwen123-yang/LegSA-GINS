@@ -2588,3 +2588,30 @@ Still forbidden after PAPER10M1R2B V2:
 - treating trace, final_v23 output, LegSA output, benchmark output, or Go2 source fields as provider-generation truth or solver input authorization;
 - modifying/copying raw data, overwriting raw data with degraded providers, running solver/evaluator/full algorithm matrix/internal ablation/PAPER10H without a later approved stage, deleting epochs, tuning per case, or performing output-only correction;
 - committing raw data, by2/by3 source files, degraded provider payloads, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, export-clean zips, local absolute paths, or secrets.
+
+## PAPER10M1R2C V2 BY2 Full Algorithm Matrix Claim Boundary
+
+Allowed after PAPER10M1R2C V2, only if the final report records pass or conditional pass:
+
+- State that the BY2 canonical controlled-degradation full-algorithm matrix was executed for the four frozen PAPER10L method modes.
+- State that the same 541 M1R2B provider-ready cases were used for all four method modes.
+- State that Basic Dual is a baseline comparator, Strong Dual-Yaw is a strong baseline comparator, LegSA without QM is an ablation candidate, and LegSA full candidate with QM is a bounded full candidate.
+- State that trace was not used online and remained outside solver input.
+- State row/method/family summaries as bounded engineering comparisons under the frozen BY2 controlled-degradation protocol.
+- Use QM/source-aware traces as interpretability evidence only if the row-level trace contracts are complete.
+
+Boundary after PAPER10M1R2C V2:
+
+- BY2 controlled degradation is not independent real-world severe-environment generalization by itself.
+- M1R2C is not internal ablation completion; M1R2D remains a separate human-authorized stage.
+- M1R2C is not horizontal literature algorithm comparison and does not prove exact external reproduction.
+- M1R2C results are not final paper claims until human review and downstream claim-boundary checks.
+- Go2 high-level/body-state providers remain weak-prior or metadata sources, not truth.
+
+Still forbidden after PAPER10M1R2C V2:
+
+- claiming universal superiority, final paper readiness, final_v23 comprehensive superiority, BY3 yaw generalization, XB/PG high-precision severe-GNSS proof, exact external reproduction, or complete nine-factor FGO validation;
+- treating trace, final_v23 output, LegSA output, benchmark output, Go2 source fields, or receiver IMU data as solver truth/input authorization;
+- claiming M1R2D internal ablation, horizontal comparison, PAPER10H, BY3/XB/PG, provider regeneration, or severe-GNSS proof was completed;
+- modifying/copying raw data, overwriting raw/provider packages, deleting epochs, tuning per case, or performing output-only correction;
+- committing raw data, by2/by3 source files, degraded provider payloads, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, export-clean zips, local absolute paths, or secrets.

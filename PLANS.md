@@ -1194,3 +1194,29 @@ Next stages:
 - PAPER10H remains blocked and separate.
 
 This stage does not authorize solver/evaluator execution, full algorithm matrix execution, internal ablation execution, performance claims, final paper claims, trace-online use, output-only correction, raw-data modification, or raw-data copy into export-clean.
+
+## PAPER10M1R2C V2 BY2 Full Algorithm Matrix Execution
+
+Current stage:
+
+```text
+PAPER10M1R2C_V2_BY2_FULL_ALGORITHM_MATRIX_EXECUTION_2164ROWS
+```
+
+PAPER10M1R2C consumes the M1R2B provider-ready BY2 degraded providers and executes the four PAPER10L frozen method modes:
+
+- cases: 541
+- method modes: 4
+- total rows: 2164
+- provider regeneration: forbidden
+- trace role: evaluation-only
+- final_v23/LegSA/benchmark output role: not solver input
+- Go2 role: weak-prior/metadata source, not truth
+
+Next stages:
+
+- `PAPER10M1R2D_INTERNAL_ABLATION_BY2_DEGRADATION_EXECUTION`: run nine internal ablation methods only after M1R2C pass/conditional pass and human authorization.
+- `PAPER10M1R2E_RESULT_REVIEW_AND_FIGURE_TABLE_PACKAGE`: may package M1R2C results for human review without running new solvers.
+- PAPER10H remains blocked and separate.
+
+This stage does not authorize internal ablation execution, horizontal comparison, PAPER10H, BY3/XB/PG execution, provider regeneration, raw-data modification, per-case tuning, output-only correction, epoch deletion, final paper claims, or universal superiority wording.
