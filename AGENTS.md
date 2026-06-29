@@ -1408,3 +1408,23 @@ PAPER10M1R2C boundaries:
 
 - This stage authorizes BY2 full-algorithm matrix execution only.
 - It does not authorize M1R2D internal ablation, horizontal benchmark comparison, PAPER10H, BY3/XB/PG execution, performance-claim finalization, final paper readiness, universal superiority, final_v23 comprehensive superiority, or complete 9F FGO validation.
+
+## 51. PAPER10M1R2C1 Clean Yaw And QM Semantic Audit
+
+`PAPER10M1R2C1_CLEAN_YAW_QM_SEMANTIC_AUDIT_AND_METRIC_REPAIR` is a mandatory semantic gate inserted after M1R2C and before any M1R2D internal ablation. It exists because M1R2C completed the 2164-row BY2 full algorithm matrix but the clean case yaw metrics and QM counters showed semantic anomalies that cannot be ignored.
+
+PAPER10M1R2C1 fixed rules:
+
+- M1R2C row completion remains an execution-completion fact only; it is not enough for yaw performance claims or ablation authorization.
+- The BY2 clean yaw RMSE anomaly must be explained before M1R2D starts.
+- Corrected evaluator-only metric tables, if generated, must be explicitly labeled `corrected_evaluator_only` and must never be presented as original solver output.
+- QM counters must not be used for claims until their field semantics are audited and separated into required, present, not-required, state-action, and diagnostic meanings.
+- `bad_a1_consumed_count` must distinguish accepted, downweighted, rejected, and diagnostic A1 counts before it is used for any paper or algorithm claim.
+- Trace remains evaluation-only and may be used to audit evaluator semantics, not solver input, method selection, provider tuning, or output correction.
+- No solver rerun, provider regeneration, raw-data modification, per-case tuning, output-only correction, or epoch deletion is authorized in M1R2C1.
+
+PAPER10M1R2C1 current decision:
+
+- M1R2D remains blocked after M1R2C1 because clean yaw semantics did not resolve as a pure evaluator-convention repair.
+- The current gate status is `BLOCKED_SOLVER_PROVIDER_YAW_SEMANTIC_FAILURE`.
+- PAPER10H remains blocked and separate.

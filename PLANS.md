@@ -1220,3 +1220,28 @@ Next stages:
 - PAPER10H remains blocked and separate.
 
 This stage does not authorize internal ablation execution, horizontal comparison, PAPER10H, BY3/XB/PG execution, provider regeneration, raw-data modification, per-case tuning, output-only correction, epoch deletion, final paper claims, or universal superiority wording.
+
+## PAPER10M1R2C1 Clean Yaw And QM Semantic Audit
+
+Current stage:
+
+```text
+PAPER10M1R2C1_CLEAN_YAW_QM_SEMANTIC_AUDIT_AND_METRIC_REPAIR
+```
+
+PAPER10M1R2C1 is the required semantic review gate inserted after M1R2C because the BY2 clean case showed yaw RMSE values inconsistent with historical clean-yaw evidence, and the QM/source-trace summary fields mixed runtime diagnostics with claim-facing meanings.
+
+Current M1R2C1 findings:
+
+- M1R2C executed 2164/2164 BY2 full-algorithm rows, but row completion does not authorize M1R2D.
+- The clean yaw anomaly remains unresolved as an evaluator-only convention fix; candidate yaw transforms and trace-reference replay did not recover all strong/LegSA clean modes below the M1R2D gate.
+- Corrected metric tables were not generated because the evidence indicates a solver/provider/method-mode semantic failure rather than a safe evaluator-only relabel.
+- QM trace and `bad_a1_consumed_count` fields require renamed or split summary semantics before any claim use.
+
+Next stages:
+
+- `PAPER10M1R2D_INTERNAL_ABLATION_BY2_DEGRADATION_EXECUTION` remains blocked until a later human-approved repair stage resolves clean yaw semantics and refreshes summary collectors.
+- `PAPER10M1R2E_RESULT_REVIEW_AND_FIGURE_TABLE_PACKAGE` may only review/organize existing evidence with the M1R2C1 blocker stated explicitly.
+- PAPER10H remains blocked and separate.
+
+This stage does not authorize solver reruns, provider regeneration, internal ablation, horizontal comparison, PAPER10H, BY3/XB/PG execution, raw-data modification, per-case tuning, output-only correction, epoch deletion, final paper claims, or universal superiority wording.
