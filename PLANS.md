@@ -1294,3 +1294,28 @@ Current route:
 - PAPER10H remains blocked.
 
 This stage does not authorize solvers, evaluators, M1R2C_R1 execution, M1R2D_R1 execution, horizontal comparison, PAPER10H, BY3/XB/PG execution, raw-data modification, per-case tuning, output-only correction, epoch deletion, final paper claims, or universal superiority wording.
+
+## PAPER10M1R2C_R1 Yaw-Corrected Full Algorithm Matrix Rerun
+
+Current stage:
+
+```text
+PAPER10M1R2C_R1_V2_BY2_FULL_ALGORITHM_MATRIX_RERUN_WITH_YAW_CORRECTED_PROVIDERS
+```
+
+PAPER10M1R2C_R1 uses the M1R2B2 yaw-corrected provider-ready manifest to rerun the BY2 full algorithm matrix.
+
+Current route:
+
+- Run clean sentinel first for 4 method modes x BY2_CLEAN_CANONICAL.
+- If clean sentinel passes, lock 2164 rows from the M1R2B2 M1R2C_R1 queue draft.
+- Run only the four PAPER10L frozen method modes over 541 BY2 provider-ready cases.
+- Generate row, case, family, method, QM/source, yaw-sanity, figure QA, claim-boundary, and export-clean artifacts.
+
+Next stages:
+
+- `PAPER10M1R2D_R1_INTERNAL_ABLATION` remains blocked until M1R2C_R1 passes review and the human explicitly authorizes ablation.
+- PAPER10H remains blocked.
+- BY3/XB/PG are out of scope for this stage.
+
+This stage does not authorize provider regeneration, internal ablation, horizontal comparison, PAPER10H, BY3/XB/PG execution, raw-data modification, per-case tuning, output-only correction, epoch deletion, final paper claims, or universal superiority wording.

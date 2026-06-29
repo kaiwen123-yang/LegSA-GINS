@@ -1468,3 +1468,25 @@ PAPER10M1R2B2 boundaries:
 
 - This stage regenerates providers, validates effects, locks provider-ready manifests, and drafts M1R2C_R1/M1R2D_R1 queues only.
 - It does not authorize solvers, evaluators, full matrix execution, internal ablation, horizontal comparison, PAPER10H, BY3/XB/PG execution, raw-data modification, paper performance claims, final paper readiness, or universal-superiority wording.
+
+## 54. PAPER10M1R2C_R1 Yaw-Corrected Full Algorithm Matrix Rerun
+
+`PAPER10M1R2C_R1_V2_BY2_FULL_ALGORITHM_MATRIX_RERUN_WITH_YAW_CORRECTED_PROVIDERS` is the only approved rerun stage for the BY2 full algorithm matrix after M1R2B2. It must consume the M1R2B2 yaw-corrected provider-ready manifest and provider packages only.
+
+PAPER10M1R2C_R1 fixed rules:
+
+- The executable queue is fixed as four PAPER10L frozen method modes x 541 M1R2B2 provider-ready cases = 2164 rows.
+- Old M1R2B provider packages are forbidden.
+- Old M1R2C results are forbidden as new results and remain execution proof only.
+- The degradation matrix must not be redesigned and providers must not be regenerated in this stage.
+- The four method modes must come from PAPER10L frozen config: `basic_dual_baseline`, `strong_dual_yaw_baseline`, `legsa_without_qm`, and `legsa_full_candidate_with_qm`.
+- Every row must have RUN_MANIFEST, feature flag dump, dataset role dump, method mode dump, case spec dump, provider-ready reference, yaw provider lineage reference, config hash, forbidden-input audit, and evaluator summary.
+- Trace remains evaluation-only and must never enter solver input, tuning, provider selection, method selection, or feedback.
+- final_v23, LegSA, benchmark, and external-method outputs must not enter solver input.
+- Go2 high-level/body-state providers remain weak-prior or metadata sources only, never truth.
+- Runtime NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, provider payloads, and export-clean zip files remain outside tracked Git.
+
+PAPER10M1R2C_R1 boundaries:
+
+- This stage authorizes only the BY2 yaw-corrected full-algorithm matrix rerun.
+- It does not authorize M1R2D_R1 internal ablation, horizontal benchmark comparison, PAPER10H, BY3/XB/PG execution, performance-claim finalization, final paper readiness, universal superiority, final_v23 comprehensive superiority, or complete 9F FGO validation.
