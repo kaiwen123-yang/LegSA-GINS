@@ -28,6 +28,21 @@ from typing import Any, Callable
 
 import numpy as np
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+SRC_ROOT = REPO_ROOT / "src"
+if str(SRC_ROOT) not in sys.path:
+    sys.path.insert(0, str(SRC_ROOT))
+
+from legsa_gins.evaluation.yaw_provider_lineage import (  # noqa: E402
+    by2_a1_dual_diff_yaw_from_status_relpos,
+    interpolate_angle_deg,
+    m1r2b_legacy_provider_yaw_from_status_relpos,
+)
+from legsa_gins.input_generation.status_yaw_builder import (  # noqa: E402
+    apply_yaw_install_and_ned,
+    build_a1_dual_diff_yaw_rows,
+)
+
 
 STAGE_NAME = "PAPER10M1R2B_V2_BY2_DEGRADED_PROVIDER_GENERATION_AND_EFFECT_VALIDATION_541CASES"
 M1R2A_STAGE_NAME = "PAPER10M1R2A_V2_BY2_DEGRADATION_MATRIX_SPEC_LOCK_60TYPES_9SEEDS"
@@ -457,6 +472,27 @@ def load_base_bundle(paths: Paths) -> ProviderBundle:
     axis = [safe_float(row.get("time")) - raw0 for row in raw]
     g1_rel = [(safe_float(row.get("Time")) - safe_float(g1[0].get("Time")), row) for row in g1]
     g2_rel = [(safe_float(row.get("Time")) - safe_float(g2[0].get("Time")), row) for row in g2]
+    status_abs0 = safe_float(g1[0].get("Time"))
+    status_base_time = math.floor(status_abs0 / 100.0) * 100.0
+    source_yaw_rows, _ = build_a1_dual_diff_yaw_rows(
+        paths.by2_fix_root / RECEIVER_FILES["gnss1_status"],
+        paths.by2_fix_root / RECEIVER_FILES["gnss2_status"],
+        base_time=status_base_time,
+    )
+    source_yaw_rows = apply_yaw_install_and_ned(source_yaw_rows, sign=1.0, offset_deg=0.0)
+    source_yaw_series = [
+        {"time": float(row["aligned_time"]), "yaw_deg": float(row["yaw_ned_deg"])}
+        for row in source_yaw_rows
+    ]
+    provider_time_offset = safe_float(os.environ.get("BY2_PROVIDER_TIME_OFFSET_SEC"), status_abs0 - status_base_time)
+    statusyaw_path = os.environ.get("BY2_STATUSYAW_GNSS")
+    if statusyaw_path and Path(statusyaw_path).is_file():
+        with Path(statusyaw_path).open(encoding="utf-8-sig") as handle:
+            for line in handle:
+                parts = line.split()
+                if parts:
+                    provider_time_offset = safe_float(parts[0], provider_time_offset)
+                    break
     position = []
     velocity = []
     dual_yaw = []
@@ -504,11 +540,24 @@ def load_base_bundle(paths: Paths) -> ProviderBundle:
                 "status": "available",
             }
         )
-        rel_n = safe_float(row1.get("rel_pos_n")) - safe_float(row2.get("rel_pos_n"))
-        rel_e = safe_float(row1.get("rel_pos_e")) - safe_float(row2.get("rel_pos_e"))
-        rel_d = safe_float(row1.get("rel_pos_d")) - safe_float(row2.get("rel_pos_d"))
-        baseline = math.sqrt(rel_n * rel_n + rel_e * rel_e + rel_d * rel_d)
-        yaw = math.degrees(math.atan2(rel_e, rel_n)) if baseline > 1e-9 else 0.0
+        lineage = by2_a1_dual_diff_yaw_from_status_relpos(
+            gnss1_rel_n_m=safe_float(row1.get("rel_pos_n")),
+            gnss1_rel_e_m=safe_float(row1.get("rel_pos_e")),
+            gnss1_rel_d_m=safe_float(row1.get("rel_pos_d")),
+            gnss2_rel_n_m=safe_float(row2.get("rel_pos_n")),
+            gnss2_rel_e_m=safe_float(row2.get("rel_pos_e")),
+            gnss2_rel_d_m=safe_float(row2.get("rel_pos_d")),
+            yaw_std_deg=1.5,
+        )
+        legacy_yaw = m1r2b_legacy_provider_yaw_from_status_relpos(
+            gnss1_rel_n_m=safe_float(row1.get("rel_pos_n")),
+            gnss1_rel_e_m=safe_float(row1.get("rel_pos_e")),
+            gnss2_rel_n_m=safe_float(row2.get("rel_pos_n")),
+            gnss2_rel_e_m=safe_float(row2.get("rel_pos_e")),
+        )
+        source_yaw = interpolate_angle_deg(source_yaw_series, t + provider_time_offset)
+        yaw_for_provider = lineage.yaw_ned_deg if source_yaw is None else source_yaw
+        baseline = lineage.baseline_length_m
         rel_acc = math.sqrt(
             safe_float(row1.get("rel_acc_n"), 0.01) ** 2
             + safe_float(row1.get("rel_acc_e"), 0.01) ** 2
@@ -517,13 +566,22 @@ def load_base_bundle(paths: Paths) -> ProviderBundle:
         dual_yaw.append(
             {
                 "time": f"{t:.3f}",
-                "yaw_deg": f"{wrap_deg(yaw):.6f}",
+                "yaw_deg": f"{wrap_deg(yaw_for_provider):.6f}",
                 "yaw_std_deg": "1.500000",
                 "rel_valid": "true" if safe_bool(row1.get("rel_valid")) and safe_bool(row2.get("rel_valid")) else "false",
                 "quality": row1.get("fix_type", "0"),
                 "baseline_length_m": f"{baseline:.6f}",
                 "rel_acc_m": f"{max(rel_acc, 0.001):.6f}",
                 "status": "available",
+                "yaw_frame": "solver_visible_body_heading_ned_deg",
+                "yaw_provider_lineage": "BY2_A1_dual_diff_status_interp_to_provider_axis",
+                "gnss_order_used": lineage.gnss_order_used,
+                "lateral_offset_sign": lineage.lateral_offset_sign,
+                "legacy_m1r2b_baseline_yaw_deg": f"{legacy_yaw:.6f}",
+                "baseline_heading_deg": f"{lineage.baseline_heading_deg:.6f}",
+                "yaw_baseline_deg": f"{lineage.yaw_baseline_deg:.6f}",
+                "provider_to_source_time_offset_sec": f"{provider_time_offset:.6f}",
+                "trace_tuned_yaw_fix": "false",
             }
         )
         r = raw[idx]
