@@ -2615,3 +2615,29 @@ Still forbidden after PAPER10M1R2C V2:
 - claiming M1R2D internal ablation, horizontal comparison, PAPER10H, BY3/XB/PG, provider regeneration, or severe-GNSS proof was completed;
 - modifying/copying raw data, overwriting raw/provider packages, deleting epochs, tuning per case, or performing output-only correction;
 - committing raw data, by2/by3 source files, degraded provider payloads, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, export-clean zips, local absolute paths, or secrets.
+
+## PAPER10M1R2C1 Clean Yaw And QM Semantic Audit Boundary
+
+Allowed after PAPER10M1R2C1:
+
+- State that M1R2C completed 2164 BY2 full-algorithm rows, but that completion is only execution coverage and not a yaw-performance or ablation-readiness claim.
+- State that the BY2 clean yaw semantic mismatch was audited against method outputs, provider yaw, trace evaluation reference semantics, transform candidates, and historical clean-yaw context.
+- State that no corrected evaluator-only metric tables were generated because the clean yaw issue did not pass the evaluator-only repair gate.
+- State that QM trace and `bad_a1_consumed_count` field semantics were audited and require split/renamed summary fields before claim use.
+- State that M1R2D is blocked by `BLOCKED_SOLVER_PROVIDER_YAW_SEMANTIC_FAILURE` until a later human-approved repair resolves clean yaw semantics and summary-field contracts.
+
+Boundary after PAPER10M1R2C1:
+
+- M1R2C row completion is not enough for yaw performance claims.
+- Clean yaw semantic mismatch blocks paper-level interpretation and M1R2D internal ablation authorization.
+- Corrected evaluator-only metrics, if a later stage generates them, must remain labeled as corrected evaluator products and must not replace original solver outputs.
+- QM trace/counter fields require semantic audit before use in paper claims, method claims, or source-aware/QM mechanism claims.
+- `bad_a1_consumed_count` must not be interpreted as accepted bad A1 consumption unless accepted, rejected, downweighted, and diagnostic counts are explicitly separated.
+
+Still forbidden after PAPER10M1R2C1:
+
+- claiming universal superiority, final paper readiness, final_v23 comprehensive superiority, BY3 yaw generalization, XB/PG high-precision severe-GNSS proof, exact external reproduction, complete nine-factor FGO validation, or a final QM performance claim;
+- treating trace, final_v23 output, LegSA output, benchmark output, Go2 source fields, receiver IMU data, corrected evaluator products, or QM diagnostics as solver truth/input authorization;
+- starting M1R2D internal ablation, horizontal comparison, PAPER10H, BY3/XB/PG execution, provider regeneration, or degraded-input regeneration without a later explicit human-approved stage;
+- modifying raw data, overwriting providers, rerunning solvers to hide the anomaly, deleting epochs, tuning per case, performing output-only correction, or silently replacing original M1R2C metrics;
+- committing raw data, by2/by3 source files, degraded provider payloads, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, export-clean zips, local absolute paths, or secrets.
