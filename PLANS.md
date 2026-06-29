@@ -1274,3 +1274,23 @@ Next stages:
 - PAPER10H remains blocked.
 
 This stage does not authorize using original M1R2C yaw tables as final evidence, starting internal ablation, starting horizontal comparison, PAPER10H, BY3/XB/PG execution, raw-data modification, per-case tuning, output-only correction, epoch deletion, final paper claims, or universal superiority wording.
+
+## PAPER10M1R2B2 BY2 Yaw Provider Regeneration And Effect Revalidation
+
+Current stage:
+
+```text
+PAPER10M1R2B2_V2_BY2_YAW_PROVIDER_REGENERATION_AND_EFFECT_REVALIDATION_541CASES
+```
+
+PAPER10M1R2B2 regenerates the full 541-case BY2 provider set after the M1R2C2 yaw provider repair. It supersedes the old M1R2B provider packages and keeps the same M1R2A 60-type, 9-seed, 541-case manifest.
+
+Current route:
+
+- 541 BY2 providers are regenerated from the corrected A1 dual-diff yaw lineage.
+- Effect validation, yaw lineage validation, yaw wrap validation, and provider-ready manifests are required for all 541 cases.
+- `PAPER10M1R2C_R1_FULL_ALGORITHM_QUEUE_PROVIDER_READY_DRAFT.csv` is the next full-matrix draft, but `run_allowed_now=false`.
+- `PAPER10M1R2D_R1_INTERNAL_ABLATION_QUEUE_PROVIDER_READY_DRAFT.csv` remains draft-only until M1R2C_R1 passes review and the human approves ablation.
+- PAPER10H remains blocked.
+
+This stage does not authorize solvers, evaluators, M1R2C_R1 execution, M1R2D_R1 execution, horizontal comparison, PAPER10H, BY3/XB/PG execution, raw-data modification, per-case tuning, output-only correction, epoch deletion, final paper claims, or universal superiority wording.
