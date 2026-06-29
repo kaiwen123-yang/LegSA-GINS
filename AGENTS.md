@@ -1449,3 +1449,22 @@ PAPER10M1R2C2 current decision:
 - Full 541-provider regeneration is required in M1R2B2.
 - M1R2C full algorithm matrix rerun is required after M1R2B2.
 - M1R2D and PAPER10H remain blocked until the repaired rerun passes review.
+
+## 53. PAPER10M1R2B2 BY2 Yaw Provider Regeneration
+
+`PAPER10M1R2B2_V2_BY2_YAW_PROVIDER_REGENERATION_AND_EFFECT_REVALIDATION_541CASES` supersedes the old M1R2B provider packages because M1R2C2 proved the original yaw provider lineage was wrong.
+
+PAPER10M1R2B2 fixed rules:
+
+- BY2 yaw provider generation must use source-lineage A1 dual-diff status yaw with GNSS2-GNSS1 and lateral body-heading conversion.
+- Baseline heading must not be directly written as solver-visible body yaw.
+- Yaw sign and lateral +/-90 deg convention must not be selected by trace RMSE.
+- Yaw residual/effect validation must be wrap-safe.
+- D30-D41 yaw degradation and D58-D60 mixed yaw components must start from the corrected body-yaw provider.
+- M1R2B2 provider packages supersede old M1R2B provider packages for any future M1R2C_R1/M1R2D_R1 run.
+- Trace remains evaluation-only and must not enter provider generation, sign selection, tuning, solver input, or feedback.
+
+PAPER10M1R2B2 boundaries:
+
+- This stage regenerates providers, validates effects, locks provider-ready manifests, and drafts M1R2C_R1/M1R2D_R1 queues only.
+- It does not authorize solvers, evaluators, full matrix execution, internal ablation, horizontal comparison, PAPER10H, BY3/XB/PG execution, raw-data modification, paper performance claims, final paper readiness, or universal-superiority wording.
