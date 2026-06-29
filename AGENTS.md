@@ -1428,3 +1428,24 @@ PAPER10M1R2C1 current decision:
 - M1R2D remains blocked after M1R2C1 because clean yaw semantics did not resolve as a pure evaluator-convention repair.
 - The current gate status is `BLOCKED_SOLVER_PROVIDER_YAW_SEMANTIC_FAILURE`.
 - PAPER10H remains blocked and separate.
+
+## 52. PAPER10M1R2C2 Yaw Provider And Clean Sentinel Repair
+
+`PAPER10M1R2C2_YAW_PROVIDER_METHOD_MODE_REPAIR_AND_CLEAN_SENTINEL_RERUN` is the repair stage after M1R2C1. It fixes yaw provider lineage and method-mode yaw input semantics before any full rerun or internal ablation.
+
+PAPER10M1R2C2 fixed rules:
+
+- M1R2C clean yaw semantic gate continues to block M1R2D until a clean sentinel passes and the full matrix is rerun from repaired providers.
+- Yaw provider repair must be geometry/source-lineage based, not trace-tuned.
+- The accepted BY2 yaw provider convention is A1 dual-diff status yaw with GNSS2-GNSS1, GNSS2 interpolation to the GNSS1-time source chain, lateral body-heading conversion, fixed 1.5 deg yaw std, and provider-axis interpolation.
+- Clean sentinel must pass before any full rerun or internal ablation.
+- `bad_a1_consumed_count` is deprecated unless split into claim-valid accepted/downweighted/rejected counters.
+- Corrected evaluator-only tables must be labeled; if the issue is not evaluator-only, no corrected metric table may replace original solver output.
+- The original M1R2B provider packages and M1R2C 2164-row results remain historical/invalidated for yaw interpretation; they must not be silently reused for claims.
+
+PAPER10M1R2C2 current decision:
+
+- Clean sentinel passed after provider repair.
+- Full 541-provider regeneration is required in M1R2B2.
+- M1R2C full algorithm matrix rerun is required after M1R2B2.
+- M1R2D and PAPER10H remain blocked until the repaired rerun passes review.

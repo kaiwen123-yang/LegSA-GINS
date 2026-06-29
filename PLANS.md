@@ -1245,3 +1245,32 @@ Next stages:
 - PAPER10H remains blocked and separate.
 
 This stage does not authorize solver reruns, provider regeneration, internal ablation, horizontal comparison, PAPER10H, BY3/XB/PG execution, raw-data modification, per-case tuning, output-only correction, epoch deletion, final paper claims, or universal superiority wording.
+
+## PAPER10M1R2C2 Yaw Provider Method-Mode Repair And Clean Sentinel
+
+Current stage:
+
+```text
+PAPER10M1R2C2_YAW_PROVIDER_METHOD_MODE_REPAIR_AND_CLEAN_SENTINEL_RERUN
+```
+
+PAPER10M1R2C2 repairs the M1R2C1 solver/provider yaw semantic failure. The deterministic bugs are:
+
+- M1R2B wrote lateral baseline heading into `dual_yaw_provider.csv/yaw_deg`.
+- M1R2B generated 5Hz yaw from nearest status rows on the provider axis instead of GNSS1-time/GNSS2-interpolated A1 yaw resampled to the provider axis.
+
+Current M1R2C2 result:
+
+- clean sentinel 4/4 rows completed-evaluable;
+- clean sentinel yaw gate passed for basic, strong, no-QM, and full-QM;
+- no trace solver input, no final_v23/LegSA solver input, no output-only correction, and no epoch deletion;
+- QM legacy `bad_a1_consumed_count` is deprecated and split counter fields are required.
+
+Next stages:
+
+- `PAPER10M1R2B2_PROVIDER_REGENERATION_WITH_REPAIRED_YAW_PROVIDER` is required before any full matrix evidence is refreshed.
+- `PAPER10M1R2C_RERUN_REPAIRED_PROVIDERS` is required after M1R2B2.
+- `PAPER10M1R2D_INTERNAL_ABLATION_BY2_DEGRADATION_EXECUTION` remains blocked until the repaired M1R2C rerun passes review.
+- PAPER10H remains blocked.
+
+This stage does not authorize using original M1R2C yaw tables as final evidence, starting internal ablation, starting horizontal comparison, PAPER10H, BY3/XB/PG execution, raw-data modification, per-case tuning, output-only correction, epoch deletion, final paper claims, or universal superiority wording.

@@ -2641,3 +2641,27 @@ Still forbidden after PAPER10M1R2C1:
 - starting M1R2D internal ablation, horizontal comparison, PAPER10H, BY3/XB/PG execution, provider regeneration, or degraded-input regeneration without a later explicit human-approved stage;
 - modifying raw data, overwriting providers, rerunning solvers to hide the anomaly, deleting epochs, tuning per case, performing output-only correction, or silently replacing original M1R2C metrics;
 - committing raw data, by2/by3 source files, degraded provider payloads, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, export-clean zips, local absolute paths, or secrets.
+
+## PAPER10M1R2C2 Yaw Provider Repair Boundary
+
+Allowed after PAPER10M1R2C2:
+
+- State that M1R2C2 identified deterministic yaw provider lineage bugs and repaired the clean sentinel provider through BY2 source-backed A1 yaw generation.
+- State that clean sentinel 4/4 rows passed after repair.
+- State that trace was used only as evaluation reference and not as solver input or production yaw-sign selector.
+- State that legacy `bad_a1_consumed_count` is deprecated and blocked from claims unless split into explicit accepted/downweighted/rejected fields.
+
+Boundary after PAPER10M1R2C2:
+
+- M1R2C row completion is execution proof, not yaw-valid result proof.
+- Original M1R2C yaw tables are not paper-ready and must not be used as final evidence.
+- No paper-level yaw claim is allowed until M1R2B2 provider regeneration and M1R2C repaired-provider rerun pass review.
+- No QM claim may use legacy `bad_a1_consumed_count`.
+- Trace remains evaluation-only; final_v23 and LegSA outputs remain forbidden as solver input.
+
+Still forbidden after PAPER10M1R2C2:
+
+- claiming M1R2C yaw results are paper-ready, M1R2D can start before repaired rerun review, universal superiority, final paper readiness, BY3 yaw generalization, or XB high-precision severe-GNSS proof;
+- using trace-tuned yaw signs, final_v23 output as solver input, LegSA output as solver input, output-only correction, or epoch deletion;
+- treating the clean sentinel as a replacement for the full 541-case provider regeneration and 2164-row full matrix rerun;
+- committing raw data, degraded providers, NAV/STD/EVAL_NAV/RUN_MANIFEST runtime, generated figures, export-clean zips, local absolute paths, or secrets.
