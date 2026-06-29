@@ -2689,3 +2689,29 @@ Still forbidden after PAPER10M1R2B2:
 - treating providers, trace, final_v23 output, LegSA output, Go2 source fields, or receiver IMU data as truth;
 - running solvers/evaluators/full matrix/internal ablation/PAPER10H from M1R2B2 without a later approved stage;
 - committing raw data, degraded provider payloads, provider runtime, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, export-clean zips, local absolute paths, or secrets.
+
+## PAPER10M1R2C_R1 Yaw-Corrected Full Matrix Claim Boundary
+
+Allowed after PAPER10M1R2C_R1, only if the final report records pass or conditional pass:
+
+- State that the BY2 canonical controlled-degradation full-algorithm matrix was rerun using yaw-corrected M1R2B2 providers.
+- State that four frozen PAPER10L method modes were evaluated on the same 541 provider-ready cases.
+- State that Basic Dual is a baseline comparator, Strong Dual-Yaw is a strong baseline comparator, LegSA without QM is an ablation candidate, and LegSA full candidate with QM is a bounded full candidate.
+- State that trace was used only as evaluation reference and never as solver input.
+- State row/method/family summaries as bounded engineering comparisons under the frozen BY2 controlled-degradation protocol.
+
+Boundary after PAPER10M1R2C_R1:
+
+- M1R2C_R1 is a BY2 controlled degradation full-algorithm rerun with yaw-corrected providers, not an independent severe-GNSS generalization proof.
+- M1R2C_R1 is not internal ablation completion; M1R2D_R1 remains a separate human-authorized stage.
+- M1R2C_R1 is not a horizontal literature algorithm comparison.
+- Old M1R2C yaw metrics remain invalidated and must not be used as paper evidence.
+- Later paper-level claims must wait for M1R2D_R1 and result review.
+
+Still forbidden after PAPER10M1R2C_R1:
+
+- claiming universal superiority, comprehensive final_v23 superiority, final paper readiness, BY3 yaw generalization, XB/PG high-precision severe-GNSS proof, exact external reproduction, or complete nine-factor FGO validation;
+- treating trace, final_v23 output, LegSA output, benchmark output, Go2 source fields, receiver IMU data, old M1R2B providers, or old M1R2C results as solver input or truth;
+- claiming M1R2D_R1 internal ablation, horizontal comparison, PAPER10H, BY3/XB/PG, provider regeneration, or severe-GNSS proof was completed;
+- modifying/copying raw data, overwriting raw/provider packages, deleting epochs, tuning per case, or performing output-only correction;
+- committing raw data, by2/by3 source files, degraded provider payloads, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, export-clean zips, local absolute paths, or secrets.
