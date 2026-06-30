@@ -2715,3 +2715,28 @@ Still forbidden after PAPER10M1R2C_R1:
 - claiming M1R2D_R1 internal ablation, horizontal comparison, PAPER10H, BY3/XB/PG, provider regeneration, or severe-GNSS proof was completed;
 - modifying/copying raw data, overwriting raw/provider packages, deleting epochs, tuning per case, or performing output-only correction;
 - committing raw data, by2/by3 source files, degraded provider payloads, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figures, export-clean zips, local absolute paths, or secrets.
+
+## PAPER10M1R2D_R1 BY2 Internal Ablation Claim Boundary
+
+Allowed after PAPER10M1R2D_R1, only if the final report records pass or conditional pass:
+
+- State that the BY2 canonical controlled degradation internal ablation matrix was executed using yaw-corrected M1R2B2 providers.
+- State that nine internal ablation methods were evaluated on the same 541 provider-ready BY2 cases.
+- State that the full candidate is compared with module-disabled variants under a frozen protocol.
+- State that trace was used only as evaluation reference and never as solver input.
+- Interpret module contribution by metric and degradation family, not as universal causality.
+
+Boundary after PAPER10M1R2D_R1:
+
+- M1R2D_R1 is a BY2 controlled-degradation internal ablation matrix, not independent real-world generalization.
+- M1R2D_R1 is not an external literature comparison and does not execute PAPER10H.
+- M1R2D_R1 does not make paper-ready module-causality claims before M1R2E review.
+- M1R2C_R1 is the full-algorithm reference and not a substitute for D_R1 rows.
+- Old M1R2B providers and old M1R2C yaw metrics remain forbidden.
+
+Still forbidden after PAPER10M1R2D_R1:
+
+- claiming universal superiority, comprehensive final_v23 superiority, final paper readiness, BY3 yaw generalization, XB/PG high-precision severe-GNSS proof, exact external reproduction, complete nine-factor FGO validation, or paper-ready module causality before M1R2E review;
+- treating trace, final_v23 output, LegSA output, benchmark output, Go2 source fields, receiver IMU data, old M1R2B providers, old M1R2C results, or M1R2C_R1 rows as solver input or D_R1 row substitutes;
+- claiming horizontal comparison, PAPER10H, BY3, XB, PG, provider regeneration, severe-GNSS proof, or final paper readiness was completed;
+- modifying/copying raw data, overwriting raw/provider packages, deleting epochs, tuning per case, performing output-only correction, or committing runtime payloads, generated figures, export-clean zips, local absolute paths, or secrets.
