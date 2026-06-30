@@ -1319,3 +1319,28 @@ Next stages:
 - BY3/XB/PG are out of scope for this stage.
 
 This stage does not authorize provider regeneration, internal ablation, horizontal comparison, PAPER10H, BY3/XB/PG execution, raw-data modification, per-case tuning, output-only correction, epoch deletion, final paper claims, or universal superiority wording.
+
+## PAPER10M1R2D_R1 BY2 Internal Ablation Matrix Execution
+
+Current stage:
+
+```text
+PAPER10M1R2D_R1_V2_BY2_INTERNAL_ABLATION_MATRIX_EXECUTION_4869ROWS
+```
+
+PAPER10M1R2D_R1 uses the M1R2B2 yaw-corrected provider-ready manifest and queue draft to run the BY2 internal ablation matrix.
+
+Current route:
+
+- Run 9 internal ablation methods over 541 BY2 provider-ready cases, for 4869 planned rows.
+- Keep M1R2C_R1 as the yaw-corrected full-algorithm reference only; do not substitute M1R2C_R1 rows into D_R1.
+- Use jobs=8 smoke and jobs=12 formal unless a later resource check justifies a separate human-reviewed change.
+- Keep PAPER10H blocked.
+- Do not run BY3, XB, or PG in this stage.
+
+Next stages:
+
+- `PAPER10M1R2E_RESULT_REVIEW_AND_FIGURE_PACKAGE` may review D_R1 metrics, render QA, module contribution tables, and claim boundaries after D_R1 closes.
+- PAPER10H remains blocked until separately authorized.
+
+This stage does not authorize horizontal literature comparison, PAPER10H, BY3/XB/PG execution, provider regeneration, raw-data modification, trace online, final_v23/LegSA/benchmark output as solver input, per-case tuning, output-only correction, epoch deletion, final paper claims, or universal superiority wording.
