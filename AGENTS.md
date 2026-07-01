@@ -77,7 +77,8 @@ The supervisor must prevent phase confusion:
 - PG_QA0_QUALITY_AWARE_FALLBACK_DESIGN_AND_PAPER_MAINLINE_DECISION: current poor-GNSS design-only follow-on after PG_MULTI_A0 and XB1A2; it organizes BY2, BY3, and PG1-PG4 evidence, defines the separate future candidate `LegSA_QA_Fallback_EKF`, designs quality-state, measurement, R-scale, Raw Doppler, Go2 bridge, logging, validation, and paper-positioning policies, and recommends Option B for the near-term paper with Option C only after human-reviewed QA1/QA2/QA3 work. No implementation, solver, evaluator, degraded input, random array, retuning, quality-aware execution, or paper claim was performed.
 - PAPER0_MAINLINE_EVIDENCE_PACKAGE_AND_CLAIM_BOUNDARY_REVIEW: current paper-facing evidence package after PG_QA0; it organizes BY2 as the full-metric main dataset, BY3 as independent position/up generalization with diagnostic-only yaw, PG1-PG4 as severe-GNSS boundary/QA motivation, and PG_QA0 as design extension. It generated paper table drafts, figure recommendations, narrative outline, journal-positioning notes, missing-work decision, export-clean material, and claim-boundary matrices from existing evidence only. No solver, evaluator, degraded input, random array, QA1 implementation, retuning, metric alteration, final figure, or final paper claim was performed.
 - PAPER10C_R1A_RESUME_INTERRUPTED_GO2_BY3_MATRIX_AND_COMPLETE_STAGE: current interrupted-stage recovery for PAPER10C_R1. It recovered BY3 Go2 provider evidence and a resume manifest, preserved completed rows, found BY2 720/720 closed and BY3 543/720 completed-evaluable, identified 169 missing and 8 partial/corrupted BY3 rows, created a missing-only wrapper, but did not execute it because Windows E free space failed the runner gate. No completed output was overwritten, no trace-online/per-case tuning/DA/LC/GINav/MATLAB/RTKLIB/contact-aided/complete FGO was run, and BY3 yaw remains diagnostic-only.
-- PAPER10M1R2D_R1_V2_BY2_INTERNAL_ABLATION_MATRIX_EXECUTION_4869ROWS: current BY2 yaw-corrected internal ablation matrix execution stage. It must use only M1R2B2 yaw-corrected provider-ready cases, treat M1R2C_R1 as full-algorithm reference only, run real 9 x 541 rows, and keep PAPER10H, BY3, XB, PG, horizontal comparison, provider regeneration, raw-data modification, trace online, final_v23/LegSA/benchmark solver input, per-case tuning, output-only correction, and runtime commits forbidden.
+- PAPER10M1R2D_R1_V2_BY2_INTERNAL_ABLATION_MATRIX_EXECUTION_4869ROWS: completed BY2 yaw-corrected internal ablation matrix execution source with 9 x 541 rows; it used only M1R2B2 yaw-corrected provider-ready cases and treated M1R2C_R1 as full-algorithm reference only.
+- PAPER10M1R2E_BY2_RESULT_REVIEW_FIGURE_PACKAGE_AND_CLAIM_BOUNDARY_FREEZE: current BY2 result-review, figure-candidate, Chinese-summary, and claim-boundary freeze stage. It is review-only: no solver/evaluator, provider generation, degradation/random generation, BY3, XB/PG, PAPER10H, or horizontal comparison. M1R2C_R1 and M1R2D_R1 are the current valid BY2 evidence sources; old M1R2C yaw-invalid metrics are forbidden. Module contribution claims require M1R2E classification, and weak/no-effect/alias modules must not be inflated into claims.
 
 ### 1.2 Planner
 
@@ -187,6 +188,9 @@ Tracked docs must use aliases only:
 - `<PAPER10M1R2D_R1_STAGE_ROOT>`
 - `<PAPER10M1R2D_R1_RUNTIME_ROOT>`
 - `<PAPER10M1R2D_R1_C_EXPORT_ROOT>`
+- `<PAPER10M1R2E_STAGE_ROOT>`
+- `<PAPER10M1R2E_LOCAL_REVIEW_ROOT>`
+- `<PAPER10M1R2E_C_EXPORT_ROOT>`
 - `<PG2_XB2_RECEIVER_ROOT>`
 - `<PG2_XB2_BODY_SOURCE>`
 - `<PG3_XB3_RECEIVER_ROOT>`
@@ -231,6 +235,7 @@ The PAPER10Y post-R1B maintenance/archive stage is represented in tracked docs o
 The PAPER10G_R2A LSE method-distinctness audit and recompute gate is represented in tracked docs only by `<PAPER10G_R2A_STAGE_ROOT>`, with export-clean material under `<PAPER10G_R2A_C_EXPORT_ROOT>` and vault notes under `<PAPER10G_R2A_OBSIDIAN_SYNC_ROOT>`.
 The PAPER10E0 Basic Dual-Yaw EKF baseline freeze is represented in tracked docs only by `<PAPER10E0_STAGE_ROOT>`, with lightweight export material under `<PAPER10E0_C_EXPORT_ROOT>` and vault notes under `<PAPER10E0_OBSIDIAN_SYNC_ROOT>`.
 The PAPER10M1R2D_R1 BY2 internal ablation matrix is represented in tracked docs only by `<PAPER10M1R2D_R1_STAGE_ROOT>`, with runtime material under `<PAPER10M1R2D_R1_RUNTIME_ROOT>` and export-clean material under `<PAPER10M1R2D_R1_C_EXPORT_ROOT>`.
+The PAPER10M1R2E BY2 result-review and claim-boundary freeze package is represented in tracked docs only by `<PAPER10M1R2E_STAGE_ROOT>`, with lightweight local review material under `<PAPER10M1R2E_LOCAL_REVIEW_ROOT>` and export-clean material under `<PAPER10M1R2E_C_EXPORT_ROOT>`.
 Prior BY3 source-aware source material imported by PAPER10C_R1 is represented only by `<PAPER10B_R2_STAGE_ROOT>`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
@@ -354,7 +359,7 @@ Current completed route:
 - Current Go2 recovery status: `PAPER10C_R1B_LOW_SPACE_BY3_MISSING_ONLY_RESUME` passed after missing-only BY3 resume. BY2 and BY3 Go2 120x6 are both closed at 720/720, BY3 providers are `by3.txt` derived, readiness/motion-state LSIM metadata is first-class for G03/G05 runtime evidence, and BY3 yaw remains diagnostic-only.
 - Current maintenance status: `PAPER10Y_POST_R1B_GIT_ARCHIVE_AND_WSL_SPACE_CLEANUP` archived verified completed WSL runtime/worktree material, deleted only verified WSL sources, generated a Windows compact script, and recommended PAPER10B2 if the paper kept multi-state quality management as a contribution.
 - Current QM status: `PAPER10B2_R1_MISSING_ONLY_RESUME_AND_FINAL_QM_CLOSURE` closed the remaining BY3 QM missing-only rows. BY2 remains 600/600, BY3 is now 600/600, 7 unindexed complete artifacts were harvested, 14 missing-only rows were executed with jobs=8 and E/WSL emergency stops of 2GB/20GB, and final status is `CONDITIONAL_PASS_QM_FULL_MATRIX_COMPLETED_PERFORMANCE_MIXED`.
-- Current BY2 internal ablation status: `PAPER10M1R2D_R1_V2_BY2_INTERNAL_ABLATION_MATRIX_EXECUTION_4869ROWS` is the active 9-method x 541-case yaw-corrected internal ablation execution stage. Old M1R2B providers and old M1R2C yaw-invalid results are forbidden; M1R2C_R1 is a reference, not a substitute row source. Parallel execution must use row locks and unique output roots. Runtime outputs, generated figures, NAV/STD/EVAL_NAV/RUN_MANIFEST, provider payloads, and export zips must not be committed.
+- Current BY2 result-review status: `PAPER10M1R2E_BY2_RESULT_REVIEW_FIGURE_PACKAGE_AND_CLAIM_BOUNDARY_FREEZE` is the active review-only stage after M1R2C_R1 and M1R2D_R1. Old M1R2B providers and old M1R2C yaw-invalid results are forbidden. M1R2C_R1 is the valid full-algorithm evidence source; M1R2D_R1 is the valid internal-ablation evidence source. Runtime outputs, generated figures, NAV/STD/EVAL_NAV/RUN_MANIFEST, provider payloads, and export zips must not be committed.
 - Recommended BY3 next stage: human review of GEN1, then decide `BY3D_MIXED_POSITION_UP_PLANNING`, separate diagnostic-yaw planning, or another-dataset planning only if explicitly approved; GEN1 does not authorize paper claims, PR #52 merge/tag/closure, or additional yaw/mixed/module/full-matrix execution.
 - Recommended paper next stage: `PAPER1_MANUSCRIPT_EXPERIMENT_SECTION_DRAFT`. QA1 remains optional for a stronger secondary-contribution route and is not required before starting the near-term Option B manuscript. PAPER0 does not authorize frozen mainline execution on PG1-PG4, quality-aware implementation, solver/evaluator execution, artificial degradation, random arrays, retuning, final paper figures, paper claims, PR #52 merge/closure/tag, or poor-GNSS robustness claims.
 - Recommended active-FGO next stage remains: `implement_active_fgo_backend_or_reframe_scope`.
@@ -1496,3 +1501,36 @@ PAPER10M1R2C_R1 boundaries:
 
 - This stage authorizes only the BY2 yaw-corrected full-algorithm matrix rerun.
 - It does not authorize M1R2D_R1 internal ablation, horizontal benchmark comparison, PAPER10H, BY3/XB/PG execution, performance-claim finalization, final paper readiness, universal superiority, final_v23 comprehensive superiority, or complete 9F FGO validation.
+
+## 55. PAPER10M1R2E BY2 Result Review And Claim Freeze
+
+`PAPER10M1R2E_BY2_RESULT_REVIEW_FIGURE_PACKAGE_AND_CLAIM_BOUNDARY_FREEZE` is the review-only stage after M1R2C_R1 and M1R2D_R1.
+
+PAPER10M1R2E fixed rules:
+
+- M1R2E must not run solvers, evaluators, provider generation, degraded-input generation, random generation, BY3, XB/PG, PAPER10H, or horizontal algorithm comparison.
+- M1R2C_R1 and M1R2D_R1 are the current valid BY2 evidence sources for full-algorithm and internal-ablation review.
+- Old M1R2C yaw-invalid metrics are forbidden for active claims.
+- M1R2C_R1 rows must not substitute for M1R2D_R1 rows, and M1R2D_R1 rows must not substitute for M1R2C_R1 full-algorithm evidence.
+- Module contribution claims require M1R2E classification labels and caveats.
+- Weak, no-effect, alias, or diagnostic modules must not be inflated into effective module claims.
+- Go2 remains an observation / weak-prior source and never truth.
+- Trace remains evaluation-only and never solver input.
+- Runtime outputs, generated figures, NAV/STD/EVAL_NAV/RUN_MANIFEST, provider payloads, and export-clean zip files remain outside tracked Git.
+
+PAPER10M1R2E current interpretation boundaries:
+
+- Raw Doppler may be described only as a small bounded auxiliary contribution under the frozen BY2 protocol.
+- Source-aware weighting may be described as stable bounded evidence with small deltas and tradeoffs.
+- Multi-state QM may be described as interpretable state/action evidence with metric tradeoffs, not universal improvement.
+- Go2 horizontal velocity may be described only as a weak auxiliary prior with limited measured contribution.
+- Go2 roll/pitch is not a main-text strong contribution under current evidence.
+- Go2 joint/proprioceptive factor is no-effect/diagnostic in the current matrix if its delta remains zero.
+- FGO feedback / EKF-only relation is alias/no-effect/diagnostic in the current matrix if its delta remains zero.
+- Dual-antenna yaw is a source-backed BY2 backbone and system foundation, not proof of BY3 yaw generalization.
+
+PAPER10M1R2E boundaries:
+
+- This stage may generate review tables, figure-candidate indexes, Chinese experimental summaries, claim-boundary tables, innovation-positioning notes, next-stage decision notes, AI-context snippets, and export-clean packages.
+- This stage does not authorize final paper claim readiness, universal superiority, final_v23 comprehensive superiority, BY3 yaw generalization, XB/PG severe-GNSS high-precision proof, exact external reproduction, complete 9F FGO validation, output-only correction, per-case tuning, or deletion of bad epochs.
+- The recommended next stage is M1R2F final figure/table replot from existing summaries only, unless the human chooses M1R2G module repair or a separately authorized BY3/XB/PAPER10H/horizontal route.
