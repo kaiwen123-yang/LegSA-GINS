@@ -54,7 +54,7 @@ Completed or accepted for current planning:
 - Current implementation/context stage: `N9G1C_TO_N9G1E_PROVIDER_CONTRACT_RESOLUTION_ACTIVE_FGO_BACKEND_AND_NORMAL_SMOKE`.
 - Current BY3/reporting stage: `GEN1_BY2_BY3_GENERALIZATION_REPORT_AND_BY3_FIGURE_ORGANIZATION`; GEN1 built BY2/BY3 three-scheme inventories and summaries from existing metrics, generated cross-dataset figures from existing metrics only, and created a copy-only BY3 figure organization. Paper claims remain false.
 - Current poor-GNSS stage: `PG_QA0_QUALITY_AWARE_FALLBACK_DESIGN_AND_PAPER_MAINLINE_DECISION`; PG_MULTI_A0 remains the source/runnability evidence import. PG_QA0 is design-only and creates no solver/evaluator/degraded/random/retuning evidence. It defines `LegSA_QA_Fallback_EKF` as a separate future quality-aware fallback candidate for severe GNSS and unavailable A1 dual-yaw, while keeping `LegSA_full_EKF` as the current verified mainline for normal/moderate GNSS and BY2/BY3 position-up evidence.
-- Current paper-facing evidence stage: `PAPER0_MAINLINE_EVIDENCE_PACKAGE_AND_CLAIM_BOUNDARY_REVIEW`; PAPER0 is complete and supports starting manuscript experiment-section drafting from existing BY2/BY3 evidence while keeping PG/QA as limitation/design extension and `ready_for_paper_claims=false`.
+- Current paper-facing evidence stage: `PAPER10M1R2E_BY2_RESULT_REVIEW_FIGURE_PACKAGE_AND_CLAIM_BOUNDARY_FREEZE`; M1R2E reviews the valid yaw-corrected BY2 full-algorithm and internal-ablation matrices, classifies figure candidates, writes Chinese experiment summaries, freezes claim boundaries, and runs no solver/evaluator/provider/degradation/random generation.
 - N9F design materialization completed: current evidence requires a new active nine-factor FGO algorithm design before representative runs.
 - N9F6A source-code forensic audit completed from real Windows/WSL source evidence and passed reviewer gate.
 - N9F7 followed Path C only: substantial algorithm design package required; no implementation, solver/evaluator execution, representative run, full matrix, or replot was performed.
@@ -1344,3 +1344,39 @@ Next stages:
 - PAPER10H remains blocked until separately authorized.
 
 This stage does not authorize horizontal literature comparison, PAPER10H, BY3/XB/PG execution, provider regeneration, raw-data modification, trace online, final_v23/LegSA/benchmark output as solver input, per-case tuning, output-only correction, epoch deletion, final paper claims, or universal superiority wording.
+
+## PAPER10M1R2E BY2 Result Review, Figure Package, And Claim Freeze
+
+Current stage:
+
+```text
+PAPER10M1R2E_BY2_RESULT_REVIEW_FIGURE_PACKAGE_AND_CLAIM_BOUNDARY_FREEZE
+```
+
+PAPER10M1R2E is a result-review and writing-boundary stage only.
+
+Current route:
+
+- Load M1R2A 60-type/541-case manifest, M1R2B2 541/541 yaw-corrected provider-ready manifest, M1R2C_R1 2164/2164 full-algorithm rows, and M1R2D_R1 4869/4869 internal-ablation rows.
+- Review four M1R2C_R1 full-algorithm modes and nine M1R2D_R1 ablation methods.
+- Classify module evidence into strong/moderate/weak/tradeoff/no-effect/alias/diagnostic labels.
+- Classify existing M1R2C_R1 and M1R2D_R1 figure indexes into main-text, appendix, diagnostic, and replot-needed buckets.
+- Generate Chinese experiment summaries, claim-boundary freeze tables, innovation/journal positioning notes, next-stage decision notes, Obsidian notes, AI-context snippets, and export-clean package.
+
+Current M1R2E interpretation:
+
+- M1R2C_R1 and M1R2D_R1 are the valid BY2 evidence sources; old M1R2C yaw-invalid metrics are forbidden.
+- Raw Doppler is a small bounded auxiliary contribution.
+- Source-aware weighting is stable bounded evidence with small deltas and tradeoffs.
+- Multi-state QM is interpretable state/action evidence with metric tradeoffs, not universal improvement.
+- Go2 horizontal velocity is a weak auxiliary prior.
+- Go2 roll/pitch is not a strong main-text contribution under current evidence.
+- Go2 joint/proprioceptive and FGO feedback / EKF-only remain no-effect or alias/diagnostic if their deltas are zero.
+
+Next stages:
+
+- Preferred: `PAPER10M1R2F_MAIN_FIGURE_TABLE_REPLOT` for final paper-format figures and tables from existing summaries only.
+- Conditional: `PAPER10M1R2G_MODULE_REPAIR_OR_ALIAS_CLEANUP` if the human wants to repair no-effect/alias module semantics before final packaging.
+- Separately authorized only: `PAPER10H_XB_PG_BOUNDARY_DIAGNOSTIC`, BY3 targeted poor-heading stress, and horizontal algorithm comparison.
+
+This stage does not authorize solvers, evaluators, provider generation, degraded-input generation, random generation, BY3, XB/PG, PAPER10H, horizontal comparison, raw-data modification, trace online, final_v23/LegSA/benchmark output as solver input, per-case tuning, output-only correction, epoch deletion, final paper claims, or universal superiority wording.

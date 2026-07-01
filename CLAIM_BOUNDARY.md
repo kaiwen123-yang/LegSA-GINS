@@ -2740,3 +2740,41 @@ Still forbidden after PAPER10M1R2D_R1:
 - treating trace, final_v23 output, LegSA output, benchmark output, Go2 source fields, receiver IMU data, old M1R2B providers, old M1R2C results, or M1R2C_R1 rows as solver input or D_R1 row substitutes;
 - claiming horizontal comparison, PAPER10H, BY3, XB, PG, provider regeneration, severe-GNSS proof, or final paper readiness was completed;
 - modifying/copying raw data, overwriting raw/provider packages, deleting epochs, tuning per case, performing output-only correction, or committing runtime payloads, generated figures, export-clean zips, local absolute paths, or secrets.
+
+## PAPER10M1R2E BY2 Result Review And Claim Boundary Freeze
+
+Allowed after PAPER10M1R2E, only with the generated M1R2E classification tables and caveats:
+
+- State that the BY2 controlled degradation matrix was reviewed using yaw-corrected M1R2B2 providers.
+- State that M1R2C_R1 completed four frozen full-algorithm modes over 541 BY2 cases, for 2164/2164 completed-evaluable rows.
+- State that M1R2D_R1 completed nine internal ablation methods over 541 BY2 cases, for 4869/4869 completed-evaluable rows.
+- State that trace was evaluation-only and not solver input.
+- State that Raw Doppler shows a small bounded auxiliary contribution under the frozen BY2 protocol.
+- State that source-aware weighting shows stable bounded contribution in many cases, with small deltas and metric tradeoffs.
+- State that multi-state QM provides interpretable state/action traces but has metric tradeoffs and is not a universal performance improvement.
+- State that Go2 horizontal velocity is a weak auxiliary prior with limited measured contribution.
+- State that the dual-antenna yaw provider lineage is a BY2 source-backed backbone and system foundation.
+
+Conditional or diagnostic-only after PAPER10M1R2E:
+
+- Go2 roll/pitch may be discussed only as weak or not-claimable-as-improvement evidence under current metrics.
+- Go2 joint/proprioceptive factor must be diagnostic/no-effect if its delta is zero.
+- FGO feedback / EKF-only relation must be diagnostic/alias/no-effect if its delta is zero.
+- `legsa_without_qm` and `legsa_no_qm` must not be double-counted as two independent module contributions if their metrics are equivalent.
+- Existing review figures may be candidates for main text or appendix, but final manuscript figures require a separate M1R2F formatting/replot gate.
+
+Still forbidden after PAPER10M1R2E:
+
+- universal superiority;
+- final paper claim ready;
+- BY3 yaw generalization;
+- XB/PG high-precision severe-GNSS proof;
+- exact external reproduction;
+- complete nine-factor FGO validation;
+- treating Go2 position, velocity, contact, or yaw as truth;
+- using old M1R2C yaw-invalid results as active evidence;
+- using legacy bad-A1 consumed counters as claim fields;
+- claiming final_v23 comprehensive superiority;
+- claiming all modules significantly improve performance;
+- claiming Go2 joint or FGO feedback effectiveness when measured delta is zero;
+- running or implying PAPER10H, BY3, XB/PG, horizontal comparison, new provider generation, new degraded inputs, solver/evaluator runs, output-only correction, per-case tuning, or deletion of bad epochs from M1R2E.
