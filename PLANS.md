@@ -1405,3 +1405,38 @@ Next stages:
 - PAPER10H, BY3, and XB/PG remain separate human-authorized stages and were not run in Q1.
 
 This stage does not authorize solvers, evaluators, provider generation, degraded-input generation, random generation, BY3, XB/PG, PAPER10H, horizontal comparison, raw-data modification, trace online, final_v23/LegSA/benchmark output as solver input, per-case tuning, output-only correction, epoch deletion, final paper claims, universal QM improvement, or legacy `bad_a1_consumed_count` claim use.
+
+## PAPER10Q2 Horizontal Comparison Evidence Reconciliation And Rerun Gate
+
+Current stage:
+
+```text
+PAPER10Q2_HORIZONTAL_COMPARISON_EVIDENCE_RECONCILIATION_AND_TARGETED_RERUN_GATE
+```
+
+PAPER10Q2 is a review/index/gate-only stage for existing horizontal algorithm comparison assets.
+
+Current route:
+
+- Load Q1, M1R2E, M1R2C_R1, M1R2D_R1, AI context, and existing horizontal comparison registries/summaries.
+- Reconcile PAPER2A, PAPER1F, PAPER3/PAPER4G, QA11/QA11G, PAPER0M2/PAPER0N, Go2/LSE, and archived horizontal evidence.
+- Classify every method/evidence row as exact, faithful algorithm, faithful module, policy baseline, diagnostic, blocked, or excluded.
+- Split horizontal evidence into main-text, appendix, diagnostic-only, excluded, re-export-required, and targeted-rerun-required tables.
+- Generate horizontal claim boundaries, Chinese summaries, figure organization plans, next-stage prompt drafts, Obsidian notes, AI-context snippets, and export-clean package.
+
+Current Q2 gate:
+
+- PAPER2A needs direct evidence re-export before paper use.
+- QA11G needs direct evidence re-export/replot if used.
+- Dual-antenna main-text true-method comparison needs a future targeted 3-5 method rerun.
+- PAPER1F remains diagnostic-only unless mapping/proof is repaired.
+- QA11 20-method benchmark is not pursued unless real runnable methods are available.
+
+Next stages:
+
+- `PAPER10Q2R1_PAPER2A_REEXPORT_EVIDENCE_PACK` for re-export only, no rerun.
+- `PAPER10Q2R2_DUAL_ANTENNA_TRUE_METHODS_TARGETED_RERUN` only if the human wants main-text true dual-antenna external comparison.
+- `PAPER10Q2R3_QA11G_EVIDENCE_REEXPORT_OR_REPLOT` if QA11G is still needed.
+- `PAPER10Q2R4_BY3_XB_STRESS_HORIZONTAL` only as separately authorized stress evidence.
+
+This stage does not authorize solvers, evaluators, provider generation, degradation generation, BY2/BY3/XB/PAPER10H execution, new horizontal full matrices, official-code cloning/running, data download, final paper claims, universal superiority, BY3 ordinary yaw generalization, XB high-precision severe-GNSS proof, exact=false-to-exact wording, policy-baseline-to-real-algorithm wording, output-only correction, per-case tuning, or epoch deletion.

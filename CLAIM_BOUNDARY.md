@@ -2805,3 +2805,38 @@ Still forbidden after PAPER10Q1:
 - treating Go2 position, velocity, contact, or yaw as truth;
 - running or implying solver/evaluator/provider/degradation/random-generation work from Q1;
 - committing generated figure binaries, raw data, providers, NAV/STD/EVAL_NAV/RUN_MANIFEST, export-clean zips, local absolute paths, or secrets.
+
+## PAPER10Q2 Horizontal Comparison Claim Boundary
+
+Allowed after PAPER10Q2, only with reproduction-type caveats:
+
+- State that existing horizontal comparison evidence was reconciled and classified before paper use.
+- State that evidence was separated into exact, faithful algorithm, faithful module, paper-derived policy baseline, diagnostic-only, blocked-with-proof, and excluded/deprecated classes.
+- State that external algorithms are not rejected because their original platform is vehicle, marine, or generic GNSS/INS; the required gate is real BY2 input construction, independent algorithm execution, and closed output/evaluator semantics.
+- State that some existing dual-antenna native DD/LOS/module metrics can support appendix discussion, with no body-yaw superiority claim.
+- State that PAPER2A QA evidence requires direct re-export before paper use if only secondary summaries are available.
+- State that BY3 is poor-heading stress only and XB is poor-GNSS stress only.
+
+Conditional after PAPER10Q2:
+
+- PAPER2A QA methods may support an appendix or bounded method-overview table after row-level/proof/render-QA re-export.
+- QA11G may be used only after direct evidence re-export/replot if its row-level/proof package exists.
+- Dual-antenna external-method main-text comparison requires a future targeted 3-5 method rerun with real BY2 inputs and closed body-yaw / lateral +/-90 / ENU-NED / wrap-safe semantics.
+- PAPER1F remains diagnostic-only unless direct proof and method-source mapping are repaired.
+- Legged external-method evidence remains proxy/diagnostic unless full external method inputs, backend, and yaw/reference semantics are closed.
+
+Still forbidden after PAPER10Q2:
+
+- claiming exact reproduction of five external dual-antenna algorithms;
+- claiming exact reproduction or completion of twenty literature algorithms;
+- claiming universal superiority over all external methods;
+- claiming PAPER1F proves main-text superiority;
+- claiming PAPER2A proves performance superiority before direct re-export and classification support it;
+- claiming BY3 ordinary yaw generalization;
+- claiming XB high-precision severe-GNSS proof;
+- writing RTKLIB moving-base as faithful literature reproduction unless DD/LOS/ambiguity backends are actually closed;
+- writing method-inspired policy baselines as exact or faithful external algorithms;
+- writing frame-unsafe yaw results as yaw claims;
+- writing old aggregate counts as completed matrices;
+- using trace online, final_v23/LegSA outputs as solver input, receiver IMU as Go2 body IMU, output-only correction, epoch deletion, per-case tuning, or Go2 position/yaw/velocity/contact as truth;
+- committing raw data, providers, runtime payloads, epoch-output payloads, generated figures, official code snapshots, old zips, local absolute paths, or secrets.
