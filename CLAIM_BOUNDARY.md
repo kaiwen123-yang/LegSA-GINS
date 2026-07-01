@@ -2778,3 +2778,30 @@ Still forbidden after PAPER10M1R2E:
 - claiming all modules significantly improve performance;
 - claiming Go2 joint or FGO feedback effectiveness when measured delta is zero;
 - running or implying PAPER10H, BY3, XB/PG, horizontal comparison, new provider generation, new degraded inputs, solver/evaluator runs, output-only correction, per-case tuning, or deletion of bad epochs from M1R2E.
+
+## PAPER10Q1 QM Evidence And Claim Boundary
+
+Allowed after PAPER10Q1, only with Q1 caveats:
+
+- State that QM/source-aware provides bounded protection under degraded measurement conditions in BY2.
+- State that QM provides interpretable state/action/recovery traces from frozen M1R2C_R1/M1R2D_R1 evidence.
+- State that source-aware weighting has stable bounded contribution in many cases, with small deltas and metric tradeoffs.
+- State that normal-condition QM transparency must be reported with caveats.
+- State that Q1 generated review PNG/PDF figures and figure QA outside Git, not new solver/evaluator evidence.
+
+Conditional after PAPER10Q1:
+
+- Multi-state QM may be positioned as a protective and interpretable mechanism only if the manuscript also reports full-QM versus no-QM tradeoffs.
+- Full-QM versus no-QM results must include no-QM-better cases and diagnostic caveat figures where relevant.
+- Source-aware and QM wording must be degradation-family-specific; do not generalize from BY2 to BY3/XB/PG.
+
+Still forbidden after PAPER10Q1:
+
+- claiming QM universally improves all metrics;
+- claiming QM significantly improves normal-condition accuracy;
+- claiming full-QM dominates no-QM in all cases;
+- using legacy `bad_a1_consumed_count` as a claim field;
+- claiming BY3 yaw generalization, XB/PG high-precision severe-GNSS proof, horizontal comparison completion, PAPER10H completion, final paper readiness, universal superiority, or complete 9F FGO validation;
+- treating Go2 position, velocity, contact, or yaw as truth;
+- running or implying solver/evaluator/provider/degradation/random-generation work from Q1;
+- committing generated figure binaries, raw data, providers, NAV/STD/EVAL_NAV/RUN_MANIFEST, export-clean zips, local absolute paths, or secrets.

@@ -79,6 +79,7 @@ The supervisor must prevent phase confusion:
 - PAPER10C_R1A_RESUME_INTERRUPTED_GO2_BY3_MATRIX_AND_COMPLETE_STAGE: current interrupted-stage recovery for PAPER10C_R1. It recovered BY3 Go2 provider evidence and a resume manifest, preserved completed rows, found BY2 720/720 closed and BY3 543/720 completed-evaluable, identified 169 missing and 8 partial/corrupted BY3 rows, created a missing-only wrapper, but did not execute it because Windows E free space failed the runner gate. No completed output was overwritten, no trace-online/per-case tuning/DA/LC/GINav/MATLAB/RTKLIB/contact-aided/complete FGO was run, and BY3 yaw remains diagnostic-only.
 - PAPER10M1R2D_R1_V2_BY2_INTERNAL_ABLATION_MATRIX_EXECUTION_4869ROWS: completed BY2 yaw-corrected internal ablation matrix execution source with 9 x 541 rows; it used only M1R2B2 yaw-corrected provider-ready cases and treated M1R2C_R1 as full-algorithm reference only.
 - PAPER10M1R2E_BY2_RESULT_REVIEW_FIGURE_PACKAGE_AND_CLAIM_BOUNDARY_FREEZE: current BY2 result-review, figure-candidate, Chinese-summary, and claim-boundary freeze stage. It is review-only: no solver/evaluator, provider generation, degradation/random generation, BY3, XB/PG, PAPER10H, or horizontal comparison. M1R2C_R1 and M1R2D_R1 are the current valid BY2 evidence sources; old M1R2C yaw-invalid metrics are forbidden. Module contribution claims require M1R2E classification, and weak/no-effect/alias modules must not be inflated into claims.
+- PAPER10Q1_QM_DEGRADED_ACTION_EVIDENCE_AND_FIGURE_PACKAGE: current QM evidence-strengthening and figure-review package. It is review/plot-only from frozen M1R2C_R1/M1R2D_R1 evidence; generated PNG/PDF figures stay outside Git. QM/source-aware claims must be family-specific, legacy `bad_a1_consumed_count` is deprecated, and BY3/XB/PAPER10H/horizontal comparison remain not run.
 
 ### 1.2 Planner
 
@@ -191,6 +192,9 @@ Tracked docs must use aliases only:
 - `<PAPER10M1R2E_STAGE_ROOT>`
 - `<PAPER10M1R2E_LOCAL_REVIEW_ROOT>`
 - `<PAPER10M1R2E_C_EXPORT_ROOT>`
+- `<PAPER10Q1_STAGE_ROOT>`
+- `<PAPER10Q1_FIGURE_ROOT>`
+- `<PAPER10Q1_C_EXPORT_ROOT>`
 - `<PG2_XB2_RECEIVER_ROOT>`
 - `<PG2_XB2_BODY_SOURCE>`
 - `<PG3_XB3_RECEIVER_ROOT>`
@@ -236,6 +240,7 @@ The PAPER10G_R2A LSE method-distinctness audit and recompute gate is represented
 The PAPER10E0 Basic Dual-Yaw EKF baseline freeze is represented in tracked docs only by `<PAPER10E0_STAGE_ROOT>`, with lightweight export material under `<PAPER10E0_C_EXPORT_ROOT>` and vault notes under `<PAPER10E0_OBSIDIAN_SYNC_ROOT>`.
 The PAPER10M1R2D_R1 BY2 internal ablation matrix is represented in tracked docs only by `<PAPER10M1R2D_R1_STAGE_ROOT>`, with runtime material under `<PAPER10M1R2D_R1_RUNTIME_ROOT>` and export-clean material under `<PAPER10M1R2D_R1_C_EXPORT_ROOT>`.
 The PAPER10M1R2E BY2 result-review and claim-boundary freeze package is represented in tracked docs only by `<PAPER10M1R2E_STAGE_ROOT>`, with lightweight local review material under `<PAPER10M1R2E_LOCAL_REVIEW_ROOT>` and export-clean material under `<PAPER10M1R2E_C_EXPORT_ROOT>`.
+The PAPER10Q1 QM degraded-action evidence package is represented in tracked docs only by `<PAPER10Q1_STAGE_ROOT>`, with review-only PNG/PDF figures outside Git under `<PAPER10Q1_FIGURE_ROOT>` and export-clean text material under `<PAPER10Q1_C_EXPORT_ROOT>`.
 Prior BY3 source-aware source material imported by PAPER10C_R1 is represented only by `<PAPER10B_R2_STAGE_ROOT>`.
 The BY3 full-matrix runtime root is represented in tracked docs only by the alias `<BY3_FULL_MATRIX_ROOT>`.
 The BY3 receiver root is represented in tracked docs only by `<BY3_RECEIVER_ROOT>`.
@@ -1534,3 +1539,25 @@ PAPER10M1R2E boundaries:
 - This stage may generate review tables, figure-candidate indexes, Chinese experimental summaries, claim-boundary tables, innovation-positioning notes, next-stage decision notes, AI-context snippets, and export-clean packages.
 - This stage does not authorize final paper claim readiness, universal superiority, final_v23 comprehensive superiority, BY3 yaw generalization, XB/PG severe-GNSS high-precision proof, exact external reproduction, complete 9F FGO validation, output-only correction, per-case tuning, or deletion of bad epochs.
 - The recommended next stage is M1R2F final figure/table replot from existing summaries only, unless the human chooses M1R2G module repair or a separately authorized BY3/XB/PAPER10H/horizontal route.
+
+## 56. PAPER10Q1 QM Degraded-Action Evidence Package
+
+`PAPER10Q1_QM_DEGRADED_ACTION_EVIDENCE_AND_FIGURE_PACKAGE` is a review/plot-only follow-up focused on multi-state QM and source-aware evidence.
+
+PAPER10Q1 fixed rules:
+
+- Q1 must not run solvers, evaluators, provider generation, degraded-input generation, random generation, BY3, XB/PG, PAPER10H, or horizontal algorithm comparison.
+- Q1 may read only frozen M1R2C_R1/M1R2D_R1 result tables, QM/source-aware summaries, and existing trace files for review and plotting.
+- Q1-generated PNG/PDF figures are review artifacts under `<PAPER10Q1_FIGURE_ROOT>` and must not be committed to Git.
+- Q1 export-clean material must exclude raw data, providers, NAV/STD/EVAL_NAV/RUN_MANIFEST, generated figure binaries, old zips, local absolute paths, and secrets.
+- Legacy `bad_a1_consumed_count` is deprecated and must not be used as a claim field.
+- QM/source-aware claims must be family-specific and caveated; Q1 does not authorize universal improvement wording.
+- BY3, XB/PG, PAPER10H, and horizontal comparison were not run in Q1 and remain separate human-authorized stages only.
+
+PAPER10Q1 current interpretation boundaries:
+
+- Final QM judgment is `QM_supported_only_as_interpretability_and_protection`.
+- Source-aware weighting has bounded positive evidence with small deltas and metric tradeoffs.
+- Multi-state QM provides interpretable state/action/recovery evidence but has RMSE tradeoffs and must not be written as all-metric precision improvement.
+- Full-QM versus no-QM must be presented with no-QM-better and tradeoff caveats.
+- Diagnostic figures, legacy counters, and cases where QM hurts or is neutral must not be promoted to main claims.

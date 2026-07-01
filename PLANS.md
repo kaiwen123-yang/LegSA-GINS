@@ -1380,3 +1380,28 @@ Next stages:
 - Separately authorized only: `PAPER10H_XB_PG_BOUNDARY_DIAGNOSTIC`, BY3 targeted poor-heading stress, and horizontal algorithm comparison.
 
 This stage does not authorize solvers, evaluators, provider generation, degraded-input generation, random generation, BY3, XB/PG, PAPER10H, horizontal comparison, raw-data modification, trace online, final_v23/LegSA/benchmark output as solver input, per-case tuning, output-only correction, epoch deletion, final paper claims, or universal superiority wording.
+
+## PAPER10Q1 QM Degraded-Action Evidence And Figure Package
+
+Current stage:
+
+```text
+PAPER10Q1_QM_DEGRADED_ACTION_EVIDENCE_AND_FIGURE_PACKAGE
+```
+
+PAPER10Q1 is a review/plot-only QM evidence-strengthening stage after M1R2E.
+
+Current route:
+
+- Load M1R2E claim-boundary freeze plus frozen M1R2C_R1/M1R2D_R1 row tables, QM/source-aware summaries, and existing trace files.
+- Review normal-condition QM transparency, degraded-condition protection, source action counts, recovery/fallback evidence, and full-QM versus no-QM/no-source-aware tradeoffs.
+- Generate Q1 evidence tables, review PNG/PDF figures outside Git, figure QA/claim mapping, Chinese summaries, QM claim boundaries, Obsidian notes, AI-context snippets, next-stage notes, and export-clean text package.
+- Final QM judgment is `QM_supported_only_as_interpretability_and_protection`: source-aware is bounded positive with small deltas, while multi-state QM is a protective/interpretable mechanism with RMSE tradeoffs.
+
+Next stages:
+
+- `PAPER10M1R2F_MAIN_FIGURE_TABLE_REPLOT` may replot final paper-format figures from existing summaries only.
+- `PAPER10Q2_HORIZONTAL_COMPARISON_PLAN` requires explicit human authorization before any horizontal comparison work.
+- PAPER10H, BY3, and XB/PG remain separate human-authorized stages and were not run in Q1.
+
+This stage does not authorize solvers, evaluators, provider generation, degraded-input generation, random generation, BY3, XB/PG, PAPER10H, horizontal comparison, raw-data modification, trace online, final_v23/LegSA/benchmark output as solver input, per-case tuning, output-only correction, epoch deletion, final paper claims, universal QM improvement, or legacy `bad_a1_consumed_count` claim use.
