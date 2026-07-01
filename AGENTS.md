@@ -1561,3 +1561,30 @@ PAPER10Q1 current interpretation boundaries:
 - Multi-state QM provides interpretable state/action/recovery evidence but has RMSE tradeoffs and must not be written as all-metric precision improvement.
 - Full-QM versus no-QM must be presented with no-QM-better and tradeoff caveats.
 - Diagnostic figures, legacy counters, and cases where QM hurts or is neutral must not be promoted to main claims.
+
+## 57. PAPER10Q2 Horizontal Comparison Evidence Reconciliation
+
+`PAPER10Q2_HORIZONTAL_COMPARISON_EVIDENCE_RECONCILIATION_AND_TARGETED_RERUN_GATE` is a horizontal-comparison evidence reconciliation and gate stage only.
+
+PAPER10Q2 fixed rules:
+
+- Q2 must not run solvers, evaluators, provider generation, degradation generation, BY2/BY3/XB/PAPER10H, new full matrices, official-code clones/runs, or data downloads.
+- Horizontal algorithm evidence must be classified as `EXACT_REPRODUCTION`, `FAITHFUL_ALGORITHM_REPRODUCTION`, `FAITHFUL_MODULE_REPRODUCTION`, `PAPER_DERIVED_POLICY_BASELINE`, `DIAGNOSTIC_ONLY`, `BLOCKED_WITH_PROOF`, or `EXCLUDED_DEPRECATED`.
+- Method-inspired gates, R-scaling policies, robust policies, and loose adapters must not be written as true external algorithm reproductions.
+- `exact_reproduction=false` evidence must not be described as exact.
+- Frame-unsafe yaw or body-heading evidence must not be written as yaw performance claims.
+- BY3 is poor-heading stress only; XB is poor-GNSS stress only.
+- External algorithm platform mismatch is not a rejection reason. The real gate is BY2 real-input construction, independent method execution, and closed body-yaw / lateral +/-90 / ENU-NED / wrap-safe evaluator semantics.
+- Horizontal figure organization must distinguish normal-condition figures from degraded-experiment figures.
+- PAPER2A and QA11G require direct lightweight re-export before paper use if Q2 only has secondary summaries.
+- PAPER1F remains diagnostic-only unless direct proof and method-source mapping are repaired.
+- QA11 20-method blocked stages must not be promoted to completed benchmark claims.
+
+PAPER10Q2 current interpretation boundaries:
+
+- Exact external reproduction count is zero in the reconciled Q2 evidence.
+- PAPER2A QA evidence is re-export-required before paper use.
+- QA11G is re-export-required if used.
+- Dual-antenna true external-method main-text evidence requires a future targeted 3-5 method rerun.
+- Existing PAPER4G native DD/LOS metrics may support appendix/module discussion only and do not close body-yaw superiority claims.
+- Legged external-method evidence remains proxy/diagnostic; use internal Go2 weak-prior and observability evidence with truth caveats.
