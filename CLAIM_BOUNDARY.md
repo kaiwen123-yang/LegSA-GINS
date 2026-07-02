@@ -2866,3 +2866,31 @@ Still forbidden after PAPER10Q2R1:
 - promoting old diagnostic, prepare-only, supervisor-only, or count-only evidence into main-text strong claims;
 - deleting raw data, raw-adjacent caches, current valid evidence, reports/stages evidence, export-clean packages, or Git source without explicit human review;
 - committing raw data, runtime payloads, epoch-output payloads, QA decision payloads, eval metric payloads, generated figure binaries, archive binaries, old zips, local absolute path manifests, or secrets.
+
+## PAPER10Q2R2 Dual-Antenna Targeted Rerun Claim Boundary
+
+Allowed after PAPER10Q2R2:
+
+- State that Q2R2 selected five representative dual-antenna / two-receiver / heading-aided methods as faithful-algorithm targets.
+- State that Q2R2 locked BY2 input roles, trace evaluation-only policy, and PAPER4B_R2 fixed lateral +90 body-yaw policy.
+- State that Q2R2 generated a 120-case planned BY2 queue and 600 planned method-case rows.
+- State that Q2R2 was blocked by provider contract because the required BY2 receiver raw/status source root and Go2 body source were not readable in the current environment.
+- State that no solver/evaluator/provider-generation/full-plotting work completed in Q2R2.
+
+Conditional after PAPER10Q2R2:
+
+- A selected external dual-antenna method may be described as faithful only after it independently runs on real BY2 source inputs, closes its backend, and completes 120/120 evaluable rows with yaw/frame proof.
+- Q2R2 can become a main-text or strong appendix horizontal comparison only after at least three selected faithful methods complete 120/120 BY2 rows.
+- If external methods later fail on BY2 after source-input and frame closure, that failure may be used as bounded stress evidence with method-specific caveats.
+
+Still forbidden after PAPER10Q2R2:
+
+- claiming Q2R2 completed faithful external dual-antenna reproductions;
+- claiming exact reproduction of any selected method;
+- claiming universal superiority or that LegSA beats all external methods;
+- claiming all external methods fail or are wrong;
+- claiming BY3 yaw generalization or XB high-precision severe-GNSS proof;
+- using old PAPER1F diagnostic rows, policy baselines, method-family adapters, prepare-only rows, or old aggregates as faithful completed rows;
+- using trace to choose yaw sign/offset, applying output-only correction, deleting epochs, or using per-case yaw offsets;
+- using receiver `imu-data.csv` as Go2 body IMU, treating Go2 pose/yaw/velocity/contact as truth, or using final_v23/LegSA outputs as external method solver inputs;
+- committing raw data, runtime payloads, epoch-output payloads, eval metric payloads, generated figure binaries, export-clean zips, old zips, local absolute path manifests, official code snapshots, or secrets.
