@@ -1440,3 +1440,36 @@ Next stages:
 - `PAPER10Q2R4_BY3_XB_STRESS_HORIZONTAL` only as separately authorized stress evidence.
 
 This stage does not authorize solvers, evaluators, provider generation, degradation generation, BY2/BY3/XB/PAPER10H execution, new horizontal full matrices, official-code cloning/running, data download, final paper claims, universal superiority, BY3 ordinary yaw generalization, XB high-precision severe-GNSS proof, exact=false-to-exact wording, policy-baseline-to-real-algorithm wording, output-only correction, per-case tuning, or epoch deletion.
+
+## PAPER10Q2R1 Storage Slim And PAPER2A QA Re-Export Evidence Pack
+
+Current stage:
+
+```text
+PAPER10Q2R1_STORAGE_SLIM_AND_PAPER2A_QA_REEXPORT_EVIDENCE_PACK
+```
+
+PAPER10Q2R1 is a storage-safety and evidence-packaging stage after Q2.
+
+Current route:
+
+- Build a bounded storage inventory and classify entries into must-keep, compress-only, delete-candidate, and review-required buckets.
+- Execute only exact-path safe delete candidates; raw-like, current evidence, reports/stages, export-clean, and Git source remain protected.
+- Normalize horizontal comparison folder planning; if the Windows root is unavailable, produce plan-only mappings.
+- Discover PAPER2A direct worktree/runtime evidence, falling back only to clearly labeled secondary PAPER4A summaries.
+- Generate PAPER2A light re-export tables, method classification, Chinese summary, claim boundary, future figure plan, Obsidian notes, AI-context snippets, and export-clean package.
+
+Current Q2R1 outcome:
+
+- PAPER2A direct row-level/proof/render-QA evidence was not found in the available roots.
+- PAPER2A counts are marked `COUNT_FROM_SUPERVISOR_ONLY_NOT_ROW_PROVEN`.
+- Storage inventory completed with no automatic deletion because no safe delete candidates were present.
+- Full plotting remains deferred.
+
+Next stages:
+
+- Locate or re-export direct PAPER2A row/proof/render-QA evidence if QA appendix use needs row-proven support.
+- `PAPER10Q2R2_DUAL_ANTENNA_TRUE_METHODS_TARGETED_RERUN` remains the path for main-text dual-antenna true external comparison.
+- A dedicated future full-figure stage should handle normal/degraded horizontal figure generation and folder population.
+
+This stage does not authorize solvers, evaluators, provider generation, degradation generation, BY2/BY3/XB/PAPER10H execution, new horizontal full matrices, full plotting, algorithm changes, parameter tuning, raw-data deletion, diagnostic-to-main claim promotion, exact PAPER2A reproduction claims, universal superiority, BY3 yaw generalization, or XB high-precision severe-GNSS claims.

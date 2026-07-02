@@ -1588,3 +1588,24 @@ PAPER10Q2 current interpretation boundaries:
 - Dual-antenna true external-method main-text evidence requires a future targeted 3-5 method rerun.
 - Existing PAPER4G native DD/LOS metrics may support appendix/module discussion only and do not close body-yaw superiority claims.
 - Legged external-method evidence remains proxy/diagnostic; use internal Go2 weak-prior and observability evidence with truth caveats.
+
+## 58. PAPER10Q2R1 Storage Slim And PAPER2A QA Re-Export
+
+`PAPER10Q2R1_STORAGE_SLIM_AND_PAPER2A_QA_REEXPORT_EVIDENCE_PACK` is a storage-maintenance and evidence-packaging stage only.
+
+PAPER10Q2R1 fixed rules:
+
+- Storage slim must be manifest-first: inventory, classify, plan, safety-check, then execute only exact-path safe candidates.
+- Raw data, receiver raw files, Go2 body text files, trace references, Git source, current valid evidence chain, reports/stages final reports, and export-clean packages must not be deleted.
+- Raw-like paths and raw-adjacent caches require human review and must not be automatically deleted.
+- PAPER2A re-export is read-only evidence packaging, not a solver/evaluator/provider/degradation rerun.
+- PAPER2A is not exact reproduction and must remain QA appendix/bounded evidence unless direct row-level/proof evidence supports stronger wording.
+- PAPER2A does not replace Q2R2 dual-antenna targeted rerun.
+- Full horizontal plotting is deferred to a later dedicated stage.
+- Archive binaries, generated figures, runtime payloads, raw data, old zips, and local absolute path manifests must not be committed.
+
+PAPER10Q2R1 current interpretation boundaries:
+
+- PAPER2A direct runtime/worktree proof was not found in the available roots; counts are `COUNT_FROM_SUPERVISOR_ONLY_NOT_ROW_PROVEN`.
+- Q2R1 can support a conditional PAPER2A QA appendix scaffold, not paper-ready QA superiority claims.
+- Storage cleanup executed no automatic deletion when delete candidates were absent or unsafe.
