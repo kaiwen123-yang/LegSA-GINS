@@ -2840,3 +2840,29 @@ Still forbidden after PAPER10Q2:
 - writing old aggregate counts as completed matrices;
 - using trace online, final_v23/LegSA outputs as solver input, receiver IMU as Go2 body IMU, output-only correction, epoch deletion, per-case tuning, or Go2 position/yaw/velocity/contact as truth;
 - committing raw data, providers, runtime payloads, epoch-output payloads, generated figures, official code snapshots, old zips, local absolute paths, or secrets.
+
+## PAPER10Q2R1 Storage Slim And PAPER2A QA Claim Boundary
+
+Allowed after PAPER10Q2R1:
+
+- State that a bounded storage inventory and manifest-first cleanup plan were generated.
+- State that no raw data, current evidence chain, reports/stages evidence, export-clean material, or Git source was deleted.
+- State that PAPER2A was re-exported only as a light QA evidence scaffold when direct runtime proof is missing.
+- State that PAPER2A QA01-QA07 are appendix/bounded quality-control context, not exact official external reproductions.
+- State that full horizontal plotting is deferred to a later dedicated stage.
+
+Conditional after PAPER10Q2R1:
+
+- PAPER2A BY2/BY3/XB coverage counts may be cited only with `COUNT_FROM_SUPERVISOR_ONLY_NOT_ROW_PROVEN` caveat unless direct row/proof files are found.
+- PAPER2A may support a QA appendix table only after the manuscript clearly states it is common-backend/policy-baseline evidence.
+- Storage compression/deletion beyond cache-like exact-path candidates requires human review and a fresh manifest.
+
+Still forbidden after PAPER10Q2R1:
+
+- claiming PAPER2A exact external reproduction;
+- claiming PAPER2A universal performance superiority or that LegSA beats all QA methods;
+- claiming PAPER2A proves BY3 yaw generalization or XB high-precision severe-GNSS;
+- claiming PAPER2A replaces Q2R2 dual-antenna targeted rerun;
+- promoting old diagnostic, prepare-only, supervisor-only, or count-only evidence into main-text strong claims;
+- deleting raw data, raw-adjacent caches, current valid evidence, reports/stages evidence, export-clean packages, or Git source without explicit human review;
+- committing raw data, runtime payloads, epoch-output payloads, QA decision payloads, eval metric payloads, generated figure binaries, archive binaries, old zips, local absolute path manifests, or secrets.
