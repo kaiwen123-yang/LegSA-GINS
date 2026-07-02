@@ -1609,3 +1609,24 @@ PAPER10Q2R1 current interpretation boundaries:
 - PAPER2A direct runtime/worktree proof was not found in the available roots; counts are `COUNT_FROM_SUPERVISOR_ONLY_NOT_ROW_PROVEN`.
 - Q2R1 can support a conditional PAPER2A QA appendix scaffold, not paper-ready QA superiority claims.
 - Storage cleanup executed no automatic deletion when delete candidates were absent or unsafe.
+
+## 59. PAPER10Q2R2 Dual-Antenna True-Method Targeted Rerun
+
+`PAPER10Q2R2_DUAL_ANTENNA_TRUE_METHODS_TARGETED_RERUN` is the targeted execution entry for real dual-antenna / two-receiver / heading-aided external methods.
+
+PAPER10Q2R2 fixed rules:
+
+- Q2R2 may only count a row as completed when a selected external method independently runs on real BY2 source inputs and emits row-level output/evaluation proof.
+- Existing LegSA provider packages, old PAPER1F diagnostic rows, paper-derived policies, method-family adapters, prepare-only assets, and old aggregates must not be promoted to faithful external algorithm reproduction.
+- At least three selected methods must reach `FAITHFUL_ALGORITHM_REPRODUCTION` or higher and complete 120/120 BY2 rows before any PASS/main-text candidate wording is allowed.
+- External method platform mismatch is not a rejection reason; the real gates are BY2 source-input availability, independent backend execution, body yaw / lateral +90 / ENU-NED / wrap-safe semantics, and trace evaluation-only provenance.
+- Receiver `imu-data.csv` must not be used as Go2 body IMU; `by2.txt` is Go2 body context only and not truth.
+- final_v23 and LegSA outputs are forbidden as external method solver inputs.
+- Q2R2 does not replace a future full horizontal plotting stage; generated figures, runtime payloads, raw files, and export zips must not be committed.
+
+PAPER10Q2R2 current interpretation boundaries:
+
+- Q2R2 selected five faithful-algorithm target candidates, but the available environment did not expose the BY2 raw receiver root or Go2 `by2.txt`.
+- The Q2R2 matrix is therefore blocked at provider contract: 600 planned rows, 0 completed-evaluable rows, 600 `BLOCKED_WITH_PROOF` rows.
+- Final decision is `BLOCKED_PROVIDER_CONTRACT_FAILURE`.
+- No faithful external dual-antenna method completion, exact reproduction, superiority, BY3 yaw generalization, or XB high-precision severe-GNSS claim is allowed from Q2R2.

@@ -1473,3 +1473,37 @@ Next stages:
 - A dedicated future full-figure stage should handle normal/degraded horizontal figure generation and folder population.
 
 This stage does not authorize solvers, evaluators, provider generation, degradation generation, BY2/BY3/XB/PAPER10H execution, new horizontal full matrices, full plotting, algorithm changes, parameter tuning, raw-data deletion, diagnostic-to-main claim promotion, exact PAPER2A reproduction claims, universal superiority, BY3 yaw generalization, or XB high-precision severe-GNSS claims.
+
+## PAPER10Q2R2 Dual-Antenna True-Method Targeted Rerun
+
+Current stage:
+
+```text
+PAPER10Q2R2_DUAL_ANTENNA_TRUE_METHODS_TARGETED_RERUN
+```
+
+PAPER10Q2R2 is the targeted external dual-antenna execution gate requested after Q2/Q2R1.
+
+Current route:
+
+- Select 3-5 dual-antenna / two-receiver / heading-aided faithful-algorithm target methods.
+- Lock BY2 input roles, receiver-file expectations, Go2 body-source boundaries, trace evaluation-only policy, and PAPER4B_R2 lateral +90 body-yaw policy.
+- Build a BY2 120-case planned queue from existing canonical cases without generating new degradations.
+- Run external methods only if BY2 source inputs and independent backend contracts close.
+- If provider contract fails, emit blocked-with-proof rows instead of fabricated completed rows.
+
+Current Q2R2 outcome:
+
+- Five methods were selected as faithful-algorithm targets.
+- The current environment does not expose the required BY2 receiver raw/status root or Go2 `by2.txt`.
+- Provider contract failed before matrix execution.
+- Matrix status is 600 planned rows, 0 completed-evaluable rows, 600 blocked-with-proof rows.
+- Final decision is `BLOCKED_PROVIDER_CONTRACT_FAILURE`.
+
+Next stages:
+
+- Restore or mount the BY2 receiver raw/status root and Go2 body source, then rerun Q2R2.
+- After at least three faithful external methods complete 120/120 BY2 rows, run a separate horizontal full-figure stage.
+- PAPER2A/Q2R1 QA evidence remains separate and does not replace Q2R2.
+
+This stage currently does not authorize faithful/exact completed external-method claims, main-text superiority claims, BY3 yaw generalization, XB high-precision severe-GNSS proof, old PAPER1F row promotion, policy-baseline promotion, output-only correction, trace-tuned yaw sign, per-case yaw offset, runtime payload commits, raw-data commits, generated-figure commits, or export-zip commits.
