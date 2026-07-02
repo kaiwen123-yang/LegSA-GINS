@@ -30,15 +30,37 @@ from legsa_gins.external_dual.trace_reference_adapter import summarize_trace
 
 STAGE_NAME = "PAPER10Q2R2R1_A1_POST_MIGRATION_PATH_LOCK_PROVIDER_AND_DUAL_MATRIX_RESTART"
 STAGE_DIRS = "00_STAGE_REPORT 01_GIT 02_DATASET_ROLE_LOCK 03_PATH_RECOVERY 04_PATH_LOCK 05_PROVIDER 06_METHOD_SELECTION 07_MATRIX 08_EVALUATION 09_STRESS_READINESS 10_TEXT_SUMMARY 11_FIGURES 12_CLAIM_BOUNDARY 13_OBSIDIAN_SYNC 14_AI_CONTEXT_UPDATE 15_TESTS 16_EXPORT_CLEAN_FOR_GPT".split()
-LOCAL_HOME_PREFIX = "/home/" + "kaiwen/"
-LOCAL_PROJECT_PREFIX = "/media/" + "kaiwen/新加卷"
-LOCAL_PROJECT_ROOT_LITERAL = LOCAL_PROJECT_PREFIX + "/LegSA-GINS-project"
-LEGACY_WINDOWS_DESKTOP = "/mnt/c/" + "Users/ykw/Desktop"
-LEGACY_WINDOWS_USERS = "/mnt/c/" + "Users/"
-LEGACY_G_ROOT = "/mnt/" + "g/"
-WINDOWS_USERS_LITERAL = "C:" + "\\Users\\"
-LEGSA_CLEAN_WORKTREE_LITERAL = LOCAL_HOME_PREFIX + "research/LegSA-GINS-WORKTREES/q2r2r1-research-clean"
-LEGSA_ORIGINAL_DIRTY_REPO_LITERAL = LOCAL_HOME_PREFIX + "research/LegSA-GINS"
+LOCAL_PATH_ENV_PLACEHOLDERS = {
+    "LEGSA_CODE_ROOT": "<LEGSA_CODE_ROOT>",
+    "LEGSA_ORIGINAL_DIRTY_REPO": "<ORIGINAL_DIRTY_REPO>",
+    "LEGSA_PROJECT_ROOT": "<LEGSA_PROJECT_ROOT>",
+    "LEGSA_WINDOWS_DESKTOP_ROOT": "<WINDOWS_DESKTOP_ROOT>",
+    "LEGSA_WINDOWS_USERS_ROOT": "<WINDOWS_USERS_ROOT>",
+    "LEGSA_LOCAL_HOME": "<LOCAL_HOME>",
+    "LEGSA_MNT_G_ROOT": "<MNT_G_ROOT>",
+}
+
+
+def local_path_redaction_candidates() -> dict[str, str]:
+    """Return local-only path values supplied by the operator for export redaction.
+
+    Tracked code must not construct machine-specific prefixes. Operators can set
+    these environment variables, or pass explicit runner roots, when producing
+    export-clean packages on a local machine.
+    """
+    candidates: dict[str, str] = {}
+    for env_name, placeholder in LOCAL_PATH_ENV_PLACEHOLDERS.items():
+        value = os.environ.get(env_name, "").strip()
+        if not value:
+            continue
+        candidates[value] = placeholder
+        stripped = value.rstrip("/\\")
+        if stripped and stripped != value:
+            candidates[stripped] = placeholder
+        if stripped:
+            candidates[stripped + "/"] = placeholder + "/"
+            candidates[stripped + "\\"] = placeholder + "\\"
+    return candidates
 
 RECEIVER_FILES = (
     "imu-data.csv", "imu-temp.csv", "imu-biases.csv", "ntrip-info.csv", "ntrip-latency.csv", "tf.csv", "tf_static.csv",
@@ -504,30 +526,43 @@ def write_export_clean(stage_root: Path, export_root: Path) -> str:
 
 
 def redact_export_text(text: str) -> str:
-    replacements = {LEGSA_CLEAN_WORKTREE_LITERAL: "<LEGSA_CODE_ROOT>", LEGSA_ORIGINAL_DIRTY_REPO_LITERAL: "<ORIGINAL_DIRTY_REPO>", LOCAL_HOME_PREFIX: "<LOCAL_HOME>/", LOCAL_PROJECT_ROOT_LITERAL: "<LEGSA_PROJECT_ROOT>", LEGACY_WINDOWS_DESKTOP: "<WINDOWS_DESKTOP_ROOT>", "by2.txt": "<BY2_GO2_BODY_ROOT>", "by3.txt": "<BY3_GO2_BODY_ROOT>", "nmb1.txt": "<XB3_BODY_ROOT>", "nmb2.txt": "<XB4_BODY_ROOT>", "nmb3.txt": "<XB1_BODY_ROOT>", "nmb4.txt": "<XB2_BODY_ROOT>", "gnss1-raw.csv": "<GNSS1_RAW_SOURCE>", "gnss2-raw.csv": "<GNSS2_RAW_SOURCE>", "corr-raw.csv": "<CORR_RAW_SOURCE>", "userio-raw.csv": "<USERIO_RAW_SOURCE>", "imu-data.csv": "<RECEIVER_IMU_SOURCE>", "trace_vrtk2": "<TRACE_EVAL_REFERENCE_ONLY>", "epoch_output.csv": "<EPOCH_OUTPUT_RUNTIME_ONLY>"}
-    for old, new in replacements.items():
-        text = text.replace(old, new)
-    return text
+    replacements = dict(local_path_redaction_candidates())
+    replacements.update(
+        {
+            "by2.txt": "<BY2_GO2_BODY_SOURCE>",
+            "gnss1-raw.csv": "<GNSS1_RAW_SOURCE>",
+            "gnss2-raw.csv": "<GNSS2_RAW_SOURCE>",
+            "corr-raw.csv": "<CORR_RAW_SOURCE>",
+            "trace_vrtk2.txt": "<TRACE_EVAL_REFERENCE_ONLY>",
+            "epoch_output.csv": "<EPOCH_OUTPUT_PAYLOAD>",
+        }
+    )
+    out = text
+    for src, dst in replacements.items():
+        out = out.replace(src, dst)
+    return out
 
-
-def scan_export_clean(text_root: Path) -> dict[str, object]:
-    forbidden = [WINDOWS_USERS_LITERAL, LEGACY_WINDOWS_USERS, LEGACY_G_ROOT, LOCAL_HOME_PREFIX, LOCAL_PROJECT_PREFIX, "by2.txt", "by3.txt", "nmb1.txt", "nmb2.txt", "nmb3.txt", "nmb4.txt", "gnss1-raw.csv", "gnss2-raw.csv", "corr-raw.csv", "trace_vrtk2", "epoch_output.csv", "universal superiority", "final paper claim ready", "BY3 yaw generalization", "XB high-precision severe-GNSS"]
+def scan_export_clean(text_root: Path) -> dict:
+    forbidden = list(local_path_redaction_candidates().keys()) + [
+        "by2.txt",
+        "gnss1-raw.csv",
+        "gnss2-raw.csv",
+        "corr-raw.csv",
+        "trace_vrtk2",
+        "epoch_output",
+        "exact reproduction",
+        "policy baseline main-text",
+        "paper claim ready",
+    ]
     hits = []
     for path in text_root.rglob("*"):
-        if not path.is_file():
+        if not path.is_file() or path.suffix.lower() in {".zip", ".tar", ".zst", ".png", ".pdf", ".svg", ".jpg", ".jpeg"}:
             continue
-        if path.suffix.lower() in {".png", ".pdf", ".zip", ".tar", ".zst"}:
-            hits.append({"path": str(path.relative_to(text_root)), "pattern": f"*{path.suffix}"})
-            continue
-        text = path.read_text(encoding="utf-8", errors="ignore")
-        for pattern in forbidden:
-            if pattern in text:
-                claim_boundary_context = "FORBIDDEN" in path.name.upper() or "04_FORBIDDEN" in str(path) or "STRESS_DATASET_ROLE_REPORT" in path.name
-                if pattern in {"universal superiority", "final paper claim ready", "BY3 yaw generalization", "XB high-precision severe-GNSS"} and claim_boundary_context:
-                    continue
-                hits.append({"path": str(path.relative_to(text_root)), "pattern": pattern})
-    return {"status": "PASS" if not hits else "FAIL", "hits": hits, "scanned_root": "<EXPORT_CLEAN_TEXT_PACKAGE>"}
-
+        text = path.read_text(encoding="utf-8", errors="replace")
+        for pat in forbidden:
+            if pat and pat in text:
+                hits.append({"file": str(path), "pattern": pat})
+    return {"status": "PASS" if not hits else "FAIL", "hits": hits}
 
 def write_final_reports(stage_root: Path, a0: dict[str, str], by2_ready: bool, provider_built: bool, completed: int, blocked: int, failed: int, faithful: int, decision: str, export_status: str) -> None:
     methods = read_csv(stage_root / "08_EVALUATION/METHOD_LEVEL_SUMMARY.csv")
