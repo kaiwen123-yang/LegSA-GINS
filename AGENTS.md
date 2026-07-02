@@ -1630,3 +1630,26 @@ PAPER10Q2R2 current interpretation boundaries:
 - The Q2R2 matrix is therefore blocked at provider contract: 600 planned rows, 0 completed-evaluable rows, 600 `BLOCKED_WITH_PROOF` rows.
 - Final decision is `BLOCKED_PROVIDER_CONTRACT_FAILURE`.
 - No faithful external dual-antenna method completion, exact reproduction, superiority, BY3 yaw generalization, or XB high-precision severe-GNSS claim is allowed from Q2R2.
+
+## 60. PAPER10Q2R2R1_A1 Post-Migration Dual-Antenna Matrix
+
+`PAPER10Q2R2R1_A1_POST_MIGRATION_PATH_LOCK_PROVIDER_AND_DUAL_MATRIX_RESTART` is the clean-worktree restart after A0.
+
+PAPER10Q2R2R1_A1 fixed rules:
+
+- The active code root for this stage is the clean worktree represented by `<LEGSA_CODE_ROOT>`.
+- The original dirty repository must not be modified by the research terminal; it remains separate from A1 execution.
+- Migrated `<LEGSA_PROJECT_ROOT>` paths have priority over old Windows and G-root locations. Legacy paths are fallback-only and must not be written into tracked docs/config/scripts.
+- External algorithms from vehicle, ship, and general GNSS domains are allowed if BY2 real inputs and unified evaluator semantics are closed.
+- At least three faithful/evaluable dual-antenna methods are required before any main-text horizontal candidate wording is considered.
+- Policy baselines, method-family adapters, old aggregates, and PAPER1F diagnostic rows cannot be promoted to main external algorithms.
+- Trace remains evaluation-only. Receiver `imu-data.csv` is not Go2 body IMU. `by2.txt`, `by3.txt`, and `nmb*.txt` are Go2 `/sportmodestate` high-level body sources, not truth.
+- final_v23 and LegSA outputs remain forbidden as external-method solver inputs.
+
+PAPER10Q2R2R1_A1 current interpretation boundaries:
+
+- A1 recovered BY2/BY3/XB post-migration paths under `<LEGSA_PROJECT_ROOT>` and selected no legacy fallback primary path.
+- A1 built the BY2 external dual-antenna provider from real BY2 status/raw/body inputs with GNSS2-GNSS1 status relpos difference, fixed lateral +90 body-yaw conversion, and wrap-safe residual semantics.
+- A1 imported the Q2R2 120-case manifest and completed 360/360 yaw-only method-case rows for three faithful non-official implementations: `DA02_LIU_CONSTRAINED_WRAPPED_WLS`, `DA03_YANG_BASELINE_KF_STATUS`, and `DA04_WU_ROBUST_EQKF_GO2`.
+- The A1 result is appendix-candidate and caveated because the selected methods are non-official yaw-only reproductions and carrier-ambiguity/DD/LOS methods remain blocked or diagnostic.
+- A1 does not authorize exact reproduction wording, universal superiority, "LegSA beats all methods", BY3 yaw generalization, XB high-precision severe-GNSS proof, or final paper claim-ready wording.

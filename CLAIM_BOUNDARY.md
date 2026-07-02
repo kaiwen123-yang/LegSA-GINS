@@ -2894,3 +2894,33 @@ Still forbidden after PAPER10Q2R2:
 - using trace to choose yaw sign/offset, applying output-only correction, deleting epochs, or using per-case yaw offsets;
 - using receiver `imu-data.csv` as Go2 body IMU, treating Go2 pose/yaw/velocity/contact as truth, or using final_v23/LegSA outputs as external method solver inputs;
 - committing raw data, runtime payloads, epoch-output payloads, eval metric payloads, generated figure binaries, export-clean zips, old zips, local absolute path manifests, official code snapshots, or secrets.
+
+## PAPER10Q2R2R1_A1 Post-Migration Dual Matrix Claim Boundary
+
+Allowed after PAPER10Q2R2R1_A1:
+
+- State that A1 ran from the clean worktree and preserved the original dirty repository as separate context.
+- State that migrated `<LEGSA_PROJECT_ROOT>` source paths were preferred and no legacy fallback primary path was selected.
+- State that BY2/BY3/XB source roles were locked, with BY2 as the main dataset, BY3 as poor-heading stress-only, and XB as poor-GNSS/fallback stress-only.
+- State that trace was evaluation-only and receiver `imu-data.csv` was not treated as Go2 body IMU.
+- State that the BY2 provider closed with real BY2 receiver/body inputs, GNSS2-GNSS1 status relpos difference, lateral +90 body-yaw conversion, and wrap-safe residual semantics.
+- State that three faithful non-official yaw-only dual-antenna/heading methods completed 360/360 BY2 method-case rows: `DA02_LIU_CONSTRAINED_WRAPPED_WLS`, `DA03_YANG_BASELINE_KF_STATUS`, and `DA04_WU_ROBUST_EQKF_GO2`.
+
+Conditional after PAPER10Q2R2R1_A1:
+
+- A1 may support an appendix or caveated horizontal comparison table after human review of method fidelity and yaw-frame caveats.
+- A1 may motivate platform-specific modeling under BY2 short-baseline lateral-antenna stress only with method-specific caveats.
+- Main-text wording requires human approval and should avoid performance superiority language unless a later plotting/review stage strengthens the evidence.
+- Carrier-ambiguity/DD/LOS methods require a separately closed backend before they can be promoted from blocked/diagnostic status.
+
+Still forbidden after PAPER10Q2R2R1_A1:
+
+- claiming exact reproduction unless official code or a fully equivalent implementation is proven;
+- claiming universal superiority, that LegSA beats all methods, or that all external methods fail or are wrong;
+- claiming BY3 ordinary yaw generalization or XB high-precision severe-GNSS proof;
+- using trace to choose yaw sign/offset, applying output-only correction, deleting epochs, or using per-case yaw offsets;
+- using old PAPER1F diagnostic rows, old aggregates, policy baselines, method-family adapters, or prepare-only assets as faithful completed external algorithms;
+- promoting diagnostic-only external methods into main-text faithful algorithms;
+- claiming final paper readiness or paper performance claims from A1 alone;
+- treating Go2 pose/yaw/velocity/contact as truth or using final_v23/LegSA outputs as external method solver inputs;
+- committing raw data, runtime payloads, epoch-output payloads, eval metric payloads, generated figure binaries, export-clean zips, local-only path locks, local absolute path manifests, or secrets.
