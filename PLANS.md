@@ -1507,3 +1507,37 @@ Next stages:
 - PAPER2A/Q2R1 QA evidence remains separate and does not replace Q2R2.
 
 This stage currently does not authorize faithful/exact completed external-method claims, main-text superiority claims, BY3 yaw generalization, XB high-precision severe-GNSS proof, old PAPER1F row promotion, policy-baseline promotion, output-only correction, trace-tuned yaw sign, per-case yaw offset, runtime payload commits, raw-data commits, generated-figure commits, or export-zip commits.
+
+## PAPER10Q2R2R1_A1 Post-Migration Path Lock Provider And Dual Matrix Restart
+
+Current stage:
+
+```text
+PAPER10Q2R2R1_A1_POST_MIGRATION_PATH_LOCK_PROVIDER_AND_DUAL_MATRIX_RESTART
+```
+
+Current route:
+
+- Run only from the clean worktree represented by `<LEGSA_CODE_ROOT>`.
+- Preserve the original dirty repository as read-only context for this research terminal.
+- Prefer migrated `<LEGSA_PROJECT_ROOT>` source paths over old Windows/G-root paths.
+- Lock BY2/BY3/XB roles, trace evaluation-only policy, receiver-IMU-not-body-IMU policy, and Go2 body-source boundaries.
+- Build the BY2 real-input dual-antenna provider and import the Q2R2 120-case manifest.
+- Run 3-5 external dual-antenna/two-receiver/short-baseline methods only when they independently close on BY2 source inputs.
+
+Current A1 outcome:
+
+- BY2/BY3/XB post-migration paths were recovered under `<LEGSA_PROJECT_ROOT>`.
+- The BY2 provider closed and the Q2R2 120-case manifest was reused.
+- Three faithful non-official yaw-only methods completed 360/360 evaluable rows.
+- The result is `CONDITIONAL_PASS` and appendix-candidate unless human review accepts stronger wording.
+- Carrier-ambiguity/DD/LOS-oriented methods remain blocked or diagnostic.
+
+Next stages:
+
+- Human review of A1 fidelity, yaw-frame caveats, and method-writing scope.
+- Storage terminal S2 remains independent and does not affect A1 claims.
+- BY3/XB stress full matrix is a separate later stage.
+- Full horizontal plotting is deferred to a dedicated figure/package stage.
+
+This stage does not authorize exact reproduction claims, universal superiority, BY3 ordinary yaw generalization, XB high-precision severe-GNSS proof, old aggregate promotion, policy-baseline promotion, trace-tuned yaw sign, per-case yaw offset, final paper claim-ready wording, runtime payload commits, raw-data commits, generated-figure commits, or export-zip commits.
