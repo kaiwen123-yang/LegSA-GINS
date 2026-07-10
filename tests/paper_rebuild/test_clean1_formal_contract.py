@@ -7,6 +7,7 @@ import struct
 import subprocess
 import sys
 import time
+import zipfile
 from pathlib import Path
 
 import pytest
@@ -29,16 +30,19 @@ from legsa_gins.paper_rebuild.evidence import (
     BY2_FIX_PREFIX,
     BY2_RAW_RELATIVE_PATHS,
     BY2_TRACE_RELATIVE_PATH,
+    FAILED_CLEAN1_EXPECTED_RAW_READS,
     EvidenceContractError,
     RawAudit,
     assert_export_text_is_redacted,
     parse_strace_openat_paths,
     validate_provider_source_read_set,
+    validate_failed_clean1_attempt_evidence,
     write_source_role_manifests,
     verify_by2_raw_22,
 )
 from legsa_gins.paper_rebuild import formal_generation
 from legsa_gins.paper_rebuild.formal_generation import (
+    _reuse_generated_dual_yaw_artifact,
     _source_gps_time_contract,
     _upgrade_gnss_to_formal_18_columns,
     gpst_tow_to_clean_seconds_of_utc_day,
@@ -202,6 +206,24 @@ def test_formal_provider_source_roles_pin_receiver_velocity_to_nav_pvt_raw() -> 
     assert "receiver_velocity" not in FORMAL_PROVIDER_ACTUAL_SOURCE_ROLES[status]
     assert "receiver_velocity_nav_pvt" in FORMAL_PROVIDER_ACTUAL_SOURCE_ROLES[raw]
     assert "rawx_sfrbx_raw_doppler_observation" in FORMAL_PROVIDER_ACTUAL_SOURCE_ROLES[raw]
+
+
+def test_formal_dual_yaw_reuses_one_artifact_without_case_only_copy(
+    tmp_path: Path,
+) -> None:
+    provider = tmp_path / "provider"
+    source = provider / "providers/dual_yaw_provider.csv"
+    source.parent.mkdir(parents=True)
+    source.write_text("time,body_yaw_ned_deg\n0,90\n", encoding="utf-8")
+    result = _reuse_generated_dual_yaw_artifact(
+        provider,
+        {"dual_yaw_provider": {"relative_path": "providers/dual_yaw_provider.csv"}},
+    )
+    assert result == {
+        "relative_path": "providers/dual_yaw_provider.csv",
+        "source_generated": True,
+    }
+    assert not (provider / "providers/DUAL_YAW_PROVIDER.csv").exists()
 
 
 def test_report_only_descendant_commit_is_narrowly_allowed(tmp_path: Path) -> None:
@@ -860,6 +882,10 @@ def test_strace_parser_resolves_utf8_octal_and_decoded_dirfd(tmp_path: Path) -> 
     opened = parse_strace_openat_paths(traced, cwd=ROOT)
     assert Path("/tmp/测试.csv") in opened
     assert (tmp_path / "relative.csv").resolve(strict=False) in opened
+    filtered = parse_strace_openat_paths(
+        traced, cwd=ROOT, required_substring='"/tmp/'
+    )
+    assert filtered == [Path("/tmp/测试.csv")]
 
 
 def test_attempt_ledger_preserves_prior_sessions(tmp_path: Path) -> None:
@@ -1087,6 +1113,280 @@ def test_raw_blocker_derives_preserved_provider_attempt_status(
         "1" * 40,
     )
     assert captured["provider_attempt_generated"] is True
+
+
+def _write_failed_attempt_fixture(tmp_path: Path, old_commit: str):
+    from legsa_gins.paper_rebuild.paths import CleanPaths
+    from scripts.paper_rebuild import generate_clean1_by2_inputs as generate
+
+    clean = tmp_path / "clean"
+    raw = tmp_path / "raw"
+    code = tmp_path / "code"
+    code.mkdir()
+    stage = clean / generate.STAGE_DIR_NAME
+    for relative in (
+        "08_EVIDENCE_AUDIT",
+        "06_RUN_MANIFESTS",
+        "03_DATA_HASH_AND_ROLES",
+        "09_REPORT",
+        "04_PROVIDER_AUDIT",
+        "10_EXPORT",
+    ):
+        (stage / relative).mkdir(parents=True, exist_ok=True)
+    for relative in FAILED_CLEAN1_EXPECTED_RAW_READS:
+        source = raw / relative
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text("fixture\n", encoding="utf-8")
+    provider_attempt = (
+        clean
+        / "04_PROVIDER_FREEZE/.CLEAN1_BY2_CLEAN_NORMAL_V1.attempt-fixture"
+    )
+    for relative in (
+        "RAW_DOPPLER_BACKEND_REPORT.json",
+        "providers/RAW_DOPPLER_VELOCITY.csv",
+        "providers/dual_yaw_provider.csv",
+        "runtime_inputs/BY2_PROCESS_DATA_COMPAT.gnss",
+        "runtime_inputs/BY2_PROCESS_DATA_COMPAT.imu",
+    ):
+        target = provider_attempt / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text("fixture\n", encoding="utf-8")
+    terminal = "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN"
+    payloads = {
+        "08_EVIDENCE_AUDIT/PRE_RUN_GATE_DECISION.json": {
+            "code_freeze_commit": old_commit,
+            "terminal_status": terminal,
+            "formal_run_count": 0,
+            "provider_promoted": False,
+            "provider_attempt_generated": True,
+            "raw_pre_verified": 22,
+            "raw_post_verified": 22,
+            "raw_mutation_count": 0,
+        },
+        "06_RUN_MANIFESTS/FOUR_METHOD_RUN_BLOCKED.json": {
+            "schema_version": "paper-rebuild-clean1-four-run-gate-v1",
+            "formal_run_count": 0,
+            "method_count_required": 4,
+            "metric_driven_rerun": False,
+            "terminal_status": terminal,
+            "paper_performance_claim": False,
+        },
+        "03_DATA_HASH_AND_ROLES/BY2_RAW_22_SUMMARY.json": {
+            "passed": True,
+            "pre_verified": 22,
+            "post_verified": 22,
+            "raw_mutation": 0,
+        },
+        "09_REPORT/CLEAN1_FULL_REPORT.json": {
+            "terminal_decision": terminal,
+            "formal_run_count": 0,
+            "metrics_generated": False,
+            "paper_figure_count": 0,
+        },
+    }
+    for relative, payload in payloads.items():
+        (stage / relative).write_text(json.dumps(payload) + "\n", encoding="utf-8")
+    trace = stage / "04_PROVIDER_AUDIT/PROVIDER_FAILED_FILE_OPEN_TRACE.raw"
+    trace.write_text(
+        "".join(
+            f"openat(AT_FDCWD, {json.dumps(str(raw / relative), ensure_ascii=False)}, O_RDONLY) = 3\n"
+            for relative in FAILED_CLEAN1_EXPECTED_RAW_READS
+        ),
+        encoding="utf-8",
+    )
+    trace_hash = hashlib.sha256(trace.read_bytes()).hexdigest()
+    (stage / "04_PROVIDER_AUDIT/PROVIDER_ATTEMPT_BLOCKED.json").write_text(
+        json.dumps(
+            {
+                "terminal_status": terminal,
+                "returncode": 1,
+                "provider_final_root_created": False,
+                "failed_attempt_preserved": True,
+                "strace_available": True,
+                "strace_sha256": trace_hash,
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (stage / "04_PROVIDER_AUDIT/PROVIDER_FAILED_ACTUAL_READ_AUDIT.json").write_text(
+        json.dumps(
+            {
+                "strace_available": True,
+                "observed_partial_failed_attempt_raw_reads": sorted(
+                    FAILED_CLEAN1_EXPECTED_RAW_READS
+                ),
+                "unexpected_raw_reads": [],
+                "promoted_provider_actual_read_set": [],
+                "passed": True,
+            },
+            ensure_ascii=False,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (stage / "04_PROVIDER_AUDIT/PROVIDER_ATTEMPT_STDERR.txt").write_text(
+        "shutil.SameFileError: dual_yaw_provider.csv and DUAL_YAW_PROVIDER.csv are the same file\n",
+        encoding="utf-8",
+    )
+    report_source = stage / "09_REPORT/CLEAN1_FULL_REPORT.json"
+    claim = b"No broad claim.\n"
+    export_rows = [
+        {
+            "archive_path": "09_REPORT/CLEAN1_FULL_REPORT.json",
+            "sha256": hashlib.sha256(report_source.read_bytes()).hexdigest(),
+            "size_bytes": report_source.stat().st_size,
+        },
+        {
+            "archive_path": "CLAIM_BOUNDARY.md",
+            "sha256": hashlib.sha256(claim).hexdigest(),
+            "size_bytes": len(claim),
+        },
+    ]
+    export_manifest = stage / "10_EXPORT/EXPORT_SHA256_MANIFEST.csv"
+    with export_manifest.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(export_rows[0]))
+        writer.writeheader()
+        writer.writerows(export_rows)
+    with zipfile.ZipFile(
+        stage / "10_EXPORT/CLEAN1_CONTEXT_FOR_GPT.zip",
+        "w",
+        compression=zipfile.ZIP_DEFLATED,
+    ) as handle:
+        handle.write(report_source, "09_REPORT/CLEAN1_FULL_REPORT.json")
+        handle.writestr("CLAIM_BOUNDARY.md", claim)
+        handle.write(export_manifest, "EXPORT_SHA256_MANIFEST.csv")
+    excluded = {
+        "08_EVIDENCE_AUDIT/EVIDENCE_MANIFEST.csv",
+        "08_EVIDENCE_AUDIT/EVIDENCE_MANIFEST.sha256",
+    }
+    evidence_rows = []
+    for source in sorted(path for path in stage.rglob("*") if path.is_file()):
+        relative = source.relative_to(stage).as_posix()
+        if relative in excluded:
+            continue
+        evidence_rows.append(
+            {
+                "relative_path": relative,
+                "sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+                "size_bytes": source.stat().st_size,
+                "tracked": False,
+            }
+        )
+    evidence = stage / "08_EVIDENCE_AUDIT/EVIDENCE_MANIFEST.csv"
+    with evidence.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(evidence_rows[0]))
+        writer.writeheader()
+        writer.writerows(evidence_rows)
+    evidence_hash = hashlib.sha256(evidence.read_bytes()).hexdigest()
+    (stage / "08_EVIDENCE_AUDIT/EVIDENCE_MANIFEST.sha256").write_text(
+        f"{evidence_hash}  EVIDENCE_MANIFEST.csv\n", encoding="utf-8"
+    )
+    paths = CleanPaths(
+        config_path=tmp_path / "paths.local.yaml",
+        code_root=code,
+        raw_root=raw,
+        by2_fix_root=raw / "fix",
+        by2_go2_body=raw / "by2.txt",
+        clean_root=clean,
+        provider_root=clean / "04_PROVIDER_FREEZE/CLEAN1_BY2_CLEAN_NORMAL_V1",
+        runtime_root=clean / "05_BY2_CLEAN/CLEAN1_BY2_CLEAN_NORMAL_V1",
+    )
+    return paths, stage, provider_attempt
+
+
+def test_failed_attempt_validator_rehashes_full_stage_and_rejects_metrics(
+    tmp_path: Path,
+) -> None:
+    from scripts.paper_rebuild import generate_clean1_by2_inputs as generate
+
+    paths, stage, provider_attempt = _write_failed_attempt_fixture(
+        tmp_path, generate.FAILED_ATTEMPT_CODE_FREEZE_COMMIT
+    )
+    validated = validate_failed_clean1_attempt_evidence(
+        stage,
+        raw_root=paths.raw_root,
+        code_root=paths.code_root,
+        provider_attempt=provider_attempt,
+        expected_code_commit=generate.FAILED_ATTEMPT_CODE_FREEZE_COMMIT,
+    )
+    assert validated["evidence_file_count"] > 0
+    metric = stage / "07_EVALUATION/ROW_LEVEL_ERRORS.csv"
+    metric.parent.mkdir()
+    metric.write_text("forbidden\n", encoding="utf-8")
+    with pytest.raises(EvidenceContractError):
+        validate_failed_clean1_attempt_evidence(
+            stage,
+            raw_root=paths.raw_root,
+            code_root=paths.code_root,
+            provider_attempt=provider_attempt,
+            expected_code_commit=generate.FAILED_ATTEMPT_CODE_FREEZE_COMMIT,
+        )
+
+
+def test_failed_attempt_validator_rejects_empty_required_provider_artifact(
+    tmp_path: Path,
+) -> None:
+    from scripts.paper_rebuild import generate_clean1_by2_inputs as generate
+
+    paths, stage, provider_attempt = _write_failed_attempt_fixture(
+        tmp_path, generate.FAILED_ATTEMPT_CODE_FREEZE_COMMIT
+    )
+    (provider_attempt / "providers/RAW_DOPPLER_VELOCITY.csv").write_bytes(b"")
+    with pytest.raises(EvidenceContractError, match="provider attempt is incomplete"):
+        validate_failed_clean1_attempt_evidence(
+            stage,
+            raw_root=paths.raw_root,
+            code_root=paths.code_root,
+            provider_attempt=provider_attempt,
+            expected_code_commit=generate.FAILED_ATTEMPT_CODE_FREEZE_COMMIT,
+        )
+
+
+def test_exact_raw_blocked_stage_is_archived_and_indexed_without_delete(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from types import SimpleNamespace
+    from scripts.paper_rebuild import generate_clean1_by2_inputs as generate
+    from scripts.paper_rebuild import audit_clean1_by2 as audit_script
+
+    old_commit = generate.FAILED_ATTEMPT_CODE_FREEZE_COMMIT
+    new_commit = "2" * 40
+    paths, stage, failed_provider_attempt = _write_failed_attempt_fixture(
+        tmp_path, old_commit
+    )
+    monkeypatch.setattr(generate, "_git_commit_is_ancestor", lambda *args: True)
+    record = generate._preserve_exact_raw_doppler_blocked_stage_for_retry(
+        paths, new_code_commit=new_commit
+    )
+    archive = paths.clean_root / generate.FAILED_ATTEMPT_DIR_NAME / old_commit
+    assert not stage.exists()
+    assert archive.is_dir()
+    assert record["preserved_without_delete"] is True
+    assert record["replacement_code_commit"] == new_commit
+    new_stage = paths.clean_root / generate.STAGE_DIR_NAME
+    (new_stage / "00_AUTHORIZATION").mkdir(parents=True)
+    (new_stage / "01_GIT_FREEZE").mkdir()
+    (new_stage / "01_GIT_FREEZE/CODE_FREEZE_COMMIT.txt").write_text(
+        new_commit + "\n", encoding="utf-8"
+    )
+    (new_stage / "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json").write_text(
+        json.dumps(record), encoding="utf-8"
+    )
+    assert record["provider_attempt_alias"].endswith(failed_provider_attempt.name)
+    monkeypatch.setattr(
+        audit_script.subprocess,
+        "run",
+        lambda *args, **kwargs: SimpleNamespace(returncode=0),
+    )
+    assert audit_script._assert_prior_technical_attempt_record(new_stage, paths) == 1
+
+    # A crash after the archive rename but before new-stage creation is idempotent.
+    new_stage.rename(paths.clean_root / ".new-stage-not-final")
+    recovered = generate._preserve_exact_raw_doppler_blocked_stage_for_retry(
+        paths, new_code_commit=new_commit
+    )
+    assert recovered["archive_recovered_after_interruption"] is True
 
 
 def test_promotion_recovery_handles_hidden_stage_and_complete_marker_gap(

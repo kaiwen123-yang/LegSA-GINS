@@ -4,10 +4,12 @@ from __future__ import annotations
 
 import ast
 import csv
+import hashlib
 import json
 import os
 import re
 import tempfile
+import zipfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
@@ -89,6 +91,13 @@ HARD_DENYLIST_ROWS = (
     ("role:trace_online", "trace is evaluator-only"),
 )
 
+FAILED_CLEAN1_EXPECTED_RAW_READS = (
+    f"{BY2_FIX_PREFIX}/gnss1-status.csv",
+    f"{BY2_FIX_PREFIX}/gnss2-status.csv",
+    f"{BY2_FIX_PREFIX}/gnss1-raw.csv",
+    BY2_BODY_RELATIVE_PATH,
+)
+
 LOCAL_PATH_RE = re.compile(
     r"(?:(?<![:/A-Za-z0-9_+\-])/(?!/)[^\s'\"`<>]+|"
     r"(?<![A-Za-z0-9])[A-Za-z]:[\\/](?![\\/])[^\r\n'\"`]+)"
@@ -103,13 +112,20 @@ class EvidenceContractError(ValueError):
     """Raw, read-ledger, or export evidence did not close."""
 
 
-def parse_strace_openat_paths(path: str | Path, *, cwd: str | Path) -> list[Path]:
+def parse_strace_openat_paths(
+    path: str | Path,
+    *,
+    cwd: str | Path,
+    required_substring: str | None = None,
+) -> list[Path]:
     """Parse absolute/AT_FDCWD openat paths, including strace UTF-8 octal escapes."""
 
     source = Path(path).resolve(strict=True)
     base = Path(cwd).resolve(strict=True)
     opened: list[Path] = []
     for line in source.read_text(encoding="utf-8", errors="replace").splitlines():
+        if required_substring is not None and required_substring not in line:
+            continue
         match = STRACE_OPENAT_RE.search(line)
         if not match:
             continue
@@ -462,6 +478,254 @@ def assert_export_text_is_redacted(text: str) -> None:
     issues = scan_text_for_export_leaks(text)
     if issues:
         raise EvidenceContractError("Export text leak: " + ",".join(issues))
+
+
+def validate_failed_clean1_attempt_evidence(
+    stage_root: str | Path,
+    *,
+    raw_root: str | Path,
+    code_root: str | Path,
+    provider_attempt: str | Path,
+    expected_code_commit: str,
+) -> dict[str, Any]:
+    """Rehash one exact failed stage and prove it contains no result evidence."""
+
+    stage = Path(stage_root).resolve(strict=True)
+    raw = Path(raw_root).resolve(strict=True)
+    code = Path(code_root).resolve(strict=True)
+    attempt = Path(provider_attempt).resolve(strict=True)
+    if not stage.is_dir() or not attempt.is_dir():
+        raise EvidenceContractError("Failed CLEAN1 stage/provider attempt is missing")
+
+    def safe_relative(value: str) -> str:
+        normalized = value.replace("\\", "/")
+        candidate = Path(normalized)
+        if (
+            not normalized
+            or normalized != value
+            or candidate.is_absolute()
+            or ".." in candidate.parts
+            or "." in candidate.parts
+        ):
+            raise EvidenceContractError("Failed-attempt manifest path is unsafe")
+        return normalized
+
+    def json_object(relative: str) -> dict[str, Any]:
+        path = stage / safe_relative(relative)
+        value = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(value, dict):
+            raise EvidenceContractError("Failed-attempt JSON is not an object")
+        return value
+
+    decision = json_object("08_EVIDENCE_AUDIT/PRE_RUN_GATE_DECISION.json")
+    run_gate = json_object("06_RUN_MANIFESTS/FOUR_METHOD_RUN_BLOCKED.json")
+    report = json_object("09_REPORT/CLEAN1_FULL_REPORT.json")
+    blocked = json_object("04_PROVIDER_AUDIT/PROVIDER_ATTEMPT_BLOCKED.json")
+    read_audit = json_object(
+        "04_PROVIDER_AUDIT/PROVIDER_FAILED_ACTUAL_READ_AUDIT.json"
+    )
+    terminal = "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN"
+    if (
+        decision.get("code_freeze_commit") != expected_code_commit
+        or decision.get("terminal_status") != terminal
+        or decision.get("formal_run_count") != 0
+        or decision.get("provider_promoted") is not False
+        or report.get("terminal_decision") != terminal
+        or report.get("formal_run_count") != 0
+        or report.get("metrics_generated") is not False
+        or report.get("paper_figure_count") != 0
+        or run_gate
+        != {
+            "schema_version": "paper-rebuild-clean1-four-run-gate-v1",
+            "formal_run_count": 0,
+            "method_count_required": 4,
+            "metric_driven_rerun": False,
+            "terminal_status": terminal,
+            "paper_performance_claim": False,
+        }
+    ):
+        raise EvidenceContractError("Failed CLEAN1 terminal/run closure differs")
+    expected_blocked = {
+        "terminal_status": terminal,
+        "returncode": 1,
+        "provider_final_root_created": False,
+        "failed_attempt_preserved": True,
+        "strace_available": True,
+        "strace_sha256": blocked.get("strace_sha256"),
+    }
+    if blocked != expected_blocked or not re.fullmatch(
+        r"[0-9a-f]{64}", str(blocked.get("strace_sha256") or "")
+    ):
+        raise EvidenceContractError("Failed provider process record differs")
+    expected_read_audit = {
+        "strace_available": True,
+        "observed_partial_failed_attempt_raw_reads": sorted(
+            FAILED_CLEAN1_EXPECTED_RAW_READS
+        ),
+        "unexpected_raw_reads": [],
+        "promoted_provider_actual_read_set": [],
+        "passed": True,
+    }
+    if read_audit != expected_read_audit:
+        raise EvidenceContractError("Failed provider read closure differs")
+    trace = stage / "04_PROVIDER_AUDIT/PROVIDER_FAILED_FILE_OPEN_TRACE.raw"
+    if not trace.is_file() or sha256_file(trace) != blocked["strace_sha256"]:
+        raise EvidenceContractError("Failed provider strace hash differs")
+    opened = parse_strace_openat_paths(
+        trace, cwd=code, required_substring=str(raw)
+    )
+    observed_raw = sorted(
+        {
+            path.relative_to(raw).as_posix()
+            for path in opened
+            if is_within(path, raw)
+        }
+    )
+    if observed_raw != sorted(FAILED_CLEAN1_EXPECTED_RAW_READS):
+        raise EvidenceContractError("Failed provider strace raw reads differ")
+    stderr = (
+        stage / "04_PROVIDER_AUDIT/PROVIDER_ATTEMPT_STDERR.txt"
+    ).read_text(encoding="utf-8", errors="strict")
+    for marker in (
+        "shutil.SameFileError",
+        "dual_yaw_provider.csv",
+        "DUAL_YAW_PROVIDER.csv",
+    ):
+        if marker not in stderr:
+            raise EvidenceContractError("Failed provider error is not the exact case-only copy bug")
+
+    required_attempt_files = (
+        "RAW_DOPPLER_BACKEND_REPORT.json",
+        "providers/RAW_DOPPLER_VELOCITY.csv",
+        "providers/dual_yaw_provider.csv",
+        "runtime_inputs/BY2_PROCESS_DATA_COMPAT.gnss",
+        "runtime_inputs/BY2_PROCESS_DATA_COMPAT.imu",
+    )
+    for relative in required_attempt_files:
+        candidate = (attempt / relative).resolve(strict=True)
+        if (
+            not candidate.is_file()
+            or not is_within(candidate, attempt)
+            or candidate.stat().st_size <= 0
+        ):
+            raise EvidenceContractError("Preserved failed provider attempt is incomplete")
+
+    manifest = stage / "08_EVIDENCE_AUDIT/EVIDENCE_MANIFEST.csv"
+    sidecar = stage / "08_EVIDENCE_AUDIT/EVIDENCE_MANIFEST.sha256"
+    manifest_digest = sha256_file(manifest)
+    if sidecar.read_text(encoding="utf-8").strip() != (
+        f"{manifest_digest}  EVIDENCE_MANIFEST.csv"
+    ):
+        raise EvidenceContractError("Failed evidence manifest sidecar differs")
+    with manifest.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        if reader.fieldnames != ["relative_path", "sha256", "size_bytes", "tracked"]:
+            raise EvidenceContractError("Failed evidence manifest schema differs")
+        rows = list(reader)
+    declared: dict[str, dict[str, str]] = {}
+    for row in rows:
+        relative = safe_relative(str(row.get("relative_path") or ""))
+        if relative in declared:
+            raise EvidenceContractError("Failed evidence manifest path is duplicated")
+        if row.get("tracked") != "False" or not re.fullmatch(
+            r"[0-9a-f]{64}", str(row.get("sha256") or "")
+        ):
+            raise EvidenceContractError("Failed evidence manifest row differs")
+        candidate = (stage / relative).resolve(strict=True)
+        if not candidate.is_file() or not is_within(candidate, stage):
+            raise EvidenceContractError("Failed evidence manifest file escapes stage")
+        if (
+            sha256_file(candidate) != row["sha256"]
+            or candidate.stat().st_size != int(str(row.get("size_bytes") or -1))
+        ):
+            raise EvidenceContractError("Failed evidence artifact hash/size differs")
+        declared[relative] = row
+    excluded = {
+        "08_EVIDENCE_AUDIT/EVIDENCE_MANIFEST.csv",
+        "08_EVIDENCE_AUDIT/EVIDENCE_MANIFEST.sha256",
+    }
+    actual = {
+        path.relative_to(stage).as_posix()
+        for path in stage.rglob("*")
+        if path.is_file()
+    }
+    if set(declared) != actual - excluded or actual & excluded != excluded:
+        raise EvidenceContractError("Failed evidence manifest file set differs")
+    forbidden_tokens = (
+        "ROW_LEVEL_ERRORS",
+        "AGGREGATE_METRICS",
+        "AGGREGATE_CROSSCHECK",
+        "FOUR_METHOD_METRICS",
+        "FORMAL_RUN_MANIFEST",
+        "EVAL_NAV",
+    )
+    if any(
+        any(token in relative.upper() for token in forbidden_tokens)
+        or relative.startswith("07_EVALUATION/")
+        or (
+            relative.startswith("06_RUN_MANIFESTS/")
+            and relative != "06_RUN_MANIFESTS/FOUR_METHOD_RUN_BLOCKED.json"
+        )
+        or Path(relative).suffix.casefold()
+        in {".png", ".jpg", ".jpeg", ".svg", ".pdf", ".nav", ".std"}
+        for relative in actual
+    ):
+        raise EvidenceContractError("Failed stage contains result/metric/figure payload")
+
+    export_manifest = stage / "10_EXPORT/EXPORT_SHA256_MANIFEST.csv"
+    export_archive = stage / "10_EXPORT/CLEAN1_CONTEXT_FOR_GPT.zip"
+    with export_manifest.open("r", encoding="utf-8", newline="") as handle:
+        export_reader = csv.DictReader(handle)
+        if export_reader.fieldnames != ["archive_path", "sha256", "size_bytes"]:
+            raise EvidenceContractError("Failed export manifest schema differs")
+        export_rows = list(export_reader)
+    export_declared: dict[str, dict[str, str]] = {}
+    for row in export_rows:
+        name = safe_relative(str(row.get("archive_path") or ""))
+        if name in export_declared or not re.fullmatch(
+            r"[0-9a-f]{64}", str(row.get("sha256") or "")
+        ) or (
+            name.endswith(".local.yaml")
+            or "raw_doppler_backend/" in name.casefold()
+            or "row_level" in name.casefold()
+            or Path(name).suffix.casefold()
+            in {".nav", ".std", ".pdf", ".png", ".jpg", ".jpeg", ".svg"}
+        ):
+            raise EvidenceContractError("Failed export manifest row differs")
+        export_declared[name] = row
+        if name != "CLAIM_BOUNDARY.md":
+            source = (stage / name).resolve(strict=True)
+            if (
+                not source.is_file()
+                or not is_within(source, stage)
+                or sha256_file(source) != row["sha256"]
+                or source.stat().st_size != int(str(row["size_bytes"]))
+            ):
+                raise EvidenceContractError("Failed export source differs")
+    with zipfile.ZipFile(export_archive, "r") as handle:
+        members = handle.infolist()
+        names = [safe_relative(member.filename) for member in members]
+        if len(names) != len(set(names)) or set(names) != (
+            set(export_declared) | {"EXPORT_SHA256_MANIFEST.csv"}
+        ):
+            raise EvidenceContractError("Failed export archive member set differs")
+        for name, row in export_declared.items():
+            data = handle.read(name)
+            if (
+                hashlib.sha256(data).hexdigest() != row["sha256"]
+                or len(data) != int(str(row["size_bytes"]))
+            ):
+                raise EvidenceContractError("Failed export member hash/size differs")
+            if Path(name).suffix.casefold() in {".md", ".json", ".yaml", ".yml", ".csv", ".txt"}:
+                assert_export_text_is_redacted(data.decode("utf-8"))
+        if handle.read("EXPORT_SHA256_MANIFEST.csv") != export_manifest.read_bytes():
+            raise EvidenceContractError("Failed export embedded manifest differs")
+    return {
+        "evidence_manifest_sha256": manifest_digest,
+        "provider_attempt_name": attempt.name,
+        "evidence_file_count": len(declared),
+        "export_member_count": len(export_declared) + 1,
+    }
 
 
 def write_csv_atomic(path: str | Path, fieldnames: Sequence[str], rows: Sequence[Mapping[str, Any]]) -> Path:

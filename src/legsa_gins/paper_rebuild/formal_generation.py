@@ -461,6 +461,36 @@ def _write_source_quality(gnss_path: Path, output_path: Path) -> None:
         writer.writerows(rows)
 
 
+def _reuse_generated_dual_yaw_artifact(
+    provider_root: Path,
+    artifacts: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Reuse the already generated artifact without a case-only copy.
+
+    The CLEAN_ROOT may be on a case-insensitive filesystem.  A copy from
+    ``dual_yaw_provider.csv`` to ``DUAL_YAW_PROVIDER.csv`` can therefore be a
+    self-copy even though the spellings differ.
+    """
+
+    entry = artifacts.get("dual_yaw_provider")
+    if not isinstance(entry, Mapping):
+        raise FormalProviderError("Generated dual-yaw artifact entry is missing")
+    relative = entry.get("relative_path")
+    if not isinstance(relative, str) or relative.startswith("/") or ".." in Path(relative).parts:
+        raise FormalProviderError("Generated dual-yaw artifact path is invalid")
+    candidate = guard_path(
+        provider_root / relative,
+        role="generated dual-yaw provider",
+        allowed_root=provider_root,
+        must_exist=True,
+        regular_file=True,
+    )
+    return {
+        "relative_path": candidate.relative_to(provider_root).as_posix(),
+        "source_generated": True,
+    }
+
+
 def generate_formal_clean1_inputs(
     paths: CleanPaths,
     *,
@@ -766,15 +796,9 @@ def generate_formal_clean1_inputs(
     )
 
     artifacts = dict(base_manifest["artifacts"])
-    formal_dual_path = provider_root / "providers" / "DUAL_YAW_PROVIDER.csv"
-    shutil.copy2(
-        provider_root / artifacts["dual_yaw_provider"]["relative_path"],
-        formal_dual_path,
+    artifacts["dual_yaw_provider"] = _reuse_generated_dual_yaw_artifact(
+        provider_root, artifacts
     )
-    artifacts["dual_yaw_provider"] = {
-        "relative_path": formal_dual_path.relative_to(provider_root).as_posix(),
-        "source_generated": True,
-    }
     artifacts["raw_doppler_provider"] = {"relative_path": formal_raw_path.relative_to(provider_root).as_posix(), "source_generated": True}
     artifacts["source_quality_metadata"] = {"relative_path": source_quality_path.relative_to(provider_root).as_posix(), "source_generated": True}
     artifacts = {role: artifacts[role] for role in REQUIRED_FORMAL_PROVIDER_ROLES}

@@ -29,6 +29,7 @@ from legsa_gins.paper_rebuild.evidence import (
     assert_export_text_is_redacted,
     compare_pre_post_raw_audits,
     parse_strace_openat_paths,
+    validate_failed_clean1_attempt_evidence,
     verify_by2_raw_22,
     write_raw_audit,
     write_read_ledger,
@@ -62,6 +63,8 @@ from legsa_gins.paper_rebuild.subprocess_guard import run_process_group
 
 
 STAGE_DIR_NAME = "06_CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION"
+FAILED_ATTEMPT_DIR_NAME = f"{STAGE_DIR_NAME}_FAILED_ATTEMPTS"
+FAILED_ATTEMPT_CODE_FREEZE_COMMIT = "409508def7f20521db290d9bfb7e1506a1f72ef9"
 EVIDENCE_SUBDIRS = (
     "00_AUTHORIZATION",
     "01_GIT_FREEZE",
@@ -89,6 +92,17 @@ def _git_ok(args: list[str]) -> bool:
     ).returncode == 0
 
 
+def _git_commit_is_ancestor(code_root: Path, ancestor: str, descendant: str) -> bool:
+    return subprocess.run(
+        ["git", "merge-base", "--is-ancestor", ancestor, descendant],
+        cwd=code_root,
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=60,
+    ).returncode == 0
+
+
 def _create_stage_root(clean_root: Path) -> tuple[Path, Path]:
     final = guard_path(clean_root / STAGE_DIR_NAME, role="CLEAN1 stage root", allowed_root=clean_root)
     if final.exists():
@@ -102,6 +116,133 @@ def _create_stage_root(clean_root: Path) -> tuple[Path, Path]:
     for name in EVIDENCE_SUBDIRS:
         (stage / name).mkdir()
     return stage, final
+
+
+def _preserve_exact_raw_doppler_blocked_stage_for_retry(
+    paths: Any,
+    *,
+    new_code_commit: str,
+) -> dict[str, Any]:
+    """Archive one exact no-run technical blocker without deleting or overwriting it."""
+
+    stage_final = guard_path(
+        paths.clean_root / STAGE_DIR_NAME,
+        role="blocked CLEAN1 stage evidence",
+        allowed_root=paths.clean_root,
+    )
+    archive_parent = guard_path(
+        paths.clean_root / FAILED_ATTEMPT_DIR_NAME,
+        role="CLEAN1 failed-attempt archive root",
+        allowed_root=paths.clean_root,
+    )
+    archive = guard_path(
+        archive_parent / FAILED_ATTEMPT_CODE_FREEZE_COMMIT,
+        role="CLEAN1 exact failed-attempt archive",
+        allowed_root=archive_parent,
+    )
+    if stage_final.exists() == archive.exists():
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    failed_stage = stage_final if stage_final.exists() else archive
+    archive_recovered_after_interruption = archive.exists()
+    if paths.provider_root.exists() or paths.runtime_root.exists():
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+
+    def load_object(relative: str) -> dict[str, Any]:
+        value = json.loads((failed_stage / relative).read_text(encoding="utf-8"))
+        if not isinstance(value, dict):
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        return value
+
+    decision = load_object("08_EVIDENCE_AUDIT/PRE_RUN_GATE_DECISION.json")
+    run_gate = load_object("06_RUN_MANIFESTS/FOUR_METHOD_RUN_BLOCKED.json")
+    raw_summary = load_object("03_DATA_HASH_AND_ROLES/BY2_RAW_22_SUMMARY.json")
+    report = load_object("09_REPORT/CLEAN1_FULL_REPORT.json")
+    terminal = "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN"
+    old_commit = decision.get("code_freeze_commit")
+    if (
+        not isinstance(old_commit, str)
+        or len(old_commit) != 40
+        or any(character not in "0123456789abcdef" for character in old_commit)
+        or old_commit != FAILED_ATTEMPT_CODE_FREEZE_COMMIT
+        or old_commit == new_code_commit
+        or decision.get("terminal_status") != terminal
+        or decision.get("formal_run_count") != 0
+        or decision.get("provider_promoted") is not False
+        or decision.get("raw_pre_verified") != 22
+        or decision.get("raw_post_verified") != 22
+        or decision.get("raw_mutation_count") != 0
+        or report.get("terminal_decision") != terminal
+        or report.get("formal_run_count") != 0
+        or report.get("metrics_generated") is not False
+        or report.get("paper_figure_count") != 0
+        or raw_summary.get("passed") is not True
+        or raw_summary.get("pre_verified") != 22
+        or raw_summary.get("post_verified") != 22
+        or raw_summary.get("raw_mutation") != 0
+    ):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    expected_run_gate = {
+        "schema_version": "paper-rebuild-clean1-four-run-gate-v1",
+        "formal_run_count": 0,
+        "method_count_required": 4,
+        "metric_driven_rerun": False,
+        "terminal_status": terminal,
+        "paper_performance_claim": False,
+    }
+    if run_gate != expected_run_gate:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    if not _git_commit_is_ancestor(paths.code_root, old_commit, new_code_commit):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    provider_attempts = [
+        child
+        for child in paths.provider_root.parent.iterdir()
+        if child.is_dir()
+        and child.name.startswith(".CLEAN1_BY2_CLEAN_NORMAL_V1.attempt-")
+    ]
+    if len(provider_attempts) != 1:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    provider_attempt = guard_path(
+        provider_attempts[0],
+        role="preserved failed CLEAN1 provider attempt",
+        allowed_root=paths.provider_root.parent,
+        must_exist=True,
+    )
+    try:
+        validated = validate_failed_clean1_attempt_evidence(
+            failed_stage,
+            raw_root=paths.raw_root,
+            code_root=paths.code_root,
+            provider_attempt=provider_attempt,
+            expected_code_commit=old_commit,
+        )
+    except Exception as exc:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION") from exc
+    evidence_digest = str(validated["evidence_manifest_sha256"])
+    if failed_stage == stage_final:
+        archive_parent.mkdir(parents=False, exist_ok=True)
+        stage_final.rename(archive)
+    return {
+        "schema_version": "paper-rebuild-clean1-prior-technical-attempt-v1",
+        "archived_stage_alias": f"<CLEAN_ROOT>/{FAILED_ATTEMPT_DIR_NAME}/{old_commit}",
+        "code_freeze_commit": old_commit,
+        "terminal_status": terminal,
+        "formal_run_count": 0,
+        "provider_promoted": False,
+        "provider_attempt_preserved": bool(decision.get("provider_attempt_generated")),
+        "provider_attempt_alias": (
+            f"<CLEAN_ROOT>/04_PROVIDER_FREEZE/{provider_attempt.name}"
+        ),
+        "raw_pre_verified": 22,
+        "raw_post_verified": 22,
+        "raw_mutation_count": 0,
+        "evidence_manifest_sha256": evidence_digest,
+        "evidence_file_count": validated["evidence_file_count"],
+        "export_member_count": validated["export_member_count"],
+        "preserved_without_delete": True,
+        "archive_recovered_after_interruption": archive_recovered_after_interruption,
+        "superseded_reason": "case_insensitive_dual_yaw_artifact_self_copy_code_bug",
+        "replacement_code_commit": new_code_commit,
+    }
 
 
 def _recover_pending_promotion(paths: Any) -> dict[str, Any] | None:
@@ -958,6 +1099,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--methods", default=str(REPO_ROOT / "configs/paper_rebuild/methods.yaml"))
     parser.add_argument("--rtklib-source-root")
     parser.add_argument("--materialize-pinned-rtklib", action="store_true")
+    parser.add_argument("--retry-after-exact-blocked-attempt", action="store_true")
     args = parser.parse_args(argv)
 
     paths = load_clean_paths(args.config)
@@ -972,12 +1114,22 @@ def main(argv: list[str] | None = None) -> int:
     ):
         raise RuntimeError("BLOCKED_CLEAN1_GIT_OR_CODE_FREEZE_FAILED")
     protocol = load_clean1_protocol(args.protocol)
+    prior_attempt = None
+    if args.retry_after_exact_blocked_attempt:
+        prior_attempt = _preserve_exact_raw_doppler_blocked_stage_for_retry(
+            paths, new_code_commit=code_commit
+        )
     recovered = _recover_pending_promotion(paths)
     if recovered is not None:
         print(json.dumps(recovered, ensure_ascii=False, sort_keys=True))
         return 0
     stage, stage_final = _create_stage_root(paths.clean_root)
     _write_git_and_authorization(stage, code_commit)
+    if prior_attempt is not None:
+        write_json_atomic(
+            stage / "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json",
+            prior_attempt,
+        )
     shutil.copy2(protocol.path, stage / "02_PROTOCOL_FREEZE" / "SCOPE_LOCK.yaml")
 
     pre = verify_by2_raw_22(
@@ -1066,6 +1218,10 @@ def main(argv: list[str] | None = None) -> int:
     shutil.copy2(attempt_paths.provider_root / "RAW_DOPPLER_BACKEND_REPORT.json", stage / "04_PROVIDER_AUDIT")
     for name in ("DUAL_YAW_PHYSICAL_GATE.json", "DUAL_YAW_RUNTIME_CROSSCHECK.json"):
         shutil.copy2(attempt_paths.provider_root / name, stage / "04_PROVIDER_AUDIT" / name)
+    shutil.copy2(
+        bundle.artifacts["dual_yaw_provider"],
+        stage / "04_PROVIDER_AUDIT/DUAL_YAW_PROVIDER.csv",
+    )
     provider_rows = [
         {
             "provider_role": role,

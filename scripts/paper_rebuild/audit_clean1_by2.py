@@ -22,6 +22,7 @@ from legsa_gins.paper_rebuild.evidence import (
     BY2_TRACE_RELATIVE_PATH,
     assert_export_text_is_redacted,
     scan_text_for_export_leaks,
+    validate_failed_clean1_attempt_evidence,
 )
 from legsa_gins.paper_rebuild.formal_provider import load_formal_provider_bundle
 from legsa_gins.paper_rebuild.formal_runner import RUN_DIRECTORY_NAMES
@@ -37,6 +38,8 @@ from legsa_gins.paper_rebuild.protocol import REQUIRED_WINDOW_STREAMS, load_froz
 
 
 BLOCKED_STATUS = "BLOCKED_CLEAN1_EVALUATOR_CONTRACT_FAILED"
+FAILED_ATTEMPT_DIR_NAME = "06_CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION_FAILED_ATTEMPTS"
+FAILED_ATTEMPT_CODE_FREEZE_COMMIT = "409508def7f20521db290d9bfb7e1506a1f72ef9"
 
 
 def _assert_exact_blocked_gate_closure(
@@ -242,6 +245,108 @@ def _assert_exact_pre_run_gate_closure(
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
 
 
+def _assert_prior_technical_attempt_record(stage: Path, paths: Any) -> int:
+    record_path = stage / "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json"
+    if not record_path.is_file():
+        return 0
+    record = _json(record_path)
+    old_commit = record.get("code_freeze_commit")
+    expected_terminal = "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN"
+    expected_alias = f"<CLEAN_ROOT>/{FAILED_ATTEMPT_DIR_NAME}/{old_commit}"
+    provider_attempt_alias = record.get("provider_attempt_alias")
+    provider_attempt_prefix = "<CLEAN_ROOT>/04_PROVIDER_FREEZE/"
+    if (
+        not isinstance(old_commit, str)
+        or len(old_commit) != 40
+        or any(character not in "0123456789abcdef" for character in old_commit)
+        or old_commit != FAILED_ATTEMPT_CODE_FREEZE_COMMIT
+        or record.get("schema_version")
+        != "paper-rebuild-clean1-prior-technical-attempt-v1"
+        or record.get("archived_stage_alias") != expected_alias
+        or record.get("terminal_status") != expected_terminal
+        or record.get("formal_run_count") != 0
+        or record.get("provider_promoted") is not False
+        or record.get("provider_attempt_preserved") is not True
+        or not isinstance(provider_attempt_alias, str)
+        or not provider_attempt_alias.startswith(
+            provider_attempt_prefix + ".CLEAN1_BY2_CLEAN_NORMAL_V1.attempt-"
+        )
+        or "/" in provider_attempt_alias[len(provider_attempt_prefix) :]
+        or "\\" in provider_attempt_alias[len(provider_attempt_prefix) :]
+        or record.get("raw_pre_verified") != 22
+        or record.get("raw_post_verified") != 22
+        or record.get("raw_mutation_count") != 0
+        or record.get("preserved_without_delete") is not True
+        or not isinstance(record.get("archive_recovered_after_interruption"), bool)
+        or record.get("superseded_reason")
+        != "case_insensitive_dual_yaw_artifact_self_copy_code_bug"
+        or not isinstance(record.get("evidence_file_count"), int)
+        or int(record.get("evidence_file_count")) <= 0
+        or not isinstance(record.get("export_member_count"), int)
+        or int(record.get("export_member_count")) <= 0
+    ):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    archive = guard_path(
+        paths.clean_root / FAILED_ATTEMPT_DIR_NAME / old_commit,
+        role="prior CLEAN1 technical-attempt archive",
+        allowed_root=paths.clean_root,
+        must_exist=True,
+    )
+    provider_attempt = guard_path(
+        paths.provider_root.parent
+        / provider_attempt_alias[len(provider_attempt_prefix) :],
+        role="preserved failed CLEAN1 provider attempt",
+        allowed_root=paths.provider_root.parent,
+        must_exist=True,
+    )
+    if not provider_attempt.is_dir():
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    current_code_commit = (
+        stage / "01_GIT_FREEZE/CODE_FREEZE_COMMIT.txt"
+    ).read_text(encoding="utf-8").strip()
+    prior_decision = _json(
+        archive / "08_EVIDENCE_AUDIT/PRE_RUN_GATE_DECISION.json"
+    )
+    prior_report = _json(archive / "09_REPORT/CLEAN1_FULL_REPORT.json")
+    try:
+        validated = validate_failed_clean1_attempt_evidence(
+            archive,
+            raw_root=paths.raw_root,
+            code_root=paths.code_root,
+            provider_attempt=provider_attempt,
+            expected_code_commit=old_commit,
+        )
+    except Exception as exc:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION") from exc
+    if (
+        prior_decision.get("code_freeze_commit") != old_commit
+        or prior_decision.get("terminal_status") != expected_terminal
+        or prior_decision.get("formal_run_count") != 0
+        or prior_decision.get("provider_promoted") is not False
+        or prior_report.get("terminal_decision") != expected_terminal
+        or prior_report.get("formal_run_count") != 0
+        or prior_report.get("metrics_generated") is not False
+        or validated["evidence_manifest_sha256"]
+        != record.get("evidence_manifest_sha256")
+        or validated["evidence_file_count"] != record.get("evidence_file_count")
+        or validated["export_member_count"] != record.get("export_member_count")
+        or record.get("replacement_code_commit") != current_code_commit
+        or current_code_commit == old_commit
+    ):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    ancestry = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", old_commit, current_code_commit],
+        cwd=paths.code_root,
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+    if ancestry.returncode != 0:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    return 1
+
+
 def _json(path: Path) -> dict[str, Any]:
     value = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(value, dict):
@@ -304,6 +409,7 @@ def _tracked_local_path_issues(paths: Any) -> list[str]:
 def _export(stage: Path, report_dir: Path) -> Path:
     relative_candidates = [
         "00_AUTHORIZATION/AUTHORIZATION.md",
+        "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json",
         "01_GIT_FREEZE/GIT_STATE.json",
         "01_GIT_FREEZE/CODE_FREEZE_COMMIT.txt",
         "02_PROTOCOL_FREEZE/SCOPE_LOCK.yaml",
@@ -428,6 +534,9 @@ def main(argv: list[str] | None = None) -> int:
         role="CLEAN1 evidence root",
         allowed_root=paths.clean_root,
         must_exist=True,
+    )
+    prior_technical_attempt_count = _assert_prior_technical_attempt_record(
+        stage, paths
     )
     decision = _json(stage / "08_EVIDENCE_AUDIT/PRE_RUN_GATE_DECISION.json")
     backend = _json(stage / "04_PROVIDER_AUDIT/RAW_DOPPLER_BACKEND_REPORT.json")
@@ -721,6 +830,7 @@ def main(argv: list[str] | None = None) -> int:
         "aggregate_crosscheck_run": crosscheck_count > 0,
         "paper_figure_count": figure_count,
         "diagnostic_plot_count": forbidden_values["diagnostic_plot_count"],
+        "prior_technical_attempt_count": prior_technical_attempt_count,
         "paper_performance_claim": False,
         "claim_boundary": (
             "CLEAN1 evidence covers one BY2 clean-normal readiness chain only; no degradation robustness, "
@@ -741,6 +851,7 @@ Fresh source and provider readiness closed, including exact 22/22 pre/post raw v
 
 - code freeze commit: `{code_commit}`
 - report commit: `{args.report_commit}`
+- preserved technical failed attempts: {prior_technical_attempt_count}
 - BY2 raw: 22/22 pre, 22/22 post, zero mutation
 - Raw Doppler: {backend['valid_epoch_count']} valid and {backend['invalid_epoch_count']} invalid RAWX epochs; satellites min/median/max {backend['sat_count_min']}/{backend['sat_count_median']}/{backend['sat_count_max']}
 - common full window: frozen without smoke truncation or trace selection
