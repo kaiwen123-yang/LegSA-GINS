@@ -106,6 +106,7 @@ FAILED_CLEAN1_ATTEMPT_SPECS: dict[str, dict[str, Any]] = {
             "dual_yaw_provider.csv",
             "DUAL_YAW_PROVIDER.csv",
         ),
+        "failure_state": "stable_exported_stage",
     },
     "28ef36d5a9bac87bdeaed2e7567de7bbb9abd238": {
         "superseded_reason": "json_object_artifact_key_order_validation_code_bug",
@@ -113,8 +114,98 @@ FAILED_CLEAN1_ATTEMPT_SPECS: dict[str, dict[str, Any]] = {
             "FormalProviderError",
             "Formal provider artifact roles/order mismatch",
         ),
+        "failure_state": "stable_exported_stage",
+    },
+    "0aff9ea4c0b8103974591b060ea2b5627a6941ba": {
+        "superseded_reason": (
+            "git_code_state_ran_inside_traced_provider_child_and_triggered_"
+            "strict_legacy_path_crosscheck"
+        ),
+        "failure_state": "partial_hidden_stage",
+        "partial_finalization_reason": (
+            "unicode_relative_path_export_redaction_false_positive"
+        ),
+        "terminal_status": "FAIL_CLEAN1_EVIDENCE_CONTAMINATION",
+        "expected_stage_file_count": 23,
+        "expected_legacy_git_metadata_event_count": 45,
+        "expected_canonical_stage_tree_sha256": (
+            "de66b3881e425bbab4f9458fbfd35b8eb2264391d73525a9e4fe14814c762a0e"
+        ),
+        "expected_provider_manifest_sha256": (
+            "653e30f36b4ec4c8a056253719475ad341d8374e3e62b6ec71555dfb5b51bd49"
+        ),
     },
 }
+
+FAILED_CLEAN1_PARTIAL_STAGE_FILES = frozenset(
+    {
+        "00_AUTHORIZATION/AUTHORIZATION.md",
+        "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json",
+        "01_GIT_FREEZE/CODE_FREEZE_COMMIT.txt",
+        "01_GIT_FREEZE/GIT_STATE.json",
+        "01_GIT_FREEZE/TRACKED_FILE_HASH_MANIFEST.csv",
+        "02_PROTOCOL_FREEZE/SCOPE_LOCK.yaml",
+        "03_DATA_HASH_AND_ROLES/BY2_RAW_22_POST_HASH_AUDIT.csv",
+        "03_DATA_HASH_AND_ROLES/BY2_RAW_22_PRE_HASH_AUDIT.csv",
+        "03_DATA_HASH_AND_ROLES/BY2_RAW_22_ROLE_MANIFEST.csv",
+        "03_DATA_HASH_AND_ROLES/BY2_RAW_22_SUMMARY.json",
+        "03_DATA_HASH_AND_ROLES/CLEAN1_HARD_DENYLIST.csv",
+        "03_DATA_HASH_AND_ROLES/EVALUATOR_ONLY_ALLOWLIST.csv",
+        "03_DATA_HASH_AND_ROLES/HASH_VERIFIED_NOT_SOLVER_INPUT.csv",
+        "03_DATA_HASH_AND_ROLES/PROVIDER_SOLVER_SOURCE_ALLOWLIST.csv",
+        "03_DATA_HASH_AND_ROLES/RAW_MUTATION_AUDIT.json",
+        "04_PROVIDER_AUDIT/PROVIDER_ATTEMPT_BLOCKED.json",
+        "04_PROVIDER_AUDIT/PROVIDER_FAILED_ACTUAL_READ_AUDIT.json",
+        "04_PROVIDER_AUDIT/PROVIDER_FAILED_FILE_OPEN_TRACE.raw",
+        "04_PROVIDER_AUDIT/PROVIDER_FILE_OPEN_CROSSCHECK.json",
+        "06_RUN_MANIFESTS/FOUR_METHOD_RUN_BLOCKED.json",
+        "08_EVIDENCE_AUDIT/PRE_RUN_GATE_DECISION.json",
+        "09_REPORT/CLEAN1_FULL_REPORT.json",
+        "09_REPORT/CLEAN1_FULL_REPORT.md",
+    }
+)
+FAILED_CLEAN1_PARTIAL_STAGE_DIRS = frozenset(
+    f"{index:02d}_{name}"
+    for index, name in enumerate(
+        (
+            "AUTHORIZATION",
+            "GIT_FREEZE",
+            "PROTOCOL_FREEZE",
+            "DATA_HASH_AND_ROLES",
+            "PROVIDER_AUDIT",
+            "BUILD_AND_TESTS",
+            "RUN_MANIFESTS",
+            "EVALUATION",
+            "EVIDENCE_AUDIT",
+            "REPORT",
+            "EXPORT",
+        )
+    )
+)
+FAILED_CLEAN1_PARTIAL_PROVIDER_ROLES = frozenset(
+    {
+        "imu_runtime_input",
+        "gnss_runtime_input",
+        "dual_yaw_provider",
+        "raw_doppler_provider",
+        "go2_attitude_prior",
+        "go2_horizontal_velocity_prior",
+        "source_quality_metadata",
+    }
+)
+FAILED_CLEAN1_GIT_METADATA_SCAN_PATHS = frozenset(
+    {
+        "configs/experiments",
+        "docs/experiments",
+        "experiments",
+        "experiments/.gitignore",
+        "experiments/dataset_gnss_degraded",
+        "experiments/dataset_by",
+        "experiments/dataset_indoor_outdoor",
+        "src/legsa_gins/experiments",
+        "scripts/experiments",
+    }
+)
 
 FAILED_CLEAN1_RETRY_LAUNCH_SPECS: dict[str, dict[str, Any]] = {
     "b37e0ff1d38a750fb6e035f3b4da3f5b788fbdba": {
@@ -128,8 +219,8 @@ FAILED_CLEAN1_RETRY_LAUNCH_SPECS: dict[str, dict[str, Any]] = {
 }
 
 LOCAL_PATH_RE = re.compile(
-    r"(?:(?<![:/A-Za-z0-9_+\-])/(?!/)[^\s'\"`<>]+|"
-    r"(?<![A-Za-z0-9])[A-Za-z]:[\\/](?![\\/])[^\r\n'\"`]+)"
+    r"(?:(?<![:/\w+\-])/(?!/)[^\s'\"`<>]+|"
+    r"(?<![\w])[A-Za-z]:[\\/](?![\\/])[^\r\n'\"`]+)"
 )
 PATH_ALIAS_RE = re.compile(r"<[A-Z0-9_]+>/[^\s'\"`]*")
 STRACE_OPENAT_RE = re.compile(
@@ -509,6 +600,541 @@ def assert_export_text_is_redacted(text: str) -> None:
         raise EvidenceContractError("Export text leak: " + ",".join(issues))
 
 
+def canonical_file_tree_digest(
+    root: str | Path, expected_relative_files: Iterable[str]
+) -> str:
+    """Hash an exact file tree by canonical relative path, file SHA, and size."""
+
+    base = Path(root).resolve(strict=True)
+    rows: list[dict[str, Any]] = []
+    for relative in sorted(expected_relative_files):
+        candidate = base / relative
+        if candidate.is_symlink():
+            raise EvidenceContractError("Canonical evidence tree contains a symlink")
+        resolved = candidate.resolve(strict=True)
+        if not resolved.is_file() or not is_within(resolved, base):
+            raise EvidenceContractError("Canonical evidence tree file is missing or escapes")
+        rows.append(
+            {
+                "relative_path": relative,
+                "sha256": sha256_file(resolved),
+                "size_bytes": resolved.stat().st_size,
+            }
+        )
+    payload = json.dumps(
+        rows, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
+def resolve_path_without_symlink_chain(
+    root: str | Path,
+    relative: str,
+    *,
+    role: str,
+    must_exist: bool = True,
+) -> Path:
+    """Resolve one root-relative path only after lstat-like symlink checks."""
+
+    root_input = Path(root)
+    if root_input.is_symlink():
+        raise EvidenceContractError(f"{role} root is a symlink")
+    base = root_input.resolve(strict=True)
+    normalized = relative.replace("\\", "/")
+    relative_path = Path(normalized)
+    if (
+        not normalized
+        or normalized != relative
+        or relative_path.is_absolute()
+        or ".." in relative_path.parts
+        or "." in relative_path.parts
+    ):
+        raise EvidenceContractError(f"{role} relative path is unsafe")
+    candidate = base
+    for component in relative_path.parts:
+        candidate = candidate / component
+        if candidate.is_symlink():
+            raise EvidenceContractError(f"{role} path chain contains a symlink")
+        if must_exist and not candidate.exists():
+            raise EvidenceContractError(f"{role} path chain is missing")
+    resolved = candidate.resolve(strict=must_exist)
+    if not is_within(resolved, base):
+        raise EvidenceContractError(f"{role} escapes its root")
+    return resolved
+
+
+def _regular_file_without_symlink_chain(
+    root: str | Path, relative: str, *, role: str
+) -> Path:
+    resolved = resolve_path_without_symlink_chain(
+        root, relative, role=role, must_exist=True
+    )
+    if not resolved.is_file():
+        raise EvidenceContractError(f"{role} is not a regular file")
+    return resolved
+
+
+def _validate_partial_raw_audit_csv(
+    path: Path, *, raw_root: Path, expected_phase: str
+) -> dict[str, str]:
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    if len(rows) != 22 or {row.get("relative_path") for row in rows} != set(
+        BY2_RAW_RELATIVE_PATHS
+    ):
+        raise EvidenceContractError("Partial failed raw audit path set differs")
+    verified: dict[str, str] = {}
+    for row in rows:
+        relative = str(row.get("relative_path") or "")
+        candidate = _regular_file_without_symlink_chain(
+            raw_root, relative, role="partial failed raw audit source"
+        )
+        digest = sha256_file(candidate)
+        if (
+            row.get("audit_phase") != expected_phase
+            or row.get("status") != "PASS"
+            or row.get("exists") != "True"
+            or row.get("regular_file") != "True"
+            or row.get("realpath_confined") != "True"
+            or row.get("expected_sha256") != digest
+            or row.get("actual_sha256") != digest
+            or int(str(row.get("expected_size_bytes") or -1))
+            != candidate.stat().st_size
+            or int(str(row.get("actual_size_bytes") or -1))
+            != candidate.stat().st_size
+        ):
+            raise EvidenceContractError("Partial failed raw audit row differs")
+        verified[relative] = digest
+    return verified
+
+
+def _validate_partial_provider_attempt(
+    attempt: Path,
+    *,
+    raw_root: Path,
+    expected_code_commit: str,
+) -> dict[str, Any]:
+    manifest_path = _regular_file_without_symlink_chain(
+        attempt,
+        "CLEAN_INPUT_MANIFEST.json",
+        role="partial formal provider manifest",
+    )
+    specification = FAILED_CLEAN1_ATTEMPT_SPECS.get(expected_code_commit)
+    if (
+        not isinstance(specification, dict)
+        or sha256_file(manifest_path)
+        != specification.get("expected_provider_manifest_sha256")
+    ):
+        raise EvidenceContractError("Partial formal provider manifest hash differs")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if not isinstance(manifest, dict):
+        raise EvidenceContractError("Partial provider manifest is not an object")
+    raw_hashes = manifest.get("raw_source_hashes")
+    actual_reads = manifest.get("actual_source_read_set")
+    artifacts = manifest.get("artifacts")
+    provider_hashes = manifest.get("provider_hashes")
+    if (
+        manifest.get("schema_version") != "paper-rebuild-clean1-input-v1"
+        or manifest.get("generator_code_commit") != expected_code_commit
+        or manifest.get("generator_worktree_dirty") is not False
+        or not isinstance(raw_hashes, dict)
+        or set(raw_hashes) != set(BY2_RAW_RELATIVE_PATHS)
+        or not isinstance(actual_reads, list)
+        or not isinstance(artifacts, dict)
+        or set(artifacts) != FAILED_CLEAN1_PARTIAL_PROVIDER_ROLES
+        or not isinstance(provider_hashes, dict)
+        or set(provider_hashes) != FAILED_CLEAN1_PARTIAL_PROVIDER_ROLES
+    ):
+        raise EvidenceContractError("Partial formal provider manifest closure differs")
+    forbidden_false = (
+        "synthetic_data_used",
+        "semisynthetic_data_used",
+        "trace_used_online",
+        "receiver_imu_as_body_imu",
+        "final_v23_output_solver_input",
+        "LegSA_output_solver_input",
+        "per_case_tuning",
+        "output_only_correction",
+        "epoch_deleted_for_metric",
+        "status_fallback_used",
+        "legacy_provider_used",
+    )
+    if any(manifest.get(field) is not False for field in forbidden_false) or any(
+        manifest.get(field) != 0
+        for field in (
+            "old_runtime_input_count",
+            "legacy_provider_input_count",
+            "legacy_row_input_count",
+            "legacy_aggregate_input_count",
+        )
+    ):
+        raise EvidenceContractError("Partial formal provider forbidden flag differs")
+    forbidden_result_tokens = (
+        "row_level",
+        "aggregate",
+        "formal_run",
+        "eval_nav",
+        "four_method",
+        "result",
+        "metric",
+    )
+    for candidate in attempt.rglob("*"):
+        relative_parts = tuple(
+            part.casefold() for part in candidate.relative_to(attempt).parts
+        )
+        if any(
+            token in component
+            for component in relative_parts
+            for token in forbidden_result_tokens
+        ):
+            raise EvidenceContractError(
+                "Partial provider attempt contains unexpected result evidence"
+            )
+    for relative, digest in raw_hashes.items():
+        source = _regular_file_without_symlink_chain(
+            raw_root, relative, role="partial formal provider raw source"
+        )
+        if sha256_file(source) != digest:
+            raise EvidenceContractError("Partial formal provider raw hash differs")
+    normalized_reads = validate_provider_source_read_set(actual_reads, raw_hashes)
+    if {entry["relative_path"] for entry in normalized_reads} != set(
+        FAILED_CLEAN1_EXPECTED_RAW_READS
+    ):
+        raise EvidenceContractError("Partial formal provider actual read set differs")
+    computed_hashes: dict[str, str] = {}
+    for role in sorted(FAILED_CLEAN1_PARTIAL_PROVIDER_ROLES):
+        entry = artifacts[role]
+        if not isinstance(entry, dict):
+            raise EvidenceContractError("Partial formal provider artifact entry differs")
+        relative = str(entry.get("relative_path") or "")
+        resolved = _regular_file_without_symlink_chain(
+            attempt, relative, role=f"partial formal provider artifact {role}"
+        )
+        digest = sha256_file(resolved)
+        if provider_hashes[role] != digest:
+            raise EvidenceContractError("Partial formal provider artifact hash differs")
+        computed_hashes[role] = digest
+    canonical_hashes = json.dumps(
+        computed_hashes, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    if manifest.get("provider_bundle_hash") != hashlib.sha256(canonical_hashes).hexdigest():
+        raise EvidenceContractError("Partial formal provider bundle hash differs")
+    with (attempt / "PROVIDER_HASH_MANIFEST.csv").open(
+        "r", encoding="utf-8", newline=""
+    ) as handle:
+        reader = csv.DictReader(handle)
+        if reader.fieldnames != [
+            "provider_role",
+            "relative_path",
+            "sha256",
+            "solver_input",
+            "artifact_role",
+        ]:
+            raise EvidenceContractError("Partial provider hash manifest schema differs")
+        rows = list(reader)
+    if len(rows) != 7 or {row.get("provider_role") for row in rows} != set(
+        FAILED_CLEAN1_PARTIAL_PROVIDER_ROLES
+    ):
+        raise EvidenceContractError("Partial provider hash manifest roles differ")
+    for row in rows:
+        role = str(row["provider_role"])
+        entry = artifacts[role]
+        if (
+            row.get("relative_path") != entry.get("relative_path")
+            or row.get("sha256") != computed_hashes[role]
+            or row.get("solver_input") != str(entry.get("solver_input"))
+            or row.get("artifact_role") != entry.get("artifact_role")
+        ):
+            raise EvidenceContractError("Partial provider hash manifest row differs")
+    backend_path = _regular_file_without_symlink_chain(
+        attempt,
+        "RAW_DOPPLER_BACKEND_REPORT.json",
+        role="partial Raw Doppler backend report",
+    )
+    backend = json.loads(backend_path.read_text(encoding="utf-8"))
+    if (
+        not isinstance(backend, dict)
+        or backend != manifest.get("raw_doppler_backend")
+        or manifest.get("raw_doppler_backend_report_sha256")
+        != sha256_file(backend_path)
+    ):
+        raise EvidenceContractError("Partial Raw Doppler backend closure differs")
+    from .formal_provider import validate_raw_doppler_backend_report
+
+    validated_backend = validate_raw_doppler_backend_report(
+        backend, verified_raw_hashes=raw_hashes
+    )
+    retained = validated_backend["retained_backend_artifacts"]
+    if len({str(entry["relative_path"]) for entry in retained.values()}) != 7:
+        raise EvidenceContractError("Partial retained backend paths are not unique")
+    retained_hashes: dict[str, str] = {}
+    for role, entry in retained.items():
+        relative = str(entry["relative_path"])
+        retained_path = _regular_file_without_symlink_chain(
+            attempt,
+            relative,
+            role=f"partial retained Raw Doppler artifact {role}",
+        )
+        digest = sha256_file(retained_path)
+        if digest != entry["sha256"]:
+            raise EvidenceContractError(
+                "Partial retained Raw Doppler artifact hash differs"
+            )
+        retained_hashes[role] = digest
+    canonical_retained = json.dumps(
+        dict(retained), sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    if hashlib.sha256(canonical_retained).hexdigest() != validated_backend[
+        "retained_backend_bundle_hash"
+    ]:
+        raise EvidenceContractError("Partial retained backend bundle hash differs")
+    top_level_cross_map = {
+        "helper_executable_hash": "helper_executable",
+        "helper_source_hash": "helper_source",
+        "convbin_executable_hash": "convbin_executable",
+        "rebuilt_ubx_hash": "rebuilt_ubx",
+        "obs_source_hash": "rinex_obs",
+        "nav_source_hash": "rinex_nav",
+    }
+    if any(
+        validated_backend[field] != retained_hashes[role]
+        for field, role in top_level_cross_map.items()
+    ):
+        raise EvidenceContractError("Partial retained backend top-level hash differs")
+    if (
+        retained_hashes["formal_raw_doppler_provider"]
+        != computed_hashes["raw_doppler_provider"]
+    ):
+        raise EvidenceContractError(
+            "Partial retained Raw Doppler provider differs from provider role hash"
+        )
+    return {
+        "provider_bundle_hash": manifest["provider_bundle_hash"],
+        "provider_role_count": len(computed_hashes),
+        "raw_hashes": raw_hashes,
+    }
+
+
+def _validate_partial_failed_clean1_attempt_evidence(
+    stage: Path,
+    *,
+    raw_root: Path,
+    code_root: Path,
+    provider_attempt: Path,
+    expected_code_commit: str,
+    specification: Mapping[str, Any],
+) -> dict[str, Any]:
+    entries = list(stage.rglob("*"))
+    if any(path.is_symlink() for path in entries):
+        raise EvidenceContractError("Partial failed stage contains a symlink")
+    actual_files = {
+        path.relative_to(stage).as_posix() for path in entries if path.is_file()
+    }
+    actual_dirs = {
+        path.relative_to(stage).as_posix() for path in entries if path.is_dir()
+    }
+    if (
+        actual_files != FAILED_CLEAN1_PARTIAL_STAGE_FILES
+        or actual_dirs != FAILED_CLEAN1_PARTIAL_STAGE_DIRS
+        or len(actual_files) != specification["expected_stage_file_count"]
+    ):
+        raise EvidenceContractError("Partial failed stage exact tree differs")
+    for forbidden in (
+        "08_EVIDENCE_AUDIT/EVIDENCE_MANIFEST.csv",
+        "08_EVIDENCE_AUDIT/EVIDENCE_MANIFEST.sha256",
+        "10_EXPORT/EXPORT_SHA256_MANIFEST.csv",
+        "10_EXPORT/CLEAN1_CONTEXT_FOR_GPT.zip",
+    ):
+        if (stage / forbidden).exists():
+            raise EvidenceContractError("Partial failed stage unexpectedly has finalized evidence/export")
+
+    def json_object(relative: str) -> dict[str, Any]:
+        value = json.loads((stage / relative).read_text(encoding="utf-8"))
+        if not isinstance(value, dict):
+            raise EvidenceContractError("Partial failed JSON is not an object")
+        return value
+
+    terminal = str(specification["terminal_status"])
+    decision = json_object("08_EVIDENCE_AUDIT/PRE_RUN_GATE_DECISION.json")
+    report = json_object("09_REPORT/CLEAN1_FULL_REPORT.json")
+    run_gate = json_object("06_RUN_MANIFESTS/FOUR_METHOD_RUN_BLOCKED.json")
+    blocked = json_object("04_PROVIDER_AUDIT/PROVIDER_ATTEMPT_BLOCKED.json")
+    read_audit = json_object(
+        "04_PROVIDER_AUDIT/PROVIDER_FAILED_ACTUAL_READ_AUDIT.json"
+    )
+    raw_summary = json_object("03_DATA_HASH_AND_ROLES/BY2_RAW_22_SUMMARY.json")
+    mutation = json_object("03_DATA_HASH_AND_ROLES/RAW_MUTATION_AUDIT.json")
+    git_state = json_object("01_GIT_FREEZE/GIT_STATE.json")
+    expected_run_gate = {
+        "schema_version": "paper-rebuild-clean1-four-run-gate-v1",
+        "formal_run_count": 0,
+        "method_count_required": 4,
+        "metric_driven_rerun": False,
+        "terminal_status": terminal,
+        "paper_performance_claim": False,
+    }
+    if (
+        decision.get("code_freeze_commit") != expected_code_commit
+        or decision.get("terminal_status") != terminal
+        or decision.get("formal_run_count") != 0
+        or decision.get("provider_promoted") is not False
+        or decision.get("provider_attempt_generated") is not True
+        or report.get("code_freeze_commit") != expected_code_commit
+        or report.get("terminal_decision") != terminal
+        or report.get("formal_run_count") != 0
+        or report.get("metrics_generated") is not False
+        or report.get("paper_figure_count") != 0
+        or report.get("provider_promoted") is not False
+        or run_gate != expected_run_gate
+        or blocked
+        != {
+            "terminal_status": terminal,
+            "provider_final_root_created": False,
+            "failed_attempt_preserved": True,
+            "file_open_crosscheck_passed": False,
+        }
+        or read_audit
+        != {
+            "strace_available": True,
+            "observed_partial_failed_attempt_raw_reads": sorted(
+                FAILED_CLEAN1_EXPECTED_RAW_READS
+            ),
+            "unexpected_raw_reads": [],
+            "promoted_provider_actual_read_set": [],
+            "passed": True,
+        }
+        or raw_summary.get("passed") is not True
+        or raw_summary.get("pre_verified") != 22
+        or raw_summary.get("post_verified") != 22
+        or raw_summary.get("raw_mutation") != 0
+        or mutation.get("passed") is not True
+        or mutation.get("pre_verified") != 22
+        or mutation.get("post_verified") != 22
+        or mutation.get("raw_mutation") != 0
+        or mutation.get("changed_relative_paths") != []
+        or git_state.get("code_freeze_commit") != expected_code_commit
+        or git_state.get("worktree_clean") is not True
+        or (stage / "01_GIT_FREEZE/CODE_FREEZE_COMMIT.txt")
+        .read_text(encoding="utf-8")
+        .strip()
+        != expected_code_commit
+    ):
+        raise EvidenceContractError("Partial failed terminal/raw/run closure differs")
+
+    pre_hashes = _validate_partial_raw_audit_csv(
+        stage / "03_DATA_HASH_AND_ROLES/BY2_RAW_22_PRE_HASH_AUDIT.csv",
+        raw_root=raw_root,
+        expected_phase="pre_generation",
+    )
+    post_hashes = _validate_partial_raw_audit_csv(
+        stage / "03_DATA_HASH_AND_ROLES/BY2_RAW_22_POST_HASH_AUDIT.csv",
+        raw_root=raw_root,
+        expected_phase="post_generation",
+    )
+    if pre_hashes != post_hashes:
+        raise EvidenceContractError("Partial failed raw pre/post hashes differ")
+    provider = _validate_partial_provider_attempt(
+        provider_attempt,
+        raw_root=raw_root,
+        expected_code_commit=expected_code_commit,
+    )
+    if provider["raw_hashes"] != pre_hashes:
+        raise EvidenceContractError("Partial provider and raw audit hashes differ")
+
+    crosscheck = json_object("04_PROVIDER_AUDIT/PROVIDER_FILE_OPEN_CROSSCHECK.json")
+    trace = stage / "04_PROVIDER_AUDIT/PROVIDER_FAILED_FILE_OPEN_TRACE.raw"
+    expected_raw = list(FAILED_CLEAN1_EXPECTED_RAW_READS)
+    if (
+        crosscheck.get("schema_version")
+        != "paper-rebuild-provider-file-open-crosscheck-v1"
+        or crosscheck.get("strace_available") is not True
+        or crosscheck.get("provider_process_isolated") is not True
+        or crosscheck.get("expected_raw_relative_paths") != expected_raw
+        or crosscheck.get("missing_expected_raw_opens") != []
+        or crosscheck.get("unexpected_raw_root_relative_paths") != []
+        or crosscheck.get("unexpected_clean_root_relative_paths") != []
+        or crosscheck.get("trace_opened_by_provider_process") is not False
+        or crosscheck.get("legacy_path_read_count")
+        != specification["expected_legacy_git_metadata_event_count"]
+        or crosscheck.get("passed") is not False
+        or not re.fullmatch(r"[0-9a-f]{64}", str(crosscheck.get("strace_sha256") or ""))
+        or sha256_file(trace) != crosscheck["strace_sha256"]
+    ):
+        raise EvidenceContractError("Partial failed file-open crosscheck differs")
+    opened = parse_strace_openat_paths(trace, cwd=code_root)
+    raw_opened = [path for path in opened if is_within(path, raw_root)]
+    expected_paths = {
+        relative: (raw_root / relative).resolve(strict=True) for relative in expected_raw
+    }
+    observed_counts = {
+        relative: sum(path == expected for path in raw_opened)
+        for relative, expected in expected_paths.items()
+    }
+    if (
+        observed_counts != crosscheck.get("observed_expected_raw_open_counts")
+        or any(path not in set(expected_paths.values()) for path in raw_opened)
+    ):
+        raise EvidenceContractError("Partial failed strace raw closure differs")
+    if (raw_root / BY2_TRACE_RELATIVE_PATH).resolve(strict=True) in raw_opened:
+        raise EvidenceContractError("Partial failed provider opened trace")
+    clean_root = provider_attempt.parent.parent.resolve(strict=True)
+    raw_hash_lock = clean_root / "01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv"
+    unexpected_clean = {
+        path.relative_to(clean_root).as_posix()
+        for path in opened
+        if is_within(path, clean_root)
+        and not is_within(path, provider_attempt)
+        and path != raw_hash_lock.resolve(strict=True)
+    }
+    if unexpected_clean:
+        raise EvidenceContractError("Partial failed strace clean-root closure differs")
+    legacy_opened = [path for path in opened if legacy_reason(path) is not None]
+    legacy_relative_counts: dict[str, int] = {}
+    for path in legacy_opened:
+        if not is_within(path, code_root):
+            raise EvidenceContractError("Partial failed legacy open was outside Git worktree")
+        relative = path.relative_to(code_root).as_posix()
+        legacy_relative_counts[relative] = legacy_relative_counts.get(relative, 0) + 1
+    if legacy_relative_counts != {
+        relative: 5 for relative in FAILED_CLEAN1_GIT_METADATA_SCAN_PATHS
+    }:
+        raise EvidenceContractError("Partial failed Git metadata event set differs")
+    if len(opened) != crosscheck.get("opened_path_count"):
+        raise EvidenceContractError("Partial failed strace opened-path count differs")
+
+    forbidden_tokens = (
+        "ROW_LEVEL_ERRORS",
+        "AGGREGATE_METRICS",
+        "AGGREGATE_CROSSCHECK",
+        "FOUR_METHOD_METRICS",
+        "FORMAL_RUN_MANIFEST",
+        "EVAL_NAV",
+    )
+    if any(
+        any(token in relative.upper() for token in forbidden_tokens)
+        or relative.startswith("07_EVALUATION/")
+        or Path(relative).suffix.casefold()
+        in {".png", ".jpg", ".jpeg", ".svg", ".pdf", ".nav", ".std"}
+        for relative in actual_files
+    ):
+        raise EvidenceContractError("Partial failed stage contains run/metric/figure payload")
+    tree_digest = canonical_file_tree_digest(stage, actual_files)
+    if tree_digest != specification["expected_canonical_stage_tree_sha256"]:
+        raise EvidenceContractError("Partial failed canonical stage tree differs")
+    return {
+        "evidence_manifest_sha256": "NOT_AVAILABLE_PARTIAL_STAGE",
+        "evidence_manifest_present": False,
+        "provider_attempt_name": provider_attempt.name,
+        "evidence_file_count": len(actual_files),
+        "export_member_count": 0,
+        "partial_stage_preserved": True,
+        "canonical_stage_tree_sha256": tree_digest,
+        "provider_bundle_hash": provider["provider_bundle_hash"],
+        "provider_role_count": provider["provider_role_count"],
+        "legacy_git_metadata_event_count": len(legacy_opened),
+    }
+
+
 def validate_failed_clean1_attempt_evidence(
     stage_root: str | Path,
     *,
@@ -519,15 +1145,33 @@ def validate_failed_clean1_attempt_evidence(
 ) -> dict[str, Any]:
     """Rehash one exact failed stage and prove it contains no result evidence."""
 
-    stage = Path(stage_root).resolve(strict=True)
-    raw = Path(raw_root).resolve(strict=True)
+    stage_input = Path(stage_root)
+    attempt_input = Path(provider_attempt)
+    raw_input = Path(raw_root)
+    if (
+        stage_input.is_symlink()
+        or attempt_input.is_symlink()
+        or raw_input.is_symlink()
+    ):
+        raise EvidenceContractError("Failed CLEAN1 stage/provider/raw root is a symlink")
+    stage = stage_input.resolve(strict=True)
+    raw = raw_input.resolve(strict=True)
     code = Path(code_root).resolve(strict=True)
-    attempt = Path(provider_attempt).resolve(strict=True)
+    attempt = attempt_input.resolve(strict=True)
     if not stage.is_dir() or not attempt.is_dir():
         raise EvidenceContractError("Failed CLEAN1 stage/provider attempt is missing")
     specification = FAILED_CLEAN1_ATTEMPT_SPECS.get(expected_code_commit)
     if specification is None:
         raise EvidenceContractError("Failed CLEAN1 code commit is not retry-authorized")
+    if specification.get("failure_state") == "partial_hidden_stage":
+        return _validate_partial_failed_clean1_attempt_evidence(
+            stage,
+            raw_root=raw,
+            code_root=code,
+            provider_attempt=attempt,
+            expected_code_commit=expected_code_commit,
+            specification=specification,
+        )
 
     def safe_relative(value: str) -> str:
         normalized = value.replace("\\", "/")

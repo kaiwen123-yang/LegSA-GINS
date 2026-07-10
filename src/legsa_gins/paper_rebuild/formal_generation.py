@@ -8,6 +8,7 @@ import datetime as dt
 import hashlib
 import json
 import math
+import re
 import shutil
 import struct
 import subprocess
@@ -50,7 +51,6 @@ from .formal_provider import (
     validate_raw_doppler_backend_report,
 )
 from .manifest import (
-    git_code_state,
     read_hash_lock,
     sha256_file,
     sha256_text,
@@ -494,6 +494,7 @@ def _reuse_generated_dual_yaw_artifact(
 def generate_formal_clean1_inputs(
     paths: CleanPaths,
     *,
+    expected_code_commit: str,
     rtklib_source_root: str | Path | None = None,
     materialize_pinned_rtklib: bool = False,
     timeout_seconds: int = 900,
@@ -504,9 +505,11 @@ def generate_formal_clean1_inputs(
     provider_root = guard_path(paths.provider_root, role="CLEAN1 provider root", allowed_root=paths.clean_root)
     if provider_root.exists():
         raise FormalGenerationError("Fresh CLEAN1 provider root already exists")
-    commit, dirty = git_code_state(paths.code_root)
-    if dirty:
-        raise FormalGenerationError("Formal provider generation requires a clean committed worktree")
+    if not isinstance(expected_code_commit, str) or not re.fullmatch(
+        r"[0-9a-f]{40}", expected_code_commit
+    ):
+        raise FormalGenerationError("Expected formal code commit is invalid")
+    commit = expected_code_commit
     lock = read_hash_lock(paths.raw_hash_lock)
     by2_lock = {relative: row for relative, row in lock.items() if row.get("dataset") == "BY2"}
     if set(by2_lock) != set(BY2_RAW_RELATIVE_PATHS):
@@ -565,6 +568,7 @@ def generate_formal_clean1_inputs(
         go2_roll_pitch_std_deg=float(generation["go2_roll_pitch_std_deg"]),
         go2_horizontal_velocity_std_mps=float(generation["go2_horizontal_velocity_std_mps"]),
         stage_id="CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION",
+        expected_code_commit=commit,
     )
     gnss_path = provider_root / base_manifest["artifacts"]["gnss_runtime_input"]["relative_path"]
     gnss1_status = paths.by2_fix_root / "gnss1-status.csv"
@@ -911,9 +915,6 @@ def generate_formal_clean1_inputs(
         "local_path_config_hash": sha256_file(paths.config_path),
         "generation_contract": generation_contract,
     }
-    final_commit, final_dirty = git_code_state(paths.code_root)
-    if final_commit != commit or final_dirty:
-        raise FormalGenerationError("Code state changed during formal provider generation")
     write_json_atomic(provider_root / "CLEAN_INPUT_MANIFEST.json", manifest)
     with (provider_root / "PROVIDER_HASH_MANIFEST.csv").open(
         "w", encoding="utf-8", newline=""

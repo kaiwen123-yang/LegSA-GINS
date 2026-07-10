@@ -23,6 +23,7 @@ from legsa_gins.paper_rebuild.evidence import (
     FAILED_CLEAN1_ATTEMPT_SPECS,
     FAILED_CLEAN1_RETRY_LAUNCH_SPECS,
     assert_export_text_is_redacted,
+    resolve_path_without_symlink_chain,
     scan_text_for_export_leaks,
     validate_failed_clean1_attempt_evidence,
 )
@@ -263,7 +264,18 @@ def _assert_prior_technical_attempt_record(
         if isinstance(old_commit, str)
         else None
     )
-    expected_terminal = "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN"
+    partial_stage = bool(
+        specification
+        and specification.get("failure_state") == "partial_hidden_stage"
+    )
+    expected_terminal = str(
+        specification.get(
+            "terminal_status",
+            "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN",
+        )
+        if specification
+        else ""
+    )
     expected_alias = f"<CLEAN_ROOT>/{FAILED_ATTEMPT_DIR_NAME}/{old_commit}"
     provider_attempt_alias = record.get("provider_attempt_alias")
     provider_attempt_prefix = "<CLEAN_ROOT>/04_PROVIDER_FREEZE/"
@@ -296,19 +308,61 @@ def _assert_prior_technical_attempt_record(
         or not isinstance(record.get("evidence_file_count"), int)
         or int(record.get("evidence_file_count")) <= 0
         or not isinstance(record.get("export_member_count"), int)
-        or int(record.get("export_member_count")) <= 0
+        or (
+            int(record.get("export_member_count")) != 0
+            if partial_stage
+            else int(record.get("export_member_count")) <= 0
+        )
+        or (
+            partial_stage
+            and (
+                record.get("partial_stage_preserved") is not True
+                or record.get("partial_finalization_reason")
+                != specification.get("partial_finalization_reason")
+                or record.get("evidence_manifest_present") is not False
+                or record.get("evidence_manifest_sha256")
+                != "NOT_AVAILABLE_PARTIAL_STAGE"
+                or record.get("evidence_file_count")
+                != specification.get("expected_stage_file_count")
+                or not isinstance(record.get("canonical_stage_tree_sha256"), str)
+                or len(str(record.get("canonical_stage_tree_sha256"))) != 64
+                or record.get("provider_role_count") != 7
+                or record.get("legacy_git_metadata_event_count")
+                != specification.get("expected_legacy_git_metadata_event_count")
+            )
+        )
         or not isinstance(intervening_launch_failures, list)
     ):
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    try:
+        archive_identity = resolve_path_without_symlink_chain(
+            paths.clean_root,
+            f"{FAILED_ATTEMPT_DIR_NAME}/{old_commit}",
+            role="prior CLEAN1 technical-attempt archive",
+        )
+    except Exception as exc:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION") from exc
+    if not archive_identity.is_dir():
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     archive = guard_path(
-        paths.clean_root / FAILED_ATTEMPT_DIR_NAME / old_commit,
+        archive_identity,
         role="prior CLEAN1 technical-attempt archive",
         allowed_root=paths.clean_root,
         must_exist=True,
     )
+    provider_suffix = provider_attempt_alias[len(provider_attempt_prefix) :]
+    try:
+        provider_identity = resolve_path_without_symlink_chain(
+            paths.provider_root.parent,
+            provider_suffix,
+            role="preserved failed CLEAN1 provider attempt",
+        )
+    except Exception as exc:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION") from exc
+    if not provider_identity.is_dir():
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     provider_attempt = guard_path(
-        paths.provider_root.parent
-        / provider_attempt_alias[len(provider_attempt_prefix) :],
+        provider_identity,
         role="preserved failed CLEAN1 provider attempt",
         allowed_root=paths.provider_root.parent,
         must_exist=True,
@@ -348,6 +402,20 @@ def _assert_prior_technical_attempt_record(
         != record.get("evidence_manifest_sha256")
         or validated["evidence_file_count"] != record.get("evidence_file_count")
         or validated["export_member_count"] != record.get("export_member_count")
+        or (
+            partial_stage
+            and (
+                validated.get("canonical_stage_tree_sha256")
+                != record.get("canonical_stage_tree_sha256")
+                or validated.get("provider_bundle_hash")
+                != record.get("provider_bundle_hash")
+                or validated.get("provider_role_count")
+                != record.get("provider_role_count")
+                or validated.get("legacy_git_metadata_event_count")
+                != record.get("legacy_git_metadata_event_count")
+                or validated.get("evidence_manifest_present") is not False
+            )
+        )
         or record.get("replacement_code_commit") != current_code_commit
         or current_code_commit == old_commit
     ):

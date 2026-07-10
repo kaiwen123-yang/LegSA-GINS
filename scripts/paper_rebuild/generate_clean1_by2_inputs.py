@@ -33,6 +33,7 @@ from legsa_gins.paper_rebuild.evidence import (
     assert_export_text_is_redacted,
     compare_pre_post_raw_audits,
     parse_strace_openat_paths,
+    resolve_path_without_symlink_chain,
     validate_failed_clean1_attempt_evidence,
     verify_by2_raw_22,
     write_raw_audit,
@@ -148,8 +149,18 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
         role="blocked CLEAN1 stage evidence",
         allowed_root=paths.clean_root,
     )
+    archive_parent_candidate = paths.clean_root / FAILED_ATTEMPT_DIR_NAME
+    try:
+        archive_parent_identity = resolve_path_without_symlink_chain(
+            paths.clean_root,
+            FAILED_ATTEMPT_DIR_NAME,
+            role="CLEAN1 failed-attempt archive root",
+            must_exist=archive_parent_candidate.exists(),
+        )
+    except Exception as exc:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION") from exc
     archive_parent = guard_path(
-        paths.clean_root / FAILED_ATTEMPT_DIR_NAME,
+        archive_parent_identity,
         role="CLEAN1 failed-attempt archive root",
         allowed_root=paths.clean_root,
     )
@@ -172,17 +183,50 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
     specification = FAILED_CLEAN1_ATTEMPT_SPECS.get(expected_old_commit)
     if specification is None:
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    archive_candidate = archive_parent / expected_old_commit
+    try:
+        archive_identity = resolve_path_without_symlink_chain(
+            paths.clean_root,
+            f"{FAILED_ATTEMPT_DIR_NAME}/{expected_old_commit}",
+            role="CLEAN1 exact failed-attempt archive",
+            must_exist=archive_candidate.exists(),
+        )
+    except Exception as exc:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION") from exc
     archive = guard_path(
-        archive_parent / expected_old_commit,
+        archive_identity,
         role="CLEAN1 exact failed-attempt archive",
         allowed_root=archive_parent,
     )
-    if stage_final.exists() == archive.exists():
-        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
-    failed_stage = stage_final if stage_final.exists() else archive
-    archive_recovered_after_interruption = archive.exists()
     if paths.provider_root.exists() or paths.runtime_root.exists():
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    if specification.get("failure_state") == "partial_hidden_stage":
+        if stage_final.exists():
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        hidden_prefix = f".{STAGE_DIR_NAME}.attempt-"
+        hidden_entries = [
+            child
+            for child in paths.clean_root.iterdir()
+            if child.name.startswith(hidden_prefix)
+        ]
+        if any(child.is_symlink() or not child.is_dir() for child in hidden_entries):
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        hidden_stages = hidden_entries
+        if archive.exists():
+            if hidden_stages:
+                raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+            failed_stage = archive
+            archive_recovered_after_interruption = True
+        else:
+            if len(hidden_stages) != 1:
+                raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+            failed_stage = hidden_stages[0]
+            archive_recovered_after_interruption = False
+    else:
+        if stage_final.exists() == archive.exists():
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        failed_stage = stage_final if stage_final.exists() else archive
+        archive_recovered_after_interruption = archive.exists()
 
     def load_object(relative: str) -> dict[str, Any]:
         value = json.loads((failed_stage / relative).read_text(encoding="utf-8"))
@@ -194,7 +238,12 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
     run_gate = load_object("06_RUN_MANIFESTS/FOUR_METHOD_RUN_BLOCKED.json")
     raw_summary = load_object("03_DATA_HASH_AND_ROLES/BY2_RAW_22_SUMMARY.json")
     report = load_object("09_REPORT/CLEAN1_FULL_REPORT.json")
-    terminal = "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN"
+    terminal = str(
+        specification.get(
+            "terminal_status",
+            "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN",
+        )
+    )
     old_commit = decision.get("code_freeze_commit")
     if (
         not isinstance(old_commit, str)
@@ -233,22 +282,32 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
     provider_attempts = []
     launch_failure_provider_attempts = []
     for child in paths.provider_root.parent.iterdir():
-        if not child.is_dir() or not child.name.startswith(
-            ".CLEAN1_BY2_CLEAN_NORMAL_V1.attempt-"
-        ):
+        if not child.name.startswith(".CLEAN1_BY2_CLEAN_NORMAL_V1.attempt-"):
             continue
+        if child.is_symlink() or not child.is_dir():
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
         manifest_path = child / "CLEAN_INPUT_MANIFEST.json"
         if not manifest_path.is_file():
-            continue
-        candidate_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        try:
+            candidate_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION") from exc
+        candidate_commit = (
+            candidate_manifest.get("generator_code_commit")
+            if isinstance(candidate_manifest, dict)
+            else None
+        )
+        if candidate_commit not in FAILED_CLEAN1_ATTEMPT_SPECS:
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
         if (
             isinstance(candidate_manifest, dict)
-            and candidate_manifest.get("generator_code_commit") == old_commit
+            and candidate_commit == old_commit
         ):
             provider_attempts.append(child)
         if (
             isinstance(candidate_manifest, dict)
-            and candidate_manifest.get("generator_code_commit") == new_first_parent
+            and candidate_commit == new_first_parent
             and launch_specification is not None
         ):
             launch_failure_provider_attempts.append(child)
@@ -282,10 +341,10 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
         inherited_prior_attempt_count = _assert_prior_technical_attempt_record(
             failed_stage, paths
         )
-    if failed_stage == stage_final:
+    if failed_stage != archive:
         archive_parent.mkdir(parents=False, exist_ok=True)
-        stage_final.rename(archive)
-    return {
+        failed_stage.rename(archive)
+    record = {
         "schema_version": "paper-rebuild-clean1-prior-technical-attempt-v1",
         "archived_stage_alias": f"<CLEAN_ROOT>/{FAILED_ATTEMPT_DIR_NAME}/{old_commit}",
         "code_freeze_commit": old_commit,
@@ -309,6 +368,32 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
         "superseded_reason": specification["superseded_reason"],
         "replacement_code_commit": new_code_commit,
     }
+    if specification.get("failure_state") == "partial_hidden_stage":
+        record.update(
+            {
+                "partial_stage_preserved": True,
+                "partial_finalization_reason": specification[
+                    "partial_finalization_reason"
+                ],
+                "evidence_manifest_present": False,
+                "canonical_stage_tree_sha256": validated[
+                    "canonical_stage_tree_sha256"
+                ],
+                "provider_bundle_hash": validated["provider_bundle_hash"],
+                "provider_role_count": validated["provider_role_count"],
+                "legacy_git_metadata_event_count": validated[
+                    "legacy_git_metadata_event_count"
+                ],
+            }
+        )
+    else:
+        record.update(
+            {
+                "partial_stage_preserved": False,
+                "evidence_manifest_present": True,
+            }
+        )
+    return record
 
 
 def _recover_pending_promotion(paths: Any) -> dict[str, Any] | None:
@@ -537,6 +622,7 @@ def _materialize_provider_attempt(
     protocol_path: Path,
     stage: Path,
     *,
+    expected_code_commit: str,
     rtklib_source_root: str | None,
     materialize_pinned_rtklib: bool,
 ) -> tuple[Any, Any]:
@@ -558,11 +644,16 @@ def _materialize_provider_attempt(
         str(attempt),
         "--protocol",
         str(protocol_path),
+        "--expected-code-commit",
+        expected_code_commit,
     ]
     if rtklib_source_root:
         command.extend(["--rtklib-source-root", rtklib_source_root])
     if materialize_pinned_rtklib:
         command.append("--materialize-pinned-rtklib")
+    before_commit, before_dirty = git_code_state(paths.code_root)
+    if before_dirty or before_commit != expected_code_commit:
+        raise RuntimeError("BLOCKED_CLEAN1_GIT_OR_CODE_FREEZE_FAILED")
     strace = shutil.which("strace")
     traced_command = (
         [strace, "-f", "-qq", "-yy", "-s", "4096", "-e", "trace=openat", "-o", str(strace_path), *command]
@@ -599,6 +690,9 @@ def _materialize_provider_attempt(
         completed = subprocess.CompletedProcess(
             traced_command, 127, "", f"provider attempt launch failure: {exc}"
         )
+    after_commit, after_dirty = git_code_state(paths.code_root)
+    if after_dirty or after_commit != expected_code_commit:
+        raise RuntimeError("BLOCKED_CLEAN1_GIT_OR_CODE_FREEZE_FAILED")
     if completed.returncode != 0:
         blocked_payload = {
             "terminal_status": "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN",
@@ -1212,6 +1306,7 @@ def main(argv: list[str] | None = None) -> int:
             paths,
             protocol.path,
             stage,
+            expected_code_commit=code_commit,
             rtklib_source_root=args.rtklib_source_root,
             materialize_pinned_rtklib=args.materialize_pinned_rtklib,
         )

@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import json
 import math
+import re
 import shutil
 from pathlib import Path
 from typing import Any
@@ -269,17 +270,38 @@ def generate_clean_by2_inputs(
     go2_roll_pitch_std_deg: float = GO2_ROLL_PITCH_STD_DEG,
     go2_horizontal_velocity_std_mps: float = GO2_HORIZONTAL_STD_MPS,
     stage_id: str = "PAPER10_CLEAN0",
+    expected_code_commit: str | None = None,
 ) -> dict[str, Any]:
-    """Materialize clean inputs/providers from four raw source files only."""
+    """Materialize clean inputs/providers from four raw source files only.
+
+    The default/smoke entrypoint owns its Git checks exactly as before.  The
+    formal CLEAN1 subprocess instead receives a commit already bracketed by
+    its parent outside the file-open trace; that path must not run ``git
+    status`` inside the traced child.
+    """
 
     provider_root = guard_path(paths.provider_root, role="provider root", allowed_root=paths.clean_root)
     manifest_path = provider_root / "CLEAN_INPUT_MANIFEST.json"
-    try:
-        generator_commit, generator_dirty = git_code_state(paths.code_root)
-    except ValueError as exc:
-        raise ProviderGenerationError(str(exc)) from exc
-    if generator_dirty:
-        raise ProviderGenerationError("Provider generation requires a clean committed Git worktree")
+    parent_bracketed_git_state = expected_code_commit is not None
+    if parent_bracketed_git_state:
+        if stage_id != "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION":
+            raise ProviderGenerationError(
+                "Expected formal code commit is only valid for the CLEAN1 formal stage"
+            )
+        if not isinstance(expected_code_commit, str) or not re.fullmatch(
+            r"[0-9a-f]{40}", expected_code_commit
+        ):
+            raise ProviderGenerationError("Expected formal code commit is invalid")
+        generator_commit = expected_code_commit
+    else:
+        try:
+            generator_commit, generator_dirty = git_code_state(paths.code_root)
+        except ValueError as exc:
+            raise ProviderGenerationError(str(exc)) from exc
+        if generator_dirty:
+            raise ProviderGenerationError(
+                "Provider generation requires a clean committed Git worktree"
+            )
     if provider_root.exists():
         if not replace:
             raise ProviderGenerationError("Clean provider root already exists; use an explicit replace request")
@@ -519,9 +541,12 @@ def generate_clean_by2_inputs(
         "generation_contract": generation_contract,
         "raw_doppler_provider_status": "not_required_for_basic_dual_yaw_smoke",
     }
-    final_commit, final_dirty = git_code_state(paths.code_root)
-    if final_commit != generator_commit or final_dirty:
-        raise ProviderGenerationError("Git code state changed during clean provider generation")
+    if not parent_bracketed_git_state:
+        final_commit, final_dirty = git_code_state(paths.code_root)
+        if final_commit != generator_commit or final_dirty:
+            raise ProviderGenerationError(
+                "Git code state changed during clean provider generation"
+            )
     write_json_atomic(provider_root / "DUAL_YAW_PHYSICAL_GATE.json", yaw_audit)
     write_json_atomic(provider_root / "DUAL_YAW_RUNTIME_CROSSCHECK.json", yaw_runtime_crosscheck)
     write_json_atomic(provider_root / "GO2_PROVIDER_REPORT.json", go2_report)

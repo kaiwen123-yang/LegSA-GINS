@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import inspect
 import json
 import struct
 import subprocess
@@ -32,9 +33,13 @@ from legsa_gins.paper_rebuild.evidence import (
     BY2_TRACE_RELATIVE_PATH,
     FAILED_CLEAN1_EXPECTED_RAW_READS,
     FAILED_CLEAN1_ATTEMPT_SPECS,
+    FAILED_CLEAN1_GIT_METADATA_SCAN_PATHS,
+    FAILED_CLEAN1_PARTIAL_PROVIDER_ROLES,
+    FAILED_CLEAN1_PARTIAL_STAGE_FILES,
     EvidenceContractError,
     RawAudit,
     assert_export_text_is_redacted,
+    canonical_file_tree_digest,
     parse_strace_openat_paths,
     validate_provider_source_read_set,
     validate_failed_clean1_attempt_evidence,
@@ -42,6 +47,7 @@ from legsa_gins.paper_rebuild.evidence import (
     verify_by2_raw_22,
 )
 from legsa_gins.paper_rebuild import formal_generation
+from legsa_gins.paper_rebuild import providers as clean_providers
 from legsa_gins.paper_rebuild.formal_generation import (
     _reuse_generated_dual_yaw_artifact,
     _source_gps_time_contract,
@@ -86,6 +92,11 @@ from legsa_gins.raw_gnss.ubx_raw_binary_rebuilder import ubx_checksum
 
 ROOT = Path(__file__).resolve().parents[2]
 DIGEST = "a" * 64
+STABLE_FAILED_CLEAN1_COMMITS = tuple(
+    commit
+    for commit, specification in FAILED_CLEAN1_ATTEMPT_SPECS.items()
+    if specification.get("failure_state") == "stable_exported_stage"
+)
 
 
 def _catalog():
@@ -815,6 +826,7 @@ def test_evaluator_retains_unmatched_and_wraps_yaw() -> None:
 
 
 def test_formal_runner_is_separate_and_evaluator_gate_creates_no_runtime(tmp_path: Path) -> None:
+    from types import SimpleNamespace
     raw = tmp_path / "raw"
     fix = raw / "fix"
     clean = tmp_path / "clean"
@@ -875,15 +887,62 @@ def test_formal_runner_is_separate_and_evaluator_gate_creates_no_runtime(tmp_pat
         runner.run()
     assert not runtime.exists()
     assert "start + 10" not in (ROOT / "src/legsa_gins/paper_rebuild/formal_runner.py").read_text()
+    child_source = (
+        ROOT / "scripts/paper_rebuild/materialize_clean1_by2_provider.py"
+    ).read_text(encoding="utf-8")
+    formal_source = (
+        ROOT / "src/legsa_gins/paper_rebuild/formal_generation.py"
+    ).read_text(encoding="utf-8")
+    parent_source = (
+        ROOT / "scripts/paper_rebuild/generate_clean1_by2_inputs.py"
+    ).read_text(encoding="utf-8")
+    assert "git_code_state" not in child_source
+    assert "load_formal_provider_bundle" not in child_source
+    assert "git_code_state" not in formal_source
+    assert '"--expected-code-commit"' in child_source
+    assert "before_commit, before_dirty = git_code_state" in parent_source
+    assert "after_commit, after_dirty = git_code_state" in parent_source
+    assert "bundle = load_formal_provider_bundle(attempt_paths)" in parent_source
+    assert (
+        inspect.signature(clean_providers.generate_clean_by2_inputs)
+        .parameters["expected_code_commit"]
+        .default
+        is None
+    )
+    assert (
+        inspect.signature(formal_generation.generate_formal_clean1_inputs)
+        .parameters["expected_code_commit"]
+        .default
+        is inspect.Parameter.empty
+    )
+    nonformal_paths = SimpleNamespace(
+        clean_root=tmp_path / "formal-stage-guard",
+        provider_root=tmp_path / "formal-stage-guard/provider",
+        code_root=ROOT,
+    )
+    with pytest.raises(
+        clean_providers.ProviderGenerationError,
+        match="only valid for the CLEAN1 formal stage",
+    ):
+        clean_providers.generate_clean_by2_inputs(
+            nonformal_paths,
+            expected_code_commit="a" * 40,
+            stage_id="PAPER10_CLEAN0",
+        )
 
 
 def test_export_leak_guard_rejects_local_absolute_paths() -> None:
     assert_export_text_is_redacted("alias=<RAW_ROOT>/BY2/source.csv")
     assert_export_text_is_redacted("schema=https://json-schema.org/draft/2020-12/schema")
     assert_export_text_is_redacted("fixed physical alternatives are +/-90 deg")
+    assert_export_text_is_redacted(
+        "relative=BY2_BY3/2026-03-06/高层数据/by2.txt"
+    )
     with pytest.raises(EvidenceContractError, match="absolute_local_path"):
         absolute = str(Path("/") / "mnt" / "g" / "private" / "source.csv")
         assert_export_text_is_redacted(f"path={absolute}")
+    with pytest.raises(EvidenceContractError, match="absolute_local_path"):
+        assert_export_text_is_redacted("path=/mnt/g/中文/source.csv")
 
 
 def test_strace_parser_resolves_utf8_octal_and_decoded_dirfd(tmp_path: Path) -> None:
@@ -1326,7 +1385,407 @@ def _write_failed_attempt_fixture(
     return paths, stage, provider_attempt
 
 
-@pytest.mark.parametrize("failed_commit", tuple(FAILED_CLEAN1_ATTEMPT_SPECS))
+def _write_partial_failed_attempt_fixture(
+    tmp_path: Path,
+    *,
+    prior_record: dict[str, object] | None = None,
+):
+    from legsa_gins.paper_rebuild.paths import CleanPaths
+    from scripts.paper_rebuild import generate_clean1_by2_inputs as generate
+
+    commit = "0aff9ea4c0b8103974591b060ea2b5627a6941ba"
+    clean = tmp_path / "clean"
+    raw = tmp_path / "raw"
+    code = tmp_path / "code"
+    code.mkdir(parents=True, exist_ok=True)
+    raw_hashes: dict[str, str] = {}
+    for index, relative in enumerate(BY2_RAW_RELATIVE_PATHS):
+        source = raw / relative
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_bytes(f"raw-{index}-{relative}\n".encode("utf-8"))
+        raw_hashes[relative] = hashlib.sha256(source.read_bytes()).hexdigest()
+    raw_lock = clean / "01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv"
+    raw_lock.parent.mkdir(parents=True, exist_ok=True)
+    raw_lock.write_text("fixture lock\n", encoding="utf-8")
+
+    stage = clean / (
+        f".{generate.STAGE_DIR_NAME}.attempt-partial-fixture"
+    )
+    for relative in generate.EVIDENCE_SUBDIRS:
+        (stage / relative).mkdir(parents=True, exist_ok=False)
+    provider_attempt = (
+        clean
+        / "04_PROVIDER_FREEZE/.CLEAN1_BY2_CLEAN_NORMAL_V1.attempt-partial-fixture"
+    )
+    artifact_paths = {
+        "imu_runtime_input": "runtime_inputs/BY2_PROCESS_DATA_COMPAT.imu",
+        "gnss_runtime_input": "runtime_inputs/BY2_PROCESS_DATA_COMPAT.gnss",
+        "dual_yaw_provider": "providers/dual_yaw_provider.csv",
+        "raw_doppler_provider": "providers/RAW_DOPPLER_VELOCITY.csv",
+        "go2_attitude_prior": "providers/GO2_ATTITUDE_WEAK_PRIORS.csv",
+        "go2_horizontal_velocity_prior": "providers/GO2_HORIZONTAL_VELOCITY_WEAK_PRIORS.csv",
+        "source_quality_metadata": "providers/SOURCE_QUALITY_METADATA.csv",
+    }
+    provider_hashes: dict[str, str] = {}
+    artifacts: dict[str, dict[str, object]] = {}
+    for role, relative in artifact_paths.items():
+        target = provider_attempt / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(f"{role}\n", encoding="utf-8")
+        provider_hashes[role] = hashlib.sha256(target.read_bytes()).hexdigest()
+        solver_input = role not in {"dual_yaw_provider", "source_quality_metadata"}
+        artifacts[role] = {
+            "relative_path": relative,
+            "source_generated": True,
+            "solver_input": solver_input,
+            "artifact_role": (
+                "potential_formal_solver_input"
+                if solver_input
+                else "audit_only_lineage"
+            ),
+        }
+    retained_relative_paths = {
+        "helper_executable": "raw_doppler_backend/helper/helper_executable",
+        "helper_source": "raw_doppler_backend/helper/helper_source.c",
+        "convbin_executable": "raw_doppler_backend/tools/convbin",
+        "rebuilt_ubx": "raw_doppler_backend/gnss1_rebuilt.ubx",
+        "rinex_obs": "raw_doppler_backend/rinex/gnss1.obs",
+        "rinex_nav": "raw_doppler_backend/rinex/gnss1.nav",
+        "formal_raw_doppler_provider": artifact_paths["raw_doppler_provider"],
+    }
+    retained: dict[str, dict[str, str]] = {}
+    for role, relative in retained_relative_paths.items():
+        target = provider_attempt / relative
+        if role != "formal_raw_doppler_provider":
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(f"retained-{role}\n", encoding="utf-8")
+        retained[role] = {
+            "relative_path": relative,
+            "sha256": hashlib.sha256(target.read_bytes()).hexdigest(),
+        }
+    raw_observation = next(
+        relative
+        for relative in BY2_RAW_RELATIVE_PATHS
+        if relative.endswith("/gnss1-raw.csv")
+    )
+    status_source = next(
+        relative
+        for relative in BY2_RAW_RELATIVE_PATHS
+        if relative.endswith("/gnss1-status.csv")
+    )
+    backend = _raw_doppler_report(raw_observation, status_source)
+    backend["raw_doppler_backend_source_hashes"] = {
+        raw_observation: raw_hashes[raw_observation],
+        status_source: raw_hashes[status_source],
+    }
+    backend["approx_position_source_hash"] = raw_hashes[status_source]
+    backend["retained_backend_artifacts"] = retained
+    backend["retained_backend_bundle_hash"] = hashlib.sha256(
+        json.dumps(retained, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    backend["helper_executable_hash"] = retained["helper_executable"]["sha256"]
+    backend["helper_source_hash"] = retained["helper_source"]["sha256"]
+    backend["convbin_executable_hash"] = retained["convbin_executable"]["sha256"]
+    backend["rebuilt_ubx_hash"] = retained["rebuilt_ubx"]["sha256"]
+    backend["obs_source_hash"] = retained["rinex_obs"]["sha256"]
+    backend["nav_source_hash"] = retained["rinex_nav"]["sha256"]
+    backend_path = provider_attempt / "RAW_DOPPLER_BACKEND_REPORT.json"
+    backend_path.write_text(json.dumps(backend) + "\n", encoding="utf-8")
+    actual_reads = []
+    for relative in FAILED_CLEAN1_EXPECTED_RAW_READS:
+        role = (
+            "propagation_imu_source"
+            if relative == BY2_BODY_RELATIVE_PATH
+            else "fixed_physical_dual_yaw_source"
+            if relative.endswith("gnss2-status.csv")
+            else "source_observation"
+        )
+        actual_reads.append(
+            {
+                "relative_path": relative,
+                "role": role,
+                "expected_sha256": raw_hashes[relative],
+                "actual_sha256": raw_hashes[relative],
+                "reader_component": "paper_rebuild.fixture",
+                "reason": "strict partial-attempt fixture",
+                "output_provider_lineage": "fixture provider",
+            }
+        )
+    bundle_hash = hashlib.sha256(
+        json.dumps(provider_hashes, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    manifest = {
+        "schema_version": "paper-rebuild-clean1-input-v1",
+        "generator_code_commit": commit,
+        "generator_worktree_dirty": False,
+        "raw_source_hashes": raw_hashes,
+        "actual_source_read_set": actual_reads,
+        "artifacts": artifacts,
+        "provider_hashes": provider_hashes,
+        "provider_bundle_hash": bundle_hash,
+        "raw_doppler_backend": backend,
+        "raw_doppler_backend_report_sha256": hashlib.sha256(
+            backend_path.read_bytes()
+        ).hexdigest(),
+        "synthetic_data_used": False,
+        "semisynthetic_data_used": False,
+        "trace_used_online": False,
+        "receiver_imu_as_body_imu": False,
+        "final_v23_output_solver_input": False,
+        "LegSA_output_solver_input": False,
+        "per_case_tuning": False,
+        "output_only_correction": False,
+        "epoch_deleted_for_metric": False,
+        "old_runtime_input_count": 0,
+        "legacy_provider_input_count": 0,
+        "legacy_row_input_count": 0,
+        "legacy_aggregate_input_count": 0,
+        "status_fallback_used": False,
+        "legacy_provider_used": False,
+    }
+    (provider_attempt / "CLEAN_INPUT_MANIFEST.json").write_text(
+        json.dumps(manifest, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    with (provider_attempt / "PROVIDER_HASH_MANIFEST.csv").open(
+        "w", encoding="utf-8", newline=""
+    ) as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=[
+                "provider_role",
+                "relative_path",
+                "sha256",
+                "solver_input",
+                "artifact_role",
+            ],
+        )
+        writer.writeheader()
+        for role in sorted(FAILED_CLEAN1_PARTIAL_PROVIDER_ROLES):
+            writer.writerow(
+                {
+                    "provider_role": role,
+                    "relative_path": artifacts[role]["relative_path"],
+                    "sha256": provider_hashes[role],
+                    "solver_input": artifacts[role]["solver_input"],
+                    "artifact_role": artifacts[role]["artifact_role"],
+                }
+            )
+
+    (stage / "00_AUTHORIZATION/AUTHORIZATION.md").write_text(
+        "# Fixture authorization\n", encoding="utf-8"
+    )
+    (stage / "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json").write_text(
+        json.dumps(prior_record or {}) + "\n", encoding="utf-8"
+    )
+    (stage / "01_GIT_FREEZE/CODE_FREEZE_COMMIT.txt").write_text(
+        commit + "\n", encoding="utf-8"
+    )
+    (stage / "01_GIT_FREEZE/GIT_STATE.json").write_text(
+        json.dumps({"code_freeze_commit": commit, "worktree_clean": True}) + "\n",
+        encoding="utf-8",
+    )
+    (stage / "01_GIT_FREEZE/TRACKED_FILE_HASH_MANIFEST.csv").write_text(
+        "relative_path,sha256,code_commit\n", encoding="utf-8"
+    )
+    (stage / "02_PROTOCOL_FREEZE/SCOPE_LOCK.yaml").write_text(
+        "stage_id: CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION\n", encoding="utf-8"
+    )
+    raw_fields = [
+        "audit_phase",
+        "relative_path",
+        "dataset",
+        "lock_role",
+        "expected_size_bytes",
+        "expected_sha256",
+        "exists",
+        "regular_file",
+        "realpath_confined",
+        "actual_size_bytes",
+        "actual_sha256",
+        "status",
+        "reason",
+    ]
+    for phase, name in (
+        ("pre_generation", "BY2_RAW_22_PRE_HASH_AUDIT.csv"),
+        ("post_generation", "BY2_RAW_22_POST_HASH_AUDIT.csv"),
+    ):
+        with (stage / "03_DATA_HASH_AND_ROLES" / name).open(
+            "w", encoding="utf-8", newline=""
+        ) as handle:
+            writer = csv.DictWriter(handle, fieldnames=raw_fields)
+            writer.writeheader()
+            for relative in BY2_RAW_RELATIVE_PATHS:
+                source = raw / relative
+                writer.writerow(
+                    {
+                        "audit_phase": phase,
+                        "relative_path": relative,
+                        "dataset": "BY2",
+                        "lock_role": "fixture",
+                        "expected_size_bytes": source.stat().st_size,
+                        "expected_sha256": raw_hashes[relative],
+                        "exists": True,
+                        "regular_file": True,
+                        "realpath_confined": True,
+                        "actual_size_bytes": source.stat().st_size,
+                        "actual_sha256": raw_hashes[relative],
+                        "status": "PASS",
+                        "reason": "",
+                    }
+                )
+    raw_summary = {
+        "passed": True,
+        "pre_verified": 22,
+        "post_verified": 22,
+        "raw_mutation": 0,
+    }
+    (stage / "03_DATA_HASH_AND_ROLES/BY2_RAW_22_SUMMARY.json").write_text(
+        json.dumps(raw_summary) + "\n", encoding="utf-8"
+    )
+    mutation = {
+        "passed": True,
+        "pre_verified": 22,
+        "post_verified": 22,
+        "raw_mutation": 0,
+        "changed_relative_paths": [],
+    }
+    (stage / "03_DATA_HASH_AND_ROLES/RAW_MUTATION_AUDIT.json").write_text(
+        json.dumps(mutation) + "\n", encoding="utf-8"
+    )
+    for name in (
+        "BY2_RAW_22_ROLE_MANIFEST.csv",
+        "CLEAN1_HARD_DENYLIST.csv",
+        "EVALUATOR_ONLY_ALLOWLIST.csv",
+        "HASH_VERIFIED_NOT_SOLVER_INPUT.csv",
+    ):
+        (stage / "03_DATA_HASH_AND_ROLES" / name).write_text(
+            "fixture\n", encoding="utf-8"
+        )
+    (stage / "03_DATA_HASH_AND_ROLES/PROVIDER_SOLVER_SOURCE_ALLOWLIST.csv").write_text(
+        "relative_path,role,expected_sha256,actual_sha256,reader_component,reason,output_provider_lineage\n",
+        encoding="utf-8",
+    )
+
+    trace_lines = []
+    for relative in FAILED_CLEAN1_EXPECTED_RAW_READS:
+        trace_lines.append(
+            f"100 openat(AT_FDCWD, {json.dumps(str(raw / relative), ensure_ascii=False)}, O_RDONLY) = 3\n"
+        )
+    for iteration in range(5):
+        for relative in sorted(FAILED_CLEAN1_GIT_METADATA_SCAN_PATHS):
+            trace_lines.append(
+                f"{200 + iteration} openat(AT_FDCWD<{code}>, "
+                f"{json.dumps(relative)}, O_RDONLY|O_DIRECTORY) = 5<{code / relative}>\n"
+            )
+    trace = stage / "04_PROVIDER_AUDIT/PROVIDER_FAILED_FILE_OPEN_TRACE.raw"
+    trace.write_text("".join(trace_lines), encoding="utf-8")
+    trace_hash = hashlib.sha256(trace.read_bytes()).hexdigest()
+    crosscheck = {
+        "schema_version": "paper-rebuild-provider-file-open-crosscheck-v1",
+        "strace_sha256": trace_hash,
+        "strace_available": True,
+        "provider_process_isolated": True,
+        "expected_raw_relative_paths": list(FAILED_CLEAN1_EXPECTED_RAW_READS),
+        "observed_expected_raw_open_counts": {
+            relative: 1 for relative in FAILED_CLEAN1_EXPECTED_RAW_READS
+        },
+        "missing_expected_raw_opens": [],
+        "unexpected_raw_root_relative_paths": [],
+        "unexpected_clean_root_relative_paths": [],
+        "trace_opened_by_provider_process": False,
+        "legacy_path_read_count": 45,
+        "opened_path_count": 49,
+        "passed": False,
+    }
+    (stage / "04_PROVIDER_AUDIT/PROVIDER_FILE_OPEN_CROSSCHECK.json").write_text(
+        json.dumps(crosscheck, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    terminal = "FAIL_CLEAN1_EVIDENCE_CONTAMINATION"
+    (stage / "04_PROVIDER_AUDIT/PROVIDER_ATTEMPT_BLOCKED.json").write_text(
+        json.dumps(
+            {
+                "terminal_status": terminal,
+                "provider_final_root_created": False,
+                "failed_attempt_preserved": True,
+                "file_open_crosscheck_passed": False,
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (stage / "04_PROVIDER_AUDIT/PROVIDER_FAILED_ACTUAL_READ_AUDIT.json").write_text(
+        json.dumps(
+            {
+                "strace_available": True,
+                "observed_partial_failed_attempt_raw_reads": sorted(
+                    FAILED_CLEAN1_EXPECTED_RAW_READS
+                ),
+                "unexpected_raw_reads": [],
+                "promoted_provider_actual_read_set": [],
+                "passed": True,
+            },
+            ensure_ascii=False,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    run_gate = {
+        "schema_version": "paper-rebuild-clean1-four-run-gate-v1",
+        "formal_run_count": 0,
+        "method_count_required": 4,
+        "metric_driven_rerun": False,
+        "terminal_status": terminal,
+        "paper_performance_claim": False,
+    }
+    (stage / "06_RUN_MANIFESTS/FOUR_METHOD_RUN_BLOCKED.json").write_text(
+        json.dumps(run_gate) + "\n", encoding="utf-8"
+    )
+    decision = {
+        "code_freeze_commit": commit,
+        "terminal_status": terminal,
+        "formal_run_count": 0,
+        "provider_promoted": False,
+        "provider_attempt_generated": True,
+        "raw_pre_verified": 22,
+        "raw_post_verified": 22,
+        "raw_mutation_count": 0,
+    }
+    (stage / "08_EVIDENCE_AUDIT/PRE_RUN_GATE_DECISION.json").write_text(
+        json.dumps(decision) + "\n", encoding="utf-8"
+    )
+    report = {
+        "code_freeze_commit": commit,
+        "terminal_decision": terminal,
+        "formal_run_count": 0,
+        "metrics_generated": False,
+        "paper_figure_count": 0,
+        "provider_promoted": False,
+    }
+    (stage / "09_REPORT/CLEAN1_FULL_REPORT.json").write_text(
+        json.dumps(report) + "\n", encoding="utf-8"
+    )
+    (stage / "09_REPORT/CLEAN1_FULL_REPORT.md").write_text(
+        "# Partial technical failure\n", encoding="utf-8"
+    )
+    assert {
+        path.relative_to(stage).as_posix()
+        for path in stage.rglob("*")
+        if path.is_file()
+    } == FAILED_CLEAN1_PARTIAL_STAGE_FILES
+    paths = CleanPaths(
+        config_path=tmp_path / "paths.local.yaml",
+        code_root=code,
+        raw_root=raw,
+        by2_fix_root=raw / "fix",
+        by2_go2_body=raw / "by2.txt",
+        clean_root=clean,
+        provider_root=clean / "04_PROVIDER_FREEZE/CLEAN1_BY2_CLEAN_NORMAL_V1",
+        runtime_root=clean / "05_BY2_CLEAN/CLEAN1_BY2_CLEAN_NORMAL_V1",
+    )
+    return paths, stage, provider_attempt
+
+
+@pytest.mark.parametrize("failed_commit", STABLE_FAILED_CLEAN1_COMMITS)
 def test_failed_attempt_validator_rehashes_full_stage_and_rejects_metrics(
     tmp_path: Path, failed_commit: str,
 ) -> None:
@@ -1355,7 +1814,7 @@ def test_failed_attempt_validator_rehashes_full_stage_and_rejects_metrics(
 
 
 def test_failed_attempt_validator_rejects_empty_required_provider_artifact(
-    tmp_path: Path,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     from scripts.paper_rebuild import generate_clean1_by2_inputs as generate
 
@@ -1371,6 +1830,146 @@ def test_failed_attempt_validator_rejects_empty_required_provider_artifact(
             provider_attempt=provider_attempt,
             expected_code_commit=generate.FAILED_ATTEMPT_CODE_FREEZE_COMMIT,
         )
+
+    partial_paths, partial_stage, partial_provider = (
+        _write_partial_failed_attempt_fixture(tmp_path / "partial")
+    )
+    partial_commit = "0aff9ea4c0b8103974591b060ea2b5627a6941ba"
+    monkeypatch.setitem(
+        FAILED_CLEAN1_ATTEMPT_SPECS[partial_commit],
+        "expected_canonical_stage_tree_sha256",
+        canonical_file_tree_digest(
+            partial_stage, FAILED_CLEAN1_PARTIAL_STAGE_FILES
+        ),
+    )
+    monkeypatch.setitem(
+        FAILED_CLEAN1_ATTEMPT_SPECS[partial_commit],
+        "expected_provider_manifest_sha256",
+        hashlib.sha256(
+            (partial_provider / "CLEAN_INPUT_MANIFEST.json").read_bytes()
+        ).hexdigest(),
+    )
+    validated = validate_failed_clean1_attempt_evidence(
+        partial_stage,
+        raw_root=partial_paths.raw_root,
+        code_root=partial_paths.code_root,
+        provider_attempt=partial_provider,
+        expected_code_commit=partial_commit,
+    )
+    assert validated["partial_stage_preserved"] is True
+    assert validated["evidence_file_count"] == 23
+    assert validated["export_member_count"] == 0
+    assert len(validated["canonical_stage_tree_sha256"]) == 64
+
+    manifest_path = partial_provider / "CLEAN_INPUT_MANIFEST.json"
+    original_manifest = manifest_path.read_bytes()
+    coordinated = json.loads(original_manifest)
+    coordinated["otherwise_unchecked_field"] = "tampered"
+    manifest_path.write_text(
+        json.dumps(coordinated, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    with pytest.raises(EvidenceContractError, match="provider manifest hash differs"):
+        validate_failed_clean1_attempt_evidence(
+            partial_stage,
+            raw_root=partial_paths.raw_root,
+            code_root=partial_paths.code_root,
+            provider_attempt=partial_provider,
+            expected_code_commit=partial_commit,
+        )
+    manifest_path.write_bytes(original_manifest)
+
+    for unexpected_name in (
+        "ROW_LEVEL_ERRORS.csv",
+        "AGGREGATE_METRICS.json",
+    ):
+        unexpected = partial_provider / unexpected_name
+        unexpected.write_text("forbidden\n", encoding="utf-8")
+        with pytest.raises(
+            EvidenceContractError, match="unexpected result evidence"
+        ):
+            validate_failed_clean1_attempt_evidence(
+                partial_stage,
+                raw_root=partial_paths.raw_root,
+                code_root=partial_paths.code_root,
+                provider_attempt=partial_provider,
+                expected_code_commit=partial_commit,
+            )
+        unexpected.unlink()
+
+    raw_relative = BY2_RAW_RELATIVE_PATHS[0]
+    raw_source = partial_paths.raw_root / raw_relative
+    original_raw = raw_source.read_bytes()
+    same_content_target = partial_paths.raw_root / "same-content-target.bin"
+    same_content_target.write_bytes(original_raw)
+    raw_source.unlink()
+    raw_source.symlink_to(same_content_target)
+    with pytest.raises(EvidenceContractError, match="path chain contains a symlink"):
+        validate_failed_clean1_attempt_evidence(
+            partial_stage,
+            raw_root=partial_paths.raw_root,
+            code_root=partial_paths.code_root,
+            provider_attempt=partial_provider,
+            expected_code_commit=partial_commit,
+        )
+    raw_source.unlink()
+    raw_source.write_bytes(original_raw)
+    same_content_target.unlink()
+
+    manifest = json.loads(
+        (partial_provider / "CLEAN_INPUT_MANIFEST.json").read_text(encoding="utf-8")
+    )
+    retained = manifest["raw_doppler_backend"]["retained_backend_artifacts"]
+    for retained_role in ("rinex_nav", "helper_executable"):
+        retained_path = partial_provider / retained[retained_role]["relative_path"]
+        original_retained = retained_path.read_bytes()
+        retained_path.write_bytes(original_retained + b"tamper\n")
+        with pytest.raises(
+            EvidenceContractError, match="retained Raw Doppler artifact hash differs"
+        ):
+            validate_failed_clean1_attempt_evidence(
+                partial_stage,
+                raw_root=partial_paths.raw_root,
+                code_root=partial_paths.code_root,
+                provider_attempt=partial_provider,
+                expected_code_commit=partial_commit,
+            )
+        retained_path.write_bytes(original_retained)
+
+    artifact = partial_provider / "providers/RAW_DOPPLER_VELOCITY.csv"
+    original = artifact.read_bytes()
+    artifact.write_bytes(original + b"tamper\n")
+    with pytest.raises(EvidenceContractError, match="artifact hash differs"):
+        validate_failed_clean1_attempt_evidence(
+            partial_stage,
+            raw_root=partial_paths.raw_root,
+            code_root=partial_paths.code_root,
+            provider_attempt=partial_provider,
+            expected_code_commit=partial_commit,
+        )
+    artifact.write_bytes(original)
+    authorization = partial_stage / "00_AUTHORIZATION/AUTHORIZATION.md"
+    original_authorization = authorization.read_bytes()
+    authorization.write_bytes(original_authorization + b"tamper\n")
+    with pytest.raises(EvidenceContractError, match="canonical stage tree differs"):
+        validate_failed_clean1_attempt_evidence(
+            partial_stage,
+            raw_root=partial_paths.raw_root,
+            code_root=partial_paths.code_root,
+            provider_attempt=partial_provider,
+            expected_code_commit=partial_commit,
+        )
+    authorization.write_bytes(original_authorization)
+    extra = partial_stage / "07_EVALUATION/ROW_LEVEL_ERRORS.csv"
+    extra.write_text("forbidden\n", encoding="utf-8")
+    with pytest.raises(EvidenceContractError, match="exact tree differs"):
+        validate_failed_clean1_attempt_evidence(
+            partial_stage,
+            raw_root=partial_paths.raw_root,
+            code_root=partial_paths.code_root,
+            provider_attempt=partial_provider,
+            expected_code_commit=partial_commit,
+        )
+    extra.unlink()
 
 
 def test_exact_raw_blocked_stage_is_archived_and_indexed_without_delete(
@@ -1422,7 +2021,7 @@ def test_exact_raw_blocked_stage_is_archived_and_indexed_without_delete(
     assert recovered["archive_recovered_after_interruption"] is True
 
     launch_commit = "b37e0ff1d38a750fb6e035f3b4da3f5b788fbdba"
-    third_commit = "3" * 40
+    third_commit = "0aff9ea4c0b8103974591b060ea2b5627a6941ba"
     paths, second_stage, second_provider_attempt = _write_failed_attempt_fixture(
         tmp_path, new_commit, prior_record=record
     )
@@ -1467,6 +2066,136 @@ def test_exact_raw_blocked_stage_is_archived_and_indexed_without_delete(
     assert audit_script._count_prior_retry_launch_failures(
         final_stage, paths
     ) == 1
+
+    # The next retry must preserve the exact partial hidden 0aff stage.  A
+    # final provider/runtime/stage or a second hidden stage makes selection
+    # ambiguous and fails before any rename.
+    final_stage.rename(paths.clean_root / ".audit-only-not-final")
+    partial_paths, partial_stage, partial_provider = (
+        _write_partial_failed_attempt_fixture(tmp_path, prior_record=second_record)
+    )
+    monkeypatch.setitem(
+        FAILED_CLEAN1_ATTEMPT_SPECS[third_commit],
+        "expected_canonical_stage_tree_sha256",
+        canonical_file_tree_digest(
+            partial_stage, FAILED_CLEAN1_PARTIAL_STAGE_FILES
+        ),
+    )
+    monkeypatch.setitem(
+        FAILED_CLEAN1_ATTEMPT_SPECS[third_commit],
+        "expected_provider_manifest_sha256",
+        hashlib.sha256(
+            (partial_provider / "CLEAN_INPUT_MANIFEST.json").read_bytes()
+        ).hexdigest(),
+    )
+    fourth_commit = "4" * 40
+    monkeypatch.setattr(
+        generate,
+        "_git_first_parent",
+        lambda _root, commit: (
+            third_commit
+            if commit == fourth_commit
+            else launch_commit
+            if commit == third_commit
+            else new_commit
+        ),
+    )
+    partial_paths.runtime_root.mkdir(parents=True)
+    with pytest.raises(RuntimeError, match="FAIL_CLEAN1_EVIDENCE_CONTAMINATION"):
+        generate._preserve_exact_raw_doppler_blocked_stage_for_retry(
+            partial_paths, new_code_commit=fourth_commit
+        )
+    partial_paths.runtime_root.rmdir()
+    partial_paths.provider_root.mkdir()
+    with pytest.raises(RuntimeError, match="FAIL_CLEAN1_EVIDENCE_CONTAMINATION"):
+        generate._preserve_exact_raw_doppler_blocked_stage_for_retry(
+            partial_paths, new_code_commit=fourth_commit
+        )
+    partial_paths.provider_root.rmdir()
+    ambiguous_final = partial_paths.clean_root / generate.STAGE_DIR_NAME
+    ambiguous_final.mkdir()
+    with pytest.raises(RuntimeError, match="FAIL_CLEAN1_EVIDENCE_CONTAMINATION"):
+        generate._preserve_exact_raw_doppler_blocked_stage_for_retry(
+            partial_paths, new_code_commit=fourth_commit
+        )
+    ambiguous_final.rmdir()
+    extra_hidden = partial_paths.clean_root / (
+        f".{generate.STAGE_DIR_NAME}.attempt-unexpected"
+    )
+    extra_hidden.mkdir()
+    with pytest.raises(RuntimeError, match="FAIL_CLEAN1_EVIDENCE_CONTAMINATION"):
+        generate._preserve_exact_raw_doppler_blocked_stage_for_retry(
+            partial_paths, new_code_commit=fourth_commit
+        )
+    extra_hidden.rmdir()
+
+    partial_record = generate._preserve_exact_raw_doppler_blocked_stage_for_retry(
+        partial_paths, new_code_commit=fourth_commit
+    )
+    partial_archive = (
+        partial_paths.clean_root
+        / generate.FAILED_ATTEMPT_DIR_NAME
+        / third_commit
+    )
+    assert not partial_stage.exists()
+    assert partial_archive.is_dir()
+    assert partial_record["partial_stage_preserved"] is True
+    assert partial_record["partial_finalization_reason"] == (
+        "unicode_relative_path_export_redaction_false_positive"
+    )
+    assert partial_record["evidence_manifest_present"] is False
+    assert partial_record["export_member_count"] == 0
+    assert partial_record["evidence_file_count"] == 23
+    assert len(partial_record["canonical_stage_tree_sha256"]) == 64
+    assert partial_record["provider_attempt_alias"].endswith(partial_provider.name)
+    recovered_partial = generate._preserve_exact_raw_doppler_blocked_stage_for_retry(
+        partial_paths, new_code_commit=fourth_commit
+    )
+    assert recovered_partial["archive_recovered_after_interruption"] is True
+
+    current = partial_paths.clean_root / generate.STAGE_DIR_NAME
+    (current / "00_AUTHORIZATION").mkdir(parents=True)
+    (current / "01_GIT_FREEZE").mkdir()
+    (current / "01_GIT_FREEZE/CODE_FREEZE_COMMIT.txt").write_text(
+        fourth_commit + "\n", encoding="utf-8"
+    )
+    (current / "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json").write_text(
+        json.dumps(partial_record), encoding="utf-8"
+    )
+
+    def full_ancestry_result(command, **kwargs):
+        commit = command[-1]
+        parent = {
+            new_commit: old_commit,
+            launch_commit: new_commit,
+            third_commit: launch_commit,
+            fourth_commit: third_commit,
+        }[commit]
+        return SimpleNamespace(returncode=0, stdout=f"{commit} {parent}\n")
+
+    monkeypatch.setattr(audit_script.subprocess, "run", full_ancestry_result)
+    assert audit_script._assert_prior_technical_attempt_record(
+        current, partial_paths
+    ) == 3
+    assert audit_script._count_prior_retry_launch_failures(
+        current, partial_paths
+    ) == 1
+
+    archive_backing = partial_archive.with_name(partial_archive.name + ".backing")
+    partial_archive.rename(archive_backing)
+    partial_archive.symlink_to(archive_backing, target_is_directory=True)
+    with pytest.raises(RuntimeError, match="FAIL_CLEAN1_EVIDENCE_CONTAMINATION"):
+        audit_script._assert_prior_technical_attempt_record(current, partial_paths)
+    partial_archive.unlink()
+    archive_backing.rename(partial_archive)
+
+    provider_backing = partial_provider.with_name(partial_provider.name + ".backing")
+    partial_provider.rename(provider_backing)
+    partial_provider.symlink_to(provider_backing, target_is_directory=True)
+    with pytest.raises(RuntimeError, match="FAIL_CLEAN1_EVIDENCE_CONTAMINATION"):
+        audit_script._assert_prior_technical_attempt_record(current, partial_paths)
+    partial_provider.unlink()
+    provider_backing.rename(partial_provider)
 
 
 def test_promotion_recovery_handles_hidden_stage_and_complete_marker_gap(

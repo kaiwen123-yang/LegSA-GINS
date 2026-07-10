@@ -15,7 +15,6 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
 from legsa_gins.paper_rebuild.formal_generation import generate_formal_clean1_inputs
-from legsa_gins.paper_rebuild.formal_provider import load_formal_provider_bundle
 from legsa_gins.paper_rebuild.paths import assert_clean1_path_contract, guard_path, load_clean_paths
 from legsa_gins.paper_rebuild.protocol import load_clean1_protocol
 
@@ -25,6 +24,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--config", required=True)
     parser.add_argument("--provider-attempt-root", required=True)
     parser.add_argument("--protocol", required=True)
+    parser.add_argument("--expected-code-commit", required=True)
     parser.add_argument("--rtklib-source-root")
     parser.add_argument("--materialize-pinned-rtklib", action="store_true")
     args = parser.parse_args(argv)
@@ -42,18 +42,20 @@ def main(argv: list[str] | None = None) -> int:
     attempt_paths = replace(paths, provider_root=attempt)
     manifest = generate_formal_clean1_inputs(
         attempt_paths,
+        expected_code_commit=args.expected_code_commit,
         rtklib_source_root=args.rtklib_source_root,
         materialize_pinned_rtklib=args.materialize_pinned_rtklib,
         provider_generation=protocol.payload["provider_generation"],
     )
-    bundle = load_formal_provider_bundle(attempt_paths)
     print(
         json.dumps(
             {
                 "schema_version": "paper-rebuild-provider-attempt-v1",
-                "provider_bundle_hash": bundle.provider_bundle_hash,
-                "generator_code_commit": bundle.generator_code_commit,
-                "raw_doppler_valid_epoch_count": bundle.raw_doppler_report["valid_epoch_count"],
+                "provider_bundle_hash": manifest["provider_bundle_hash"],
+                "generator_code_commit": manifest["generator_code_commit"],
+                "raw_doppler_valid_epoch_count": manifest["raw_doppler_backend"][
+                    "valid_epoch_count"
+                ],
                 "trace_used_online": manifest["trace_used_online"],
                 "terminal_status": "READY_FOR_ATOMIC_PROMOTION",
             },
