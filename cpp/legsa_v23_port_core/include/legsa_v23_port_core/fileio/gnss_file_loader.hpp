@@ -23,6 +23,7 @@ class GnssFileLoader {
   bool next(GnssData& gnss);
   bool isEof() const;
   bool isOpen() const;
+  bool allValidityExplicit() const;
 
  private:
   std::vector<GnssData> rows_;

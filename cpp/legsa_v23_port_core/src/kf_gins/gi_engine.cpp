@@ -246,7 +246,14 @@ void GIEngine::addImuData(const ImuData& imu, bool compensate) {
 // 中文说明：GNSS 是 15 列松组合观测，不是 raw pseudorange/Doppler。
 void GIEngine::addGnssData(const GnssData& gnss) {
   gnssdata_ = gnss;
-  gnssdata_.isvalid = true;
+  // 中文说明：legacy 15 列继续视为三类观测均有效；formal validity 则保留自然 dropout，
+  // 不得因 velocity/yaw 缺测而删除同一历元的 position，也不得把无效字段恢复为有效。
+  if (!gnssdata_.validity_explicit) {
+    gnssdata_.has_position = true;
+    gnssdata_.has_velocity = true;
+    gnssdata_.has_yaw = true;
+  }
+  gnssdata_.isvalid = gnssdata_.has_position || gnssdata_.has_velocity || gnssdata_.has_yaw;
 }
 
 int GIEngine::isToUpdate() const {
@@ -353,7 +360,7 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
   const bool qa_reject_position =
       qa_active && (qa_decision.gnss_position_action == "REJECT" ||
                     qa_decision.gnss_position_action == "HOLD");
-  if (!qa_reject_position) {
+  if (policy_gnss.has_position && !qa_reject_position) {
     applyPositionUpdate(policy_gnss);
   }
   if (options_.enable_basic_dual_yaw_baseline) {
@@ -369,7 +376,8 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
     applyVelocityUpdate(stressed_gnss);
   }
   const bool qa_reject_yaw = qa_active && qa_decision.a1_measurement_action == "REJECT";
-  if (!qa_reject_yaw && policy_gnss.has_yaw && options_.yaw_scheme_C_enabled) {
+  if (!qa_reject_yaw && policy_gnss.has_yaw && options_.enable_dual_yaw_update &&
+      options_.yaw_scheme_C_enabled) {
     applyYawUpdate(policy_gnss);
   }
   // 中文说明：raw Doppler auxiliary velocity factor 与 GNSS epoch 对齐，并在 stateFeedback 前进入 EKF。
@@ -547,6 +555,14 @@ std::size_t GIEngine::yawDownweightCount() const {
 
 std::size_t GIEngine::yawRejectCount() const {
   return yaw_reject_count_;
+}
+
+std::size_t GIEngine::sourceAwareEvaluationCount() const {
+  return source_aware_evaluation_count_;
+}
+
+std::size_t GIEngine::sourceAwareWeightChangedCount() const {
+  return source_aware_weight_changed_count_;
 }
 
 std::size_t GIEngine::rawDopplerUpdateCount() const {
@@ -1154,7 +1170,8 @@ void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
   }
   EKFUpdate(dz, H, scaled_R);
   ++go2_velocity_diagnostic_prior_status_.update_count;
-  if (best->std_ned_mps[2] >= 999.0 || best->prior_policy.find("horizontal") != std::string::npos) {
+  if (horizontal_2d || best->std_ned_mps[2] >= 999.0 ||
+      best->prior_policy.find("horizontal") != std::string::npos) {
     go2_velocity_diagnostic_prior_status_.horizontal_only = true;
     go2_velocity_diagnostic_prior_status_.vertical_disabled = true;
     ++go2_velocity_diagnostic_prior_status_.horizontal_update_count;
@@ -1452,6 +1469,12 @@ source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(
     result.scaled_R_trace = matrixTrace(scaled_R);
     if (source_aware_active && options_.source_aware_policy_config.source_aware_trace_enabled) {
       source_aware_trace_.add(metadata_copy.time, update_count_ + 1, result);
+    }
+  }
+  if (source_aware_active) {
+    ++source_aware_evaluation_count_;
+    if (std::fabs(result.combined_R_scale - 1.0) > 1.0e-12) {
+      ++source_aware_weight_changed_count_;
     }
   }
   if (quality_state_manager_.traceEnabled()) {

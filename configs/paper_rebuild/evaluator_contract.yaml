@@ -1,0 +1,79 @@
+schema_version: paper_rebuild.evaluator_contract.v1
+contract_id: CLEAN1_BY2_EVALUATOR_V1
+reference_wording: aligned evaluation-only reference
+reference_independence_established: false
+freeze_before_solver_output_inspection: true
+
+timestamps:
+  solver_timestamp_column: time
+  solver_timestamp_definition: seconds_since_source_utc_day_floor
+  reference_timestamp_column: time
+  reference_timestamp_definition: unix_seconds_from_hash_locked_trace
+  common_time_system: unix_seconds
+  solver_to_common_formula: solver_time_plus_window_source_time_origin_seconds
+  reference_to_common_formula: identity
+  matching_policy: nearest_neighbor
+  max_gap_policy: ceil_reference_max_positive_period_to_fixed_0p01_seconds
+  max_gap_ceiling_quantum_seconds: 0.01
+  duplicate_solver_timestamp_policy: fail
+  duplicate_reference_timestamp_policy: fail
+  unmatched_epoch_policy: retain_row_and_label_unmatched
+  extrapolation_policy: forbidden
+  first_last_extrapolation: forbidden
+  yaw_interpolation_policy: none_nearest_neighbor_wrap_after_match
+  trace_based_time_offset_search: false
+
+frames:
+  solver_position: geodetic_WGS84_lat_lon_height
+  reference_position: geodetic_WGS84_lat_lon_height
+  position_error_frame: local_NED_at_matched_reference
+  solver_attitude: NED_FRD_degrees
+  reference_attitude: NOT_PROVEN_FROM_ACTIVE_SOURCE_METADATA
+  reference_attitude_frame_contract_proven: false
+  reference_frame_metadata_source: NOT_AVAILABLE
+  reference_yaw_to_solver_formula: NOT_AUTHORIZED_UNTIL_FRAME_CONTRACT_PROVEN
+  reference_roll_pitch_conversion: NOT_PROVEN
+  yaw_wrap: signed_minus180_to_180
+  lever_arm_policy: identical_frozen_solver_reference_point_or_block
+  reference_point_contract_proven: false
+  reference_point_block_status: BLOCKED_CLEAN1_EVALUATOR_CONTRACT_FAILED
+  method_specific_conversion: false
+
+reference_columns:
+  latitude: lat
+  longitude: lon
+  height: height
+  yaw: yaw
+  pitch: pitch
+  roll: roll
+  velocity: NOT_AVAILABLE
+
+solver_columns:
+  latitude: lat_deg
+  longitude: lon_deg
+  height: height_m
+  velocity_north: vn
+  velocity_east: ve
+  velocity_down: vd
+  yaw: yaw_deg
+  pitch: pitch_deg
+  roll: roll_deg
+
+forbidden_postprocessing:
+  translation_alignment: false
+  rotation_alignment: false
+  yaw_alignment: false
+  umeyama_or_se3_alignment: false
+  trace_based_sign_or_axis_selection: false
+  output_smoothing: false
+  output_substitution: false
+  direct_nav_overwrite: false
+  output_only_correction: false
+  metric_driven_epoch_deletion: false
+
+aggregate:
+  metrics: [rmse, mae, median, p95, max]
+  crosscheck_absolute_tolerance: 1.0e-10
+  crosscheck_relative_tolerance: 1.0e-10
+  minimum_coverage_ratio: 0.0
+  unsupported_value: NOT_AVAILABLE

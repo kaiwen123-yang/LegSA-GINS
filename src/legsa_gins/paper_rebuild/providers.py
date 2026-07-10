@@ -84,6 +84,7 @@ def build_physical_dual_yaw_provider(
     *,
     base_time: float,
     max_rows: int | None = None,
+    fixed_yaw_std_deg: float = 1.5,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Build every accepted status epoch, then fail closed on whole-set geometry."""
 
@@ -120,7 +121,7 @@ def build_physical_dual_yaw_provider(
                 "baseline_length_m": length,
                 "baseline_heading_ned_deg": baseline_heading,
                 "body_yaw_ned_deg": body_yaw,
-                "yaw_std_deg": 1.5,
+                "yaw_std_deg": fixed_yaw_std_deg,
                 "physical_in_band": PHYSICAL_BASELINE_MIN_M <= length <= PHYSICAL_BASELINE_MAX_M,
                 "source_status": "active" if physical_pass else "blocked_physical_gate",
                 "gnss_order": "GNSS2-GNSS1",
@@ -149,11 +150,18 @@ def build_physical_dual_yaw_provider(
     return rows, audit
 
 
-def _go2_priors(body: Path, *, base_time: float, max_messages: int | None) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+def _go2_priors(
+    body: Path,
+    *,
+    base_time: float,
+    max_messages: int | None,
+    frame_name: str = "go2_velocity_as_body_flu_then_rotate_by_go2_attitude",
+    roll_pitch_std_deg: float = GO2_ROLL_PITCH_STD_DEG,
+    horizontal_std_mps: float = GO2_HORIZONTAL_STD_MPS,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
     rows = parse_go2_body_state_text(body, max_messages=max_messages)
     attitude: list[dict[str, Any]] = []
     horizontal: list[dict[str, Any]] = []
-    frame_name = "go2_velocity_as_body_flu_then_rotate_by_go2_attitude"
     for row in rows:
         timestamp = row.get("timestamp")
         roll = row.get("roll_rad")
@@ -166,8 +174,8 @@ def _go2_priors(body: Path, *, base_time: float, max_messages: int | None) -> tu
                 "time": time_value,
                 "roll_rad": float(roll),
                 "pitch_rad": float(pitch),
-                "std_roll_rad": math.radians(GO2_ROLL_PITCH_STD_DEG),
-                "std_pitch_rad": math.radians(GO2_ROLL_PITCH_STD_DEG),
+                "std_roll_rad": math.radians(roll_pitch_std_deg),
+                "std_pitch_rad": math.radians(roll_pitch_std_deg),
                 "source_status": "active",
                 "mode": row.get("mode", ""),
                 "gait_type": row.get("gait_type", ""),
@@ -183,8 +191,8 @@ def _go2_priors(body: Path, *, base_time: float, max_messages: int | None) -> tu
                     "vn": velocity[0],
                     "ve": velocity[1],
                     "vd": 0.0,
-                    "std_vn": GO2_HORIZONTAL_STD_MPS,
-                    "std_ve": GO2_HORIZONTAL_STD_MPS,
+                    "std_vn": horizontal_std_mps,
+                    "std_ve": horizontal_std_mps,
                     "std_vd": 999.0,
                     "confidence": "",
                     "confidence_level": "weak_auxiliary",
@@ -247,6 +255,20 @@ def generate_clean_by2_inputs(
     max_raw_rows: int | None = None,
     max_imu_messages: int | None = None,
     replace: bool = False,
+    yaw_sign: float = 1.0,
+    yaw_install_offset_deg: float = 0.0,
+    status_fixed_yaw_std_deg: float = 1.5,
+    receiver_velocity_match_tolerance_seconds: float = 0.1,
+    dual_yaw_match_tolerance_seconds: float = 0.6,
+    receiver_velocity_std_mps: float = 0.05,
+    imu_install_roll_deg: float = -1.0,
+    imu_install_pitch_deg: float = 0.0,
+    imu_install_yaw_deg: float = 0.0,
+    imu_gnss_time_offset: float = 0.0,
+    go2_velocity_frame_transform: str = "go2_velocity_as_body_flu_then_rotate_by_go2_attitude",
+    go2_roll_pitch_std_deg: float = GO2_ROLL_PITCH_STD_DEG,
+    go2_horizontal_velocity_std_mps: float = GO2_HORIZONTAL_STD_MPS,
+    stage_id: str = "PAPER10_CLEAN0",
 ) -> dict[str, Any]:
     """Materialize clean inputs/providers from four raw source files only."""
 
@@ -287,6 +309,7 @@ def generate_clean_by2_inputs(
         source_paths["gnss2_status"],
         base_time=base_time,
         max_rows=max_status_rows,
+        fixed_yaw_std_deg=status_fixed_yaw_std_deg,
     )
     if not yaw_audit["physical_baseline_gate_pass"]:
         write_json_atomic(provider_root / "DUAL_YAW_PHYSICAL_GATE_BLOCKED.json", yaw_audit)
@@ -298,12 +321,21 @@ def generate_clean_by2_inputs(
         provider_root / "runtime_inputs",
         base_time=base_time,
         yaw_source_mode="status",
-        yaw_sign=1.0,
-        yaw_install_offset_deg=0.0,
+        yaw_sign=yaw_sign,
+        yaw_install_offset_deg=yaw_install_offset_deg,
         yaw_std_mode="fixed_1p5",
         enable_outage=False,
         outlier_mode="none",
         yaw_noise_std_deg=0.0,
+        status_fixed_yaw_std_deg=status_fixed_yaw_std_deg,
+        receiver_velocity_match_tolerance_seconds=receiver_velocity_match_tolerance_seconds,
+        dual_yaw_match_tolerance_seconds=dual_yaw_match_tolerance_seconds,
+        receiver_velocity_std_mps=receiver_velocity_std_mps,
+        imu_install_roll_deg=imu_install_roll_deg,
+        imu_install_pitch_deg=imu_install_pitch_deg,
+        imu_install_yaw_deg=imu_install_yaw_deg,
+        imu_gnss_time_offset=imu_gnss_time_offset,
+        stage_id=stage_id,
         max_status_rows=max_status_rows,
         max_raw_rows=max_raw_rows,
         max_imu_messages=max_imu_messages,
@@ -341,6 +373,9 @@ def generate_clean_by2_inputs(
         paths.by2_go2_body,
         base_time=base_time,
         max_messages=max_imu_messages,
+        frame_name=go2_velocity_frame_transform,
+        roll_pitch_std_deg=go2_roll_pitch_std_deg,
+        horizontal_std_mps=go2_horizontal_velocity_std_mps,
     )
     if not attitude_rows or not horizontal_rows:
         raise ProviderGenerationError("Go2 raw source did not produce clean weak-prior rows")
@@ -434,6 +469,20 @@ def generate_clean_by2_inputs(
         "yaw_order": "GNSS2-GNSS1",
         "lateral_to_body_offset_deg": 90.0,
         "go2_prior_policy": "weak_auxiliary_not_truth",
+        "yaw_sign": yaw_sign,
+        "yaw_install_offset_deg": yaw_install_offset_deg,
+        "status_fixed_yaw_std_deg": status_fixed_yaw_std_deg,
+        "receiver_velocity_match_tolerance_seconds": receiver_velocity_match_tolerance_seconds,
+        "dual_yaw_match_tolerance_seconds": dual_yaw_match_tolerance_seconds,
+        "receiver_velocity_std_mps": receiver_velocity_std_mps,
+        "imu_install_roll_deg": imu_install_roll_deg,
+        "imu_install_pitch_deg": imu_install_pitch_deg,
+        "imu_install_yaw_deg": imu_install_yaw_deg,
+        "imu_gnss_time_offset": imu_gnss_time_offset,
+        "go2_velocity_frame_transform": go2_velocity_frame_transform,
+        "go2_roll_pitch_std_deg": go2_roll_pitch_std_deg,
+        "go2_horizontal_velocity_std_mps": go2_horizontal_velocity_std_mps,
+        "stage_id": stage_id,
     }
     generator_config_hash = sha256_text(
         json.dumps(generation_contract, ensure_ascii=False, sort_keys=True, separators=(",", ":"))

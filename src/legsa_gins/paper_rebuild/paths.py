@@ -209,6 +209,10 @@ def load_clean_paths(config_path: str | Path, *, require_sources: bool = True) -
 
     if legacy_reason(code_root):
         raise PathContractError("code_root may not be inside a legacy runtime tree")
+    if legacy_reason(clean_root):
+        raise PathContractError("clean_root crosses the legacy denylist")
+    if is_within(clean_root, raw_root) or is_within(raw_root, clean_root):
+        raise PathContractError("clean_root and raw_root must be mutually disjoint")
     guard_path(by2_fix_root, role="BY2 fix source", allowed_root=raw_root, must_exist=require_sources)
     guard_path(
         by2_go2_body,
@@ -219,6 +223,13 @@ def load_clean_paths(config_path: str | Path, *, require_sources: bool = True) -
     )
     guard_path(provider_root, role="clean provider root", allowed_root=clean_root)
     guard_path(runtime_root, role="clean runtime root", allowed_root=clean_root)
+    if is_within(provider_root, runtime_root) or is_within(runtime_root, provider_root):
+        raise PathContractError("provider_root and runtime_root must be mutually disjoint")
+    if provider_root.name == "CLEAN1_BY2_CLEAN_NORMAL_V1" or runtime_root.name == "CLEAN1_BY2_CLEAN_NORMAL_V1":
+        if provider_root != clean_root / "04_PROVIDER_FREEZE" / "CLEAN1_BY2_CLEAN_NORMAL_V1":
+            raise PathContractError("CLEAN1 provider_root exact suffix mismatch")
+        if runtime_root != clean_root / "05_BY2_CLEAN" / "CLEAN1_BY2_CLEAN_NORMAL_V1":
+            raise PathContractError("CLEAN1 runtime_root exact suffix mismatch")
     if require_sources:
         if not code_root.is_dir():
             raise PathContractError("paths.code_root is missing")
@@ -237,3 +248,29 @@ def load_clean_paths(config_path: str | Path, *, require_sources: bool = True) -
         provider_root=provider_root,
         runtime_root=runtime_root,
     )
+
+
+def assert_clean1_path_contract(paths: CleanPaths, expected_code_root: str | Path) -> None:
+    """Bind every CLEAN1 entrypoint to this exact worktree and frozen root suffixes."""
+
+    # Local import avoids a module-load cycle; the registry is the single exact
+    # BY2 relative-path source used by provider and hash-lock validation.
+    from .evidence import BY2_BODY_RELATIVE_PATH, BY2_FIX_PREFIX
+
+    expected_code = Path(expected_code_root).resolve(strict=True)
+    if paths.code_root != expected_code:
+        raise PathContractError("CLEAN1 paths.code_root is not the executing worktree")
+    expected_provider = (
+        paths.clean_root / "04_PROVIDER_FREEZE" / "CLEAN1_BY2_CLEAN_NORMAL_V1"
+    )
+    expected_runtime = (
+        paths.clean_root / "05_BY2_CLEAN" / "CLEAN1_BY2_CLEAN_NORMAL_V1"
+    )
+    if paths.provider_root != expected_provider:
+        raise PathContractError("CLEAN1 provider_root exact suffix mismatch")
+    if paths.runtime_root != expected_runtime:
+        raise PathContractError("CLEAN1 runtime_root exact suffix mismatch")
+    if paths.by2_fix_root != (paths.raw_root / BY2_FIX_PREFIX).resolve(strict=False):
+        raise PathContractError("CLEAN1 by2_fix_root does not match the canonical lock path")
+    if paths.by2_go2_body != (paths.raw_root / BY2_BODY_RELATIVE_PATH).resolve(strict=False):
+        raise PathContractError("CLEAN1 by2_go2_body does not match the canonical lock path")

@@ -16,11 +16,20 @@ namespace legsa_v23_port_core {
 
 struct RawDopplerVelocityMeasurement {
   double time = 0.0;
+  double source_time = 0.0;
   Vec3 velocity_ned_mps = makeVec3(0.0, 0.0, 0.0);
   Vec3 std_ned_mps = makeVec3(1.0, 1.0, 1.0);
   std::size_t sat_count = 0;
   double gdop_like = 0.0;
   std::string provider_status = "provider_missing";
+  std::string quality = "invalid";
+  bool valid = true;
+  bool lineage_valid = true;
+  std::string raw_doppler_backend_id;
+  std::string obs_source_hash;
+  std::string nav_source_hash;
+  std::string conversion_config_hash;
+  std::string covariance_policy;
 };
 
 struct RawDopplerFactorConfig {
@@ -33,6 +42,22 @@ struct RawDopplerFactorConfig {
   double raw_doppler_residual_gate_mps = 3.0;
   double raw_doppler_R_scale = 1.0;
   std::string raw_doppler_mode = "doppler_ls_velocity";
+  // 中文说明：formal provider 必须自证 RAWX/obs + broadcast-nav/satellite-state lineage；
+  // 这些字段只用于输入门禁和审计，不改变因子数值参数。
+  bool formal_lineage_required = false;
+  std::string raw_doppler_backend_id;
+  std::string raw_doppler_backend_source_files;
+  std::string raw_doppler_backend_source_hashes;
+  std::string helper_executable_hash;
+  std::string obs_source_hash;
+  std::string nav_source_hash;
+  std::string conversion_config_hash;
+  std::string covariance_policy;
+  bool rtklib_position_solution_used_as_solver_input = false;
+  bool nav_pvt_velocity_used_as_raw_doppler = false;
+  bool gnss_velocity_used_as_raw_doppler = false;
+  bool status_fallback_used = false;
+  bool legacy_provider_used = false;
 };
 
 struct RawDopplerFactorStatus {
@@ -41,6 +66,7 @@ struct RawDopplerFactorStatus {
   bool toy_factor_applied = false;
   std::size_t epoch_count = 0;
   std::size_t valid_epoch_count = 0;
+  std::size_t invalid_epoch_count = 0;
   std::size_t update_count = 0;
   std::size_t reject_count = 0;
   std::size_t sat_count_min = 0;
@@ -51,6 +77,14 @@ struct RawDopplerFactorStatus {
   std::string factor_source = "none";
   bool velocity_not_nav_pvt = true;
   bool velocity_not_gnss_15col = true;
+  bool status_fallback_used = false;
+  bool legacy_provider_used = false;
+  bool lineage_proven = false;
+  std::string backend_id;
+  std::string obs_source_hash;
+  std::string nav_source_hash;
+  std::string conversion_config_hash;
+  std::string covariance_policy;
 };
 
 }  // namespace legsa_v23_port_core

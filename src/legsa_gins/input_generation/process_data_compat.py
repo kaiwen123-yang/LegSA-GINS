@@ -223,6 +223,10 @@ def generate_process_data_compat_inputs(
     imu_install_pitch_deg: float = 0.0,
     imu_install_yaw_deg: float = 0.0,
     imu_gnss_time_offset: float = 0.0,
+    receiver_velocity_match_tolerance_seconds: float = 0.1,
+    dual_yaw_match_tolerance_seconds: float = 0.6,
+    receiver_velocity_std_mps: float = 0.05,
+    stage_id: str = "N4H1P2",
     max_status_rows: int | None = None,
     max_raw_rows: int | None = None,
     max_imu_messages: int | None = None,
@@ -271,7 +275,12 @@ def generate_process_data_compat_inputs(
     for base in base_rows:
         t = float(base["time"])
         row = dict(base)
-        vel = _nearest(pvt_rows, t, key="time", tolerance=0.1)
+        vel = _nearest(
+            pvt_rows,
+            t,
+            key="time",
+            tolerance=receiver_velocity_match_tolerance_seconds,
+        )
         if vel is not None:
             pvt_merge_match_count_before_fill += 1
             row.update(
@@ -284,7 +293,12 @@ def generate_process_data_compat_inputs(
             )
         else:
             row.update({"vn": None, "ve": None, "vd": None, "sAcc": None})
-        yaw = _nearest(yaw_rows, t, key="aligned_time", tolerance=0.6)
+        yaw = _nearest(
+            yaw_rows,
+            t,
+            key="aligned_time",
+            tolerance=dual_yaw_match_tolerance_seconds,
+        )
         if yaw is not None:
             yaw_merge_match_count_before_fill += 1
             row.update(
@@ -309,9 +323,9 @@ def generate_process_data_compat_inputs(
         else:
             row["yaw"] = None
         row["yaw_std"] = row.get("yaw_std_for_merge_deg")
-        row["std_vn"] = 0.05
-        row["std_ve"] = 0.05
-        row["std_vd"] = 0.05
+        row["std_vn"] = receiver_velocity_std_mps
+        row["std_ve"] = receiver_velocity_std_mps
+        row["std_vd"] = receiver_velocity_std_mps
 
     key_fields = [
         "time",
@@ -373,10 +387,14 @@ def generate_process_data_compat_inputs(
         }
     )
     report = {
-        "phase": "N4H1P2",
+        "phase": stage_id,
         "runtime_input_reconstructed": True,
         "base_time": float(base_time),
-        "time_mode": "legacy_base_time_process_data_compat",
+        "time_mode": (
+            "source_utc_day_relative_seconds"
+            if stage_id == "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION"
+            else "legacy_base_time_process_data_compat"
+        ),
         "gnss_columns": 15,
         "imu_columns": 7,
         "gnss_row_count": len(gnss_rows),
@@ -401,6 +419,13 @@ def generate_process_data_compat_inputs(
         "position_std_source": "gnss1_status_pos_acc_h_v",
         "velocity_source": "gnss1_raw_UBX_NAV_PVT",
         "velocity_std_policy": "fixed_0p05_observed_in_uploaded_code",
+        "receiver_velocity_std_mps": float(receiver_velocity_std_mps),
+        "receiver_velocity_match_tolerance_seconds": float(receiver_velocity_match_tolerance_seconds),
+        "dual_yaw_match_tolerance_seconds": float(dual_yaw_match_tolerance_seconds),
+        "imu_install_roll_deg": float(imu_install_roll_deg),
+        "imu_install_pitch_deg": float(imu_install_pitch_deg),
+        "imu_install_yaw_deg": float(imu_install_yaw_deg),
+        "imu_gnss_time_offset_seconds": float(imu_gnss_time_offset),
         "pvt_sacc_parsed": True,
         "pvt_sacc_used_for_velocity_std": False,
         "yaw_source": "A1_dual_diff_status",
@@ -436,7 +461,7 @@ def generate_process_data_compat_inputs(
             "imu_report": imu_report_path.name,
         },
         "formal_allowed": True,
-        "generated_inputs_are_baseline_parity_only": True,
+        "generated_inputs_are_baseline_parity_only": stage_id != "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION",
     }
     _write_json(report_path, report)
     write_process_data_coverage_report(coverage_report, coverage_report_path)

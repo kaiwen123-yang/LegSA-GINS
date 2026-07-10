@@ -22,8 +22,11 @@ struct GnssData {
   double yaw_std_deg = 1.0;
   double yaw_rad = 0.0;
   double yaw_std_rad = D2R;
+  bool has_position = true;
   bool has_velocity = true;
   bool has_yaw = true;
+  // 中文说明：legacy 15 列没有 validity 后缀；formal 18 列必须显式给出 position/velocity/yaw validity。
+  bool validity_explicit = false;
   bool isvalid = false;
 };
 

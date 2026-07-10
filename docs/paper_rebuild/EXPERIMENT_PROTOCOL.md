@@ -42,4 +42,4 @@ The 60-type, 9-seed registry and classic-18 manifest are retained as legacy prot
 
 ## Execution Boundary
 
-CLEAN0 authorizes only the independent BY2 clean smoke required by the stage. It does not authorize DA03, DA05, the 541-case matrix, paper figures, or performance conclusions. Later execution requires its own explicit stage and human gate.
+CLEAN0's independent BY2 smoke remains a runtime-health regression only. The current human authorization permits exactly one fresh CLEAN1 BY2 clean-normal four-method chain under the tracked CLEAN1 protocol. Formal execution requires a fresh provider, proven Raw Doppler lineage, the full common window, common source-backed initialization, and a separately frozen evaluator. An unproven evaluator point or frame contract blocks all four runs; it cannot be repaired through trace fitting or output inspection. CLEAN1 does not authorize DA03, DA05, classic-18, the 541-case matrix, figures, broad performance conclusions, or a later stage.

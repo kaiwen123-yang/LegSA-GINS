@@ -17,6 +17,7 @@ defaults:
   enable_go2_position_truth: false
   enable_go2_velocity_truth: false
   enable_go2_yaw_truth: false
+  enable_go2_contact_truth: false
 
 dual_yaw_source_contract:
   baseline_vector: gnss2_minus_gnss1
@@ -31,8 +32,8 @@ dual_yaw_source_contract:
 methods:
   single_antenna_EKF:
     role: baseline
-    required_inputs: [imu, gnss_position]
-    optional_inputs: [receiver_velocity]
+    required_inputs: [imu, gnss_position, receiver_velocity]
+    optional_inputs: []
     features:
       enable_dual_yaw: false
       enable_receiver_velocity: true
@@ -63,8 +64,8 @@ methods:
 
   strong_dual_yaw_EKF:
     role: strong_baseline
-    required_inputs: [imu, gnss_position, dual_antenna_body_yaw]
-    optional_inputs: [receiver_velocity]
+    required_inputs: [imu, gnss_position, receiver_velocity, dual_antenna_body_yaw]
+    optional_inputs: []
     yaw_contract:
       baseline_vector: gnss2_minus_gnss1
       lateral_body_offset_deg: 90.0
@@ -84,11 +85,12 @@ methods:
     required_inputs:
       - imu
       - gnss_position
+      - receiver_velocity
       - dual_antenna_body_yaw
       - raw_doppler_velocity
       - go2_roll_pitch_weak_prior
       - go2_horizontal_velocity_weak_prior
-    optional_inputs: [receiver_velocity]
+    optional_inputs: []
     yaw_contract:
       baseline_vector: gnss2_minus_gnss1
       lateral_body_offset_deg: 90.0
