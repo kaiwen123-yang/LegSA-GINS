@@ -1421,15 +1421,26 @@ def test_exact_raw_blocked_stage_is_archived_and_indexed_without_delete(
     )
     assert recovered["archive_recovered_after_interruption"] is True
 
+    launch_commit = "b37e0ff1d38a750fb6e035f3b4da3f5b788fbdba"
     third_commit = "3" * 40
     paths, second_stage, second_provider_attempt = _write_failed_attempt_fixture(
         tmp_path, new_commit, prior_record=record
     )
-    monkeypatch.setattr(generate, "_git_first_parent", lambda *args: new_commit)
+    monkeypatch.setattr(
+        generate,
+        "_git_first_parent",
+        lambda _root, commit: (
+            launch_commit if commit == third_commit else new_commit
+        ),
+    )
 
     def ancestry_result(command, **kwargs):
         commit = command[-1]
-        parent = old_commit if commit == new_commit else new_commit
+        parent = {
+            new_commit: old_commit,
+            launch_commit: new_commit,
+            third_commit: launch_commit,
+        }[commit]
         return SimpleNamespace(returncode=0, stdout=f"{commit} {parent}\n")
 
     monkeypatch.setattr(audit_script.subprocess, "run", ancestry_result)
@@ -1437,6 +1448,7 @@ def test_exact_raw_blocked_stage_is_archived_and_indexed_without_delete(
         paths, new_code_commit=third_commit
     )
     assert second_record["inherited_prior_attempt_count"] == 1
+    assert len(second_record["intervening_retry_launch_failures"]) == 1
     assert second_record["provider_attempt_alias"].endswith(
         second_provider_attempt.name
     )
@@ -1452,6 +1464,9 @@ def test_exact_raw_blocked_stage_is_archived_and_indexed_without_delete(
     assert audit_script._assert_prior_technical_attempt_record(
         final_stage, paths
     ) == 2
+    assert audit_script._count_prior_retry_launch_failures(
+        final_stage, paths
+    ) == 1
 
 
 def test_promotion_recovery_handles_hidden_stage_and_complete_marker_gap(

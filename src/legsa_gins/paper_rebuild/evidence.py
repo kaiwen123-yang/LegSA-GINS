@@ -116,6 +116,17 @@ FAILED_CLEAN1_ATTEMPT_SPECS: dict[str, dict[str, Any]] = {
     },
 }
 
+FAILED_CLEAN1_RETRY_LAUNCH_SPECS: dict[str, dict[str, Any]] = {
+    "b37e0ff1d38a750fb6e035f3b4da3f5b788fbdba": {
+        "stage_failure_commit": "28ef36d5a9bac87bdeaed2e7567de7bbb9abd238",
+        "failure_class": "ModuleNotFoundError",
+        "error_message": "No module named 'scripts'",
+        "occurred_before_stage_archive": True,
+        "provider_attempt_created": False,
+        "formal_run_count": 0,
+    }
+}
+
 LOCAL_PATH_RE = re.compile(
     r"(?:(?<![:/A-Za-z0-9_+\-])/(?!/)[^\s'\"`<>]+|"
     r"(?<![A-Za-z0-9])[A-Za-z]:[\\/](?![\\/])[^\r\n'\"`]+)"

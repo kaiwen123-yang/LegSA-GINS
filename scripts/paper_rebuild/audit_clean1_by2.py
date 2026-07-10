@@ -21,6 +21,7 @@ if str(SRC_ROOT) not in sys.path:
 from legsa_gins.paper_rebuild.evidence import (
     BY2_TRACE_RELATIVE_PATH,
     FAILED_CLEAN1_ATTEMPT_SPECS,
+    FAILED_CLEAN1_RETRY_LAUNCH_SPECS,
     assert_export_text_is_redacted,
     scan_text_for_export_leaks,
     validate_failed_clean1_attempt_evidence,
@@ -266,6 +267,7 @@ def _assert_prior_technical_attempt_record(
     expected_alias = f"<CLEAN_ROOT>/{FAILED_ATTEMPT_DIR_NAME}/{old_commit}"
     provider_attempt_alias = record.get("provider_attempt_alias")
     provider_attempt_prefix = "<CLEAN_ROOT>/04_PROVIDER_FREEZE/"
+    intervening_launch_failures = record.get("intervening_retry_launch_failures", [])
     if (
         not isinstance(old_commit, str)
         or len(old_commit) != 40
@@ -295,6 +297,7 @@ def _assert_prior_technical_attempt_record(
         or int(record.get("evidence_file_count")) <= 0
         or not isinstance(record.get("export_member_count"), int)
         or int(record.get("export_member_count")) <= 0
+        or not isinstance(intervening_launch_failures, list)
     ):
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     archive = guard_path(
@@ -349,23 +352,95 @@ def _assert_prior_technical_attempt_record(
         or current_code_commit == old_commit
     ):
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
-    ancestry = subprocess.run(
-        ["git", "rev-list", "--parents", "-n", "1", current_code_commit],
-        cwd=paths.code_root,
-        check=False,
-        capture_output=True,
-        text=True,
-        timeout=60,
-    )
-    parents = ancestry.stdout.split() if ancestry.returncode == 0 else []
-    if len(parents) != 2 or parents[1] != old_commit:
-        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    def git_parent(commit: str) -> str:
+        ancestry = subprocess.run(
+            ["git", "rev-list", "--parents", "-n", "1", commit],
+            cwd=paths.code_root,
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+        parents = ancestry.stdout.split() if ancestry.returncode == 0 else []
+        if len(parents) != 2:
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        return parents[1]
+
+    if not intervening_launch_failures:
+        if git_parent(current_code_commit) != old_commit:
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    else:
+        if len(intervening_launch_failures) != 1:
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        launch_record = intervening_launch_failures[0]
+        if not isinstance(launch_record, dict):
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        launch_commit = launch_record.get("code_commit")
+        launch_spec = (
+            FAILED_CLEAN1_RETRY_LAUNCH_SPECS.get(launch_commit)
+            if isinstance(launch_commit, str)
+            else None
+        )
+        expected_launch_record = (
+            {
+                "code_commit": launch_commit,
+                **launch_spec,
+                "replacement_code_commit": current_code_commit,
+            }
+            if launch_spec is not None
+            else None
+        )
+        if (
+            launch_record != expected_launch_record
+            or launch_spec.get("stage_failure_commit") != old_commit
+            or git_parent(current_code_commit) != launch_commit
+            or git_parent(launch_commit) != old_commit
+        ):
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        for child in paths.provider_root.parent.iterdir():
+            if not child.is_dir() or not child.name.startswith(
+                ".CLEAN1_BY2_CLEAN_NORMAL_V1.attempt-"
+            ):
+                continue
+            manifest_path = child / "CLEAN_INPUT_MANIFEST.json"
+            if not manifest_path.is_file():
+                continue
+            candidate = json.loads(manifest_path.read_text(encoding="utf-8"))
+            if (
+                isinstance(candidate, dict)
+                and candidate.get("generator_code_commit") == launch_commit
+            ):
+                raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     inherited_count = _assert_prior_technical_attempt_record(
         archive, paths, _seen_commits=seen
     )
     if record.get("inherited_prior_attempt_count", 0) != inherited_count:
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     return 1 + inherited_count
+
+
+def _count_prior_retry_launch_failures(
+    stage: Path,
+    paths: Any,
+    *,
+    _seen_commits: set[str] | None = None,
+) -> int:
+    record_path = stage / "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json"
+    if not record_path.is_file():
+        return 0
+    record = _json(record_path)
+    old_commit = str(record.get("code_freeze_commit") or "")
+    seen = set(_seen_commits or ())
+    if old_commit in seen:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    seen.add(old_commit)
+    launches = record.get("intervening_retry_launch_failures", [])
+    if not isinstance(launches, list):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    archive = paths.clean_root / FAILED_ATTEMPT_DIR_NAME / old_commit
+    return len(launches) + _count_prior_retry_launch_failures(
+        archive, paths, _seen_commits=seen
+    )
 
 
 def _json(path: Path) -> dict[str, Any]:
@@ -557,6 +632,9 @@ def main(argv: list[str] | None = None) -> int:
         must_exist=True,
     )
     prior_technical_attempt_count = _assert_prior_technical_attempt_record(
+        stage, paths
+    )
+    prior_retry_launch_failure_count = _count_prior_retry_launch_failures(
         stage, paths
     )
     decision = _json(stage / "08_EVIDENCE_AUDIT/PRE_RUN_GATE_DECISION.json")
@@ -852,6 +930,7 @@ def main(argv: list[str] | None = None) -> int:
         "paper_figure_count": figure_count,
         "diagnostic_plot_count": forbidden_values["diagnostic_plot_count"],
         "prior_technical_attempt_count": prior_technical_attempt_count,
+        "prior_retry_launch_failure_count": prior_retry_launch_failure_count,
         "paper_performance_claim": False,
         "claim_boundary": (
             "CLEAN1 evidence covers one BY2 clean-normal readiness chain only; no degradation robustness, "
@@ -873,6 +952,7 @@ Fresh source and provider readiness closed, including exact 22/22 pre/post raw v
 - code freeze commit: `{code_commit}`
 - report commit: `{args.report_commit}`
 - preserved technical failed attempts: {prior_technical_attempt_count}
+- preserved pre-archive retry launch failures: {prior_retry_launch_failure_count}
 - BY2 raw: 22/22 pre, 22/22 post, zero mutation
 - Raw Doppler: {backend['valid_epoch_count']} valid and {backend['invalid_epoch_count']} invalid RAWX epochs; satellites min/median/max {backend['sat_count_min']}/{backend['sat_count_median']}/{backend['sat_count_max']}
 - common full window: frozen without smoke truncation or trace selection

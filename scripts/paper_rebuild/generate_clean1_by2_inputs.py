@@ -20,6 +20,8 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SRC_ROOT = REPO_ROOT / "src"
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
@@ -27,6 +29,7 @@ from legsa_gins.paper_rebuild.evidence import (
     BY2_TRACE_RELATIVE_PATH,
     BY2_RAW_RELATIVE_PATHS,
     FAILED_CLEAN1_ATTEMPT_SPECS,
+    FAILED_CLEAN1_RETRY_LAUNCH_SPECS,
     assert_export_text_is_redacted,
     compare_pre_post_raw_audits,
     parse_strace_openat_paths,
@@ -150,7 +153,22 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
         role="CLEAN1 failed-attempt archive root",
         allowed_root=paths.clean_root,
     )
-    expected_old_commit = _git_first_parent(paths.code_root, new_code_commit)
+    new_first_parent = _git_first_parent(paths.code_root, new_code_commit)
+    launch_specification = FAILED_CLEAN1_RETRY_LAUNCH_SPECS.get(new_first_parent)
+    if launch_specification is None:
+        expected_old_commit = new_first_parent
+        intervening_launch_failures: list[dict[str, Any]] = []
+    else:
+        expected_old_commit = str(launch_specification["stage_failure_commit"])
+        if _git_first_parent(paths.code_root, new_first_parent) != expected_old_commit:
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        intervening_launch_failures = [
+            {
+                "code_commit": new_first_parent,
+                **launch_specification,
+                "replacement_code_commit": new_code_commit,
+            }
+        ]
     specification = FAILED_CLEAN1_ATTEMPT_SPECS.get(expected_old_commit)
     if specification is None:
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
@@ -213,6 +231,7 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
     if not _git_commit_is_ancestor(paths.code_root, old_commit, new_code_commit):
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     provider_attempts = []
+    launch_failure_provider_attempts = []
     for child in paths.provider_root.parent.iterdir():
         if not child.is_dir() or not child.name.startswith(
             ".CLEAN1_BY2_CLEAN_NORMAL_V1.attempt-"
@@ -227,7 +246,15 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
             and candidate_manifest.get("generator_code_commit") == old_commit
         ):
             provider_attempts.append(child)
+        if (
+            isinstance(candidate_manifest, dict)
+            and candidate_manifest.get("generator_code_commit") == new_first_parent
+            and launch_specification is not None
+        ):
+            launch_failure_provider_attempts.append(child)
     if len(provider_attempts) != 1:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    if launch_failure_provider_attempts:
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     provider_attempt = guard_path(
         provider_attempts[0],
@@ -276,6 +303,7 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
         "evidence_file_count": validated["evidence_file_count"],
         "export_member_count": validated["export_member_count"],
         "inherited_prior_attempt_count": inherited_prior_attempt_count,
+        "intervening_retry_launch_failures": intervening_launch_failures,
         "preserved_without_delete": True,
         "archive_recovered_after_interruption": archive_recovered_after_interruption,
         "superseded_reason": specification["superseded_reason"],
