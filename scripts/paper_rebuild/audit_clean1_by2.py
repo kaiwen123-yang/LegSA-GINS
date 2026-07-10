@@ -20,6 +20,7 @@ if str(SRC_ROOT) not in sys.path:
 
 from legsa_gins.paper_rebuild.evidence import (
     BY2_TRACE_RELATIVE_PATH,
+    FAILED_CLEAN1_ATTEMPT_SPECS,
     assert_export_text_is_redacted,
     scan_text_for_export_leaks,
     validate_failed_clean1_attempt_evidence,
@@ -245,12 +246,22 @@ def _assert_exact_pre_run_gate_closure(
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
 
 
-def _assert_prior_technical_attempt_record(stage: Path, paths: Any) -> int:
+def _assert_prior_technical_attempt_record(
+    stage: Path,
+    paths: Any,
+    *,
+    _seen_commits: set[str] | None = None,
+) -> int:
     record_path = stage / "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json"
     if not record_path.is_file():
         return 0
     record = _json(record_path)
     old_commit = record.get("code_freeze_commit")
+    specification = (
+        FAILED_CLEAN1_ATTEMPT_SPECS.get(old_commit)
+        if isinstance(old_commit, str)
+        else None
+    )
     expected_terminal = "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN"
     expected_alias = f"<CLEAN_ROOT>/{FAILED_ATTEMPT_DIR_NAME}/{old_commit}"
     provider_attempt_alias = record.get("provider_attempt_alias")
@@ -259,7 +270,7 @@ def _assert_prior_technical_attempt_record(stage: Path, paths: Any) -> int:
         not isinstance(old_commit, str)
         or len(old_commit) != 40
         or any(character not in "0123456789abcdef" for character in old_commit)
-        or old_commit != FAILED_ATTEMPT_CODE_FREEZE_COMMIT
+        or specification is None
         or record.get("schema_version")
         != "paper-rebuild-clean1-prior-technical-attempt-v1"
         or record.get("archived_stage_alias") != expected_alias
@@ -279,7 +290,7 @@ def _assert_prior_technical_attempt_record(stage: Path, paths: Any) -> int:
         or record.get("preserved_without_delete") is not True
         or not isinstance(record.get("archive_recovered_after_interruption"), bool)
         or record.get("superseded_reason")
-        != "case_insensitive_dual_yaw_artifact_self_copy_code_bug"
+        != specification["superseded_reason"]
         or not isinstance(record.get("evidence_file_count"), int)
         or int(record.get("evidence_file_count")) <= 0
         or not isinstance(record.get("export_member_count"), int)
@@ -304,6 +315,10 @@ def _assert_prior_technical_attempt_record(stage: Path, paths: Any) -> int:
     current_code_commit = (
         stage / "01_GIT_FREEZE/CODE_FREEZE_COMMIT.txt"
     ).read_text(encoding="utf-8").strip()
+    seen = set(_seen_commits or ())
+    if old_commit in seen:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    seen.add(old_commit)
     prior_decision = _json(
         archive / "08_EVIDENCE_AUDIT/PRE_RUN_GATE_DECISION.json"
     )
@@ -335,16 +350,22 @@ def _assert_prior_technical_attempt_record(stage: Path, paths: Any) -> int:
     ):
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     ancestry = subprocess.run(
-        ["git", "merge-base", "--is-ancestor", old_commit, current_code_commit],
+        ["git", "rev-list", "--parents", "-n", "1", current_code_commit],
         cwd=paths.code_root,
         check=False,
         capture_output=True,
         text=True,
         timeout=60,
     )
-    if ancestry.returncode != 0:
+    parents = ancestry.stdout.split() if ancestry.returncode == 0 else []
+    if len(parents) != 2 or parents[1] != old_commit:
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
-    return 1
+    inherited_count = _assert_prior_technical_attempt_record(
+        archive, paths, _seen_commits=seen
+    )
+    if record.get("inherited_prior_attempt_count", 0) != inherited_count:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    return 1 + inherited_count
 
 
 def _json(path: Path) -> dict[str, Any]:

@@ -151,6 +151,13 @@ class FormalProviderError(EvidenceContractError):
     """Formal provider lineage is incomplete or contaminated."""
 
 
+def _assert_exact_provider_artifact_roles(artifacts: Mapping[str, Any]) -> None:
+    """Validate the exact JSON-object key set without relying on key order."""
+
+    if set(artifacts) != set(REQUIRED_FORMAL_PROVIDER_ROLES):
+        raise FormalProviderError("Formal provider artifact role set mismatch")
+
+
 @dataclass(frozen=True)
 class FormalProviderBundle:
     root: Path
@@ -513,8 +520,7 @@ def validate_formal_provider_manifest(
     declared_hashes = manifest.get("provider_hashes")
     if not isinstance(artifacts, Mapping) or not isinstance(declared_hashes, Mapping):
         raise FormalProviderError("Formal provider artifacts/hash mappings are missing")
-    if tuple(artifacts.keys()) != REQUIRED_FORMAL_PROVIDER_ROLES:
-        raise FormalProviderError("Formal provider artifact roles/order mismatch")
+    _assert_exact_provider_artifact_roles(artifacts)
     resolved: dict[str, Path] = {}
     relpaths: dict[str, str] = {}
     hashes: dict[str, str] = {}

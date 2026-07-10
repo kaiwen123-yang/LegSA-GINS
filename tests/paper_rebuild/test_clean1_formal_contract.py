@@ -31,6 +31,7 @@ from legsa_gins.paper_rebuild.evidence import (
     BY2_RAW_RELATIVE_PATHS,
     BY2_TRACE_RELATIVE_PATH,
     FAILED_CLEAN1_EXPECTED_RAW_READS,
+    FAILED_CLEAN1_ATTEMPT_SPECS,
     EvidenceContractError,
     RawAudit,
     assert_export_text_is_redacted,
@@ -60,6 +61,7 @@ from legsa_gins.paper_rebuild.formal_provider import (
     RAW_DOPPLER_TIME_CONVERSION,
     REQUIRED_FORMAL_PROVIDER_ROLES,
     FormalProviderError,
+    _assert_exact_provider_artifact_roles,
     _assert_code_commit_relation,
     validate_raw_doppler_backend_report,
 )
@@ -206,6 +208,18 @@ def test_formal_provider_source_roles_pin_receiver_velocity_to_nav_pvt_raw() -> 
     assert "receiver_velocity" not in FORMAL_PROVIDER_ACTUAL_SOURCE_ROLES[status]
     assert "receiver_velocity_nav_pvt" in FORMAL_PROVIDER_ACTUAL_SOURCE_ROLES[raw]
     assert "rawx_sfrbx_raw_doppler_observation" in FORMAL_PROVIDER_ACTUAL_SOURCE_ROLES[raw]
+
+
+def test_provider_artifact_json_object_uses_exact_set_not_serialized_order() -> None:
+    sorted_mapping = {
+        role: {"relative_path": role}
+        for role in sorted(REQUIRED_FORMAL_PROVIDER_ROLES)
+    }
+    assert tuple(sorted_mapping) != REQUIRED_FORMAL_PROVIDER_ROLES
+    _assert_exact_provider_artifact_roles(sorted_mapping)
+    sorted_mapping.pop("raw_doppler_provider")
+    with pytest.raises(FormalProviderError, match="role set mismatch"):
+        _assert_exact_provider_artifact_roles(sorted_mapping)
 
 
 def test_formal_dual_yaw_reuses_one_artifact_without_case_only_copy(
@@ -1115,14 +1129,19 @@ def test_raw_blocker_derives_preserved_provider_attempt_status(
     assert captured["provider_attempt_generated"] is True
 
 
-def _write_failed_attempt_fixture(tmp_path: Path, old_commit: str):
+def _write_failed_attempt_fixture(
+    tmp_path: Path,
+    old_commit: str,
+    *,
+    prior_record: dict[str, object] | None = None,
+):
     from legsa_gins.paper_rebuild.paths import CleanPaths
     from scripts.paper_rebuild import generate_clean1_by2_inputs as generate
 
     clean = tmp_path / "clean"
     raw = tmp_path / "raw"
     code = tmp_path / "code"
-    code.mkdir()
+    code.mkdir(exist_ok=True)
     stage = clean / generate.STAGE_DIR_NAME
     for relative in (
         "08_EVIDENCE_AUDIT",
@@ -1139,7 +1158,7 @@ def _write_failed_attempt_fixture(tmp_path: Path, old_commit: str):
         source.write_text("fixture\n", encoding="utf-8")
     provider_attempt = (
         clean
-        / "04_PROVIDER_FREEZE/.CLEAN1_BY2_CLEAN_NORMAL_V1.attempt-fixture"
+        / f"04_PROVIDER_FREEZE/.CLEAN1_BY2_CLEAN_NORMAL_V1.attempt-{old_commit[:12]}"
     )
     for relative in (
         "RAW_DOPPLER_BACKEND_REPORT.json",
@@ -1151,6 +1170,10 @@ def _write_failed_attempt_fixture(tmp_path: Path, old_commit: str):
         target = provider_attempt / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text("fixture\n", encoding="utf-8")
+    (provider_attempt / "CLEAN_INPUT_MANIFEST.json").write_text(
+        json.dumps({"generator_code_commit": old_commit}) + "\n",
+        encoding="utf-8",
+    )
     terminal = "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN"
     payloads = {
         "08_EVIDENCE_AUDIT/PRE_RUN_GATE_DECISION.json": {
@@ -1186,6 +1209,13 @@ def _write_failed_attempt_fixture(tmp_path: Path, old_commit: str):
     }
     for relative, payload in payloads.items():
         (stage / relative).write_text(json.dumps(payload) + "\n", encoding="utf-8")
+    git_freeze = stage / "01_GIT_FREEZE/CODE_FREEZE_COMMIT.txt"
+    git_freeze.parent.mkdir(parents=True)
+    git_freeze.write_text(old_commit + "\n", encoding="utf-8")
+    if prior_record is not None:
+        prior_path = stage / "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json"
+        prior_path.parent.mkdir(parents=True)
+        prior_path.write_text(json.dumps(prior_record) + "\n", encoding="utf-8")
     trace = stage / "04_PROVIDER_AUDIT/PROVIDER_FAILED_FILE_OPEN_TRACE.raw"
     trace.write_text(
         "".join(
@@ -1226,7 +1256,8 @@ def _write_failed_attempt_fixture(tmp_path: Path, old_commit: str):
         encoding="utf-8",
     )
     (stage / "04_PROVIDER_AUDIT/PROVIDER_ATTEMPT_STDERR.txt").write_text(
-        "shutil.SameFileError: dual_yaw_provider.csv and DUAL_YAW_PROVIDER.csv are the same file\n",
+        " | ".join(FAILED_CLEAN1_ATTEMPT_SPECS[old_commit]["stderr_markers"])
+        + "\n",
         encoding="utf-8",
     )
     report_source = stage / "09_REPORT/CLEAN1_FULL_REPORT.json"
@@ -1295,20 +1326,19 @@ def _write_failed_attempt_fixture(tmp_path: Path, old_commit: str):
     return paths, stage, provider_attempt
 
 
+@pytest.mark.parametrize("failed_commit", tuple(FAILED_CLEAN1_ATTEMPT_SPECS))
 def test_failed_attempt_validator_rehashes_full_stage_and_rejects_metrics(
-    tmp_path: Path,
+    tmp_path: Path, failed_commit: str,
 ) -> None:
-    from scripts.paper_rebuild import generate_clean1_by2_inputs as generate
-
     paths, stage, provider_attempt = _write_failed_attempt_fixture(
-        tmp_path, generate.FAILED_ATTEMPT_CODE_FREEZE_COMMIT
+        tmp_path, failed_commit
     )
     validated = validate_failed_clean1_attempt_evidence(
         stage,
         raw_root=paths.raw_root,
         code_root=paths.code_root,
         provider_attempt=provider_attempt,
-        expected_code_commit=generate.FAILED_ATTEMPT_CODE_FREEZE_COMMIT,
+        expected_code_commit=failed_commit,
     )
     assert validated["evidence_file_count"] > 0
     metric = stage / "07_EVALUATION/ROW_LEVEL_ERRORS.csv"
@@ -1320,7 +1350,7 @@ def test_failed_attempt_validator_rehashes_full_stage_and_rejects_metrics(
             raw_root=paths.raw_root,
             code_root=paths.code_root,
             provider_attempt=provider_attempt,
-            expected_code_commit=generate.FAILED_ATTEMPT_CODE_FREEZE_COMMIT,
+            expected_code_commit=failed_commit,
         )
 
 
@@ -1351,10 +1381,11 @@ def test_exact_raw_blocked_stage_is_archived_and_indexed_without_delete(
     from scripts.paper_rebuild import audit_clean1_by2 as audit_script
 
     old_commit = generate.FAILED_ATTEMPT_CODE_FREEZE_COMMIT
-    new_commit = "2" * 40
+    new_commit = "28ef36d5a9bac87bdeaed2e7567de7bbb9abd238"
     paths, stage, failed_provider_attempt = _write_failed_attempt_fixture(
         tmp_path, old_commit
     )
+    monkeypatch.setattr(generate, "_git_first_parent", lambda *args: old_commit)
     monkeypatch.setattr(generate, "_git_commit_is_ancestor", lambda *args: True)
     record = generate._preserve_exact_raw_doppler_blocked_stage_for_retry(
         paths, new_code_commit=new_commit
@@ -1377,7 +1408,9 @@ def test_exact_raw_blocked_stage_is_archived_and_indexed_without_delete(
     monkeypatch.setattr(
         audit_script.subprocess,
         "run",
-        lambda *args, **kwargs: SimpleNamespace(returncode=0),
+        lambda *args, **kwargs: SimpleNamespace(
+            returncode=0, stdout=f"{new_commit} {old_commit}\n"
+        ),
     )
     assert audit_script._assert_prior_technical_attempt_record(new_stage, paths) == 1
 
@@ -1387,6 +1420,38 @@ def test_exact_raw_blocked_stage_is_archived_and_indexed_without_delete(
         paths, new_code_commit=new_commit
     )
     assert recovered["archive_recovered_after_interruption"] is True
+
+    third_commit = "3" * 40
+    paths, second_stage, second_provider_attempt = _write_failed_attempt_fixture(
+        tmp_path, new_commit, prior_record=record
+    )
+    monkeypatch.setattr(generate, "_git_first_parent", lambda *args: new_commit)
+
+    def ancestry_result(command, **kwargs):
+        commit = command[-1]
+        parent = old_commit if commit == new_commit else new_commit
+        return SimpleNamespace(returncode=0, stdout=f"{commit} {parent}\n")
+
+    monkeypatch.setattr(audit_script.subprocess, "run", ancestry_result)
+    second_record = generate._preserve_exact_raw_doppler_blocked_stage_for_retry(
+        paths, new_code_commit=third_commit
+    )
+    assert second_record["inherited_prior_attempt_count"] == 1
+    assert second_record["provider_attempt_alias"].endswith(
+        second_provider_attempt.name
+    )
+    final_stage = paths.clean_root / generate.STAGE_DIR_NAME
+    (final_stage / "00_AUTHORIZATION").mkdir(parents=True)
+    (final_stage / "01_GIT_FREEZE").mkdir()
+    (final_stage / "01_GIT_FREEZE/CODE_FREEZE_COMMIT.txt").write_text(
+        third_commit + "\n", encoding="utf-8"
+    )
+    (final_stage / "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json").write_text(
+        json.dumps(second_record), encoding="utf-8"
+    )
+    assert audit_script._assert_prior_technical_attempt_record(
+        final_stage, paths
+    ) == 2
 
 
 def test_promotion_recovery_handles_hidden_stage_and_complete_marker_gap(

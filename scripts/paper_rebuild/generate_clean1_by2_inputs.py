@@ -26,6 +26,7 @@ if str(SRC_ROOT) not in sys.path:
 from legsa_gins.paper_rebuild.evidence import (
     BY2_TRACE_RELATIVE_PATH,
     BY2_RAW_RELATIVE_PATHS,
+    FAILED_CLEAN1_ATTEMPT_SPECS,
     assert_export_text_is_redacted,
     compare_pre_post_raw_audits,
     parse_strace_openat_paths,
@@ -103,6 +104,20 @@ def _git_commit_is_ancestor(code_root: Path, ancestor: str, descendant: str) -> 
     ).returncode == 0
 
 
+def _git_first_parent(code_root: Path, commit: str) -> str:
+    result = subprocess.run(
+        ["git", "rev-list", "--parents", "-n", "1", commit],
+        cwd=code_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=60,
+    ).stdout.split()
+    if len(result) != 2:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    return result[1]
+
+
 def _create_stage_root(clean_root: Path) -> tuple[Path, Path]:
     final = guard_path(clean_root / STAGE_DIR_NAME, role="CLEAN1 stage root", allowed_root=clean_root)
     if final.exists():
@@ -135,8 +150,12 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
         role="CLEAN1 failed-attempt archive root",
         allowed_root=paths.clean_root,
     )
+    expected_old_commit = _git_first_parent(paths.code_root, new_code_commit)
+    specification = FAILED_CLEAN1_ATTEMPT_SPECS.get(expected_old_commit)
+    if specification is None:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     archive = guard_path(
-        archive_parent / FAILED_ATTEMPT_CODE_FREEZE_COMMIT,
+        archive_parent / expected_old_commit,
         role="CLEAN1 exact failed-attempt archive",
         allowed_root=archive_parent,
     )
@@ -163,7 +182,7 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
         not isinstance(old_commit, str)
         or len(old_commit) != 40
         or any(character not in "0123456789abcdef" for character in old_commit)
-        or old_commit != FAILED_ATTEMPT_CODE_FREEZE_COMMIT
+        or old_commit != expected_old_commit
         or old_commit == new_code_commit
         or decision.get("terminal_status") != terminal
         or decision.get("formal_run_count") != 0
@@ -193,12 +212,21 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     if not _git_commit_is_ancestor(paths.code_root, old_commit, new_code_commit):
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
-    provider_attempts = [
-        child
-        for child in paths.provider_root.parent.iterdir()
-        if child.is_dir()
-        and child.name.startswith(".CLEAN1_BY2_CLEAN_NORMAL_V1.attempt-")
-    ]
+    provider_attempts = []
+    for child in paths.provider_root.parent.iterdir():
+        if not child.is_dir() or not child.name.startswith(
+            ".CLEAN1_BY2_CLEAN_NORMAL_V1.attempt-"
+        ):
+            continue
+        manifest_path = child / "CLEAN_INPUT_MANIFEST.json"
+        if not manifest_path.is_file():
+            continue
+        candidate_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        if (
+            isinstance(candidate_manifest, dict)
+            and candidate_manifest.get("generator_code_commit") == old_commit
+        ):
+            provider_attempts.append(child)
     if len(provider_attempts) != 1:
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     provider_attempt = guard_path(
@@ -218,6 +246,15 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
     except Exception as exc:
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION") from exc
     evidence_digest = str(validated["evidence_manifest_sha256"])
+    inherited_prior_attempt_count = 0
+    if (failed_stage / "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json").is_file():
+        from scripts.paper_rebuild.audit_clean1_by2 import (
+            _assert_prior_technical_attempt_record,
+        )
+
+        inherited_prior_attempt_count = _assert_prior_technical_attempt_record(
+            failed_stage, paths
+        )
     if failed_stage == stage_final:
         archive_parent.mkdir(parents=False, exist_ok=True)
         stage_final.rename(archive)
@@ -238,9 +275,10 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
         "evidence_manifest_sha256": evidence_digest,
         "evidence_file_count": validated["evidence_file_count"],
         "export_member_count": validated["export_member_count"],
+        "inherited_prior_attempt_count": inherited_prior_attempt_count,
         "preserved_without_delete": True,
         "archive_recovered_after_interruption": archive_recovered_after_interruption,
-        "superseded_reason": "case_insensitive_dual_yaw_artifact_self_copy_code_bug",
+        "superseded_reason": specification["superseded_reason"],
         "replacement_code_commit": new_code_commit,
     }
 

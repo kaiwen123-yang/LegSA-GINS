@@ -98,6 +98,24 @@ FAILED_CLEAN1_EXPECTED_RAW_READS = (
     BY2_BODY_RELATIVE_PATH,
 )
 
+FAILED_CLEAN1_ATTEMPT_SPECS: dict[str, dict[str, Any]] = {
+    "409508def7f20521db290d9bfb7e1506a1f72ef9": {
+        "superseded_reason": "case_insensitive_dual_yaw_artifact_self_copy_code_bug",
+        "stderr_markers": (
+            "shutil.SameFileError",
+            "dual_yaw_provider.csv",
+            "DUAL_YAW_PROVIDER.csv",
+        ),
+    },
+    "28ef36d5a9bac87bdeaed2e7567de7bbb9abd238": {
+        "superseded_reason": "json_object_artifact_key_order_validation_code_bug",
+        "stderr_markers": (
+            "FormalProviderError",
+            "Formal provider artifact roles/order mismatch",
+        ),
+    },
+}
+
 LOCAL_PATH_RE = re.compile(
     r"(?:(?<![:/A-Za-z0-9_+\-])/(?!/)[^\s'\"`<>]+|"
     r"(?<![A-Za-z0-9])[A-Za-z]:[\\/](?![\\/])[^\r\n'\"`]+)"
@@ -496,6 +514,9 @@ def validate_failed_clean1_attempt_evidence(
     attempt = Path(provider_attempt).resolve(strict=True)
     if not stage.is_dir() or not attempt.is_dir():
         raise EvidenceContractError("Failed CLEAN1 stage/provider attempt is missing")
+    specification = FAILED_CLEAN1_ATTEMPT_SPECS.get(expected_code_commit)
+    if specification is None:
+        raise EvidenceContractError("Failed CLEAN1 code commit is not retry-authorized")
 
     def safe_relative(value: str) -> str:
         normalized = value.replace("\\", "/")
@@ -586,13 +607,9 @@ def validate_failed_clean1_attempt_evidence(
     stderr = (
         stage / "04_PROVIDER_AUDIT/PROVIDER_ATTEMPT_STDERR.txt"
     ).read_text(encoding="utf-8", errors="strict")
-    for marker in (
-        "shutil.SameFileError",
-        "dual_yaw_provider.csv",
-        "DUAL_YAW_PROVIDER.csv",
-    ):
+    for marker in specification["stderr_markers"]:
         if marker not in stderr:
-            raise EvidenceContractError("Failed provider error is not the exact case-only copy bug")
+            raise EvidenceContractError("Failed provider error is not the exact authorized code bug")
 
     required_attempt_files = (
         "RAW_DOPPLER_BACKEND_REPORT.json",
