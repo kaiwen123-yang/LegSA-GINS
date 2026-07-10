@@ -23,4 +23,6 @@ Fresh active evidence requires raw hash verification, fresh provider generation,
 
 ## Decision State
 
-CLEAN0 is a bootstrap/reset gate, not paper-performance evidence. `CLEAN1` may begin only after CLEAN0 supervisor/reviewer closure and explicit human approval. No old experiment continuation, DA03/DA05, 541-case matrix, paper claim, merge, or clean release tag is implied.
+CLEAN0 completed the repository/asset reset and is published only for unmerged human review. The raw lock, clean providers, reproducible BY2 smoke, exact delete manifest, deletion checkpoints, post-delete hash verification, and clean context export are the current bootstrap evidence. They are not paper-performance evidence.
+
+`CLEAN1` may begin only after explicit human approval. No old experiment continuation, DA03/DA05, 541-case matrix, paper claim, merge, tag, or branch cleanup is implied.
