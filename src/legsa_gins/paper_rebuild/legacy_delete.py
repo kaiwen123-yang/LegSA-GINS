@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import csv
+import hashlib
+import json
 import os
 import shutil
 from dataclasses import dataclass
@@ -206,7 +208,17 @@ def _write_csv(path: Path, fieldnames: list[str], rows: Iterable[Mapping[str, An
         writer.writerows([{field: row.get(field, "") for field in fieldnames} for row in rows])
 
 
-DRY_FIELDS = ["delete_id", "exact_path", "realpath", "size_bytes", "category", "delete_allowed", "guard_result"]
+DRY_FIELDS = [
+    "delete_id",
+    "exact_path",
+    "realpath",
+    "size_bytes",
+    "category",
+    "delete_allowed",
+    "guard_result",
+    "manifest_row_sha256",
+    "manifest_rows_sha256",
+]
 EXEC_FIELDS = [
     "delete_id",
     "exact_path",
@@ -221,9 +233,29 @@ EXEC_FIELDS = [
 FAIL_FIELDS = ["delete_id", "exact_path", "category", "error"]
 
 
+def delete_row_sha256(row: Mapping[str, str]) -> str:
+    """Bind dry-run approval to every required manifest field, not only its ID."""
+
+    payload = {field: str(row.get(field) or "") for field in sorted(DELETE_MANIFEST_REQUIRED_FIELDS)}
+    encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def delete_manifest_rows_sha256(rows: Iterable[Mapping[str, str]]) -> str:
+    """Hash the ordered semantic manifest so approval cannot be reused after any drift."""
+
+    payload = [
+        {field: str(row.get(field) or "") for field in sorted(DELETE_MANIFEST_REQUIRED_FIELDS)}
+        for row in rows
+    ]
+    encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
 def dry_run_delete_manifest(rows: list[dict[str, str]], roots: DeleteRoots, output_path: Path) -> tuple[list[dict[str, Any]], bool]:
     report: list[dict[str, Any]] = []
     passed = True
+    manifest_rows_hash = delete_manifest_rows_sha256(rows)
     for row in rows:
         ok, reason, _exact, real = guard_delete_row(row, roots)
         selected = _bool(row.get("delete_allowed"))
@@ -238,6 +270,8 @@ def dry_run_delete_manifest(rows: list[dict[str, str]], roots: DeleteRoots, outp
                 "category": row.get("category", ""),
                 "delete_allowed": "true" if selected else "false",
                 "guard_result": reason,
+                "manifest_row_sha256": delete_row_sha256(row),
+                "manifest_rows_sha256": manifest_rows_hash,
             }
         )
     _write_csv(output_path, DRY_FIELDS, report)
@@ -248,12 +282,27 @@ def verify_dry_run_approval(path: Path, rows: list[dict[str, str]]) -> None:
     if not path.is_file():
         raise DeleteGuardError("Approved dry-run log is missing")
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
-        approval = {row["delete_id"]: row for row in csv.DictReader(handle)}
+        approval_rows = list(csv.DictReader(handle))
+    approval: dict[str, dict[str, str]] = {}
+    for approved in approval_rows:
+        delete_id = str(approved.get("delete_id") or "")
+        if not delete_id or delete_id in approval:
+            raise DeleteGuardError("Approved dry-run log has duplicate or empty delete_id")
+        approval[delete_id] = approved
+    current_ids = [row["delete_id"] for row in rows]
+    if set(approval) != set(current_ids):
+        raise DeleteGuardError("Approved dry-run log does not match the exact manifest ID set")
+    current_manifest_hash = delete_manifest_rows_sha256(rows)
+    approved_manifest_hashes = {row.get("manifest_rows_sha256") for row in approval.values()}
+    if approved_manifest_hashes != {current_manifest_hash}:
+        raise DeleteGuardError("Exact delete manifest changed after dry-run approval")
     for row in rows:
         if _bool(row.get("delete_allowed")):
             approved = approval.get(row["delete_id"])
             if not approved or approved.get("guard_result") != "PASS":
                 raise DeleteGuardError(f"Delete row lacks passing dry-run approval: {row['delete_id']}")
+            if approved.get("manifest_row_sha256") != delete_row_sha256(row):
+                raise DeleteGuardError(f"Delete row changed after dry-run approval: {row['delete_id']}")
 
 
 def _load_execution_states(path: Path) -> dict[str, str]:
