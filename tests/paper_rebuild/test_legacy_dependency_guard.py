@@ -3,6 +3,8 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
+import pytest
+
 from legsa_gins.paper_rebuild import legacy_delete
 from legsa_gins.paper_rebuild.legacy_delete import (
     dry_run_delete_manifest,
@@ -10,6 +12,7 @@ from legsa_gins.paper_rebuild.legacy_delete import (
     guard_delete_row,
     make_delete_roots,
 )
+from legsa_gins.paper_rebuild.legacy_delete import DeleteGuardError
 from legsa_gins.paper_rebuild.paths import legacy_reason
 
 
@@ -177,3 +180,36 @@ def test_measure_failure_is_checkpointed_and_next_candidate_is_deleted(
         row["delete_id"] == "D_DELETE_OK" and row["status"] == "DELETED"
         for row in executions
     )
+
+
+def test_execution_rejects_manifest_row_changed_after_dry_run(tmp_path: Path) -> None:
+    project = tmp_path / "project"
+    raw = project / "data" / "raw"
+    paper = project / "paper"
+    clean = project / "clean"
+    freeze = project / "freeze"
+    code = tmp_path / "code"
+    for path in (raw, paper, clean, freeze, code):
+        path.mkdir(parents=True)
+    candidate = project / "approved_candidate"
+    candidate.mkdir()
+    (candidate / "payload.bin").write_bytes(b"legacy")
+    roots = make_delete_roots(
+        project_root=project,
+        raw_root=raw,
+        paper_root=paper,
+        clean_root=clean,
+        legacy_freeze_root=freeze,
+        code_root=code,
+    )
+    rows = [_row(candidate)]
+    log_root = clean / "delete_logs"
+    dry_log = log_root / "DELETE_DRY_RUN_LOG.csv"
+    _report, passed = dry_run_delete_manifest(rows, roots, dry_log)
+    assert passed is True
+
+    tampered = dict(rows[0])
+    tampered["reason"] = "changed after approval"
+    with pytest.raises(DeleteGuardError, match="changed after dry-run approval"):
+        execute_delete_manifest([tampered], roots, log_root=log_root, dry_run_log=dry_log)
+    assert candidate.is_dir()
