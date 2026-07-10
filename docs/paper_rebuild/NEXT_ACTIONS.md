@@ -1,17 +1,17 @@
 # Clean Rebuild Next Actions
 
-## Finish CLEAN0
+## CLEAN0 Closure
 
-- Complete raw hash lock and verify no raw modification.
-- Validate the paper-rebuild code/config/tests and build the active core.
-- Complete a BY2 `basic_dual_yaw_EKF` smoke from freshly generated raw-derived inputs.
-- Confirm `old_runtime_input_count=0` and all forbidden manifest flags are false.
-- Complete guarded legacy deletion, storage accounting, and clean GPT-context export.
-- Publish the lightweight clean-rebuild branch and PR without merging or creating a clean-release tag.
+- Raw hash lock and post-delete full verification: complete.
+- Independent paper-rebuild code/config/tests and active-core build: complete.
+- BY2 `basic_dual_yaw_EKF` smoke from freshly regenerated raw-derived inputs: complete.
+- `old_runtime_input_count=0`, clean code/provider provenance, and forbidden flags: verified.
+- Exact guarded legacy deletion and storage accounting: complete.
+- Clean GPT context export and lightweight unmerged review PR: CLEAN0 publication deliverables.
 
 ## CLEAN1 Candidate Scope
 
-After a passing CLEAN0 supervisor/reviewer gate and explicit human approval:
+After the CLEAN0 supervisor/reviewer reports and explicit human approval:
 
 1. Freeze the exact BY2 clean experiment window and evaluator contract.
 2. Run clean normal BY2 for the four methods in `methods.yaml`.

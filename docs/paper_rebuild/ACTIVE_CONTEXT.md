@@ -43,10 +43,10 @@ Active runtime evidence may come only from `<CLEAN_ROOT>` and only when its mani
 - final_v23 and LegSA outputs are never solver inputs.
 - No per-case tuning, output-only correction, or metric-driven epoch deletion is allowed.
 - Synthetic and semi-synthetic results must never enter a real-data result table.
-- Every runtime manifest records source hashes, provider hashes, data mode, synthetic flags, forbidden-input flags, code commit, and config hash.
+- Every runtime manifest records source hashes, provider hashes, provider-generator commit/config hash, data mode, synthetic flags, forbidden-input flags, clean code commit, clean-worktree state, and runtime config hash.
 - Old runners may remain for historical reproducibility, but the clean rebuild must not call them.
 - There is no active complete nine-factor FGO claim.
 
 ## Current Gate
 
-`PAPER10_CLEAN0` establishes the new context, raw hash lock, independent runner, BY2 clean smoke, guarded legacy deletion, and GPT context export. `CLEAN1` must not start until the CLEAN0 supervisor and reviewer reports close the required gates. No performance or paper claim is authorized by bootstrap completion alone.
+`PAPER10_CLEAN0` established the new context, raw hash lock, independent runner, reproducible BY2 clean smoke, guarded legacy deletion, and GPT context export. `CLEAN1` must not start without explicit human approval. No performance or paper claim is authorized by bootstrap completion alone.

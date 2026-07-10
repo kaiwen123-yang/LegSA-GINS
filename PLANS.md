@@ -4,7 +4,7 @@
 
 `PAPER10_CLEAN0_REPOSITORY_LEGACY_FREEZE_DEPENDENCY_DECOUPLING_AND_HARD_RESET`
 
-CLEAN0 freezes Git history and legacy protocol knowledge, establishes the clean code/config/context structure, hash-locks raw inputs, creates an independent runner, completes a BY2 clean smoke, removes guarded legacy assets, exports a clean GPT context, and publishes a lightweight review PR.
+CLEAN0 froze Git history and legacy protocol knowledge, established the clean code/config/context structure, hash-locked raw inputs, created an independent runner, completed a BY2 clean smoke, physically removed guarded legacy assets, and prepared a clean GPT context and lightweight unmerged review PR.
 
 ## CLEAN0 Gates
 
@@ -18,6 +18,8 @@ CLEAN0 freezes Git history and legacy protocol knowledge, establishes the clean 
 8. Build, clean tests, active-core tests, diff checks, and publish checks pass.
 
 No smoke result is a paper performance claim.
+
+All execution gates above are complete. Legacy unit/audit tests that require retired external stage assets remain classified separately and do not override passing clean tests, active-core tests, or the raw/provider/smoke guards.
 
 ## Next Stage
 
