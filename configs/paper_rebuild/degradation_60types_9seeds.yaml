@@ -1,0 +1,452 @@
+schema_version: paper_rebuild.degradation.v1
+spec_id: PAPER10M1R2A_V2_BY2_DEGRADATION_MATRIX_SPEC_LOCK_60TYPES_9SEEDS
+provenance:
+  source_kind: legacy_spec_source
+  tracked_source: scripts/paper10m1r2a_v2_build_degradation_spec.py
+  tracked_source_sha256: db2e70fbc361f5e5ff62ff12a1e28ac1ee4002c92c5c3147e0cefa19d47d7d2e
+  performance_evidence: false
+  legacy_row_results_copied: false
+  legacy_provider_payload_copied: false
+  legacy_figures_copied: false
+
+execution_authorized_in_CLEAN0: false
+future_provider_generation_requires_human_approval: true
+
+matrix:
+  dataset: BY2
+  degradation_type_count: 60
+  seeds_per_type: 9
+  degraded_case_count: 540
+  clean_case_count: 1
+  total_case_count: 541
+  module_disable_is_case_axis: false
+  mixed_components_must_be_explicit: true
+
+clean_case:
+  case_id: BY2_CLEAN_CANONICAL
+  case_index: 0
+  family: clean
+  degradation_type_id: CLEAN
+  degradation_type_name: clean_reference_no_degradation
+  seed_index: none
+  seed_value: null
+  rng_algorithm: none
+  anchor_name: none
+  duration: full_sequence
+  parameters: {operation: none}
+  requires_provider_generation: false
+  trace_evaluation_only: true
+
+case_rules:
+  case_id_template: "BY2_{degradation_type_id}_{degradation_type_name}_{seed_index}"
+  case_index_order: clean_then_D01_to_D60_each_seed_00_to_seed_08
+  rng_algorithm: numpy.random.PCG64
+  same_seed_fairness: true
+  trace_evaluation_only: true
+  trace_used_for_anchor_or_parameter_selection: false
+  final_v23_or_legsa_output_used_for_generation: false
+  raw_data_overwritten: false
+  provider_lineage_required: true
+  input_and_output_sha256_required: true
+  effect_rule_id_template: "RULE_{degradation_type_id}"
+  mixed_component_validation: each_component_independently_validated
+  source_family_separation:
+    raw_doppler_and_receiver_velocity_are_distinct: true
+    go2_inputs_are_weak_prior_or_diagnostic_only: true
+
+seeds:
+  - {seed_index: seed_00, seed_value: 260306001, anchor_name: user_original_206p2s, anchor_time_s: 206.2}
+  - {seed_index: seed_01, seed_value: 260306002, anchor_name: early_motion, anchor_time_s: 88.0}
+  - {seed_index: seed_02, seed_value: 260306003, anchor_name: mid_straight, anchor_time_s: 146.0}
+  - {seed_index: seed_03, seed_value: 260306004, anchor_name: turn_segment, anchor_time_s: 190.0}
+  - {seed_index: seed_04, seed_value: 260306005, anchor_name: low_speed_segment, anchor_time_s: 230.0}
+  - {seed_index: seed_05, seed_value: 260306006, anchor_name: high_motion_segment, anchor_time_s: 118.0}
+  - {seed_index: seed_06, seed_value: 260306007, anchor_name: lower_quality_but_valid_A1, anchor_time_s: 272.0}
+  - {seed_index: seed_07, seed_value: 260306008, anchor_name: raw_doppler_residual_candidate, anchor_time_s: 304.0}
+  - {seed_index: seed_08, seed_value: 260306009, anchor_name: late_recovery_segment, anchor_time_s: 332.0}
+
+anchor_policy:
+  selection_basis:
+    - GNSS_status
+    - dual_antenna_status_or_relpos_quality
+    - Raw_Doppler_provider_metadata
+    - Go2_body_state_velocity_yaw_speed_mode_gait
+    - time_percentile_fallback
+  trace_used: false
+  final_v23_output_used: false
+  legsa_output_used: false
+  unresolved_fallback: nearest_valid_source_epoch_with_same_seed_index
+
+degradation_types:
+  - id: D01
+    name: GNSS_position_outage_3s
+    family: gnss_outage
+    parameters: {operation: outage, sources: [gnss_position], duration_s: 3}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D02
+    name: GNSS_position_outage_5s
+    family: gnss_outage
+    parameters: {operation: outage, sources: [gnss_position], duration_s: 5}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D03
+    name: GNSS_position_outage_10s
+    family: gnss_outage
+    parameters: {operation: outage, sources: [gnss_position], duration_s: 10}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D04
+    name: GNSS_position_outage_20s
+    family: gnss_outage
+    parameters: {operation: outage, sources: [gnss_position], duration_s: 20}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D05
+    name: GNSS_position_velocity_outage_10s
+    family: gnss_outage
+    parameters: {operation: outage, sources: [gnss_position, receiver_velocity], duration_s: 10}
+    affected_sources: [gnss_position, receiver_velocity]
+    claim_level: main_candidate
+  - id: D06
+    name: GNSS_all_update_outage_20s
+    family: gnss_outage
+    parameters: {operation: outage, sources: [gnss_position, receiver_velocity, dual_yaw], duration_s: 20}
+    affected_sources: [gnss_position, receiver_velocity, dual_yaw]
+    claim_level: main_candidate
+  - id: D07
+    name: GNSS_repeated_short_outage
+    family: gnss_outage
+    parameters: {operation: repeated_outage, sources: [gnss_position], interval_count: 3, duration_each_s: 3, seed_controls: interval_start_times}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D08
+    name: GNSS_downsample_5Hz
+    family: gnss_sampling
+    parameters: {operation: downsample, sources: [gnss_position, receiver_velocity, dual_yaw], target_rate_hz: 5, seed_controls: phase}
+    affected_sources: [gnss_position, receiver_velocity, dual_yaw]
+    claim_level: main_candidate
+  - id: D09
+    name: GNSS_downsample_2Hz
+    family: gnss_sampling
+    parameters: {operation: downsample, sources: [gnss_position, receiver_velocity, dual_yaw], target_rate_hz: 2, seed_controls: phase}
+    affected_sources: [gnss_position, receiver_velocity, dual_yaw]
+    claim_level: main_candidate
+  - id: D10
+    name: GNSS_downsample_1Hz
+    family: gnss_sampling
+    parameters: {operation: downsample, sources: [gnss_position, receiver_velocity, dual_yaw], target_rate_hz: 1, seed_controls: phase}
+    affected_sources: [gnss_position, receiver_velocity, dual_yaw]
+    claim_level: main_candidate
+  - id: D11
+    name: GNSS_random_dropout_30
+    family: gnss_sampling
+    parameters: {operation: random_dropout, sources: [gnss_position, receiver_velocity, dual_yaw], dropout_ratio: 0.30, seed_controls: dropout_pattern}
+    affected_sources: [gnss_position, receiver_velocity, dual_yaw]
+    claim_level: main_candidate
+  - id: D12
+    name: GNSS_random_dropout_60
+    family: gnss_sampling
+    parameters: {operation: random_dropout, sources: [gnss_position, receiver_velocity, dual_yaw], dropout_ratio: 0.60, seed_controls: dropout_pattern}
+    affected_sources: [gnss_position, receiver_velocity, dual_yaw]
+    claim_level: main_candidate
+  - id: D13
+    name: position_noise_mild
+    family: position_value
+    parameters: {operation: gaussian_position_noise, h_sigma_m: 0.5, v_sigma_m: 1.0}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D14
+    name: position_noise_medium
+    family: position_value
+    parameters: {operation: gaussian_position_noise, h_sigma_m: 1.5, v_sigma_m: 2.5}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D15
+    name: position_noise_strong
+    family: position_value
+    parameters: {operation: gaussian_position_noise, h_sigma_m: 3.0, v_sigma_m: 5.0}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D16
+    name: position_static_bias_1p5m
+    family: position_value
+    parameters: {operation: static_position_bias, horizontal_bias_m: 1.5, vertical_bias_m: 0.5, seed_controls: horizontal_direction_and_vertical_sign}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D17
+    name: position_static_bias_3m
+    family: position_value
+    parameters: {operation: static_position_bias, horizontal_bias_m: 3.0, vertical_bias_m: 1.0, seed_controls: horizontal_direction_and_vertical_sign}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D18
+    name: position_slow_drift_bias
+    family: position_value
+    parameters: {operation: slow_drift_bias, horizontal_start_m: 0.0, horizontal_end_m: 3.0, vertical_start_m: 0.0, vertical_end_m: 1.0}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D19
+    name: position_sinusoidal_multipath
+    family: position_value
+    parameters: {operation: sinusoidal_multipath, horizontal_amplitude_m: 2.0, vertical_amplitude_m: 0.5, seed_controls: phase}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D20
+    name: position_spike_mild
+    family: position_value
+    parameters: {operation: position_spike, probability: 0.02, horizontal_m: 2.0, vertical_m: 1.0}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D21
+    name: position_spike_medium
+    family: position_value
+    parameters: {operation: position_spike, probability: 0.05, horizontal_m: 4.0, vertical_m: 2.0}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D22
+    name: position_spike_burst_strong
+    family: position_value
+    parameters: {operation: position_burst_spike, burst_length_epochs_min: 3, burst_length_epochs_max: 5, horizontal_m: 8.0, vertical_m: 4.0}
+    affected_sources: [gnss_position]
+    claim_level: main_candidate
+  - id: D23
+    name: position_std_inflation_1p5
+    family: position_std_status
+    parameters: {operation: std_inflation, source: gnss_position_std, factor: 1.5}
+    affected_sources: [gnss_position_std]
+    claim_level: main_candidate
+  - id: D24
+    name: position_std_inflation_2p5
+    family: position_std_status
+    parameters: {operation: std_inflation, source: gnss_position_std, factor: 2.5}
+    affected_sources: [gnss_position_std]
+    claim_level: main_candidate
+  - id: D25
+    name: position_std_inflation_4p0
+    family: position_std_status
+    parameters: {operation: std_inflation, source: gnss_position_std, factor: 4.0}
+    affected_sources: [gnss_position_std]
+    claim_level: main_candidate
+  - id: D26
+    name: position_std_deflation_0p25
+    family: position_std_status
+    parameters: {operation: std_deflation, source: gnss_position_std, factor: 0.25}
+    affected_sources: [gnss_position_std]
+    claim_level: main_candidate
+  - id: D27
+    name: bad_position_optimistic_std
+    family: position_std_status
+    parameters: {operation: bad_position_optimistic_std, h_sigma_m: 3.0, v_sigma_m: 5.0, std_factor: 0.25}
+    affected_sources: [gnss_position, gnss_position_std]
+    claim_level: main_candidate
+  - id: D28
+    name: good_position_pessimistic_std
+    family: position_std_status
+    parameters: {operation: good_position_pessimistic_std, value_change: unchanged, std_factor: 4.0}
+    affected_sources: [gnss_position_std]
+    claim_level: main_candidate
+  - id: D29
+    name: gnss_status_quality_downgrade_only
+    family: position_std_status
+    parameters: {operation: status_quality_downgrade_only, value_change: unchanged}
+    affected_sources: [gnss_status_quality_flags]
+    claim_level: main_candidate
+  - id: D30
+    name: dual_yaw_outage_5s
+    family: dual_yaw
+    parameters: {operation: outage, sources: [dual_yaw], duration_s: 5}
+    affected_sources: [dual_yaw]
+    claim_level: main_candidate
+  - id: D31
+    name: dual_yaw_outage_20s
+    family: dual_yaw
+    parameters: {operation: outage, sources: [dual_yaw], duration_s: 20}
+    affected_sources: [dual_yaw]
+    claim_level: main_candidate
+  - id: D32
+    name: dual_yaw_noise_mild
+    family: dual_yaw
+    parameters: {operation: dual_yaw_gaussian_noise, sigma_deg: 1.0, yaw_wrap: required}
+    affected_sources: [dual_yaw]
+    claim_level: main_candidate
+  - id: D33
+    name: dual_yaw_noise_strong
+    family: dual_yaw
+    parameters: {operation: dual_yaw_gaussian_noise, sigma_deg: 5.0, yaw_wrap: required}
+    affected_sources: [dual_yaw]
+    claim_level: main_candidate
+  - id: D34
+    name: dual_yaw_spike_5pct
+    family: dual_yaw
+    parameters: {operation: dual_yaw_spike, probability: 0.05, yaw_wrap: required}
+    affected_sources: [dual_yaw]
+    claim_level: main_candidate
+  - id: D35
+    name: dual_yaw_spike_10pct
+    family: dual_yaw
+    parameters: {operation: dual_yaw_spike, probability: 0.10, yaw_wrap: required}
+    affected_sources: [dual_yaw]
+    claim_level: main_candidate
+  - id: D36
+    name: dual_yaw_std_inflation_1p5
+    family: dual_yaw
+    parameters: {operation: yaw_std_inflation, factor: 1.5}
+    affected_sources: [dual_yaw_std]
+    claim_level: main_candidate
+  - id: D37
+    name: dual_yaw_std_inflation_3p0
+    family: dual_yaw
+    parameters: {operation: yaw_std_inflation, factor: 3.0}
+    affected_sources: [dual_yaw_std]
+    claim_level: main_candidate
+  - id: D38
+    name: bad_yaw_optimistic_std
+    family: dual_yaw
+    parameters: {operation: bad_yaw_optimistic_std, yaw_noise_sigma_deg: 10.0, optional_spike_component: true, yaw_std_factor: 0.25, yaw_wrap: required}
+    affected_sources: [dual_yaw, dual_yaw_std]
+    claim_level: main_candidate
+  - id: D39
+    name: baseline_quality_dropout
+    family: dual_yaw
+    parameters: {operation: baseline_quality_dropout, fields: [rel_valid, quality], seed_controls: unavailable_bursts}
+    affected_sources: [dual_antenna_baseline_quality]
+    claim_level: main_candidate
+  - id: D40
+    name: baseline_length_jitter_relacc
+    family: dual_yaw
+    parameters: {operation: baseline_length_jitter_relacc, baseline_length_jitter_m: seeded_small_jitter, rel_acc_inflation: true}
+    affected_sources: [dual_antenna_relpos, baseline_metadata]
+    claim_level: main_candidate
+  - id: D41
+    name: gnss1_gnss2_asymmetric_noise
+    family: dual_yaw
+    parameters: {operation: gnss1_gnss2_asymmetric_noise, h_sigma_m: 3.0, v_sigma_m: 2.0, seed_controls: antenna_selection}
+    affected_sources: [one_seed_selected_gnss_antenna_position]
+    claim_level: main_candidate
+  - id: D42
+    name: receiver_velocity_outage_20s
+    family: velocity_raw_doppler
+    parameters: {operation: outage, sources: [receiver_velocity], duration_s: 20}
+    affected_sources: [receiver_velocity]
+    claim_level: main_candidate
+  - id: D43
+    name: receiver_velocity_noise_0p5
+    family: velocity_raw_doppler
+    parameters: {operation: receiver_velocity_noise, sigma_mps: 0.5}
+    affected_sources: [receiver_velocity]
+    claim_level: main_candidate
+  - id: D44
+    name: receiver_velocity_spike_2mps
+    family: velocity_raw_doppler
+    parameters: {operation: receiver_velocity_spike, probability: 0.02, magnitude_mps: 2.0}
+    affected_sources: [receiver_velocity]
+    claim_level: main_candidate
+  - id: D45
+    name: receiver_velocity_bad_optimistic_std
+    family: velocity_raw_doppler
+    parameters: {operation: receiver_velocity_noise_optimistic_std, sigma_mps: 0.5, std_factor: 0.25}
+    affected_sources: [receiver_velocity, receiver_velocity_std]
+    claim_level: main_candidate
+  - id: D46
+    name: raw_doppler_outage_20s
+    family: velocity_raw_doppler
+    parameters: {operation: outage, sources: [raw_doppler_velocity], duration_s: 20}
+    affected_sources: [raw_doppler_velocity]
+    claim_level: main_candidate
+  - id: D47
+    name: raw_doppler_noise_0p5
+    family: velocity_raw_doppler
+    parameters: {operation: raw_doppler_velocity_noise, sigma_mps: 0.5}
+    affected_sources: [raw_doppler_velocity]
+    claim_level: main_candidate
+  - id: D48
+    name: raw_doppler_spike_1p5mps
+    family: velocity_raw_doppler
+    parameters: {operation: raw_doppler_velocity_spike, probability: 0.02, magnitude_mps: 1.5}
+    affected_sources: [raw_doppler_velocity]
+    claim_level: main_candidate
+  - id: D49
+    name: raw_doppler_bad_optimistic_std
+    family: velocity_raw_doppler
+    parameters: {operation: raw_doppler_anomaly_optimistic_std, anomaly: noise_or_spike_seeded, optimistic_or_floor_std_policy: true}
+    affected_sources: [raw_doppler_velocity, raw_doppler_uncertainty]
+    claim_level: main_candidate
+  - id: D50
+    name: raw_receiver_velocity_conflict
+    family: velocity_raw_doppler
+    parameters: {operation: raw_receiver_velocity_conflict, conflict_magnitude_mps: 1.0}
+    affected_sources: [raw_doppler_velocity, receiver_velocity]
+    claim_level: main_candidate
+  - id: D51
+    name: go2_roll_pitch_dropout_noise
+    family: go2_prior_metadata
+    parameters: {operation: go2_roll_pitch_dropout_noise, dropout_ratio: 0.50, remaining_noise_sigma_deg: 3.0}
+    affected_sources: [go2_roll_pitch_weak_prior]
+    claim_level: appendix_candidate
+  - id: D52
+    name: go2_roll_pitch_bias
+    family: go2_prior_metadata
+    parameters: {operation: go2_roll_pitch_bias, bias_deg: 2.0, seed_controls: roll_pitch_direction}
+    affected_sources: [go2_roll_pitch_weak_prior]
+    claim_level: appendix_candidate
+  - id: D53
+    name: go2_horizontal_velocity_noise
+    family: go2_prior_metadata
+    parameters: {operation: go2_horizontal_velocity_noise, sigma_mps: 1.0}
+    affected_sources: [go2_horizontal_velocity_weak_prior]
+    claim_level: appendix_candidate
+  - id: D54
+    name: go2_horizontal_velocity_scale_dropout
+    family: go2_prior_metadata
+    parameters: {operation: go2_horizontal_velocity_scale_or_dropout, scale: 1.5, dropout_ratio: 0.50, seed_group_controls: scale_vs_dropout}
+    affected_sources: [go2_horizontal_velocity_weak_prior]
+    claim_level: appendix_candidate
+  - id: D55
+    name: go2_contact_motion_metadata_uncertain
+    family: go2_prior_metadata
+    parameters: {operation: go2_contact_motion_metadata_uncertain, pattern: missing_or_uncertain_seeded}
+    affected_sources: [go2_contact, go2_mode, go2_gait_metadata]
+    claim_level: diagnostic_only
+  - id: D56
+    name: go2_foot_speed_contact_conflict
+    family: go2_prior_metadata
+    parameters: {operation: go2_foot_speed_contact_conflict, pattern: foot_force_and_foot_speed_conflict_seeded}
+    affected_sources: [go2_foot_force, go2_foot_speed_metadata]
+    claim_level: diagnostic_only
+  - id: D57
+    name: multi_source_latency_jitter
+    family: multi_source_mixed
+    parameters: {operation: multi_source_latency_jitter, components: [latency_shift, timestamp_jitter], latency_range_s: [0.1, 0.3], jitter_range_ms: [20, 50]}
+    affected_sources: [selected_source_timestamps]
+    claim_level: main_candidate
+  - id: D58
+    name: outage_yaw_spike_then_recovery
+    family: multi_source_mixed
+    parameters: {operation: mixed_components, components: [position_outage_10s, dual_yaw_spike, clean_recovery_interval], recovery_interval: required}
+    affected_sources: [gnss_position, dual_yaw]
+    claim_level: main_candidate
+  - id: D59
+    name: bad_position_good_yaw_raw_conflict
+    family: multi_source_mixed
+    parameters: {operation: mixed_components, components: [bad_position, good_yaw, raw_receiver_velocity_conflict], conflict_magnitude_mps: 1.0}
+    affected_sources: [gnss_position, raw_doppler_velocity, receiver_velocity]
+    claim_level: main_candidate
+  - id: D60
+    name: multisource_bad_optimistic_then_recovery
+    family: multi_source_mixed
+    parameters: {operation: mixed_components, components: [bad_position_optimistic_std, bad_yaw_optimistic_std, bad_velocity_optimistic_std, clean_recovery_interval], recovery_interval: required}
+    affected_sources: [gnss_position, dual_yaw, velocity_sources, uncertainty_fields]
+    claim_level: main_candidate
+
+effect_validation_contract:
+  affected_sources_only: true
+  seeded_epoch_count_or_mask_matches_spec: true
+  configured_value_or_std_change_matches_spec: true
+  seed_replay_is_identical: true
+  timestamps_monotonic_or_jitter_bounded: true
+  no_unexpected_nan_or_inf: true
+  yaw_changes_wrap_safe: true
+  baseline_length_remains_physically_auditable: true
+  trace_for_generation_or_tuning: false
+  final_v23_or_legsa_output_for_generation_or_tuning: false

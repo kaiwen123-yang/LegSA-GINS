@@ -1,0 +1,87 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: paper_rebuild.run_manifest.v1
+title: LegSA-GINS Clean Rebuild Run Manifest
+type: object
+additionalProperties: true
+required:
+  - schema_version
+  - run_id
+  - algorithm_id
+  - case_id
+  - data_mode
+  - raw_source_hashes
+  - provider_hashes
+  - synthetic_data_used
+  - semisynthetic_data_used
+  - trace_used_online
+  - receiver_imu_as_body_imu
+  - final_v23_output_solver_input
+  - LegSA_output_solver_input
+  - per_case_tuning
+  - output_only_correction
+  - epoch_deleted_for_metric
+  - old_runtime_input_count
+  - code_commit
+  - code_worktree_dirty_at_run
+  - config_hash
+  - provider_generator_commit
+  - provider_generation_config_hash
+  - local_path_config_hash
+  - terminal_status
+
+properties:
+  schema_version: {const: paper-rebuild-run-manifest-v1}
+  run_id: {type: string, minLength: 1}
+  algorithm_id:
+    enum: [single_antenna_EKF, basic_dual_yaw_EKF, strong_dual_yaw_EKF, LegSA_Paper_V1]
+  case_id: {type: string, minLength: 1}
+  data_mode:
+    enum: [real_by2_raw, real_by3_raw, real_xb_pg_raw, synthetic, semisynthetic]
+  raw_source_hashes:
+    type: object
+    minProperties: 1
+    additionalProperties: {type: string, pattern: "^[0-9a-f]{64}$"}
+  provider_hashes:
+    type: object
+    minProperties: 1
+    additionalProperties: {type: string, pattern: "^[0-9a-f]{64}$"}
+  synthetic_data_used: {type: boolean}
+  semisynthetic_data_used: {type: boolean}
+  trace_used_online: {const: false}
+  receiver_imu_as_body_imu: {const: false}
+  final_v23_output_solver_input: {const: false}
+  LegSA_output_solver_input: {const: false}
+  per_case_tuning: {const: false}
+  output_only_correction: {const: false}
+  epoch_deleted_for_metric: {const: false}
+  old_runtime_input_count: {const: 0}
+  code_commit: {type: string, pattern: "^[0-9a-f]{7,64}$"}
+  code_worktree_dirty_at_run: {const: false}
+  config_hash: {type: string, pattern: "^[0-9a-f]{64}$"}
+  provider_generator_commit: {type: string, pattern: "^[0-9a-f]{7,64}$"}
+  provider_generation_config_hash: {type: string, pattern: "^[0-9a-f]{64}$"}
+  local_path_config_hash: {type: string, pattern: "^[0-9a-f]{64}$"}
+  terminal_status: {type: string, minLength: 1}
+  source_role_manifest: {type: string, minLength: 1}
+  provider_lineage_manifest: {type: string, minLength: 1}
+  metric_cross_check: {type: object}
+
+allOf:
+  - if:
+      properties: {data_mode: {pattern: "^real_"}}
+    then:
+      properties:
+        synthetic_data_used: {const: false}
+        semisynthetic_data_used: {const: false}
+  - if:
+      properties: {data_mode: {const: synthetic}}
+    then:
+      properties:
+        synthetic_data_used: {const: true}
+        semisynthetic_data_used: {const: false}
+  - if:
+      properties: {data_mode: {const: semisynthetic}}
+    then:
+      properties:
+        synthetic_data_used: {const: false}
+        semisynthetic_data_used: {const: true}
