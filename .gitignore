@@ -101,3 +101,13 @@ cmake-build-*/
 !scripts/datasets/**
 !docs/datasets/
 !docs/datasets/**
+
+# 202607 clean paper rebuild local/runtime state
+configs/paper_rebuild/DATA_PATHS.local.yaml
+dist/
+.mypy_cache/
+.ruff_cache/
+*.pyo
+*.egg-info/
+LegSA-GINS-WORKTREES/
+.paper_rebuild_runtime/

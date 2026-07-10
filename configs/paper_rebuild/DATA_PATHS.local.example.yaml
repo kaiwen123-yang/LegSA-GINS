@@ -1,0 +1,12 @@
+schema_version: paper_rebuild.paths.v1
+paths:
+  code_root: "<CODE_ROOT>"
+  raw_root: "<RAW_ROOT>"
+  by2_fix_root: "<BY2_FIX_ROOT>"
+  by2_go2_body: "<BY2_GO2_BODY>"
+  clean_root: "<CLEAN_ROOT>"
+  provider_root: "<CLEAN_ROOT>/04_PROVIDER_FREEZE/BY2_CLEAN"
+  runtime_root: "<CLEAN_ROOT>/05_BY2_CLEAN"
+
+# Copy this file to DATA_PATHS.local.yaml and replace placeholders locally.
+# DATA_PATHS.local.yaml is ignored and must never be committed or exported.

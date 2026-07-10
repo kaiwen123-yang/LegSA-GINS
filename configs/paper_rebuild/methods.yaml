@@ -1,0 +1,111 @@
+schema_version: paper_rebuild.methods.v1
+paper_method_id: LegSA_Paper_V1
+defaults:
+  solver_namespace: legsa_gins.paper_rebuild
+  trace_used_online: false
+  final_v23_output_solver_input: false
+  LegSA_output_solver_input: false
+  per_case_tuning: false
+  output_only_correction: false
+  epoch_deleted_for_metric: false
+  enable_selected_fgo_feedback: false
+  enable_no_feedback_fgo: false
+  enable_active_nine_factor_fgo: false
+  enable_multi_state_qm: false
+  enable_qa_fallback: false
+  enable_go2_joint_factor: false
+  enable_go2_position_truth: false
+  enable_go2_velocity_truth: false
+  enable_go2_yaw_truth: false
+
+dual_yaw_source_contract:
+  baseline_vector: gnss2_minus_gnss1
+  lateral_body_offset_deg: 90.0
+  residual: wrap_safe
+  trace_selects_sign_or_offset: false
+  by2_clean_median_length_gate_m: [0.20, 0.60]
+  forbidden_four_meter_regression_band_m: [3.5, 4.5]
+  per_epoch_out_of_band_action: label_only_not_metric_deletion
+  applicability: BY2_clean_contract_not_universal_dataset_range
+
+methods:
+  single_antenna_EKF:
+    role: baseline
+    required_inputs: [imu, gnss_position]
+    optional_inputs: [receiver_velocity]
+    features:
+      enable_dual_yaw: false
+      enable_receiver_velocity: true
+      enable_raw_doppler: false
+      enable_source_aware: false
+      enable_go2_roll_pitch_prior: false
+      enable_go2_horizontal_velocity_prior: false
+    claim_scope: baseline_only
+
+  basic_dual_yaw_EKF:
+    role: baseline
+    required_inputs: [imu, gnss_position, dual_antenna_body_yaw]
+    optional_inputs: []
+    yaw_contract:
+      baseline_vector: gnss2_minus_gnss1
+      lateral_body_offset_deg: 90.0
+      residual: wrap_safe
+      fixed_std_deg: 1.5
+      trace_selects_sign_or_offset: false
+    features:
+      enable_dual_yaw: true
+      enable_receiver_velocity: false
+      enable_raw_doppler: false
+      enable_source_aware: false
+      enable_go2_roll_pitch_prior: false
+      enable_go2_horizontal_velocity_prior: false
+    claim_scope: baseline_only
+
+  strong_dual_yaw_EKF:
+    role: strong_baseline
+    required_inputs: [imu, gnss_position, dual_antenna_body_yaw]
+    optional_inputs: [receiver_velocity]
+    yaw_contract:
+      baseline_vector: gnss2_minus_gnss1
+      lateral_body_offset_deg: 90.0
+      residual: wrap_safe
+      trace_selects_sign_or_offset: false
+    features:
+      enable_dual_yaw: true
+      enable_receiver_velocity: true
+      enable_raw_doppler: false
+      enable_source_aware: false
+      enable_go2_roll_pitch_prior: false
+      enable_go2_horizontal_velocity_prior: false
+    claim_scope: strong_baseline_only
+
+  LegSA_Paper_V1:
+    role: proposed_method
+    required_inputs:
+      - imu
+      - gnss_position
+      - dual_antenna_body_yaw
+      - raw_doppler_velocity
+      - go2_roll_pitch_weak_prior
+      - go2_horizontal_velocity_weak_prior
+    optional_inputs: [receiver_velocity]
+    yaw_contract:
+      baseline_vector: gnss2_minus_gnss1
+      lateral_body_offset_deg: 90.0
+      residual: wrap_safe
+      trace_selects_sign_or_offset: false
+    features:
+      enable_dual_yaw: true
+      enable_receiver_velocity: true
+      enable_raw_doppler: true
+      enable_source_aware: true
+      enable_go2_roll_pitch_prior: true
+      enable_go2_horizontal_velocity_prior: true
+    excluded_features:
+      - selected_fgo_feedback
+      - active_nine_factor_fgo
+      - multi_state_qm_as_main_innovation
+      - qa_fallback
+      - complete_contact_or_fk_factor
+      - go2_truth
+    claim_scope: no_performance_claim_until_fresh_clean_multidataset_review

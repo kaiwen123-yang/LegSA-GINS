@@ -1,0 +1,58 @@
+schema_version: paper_rebuild.classic_cases.v1
+spec_id: BY2_CLASSIC_CASE_MANIFEST_18
+provenance:
+  source_kind: legacy_spec_source
+  tracked_sources:
+    - src/legsa_gins/da_repro/method_teunissen_clambda.py
+    - src/legsa_gins/da_repro/full_backend_classic_runner.py
+  tracked_source_sha256:
+    src/legsa_gins/da_repro/method_teunissen_clambda.py: b38c53532e013a8d63bc1419a70d0c0c45fe31cd585c87cc41d4d9e6fdc93aec
+    src/legsa_gins/da_repro/full_backend_classic_runner.py: e38a275d26bb67017912caccabfeedba35d99c4247a661e675ab2f192fa16306
+  performance_evidence: false
+  legacy_row_results_copied: false
+  legacy_provider_payload_copied: false
+  policy_scope: legacy_DA01_full_backend_provider_side_definition
+
+execution_authorized_in_CLEAN0: false
+future_clean_use_requires_human_approval: true
+
+case_count: 18
+clean_case_id: C00_clean_normal
+execution_rules:
+  clean_runs_first: true
+  remaining_cases_require_clean_gate: true
+  deterministic_seeded_policies: true
+  rng_algorithm: numpy.random.PCG64
+  explicit_seed_values: [0, 1, 2]
+  clean_case_uses_randomness: false
+  trace_evaluation_only: true
+  trace_selects_sign_or_offset: false
+  per_case_tuning: false
+  epoch_deleted_for_metric: false
+  full_backend_provider_layer: raw_carrier_dd_los
+  status_fallback_promoted_to_full_backend: false
+  preserve_nominal_baseline_length_after_vector_perturbation: true
+
+cases:
+  - {case_id: C00_clean_normal, family: clean, policy: none, seed: null, parameters: {operation: none}}
+  - {case_id: C01_outage_10s, family: outage, policy: outage_10s, seed: null, parameters: {operation: midpoint_outage, duration_s: 10}}
+  - {case_id: C02_downsample_2Hz, family: downsample, policy: downsample_2hz, seed: null, parameters: {operation: min_interval_downsample, min_dt_s: 0.50}}
+  - {case_id: C03_downsample_1Hz, family: downsample, policy: downsample_1hz, seed: null, parameters: {operation: min_interval_downsample, min_dt_s: 0.95}}
+  - {case_id: C04_position_noise_medium_seed0, family: position_noise, policy: position_noise_medium, seed: 0, parameters: {operation: baseline_vector_gaussian_noise, horizontal_sigma_m: 0.05, vertical_sigma_scale: 0.5}}
+  - {case_id: C05_position_noise_medium_seed1, family: position_noise, policy: position_noise_medium, seed: 1, parameters: {operation: baseline_vector_gaussian_noise, horizontal_sigma_m: 0.05, vertical_sigma_scale: 0.5}}
+  - {case_id: C06_position_noise_medium_seed2, family: position_noise, policy: position_noise_medium, seed: 2, parameters: {operation: baseline_vector_gaussian_noise, horizontal_sigma_m: 0.05, vertical_sigma_scale: 0.5}}
+  - {case_id: C07_position_spike_medium_seed0, family: position_spike, policy: position_spike_medium, seed: 0, parameters: {operation: horizontal_baseline_spike, magnitude_m: 0.25, fraction: 0.05}}
+  - {case_id: C08_position_spike_medium_seed1, family: position_spike, policy: position_spike_medium, seed: 1, parameters: {operation: horizontal_baseline_spike, magnitude_m: 0.25, fraction: 0.05}}
+  - {case_id: C09_position_spike_medium_seed2, family: position_spike, policy: position_spike_medium, seed: 2, parameters: {operation: horizontal_baseline_spike, magnitude_m: 0.25, fraction: 0.05}}
+  - {case_id: C10_std_inflation_strong, family: std_inflation, policy: std_inflation_strong, seed: null, parameters: {operation: provider_std_scale, factor: 4.0}}
+  - {case_id: C11_yaw_spike_10_seed0, family: yaw_spike, policy: yaw_spike_10_deg, seed: 0, parameters: {operation: baseline_horizontal_rotation_spike, magnitude_deg: 10.0, fraction: 0.05, wrap_safe: true}}
+  - {case_id: C12_yaw_spike_10_seed1, family: yaw_spike, policy: yaw_spike_10_deg, seed: 1, parameters: {operation: baseline_horizontal_rotation_spike, magnitude_deg: 10.0, fraction: 0.05, wrap_safe: true}}
+  - {case_id: C13_yaw_spike_10_seed2, family: yaw_spike, policy: yaw_spike_10_deg, seed: 2, parameters: {operation: baseline_horizontal_rotation_spike, magnitude_deg: 10.0, fraction: 0.05, wrap_safe: true}}
+  - {case_id: C14_yawstd_inflation_2x, family: yawstd_inflation, policy: yawstd_inflation_2x, seed: null, parameters: {operation: provider_yaw_std_scale, factor: 2.0}}
+  - case_id: C15_mixed_medium_seed0
+    family: mixed
+    policy: mixed_medium
+    seed: 0
+    parameters: &mixed_medium {operation: mixed_components, vector_noise_sigma_m: 0.03, vertical_sigma_scale: 0.5, position_spike_magnitude_m: 0.15, position_spike_fraction: 0.03, yaw_spike_magnitude_deg: 6.0, yaw_spike_fraction: 0.03, wrap_safe: true}
+  - {case_id: C16_mixed_medium_seed1, family: mixed, policy: mixed_medium, seed: 1, parameters: *mixed_medium}
+  - {case_id: C17_mixed_medium_seed2, family: mixed, policy: mixed_medium, seed: 2, parameters: *mixed_medium}
