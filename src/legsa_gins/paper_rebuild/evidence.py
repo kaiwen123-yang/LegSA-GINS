@@ -99,6 +99,33 @@ FAILED_CLEAN1_EXPECTED_RAW_READS = (
 )
 
 FAILED_CLEAN1_ATTEMPT_SPECS: dict[str, dict[str, Any]] = {
+    "644d2a022e9927d4fd09917003e88ad6c83aa1dc": {
+        "superseded_reason": (
+            "inactive_go2_vertical_disabled_runtime_status_was_validated_"
+            "as_always_on_common_configuration"
+        ),
+        "failure_state": "partial_formal_method_contract_mismatch",
+        "terminal_status": "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH",
+        "expected_stage_file_count": 58,
+        "expected_stage_tree_sha256": (
+            "71a9fd013919b30d04dd3f73fbdb26afd2dccd0dd946f7e5fc4fb94e86c11cf8"
+        ),
+        "expected_provider_manifest_sha256": (
+            "2be4cceb045055cf0d179233a4bc8485ff030cb1bd8779474590427ee252b82e"
+        ),
+        "expected_provider_bundle_hash": (
+            "796ad75a06521089af806cf3fa28b0733de5dcd56b02b6f56c12f7508102cbd4"
+        ),
+        "expected_runtime_file_count": 9,
+        "expected_runtime_tree_sha256": (
+            "63d512462c4f0ba71109c40c14e6816199219561eb0b11a96f6f04b893cbe367"
+        ),
+        "expected_solver_manifest_sha256": (
+            "baf844dfc6f21d7ae840c287626149cea2b26fcbfb67903d74f56edfa0d2f0ca"
+        ),
+        "expected_formal_solver_process_count": 1,
+        "expected_formal_run_count": 0,
+    },
     "7d1cb382f69e2c055f7e535198218246533822c3": {
         "superseded_reason": (
             "hidden_provider_attempt_protocol_suffix_validation_code_bug"
@@ -108,6 +135,13 @@ FAILED_CLEAN1_ATTEMPT_SPECS: dict[str, dict[str, Any]] = {
             "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN"
         ),
         "expected_error_class": "FormalProviderError",
+        "expected_provider_file_count": 1009,
+        "expected_provider_tree_sha256": (
+            "928ece33cf71542f83b471a827ffb2665de6fe4b545f6cbf87111d6d3a7c4b05"
+        ),
+        "expected_provider_manifest_sha256": (
+            "abda17fa7f78a1b2f3b7124836adf713216e3038d6ee279811dab1bc362475d1"
+        ),
     },
     "409508def7f20521db290d9bfb7e1506a1f72ef9": {
         "superseded_reason": "case_insensitive_dual_yaw_artifact_self_copy_code_bug",

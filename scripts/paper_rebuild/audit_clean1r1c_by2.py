@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import sys
 import uuid
@@ -16,7 +17,13 @@ SRC_ROOT = REPO_ROOT / "src"
 if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
-from legsa_gins.paper_rebuild.evidence import verify_by2_raw_22, write_raw_audit
+from legsa_gins.paper_rebuild.evidence import (
+    FAILED_CLEAN1_ATTEMPT_SPECS,
+    canonical_file_tree_digest,
+    validate_failed_clean1_attempt_evidence,
+    verify_by2_raw_22,
+    write_raw_audit,
+)
 from legsa_gins.paper_rebuild.evaluator import load_frozen_evaluator
 from legsa_gins.paper_rebuild.formal_manifest import assert_formal_run_manifest
 from legsa_gins.paper_rebuild.formal_provider import load_formal_provider_bundle
@@ -65,6 +72,194 @@ def _write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
 
 def _boolean_gate(value: Any) -> bool:
     return value is True
+
+
+def _validate_technical_retry_chain_strict(
+    stage: Path, paths: Any, code_commit: str
+) -> bool:
+    old_commit = "644d2a022e9927d4fd09917003e88ad6c83aa1dc"
+    inherited_commit = "7d1cb382f69e2c055f7e535198218246533822c3"
+    record_path = stage / "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json"
+    if not record_path.is_file():
+        return False
+    record = _json(record_path)
+    archive = (
+        paths.clean_root
+        / f"{stage.name}_FAILED_ATTEMPTS"
+        / old_commit
+    )
+    technical = archive / "11_TECHNICAL_RETRY_ARCHIVE"
+    journal_path = technical / "ARCHIVE_JOURNAL.json"
+    provider = technical / "preserved_provider"
+    runtime = technical / "preserved_runtime"
+    if any(
+        path.is_symlink() or not path.is_dir()
+        for path in (archive, technical, provider, runtime)
+    ) or not journal_path.is_file():
+        return False
+    journal = _json(journal_path)
+    required_record = {
+        "schema_version": "paper-rebuild-clean1r1c-method-retry-v1",
+        "code_freeze_commit": old_commit,
+        "replacement_code_commit": code_commit,
+        "terminal_status": "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH",
+        "solver_process_count": 1,
+        "formal_run_count": 0,
+        "formal_output_reusable": False,
+        "provider_reusable": False,
+        "evaluation_started": False,
+        "trace_read": False,
+        "metrics_generated": False,
+        "raw_pre_verified": 22,
+        "raw_post_verified": 22,
+        "raw_mutation_count": 0,
+        "inherited_prior_attempt_count": 1,
+        "preserved_without_delete": True,
+        "archive_dry_run": False,
+        "archive_state": "COMPLETE",
+    }
+    if any(record.get(field) != value for field, value in required_record.items()):
+        return False
+    if (
+        journal.get("state") != "COMPLETE"
+        or journal.get("runtime_preserved") is not True
+        or journal.get("provider_preserved") is not True
+        or journal.get("stage_preserved") is not True
+        or journal.get("delete_used") is not False
+        or journal.get("overwrite_used") is not False
+    ):
+        return False
+    for field in (
+        "code_freeze_commit",
+        "replacement_code_commit",
+        "provider_bundle_hash",
+        "source_stage_file_count",
+        "source_stage_tree_sha256",
+        "source_runtime_file_count",
+        "source_runtime_tree_sha256",
+        "inherited_prior_record_sha256",
+    ):
+        if journal.get(field) != record.get(field):
+            return False
+    runtime_files = {
+        path.relative_to(runtime).as_posix()
+        for path in runtime.rglob("*")
+        if path.is_file()
+    }
+    stage_files = {
+        path.relative_to(archive).as_posix()
+        for path in archive.rglob("*")
+        if path.is_file()
+        and not path.relative_to(archive).as_posix().startswith(
+            "11_TECHNICAL_RETRY_ARCHIVE/"
+        )
+    }
+    if (
+        len(runtime_files) != record.get("source_runtime_file_count")
+        or canonical_file_tree_digest(runtime, runtime_files)
+        != record.get("source_runtime_tree_sha256")
+        or len(stage_files) != record.get("source_stage_file_count")
+        or canonical_file_tree_digest(archive, stage_files)
+        != record.get("source_stage_tree_sha256")
+    ):
+        return False
+    provider_manifest = _json(provider / "CLEAN_INPUT_MANIFEST.json")
+    specification = FAILED_CLEAN1_ATTEMPT_SPECS[old_commit]
+    if (
+        sha256_file(provider / "CLEAN_INPUT_MANIFEST.json")
+        != specification["expected_provider_manifest_sha256"]
+        or provider_manifest.get("generator_code_commit") != old_commit
+        or provider_manifest.get("provider_bundle_hash")
+        != record.get("provider_bundle_hash")
+    ):
+        return False
+    artifacts = provider_manifest.get("artifacts")
+    provider_hashes = provider_manifest.get("provider_hashes")
+    if (
+        not isinstance(artifacts, dict)
+        or not isinstance(provider_hashes, dict)
+        or set(artifacts) != set(provider_hashes)
+    ):
+        return False
+    for role, entry in artifacts.items():
+        relative = entry.get("relative_path") if isinstance(entry, dict) else None
+        if (
+            not isinstance(relative, str)
+            or relative.startswith("/")
+            or ".." in Path(relative).parts
+        ):
+            return False
+        artifact = provider / relative
+        if (
+            artifact.is_symlink()
+            or not artifact.is_file()
+            or sha256_file(artifact) != provider_hashes.get(role)
+        ):
+            return False
+    computed_provider_bundle = hashlib.sha256(
+        json.dumps(
+            provider_hashes, sort_keys=True, separators=(",", ":")
+        ).encode("utf-8")
+    ).hexdigest()
+    if computed_provider_bundle != record.get("provider_bundle_hash"):
+        return False
+    inherited_record = archive / "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json"
+    inherited_provider = (
+        paths.provider_root.parent
+        / ".CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED.attempt-5eab359802b14798b3f7822bab617fdd"
+    )
+    if (
+        not inherited_record.is_file()
+        or sha256_file(inherited_record)
+        != record.get("inherited_prior_record_sha256")
+        or not inherited_provider.is_dir()
+    ):
+        return False
+    inherited_payload = _json(inherited_record)
+    if inherited_payload.get("code_freeze_commit") != inherited_commit:
+        return False
+    inherited_stage = (
+        paths.clean_root
+        / f"{stage.name}_FAILED_ATTEMPTS"
+        / inherited_commit
+    )
+    validated_inherited = validate_failed_clean1_attempt_evidence(
+        inherited_stage,
+        raw_root=paths.raw_root,
+        code_root=paths.code_root,
+        provider_attempt=inherited_provider,
+        expected_code_commit=inherited_commit,
+    )
+    if validated_inherited.get("evidence_manifest_sha256") != inherited_payload.get(
+        "evidence_manifest_sha256"
+    ):
+        return False
+    if inherited_provider.is_symlink():
+        return False
+    inherited_files: set[str] = set()
+    for path in inherited_provider.rglob("*"):
+        if path.is_symlink():
+            return False
+        if path.is_file():
+            inherited_files.add(path.relative_to(inherited_provider).as_posix())
+    inherited_specification = FAILED_CLEAN1_ATTEMPT_SPECS[inherited_commit]
+    if (
+        len(inherited_files)
+        != inherited_specification["expected_provider_file_count"]
+        or canonical_file_tree_digest(inherited_provider, inherited_files)
+        != inherited_specification["expected_provider_tree_sha256"]
+        or sha256_file(inherited_provider / "CLEAN_INPUT_MANIFEST.json")
+        != inherited_specification["expected_provider_manifest_sha256"]
+    ):
+        return False
+    return True
+
+
+def _validate_technical_retry_chain(stage: Path, paths: Any, code_commit: str) -> bool:
+    try:
+        return _validate_technical_retry_chain_strict(stage, paths, code_commit)
+    except (OSError, ValueError, RuntimeError, KeyError, TypeError):
+        return False
 
 
 def _verify_manifest_rows(
@@ -337,6 +532,9 @@ def main(argv: list[str] | None = None) -> int:
         "receiver_imu_as_body_imu_false": provider_manifest.get("receiver_imu_as_body_imu") is False,
         "worktree_clean_at_audit": dirty is False,
         "provider_commit_matches_code": provider.generator_code_commit == code_commit,
+        "technical_retry_chain_preserved": _validate_technical_retry_chain(
+            stage, paths, code_commit
+        ),
         "paper_figure_count_zero": paper_figure_count == 0,
         "position_same_source_mounting_caveat": evaluator.get(
             "position_same_source_mounting_caveat"

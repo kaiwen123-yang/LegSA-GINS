@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import math
 import os
@@ -31,6 +32,7 @@ from legsa_gins.paper_rebuild.evidence import (
     FAILED_CLEAN1_ATTEMPT_SPECS,
     FAILED_CLEAN1_RETRY_LAUNCH_SPECS,
     assert_export_text_is_redacted,
+    canonical_file_tree_digest,
     compare_pre_post_raw_audits,
     parse_strace_openat_paths,
     resolve_path_without_symlink_chain,
@@ -151,10 +153,389 @@ def _create_stage_root(clean_root: Path) -> tuple[Path, Path]:
     return stage, final
 
 
+def _tree_digest_without_retry_archive(root: Path) -> tuple[int, str]:
+    if root.is_symlink() or not root.is_dir():
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    files: set[str] = set()
+    for path in root.rglob("*"):
+        if path.is_symlink():
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        if not path.is_file():
+            continue
+        relative = path.relative_to(root).as_posix()
+        if relative.startswith("11_TECHNICAL_RETRY_ARCHIVE/"):
+            continue
+        files.add(relative)
+    return len(files), canonical_file_tree_digest(root, files)
+
+
+def _tree_digest_exact(root: Path) -> tuple[int, str]:
+    if root.is_symlink() or not root.is_dir():
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    files: set[str] = set()
+    for path in root.rglob("*"):
+        if path.is_symlink():
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        if path.is_file():
+            files.add(path.relative_to(root).as_posix())
+    return len(files), canonical_file_tree_digest(root, files)
+
+
+def _fsync_directory(path: Path) -> None:
+    descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def _preserve_method_contract_attempt_for_retry(
+    paths: Any,
+    *,
+    new_code_commit: str,
+    old_code_commit: str,
+    specification: dict[str, Any],
+    stage_source: Path,
+    stage_archive: Path,
+    perform_archive: bool,
+) -> dict[str, Any]:
+    """Validate and atomically preserve one zero-formal-run solver attempt."""
+
+    if _git_first_parent(paths.code_root, new_code_commit) != old_code_commit:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    if paths.runtime_root.exists():
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    if stage_source.exists() == stage_archive.exists():
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    failed_stage = stage_source if stage_source.exists() else stage_archive
+    if failed_stage.is_symlink() or not failed_stage.is_dir():
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+
+    technical_root = failed_stage / "11_TECHNICAL_RETRY_ARCHIVE"
+    if technical_root.exists() and (
+        technical_root.is_symlink() or not technical_root.is_dir()
+    ):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    preserved_runtime = technical_root / "preserved_runtime"
+    preserved_provider = technical_root / "preserved_provider"
+    runtime_prefix = f".{paths.runtime_root.name}.attempt-"
+    runtime_candidates = [
+        child
+        for child in paths.runtime_root.parent.iterdir()
+        if child.name.startswith(runtime_prefix)
+    ]
+    if any(child.is_symlink() or not child.is_dir() for child in runtime_candidates):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    for child in runtime_candidates:
+        token = child.name.removeprefix(runtime_prefix)
+        if len(token) != 32 or any(
+            character not in "0123456789abcdef" for character in token
+        ):
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    if preserved_runtime.exists():
+        if runtime_candidates or preserved_runtime.is_symlink():
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        runtime_attempt = preserved_runtime
+    else:
+        if len(runtime_candidates) != 1:
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        runtime_attempt = runtime_candidates[0]
+    if preserved_provider.exists():
+        if paths.provider_root.exists() or preserved_provider.is_symlink():
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        provider = preserved_provider
+    else:
+        if not paths.provider_root.is_dir() or paths.provider_root.is_symlink():
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        provider = paths.provider_root
+
+    stage_count, stage_digest = _tree_digest_without_retry_archive(failed_stage)
+    runtime_count, runtime_digest = _tree_digest_exact(runtime_attempt)
+    if (
+        stage_count != specification["expected_stage_file_count"]
+        or stage_digest != specification["expected_stage_tree_sha256"]
+        or runtime_count != specification["expected_runtime_file_count"]
+        or runtime_digest != specification["expected_runtime_tree_sha256"]
+    ):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+
+    def load_object(root: Path, relative: str) -> dict[str, Any]:
+        candidate = guard_path(
+            root / relative,
+            role="CLEAN1R1C technical retry JSON",
+            allowed_root=root,
+            must_exist=True,
+            regular_file=True,
+        )
+        value = json.loads(candidate.read_text(encoding="utf-8"))
+        if not isinstance(value, dict):
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        return value
+
+    decision = load_object(
+        failed_stage, "08_EVIDENCE_AUDIT/PRE_RUN_GATE_DECISION.json"
+    )
+    run_gate = load_object(
+        failed_stage, "06_RUN_MANIFESTS/FOUR_METHOD_RUN_BLOCKED.json"
+    )
+    raw_summary = load_object(
+        failed_stage, "03_DATA_HASH_AND_ROLES/BY2_RAW_22_SUMMARY.json"
+    )
+    promotion = load_object(
+        failed_stage, "08_EVIDENCE_AUDIT/PROMOTION_COMPLETE.json"
+    )
+    if (
+        decision.get("code_freeze_commit") != old_code_commit
+        or decision.get("provider_bundle_hash")
+        != specification["expected_provider_bundle_hash"]
+        or decision.get("fresh_provider_generated") is not True
+        or decision.get("formal_runs_authorized_by_all_gates") is not True
+        or decision.get("raw_pre_verified") != 22
+        or decision.get("raw_post_verified") != 22
+        or decision.get("raw_mutation_count") != 0
+        or run_gate
+        != {
+            "schema_version": "paper-rebuild-clean1-four-run-gate-v1",
+            "formal_run_count": 0,
+            "method_count_required": 4,
+            "metric_driven_rerun": False,
+            "terminal_status": "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH",
+            "paper_performance_claim": False,
+        }
+        or raw_summary.get("passed") is not True
+        or raw_summary.get("pre_verified") != 22
+        or raw_summary.get("post_verified") != 22
+        or raw_summary.get("raw_mutation") != 0
+        or promotion.get("provider_final_promoted") is not True
+        or promotion.get("stage_final_promoted") is not True
+        or promotion.get("provider_bundle_hash")
+        != specification["expected_provider_bundle_hash"]
+    ):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    if any((failed_stage / "07_EVALUATION").iterdir()) or (
+        failed_stage / "06_RUN_MANIFESTS/FORMAL_RUN_ATTEMPT_LEDGER.csv"
+    ).exists():
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+
+    manifest_path = provider / "CLEAN_INPUT_MANIFEST.json"
+    if sha256_file(manifest_path) != specification[
+        "expected_provider_manifest_sha256"
+    ]:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    provider_manifest = load_object(provider, "CLEAN_INPUT_MANIFEST.json")
+    if (
+        provider_manifest.get("generator_code_commit") != old_code_commit
+        or provider_manifest.get("generator_worktree_dirty") is not False
+        or provider_manifest.get("provider_bundle_hash")
+        != specification["expected_provider_bundle_hash"]
+        or provider_manifest.get("trace_used_online") is not False
+        or provider_manifest.get("raw_doppler_backend", {}).get(
+            "raw_doppler_backend_lineage_proven"
+        )
+        is not True
+    ):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    artifacts = provider_manifest.get("artifacts")
+    hashes = provider_manifest.get("provider_hashes")
+    if not isinstance(artifacts, dict) or not isinstance(hashes, dict) or set(
+        artifacts
+    ) != set(hashes):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    for role, entry in artifacts.items():
+        relative = entry.get("relative_path") if isinstance(entry, dict) else None
+        if not isinstance(relative, str) or relative.startswith("/") or ".." in Path(
+            relative
+        ).parts:
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        artifact = guard_path(
+            provider / relative,
+            role=f"archived provider artifact {role}",
+            allowed_root=provider,
+            must_exist=True,
+            regular_file=True,
+        )
+        if sha256_file(artifact) != hashes[role]:
+            raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    computed_bundle = hashlib.sha256(
+        json.dumps(hashes, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    if computed_bundle != specification["expected_provider_bundle_hash"]:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    stage_provider_manifest = failed_stage / "04_PROVIDER_AUDIT/PROVIDER_MANIFEST.json"
+    if sha256_file(stage_provider_manifest) != sha256_file(manifest_path):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+
+    run_root = runtime_attempt / "01_single_antenna_EKF"
+    if {child.name for child in runtime_attempt.iterdir()} != {
+        "01_single_antenna_EKF"
+    }:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    solver_manifest_path = run_root / "RUN_MANIFEST.json"
+    if sha256_file(solver_manifest_path) != specification[
+        "expected_solver_manifest_sha256"
+    ]:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    solver = load_object(run_root, "RUN_MANIFEST.json")
+    counts = solver.get("module_update_counts")
+    if (
+        solver.get("stage_id")
+        != "CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION"
+        or solver.get("protocol_id")
+        != "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED"
+        or solver.get("algorithm_id") != "single_antenna_EKF"
+        or solver.get("run_id") != "01_single_antenna_EKF"
+        or not isinstance(counts, dict)
+        or int(counts.get("position_update_count", 0)) <= 0
+        or int(counts.get("receiver_velocity_update_count", 0)) <= 0
+        or any(
+            int(counts.get(field, -1)) != 0
+            for field in (
+                "dual_yaw_update_count",
+                "raw_doppler_update_count",
+                "source_aware_evaluation_count",
+                "go2_roll_pitch_update_count",
+                "go2_horizontal_velocity_update_count",
+                "selected_fgo_feedback_update_count",
+                "nine_factor_fgo_update_count",
+                "qa_fallback_count",
+                "multi_state_qm_update_count",
+                "contact_fk_update_count",
+            )
+        )
+        or (run_root / "FORMAL_RUN_MANIFEST.json").exists()
+        or (run_root / "SOLVER_RUN_MANIFEST.json").exists()
+    ):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+    file_open = load_object(run_root, "logs/SOLVER_FILE_OPEN_CROSSCHECK.json")
+    if (
+        file_open.get("passed") is not True
+        or file_open.get("legacy_path_read_count") != 0
+        or file_open.get("raw_root_read_relative_paths") != []
+        or file_open.get("unexpected_provider_relative_paths") != []
+        or file_open.get("unexpected_clean_root_relative_paths") != []
+    ):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+
+    inherited = load_object(
+        failed_stage, "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json"
+    )
+    inherited_commit = "7d1cb382f69e2c055f7e535198218246533822c3"
+    inherited_stage = (
+        paths.clean_root
+        / FAILED_ATTEMPT_DIR_NAME
+        / inherited_commit
+    )
+    inherited_provider = (
+        paths.provider_root.parent
+        / ".CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED.attempt-5eab359802b14798b3f7822bab617fdd"
+    )
+    if (
+        inherited.get("code_freeze_commit") != inherited_commit
+        or inherited.get("replacement_code_commit") != old_code_commit
+        or inherited.get("formal_run_count") != 0
+        or inherited.get("preserved_without_delete") is not True
+        or not inherited_stage.is_dir()
+        or not inherited_provider.is_dir()
+    ):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+
+    record = {
+        "schema_version": "paper-rebuild-clean1r1c-method-retry-v1",
+        "archived_stage_alias": (
+            f"<CLEAN_ROOT>/{FAILED_ATTEMPT_DIR_NAME}/{old_code_commit}"
+        ),
+        "code_freeze_commit": old_code_commit,
+        "replacement_code_commit": new_code_commit,
+        "terminal_status": specification["terminal_status"],
+        "superseded_reason": specification["superseded_reason"],
+        "solver_process_count": 1,
+        "formal_run_count": 0,
+        "formal_output_reusable": False,
+        "provider_reusable": False,
+        "evaluation_started": False,
+        "trace_read": False,
+        "metrics_generated": False,
+        "raw_pre_verified": 22,
+        "raw_post_verified": 22,
+        "raw_mutation_count": 0,
+        "provider_bundle_hash": specification["expected_provider_bundle_hash"],
+        "source_stage_file_count": stage_count,
+        "source_stage_tree_sha256": stage_digest,
+        "source_runtime_file_count": runtime_count,
+        "source_runtime_tree_sha256": runtime_digest,
+        "inherited_prior_attempt_count": 1,
+        "inherited_prior_record_sha256": sha256_file(
+            failed_stage / "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json"
+        ),
+        "preserved_without_delete": True,
+        "archive_dry_run": not perform_archive,
+    }
+    if not perform_archive:
+        return record
+
+    technical_root.mkdir(parents=False, exist_ok=True)
+    journal_path = technical_root / "ARCHIVE_JOURNAL.json"
+    journal = {
+        **record,
+        "archive_dry_run": False,
+        "state": "VALIDATED_RUNTIME_PENDING",
+        "runtime_source_name": runtime_attempt.name,
+        "runtime_preserved": runtime_attempt == preserved_runtime,
+        "provider_preserved": provider == preserved_provider,
+        "stage_preserved": failed_stage == stage_archive,
+        "delete_used": False,
+        "overwrite_used": False,
+    }
+    if journal_path.exists():
+        existing = load_object(technical_root, "ARCHIVE_JOURNAL.json")
+        for field in (
+            "schema_version",
+            "code_freeze_commit",
+            "replacement_code_commit",
+            "source_stage_tree_sha256",
+            "source_runtime_tree_sha256",
+            "provider_bundle_hash",
+        ):
+            if existing.get(field) != journal.get(field):
+                raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        journal.update(existing)
+    else:
+        write_json_atomic(journal_path, journal)
+        _fsync_directory(technical_root)
+    if runtime_attempt != preserved_runtime:
+        runtime_attempt.rename(preserved_runtime)
+        _fsync_directory(paths.runtime_root.parent)
+        _fsync_directory(technical_root)
+    journal.update(
+        {"state": "RUNTIME_PRESERVED_PROVIDER_PENDING", "runtime_preserved": True}
+    )
+    write_json_atomic(journal_path, journal)
+    if provider != preserved_provider:
+        provider.rename(preserved_provider)
+        _fsync_directory(paths.provider_root.parent)
+        _fsync_directory(technical_root)
+    journal.update(
+        {"state": "PROVIDER_PRESERVED_STAGE_PENDING", "provider_preserved": True}
+    )
+    write_json_atomic(journal_path, journal)
+    if failed_stage != stage_archive:
+        stage_archive.parent.mkdir(parents=False, exist_ok=True)
+        failed_stage.rename(stage_archive)
+        _fsync_directory(paths.clean_root)
+        _fsync_directory(stage_archive.parent)
+        technical_root = stage_archive / "11_TECHNICAL_RETRY_ARCHIVE"
+        journal_path = technical_root / "ARCHIVE_JOURNAL.json"
+    journal.update({"state": "COMPLETE", "stage_preserved": True})
+    write_json_atomic(journal_path, journal)
+    _fsync_directory(technical_root)
+    return {**record, "archive_dry_run": False, "archive_state": "COMPLETE"}
+
+
 def _preserve_exact_raw_doppler_blocked_stage_for_retry(
     paths: Any,
     *,
     new_code_commit: str,
+    perform_archive: bool = True,
 ) -> dict[str, Any]:
     """Archive one exact no-run technical blocker without deleting or overwriting it."""
 
@@ -212,6 +593,18 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
         role="CLEAN1 exact failed-attempt archive",
         allowed_root=archive_parent,
     )
+    if specification.get("failure_state") == "partial_formal_method_contract_mismatch":
+        return _preserve_method_contract_attempt_for_retry(
+            paths,
+            new_code_commit=new_code_commit,
+            old_code_commit=expected_old_commit,
+            specification=specification,
+            stage_source=stage_final,
+            stage_archive=archive,
+            perform_archive=perform_archive,
+        )
+    if not perform_archive:
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     if paths.provider_root.exists() or paths.runtime_root.exists():
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     if specification.get("failure_state") == "partial_hidden_stage":
@@ -1483,7 +1876,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--rtklib-source-root")
     parser.add_argument("--materialize-pinned-rtklib", action="store_true")
     parser.add_argument("--retry-after-exact-blocked-attempt", action="store_true")
+    parser.add_argument(
+        "--check-retry-after-exact-blocked-attempt", action="store_true"
+    )
     args = parser.parse_args(argv)
+    if (
+        args.retry_after_exact_blocked_attempt
+        and args.check_retry_after_exact_blocked_attempt
+    ):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
 
     paths = load_clean_paths(args.config)
     assert_clean1_path_contract(paths, REPO_ROOT)
@@ -1491,7 +1892,10 @@ def main(argv: list[str] | None = None) -> int:
     _assert_protocol_path_identity(paths, protocol)
     STAGE_DIR_NAME = clean1_stage_root(paths).name
     FAILED_ATTEMPT_DIR_NAME = f"{STAGE_DIR_NAME}_FAILED_ATTEMPTS"
-    if args.retry_after_exact_blocked_attempt and protocol.payload[
+    if (
+        args.retry_after_exact_blocked_attempt
+        or args.check_retry_after_exact_blocked_attempt
+    ) and protocol.payload[
         "protocol_id"
     ] not in {
         "CLEAN1_BY2_CLEAN_NORMAL_V1",
@@ -1507,6 +1911,12 @@ def main(argv: list[str] | None = None) -> int:
         )
     ):
         raise RuntimeError("BLOCKED_CLEAN1_GIT_OR_CODE_FREEZE_FAILED")
+    if args.check_retry_after_exact_blocked_attempt:
+        checked = _preserve_exact_raw_doppler_blocked_stage_for_retry(
+            paths, new_code_commit=code_commit, perform_archive=False
+        )
+        print(json.dumps(checked, ensure_ascii=False, sort_keys=True))
+        return 0
     prior_attempt = None
     if args.retry_after_exact_blocked_attempt:
         prior_attempt = _preserve_exact_raw_doppler_blocked_stage_for_retry(

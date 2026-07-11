@@ -175,6 +175,31 @@ def _assert_clean1_evaluator_gate(
         raise FormalRunError("BLOCKED_CLEAN1_EVALUATOR_CONTRACT_FAILED")
 
 
+def _assert_go2_vertical_disabled_status(
+    solver_manifest: Mapping[str, Any], common: Mapping[str, Any]
+) -> None:
+    """Validate the runtime status, which is false while the module is off."""
+
+    go2_horizontal_enabled = solver_manifest.get(
+        "go2_horizontal_velocity_prior_enabled"
+    )
+    if not isinstance(go2_horizontal_enabled, bool):
+        raise FormalRunError("FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH")
+    expected = (
+        go2_horizontal_enabled and not common["go2_vertical_velocity_enabled"]
+    )
+    if solver_manifest.get(
+        "go2_horizontal_velocity_prior_vertical_disabled"
+    ) is not expected:
+        raise FormalRunError("FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH")
+
+
+def _runtime_12g(value: Any) -> float:
+    """Mirror the exact scalar serialization used by the runtime YAML writer."""
+
+    return float(f"{float(value):.12g}")
+
+
 def _assert_solver_common_manifest(
     solver_manifest: Mapping[str, Any],
     common: Mapping[str, Any],
@@ -212,9 +237,6 @@ def _assert_solver_common_manifest(
         ],
         "go2_horizontal_velocity_adaptive_std_enabled": common[
             "go2_horizontal_velocity_adaptive_std_enabled"
-        ],
-        "go2_horizontal_velocity_prior_vertical_disabled": not common[
-            "go2_vertical_velocity_enabled"
         ],
     }
     integers = {
@@ -282,6 +304,7 @@ def _assert_solver_common_manifest(
     for field, expected in booleans.items():
         if solver_manifest.get(field) is not expected:
             raise FormalRunError("FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH")
+    _assert_go2_vertical_disabled_status(solver_manifest, common)
     for field, expected in integers.items():
         value = solver_manifest.get(field)
         if isinstance(value, bool) or value != int(expected):
@@ -317,11 +340,16 @@ def _assert_solver_common_manifest(
         raise FormalRunError("FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH")
 
     expected_sequences = {
-        "init_position_geodetic_deg_m": initialization["position_geodetic_deg_m"],
-        "init_velocity_ned_mps": initialization["velocity_ned_mps"],
+        "init_position_geodetic_deg_m": [
+            _runtime_12g(value)
+            for value in initialization["position_geodetic_deg_m"]
+        ],
+        "init_velocity_ned_mps": [
+            _runtime_12g(value) for value in initialization["velocity_ned_mps"]
+        ],
         "init_attitude_deg": [
-            *initialization["roll_pitch_deg"],
-            initialization["yaw_ned_deg"],
+            *(_runtime_12g(value) for value in initialization["roll_pitch_deg"]),
+            _runtime_12g(initialization["yaw_ned_deg"]),
         ],
         "init_gyro_bias_deg_h": common["init_gyro_bias"],
         "init_accel_bias_mgal": common["init_accel_bias"],
