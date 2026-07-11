@@ -99,6 +99,18 @@ def _git_ok(args: list[str]) -> bool:
     ).returncode == 0
 
 
+def _assert_protocol_path_identity(paths: Any, protocol: Any) -> None:
+    """Reject local suffix drift before creating or moving any evidence object."""
+
+    protocol_id = protocol.payload.get("protocol_id")
+    if (
+        not isinstance(protocol_id, str)
+        or paths.provider_root.name != protocol_id
+        or paths.runtime_root.name != protocol_id
+    ):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+
+
 def _git_commit_is_ancestor(code_root: Path, ancestor: str, descendant: str) -> bool:
     return subprocess.run(
         ["git", "merge-base", "--is-ancestor", ancestor, descendant],
@@ -283,8 +295,9 @@ def _preserve_exact_raw_doppler_blocked_stage_for_retry(
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     provider_attempts = []
     launch_failure_provider_attempts = []
+    provider_attempt_prefix = f".{paths.provider_root.name}.attempt-"
     for child in paths.provider_root.parent.iterdir():
-        if not child.name.startswith(".CLEAN1_BY2_CLEAN_NORMAL_V1.attempt-"):
+        if not child.name.startswith(provider_attempt_prefix):
             continue
         if child.is_symlink() or not child.is_dir():
             raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
@@ -1475,13 +1488,15 @@ def main(argv: list[str] | None = None) -> int:
     paths = load_clean_paths(args.config)
     assert_clean1_path_contract(paths, REPO_ROOT)
     protocol = load_clean1_protocol(args.protocol)
+    _assert_protocol_path_identity(paths, protocol)
     STAGE_DIR_NAME = clean1_stage_root(paths).name
     FAILED_ATTEMPT_DIR_NAME = f"{STAGE_DIR_NAME}_FAILED_ATTEMPTS"
-    if (
-        args.retry_after_exact_blocked_attempt
-        and protocol.payload["protocol_id"]
-        != "CLEAN1_BY2_CLEAN_NORMAL_V1"
-    ):
+    if args.retry_after_exact_blocked_attempt and protocol.payload[
+        "protocol_id"
+    ] not in {
+        "CLEAN1_BY2_CLEAN_NORMAL_V1",
+        "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED",
+    }:
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     code_commit, dirty = git_code_state(paths.code_root)
     if (

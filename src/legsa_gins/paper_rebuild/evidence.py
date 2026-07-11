@@ -99,6 +99,16 @@ FAILED_CLEAN1_EXPECTED_RAW_READS = (
 )
 
 FAILED_CLEAN1_ATTEMPT_SPECS: dict[str, dict[str, Any]] = {
+    "7d1cb382f69e2c055f7e535198218246533822c3": {
+        "superseded_reason": (
+            "hidden_provider_attempt_protocol_suffix_validation_code_bug"
+        ),
+        "failure_state": "stable_provider_validation_block",
+        "terminal_status": (
+            "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN"
+        ),
+        "expected_error_class": "FormalProviderError",
+    },
     "409508def7f20521db290d9bfb7e1506a1f72ef9": {
         "superseded_reason": "case_insensitive_dual_yaw_artifact_self_copy_code_bug",
         "stderr_markers": (
@@ -1221,18 +1231,29 @@ def validate_failed_clean1_attempt_evidence(
         }
     ):
         raise EvidenceContractError("Failed CLEAN1 terminal/run closure differs")
-    expected_blocked = {
-        "terminal_status": terminal,
-        "returncode": 1,
-        "provider_final_root_created": False,
-        "failed_attempt_preserved": True,
-        "strace_available": True,
-        "strace_sha256": blocked.get("strace_sha256"),
-    }
-    if blocked != expected_blocked or not re.fullmatch(
-        r"[0-9a-f]{64}", str(blocked.get("strace_sha256") or "")
-    ):
-        raise EvidenceContractError("Failed provider process record differs")
+    if specification.get("failure_state") == "stable_provider_validation_block":
+        expected_blocked = {
+            "terminal_status": terminal,
+            "provider_final_root_created": False,
+            "failed_attempt_preserved": True,
+            "provider_bundle_validation_passed": False,
+            "error_class": specification["expected_error_class"],
+        }
+        if blocked != expected_blocked:
+            raise EvidenceContractError("Failed provider validation record differs")
+    else:
+        expected_blocked = {
+            "terminal_status": terminal,
+            "returncode": 1,
+            "provider_final_root_created": False,
+            "failed_attempt_preserved": True,
+            "strace_available": True,
+            "strace_sha256": blocked.get("strace_sha256"),
+        }
+        if blocked != expected_blocked or not re.fullmatch(
+            r"[0-9a-f]{64}", str(blocked.get("strace_sha256") or "")
+        ):
+            raise EvidenceContractError("Failed provider process record differs")
     expected_read_audit = {
         "strace_available": True,
         "observed_partial_failed_attempt_raw_reads": sorted(
@@ -1245,7 +1266,12 @@ def validate_failed_clean1_attempt_evidence(
     if read_audit != expected_read_audit:
         raise EvidenceContractError("Failed provider read closure differs")
     trace = stage / "04_PROVIDER_AUDIT/PROVIDER_FAILED_FILE_OPEN_TRACE.raw"
-    if not trace.is_file() or sha256_file(trace) != blocked["strace_sha256"]:
+    if not trace.is_file():
+        raise EvidenceContractError("Failed provider strace is missing")
+    if (
+        specification.get("failure_state") != "stable_provider_validation_block"
+        and sha256_file(trace) != blocked["strace_sha256"]
+    ):
         raise EvidenceContractError("Failed provider strace hash differs")
     opened = parse_strace_openat_paths(
         trace, cwd=code, required_substring=str(raw)
@@ -1259,12 +1285,15 @@ def validate_failed_clean1_attempt_evidence(
     )
     if observed_raw != sorted(FAILED_CLEAN1_EXPECTED_RAW_READS):
         raise EvidenceContractError("Failed provider strace raw reads differ")
-    stderr = (
-        stage / "04_PROVIDER_AUDIT/PROVIDER_ATTEMPT_STDERR.txt"
-    ).read_text(encoding="utf-8", errors="strict")
-    for marker in specification["stderr_markers"]:
-        if marker not in stderr:
-            raise EvidenceContractError("Failed provider error is not the exact authorized code bug")
+    if specification.get("failure_state") != "stable_provider_validation_block":
+        stderr = (
+            stage / "04_PROVIDER_AUDIT/PROVIDER_ATTEMPT_STDERR.txt"
+        ).read_text(encoding="utf-8", errors="strict")
+        for marker in specification["stderr_markers"]:
+            if marker not in stderr:
+                raise EvidenceContractError(
+                    "Failed provider error is not the exact authorized code bug"
+                )
 
     required_attempt_files = (
         "RAW_DOPPLER_BACKEND_REPORT.json",

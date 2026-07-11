@@ -180,6 +180,30 @@ class FormalProviderError(EvidenceContractError):
     """Formal provider lineage is incomplete or contaminated."""
 
 
+def _provider_protocol_suffix(provider_root: Path) -> str:
+    """Resolve a canonical or guarded hidden-attempt provider identity."""
+
+    identities = (
+        "CLEAN1_BY2_CLEAN_NORMAL_V1",
+        "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED",
+    )
+    name = provider_root.name
+    if name in identities:
+        return name
+    for identity in identities:
+        prefix = f".{identity}.attempt-"
+        if not name.startswith(prefix):
+            continue
+        token = name.removeprefix(prefix)
+        if len(token) == 32 and all(
+            character in "0123456789abcdef" for character in token
+        ):
+            return identity
+    raise FormalProviderError(
+        "Formal provider root is not canonical or a guarded attempt"
+    )
+
+
 def _assert_exact_provider_artifact_roles(
     artifacts: Mapping[str, Any],
     required_roles: tuple[str, ...] = REQUIRED_FORMAL_PROVIDER_ROLES,
@@ -467,17 +491,18 @@ def validate_formal_provider_manifest(
             "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED",
         ),
     }
-    expected_identity = identity_by_suffix.get(paths.provider_root.name)
+    protocol_suffix = _provider_protocol_suffix(paths.provider_root)
+    expected_identity = identity_by_suffix.get(protocol_suffix)
     declared_identity = (manifest.get("stage_id"), manifest.get("protocol_id"))
     v1_legacy_manifest = (
-        paths.provider_root.name == "CLEAN1_BY2_CLEAN_NORMAL_V1"
+        protocol_suffix == "CLEAN1_BY2_CLEAN_NORMAL_V1"
         and declared_identity == (None, None)
     )
     if expected_identity is None or (
         not v1_legacy_manifest and declared_identity != expected_identity
     ):
         raise FormalProviderError("Formal provider stage/protocol identity mismatch")
-    is_v2 = paths.provider_root.name == "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED"
+    is_v2 = protocol_suffix == "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED"
     required_roles = (
         V2_REQUIRED_FORMAL_PROVIDER_ROLES
         if is_v2
