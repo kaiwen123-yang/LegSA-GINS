@@ -33,7 +33,7 @@ RAW_DOPPLER_TIME_CONVERSION = (
 )
 RAW_DOPPLER_COVARIANCE_POLICY = "conservative_isotropic_max_ecef_std_floor_0p2_mps"
 
-REQUIRED_FORMAL_PROVIDER_ROLES = (
+V1_REQUIRED_FORMAL_PROVIDER_ROLES = (
     "imu_runtime_input",
     "gnss_runtime_input",
     "dual_yaw_provider",
@@ -42,8 +42,18 @@ REQUIRED_FORMAL_PROVIDER_ROLES = (
     "go2_horizontal_velocity_prior",
     "source_quality_metadata",
 )
+V2_REQUIRED_FORMAL_PROVIDER_ROLES = (
+    *V1_REQUIRED_FORMAL_PROVIDER_ROLES,
+    "kick_alignment_contract",
+    "kick_alignment_report",
+    "kick_event_diagnostic",
+    "kick_maintained_initial_segment",
+    "common_start_time_contract",
+)
+# The active tracked protocol is V2; V1 remains an explicit compatibility set.
+REQUIRED_FORMAL_PROVIDER_ROLES = V2_REQUIRED_FORMAL_PROVIDER_ROLES
 
-MAINTAINED_SHARED_SOURCE_FILES = (
+V1_MAINTAINED_SHARED_SOURCE_FILES = (
     "src/legsa_gins/datasets/by2/go2_body_state_parser.py",
     "src/legsa_gins/datasets/by2/unitree_imu_semantics.py",
     "src/legsa_gins/go2_prior/go2_contact_state.py",
@@ -58,6 +68,25 @@ MAINTAINED_SHARED_SOURCE_FILES = (
     "src/legsa_gins/raw_gnss/rtklib_doppler_velocity_provider.py",
     "src/legsa_gins/raw_gnss/rtklib_solution_velocity_parser.py",
     "src/legsa_gins/raw_gnss/ubx_raw_binary_rebuilder.py",
+)
+V2_MAINTAINED_SHARED_SOURCE_FILES = (
+    "src/legsa_gins/paper_rebuild/kick_alignment.py",
+    *V1_MAINTAINED_SHARED_SOURCE_FILES,
+    "src/legsa_gins/time_alignment/event_normalization.py",
+    "src/legsa_gins/time_alignment/time_domain_audit.py",
+)
+MAINTAINED_SHARED_SOURCE_FILES = V2_MAINTAINED_SHARED_SOURCE_FILES
+
+AUDIT_ONLY_PROVIDER_ROLES = frozenset(
+    {
+        "dual_yaw_provider",
+        "source_quality_metadata",
+        "kick_alignment_contract",
+        "kick_alignment_report",
+        "kick_event_diagnostic",
+        "kick_maintained_initial_segment",
+        "common_start_time_contract",
+    }
 )
 
 FORMAL_PROVIDER_ACTUAL_SOURCE_PATHS = (
@@ -151,10 +180,13 @@ class FormalProviderError(EvidenceContractError):
     """Formal provider lineage is incomplete or contaminated."""
 
 
-def _assert_exact_provider_artifact_roles(artifacts: Mapping[str, Any]) -> None:
+def _assert_exact_provider_artifact_roles(
+    artifacts: Mapping[str, Any],
+    required_roles: tuple[str, ...] = REQUIRED_FORMAL_PROVIDER_ROLES,
+) -> None:
     """Validate the exact JSON-object key set without relying on key order."""
 
-    if set(artifacts) != set(REQUIRED_FORMAL_PROVIDER_ROLES):
+    if set(artifacts) != set(required_roles):
         raise FormalProviderError("Formal provider artifact role set mismatch")
 
 
@@ -425,6 +457,37 @@ def validate_formal_provider_manifest(
         raise FormalProviderError("Formal provider manifest schema mismatch")
     if manifest.get("data_mode") != "real_by2_raw":
         raise FormalProviderError("Formal provider data mode mismatch")
+    identity_by_suffix = {
+        "CLEAN1_BY2_CLEAN_NORMAL_V1": (
+            "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION",
+            "CLEAN1_BY2_CLEAN_NORMAL_V1",
+        ),
+        "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED": (
+            "CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION",
+            "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED",
+        ),
+    }
+    expected_identity = identity_by_suffix.get(paths.provider_root.name)
+    declared_identity = (manifest.get("stage_id"), manifest.get("protocol_id"))
+    v1_legacy_manifest = (
+        paths.provider_root.name == "CLEAN1_BY2_CLEAN_NORMAL_V1"
+        and declared_identity == (None, None)
+    )
+    if expected_identity is None or (
+        not v1_legacy_manifest and declared_identity != expected_identity
+    ):
+        raise FormalProviderError("Formal provider stage/protocol identity mismatch")
+    is_v2 = paths.provider_root.name == "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED"
+    required_roles = (
+        V2_REQUIRED_FORMAL_PROVIDER_ROLES
+        if is_v2
+        else V1_REQUIRED_FORMAL_PROVIDER_ROLES
+    )
+    maintained_files = (
+        V2_MAINTAINED_SHARED_SOURCE_FILES
+        if is_v2
+        else V1_MAINTAINED_SHARED_SOURCE_FILES
+    )
     for field in (
         "synthetic_data_used",
         "semisynthetic_data_used",
@@ -451,11 +514,11 @@ def validate_formal_provider_manifest(
     if manifest.get("generator_worktree_dirty") is not False:
         raise FormalProviderError("Formal provider generator worktree was dirty")
     maintained_hashes = manifest.get("maintained_shared_source_hashes")
-    if not isinstance(maintained_hashes, Mapping) or tuple(maintained_hashes) != MAINTAINED_SHARED_SOURCE_FILES:
+    if not isinstance(maintained_hashes, Mapping) or set(maintained_hashes) != set(maintained_files):
         raise FormalProviderError("Maintained shared-source dependency set is incomplete")
     if manifest.get("maintained_shared_source_commit") != manifest.get("generator_code_commit"):
         raise FormalProviderError("Maintained shared-source commit differs from provider generator commit")
-    for relative in MAINTAINED_SHARED_SOURCE_FILES:
+    for relative in maintained_files:
         source = paths.code_root / relative
         if not source.is_file() or maintained_hashes.get(relative) != sha256_file(source):
             raise FormalProviderError(f"Maintained shared-source hash mismatch: {relative}")
@@ -520,14 +583,16 @@ def validate_formal_provider_manifest(
     declared_hashes = manifest.get("provider_hashes")
     if not isinstance(artifacts, Mapping) or not isinstance(declared_hashes, Mapping):
         raise FormalProviderError("Formal provider artifacts/hash mappings are missing")
-    _assert_exact_provider_artifact_roles(artifacts)
+    _assert_exact_provider_artifact_roles(artifacts, required_roles)
+    if set(declared_hashes) != set(required_roles):
+        raise FormalProviderError("Formal provider hash role set mismatch")
     resolved: dict[str, Path] = {}
     relpaths: dict[str, str] = {}
     hashes: dict[str, str] = {}
-    for role in REQUIRED_FORMAL_PROVIDER_ROLES:
+    for role in required_roles:
         entry = artifacts[role]
         relative = entry.get("relative_path") if isinstance(entry, Mapping) else entry
-        expected_solver_input = role not in {"dual_yaw_provider", "source_quality_metadata"}
+        expected_solver_input = role not in AUDIT_ONLY_PROVIDER_ROLES
         if not isinstance(entry, Mapping) or entry.get("solver_input") is not expected_solver_input:
             raise FormalProviderError(f"Formal provider solver-input role mismatch: {role}")
         expected_artifact_role = (
@@ -550,6 +615,31 @@ def validate_formal_provider_manifest(
         resolved[role] = candidate
         relpaths[role] = relative.replace("\\", "/")
         hashes[role] = actual
+    if is_v2:
+        kick = manifest.get("kick_alignment")
+        if not isinstance(kick, Mapping):
+            raise FormalProviderError("CLEAN1R1C kick-alignment manifest is missing")
+        expected_kick_hashes = {
+            "kick_alignment_contract_hash": hashes["kick_alignment_contract"],
+            "kick_alignment_report_hash": hashes["kick_alignment_report"],
+            "kick_diagnostic_hash": hashes["kick_event_diagnostic"],
+            "maintained_candidate_derived_csv_hash": hashes[
+                "kick_maintained_initial_segment"
+            ],
+            "common_start_contract_hash": hashes["common_start_time_contract"],
+        }
+        if any(kick.get(field) != digest for field, digest in expected_kick_hashes.items()):
+            raise FormalProviderError("CLEAN1R1C kick artifact hash mismatch")
+        for field in (
+            "trace_used_for_alignment",
+            "offset_search_performed",
+            "method_specific_shift",
+            "optional_streams_delay_start",
+        ):
+            if kick.get(field) is not False:
+                raise FormalProviderError(f"CLEAN1R1C kick forbidden field is not false: {field}")
+        if float(kick.get("fixed_event_alignment_offset", math.nan)) != 0.0:
+            raise FormalProviderError("CLEAN1R1C kick offset is not the frozen zero mapping")
     if raw_doppler_report["retained_backend_artifacts"][
         "formal_raw_doppler_provider"
     ]["sha256"] != hashes["raw_doppler_provider"]:

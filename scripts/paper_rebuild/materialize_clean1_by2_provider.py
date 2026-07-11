@@ -46,6 +46,8 @@ def main(argv: list[str] | None = None) -> int:
         rtklib_source_root=args.rtklib_source_root,
         materialize_pinned_rtklib=args.materialize_pinned_rtklib,
         provider_generation=protocol.payload["provider_generation"],
+        stage_id=str(protocol.payload["stage_id"]),
+        protocol_id=str(protocol.payload["protocol_id"]),
     )
     print(
         json.dumps(

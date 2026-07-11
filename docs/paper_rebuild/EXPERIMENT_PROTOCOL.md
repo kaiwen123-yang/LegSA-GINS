@@ -40,6 +40,16 @@ Every manifest must write `data_mode`, `synthetic_data_used`, and `semisynthetic
 
 The 60-type, 9-seed registry and classic-18 manifest are retained as legacy protocol definitions only. They do not import any legacy providers or results. Degraded data must be regenerated under `<CLEAN_ROOT>` from hash-locked raw inputs. Seed replay uses the fixed seed catalog and PCG64. The clean case is unique and contains no random operation. Module-disable is a method ablation, not a degradation case axis.
 
+## CLEAN1R1C Kick-Aligned Execution
+
+- Detect the physical kick only from the initial Go2 IMU/event segment using the frozen robust jerk score and the maintained event-normalized detector cross-check.
+- Freeze `fixed_event_alignment_offset_seconds=0.0`; no correlation, trace, output, or metric offset search is permitted.
+- Set `t_start` to the first position- and dual-yaw-valid GNSS epoch after the mapped kick.
+- Set `t_end=min(propagation_imu_last_valid,core_gnss_last_valid)` and preserve internal dropouts.
+- Raw Doppler and Go2 priors are optional at start and activate only when their own epochs become available.
+- Freeze `[0.03,0.03,-0.30] m` as the common GNSS measurement lever arm.
+- Freeze the evaluator without opening trace. After four outputs are hash-frozen, interpolate reference ECEF and unwrapped ENU yaw at absolute solver time, convert yaw with `wrap360(90-yaw_enu)`, and retain unmatched epochs in coverage.
+
 ## Execution Boundary
 
-CLEAN0's independent BY2 smoke remains a runtime-health regression only. The current human authorization permits exactly one fresh CLEAN1 BY2 clean-normal four-method chain under the tracked CLEAN1 protocol. Formal execution requires a fresh provider, proven Raw Doppler lineage, the full common window, common source-backed initialization, and a separately frozen evaluator. An unproven evaluator point or frame contract blocks all four runs; it cannot be repaired through trace fitting or output inspection. CLEAN1 does not authorize DA03, DA05, classic-18, the 541-case matrix, figures, broad performance conclusions, or a later stage.
+CLEAN0's independent BY2 smoke remains a runtime-health regression only. The current human authorization permits exactly one fresh CLEAN1R1C BY2 clean-normal four-method chain under the V2 kick-aligned protocol. A missing independent POI calibration or the same-source nature of the reference is not a blocker; both are mandatory caveats. CLEAN1R1C does not authorize DA03, DA05, classic-18, the 541-case matrix, figures, broad performance conclusions, or a later stage.

@@ -556,7 +556,7 @@ def test_formal_gnss_validity_preserves_natural_dropouts(tmp_path: Path, monkeyp
     assert report["dual_yaw_dropout_count"] == 1
 
 
-def test_evaluator_freeze_uses_max_interval_and_blocks_unproven_reference_point(tmp_path: Path) -> None:
+def test_evaluator_freeze_uses_hash_lock_only_and_defers_trace_cadence(tmp_path: Path) -> None:
     trace = tmp_path / "trace.csv"
     with trace.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=["time", "lat", "lon", "height", "yaw", "pitch", "roll"])
@@ -569,20 +569,24 @@ def test_evaluator_freeze_uses_max_interval_and_blocks_unproven_reference_point(
             ]
         )
     trace_hash = hashlib.sha256(trace.read_bytes()).hexdigest()
+    trace.unlink()
     frozen = freeze_evaluator_contract(
         ROOT / "configs" / "paper_rebuild" / "evaluator_contract.yaml",
         trace,
         tmp_path / "freeze",
         reference_relative_path="BY2/trace.csv",
         expected_reference_sha256=trace_hash,
+        verified_source_hashes={"BY2/trace.csv": trace_hash},
     )
-    assert frozen.ready is False
-    payload = load_frozen_evaluator(frozen.contract_path, require_ready=False)
-    assert payload["reference"]["max_allowed_matching_gap_seconds"] == pytest.approx(0.11)
-    with pytest.raises(EvaluatorContractError, match="BLOCKED_CLEAN1_EVALUATOR_CONTRACT_FAILED"):
-        load_frozen_evaluator(frozen.contract_path, require_ready=True)
+    assert frozen.ready is True
+    payload = load_frozen_evaluator(frozen.contract_path, require_ready=True)
+    assert payload["reference"]["max_allowed_matching_gap_seconds"] == (
+        "DERIVED_OFFLINE_FROM_HASH_LOCKED_REFERENCE"
+    )
+    assert payload["reference"]["payload_read_during_freeze"] is False
+    assert payload["trace_read_during_freeze"] is False
     assert reference_yaw_enu_to_solver_ned_deg(0.0) == 90.0
-    assert payload["reference_attitude_frame_contract_proven"] is False
+    assert payload["reference_attitude_frame_contract_proven"] is True
 
 
 def test_evaluator_spoofed_ready_contracts_remain_blocked(tmp_path: Path) -> None:
@@ -2615,10 +2619,17 @@ def _formal_manifest(method: str) -> dict[str, object]:
 def test_formal_manifest_positive_and_counter_negative() -> None:
     catalog = _catalog()
     manifest = _formal_manifest("single_antenna_EKF")
-    assert validate_formal_run_manifest(manifest, catalog) == []
-    assert_formal_run_manifest(manifest, catalog)
+    identity = {
+        "expected_stage_id": "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION",
+        "expected_protocol_id": "CLEAN1_BY2_CLEAN_NORMAL_V1",
+        "expected_case_id": "CLEAN1_BY2_CLEAN_NORMAL",
+    }
+    assert validate_formal_run_manifest(manifest, catalog, **identity) == []
+    assert_formal_run_manifest(manifest, catalog, **identity)
     manifest["module_update_counts"]["dual_yaw_update_count"] = 1  # type: ignore[index]
-    assert "forbidden_module_activated:dual_yaw_update_count" in validate_formal_run_manifest(manifest, catalog)
+    assert "forbidden_module_activated:dual_yaw_update_count" in validate_formal_run_manifest(
+        manifest, catalog, **identity
+    )
 
 
 @pytest.mark.parametrize(

@@ -128,8 +128,12 @@ def _solver_file_open_crosscheck(
     return report
 
 
-def _assert_clean1_blocked_evaluator_gate(paths: CleanPaths, evaluator_path: Path) -> None:
-    """CLEAN1 is blocked-only: no external frozen YAML may unlock solver execution."""
+def _assert_clean1_evaluator_gate(
+    paths: CleanPaths,
+    evaluator_path: Path,
+    protocol_payload: Mapping[str, Any],
+) -> None:
+    """Validate the frozen evaluator before any run without reading its trace."""
 
     payload = load_frozen_evaluator(evaluator_path, require_ready=False)
     sidecar = evaluator_path.with_suffix(".sha256")
@@ -144,16 +148,31 @@ def _assert_clean1_blocked_evaluator_gate(paths: CleanPaths, evaluator_path: Pat
         or payload.get("tracked_contract_sha256") != sha256_file(tracked_contract)
     ):
         raise FormalRunError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
-    expected_blocked = {
-        "reference_point_contract_proven": False,
-        "reference_attitude_frame_contract_proven": False,
-        "formal_metrics_authorized": False,
-        "terminal_status": "BLOCKED_CLEAN1_EVALUATOR_CONTRACT_FAILED",
+    protocol_id = protocol_payload.get("protocol_id")
+    if protocol_id == "CLEAN1_BY2_CLEAN_NORMAL_V1":
+        expected_blocked = {
+            "reference_point_contract_proven": False,
+            "reference_attitude_frame_contract_proven": False,
+            "formal_metrics_authorized": False,
+            "terminal_status": "BLOCKED_CLEAN1_EVALUATOR_CONTRACT_FAILED",
+            "method_output_read_during_freeze": False,
+        }
+        if any(payload.get(field) != value for field, value in expected_blocked.items()):
+            raise FormalRunError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
+        raise FormalRunError("BLOCKED_CLEAN1_EVALUATOR_CONTRACT_FAILED")
+    expected_ready = {
+        "protocol_id": "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED",
+        "profile": "FIXPOSITION_SAME_SOURCE_DIRECT_REFERENCE",
+        "formal_metrics_authorized": True,
         "method_output_read_during_freeze": False,
+        "trace_read_during_freeze": False,
+        "position_same_source_mounting_caveat": True,
+        "independent_ground_truth": False,
+        "point_compensation_in_evaluator": False,
+        "terminal_status": "READY_FOR_OFFLINE_EVALUATION",
     }
-    if any(payload.get(field) != value for field, value in expected_blocked.items()):
-        raise FormalRunError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
-    raise FormalRunError("BLOCKED_CLEAN1_EVALUATOR_CONTRACT_FAILED")
+    if any(payload.get(field) != value for field, value in expected_ready.items()):
+        raise FormalRunError("BLOCKED_CLEAN1_EVALUATOR_CONTRACT_FAILED")
 
 
 def _assert_solver_common_manifest(
@@ -382,7 +401,13 @@ def _assert_solver_common_manifest(
             raise FormalRunError("FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH")
 
 
-def _assert_solver_forbidden_manifest(solver_manifest: Mapping[str, Any]) -> None:
+def _assert_solver_forbidden_manifest(
+    solver_manifest: Mapping[str, Any],
+    *,
+    stage_id: str = STAGE_ID,
+    protocol_id: str = PROTOCOL_ID,
+    case_id: str = CASE_ID,
+) -> None:
     false_fields = (
         "paper_performance_claim",
         "final_v23_output_solver_input",
@@ -417,9 +442,9 @@ def _assert_solver_forbidden_manifest(solver_manifest: Mapping[str, Any]) -> Non
         raise FormalRunError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     expected_identity = {
         "clean1_formal_mode": True,
-        "stage_id": STAGE_ID,
-        "protocol_id": PROTOCOL_ID,
-        "case_id": CASE_ID,
+        "stage_id": stage_id,
+        "protocol_id": protocol_id,
+        "case_id": case_id,
         "data_mode": DATA_MODE,
         "common_initialization": True,
         "common_initialization_dual_yaw_used": True,
@@ -452,7 +477,7 @@ def build_effective_method_metadata(
         raise FormalRunError("Tracked protocol lacks solver_common/dual_yaw")
     common = {
         "dataset": "BY2",
-        "case_id": CASE_ID,
+        "case_id": str(protocol_payload.get("case_id") or CASE_ID),
         "code_commit": code_commit,
         "provider_bundle_hash": bundle.provider_bundle_hash,
         "window_contract_hash": sha256_file(window["_contract_path"]),
@@ -518,10 +543,10 @@ def build_formal_runtime_config(
     lines = [
         "# CLEAN1 runtime-only config generated from frozen tracked contracts.",
         "clean1_formal_mode: true",
-        f"stage_id: {STAGE_ID}",
-        f"protocol_id: {PROTOCOL_ID}",
-        f"case_id: {CASE_ID}",
-        f"data_mode: {DATA_MODE}",
+        f"stage_id: {protocol_payload.get('stage_id') or STAGE_ID}",
+        f"protocol_id: {protocol_payload.get('protocol_id') or PROTOCOL_ID}",
+        f"case_id: {protocol_payload.get('case_id') or CASE_ID}",
+        f"data_mode: {protocol_payload.get('data_mode') or DATA_MODE}",
         f"run_id: {RUN_DIRECTORY_NAMES[FORMAL_METHOD_ORDER.index(method_id)]}",
         f"run_label: {RUN_DIRECTORY_NAMES[FORMAL_METHOD_ORDER.index(method_id)]}",
         f"algorithm_id: {method_id}",
@@ -715,8 +740,10 @@ class FormalFourMethodRunner:
                 self.prior_attempt_rows = list(csv.DictReader(handle))
 
     def run(self) -> list[dict[str, Any]]:
-        # The evaluator gate is deliberately first: a blocked point contract creates no run directory.
-        _assert_clean1_blocked_evaluator_gate(self.paths, self.evaluator_path)
+        # The evaluator gate is deliberately first and never opens the trace.
+        _assert_clean1_evaluator_gate(
+            self.paths, self.evaluator_path, self.protocol.payload
+        )
         window = load_frozen_window(self.window_path)
         bundle = load_formal_provider_bundle(self.paths)
         code_commit, dirty = git_code_state(self.paths.code_root)
@@ -817,14 +844,22 @@ class FormalFourMethodRunner:
                 }
                 write_json_atomic(logs / "SOLVER_FILE_OPEN_CROSSCHECK.json", solver_file_open)
             solver_manifest = json.loads(solver_manifest_path.read_text(encoding="utf-8"))
-            _assert_solver_forbidden_manifest(solver_manifest)
+            stage_id = str(self.protocol.payload["stage_id"])
+            protocol_id = str(self.protocol.payload["protocol_id"])
+            case_id = str(self.protocol.payload["case_id"])
+            _assert_solver_forbidden_manifest(
+                solver_manifest,
+                stage_id=stage_id,
+                protocol_id=protocol_id,
+                case_id=case_id,
+            )
             _assert_solver_common_manifest(
                 solver_manifest, self.protocol.payload["solver_common"], window
             )
             if (
                 solver_manifest.get("algorithm_id") != method_id
                 or solver_manifest.get("run_id") != RUN_DIRECTORY_NAMES[index]
-                or solver_manifest.get("phase") != STAGE_ID
+                or solver_manifest.get("phase") != stage_id
             ):
                 raise FormalRunError("FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH")
             expected_features = self.catalog.features(method_id)
@@ -906,10 +941,10 @@ class FormalFourMethodRunner:
                     )
             manifest = {
                 "schema_version": "paper-rebuild-formal-run-manifest-v1",
-                "stage_id": STAGE_ID,
-                "protocol_id": PROTOCOL_ID,
-                "case_id": CASE_ID,
-                "data_mode": DATA_MODE,
+                "stage_id": stage_id,
+                "protocol_id": protocol_id,
+                "case_id": case_id,
+                "data_mode": str(self.protocol.payload["data_mode"]),
                 "run_id": RUN_DIRECTORY_NAMES[index],
                 "algorithm_id": method_id,
                 "method_role": self.catalog.method(method_id)["role"],
@@ -955,7 +990,14 @@ class FormalFourMethodRunner:
                 "terminal_status": "PASS",
                 "paper_performance_claim": False,
             }
-            assert_formal_run_manifest(manifest, self.catalog, require_pass=True)
+            assert_formal_run_manifest(
+                manifest,
+                self.catalog,
+                require_pass=True,
+                expected_stage_id=stage_id,
+                expected_protocol_id=protocol_id,
+                expected_case_id=case_id,
+            )
             write_json_atomic(output / "FORMAL_RUN_MANIFEST.json", manifest)
             manifests.append(manifest)
             rows.append({"attempt": index + 1, "algorithm_id": method_id, "returncode": completed.returncode, "failure_class": "", "terminal_success": True, "metric_driven_rerun": False})

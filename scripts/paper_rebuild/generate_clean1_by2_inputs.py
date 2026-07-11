@@ -50,6 +50,7 @@ from legsa_gins.paper_rebuild.manifest import git_code_state, sha256_file, write
 from legsa_gins.paper_rebuild.methods import load_method_catalog, write_method_freeze
 from legsa_gins.paper_rebuild.paths import (
     assert_clean1_path_contract,
+    clean1_stage_root,
     guard_path,
     is_within,
     legacy_reason,
@@ -59,6 +60,7 @@ from legsa_gins.paper_rebuild.protocol import (
     REQUIRED_WINDOW_STREAMS,
     build_common_covariance_contract,
     compute_full_common_window,
+    compute_kick_aligned_window,
     coverage_from_timestamps,
     freeze_window_contract,
     load_clean1_protocol,
@@ -443,7 +445,7 @@ def _recover_pending_promotion(paths: Any) -> dict[str, Any] | None:
         not isinstance(attempt_name, str)
         or "/" in attempt_name
         or "\\" in attempt_name
-        or not attempt_name.startswith(".CLEAN1_BY2_CLEAN_NORMAL_V1.attempt-")
+        or not attempt_name.startswith(f".{paths.provider_root.name}.attempt-")
     ):
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     if journal.get("state") == "STAGE_ATTEMPT_READY_PROVIDER_PENDING":
@@ -472,7 +474,8 @@ def _recover_pending_promotion(paths: Any) -> dict[str, Any] | None:
     if (
         not isinstance(decision, dict)
         or decision.get("provider_bundle_hash") != bundle.provider_bundle_hash
-        or decision.get("formal_runs_authorized_by_all_gates") is not False
+        or decision.get("formal_runs_authorized_by_all_gates")
+        is not decision.get("evaluator_ready", False)
     ):
         raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     complete_payload = {
@@ -572,16 +575,18 @@ def _evaluator_strace_crosscheck(
     *,
     paths: Any,
     stage_attempt: Path,
+    expect_trace_read: bool,
 ) -> dict[str, Any]:
     opened = parse_strace_openat_paths(strace_path, cwd=REPO_ROOT)
     trace_path = (paths.raw_root / BY2_TRACE_RELATIVE_PATH).resolve(strict=True)
     raw_opened = [path for path in opened if is_within(path, paths.raw_root)]
     trace_open_count = sum(path == trace_path for path in raw_opened)
+    allowed_raw = {trace_path} if expect_trace_read else set()
     unexpected_raw = sorted(
         {
             path.relative_to(paths.raw_root).as_posix()
             for path in raw_opened
-            if path != trace_path
+            if path not in allowed_raw
         }
     )
     provider_runtime_reads = sorted(
@@ -605,11 +610,17 @@ def _evaluator_strace_crosscheck(
         "strace_sha256": sha256_file(strace_path),
         "evaluator_process_isolated": True,
         "evaluation_only_trace_open_count": trace_open_count,
+        "trace_read_expected_during_freeze": expect_trace_read,
         "unexpected_raw_root_relative_paths": unexpected_raw,
         "provider_or_runtime_root_reads": provider_runtime_reads,
         "unexpected_clean_root_relative_paths": unexpected_clean,
         "opened_path_count": len(opened),
-        "passed": trace_open_count > 0 and not unexpected_raw and not provider_runtime_reads and not unexpected_clean,
+        "passed": (
+            (trace_open_count > 0 if expect_trace_read else trace_open_count == 0)
+            and not unexpected_raw
+            and not provider_runtime_reads
+            and not unexpected_clean
+        ),
     }
     write_json_atomic(destination, report)
     if not report["passed"]:
@@ -780,13 +791,15 @@ def _materialize_provider_attempt(
     return attempt_paths, bundle
 
 
-def _write_git_and_authorization(stage: Path, code_commit: str) -> None:
+def _write_git_and_authorization(
+    stage: Path, code_commit: str, protocol: Any
+) -> None:
     auth = stage / "00_AUTHORIZATION" / "AUTHORIZATION.md"
     auth.write_text(
         "# CLEAN1 Human Authorization\n\n"
-        "- stage: `CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION`\n"
-        "- case: `CLEAN1_BY2_CLEAN_NORMAL`\n"
-        "- protocol: `CLEAN1_BY2_CLEAN_NORMAL_V1`\n"
+        f"- stage: `{protocol.payload['stage_id']}`\n"
+        f"- case: `{protocol.payload['case_id']}`\n"
+        f"- protocol: `{protocol.payload['protocol_id']}`\n"
         "- base commit: `4e6b3f3fa9f50ed91b6c4e250f3d1f75d6725cc6`\n"
         "- methods: exactly four frozen methods in tracked order\n"
         "- no merge, tag, deletion, figures, classic-18, matrix, DA03, DA05, or next stage\n",
@@ -838,6 +851,78 @@ def _write_git_and_authorization(stage: Path, code_commit: str) -> None:
         writer = csv.DictWriter(handle, fieldnames=["relative_path", "sha256", "code_commit"])
         writer.writeheader()
         writer.writerows(rows)
+
+
+def _run_build_and_tests(stage: Path, expected_code_commit: str) -> None:
+    """Re-run the active Python tests and C++ build at the frozen commit."""
+
+    commands = (
+        (
+            "PAPER_REBUILD_PYTEST",
+            [sys.executable, "-m", "pytest", "tests/paper_rebuild", "-q"],
+            600,
+        ),
+        (
+            "CMAKE_CONFIGURE",
+            [
+                "cmake",
+                "-S",
+                "cpp",
+                "-B",
+                "build/cpp",
+                "-DCMAKE_BUILD_TYPE=Release",
+            ],
+            300,
+        ),
+        (
+            "CMAKE_BUILD",
+            ["cmake", "--build", "build/cpp", "-j2"],
+            900,
+        ),
+    )
+    destination = stage / "05_BUILD_AND_TESTS"
+    statuses: list[dict[str, Any]] = []
+    for label, command, timeout_seconds in commands:
+        completed = run_process_group(
+            command,
+            cwd=REPO_ROOT,
+            timeout_seconds=timeout_seconds,
+            timeout_message=f"{label} timeout; entire process group terminated",
+            launch_failure_message=f"{label} launch failure",
+        )
+        (destination / f"{label}.stdout.txt").write_text(
+            completed.stdout, encoding="utf-8"
+        )
+        (destination / f"{label}.stderr.txt").write_text(
+            completed.stderr, encoding="utf-8"
+        )
+        statuses.append(
+            {
+                "label": label,
+                "command_alias": " ".join(command),
+                "returncode": completed.returncode,
+                "passed": completed.returncode == 0,
+            }
+        )
+        if completed.returncode != 0:
+            write_json_atomic(
+                destination / "BUILD_AND_TEST_STATUS.json",
+                {"steps": statuses, "passed": False},
+            )
+            raise RuntimeError("BLOCKED_CLEAN1_BUILD_OR_TEST_FAILED")
+    commit, dirty = git_code_state(REPO_ROOT)
+    passed = commit == expected_code_commit and dirty is False
+    write_json_atomic(
+        destination / "BUILD_AND_TEST_STATUS.json",
+        {
+            "steps": statuses,
+            "code_commit": commit,
+            "worktree_dirty": dirty,
+            "passed": passed,
+        },
+    )
+    if not passed:
+        raise RuntimeError("BLOCKED_CLEAN1_GIT_OR_CODE_FREEZE_FAILED")
 
 
 def _write_post_raw_evidence(
@@ -1137,6 +1222,80 @@ def _strict_times(values: list[float], role: str) -> list[float]:
     return finite
 
 
+def _select_initialization_epochs(
+    gnss_rows: list[list[float]],
+    attitude_rows: list[dict[str, str]],
+    start: float,
+) -> tuple[list[float], list[float], dict[str, str]]:
+    """Select only exact-start or historical source rows; never future data."""
+
+    start_epoch = next(
+        (
+            row
+            for row in gnss_rows
+            if math.isclose(row[0], start, rel_tol=0.0, abs_tol=1.0e-9)
+            and int(row[15]) == 1
+            and int(row[17]) == 1
+        ),
+        None,
+    )
+    velocity_epoch = next(
+        (
+            row
+            for row in reversed(gnss_rows)
+            if row[0] <= start + 1.0e-9 and int(row[16]) == 1
+        ),
+        None,
+    )
+    attitude_epoch = next(
+        (
+            row
+            for row in reversed(attitude_rows)
+            if float(row["time"]) <= start + 1.0e-9
+            and row["source_status"] == "active"
+        ),
+        None,
+    )
+    if start_epoch is None or velocity_epoch is None or attitude_epoch is None:
+        raise RuntimeError("BLOCKED_CLEAN1_WINDOW_OR_INITIALIZATION_CONTRACT_FAILED")
+    if (
+        velocity_epoch[0] > start + 1.0e-9
+        or float(attitude_epoch["time"]) > start + 1.0e-9
+    ):
+        raise RuntimeError("BLOCKED_CLEAN1_WINDOW_OR_INITIALIZATION_CONTRACT_FAILED")
+    return start_epoch, velocity_epoch, attitude_epoch
+
+
+def _initialization_provenance(
+    start_epoch: list[float],
+    velocity_epoch: list[float],
+    attitude_epoch: dict[str, str],
+) -> dict[str, Any]:
+    start = float(start_epoch[0])
+    velocity_time = float(velocity_epoch[0])
+    attitude_time = float(attitude_epoch["time"])
+    if velocity_time > start + 1.0e-9 or attitude_time > start + 1.0e-9:
+        raise RuntimeError("BLOCKED_CLEAN1_WINDOW_OR_INITIALIZATION_CONTRACT_FAILED")
+    return {
+        "position_velocity_source_role": (
+            "gnss_position_exact_common_start_and_receiver_velocity_"
+            "latest_valid_at_or_before_common_start"
+        ),
+        "position_source_role": "gnss_position_exact_common_start",
+        "velocity_source_role": (
+            "gnss_receiver_velocity_latest_valid_at_or_before_common_start"
+        ),
+        "roll_pitch_source_role": (
+            "go2_body_attitude_latest_valid_at_or_before_common_start"
+        ),
+        "position_initialization_timestamp": start,
+        "velocity_initialization_timestamp": velocity_time,
+        "roll_pitch_initialization_timestamp": attitude_time,
+        "yaw_initialization_timestamp": start,
+        "future_observation_used_for_initialization": False,
+    }
+
+
 def _freeze_window(paths: Any, bundle: Any, protocol: Any, destination: Path) -> dict[str, Any]:
     imu_rows = _numeric_rows(bundle.artifacts["imu_runtime_input"])
     gnss_rows = _numeric_rows(bundle.artifacts["gnss_runtime_input"])
@@ -1176,24 +1335,37 @@ def _freeze_window(paths: Any, bundle: Any, protocol: Any, destination: Path) ->
                 source_sha256=bundle.provider_hashes[artifact],
             )
         )
-    start = max(item.first_valid_timestamp for item in coverages)
-    init_gnss = next(
-        row for row in gnss_rows if row[0] >= start and int(row[15]) == int(row[16]) == 1
+    is_v2 = (
+        protocol.payload.get("protocol_id")
+        == "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED"
     )
-    init_yaw = next(row for row in gnss_rows if row[0] >= start and int(row[17]) == 1)
-    init_attitude = next(row for row in attitude_rows if float(row["time"]) >= start)
+    kick_report: dict[str, Any] | None = None
+    if is_v2:
+        kick_report = json.loads(
+            bundle.artifacts["kick_alignment_report"].read_text(encoding="utf-8")
+        )
+        if not isinstance(kick_report, dict) or kick_report.get("kick_alignment_pass") is not True:
+            raise RuntimeError("BLOCKED_CLEAN1R1C_KICK_EVENT_ALIGNMENT_FAILED")
+        start = float(kick_report["t_start"])
+    else:
+        start = max(item.first_valid_timestamp for item in coverages)
+    start_epoch, velocity_epoch, attitude_epoch = _select_initialization_epochs(
+        gnss_rows, attitude_rows, start
+    )
+    initialization_provenance = _initialization_provenance(
+        start_epoch, velocity_epoch, attitude_epoch
+    )
     common = protocol.payload["solver_common"]
     covariance_contract = build_common_covariance_contract(common)
     initialization = {
-        "position_geodetic_deg_m": init_gnss[1:4],
-        "velocity_ned_mps": init_gnss[7:10],
-        "roll_pitch_deg": [math.degrees(float(init_attitude["roll_rad"])), math.degrees(float(init_attitude["pitch_rad"]))],
-        "yaw_ned_deg": init_yaw[13] % 360.0,
+        "position_geodetic_deg_m": start_epoch[1:4],
+        "velocity_ned_mps": velocity_epoch[7:10],
+        "roll_pitch_deg": [math.degrees(float(attitude_epoch["roll_rad"])), math.degrees(float(attitude_epoch["pitch_rad"]))],
+        "yaw_ned_deg": start_epoch[13] % 360.0,
         "bias_scale_state": [0.0] * 12,
         "covariance_diagonal": covariance_contract["covariance_diagonal_internal"],
         "covariance_contract": covariance_contract,
-        "position_velocity_source_role": "gnss_source_at_common_start",
-        "roll_pitch_source_role": "go2_body_attitude_at_common_start",
+        **initialization_provenance,
         "yaw_source_role": "fixed_physical_dual_yaw_at_common_start",
         "trace_used": False,
         "method_specific": False,
@@ -1203,17 +1375,54 @@ def _freeze_window(paths: Any, bundle: Any, protocol: Any, destination: Path) ->
         "antenna_lever_source_status": common["antenna_lever_source_status"],
     }
     source_origin = infer_source_day_base_time(paths.by2_fix_root / "gnss1-status.csv")
-    frozen = compute_full_common_window(
-        coverages,
-        source_time_origin_seconds=source_origin,
-        common_initialization=initialization,
-    )
+    if is_v2:
+        assert kick_report is not None
+        frozen = compute_kick_aligned_window(
+            coverages,
+            core_gnss_timestamps=stream_times["gnss_position"],
+            dual_yaw_timestamps=[
+                row[0] for row in gnss_rows if int(row[17]) == 1
+            ],
+            mapped_kick_provider_time=float(
+                kick_report["mapped_kick_provider_time"]
+            ),
+            source_time_origin_seconds=source_origin,
+            common_initialization=initialization,
+        )
+        if not (
+            math.isclose(frozen.t_start, float(kick_report["t_start"]), abs_tol=1.0e-9)
+            and math.isclose(frozen.t_end, float(kick_report["t_end"]), abs_tol=1.0e-9)
+        ):
+            raise RuntimeError("BLOCKED_CLEAN1R1C_KICK_EVENT_ALIGNMENT_FAILED")
+        for role in (
+            "kick_alignment_contract",
+            "kick_alignment_report",
+            "kick_event_diagnostic",
+            "common_start_time_contract",
+        ):
+            shutil.copy2(bundle.artifacts[role], destination / bundle.artifacts[role].name)
+    else:
+        frozen = compute_full_common_window(
+            coverages,
+            source_time_origin_seconds=source_origin,
+            common_initialization=initialization,
+        )
     freeze_window_contract(protocol, frozen, destination)
     return json.loads(json.dumps({
         "t_start": frozen.t_start,
         "t_end": frozen.t_end,
         "duration_seconds": frozen.duration_seconds,
         "source_time_origin_seconds": frozen.source_time_origin_seconds,
+        "alignment_mode": (
+            kick_report.get("alignment_mode") if kick_report else "none"
+        ),
+        "t_go2_kick": kick_report.get("t_go2_kick") if kick_report else None,
+        "fixed_event_alignment_offset": (
+            kick_report.get("fixed_event_alignment_offset") if kick_report else None
+        ),
+        "first_valid_gnss_after_kick": (
+            kick_report.get("first_valid_gnss_after_kick") if kick_report else None
+        ),
         "common_initialization": frozen.common_initialization,
     }))
 
@@ -1252,6 +1461,7 @@ def _build_success_pre_run_decision(
 
 
 def main(argv: list[str] | None = None) -> int:
+    global STAGE_DIR_NAME, FAILED_ATTEMPT_DIR_NAME
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", required=True)
     parser.add_argument("--protocol", default=str(REPO_ROOT / "configs/paper_rebuild/clean1_by2_clean_protocol.yaml"))
@@ -1264,6 +1474,15 @@ def main(argv: list[str] | None = None) -> int:
 
     paths = load_clean_paths(args.config)
     assert_clean1_path_contract(paths, REPO_ROOT)
+    protocol = load_clean1_protocol(args.protocol)
+    STAGE_DIR_NAME = clean1_stage_root(paths).name
+    FAILED_ATTEMPT_DIR_NAME = f"{STAGE_DIR_NAME}_FAILED_ATTEMPTS"
+    if (
+        args.retry_after_exact_blocked_attempt
+        and protocol.payload["protocol_id"]
+        != "CLEAN1_BY2_CLEAN_NORMAL_V1"
+    ):
+        raise RuntimeError("FAIL_CLEAN1_EVIDENCE_CONTAMINATION")
     code_commit, dirty = git_code_state(paths.code_root)
     if (
         dirty
@@ -1273,7 +1492,6 @@ def main(argv: list[str] | None = None) -> int:
         )
     ):
         raise RuntimeError("BLOCKED_CLEAN1_GIT_OR_CODE_FREEZE_FAILED")
-    protocol = load_clean1_protocol(args.protocol)
     prior_attempt = None
     if args.retry_after_exact_blocked_attempt:
         prior_attempt = _preserve_exact_raw_doppler_blocked_stage_for_retry(
@@ -1284,7 +1502,8 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(recovered, ensure_ascii=False, sort_keys=True))
         return 0
     stage, stage_final = _create_stage_root(paths.clean_root)
-    _write_git_and_authorization(stage, code_commit)
+    _write_git_and_authorization(stage, code_commit, protocol)
+    _run_build_and_tests(stage, code_commit)
     if prior_attempt is not None:
         write_json_atomic(
             stage / "00_AUTHORIZATION/PRIOR_TECHNICAL_ATTEMPT.json",
@@ -1376,8 +1595,17 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(decision, ensure_ascii=False, sort_keys=True))
         return 2
     shutil.copy2(attempt_paths.provider_root / "CLEAN_INPUT_MANIFEST.json", stage / "04_PROVIDER_AUDIT")
+    shutil.copy2(
+        attempt_paths.provider_root / "CLEAN_INPUT_MANIFEST.json",
+        stage / "04_PROVIDER_AUDIT/PROVIDER_MANIFEST.json",
+    )
     shutil.copy2(attempt_paths.provider_root / "RAW_DOPPLER_BACKEND_REPORT.json", stage / "04_PROVIDER_AUDIT")
-    for name in ("DUAL_YAW_PHYSICAL_GATE.json", "DUAL_YAW_RUNTIME_CROSSCHECK.json"):
+    for name in (
+        "DUAL_YAW_PHYSICAL_GATE.json",
+        "DUAL_YAW_RUNTIME_CROSSCHECK.json",
+        "SOURCE_ROLE_MANIFEST.json",
+        "GO2_PROVIDER_REPORT.json",
+    ):
         shutil.copy2(attempt_paths.provider_root / name, stage / "04_PROVIDER_AUDIT" / name)
     shutil.copy2(
         bundle.artifacts["dual_yaw_provider"],
@@ -1525,6 +1753,10 @@ def main(argv: list[str] | None = None) -> int:
                 stage / "02_PROTOCOL_FREEZE/EVALUATOR_FREEZE_FILE_OPEN_CROSSCHECK.json",
                 paths=paths,
                 stage_attempt=stage,
+                expect_trace_read=(
+                    protocol.payload["protocol_id"]
+                    == "CLEAN1_BY2_CLEAN_NORMAL_V1"
+                ),
             )
         except RuntimeError:
             decision = _finalize_stable_blocked_stage(
@@ -1563,6 +1795,10 @@ def main(argv: list[str] | None = None) -> int:
         executable_hash=sha256_file(paths.port_core_exe),
     )
     write_method_freeze(catalog, stage / "02_PROTOCOL_FREEZE", effective_configs=effective)
+    shutil.copy2(
+        stage / "02_PROTOCOL_FREEZE/EFFECTIVE_METHOD_FLAG_MATRIX.csv",
+        stage / "02_PROTOCOL_FREEZE/METHOD_FLAG_MATRIX.csv",
+    )
     evaluator_payload = load_yaml_mapping(stage / "02_PROTOCOL_FREEZE/EVALUATOR_CONTRACT.yaml")
     evaluator_ready = evaluator_payload.get("formal_metrics_authorized") is True
     decision = _build_success_pre_run_decision(

@@ -31,6 +31,19 @@ LEGACY_SEQUENCES = (
 )
 WINDOWS_ABSOLUTE_RE = re.compile(r"^[A-Za-z]:[\\/]")
 
+CLEAN1_PROTOCOL_PATH_SUFFIXES = frozenset(
+    {
+        "CLEAN1_BY2_CLEAN_NORMAL_V1",
+        "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED",
+    }
+)
+CLEAN1_STAGE_DIR_BY_PROTOCOL_SUFFIX = {
+    "CLEAN1_BY2_CLEAN_NORMAL_V1": "06_CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION",
+    "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED": (
+        "06_CLEAN1R1C_KICK_ALIGNED_FOUR_METHOD_EXECUTION"
+    ),
+}
+
 
 @dataclass(frozen=True)
 class CleanPaths:
@@ -225,10 +238,16 @@ def load_clean_paths(config_path: str | Path, *, require_sources: bool = True) -
     guard_path(runtime_root, role="clean runtime root", allowed_root=clean_root)
     if is_within(provider_root, runtime_root) or is_within(runtime_root, provider_root):
         raise PathContractError("provider_root and runtime_root must be mutually disjoint")
-    if provider_root.name == "CLEAN1_BY2_CLEAN_NORMAL_V1" or runtime_root.name == "CLEAN1_BY2_CLEAN_NORMAL_V1":
-        if provider_root != clean_root / "04_PROVIDER_FREEZE" / "CLEAN1_BY2_CLEAN_NORMAL_V1":
+    if (
+        provider_root.name in CLEAN1_PROTOCOL_PATH_SUFFIXES
+        or runtime_root.name in CLEAN1_PROTOCOL_PATH_SUFFIXES
+    ):
+        if provider_root.name != runtime_root.name:
+            raise PathContractError("CLEAN1 provider/runtime protocol suffix mismatch")
+        protocol_suffix = provider_root.name
+        if provider_root != clean_root / "04_PROVIDER_FREEZE" / protocol_suffix:
             raise PathContractError("CLEAN1 provider_root exact suffix mismatch")
-        if runtime_root != clean_root / "05_BY2_CLEAN" / "CLEAN1_BY2_CLEAN_NORMAL_V1":
+        if runtime_root != clean_root / "05_BY2_CLEAN" / protocol_suffix:
             raise PathContractError("CLEAN1 runtime_root exact suffix mismatch")
     if require_sources:
         if not code_root.is_dir():
@@ -260,12 +279,14 @@ def assert_clean1_path_contract(paths: CleanPaths, expected_code_root: str | Pat
     expected_code = Path(expected_code_root).resolve(strict=True)
     if paths.code_root != expected_code:
         raise PathContractError("CLEAN1 paths.code_root is not the executing worktree")
-    expected_provider = (
-        paths.clean_root / "04_PROVIDER_FREEZE" / "CLEAN1_BY2_CLEAN_NORMAL_V1"
-    )
-    expected_runtime = (
-        paths.clean_root / "05_BY2_CLEAN" / "CLEAN1_BY2_CLEAN_NORMAL_V1"
-    )
+    protocol_suffix = paths.provider_root.name
+    if (
+        protocol_suffix not in CLEAN1_PROTOCOL_PATH_SUFFIXES
+        or paths.runtime_root.name != protocol_suffix
+    ):
+        raise PathContractError("CLEAN1 provider/runtime protocol suffix mismatch")
+    expected_provider = paths.clean_root / "04_PROVIDER_FREEZE" / protocol_suffix
+    expected_runtime = paths.clean_root / "05_BY2_CLEAN" / protocol_suffix
     if paths.provider_root != expected_provider:
         raise PathContractError("CLEAN1 provider_root exact suffix mismatch")
     if paths.runtime_root != expected_runtime:
@@ -274,3 +295,16 @@ def assert_clean1_path_contract(paths: CleanPaths, expected_code_root: str | Pat
         raise PathContractError("CLEAN1 by2_fix_root does not match the canonical lock path")
     if paths.by2_go2_body != (paths.raw_root / BY2_BODY_RELATIVE_PATH).resolve(strict=False):
         raise PathContractError("CLEAN1 by2_go2_body does not match the canonical lock path")
+
+
+def clean1_stage_root(paths: CleanPaths) -> Path:
+    """Return the exact isolated evidence root for the configured CLEAN1 protocol."""
+
+    stage_name = CLEAN1_STAGE_DIR_BY_PROTOCOL_SUFFIX.get(paths.provider_root.name)
+    if stage_name is None or paths.runtime_root.name != paths.provider_root.name:
+        raise PathContractError("CLEAN1 stage protocol suffix is unsupported or mixed")
+    return guard_path(
+        paths.clean_root / stage_name,
+        role="CLEAN1 stage root",
+        allowed_root=paths.clean_root,
+    )

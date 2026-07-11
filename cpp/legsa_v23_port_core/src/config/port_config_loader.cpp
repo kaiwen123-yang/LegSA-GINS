@@ -158,8 +158,14 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
       formalContractFailure(std::string("formal config must explicitly disable ") + key);
     }
   }
-  if (options.stage_id != "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION" ||
-      options.protocol_id != "CLEAN1_BY2_CLEAN_NORMAL_V1" ||
+  const bool clean1_v1_identity =
+      options.stage_id == "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION" &&
+      options.protocol_id == "CLEAN1_BY2_CLEAN_NORMAL_V1";
+  const bool clean1r1c_v2_identity =
+      options.stage_id ==
+          "CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION" &&
+      options.protocol_id == "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED";
+  if ((!clean1_v1_identity && !clean1r1c_v2_identity) ||
       options.case_id != "CLEAN1_BY2_CLEAN_NORMAL" ||
       options.data_mode != "real_by2_raw" || options.run_id.empty()) {
     formalContractFailure("formal stage/protocol/case/data_mode/run identity mismatch");

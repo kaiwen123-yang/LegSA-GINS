@@ -17,6 +17,7 @@ from legsa_gins.paper_rebuild.evaluator import evaluate_formal_output
 from legsa_gins.paper_rebuild.evidence import BY2_TRACE_RELATIVE_PATH
 from legsa_gins.paper_rebuild.paths import (
     assert_clean1_path_contract,
+    clean1_stage_root,
     guard_path,
     load_clean_paths,
 )
@@ -34,7 +35,7 @@ def main(argv: list[str] | None = None) -> int:
 
     paths = load_clean_paths(args.config)
     assert_clean1_path_contract(paths, REPO_ROOT)
-    stage = paths.clean_root / "06_CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION"
+    stage = clean1_stage_root(paths)
     solver = guard_path(
         args.solver_output,
         role="CLEAN1 current solver output",

@@ -11,11 +11,12 @@
 
 ## CLEAN1 Authorized Scope
 
-The human authorized the following bounded work from the frozen CLEAN1 base:
+The human authorized the following bounded CLEAN1R1C work from the frozen CLEAN1 base:
 
-1. Freeze the exact BY2 clean experiment window and evaluator contract.
-2. Run clean normal BY2 for the four methods in `methods.yaml`.
-3. Review manifests, provider lineage, module counters, and current-output metric cross-checks.
-4. Stop with a blocker before formal runs if any Raw Doppler, initialization, evaluator, or evidence-isolation gate fails.
+1. Reproduce the frozen kick event and first post-kick valid GNSS start without trace or offset search.
+2. Commit the V2 evaluator/alignment/lever-arm implementation and regenerate an isolated fresh provider from raw 22/22.
+3. Run clean normal BY2 once for the four methods in `methods.yaml`, in order.
+4. Open trace only after all outputs are hash-frozen, then generate row, summary, coverage, aggregate, and independent cross-check artifacts.
+5. Stop with a blocker if any raw, kick, A1 dual-yaw, Raw Doppler, build/test, run, module-counter, evaluator, or isolation gate fails.
 
 CLEAN1 has `paper_figure_count=0` and does not decide or authorize a classic-18 pilot. It must not silently expand into classic-18, the 60x9 matrix, DA03/DA05, another dataset, selected feedback, active 9F FGO, QA fallback, paper performance claims, or a next stage.

@@ -284,7 +284,10 @@ def generate_clean_by2_inputs(
     manifest_path = provider_root / "CLEAN_INPUT_MANIFEST.json"
     parent_bracketed_git_state = expected_code_commit is not None
     if parent_bracketed_git_state:
-        if stage_id != "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION":
+        if stage_id not in {
+            "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION",
+            "CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION",
+        }:
             raise ProviderGenerationError(
                 "Expected formal code commit is only valid for the CLEAN1 formal stage"
             )
@@ -464,6 +467,26 @@ def generate_clean_by2_inputs(
         relative_sources["go2_body"]: "Go2 body IMU and weak auxiliary priors; not truth",
         "trace": "evaluation-only and not read during clean input generation",
     }
+    if (
+        stage_id
+        == "CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION"
+    ):
+        receiver_diagnostics = {
+            "imu-data.csv": "Fixposition receiver IMU diagnostic-only; never propagation input",
+            "imu-biases.csv": "Fixposition receiver IMU bias diagnostic-only; never propagation input",
+            "imu-temp.csv": "Fixposition receiver IMU temperature diagnostic-only; never propagation input",
+        }
+        for name, role in receiver_diagnostics.items():
+            relative = str(
+                (paths.by2_fix_root / name)
+                .resolve(strict=False)
+                .relative_to(paths.raw_root.resolve(strict=True))
+            )
+            source_roles[relative] = role
+        source_roles["trace"] = (
+            "Fixposition same-source evaluation reference; offline-only and not read "
+            "during clean input generation"
+        )
     yaw_contract = {
         key: yaw_audit[key]
         for key in (

@@ -41,12 +41,15 @@ from .evidence import (
     validate_provider_source_read_set,
 )
 from .formal_provider import (
+    AUDIT_ONLY_PROVIDER_ROLES,
     PINNED_RTKLIB_COMMIT,
     PINNED_RTKLIB_REMOTE,
     RAW_DOPPLER_COVARIANCE_POLICY,
     RAW_DOPPLER_TIME_CONVERSION,
-    REQUIRED_FORMAL_PROVIDER_ROLES,
-    MAINTAINED_SHARED_SOURCE_FILES,
+    V1_MAINTAINED_SHARED_SOURCE_FILES,
+    V1_REQUIRED_FORMAL_PROVIDER_ROLES,
+    V2_MAINTAINED_SHARED_SOURCE_FILES,
+    V2_REQUIRED_FORMAL_PROVIDER_ROLES,
     FormalProviderError,
     validate_raw_doppler_backend_report,
 )
@@ -57,6 +60,7 @@ from .manifest import (
     verify_raw_sources,
     write_json_atomic,
 )
+from .kick_alignment import build_kick_aligned_contract
 from .paths import CleanPaths, guard_path
 from .providers import generate_clean_by2_inputs, infer_source_day_base_time
 
@@ -117,6 +121,31 @@ CONVBIN_SOURCE_FILES = (
 
 class FormalGenerationError(FormalProviderError):
     """Fresh provider generation stopped at a hard lineage or backend gate."""
+
+
+def _formal_provider_contract_for_identity(
+    stage_id: str, protocol_id: str
+) -> tuple[bool, tuple[str, ...], tuple[str, ...]]:
+    identity = (stage_id, protocol_id)
+    if identity == (
+        "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION",
+        "CLEAN1_BY2_CLEAN_NORMAL_V1",
+    ):
+        return (
+            False,
+            V1_REQUIRED_FORMAL_PROVIDER_ROLES,
+            V1_MAINTAINED_SHARED_SOURCE_FILES,
+        )
+    if identity == (
+        "CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION",
+        "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED",
+    ):
+        return (
+            True,
+            V2_REQUIRED_FORMAL_PROVIDER_ROLES,
+            V2_MAINTAINED_SHARED_SOURCE_FILES,
+        )
+    raise FormalGenerationError("Formal provider stage/protocol identity mismatch")
 
 
 def _run(command: list[str], *, cwd: Path, label: str, timeout: int = 600) -> subprocess.CompletedProcess[str]:
@@ -499,6 +528,8 @@ def generate_formal_clean1_inputs(
     materialize_pinned_rtklib: bool = False,
     timeout_seconds: int = 900,
     provider_generation: Mapping[str, Any] | None = None,
+    stage_id: str = "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION",
+    protocol_id: str = "CLEAN1_BY2_CLEAN_NORMAL_V1",
 ) -> dict[str, Any]:
     """Generate the fresh provider once; no replace, fallback, or provider discovery."""
 
@@ -510,6 +541,9 @@ def generate_formal_clean1_inputs(
     ):
         raise FormalGenerationError("Expected formal code commit is invalid")
     commit = expected_code_commit
+    is_v2, provider_roles, maintained_files = (
+        _formal_provider_contract_for_identity(stage_id, protocol_id)
+    )
     lock = read_hash_lock(paths.raw_hash_lock)
     by2_lock = {relative: row for relative, row in lock.items() if row.get("dataset") == "BY2"}
     if set(by2_lock) != set(BY2_RAW_RELATIVE_PATHS):
@@ -567,7 +601,7 @@ def generate_formal_clean1_inputs(
         go2_velocity_frame_transform=str(generation["go2_velocity_frame_transform"]),
         go2_roll_pitch_std_deg=float(generation["go2_roll_pitch_std_deg"]),
         go2_horizontal_velocity_std_mps=float(generation["go2_horizontal_velocity_std_mps"]),
-        stage_id="CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION",
+        stage_id=stage_id,
         expected_code_commit=commit,
     )
     gnss_path = provider_root / base_manifest["artifacts"]["gnss_runtime_input"]["relative_path"]
@@ -588,6 +622,22 @@ def generate_formal_clean1_inputs(
             generation["dual_yaw_match_tolerance_seconds"]
         ),
     )
+    imu_path = provider_root / base_manifest["artifacts"]["imu_runtime_input"][
+        "relative_path"
+    ]
+    kick_output_dir = provider_root / "protocol"
+    kick_alignment: dict[str, Any] | None = None
+    if is_v2:
+        kick_alignment = build_kick_aligned_contract(
+            paths.by2_go2_body,
+            gnss_path,
+            imu_path,
+            kick_output_dir,
+            base_time,
+            fixed_event_alignment_offset=float(
+                generation["imu_gnss_time_offset_seconds"]
+            ),
+        )
     source_quality_path = provider_root / "providers" / "SOURCE_QUALITY_METADATA.csv"
     _write_source_quality(gnss_path, source_quality_path)
 
@@ -701,7 +751,7 @@ def generate_formal_clean1_inputs(
     helper_source_hashes = {relative: sha256_file(paths.code_root / relative) for relative in helper_sources}
     maintained_shared_source_hashes = {
         relative: sha256_file(paths.code_root / relative)
-        for relative in MAINTAINED_SHARED_SOURCE_FILES
+        for relative in maintained_files
     }
     rtklib_source_files = list(dict.fromkeys([f"src/{name}" for name in REQUIRED_SOURCE_FILES] + list(CONVBIN_SOURCE_FILES)))
     rtklib_source_hashes: dict[str, str] = {}
@@ -805,9 +855,24 @@ def generate_formal_clean1_inputs(
     )
     artifacts["raw_doppler_provider"] = {"relative_path": formal_raw_path.relative_to(provider_root).as_posix(), "source_generated": True}
     artifacts["source_quality_metadata"] = {"relative_path": source_quality_path.relative_to(provider_root).as_posix(), "source_generated": True}
-    artifacts = {role: artifacts[role] for role in REQUIRED_FORMAL_PROVIDER_ROLES}
+    kick_artifact_names = {
+        "kick_alignment_contract": "KICK_EVENT_ALIGNMENT_CONTRACT.yaml",
+        "kick_alignment_report": "KICK_EVENT_ALIGNMENT_REPORT.json",
+        "kick_event_diagnostic": "KICK_EVENT_DIAGNOSTIC.csv",
+        "kick_maintained_initial_segment": "GO2_INITIAL_EVENT_SEGMENT.csv",
+        "common_start_time_contract": "COMMON_START_TIME_CONTRACT.yaml",
+    }
+    if is_v2:
+        for role, filename in kick_artifact_names.items():
+            artifacts[role] = {
+                "relative_path": (kick_output_dir / filename)
+                .relative_to(provider_root)
+                .as_posix(),
+                "source_generated": True,
+            }
+    artifacts = {role: artifacts[role] for role in provider_roles}
     for role, entry in artifacts.items():
-        entry["solver_input"] = role not in {"dual_yaw_provider", "source_quality_metadata"}
+        entry["solver_input"] = role not in AUDIT_ONLY_PROVIDER_ROLES
         entry["artifact_role"] = (
             "audit_only_lineage"
             if not entry["solver_input"]
@@ -866,7 +931,9 @@ def generate_formal_clean1_inputs(
     generation_contract = {
         "schema_version": "paper-rebuild-clean1-provider-generation-v1",
         "code_commit": commit,
-        "provider_roles": list(REQUIRED_FORMAL_PROVIDER_ROLES),
+        "stage_id": stage_id,
+        "protocol_id": protocol_id,
+        "provider_roles": list(provider_roles),
         "raw_doppler_conversion_config_hash": conversion_hash,
         "formal_gnss_columns": 18,
         "formal_gnss_validity_report": validity_report,
@@ -875,11 +942,15 @@ def generate_formal_clean1_inputs(
         "maintained_shared_source_hashes": maintained_shared_source_hashes,
         "maintained_shared_source_commit": commit,
     }
+    if is_v2:
+        generation_contract["kick_alignment"] = kick_alignment
     generation_hash = sha256_text(json.dumps(generation_contract, sort_keys=True, separators=(",", ":")))
     bundle_hash = hashlib.sha256(json.dumps(provider_hashes, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
     manifest = {
         "schema_version": "paper-rebuild-clean1-input-v1",
         "data_mode": "real_by2_raw",
+        "stage_id": stage_id,
+        "protocol_id": protocol_id,
         "raw_source_hashes": verified,
         "raw_source_roles": raw_source_roles,
         "actual_source_read_set": actual_reads,
@@ -915,6 +986,8 @@ def generate_formal_clean1_inputs(
         "local_path_config_hash": sha256_file(paths.config_path),
         "generation_contract": generation_contract,
     }
+    if is_v2:
+        manifest["kick_alignment"] = kick_alignment
     write_json_atomic(provider_root / "CLEAN_INPUT_MANIFEST.json", manifest)
     with (provider_root / "PROVIDER_HASH_MANIFEST.csv").open(
         "w", encoding="utf-8", newline=""
@@ -924,7 +997,7 @@ def generate_formal_clean1_inputs(
             fieldnames=["provider_role", "relative_path", "sha256", "solver_input", "artifact_role"],
         )
         writer.writeheader()
-        for role in REQUIRED_FORMAL_PROVIDER_ROLES:
+        for role in provider_roles:
             writer.writerow(
                 {
                     "provider_role": role,

@@ -46,7 +46,7 @@ def main(argv: list[str] | None = None) -> int:
     locked_hashes = {relative: str(row.get("sha256") or "") for relative, row in by2_lock.items()}
     frozen = freeze_evaluator_contract(
         args.contract,
-        paths.raw_root / BY2_TRACE_RELATIVE_PATH,
+        None,
         output,
         reference_relative_path=BY2_TRACE_RELATIVE_PATH,
         expected_reference_sha256=locked_hashes[BY2_TRACE_RELATIVE_PATH],
@@ -59,11 +59,13 @@ def main(argv: list[str] | None = None) -> int:
         [
             {
                 "read_order": 1,
-                "path_alias": "<RAW_ROOT>",
-                "relative_path": BY2_TRACE_RELATIVE_PATH,
-                "role": "evaluation_only_trace",
-                "sha256": locked_hashes[BY2_TRACE_RELATIVE_PATH],
-                "reader_component": "paper_rebuild.freeze_evaluator_contract",
+                "path_alias": "<CLEAN_ROOT>",
+                "relative_path": paths.raw_hash_lock.resolve(strict=True).relative_to(
+                    paths.clean_root.resolve(strict=True)
+                ).as_posix(),
+                "role": "raw_hash_lock_registry",
+                "sha256": sha256_file(paths.raw_hash_lock),
+                "reader_component": "paper_rebuild.freeze_evaluator_contract.hash_lock_only",
             },
             {
                 "read_order": 2,
@@ -74,9 +76,18 @@ def main(argv: list[str] | None = None) -> int:
                 "reader_component": "paper_rebuild.freeze_evaluator_contract",
             },
         ],
-        allowed_roles={"evaluation_only_trace", "tracked_evaluator_contract"},
+        allowed_roles={"raw_hash_lock_registry", "tracked_evaluator_contract"},
     )
-    print(json.dumps({"ready": frozen.ready, "terminal_status": frozen.terminal_status}, sort_keys=True))
+    print(
+        json.dumps(
+            {
+                "ready": frozen.ready,
+                "terminal_status": frozen.terminal_status,
+                "trace_read_during_freeze": False,
+            },
+            sort_keys=True,
+        )
+    )
     return 0
 
 

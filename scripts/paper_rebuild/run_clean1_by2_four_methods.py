@@ -16,7 +16,11 @@ if str(SRC_ROOT) not in sys.path:
 
 from legsa_gins.paper_rebuild.formal_runner import FormalFourMethodRunner
 from legsa_gins.paper_rebuild.manifest import write_json_atomic
-from legsa_gins.paper_rebuild.paths import assert_clean1_path_contract, load_clean_paths
+from legsa_gins.paper_rebuild.paths import (
+    assert_clean1_path_contract,
+    clean1_stage_root,
+    load_clean_paths,
+)
 
 
 def _completed_current_session_count(path: Path, session_id: str) -> int:
@@ -36,7 +40,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     paths = load_clean_paths(args.config)
     assert_clean1_path_contract(paths, REPO_ROOT)
-    stage = paths.clean_root / "06_CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION"
+    stage = clean1_stage_root(paths)
     runner = FormalFourMethodRunner(
         args.config,
         window_contract=stage / "02_PROTOCOL_FREEZE/WINDOW_CONTRACT.yaml",

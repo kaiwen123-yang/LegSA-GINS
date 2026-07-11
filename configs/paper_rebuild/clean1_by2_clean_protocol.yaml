@@ -1,7 +1,7 @@
-schema_version: paper_rebuild.clean1_by2_protocol.v1
-stage_id: CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION
+schema_version: paper_rebuild.clean1_by2_protocol.v2_kick_aligned
+stage_id: CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION
 case_id: CLEAN1_BY2_CLEAN_NORMAL
-protocol_id: CLEAN1_BY2_CLEAN_NORMAL_V1
+protocol_id: CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED
 data_mode: real_by2_raw
 base_commit: 4e6b3f3fa9f50ed91b6c4e250f3d1f75d6725cc6
 clean0_provider_smoke_commit: 85984627439cdc861243eedb094f9be0c7dc1a76
@@ -16,11 +16,12 @@ method_order:
   - LegSA_Paper_V1
 
 window:
-  policy: full_common_required_stream_interval
-  t_start_formula: max_required_stream_first_valid_timestamp
-  t_end_formula: min_required_stream_last_valid_timestamp
+  policy: event_normalized_kick_core_gnss_interval
+  t_start_formula: first_valid_frozen_gnss_epoch_at_or_after_mapped_kick_event
+  t_end_formula: min_propagation_imu_last_valid_core_gnss_last_valid
   preserve_internal_dropout: true
   method_specific_window: false
+  optional_streams_delay_start: false
   smoke_truncation_seconds: null
   evaluation_burn_in_seconds: 0.0
   required_streams:
@@ -31,6 +32,29 @@ window:
     - raw_doppler
     - go2_roll_pitch_prior
     - go2_horizontal_velocity_prior
+  core_start_streams:
+    - propagation_imu
+    - gnss_position
+    - dual_yaw
+  optional_start_streams:
+    - receiver_velocity
+    - raw_doppler
+    - go2_roll_pitch_prior
+    - go2_horizontal_velocity_prior
+
+time_alignment:
+  alignment_mode: event_normalized_kick
+  fixed_event_alignment_offset_seconds: 0.0
+  initial_event_segment_end: first_mode_or_gait_change_exclusive
+  normalization_baseline_max_samples: 1000
+  normalization_center: median
+  normalization_scale: max_1p4826_mad_1e-12
+  kick_score: max_0_z_acc_jerk_plus_max_0_z_gyro_jerk
+  minimum_kick_score: 6.0
+  maintained_candidate_required_status: detected
+  trace_used_for_alignment: false
+  offset_search_performed: false
+  method_specific_shift: false
 
 initialization:
   common_initialization: true
@@ -111,8 +135,8 @@ solver_common:
   gyro_scale_std_ppm: [0.0, 0.0, 0.0]
   accel_scale_std_ppm: [0.0, 0.0, 0.0]
   correlation_time_h: 1.0
-  antenna_lever_m: [0.0, 0.0, -0.25]
-  antenna_lever_source_status: inherited_clean_runner_value_not_reference_point_proof
+  antenna_lever_m: [0.03, 0.03, -0.30]
+  antenna_lever_source_status: user_frozen_measurement_lever_frd_no_rmse_selection
   raw_doppler_min_sat: 5
   raw_doppler_mode: doppler_ls_velocity
   raw_doppler_time_tolerance_seconds: 0.05

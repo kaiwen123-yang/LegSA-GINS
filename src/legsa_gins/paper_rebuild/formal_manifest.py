@@ -237,6 +237,9 @@ def validate_formal_run_manifest(
     catalog: MethodCatalog,
     *,
     require_pass: bool = True,
+    expected_stage_id: str = STAGE_ID,
+    expected_protocol_id: str = PROTOCOL_ID,
+    expected_case_id: str = CASE_ID,
 ) -> list[str]:
     issues: list[str] = []
     for field in FORMAL_REQUIRED_FIELDS:
@@ -244,9 +247,9 @@ def validate_formal_run_manifest(
             issues.append(f"missing_field:{field}")
     expected_scalars = {
         "schema_version": FORMAL_SCHEMA_VERSION,
-        "stage_id": STAGE_ID,
-        "protocol_id": PROTOCOL_ID,
-        "case_id": CASE_ID,
+        "stage_id": expected_stage_id,
+        "protocol_id": expected_protocol_id,
+        "case_id": expected_case_id,
         "data_mode": DATA_MODE,
     }
     for field, expected in expected_scalars.items():
@@ -354,6 +357,28 @@ def validate_formal_schema_contract(schema_path: str, manifest: Mapping[str, Any
         issues.append("formal_schema_object_boundary_mismatch")
     if tuple(schema.get("required") or ()) != FORMAL_REQUIRED_FIELDS:
         issues.append("formal_schema_required_fields_mismatch")
+    identity_options = schema.get("oneOf")
+    identity_matches = 0
+    if not isinstance(identity_options, list) or len(identity_options) != 2:
+        issues.append("formal_schema_identity_pair_contract_missing")
+    else:
+        for option in identity_options:
+            option_properties = (
+                option.get("properties") if isinstance(option, Mapping) else None
+            )
+            if not isinstance(option_properties, Mapping):
+                continue
+            stage_definition = option_properties.get("stage_id")
+            protocol_definition = option_properties.get("protocol_id")
+            if (
+                isinstance(stage_definition, Mapping)
+                and isinstance(protocol_definition, Mapping)
+                and manifest.get("stage_id") == stage_definition.get("const")
+                and manifest.get("protocol_id") == protocol_definition.get("const")
+            ):
+                identity_matches += 1
+        if identity_matches != 1:
+            issues.append("formal_schema_identity_pair_mismatch")
     properties = schema.get("properties")
     if not isinstance(properties, Mapping) or set(properties) != set(FORMAL_REQUIRED_FIELDS):
         issues.append("formal_schema_properties_mismatch")
@@ -439,8 +464,18 @@ def assert_formal_run_manifest(
     *,
     require_pass: bool = True,
     schema_path: str | None = None,
+    expected_stage_id: str = STAGE_ID,
+    expected_protocol_id: str = PROTOCOL_ID,
+    expected_case_id: str = CASE_ID,
 ) -> None:
-    issues = validate_formal_run_manifest(manifest, catalog, require_pass=require_pass)
+    issues = validate_formal_run_manifest(
+        manifest,
+        catalog,
+        require_pass=require_pass,
+        expected_stage_id=expected_stage_id,
+        expected_protocol_id=expected_protocol_id,
+        expected_case_id=expected_case_id,
+    )
     resolved_schema = schema_path or str(catalog.path.with_name("formal_manifest_schema.yaml"))
     issues.extend(validate_formal_schema_contract(resolved_schema, manifest))
     if issues:

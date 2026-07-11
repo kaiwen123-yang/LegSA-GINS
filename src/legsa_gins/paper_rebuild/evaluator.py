@@ -8,7 +8,7 @@ import json
 import math
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable, Mapping, Sequence
+from typing import Any, Mapping, Sequence
 
 from .evidence import write_csv_atomic, write_read_ledger
 from .manifest import sha256_file, write_json_atomic
@@ -31,10 +31,16 @@ SOLVER_REQUIRED_COLUMNS = (
 )
 ERROR_COLUMNS = (
     "horizontal_position_error_m",
-    "vertical_error_m",
+    "up_error_m",
     "position_3d_error_m",
     "yaw_error_deg",
 )
+
+TRACKED_EVALUATOR_SCHEMA_V2 = "paper_rebuild.evaluator_contract.v2"
+FROZEN_EVALUATOR_SCHEMA_V2 = "paper-rebuild-frozen-evaluator-contract-v2"
+EVALUATOR_PROTOCOL_ID_V2 = "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED"
+EVALUATOR_PROFILE_V2 = "FIXPOSITION_SAME_SOURCE_DIRECT_REFERENCE"
+READY_STATUS = "READY_FOR_OFFLINE_EVALUATION"
 
 
 class EvaluatorContractError(ValueError):
@@ -54,8 +60,12 @@ def wrap_signed_deg(value: float) -> float:
     return (value + 180.0) % 360.0 - 180.0
 
 
+def wrap_360_deg(value: float) -> float:
+    return value % 360.0
+
+
 def reference_yaw_enu_to_solver_ned_deg(value: float) -> float:
-    return wrap_signed_deg(90.0 - value)
+    return wrap_360_deg(90.0 - value)
 
 
 def _read_rows(path: Path, required: Sequence[str]) -> tuple[list[dict[str, str]], list[str]]:
@@ -84,6 +94,42 @@ def _strict_timestamps(rows: Sequence[Mapping[str, str]], column: str, label: st
     if any(later <= earlier for earlier, later in zip(values, values[1:])):
         raise EvaluatorContractError(f"Duplicate or nonmonotonic {label} timestamp")
     return values
+
+
+def _interval_percentile_type7(values: Sequence[float], probability: float) -> float:
+    ordered = sorted(values)
+    if not ordered:
+        raise EvaluatorContractError("Reference needs at least two timestamps")
+    position = (len(ordered) - 1) * probability
+    low = math.floor(position)
+    high = math.ceil(position)
+    if low == high:
+        return ordered[low]
+    fraction = position - low
+    return ordered[low] * (1.0 - fraction) + ordered[high] * fraction
+
+
+def derive_reference_timing_profile(
+    reference_rows: Sequence[Mapping[str, str]],
+) -> dict[str, float | int]:
+    """Derive the fixed V2 gap gate only from the offline reference timestamps."""
+
+    times = _strict_timestamps(reference_rows, "time", "reference")
+    if len(times) < 2:
+        raise EvaluatorContractError("Reference needs at least two timestamps")
+    intervals = [later - earlier for earlier, later in zip(times, times[1:])]
+    median_dt = _interval_percentile_type7(intervals, 0.50)
+    p99_dt = _interval_percentile_type7(intervals, 0.99)
+    max_gap = max(3.0 * median_dt, p99_dt + 1.0e-9)
+    return {
+        "row_count": len(times),
+        "first_timestamp": times[0],
+        "last_timestamp": times[-1],
+        "interval_count": len(intervals),
+        "median_dt_seconds": median_dt,
+        "p99_dt_seconds": p99_dt,
+        "max_allowed_bracket_gap_seconds": max_gap,
+    }
 
 
 def _dump_yaml(payload: Mapping[str, Any]) -> str:
@@ -190,7 +236,7 @@ def _reference_frame_ready(
 
 def freeze_evaluator_contract(
     tracked_contract_path: str | Path,
-    reference_path: str | Path,
+    reference_path: str | Path | None,
     output_dir: str | Path,
     *,
     reference_relative_path: str,
@@ -199,22 +245,35 @@ def freeze_evaluator_contract(
     reference_frame_contract: Mapping[str, Any] | None = None,
     verified_source_hashes: Mapping[str, str] | None = None,
 ) -> EvaluatorFreeze:
-    """Freeze from reference schema/cadence only, before any solver output is read."""
+    """Freeze V2 from the hash-lock declaration without opening the trace payload."""
 
-    # CLEAN1 has no independently proven active-source point or attitude-frame
-    # schema.  Do not permit a caller to unlock evaluation by self-asserting
-    # semantics around an otherwise valid raw hash.  A later authorized stage
-    # must add a fixed, machine-validated source-role contract before this gate
-    # can accept a proof object.
+    # 中文说明：reference_path 仅为 V1 调用兼容参数。V2 freeze 不解析、不 resolve、
+    # 不 hash 该路径；真正的 trace 读取和 hash 复核只允许在 offline evaluator 中发生。
+    del reference_path
     if reference_point_contract is not None or reference_frame_contract is not None:
         raise EvaluatorContractError(
-            "CLEAN1 evaluator source-contract proof injection is not authorized"
+            "CLEAN1R1C V2 proof injection is not authorized; use the fixed tracked profile"
         )
 
     tracked_path = Path(tracked_contract_path).resolve(strict=True)
     base = load_yaml_mapping(tracked_path)
-    if base.get("schema_version") != "paper_rebuild.evaluator_contract.v1":
+    if base.get("schema_version") != TRACKED_EVALUATOR_SCHEMA_V2:
         raise EvaluatorContractError("Tracked evaluator contract schema mismatch")
+    expected_top_level = {
+        "protocol_id": EVALUATOR_PROTOCOL_ID_V2,
+        "profile": EVALUATOR_PROFILE_V2,
+        "formal_metrics_authorized": True,
+        "method_output_read_during_freeze": False,
+        "trace_read_during_freeze": False,
+        "position_same_source_mounting_caveat": True,
+        "independent_ground_truth": False,
+        "point_compensation_in_evaluator": False,
+        "terminal_status": READY_STATUS,
+        "freeze_before_solver_output_inspection": True,
+    }
+    for field, expected in expected_top_level.items():
+        if base.get(field) != expected:
+            raise EvaluatorContractError(f"Tracked evaluator top-level field mismatch: {field}")
     forbidden = base.get("forbidden_postprocessing")
     if not isinstance(forbidden, Mapping) or any(value is not False for value in forbidden.values()):
         raise EvaluatorContractError("Tracked evaluator permits forbidden postprocessing")
@@ -222,39 +281,43 @@ def freeze_evaluator_contract(
     if not isinstance(timestamp_contract, Mapping):
         raise EvaluatorContractError("Tracked evaluator timestamp contract is missing")
     expected_timestamp_fields = {
-        "matching_policy": "nearest_neighbor",
-        "max_gap_policy": "ceil_reference_max_positive_period_to_fixed_0p01_seconds",
+        "solver_to_common_formula": "solver_relative_seconds_plus_window_absolute_origin_seconds",
+        "reference_to_common_formula": "identity_absolute_unix_seconds",
+        "matching_policy": "bracketed_linear_interpolation",
+        "max_gap_policy": "max_3x_median_dt_p99_dt_plus_1e-9",
+        "reference_interval_percentile": "type7",
         "duplicate_solver_timestamp_policy": "fail",
         "duplicate_reference_timestamp_policy": "fail",
         "unmatched_epoch_policy": "retain_row_and_label_unmatched",
         "extrapolation_policy": "forbidden",
         "first_last_extrapolation": "forbidden",
-        "yaw_interpolation_policy": "none_nearest_neighbor_wrap_after_match",
+        "bracket_gap_policy": "reference_bracket_interval_lte_derived_max_gap",
+        "yaw_interpolation_policy": "unwrap_enu_degrees_then_linear_interpolate",
+        "position_interpolation_policy": "wgs84_blh_to_ecef_then_linear_interpolate",
         "trace_based_time_offset_search": False,
     }
     for field, expected in expected_timestamp_fields.items():
         if timestamp_contract.get(field) != expected:
             raise EvaluatorContractError(f"Tracked evaluator timestamp field mismatch: {field}")
-
-    reference = Path(reference_path).resolve(strict=True)
-    actual_hash = sha256_file(reference)
-    if actual_hash != expected_reference_sha256:
-        raise EvaluatorContractError("Evaluation-only reference hash mismatch")
-    rows, fields = _read_rows(reference, REFERENCE_REQUIRED_COLUMNS)
-    times = _strict_timestamps(rows, "time", "reference")
-    intervals = [later - earlier for earlier, later in zip(times, times[1:])]
-    maximum_interval = max(intervals)
-    quantum = float(timestamp_contract.get("max_gap_ceiling_quantum_seconds") or 0.01)
-    if quantum != 0.01:
-        raise EvaluatorContractError("Evaluator max-gap ceiling quantum must remain 0.01 seconds")
-    max_gap = math.ceil((maximum_interval - 1.0e-15) / quantum) * quantum
-    if base.get("reference_wording") != "aligned evaluation-only reference" or base.get("reference_independence_established") is not False:
+    if base.get("reference_wording") != "same-source direct evaluation-only reference" or base.get("reference_independence_established") is not False:
         raise EvaluatorContractError("Tracked evaluator reference wording/independence contract mismatch")
     frames = base.get("frames")
     if not isinstance(frames, Mapping) or frames.get("method_specific_conversion") is not False:
         raise EvaluatorContractError("Tracked evaluator frame contract is incomplete")
-    if frames.get("reference_point_contract_proven") is not False or frames.get("reference_attitude_frame_contract_proven") is not False:
-        raise EvaluatorContractError("Tracked evaluator may not predeclare unproven source contracts")
+    expected_frame_fields = {
+        "solver_position": "geodetic_WGS84_lat_lon_ellipsoidal_height",
+        "reference_position": "geodetic_WGS84_lat_lon_ellipsoidal_height",
+        "position_error_frame": "local_NED_at_interpolated_reference",
+        "solver_attitude": "NED_FRD_degrees",
+        "reference_attitude": "ENU_heading_degrees",
+        "reference_yaw_to_solver_formula": "wrap360(90_deg-reference_yaw_ENU_deg)",
+        "yaw_residual": "wrap_to_minus180_plus180(solver_minus_reference)",
+        "point_compensation_in_evaluator": False,
+        "position_same_source_mounting_caveat": True,
+    }
+    for field, expected in expected_frame_fields.items():
+        if frames.get(field) != expected:
+            raise EvaluatorContractError(f"Tracked evaluator frame field mismatch: {field}")
     aggregate = base.get("aggregate")
     if not isinstance(aggregate, Mapping) or aggregate.get("metrics") != ["rmse", "mae", "median", "p95", "max"]:
         raise EvaluatorContractError("Tracked evaluator aggregate metric contract mismatch")
@@ -262,36 +325,44 @@ def freeze_evaluator_contract(
         aggregate.get("crosscheck_relative_tolerance", -1.0)
     ) != 1.0e-10:
         raise EvaluatorContractError("Tracked evaluator cross-check tolerance mismatch")
-    point_ready, point_contract = _reference_point_ready(None, verified_source_hashes)
-    frame_ready, frame_contract = _reference_frame_ready(None, verified_source_hashes)
-    ready = point_ready and frame_ready
+
+    relative = Path(reference_relative_path)
+    if relative.is_absolute() or ".." in relative.parts or not reference_relative_path:
+        raise EvaluatorContractError("Evaluation-only reference alias is not root-relative")
+    digest = str(expected_reference_sha256)
+    if len(digest) != 64 or any(ch not in "0123456789abcdef" for ch in digest):
+        raise EvaluatorContractError("Evaluation-only reference hash-lock digest is invalid")
+    if not verified_source_hashes or verified_source_hashes.get(reference_relative_path) != digest:
+        raise EvaluatorContractError("Evaluation-only reference hash-lock binding is missing")
 
     frozen = dict(base)
-    frozen["schema_version"] = "paper-rebuild-frozen-evaluator-contract-v1"
+    frozen["schema_version"] = FROZEN_EVALUATOR_SCHEMA_V2
     frozen["tracked_contract_sha256"] = sha256_file(tracked_path)
     frozen["reference"] = {
         "path_alias": "<RAW_ROOT>",
         "relative_path": reference_relative_path,
-        "sha256": actual_hash,
-        "row_count": len(rows),
-        "first_timestamp": times[0],
-        "last_timestamp": times[-1],
-        "max_positive_period_seconds": maximum_interval,
-        "max_allowed_matching_gap_seconds": max_gap,
+        "sha256": digest,
+        "hash_lock_binding_verified": True,
+        "payload_read_during_freeze": False,
+        "schema_validation_phase": "offline_evaluation_only",
+        "cadence_derivation_phase": "offline_evaluation_only",
+        "max_allowed_matching_gap_seconds": "DERIVED_OFFLINE_FROM_HASH_LOCKED_REFERENCE",
         "cadence_derivation_used_method_output": False,
-        "metadata_ypr_frame": "ENU" if frame_ready else "NOT_PROVEN",
+        "metadata_ypr_frame": "ENU",
+        "yaw_unit": "degree",
     }
-    frozen["reference_point_contract"] = point_contract
-    frozen["reference_point_contract_proven"] = point_ready
-    frozen["reference_frame_contract"] = frame_contract
-    frozen["reference_attitude_frame_contract_proven"] = frame_ready
-    frozen["terminal_status"] = (
-        "READY_FOR_OFFLINE_EVALUATION"
-        if ready
-        else "BLOCKED_CLEAN1_EVALUATOR_CONTRACT_FAILED"
-    )
-    frozen["formal_metrics_authorized"] = ready
+    frozen["reference_point_contract"] = {
+        "profile": EVALUATOR_PROFILE_V2,
+        "point_compensation_in_evaluator": False,
+        "position_same_source_mounting_caveat": True,
+        "independent_ground_truth": False,
+    }
+    frozen["reference_point_contract_proven"] = False
+    frozen["reference_attitude_frame_contract_proven"] = True
+    frozen["formal_metrics_authorized"] = True
     frozen["method_output_read_during_freeze"] = False
+    frozen["trace_read_during_freeze"] = False
+    frozen["terminal_status"] = READY_STATUS
 
     destination = Path(output_dir)
     destination.mkdir(parents=True, exist_ok=True)
@@ -302,46 +373,63 @@ def freeze_evaluator_contract(
         f"{contract_hash}  EVALUATOR_CONTRACT.yaml\n", encoding="utf-8"
     )
     audit = {
-        "schema_version": "paper-rebuild-reference-schema-audit-v1",
-        "reference_wording": "aligned evaluation-only reference",
+        "schema_version": "paper-rebuild-reference-declaration-audit-v2",
+        "protocol_id": EVALUATOR_PROTOCOL_ID_V2,
+        "profile": EVALUATOR_PROFILE_V2,
+        "reference_wording": "same-source direct evaluation-only reference",
         "reference_independence_established": False,
-        "columns": fields,
-        "required_columns_present": True,
-        "row_count": len(rows),
-        "duplicate_timestamp_count": 0,
-        "nonmonotonic_timestamp_count": 0,
-        "timestamp_min": times[0],
-        "timestamp_max": times[-1],
-        "max_positive_period_seconds": maximum_interval,
-        "max_allowed_matching_gap_seconds": max_gap,
-        "yaw_frame": "ENU" if frame_ready else "NOT_PROVEN",
-        "yaw_conversion": "wrap(90_deg-reference_yaw_ENU_deg)" if frame_ready else "NOT_AUTHORIZED",
+        "independent_ground_truth": False,
+        "reference_path_alias": "<RAW_ROOT>",
+        "reference_relative_path": reference_relative_path,
+        "reference_sha256": digest,
+        "hash_lock_binding_verified": True,
+        "trace_read_during_freeze": False,
+        "method_output_read_during_freeze": False,
+        "declared_required_columns": list(REFERENCE_REQUIRED_COLUMNS),
+        "schema_validation_phase": "offline_evaluation_only",
+        "cadence_derivation_phase": "offline_evaluation_only",
+        "yaw_frame": "ENU",
+        "yaw_unit": "degree",
+        "yaw_conversion": "wrap360(90_deg-reference_yaw_ENU_deg)",
         "roll_pitch_metric_supported": False,
         "velocity_metric_supported": False,
-        "reference_point_contract_proven": point_ready,
-        "reference_attitude_frame_contract_proven": frame_ready,
-        "blocking_reasons": [
-            reason
-            for condition, reason in (
-                (point_ready, "reference_point_identity_or_transform_not_proven"),
-                (frame_ready, "reference_yaw_frame_semantics_not_proven"),
-            )
-            if not condition
-        ],
-        "formal_metrics_authorized": ready,
-        "terminal_status": frozen["terminal_status"],
+        "reference_point_contract_proven": False,
+        "position_same_source_mounting_caveat": True,
+        "point_compensation_in_evaluator": False,
+        "reference_attitude_frame_contract_proven": True,
+        "blocking_reasons": [],
+        "formal_metrics_authorized": True,
+        "terminal_status": READY_STATUS,
     }
     audit_path = write_json_atomic(destination / "REFERENCE_SCHEMA_AUDIT.json", audit)
-    return EvaluatorFreeze(contract_path, contract_hash, audit_path, ready, frozen["terminal_status"])
+    return EvaluatorFreeze(contract_path, contract_hash, audit_path, True, READY_STATUS)
 
 
 def load_frozen_evaluator(path: str | Path, *, require_ready: bool = True) -> dict[str, Any]:
     payload = load_yaml_mapping(Path(path).resolve(strict=True))
-    if payload.get("schema_version") != "paper-rebuild-frozen-evaluator-contract-v1":
+    schema = payload.get("schema_version")
+    if schema not in {"paper-rebuild-frozen-evaluator-contract-v1", FROZEN_EVALUATOR_SCHEMA_V2}:
         raise EvaluatorContractError("Frozen evaluator schema mismatch")
     if payload.get("method_output_read_during_freeze") is not False:
         raise EvaluatorContractError("Evaluator was not frozen before outputs")
-    if require_ready and (
+    if schema == FROZEN_EVALUATOR_SCHEMA_V2:
+        required_v2 = {
+            "protocol_id": EVALUATOR_PROTOCOL_ID_V2,
+            "profile": EVALUATOR_PROFILE_V2,
+            "formal_metrics_authorized": True,
+            "method_output_read_during_freeze": False,
+            "trace_read_during_freeze": False,
+            "position_same_source_mounting_caveat": True,
+            "independent_ground_truth": False,
+            "point_compensation_in_evaluator": False,
+            "terminal_status": READY_STATUS,
+        }
+        if any(payload.get(field) != expected for field, expected in required_v2.items()):
+            raise EvaluatorContractError("Frozen V2 evaluator invariant mismatch")
+        reference = payload.get("reference")
+        if not isinstance(reference, Mapping) or reference.get("hash_lock_binding_verified") is not True:
+            raise EvaluatorContractError("Frozen V2 evaluator reference binding is missing")
+    elif require_ready and (
         payload.get("reference_point_contract_proven") is not True
         or payload.get("reference_attitude_frame_contract_proven") is not True
         or payload.get("formal_metrics_authorized") is not True
@@ -376,9 +464,47 @@ def _geodetic_delta_ned(
     ref_lon: float,
     ref_height: float,
 ) -> tuple[float, float, float]:
-    sx, sy, sz = _ecef(solver_lat, solver_lon, solver_height)
-    rx, ry, rz = _ecef(ref_lat, ref_lon, ref_height)
+    solver_ecef = _ecef(solver_lat, solver_lon, solver_height)
+    reference_ecef = _ecef(ref_lat, ref_lon, ref_height)
+    return _ecef_delta_ned(solver_ecef, reference_ecef)
+
+
+def _ecef_to_geodetic(x: float, y: float, z: float) -> tuple[float, float, float]:
+    """Convert WGS84 ECEF to latitude/longitude degrees and ellipsoidal height."""
+
+    a = 6378137.0
+    f = 1.0 / 298.257223563
+    b = a * (1.0 - f)
+    e2 = f * (2.0 - f)
+    ep2 = (a * a - b * b) / (b * b)
+    p = math.hypot(x, y)
+    if p < 1.0e-12:
+        latitude = math.copysign(math.pi / 2.0, z)
+        longitude = 0.0
+        height = abs(z) - b
+        return math.degrees(latitude), math.degrees(longitude), height
+    longitude = math.atan2(y, x)
+    theta = math.atan2(z * a, p * b)
+    sin_theta = math.sin(theta)
+    cos_theta = math.cos(theta)
+    latitude = math.atan2(
+        z + ep2 * b * sin_theta**3,
+        p - e2 * a * cos_theta**3,
+    )
+    sin_latitude = math.sin(latitude)
+    prime_vertical = a / math.sqrt(1.0 - e2 * sin_latitude * sin_latitude)
+    height = p / math.cos(latitude) - prime_vertical
+    return math.degrees(latitude), math.degrees(longitude), height
+
+
+def _ecef_delta_ned(
+    solver_ecef: tuple[float, float, float],
+    reference_ecef: tuple[float, float, float],
+) -> tuple[float, float, float]:
+    sx, sy, sz = solver_ecef
+    rx, ry, rz = reference_ecef
     dx, dy, dz = sx - rx, sy - ry, sz - rz
+    ref_lat, ref_lon, _ = _ecef_to_geodetic(rx, ry, rz)
     lat = math.radians(ref_lat)
     lon = math.radians(ref_lon)
     north = -math.sin(lat) * math.cos(lon) * dx - math.sin(lat) * math.sin(lon) * dy + math.cos(lat) * dz
@@ -397,16 +523,22 @@ def _float(row: Mapping[str, str], field: str) -> float:
     return value
 
 
-def _nearest_index(reference_times: Sequence[float], value: float) -> int | None:
-    position = bisect.bisect_left(reference_times, value)
-    candidates = []
-    if position > 0:
-        candidates.append(position - 1)
-    if position < len(reference_times):
-        candidates.append(position)
-    if not candidates:
-        return None
-    return min(candidates, key=lambda index: (abs(reference_times[index] - value), reference_times[index]))
+def _unwrap_degrees(values: Sequence[float]) -> list[float]:
+    if not values:
+        raise EvaluatorContractError("Reference yaw sequence is empty")
+    if any(not math.isfinite(value) for value in values):
+        raise EvaluatorContractError("Reference yaw contains a non-finite value")
+    output = [float(values[0])]
+    previous_wrapped = float(values[0])
+    for value in values[1:]:
+        current = float(value)
+        output.append(output[-1] + wrap_signed_deg(current - previous_wrapped))
+        previous_wrapped = current
+    return output
+
+
+def _lerp(left: float, right: float, fraction: float) -> float:
+    return left + fraction * (right - left)
 
 
 def build_row_level_errors(
@@ -414,61 +546,117 @@ def build_row_level_errors(
     reference_rows: Sequence[Mapping[str, str]],
     *,
     source_time_origin_seconds: float,
-    max_gap_seconds: float,
+    max_gap_seconds: float | None = None,
 ) -> list[dict[str, Any]]:
+    """Build V2 rows by bracketed ECEF/yaw interpolation; never extrapolate."""
+
     solver_times = _strict_timestamps(solver_rows, "time", "solver")
     reference_times = _strict_timestamps(reference_rows, "time", "reference")
+    if not math.isfinite(source_time_origin_seconds):
+        raise EvaluatorContractError("Window absolute time origin is not finite")
+    timing = derive_reference_timing_profile(reference_rows)
+    derived_max_gap = float(timing["max_allowed_bracket_gap_seconds"])
+    effective_max_gap = derived_max_gap if max_gap_seconds is None else float(max_gap_seconds)
+    if not math.isfinite(effective_max_gap) or effective_max_gap <= 0.0:
+        raise EvaluatorContractError("Reference bracket gap gate is invalid")
+    reference_ecef = [
+        _ecef(_float(row, "lat"), _float(row, "lon"), _float(row, "height"))
+        for row in reference_rows
+    ]
+    reference_yaw_unwrapped = _unwrap_degrees(
+        [_float(row, "yaw") for row in reference_rows]
+    )
     output: list[dict[str, Any]] = []
     for index, (solver, solver_time) in enumerate(zip(solver_rows, solver_times)):
         common_time = solver_time + source_time_origin_seconds
-        ref_index = _nearest_index(reference_times, common_time)
-        matched = False
-        gap: float | str = ""
         row: dict[str, Any] = {
             "output_row_index": index,
             "solver_time": solver_time,
             "common_time": common_time,
             "reference_time": "",
             "matching_gap_seconds": "",
+            "reference_left_time": "",
+            "reference_right_time": "",
+            "reference_bracket_gap_seconds": "",
+            "interpolation_fraction": "",
             "matched": False,
-            "unmatched_reason": "outside_reference_extent_or_gap",
+            "unmatched_reason": "outside_reference_extent",
             "north_error_m": "",
             "east_error_m": "",
             "down_error_m": "",
+            "vertical_error_m": "",
             **{field: "" for field in ERROR_COLUMNS},
         }
-        if ref_index is not None and reference_times[0] <= common_time <= reference_times[-1]:
-            gap = abs(reference_times[ref_index] - common_time)
-            if gap <= max_gap_seconds + 1.0e-12:
-                reference = reference_rows[ref_index]
-                north, east, down = _geodetic_delta_ned(
-                    _float(solver, "lat_deg"),
-                    _float(solver, "lon_deg"),
-                    _float(solver, "height_m"),
-                    _float(reference, "lat"),
-                    _float(reference, "lon"),
-                    _float(reference, "height"),
-                )
-                yaw_reference = reference_yaw_enu_to_solver_ned_deg(_float(reference, "yaw"))
-                yaw_error = abs(wrap_signed_deg(_float(solver, "yaw_deg") - yaw_reference))
-                row.update(
-                    {
-                        "reference_time": reference_times[ref_index],
-                        "matching_gap_seconds": gap,
-                        "matched": True,
-                        "unmatched_reason": "",
-                        "north_error_m": north,
-                        "east_error_m": east,
-                        "down_error_m": down,
-                        "horizontal_position_error_m": math.hypot(north, east),
-                        "vertical_error_m": abs(down),
-                        "position_3d_error_m": math.sqrt(north * north + east * east + down * down),
-                        "yaw_error_deg": yaw_error,
-                    }
-                )
-                matched = True
-        if not matched and gap != "":
-            row["matching_gap_seconds"] = gap
+        if common_time < reference_times[0] or common_time > reference_times[-1]:
+            output.append(row)
+            continue
+
+        right = bisect.bisect_left(reference_times, common_time)
+        exact = right < len(reference_times) and math.isclose(
+            reference_times[right], common_time, rel_tol=0.0, abs_tol=1.0e-12
+        )
+        if exact:
+            left = right
+            fraction = 0.0
+            bracket_gap = 0.0
+            interpolated_ecef = reference_ecef[left]
+            interpolated_yaw_enu = reference_yaw_unwrapped[left]
+        else:
+            if right <= 0 or right >= len(reference_times):
+                output.append(row)
+                continue
+            left = right - 1
+            bracket_gap = reference_times[right] - reference_times[left]
+            row.update(
+                {
+                    "reference_left_time": reference_times[left],
+                    "reference_right_time": reference_times[right],
+                    "reference_bracket_gap_seconds": bracket_gap,
+                    "matching_gap_seconds": bracket_gap,
+                }
+            )
+            if bracket_gap > effective_max_gap + 1.0e-12:
+                row["unmatched_reason"] = "reference_bracket_gap_exceeds_gate"
+                output.append(row)
+                continue
+            fraction = (common_time - reference_times[left]) / bracket_gap
+            interpolated_ecef = tuple(
+                _lerp(reference_ecef[left][axis], reference_ecef[right][axis], fraction)
+                for axis in range(3)
+            )
+            interpolated_yaw_enu = _lerp(
+                reference_yaw_unwrapped[left], reference_yaw_unwrapped[right], fraction
+            )
+
+        solver_ecef = _ecef(
+            _float(solver, "lat_deg"),
+            _float(solver, "lon_deg"),
+            _float(solver, "height_m"),
+        )
+        north, east, down = _ecef_delta_ned(solver_ecef, interpolated_ecef)
+        up = -down
+        yaw_reference = reference_yaw_enu_to_solver_ned_deg(interpolated_yaw_enu)
+        yaw_error = wrap_signed_deg(_float(solver, "yaw_deg") - yaw_reference)
+        row.update(
+            {
+                "reference_time": common_time,
+                "reference_left_time": reference_times[left],
+                "reference_right_time": reference_times[right],
+                "reference_bracket_gap_seconds": bracket_gap,
+                "matching_gap_seconds": bracket_gap,
+                "interpolation_fraction": fraction,
+                "matched": True,
+                "unmatched_reason": "",
+                "north_error_m": north,
+                "east_error_m": east,
+                "down_error_m": down,
+                "up_error_m": up,
+                "vertical_error_m": abs(up),
+                "horizontal_position_error_m": math.hypot(north, east),
+                "position_3d_error_m": math.sqrt(north * north + east * east + up * up),
+                "yaw_error_deg": yaw_error,
+            }
+        )
         output.append(row)
     return output
 
@@ -492,7 +680,14 @@ def aggregate_row_level(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         raise EvaluatorContractError("No solver epochs matched the evaluation-only reference")
     metrics: dict[str, Any] = {}
     for field in ERROR_COLUMNS:
-        values = [float(row[field]) for row in matched]
+        values = [
+            float(
+                row.get("vertical_error_m")
+                if field == "up_error_m" and row.get(field) in {None, ""}
+                else row[field]
+            )
+            for row in matched
+        ]
         metrics[field] = {
             "rmse": math.sqrt(math.fsum(value * value for value in values) / len(values)),
             "mae": math.fsum(abs(value) for value in values) / len(values),
@@ -522,7 +717,12 @@ def aggregate_row_level_independent(rows: Sequence[Mapping[str, Any]]) -> dict[s
             continue
         matched_count += 1
         for field in ERROR_COLUMNS:
-            values_by_field[field].append(float(row[field]))
+            value = (
+                row.get("vertical_error_m")
+                if field == "up_error_m" and row.get(field) in {None, ""}
+                else row[field]
+            )
+            values_by_field[field].append(float(value))
     if matched_count == 0:
         raise EvaluatorContractError("Independent aggregate found no matched rows")
     metrics: dict[str, Any] = {}
@@ -609,6 +809,10 @@ def read_persisted_row_level(path: str | Path) -> list[dict[str, Any]]:
             raise EvaluatorContractError("Persisted row-level matched flag is invalid")
         converted: dict[str, Any] = dict(row)
         converted["matched"] = value == "true"
+        # V1 fixture compatibility: V2 reports signed up, while V1 persisted only
+        # an absolute vertical field. New formal rows always contain up_error_m.
+        if converted["matched"] and not converted.get("up_error_m") and converted.get("vertical_error_m"):
+            converted["up_error_m"] = converted["vertical_error_m"]
         normalized.append(converted)
     return normalized
 
@@ -636,17 +840,40 @@ def evaluate_formal_output(
     if output_hash != expected_output_sha256:
         raise EvaluatorContractError("FAIL_CLEAN1_FINAL_OUTPUT_OR_METRIC_CROSSCHECK")
     solver_rows, _ = _read_rows(solver_path, SOLVER_REQUIRED_COLUMNS)
-    reference_rows, _ = _read_rows(reference, REFERENCE_REQUIRED_COLUMNS)
+    reference_rows, reference_fields = _read_rows(reference, REFERENCE_REQUIRED_COLUMNS)
+    reference_timing = derive_reference_timing_profile(reference_rows)
+    max_gap_seconds = float(reference_timing["max_allowed_bracket_gap_seconds"])
     row_level = build_row_level_errors(
         solver_rows,
         reference_rows,
         source_time_origin_seconds=float(window["source_time_origin_seconds"]),
-        max_gap_seconds=float(evaluator["reference"]["max_allowed_matching_gap_seconds"]),
+        max_gap_seconds=max_gap_seconds,
     )
     destination = Path(output_dir)
     if destination.exists():
         raise EvaluatorContractError("Fresh evaluator output directory already exists")
     destination.mkdir(parents=True, exist_ok=False)
+    reference_audit_path = write_json_atomic(
+        destination / "REFERENCE_OFFLINE_SCHEMA_AUDIT.json",
+        {
+            "schema_version": "paper-rebuild-reference-offline-schema-audit-v2",
+            "protocol_id": EVALUATOR_PROTOCOL_ID_V2,
+            "profile": EVALUATOR_PROFILE_V2,
+            "path_alias": "<RAW_ROOT>",
+            "relative_path": evaluator["reference"]["relative_path"],
+            "sha256": evaluator["reference"]["sha256"],
+            "trace_read_during_freeze": False,
+            "trace_read_offline": True,
+            "columns": reference_fields,
+            "required_columns_present": True,
+            "duplicate_timestamp_count": 0,
+            "nonmonotonic_timestamp_count": 0,
+            **reference_timing,
+            "max_gap_formula": "max(3*median_dt,p99_dt+1e-9)",
+            "reference_interval_percentile": "type7",
+            "passed": True,
+        },
+    )
     row_path = write_csv_atomic(destination / "ROW_LEVEL_ERRORS.csv", list(row_level[0]), row_level)
     row_level_hash = sha256_file(row_path)
     primary = aggregate_row_level(read_persisted_row_level(row_path))
@@ -663,10 +890,15 @@ def evaluate_formal_output(
     if sha256_file(row_path) != row_level_hash or sha256_file(solver_path) != output_hash:
         raise EvaluatorContractError("FAIL_CLEAN1_FINAL_OUTPUT_OR_METRIC_CROSSCHECK")
     aggregate = {
-        "schema_version": "paper-rebuild-aggregate-metrics-v1",
-        "title": "BY2 clean normal relative-to-evaluation-reference descriptive results",
-        "reference_wording": "aligned evaluation-only reference",
+        "schema_version": "paper-rebuild-aggregate-metrics-v2",
+        "title": "BY2 clean normal relative-to-same-source-direct-reference descriptive results",
+        "protocol_id": EVALUATOR_PROTOCOL_ID_V2,
+        "profile": EVALUATOR_PROFILE_V2,
+        "reference_wording": "same-source direct evaluation-only reference",
         "reference_independence_established": False,
+        "independent_ground_truth": False,
+        "position_same_source_mounting_caveat": True,
+        "point_compensation_in_evaluator": False,
         "output_sha256": output_hash,
         "row_level_sha256": row_level_hash,
         **primary,
@@ -694,9 +926,21 @@ def evaluate_formal_output(
         }],
     )
     matching = {
-        "schema_version": "paper-rebuild-matching-audit-v1",
-        "matching_policy": "nearest_neighbor",
-        "max_gap_seconds": evaluator["reference"]["max_allowed_matching_gap_seconds"],
+        "schema_version": "paper-rebuild-matching-audit-v2",
+        "protocol_id": EVALUATOR_PROTOCOL_ID_V2,
+        "profile": EVALUATOR_PROFILE_V2,
+        "matching_policy": "bracketed_linear_interpolation",
+        "position_interpolation": "wgs84_blh_to_ecef_then_linear_interpolate",
+        "yaw_interpolation": "unwrap_enu_degrees_then_linear_interpolate",
+        "max_gap_formula": "max(3*median_dt,p99_dt+1e-9)",
+        "max_gap_seconds": max_gap_seconds,
+        "median_dt_seconds": reference_timing["median_dt_seconds"],
+        "p99_dt_seconds": reference_timing["p99_dt_seconds"],
+        "duplicate_solver_timestamp_policy": "fail",
+        "duplicate_reference_timestamp_policy": "fail",
+        "unmatched_epoch_policy": "retain_row_and_label_unmatched",
+        "extrapolation_policy": "forbidden",
+        "bracket_gap_policy": "reference_bracket_interval_lte_derived_max_gap",
         "output_epoch_count": len(row_level),
         "reference_epoch_count": len(reference_rows),
         "matched_epoch_count": primary["matched_epoch_count"],
@@ -704,6 +948,10 @@ def evaluate_formal_output(
         "coverage_ratio": primary["coverage_ratio"],
         "alignment_applied": False,
         "time_offset_search_applied": False,
+        "sign_or_axis_search_applied": False,
+        "point_compensation_in_evaluator": False,
+        "position_same_source_mounting_caveat": True,
+        "independent_ground_truth": False,
         "epoch_deleted_for_metric": False,
         "passed": True,
     }
@@ -728,5 +976,6 @@ def evaluate_formal_output(
             "aggregate_json": str(aggregate_json),
             "aggregate_csv": str(aggregate_csv),
             "crosscheck": str(cross_path),
+            "reference_offline_schema_audit": str(reference_audit_path),
         },
     }

@@ -23,11 +23,13 @@ from legsa_gins.paper_rebuild.methods import FORMAL_METHOD_ORDER, load_method_ca
 from legsa_gins.paper_rebuild.paths import (
     CleanPaths,
     assert_clean1_path_contract,
+    clean1_stage_root,
     is_within,
     legacy_reason,
     load_clean_paths,
 )
 from legsa_gins.paper_rebuild.subprocess_guard import run_process_group
+from legsa_gins.paper_rebuild.protocol import load_clean1_protocol
 from legsa_gins.paper_rebuild.evidence import (
     BY2_TRACE_RELATIVE_PATH,
     parse_strace_openat_paths,
@@ -113,10 +115,13 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     paths = load_clean_paths(args.config)
     assert_clean1_path_contract(paths, REPO_ROOT)
-    stage = paths.clean_root / "06_CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION"
+    stage = clean1_stage_root(paths)
     evaluator_path = stage / "02_PROTOCOL_FREEZE/EVALUATOR_CONTRACT.yaml"
     window_path = stage / "02_PROTOCOL_FREEZE/WINDOW_CONTRACT.yaml"
     catalog = load_method_catalog(REPO_ROOT / "configs/paper_rebuild/methods.yaml")
+    protocol = load_clean1_protocol(
+        REPO_ROOT / "configs/paper_rebuild/clean1_by2_clean_protocol.yaml"
+    )
     expected_window_hash = sha256_file(window_path)
     expected_evaluator_hash = sha256_file(evaluator_path)
     manifests: dict[str, dict[str, object]] = {}
@@ -131,7 +136,14 @@ def main(argv: list[str] | None = None) -> int:
         manifest = json.loads(formal_manifest.read_text(encoding="utf-8"))
         if not isinstance(manifest, dict):
             raise RuntimeError("BLOCKED_CLEAN1_FOUR_METHOD_SET_INCOMPLETE")
-        assert_formal_run_manifest(manifest, catalog, require_pass=True)
+        assert_formal_run_manifest(
+            manifest,
+            catalog,
+            require_pass=True,
+            expected_stage_id=str(protocol.payload["stage_id"]),
+            expected_protocol_id=str(protocol.payload["protocol_id"]),
+            expected_case_id=str(protocol.payload["case_id"]),
+        )
         if manifest.get("algorithm_id") != method_id or manifest.get("run_id") != directory:
             raise RuntimeError("FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH")
         if manifest.get("window_contract_hash") != expected_window_hash or manifest.get("evaluator_contract_hash") != expected_evaluator_hash:
@@ -169,9 +181,14 @@ def main(argv: list[str] | None = None) -> int:
     rows = []
     payload: dict[str, object] = {
         "schema_version": "paper-rebuild-clean1-four-method-metrics-v1",
-        "title": "BY2 clean normal relative-to-evaluation-reference descriptive results",
-        "reference_wording": "aligned evaluation-only reference",
+        "title": "BY2 clean normal relative-to-same-source-reference descriptive results",
+        "protocol_id": protocol.payload["protocol_id"],
+        "reference_role": "FIXPOSITION_SAME_SOURCE_EVALUATION_REFERENCE",
+        "reference_wording": "Fixposition-derived same-source evaluation reference",
         "reference_independence_established": False,
+        "engineering_truth_alias": True,
+        "independent_ground_truth": False,
+        "position_same_source_mounting_caveat": True,
         "claim_boundary": (
             "在冻结的单一 BY2 clean normal 序列、统一窗口、统一初始化和冻结 evaluator 下，"
             "相对于 evaluation-only reference 的描述性结果。"
@@ -294,6 +311,70 @@ def main(argv: list[str] | None = None) -> int:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)
+    # Canonical current-only artifacts required by the R1C evidence contract.
+    with (attempt_root / "FOUR_METHOD_SUMMARY.csv").open(
+        "w", encoding="utf-8", newline=""
+    ) as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+    coverage_rows = [
+        {
+            "method_order": row["method_order"],
+            "algorithm_id": row["algorithm_id"],
+            "output_epoch_count": row["output_epoch_count"],
+            "matched_epoch_count": row["matched_epoch_count"],
+            "unmatched_epoch_count": int(row["output_epoch_count"])
+            - int(row["matched_epoch_count"]),
+            "coverage_ratio": row["coverage_ratio"],
+        }
+        for row in rows
+    ]
+    with (attempt_root / "MATCH_COVERAGE.csv").open(
+        "w", encoding="utf-8", newline=""
+    ) as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(coverage_rows[0]))
+        writer.writeheader()
+        writer.writerows(coverage_rows)
+    combined_rows: list[dict[str, object]] = []
+    method_crosschecks: dict[str, bool] = {}
+    for method_id, directory in zip(FORMAL_METHOD_ORDER, RUN_DIRECTORY_NAMES):
+        with (attempt_root / directory / "ROW_LEVEL_ERRORS.csv").open(
+            "r", encoding="utf-8", newline=""
+        ) as handle:
+            for row in csv.DictReader(handle):
+                combined_rows.append({"algorithm_id": method_id, **row})
+        method_crosschecks[method_id] = bool(
+            json.loads(
+                (attempt_root / directory / "AGGREGATE_CROSSCHECK.json").read_text(
+                    encoding="utf-8"
+                )
+            ).get("passed")
+        )
+    with (attempt_root / "ROW_LEVEL_ERRORS.csv").open(
+        "w", encoding="utf-8", newline=""
+    ) as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(combined_rows[0]))
+        writer.writeheader()
+        writer.writerows(combined_rows)
+    write_json_atomic(attempt_root / "AGGREGATE_METRICS.json", payload)
+    overall_crosscheck = {
+        "schema_version": "paper-rebuild-four-method-aggregate-crosscheck-v2",
+        "method_crosschecks": method_crosschecks,
+        "summary_method_order": [row["algorithm_id"] for row in rows],
+        "expected_method_order": list(FORMAL_METHOD_ORDER),
+        "row_level_method_count": len(
+            {str(row["algorithm_id"]) for row in combined_rows}
+        ),
+        "passed": all(method_crosschecks.values())
+        and [row["algorithm_id"] for row in rows] == list(FORMAL_METHOD_ORDER)
+        and len({str(row["algorithm_id"]) for row in combined_rows}) == 4,
+    }
+    if overall_crosscheck["passed"] is not True:
+        raise RuntimeError("FAIL_CLEAN1_FINAL_OUTPUT_OR_METRIC_CROSSCHECK")
+    write_json_atomic(
+        attempt_root / "AGGREGATE_CROSSCHECK.json", overall_crosscheck
+    )
     attempt_root.rename(complete_root)
     print(json.dumps({"formal_metric_rows": len(rows), "paper_performance_claim": False}, sort_keys=True))
     return 0

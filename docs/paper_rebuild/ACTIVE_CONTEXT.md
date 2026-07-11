@@ -2,8 +2,9 @@
 
 ## Identity
 
-- Active program: `CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION`.
-- Active case/protocol: `CLEAN1_BY2_CLEAN_NORMAL` / `CLEAN1_BY2_CLEAN_NORMAL_V1`.
+- Active program: `CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION`.
+- Parent program: `CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION`.
+- Active case/protocol: `CLEAN1_BY2_CLEAN_NORMAL` / `CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED`.
 - Frozen base commit: `4e6b3f3fa9f50ed91b6c4e250f3d1f75d6725cc6`.
 - Active Git line: `stage/clean1-by2-clean-four-method`.
 - Active implementation namespace: `src/legsa_gins/paper_rebuild/`.
@@ -53,6 +54,8 @@ Active runtime evidence may come only from `<CLEAN_ROOT>` and only when its mani
 
 The human explicitly authorized only the CLEAN1 BY2 clean-normal four-method chain. The exact method order is `single_antenna_EKF`, `basic_dual_yaw_EKF`, `strong_dual_yaw_EKF`, and `LegSA_Paper_V1`. Provider generation, solver execution, and offline evaluation are separate read domains.
 
-Formal execution remains fail-closed unless the fresh Raw Doppler lineage, full common window, common 21-state initialization, method-effective flags, and evaluator contracts all pass. The active trace does not itself prove its yaw-frame semantics or a unique identity/transform between its reference point and the solver propagation-IMU state point. No fit, alignment, output inspection, or legacy evidence may close those contracts. If they remain unproven, the terminal decision is `BLOCKED_CLEAN1_EVALUATOR_CONTRACT_FAILED` with zero formal runs and no metrics.
+Formal execution remains fail-closed unless raw 22/22, the fixed kick event, fresh Raw Doppler lineage, kick-aligned common interval, common 21-state initialization, method-effective flags, and the frozen V2 evaluator all pass. The physical mapping is `t_abs_go2=t_go2+0.0`; the common start is the first position- and dual-yaw-valid GNSS epoch at or after the mapped kick. Optional Raw Doppler and Go2 priors begin when available and do not delay all methods. Trace is not opened during provider generation, alignment, evaluator freeze, initialization, or solver execution.
+
+The offline profile is `FIXPOSITION_SAME_SOURCE_DIRECT_REFERENCE`. It directly compares the propagation-IMU state output with the Fixposition POI/output reference without point compensation. This is permitted with `position_same_source_mounting_caveat=true` and `independent_ground_truth=false`; position is descriptive, and yaw follows the frozen ENU-to-NED protocol. Missing independent POI calibration is not a run blocker and cannot be hidden in the wording.
 
 CLEAN1 does not authorize figures, classic-18, the 60x9 matrix, DA03, DA05, another dataset, a merge, a tag, or any next stage.

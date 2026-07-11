@@ -285,7 +285,7 @@ class RawAudit:
 def _role_bucket(relative_path: str) -> tuple[str, str]:
     name = Path(relative_path).name
     if relative_path == BY2_TRACE_RELATIVE_PATH:
-        return "evaluator_only", "aligned evaluation-only reference"
+        return "evaluator_only", "Fixposition-derived same-source evaluation reference"
     if name in RECEIVER_IMU_NAMES:
         return "hash_verified_not_solver_input", "receiver IMU diagnostic or auxiliary; not Go2 body IMU"
     if name in DEVICE_OUTPUT_NAMES:

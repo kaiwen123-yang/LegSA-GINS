@@ -392,7 +392,11 @@ def generate_process_data_compat_inputs(
         "base_time": float(base_time),
         "time_mode": (
             "source_utc_day_relative_seconds"
-            if stage_id == "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION"
+            if stage_id
+            in {
+                "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION",
+                "CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION",
+            }
             else "legacy_base_time_process_data_compat"
         ),
         "gnss_columns": 15,
@@ -461,7 +465,11 @@ def generate_process_data_compat_inputs(
             "imu_report": imu_report_path.name,
         },
         "formal_allowed": True,
-        "generated_inputs_are_baseline_parity_only": stage_id != "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION",
+        "generated_inputs_are_baseline_parity_only": stage_id
+        not in {
+            "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION",
+            "CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION",
+        },
     }
     _write_json(report_path, report)
     write_process_data_coverage_report(coverage_report, coverage_report_path)
