@@ -163,6 +163,40 @@ def _write_tag_fixture(root: Path) -> Path:
     (tag_root / "TAG_ANCILLARY_ROLE_MAP.csv").write_text(
         "logical_path,tag_status\n", encoding="utf-8"
     )
+    conflict_rows = [
+        {
+            "path": "src/kf-gins/gi_engine.cpp",
+            "tag_commit": finalizer.TAG_COMMIT,
+            "tag_sha256": digest,
+            "archive_working_tree_sha256": digest,
+            "comparison_status": "HASH_MATCH",
+        },
+        {
+            "path": "scripts/run_final_mainline.py",
+            "tag_commit": finalizer.TAG_COMMIT,
+            "tag_sha256": runner_hash,
+            "archive_working_tree_sha256": runner_hash,
+            "comparison_status": "HASH_MATCH",
+        },
+        {
+            "path": "docs/final_mainline_config.md",
+            "tag_commit": finalizer.TAG_COMMIT,
+            "tag_sha256": note_hash,
+            "archive_working_tree_sha256": note_hash,
+            "comparison_status": "HASH_MATCH",
+        },
+    ]
+    (tag_root / "WORKING_TREE_VS_TAG_CONFLICT_MAP.json").write_text(
+        json.dumps({"tag_commit": finalizer.TAG_COMMIT, "rows": conflict_rows}),
+        encoding="utf-8",
+    )
+    (tag_root / "WORKING_TREE_VS_TAG_CONFLICT_MAP.csv").write_text(
+        "path,comparison_status\n"
+        "src/kf-gins/gi_engine.cpp,HASH_MATCH\n"
+        "scripts/run_final_mainline.py,HASH_MATCH\n"
+        "docs/final_mainline_config.md,HASH_MATCH\n",
+        encoding="utf-8",
+    )
     return source
 
 

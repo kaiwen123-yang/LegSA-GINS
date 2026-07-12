@@ -9,6 +9,16 @@ def test_active_port_parity_is_not_fabricated() -> None:
     assert record["metrics_generated"] is False
 
 
+def test_active_solver_and_provider_parser_change_are_not_conflated() -> None:
+    source = (
+        finalizer.REPO_ROOT
+        / "scripts/paper_rebuild/finalize_clean1r2_blocked.py"
+    ).read_text(encoding="utf-8")
+    assert '"active_parity_solver_modified": False' in source
+    assert '"active_clean_provider_parser_modified": True' in source
+    assert '"active_port_modified"' not in source
+
+
 def test_all_four_methods_are_not_run_after_upstream_blocker() -> None:
     rows = finalizer.build_four_method_rows()
     assert [row["method_id"] for row in rows] == list(finalizer.METHOD_ORDER)

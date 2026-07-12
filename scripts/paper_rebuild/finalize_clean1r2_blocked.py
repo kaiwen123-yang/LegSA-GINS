@@ -447,6 +447,10 @@ def _validate_tag_proof(clean_root: Path) -> dict[str, Any]:
         "source_manifest": source_root / "TAG_SOURCE_MANIFEST.json",
         "ancillary_json": source_root / "TAG_ANCILLARY_ROLE_MAP.json",
         "ancillary_csv": source_root / "TAG_ANCILLARY_ROLE_MAP.csv",
+        "working_tree_conflict_json": source_root
+        / "WORKING_TREE_VS_TAG_CONFLICT_MAP.json",
+        "working_tree_conflict_csv": source_root
+        / "WORKING_TREE_VS_TAG_CONFLICT_MAP.csv",
     }
     missing = [name for name, path in required.items() if not path.is_file()]
     if missing:
@@ -577,6 +581,32 @@ def _validate_tag_proof(clean_root: Path) -> dict[str, Any]:
         ):
             raise FinalizationError(f"Tag source materialization mismatch: {relative}")
         normalized.append(dict(raw_row))
+    conflict_payload = _json_object(required["working_tree_conflict_json"])
+    conflict_rows = conflict_payload.get("rows")
+    if not isinstance(conflict_rows, list):
+        raise FinalizationError("Tag working-tree conflict map has no rows")
+    conflicts_by_path = {
+        str(row.get("path", "")): row
+        for row in conflict_rows
+        if isinstance(row, dict)
+    }
+    if set(conflicts_by_path) != {str(row["path"]) for row in normalized}:
+        raise FinalizationError("Tag working-tree conflict map source set mismatch")
+    for source_row in normalized:
+        conflict = conflicts_by_path[str(source_row["path"])]
+        if (
+            conflict.get("tag_commit") != TAG_COMMIT
+            or conflict.get("tag_sha256") != source_row["sha256"]
+            or conflict.get("comparison_status")
+            not in {
+                "HASH_MATCH",
+                "HASH_DIFFERENT",
+                "MISSING_FROM_ARCHIVE_WORKING_TREE",
+            }
+        ):
+            raise FinalizationError(
+                f"Tag working-tree conflict row mismatch: {source_row['path']}"
+            )
     if set(ancillary_by_path) != {
         "bin/process_data.py",
         "bin/evaluate_nav_trace_kfgins_v2.py",
@@ -605,6 +635,7 @@ def _validate_tag_proof(clean_root: Path) -> dict[str, Any]:
         "terminal": terminal,
         "provenance": provenance,
         "source_rows": normalized,
+        "working_tree_conflicts": conflicts_by_path,
     }
 
 
@@ -686,8 +717,14 @@ def _consolidated_source_rows(
         logical_role = primary_tag_role(
             tag_path, str(tag_row.get("logical_role", "tag_source"))
         )
-        conflict_hash = working_conflicts.get(logical_role)
-        identical = conflict_hash == tag_row["sha256"] if conflict_hash else False
+        conflict_record = tag["working_tree_conflicts"].get(tag_path, {})
+        conflict_hash = str(conflict_record.get("archive_working_tree_sha256", ""))
+        if not conflict_hash:
+            conflict_hash = working_conflicts.get(logical_role, "")
+        comparison_status = str(conflict_record.get("comparison_status", ""))
+        identical = comparison_status == "HASH_MATCH" or (
+            bool(conflict_hash) and conflict_hash == tag_row["sha256"]
+        )
         rows.append(
             {
                 "logical_role": logical_role,
@@ -1050,6 +1087,12 @@ def _copy_terminal_proofs(
         "TAG_SOURCE_MANIFEST.json": tag["files"]["source_manifest"],
         "TAG_ANCILLARY_ROLE_MAP.json": tag["files"]["ancillary_json"],
         "TAG_ANCILLARY_ROLE_MAP.csv": tag["files"]["ancillary_csv"],
+        "WORKING_TREE_VS_TAG_CONFLICT_MAP.json": tag["files"][
+            "working_tree_conflict_json"
+        ],
+        "WORKING_TREE_VS_TAG_CONFLICT_MAP.csv": tag["files"][
+            "working_tree_conflict_csv"
+        ],
         "FINAL_V23_PARITY_CONTRACT.yaml": CONTRACT_PATH,
     }
     for name, source in copies.items():
@@ -1290,7 +1333,11 @@ def _finalize_into(paths: Any, output_root: Path) -> dict[str, Any]:
     active_port.update(
         {
             "strong_dual_yaw_equals_final_v23": "NOT_EVALUATED",
-            "active_port_modified": False,
+            "active_parity_solver_modified": False,
+            "active_clean_provider_parser_modified": True,
+            "active_clean_provider_parser_change": (
+                "UBX_NAV_PVT_sAcc_full_frame_offset_74_78"
+            ),
             "parity_gate_passed": False,
         }
     )
