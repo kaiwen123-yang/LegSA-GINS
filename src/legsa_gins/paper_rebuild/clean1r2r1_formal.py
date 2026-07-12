@@ -12,6 +12,7 @@ import csv
 import hashlib
 import json
 import math
+import re
 import shutil
 import subprocess
 import sys
@@ -93,6 +94,10 @@ def _is_sha256(value: Any) -> bool:
     return isinstance(value, str) and len(value) == 64 and all(ch in "0123456789abcdef" for ch in value)
 
 
+def _is_git_commit(value: Any) -> bool:
+    return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{40}", value) is not None
+
+
 def _artifact(root: Path, entry: Mapping[str, Any], role: str) -> Path:
     relative = entry.get("relative_path")
     if not isinstance(relative, str) or relative.startswith("/") or ".." in Path(relative).parts:
@@ -139,7 +144,7 @@ def generate_fresh_auxiliaries(
 ) -> dict[str, Any]:
     """Generate only fresh auxiliaries while retaining the sealed 15-col base."""
 
-    if not _is_sha256(expected_code_commit):
+    if not _is_git_commit(expected_code_commit):
         raise Clean1R2R1FormalError("expected code-freeze commit is invalid")
     commit_before, dirty_before = git_code_state(paths.code_root)
     if dirty_before or commit_before != expected_code_commit:
@@ -550,7 +555,7 @@ def run_four_methods(
 ) -> dict[str, Any]:
     """Run exactly four separate processes and seal every output before return."""
 
-    if not _is_sha256(code_freeze_commit):
+    if not _is_git_commit(code_freeze_commit):
         raise Clean1R2R1FormalError("code-freeze commit is invalid")
     repo = Path(repo_root).resolve(strict=True)
     commit_before, dirty_before = git_code_state(repo)

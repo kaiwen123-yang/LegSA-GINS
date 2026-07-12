@@ -12,6 +12,7 @@ from legsa_gins.paper_rebuild.clean1r2r1_formal import (
     RUN_DIRECTORIES,
     Clean1R2R1FormalError,
     _assert_parity_gate,
+    _is_git_commit,
     auxiliary_generation_plan,
     module_counters,
     normalize_runtime_config,
@@ -32,6 +33,11 @@ def test_auxiliary_plan_has_no_trace_and_keeps_15col_base_separate() -> None:
     assert plan["common_solver_base_roles"] == (
         "imu_runtime_input", "gnss_runtime_input"
     )
+
+
+def test_git_commit_identity_is_40_hex_not_sha256() -> None:
+    assert _is_git_commit("9" * 40)
+    assert not _is_git_commit("9" * 64)
 
 
 def test_auxiliary_trace_audit_requires_exact_four_raw_opens(tmp_path: Path) -> None:
