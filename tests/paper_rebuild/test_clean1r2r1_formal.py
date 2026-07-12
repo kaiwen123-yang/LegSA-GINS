@@ -13,9 +13,11 @@ from legsa_gins.paper_rebuild.clean1r2r1_formal import (
     Clean1R2R1FormalError,
     _assert_parity_gate,
     _is_git_commit,
+    _nearest_match_count,
     auxiliary_generation_plan,
     module_counters,
     normalize_runtime_config,
+    rebase_auxiliary_time_csv,
     seal_auxiliary_file_open_audit,
     validate_four_method_seal,
 )
@@ -38,6 +40,31 @@ def test_auxiliary_plan_has_no_trace_and_keeps_15col_base_separate() -> None:
 def test_git_commit_identity_is_40_hex_not_sha256() -> None:
     assert _is_git_commit("9" * 40)
     assert not _is_git_commit("9" * 64)
+
+
+def test_auxiliary_time_rebase_changes_only_time_and_preserves_source_time(tmp_path: Path) -> None:
+    source = tmp_path / "raw.csv"
+    source.write_text(
+        "time,source_time,vn,std_vn,status\n"
+        "28856.000000000,460874.000000000,1.25,0.2,available\n"
+        "28856.200000000,460874.200000000,1.50,0.3,available\n",
+        encoding="utf-8",
+    )
+    original = source.read_bytes()
+    active = tmp_path / "rebased" / "raw.csv"
+    audit = rebase_auxiliary_time_csv(source, active, offset_seconds=28800.0)
+    assert source.read_bytes() == original
+    with active.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    assert [float(row["time"]) for row in rows] == [56.0, 56.2]
+    assert [row["source_time"] for row in rows] == ["460874.000000000", "460874.200000000"]
+    assert [row["vn"] for row in rows] == ["1.25", "1.50"]
+    assert audit["offset_subtracted_seconds"] == 28800.0
+    assert audit["time_column_only_transformed"] is True
+    assert audit["source_time_column_preserved"] is True
+    assert audit["row_count"] == 2
+    assert _nearest_match_count([56.21788], [float(row["time"]) for row in rows], 0.05) == 1
+    assert _nearest_match_count([56.21788], [28856.0, 28856.2], 0.05) == 0
 
 
 def test_auxiliary_trace_audit_requires_exact_four_raw_opens(tmp_path: Path) -> None:

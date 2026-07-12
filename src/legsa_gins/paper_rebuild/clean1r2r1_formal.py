@@ -9,6 +9,7 @@ IMU/GNSS products are audit-only and can never be selected by this runner.
 from __future__ import annotations
 
 import csv
+import bisect
 import hashlib
 import json
 import math
@@ -18,6 +19,7 @@ import subprocess
 import sys
 import time
 from dataclasses import replace
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
@@ -108,6 +110,153 @@ def _artifact(root: Path, entry: Mapping[str, Any], role: str) -> Path:
     return candidate
 
 
+def rebase_auxiliary_time_csv(
+    source: str | Path,
+    destination: str | Path,
+    *,
+    offset_seconds: float,
+) -> dict[str, Any]:
+    """Create an attempt-owned copy on the archived final_v23 time basis.
+
+    The maintained V1 helper writes seconds since the source UTC midnight,
+    while exact final_v23 subtracts its archived +08:00 base time.  Only the
+    active ``time`` column is rebased; raw-Doppler ``source_time`` and every
+    observation/covariance/status field remain byte-identical strings.
+    """
+
+    input_path = Path(source).resolve(strict=True)
+    output_path = Path(destination)
+    if not math.isfinite(offset_seconds) or offset_seconds <= 0.0:
+        raise Clean1R2R1FormalError("invalid auxiliary time-basis offset")
+    if output_path.exists():
+        raise Clean1R2R1FormalError("rebased auxiliary output already exists")
+    with input_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        fieldnames = list(reader.fieldnames or ())
+        rows = list(reader)
+    if not rows or "time" not in fieldnames:
+        raise Clean1R2R1FormalError("auxiliary CSV lacks a non-empty time column")
+    input_times: list[float] = []
+    output_times: list[float] = []
+    source_time_before = [row.get("source_time") for row in rows]
+    decimal_offset = Decimal(str(offset_seconds))
+    for row in rows:
+        try:
+            original_decimal = Decimal(str(row["time"]))
+            rebased_decimal = original_decimal - decimal_offset
+            original = float(original_decimal)
+            rebased = float(rebased_decimal)
+        except (InvalidOperation, TypeError, ValueError) as exc:
+            raise Clean1R2R1FormalError("auxiliary CSV has an invalid time value") from exc
+        if not math.isfinite(original) or not math.isfinite(rebased):
+            raise Clean1R2R1FormalError("auxiliary CSV time is non-finite")
+        input_times.append(original)
+        output_times.append(rebased)
+        row["time"] = f"{rebased_decimal:.12f}"
+    if any(b <= a for a, b in zip(output_times, output_times[1:])):
+        raise Clean1R2R1FormalError("rebased auxiliary time is not strictly increasing")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = output_path.with_name(output_path.name + ".tmp")
+    if temporary.exists():
+        raise Clean1R2R1FormalError("rebased auxiliary temporary output already exists")
+    try:
+        with temporary.open("x", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+        temporary.replace(output_path)
+    except Exception:
+        temporary.unlink(missing_ok=True)
+        raise
+    source_time_after = [row.get("source_time") for row in rows]
+    return {
+        "row_count": len(rows),
+        "input_time_start_seconds": input_times[0],
+        "input_time_end_seconds": input_times[-1],
+        "output_time_start_seconds": output_times[0],
+        "output_time_end_seconds": output_times[-1],
+        "offset_subtracted_seconds": offset_seconds,
+        "time_column_only_transformed": True,
+        "source_time_column_present": "source_time" in fieldnames,
+        "source_time_column_preserved": source_time_before == source_time_after,
+        "input_sha256": sha256_file(input_path),
+        "output_sha256": sha256_file(output_path),
+    }
+
+
+def _first_column_times(path: Path) -> list[float]:
+    times: list[float] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith(("#", "%")):
+            continue
+        times.append(float(stripped.replace(",", " ").split()[0]))
+    if not times or any(b <= a for a, b in zip(times, times[1:])):
+        raise Clean1R2R1FormalError("clean common GNSS time column is invalid")
+    return times
+
+
+def _csv_times(path: Path) -> list[float]:
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    try:
+        times = [float(row["time"]) for row in rows]
+    except (KeyError, TypeError, ValueError) as exc:
+        raise Clean1R2R1FormalError("active auxiliary time column is invalid") from exc
+    if not times or any(b <= a for a, b in zip(times, times[1:])):
+        raise Clean1R2R1FormalError("active auxiliary time is not strictly increasing")
+    return times
+
+
+def _nearest_match_count(reference_times: Sequence[float], provider_times: Sequence[float], tolerance: float) -> int:
+    if not math.isfinite(tolerance) or tolerance <= 0.0:
+        raise Clean1R2R1FormalError("auxiliary match tolerance is invalid")
+    count = 0
+    for value in reference_times:
+        index = bisect.bisect_left(provider_times, value)
+        candidates = []
+        if index < len(provider_times):
+            candidates.append(abs(provider_times[index] - value))
+        if index:
+            candidates.append(abs(provider_times[index - 1] - value))
+        if candidates and min(candidates) <= tolerance:
+            count += 1
+    return count
+
+
+def _clean_time_basis_contract(clean_manifest: Path) -> dict[str, Any]:
+    payload = _json(clean_manifest)
+    try:
+        offset = float(payload["archive_base_time_offset_from_utc_midnight_seconds"])
+        base_time = float(payload["base_time_unix_seconds"])
+        utc_midnight = float(payload["source_utc_day_midnight_unix_seconds"])
+        relative = str(payload["time_audit_relative_path"])
+    except (KeyError, TypeError, ValueError) as exc:
+        raise Clean1R2R1FormalError("clean input lacks the archived time-basis contract") from exc
+    audit_path = (clean_manifest.parent / relative).resolve(strict=True)
+    if clean_manifest.parent not in audit_path.parents:
+        raise Clean1R2R1FormalError("clean input time audit escaped its attempt root")
+    audit = _json(audit_path)
+    window = audit.get("runtime_window_seconds")
+    if (
+        not math.isfinite(offset)
+        or abs(offset - 28800.0) > 1.0e-9
+        or abs((utc_midnight + offset) - base_time) > 1.0e-6
+        or audit.get("archive_base_time_offset_from_utc_midnight_seconds") != offset
+        or not isinstance(window, list)
+        or len(window) != 2
+        or [float(value) for value in window] != [66.0, 340.0]
+    ):
+        raise Clean1R2R1FormalError("clean input time-basis proof does not match exact final_v23")
+    return {
+        "source_utc_day_midnight_unix_seconds": utc_midnight,
+        "final_v23_base_time_unix_seconds": base_time,
+        "offset_subtracted_seconds": offset,
+        "runtime_window_seconds": [66.0, 340.0],
+        "time_audit_sha256": sha256_file(audit_path),
+    }
+
+
 def auxiliary_generation_plan() -> dict[str, Any]:
     """Return the fixed read/output roles used by the maintained generator."""
 
@@ -165,6 +314,9 @@ def generate_fresh_auxiliaries(
     generation = protocol.get("provider_generation")
     if not isinstance(generation, Mapping):
         raise Clean1R2R1FormalError("tracked provider-generation contract is missing")
+    solver_common = protocol.get("solver_common")
+    if not isinstance(solver_common, Mapping):
+        raise Clean1R2R1FormalError("tracked solver-common auxiliary contract is missing")
     # V1 is a maintained helper compatibility identity only.  Its generated
     # IMU/GNSS are quarantined below and never become CLEAN1R2R1 solver input.
     generated = generator(
@@ -183,7 +335,60 @@ def generate_fresh_auxiliaries(
     if not isinstance(artifacts, Mapping):
         raise Clean1R2R1FormalError("maintained auxiliary artifact map is missing")
     active_roles = auxiliary_generation_plan()["active_auxiliary_roles"]
-    active_paths = {role: _artifact(destination, artifacts[role], role) for role in active_roles}
+    source_active_paths = {role: _artifact(destination, artifacts[role], role) for role in active_roles}
+    time_basis = _clean_time_basis_contract(clean.manifest_path)
+    tolerances = {
+        "raw_doppler_provider": float(solver_common["raw_doppler_time_tolerance_seconds"]),
+        "go2_attitude_prior": float(solver_common["go2_roll_pitch_time_tolerance_seconds"]),
+        "go2_horizontal_velocity_prior": float(solver_common["go2_horizontal_velocity_time_tolerance_seconds"]),
+    }
+    starttime, endtime = time_basis["runtime_window_seconds"]
+    common_gnss_times = [
+        value for value in _first_column_times(clean.gnss_path)
+        if value > starttime and value <= endtime
+    ]
+    if not common_gnss_times:
+        raise Clean1R2R1FormalError("clean final_v23 runtime window has no GNSS candidates")
+    rebased_root = destination / "clean_final_v23_time_basis"
+    active_paths: dict[str, Path] = {}
+    role_time_audits: dict[str, dict[str, Any]] = {}
+    for role in active_roles:
+        source = source_active_paths[role]
+        active = rebased_root / source.name
+        audit = rebase_auxiliary_time_csv(
+            source,
+            active,
+            offset_seconds=float(time_basis["offset_subtracted_seconds"]),
+        )
+        provider_times = _csv_times(active)
+        tolerance = tolerances[role]
+        match_count = _nearest_match_count(common_gnss_times, provider_times, tolerance)
+        audit.update({
+            "source_path": str(source),
+            "active_path": str(active),
+            "active_time_basis": "seconds_since_archived_final_v23_base_time",
+            "source_time_basis": "seconds_since_source_utc_midnight",
+            "match_tolerance_seconds": tolerance,
+            "common_gnss_candidate_count": len(common_gnss_times),
+            "common_gnss_match_count": match_count,
+            "common_gnss_match_ratio": match_count / len(common_gnss_times),
+            "runtime_window_overlap": provider_times[0] <= endtime and provider_times[-1] >= starttime,
+        })
+        audit["passed"] = bool(
+            audit["time_column_only_transformed"]
+            and audit["source_time_column_preserved"]
+            and audit["runtime_window_overlap"]
+            and match_count > 0
+        )
+        if not audit["passed"]:
+            raise Clean1R2R1FormalError(f"auxiliary time-basis activation gate failed: {role}")
+        active_paths[role] = active
+        role_time_audits[role] = audit
+    time_basis["source_time_basis"] = "seconds_since_source_utc_midnight"
+    time_basis["active_time_basis"] = "seconds_since_archived_final_v23_base_time"
+    time_basis["common_gnss_candidate_count"] = len(common_gnss_times)
+    time_basis["roles"] = role_time_audits
+    time_basis["passed"] = True
     active_hashes = {role: sha256_file(path) for role, path in active_paths.items()}
     common_after = {
         "imu_runtime_input": sha256_file(clean.imu_path),
@@ -219,6 +424,7 @@ def generate_fresh_auxiliaries(
             role: {"path": str(path), "sha256": active_hashes[role]}
             for role, path in active_paths.items()
         },
+        "auxiliary_time_basis": time_basis,
         "raw_source_hashes": generated.get("raw_source_hashes"),
         "actual_source_read_set": actual_reads,
         "raw_doppler_backend": dict(raw),
@@ -226,6 +432,15 @@ def generate_fresh_auxiliaries(
         "compatibility_generated_imu_gnss": {
             "solver_eligible": False,
             "reason": "CLEAN1R2R1 uses sealed FINAL_V23_CLEAN_FRESH 15-column common base",
+        },
+        "compatibility_helper_auxiliaries": {
+            role: {
+                "path": str(source_active_paths[role]),
+                "sha256": sha256_file(source_active_paths[role]),
+                "solver_eligible": False,
+                "reason": "UTC-midnight time basis; preserved as helper output before deterministic rebase",
+            }
+            for role in active_roles
         },
         "trace_open_count": None,
         "trace_open_audit_sealed": False,
@@ -241,7 +456,12 @@ def generate_fresh_auxiliaries(
         "plan": auxiliary_generation_plan(),
     }
     payload["bundle_hash"] = _canonical_hash(
-        {**common_after, **active_hashes, "raw_doppler_backend": _canonical_hash(dict(raw))}
+        {
+            **common_after,
+            **active_hashes,
+            "raw_doppler_backend": _canonical_hash(dict(raw)),
+            "auxiliary_time_basis": _canonical_hash(time_basis),
+        }
     )
     manifest_path = write_json_atomic(destination / "CLEAN1R2R1_AUXILIARY_MANIFEST.json", payload)
     with (destination / "CLEAN1R2R1_AUXILIARY_SOURCE_LEDGER.csv").open(
@@ -358,6 +578,86 @@ def validate_auxiliary_bundle(path: str | Path) -> dict[str, Any]:
                 raise Clean1R2R1FormalError(f"auxiliary/common artifact changed: {role}")
     if payload["common_solver_base"]["gnss_runtime_input"].get("columns") != 15:
         raise Clean1R2R1FormalError("formal common GNSS is not the sealed 15-column input")
+    time_basis = payload.get("auxiliary_time_basis")
+    if not isinstance(time_basis, Mapping) or time_basis.get("passed") is not True:
+        raise Clean1R2R1FormalError("auxiliary time-basis audit is missing or failed")
+    try:
+        offset = float(time_basis["offset_subtracted_seconds"])
+        utc_midnight = float(time_basis["source_utc_day_midnight_unix_seconds"])
+        final_base = float(time_basis["final_v23_base_time_unix_seconds"])
+        window = [float(value) for value in time_basis["runtime_window_seconds"]]
+    except (KeyError, TypeError, ValueError) as exc:
+        raise Clean1R2R1FormalError("auxiliary time-basis audit fields are invalid") from exc
+    if (
+        abs(offset - 28800.0) > 1.0e-9
+        or abs((utc_midnight + offset) - final_base) > 1.0e-6
+        or window != [66.0, 340.0]
+        or time_basis.get("source_time_basis") != "seconds_since_source_utc_midnight"
+        or time_basis.get("active_time_basis") != "seconds_since_archived_final_v23_base_time"
+    ):
+        raise Clean1R2R1FormalError("auxiliary time basis is not exact clean final_v23")
+    common_gnss = Path(payload["common_solver_base"]["gnss_runtime_input"]["path"]).resolve(strict=True)
+    common_times = [value for value in _first_column_times(common_gnss) if value > window[0] and value <= window[1]]
+    if int(time_basis.get("common_gnss_candidate_count", -1)) != len(common_times):
+        raise Clean1R2R1FormalError("auxiliary time-basis GNSS candidate count changed")
+    role_audits = time_basis.get("roles")
+    expected_tolerances = {
+        "raw_doppler_provider": 0.05,
+        "go2_attitude_prior": 0.02,
+        "go2_horizontal_velocity_prior": 0.08,
+    }
+    helper_entries = payload.get("compatibility_helper_auxiliaries")
+    if not isinstance(role_audits, Mapping) or set(role_audits) != set(expected_tolerances):
+        raise Clean1R2R1FormalError("auxiliary role time-basis audit mismatch")
+    if not isinstance(helper_entries, Mapping) or set(helper_entries) != set(expected_tolerances):
+        raise Clean1R2R1FormalError("compatibility helper auxiliary map mismatch")
+    for role, tolerance in expected_tolerances.items():
+        audit = role_audits[role]
+        if not isinstance(audit, Mapping) or audit.get("passed") is not True:
+            raise Clean1R2R1FormalError(f"auxiliary role time-basis gate failed: {role}")
+        source = Path(str(helper_entries[role].get("path", ""))).resolve(strict=True)
+        active = Path(str(payload["auxiliary_artifacts"][role].get("path", ""))).resolve(strict=True)
+        if (
+            helper_entries[role].get("solver_eligible") is not False
+            or sha256_file(source) != helper_entries[role].get("sha256")
+            or sha256_file(source) != audit.get("input_sha256")
+            or sha256_file(active) != audit.get("output_sha256")
+            or str(source) != audit.get("source_path")
+            or str(active) != audit.get("active_path")
+            or abs(float(audit.get("offset_subtracted_seconds", math.nan)) - offset) > 1.0e-9
+            or abs(float(audit.get("match_tolerance_seconds", math.nan)) - tolerance) > 1.0e-12
+            or audit.get("time_column_only_transformed") is not True
+            or audit.get("source_time_column_preserved") is not True
+            or audit.get("runtime_window_overlap") is not True
+        ):
+            raise Clean1R2R1FormalError(f"auxiliary role rebase provenance mismatch: {role}")
+        with source.open("r", encoding="utf-8-sig", newline="") as handle:
+            source_reader = csv.DictReader(handle)
+            source_fields = list(source_reader.fieldnames or ())
+            source_rows = list(source_reader)
+        with active.open("r", encoding="utf-8-sig", newline="") as handle:
+            active_reader = csv.DictReader(handle)
+            active_fields = list(active_reader.fieldnames or ())
+            active_rows = list(active_reader)
+        if source_fields != active_fields or len(source_rows) != len(active_rows):
+            raise Clean1R2R1FormalError(f"auxiliary role rebase schema changed: {role}")
+        for source_row, active_row in zip(source_rows, active_rows):
+            for field in source_fields:
+                if field == "time":
+                    if abs((float(source_row[field]) - offset) - float(active_row[field])) > 1.0e-9:
+                        raise Clean1R2R1FormalError(f"auxiliary role time rebase changed: {role}")
+                elif source_row[field] != active_row[field]:
+                    raise Clean1R2R1FormalError(f"auxiliary role non-time field changed: {role}/{field}")
+        active_times = _csv_times(active)
+        match_count = _nearest_match_count(common_times, active_times, tolerance)
+        if (
+            match_count <= 0
+            or match_count != int(audit.get("common_gnss_match_count", -1))
+            or len(active_times) != int(audit.get("row_count", -1))
+            or abs(active_times[0] - float(audit.get("output_time_start_seconds", math.nan))) > 1.0e-9
+            or abs(active_times[-1] - float(audit.get("output_time_end_seconds", math.nan))) > 1.0e-9
+        ):
+            raise Clean1R2R1FormalError(f"auxiliary role activation coverage changed: {role}")
     return payload
 
 

@@ -436,6 +436,15 @@ clean1r2r1_execution_status:
   diagnostic_parity_anchor_code_commit: 9836146562fb77d118e63aa77e23f8520b353bc9
   superseded_code_freeze_commit: 906550fc11135aaddf382bc6c79eb0fa28e2433f
   superseded_code_freeze_reason: formal_Git_commit_identity_validator_bug_fixed_before_four_methods
+  superseded_formal_attempt_commit: a44bae54e8c23de656cdccc51e8839f7c63630ee
+  superseded_formal_attempt_reason: auxiliary_UTC_midnight_time_basis_not_rebased_to_final_v23_base
+  superseded_formal_attempt_first_divergence:
+    file: RAW_DOPPLER_VELOCITY.csv
+    field: first_data_row.time
+    expected_seconds: 56.0
+    actual_seconds: 28856.0
+    deterministic_offset_seconds: 28800.0
+  superseded_formal_attempt_terminal_evidence_eligible: false
   fresh_clean_input: PASS_DIAGNOSTIC_FRESH_CURRENT_RAW
   exact_tag_fresh_build: PASS_FINAL_V23_FREEZE_A906C3A2
   exact_clean_final_v23_run: PASS_56642_ROWS_274_UPDATES
