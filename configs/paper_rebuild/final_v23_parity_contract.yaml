@@ -433,7 +433,9 @@ clean1r2r1_execution_status:
   E001_reference_role: ARCHIVED_SEMISYNTHETIC_DIAGNOSTIC_REFERENCE_ONLY
   E001_old_input_used_by_solver: false
   current_active_evidence_contaminated: false
-  diagnostic_parity_anchor_code_commit: 88623711724825e9afa7d1430585a59724d5c091
+  diagnostic_parity_anchor_code_commit: 9836146562fb77d118e63aa77e23f8520b353bc9
+  superseded_code_freeze_commit: 906550fc11135aaddf382bc6c79eb0fa28e2433f
+  superseded_code_freeze_reason: formal_Git_commit_identity_validator_bug_fixed_before_four_methods
   fresh_clean_input: PASS_DIAGNOSTIC_FRESH_CURRENT_RAW
   exact_tag_fresh_build: PASS_FINAL_V23_FREEZE_A906C3A2
   exact_clean_final_v23_run: PASS_56642_ROWS_274_UPDATES

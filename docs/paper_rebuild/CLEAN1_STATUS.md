@@ -17,7 +17,7 @@
 - Hard stop: no four-method execution before exact-source clean run and active-port clean parity pass.
 - Clean profile: real BY2 raw, status A1 dual yaw, `yaw_measurement_std_deg=1.5`, yaw noise injection disabled, trace excluded from input generation, receiver IMU excluded from propagation, and E001 input payload excluded.
 - Static runtime contract retained from archive/tag proof: `base_time=1772784000`, window `66..340 s`, fixed initialization, antlever `[0.03,0.03,-0.30] m`, IMU install `[-1,0,0] deg`, 21/18 state/noise dimensions, position/yaw/velocity/feedback order, scheme-C, writer, and evaluator.
-- Diagnostic clean-real parity anchor passed at code commit `88623711724825e9afa7d1430585a59724d5c091`: exact and active each wrote 56,642 rows, all 274 update epochs/actions matched, and position/velocity/attitude/STD stayed inside the pre-output tolerance freeze. The next step is the required code-freeze commit followed by fresh provider regeneration and a final parity replay at that commit.
+- Diagnostic clean-real parity anchor passed again at code commit `9836146562fb77d118e63aa77e23f8520b353bc9` after correcting the formal Git-identity validator: exact and active each wrote 56,642 rows, all 274 update epochs/actions matched, and position/velocity/attitude/STD stayed inside the pre-output tolerance freeze. Earlier freeze `906550fc11135aaddf382bc6c79eb0fa28e2433f` is superseded before formal execution; no four-method run used it.
 
 ## Retained CLEAN1R1C execution status
 
