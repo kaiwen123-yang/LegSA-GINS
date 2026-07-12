@@ -112,3 +112,12 @@ def test_counter_contract_distinguishes_attempts_from_accepted_updates() -> None
     ).read_text(encoding="utf-8")
     assert r'\"dual_yaw_attempt_count\"' in source
     assert r'\"dual_yaw_accepted_count\"' in source
+
+
+def test_parity_cli_bootstraps_repo_src_namespace() -> None:
+    source = (
+        Path(__file__).resolve().parents[2]
+        / "scripts/paper_rebuild/run_final_v23_clean_parity.py"
+    ).read_text(encoding="utf-8")
+    assert 'SRC_ROOT = REPO_ROOT / "src"' in source
+    assert "sys.path.insert(0, str(SRC_ROOT))" in source
