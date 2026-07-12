@@ -680,11 +680,17 @@ def generate_final_v23_clean_input(
     actual_pre_hashes = verify_raw_sources(
         paths.raw_root, ACTUAL_SOURCE_ROLES, locked_by2
     )
-    base_time = infer_source_day_base_time(paths.by2_fix_root / "gnss1-status.csv")
+    source_utc_day_midnight = infer_source_day_base_time(
+        paths.by2_fix_root / "gnss1-status.csv"
+    )
     expected_base_time = float(contract["time_contract"]["base_time_unix_seconds"])
-    if base_time != expected_base_time:
+    # The archived runtime freezes Beijing-local day origin (UTC midnight plus
+    # eight hours), while the maintained helper intentionally reports UTC day
+    # midnight.  Validate that exact relationship instead of replacing the
+    # archived base_time with a newly inferred value.
+    if expected_base_time - source_utc_day_midnight != 8.0 * 3600.0:
         raise FinalV23CleanInputError(
-            f"source-derived base time {base_time} does not match contract {expected_base_time}"
+            "source UTC-day origin is inconsistent with archived +08:00 base_time"
         )
 
     root.mkdir(parents=True, exist_ok=False)
@@ -797,6 +803,8 @@ def generate_final_v23_clean_input(
         time_audit = {
             "schema_version": "paper_rebuild.final_v23_clean_input_time_audit.v1",
             "base_time_unix_seconds": expected_base_time,
+            "source_utc_day_midnight_unix_seconds": source_utc_day_midnight,
+            "archive_base_time_offset_from_utc_midnight_seconds": 28800.0,
             "runtime_window_seconds": [
                 float(contract["time_contract"]["starttime_seconds"]),
                 float(contract["time_contract"]["endtime_seconds"]),
@@ -896,6 +904,8 @@ def generate_final_v23_clean_input(
             "terminal_status": "AWAITING_EXTERNAL_POST_GENERATION_RAW_CHECKPOINT",
             "data_mode": "real_by2_raw",
             "base_time_unix_seconds": expected_base_time,
+            "source_utc_day_midnight_unix_seconds": source_utc_day_midnight,
+            "archive_base_time_offset_from_utc_midnight_seconds": 28800.0,
             "generator_code_commit": commit,
             "generator_worktree_dirty": False,
             "contract_sha256": sha256_file(contract_path),

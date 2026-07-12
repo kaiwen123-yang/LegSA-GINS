@@ -46,3 +46,12 @@ def test_clean_input_serialization_matches_archive_precision(tmp_path: Path) -> 
     )
     assert gnss.read_text(encoding="utf-8") == "66.123457 " + " ".join(["1.234568"] * 14) + "\n"
     assert imu.read_text(encoding="utf-8") == "66.123457 " + " ".join(["0.12345679"] * 6) + "\n"
+
+
+def test_clean_builder_keeps_archived_plus08_base_time_not_utc_midnight() -> None:
+    source = (
+        Path(__file__).resolve().parents[2]
+        / "src/legsa_gins/paper_rebuild/final_v23_clean_input.py"
+    ).read_text(encoding="utf-8")
+    assert "expected_base_time - source_utc_day_midnight != 8.0 * 3600.0" in source
+    assert "archive_base_time_offset_from_utc_midnight_seconds" in source
