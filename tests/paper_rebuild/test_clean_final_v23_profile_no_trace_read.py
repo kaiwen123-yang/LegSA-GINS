@@ -71,3 +71,6 @@ def test_final_manifest_requires_actual_file_open_audit_seal() -> None:
     assert "unexpected_raw_root_relative_paths" in seal_source
     assert "trace_open_count" in seal_source
     assert 'payload.get("file_open_audit_sealed") is not True' in validation_source
+    generator_source = inspect.getsource(builder.generate_final_v23_clean_input)
+    assert '"file_open_audit_sealed": False' in generator_source
+    assert '"actual_file_open_audit_external_seal_required": True' in generator_source
