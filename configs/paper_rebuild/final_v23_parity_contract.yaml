@@ -445,14 +445,23 @@ clean1r2r1_execution_status:
     actual_seconds: 28856.0
     deterministic_offset_seconds: 28800.0
   superseded_formal_attempt_terminal_evidence_eligible: false
-  fresh_clean_input: PASS_DIAGNOSTIC_FRESH_CURRENT_RAW
+  code_freeze_commit: 5c807633f699238aa2244a0496881dff71550273
+  fresh_clean_input: PASS_FORMAL_FRESH_CURRENT_RAW_63277_IMU_303_GNSS
   exact_tag_fresh_build: PASS_FINAL_V23_FREEZE_A906C3A2
   exact_clean_final_v23_run: PASS_56642_ROWS_274_UPDATES
   active_port_clean_final_v23_parity: PASS_FINAL_V23_CLEAN_PARITY_ANCHOR
   diagnostic_strong_count: 56642
   diagnostic_yaw_actions: {attempt: 274, normal: 228, downweight: 40, reject: 6, accepted: 268}
   historical_metric_used_for_gate: false
-  four_method_execution: PENDING_CODE_FREEZE_REGENERATION
+  raw_checkpoints: {pre_generation: 22, post_generation: 22, post_exact_run: 22, post_four_method_run: 22, mutation: 0}
+  auxiliary_time_basis_offset_seconds: 28800.0
+  auxiliary_candidate_matches: {raw_doppler: 223, go2_roll_pitch: 274, go2_horizontal_velocity: 274}
+  four_method_execution: PASS_4_METHODS_4_RUNS_ALL_OUTPUTS_SEALED
+  offline_evaluation: PASS_EXACT_ARCHIVED_EVALUATOR_AGGREGATE_CROSSCHECK
+  formal_method_count: 4
+  formal_run_count: 4
+  trace_used_online: false
+  terminal_status: PASS_CLEAN1R2R1_CLEAN_FINAL_V23_PARITY_AND_FOUR_METHOD_FRESH_EVIDENCE_READY_FOR_HUMAN_REVIEW
   classic18: 0
   degradation_execution_count: 0
 

@@ -7,7 +7,7 @@
 - `PARENT_STAGE=CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION`
 - `CASE_ID=CLEAN1_BY2_CLEAN_NORMAL`
 - Active Git line: `stage/clean1-by2-clean-four-method`; the existing stage worktree remains in use.
-- Current phase: clean-real input generation, exact-source build/run, active parity, then gated four-method execution.
+- Current phase: terminal PASS evidence preparation after clean-real parity, four-method execution, and offline evaluation.
 - Human profile decision: `CLEAN_REAL_DATA_FINAL_V23`.
 - Static recovery: exact solver tag, actual runtime configuration, input-builder contract, and evaluator identity recovered.
 - CLEAN1R2 historical execution status: no fresh provider, exact solver run, active-port parity run, four-method run, or current trace evaluation was started; therefore `CURRENT_ACTIVE_EVIDENCE_CONTAMINATED=false`.
@@ -19,6 +19,21 @@
 - Static runtime contract retained from archive/tag proof: `base_time=1772784000`, window `66..340 s`, fixed initialization, antlever `[0.03,0.03,-0.30] m`, IMU install `[-1,0,0] deg`, 21/18 state/noise dimensions, position/yaw/velocity/feedback order, scheme-C, writer, and evaluator.
 - Diagnostic clean-real parity anchor passed again at code commit `9836146562fb77d118e63aa77e23f8520b353bc9` after correcting the formal Git-identity validator: exact and active each wrote 56,642 rows, all 274 update epochs/actions matched, and position/velocity/attitude/STD stayed inside the pre-output tolerance freeze. Earlier freeze `906550fc11135aaddf382bc6c79eb0fa28e2433f` is superseded before formal execution; no four-method run used it.
 - A first four-method attempt at `a44bae54e8c23de656cdccc51e8839f7c63630ee` completed the first three processes but failed closed before the four-output seal because helper auxiliaries retained the source UTC-midnight time basis (`28856.0 s`) instead of the exact final_v23 base (`56.0 s`). Those partial outputs are diagnostic-only. The bounded fix creates fresh attempt-owned auxiliary copies that subtract the archive-proven `28800 s` offset from `time` only, preserves Raw Doppler `source_time` and all observation fields, and fails closed on runtime-window match coverage before a new formal attempt.
+- Final code freeze `5c807633f699238aa2244a0496881dff71550273` passed fresh exact-tag and active parity: 56,642 rows, exact timestamps, 274 position/receiver-velocity/yaw attempts, and yaw actions `228 NORMAL / 40 DOWNWEIGHT / 6 REJECT / 268 accepted`.
+- The formal auxiliary adapter proved `223/274` Raw Doppler candidate matches and `274/274` matches for both Go2 weak priors before execution; trace-open count remained zero.
+- The complete four-method sequence then passed and was hash-sealed before evaluation. Exact archived evaluator crosschecks passed for all four methods, using Fixposition only as a same-source offline reference.
+- Terminal status: `PASS_CLEAN1R2R1_CLEAN_FINAL_V23_PARITY_AND_FOUR_METHOD_FRESH_EVIDENCE_READY_FOR_HUMAN_REVIEW`.
+
+## CLEAN1R2R1 formal results
+
+| Method | Pos | Receiver vel | Yaw attempt / accepted | Raw Doppler | Source-aware eval / changed | Go2 RP | Go2 horizontal | Horizontal RMSE (m) | Up RMSE (m) | Yaw RMSE (deg) |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `single_antenna_EKF` | 274 | 274 | 0 / 0 | 0 | 0 / 0 | 0 | 0 | 0.354570 | 0.817787 | 6.927288 |
+| `basic_dual_yaw_EKF` | 274 | 0 | 274 / 274 | 0 | 0 / 0 | 0 | 0 | 0.355526 | 0.819287 | 2.338427 |
+| `strong_dual_yaw_EKF` | 274 | 274 | 274 / 268 | 0 | 0 / 0 | 0 | 0 | 0.352517 | 0.817842 | 1.962413 |
+| `LegSA_Paper_V1` | 274 | 274 | 274 / 268 | 223 | 1,587 / 1,337 | 274 | 274 | 0.354921 | 0.855731 | 1.962342 |
+
+All FGO, QM, QA, and contact/FK counters were zero. The clean-normal result shows no catastrophic degradation; it is not a tuned superiority claim. The reference is same-source and not independent ground truth.
 
 ## Retained CLEAN1R1C execution status
 
