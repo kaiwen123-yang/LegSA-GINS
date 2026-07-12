@@ -264,6 +264,74 @@ void FileSaver::writeEvalNav(const std::string& output_dir, const std::vector<Na
   }
 }
 
+// CLEAN1R2R1 only: serialize the active state directly with the exact tag's
+// 11/22/13-column writer contract.  This is a format view of the same states
+// and covariance matrices; it performs no correction, substitution, or epoch
+// filtering.
+void FileSaver::writeExactCompatible(
+    const std::string& output_dir,
+    const std::vector<NavState>& states,
+    const std::vector<std::vector<double>>& covariances) {
+  ensureOutputDir(output_dir);
+  if (states.size() != covariances.size()) {
+    throw std::runtime_error("exact-compatible writer state/covariance row mismatch");
+  }
+  std::ofstream nav(std::filesystem::path(output_dir) / "KF_GINS_Navresult.nav");
+  std::ofstream stdfile(std::filesystem::path(output_dir) / "KF_GINS_STD.txt");
+  std::ofstream imuerr(std::filesystem::path(output_dir) / "KF_GINS_IMU_ERR.txt");
+  if (!nav || !stdfile || !imuerr) {
+    throw std::runtime_error("failed to open exact-compatible writer outputs");
+  }
+  auto write_value = [](std::ostream& out, double value) {
+    out << std::left << std::setw(15) << std::fixed << std::setprecision(9) << value << ' ';
+  };
+  for (std::size_t row = 0; row < states.size(); ++row) {
+    const auto& state = states[row];
+    for (double value : std::array<double, 11>{
+             0.0,
+             state.time,
+             Earth::radToDeg(state.pos_blh_rad_m[0]),
+             Earth::radToDeg(state.pos_blh_rad_m[1]),
+             state.pos_blh_rad_m[2],
+             state.vel_ned_mps[0],
+             state.vel_ned_mps[1],
+             state.vel_ned_mps[2],
+             Earth::radToDeg(state.euler_rad[0]),
+             Earth::radToDeg(state.euler_rad[1]),
+             Earth::radToDeg(state.euler_rad[2]),
+         }) {
+      write_value(nav, value);
+    }
+    nav << '\n';
+
+    write_value(stdfile, state.time);
+    for (std::size_t index = 0; index < kErrorStateSize; ++index) {
+      const auto& covariance = covariances[row];
+      const std::size_t diagonal_index = covariance.size() == kErrorStateSize
+                                             ? index
+                                             : index * kErrorStateSize + index;
+      const double variance = diagonal_index < covariance.size() ? covariance[diagonal_index] : 0.0;
+      write_value(stdfile, std::sqrt(std::max(0.0, variance)) * stdOutputScale(index));
+    }
+    stdfile << '\n';
+
+    write_value(imuerr, state.time);
+    for (double value : state.imu_error.gyrbias) {
+      write_value(imuerr, value * R2D * 3600.0);
+    }
+    for (double value : state.imu_error.accbias) {
+      write_value(imuerr, value * 1.0e5);
+    }
+    for (double value : state.imu_error.gyrscale) {
+      write_value(imuerr, value * 1.0e6);
+    }
+    for (double value : state.imu_error.accscale) {
+      write_value(imuerr, value * 1.0e6);
+    }
+    imuerr << '\n';
+  }
+}
+
 // 中文说明：RUN_MANIFEST 记录 R2/R3 运行边界和计数；reference 输出不进入 solver。
 void FileSaver::writeRunManifest(const std::string& output_dir, const PortOptions& options) {
   ensureOutputDir(output_dir);
@@ -275,6 +343,8 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
   out << "{\n"
       << "  \"schema_version\": \"legsa-v23-port-core-run-manifest-v2\",\n"
       << "  \"clean1_formal_mode\": " << (options.clean1_formal_mode ? "true" : "false") << ",\n"
+      << "  \"clean_final_v23_parity_mode\": "
+      << (options.clean_final_v23_parity_mode ? "true" : "false") << ",\n"
       << "  \"stage_id\": \"" << escapeJson(options.stage_id) << "\",\n"
       << "  \"protocol_id\": \"" << escapeJson(options.protocol_id) << "\",\n"
       << "  \"case_id\": \"" << escapeJson(options.case_id) << "\",\n"
@@ -377,6 +447,19 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << "  \"reference_point_compensation_applied\": "
       << (options.reference_point_compensation_applied ? "true" : "false") << ",\n"
       << "  \"algorithm_id\": \"" << escapeJson(options.algorithm_id) << "\",\n"
+      << "  \"measurement_update_order\": \""
+      << (options.enable_basic_dual_yaw_baseline
+              ? "position_then_basic_yaw_then_feedback"
+              : (options.enable_dual_yaw_update
+                     ? (options.clean_final_v23_parity_mode
+                            ? (options.algorithm_id == "LegSA_Paper_V1"
+                                   ? "position_then_yaw_then_receiver_velocity_then_auxiliary_then_feedback"
+                                   : "position_then_yaw_then_receiver_velocity_then_feedback")
+                            : (options.algorithm_id == "LegSA_Paper_V1"
+                                   ? "position_then_receiver_velocity_then_yaw_then_auxiliary_then_feedback"
+                                   : "position_then_receiver_velocity_then_yaw_then_feedback"))
+                     : "position_then_receiver_velocity_then_feedback"))
+      << "\",\n"
       << "  \"ablation_variant\": \"" << escapeJson(options.ablation_variant) << "\",\n"
       << "  \"enable_basic_dual_yaw_baseline\": "
       << (options.enable_basic_dual_yaw_baseline ? "true" : "false") << ",\n"
@@ -828,8 +911,10 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << "  \"position_update_count\": " << options.position_update_count << ",\n"
       << "  \"velocity_update_count\": " << options.velocity_update_count << ",\n"
       << "  \"yaw_update_count\": " << options.yaw_update_count << ",\n"
+      << "  \"dual_yaw_attempt_count\": " << options.yaw_update_count << ",\n"
       << "  \"receiver_velocity_update_count\": " << options.receiver_velocity_update_count << ",\n"
       << "  \"dual_yaw_update_count\": " << options.dual_yaw_update_count << ",\n"
+      << "  \"dual_yaw_accepted_count\": " << options.dual_yaw_update_count << ",\n"
       << "  \"source_aware_evaluation_count\": " << options.source_aware_evaluation_count << ",\n"
       << "  \"source_aware_weight_changed_count\": "
       << options.source_aware_weight_changed_count << ",\n"

@@ -1,0 +1,941 @@
+"""CLEAN1R2R1 fresh auxiliaries, four-method execution, and offline evaluation.
+
+This module deliberately keeps the clean final_v23 15-column IMU/GNSS bundle
+immutable.  The maintained CLEAN1 generator is reused only to materialize the
+source-backed Raw Doppler and Go2 weak-prior auxiliaries.  Its compatibility
+IMU/GNSS products are audit-only and can never be selected by this runner.
+"""
+
+from __future__ import annotations
+
+import csv
+import hashlib
+import json
+import math
+import shutil
+import subprocess
+import sys
+import time
+from dataclasses import replace
+from pathlib import Path
+from typing import Any, Callable, Mapping, Sequence
+
+from .evidence import BY2_TRACE_RELATIVE_PATH, parse_strace_openat_paths
+from .final_v23_clean_parity import (
+    METHOD_FEATURES,
+    active_runtime_config,
+    load_clean_bundle,
+)
+from .formal_generation import generate_formal_clean1_inputs
+from .manifest import git_code_state, sha256_file, write_json_atomic
+from .paths import CleanPaths, guard_path, is_within, load_yaml_mapping
+from .subprocess_guard import run_process_group
+
+
+STAGE_ID = "CLEAN1R2R1_CLEAN_REAL_FINAL_V23_PARITY_AND_FOUR_METHOD_EXECUTION"
+PROTOCOL_ID = "CLEAN_REAL_DATA_FINAL_V23"
+CASE_ID = "CLEAN1_BY2_CLEAN_NORMAL"
+METHOD_ORDER = (
+    "single_antenna_EKF",
+    "basic_dual_yaw_EKF",
+    "strong_dual_yaw_EKF",
+    "LegSA_Paper_V1",
+)
+RUN_DIRECTORIES = (
+    "01_single_antenna_EKF",
+    "02_basic_dual_yaw_EKF",
+    "03_strong_dual_yaw_EKF",
+    "04_LegSA_Paper_V1",
+)
+EVALUATOR_NAV_NAME = "KF_GINS_Navresult.nav"
+EVALUATOR_STD_NAME = "KF_GINS_STD.txt"
+COUNTER_FIELDS = (
+    "position_update_count",
+    "receiver_velocity_update_count",
+    "dual_yaw_attempt_count",
+    "dual_yaw_normal_count",
+    "dual_yaw_downweight_count",
+    "dual_yaw_reject_count",
+    "dual_yaw_accepted_count",
+    "raw_doppler_update_count",
+    "source_aware_evaluation_count",
+    "source_aware_weight_changed_count",
+    "go2_roll_pitch_update_count",
+    "go2_horizontal_velocity_update_count",
+    "fgo_count",
+    "qm_count",
+    "qa_count",
+    "contact_fk_count",
+)
+
+
+class Clean1R2R1FormalError(RuntimeError):
+    """The bounded formal chain failed closed."""
+
+
+def _json(path: str | Path) -> dict[str, Any]:
+    source = Path(path)
+    try:
+        payload = json.loads(source.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise Clean1R2R1FormalError(f"invalid JSON evidence: {source.name}") from exc
+    if not isinstance(payload, dict):
+        raise Clean1R2R1FormalError(f"JSON evidence is not an object: {source.name}")
+    return payload
+
+
+def _canonical_hash(value: Mapping[str, Any]) -> str:
+    encoded = json.dumps(dict(value), sort_keys=True, separators=(",", ":")).encode()
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _is_sha256(value: Any) -> bool:
+    return isinstance(value, str) and len(value) == 64 and all(ch in "0123456789abcdef" for ch in value)
+
+
+def _artifact(root: Path, entry: Mapping[str, Any], role: str) -> Path:
+    relative = entry.get("relative_path")
+    if not isinstance(relative, str) or relative.startswith("/") or ".." in Path(relative).parts:
+        raise Clean1R2R1FormalError(f"unsafe auxiliary artifact path: {role}")
+    candidate = (root / relative).resolve(strict=True)
+    if root.resolve(strict=True) not in candidate.parents or not candidate.is_file():
+        raise Clean1R2R1FormalError(f"auxiliary artifact escaped its root: {role}")
+    return candidate
+
+
+def auxiliary_generation_plan() -> dict[str, Any]:
+    """Return the fixed read/output roles used by the maintained generator."""
+
+    return {
+        "actual_raw_read_roles": (
+            "gnss1_status",
+            "gnss2_status",
+            "gnss1_raw",
+            "go2_body",
+        ),
+        "active_auxiliary_roles": (
+            "raw_doppler_provider",
+            "go2_attitude_prior",
+            "go2_horizontal_velocity_prior",
+        ),
+        "common_solver_base_roles": ("imu_runtime_input", "gnss_runtime_input"),
+        "trace_read_during_generation": False,
+        "compatibility_generated_imu_gnss_solver_eligible": False,
+        "semisynthetic_data_used": False,
+    }
+
+
+def generate_fresh_auxiliaries(
+    paths: CleanPaths,
+    *,
+    clean_input_manifest: str | Path,
+    output_root: str | Path,
+    expected_code_commit: str,
+    provider_protocol: str | Path,
+    rtklib_source_root: str | Path | None = None,
+    materialize_pinned_rtklib: bool = False,
+    timeout_seconds: int = 900,
+    generator: Callable[..., dict[str, Any]] = generate_formal_clean1_inputs,
+) -> dict[str, Any]:
+    """Generate only fresh auxiliaries while retaining the sealed 15-col base."""
+
+    if not _is_sha256(expected_code_commit):
+        raise Clean1R2R1FormalError("expected code-freeze commit is invalid")
+    commit_before, dirty_before = git_code_state(paths.code_root)
+    if dirty_before or commit_before != expected_code_commit:
+        raise Clean1R2R1FormalError("auxiliary generation requires the exact clean code freeze")
+    clean = load_clean_bundle(clean_input_manifest)
+    common_before = {
+        "imu_runtime_input": sha256_file(clean.imu_path),
+        "gnss_runtime_input": sha256_file(clean.gnss_path),
+    }
+    destination = guard_path(
+        output_root,
+        role="CLEAN1R2R1 auxiliary root",
+        allowed_root=paths.clean_root,
+    )
+    if destination.exists():
+        raise Clean1R2R1FormalError("fresh auxiliary root already exists")
+    protocol = load_yaml_mapping(provider_protocol)
+    generation = protocol.get("provider_generation")
+    if not isinstance(generation, Mapping):
+        raise Clean1R2R1FormalError("tracked provider-generation contract is missing")
+    # V1 is a maintained helper compatibility identity only.  Its generated
+    # IMU/GNSS are quarantined below and never become CLEAN1R2R1 solver input.
+    generated = generator(
+        replace(paths, provider_root=destination),
+        expected_code_commit=expected_code_commit,
+        rtklib_source_root=rtklib_source_root,
+        materialize_pinned_rtklib=materialize_pinned_rtklib,
+        timeout_seconds=timeout_seconds,
+        provider_generation=dict(generation),
+        stage_id="CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION",
+        protocol_id="CLEAN1_BY2_CLEAN_NORMAL_V1",
+    )
+    if generated.get("trace_used_online") is not False or generated.get("semisynthetic_data_used") is not False:
+        raise Clean1R2R1FormalError("auxiliary generator reported trace or semisynthetic input")
+    artifacts = generated.get("artifacts")
+    if not isinstance(artifacts, Mapping):
+        raise Clean1R2R1FormalError("maintained auxiliary artifact map is missing")
+    active_roles = auxiliary_generation_plan()["active_auxiliary_roles"]
+    active_paths = {role: _artifact(destination, artifacts[role], role) for role in active_roles}
+    active_hashes = {role: sha256_file(path) for role, path in active_paths.items()}
+    common_after = {
+        "imu_runtime_input": sha256_file(clean.imu_path),
+        "gnss_runtime_input": sha256_file(clean.gnss_path),
+    }
+    if common_before != common_after:
+        raise Clean1R2R1FormalError("sealed clean final_v23 common input changed during auxiliary generation")
+    commit_after, dirty_after = git_code_state(paths.code_root)
+    if dirty_after or commit_after != expected_code_commit:
+        raise Clean1R2R1FormalError("code state changed during auxiliary generation")
+    raw = generated.get("raw_doppler_backend")
+    if not isinstance(raw, Mapping) or raw.get("raw_doppler_backend_lineage_proven") is not True:
+        raise Clean1R2R1FormalError("fresh Raw Doppler backend lineage is not proven")
+    actual_reads = generated.get("actual_source_read_set")
+    if not isinstance(actual_reads, list) or len(actual_reads) != 4:
+        raise Clean1R2R1FormalError("auxiliary actual raw read set is not the fixed four-source set")
+    if any("trace" in str(row.get("relative_path", "")).casefold() for row in actual_reads if isinstance(row, Mapping)):
+        raise Clean1R2R1FormalError("trace entered fresh auxiliary generation")
+    payload = {
+        "schema_version": "paper_rebuild.clean1r2r1_auxiliary_bundle.v1",
+        "stage_id": STAGE_ID,
+        "protocol_id": PROTOCOL_ID,
+        "case_id": CASE_ID,
+        "data_mode": "real_by2_raw",
+        "code_freeze_commit": expected_code_commit,
+        "clean_input_manifest_path": str(clean.manifest_path),
+        "clean_input_manifest_sha256": sha256_file(clean.manifest_path),
+        "common_solver_base": {
+            "imu_runtime_input": {"path": str(clean.imu_path), "sha256": common_after["imu_runtime_input"]},
+            "gnss_runtime_input": {"path": str(clean.gnss_path), "sha256": common_after["gnss_runtime_input"], "columns": 15},
+        },
+        "auxiliary_artifacts": {
+            role: {"path": str(path), "sha256": active_hashes[role]}
+            for role, path in active_paths.items()
+        },
+        "raw_source_hashes": generated.get("raw_source_hashes"),
+        "actual_source_read_set": actual_reads,
+        "raw_doppler_backend": dict(raw),
+        "compatibility_helper_identity": "maintained_CLEAN1_V1_auxiliary_generator",
+        "compatibility_generated_imu_gnss": {
+            "solver_eligible": False,
+            "reason": "CLEAN1R2R1 uses sealed FINAL_V23_CLEAN_FRESH 15-column common base",
+        },
+        "trace_open_count": None,
+        "trace_open_audit_sealed": False,
+        "trace_used_online": False,
+        "trace_read_during_generation": False,
+        "synthetic_data_used": False,
+        "semisynthetic_data_used": False,
+        "legacy_input_payload_used": False,
+        "receiver_imu_as_body_imu": False,
+        "final_v23_output_solver_input": False,
+        "LegSA_output_solver_input": False,
+        "old_runtime_input_count": 0,
+        "plan": auxiliary_generation_plan(),
+    }
+    payload["bundle_hash"] = _canonical_hash(
+        {**common_after, **active_hashes, "raw_doppler_backend": _canonical_hash(dict(raw))}
+    )
+    manifest_path = write_json_atomic(destination / "CLEAN1R2R1_AUXILIARY_MANIFEST.json", payload)
+    with (destination / "CLEAN1R2R1_AUXILIARY_SOURCE_LEDGER.csv").open(
+        "x", encoding="utf-8", newline=""
+    ) as handle:
+        fields = ["read_order", "relative_path", "role", "expected_sha256", "trace_source"]
+        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer.writeheader()
+        for index, row in enumerate(actual_reads, start=1):
+            writer.writerow({
+                "read_order": index,
+                "relative_path": row["relative_path"],
+                "role": row["role"],
+                "expected_sha256": row["expected_sha256"],
+                "trace_source": False,
+            })
+    payload["manifest_path"] = str(manifest_path)
+    return payload
+
+
+def seal_auxiliary_file_open_audit(
+    *,
+    auxiliary_manifest: str | Path,
+    strace_path: str | Path,
+    raw_root: str | Path,
+    code_root: str | Path,
+) -> dict[str, Any]:
+    """Close actual raw opens after the generator process exits under strace."""
+
+    manifest_path = Path(auxiliary_manifest).resolve(strict=True)
+    payload = _json(manifest_path)
+    if payload.get("trace_open_audit_sealed") is not False or payload.get("trace_open_count") is not None:
+        raise Clean1R2R1FormalError("auxiliary file-open audit was already sealed")
+    raw = Path(raw_root).resolve(strict=True)
+    opened = parse_strace_openat_paths(strace_path, cwd=code_root)
+    raw_opened = [path for path in opened if is_within(path, raw)]
+    actual_reads = payload.get("actual_source_read_set")
+    if not isinstance(actual_reads, list):
+        raise Clean1R2R1FormalError("auxiliary actual source ledger is missing")
+    expected = {
+        str(row["relative_path"]): (raw / str(row["relative_path"])).resolve(strict=True)
+        for row in actual_reads
+        if isinstance(row, Mapping)
+    }
+    counts = {
+        relative: sum(path == source for path in raw_opened)
+        for relative, source in expected.items()
+    }
+    unexpected = sorted(
+        path.relative_to(raw).as_posix()
+        for path in set(raw_opened)
+        if path not in set(expected.values())
+    )
+    trace_path = (raw / BY2_TRACE_RELATIVE_PATH).resolve(strict=True)
+    trace_count = sum(path == trace_path for path in raw_opened)
+    missing = sorted(relative for relative, count in counts.items() if count == 0)
+    audit = {
+        "schema_version": "paper_rebuild.clean1r2r1_auxiliary_file_open_audit.v1",
+        "strace_sha256": sha256_file(strace_path),
+        "expected_raw_open_counts": counts,
+        "missing_expected_raw_opens": missing,
+        "unexpected_raw_root_relative_paths": unexpected,
+        "trace_open_count": trace_count,
+        "trace_opened_by_auxiliary_generator": trace_count > 0,
+        "passed": not missing and not unexpected and trace_count == 0,
+    }
+    if not audit["passed"]:
+        raise Clean1R2R1FormalError("auxiliary generator file-open audit failed")
+    audit_path = write_json_atomic(manifest_path.parent / "CLEAN1R2R1_AUXILIARY_FILE_OPEN_AUDIT.json", audit)
+    payload["trace_open_count"] = 0
+    payload["trace_open_audit_sealed"] = True
+    payload["file_open_audit_sha256"] = sha256_file(audit_path)
+    payload["file_open_trace_sha256"] = sha256_file(strace_path)
+    write_json_atomic(manifest_path, payload)
+    return audit
+
+
+def validate_auxiliary_bundle(path: str | Path) -> dict[str, Any]:
+    payload = _json(path)
+    expected = {
+        "schema_version": "paper_rebuild.clean1r2r1_auxiliary_bundle.v1",
+        "stage_id": STAGE_ID,
+        "protocol_id": PROTOCOL_ID,
+        "case_id": CASE_ID,
+        "data_mode": "real_by2_raw",
+        "trace_open_count": 0,
+        "trace_open_audit_sealed": True,
+        "trace_used_online": False,
+        "trace_read_during_generation": False,
+        "synthetic_data_used": False,
+        "semisynthetic_data_used": False,
+        "legacy_input_payload_used": False,
+        "receiver_imu_as_body_imu": False,
+        "final_v23_output_solver_input": False,
+        "LegSA_output_solver_input": False,
+        "old_runtime_input_count": 0,
+    }
+    if any(payload.get(key) != value for key, value in expected.items()):
+        raise Clean1R2R1FormalError("auxiliary evidence boundary mismatch")
+    audit_path = Path(path).resolve(strict=True).parent / "CLEAN1R2R1_AUXILIARY_FILE_OPEN_AUDIT.json"
+    if not audit_path.is_file() or sha256_file(audit_path) != payload.get("file_open_audit_sha256"):
+        raise Clean1R2R1FormalError("auxiliary file-open audit is missing or changed")
+    for section, roles in (
+        ("common_solver_base", ("imu_runtime_input", "gnss_runtime_input")),
+        ("auxiliary_artifacts", auxiliary_generation_plan()["active_auxiliary_roles"]),
+    ):
+        entries = payload.get(section)
+        if not isinstance(entries, Mapping) or set(entries) != set(roles):
+            raise Clean1R2R1FormalError(f"auxiliary manifest {section} role mismatch")
+        for role in roles:
+            entry = entries[role]
+            source = Path(str(entry.get("path", ""))).resolve(strict=True)
+            if sha256_file(source) != entry.get("sha256"):
+                raise Clean1R2R1FormalError(f"auxiliary/common artifact changed: {role}")
+    if payload["common_solver_base"]["gnss_runtime_input"].get("columns") != 15:
+        raise Clean1R2R1FormalError("formal common GNSS is not the sealed 15-column input")
+    return payload
+
+
+def _solver_extra_config(auxiliary: Mapping[str, Any], solver_common: Mapping[str, Any]) -> dict[str, Any]:
+    raw = auxiliary["raw_doppler_backend"]
+    config: dict[str, Any] = {
+        "raw_doppler_factor_source": raw["raw_doppler_backend_id"],
+        "raw_doppler_backend_id": raw["raw_doppler_backend_id"],
+        "raw_doppler_backend_source_files": json.dumps(raw["raw_doppler_backend_source_files"], sort_keys=True),
+        "raw_doppler_backend_source_hashes": json.dumps(raw["raw_doppler_backend_source_hashes"], sort_keys=True),
+        "helper_executable_hash": raw["helper_executable_hash"],
+        "obs_source_hash": raw["obs_source_hash"],
+        "nav_source_hash": raw["nav_source_hash"],
+        "conversion_config_hash": raw["conversion_config_hash"],
+        "covariance_policy": raw["covariance_policy"],
+        "raw_doppler_min_sat": int(solver_common["raw_doppler_min_sat"]),
+        "raw_doppler_mode": solver_common["raw_doppler_mode"],
+        "raw_doppler_time_tolerance_sec": solver_common["raw_doppler_time_tolerance_seconds"],
+        "raw_doppler_residual_gate_mps": solver_common["raw_doppler_residual_gate_mps"],
+        "raw_doppler_R_scale": solver_common["raw_doppler_R_scale"],
+        "rtklib_position_solution_used_as_solver_input": False,
+        "nav_pvt_velocity_used_as_raw_doppler": False,
+        "gnss_velocity_used_as_raw_doppler": False,
+        "source_aware_policy_version": solver_common["source_aware_policy"],
+        "source_aware_mode": solver_common["source_aware_mode"],
+        "go2_attitude_prior_std_roll_deg": solver_common["go2_roll_pitch_std_deg"],
+        "go2_attitude_prior_std_pitch_deg": solver_common["go2_roll_pitch_std_deg"],
+        "go2_attitude_prior_time_tolerance_sec": solver_common["go2_roll_pitch_time_tolerance_seconds"],
+        "go2_attitude_prior_sourceaware": solver_common["go2_attitude_prior_source_aware_enabled"],
+        "go2_velocity_prior_time_tolerance_sec": solver_common["go2_horizontal_velocity_time_tolerance_seconds"],
+        "go2_horizontal_velocity_prior_std_scale": solver_common["go2_horizontal_velocity_std_scale"],
+        "go2_horizontal_velocity_prior_source_aware_enabled": solver_common["go2_horizontal_velocity_source_aware_enabled"],
+        "go2_horizontal_velocity_adaptive_std_enabled": solver_common["go2_horizontal_velocity_adaptive_std_enabled"],
+        "go2_position_prior_enabled": False,
+        "go2_velocity_prior_enabled": False,
+        "go2_yaw_prior_enabled": False,
+        "go2_vertical_velocity_prior_enabled": False,
+    }
+    direct = (
+        "source_aware_max_R_scale", "source_aware_global_cap",
+        "source_aware_use_innovation_covariance", "source_aware_deadband_normalized",
+        "source_aware_moderate_normalized", "source_aware_strong_normalized",
+        "source_aware_receiver_position_cap", "source_aware_receiver_velocity_cap",
+        "source_aware_dual_yaw_cap", "source_aware_raw_doppler_cap",
+        "source_aware_go2_attitude_cap", "source_aware_go2_horizontal_velocity_cap",
+        "source_aware_reject_extreme", "source_aware_no_R_shrink",
+        "source_aware_trace_enabled", "source_aware_enable_rolling_innovation_baseline",
+        "source_aware_rolling_window_size", "source_aware_rolling_mad_floor",
+        "source_aware_method_family", "source_aware_method_k0", "source_aware_method_k1",
+        "source_aware_method_c", "source_aware_method_alpha", "source_aware_method_phi",
+        "source_aware_method_base_gain",
+    )
+    for field in direct:
+        config[field] = solver_common[field]
+    sources = solver_common.get("source_aware_sources")
+    if not isinstance(sources, Mapping):
+        raise Clean1R2R1FormalError("source-aware per-source contract is missing")
+    for source, source_config in sources.items():
+        if not isinstance(source_config, Mapping):
+            raise Clean1R2R1FormalError("source-aware per-source contract is invalid")
+        for field in ("enabled", "lsim_enabled", "oim_enabled"):
+            config[f"source_aware_{source}_{field}"] = source_config[field]
+    return config
+
+
+def normalize_runtime_config(text: str) -> str:
+    """Remove only run/output identity for strong-vs-parity contract comparison."""
+
+    ignored = {"outputpath", "run_id", "run_label"}
+    rows = []
+    for line in text.splitlines():
+        if not line.strip() or line.lstrip().startswith("#") or ":" not in line:
+            continue
+        key = line.split(":", 1)[0].strip()
+        if key not in ignored:
+            rows.append(line.strip())
+    return "\n".join(sorted(rows)) + "\n"
+
+
+def module_counters(manifest: Mapping[str, Any]) -> dict[str, int]:
+    def number(field: str) -> int:
+        value = manifest.get(field, 0)
+        if isinstance(value, bool):
+            raise Clean1R2R1FormalError(f"invalid boolean module counter: {field}")
+        try:
+            result = int(value)
+        except (TypeError, ValueError) as exc:
+            raise Clean1R2R1FormalError(f"invalid module counter: {field}") from exc
+        if result < 0:
+            raise Clean1R2R1FormalError(f"negative module counter: {field}")
+        return result
+
+    normal = number("yaw_NORMAL")
+    downweight = number("yaw_DOWNWEIGHT")
+    reject = number("yaw_REJECT")
+    attempt = number("dual_yaw_attempt_count") if "dual_yaw_attempt_count" in manifest else number("yaw_update_count")
+    accepted = number("dual_yaw_accepted_count") if "dual_yaw_accepted_count" in manifest else number("dual_yaw_update_count")
+    if attempt != normal + downweight + reject:
+        raise Clean1R2R1FormalError("dual-yaw action counts do not close")
+    if accepted != normal + downweight:
+        raise Clean1R2R1FormalError("dual-yaw accepted count does not close")
+    counters = {
+        "position_update_count": number("position_update_count"),
+        "receiver_velocity_update_count": number("receiver_velocity_update_count"),
+        "dual_yaw_attempt_count": attempt,
+        "dual_yaw_normal_count": normal,
+        "dual_yaw_downweight_count": downweight,
+        "dual_yaw_reject_count": reject,
+        "dual_yaw_accepted_count": accepted,
+        "raw_doppler_update_count": number("raw_doppler_update_count"),
+        "source_aware_evaluation_count": number("source_aware_evaluation_count"),
+        "source_aware_weight_changed_count": number("source_aware_weight_changed_count"),
+        "go2_roll_pitch_update_count": number("go2_roll_pitch_update_count"),
+        "go2_horizontal_velocity_update_count": number("go2_horizontal_velocity_update_count"),
+        "fgo_count": number("selected_fgo_feedback_update_count") + number("nine_factor_fgo_update_count"),
+        "qm_count": number("multi_state_qm_update_count"),
+        "qa_count": number("qa_fallback_count"),
+        "contact_fk_count": number("contact_fk_update_count"),
+    }
+    if set(counters) != set(COUNTER_FIELDS):
+        raise AssertionError("internal counter registry drift")
+    return counters
+
+
+def _validate_run_manifest(manifest: Mapping[str, Any], method_id: str, run_id: str) -> dict[str, int]:
+    expected = METHOD_FEATURES[method_id]
+    feature_values = {
+        "dual": manifest.get("enable_dual_yaw_update"),
+        "receiver": manifest.get("enable_receiver_velocity_update"),
+        "raw": manifest.get("enable_raw_doppler"),
+        "source_aware": manifest.get("source_aware_weighting_enabled"),
+        "go2_roll_pitch": manifest.get("go2_attitude_weak_prior_enabled"),
+        "go2_horizontal": manifest.get("go2_horizontal_velocity_prior_enabled"),
+    }
+    fixed = {
+        "clean_final_v23_parity_mode": True,
+        "stage_id": STAGE_ID,
+        "protocol_id": PROTOCOL_ID,
+        "case_id": CASE_ID,
+        "data_mode": "real_by2_raw",
+        "algorithm_id": method_id,
+        "run_id": run_id,
+        "trace_used_online": False,
+        "synthetic_data_used": False,
+        "semisynthetic_data_used": False,
+        "final_v23_output_solver_input": False,
+        "LegSA_output_solver_input": False,
+        "per_case_tuning": False,
+        "output_only_correction": False,
+        "epoch_deleted_for_metric": False,
+        "old_runtime_input_count": 0,
+    }
+    if feature_values != expected or any(manifest.get(key) != value for key, value in fixed.items()):
+        raise Clean1R2R1FormalError(f"formal solver manifest mismatch: {method_id}")
+    counters = module_counters(manifest)
+    if method_id != "LegSA_Paper_V1" and any(counters[field] != 0 for field in (
+        "raw_doppler_update_count", "source_aware_evaluation_count",
+        "source_aware_weight_changed_count", "go2_roll_pitch_update_count",
+        "go2_horizontal_velocity_update_count",
+    )):
+        raise Clean1R2R1FormalError("proposed-module counter is nonzero outside LegSA")
+    if method_id == "LegSA_Paper_V1" and any(counters[field] <= 0 for field in (
+        "raw_doppler_update_count", "source_aware_evaluation_count",
+        "go2_roll_pitch_update_count", "go2_horizontal_velocity_update_count",
+    )):
+        raise Clean1R2R1FormalError("LegSA proposed modules were not effectively activated")
+    if any(counters[field] != 0 for field in ("fgo_count", "qm_count", "qa_count", "contact_fk_count")):
+        raise Clean1R2R1FormalError("out-of-scope module counter is nonzero")
+    return counters
+
+
+def _assert_parity_gate(report: Mapping[str, Any]) -> None:
+    if (
+        report.get("active_port_clean_final_v23_parity") is not True
+        or report.get("strong_equals_clean_final_v23") is not True
+        or report.get("terminal_status") != "PASS_FINAL_V23_CLEAN_PARITY_ANCHOR"
+        or report.get("trace_opened") is not False
+    ):
+        raise Clean1R2R1FormalError("four methods are forbidden before clean final_v23 parity passes")
+
+
+def run_four_methods(
+    *,
+    repo_root: str | Path,
+    executable: str | Path,
+    clean_input_manifest: str | Path,
+    auxiliary_manifest: str | Path,
+    parity_report: str | Path,
+    parity_active_config: str | Path,
+    provider_protocol: str | Path,
+    runtime_root: str | Path,
+    code_freeze_commit: str,
+    timeout_seconds: int = 1800,
+    command_runner: Callable[..., Any] = run_process_group,
+) -> dict[str, Any]:
+    """Run exactly four separate processes and seal every output before return."""
+
+    if not _is_sha256(code_freeze_commit):
+        raise Clean1R2R1FormalError("code-freeze commit is invalid")
+    repo = Path(repo_root).resolve(strict=True)
+    commit_before, dirty_before = git_code_state(repo)
+    if dirty_before or commit_before != code_freeze_commit:
+        raise Clean1R2R1FormalError("four methods require the exact clean code freeze")
+    binary = Path(executable).resolve(strict=True)
+    clean = load_clean_bundle(clean_input_manifest)
+    auxiliary = validate_auxiliary_bundle(auxiliary_manifest)
+    parity = _json(parity_report)
+    _assert_parity_gate(parity)
+    if parity.get("active_code_commit") != code_freeze_commit:
+        raise Clean1R2R1FormalError("passing parity report is not bound to the code freeze")
+    if parity.get("active_executable_sha256") != sha256_file(binary):
+        raise Clean1R2R1FormalError("formal executable differs from the passing parity executable")
+    if parity.get("same_fresh_imu_sha256") != sha256_file(clean.imu_path) or parity.get("same_fresh_gnss_sha256") != sha256_file(clean.gnss_path):
+        raise Clean1R2R1FormalError("formal common base differs from the passing parity anchor")
+    if auxiliary.get("code_freeze_commit") != code_freeze_commit:
+        raise Clean1R2R1FormalError("auxiliaries were not generated at the code freeze")
+    common = auxiliary["common_solver_base"]
+    if common["imu_runtime_input"]["sha256"] != sha256_file(clean.imu_path) or common["gnss_runtime_input"]["sha256"] != sha256_file(clean.gnss_path):
+        raise Clean1R2R1FormalError("auxiliary bundle common base differs from the parity input")
+    protocol = load_yaml_mapping(provider_protocol)
+    solver_common = protocol.get("solver_common")
+    if not isinstance(solver_common, Mapping):
+        raise Clean1R2R1FormalError("tracked solver-common auxiliary contract is missing")
+    root = Path(runtime_root)
+    if root.exists():
+        raise Clean1R2R1FormalError("fresh four-method runtime root already exists")
+    root.mkdir(parents=True)
+    extra = _solver_extra_config(auxiliary, solver_common)
+    aux_paths = {
+        "raw_doppler": auxiliary["auxiliary_artifacts"]["raw_doppler_provider"]["path"],
+        "go2_roll_pitch": auxiliary["auxiliary_artifacts"]["go2_attitude_prior"]["path"],
+        "go2_horizontal_velocity": auxiliary["auxiliary_artifacts"]["go2_horizontal_velocity_prior"]["path"],
+    }
+    parity_config_text = Path(parity_active_config).resolve(strict=True).read_text(encoding="utf-8")
+    index_rows: list[dict[str, Any]] = []
+    hash_rows: list[dict[str, Any]] = []
+    strong_counters: dict[str, int] | None = None
+    for order, (method_id, directory) in enumerate(zip(METHOD_ORDER, RUN_DIRECTORIES), start=1):
+        output = root / directory
+        output.mkdir()
+        config = output / "CLEAN1R2R1_RUNTIME_CONFIG.yaml"
+        config_text = active_runtime_config(
+            clean.imu_path,
+            clean.gnss_path,
+            output,
+            method_id=method_id,
+            auxiliary_paths=aux_paths if method_id == "LegSA_Paper_V1" else {},
+            extra_config=extra if method_id == "LegSA_Paper_V1" else {},
+            run_id=directory,
+        )
+        config.write_text(config_text, encoding="utf-8")
+        if method_id == "strong_dual_yaw_EKF" and normalize_runtime_config(config_text) != normalize_runtime_config(parity_config_text):
+            raise Clean1R2R1FormalError("strong runtime contract differs from the passing active parity config")
+        logs = output / "logs"
+        logs.mkdir()
+        command = [
+            str(binary), "--config", str(config), "--output-dir", str(output),
+            "--debug-update-timeline", "--debug-output-dir", str(output),
+            "--debug-max-rows", "1000000",
+        ]
+        started = time.monotonic()
+        completed = command_runner(
+            command,
+            cwd=repo,
+            timeout_seconds=timeout_seconds,
+            timeout_message="four-method solver timeout; process group terminated",
+            launch_failure_message="four-method solver launch failure",
+        )
+        (logs / "stdout.txt").write_text(completed.stdout, encoding="utf-8")
+        (logs / "stderr.txt").write_text(completed.stderr, encoding="utf-8")
+        if completed.returncode != 0:
+            raise Clean1R2R1FormalError(f"BLOCKED_CLEAN1R2R1_FOUR_METHOD_EXECUTION_FAILED: {method_id} returncode={completed.returncode}")
+        solver_manifest_path = output / "RUN_MANIFEST.json"
+        nav = output / EVALUATOR_NAV_NAME
+        std = output / EVALUATOR_STD_NAME
+        update_trace = output / "PORT_GNSS_UPDATE_TRACE.csv"
+        if not all(path.is_file() for path in (solver_manifest_path, nav, std, update_trace)):
+            raise Clean1R2R1FormalError(f"formal evaluator-compatible output set incomplete: {method_id}")
+        solver_manifest = _json(solver_manifest_path)
+        counters = _validate_run_manifest(solver_manifest, method_id, directory)
+        if method_id == "strong_dual_yaw_EKF":
+            expected = parity.get("counter_audit", {}).get("active")
+            if not isinstance(expected, Mapping):
+                raise Clean1R2R1FormalError("passing parity report lacks strong counters")
+            comparison = {
+                field: counters[field]
+                for field in (
+                    "position_update_count", "receiver_velocity_update_count",
+                    "dual_yaw_attempt_count", "dual_yaw_normal_count",
+                    "dual_yaw_downweight_count", "dual_yaw_reject_count",
+                    "dual_yaw_accepted_count",
+                )
+            }
+            if comparison != {field: int(expected[field]) for field in comparison}:
+                raise Clean1R2R1FormalError("strong counters differ from clean final_v23 parity anchor")
+            strong_counters = counters
+        wrapper = {
+            "schema_version": "paper_rebuild.clean1r2r1_formal_run.v1",
+            "stage_id": STAGE_ID,
+            "protocol_id": PROTOCOL_ID,
+            "case_id": CASE_ID,
+            "data_mode": "real_by2_raw",
+            "method_order": order,
+            "algorithm_id": method_id,
+            "run_id": directory,
+            "code_freeze_commit": code_freeze_commit,
+            "executable_sha256": sha256_file(binary),
+            "clean_input_manifest_sha256": sha256_file(clean.manifest_path),
+            "common_imu_sha256": sha256_file(clean.imu_path),
+            "common_gnss_sha256": sha256_file(clean.gnss_path),
+            "runtime_config_sha256": sha256_file(config),
+            "solver_manifest_sha256": sha256_file(solver_manifest_path),
+            "module_counters": counters,
+            "runtime_seconds": time.monotonic() - started,
+            "trace_used_online": False,
+            "legacy_solver_input": False,
+            "terminal_success": True,
+        }
+        wrapper_path = write_json_atomic(output / "CLEAN1R2R1_FORMAL_RUN_MANIFEST.json", wrapper)
+        index_rows.append({
+            "method_order": order, "algorithm_id": method_id, "run_id": directory,
+            "returncode": completed.returncode, "terminal_success": True,
+            "formal_manifest_sha256": sha256_file(wrapper_path),
+        })
+        for role, path in (
+            ("nav", nav), ("std", std), ("solver_manifest", solver_manifest_path),
+            ("formal_manifest", wrapper_path), ("runtime_config", config), ("update_trace", update_trace),
+        ):
+            hash_rows.append({
+                "method_order": order, "algorithm_id": method_id, "output_role": role,
+                "relative_path": path.relative_to(root).as_posix(),
+                "sha256": sha256_file(path), "frozen_before_any_evaluation": True,
+            })
+    if strong_counters is None:
+        raise Clean1R2R1FormalError("strong method did not run")
+    commit_after, dirty_after = git_code_state(repo)
+    if dirty_after or commit_after != code_freeze_commit:
+        raise Clean1R2R1FormalError("code state changed during four-method execution")
+    with (root / "FOUR_METHOD_RUN_INDEX.csv").open("x", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(index_rows[0]))
+        writer.writeheader(); writer.writerows(index_rows)
+    with (root / "FOUR_METHOD_OUTPUT_HASHES.csv").open("x", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(hash_rows[0]))
+        writer.writeheader(); writer.writerows(hash_rows)
+    report = {
+        "schema_version": "paper_rebuild.clean1r2r1_four_method_execution.v1",
+        "stage_id": STAGE_ID,
+        "method_order": list(METHOD_ORDER),
+        "formal_method_count": 4,
+        "formal_run_count": 4,
+        "all_runs_terminal_pass": True,
+        "same_executable": True,
+        "same_common_imu": True,
+        "same_common_gnss_15col": True,
+        "strong_equals_clean_final_v23": True,
+        "all_outputs_sealed_before_evaluation": True,
+        "trace_opened": False,
+        "trace_used_online": False,
+        "module_counters_match": True,
+        "strong_module_counters": strong_counters,
+        "terminal_status": "READY_FOR_EXACT_ARCHIVED_OFFLINE_EVALUATION",
+    }
+    write_json_atomic(root / "FOUR_METHOD_EXECUTION_REPORT.json", report)
+    return report
+
+
+def validate_four_method_seal(runtime_root: str | Path) -> list[dict[str, str]]:
+    root = Path(runtime_root).resolve(strict=True)
+    seal = root / "FOUR_METHOD_OUTPUT_HASHES.csv"
+    report = _json(root / "FOUR_METHOD_EXECUTION_REPORT.json")
+    if report.get("all_outputs_sealed_before_evaluation") is not True or report.get("trace_opened") is not False:
+        raise Clean1R2R1FormalError("four-method outputs were not sealed before evaluation")
+    with seal.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    if len(rows) != 4 * 6 or [row["algorithm_id"] for row in rows[::6]] != list(METHOD_ORDER):
+        raise Clean1R2R1FormalError("four-method output seal is incomplete or out of order")
+    for row in rows:
+        path = (root / row["relative_path"]).resolve(strict=True)
+        if root not in path.parents or sha256_file(path) != row["sha256"]:
+            raise Clean1R2R1FormalError("sealed formal output changed before evaluation")
+        if row.get("frozen_before_any_evaluation") != "True":
+            raise Clean1R2R1FormalError("formal output was not marked frozen before evaluation")
+    return rows
+
+
+def _run_exact_evaluator(
+    evaluator: Path, trace: Path, nav: Path, std: Path, outdir: Path,
+    *, base_time: float, timeout_seconds: int,
+) -> None:
+    command = [
+        sys.executable, str(evaluator), "--trace", str(trace), "--nav", str(nav),
+        "--std", str(std), "--outdir", str(outdir), "--base_time", str(base_time),
+        "--yaw_truth_mode", "enu",
+    ]
+    completed = subprocess.run(
+        command, check=False, capture_output=True, text=True, timeout=timeout_seconds,
+        start_new_session=True,
+    )
+    outdir.mkdir(parents=True, exist_ok=True)
+    (outdir / "evaluator.stdout.txt").write_text(completed.stdout, encoding="utf-8")
+    (outdir / "evaluator.stderr.txt").write_text(completed.stderr, encoding="utf-8")
+    if completed.returncode != 0 or not (outdir / "summary.json").is_file() or not (outdir / "error_series.csv").is_file():
+        raise Clean1R2R1FormalError("exact archived evaluator failed")
+
+
+def _rmse(values: Sequence[float]) -> float:
+    return math.sqrt(sum(value * value for value in values) / len(values))
+
+
+def _nav_row_count(path: Path) -> int:
+    count = 0
+    for line in path.read_text(encoding="utf-8", errors="strict").splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith(("#", "%")):
+            continue
+        try:
+            [float(value) for value in stripped.replace(",", " ").split()]
+        except ValueError:
+            continue
+        count += 1
+    return count
+
+
+def _crosscheck_error_series(path: Path, summary: Mapping[str, Any]) -> dict[str, Any]:
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    if not rows:
+        raise Clean1R2R1FormalError("exact evaluator returned no row errors")
+    mapping = {
+        "north_rmse_m": ("position", "north_rmse_m", "err_n_m"),
+        "east_rmse_m": ("position", "east_rmse_m", "err_e_m"),
+        "up_rmse_m": ("position", "up_rmse_m", "err_u_m"),
+        "horizontal_rmse_m": ("position", "horizontal_rmse_m", "horizontal_err_m"),
+        "roll_rmse_deg": ("attitude", "roll_rmse_deg", "roll_err_deg"),
+        "pitch_rmse_deg": ("attitude", "pitch_rmse_deg", "pitch_err_deg"),
+        "yaw_rmse_deg": ("attitude", "yaw_rmse_deg", "yaw_err_deg"),
+    }
+    checks: dict[str, Any] = {}
+    passed = True
+    for name, (section, field, column) in mapping.items():
+        computed = _rmse([float(row[column]) for row in rows])
+        reported = float(summary[section][field])
+        difference = abs(computed - reported)
+        check = {"computed": computed, "reported": reported, "absolute_difference": difference, "passed": difference <= 1.0e-10}
+        checks[name] = check
+        passed = passed and check["passed"]
+    return {"row_count": len(rows), "checks": checks, "passed": passed}
+
+
+def evaluate_four_methods_offline(
+    *,
+    runtime_root: str | Path,
+    exact_evaluator: str | Path,
+    evaluator_sha256: str,
+    trace: str | Path,
+    trace_sha256: str,
+    exact_nav: str | Path,
+    exact_std: str | Path,
+    output_root: str | Path,
+    base_time: float = 1772784000.0,
+    timeout_seconds: int = 900,
+) -> dict[str, Any]:
+    """Open trace only after all four current outputs are hash-sealed."""
+
+    sealed = validate_four_method_seal(runtime_root)
+    runtime = Path(runtime_root).resolve(strict=True)
+    evaluator = Path(exact_evaluator).resolve(strict=True)
+    reference = Path(trace).resolve(strict=True)
+    if sha256_file(evaluator) != evaluator_sha256 or sha256_file(reference) != trace_sha256:
+        raise Clean1R2R1FormalError("exact evaluator or offline trace hash mismatch")
+    destination = Path(output_root)
+    if destination.exists():
+        raise Clean1R2R1FormalError("fresh offline evaluation root already exists")
+    destination.mkdir(parents=True)
+    summary_rows: list[dict[str, Any]] = []
+    combined_errors: list[dict[str, Any]] = []
+    crosschecks: dict[str, Any] = {}
+    targets = [("exact_clean_final_v23", Path(exact_nav).resolve(strict=True), Path(exact_std).resolve(strict=True))]
+    for method, directory in zip(METHOD_ORDER, RUN_DIRECTORIES):
+        targets.append((method, runtime / directory / EVALUATOR_NAV_NAME, runtime / directory / EVALUATOR_STD_NAME))
+    summaries: dict[str, Any] = {}
+    formal_wrappers: dict[str, Any] = {}
+    for method, nav, std in targets:
+        method_root = destination / ("00_exact_clean_final_v23" if method == "exact_clean_final_v23" else RUN_DIRECTORIES[METHOD_ORDER.index(method)])
+        _run_exact_evaluator(evaluator, reference, nav, std, method_root, base_time=base_time, timeout_seconds=timeout_seconds)
+        summary = _json(method_root / "summary.json")
+        summaries[method] = summary
+        crosschecks[method] = _crosscheck_error_series(method_root / "error_series.csv", summary)
+        if not crosschecks[method]["passed"]:
+            raise Clean1R2R1FormalError("aggregate crosscheck failed")
+        if method != "exact_clean_final_v23":
+            wrapper = _json(runtime / RUN_DIRECTORIES[METHOD_ORDER.index(method)] / "CLEAN1R2R1_FORMAL_RUN_MANIFEST.json")
+            formal_wrappers[method] = wrapper
+            with (method_root / "error_series.csv").open("r", encoding="utf-8-sig", newline="") as handle:
+                combined_errors.extend({"algorithm_id": method, **row} for row in csv.DictReader(handle))
+            meta = summary["meta"]
+            output_count = _nav_row_count(nav)
+            matched_count = int(meta["num_samples"])
+            summary_rows.append({
+                "method_order": METHOD_ORDER.index(method) + 1,
+                "algorithm_id": method,
+                "terminal_success": wrapper.get("terminal_success"),
+                "output_epoch_count": output_count,
+                "matched_epoch_count": matched_count,
+                "unmatched_epoch_count": output_count - matched_count,
+                "coverage_ratio": matched_count / output_count if output_count else 0.0,
+                "time_start": meta["time_start"], "time_end": meta["time_end"],
+                "horizontal_rmse_m": summary["position"]["horizontal_rmse_m"],
+                "up_rmse_m": summary["position"]["up_rmse_m"],
+                "roll_rmse_deg": summary["attitude"]["roll_rmse_deg"],
+                "pitch_rmse_deg": summary["attitude"]["pitch_rmse_deg"],
+                "yaw_rmse_deg": summary["attitude"]["yaw_rmse_deg"],
+                "module_counters_json": json.dumps(wrapper["module_counters"], sort_keys=True),
+            })
+    with (destination / "FOUR_METHOD_SUMMARY.csv").open("x", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(summary_rows[0])); writer.writeheader(); writer.writerows(summary_rows)
+    with (destination / "MATCH_COVERAGE.csv").open("x", encoding="utf-8", newline="") as handle:
+        fields = ["method_order", "algorithm_id", "output_epoch_count", "matched_epoch_count",
+                  "unmatched_epoch_count", "coverage_ratio", "time_start", "time_end", "coverage_role"]
+        writer = csv.DictWriter(handle, fieldnames=fields); writer.writeheader()
+        for row in summary_rows:
+            writer.writerow({"method_order": row["method_order"], "algorithm_id": row["algorithm_id"],
+                             "output_epoch_count": row["output_epoch_count"],
+                             "matched_epoch_count": row["matched_epoch_count"],
+                             "unmatched_epoch_count": row["unmatched_epoch_count"],
+                             "coverage_ratio": row["coverage_ratio"],
+                             "time_start": row["time_start"], "time_end": row["time_end"],
+                             "coverage_role": "exact_archived_evaluator_overlap"})
+    with (destination / "ROW_LEVEL_ERRORS.csv").open("x", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(combined_errors[0])); writer.writeheader(); writer.writerows(combined_errors)
+    strong = summaries["strong_dual_yaw_EKF"]
+    exact = summaries["exact_clean_final_v23"]
+    comparison_rows = []
+    for section, fields in (("position", ("horizontal_rmse_m", "up_rmse_m")), ("attitude", ("roll_rmse_deg", "pitch_rmse_deg", "yaw_rmse_deg"))):
+        for field in fields:
+            comparison_rows.append({"metric": field, "exact_clean_final_v23": exact[section][field],
+                                    "strong_dual_yaw_EKF": strong[section][field],
+                                    "difference": float(strong[section][field]) - float(exact[section][field]),
+                                    "implementation_parity_gate_source": "ACTIVE_PORT_CLEAN_FINAL_V23_PARITY_REPORT.json"})
+    exact_meta, strong_meta = exact["meta"], strong["meta"]
+    for field in ("num_samples", "time_start", "time_end"):
+        exact_value, strong_value = exact_meta[field], strong_meta[field]
+        comparison_rows.append({"metric": field, "exact_clean_final_v23": exact_value,
+                                "strong_dual_yaw_EKF": strong_value,
+                                "difference": float(strong_value) - float(exact_value),
+                                "implementation_parity_gate_source": "ACTIVE_PORT_CLEAN_FINAL_V23_PARITY_REPORT.json"})
+    four_report = _json(runtime / "FOUR_METHOD_EXECUTION_REPORT.json")
+    for field, value in four_report["strong_module_counters"].items():
+        comparison_rows.append({"metric": field, "exact_clean_final_v23": value,
+                                "strong_dual_yaw_EKF": value, "difference": 0,
+                                "implementation_parity_gate_source": "passing parity counter audit plus fresh strong rerun"})
+    with (destination / "FINAL_V23_PARITY_COMPARISON.csv").open("x", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(comparison_rows[0])); writer.writeheader(); writer.writerows(comparison_rows)
+    aggregate = {
+        "schema_version": "paper_rebuild.clean1r2r1_aggregate_metrics.v1",
+        "reference_identity": "Fixposition-derived same-source offline evaluation reference",
+        "independent_ground_truth": False,
+        "position_same_source_mounting_caveat": True,
+        "trace_used_online": False,
+        "trace_opened_only_after_four_outputs_sealed": True,
+        "exact_evaluator_sha256": evaluator_sha256,
+        "output_seal_sha256": sha256_file(runtime / "FOUR_METHOD_OUTPUT_HASHES.csv"),
+        "methods": {
+            method: {**summaries[method], "module_counters": formal_wrappers[method]["module_counters"]}
+            for method in METHOD_ORDER
+        },
+        "paper_performance_claim": False,
+    }
+    write_json_atomic(destination / "AGGREGATE_METRICS.json", aggregate)
+    overall = {
+        "schema_version": "paper_rebuild.clean1r2r1_aggregate_crosscheck.v1",
+        "method_crosschecks": crosschecks,
+        "method_order": list(METHOD_ORDER),
+        "all_outputs_sealed_before_trace_open": True,
+        "trace_offline_only": True,
+        "passed": all(item["passed"] for item in crosschecks.values()),
+    }
+    write_json_atomic(destination / "AGGREGATE_CROSSCHECK.json", overall)
+    write_json_atomic(destination / "OFFLINE_EVALUATION_MANIFEST.json", {
+        "schema_version": "paper_rebuild.clean1r2r1_offline_evaluation.v1",
+        "exact_evaluator_sha256": evaluator_sha256, "trace_sha256": trace_sha256,
+        "sealed_output_row_count": len(sealed), "trace_opened_after_seal_validation": True,
+        "trace_used_online": False, "old_metric_evidence_used": False,
+        "terminal_status": "PASS_EXACT_ARCHIVED_OFFLINE_EVALUATION",
+    })
+    return overall

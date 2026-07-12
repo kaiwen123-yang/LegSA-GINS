@@ -21,8 +21,10 @@ class FileSaver {
   static void writeNav(const std::string& output_dir, const std::vector<NavState>& states);
   static void writeStd(const std::string& output_dir, const std::vector<std::vector<double>>& covariances);
   static void writeEvalNav(const std::string& output_dir, const std::vector<NavState>& states);
+  static void writeExactCompatible(const std::string& output_dir,
+                                   const std::vector<NavState>& states,
+                                   const std::vector<std::vector<double>>& covariances);
   static void writeRunManifest(const std::string& output_dir, const PortOptions& options);
 };
 
 }  // namespace legsa_v23_port_core
-

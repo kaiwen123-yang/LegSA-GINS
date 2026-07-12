@@ -59,6 +59,9 @@ void writeAll(const std::string& output_dir,
   FileSaver::writeNav(output_dir, states);
   FileSaver::writeStd(output_dir, covariances);
   FileSaver::writeEvalNav(output_dir, states);
+  if (options.clean_final_v23_parity_mode) {
+    FileSaver::writeExactCompatible(output_dir, states, covariances);
+  }
   FileSaver::writeRunManifest(output_dir, options);
 }
 
@@ -1056,9 +1059,10 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.phase = options.stage_id;
     options.port_role = "clean1_formal_four_method_solver";
     options.run_label = options.run_id;
-    options.parity_attempted = false;
+    options.parity_attempted =
+        options.clean_final_v23_parity_mode && options.algorithm_id == "strong_dual_yaw_EKF";
     options.real_clean_replay_attempted = true;
-    options.engineering_backbone_parity_only = false;
+    options.engineering_backbone_parity_only = options.parity_attempted;
   } else {
     options.phase = "N4H4R3";
     options.port_role = "source_backed_clean_replay_candidate";
@@ -1296,7 +1300,8 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   if (!imu_loader.isOpen() || !gnss_loader.isOpen()) {
     throw std::runtime_error("failed to open configured IMU/GNSS inputs");
   }
-  if (options.clean1_formal_mode && !gnss_loader.allValidityExplicit()) {
+  if (options.clean1_formal_mode && !options.clean_final_v23_parity_mode &&
+      !gnss_loader.allValidityExplicit()) {
     throw std::runtime_error(
         "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH: formal GNSS input lacks explicit position/velocity/yaw validity");
   }
@@ -1336,7 +1341,12 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   engine.initialize(makeInitialState(options));
   std::vector<NavState> states;
   std::vector<std::vector<double>> covariances;
-  appendState(engine, states, covariances);
+  // final_v23 只把第一个 aligned IMU 样本用于初始化；第一条 NAV/STD
+  // 必须在下一个 IMU 样本处写出，不能额外写一条 starttime 伪记录。
+  // 旧 CLEAN1/R1C 证据的 writer 语义不在此阶段改写。
+  if (!options.clean_final_v23_parity_mode) {
+    appendState(engine, states, covariances);
+  }
 
   ImuData imu;
   bool has_imu = false;
@@ -1381,6 +1391,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
                << "gnss_valid_before_newImuProcess,isToUpdate_res,update_applied,update_type,"
                << "timestamp_after_process,nav_written,gnss_eof,imu_eof\n";
     update_trace.open(debug_dir / "PORT_GNSS_UPDATE_TRACE.csv");
+    update_trace << std::fixed << std::setprecision(9);
     update_trace << "update_index,gnss_time,imu_pre_time,imu_cur_time,res,position_update,velocity_update,"
                  << "yaw_update,yaw_mode,yaw_residual_deg,residual_pos_norm,residual_vel_norm\n";
   }
@@ -1437,7 +1448,8 @@ void PortRuntime::runFromConfig(const std::string& config_path,
       } else if (engine.yawRejectCount() > yaw_reject_before) {
         yaw_mode = "REJECT";
       }
-      update_trace << engine.updateCount() << "," << gnss_before_loop << "," << current_imu_time << "," << imu.time
+      const double measurement_time = has_gnss ? gnss.time : -1.0;
+      update_trace << engine.updateCount() << "," << measurement_time << "," << current_imu_time << "," << imu.time
                    << "," << res << "," << (engine.positionUpdateCount() > pos_before ? 1 : 0) << ","
                    << (engine.velocityUpdateCount() > vel_before ? 1 : 0) << ","
                    << (engine.yawUpdateCount() > yaw_before ? 1 : 0) << "," << yaw_mode << ",,,\n";

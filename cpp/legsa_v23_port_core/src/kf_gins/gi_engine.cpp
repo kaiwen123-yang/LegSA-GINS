@@ -334,7 +334,8 @@ void GIEngine::gnssUpdate() {
   gnssUpdate(gnssdata_);
 }
 
-// 中文说明：GNSS update 顺序为 position、receiver-native velocity、yaw；N5D velocity stress
+// 中文说明：final_v23 strong 骨架的 GNSS update 顺序为
+// position、dual-yaw、receiver-native velocity；N5D velocity stress
 // 只用于诊断 raw Doppler 独立约束能力，不代表真实传感器故障模型，也不作为论文性能结果。
 void GIEngine::gnssUpdate(GnssData& gnss) {
   if (!gnss.isvalid) {
@@ -371,14 +372,27 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
     ++update_count_;
     return;
   }
-  if (!qa_reject_position && policy_gnss.has_velocity && receiverVelocityUpdateEnabledForTime(policy_gnss.time)) {
-    GnssData stressed_gnss = receiverVelocityStressView(policy_gnss);
-    applyVelocityUpdate(stressed_gnss);
-  }
   const bool qa_reject_yaw = qa_active && qa_decision.a1_measurement_action == "REJECT";
-  if (!qa_reject_yaw && policy_gnss.has_yaw && options_.enable_dual_yaw_update &&
-      options_.yaw_scheme_C_enabled) {
-    applyYawUpdate(policy_gnss);
+  auto apply_yaw = [&]() {
+    if (!qa_reject_yaw && policy_gnss.has_yaw && options_.enable_dual_yaw_update &&
+        options_.yaw_scheme_C_enabled) {
+      applyYawUpdate(policy_gnss);
+    }
+  };
+  auto apply_receiver_velocity = [&]() {
+    if (!qa_reject_position && policy_gnss.has_velocity &&
+        receiverVelocityUpdateEnabledForTime(policy_gnss.time)) {
+      GnssData stressed_gnss = receiverVelocityStressView(policy_gnss);
+      applyVelocityUpdate(stressed_gnss);
+    }
+  };
+  if (options_.clean_final_v23_parity_mode) {
+    apply_yaw();
+    apply_receiver_velocity();
+  } else {
+    // 旧 CLEAN1/R1C replay 保留原 position→velocity→yaw 语义。
+    apply_receiver_velocity();
+    apply_yaw();
   }
   // 中文说明：raw Doppler auxiliary velocity factor 与 GNSS epoch 对齐，并在 stateFeedback 前进入 EKF。
   if (!qa_active || qa_decision.raw_doppler_action == "ACCEPT") {
@@ -913,11 +927,10 @@ void GIEngine::applyYawUpdate(GnssData& gnss) {
     return;
   }
   double scale_value = 1.0;
+  bool scheme_downweighted = false;
   if (yaw_std >= options_.yaw_std_soft_deg * D2R || abs_res >= options_.yaw_res_soft_deg * D2R) {
     scale_value = options_.yaw_downweight_scale;
-    ++yaw_downweight_count_;
-  } else {
-    ++yaw_normal_count_;
+    scheme_downweighted = true;
   }
   Matrix H(1, RANK, 0.0);
   H(0, PHI_ID + 2) = -1.0;
@@ -936,8 +949,12 @@ void GIEngine::applyYawUpdate(GnssData& gnss) {
     ++yaw_reject_count_;
     return;
   }
-  if (options_.source_aware_policy_config.enable_source_aware_weighting && weight.combined_R_scale > 1.0) {
+  if (scheme_downweighted ||
+      (options_.source_aware_policy_config.enable_source_aware_weighting &&
+       weight.combined_R_scale > 1.0)) {
     ++yaw_downweight_count_;
+  } else {
+    ++yaw_normal_count_;
   }
   EKFUpdate(dz, H, scaled_R);
 }

@@ -1,18 +1,22 @@
 # CLEAN1 execution status
 
-## Active CLEAN1R2 governance state
+## Active CLEAN1R2R1 governance state
 
-- `STAGE_ID=CLEAN1R2_FINAL_V23_ARCHIVE_PARITY_AND_FOUR_METHOD_REEXECUTION`
+- `STAGE_ID=CLEAN1R2R1_CLEAN_REAL_FINAL_V23_PARITY_AND_FOUR_METHOD_EXECUTION`
+- `PROTOCOL_ID=CLEAN_REAL_DATA_FINAL_V23`
 - `PARENT_STAGE=CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION`
 - `CASE_ID=CLEAN1_BY2_CLEAN_NORMAL`
 - Active Git line: `stage/clean1-by2-clean-four-method`; the existing stage worktree remains in use.
-- Current phase: terminal archive-contract review.
-- Terminal decision: `BLOCKED_CLEAN1R2_EVIDENCE_CONTAMINATION`.
+- Current phase: clean-real input generation, exact-source build/run, active parity, then gated four-method execution.
+- Human profile decision: `CLEAN_REAL_DATA_FINAL_V23`.
 - Static recovery: exact solver tag, actual runtime configuration, input-builder contract, and evaluator identity recovered.
-- Execution status: no fresh provider, exact solver run, active-port parity run, four-method run, or current trace evaluation was started.
-- Deterministic conflict: strict archived E001 input parity requires seeded 1.5 degree yaw injection and online trace access; clean real-data evidence forbids both.
-- Required gate order: archive exact contract -> current hash-locked raw fresh input -> exact archived parity -> active-port parity -> code freeze -> fresh four-method execution under one common contract.
-- Hard stop: no four-method execution before `PASS_FINAL_V23_PARITY_ANCHOR`.
+- CLEAN1R2 historical execution status: no fresh provider, exact solver run, active-port parity run, four-method run, or current trace evaluation was started; therefore `CURRENT_ACTIVE_EVIDENCE_CONTAMINATED=false`.
+- E001 reclassification: `ARCHIVED_SEMISYNTHETIC_DIAGNOSTIC_REFERENCE_ONLY`; seeded 1.5 degree yaw injection and provider-generation trace access belong only to that archived diagnostic profile.
+- Historical CLEAN1R2 block reason: `WRONG_PARITY_ANCHOR_PROFILE_SELECTED`; the human clean-real profile decision resolves it.
+- Required gate order: recovered static contract -> current hash-locked raw fresh clean input -> fresh-built exact-tag clean run -> active-port parity -> code freeze -> fresh four-method execution under one common contract.
+- Hard stop: no four-method execution before exact-source clean run and active-port clean parity pass.
+- Clean profile: real BY2 raw, status A1 dual yaw, `yaw_measurement_std_deg=1.5`, yaw noise injection disabled, trace excluded from input generation, receiver IMU excluded from propagation, and E001 input payload excluded.
+- Static runtime contract retained from archive/tag proof: `base_time=1772784000`, window `66..340 s`, fixed initialization, antlever `[0.03,0.03,-0.30] m`, IMU install `[-1,0,0] deg`, 21/18 state/noise dimensions, position/yaw/velocity/feedback order, scheme-C, writer, and evaluator.
 
 ## Retained CLEAN1R1C execution status
 

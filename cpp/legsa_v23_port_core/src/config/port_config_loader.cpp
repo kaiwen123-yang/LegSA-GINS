@@ -165,10 +165,17 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
       options.stage_id ==
           "CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION" &&
       options.protocol_id == "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED";
-  if ((!clean1_v1_identity && !clean1r1c_v2_identity) ||
+  const bool clean1r2r1_final_v23_identity =
+      options.stage_id ==
+          "CLEAN1R2R1_CLEAN_REAL_FINAL_V23_PARITY_AND_FOUR_METHOD_EXECUTION" &&
+      options.protocol_id == "CLEAN_REAL_DATA_FINAL_V23";
+  if ((!clean1_v1_identity && !clean1r1c_v2_identity && !clean1r2r1_final_v23_identity) ||
       options.case_id != "CLEAN1_BY2_CLEAN_NORMAL" ||
       options.data_mode != "real_by2_raw" || options.run_id.empty()) {
     formalContractFailure("formal stage/protocol/case/data_mode/run identity mismatch");
+  }
+  if (options.clean_final_v23_parity_mode != clean1r2r1_final_v23_identity) {
+    formalContractFailure("clean final_v23 parity mode/profile identity mismatch");
   }
   if (!options.common_initialization || !options.common_initialization_dual_yaw_used ||
       options.trace_used_for_initialization ||
@@ -309,6 +316,8 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   const auto kv = readKeyValues(path);
   PortOptions options;
   options.clean1_formal_mode = boolOrDefault(kv, "clean1_formal_mode", options.clean1_formal_mode);
+  options.clean_final_v23_parity_mode =
+      boolOrDefault(kv, "clean_final_v23_parity_mode", options.clean_final_v23_parity_mode);
   options.stage_id = stringOrDefault(kv, "stage_id", options.stage_id);
   options.protocol_id = stringOrDefault(kv, "protocol_id", options.protocol_id);
   options.case_id = stringOrDefault(kv, "case_id", options.case_id);

@@ -7,6 +7,66 @@ contract_id: FINAL_V23_ARCHIVE_EXACT_PARITY_V1
 terminal_status: BLOCKED_CLEAN1R2_EVIDENCE_CONTAMINATION
 clean_execution_eligible: false
 
+# The three fields above preserve the published CLEAN1R2 terminal artifact so
+# finalize_clean1r2_blocked.py can continue to verify it byte-for-contract.
+# CLEAN1R2R1 is the current authorization and selects the clean-real profile.
+current_authorization:
+  stage_id: CLEAN1R2R1_CLEAN_REAL_FINAL_V23_PARITY_AND_FOUR_METHOD_EXECUTION
+  protocol_id: CLEAN_REAL_DATA_FINAL_V23
+  case_id: CLEAN1_BY2_CLEAN_NORMAL
+  human_profile_decision: CLEAN_REAL_DATA_FINAL_V23
+  selected_profile: clean_real_final_v23
+  clean_execution_eligible: true
+  current_active_evidence_contaminated: false
+  CLEAN1R2_historical_identity: CLEAN1R2_ARCHIVE_RECOVERY_AND_PROFILE_CONFLICT_DISCOVERY
+  CLEAN1R2_block_reason: WRONG_PARITY_ANCHOR_PROFILE_SELECTED
+  E001_strict_clean_input_byte_parity_required: false
+
+profiles:
+  archived_E001_semisynthetic:
+    role: ARCHIVED_SEMISYNTHETIC_DIAGNOSTIC_REFERENCE_ONLY
+    data_mode: semisynthetic
+    yaw_measurement_std_deg: 1.5
+    yaw_noise_injection_enabled: true
+    yaw_noise_injection_std_deg: 1.5
+    yaw_noise_seed: 42
+    trace_used_during_input_generation: true
+    clean_solver_input_eligible: false
+    clean_metric_evidence_eligible: false
+    strict_clean_input_parity_target: false
+  clean_real_final_v23:
+    role: CLEAN_FINAL_V23_PARITY_AND_STRONG_BASELINE
+    data_mode: real_by2_raw
+    yaw_measurement_std_deg: 1.5
+    yaw_noise_injection_enabled: false
+    yaw_noise_injection_std_deg: 0.0
+    yaw_noise_seed: null
+    trace_used_during_input_generation: false
+    clean_solver_input_eligible: true
+    clean_metric_evidence_eligible: true
+    dual_yaw_source: A1_dual_diff_status
+    position_source: GNSS1_status
+    receiver_velocity_source: GNSS1_raw_UBX_NAV_PVT
+    propagation_imu_source: BY2_GO2_BODY/by2.txt
+    receiver_imu_as_body_imu: false
+    legacy_input_payload_used: false
+    E001_old_input_used_by_solver: false
+
+profile_identity_correction:
+  human_profile_decision: CLEAN_REAL_DATA_FINAL_V23
+  E001_selected_as_clean_input_anchor: false
+  E001_selected_as_static_runtime_field_source: true
+  E001_static_field_use_scope: unaffected_fields_cross_confirmed_by_exact_tag_source
+  E001_old_input_used_by_solver: false
+  nominal_none_meaning: no_additional_degradation_case
+  nominal_none_does_not_mean_clean_real_input: true
+  reason: E001_base_command_still_enables_semisynthetic_yaw_injection_and_trace_read
+  current_active_evidence_contaminated: false
+  CLEAN1R2_solver_process_count: 0
+  CLEAN1R2_formal_run_count: 0
+  CLEAN1R2_current_trace_read: false
+  CLEAN1R2_legacy_solver_input: false
+
 archive_identity:
   path_alias: archive://authorized-final-v23
   sha256: 45953164c53e102a4ce7e99912535b484d60420ef0de20466252446f3d76b716
@@ -101,7 +161,7 @@ input_format:
     - {index: 11, name: std_vn, unit: m_per_s, source: fixed_0p05}
     - {index: 12, name: std_ve, unit: m_per_s, source: fixed_0p05}
     - {index: 13, name: std_vd, unit: m_per_s, source: fixed_0p05}
-    - {index: 14, name: yaw, unit: deg_NED, source: status_A1_then_archived_noise_injection}
+    - {index: 14, name: yaw, unit: deg_NED, source: GNSS1_GNSS2_status_A1_dual_diff_profile_transformed}
     - {index: 15, name: yaw_std, unit: deg, source: fixed_measurement_std_1p5}
   receiver_velocity_merge:
     method: nearest
@@ -272,8 +332,10 @@ excluded_extensions:
   semi_physical_yaw_injection:
     source_present: true
     selected_same_run_enabled: true
+    selected_clean_real_profile_enabled: false
     excluded_from_clean_real_evidence: true
-    consequence: BLOCKED_CLEAN1R2_EVIDENCE_CONTAMINATION
+    historical_CLEAN1R2_consequence: BLOCKED_CLEAN1R2_EVIDENCE_CONTAMINATION
+    current_CLEAN1R2R1_consequence: E001_RECLASSIFIED_REFERENCE_ONLY_DOES_NOT_BLOCK_CLEAN
 
 evaluator_contract:
   evaluator_sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
@@ -327,6 +389,10 @@ archived_same_run_reference:
   evidence_classification: PARITY_REFERENCE_ONLY
 
 evidence_contamination_gate:
+  scope: HISTORICAL_CLEAN1R2_WRONG_ANCHOR_SELECTION_ONLY
+  current_gate_active: false
+  resolved_by_human_profile_decision: CLEAN_REAL_DATA_FINAL_V23
+  current_active_evidence_contaminated: false
   first_divergence:
     file: E001_single_nominal_none/run.log
     field: yaw_noise_injection_std_deg
@@ -349,6 +415,7 @@ evidence_contamination_gate:
     both_can_be_claimed_by_one_run: false
 
 execution_status:
+  scope: HISTORICAL_CLEAN1R2_TERMINAL_RECORD
   fresh_final_v23_input: NOT_RUN_UPSTREAM_EVIDENCE_CONTAMINATION
   exact_final_v23_fresh_run: NOT_RUN_UPSTREAM_EVIDENCE_CONTAMINATION
   active_port_final_v23_parity: NOT_RUN_UPSTREAM_EVIDENCE_CONTAMINATION
@@ -360,3 +427,37 @@ execution_status:
   paper_figure_count: 0
   classic18: 0
   degradation_execution_count: 0
+
+clean1r2r1_execution_status:
+  selected_profile: clean_real_final_v23
+  E001_reference_role: ARCHIVED_SEMISYNTHETIC_DIAGNOSTIC_REFERENCE_ONLY
+  E001_old_input_used_by_solver: false
+  current_active_evidence_contaminated: false
+  fresh_clean_input: PENDING_EXECUTION
+  exact_tag_fresh_build: PENDING_EXECUTION
+  exact_clean_final_v23_run: PENDING_EXECUTION
+  active_port_clean_final_v23_parity: PENDING_EXECUTION
+  four_method_execution: PENDING_PARITY_GATE
+  classic18: 0
+  degradation_execution_count: 0
+
+clean1r2r1_parity_tolerance:
+  freeze_id: CLEAN1R2R1_PRE_OUTPUT_FLOAT64_FORMAT_BOUND_V1
+  frozen_before_any_clean_solver_output: true
+  historical_metric_used: false
+  basis: exact_and_active_use_float64_same_rounded_input_and_same_9_decimal_common_writer
+  row_count_exact: true
+  update_action_sequence_exact: true
+  timestamp_abs_max_sec: 1.0e-9
+  horizontal_rmse_m: 0.02
+  horizontal_max_m: 0.10
+  up_rmse_m: 0.02
+  up_max_m: 0.10
+  velocity_3d_rmse_mps: 0.002
+  velocity_3d_max_mps: 0.01
+  roll_rmse_deg: 0.002
+  pitch_rmse_deg: 0.002
+  yaw_rmse_deg: 0.002
+  attitude_max_abs_deg: 0.01
+  std_max_normalized_rmse: 0.01
+  std_max_normalized_max: 0.05
