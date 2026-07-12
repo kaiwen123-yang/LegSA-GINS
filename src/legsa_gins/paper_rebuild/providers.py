@@ -7,12 +7,16 @@ import json
 import math
 import re
 import shutil
+import threading
 from pathlib import Path
 from typing import Any
 
 from legsa_gins.datasets.by2.go2_body_state_parser import parse_go2_body_state_text
 from legsa_gins.go2_prior.go2_velocity_frame_review import transform_go2_velocity_for_frame
-from legsa_gins.input_generation.process_data_compat import generate_process_data_compat_inputs
+from legsa_gins.input_generation import process_data_compat as _shared_process_data_compat
+from legsa_gins.input_generation.ubx_nav_pvt import (
+    extract_pvt_velocity_rows as _expected_shared_pvt_extractor,
+)
 from legsa_gins.input_generation.status_yaw_builder import (
     build_a1_dual_diff_yaw_rows,
     status_time_header,
@@ -29,16 +33,48 @@ from .manifest import (
     write_json_atomic,
 )
 from .paths import CleanPaths, guard_path
+from .ubx_nav_pvt import extract_pvt_velocity_rows as _active_clean_pvt_extractor
 
 
 PHYSICAL_BASELINE_MIN_M = 0.20
 PHYSICAL_BASELINE_MAX_M = 0.60
 GO2_ROLL_PITCH_STD_DEG = 1.6
 GO2_HORIZONTAL_STD_MPS = 1.5
+RECEIVER_VELOCITY_PARSER_ADAPTER_ID = (
+    "paper_rebuild.ubx_nav_pvt_full_frame_sacc_74_78.v1"
+)
+_PROCESS_DATA_COMPAT_BIND_LOCK = threading.Lock()
 
 
 class ProviderGenerationError(RuntimeError):
     """Fresh source provider generation failed a physical or lineage gate."""
+
+
+def _generate_process_data_compat_with_active_pvt(*args: Any, **kwargs: Any) -> dict[str, Any]:
+    """Call the maintained compatibility builder with the clean PVT decoder.
+
+    The shared builder exposes no dependency-injection argument.  The clean
+    namespace therefore binds only its extractor global for this synchronous,
+    serialized call, verifies the expected legacy dependency before binding,
+    and restores it in ``finally`` on every exit path.
+    """
+
+    with _PROCESS_DATA_COMPAT_BIND_LOCK:
+        current = _shared_process_data_compat.extract_pvt_velocity_rows
+        if current is not _expected_shared_pvt_extractor:
+            raise ProviderGenerationError(
+                "Shared process_data compatibility extractor identity changed; "
+                "refusing an unreviewed receiver-velocity parser binding"
+            )
+        _shared_process_data_compat.extract_pvt_velocity_rows = _active_clean_pvt_extractor
+        try:
+            return _shared_process_data_compat.generate_process_data_compat_inputs(
+                *args, **kwargs
+            )
+        finally:
+            _shared_process_data_compat.extract_pvt_velocity_rows = (
+                _expected_shared_pvt_extractor
+            )
 
 
 def _percentile(values: list[float], fraction: float) -> float | None:
@@ -340,7 +376,7 @@ def generate_clean_by2_inputs(
         write_json_atomic(provider_root / "DUAL_YAW_PHYSICAL_GATE_BLOCKED.json", yaw_audit)
         raise ProviderGenerationError("BY2 dual-yaw physical short-baseline gate failed")
 
-    generated = generate_process_data_compat_inputs(
+    generated = _generate_process_data_compat_with_active_pvt(
         paths.by2_fix_root,
         paths.by2_go2_body,
         provider_root / "runtime_inputs",
@@ -520,6 +556,8 @@ def generate_clean_by2_inputs(
         "receiver_velocity_match_tolerance_seconds": receiver_velocity_match_tolerance_seconds,
         "dual_yaw_match_tolerance_seconds": dual_yaw_match_tolerance_seconds,
         "receiver_velocity_std_mps": receiver_velocity_std_mps,
+        "receiver_velocity_parser_adapter_id": RECEIVER_VELOCITY_PARSER_ADAPTER_ID,
+        "receiver_velocity_sAcc_full_frame_offsets": [74, 78],
         "imu_install_roll_deg": imu_install_roll_deg,
         "imu_install_pitch_deg": imu_install_pitch_deg,
         "imu_install_yaw_deg": imu_install_yaw_deg,

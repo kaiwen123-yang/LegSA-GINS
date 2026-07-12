@@ -2,11 +2,14 @@
 
 ## Identity
 
-- Active program: `CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION`.
-- Parent program: `CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION`.
-- Active case/protocol: `CLEAN1_BY2_CLEAN_NORMAL` / `CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED`.
+- Active program: `STAGE_ID=CLEAN1R2_FINAL_V23_ARCHIVE_PARITY_AND_FOUR_METHOD_REEXECUTION`.
+- Parent program: `PARENT_STAGE=CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION`.
+- Active case: `CASE_ID=CLEAN1_BY2_CLEAN_NORMAL`.
+- Active protocol: recovered exact final_v23 archive parity contract; terminal decision `BLOCKED_CLEAN1R2_EVIDENCE_CONTAMINATION`.
+- Retained predecessor protocol: `CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED`; review disposition `SUPERSEDED_FOR_FINAL_V23_PARITY_REVIEW`; `superseded_by=CLEAN1R2_FINAL_V23_PARITY`.
 - Frozen base commit: `4e6b3f3fa9f50ed91b6c4e250f3d1f75d6725cc6`.
 - Active Git line: `stage/clean1-by2-clean-four-method`.
+- Active worktree: existing `worktree://clean1-by2-clean-four-method`, unchanged.
 - Active implementation namespace: `src/legsa_gins/paper_rebuild/`.
 - Active runner entrypoints: `scripts/paper_rebuild/` only.
 - Active raw source: `<RAW_ROOT>`; raw files are immutable.
@@ -52,10 +55,32 @@ Active runtime evidence may come only from `<CLEAN_ROOT>` and only when its mani
 
 ## Current Gate
 
-The human explicitly authorized only the CLEAN1 BY2 clean-normal four-method chain. The exact method order is `single_antenna_EKF`, `basic_dual_yaw_EKF`, `strong_dual_yaw_EKF`, and `LegSA_Paper_V1`. Provider generation, solver execution, and offline evaluation are separate read domains.
+The human authorized the bounded CLEAN1R2 chain in this exact fail-closed order:
 
-Formal execution remains fail-closed unless raw 22/22, the fixed kick event, fresh Raw Doppler lineage, kick-aligned common interval, common 21-state initialization, method-effective flags, and the frozen V2 evaluator all pass. The physical mapping is `t_abs_go2=t_go2+0.0`; the common start is the first position- and dual-yaw-valid GNSS epoch at or after the mapped kick. Optional Raw Doppler and Go2 priors begin when available and do not delay all methods. Trace is not opened during provider generation, alignment, evaluator freeze, initialization, or solver execution.
+1. recover the unique exact final_v23 static source, actual runtime configuration, input-generation contract, and evaluator identity from the authorized archive;
+2. generate exact final_v23 input freshly from the current hash-locked BY2 raw sources;
+3. run one exact archived final_v23 parity anchor with every additional paper module disabled;
+4. make the active paper-rebuild port pass the same final_v23 parity contract;
+5. complete tests/build/review and freeze the parity-restored code commit;
+6. regenerate the provider at that code freeze and run the four methods under one common recovered contract, in order: `single_antenna_EKF`, `basic_dual_yaw_EKF`, `strong_dual_yaw_EKF`, and `LegSA_Paper_V1`;
+7. open trace only for offline evaluation after all four fresh outputs are sealed and hashed.
 
-The offline profile is `FIXPOSITION_SAME_SOURCE_DIRECT_REFERENCE`. It directly compares the propagation-IMU state output with the Fixposition POI/output reference without point compensation. This is permitted with `position_same_source_mounting_caveat=true` and `independent_ground_truth=false`; position is descriptive, and yaw follows the frozen ENU-to-NED protocol. Missing independent POI calibration is not a run blocker and cannot be hidden in the wording.
+The four-method execution is forbidden until both the exact archived fresh-run parity and active-port parity gates pass. Historical archive inputs and outputs are parity-reference material only and can never become current solver input or current performance evidence. Raw 22/22 integrity, fresh provider lineage, forbidden-input flags, method-effective counters, and evaluator identity remain fail-closed gates.
 
-CLEAN1 does not authorize figures, classic-18, the 60x9 matrix, DA03, DA05, another dataset, a merge, a tag, or any next stage.
+Archive recovery closed the static tag source, same-run runtime configuration,
+input-builder behavior, and evaluator identity.  It also proved that the linked
+E001 `nominal_none` input is semisynthetic: a separate command argument injects
+1.5 degree Gaussian yaw noise with seed 42, and the input builder reads trace
+during provider generation.  This conflicts with the clean real-data contract.
+Therefore no fresh CLEAN1R2 provider, exact solver run, active-port parity run,
+four-method run, or current trace evaluation was started.
+
+Continuation requires an explicit human choice between a semisynthetic
+diagnostic historical reproduction, which cannot be clean real-data evidence,
+and a clean no-injection/no-online-trace execution, which cannot claim strict
+archived E001 input parity.  Until that choice, the parity and four-method gates
+remain closed.
+
+No start/end window, initialization, receiver-velocity policy, yaw standard-deviation interpretation, scheme-C setting, or evaluator behavior is frozen by this governance update. Each value must be recovered from the archive under the stated source-priority rules; current CLEAN1R1C values must not fill an archive evidence gap.
+
+CLEAN1R2 does not authorize figures, classic-18, D01-D60, the 60x9 matrix, DA03, DA05, BY3, XB, PG, selected FGO feedback, active/complete nine-factor FGO, QM, QA, contact/FK factors, a merge, a tag, or any next stage.

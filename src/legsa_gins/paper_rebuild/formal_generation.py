@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from legsa_gins.input_generation.status_yaw_builder import build_a1_dual_diff_yaw_rows
-from legsa_gins.input_generation.ubx_nav_pvt import extract_pvt_velocity_rows
+from legsa_gins.paper_rebuild.ubx_nav_pvt import extract_pvt_velocity_rows
 from legsa_gins.raw_gnss.rtklib_doppler_helper_builder import (
     HELPER_C_FILES,
     HELPER_SOURCE,

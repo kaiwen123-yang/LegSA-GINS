@@ -1,4 +1,26 @@
-# CLEAN1R1C execution status
+# CLEAN1 execution status
+
+## Active CLEAN1R2 governance state
+
+- `STAGE_ID=CLEAN1R2_FINAL_V23_ARCHIVE_PARITY_AND_FOUR_METHOD_REEXECUTION`
+- `PARENT_STAGE=CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION`
+- `CASE_ID=CLEAN1_BY2_CLEAN_NORMAL`
+- Active Git line: `stage/clean1-by2-clean-four-method`; the existing stage worktree remains in use.
+- Current phase: terminal archive-contract review.
+- Terminal decision: `BLOCKED_CLEAN1R2_EVIDENCE_CONTAMINATION`.
+- Static recovery: exact solver tag, actual runtime configuration, input-builder contract, and evaluator identity recovered.
+- Execution status: no fresh provider, exact solver run, active-port parity run, four-method run, or current trace evaluation was started.
+- Deterministic conflict: strict archived E001 input parity requires seeded 1.5 degree yaw injection and online trace access; clean real-data evidence forbids both.
+- Required gate order: archive exact contract -> current hash-locked raw fresh input -> exact archived parity -> active-port parity -> code freeze -> fresh four-method execution under one common contract.
+- Hard stop: no four-method execution before `PASS_FINAL_V23_PARITY_ANCHOR`.
+
+## Retained CLEAN1R1C execution status
+
+- `current_v2_protocol=CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED`
+- `current_v2_status=ENGINEERING_PASS_SCIENTIFIC_HOLD`
+- `review_disposition=SUPERSEDED_FOR_FINAL_V23_PARITY_REVIEW`
+- `superseded_by=CLEAN1R2_FINAL_V23_PARITY`
+- Preservation rule: all CLEAN1R1C metrics, counters, manifests, commits, and evidence below remain unchanged and retained; they are paused for scientific adoption and are not CLEAN1R2 active evidence.
 
 ## Decision
 
@@ -32,7 +54,7 @@
 
 FGO, QM, QA, and contact/FK counters were zero for every method. The four methods ran once, in the frozen order, in formal session `303b8051de3b40dca3c5114c4591cb67`.
 
-## Current clean descriptive metrics
+## Retained CLEAN1R1C descriptive metrics (not CLEAN1R2 active evidence)
 
 | Method | Horizontal RMSE (m) | 3D RMSE (m) | Up RMSE (m) | Yaw RMSE (deg) | Yaw MAE (deg) | Coverage |
 |---|---:|---:|---:|---:|---:|---:|

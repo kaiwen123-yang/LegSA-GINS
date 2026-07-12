@@ -9,14 +9,26 @@
 - Exact guarded legacy deletion and storage accounting: complete.
 - Clean GPT context export and lightweight unmerged review PR: CLEAN0 publication deliverables.
 
-## CLEAN1 Authorized Scope
+## CLEAN1R2 Authorized Scope
 
-The human authorized the following bounded CLEAN1R1C work from the frozen CLEAN1 base:
+The human authorized the following bounded CLEAN1R2 work on the existing CLEAN1 branch and worktree:
 
-1. Reproduce the frozen kick event and first post-kick valid GNSS start without trace or offset search.
-2. Commit the V2 evaluator/alignment/lever-arm implementation and regenerate an isolated fresh provider from raw 22/22.
-3. Run clean normal BY2 once for the four methods in `methods.yaml`, in order.
-4. Open trace only after all outputs are hash-frozen, then generate row, summary, coverage, aggregate, and independent cross-check artifacts.
-5. Stop with a blocker if any raw, kick, A1 dual-yaw, Raw Doppler, build/test, run, module-counter, evaluator, or isolation gate fails.
+1. Inventory the single authorized final_v23 archive and recover one uniquely identified exact source/config/input-builder/evaluator contract. Treat archive runtime inputs, outputs, rows, aggregates, and figures as parity-reference-only material.
+2. Verify the current BY2 raw lock 22/22 and generate exact final_v23 input freshly from those current raw sources; archived input must not become solver input.
+3. Run exactly one final_v23 parity anchor first, with Raw Doppler, source-aware weighting, Go2 priors, FGO, QM, QA, and contact/FK additions disabled.
+4. Repair the active paper-rebuild port only until it matches that recovered contract. Stop with the first deterministic blocker if exact archived reproduction or active-port parity cannot close without guessing or tuning.
+5. Only after both parity gates pass, complete the code freeze and freshly regenerate the common provider at that commit.
+6. Run the four methods exactly once and in order under the same recovered time window, initialization, preprocessing, measurement mapping, velocity policy, lever arm, executable/provider base, and evaluator: `single_antenna_EKF`, `basic_dual_yaw_EKF`, `strong_dual_yaw_EKF`, `LegSA_Paper_V1`.
+7. Seal all four outputs before offline trace evaluation, cross-check the aggregates, preserve the superseded CLEAN1R1C evidence, and produce only the single terminal package authorized for PASS or a concrete BLOCKED outcome.
 
-CLEAN1 has `paper_figure_count=0` and does not decide or authorize a classic-18 pilot. It must not silently expand into classic-18, the 60x9 matrix, DA03/DA05, another dataset, selected feedback, active 9F FGO, QA fallback, paper performance claims, or a next stage.
+Archive evidence must determine start/end, initialization, velocity/std behavior, yaw measurement semantics, scheme-C routing, and evaluator identity; current CLEAN1R1C values cannot be used to guess missing fields. The four-method chain is forbidden before `PASS_FINAL_V23_PARITY_ANCHOR`.
+
+The archive review reached `BLOCKED_CLEAN1R2_EVIDENCE_CONTAMINATION` before
+fresh generation.  No continuation is authorized until the human explicitly
+chooses one of two non-equivalent contracts: (1) semisynthetic diagnostic E001
+reproduction, which is not clean evidence, or (2) clean no-injection and
+no-online-trace execution, which is not strict archived E001 input parity.
+Neither choice may be inferred from metrics, and four-method execution remains
+forbidden unless a newly authorized parity contract passes first.
+
+CLEAN1R2 keeps `paper_figure_count=0` and does not authorize classic-18, D01-D60, the 60x9 matrix, DA03, DA05, BY3, XB, PG, selected FGO feedback, active/complete nine-factor FGO, QM, QA, contact/FK factors, parameter search, per-case tuning, output-only correction, metric-driven epoch deletion, merge, release tag, or any next stage.

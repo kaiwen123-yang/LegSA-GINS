@@ -1,0 +1,344 @@
+schema_version: paper_rebuild.final_v23_parity_contract.v1
+stage_id: CLEAN1R2_FINAL_V23_ARCHIVE_PARITY_AND_FOUR_METHOD_REEXECUTION
+parent_stage: CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION
+dataset: BY2
+case_id: CLEAN1_BY2_CLEAN_NORMAL
+contract_id: FINAL_V23_ARCHIVE_EXACT_PARITY_V1
+terminal_status: BLOCKED_CLEAN1R2_EVIDENCE_CONTAMINATION
+clean_execution_eligible: false
+
+archive_identity:
+  path_alias: archive://authorized-final-v23
+  sha256: 45953164c53e102a4ce7e99912535b484d60420ef0de20466252446f3d76b716
+  exact_tag: final-v23-freeze
+  exact_tag_commit: a906c3a2e704eddbd15ceb3f98f1ba8de85dc410
+  exact_tag_scope: solver_and_build_static_contract_only
+  same_run_historical_solver_commit: NOT_RECORDED_SAME_RUN
+  same_run_historical_binary_lineage_to_exact_tag: NOT_PROVEN
+  archived_binary_executed: false
+  archived_runtime_used_as_solver_input: false
+
+source_identity:
+  ancillary_builder_and_evaluator_tag_status: MISSING_FROM_TAG_ANCILLARY_ROLE
+  ancillary_identity_basis: unique_archive_static_source_map_hashes
+  process_data:
+    archive_member: KF-GINS/bin/process_data.py
+    sha256: 91b82997c11f2d5b18858e169c25e5d7c569a9512a88f04f57213f50dfaff221
+  run_final_mainline:
+    archive_member: KF-GINS/scripts/run_final_mainline.py
+    archive_working_tree_candidate_sha256: d3dc8a86a2f9c73cd1e32e83c46d9b390f4696ae2a3b19db43aabd452d3cfcf3
+    selected_source: git-tag://final-v23-freeze/scripts/run_final_mainline.py
+    selected_sha256_proof: clean://17_LOGS/CLEAN1R2_FINAL/TAG_SOURCE_MANIFEST.json
+  final_mainline_config:
+    archive_member: KF-GINS/docs/final_mainline_config.md
+    archive_working_tree_candidate_sha256: b1c1abc3db42583de3105bcbee3bd782f8b900a3f4a53cbfad49a84979acdd00
+    selected_source: git-tag://final-v23-freeze/docs/final_mainline_config.md
+    selected_sha256_proof: clean://17_LOGS/CLEAN1R2_FINAL/TAG_SOURCE_MANIFEST.json
+  evaluator:
+    archive_member: KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py
+    sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  same_run_runtime_config:
+    archive_member_suffix: extended_degradation_results/final_v23/single/E001_single_nominal_none/kf-gins.yaml
+    sha256: 163cada45462b6b17d9b221304fc6faca2f734ce5e3a85db45654b3164e93737
+  same_run_manifest:
+    archive_member_suffix: extended_degradation_results/final_v23/single/E001_single_nominal_none/run_meta.json
+    sha256: 1bc4ee6a535dd52cfac738c681fa6e4792def8a48bf46cca2a95277738903d08
+  same_run_log:
+    archive_member_suffix: extended_degradation_results/final_v23/single/E001_single_nominal_none/run.log
+    sha256: fa3f6f70756d54b848f0d9d24908d5789f4a7ca22b806802f9ab0ad3d58cd439
+  same_run_input_reference:
+    archive_member_suffix: extended_degradation_results/final_v23/single/E001_single_nominal_none/input.gnss
+    sha256: cea5fc832399eb0be3c038e2066666fe3ded26e39dddcf0197cdbb0de2da7196
+    evidence_classification: PARITY_REFERENCE_ONLY
+    solver_input_eligible: false
+
+data_sources:
+  propagation_imu:
+    source: BY2_GO2_BODY/by2.txt
+    role: body_imu_propagation
+  receiver_imu:
+    role: diagnostic_only
+    propagation_eligible: false
+  position:
+    source: GNSS1_status
+    fields: [pos_lat, pos_lon, pos_height]
+  position_std:
+    source: GNSS1_status
+    fields: [pos_acc_h, pos_acc_h, pos_acc_v]
+  receiver_velocity:
+    source: GNSS1_raw_UBX_NAV_PVT
+  dual_yaw:
+    source: GNSS1_status_and_GNSS2_status_A1_dual_diff
+  trace:
+    clean_role: offline_evaluation_only
+    archived_process_data_behavior: read_during_provider_generation
+    solver_input_eligible: false
+
+time_contract:
+  base_time_unix_seconds: 1772784000.0
+  starttime_seconds: 66.0
+  endtime_seconds: 340.0
+  gnss_time: GNSS1_status_sys_stamp_minus_base_time
+  status_baseline_time: GNSS1_header_stamp_minus_base_time
+  imu_time: message_time_minus_base_time_plus_zero_offset
+
+input_format:
+  delimiter: space
+  header: false
+  float_format: "%.6f"
+  column_count: 15
+  columns:
+    - {index: 1, name: time, unit: s, source: GNSS1_status_sys_stamp_minus_base_time}
+    - {index: 2, name: lat, unit: deg, source: GNSS1_status_pos_lat}
+    - {index: 3, name: lon, unit: deg, source: GNSS1_status_pos_lon}
+    - {index: 4, name: height, unit: m, source: GNSS1_status_pos_height}
+    - {index: 5, name: std_n, unit: m, source: GNSS1_status_pos_acc_h}
+    - {index: 6, name: std_e, unit: m, source: GNSS1_status_pos_acc_h}
+    - {index: 7, name: std_d, unit: m, source: GNSS1_status_pos_acc_v}
+    - {index: 8, name: vn, unit: m_per_s, source: GNSS1_raw_NAV_PVT_velN}
+    - {index: 9, name: ve, unit: m_per_s, source: GNSS1_raw_NAV_PVT_velE}
+    - {index: 10, name: vd, unit: m_per_s, source: GNSS1_raw_NAV_PVT_velD}
+    - {index: 11, name: std_vn, unit: m_per_s, source: fixed_0p05}
+    - {index: 12, name: std_ve, unit: m_per_s, source: fixed_0p05}
+    - {index: 13, name: std_vd, unit: m_per_s, source: fixed_0p05}
+    - {index: 14, name: yaw, unit: deg_NED, source: status_A1_then_archived_noise_injection}
+    - {index: 15, name: yaw_std, unit: deg, source: fixed_measurement_std_1p5}
+  receiver_velocity_merge:
+    method: nearest
+    tolerance_seconds: 0.1
+  dual_yaw_merge:
+    method: nearest
+    tolerance_seconds: 0.6
+  fill_policy:
+    receiver_velocity_and_trace_columns: forward_fill_then_back_fill
+    status_yaw_after_merge: forward_fill_then_back_fill
+  final_drop_policy: drop_row_if_any_output_column_is_missing
+  outage_epoch_deletion:
+    archived_same_run_enabled: false
+    clean_allowed: false
+
+imu_preprocessing:
+  source_frame: FLU
+  solver_frame: FRD
+  flu_to_frd: [x, negative_y, negative_z]
+  install_rotation_order: Rz_yaw_Ry_pitch_Rx_roll
+  install_rpy_deg: [-1.0, 0.0, 0.0]
+  input_rate_hz: 500
+  input_rate_units_documented_in_archive: false
+  code_assumption:
+    gyro: rad_per_s
+    accelerometer: m_per_s2
+  output_incremental: true
+  gyro_bias_policy: mean_first_up_to_1000_install_corrected_frames
+  increment_policy: current_sample_times_dt
+  first_sample_output: skipped
+  invalid_dt_policy: drop_if_dt_lte_0_or_gt_0p1_seconds
+  output_columns: [time, dtheta_x, dtheta_y, dtheta_z, dvel_x, dvel_y, dvel_z]
+
+dual_yaw_contract:
+  antenna_order: GNSS2_minus_GNSS1
+  physical_roles_from_active_governance:
+    GNSS1: robot_right
+    GNSS2: robot_left
+  archive_explicitly_labels_physical_roles: false
+  scheme: A1_dual_diff
+  status2_to_status1_interpolation: numpy_linear_with_endpoint_hold
+  status_interpolation_tolerance_seconds: none
+  baseline_formula: negative_atan2_rel_e_rel_n
+  body_candidate_formula: wrap(sign_times_baseline_plus_install_offset)
+  sign: 1.0
+  install_offset_deg: 0.0
+  ned_formula: wrap(90_deg_minus_body_candidate)
+  validity:
+    rel_valid: required_if_column_exists
+    ant_valid: required_if_column_exists
+    ant_state: equals_2_if_column_exists
+    missing_validity_column_policy: skip_that_gate
+  residual: wrap_safe
+
+receiver_velocity_contract:
+  nav_pvt_full_message_offsets:
+    vel_n: {start: 54, end_exclusive: 58, type: little_endian_int32, scale_to_mps: 0.001}
+    vel_e: {start: 58, end_exclusive: 62, type: little_endian_int32, scale_to_mps: 0.001}
+    vel_d: {start: 62, end_exclusive: 66, type: little_endian_int32, scale_to_mps: 0.001}
+    archived_sAcc_bug: {start: 68, end_exclusive: 72}
+    corrected_sAcc: {start: 74, end_exclusive: 78, type: little_endian_uint32, scale_to_mps: 0.001}
+  sAcc_used_by_archived_provider: false
+  active_clean_parser_module: legsa_gins.paper_rebuild.ubx_nav_pvt
+  active_clean_parser_uses_corrected_sAcc_offset: true
+  provider_std_mps: [0.05, 0.05, 0.05]
+  solver_extra_std_addition_mps: [0.05, 0.05, 0.05]
+  solver_extra_std_is_floor: false
+  solver_source: final-v23-freeze/src/kf-gins/gi_engine.cpp:760-778
+  solver_source_sha256: 9c47637868b399afde9432e6ae8931638b02a2a11048f61f1d1653b48303392e
+  solver_std_combination: componentwise_add_then_square_for_R
+  effective_pre_scale_std_mps: [0.10, 0.10, 0.10]
+
+yaw_measurement_and_injection:
+  yaw_measurement_std_deg: 1.5
+  yaw_measurement_std_role: measurement_covariance_R
+  yaw_noise_injection_enabled_archived_same_run: true
+  yaw_noise_injection_std_deg_archived_same_run: 1.5
+  yaw_noise_injection_seed_archived_same_run: 42
+  yaw_noise_injection_distribution: zero_mean_gaussian
+  fixed_1p5_implies_noise_injection: false
+  clean_normal_required_injection_enabled: false
+  clean_normal_required_injection_std_deg: 0.0
+  archived_same_run_data_mode: semisynthetic
+
+runtime_initialization:
+  initpos_deg_deg_m: [39.98482973, 116.34312609, 41.80208107]
+  initvel_ned_mps: [0.0, 0.0, 0.0]
+  initatt_rpy_deg: [0.0, 0.0, 0.688505]
+  initgyro_bias: [0.0, 0.0, 0.0]
+  initacc_bias: [0.0, 0.0, 0.0]
+  initgyro_scale: [0.0, 0.0, 0.0]
+  initacc_scale: [0.0, 0.0, 0.0]
+  initpos_std_m: [10.0, 10.0, 10.0]
+  initvel_std_mps: [1.0, 1.0, 1.0]
+  initatt_std_deg: [2.0, 2.0, 2.0]
+
+filter_contract:
+  error_state_dimension: 21
+  state_groups: [position, velocity, attitude, gyro_bias, accel_bias, gyro_scale, accel_scale]
+  imu_noise:
+    arw_deg_sqrt_h: [0.985, 0.985, 0.985]
+    vrw_mps_sqrt_h: [0.077, 0.077, 0.077]
+    gyro_bias_std_deg_h: [9.38, 9.38, 9.38]
+    accel_bias_std_mgal: [77.8, 77.8, 77.8]
+    gyro_scale_std_ppm: [0.0, 0.0, 0.0]
+    accel_scale_std_ppm: [0.0, 0.0, 0.0]
+    correlation_time_h: 1.0
+  antlever_frd_m: [0.03, 0.03, -0.30]
+  position_lever_correction: enabled
+  velocity_lever_correction: enabled
+  yaw_jacobian_H_phi_z: -1.0
+  yaw_residual: wrap_to_minus_pi_plus_pi
+  measurement_update_order: position_then_yaw_then_receiver_velocity_at_GNSS_epoch
+  scheme_C:
+    source: exact_tag_compile_time_constants
+    runner_environment_overrides_read_by_exact_tag_solver: false
+    historical_log_config_marker_present: true
+    yaw_std_min_deg: 0.5
+    yaw_std_soft_deg: 3.0
+    yaw_std_hard_deg: 6.0
+    yaw_res_soft_deg: 6.0
+    yaw_res_hard_deg: 15.0
+    yaw_downweight_scale: 2.5
+  output_writer:
+    position: latitude_longitude_degrees_and_height_m
+    velocity: NED_m_per_s
+    attitude: roll_pitch_yaw_degrees
+
+excluded_extensions:
+  v3_foot_aware:
+    source_present_in_exact_tag: true
+    exact_tag_default_enabled: false
+    enable_environment_variable: KF_GINS_FOOT_AWARE
+    default_source_expression: 'parseEnvBool("KF_GINS_FOOT_AWARE", false)'
+    selected_same_run_foot_marker_count: 0
+    selected_same_run_enabled: false
+    selected_for_parity_contract: false
+  v2_4_quality_manager:
+    selected_for_parity_contract: false
+    selected_same_run_runtime_marker_count: 0
+  v4_raw_gnss_frontend:
+    selected_for_parity_contract: false
+    selected_same_run_runtime_marker_count: 0
+  qa_fallback:
+    selected_for_parity_contract: false
+    selected_same_run_runtime_marker_count: 0
+  fgo:
+    selected_for_parity_contract: false
+    selected_same_run_runtime_marker_count: 0
+  semi_physical_yaw_injection:
+    source_present: true
+    selected_same_run_enabled: true
+    excluded_from_clean_real_evidence: true
+    consequence: BLOCKED_CLEAN1R2_EVIDENCE_CONTAMINATION
+
+evaluator_contract:
+  evaluator_sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  solver_nav_columns_zero_based:
+    time: 1
+    latitude: 2
+    longitude: 3
+    height: 4
+    roll: 8
+    pitch: 9
+    yaw: 10
+  trace_column_selection: case_insensitive_exact_or_substring_candidate_search
+  time_conversion: subtract_base_time_unless_selected_time_column_contains_aligned_time
+  overlap_policy: crop_NAV_to_closed_trace_overlap
+  interpolation:
+    position_and_roll_pitch: numpy_linear_at_each_retained_NAV_epoch
+    yaw: unwrap_radians_then_linear_interpolate_then_convert_to_degrees
+  reference_yaw_conversion: wrap360(90_deg_minus_trace_ENU_yaw)
+  position_error_frame: local_ENU_at_first_interpolated_trace_position
+  match_tolerance_seconds: none
+  unmatched_policy: outside_overlap_dropped_and_all_interior_NAV_epochs_interpolated
+  denominator: retained_NAV_epoch_count
+  metrics:
+    rmse: sqrt_mean_square
+    p95: percentile_95_of_absolute_error
+    max: maximum_absolute_error
+    pass_ratio: mean_absolute_error_lte_fixed_threshold
+
+archived_same_run_reference:
+  case_id: E001_single_nominal_none
+  historical_solver_identity: NOT_RECORDED_SAME_RUN
+  historical_binary_lineage_to_exact_tag: NOT_PROVEN
+  exact_tag_role: selected_static_solver_contract_only
+  registry_degradation_type: nominal
+  registry_degradation_level: none
+  actual_data_mode: semisynthetic
+  input_rows: 303
+  input_columns: 15
+  input_time_start_seconds: 55.206795
+  input_time_end_seconds: 357.201323
+  rows_inside_runtime_window: 274
+  solver_output_rows: 56642
+  solver_time_start_seconds: 66.005054
+  solver_time_end_seconds: 339.997056
+  yaw_update_counts: {normal: 223, downweight: 45, reject: 6}
+  position_update_attempts: 274
+  receiver_velocity_update_attempts: 274
+  yaw_update_attempts: 274
+  yaw_EKF_updates_after_rejects: 268
+  total_measurement_EKF_updates: 816
+  evidence_classification: PARITY_REFERENCE_ONLY
+
+evidence_contamination_gate:
+  first_divergence:
+    file: E001_single_nominal_none/run.log
+    field: yaw_noise_injection_std_deg
+    expected_clean_value: 0.0
+    archived_actual_value: 1.5
+    source_archive_member: KF-GINS/bin/process_data.py
+    current_code_symbol: process_gnss
+    source_lines: 1115-1129
+    exact_next_fix: human_must_choose_semisynthetic_historical_parity_or_clean_no_injection_execution
+  second_divergence:
+    field: trace_used_online
+    expected_clean_value: false
+    archived_actual_value: true
+    source_archive_member: KF-GINS/bin/process_data.py
+    current_code_symbol: process_gnss
+    source_lines: 741-798,967-977,1007-1035,1083-1111
+  contradiction:
+    strict_archived_input_parity_requires_semisynthetic_injection: true
+    clean_real_evidence_requires_no_injection_and_no_online_trace: true
+    both_can_be_claimed_by_one_run: false
+
+execution_status:
+  fresh_final_v23_input: NOT_RUN_UPSTREAM_EVIDENCE_CONTAMINATION
+  exact_final_v23_fresh_run: NOT_RUN_UPSTREAM_EVIDENCE_CONTAMINATION
+  active_port_final_v23_parity: NOT_RUN_UPSTREAM_EVIDENCE_CONTAMINATION
+  four_method_execution: NOT_RUN_UPSTREAM_EVIDENCE_CONTAMINATION
+  trace_opened_for_current_evaluation: false
+  current_provider_generated: false
+  current_solver_process_count: 0
+  current_formal_run_count: 0
+  paper_figure_count: 0
+  classic18: 0
+  degradation_execution_count: 0
