@@ -59,6 +59,7 @@ def test_outer_checkpoint_binds_22_but_generation_ledger_binds_only_four() -> No
 
     assert len(verified) == 22
     assert len(ledger) == 4
+    assert all(row["expected_sha256"] == row["actual_sha256"] == row["sha256"] for row in ledger)
     assert BY2_TRACE_RELATIVE_PATH in verified
     assert BY2_TRACE_RELATIVE_PATH not in {row["relative_path"] for row in ledger}
 

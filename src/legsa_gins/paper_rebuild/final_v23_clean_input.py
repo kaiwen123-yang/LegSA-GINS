@@ -794,6 +794,8 @@ def generate_final_v23_clean_input(
                 "relative_path",
                 "role",
                 "sha256",
+                "expected_sha256",
+                "actual_sha256",
                 "reader_component",
                 "reason",
                 "output_provider_lineage",
