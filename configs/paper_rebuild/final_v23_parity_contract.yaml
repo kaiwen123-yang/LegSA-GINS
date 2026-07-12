@@ -433,11 +433,15 @@ clean1r2r1_execution_status:
   E001_reference_role: ARCHIVED_SEMISYNTHETIC_DIAGNOSTIC_REFERENCE_ONLY
   E001_old_input_used_by_solver: false
   current_active_evidence_contaminated: false
-  fresh_clean_input: PENDING_EXECUTION
-  exact_tag_fresh_build: PENDING_EXECUTION
-  exact_clean_final_v23_run: PENDING_EXECUTION
-  active_port_clean_final_v23_parity: PENDING_EXECUTION
-  four_method_execution: PENDING_PARITY_GATE
+  diagnostic_parity_anchor_code_commit: 88623711724825e9afa7d1430585a59724d5c091
+  fresh_clean_input: PASS_DIAGNOSTIC_FRESH_CURRENT_RAW
+  exact_tag_fresh_build: PASS_FINAL_V23_FREEZE_A906C3A2
+  exact_clean_final_v23_run: PASS_56642_ROWS_274_UPDATES
+  active_port_clean_final_v23_parity: PASS_FINAL_V23_CLEAN_PARITY_ANCHOR
+  diagnostic_strong_count: 56642
+  diagnostic_yaw_actions: {attempt: 274, normal: 228, downweight: 40, reject: 6, accepted: 268}
+  historical_metric_used_for_gate: false
+  four_method_execution: PENDING_CODE_FREEZE_REGENERATION
   classic18: 0
   degradation_execution_count: 0
 
