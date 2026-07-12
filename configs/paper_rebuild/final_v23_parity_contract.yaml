@@ -197,10 +197,20 @@ runtime_initialization:
   initpos_std_m: [10.0, 10.0, 10.0]
   initvel_std_mps: [1.0, 1.0, 1.0]
   initatt_std_deg: [2.0, 2.0, 2.0]
+  initial_error_std_fallbacks:
+    gyro_bias_std_deg_per_h: {source: imunoise.gbstd, value: [9.38, 9.38, 9.38]}
+    accel_bias_std_mGal: {source: imunoise.abstd, value: [77.8, 77.8, 77.8]}
+    gyro_scale_std_ppm: {source: imunoise.gsstd, value: [0.0, 0.0, 0.0]}
+    accel_scale_std_ppm: {source: imunoise.asstd, value: [0.0, 0.0, 0.0]}
 
 filter_contract:
   error_state_dimension: 21
+  process_noise_dimension: 18
   state_groups: [position, velocity, attitude, gyro_bias, accel_bias, gyro_scale, accel_scale]
+  imu_gnss_time_alignment_tolerance_seconds: 0.001
+  start_boundary:
+    gnss_at_or_before_starttime: skipped
+    first_aligned_imu: initializes_state_without_output
   imu_noise:
     arw_deg_sqrt_h: [0.985, 0.985, 0.985]
     vrw_mps_sqrt_h: [0.077, 0.077, 0.077]
@@ -215,6 +225,7 @@ filter_contract:
   yaw_jacobian_H_phi_z: -1.0
   yaw_residual: wrap_to_minus_pi_plus_pi
   measurement_update_order: position_then_yaw_then_receiver_velocity_at_GNSS_epoch
+  state_feedback: once_after_position_yaw_velocity_sequence
   scheme_C:
     source: exact_tag_compile_time_constants
     runner_environment_overrides_read_by_exact_tag_solver: false
@@ -226,9 +237,16 @@ filter_contract:
     yaw_res_hard_deg: 15.0
     yaw_downweight_scale: 2.5
   output_writer:
-    position: latitude_longitude_degrees_and_height_m
-    velocity: NED_m_per_s
-    attitude: roll_pitch_yaw_degrees
+    text_format: '%-15.9lf'
+    nav:
+      column_count: 11
+      columns: [week_zero, time, latitude_deg, longitude_deg, height_m, vn_mps, ve_mps, vd_mps, roll_deg, pitch_deg, yaw_deg]
+    std:
+      column_count: 22
+      semantics: time_then_state_standard_deviations_in_NAV_attitude_bias_scale_output_units
+    imu_error:
+      column_count: 13
+      columns: [time, gyro_bias_x_deg_per_h, gyro_bias_y_deg_per_h, gyro_bias_z_deg_per_h, accel_bias_x_mGal, accel_bias_y_mGal, accel_bias_z_mGal, gyro_scale_x_ppm, gyro_scale_y_ppm, gyro_scale_z_ppm, accel_scale_x_ppm, accel_scale_y_ppm, accel_scale_z_ppm]
 
 excluded_extensions:
   v3_foot_aware:

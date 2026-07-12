@@ -11,6 +11,26 @@ def test_same_run_window_and_initialization_are_recovered() -> None:
     assert init["initvel_ned_mps"] == [0.0, 0.0, 0.0]
     assert init["initatt_rpy_deg"] == [0.0, 0.0, 0.688505]
     assert contract["filter_contract"]["antlever_frd_m"] == [0.03, 0.03, -0.3]
+    assert contract["filter_contract"]["error_state_dimension"] == 21
+    assert contract["filter_contract"]["process_noise_dimension"] == 18
+    assert contract["filter_contract"]["imu_gnss_time_alignment_tolerance_seconds"] == 0.001
+    fallbacks = init["initial_error_std_fallbacks"]
+    assert fallbacks["gyro_bias_std_deg_per_h"]["value"] == [9.38, 9.38, 9.38]
+    assert fallbacks["accel_bias_std_mGal"]["value"] == [77.8, 77.8, 77.8]
+
+
+def test_exact_writer_and_start_boundary_semantics_are_recorded() -> None:
+    filter_contract = finalizer.load_contract()["filter_contract"]
+    boundary = filter_contract["start_boundary"]
+    assert boundary["gnss_at_or_before_starttime"] == "skipped"
+    assert boundary["first_aligned_imu"] == "initializes_state_without_output"
+    assert filter_contract["state_feedback"] == "once_after_position_yaw_velocity_sequence"
+    writer = filter_contract["output_writer"]
+    assert writer["text_format"] == "%-15.9lf"
+    assert writer["nav"]["column_count"] == 11
+    assert writer["nav"]["columns"][0:2] == ["week_zero", "time"]
+    assert writer["std"]["column_count"] == 22
+    assert writer["imu_error"]["column_count"] == 13
 
 
 def test_parity_and_four_method_gates_remain_closed() -> None:
