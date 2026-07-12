@@ -40,7 +40,9 @@ Every manifest must write `data_mode`, `synthetic_data_used`, and `semisynthetic
 
 The 60-type, 9-seed registry and classic-18 manifest are retained as legacy protocol definitions only. They do not import any legacy providers or results. Degraded data must be regenerated under `<CLEAN_ROOT>` from hash-locked raw inputs. Seed replay uses the fixed seed catalog and PCG64. The clean case is unique and contains no random operation. Module-disable is a method ablation, not a degradation case axis.
 
-## CLEAN1R1C Kick-Aligned Execution
+## Retained CLEAN1R1C Kick-Aligned Protocol
+
+This subsection records the superseded CLEAN1R1C contract for provenance only. It is not the current execution authorization and cannot supply CLEAN1R2 active evidence.
 
 - Detect the physical kick only from the initial Go2 IMU/event segment using the frozen robust jerk score and the maintained event-normalized detector cross-check.
 - Freeze `fixed_event_alignment_offset_seconds=0.0`; no correlation, trace, output, or metric offset search is permitted.
@@ -52,4 +54,4 @@ The 60-type, 9-seed registry and classic-18 manifest are retained as legacy prot
 
 ## Execution Boundary
 
-CLEAN0's independent BY2 smoke remains a runtime-health regression only. The current human authorization permits exactly one fresh CLEAN1R1C BY2 clean-normal four-method chain under the V2 kick-aligned protocol. A missing independent POI calibration or the same-source nature of the reference is not a blocker; both are mandatory caveats. CLEAN1R1C does not authorize DA03, DA05, classic-18, the 541-case matrix, figures, broad performance conclusions, or a later stage.
+CLEAN0's independent BY2 smoke remains a runtime-health regression only. CLEAN1R1C is retained historical protocol and has review disposition `SUPERSEDED_FOR_FINAL_V23_PARITY_REVIEW`; it is no longer an active execution authorization. The current CLEAN1R2 authorization remains fail-closed at `BLOCKED_CLEAN1R2_EVIDENCE_CONTAMINATION`: no fresh provider, parity anchor, active-port parity run, or four-method run may start until the human resolves the semisynthetic historical-parity versus clean no-injection/no-online-trace choice. Neither CLEAN1R1C nor CLEAN1R2 authorizes DA03, DA05, classic-18, the 541-case matrix, figures, broad performance conclusions, or a later stage.
