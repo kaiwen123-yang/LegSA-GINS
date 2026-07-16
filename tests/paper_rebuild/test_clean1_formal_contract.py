@@ -42,6 +42,7 @@ from legsa_gins.paper_rebuild.evidence import (
     assert_export_text_is_redacted,
     canonical_file_tree_digest,
     parse_strace_openat_paths,
+    scan_text_for_export_leaks,
     validate_provider_source_read_set,
     validate_failed_clean1_attempt_evidence,
     write_source_role_manifests,
@@ -1157,6 +1158,60 @@ def test_export_leak_guard_rejects_local_absolute_paths() -> None:
         assert_export_text_is_redacted(f"path={absolute}")
     with pytest.raises(EvidenceContractError, match="absolute_local_path"):
         assert_export_text_is_redacted("path=/mnt/g/中文/source.csv")
+
+
+@pytest.mark.parametrize(
+    "text",
+    (
+        '$ref: "#/$defs/sha256"',
+        '{"$ref":"#/$defs/run_manifest/sha256"}',
+        "beta_term=sum(x_term*y)/16",
+        "beta_term=math.fsum((x*y) for x, y in pairs)/16",
+        "fixed physical alternatives are +/-90 deg",
+        "schema=https://json-schema.org/draft/2020-12/schema",
+        r"pattern: '^(?!/)(?!.*(?:^|/)\.\.(?:/|$)).+'",
+    ),
+)
+def test_public_export_scanner_accepts_strict_non_path_slash_tokens(text: str) -> None:
+    assert scan_text_for_export_leaks(text) == []
+
+
+@pytest.mark.parametrize(
+    "text",
+    (
+        "/mnt/g/private/source.csv",
+        r"C:\Users\kaiwen\private\source.csv",
+        "D:/private/source.csv",
+        "/16/private",
+        "sum(x)/16/private",
+        "sum(/mnt/g/private)/16",
+        '#/$defs//mnt/g',
+        '#/$defs/sha256 /mnt/g/private/source.csv',
+        r'#/$defs/sha256/C:\Users\kaiwen\private.csv',
+        '#/$defs/sha256/C:/Users/kaiwen/private.csv',
+        'sum(x)/16:/mnt/g/private.csv',
+        r"^(?!/)(?!.*(?:^|/)\.\.(?:/|$)).+ /mnt/g/private/source.csv",
+        r"^(?!/)(?!.*(?:^|/)\.\.(?:/|$)).+:/mnt/g/private.csv",
+        r"^(?!/)(?!.*(?:^|/)\.\.(?:/|$)).+/mnt/g/private.csv",
+        r"^(?!/)(?!.*(?:^|/)\.\.(?:/|$)).+\C:\Users\kaiwen\private.csv",
+        "+/mnt/g/private.csv",
+        "-/home/kaiwen/private.csv",
+        "#/$defs/sha256+/mnt/g/private.csv",
+        "sum(x)/16+/mnt/g/private.csv",
+        r"pattern: '^(?!/)(?!.*(?:^|/)\.\.(?:/|$)).+', +/mnt/g/private.csv",
+        "fixed physical alternatives are +/-90/mnt/g/private.csv",
+        "file:/mnt/g/private.csv",
+        "file:///mnt/g/private.csv",
+        "FILE:///C:/Users/kaiwen/private.csv",
+        r"file:C:\Users\kaiwen\private.csv",
+        r'{"uri":"file:C:\\Users\\kaiwen\\private.csv"}',
+        "file://server/share/private.csv",
+        r"file:\\server\share\private.csv",
+        ":/mnt/g/private.csv",
+    ),
+)
+def test_public_export_scanner_rejects_paths_outside_strict_masks(text: str) -> None:
+    assert "absolute_local_path" in scan_text_for_export_leaks(text)
 
 
 def test_strace_parser_resolves_utf8_octal_and_decoded_dirfd(tmp_path: Path) -> None:

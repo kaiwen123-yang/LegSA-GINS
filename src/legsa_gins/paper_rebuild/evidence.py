@@ -263,10 +263,38 @@ FAILED_CLEAN1_RETRY_LAUNCH_SPECS: dict[str, dict[str, Any]] = {
 }
 
 LOCAL_PATH_RE = re.compile(
-    r"(?:(?<![:/\w+\-])/(?!/)[^\s'\"`<>]+|"
-    r"(?<![\w])[A-Za-z]:[\\/](?![\\/])[^\r\n'\"`]+)"
+    r"(?:(?<![/\w])/(?!/)[^\s'\"`<>]+|"
+    r"(?<![\w])[A-Za-z]:(?:[\\/](?![\\/])|\\\\(?!\\))[^\r\n'\"`]+)"
+)
+FILE_URI_RE = re.compile(
+    r"(?<![A-Za-z0-9_])file:"
+    r"(?:/{1,3}|\\+|[A-Za-z]:(?:/+|\\+))"
+    r"[^\s'\"`<>]*",
+    re.IGNORECASE,
 )
 PATH_ALIAS_RE = re.compile(r"<[A-Z0-9_]+>/[^\s'\"`]*")
+SIGNED_ALTERNATIVE_NUMERIC_RE = re.compile(
+    r"(?<![A-Za-z0-9_./\\])\+/-[0-9]+(?:\.[0-9]+)?"
+    r"(?![A-Za-z0-9_./\\:-])"
+)
+JSON_SCHEMA_LOCAL_REF_RE = re.compile(
+    r"#/\$defs/"
+    r"(?:[A-Za-z0-9_.-]|~[01])+"
+    r"(?:/(?:[A-Za-z0-9_.-]|~[01])+)*"
+    r"(?![A-Za-z0-9_./~$:-])"
+)
+JSON_SCHEMA_RELATIVE_PATH_PATTERN = r"^(?!/)(?!.*(?:^|/)\.\.(?:/|$)).+"
+JSON_SCHEMA_RELATIVE_PATH_PATTERN_RE = re.compile(
+    re.escape(JSON_SCHEMA_RELATIVE_PATH_PATTERN)
+    + r"(?=(?:\r?$|['\"](?=[ \t]*(?:[,}\]]|\r?$))))",
+    re.MULTILINE,
+)
+CLOSED_EXPRESSION_NUMERIC_DIVISOR_RE = re.compile(
+    r"(?P<closed_expression>\b[A-Za-z_][A-Za-z0-9_.]*\("
+    r"(?:[^()\r\n]|\([^()\r\n]*\))*"
+    r"\))/(?P<numeric_divisor>[1-9][0-9]*)"
+    r"(?![A-Za-z0-9_./\\:-])"
+)
 STRACE_OPENAT_RE = re.compile(
     r'openat\(([^,]+),\s*("(?:\\.|[^"\\])*")'
 )
@@ -628,8 +656,24 @@ def write_read_ledger(
 
 def scan_text_for_export_leaks(text: str) -> list[str]:
     issues: list[str] = []
+    if FILE_URI_RE.search(text):
+        issues.append("absolute_local_path")
     without_alias_paths = PATH_ALIAS_RE.sub("<PATH_ALIAS>", text)
-    if LOCAL_PATH_RE.search(without_alias_paths):
+    # 只遮盖完整、封闭的非路径 slash 语法；畸形 ref、后续路径段和独立绝对路径仍须失败。
+    without_schema_refs = JSON_SCHEMA_LOCAL_REF_RE.sub(
+        "<JSON_SCHEMA_LOCAL_REF>", without_alias_paths
+    )
+    without_relative_path_pattern = JSON_SCHEMA_RELATIVE_PATH_PATTERN_RE.sub(
+        "<JSON_SCHEMA_RELATIVE_PATH_PATTERN>",
+        without_schema_refs,
+    )
+    without_numeric_divisors = CLOSED_EXPRESSION_NUMERIC_DIVISOR_RE.sub(
+        r"\g<closed_expression><NUMERIC_DIVISOR>", without_relative_path_pattern
+    )
+    without_signed_alternatives = SIGNED_ALTERNATIVE_NUMERIC_RE.sub(
+        "<SIGNED_ALTERNATIVE_NUMERIC>", without_numeric_divisors
+    )
+    if LOCAL_PATH_RE.search(without_signed_alternatives):
         issues.append("absolute_local_path")
     for line in text.splitlines():
         reason = legacy_reason(line)

@@ -42,6 +42,67 @@ def test_export_rejects_absolute_private_path_text(tmp_path: Path) -> None:
         validate_export_members([member])
 
 
+def test_export_accepts_schema_ref_and_closed_numeric_divisor(tmp_path: Path) -> None:
+    member = _member(
+        tmp_path,
+        "CLEAN2_PROTOCOL_SNAPSHOT.yaml",
+        (
+            b'$ref: "#/$defs/sha256"\n'
+            b'formula: beta_term=sum(x_term*y)/16\n'
+            b'physical_transform: fixed alternatives are +/-90 deg\n'
+            b'schema: https://json-schema.org/draft/2020-12/schema\n'
+            br"relative_path_pattern: '^(?!/)(?!.*(?:^|/)\.\.(?:/|$)).+'"
+            b"\n"
+        ),
+    )
+    assert validate_export_members([member]) == [member]
+
+
+@pytest.mark.parametrize(
+    "content",
+    (
+        b'{"path":"C:\\\\Users\\\\kaiwen\\\\private.csv"}\n',
+        b'{"formula":"/16/private"}\n',
+        b'{"formula":"sum(x)/16/private"}\n',
+        b'{"formula":"sum(/mnt/g/private)/16"}\n',
+        b'{"$ref":"#/$defs//mnt/g"}\n',
+        b'{"$ref":"#/$defs/sha256", "path":"/mnt/g/private"}\n',
+        b'{"$ref":"#/$defs/sha256/C:\\\\Users\\\\kaiwen\\\\private.csv"}\n',
+        b'{"$ref":"#/$defs/sha256/C:/Users/kaiwen/private.csv"}\n',
+        b'{"formula":"sum(x)/16:/mnt/g/private.csv"}\n',
+        (
+            br"pattern: '^(?!/)(?!.*(?:^|/)\.\.(?:/|$)).+ /mnt/g/private'"
+            b"\n"
+        ),
+        br"pattern: ^(?!/)(?!.*(?:^|/)\.\.(?:/|$)).+:/mnt/g/private.csv",
+        br"pattern: ^(?!/)(?!.*(?:^|/)\.\.(?:/|$)).+/mnt/g/private.csv",
+        br"pattern: ^(?!/)(?!.*(?:^|/)\.\.(?:/|$)).+\C:\Users\kaiwen\private.csv",
+        b'{"path":"+/mnt/g/private.csv"}\n',
+        b'{"path":"-/home/kaiwen/private.csv"}\n',
+        b'{"$ref":"#/$defs/sha256+/mnt/g/private.csv"}\n',
+        b'{"formula":"sum(x)/16+/mnt/g/private.csv"}\n',
+        (
+            br"pattern: '^(?!/)(?!.*(?:^|/)\.\.(?:/|$)).+', +/mnt/g/private.csv"
+            b"\n"
+        ),
+        b'{"notation":"+/-90/mnt/g/private.csv"}\n',
+        b'{"uri":"file:/mnt/g/private.csv"}\n',
+        b'{"uri":"file:///mnt/g/private.csv"}\n',
+        b'{"uri":"FILE:///C:/Users/kaiwen/private.csv"}\n',
+        b'{"uri":"file:C:\\\\Users\\\\kaiwen\\\\private.csv"}\n',
+        b'{"uri":"file:\\\\\\\\server\\\\share\\\\private.csv"}\n',
+        b'{"uri":"file://server/share/private.csv"}\n',
+        b'{"path":":/mnt/g/private.csv"}\n',
+    ),
+)
+def test_export_strict_masks_do_not_hide_adversarial_paths(
+    tmp_path: Path, content: bytes
+) -> None:
+    member = _member(tmp_path, "CLEAN2_PROTOCOL_SNAPSHOT.json", content)
+    with pytest.raises(Clean2EvidenceError, match="privacy scan"):
+        validate_export_members([member])
+
+
 def test_export_rejects_extra_nav_payload(tmp_path: Path) -> None:
     member = _member(tmp_path, "EXTRA_OUTPUT.nav", b"1 2 3\n")
     with pytest.raises(Clean2EvidenceError, match="NAV/STD"):
