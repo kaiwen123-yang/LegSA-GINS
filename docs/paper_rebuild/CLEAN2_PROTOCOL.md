@@ -123,3 +123,28 @@ Classic-18 is a controlled dual-yaw degradation pilot on a real BY2 base. It is
 not 18 real scenarios, severe-GNSS real-world generalization, independent truth,
 or universal robustness evidence. CLEAN2 does not establish universal
 superiority.
+
+## Terminal execution record
+
+The protocol was executed at code freeze
+`8b592681de3aef97e33e86e1092664950d8db114`. The fresh chain passed all
+fail-closed gates:
+
+- raw integrity `22/22` at pre-provider, post-provider, and post-run;
+- exact five-provider content-hash parity;
+- 18 deterministic current-provider cases;
+- 110 unique formal configurations with 110 first-attempt terminal passes and
+  zero metric-driven reruns;
+- C00 single/basic/strong/full byte-identical structural parity;
+- 1,143 artifacts hash sealed before any trace read;
+- 110 exact offline evaluations, each with 56,642 matched epochs, zero
+  unmatched epochs, finite output, and coverage 1.0;
+- single, position/velocity, basic fixed-std, strong/full identity, module
+  counter, aggregate, and figure-render invariants;
+- final independent read-only review and the terminal evidence gate.
+
+The terminal machine decision is
+`PASS_CLEAN2_BY2_MODULE_ABLATION_AND_CLASSIC18_FRESH_EVIDENCE_READY_FOR_HUMAN_REVIEW`.
+This closes only the authorized BY2 clean factorial and controlled Classic-18
+pilot. It does not authorize CLEAN2 PR merge, a CLEAN2 tag, final paper figures,
+BY3/XB, or the 60x9 matrix.

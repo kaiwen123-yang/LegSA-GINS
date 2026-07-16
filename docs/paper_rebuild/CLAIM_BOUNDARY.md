@@ -8,19 +8,20 @@
 - State implementation, test, build, or clean-smoke completion only when the current clean artifact directly proves it.
 - Describe source-aware weighting as a bounded protection/interpretability mechanism and Go2 priors as weak auxiliary observations.
 - Report BY2 clean-normal descriptive metrics relative to the Fixposition-derived same-source reference after the V2 evidence audit passes, with the mounting/point caveat and without an independent-ground-truth claim.
-- After all CLEAN2 gates pass, report descriptive C00 module effects and
-  interactions, and descriptive four-method/LOO responses under the specified
-  controlled A1 dual-yaw perturbations. Helpful, neutral, or harmful labels must
-  remain metric-, case-, and protocol-specific.
+- The terminal CLEAN2 evidence at code freeze
+  `8b592681de3aef97e33e86e1092664950d8db114` permits descriptive C00 module
+  effects and interactions, and descriptive four-method/LOO responses under
+  the specified controlled A1 dual-yaw perturbations. Helpful, neutral, or
+  harmful labels must remain metric-, case-, and protocol-specific.
 
-## Not Allowed Until Fresh Clean Evidence Exists
+## Not Established By Current Evidence
 
-- Any numerical accuracy, robustness, generalization, ablation, or superiority result.
-- Any claim based on an old row, aggregate, figure, provider, manifest, or reconstructed summary.
+- Any numerical claim sourced from an old row, aggregate, figure, provider,
+  manifest, failed CLEAN2 attempt, or reconstructed summary.
 - Any claim that `LegSA_Paper_V1` outperforms final_v23 or another method.
 - Universal improvement claims for source-aware weighting, QM, Raw Doppler, or Go2.
 - Ordinary BY3 yaw generalization or severe-GNSS robustness.
-- A paper-ready or submission-ready claim from a smoke run.
+- A paper-ready or submission-ready claim from the bounded BY2 CLEAN2 evidence.
 
 ## CLEAN2 wording ceiling
 
