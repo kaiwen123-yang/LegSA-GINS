@@ -30,6 +30,7 @@ from .final_v23_clean_parity import (
     load_clean_bundle,
 )
 from .formal_generation import generate_formal_clean1_inputs
+from .formal_provider import RAW_DOPPLER_ANCHOR_ACTIVE_SHA256
 from .manifest import git_code_state, sha256_file, write_json_atomic
 from .paths import CleanPaths, guard_path, is_within, load_yaml_mapping
 from .subprocess_guard import run_process_group
@@ -98,6 +99,21 @@ def _is_sha256(value: Any) -> bool:
 
 def _is_git_commit(value: Any) -> bool:
     return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{40}", value) is not None
+
+
+def validate_active_raw_doppler_anchor(
+    path: str | Path,
+    reproducible_build: Mapping[str, Any],
+) -> str:
+    """Bind the rebased active CSV to the frozen current-clean content hash."""
+
+    expected = reproducible_build.get("expected_active_raw_doppler_sha256")
+    if expected != RAW_DOPPLER_ANCHOR_ACTIVE_SHA256:
+        raise Clean1R2R1FormalError("active Raw Doppler anchor identity drifted")
+    actual = sha256_file(path)
+    if actual != expected:
+        raise Clean1R2R1FormalError("BLOCKED_CLEAN2_BASE_PROVIDER_PARITY_FAILED")
+    return actual
 
 
 def _artifact(root: Path, entry: Mapping[str, Any], role: str) -> Path:
@@ -447,6 +463,22 @@ def generate_fresh_auxiliaries(
     raw = generated.get("raw_doppler_backend")
     if not isinstance(raw, Mapping) or raw.get("raw_doppler_backend_lineage_proven") is not True:
         raise Clean1R2R1FormalError("fresh Raw Doppler backend lineage is not proven")
+    reproducible_build = raw.get("raw_doppler_reproducible_build")
+    if not isinstance(reproducible_build, Mapping):
+        raise Clean1R2R1FormalError(
+            "fresh Raw Doppler reproducible-build contract is missing"
+        )
+    active_raw_hash = validate_active_raw_doppler_anchor(
+        active_paths["raw_doppler_provider"], reproducible_build
+    )
+    if active_hashes["raw_doppler_provider"] != active_raw_hash:
+        raise Clean1R2R1FormalError("active Raw Doppler hash binding changed")
+    role_time_audits["raw_doppler_provider"].update(
+        {
+            "expected_active_sha256": RAW_DOPPLER_ANCHOR_ACTIVE_SHA256,
+            "active_hash_parity": True,
+        }
+    )
     actual_reads = generated.get("actual_source_read_set")
     if not isinstance(actual_reads, list) or len(actual_reads) != 4:
         raise Clean1R2R1FormalError("auxiliary actual raw read set is not the fixed four-source set")
@@ -691,6 +723,29 @@ def validate_auxiliary_bundle(path: str | Path) -> dict[str, Any]:
             or audit.get("runtime_window_overlap") is not True
         ):
             raise Clean1R2R1FormalError(f"auxiliary role rebase provenance mismatch: {role}")
+        if role == "raw_doppler_provider":
+            raw_backend = payload.get("raw_doppler_backend")
+            reproducible_build = (
+                raw_backend.get("raw_doppler_reproducible_build")
+                if isinstance(raw_backend, Mapping)
+                else None
+            )
+            if not isinstance(reproducible_build, Mapping):
+                raise Clean1R2R1FormalError(
+                    "active Raw Doppler reproducible-build contract is missing"
+                )
+            active_hash = validate_active_raw_doppler_anchor(
+                active, reproducible_build
+            )
+            if (
+                audit.get("expected_active_sha256")
+                != RAW_DOPPLER_ANCHOR_ACTIVE_SHA256
+                or audit.get("active_hash_parity") is not True
+                or active_hash != payload["auxiliary_artifacts"][role].get("sha256")
+            ):
+                raise Clean1R2R1FormalError(
+                    "active Raw Doppler parity audit is incomplete"
+                )
         with source.open("r", encoding="utf-8-sig", newline="") as handle:
             source_reader = csv.DictReader(handle)
             source_fields = list(source_reader.fieldnames or ())

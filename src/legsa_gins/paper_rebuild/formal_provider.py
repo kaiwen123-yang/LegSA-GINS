@@ -6,8 +6,10 @@ must provide an exact pinned tool/source report and an explicit artifact map.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import math
+import re
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
@@ -32,6 +34,43 @@ RAW_DOPPLER_TIME_CONVERSION = (
     "GPS_day_index_from_UTC_date*86400-leap_seconds"
 )
 RAW_DOPPLER_COVARIANCE_POLICY = "conservative_isotropic_max_ecef_std_floor_0p2_mps"
+RAW_DOPPLER_REPRODUCIBLE_BUILD_SCHEMA = (
+    "paper_rebuild.raw_doppler_reproducible_build.v1"
+)
+RAW_DOPPLER_RINEX_NORMALIZATION_POLICY = "rinex_pgm_run_by_date_header_only_v1"
+RAW_DOPPLER_CANONICAL_RINEX_HEADER = (
+    b"CONVBIN 2.4.3                           "
+    b"20260712 104638 UTC PGM / RUN BY / DATE "
+)
+RAW_DOPPLER_CONVERSION_IDENTITY_ROLE = (
+    "frozen_current_clean_anchor_compatibility_identity"
+)
+RAW_DOPPLER_ANCHOR_CODE_FREEZE = "5c807633f699238aa2244a0496881dff71550273"
+RAW_DOPPLER_ANCHOR_REPORT_COMMIT = "a3909830288b29a8576626408c0eea700abea5ef"
+RAW_DOPPLER_ANCHOR_OBS_SHA256 = (
+    "570726bf49855905a4ee230cc977910f6f22ed4f6ad480d7aa486833b8ba62dd"
+)
+RAW_DOPPLER_ANCHOR_NAV_SHA256 = (
+    "5fa101567fcb1a044fd5f63850b5744ef20af568de48ac5f2ca7766978bf9ffa"
+)
+RAW_DOPPLER_ANCHOR_CONVERSION_IDENTITY_SHA256 = (
+    "73ad4264ae4c4e54be835aea17420575d736ddf38bdfa8908e4fd6e0d33b1d4a"
+)
+RAW_DOPPLER_ANCHOR_ACTIVE_SHA256 = (
+    "a40b9933295f6c2c989884d67cc674313f2fe03113c8acdf1d02ddf28734d722"
+)
+RAW_DOPPLER_CANONICAL_PATH_ALIASES = {
+    "convbin_executable": "tool://rtklib_b34/convbin",
+    "rebuilt_ubx": "provider://fresh/raw_doppler_backend/gnss1_rebuilt.ubx",
+    "rinex_obs": "provider://fresh/raw_doppler_backend/rinex/gnss1.obs",
+    "rinex_nav": "provider://fresh/raw_doppler_backend/rinex/gnss1.nav",
+    "rinex_gnav": "provider://fresh/raw_doppler_backend/rinex/gnss1.gnav",
+    "rinex_hnav": "provider://fresh/raw_doppler_backend/rinex/gnss1.hnav",
+    "rinex_qnav": "provider://fresh/raw_doppler_backend/rinex/gnss1.qnav",
+    "rinex_lnav": "provider://fresh/raw_doppler_backend/rinex/gnss1.lnav",
+    "rinex_cnav": "provider://fresh/raw_doppler_backend/rinex/gnss1.cnav",
+    "rinex_inav": "provider://fresh/raw_doppler_backend/rinex/gnss1.inav",
+}
 
 V1_REQUIRED_FORMAL_PROVIDER_ROLES = (
     "imu_runtime_input",
@@ -124,6 +163,14 @@ RAW_DOPPLER_REQUIRED_FIELDS = (
     "nav_source_hash",
     "conversion_config_hash",
     "conversion_contract",
+    "conversion_config_hash_role",
+    "canonical_conversion_contract_hash",
+    "actual_conversion_execution_contract",
+    "actual_conversion_execution_contract_hash",
+    "raw_doppler_reproducible_build",
+    "raw_doppler_reproducible_build_hash",
+    "rinex_header_normalization",
+    "tracked_provider_generation",
     "raw_epoch_count",
     "valid_epoch_count",
     "invalid_epoch_count",
@@ -173,6 +220,19 @@ RAW_OBSERVATION_SOURCE_NAMES = frozenset(
         "gnss1-raw.csv",
         "gnss2-raw.csv",
     }
+)
+
+_RAW_DOPPLER_CONVERSION_PATH_KEYS = (
+    "convbin_executable",
+    "rebuilt_ubx",
+    "rinex_obs",
+    "rinex_nav",
+    "rinex_gnav",
+    "rinex_hnav",
+    "rinex_qnav",
+    "rinex_lnav",
+    "rinex_cnav",
+    "rinex_inav",
 )
 
 
@@ -233,6 +293,49 @@ def _is_sha256(value: Any) -> bool:
     return isinstance(value, str) and len(value) == 64 and all(ch in "0123456789abcdef" for ch in value)
 
 
+def _canonical_mapping_hash(value: Mapping[str, Any]) -> str:
+    canonical = json.dumps(dict(value), sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def _contains_local_absolute_path(value: Any) -> bool:
+    """Reject host paths while allowing frozen non-file URI identities."""
+
+    if isinstance(value, Mapping):
+        return any(
+            _contains_local_absolute_path(key)
+            or _contains_local_absolute_path(item)
+            for key, item in value.items()
+        )
+    if isinstance(value, (list, tuple)):
+        return any(_contains_local_absolute_path(item) for item in value)
+    if not isinstance(value, str):
+        return False
+    if value.casefold().startswith("file://"):
+        return True
+    # URI identities such as tool://, provider://, and the pinned HTTPS remote
+    # are not filesystem paths and are deliberately path-independent.
+    if re.match(r"^[A-Za-z][A-Za-z0-9+.-]*://", value):
+        return False
+    return (
+        Path(value).is_absolute()
+        or bool(re.match(r"^[A-Za-z]:[\\/]", value))
+        or value.startswith(("\\\\", "//"))
+    )
+
+
+def _raw_doppler_conversion_command(paths: Mapping[str, str]) -> list[str]:
+    return [
+        paths["convbin_executable"],
+        "-r", "ubx", "-v", "3.04", "-od", "-os", "-oi", "-ot", "-ol",
+        "-o", paths["rinex_obs"], "-n", paths["rinex_nav"],
+        "-g", paths["rinex_gnav"], "-h", paths["rinex_hnav"],
+        "-q", paths["rinex_qnav"], "-l", paths["rinex_lnav"],
+        "-b", paths["rinex_cnav"], "-i", paths["rinex_inav"],
+        paths["rebuilt_ubx"],
+    ]
+
+
 def load_json_object(path: str | Path) -> dict[str, Any]:
     source = Path(path)
     try:
@@ -242,6 +345,204 @@ def load_json_object(path: str | Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise FormalProviderError(f"Provider JSON must be an object: {source.name}")
     return payload
+
+
+def _validate_raw_doppler_reproducibility(report: Mapping[str, Any]) -> None:
+    reproducible = report.get("raw_doppler_reproducible_build")
+    if not isinstance(reproducible, Mapping):
+        raise FormalProviderError("Raw Doppler reproducible-build contract is missing")
+    if set(reproducible) != {
+        "schema_version",
+        "source_role",
+        "source_stage_id",
+        "source_code_freeze_commit",
+        "source_report_commit",
+        "runtime_reads_prior_provider_or_rinex",
+        "rinex_header_normalization",
+        "conversion_identity",
+        "canonical_path_aliases",
+        "expected_active_raw_doppler_sha256",
+    }:
+        raise FormalProviderError("Raw Doppler reproducible-build field set mismatch")
+    if (
+        reproducible.get("schema_version") != RAW_DOPPLER_REPRODUCIBLE_BUILD_SCHEMA
+        or reproducible.get("source_role")
+        != "user_designated_current_clean_anchor_metadata"
+        or reproducible.get("source_stage_id")
+        != "CLEAN1R2R1_CLEAN_REAL_FINAL_V23_PARITY_AND_FOUR_METHOD_EXECUTION"
+        or reproducible.get("source_code_freeze_commit")
+        != RAW_DOPPLER_ANCHOR_CODE_FREEZE
+        or reproducible.get("source_report_commit")
+        != RAW_DOPPLER_ANCHOR_REPORT_COMMIT
+        or reproducible.get("runtime_reads_prior_provider_or_rinex") is not False
+        or reproducible.get("expected_active_raw_doppler_sha256")
+        != RAW_DOPPLER_ANCHOR_ACTIVE_SHA256
+        or _canonical_mapping_hash(reproducible)
+        != report.get("raw_doppler_reproducible_build_hash")
+    ):
+        raise FormalProviderError("Raw Doppler reproducible-build anchor identity mismatch")
+    tracked_generation = report.get("tracked_provider_generation")
+    if (
+        not isinstance(tracked_generation, Mapping)
+        or tracked_generation.get("raw_doppler_reproducible_build") != reproducible
+    ):
+        raise FormalProviderError("Raw Doppler reproducible build is not the tracked generation spec")
+    normalization = reproducible.get("rinex_header_normalization")
+    if not isinstance(normalization, Mapping) or set(normalization) != {
+        "policy_id",
+        "fixed_width_bytes",
+        "label",
+        "program",
+        "run_by",
+        "build_timestamp_utc",
+        "expected_obs_sha256",
+        "expected_nav_sha256",
+    } or (
+        normalization.get("policy_id") != RAW_DOPPLER_RINEX_NORMALIZATION_POLICY
+        or normalization.get("fixed_width_bytes") != 80
+        or normalization.get("label") != "PGM / RUN BY / DATE"
+        or normalization.get("program") != "CONVBIN 2.4.3"
+        or normalization.get("run_by") != ""
+        or normalization.get("build_timestamp_utc") != "20260712 104638 UTC"
+        or normalization.get("expected_obs_sha256")
+        != RAW_DOPPLER_ANCHOR_OBS_SHA256
+        or normalization.get("expected_nav_sha256")
+        != RAW_DOPPLER_ANCHOR_NAV_SHA256
+    ):
+        raise FormalProviderError("Raw Doppler RINEX normalization contract mismatch")
+    identity = reproducible.get("conversion_identity")
+    if not isinstance(identity, Mapping) or set(identity) != {
+        "csv_field",
+        "role",
+        "sha256",
+        "actual_contract_sha256_claimed",
+    } or (
+        identity.get("csv_field") != "conversion_config_hash"
+        or identity.get("role") != RAW_DOPPLER_CONVERSION_IDENTITY_ROLE
+        or identity.get("sha256")
+        != RAW_DOPPLER_ANCHOR_CONVERSION_IDENTITY_SHA256
+        or identity.get("actual_contract_sha256_claimed") is not False
+        or report.get("conversion_config_hash") != identity.get("sha256")
+        or report.get("conversion_config_hash_role") != identity.get("role")
+    ):
+        raise FormalProviderError("Raw Doppler anchor/actual conversion identity is confused")
+    aliases = reproducible.get("canonical_path_aliases")
+    if not isinstance(aliases, Mapping) or set(aliases) != set(
+        _RAW_DOPPLER_CONVERSION_PATH_KEYS
+    ):
+        raise FormalProviderError("Raw Doppler canonical path aliases are incomplete")
+    alias_paths = {key: str(aliases[key]) for key in _RAW_DOPPLER_CONVERSION_PATH_KEYS}
+    if alias_paths != RAW_DOPPLER_CANONICAL_PATH_ALIASES or len(
+        set(alias_paths.values())
+    ) != len(alias_paths) or any(
+        "://" not in value
+        or value.startswith(("/", "\\"))
+        or ".." in Path(value).parts
+        or any(character.isspace() for character in value)
+        for value in alias_paths.values()
+    ):
+        raise FormalProviderError("Raw Doppler canonical path alias is unsafe")
+
+    normalization_audit = report.get("rinex_header_normalization")
+    if not isinstance(normalization_audit, Mapping) or (
+        normalization_audit.get("schema_version")
+        != "paper_rebuild.raw_doppler_rinex_normalization.v1"
+        or normalization_audit.get("policy_hash")
+        != _canonical_mapping_hash(normalization)
+        or normalization_audit.get("runtime_prior_provider_or_rinex_read") is not False
+        or normalization_audit.get("passed") is not True
+    ):
+        raise FormalProviderError("Raw Doppler RINEX normalization audit is incomplete")
+    for role, expected in (
+        ("obs", RAW_DOPPLER_ANCHOR_OBS_SHA256),
+        ("nav", RAW_DOPPLER_ANCHOR_NAV_SHA256),
+    ):
+        audit = normalization_audit.get(role)
+        if not isinstance(audit, Mapping) or (
+            audit.get("schema_version")
+            != "paper_rebuild.rinex_header_normalization_audit.v1"
+            or audit.get("role") != role
+            or audit.get("policy_id") != RAW_DOPPLER_RINEX_NORMALIZATION_POLICY
+            or audit.get("target_label") != "PGM / RUN BY / DATE"
+            or audit.get("path_role") != f"raw_doppler_rinex_{role}"
+            or not isinstance(audit.get("target_line_number"), int)
+            or audit.get("target_line_number") < 1
+            or audit.get("fixed_width_bytes") != 80
+            or audit.get("normalized_sha256") != expected
+            or audit.get("expected_normalized_sha256") != expected
+            or audit.get("only_build_timestamp_field_changed") is not True
+            or audit.get("changed_line_count") not in {0, 1}
+            or audit.get("normalized_file_used_by_helper") is not True
+            or audit.get("passed") is not True
+            or not _is_sha256(audit.get("source_sha256"))
+            or not _is_sha256(audit.get("source_header_line_sha256"))
+            or audit.get("canonical_header_line_sha256")
+            != hashlib.sha256(RAW_DOPPLER_CANONICAL_RINEX_HEADER).hexdigest()
+            or not _is_sha256(audit.get("non_target_bytes_sha256"))
+        ):
+            raise FormalProviderError(f"Raw Doppler normalized RINEX {role} audit mismatch")
+    if (
+        report.get("obs_source_hash") != RAW_DOPPLER_ANCHOR_OBS_SHA256
+        or report.get("nav_source_hash") != RAW_DOPPLER_ANCHOR_NAV_SHA256
+    ):
+        raise FormalProviderError("Raw Doppler source hashes are not normalized anchor artifacts")
+
+    conversion = report.get("conversion_contract")
+    if not isinstance(conversion, Mapping) or (
+        conversion.get("schema_version")
+        != "paper_rebuild.raw_doppler_canonical_conversion.v1"
+        or _canonical_mapping_hash(conversion)
+        != report.get("canonical_conversion_contract_hash")
+    ):
+        raise FormalProviderError("Raw Doppler canonical conversion contract hash mismatch")
+    canonical_command = _raw_doppler_conversion_command(alias_paths)
+    if (
+        conversion.get("canonical_path_aliases") != alias_paths
+        or conversion.get("canonical_command") != canonical_command
+        or conversion.get("convbin_options") != canonical_command[1:-1]
+        or conversion.get("convbin_input") != canonical_command[-1]
+    ):
+        raise FormalProviderError("Raw Doppler canonical conversion command drifted")
+    if _contains_local_absolute_path(conversion):
+        raise FormalProviderError("Raw Doppler canonical conversion contains an absolute path")
+
+    actual = report.get("actual_conversion_execution_contract")
+    if not isinstance(actual, Mapping) or (
+        actual.get("schema_version")
+        != "paper_rebuild.raw_doppler_actual_conversion_execution.v1"
+        or actual.get("paths_separate_from_canonical_contract") is not True
+        or _canonical_mapping_hash(actual)
+        != report.get("actual_conversion_execution_contract_hash")
+    ):
+        raise FormalProviderError("Raw Doppler actual execution contract hash mismatch")
+    root_text = actual.get("provider_root")
+    actual_paths_raw = actual.get("actual_paths")
+    if not isinstance(root_text, str) or not isinstance(actual_paths_raw, Mapping):
+        raise FormalProviderError("Raw Doppler actual execution paths are missing")
+    raw_root = Path(root_text)
+    if (
+        not raw_root.is_absolute()
+        or raw_root.is_symlink()
+        or set(actual_paths_raw) != set(_RAW_DOPPLER_CONVERSION_PATH_KEYS)
+    ):
+        raise FormalProviderError("Raw Doppler actual provider-root contract is invalid")
+    root = raw_root.resolve(strict=False)
+    actual_paths: dict[str, str] = {}
+    for role in _RAW_DOPPLER_CONVERSION_PATH_KEYS:
+        raw_path = Path(str(actual_paths_raw[role]))
+        if not raw_path.is_absolute() or raw_path.is_symlink():
+            raise FormalProviderError("Raw Doppler actual execution path is not absolute/direct")
+        resolved = raw_path.resolve(strict=False)
+        if resolved != root and root not in resolved.parents:
+            raise FormalProviderError("Raw Doppler actual execution path escaped provider root")
+        actual_paths[role] = str(resolved)
+    if actual.get("actual_command") != _raw_doppler_conversion_command(actual_paths):
+        raise FormalProviderError("Raw Doppler actual execution command/path map differs")
+    if report.get("conversion_config_hash") in {
+        report.get("canonical_conversion_contract_hash"),
+        report.get("actual_conversion_execution_contract_hash"),
+    }:
+        raise FormalProviderError("Raw Doppler compatibility identity was claimed as a contract hash")
 
 
 def validate_raw_doppler_backend_report(
@@ -302,6 +603,7 @@ def validate_raw_doppler_backend_report(
     ):
         if not _is_sha256(report.get(field)):
             raise FormalProviderError(f"Raw Doppler lineage hash is invalid: {field}")
+    _validate_raw_doppler_reproducibility(report)
 
     rtklib_sources = report.get("rtklib_source_files")
     rtklib_hashes = report.get("rtklib_source_hashes")
@@ -363,10 +665,6 @@ def validate_raw_doppler_backend_report(
     conversion = report.get("conversion_contract")
     if not isinstance(conversion, Mapping):
         raise FormalProviderError("Raw Doppler conversion contract is missing")
-    canonical_conversion = json.dumps(dict(conversion), sort_keys=True, separators=(",", ":"))
-    import hashlib
-    if hashlib.sha256(canonical_conversion.encode("utf-8")).hexdigest() != report.get("conversion_config_hash"):
-        raise FormalProviderError("Raw Doppler conversion contract hash mismatch")
     if conversion.get("approx_position_geodetic_deg_m") != approx or conversion.get("gps_week") != gps_week:
         raise FormalProviderError("Raw Doppler conversion contract omits position/time inputs")
     for field in (
@@ -588,6 +886,9 @@ def validate_formal_provider_manifest(
     raw_doppler_report = validate_raw_doppler_backend_report(
         raw_doppler, verified_raw_hashes=locked_hashes
     )
+    execution = raw_doppler_report["actual_conversion_execution_contract"]
+    if Path(str(execution["provider_root"])).resolve(strict=True) != root:
+        raise FormalProviderError("Raw Doppler actual execution provider root differs")
     for role, entry in raw_doppler_report["retained_backend_artifacts"].items():
         candidate = guard_path(
             root / entry["relative_path"],

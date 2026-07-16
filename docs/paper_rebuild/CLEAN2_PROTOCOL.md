@@ -47,6 +47,31 @@ to C00. Outage/downsample changes only column 18. Value perturbations may change
 column 14. C10/C14 may change only column 15. IMU, Raw Doppler, Go2 roll/pitch,
 and Go2 horizontal-velocity providers remain content-identical to C00.
 
+## Fresh base-provider reproducibility gate
+
+Raw Doppler is regenerated from hash-locked source; no prior provider or RINEX
+is a runtime input. The only permitted post-`convbin` normalization is the
+unique 80-byte `PGM / RUN BY / DATE` line. The resulting observation/navigation
+RINEX hashes must be
+`570726bf49855905a4ee230cc977910f6f22ed4f6ad480d7aa486833b8ba62dd` and
+`5fa101567fcb1a044fd5f63850b5744ef20af568de48ac5f2ca7766978bf9ffa`,
+respectively, and all non-target bytes must be unchanged. The legacy CSV value
+`73ad4264ae4c4e54be835aea17420575d736ddf38bdfa8908e4fd6e0d33b1d4a` is
+retained solely as `frozen_current_clean_anchor_compatibility_identity`, never
+as the actual conversion-contract hash. Canonical alias identity and actual
+attempt-path execution each have independent contracts and hashes; actual paths
+must remain beneath the fresh provider root.
+
+The active time-rebased Raw Doppler CSV must hash to
+`a40b9933295f6c2c989884d67cc674313f2fe03113c8acdf1d02ddf28734d722`.
+Failure of
+any normalized-RINEX, identity-role, path-confinement, or active-provider lock
+stops at `BLOCKED_CLEAN2_BASE_PROVIDER_PARITY_FAILED` before C00. The anchor
+metadata provenance is CLEAN1 code freeze
+`5c807633f699238aa2244a0496881dff71550273` and report commit
+`a3909830288b29a8576626408c0eea700abea5ef`; this provenance is not permission
+to read their old payloads.
+
 ## Deterministic policy details
 
 - RNG: `numpy.random.Generator(PCG64(seed))`.

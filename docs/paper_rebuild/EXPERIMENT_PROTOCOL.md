@@ -45,6 +45,36 @@ Every manifest must write `data_mode`, `synthetic_data_used`, and `semisynthetic
 - Provider lineage and source hashes are mandatory.
 - Reported metrics must be recomputable from the final clean output, not an old aggregate or summary reconstruction.
 
+## Fresh Raw Doppler reproducibility identity
+
+The current-clean Raw Doppler anchor contributes frozen metadata only. Fresh
+generation must rebuild UBX from the hash-locked GNSS1 raw CSV, run a freshly
+built pinned RTKLIB `convbin`, and must not read a prior provider or prior RINEX
+payload. After `convbin`, the generator may normalize only the unique fixed-width
+`PGM / RUN BY / DATE` header line to the frozen 80-byte value. Program/run-by
+identity and every non-target byte remain unchanged. The normalized hard locks
+are:
+
+- observation RINEX: `570726bf49855905a4ee230cc977910f6f22ed4f6ad480d7aa486833b8ba62dd`;
+- navigation RINEX: `5fa101567fcb1a044fd5f63850b5744ef20af568de48ac5f2ca7766978bf9ffa`.
+
+The Raw Doppler CSV field
+`conversion_config_hash=73ad4264ae4c4e54be835aea17420575d736ddf38bdfa8908e4fd6e0d33b1d4a`
+retains the
+explicit role `frozen_current_clean_anchor_compatibility_identity`. It is not,
+and must never be described as, the hash of the current canonical or actual
+conversion contract. A path-independent canonical contract uses only
+`tool://`/`provider://` aliases and has its own computed hash. A separate actual
+execution contract records the attempt-owned paths, all confined below the new
+provider root, and has a different computed hash. The normalization policy and
+each normalization audit are hash-bound separately.
+
+After the time-only rebase, the active Raw Doppler provider must equal
+`a40b9933295f6c2c989884d67cc674313f2fe03113c8acdf1d02ddf28734d722`.
+Any difference is `BLOCKED_CLEAN2_BASE_PROVIDER_PARITY_FAILED`; it cannot be
+accepted as a new provider. This reproducibility repair does not alter solver,
+evaluator, final_v23 mathematics, thresholds, or method parameters.
+
 ## Degradation Protocol
 
 The 60-type, 9-seed registry and classic-18 manifest are retained as legacy protocol definitions only. They do not import any legacy providers or results. Degraded data must be regenerated under `<CLEAN_ROOT>` from hash-locked raw inputs. Seed replay uses the fixed seed catalog and PCG64. The clean case is unique and contains no random operation. Module-disable is a method ablation, not a degradation case axis.

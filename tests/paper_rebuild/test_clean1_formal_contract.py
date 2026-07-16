@@ -9,6 +9,7 @@ import subprocess
 import sys
 import time
 import zipfile
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
@@ -46,7 +47,7 @@ from legsa_gins.paper_rebuild.evidence import (
     write_source_role_manifests,
     verify_by2_raw_22,
 )
-from legsa_gins.paper_rebuild import formal_generation
+from legsa_gins.paper_rebuild import formal_generation, formal_provider
 from legsa_gins.paper_rebuild import providers as clean_providers
 from legsa_gins.paper_rebuild.formal_generation import (
     _reuse_generated_dual_yaw_artifact,
@@ -63,7 +64,16 @@ from legsa_gins.paper_rebuild.formal_provider import (
     FORMAL_PROVIDER_ACTUAL_SOURCE_ROLES,
     PINNED_RTKLIB_COMMIT,
     PINNED_RTKLIB_REMOTE,
+    RAW_DOPPLER_ANCHOR_ACTIVE_SHA256,
+    RAW_DOPPLER_ANCHOR_CODE_FREEZE,
+    RAW_DOPPLER_ANCHOR_CONVERSION_IDENTITY_SHA256,
+    RAW_DOPPLER_ANCHOR_NAV_SHA256,
+    RAW_DOPPLER_ANCHOR_OBS_SHA256,
+    RAW_DOPPLER_ANCHOR_REPORT_COMMIT,
+    RAW_DOPPLER_CONVERSION_IDENTITY_ROLE,
     RAW_DOPPLER_COVARIANCE_POLICY,
+    RAW_DOPPLER_REPRODUCIBLE_BUILD_SCHEMA,
+    RAW_DOPPLER_RINEX_NORMALIZATION_POLICY,
     RAW_DOPPLER_TIME_CONVERSION,
     REQUIRED_FORMAL_PROVIDER_ROLES,
     FormalProviderError,
@@ -353,16 +363,153 @@ def test_post_raw_mismatch_returns_auditable_failed_rows(tmp_path: Path) -> None
     assert len(audit.rows) == 22
 
 
-def _raw_doppler_report(source: str, status_source: str) -> dict[str, object]:
-    conversion = {
-        "approx_position_geodetic_deg_m": [40.0, 116.0, 10.0],
-        "gps_week": 2408,
+def _raw_doppler_report(
+    source: str,
+    status_source: str,
+    *,
+    provider_root: str | Path = "/tmp/CLEAN1_BY2_CLEAN_NORMAL_V1",
+) -> dict[str, object]:
+    aliases = {
+        "convbin_executable": "tool://rtklib_b34/convbin",
+        "rebuilt_ubx": "provider://fresh/raw_doppler_backend/gnss1_rebuilt.ubx",
+        "rinex_obs": "provider://fresh/raw_doppler_backend/rinex/gnss1.obs",
+        "rinex_nav": "provider://fresh/raw_doppler_backend/rinex/gnss1.nav",
+        "rinex_gnav": "provider://fresh/raw_doppler_backend/rinex/gnss1.gnav",
+        "rinex_hnav": "provider://fresh/raw_doppler_backend/rinex/gnss1.hnav",
+        "rinex_qnav": "provider://fresh/raw_doppler_backend/rinex/gnss1.qnav",
+        "rinex_lnav": "provider://fresh/raw_doppler_backend/rinex/gnss1.lnav",
+        "rinex_cnav": "provider://fresh/raw_doppler_backend/rinex/gnss1.cnav",
+        "rinex_inav": "provider://fresh/raw_doppler_backend/rinex/gnss1.inav",
     }
-    conversion_hash = hashlib.sha256(
-        json.dumps(conversion, sort_keys=True, separators=(",", ":")).encode()
-    ).hexdigest()
+
+    def command(paths: dict[str, str]) -> list[str]:
+        return [
+            paths["convbin_executable"],
+            "-r", "ubx", "-v", "3.04", "-od", "-os", "-oi", "-ot", "-ol",
+            "-o", paths["rinex_obs"], "-n", paths["rinex_nav"],
+            "-g", paths["rinex_gnav"], "-h", paths["rinex_hnav"],
+            "-q", paths["rinex_qnav"], "-l", paths["rinex_lnav"],
+            "-b", paths["rinex_cnav"], "-i", paths["rinex_inav"],
+            paths["rebuilt_ubx"],
+        ]
+
+    normalization = {
+        "policy_id": RAW_DOPPLER_RINEX_NORMALIZATION_POLICY,
+        "fixed_width_bytes": 80,
+        "label": "PGM / RUN BY / DATE",
+        "program": "CONVBIN 2.4.3",
+        "run_by": "",
+        "build_timestamp_utc": "20260712 104638 UTC",
+        "expected_obs_sha256": RAW_DOPPLER_ANCHOR_OBS_SHA256,
+        "expected_nav_sha256": RAW_DOPPLER_ANCHOR_NAV_SHA256,
+    }
+    reproducible = {
+        "schema_version": RAW_DOPPLER_REPRODUCIBLE_BUILD_SCHEMA,
+        "source_role": "user_designated_current_clean_anchor_metadata",
+        "source_stage_id": "CLEAN1R2R1_CLEAN_REAL_FINAL_V23_PARITY_AND_FOUR_METHOD_EXECUTION",
+        "source_code_freeze_commit": RAW_DOPPLER_ANCHOR_CODE_FREEZE,
+        "source_report_commit": RAW_DOPPLER_ANCHOR_REPORT_COMMIT,
+        "runtime_reads_prior_provider_or_rinex": False,
+        "rinex_header_normalization": normalization,
+        "conversion_identity": {
+            "csv_field": "conversion_config_hash",
+            "role": RAW_DOPPLER_CONVERSION_IDENTITY_ROLE,
+            "sha256": RAW_DOPPLER_ANCHOR_CONVERSION_IDENTITY_SHA256,
+            "actual_contract_sha256_claimed": False,
+        },
+        "canonical_path_aliases": aliases,
+        "expected_active_raw_doppler_sha256": RAW_DOPPLER_ANCHOR_ACTIVE_SHA256,
+    }
+    canonical_command = command(aliases)
+    conversion = {
+        "schema_version": "paper_rebuild.raw_doppler_canonical_conversion.v1",
+        "rtklib_remote": PINNED_RTKLIB_REMOTE,
+        "rtklib_commit": PINNED_RTKLIB_COMMIT,
+        "canonical_path_aliases": aliases,
+        "canonical_command": canonical_command,
+        "convbin_options": canonical_command[1:-1],
+        "convbin_input": canonical_command[-1],
+        "min_sat": 5,
+        "std_floor_mps": 0.2,
+        "time_conversion_formula": RAW_DOPPLER_TIME_CONVERSION,
+        "utc_date": [2026, 3, 6],
+        "gps_week": 2408,
+        "leap_seconds": 18,
+        "approx_position_geodetic_deg_m": [40.0, 116.0, 10.0],
+        "selected_status_row_number": 2,
+        "selected_status_fields_sha256": DIGEST,
+        "covariance_policy": RAW_DOPPLER_COVARIANCE_POLICY,
+        "first_epoch_fit_used": False,
+    }
+    root = Path(provider_root).resolve()
+    actual_paths = {
+        "convbin_executable": str(root / "raw_doppler_backend/tools/convbin_pinned_b34"),
+        "rebuilt_ubx": str(root / "raw_doppler_backend/gnss1_rebuilt.ubx"),
+        "rinex_obs": str(root / "raw_doppler_backend/rinex/gnss1.obs"),
+        "rinex_nav": str(root / "raw_doppler_backend/rinex/gnss1.nav"),
+        "rinex_gnav": str(root / "raw_doppler_backend/rinex/gnss1.gnav"),
+        "rinex_hnav": str(root / "raw_doppler_backend/rinex/gnss1.hnav"),
+        "rinex_qnav": str(root / "raw_doppler_backend/rinex/gnss1.qnav"),
+        "rinex_lnav": str(root / "raw_doppler_backend/rinex/gnss1.lnav"),
+        "rinex_cnav": str(root / "raw_doppler_backend/rinex/gnss1.cnav"),
+        "rinex_inav": str(root / "raw_doppler_backend/rinex/gnss1.inav"),
+    }
+    actual = {
+        "schema_version": "paper_rebuild.raw_doppler_actual_conversion_execution.v1",
+        "provider_root": str(root),
+        "actual_paths": actual_paths,
+        "actual_command": command(actual_paths),
+        "paths_separate_from_canonical_contract": True,
+    }
+
+    def canonical_hash(value: dict[str, object]) -> str:
+        return hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+    normalization_audit: dict[str, object] = {
+        "schema_version": "paper_rebuild.raw_doppler_rinex_normalization.v1",
+        "policy_hash": canonical_hash(normalization),
+        "runtime_prior_provider_or_rinex_read": False,
+        "passed": True,
+    }
+    for role, expected in (
+        ("obs", RAW_DOPPLER_ANCHOR_OBS_SHA256),
+        ("nav", RAW_DOPPLER_ANCHOR_NAV_SHA256),
+    ):
+        normalization_audit[role] = {
+            "schema_version": "paper_rebuild.rinex_header_normalization_audit.v1",
+            "role": role,
+            "path_role": f"raw_doppler_rinex_{role}",
+            "policy_id": RAW_DOPPLER_RINEX_NORMALIZATION_POLICY,
+            "target_label": "PGM / RUN BY / DATE",
+            "target_line_number": 2,
+            "fixed_width_bytes": 80,
+            "normalized_sha256": expected,
+            "expected_normalized_sha256": expected,
+            "only_build_timestamp_field_changed": True,
+            "changed_line_count": 1,
+            "normalized_file_used_by_helper": True,
+            "passed": True,
+            "source_sha256": DIGEST,
+            "source_header_line_sha256": DIGEST,
+            "canonical_header_line_sha256": hashlib.sha256(
+                b"CONVBIN 2.4.3                           "
+                b"20260712 104638 UTC PGM / RUN BY / DATE "
+            ).hexdigest(),
+            "non_target_bytes_sha256": DIGEST,
+        }
     retained = {
-        role: {"relative_path": f"raw_doppler_backend/{role}", "sha256": DIGEST}
+        role: {
+            "relative_path": f"raw_doppler_backend/{role}",
+            "sha256": (
+                RAW_DOPPLER_ANCHOR_OBS_SHA256
+                if role == "rinex_obs"
+                else RAW_DOPPLER_ANCHOR_NAV_SHA256
+                if role == "rinex_nav"
+                else DIGEST
+            ),
+        }
         for role in (
             "helper_executable",
             "helper_source",
@@ -382,10 +529,20 @@ def _raw_doppler_report(source: str, status_source: str) -> dict[str, object]:
         "helper_source_files": ["src/legsa_gins/paper_rebuild/formal_generation.py"],
         "helper_source_hashes": {"src/legsa_gins/paper_rebuild/formal_generation.py": DIGEST},
         "helper_executable_hash": DIGEST,
-        "obs_source_hash": DIGEST,
-        "nav_source_hash": DIGEST,
-        "conversion_config_hash": conversion_hash,
+        "obs_source_hash": RAW_DOPPLER_ANCHOR_OBS_SHA256,
+        "nav_source_hash": RAW_DOPPLER_ANCHOR_NAV_SHA256,
+        "conversion_config_hash": RAW_DOPPLER_ANCHOR_CONVERSION_IDENTITY_SHA256,
         "conversion_contract": conversion,
+        "conversion_config_hash_role": RAW_DOPPLER_CONVERSION_IDENTITY_ROLE,
+        "canonical_conversion_contract_hash": canonical_hash(conversion),
+        "actual_conversion_execution_contract": actual,
+        "actual_conversion_execution_contract_hash": canonical_hash(actual),
+        "raw_doppler_reproducible_build": reproducible,
+        "raw_doppler_reproducible_build_hash": canonical_hash(reproducible),
+        "rinex_header_normalization": normalization_audit,
+        "tracked_provider_generation": {
+            "raw_doppler_reproducible_build": reproducible,
+        },
         "raw_epoch_count": 1509,
         "valid_epoch_count": 1248,
         "invalid_epoch_count": 261,
@@ -433,6 +590,53 @@ def _raw_doppler_report(source: str, status_source: str) -> dict[str, object]:
     }
 
 
+def _rebind_partial_fixture_rinex_anchors(
+    monkeypatch: pytest.MonkeyPatch,
+    provider_attempt: Path,
+) -> None:
+    """Give a synthetic historical fixture a self-consistent test-only anchor."""
+
+    manifest_path = provider_attempt / "CLEAN_INPUT_MANIFEST.json"
+    backend_path = provider_attempt / "RAW_DOPPLER_BACKEND_REPORT.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    backend = manifest["raw_doppler_backend"]
+    retained = backend["retained_backend_artifacts"]
+    obs_hash = retained["rinex_obs"]["sha256"]
+    nav_hash = retained["rinex_nav"]["sha256"]
+    monkeypatch.setattr(formal_provider, "RAW_DOPPLER_ANCHOR_OBS_SHA256", obs_hash)
+    monkeypatch.setattr(formal_provider, "RAW_DOPPLER_ANCHOR_NAV_SHA256", nav_hash)
+    monkeypatch.setattr(formal_generation, "RAW_DOPPLER_ANCHOR_OBS_SHA256", obs_hash)
+    monkeypatch.setattr(formal_generation, "RAW_DOPPLER_ANCHOR_NAV_SHA256", nav_hash)
+
+    build = backend["raw_doppler_reproducible_build"]
+    normalization = build["rinex_header_normalization"]
+    normalization["expected_obs_sha256"] = obs_hash
+    normalization["expected_nav_sha256"] = nav_hash
+    backend["obs_source_hash"] = obs_hash
+    backend["nav_source_hash"] = nav_hash
+    audit = backend["rinex_header_normalization"]
+    audit["policy_hash"] = hashlib.sha256(
+        json.dumps(normalization, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    for role, digest in (("obs", obs_hash), ("nav", nav_hash)):
+        audit[role]["normalized_sha256"] = digest
+        audit[role]["expected_normalized_sha256"] = digest
+    backend["raw_doppler_reproducible_build_hash"] = hashlib.sha256(
+        json.dumps(build, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    backend["tracked_provider_generation"]["raw_doppler_reproducible_build"] = deepcopy(
+        build
+    )
+    backend_path.write_text(json.dumps(backend) + "\n", encoding="utf-8")
+    manifest["raw_doppler_backend"] = backend
+    manifest["raw_doppler_backend_report_sha256"] = hashlib.sha256(
+        backend_path.read_bytes()
+    ).hexdigest()
+    manifest_path.write_text(
+        json.dumps(manifest, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+
+
 def test_raw_doppler_lineage_requires_pinned_no_fallback_and_fixed_time() -> None:
     source = next(path for path in BY2_RAW_RELATIVE_PATHS if path.endswith("/gnss1-raw.csv"))
     status = next(path for path in BY2_RAW_RELATIVE_PATHS if path.endswith("/gnss1-status.csv"))
@@ -440,6 +644,12 @@ def test_raw_doppler_lineage_requires_pinned_no_fallback_and_fixed_time() -> Non
     assert validate_raw_doppler_backend_report(
         report, verified_raw_hashes={source: DIGEST, status: DIGEST}
     )["valid_epoch_count"] == 1248
+    confused = _raw_doppler_report(source, status)
+    confused["conversion_config_hash_role"] = "actual_conversion_contract_sha256"
+    with pytest.raises(FormalProviderError, match="identity is confused"):
+        validate_raw_doppler_backend_report(
+            confused, verified_raw_hashes={source: DIGEST, status: DIGEST}
+        )
     report["status_fallback_used"] = True
     with pytest.raises(FormalProviderError, match="status_fallback_used"):
         validate_raw_doppler_backend_report(
@@ -1477,7 +1687,9 @@ def _write_partial_failed_attempt_fixture(
         for relative in BY2_RAW_RELATIVE_PATHS
         if relative.endswith("/gnss1-status.csv")
     )
-    backend = _raw_doppler_report(raw_observation, status_source)
+    backend = _raw_doppler_report(
+        raw_observation, status_source, provider_root=provider_attempt
+    )
     backend["raw_doppler_backend_source_hashes"] = {
         raw_observation: raw_hashes[raw_observation],
         status_source: raw_hashes[status_source],
@@ -1838,6 +2050,7 @@ def test_failed_attempt_validator_rejects_empty_required_provider_artifact(
     partial_paths, partial_stage, partial_provider = (
         _write_partial_failed_attempt_fixture(tmp_path / "partial")
     )
+    _rebind_partial_fixture_rinex_anchors(monkeypatch, partial_provider)
     partial_commit = "0aff9ea4c0b8103974591b060ea2b5627a6941ba"
     monkeypatch.setitem(
         FAILED_CLEAN1_ATTEMPT_SPECS[partial_commit],
@@ -2078,6 +2291,7 @@ def test_exact_raw_blocked_stage_is_archived_and_indexed_without_delete(
     partial_paths, partial_stage, partial_provider = (
         _write_partial_failed_attempt_fixture(tmp_path, prior_record=second_record)
     )
+    _rebind_partial_fixture_rinex_anchors(monkeypatch, partial_provider)
     monkeypatch.setitem(
         FAILED_CLEAN1_ATTEMPT_SPECS[third_commit],
         "expected_canonical_stage_tree_sha256",

@@ -8,6 +8,7 @@ import datetime as dt
 import hashlib
 import json
 import math
+import os
 import re
 import shutil
 import struct
@@ -44,13 +45,25 @@ from .formal_provider import (
     AUDIT_ONLY_PROVIDER_ROLES,
     PINNED_RTKLIB_COMMIT,
     PINNED_RTKLIB_REMOTE,
+    RAW_DOPPLER_ANCHOR_ACTIVE_SHA256,
+    RAW_DOPPLER_ANCHOR_CODE_FREEZE,
+    RAW_DOPPLER_ANCHOR_CONVERSION_IDENTITY_SHA256,
+    RAW_DOPPLER_ANCHOR_NAV_SHA256,
+    RAW_DOPPLER_ANCHOR_OBS_SHA256,
+    RAW_DOPPLER_ANCHOR_REPORT_COMMIT,
+    RAW_DOPPLER_CANONICAL_RINEX_HEADER,
+    RAW_DOPPLER_CANONICAL_PATH_ALIASES,
+    RAW_DOPPLER_CONVERSION_IDENTITY_ROLE,
     RAW_DOPPLER_COVARIANCE_POLICY,
+    RAW_DOPPLER_REPRODUCIBLE_BUILD_SCHEMA,
+    RAW_DOPPLER_RINEX_NORMALIZATION_POLICY,
     RAW_DOPPLER_TIME_CONVERSION,
     V1_MAINTAINED_SHARED_SOURCE_FILES,
     V1_REQUIRED_FORMAL_PROVIDER_ROLES,
     V2_MAINTAINED_SHARED_SOURCE_FILES,
     V2_REQUIRED_FORMAL_PROVIDER_ROLES,
     FormalProviderError,
+    _contains_local_absolute_path,
     validate_raw_doppler_backend_report,
 )
 from .manifest import (
@@ -121,6 +134,301 @@ CONVBIN_SOURCE_FILES = (
 
 class FormalGenerationError(FormalProviderError):
     """Fresh provider generation stopped at a hard lineage or backend gate."""
+
+
+_CANONICAL_PATH_KEYS = (
+    "convbin_executable",
+    "rebuilt_ubx",
+    "rinex_obs",
+    "rinex_nav",
+    "rinex_gnav",
+    "rinex_hnav",
+    "rinex_qnav",
+    "rinex_lnav",
+    "rinex_cnav",
+    "rinex_inav",
+)
+
+
+def _canonical_json_hash(value: Mapping[str, Any]) -> str:
+    return sha256_text(json.dumps(dict(value), sort_keys=True, separators=(",", ":")))
+
+
+def _canonical_rinex_header_line(normalization: Mapping[str, Any]) -> bytes:
+    """Build the exact fixed-width non-scientific RINEX creation header."""
+
+    if (
+        normalization.get("policy_id") != RAW_DOPPLER_RINEX_NORMALIZATION_POLICY
+        or normalization.get("fixed_width_bytes") != 80
+        or normalization.get("label") != "PGM / RUN BY / DATE"
+    ):
+        raise FormalGenerationError("Raw Doppler RINEX normalization policy drifted")
+    values = (
+        normalization.get("program"),
+        normalization.get("run_by"),
+        normalization.get("build_timestamp_utc"),
+        normalization.get("label"),
+    )
+    if any(not isinstance(value, str) or len(value.encode("ascii", errors="ignore")) > 20 for value in values):
+        raise FormalGenerationError("Raw Doppler RINEX header field is invalid")
+    try:
+        line = "".join(f"{value:<20}" for value in values).encode("ascii")
+    except UnicodeEncodeError as exc:
+        raise FormalGenerationError("Raw Doppler RINEX header must be ASCII") from exc
+    if len(line) != 80 or line != RAW_DOPPLER_CANONICAL_RINEX_HEADER:
+        raise FormalGenerationError("Raw Doppler canonical RINEX header is not fixed-width")
+    return line
+
+
+def validate_raw_doppler_reproducible_build(
+    raw: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Validate the human-frozen current-clean reproducible-build specification."""
+
+    expected_fields = {
+        "schema_version",
+        "source_role",
+        "source_stage_id",
+        "source_code_freeze_commit",
+        "source_report_commit",
+        "runtime_reads_prior_provider_or_rinex",
+        "rinex_header_normalization",
+        "conversion_identity",
+        "canonical_path_aliases",
+        "expected_active_raw_doppler_sha256",
+    }
+    if set(raw) != expected_fields:
+        raise FormalGenerationError("Raw Doppler reproducible-build fields are incomplete")
+    if (
+        raw.get("schema_version") != RAW_DOPPLER_REPRODUCIBLE_BUILD_SCHEMA
+        or raw.get("source_role") != "user_designated_current_clean_anchor_metadata"
+        or raw.get("source_stage_id")
+        != "CLEAN1R2R1_CLEAN_REAL_FINAL_V23_PARITY_AND_FOUR_METHOD_EXECUTION"
+        or raw.get("source_code_freeze_commit") != RAW_DOPPLER_ANCHOR_CODE_FREEZE
+        or raw.get("source_report_commit") != RAW_DOPPLER_ANCHOR_REPORT_COMMIT
+        or raw.get("runtime_reads_prior_provider_or_rinex") is not False
+        or raw.get("expected_active_raw_doppler_sha256")
+        != RAW_DOPPLER_ANCHOR_ACTIVE_SHA256
+    ):
+        raise FormalGenerationError("Raw Doppler current-clean anchor identity drifted")
+    normalization = raw.get("rinex_header_normalization")
+    if not isinstance(normalization, Mapping) or set(normalization) != {
+        "policy_id",
+        "fixed_width_bytes",
+        "label",
+        "program",
+        "run_by",
+        "build_timestamp_utc",
+        "expected_obs_sha256",
+        "expected_nav_sha256",
+    }:
+        raise FormalGenerationError("Raw Doppler RINEX normalization spec is incomplete")
+    _canonical_rinex_header_line(normalization)
+    if (
+        normalization.get("expected_obs_sha256") != RAW_DOPPLER_ANCHOR_OBS_SHA256
+        or normalization.get("expected_nav_sha256") != RAW_DOPPLER_ANCHOR_NAV_SHA256
+    ):
+        raise FormalGenerationError("Raw Doppler normalized RINEX hashes drifted")
+    identity = raw.get("conversion_identity")
+    if not isinstance(identity, Mapping) or set(identity) != {
+        "csv_field", "role", "sha256", "actual_contract_sha256_claimed"
+    }:
+        raise FormalGenerationError("Raw Doppler conversion identity spec is incomplete")
+    if (
+        identity.get("csv_field") != "conversion_config_hash"
+        or identity.get("role") != RAW_DOPPLER_CONVERSION_IDENTITY_ROLE
+        or identity.get("sha256")
+        != RAW_DOPPLER_ANCHOR_CONVERSION_IDENTITY_SHA256
+        or identity.get("actual_contract_sha256_claimed") is not False
+    ):
+        raise FormalGenerationError("Raw Doppler conversion identity role is ambiguous")
+    aliases = raw.get("canonical_path_aliases")
+    if not isinstance(aliases, Mapping) or tuple(aliases) != _CANONICAL_PATH_KEYS:
+        raise FormalGenerationError("Raw Doppler canonical path aliases are incomplete")
+    alias_values = [str(aliases[key]) for key in _CANONICAL_PATH_KEYS]
+    if dict(aliases) != RAW_DOPPLER_CANONICAL_PATH_ALIASES or len(
+        set(alias_values)
+    ) != len(alias_values) or any(
+        "://" not in value
+        or value.startswith(("/", "\\"))
+        or ".." in Path(value).parts
+        or any(character.isspace() for character in value)
+        for value in alias_values
+    ):
+        raise FormalGenerationError("Raw Doppler canonical path alias is unsafe")
+    return {
+        **dict(raw),
+        "rinex_header_normalization": dict(normalization),
+        "conversion_identity": dict(identity),
+        "canonical_path_aliases": dict(aliases),
+    }
+
+
+def normalize_rinex_build_header(
+    path: str | Path,
+    *,
+    normalization: Mapping[str, Any],
+    role: str,
+) -> dict[str, Any]:
+    """Normalize only the unique fixed-width RINEX build-date header line."""
+
+    if role not in {"obs", "nav"}:
+        raise FormalGenerationError("Raw Doppler RINEX normalization role is invalid")
+    source = Path(path).resolve(strict=True)
+    original = source.read_bytes()
+    lines = original.splitlines(keepends=True)
+    target_indices: list[int] = []
+    end_header_index: int | None = None
+    for index, line in enumerate(lines):
+        body = line[:-2] if line.endswith(b"\r\n") else line[:-1] if line.endswith(b"\n") else line
+        if len(body) == 80 and body[60:80] == b"PGM / RUN BY / DATE ":
+            target_indices.append(index)
+        if len(body) == 80 and body[60:80] == b"END OF HEADER       ":
+            end_header_index = index
+            break
+    if len(target_indices) != 1 or end_header_index is None or target_indices[0] >= end_header_index:
+        raise FormalGenerationError("RINEX must contain one PGM / RUN BY / DATE header line")
+    target = target_indices[0]
+    source_line = lines[target]
+    ending = b"\r\n" if source_line.endswith(b"\r\n") else b"\n" if source_line.endswith(b"\n") else b""
+    source_body = source_line[: -len(ending)] if ending else source_line
+    canonical_body = _canonical_rinex_header_line(normalization)
+    if len(source_body) != 80 or source_body[:40] != canonical_body[:40]:
+        raise FormalGenerationError("RINEX normalization would change program/run-by identity")
+    before_non_target = hashlib.sha256(
+        b"".join(line for index, line in enumerate(lines) if index != target)
+    ).hexdigest()
+    normalized_lines = list(lines)
+    normalized_lines[target] = canonical_body + ending
+    normalized = b"".join(normalized_lines)
+    after_non_target = hashlib.sha256(
+        b"".join(line for index, line in enumerate(normalized_lines) if index != target)
+    ).hexdigest()
+    if before_non_target != after_non_target or len(normalized) != len(original):
+        raise FormalGenerationError("RINEX normalization changed non-target bytes or size")
+    expected_hash = str(normalization[f"expected_{role}_sha256"])
+    normalized_hash = hashlib.sha256(normalized).hexdigest()
+    if normalized_hash != expected_hash:
+        raise FormalGenerationError("Fresh normalized RINEX differs from current-clean anchor")
+    temporary = source.with_name(source.name + ".normalize.tmp")
+    if temporary.exists():
+        raise FormalGenerationError("RINEX normalization temporary file already exists")
+    try:
+        with temporary.open("xb") as handle:
+            handle.write(normalized)
+            handle.flush()
+            os.fsync(handle.fileno())
+        temporary.replace(source)
+    except Exception:
+        temporary.unlink(missing_ok=True)
+        raise
+    if sha256_file(source) != expected_hash:
+        raise FormalGenerationError("Normalized RINEX write verification failed")
+    return {
+        "schema_version": "paper_rebuild.rinex_header_normalization_audit.v1",
+        "role": role,
+        "path_role": f"raw_doppler_rinex_{role}",
+        "policy_id": normalization["policy_id"],
+        "target_label": normalization["label"],
+        "target_line_number": target + 1,
+        "fixed_width_bytes": 80,
+        "source_sha256": hashlib.sha256(original).hexdigest(),
+        "normalized_sha256": normalized_hash,
+        "expected_normalized_sha256": expected_hash,
+        "source_header_line_sha256": hashlib.sha256(source_body).hexdigest(),
+        "canonical_header_line_sha256": hashlib.sha256(canonical_body).hexdigest(),
+        "non_target_bytes_sha256": before_non_target,
+        "only_build_timestamp_field_changed": source_body[:40] == canonical_body[:40]
+        and source_body[60:80] == canonical_body[60:80],
+        "changed_line_count": int(source_body != canonical_body),
+        "normalized_file_used_by_helper": True,
+        "passed": True,
+    }
+
+
+def _convbin_command(path_roles: Mapping[str, str]) -> list[str]:
+    return [
+        path_roles["convbin_executable"],
+        "-r", "ubx", "-v", "3.04", "-od", "-os", "-oi", "-ot", "-ol",
+        "-o", path_roles["rinex_obs"], "-n", path_roles["rinex_nav"],
+        "-g", path_roles["rinex_gnav"], "-h", path_roles["rinex_hnav"],
+        "-q", path_roles["rinex_qnav"], "-l", path_roles["rinex_lnav"],
+        "-b", path_roles["rinex_cnav"], "-i", path_roles["rinex_inav"],
+        path_roles["rebuilt_ubx"],
+    ]
+
+
+def build_canonical_conversion_contract(
+    *,
+    aliases: Mapping[str, str],
+    source_position: Mapping[str, Any],
+    generation: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Build the path-independent scientific conversion contract."""
+
+    if tuple(aliases) != _CANONICAL_PATH_KEYS or dict(
+        aliases
+    ) != RAW_DOPPLER_CANONICAL_PATH_ALIASES:
+        raise FormalGenerationError("Canonical conversion path aliases drifted")
+    canonical_command = _convbin_command(
+        {key: str(aliases[key]) for key in _CANONICAL_PATH_KEYS}
+    )
+    payload = {
+        "schema_version": "paper_rebuild.raw_doppler_canonical_conversion.v1",
+        "rtklib_remote": PINNED_RTKLIB_REMOTE,
+        "rtklib_commit": PINNED_RTKLIB_COMMIT,
+        "canonical_path_aliases": dict(aliases),
+        "canonical_command": canonical_command,
+        "convbin_options": canonical_command[1:-1],
+        "convbin_input": canonical_command[-1],
+        "min_sat": int(generation["raw_doppler_min_sat"]),
+        "std_floor_mps": float(generation["raw_doppler_std_floor_mps"]),
+        "time_conversion_formula": RAW_DOPPLER_TIME_CONVERSION,
+        "utc_date": [
+            source_position["utc_year"], source_position["utc_month"], source_position["utc_day"]
+        ],
+        "gps_week": source_position["gps_week"],
+        "leap_seconds": source_position["leap_seconds"],
+        "approx_position_geodetic_deg_m": [
+            source_position["lat_deg"], source_position["lon_deg"], source_position["height_m"]
+        ],
+        "selected_status_row_number": source_position["selected_status_row_number"],
+        "selected_status_fields_sha256": source_position["selected_status_fields_sha256"],
+        "covariance_policy": generation["raw_doppler_covariance_policy"],
+        "first_epoch_fit_used": False,
+    }
+    if _contains_local_absolute_path(payload):
+        raise FormalGenerationError("Canonical conversion contract contains an absolute path")
+    return payload
+
+
+def build_actual_conversion_execution_contract(
+    *, provider_root: str | Path, paths: Mapping[str, str | Path]
+) -> dict[str, Any]:
+    """Record the real attempt paths separately from the canonical identity."""
+
+    if set(paths) != set(_CANONICAL_PATH_KEYS):
+        raise FormalGenerationError("Actual conversion path role set is incomplete")
+    raw_root = Path(provider_root)
+    if not raw_root.is_absolute() or raw_root.is_symlink():
+        raise FormalGenerationError("Actual conversion provider root must be absolute and direct")
+    root = raw_root.resolve(strict=True)
+    actual: dict[str, str] = {}
+    for role in _CANONICAL_PATH_KEYS:
+        raw = Path(paths[role])
+        if not raw.is_absolute() or raw.is_symlink():
+            raise FormalGenerationError("Actual conversion path is not absolute/direct")
+        resolved = raw.resolve(strict=False)
+        if resolved != root and root not in resolved.parents:
+            raise FormalGenerationError("Actual conversion path escaped provider root")
+        actual[role] = str(resolved)
+    return {
+        "schema_version": "paper_rebuild.raw_doppler_actual_conversion_execution.v1",
+        "provider_root": str(root),
+        "actual_paths": actual,
+        "actual_command": _convbin_command(actual),
+        "paths_separate_from_canonical_contract": True,
+    }
 
 
 def _formal_provider_contract_for_identity(
@@ -570,6 +878,7 @@ def generate_formal_clean1_inputs(
         "go2_roll_pitch_std_deg", "go2_horizontal_velocity_std_mps", "outage_enabled",
         "raw_doppler_min_sat", "raw_doppler_std_floor_mps", "raw_doppler_covariance_policy",
         "outlier_mode", "yaw_noise_std_deg",
+        "raw_doppler_reproducible_build",
     }
     if set(generation) != required_generation_fields:
         raise FormalGenerationError("Tracked provider-generation contract is incomplete")
@@ -581,6 +890,13 @@ def generate_formal_clean1_inputs(
         or generation["raw_doppler_covariance_policy"] != RAW_DOPPLER_COVARIANCE_POLICY
     ):
         raise FormalGenerationError("Tracked Raw Doppler generation policy is invalid")
+    reproducible_build_raw = generation.get("raw_doppler_reproducible_build")
+    if not isinstance(reproducible_build_raw, Mapping):
+        raise FormalGenerationError("Tracked Raw Doppler reproducible-build contract is missing")
+    reproducible_build = validate_raw_doppler_reproducible_build(
+        reproducible_build_raw
+    )
+    reproducible_build_hash = _canonical_json_hash(reproducible_build)
     # Reuse only maintained, hash-recorded source helpers with every formerly implicit value explicit.
     base_manifest = generate_clean_by2_inputs(
         paths,
@@ -659,6 +975,10 @@ def generate_formal_clean1_inputs(
 
     raw_backend_root = provider_root / "raw_doppler_backend"
     raw_backend_root.mkdir(parents=True, exist_ok=True)
+    retained_tools = raw_backend_root / "tools"
+    retained_tools.mkdir()
+    retained_convbin = retained_tools / "convbin_pinned_b34"
+    shutil.copy2(convbin, retained_convbin)
     rebuilt_ubx = raw_backend_root / "gnss1_rebuilt.ubx"
     rebuild_report = rebuild_csv_to_ubx(raw_csv, rebuilt_ubx)
     if not rebuild_report.get("rebuilt_ubx_available") or int(rebuild_report.get("rawx_frame_count") or 0) <= 0 or int(rebuild_report.get("sfrbx_frame_count") or 0) <= 0:
@@ -668,25 +988,48 @@ def generate_formal_clean1_inputs(
     rinex_root.mkdir()
     obs_path = rinex_root / "gnss1.obs"
     nav_path = rinex_root / "gnss1.nav"
-    convbin_command = [
-        str(convbin), "-r", "ubx", "-v", "3.04", "-od", "-os", "-oi", "-ot", "-ol",
-        "-o", str(obs_path), "-n", str(nav_path), "-g", str(rinex_root / "gnss1.gnav"),
-        "-h", str(rinex_root / "gnss1.hnav"), "-q", str(rinex_root / "gnss1.qnav"),
-        "-l", str(rinex_root / "gnss1.lnav"), "-b", str(rinex_root / "gnss1.cnav"),
-        "-i", str(rinex_root / "gnss1.inav"), str(rebuilt_ubx),
-    ]
+    actual_conversion_paths = {
+        "convbin_executable": retained_convbin,
+        "rebuilt_ubx": rebuilt_ubx,
+        "rinex_obs": obs_path,
+        "rinex_nav": nav_path,
+        "rinex_gnav": rinex_root / "gnss1.gnav",
+        "rinex_hnav": rinex_root / "gnss1.hnav",
+        "rinex_qnav": rinex_root / "gnss1.qnav",
+        "rinex_lnav": rinex_root / "gnss1.lnav",
+        "rinex_cnav": rinex_root / "gnss1.cnav",
+        "rinex_inav": rinex_root / "gnss1.inav",
+    }
+    actual_conversion_execution = build_actual_conversion_execution_contract(
+        provider_root=provider_root,
+        paths=actual_conversion_paths,
+    )
+    actual_conversion_execution_hash = _canonical_json_hash(
+        actual_conversion_execution
+    )
+    convbin_command = list(actual_conversion_execution["actual_command"])
     _run(convbin_command, cwd=rinex_root, label="fresh pinned convbin conversion", timeout=timeout_seconds)
     if not obs_path.is_file() or not nav_path.is_file() or not obs_path.stat().st_size or not nav_path.stat().st_size:
         raise FormalGenerationError("Fresh convbin did not produce nonempty obs/nav")
+
+    normalization = reproducible_build["rinex_header_normalization"]
+    rinex_normalization_audit = {
+        "schema_version": "paper_rebuild.raw_doppler_rinex_normalization.v1",
+        "policy_hash": _canonical_json_hash(normalization),
+        "obs": normalize_rinex_build_header(
+            obs_path, normalization=normalization, role="obs"
+        ),
+        "nav": normalize_rinex_build_header(
+            nav_path, normalization=normalization, role="nav"
+        ),
+        "runtime_prior_provider_or_rinex_read": False,
+        "passed": True,
+    }
 
     helper_report = _build_exact_rtklib_doppler_helper(rtklib_root, raw_backend_root / "helper")
     if helper_report.get("helper_compile_status") != "success" or helper_report.get("runtime_patch_applied") != []:
         raise FormalGenerationError("Formal RTKLIB helper failed or required a runtime patch")
     helper_exe = Path(helper_report["helper_executable_path"])
-    retained_tools = raw_backend_root / "tools"
-    retained_tools.mkdir()
-    retained_convbin = retained_tools / "convbin_pinned_b34"
-    shutil.copy2(convbin, retained_convbin)
     source_position = _first_source_position_and_time(gnss1_status, raw_csv)
     helper_run = run_rtklib_doppler_velocity_provider(
         obs_path=obs_path,
@@ -702,27 +1045,27 @@ def generate_formal_clean1_inputs(
     obs_hash = sha256_file(obs_path)
     nav_hash = sha256_file(nav_path)
     helper_hash = sha256_file(helper_exe)
-    conversion_contract = {
-        "rtklib_remote": PINNED_RTKLIB_REMOTE,
-        "rtklib_commit": PINNED_RTKLIB_COMMIT,
-        "convbin_options": convbin_command[1:-1],
-        "min_sat": int(generation["raw_doppler_min_sat"]),
-        "std_floor_mps": float(generation["raw_doppler_std_floor_mps"]),
-        "time_conversion_formula": RAW_DOPPLER_TIME_CONVERSION,
-        "utc_date": [source_position["utc_year"], source_position["utc_month"], source_position["utc_day"]],
-        "gps_week": source_position["gps_week"],
-        "leap_seconds": source_position["leap_seconds"],
-        "approx_position_geodetic_deg_m": [
-            source_position["lat_deg"],
-            source_position["lon_deg"],
-            source_position["height_m"],
-        ],
-        "selected_status_row_number": source_position["selected_status_row_number"],
-        "selected_status_fields_sha256": source_position["selected_status_fields_sha256"],
-        "covariance_policy": generation["raw_doppler_covariance_policy"],
-        "first_epoch_fit_used": False,
-    }
-    conversion_hash = sha256_text(json.dumps(conversion_contract, sort_keys=True, separators=(",", ":")))
+    if (
+        obs_hash != RAW_DOPPLER_ANCHOR_OBS_SHA256
+        or nav_hash != RAW_DOPPLER_ANCHOR_NAV_SHA256
+    ):
+        raise FormalGenerationError("Normalized RINEX anchor hash changed before helper closeout")
+    conversion_contract = build_canonical_conversion_contract(
+        aliases=reproducible_build["canonical_path_aliases"],
+        source_position=source_position,
+        generation=generation,
+    )
+    canonical_conversion_hash = _canonical_json_hash(conversion_contract)
+    conversion_hash = str(reproducible_build["conversion_identity"]["sha256"])
+    if conversion_hash != RAW_DOPPLER_ANCHOR_CONVERSION_IDENTITY_SHA256:
+        raise FormalGenerationError("Raw Doppler anchor conversion identity changed")
+    if conversion_hash in {
+        canonical_conversion_hash,
+        actual_conversion_execution_hash,
+    }:
+        raise FormalGenerationError(
+            "Raw Doppler compatibility identity cannot be a contract hash"
+        )
     formal_raw_path = provider_root / "providers" / "RAW_DOPPLER_VELOCITY.csv"
     count_report = _write_formal_raw_doppler(
         Path(helper_run["helper_raw_csv_path"]),
@@ -803,6 +1146,13 @@ def generate_formal_clean1_inputs(
         "nav_source_hash": nav_hash,
         "conversion_config_hash": conversion_hash,
         "conversion_contract": conversion_contract,
+        "conversion_config_hash_role": RAW_DOPPLER_CONVERSION_IDENTITY_ROLE,
+        "canonical_conversion_contract_hash": canonical_conversion_hash,
+        "actual_conversion_execution_contract": actual_conversion_execution,
+        "actual_conversion_execution_contract_hash": actual_conversion_execution_hash,
+        "raw_doppler_reproducible_build": reproducible_build,
+        "raw_doppler_reproducible_build_hash": reproducible_build_hash,
+        "rinex_header_normalization": rinex_normalization_audit,
         **count_report,
         "covariance_policy": generation["raw_doppler_covariance_policy"],
         "rtklib_source_mode": rtklib_mode,

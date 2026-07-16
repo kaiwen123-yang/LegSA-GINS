@@ -108,6 +108,39 @@ provider_generation:
   raw_doppler_min_sat: 5
   raw_doppler_std_floor_mps: 0.2
   raw_doppler_covariance_policy: conservative_isotropic_max_ecef_std_floor_0p2_mps
+  raw_doppler_reproducible_build:
+    schema_version: paper_rebuild.raw_doppler_reproducible_build.v1
+    source_role: user_designated_current_clean_anchor_metadata
+    source_stage_id: CLEAN1R2R1_CLEAN_REAL_FINAL_V23_PARITY_AND_FOUR_METHOD_EXECUTION
+    source_code_freeze_commit: 5c807633f699238aa2244a0496881dff71550273
+    source_report_commit: a3909830288b29a8576626408c0eea700abea5ef
+    runtime_reads_prior_provider_or_rinex: false
+    rinex_header_normalization:
+      policy_id: rinex_pgm_run_by_date_header_only_v1
+      fixed_width_bytes: 80
+      label: PGM / RUN BY / DATE
+      program: CONVBIN 2.4.3
+      run_by: ""
+      build_timestamp_utc: 20260712 104638 UTC
+      expected_obs_sha256: 570726bf49855905a4ee230cc977910f6f22ed4f6ad480d7aa486833b8ba62dd
+      expected_nav_sha256: 5fa101567fcb1a044fd5f63850b5744ef20af568de48ac5f2ca7766978bf9ffa
+    conversion_identity:
+      csv_field: conversion_config_hash
+      role: frozen_current_clean_anchor_compatibility_identity
+      sha256: 73ad4264ae4c4e54be835aea17420575d736ddf38bdfa8908e4fd6e0d33b1d4a
+      actual_contract_sha256_claimed: false
+    canonical_path_aliases:
+      convbin_executable: tool://rtklib_b34/convbin
+      rebuilt_ubx: provider://fresh/raw_doppler_backend/gnss1_rebuilt.ubx
+      rinex_obs: provider://fresh/raw_doppler_backend/rinex/gnss1.obs
+      rinex_nav: provider://fresh/raw_doppler_backend/rinex/gnss1.nav
+      rinex_gnav: provider://fresh/raw_doppler_backend/rinex/gnss1.gnav
+      rinex_hnav: provider://fresh/raw_doppler_backend/rinex/gnss1.hnav
+      rinex_qnav: provider://fresh/raw_doppler_backend/rinex/gnss1.qnav
+      rinex_lnav: provider://fresh/raw_doppler_backend/rinex/gnss1.lnav
+      rinex_cnav: provider://fresh/raw_doppler_backend/rinex/gnss1.cnav
+      rinex_inav: provider://fresh/raw_doppler_backend/rinex/gnss1.inav
+    expected_active_raw_doppler_sha256: a40b9933295f6c2c989884d67cc674313f2fe03113c8acdf1d02ddf28734d722
   outage_enabled: false
   outlier_mode: none
   yaw_noise_std_deg: 0.0

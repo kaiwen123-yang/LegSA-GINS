@@ -10,6 +10,9 @@
   `CLEAN1R2R1-v1.0-final-v23-parity-four-method`.
 - CLEAN2 branch: `stage/clean2-by2-ablation-classic18`.
 - CLEAN2 code-freeze commit: `PENDING`.
+- Raw Doppler reproducibility repair: `IMPLEMENTED_AND_UNIT_VALIDATED`;
+  no fresh provider has been executed or accepted, so base-provider parity is
+  still pending.
 - Fresh formal solver process count: `0/110`.
 - Trace open count for CLEAN2: `0`.
 - Final export ZIP count: `0`.

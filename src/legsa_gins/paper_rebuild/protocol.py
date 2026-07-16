@@ -10,6 +10,10 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from .evidence import EvidenceContractError, LOCAL_PATH_RE, write_csv_atomic
+from .formal_generation import (
+    FormalGenerationError,
+    validate_raw_doppler_reproducible_build,
+)
 from .manifest import sha256_file, sha256_text
 from .methods import FORMAL_METHOD_ORDER
 from .paths import load_yaml_mapping
@@ -185,8 +189,27 @@ def load_clean1_protocol(path: str | Path) -> ProtocolConfig:
         "outlier_mode": "none",
         "yaw_noise_std_deg": 0.0,
     }
-    if not isinstance(provider_generation, Mapping) or dict(provider_generation) != expected_provider_generation:
+    expected_provider_keys = set(expected_provider_generation)
+    if schema_version == V2_SCHEMA_VERSION:
+        expected_provider_keys.add("raw_doppler_reproducible_build")
+    if (
+        not isinstance(provider_generation, Mapping)
+        or set(provider_generation) != expected_provider_keys
+        or {
+            key: provider_generation[key] for key in expected_provider_generation
+        }
+        != expected_provider_generation
+    ):
         raise ProtocolContractError("Tracked provider-generation parameters differ from CLEAN1 freeze")
+    if schema_version == V2_SCHEMA_VERSION:
+        try:
+            validate_raw_doppler_reproducible_build(
+                provider_generation["raw_doppler_reproducible_build"]
+            )
+        except FormalGenerationError as exc:
+            raise ProtocolContractError(
+                "Tracked Raw Doppler reproducible-build contract differs from CLEAN1 freeze"
+            ) from exc
     solver_common = payload.get("solver_common")
     if not isinstance(solver_common, Mapping) or provider_generation["raw_doppler_min_sat"] != solver_common.get("raw_doppler_min_sat"):
         raise ProtocolContractError("Provider and solver Raw Doppler minimum-satellite contracts differ")
