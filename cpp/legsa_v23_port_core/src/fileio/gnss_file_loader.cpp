@@ -27,7 +27,9 @@ std::vector<GnssData> GnssFileLoader::loadFifteenColumn(const std::string& path)
   }
   std::vector<GnssData> rows;
   std::string line;
+  std::size_t line_number = 0;
   while (std::getline(input, line)) {
+    ++line_number;
     if (line.empty() || line[0] == '#') {
       continue;
     }
@@ -45,8 +47,28 @@ std::vector<GnssData> GnssFileLoader::loadFifteenColumn(const std::string& path)
       }
       gnss.yaw_rad = Earth::degToRad(gnss.yaw_deg);
       gnss.yaw_std_rad = Earth::degToRad(std::max(gnss.yaw_std_deg, 0.001));
-      gnss.has_velocity = true;
-      gnss.has_yaw = true;
+      int position_valid = 1;
+      int velocity_valid = 1;
+      int yaw_valid = 1;
+      if (stream >> position_valid) {
+        if (!(stream >> velocity_valid >> yaw_valid) ||
+            (position_valid != 0 && position_valid != 1) ||
+            (velocity_valid != 0 && velocity_valid != 1) ||
+            (yaw_valid != 0 && yaw_valid != 1)) {
+          throw std::runtime_error(
+              "GNSS formal validity extension must be three 0/1 columns at line " +
+              std::to_string(line_number));
+        }
+        std::string trailing;
+        if (stream >> trailing) {
+          throw std::runtime_error("unexpected GNSS column after formal validity fields at line " +
+                                   std::to_string(line_number));
+        }
+        gnss.validity_explicit = true;
+      }
+      gnss.has_position = position_valid != 0;
+      gnss.has_velocity = velocity_valid != 0;
+      gnss.has_yaw = yaw_valid != 0;
       gnss.isvalid = false;
       rows.push_back(gnss);
     }
@@ -68,6 +90,13 @@ bool GnssFileLoader::isEof() const {
 
 bool GnssFileLoader::isOpen() const {
   return !rows_.empty();
+}
+
+bool GnssFileLoader::allValidityExplicit() const {
+  return !rows_.empty() &&
+         std::all_of(rows_.begin(), rows_.end(), [](const GnssData& row) {
+           return row.validity_explicit;
+         });
 }
 
 }  // namespace legsa_v23_port_core

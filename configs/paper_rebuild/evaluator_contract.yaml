@@ -1,0 +1,95 @@
+schema_version: paper_rebuild.evaluator_contract.v2
+contract_id: CLEAN1_BY2_EVALUATOR_V2
+protocol_id: CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED
+profile: FIXPOSITION_SAME_SOURCE_DIRECT_REFERENCE
+reference_wording: same-source direct evaluation-only reference
+reference_independence_established: false
+independent_ground_truth: false
+position_same_source_mounting_caveat: true
+point_compensation_in_evaluator: false
+freeze_before_solver_output_inspection: true
+method_output_read_during_freeze: false
+trace_read_during_freeze: false
+formal_metrics_authorized: true
+terminal_status: READY_FOR_OFFLINE_EVALUATION
+
+timestamps:
+  solver_timestamp_column: time
+  solver_timestamp_definition: relative_seconds_from_frozen_window_absolute_origin
+  reference_timestamp_column: time
+  reference_timestamp_definition: absolute_unix_seconds_from_hash_locked_trace
+  common_time_system: absolute_unix_seconds
+  solver_to_common_formula: solver_relative_seconds_plus_window_absolute_origin_seconds
+  reference_to_common_formula: identity_absolute_unix_seconds
+  matching_policy: bracketed_linear_interpolation
+  position_interpolation_policy: wgs84_blh_to_ecef_then_linear_interpolate
+  yaw_interpolation_policy: unwrap_enu_degrees_then_linear_interpolate
+  max_gap_policy: max_3x_median_dt_p99_dt_plus_1e-9
+  reference_interval_percentile: type7
+  bracket_gap_policy: reference_bracket_interval_lte_derived_max_gap
+  duplicate_solver_timestamp_policy: fail
+  duplicate_reference_timestamp_policy: fail
+  unmatched_epoch_policy: retain_row_and_label_unmatched
+  extrapolation_policy: forbidden
+  first_last_extrapolation: forbidden
+  trace_based_time_offset_search: false
+
+frames:
+  solver_position: geodetic_WGS84_lat_lon_ellipsoidal_height
+  reference_position: geodetic_WGS84_lat_lon_ellipsoidal_height
+  reference_position_interpolation: WGS84_ECEF_linear
+  position_error_frame: local_NED_at_interpolated_reference
+  vertical_error_definition: up_equals_negative_down
+  solver_attitude: NED_FRD_degrees
+  reference_attitude: ENU_heading_degrees
+  reference_yaw_to_solver_formula: wrap360(90_deg-reference_yaw_ENU_deg)
+  yaw_residual: wrap_to_minus180_plus180(solver_minus_reference)
+  yaw_unwrap_order: unwrap_reference_ENU_before_linear_interpolation
+  point_compensation_in_evaluator: false
+  position_same_source_mounting_caveat: true
+  method_specific_conversion: false
+
+reference_columns:
+  time: time
+  latitude: lat
+  longitude: lon
+  ellipsoidal_height: height
+  yaw_enu_degree: yaw
+  pitch: pitch
+  roll: roll
+  velocity: NOT_AVAILABLE
+
+solver_columns:
+  time: time
+  latitude: lat_deg
+  longitude: lon_deg
+  ellipsoidal_height: height_m
+  velocity_north: vn
+  velocity_east: ve
+  velocity_down: vd
+  yaw_ned_degree: yaw_deg
+  pitch: pitch_deg
+  roll: roll_deg
+
+forbidden_postprocessing:
+  translation_alignment: false
+  rotation_alignment: false
+  yaw_alignment: false
+  umeyama_or_se3_alignment: false
+  time_offset_search: false
+  sign_search: false
+  axis_search: false
+  constant_offset_search: false
+  trace_based_sign_or_axis_selection: false
+  output_smoothing: false
+  output_substitution: false
+  direct_nav_overwrite: false
+  output_only_correction: false
+  metric_driven_epoch_deletion: false
+
+aggregate:
+  metrics: [rmse, mae, median, p95, max]
+  crosscheck_absolute_tolerance: 1.0e-10
+  crosscheck_relative_tolerance: 1.0e-10
+  minimum_coverage_ratio: 0.0
+  unsupported_value: NOT_AVAILABLE

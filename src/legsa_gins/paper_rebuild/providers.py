@@ -5,13 +5,18 @@ from __future__ import annotations
 import csv
 import json
 import math
+import re
 import shutil
+import threading
 from pathlib import Path
 from typing import Any
 
 from legsa_gins.datasets.by2.go2_body_state_parser import parse_go2_body_state_text
 from legsa_gins.go2_prior.go2_velocity_frame_review import transform_go2_velocity_for_frame
-from legsa_gins.input_generation.process_data_compat import generate_process_data_compat_inputs
+from legsa_gins.input_generation import process_data_compat as _shared_process_data_compat
+from legsa_gins.input_generation.ubx_nav_pvt import (
+    extract_pvt_velocity_rows as _expected_shared_pvt_extractor,
+)
 from legsa_gins.input_generation.status_yaw_builder import (
     build_a1_dual_diff_yaw_rows,
     status_time_header,
@@ -28,16 +33,48 @@ from .manifest import (
     write_json_atomic,
 )
 from .paths import CleanPaths, guard_path
+from .ubx_nav_pvt import extract_pvt_velocity_rows as _active_clean_pvt_extractor
 
 
 PHYSICAL_BASELINE_MIN_M = 0.20
 PHYSICAL_BASELINE_MAX_M = 0.60
 GO2_ROLL_PITCH_STD_DEG = 1.6
 GO2_HORIZONTAL_STD_MPS = 1.5
+RECEIVER_VELOCITY_PARSER_ADAPTER_ID = (
+    "paper_rebuild.ubx_nav_pvt_full_frame_sacc_74_78.v1"
+)
+_PROCESS_DATA_COMPAT_BIND_LOCK = threading.Lock()
 
 
 class ProviderGenerationError(RuntimeError):
     """Fresh source provider generation failed a physical or lineage gate."""
+
+
+def _generate_process_data_compat_with_active_pvt(*args: Any, **kwargs: Any) -> dict[str, Any]:
+    """Call the maintained compatibility builder with the clean PVT decoder.
+
+    The shared builder exposes no dependency-injection argument.  The clean
+    namespace therefore binds only its extractor global for this synchronous,
+    serialized call, verifies the expected legacy dependency before binding,
+    and restores it in ``finally`` on every exit path.
+    """
+
+    with _PROCESS_DATA_COMPAT_BIND_LOCK:
+        current = _shared_process_data_compat.extract_pvt_velocity_rows
+        if current is not _expected_shared_pvt_extractor:
+            raise ProviderGenerationError(
+                "Shared process_data compatibility extractor identity changed; "
+                "refusing an unreviewed receiver-velocity parser binding"
+            )
+        _shared_process_data_compat.extract_pvt_velocity_rows = _active_clean_pvt_extractor
+        try:
+            return _shared_process_data_compat.generate_process_data_compat_inputs(
+                *args, **kwargs
+            )
+        finally:
+            _shared_process_data_compat.extract_pvt_velocity_rows = (
+                _expected_shared_pvt_extractor
+            )
 
 
 def _percentile(values: list[float], fraction: float) -> float | None:
@@ -84,6 +121,7 @@ def build_physical_dual_yaw_provider(
     *,
     base_time: float,
     max_rows: int | None = None,
+    fixed_yaw_std_deg: float = 1.5,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Build every accepted status epoch, then fail closed on whole-set geometry."""
 
@@ -120,7 +158,7 @@ def build_physical_dual_yaw_provider(
                 "baseline_length_m": length,
                 "baseline_heading_ned_deg": baseline_heading,
                 "body_yaw_ned_deg": body_yaw,
-                "yaw_std_deg": 1.5,
+                "yaw_std_deg": fixed_yaw_std_deg,
                 "physical_in_band": PHYSICAL_BASELINE_MIN_M <= length <= PHYSICAL_BASELINE_MAX_M,
                 "source_status": "active" if physical_pass else "blocked_physical_gate",
                 "gnss_order": "GNSS2-GNSS1",
@@ -149,11 +187,18 @@ def build_physical_dual_yaw_provider(
     return rows, audit
 
 
-def _go2_priors(body: Path, *, base_time: float, max_messages: int | None) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+def _go2_priors(
+    body: Path,
+    *,
+    base_time: float,
+    max_messages: int | None,
+    frame_name: str = "go2_velocity_as_body_flu_then_rotate_by_go2_attitude",
+    roll_pitch_std_deg: float = GO2_ROLL_PITCH_STD_DEG,
+    horizontal_std_mps: float = GO2_HORIZONTAL_STD_MPS,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
     rows = parse_go2_body_state_text(body, max_messages=max_messages)
     attitude: list[dict[str, Any]] = []
     horizontal: list[dict[str, Any]] = []
-    frame_name = "go2_velocity_as_body_flu_then_rotate_by_go2_attitude"
     for row in rows:
         timestamp = row.get("timestamp")
         roll = row.get("roll_rad")
@@ -166,8 +211,8 @@ def _go2_priors(body: Path, *, base_time: float, max_messages: int | None) -> tu
                 "time": time_value,
                 "roll_rad": float(roll),
                 "pitch_rad": float(pitch),
-                "std_roll_rad": math.radians(GO2_ROLL_PITCH_STD_DEG),
-                "std_pitch_rad": math.radians(GO2_ROLL_PITCH_STD_DEG),
+                "std_roll_rad": math.radians(roll_pitch_std_deg),
+                "std_pitch_rad": math.radians(roll_pitch_std_deg),
                 "source_status": "active",
                 "mode": row.get("mode", ""),
                 "gait_type": row.get("gait_type", ""),
@@ -183,8 +228,8 @@ def _go2_priors(body: Path, *, base_time: float, max_messages: int | None) -> tu
                     "vn": velocity[0],
                     "ve": velocity[1],
                     "vd": 0.0,
-                    "std_vn": GO2_HORIZONTAL_STD_MPS,
-                    "std_ve": GO2_HORIZONTAL_STD_MPS,
+                    "std_vn": horizontal_std_mps,
+                    "std_ve": horizontal_std_mps,
                     "std_vd": 999.0,
                     "confidence": "",
                     "confidence_level": "weak_auxiliary",
@@ -247,17 +292,55 @@ def generate_clean_by2_inputs(
     max_raw_rows: int | None = None,
     max_imu_messages: int | None = None,
     replace: bool = False,
+    yaw_sign: float = 1.0,
+    yaw_install_offset_deg: float = 0.0,
+    status_fixed_yaw_std_deg: float = 1.5,
+    receiver_velocity_match_tolerance_seconds: float = 0.1,
+    dual_yaw_match_tolerance_seconds: float = 0.6,
+    receiver_velocity_std_mps: float = 0.05,
+    imu_install_roll_deg: float = -1.0,
+    imu_install_pitch_deg: float = 0.0,
+    imu_install_yaw_deg: float = 0.0,
+    imu_gnss_time_offset: float = 0.0,
+    go2_velocity_frame_transform: str = "go2_velocity_as_body_flu_then_rotate_by_go2_attitude",
+    go2_roll_pitch_std_deg: float = GO2_ROLL_PITCH_STD_DEG,
+    go2_horizontal_velocity_std_mps: float = GO2_HORIZONTAL_STD_MPS,
+    stage_id: str = "PAPER10_CLEAN0",
+    expected_code_commit: str | None = None,
 ) -> dict[str, Any]:
-    """Materialize clean inputs/providers from four raw source files only."""
+    """Materialize clean inputs/providers from four raw source files only.
+
+    The default/smoke entrypoint owns its Git checks exactly as before.  The
+    formal CLEAN1 subprocess instead receives a commit already bracketed by
+    its parent outside the file-open trace; that path must not run ``git
+    status`` inside the traced child.
+    """
 
     provider_root = guard_path(paths.provider_root, role="provider root", allowed_root=paths.clean_root)
     manifest_path = provider_root / "CLEAN_INPUT_MANIFEST.json"
-    try:
-        generator_commit, generator_dirty = git_code_state(paths.code_root)
-    except ValueError as exc:
-        raise ProviderGenerationError(str(exc)) from exc
-    if generator_dirty:
-        raise ProviderGenerationError("Provider generation requires a clean committed Git worktree")
+    parent_bracketed_git_state = expected_code_commit is not None
+    if parent_bracketed_git_state:
+        if stage_id not in {
+            "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION",
+            "CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION",
+        }:
+            raise ProviderGenerationError(
+                "Expected formal code commit is only valid for the CLEAN1 formal stage"
+            )
+        if not isinstance(expected_code_commit, str) or not re.fullmatch(
+            r"[0-9a-f]{40}", expected_code_commit
+        ):
+            raise ProviderGenerationError("Expected formal code commit is invalid")
+        generator_commit = expected_code_commit
+    else:
+        try:
+            generator_commit, generator_dirty = git_code_state(paths.code_root)
+        except ValueError as exc:
+            raise ProviderGenerationError(str(exc)) from exc
+        if generator_dirty:
+            raise ProviderGenerationError(
+                "Provider generation requires a clean committed Git worktree"
+            )
     if provider_root.exists():
         if not replace:
             raise ProviderGenerationError("Clean provider root already exists; use an explicit replace request")
@@ -287,23 +370,33 @@ def generate_clean_by2_inputs(
         source_paths["gnss2_status"],
         base_time=base_time,
         max_rows=max_status_rows,
+        fixed_yaw_std_deg=status_fixed_yaw_std_deg,
     )
     if not yaw_audit["physical_baseline_gate_pass"]:
         write_json_atomic(provider_root / "DUAL_YAW_PHYSICAL_GATE_BLOCKED.json", yaw_audit)
         raise ProviderGenerationError("BY2 dual-yaw physical short-baseline gate failed")
 
-    generated = generate_process_data_compat_inputs(
+    generated = _generate_process_data_compat_with_active_pvt(
         paths.by2_fix_root,
         paths.by2_go2_body,
         provider_root / "runtime_inputs",
         base_time=base_time,
         yaw_source_mode="status",
-        yaw_sign=1.0,
-        yaw_install_offset_deg=0.0,
+        yaw_sign=yaw_sign,
+        yaw_install_offset_deg=yaw_install_offset_deg,
         yaw_std_mode="fixed_1p5",
         enable_outage=False,
         outlier_mode="none",
         yaw_noise_std_deg=0.0,
+        status_fixed_yaw_std_deg=status_fixed_yaw_std_deg,
+        receiver_velocity_match_tolerance_seconds=receiver_velocity_match_tolerance_seconds,
+        dual_yaw_match_tolerance_seconds=dual_yaw_match_tolerance_seconds,
+        receiver_velocity_std_mps=receiver_velocity_std_mps,
+        imu_install_roll_deg=imu_install_roll_deg,
+        imu_install_pitch_deg=imu_install_pitch_deg,
+        imu_install_yaw_deg=imu_install_yaw_deg,
+        imu_gnss_time_offset=imu_gnss_time_offset,
+        stage_id=stage_id,
         max_status_rows=max_status_rows,
         max_raw_rows=max_raw_rows,
         max_imu_messages=max_imu_messages,
@@ -341,6 +434,9 @@ def generate_clean_by2_inputs(
         paths.by2_go2_body,
         base_time=base_time,
         max_messages=max_imu_messages,
+        frame_name=go2_velocity_frame_transform,
+        roll_pitch_std_deg=go2_roll_pitch_std_deg,
+        horizontal_std_mps=go2_horizontal_velocity_std_mps,
     )
     if not attitude_rows or not horizontal_rows:
         raise ProviderGenerationError("Go2 raw source did not produce clean weak-prior rows")
@@ -407,6 +503,26 @@ def generate_clean_by2_inputs(
         relative_sources["go2_body"]: "Go2 body IMU and weak auxiliary priors; not truth",
         "trace": "evaluation-only and not read during clean input generation",
     }
+    if (
+        stage_id
+        == "CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION"
+    ):
+        receiver_diagnostics = {
+            "imu-data.csv": "Fixposition receiver IMU diagnostic-only; never propagation input",
+            "imu-biases.csv": "Fixposition receiver IMU bias diagnostic-only; never propagation input",
+            "imu-temp.csv": "Fixposition receiver IMU temperature diagnostic-only; never propagation input",
+        }
+        for name, role in receiver_diagnostics.items():
+            relative = str(
+                (paths.by2_fix_root / name)
+                .resolve(strict=False)
+                .relative_to(paths.raw_root.resolve(strict=True))
+            )
+            source_roles[relative] = role
+        source_roles["trace"] = (
+            "Fixposition same-source evaluation reference; offline-only and not read "
+            "during clean input generation"
+        )
     yaw_contract = {
         key: yaw_audit[key]
         for key in (
@@ -434,6 +550,22 @@ def generate_clean_by2_inputs(
         "yaw_order": "GNSS2-GNSS1",
         "lateral_to_body_offset_deg": 90.0,
         "go2_prior_policy": "weak_auxiliary_not_truth",
+        "yaw_sign": yaw_sign,
+        "yaw_install_offset_deg": yaw_install_offset_deg,
+        "status_fixed_yaw_std_deg": status_fixed_yaw_std_deg,
+        "receiver_velocity_match_tolerance_seconds": receiver_velocity_match_tolerance_seconds,
+        "dual_yaw_match_tolerance_seconds": dual_yaw_match_tolerance_seconds,
+        "receiver_velocity_std_mps": receiver_velocity_std_mps,
+        "receiver_velocity_parser_adapter_id": RECEIVER_VELOCITY_PARSER_ADAPTER_ID,
+        "receiver_velocity_sAcc_full_frame_offsets": [74, 78],
+        "imu_install_roll_deg": imu_install_roll_deg,
+        "imu_install_pitch_deg": imu_install_pitch_deg,
+        "imu_install_yaw_deg": imu_install_yaw_deg,
+        "imu_gnss_time_offset": imu_gnss_time_offset,
+        "go2_velocity_frame_transform": go2_velocity_frame_transform,
+        "go2_roll_pitch_std_deg": go2_roll_pitch_std_deg,
+        "go2_horizontal_velocity_std_mps": go2_horizontal_velocity_std_mps,
+        "stage_id": stage_id,
     }
     generator_config_hash = sha256_text(
         json.dumps(generation_contract, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
@@ -470,9 +602,12 @@ def generate_clean_by2_inputs(
         "generation_contract": generation_contract,
         "raw_doppler_provider_status": "not_required_for_basic_dual_yaw_smoke",
     }
-    final_commit, final_dirty = git_code_state(paths.code_root)
-    if final_commit != generator_commit or final_dirty:
-        raise ProviderGenerationError("Git code state changed during clean provider generation")
+    if not parent_bracketed_git_state:
+        final_commit, final_dirty = git_code_state(paths.code_root)
+        if final_commit != generator_commit or final_dirty:
+            raise ProviderGenerationError(
+                "Git code state changed during clean provider generation"
+            )
     write_json_atomic(provider_root / "DUAL_YAW_PHYSICAL_GATE.json", yaw_audit)
     write_json_atomic(provider_root / "DUAL_YAW_RUNTIME_CROSSCHECK.json", yaw_runtime_crosscheck)
     write_json_atomic(provider_root / "GO2_PROVIDER_REPORT.json", go2_report)

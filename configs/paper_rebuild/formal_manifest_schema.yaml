@@ -1,0 +1,149 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: paper_rebuild.formal_run_manifest.v1
+title: LegSA-GINS CLEAN1 Formal Run Manifest
+type: object
+additionalProperties: false
+oneOf:
+  - required: [stage_id, protocol_id]
+    properties:
+      stage_id: {const: CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION}
+      protocol_id: {const: CLEAN1_BY2_CLEAN_NORMAL_V1}
+  - required: [stage_id, protocol_id]
+    properties:
+      stage_id: {const: CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION}
+      protocol_id: {const: CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED}
+required:
+  - schema_version
+  - stage_id
+  - protocol_id
+  - case_id
+  - data_mode
+  - run_id
+  - algorithm_id
+  - method_role
+  - code_commit
+  - code_worktree_dirty_at_run
+  - executable_hash
+  - runtime_config_hash
+  - methods_yaml_hash
+  - window_contract_hash
+  - evaluator_contract_hash
+  - raw_source_hashes
+  - provider_hashes
+  - provider_generator_commit
+  - provider_generation_config_hash
+  - local_path_config_hash
+  - actual_solver_input_paths
+  - actual_solver_input_roles
+  - synthetic_data_used
+  - semisynthetic_data_used
+  - trace_used_online
+  - receiver_imu_as_body_imu
+  - final_v23_output_solver_input
+  - LegSA_output_solver_input
+  - per_case_tuning
+  - output_only_correction
+  - epoch_deleted_for_metric
+  - old_runtime_input_count
+  - legacy_provider_input_count
+  - legacy_row_input_count
+  - legacy_aggregate_input_count
+  - status_fallback_used
+  - go2_position_truth_claim
+  - go2_velocity_truth_claim
+  - go2_yaw_truth_claim
+  - go2_contact_truth_claim
+  - common_initialization
+  - common_initialization_dual_yaw_used
+  - solver_returncode
+  - runtime_seconds
+  - module_update_counts
+  - output_files
+  - output_hashes
+  - terminal_status
+  - paper_performance_claim
+properties:
+  schema_version: {const: paper-rebuild-formal-run-manifest-v1}
+  stage_id:
+    enum:
+      - CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION
+      - CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION
+  protocol_id:
+    enum: [CLEAN1_BY2_CLEAN_NORMAL_V1, CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED]
+  case_id: {const: CLEAN1_BY2_CLEAN_NORMAL}
+  data_mode: {const: real_by2_raw}
+  run_id: {type: string, minLength: 1}
+  algorithm_id:
+    enum: [single_antenna_EKF, basic_dual_yaw_EKF, strong_dual_yaw_EKF, LegSA_Paper_V1]
+  method_role: {enum: [baseline, strong_baseline, proposed_method]}
+  code_commit: {type: string, pattern: "^[0-9a-f]{40}$"}
+  code_worktree_dirty_at_run: {const: false}
+  executable_hash: {type: string, pattern: "^[0-9a-f]{64}$"}
+  runtime_config_hash: {type: string, pattern: "^[0-9a-f]{64}$"}
+  methods_yaml_hash: {type: string, pattern: "^[0-9a-f]{64}$"}
+  window_contract_hash: {type: string, pattern: "^[0-9a-f]{64}$"}
+  evaluator_contract_hash: {type: string, pattern: "^[0-9a-f]{64}$"}
+  raw_source_hashes: {type: object, minProperties: 22}
+  provider_hashes: {type: object, minProperties: 7}
+  provider_generator_commit: {type: string, pattern: "^[0-9a-f]{40}$"}
+  provider_generation_config_hash: {type: string, pattern: "^[0-9a-f]{64}$"}
+  local_path_config_hash: {type: string, pattern: "^[0-9a-f]{64}$"}
+  actual_solver_input_paths: {type: object, minProperties: 2}
+  actual_solver_input_roles: {type: array, minItems: 2, uniqueItems: true}
+  synthetic_data_used: {const: false}
+  semisynthetic_data_used: {const: false}
+  trace_used_online: {const: false}
+  receiver_imu_as_body_imu: {const: false}
+  final_v23_output_solver_input: {const: false}
+  LegSA_output_solver_input: {const: false}
+  per_case_tuning: {const: false}
+  output_only_correction: {const: false}
+  epoch_deleted_for_metric: {const: false}
+  old_runtime_input_count: {const: 0}
+  legacy_provider_input_count: {const: 0}
+  legacy_row_input_count: {const: 0}
+  legacy_aggregate_input_count: {const: 0}
+  status_fallback_used: {const: false}
+  go2_position_truth_claim: {const: false}
+  go2_velocity_truth_claim: {const: false}
+  go2_yaw_truth_claim: {const: false}
+  go2_contact_truth_claim: {const: false}
+  common_initialization: {const: true}
+  common_initialization_dual_yaw_used: {const: true}
+  solver_returncode: {const: 0}
+  runtime_seconds: {type: number, minimum: 0}
+  module_update_counts:
+    type: object
+    additionalProperties: false
+    required:
+      - position_update_count
+      - receiver_velocity_update_count
+      - dual_yaw_update_count
+      - raw_doppler_update_count
+      - source_aware_evaluation_count
+      - source_aware_weight_changed_count
+      - go2_roll_pitch_update_count
+      - go2_horizontal_velocity_update_count
+      - selected_fgo_feedback_update_count
+      - nine_factor_fgo_update_count
+      - qa_fallback_count
+      - multi_state_qm_update_count
+      - contact_fk_update_count
+    properties:
+      position_update_count: {type: integer, minimum: 0}
+      receiver_velocity_update_count: {type: integer, minimum: 0}
+      dual_yaw_update_count: {type: integer, minimum: 0}
+      raw_doppler_update_count: {type: integer, minimum: 0}
+      source_aware_evaluation_count: {type: integer, minimum: 0}
+      source_aware_weight_changed_count: {type: integer, minimum: 0}
+      go2_roll_pitch_update_count: {type: integer, minimum: 0}
+      go2_horizontal_velocity_update_count: {type: integer, minimum: 0}
+      selected_fgo_feedback_update_count: {type: integer, minimum: 0}
+      nine_factor_fgo_update_count: {type: integer, minimum: 0}
+      qa_fallback_count: {type: integer, minimum: 0}
+      multi_state_qm_update_count: {type: integer, minimum: 0}
+      contact_fk_update_count: {type: integer, minimum: 0}
+  output_files: {type: object, minProperties: 3}
+  output_hashes: {type: object, minProperties: 3}
+  terminal_status: {const: PASS}
+  paper_performance_claim: {const: false}

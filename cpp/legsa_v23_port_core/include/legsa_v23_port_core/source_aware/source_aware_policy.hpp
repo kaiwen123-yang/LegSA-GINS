@@ -22,6 +22,7 @@ class SourceAwarePolicy {
   explicit SourceAwarePolicy(SourceAwarePolicyConfig config);
 
   const SourceAwarePolicyConfig& config() const;
+  std::string branchId() const;
   bool enabledFor(MeasurementSource source) const;
   SourceWeightResult evaluate(const SourceMetadata& metadata, const ObservationInnovation& innovation);
 

@@ -24,9 +24,30 @@ struct PortOptions {
   std::string phase = "N4H4R2";
   std::string port_role = "source_backed_math_port";
   std::string run_label = "N4H4R2_synthetic_math";
+  // 中文说明：CLEAN1 formal identity 与历史 phase 路由分离；非 formal 入口保持原 smoke/toy 语义。
+  bool clean1_formal_mode = false;
+  // CLEAN1R2R1 专用：使用 exact final_v23 的 15 列 implicit-all-valid GNSS
+  // 和“首个 aligned IMU 只初始化、不写 NAV/STD”语义。旧 CLEAN1 运行保持原样。
+  bool clean_final_v23_parity_mode = false;
+  std::string stage_id;
+  std::string protocol_id;
+  std::string case_id;
+  std::string run_id;
+  std::string data_mode;
   std::string algorithm_id;
   std::string imu_path;
   std::string gnss_path;
+  std::string propagation_imu_source = "configured_imu_runtime_input";
+  bool common_initialization = false;
+  bool common_initialization_dual_yaw_used = false;
+  bool trace_used_for_initialization = false;
+  bool method_specific_initialization = false;
+  std::string common_initialization_source = "unspecified";
+  // 中文说明：滤波状态位置是 propagation IMU reference point；是否与离线 reference 同点必须由 evaluator 独立证明。
+  std::string solver_output_reference_point = "propagation_imu_reference_point";
+  std::string antlever_config_source = "runtime_config_antlever";
+  bool evaluation_reference_point_match_established = false;
+  bool reference_point_compensation_applied = false;
   Vec3 antlever_m = makeVec3(0.0, 0.0, 0.0);
   Vec3 init_pos_blh_rad_m = makeVec3(0.0, 0.0, 0.0);
   Vec3 init_vel_ned_mps = makeVec3(0.0, 0.0, 0.0);
@@ -46,9 +67,20 @@ struct PortOptions {
   bool parity_attempted = false;
   bool real_clean_replay_attempted = false;
   bool final_v23_output_solver_input = false;
+  bool LegSA_output_solver_input = false;
   bool trace_solver_input = false;
+  bool synthetic_data_used = false;
+  bool semisynthetic_data_used = false;
+  bool receiver_imu_as_body_imu = false;
+  bool per_case_tuning = false;
   bool output_only_correction = false;
   bool bad_epoch_deletion_for_metric = false;
+  std::size_t old_runtime_input_count = 0;
+  std::size_t legacy_provider_input_count = 0;
+  std::size_t legacy_row_input_count = 0;
+  std::size_t legacy_aggregate_input_count = 0;
+  bool status_fallback_used = false;
+  bool legacy_provider_used = false;
   bool enable_receiver_velocity_update = true;
   std::string receiver_velocity_stress_mode = "none";
   double receiver_velocity_std_scale = 1.0;
@@ -104,6 +136,9 @@ struct PortOptions {
   source_aware::QualityStateRuntimeStats quality_state_runtime_stats;
   bool multi_state_qm = false;
   bool fgo = false;
+  bool enable_no_feedback_fgo = false;
+  bool enable_active_nine_factor_fgo = false;
+  bool enable_contact_fk_factor = false;
   // 中文说明：N8G FGO feedback 默认关闭；开启时只能作为 EKF pseudo-measurement update。
   fgo_feedback::FgoFeedbackConfig fgo_feedback_config;
   fgo_feedback::FgoFeedbackStatus fgo_feedback_status;
@@ -123,6 +158,18 @@ struct PortOptions {
   std::size_t position_update_count = 0;
   std::size_t velocity_update_count = 0;
   std::size_t yaw_update_count = 0;
+  // 中文说明：formal module counters 使用方法合同中的稳定命名；禁用模块必须显式为零。
+  std::size_t receiver_velocity_update_count = 0;
+  std::size_t dual_yaw_update_count = 0;
+  std::size_t source_aware_evaluation_count = 0;
+  std::size_t source_aware_weight_changed_count = 0;
+  std::size_t go2_roll_pitch_update_count = 0;
+  std::size_t go2_horizontal_velocity_update_count = 0;
+  std::size_t selected_fgo_feedback_update_count = 0;
+  std::size_t nine_factor_fgo_update_count = 0;
+  std::size_t qa_fallback_count = 0;
+  std::size_t multi_state_qm_update_count = 0;
+  std::size_t contact_fk_update_count = 0;
   std::size_t yaw_normal_count = 0;
   std::size_t yaw_downweight_count = 0;
   std::size_t yaw_reject_count = 0;

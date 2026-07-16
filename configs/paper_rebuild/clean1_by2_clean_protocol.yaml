@@ -1,0 +1,223 @@
+schema_version: paper_rebuild.clean1_by2_protocol.v2_kick_aligned
+stage_id: CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION
+case_id: CLEAN1_BY2_CLEAN_NORMAL
+protocol_id: CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED
+data_mode: real_by2_raw
+base_commit: 4e6b3f3fa9f50ed91b6c4e250f3d1f75d6725cc6
+clean0_provider_smoke_commit: 85984627439cdc861243eedb094f9be0c7dc1a76
+raw_hash_lock_expected_sha256: f6e5d7965d17857e5b4a846501883f4675f2331a1164fab3de9e5ba9470f1ad7
+expected_full_lock_rows: 9980
+expected_by2_lock_rows: 22
+formal_method_count: 4
+method_order:
+  - single_antenna_EKF
+  - basic_dual_yaw_EKF
+  - strong_dual_yaw_EKF
+  - LegSA_Paper_V1
+
+window:
+  policy: event_normalized_kick_core_gnss_interval
+  t_start_formula: first_valid_frozen_gnss_epoch_at_or_after_mapped_kick_event
+  t_end_formula: min_propagation_imu_last_valid_core_gnss_last_valid
+  preserve_internal_dropout: true
+  method_specific_window: false
+  optional_streams_delay_start: false
+  smoke_truncation_seconds: null
+  evaluation_burn_in_seconds: 0.0
+  required_streams:
+    - propagation_imu
+    - gnss_position
+    - receiver_velocity
+    - dual_yaw
+    - raw_doppler
+    - go2_roll_pitch_prior
+    - go2_horizontal_velocity_prior
+  core_start_streams:
+    - propagation_imu
+    - gnss_position
+    - dual_yaw
+  optional_start_streams:
+    - receiver_velocity
+    - raw_doppler
+    - go2_roll_pitch_prior
+    - go2_horizontal_velocity_prior
+
+time_alignment:
+  alignment_mode: event_normalized_kick
+  fixed_event_alignment_offset_seconds: 0.0
+  initial_event_segment_end: first_mode_or_gait_change_exclusive
+  normalization_baseline_max_samples: 1000
+  normalization_center: median
+  normalization_scale: max_1p4826_mad_1e-12
+  kick_score: max_0_z_acc_jerk_plus_max_0_z_gyro_jerk
+  minimum_kick_score: 6.0
+  maintained_candidate_required_status: detected
+  trace_used_for_alignment: false
+  offset_search_performed: false
+  method_specific_shift: false
+
+initialization:
+  common_initialization: true
+  position_velocity_source: first_valid_gnss_at_or_after_common_start
+  roll_pitch_source: first_valid_go2_body_attitude_at_or_after_common_start
+  yaw_source: fixed_physical_dual_yaw_at_or_after_common_start
+  trace_initialization: false
+  method_specific_initialization: false
+  single_antenna_dual_yaw_initialization_only: true
+
+dual_yaw:
+  antenna_order: GNSS2-GNSS1
+  gnss1_physical_role: robot-right
+  gnss2_physical_role: robot-left
+  baseline_direction: body_+Y_left
+  lateral_to_body_offset_deg: 90.0
+  frame: NED_locked
+  residual: wrap_safe
+  trace_selects_sign_or_offset: false
+  median_baseline_length_gate_m: [0.20, 0.60]
+  forbidden_regression_band_m: [3.5, 4.5]
+  out_of_band_epoch_action: label_only_not_metric_deletion
+
+execution:
+  fixed_order: true
+  separate_process_per_method: true
+  parallel: false
+  metric_driven_rerun: false
+  timeout_policy: fixed_before_execution
+  formal_run_count: 4
+
+provider_generation:
+  max_status_rows: null
+  max_raw_rows: null
+  max_imu_messages: null
+  yaw_source_mode: status
+  yaw_sign: 1.0
+  yaw_install_offset_deg: 0.0
+  yaw_std_mode: fixed_1p5
+  status_fixed_yaw_std_deg: 1.5
+  receiver_velocity_match_tolerance_seconds: 0.1
+  dual_yaw_match_tolerance_seconds: 0.6
+  receiver_velocity_std_mps: 0.05
+  imu_install_roll_deg: -1.0
+  imu_install_pitch_deg: 0.0
+  imu_install_yaw_deg: 0.0
+  imu_gnss_time_offset_seconds: 0.0
+  go2_velocity_frame_transform: go2_velocity_as_body_flu_then_rotate_by_go2_attitude
+  go2_roll_pitch_std_deg: 1.6
+  go2_horizontal_velocity_std_mps: 1.5
+  raw_doppler_min_sat: 5
+  raw_doppler_std_floor_mps: 0.2
+  raw_doppler_covariance_policy: conservative_isotropic_max_ecef_std_floor_0p2_mps
+  outage_enabled: false
+  outlier_mode: none
+  yaw_noise_std_deg: 0.0
+
+solver_common:
+  numerical_precision: float64
+  timeout_seconds: 900
+  imu_data_columns: 7
+  imu_data_rate_hz: 500
+  init_gyro_bias: [0.0, 0.0, 0.0]
+  init_accel_bias: [0.0, 0.0, 0.0]
+  init_gyro_scale: [0.0, 0.0, 0.0]
+  init_accel_scale: [0.0, 0.0, 0.0]
+  init_position_std_m: [10.0, 10.0, 10.0]
+  init_velocity_std_mps: [1.0, 1.0, 1.0]
+  init_attitude_std_deg: [2.0, 2.0, 2.0]
+  init_gyro_bias_std_deg_h: [9.38, 9.38, 9.38]
+  init_accel_bias_std_mgal: [77.8, 77.8, 77.8]
+  init_gyro_scale_std_ppm: [0.0, 0.0, 0.0]
+  init_accel_scale_std_ppm: [0.0, 0.0, 0.0]
+  angle_random_walk_deg_sqrt_h: [0.985, 0.985, 0.985]
+  velocity_random_walk_mps_sqrt_h: [0.077, 0.077, 0.077]
+  gyro_bias_std_deg_h: [9.38, 9.38, 9.38]
+  accel_bias_std_mgal: [77.8, 77.8, 77.8]
+  gyro_scale_std_ppm: [0.0, 0.0, 0.0]
+  accel_scale_std_ppm: [0.0, 0.0, 0.0]
+  correlation_time_h: 1.0
+  antenna_lever_m: [0.03, 0.03, -0.30]
+  antenna_lever_source_status: user_frozen_measurement_lever_frd_no_rmse_selection
+  raw_doppler_min_sat: 5
+  raw_doppler_mode: doppler_ls_velocity
+  raw_doppler_time_tolerance_seconds: 0.05
+  raw_doppler_residual_gate_mps: 3.0
+  raw_doppler_R_scale: 1.0
+  go2_roll_pitch_std_deg: 1.6
+  go2_roll_pitch_time_tolerance_seconds: 0.02
+  go2_horizontal_velocity_std_mps: 1.5
+  go2_horizontal_velocity_time_tolerance_seconds: 0.08
+  go2_horizontal_velocity_std_scale: 1.0
+  go2_attitude_prior_source_aware_enabled: true
+  go2_horizontal_velocity_source_aware_enabled: true
+  go2_horizontal_velocity_adaptive_std_enabled: false
+  go2_horizontal_velocity_prior_mode: horizontal_2d
+  go2_vertical_velocity_enabled: false
+  source_aware_policy: clean_v1_conservative_innovation_covariance
+  source_aware_mode: lsim_oim
+  source_aware_max_R_scale: 25.0
+  source_aware_global_cap: 25.0
+  source_aware_use_innovation_covariance: true
+  source_aware_deadband_normalized: 1.5
+  source_aware_moderate_normalized: 2.5
+  source_aware_strong_normalized: 4.0
+  source_aware_receiver_position_cap: 5.0
+  source_aware_receiver_velocity_cap: 8.0
+  source_aware_dual_yaw_cap: 10.0
+  source_aware_raw_doppler_cap: 15.0
+  source_aware_go2_attitude_cap: 10.0
+  source_aware_go2_horizontal_velocity_cap: 10.0
+  source_aware_reject_extreme: false
+  source_aware_no_R_shrink: true
+  source_aware_trace_enabled: true
+  source_aware_enable_rolling_innovation_baseline: true
+  source_aware_rolling_window_size: 31
+  source_aware_rolling_mad_floor: 0.5
+  source_aware_method_family: clean_v1_conservative_quadratic
+  source_aware_method_k0: 1.5
+  source_aware_method_k1: 4.0
+  source_aware_method_c: 2.5
+  source_aware_method_alpha: 0.0
+  source_aware_method_phi: 1.0
+  source_aware_method_base_gain: 1.0
+  source_aware_effective_policy_branch: conservative_innovation_covariance_v1
+  source_aware_sources:
+    receiver_position: {enabled: true, lsim_enabled: true, oim_enabled: true}
+    receiver_velocity: {enabled: true, lsim_enabled: true, oim_enabled: true}
+    dual_antenna_yaw: {enabled: true, lsim_enabled: true, oim_enabled: true}
+    raw_doppler_velocity: {enabled: true, lsim_enabled: true, oim_enabled: true}
+    go2_attitude_roll_pitch: {enabled: true, lsim_enabled: true, oim_enabled: true}
+    go2_horizontal_velocity: {enabled: true, lsim_enabled: true, oim_enabled: true}
+  receiver_velocity_stress_mode: none
+  receiver_velocity_std_scale: 1.0
+  receiver_velocity_outage_start_seconds: 0.0
+  receiver_velocity_outage_duration_seconds: 0.0
+  receiver_velocity_additive_noise_std_mps: 0.0
+  receiver_velocity_additive_noise_seed: 20260510
+  diagnostic_stress_only: false
+  yaw_std_min_deg: 0.5
+  yaw_std_soft_deg: 3.0
+  yaw_std_hard_deg: 6.0
+  yaw_residual_soft_deg: 6.0
+  yaw_residual_hard_deg: 15.0
+  yaw_downweight_scale: 2.5
+
+forbidden:
+  trace_used_online: false
+  receiver_imu_as_body_imu: false
+  final_v23_output_solver_input: false
+  LegSA_output_solver_input: false
+  synthetic_data_used: false
+  semisynthetic_data_used: false
+  per_case_tuning: false
+  output_only_correction: false
+  epoch_deleted_for_metric: false
+  status_fallback_used: false
+  old_runtime_input_count: 0
+  selected_fgo_feedback: false
+  active_nine_factor_fgo: false
+  qa_fallback: false
+  multi_state_qm_main_innovation: false
+  paper_performance_claim: false
+
+paper_figure_count: 0
+diagnostic_plot_count: 0

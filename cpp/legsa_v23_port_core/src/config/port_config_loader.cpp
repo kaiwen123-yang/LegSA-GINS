@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <array>
 #include <cctype>
+#include <cmath>
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
@@ -123,6 +124,163 @@ std::string stringOrDefault(const std::unordered_map<std::string, std::string>& 
   return value;
 }
 
+bool hasKey(const std::unordered_map<std::string, std::string>& kv, const std::string& key) {
+  return kv.find(key) != kv.end();
+}
+
+[[noreturn]] void formalContractFailure(const std::string& detail) {
+  throw std::runtime_error("FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH: " + detail);
+}
+
+void validateFormalMethodContract(const std::unordered_map<std::string, std::string>& kv,
+                                  PortOptions& options) {
+  const std::array<const char*, 6> feature_keys{{
+      "enable_dual_yaw",
+      "enable_receiver_velocity",
+      "enable_raw_doppler",
+      "enable_source_aware",
+      "enable_go2_roll_pitch_prior",
+      "enable_go2_horizontal_velocity_prior",
+  }};
+  for (const char* key : feature_keys) {
+    if (!hasKey(kv, key)) {
+      formalContractFailure(std::string("formal config missing explicit feature key ") + key);
+    }
+  }
+  const std::array<const char*, 4> go2_truth_keys{{
+      "go2_position_truth_claim",
+      "go2_velocity_truth_claim",
+      "go2_yaw_truth_claim",
+      "go2_contact_truth_claim",
+  }};
+  for (const char* key : go2_truth_keys) {
+    if (!hasKey(kv, key) || boolOrDefault(kv, key, true)) {
+      formalContractFailure(std::string("formal config must explicitly disable ") + key);
+    }
+  }
+  const bool clean1_v1_identity =
+      options.stage_id == "CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION" &&
+      options.protocol_id == "CLEAN1_BY2_CLEAN_NORMAL_V1";
+  const bool clean1r1c_v2_identity =
+      options.stage_id ==
+          "CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION" &&
+      options.protocol_id == "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED";
+  const bool clean1r2r1_final_v23_identity =
+      options.stage_id ==
+          "CLEAN1R2R1_CLEAN_REAL_FINAL_V23_PARITY_AND_FOUR_METHOD_EXECUTION" &&
+      options.protocol_id == "CLEAN_REAL_DATA_FINAL_V23";
+  if ((!clean1_v1_identity && !clean1r1c_v2_identity && !clean1r2r1_final_v23_identity) ||
+      options.case_id != "CLEAN1_BY2_CLEAN_NORMAL" ||
+      options.data_mode != "real_by2_raw" || options.run_id.empty()) {
+    formalContractFailure("formal stage/protocol/case/data_mode/run identity mismatch");
+  }
+  if (options.clean_final_v23_parity_mode != clean1r2r1_final_v23_identity) {
+    formalContractFailure("clean final_v23 parity mode/profile identity mismatch");
+  }
+  if (!options.common_initialization || !options.common_initialization_dual_yaw_used ||
+      options.trace_used_for_initialization ||
+      options.method_specific_initialization ||
+      options.common_initialization_source.empty() ||
+      options.common_initialization_source == "unspecified") {
+    formalContractFailure("common source-backed initialization contract is incomplete");
+  }
+  if (options.propagation_imu_source.empty() ||
+      options.solver_output_reference_point != "propagation_imu_reference_point" ||
+      options.antlever_config_source != "runtime_config_antlever" ||
+      options.evaluation_reference_point_match_established ||
+      options.reference_point_compensation_applied) {
+    formalContractFailure("solver/reference-point or propagation-IMU contract is not fail-closed");
+  }
+  if (options.trace_solver_input || options.receiver_imu_as_body_imu ||
+      options.synthetic_data_used || options.semisynthetic_data_used ||
+      options.final_v23_output_solver_input || options.LegSA_output_solver_input ||
+      options.per_case_tuning || options.output_only_correction ||
+      options.bad_epoch_deletion_for_metric || options.old_runtime_input_count != 0 ||
+      options.legacy_provider_input_count != 0 || options.legacy_row_input_count != 0 ||
+      options.legacy_aggregate_input_count != 0 || options.status_fallback_used ||
+      options.legacy_provider_used) {
+    formalContractFailure("formal forbidden input/tuning/correction flag is nonzero");
+  }
+  if (options.enable_go2_proprioceptive_joint_factor || options.go2_vertical_velocity_prior_enabled ||
+      options.fgo_feedback_config.enable_fgo_feedback ||
+      options.enable_no_feedback_fgo ||
+      options.quality_state_manager_config.enable_multi_state_qm ||
+      options.qa_fallback_config.enable_qa_fallback || options.qa_fallback_config.qa_active_mode ||
+      options.enable_active_nine_factor_fgo || options.enable_contact_fk_factor) {
+    formalContractFailure("out-of-scope FGO/QM/QA/contact-FK/Go2 joint feature is enabled");
+  }
+
+  const bool dual = options.enable_dual_yaw_update;
+  const bool receiver_velocity = options.enable_receiver_velocity_update;
+  const bool raw_doppler = options.raw_doppler_config.enable_raw_doppler;
+  const bool source_aware = options.source_aware_policy_config.enable_source_aware_weighting;
+  const bool go2_roll_pitch = options.go2_attitude_prior_config.enable_go2_attitude_weak_prior;
+  const bool go2_horizontal =
+      options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior;
+  bool expected_dual = false;
+  bool expected_receiver_velocity = false;
+  bool expected_raw_doppler = false;
+  bool expected_source_aware = false;
+  bool expected_go2_roll_pitch = false;
+  bool expected_go2_horizontal = false;
+  if (options.algorithm_id == "single_antenna_EKF") {
+    expected_receiver_velocity = true;
+  } else if (options.algorithm_id == "basic_dual_yaw_EKF") {
+    expected_dual = true;
+    if (std::fabs(options.basic_dual_yaw_fixed_std_deg - 1.5) > 1.0e-12) {
+      formalContractFailure("basic_dual_yaw_EKF fixed yaw std must be 1.5 deg");
+    }
+  } else if (options.algorithm_id == "strong_dual_yaw_EKF") {
+    expected_dual = true;
+    expected_receiver_velocity = true;
+  } else if (options.algorithm_id == "LegSA_Paper_V1") {
+    expected_dual = true;
+    expected_receiver_velocity = true;
+    expected_raw_doppler = true;
+    expected_source_aware = true;
+    expected_go2_roll_pitch = true;
+    expected_go2_horizontal = true;
+  } else {
+    formalContractFailure("algorithm_id is not one of the four frozen methods");
+  }
+  if (dual != expected_dual || receiver_velocity != expected_receiver_velocity ||
+      raw_doppler != expected_raw_doppler || source_aware != expected_source_aware ||
+      go2_roll_pitch != expected_go2_roll_pitch || go2_horizontal != expected_go2_horizontal) {
+    formalContractFailure("effective method flags do not match methods.yaml frozen matrix");
+  }
+  if (expected_source_aware && options.source_aware_policy_config.source_aware_mode == "off") {
+    formalContractFailure("source-aware feature is enabled but policy mode is off");
+  }
+  if (go2_horizontal &&
+      (!options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_vertical_disabled ||
+       options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_mode != "horizontal_2d")) {
+    formalContractFailure("Go2 horizontal weak prior must be horizontal_2d with vertical disabled");
+  }
+  if (options.go2_attitude_prior_config.go2_position_prior_enabled ||
+      options.go2_attitude_prior_config.go2_velocity_prior_enabled ||
+      options.go2_attitude_prior_config.go2_yaw_prior_enabled) {
+    formalContractFailure("Go2 truth/position/yaw prior flag is enabled");
+  }
+
+  options.enable_basic_dual_yaw_baseline = options.algorithm_id == "basic_dual_yaw_EKF";
+  options.yaw_scheme_C_enabled = options.enable_dual_yaw_update && !options.enable_basic_dual_yaw_baseline;
+  options.phase = options.stage_id;
+  options.port_role = "clean1_formal_four_method_solver";
+  options.run_label = options.run_id;
+  options.raw_doppler_config.formal_lineage_required = expected_raw_doppler;
+  if (expected_go2_roll_pitch) {
+    options.go2_attitude_prior_config.go2_attitude_prior_diagnostic_only = false;
+  }
+  if (expected_go2_horizontal) {
+    options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic = true;
+    options.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only = false;
+    options.go2_diagnostic_prior_only = false;
+  }
+  options.paper_performance_claim = false;
+  options.proposed_factor_claim = false;
+  options.performance_claim = false;
+}
+
 std::unordered_map<std::string, std::string> readKeyValues(const std::string& path) {
   std::ifstream input(path);
   if (!input) {
@@ -157,6 +315,14 @@ PortOptions PortConfigLoader::loadKeyValue(const std::string& path) {
 PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   const auto kv = readKeyValues(path);
   PortOptions options;
+  options.clean1_formal_mode = boolOrDefault(kv, "clean1_formal_mode", options.clean1_formal_mode);
+  options.clean_final_v23_parity_mode =
+      boolOrDefault(kv, "clean_final_v23_parity_mode", options.clean_final_v23_parity_mode);
+  options.stage_id = stringOrDefault(kv, "stage_id", options.stage_id);
+  options.protocol_id = stringOrDefault(kv, "protocol_id", options.protocol_id);
+  options.case_id = stringOrDefault(kv, "case_id", options.case_id);
+  options.run_id = stringOrDefault(kv, "run_id", options.run_id);
+  options.data_mode = stringOrDefault(kv, "data_mode", options.data_mode);
   options.run_label = stringOrDefault(kv, "run_label", "N4H4R2_config_run");
   options.algorithm_id = stringOrDefault(kv, "algorithm_id", options.algorithm_id);
   options.qa_fallback_config.algorithm_id = options.algorithm_id;
@@ -164,6 +330,58 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   options.gnss_path = stringOrDefault(kv, "gnsspath", stringOrDefault(kv, "gnss_path", ""));
   options.clean_input_provenance_label =
       stringOrDefault(kv, "clean_input_provenance_label", options.clean_input_provenance_label);
+  options.propagation_imu_source =
+      stringOrDefault(kv, "propagation_imu_source", options.propagation_imu_source);
+  options.common_initialization =
+      boolOrDefault(kv, "common_initialization", options.common_initialization);
+  options.common_initialization_dual_yaw_used =
+      boolOrDefault(kv, "common_initialization_dual_yaw_used", options.common_initialization_dual_yaw_used);
+  options.trace_used_for_initialization =
+      boolOrDefault(kv, "trace_used_for_initialization", options.trace_used_for_initialization);
+  options.method_specific_initialization =
+      boolOrDefault(kv, "method_specific_initialization", options.method_specific_initialization);
+  options.common_initialization_source =
+      stringOrDefault(kv, "common_initialization_source", options.common_initialization_source);
+  options.solver_output_reference_point =
+      stringOrDefault(kv, "solver_output_reference_point", options.solver_output_reference_point);
+  options.antlever_config_source =
+      stringOrDefault(kv, "antlever_config_source", options.antlever_config_source);
+  options.evaluation_reference_point_match_established =
+      boolOrDefault(kv,
+                    "evaluation_reference_point_match_established",
+                    options.evaluation_reference_point_match_established);
+  options.reference_point_compensation_applied =
+      boolOrDefault(kv, "reference_point_compensation_applied", options.reference_point_compensation_applied);
+  options.trace_solver_input = boolOrDefault(
+      kv, "trace_used_online", boolOrDefault(kv, "trace_solver_input", options.trace_solver_input));
+  options.receiver_imu_as_body_imu =
+      boolOrDefault(kv, "receiver_imu_as_body_imu", options.receiver_imu_as_body_imu);
+  options.synthetic_data_used =
+      boolOrDefault(kv, "synthetic_data_used", options.synthetic_data_used);
+  options.semisynthetic_data_used =
+      boolOrDefault(kv, "semisynthetic_data_used", options.semisynthetic_data_used);
+  options.final_v23_output_solver_input =
+      boolOrDefault(kv, "final_v23_output_solver_input", options.final_v23_output_solver_input);
+  options.LegSA_output_solver_input =
+      boolOrDefault(kv, "LegSA_output_solver_input", options.LegSA_output_solver_input);
+  options.per_case_tuning = boolOrDefault(kv, "per_case_tuning", options.per_case_tuning);
+  options.output_only_correction =
+      boolOrDefault(kv, "output_only_correction", options.output_only_correction);
+  options.bad_epoch_deletion_for_metric = boolOrDefault(
+      kv, "epoch_deleted_for_metric", boolOrDefault(kv, "bad_epoch_deletion_for_metric", false));
+  options.old_runtime_input_count = static_cast<std::size_t>(std::max(
+      0.0, scalarOrDefault(kv, "old_runtime_input_count", static_cast<double>(options.old_runtime_input_count))));
+  options.legacy_provider_input_count = static_cast<std::size_t>(std::max(
+      0.0, scalarOrDefault(kv, "legacy_provider_input_count", static_cast<double>(options.legacy_provider_input_count))));
+  options.legacy_row_input_count = static_cast<std::size_t>(std::max(
+      0.0, scalarOrDefault(kv, "legacy_row_input_count", static_cast<double>(options.legacy_row_input_count))));
+  options.legacy_aggregate_input_count = static_cast<std::size_t>(std::max(
+      0.0,
+      scalarOrDefault(kv,
+                      "legacy_aggregate_input_count",
+                      static_cast<double>(options.legacy_aggregate_input_count))));
+  options.status_fallback_used = boolOrDefault(kv, "status_fallback_used", options.status_fallback_used);
+  options.legacy_provider_used = boolOrDefault(kv, "legacy_provider_used", options.legacy_provider_used);
   options.config_policy_evidence_status =
       stringOrDefault(kv, "config_policy_evidence_status", options.config_policy_evidence_status);
 
@@ -210,6 +428,9 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   // 中文说明：receiver-native velocity 是 baseline 松组合速度观测，N5C 仅为诊断可关闭。
   options.enable_receiver_velocity_update =
       boolOrDefault(kv, "enable_receiver_velocity_update", options.enable_receiver_velocity_update);
+  // 中文说明：formal config 使用 methods.yaml 字段名；若两种键并存，machine-readable 方法键优先。
+  options.enable_receiver_velocity_update =
+      boolOrDefault(kv, "enable_receiver_velocity", options.enable_receiver_velocity_update);
   // 中文说明：N5D velocity stress 只诊断 raw Doppler 独立约束能力，不代表真实传感器故障模型。
   options.receiver_velocity_stress_mode =
       stringOrDefault(kv, "receiver_velocity_stress_mode", options.receiver_velocity_stress_mode);
@@ -234,8 +455,16 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   options.enable_basic_dual_yaw_baseline =
       boolOrDefault(kv, "enable_basic_dual_yaw_baseline", options.enable_basic_dual_yaw_baseline);
   options.enable_dual_yaw_update = boolOrDefault(kv, "enable_dual_yaw_update", options.enable_dual_yaw_update);
+  options.enable_dual_yaw_update = boolOrDefault(kv, "enable_dual_yaw", options.enable_dual_yaw_update);
   options.basic_dual_yaw_fixed_std_deg =
       scalarOrDefault(kv, "basic_dual_yaw_fixed_std_deg", options.basic_dual_yaw_fixed_std_deg);
+  options.yaw_std_min_deg = scalarOrDefault(kv, "yaw_std_min_deg", options.yaw_std_min_deg);
+  options.yaw_std_soft_deg = scalarOrDefault(kv, "yaw_std_soft_deg", options.yaw_std_soft_deg);
+  options.yaw_std_hard_deg = scalarOrDefault(kv, "yaw_std_hard_deg", options.yaw_std_hard_deg);
+  options.yaw_res_soft_deg = scalarOrDefault(kv, "yaw_res_soft_deg", options.yaw_res_soft_deg);
+  options.yaw_res_hard_deg = scalarOrDefault(kv, "yaw_res_hard_deg", options.yaw_res_hard_deg);
+  options.yaw_downweight_scale =
+      scalarOrDefault(kv, "yaw_downweight_scale", options.yaw_downweight_scale);
   options.disable_source_aware = boolOrDefault(kv, "disable_source_aware", options.disable_source_aware);
   options.disable_go2 = boolOrDefault(kv, "disable_go2", options.disable_go2);
   options.disable_qm = boolOrDefault(kv, "disable_qm", options.disable_qm);
@@ -335,6 +564,10 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       boolOrDefault(kv,
                     "enable_go2_proprioceptive_joint_factor",
                     options.enable_go2_proprioceptive_joint_factor);
+  options.enable_go2_proprioceptive_joint_factor =
+      boolOrDefault(kv,
+                    "enable_go2_joint_factor",
+                    options.enable_go2_proprioceptive_joint_factor);
   options.go2_proprioceptive_joint_factor_path =
       stringOrDefault(kv,
                       "go2_proprioceptive_joint_factor_path",
@@ -375,10 +608,46 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       scalarOrDefault(kv, "raw_doppler_R_scale", options.raw_doppler_config.raw_doppler_R_scale);
   options.raw_doppler_config.raw_doppler_mode =
       stringOrDefault(kv, "raw_doppler_mode", options.raw_doppler_config.raw_doppler_mode);
+  options.raw_doppler_config.raw_doppler_backend_id =
+      stringOrDefault(kv, "raw_doppler_backend_id", options.raw_doppler_config.raw_doppler_backend_id);
+  options.raw_doppler_config.raw_doppler_backend_source_files = stringOrDefault(
+      kv, "raw_doppler_backend_source_files", options.raw_doppler_config.raw_doppler_backend_source_files);
+  options.raw_doppler_config.raw_doppler_backend_source_hashes = stringOrDefault(
+      kv, "raw_doppler_backend_source_hashes", options.raw_doppler_config.raw_doppler_backend_source_hashes);
+  options.raw_doppler_config.helper_executable_hash =
+      stringOrDefault(kv, "helper_executable_hash", options.raw_doppler_config.helper_executable_hash);
+  options.raw_doppler_config.obs_source_hash =
+      stringOrDefault(kv, "obs_source_hash", options.raw_doppler_config.obs_source_hash);
+  options.raw_doppler_config.nav_source_hash =
+      stringOrDefault(kv, "nav_source_hash", options.raw_doppler_config.nav_source_hash);
+  options.raw_doppler_config.conversion_config_hash =
+      stringOrDefault(kv, "conversion_config_hash", options.raw_doppler_config.conversion_config_hash);
+  options.raw_doppler_config.covariance_policy =
+      stringOrDefault(kv, "covariance_policy", options.raw_doppler_config.covariance_policy);
+  options.raw_doppler_config.rtklib_position_solution_used_as_solver_input =
+      boolOrDefault(kv,
+                    "rtklib_position_solution_used_as_solver_input",
+                    options.raw_doppler_config.rtklib_position_solution_used_as_solver_input);
+  options.raw_doppler_config.nav_pvt_velocity_used_as_raw_doppler =
+      boolOrDefault(kv,
+                    "nav_pvt_velocity_used_as_raw_doppler",
+                    options.raw_doppler_config.nav_pvt_velocity_used_as_raw_doppler);
+  options.raw_doppler_config.gnss_velocity_used_as_raw_doppler =
+      boolOrDefault(kv,
+                    "gnss_velocity_used_as_raw_doppler",
+                    options.raw_doppler_config.gnss_velocity_used_as_raw_doppler);
+  options.raw_doppler_config.status_fallback_used =
+      boolOrDefault(kv, "status_fallback_used", options.raw_doppler_config.status_fallback_used);
+  options.raw_doppler_config.legacy_provider_used =
+      boolOrDefault(kv, "legacy_provider_used", options.raw_doppler_config.legacy_provider_used);
   // 中文说明：N7A Go2 attitude weak prior 默认关闭；只读取 builder 生成的 runtime-only CSV。
   options.go2_attitude_prior_config.enable_go2_attitude_weak_prior =
       boolOrDefault(kv,
                     "enable_go2_attitude_weak_prior",
+                    options.go2_attitude_prior_config.enable_go2_attitude_weak_prior);
+  options.go2_attitude_prior_config.enable_go2_attitude_weak_prior =
+      boolOrDefault(kv,
+                    "enable_go2_roll_pitch_prior",
                     options.go2_attitude_prior_config.enable_go2_attitude_weak_prior);
   options.go2_attitude_prior_config.go2_attitude_prior_path =
       stringOrDefault(kv,
@@ -513,6 +782,10 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   options.source_aware_policy_config.enable_source_aware_weighting =
       boolOrDefault(kv,
                     "enable_source_aware_weighting",
+                    options.source_aware_policy_config.enable_source_aware_weighting);
+  options.source_aware_policy_config.enable_source_aware_weighting =
+      boolOrDefault(kv,
+                    "enable_source_aware",
                     options.source_aware_policy_config.enable_source_aware_weighting);
   options.source_aware_policy_config.source_aware_policy_version =
       stringOrDefault(kv,
@@ -748,7 +1021,22 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       boolOrDefault(kv,
                     "fgo_feedback_no_future_data_required",
                     options.fgo_feedback_config.fgo_feedback_no_future_data_required);
-  if (options.enable_basic_dual_yaw_baseline) {
+  options.fgo_feedback_config.enable_fgo_feedback =
+      boolOrDefault(kv,
+                    "enable_selected_fgo_feedback",
+                    options.fgo_feedback_config.enable_fgo_feedback);
+  options.enable_active_nine_factor_fgo =
+      boolOrDefault(kv, "enable_active_nine_factor_fgo", options.enable_active_nine_factor_fgo);
+  options.enable_no_feedback_fgo =
+      boolOrDefault(kv, "enable_no_feedback_fgo", options.enable_no_feedback_fgo);
+  options.enable_contact_fk_factor =
+      boolOrDefault(kv,
+                    "enable_contact_fk",
+                    boolOrDefault(kv, "enable_contact_fk_factor", options.enable_contact_fk_factor));
+  if (options.clean1_formal_mode) {
+    validateFormalMethodContract(kv, options);
+  }
+  if (!options.clean1_formal_mode && options.enable_basic_dual_yaw_baseline) {
     // 中文说明：PAPER10E0 Basic 基线强制关闭 LegSA-GINS-Full 复杂模块；
     // 即使配置误写启用项，也不得让 source-aware/Go2/QM/Raw Doppler/FGO 进入 solver。
     options.phase = "PAPER10E0";
@@ -757,7 +1045,8 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       // 中文说明：Basic baseline 不能被 algorithm_id 误写重新路由到 QA fallback。
       options.algorithm_id = "Basic_Dual_Yaw_EKF";
     }
-    options.ablation_variant = options.ablation_variant.empty() ? "B01_BASIC_DUAL_YAW_EKF" : options.ablation_variant;
+    options.ablation_variant =
+        options.ablation_variant.empty() ? "B01_BASIC_DUAL_YAW_EKF" : options.ablation_variant;
     options.enable_receiver_velocity_update = false;
     options.receiver_velocity_stress_mode = "disabled";
     options.receiver_velocity_additive_noise_std_mps = 0.0;

@@ -12,7 +12,7 @@
 namespace legsa_v23_port_core {
 
 bool RawDopplerFactor::isProviderBacked(const RawDopplerVelocityMeasurement& measurement) {
-  return measurement.provider_status == "available";
+  return measurement.valid && measurement.lineage_valid && measurement.provider_status == "available";
 }
 
 Vec3 RawDopplerFactor::positiveStd(const RawDopplerVelocityMeasurement& measurement) {

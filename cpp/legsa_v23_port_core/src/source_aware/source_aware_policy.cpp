@@ -157,6 +157,18 @@ const SourceAwarePolicyConfig& SourceAwarePolicy::config() const {
   return config_;
 }
 
+std::string SourceAwarePolicy::branchId() const {
+  if (n6bPolicyEnabled() &&
+      (config_.source_aware_method_family == "n6b_conservative_quadratic" ||
+       config_.source_aware_method_family == "clean_v1_conservative_quadratic")) {
+    return "conservative_innovation_covariance_v1";
+  }
+  if (!config_.source_aware_method_family.empty()) {
+    return "configured_method_family:" + config_.source_aware_method_family;
+  }
+  return "legacy_generic_source_aware";
+}
+
 bool SourceAwarePolicy::enabledFor(MeasurementSource source) const {
   if (!config_.enable_source_aware_weighting || config_.source_aware_mode == "off") {
     return false;
@@ -195,7 +207,8 @@ double SourceAwarePolicy::capScale(double value, MeasurementSource source) const
 }
 
 bool SourceAwarePolicy::n6bPolicyEnabled() const {
-  return config_.source_aware_policy_version == "n6b_conservative_innovation_covariance";
+  return config_.source_aware_policy_version == "n6b_conservative_innovation_covariance" ||
+         config_.source_aware_policy_version == "clean_v1_conservative_innovation_covariance";
 }
 
 void SourceAwarePolicy::applyRollingBaseline(MeasurementSource source,
@@ -554,7 +567,8 @@ double SourceAwarePolicy::oimScale(const SourceMetadata& metadata,
   result.innovation_cov_trace = innovation.innovation_cov_trace;
   result.used_innovation_covariance = innovation.used_innovation_covariance;
   if (!config_.source_aware_method_family.empty() &&
-      config_.source_aware_method_family != "n6b_conservative_quadratic") {
+      config_.source_aware_method_family != "n6b_conservative_quadratic" &&
+      config_.source_aware_method_family != "clean_v1_conservative_quadratic") {
     return methodFamilyOimScale(metadata, normalized, result);
   }
   if (!n6bPolicyEnabled()) {

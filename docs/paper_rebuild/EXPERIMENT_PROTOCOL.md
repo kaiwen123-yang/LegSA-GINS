@@ -25,6 +25,12 @@ If any link is missing, the run is not active evidence.
 
 Every manifest must write `data_mode`, `synthetic_data_used`, and `semisynthetic_data_used` explicitly.
 
+## CLEAN1R2R1 final_v23 profiles
+
+- `archived_E001_semisynthetic` is `ARCHIVED_SEMISYNTHETIC_DIAGNOSTIC_REFERENCE_ONLY`. Its `nominal_none` label means no additional degradation case; the base command still injected 1.5 degree Gaussian yaw noise with seed 42 and read trace during provider generation. Its input, output, rows, and metrics cannot enter clean evidence.
+- `clean_real_final_v23` is the selected parity/strong-baseline profile. It uses current hash-locked real BY2 raw, GNSS1 position/std, GNSS1 raw NAV-PVT receiver velocity, GNSS1/GNSS2 status A1 yaw, and Go2 body IMU. Yaw measurement std is 1.5 degrees, while yaw noise injection is disabled and trace is excluded from generation.
+- E001 may support unaffected static runtime fields only when cross-confirmed by exact tag/source. It is not a byte-parity target and its old input is never solver input.
+
 ## Fixed Safety Invariants
 
 - Trace is evaluation-only and `trace_used_online=false`.
@@ -40,6 +46,18 @@ Every manifest must write `data_mode`, `synthetic_data_used`, and `semisynthetic
 
 The 60-type, 9-seed registry and classic-18 manifest are retained as legacy protocol definitions only. They do not import any legacy providers or results. Degraded data must be regenerated under `<CLEAN_ROOT>` from hash-locked raw inputs. Seed replay uses the fixed seed catalog and PCG64. The clean case is unique and contains no random operation. Module-disable is a method ablation, not a degradation case axis.
 
+## Retained CLEAN1R1C Kick-Aligned Protocol
+
+This subsection records the superseded CLEAN1R1C contract for provenance only. It is not the current execution authorization and cannot supply CLEAN1R2 active evidence.
+
+- Detect the physical kick only from the initial Go2 IMU/event segment using the frozen robust jerk score and the maintained event-normalized detector cross-check.
+- Freeze `fixed_event_alignment_offset_seconds=0.0`; no correlation, trace, output, or metric offset search is permitted.
+- Set `t_start` to the first position- and dual-yaw-valid GNSS epoch after the mapped kick.
+- Set `t_end=min(propagation_imu_last_valid,core_gnss_last_valid)` and preserve internal dropouts.
+- Raw Doppler and Go2 priors are optional at start and activate only when their own epochs become available.
+- Freeze `[0.03,0.03,-0.30] m` as the common GNSS measurement lever arm.
+- Freeze the evaluator without opening trace. After four outputs are hash-frozen, interpolate reference ECEF and unwrapped ENU yaw at absolute solver time, convert yaw with `wrap360(90-yaw_enu)`, and retain unmatched epochs in coverage.
+
 ## Execution Boundary
 
-CLEAN0 authorizes only the independent BY2 clean smoke required by the stage. It does not authorize DA03, DA05, the 541-case matrix, paper figures, or performance conclusions. Later execution requires its own explicit stage and human gate.
+CLEAN0's independent BY2 smoke remains a runtime-health regression only. CLEAN1R1C is retained historical protocol and has review disposition `SUPERSEDED_FOR_FINAL_V23_PARITY_REVIEW`; it is no longer an active execution authorization. CLEAN1R2 is retained as archive recovery and wrong-profile discovery: it launched no solver, read no current trace, and did not contaminate current active evidence. The human has now selected `CLEAN_REAL_DATA_FINAL_V23`, resolving the E001 anchor mistake. CLEAN1R2R1 must still pass the fresh exact-tag clean run and exact-vs-active parity before four methods may run. Neither this authorization nor its predecessors authorize DA03, DA05, classic-18, the 541-case matrix, figures, broad performance conclusions, or a later stage.

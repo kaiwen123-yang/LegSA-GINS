@@ -71,6 +71,8 @@ class GIEngine {
   std::size_t yawNormalCount() const;
   std::size_t yawDownweightCount() const;
   std::size_t yawRejectCount() const;
+  std::size_t sourceAwareEvaluationCount() const;
+  std::size_t sourceAwareWeightChangedCount() const;
   std::size_t rawDopplerUpdateCount() const;
   std::size_t rawDopplerRejectCount() const;
   std::size_t rawDopplerEpochCount() const;
@@ -141,6 +143,8 @@ class GIEngine {
   std::size_t yaw_normal_count_ = 0;
   std::size_t yaw_downweight_count_ = 0;
   std::size_t yaw_reject_count_ = 0;
+  std::size_t source_aware_evaluation_count_ = 0;
+  std::size_t source_aware_weight_changed_count_ = 0;
   std::vector<RawDopplerVelocityMeasurement> raw_doppler_measurements_;
   RawDopplerFactorStatus raw_doppler_status_;
   std::vector<double> raw_doppler_residual_norms_;

@@ -19,6 +19,9 @@ void PortWriters::writeAll(const std::string& output_dir,
   FileSaver::writeNav(output_dir, states);
   FileSaver::writeStd(output_dir, covariances);
   FileSaver::writeEvalNav(output_dir, states);
+  if (options.clean_final_v23_parity_mode) {
+    FileSaver::writeExactCompatible(output_dir, states, covariances);
+  }
   FileSaver::writeRunManifest(output_dir, options);
 }
 

@@ -5,9 +5,9 @@
 | Source | Allowed role | Forbidden role |
 |---|---|---|
 | Fixposition raw and status | GNSS observations, quality fields, dual-receiver geometry, Raw Doppler source material | algorithm estimate, truth, direct performance metric |
-| Receiver IMU | receiver diagnostic/source data when explicitly configured | replacement for Go2 body IMU |
+| Receiver IMU | Fixposition receiver diagnostic only | propagation input or replacement for Go2 body IMU |
 | Go2 body log | body IMU/state source, roll/pitch weak prior, horizontal-velocity weak prior, readiness/contact diagnostics | position, velocity, yaw, contact, or pose truth |
-| Trace | aligned evaluation-only reference | online solver input, provider generation, sign/offset choice, tuning, feedback, output correction |
+| Trace | Fixposition-derived same-source evaluation reference, opened offline only after all four outputs are hash-frozen | online solver input, provider/alignment/start selection, sign/offset choice, tuning, feedback, output correction, independent-ground-truth claim |
 | Raw Doppler | source-backed auxiliary velocity observation after fresh provider generation | receiver-velocity alias, algorithm output, truth |
 
 ## Dataset Roles
@@ -30,3 +30,5 @@
 ## Generated Data
 
 Fresh provider files are derived artifacts. They must stay under `<CLEAN_ROOT>`, include source-role and hash lineage, and never overwrite raw files. NAV, STD, EVAL_NAV or their clean equivalents are algorithm outputs and remain untracked. They become eligible evidence only after manifest and dependency audits pass.
+
+For CLEAN1R1C, `<BY2_GO2_BODY>/by2.txt` is the sole propagation IMU source. The fixed measurement lever arm is `[+0.03,+0.03,-0.30] m` in solver FRD for every method. It is not an evaluator point transform. The reference role is `FIXPOSITION_SAME_SOURCE_EVALUATION_REFERENCE`; `engineering_truth_alias=true` records the experiment convention, while `independent_ground_truth=false` limits the claim.
