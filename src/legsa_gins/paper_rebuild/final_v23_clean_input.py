@@ -649,6 +649,7 @@ def generate_final_v23_clean_input(
     max_status_rows: int | None = None,
     max_raw_rows: int | None = None,
     max_imu_messages: int | None = None,
+    raw_pre_checkpoint_phase: str = "pre_generation",
 ) -> dict[str, Any]:
     """Generate one immutable attempt; callers must supply a new direct child root."""
 
@@ -673,7 +674,7 @@ def generate_final_v23_clean_input(
         raise FinalV23CleanInputError("raw hash lock BY2 path set mismatch")
     pre_verified_hashes = validate_raw_checkpoint(
         raw_pre_checkpoint,
-        phase="pre_generation",
+        phase=raw_pre_checkpoint_phase,
         lock=locked_by2,
         expected_lock_sha256=expected_raw_lock_sha256,
     )
@@ -1048,6 +1049,7 @@ def seal_clean_input_post_raw_checkpoint(
     raw_post_checkpoint: Mapping[str, Any],
     raw_hash_lock_path: str | Path,
     expected_raw_lock_sha256: str = EXPECTED_RAW_LOCK_SHA256,
+    raw_post_checkpoint_phase: str = "post_generation",
 ) -> dict[str, Any]:
     """Seal a generated manifest from an outer post-generation 22/22 audit.
 
@@ -1071,7 +1073,7 @@ def seal_clean_input_post_raw_checkpoint(
     }
     post_hashes = validate_raw_checkpoint(
         raw_post_checkpoint,
-        phase="post_generation",
+        phase=raw_post_checkpoint_phase,
         lock=locked_by2,
         expected_lock_sha256=expected_raw_lock_sha256,
     )

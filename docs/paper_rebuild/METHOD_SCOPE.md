@@ -22,6 +22,14 @@ Go2 inputs remain weak auxiliary observations. They are not truth. Source-aware 
 
 The machine-readable mode contract is `configs/paper_rebuild/methods.yaml`.
 
+## CLEAN2 ablation identity
+
+The 16 `AB0000..AB1111` entries are
+`role=ablation_configuration` on the frozen `strong_dual_yaw_EKF` / clean
+final_v23 backbone. They are not additional paper methods. Their left-to-right
+bit order is `RD,SA,RP,HV`; `AB0000` aliases canonical strong and `AB1111`
+aliases canonical `LegSA_Paper_V1` without launching duplicate processes.
+
 ## Explicitly Out Of Scope
 
 - selected FGO feedback;

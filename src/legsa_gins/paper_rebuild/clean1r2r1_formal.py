@@ -334,6 +334,16 @@ def generate_fresh_auxiliaries(
     artifacts = generated.get("artifacts")
     if not isinstance(artifacts, Mapping):
         raise Clean1R2R1FormalError("maintained auxiliary artifact map is missing")
+    helper_manifest_path = destination / "CLEAN_INPUT_MANIFEST.json"
+    helper_manifest = _json(helper_manifest_path)
+    if helper_manifest != generated:
+        raise Clean1R2R1FormalError("maintained helper manifest differs from generator result")
+    dual_yaw_path = _artifact(
+        destination, artifacts["dual_yaw_provider"], "dual_yaw_provider"
+    )
+    dual_yaw_hash = sha256_file(dual_yaw_path)
+    if generated.get("provider_hashes", {}).get("dual_yaw_provider") != dual_yaw_hash:
+        raise Clean1R2R1FormalError("maintained helper dual-yaw hash binding is missing")
     active_roles = auxiliary_generation_plan()["active_auxiliary_roles"]
     source_active_paths = {role: _artifact(destination, artifacts[role], role) for role in active_roles}
     time_basis = _clean_time_basis_contract(clean.manifest_path)
@@ -384,6 +394,41 @@ def generate_fresh_auxiliaries(
             raise Clean1R2R1FormalError(f"auxiliary time-basis activation gate failed: {role}")
         active_paths[role] = active
         role_time_audits[role] = audit
+    # Classic-18 consumes the helper's source-backed A1 vector, but on the
+    # clean final_v23 time base. Rebase time only; every scientific field stays
+    # byte-identical to the helper payload.
+    active_dual_yaw_path = rebased_root / "DUAL_YAW_PROVIDER.csv"
+    dual_yaw_time_audit = rebase_auxiliary_time_csv(
+        dual_yaw_path,
+        active_dual_yaw_path,
+        offset_seconds=float(time_basis["offset_subtracted_seconds"]),
+    )
+    dual_yaw_times = _csv_times(active_dual_yaw_path)
+    dual_yaw_tolerance = float(generation["dual_yaw_match_tolerance_seconds"])
+    dual_yaw_match_count = _nearest_match_count(
+        common_gnss_times, dual_yaw_times, dual_yaw_tolerance
+    )
+    dual_yaw_time_audit.update(
+        {
+            "source_path": str(dual_yaw_path),
+            "active_path": str(active_dual_yaw_path),
+            "source_time_basis": "seconds_since_source_utc_midnight",
+            "active_time_basis": "seconds_since_archived_final_v23_base_time",
+            "match_tolerance_seconds": dual_yaw_tolerance,
+            "common_gnss_candidate_count": len(common_gnss_times),
+            "common_gnss_match_count": dual_yaw_match_count,
+            "runtime_window_overlap": dual_yaw_times[0] <= endtime
+            and dual_yaw_times[-1] >= starttime,
+        }
+    )
+    dual_yaw_time_audit["passed"] = bool(
+        dual_yaw_time_audit["time_column_only_transformed"]
+        and dual_yaw_time_audit["source_time_column_preserved"]
+        and dual_yaw_time_audit["runtime_window_overlap"]
+        and dual_yaw_match_count > 0
+    )
+    if not dual_yaw_time_audit["passed"]:
+        raise Clean1R2R1FormalError("Classic-18 dual-yaw time-basis activation gate failed")
     time_basis["source_time_basis"] = "seconds_since_source_utc_midnight"
     time_basis["active_time_basis"] = "seconds_since_archived_final_v23_base_time"
     time_basis["common_gnss_candidate_count"] = len(common_gnss_times)
@@ -429,6 +474,20 @@ def generate_fresh_auxiliaries(
         "actual_source_read_set": actual_reads,
         "raw_doppler_backend": dict(raw),
         "compatibility_helper_identity": "maintained_CLEAN1_V1_auxiliary_generator",
+        "classic18_dual_yaw_provider": {
+            "path": str(active_dual_yaw_path),
+            "sha256": sha256_file(active_dual_yaw_path),
+            "helper_source_path": str(dual_yaw_path),
+            "helper_source_sha256": dual_yaw_hash,
+            "helper_manifest_path": str(helper_manifest_path),
+            "helper_manifest_sha256": sha256_file(helper_manifest_path),
+            "helper_provider_bundle_hash": generated["provider_bundle_hash"],
+            "generator_config_hash": generated["generator_config_hash"],
+            "generator_code_commit": generated["generator_code_commit"],
+            "source_backed": True,
+            "solver_eligible": False,
+            "time_basis_audit": dual_yaw_time_audit,
+        },
         "compatibility_generated_imu_gnss": {
             "solver_eligible": False,
             "reason": "CLEAN1R2R1 uses sealed FINAL_V23_CLEAN_FRESH 15-column common base",
@@ -459,6 +518,7 @@ def generate_fresh_auxiliaries(
         {
             **common_after,
             **active_hashes,
+            "classic18_dual_yaw_provider": sha256_file(active_dual_yaw_path),
             "raw_doppler_backend": _canonical_hash(dict(raw)),
             "auxiliary_time_basis": _canonical_hash(time_basis),
         }
@@ -658,6 +718,88 @@ def validate_auxiliary_bundle(path: str | Path) -> dict[str, Any]:
             or abs(active_times[-1] - float(audit.get("output_time_end_seconds", math.nan))) > 1.0e-9
         ):
             raise Clean1R2R1FormalError(f"auxiliary role activation coverage changed: {role}")
+    dual = payload.get("classic18_dual_yaw_provider")
+    if dual is None:
+        # Historical CLEAN1R2R1 bundles predate the CLEAN2-only active dual
+        # sidecar. They remain valid current structural evidence, but the
+        # CLEAN2 case-provider gate separately requires the new binding.
+        expected_bundle = _canonical_hash(
+            {
+                **{
+                    role: payload["common_solver_base"][role]["sha256"]
+                    for role in ("imu_runtime_input", "gnss_runtime_input")
+                },
+                **{
+                    role: payload["auxiliary_artifacts"][role]["sha256"]
+                    for role in auxiliary_generation_plan()["active_auxiliary_roles"]
+                },
+                "raw_doppler_backend": _canonical_hash(dict(payload["raw_doppler_backend"])),
+                "auxiliary_time_basis": _canonical_hash(dict(time_basis)),
+            }
+        )
+        if payload.get("bundle_hash") != expected_bundle:
+            raise Clean1R2R1FormalError("Historical auxiliary bundle hash no longer closes")
+        return payload
+    if not isinstance(dual, Mapping) or dual.get("source_backed") is not True:
+        raise Clean1R2R1FormalError("Classic-18 active dual-yaw binding is missing")
+    dual_source = Path(str(dual.get("helper_source_path") or "")).resolve(strict=True)
+    dual_active = Path(str(dual.get("path") or "")).resolve(strict=True)
+    dual_audit = dual.get("time_basis_audit")
+    if (
+        not isinstance(dual_audit, Mapping)
+        or dual_audit.get("passed") is not True
+        or dual.get("solver_eligible") is not False
+        or sha256_file(dual_source) != dual.get("helper_source_sha256")
+        or sha256_file(dual_active) != dual.get("sha256")
+        or sha256_file(dual_source) != dual_audit.get("input_sha256")
+        or sha256_file(dual_active) != dual_audit.get("output_sha256")
+        or str(dual_source) != dual_audit.get("source_path")
+        or str(dual_active) != dual_audit.get("active_path")
+        or abs(float(dual_audit.get("offset_subtracted_seconds", math.nan)) - offset) > 1.0e-9
+        or dual_audit.get("time_column_only_transformed") is not True
+        or dual_audit.get("source_time_column_preserved") is not True
+    ):
+        raise Clean1R2R1FormalError("Classic-18 dual-yaw rebase provenance mismatch")
+    with dual_source.open("r", encoding="utf-8-sig", newline="") as handle:
+        source_rows = list(csv.DictReader(handle))
+    with dual_active.open("r", encoding="utf-8-sig", newline="") as handle:
+        active_rows = list(csv.DictReader(handle))
+    if len(source_rows) != len(active_rows) or not source_rows:
+        raise Clean1R2R1FormalError("Classic-18 dual-yaw rebase row count changed")
+    for source_row, active_row in zip(source_rows, active_rows):
+        if set(source_row) != set(active_row):
+            raise Clean1R2R1FormalError("Classic-18 dual-yaw rebase schema changed")
+        for field in source_row:
+            if field == "time":
+                if abs((float(source_row[field]) - offset) - float(active_row[field])) > 1.0e-9:
+                    raise Clean1R2R1FormalError("Classic-18 dual-yaw time rebase changed")
+            elif source_row[field] != active_row[field]:
+                raise Clean1R2R1FormalError("Classic-18 dual-yaw non-time field changed")
+    dual_times = _csv_times(dual_active)
+    dual_tolerance = float(dual_audit.get("match_tolerance_seconds", math.nan))
+    if (
+        _nearest_match_count(common_times, dual_times, dual_tolerance)
+        != int(dual_audit.get("common_gnss_match_count", -1))
+        or len(dual_times) != int(dual_audit.get("row_count", -1))
+    ):
+        raise Clean1R2R1FormalError("Classic-18 dual-yaw activation coverage changed")
+    expected_bundle = _canonical_hash(
+        {
+            **{
+                role: payload["common_solver_base"][role]["sha256"]
+                for role in ("imu_runtime_input", "gnss_runtime_input")
+            },
+            **{
+                role: payload["auxiliary_artifacts"][role]["sha256"]
+                for role in auxiliary_generation_plan()["active_auxiliary_roles"]
+            },
+            "classic18_dual_yaw_provider": dual["sha256"],
+            "raw_doppler_backend": _canonical_hash(dict(payload["raw_doppler_backend"])),
+            "auxiliary_time_basis": _canonical_hash(dict(time_basis)),
+        }
+    )
+    if payload.get("bundle_hash") != expected_bundle:
+        raise Clean1R2R1FormalError("Auxiliary bundle hash no longer closes")
     return payload
 
 

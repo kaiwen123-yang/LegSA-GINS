@@ -1,0 +1,98 @@
+schema_version: paper_rebuild.clean2_classic18_active_mapping.v1
+stage_id: CLEAN2_BY2_MODULE_ABLATION_AND_CLASSIC18
+dataset: BY2
+case_count: 18
+clean_case_id: C00_clean_normal
+clean_protocol: CLEAN_REAL_DATA_FINAL_V23
+
+provenance:
+  source_spec_path: configs/paper_rebuild/classic_18cases.yaml
+  source_spec_sha256: 4bc10f06ff29fca7401b4485ea44e9d2f73b576388ea2dca1b5df219c5d72912
+  migrated_content: mathematical_perturbation_policy_only
+  legacy_performance_evidence_used: false
+  legacy_provider_payload_used: false
+  legacy_full_backend_solver_used: false
+  active_mapping_source_backed: true
+  legacy_full_backend_provider_layer_promoted: false
+
+active_provider:
+  layer: A1_dual_diff_status_baseline_vector
+  source_files: [GNSS1_status, GNSS2_status]
+  baseline_vector: GNSS2_minus_GNSS1
+  GNSS1_physical_role: right
+  GNSS2_physical_role: left
+  body_yaw_ned_formula: wrap360(atan2(baseline_e,baseline_n)+90deg)
+  nominal_preserved_length_m: 0.350
+  unchanged_sources:
+    - gnss_position
+    - receiver_velocity
+    - propagation_imu
+    - raw_doppler
+    - go2_roll_pitch
+    - go2_horizontal_velocity
+  mutable_fields: [dual_yaw_value, dual_yaw_valid, dual_yaw_std, case_metadata]
+  trace_read_count: 0
+
+gnss_schema:
+  delimiter: whitespace
+  base_column_count: 15
+  extended_column_count: 18
+  one_based_columns:
+    time: 1
+    position_and_position_std: [2, 3, 4, 5, 6, 7]
+    receiver_velocity_and_std: [8, 9, 10, 11, 12, 13]
+    yaw: 14
+    yaw_std: 15
+    position_valid: 16
+    receiver_velocity_valid: 17
+    dual_yaw_valid: 18
+  c00_extended_equals_clean_15_column_numeric_semantics: true
+  outage_or_downsample_deletes_whole_row: false
+  single_method_uses_case_dual_yaw_fields: false
+
+determinism:
+  rng: numpy.random.Generator
+  bit_generator: PCG64
+  seed_values: [0, 1, 2]
+  selected_count_formula: floor(fraction*N+0.5)
+  selected_count_rounding: round_half_up
+  selection: sorted_choice_without_replacement
+  outage_midpoint_policy: upper_midpoint_index_N_floor_div_2
+  downsample_policy: retain_first_then_require_time_minus_last_kept_gte_min_interval
+  mixed_rng_policy: restart_PCG64_with_same_seed_for_each_sub_operation
+  mixed_operation_order: [baseline_vector_noise, baseline_vector_spike, yaw_spike]
+
+cases:
+  - {case_id: C00_clean_normal, case_code: C00, family: clean, display_label: clean_normal, seed: null, operations: [{operation: none}]}
+  - {case_id: C01_outage_10s, case_code: C01, family: outage, display_label: outage_10s, seed: null, operations: [{operation: yaw_valid_midpoint_outage, duration_s: 10.0}]}
+  - {case_id: C02_downsample_2Hz, case_code: C02, family: downsample, display_label: downsample_2Hz, seed: null, operations: [{operation: yaw_valid_min_interval, min_interval_s: 0.50}]}
+  - {case_id: C03_downsample_1Hz, case_code: C03, family: downsample, display_label: downsample_1Hz, seed: null, operations: [{operation: yaw_valid_min_interval, min_interval_s: 0.95}]}
+  - {case_id: C04_baseline_vector_noise_seed0, case_code: C04, family: baseline_vector_noise, display_label: baseline_vector_noise, seed: 0, operations: [{operation: baseline_vector_noise, horizontal_sigma_m: 0.05, up_sigma_m: 0.025, preserve_length_m: 0.350}]}
+  - {case_id: C05_baseline_vector_noise_seed1, case_code: C05, family: baseline_vector_noise, display_label: baseline_vector_noise, seed: 1, operations: [{operation: baseline_vector_noise, horizontal_sigma_m: 0.05, up_sigma_m: 0.025, preserve_length_m: 0.350}]}
+  - {case_id: C06_baseline_vector_noise_seed2, case_code: C06, family: baseline_vector_noise, display_label: baseline_vector_noise, seed: 2, operations: [{operation: baseline_vector_noise, horizontal_sigma_m: 0.05, up_sigma_m: 0.025, preserve_length_m: 0.350}]}
+  - {case_id: C07_baseline_vector_spike_seed0, case_code: C07, family: baseline_vector_spike, display_label: baseline_vector_spike, seed: 0, operations: [{operation: baseline_vector_spike, fraction: 0.05, magnitude_m: 0.25, preserve_length_m: 0.350}]}
+  - {case_id: C08_baseline_vector_spike_seed1, case_code: C08, family: baseline_vector_spike, display_label: baseline_vector_spike, seed: 1, operations: [{operation: baseline_vector_spike, fraction: 0.05, magnitude_m: 0.25, preserve_length_m: 0.350}]}
+  - {case_id: C09_baseline_vector_spike_seed2, case_code: C09, family: baseline_vector_spike, display_label: baseline_vector_spike, seed: 2, operations: [{operation: baseline_vector_spike, fraction: 0.05, magnitude_m: 0.25, preserve_length_m: 0.350}]}
+  - {case_id: C10_provider_std_inflation_4x, case_code: C10, family: provider_std_inflation, display_label: provider_std_inflation_4x, seed: null, provider_std_scale: 4.0, operations: [{operation: yaw_std_scale, factor: 4.0}]}
+  - {case_id: C11_yaw_spike_10deg_seed0, case_code: C11, family: yaw_spike, display_label: yaw_spike_10deg, seed: 0, operations: [{operation: signed_yaw_spike, fraction: 0.05, magnitude_deg: 10.0, preserve_length_m: 0.350}]}
+  - {case_id: C12_yaw_spike_10deg_seed1, case_code: C12, family: yaw_spike, display_label: yaw_spike_10deg, seed: 1, operations: [{operation: signed_yaw_spike, fraction: 0.05, magnitude_deg: 10.0, preserve_length_m: 0.350}]}
+  - {case_id: C13_yaw_spike_10deg_seed2, case_code: C13, family: yaw_spike, display_label: yaw_spike_10deg, seed: 2, operations: [{operation: signed_yaw_spike, fraction: 0.05, magnitude_deg: 10.0, preserve_length_m: 0.350}]}
+  - {case_id: C14_yaw_std_inflation_2x, case_code: C14, family: yaw_std_inflation, display_label: yaw_std_inflation_2x, seed: null, provider_std_scale: 2.0, operations: [{operation: yaw_std_scale, factor: 2.0}]}
+  - &mixed_seed0
+    case_id: C15_mixed_seed0
+    case_code: C15
+    family: mixed
+    display_label: mixed
+    seed: 0
+    operations:
+      - {operation: baseline_vector_noise, horizontal_sigma_m: 0.03, up_sigma_m: 0.015, preserve_length_m: 0.350, restart_rng: true}
+      - {operation: baseline_vector_spike, fraction: 0.03, magnitude_m: 0.15, preserve_length_m: 0.350, restart_rng: true}
+      - {operation: signed_yaw_spike, fraction: 0.03, magnitude_deg: 6.0, preserve_length_m: 0.350, restart_rng: true}
+  - <<: *mixed_seed0
+    case_id: C16_mixed_seed1
+    case_code: C16
+    seed: 1
+  - <<: *mixed_seed0
+    case_id: C17_mixed_seed2
+    case_code: C17
+    seed: 2

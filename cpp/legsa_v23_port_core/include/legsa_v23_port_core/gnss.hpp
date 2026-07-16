@@ -11,7 +11,8 @@
 
 namespace legsa_v23_port_core {
 
-// 中文说明：GNSSData 对齐 final_v23 高层 15 列 loose-coupled 输入角色，不表示 raw GNSS。
+// 中文说明：GNSSData 对齐 final_v23 高层 loose-coupled 角色；支持 legacy 15 列
+// 和 formal 18 列 explicit-validity，两者均不表示 raw GNSS。
 struct GnssData {
   double time = 0.0;
   Vec3 blh_rad_m = makeVec3(0.0, 0.0, 0.0);

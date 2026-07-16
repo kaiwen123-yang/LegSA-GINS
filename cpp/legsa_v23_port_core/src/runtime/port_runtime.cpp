@@ -137,19 +137,38 @@ void copyFormalModuleCounters(const GIEngine& engine, PortOptions& options) {
   options.contact_fk_update_count = 0;
 }
 
+bool isFormalRuntime(const PortOptions& options) {
+  return options.clean1_formal_mode || options.clean2_formal_mode;
+}
+
 void validateFormalRuntimeCounters(const PortOptions& options) {
-  if (!options.clean1_formal_mode) {
+  if (!isFormalRuntime(options)) {
     return;
   }
   const bool position_active = options.position_update_count > 0;
   const bool receiver_active = options.receiver_velocity_update_count > 0;
   const bool yaw_active = options.dual_yaw_update_count > 0;
+  const bool yaw_attempted = options.yaw_update_count > 0;
   const bool raw_active = options.raw_doppler_status.update_count > 0;
   const bool source_aware_active = options.source_aware_evaluation_count > 0;
   const bool go2_roll_pitch_active = options.go2_roll_pitch_update_count > 0;
   const bool go2_horizontal_active = options.go2_horizontal_velocity_update_count > 0;
   bool counters_match = position_active;
-  if (options.algorithm_id == "single_antenna_EKF") {
+  if (options.clean2_formal_mode) {
+    // 中文说明：CLEAN2 按冻结 feature vector 验收；dual yaw 用 attempt 证明路由激活，
+    // 允许受控退化下所有 attempt 均被 scheme-C reject。accepted/reject 仍在证据中分开记录。
+    const bool expected_receiver = options.enable_receiver_velocity_update;
+    const bool expected_yaw = options.enable_dual_yaw_update;
+    const bool expected_raw = options.feature_RD;
+    const bool expected_source_aware = options.feature_SA;
+    const bool expected_go2_roll_pitch = options.feature_RP;
+    const bool expected_go2_horizontal = options.feature_HV;
+    counters_match = counters_match && receiver_active == expected_receiver &&
+                     yaw_attempted == expected_yaw && raw_active == expected_raw &&
+                     source_aware_active == expected_source_aware &&
+                     go2_roll_pitch_active == expected_go2_roll_pitch &&
+                     go2_horizontal_active == expected_go2_horizontal;
+  } else if (options.algorithm_id == "single_antenna_EKF") {
     counters_match = counters_match && receiver_active && !yaw_active && !raw_active &&
                      !source_aware_active && !go2_roll_pitch_active && !go2_horizontal_active;
   } else if (options.algorithm_id == "basic_dual_yaw_EKF") {
@@ -168,8 +187,9 @@ void validateFormalRuntimeCounters(const PortOptions& options) {
                    options.nine_factor_fgo_update_count == 0 && options.qa_fallback_count == 0 &&
                    options.multi_state_qm_update_count == 0 && options.contact_fk_update_count == 0;
   if (!counters_match) {
-    throw std::runtime_error(
-        "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH: actual formal module activation counters mismatch");
+    throw std::runtime_error(options.clean2_formal_mode
+                                 ? "BLOCKED_CLEAN2_FORMAL_EXECUTION_FAILED: actual formal module activation counters mismatch"
+                                 : "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH: actual formal module activation counters mismatch");
   }
 }
 
@@ -1054,6 +1074,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
                                 const std::string& output_dir,
                                 const PortRuntimeDebugOptions& debug_options) {
   PortOptions options = PortConfigLoader::loadYamlLike(config_path);
+  const bool formal_mode = isFormalRuntime(options);
   if (options.clean1_formal_mode) {
     // 中文说明：formal identity 已由 loader 严格校验，禁止后续 N*/PAPER10E0 路由覆盖。
     options.phase = options.stage_id;
@@ -1061,6 +1082,18 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.run_label = options.run_id;
     options.parity_attempted =
         options.clean_final_v23_parity_mode && options.algorithm_id == "strong_dual_yaw_EKF";
+    options.real_clean_replay_attempted = true;
+    options.engineering_backbone_parity_only = options.parity_attempted;
+  } else if (options.clean2_formal_mode) {
+    // 中文说明：CLEAN2 只使用冻结 strong backbone/canonical 结构，不进入历史路由。
+    options.phase = options.stage_id;
+    options.port_role = options.formal_role;
+    options.run_label = options.run_id;
+    const bool c00 = options.case_id.rfind("C00", 0) == 0;
+    options.parity_attempted =
+        c00 && ((options.formal_role == "canonical_method" &&
+                 options.algorithm_id == "strong_dual_yaw_EKF") ||
+                options.ablation_id == "AB0000");
     options.real_clean_replay_attempted = true;
     options.engineering_backbone_parity_only = options.parity_attempted;
   } else {
@@ -1083,7 +1116,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   options.debug_covariance_gain_enabled = debug_options.covariance_gain;
   options.runtime_loop_fix_applied = true;
   options.source_backed_runtime_loop_fix = true;
-  if (!options.clean1_formal_mode && options.enable_basic_dual_yaw_baseline) {
+  if (!formal_mode && options.enable_basic_dual_yaw_baseline) {
     // 中文说明：PAPER10E0 只冻结 Basic Dual-Yaw EKF 基线，不进入 source-aware/Go2/QM/Raw Doppler/FGO 阶段路由。
     options.phase = "PAPER10E0";
     options.port_role = "basic_dual_yaw_ekf_baseline";
@@ -1092,7 +1125,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.real_clean_replay_attempted = true;
     options.engineering_backbone_parity_only = true;
   }
-  if (!options.clean1_formal_mode && options.source_aware_policy_config.enable_source_aware_weighting) {
+  if (!formal_mode && options.source_aware_policy_config.enable_source_aware_weighting) {
     // 中文说明：N6B 是在 source-backed port-core 上真实启用保守 LSIM/OIM R scaling 的诊断阶段。
     options.phase = options.source_aware_policy_config.source_aware_policy_version == "n6a_original_residual_ratio"
                         ? "N6A"
@@ -1102,7 +1135,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.run_label = options.ablation_variant.empty() ? options.phase + "_source_aware_run" : options.ablation_variant;
     options.lsim_oim = true;
   }
-  if (!options.clean1_formal_mode && options.quality_state_manager_config.enable_multi_state_qm &&
+  if (!formal_mode && options.quality_state_manager_config.enable_multi_state_qm &&
       options.quality_state_manager_config.multi_state_qm_mode != "QM00_OFF") {
     options.phase = "PAPER10B2";
     options.port_role = "source_level_multi_state_quality_management";
@@ -1113,14 +1146,14 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.proposed_factor_claim = false;
     options.performance_claim = false;
   }
-  if (!options.clean1_formal_mode && options.go2_attitude_prior_config.enable_go2_attitude_weak_prior) {
+  if (!formal_mode && options.go2_attitude_prior_config.enable_go2_attitude_weak_prior) {
     // 中文说明：N7A 在 N6B source-aware layer 后激活 Go2 roll/pitch weak prior，仍不声明 paper performance。
     options.phase = "N7A";
     options.port_role = "go2_body_state_weak_prior_foundation";
     options.run_label = options.ablation_variant.empty() ? "N7A_go2_weak_prior_run" : options.ablation_variant;
     options.go2_attitude_prior_status.body_state_not_truth = true;
   }
-  if (!options.clean1_formal_mode &&
+  if (!formal_mode &&
       options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior) {
     // 中文说明：N7C 只受控激活 Go2 horizontal velocity weak prior；vertical/yaw/position/FGO 仍关闭。
     if (!options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_strength_policy.empty()) {
@@ -1145,7 +1178,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.proposed_factor_claim = false;
     options.performance_claim = false;
   }
-  if (!options.clean1_formal_mode && options.enable_go2_proprioceptive_joint_factor) {
+  if (!formal_mode && options.enable_go2_proprioceptive_joint_factor) {
     // 中文说明：N7C6 将已有 Go2 roll/pitch 与 horizontal velocity update 作为联合观测的
     // sequential-equivalent 受控激活；Go2 position/yaw/vertical velocity 仍关闭。
     options.phase = "N7C6";
@@ -1162,7 +1195,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.paper_performance_claim = false;
     options.proposed_factor_claim = false;
     options.performance_claim = false;
-  } else if (!options.clean1_formal_mode &&
+  } else if (!formal_mode &&
       !options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior &&
       (options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic ||
        options.go2_yaw_rate_prior_diagnostic_config.enable_go2_yaw_rate_prior_diagnostic)) {
@@ -1176,7 +1209,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.proposed_factor_claim = false;
     options.performance_claim = false;
   }
-  if (!options.clean1_formal_mode && options.fgo_feedback_config.enable_fgo_feedback) {
+  if (!formal_mode && options.fgo_feedback_config.enable_fgo_feedback) {
     // 中文说明：N8G 开启 FGO feedback-to-EKF；FGO 输出不直接写 NAV。
     options.phase = "N8G";
     options.port_role = "fgo_feedback_ekf_foundation";
@@ -1190,7 +1223,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     options.proposed_factor_claim = false;
     options.performance_claim = false;
   }
-  if (!options.clean1_formal_mode && !options.enable_basic_dual_yaw_baseline &&
+  if (!formal_mode && !options.enable_basic_dual_yaw_baseline &&
       (options.qa_fallback_config.enable_qa_fallback ||
        options.qa_fallback_config.qa_active_mode ||
        options.algorithm_id == quality_aware::kLegsaQaFallbackEkf)) {
@@ -1231,7 +1264,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
         options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path,
         options.go2_velocity_prior_diagnostic_config);
     options.go2_velocity_prior_diagnostic_status = go2_velocity_prior_load.status;
-    if (!options.clean1_formal_mode && go2_velocity_prior_load.status.horizontal_only &&
+    if (!formal_mode && go2_velocity_prior_load.status.horizontal_only &&
         !options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior) {
       // 中文说明：N7B5 只标注 horizontal-only diagnostic activation，不升级为 formal Go2 velocity prior。
       options.phase = "N7B5";
@@ -1262,24 +1295,30 @@ void PortRuntime::runFromConfig(const std::string& config_path,
                                                  options.fgo_feedback_config);
     options.fgo_feedback_status = fgo_feedback_load.status;
   }
-  if (options.clean1_formal_mode && options.raw_doppler_config.enable_raw_doppler &&
+  if (formal_mode && options.raw_doppler_config.enable_raw_doppler &&
       (!raw_doppler_load.status.solver_enabled || !raw_doppler_load.status.lineage_proven ||
        raw_doppler_load.status.status_fallback_used || raw_doppler_load.status.legacy_provider_used)) {
     throw std::runtime_error(
-        "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN: formal provider preflight failed");
+        options.clean2_formal_mode
+            ? "BLOCKED_CLEAN2_FORMAL_EXECUTION_FAILED: Raw Doppler provider lineage preflight failed"
+            : "BLOCKED_CLEAN1_RAW_DOPPLER_BACKEND_LINEAGE_NOT_PROVEN: formal provider preflight failed");
   }
-  if (options.clean1_formal_mode &&
+  if (formal_mode &&
       options.go2_attitude_prior_config.enable_go2_attitude_weak_prior &&
       !go2_prior_load.status.solver_enabled) {
     throw std::runtime_error(
-        "BLOCKED_CLEAN1_WINDOW_OR_INITIALIZATION_CONTRACT_FAILED: Go2 roll/pitch prior unavailable");
+        options.clean2_formal_mode
+            ? "BLOCKED_CLEAN2_FORMAL_EXECUTION_FAILED: Go2 roll/pitch prior unavailable"
+            : "BLOCKED_CLEAN1_WINDOW_OR_INITIALIZATION_CONTRACT_FAILED: Go2 roll/pitch prior unavailable");
   }
-  if (options.clean1_formal_mode &&
+  if (formal_mode &&
       options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior &&
       (!go2_velocity_prior_load.status.solver_enabled ||
        !go2_velocity_prior_load.status.controlled_activation)) {
     throw std::runtime_error(
-        "BLOCKED_CLEAN1_WINDOW_OR_INITIALIZATION_CONTRACT_FAILED: Go2 horizontal prior unavailable");
+        options.clean2_formal_mode
+            ? "BLOCKED_CLEAN2_FORMAL_EXECUTION_FAILED: Go2 horizontal prior unavailable"
+            : "BLOCKED_CLEAN1_WINDOW_OR_INITIALIZATION_CONTRACT_FAILED: Go2 horizontal prior unavailable");
   }
   const std::vector<double> imu_times = readFirstColumnTimes(options.imu_path);
   const std::vector<double> gnss_times = readFirstColumnTimes(options.gnss_path);
@@ -1300,10 +1339,14 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   if (!imu_loader.isOpen() || !gnss_loader.isOpen()) {
     throw std::runtime_error("failed to open configured IMU/GNSS inputs");
   }
-  if (options.clean1_formal_mode && !options.clean_final_v23_parity_mode &&
-      !gnss_loader.allValidityExplicit()) {
-    throw std::runtime_error(
-        "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH: formal GNSS input lacks explicit position/velocity/yaw validity");
+  if ((options.clean1_formal_mode && !options.clean_final_v23_parity_mode) ||
+      options.clean2_formal_mode) {
+    if (!gnss_loader.allValidityExplicit()) {
+      throw std::runtime_error(
+          options.clean2_formal_mode
+              ? "BLOCKED_CLEAN2_FORMAL_EXECUTION_FAILED: formal GNSS input lacks explicit position/velocity/yaw validity"
+              : "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH: formal GNSS input lacks explicit position/velocity/yaw validity");
+    }
   }
   const std::filesystem::path debug_dir =
       debug_options.output_dir.empty() ? std::filesystem::path(output_dir) : std::filesystem::path(debug_options.output_dir);

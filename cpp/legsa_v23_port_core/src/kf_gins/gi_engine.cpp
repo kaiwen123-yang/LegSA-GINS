@@ -243,7 +243,7 @@ void GIEngine::addImuData(const ImuData& imu, bool compensate) {
   }
 }
 
-// 中文说明：GNSS 是 15 列松组合观测，不是 raw pseudorange/Doppler。
+// 中文说明：GNSS 是 15/18 列高层松组合观测，不是 raw pseudorange/Doppler。
 void GIEngine::addGnssData(const GnssData& gnss) {
   gnssdata_ = gnss;
   // 中文说明：legacy 15 列继续视为三类观测均有效；formal validity 则保留自然 dropout，

@@ -1,0 +1,67 @@
+schema_version: paper_rebuild.clean2_ablation_2pow4.v1
+stage_id: CLEAN2_BY2_MODULE_ABLATION_AND_CLASSIC18
+dataset: BY2
+case_id: C00_clean_normal
+data_mode: real_by2_raw
+result_namespace: BY2_REAL_CLEAN_MODULE_ABLATION
+role: ablation_configuration
+backbone: strong_dual_yaw_EKF
+backbone_contract: CLEAN_REAL_DATA_FINAL_V23
+variant_count: 16
+
+# 位串从左到右固定为 RD、SA、RP、HV；不得按整数最低位反向解释。
+bit_contract:
+  representation: AB<four_bits>
+  bit_string_left_to_right: [RD, SA, RP, HV]
+  feature_fields_left_to_right:
+    - enable_raw_doppler
+    - enable_source_aware
+    - enable_go2_roll_pitch_prior
+    - enable_go2_horizontal_velocity_prior
+  source_code_bit_index:
+    RD: 0
+    SA: 1
+    RP: 2
+    HV: 3
+
+fixed_invariants:
+  same_base_provider: true
+  same_window: true
+  same_initialization: true
+  same_executable: true
+  same_evaluator: true
+  std_gate_threshold_time_tolerance_unchanged: true
+  creates_new_paper_method: false
+  per_case_tuning: false
+  trace_used_online: false
+
+variants:
+  - {ablation_id: AB0000, bits: '0000', label: strong_baseline, RD: false, SA: false, RP: false, HV: false, alias_roles: [canonical_strong]}
+  - {ablation_id: AB0001, bits: '0001', label: HV_only, RD: false, SA: false, RP: false, HV: true, alias_roles: []}
+  - {ablation_id: AB0010, bits: '0010', label: RP_only, RD: false, SA: false, RP: true, HV: false, alias_roles: []}
+  - {ablation_id: AB0011, bits: '0011', label: RP_plus_HV, RD: false, SA: false, RP: true, HV: true, alias_roles: []}
+  - {ablation_id: AB0100, bits: '0100', label: SA_only, RD: false, SA: true, RP: false, HV: false, alias_roles: []}
+  - {ablation_id: AB0101, bits: '0101', label: SA_plus_HV, RD: false, SA: true, RP: false, HV: true, alias_roles: []}
+  - {ablation_id: AB0110, bits: '0110', label: SA_plus_RP, RD: false, SA: true, RP: true, HV: false, alias_roles: []}
+  - {ablation_id: AB0111, bits: '0111', label: SA_plus_RP_plus_HV, RD: false, SA: true, RP: true, HV: true, alias_roles: [LOO_NO_RD]}
+  - {ablation_id: AB1000, bits: '1000', label: RD_only, RD: true, SA: false, RP: false, HV: false, alias_roles: []}
+  - {ablation_id: AB1001, bits: '1001', label: RD_plus_HV, RD: true, SA: false, RP: false, HV: true, alias_roles: []}
+  - {ablation_id: AB1010, bits: '1010', label: RD_plus_RP, RD: true, SA: false, RP: true, HV: false, alias_roles: []}
+  - {ablation_id: AB1011, bits: '1011', label: RD_plus_RP_plus_HV, RD: true, SA: false, RP: true, HV: true, alias_roles: [LOO_NO_SA]}
+  - {ablation_id: AB1100, bits: '1100', label: RD_plus_SA, RD: true, SA: true, RP: false, HV: false, alias_roles: []}
+  - {ablation_id: AB1101, bits: '1101', label: RD_plus_SA_plus_HV, RD: true, SA: true, RP: false, HV: true, alias_roles: [LOO_NO_RP]}
+  - {ablation_id: AB1110, bits: '1110', label: RD_plus_SA_plus_RP, RD: true, SA: true, RP: true, HV: false, alias_roles: [LOO_NO_HV]}
+  - {ablation_id: AB1111, bits: '1111', label: full_LegSA_Paper_V1, RD: true, SA: true, RP: true, HV: true, alias_roles: [canonical_LegSA]}
+
+# 公式在查看 CLEAN2 结果前冻结。对 lower-is-better 指标，负 main effect 表示有帮助。
+factorial_effect_contract:
+  coding: effect_coding_minus1_plus1
+  coefficient_formula: beta_term=sum(x_term*y)/16
+  reported_effect_formula: effect_term=2*beta_term
+  main_effect_terms: [RD, SA, RP, HV]
+  pairwise_terms: [RD_x_SA, RD_x_RP, RD_x_HV, SA_x_RP, SA_x_HV, RP_x_HV]
+  lower_is_better: true
+  neutral_absolute_effect_tolerance: 1.0e-12
+  p_values_computed: false
+  significance_claimed: false
+  universal_causal_effect_claimed: false

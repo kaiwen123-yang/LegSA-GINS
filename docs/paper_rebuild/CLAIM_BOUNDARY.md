@@ -8,6 +8,10 @@
 - State implementation, test, build, or clean-smoke completion only when the current clean artifact directly proves it.
 - Describe source-aware weighting as a bounded protection/interpretability mechanism and Go2 priors as weak auxiliary observations.
 - Report BY2 clean-normal descriptive metrics relative to the Fixposition-derived same-source reference after the V2 evidence audit passes, with the mounting/point caveat and without an independent-ground-truth claim.
+- After all CLEAN2 gates pass, report descriptive C00 module effects and
+  interactions, and descriptive four-method/LOO responses under the specified
+  controlled A1 dual-yaw perturbations. Helpful, neutral, or harmful labels must
+  remain metric-, case-, and protocol-specific.
 
 ## Not Allowed Until Fresh Clean Evidence Exists
 
@@ -17,6 +21,16 @@
 - Universal improvement claims for source-aware weighting, QM, Raw Doppler, or Go2.
 - Ordinary BY3 yaw generalization or severe-GNSS robustness.
 - A paper-ready or submission-ready claim from a smoke run.
+
+## CLEAN2 wording ceiling
+
+- Classic-18 is a real-data-based controlled dual-yaw degradation pilot, not 18
+  real scenarios and not a pure module ablation.
+- Controlled rows cannot establish severe-GNSS real-world generalization,
+  independent-truth accuracy, or universal robustness.
+- A favorable average, worst case, main effect, or interaction cannot establish
+  universal superiority or statistical significance. Negative and neutral
+  effects must be reported unchanged.
 
 ## Always Forbidden Under Current Scope
 

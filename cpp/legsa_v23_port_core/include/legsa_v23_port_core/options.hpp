@@ -26,8 +26,11 @@ struct PortOptions {
   std::string run_label = "N4H4R2_synthetic_math";
   // 中文说明：CLEAN1 formal identity 与历史 phase 路由分离；非 formal 入口保持原 smoke/toy 语义。
   bool clean1_formal_mode = false;
+  // 中文说明：CLEAN2 独立 formal 路由不改写 CLEAN1 identity；两者不得同时开启。
+  bool clean2_formal_mode = false;
   // CLEAN1R2R1 专用：使用 exact final_v23 的 15 列 implicit-all-valid GNSS
-  // 和“首个 aligned IMU 只初始化、不写 NAV/STD”语义。旧 CLEAN1 运行保持原样。
+  // 和“首个 aligned IMU 只初始化、不写 NAV/STD”语义。CLEAN2 仅复用
+  // 后一项 runtime/writer 语义，GNSS 仍必须是 18 列 explicit-validity。
   bool clean_final_v23_parity_mode = false;
   std::string stage_id;
   std::string protocol_id;
@@ -35,6 +38,14 @@ struct PortOptions {
   std::string run_id;
   std::string data_mode;
   std::string algorithm_id;
+  std::string result_namespace;
+  std::string formal_role;
+  std::string structural_method;
+  std::string ablation_id;
+  bool feature_RD = false;
+  bool feature_SA = false;
+  bool feature_RP = false;
+  bool feature_HV = false;
   std::string imu_path;
   std::string gnss_path;
   std::string propagation_imu_source = "configured_imu_runtime_input";

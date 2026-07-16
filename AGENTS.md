@@ -113,4 +113,13 @@ The human is the final authority for stage transition, merge, release tag, force
 
 ## Current Stage Boundary
 
-CLEAN0 authorizes a BY2 clean smoke only as the required runtime gate. It does not authorize continuing old experiments, DA03, DA05, the 541-case matrix, paper figures, or performance claims. `CLEAN1` requires separate human approval after CLEAN0 closes.
+The active human authorization is `CLEAN2_BY2_MODULE_ABLATION_AND_CLASSIC18`.
+It allows exactly the 16-configuration C00 clean module ablation, the 18-case
+controlled A1 dual-yaw pilot across the canonical four methods, and four extra
+leave-one-module-out configurations on six frozen sentinel cases: 110 unique
+formal solver processes total. Classic-18 is controlled degradation of a real
+BY2 base, not 18 real scenarios and not clean-real evidence.
+
+This stage does not authorize D01-D60, the 60x9 matrix, BY3, XB, PG, DA03,
+DA05, FGO, QM, QA, contact/FK factors, final paper figures, automatic CLEAN2
+merge, a CLEAN2 tag, force push, or deletion of evidence/raw/frozen assets.

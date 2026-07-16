@@ -19,7 +19,7 @@ namespace legsa_v23_port_core {
 
 GnssFileLoader::GnssFileLoader(const std::string& path) : rows_(loadFifteenColumn(path)) {}
 
-// 中文说明：读取 process_data-compatible 15 列高层 GNSS；R1 不读取 raw GNSS。
+// 中文说明：保留历史函数名；实际严格接受 15 列 legacy 或 18 列 explicit-validity GNSS。
 std::vector<GnssData> GnssFileLoader::loadFifteenColumn(const std::string& path) {
   std::ifstream input(path);
   if (!input) {
@@ -30,7 +30,8 @@ std::vector<GnssData> GnssFileLoader::loadFifteenColumn(const std::string& path)
   std::size_t line_number = 0;
   while (std::getline(input, line)) {
     ++line_number;
-    if (line.empty() || line[0] == '#') {
+    const auto first_non_space = line.find_first_not_of(" \t\r");
+    if (first_non_space == std::string::npos || line[first_non_space] == '#') {
       continue;
     }
     std::istringstream stream(line);
@@ -50,8 +51,9 @@ std::vector<GnssData> GnssFileLoader::loadFifteenColumn(const std::string& path)
       int position_valid = 1;
       int velocity_valid = 1;
       int yaw_valid = 1;
-      if (stream >> position_valid) {
-        if (!(stream >> velocity_valid >> yaw_valid) ||
+      stream >> std::ws;
+      if (!stream.eof()) {
+        if (!(stream >> position_valid >> velocity_valid >> yaw_valid) ||
             (position_valid != 0 && position_valid != 1) ||
             (velocity_valid != 0 && velocity_valid != 1) ||
             (yaw_valid != 0 && yaw_valid != 1)) {
@@ -59,8 +61,8 @@ std::vector<GnssData> GnssFileLoader::loadFifteenColumn(const std::string& path)
               "GNSS formal validity extension must be three 0/1 columns at line " +
               std::to_string(line_number));
         }
-        std::string trailing;
-        if (stream >> trailing) {
+        stream >> std::ws;
+        if (!stream.eof()) {
           throw std::runtime_error("unexpected GNSS column after formal validity fields at line " +
                                    std::to_string(line_number));
         }
@@ -71,6 +73,10 @@ std::vector<GnssData> GnssFileLoader::loadFifteenColumn(const std::string& path)
       gnss.has_yaw = yaw_valid != 0;
       gnss.isvalid = false;
       rows.push_back(gnss);
+    } else {
+      // 中文说明：坏行不得静默丢弃，否则 formal update count 可能伪绿。
+      throw std::runtime_error("GNSS row must contain exactly 15 or 18 columns at line " +
+                               std::to_string(line_number));
     }
   }
   return rows;

@@ -1,0 +1,103 @@
+schema_version: paper_rebuild.clean2_execution_protocol.v1
+stage_id: CLEAN2_BY2_MODULE_ABLATION_AND_CLASSIC18
+dataset: BY2
+clean_protocol: CLEAN_REAL_DATA_FINAL_V23
+canonical_method_count: 4
+factorial_variant_count: 16
+classic_case_count: 18
+unique_formal_run_count: 110
+
+result_namespaces:
+  C00_clean_normal:
+    data_mode: real_by2_raw
+    result_namespace: BY2_REAL_CLEAN_MODULE_ABLATION
+  C01_through_C17:
+    data_mode: real_base_controlled_degradation
+    result_namespace: BY2_CONTROLLED_DUAL_YAW_DEGRADATION
+    synthetic_data_used: false
+    # 基于真实 BY2 的冻结注入属于受控半合成证据；不得混入 C00 clean table。
+    semisynthetic_data_used: true
+    wording: under_the_specified_controlled_A1_dual_yaw_perturbations
+
+run_count_contract:
+  C00_canonical_single_basic: 2
+  C00_factorial: 16
+  C01_C17_canonical_four: 68
+  six_sentinel_four_extra_LOO: 24
+  aliases:
+    C00_AB0000: canonical_strong
+    C00_AB1111: canonical_LegSA
+  total_unique: 110
+  duplicate_effective_config_count: 0
+
+sentinel_cases:
+  - C01_outage_10s
+  - C04_baseline_vector_noise_seed0
+  - C07_baseline_vector_spike_seed0
+  - C10_provider_std_inflation_4x
+  - C11_yaw_spike_10deg_seed0
+  - C15_mixed_seed0
+sentinel_LOO:
+  LOO_NO_RD: AB0111
+  LOO_NO_SA: AB1011
+  LOO_NO_RP: AB1101
+  LOO_NO_HV: AB1110
+  marginal_loss_formula: metric(no_module)-metric(full)
+  positive_interpretation: full_module_helpful_in_this_case
+  negative_interpretation: removal_improved_this_case
+  zeroish_interpretation: neutral_in_this_case
+
+execution:
+  ordered_phases:
+    - C00_structural_gate_single_basic_AB0000_AB1111
+    - C00_remaining_14_factorial
+    - C01_C17_canonical_four
+    - sentinel_extra_LOO
+  default_jobs: 8
+  hard_max_jobs: 12
+  isolated_run_directories: true
+  shared_writable_config_log_output: false
+  same_executable_hash: true
+  metric_visible_during_solver_phase: false
+  health_checks_only: [exit_code, output_present, row_count, time_monotonic, finite_output, module_counters, file_read_ledger]
+  technical_retry:
+    max_retry_count: 1
+    allowed_reasons: [process_crash, I/O_transient, resource_exhaustion, lost_PTY]
+    metric_driven_rerun: false
+  any_code_config_provider_change_invalidates_all_formal_runs: true
+
+trace_and_seal:
+  trace_open_count_before_all_outputs_sealed: 0
+  all_110_outputs_hash_sealed_before_offline_evaluation: true
+  evaluator_starts_only_after_complete_seal: true
+
+evaluator:
+  contract_source: configs/paper_rebuild/final_v23_parity_contract.yaml
+  reference_trace_role: evaluation_only_fixposition_same_source
+  reference_trace_sha256: ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c
+  base_time_unix_seconds: 1772784000.0
+  window_seconds: [66.0, 340.0]
+  yaw_reference_formula: wrap360(90-yaw_trace_enu)
+  yaw_interpolation: unwrap_then_linear
+  position_frame: frozen_BHL_ECEF_local_frame
+  offset_search: false
+  alignment: false
+  output_correction: false
+  epoch_deletion: false
+  final_error_definition: last_matched_epoch_absolute_and_component_error
+
+forbidden:
+  D01_D60_run_count: 0
+  full_60x9: false
+  BY3_XB_PG: false
+  DA03_DA05: false
+  selected_FGO_feedback: false
+  active_complete_9F_FGO: false
+  multi_state_QM: false
+  QA_fallback: false
+  contact_FK: false
+  Go2_truth: false
+  per_case_tuning: false
+  output_only_correction: false
+  epoch_deleted_for_metric: false
+  final_paper_figures: false

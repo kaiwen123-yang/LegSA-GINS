@@ -281,6 +281,233 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   options.performance_claim = false;
 }
 
+[[noreturn]] void clean2FormalContractFailure(const std::string& detail) {
+  throw std::runtime_error("BLOCKED_CLEAN2_FORMAL_EXECUTION_FAILED: " + detail);
+}
+
+bool clean2RequiredBool(const std::unordered_map<std::string, std::string>& kv,
+                        const std::string& key) {
+  const auto it = kv.find(key);
+  if (it == kv.end()) {
+    clean2FormalContractFailure("CLEAN2 formal config missing explicit boolean " + key);
+  }
+  std::string value = trim(it->second);
+  std::transform(value.begin(), value.end(), value.begin(), [](unsigned char ch) {
+    return static_cast<char>(std::tolower(ch));
+  });
+  if (value == "true" || value == "1" || value == "yes" || value == "on") {
+    return true;
+  }
+  if (value == "false" || value == "0" || value == "no" || value == "off") {
+    return false;
+  }
+  clean2FormalContractFailure("CLEAN2 formal boolean has invalid value: " + key);
+}
+
+int clean2CaseIndex(const std::string& case_id) {
+  if (case_id.size() < 3 || case_id[0] != 'C' ||
+      !std::isdigit(static_cast<unsigned char>(case_id[1])) ||
+      !std::isdigit(static_cast<unsigned char>(case_id[2])) ||
+      (case_id.size() > 3 && case_id[3] != '_')) {
+    return -1;
+  }
+  const int index = 10 * (case_id[1] - '0') + (case_id[2] - '0');
+  return index <= 17 ? index : -1;
+}
+
+bool isClean2AblationId(const std::string& ablation_id) {
+  if (ablation_id.size() != 6 || ablation_id.substr(0, 2) != "AB") {
+    return false;
+  }
+  return std::all_of(ablation_id.begin() + 2, ablation_id.end(), [](char value) {
+    return value == '0' || value == '1';
+  });
+}
+
+void validateClean2FormalContract(const std::unordered_map<std::string, std::string>& kv,
+                                  PortOptions& options) {
+  if (options.clean1_formal_mode) {
+    clean2FormalContractFailure("CLEAN1 and CLEAN2 formal modes cannot both be enabled");
+  }
+  const int case_index = clean2CaseIndex(options.case_id);
+  if (options.stage_id != "CLEAN2_BY2_MODULE_ABLATION_AND_CLASSIC18" ||
+      options.protocol_id != "CLEAN_REAL_DATA_FINAL_V23" || case_index < 0 ||
+      options.run_id.empty()) {
+    clean2FormalContractFailure("CLEAN2 stage/protocol/case/run identity mismatch");
+  }
+  const std::string expected_data_mode =
+      case_index == 0 ? "real_by2_raw" : "real_base_controlled_degradation";
+  const std::string expected_namespace =
+      case_index == 0 ? "BY2_REAL_CLEAN_MODULE_ABLATION"
+                      : "BY2_CONTROLLED_DUAL_YAW_DEGRADATION";
+  if (options.data_mode != expected_data_mode || options.result_namespace != expected_namespace) {
+    clean2FormalContractFailure("CLEAN2 data_mode/result_namespace does not match case boundary");
+  }
+  // 中文说明：C00 是未扰动 clean real-data；C01..C17 必须显式标为 real-base controlled degradation。
+  const bool controlled_degradation = case_index > 0;
+  if (options.synthetic_data_used || options.semisynthetic_data_used != controlled_degradation) {
+    clean2FormalContractFailure("synthetic/semisynthetic flag does not match clean versus controlled case");
+  }
+  // 中文说明：CLEAN2 继承 final_v23 update-order/writer 语义，但 GNSS 必须另行通过 18 列检查。
+  if (!options.clean_final_v23_parity_mode) {
+    clean2FormalContractFailure("CLEAN2 must retain clean final_v23 runtime/writer semantics");
+  }
+
+  const std::array<const char*, 6> effective_feature_keys{{
+      "enable_dual_yaw",
+      "enable_receiver_velocity",
+      "enable_raw_doppler",
+      "enable_source_aware",
+      "enable_go2_roll_pitch_prior",
+      "enable_go2_horizontal_velocity_prior",
+  }};
+  for (const char* key : effective_feature_keys) {
+    (void)clean2RequiredBool(kv, key);
+  }
+  options.feature_RD = clean2RequiredBool(kv, "feature_RD");
+  options.feature_SA = clean2RequiredBool(kv, "feature_SA");
+  options.feature_RP = clean2RequiredBool(kv, "feature_RP");
+  options.feature_HV = clean2RequiredBool(kv, "feature_HV");
+
+  const std::array<const char*, 4> go2_truth_keys{{
+      "go2_position_truth_claim",
+      "go2_velocity_truth_claim",
+      "go2_yaw_truth_claim",
+      "go2_contact_truth_claim",
+  }};
+  for (const char* key : go2_truth_keys) {
+    if (clean2RequiredBool(kv, key)) {
+      clean2FormalContractFailure(std::string("CLEAN2 formal config must disable ") + key);
+    }
+  }
+  if (!options.common_initialization || !options.common_initialization_dual_yaw_used ||
+      options.trace_used_for_initialization || options.method_specific_initialization ||
+      options.common_initialization_source.empty() ||
+      options.common_initialization_source == "unspecified") {
+    clean2FormalContractFailure("common source-backed initialization contract is incomplete");
+  }
+  if (options.propagation_imu_source.empty() ||
+      options.solver_output_reference_point != "propagation_imu_reference_point" ||
+      options.antlever_config_source != "runtime_config_antlever" ||
+      options.evaluation_reference_point_match_established ||
+      options.reference_point_compensation_applied) {
+    clean2FormalContractFailure("solver/reference-point or propagation-IMU contract is not fail-closed");
+  }
+  if (options.trace_solver_input || options.receiver_imu_as_body_imu ||
+      options.final_v23_output_solver_input || options.LegSA_output_solver_input ||
+      options.per_case_tuning || options.output_only_correction ||
+      options.bad_epoch_deletion_for_metric || options.old_runtime_input_count != 0 ||
+      options.legacy_provider_input_count != 0 || options.legacy_row_input_count != 0 ||
+      options.legacy_aggregate_input_count != 0 || options.status_fallback_used ||
+      options.legacy_provider_used) {
+    clean2FormalContractFailure("forbidden input/tuning/correction flag is nonzero");
+  }
+  if (options.enable_go2_proprioceptive_joint_factor || options.go2_vertical_velocity_prior_enabled ||
+      options.fgo_feedback_config.enable_fgo_feedback || options.enable_no_feedback_fgo ||
+      options.quality_state_manager_config.enable_multi_state_qm ||
+      options.qa_fallback_config.enable_qa_fallback || options.qa_fallback_config.qa_active_mode ||
+      options.enable_active_nine_factor_fgo || options.enable_contact_fk_factor) {
+    clean2FormalContractFailure("out-of-scope FGO/QM/QA/contact-FK/Go2 joint feature is enabled");
+  }
+
+  const bool dual = options.enable_dual_yaw_update;
+  const bool receiver_velocity = options.enable_receiver_velocity_update;
+  const bool raw_doppler = options.raw_doppler_config.enable_raw_doppler;
+  const bool source_aware = options.source_aware_policy_config.enable_source_aware_weighting;
+  const bool go2_roll_pitch = options.go2_attitude_prior_config.enable_go2_attitude_weak_prior;
+  const bool go2_horizontal =
+      options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior;
+  if (options.feature_RD != raw_doppler || options.feature_SA != source_aware ||
+      options.feature_RP != go2_roll_pitch || options.feature_HV != go2_horizontal) {
+    clean2FormalContractFailure("RD/SA/RP/HV feature vector disagrees with effective module flags");
+  }
+
+  bool expected_dual = false;
+  bool expected_receiver_velocity = false;
+  bool expected_raw_doppler = false;
+  bool expected_source_aware = false;
+  bool expected_go2_roll_pitch = false;
+  bool expected_go2_horizontal = false;
+  if (options.formal_role == "canonical_method") {
+    if (!options.ablation_id.empty() || options.structural_method != options.algorithm_id) {
+      clean2FormalContractFailure("canonical method must have empty ablation_id and matching structural_method");
+    }
+    if (options.algorithm_id == "single_antenna_EKF") {
+      expected_receiver_velocity = true;
+    } else if (options.algorithm_id == "basic_dual_yaw_EKF") {
+      expected_dual = true;
+      if (std::fabs(options.basic_dual_yaw_fixed_std_deg - 1.5) > 1.0e-12) {
+        clean2FormalContractFailure("basic_dual_yaw_EKF fixed yaw std must be 1.5 deg");
+      }
+    } else if (options.algorithm_id == "strong_dual_yaw_EKF") {
+      expected_dual = true;
+      expected_receiver_velocity = true;
+    } else if (options.algorithm_id == "LegSA_Paper_V1") {
+      expected_dual = true;
+      expected_receiver_velocity = true;
+      expected_raw_doppler = true;
+      expected_source_aware = true;
+      expected_go2_roll_pitch = true;
+      expected_go2_horizontal = true;
+    } else {
+      clean2FormalContractFailure("canonical algorithm_id is not one of methods.yaml frozen methods");
+    }
+  } else if (options.formal_role == "ablation_configuration") {
+    if (options.algorithm_id != "strong_dual_yaw_EKF" ||
+        options.structural_method != "strong_dual_yaw_EKF" ||
+        !isClean2AblationId(options.ablation_id)) {
+      clean2FormalContractFailure("ablation must identify the frozen strong backbone and AB0000..AB1111");
+    }
+    expected_dual = true;
+    expected_receiver_velocity = true;
+    // 中文说明：AB 左到右固定为 RD/SA/RP/HV，禁止代码与配置反序。
+    expected_raw_doppler = options.ablation_id[2] == '1';
+    expected_source_aware = options.ablation_id[3] == '1';
+    expected_go2_roll_pitch = options.ablation_id[4] == '1';
+    expected_go2_horizontal = options.ablation_id[5] == '1';
+  } else {
+    clean2FormalContractFailure("role must be canonical_method or ablation_configuration");
+  }
+  if (dual != expected_dual || receiver_velocity != expected_receiver_velocity ||
+      raw_doppler != expected_raw_doppler || source_aware != expected_source_aware ||
+      go2_roll_pitch != expected_go2_roll_pitch || go2_horizontal != expected_go2_horizontal) {
+    clean2FormalContractFailure("effective features do not match canonical identity or ablation bit vector");
+  }
+  if (expected_source_aware && options.source_aware_policy_config.source_aware_mode == "off") {
+    clean2FormalContractFailure("source-aware feature is enabled but policy mode is off");
+  }
+  if (go2_horizontal &&
+      (!options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_vertical_disabled ||
+       options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_mode != "horizontal_2d")) {
+    clean2FormalContractFailure("Go2 horizontal weak prior must be horizontal_2d with vertical disabled");
+  }
+  if (options.go2_attitude_prior_config.go2_position_prior_enabled ||
+      options.go2_attitude_prior_config.go2_velocity_prior_enabled ||
+      options.go2_attitude_prior_config.go2_yaw_prior_enabled) {
+    clean2FormalContractFailure("Go2 truth/position/yaw prior flag is enabled");
+  }
+
+  options.enable_basic_dual_yaw_baseline =
+      options.formal_role == "canonical_method" && options.algorithm_id == "basic_dual_yaw_EKF";
+  options.yaw_scheme_C_enabled = options.enable_dual_yaw_update && !options.enable_basic_dual_yaw_baseline;
+  options.phase = options.stage_id;
+  options.port_role = options.formal_role;
+  options.run_label = options.run_id;
+  options.ablation_variant = options.ablation_id.empty() ? options.algorithm_id : options.ablation_id;
+  options.raw_doppler_config.formal_lineage_required = expected_raw_doppler;
+  if (expected_go2_roll_pitch) {
+    options.go2_attitude_prior_config.go2_attitude_prior_diagnostic_only = false;
+  }
+  if (expected_go2_horizontal) {
+    options.go2_velocity_prior_diagnostic_config.enable_go2_velocity_prior_diagnostic = true;
+    options.go2_velocity_prior_diagnostic_config.go2_diagnostic_prior_only = false;
+    options.go2_diagnostic_prior_only = false;
+  }
+  options.paper_performance_claim = false;
+  options.proposed_factor_claim = false;
+  options.performance_claim = false;
+}
+
 std::unordered_map<std::string, std::string> readKeyValues(const std::string& path) {
   std::ifstream input(path);
   if (!input) {
@@ -316,6 +543,7 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   const auto kv = readKeyValues(path);
   PortOptions options;
   options.clean1_formal_mode = boolOrDefault(kv, "clean1_formal_mode", options.clean1_formal_mode);
+  options.clean2_formal_mode = boolOrDefault(kv, "clean2_formal_mode", options.clean2_formal_mode);
   options.clean_final_v23_parity_mode =
       boolOrDefault(kv, "clean_final_v23_parity_mode", options.clean_final_v23_parity_mode);
   options.stage_id = stringOrDefault(kv, "stage_id", options.stage_id);
@@ -325,6 +553,14 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   options.data_mode = stringOrDefault(kv, "data_mode", options.data_mode);
   options.run_label = stringOrDefault(kv, "run_label", "N4H4R2_config_run");
   options.algorithm_id = stringOrDefault(kv, "algorithm_id", options.algorithm_id);
+  options.result_namespace = stringOrDefault(kv, "result_namespace", options.result_namespace);
+  options.formal_role = stringOrDefault(kv, "role", options.formal_role);
+  options.structural_method = stringOrDefault(kv, "structural_method", options.structural_method);
+  options.ablation_id = stringOrDefault(kv, "ablation_id", options.ablation_id);
+  options.feature_RD = boolOrDefault(kv, "feature_RD", options.feature_RD);
+  options.feature_SA = boolOrDefault(kv, "feature_SA", options.feature_SA);
+  options.feature_RP = boolOrDefault(kv, "feature_RP", options.feature_RP);
+  options.feature_HV = boolOrDefault(kv, "feature_HV", options.feature_HV);
   options.qa_fallback_config.algorithm_id = options.algorithm_id;
   options.imu_path = stringOrDefault(kv, "imupath", stringOrDefault(kv, "imu_path", ""));
   options.gnss_path = stringOrDefault(kv, "gnsspath", stringOrDefault(kv, "gnss_path", ""));
@@ -1033,10 +1269,16 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       boolOrDefault(kv,
                     "enable_contact_fk",
                     boolOrDefault(kv, "enable_contact_fk_factor", options.enable_contact_fk_factor));
+  if (options.clean1_formal_mode && options.clean2_formal_mode) {
+    clean2FormalContractFailure("CLEAN1 and CLEAN2 formal modes cannot both be enabled");
+  }
   if (options.clean1_formal_mode) {
     validateFormalMethodContract(kv, options);
+  } else if (options.clean2_formal_mode) {
+    validateClean2FormalContract(kv, options);
   }
-  if (!options.clean1_formal_mode && options.enable_basic_dual_yaw_baseline) {
+  if (!options.clean1_formal_mode && !options.clean2_formal_mode &&
+      options.enable_basic_dual_yaw_baseline) {
     // 中文说明：PAPER10E0 Basic 基线强制关闭 LegSA-GINS-Full 复杂模块；
     // 即使配置误写启用项，也不得让 source-aware/Go2/QM/Raw Doppler/FGO 进入 solver。
     options.phase = "PAPER10E0";

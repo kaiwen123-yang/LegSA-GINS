@@ -1,0 +1,264 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: paper_rebuild.clean2_formal_run_manifest.v1
+title: LegSA-GINS CLEAN2 Formal Run Manifest
+$comment: >-
+  CLEAN2 has controlled semisynthetic cases and factorial registry identities
+  that CLEAN1's historical formal_manifest_schema.yaml cannot represent.  The
+  historical schema remains immutable and its SHA-256 is recorded by every
+  CLEAN2 wrapper; this schema is a deliberate versioned split, not a rewrite.
+type: object
+additionalProperties: false
+required:
+  - schema_version
+  - stage_id
+  - protocol_id
+  - run_id
+  - case_id
+  - result_namespace
+  - data_mode
+  - role
+  - structural_method
+  - ablation_id
+  - feature_RD
+  - feature_SA
+  - feature_RP
+  - feature_HV
+  - run_order
+  - formal
+  - alias_roles
+  - code_commit
+  - code_worktree_dirty_at_run
+  - runtime_config_hash
+  - executable_hash
+  - executable_source_manifest_hash
+  - provider_bundle_hash
+  - provider_hashes
+  - raw_source_hashes
+  - source_manifest_hashes
+  - actual_solver_input_paths
+  - synthetic_data_used
+  - semisynthetic_data_used
+  - trace_used_online
+  - receiver_imu_as_body_imu
+  - final_v23_output_solver_input
+  - LegSA_output_solver_input
+  - per_case_tuning
+  - output_only_correction
+  - epoch_deleted_for_metric
+  - old_runtime_input_count
+  - legacy_provider_input_count
+  - legacy_row_input_count
+  - legacy_aggregate_input_count
+  - status_fallback_used
+  - paper_performance_claim
+  - module_update_counts
+  - counters
+  - file_read_audit
+  - output_health
+  - source_aware_trace_expected
+  - output_files
+  - output_hashes
+  - solver_manifest_sha256
+  - solver_returncode
+  - runtime_seconds
+  - terminal_status
+properties:
+  schema_version: {const: paper_rebuild.clean2_formal_run_manifest.v1}
+  stage_id: {const: CLEAN2_BY2_MODULE_ABLATION_AND_CLASSIC18}
+  protocol_id: {const: CLEAN_REAL_DATA_FINAL_V23}
+  run_id: {type: string, minLength: 1}
+  case_id: {type: string, pattern: "^C(?:0[0-9]|1[0-7])_"}
+  result_namespace:
+    enum: [BY2_REAL_CLEAN_MODULE_ABLATION, BY2_CONTROLLED_DUAL_YAW_DEGRADATION]
+  data_mode: {enum: [real_by2_raw, real_base_controlled_degradation]}
+  role: {enum: [canonical_method, ablation_configuration]}
+  structural_method:
+    enum: [single_antenna_EKF, basic_dual_yaw_EKF, strong_dual_yaw_EKF, LegSA_Paper_V1]
+  ablation_id: {type: string, pattern: "^(?:|AB[01]{4})$"}
+  feature_RD: {type: boolean}
+  feature_SA: {type: boolean}
+  feature_RP: {type: boolean}
+  feature_HV: {type: boolean}
+  run_order: {type: integer, minimum: 1, maximum: 110}
+  formal: {const: true}
+  alias_roles: {type: string}
+  code_commit: {type: string, pattern: "^[0-9a-f]{40}$"}
+  code_worktree_dirty_at_run: {const: false}
+  runtime_config_hash: {$ref: "#/$defs/sha256"}
+  executable_hash: {$ref: "#/$defs/sha256"}
+  executable_source_manifest_hash: {$ref: "#/$defs/sha256"}
+  provider_bundle_hash: {$ref: "#/$defs/sha256"}
+  provider_hashes:
+    type: object
+    additionalProperties: false
+    required: [imu, gnss, case_gnss, dual_yaw, raw_doppler, go2_roll_pitch, go2_horizontal_velocity]
+    properties:
+      imu: {$ref: "#/$defs/sha256"}
+      gnss: {$ref: "#/$defs/sha256"}
+      case_gnss: {$ref: "#/$defs/sha256"}
+      dual_yaw: {$ref: "#/$defs/sha256"}
+      raw_doppler: {$ref: "#/$defs/sha256"}
+      go2_roll_pitch: {$ref: "#/$defs/sha256"}
+      go2_horizontal_velocity: {$ref: "#/$defs/sha256"}
+  raw_source_hashes:
+    type: object
+    minProperties: 22
+    maxProperties: 22
+    additionalProperties: {$ref: "#/$defs/sha256"}
+  source_manifest_hashes:
+    type: object
+    additionalProperties: {$ref: "#/$defs/sha256"}
+    required: [clean_input, auxiliary_bundle, case_provider, case_provider_index, historical_formal_schema, clean2_formal_schema]
+  actual_solver_input_paths: {type: object, minProperties: 2, additionalProperties: {type: string, minLength: 1}}
+  synthetic_data_used: {const: false}
+  semisynthetic_data_used: {type: boolean}
+  trace_used_online: {const: false}
+  receiver_imu_as_body_imu: {const: false}
+  final_v23_output_solver_input: {const: false}
+  LegSA_output_solver_input: {const: false}
+  per_case_tuning: {const: false}
+  output_only_correction: {const: false}
+  epoch_deleted_for_metric: {const: false}
+  old_runtime_input_count: {const: 0}
+  legacy_provider_input_count: {const: 0}
+  legacy_row_input_count: {const: 0}
+  legacy_aggregate_input_count: {const: 0}
+  status_fallback_used: {const: false}
+  paper_performance_claim: {const: false}
+  module_update_counts:
+    type: object
+    additionalProperties: false
+    required: [position_update_count, receiver_velocity_update_count, dual_yaw_update_count, raw_doppler_update_count, source_aware_evaluation_count, source_aware_weight_changed_count, go2_roll_pitch_update_count, go2_horizontal_velocity_update_count, selected_fgo_feedback_update_count, nine_factor_fgo_update_count, qa_fallback_count, multi_state_qm_update_count, contact_fk_update_count]
+    properties:
+      position_update_count: {$ref: "#/$defs/count"}
+      receiver_velocity_update_count: {$ref: "#/$defs/count"}
+      dual_yaw_update_count: {$ref: "#/$defs/count"}
+      raw_doppler_update_count: {$ref: "#/$defs/count"}
+      source_aware_evaluation_count: {$ref: "#/$defs/count"}
+      source_aware_weight_changed_count: {$ref: "#/$defs/count"}
+      go2_roll_pitch_update_count: {$ref: "#/$defs/count"}
+      go2_horizontal_velocity_update_count: {$ref: "#/$defs/count"}
+      selected_fgo_feedback_update_count: {const: 0}
+      nine_factor_fgo_update_count: {const: 0}
+      qa_fallback_count: {const: 0}
+      multi_state_qm_update_count: {const: 0}
+      contact_fk_update_count: {const: 0}
+  counters:
+    type: object
+    additionalProperties: false
+    required: [yaw_attempt_count, yaw_normal_count, yaw_downweight_count, yaw_reject_count, yaw_accepted_count, raw_doppler_reject_count, go2_roll_pitch_reject_count, go2_horizontal_velocity_reject_count]
+    properties:
+      yaw_attempt_count: {$ref: "#/$defs/count"}
+      yaw_normal_count: {$ref: "#/$defs/count"}
+      yaw_downweight_count: {$ref: "#/$defs/count"}
+      yaw_reject_count: {$ref: "#/$defs/count"}
+      yaw_accepted_count: {$ref: "#/$defs/count"}
+      raw_doppler_reject_count: {$ref: "#/$defs/count"}
+      go2_roll_pitch_reject_count: {$ref: "#/$defs/count"}
+      go2_horizontal_velocity_reject_count: {$ref: "#/$defs/count"}
+  file_read_audit:
+    type: object
+    additionalProperties: false
+    required: [schema_version, stage_id, run_id, run_order, strace_available, strace_sha256, required_input_roles, required_input_open_counts, missing_required_input_roles, opened_path_count, raw_root_open_count, trace_open_count, trace_used_online, private_absolute_paths_recorded, passed]
+    properties:
+      schema_version: {const: paper_rebuild.clean2_solver_file_open_audit.v1}
+      stage_id: {const: CLEAN2_BY2_MODULE_ABLATION_AND_CLASSIC18}
+      run_id: {type: string, minLength: 1}
+      run_order: {type: integer, minimum: 1, maximum: 110}
+      strace_available: {const: true}
+      strace_sha256: {$ref: "#/$defs/sha256"}
+      required_input_roles:
+        type: array
+        minItems: 3
+        uniqueItems: true
+        items: {enum: [runtime_config, propagation_imu, case_gnss, raw_doppler, go2_roll_pitch, go2_horizontal_velocity]}
+      required_input_open_counts:
+        type: object
+        minProperties: 3
+        additionalProperties: {type: integer, minimum: 1}
+      missing_required_input_roles: {type: array, maxItems: 0}
+      opened_path_count: {$ref: "#/$defs/count"}
+      raw_root_open_count: {const: 0}
+      trace_open_count: {const: 0}
+      trace_used_online: {const: false}
+      private_absolute_paths_recorded: {const: false}
+      passed: {const: true}
+  output_health:
+    type: object
+    additionalProperties: false
+    required: [nav_row_count, std_row_count, nav_column_count, std_column_count, nav_std_timestamp_abs_max_sec, row_count_exact, timestamps_exact, time_monotonic, finite_output, passed]
+    properties:
+      nav_row_count: {type: integer, minimum: 1}
+      std_row_count: {type: integer, minimum: 1}
+      nav_column_count: {const: 11}
+      std_column_count: {const: 22}
+      nav_std_timestamp_abs_max_sec: {type: number, minimum: 0, maximum: 1.0e-12}
+      row_count_exact: {const: true}
+      timestamps_exact: {const: true}
+      time_monotonic: {const: true}
+      finite_output: {const: true}
+      passed: {const: true}
+  source_aware_trace_expected: {type: boolean}
+  output_files:
+    type: object
+    minProperties: 10
+    maxProperties: 11
+    additionalProperties: false
+    required: [legsa_nav, legsa_std, evaluator_nav, exact_nav, exact_std, exact_imu_error, solver_manifest, gnss_action_trace, file_open_trace, file_open_audit]
+    properties:
+      legsa_nav: {$ref: "#/$defs/relative_path"}
+      legsa_std: {$ref: "#/$defs/relative_path"}
+      evaluator_nav: {$ref: "#/$defs/relative_path"}
+      exact_nav: {$ref: "#/$defs/relative_path"}
+      exact_std: {$ref: "#/$defs/relative_path"}
+      exact_imu_error: {$ref: "#/$defs/relative_path"}
+      solver_manifest: {$ref: "#/$defs/relative_path"}
+      gnss_action_trace: {$ref: "#/$defs/relative_path"}
+      file_open_trace: {$ref: "#/$defs/relative_path"}
+      file_open_audit: {$ref: "#/$defs/relative_path"}
+      source_aware_trace: {$ref: "#/$defs/relative_path"}
+  output_hashes:
+    type: object
+    minProperties: 10
+    maxProperties: 11
+    additionalProperties: false
+    required: [legsa_nav, legsa_std, evaluator_nav, exact_nav, exact_std, exact_imu_error, solver_manifest, gnss_action_trace, file_open_trace, file_open_audit]
+    properties:
+      legsa_nav: {$ref: "#/$defs/sha256"}
+      legsa_std: {$ref: "#/$defs/sha256"}
+      evaluator_nav: {$ref: "#/$defs/sha256"}
+      exact_nav: {$ref: "#/$defs/sha256"}
+      exact_std: {$ref: "#/$defs/sha256"}
+      exact_imu_error: {$ref: "#/$defs/sha256"}
+      solver_manifest: {$ref: "#/$defs/sha256"}
+      gnss_action_trace: {$ref: "#/$defs/sha256"}
+      file_open_trace: {$ref: "#/$defs/sha256"}
+      file_open_audit: {$ref: "#/$defs/sha256"}
+      source_aware_trace: {$ref: "#/$defs/sha256"}
+  solver_manifest_sha256: {$ref: "#/$defs/sha256"}
+  solver_returncode: {const: 0}
+  runtime_seconds: {type: number, minimum: 0}
+  terminal_status: {const: PASS}
+allOf:
+  - if: {properties: {data_mode: {const: real_by2_raw}}}
+    then:
+      properties:
+        result_namespace: {const: BY2_REAL_CLEAN_MODULE_ABLATION}
+        semisynthetic_data_used: {const: false}
+  - if: {properties: {data_mode: {const: real_base_controlled_degradation}}}
+    then:
+      properties:
+        result_namespace: {const: BY2_CONTROLLED_DUAL_YAW_DEGRADATION}
+        semisynthetic_data_used: {const: true}
+  - if: {properties: {feature_SA: {const: true}}}
+    then:
+      properties:
+        source_aware_trace_expected: {const: true}
+        output_files: {required: [source_aware_trace]}
+        output_hashes: {required: [source_aware_trace]}
+  - if: {properties: {feature_SA: {const: false}}}
+    then: {properties: {source_aware_trace_expected: {const: false}}}
+$defs:
+  sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+  count: {type: integer, minimum: 0}
+  relative_path: {type: string, minLength: 1, pattern: '^(?!/)(?!.*(?:^|/)\.\.(?:/|$)).+'}

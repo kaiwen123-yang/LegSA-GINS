@@ -339,10 +339,15 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
   if (!out) {
     throw std::runtime_error("failed to write RUN_MANIFEST");
   }
+  const bool auxiliary_measurement_enabled =
+      options.raw_doppler_config.enable_raw_doppler ||
+      options.go2_attitude_prior_config.enable_go2_attitude_weak_prior ||
+      options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior;
   out << std::setprecision(17);
   out << "{\n"
       << "  \"schema_version\": \"legsa-v23-port-core-run-manifest-v2\",\n"
       << "  \"clean1_formal_mode\": " << (options.clean1_formal_mode ? "true" : "false") << ",\n"
+      << "  \"clean2_formal_mode\": " << (options.clean2_formal_mode ? "true" : "false") << ",\n"
       << "  \"clean_final_v23_parity_mode\": "
       << (options.clean_final_v23_parity_mode ? "true" : "false") << ",\n"
       << "  \"stage_id\": \"" << escapeJson(options.stage_id) << "\",\n"
@@ -350,6 +355,14 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << "  \"case_id\": \"" << escapeJson(options.case_id) << "\",\n"
       << "  \"run_id\": \"" << escapeJson(options.run_id) << "\",\n"
       << "  \"data_mode\": \"" << escapeJson(options.data_mode) << "\",\n"
+      << "  \"result_namespace\": \"" << escapeJson(options.result_namespace) << "\",\n"
+      << "  \"role\": \"" << escapeJson(options.formal_role) << "\",\n"
+      << "  \"structural_method\": \"" << escapeJson(options.structural_method) << "\",\n"
+      << "  \"ablation_id\": \"" << escapeJson(options.ablation_id) << "\",\n"
+      << "  \"feature_RD\": " << (options.feature_RD ? "true" : "false") << ",\n"
+      << "  \"feature_SA\": " << (options.feature_SA ? "true" : "false") << ",\n"
+      << "  \"feature_RP\": " << (options.feature_RP ? "true" : "false") << ",\n"
+      << "  \"feature_HV\": " << (options.feature_HV ? "true" : "false") << ",\n"
       << "  \"phase\": \"" << escapeJson(options.phase) << "\",\n"
       << "  \"port_role\": \"" << escapeJson(options.port_role) << "\",\n"
       << "  \"math_port_completed\": " << (options.math_port_completed ? "true" : "false") << ",\n"
@@ -452,10 +465,10 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
               ? "position_then_basic_yaw_then_feedback"
               : (options.enable_dual_yaw_update
                      ? (options.clean_final_v23_parity_mode
-                            ? (options.algorithm_id == "LegSA_Paper_V1"
+                            ? (auxiliary_measurement_enabled
                                    ? "position_then_yaw_then_receiver_velocity_then_auxiliary_then_feedback"
                                    : "position_then_yaw_then_receiver_velocity_then_feedback")
-                            : (options.algorithm_id == "LegSA_Paper_V1"
+                            : (auxiliary_measurement_enabled
                                    ? "position_then_receiver_velocity_then_yaw_then_auxiliary_then_feedback"
                                    : "position_then_receiver_velocity_then_yaw_then_feedback"))
                      : "position_then_receiver_velocity_then_feedback"))
@@ -692,7 +705,7 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << "  \"go2_horizontal_velocity_prior_controlled_activation\": "
       << (options.go2_velocity_prior_diagnostic_status.controlled_activation ? "true" : "false") << ",\n"
       << "  \"formal_go2_velocity_prior\": "
-      << ((options.clean1_formal_mode &&
+      << (((options.clean1_formal_mode || options.clean2_formal_mode) &&
            options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior)
               ? "true"
               : "false")

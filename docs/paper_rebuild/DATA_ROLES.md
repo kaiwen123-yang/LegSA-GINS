@@ -32,3 +32,13 @@
 Fresh provider files are derived artifacts. They must stay under `<CLEAN_ROOT>`, include source-role and hash lineage, and never overwrite raw files. NAV, STD, EVAL_NAV or their clean equivalents are algorithm outputs and remain untracked. They become eligible evidence only after manifest and dependency audits pass.
 
 For CLEAN1R1C, `<BY2_GO2_BODY>/by2.txt` is the sole propagation IMU source. The fixed measurement lever arm is `[+0.03,+0.03,-0.30] m` in solver FRD for every method. It is not an evaluator point transform. The reference role is `FIXPOSITION_SAME_SOURCE_EVALUATION_REFERENCE`; `engineering_truth_alias=true` records the experiment convention, while `independent_ground_truth=false` limits the claim.
+
+## CLEAN2 controlled-provider role
+
+Classic-18 migrates only the mathematical perturbation policies from the legacy
+specification. The active provider layer is the current source-backed
+`A1_dual_diff_status_baseline_vector` from GNSS1/GNSS2 status. Across C01..C17,
+GNSS position, receiver velocity, propagation IMU, Raw Doppler, and Go2 weak
+priors are unchanged; only dual-yaw value, validity, standard deviation, and
+case metadata may change. These rows are controlled-degradation evidence, not
+clean-real evidence or 18 independent environments.

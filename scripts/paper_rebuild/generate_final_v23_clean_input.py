@@ -49,6 +49,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     generate.add_argument("--contract", default=str(DEFAULT_CONTRACT))
     generate.add_argument("--expected-code-commit")
     generate.add_argument("--expected-raw-lock-sha256", default=EXPECTED_RAW_LOCK_SHA256)
+    generate.add_argument(
+        "--raw-pre-checkpoint-phase",
+        choices=("pre_generation", "pre_provider"),
+        default="pre_generation",
+    )
     generate.add_argument("--max-status-rows", type=int)
     generate.add_argument("--max-raw-rows", type=int)
     generate.add_argument("--max-imu-messages", type=int)
@@ -61,6 +66,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     seal.add_argument("--manifest", required=True, help=f"Path to {MANIFEST_NAME}")
     seal.add_argument("--raw-post-checkpoint", required=True)
     seal.add_argument("--expected-raw-lock-sha256", default=EXPECTED_RAW_LOCK_SHA256)
+    seal.add_argument(
+        "--raw-post-checkpoint-phase",
+        choices=("post_generation", "post_provider"),
+        default="post_generation",
+    )
 
     file_open = subparsers.add_parser(
         "seal-file-open",
@@ -86,6 +96,7 @@ def main(argv: list[str] | None = None) -> int:
             max_status_rows=args.max_status_rows,
             max_raw_rows=args.max_raw_rows,
             max_imu_messages=args.max_imu_messages,
+            raw_pre_checkpoint_phase=args.raw_pre_checkpoint_phase,
         )
     elif args.command == "seal-post":
         provider_parent = guard_path(
@@ -107,6 +118,7 @@ def main(argv: list[str] | None = None) -> int:
             raw_post_checkpoint=load_raw_checkpoint(args.raw_post_checkpoint),
             raw_hash_lock_path=paths.raw_hash_lock,
             expected_raw_lock_sha256=args.expected_raw_lock_sha256,
+            raw_post_checkpoint_phase=args.raw_post_checkpoint_phase,
         )
     else:
         provider_parent = guard_path(

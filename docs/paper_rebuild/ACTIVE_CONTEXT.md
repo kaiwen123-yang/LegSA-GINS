@@ -2,15 +2,16 @@
 
 ## Identity
 
-- Active program: `STAGE_ID=CLEAN1R2R1_CLEAN_REAL_FINAL_V23_PARITY_AND_FOUR_METHOD_EXECUTION`.
-- Parent program: `PARENT_STAGE=CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION`.
-- Active case: `CASE_ID=CLEAN1_BY2_CLEAN_NORMAL`.
-- Active protocol: `PROTOCOL_ID=CLEAN_REAL_DATA_FINAL_V23`; human profile decision `CLEAN_REAL_DATA_FINAL_V23`.
-- Historical CLEAN1R2 identity: `CLEAN1R2_ARCHIVE_RECOVERY_AND_PROFILE_CONFLICT_DISCOVERY`; its blocker was `WRONG_PARITY_ANCHOR_PROFILE_SELECTED`, not contamination of current active evidence.
-- Retained predecessor protocol: `CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED`; review disposition `SUPERSEDED_FOR_FINAL_V23_PARITY_REVIEW`; `superseded_by=CLEAN1R2_FINAL_V23_PARITY`.
-- Frozen base commit: `4e6b3f3fa9f50ed91b6c4e250f3d1f75d6725cc6`.
-- Active Git line: `stage/clean1-by2-clean-four-method`.
-- Active worktree: existing `worktree://clean1-by2-clean-four-method`, unchanged.
+- Active program: `STAGE_ID=CLEAN2_BY2_MODULE_ABLATION_AND_CLASSIC18`.
+- Parent milestone: `CLEAN1R2R1_CLEAN_REAL_FINAL_V23_PARITY_AND_FOUR_METHOD_EXECUTION`.
+- Active dataset: `BY2`; clean case `C00_clean_normal`; controlled cases `C01..C17`.
+- Active protocol: `CLEAN_PROTOCOL=CLEAN_REAL_DATA_FINAL_V23`.
+- Active Git line: `stage/clean2-by2-ablation-classic18`.
+- Active worktree: `worktree://clean2-by2-ablation-classic18`.
+- CLEAN1 merge anchor: `eddc536b36d87c760bd7c6a3184f2ff724a8ea78`.
+- CLEAN1 code freeze: `5c807633f699238aa2244a0496881dff71550273`.
+- CLEAN1 report commit: `a3909830288b29a8576626408c0eea700abea5ef`.
+- CLEAN1 milestone tag: `CLEAN1R2R1-v1.0-final-v23-parity-four-method`.
 - Active implementation namespace: `src/legsa_gins/paper_rebuild/`.
 - Active runner entrypoints: `scripts/paper_rebuild/` only.
 - Active raw source: `<RAW_ROOT>`; raw files are immutable.
@@ -56,6 +57,47 @@ Active runtime evidence may come only from `<CLEAN_ROOT>` and only when its mani
 
 ## Current Gate
 
+The human authorized one bounded CLEAN2 chain with two scientifically distinct
+namespaces:
+
+1. `BY2_REAL_CLEAN_MODULE_ABLATION`: C00 only, strong/final_v23 backbone, all
+   16 frozen RD/SA/RP/HV feature combinations;
+2. `BY2_CONTROLLED_DUAL_YAW_DEGRADATION`: C01..C17, real BY2 base with only the
+   current A1 dual-yaw value/validity/std perturbed, canonical four methods, plus
+   four leave-one-module-out configurations on six frozen sentinel cases.
+
+Classic-18 is a real-data-based controlled dual-yaw degradation pilot. It is
+not 18 real environments, not an independent-truth study, and not a pure module
+ablation. Controlled cases use `data_mode=real_base_controlled_degradation`,
+`synthetic_data_used=false`, and `semisynthetic_data_used=true`; they remain
+separate from the clean-real C00 table.
+
+Execution is fail-closed in this order: implementation and tests; code-freeze
+commit; raw pre-check 22/22; fresh base-provider generation and exact five-hash
+parity; raw post-provider 22/22; deterministic 18-case provider freeze; 110-run
+registry proof; C00 four-role structural gate without trace or metrics; the
+remaining 106 runs; complete output hash seal; raw post-run 22/22; unified
+offline trace evaluation; frozen descriptive analysis; diagnostic render QA;
+read-only review; Draft PR; and one terminal export ZIP.
+
+The exact formal process count is 110: 2 C00 canonical single/basic processes,
+16 C00 factorial processes (AB0000 and AB1111 alias canonical strong/full), 68
+C01..C17 canonical processes, and 24 sentinel LOO processes. Duplicate effective
+configurations are forbidden.
+
+The trace embargo remains absolute until all 110 outputs are terminal and hash
+sealed. Any code, tracked config, executable, or provider change invalidates the
+formal set and requires restart from the C00 structural gate. Metric-driven
+rerun, per-case tuning, output correction, and metric-driven epoch deletion are
+forbidden.
+
+CLEAN2 does not authorize D01-D60, the 60x9 matrix, BY3, XB, PG, DA03, DA05,
+selected/no-feedback FGO, active nine-factor FGO, QM, QA, contact/FK factors,
+final paper figures, automatic CLEAN2 merge, a CLEAN2 tag, force push, or any
+deletion of CLEAN1 evidence, raw data, legacy freeze, or failed attempts.
+
+## Retained CLEAN1R2R1 closure
+
 The human authorized the bounded CLEAN1R2R1 chain in this exact fail-closed order:
 
 1. reuse the already verified unique final_v23 static source, runtime configuration, input-generation contract, and evaluator identity without repeating the 18 GB archive inventory;
@@ -83,6 +125,6 @@ dimensions, update order, scheme-C, writer, and evaluator—but rebuilds input
 from current raw with `yaw_measurement_std_deg=1.5`, noise injection disabled,
 status A1 yaw, and trace excluded from generation. `CURRENT_ACTIVE_EVIDENCE_CONTAMINATED=false` because CLEAN1R2 launched no solver and read no current trace.
 
-CLEAN1R2R1 does not authorize figures, classic-18, D01-D60, the 60x9 matrix,
-DA03, DA05, BY3, XB, PG, selected FGO feedback, active/complete nine-factor
-FGO, QM, QA, contact/FK factors, a merge, a tag, or any next stage.
+The predecessor authorization did not itself authorize CLEAN2. The current
+human CLEAN2 authorization above is the sole expansion and does not relax any
+data-role, provenance, trace, tuning, correction, or claim boundary.

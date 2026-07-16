@@ -1,5 +1,21 @@
 # Clean Rebuild Next Actions
 
+## CLEAN2 authorized chain
+
+1. Freeze and test the current-A1 Classic-18 mapping, C00 2^4 matrix, and exact
+   110-process registry before reading results.
+2. Create one code-freeze commit and regenerate all five C00 providers from the
+   hash-locked BY2 raw chain.
+3. Require 22/22 raw checkpoints, exact CLEAN1 base-provider content hashes,
+   and the C00 four-role structural gate without trace.
+4. Complete and hash-seal all 110 outputs before one unified offline evaluator
+   opens trace.
+5. Produce separate clean-ablation and controlled-degradation tables,
+   diagnostic-only render QA, a read-only review, one Draft PR, and one final
+   export ZIP.
+
+No next-stage execution is implied by CLEAN2 completion.
+
 ## CLEAN0 Closure
 
 - Raw hash lock and post-delete full verification: complete.

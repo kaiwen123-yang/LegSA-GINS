@@ -20,6 +20,9 @@ If any link is missing, the run is not active evidence.
 - `real_by2_raw`: freshly derived from hash-locked BY2 raw data.
 - `real_by3_raw`: freshly derived from hash-locked BY3 raw data.
 - `real_xb_pg_raw`: freshly derived from hash-locked XB/PG raw data.
+- `real_base_controlled_degradation`: a hash-locked real-data base with a
+  declared controlled perturbation. It is kept outside clean-real tables and
+  requires `synthetic_data_used=false` and `semisynthetic_data_used=true`.
 - `synthetic`: fully synthetic and never eligible for a real-data result table.
 - `semisynthetic`: real source plus injected degradation and never mislabeled as raw clean data.
 
@@ -60,4 +63,8 @@ This subsection records the superseded CLEAN1R1C contract for provenance only. I
 
 ## Execution Boundary
 
-CLEAN0's independent BY2 smoke remains a runtime-health regression only. CLEAN1R1C is retained historical protocol and has review disposition `SUPERSEDED_FOR_FINAL_V23_PARITY_REVIEW`; it is no longer an active execution authorization. CLEAN1R2 is retained as archive recovery and wrong-profile discovery: it launched no solver, read no current trace, and did not contaminate current active evidence. The human has now selected `CLEAN_REAL_DATA_FINAL_V23`, resolving the E001 anchor mistake. CLEAN1R2R1 must still pass the fresh exact-tag clean run and exact-vs-active parity before four methods may run. Neither this authorization nor its predecessors authorize DA03, DA05, classic-18, the 541-case matrix, figures, broad performance conclusions, or a later stage.
+CLEAN1R2R1 is the closed final_v23/four-method milestone. CLEAN2 authorizes only
+the frozen C00 2^4 module matrix and the Classic-18 current-A1 controlled pilot
+with six sentinel LOO cases, totaling 110 unique processes. It does not
+authorize DA03, DA05, D01-D60, the 60x9 matrix, BY3/XB/PG, FGO/QM/QA/contact,
+final paper figures, or broad performance conclusions.
