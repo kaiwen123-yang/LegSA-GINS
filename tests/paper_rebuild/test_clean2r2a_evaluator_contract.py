@@ -177,12 +177,12 @@ def test_terminal_revalidation_rejects_summary_tamper(
     monkeypatch.setattr(evaluator_module, "METHOD_ORDER", ("AB0000",))
     result_row = evaluator_module._result_row("AB0000", runtime, summary)
     evaluator_module._write_csv(
-        evaluation / "CLEAN2R2A_FACTORIAL_RESULTS.csv",
+        evaluation / "CLEAN2R2A1_FACTORIAL_RESULTS.csv",
         evaluator_module.RESULT_FIELDS,
         [result_row],
     )
     evaluator_module._write_csv(
-        evaluation / "CLEAN2R2A_MATCH_COVERAGE.csv",
+        evaluation / "CLEAN2R2A1_MATCH_COVERAGE.csv",
         evaluator_module.COVERAGE_FIELDS,
         [{key: result_row[key] for key in evaluator_module.COVERAGE_FIELDS}],
     )
@@ -192,8 +192,8 @@ def test_terminal_revalidation_rejects_summary_tamper(
         ledger_rows,
     )
     crosscheck = evaluator_module._crosscheck(output / "error_series.csv", summary)
-    write_json_atomic(evaluation / "CLEAN2R2A_AGGREGATE_CROSSCHECK.json", {
-        "schema_version": "paper_rebuild.clean2r2a_aggregate_crosscheck.v2",
+    write_json_atomic(evaluation / "CLEAN2R2A1_AGGREGATE_CROSSCHECK.json", {
+        "schema_version": "paper_rebuild.clean2r2a1_aggregate_crosscheck.v2",
         "method_crosschecks": {"AB0000": crosscheck},
         "method_order": ["AB0000"],
         "method_count": 1,

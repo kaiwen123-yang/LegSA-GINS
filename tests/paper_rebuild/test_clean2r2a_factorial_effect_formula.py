@@ -1,12 +1,17 @@
+import csv
 import pytest
 from pathlib import Path
 
 from legsa_gins.paper_rebuild.clean2r2a_ablation import canonical_ablation_profiles
 from legsa_gins.paper_rebuild.clean2r2a_analysis import (
+    MODULE_COUNTERS_FILENAME,
     factorial_main_effects,
     factorial_pairwise_interactions,
     full_vs_strong_delta,
     validate_statistical_contract,
+)
+from legsa_gins.paper_rebuild.clean2r2a_evidence import (
+    _module_counter_artifact_closes,
 )
 
 
@@ -41,3 +46,31 @@ def test_clean2r2a_pairwise_effect_uses_same_frozen_formula() -> None:
         for name, value in interactions.items()
         if name != "RD:SA"
     )
+
+
+def test_required_module_counter_artifact_name_and_schema(tmp_path: Path) -> None:
+    assert MODULE_COUNTERS_FILENAME == "CLEAN2R2A1_MODULE_COUNTERS.csv"
+    artifact = tmp_path / MODULE_COUNTERS_FILENAME
+    rows = [{
+        "configuration_id": "AB0000",
+        "position_update_count": 10,
+        "raw_doppler_update_count": 0,
+    }]
+    with artifact.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+    wrapper = {
+        "algorithm_id": "AB0000",
+        "module_counters": {
+            "position_update_count": 10,
+            "raw_doppler_update_count": 0,
+        },
+    }
+    assert _module_counter_artifact_closes(artifact, [wrapper]) is True
+    rows[0].pop("raw_doppler_update_count")
+    with artifact.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+    assert _module_counter_artifact_closes(artifact, [wrapper]) is False

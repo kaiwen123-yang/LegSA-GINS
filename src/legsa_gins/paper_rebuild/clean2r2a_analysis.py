@@ -1,4 +1,4 @@
-"""CLEAN2R2A clean 2^4 的预冻结描述性效应计算。"""
+"""CLEAN2R2A1 clean 2^4 的预冻结描述性效应计算。"""
 
 from __future__ import annotations
 
@@ -82,9 +82,9 @@ def validate_statistical_contract(path: str | Path) -> dict[str, object]:
     """校验统计公式在读取任何正式指标前已经冻结。"""
 
     payload = load_yaml_mapping(path)
-    if payload.get("schema_version") != "paper_rebuild.clean2r2a_statistics.v1":
+    if payload.get("schema_version") != "paper_rebuild.clean2r2a1_statistics.v1":
         raise Clean2R2AAnalysisError("statistical contract schema mismatch")
-    if payload.get("stage_id") != "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD":
+    if payload.get("stage_id") != "CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME":
         raise Clean2R2AAnalysisError("statistical contract stage mismatch")
     factorial = payload.get("factorial")
     reporting = payload.get("reporting")
@@ -118,6 +118,7 @@ METRIC_COLUMNS = {
     "pitch": "pitch_rmse_deg",
     "yaw": "yaw_rmse_deg",
 }
+MODULE_COUNTERS_FILENAME = "CLEAN2R2A1_MODULE_COUNTERS.csv"
 
 
 def materialize_factorial_analysis(
@@ -157,13 +158,13 @@ def materialize_factorial_analysis(
                                "left": left, "right": right,
                                "delta_left_minus_right": values[left] - values[right],
                                "lower_is_better": True})
-    with (destination / "CLEAN2R2A_FACTORIAL_RESULTS.csv").open("x", encoding="utf-8", newline="") as handle:
+    with (destination / "CLEAN2R2A1_FACTORIAL_RESULTS.csv").open("x", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0])); writer.writeheader(); writer.writerows(rows)
-    with (destination / "CLEAN2R2A_MODULE_MAIN_EFFECTS.csv").open("x", encoding="utf-8", newline="") as handle:
+    with (destination / "CLEAN2R2A1_MODULE_MAIN_EFFECTS.csv").open("x", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(main_rows[0])); writer.writeheader(); writer.writerows(main_rows)
-    with (destination / "CLEAN2R2A_PAIRWISE_INTERACTIONS.csv").open("x", encoding="utf-8", newline="") as handle:
+    with (destination / "CLEAN2R2A1_PAIRWISE_INTERACTIONS.csv").open("x", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(interaction_rows[0])); writer.writeheader(); writer.writerows(interaction_rows)
-    with (destination / "CLEAN2R2A_METHOD_DELTAS.csv").open("x", encoding="utf-8", newline="") as handle:
+    with (destination / "CLEAN2R2A1_METHOD_DELTAS.csv").open("x", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(delta_rows[0])); writer.writeheader(); writer.writerows(delta_rows)
     runtime_root = destination.parent / "06_FORMAL_RUNS"
     action_rows: list[dict[str, Any]] = []
@@ -171,7 +172,7 @@ def materialize_factorial_analysis(
     from .clean2r2a_runner import METHOD_ORDER, run_directory
     for configuration_id in METHOD_ORDER:
         wrapper = json.loads(
-            (runtime_root / run_directory(configuration_id) / "CLEAN2R2A_FORMAL_RUN_MANIFEST.json")
+            (runtime_root / run_directory(configuration_id) / "CLEAN2R2A1_FORMAL_RUN_MANIFEST.json")
             .read_text(encoding="utf-8")
         )
         counters = wrapper["module_counters"]
@@ -195,21 +196,21 @@ def materialize_factorial_analysis(
                 "R_scale_p95": stats["p95"],
                 "R_scale_max": stats["max"],
             })
-    with (destination / "CLEAN2R2A_MODULE_ACTION_SUMMARY.csv").open("x", encoding="utf-8", newline="") as handle:
+    with (destination / MODULE_COUNTERS_FILENAME).open("x", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(action_rows[0])); writer.writeheader(); writer.writerows(action_rows)
-    with (destination / "CLEAN2R2A_SOURCE_AWARE_R_SCALE_SUMMARY.csv").open("x", encoding="utf-8", newline="") as handle:
+    with (destination / "CLEAN2R2A1_SOURCE_AWARE_R_SCALE_SUMMARY.csv").open("x", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(source_rows[0])); writer.writeheader(); writer.writerows(source_rows)
     payload = {
-        "schema_version": "paper_rebuild.clean2r2a_factorial_report.v1",
-        "stage_id": "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD",
+        "schema_version": "paper_rebuild.clean2r2a1_factorial_report.v1",
+        "stage_id": "CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME",
         "variant_count": 16, "structural_method_count": 2,
         "bit_order": list(BIT_ORDER), "metrics": metric_reports,
         "descriptive_only": True, "p_value_generated": False,
         "parameter_search_performed": False, "degradation_case_count": 0,
     }
-    write_json_atomic(destination / "CLEAN2R2A_FACTORIAL_REPORT.json", payload)
+    write_json_atomic(destination / "CLEAN2R2A1_FACTORIAL_REPORT.json", payload)
     lines = [
-        "# CLEAN2R2A BY2 clean module ablation report",
+        "# CLEAN2R2A1 BY2 clean module ablation report",
         "",
         "This is a descriptive clean-only 2^4 factorial analysis. Positive effects are harmful for lower-is-better metrics.",
         "",
@@ -224,5 +225,5 @@ def materialize_factorial_analysis(
             f"{effects['HV']:.9g} | {report['full_vs_strong_delta']:.9g} |"
         )
     lines.extend(["", "No p-value, parameter search, or non-clean execution is part of this report.", ""])
-    (destination / "CLEAN2R2A_FACTORIAL_REPORT.md").write_text("\n".join(lines), encoding="utf-8")
+    (destination / "CLEAN2R2A1_FACTORIAL_REPORT.md").write_text("\n".join(lines), encoding="utf-8")
     return payload

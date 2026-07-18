@@ -1,4 +1,4 @@
-"""CLEAN2R2A terminal audits, manifest/sidecar closure, and one final ZIP."""
+"""CLEAN2R2A1 terminal audits, manifest/sidecar closure, and one final ZIP."""
 
 from __future__ import annotations
 
@@ -21,6 +21,13 @@ from .clean2r2a_runner import (
     CANONICAL_PROVIDER_PROTOCOL_SHA256,
     FORMAL_SCHEMA_NAME,
     METHOD_ORDER,
+    PROTOCOL_ID,
+    PROVIDER_CODE_FREEZE_COMMIT,
+    PROVIDER_PROTOCOL_ID,
+    PROVIDER_STAGE_ID,
+    SOLVER_PARENT_PROTOCOL_ID,
+    SOLVER_PARENT_STAGE_ID,
+    STAGE_ID,
     mechanism_evidence,
     run_directory,
     validate_counters,
@@ -32,14 +39,44 @@ from .clean2r2a_runner import (
 )
 from .manifest import sha256_file, write_json_atomic
 from .clean2r2a_evaluator import revalidate_offline_evaluation
+from .clean2r2a_analysis import MODULE_COUNTERS_FILENAME
 
 
-STAGE_ID = "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD"
-TERMINAL_STATUS = "PASS_CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_FRESH_EVIDENCE_READY_FOR_HUMAN_REVIEW"
+TERMINAL_STATUS = "PASS_CLEAN2R2A1_BY2_CLEAN_MODULE_ABLATION_FRESH_EVIDENCE_READY_FOR_HUMAN_REVIEW"
 
 
 class Clean2R2AEvidenceError(RuntimeError):
     """Terminal evidence did not close."""
+
+
+def _module_counter_artifact_closes(
+    path: str | Path, wrappers: list[dict[str, Any]],
+) -> bool:
+    """Verify the required exact counter artifact and its per-method schema."""
+
+    artifact = Path(path).resolve(strict=True)
+    with artifact.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        rows = list(reader)
+        fields = set(reader.fieldnames or ())
+    required_fields = {"configuration_id"}
+    for wrapper in wrappers:
+        required_fields.update(wrapper.get("module_counters", {}))
+    by_method = {row.get("configuration_id", ""): row for row in rows}
+    expected_methods = {str(wrapper.get("algorithm_id", "")) for wrapper in wrappers}
+    return (
+        artifact.name == MODULE_COUNTERS_FILENAME
+        and required_fields.issubset(fields)
+        and len(rows) == len(wrappers)
+        and set(by_method) == expected_methods
+        and all(
+            all(
+                by_method[wrapper["algorithm_id"]].get(field) == str(value)
+                for field, value in wrapper["module_counters"].items()
+            )
+            for wrapper in wrappers
+        )
+    )
 
 
 def _registry_closes(actual: list[dict[str, str]], contract: Path) -> bool:
@@ -100,35 +137,48 @@ def initialize_stage_documents(
 ) -> dict[str, Any]:
     stage = Path(stage_root).resolve(strict=True)
     repo = Path(repo_root).resolve(strict=True)
+    if stage.name != STAGE_ID or stage.parent.name != "stages":
+        raise Clean2R2AEvidenceError("initializer stage root identity mismatch")
     validate_canonical_provider_protocol(repo, repo / CANONICAL_PROVIDER_PROTOCOL_RELATIVE)
     authorization = {
-        "schema_version": "paper_rebuild.clean2r2a_authorization.v1",
-        "stage_id": STAGE_ID, "dataset": "BY2", "data_mode": "real_clean",
+        "schema_version": "paper_rebuild.clean2r2a1_authorization.v1",
+        "stage_id": STAGE_ID, "protocol_id": PROTOCOL_ID,
+        "dataset": "BY2", "data_mode": "real_clean",
         "canonical_data_mode": "real_by2_raw", "clean_ablation_authorized": True,
         "degradation_execution_authorized": False, "full_matrix_authorized": False,
         "by3_authorized": False, "xb_authorized": False, "fgo_authorized": False,
         "qm_qa_contact_authorized": False, "formal_run_count": 18,
         "degradation_run_count": 0, "D01_D60_audit_count": 0,
     }
-    write_json_atomic(stage / "00_AUTHORIZATION" / "CLEAN2R2A_AUTHORIZATION.json", authorization)
-    (stage / "00_AUTHORIZATION" / "CLEAN2R2A_AUTHORIZATION.md").write_text(
-        "# CLEAN2R2A authorization\n\nOnly the 18-run BY2 real-clean module ablation is authorized. "
+    write_json_atomic(stage / "00_AUTHORIZATION" / "CLEAN2R2A1_AUTHORIZATION.json", authorization)
+    (stage / "00_AUTHORIZATION" / "CLEAN2R2A1_AUTHORIZATION.md").write_text(
+        "# CLEAN2R2A1 authorization\n\nOnly the 18-run BY2 real-clean module ablation is authorized. "
         "No degradation definition, audit, provider, or solver run belongs to this stage.\n",
         encoding="utf-8",
     )
     freeze = {
-        "schema_version": "paper_rebuild.clean2r2a_git_freeze.v1",
-        "stage_id": STAGE_ID, "branch": "stage/clean2r2-by2-ablation-full-60x9",
-        "code_freeze_commit": code_freeze_commit, "clean1_merge_commit": "eddc536b36d87c760bd7c6a3184f2ff724a8ea78",
-        "provider_generated_before_freeze": False, "formal_solver_run_before_freeze": False,
+        "schema_version": "paper_rebuild.clean2r2a1_git_freeze.v1",
+        "stage_id": STAGE_ID, "protocol_id": PROTOCOL_ID,
+        "branch": "stage/clean2r2-by2-ablation-full-60x9",
+        "execution_code_freeze_commit": code_freeze_commit,
+        "provider_stage_id": PROVIDER_STAGE_ID,
+        "provider_protocol_id": PROVIDER_PROTOCOL_ID,
+        "provider_freeze_commit": PROVIDER_CODE_FREEZE_COMMIT,
+        "solver_parent_stage_id": SOLVER_PARENT_STAGE_ID,
+        "solver_parent_protocol_id": SOLVER_PARENT_PROTOCOL_ID,
+        "clean1_merge_commit": "eddc536b36d87c760bd7c6a3184f2ff724a8ea78",
+        "provider_generated_under_parent_freeze": True,
+        "provider_payload_modified_after_generation": False,
+        "formal_solver_run_before_freeze": False,
         "trace_opened_before_freeze": False,
     }
-    write_json_atomic(stage / "01_GIT_FREEZE" / "CLEAN2R2A_GIT_FREEZE.json", freeze)
+    write_json_atomic(stage / "01_GIT_FREEZE" / "CLEAN2R2A1_GIT_FREEZE.json", freeze)
     snapshots = (
         "configs/paper_rebuild/clean2r2a_ablation_2pow4.yaml",
         "configs/paper_rebuild/clean2r2a_execution_protocol.yaml",
         "configs/paper_rebuild/clean2r2a_statistical_contract.yaml",
         "configs/paper_rebuild/clean2r2a_formal_manifest_schema.yaml",
+        "configs/paper_rebuild/clean2r2a1_raw_doppler_semantic_parity.yaml",
         CANONICAL_PROVIDER_PROTOCOL_RELATIVE.as_posix(),
         "configs/paper_rebuild/final_v23_parity_contract.yaml",
         "configs/paper_rebuild/methods.yaml",
@@ -137,7 +187,7 @@ def initialize_stage_documents(
         source = repo / relative
         shutil.copy2(source, stage / "02_PROTOCOLS" / source.name)
     write_json_atomic(stage / "02_PROTOCOLS" / "PROTOCOL_SNAPSHOT_MANIFEST.json", {
-        "schema_version": "paper_rebuild.clean2r2a_protocol_snapshot.v1",
+        "schema_version": "paper_rebuild.clean2r2a1_protocol_snapshot.v1",
         "files": {Path(relative).name: sha256_file(repo / relative) for relative in snapshots},
         "degradation_spec_read": False, "classic18_config_read": False,
     })
@@ -164,50 +214,104 @@ def audit_terminal_stage(
             "RAW_PRE_POST_RUN_MUTATION_AUDIT.json",
         )
     ]
-    provider = json.loads((stage / "04_BASE_PROVIDER" / "CLEAN2R2A_BASE_PROVIDER_PARITY.json").read_text(encoding="utf-8"))
-    provider_report_path = stage / "04_BASE_PROVIDER" / "CLEAN2R2A_BASE_PROVIDER_PARITY.json"
+    provider = json.loads((stage / "04_BASE_PROVIDER" / "CLEAN2R2A1_BASE_PROVIDER_PARITY.json").read_text(encoding="utf-8"))
+    provider_report_path = stage / "04_BASE_PROVIDER" / "CLEAN2R2A1_BASE_PROVIDER_PARITY.json"
     source_quality = provider.get("source_quality_metadata", {})
+    raw_parity = provider.get("raw_doppler_parity", {})
+    clean_manifest_path = Path(str(provider.get("clean_input_manifest_path", ""))).resolve(strict=True)
+    auxiliary_manifest_path = Path(str(provider.get("auxiliary_manifest_path", ""))).resolve(strict=True)
+    clean_provider_payload = json.loads(clean_manifest_path.read_text(encoding="utf-8"))
+    auxiliary_provider_payload = json.loads(auxiliary_manifest_path.read_text(encoding="utf-8"))
+    live_provider_hashes = {
+        "imu": sha256_file(
+            clean_manifest_path.parent
+            / clean_provider_payload["artifacts"]["imu"]["relative_path"]
+        ),
+        "gnss": sha256_file(
+            clean_manifest_path.parent
+            / clean_provider_payload["artifacts"]["gnss"]["relative_path"]
+        ),
+        "raw_doppler": sha256_file(
+            Path(auxiliary_provider_payload["auxiliary_artifacts"]["raw_doppler_provider"]["path"])
+        ),
+        "go2_roll_pitch": sha256_file(
+            Path(auxiliary_provider_payload["auxiliary_artifacts"]["go2_attitude_prior"]["path"])
+        ),
+        "go2_horizontal_velocity": sha256_file(
+            Path(auxiliary_provider_payload["auxiliary_artifacts"]["go2_horizontal_velocity_prior"]["path"])
+        ),
+    }
     provider_closure = (
         provider.get("passed") is True
+        and provider.get("terminal_status") == "PASS_CLEAN2R2A1_MINIMUM_SUFFICIENT_PROVIDER_PARITY"
+        and provider.get("stage_id") == STAGE_ID
+        and provider.get("protocol_id") == PROTOCOL_ID
+        and provider.get("provider_stage_id") == PROVIDER_STAGE_ID
+        and provider.get("provider_protocol_id") == PROVIDER_PROTOCOL_ID
+        and provider.get("provider_freeze_commit") == PROVIDER_CODE_FREEZE_COMMIT
+        and provider.get("provider_generated_under_parent_freeze") is True
+        and provider.get("provider_payload_modified_after_generation") is False
+        and provider.get("old_provider_solver_input") is False
+        and provider.get("trace_open_count") == 0
         and provider.get("provider_root_exact") is True
+        and provider.get("evidence_root_exact") is True
+        and live_provider_hashes == provider.get("actual_hashes")
+        and raw_parity.get("passed") is True
+        and raw_parity.get("raw_doppler_solver_semantic_sha256")
+        == "235694534abfe2fa15b5469cebbeda220469a0d3da7318fdbbdc39b07548fa33"
+        and raw_parity.get("raw_doppler_actual_full_sha256")
+        == "847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4"
+        and raw_parity.get("cpp_provenance_static_audit", {}).get("passed") is True
+        and sha256_file(Path(str(provider.get("provenance_static_audit_path", ""))).resolve(strict=True))
+        == provider.get("provenance_static_audit_sha256")
+        and sha256_file(Path(str(provider.get("active_provider_freeze_path", ""))).resolve(strict=True))
+        == provider.get("active_provider_freeze_sha256")
         and len(provider.get("raw_source_hashes", {})) == 22
         and isinstance(source_quality, dict)
         and sha256_file(Path(str(source_quality.get("path", ""))).resolve(strict=True))
         == source_quality.get("sha256")
-        and sha256_file(Path(str(provider.get("clean_input_manifest_path", ""))).resolve(strict=True))
+        and sha256_file(clean_manifest_path)
         == provider.get("clean_input_manifest_sha256")
-        and sha256_file(Path(str(provider.get("auxiliary_manifest_path", ""))).resolve(strict=True))
+        and sha256_file(auxiliary_manifest_path)
         == provider.get("auxiliary_manifest_sha256")
         and provider.get("provider_protocol_sha256") == CANONICAL_PROVIDER_PROTOCOL_SHA256
         and provider.get("provider_protocol_relative_path") == CANONICAL_PROVIDER_PROTOCOL_RELATIVE.as_posix()
     )
-    structural = json.loads((stage / "11_AUDITS" / "CLEAN2R2A_C00_STRUCTURAL_GATE.json").read_text(encoding="utf-8"))
-    aggregate = json.loads((stage / "08_OFFLINE_EVALUATION" / "CLEAN2R2A_AGGREGATE_CROSSCHECK.json").read_text(encoding="utf-8"))
+    structural = json.loads((stage / "11_AUDITS" / "CLEAN2R2A1_C00_STRUCTURAL_GATE.json").read_text(encoding="utf-8"))
+    aggregate = json.loads((stage / "08_OFFLINE_EVALUATION" / "CLEAN2R2A1_AGGREGATE_CROSSCHECK.json").read_text(encoding="utf-8"))
     evaluation_revalidation = revalidate_offline_evaluation(
         stage_root=stage,
         local_config=local_config,
         exact_evaluator=exact_evaluator,
         write_report=False,
     )
-    figures = json.loads((stage / "10_DIAGNOSTIC_FIGURES" / "CLEAN2R2A_FIGURE_RENDER_QA.json").read_text(encoding="utf-8"))
-    attempts = list(csv.DictReader((stage / "05_RUN_REGISTRY" / "CLEAN2R2A_RUN_ATTEMPTS.csv").open("r", encoding="utf-8", newline="")))
-    registry = list(csv.DictReader((stage / "05_RUN_REGISTRY" / "CLEAN2R2A_CLEAN_RUN_REGISTRY.csv").open("r", encoding="utf-8", newline="")))
+    figures = json.loads((stage / "10_DIAGNOSTIC_FIGURES" / "CLEAN2R2A1_FIGURE_RENDER_QA.json").read_text(encoding="utf-8"))
+    attempts = list(csv.DictReader((stage / "05_RUN_REGISTRY" / "CLEAN2R2A1_RUN_ATTEMPTS.csv").open("r", encoding="utf-8", newline="")))
+    registry = list(csv.DictReader((stage / "05_RUN_REGISTRY" / "CLEAN2R2A1_CLEAN_RUN_REGISTRY.csv").open("r", encoding="utf-8", newline="")))
     schema_path = stage / "02_PROTOCOLS" / FORMAL_SCHEMA_NAME
     wrappers: list[dict[str, Any]] = []
     formal_closure = True
-    clean_provider_payload = json.loads(
-        Path(str(provider["clean_input_manifest_path"])).read_text(encoding="utf-8")
-    )
-    auxiliary_provider_payload = json.loads(
-        Path(str(provider["auxiliary_manifest_path"])).read_text(encoding="utf-8")
-    )
     expected_provider_hashes = {
         "clean_input_manifest": provider["clean_input_manifest_sha256"],
         "auxiliary_manifest": provider["auxiliary_manifest_sha256"],
         **provider["actual_hashes"],
         "source_quality_metadata": provider["source_quality_metadata"]["sha256"],
     }
+    frozen_solver_input_hashes = {
+        "propagation_imu": expected_provider_hashes["imu"],
+        "gnss_position_receiver_velocity_dual_yaw": expected_provider_hashes["gnss"],
+        "raw_doppler_velocity": expected_provider_hashes["raw_doppler"],
+        "go2_roll_pitch_weak_prior": expected_provider_hashes["go2_roll_pitch"],
+        "go2_horizontal_velocity_weak_prior": expected_provider_hashes["go2_horizontal_velocity"],
+        "go2_source_quality_metadata": expected_provider_hashes["source_quality_metadata"],
+    }
     expected_generation = {
+        "provider_stage_id": PROVIDER_STAGE_ID,
+        "provider_protocol_id": PROVIDER_PROTOCOL_ID,
+        "provider_freeze_commit": PROVIDER_CODE_FREEZE_COMMIT,
+        "execution_code_freeze_commit": provider["execution_code_freeze_commit"],
+        "provider_generated_under_parent_freeze": True,
+        "provider_payload_modified_after_generation": False,
         "base_generator_code_commit": clean_provider_payload["generator_code_commit"],
         "base_generation_config_sha256": clean_provider_payload["generation_config_sha256"],
         "base_contract_sha256": clean_provider_payload["contract_sha256"],
@@ -217,13 +321,21 @@ def audit_terminal_stage(
     }
     for method in METHOD_ORDER:
         run_root = stage / "06_FORMAL_RUNS" / run_directory(method)
-        wrapper = json.loads((run_root / "CLEAN2R2A_FORMAL_RUN_MANIFEST.json").read_text(encoding="utf-8"))
+        wrapper = json.loads((run_root / "CLEAN2R2A1_FORMAL_RUN_MANIFEST.json").read_text(encoding="utf-8"))
         validate_formal_wrapper(wrapper, schema_path)
         formal_closure = formal_closure and wrapper.get("formal_schema_hash") == sha256_file(schema_path)
         formal_closure = formal_closure and wrapper.get("base_provider_parity_sha256") == sha256_file(provider_report_path)
         formal_closure = formal_closure and wrapper.get("provider_hashes") == expected_provider_hashes
         formal_closure = formal_closure and wrapper.get("raw_source_hashes") == provider.get("raw_source_hashes")
         formal_closure = formal_closure and wrapper.get("provider_generation") == expected_generation
+        formal_closure = formal_closure and wrapper.get("stage_id") == STAGE_ID
+        formal_closure = formal_closure and wrapper.get("protocol_id") == PROTOCOL_ID
+        formal_closure = formal_closure and wrapper.get("solver_parent_stage_id") == SOLVER_PARENT_STAGE_ID
+        formal_closure = formal_closure and wrapper.get("solver_parent_protocol_id") == SOLVER_PARENT_PROTOCOL_ID
+        formal_closure = formal_closure and wrapper.get("provider_stage_id") == PROVIDER_STAGE_ID
+        formal_closure = formal_closure and wrapper.get("provider_protocol_id") == PROVIDER_PROTOCOL_ID
+        formal_closure = formal_closure and wrapper.get("provider_code_freeze_commit") == PROVIDER_CODE_FREEZE_COMMIT
+        formal_closure = formal_closure and wrapper.get("execution_code_freeze_commit") == provider.get("execution_code_freeze_commit")
         formal_closure = formal_closure and wrapper.get("local_config_hash") == sha256_file(local_config)
         solver_manifest_path = run_root / "RUN_MANIFEST.json"
         solver_manifest = json.loads(solver_manifest_path.read_text(encoding="utf-8"))
@@ -237,8 +349,31 @@ def audit_terminal_stage(
         for entry in wrapper.get("actual_solver_inputs", {}).values():
             candidate = Path(str(entry["path"])).resolve(strict=True)
             formal_closure = formal_closure and sha256_file(candidate) == entry["sha256"]
+        wrapper_input_hashes = {
+            role: entry.get("sha256")
+            for role, entry in wrapper.get("actual_solver_inputs", {}).items()
+        }
+        formal_closure = (
+            formal_closure
+            and set(wrapper_input_hashes).issubset(frozen_solver_input_hashes)
+            and wrapper_input_hashes == {
+                role: frozen_solver_input_hashes[role]
+                for role in wrapper_input_hashes
+            }
+        )
         wrappers.append(wrapper)
     attempts_close, technical_retry_count = _attempts_close(attempts)
+    wrapper_executable_hashes = {str(wrapper.get("executable_hash", "")) for wrapper in wrappers}
+    attempt_executable_hashes = {str(row.get("executable_hash", "")) for row in attempts}
+    common_executable_closure = (
+        len(wrapper_executable_hashes) == 1
+        and wrapper_executable_hashes == attempt_executable_hashes
+        and len(next(iter(wrapper_executable_hashes), "")) == 64
+    )
+    module_counter_artifact_closure = _module_counter_artifact_closes(
+        stage / "09_FACTORIAL_ANALYSIS" / MODULE_COUNTERS_FILENAME,
+        wrappers,
+    )
     protocol_snapshot = json.loads(
         (stage / "02_PROTOCOLS" / "PROTOCOL_SNAPSHOT_MANIFEST.json").read_text(encoding="utf-8")
     )
@@ -275,12 +410,14 @@ def audit_terminal_stage(
         "raw_checkpoints_22_22": len(raw) == 4 and all(item.get("verified") == 22 and item.get("passed") is True for item in raw),
         "raw_immutable": all(item.get("raw_mutation") == 0 and item.get("passed") is True for item in raw_mutations),
         "base_provider_parity": provider_closure,
+        "minimum_sufficient_raw_doppler_parity": provider_closure,
         "canonical_provider_protocol": protocol_snapshot_closes,
         "ablation_variants_16": len([row for row in registry if str(row["configuration_id"]).startswith("AB")]) == 16,
         "structural_methods_2": sum(row.get("role") == "structural_baseline" for row in registry) == 2,
         "run_registry_exact": _registry_closes(registry, stage / "02_PROTOCOLS" / "clean2r2a_ablation_2pow4.yaml"),
         "unique_formal_runs_18": len(wrappers) == 18 and len({row["algorithm_id"] for row in wrappers}) == 18,
         "formal_schema_and_provenance_closure": formal_closure,
+        "common_executable_hash": common_executable_closure,
         "attempt_registry_closure": attempts_close,
         "all_terminal_pass": all(row.get("terminal_status") == "PASS" for row in wrappers),
         "all_outputs_finite": all(row.get("structure", {}).get("finite") is True for row in wrappers),
@@ -289,6 +426,7 @@ def audit_terminal_stage(
         "strong_final_v23_identity": any(row.get("method_id") == "AB0000" and row.get("passed") is True for row in structural.get("rows", [])),
         "full_legsa_identity": any(row.get("method_id") == "AB1111" and row.get("passed") is True for row in structural.get("rows", [])),
         "module_counters_match": formal_closure,
+        "module_counters_artifact": module_counter_artifact_closure,
         "aggregate_crosscheck": aggregate.get("passed") is True and evaluation_revalidation.get("passed") is True,
         "offline_evaluation_full_revalidation": evaluation_revalidation.get("passed") is True,
         "figure_qa": figures.get("passed") is True,
@@ -302,8 +440,16 @@ def audit_terminal_stage(
     if not all(gates.values()):
         raise Clean2R2AEvidenceError("terminal gate failed: " + ",".join(key for key, value in gates.items() if not value))
     report = {
-        "schema_version": "paper_rebuild.clean2r2a_full_report.v1",
-        "stage_id": STAGE_ID, "terminal_status": TERMINAL_STATUS,
+        "schema_version": "paper_rebuild.clean2r2a1_full_report.v1",
+        "stage_id": STAGE_ID, "protocol_id": PROTOCOL_ID,
+        "terminal_status": TERMINAL_STATUS,
+        "provider_stage_id": PROVIDER_STAGE_ID,
+        "provider_protocol_id": PROVIDER_PROTOCOL_ID,
+        "provider_freeze_commit": PROVIDER_CODE_FREEZE_COMMIT,
+        "execution_code_freeze_commit": provider["execution_code_freeze_commit"],
+        "raw_doppler_solver_semantic_sha256": raw_parity["raw_doppler_solver_semantic_sha256"],
+        "raw_doppler_actual_full_sha256": raw_parity["raw_doppler_actual_full_sha256"],
+        "common_executable_sha256": next(iter(wrapper_executable_hashes)),
         "gates": gates, "formal_run_count": 18, "technical_retry_count": technical_retry_count,
         "degradation_run_count": 0, "D01_D60_audit_count": 0,
         "trace_used_online": False, "legacy_solver_input": False,
@@ -315,10 +461,10 @@ def audit_terminal_stage(
             "independent_ground_truth": False, "paper_final_figures": False,
         },
     }
-    write_json_atomic(stage / "11_AUDITS" / "CLEAN2R2A_PASS_GATES.json", gates)
-    write_json_atomic(stage / "11_AUDITS" / "CLEAN2R2A_FULL_REPORT.json", report)
-    (stage / "11_AUDITS" / "CLEAN2R2A_FULL_REPORT.md").write_text(
-        "# CLEAN2R2A full report\n\n"
+    write_json_atomic(stage / "11_AUDITS" / "CLEAN2R2A1_PASS_GATES.json", gates)
+    write_json_atomic(stage / "11_AUDITS" / "CLEAN2R2A1_FULL_REPORT.json", report)
+    (stage / "11_AUDITS" / "CLEAN2R2A1_FULL_REPORT.md").write_text(
+        "# CLEAN2R2A1 full report\n\n"
         f"Terminal status: `{TERMINAL_STATUS}`.\n\n"
         "Fresh BY2 clean input produced 18 sealed formal outputs. Trace was opened only after the output seal for same-source offline evaluation.\n\n"
         "No degradation definition was read, audited, constructed, or executed. No FGO, multi-state QM, QA fallback, or contact/FK factor was used.\n",
@@ -344,7 +490,7 @@ def _copy_payloads(stage: Path, staging: Path) -> None:
         target.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(path, target)
     run_out = staging / "06_FORMAL_RUNS"; run_out.mkdir()
     keep_run_names = {
-        "CLEAN2R2A_RUNTIME_CONFIG.yaml", "RUN_MANIFEST.json", "CLEAN2R2A_FORMAL_RUN_MANIFEST.json",
+        "CLEAN2R2A1_RUNTIME_CONFIG.yaml", "RUN_MANIFEST.json", "CLEAN2R2A1_FORMAL_RUN_MANIFEST.json",
         "PORT_GNSS_UPDATE_TRACE.csv", "SOURCE_AWARE_WEIGHT_TRACE.csv",
     }
     for method in METHOD_ORDER:
@@ -402,8 +548,8 @@ def finalize_evidence_zip(
     ):
         raise Clean2R2AEvidenceError("terminal PASS gate is not closed")
     final_root = stage / "12_FINAL_EVIDENCE" / "FINALIZED"
-    if final_root.exists() or list(export.glob("LegSA_GINS_CLEAN2R2A_FINAL_*.zip")):
-        raise Clean2R2AEvidenceError("terminal evidence or CLEAN2R2A ZIP already exists")
+    if final_root.exists() or list(export.glob("LegSA_GINS_CLEAN2R2A1_FINAL_*.zip")):
+        raise Clean2R2AEvidenceError("terminal evidence or CLEAN2R2A1 ZIP already exists")
     staging = stage / "12_FINAL_EVIDENCE" / f".staging_{uuid.uuid4().hex}"
     staging.mkdir()
     _copy_payloads(stage, staging)
@@ -421,10 +567,10 @@ def finalize_evidence_zip(
         path = staging / row["archive_path"]
         if path.stat().st_size != int(row["size_bytes"]) or sha256_file(path) != row["sha256"]:
             raise Clean2R2AEvidenceError("stage manifest payload closure failed")
-    zip_path = export / f"LegSA_GINS_CLEAN2R2A_FINAL_{timestamp}.zip"
+    zip_path = export / f"LegSA_GINS_CLEAN2R2A1_FINAL_{timestamp}.zip"
     zip_sha = zip_path.with_suffix(zip_path.suffix + ".sha256")
     if zip_path.exists() or zip_sha.exists():
-        raise Clean2R2AEvidenceError("exact CLEAN2R2A ZIP target already exists")
+        raise Clean2R2AEvidenceError("exact CLEAN2R2A1 ZIP target already exists")
     attempt_token = uuid.uuid4().hex
     temporary_zip = export / f".{zip_path.name}.{attempt_token}.tmp"
     temporary_sha = export / f".{zip_sha.name}.{attempt_token}.tmp"

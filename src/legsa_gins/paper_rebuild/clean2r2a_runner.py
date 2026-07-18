@@ -1,4 +1,4 @@
-"""CLEAN2R2A clean-only 18-run formal execution and output sealing."""
+"""CLEAN2R2A1 clean-only 18-run formal execution and output sealing."""
 
 from __future__ import annotations
 
@@ -20,11 +20,23 @@ from .evidence import BY2_TRACE_RELATIVE_PATH, parse_strace_openat_paths
 from .final_v23_clean_parity import active_runtime_config, load_clean_bundle
 from .manifest import git_code_state, sha256_file, write_json_atomic
 from .paths import is_within, legacy_reason, load_yaml_mapping
+from .raw_doppler_parity import (
+    AUDIT_ONLY_PROVENANCE_COLUMNS,
+    EXPECTED_ACTUAL_FULL_SHA256,
+    EXPECTED_SOLVER_SEMANTIC_SHA256,
+    HISTORICAL_NONCANONICAL_FULL_SHA256,
+    audit_raw_doppler_minimum_sufficient_parity,
+)
 from .subprocess_guard import run_process_group
 
 
-STAGE_ID = "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD"
-PROTOCOL_ID = "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION"
+STAGE_ID = "CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME"
+PROTOCOL_ID = "CLEAN2R2A1_BY2_CLEAN_MODULE_ABLATION_RESUME"
+SOLVER_PARENT_STAGE_ID = "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD"
+SOLVER_PARENT_PROTOCOL_ID = "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION"
+PROVIDER_STAGE_ID = SOLVER_PARENT_STAGE_ID
+PROVIDER_PROTOCOL_ID = SOLVER_PARENT_PROTOCOL_ID
+PROVIDER_CODE_FREEZE_COMMIT = "91793894a43c8ba83c25d8da698b7ee16e31b80e"
 CASE_ID = "CLEAN1_BY2_CLEAN_NORMAL"
 DATA_MODE = "real_clean"
 AB_IDS = tuple(f"AB{value:04b}" for value in range(16))
@@ -35,26 +47,28 @@ OUTPUT_ROLES = (
     "KF_GINS_STD.txt",
     "RUN_MANIFEST.json",
     "PORT_GNSS_UPDATE_TRACE.csv",
-    "CLEAN2R2A_FORMAL_RUN_MANIFEST.json",
-    "CLEAN2R2A_RUNTIME_CONFIG.yaml",
+    "CLEAN2R2A1_FORMAL_RUN_MANIFEST.json",
+    "CLEAN2R2A1_RUNTIME_CONFIG.yaml",
 )
-EXPECTED_PROVIDER_HASHES = {
+EXPECTED_BYTE_PROVIDER_HASHES = {
     "imu": "a46fe2b50a5a99d550392f42e3952c871a7562c6d5625ea1b377691009ab643b",
     "gnss": "f4070ba795825cc243402e4acb551c62c6aad109e7040582bf57781226420e22",
-    "raw_doppler": "a40b9933295f6c2c989884d67cc674313f2fe03113c8acdf1d02ddf28734d722",
     "go2_roll_pitch": "2329770b8e9bc61c02fbf943e2e5fd9ea233d6fd8a3550f7a22410a536155c7a",
     "go2_horizontal_velocity": "f390c8e51f1bec1162c0f6c628ebbcd0449923cfbf9211bebb36004dc2b2aab0",
 }
 FORMAL_SCHEMA_NAME = "clean2r2a_formal_manifest_schema.yaml"
 CANONICAL_PROVIDER_PROTOCOL_RELATIVE = Path("configs/paper_rebuild/clean1_by2_clean_protocol.yaml")
 CANONICAL_PROVIDER_PROTOCOL_SHA256 = "fc3cea6a84cbb535be7fba705cc5001981022538f85f9d8d8ddcb74a23c08afd"
+RAW_DOPPLER_PARITY_CONTRACT_RELATIVE = Path(
+    "configs/paper_rebuild/clean2r2a1_raw_doppler_semantic_parity.yaml"
+)
 TECHNICAL_FAILURE_CLASSES = {
     "process_crash_signal", "io_transient", "resource_exhaustion", "lost_pty",
 }
 
 
 class Clean2R2ARunError(RuntimeError):
-    """CLEAN2R2A formal execution failed closed."""
+    """CLEAN2R2A1 formal execution failed closed."""
 
 
 def validate_canonical_provider_protocol(repo_root: str | Path, candidate: str | Path) -> Path:
@@ -72,6 +86,65 @@ def validate_canonical_provider_protocol(repo_root: str | Path, candidate: str |
     return selected
 
 
+def validate_raw_doppler_parity_contract(repo_root: str | Path) -> dict[str, Any]:
+    """Bind the executing gate to the tracked minimum-sufficient contract."""
+
+    repo = Path(repo_root).resolve(strict=True)
+    contract_path = (repo / RAW_DOPPLER_PARITY_CONTRACT_RELATIVE).resolve(strict=True)
+    payload = load_yaml_mapping(contract_path)
+    raw = payload.get("raw_doppler")
+    runtime = payload.get("runtime_gates")
+    expected_historical = {
+        "value": HISTORICAL_NONCANONICAL_FULL_SHA256,
+        "role": "audit_only",
+        "gate": False,
+    }
+    if (
+        payload.get("stage_id") != STAGE_ID
+        or payload.get("protocol_id") != PROTOCOL_ID
+        or payload.get("parity_profile")
+        != "minimum_sufficient_solver_semantic_plus_actual_byte_audit"
+        or not isinstance(raw, Mapping)
+        or raw.get("row_count") != 1248
+        or raw.get("column_count") != 21
+        or raw.get("solver_semantic_column_count") != 18
+        or tuple(raw.get("audit_only_provenance_columns", ()))
+        != AUDIT_ONLY_PROVENANCE_COLUMNS
+        or raw.get("all_other_columns_required") is not True
+        or raw.get("solver_semantic_sha256") != EXPECTED_SOLVER_SEMANTIC_SHA256
+        or raw.get("current_actual_full_sha256") != EXPECTED_ACTUAL_FULL_SHA256
+        or raw.get("historical_noncanonical_full_sha256") != expected_historical
+        or raw.get("provider_rewrite_authorized") is not False
+        or raw.get("row_reorder_or_removal_authorized") is not False
+        or raw.get("rinex_header_canonicalization_required") is not False
+        or raw.get("second_fresh_attempt_required") is not False
+        or payload.get("other_provider_byte_sha256") != EXPECTED_BYTE_PROVIDER_HASHES
+        or not isinstance(runtime, Mapping)
+        or runtime.get("raw_hash_lock_verified_count") != 22
+        or runtime.get("trace_used_online") is not False
+        or runtime.get("old_provider_solver_input") is not False
+        or runtime.get("cpp_provenance_fields_numeric_update") is not False
+        or payload.get("terminal_status")
+        != "PASS_CLEAN2R2A1_MINIMUM_SUFFICIENT_PROVIDER_PARITY"
+    ):
+        raise Clean2R2ARunError("tracked Raw Doppler parity contract differs from the executing gate")
+    return payload
+
+
+def _require_frozen_file_hashes(
+    paths: Mapping[str, Path], expected: Mapping[str, str], *, label: str,
+) -> None:
+    """Fail closed if any executable/provider byte changes after activation."""
+
+    actual = {role: sha256_file(path.resolve(strict=True)) for role, path in paths.items()}
+    if actual != dict(expected):
+        changed = sorted(
+            role for role in set(actual) | set(expected)
+            if actual.get(role) != expected.get(role)
+        )
+        raise Clean2R2ARunError(f"{label} changed after freeze: {','.join(changed)}")
+
+
 def method_features(method_id: str) -> dict[str, bool]:
     """Return the six solver flags; AB bit order is RD, SA, RP, HV."""
 
@@ -85,7 +158,7 @@ def method_features(method_id: str) -> dict[str, bool]:
         bits = tuple(value == "1" for value in method_id[2:])
         return {"dual": True, "receiver": True, "raw": bits[0], "source_aware": bits[1],
                 "go2_roll_pitch": bits[2], "go2_horizontal": bits[3]}
-    raise Clean2R2ARunError(f"method outside frozen CLEAN2R2A set: {method_id}")
+    raise Clean2R2ARunError(f"method outside frozen CLEAN2R2A1 set: {method_id}")
 
 
 def run_directory(method_id: str) -> str:
@@ -106,7 +179,7 @@ def _replace_config(text: str, values: Mapping[str, str]) -> str:
     for key, value in values.items():
         if key not in seen:
             rows.append(f"{key}: {value}")
-    rows[0] = "# CLEAN2R2A clean-only common-contract config."
+    rows[0] = "# CLEAN2R2A1 wrapper; solver identity remains the frozen CLEAN2R2A parent."
     return "\n".join(rows) + "\n"
 
 
@@ -123,8 +196,8 @@ def build_runtime_config(
     clean = load_clean_bundle(clean_input_manifest)
     auxiliary = validate_auxiliary_bundle(
         auxiliary_manifest,
-        expected_stage_id=STAGE_ID,
-        expected_protocol_id=PROTOCOL_ID,
+        expected_stage_id=PROVIDER_STAGE_ID,
+        expected_protocol_id=PROVIDER_PROTOCOL_ID,
     )
     if auxiliary.get("provider_protocol_sha256") != CANONICAL_PROVIDER_PROTOCOL_SHA256:
         raise Clean2R2ARunError("base provider used a non-canonical provider protocol")
@@ -137,7 +210,8 @@ def build_runtime_config(
         "go2_roll_pitch": auxiliary["auxiliary_artifacts"]["go2_attitude_prior"]["path"],
         "go2_horizontal_velocity": auxiliary["auxiliary_artifacts"]["go2_horizontal_velocity_prior"]["path"],
     }
-    # 中文说明：先复用完整 LegSA common config，再只替换阶段身份与冻结的六个方法旗标。
+    # 中文说明：先复用完整 LegSA common config，再只替换冻结的
+    # 六个方法旗标。C++ 仍使用 parent A 身份；A1 身份记录在 formal wrapper。
     text = active_runtime_config(
         clean.imu_path,
         clean.gnss_path,
@@ -149,8 +223,8 @@ def build_runtime_config(
     )
     flags = method_features(method_id)
     replacements = {
-        "stage_id": STAGE_ID,
-        "protocol_id": PROTOCOL_ID,
+        "stage_id": SOLVER_PARENT_STAGE_ID,
+        "protocol_id": SOLVER_PARENT_PROTOCOL_ID,
         "case_id": CASE_ID,
         "data_mode": DATA_MODE,
         "run_id": run_directory(method_id),
@@ -169,66 +243,181 @@ def build_runtime_config(
 
 def audit_base_provider_parity(
     *, clean_input_manifest: str | Path, auxiliary_manifest: str | Path,
-    output_path: str | Path,
+    output_path: str | Path, repo_root: str | Path,
+    execution_code_freeze_commit: str,
 ) -> dict[str, Any]:
+    """Freeze the existing fresh parent provider under the A1 semantic gate."""
+
+    validate_raw_doppler_parity_contract(repo_root)
     output = Path(output_path).resolve(strict=False)
-    provider_root = output.parent.resolve(strict=True)
+    evidence_root = output.parent.resolve(strict=True)
     if (
-        provider_root.name != "04_BASE_PROVIDER"
-        or provider_root.parent.name != STAGE_ID
-        or provider_root.parent.parent.name != "stages"
-        or provider_root.is_symlink()
+        output.name != "CLEAN2R2A1_BASE_PROVIDER_PARITY.json"
+        or evidence_root.name != "04_BASE_PROVIDER"
+        or evidence_root.parent.name != STAGE_ID
+        or evidence_root.parent.parent.name != "stages"
+        or evidence_root.is_symlink()
     ):
-        raise Clean2R2ARunError("base provider evidence is outside the exact CLEAN2R2A stage root")
+        raise Clean2R2ARunError("base provider evidence is outside the exact CLEAN2R2A1 stage root")
+    if (
+        len(execution_code_freeze_commit) != 40
+        or any(ch not in "0123456789abcdef" for ch in execution_code_freeze_commit)
+    ):
+        raise Clean2R2ARunError("execution code-freeze commit is not a full lowercase SHA")
+    expected_provider_root = (
+        evidence_root.parent.parent / PROVIDER_STAGE_ID / "04_BASE_PROVIDER"
+    ).resolve(strict=True)
     clean_manifest_path = Path(clean_input_manifest).resolve(strict=True)
     auxiliary_manifest_path = Path(auxiliary_manifest).resolve(strict=True)
+    provider_root = clean_manifest_path.parent.parent.resolve(strict=True)
     if (
-        clean_manifest_path.parent.parent != provider_root
+        provider_root != expected_provider_root
         or auxiliary_manifest_path.parent.parent != provider_root
         or clean_manifest_path.parent.is_symlink()
         or auxiliary_manifest_path.parent.is_symlink()
+        or provider_root.is_symlink()
     ):
-        raise Clean2R2ARunError("provider attempts are not direct children of CLEAN2R2A 04_BASE_PROVIDER")
+        raise Clean2R2ARunError("provider is not the exact fresh CLEAN2R2A parent bundle")
+    if (
+        clean_manifest_path.parent.name != "FINAL_V23_CLEAN_CLEAN2R2A"
+        or auxiliary_manifest_path.parent.name != "FRESH_AUXILIARIES_CLEAN2R2A"
+    ):
+        raise Clean2R2ARunError("fresh parent provider attempt identity mismatch")
     clean = load_clean_bundle(clean_manifest_path)
     auxiliary = validate_auxiliary_bundle(
-        auxiliary_manifest_path, expected_stage_id=STAGE_ID, expected_protocol_id=PROTOCOL_ID,
+        auxiliary_manifest_path,
+        expected_stage_id=PROVIDER_STAGE_ID,
+        expected_protocol_id=PROVIDER_PROTOCOL_ID,
     )
     if auxiliary.get("provider_protocol_sha256") != CANONICAL_PROVIDER_PROTOCOL_SHA256:
         raise Clean2R2ARunError("provider parity used a non-canonical provider protocol")
     clean_payload = json.loads(clean_manifest_path.read_text(encoding="utf-8"))
     if clean_payload.get("generator_code_commit") != auxiliary.get("code_freeze_commit"):
         raise Clean2R2ARunError("base/auxiliary provider code-freeze identity differs")
+    if auxiliary.get("code_freeze_commit") != PROVIDER_CODE_FREEZE_COMMIT:
+        raise Clean2R2ARunError("provider was not generated under the frozen parent commit")
     if clean_payload.get("raw_source_hashes") != auxiliary.get("raw_source_hashes"):
         raise Clean2R2ARunError("base/auxiliary raw source hash set differs")
     if len(clean_payload.get("raw_source_hashes", {})) != 22:
         raise Clean2R2ARunError("provider does not bind the exact 22 raw hashes")
-    actual = {
+    raw_artifact = Path(
+        auxiliary["auxiliary_artifacts"]["raw_doppler_provider"]["path"]
+    ).resolve(strict=True)
+    expected_raw_artifact = (
+        provider_root / "FRESH_AUXILIARIES_CLEAN2R2A"
+        / "clean_final_v23_time_basis" / "RAW_DOPPLER_VELOCITY.csv"
+    ).resolve(strict=True)
+    if raw_artifact != expected_raw_artifact:
+        raise Clean2R2ARunError("active Raw Doppler provider path is not the frozen fresh artifact")
+    raw_parity = audit_raw_doppler_minimum_sufficient_parity(
+        provider_path=raw_artifact, repo_root=repo_root,
+    )
+    backend_report_path = auxiliary_manifest_path.parent / "RAW_DOPPLER_BACKEND_REPORT.json"
+    backend_report = json.loads(backend_report_path.read_text(encoding="utf-8"))
+    if auxiliary.get("raw_doppler_backend") != backend_report:
+        raise Clean2R2ARunError("auxiliary manifest does not embed the retained backend report")
+    if (
+        backend_report.get("raw_doppler_backend_lineage_proven") is not True
+        or backend_report.get("legacy_provider_used") is not False
+        or backend_report.get("nav_pvt_velocity_used_as_raw_doppler") is not False
+        or backend_report.get("gnss_velocity_used_as_raw_doppler") is not False
+        or backend_report.get("valid_epoch_count") != 1248
+    ):
+        raise Clean2R2ARunError("Raw Doppler backend lineage/status gate failed")
+    with raw_artifact.open("r", encoding="utf-8", newline="") as handle:
+        raw_rows = list(csv.DictReader(handle))
+    provenance_values = {
+        column: sorted({row[column] for row in raw_rows})
+        for column in AUDIT_ONLY_PROVENANCE_COLUMNS
+    }
+    expected_provenance = {
+        "obs_source_hash": backend_report["obs_source_hash"],
+        "nav_source_hash": backend_report["nav_source_hash"],
+        "conversion_config_hash": backend_report["conversion_config_hash"],
+    }
+    if any(provenance_values[column] != [value] for column, value in expected_provenance.items()):
+        raise Clean2R2ARunError("provider provenance columns do not bind the backend report")
+    actual_byte_hashes = {
         "imu": sha256_file(clean.imu_path), "gnss": sha256_file(clean.gnss_path),
-        "raw_doppler": sha256_file(auxiliary["auxiliary_artifacts"]["raw_doppler_provider"]["path"]),
+        "raw_doppler": sha256_file(raw_artifact),
         "go2_roll_pitch": sha256_file(auxiliary["auxiliary_artifacts"]["go2_attitude_prior"]["path"]),
         "go2_horizontal_velocity": sha256_file(auxiliary["auxiliary_artifacts"]["go2_horizontal_velocity_prior"]["path"]),
     }
+    other_byte_parity = {
+        role: actual_byte_hashes[role] == digest
+        for role, digest in EXPECTED_BYTE_PROVIDER_HASHES.items()
+    }
+    static_path = evidence_root / "CLEAN2R2A1_RAW_DOPPLER_PROVENANCE_STATIC_AUDIT.json"
+    write_json_atomic(static_path, raw_parity["cpp_provenance_static_audit"])
+    activation = {
+        "schema_version": "paper_rebuild.clean2r2a1_active_provider_freeze.v1",
+        "stage_id": STAGE_ID,
+        "protocol_id": PROTOCOL_ID,
+        "provider_stage_id": PROVIDER_STAGE_ID,
+        "provider_protocol_id": PROVIDER_PROTOCOL_ID,
+        "provider_freeze_commit": PROVIDER_CODE_FREEZE_COMMIT,
+        "execution_code_freeze_commit": execution_code_freeze_commit,
+        "provider_generated_under_parent_freeze": True,
+        "provider_payload_modified_after_generation": False,
+        "provider_payload_copied_into_a1": False,
+        "active_provider_root": str(provider_root),
+        "actual_provider_hashes": actual_byte_hashes,
+        "raw_doppler_solver_semantic_sha256": EXPECTED_SOLVER_SEMANTIC_SHA256,
+        "trace_open_count": 0,
+        "old_provider_solver_input": False,
+        "terminal_status": "PASS_CLEAN2R2A1_MINIMUM_SUFFICIENT_PROVIDER_PARITY",
+        "passed": all(other_byte_parity.values()) and raw_parity["passed"],
+    }
+    activation_path = evidence_root / "CLEAN2R2A1_ACTIVE_PROVIDER_FREEZE.json"
+    write_json_atomic(activation_path, activation)
     report = {
-        "schema_version": "paper_rebuild.clean2r2a_base_provider_parity.v1",
-        "stage_id": STAGE_ID, "expected_hashes": EXPECTED_PROVIDER_HASHES,
-        "actual_hashes": actual, "source_quality_metadata": auxiliary["source_quality_metadata"],
+        "schema_version": "paper_rebuild.clean2r2a1_base_provider_parity.v1",
+        "stage_id": STAGE_ID, "protocol_id": PROTOCOL_ID,
+        "provider_stage_id": PROVIDER_STAGE_ID,
+        "provider_protocol_id": PROVIDER_PROTOCOL_ID,
+        "provider_freeze_commit": PROVIDER_CODE_FREEZE_COMMIT,
+        "execution_code_freeze_commit": execution_code_freeze_commit,
+        "expected_byte_hashes": EXPECTED_BYTE_PROVIDER_HASHES,
+        "actual_hashes": actual_byte_hashes,
+        "other_provider_byte_parity": other_byte_parity,
+        "raw_doppler_parity": raw_parity,
+        "raw_doppler_backend_report_path": str(backend_report_path),
+        "raw_doppler_backend_report_sha256": sha256_file(backend_report_path),
+        "raw_doppler_provenance_values": provenance_values,
+        "provenance_static_audit_path": str(static_path),
+        "provenance_static_audit_sha256": sha256_file(static_path),
+        "active_provider_freeze_path": str(activation_path),
+        "active_provider_freeze_sha256": sha256_file(activation_path),
+        "source_quality_metadata": auxiliary["source_quality_metadata"],
         "provider_root": str(provider_root), "provider_root_exact": True,
+        "evidence_root": str(evidence_root), "evidence_root_exact": True,
         "clean_input_manifest_path": str(clean_manifest_path),
         "auxiliary_manifest_path": str(auxiliary_manifest_path),
         "clean_input_manifest_sha256": sha256_file(clean_manifest_path),
         "auxiliary_manifest_sha256": sha256_file(auxiliary_manifest_path),
         "raw_source_hashes": clean_payload["raw_source_hashes"],
-        "code_freeze_commit": auxiliary["code_freeze_commit"],
+        "provider_generated_under_parent_freeze": True,
+        "provider_payload_modified_after_generation": False,
         "base_generation_config_sha256": clean_payload["generation_config_sha256"],
         "auxiliary_bundle_hash": auxiliary["bundle_hash"],
         "provider_protocol_sha256": auxiliary["provider_protocol_sha256"],
         "provider_protocol_relative_path": CANONICAL_PROVIDER_PROTOCOL_RELATIVE.as_posix(),
         "fresh_current_raw": True, "old_provider_reused": False,
-        "trace_open_count": 0, "passed": actual == EXPECTED_PROVIDER_HASHES,
+        "old_provider_solver_input": False,
+        "raw_verified_count": 22,
+        "trace_open_count": 0,
+        "historical_noncanonical_full_sha256": {
+            "value": HISTORICAL_NONCANONICAL_FULL_SHA256,
+            "role": "audit_only",
+            "gate": False,
+        },
+        "terminal_status": "PASS_CLEAN2R2A1_MINIMUM_SUFFICIENT_PROVIDER_PARITY",
+        "passed": all(other_byte_parity.values()) and raw_parity["passed"]
+        and activation["passed"],
     }
     write_json_atomic(output_path, report)
     if not report["passed"]:
-        raise Clean2R2ARunError("BLOCKED_CLEAN2R2A_BASE_PROVIDER_PARITY_FAILED")
+        raise Clean2R2ARunError("BLOCKED_CLEAN2R2A1_BASE_PROVIDER_PARITY_FAILED")
     return report
 
 
@@ -300,8 +489,8 @@ def validate_solver_manifest(
 
     flags = method_features(method_id)
     expected = {
-        "stage_id": STAGE_ID,
-        "protocol_id": PROTOCOL_ID,
+        "stage_id": SOLVER_PARENT_STAGE_ID,
+        "protocol_id": SOLVER_PARENT_PROTOCOL_ID,
         "case_id": CASE_ID,
         "data_mode": DATA_MODE,
         "run_id": run_id,
@@ -387,7 +576,7 @@ def _audit_solver_file_opens(
     trace_count = sum(path == trace for path in opened)
     missing = sorted(role for role, count in counts.items() if count == 0)
     report = {
-        "schema_version": "paper_rebuild.clean2r2a_solver_read_ledger.v1",
+        "schema_version": "paper_rebuild.clean2r2a1_solver_read_ledger.v1",
         "actual_solver_input_paths": {role: str(path) for role, path in expected.items()},
         "actual_solver_input_roles": dict(actual_inputs["roles"]),
         "actual_solver_input_open_counts": counts,
@@ -528,17 +717,18 @@ def run_methods(
         or root.parent.parent.name != "stages"
         or root.is_symlink()
     ):
-        raise Clean2R2ARunError("formal runtime root is not the exact CLEAN2R2A stage root")
+        raise Clean2R2ARunError("formal runtime root is not the exact CLEAN2R2A1 stage root")
     stage_root = root.parent
-    expected_provider_root = stage_root / "04_BASE_PROVIDER"
-    expected_parity_path = expected_provider_root / "CLEAN2R2A_BASE_PROVIDER_PARITY.json"
+    evidence_provider_root = stage_root / "04_BASE_PROVIDER"
+    expected_provider_root = stage_root.parent / PROVIDER_STAGE_ID / "04_BASE_PROVIDER"
+    expected_parity_path = evidence_provider_root / "CLEAN2R2A1_BASE_PROVIDER_PARITY.json"
     if parity_path != expected_parity_path.resolve(strict=True):
         raise Clean2R2ARunError("formal provider parity report path is not exact")
     clean_bundle = load_clean_bundle(clean_manifest_path)
     auxiliary_bundle = validate_auxiliary_bundle(
         auxiliary_manifest_path,
-        expected_stage_id=STAGE_ID,
-        expected_protocol_id=PROTOCOL_ID,
+        expected_stage_id=PROVIDER_STAGE_ID,
+        expected_protocol_id=PROVIDER_PROTOCOL_ID,
     )
     clean_payload = json.loads(clean_manifest_path.read_text(encoding="utf-8"))
     if auxiliary_bundle.get("provider_protocol_sha256") != sha256_file(provider_protocol_path):
@@ -566,15 +756,34 @@ def run_methods(
     parity = json.loads(parity_path.read_text(encoding="utf-8"))
     if (
         parity.get("stage_id") != STAGE_ID
+        or parity.get("protocol_id") != PROTOCOL_ID
+        or parity.get("provider_stage_id") != PROVIDER_STAGE_ID
+        or parity.get("provider_protocol_id") != PROVIDER_PROTOCOL_ID
+        or parity.get("provider_freeze_commit") != PROVIDER_CODE_FREEZE_COMMIT
+        or parity.get("execution_code_freeze_commit") != code_freeze_commit
         or parity.get("passed") is not True
         or parity.get("provider_root_exact") is not True
+        or parity.get("evidence_root_exact") is not True
         or Path(str(parity.get("provider_root", ""))).resolve(strict=True) != provider_root
-        or parity.get("actual_hashes") != EXPECTED_PROVIDER_HASHES
+        or Path(str(parity.get("evidence_root", ""))).resolve(strict=True) != evidence_provider_root.resolve(strict=True)
+        or parity.get("actual_hashes") != {
+            "imu": provider_hashes["imu"],
+            "gnss": provider_hashes["gnss"],
+            "raw_doppler": provider_hashes["raw_doppler"],
+            "go2_roll_pitch": provider_hashes["go2_roll_pitch"],
+            "go2_horizontal_velocity": provider_hashes["go2_horizontal_velocity"],
+        }
+        or parity.get("raw_doppler_parity", {}).get("raw_doppler_solver_semantic_sha256")
+        != EXPECTED_SOLVER_SEMANTIC_SHA256
+        or parity.get("raw_doppler_parity", {}).get("raw_doppler_actual_full_sha256")
+        != EXPECTED_ACTUAL_FULL_SHA256
         or parity.get("clean_input_manifest_sha256") != provider_hashes["clean_input_manifest"]
         or parity.get("auxiliary_manifest_sha256") != provider_hashes["auxiliary_manifest"]
         or parity.get("source_quality_metadata", {}).get("sha256") != provider_hashes["source_quality_metadata"]
         or parity.get("raw_source_hashes") != raw_source_hashes
-        or parity.get("code_freeze_commit") != code_freeze_commit
+        or parity.get("provider_payload_modified_after_generation") is not False
+        or parity.get("old_provider_solver_input") is not False
+        or parity.get("trace_open_count") != 0
     ):
         raise Clean2R2ARunError("formal provider bundle does not close against the PASS parity report")
     local_paths = load_yaml_mapping(local_config_path).get("paths")
@@ -599,10 +808,22 @@ def run_methods(
         "go2_horizontal_velocity_weak_prior": Path(auxiliary_bundle["auxiliary_artifacts"]["go2_horizontal_velocity_prior"]["path"]),
         "go2_source_quality_metadata": Path(auxiliary_bundle["source_quality_metadata"]["path"]),
     }
+    frozen_input_hashes = {
+        "propagation_imu": provider_hashes["imu"],
+        "gnss_position_receiver_velocity_dual_yaw": provider_hashes["gnss"],
+        "raw_doppler_velocity": provider_hashes["raw_doppler"],
+        "go2_roll_pitch_weak_prior": provider_hashes["go2_roll_pitch"],
+        "go2_horizontal_velocity_weak_prior": provider_hashes["go2_horizontal_velocity"],
+        "go2_source_quality_metadata": provider_hashes["source_quality_metadata"],
+    }
+    frozen_executable_hash = sha256_file(binary)
+    _require_frozen_file_hashes(
+        expected_input_paths, frozen_input_hashes, label="active provider payload",
+    )
     commit, dirty = git_code_state(repo)
     if dirty or commit != code_freeze_commit:
         raise Clean2R2ARunError("formal run requires exact clean code freeze")
-    attempts_path = root.parent / "05_RUN_REGISTRY" / "CLEAN2R2A_RUN_ATTEMPTS.csv"
+    attempts_path = root.parent / "05_RUN_REGISTRY" / "CLEAN2R2A1_RUN_ATTEMPTS.csv"
     attempts_path.parent.mkdir(parents=True, exist_ok=True)
     failed_root = root / ".failed_attempts"
     records: list[dict[str, Any]] = []
@@ -615,13 +836,21 @@ def run_methods(
         completed = None
         completed_returncode: int | None = None
         runtime_seconds = 0.0
-        config = output / "CLEAN2R2A_RUNTIME_CONFIG.yaml"
+        config = output / "CLEAN2R2A1_RUNTIME_CONFIG.yaml"
         strace_path = output / "logs" / "SOLVER_FILE_OPEN_TRACE.raw"
         for attempt_number in (1, 2):
+            _require_frozen_file_hashes(
+                {"executable": binary}, {"executable": frozen_executable_hash},
+                label="formal executable",
+            )
+            _require_frozen_file_hashes(
+                expected_input_paths, frozen_input_hashes,
+                label="active provider payload",
+            )
             output.mkdir(parents=True)
             logs = output / "logs"
             logs.mkdir()
-            config = output / "CLEAN2R2A_RUNTIME_CONFIG.yaml"
+            config = output / "CLEAN2R2A1_RUNTIME_CONFIG.yaml"
             config.write_text(build_runtime_config(
                 method_id=method_id,
                 clean_input_manifest=clean_manifest_path,
@@ -648,8 +877,8 @@ def run_methods(
                     command,
                     cwd=repo,
                     timeout_seconds=timeout_seconds,
-                    timeout_message="CLEAN2R2A solver timeout; process group terminated",
-                    launch_failure_message="CLEAN2R2A solver launch failure",
+                    timeout_message="CLEAN2R2A1 solver timeout; process group terminated",
+                    launch_failure_message="CLEAN2R2A1 solver launch failure",
                 )
                 completed_returncode = completed.returncode
                 stdout = completed.stdout
@@ -662,6 +891,14 @@ def run_methods(
             runtime_seconds = time.monotonic() - started
             (logs / "stdout.txt").write_text(stdout, encoding="utf-8")
             (logs / "stderr.txt").write_text(stderr, encoding="utf-8")
+            _require_frozen_file_hashes(
+                {"executable": binary}, {"executable": frozen_executable_hash},
+                label="formal executable",
+            )
+            _require_frozen_file_hashes(
+                expected_input_paths, frozen_input_hashes,
+                label="active provider payload",
+            )
             failure_class = classify_failure(completed_returncode, stdout, stderr)
             technical_failure = failure_class in TECHNICAL_FAILURE_CLASSES
             terminal_success = completed_returncode == 0
@@ -675,7 +912,7 @@ def run_methods(
                 "terminal_success": terminal_success,
                 "metric_driven_rerun": False,
                 "runtime_config_hash": config_hash,
-                "executable_hash": sha256_file(binary),
+                "executable_hash": frozen_executable_hash,
                 "runtime_seconds": runtime_seconds,
             }
             exists = attempts_path.is_file()
@@ -694,7 +931,7 @@ def run_methods(
             if not technical_failure or attempt_number == 2:
                 break
         if completed_returncode != 0:
-            raise Clean2R2ARunError(f"BLOCKED_CLEAN2R2A_FORMAL_EXECUTION_FAILED: {method_id}")
+            raise Clean2R2ARunError(f"BLOCKED_CLEAN2R2A1_FORMAL_EXECUTION_FAILED: {method_id}")
         required = [output / name for name in OUTPUT_ROLES[:4]]
         if not all(path.is_file() for path in required):
             raise Clean2R2ARunError(f"formal output set incomplete: {method_id}")
@@ -710,8 +947,8 @@ def run_methods(
             strace_path=strace_path, cwd=repo, raw_root=raw,
             provider_root=provider_root, runtime_root=root, actual_inputs=actual_inputs,
         )
-        read_ledger_path = write_json_atomic(output / "CLEAN2R2A_SOLVER_READ_LEDGER.json", read_ledger)
-        with (output / "CLEAN2R2A_SOLVER_READ_LEDGER.csv").open("x", encoding="utf-8", newline="") as handle:
+        read_ledger_path = write_json_atomic(output / "CLEAN2R2A1_SOLVER_READ_LEDGER.json", read_ledger)
+        with (output / "CLEAN2R2A1_SOLVER_READ_LEDGER.csv").open("x", encoding="utf-8", newline="") as handle:
             writer = csv.DictWriter(handle, fieldnames=("role", "path", "semantic_role", "open_count", "sha256"))
             writer.writeheader()
             for role, path in actual_inputs["paths"].items():
@@ -725,12 +962,18 @@ def run_methods(
             for path in sorted(item for item in output.rglob("*") if item.is_file())
         }
         wrapper = {
-            "schema_version": "paper_rebuild.clean2r2a_formal_run.v1",
+            "schema_version": "paper_rebuild.clean2r2a1_formal_run.v1",
             "stage_id": STAGE_ID, "protocol_id": PROTOCOL_ID, "case_id": CASE_ID,
+            "solver_parent_stage_id": SOLVER_PARENT_STAGE_ID,
+            "solver_parent_protocol_id": SOLVER_PARENT_PROTOCOL_ID,
+            "provider_stage_id": PROVIDER_STAGE_ID,
+            "provider_protocol_id": PROVIDER_PROTOCOL_ID,
+            "provider_code_freeze_commit": PROVIDER_CODE_FREEZE_COMMIT,
+            "execution_code_freeze_commit": code_freeze_commit,
             "data_mode": DATA_MODE, "run_id": run_directory(method_id),
             "algorithm_id": method_id, "method_features": method_features(method_id),
             "code_commit": code_freeze_commit, "code_worktree_dirty_at_run": False,
-            "executable_hash": sha256_file(binary), "runtime_config_hash": sha256_file(config),
+            "executable_hash": frozen_executable_hash, "runtime_config_hash": sha256_file(config),
             "local_config_hash": sha256_file(local_config_path),
             "provider_protocol_hash": sha256_file(provider_protocol_path),
             "formal_schema_hash": sha256_file(schema_path),
@@ -738,6 +981,12 @@ def run_methods(
             "provider_hashes": provider_hashes,
             "raw_source_hashes": dict(raw_source_hashes),
             "provider_generation": {
+                "provider_stage_id": PROVIDER_STAGE_ID,
+                "provider_protocol_id": PROVIDER_PROTOCOL_ID,
+                "provider_freeze_commit": PROVIDER_CODE_FREEZE_COMMIT,
+                "execution_code_freeze_commit": code_freeze_commit,
+                "provider_generated_under_parent_freeze": True,
+                "provider_payload_modified_after_generation": False,
                 "base_generator_code_commit": clean_payload["generator_code_commit"],
                 "base_generation_config_sha256": clean_payload["generation_config_sha256"],
                 "base_contract_sha256": clean_payload["contract_sha256"],
@@ -769,7 +1018,7 @@ def run_methods(
             "metric_driven_rerun": False, "terminal_status": "PASS",
         }
         validate_formal_wrapper(wrapper, schema_path)
-        wrapper_path = write_json_atomic(output / "CLEAN2R2A_FORMAL_RUN_MANIFEST.json", wrapper)
+        wrapper_path = write_json_atomic(output / "CLEAN2R2A1_FORMAL_RUN_MANIFEST.json", wrapper)
         records.append({
             "method_id": method_id, "run_id": run_directory(method_id),
             "runtime_config_hash": sha256_file(config), "formal_manifest_hash": sha256_file(wrapper_path),
@@ -778,6 +1027,13 @@ def run_methods(
     commit_after, dirty_after = git_code_state(repo)
     if dirty_after or commit_after != code_freeze_commit:
         raise Clean2R2ARunError("code state changed during formal execution")
+    _require_frozen_file_hashes(
+        {"executable": binary}, {"executable": frozen_executable_hash},
+        label="formal executable",
+    )
+    _require_frozen_file_hashes(
+        expected_input_paths, frozen_input_hashes, label="active provider payload",
+    )
     return records
 
 
@@ -808,13 +1064,13 @@ def structural_parity_gate(*, runtime_root: str | Path, clean1_runtime_root: str
                      "nav_bit_identical": nav_equal, "std_bit_identical": std_equal,
                      "counters_exact": counters_equal, "passed": nav_equal and std_equal and counters_equal})
     report = {
-        "schema_version": "paper_rebuild.clean2r2a_structural_gate.v1",
+        "schema_version": "paper_rebuild.clean2r2a1_structural_gate.v1",
         "trace_opened": False, "performance_metrics_read": False,
         "rows": rows, "passed": all(row["passed"] for row in rows),
     }
-    write_json_atomic(current.parent / "11_AUDITS" / "CLEAN2R2A_C00_STRUCTURAL_GATE.json", report)
+    write_json_atomic(current.parent / "11_AUDITS" / "CLEAN2R2A1_C00_STRUCTURAL_GATE.json", report)
     if not report["passed"]:
-        raise Clean2R2ARunError("BLOCKED_CLEAN2R2A_C00_STRUCTURAL_GATE_FAILED")
+        raise Clean2R2ARunError("BLOCKED_CLEAN2R2A1_C00_STRUCTURAL_GATE_FAILED")
     return report
 
 
@@ -829,16 +1085,20 @@ def seal_outputs(runtime_root: str | Path) -> dict[str, Any]:
         raise Clean2R2ARunError("offline evaluation opened before the formal output seal")
     schema_path = root.parent / "02_PROTOCOLS" / FORMAL_SCHEMA_NAME
     rows: list[dict[str, Any]] = []
+    executable_hashes: set[str] = set()
     for method in METHOD_ORDER:
         run_root = root / run_directory(method)
-        wrapper = json.loads((run_root / "CLEAN2R2A_FORMAL_RUN_MANIFEST.json").read_text(encoding="utf-8"))
+        wrapper = json.loads((run_root / "CLEAN2R2A1_FORMAL_RUN_MANIFEST.json").read_text(encoding="utf-8"))
         validate_formal_wrapper(wrapper, schema_path)
+        executable_hashes.add(str(wrapper.get("executable_hash", "")))
         if wrapper.get("terminal_status") != "PASS" or wrapper.get("trace_open_count") != 0:
             raise Clean2R2ARunError("formal wrapper is not terminal PASS/no-trace")
         for path in sorted(item for item in run_root.rglob("*") if item.is_file()):
             rows.append({"algorithm_id": method, "relative_path": path.relative_to(root).as_posix(),
                          "size_bytes": path.stat().st_size, "sha256": sha256_file(path),
                          "sealed_before_trace": True})
+    if len(executable_hashes) != 1 or len(next(iter(executable_hashes), "")) != 64:
+        raise Clean2R2ARunError("formal outputs do not share one frozen executable hash")
     seal_root = root.parent / "07_OUTPUT_SEAL"
     seal_root.mkdir(parents=True, exist_ok=True)
     manifest = seal_root / "OUTPUT_HASH_MANIFEST.csv"
@@ -846,10 +1106,11 @@ def seal_outputs(runtime_root: str | Path) -> dict[str, Any]:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0])); writer.writeheader(); writer.writerows(rows)
     counts = {method: sum(row["algorithm_id"] == method for row in rows) for method in METHOD_ORDER}
     journal = {
-        "schema_version": "paper_rebuild.clean2r2a_output_seal.v1",
+        "schema_version": "paper_rebuild.clean2r2a1_output_seal.v1",
         "unique_formal_runs": 18, "sealed_file_count": len(rows),
         "method_ids": list(METHOD_ORDER), "sealed_file_count_by_method": counts,
         "all_terminal_pass": True, "trace_open_count_before_seal": 0,
+        "common_executable_sha256": next(iter(executable_hashes)),
         "all_outputs_sealed_before_trace": True,
         "output_hash_manifest_sha256": sha256_file(manifest),
         "output_hash_manifest_size_bytes": manifest.stat().st_size,
@@ -870,6 +1131,7 @@ def validate_output_seal(stage_root: str | Path) -> list[dict[str, str]]:
         or journal.get("trace_open_count_before_seal") != 0
         or journal.get("unique_formal_runs") != 18
         or journal.get("method_ids") != list(METHOD_ORDER)
+        or len(str(journal.get("common_executable_sha256", ""))) != 64
         or journal.get("output_hash_manifest_sha256") != sha256_file(manifest)
         or journal.get("output_hash_manifest_size_bytes") != manifest.stat().st_size
     ):

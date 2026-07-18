@@ -14,7 +14,7 @@ from legsa_gins.paper_rebuild.manifest import sha256_file
 
 
 def _sealed_stage(tmp_path: Path) -> tuple[Path, Path, Path]:
-    stage = tmp_path / "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD"
+    stage = tmp_path / "CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME"
     runtime = stage / "06_FORMAL_RUNS"
     seal = stage / "07_OUTPUT_SEAL"
     seal.mkdir(parents=True)
@@ -39,9 +39,10 @@ def _sealed_stage(tmp_path: Path) -> tuple[Path, Path, Path]:
         writer.writeheader(); writer.writerows(rows)
     journal_path = seal / "OUTPUT_SEAL_JOURNAL.json"
     journal = {
-        "schema_version": "paper_rebuild.clean2r2a_output_seal.v1",
+        "schema_version": "paper_rebuild.clean2r2a1_output_seal.v1",
         "unique_formal_runs": 18, "sealed_file_count": 18,
         "method_ids": list(METHOD_ORDER), "sealed_file_count_by_method": counts,
+        "common_executable_sha256": "a" * 64,
         "trace_open_count_before_seal": 0, "all_outputs_sealed_before_trace": True,
         "output_hash_manifest_sha256": sha256_file(manifest),
         "output_hash_manifest_size_bytes": manifest.stat().st_size,

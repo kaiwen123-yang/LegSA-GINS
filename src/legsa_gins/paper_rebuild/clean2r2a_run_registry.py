@@ -1,4 +1,4 @@
-"""构建 CLEAN2R2A 的 18 行 clean-only 正式配置注册表。"""
+"""构建 CLEAN2R2A1 的 18 行 clean-only 正式配置注册表。"""
 
 from __future__ import annotations
 
@@ -183,10 +183,20 @@ def _walk_keys(value: Any) -> tuple[str, ...]:
 
 def validate_execution_protocol(path: str | Path) -> dict[str, Any]:
     payload = load_yaml_mapping(path)
-    if payload.get("schema_version") != "paper_rebuild.clean2r2a_execution.v1":
+    if payload.get("schema_version") != "paper_rebuild.clean2r2a1_execution.v1":
         raise Clean2R2ARegistryError("execution protocol schema mismatch")
     if payload.get("stage_id") != STAGE_ID or payload.get("case_id") != CASE_ID:
         raise Clean2R2ARegistryError("execution protocol identity mismatch")
+    if payload.get("protocol_id") != "CLEAN2R2A1_BY2_CLEAN_MODULE_ABLATION_RESUME":
+        raise Clean2R2ARegistryError("execution protocol id mismatch")
+    if (
+        payload.get("solver_parent_stage_id") != "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD"
+        or payload.get("solver_parent_protocol_id") != "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION"
+        or payload.get("provider_stage_id") != "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD"
+        or payload.get("provider_protocol_id") != "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION"
+        or payload.get("provider_freeze_commit") != "91793894a43c8ba83c25d8da698b7ee16e31b80e"
+    ):
+        raise Clean2R2ARegistryError("solver/provider parent identity mismatch")
     if payload.get("data_mode") != DATA_MODE:
         raise Clean2R2ARegistryError("execution protocol is not clean BY2 raw")
     if payload.get("formal_configuration_count") != 18:

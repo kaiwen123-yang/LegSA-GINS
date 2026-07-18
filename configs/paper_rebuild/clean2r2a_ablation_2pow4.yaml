@@ -1,5 +1,5 @@
-schema_version: paper_rebuild.clean2r2a_ablation.v1
-stage_id: CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD
+schema_version: paper_rebuild.clean2r2a1_ablation.v1
+stage_id: CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME
 case_id: CLEAN1_BY2_CLEAN_NORMAL
 data_mode: real_clean
 backbone_method_id: strong_dual_yaw_EKF

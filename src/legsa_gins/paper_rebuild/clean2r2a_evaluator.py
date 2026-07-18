@@ -1,4 +1,4 @@
-"""Exact same-source offline evaluation for the sealed CLEAN2R2A outputs."""
+"""Exact same-source offline evaluation for the sealed CLEAN2R2A1 outputs."""
 
 from __future__ import annotations
 
@@ -313,7 +313,7 @@ def _audit_evaluator_file_opens(
         for order, (alias, relative, role, path) in enumerate(specs, start=1)
     ]
     audit = {
-        "schema_version": "paper_rebuild.clean2r2a_evaluator_file_open_audit.v2",
+        "schema_version": "paper_rebuild.clean2r2a1_evaluator_file_open_audit.v2",
         "configuration_id": configuration_id,
         "seal_validation_completed_ns": seal_validation_completed_ns,
         "evaluator_started_ns": evaluator_started_ns,
@@ -362,7 +362,7 @@ def _expected_manifest(
         for method_id in METHOD_ORDER
     }
     return {
-        "schema_version": "paper_rebuild.clean2r2a_offline_evaluation.v2",
+        "schema_version": "paper_rebuild.clean2r2a1_offline_evaluation.v2",
         "exact_evaluator_sha256": EXACT_EVALUATOR_SHA256,
         "trace_relative_path": BY2_TRACE_RELATIVE_PATH,
         "trace_sha256": FROZEN_TRACE_SHA256,
@@ -375,10 +375,10 @@ def _expected_manifest(
         "evaluated_unique_outputs": len(METHOD_ORDER),
         "method_order": list(METHOD_ORDER),
         "local_config_sha256": sha256_file(inputs["local_config"]),
-        "factorial_results_sha256": sha256_file(destination / "CLEAN2R2A_FACTORIAL_RESULTS.csv"),
-        "match_coverage_sha256": sha256_file(destination / "CLEAN2R2A_MATCH_COVERAGE.csv"),
+        "factorial_results_sha256": sha256_file(destination / "CLEAN2R2A1_FACTORIAL_RESULTS.csv"),
+        "match_coverage_sha256": sha256_file(destination / "CLEAN2R2A1_MATCH_COVERAGE.csv"),
         "aggregate_crosscheck_sha256": sha256_file(
-            destination / "CLEAN2R2A_AGGREGATE_CROSSCHECK.json"
+            destination / "CLEAN2R2A1_AGGREGATE_CROSSCHECK.json"
         ),
         "evaluator_read_ledger_sha256": sha256_file(destination / "EVALUATOR_READ_LEDGER.csv"),
         "per_run_summary_sha256": per_run_summary_hashes,
@@ -392,7 +392,7 @@ def _expected_manifest(
         "alignment": False,
         "output_correction": False,
         "epoch_deletion": False,
-        "terminal_status": "PASS_CLEAN2R2A_OFFLINE_EVALUATION",
+        "terminal_status": "PASS_CLEAN2R2A1_OFFLINE_EVALUATION",
     }
 
 
@@ -461,20 +461,20 @@ def revalidate_offline_evaluation(
         expected_ledger_rows.extend(ledger_rows)
         audit_hashes[method_id] = sha256_file(audit_path)
 
-    result_fields, persisted_results = _read_csv(destination / "CLEAN2R2A_FACTORIAL_RESULTS.csv")
+    result_fields, persisted_results = _read_csv(destination / "CLEAN2R2A1_FACTORIAL_RESULTS.csv")
     if result_fields != list(RESULT_FIELDS) or persisted_results != _string_rows(summary_rows):
         raise Clean2R2AEvaluationError("factorial result table differs from the 18 exact summaries")
     coverage_rows = [{key: row[key] for key in COVERAGE_FIELDS} for row in summary_rows]
-    coverage_fields, persisted_coverage = _read_csv(destination / "CLEAN2R2A_MATCH_COVERAGE.csv")
+    coverage_fields, persisted_coverage = _read_csv(destination / "CLEAN2R2A1_MATCH_COVERAGE.csv")
     if coverage_fields != list(COVERAGE_FIELDS) or persisted_coverage != _string_rows(coverage_rows):
         raise Clean2R2AEvaluationError("coverage table differs from the 18 exact summaries")
     ledger_fields, persisted_ledger = _read_csv(destination / "EVALUATOR_READ_LEDGER.csv")
     if ledger_fields != list(LEDGER_FIELDS) or persisted_ledger != _string_rows(expected_ledger_rows):
         raise Clean2R2AEvaluationError("evaluator read ledger differs from parsed strace evidence")
 
-    persisted_crosscheck = _read_json(destination / "CLEAN2R2A_AGGREGATE_CROSSCHECK.json")
+    persisted_crosscheck = _read_json(destination / "CLEAN2R2A1_AGGREGATE_CROSSCHECK.json")
     expected_crosscheck = {
-        "schema_version": "paper_rebuild.clean2r2a_aggregate_crosscheck.v2",
+        "schema_version": "paper_rebuild.clean2r2a1_aggregate_crosscheck.v2",
         "method_crosschecks": recomputed_crosschecks,
         "method_order": list(METHOD_ORDER),
         "method_count": len(METHOD_ORDER),
@@ -505,7 +505,7 @@ def revalidate_offline_evaluation(
         raise Clean2R2AEvaluationError("output seal changed during terminal evaluation revalidation")
 
     report = {
-        "schema_version": "paper_rebuild.clean2r2a_offline_evaluation_revalidation.v1",
+        "schema_version": "paper_rebuild.clean2r2a1_offline_evaluation_revalidation.v1",
         "method_count": len(METHOD_ORDER),
         "summary_error_series_crosschecks": len(METHOD_ORDER),
         "file_open_audits_reparsed": len(METHOD_ORDER),
@@ -515,10 +515,10 @@ def revalidate_offline_evaluation(
         "trace_sha256": FROZEN_TRACE_SHA256,
         "base_time": FROZEN_BASE_TIME,
         "passed": True,
-        "terminal_status": "PASS_CLEAN2R2A_OFFLINE_EVALUATION_REVALIDATION",
+        "terminal_status": "PASS_CLEAN2R2A1_OFFLINE_EVALUATION_REVALIDATION",
     }
     if write_report:
-        write_json_atomic(destination / "CLEAN2R2A_OFFLINE_EVALUATION_REVALIDATION.json", report)
+        write_json_atomic(destination / "CLEAN2R2A1_OFFLINE_EVALUATION_REVALIDATION.json", report)
     return report
 
 
@@ -631,12 +631,12 @@ def evaluate_sealed_outputs(
         crosschecks[method_id] = crosscheck
         summary_rows.append(_result_row(method_id, runtime, summary))
 
-    _write_csv(destination / "CLEAN2R2A_FACTORIAL_RESULTS.csv", RESULT_FIELDS, summary_rows)
+    _write_csv(destination / "CLEAN2R2A1_FACTORIAL_RESULTS.csv", RESULT_FIELDS, summary_rows)
     coverage_rows = [{key: row[key] for key in COVERAGE_FIELDS} for row in summary_rows]
-    _write_csv(destination / "CLEAN2R2A_MATCH_COVERAGE.csv", COVERAGE_FIELDS, coverage_rows)
+    _write_csv(destination / "CLEAN2R2A1_MATCH_COVERAGE.csv", COVERAGE_FIELDS, coverage_rows)
     _write_csv(destination / "EVALUATOR_READ_LEDGER.csv", LEDGER_FIELDS, evaluator_ledger_rows)
     crosscheck_payload = {
-        "schema_version": "paper_rebuild.clean2r2a_aggregate_crosscheck.v2",
+        "schema_version": "paper_rebuild.clean2r2a1_aggregate_crosscheck.v2",
         "method_crosschecks": crosschecks,
         "method_order": list(METHOD_ORDER),
         "method_count": len(METHOD_ORDER),
@@ -644,7 +644,7 @@ def evaluate_sealed_outputs(
         "trace_offline_only": True,
         "passed": all(item["passed"] for item in crosschecks.values()),
     }
-    write_json_atomic(destination / "CLEAN2R2A_AGGREGATE_CROSSCHECK.json", crosscheck_payload)
+    write_json_atomic(destination / "CLEAN2R2A1_AGGREGATE_CROSSCHECK.json", crosscheck_payload)
     final_seal = _output_seal_identity(stage)
     if final_seal["manifest_sha256"] != initial_seal["manifest_sha256"]:
         raise Clean2R2AEvaluationError("output seal changed during offline evaluation")

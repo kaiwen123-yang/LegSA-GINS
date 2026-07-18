@@ -1,12 +1,18 @@
 $schema: "http://json-schema.org/draft-07/schema#"
-$id: paper_rebuild.clean2r2a_formal_run_manifest.v1
-title: LegSA-GINS CLEAN2R2A Formal Run Manifest
+$id: paper_rebuild.clean2r2a1_formal_run_manifest.v1
+title: LegSA-GINS CLEAN2R2A1 Formal Run Manifest
 type: object
 additionalProperties: false
 required:
   - schema_version
   - stage_id
   - protocol_id
+  - solver_parent_stage_id
+  - solver_parent_protocol_id
+  - provider_stage_id
+  - provider_protocol_id
+  - provider_code_freeze_commit
+  - execution_code_freeze_commit
   - case_id
   - data_mode
   - run_id
@@ -50,9 +56,16 @@ required:
   - metric_driven_rerun
   - terminal_status
 properties:
-  schema_version: {const: paper_rebuild.clean2r2a_formal_run.v1}
-  stage_id: {const: CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD}
-  protocol_id: {const: CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION}
+  schema_version: {const: paper_rebuild.clean2r2a1_formal_run.v1}
+  stage_id: {const: CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME}
+  protocol_id: {const: CLEAN2R2A1_BY2_CLEAN_MODULE_ABLATION_RESUME}
+  solver_parent_stage_id: {const: CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD}
+  solver_parent_protocol_id: {const: CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION}
+  provider_stage_id: {const: CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD}
+  provider_protocol_id: {const: CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION}
+  provider_code_freeze_commit:
+    const: 91793894a43c8ba83c25d8da698b7ee16e31b80e
+  execution_code_freeze_commit: {$ref: "#/definitions/commit"}
   case_id: {const: CLEAN1_BY2_CLEAN_NORMAL}
   data_mode: {const: real_clean}
   run_id: {type: string, pattern: "^[0-9]{2}_(single_antenna_EKF|basic_dual_yaw_EKF|AB[01]{4})$"}
@@ -127,6 +140,9 @@ properties:
   metric_driven_rerun: {const: false}
   terminal_status: {const: PASS}
 definitions:
+  commit:
+    type: string
+    pattern: "^[0-9a-f]{40}$"
   sha256:
     type: string
     pattern: "^[0-9a-f]{64}$"

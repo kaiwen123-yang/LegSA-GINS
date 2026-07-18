@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render, audit, and finalize CLEAN2R2A evidence without running a solver."""
+"""Render, audit, and finalize CLEAN2R2A1 evidence without running a solver."""
 
 from __future__ import annotations
 

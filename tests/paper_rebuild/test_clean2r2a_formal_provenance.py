@@ -21,9 +21,15 @@ def _wrapper() -> dict:
         "fgo_count": 0, "qm_count": 0, "qa_count": 0, "contact_fk_count": 0,
     }
     return {
-        "schema_version": "paper_rebuild.clean2r2a_formal_run.v1",
-        "stage_id": "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD",
-        "protocol_id": "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION",
+        "schema_version": "paper_rebuild.clean2r2a1_formal_run.v1",
+        "stage_id": "CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME",
+        "protocol_id": "CLEAN2R2A1_BY2_CLEAN_MODULE_ABLATION_RESUME",
+        "solver_parent_stage_id": "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD",
+        "solver_parent_protocol_id": "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION",
+        "provider_stage_id": "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD",
+        "provider_protocol_id": "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION",
+        "provider_code_freeze_commit": "91793894a43c8ba83c25d8da698b7ee16e31b80e",
+        "execution_code_freeze_commit": "b" * 40,
         "case_id": "CLEAN1_BY2_CLEAN_NORMAL", "data_mode": "real_clean",
         "run_id": "03_AB0000", "algorithm_id": "AB0000",
         "method_features": method_features("AB0000"), "code_commit": "b" * 40,

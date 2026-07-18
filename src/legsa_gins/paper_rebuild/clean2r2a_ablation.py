@@ -1,4 +1,4 @@
-"""CLEAN2R2A 的 BY2 clean-only 2^4 模块消融合同。"""
+"""CLEAN2R2A1 的 BY2 clean-only 2^4 模块消融合同。"""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from .methods import EXPECTED_FEATURES, FEATURE_FIELDS
 from .paths import load_yaml_mapping
 
 
-STAGE_ID = "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD"
+STAGE_ID = "CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME"
 CASE_ID = "CLEAN1_BY2_CLEAN_NORMAL"
 DATA_MODE = "real_clean"
 BIT_ORDER = ("RD", "SA", "RP", "HV")
@@ -99,7 +99,7 @@ def load_ablation_contract(path: str | Path) -> tuple[AblationProfile, ...]:
     if set(payload) != expected_top:
         raise Clean2R2AAblationError("ablation contract top-level fields mismatch")
     expected_scalars = {
-        "schema_version": "paper_rebuild.clean2r2a_ablation.v1",
+        "schema_version": "paper_rebuild.clean2r2a1_ablation.v1",
         "stage_id": STAGE_ID,
         "case_id": CASE_ID,
         "data_mode": DATA_MODE,

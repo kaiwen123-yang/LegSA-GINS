@@ -1,0 +1,46 @@
+schema_version: paper_rebuild.clean2r2a1_raw_doppler_parity.v1
+stage_id: CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME
+protocol_id: CLEAN2R2A1_BY2_CLEAN_MODULE_ABLATION_RESUME
+parity_profile: minimum_sufficient_solver_semantic_plus_actual_byte_audit
+
+provider_parent:
+  stage_id: CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD
+  protocol_id: CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION
+  provider_freeze_commit: 91793894a43c8ba83c25d8da698b7ee16e31b80e
+  provider_generated_under_parent_freeze: true
+  provider_payload_modified_after_generation: false
+  old_provider_solver_input: false
+
+raw_doppler:
+  row_count: 1248
+  column_count: 21
+  solver_semantic_column_count: 18
+  audit_only_provenance_columns:
+    - obs_source_hash
+    - nav_source_hash
+    - conversion_config_hash
+  all_other_columns_required: true
+  solver_semantic_sha256: 235694534abfe2fa15b5469cebbeda220469a0d3da7318fdbbdc39b07548fa33
+  current_actual_full_sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+  historical_noncanonical_full_sha256:
+    value: a40b9933295f6c2c989884d67cc674313f2fe03113c8acdf1d02ddf28734d722
+    role: audit_only
+    gate: false
+  provider_rewrite_authorized: false
+  row_reorder_or_removal_authorized: false
+  rinex_header_canonicalization_required: false
+  second_fresh_attempt_required: false
+
+other_provider_byte_sha256:
+  imu: a46fe2b50a5a99d550392f42e3952c871a7562c6d5625ea1b377691009ab643b
+  gnss: f4070ba795825cc243402e4acb551c62c6aad109e7040582bf57781226420e22
+  go2_roll_pitch: 2329770b8e9bc61c02fbf943e2e5fd9ea233d6fd8a3550f7a22410a536155c7a
+  go2_horizontal_velocity: f390c8e51f1bec1162c0f6c628ebbcd0449923cfbf9211bebb36004dc2b2aab0
+
+runtime_gates:
+  raw_hash_lock_verified_count: 22
+  trace_used_online: false
+  old_provider_solver_input: false
+  cpp_provenance_fields_numeric_update: false
+
+terminal_status: PASS_CLEAN2R2A1_MINIMUM_SUFFICIENT_PROVIDER_PARITY

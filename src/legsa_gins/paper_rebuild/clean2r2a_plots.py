@@ -1,4 +1,4 @@
-"""CLEAN2R2A diagnostic-only figures and render QA."""
+"""CLEAN2R2A1 diagnostic-only figures and render QA."""
 
 from __future__ import annotations
 
@@ -41,9 +41,9 @@ def generate_diagnostic_figures(*, stage_root: str | Path) -> dict[str, Any]:
     destination = stage / "10_DIAGNOSTIC_FIGURES"
     if any(destination.iterdir()):
         raise Clean2R2APlotError("diagnostic figure root is not empty")
-    results = _load_csv(analysis / "CLEAN2R2A_FACTORIAL_RESULTS.csv")
-    main = _load_csv(analysis / "CLEAN2R2A_MODULE_MAIN_EFFECTS.csv")
-    interactions = _load_csv(analysis / "CLEAN2R2A_PAIRWISE_INTERACTIONS.csv")
+    results = _load_csv(analysis / "CLEAN2R2A1_FACTORIAL_RESULTS.csv")
+    main = _load_csv(analysis / "CLEAN2R2A1_MODULE_MAIN_EFFECTS.csv")
+    interactions = _load_csv(analysis / "CLEAN2R2A1_PAIRWISE_INTERACTIONS.csv")
     by_id = {row["configuration_id"]: row for row in results}
     metrics = ("horizontal", "Up", "3D", "roll", "pitch", "yaw")
     columns = {
@@ -186,7 +186,7 @@ def generate_diagnostic_figures(*, stage_root: str | Path) -> dict[str, Any]:
     counter_names = ("raw_doppler_update_count", "source_aware_evaluation_count", "go2_roll_pitch_update_count", "go2_horizontal_velocity_update_count")
     counter_values: dict[str, list[int]] = {name: [] for name in counter_names}
     for method in AB_IDS:
-        wrapper = json.loads((runtime / run_directory(method) / "CLEAN2R2A_FORMAL_RUN_MANIFEST.json").read_text(encoding="utf-8"))
+        wrapper = json.loads((runtime / run_directory(method) / "CLEAN2R2A1_FORMAL_RUN_MANIFEST.json").read_text(encoding="utf-8"))
         for name in counter_names: counter_values[name].append(int(wrapper["module_counters"][name]))
     fig, ax = plt.subplots(figsize=(12, 5))
     for offset, name in enumerate(counter_names):
@@ -199,11 +199,11 @@ def generate_diagnostic_figures(*, stage_root: str | Path) -> dict[str, Any]:
     ax.text(0.52, 0.72, "Not established: degradation robustness\nuniversal superiority\nindependent ground truth\nBY3/XB generalization", fontsize=12)
     save(fig, "F15", "clean claim-boundary panel", 8)
 
-    manifest_path = destination / "CLEAN2R2A_FIGURE_MANIFEST.csv"
+    manifest_path = destination / "CLEAN2R2A1_FIGURE_MANIFEST.csv"
     with manifest_path.open("x", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(manifest_rows[0])); writer.writeheader(); writer.writerows(manifest_rows)
     qa = {
-        "schema_version": "paper_rebuild.clean2r2a_figure_qa.v1",
+        "schema_version": "paper_rebuild.clean2r2a1_figure_qa.v1",
         "figure_groups": 15, "render_files": 30,
         "all_nonempty": all(row["nonempty"] for row in manifest_rows),
         "all_finite": all(row["finite"] for row in manifest_rows),
@@ -223,7 +223,7 @@ def generate_diagnostic_figures(*, stage_root: str | Path) -> dict[str, Any]:
         and qa["text_extents_finite"] and qa["renders_nonblank"]
         and qa["action_labels_separate_panel"]
     )
-    write_json_atomic(destination / "CLEAN2R2A_FIGURE_MACHINE_QA.json", qa)
+    write_json_atomic(destination / "CLEAN2R2A1_FIGURE_MACHINE_QA.json", qa)
     return qa
 
 
@@ -234,7 +234,7 @@ def record_visual_figure_review(
 
     stage = Path(stage_root).resolve(strict=True)
     destination = stage / "10_DIAGNOSTIC_FIGURES"
-    machine = json.loads((destination / "CLEAN2R2A_FIGURE_MACHINE_QA.json").read_text(encoding="utf-8"))
+    machine = json.loads((destination / "CLEAN2R2A1_FIGURE_MACHINE_QA.json").read_text(encoding="utf-8"))
     review_path = Path(review_json).resolve(strict=True)
     submitted = json.loads(review_path.read_text(encoding="utf-8"))
     reviewer = submitted.get("reviewer")
@@ -244,7 +244,7 @@ def record_visual_figure_review(
         raise Clean2R2APlotError("visual review identity or machine QA is incomplete")
     if machine.get("passed") is not True or not isinstance(decisions, list) or len(decisions) != 15:
         raise Clean2R2APlotError("visual review decisions or machine QA are incomplete")
-    manifest = _load_csv(destination / "CLEAN2R2A_FIGURE_MANIFEST.csv")
+    manifest = _load_csv(destination / "CLEAN2R2A1_FIGURE_MANIFEST.csv")
     png_manifest = {row["figure_id"]: row for row in manifest if row["format"] == "PNG"}
     expected_ids = {f"F{index:02d}" for index in range(1, 16)}
     by_id: dict[str, dict[str, Any]] = {}
@@ -283,7 +283,7 @@ def record_visual_figure_review(
         and not any_clipped and not any_misleading and not any_action_overlap
     )
     visual = {
-        "schema_version": "paper_rebuild.clean2r2a_figure_visual_review.v1",
+        "schema_version": "paper_rebuild.clean2r2a1_figure_visual_review.v1",
         "reviewer": reviewer, "reviewed_at": reviewed_at,
         "review_input_sha256": sha256_file(review_path), "reviewed_png_count": 15,
         "figure_decisions": [by_id[key] for key in sorted(by_id)],
@@ -294,13 +294,13 @@ def record_visual_figure_review(
         "action_labels_overlap_data": any_action_overlap,
         "passed": visual_passed,
     }
-    write_json_atomic(destination / "CLEAN2R2A_FIGURE_VISUAL_REVIEW.json", visual)
+    write_json_atomic(destination / "CLEAN2R2A1_FIGURE_VISUAL_REVIEW.json", visual)
     final = {
-        "schema_version": "paper_rebuild.clean2r2a_figure_render_qa.v1",
+        "schema_version": "paper_rebuild.clean2r2a1_figure_render_qa.v1",
         "machine_qa": machine, "visual_review": visual,
         "passed": machine.get("passed") is True and visual["passed"] is True,
     }
-    write_json_atomic(destination / "CLEAN2R2A_FIGURE_RENDER_QA.json", final)
+    write_json_atomic(destination / "CLEAN2R2A1_FIGURE_RENDER_QA.json", final)
     if not final["passed"]:
         raise Clean2R2APlotError("visual figure review reported a render/readability failure")
     return final

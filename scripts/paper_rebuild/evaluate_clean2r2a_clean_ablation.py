@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate sealed CLEAN2R2A outputs with the frozen CLEAN1R2R1 contract."""
+"""Evaluate sealed CLEAN2R2A1 outputs with the frozen CLEAN1R2R1 contract."""
 
 from __future__ import annotations
 
@@ -37,7 +37,7 @@ def main() -> int:
         timeout_seconds=args.timeout_seconds,
     )
     report = materialize_factorial_analysis(
-        evaluation_csv=Path(args.stage_root) / "08_OFFLINE_EVALUATION/CLEAN2R2A_FACTORIAL_RESULTS.csv",
+        evaluation_csv=Path(args.stage_root) / "08_OFFLINE_EVALUATION/CLEAN2R2A1_FACTORIAL_RESULTS.csv",
         output_root=Path(args.stage_root) / "09_FACTORIAL_ANALYSIS",
     )
     print(json.dumps({"evaluation": evaluation, "factorial": report}, sort_keys=True))
