@@ -132,6 +132,14 @@ bool hasKey(const std::unordered_map<std::string, std::string>& kv, const std::s
   throw std::runtime_error("FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH: " + detail);
 }
 
+bool isClean2r2aAblationId(const std::string& algorithm_id) {
+  if (algorithm_id.size() != 6 || algorithm_id[0] != 'A' || algorithm_id[1] != 'B') {
+    return false;
+  }
+  return std::all_of(algorithm_id.begin() + 2, algorithm_id.end(),
+                     [](char value) { return value == '0' || value == '1'; });
+}
+
 void validateFormalMethodContract(const std::unordered_map<std::string, std::string>& kv,
                                   PortOptions& options) {
   const std::array<const char*, 6> feature_keys{{
@@ -169,12 +177,24 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
       options.stage_id ==
           "CLEAN1R2R1_CLEAN_REAL_FINAL_V23_PARITY_AND_FOUR_METHOD_EXECUTION" &&
       options.protocol_id == "CLEAN_REAL_DATA_FINAL_V23";
-  if ((!clean1_v1_identity && !clean1r1c_v2_identity && !clean1r2r1_final_v23_identity) ||
-      options.case_id != "CLEAN1_BY2_CLEAN_NORMAL" ||
-      options.data_mode != "real_by2_raw" || options.run_id.empty()) {
+  const bool clean2r2a_ablation_identity =
+      options.stage_id == "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD" &&
+      options.protocol_id == "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION";
+  const bool data_mode_matches = clean2r2a_ablation_identity
+                                     ? options.data_mode == "real_clean"
+                                     : options.data_mode == "real_by2_raw";
+  if ((!clean1_v1_identity && !clean1r1c_v2_identity && !clean1r2r1_final_v23_identity &&
+       !clean2r2a_ablation_identity) ||
+      options.case_id != "CLEAN1_BY2_CLEAN_NORMAL" || !data_mode_matches ||
+      options.run_id.empty()) {
     formalContractFailure("formal stage/protocol/case/data_mode/run identity mismatch");
   }
-  if (options.clean_final_v23_parity_mode != clean1r2r1_final_v23_identity) {
+  // 保留 CLEAN1 的逐字合同，同时只为 CLEAN2R2A 要求同一 final_v23 parity mode。
+  if ((options.clean_final_v23_parity_mode != clean1r2r1_final_v23_identity) &&
+      !clean2r2a_ablation_identity) {
+    formalContractFailure("clean final_v23 parity mode/profile identity mismatch");
+  }
+  if (clean2r2a_ablation_identity && !options.clean_final_v23_parity_mode) {
     formalContractFailure("clean final_v23 parity mode/profile identity mismatch");
   }
   if (!options.common_initialization || !options.common_initialization_dual_yaw_used ||
@@ -240,8 +260,16 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
     expected_source_aware = true;
     expected_go2_roll_pitch = true;
     expected_go2_horizontal = true;
+  } else if (clean2r2a_ablation_identity && isClean2r2aAblationId(options.algorithm_id)) {
+    // 中文说明：AB 四位从左到右严格是 RD、SA、RP、HV；backbone 始终是 strong/final_v23。
+    expected_dual = true;
+    expected_receiver_velocity = true;
+    expected_raw_doppler = options.algorithm_id[2] == '1';
+    expected_source_aware = options.algorithm_id[3] == '1';
+    expected_go2_roll_pitch = options.algorithm_id[4] == '1';
+    expected_go2_horizontal = options.algorithm_id[5] == '1';
   } else {
-    formalContractFailure("algorithm_id is not one of the four frozen methods");
+    formalContractFailure("algorithm_id is outside the frozen stage method set");
   }
   if (dual != expected_dual || receiver_velocity != expected_receiver_velocity ||
       raw_doppler != expected_raw_doppler || source_aware != expected_source_aware ||
@@ -265,7 +293,9 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   options.enable_basic_dual_yaw_baseline = options.algorithm_id == "basic_dual_yaw_EKF";
   options.yaw_scheme_C_enabled = options.enable_dual_yaw_update && !options.enable_basic_dual_yaw_baseline;
   options.phase = options.stage_id;
-  options.port_role = "clean1_formal_four_method_solver";
+  options.port_role = clean2r2a_ablation_identity
+                          ? "clean2r2a_formal_clean_ablation_solver"
+                          : "clean1_formal_four_method_solver";
   options.run_label = options.run_id;
   options.raw_doppler_config.formal_lineage_required = expected_raw_doppler;
   if (expected_go2_roll_pitch) {

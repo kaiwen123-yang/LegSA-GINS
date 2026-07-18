@@ -1,0 +1,32 @@
+schema_version: paper_rebuild.clean2r2a1_ablation.v1
+stage_id: CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME
+case_id: CLEAN1_BY2_CLEAN_NORMAL
+data_mode: real_clean
+backbone_method_id: strong_dual_yaw_EKF
+variant_count: 16
+bit_order: [RD, SA, RP, HV]
+feature_map:
+  RD: enable_raw_doppler
+  SA: enable_source_aware
+  RP: enable_go2_roll_pitch_prior
+  HV: enable_go2_horizontal_velocity_prior
+fixed_backbone_features:
+  enable_dual_yaw: true
+  enable_receiver_velocity: true
+variants:
+  - {configuration_id: AB0000, bit_string: "0000", RD: false, SA: false, RP: false, HV: false, canonical_equivalent_method_id: strong_dual_yaw_EKF}
+  - {configuration_id: AB0001, bit_string: "0001", RD: false, SA: false, RP: false, HV: true, canonical_equivalent_method_id: null}
+  - {configuration_id: AB0010, bit_string: "0010", RD: false, SA: false, RP: true, HV: false, canonical_equivalent_method_id: null}
+  - {configuration_id: AB0011, bit_string: "0011", RD: false, SA: false, RP: true, HV: true, canonical_equivalent_method_id: null}
+  - {configuration_id: AB0100, bit_string: "0100", RD: false, SA: true, RP: false, HV: false, canonical_equivalent_method_id: null}
+  - {configuration_id: AB0101, bit_string: "0101", RD: false, SA: true, RP: false, HV: true, canonical_equivalent_method_id: null}
+  - {configuration_id: AB0110, bit_string: "0110", RD: false, SA: true, RP: true, HV: false, canonical_equivalent_method_id: null}
+  - {configuration_id: AB0111, bit_string: "0111", RD: false, SA: true, RP: true, HV: true, canonical_equivalent_method_id: null}
+  - {configuration_id: AB1000, bit_string: "1000", RD: true, SA: false, RP: false, HV: false, canonical_equivalent_method_id: null}
+  - {configuration_id: AB1001, bit_string: "1001", RD: true, SA: false, RP: false, HV: true, canonical_equivalent_method_id: null}
+  - {configuration_id: AB1010, bit_string: "1010", RD: true, SA: false, RP: true, HV: false, canonical_equivalent_method_id: null}
+  - {configuration_id: AB1011, bit_string: "1011", RD: true, SA: false, RP: true, HV: true, canonical_equivalent_method_id: null}
+  - {configuration_id: AB1100, bit_string: "1100", RD: true, SA: true, RP: false, HV: false, canonical_equivalent_method_id: null}
+  - {configuration_id: AB1101, bit_string: "1101", RD: true, SA: true, RP: false, HV: true, canonical_equivalent_method_id: null}
+  - {configuration_id: AB1110, bit_string: "1110", RD: true, SA: true, RP: true, HV: false, canonical_equivalent_method_id: null}
+  - {configuration_id: AB1111, bit_string: "1111", RD: true, SA: true, RP: true, HV: true, canonical_equivalent_method_id: LegSA_Paper_V1}

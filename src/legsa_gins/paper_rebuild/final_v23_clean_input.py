@@ -546,9 +546,28 @@ def build_source_ledger(verified_hashes: Mapping[str, str]) -> list[dict[str, An
     return [by_relative[row["relative_path"]] for row in validated]
 
 
-def _guard_output_root(paths: CleanPaths, output_root: str | Path) -> Path:
+def _guard_output_root(
+    paths: CleanPaths,
+    output_root: str | Path,
+    *,
+    provider_parent: str | Path | None = None,
+) -> Path:
+    parent_candidate = (
+        paths.clean_root / "04_PROVIDER_FREEZE"
+        if provider_parent is None
+        else Path(provider_parent)
+    )
+    if provider_parent is not None:
+        if any(path.is_symlink() for path in (parent_candidate, *parent_candidate.parents)):
+            raise FinalV23CleanInputError("explicit provider parent contains a symlink component")
+        expected_parent = (
+            paths.clean_root / "stages" /
+            "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD" / "04_BASE_PROVIDER"
+        ).resolve(strict=False)
+        if parent_candidate.resolve(strict=False) != expected_parent:
+            raise FinalV23CleanInputError("explicit provider parent is not the exact CLEAN2R2A stage root")
     provider_parent = guard_path(
-        paths.clean_root / "04_PROVIDER_FREEZE",
+        parent_candidate,
         role="CLEAN1R2R1 provider parent",
         allowed_root=paths.clean_root,
     )
@@ -558,7 +577,7 @@ def _guard_output_root(paths: CleanPaths, output_root: str | Path) -> Path:
         allowed_root=provider_parent,
     )
     if root.parent != provider_parent:
-        raise FinalV23CleanInputError("provider attempt must be a direct child of 04_PROVIDER_FREEZE")
+        raise FinalV23CleanInputError("provider attempt must be a direct child of its frozen provider parent")
     if not root.name.startswith("FINAL_V23_CLEAN_"):
         raise FinalV23CleanInputError("provider attempt name must start with FINAL_V23_CLEAN_")
     if root.exists():
@@ -649,12 +668,14 @@ def generate_final_v23_clean_input(
     max_status_rows: int | None = None,
     max_raw_rows: int | None = None,
     max_imu_messages: int | None = None,
+    provider_parent: str | Path | None = None,
 ) -> dict[str, Any]:
     """Generate one immutable attempt; callers must supply a new direct child root."""
 
     contract = load_contract(contract_path)
     profile = contract["profiles"][PROFILE_ID]
-    root = _guard_output_root(paths, output_root)
+    # 中文说明：默认路径保持 CLEAN1 不变；后续 clean stage 必须显式传入自身 provider parent。
+    root = _guard_output_root(paths, output_root, provider_parent=provider_parent)
     commit, dirty = git_code_state(paths.code_root)
     if dirty:
         raise FinalV23CleanInputError("clean input generation requires a clean Git worktree")

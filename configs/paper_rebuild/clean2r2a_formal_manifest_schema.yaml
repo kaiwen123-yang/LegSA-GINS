@@ -1,0 +1,148 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: paper_rebuild.clean2r2a1_formal_run_manifest.v1
+title: LegSA-GINS CLEAN2R2A1 Formal Run Manifest
+type: object
+additionalProperties: false
+required:
+  - schema_version
+  - stage_id
+  - protocol_id
+  - solver_parent_stage_id
+  - solver_parent_protocol_id
+  - provider_stage_id
+  - provider_protocol_id
+  - provider_code_freeze_commit
+  - execution_code_freeze_commit
+  - case_id
+  - data_mode
+  - run_id
+  - algorithm_id
+  - method_features
+  - code_commit
+  - code_worktree_dirty_at_run
+  - executable_hash
+  - runtime_config_hash
+  - local_config_hash
+  - provider_protocol_hash
+  - formal_schema_hash
+  - base_provider_parity_sha256
+  - provider_hashes
+  - raw_source_hashes
+  - provider_generation
+  - solver_manifest_sha256
+  - actual_solver_inputs
+  - solver_read_ledger
+  - solver_read_ledger_sha256
+  - output_hashes
+  - synthetic_data_used
+  - semisynthetic_data_used
+  - trace_used_online
+  - trace_open_count
+  - receiver_imu_as_body_imu
+  - final_v23_output_solver_input
+  - LegSA_output_solver_input
+  - per_case_tuning
+  - output_only_correction
+  - epoch_deleted_for_metric
+  - old_runtime_input_count
+  - legacy_provider_input_count
+  - legacy_row_input_count
+  - legacy_aggregate_input_count
+  - module_counters
+  - mechanism_evidence
+  - structure
+  - runtime_seconds
+  - solver_returncode
+  - metric_driven_rerun
+  - terminal_status
+properties:
+  schema_version: {const: paper_rebuild.clean2r2a1_formal_run.v1}
+  stage_id: {const: CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME}
+  protocol_id: {const: CLEAN2R2A1_BY2_CLEAN_MODULE_ABLATION_RESUME}
+  solver_parent_stage_id: {const: CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD}
+  solver_parent_protocol_id: {const: CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION}
+  provider_stage_id: {const: CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD}
+  provider_protocol_id: {const: CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION}
+  provider_code_freeze_commit:
+    const: 91793894a43c8ba83c25d8da698b7ee16e31b80e
+  execution_code_freeze_commit: {$ref: "#/definitions/commit"}
+  case_id: {const: CLEAN1_BY2_CLEAN_NORMAL}
+  data_mode: {const: real_clean}
+  run_id: {type: string, pattern: "^[0-9]{2}_(single_antenna_EKF|basic_dual_yaw_EKF|AB[01]{4})$"}
+  algorithm_id:
+    oneOf:
+      - {enum: [single_antenna_EKF, basic_dual_yaw_EKF]}
+      - {type: string, pattern: "^AB[01]{4}$"}
+  method_features: {type: object, minProperties: 6, maxProperties: 6}
+  code_commit: {type: string, pattern: "^[0-9a-f]{40}$"}
+  code_worktree_dirty_at_run: {const: false}
+  executable_hash: {$ref: "#/definitions/sha256"}
+  runtime_config_hash: {$ref: "#/definitions/sha256"}
+  local_config_hash: {$ref: "#/definitions/sha256"}
+  provider_protocol_hash: {$ref: "#/definitions/sha256"}
+  formal_schema_hash: {$ref: "#/definitions/sha256"}
+  base_provider_parity_sha256: {$ref: "#/definitions/sha256"}
+  provider_hashes:
+    type: object
+    minProperties: 8
+    maxProperties: 8
+    additionalProperties: {$ref: "#/definitions/sha256"}
+  raw_source_hashes:
+    type: object
+    minProperties: 22
+    maxProperties: 22
+    additionalProperties: {$ref: "#/definitions/sha256"}
+  provider_generation: {type: object, minProperties: 6}
+  solver_manifest_sha256: {$ref: "#/definitions/sha256"}
+  actual_solver_inputs:
+    type: object
+    minProperties: 2
+    additionalProperties:
+      type: object
+      required: [path, role, sha256, open_count]
+      properties:
+        path: {type: string, minLength: 1}
+        role: {type: string, minLength: 1}
+        sha256: {$ref: "#/definitions/sha256"}
+        open_count: {type: integer, minimum: 1}
+  solver_read_ledger:
+    type: object
+    required: [trace_open_count, raw_root_open_count, legacy_open_count, passed]
+    properties:
+      trace_open_count: {const: 0}
+      raw_root_open_count: {const: 0}
+      legacy_open_count: {const: 0}
+      passed: {const: true}
+  solver_read_ledger_sha256: {$ref: "#/definitions/sha256"}
+  output_hashes:
+    type: object
+    minProperties: 8
+    additionalProperties: {$ref: "#/definitions/sha256"}
+  synthetic_data_used: {const: false}
+  semisynthetic_data_used: {const: false}
+  trace_used_online: {const: false}
+  trace_open_count: {const: 0}
+  receiver_imu_as_body_imu: {const: false}
+  final_v23_output_solver_input: {const: false}
+  LegSA_output_solver_input: {const: false}
+  per_case_tuning: {const: false}
+  output_only_correction: {const: false}
+  epoch_deleted_for_metric: {const: false}
+  old_runtime_input_count: {const: 0}
+  legacy_provider_input_count: {const: 0}
+  legacy_row_input_count: {const: 0}
+  legacy_aggregate_input_count: {const: 0}
+  module_counters: {type: object, minProperties: 16}
+  mechanism_evidence: {type: object, required: [scheme_c, source_aware]}
+  structure: {type: object, required: [nav_rows, std_rows, time_start, time_end, finite]}
+  runtime_seconds: {type: number, minimum: 0}
+  solver_returncode: {const: 0}
+  metric_driven_rerun: {const: false}
+  terminal_status: {const: PASS}
+definitions:
+  commit:
+    type: string
+    pattern: "^[0-9a-f]{40}$"
+  sha256:
+    type: string
+    pattern: "^[0-9a-f]{64}$"

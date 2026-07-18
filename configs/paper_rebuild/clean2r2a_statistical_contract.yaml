@@ -1,0 +1,40 @@
+schema_version: paper_rebuild.clean2r2a1_statistics.v1
+stage_id: CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME
+case_id: CLEAN1_BY2_CLEAN_NORMAL
+analysis_scope: clean_factorial_descriptive_only
+factorial:
+  variant_count: 16
+  bit_order: [RD, SA, RP, HV]
+  coding:
+    disabled: -1
+    enabled: 1
+  coefficient_formula: beta=sum(x*y)/16
+  effect_formula: effect=2*sum(x*y)/16
+  main_effects: [RD, SA, RP, HV]
+  pairwise_interactions:
+    - [RD, SA]
+    - [RD, RP]
+    - [RD, HV]
+    - [SA, RP]
+    - [SA, HV]
+    - [RP, HV]
+  significance_testing: false
+comparisons:
+  full_vs_strong:
+    left: AB1111
+    right: AB0000
+    operation: left_minus_right
+  full_vs_no_source_aware:
+    left: AB1111
+    right: AB1011
+    operation: left_minus_right
+  full_vs_no_go2_priors:
+    left: AB1111
+    right: AB1100
+    operation: left_minus_right
+reporting:
+  preserve_negative_and_neutral_results: true
+  performance_is_engineering_gate: false
+  no_parameter_search: true
+  no_metric_driven_rerun: true
+  reference_wording: same-source offline evaluation reference
