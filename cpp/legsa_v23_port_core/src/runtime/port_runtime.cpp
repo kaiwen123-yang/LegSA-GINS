@@ -161,6 +161,20 @@ void validateFormalRuntimeCounters(const PortOptions& options) {
   } else if (options.algorithm_id == "LegSA_Paper_V1") {
     counters_match = counters_match && receiver_active && yaw_active && raw_active &&
                      source_aware_active && go2_roll_pitch_active && go2_horizontal_active;
+  } else if (options.stage_id == "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD" &&
+             options.algorithm_id.size() == 6 && options.algorithm_id.rfind("AB", 0) == 0 &&
+             std::all_of(options.algorithm_id.begin() + 2, options.algorithm_id.end(),
+                         [](char value) { return value == '0' || value == '1'; })) {
+    // 中文说明：runtime counter 必须证明每一位模块真实开关，而不是只相信配置旗标。
+    const bool expected_raw = options.algorithm_id[2] == '1';
+    const bool expected_source_aware = options.algorithm_id[3] == '1';
+    const bool expected_roll_pitch = options.algorithm_id[4] == '1';
+    const bool expected_horizontal = options.algorithm_id[5] == '1';
+    counters_match = counters_match && receiver_active && yaw_active &&
+                     raw_active == expected_raw &&
+                     source_aware_active == expected_source_aware &&
+                     go2_roll_pitch_active == expected_roll_pitch &&
+                     go2_horizontal_active == expected_horizontal;
   } else {
     counters_match = false;
   }
@@ -1057,7 +1071,10 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   if (options.clean1_formal_mode) {
     // 中文说明：formal identity 已由 loader 严格校验，禁止后续 N*/PAPER10E0 路由覆盖。
     options.phase = options.stage_id;
-    options.port_role = "clean1_formal_four_method_solver";
+    options.port_role =
+        options.stage_id == "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD"
+            ? "clean2r2a_formal_clean_ablation_solver"
+            : "clean1_formal_four_method_solver";
     options.run_label = options.run_id;
     options.parity_attempted =
         options.clean_final_v23_parity_mode && options.algorithm_id == "strong_dual_yaw_EKF";

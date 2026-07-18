@@ -290,9 +290,21 @@ def generate_fresh_auxiliaries(
     materialize_pinned_rtklib: bool = False,
     timeout_seconds: int = 900,
     generator: Callable[..., dict[str, Any]] = generate_formal_clean1_inputs,
+    evidence_stage_id: str = STAGE_ID,
+    evidence_protocol_id: str = PROTOCOL_ID,
+    expected_output_parent: str | Path | None = None,
 ) -> dict[str, Any]:
     """Generate only fresh auxiliaries while retaining the sealed 15-col base."""
 
+    allowed_evidence_identities = {
+        (STAGE_ID, PROTOCOL_ID),
+        (
+            "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD",
+            "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION",
+        ),
+    }
+    if (evidence_stage_id, evidence_protocol_id) not in allowed_evidence_identities:
+        raise Clean1R2R1FormalError("auxiliary evidence identity is not allowlisted")
     if not _is_git_commit(expected_code_commit):
         raise Clean1R2R1FormalError("expected code-freeze commit is invalid")
     commit_before, dirty_before = git_code_state(paths.code_root)
@@ -303,11 +315,23 @@ def generate_fresh_auxiliaries(
         "imu_runtime_input": sha256_file(clean.imu_path),
         "gnss_runtime_input": sha256_file(clean.gnss_path),
     }
+    allowed_output_root = paths.clean_root
+    if expected_output_parent is not None:
+        output_parent_candidate = Path(expected_output_parent)
+        if any(path.is_symlink() for path in (output_parent_candidate, *output_parent_candidate.parents)):
+            raise Clean1R2R1FormalError("auxiliary parent contains a symlink component")
+        allowed_output_root = guard_path(
+            expected_output_parent,
+            role="clean-stage auxiliary parent",
+            allowed_root=paths.clean_root,
+        )
     destination = guard_path(
         output_root,
         role="CLEAN1R2R1 auxiliary root",
-        allowed_root=paths.clean_root,
+        allowed_root=allowed_output_root,
     )
+    if expected_output_parent is not None and destination.parent != allowed_output_root:
+        raise Clean1R2R1FormalError("auxiliary attempt is not a direct child of its frozen parent")
     if destination.exists():
         raise Clean1R2R1FormalError("fresh auxiliary root already exists")
     protocol = load_yaml_mapping(provider_protocol)
@@ -336,6 +360,12 @@ def generate_fresh_auxiliaries(
         raise Clean1R2R1FormalError("maintained auxiliary artifact map is missing")
     active_roles = auxiliary_generation_plan()["active_auxiliary_roles"]
     source_active_paths = {role: _artifact(destination, artifacts[role], role) for role in active_roles}
+    clean2r2a_identity = evidence_stage_id == "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD"
+    source_quality_metadata = (
+        _artifact(destination, artifacts["source_quality_metadata"], "source_quality_metadata")
+        if clean2r2a_identity
+        else None
+    )
     time_basis = _clean_time_basis_contract(clean.manifest_path)
     tolerances = {
         "raw_doppler_provider": float(solver_common["raw_doppler_time_tolerance_seconds"]),
@@ -409,8 +439,8 @@ def generate_fresh_auxiliaries(
         raise Clean1R2R1FormalError("trace entered fresh auxiliary generation")
     payload = {
         "schema_version": "paper_rebuild.clean1r2r1_auxiliary_bundle.v1",
-        "stage_id": STAGE_ID,
-        "protocol_id": PROTOCOL_ID,
+        "stage_id": evidence_stage_id,
+        "protocol_id": evidence_protocol_id,
         "case_id": CASE_ID,
         "data_mode": "real_by2_raw",
         "code_freeze_commit": expected_code_commit,
@@ -426,6 +456,7 @@ def generate_fresh_auxiliaries(
         },
         "auxiliary_time_basis": time_basis,
         "raw_source_hashes": generated.get("raw_source_hashes"),
+        "provider_protocol_sha256": sha256_file(provider_protocol),
         "actual_source_read_set": actual_reads,
         "raw_doppler_backend": dict(raw),
         "compatibility_helper_identity": "maintained_CLEAN1_V1_auxiliary_generator",
@@ -455,14 +486,22 @@ def generate_fresh_auxiliaries(
         "old_runtime_input_count": 0,
         "plan": auxiliary_generation_plan(),
     }
-    payload["bundle_hash"] = _canonical_hash(
-        {
+    if source_quality_metadata is not None:
+        payload["source_quality_metadata"] = {
+            "path": str(source_quality_metadata),
+            "sha256": sha256_file(source_quality_metadata),
+            "solver_truth": False,
+        }
+    bundle_identity = {
             **common_after,
             **active_hashes,
             "raw_doppler_backend": _canonical_hash(dict(raw)),
             "auxiliary_time_basis": _canonical_hash(time_basis),
-        }
-    )
+            "provider_protocol_sha256": payload["provider_protocol_sha256"],
+    }
+    if source_quality_metadata is not None:
+        bundle_identity["source_quality_metadata"] = sha256_file(source_quality_metadata)
+    payload["bundle_hash"] = _canonical_hash(bundle_identity)
     manifest_path = write_json_atomic(destination / "CLEAN1R2R1_AUXILIARY_MANIFEST.json", payload)
     with (destination / "CLEAN1R2R1_AUXILIARY_SOURCE_LEDGER.csv").open(
         "x", encoding="utf-8", newline=""
@@ -539,12 +578,26 @@ def seal_auxiliary_file_open_audit(
     return audit
 
 
-def validate_auxiliary_bundle(path: str | Path) -> dict[str, Any]:
+def validate_auxiliary_bundle(
+    path: str | Path,
+    *,
+    expected_stage_id: str = STAGE_ID,
+    expected_protocol_id: str = PROTOCOL_ID,
+) -> dict[str, Any]:
+    allowed_evidence_identities = {
+        (STAGE_ID, PROTOCOL_ID),
+        (
+            "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD",
+            "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION",
+        ),
+    }
+    if (expected_stage_id, expected_protocol_id) not in allowed_evidence_identities:
+        raise Clean1R2R1FormalError("auxiliary validation identity is not allowlisted")
     payload = _json(path)
     expected = {
         "schema_version": "paper_rebuild.clean1r2r1_auxiliary_bundle.v1",
-        "stage_id": STAGE_ID,
-        "protocol_id": PROTOCOL_ID,
+        "stage_id": expected_stage_id,
+        "protocol_id": expected_protocol_id,
         "case_id": CASE_ID,
         "data_mode": "real_by2_raw",
         "trace_open_count": 0,
@@ -576,6 +629,36 @@ def validate_auxiliary_bundle(path: str | Path) -> dict[str, Any]:
             source = Path(str(entry.get("path", ""))).resolve(strict=True)
             if sha256_file(source) != entry.get("sha256"):
                 raise Clean1R2R1FormalError(f"auxiliary/common artifact changed: {role}")
+    source_quality = payload.get("source_quality_metadata")
+    require_source_quality = expected_stage_id == "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD"
+    if source_quality is None and not require_source_quality:
+        pass
+    elif not isinstance(source_quality, Mapping) or source_quality.get("solver_truth") is not False:
+        raise Clean1R2R1FormalError("source-quality metadata evidence is missing")
+    else:
+        source_quality_path = Path(str(source_quality.get("path", ""))).resolve(strict=True)
+        if sha256_file(source_quality_path) != source_quality.get("sha256"):
+            raise Clean1R2R1FormalError("source-quality metadata changed")
+    if require_source_quality:
+        raw_backend = payload.get("raw_doppler_backend")
+        if not isinstance(raw_backend, Mapping):
+            raise Clean1R2R1FormalError("Raw Doppler bundle identity is missing")
+        bundle_identity = {
+            **{
+                role: str(payload["common_solver_base"][role]["sha256"])
+                for role in ("imu_runtime_input", "gnss_runtime_input")
+            },
+            **{
+                role: str(payload["auxiliary_artifacts"][role]["sha256"])
+                for role in auxiliary_generation_plan()["active_auxiliary_roles"]
+            },
+            "raw_doppler_backend": _canonical_hash(dict(raw_backend)),
+            "auxiliary_time_basis": _canonical_hash(payload["auxiliary_time_basis"]),
+            "provider_protocol_sha256": payload.get("provider_protocol_sha256"),
+            "source_quality_metadata": source_quality.get("sha256"),
+        }
+        if payload.get("bundle_hash") != _canonical_hash(bundle_identity):
+            raise Clean1R2R1FormalError("CLEAN2R2A auxiliary bundle hash does not close")
     if payload["common_solver_base"]["gnss_runtime_input"].get("columns") != 15:
         raise Clean1R2R1FormalError("formal common GNSS is not the sealed 15-column input")
     time_basis = payload.get("auxiliary_time_basis")
