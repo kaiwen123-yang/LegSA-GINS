@@ -5,6 +5,8 @@
 - Stage: `CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE`.
 - Base main commit: `9f9727b74f5195141523ab570380cc35006f3d18`.
 - Branch: `stage/clean3-math-repair`.
+- Reviewed S2 implementation tree freeze: `0d8cc2bdccfd89b236ab4badeef9db5344dcf4d3`.
+- Frozen `cpp/` tree identity: `a3716d22acf95fb1e6028ae82acb2ae73e138bfc`.
 - Current gate: `S2_REVIEWER_APPROVED_S3_PENDING`.
 - `ready_for_paper_claims=false`.
 
@@ -22,7 +24,7 @@
 ## Pending Gate
 
 - S3 AB0000 parity regression is `NOT_EXECUTED`.
-- No S3 result or CLEAN3 code-freeze commit exists yet.
+- No S3 result exists yet. Any S3 runtime must use a clean documentation-only descendant of the reviewed S2 freeze, record that descendant's exact HEAD in its manifest and report, and verify that its `cpp/` tree identity remains `a3716d22acf95fb1e6028ae82acb2ae73e138bfc`.
 - S4 shadow mode, S5 one-shot calibration, S6 SA changes, S7 clean 18-configuration rerun, S8 acceptance gates, and S9 final review are not started.
 - Passing S2 does not authorize or imply any later gate.
 
