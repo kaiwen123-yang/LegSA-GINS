@@ -27,12 +27,13 @@
 
 - S1 read-only inventory and human scope approval: complete.
 - S2 repairs A/B/E1, focused tests, Release build, full `tests/paper_rebuild`, and read-only reviewer recheck: complete and reviewer-approved.
-- S2 verified test result: `220 passed, 3 skipped`.
-- S3 AB0000 parity regression: `NOT_EXECUTED`.
-- No S3 parity pass, clean rerun, calibration result, module-effect result, or final CLEAN3 status exists yet.
-- No provider generation, evaluator execution, trace opening, Canonical-541 execution, paper figure generation, merge, or release tag is authorized by the current gate.
+- Final S2/C1b verified test result: `253 passed, 3 skipped`.
+- Supervisor terminal: `FAILED_TECHNICAL_S3_AB0000_FORMAL_COUNTER_CONTRACT_UNROUTED`.
+- Original S3 attempt terminal: `FAILED_TECHNICAL_SOLVER_EXECUTION`; S3 byte parity: `NOT_EVALUATED`.
+- `ready_for_S4=false`; no clean rerun, calibration result, module-effect result, or final CLEAN3 pass exists.
+- No provider generation, evaluator execution, trace-online use, Canonical-541 execution, paper figure generation, merge, or release tag is authorized by the current gate.
 
-S3 is the next permitted action, but it remains fail-closed and `NOT_EXECUTED`: AB0000 must be rerun with all additional modules disabled and its NAV/STD outputs must be byte-identical to the frozen CLEAN1R2R1 anchor. The S3 formal identity requires the authorized loader-only extension in `cpp/legsa_v23_port_core/src/config/port_config_loader.cpp` together with the one-shot S3 runner; that extension adds an exact execution-identity gate and does not alter parity-locked solver mathematics. The original C1 runner freeze `a0e763defdf7271c8b8435cf566a81eceb403938` and C2 authorization `b874ca5f37e57a3ec3acd4947824e8d7c6e31067` were superseded after read-only preflight found the clean-input manifest provenance-contract error and before creation of the CLEAN3 S3 stage root or any S3 build/solver command. The replacement C1b commit containing this document binds the repaired runner bytes, approved governance documents, and final `cpp/` tree; its actual SHA is supplied by the immediately following C2b authorization JSON. That C2b authorization commit may change only `docs/paper_rebuild/CLEAN3_S3_EXECUTION_FREEZE.json`, and runtime must use the clean C2b HEAD. The exact runtime HEAD must be recorded in the manifest and report. Any mismatch terminates the stage as `BLOCKED_PARITY_REGRESSION_AB0000_MISMATCH`. Passing S2 does not imply passing S3.
+The attempted S3 execution used C1b `e28899156b03b32d3840476bf57ac01807494086`, C2b/execution HEAD `3110131cbbb64caff71a4e493a0b64365e6fb936`, and final `cpp/` tree `40baa12045d6100e3342fd92a01079d253705a45`. Configure/build succeeded, but the solver failed before `writeAll`: the runtime config correctly selected CLEAN3/AB0000 while `port_runtime.cpp::validateFormalRuntimeCounters` routes its AB counter contract only for CLEAN2R2A, so `counters_match` became false unconditionally. This is a technical routing failure, not an observed mathematical parity mismatch. No NAV, STD, run manifest, outer manifest, output seal, or byte comparison exists; parity therefore remains `NOT_EVALUATED`.
 
 ## Inherited Locked Identities
 
@@ -82,4 +83,4 @@ Active runtime evidence may come only from `<CLEAN_ROOT>` and only when its mani
 
 All CLEAN2R2A1 full-minus-strong and RD/SA/RP/HV module-effect numbers are `SUPERSEDED_BY_CLEAN3_PENDING_RERUN`. They may be retained as history but cannot support an active claim, threshold adjustment, or tuning decision.
 
-CLEAN3 does not authorize Canonical-541 solving, D01-D60, BY3/XB/PG, DA studies, QM/QA/FGO, kernel comparisons, trace-online use, per-case tuning, paper figures, performance claims, merge, or release tagging. Canonical-541 remains preparation-only until a separate human-approved execution freeze.
+CLEAN3 does not authorize Canonical-541 solving, D01-D60, BY3/XB/PG, DA studies, QM/QA/FGO, kernel comparisons, trace-online use, per-case tuning, paper figures, performance claims, merge, or release tagging. Canonical-541 restart is `NOT_AUTHORIZED`.
