@@ -127,12 +127,34 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes((ROOT / relative).read_bytes())
     _git(repo, "add", ".")
-    _git(repo, "commit", "-qm", "runner freeze")
+    _git(repo, "commit", "-qm", "superseded runner freeze")
+    old_c1 = _git(repo, "rev-parse", "HEAD")
+
+    old_freeze_path = repo / s3.FREEZE_PATH
+    old_freeze_path.parent.mkdir(parents=True, exist_ok=True)
+    old_freeze_path.write_text("{}\n", encoding="utf-8")
+    _git(repo, "add", s3.FREEZE_PATH)
+    _git(repo, "commit", "-qm", "superseded authorization")
+    old_c2 = _git(repo, "rev-parse", "HEAD")
+
+    for relative in (
+        "src/legsa_gins/paper_rebuild/clean3_math_repair.py",
+        "tests/paper_rebuild/test_clean3_s3_parity_runner.py",
+    ):
+        (repo / relative).write_text(f"replacement bytes for {relative}\n", encoding="utf-8")
+    for relative in ("docs/paper_rebuild/ACTIVE_CONTEXT.md", "docs/paper_rebuild/CLEAN3_STATUS.md"):
+        target = repo / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(f"replacement governance for {relative}\n", encoding="utf-8")
+    _git(repo, "add", ".")
+    _git(repo, "commit", "-qm", "replacement runner freeze")
     runner_freeze = _git(repo, "rev-parse", "HEAD")
 
     monkeypatch.setattr(s3, "REPAIR_IMPLEMENTATION_COMMIT", repair)
     monkeypatch.setattr(s3, "PRE_PARITY_CONTEXT_COMMIT", pre)
     monkeypatch.setattr(s3, "PRIOR_REVIEWED_CPP_TREE", prior_tree)
+    monkeypatch.setattr(s3, "SUPERSEDED_RUNNER_FREEZE_COMMIT", old_c1)
+    monkeypatch.setattr(s3, "SUPERSEDED_AUTHORIZATION_COMMIT", old_c2)
     freeze_path = repo / s3.FREEZE_PATH
     freeze_path.parent.mkdir(parents=True, exist_ok=True)
     freeze = {
@@ -141,6 +163,10 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
         "runner_freeze_commit": runner_freeze,
         "repair_implementation_commit": repair,
         "pre_parity_context_commit": pre,
+        "supersedes_runner_freeze_commit": old_c1,
+        "supersedes_authorization_commit": old_c2,
+        "supersession_reason": "PRE_STAGE_MANIFEST_PROVENANCE_CONTRACT_REPAIR",
+        "superseded_authorization_s3_started": False,
         "final_cpp_tree": _git(repo, "rev-parse", "HEAD:cpp"),
         "tracked_file_sha256": {relative: sha256_file(repo / relative) for relative in s3.FROZEN_CODE_PATHS},
     }
@@ -194,7 +220,7 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     raw_hashes = {row["relative_path"]: row["sha256"] for row in raw_rows}
     clean_manifest = main / "FINAL_V23_CLEAN_INPUT_MANIFEST.json"
     clean_payload = {
-        "stage_id": s3.PARENT_PROVIDER_STAGE_ID, "protocol_id": s3.PARENT_PROVIDER_PROTOCOL_ID,
+        "stage_id": s3.CLEAN_INPUT_STAGE_ID, "protocol_id": s3.CLEAN_INPUT_PROTOCOL_ID,
         "artifacts": {
             "imu": {"relative_path": "imu.txt", "sha256": provider_hashes["imu"]},
             "gnss": {"relative_path": "gnss.txt", "sha256": provider_hashes["gnss"]},
@@ -250,7 +276,9 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     })
     inputs = s3.S3Inputs(repo, clean, raw, full_lock, by2_lock, clean_manifest, auxiliary_manifest, parity_report)
     return {"inputs": inputs, "providers": providers, "raw": raw, "repo": repo, "clean": clean,
-            "freeze": freeze, "freeze_path": freeze_path, "auxiliary_manifest": auxiliary_manifest}
+            "freeze": freeze, "freeze_path": freeze_path, "clean_manifest": clean_manifest,
+            "auxiliary_manifest": auxiliary_manifest, "parity_report": parity_report,
+            "old_c1": old_c1, "old_c2": old_c2, "runner_freeze": runner_freeze}
 
 
 def _solver_manifest(providers: dict[str, Path]) -> dict[str, object]:
@@ -351,6 +379,39 @@ def test_one_shot_pass_seals_then_compares_and_stops(fake_s3) -> None:
     assert outer["stage_id"] == s3.STAGE_ID
     assert outer["parent_contract"]["stage_id"] == s3.PARENT_PROVIDER_STAGE_ID
     assert outer["trace_used_online"] is False
+
+
+@pytest.mark.parametrize("stage_id,protocol_id", [
+    (s3.PARENT_PROVIDER_STAGE_ID, s3.PARENT_PROVIDER_PROTOCOL_ID),
+    ("WRONG_CLEAN_INPUT_STAGE", s3.CLEAN_INPUT_PROTOCOL_ID),
+    (s3.CLEAN_INPUT_STAGE_ID, "WRONG_CLEAN_INPUT_PROTOCOL"),
+])
+def test_clean_input_manifest_identity_is_exact_and_not_clean2(
+    fake_s3, monkeypatch: pytest.MonkeyPatch, stage_id: str, protocol_id: str,
+) -> None:
+    clean_path = fake_s3["clean_manifest"]
+    auxiliary_path = fake_s3["auxiliary_manifest"]
+    parity_path = fake_s3["parity_report"]
+    clean = json.loads(clean_path.read_text())
+    clean.update({"stage_id": stage_id, "protocol_id": protocol_id})
+    clean_path.write_text(json.dumps(clean, sort_keys=True), encoding="utf-8")
+    auxiliary = json.loads(auxiliary_path.read_text())
+    auxiliary["clean_input_manifest_sha256"] = sha256_file(clean_path)
+    auxiliary_path.write_text(json.dumps(auxiliary, sort_keys=True), encoding="utf-8")
+    parity = json.loads(parity_path.read_text())
+    parity["clean_input_manifest_sha256"] = sha256_file(clean_path)
+    parity["auxiliary_manifest_sha256"] = sha256_file(auxiliary_path)
+    parity_path.write_text(json.dumps(parity, sort_keys=True), encoding="utf-8")
+    monkeypatch.setattr(s3, "EXPECTED_MANIFEST_HASHES", {
+        "clean_input_manifest": sha256_file(clean_path),
+        "auxiliary_manifest": sha256_file(auxiliary_path),
+        "provider_parity_report": sha256_file(parity_path),
+    })
+    runner, commands = _runner(fake_s3)
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        s3.run_s3_ab0000_parity(fake_s3["inputs"], command_runner=runner)
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_INHERITED_MANIFEST_CONTRACT"
+    assert commands == []
 
 
 def test_mismatch_is_blocking_and_keeps_sealed_outputs(fake_s3) -> None:
@@ -525,6 +586,29 @@ def test_cpp_scope_drift_rejected_before_commands(fake_s3) -> None:
     extra.write_text("scope drift\n", encoding="utf-8")
     _git(fake_s3["repo"], "add", ".")
     _git(fake_s3["repo"], "commit", "-qm", "cpp scope drift")
+    runner, commands = _runner(fake_s3)
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        s3.run_s3_ab0000_parity(fake_s3["inputs"], command_runner=runner)
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_FREEZE_LINEAGE"
+    assert commands == []
+
+
+def test_replacement_c1b_scope_drift_rejected(fake_s3, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(s3, "C1B_APPROVED_PATHS", s3.C1B_APPROVED_PATHS[:-1])
+    runner, commands = _runner(fake_s3)
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        s3.run_s3_ab0000_parity(fake_s3["inputs"], command_runner=runner)
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT"
+    assert commands == []
+
+
+def test_superseded_lineage_drift_rejected(fake_s3, monkeypatch: pytest.MonkeyPatch) -> None:
+    freeze = dict(fake_s3["freeze"])
+    freeze["supersedes_authorization_commit"] = fake_s3["old_c1"]
+    fake_s3["freeze_path"].write_text(json.dumps(freeze, sort_keys=True), encoding="utf-8")
+    _git(fake_s3["repo"], "add", s3.FREEZE_PATH)
+    _git(fake_s3["repo"], "commit", "--amend", "-qm", "bad supersession authorization")
+    monkeypatch.setattr(s3, "SUPERSEDED_AUTHORIZATION_COMMIT", fake_s3["old_c1"])
     runner, commands = _runner(fake_s3)
     with pytest.raises(s3.Clean3S3Error) as caught:
         s3.run_s3_ab0000_parity(fake_s3["inputs"], command_runner=runner)

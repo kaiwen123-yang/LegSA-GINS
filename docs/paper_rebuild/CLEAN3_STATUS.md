@@ -25,7 +25,8 @@
 
 - S3 AB0000 parity regression is `NOT_EXECUTED`.
 - No S3 result exists yet. S3 formal execution requires the authorized loader-only extension in `cpp/legsa_v23_port_core/src/config/port_config_loader.cpp` and the one-shot S3 runner. The extension changes only execution-identity validation and does not change parity-locked solver mathematics.
-- A future C1 runner-freeze commit will bind the final loader/runner bytes and final `cpp/` tree. Its immediately following C2 authorization commit may modify only `docs/paper_rebuild/CLEAN3_S3_EXECUTION_FREEZE.json`; S3 runtime must use the clean C2 HEAD. Neither C1 nor C2 SHA exists yet, so no commit identity is claimed here.
+- Original C1 `a0e763defdf7271c8b8435cf566a81eceb403938` and original C2 `b874ca5f37e57a3ec3acd4947824e8d7c6e31067` were superseded after read-only preflight identified the clean-input manifest provenance-contract error and before creation of the CLEAN3 S3 stage root or any S3 build/solver command. S3 therefore remains `NOT_EXECUTED`.
+- The replacement C1b commit containing this document binds the repaired runner bytes, approved governance documents, and final `cpp/` tree; its actual SHA is supplied by the immediately following C2b authorization JSON. The C2b commit may modify only `docs/paper_rebuild/CLEAN3_S3_EXECUTION_FREEZE.json`, and S3 runtime must use the clean C2b HEAD. No C1b or C2b SHA is predicted in this document.
 - S4 shadow mode, S5 one-shot calibration, S6 SA changes, S7 clean 18-configuration rerun, S8 acceptance gates, and S9 final review are not started.
 - Passing S2 does not authorize or imply any later gate.
 

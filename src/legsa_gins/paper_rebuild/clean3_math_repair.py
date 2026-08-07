@@ -34,6 +34,8 @@ DATA_MODE = "real_clean"
 
 REPAIR_IMPLEMENTATION_COMMIT = "0d8cc2bdccfd89b236ab4badeef9db5344dcf4d3"
 PRE_PARITY_CONTEXT_COMMIT = "b451110267e71725d1d5259f6a37ab696197ed9a"
+SUPERSEDED_RUNNER_FREEZE_COMMIT = "a0e763defdf7271c8b8435cf566a81eceb403938"
+SUPERSEDED_AUTHORIZATION_COMMIT = "b874ca5f37e57a3ec3acd4947824e8d7c6e31067"
 PRIOR_REVIEWED_CPP_TREE = "a3716d22acf95fb1e6028ae82acb2ae73e138bfc"
 LOADER_EXTENSION_PATH = "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp"
 FREEZE_PATH = "docs/paper_rebuild/CLEAN3_S3_EXECUTION_FREEZE.json"
@@ -43,9 +45,17 @@ FROZEN_CODE_PATHS = (
     "scripts/paper_rebuild/run_clean3_math_repair.py",
     "tests/paper_rebuild/test_clean3_s3_parity_runner.py",
 )
+C1B_APPROVED_PATHS = (
+    "docs/paper_rebuild/ACTIVE_CONTEXT.md",
+    "docs/paper_rebuild/CLEAN3_STATUS.md",
+    "src/legsa_gins/paper_rebuild/clean3_math_repair.py",
+    "tests/paper_rebuild/test_clean3_s3_parity_runner.py",
+)
 
 PARENT_PROVIDER_STAGE_ID = "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD"
 PARENT_PROVIDER_PROTOCOL_ID = "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION"
+CLEAN_INPUT_STAGE_ID = "CLEAN1R2R1_CLEAN_REAL_FINAL_V23_PARITY_AND_FOUR_METHOD_EXECUTION"
+CLEAN_INPUT_PROTOCOL_ID = "CLEAN_REAL_DATA_FINAL_V23"
 PARENT_PARITY_STAGE_ID = "CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME"
 PARENT_PARITY_PROTOCOL_ID = "CLEAN2R2A1_BY2_CLEAN_MODULE_ABLATION_RESUME"
 
@@ -140,6 +150,10 @@ def _guard_git(repo: Path) -> dict[str, Any]:
         "protocol_id": PROTOCOL_ID,
         "repair_implementation_commit": REPAIR_IMPLEMENTATION_COMMIT,
         "pre_parity_context_commit": PRE_PARITY_CONTEXT_COMMIT,
+        "supersedes_runner_freeze_commit": SUPERSEDED_RUNNER_FREEZE_COMMIT,
+        "supersedes_authorization_commit": SUPERSEDED_AUTHORIZATION_COMMIT,
+        "supersession_reason": "PRE_STAGE_MANIFEST_PROVENANCE_CONTRACT_REPAIR",
+        "superseded_authorization_s3_started": False,
     }
     if any(freeze.get(key) != value for key, value in required.items()):
         raise Clean3S3Error("execution freeze lineage mismatch", terminal_status="FAILED_TECHNICAL_FREEZE_CONTRACT")
@@ -147,12 +161,30 @@ def _guard_git(repo: Path) -> dict[str, Any]:
     if (not isinstance(runner_freeze, str) or len(runner_freeze) != 40
             or any(ch not in "0123456789abcdef" for ch in runner_freeze)):
         raise Clean3S3Error("execution freeze commit is invalid", terminal_status="FAILED_TECHNICAL_FREEZE_CONTRACT")
+    def require_single_parent(commit: str, parent: str, label: str) -> None:
+        fields = _git(repo, "rev-list", "--parents", "-n", "1", commit).stdout.strip().split()
+        if fields != [commit, parent]:
+            raise Clean3S3Error(f"{label} is not an exact single-parent commit",
+                                terminal_status="FAILED_TECHNICAL_FREEZE_LINEAGE")
+
+    require_single_parent(SUPERSEDED_RUNNER_FREEZE_COMMIT, PRE_PARITY_CONTEXT_COMMIT, "superseded C1")
+    require_single_parent(SUPERSEDED_AUTHORIZATION_COMMIT, SUPERSEDED_RUNNER_FREEZE_COMMIT,
+                          "superseded C2")
+    require_single_parent(runner_freeze, SUPERSEDED_AUTHORIZATION_COMMIT, "replacement C1b")
+    require_single_parent(head, runner_freeze, "replacement C2b")
     if _git(repo, "rev-parse", f"{head}^").stdout.strip() != runner_freeze:
         raise Clean3S3Error("execution HEAD is not exactly one authorization commit after runner freeze",
                             terminal_status="FAILED_TECHNICAL_FREEZE_LINEAGE")
     changed = tuple(_git(repo, "diff", "--name-only", f"{runner_freeze}..{head}").stdout.splitlines())
     if changed != (FREEZE_PATH,):
         raise Clean3S3Error("authorization commit changed files other than the freeze JSON",
+                            terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
+    c1b_changed = tuple(sorted(
+        _git(repo, "diff", "--name-only", f"{SUPERSEDED_AUTHORIZATION_COMMIT}..{runner_freeze}")
+        .stdout.splitlines()
+    ))
+    if c1b_changed != tuple(sorted(C1B_APPROVED_PATHS)):
+        raise Clean3S3Error("replacement C1b diff is outside the approved four paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     if _git(repo, "ls-files", "--error-unmatch", FREEZE_PATH, check=False).returncode != 0:
         raise Clean3S3Error("execution freeze is not tracked", terminal_status="FAILED_TECHNICAL_FREEZE_UNTRACKED")
@@ -191,6 +223,10 @@ def _guard_git(repo: Path) -> dict[str, Any]:
     return {
         "execution_head": head,
         "runner_freeze_commit": runner_freeze,
+        "supersedes_runner_freeze_commit": SUPERSEDED_RUNNER_FREEZE_COMMIT,
+        "supersedes_authorization_commit": SUPERSEDED_AUTHORIZATION_COMMIT,
+        "supersession_reason": "PRE_STAGE_MANIFEST_PROVENANCE_CONTRACT_REPAIR",
+        "superseded_authorization_s3_started": False,
         "execution_freeze_sha256": sha256_file(freeze_path),
         "frozen_tracked_file_sha256": dict(frozen_hashes),
         "repair_implementation_commit": REPAIR_IMPLEMENTATION_COMMIT,
@@ -285,8 +321,8 @@ def _manifest_and_provider_guard(paths: Mapping[str, Path]) -> dict[str, Any]:
     auxiliary = _load_json(paths["auxiliary_manifest"])
     parity = _load_json(paths["provider_parity_report"])
     if (
-        clean.get("stage_id") != PARENT_PROVIDER_STAGE_ID
-        or clean.get("protocol_id") != PARENT_PROVIDER_PROTOCOL_ID
+        clean.get("stage_id") != CLEAN_INPUT_STAGE_ID
+        or clean.get("protocol_id") != CLEAN_INPUT_PROTOCOL_ID
         or auxiliary.get("stage_id") != PARENT_PROVIDER_STAGE_ID
         or auxiliary.get("protocol_id") != PARENT_PROVIDER_PROTOCOL_ID
         or parity.get("stage_id") != PARENT_PARITY_STAGE_ID
