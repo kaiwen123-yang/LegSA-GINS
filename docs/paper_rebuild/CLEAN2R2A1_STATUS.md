@@ -1,5 +1,7 @@
 # CLEAN2R2A1 execution status
 
+> **Current disposition: `SUPERSEDED_BY_CLEAN3_PENDING_RERUN`.** The body below is retained unchanged as historical CLEAN2R2A1 provenance. Its full-minus-strong and RD/SA/RP/HV ablation values are not current CLEAN3 module-effect evidence and must not be used for active claims or tuning.
+
 Terminal status: `PASS_CLEAN2R2A1_BY2_CLEAN_MODULE_ABLATION_FRESH_EVIDENCE_READY_FOR_HUMAN_REVIEW`.
 
 ## Frozen scope

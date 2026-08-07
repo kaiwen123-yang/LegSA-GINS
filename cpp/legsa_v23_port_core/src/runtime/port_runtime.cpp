@@ -73,6 +73,12 @@ void copyRawDopplerStatus(const GIEngine& engine, PortOptions& options) {
   options.raw_doppler = options.raw_doppler_status.update_count > 0;
 }
 
+void copyCovHealthStatus(const GIEngine& engine, PortOptions& options) {
+  options.cov_health_fail_count = engine.covHealthFailCount();
+  options.cov_health_first_failure_time = engine.covHealthFirstFailureTime();
+  options.cov_health_status = options.cov_health_fail_count == 0 ? "PASS" : "FAILED";
+}
+
 void copySourceAwareStatus(const GIEngine& engine, PortOptions& options) {
   // 中文说明：source-aware stats 来自 EKFUpdate 前的 R scale trace；不是评价结果反向调参。
   options.source_aware_runtime_stats = engine.sourceAwareStats();
@@ -135,6 +141,60 @@ void copyFormalModuleCounters(const GIEngine& engine, PortOptions& options) {
     }
   }
   options.contact_fk_update_count = 0;
+}
+
+void copyRuntimeStatusForCovFailure(const GIEngine& engine, PortOptions& options) {
+  options.propagation_count = engine.propagationCount();
+  options.measurement_update_count = engine.updateCount();
+  options.position_update_count = engine.positionUpdateCount();
+  options.velocity_update_count = engine.velocityUpdateCount();
+  options.yaw_update_count = engine.yawUpdateCount();
+  options.yaw_normal_count = engine.yawNormalCount();
+  options.yaw_downweight_count = engine.yawDownweightCount();
+  options.yaw_reject_count = engine.yawRejectCount();
+  copyCovHealthStatus(engine, options);
+  copyRawDopplerStatus(engine, options);
+  copySourceAwareStatus(engine, options);
+  copyGo2AttitudePriorStatus(engine, options);
+  copyGo2DiagnosticPriorStatus(engine, options);
+  copyGo2ReadinessLsimStatus(engine, options);
+  copyFgoFeedbackStatus(engine, options);
+  options.qa_log_row_count = engine.qaFallbackTraceRowCount();
+  options.qa_fallback_active =
+      options.qa_fallback_config.enable_qa_fallback || options.qa_fallback_config.qa_active_mode ||
+      options.algorithm_id == quality_aware::kLegsaQaFallbackEkf;
+  options.qa_passive_logging_enabled = options.qa_fallback_config.qa_passive_logging_enabled;
+  options.qa_fallback_layer_present =
+      options.qa_passive_logging_enabled || options.qa_fallback_active || options.qa_log_row_count > 0;
+  copyFormalModuleCounters(engine, options);
+  options.actual_update_count = engine.updateCount();
+  options.update_count_ratio =
+      options.expected_update_count == 0
+          ? 0.0
+          : static_cast<double>(options.actual_update_count) / static_cast<double>(options.expected_update_count);
+  options.update_count_low =
+      options.expected_update_count > 0 &&
+      static_cast<double>(options.actual_update_count) < 0.8 * static_cast<double>(options.expected_update_count);
+  options.gnss_rows_skipped_unexpectedly = options.update_count_low;
+}
+
+void failClosedOnCovHealth(const GIEngine& engine,
+                           PortOptions& options,
+                           const std::string& output_dir,
+                           const char* message) {
+  copyCovHealthStatus(engine, options);
+  if (options.cov_health_fail_count == 0) {
+    return;
+  }
+  copyRuntimeStatusForCovFailure(engine, options);
+  options.math_port_completed = false;
+  options.performance_claim = false;
+  options.paper_performance_claim = false;
+  options.proposed_factor_claim = false;
+  // Preserve a provenance-bearing FAILED diagnostic before aborting. NAV/STD
+  // and all other solver outputs are intentionally not emitted on this path.
+  FileSaver::writeRunManifest(output_dir, options);
+  throw std::runtime_error(message);
 }
 
 void validateFormalRuntimeCounters(const PortOptions& options) {
@@ -471,9 +531,7 @@ void PortRuntime::runSyntheticMath(const std::string& output_dir) {
     }
     engine.addImuData(imu);
     engine.newImuProcess();
-    if (!engine.checkCov()) {
-      throw std::runtime_error("port core synthetic covariance check failed");
-    }
+    failClosedOnCovHealth(engine, options, output_dir, "port core synthetic covariance check failed");
     appendState(engine, states, covariances);
   }
 
@@ -552,9 +610,7 @@ void PortRuntime::runRawDopplerToy(const std::string& output_dir) {
     }
     engine.addImuData(imu);
     engine.newImuProcess();
-    if (!engine.checkCov()) {
-      throw std::runtime_error("raw Doppler toy covariance check failed");
-    }
+    failClosedOnCovHealth(engine, options, output_dir, "raw Doppler toy covariance check failed");
     appendState(engine, states, covariances);
   }
   RawDopplerFactorStatus final_status = engine.rawDopplerStatus();
@@ -665,9 +721,7 @@ void PortRuntime::runSourceAwareToy(const std::string& output_dir) {
     }
     engine.addImuData(imu);
     engine.newImuProcess();
-    if (!engine.checkCov()) {
-      throw std::runtime_error("source-aware toy covariance check failed");
-    }
+    failClosedOnCovHealth(engine, options, output_dir, "source-aware toy covariance check failed");
     appendState(engine, states, covariances);
   }
 
@@ -860,9 +914,7 @@ void PortRuntime::runQualityStateToy(const std::string& output_dir) {
     }
     engine.addImuData(imu);
     engine.newImuProcess();
-    if (!engine.checkCov()) {
-      throw std::runtime_error("quality state toy covariance check failed");
-    }
+    failClosedOnCovHealth(engine, options, output_dir, "quality state toy covariance check failed");
     appendState(engine, states, covariances);
   }
 
@@ -949,9 +1001,7 @@ void PortRuntime::runGo2WeakPriorToy(const std::string& output_dir) {
     }
     engine.addImuData(imu);
     engine.newImuProcess();
-    if (!engine.checkCov()) {
-      throw std::runtime_error("Go2 weak prior toy covariance check failed");
-    }
+    failClosedOnCovHealth(engine, options, output_dir, "Go2 weak prior toy covariance check failed");
     appendState(engine, states, covariances);
   }
   copyGo2AttitudePriorStatus(engine, options);
@@ -1038,9 +1088,7 @@ void PortRuntime::runQaFallbackToy(const std::string& output_dir) {
     }
     engine.addImuData(imu);
     engine.newImuProcess();
-    if (!engine.checkCov()) {
-      throw std::runtime_error("QA fallback toy covariance check failed");
-    }
+    failClosedOnCovHealth(engine, options, output_dir, "QA fallback toy covariance check failed");
     appendState(engine, states, covariances);
   }
 
@@ -1444,9 +1492,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     const std::size_t yaw_down_before = engine.yawDownweightCount();
     const std::size_t yaw_reject_before = engine.yawRejectCount();
     engine.newImuProcess();
-    if (!engine.checkCov()) {
-      throw std::runtime_error("configured run covariance check failed");
-    }
+    failClosedOnCovHealth(engine, options, output_dir, "configured run covariance check failed");
     appendState(engine, states, covariances);
     const bool update_applied = engine.updateCount() > updates_before;
     if (loop_trace && loop_index < debug_options.max_rows) {
