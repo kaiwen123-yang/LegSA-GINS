@@ -5,8 +5,8 @@
 - Active program: `STAGE_ID=CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE`.
 - Base main commit: `9f9727b74f5195141523ab570380cc35006f3d18`.
 - Active Git branch: `stage/clean3-math-repair`.
-- Reviewed S2 implementation tree freeze: `0d8cc2bdccfd89b236ab4badeef9db5344dcf4d3`.
-- Frozen `cpp/` tree identity at that commit: `a3716d22acf95fb1e6028ae82acb2ae73e138bfc`.
+- Reviewed S2 math-repair commit: `0d8cc2bdccfd89b236ab4badeef9db5344dcf4d3`.
+- Reviewed S2 math-repair `cpp/` tree identity at that commit: `a3716d22acf95fb1e6028ae82acb2ae73e138bfc`. This is S2 math-tree provenance, not the final S3 execution `cpp/` tree.
 - Active implementation namespace: `src/legsa_gins/paper_rebuild/`, invoked only through `scripts/paper_rebuild/`.
 - Active raw source: `<RAW_ROOT>`; raw files are immutable.
 - Active generated-asset root: `<CLEAN_ROOT>`.
@@ -32,7 +32,7 @@
 - No S3 parity pass, clean rerun, calibration result, module-effect result, or final CLEAN3 status exists yet.
 - No provider generation, evaluator execution, trace opening, Canonical-541 execution, paper figure generation, merge, or release tag is authorized by the current gate.
 
-S3 is the next permitted action, but it remains fail-closed: AB0000 must be rerun with all additional modules disabled and its NAV/STD outputs must be byte-identical to the frozen CLEAN1R2R1 anchor. Any S3 runtime must start from a clean documentation-only descendant of `0d8cc2bdccfd89b236ab4badeef9db5344dcf4d3`; the exact runtime HEAD must be recorded in the manifest and report, and its `cpp/` tree identity must equal `a3716d22acf95fb1e6028ae82acb2ae73e138bfc`. Any mismatch terminates the stage as `BLOCKED_PARITY_REGRESSION_AB0000_MISMATCH`. Passing S2 does not imply passing S3.
+S3 is the next permitted action, but it remains fail-closed and `NOT_EXECUTED`: AB0000 must be rerun with all additional modules disabled and its NAV/STD outputs must be byte-identical to the frozen CLEAN1R2R1 anchor. The S3 formal identity requires the authorized loader-only extension in `cpp/legsa_v23_port_core/src/config/port_config_loader.cpp` together with the one-shot S3 runner; that extension adds an exact execution-identity gate and does not alter parity-locked solver mathematics. A future C1 runner-freeze commit will bind the final loader and runner bytes and the final `cpp/` tree. The immediately following C2 authorization commit may change only `docs/paper_rebuild/CLEAN3_S3_EXECUTION_FREEZE.json`, and runtime must use the clean C2 HEAD. C1 and C2 commit identities do not exist yet and must not be inferred. The exact runtime HEAD must be recorded in the manifest and report. Any mismatch terminates the stage as `BLOCKED_PARITY_REGRESSION_AB0000_MISMATCH`. Passing S2 does not imply passing S3.
 
 ## Inherited Locked Identities
 

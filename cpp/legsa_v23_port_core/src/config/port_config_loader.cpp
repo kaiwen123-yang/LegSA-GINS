@@ -142,6 +142,8 @@ bool isClean2r2aAblationId(const std::string& algorithm_id) {
 
 void validateFormalMethodContract(const std::unordered_map<std::string, std::string>& kv,
                                   PortOptions& options) {
+  const bool clean3_s3_ab0000_parity_mode =
+      boolOrDefault(kv, "clean3_s3_ab0000_parity_mode", false);
   const std::array<const char*, 6> feature_keys{{
       "enable_dual_yaw",
       "enable_receiver_velocity",
@@ -180,21 +182,36 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   const bool clean2r2a_ablation_identity =
       options.stage_id == "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD" &&
       options.protocol_id == "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION";
-  const bool data_mode_matches = clean2r2a_ablation_identity
+  const bool clean3_s3_ab0000_identity =
+      clean3_s3_ab0000_parity_mode &&
+      options.stage_id ==
+          "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE" &&
+      options.protocol_id == "CLEAN3_S3_AB0000_PARITY" &&
+      options.algorithm_id == "AB0000" && options.run_id == "CLEAN3_S3_AB0000";
+  if (clean3_s3_ab0000_parity_mode && !clean3_s3_ab0000_identity) {
+    formalContractFailure("CLEAN3 S3 parity mode identity mismatch");
+  }
+  if (!clean3_s3_ab0000_parity_mode &&
+      options.stage_id ==
+          "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE") {
+    formalContractFailure("CLEAN3 S3 parity mode requires its explicit guard key");
+  }
+  const bool data_mode_matches = (clean2r2a_ablation_identity || clean3_s3_ab0000_identity)
                                      ? options.data_mode == "real_clean"
                                      : options.data_mode == "real_by2_raw";
   if ((!clean1_v1_identity && !clean1r1c_v2_identity && !clean1r2r1_final_v23_identity &&
-       !clean2r2a_ablation_identity) ||
+       !clean2r2a_ablation_identity && !clean3_s3_ab0000_identity) ||
       options.case_id != "CLEAN1_BY2_CLEAN_NORMAL" || !data_mode_matches ||
       options.run_id.empty()) {
     formalContractFailure("formal stage/protocol/case/data_mode/run identity mismatch");
   }
   // 保留 CLEAN1 的逐字合同，同时只为 CLEAN2R2A 要求同一 final_v23 parity mode。
   if ((options.clean_final_v23_parity_mode != clean1r2r1_final_v23_identity) &&
-      !clean2r2a_ablation_identity) {
+      !clean2r2a_ablation_identity && !clean3_s3_ab0000_identity) {
     formalContractFailure("clean final_v23 parity mode/profile identity mismatch");
   }
-  if (clean2r2a_ablation_identity && !options.clean_final_v23_parity_mode) {
+  if ((clean2r2a_ablation_identity || clean3_s3_ab0000_identity) &&
+      !options.clean_final_v23_parity_mode) {
     formalContractFailure("clean final_v23 parity mode/profile identity mismatch");
   }
   if (!options.common_initialization || !options.common_initialization_dual_yaw_used ||
@@ -260,7 +277,8 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
     expected_source_aware = true;
     expected_go2_roll_pitch = true;
     expected_go2_horizontal = true;
-  } else if (clean2r2a_ablation_identity && isClean2r2aAblationId(options.algorithm_id)) {
+  } else if ((clean2r2a_ablation_identity || clean3_s3_ab0000_identity) &&
+             isClean2r2aAblationId(options.algorithm_id)) {
     // 中文说明：AB 四位从左到右严格是 RD、SA、RP、HV；backbone 始终是 strong/final_v23。
     expected_dual = true;
     expected_receiver_velocity = true;
@@ -293,7 +311,9 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   options.enable_basic_dual_yaw_baseline = options.algorithm_id == "basic_dual_yaw_EKF";
   options.yaw_scheme_C_enabled = options.enable_dual_yaw_update && !options.enable_basic_dual_yaw_baseline;
   options.phase = options.stage_id;
-  options.port_role = clean2r2a_ablation_identity
+  options.port_role = clean3_s3_ab0000_identity
+                          ? "clean3_s3_ab0000_parity_solver"
+                      : clean2r2a_ablation_identity
                           ? "clean2r2a_formal_clean_ablation_solver"
                           : "clean1_formal_four_method_solver";
   options.run_label = options.run_id;
@@ -1063,6 +1083,17 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       boolOrDefault(kv,
                     "enable_contact_fk",
                     boolOrDefault(kv, "enable_contact_fk_factor", options.enable_contact_fk_factor));
+  const bool clean3_s3_guard_requested =
+      boolOrDefault(kv, "clean3_s3_ab0000_parity_mode", false);
+  const bool clean3_stage_requested =
+      options.stage_id ==
+          "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE";
+  if (clean3_stage_requested && !clean3_s3_guard_requested) {
+    formalContractFailure("CLEAN3 S3 stage requires its explicit guard key");
+  }
+  if (clean3_s3_guard_requested && !options.clean1_formal_mode) {
+    formalContractFailure("CLEAN3 S3 parity mode cannot weaken formal validation");
+  }
   if (options.clean1_formal_mode) {
     validateFormalMethodContract(kv, options);
   }

@@ -5,8 +5,8 @@
 - Stage: `CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE`.
 - Base main commit: `9f9727b74f5195141523ab570380cc35006f3d18`.
 - Branch: `stage/clean3-math-repair`.
-- Reviewed S2 implementation tree freeze: `0d8cc2bdccfd89b236ab4badeef9db5344dcf4d3`.
-- Frozen `cpp/` tree identity: `a3716d22acf95fb1e6028ae82acb2ae73e138bfc`.
+- Reviewed S2 math-repair commit: `0d8cc2bdccfd89b236ab4badeef9db5344dcf4d3`.
+- Reviewed S2 math-repair `cpp/` tree identity: `a3716d22acf95fb1e6028ae82acb2ae73e138bfc`; retained as S2 math-tree provenance rather than the final S3 execution `cpp/` identity.
 - Current gate: `S2_REVIEWER_APPROVED_S3_PENDING`.
 - `ready_for_paper_claims=false`.
 
@@ -24,7 +24,8 @@
 ## Pending Gate
 
 - S3 AB0000 parity regression is `NOT_EXECUTED`.
-- No S3 result exists yet. Any S3 runtime must use a clean documentation-only descendant of the reviewed S2 freeze, record that descendant's exact HEAD in its manifest and report, and verify that its `cpp/` tree identity remains `a3716d22acf95fb1e6028ae82acb2ae73e138bfc`.
+- No S3 result exists yet. S3 formal execution requires the authorized loader-only extension in `cpp/legsa_v23_port_core/src/config/port_config_loader.cpp` and the one-shot S3 runner. The extension changes only execution-identity validation and does not change parity-locked solver mathematics.
+- A future C1 runner-freeze commit will bind the final loader/runner bytes and final `cpp/` tree. Its immediately following C2 authorization commit may modify only `docs/paper_rebuild/CLEAN3_S3_EXECUTION_FREEZE.json`; S3 runtime must use the clean C2 HEAD. Neither C1 nor C2 SHA exists yet, so no commit identity is claimed here.
 - S4 shadow mode, S5 one-shot calibration, S6 SA changes, S7 clean 18-configuration rerun, S8 acceptance gates, and S9 final review are not started.
 - Passing S2 does not authorize or imply any later gate.
 
