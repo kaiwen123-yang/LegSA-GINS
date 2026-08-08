@@ -27,7 +27,9 @@ from legsa_gins.paper_rebuild.raw_doppler_parity import (
 from legsa_gins.paper_rebuild.canonical541.seed_anchor import (
     anchor_context_from_fresh_bundle, realize_all_anchors, seed_manifest,
 )
-from legsa_gins.paper_rebuild.canonical541.authorization import validate_attempt_root
+from legsa_gins.paper_rebuild.canonical541.authorization import (
+    PROTOCOL_ID, RUNTIME_ROLE, STAGE_ID, validate_attempt_root,
+)
 from legsa_gins.paper_rebuild.manifest import git_code_state
 
 
@@ -53,6 +55,25 @@ EXPECTED_BASE_HASHES = {
     "go2_horizontal_velocity": "f390c8e51f1bec1162c0f6c628ebbcd0449923cfbf9211bebb36004dc2b2aab0",
 }
 EXPECTED_RAW_LOCK_SHA256 = "f6e5d7965d17857e5b4a846501883f4675f2331a1164fab3de9e5ba9470f1ad7"
+
+ATTEMPT_PRE_FREEZE_DESTINATIONS = (
+    "01_COMPACT_READINESS_RUN",
+    "05_PROVIDER_GENERATION",
+    "06_PROVIDER_READY",
+    "07_FULL_ALGORITHM_REGISTRY/PREPARED_EXECUTION_INPUTS",
+    "08_FULL_ALGORITHM_RUNS",
+    "10_INTERNAL_ABLATION_RUNS",
+    "11_OUTPUT_SEAL",
+)
+GLOBAL_PRE_FREEZE_FILE_NAMES = {
+    "KF_GINS_NAVRESULT.NAV", "KF_GINS_STD.TXT", "RUN_MANIFEST.JSON",
+    "RUN_PROOF.JSON", "CANONICAL541_EXECUTION_PROOF.JSON",
+    "CANONICAL541_FORMAL_RUN_MANIFEST.JSON",
+    "OUTPUT_HASH_MANIFEST.CSV", "OUTPUT_SEAL_MANIFEST.CSV",
+    "OUTPUT_SEAL_JOURNAL.JSON", "SOLVER_READ_LEDGER.JSON",
+    "EVALUATOR_READ_LEDGER.JSON", "SOLVER_FILE_OPEN_TRACE.RAW",
+    "EVALUATOR_FILE_OPEN_TRACE.RAW",
+}
 
 
 def verify_active_base_provider(paths: Mapping[str, Path]) -> dict[str, Any]:
@@ -134,6 +155,158 @@ def load_base(paths: Mapping[str, Path]):
     )
 
 
+def _external_provider_origin(external_provider_root: Path) -> dict[str, Any]:
+    try:
+        external = external_provider_root.resolve(strict=True)
+    except FileNotFoundError as exc:
+        raise SystemExit("external provider origin is missing") from exc
+    if external.name != "05_PROVIDER_GENERATION":
+        raise SystemExit("external provider origin must be the old 05_PROVIDER_GENERATION root")
+    try:
+        finalized = (external / "FINALIZED").resolve(strict=True)
+        gate_path = (external.parent / "06_PROVIDER_READY/PROVIDER_GATE.json").resolve(strict=True)
+        gate = json.loads(gate_path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError) as exc:
+        raise SystemExit("external provider gate is missing or unreadable") from exc
+    required = {
+        "passed": True, "provider_generation": 541, "provider_ready": 541,
+        "effect_validation": 541, "provider_sha_rows": 4328,
+        "provider_sha_closure": True, "raw_mutation": 0, "trace_open_count": 0,
+    }
+    try:
+        bound_finalized = Path(str(gate["finalized_provider_root"])).resolve(strict=True)
+    except (KeyError, FileNotFoundError) as exc:
+        raise SystemExit("external provider gate lacks finalized-provider binding") from exc
+    if bound_finalized != finalized or any(gate.get(key) != value for key, value in required.items()):
+        raise SystemExit("external provider gate contract mismatch")
+    return {
+        "role": "READ_ONLY_PROVIDER_REUSE_ORIGIN_NOT_ATTEMPT_OWNED",
+        "path": str(external),
+        "finalized_provider_root": str(finalized),
+        "provider_gate_path": str(gate_path),
+        "provider_gate_sha256": sha256_file(gate_path),
+        **required,
+    }
+
+
+def _attempt_owned_pre_freeze_state(
+    output: Path, external_provider_root: Path,
+) -> dict[str, Any]:
+    """Reject only execution artifacts owned by the new attempt.
+
+    ``external_provider_root`` is the immutable CLEAN2 provider-reuse origin.  Its
+    existing ``FINALIZED`` tree is evidence to bind later, not evidence that this
+    CLEAN3 attempt generated a provider before its solver freeze.
+    """
+
+    attempt = validate_attempt_root(output)
+    external = external_provider_root.resolve(strict=True)
+    try:
+        external.relative_to(attempt)
+    except ValueError:
+        pass
+    else:
+        raise SystemExit("external provider reuse origin must not be attempt-owned")
+    destination_artifacts = sorted(
+        path.relative_to(attempt).as_posix()
+        for name in ATTEMPT_PRE_FREEZE_DESTINATIONS
+        for root in (attempt / name,)
+        if root.exists()
+        for path in (root, *root.rglob("*"))
+    )
+    misplaced_artifacts = sorted(
+        path.relative_to(attempt).as_posix()
+        for path in attempt.rglob("*")
+        if path.is_file()
+        and (
+            path.name.upper() in GLOBAL_PRE_FREEZE_FILE_NAMES
+            or "TRACE" in path.name.upper()
+            or "READ_LEDGER" in path.name.upper()
+            or ("SEAL" in path.name.upper()
+                and ("MANIFEST" in path.name.upper() or "JOURNAL" in path.name.upper()))
+        )
+    )
+    if destination_artifacts or misplaced_artifacts:
+        raise SystemExit(
+            "code-freeze evidence must precede all attempt-owned readiness/providers/"
+            "prepared inputs/formal runs/seals/trace ledgers"
+        )
+    return {
+        "attempt_owned_readiness_artifact_count": 0,
+        "attempt_owned_provider_artifact_count": 0,
+        "attempt_owned_prepared_input_artifact_count": 0,
+        "attempt_owned_formal_artifact_count": 0,
+        "attempt_owned_output_seal_artifact_count": 0,
+        "attempt_owned_misplaced_execution_artifact_count": 0,
+        "attempt_owned_trace_ledger_count": 0,
+        "external_provider_origin": _external_provider_origin(external),
+    }
+
+
+def _expected_code_freeze(
+    *, executable: Path, code_freeze_commit: str,
+    ownership_state: Mapping[str, Any],
+) -> dict[str, Any]:
+    binary = executable.resolve(strict=True)
+    if not binary.is_absolute():
+        raise SystemExit("code-freeze executable path must be absolute")
+    return {
+        "schema_version": "paper_rebuild.canonical541_code_freeze.v1",
+        "stage_id": STAGE_ID, "protocol_id": PROTOCOL_ID,
+        "runtime_role": RUNTIME_ROLE,
+        "code_freeze_commit": code_freeze_commit,
+        "executable_path": str(binary), "executable_sha256": sha256_file(binary),
+        "provider_generation_count_at_freeze": 0,
+        "formal_solver_run_count_at_freeze": 0, "trace_open_count_at_freeze": 0,
+        "degraded_provider_generation_started_before_freeze": False,
+        "formal_solver_run_started_before_freeze": False,
+        "worktree_clean": True, **dict(ownership_state), "passed": True,
+    }
+
+
+def _initialize_code_freeze(
+    *, output: Path, external_provider_root: Path, executable: Path,
+    code_freeze_commit: str,
+) -> dict[str, Any]:
+    """Create or validate the exact attempt-owned solver freeze."""
+
+    freeze_root = output / "01_GIT_FREEZE"
+    freeze_path = freeze_root / "CANONICAL541_CODE_FREEZE.json"
+    if freeze_path.is_file():
+        freeze = json.loads(freeze_path.read_text(encoding="utf-8"))
+        ownership = {
+            key: 0 for key in (
+                "attempt_owned_readiness_artifact_count",
+                "attempt_owned_provider_artifact_count",
+                "attempt_owned_prepared_input_artifact_count",
+                "attempt_owned_formal_artifact_count",
+                "attempt_owned_output_seal_artifact_count",
+                "attempt_owned_misplaced_execution_artifact_count",
+                "attempt_owned_trace_ledger_count",
+            )
+        }
+        ownership["external_provider_origin"] = _external_provider_origin(
+            external_provider_root
+        )
+        expected = _expected_code_freeze(
+            executable=executable, code_freeze_commit=code_freeze_commit,
+            ownership_state=ownership,
+        )
+        if freeze != expected:
+            raise SystemExit("existing code-freeze evidence differs from current bytes")
+        return freeze
+    state = _attempt_owned_pre_freeze_state(output, external_provider_root)
+    freeze_root.mkdir(parents=True, exist_ok=True)
+    freeze = _expected_code_freeze(
+        executable=executable, code_freeze_commit=code_freeze_commit,
+        ownership_state=state,
+    )
+    freeze_path.write_text(
+        json.dumps(freeze, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    return freeze
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(); parser.add_argument("--local-config", required=True); parser.add_argument("--output-root")
     parser.add_argument("--code-freeze-commit", required=True); parser.add_argument("--executable", required=True)
@@ -150,35 +323,11 @@ def main() -> None:
     commit, dirty = git_code_state(repo)
     if dirty or commit != args.code_freeze_commit:
         raise SystemExit("matrix lock requires exact clean code-freeze commit")
-    freeze_root = output / "01_GIT_FREEZE"; freeze_root.mkdir(parents=True, exist_ok=True)
-    freeze_path = freeze_root / "CANONICAL541_CODE_FREEZE.json"
-    if freeze_path.is_file():
-        freeze = json.loads(freeze_path.read_text(encoding="utf-8"))
-        if (freeze.get("code_freeze_commit") != args.code_freeze_commit
-                or freeze.get("executable_sha256") != sha256_file(executable)
-                or freeze.get("passed") is not True):
-            raise SystemExit("existing code-freeze evidence differs from current bytes")
-    else:
-        provider_finalized = paths["provider_root"] / "FINALIZED"
-        formal_count = sum(
-            path.name.startswith("RUN_")
-            for parent in (output / "08_FULL_ALGORITHM_RUNS", output / "10_INTERNAL_ABLATION_RUNS")
-            if parent.exists() for path in parent.iterdir() if path.is_dir()
-        )
-        if provider_finalized.exists() or formal_count:
-            raise SystemExit("code-freeze evidence must be created before providers/formal runs")
-        freeze = {
-            "schema_version": "paper_rebuild.canonical541_code_freeze.v1",
-            "stage_id": "CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX",
-            "code_freeze_commit": args.code_freeze_commit,
-            "executable_path": str(executable), "executable_sha256": sha256_file(executable),
-            "provider_generation_count_at_freeze": 0,
-            "formal_solver_run_count_at_freeze": 0, "trace_open_count_at_freeze": 0,
-            "degraded_provider_generation_started_before_freeze": False,
-            "formal_solver_run_started_before_freeze": False,
-            "worktree_clean": True, "passed": True,
-        }
-        freeze_path.write_text(json.dumps(freeze, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    freeze = _initialize_code_freeze(
+        output=output, external_provider_root=paths["provider_root"],
+        executable=executable, code_freeze_commit=args.code_freeze_commit,
+    )
+    freeze_root = output / "01_GIT_FREEZE"
     snapshot_root = freeze_root / "TRACKED_CONFIG_SNAPSHOTS"; snapshot_root.mkdir(exist_ok=True)
     snapshot_names = (
         "canonical_by2_degradation_541.yaml", "canonical_by2_seed_anchor_policy.yaml",
