@@ -186,7 +186,9 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
       options.stage_id ==
           "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE" ||
       options.stage_id ==
-          "CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME";
+          "CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME" ||
+      options.stage_id ==
+          "CLEAN3R3_MATH_REPAIR_PORT_ROLE_FILL_IF_EMPTY_HARDCODE_SWEEP_AND_S3_RESUME";
   const bool clean3_s3_ab0000_identity =
       clean3_s3_ab0000_parity_mode && clean3_s3_stage_identity &&
       options.protocol_id == "CLEAN3_S3_AB0000_PARITY" &&
@@ -1090,7 +1092,9 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       options.stage_id ==
           "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE" ||
       options.stage_id ==
-          "CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME";
+          "CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME" ||
+      options.stage_id ==
+          "CLEAN3R3_MATH_REPAIR_PORT_ROLE_FILL_IF_EMPTY_HARDCODE_SWEEP_AND_S3_RESUME";
   if (clean3_stage_requested && !clean3_s3_guard_requested) {
     formalContractFailure("CLEAN3 S3 stage requires its explicit guard key");
   }

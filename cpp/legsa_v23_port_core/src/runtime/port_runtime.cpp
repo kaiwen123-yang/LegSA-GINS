@@ -1118,10 +1118,6 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   if (options.clean1_formal_mode) {
     // 中文说明：formal identity 已由 loader 严格校验，禁止后续 N*/PAPER10E0 路由覆盖。
     options.phase = options.stage_id;
-    options.port_role =
-        options.stage_id == "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD"
-            ? "clean2r2a_formal_clean_ablation_solver"
-            : "clean1_formal_four_method_solver";
     options.run_label = options.run_id;
     options.parity_attempted =
         options.clean_final_v23_parity_mode && options.algorithm_id == "strong_dual_yaw_EKF";
