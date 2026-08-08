@@ -1,5 +1,7 @@
 import hashlib
 
+import pytest
+
 from legsa_gins.paper_rebuild.canonical541.full_method_registry import FEATURE_FIELDS
 from legsa_gins.paper_rebuild.canonical541.preparation import (
     ABLATION_QUEUE_TOTAL,
@@ -8,8 +10,9 @@ from legsa_gins.paper_rebuild.canonical541.preparation import (
     METHOD_BOUND_TOTAL,
 )
 from legsa_gins.paper_rebuild.canonical541.run_registry import (
-    build_logical_queues,
+    RunRegistryError, build_logical_queues,
     resolve_execution_aliases,
+    validate_execution_registry,
 )
 
 
@@ -37,9 +40,10 @@ def test_preparation_counts_and_required_exact_aliases():
     runtime_hashes = {}
     for row in logical:
         signature = "".join("1" if row[field] else "0" for field in FEATURE_FIELDS)
-        # Case-specific exact input; F04/A01 and F03/A02 share signatures.
+        # Deliberately identical across cases: case_id itself must prevent a
+        # degradation that is inactive for one profile from cross-case dedup.
         method_hashes[(row["method_id"], row["case_id"])] = hashlib.sha256(
-            f"{row['case_id']}:{signature}".encode()
+            signature.encode()
         ).hexdigest()
         runtime_hashes[(row["method_id"], row["case_id"])] = hashlib.sha256(signature.encode()).hexdigest()
     resolved, unique = resolve_execution_aliases(
@@ -51,8 +55,19 @@ def test_preparation_counts_and_required_exact_aliases():
     assert len(ablation) == ABLATION_QUEUE_TOTAL == 4869
     assert len(resolved) == ALL_LOGICAL_TOTAL == 7033
     assert len(unique) == 5951
+    assert sum(bool(row["execution_alias"]) for row in resolved) == 1082
+    assert {row["case_id"] for row in unique} == {row["case_id"] for row in cases}
+    assert all(sum(row["case_id"] == case["case_id"] for row in unique) == 11 for case in cases)
     by_id = {row["logical_id"]: row for row in resolved}
     for case in cases:
         case_id = case["case_id"]
         assert by_id[f"ABLATION_A01_{case_id}"]["run_id"] == by_id[f"FULL_F04_{case_id}"]["run_id"]
         assert by_id[f"ABLATION_A02_{case_id}"]["run_id"] == by_id[f"FULL_F03_{case_id}"]["run_id"]
+
+    # A persisted registry may never reuse a run ID across case identities.
+    tampered = [dict(row) for row in resolved]
+    first = next(row for row in tampered if row["case_id"] == cases[0]["case_id"] and not row["execution_alias"])
+    second = next(row for row in tampered if row["case_id"] == cases[1]["case_id"] and not row["execution_alias"])
+    second["run_id"] = first["run_id"]
+    with pytest.raises(RunRegistryError, match="cross-case"):
+        validate_execution_registry(tampered, unique)

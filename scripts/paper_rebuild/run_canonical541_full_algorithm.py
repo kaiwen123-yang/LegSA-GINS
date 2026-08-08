@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare the exact plan, run C00, 32 formal smoke rows, then full 4x541."""
+"""Load the authoritative prepared plan, then run the frozen full matrix."""
 
 from __future__ import annotations
 
@@ -13,10 +13,10 @@ SRC_ROOT = REPO_ROOT / "src"
 if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
-from build_canonical541_manifest import load_base, load_local
+from build_canonical541_manifest import load_local
 from legsa_gins.paper_rebuild.canonical541.execution_plan import (
     execute_unique_selection, load_execution_plan, matrix_terminal_gate,
-    prepare_execution_plan, storage_projection,
+    storage_projection,
 )
 from legsa_gins.paper_rebuild.canonical541.runner import (
     TERMINAL_STATUSES, safe_initial_jobs, select_adaptive_jobs,
@@ -43,13 +43,6 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("hard max jobs must be 8..16")
     local = Path(args.local_config).resolve(strict=True); paths = load_local(local)
     stage = validate_attempt_root(paths["runtime_root"])
-    plan_path = stage / "07_FULL_ALGORITHM_REGISTRY/EXECUTION_PLAN.json"
-    if not plan_path.is_file():
-        prepare_execution_plan(
-            repo_root=REPO_ROOT, stage_root=stage, provider_root=paths["provider_root"],
-            base_provider_root=paths["base_provider_root"], base=load_base(paths),
-            executable=args.executable, code_freeze_commit=args.code_freeze_commit,
-        )
     plan, unique, logical = load_execution_plan(
         stage_root=stage, repo_root=REPO_ROOT, executable=args.executable,
         code_freeze_commit=args.code_freeze_commit,
@@ -75,6 +68,10 @@ def main(argv: list[str] | None = None) -> int:
         clean_root=paths["clean_root"], repo_root=REPO_ROOT,
         code_freeze_commit=args.code_freeze_commit, jobs=initial_jobs,
         timeout_seconds=args.timeout_seconds,
+    )
+    plan, unique, logical = load_execution_plan(
+        stage_root=stage, repo_root=REPO_ROOT, executable=args.executable,
+        code_freeze_commit=args.code_freeze_commit,
     )
     reference = paths["clean_root"] / "stages/CLEAN2R2A1_RAW_DOPPLER_CANONICAL_PARITY_AND_CLEAN_ABLATION_RESUME/06_FORMAL_RUNS"
     c00_gate = validate_c00_structural_gate(
@@ -107,6 +104,10 @@ def main(argv: list[str] | None = None) -> int:
         code_freeze_commit=args.code_freeze_commit, jobs=initial_jobs,
         timeout_seconds=args.timeout_seconds,
     )
+    plan, unique, logical = load_execution_plan(
+        stage_root=stage, repo_root=REPO_ROOT, executable=args.executable,
+        code_freeze_commit=args.code_freeze_commit,
+    )
     by_run = {str(row["run_id"]): row for row in unique}
     smoke_proofs = [
         json.loads((Path(str(by_run[run_id]["output_root"])) / "CANONICAL541_EXECUTION_PROOF.json").read_text(encoding="utf-8"))
@@ -131,6 +132,10 @@ def main(argv: list[str] | None = None) -> int:
         clean_root=paths["clean_root"], repo_root=REPO_ROOT,
         code_freeze_commit=args.code_freeze_commit, jobs=int(adaptive["selected_jobs"]),
         timeout_seconds=args.timeout_seconds,
+    )
+    plan, unique, logical = load_execution_plan(
+        stage_root=stage, repo_root=REPO_ROOT, executable=args.executable,
+        code_freeze_commit=args.code_freeze_commit,
     )
     full_gate = matrix_terminal_gate(
         matrix="full_algorithm", unique_rows=unique, logical_rows=logical,

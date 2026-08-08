@@ -13,6 +13,7 @@ from legsa_gins.paper_rebuild.canonical541.preparation import (
     ProviderTableCache,
     UniqueFileHashCache,
     _tail_recovery_allowed,
+    _finalize_method_manifest_rendered_hash,
     _validate_method_manifest,
     _validate_shared_gnss_store,
     scientific_method_runtime_hash,
@@ -39,6 +40,44 @@ def test_unique_file_hash_and_json_cache_read_once(tmp_path):
     assert cache.sha256(path) == _sha(path)
     assert calls == []
     assert cache.physical_reads == 1
+
+
+def test_hash_cache_rejects_external_mutation_and_fresh_boundary_accepts_finalized_bytes(tmp_path):
+    path = tmp_path / "manifest.json"
+    path.write_text('{"value":"before"}\n', encoding="utf-8")
+    cache = UniqueFileHashCache()
+    cache.sha256(path)
+    path.write_text('{"value":"external"}\n', encoding="utf-8")
+    with pytest.raises(PreparationError, match="mutated during hash cache lifetime"):
+        cache.sha256(path)
+
+    # A new boundary is permitted only after the caller has explicitly
+    # completed its owned atomic finalization; it hashes the finalized bytes.
+    finalized = UniqueFileHashCache()
+    assert finalized.sha256(path) == _sha(path)
+
+
+def test_owned_manifest_finalization_is_guarded_and_written_once(tmp_path):
+    path = tmp_path / "METHOD_BOUND_INPUT_MANIFEST.json"
+    payload = {"case_id": "C00_clean_normal"}
+    path.write_text(json.dumps(payload) + "\n", encoding="utf-8")
+    cache = UniqueFileHashCache()
+    cache.read_json(path)
+    _finalize_method_manifest_rendered_hash(
+        path=path, payload=payload, rendered_hash="a" * 64, hash_cache=cache,
+    )
+    assert json.loads(path.read_text(encoding="utf-8"))["actual_rendered_runtime_config_sha256"] == "a" * 64
+    assert payload["actual_rendered_runtime_config_sha256"] == "a" * 64
+
+    fresh = UniqueFileHashCache()
+    fresh.sha256(path)
+    _finalize_method_manifest_rendered_hash(
+        path=path, payload=payload, rendered_hash="a" * 64, hash_cache=fresh,
+    )
+    with pytest.raises(PreparationError, match="rendered runtime config hash drift"):
+        _finalize_method_manifest_rendered_hash(
+            path=path, payload=payload, rendered_hash="b" * 64, hash_cache=fresh,
+        )
 
 
 def test_provider_table_cache_parses_same_physical_file_once(tmp_path):

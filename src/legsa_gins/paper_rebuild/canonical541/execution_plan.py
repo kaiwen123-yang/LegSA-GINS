@@ -29,7 +29,10 @@ from .full_method_registry import (
 from .provider_generator import (
     ProviderBundle, load_case_bundle, resolve_provider_index, sha256_file,
 )
-from .run_registry import build_logical_queues, resolve_execution_aliases
+from .run_registry import (
+    RunRegistryError, build_logical_queues, resolve_execution_aliases,
+    validate_execution_registry,
+)
 from .runner import (
     TERMINAL_STATUSES, CanonicalRunnerError, _as_bool, _expected_solver_inputs,
     build_runtime_config, materialize_method_bound_inputs, run_unique_execution,
@@ -42,6 +45,21 @@ from .authorization import validate_attempt_root
 
 class ExecutionPlanError(RuntimeError):
     pass
+
+
+def _validate_dual_freeze(
+    *, repo: Path, supplied_scientific_commit: str,
+    recorded_scientific_commit: str, recorded_preparation_commit: str,
+) -> None:
+    """Keep solver science frozen while binding the reviewed preparation HEAD."""
+
+    current, dirty = git_code_state(repo)
+    if (
+        dirty
+        or recorded_scientific_commit != supplied_scientific_commit
+        or current != recorded_preparation_commit
+    ):
+        raise ExecutionPlanError("scientific/preparation dual-freeze identity failed")
 
 
 PROFILE_BY_METHOD = {row.method_id: row for row in (*FULL_METHODS, *ABLATION_METHODS)}
@@ -242,9 +260,9 @@ def prepare_execution_plan(
 ) -> dict[str, Any]:
     repo = Path(repo_root).resolve(strict=True); stage = validate_attempt_root(stage_root)
     provider = Path(provider_root).resolve(strict=True); executable_path = Path(executable).resolve(strict=True)
-    commit, dirty = git_code_state(repo)
-    if dirty or commit != code_freeze_commit:
-        raise ExecutionPlanError("execution plan requires exact clean code freeze")
+    preparation_commit, dirty = git_code_state(repo)
+    if dirty:
+        raise ExecutionPlanError("execution plan requires a clean preparation-code freeze")
     validate_code_freeze_gate(
         stage_root=stage, executable=executable_path,
         code_freeze_commit=code_freeze_commit,
@@ -345,7 +363,9 @@ def prepare_execution_plan(
             "runtime_config_file_hash": "", "runtime_config_path": "",
             "method_bound_manifest_path": str(method_manifest.resolve(strict=True)),
             "method_bound_manifest_hash": sha256_file(method_manifest),
-            "code_freeze_commit": code_freeze_commit, "terminal_status": "PENDING",
+            "scientific_code_freeze_commit": code_freeze_commit,
+            "preparation_code_commit": preparation_commit,
+            "terminal_status": "PENDING",
             **{field: profile.flags[field] for field in FEATURE_FIELDS},
         })
     unique_by_run = {str(row["run_id"]): row for row in unique}
@@ -361,8 +381,10 @@ def prepare_execution_plan(
     write_csv_atomic(stage / "09_INTERNAL_ABLATION_REGISTRY/INTERNAL_ABLATION_QUEUE.csv", ablation_resolved)
     unique_path = write_csv_atomic(stage / "07_FULL_ALGORITHM_REGISTRY/CANONICAL541_UNIQUE_RUN_REGISTRY.csv", unique)
     plan = {
-        "schema_version": "paper_rebuild.canonical541_execution_plan.v1",
-        "code_freeze_commit": code_freeze_commit, "executable_path": str(executable_path),
+        "schema_version": "paper_rebuild.canonical541_execution_plan.v3_repaired",
+        "scientific_code_freeze_commit": code_freeze_commit,
+        "preparation_code_commit": preparation_commit,
+        "executable_path": str(executable_path),
         "executable_sha256": executable_hash, "logical_row_count": len(logical),
         "full_logical_row_count": len(full_resolved), "ablation_logical_row_count": len(ablation_resolved),
         "unique_run_count": len(unique), "effective_profile_count": len(representatives),
@@ -372,7 +394,8 @@ def prepare_execution_plan(
         "trace_open_count": 0, "metric_driven_rerun": False, "passed": True,
     }
     if (plan["logical_row_count"], plan["full_logical_row_count"], plan["ablation_logical_row_count"],
-            plan["effective_profile_count"], plan["c00_logical_row_count"], plan["c00_unique_run_count"]) != (7033, 2164, 4869, 11, 13, 11):
+            plan["unique_run_count"], plan["effective_profile_count"],
+            plan["c00_logical_row_count"], plan["c00_unique_run_count"]) != (7033, 2164, 4869, 5951, 11, 13, 11):
         raise ExecutionPlanError("canonical execution plan count closure failed")
     (registry_root / "EXECUTION_PLAN.json").write_text(
         json.dumps(plan, indent=2, sort_keys=True) + "\n", encoding="utf-8",
@@ -393,6 +416,116 @@ def _normalize_registry_row(row: Mapping[str, Any]) -> dict[str, Any]:
     return output
 
 
+def _validate_authoritative_preparation_gate(
+    *, stage: Path, plan: Mapping[str, Any], unique: Sequence[Mapping[str, Any]],
+    logical: Sequence[Mapping[str, Any]],
+) -> dict[str, str]:
+    """Cross-bind the plan-last marker to the complete pre-execution package."""
+
+    paths = {
+        "full_queue": stage / "07_FULL_ALGORITHM_REGISTRY/PREPARED_REGISTRY_FREEZE/FULL_ALGORITHM_QUEUE.csv",
+        "ablation_queue": stage / "07_FULL_ALGORITHM_REGISTRY/PREPARED_REGISTRY_FREEZE/INTERNAL_ABLATION_QUEUE.csv",
+        "unique_registry": stage / "07_FULL_ALGORITHM_REGISTRY/PREPARED_REGISTRY_FREEZE/CANONICAL541_UNIQUE_RUN_REGISTRY.csv",
+        "hash_registry": stage / "07_FULL_ALGORITHM_REGISTRY/PROVIDER_CONFIG_EXECUTABLE_HASH_REGISTRY.csv",
+        "source_isolation": stage / "04_EFFECT_RULES/CANONICAL541_EXPECTED_SOURCE_ISOLATION_MATRIX.csv",
+        "completeness_audit": stage / "16_AUDITS/CANONICAL541_EXECUTION_INPUT_COMPLETENESS_AUDIT.json",
+        "preparation_status": stage / "07_FULL_ALGORITHM_REGISTRY/PREPARATION_STATUS.json",
+    }
+    current = {name: sha256_file(path) for name, path in paths.items()}
+    if plan.get("prepared_artifact_sha256") != current:
+        raise ExecutionPlanError("authoritative plan does not bind current preparation artifacts")
+    audit = json.loads(paths["completeness_audit"].read_text(encoding="utf-8"))
+    status = json.loads(paths["preparation_status"].read_text(encoding="utf-8"))
+    hash_rows = read_csv(paths["hash_registry"])
+    source_rows = read_csv(paths["source_isolation"])
+    frozen_unique = [_normalize_registry_row(row) for row in read_csv(paths["unique_registry"])]
+    frozen_logical = [_normalize_registry_row(row) for row in (
+        *read_csv(paths["full_queue"]), *read_csv(paths["ablation_queue"]),
+    )]
+    if (
+        plan.get("passed") is not True
+        or audit.get("passed") is not True
+        or audit.get("method_bound_completed") != 5951
+        or audit.get("unique_runs_planned") != 5951
+        or audit.get("full_queue_rows") != 2164
+        or audit.get("ablation_queue_rows") != 4869
+        or audit.get("provider_config_executable_hash_rows") != 5951
+        or audit.get("source_isolation_rows") != 671
+        or audit.get("full_queue_sha256") != current["full_queue"]
+        or audit.get("ablation_queue_sha256") != current["ablation_queue"]
+        or audit.get("unique_registry_sha256") != current["unique_registry"]
+        or audit.get("hash_registry_sha256") != current["hash_registry"]
+        or audit.get("source_isolation_sha256") != current["source_isolation"]
+        or status.get("phase") != "READY_FOR_AUTOMATIC_EXECUTION"
+        or status.get("method_bound_completed") != 5951
+        or status.get("full_queue_rows") != 2164
+        or status.get("ablation_queue_rows") != 4869
+        or status.get("unique_runs_planned") != 5951
+        or any(status.get(name) != 0 for name in ("solver_runs", "evaluator_runs", "trace_reads"))
+        or status.get("formal_execution_started") is not False
+        or len(hash_rows) != 5951 or len(source_rows) != 671
+        or any(audit.get(name) != 0 for name in ("solver_runs", "evaluator_runs", "trace_reads"))
+        or audit.get("formal_execution_started") is not False
+        or audit.get("preparation_code_commit") != plan.get("preparation_code_commit")
+        or audit.get("worktree_clean") is not True
+        or status.get("execution_authorized") is not True
+        or status.get("solver_allowed_after_readiness_freeze") is not True
+        or status.get("human_approval_required") is not False
+    ):
+        raise ExecutionPlanError("authoritative preparation audit/status/count gate failed")
+    validate_execution_registry(frozen_logical, frozen_unique)
+    frozen_by_run = {str(row["run_id"]): row for row in frozen_unique}
+    hash_run_ids = [str(row.get("run_id", "")) for row in hash_rows]
+    if len(set(hash_run_ids)) != 5951 or set(hash_run_ids) != set(frozen_by_run):
+        raise ExecutionPlanError("hash registry is not a 5951-row bijection to canonical runs")
+    for row in hash_rows:
+        owner = frozen_by_run.get(str(row.get("run_id", "")))
+        if owner is None or any(
+            str(row.get(field, "")) != str(owner.get(owner_field, ""))
+            for field, owner_field in (
+                ("case_id", "case_id"), ("execution_key", "execution_key"),
+                ("runtime_config_hash", "runtime_config_hash"),
+                ("method_bound_provider_hash", "method_bound_provider_hash"),
+                ("executable_sha256", "executable_hash"),
+                ("method_bound_manifest_sha256", "method_bound_manifest_hash"),
+            )
+        ):
+            raise ExecutionPlanError("hash registry differs from canonical execution owner")
+    if int(plan.get("terminal_unique_run_count", 0)) == 0:
+        activity_roots = (stage / "08_FULL_ALGORITHM_RUNS", stage / "10_INTERNAL_ABLATION_RUNS",
+                          stage / "11_OUTPUT_SEAL", stage / "12_OFFLINE_EVALUATION")
+        trace_names = {"TRACE_ACCESS_LEDGER.json", "REFERENCE_TRACE_READ_LEDGER.json"}
+        if (
+            any(path.is_file() for root in activity_roots if root.exists() for path in root.rglob("*"))
+            or any(path.is_file() and path.name in trace_names for path in stage.rglob("*"))
+        ):
+            raise ExecutionPlanError("formal/evaluator/trace artifact exists before execution gate")
+    validate_execution_registry(logical, unique)
+    immutable_fields = (
+        "run_id", "run_order", "canonical_logical_id", "case_id", "method_id",
+        "execution_key", "method_bound_provider_hash", "runtime_config_hash",
+        "executable_hash", "logical_alias_count", *FEATURE_FIELDS,
+    )
+    for row in unique:
+        frozen = frozen_by_run.get(str(row["run_id"]))
+        if frozen is None or any(str(row.get(field)) != str(frozen.get(field)) for field in immutable_fields):
+            raise ExecutionPlanError("current execution status registry differs from immutable prepared identity")
+    current_status = {
+        "current_full_queue": sha256_file(stage / "07_FULL_ALGORITHM_REGISTRY/FULL_ALGORITHM_QUEUE.csv"),
+        "current_ablation_queue": sha256_file(stage / "09_INTERNAL_ABLATION_REGISTRY/INTERNAL_ABLATION_QUEUE.csv"),
+        "current_unique_registry": sha256_file(stage / "07_FULL_ALGORITHM_REGISTRY/CANONICAL541_UNIQUE_RUN_REGISTRY.csv"),
+    }
+    expected_status = plan.get("current_status_registry_sha256")
+    if expected_status != {
+        "full_queue": current_status["current_full_queue"],
+        "ablation_queue": current_status["current_ablation_queue"],
+        "unique_registry": current_status["current_unique_registry"],
+    }:
+        raise ExecutionPlanError("current execution status registry hashes differ from plan")
+    current.update(current_status)
+    return current
+
+
 def load_execution_plan(
     *, stage_root: str | Path, repo_root: str | Path, executable: str | Path,
     code_freeze_commit: str,
@@ -405,24 +538,39 @@ def load_execution_plan(
     plan = json.loads(plan_path.read_text(encoding="utf-8"))
     unique = [_normalize_registry_row(row) for row in read_csv(unique_path)]
     logical = [_normalize_registry_row(row) for row in (*read_csv(full_path), *read_csv(ablation_path))]
-    commit, dirty = git_code_state(repo)
     binary = Path(executable).resolve(strict=True)
+    current_artifacts = _validate_authoritative_preparation_gate(
+        stage=stage, plan=plan, unique=unique, logical=logical,
+    )
     validate_code_freeze_gate(
         stage_root=stage, executable=binary,
         code_freeze_commit=code_freeze_commit,
     )
+    _validate_dual_freeze(
+        repo=repo, supplied_scientific_commit=code_freeze_commit,
+        recorded_scientific_commit=str(plan.get("scientific_code_freeze_commit", "")),
+        recorded_preparation_commit=str(plan.get("preparation_code_commit", "")),
+    )
     if (
-        dirty or commit != code_freeze_commit or plan.get("code_freeze_commit") != code_freeze_commit
+        plan.get("schema_version") != "paper_rebuild.canonical541_execution_plan.v3_repaired"
         or Path(str(plan.get("executable_path", ""))).resolve(strict=True) != binary
         or plan.get("executable_sha256") != sha256_file(binary)
         or plan.get("unique_registry_sha256") != sha256_file(unique_path)
-        or len(unique) != plan.get("unique_run_count") or len(logical) != 7033
+        or len(unique) != plan.get("unique_run_count") or len(unique) != 5951 or len(logical) != 7033
         or sum(row["matrix"] == "full_algorithm" for row in logical) != 2164
         or sum(row["matrix"] == "internal_ablation" for row in logical) != 4869
     ):
         raise ExecutionPlanError("prepared execution plan identity/count closure failed")
+    try:
+        validate_execution_registry(logical, unique)
+    except RunRegistryError as exc:
+        raise ExecutionPlanError(str(exc)) from exc
     for row in unique:
-        if row.get("executable_hash") != plan["executable_sha256"]:
+        if (
+            row.get("executable_hash") != plan["executable_sha256"]
+            or row.get("scientific_code_freeze_commit") != plan["scientific_code_freeze_commit"]
+            or row.get("preparation_code_commit") != plan["preparation_code_commit"]
+        ):
             raise ExecutionPlanError("unique run executable hash differs from plan")
         template = Path(str(row["runtime_config_template_path"])).resolve(strict=True)
         method_manifest = Path(str(row["method_bound_manifest_path"])).resolve(strict=True)
@@ -436,6 +584,7 @@ def load_execution_plan(
         if method_payload.get("actual_rendered_runtime_config_sha256") != row.get("actual_rendered_runtime_config_sha256"):
             raise ExecutionPlanError("method-bound rendered config hash differs from plan")
         _expected_solver_inputs(method_payload)
+    plan["validated_current_artifact_sha256"] = current_artifacts
     return plan, unique, logical
 
 
@@ -696,13 +845,17 @@ def persist_execution_status(*, stage_root: str | Path, unique_rows: Sequence[Ma
         row["output_root"] = unique["output_root"]
         resolved_logical.append(row)
     unique_path = write_csv_atomic(stage / "07_FULL_ALGORITHM_REGISTRY/CANONICAL541_UNIQUE_RUN_REGISTRY.csv", unique_rows)
-    write_csv_atomic(stage / "07_FULL_ALGORITHM_REGISTRY/FULL_ALGORITHM_QUEUE.csv",
-                     [row for row in resolved_logical if row["matrix"] == "full_algorithm"])
-    write_csv_atomic(stage / "09_INTERNAL_ABLATION_REGISTRY/INTERNAL_ABLATION_QUEUE.csv",
-                     [row for row in resolved_logical if row["matrix"] == "internal_ablation"])
+    full_path = write_csv_atomic(stage / "07_FULL_ALGORITHM_REGISTRY/FULL_ALGORITHM_QUEUE.csv",
+                                 [row for row in resolved_logical if row["matrix"] == "full_algorithm"])
+    ablation_path = write_csv_atomic(stage / "09_INTERNAL_ABLATION_REGISTRY/INTERNAL_ABLATION_QUEUE.csv",
+                                     [row for row in resolved_logical if row["matrix"] == "internal_ablation"])
     plan_path = stage / "07_FULL_ALGORITHM_REGISTRY/EXECUTION_PLAN.json"
     plan = json.loads(plan_path.read_text(encoding="utf-8"))
     plan["unique_registry_sha256"] = sha256_file(unique_path)
+    plan["current_status_registry_sha256"] = {
+        "full_queue": sha256_file(full_path), "ablation_queue": sha256_file(ablation_path),
+        "unique_registry": sha256_file(unique_path),
+    }
     plan["terminal_unique_run_count"] = sum(row.get("terminal_status") in TERMINAL_STATUSES for row in unique_rows)
     temporary = plan_path.with_name(f".{plan_path.name}.tmp_{os.getpid()}")
     temporary.write_text(json.dumps(plan, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -718,12 +871,16 @@ def execute_unique_selection(
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     if not 1 <= jobs <= 16:
         raise ExecutionPlanError("solver jobs must be 1..16")
-    for name in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
-        os.environ[name] = "1"
     repo = Path(repo_root).resolve(strict=True); binary = Path(executable).resolve(strict=True)
-    commit, dirty = git_code_state(repo)
-    if dirty or commit != code_freeze_commit:
-        raise ExecutionPlanError("formal execution requires exact clean code freeze")
+    scientific_commits = {str(row.get("scientific_code_freeze_commit", "")) for row in unique_rows}
+    preparation_commits = {str(row.get("preparation_code_commit", "")) for row in unique_rows}
+    if len(scientific_commits) != 1 or len(preparation_commits) != 1:
+        raise ExecutionPlanError("execution rows do not bind one dual freeze")
+    _validate_dual_freeze(
+        repo=repo, supplied_scientific_commit=code_freeze_commit,
+        recorded_scientific_commit=next(iter(scientific_commits)),
+        recorded_preparation_commit=next(iter(preparation_commits)),
+    )
     selected = set(str(value) for value in selected_run_ids)
     by_run = {str(row["run_id"]): dict(row) for row in unique_rows}
     executable_hashes = {str(row["executable_hash"]) for row in unique_rows}
@@ -731,6 +888,22 @@ def execute_unique_selection(
         raise ExecutionPlanError("execution plan does not bind one exact executable SHA256")
     if not selected.issubset(by_run):
         raise ExecutionPlanError("execution selection references unknown run IDs")
+    # Last possible pre-launch boundary: reload every authoritative byte and
+    # require exact equality before constructing the executor or submitting a
+    # single solver process.
+    _, reloaded_unique, reloaded_logical = load_execution_plan(
+        stage_root=stage_root, repo_root=repo, executable=binary,
+        code_freeze_commit=code_freeze_commit,
+    )
+    if (
+        [dict(row) for row in unique_rows] != reloaded_unique
+        or [dict(row) for row in logical_rows] != reloaded_logical
+        or selected != {str(row["run_id"]) for row in reloaded_unique if str(row["run_id"]) in selected}
+    ):
+        raise ExecutionPlanError("authoritative execution registries changed before launch")
+    by_run = {str(row["run_id"]): dict(row) for row in reloaded_unique}
+    for name in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
+        os.environ[name] = "1"
     records: list[dict[str, Any]] = []
     failures: list[BaseException] = []
     with ThreadPoolExecutor(max_workers=jobs) as pool:
@@ -751,7 +924,11 @@ def execute_unique_selection(
     persist_execution_status(stage_root=stage_root, unique_rows=updated_rows, logical_rows=logical_rows)
     rebuild_attempt_registry(stage_root=stage_root)
     commit_after, dirty_after = git_code_state(repo)
-    if dirty_after or commit_after != code_freeze_commit or sha256_file(binary) != next(iter(executable_hashes)):
+    if (
+        dirty_after
+        or commit_after != next(iter(preparation_commits))
+        or sha256_file(binary) != next(iter(executable_hashes))
+    ):
         raise ExecutionPlanError("code/executable changed during formal execution")
     if failures:
         raise failures[0]

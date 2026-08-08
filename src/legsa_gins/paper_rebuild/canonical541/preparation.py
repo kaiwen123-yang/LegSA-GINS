@@ -64,6 +64,28 @@ METHOD_BOUND_TOTAL = 541 * 11
 FULL_QUEUE_TOTAL = 541 * 4
 ABLATION_QUEUE_TOTAL = 541 * 9
 ALL_LOGICAL_TOTAL = FULL_QUEUE_TOTAL + ABLATION_QUEUE_TOTAL
+KNOWN_RECOVERY_UNIQUE_COUNT = 3981
+KNOWN_RECOVERY_ALIAS_COUNT = 3052
+KNOWN_RECOVERY_ANNOTATED_COUNT = 3981
+KNOWN_RECOVERY_UNTOUCHED_COUNT = 1970
+KNOWN_RECOVERY_CONFIG_COUNT = 3981
+KNOWN_RECOVERY_CASE_COUNT = 541
+KNOWN_RECOVERY_PROFILES_PER_CASE = 11
+KNOWN_RECOVERY_COMMIT = "64c81965b17ef1bf8ae2ce3e4dd7b1ae35110b00"
+KNOWN_RECOVERY_HASHES = {
+    "EXECUTION_PLAN.json": "197fe18ab5e6855fbd3615ec2fc9bf492a31342e5cc04363329e0ecd494083f1",
+    "CANONICAL541_UNIQUE_RUN_REGISTRY.csv": "f80f0c438cf309fd88d1346fb2278e6586a64700aebebf5db4a2a37f42c5038a",
+    "FULL_ALGORITHM_QUEUE.csv": "7090889d51ebcebed332898e4310c1c1efda36c93b0c33cad7f8c73623f8102d",
+    "INTERNAL_ABLATION_QUEUE.csv": "fd5435ce385812ff3f89b47cf00f629c0f34b3850cf04346a7b81b67aec5a006",
+    "PREPARATION_STATUS.json": "282eb1e5f9bfcad8f208c83a0cb56d711d86acd27530d795773de979b72eaa36",
+}
+KNOWN_RECOVERY_SESSION_HASHES = {
+    "RUN_SESSION.json": "3ad5e4b831e397d15c8e4a6ffbf1a83a40f9cadc44b93f98085611775cb437a0",
+    "CANONICAL541_STATUS.json": "c4ba0b98032d8d9fad7dfce65712a0b3b0fe88343e5ef39b6446264559bbce66",
+    "pipeline.stdout.log": "23cf06be5fa0d4500797655d45bc2b8be73a68d1bd562f3bb5272dba6ee4fdd2",
+    "pipeline.stderr.log": "5731e7e2bbda2f26c496f526246300692d08a8e0b80cced95abb5a609c43e59e",
+}
+KNOWN_RECOVERY_PIDS = frozenset((403582, 403631))
 SOURCE_NAMES = (
     "gnss_position",
     "receiver_velocity",
@@ -137,6 +159,130 @@ def _atomic_text(path: Path, text: str) -> Path:
     finally:
         os.close(directory_fd)
     return path
+
+
+def _fsync_directory(path: Path) -> None:
+    descriptor = os.open(path, os.O_RDONLY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def _regular_file_inventory(root: Path) -> dict[str, str]:
+    """Inventory only regular non-symlink files and reject tmp/unknown links."""
+
+    if not root.exists():
+        return {}
+    if root.is_symlink() or not root.is_dir():
+        raise PreparationError(f"protected inventory root is not a regular directory: {root}")
+    output: dict[str, str] = {}
+    for path in sorted(root.rglob("*")):
+        if path.is_symlink():
+            raise PreparationError(f"symlink in protected recovery inventory: {path}")
+        if path.is_dir():
+            if ".tmp_" in path.name:
+                raise PreparationError(f"temporary directory in protected recovery inventory: {path}")
+            continue
+        if not path.is_file() or ".tmp_" in path.name:
+            raise PreparationError(f"non-regular or temporary protected recovery item: {path}")
+        relative = path.relative_to(root).as_posix()
+        output[relative] = sha256_file(path)
+    return output
+
+
+PROTECTED_LIVE_ROOTS = (
+    ("compact_readiness", "01_COMPACT_READINESS_RUN"),
+    ("git_freeze", "01_GIT_FREEZE"),
+    ("matrix_spec", "02_MATRIX_SPEC_LOCK"),
+    ("seeds_anchors", "03_SEEDS_AND_ANCHORS"),
+    ("effect_rules", "04_EFFECT_RULES"),
+    ("provider_ready", "06_PROVIDER_READY"),
+    ("shared_gnss", "07_FULL_ALGORITHM_REGISTRY/PREPARED_EXECUTION_INPUTS/SHARED_GNSS_BY_HASH"),
+    ("audits", "16_AUDITS"),
+)
+PROTECTED_LIVE_FILES = (
+    "RUN_SESSION.json", "CANONICAL541_STATUS.json",
+    "00_PIPELINE_LOGS/pipeline.stdout.log", "00_PIPELINE_LOGS/pipeline.stderr.log",
+)
+PROTECTED_LIVE_EXCLUSIONS = (
+    "16_AUDITS/CANONICAL541_EXECUTION_INPUT_COMPLETENESS_AUDIT.json",
+    "16_AUDITS/CANONICAL541_PREPARATION_REPORT.json",
+    "16_AUDITS/CANONICAL541_PREPARATION_REPORT.md",
+    "16_AUDITS/CANONICAL541_PREPARATION_REVIEW_PACKET.json",
+)
+
+
+def scan_protected_live_set(stage_root: str | Path) -> dict[str, Any]:
+    """Scan the frozen live preparation/output roots with explicit exclusions."""
+
+    stage = Path(stage_root).resolve(strict=True)
+    rows: list[dict[str, str]] = []
+    role_counts: dict[str, int] = {}
+    for role, relative_root in PROTECTED_LIVE_ROOTS:
+        root = stage / relative_root
+        if not root.is_dir() or root.is_symlink():
+            raise PreparationError(f"protected live root is omitted or nonregular: {relative_root}")
+        inventory = _regular_file_inventory(root)
+        included = {
+            relative: digest for relative, digest in inventory.items()
+            if (Path(relative_root) / relative).as_posix() not in PROTECTED_LIVE_EXCLUSIONS
+        }
+        if not included:
+            raise PreparationError(f"protected live root is empty after exclusions: {relative_root}")
+        role_counts[role] = len(included)
+        for relative, digest in included.items():
+            rows.append({
+                "role": role, "relative_path": relative,
+                "absolute_path": str(root / relative), "sha256": digest,
+            })
+    for relative in PROTECTED_LIVE_FILES:
+        path = stage / relative
+        if not path.is_file() or path.is_symlink():
+            raise PreparationError(f"protected live session file is omitted or nonregular: {relative}")
+        rows.append({"role": "session_file", "relative_path": relative,
+                     "absolute_path": str(path), "sha256": sha256_file(path)})
+    role_counts["session_file"] = len(PROTECTED_LIVE_FILES)
+    if not rows or role_counts.get("session_file") != 4:
+        raise PreparationError("protected live scan is empty or omitted")
+    canonical = [f"{row['role']}\0{row['relative_path']}\0{row['sha256']}" for row in rows]
+    return {
+        "roots": [{"role": role, "relative_root": root} for role, root in PROTECTED_LIVE_ROOTS],
+        "files": list(PROTECTED_LIVE_FILES),
+        "exclusions": list(PROTECTED_LIVE_EXCLUSIONS),
+        "rows": rows, "role_counts": role_counts, "file_count": len(rows),
+        "set_sha256": hashlib.sha256("\n".join(canonical).encode("utf-8")).hexdigest(),
+    }
+
+
+def _validate_protected_scan_record(record: Mapping[str, Any]) -> None:
+    expected_roots = [{"role": role, "relative_root": root} for role, root in PROTECTED_LIVE_ROOTS]
+    rows = record.get("rows")
+    if (
+        record.get("roots") != expected_roots
+        or record.get("files") != list(PROTECTED_LIVE_FILES)
+        or record.get("exclusions") != list(PROTECTED_LIVE_EXCLUSIONS)
+        or not isinstance(rows, list) or not rows
+        or record.get("file_count") != len(rows)
+        or sum(int(value) for value in record.get("role_counts", {}).values()) != len(rows)
+    ):
+        raise PreparationError("protected live scan roots/exclusions/counts are omitted or unexpected")
+    canonical = [f"{row['role']}\0{row['relative_path']}\0{row['sha256']}" for row in rows]
+    if hashlib.sha256("\n".join(canonical).encode("utf-8")).hexdigest() != record.get("set_sha256"):
+        raise PreparationError("protected live scan set hash mismatch")
+
+
+def _canonical_sidecar_bytes(artifact: Path) -> bytes:
+    return f"{sha256_file(artifact)}  {artifact.name}\n".encode("ascii")
+
+
+def _write_or_validate_recovery_sidecar(artifact: Path, sidecar: Path) -> None:
+    expected = _canonical_sidecar_bytes(artifact)
+    if sidecar.exists():
+        if sidecar.is_symlink() or not sidecar.is_file() or sidecar.read_bytes() != expected:
+            raise PreparationError(f"noncanonical recovery sidecar: {sidecar.name}")
+    else:
+        _atomic_text(sidecar, expected.decode("ascii"))
 
 
 def _is_false(value: Any) -> bool:
@@ -983,12 +1129,10 @@ def _build_plan_registries(
         if scientific_runtime_config_hash(config_text) != record["runtime_config_hash"]:
             raise PreparationError("prepared runtime scientific config hash drift")
         rendered_hash = actual_rendered_runtime_config_sha256(config_text)
-        prior_rendered_hash = manifest_payload.get("actual_rendered_runtime_config_sha256")
-        if prior_rendered_hash not in (None, rendered_hash):
-            raise PreparationError("method-bound actual rendered runtime config hash drift")
-        if prior_rendered_hash is None:
-            manifest_payload["actual_rendered_runtime_config_sha256"] = rendered_hash
-            _atomic_json(manifest_path, manifest_payload)
+        _finalize_method_manifest_rendered_hash(
+            path=manifest_path, payload=manifest_payload,
+            rendered_hash=rendered_hash, hash_cache=hash_cache,
+        )
         config_path = _atomic_config(configs_root / f"{record['run_id']}.yaml", config_text)
         record.update({
             "matrix": matrix,
@@ -1066,11 +1210,35 @@ def _build_plan_registries(
         len(full_resolved) != FULL_QUEUE_TOTAL
         or len(ablation_resolved) != ABLATION_QUEUE_TOTAL
         or len(logical) != ALL_LOGICAL_TOTAL
+        or len(unique) != METHOD_BOUND_TOTAL
+        or len({str(row["case_id"]) for row in unique}) != 541
+        or any(
+            sum(str(row["case_id"]) == case_id for row in unique) != 11
+            for case_id in {str(row["case_id"]) for row in logical}
+        )
         or sum(bool(row["execution_alias"]) for row in logical if row["method_id"] in {"A01", "A02"}) != 1082
+        or sum(bool(row["execution_alias"]) for row in logical) != 1082
     ):
         raise PreparationError("canonical queue/required-alias count closure failed")
-    _atomic_json(stage / "07_FULL_ALGORITHM_REGISTRY/EXECUTION_PLAN.json", plan)
     return plan, unique, full_resolved, ablation_resolved
+
+
+def _finalize_method_manifest_rendered_hash(
+    *, path: Path, payload: dict[str, Any], rendered_hash: str,
+    hash_cache: UniqueFileHashCache,
+) -> None:
+    """Perform the sole authorized in-place semantic finalization atomically."""
+
+    # Verify the attempt-owned manifest has not changed since resume parsing.
+    hash_cache.sha256(path)
+    prior = payload.get("actual_rendered_runtime_config_sha256")
+    if prior not in (None, rendered_hash):
+        raise PreparationError("method-bound actual rendered runtime config hash drift")
+    if prior is None:
+        finalized = dict(payload)
+        finalized["actual_rendered_runtime_config_sha256"] = rendered_hash
+        _atomic_json(path, finalized)
+        payload["actual_rendered_runtime_config_sha256"] = rendered_hash
 
 
 def _write_hash_registry(
@@ -1311,6 +1479,7 @@ def _preparation_completeness_audit(
         and audit["method_bound_completed"] == METHOD_BOUND_TOTAL
         and audit["full_queue_rows"] == FULL_QUEUE_TOTAL
         and audit["ablation_queue_rows"] == ABLATION_QUEUE_TOTAL
+        and audit["unique_runs_planned"] == METHOD_BOUND_TOTAL
         and audit["provider_config_executable_hash_rows"] == METHOD_BOUND_TOTAL
         and audit["source_isolation_rows"] == 61 * 11
         and solver_proofs == solver_outputs == evaluator_outputs == 0
@@ -1398,6 +1567,543 @@ the exact evaluator only after terminal outputs are sealed.
     return md_path, json_path
 
 
+def recover_known_3981_preparation(
+    stage_root: str | Path, *, explicitly_authorized: bool = False,
+) -> dict[str, Any] | None:
+    """Recover only the known case-deduplicated, zero-execution attempt shape.
+
+    Every superseded byte is preserved before the sole semantic reset: removal
+    of the derived rendered-runtime hash from each attempt-owned method manifest.
+    """
+
+    if not explicitly_authorized:
+        raise PreparationError("known-3981 recovery requires explicit invocation authorization")
+    stage = validate_attempt_root(stage_root)
+    registry = stage / "07_FULL_ALGORITHM_REGISTRY"
+    recovery_root = registry / "PREPARATION_RECOVERY_KNOWN_3981"
+    complete_path = recovery_root / "RECOVERY_COMPLETE.json"
+    if complete_path.is_file():
+        for artifact_name in ("RECOVERY_BOOTSTRAP.json", "PREINVENTORY.json", "RECOVERY_COMPLETE.json"):
+            artifact = recovery_root / artifact_name
+            sidecar = recovery_root / f"{artifact_name}.sha256"
+            if not sidecar.is_file():
+                raise PreparationError("completed known-3981 recovery sidecar is missing")
+            _write_or_validate_recovery_sidecar(artifact, sidecar)
+        payload = json.loads(complete_path.read_text(encoding="utf-8"))
+        preinventory = json.loads((recovery_root / "PREINVENTORY.json").read_text(encoding="utf-8"))
+        reset = json.loads((recovery_root / "RESET_LEDGER.json").read_text(encoding="utf-8"))
+        post = json.loads((recovery_root / "POSTINVENTORY.json").read_text(encoding="utf-8"))
+        phases = json.loads((recovery_root / "RECOVERY_PHASES.json").read_text(encoding="utf-8"))
+        bootstrap_path = recovery_root / "RECOVERY_BOOTSTRAP.json"
+        bootstrap = json.loads(bootstrap_path.read_text(encoding="utf-8"))
+        if (
+            payload.get("passed") is not True
+            or payload.get("reset_manifest_count") != KNOWN_RECOVERY_ANNOTATED_COUNT
+            or payload.get("untouched_manifest_count") != KNOWN_RECOVERY_UNTOUCHED_COUNT
+            or reset.get("reset_manifest_count") != KNOWN_RECOVERY_ANNOTATED_COUNT
+            or post.get("passed") is not True
+            or phases.get("phases", [])[-1:] != ["RECOVERY_COMPLETE"]
+            or sha256_file(recovery_root / "RESET_LEDGER.json") != payload.get("reset_ledger_sha256")
+            or sha256_file(recovery_root / "POSTINVENTORY.json") != payload.get("postinventory_sha256")
+            or sha256_file(recovery_root / "RECOVERY_PHASES.json") != payload.get("phase_ledger_sha256")
+            or sha256_file(bootstrap_path) != payload.get("bootstrap_sha256")
+            or sha256_file(recovery_root / "PREINVENTORY.json") != payload.get("preinventory_sha256")
+        ):
+            raise PreparationError("known-3981 recovery completion ledger is invalid")
+        method_root = registry / "PREPARED_EXECUTION_INPUTS/METHOD_BOUND"
+        protected_complete = scan_protected_live_set(stage)
+        recorded_post_scan = post.get("protected_live_post")
+        if isinstance(recorded_post_scan, dict):
+            _validate_protected_scan_record(recorded_post_scan)
+        if (
+            not isinstance(recorded_post_scan, dict)
+            or protected_complete != recorded_post_scan
+            or protected_complete != preinventory.get("protected_live_pre")
+            or protected_complete.get("set_sha256") != recorded_post_scan.get("set_sha256")
+        ):
+            raise PreparationError("completed known-3981 protected COMPLETE rescan differs from POST")
+        live_methods = _regular_file_inventory(method_root)
+        manifest_rows = list(preinventory.get("manifest_rows", []))
+        normalized_manifest_paths = [
+            str(Path(row["path"]).resolve(strict=True)) for row in manifest_rows
+        ]
+        independent_manifest_paths = {
+            str((method_root / relative).resolve(strict=True)) for relative in live_methods
+        }
+        case_profiles = {tuple(Path(relative).parts[:2]) for relative in live_methods}
+        cases = {case for case, _ in case_profiles}
+        if (
+            len(manifest_rows) != METHOD_BOUND_TOTAL
+            or len(set(normalized_manifest_paths)) != METHOD_BOUND_TOTAL
+            or set(normalized_manifest_paths) != independent_manifest_paths
+            or len(cases) != KNOWN_RECOVERY_CASE_COUNT
+            or any(sum(case_id == case for case_id, _ in case_profiles) != KNOWN_RECOVERY_PROFILES_PER_CASE for case in cases)
+            or set(live_methods) != set(preinventory["protected_method_inventory"])
+            or len(live_methods) != METHOD_BOUND_TOTAL
+        ):
+            raise PreparationError("completed known-3981 live method set drift")
+        annotated_rows = [row for row in preinventory["manifest_rows"] if row["annotated"]]
+        untouched_rows = [row for row in preinventory["manifest_rows"] if not row["annotated"]]
+        originals_root = recovery_root / "ORIGINAL_METHOD_MANIFESTS"
+        originals_inventory = _regular_file_inventory(originals_root)
+        expected_originals = {
+            Path(row["path"]).relative_to(method_root).as_posix(): row["original_sha256"]
+            for row in annotated_rows
+        }
+        if originals_inventory != expected_originals or len(annotated_rows) != KNOWN_RECOVERY_ANNOTATED_COUNT or len(untouched_rows) != KNOWN_RECOVERY_UNTOUCHED_COUNT:
+            raise PreparationError("completed known-3981 original/untouched set closure failed")
+        reset_by_path = {str(row["path"]): row for row in reset["reset_rows"]}
+        if set(reset_by_path) != {str(row["path"]) for row in annotated_rows}:
+            raise PreparationError("completed known-3981 reset ledger set differs from annotated manifests")
+        for row in preinventory["manifest_rows"]:
+            preserved = Path(row["preserved_path"]); current = Path(row["path"])
+            if row["annotated"]:
+                if not preserved.is_file() or preserved.is_symlink() or sha256_file(preserved) != row["original_sha256"]:
+                    raise PreparationError("completed known-3981 preserved original no longer validates")
+                expected = json.loads(preserved.read_text(encoding="utf-8"))
+                expected.pop("actual_rendered_runtime_config_sha256")
+            else:
+                expected = json.loads(current.read_text(encoding="utf-8"))
+                if preserved.exists() or sha256_file(current) != row["original_sha256"]:
+                    raise PreparationError("completed known-3981 untouched manifest no longer validates")
+            if current.is_symlink() or json.loads(current.read_text(encoding="utf-8")) != expected:
+                raise PreparationError("completed known-3981 recovery no longer validates")
+            if row["annotated"] and (
+                reset_by_path[str(current)]["original_sha256"] != row["original_sha256"]
+                or reset_by_path[str(current)]["reset_sha256"] != sha256_file(current)
+            ):
+                raise PreparationError("completed known-3981 reset ledger hash differs from disk")
+        quarantine = recovery_root / "SUPERSEDED_PREPARATION_ARTIFACTS"
+        for row in preinventory["superseded_rows"]:
+            destination = quarantine / Path(row["path"]).relative_to(stage)
+            if Path(row["path"]).exists() or not destination.is_file() or sha256_file(destination) != row["sha256"]:
+                raise PreparationError("completed known-3981 quarantine no longer validates")
+        config_root = registry / "PREPARED_EXECUTION_INPUTS/RUNTIME_CONFIGS"
+        if _regular_file_inventory(config_root):
+            raise PreparationError("completed known-3981 live stale runtime configs remain")
+        config_destination = quarantine / config_root.relative_to(stage)
+        for row in preinventory["runtime_config_rows"]:
+            destination = config_destination / Path(row["path"]).relative_to(config_root)
+            if not destination.is_file() or sha256_file(destination) != row["sha256"]:
+                raise PreparationError("completed known-3981 config quarantine no longer validates")
+        expected_quarantine = {
+            Path(row["path"]).relative_to(stage).as_posix(): row["sha256"]
+            for row in preinventory["superseded_rows"]
+        }
+        expected_quarantine.update({
+            (config_root.relative_to(stage) / Path(row["path"]).relative_to(config_root)).as_posix(): row["sha256"]
+            for row in preinventory["runtime_config_rows"]
+        })
+        if _regular_file_inventory(quarantine) != expected_quarantine or len(preinventory["runtime_config_rows"]) != KNOWN_RECOVERY_CONFIG_COUNT:
+            raise PreparationError("completed known-3981 quarantine union contains missing/extra bytes")
+        if (
+            {str(row["path"]): str(row["sha256"]) for row in post["protected_manifest_rows"]}
+            != {str(method_root / relative): digest for relative, digest in live_methods.items()}
+            or {str(row["preserved_path"]): str(row["sha256"]) for row in post["protected_quarantine_rows"]}
+            != {str(quarantine / Path(row["path"]).relative_to(stage)): str(row["sha256"]) for row in preinventory["superseded_rows"]}
+            or {str(row["path"]): str(row["sha256"]) for row in post["protected_runtime_config_rows"]}
+            != {str(config_destination / Path(row["path"]).relative_to(config_root)): str(row["sha256"]) for row in preinventory["runtime_config_rows"]}
+        ):
+            raise PreparationError("completed known-3981 postinventory differs from independent disk rescan")
+        for row in bootstrap["session_evidence"]:
+            if sha256_file(Path(row["path"])) != row["sha256"]:
+                raise PreparationError("completed known-3981 session evidence mutated")
+        for row in bootstrap["pid_dead_proof"]:
+            try:
+                os.kill(int(row["pid"]), 0); alive = True
+            except (ProcessLookupError, ValueError):
+                alive = False
+            except PermissionError:
+                alive = True
+            if alive:
+                raise PreparationError("completed known-3981 PID is unexpectedly live")
+        if (
+            len(bootstrap["session_evidence"]) != 4 or len(bootstrap["pid_dead_proof"]) != 2
+            or frozenset(row.get("pid") for row in bootstrap["pid_dead_proof"]) != KNOWN_RECOVERY_PIDS
+            or any(type(row.get("pid")) is not int for row in bootstrap["pid_dead_proof"])
+            or {Path(row["path"]).name: row["sha256"] for row in bootstrap["session_evidence"]}
+               != KNOWN_RECOVERY_SESSION_HASHES
+        ):
+            raise PreparationError("completed known-3981 session/PID set count drift")
+        metadata_names = {
+            "RECOVERY_BOOTSTRAP.json", "RECOVERY_BOOTSTRAP.json.sha256",
+            "PREINVENTORY.json", "PREINVENTORY.json.sha256", "RECOVERY_PHASES.json",
+            "RESET_LEDGER.json", "POSTINVENTORY.json", "RECOVERY_COMPLETE.json",
+            "RECOVERY_COMPLETE.json.sha256",
+        }
+        expected_recovery_inventory = {
+            name: sha256_file(recovery_root / name) for name in metadata_names
+        }
+        expected_recovery_inventory.update({
+            f"ORIGINAL_METHOD_MANIFESTS/{relative}": digest
+            for relative, digest in originals_inventory.items()
+        })
+        expected_recovery_inventory.update({
+            f"SUPERSEDED_PREPARATION_ARTIFACTS/{relative}": digest
+            for relative, digest in expected_quarantine.items()
+        })
+        if _regular_file_inventory(recovery_root) != expected_recovery_inventory:
+            raise PreparationError("completed known-3981 recovery tree contains unknown/missing/tmp bytes")
+        activity_roots = (stage / "08_FULL_ALGORITHM_RUNS", stage / "10_INTERNAL_ABLATION_RUNS",
+                          stage / "11_OUTPUT_SEAL", stage / "12_OFFLINE_EVALUATION")
+        if any(_regular_file_inventory(root) for root in activity_roots):
+            raise PreparationError("completed known-3981 output/evaluator set is nonzero")
+        trace_names = {"TRACE_ACCESS_LEDGER.json", "REFERENCE_TRACE_READ_LEDGER.json"}
+        if any(path.is_file() and path.name in trace_names for path in stage.rglob("*") if recovery_root not in path.parents):
+            raise PreparationError("completed known-3981 trace ledger is nonzero")
+        return payload
+    preinventory_path = recovery_root / "PREINVENTORY.json"
+    unique_path = registry / "CANONICAL541_UNIQUE_RUN_REGISTRY.csv"
+    plan_path = registry / "EXECUTION_PLAN.json"
+    full_path = registry / "FULL_ALGORITHM_QUEUE.csv"
+    ablation_path = stage / "09_INTERNAL_ABLATION_REGISTRY/INTERNAL_ABLATION_QUEUE.csv"
+    quarantine = recovery_root / "SUPERSEDED_PREPARATION_ARTIFACTS"
+    if not preinventory_path.is_file():
+        if not plan_path.is_file() or not unique_path.is_file():
+            return None
+        unique = read_csv(unique_path); full = read_csv(full_path); ablation = read_csv(ablation_path)
+        aliases = sum(str(row.get("execution_alias", "")).lower() == "true" for row in (*full, *ablation))
+        if (len(unique) != KNOWN_RECOVERY_UNIQUE_COUNT or len(full) != FULL_QUEUE_TOTAL
+                or len(ablation) != ABLATION_QUEUE_TOTAL or aliases != KNOWN_RECOVERY_ALIAS_COUNT):
+            return None
+        plan_payload = json.loads(plan_path.read_text(encoding="utf-8"))
+        fixed_paths = (plan_path, unique_path, full_path, ablation_path, registry / "PREPARATION_STATUS.json")
+        if (
+            plan_payload.get("schema_version") != "paper_rebuild.canonical541_execution_plan.v3_repaired"
+            or plan_payload.get("scientific_code_freeze_commit") != KNOWN_RECOVERY_COMMIT
+            or plan_payload.get("preparation_code_commit") != KNOWN_RECOVERY_COMMIT
+            or any(KNOWN_RECOVERY_HASHES.get(path.name) != sha256_file(path) for path in fixed_paths)
+            or (registry / "PROVIDER_CONFIG_EXECUTABLE_HASH_REGISTRY.csv").exists()
+        ):
+            raise PreparationError("known-3981 fixed attempt signature/hash mismatch")
+        session_paths = (
+            stage / "RUN_SESSION.json", stage / "CANONICAL541_STATUS.json",
+            stage / "00_PIPELINE_LOGS/pipeline.stdout.log",
+            stage / "00_PIPELINE_LOGS/pipeline.stderr.log",
+        )
+        if any(not path.is_file() or path.is_symlink() or KNOWN_RECOVERY_SESSION_HASHES.get(path.name) != sha256_file(path) for path in session_paths):
+            raise PreparationError("known-3981 session/status/log hash signature mismatch")
+        session = json.loads(session_paths[0].read_text(encoding="utf-8"))
+        pipeline_status = json.loads(session_paths[1].read_text(encoding="utf-8"))
+        raw_pids = (session.get("pid"), pipeline_status.get("process_pid"))
+        if any(type(pid) is not int for pid in raw_pids) or frozenset(raw_pids) != KNOWN_RECOVERY_PIDS:
+            raise PreparationError("known-3981 session PID identity/type mismatch")
+        pids = tuple(raw_pids)
+        pid_proof: list[dict[str, Any]] = []
+        for pid in pids:
+            try:
+                os.kill(pid, 0); alive = True
+            except (ProcessLookupError, ValueError):
+                alive = False
+            except PermissionError:
+                alive = True
+            pid_proof.append({"pid": pid, "alive": alive})
+        if (
+            session.get("attempt_root") != str(stage)
+            or session.get("code_freeze_commit") != KNOWN_RECOVERY_COMMIT
+            or pipeline_status.get("phase") != "PIPELINE_STEP_2_OF_6"
+            or pipeline_status.get("trace_reads_before_seal") != 0
+            or any(row["alive"] for row in pid_proof)
+            or "prepared input mutated during hash cache lifetime" not in session_paths[3].read_text(encoding="utf-8")
+        ):
+            raise PreparationError("known-3981 session/PID/failure evidence mismatch")
+        lock = stage / "runner.lock"
+        if lock.exists():
+            lock_payload = json.loads(lock.read_text(encoding="utf-8"))
+            pid = int(lock_payload.get("pid", -1))
+            try:
+                os.kill(pid, 0); alive = True
+            except (ProcessLookupError, ValueError):
+                alive = False
+            except PermissionError:
+                alive = True
+            if (
+                alive
+                or str(lock_payload.get("stage_root", "")) != str(stage)
+                or lock_payload.get("code_freeze_commit") != KNOWN_RECOVERY_COMMIT
+            ):
+                raise PreparationError("known-3981 recovery rejects live or foreign runner lock")
+        activity_roots = (stage / "08_FULL_ALGORITHM_RUNS", stage / "10_INTERNAL_ABLATION_RUNS",
+                          stage / "11_OUTPUT_SEAL", stage / "12_OFFLINE_EVALUATION")
+        trace_names = {"TRACE_ACCESS_LEDGER.json", "REFERENCE_TRACE_READ_LEDGER.json"}
+        if (
+            any(path.is_file() for root in activity_roots if root.exists() for path in root.rglob("*"))
+            or any(path.is_file() and path.name in trace_names for path in stage.rglob("*"))
+        ):
+            raise PreparationError("known-3981 recovery requires zero formal/evaluator/trace activity")
+        protected_pre = scan_protected_live_set(stage)
+        _validate_protected_scan_record(protected_pre)
+        method_root = registry / "PREPARED_EXECUTION_INPUTS/METHOD_BOUND"
+        method_inventory = _regular_file_inventory(method_root)
+        if len(method_inventory) != METHOD_BOUND_TOTAL or any(
+            not relative.endswith("/METHOD_BOUND_INPUT_MANIFEST.json") for relative in method_inventory
+        ):
+            raise PreparationError("known-3981 recovery requires exactly 5951 method manifests")
+        manifests = [method_root / relative for relative in sorted(method_inventory)]
+        recovery_root.mkdir(parents=True, exist_ok=True)
+        phase_path = recovery_root / "RECOVERY_PHASES.json"
+        bootstrap = {
+            "schema_version": "paper_rebuild.canonical541_recovery_bootstrap.v1",
+            "explicitly_authorized": True, "attempt_root": str(stage),
+            "fixed_artifact_hashes": dict(KNOWN_RECOVERY_HASHES),
+            "session_evidence": [{"path": str(path), "sha256": sha256_file(path)} for path in session_paths],
+            "pid_dead_proof": pid_proof, "scientific_code_freeze_commit": KNOWN_RECOVERY_COMMIT,
+        }
+        bootstrap_path = recovery_root / "RECOVERY_BOOTSTRAP.json"
+        if bootstrap_path.exists():
+            if json.loads(bootstrap_path.read_text(encoding="utf-8")) != bootstrap:
+                raise PreparationError("known-3981 recovery bootstrap drift")
+        else:
+            _atomic_json(bootstrap_path, bootstrap)
+        bootstrap_sidecar = recovery_root / "RECOVERY_BOOTSTRAP.json.sha256"
+        _write_or_validate_recovery_sidecar(bootstrap_path, bootstrap_sidecar)
+        _atomic_json(phase_path, {"schema_version": "paper_rebuild.canonical541_recovery_phases.v1",
+                                  "phases": ["BOOTSTRAP_DURABLE"]})
+        originals = recovery_root / "ORIGINAL_METHOD_MANIFESTS"
+        manifest_rows: list[dict[str, str]] = []
+        for manifest in manifests:
+            relative = manifest.relative_to(registry / "PREPARED_EXECUTION_INPUTS/METHOD_BOUND")
+            preserved = originals / relative
+            digest = sha256_file(manifest)
+            payload = json.loads(manifest.read_text(encoding="utf-8"))
+            rendered = payload.get("actual_rendered_runtime_config_sha256")
+            if rendered is not None and (not isinstance(rendered, str) or len(rendered) != 64):
+                raise PreparationError("known-3981 manifest rendered-hash field is malformed")
+            manifest_rows.append({"path": str(manifest), "preserved_path": str(preserved),
+                                  "original_sha256": digest, "removed_value": rendered,
+                                  "annotated": rendered is not None})
+        annotated = sum(bool(row["annotated"]) for row in manifest_rows)
+        untouched = len(manifest_rows) - annotated
+        scanned_manifest_paths = {
+            str((method_root / relative).resolve(strict=True)) for relative in method_inventory
+        }
+        recorded_manifest_paths = {
+            str(Path(row["path"]).resolve(strict=True)) for row in manifest_rows
+        }
+        case_profiles = {
+            tuple(Path(relative).parts[:2]) for relative in method_inventory
+        }
+        cases = {case for case, _ in case_profiles}
+        if (
+            recorded_manifest_paths != scanned_manifest_paths
+            or len(recorded_manifest_paths) != METHOD_BOUND_TOTAL
+            or len(cases) != KNOWN_RECOVERY_CASE_COUNT
+            or any(sum(case_id == case for case_id, _ in case_profiles) != KNOWN_RECOVERY_PROFILES_PER_CASE for case in cases)
+        ):
+            raise PreparationError("known-3981 manifest rows do not equal independent 541x11 live scan")
+        configs = registry / "PREPARED_EXECUTION_INPUTS/RUNTIME_CONFIGS"
+        config_inventory = _regular_file_inventory(configs)
+        config_rows = [
+            {"path": str(configs / relative), "sha256": digest}
+            for relative, digest in sorted(config_inventory.items())
+        ]
+        if (annotated, untouched, len(config_rows)) != (
+            KNOWN_RECOVERY_ANNOTATED_COUNT, KNOWN_RECOVERY_UNTOUCHED_COUNT, KNOWN_RECOVERY_CONFIG_COUNT,
+        ):
+            raise PreparationError("known-3981 annotated/untouched/config signature mismatch")
+        superseded = tuple(path for path in (
+            full_path, ablation_path, unique_path,
+            registry / "PROVIDER_CONFIG_EXECUTABLE_HASH_REGISTRY.csv",
+            stage / "16_AUDITS/CANONICAL541_EXECUTION_INPUT_COMPLETENESS_AUDIT.json",
+            registry / "PREPARATION_STATUS.json", plan_path,
+            stage / "16_AUDITS/CANONICAL541_PREPARATION_REPORT.json",
+            stage / "16_AUDITS/CANONICAL541_PREPARATION_REPORT.md",
+            stage / "16_AUDITS/CANONICAL541_PREPARATION_REVIEW_PACKET.json",
+            stage / "runner.lock",
+        ) if path.is_file())
+        preinventory = {
+            "schema_version": "paper_rebuild.canonical541_known_3981_preinventory.v1",
+            "known_unique_count": KNOWN_RECOVERY_UNIQUE_COUNT,
+            "known_alias_count": KNOWN_RECOVERY_ALIAS_COUNT,
+            "formal_runs": 0, "evaluator_runs": 0, "trace_reads": 0,
+            "manifest_rows": manifest_rows,
+            "superseded_rows": [{"path": str(path), "sha256": sha256_file(path)} for path in superseded],
+            "runtime_config_rows": config_rows,
+            "protected_method_inventory": method_inventory,
+            "protected_runtime_config_inventory": config_inventory,
+            "annotated_manifest_count": annotated, "untouched_manifest_count": untouched,
+            "protected_live_pre": protected_pre,
+        }
+        _atomic_json(preinventory_path, preinventory)
+        _write_or_validate_recovery_sidecar(
+            preinventory_path, recovery_root / "PREINVENTORY.json.sha256",
+        )
+        _atomic_json(phase_path, {"schema_version": "paper_rebuild.canonical541_recovery_phases.v1",
+                                  "phases": ["BOOTSTRAP_DURABLE", "PREINVENTORY_DURABLE"]})
+    else:
+        preinventory = json.loads(preinventory_path.read_text(encoding="utf-8"))
+        if (preinventory.get("known_unique_count"), preinventory.get("known_alias_count")) != (
+            KNOWN_RECOVERY_UNIQUE_COUNT, KNOWN_RECOVERY_ALIAS_COUNT,
+        ):
+            raise PreparationError("known-3981 preinventory signature drift")
+        preinventory_sidecar = recovery_root / "PREINVENTORY.json.sha256"
+        _write_or_validate_recovery_sidecar(preinventory_path, preinventory_sidecar)
+    manifest_rows = list(preinventory["manifest_rows"])
+    _validate_protected_scan_record(preinventory.get("protected_live_pre", {}))
+    current_method_inventory = _regular_file_inventory(
+        registry / "PREPARED_EXECUTION_INPUTS/METHOD_BOUND",
+    )
+    current_manifest_paths = {
+        str((registry / "PREPARED_EXECUTION_INPUTS/METHOD_BOUND" / relative).resolve(strict=True))
+        for relative in current_method_inventory
+    }
+    normalized_recorded_paths = {
+        str(Path(row["path"]).resolve(strict=True)) for row in manifest_rows
+    }
+    current_case_profiles = {
+        tuple(Path(relative).parts[:2]) for relative in current_method_inventory
+    }
+    current_cases = {case for case, _ in current_case_profiles}
+    if (
+        normalized_recorded_paths != current_manifest_paths
+        or len(normalized_recorded_paths) != METHOD_BOUND_TOTAL
+        or len(current_cases) != KNOWN_RECOVERY_CASE_COUNT
+        or any(sum(case_id == case for case_id, _ in current_case_profiles) != KNOWN_RECOVERY_PROFILES_PER_CASE for case in current_cases)
+    ):
+        raise PreparationError("known-3981 manifest rows differ from current independent live scan")
+    for row in manifest_rows:
+        if not row["annotated"]:
+            continue
+        source = Path(row["path"]); preserved = Path(row["preserved_path"])
+        if preserved.exists():
+            if sha256_file(preserved) != row["original_sha256"]:
+                raise PreparationError("known-3981 preserved manifest mutated")
+            continue
+        if sha256_file(source) != row["original_sha256"]:
+            raise PreparationError("known-3981 manifest mutated before preservation")
+        preserved.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(source, preserved)
+        if sha256_file(preserved) != row["original_sha256"]:
+            raise PreparationError("known-3981 quarantine byte preservation failed")
+    _atomic_json(recovery_root / "RECOVERY_PHASES.json", {
+        "schema_version": "paper_rebuild.canonical541_recovery_phases.v1",
+        "phases": ["BOOTSTRAP_DURABLE", "PREINVENTORY_DURABLE", "ORIGINALS_PRESERVED"],
+    })
+    reset_rows: list[dict[str, str]] = []
+    for row in manifest_rows:
+        manifest = Path(row["path"]); preserved = Path(row["preserved_path"])
+        if row["annotated"]:
+            if sha256_file(preserved) != row["original_sha256"]:
+                raise PreparationError("known-3981 preserved manifest mutated")
+            expected = json.loads(preserved.read_text(encoding="utf-8"))
+            rendered = expected.pop("actual_rendered_runtime_config_sha256")
+            if sha256_file(manifest) == row["original_sha256"]:
+                _atomic_json(manifest, expected)
+            elif json.loads(manifest.read_text(encoding="utf-8")) != expected:
+                raise PreparationError("known-3981 reset manifest contains non-rendered-field mutation")
+        else:
+            if sha256_file(manifest) != row["original_sha256"]:
+                raise PreparationError("known-3981 untouched manifest mutated")
+            continue
+        reset_rows.append({
+            "path": str(manifest), "preserved_path": str(preserved),
+            "original_sha256": row["original_sha256"], "reset_sha256": sha256_file(manifest),
+            "removed_field": "actual_rendered_runtime_config_sha256",
+            "removed_value": rendered,
+        })
+    _atomic_json(recovery_root / "RECOVERY_PHASES.json", {
+        "schema_version": "paper_rebuild.canonical541_recovery_phases.v1",
+        "phases": ["BOOTSTRAP_DURABLE", "PREINVENTORY_DURABLE", "ORIGINALS_PRESERVED",
+                   "RENDERED_FIELDS_RESET"],
+    })
+    quarantined: list[dict[str, str]] = []
+    for row in preinventory["superseded_rows"]:
+        source = Path(row["path"])
+        destination = quarantine / source.relative_to(stage)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        if source.is_file():
+            if sha256_file(source) != row["sha256"]:
+                raise PreparationError("known-3981 source mutated after preinventory")
+            os.replace(source, destination)
+            _fsync_directory(source.parent); _fsync_directory(destination.parent)
+        if not destination.is_file() or sha256_file(destination) != row["sha256"]:
+            raise PreparationError("known-3981 superseded artifact preservation failed")
+        quarantined.append({"path": str(source), "preserved_path": str(destination), "sha256": row["sha256"]})
+    configs = registry / "PREPARED_EXECUTION_INPUTS/RUNTIME_CONFIGS"
+    config_destination = quarantine / configs.relative_to(stage)
+    if configs.exists():
+        config_destination.parent.mkdir(parents=True, exist_ok=True); os.replace(configs, config_destination)
+        _fsync_directory(configs.parent); _fsync_directory(config_destination.parent)
+    for row in preinventory["runtime_config_rows"]:
+        destination = config_destination / Path(row["path"]).relative_to(configs)
+        if not destination.is_file() or sha256_file(destination) != row["sha256"]:
+            raise PreparationError("known-3981 runtime config preservation failed")
+    protected_post = scan_protected_live_set(stage)
+    _validate_protected_scan_record(protected_post)
+    if protected_post != preinventory["protected_live_pre"]:
+        raise PreparationError("known-3981 protected immutable live set changed PRE to POST")
+    _atomic_json(recovery_root / "RECOVERY_PHASES.json", {
+        "schema_version": "paper_rebuild.canonical541_recovery_phases.v1",
+        "phases": ["BOOTSTRAP_DURABLE", "PREINVENTORY_DURABLE", "ORIGINALS_PRESERVED",
+                   "RENDERED_FIELDS_RESET", "PROTECTED_ARTIFACTS_QUARANTINED"],
+    })
+    post_manifest_rows = [
+        {"path": row["path"], "sha256": sha256_file(Path(row["path"])),
+         "annotated_before_recovery": row["annotated"]}
+        for row in manifest_rows
+    ]
+    post_config_rows = [
+        {"path": str(config_destination / Path(row["path"]).relative_to(configs)),
+         "sha256": row["sha256"]}
+        for row in preinventory["runtime_config_rows"]
+    ]
+    _atomic_json(recovery_root / "RESET_LEDGER.json", {
+        "schema_version": "paper_rebuild.canonical541_known_3981_reset.v1",
+        "known_unique_count": KNOWN_RECOVERY_UNIQUE_COUNT,
+        "known_alias_count": KNOWN_RECOVERY_ALIAS_COUNT,
+        "reset_manifest_count": len(reset_rows), "reset_rows": reset_rows,
+        "untouched_manifest_count": preinventory["untouched_manifest_count"],
+        "quarantined_artifacts": quarantined, "byte_preservation_required": True,
+    })
+    post = {
+        "schema_version": "paper_rebuild.canonical541_known_3981_postinventory.v1",
+        "reset_manifest_count": len(reset_rows),
+        "untouched_manifest_count": preinventory["untouched_manifest_count"],
+        "quarantined_artifact_count": len(quarantined),
+        "quarantined_runtime_config_count": len(preinventory["runtime_config_rows"]),
+        "authoritative_superseded_paths_absent": all(not Path(row["path"]).exists() for row in preinventory["superseded_rows"]),
+        "protected_manifest_rows": post_manifest_rows,
+        "protected_quarantine_rows": quarantined,
+        "protected_runtime_config_rows": post_config_rows,
+        "protected_live_post": protected_post,
+        "passed": (
+            len(reset_rows) == KNOWN_RECOVERY_ANNOTATED_COUNT
+            and preinventory["untouched_manifest_count"] == KNOWN_RECOVERY_UNTOUCHED_COUNT
+            and len(preinventory["runtime_config_rows"]) == KNOWN_RECOVERY_CONFIG_COUNT
+            and all(not Path(row["path"]).exists() for row in preinventory["superseded_rows"])
+        ),
+    }
+    _atomic_json(recovery_root / "POSTINVENTORY.json", post)
+    phases = ["BOOTSTRAP_DURABLE", "PREINVENTORY_DURABLE", "ORIGINALS_PRESERVED",
+              "RENDERED_FIELDS_RESET", "PROTECTED_ARTIFACTS_QUARANTINED",
+              "POSTINVENTORY_VALIDATED"]
+    _atomic_json(recovery_root / "RECOVERY_PHASES.json", {
+        "schema_version": "paper_rebuild.canonical541_recovery_phases.v1", "phases": phases,
+    })
+    complete = {
+        "schema_version": "paper_rebuild.canonical541_known_3981_recovery_complete.v1",
+        "terminal_status": "RECOVERY_COMPLETE", "passed": True,
+        "known_unique_count": KNOWN_RECOVERY_UNIQUE_COUNT,
+        "known_alias_count": KNOWN_RECOVERY_ALIAS_COUNT,
+        "reset_manifest_count": len(reset_rows), "formal_runs": 0,
+        "untouched_manifest_count": preinventory["untouched_manifest_count"],
+        "evaluator_runs": 0, "trace_reads": 0,
+        "reset_ledger_sha256": sha256_file(recovery_root / "RESET_LEDGER.json"),
+        "postinventory_sha256": sha256_file(recovery_root / "POSTINVENTORY.json"),
+        "bootstrap_sha256": sha256_file(recovery_root / "RECOVERY_BOOTSTRAP.json"),
+        "preinventory_sha256": sha256_file(recovery_root / "PREINVENTORY.json"),
+    }
+    _atomic_json(recovery_root / "RECOVERY_PHASES.json", {
+        "schema_version": "paper_rebuild.canonical541_recovery_phases.v1",
+        "phases": [*phases, "RECOVERY_COMPLETE"],
+    })
+    complete["phase_ledger_sha256"] = sha256_file(recovery_root / "RECOVERY_PHASES.json")
+    _atomic_json(complete_path, complete)  # marker excludes its own hash; sidecar binds it
+    _write_or_validate_recovery_sidecar(
+        complete_path, recovery_root / "RECOVERY_COMPLETE.json.sha256",
+    )
+    return recover_known_3981_preparation(stage, explicitly_authorized=True)
+
+
 def prepare_only_execution_plan(
     *, repo_root: str | Path, stage_root: str | Path, provider_root: str | Path,
     base_provider_root: str | Path, base: ProviderBundle, executable: str | Path,
@@ -1483,12 +2189,30 @@ def prepare_only_execution_plan(
         hash_cache=hash_cache, authorization=authorization,
     )
     logical_rows = [*full_rows, *ablation_rows]
+    # _build_plan_registries may perform the narrowly authorized, atomic
+    # attempt-owned manifest finalization above.  Start a fresh cache boundary
+    # afterward so the final registry hashes the finalized bytes, while its
+    # own stat-before/stat-after checks continue to reject external mutation.
+    finalized_hash_cache = UniqueFileHashCache()
     hash_registry = _write_hash_registry(
         stage=stage, cases=cases, bindings=bindings,
         executable_sha256=plan["executable_sha256"], logical_rows=logical_rows,
-        hash_cache=hash_cache,
+        hash_cache=finalized_hash_cache,
     )
     source_matrix = _write_source_isolation_matrix(stage, cases)
+    freeze_root = stage / "07_FULL_ALGORITHM_REGISTRY/PREPARED_REGISTRY_FREEZE"
+    prepared_registry_sources = {
+        "full_queue": stage / "07_FULL_ALGORITHM_REGISTRY/FULL_ALGORITHM_QUEUE.csv",
+        "ablation_queue": stage / "09_INTERNAL_ABLATION_REGISTRY/INTERNAL_ABLATION_QUEUE.csv",
+        "unique_registry": stage / "07_FULL_ALGORITHM_REGISTRY/CANONICAL541_UNIQUE_RUN_REGISTRY.csv",
+    }
+    prepared_registry_freeze: dict[str, Path] = {}
+    for role, source in prepared_registry_sources.items():
+        destination = freeze_root / source.name
+        _atomic_text(destination, source.read_text(encoding="utf-8"))
+        if sha256_file(destination) != sha256_file(source):
+            raise PreparationError("immutable prepared registry freeze hash mismatch")
+        prepared_registry_freeze[role] = destination
     resources = _resource_estimate(stage, int(plan["unique_run_count"]))
     status.write(
         phase="AUDITING_PREPARATION",
@@ -1505,8 +2229,16 @@ def prepare_only_execution_plan(
         source_matrix_path=source_matrix, resource_estimate=resources,
         authorization=authorization,
     )
+    if not audit["passed"]:
+        status.write(
+            phase="BLOCKED", method_bound_completed=METHOD_BOUND_TOTAL,
+            cases_completed=541, full_queue_rows=FULL_QUEUE_TOTAL,
+            ablation_queue_rows=ABLATION_QUEUE_TOTAL,
+            unique_runs_planned=int(plan["unique_run_count"]), force=True,
+        )
+        raise PreparationError("preparation completeness audit did not pass")
     status.write(
-        phase="READY_FOR_AUTOMATIC_EXECUTION" if audit["passed"] else "BLOCKED",
+        phase="READY_FOR_AUTOMATIC_EXECUTION",
         method_bound_completed=METHOD_BOUND_TOTAL,
         cases_completed=541,
         full_queue_rows=FULL_QUEUE_TOTAL,
@@ -1514,12 +2246,26 @@ def prepare_only_execution_plan(
         unique_runs_planned=int(plan["unique_run_count"]),
         force=True,
     )
+    prepared_artifacts = {
+        **prepared_registry_freeze,
+        "hash_registry": hash_registry,
+        "source_isolation": source_matrix,
+        "completeness_audit": stage / "16_AUDITS/CANONICAL541_EXECUTION_INPUT_COMPLETENESS_AUDIT.json",
+        "preparation_status": stage / "07_FULL_ALGORITHM_REGISTRY/PREPARATION_STATUS.json",
+    }
+    plan["prepared_artifact_sha256"] = {
+        role: sha256_file(path) for role, path in prepared_artifacts.items()
+    }
+    plan["current_status_registry_sha256"] = {
+        role: sha256_file(path) for role, path in prepared_registry_sources.items()
+    }
+    # The plan is the authoritative commit marker and is written last among
+    # all execution-gating preparation artifacts.
+    _atomic_json(stage / "07_FULL_ALGORITHM_REGISTRY/EXECUTION_PLAN.json", plan)
     report_md, report_json = _write_preparation_report(
         stage=stage, plan=plan, provider_gate=provider_gate,
         resume=resume, audit=audit, authorization=authorization,
     )
-    if not audit["passed"]:
-        raise PreparationError("preparation completeness audit did not pass")
     return {
         "terminal_status": "PASS_CANONICAL541_AUTHORIZED_PREPARATION_READY_FOR_AUTOMATIC_EXECUTION",
         "plan": plan,
@@ -1580,9 +2326,11 @@ def verify_preparation_only(
         and len(ablation) == ABLATION_QUEUE_TOTAL
         and len(hash_rows) == METHOD_BOUND_TOTAL
         and method_bound_count == METHOD_BOUND_TOTAL
-        and len(unique) == plan.get("unique_run_count")
+        and len(unique) == plan.get("unique_run_count") == METHOD_BOUND_TOTAL
         and len(by_logical) == ALL_LOGICAL_TOTAL
         and alias_ok
+        and plan.get("scientific_code_freeze_commit") is not None
+        and plan.get("preparation_code_commit") == commit
         and plan.get("execution_authorized") is True
         and plan.get("solver_allowed_after_readiness_freeze") is True
         and plan.get("evaluator_allowed_after_output_seal") is True
