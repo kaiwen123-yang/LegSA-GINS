@@ -12,6 +12,8 @@ import json
 import ast
 import contextlib
 import fcntl
+import os
+import stat
 import re
 import shutil
 import subprocess
@@ -43,6 +45,7 @@ REJECTED_RUNNER_FREEZE_COMMIT = "0f8d12ec6465105e56309a0df62c1f165e01aa63"
 C2R1_COMMIT = "187e92796db8aa2a479b62249d7c1a945f4ad721"
 C2R2_COMMIT = "f3c5baff07beb9f20faaefd89c4e7ad4a05a7ab0"
 C2R3_COMMIT = "244872ae18ebd3fdbb33aa8e035fba93f1dcfcd5"
+C2R4_COMMIT = "218059452c7774b3d4dc23bc722a9a2f6f8c9ae7"
 PRIOR_REVIEWED_CPP_TREE = "a3716d22acf95fb1e6028ae82acb2ae73e138bfc"
 RUNTIME_COUNTER_PATH = "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp"
 LOADER_EXTENSION_PATH = "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp"
@@ -74,6 +77,7 @@ C2R1_CHANGED_PATHS = (
 C2R2_CHANGED_PATHS = C2R1_CHANGED_PATHS
 C2R3_CHANGED_PATHS = C2R1_CHANGED_PATHS
 C2R4_CHANGED_PATHS = C2R1_CHANGED_PATHS
+C2R5_CHANGED_PATHS = C2R1_CHANGED_PATHS
 A0_CHANGED_PATHS = (
     "docs/paper_rebuild/CLEAN3R3/HARDCODE_INVENTORY.md",
     "docs/paper_rebuild/CLEAN3R3/AMENDMENT_1_SCOPE_AND_IMPLEMENTATION_AUTHORIZATION.md",
@@ -84,6 +88,7 @@ PREFLIGHT_LEDGER_SCHEMA = "paper_rebuild.clean3r3_zero_data_loader_ledger.v1"
 PREFLIGHT_SEAL_SCHEMA = "paper_rebuild.clean3r3_governance_preflight_seal.v1"
 PREFLIGHT_CLAIM_SCHEMA = "paper_rebuild.clean3r3_governance_preflight_claim.v1"
 PREFLIGHT_TERMINAL_SCHEMA = "paper_rebuild.clean3r3_governance_preflight_terminal.v1"
+PREFLIGHT_FAILURE_SCHEMA = "paper_rebuild.clean3r3_governance_preflight_failure.v1"
 PREFLIGHT_LEDGER_FIELDS = frozenset({
     "schema_version", "trace_subject", "exec_paths", "expected_exec_path", "exact_exec_subject",
     "read_attempt_paths", "write_attempt_paths", "accepting_config_open_count",
@@ -236,7 +241,8 @@ def _guard_git(repo: Path) -> dict[str, Any]:
     require_single_parent(C2R1_COMMIT, REJECTED_RUNNER_FREEZE_COMMIT, "preserved CLEAN3R3 C2R1")
     require_single_parent(C2R2_COMMIT, C2R1_COMMIT, "preserved CLEAN3R3 C2R2")
     require_single_parent(C2R3_COMMIT, C2R2_COMMIT, "preserved CLEAN3R3 C2R3")
-    require_single_parent(runner_freeze, C2R3_COMMIT, "CLEAN3R3 C2R4")
+    require_single_parent(C2R4_COMMIT, C2R3_COMMIT, "preserved CLEAN3R3 C2R4")
+    require_single_parent(runner_freeze, C2R4_COMMIT, "CLEAN3R3 C2R5")
     require_single_parent(head, runner_freeze, "CLEAN3R3 C3")
     if _git(repo, "rev-parse", f"{head}^").stdout.strip() != runner_freeze:
         raise Clean3S3Error("execution HEAD is not exactly one authorization commit after runner freeze",
@@ -288,17 +294,24 @@ def _guard_git(repo: Path) -> dict[str, Any]:
         raise Clean3S3Error("C2R3 diff is outside the approved two repair paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     repair4_changed = tuple(sorted(
-        _git(repo, "diff", "--name-only", f"{C2R3_COMMIT}..{runner_freeze}").stdout.splitlines()
+        _git(repo, "diff", "--name-only", f"{C2R3_COMMIT}..{C2R4_COMMIT}").stdout.splitlines()
     ))
     if repair4_changed != tuple(sorted(C2R4_CHANGED_PATHS)):
         raise Clean3S3Error("C2R4 diff is outside the approved two repair paths",
+                            terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
+    repair5_changed = tuple(sorted(
+        _git(repo, "diff", "--name-only", f"{C2R4_COMMIT}..{runner_freeze}").stdout.splitlines()
+    ))
+    if repair5_changed != tuple(sorted(C2R5_CHANGED_PATHS)):
+        raise Clean3S3Error("C2R5 diff is outside the approved two repair paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     for tracked in (FREEZE_PATH, AUTHORIZATION_PATH):
         if _git(repo, "ls-files", "--error-unmatch", tracked, check=False).returncode != 0:
             raise Clean3S3Error("execution freeze or authorization is not tracked",
                                 terminal_status="FAILED_TECHNICAL_FREEZE_UNTRACKED")
     for ancestor in (
-        runner_freeze, C2R3_COMMIT, C2R2_COMMIT, C2R1_COMMIT, REJECTED_RUNNER_FREEZE_COMMIT,
+        runner_freeze, C2R4_COMMIT, C2R3_COMMIT, C2R2_COMMIT, C2R1_COMMIT,
+        REJECTED_RUNNER_FREEZE_COMMIT,
         CODE_FREEZE_COMMIT,
         REPAIR_IMPLEMENTATION_COMMIT,
         AMENDMENT_PARENT_HEAD,
@@ -1010,20 +1023,43 @@ def _audit_preflight_trace(
 
 @contextlib.contextmanager
 def _preflight_namespace_lock(clean_root: Path):
-    namespace = clean_root / PREFLIGHT_RELATIVE
-    namespace.parent.mkdir(exist_ok=True)
-    namespace.mkdir(exist_ok=True)
-    if namespace.is_symlink() or not namespace.is_dir():
-        raise Clean3S3Error("unsafe preflight namespace", terminal_status="FAILED_TECHNICAL_PREFLIGHT_NAMESPACE")
-    lock_path = namespace / ".namespace.lock"
-    if lock_path.exists() and (lock_path.is_symlink() or not lock_path.is_file()):
-        raise Clean3S3Error("unsafe preflight namespace lock", terminal_status="FAILED_TECHNICAL_PREFLIGHT_NAMESPACE")
-    with lock_path.open("a+b") as handle:
-        fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
-        try:
-            yield namespace
-        finally:
-            fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+    clean = clean_root.resolve(strict=True)
+    if clean != clean_root.absolute() or clean.is_symlink() or not clean.is_dir():
+        raise Clean3S3Error("unsafe clean root", terminal_status="FAILED_TECHNICAL_PREFLIGHT_NAMESPACE")
+    directory_flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW
+    fds: list[int] = []
+    try:
+        current = os.open(clean, directory_flags); fds.append(current)
+        for component in ("00_GOVERNANCE_PREFLIGHT", STAGE_ID):
+            try:
+                os.mkdir(component, mode=0o755, dir_fd=current)
+            except FileExistsError:
+                pass
+            child = os.open(component, directory_flags, dir_fd=current)
+            if not stat.S_ISDIR(os.fstat(child).st_mode):
+                raise OSError("namespace component is not a directory")
+            fds.append(child); current = child
+        lock_fd = os.open(".namespace.lock", os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600, dir_fd=current)
+        fds.append(lock_fd)
+        lock_stat = os.fstat(lock_fd)
+        if not stat.S_ISREG(lock_stat.st_mode) or lock_stat.st_nlink != 1:
+            raise OSError("namespace lock is not a single-linked regular file")
+        fcntl.flock(lock_fd, fcntl.LOCK_EX)
+        namespace = clean / PREFLIGHT_RELATIVE
+        path_stat = os.stat(namespace, follow_symlinks=False)
+        if (path_stat.st_dev, path_stat.st_ino) != (os.fstat(current).st_dev, os.fstat(current).st_ino):
+            raise OSError("namespace parent identity changed")
+        yield namespace
+        path_stat = os.stat(namespace, follow_symlinks=False)
+        if (path_stat.st_dev, path_stat.st_ino) != (os.fstat(current).st_dev, os.fstat(current).st_ino):
+            raise OSError("namespace parent identity changed")
+    except OSError as exc:
+        raise Clean3S3Error("unsafe preflight namespace",
+                            terminal_status="FAILED_TECHNICAL_PREFLIGHT_NAMESPACE") from exc
+    finally:
+        for fd in reversed(fds):
+            try: os.close(fd)
+            except OSError: pass
 
 
 def _scan_preflight_attempts(namespace: Path) -> list[Path]:
@@ -1053,7 +1089,7 @@ def _attempt_terminal(attempt: Path) -> dict[str, Any] | None:
     path = attempt / "TERMINAL.json"
     if not path.exists():
         return None
-    if path.is_symlink() or not path.is_file():
+    if path.is_symlink() or not path.is_file() or not stat.S_ISREG(path.lstat().st_mode):
         raise Clean3S3Error("unsafe preflight terminal", terminal_status="FAILED_TECHNICAL_PREFLIGHT_NAMESPACE")
     terminal = _load_json(path)
     if (terminal.get("schema_version") != PREFLIGHT_TERMINAL_SCHEMA or
@@ -1064,10 +1100,34 @@ def _attempt_terminal(attempt: Path) -> dict[str, Any] | None:
     claim = attempt / "ATTEMPT_CLAIM.json"
     report = attempt / "04_REPORT" / ("CLEAN3R3_GOVERNANCE_PREFLIGHT_REPORT.json"
         if terminal["terminal_status"] == "PREFLIGHT_OK" else "CLEAN3R3_GOVERNANCE_PREFLIGHT_FAILURE.json")
-    if (not claim.is_file() or not report.is_file() or terminal.get("claim_sha256") != sha256_file(claim)
+    if (claim.is_symlink() or report.is_symlink() or not claim.is_file() or not report.is_file()
+            or not stat.S_ISREG(claim.lstat().st_mode) or not stat.S_ISREG(report.lstat().st_mode)
+            or terminal.get("claim_sha256") != sha256_file(claim)
             or terminal.get("report_sha256") != sha256_file(report)):
         raise Clean3S3Error("preflight terminal hash mismatch",
                             terminal_status="FAILED_TECHNICAL_PREFLIGHT_CONTRACT")
+    ordinal = int(attempt.name[-6:])
+    predecessor = f"ATTEMPT_{ordinal - 1:06d}" if ordinal > 1 else None
+    claim_payload = _load_json(claim)
+    expected_claim = {"schema_version": PREFLIGHT_CLAIM_SCHEMA, "attempt_id": attempt.name,
+        "attempt_ordinal": ordinal, "execution_head": claim_payload.get("execution_head"),
+        "stage_id": STAGE_ID, "predecessor_attempt_id": predecessor,
+        "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER", "formal_solver_executed": False,
+        "claimed_before_work": True}
+    if set(claim_payload) != set(expected_claim) or claim_payload != expected_claim:
+        raise Clean3S3Error("invalid preflight claim", terminal_status="FAILED_TECHNICAL_PREFLIGHT_CONTRACT")
+    if terminal["terminal_status"] == "PREFLIGHT_FAILED":
+        failure = _load_json(report)
+        expected_failure = {"schema_version": PREFLIGHT_FAILURE_SCHEMA, "stage_id": STAGE_ID,
+            "attempt_id": attempt.name, "attempt_ordinal": ordinal,
+            "execution_head": claim_payload["execution_head"], "predecessor_attempt_id": predecessor,
+            "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER", "formal_solver_executed": False,
+            "terminal_status": "PREFLIGHT_FAILED", "passed": False,
+            "failure_reason": failure.get("failure_reason"), "claim_sha256": sha256_file(claim)}
+        if (not isinstance(failure.get("failure_reason"), str) or not failure["failure_reason"] or
+                set(failure) != set(expected_failure) or failure != expected_failure):
+            raise Clean3S3Error("invalid preflight failure report",
+                                terminal_status="FAILED_TECHNICAL_PREFLIGHT_CONTRACT")
     return terminal
 
 
@@ -1230,14 +1290,18 @@ def _locked_preflight(function):
                 (root / relative).mkdir()
             claim = {"schema_version": PREFLIGHT_CLAIM_SCHEMA, "attempt_id": root.name,
                      "attempt_ordinal": ordinal, "execution_head": git_identity["execution_head"],
+                     "stage_id": STAGE_ID, "predecessor_attempt_id": attempts[-1].name if attempts else None,
+                     "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER", "formal_solver_executed": False,
                      "claimed_before_work": True}
             claim_path = write_json_atomic(root / "ATTEMPT_CLAIM.json", claim)
             try:
                 report = function(repo, clean, _attempt_root=root, _git_identity=git_identity, **kwargs)
             except Exception as exc:
-                failure = {"schema_version": PREFLIGHT_REPORT_SCHEMA, "stage_id": STAGE_ID,
+                failure = {"schema_version": PREFLIGHT_FAILURE_SCHEMA, "stage_id": STAGE_ID,
                            "attempt_id": root.name, "attempt_ordinal": ordinal,
                            "execution_head": git_identity["execution_head"],
+                           "predecessor_attempt_id": attempts[-1].name if attempts else None,
+                           "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER", "formal_solver_executed": False,
                            "terminal_status": "PREFLIGHT_FAILED", "passed": False,
                            "failure_reason": str(exc), "claim_sha256": sha256_file(claim_path)}
                 failure_path = write_json_atomic(root / "04_REPORT/CLEAN3R3_GOVERNANCE_PREFLIGHT_FAILURE.json", failure)
