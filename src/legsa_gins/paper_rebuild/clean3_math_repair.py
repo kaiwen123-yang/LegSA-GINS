@@ -49,6 +49,7 @@ C2R4_COMMIT = "218059452c7774b3d4dc23bc722a9a2f6f8c9ae7"
 C2R5_COMMIT = "6602ac51de1a5fbb5faadb6bf91e1aab0f1882cc"
 C2R6_COMMIT = "e43194d87b28184690813b3f7834546f6d636e25"
 C2R7_COMMIT = "21cc169fa50f749d09174348c956e7ca44152f36"
+C2R8_COMMIT = "291683fdf4ab9b6432b8b6370bb3b70c7e1382bc"
 PRIOR_REVIEWED_CPP_TREE = "a3716d22acf95fb1e6028ae82acb2ae73e138bfc"
 RUNTIME_COUNTER_PATH = "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp"
 LOADER_EXTENSION_PATH = "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp"
@@ -88,6 +89,7 @@ C2R8_CHANGED_PATHS = (
     "scripts/paper_rebuild/run_clean3_math_repair.py",
     "tests/paper_rebuild/test_clean3_s3_parity_runner.py",
 )
+C2R9_CHANGED_PATHS = C2R1_CHANGED_PATHS
 A0_CHANGED_PATHS = (
     "docs/paper_rebuild/CLEAN3R3/HARDCODE_INVENTORY.md",
     "docs/paper_rebuild/CLEAN3R3/AMENDMENT_1_SCOPE_AND_IMPLEMENTATION_AUTHORIZATION.md",
@@ -110,7 +112,9 @@ PREFLIGHT_LEDGER_FIELDS = frozenset({
     "classification_roots", "raw_open_count", "provider_open_count", "reference_trace_open_count",
     "legacy_open_count", "unexpected_write_count", "unexpected_read_count",
     "bound_artifact_sha256", "formal_solver_executed", "passed",
+    "bound_roots", "claim_sha256",
 })
+T8_EXACT_STDERR = "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH: CLEAN3 S3 parity mode identity mismatch"
 
 FAILED_ATTEMPT_STAGE_ID = "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE"
 FAILED_ATTEMPT_TERMINAL = "FAILED_TECHNICAL_S3_AB0000_FORMAL_COUNTER_CONTRACT_UNROUTED"
@@ -258,7 +262,8 @@ def _guard_git(repo: Path) -> dict[str, Any]:
     require_single_parent(C2R5_COMMIT, C2R4_COMMIT, "preserved CLEAN3R3 C2R5")
     require_single_parent(C2R6_COMMIT, C2R5_COMMIT, "preserved CLEAN3R3 C2R6")
     require_single_parent(C2R7_COMMIT, C2R6_COMMIT, "preserved CLEAN3R3 C2R7")
-    require_single_parent(runner_freeze, C2R7_COMMIT, "CLEAN3R3 C2R8")
+    require_single_parent(C2R8_COMMIT, C2R7_COMMIT, "preserved CLEAN3R3 C2R8")
+    require_single_parent(runner_freeze, C2R8_COMMIT, "CLEAN3R3 C2R9")
     require_single_parent(head, runner_freeze, "CLEAN3R3 C3")
     if _git(repo, "rev-parse", f"{head}^").stdout.strip() != runner_freeze:
         raise Clean3S3Error("execution HEAD is not exactly one authorization commit after runner freeze",
@@ -334,17 +339,24 @@ def _guard_git(repo: Path) -> dict[str, Any]:
         raise Clean3S3Error("C2R7 diff is outside the approved two repair paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     repair8_changed = tuple(sorted(
-        _git(repo, "diff", "--name-only", f"{C2R7_COMMIT}..{runner_freeze}").stdout.splitlines()
+        _git(repo, "diff", "--name-only", f"{C2R7_COMMIT}..{C2R8_COMMIT}").stdout.splitlines()
     ))
     if repair8_changed != tuple(sorted(C2R8_CHANGED_PATHS)):
         raise Clean3S3Error("C2R8 diff is outside the approved three repair paths",
+                            terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
+    repair9_changed = tuple(sorted(
+        _git(repo, "diff", "--name-only", f"{C2R8_COMMIT}..{runner_freeze}").stdout.splitlines()
+    ))
+    if repair9_changed != tuple(sorted(C2R9_CHANGED_PATHS)):
+        raise Clean3S3Error("C2R9 diff is outside the approved two repair paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     for tracked in (FREEZE_PATH, AUTHORIZATION_PATH):
         if _git(repo, "ls-files", "--error-unmatch", tracked, check=False).returncode != 0:
             raise Clean3S3Error("execution freeze or authorization is not tracked",
                                 terminal_status="FAILED_TECHNICAL_FREEZE_UNTRACKED")
     for ancestor in (
-        runner_freeze, C2R7_COMMIT, C2R6_COMMIT, C2R5_COMMIT, C2R4_COMMIT, C2R3_COMMIT,
+        runner_freeze, C2R8_COMMIT, C2R7_COMMIT, C2R6_COMMIT, C2R5_COMMIT, C2R4_COMMIT,
+        C2R3_COMMIT,
         C2R2_COMMIT,
         C2R1_COMMIT,
         REJECTED_RUNNER_FREEZE_COMMIT,
@@ -984,7 +996,8 @@ def _audit_preflight_trace(
     trace: Path, *, cwd: Path, harness_binary: Path, accepting_config: Path,
     negative_config: Path, sentinel_root: Path, artifact_hashes: Mapping[str, str],
     raw_root: Path | None = None, provider_root: Path | None = None,
-    reference_trace: Path | None = None,
+    reference_trace: Path | None = None, bound_roots: Mapping[str, str] | None = None,
+    claim_sha256: str | None = None,
 ) -> dict[str, Any]:
     events = _syscall_events(trace, cwd)
     exec_paths = [event["paths"][0] for event in events if event["syscall"] == "execve"]
@@ -1051,6 +1064,7 @@ def _audit_preflight_trace(
         "unexpected_read_count": len(unexpected_reads),
         "bound_artifact_sha256": dict(artifact_hashes),
         "formal_solver_executed": False,
+        "bound_roots": dict(bound_roots or {}), "claim_sha256": claim_sha256,
     }
     ledger["passed"] = (exact_subject and config_open_count == 1 and
                          ledger["negative_config_open_count"] == 0 and
@@ -1241,14 +1255,27 @@ def _attempt_terminal(attempt: Path) -> dict[str, Any] | None:
             or terminal.get("report_sha256") != sha256_file(report)):
         raise Clean3S3Error("preflight terminal hash mismatch",
                             terminal_status="FAILED_TECHNICAL_PREFLIGHT_CONTRACT")
+    if terminal["terminal_status"] == "PREFLIGHT_OK":
+        seal_leaf = attempt / "03_SEAL/CLEAN3R3_GOVERNANCE_PREFLIGHT_SEAL.json"
+        if (seal_leaf.is_symlink() or not seal_leaf.is_file() or
+                terminal.get("seal_sha256") != sha256_file(seal_leaf)):
+            raise Clean3S3Error("preflight terminal seal mismatch",
+                                terminal_status="FAILED_TECHNICAL_PREFLIGHT_CONTRACT")
     ordinal = _parse_attempt_name(attempt.name)
     predecessor = f"ATTEMPT_{ordinal - 1:06d}" if ordinal > 1 else None
     claim_payload = _load_json(claim)
+    roots = claim_payload.get("bound_roots")
+    root_keys = {"raw_root", "provider_root", "reference_trace_path", "repo_cwd", "clean_root",
+                 "attempt_root", "sentinel_root"}
+    if (not isinstance(roots, Mapping) or set(roots) != root_keys or
+            roots.get("attempt_root") != str(attempt) or
+            roots.get("sentinel_root") != str(attempt / "NONEXISTENT_DO_NOT_OPEN")):
+        raise Clean3S3Error("invalid preflight claim roots", terminal_status="FAILED_TECHNICAL_PREFLIGHT_CONTRACT")
     expected_claim = {"schema_version": PREFLIGHT_CLAIM_SCHEMA, "attempt_id": attempt.name,
         "attempt_ordinal": ordinal, "execution_head": claim_payload.get("execution_head"),
         "stage_id": STAGE_ID, "predecessor_attempt_id": predecessor,
         "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER", "formal_solver_executed": False,
-        "claimed_before_work": True}
+        "claimed_before_work": True, "bound_roots": dict(roots)}
     if set(claim_payload) != set(expected_claim) or claim_payload != expected_claim:
         raise Clean3S3Error("invalid preflight claim", terminal_status="FAILED_TECHNICAL_PREFLIGHT_CONTRACT")
     if terminal["terminal_status"] == "PREFLIGHT_FAILED":
@@ -1266,7 +1293,8 @@ def _attempt_terminal(attempt: Path) -> dict[str, Any] | None:
     return terminal
 
 
-def _guard_preflight_attempt(root: Path, git_identity: Mapping[str, Any], raw_root: Path | None = None) -> dict[str, Any]:
+def _guard_preflight_attempt(root: Path, git_identity: Mapping[str, Any], raw_root: Path | None = None,
+                             repo_root: Path | None = None) -> dict[str, Any]:
     """Recompute and verify the sealed zero-data loader proof from its raw trace."""
 
     expected_top = {"ATTEMPT_CLAIM.json", "TERMINAL.json", "01_BUILD", "02_HARNESS", "03_SEAL", "04_REPORT"}
@@ -1335,10 +1363,13 @@ def _guard_preflight_attempt(root: Path, git_identity: Mapping[str, Any], raw_ro
     if not isinstance(bound_roots, Mapping):
         raise Clean3S3Error("governance preflight roots missing",
                             terminal_status="FAILED_TECHNICAL_PREFLIGHT_ROOT_MISMATCH")
-    if raw_root is not None and (
-            bound_roots.get("raw_root") != str(actual_raw) or
-            bound_roots.get("provider_root") != str(actual_provider) or
-            bound_roots.get("reference_trace") != str(actual_raw / BY2_TRACE_RELATIVE_PATH)):
+    if raw_root is not None:
+        if repo_root is None:
+            raise Clean3S3Error("repo root required", terminal_status="FAILED_TECHNICAL_PREFLIGHT_ROOT_MISMATCH")
+        expected_roots = _expected_preflight_roots(repo_root, root.parents[2], raw_root, root)
+    else:
+        expected_roots = dict(bound_roots)
+    if dict(bound_roots) != expected_roots:
         raise Clean3S3Error("governance preflight root binding mismatch",
                             terminal_status="FAILED_TECHNICAL_PREFLIGHT_ROOT_MISMATCH")
     try:
@@ -1349,6 +1380,7 @@ def _guard_preflight_attempt(root: Path, git_identity: Mapping[str, Any], raw_ro
             sentinel_root=root / "NONEXISTENT_DO_NOT_OPEN", artifact_hashes=actual_artifacts,
             raw_root=actual_raw, provider_root=actual_provider,
             reference_trace=actual_raw / BY2_TRACE_RELATIVE_PATH if actual_raw else None,
+            bound_roots=expected_roots, claim_sha256=report.get("claim_sha256"),
         )
         recomputed_reject = _audit_preflight_trace(
             reject_trace_path, cwd=Path(bound_roots["repo_cwd"]), harness_binary=artifact_paths["harness_binary"],
@@ -1357,6 +1389,7 @@ def _guard_preflight_attempt(root: Path, git_identity: Mapping[str, Any], raw_ro
             sentinel_root=root / "NONEXISTENT_DO_NOT_OPEN", artifact_hashes=actual_artifacts,
             raw_root=actual_raw, provider_root=actual_provider,
             reference_trace=actual_raw / BY2_TRACE_RELATIVE_PATH if actual_raw else None,
+            bound_roots=expected_roots, claim_sha256=report.get("claim_sha256"),
         )
     except (OSError, _TechnicalFailure) as exc:
         raise Clean3S3Error("raw governance trace cannot reproduce the sealed ledger",
@@ -1390,6 +1423,8 @@ def _guard_preflight_attempt(root: Path, git_identity: Mapping[str, Any], raw_ro
         and isinstance(ledger.get("classification_roots"), Mapping)
         and set(ledger["classification_roots"]) == {"raw", "provider", "reference", "legacy", "sentinel", "cwd"}
         and report.get("bound_artifact_sha256") == dict(bound)
+        and ledger.get("bound_roots") == expected_roots and reject_ledger.get("bound_roots") == expected_roots
+        and ledger.get("claim_sha256") == report.get("claim_sha256") == reject_ledger.get("claim_sha256")
         and all(report.get(key) == recomputed.get(key) for key in derived_report_fields)
     )
     hashes = seal.get("sha256")
@@ -1402,10 +1437,12 @@ def _guard_preflight_attempt(root: Path, git_identity: Mapping[str, Any], raw_ro
         "reject_stderr": sha256_file(reject_stderr)}
     if (not consistent or seal.get("schema_version") != PREFLIGHT_SEAL_SCHEMA or
             seal.get("sealed") is not True or hashes != expected or
-            seal.get("bound_artifact_sha256") != dict(bound) or seal.get("bound_roots") != bound_roots or
-            accept_stdout.read_text() .strip() != "\n".join((STAGE_ID, "clean3_s3_ab0000_parity_solver", STAGE_ID, RUN_ID)) or
+            seal.get("bound_artifact_sha256") != dict(bound) or seal.get("bound_roots") != expected_roots or
+            seal.get("claim_sha256") != report.get("claim_sha256") or
+            accept_stdout.read_text() != "\n".join((STAGE_ID, "clean3_s3_ab0000_parity_solver", STAGE_ID, RUN_ID)) or
             accept_stderr.read_text() != "" or reject_stdout.read_text() != "" or
-            "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH" not in reject_stderr.read_text()):
+            reject_stderr.read_text() != T8_EXACT_STDERR or report.get("accept_returncode") != 0 or
+            report.get("reject_returncode") != 2):
         raise Clean3S3Error("governance preflight seal mismatch",
                             terminal_status="FAILED_TECHNICAL_PREFLIGHT_SEAL")
     claim_path = root / "ATTEMPT_CLAIM.json"
@@ -1417,13 +1454,17 @@ def _guard_preflight_attempt(root: Path, git_identity: Mapping[str, Any], raw_ro
             claim.get("attempt_ordinal") != ordinal or claim.get("execution_head") != git_identity["execution_head"]):
         raise Clean3S3Error("preflight claim mismatch", terminal_status="FAILED_TECHNICAL_PREFLIGHT_CONTRACT")
     return {"root": str(root), "attempt_id": root.name, "attempt_ordinal": ordinal,
+            "bound_roots": expected_roots,
             "claim_sha256": sha256_file(claim_path), "terminal_sha256": sha256_file(root / "TERMINAL.json"),
             "report_sha256": expected["report"], "seal_sha256": sha256_file(seal_path),
             "trace_sha256": expected["accept_trace"], "reject_trace_sha256": expected["reject_trace"],
+            "accept_ledger_sha256": expected["accept_ledger"],
+            "reject_ledger_sha256": expected["reject_ledger"],
             "proof_kind": required["proof_kind"]}
 
 
-def _select_governance_preflight_locked(namespace: Path, git_identity: Mapping[str, Any], raw_root: Path | None = None) -> dict[str, Any]:
+def _select_governance_preflight_locked(namespace: Path, git_identity: Mapping[str, Any], raw_root: Path | None = None,
+                                        repo_root: Path | None = None) -> dict[str, Any]:
     attempts = _scan_preflight_attempts(namespace)
     if not attempts:
         raise Clean3S3Error("no governance preflight attempt", terminal_status="FAILED_TECHNICAL_PREFLIGHT_MISSING")
@@ -1435,13 +1476,32 @@ def _select_governance_preflight_locked(namespace: Path, git_identity: Mapping[s
     if terminal["terminal_status"] != "PREFLIGHT_OK":
         raise Clean3S3Error("latest governance preflight failed",
                             terminal_status="FAILED_TECHNICAL_PREFLIGHT_LATEST_FAILED")
-    return _guard_preflight_attempt(latest, git_identity, raw_root)
+    return _guard_preflight_attempt(latest, git_identity, raw_root, repo_root)
 
 
-def _governance_preflight_guard(clean_root: Path, git_identity: Mapping[str, Any], raw_root: Path | None = None) -> dict[str, Any]:
+def _governance_preflight_guard(clean_root: Path, git_identity: Mapping[str, Any], raw_root: Path | None = None,
+                                repo_root: Path | None = None) -> dict[str, Any]:
     """Select and replay the latest immutable completed governance attempt."""
     with _preflight_namespace_lock(clean_root) as namespace:
-        return _select_governance_preflight_locked(namespace, git_identity, raw_root)
+        return _select_governance_preflight_locked(namespace, git_identity, raw_root, repo_root)
+
+
+def _expected_preflight_roots(repo: Path, clean: Path, raw: Path, attempt: Path) -> dict[str, str]:
+    repo, clean = repo.resolve(strict=True), clean.resolve(strict=True)
+    _require_no_symlink_chain(raw)
+    actual_raw = raw.resolve(strict=True)
+    provider_lexical = clean / "stages" / PARENT_PROVIDER_STAGE_ID / "04_BASE_PROVIDER"
+    _require_no_symlink_chain(provider_lexical)
+    provider = provider_lexical.resolve(strict=True)
+    reference = actual_raw / BY2_TRACE_RELATIVE_PATH
+    _require_no_symlink_chain(reference)
+    if not actual_raw.is_dir() or actual_raw.is_symlink() or not provider.is_dir() or provider.is_symlink():
+        raise Clean3S3Error("raw/provider root is unsafe", terminal_status="FAILED_TECHNICAL_PREFLIGHT_ROOT_MISMATCH")
+    if attempt.parent != clean / PREFLIGHT_RELATIVE or attempt.is_symlink():
+        raise Clean3S3Error("attempt root is not canonical", terminal_status="FAILED_TECHNICAL_PREFLIGHT_ROOT_MISMATCH")
+    return {"raw_root": str(actual_raw), "provider_root": str(provider),
+            "reference_trace_path": str(reference), "repo_cwd": str(repo), "clean_root": str(clean),
+            "attempt_root": str(attempt), "sentinel_root": str(attempt / "NONEXISTENT_DO_NOT_OPEN")}
 
 
 def _locked_preflight(function):
@@ -1462,14 +1522,18 @@ def _locked_preflight(function):
             root.mkdir()
             for relative in ("01_BUILD", "02_HARNESS", "03_SEAL", "04_REPORT"):
                 (root / relative).mkdir()
+            if not args:
+                raise Clean3S3Error("raw root is required", terminal_status="FAILED_TECHNICAL_PREFLIGHT_ROOT_MISMATCH")
+            bound_roots = _expected_preflight_roots(repo, clean, Path(args[0]), root)
             claim = {"schema_version": PREFLIGHT_CLAIM_SCHEMA, "attempt_id": root.name,
                      "attempt_ordinal": ordinal, "execution_head": git_identity["execution_head"],
                      "stage_id": STAGE_ID, "predecessor_attempt_id": attempts[-1].name if attempts else None,
                      "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER", "formal_solver_executed": False,
-                     "claimed_before_work": True}
+                     "claimed_before_work": True, "bound_roots": bound_roots}
             claim_path = write_json_atomic(root / "ATTEMPT_CLAIM.json", claim)
             try:
-                report = function(repo, clean, *args, _attempt_root=root, _git_identity=git_identity, **kwargs)
+                report = function(repo, clean, *args, _attempt_root=root, _git_identity=git_identity,
+                                  _bound_roots=bound_roots, _claim_sha256=sha256_file(claim_path), **kwargs)
             except Exception as exc:
                 failure = {"schema_version": PREFLIGHT_FAILURE_SCHEMA, "stage_id": STAGE_ID,
                            "attempt_id": root.name, "attempt_ordinal": ordinal,
@@ -1488,7 +1552,8 @@ def _locked_preflight(function):
             write_json_atomic(root / "TERMINAL.json", {
                 "schema_version": PREFLIGHT_TERMINAL_SCHEMA, "attempt_id": root.name,
                 "attempt_ordinal": ordinal, "terminal_status": "PREFLIGHT_OK",
-                "report_sha256": sha256_file(report_path), "claim_sha256": sha256_file(claim_path)})
+                "report_sha256": sha256_file(report_path), "claim_sha256": sha256_file(claim_path),
+                "seal_sha256": sha256_file(root / "03_SEAL/CLEAN3R3_GOVERNANCE_PREFLIGHT_SEAL.json")})
             return report
     return wrapper
 
@@ -1499,22 +1564,17 @@ def run_governance_preflight(
     command_runner: CommandRunner = _default_command_runner,
     which: Callable[[str], str | None] = shutil.which,
     _attempt_root: Path | None = None, _git_identity: Mapping[str, Any] | None = None,
+    _bound_roots: Mapping[str, str] | None = None, _claim_sha256: str | None = None,
 ) -> dict[str, Any]:
     """Build and trace only a zero-data loader harness; never invoke the solver."""
 
     repo, clean = repo_root, clean_root
-    assert _attempt_root is not None and _git_identity is not None
+    assert _attempt_root is not None and _git_identity is not None and _bound_roots is not None and _claim_sha256
     root = _attempt_root
     git_identity = dict(_git_identity)
-    _require_no_symlink_chain(raw_root)
-    actual_raw = raw_root.resolve(strict=True)
-    provider_root = (clean / "stages" / PARENT_PROVIDER_STAGE_ID / "04_BASE_PROVIDER").resolve(strict=True)
-    if not actual_raw.is_dir() or actual_raw.is_symlink() or not provider_root.is_dir() or provider_root.is_symlink():
-        raise Clean3S3Error("raw/provider root is unsafe", terminal_status="FAILED_TECHNICAL_PREFLIGHT_ROOT_MISMATCH")
-    reference_trace = actual_raw / BY2_TRACE_RELATIVE_PATH
-    bound_roots = {"raw_root": str(actual_raw), "provider_root": str(provider_root),
-                   "reference_trace": str(reference_trace), "repo_cwd": str(repo),
-                   "attempt_root": str(root), "sentinel_root": str(root / "NONEXISTENT_DO_NOT_OPEN")}
+    bound_roots = dict(_bound_roots)
+    actual_raw = Path(bound_roots["raw_root"]); provider_root = Path(bound_roots["provider_root"])
+    reference_trace = Path(bound_roots["reference_trace_path"])
     strace = which("strace")
     if not strace:
         raise Clean3S3Error("strace is required for governance preflight",
@@ -1562,7 +1622,7 @@ def run_governance_preflight(
          str(binary), str(config)), repo, timeout_seconds, "PREFLIGHT_HARNESS",
         harness_root / "logs/harness_stdout.txt", harness_root / "logs/harness_stderr.txt")
     expected_stdout = "\n".join((STAGE_ID, "clean3_s3_ab0000_parity_solver", STAGE_ID, RUN_ID))
-    if traced.stdout.strip() != expected_stdout:
+    if traced.returncode != 0 or traced.stdout != expected_stdout:
         raise Clean3S3Error("T5-T7 loader identity mismatch",
                             terminal_status="FAILED_TECHNICAL_PREFLIGHT_IDENTITY")
     if traced.stderr != "":
@@ -1572,7 +1632,7 @@ def run_governance_preflight(
         (str(strace), "-f", "-qq", "-yy", "-s", "4096", "-e", "trace=%file", "-o", str(reject_trace),
          str(binary), str(canonical)), repo, timeout_seconds, "PREFLIGHT_T8_HARNESS",
         harness_root / "logs/t8_stdout.txt", harness_root / "logs/t8_stderr.txt", raise_on_nonzero=False)
-    if rejected.returncode != 2 or rejected.stdout != "" or "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH" not in rejected.stderr:
+    if rejected.returncode != 2 or rejected.stdout != "" or rejected.stderr != T8_EXACT_STDERR:
         raise Clean3S3Error("T8 Canonical tuple was not rejected",
                             terminal_status="FAILED_TECHNICAL_PREFLIGHT_T8")
     try:
@@ -1580,11 +1640,13 @@ def run_governance_preflight(
             trace, cwd=repo, harness_binary=binary, accepting_config=config,
             negative_config=canonical, sentinel_root=sentinel, artifact_hashes=artifact_hashes,
             raw_root=actual_raw, provider_root=provider_root, reference_trace=reference_trace,
+            bound_roots=bound_roots, claim_sha256=_claim_sha256,
         )
         reject_ledger = _audit_preflight_trace(
             reject_trace, cwd=repo, harness_binary=binary, accepting_config=canonical,
             negative_config=config, sentinel_root=sentinel, artifact_hashes=artifact_hashes,
             raw_root=actual_raw, provider_root=provider_root, reference_trace=reference_trace,
+            bound_roots=bound_roots, claim_sha256=_claim_sha256,
         )
     except _TechnicalFailure as exc:
         raise Clean3S3Error(str(exc), terminal_status="FAILED_TECHNICAL_PREFLIGHT_FILE_OPEN_AUDIT") from exc
@@ -1594,6 +1656,7 @@ def run_governance_preflight(
               "stage_id": STAGE_ID, "execution_head": git_identity["execution_head"],
               "attempt_id": root.name, "attempt_ordinal": _parse_attempt_name(root.name),
               "bound_roots": bound_roots,
+              "claim_sha256": _claim_sha256,
               "terminal_status": "PREFLIGHT_OK", "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER",
               "trace_subject": "ZERO_DATA_LOADER_HARNESS", "formal_solver_executed": False,
               "aggregate_harness_exec_count": 2, "accept_ledger": ledger, "reject_ledger": reject_ledger,
@@ -1605,6 +1668,7 @@ def run_governance_preflight(
                       {"schema_version": PREFLIGHT_SEAL_SCHEMA, "sealed": True,
                        "bound_artifact_sha256": artifact_hashes,
                        "bound_roots": bound_roots,
+                       "claim_sha256": _claim_sha256,
                        "sha256": {"report": sha256_file(report_path),
                        "accept_ledger": sha256_file(ledger_path), "reject_ledger": sha256_file(reject_ledger_path),
                        "accept_trace": sha256_file(trace), "reject_trace": sha256_file(reject_trace),
@@ -1629,9 +1693,9 @@ def run_s3_ab0000_parity(
         repo = inputs.repo_root.resolve(strict=True)
         git_identity = _guard_git(repo)
         clean_root = inputs.clean_root.resolve(strict=True)
-        initial_preflight = _governance_preflight_guard(clean_root, git_identity, inputs.raw_root)
+        initial_preflight = _governance_preflight_guard(clean_root, git_identity, inputs.raw_root, repo)
         with _preflight_namespace_lock(clean_root) as namespace:
-            preflight = _select_governance_preflight_locked(namespace, git_identity, inputs.raw_root)
+            preflight = _select_governance_preflight_locked(namespace, git_identity, inputs.raw_root, repo)
             if preflight != initial_preflight:
                 raise Clean3S3Error("selected preflight changed before formal claim",
                                     terminal_status="FAILED_TECHNICAL_PREFLIGHT_SELECTION_RACE")
