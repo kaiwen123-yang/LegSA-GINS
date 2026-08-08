@@ -42,7 +42,7 @@ def loader_harness(tmp_path_factory: pytest.TempPathFactory) -> Path:
         '#include "legsa_v23_port_core/config/port_config_loader.hpp"\n'
         'int main(int argc, char** argv) { try { auto o = '
         'legsa_v23_port_core::PortConfigLoader::loadYamlLike(argv[1]); '
-        'std::cout << o.algorithm_id << " " << o.port_role; return 0; '
+        'std::cout << o.algorithm_id << " " << o.port_role << "|" << o.phase << "|" << o.run_label; return 0; '
         '} catch (const std::exception& e) { std::cerr << e.what(); return 2; }}\n',
         encoding="utf-8",
     )
@@ -81,12 +81,12 @@ def test_loader_extension_is_exact_and_fail_closed(loader_harness: Path, tmp_pat
     old = _clean2_config(tmp_path)
     accepted_old = _run_loader(loader_harness, tmp_path, old)
     assert accepted_old.returncode == 0, accepted_old.stderr
-    assert accepted_old.stdout == "AB0000 clean2r2a_formal_clean_ablation_solver"
+    assert accepted_old.stdout == f"AB0000 clean2r2a_formal_clean_ablation_solver|{s3.PARENT_PROVIDER_STAGE_ID}|AB0000"
 
     clean3 = s3.build_s3_ab0000_config(tmp_path / "imu", tmp_path / "gnss", tmp_path / "out")
     accepted = _run_loader(loader_harness, tmp_path, clean3)
     assert accepted.returncode == 0, accepted.stderr
-    assert accepted.stdout == "AB0000 clean3_s3_ab0000_parity_solver"
+    assert accepted.stdout == f"AB0000 clean3_s3_ab0000_parity_solver|{s3.STAGE_ID}|{s3.RUN_ID}"
 
     invalid = [
         _replace(clean3, {"algorithm_id": "AB0001"}),
@@ -99,6 +99,26 @@ def test_loader_extension_is_exact_and_fail_closed(loader_harness: Path, tmp_pat
         rejected = _run_loader(loader_harness, tmp_path, text)
         assert rejected.returncode == 2
         assert "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH" in rejected.stderr
+
+
+@pytest.mark.parametrize(("stage_id", "protocol_id", "data_mode", "parity_mode"), [
+    ("CLEAN1_BY2_CLEAN_FOUR_METHOD_EXECUTION", "CLEAN1_BY2_CLEAN_NORMAL_V1", "real_by2_raw", "false"),
+    ("CLEAN1R1C_FROZEN_PROTOCOL_DIRECT_REIMPLEMENTATION_AND_BY2_FORMAL_EXECUTION",
+     "CLEAN1_BY2_CLEAN_NORMAL_V2_KICK_ALIGNED", "real_by2_raw", "false"),
+    (s3.CLEAN_INPUT_STAGE_ID, "CLEAN_REAL_DATA_FINAL_V23", "real_by2_raw", "true"),
+])
+def test_t6_historical_clean1_role_phase_run_label_preserved(
+    loader_harness: Path, tmp_path: Path, stage_id: str, protocol_id: str,
+    data_mode: str, parity_mode: str,
+) -> None:
+    config = active_runtime_config(tmp_path / "imu", tmp_path / "gnss", tmp_path / "out",
+                                   method_id="strong_dual_yaw_EKF", run_id="strong_dual_yaw_EKF")
+    config = _replace(config, {"stage_id": stage_id, "protocol_id": protocol_id,
+        "case_id": s3.CASE_ID, "data_mode": data_mode, "clean_final_v23_parity_mode": parity_mode})
+    result = _run_loader(loader_harness, tmp_path, config)
+    assert result.returncode == 0, result.stderr
+    assert result.stdout == (f"strong_dual_yaw_EKF clean1_formal_four_method_solver|{stage_id}|"
+                             "strong_dual_yaw_EKF")
 
 
 @pytest.fixture
@@ -178,9 +198,14 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     _git(repo, "commit", "-qm", "preserved CLEAN3R3 C2R6 runner freeze")
     c2r6 = _git(repo, "rev-parse", "HEAD")
     for relative in s3.C2R7_CHANGED_PATHS:
+        (repo / relative).write_text(_git(ROOT, "show", f"{s3.C2R7_COMMIT}:{relative}"), encoding="utf-8")
+    _git(repo, "add", ".")
+    _git(repo, "commit", "-qm", "preserved CLEAN3R3 C2R7 runner freeze")
+    c2r7 = _git(repo, "rev-parse", "HEAD")
+    for relative in s3.C2R8_CHANGED_PATHS:
         (repo / relative).write_bytes((ROOT / relative).read_bytes())
     _git(repo, "add", ".")
-    _git(repo, "commit", "-qm", "CLEAN3R3 C2R7 runner freeze")
+    _git(repo, "commit", "-qm", "CLEAN3R3 C2R8 runner freeze")
     runner_freeze = _git(repo, "rev-parse", "HEAD")
 
     monkeypatch.setattr(s3, "REPAIR_IMPLEMENTATION_COMMIT", repair)
@@ -194,6 +219,7 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setattr(s3, "C2R4_COMMIT", c2r4)
     monkeypatch.setattr(s3, "C2R5_COMMIT", c2r5)
     monkeypatch.setattr(s3, "C2R6_COMMIT", c2r6)
+    monkeypatch.setattr(s3, "C2R7_COMMIT", c2r7)
     monkeypatch.setattr(s3, "PRIOR_REVIEWED_CPP_TREE", prior_tree)
     authorization_path = repo / s3.AUTHORIZATION_PATH
     authorization_path.parent.mkdir(parents=True, exist_ok=True)
@@ -249,8 +275,8 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
              "claim_sha256": "c" * 64, "terminal_sha256": "d" * 64,
              "report_sha256": "a" * 64, "seal_sha256": "b" * 64, "trace_sha256": "e" * 64,
              "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER"}
-    monkeypatch.setattr(s3, "_governance_preflight_guard", lambda clean_root, identity: dict(proof))
-    monkeypatch.setattr(s3, "_select_governance_preflight_locked", lambda namespace, identity: dict(proof))
+    monkeypatch.setattr(s3, "_governance_preflight_guard", lambda clean_root, identity, *args: dict(proof))
+    monkeypatch.setattr(s3, "_select_governance_preflight_locked", lambda namespace, identity, *args: dict(proof))
 
     clean = tmp_path / "clean"
     raw = tmp_path / "raw"
@@ -834,6 +860,7 @@ def _write_namespace_lock(namespace: Path) -> None:
 
 
 def _sealed_preflight_fixture(tmp_path: Path, execution_head: str = "a" * 40):
+    (tmp_path / "stages" / s3.PARENT_PROVIDER_STAGE_ID / "04_BASE_PROVIDER").mkdir(parents=True)
     namespace = tmp_path / s3.PREFLIGHT_RELATIVE
     namespace.mkdir(parents=True)
     _write_namespace_lock(namespace)
@@ -869,6 +896,11 @@ def _sealed_preflight_fixture(tmp_path: Path, execution_head: str = "a" * 40):
         "legacy_open_count": 0, "unexpected_write_count": 0, "unexpected_read_count": 0,
         "g_c2": "REPORTING_ONLY", "g_c3": "HARD_UNCHANGED",
         "execution_head": execution_head, "trace_cwd": str(tmp_path),
+        "bound_roots": {"raw_root": str(root / "NONEXISTENT_DO_NOT_OPEN/raw"),
+            "provider_root": str(root / "NONEXISTENT_DO_NOT_OPEN/provider"),
+            "reference_trace": str(root / "NONEXISTENT_DO_NOT_OPEN/raw" / s3.BY2_TRACE_RELATIVE_PATH),
+            "repo_cwd": str(root), "attempt_root": str(root),
+            "sentinel_root": str(root / "NONEXISTENT_DO_NOT_OPEN")},
         "bound_artifact_sha256": artifacts,
     }
     binary = str(artifact_paths["harness_binary"].resolve())
@@ -880,25 +912,52 @@ def _sealed_preflight_fixture(tmp_path: Path, execution_head: str = "a" * 40):
         "raw_paths": [], "provider_paths": [], "reference_trace_paths": [], "legacy_paths": [],
         "unexpected_write_paths": [], "unexpected_read_paths": [],
         "path_classifications": {str(artifact_paths["accepting_config"].resolve()): "accepting_config"},
-        "classification_roots": {key: str(root / "NONEXISTENT_DO_NOT_OPEN" / key)
-                                 for key in ("raw", "provider", "reference", "legacy")},
+        "classification_roots": {"raw": str(root / "NONEXISTENT_DO_NOT_OPEN/raw"),
+            "provider": str(root / "NONEXISTENT_DO_NOT_OPEN/provider"),
+            "reference": str(root / "NONEXISTENT_DO_NOT_OPEN/raw" / s3.BY2_TRACE_RELATIVE_PATH),
+            "legacy": str(root / "NONEXISTENT_DO_NOT_OPEN/legacy"),
+            "sentinel": str(root / "NONEXISTENT_DO_NOT_OPEN"), "cwd": str(root)},
         "raw_open_count": 0, "provider_open_count": 0,
         "reference_trace_open_count": 0, "legacy_open_count": 0, "unexpected_write_count": 0,
         "unexpected_read_count": 0,
         "bound_artifact_sha256": artifacts, "formal_solver_executed": False, "passed": True,
     }
     ledger_path.write_text(json.dumps(ledger, sort_keys=True), encoding="utf-8")
+    reject_ledger = json.loads(json.dumps(ledger))
+    accept_path = str(artifact_paths["accepting_config"].resolve())
+    reject_path = str(artifact_paths["negative_config"].resolve())
+    reject_ledger["read_attempt_paths"] = [reject_path]
+    reject_ledger["path_classifications"] = {reject_path: "accepting_config"}
+    reject_ledger_path = root / "03_SEAL/T8_ZERO_DATA_LOADER_READ_LEDGER.json"
+    reject_ledger_path.write_text(json.dumps(reject_ledger, sort_keys=True), encoding="utf-8")
     report.update({key: value for key, value in ledger.items() if key not in ("schema_version", "passed")})
+    report.update({"aggregate_harness_exec_count": 2, "accept_ledger": ledger,
+                   "reject_ledger": reject_ledger, "accept_returncode": 0, "reject_returncode": 2})
     report_path.write_text(json.dumps(report, sort_keys=True), encoding="utf-8")
     trace_path.write_text(
         f'execve("{artifact_paths["harness_binary"]}", ["loader"], 0x0) = 0\n'
         f'openat(AT_FDCWD, "{artifact_paths["accepting_config"]}", O_RDONLY) = 3\n',
         encoding="utf-8")
+    reject_trace = root / "02_HARNESS/logs/T8_FILE_OPEN_TRACE.raw"
+    reject_trace.write_text(
+        f'execve("{artifact_paths["harness_binary"]}", ["loader"], 0x0) = 0\n'
+        f'openat(AT_FDCWD, "{artifact_paths["negative_config"]}", O_RDONLY) = 3\n', encoding="utf-8")
+    (root / "02_HARNESS/logs/harness_stdout.txt").write_text(
+        "\n".join((s3.STAGE_ID, "clean3_s3_ab0000_parity_solver", s3.STAGE_ID, s3.RUN_ID)), encoding="utf-8")
+    (root / "02_HARNESS/logs/harness_stderr.txt").write_text("", encoding="utf-8")
+    (root / "02_HARNESS/logs/t8_stdout.txt").write_text("", encoding="utf-8")
+    (root / "02_HARNESS/logs/t8_stderr.txt").write_text(
+        "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH", encoding="utf-8")
     seal_path = root / "03_SEAL/CLEAN3R3_GOVERNANCE_PREFLIGHT_SEAL.json"
     seal = {"schema_version": s3.PREFLIGHT_SEAL_SCHEMA, "sealed": True,
-            "bound_artifact_sha256": artifacts, "sha256": {
-        "report": sha256_file(report_path), "ledger": sha256_file(ledger_path),
-        "raw_trace": sha256_file(trace_path),
+            "bound_artifact_sha256": artifacts, "bound_roots": report["bound_roots"], "sha256": {
+        "report": sha256_file(report_path), "accept_ledger": sha256_file(ledger_path),
+        "reject_ledger": sha256_file(reject_ledger_path), "accept_trace": sha256_file(trace_path),
+        "reject_trace": sha256_file(reject_trace),
+        "accept_stdout": sha256_file(root / "02_HARNESS/logs/harness_stdout.txt"),
+        "accept_stderr": sha256_file(root / "02_HARNESS/logs/harness_stderr.txt"),
+        "reject_stdout": sha256_file(root / "02_HARNESS/logs/t8_stdout.txt"),
+        "reject_stderr": sha256_file(root / "02_HARNESS/logs/t8_stderr.txt"),
     }}
     seal_path.write_text(json.dumps(seal, sort_keys=True), encoding="utf-8")
     (root / "TERMINAL.json").write_text(json.dumps({
@@ -918,6 +977,16 @@ def test_sealed_governance_preflight_guard_is_hard_and_hash_bound(tmp_path: Path
     with pytest.raises(s3.Clean3S3Error) as caught:
         s3._governance_preflight_guard(tmp_path, {"execution_head": execution_head})
     assert caught.value.terminal_status == "FAILED_TECHNICAL_PREFLIGHT_TRACE_REPLAY"
+
+
+def test_preflight_seals_both_traces_and_s3_rejects_raw_root_mismatch(tmp_path: Path) -> None:
+    root, _, _, _, seal_path, *_ = _sealed_preflight_fixture(tmp_path)
+    seal = json.loads(seal_path.read_text())
+    assert {"accept_trace", "reject_trace", "accept_ledger", "reject_ledger"} <= set(seal["sha256"])
+    wrong_raw = tmp_path / "wrong_raw"; wrong_raw.mkdir()
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        s3._governance_preflight_guard(tmp_path, {"execution_head": "a" * 40}, wrong_raw)
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_PREFLIGHT_ROOT_MISMATCH"
 
 
 def test_preflight_rejects_external_symlinked_report_parent(tmp_path: Path) -> None:
@@ -1001,6 +1070,8 @@ def test_governance_preflight_generator_emits_bound_zero_data_evidence(
 ) -> None:
     clean = tmp_path / "clean"
     clean.mkdir()
+    raw = tmp_path / "raw"; raw.mkdir()
+    (clean / "stages" / s3.PARENT_PROVIDER_STAGE_ID / "04_BASE_PROVIDER").mkdir(parents=True)
     execution_head = "b" * 40
     monkeypatch.setattr(s3, "_guard_git", lambda repo: {"execution_head": execution_head})
 
@@ -1017,20 +1088,23 @@ def test_governance_preflight_generator_emits_bound_zero_data_evidence(
             trace.write_text(
                 f'execve("{binary}", ["loader"], 0x0) = 0\n'
                 f'openat(AT_FDCWD, "{config}", O_RDONLY) = 3\n', encoding="utf-8")
+            if config.name == "CANONICAL_T8_REJECT.yaml":
+                return subprocess.CompletedProcess(command, 2, stdout="",
+                    stderr="FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH")
             stdout = "\n".join((s3.STAGE_ID, "clean3_s3_ab0000_parity_solver", s3.STAGE_ID, s3.RUN_ID))
             return subprocess.CompletedProcess(command, 0, stdout=stdout, stderr="")
         return subprocess.CompletedProcess(
             command, 2, stdout="", stderr="FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH")
 
     report = s3.run_governance_preflight(
-        ROOT, clean, command_runner=runner, which=lambda _: "/fake/strace")
+        ROOT, clean, raw, command_runner=runner, which=lambda _: "/fake/strace")
     assert report["terminal_status"] == "PREFLIGHT_OK"
     assert report["formal_solver_executed"] is False
     assert report["raw_open_count"] == report["provider_open_count"] == 0
     accepted = s3._governance_preflight_guard(clean, {"execution_head": execution_head})
     assert accepted["proof_kind"] == "STATIC_PLUS_ZERO_DATA_LOADER"
     second = s3.run_governance_preflight(
-        ROOT, clean, command_runner=runner, which=lambda _: "/fake/strace")
+        ROOT, clean, raw, command_runner=runner, which=lambda _: "/fake/strace")
     assert second["attempt_ordinal"] == 2
     selected = s3._governance_preflight_guard(clean, {"execution_head": execution_head})
     assert selected["attempt_id"] == "ATTEMPT_000002"
@@ -1050,6 +1124,12 @@ def test_preflight_namespace_rejects_noncanonical_gap_and_unexpected_entries(
         target.mkdir()
     with pytest.raises(s3.Clean3S3Error):
         s3._scan_preflight_attempts(namespace)
+
+
+def test_attempt_parser_supports_canonical_ordinals_above_six_digits() -> None:
+    assert s3._parse_attempt_name("ATTEMPT_1000000") == 1_000_000
+    with pytest.raises(ValueError):
+        s3._parse_attempt_name("ATTEMPT_01000000")
 
 
 def test_preflight_namespace_rejects_parent_and_dangling_lock_symlinks(tmp_path: Path) -> None:
@@ -1242,8 +1322,8 @@ def test_corrupt_partial_or_permissive_lock_fails_closed(tmp_path: Path, content
 def test_s3_selection_race_fails_before_stage_creation(fake_s3, monkeypatch: pytest.MonkeyPatch) -> None:
     initial = s3._governance_preflight_guard(fake_s3["clean"], {"execution_head": "ignored"})
     changed = dict(initial); changed["attempt_id"] = "ATTEMPT_000002"; changed["attempt_ordinal"] = 2
-    monkeypatch.setattr(s3, "_governance_preflight_guard", lambda clean, identity: dict(initial))
-    monkeypatch.setattr(s3, "_select_governance_preflight_locked", lambda namespace, identity: dict(changed))
+    monkeypatch.setattr(s3, "_governance_preflight_guard", lambda clean, identity, *args: dict(initial))
+    monkeypatch.setattr(s3, "_select_governance_preflight_locked", lambda namespace, identity, *args: dict(changed))
     with pytest.raises(s3.Clean3S3Error) as caught:
         s3.run_s3_ab0000_parity(fake_s3["inputs"])
     assert caught.value.terminal_status == "FAILED_TECHNICAL_PREFLIGHT_SELECTION_RACE"

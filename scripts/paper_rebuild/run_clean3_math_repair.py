@@ -39,6 +39,7 @@ def parser() -> argparse.ArgumentParser:
     preflight = commands.add_parser("governance-preflight")
     preflight.add_argument("--repo-root", default=str(REPO_ROOT))
     preflight.add_argument("--clean-root", required=True)
+    preflight.add_argument("--raw-root", required=True)
     preflight.add_argument("--timeout-seconds", type=int, default=120)
     return result
 
@@ -48,7 +49,8 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.command == "governance-preflight":
             report = run_governance_preflight(
-                Path(args.repo_root), Path(args.clean_root), timeout_seconds=args.timeout_seconds,
+                Path(args.repo_root), Path(args.clean_root), Path(args.raw_root),
+                timeout_seconds=args.timeout_seconds,
             )
             print(json.dumps(report, sort_keys=True))
             return 0
