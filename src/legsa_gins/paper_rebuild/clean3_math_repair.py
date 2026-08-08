@@ -37,6 +37,7 @@ B0_COMMIT = "683d355db4fe5194d479cda155e01de1b47a2b17"
 AMENDMENT_PARENT_HEAD = "d311f7457d5b5b9be72ef2101cfa0db47e28614f"
 CODE_FREEZE_COMMIT = "d1fc2d4ac3070129595c81bea7e261c4f3b586f6"
 REJECTED_RUNNER_FREEZE_COMMIT = "0f8d12ec6465105e56309a0df62c1f165e01aa63"
+C2R1_COMMIT = "187e92796db8aa2a479b62249d7c1a945f4ad721"
 PRIOR_REVIEWED_CPP_TREE = "a3716d22acf95fb1e6028ae82acb2ae73e138bfc"
 RUNTIME_COUNTER_PATH = "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp"
 LOADER_EXTENSION_PATH = "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp"
@@ -65,6 +66,7 @@ C2R1_CHANGED_PATHS = (
     "src/legsa_gins/paper_rebuild/clean3_math_repair.py",
     "tests/paper_rebuild/test_clean3_s3_parity_runner.py",
 )
+C2R2_CHANGED_PATHS = C2R1_CHANGED_PATHS
 A0_CHANGED_PATHS = (
     "docs/paper_rebuild/CLEAN3R3/HARDCODE_INVENTORY.md",
     "docs/paper_rebuild/CLEAN3R3/AMENDMENT_1_SCOPE_AND_IMPLEMENTATION_AUTHORIZATION.md",
@@ -222,7 +224,8 @@ def _guard_git(repo: Path) -> dict[str, Any]:
     require_single_parent(AMENDMENT_PARENT_HEAD, B0_COMMIT, "CLEAN3R3 A0")
     require_single_parent(CODE_FREEZE_COMMIT, AMENDMENT_PARENT_HEAD, "CLEAN3R3 C1")
     require_single_parent(REJECTED_RUNNER_FREEZE_COMMIT, CODE_FREEZE_COMMIT, "preserved CLEAN3R3 C2")
-    require_single_parent(runner_freeze, REJECTED_RUNNER_FREEZE_COMMIT, "CLEAN3R3 C2R1")
+    require_single_parent(C2R1_COMMIT, REJECTED_RUNNER_FREEZE_COMMIT, "preserved CLEAN3R3 C2R1")
+    require_single_parent(runner_freeze, C2R1_COMMIT, "CLEAN3R3 C2R2")
     require_single_parent(head, runner_freeze, "CLEAN3R3 C3")
     if _git(repo, "rev-parse", f"{head}^").stdout.strip() != runner_freeze:
         raise Clean3S3Error("execution HEAD is not exactly one authorization commit after runner freeze",
@@ -255,18 +258,25 @@ def _guard_git(repo: Path) -> dict[str, Any]:
         raise Clean3S3Error("C2 runner freeze diff is outside the approved three runner paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     repair_changed = tuple(sorted(
-        _git(repo, "diff", "--name-only", f"{REJECTED_RUNNER_FREEZE_COMMIT}..{runner_freeze}")
+        _git(repo, "diff", "--name-only", f"{REJECTED_RUNNER_FREEZE_COMMIT}..{C2R1_COMMIT}")
         .stdout.splitlines()
     ))
     if repair_changed != tuple(sorted(C2R1_CHANGED_PATHS)):
         raise Clean3S3Error("C2R1 diff is outside the approved two repair paths",
+                            terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
+    repair2_changed = tuple(sorted(
+        _git(repo, "diff", "--name-only", f"{C2R1_COMMIT}..{runner_freeze}").stdout.splitlines()
+    ))
+    if repair2_changed != tuple(sorted(C2R2_CHANGED_PATHS)):
+        raise Clean3S3Error("C2R2 diff is outside the approved two repair paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     for tracked in (FREEZE_PATH, AUTHORIZATION_PATH):
         if _git(repo, "ls-files", "--error-unmatch", tracked, check=False).returncode != 0:
             raise Clean3S3Error("execution freeze or authorization is not tracked",
                                 terminal_status="FAILED_TECHNICAL_FREEZE_UNTRACKED")
     for ancestor in (
-        runner_freeze, REJECTED_RUNNER_FREEZE_COMMIT, CODE_FREEZE_COMMIT, REPAIR_IMPLEMENTATION_COMMIT,
+        runner_freeze, C2R1_COMMIT, REJECTED_RUNNER_FREEZE_COMMIT, CODE_FREEZE_COMMIT,
+        REPAIR_IMPLEMENTATION_COMMIT,
         AMENDMENT_PARENT_HEAD,
     ):
         if _git(repo, "merge-base", "--is-ancestor", ancestor, head, check=False).returncode != 0:
@@ -975,7 +985,7 @@ def _audit_preflight_trace(
 
 
 def _governance_preflight_guard(clean_root: Path, git_identity: Mapping[str, Any]) -> dict[str, Any]:
-    """Require the independently sealed, zero-data governance proof."""
+    """Recompute and verify the sealed zero-data loader proof from its raw trace."""
 
     root = clean_root / PREFLIGHT_RELATIVE
     report_path = root / "04_REPORT/CLEAN3R3_GOVERNANCE_PREFLIGHT_REPORT.json"
@@ -1020,6 +1030,18 @@ def _governance_preflight_guard(clean_root: Path, git_identity: Mapping[str, Any
     }
     actual_artifacts = ({key: sha256_file(path) for key, path in artifact_paths.items()}
                         if all(path.is_file() and not path.is_symlink() for path in artifact_paths.values()) else {})
+    expected_binary = artifact_paths["harness_binary"].resolve(strict=False)
+    try:
+        recomputed = _audit_preflight_trace(
+            trace_path, cwd=root, harness_binary=artifact_paths["harness_binary"],
+            accepting_config=artifact_paths["accepting_config"],
+            negative_config=artifact_paths["negative_config"],
+            sentinel_root=root / "NONEXISTENT_DO_NOT_OPEN", artifact_hashes=actual_artifacts,
+        )
+    except (OSError, _TechnicalFailure) as exc:
+        raise Clean3S3Error("raw governance trace cannot reproduce the sealed ledger",
+                            terminal_status="FAILED_TECHNICAL_PREFLIGHT_TRACE_REPLAY") from exc
+    derived_report_fields = set(PREFLIGHT_LEDGER_FIELDS) - {"schema_version", "passed"}
     consistent = (
         set(ledger) == PREFLIGHT_LEDGER_FIELDS
         and ledger.get("schema_version") == PREFLIGHT_LEDGER_SCHEMA
@@ -1028,6 +1050,9 @@ def _governance_preflight_guard(clean_root: Path, git_identity: Mapping[str, Any
         and isinstance(bound, Mapping) and set(bound) == set(artifacts)
         and all(isinstance(bound[key], str) and len(bound[key]) == 64 for key in artifacts)
         and dict(bound) == actual_artifacts
+        and ledger == recomputed
+        and ledger.get("expected_exec_path") == str(expected_binary)
+        and ledger.get("exec_paths") == [str(expected_binary)]
         and all(ledger.get(key) == report.get(key) == 0 for key in count_fields)
         and len(ledger["exec_paths"]) == 1
         and ledger["exec_paths"][0] == ledger.get("expected_exec_path")
@@ -1042,6 +1067,7 @@ def _governance_preflight_guard(clean_root: Path, git_identity: Mapping[str, Any
         and isinstance(ledger.get("classification_roots"), Mapping)
         and set(ledger["classification_roots"]) == {"raw", "provider", "reference", "legacy"}
         and report.get("bound_artifact_sha256") == dict(bound)
+        and all(report.get(key) == recomputed.get(key) for key in derived_report_fields)
     )
     hashes = seal.get("sha256")
     expected = {
@@ -1127,7 +1153,7 @@ def run_governance_preflight(
                             terminal_status="FAILED_TECHNICAL_PREFLIGHT_T8")
     try:
         ledger = _audit_preflight_trace(
-            trace, cwd=repo, harness_binary=binary, accepting_config=config,
+            trace, cwd=root, harness_binary=binary, accepting_config=config,
             negative_config=canonical, sentinel_root=sentinel, artifact_hashes=artifact_hashes,
         )
     except _TechnicalFailure as exc:
