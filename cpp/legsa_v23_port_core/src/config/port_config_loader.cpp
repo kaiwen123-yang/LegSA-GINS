@@ -149,6 +149,57 @@ bool isCanonical541AblationId(const std::string& algorithm_id) {
   });
 }
 
+bool isCanonical541MatrixRunId(const std::string& run_id) {
+  if (run_id.size() != 9 || run_id.substr(0, 4) != "RUN_") {
+    return false;
+  }
+  return std::all_of(run_id.begin() + 4, run_id.end(), [](unsigned char value) {
+    return std::isdigit(value);
+  });
+}
+
+bool isCanonical541MatrixAlgorithmId(const std::string& algorithm_id) {
+  return algorithm_id == "single_antenna_EKF" ||
+         algorithm_id == "basic_dual_yaw_EKF" ||
+         algorithm_id == "strong_dual_yaw_EKF" ||
+         algorithm_id == "LegSA_Paper_V1" ||
+         isCanonical541AblationId(algorithm_id);
+}
+
+bool isCanonical541CompactReadinessIdentity(
+    const PortOptions& options, const std::string& requested_runtime_role) {
+  if (options.stage_id != "CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX" ||
+      options.protocol_id != "CANONICAL541_BY2_CONTROLLED_DEGRADATION" ||
+      requested_runtime_role != "canonical541_formal_controlled_degradation_solver" ||
+      options.case_id != "C00_clean_normal" || options.data_mode != "real_clean" ||
+      options.run_label != options.run_id) {
+    return false;
+  }
+  const std::array<std::pair<const char*, const char*>, 18> identities{{
+      {"CLEAN3R4_READINESS_01_single_antenna_EKF", "single_antenna_EKF"},
+      {"CLEAN3R4_READINESS_02_basic_dual_yaw_EKF", "basic_dual_yaw_EKF"},
+      {"CLEAN3R4_READINESS_03_AB0000", "strong_dual_yaw_EKF"},
+      {"CLEAN3R4_READINESS_04_AB0001", "AB0001"},
+      {"CLEAN3R4_READINESS_05_AB0010", "AB0010"},
+      {"CLEAN3R4_READINESS_06_AB0011", "AB0011"},
+      {"CLEAN3R4_READINESS_07_AB0100", "AB0100"},
+      {"CLEAN3R4_READINESS_08_AB0101", "AB0101"},
+      {"CLEAN3R4_READINESS_09_AB0110", "AB0110"},
+      {"CLEAN3R4_READINESS_10_AB0111", "AB0111"},
+      {"CLEAN3R4_READINESS_11_AB1000", "AB1000"},
+      {"CLEAN3R4_READINESS_12_AB1001", "AB1001"},
+      {"CLEAN3R4_READINESS_13_AB1010", "AB1010"},
+      {"CLEAN3R4_READINESS_14_AB1011", "AB1011"},
+      {"CLEAN3R4_READINESS_15_AB1100", "AB1100"},
+      {"CLEAN3R4_READINESS_16_AB1101", "AB1101"},
+      {"CLEAN3R4_READINESS_17_AB1110", "AB1110"},
+      {"CLEAN3R4_READINESS_18_AB1111", "LegSA_Paper_V1"},
+  }};
+  return std::any_of(identities.begin(), identities.end(), [&options](const auto& identity) {
+    return options.run_id == identity.first && options.algorithm_id == identity.second;
+  });
+}
+
 bool isCanonical541CaseId(const std::string& case_id) {
   if (case_id == "C00_clean_normal") {
     return true;
@@ -211,6 +262,15 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   const bool canonical541_identity =
       options.stage_id == "CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX" &&
       options.protocol_id == "CANONICAL541_BY2_CONTROLLED_DEGRADATION";
+  const std::string canonical541_runtime_role =
+      stringOrDefault(kv, "runtime_role", "");
+  const bool canonical541_compact_readiness_identity =
+      isCanonical541CompactReadinessIdentity(options, canonical541_runtime_role);
+  const bool canonical541_matrix_identity =
+      canonical541_identity &&
+      canonical541_runtime_role == "canonical541_formal_controlled_degradation_solver" &&
+      options.run_label == options.run_id && isCanonical541MatrixRunId(options.run_id) &&
+      isCanonical541MatrixAlgorithmId(options.algorithm_id);
   const bool clean3_s3_stage_identity =
       options.stage_id ==
           "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE" ||
@@ -245,6 +305,10 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
       !case_id_matches || !data_mode_matches ||
       options.run_id.empty()) {
     formalContractFailure("formal stage/protocol/case/data_mode/run identity mismatch");
+  }
+  if (canonical541_identity &&
+      !canonical541_compact_readiness_identity && !canonical541_matrix_identity) {
+    formalContractFailure("canonical541 runtime identity is outside readiness/matrix contract");
   }
   // 保留 CLEAN1 的逐字合同，同时只为 CLEAN2R2A 要求同一 final_v23 parity mode。
   if ((options.clean_final_v23_parity_mode != clean1r2r1_final_v23_identity) &&
@@ -320,7 +384,9 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
     expected_go2_horizontal = true;
   } else if (((clean2r2a_ablation_identity || clean3_s3_ab0000_identity) &&
               isClean2r2aAblationId(options.algorithm_id)) ||
-             (canonical541_identity && isCanonical541AblationId(options.algorithm_id))) {
+             (canonical541_matrix_identity && isCanonical541AblationId(options.algorithm_id)) ||
+             (canonical541_compact_readiness_identity &&
+              isClean2r2aAblationId(options.algorithm_id))) {
     // 中文说明：AB 四位从左到右严格是 RD、SA、RP、HV；backbone 始终是 strong/final_v23。
     expected_dual = true;
     expected_receiver_velocity = true;

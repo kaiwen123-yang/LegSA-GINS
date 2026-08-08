@@ -73,13 +73,15 @@ def _rendered_anchor(
 def _rd_anchor_template(tmp_path: Path) -> str:
     template = active_runtime_config(
         Path("/provider/imu.txt"), Path("/provider/gnss.txt"),
-        tmp_path / "output", method_id="LegSA_Paper_V1", run_id="rd-anchor",
+        tmp_path / "output", method_id="LegSA_Paper_V1",
+        run_id="CLEAN3R4_READINESS_11_AB1000",
         auxiliary_paths={
             "raw_doppler": "/provider/raw.csv",
             "go2_roll_pitch": "/provider/rp.csv",
             "go2_horizontal_velocity": "/provider/hv.csv",
         },
         extra_config={
+            "runtime_role": "canonical541_formal_controlled_degradation_solver",
             "raw_doppler_backend_source_files": RAW_DOPPLER_SOURCE_FILES,
             "raw_doppler_backend_source_hashes": RAW_DOPPLER_SOURCE_HASHES,
         },
@@ -115,7 +117,7 @@ def _rendered_rd_anchor(
             "go2_hv": "/provider/hv.csv",
         }},
         output_dir=tmp_path / "output", case_id="C00_clean_normal",
-        run_id="CLEAN3R4_READINESS_18_AB1111",
+        run_id="CLEAN3R4_READINESS_11_AB1000",
     )
     return template, rendered
 
@@ -333,8 +335,9 @@ def test_actual_rendered_hash_is_semantic_stable_and_recomputed(
         ).encode()
     ).hexdigest()
     equivalent = runner._replace_yaml_values(template, {
-        "stage_id": runner.STAGE_ID, "protocol_id": runner.PROTOCOL_ID,
-        "case_id": "C00_clean_normal", "run_id": "CLEAN3R4_READINESS_03_AB0000",
+            "stage_id": runner.STAGE_ID, "protocol_id": runner.PROTOCOL_ID,
+            "runtime_role": "canonical541_formal_controlled_degradation_solver",
+            "case_id": "C00_clean_normal", "run_id": "CLEAN3R4_READINESS_03_AB0000",
         "run_label": "CLEAN3R4_READINESS_03_AB0000",
         "algorithm_id": "strong_dual_yaw_EKF", "data_mode": "real_clean",
         "imupath": "/provider/imu.txt", "gnsspath": "/provider/gnss.txt",

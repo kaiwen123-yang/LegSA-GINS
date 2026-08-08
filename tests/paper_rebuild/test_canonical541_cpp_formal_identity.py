@@ -45,6 +45,7 @@ def test_cpp_loader_contains_narrow_canonical_identity_only():
     assert 'options.data_mode == "real_clean"' in source
     assert "isCanonical541CaseId(options.case_id)" in source
     assert "degradation >= 1 && degradation <= 60 && seed >= 0 && seed <= 8" in source
-    assert "canonical541_identity && isCanonical541AblationId(options.algorithm_id)" in source
+    assert "canonical541_matrix_identity && isCanonical541AblationId(options.algorithm_id)" in source
+    assert "isCanonical541CompactReadinessIdentity" in source
     for allowed in ("AB0111", "AB1011", "AB1101", "AB1110", "AB1100", "AB1000", "AB0100"):
         assert f'"{allowed}"' in source

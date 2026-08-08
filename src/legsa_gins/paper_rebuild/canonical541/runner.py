@@ -286,6 +286,7 @@ def build_runtime_config(
     actual = method_bound_manifest["actual_solver_inputs"]
     values: dict[str, Any] = {
         "stage_id": STAGE_ID, "protocol_id": PROTOCOL_ID, "case_id": case_id,
+        "runtime_role": "canonical541_formal_controlled_degradation_solver",
         "run_id": run_id, "run_label": run_id,
         # 中文说明：canonical541 有自己的 formal 身份；不得伪装成 CLEAN2R2A/C00。
         "algorithm_id": runtime_profile_id(profile),
