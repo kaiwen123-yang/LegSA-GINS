@@ -142,15 +142,22 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     for relative in s3.RUNNER_FREEZE_CHANGED_PATHS:
         target = repo / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes((ROOT / relative).read_bytes())
+        target.write_text(_git(ROOT, "show", f"{s3.REJECTED_RUNNER_FREEZE_COMMIT}:{relative}"),
+                          encoding="utf-8")
     _git(repo, "add", ".")
-    _git(repo, "commit", "-qm", "CLEAN3R3 C2 runner freeze")
+    _git(repo, "commit", "-qm", "preserved CLEAN3R3 C2 runner freeze")
+    rejected_runner_freeze = _git(repo, "rev-parse", "HEAD")
+    for relative in s3.C2R1_CHANGED_PATHS:
+        (repo / relative).write_bytes((ROOT / relative).read_bytes())
+    _git(repo, "add", ".")
+    _git(repo, "commit", "-qm", "CLEAN3R3 C2R1 runner freeze")
     runner_freeze = _git(repo, "rev-parse", "HEAD")
 
     monkeypatch.setattr(s3, "REPAIR_IMPLEMENTATION_COMMIT", repair)
     monkeypatch.setattr(s3, "B0_COMMIT", b0)
     monkeypatch.setattr(s3, "AMENDMENT_PARENT_HEAD", amendment_parent)
     monkeypatch.setattr(s3, "CODE_FREEZE_COMMIT", code_freeze)
+    monkeypatch.setattr(s3, "REJECTED_RUNNER_FREEZE_COMMIT", rejected_runner_freeze)
     monkeypatch.setattr(s3, "PRIOR_REVIEWED_CPP_TREE", prior_tree)
     authorization_path = repo / s3.AUTHORIZATION_PATH
     authorization_path.parent.mkdir(parents=True, exist_ok=True)
@@ -767,34 +774,160 @@ def test_cli_surface_has_separate_preflight_and_no_profile_selector() -> None:
         module.parser().parse_args(["s3-ab0000-parity", "--profile", "AB0001"])
 
 
-def test_sealed_governance_preflight_guard_is_hard_and_hash_bound(tmp_path: Path) -> None:
+def _sealed_preflight_fixture(tmp_path: Path, execution_head: str = "a" * 40):
     execution_head = "a" * 40
     root = tmp_path / s3.PREFLIGHT_RELATIVE
     report_path = root / "04_REPORT/CLEAN3R3_GOVERNANCE_PREFLIGHT_REPORT.json"
     ledger_path = root / "03_SEAL/ZERO_DATA_LOADER_READ_LEDGER.json"
     trace_path = root / "02_HARNESS/logs/SOLVER_FILE_OPEN_TRACE.raw"
-    for parent in (report_path.parent, ledger_path.parent, trace_path.parent):
+    artifact_paths = {
+        "harness_binary": root / "01_BUILD/zero_data_loader",
+        "harness_source": root / "01_BUILD/zero_data_loader.cpp",
+        "accepting_config": root / "02_HARNESS/configs/CLEAN3R3_ZERO_DATA.yaml",
+        "negative_config": root / "02_HARNESS/configs/CANONICAL_T8_REJECT.yaml",
+    }
+    for parent in (report_path.parent, ledger_path.parent, trace_path.parent,
+                   *(path.parent for path in artifact_paths.values())):
         parent.mkdir(parents=True, exist_ok=True)
+    for role, path in artifact_paths.items():
+        path.write_text(role + "\n", encoding="utf-8")
+    artifacts = {role: sha256_file(path) for role, path in artifact_paths.items()}
     report = {
+        "schema_version": s3.PREFLIGHT_REPORT_SCHEMA,
         "terminal_status": "PREFLIGHT_OK", "stage_id": s3.STAGE_ID,
         "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER",
         "trace_subject": "ZERO_DATA_LOADER_HARNESS", "formal_solver_executed": False,
         "raw_open_count": 0, "provider_open_count": 0, "reference_trace_open_count": 0,
-        "legacy_open_count": 0, "unexpected_write_count": 0,
+        "legacy_open_count": 0, "unexpected_write_count": 0, "unexpected_read_count": 0,
         "g_c2": "REPORTING_ONLY", "g_c3": "HARD_UNCHANGED",
-        "execution_head": execution_head,
+        "execution_head": execution_head, "bound_artifact_sha256": artifacts,
     }
     report_path.write_text(json.dumps(report, sort_keys=True), encoding="utf-8")
-    ledger_path.write_text(json.dumps({"passed": True}, sort_keys=True), encoding="utf-8")
+    binary = str(artifact_paths["harness_binary"].resolve())
+    ledger = {
+        "schema_version": s3.PREFLIGHT_LEDGER_SCHEMA, "trace_subject": "ZERO_DATA_LOADER_HARNESS",
+        "exec_paths": [binary], "expected_exec_path": binary, "exact_exec_subject": True,
+        "read_attempt_paths": [str(artifact_paths["accepting_config"].resolve())],
+        "write_attempt_paths": [], "accepting_config_open_count": 1, "negative_config_open_count": 0,
+        "raw_paths": [], "provider_paths": [], "reference_trace_paths": [], "legacy_paths": [],
+        "unexpected_write_paths": [], "unexpected_read_paths": [],
+        "path_classifications": {str(artifact_paths["accepting_config"].resolve()): "accepting_config"},
+        "classification_roots": {key: str(root / "NONEXISTENT_DO_NOT_OPEN" / key)
+                                 for key in ("raw", "provider", "reference", "legacy")},
+        "raw_open_count": 0, "provider_open_count": 0,
+        "reference_trace_open_count": 0, "legacy_open_count": 0, "unexpected_write_count": 0,
+        "unexpected_read_count": 0,
+        "bound_artifact_sha256": artifacts, "formal_solver_executed": False, "passed": True,
+    }
+    ledger_path.write_text(json.dumps(ledger, sort_keys=True), encoding="utf-8")
     trace_path.write_text("zero-data loader trace\n", encoding="utf-8")
     seal_path = root / "03_SEAL/CLEAN3R3_GOVERNANCE_PREFLIGHT_SEAL.json"
-    seal_path.write_text(json.dumps({"sealed": True, "sha256": {
+    seal = {"schema_version": s3.PREFLIGHT_SEAL_SCHEMA, "sealed": True,
+            "bound_artifact_sha256": artifacts, "sha256": {
         "report": sha256_file(report_path), "ledger": sha256_file(ledger_path),
         "raw_trace": sha256_file(trace_path),
-    }}, sort_keys=True), encoding="utf-8")
+    }}
+    seal_path.write_text(json.dumps(seal, sort_keys=True), encoding="utf-8")
+    return root, report_path, ledger_path, trace_path, seal_path, report, ledger, seal, artifact_paths
+
+
+def test_sealed_governance_preflight_guard_is_hard_and_hash_bound(tmp_path: Path) -> None:
+    execution_head = "a" * 40
+    root, _, _, trace_path, _, _, _, _, _ = _sealed_preflight_fixture(tmp_path, execution_head)
     accepted = s3._governance_preflight_guard(tmp_path, {"execution_head": execution_head})
     assert accepted["proof_kind"] == "STATIC_PLUS_ZERO_DATA_LOADER"
     trace_path.write_text("drift\n", encoding="utf-8")
     with pytest.raises(s3.Clean3S3Error) as caught:
         s3._governance_preflight_guard(tmp_path, {"execution_head": execution_head})
     assert caught.value.terminal_status == "FAILED_TECHNICAL_PREFLIGHT_SEAL"
+
+
+@pytest.mark.parametrize("mutation", [
+    "incomplete_ledger", "count_mismatch", "wrong_exec", "forbidden_read", "unexpected_write",
+    "omitted_artifact", "bad_artifact_hash",
+])
+def test_governance_preflight_guard_rejects_inconsistent_evidence(tmp_path: Path, mutation: str) -> None:
+    _, report_path, ledger_path, trace_path, seal_path, report, ledger, seal, artifacts = \
+        _sealed_preflight_fixture(tmp_path)
+    if mutation == "incomplete_ledger":
+        ledger.pop("schema_version")
+    elif mutation == "count_mismatch":
+        ledger["raw_open_count"] = 1
+    elif mutation == "wrong_exec":
+        ledger["exec_paths"] = ["/tmp/not-the-loader"]
+    elif mutation == "forbidden_read":
+        ledger["provider_paths"] = ["/tmp/forbidden-provider"]
+        ledger["provider_open_count"] = 1
+    elif mutation == "unexpected_write":
+        ledger["unexpected_write_paths"] = ["/tmp/write"]
+        ledger["unexpected_write_count"] = 1
+    elif mutation == "omitted_artifact":
+        ledger["bound_artifact_sha256"].pop("negative_config")
+    else:
+        artifacts["harness_source"].write_text("drift\n", encoding="utf-8")
+    ledger_path.write_text(json.dumps(ledger, sort_keys=True), encoding="utf-8")
+    seal["sha256"]["ledger"] = sha256_file(ledger_path)
+    seal_path.write_text(json.dumps(seal, sort_keys=True), encoding="utf-8")
+    with pytest.raises(s3.Clean3S3Error):
+        s3._governance_preflight_guard(tmp_path, {"execution_head": "a" * 40})
+
+
+@pytest.mark.parametrize("extra", [
+    'execve("/tmp/not-loader", ["bad"], 0x0) = 0\n',
+    'openat(AT_FDCWD, "{sentinel}/provider/imu", O_RDONLY) = -1 ENOENT\n',
+    'openat(AT_FDCWD, "/tmp/unexpected-write", O_WRONLY|O_CREAT) = 3\n',
+])
+def test_preflight_trace_parser_rejects_wrong_subject_forbidden_read_and_write(
+    tmp_path: Path, extra: str,
+) -> None:
+    binary, accepting, negative = tmp_path / "loader", tmp_path / "accept.yaml", tmp_path / "negative.yaml"
+    for path in (binary, accepting, negative):
+        path.write_text(path.name, encoding="utf-8")
+    sentinel = tmp_path / "NONEXISTENT_DO_NOT_OPEN"
+    trace = tmp_path / "trace.raw"
+    trace.write_text(
+        f'execve("{binary}", ["loader"], 0x0) = 0\n'
+        f'openat(AT_FDCWD, "{accepting}", O_RDONLY) = 3\n'
+        + extra.format(sentinel=sentinel), encoding="utf-8")
+    with pytest.raises(s3._TechnicalFailure):
+        s3._audit_preflight_trace(
+            trace, cwd=tmp_path, harness_binary=binary, accepting_config=accepting,
+            negative_config=negative, sentinel_root=sentinel,
+            artifact_hashes={role: "a" * 64 for role in
+                             ("harness_binary", "harness_source", "accepting_config", "negative_config")},
+        )
+
+
+def test_governance_preflight_generator_emits_bound_zero_data_evidence(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    clean = tmp_path / "clean"
+    clean.mkdir()
+    execution_head = "b" * 40
+    monkeypatch.setattr(s3, "_guard_git", lambda repo: {"execution_head": execution_head})
+
+    def runner(command, cwd, timeout):
+        command = list(command)
+        if command[0] == "g++":
+            binary = Path(command[-1])
+            binary.write_text("loader binary\n", encoding="utf-8")
+            return subprocess.CompletedProcess(command, 0, stdout="", stderr="")
+        if command[0] == "/fake/strace":
+            trace = Path(command[command.index("-o") + 1])
+            binary = Path(command[-2])
+            config = Path(command[-1])
+            trace.write_text(
+                f'execve("{binary}", ["loader"], 0x0) = 0\n'
+                f'openat(AT_FDCWD, "{config}", O_RDONLY) = 3\n', encoding="utf-8")
+            stdout = "\n".join((s3.STAGE_ID, "clean3_s3_ab0000_parity_solver", s3.STAGE_ID, s3.RUN_ID))
+            return subprocess.CompletedProcess(command, 0, stdout=stdout, stderr="")
+        return subprocess.CompletedProcess(
+            command, 2, stdout="", stderr="FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH")
+
+    report = s3.run_governance_preflight(
+        ROOT, clean, command_runner=runner, which=lambda _: "/fake/strace")
+    assert report["terminal_status"] == "PREFLIGHT_OK"
+    assert report["formal_solver_executed"] is False
+    assert report["raw_open_count"] == report["provider_open_count"] == 0
+    accepted = s3._governance_preflight_guard(clean, {"execution_head": execution_head})
+    assert accepted["proof_kind"] == "STATIC_PLUS_ZERO_DATA_LOADER"
