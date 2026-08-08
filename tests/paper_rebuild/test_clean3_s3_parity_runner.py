@@ -112,6 +112,9 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
         target = repo / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(f"repair bytes for {relative}\n", encoding="utf-8")
+    counter_test = repo / "tests/paper_rebuild/test_clean3r2_counter_contract_routing.py"
+    counter_test.parent.mkdir(parents=True, exist_ok=True)
+    counter_test.write_bytes((ROOT / counter_test.relative_to(repo)).read_bytes())
     (repo / "docs").mkdir()
     (repo / "docs/context.md").write_text("context\n", encoding="utf-8")
     _git(repo, "add", ".")
@@ -119,58 +122,54 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     repair = _git(repo, "rev-parse", "HEAD")
     prior_tree = _git(repo, "rev-parse", "HEAD:cpp")
     (repo / "docs/context.md").write_text("CLEAN3 failed attempt terminal\n", encoding="utf-8")
-    script = repo / "scripts/paper_rebuild/run_clean3_math_repair.py"
-    script.parent.mkdir(parents=True)
-    script.write_bytes((ROOT / script.relative_to(repo)).read_bytes())
-    module = repo / "src/legsa_gins/paper_rebuild/clean3_math_repair.py"
-    module.parent.mkdir(parents=True)
-    module.write_text("pre-S0 runner module\n", encoding="utf-8")
-    parity_test = repo / "tests/paper_rebuild/test_clean3_s3_parity_runner.py"
-    parity_test.parent.mkdir(parents=True)
-    parity_test.write_text("pre-successor parity test\n", encoding="utf-8")
     _git(repo, "add", ".")
-    _git(repo, "commit", "-qm", "amendment parent")
+    _git(repo, "commit", "-qm", "B0 closeout")
+    b0 = _git(repo, "rev-parse", "HEAD")
+    for relative in s3.A0_CHANGED_PATHS:
+        target = repo / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(f"A0 authorization for {relative}\n", encoding="utf-8")
+    _git(repo, "add", ".")
+    _git(repo, "commit", "-qm", "A0 amendment")
     amendment_parent = _git(repo, "rev-parse", "HEAD")
     for relative in s3.S0_CODE_FREEZE_CHANGED_PATHS:
         target = repo / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        if relative == "src/legsa_gins/paper_rebuild/clean3_math_repair.py":
-            target.write_text("S0 code-freeze runner module\n", encoding="utf-8")
-        else:
-            target.write_bytes((ROOT / relative).read_bytes())
+        target.write_bytes((ROOT / relative).read_bytes())
     _git(repo, "add", ".")
-    _git(repo, "commit", "-qm", "CLEAN3R2 predecessor code freeze")
+    _git(repo, "commit", "-qm", "CLEAN3R3 C1 code freeze")
     code_freeze = _git(repo, "rev-parse", "HEAD")
     for relative in s3.RUNNER_FREEZE_CHANGED_PATHS:
-        (repo / relative).write_bytes((ROOT / relative).read_bytes())
+        target = repo / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((ROOT / relative).read_bytes())
     _git(repo, "add", ".")
-    _git(repo, "commit", "-qm", "CLEAN3R2 successor runner freeze")
+    _git(repo, "commit", "-qm", "CLEAN3R3 C2 runner freeze")
     runner_freeze = _git(repo, "rev-parse", "HEAD")
 
     monkeypatch.setattr(s3, "REPAIR_IMPLEMENTATION_COMMIT", repair)
+    monkeypatch.setattr(s3, "B0_COMMIT", b0)
     monkeypatch.setattr(s3, "AMENDMENT_PARENT_HEAD", amendment_parent)
     monkeypatch.setattr(s3, "CODE_FREEZE_COMMIT", code_freeze)
     monkeypatch.setattr(s3, "PRIOR_REVIEWED_CPP_TREE", prior_tree)
     authorization_path = repo / s3.AUTHORIZATION_PATH
     authorization_path.parent.mkdir(parents=True, exist_ok=True)
-    authorization_path.write_text("CLEAN3R2 authorization\n", encoding="utf-8")
-    for relative in (
-        "docs/paper_rebuild/ACTIVE_CONTEXT.md",
-        "docs/paper_rebuild/NEXT_ACTIONS.md",
-        "docs/paper_rebuild/CLEAN3R2_STATUS.md",
-    ):
+    authorization_path.write_text("CLEAN3R3 authorization\n", encoding="utf-8")
+    authorization_paths = (s3.FREEZE_PATH, s3.AUTHORIZATION_PATH)
+    for relative in ():
         target = repo / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(f"authorization governance for {relative}\n", encoding="utf-8")
     freeze_path = repo / s3.FREEZE_PATH
     freeze_path.parent.mkdir(parents=True, exist_ok=True)
     freeze = {
-        "schema_version": "paper_rebuild.clean3r2_s3_execution_freeze.v1",
+        "schema_version": "paper_rebuild.clean3r3_s3_execution_freeze.v1",
         "stage_id": s3.STAGE_ID, "protocol_id": s3.PROTOCOL_ID,
         "case_id": s3.CASE_ID, "algorithm_id": s3.METHOD_ID, "run_id": s3.RUN_ID,
         "code_freeze_commit": code_freeze,
         "runner_freeze_commit": runner_freeze,
         "repair_implementation_commit": repair,
+        "b0_commit": b0,
         "amendment_parent_head": amendment_parent,
         "failed_attempt_stage_id": s3.FAILED_ATTEMPT_STAGE_ID,
         "failed_attempt_terminal": s3.FAILED_ATTEMPT_TERMINAL,
@@ -182,6 +181,11 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
         "authorization_document": s3.AUTHORIZATION_PATH,
         "authorization_sha256": sha256_file(authorization_path),
         "authorization_hash_algorithm": "sha256",
+        "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER",
+        "g_c2": "REPORTING_ONLY",
+        "g_c3": "HARD_UNCHANGED",
+        "sealed_governance_preflight_required": True,
+        "authorization_commit_paths": list(authorization_paths),
         "execution_authorization": {
             "s3_solver_allowed_now": True,
             "maximum_solver_executions": 1,
@@ -197,7 +201,11 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     }
     freeze_path.write_text(json.dumps(freeze, sort_keys=True), encoding="utf-8")
     _git(repo, "add", ".")
-    _git(repo, "commit", "-qm", "authorize CLEAN3R2 S3")
+    _git(repo, "commit", "-qm", "authorize CLEAN3R3 S3")
+    monkeypatch.setattr(s3, "_governance_preflight_guard", lambda clean_root, identity: {
+        "root": str(clean_root / s3.PREFLIGHT_RELATIVE), "report_sha256": "a" * 64,
+        "seal_sha256": "b" * 64, "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER",
+    })
 
     clean = tmp_path / "clean"
     raw = tmp_path / "raw"
@@ -404,6 +412,11 @@ def test_one_shot_pass_seals_then_compares_and_stops(fake_s3) -> None:
     assert len(commands) == 3
     assert all("evaluator" not in " ".join(command).lower() for command in commands)
     stage = fake_s3["clean"] / "stages" / s3.STAGE_ID
+    attempt_claim = json.loads((stage / "ATTEMPT_CLAIM.json").read_text())
+    launch_claim = json.loads((stage / "02_AB0000_RUNTIME/SOLVER_LAUNCH_CLAIM.json").read_text())
+    assert attempt_claim["claimed_before_configure"] is True
+    assert attempt_claim["maximum_solver_executions"] == 1 and attempt_claim["retry_allowed"] is False
+    assert launch_claim["solver_execution_ordinal"] == 1 and launch_claim["retry_allowed"] is False
     assert not (stage / "S4").exists()
     config = (stage / "02_AB0000_RUNTIME/CLEAN3_S3_AB0000_RUNTIME_CONFIG.yaml").read_text()
     assert "clean3_s3_ab0000_parity_mode: true" in config
@@ -738,7 +751,7 @@ def test_same_path_frozen_byte_drift_rejected(fake_s3, relative: str) -> None:
     assert commands == []
 
 
-def test_cli_surface_has_only_s3_and_no_profile_selector() -> None:
+def test_cli_surface_has_separate_preflight_and_no_profile_selector() -> None:
     import importlib.util
     script = ROOT / "scripts/paper_rebuild/run_clean3_math_repair.py"
     spec = importlib.util.spec_from_file_location("clean3_cli", script)
@@ -747,7 +760,41 @@ def test_cli_surface_has_only_s3_and_no_profile_selector() -> None:
     spec.loader.exec_module(module)
     help_text = module.parser().format_help()
     assert "s3-ab0000-parity" in help_text
+    assert "governance-preflight" in help_text
     with pytest.raises(SystemExit):
         module.parser().parse_args(["s4"])
     with pytest.raises(SystemExit):
         module.parser().parse_args(["s3-ab0000-parity", "--profile", "AB0001"])
+
+
+def test_sealed_governance_preflight_guard_is_hard_and_hash_bound(tmp_path: Path) -> None:
+    execution_head = "a" * 40
+    root = tmp_path / s3.PREFLIGHT_RELATIVE
+    report_path = root / "04_REPORT/CLEAN3R3_GOVERNANCE_PREFLIGHT_REPORT.json"
+    ledger_path = root / "03_SEAL/ZERO_DATA_LOADER_READ_LEDGER.json"
+    trace_path = root / "02_HARNESS/logs/SOLVER_FILE_OPEN_TRACE.raw"
+    for parent in (report_path.parent, ledger_path.parent, trace_path.parent):
+        parent.mkdir(parents=True, exist_ok=True)
+    report = {
+        "terminal_status": "PREFLIGHT_OK", "stage_id": s3.STAGE_ID,
+        "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER",
+        "trace_subject": "ZERO_DATA_LOADER_HARNESS", "formal_solver_executed": False,
+        "raw_open_count": 0, "provider_open_count": 0, "reference_trace_open_count": 0,
+        "legacy_open_count": 0, "unexpected_write_count": 0,
+        "g_c2": "REPORTING_ONLY", "g_c3": "HARD_UNCHANGED",
+        "execution_head": execution_head,
+    }
+    report_path.write_text(json.dumps(report, sort_keys=True), encoding="utf-8")
+    ledger_path.write_text(json.dumps({"passed": True}, sort_keys=True), encoding="utf-8")
+    trace_path.write_text("zero-data loader trace\n", encoding="utf-8")
+    seal_path = root / "03_SEAL/CLEAN3R3_GOVERNANCE_PREFLIGHT_SEAL.json"
+    seal_path.write_text(json.dumps({"sealed": True, "sha256": {
+        "report": sha256_file(report_path), "ledger": sha256_file(ledger_path),
+        "raw_trace": sha256_file(trace_path),
+    }}, sort_keys=True), encoding="utf-8")
+    accepted = s3._governance_preflight_guard(tmp_path, {"execution_head": execution_head})
+    assert accepted["proof_kind"] == "STATIC_PLUS_ZERO_DATA_LOADER"
+    trace_path.write_text("drift\n", encoding="utf-8")
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        s3._governance_preflight_guard(tmp_path, {"execution_head": execution_head})
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_PREFLIGHT_SEAL"

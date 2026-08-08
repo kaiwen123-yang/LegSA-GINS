@@ -25,7 +25,7 @@ from .paths import is_within, legacy_reason
 from .subprocess_guard import run_process_group
 
 
-STAGE_ID = "CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME"
+STAGE_ID = "CLEAN3R3_MATH_REPAIR_PORT_ROLE_FILL_IF_EMPTY_HARDCODE_SWEEP_AND_S3_RESUME"
 PROTOCOL_ID = "CLEAN3_S3_AB0000_PARITY"
 CASE_ID = "CLEAN1_BY2_CLEAN_NORMAL"
 RUN_ID = "CLEAN3_S3_AB0000"
@@ -33,38 +33,38 @@ METHOD_ID = "AB0000"
 DATA_MODE = "real_clean"
 
 REPAIR_IMPLEMENTATION_COMMIT = "0d8cc2bdccfd89b236ab4badeef9db5344dcf4d3"
-AMENDMENT_PARENT_HEAD = "9d51794d5c031cd0331d1fd8fe66d42c0fb690ed"
-CODE_FREEZE_COMMIT = "8dd620ea6d9645b946a503275ddbf04d66c3baa2"
+B0_COMMIT = "683d355db4fe5194d479cda155e01de1b47a2b17"
+AMENDMENT_PARENT_HEAD = "d311f7457d5b5b9be72ef2101cfa0db47e28614f"
+CODE_FREEZE_COMMIT = "d1fc2d4ac3070129595c81bea7e261c4f3b586f6"
 PRIOR_REVIEWED_CPP_TREE = "a3716d22acf95fb1e6028ae82acb2ae73e138bfc"
 RUNTIME_COUNTER_PATH = "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp"
 LOADER_EXTENSION_PATH = "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp"
-FREEZE_PATH = "docs/paper_rebuild/CLEAN3R2_S3_EXECUTION_FREEZE.json"
-AUTHORIZATION_PATH = "docs/paper_rebuild/CLEAN3R2_AUTHORIZATION.md"
+FREEZE_PATH = "docs/paper_rebuild/CLEAN3R3/CLEAN3R3_S3_EXECUTION_FREEZE.json"
+AUTHORIZATION_PATH = "docs/paper_rebuild/CLEAN3R3/CLEAN3R3_S3_EXECUTION_AUTHORIZATION.md"
 FROZEN_CODE_PATHS = (
     RUNTIME_COUNTER_PATH,
     LOADER_EXTENSION_PATH,
     "src/legsa_gins/paper_rebuild/clean3_math_repair.py",
     "scripts/paper_rebuild/run_clean3_math_repair.py",
     "tests/paper_rebuild/test_clean3r2_counter_contract_routing.py",
+    "tests/paper_rebuild/test_clean3r3_port_role_governance.py",
     "tests/paper_rebuild/test_clean3_s3_parity_runner.py",
 )
 S0_CODE_FREEZE_CHANGED_PATHS = (
     RUNTIME_COUNTER_PATH,
     LOADER_EXTENSION_PATH,
-    "src/legsa_gins/paper_rebuild/clean3_math_repair.py",
-    "tests/paper_rebuild/test_clean3r2_counter_contract_routing.py",
+    "tests/paper_rebuild/test_clean3r3_port_role_governance.py",
 )
 RUNNER_FREEZE_CHANGED_PATHS = (
     "src/legsa_gins/paper_rebuild/clean3_math_repair.py",
+    "scripts/paper_rebuild/run_clean3_math_repair.py",
     "tests/paper_rebuild/test_clean3_s3_parity_runner.py",
 )
-AUTHORIZATION_COMMIT_PATHS = (
-    "docs/paper_rebuild/ACTIVE_CONTEXT.md",
-    "docs/paper_rebuild/NEXT_ACTIONS.md",
-    AUTHORIZATION_PATH,
-    FREEZE_PATH,
-    "docs/paper_rebuild/CLEAN3R2_STATUS.md",
+A0_CHANGED_PATHS = (
+    "docs/paper_rebuild/CLEAN3R3/HARDCODE_INVENTORY.md",
+    "docs/paper_rebuild/CLEAN3R3/AMENDMENT_1_SCOPE_AND_IMPLEMENTATION_AUTHORIZATION.md",
 )
+PREFLIGHT_RELATIVE = Path("00_GOVERNANCE_PREFLIGHT") / STAGE_ID
 
 FAILED_ATTEMPT_STAGE_ID = "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE"
 FAILED_ATTEMPT_TERMINAL = "FAILED_TECHNICAL_S3_AB0000_FORMAL_COUNTER_CONTRACT_UNROUTED"
@@ -165,13 +165,14 @@ def _guard_git(repo: Path) -> dict[str, Any]:
         raise Clean3S3Error("tracked execution freeze is missing", terminal_status="FAILED_TECHNICAL_FREEZE_MISSING")
     freeze = _load_json(freeze_path)
     required = {
-        "schema_version": "paper_rebuild.clean3r2_s3_execution_freeze.v1",
+        "schema_version": "paper_rebuild.clean3r3_s3_execution_freeze.v1",
         "stage_id": STAGE_ID,
         "protocol_id": PROTOCOL_ID,
         "case_id": CASE_ID,
         "algorithm_id": METHOD_ID,
         "run_id": RUN_ID,
         "repair_implementation_commit": REPAIR_IMPLEMENTATION_COMMIT,
+        "b0_commit": B0_COMMIT,
         "amendment_parent_head": AMENDMENT_PARENT_HEAD,
         "code_freeze_commit": CODE_FREEZE_COMMIT,
         "failed_attempt_stage_id": FAILED_ATTEMPT_STAGE_ID,
@@ -181,6 +182,10 @@ def _guard_git(repo: Path) -> dict[str, Any]:
         "failed_attempt_runner_freeze_commit": FAILED_ATTEMPT_RUNNER_FREEZE_COMMIT,
         "authorization_document": AUTHORIZATION_PATH,
         "authorization_hash_algorithm": "sha256",
+        "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER",
+        "g_c2": "REPORTING_ONLY",
+        "g_c3": "HARD_UNCHANGED",
+        "sealed_governance_preflight_required": True,
         "old_attempt_overwritten": False,
         "ready_for_s4": False,
         "ready_for_paper_claims": False,
@@ -197,29 +202,39 @@ def _guard_git(repo: Path) -> dict[str, Any]:
             raise Clean3S3Error(f"{label} is not an exact single-parent commit",
                                 terminal_status="FAILED_TECHNICAL_FREEZE_LINEAGE")
 
-    require_single_parent(CODE_FREEZE_COMMIT, AMENDMENT_PARENT_HEAD, "CLEAN3R2 code freeze")
-    require_single_parent(runner_freeze, CODE_FREEZE_COMMIT, "CLEAN3R2 runner freeze")
-    require_single_parent(head, runner_freeze, "CLEAN3R2 authorization")
+    require_single_parent(AMENDMENT_PARENT_HEAD, B0_COMMIT, "CLEAN3R3 A0")
+    require_single_parent(CODE_FREEZE_COMMIT, AMENDMENT_PARENT_HEAD, "CLEAN3R3 C1")
+    require_single_parent(runner_freeze, CODE_FREEZE_COMMIT, "CLEAN3R3 C2")
+    require_single_parent(head, runner_freeze, "CLEAN3R3 C3")
     if _git(repo, "rev-parse", f"{head}^").stdout.strip() != runner_freeze:
         raise Clean3S3Error("execution HEAD is not exactly one authorization commit after runner freeze",
                             terminal_status="FAILED_TECHNICAL_FREEZE_LINEAGE")
     changed = tuple(_git(repo, "diff", "--name-only", f"{runner_freeze}..{head}").stdout.splitlines())
-    if tuple(sorted(changed)) != tuple(sorted(AUTHORIZATION_COMMIT_PATHS)):
-        raise Clean3S3Error("authorization commit scope differs from the approved five documents",
+    authorization_paths = freeze.get("authorization_commit_paths")
+    if (not isinstance(authorization_paths, list) or not authorization_paths or
+            FREEZE_PATH not in authorization_paths or AUTHORIZATION_PATH not in authorization_paths or
+            tuple(sorted(changed)) != tuple(sorted(str(item) for item in authorization_paths))):
+        raise Clean3S3Error("authorization commit scope differs from the frozen C3 documents",
+                            terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
+    a0_changed = tuple(sorted(
+        _git(repo, "diff", "--name-only", f"{B0_COMMIT}..{AMENDMENT_PARENT_HEAD}").stdout.splitlines()
+    ))
+    if a0_changed != tuple(sorted(A0_CHANGED_PATHS)):
+        raise Clean3S3Error("A0 scope differs from the approved two documents",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     code_freeze_changed = tuple(sorted(
         _git(repo, "diff", "--name-only", f"{AMENDMENT_PARENT_HEAD}..{CODE_FREEZE_COMMIT}")
         .stdout.splitlines()
     ))
     if code_freeze_changed != tuple(sorted(S0_CODE_FREEZE_CHANGED_PATHS)):
-        raise Clean3S3Error("S0 code freeze diff is outside the approved four repair paths",
+        raise Clean3S3Error("C1 code freeze diff is outside the approved three repair paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     runner_changed = tuple(sorted(
         _git(repo, "diff", "--name-only", f"{CODE_FREEZE_COMMIT}..{runner_freeze}")
         .stdout.splitlines()
     ))
     if runner_changed != tuple(sorted(RUNNER_FREEZE_CHANGED_PATHS)):
-        raise Clean3S3Error("runner freeze diff is outside the approved two guard paths",
+        raise Clean3S3Error("C2 runner freeze diff is outside the approved three runner paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     for tracked in (FREEZE_PATH, AUTHORIZATION_PATH):
         if _git(repo, "ls-files", "--error-unmatch", tracked, check=False).returncode != 0:
@@ -857,6 +872,128 @@ def _terminal_report_path(stage: Path) -> Path:
     return stage / "04_REPORT" / "CLEAN3_S3_AB0000_PARITY_REPORT.json"
 
 
+def _governance_preflight_guard(clean_root: Path, git_identity: Mapping[str, Any]) -> dict[str, Any]:
+    """Require the independently sealed, zero-data governance proof."""
+
+    root = clean_root / PREFLIGHT_RELATIVE
+    report_path = root / "04_REPORT/CLEAN3R3_GOVERNANCE_PREFLIGHT_REPORT.json"
+    ledger_path = root / "03_SEAL/ZERO_DATA_LOADER_READ_LEDGER.json"
+    seal_path = root / "03_SEAL/CLEAN3R3_GOVERNANCE_PREFLIGHT_SEAL.json"
+    trace_path = root / "02_HARNESS/logs/SOLVER_FILE_OPEN_TRACE.raw"
+    for path in (report_path, ledger_path, seal_path, trace_path):
+        if not path.is_file() or path.is_symlink():
+            raise Clean3S3Error("sealed governance preflight is missing",
+                                terminal_status="FAILED_TECHNICAL_PREFLIGHT_MISSING")
+    report, ledger, seal = _load_json(report_path), _load_json(ledger_path), _load_json(seal_path)
+    required = {
+        "terminal_status": "PREFLIGHT_OK", "stage_id": STAGE_ID,
+        "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER",
+        "trace_subject": "ZERO_DATA_LOADER_HARNESS", "formal_solver_executed": False,
+        "raw_open_count": 0, "provider_open_count": 0, "reference_trace_open_count": 0,
+        "legacy_open_count": 0, "unexpected_write_count": 0,
+        "g_c2": "REPORTING_ONLY", "g_c3": "HARD_UNCHANGED",
+        "execution_head": git_identity["execution_head"],
+    }
+    if any(report.get(key) != value for key, value in required.items()):
+        raise Clean3S3Error("governance preflight contract mismatch",
+                            terminal_status="FAILED_TECHNICAL_PREFLIGHT_CONTRACT")
+    hashes = seal.get("sha256")
+    expected = {
+        "report": sha256_file(report_path), "ledger": sha256_file(ledger_path),
+        "raw_trace": sha256_file(trace_path),
+    }
+    if seal.get("sealed") is not True or hashes != expected or ledger.get("passed") is not True:
+        raise Clean3S3Error("governance preflight seal mismatch",
+                            terminal_status="FAILED_TECHNICAL_PREFLIGHT_SEAL")
+    return {"root": str(root), "report_sha256": expected["report"],
+            "seal_sha256": sha256_file(seal_path), "proof_kind": required["proof_kind"]}
+
+
+def run_governance_preflight(
+    repo_root: Path, clean_root: Path, *, timeout_seconds: int = 120,
+    command_runner: CommandRunner = _default_command_runner,
+    which: Callable[[str], str | None] = shutil.which,
+) -> dict[str, Any]:
+    """Build and trace only a zero-data loader harness; never invoke the solver."""
+
+    repo = repo_root.resolve(strict=True)
+    clean = clean_root.resolve(strict=True)
+    git_identity = _guard_git(repo)
+    strace = which("strace")
+    if not strace:
+        raise Clean3S3Error("strace is required for governance preflight",
+                            terminal_status="FAILED_TECHNICAL_STRACE_UNAVAILABLE")
+    root = clean / PREFLIGHT_RELATIVE
+    root.parent.mkdir(exist_ok=True)
+    root.mkdir()
+    build, harness_root, seal_root, report_root = (
+        root / "01_BUILD", root / "02_HARNESS", root / "03_SEAL", root / "04_REPORT")
+    build.mkdir(); harness_root.mkdir(); seal_root.mkdir(); report_root.mkdir()
+    (harness_root / "configs").mkdir(); (harness_root / "logs").mkdir()
+    runtime_source = (repo / RUNTIME_COUNTER_PATH).read_text(encoding="utf-8")
+    formal = runtime_source.split("if (options.clean1_formal_mode)", 1)[1].split("} else", 1)[0]
+    if "options.port_role" in formal:
+        raise Clean3S3Error("T9 static formal port_role assignment remains",
+                            terminal_status="FAILED_TECHNICAL_T9_STATIC_ROLE_ASSIGNMENT")
+    source = build / "zero_data_loader.cpp"
+    source.write_text(
+        '#include <exception>\n#include <iostream>\n#include "legsa_v23_port_core/config/port_config_loader.hpp"\n'
+        'int main(int argc,char** argv){try{auto o=legsa_v23_port_core::PortConfigLoader::loadYamlLike(argv[1]);'
+        'std::cout<<o.stage_id<<"\\n"<<o.port_role<<"\\n"<<o.phase<<"\\n"<<o.run_label;return 0;}'
+        'catch(const std::exception& e){std::cerr<<e.what();return 2;}}\n', encoding="utf-8")
+    binary = build / "zero_data_loader"
+    compile_command = (
+        "g++", "-std=c++17", "-I", str(repo / "cpp/legsa_v23_port_core/include"),
+        str(repo / "cpp/legsa_v23_port_core/src/common/types.cpp"),
+        str(repo / "cpp/legsa_v23_port_core/src/source_aware/source_aware_policy.cpp"),
+        str(repo / LOADER_EXTENSION_PATH), str(source), "-o", str(binary),
+    )
+    _run_checked(command_runner, compile_command, repo, timeout_seconds, "PREFLIGHT_COMPILE",
+                 harness_root / "logs/compile_stdout.txt", harness_root / "logs/compile_stderr.txt")
+    sentinel = root / "NONEXISTENT_DO_NOT_OPEN"
+    config = harness_root / "configs/CLEAN3R3_ZERO_DATA.yaml"
+    config.write_text(build_s3_ab0000_config(sentinel / "imu", sentinel / "gnss", sentinel / "out"),
+                      encoding="utf-8")
+    trace = harness_root / "logs/SOLVER_FILE_OPEN_TRACE.raw"
+    traced = _run_checked(command_runner,
+        (str(strace), "-f", "-qq", "-yy", "-s", "4096", "-e", "trace=%file", "-o", str(trace),
+         str(binary), str(config)), repo, timeout_seconds, "PREFLIGHT_HARNESS",
+        harness_root / "logs/harness_stdout.txt", harness_root / "logs/harness_stderr.txt")
+    expected_stdout = "\n".join((STAGE_ID, "clean3_s3_ab0000_parity_solver", STAGE_ID, RUN_ID))
+    if traced.stdout.strip() != expected_stdout:
+        raise Clean3S3Error("T5-T7 loader identity mismatch",
+                            terminal_status="FAILED_TECHNICAL_PREFLIGHT_IDENTITY")
+    canonical = harness_root / "configs/CANONICAL_T8_REJECT.yaml"
+    canonical.write_text(_replace_config(config.read_text(encoding="utf-8"), {
+        "stage_id": "CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX",
+        "protocol_id": "CANONICAL541_BY2_CONTROLLED_DEGRADATION", "case_id": "C00_clean_normal",
+    }), encoding="utf-8")
+    rejected = command_runner((str(binary), str(canonical)), repo, timeout_seconds)
+    if rejected.returncode == 0 or "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH" not in rejected.stderr:
+        raise Clean3S3Error("T8 Canonical tuple was not rejected",
+                            terminal_status="FAILED_TECHNICAL_PREFLIGHT_T8")
+    trace_text = trace.read_text(encoding="utf-8")
+    if str(sentinel) in trace_text:
+        raise Clean3S3Error("zero-data harness opened a sentinel",
+                            terminal_status="FAILED_TECHNICAL_PREFLIGHT_DATA_OPEN")
+    unexpected_writes = sum(flag in trace_text for flag in ("O_WRONLY", "O_RDWR", "O_CREAT"))
+    ledger = {"passed": unexpected_writes == 0, "raw_open_count": 0, "provider_open_count": 0,
+              "reference_trace_open_count": 0, "legacy_open_count": 0,
+              "unexpected_write_count": unexpected_writes}
+    ledger_path = write_json_atomic(seal_root / "ZERO_DATA_LOADER_READ_LEDGER.json", ledger)
+    report = {"schema_version": "paper_rebuild.clean3r3_governance_preflight.v1",
+              "stage_id": STAGE_ID, "execution_head": git_identity["execution_head"],
+              "terminal_status": "PREFLIGHT_OK", "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER",
+              "trace_subject": "ZERO_DATA_LOADER_HARNESS", "formal_solver_executed": False,
+              **{key: ledger[key] for key in ledger if key != "passed"},
+              "g_c2": "REPORTING_ONLY", "g_c3": "HARD_UNCHANGED"}
+    report_path = write_json_atomic(report_root / "CLEAN3R3_GOVERNANCE_PREFLIGHT_REPORT.json", report)
+    write_json_atomic(seal_root / "CLEAN3R3_GOVERNANCE_PREFLIGHT_SEAL.json",
+                      {"sealed": True, "sha256": {"report": sha256_file(report_path),
+                       "ledger": sha256_file(ledger_path), "raw_trace": sha256_file(trace)}})
+    return report
+
+
 def run_s3_ab0000_parity(
     inputs: S3Inputs,
     *,
@@ -868,8 +1005,10 @@ def run_s3_ab0000_parity(
     if inputs.jobs < 1 or inputs.timeout_seconds < 1:
         raise Clean3S3Error("jobs/timeout must be positive", terminal_status="FAILED_TECHNICAL_ARGUMENT")
     try:
+        repo = inputs.repo_root.resolve(strict=True)
+        git_identity = _guard_git(repo)
+        preflight = _governance_preflight_guard(inputs.clean_root.resolve(strict=True), git_identity)
         paths = _exact_paths(inputs)
-        git_identity = _guard_git(paths["repo"])
         inherited = _manifest_and_provider_guard(paths)
         anchor_hashes = {
             "KF_GINS_Navresult.nav": sha256_file(paths["anchor_nav"]),
@@ -932,10 +1071,16 @@ def run_s3_ab0000_parity(
         "auto_s4_started": False,
         "retry_count": 0,
         "ready_for_paper_claims": False,
+        "governance_preflight": preflight,
     }
     attempt_started = False
     try:
         attempt_started = True
+        write_json_atomic(stage / "ATTEMPT_CLAIM.json", {
+            "stage_id": STAGE_ID, "execution_head": git_identity["execution_head"],
+            "attempt_ordinal": 1, "maximum_solver_executions": 1,
+            "retry_count": 0, "retry_allowed": False, "claimed_before_configure": True,
+        })
         configure = _run_checked(
             command_runner,
             ("cmake", "-S", str(paths["repo"] / "cpp"), "-B", str(build), "-DCMAKE_BUILD_TYPE=Release"),
@@ -965,6 +1110,12 @@ def run_s3_ab0000_parity(
             "trace=%file",
             "-o", str(trace), str(binary), "--config", str(config), "--output-dir", str(runtime),
         )
+        write_json_atomic(runtime / "SOLVER_LAUNCH_CLAIM.json", {
+            "stage_id": STAGE_ID, "execution_head": git_identity["execution_head"],
+            "solver_execution_ordinal": 1, "maximum_solver_executions": 1,
+            "retry_allowed": False, "solver_executable_sha256": binary_hash_pre,
+            "runtime_config_sha256": config_hash,
+        })
         solver = _run_checked(
             command_runner, solver_command, paths["repo"], inputs.timeout_seconds, "SOLVER_EXECUTION",
             runtime / "logs/solver_stdout.txt", runtime / "logs/solver_stderr.txt",

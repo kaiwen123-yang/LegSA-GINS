@@ -16,6 +16,7 @@ if str(SRC_ROOT) not in sys.path:
 from legsa_gins.paper_rebuild.clean3_math_repair import (
     Clean3S3Error,
     S3Inputs,
+    run_governance_preflight,
     run_s3_ab0000_parity,
     s3_cli_payload,
 )
@@ -35,12 +36,22 @@ def parser() -> argparse.ArgumentParser:
     run.add_argument("--provider-parity-report", required=True)
     run.add_argument("--jobs", type=int, default=2)
     run.add_argument("--timeout-seconds", type=int, default=1800)
+    preflight = commands.add_parser("governance-preflight")
+    preflight.add_argument("--repo-root", default=str(REPO_ROOT))
+    preflight.add_argument("--clean-root", required=True)
+    preflight.add_argument("--timeout-seconds", type=int, default=120)
     return result
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
     try:
+        if args.command == "governance-preflight":
+            report = run_governance_preflight(
+                Path(args.repo_root), Path(args.clean_root), timeout_seconds=args.timeout_seconds,
+            )
+            print(json.dumps(report, sort_keys=True))
+            return 0
         report = run_s3_ab0000_parity(S3Inputs(
             repo_root=Path(args.repo_root),
             clean_root=Path(args.clean_root),
