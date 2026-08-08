@@ -158,9 +158,14 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     _git(repo, "commit", "-qm", "preserved CLEAN3R3 C2R2 runner freeze")
     c2r2 = _git(repo, "rev-parse", "HEAD")
     for relative in s3.C2R3_CHANGED_PATHS:
+        (repo / relative).write_text(_git(ROOT, "show", f"{s3.C2R3_COMMIT}:{relative}"), encoding="utf-8")
+    _git(repo, "add", ".")
+    _git(repo, "commit", "-qm", "preserved CLEAN3R3 C2R3 runner freeze")
+    c2r3 = _git(repo, "rev-parse", "HEAD")
+    for relative in s3.C2R4_CHANGED_PATHS:
         (repo / relative).write_bytes((ROOT / relative).read_bytes())
     _git(repo, "add", ".")
-    _git(repo, "commit", "-qm", "CLEAN3R3 C2R3 runner freeze")
+    _git(repo, "commit", "-qm", "CLEAN3R3 C2R4 runner freeze")
     runner_freeze = _git(repo, "rev-parse", "HEAD")
 
     monkeypatch.setattr(s3, "REPAIR_IMPLEMENTATION_COMMIT", repair)
@@ -170,6 +175,7 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setattr(s3, "REJECTED_RUNNER_FREEZE_COMMIT", rejected_runner_freeze)
     monkeypatch.setattr(s3, "C2R1_COMMIT", c2r1)
     monkeypatch.setattr(s3, "C2R2_COMMIT", c2r2)
+    monkeypatch.setattr(s3, "C2R3_COMMIT", c2r3)
     monkeypatch.setattr(s3, "PRIOR_REVIEWED_CPP_TREE", prior_tree)
     authorization_path = repo / s3.AUTHORIZATION_PATH
     authorization_path.parent.mkdir(parents=True, exist_ok=True)
@@ -221,10 +227,12 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     freeze_path.write_text(json.dumps(freeze, sort_keys=True), encoding="utf-8")
     _git(repo, "add", ".")
     _git(repo, "commit", "-qm", "authorize CLEAN3R3 S3")
-    monkeypatch.setattr(s3, "_governance_preflight_guard", lambda clean_root, identity: {
-        "root": str(clean_root / s3.PREFLIGHT_RELATIVE), "report_sha256": "a" * 64,
-        "seal_sha256": "b" * 64, "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER",
-    })
+    proof = {"root": "synthetic-preflight", "attempt_id": "ATTEMPT_000001", "attempt_ordinal": 1,
+             "claim_sha256": "c" * 64, "terminal_sha256": "d" * 64,
+             "report_sha256": "a" * 64, "seal_sha256": "b" * 64, "trace_sha256": "e" * 64,
+             "proof_kind": "STATIC_PLUS_ZERO_DATA_LOADER"}
+    monkeypatch.setattr(s3, "_governance_preflight_guard", lambda clean_root, identity: dict(proof))
+    monkeypatch.setattr(s3, "_select_governance_preflight_locked", lambda namespace, identity: dict(proof))
 
     clean = tmp_path / "clean"
     raw = tmp_path / "raw"
@@ -435,6 +443,8 @@ def test_one_shot_pass_seals_then_compares_and_stops(fake_s3) -> None:
     launch_claim = json.loads((stage / "02_AB0000_RUNTIME/SOLVER_LAUNCH_CLAIM.json").read_text())
     assert attempt_claim["claimed_before_configure"] is True
     assert attempt_claim["maximum_solver_executions"] == 1 and attempt_claim["retry_allowed"] is False
+    assert attempt_claim["selected_preflight"]["attempt_id"] == "ATTEMPT_000001"
+    assert attempt_claim["selected_preflight"]["trace_sha256"] == "e" * 64
     assert launch_claim["solver_execution_ordinal"] == 1 and launch_claim["retry_allowed"] is False
     assert not (stage / "S4").exists()
     config = (stage / "02_AB0000_RUNTIME/CLEAN3_S3_AB0000_RUNTIME_CONFIG.yaml").read_text()
@@ -447,6 +457,7 @@ def test_one_shot_pass_seals_then_compares_and_stops(fake_s3) -> None:
     assert outer["stage_id"] == s3.STAGE_ID
     assert outer["parent_contract"]["stage_id"] == s3.PARENT_PROVIDER_STAGE_ID
     assert outer["trace_used_online"] is False
+    assert outer["governance_preflight"] == attempt_claim["selected_preflight"]
 
 
 @pytest.mark.parametrize("stage_id,protocol_id", [
@@ -795,8 +806,11 @@ def test_module_docstring_states_exact_two_operation_boundary() -> None:
 
 
 def _sealed_preflight_fixture(tmp_path: Path, execution_head: str = "a" * 40):
-    execution_head = "a" * 40
-    root = tmp_path / s3.PREFLIGHT_RELATIVE
+    namespace = tmp_path / s3.PREFLIGHT_RELATIVE
+    namespace.mkdir(parents=True)
+    (namespace / ".namespace.lock").write_bytes(b"")
+    root = namespace / "ATTEMPT_000001"
+    root.mkdir()
     report_path = root / "04_REPORT/CLEAN3R3_GOVERNANCE_PREFLIGHT_REPORT.json"
     ledger_path = root / "03_SEAL/ZERO_DATA_LOADER_READ_LEDGER.json"
     trace_path = root / "02_HARNESS/logs/SOLVER_FILE_OPEN_TRACE.raw"
@@ -811,6 +825,10 @@ def _sealed_preflight_fixture(tmp_path: Path, execution_head: str = "a" * 40):
         parent.mkdir(parents=True, exist_ok=True)
     for role, path in artifact_paths.items():
         path.write_text(role + "\n", encoding="utf-8")
+    claim_path = root / "ATTEMPT_CLAIM.json"
+    claim_path.write_text(json.dumps({"schema_version": s3.PREFLIGHT_CLAIM_SCHEMA,
+        "attempt_id": root.name, "attempt_ordinal": 1, "execution_head": execution_head,
+        "claimed_before_work": True}, sort_keys=True), encoding="utf-8")
     artifacts = {role: sha256_file(path) for role, path in artifact_paths.items()}
     report = {
         "schema_version": s3.PREFLIGHT_REPORT_SCHEMA,
@@ -853,6 +871,11 @@ def _sealed_preflight_fixture(tmp_path: Path, execution_head: str = "a" * 40):
         "raw_trace": sha256_file(trace_path),
     }}
     seal_path.write_text(json.dumps(seal, sort_keys=True), encoding="utf-8")
+    (root / "TERMINAL.json").write_text(json.dumps({
+        "schema_version": s3.PREFLIGHT_TERMINAL_SCHEMA, "attempt_id": root.name,
+        "attempt_ordinal": 1, "terminal_status": "PREFLIGHT_OK",
+        "report_sha256": sha256_file(report_path), "claim_sha256": sha256_file(claim_path),
+    }, sort_keys=True), encoding="utf-8")
     return root, report_path, ledger_path, trace_path, seal_path, report, ledger, seal, artifact_paths
 
 
@@ -967,3 +990,79 @@ def test_governance_preflight_generator_emits_bound_zero_data_evidence(
     assert report["raw_open_count"] == report["provider_open_count"] == 0
     accepted = s3._governance_preflight_guard(clean, {"execution_head": execution_head})
     assert accepted["proof_kind"] == "STATIC_PLUS_ZERO_DATA_LOADER"
+    second = s3.run_governance_preflight(
+        ROOT, clean, command_runner=runner, which=lambda _: "/fake/strace")
+    assert second["attempt_ordinal"] == 2
+    selected = s3._governance_preflight_guard(clean, {"execution_head": execution_head})
+    assert selected["attempt_id"] == "ATTEMPT_000002"
+
+
+@pytest.mark.parametrize("entry", ["ATTEMPT_2", "ATTEMPT_000002", "unexpected", "ATTEMPT_000001"])
+def test_preflight_namespace_rejects_noncanonical_gap_and_unexpected_entries(
+    tmp_path: Path, entry: str,
+) -> None:
+    namespace = tmp_path / s3.PREFLIGHT_RELATIVE
+    namespace.mkdir(parents=True)
+    (namespace / ".namespace.lock").write_bytes(b"")
+    target = namespace / entry
+    if entry == "ATTEMPT_000001":
+        target.symlink_to(tmp_path, target_is_directory=True)
+    else:
+        target.mkdir()
+    with pytest.raises(s3.Clean3S3Error):
+        s3._scan_preflight_attempts(namespace)
+
+
+def test_preflight_is_forbidden_after_formal_stage_claim(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    clean = tmp_path / "clean"
+    (clean / "stages" / s3.STAGE_ID).mkdir(parents=True)
+    monkeypatch.setattr(s3, "_guard_git", lambda repo: {"execution_head": "b" * 40})
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        s3.run_governance_preflight(ROOT, clean, which=lambda _: "/fake/strace")
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_PREFLIGHT_AFTER_FORMAL_CLAIM"
+
+
+def test_latest_failed_or_incomplete_preflight_blocks_pass_selection(tmp_path: Path) -> None:
+    _sealed_preflight_fixture(tmp_path)
+    namespace = tmp_path / s3.PREFLIGHT_RELATIVE
+    second = namespace / "ATTEMPT_000002"
+    second.mkdir()
+    with pytest.raises(s3.Clean3S3Error) as incomplete:
+        s3._governance_preflight_guard(tmp_path, {"execution_head": "a" * 40})
+    assert incomplete.value.terminal_status == "FAILED_TECHNICAL_PREFLIGHT_INCOMPLETE"
+    claim = second / "ATTEMPT_CLAIM.json"
+    claim.write_text("{}", encoding="utf-8")
+    report = second / "04_REPORT/CLEAN3R3_GOVERNANCE_PREFLIGHT_FAILURE.json"
+    report.parent.mkdir(parents=True)
+    report.write_text("{}", encoding="utf-8")
+    (second / "TERMINAL.json").write_text(json.dumps({
+        "schema_version": s3.PREFLIGHT_TERMINAL_SCHEMA, "attempt_id": second.name,
+        "attempt_ordinal": 2, "terminal_status": "PREFLIGHT_FAILED",
+        "claim_sha256": sha256_file(claim), "report_sha256": sha256_file(report),
+    }), encoding="utf-8")
+    with pytest.raises(s3.Clean3S3Error) as failed:
+        s3._governance_preflight_guard(tmp_path, {"execution_head": "a" * 40})
+    assert failed.value.terminal_status == "FAILED_TECHNICAL_PREFLIGHT_LATEST_FAILED"
+
+
+def test_concurrent_preflight_claims_receive_distinct_contiguous_ordinals(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from concurrent.futures import ThreadPoolExecutor
+
+    clean = tmp_path / "clean"
+    clean.mkdir()
+    monkeypatch.setattr(s3, "_guard_git", lambda repo: {"execution_head": "b" * 40})
+
+    @s3._locked_preflight
+    def claim_only(repo, clean_root, *, _attempt_root=None, _git_identity=None):
+        report = {"attempt_id": _attempt_root.name, "attempt_ordinal": int(_attempt_root.name[-6:])}
+        (Path(_attempt_root) / "04_REPORT/CLEAN3R3_GOVERNANCE_PREFLIGHT_REPORT.json").write_text(
+            json.dumps(report), encoding="utf-8")
+        return report
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        results = list(pool.map(lambda _: claim_only(ROOT, clean), range(2)))
+    assert sorted(item["attempt_ordinal"] for item in results) == [1, 2]
+    assert [path.name for path in s3._scan_preflight_attempts(clean / s3.PREFLIGHT_RELATIVE)] == [
+        "ATTEMPT_000001", "ATTEMPT_000002"]
