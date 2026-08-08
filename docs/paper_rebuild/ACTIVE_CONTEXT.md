@@ -2,11 +2,14 @@
 
 ## Identity
 
-- Active program: `STAGE_ID=CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE`.
+- Active program: `STAGE_ID=CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME`.
 - Base main commit: `9f9727b74f5195141523ab570380cc35006f3d18`.
 - Active Git branch: `stage/clean3-math-repair`.
 - Reviewed S2 math-repair commit: `0d8cc2bdccfd89b236ab4badeef9db5344dcf4d3`.
 - Reviewed S2 math-repair `cpp/` tree identity at that commit: `a3716d22acf95fb1e6028ae82acb2ae73e138bfc`. This is S2 math-tree provenance, not the final S3 execution `cpp/` tree.
+- CLEAN3R2 code freeze: `8dd620ea6d9645b946a503275ddbf04d66c3baa2`.
+- CLEAN3R2 runner freeze: `5209b6afeeb2b2a0ad99e640ffe50f8dd3b0c909`.
+- CLEAN3R2 authorization document SHA-256: `eb267045d32af7ae407129b8b53fb6f4c8ed8a6dd75b7889a5a0fb53c3223237`.
 - Active implementation namespace: `src/legsa_gins/paper_rebuild/`, invoked only through `scripts/paper_rebuild/`.
 - Active raw source: `<RAW_ROOT>`; raw files are immutable.
 - Active generated-asset root: `<CLEAN_ROOT>`.
@@ -28,12 +31,12 @@
 - S1 read-only inventory and human scope approval: complete.
 - S2 repairs A/B/E1, focused tests, Release build, full `tests/paper_rebuild`, and read-only reviewer recheck: complete and reviewer-approved.
 - Final S2/C1b verified test result: `253 passed, 3 skipped`.
-- Supervisor terminal: `FAILED_TECHNICAL_S3_AB0000_FORMAL_COUNTER_CONTRACT_UNROUTED`.
-- Original S3 attempt terminal: `FAILED_TECHNICAL_SOLVER_EXECUTION`; S3 byte parity: `NOT_EVALUATED`.
-- `ready_for_S4=false`; no clean rerun, calibration result, module-effect result, or final CLEAN3 pass exists.
-- No provider generation, evaluator execution, trace-online use, Canonical-541 execution, paper figure generation, merge, or release tag is authorized by the current gate.
+- The old CLEAN3 supervisor terminal remains `FAILED_TECHNICAL_S3_AB0000_FORMAL_COUNTER_CONTRACT_UNROUTED`; its original S3 attempt terminal is `FAILED_TECHNICAL_SOLVER_EXECUTION` and its byte parity is `NOT_EVALUATED`.
+- Human authorization approved the non-overwriting CLEAN3R2 attempt. The exact counter-routing repair, guarded stage transport, T1–T4, loader bypass regression, Release build, and full `tests/paper_rebuild` validation are reviewer-approved at the new code/runner freeze.
+- Current gate: `AUTHORIZED_S3_NOT_STARTED`. After the separate authorization commit is clean and hash-verified, exactly one CLEAN3R2 AB0000 S3 solver is authorized; evaluator, evaluation trace, provider regeneration, retry, and Canonical-541 remain unauthorized.
+- `ready_for_S4=false`; no CLEAN3R2 parity, calibration result, module-effect result, or final CLEAN3R2 pass exists.
 
-The attempted S3 execution used C1b `e28899156b03b32d3840476bf57ac01807494086`, C2b/execution HEAD `3110131cbbb64caff71a4e493a0b64365e6fb936`, and final `cpp/` tree `40baa12045d6100e3342fd92a01079d253705a45`. Configure/build succeeded, but the solver failed before `writeAll`: the runtime config correctly selected CLEAN3/AB0000 while `port_runtime.cpp::validateFormalRuntimeCounters` routes its AB counter contract only for CLEAN2R2A, so `counters_match` became false unconditionally. This is a technical routing failure, not an observed mathematical parity mismatch. No NAV, STD, run manifest, outer manifest, output seal, or byte comparison exists; parity therefore remains `NOT_EVALUATED`.
+The old S3 execution used C1b `e28899156b03b32d3840476bf57ac01807494086`, C2b/execution HEAD `3110131cbbb64caff71a4e493a0b64365e6fb936`, and final `cpp/` tree `40baa12045d6100e3342fd92a01079d253705a45`. Configure/build succeeded, but the solver failed before `writeAll`: the runtime config correctly selected CLEAN3/AB0000 while `port_runtime.cpp::validateFormalRuntimeCounters` routed its AB counter contract only for CLEAN2R2A, so `counters_match` became false unconditionally. This was a technical routing failure, not an observed mathematical parity mismatch. No NAV, STD, run manifest, outer manifest, output seal, or byte comparison exists; old-attempt parity therefore remains `NOT_EVALUATED`. CLEAN3R2 preserves that attempt and uses a new stage root.
 
 ## Inherited Locked Identities
 
@@ -83,4 +86,4 @@ Active runtime evidence may come only from `<CLEAN_ROOT>` and only when its mani
 
 All CLEAN2R2A1 full-minus-strong and RD/SA/RP/HV module-effect numbers are `SUPERSEDED_BY_CLEAN3_PENDING_RERUN`. They may be retained as history but cannot support an active claim, threshold adjustment, or tuning decision.
 
-CLEAN3 does not authorize Canonical-541 solving, D01-D60, BY3/XB/PG, DA studies, QM/QA/FGO, kernel comparisons, trace-online use, per-case tuning, paper figures, performance claims, merge, or release tagging. Canonical-541 restart is `NOT_AUTHORIZED`.
+CLEAN3R2 does not authorize Canonical-541 solving, D01-D60, BY3/XB/PG, DA studies, QM/QA/FGO, kernel comparisons, trace-online use, per-case tuning, paper figures, performance claims, merge, or release tagging. Canonical-541 restart is `NOT_AUTHORIZED`.

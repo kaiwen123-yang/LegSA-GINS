@@ -1,5 +1,17 @@
 # Clean Rebuild Next Actions
 
+## CLEAN3R2 Authorized Scope
+
+- Active stage: `CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME`.
+- Code freeze: `8dd620ea6d9645b946a503275ddbf04d66c3baa2`.
+- Runner freeze: `5209b6afeeb2b2a0ad99e640ffe50f8dd3b0c909`.
+- Authorization document SHA-256: `eb267045d32af7ae407129b8b53fb6f4c8ed8a6dd75b7889a5a0fb53c3223237`.
+- Current gate: `AUTHORIZED_S3_NOT_STARTED`; `ready_for_S4=false`; `ready_for_paper_claims=false`.
+
+After the separate authorization commit and exact hash preflight, run exactly one CLEAN3R2 AB0000 S3 solver and compare NAV/STD byte-for-byte with the locked CLEAN1R2R1 anchors. A mismatch terminates `BLOCKED_PARITY_REGRESSION_AB0000_MISMATCH`; a technical failure leaves parity `NOT_EVALUATED`. Evaluator, evaluation trace, retry, provider regeneration, and Canonical-541 are not authorized at this gate.
+
+Only exact S3 parity permits S4 and S5 under the original CLEAN3 gates. S5 must stop after producing the deterministic solver-visible innovation calibration and obtain new human confirmation of `clean3_sa_calibration.yaml` before S6. The CLEAN1 material below is retained protocol history and is not the active execution authorization.
+
 ## CLEAN0 Closure
 
 - Raw hash lock and post-delete full verification: complete.
