@@ -108,71 +108,96 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     _git(repo, "init", "-q")
     _git(repo, "config", "user.email", "clean3@example.invalid")
     _git(repo, "config", "user.name", "CLEAN3 Test")
-    loader = repo / s3.LOADER_EXTENSION_PATH
-    loader.parent.mkdir(parents=True)
-    loader.write_text("s2\n", encoding="utf-8")
+    for relative in (s3.RUNTIME_COUNTER_PATH, s3.LOADER_EXTENSION_PATH):
+        target = repo / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(f"repair bytes for {relative}\n", encoding="utf-8")
     (repo / "docs").mkdir()
     (repo / "docs/context.md").write_text("context\n", encoding="utf-8")
     _git(repo, "add", ".")
     _git(repo, "commit", "-qm", "s2 repair")
     repair = _git(repo, "rev-parse", "HEAD")
     prior_tree = _git(repo, "rev-parse", "HEAD:cpp")
-    (repo / "docs/context.md").write_text("pre parity\n", encoding="utf-8")
+    (repo / "docs/context.md").write_text("CLEAN3 failed attempt terminal\n", encoding="utf-8")
+    script = repo / "scripts/paper_rebuild/run_clean3_math_repair.py"
+    script.parent.mkdir(parents=True)
+    script.write_bytes((ROOT / script.relative_to(repo)).read_bytes())
+    module = repo / "src/legsa_gins/paper_rebuild/clean3_math_repair.py"
+    module.parent.mkdir(parents=True)
+    module.write_text("pre-S0 runner module\n", encoding="utf-8")
+    parity_test = repo / "tests/paper_rebuild/test_clean3_s3_parity_runner.py"
+    parity_test.parent.mkdir(parents=True)
+    parity_test.write_text("pre-successor parity test\n", encoding="utf-8")
     _git(repo, "add", ".")
-    _git(repo, "commit", "-qm", "pre parity")
-    pre = _git(repo, "rev-parse", "HEAD")
-    loader.write_text("s2 plus loader extension\n", encoding="utf-8")
-    for relative in s3.FROZEN_CODE_PATHS[1:]:
+    _git(repo, "commit", "-qm", "amendment parent")
+    amendment_parent = _git(repo, "rev-parse", "HEAD")
+    for relative in s3.S0_CODE_FREEZE_CHANGED_PATHS:
         target = repo / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes((ROOT / relative).read_bytes())
+        if relative == "src/legsa_gins/paper_rebuild/clean3_math_repair.py":
+            target.write_text("S0 code-freeze runner module\n", encoding="utf-8")
+        else:
+            target.write_bytes((ROOT / relative).read_bytes())
     _git(repo, "add", ".")
-    _git(repo, "commit", "-qm", "superseded runner freeze")
-    old_c1 = _git(repo, "rev-parse", "HEAD")
-
-    old_freeze_path = repo / s3.FREEZE_PATH
-    old_freeze_path.parent.mkdir(parents=True, exist_ok=True)
-    old_freeze_path.write_text("{}\n", encoding="utf-8")
-    _git(repo, "add", s3.FREEZE_PATH)
-    _git(repo, "commit", "-qm", "superseded authorization")
-    old_c2 = _git(repo, "rev-parse", "HEAD")
-
-    for relative in (
-        "src/legsa_gins/paper_rebuild/clean3_math_repair.py",
-        "tests/paper_rebuild/test_clean3_s3_parity_runner.py",
-    ):
-        (repo / relative).write_text(f"replacement bytes for {relative}\n", encoding="utf-8")
-    for relative in ("docs/paper_rebuild/ACTIVE_CONTEXT.md", "docs/paper_rebuild/CLEAN3_STATUS.md"):
-        target = repo / relative
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(f"replacement governance for {relative}\n", encoding="utf-8")
+    _git(repo, "commit", "-qm", "CLEAN3R2 predecessor code freeze")
+    code_freeze = _git(repo, "rev-parse", "HEAD")
+    for relative in s3.RUNNER_FREEZE_CHANGED_PATHS:
+        (repo / relative).write_bytes((ROOT / relative).read_bytes())
     _git(repo, "add", ".")
-    _git(repo, "commit", "-qm", "replacement runner freeze")
+    _git(repo, "commit", "-qm", "CLEAN3R2 successor runner freeze")
     runner_freeze = _git(repo, "rev-parse", "HEAD")
 
     monkeypatch.setattr(s3, "REPAIR_IMPLEMENTATION_COMMIT", repair)
-    monkeypatch.setattr(s3, "PRE_PARITY_CONTEXT_COMMIT", pre)
+    monkeypatch.setattr(s3, "AMENDMENT_PARENT_HEAD", amendment_parent)
+    monkeypatch.setattr(s3, "CODE_FREEZE_COMMIT", code_freeze)
     monkeypatch.setattr(s3, "PRIOR_REVIEWED_CPP_TREE", prior_tree)
-    monkeypatch.setattr(s3, "SUPERSEDED_RUNNER_FREEZE_COMMIT", old_c1)
-    monkeypatch.setattr(s3, "SUPERSEDED_AUTHORIZATION_COMMIT", old_c2)
+    authorization_path = repo / s3.AUTHORIZATION_PATH
+    authorization_path.parent.mkdir(parents=True, exist_ok=True)
+    authorization_path.write_text("CLEAN3R2 authorization\n", encoding="utf-8")
+    for relative in (
+        "docs/paper_rebuild/ACTIVE_CONTEXT.md",
+        "docs/paper_rebuild/NEXT_ACTIONS.md",
+        "docs/paper_rebuild/CLEAN3R2_STATUS.md",
+    ):
+        target = repo / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(f"authorization governance for {relative}\n", encoding="utf-8")
     freeze_path = repo / s3.FREEZE_PATH
     freeze_path.parent.mkdir(parents=True, exist_ok=True)
     freeze = {
-        "schema_version": "paper_rebuild.clean3_s3_execution_freeze.v1",
+        "schema_version": "paper_rebuild.clean3r2_s3_execution_freeze.v1",
         "stage_id": s3.STAGE_ID, "protocol_id": s3.PROTOCOL_ID,
+        "case_id": s3.CASE_ID, "algorithm_id": s3.METHOD_ID, "run_id": s3.RUN_ID,
+        "code_freeze_commit": code_freeze,
         "runner_freeze_commit": runner_freeze,
         "repair_implementation_commit": repair,
-        "pre_parity_context_commit": pre,
-        "supersedes_runner_freeze_commit": old_c1,
-        "supersedes_authorization_commit": old_c2,
-        "supersession_reason": "PRE_STAGE_MANIFEST_PROVENANCE_CONTRACT_REPAIR",
-        "superseded_authorization_s3_started": False,
+        "amendment_parent_head": amendment_parent,
+        "failed_attempt_stage_id": s3.FAILED_ATTEMPT_STAGE_ID,
+        "failed_attempt_terminal": s3.FAILED_ATTEMPT_TERMINAL,
+        "failed_attempt_parity": s3.FAILED_ATTEMPT_PARITY,
+        "failed_attempt_execution_commit": s3.FAILED_ATTEMPT_EXECUTION_COMMIT,
+        "failed_attempt_runner_freeze_commit": s3.FAILED_ATTEMPT_RUNNER_FREEZE_COMMIT,
         "final_cpp_tree": _git(repo, "rev-parse", "HEAD:cpp"),
         "tracked_file_sha256": {relative: sha256_file(repo / relative) for relative in s3.FROZEN_CODE_PATHS},
+        "authorization_document": s3.AUTHORIZATION_PATH,
+        "authorization_sha256": sha256_file(authorization_path),
+        "authorization_hash_algorithm": "sha256",
+        "execution_authorization": {
+            "s3_solver_allowed_now": True,
+            "maximum_solver_executions": 1,
+            "evaluator_allowed_now": False,
+            "reference_trace_allowed_now": False,
+            "canonical_541_allowed_now": False,
+            "provider_regeneration_allowed_now": False,
+            "retry_allowed_now": False,
+        },
+        "old_attempt_overwritten": False,
+        "ready_for_s4": False,
+        "ready_for_paper_claims": False,
     }
     freeze_path.write_text(json.dumps(freeze, sort_keys=True), encoding="utf-8")
-    _git(repo, "add", s3.FREEZE_PATH)
-    _git(repo, "commit", "-qm", "authorize S3")
+    _git(repo, "add", ".")
+    _git(repo, "commit", "-qm", "authorize CLEAN3R2 S3")
 
     clean = tmp_path / "clean"
     raw = tmp_path / "raw"
@@ -278,7 +303,8 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     return {"inputs": inputs, "providers": providers, "raw": raw, "repo": repo, "clean": clean,
             "freeze": freeze, "freeze_path": freeze_path, "clean_manifest": clean_manifest,
             "auxiliary_manifest": auxiliary_manifest, "parity_report": parity_report,
-            "old_c1": old_c1, "old_c2": old_c2, "runner_freeze": runner_freeze}
+            "authorization_path": authorization_path, "runner_freeze": runner_freeze,
+            "code_freeze": code_freeze, "amendment_parent": amendment_parent}
 
 
 def _solver_manifest(providers: dict[str, Path]) -> dict[str, object]:
@@ -316,6 +342,16 @@ def _solver_manifest(providers: dict[str, Path]) -> dict[str, object]:
         "nine_factor_fgo_update_count": 0, "multi_state_qm_update_count": 0,
         "qa_fallback_count": 0, "contact_fk_update_count": 0,
     }
+
+
+def _amend_freeze(ctx: dict[str, object], freeze: dict[str, object], message: str) -> None:
+    path = ctx["freeze_path"]
+    assert isinstance(path, Path)
+    path.write_text(json.dumps(freeze, sort_keys=True), encoding="utf-8")
+    repo = ctx["repo"]
+    assert isinstance(repo, Path)
+    _git(repo, "add", s3.FREEZE_PATH)
+    _git(repo, "commit", "--amend", "-qm", message)
 
 
 def _runner(ctx, *, mismatch=False, mutate=None, syscall_extra="", solver_returncode=0,
@@ -572,48 +608,118 @@ def test_dirty_worktree_rejected_before_commands(fake_s3) -> None:
     assert commands == []
 
 
-def test_wrong_lineage_rejected_before_commands(fake_s3, monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(s3, "REPAIR_IMPLEMENTATION_COMMIT", "0" * 40)
-    runner, commands = _runner(fake_s3)
-    with pytest.raises(s3.Clean3S3Error) as caught:
-        s3.run_s3_ab0000_parity(fake_s3["inputs"], command_runner=runner)
-    assert caught.value.terminal_status == "FAILED_TECHNICAL_FREEZE_CONTRACT"
-    assert commands == []
+def test_clean3r2_freeze_contract_valid_pass(fake_s3) -> None:
+    identity = s3._guard_git(fake_s3["repo"])
+    assert identity["code_freeze_commit"] == fake_s3["code_freeze"]
+    assert identity["runner_freeze_commit"] == fake_s3["runner_freeze"]
+    assert identity["authorization_document"] == s3.AUTHORIZATION_PATH
+    assert identity["maximum_solver_executions"] == 1
 
 
-def test_cpp_scope_drift_rejected_before_commands(fake_s3) -> None:
-    extra = fake_s3["repo"] / "cpp/extra.cpp"
-    extra.write_text("scope drift\n", encoding="utf-8")
-    _git(fake_s3["repo"], "add", ".")
-    _git(fake_s3["repo"], "commit", "-qm", "cpp scope drift")
-    runner, commands = _runner(fake_s3)
-    with pytest.raises(s3.Clean3S3Error) as caught:
-        s3.run_s3_ab0000_parity(fake_s3["inputs"], command_runner=runner)
-    assert caught.value.terminal_status == "FAILED_TECHNICAL_FREEZE_LINEAGE"
-    assert commands == []
-
-
-def test_replacement_c1b_scope_drift_rejected(fake_s3, monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(s3, "C1B_APPROVED_PATHS", s3.C1B_APPROVED_PATHS[:-1])
-    runner, commands = _runner(fake_s3)
-    with pytest.raises(s3.Clean3S3Error) as caught:
-        s3.run_s3_ab0000_parity(fake_s3["inputs"], command_runner=runner)
-    assert caught.value.terminal_status == "FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT"
-    assert commands == []
-
-
-def test_superseded_lineage_drift_rejected(fake_s3, monkeypatch: pytest.MonkeyPatch) -> None:
+@pytest.mark.parametrize(("field", "value"), [
+    ("schema_version", "paper_rebuild.clean3_s3_execution_freeze.v1"),
+    ("stage_id", "WRONG_STAGE"),
+    ("protocol_id", "WRONG_PROTOCOL"),
+    ("case_id", "WRONG_CASE"),
+    ("algorithm_id", "AB0001"),
+    ("run_id", "WRONG_RUN"),
+])
+def test_clean3r2_freeze_schema_and_identity_drift_fail_closed(
+    fake_s3, field: str, value: str,
+) -> None:
     freeze = dict(fake_s3["freeze"])
-    freeze["supersedes_authorization_commit"] = fake_s3["old_c1"]
-    fake_s3["freeze_path"].write_text(json.dumps(freeze, sort_keys=True), encoding="utf-8")
-    _git(fake_s3["repo"], "add", s3.FREEZE_PATH)
-    _git(fake_s3["repo"], "commit", "--amend", "-qm", "bad supersession authorization")
-    monkeypatch.setattr(s3, "SUPERSEDED_AUTHORIZATION_COMMIT", fake_s3["old_c1"])
-    runner, commands = _runner(fake_s3)
+    freeze[field] = value
+    _amend_freeze(fake_s3, freeze, f"bad {field}")
     with pytest.raises(s3.Clean3S3Error) as caught:
-        s3.run_s3_ab0000_parity(fake_s3["inputs"], command_runner=runner)
+        s3._guard_git(fake_s3["repo"])
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_FREEZE_CONTRACT"
+
+
+def test_repair_lineage_drift_rejected(fake_s3, monkeypatch: pytest.MonkeyPatch) -> None:
+    repair = fake_s3["runner_freeze"]
+    monkeypatch.setattr(s3, "REPAIR_IMPLEMENTATION_COMMIT", repair)
+    freeze = dict(fake_s3["freeze"])
+    freeze["repair_implementation_commit"] = repair
+    _amend_freeze(fake_s3, freeze, "bad repair lineage")
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        s3._guard_git(fake_s3["repo"])
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_WRONG_CODE_LINEAGE"
+
+
+def test_code_freeze_parent_drift_rejected(fake_s3, monkeypatch: pytest.MonkeyPatch) -> None:
+    wrong_parent = s3.REPAIR_IMPLEMENTATION_COMMIT
+    monkeypatch.setattr(s3, "AMENDMENT_PARENT_HEAD", wrong_parent)
+    freeze = dict(fake_s3["freeze"])
+    freeze["amendment_parent_head"] = wrong_parent
+    _amend_freeze(fake_s3, freeze, "bad runner parent")
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        s3._guard_git(fake_s3["repo"])
     assert caught.value.terminal_status == "FAILED_TECHNICAL_FREEZE_LINEAGE"
-    assert commands == []
+
+
+def test_successor_runner_freeze_parent_drift_rejected(fake_s3) -> None:
+    freeze = dict(fake_s3["freeze"])
+    freeze["runner_freeze_commit"] = _git(fake_s3["repo"], "rev-parse", "HEAD")
+    _amend_freeze(fake_s3, freeze, "bad successor runner parent")
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        s3._guard_git(fake_s3["repo"])
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_FREEZE_LINEAGE"
+
+
+@pytest.mark.parametrize(
+    "scope_name", ["S0_CODE_FREEZE_CHANGED_PATHS", "RUNNER_FREEZE_CHANGED_PATHS"],
+)
+def test_predecessor_and_successor_scope_drift_rejected(
+    fake_s3, monkeypatch: pytest.MonkeyPatch, scope_name: str,
+) -> None:
+    approved = getattr(s3, scope_name)
+    monkeypatch.setattr(s3, scope_name, approved[:-1])
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        s3._guard_git(fake_s3["repo"])
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT"
+
+
+def test_authorization_commit_scope_drift_rejected(fake_s3) -> None:
+    extra = fake_s3["repo"] / "docs/paper_rebuild/EXTRA.md"
+    extra.write_text("scope drift\n", encoding="utf-8")
+    _git(fake_s3["repo"], "add", extra.relative_to(fake_s3["repo"]).as_posix())
+    _git(fake_s3["repo"], "commit", "--amend", "-qm", "bad authorization scope")
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        s3._guard_git(fake_s3["repo"])
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT"
+
+
+def test_authorization_hash_drift_rejected(fake_s3) -> None:
+    freeze = dict(fake_s3["freeze"])
+    freeze["authorization_sha256"] = "0" * 64
+    _amend_freeze(fake_s3, freeze, "bad authorization hash")
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        s3._guard_git(fake_s3["repo"])
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_AUTHORIZATION_HASH_MISMATCH"
+
+
+@pytest.mark.parametrize(("field", "value"), [
+    ("failed_attempt_stage_id", "WRONG_FAILED_STAGE"),
+    ("failed_attempt_terminal", "WRONG_TERMINAL"),
+    ("failed_attempt_parity", "PASS"),
+])
+def test_old_failed_attempt_contract_drift_rejected(fake_s3, field: str, value: str) -> None:
+    freeze = dict(fake_s3["freeze"])
+    freeze[field] = value
+    _amend_freeze(fake_s3, freeze, f"bad old attempt {field}")
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        s3._guard_git(fake_s3["repo"])
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_FREEZE_CONTRACT"
+
+
+def test_execution_count_authorization_drift_rejected(fake_s3) -> None:
+    freeze = dict(fake_s3["freeze"])
+    freeze["execution_authorization"] = dict(freeze["execution_authorization"])
+    freeze["execution_authorization"]["maximum_solver_executions"] = 2
+    _amend_freeze(fake_s3, freeze, "bad execution count")
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        s3._guard_git(fake_s3["repo"])
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_AUTHORIZATION_CONTRACT"
 
 
 @pytest.mark.parametrize("relative", [
@@ -624,9 +730,7 @@ def test_same_path_frozen_byte_drift_rejected(fake_s3, relative: str) -> None:
     freeze = dict(fake_s3["freeze"])
     freeze["tracked_file_sha256"] = dict(freeze["tracked_file_sha256"])
     freeze["tracked_file_sha256"][relative] = "0" * 64
-    fake_s3["freeze_path"].write_text(json.dumps(freeze, sort_keys=True), encoding="utf-8")
-    _git(fake_s3["repo"], "add", s3.FREEZE_PATH)
-    _git(fake_s3["repo"], "commit", "--amend", "-qm", "authorize bad bytes")
+    _amend_freeze(fake_s3, freeze, "authorize bad bytes")
     runner, commands = _runner(fake_s3)
     with pytest.raises(s3.Clean3S3Error) as caught:
         s3.run_s3_ab0000_parity(fake_s3["inputs"], command_runner=runner)
