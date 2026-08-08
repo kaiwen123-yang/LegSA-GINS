@@ -182,18 +182,19 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   const bool clean2r2a_ablation_identity =
       options.stage_id == "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD" &&
       options.protocol_id == "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION";
-  const bool clean3_s3_ab0000_identity =
-      clean3_s3_ab0000_parity_mode &&
+  const bool clean3_s3_stage_identity =
       options.stage_id ==
-          "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE" &&
+          "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE" ||
+      options.stage_id ==
+          "CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME";
+  const bool clean3_s3_ab0000_identity =
+      clean3_s3_ab0000_parity_mode && clean3_s3_stage_identity &&
       options.protocol_id == "CLEAN3_S3_AB0000_PARITY" &&
       options.algorithm_id == "AB0000" && options.run_id == "CLEAN3_S3_AB0000";
   if (clean3_s3_ab0000_parity_mode && !clean3_s3_ab0000_identity) {
     formalContractFailure("CLEAN3 S3 parity mode identity mismatch");
   }
-  if (!clean3_s3_ab0000_parity_mode &&
-      options.stage_id ==
-          "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE") {
+  if (!clean3_s3_ab0000_parity_mode && clean3_s3_stage_identity) {
     formalContractFailure("CLEAN3 S3 parity mode requires its explicit guard key");
   }
   const bool data_mode_matches = (clean2r2a_ablation_identity || clean3_s3_ab0000_identity)
@@ -1087,7 +1088,9 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       boolOrDefault(kv, "clean3_s3_ab0000_parity_mode", false);
   const bool clean3_stage_requested =
       options.stage_id ==
-          "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE";
+          "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE" ||
+      options.stage_id ==
+          "CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME";
   if (clean3_stage_requested && !clean3_s3_guard_requested) {
     formalContractFailure("CLEAN3 S3 stage requires its explicit guard key");
   }

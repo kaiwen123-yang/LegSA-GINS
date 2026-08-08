@@ -221,8 +221,7 @@ void validateFormalRuntimeCounters(const PortOptions& options) {
   } else if (options.algorithm_id == "LegSA_Paper_V1") {
     counters_match = counters_match && receiver_active && yaw_active && raw_active &&
                      source_aware_active && go2_roll_pitch_active && go2_horizontal_active;
-  } else if (options.stage_id == "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD" &&
-             options.algorithm_id.size() == 6 && options.algorithm_id.rfind("AB", 0) == 0 &&
+  } else if (options.algorithm_id.size() == 6 && options.algorithm_id.rfind("AB", 0) == 0 &&
              std::all_of(options.algorithm_id.begin() + 2, options.algorithm_id.end(),
                          [](char value) { return value == '0' || value == '1'; })) {
     // 中文说明：runtime counter 必须证明每一位模块真实开关，而不是只相信配置旗标。
