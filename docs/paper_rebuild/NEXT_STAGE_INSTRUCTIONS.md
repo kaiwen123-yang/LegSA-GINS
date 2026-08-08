@@ -2,22 +2,22 @@
 
 ## Current Boundary
 
-- CLEAN3 terminal: `FAILED_TECHNICAL_S3_AB0000_FORMAL_COUNTER_CONTRACT_UNROUTED`.
-- S3 byte parity: `NOT_EVALUATED`.
-- `ready_for_S4=false`.
-- `ready_for_paper_claims=false`.
-- Canonical-541 restart: `NOT_AUTHORIZED`.
-- The 3641-entry schema-aligned rebind must not run because no CLEAN3 pass freeze exists.
+- CLEAN3R2 terminal: `FAILED_TECHNICAL_SOLVER_MANIFEST_CONTRACT`.
+- Formal S3 byte parity: `NOT_EVALUATED`.
+- The sole authorized attempt is consumed; retry is prohibited.
+- `ready_for_S4=false`; `ready_for_paper_claims=false`.
+- Evaluator, reference trace, performance metrics, S4, provider regeneration, the 3641/5951 rebind, and Canonical-541 are `NOT_AUTHORIZED`.
 
-## Only Permitted Next Proposal
+Unsealed NAV/STD hashes equal the locked anchors, but they are not parity evidence because the formal ledger, post-validation, seal, and stream comparison were not completed.
 
-A human may approve a new technical attempt with all of these constraints:
+## Only Permitted Future Proposal
 
-1. Extend only `cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp::validateFormalRuntimeCounters` so the exact CLEAN3/AB0000 identity reaches the existing AB counter contract.
-2. Do not change parity-locked mechanization, residuals, Jacobians, prediction, EKF update, or feedback mathematics.
-3. Persist the syscall ledger on failure as well as success.
-4. Use a new, non-overwriting stage identity; never resume or overwrite the failed attempt.
-5. Establish a new reviewed code freeze and a separate authorization commit before execution.
-6. Repeat S3 only after explicit human approval. S4, calibration, the 18-configuration rerun, rebind, evaluator execution, and Canonical-541 remain unauthorized.
+A human may separately consider a new technical-attempt proposal that:
 
-Do not generate `clean3_sa_calibration.yaml`, module-effect tables, or an 18-configuration result table while S3 parity remains `NOT_EVALUATED`.
+1. repairs the `PortRuntime::runFromConfig` provenance routing so the exact guarded CLEAN3R2 successor identity retains its loader-assigned S3 parity role;
+2. does not weaken manifest validation or change solver/parity mathematics, data handling, syscall auditing, or output semantics;
+3. uses a new non-overwriting stage identity and preserves both failed attempts and all existing outputs;
+4. establishes a new reviewed code/runner freeze and a separate human execution authorization; and
+5. authorizes at most one new attempt explicitly.
+
+This document is not that approval. Do not retry CLEAN3R2, edit the existing stage root, generate calibration or module-effect artifacts, run the evaluator, open the reference trace, start S4, perform rebind, or execute Canonical-541.

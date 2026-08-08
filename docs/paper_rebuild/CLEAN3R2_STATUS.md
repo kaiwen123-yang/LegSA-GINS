@@ -1,39 +1,36 @@
 # CLEAN3R2 Counter-Contract Routing Repair Status
 
-## Identity
+## Terminal Identity
 
 - Stage: `CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME`.
-- Branch: `stage/clean3-math-repair`.
-- Amendment parent: `9d51794d5c031cd0331d1fd8fe66d42c0fb690ed`.
-- Inherited math-repair commit: `0d8cc2bdccfd89b236ab4badeef9db5344dcf4d3`.
-- CLEAN3R2 code freeze: `8dd620ea6d9645b946a503275ddbf04d66c3baa2`.
-- CLEAN3R2 runner freeze: `5209b6afeeb2b2a0ad99e640ffe50f8dd3b0c909`.
-- Authorization SHA-256: `eb267045d32af7ae407129b8b53fb6f4c8ed8a6dd75b7889a5a0fb53c3223237`.
-- Current gate: `AUTHORIZED_S3_NOT_STARTED`.
+- Execution commit: `ed49dfa0d16690ad867535137d5a961d89216234`.
+- Code freeze: `8dd620ea6d9645b946a503275ddbf04d66c3baa2`.
+- Runner freeze: `5209b6afeeb2b2a0ad99e640ffe50f8dd3b0c909`.
+- Terminal: `FAILED_TECHNICAL_SOLVER_MANIFEST_CONTRACT`.
+- Formal S3 byte parity: `NOT_EVALUATED`.
+- The sole authorized attempt was consumed; `retry_count=0` and no retry is authorized.
 - `ready_for_S4=false`; `ready_for_paper_claims=false`.
 
-## S0 and S1 Closure
+## Exact Failure
 
-- `port_runtime.cpp::validateFormalRuntimeCounters` now routes a six-character binary `ABxxxx` identity by the AB algorithm shape rather than by the CLEAN2R2A stage identity.
-- The AB branch body, four named-method branches, position requirement, FGO/QA/QM/contact zero assertions, terminal `else`, and exception text are unchanged.
-- The exact CLEAN3R2 identity is accepted only under the existing guarded CLEAN3 S3 protocol, AB0000 algorithm, run, case, data-mode, and formal-contract checks. Canonical-541 is not authorized by the loader.
-- T1–T4, the loader bypass regression, and the CLEAN3R2 authorization-guard regressions passed. The latest focused set passed `65`; the complete suite passed `285` with `3 skipped`; the Release build and diff check passed.
-- The read-only reviewer approved the exact four-path implementation scope after the loader bypass regression was added.
-- The old CLEAN3 attempt remains sealed with terminal `FAILED_TECHNICAL_S3_AB0000_FORMAL_COUNTER_CONTRACT_UNROUTED`; its parity remains `NOT_EVALUATED` and it is not overwritten or relabeled.
+The loader correctly assigned `port_role=clean3_s3_ab0000_parity_solver` for the exact guarded CLEAN3R2 identity. `PortRuntime::runFromConfig`, however, overwrote every formal non-CLEAN2R2A stage with `port_role=clean1_formal_four_method_solver`. The persisted solver manifest therefore contained `clean1_formal_four_method_solver`, and the runner correctly rejected it with `solver manifest mismatch: port_role`.
 
-## Root Cause and Numerical Safety
+This is a provenance-routing failure after solver completion, not a counter-contract failure and not an observed parity mismatch. The AB0000 counters closed: position `274`, receiver velocity `274`, dual-yaw attempts `274`, Raw Doppler/source-aware/roll-pitch/horizontal-velocity counters all `0`, and all FGO/QM/QA/contact counters `0`. Covariance health was `PASS` with zero failures and `math_port_completed=true`.
 
-The previous S3 AB0000 run fell through the runtime counter validator because the AB counter branch required the CLEAN2R2A stage identity. This occurred after the filter loop and before `writeAll()`, so no NAV or STD existed and byte parity was not evaluated.
+## Evidence Boundary
 
-The repaired function only reads final activation counters and either returns or throws. It does not write filter state. Removing the stage conjunct cannot itself change NAV/STD bytes; S3 byte-for-byte comparison against the locked CLEAN1R2R1 anchors remains the numerical gate.
+- The unsealed NAV SHA-256 is `800f0dc12d77fe01ff5262c4261457e1ec178344dba3efb249464ed16696ebc0`.
+- The unsealed STD SHA-256 is `04ebff455853a89e3a32ebed5510a5c3b86acfa3b569448acd6c7b29c18a05e2`.
+- Those hashes equal the locked anchors, but they are not formal parity evidence: syscall-ledger persistence, manifest post-validation, output sealing, and the runner's stream comparison did not occur.
+- The formal syscall ledger, output seal, and outer run manifest are absent. The retained raw syscall trace SHA-256 is `7b1dc64106367279965a8de51988a4ff585b19533311e9c1b90d767e68f74d99`.
+- The terminal report SHA-256 is `bf14da4db81cfddd836056de2380078f1d2e77477334633a2198288ff3c024c7`; the runtime manifest SHA-256 is `e51cf3c2be1325d1b43065ec8174b0be2e232fa08c8cb658addc637c0844fb63`.
+- All 34 immutable roles were unchanged: 22 raw files, 5 providers, 3 manifests, 2 raw locks, and 2 anchors; `immutable_changed_roles=[]`.
+- No evaluator, reference trace, performance metric, S4 action, provider regeneration, rebind, or Canonical-541 execution occurred.
 
-## Authorized Next Gate
+The new attempt remains preserved under `<CLEAN_ROOT>/stages/CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME/`. The old CLEAN3 attempt also remains preserved; its terminal and parity remain `FAILED_TECHNICAL_S3_AB0000_FORMAL_COUNTER_CONTRACT_UNROUTED` and `NOT_EVALUATED`.
 
-After the authorization commit is clean and its hashes pass preflight, run exactly one CLEAN3R2 AB0000 S3 solver against `CLEAN1_BY2_CLEAN_NORMAL`. Do not run the evaluator or open the evaluation trace.
+## Closed Boundary
 
-- Exact NAV/STD byte parity permits S4.
-- Any byte mismatch terminates `BLOCKED_PARITY_REGRESSION_AB0000_MISMATCH`.
-- Any technical failure preserves parity as `NOT_EVALUATED` and terminates `FAILED_TECHNICAL_<reason>`.
-- S4–S9 remain inherited from the original CLEAN3 prompt. S5 still requires a new human confirmation of `clean3_sa_calibration.yaml` before S6.
+CLEAN3R2 is terminal at this gate. Any repair to `port_role` routing or any retry requires separate human approval, a new non-overwriting attempt identity, a reviewed freeze, and a separate execution authorization. A future proposal should repair the provenance routing in `PortRuntime::runFromConfig`; it must not weaken the runner's manifest validation.
 
-Canonical-541 execution, provider regeneration, the 3641/5951 rebind, merge, tag, and paper claims remain unauthorized.
+The 3641/5951 rebind remains deferred. S4, calibration, the 18-configuration rerun, evaluator use, Canonical-541, merge, tag, and paper claims remain unauthorized.

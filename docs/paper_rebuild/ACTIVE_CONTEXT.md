@@ -33,10 +33,13 @@
 - Final S2/C1b verified test result: `253 passed, 3 skipped`.
 - The old CLEAN3 supervisor terminal remains `FAILED_TECHNICAL_S3_AB0000_FORMAL_COUNTER_CONTRACT_UNROUTED`; its original S3 attempt terminal is `FAILED_TECHNICAL_SOLVER_EXECUTION` and its byte parity is `NOT_EVALUATED`.
 - Human authorization approved the non-overwriting CLEAN3R2 attempt. The exact counter-routing repair, guarded stage transport, T1–T4, loader bypass regression, Release build, and full `tests/paper_rebuild` validation are reviewer-approved at the new code/runner freeze.
-- Current gate: `AUTHORIZED_S3_NOT_STARTED`. After the separate authorization commit is clean and hash-verified, exactly one CLEAN3R2 AB0000 S3 solver is authorized; evaluator, evaluation trace, provider regeneration, retry, and Canonical-541 remain unauthorized.
-- `ready_for_S4=false`; no CLEAN3R2 parity, calibration result, module-effect result, or final CLEAN3R2 pass exists.
+- CLEAN3R2 consumed its sole authorized S3 attempt and terminated `FAILED_TECHNICAL_SOLVER_MANIFEST_CONTRACT`; formal byte parity is `NOT_EVALUATED` and `retry_count=0`.
+- The loader assigned `clean3_s3_ab0000_parity_solver`, but `PortRuntime::runFromConfig` overwrote the role for the formal non-CLEAN2R2A stage with `clean1_formal_four_method_solver`; the runner correctly rejected the persisted manifest role.
+- `ready_for_S4=false`; `ready_for_paper_claims=false`; evaluator, evaluation trace, performance metrics, S4, provider regeneration, retry, rebind, and Canonical-541 remain unauthorized.
 
 The old S3 execution used C1b `e28899156b03b32d3840476bf57ac01807494086`, C2b/execution HEAD `3110131cbbb64caff71a4e493a0b64365e6fb936`, and final `cpp/` tree `40baa12045d6100e3342fd92a01079d253705a45`. Configure/build succeeded, but the solver failed before `writeAll`: the runtime config correctly selected CLEAN3/AB0000 while `port_runtime.cpp::validateFormalRuntimeCounters` routed its AB counter contract only for CLEAN2R2A, so `counters_match` became false unconditionally. This was a technical routing failure, not an observed mathematical parity mismatch. No NAV, STD, run manifest, outer manifest, output seal, or byte comparison exists; old-attempt parity therefore remains `NOT_EVALUATED`. CLEAN3R2 preserves that attempt and uses a new stage root.
+
+The CLEAN3R2 solver completed with the valid AB0000 counter pattern, but the provenance-role mismatch stopped the runner before formal ledger persistence, manifest post-validation, sealing, and stream comparison. The unsealed NAV/STD hashes equal the locked anchors; they cannot be promoted to parity evidence. The formal ledger, seal, and outer manifest are absent, all 34 immutable roles were unchanged, and no evaluator or reference trace was used. Any repair or new attempt requires separate human approval, a new non-overwriting identity, and a new freeze/authorization chain.
 
 ## Inherited Locked Identities
 
