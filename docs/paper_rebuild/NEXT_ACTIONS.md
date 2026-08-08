@@ -12,7 +12,7 @@
 
 The loader set the exact CLEAN3R2 S3 role, but `PortRuntime::runFromConfig` overwrote it with the generic formal four-method role. The runner correctly rejected the actual manifest. Unsealed NAV/STD hashes equal the anchors, but the formal ledger, post-validation, seal, and stream comparison did not occur, so those files are not parity evidence.
 
-Do not retry, start S4, generate calibration or module-effect artifacts, run the evaluator, open the reference trace, regenerate providers, perform the 3641/5951 rebind, or execute Canonical-541. A future provenance-routing repair is proposal-only until a human approves a new non-overwriting attempt identity and freeze/authorization chain. Manifest validation must not be weakened. The CLEAN1 material below is retained protocol history and is not an active execution authorization.
+The newer human authorization creates the non-overwriting `CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX` route. First close the bounded stage/role repair and one compact readiness gate. Then freeze the repaired solver/config, audit provider reuse, rebuild all 5951 method-bound manifests, execute and seal 5951 unique identities, and only afterward run the exact offline evaluator. The old CLEAN3/CLEAN3R2 failures and old Canonical-541 attempt remain immutable; manifest validation is not weakened.
 
 ## CLEAN0 Closure
 

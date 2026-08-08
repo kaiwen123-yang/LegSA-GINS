@@ -2,7 +2,7 @@
 
 ## Identity
 
-- Active program: `STAGE_ID=CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME`.
+- Active program: `STAGE_ID=CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX` preparation and compact-readiness implementation.
 - Base main commit: `9f9727b74f5195141523ab570380cc35006f3d18`.
 - Active Git branch: `stage/clean3-math-repair`.
 - Reviewed S2 math-repair commit: `0d8cc2bdccfd89b236ab4badeef9db5344dcf4d3`.
@@ -35,7 +35,7 @@
 - Human authorization approved the non-overwriting CLEAN3R2 attempt. The exact counter-routing repair, guarded stage transport, T1–T4, loader bypass regression, Release build, and full `tests/paper_rebuild` validation are reviewer-approved at the new code/runner freeze.
 - CLEAN3R2 consumed its sole authorized S3 attempt and terminated `FAILED_TECHNICAL_SOLVER_MANIFEST_CONTRACT`; formal byte parity is `NOT_EVALUATED` and `retry_count=0`.
 - The loader assigned `clean3_s3_ab0000_parity_solver`, but `PortRuntime::runFromConfig` overwrote the role for the formal non-CLEAN2R2A stage with `clean1_formal_four_method_solver`; the runner correctly rejected the persisted manifest role.
-- `ready_for_S4=false`; `ready_for_paper_claims=false`; evaluator, evaluation trace, performance metrics, S4, provider regeneration, retry, rebind, and Canonical-541 remain unauthorized.
+- A newer explicit human authorization permits one non-overwriting repaired Canonical-541 completion after the compact readiness gate. This implementation turn does not itself run the solver, providers, evaluator, clean-18, or matrix. `ready_for_paper_claims=false` remains unchanged.
 
 The old S3 execution used C1b `e28899156b03b32d3840476bf57ac01807494086`, C2b/execution HEAD `3110131cbbb64caff71a4e493a0b64365e6fb936`, and final `cpp/` tree `40baa12045d6100e3342fd92a01079d253705a45`. Configure/build succeeded, but the solver failed before `writeAll`: the runtime config correctly selected CLEAN3/AB0000 while `port_runtime.cpp::validateFormalRuntimeCounters` routed its AB counter contract only for CLEAN2R2A, so `counters_match` became false unconditionally. This was a technical routing failure, not an observed mathematical parity mismatch. No NAV, STD, run manifest, outer manifest, output seal, or byte comparison exists; old-attempt parity therefore remains `NOT_EVALUATED`. CLEAN3R2 preserves that attempt and uses a new stage root.
 
@@ -89,4 +89,4 @@ Active runtime evidence may come only from `<CLEAN_ROOT>` and only when its mani
 
 All CLEAN2R2A1 full-minus-strong and RD/SA/RP/HV module-effect numbers are `SUPERSEDED_BY_CLEAN3_PENDING_RERUN`. They may be retained as history but cannot support an active claim, threshold adjustment, or tuning decision.
 
-CLEAN3R2 does not authorize Canonical-541 solving, D01-D60, BY3/XB/PG, DA studies, QM/QA/FGO, kernel comparisons, trace-online use, per-case tuning, paper figures, performance claims, merge, or release tagging. Canonical-541 restart is `NOT_AUTHORIZED`.
+The tracked `canonical541_repaired_execution_authorization.yaml` and `CLEAN3R4_CANONICAL541_REPAIRED_EXECUTION_AUTHORIZATION.md` supersede only the old Canonical-541 execution denial. They authorize the frozen D01-D60 x 9 matrix after readiness, provider-reuse proof, and method-bound rebuild. BY3/XB/PG, new degradation design, QM/QA/FGO expansion, trace-online use, per-case tuning, literature comparison, merge, and release tagging remain unauthorized.

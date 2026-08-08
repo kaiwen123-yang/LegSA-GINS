@@ -1,0 +1,16 @@
+schema_version: paper_rebuild.canonical_by2_internal_ablation.v1
+stage_id: CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX
+case_count: 541
+logical_row_count: 4869
+bit_order: [RD, SA, RP, HV]
+methods:
+  - {method_id: A01, name: LegSA_full, effective_profile: AB1111, execution_profile: LegSA_Paper_V1, full_alias_method_id: F04}
+  - {method_id: A02, name: strong_backbone, effective_profile: AB0000, execution_profile: strong_dual_yaw_EKF, full_alias_method_id: F03}
+  - {method_id: A03, name: LegSA_no_raw_doppler, effective_profile: AB0111}
+  - {method_id: A04, name: LegSA_no_source_aware, effective_profile: AB1011}
+  - {method_id: A05, name: LegSA_no_go2_roll_pitch, effective_profile: AB1101}
+  - {method_id: A06, name: LegSA_no_go2_horizontal_velocity, effective_profile: AB1110}
+  - {method_id: A07, name: LegSA_no_go2_priors, effective_profile: AB1100}
+  - {method_id: A08, name: Raw_Doppler_only_on_strong, effective_profile: AB1000}
+  - {method_id: A09, name: Source_aware_only_on_strong, effective_profile: AB0100}
+forbidden_axes: [FGO, multi_state_QM, QA_fallback, contact_FK]

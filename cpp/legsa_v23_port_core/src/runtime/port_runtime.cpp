@@ -1119,9 +1119,12 @@ void PortRuntime::runFromConfig(const std::string& config_path,
     // 中文说明：formal identity 已由 loader 严格校验，禁止后续 N*/PAPER10E0 路由覆盖。
     options.phase = options.stage_id;
     options.run_label = options.run_id;
-    options.parity_attempted =
-        options.clean_final_v23_parity_mode && options.algorithm_id == "strong_dual_yaw_EKF";
-    options.real_clean_replay_attempted = true;
+    const bool canonical541_clean =
+        options.stage_id != "CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX" ||
+        options.case_id == "C00_clean_normal";
+    options.parity_attempted = canonical541_clean && options.clean_final_v23_parity_mode &&
+                               options.algorithm_id == "strong_dual_yaw_EKF";
+    options.real_clean_replay_attempted = canonical541_clean;
     options.engineering_backbone_parity_only = options.parity_attempted;
   } else {
     options.phase = "N4H4R3";

@@ -140,6 +140,32 @@ bool isClean2r2aAblationId(const std::string& algorithm_id) {
                      [](char value) { return value == '0' || value == '1'; });
 }
 
+bool isCanonical541AblationId(const std::string& algorithm_id) {
+  const std::array<const char*, 7> allowed{{
+      "AB0111", "AB1011", "AB1101", "AB1110", "AB1100", "AB1000", "AB0100",
+  }};
+  return std::any_of(allowed.begin(), allowed.end(), [&algorithm_id](const char* value) {
+    return algorithm_id == value;
+  });
+}
+
+bool isCanonical541CaseId(const std::string& case_id) {
+  if (case_id == "C00_clean_normal") {
+    return true;
+  }
+  if (case_id.size() != 11 || case_id[0] != 'D' || case_id[3] != '_' ||
+      case_id.substr(4, 5) != "seed_" ||
+      !std::isdigit(static_cast<unsigned char>(case_id[1])) ||
+      !std::isdigit(static_cast<unsigned char>(case_id[2])) ||
+      !std::isdigit(static_cast<unsigned char>(case_id[9])) ||
+      !std::isdigit(static_cast<unsigned char>(case_id[10]))) {
+    return false;
+  }
+  const int degradation = (case_id[1] - '0') * 10 + (case_id[2] - '0');
+  const int seed = (case_id[9] - '0') * 10 + (case_id[10] - '0');
+  return degradation >= 1 && degradation <= 60 && seed >= 0 && seed <= 8;
+}
+
 void validateFormalMethodContract(const std::unordered_map<std::string, std::string>& kv,
                                   PortOptions& options) {
   const bool clean3_s3_ab0000_parity_mode =
@@ -182,6 +208,9 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   const bool clean2r2a_ablation_identity =
       options.stage_id == "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD" &&
       options.protocol_id == "CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION";
+  const bool canonical541_identity =
+      options.stage_id == "CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX" &&
+      options.protocol_id == "CANONICAL541_BY2_CONTROLLED_DEGRADATION";
   const bool clean3_s3_stage_identity =
       options.stage_id ==
           "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE" ||
@@ -199,21 +228,30 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   if (!clean3_s3_ab0000_parity_mode && clean3_s3_stage_identity) {
     formalContractFailure("CLEAN3 S3 parity mode requires its explicit guard key");
   }
-  const bool data_mode_matches = (clean2r2a_ablation_identity || clean3_s3_ab0000_identity)
-                                     ? options.data_mode == "real_clean"
-                                     : options.data_mode == "real_by2_raw";
+  const bool canonical541_data_mode_matches =
+      options.case_id == "C00_clean_normal"
+          ? options.data_mode == "real_clean"
+          : options.data_mode == "real_base_controlled_degradation";
+  const bool data_mode_matches = canonical541_identity
+                                     ? canonical541_data_mode_matches
+                                     : (clean2r2a_ablation_identity || clean3_s3_ab0000_identity)
+                                           ? options.data_mode == "real_clean"
+                                           : options.data_mode == "real_by2_raw";
+  const bool case_id_matches = canonical541_identity
+                                   ? isCanonical541CaseId(options.case_id)
+                                   : options.case_id == "CLEAN1_BY2_CLEAN_NORMAL";
   if ((!clean1_v1_identity && !clean1r1c_v2_identity && !clean1r2r1_final_v23_identity &&
-       !clean2r2a_ablation_identity && !clean3_s3_ab0000_identity) ||
-      options.case_id != "CLEAN1_BY2_CLEAN_NORMAL" || !data_mode_matches ||
+       !clean2r2a_ablation_identity && !clean3_s3_ab0000_identity && !canonical541_identity) ||
+      !case_id_matches || !data_mode_matches ||
       options.run_id.empty()) {
     formalContractFailure("formal stage/protocol/case/data_mode/run identity mismatch");
   }
   // 保留 CLEAN1 的逐字合同，同时只为 CLEAN2R2A 要求同一 final_v23 parity mode。
   if ((options.clean_final_v23_parity_mode != clean1r2r1_final_v23_identity) &&
-      !clean2r2a_ablation_identity && !clean3_s3_ab0000_identity) {
+      !clean2r2a_ablation_identity && !clean3_s3_ab0000_identity && !canonical541_identity) {
     formalContractFailure("clean final_v23 parity mode/profile identity mismatch");
   }
-  if ((clean2r2a_ablation_identity || clean3_s3_ab0000_identity) &&
+  if ((clean2r2a_ablation_identity || clean3_s3_ab0000_identity || canonical541_identity) &&
       !options.clean_final_v23_parity_mode) {
     formalContractFailure("clean final_v23 parity mode/profile identity mismatch");
   }
@@ -280,8 +318,9 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
     expected_source_aware = true;
     expected_go2_roll_pitch = true;
     expected_go2_horizontal = true;
-  } else if ((clean2r2a_ablation_identity || clean3_s3_ab0000_identity) &&
-             isClean2r2aAblationId(options.algorithm_id)) {
+  } else if (((clean2r2a_ablation_identity || clean3_s3_ab0000_identity) &&
+              isClean2r2aAblationId(options.algorithm_id)) ||
+             (canonical541_identity && isCanonical541AblationId(options.algorithm_id))) {
     // 中文说明：AB 四位从左到右严格是 RD、SA、RP、HV；backbone 始终是 strong/final_v23。
     expected_dual = true;
     expected_receiver_velocity = true;
@@ -314,7 +353,9 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   options.enable_basic_dual_yaw_baseline = options.algorithm_id == "basic_dual_yaw_EKF";
   options.yaw_scheme_C_enabled = options.enable_dual_yaw_update && !options.enable_basic_dual_yaw_baseline;
   options.phase = options.stage_id;
-  options.port_role = clean3_s3_ab0000_identity
+  options.port_role = canonical541_identity
+                          ? "canonical541_formal_controlled_degradation_solver"
+                      : clean3_s3_ab0000_identity
                           ? "clean3_s3_ab0000_parity_solver"
                       : clean2r2a_ablation_identity
                           ? "clean2r2a_formal_clean_ablation_solver"

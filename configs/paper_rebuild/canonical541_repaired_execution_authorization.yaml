@@ -1,0 +1,42 @@
+schema_version: paper_rebuild.canonical541_repaired_execution_authorization.v1
+stage_id: CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX
+protocol_id: CANONICAL541_BY2_CONTROLLED_DEGRADATION
+runtime_role: canonical541_formal_controlled_degradation_solver
+scope: REPAIRED_CANONICAL541_AUTOMATIC_COMPLETION
+human_authorization_source: CLEAN3_REPAIRED_CANONICAL541_FAST_RESTART_AND_AUTOMATIC_COMPLETION
+execution_authorized: true
+solver_allowed_after_readiness_freeze: true
+evaluator_allowed_after_output_seal: true
+trace_allowed_online: false
+full_algorithm_execution_allowed: true
+internal_ablation_execution_allowed: true
+human_approval_required: false
+old_attempt_stage_id: CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX
+old_method_bound_formal_reuse_allowed: false
+provider_reuse_requires_hash_and_semantic_contract: true
+shared_gnss_reuse_requires_content_hash_validation: true
+method_bound_rebuild_required: true
+expected_case_count: 541
+expected_effective_config_count: 11
+expected_unique_run_count: 5951
+expected_logical_row_count: 7033
+ordering:
+  - compact_readiness_gate
+  - repaired_solver_config_freeze
+  - provider_reuse_audit
+  - method_bound_rebuild
+  - solver_execution
+  - output_seal
+  - offline_trace_evaluation
+  - aggregate_and_evidence_closure
+forbidden:
+  trace_used_online: false
+  receiver_imu_as_body_imu: false
+  final_v23_output_solver_input: false
+  LegSA_output_solver_input: false
+  per_case_tuning: false
+  output_only_correction: false
+  epoch_deleted_for_metric: false
+  metric_driven_rerun: false
+  old_runtime_input_count: 0
+  legacy_provider_input_count: 0
