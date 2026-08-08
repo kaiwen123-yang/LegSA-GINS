@@ -153,9 +153,14 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     _git(repo, "commit", "-qm", "preserved CLEAN3R3 C2R1 runner freeze")
     c2r1 = _git(repo, "rev-parse", "HEAD")
     for relative in s3.C2R2_CHANGED_PATHS:
+        (repo / relative).write_text(_git(ROOT, "show", f"{s3.C2R2_COMMIT}:{relative}"), encoding="utf-8")
+    _git(repo, "add", ".")
+    _git(repo, "commit", "-qm", "preserved CLEAN3R3 C2R2 runner freeze")
+    c2r2 = _git(repo, "rev-parse", "HEAD")
+    for relative in s3.C2R3_CHANGED_PATHS:
         (repo / relative).write_bytes((ROOT / relative).read_bytes())
     _git(repo, "add", ".")
-    _git(repo, "commit", "-qm", "CLEAN3R3 C2R2 runner freeze")
+    _git(repo, "commit", "-qm", "CLEAN3R3 C2R3 runner freeze")
     runner_freeze = _git(repo, "rev-parse", "HEAD")
 
     monkeypatch.setattr(s3, "REPAIR_IMPLEMENTATION_COMMIT", repair)
@@ -164,6 +169,7 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setattr(s3, "CODE_FREEZE_COMMIT", code_freeze)
     monkeypatch.setattr(s3, "REJECTED_RUNNER_FREEZE_COMMIT", rejected_runner_freeze)
     monkeypatch.setattr(s3, "C2R1_COMMIT", c2r1)
+    monkeypatch.setattr(s3, "C2R2_COMMIT", c2r2)
     monkeypatch.setattr(s3, "PRIOR_REVIEWED_CPP_TREE", prior_tree)
     authorization_path = repo / s3.AUTHORIZATION_PATH
     authorization_path.parent.mkdir(parents=True, exist_ok=True)
@@ -778,6 +784,14 @@ def test_cli_surface_has_separate_preflight_and_no_profile_selector() -> None:
         module.parser().parse_args(["s4"])
     with pytest.raises(SystemExit):
         module.parser().parse_args(["s3-ab0000-parity", "--profile", "AB0001"])
+
+
+def test_module_docstring_states_exact_two_operation_boundary() -> None:
+    assert s3.__doc__ is not None
+    assert "exactly two operations" in s3.__doc__
+    assert "zero-data governance preflight" in s3.__doc__
+    assert "one-shot S3 parity attempt" in s3.__doc__
+    assert "preflight never runs\nthe formal solver" in s3.__doc__
 
 
 def _sealed_preflight_fixture(tmp_path: Path, execution_head: str = "a" * 40):

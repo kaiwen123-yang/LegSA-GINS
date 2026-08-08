@@ -1,8 +1,9 @@
 """CLEAN3R3 governance preflight and one-shot S3 AB0000 parity orchestration.
 
-This module intentionally exposes one operation only.  It does not import an
-evaluator, generate providers, read performance metrics, or route to CLEAN2
-execution entrypoints.
+This module exposes exactly two operations: a zero-data governance preflight
+and a separately gated, one-shot S3 parity attempt.  The preflight never runs
+the formal solver; neither operation imports an evaluator, generates providers,
+reads performance metrics, or routes to CLEAN2 execution entrypoints.
 """
 
 from __future__ import annotations
@@ -38,6 +39,7 @@ AMENDMENT_PARENT_HEAD = "d311f7457d5b5b9be72ef2101cfa0db47e28614f"
 CODE_FREEZE_COMMIT = "d1fc2d4ac3070129595c81bea7e261c4f3b586f6"
 REJECTED_RUNNER_FREEZE_COMMIT = "0f8d12ec6465105e56309a0df62c1f165e01aa63"
 C2R1_COMMIT = "187e92796db8aa2a479b62249d7c1a945f4ad721"
+C2R2_COMMIT = "f3c5baff07beb9f20faaefd89c4e7ad4a05a7ab0"
 PRIOR_REVIEWED_CPP_TREE = "a3716d22acf95fb1e6028ae82acb2ae73e138bfc"
 RUNTIME_COUNTER_PATH = "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp"
 LOADER_EXTENSION_PATH = "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp"
@@ -67,6 +69,7 @@ C2R1_CHANGED_PATHS = (
     "tests/paper_rebuild/test_clean3_s3_parity_runner.py",
 )
 C2R2_CHANGED_PATHS = C2R1_CHANGED_PATHS
+C2R3_CHANGED_PATHS = C2R1_CHANGED_PATHS
 A0_CHANGED_PATHS = (
     "docs/paper_rebuild/CLEAN3R3/HARDCODE_INVENTORY.md",
     "docs/paper_rebuild/CLEAN3R3/AMENDMENT_1_SCOPE_AND_IMPLEMENTATION_AUTHORIZATION.md",
@@ -225,7 +228,8 @@ def _guard_git(repo: Path) -> dict[str, Any]:
     require_single_parent(CODE_FREEZE_COMMIT, AMENDMENT_PARENT_HEAD, "CLEAN3R3 C1")
     require_single_parent(REJECTED_RUNNER_FREEZE_COMMIT, CODE_FREEZE_COMMIT, "preserved CLEAN3R3 C2")
     require_single_parent(C2R1_COMMIT, REJECTED_RUNNER_FREEZE_COMMIT, "preserved CLEAN3R3 C2R1")
-    require_single_parent(runner_freeze, C2R1_COMMIT, "CLEAN3R3 C2R2")
+    require_single_parent(C2R2_COMMIT, C2R1_COMMIT, "preserved CLEAN3R3 C2R2")
+    require_single_parent(runner_freeze, C2R2_COMMIT, "CLEAN3R3 C2R3")
     require_single_parent(head, runner_freeze, "CLEAN3R3 C3")
     if _git(repo, "rev-parse", f"{head}^").stdout.strip() != runner_freeze:
         raise Clean3S3Error("execution HEAD is not exactly one authorization commit after runner freeze",
@@ -265,17 +269,23 @@ def _guard_git(repo: Path) -> dict[str, Any]:
         raise Clean3S3Error("C2R1 diff is outside the approved two repair paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     repair2_changed = tuple(sorted(
-        _git(repo, "diff", "--name-only", f"{C2R1_COMMIT}..{runner_freeze}").stdout.splitlines()
+        _git(repo, "diff", "--name-only", f"{C2R1_COMMIT}..{C2R2_COMMIT}").stdout.splitlines()
     ))
     if repair2_changed != tuple(sorted(C2R2_CHANGED_PATHS)):
         raise Clean3S3Error("C2R2 diff is outside the approved two repair paths",
+                            terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
+    repair3_changed = tuple(sorted(
+        _git(repo, "diff", "--name-only", f"{C2R2_COMMIT}..{runner_freeze}").stdout.splitlines()
+    ))
+    if repair3_changed != tuple(sorted(C2R3_CHANGED_PATHS)):
+        raise Clean3S3Error("C2R3 diff is outside the approved two repair paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     for tracked in (FREEZE_PATH, AUTHORIZATION_PATH):
         if _git(repo, "ls-files", "--error-unmatch", tracked, check=False).returncode != 0:
             raise Clean3S3Error("execution freeze or authorization is not tracked",
                                 terminal_status="FAILED_TECHNICAL_FREEZE_UNTRACKED")
     for ancestor in (
-        runner_freeze, C2R1_COMMIT, REJECTED_RUNNER_FREEZE_COMMIT, CODE_FREEZE_COMMIT,
+        runner_freeze, C2R2_COMMIT, C2R1_COMMIT, REJECTED_RUNNER_FREEZE_COMMIT, CODE_FREEZE_COMMIT,
         REPAIR_IMPLEMENTATION_COMMIT,
         AMENDMENT_PARENT_HEAD,
     ):
