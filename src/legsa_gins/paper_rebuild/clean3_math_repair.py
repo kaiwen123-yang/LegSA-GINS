@@ -47,6 +47,7 @@ C2R2_COMMIT = "f3c5baff07beb9f20faaefd89c4e7ad4a05a7ab0"
 C2R3_COMMIT = "244872ae18ebd3fdbb33aa8e035fba93f1dcfcd5"
 C2R4_COMMIT = "218059452c7774b3d4dc23bc722a9a2f6f8c9ae7"
 C2R5_COMMIT = "6602ac51de1a5fbb5faadb6bf91e1aab0f1882cc"
+C2R6_COMMIT = "e43194d87b28184690813b3f7834546f6d636e25"
 PRIOR_REVIEWED_CPP_TREE = "a3716d22acf95fb1e6028ae82acb2ae73e138bfc"
 RUNTIME_COUNTER_PATH = "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp"
 LOADER_EXTENSION_PATH = "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp"
@@ -80,6 +81,7 @@ C2R3_CHANGED_PATHS = C2R1_CHANGED_PATHS
 C2R4_CHANGED_PATHS = C2R1_CHANGED_PATHS
 C2R5_CHANGED_PATHS = C2R1_CHANGED_PATHS
 C2R6_CHANGED_PATHS = C2R1_CHANGED_PATHS
+C2R7_CHANGED_PATHS = C2R1_CHANGED_PATHS
 A0_CHANGED_PATHS = (
     "docs/paper_rebuild/CLEAN3R3/HARDCODE_INVENTORY.md",
     "docs/paper_rebuild/CLEAN3R3/AMENDMENT_1_SCOPE_AND_IMPLEMENTATION_AUTHORIZATION.md",
@@ -93,6 +95,7 @@ PREFLIGHT_TERMINAL_SCHEMA = "paper_rebuild.clean3r3_governance_preflight_termina
 PREFLIGHT_FAILURE_SCHEMA = "paper_rebuild.clean3r3_governance_preflight_failure.v1"
 PREFLIGHT_LOCK_SCHEMA = "paper_rebuild.clean3r3_governance_preflight_lock.v1"
 _LOCK_BEFORE_FLOCK_HOOK: Callable[[], None] | None = None
+_LOCK_AFTER_CREATOR_FLOCK_HOOK: Callable[[], None] | None = None
 PREFLIGHT_LEDGER_FIELDS = frozenset({
     "schema_version", "trace_subject", "exec_paths", "expected_exec_path", "exact_exec_subject",
     "read_attempt_paths", "write_attempt_paths", "accepting_config_open_count",
@@ -247,7 +250,8 @@ def _guard_git(repo: Path) -> dict[str, Any]:
     require_single_parent(C2R3_COMMIT, C2R2_COMMIT, "preserved CLEAN3R3 C2R3")
     require_single_parent(C2R4_COMMIT, C2R3_COMMIT, "preserved CLEAN3R3 C2R4")
     require_single_parent(C2R5_COMMIT, C2R4_COMMIT, "preserved CLEAN3R3 C2R5")
-    require_single_parent(runner_freeze, C2R5_COMMIT, "CLEAN3R3 C2R6")
+    require_single_parent(C2R6_COMMIT, C2R5_COMMIT, "preserved CLEAN3R3 C2R6")
+    require_single_parent(runner_freeze, C2R6_COMMIT, "CLEAN3R3 C2R7")
     require_single_parent(head, runner_freeze, "CLEAN3R3 C3")
     if _git(repo, "rev-parse", f"{head}^").stdout.strip() != runner_freeze:
         raise Clean3S3Error("execution HEAD is not exactly one authorization commit after runner freeze",
@@ -311,17 +315,24 @@ def _guard_git(repo: Path) -> dict[str, Any]:
         raise Clean3S3Error("C2R5 diff is outside the approved two repair paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     repair6_changed = tuple(sorted(
-        _git(repo, "diff", "--name-only", f"{C2R5_COMMIT}..{runner_freeze}").stdout.splitlines()
+        _git(repo, "diff", "--name-only", f"{C2R5_COMMIT}..{C2R6_COMMIT}").stdout.splitlines()
     ))
     if repair6_changed != tuple(sorted(C2R6_CHANGED_PATHS)):
         raise Clean3S3Error("C2R6 diff is outside the approved two repair paths",
+                            terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
+    repair7_changed = tuple(sorted(
+        _git(repo, "diff", "--name-only", f"{C2R6_COMMIT}..{runner_freeze}").stdout.splitlines()
+    ))
+    if repair7_changed != tuple(sorted(C2R7_CHANGED_PATHS)):
+        raise Clean3S3Error("C2R7 diff is outside the approved two repair paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     for tracked in (FREEZE_PATH, AUTHORIZATION_PATH):
         if _git(repo, "ls-files", "--error-unmatch", tracked, check=False).returncode != 0:
             raise Clean3S3Error("execution freeze or authorization is not tracked",
                                 terminal_status="FAILED_TECHNICAL_FREEZE_UNTRACKED")
     for ancestor in (
-        runner_freeze, C2R5_COMMIT, C2R4_COMMIT, C2R3_COMMIT, C2R2_COMMIT, C2R1_COMMIT,
+        runner_freeze, C2R6_COMMIT, C2R5_COMMIT, C2R4_COMMIT, C2R3_COMMIT, C2R2_COMMIT,
+        C2R1_COMMIT,
         REJECTED_RUNNER_FREEZE_COMMIT,
         CODE_FREEZE_COMMIT,
         REPAIR_IMPLEMENTATION_COMMIT,
@@ -1061,28 +1072,56 @@ def _preflight_namespace_lock(clean_root: Path):
         lock_stat = os.fstat(lock_fd)
         if not stat.S_ISREG(lock_stat.st_mode) or lock_stat.st_nlink != 1:
             raise OSError("namespace lock is not a single-linked regular file")
+        if created:
+            os.fchmod(lock_fd, 0o600)
+            lock_stat = os.fstat(lock_fd)
+        elif stat.S_IMODE(lock_stat.st_mode) != 0o600:
+            raise OSError("namespace lock permissions are not 0600")
         identity = {"schema_version": PREFLIGHT_LOCK_SCHEMA,
                     "st_dev": lock_stat.st_dev, "st_ino": lock_stat.st_ino}
-        if created:
-            payload = (json.dumps(identity, sort_keys=True, separators=(",", ":")) + "\n").encode()
-            os.write(lock_fd, payload); os.fsync(lock_fd)
-        os.lseek(lock_fd, 0, os.SEEK_SET)
-        stored = json.loads(os.read(lock_fd, 4096).decode("utf-8"))
-        if stored != identity:
-            raise OSError("namespace lock identity content mismatch")
         if _LOCK_BEFORE_FLOCK_HOOK is not None:
             _LOCK_BEFORE_FLOCK_HOOK()
         fcntl.flock(lock_fd, fcntl.LOCK_EX)
+        if created:
+            if _LOCK_AFTER_CREATOR_FLOCK_HOOK is not None:
+                _LOCK_AFTER_CREATOR_FLOCK_HOOK()
+            payload = (json.dumps(identity, sort_keys=True, separators=(",", ":")) + "\n").encode()
+            os.ftruncate(lock_fd, 0); os.lseek(lock_fd, 0, os.SEEK_SET)
+            offset = 0
+            while offset < len(payload):
+                try:
+                    written = os.write(lock_fd, payload[offset:])
+                except InterruptedError:
+                    continue
+                if written <= 0:
+                    raise OSError("short namespace lock identity write")
+                offset += written
+            os.ftruncate(lock_fd, len(payload)); os.fsync(lock_fd)
+        def read_identity() -> dict[str, Any]:
+            os.lseek(lock_fd, 0, os.SEEK_SET)
+            raw = os.read(lock_fd, 4097)
+            if not raw or len(raw) > 4096:
+                raise OSError("empty or oversized namespace lock identity")
+            try:
+                decoded = raw.decode("utf-8")
+                value = json.loads(decoded)
+            except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+                raise OSError("corrupt namespace lock identity") from exc
+            if not isinstance(value, dict):
+                raise OSError("namespace lock identity is not an object")
+            return value
+        if read_identity() != identity:
+            raise OSError("namespace lock identity content mismatch")
         def verify_lock() -> None:
             current_stat = os.fstat(lock_fd)
             named_stat = os.stat(".namespace.lock", dir_fd=current, follow_symlinks=False)
             if (not stat.S_ISREG(named_stat.st_mode) or named_stat.st_nlink != 1 or
+                    stat.S_IMODE(named_stat.st_mode) != 0o600 or stat.S_IMODE(current_stat.st_mode) != 0o600 or
                     (current_stat.st_dev, current_stat.st_ino, current_stat.st_mode, current_stat.st_nlink) !=
                     (named_stat.st_dev, named_stat.st_ino, named_stat.st_mode, named_stat.st_nlink) or
                     (current_stat.st_dev, current_stat.st_ino) != (identity["st_dev"], identity["st_ino"])):
                 raise OSError("namespace lock inode changed")
-            os.lseek(lock_fd, 0, os.SEEK_SET)
-            if json.loads(os.read(lock_fd, 4096).decode("utf-8")) != identity:
+            if read_identity() != identity:
                 raise OSError("namespace lock content changed")
         verify_lock()
         namespace = clean / PREFLIGHT_RELATIVE

@@ -173,9 +173,14 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     _git(repo, "commit", "-qm", "preserved CLEAN3R3 C2R5 runner freeze")
     c2r5 = _git(repo, "rev-parse", "HEAD")
     for relative in s3.C2R6_CHANGED_PATHS:
+        (repo / relative).write_text(_git(ROOT, "show", f"{s3.C2R6_COMMIT}:{relative}"), encoding="utf-8")
+    _git(repo, "add", ".")
+    _git(repo, "commit", "-qm", "preserved CLEAN3R3 C2R6 runner freeze")
+    c2r6 = _git(repo, "rev-parse", "HEAD")
+    for relative in s3.C2R7_CHANGED_PATHS:
         (repo / relative).write_bytes((ROOT / relative).read_bytes())
     _git(repo, "add", ".")
-    _git(repo, "commit", "-qm", "CLEAN3R3 C2R6 runner freeze")
+    _git(repo, "commit", "-qm", "CLEAN3R3 C2R7 runner freeze")
     runner_freeze = _git(repo, "rev-parse", "HEAD")
 
     monkeypatch.setattr(s3, "REPAIR_IMPLEMENTATION_COMMIT", repair)
@@ -188,6 +193,7 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setattr(s3, "C2R3_COMMIT", c2r3)
     monkeypatch.setattr(s3, "C2R4_COMMIT", c2r4)
     monkeypatch.setattr(s3, "C2R5_COMMIT", c2r5)
+    monkeypatch.setattr(s3, "C2R6_COMMIT", c2r6)
     monkeypatch.setattr(s3, "PRIOR_REVIEWED_CPP_TREE", prior_tree)
     authorization_path = repo / s3.AUTHORIZATION_PATH
     authorization_path.parent.mkdir(parents=True, exist_ok=True)
@@ -820,6 +826,7 @@ def test_module_docstring_states_exact_two_operation_boundary() -> None:
 def _write_namespace_lock(namespace: Path) -> None:
     lock = namespace / ".namespace.lock"
     lock.touch(mode=0o600)
+    lock.chmod(0o600)
     info = lock.stat()
     lock.write_text(json.dumps({"schema_version": s3.PREFLIGHT_LOCK_SCHEMA,
         "st_dev": info.st_dev, "st_ino": info.st_ino}, sort_keys=True, separators=(",", ":")) + "\n",
@@ -1185,6 +1192,51 @@ def test_replaced_lock_inode_cannot_enter_or_mutate_namespace(tmp_path: Path) ->
             (namespace / "ATTEMPT_000001").mkdir()
     release.set(); thread.join(5)
     assert failures and not (namespace / "ATTEMPT_000001").exists()
+
+
+def test_creator_initializes_lock_only_after_flock_and_opener_blocks(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import threading
+    clean = tmp_path / "clean"; clean.mkdir()
+    creator_paused, opener_before_flock, release = threading.Event(), threading.Event(), threading.Event()
+    calls = {"before": 0}
+    def before():
+        calls["before"] += 1
+        if calls["before"] == 2: opener_before_flock.set()
+    def after_creator(): creator_paused.set(); release.wait(5)
+    monkeypatch.setattr(s3, "_LOCK_BEFORE_FLOCK_HOOK", before)
+    monkeypatch.setattr(s3, "_LOCK_AFTER_CREATOR_FLOCK_HOOK", after_creator)
+    errors = []
+    def enter():
+        try:
+            with s3._preflight_namespace_lock(clean): pass
+        except Exception as exc: errors.append(exc)
+    first = threading.Thread(target=enter); first.start(); assert creator_paused.wait(5)
+    second = threading.Thread(target=enter); second.start(); assert opener_before_flock.wait(5)
+    assert second.is_alive()
+    release.set(); first.join(5); second.join(5)
+    assert not errors
+
+
+def test_lock_identity_full_write_loop_handles_short_writes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    clean = tmp_path / "clean"; clean.mkdir()
+    original = s3.os.write
+    monkeypatch.setattr(s3.os, "write", lambda fd, data: original(fd, data[:3]))
+    with s3._preflight_namespace_lock(clean):
+        pass
+    payload = json.loads((clean / s3.PREFLIGHT_RELATIVE / ".namespace.lock").read_text())
+    assert payload["schema_version"] == s3.PREFLIGHT_LOCK_SCHEMA
+
+
+@pytest.mark.parametrize(("content", "mode"), [(b"{", 0o600), (b"", 0o600), (b"{}", 0o666)])
+def test_corrupt_partial_or_permissive_lock_fails_closed(tmp_path: Path, content: bytes, mode: int) -> None:
+    clean = tmp_path / "clean"; namespace = clean / s3.PREFLIGHT_RELATIVE
+    namespace.mkdir(parents=True); lock = namespace / ".namespace.lock"
+    lock.write_bytes(content); lock.chmod(mode)
+    with pytest.raises(s3.Clean3S3Error) as caught:
+        with s3._preflight_namespace_lock(clean): pass
+    assert caught.value.terminal_status == "FAILED_TECHNICAL_PREFLIGHT_NAMESPACE"
 
 
 def test_s3_selection_race_fails_before_stage_creation(fake_s3, monkeypatch: pytest.MonkeyPatch) -> None:
