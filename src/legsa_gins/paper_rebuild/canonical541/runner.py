@@ -153,12 +153,98 @@ def materialize_method_bound_inputs(
     return payload
 
 
+class _FlowSequence(list[Any]):
+    """Marker for a solver-visible collection that must stay on its key line."""
+
+
+class _InlineCollectionDumper(yaml.SafeDumper):
+    pass
+
+
+def _represent_flow_sequence(
+    dumper: yaml.SafeDumper, value: _FlowSequence,
+) -> yaml.nodes.SequenceNode:
+    return dumper.represent_sequence("tag:yaml.org,2002:seq", value, flow_style=True)
+
+
+_InlineCollectionDumper.add_representer(_FlowSequence, _represent_flow_sequence)
+
+
+def _inline_collection(value: Any) -> Any:
+    if isinstance(value, Mapping):
+        # Keep mappings block-shaped: the lightweight C++ loader intentionally
+        # reads their indented scalar children as flat keys (for example arw).
+        return {str(key): _inline_collection(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return _FlowSequence(_inline_collection(item) for item in value)
+    return value
+
+
+_LOADER_JSON_LEXICAL_KEYS = frozenset({
+    "raw_doppler_backend_source_files",
+    "raw_doppler_backend_source_hashes",
+})
+
+
+def _loader_json_lexical(text: str, key: str) -> str:
+    """Recover the exact JSON string seen by the lightweight C++ loader."""
+
+    matches = [
+        line.split(":", 1)[1].strip()
+        for line in text.splitlines()
+        if line.startswith(f"{key}:")
+    ]
+    if len(matches) != 1 or not matches[0]:
+        raise CanonicalRunnerError(f"loader-consumed collection is not a same-line value: {key}")
+    lexical = matches[0]
+    yaml_value = yaml.safe_load(lexical)
+    if isinstance(yaml_value, str):
+        lexical = yaml_value
+    try:
+        decoded = json.loads(lexical)
+    except (TypeError, json.JSONDecodeError) as exc:
+        raise CanonicalRunnerError(f"loader-consumed collection is not JSON: {key}") from exc
+    if not isinstance(decoded, (list, dict)):
+        raise CanonicalRunnerError(f"loader-consumed JSON is not a collection: {key}")
+    return lexical
+
+
 def _replace_yaml_values(text: str, replacements: Mapping[str, Any]) -> str:
+    loader_lexical = {
+        key: _loader_json_lexical(text, key)
+        for key in _LOADER_JSON_LEXICAL_KEYS
+        if any(line.startswith(f"{key}:") for line in text.splitlines())
+    }
     payload = yaml.safe_load(text)
     if not isinstance(payload, dict):
         raise CanonicalRunnerError("runtime template is not YAML mapping")
     payload.update(replacements)
-    return yaml.safe_dump(payload, allow_unicode=True, sort_keys=False)
+    for key in _LOADER_JSON_LEXICAL_KEYS & replacements.keys():
+        value = replacements[key]
+        loader_lexical[key] = value if isinstance(value, str) else json.dumps(value, sort_keys=True)
+        # Apply the same fail-closed JSON collection validation to replacements.
+        json_value = json.loads(loader_lexical[key])
+        if not isinstance(json_value, (list, dict)):
+            raise CanonicalRunnerError(f"loader-consumed JSON is not a collection: {key}")
+
+    # Dump one top-level key at a time so nested mappings remain block-shaped,
+    # while the two stringOrDefault lineage fields retain the parent's exact
+    # JSON lexical bytes on their key line.  Quoting those JSON values would
+    # introduce escapes that the intentionally small C++ loader does not undo.
+    chunks: list[str] = []
+    for key, value in payload.items():
+        if key in loader_lexical:
+            chunks.append(f"{key}: {loader_lexical[key]}\n")
+            continue
+        chunks.append(yaml.dump(
+            {key: _inline_collection(value)}, Dumper=_InlineCollectionDumper,
+            allow_unicode=True, sort_keys=False, default_flow_style=False,
+            width=2**31 - 1,
+        ))
+    rendered = "".join(chunks)
+    for key in _LOADER_JSON_LEXICAL_KEYS & payload.keys():
+        _loader_json_lexical(rendered, key)
+    return rendered
 
 
 def runtime_profile_id(profile: MethodProfile) -> str:
