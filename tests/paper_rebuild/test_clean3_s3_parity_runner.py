@@ -168,9 +168,14 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     _git(repo, "commit", "-qm", "preserved CLEAN3R3 C2R4 runner freeze")
     c2r4 = _git(repo, "rev-parse", "HEAD")
     for relative in s3.C2R5_CHANGED_PATHS:
+        (repo / relative).write_text(_git(ROOT, "show", f"{s3.C2R5_COMMIT}:{relative}"), encoding="utf-8")
+    _git(repo, "add", ".")
+    _git(repo, "commit", "-qm", "preserved CLEAN3R3 C2R5 runner freeze")
+    c2r5 = _git(repo, "rev-parse", "HEAD")
+    for relative in s3.C2R6_CHANGED_PATHS:
         (repo / relative).write_bytes((ROOT / relative).read_bytes())
     _git(repo, "add", ".")
-    _git(repo, "commit", "-qm", "CLEAN3R3 C2R5 runner freeze")
+    _git(repo, "commit", "-qm", "CLEAN3R3 C2R6 runner freeze")
     runner_freeze = _git(repo, "rev-parse", "HEAD")
 
     monkeypatch.setattr(s3, "REPAIR_IMPLEMENTATION_COMMIT", repair)
@@ -182,6 +187,7 @@ def fake_s3(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setattr(s3, "C2R2_COMMIT", c2r2)
     monkeypatch.setattr(s3, "C2R3_COMMIT", c2r3)
     monkeypatch.setattr(s3, "C2R4_COMMIT", c2r4)
+    monkeypatch.setattr(s3, "C2R5_COMMIT", c2r5)
     monkeypatch.setattr(s3, "PRIOR_REVIEWED_CPP_TREE", prior_tree)
     authorization_path = repo / s3.AUTHORIZATION_PATH
     authorization_path.parent.mkdir(parents=True, exist_ok=True)
@@ -811,10 +817,19 @@ def test_module_docstring_states_exact_two_operation_boundary() -> None:
     assert "preflight never runs\nthe formal solver" in s3.__doc__
 
 
+def _write_namespace_lock(namespace: Path) -> None:
+    lock = namespace / ".namespace.lock"
+    lock.touch(mode=0o600)
+    info = lock.stat()
+    lock.write_text(json.dumps({"schema_version": s3.PREFLIGHT_LOCK_SCHEMA,
+        "st_dev": info.st_dev, "st_ino": info.st_ino}, sort_keys=True, separators=(",", ":")) + "\n",
+        encoding="utf-8")
+
+
 def _sealed_preflight_fixture(tmp_path: Path, execution_head: str = "a" * 40):
     namespace = tmp_path / s3.PREFLIGHT_RELATIVE
     namespace.mkdir(parents=True)
-    (namespace / ".namespace.lock").write_bytes(b"")
+    _write_namespace_lock(namespace)
     root = namespace / "ATTEMPT_000001"
     root.mkdir()
     report_path = root / "04_REPORT/CLEAN3R3_GOVERNANCE_PREFLIGHT_REPORT.json"
@@ -896,6 +911,15 @@ def test_sealed_governance_preflight_guard_is_hard_and_hash_bound(tmp_path: Path
     with pytest.raises(s3.Clean3S3Error) as caught:
         s3._governance_preflight_guard(tmp_path, {"execution_head": execution_head})
     assert caught.value.terminal_status == "FAILED_TECHNICAL_PREFLIGHT_TRACE_REPLAY"
+
+
+def test_preflight_rejects_external_symlinked_report_parent(tmp_path: Path) -> None:
+    root, *_ = _sealed_preflight_fixture(tmp_path)
+    report_parent = root / "04_REPORT"
+    external = tmp_path / "external-report"; report_parent.rename(external)
+    report_parent.symlink_to(external, target_is_directory=True)
+    with pytest.raises(s3.Clean3S3Error):
+        s3._governance_preflight_guard(tmp_path, {"execution_head": "a" * 40})
 
 
 @pytest.mark.parametrize("mutation", [
@@ -1011,7 +1035,7 @@ def test_preflight_namespace_rejects_noncanonical_gap_and_unexpected_entries(
 ) -> None:
     namespace = tmp_path / s3.PREFLIGHT_RELATIVE
     namespace.mkdir(parents=True)
-    (namespace / ".namespace.lock").write_bytes(b"")
+    _write_namespace_lock(namespace)
     target = namespace / entry
     if entry == "ATTEMPT_000001":
         target.symlink_to(tmp_path, target_is_directory=True)
@@ -1087,7 +1111,15 @@ def test_concurrent_preflight_claims_receive_distinct_contiguous_ordinals(
     clean = tmp_path / "clean"
     clean.mkdir()
     monkeypatch.setattr(s3, "_guard_git", lambda repo: {"execution_head": "b" * 40})
-    entered, release = threading.Event(), threading.Event()
+    entered, before_second_flock, release = threading.Event(), threading.Event(), threading.Event()
+    hook_count = {"value": 0}
+    hook_lock = threading.Lock()
+    def before_flock():
+        with hook_lock:
+            hook_count["value"] += 1
+            if hook_count["value"] == 2:
+                before_second_flock.set()
+    monkeypatch.setattr(s3, "_LOCK_BEFORE_FLOCK_HOOK", before_flock)
 
     @s3._locked_preflight
     def claim_only(repo, clean_root, *, _attempt_root=None, _git_identity=None):
@@ -1103,6 +1135,7 @@ def test_concurrent_preflight_claims_receive_distinct_contiguous_ordinals(
         first = pool.submit(claim_only, ROOT, clean)
         assert entered.wait(5)
         second = pool.submit(claim_only, ROOT, clean)
+        assert before_second_flock.wait(5)
         assert not second.done()
         release.set()
         results = [first.result(), second.result()]
@@ -1130,6 +1163,28 @@ def test_ordinary_failed_preflight_is_sealed_and_allows_later_attempt(
         fail_then_pass(ROOT, clean)
     assert s3._attempt_terminal(clean / s3.PREFLIGHT_RELATIVE / "ATTEMPT_000001")["terminal_status"] == "PREFLIGHT_FAILED"
     assert fail_then_pass(ROOT, clean)["attempt_ordinal"] == 2
+
+
+def test_replaced_lock_inode_cannot_enter_or_mutate_namespace(tmp_path: Path) -> None:
+    import threading
+    clean = tmp_path / "clean"; clean.mkdir()
+    held, release = threading.Event(), threading.Event()
+    failures = []
+    def holder():
+        try:
+            with s3._preflight_namespace_lock(clean):
+                held.set(); release.wait(5)
+        except s3.Clean3S3Error as exc:
+            failures.append(exc)
+    thread = threading.Thread(target=holder); thread.start(); assert held.wait(5)
+    namespace = clean / s3.PREFLIGHT_RELATIVE
+    lock = namespace / ".namespace.lock"; copied = lock.read_bytes()
+    lock.unlink(); lock.write_bytes(copied)
+    with pytest.raises(s3.Clean3S3Error):
+        with s3._preflight_namespace_lock(clean):
+            (namespace / "ATTEMPT_000001").mkdir()
+    release.set(); thread.join(5)
+    assert failures and not (namespace / "ATTEMPT_000001").exists()
 
 
 def test_s3_selection_race_fails_before_stage_creation(fake_s3, monkeypatch: pytest.MonkeyPatch) -> None:

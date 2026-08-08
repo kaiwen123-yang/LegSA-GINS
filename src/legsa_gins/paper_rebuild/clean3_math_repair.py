@@ -46,6 +46,7 @@ C2R1_COMMIT = "187e92796db8aa2a479b62249d7c1a945f4ad721"
 C2R2_COMMIT = "f3c5baff07beb9f20faaefd89c4e7ad4a05a7ab0"
 C2R3_COMMIT = "244872ae18ebd3fdbb33aa8e035fba93f1dcfcd5"
 C2R4_COMMIT = "218059452c7774b3d4dc23bc722a9a2f6f8c9ae7"
+C2R5_COMMIT = "6602ac51de1a5fbb5faadb6bf91e1aab0f1882cc"
 PRIOR_REVIEWED_CPP_TREE = "a3716d22acf95fb1e6028ae82acb2ae73e138bfc"
 RUNTIME_COUNTER_PATH = "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp"
 LOADER_EXTENSION_PATH = "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp"
@@ -78,6 +79,7 @@ C2R2_CHANGED_PATHS = C2R1_CHANGED_PATHS
 C2R3_CHANGED_PATHS = C2R1_CHANGED_PATHS
 C2R4_CHANGED_PATHS = C2R1_CHANGED_PATHS
 C2R5_CHANGED_PATHS = C2R1_CHANGED_PATHS
+C2R6_CHANGED_PATHS = C2R1_CHANGED_PATHS
 A0_CHANGED_PATHS = (
     "docs/paper_rebuild/CLEAN3R3/HARDCODE_INVENTORY.md",
     "docs/paper_rebuild/CLEAN3R3/AMENDMENT_1_SCOPE_AND_IMPLEMENTATION_AUTHORIZATION.md",
@@ -89,6 +91,8 @@ PREFLIGHT_SEAL_SCHEMA = "paper_rebuild.clean3r3_governance_preflight_seal.v1"
 PREFLIGHT_CLAIM_SCHEMA = "paper_rebuild.clean3r3_governance_preflight_claim.v1"
 PREFLIGHT_TERMINAL_SCHEMA = "paper_rebuild.clean3r3_governance_preflight_terminal.v1"
 PREFLIGHT_FAILURE_SCHEMA = "paper_rebuild.clean3r3_governance_preflight_failure.v1"
+PREFLIGHT_LOCK_SCHEMA = "paper_rebuild.clean3r3_governance_preflight_lock.v1"
+_LOCK_BEFORE_FLOCK_HOOK: Callable[[], None] | None = None
 PREFLIGHT_LEDGER_FIELDS = frozenset({
     "schema_version", "trace_subject", "exec_paths", "expected_exec_path", "exact_exec_subject",
     "read_attempt_paths", "write_attempt_paths", "accepting_config_open_count",
@@ -242,7 +246,8 @@ def _guard_git(repo: Path) -> dict[str, Any]:
     require_single_parent(C2R2_COMMIT, C2R1_COMMIT, "preserved CLEAN3R3 C2R2")
     require_single_parent(C2R3_COMMIT, C2R2_COMMIT, "preserved CLEAN3R3 C2R3")
     require_single_parent(C2R4_COMMIT, C2R3_COMMIT, "preserved CLEAN3R3 C2R4")
-    require_single_parent(runner_freeze, C2R4_COMMIT, "CLEAN3R3 C2R5")
+    require_single_parent(C2R5_COMMIT, C2R4_COMMIT, "preserved CLEAN3R3 C2R5")
+    require_single_parent(runner_freeze, C2R5_COMMIT, "CLEAN3R3 C2R6")
     require_single_parent(head, runner_freeze, "CLEAN3R3 C3")
     if _git(repo, "rev-parse", f"{head}^").stdout.strip() != runner_freeze:
         raise Clean3S3Error("execution HEAD is not exactly one authorization commit after runner freeze",
@@ -300,17 +305,23 @@ def _guard_git(repo: Path) -> dict[str, Any]:
         raise Clean3S3Error("C2R4 diff is outside the approved two repair paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     repair5_changed = tuple(sorted(
-        _git(repo, "diff", "--name-only", f"{C2R4_COMMIT}..{runner_freeze}").stdout.splitlines()
+        _git(repo, "diff", "--name-only", f"{C2R4_COMMIT}..{C2R5_COMMIT}").stdout.splitlines()
     ))
     if repair5_changed != tuple(sorted(C2R5_CHANGED_PATHS)):
         raise Clean3S3Error("C2R5 diff is outside the approved two repair paths",
+                            terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
+    repair6_changed = tuple(sorted(
+        _git(repo, "diff", "--name-only", f"{C2R5_COMMIT}..{runner_freeze}").stdout.splitlines()
+    ))
+    if repair6_changed != tuple(sorted(C2R6_CHANGED_PATHS)):
+        raise Clean3S3Error("C2R6 diff is outside the approved two repair paths",
                             terminal_status="FAILED_TECHNICAL_FREEZE_SCOPE_DRIFT")
     for tracked in (FREEZE_PATH, AUTHORIZATION_PATH):
         if _git(repo, "ls-files", "--error-unmatch", tracked, check=False).returncode != 0:
             raise Clean3S3Error("execution freeze or authorization is not tracked",
                                 terminal_status="FAILED_TECHNICAL_FREEZE_UNTRACKED")
     for ancestor in (
-        runner_freeze, C2R4_COMMIT, C2R3_COMMIT, C2R2_COMMIT, C2R1_COMMIT,
+        runner_freeze, C2R5_COMMIT, C2R4_COMMIT, C2R3_COMMIT, C2R2_COMMIT, C2R1_COMMIT,
         REJECTED_RUNNER_FREEZE_COMMIT,
         CODE_FREEZE_COMMIT,
         REPAIR_IMPLEMENTATION_COMMIT,
@@ -1039,17 +1050,47 @@ def _preflight_namespace_lock(clean_root: Path):
             if not stat.S_ISDIR(os.fstat(child).st_mode):
                 raise OSError("namespace component is not a directory")
             fds.append(child); current = child
-        lock_fd = os.open(".namespace.lock", os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600, dir_fd=current)
+        created = False
+        try:
+            lock_fd = os.open(".namespace.lock", os.O_CREAT | os.O_EXCL | os.O_RDWR | os.O_NOFOLLOW,
+                              0o600, dir_fd=current)
+            created = True
+        except FileExistsError:
+            lock_fd = os.open(".namespace.lock", os.O_RDWR | os.O_NOFOLLOW, dir_fd=current)
         fds.append(lock_fd)
         lock_stat = os.fstat(lock_fd)
         if not stat.S_ISREG(lock_stat.st_mode) or lock_stat.st_nlink != 1:
             raise OSError("namespace lock is not a single-linked regular file")
+        identity = {"schema_version": PREFLIGHT_LOCK_SCHEMA,
+                    "st_dev": lock_stat.st_dev, "st_ino": lock_stat.st_ino}
+        if created:
+            payload = (json.dumps(identity, sort_keys=True, separators=(",", ":")) + "\n").encode()
+            os.write(lock_fd, payload); os.fsync(lock_fd)
+        os.lseek(lock_fd, 0, os.SEEK_SET)
+        stored = json.loads(os.read(lock_fd, 4096).decode("utf-8"))
+        if stored != identity:
+            raise OSError("namespace lock identity content mismatch")
+        if _LOCK_BEFORE_FLOCK_HOOK is not None:
+            _LOCK_BEFORE_FLOCK_HOOK()
         fcntl.flock(lock_fd, fcntl.LOCK_EX)
+        def verify_lock() -> None:
+            current_stat = os.fstat(lock_fd)
+            named_stat = os.stat(".namespace.lock", dir_fd=current, follow_symlinks=False)
+            if (not stat.S_ISREG(named_stat.st_mode) or named_stat.st_nlink != 1 or
+                    (current_stat.st_dev, current_stat.st_ino, current_stat.st_mode, current_stat.st_nlink) !=
+                    (named_stat.st_dev, named_stat.st_ino, named_stat.st_mode, named_stat.st_nlink) or
+                    (current_stat.st_dev, current_stat.st_ino) != (identity["st_dev"], identity["st_ino"])):
+                raise OSError("namespace lock inode changed")
+            os.lseek(lock_fd, 0, os.SEEK_SET)
+            if json.loads(os.read(lock_fd, 4096).decode("utf-8")) != identity:
+                raise OSError("namespace lock content changed")
+        verify_lock()
         namespace = clean / PREFLIGHT_RELATIVE
         path_stat = os.stat(namespace, follow_symlinks=False)
         if (path_stat.st_dev, path_stat.st_ino) != (os.fstat(current).st_dev, os.fstat(current).st_ino):
             raise OSError("namespace parent identity changed")
         yield namespace
+        verify_lock()
         path_stat = os.stat(namespace, follow_symlinks=False)
         if (path_stat.st_dev, path_stat.st_ino) != (os.fstat(current).st_dev, os.fstat(current).st_ino):
             raise OSError("namespace parent identity changed")
@@ -1100,6 +1141,29 @@ def _attempt_terminal(attempt: Path) -> dict[str, Any] | None:
     claim = attempt / "ATTEMPT_CLAIM.json"
     report = attempt / "04_REPORT" / ("CLEAN3R3_GOVERNANCE_PREFLIGHT_REPORT.json"
         if terminal["terminal_status"] == "PREFLIGHT_OK" else "CLEAN3R3_GOVERNANCE_PREFLIGHT_FAILURE.json")
+    allowed_dirs = {"01_BUILD", "02_HARNESS", "02_HARNESS/configs", "02_HARNESS/logs",
+                    "03_SEAL", "04_REPORT"}
+    allowed_files = {"ATTEMPT_CLAIM.json", "TERMINAL.json", "01_BUILD/zero_data_loader",
+        "01_BUILD/zero_data_loader.cpp", "02_HARNESS/configs/CLEAN3R3_ZERO_DATA.yaml",
+        "02_HARNESS/configs/CANONICAL_T8_REJECT.yaml", "02_HARNESS/logs/compile_stdout.txt",
+        "02_HARNESS/logs/compile_stderr.txt", "02_HARNESS/logs/harness_stdout.txt",
+        "02_HARNESS/logs/harness_stderr.txt", "02_HARNESS/logs/SOLVER_FILE_OPEN_TRACE.raw",
+        "03_SEAL/ZERO_DATA_LOADER_READ_LEDGER.json", "03_SEAL/CLEAN3R3_GOVERNANCE_PREFLIGHT_SEAL.json",
+        "04_REPORT/CLEAN3R3_GOVERNANCE_PREFLIGHT_REPORT.json",
+        "04_REPORT/CLEAN3R3_GOVERNANCE_PREFLIGHT_FAILURE.json"}
+    for parent, dirs, files in os.walk(attempt, followlinks=False):
+        parent_path = Path(parent)
+        for name in dirs:
+            child = parent_path / name; relative = child.relative_to(attempt).as_posix()
+            if relative not in allowed_dirs or child.is_symlink() or not child.is_dir():
+                raise Clean3S3Error("unsafe preflight attempt directory",
+                                    terminal_status="FAILED_TECHNICAL_PREFLIGHT_NAMESPACE")
+        for name in files:
+            child = parent_path / name; relative = child.relative_to(attempt).as_posix()
+            if (relative not in allowed_files or child.is_symlink() or
+                    not stat.S_ISREG(child.lstat().st_mode)):
+                raise Clean3S3Error("unsafe preflight attempt leaf",
+                                    terminal_status="FAILED_TECHNICAL_PREFLIGHT_NAMESPACE")
     if (claim.is_symlink() or report.is_symlink() or not claim.is_file() or not report.is_file()
             or not stat.S_ISREG(claim.lstat().st_mode) or not stat.S_ISREG(report.lstat().st_mode)
             or terminal.get("claim_sha256") != sha256_file(claim)
