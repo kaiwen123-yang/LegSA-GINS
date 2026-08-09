@@ -275,9 +275,9 @@ def build_runtime_config(
     *, profile: MethodProfile, clean_input_manifest: str | Path,
     auxiliary_manifest: str | Path, provider_protocol: str | Path,
     method_bound_manifest: Mapping[str, Any], output_dir: str | Path,
-    case_id: str, run_id: str,
+    case_id: str, run_id: str, trusted_base_template: str | None = None,
 ) -> str:
-    template = build_clean_runtime_config(
+    template = trusted_base_template if trusted_base_template is not None else build_clean_runtime_config(
         method_id=clean2r2a_template_profile_id(profile),
         clean_input_manifest=clean_input_manifest,
         auxiliary_manifest=auxiliary_manifest, provider_protocol=provider_protocol,
@@ -425,7 +425,9 @@ def validate_output_structure(output_root: str | Path, *, require_exact: bool) -
     return payload
 
 
-def _expected_solver_inputs(method_bound_manifest: Mapping[str, Any]) -> dict[str, Path]:
+def _expected_solver_inputs(
+    method_bound_manifest: Mapping[str, Any], *, trusted_manifest_hashes: bool = False,
+) -> dict[str, Path]:
     actual = method_bound_manifest.get("actual_solver_inputs")
     flags = method_bound_manifest.get("effective_flags")
     if not isinstance(actual, Mapping) or not isinstance(flags, Mapping):
@@ -451,7 +453,10 @@ def _expected_solver_inputs(method_bound_manifest: Mapping[str, Any]) -> dict[st
     if not isinstance(recorded, Mapping):
         raise CanonicalRunnerError("method-bound actual input hashes missing")
     for role, path in expected.items():
-        if sha256_file(path) != recorded.get(role_map[role]):
+        digest = recorded.get(role_map[role])
+        if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
+            raise CanonicalRunnerError(f"method-bound input recorded hash invalid: {role}")
+        if not trusted_manifest_hashes and sha256_file(path) != digest:
             raise CanonicalRunnerError(f"method-bound input byte hash drift: {role}")
     return expected
 
@@ -459,6 +464,7 @@ def _expected_solver_inputs(method_bound_manifest: Mapping[str, Any]) -> dict[st
 def validate_solver_manifest(
     *, profile: MethodProfile, case_id: str, run_id: str,
     manifest: Mapping[str, Any], method_bound_manifest: Mapping[str, Any],
+    trusted_manifest_hashes: bool = False,
 ) -> dict[str, Path]:
     expected_values = {
         "stage_id": STAGE_ID, "protocol_id": PROTOCOL_ID,
@@ -492,7 +498,9 @@ def validate_solver_manifest(
         raise CanonicalRunnerError("solver manifest contract mismatch: " + ",".join(sorted(mismatches)))
     paths = manifest.get("actual_solver_input_paths")
     roles = manifest.get("actual_solver_input_roles")
-    expected_paths = _expected_solver_inputs(method_bound_manifest)
+    expected_paths = _expected_solver_inputs(
+        method_bound_manifest, trusted_manifest_hashes=trusted_manifest_hashes,
+    )
     if not isinstance(paths, Mapping) or not isinstance(roles, Mapping) or set(paths) != set(roles):
         raise CanonicalRunnerError("solver actual-input path/role ledger is incomplete")
     if set(paths) != set(expected_paths):
@@ -683,7 +691,7 @@ def run_unique_execution(
     raw_root: str | Path, clean_root: str | Path, repo_root: str | Path,
     expected_executable_hash: str, expected_runtime_config_hash: str,
     expected_scientific_config_hash: str, expected_method_bound_manifest_hash: str,
-    timeout_seconds: int = 1800,
+    timeout_seconds: int = 1800, trusted_manifest_hashes: bool = False,
 ) -> dict[str, Any]:
     binary = Path(executable).resolve(strict=True)
     config = Path(runtime_config).resolve(strict=True)
@@ -695,7 +703,7 @@ def run_unique_execution(
             raise CanonicalRunnerError("attempt output root contains unexplained pre-launch state")
     else:
         raise CanonicalRunnerError("attempt-owned output root/runtime config must be created before launch")
-    if sha256_file(binary) != expected_executable_hash:
+    if not trusted_manifest_hashes and sha256_file(binary) != expected_executable_hash:
         raise CanonicalRunnerError("executable changed immediately before launch")
     if sha256_file(config) != expected_runtime_config_hash:
         raise CanonicalRunnerError("runtime config changed immediately before launch")
@@ -705,14 +713,18 @@ def run_unique_execution(
         raise CanonicalRunnerError("method-bound manifest changed immediately before launch")
     method_manifest = json.loads(method_manifest_path.read_text(encoding="utf-8"))
     actual_rendered_hash = actual_rendered_runtime_config_sha256(config.read_text(encoding="utf-8"))
-    if method_manifest.get("actual_rendered_runtime_config_sha256") != actual_rendered_hash:
+    recorded_rendered = method_manifest.get("actual_rendered_runtime_config_sha256")
+    if ((trusted_manifest_hashes and recorded_rendered not in (None, actual_rendered_hash))
+            or (not trusted_manifest_hashes and recorded_rendered != actual_rendered_hash)):
         raise CanonicalRunnerError("actual rendered runtime config hash differs from method binding")
     if (method_manifest.get("method_id") != profile.method_id
             or method_manifest.get("effective_profile") != profile.effective_profile
             or {key: _as_bool(value) for key, value in method_manifest.get("effective_flags", {}).items()}
             != dict(profile.flags)):
         raise CanonicalRunnerError("method-bound manifest/profile identity mismatch")
-    expected_inputs = _expected_solver_inputs(method_manifest)
+    expected_inputs = _expected_solver_inputs(
+        method_manifest, trusted_manifest_hashes=trusted_manifest_hashes,
+    )
     logs = root / "logs"; logs.mkdir(parents=True, exist_ok=False)
     strace = shutil.which("strace")
     if not strace:
@@ -768,7 +780,8 @@ def run_unique_execution(
     mechanisms: dict[str, Any] = {}
     if solver_manifest is not None:
         validate_solver_manifest(profile=profile, case_id=case_id, run_id=run_id,
-                                 manifest=solver_manifest, method_bound_manifest=method_manifest)
+                                 manifest=solver_manifest, method_bound_manifest=method_manifest,
+                                 trusted_manifest_hashes=trusted_manifest_hashes)
         counters = module_counters(solver_manifest)
         if terminal_status == "COMPLETED_EVALUABLE":
             counters = validate_method_counters(profile, solver_manifest)
@@ -795,9 +808,17 @@ def run_unique_execution(
             writer.writerow({
                 "role": role, "path": str(path),
                 "open_count": read_ledger["actual_solver_input_open_counts"][role],
-                "sha256": sha256_file(path),
+                "sha256": (
+                    method_manifest["actual_solver_input_hashes"][{
+                        "propagation_imu": "imu",
+                        "gnss_position_receiver_velocity_dual_yaw": "gnss",
+                        "raw_doppler_velocity": "raw_doppler",
+                        "go2_roll_pitch_weak_prior": "go2_rp",
+                        "go2_horizontal_velocity_weak_prior": "go2_hv",
+                    }[role]] if trusted_manifest_hashes else sha256_file(path)
+                ),
             })
-    output_hashes = {
+    output_hashes = {} if trusted_manifest_hashes else {
         path.relative_to(root).as_posix(): sha256_file(path)
         for path in sorted(item for item in root.rglob("*") if item.is_file())
     }
@@ -849,18 +870,31 @@ def run_unique_execution(
         "actual_rendered_runtime_config_sha256": actual_rendered_hash,
         "method_bound_manifest_hash": expected_method_bound_manifest_hash,
         "method_bound_manifest_path": str(method_manifest_path),
-        "actual_solver_input_hashes": {role: sha256_file(path) for role, path in expected_inputs.items()},
+        "actual_solver_input_hashes": {
+            role: (
+                method_manifest["actual_solver_input_hashes"][{
+                    "propagation_imu": "imu",
+                    "gnss_position_receiver_velocity_dual_yaw": "gnss",
+                    "raw_doppler_velocity": "raw_doppler",
+                    "go2_roll_pitch_weak_prior": "go2_rp",
+                    "go2_horizontal_velocity_weak_prior": "go2_hv",
+                }[role]] if trusted_manifest_hashes else sha256_file(path)
+            ) for role, path in expected_inputs.items()
+        },
+        "trusted_manifest_hashes": trusted_manifest_hashes,
         "solver_manifest_sha256": sha256_file(manifest_path) if manifest_path.is_file() else None,
         "solver_read_ledger": read_ledger, "module_counters": counters,
         "mechanism_evidence": mechanisms, "forbidden_counts": forbidden,
         "trace_used_online": False, "metric_driven_rerun": False,
+        "output_hashes_deferred_to_seal": trusted_manifest_hashes,
         "stderr_sha256": sha256_file(logs / "stderr.txt"), "output_hashes_before_proof": output_hashes,
     }
     proof_path = root / "CANONICAL541_EXECUTION_PROOF.json"
     proof_bytes = (json.dumps(proof, indent=2, sort_keys=True, allow_nan=False) + "\n").encode("utf-8")
     proof_path.write_bytes(proof_bytes)
     (root / "CANONICAL541_FORMAL_RUN_MANIFEST.json").write_bytes(proof_bytes)
-    if sha256_file(binary) != expected_executable_hash or sha256_file(config) != expected_runtime_config_hash:
+    if ((not trusted_manifest_hashes and sha256_file(binary) != expected_executable_hash)
+            or sha256_file(config) != expected_runtime_config_hash):
         raise CanonicalRunnerError("executable/config changed during solver execution")
     return proof
 

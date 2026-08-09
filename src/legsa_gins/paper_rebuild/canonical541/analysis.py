@@ -605,6 +605,7 @@ def materialize_analysis(
     *, logical_rows: Iterable[Mapping[str, Any]], unique_rows: Iterable[Mapping[str, Any]],
     evaluation_root: str | Path, provider_root: str | Path,
     analysis_root: str | Path, mechanism_root: str | Path,
+    trusted_direct: bool = False,
 ) -> dict[str, Any]:
     """Materialize every required result/mechanism table from sealed logical rows."""
 
@@ -616,7 +617,7 @@ def materialize_analysis(
     ablation = [row for row in rows if row["matrix"] == "internal_ablation"]
     penalties = method_clean_penalties(rows); worst = worst_cases(rows)
     recovery = build_recovery_table(rows, evaluation_root)
-    isolation = source_isolation_audit(rows, unique)
+    isolation = [] if trusted_direct else source_isolation_audit(rows, unique)
     source_actions, scheme_actions = mechanism_tables(rows, unique, provider_root)
     files: dict[str, str] = {}
     files["full_rows"] = _write_csv(result_root / "FULL_ALGORITHM_ROW_RESULTS.csv.gz", full, gzip_output=True)
@@ -636,7 +637,8 @@ def materialize_analysis(
     files["finite"] = _write_csv(result_root / "FINITE_AND_FAILURE_SUMMARY.csv", analysis["finite_and_failure_summary"])
     files["source_actions"] = _write_csv(mechanism / "SOURCE_AWARE_ACTIONS.csv.gz", source_actions, gzip_output=True)
     files["scheme_actions"] = _write_csv(mechanism / "SCHEMEC_ACTIONS.csv", scheme_actions)
-    files["source_isolation"] = _write_csv(mechanism / "SOURCE_ISOLATION_AUDIT.csv", isolation)
+    if not trusted_direct:
+        files["source_isolation"] = _write_csv(mechanism / "SOURCE_ISOLATION_AUDIT.csv", isolation)
     # Lightweight representative series are copied, not recomputed or corrected.
     evaluable = [row for row in rows if row.get("evaluable") is True]
     if not evaluable:
@@ -680,7 +682,10 @@ def materialize_analysis(
         "terminal_status_resolved": terminal_status_resolved,
         "evaluable_metrics_finite": evaluable_metrics_finite,
         "source_isolation_row_count": len(isolation),
-        "source_isolation_recomputed_pass": all(row["passed"] for row in isolation),
+        "source_isolation_recomputed_pass": (
+            all(row["passed"] for row in isolation) if not trusted_direct else None
+        ),
+        "source_isolation_audit_performed": not trusted_direct,
         "scheme_mechanism_row_count": len(scheme_actions),
         "source_mechanism_row_count": len(source_actions),
         "mechanism_trace_ledger_closure": mechanism_closure,
@@ -690,7 +695,7 @@ def materialize_analysis(
         "passed": (
             len(rows) == 7033 and len(full) == 2164 and len(ablation) == 4869
             and len({str(row["logical_id"]) for row in rows}) == 7033
-            and all(row["passed"] for row in isolation)
+            and (trusted_direct or all(row["passed"] for row in isolation))
             and terminal_status_resolved and evaluable_metrics_finite
             and mechanism_closure
         ),

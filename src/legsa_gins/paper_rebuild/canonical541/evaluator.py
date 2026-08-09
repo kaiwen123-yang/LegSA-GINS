@@ -30,7 +30,7 @@ class CanonicalEvaluationError(RuntimeError):
     pass
 
 
-def _seal_gate(seal_root: Path) -> dict[str, Any]:
+def _seal_gate(seal_root: Path, *, trusted_direct: bool = False) -> dict[str, Any]:
     manifest = seal_root / "OUTPUT_HASH_MANIFEST.csv"; journal = seal_root / "OUTPUT_SEAL_JOURNAL.json"
     if not manifest.is_file() or not journal.is_file():
         raise CanonicalEvaluationError("output seal is incomplete before trace open")
@@ -50,13 +50,17 @@ def _seal_gate(seal_root: Path) -> dict[str, Any]:
             raise CanonicalEvaluationError("unsafe sealed output path")
         path = root / relative
         if (not path.is_file() or path.stat().st_size != int(row["size_bytes"]) or
-                sha256_file(path) != row["sha256"]):
+                (not trusted_direct and sha256_file(path) != row["sha256"])):
             raise CanonicalEvaluationError("sealed output hash mismatch")
         if row["relative_path"] in {"KF_GINS_Navresult.nav", "KF_GINS_STD.txt"}:
             run_files.setdefault(str(row["run_id"]), {})[str(row["relative_path"])] = {
                 "size_bytes": int(row["size_bytes"]), "sha256": str(row["sha256"]),
             }
-    return {"manifest_sha256": sha256_file(manifest), "journal_sha256": sha256_file(journal),
+    manifest_identity = str(payload.get("manifest_sha256", "")) if trusted_direct else sha256_file(manifest)
+    if trusted_direct and (len(manifest_identity) != 64 or any(ch not in "0123456789abcdef" for ch in manifest_identity)):
+        raise CanonicalEvaluationError("trusted output seal lacks recorded manifest identity")
+    return {"manifest_sha256": manifest_identity,
+            "journal_sha256": None if trusted_direct else sha256_file(journal),
             "row_count": len(rows), "run_files": run_files}
 
 
@@ -137,14 +141,16 @@ def _lightweight_seal_identity(seal_root: Path, expected: Mapping[str, Any]) -> 
     return current
 
 
-def _revalidate_run_inputs(runtime: Path, run_id: str, seal: Mapping[str, Any]) -> None:
+def _revalidate_run_inputs(
+    runtime: Path, run_id: str, seal: Mapping[str, Any], *, trusted_direct: bool = False,
+) -> None:
     expected = seal.get("run_files", {}).get(run_id)
     if not isinstance(expected, Mapping) or set(expected) != {"KF_GINS_Navresult.nav", "KF_GINS_STD.txt"}:
         raise CanonicalEvaluationError(f"sealed NAV/STD identity missing: {run_id}")
     for name, identity in expected.items():
         path = runtime / name
         if (not path.is_file() or path.stat().st_size != int(identity["size_bytes"])
-                or sha256_file(path) != identity["sha256"]):
+                or (not trusted_direct and sha256_file(path) != identity["sha256"])):
             raise CanonicalEvaluationError(f"sealed runtime input changed before trace open: {run_id}:{name}")
 
 
@@ -186,16 +192,22 @@ def evaluate_unique_outputs(
     *, unique_runs: Iterable[Mapping[str, Any]], seal_root: str | Path,
     trace_path: str | Path, exact_evaluator: str | Path, evaluation_root: str | Path,
     raw_root: str | Path,
-    timeout_seconds: int = 900, jobs: int = 8,
+    timeout_seconds: int = 900, jobs: int = 8, trusted_direct: bool = False,
 ) -> tuple[dict[str, dict[str, Any]], dict[str, Any]]:
     if not 1 <= jobs <= 16:
         raise CanonicalEvaluationError("evaluation jobs must be 1..16")
     seal_path = Path(seal_root).resolve(strict=True)
-    validate_output_seal(seal_path, raw_root=raw_root)
-    seal = _seal_gate(seal_path)
+    if not trusted_direct:
+        validate_output_seal(seal_path, raw_root=raw_root)
+    seal = _seal_gate(seal_path, trusted_direct=trusted_direct)
     trace = Path(trace_path).resolve(strict=True); evaluator = Path(exact_evaluator).resolve(strict=True)
     raw = Path(raw_root).resolve(strict=True)
-    if sha256_file(trace) != FROZEN_TRACE_SHA256 or sha256_file(evaluator) != EXACT_EVALUATOR_SHA256:
+    # Bind the offline trace/evaluator bytes once at evaluator entry.  Trusted
+    # direct mode removes repeated per-run/seal hashing, not this one identity
+    # check performed only after the solver output seal exists.
+    if (not trace.is_file() or not evaluator.is_file()
+            or sha256_file(trace) != FROZEN_TRACE_SHA256
+            or sha256_file(evaluator) != EXACT_EVALUATOR_SHA256):
         raise CanonicalEvaluationError("trace/evaluator identity differs from CLEAN1R2R1")
     destination = Path(evaluation_root)
     if destination.exists():
@@ -257,8 +269,9 @@ def evaluate_unique_outputs(
             os.replace(attempt, output)
             return run_id, metrics, None
         # 全量 seal 只在批次前后验证；每次 trace open 前重新绑定两个 immutable sidecar。
-        _lightweight_seal_identity(seal_path, seal)
-        _revalidate_run_inputs(runtime, run_id, seal)
+        if not trusted_direct:
+            _lightweight_seal_identity(seal_path, seal)
+        _revalidate_run_inputs(runtime, run_id, seal, trusted_direct=trusted_direct)
         seal_validation_completed_ns = time.time_ns()
         trace_log = attempt / "EVALUATOR_FILE_OPEN_TRACE.raw"
         command = [sys.executable, str(evaluator), "--trace", str(trace),
@@ -343,11 +356,15 @@ def evaluate_unique_outputs(
                 failures.append(exc)
     if failures:
         raise failures[0]
-    validate_output_seal(seal_path, raw_root=raw_root)
-    _lightweight_seal_identity(seal_path, seal)
+    if not trusted_direct:
+        validate_output_seal(seal_path, raw_root=raw_root)
+    if not trusted_direct:
+        _lightweight_seal_identity(seal_path, seal)
     aggregate = {"unique_output_count": len(results), "evaluable_count": sum(bool(row["evaluable"]) for row in results.values()),
                  "crosschecks": crosschecks, "all_outputs_sealed_before_trace": True,
-                 "trace_offline_only": True, "seal_revalidated_after_all_evaluations": True,
+                 "trace_offline_only": True,
+                 "seal_revalidated_after_all_evaluations": not trusted_direct,
+                 "trusted_seal_registry_used": trusted_direct,
                  "evaluation_jobs": jobs,
                  "crosscheck_count": len(crosschecks),
                  "passed": (

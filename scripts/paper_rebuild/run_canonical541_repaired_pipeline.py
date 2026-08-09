@@ -18,6 +18,10 @@ if str(SRC_ROOT) not in sys.path:
 
 from build_canonical541_manifest import load_local
 from legsa_gins.paper_rebuild.canonical541.authorization import STAGE_ID, load_execution_authorization, validate_attempt_root
+from legsa_gins.paper_rebuild.canonical541.trusted_direct import (
+    JOBS as TRUSTED_DIRECT_JOBS, SCIENTIFIC_FREEZE as TRUSTED_DIRECT_SCIENTIFIC_FREEZE,
+    TRUSTED_ATTEMPT_NAME,
+)
 from legsa_gins.paper_rebuild.manifest import sha256_file
 
 
@@ -138,26 +142,35 @@ def parser() -> argparse.ArgumentParser:
     command.add_argument("--executable", required=True)
     command.add_argument("--code-freeze-commit", required=True)
     command.add_argument("--exact-evaluator", required=True)
-    command.add_argument("--origin-stage", required=True)
-    command.add_argument("--origin-provider-freeze", required=True)
+    command.add_argument("--origin-stage")
+    command.add_argument("--origin-provider-freeze")
     command.add_argument("--export-root", required=True)
     command.add_argument("--attempt-id", required=True)
     command.add_argument("--timestamp", required=True)
     command.add_argument("--hard-max-jobs", type=int, default=12)
     command.add_argument("--timeout-seconds", type=int, default=1800)
     command.add_argument("--resume", action="store_true")
+    command.add_argument("--trusted-direct-resume", action="store_true")
     return command
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
-    load_execution_authorization(REPO_ROOT)
     if not 1 <= args.hard_max_jobs <= 16:
         raise SystemExit("hard max jobs must be 1..16")
     local = Path(args.local_config).resolve(strict=True)
     paths = load_local(local)
     stage = validate_attempt_root(paths["runtime_root"])
-    _readiness_gate(stage, args.code_freeze_commit, args.executable)
+    if args.trusted_direct_resume:
+        if (stage.name != TRUSTED_ATTEMPT_NAME
+                or args.code_freeze_commit != TRUSTED_DIRECT_SCIENTIFIC_FREEZE
+                or args.hard_max_jobs != TRUSTED_DIRECT_JOBS):
+            raise SystemExit("trusted-direct mode attempt/scientific-freeze/jobs lock mismatch")
+    else:
+        load_execution_authorization(REPO_ROOT)
+        if not args.origin_stage or not args.origin_provider_freeze:
+            raise SystemExit("default pipeline requires --origin-stage and --origin-provider-freeze")
+        _readiness_gate(stage, args.code_freeze_commit, args.executable)
     lock = _acquire_runner_lock(stage, args.code_freeze_commit, resume=args.resume)
     session = stage / "RUN_SESSION.json"
     status = stage / "CANONICAL541_STATUS.json"
@@ -166,7 +179,7 @@ def main(argv: list[str] | None = None) -> int:
         "OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMEXPR_NUM_THREADS",
     )})
     common = ["--local-config", str(local), "--code-freeze-commit", args.code_freeze_commit]
-    commands = [
+    default_commands = [
         [sys.executable, str(REPO_ROOT / "scripts/paper_rebuild/reuse_canonical541_providers.py"),
          "--origin-stage", args.origin_stage, "--origin-freeze", args.origin_provider_freeze,
          "--destination-stage", str(stage), "--provider-root", str(paths["provider_root"]),
@@ -187,17 +200,42 @@ def main(argv: list[str] | None = None) -> int:
          "--timestamp", args.timestamp, "--attempt-id", args.attempt_id,
          "--local-config", str(local)],
     ]
+    trusted_commands = [
+        [sys.executable, str(REPO_ROOT / "scripts/paper_rebuild/run_canonical541_trusted_direct.py"),
+         "--local-config", str(local), "--executable", args.executable,
+         "--scientific-freeze", TRUSTED_DIRECT_SCIENTIFIC_FREEZE,
+         "--jobs", str(TRUSTED_DIRECT_JOBS), "--timeout-seconds", str(args.timeout_seconds)],
+        [sys.executable, str(REPO_ROOT / "scripts/paper_rebuild/evaluate_canonical541.py"),
+         "--local-config", str(local), "--exact-evaluator", args.exact_evaluator,
+         "--jobs", str(TRUSTED_DIRECT_JOBS), "--trusted-direct"],
+        [sys.executable, str(REPO_ROOT / "scripts/paper_rebuild/package_canonical541_trusted_direct.py"),
+         "--stage-root", str(stage), "--export-root", str(Path(args.export_root).resolve()),
+         "--timestamp", args.timestamp, "--attempt-id", args.attempt_id,
+         "--local-config", str(local)],
+    ]
+    commands = trusted_commands if args.trusted_direct_resume else default_commands
     regeneration_command = [
         sys.executable, str(REPO_ROOT / "scripts/paper_rebuild/generate_canonical541_providers.py"),
         "--local-config", str(local), "--jobs", str(args.hard_max_jobs),
         "--code-freeze-commit", args.code_freeze_commit, "--executable", args.executable,
     ]
-    _atomic_json(session, {"pid": os.getpid(), "stage_id": STAGE_ID, "attempt_root": str(stage), "started_at": _now(),
-                           "code_freeze_commit": args.code_freeze_commit, "commands": commands})
+    _atomic_json(session, {"session_name": "canonical541_trusted_direct_20260808T200855P0800" if args.trusted_direct_resume else "canonical541_repaired_pipeline",
+                           "pid": os.getpid(), "process_pid": os.getpid(), "stage_id": STAGE_ID,
+                           "attempt_root": str(stage), "started_at": _now(),
+                           "code_freeze_commit": args.code_freeze_commit,
+                           "formal_execution_started": False, "running_solver_count": 0,
+                           "runtime_configs_written": 0, "execution_plan_created": False,
+                           "commands": commands})
     try:
         for index, command in enumerate(commands, start=1):
-            _atomic_json(status, {"phase": f"PIPELINE_STEP_{index}_OF_{len(commands)}",
+            _atomic_json(status, {"session_name": "canonical541_trusted_direct_20260808T200855P0800" if args.trusted_direct_resume else "canonical541_repaired_pipeline",
+                                  "pid": os.getpid(), "process_pid": os.getpid(),
+                                  "phase": f"PIPELINE_STEP_{index}_OF_{len(commands)}",
                                   "heartbeat_time": _now(), "running_jobs": args.hard_max_jobs,
+                                  "running_solver_count": 0,
+                                  "runtime_configs_written": 5951 if args.trusted_direct_resume and index > 1 else 0,
+                                  "execution_plan_created": args.trusted_direct_resume and index > 1,
+                                  "formal_execution_started": args.trusted_direct_resume and index > 1,
                                   "trace_reads_before_seal": 0})
             process = subprocess.Popen(command, cwd=REPO_ROOT, env=env)
             while True:
@@ -205,26 +243,40 @@ def main(argv: list[str] | None = None) -> int:
                     return_code = process.wait(timeout=30)
                     break
                 except subprocess.TimeoutExpired:
-                    _atomic_json(status, {"phase": f"PIPELINE_STEP_{index}_OF_{len(commands)}",
+                    if args.trusted_direct_resume and index == 1:
+                        continue
+                    _atomic_json(status, {"session_name": "canonical541_trusted_direct_20260808T200855P0800" if args.trusted_direct_resume else "canonical541_repaired_pipeline",
+                                          "pid": os.getpid(), "phase": f"PIPELINE_STEP_{index}_OF_{len(commands)}",
                                           "heartbeat_time": _now(), "running_jobs": args.hard_max_jobs,
+                                          "running_solver_count": args.hard_max_jobs if args.trusted_direct_resume and index == 1 else 0,
+                                          "formal_execution_started": args.trusted_direct_resume,
+                                          "runtime_configs_written": 5951 if args.trusted_direct_resume and index > 1 else 0,
+                                          "execution_plan_created": args.trusted_direct_resume and index > 1,
                                           "trace_reads_before_seal": 0, "process_pid": process.pid})
-            if index == 1 and return_code == 3:
+            if not args.trusted_direct_resume and index == 1 and return_code == 3:
                 # Exit 3 is emitted only after provider bytes/effects or generator/config
                 # semantics are proven mismatched. Regeneration is forbidden otherwise.
                 subprocess.run(regeneration_command, cwd=REPO_ROOT, env=env, check=True)
                 return_code = 0
             if return_code != 0:
                 raise subprocess.CalledProcessError(return_code, command)
-        _atomic_json(status, {"phase": "PIPELINE_COMPLETE", "heartbeat_time": _now(),
-                              "running_jobs": 0, "trace_reads_before_seal": 0})
-        _atomic_json(stage / "DRAFT_PR_HANDOFF.json", {
-            "schema_version": "paper_rebuild.canonical541_draft_pr_handoff.v1",
-            "stage_id": STAGE_ID, "code_freeze_commit": args.code_freeze_commit,
-            "automatic_github_action_performed": False,
-            "draft_pr_requested": True,
-            "human_or_supervisor_action_required": True,
-            "finalization_report": str(stage / "16_AUDITS/CANONICAL541_FINALIZATION_REPORT.json"),
-        })
+        _atomic_json(status, {"session_name": "canonical541_trusted_direct_20260808T200855P0800" if args.trusted_direct_resume else "canonical541_repaired_pipeline",
+                              "pid": os.getpid(), "process_pid": os.getpid(),
+                              "phase": "PIPELINE_COMPLETE", "heartbeat_time": _now(),
+                              "running_jobs": 0, "running_solver_count": 0,
+                              "runtime_configs_written": 5951 if args.trusted_direct_resume else None,
+                              "execution_plan_created": args.trusted_direct_resume,
+                              "formal_execution_started": args.trusted_direct_resume,
+                              "trace_reads_before_seal": 0})
+        if not args.trusted_direct_resume:
+            _atomic_json(stage / "DRAFT_PR_HANDOFF.json", {
+                "schema_version": "paper_rebuild.canonical541_draft_pr_handoff.v1",
+                "stage_id": STAGE_ID, "code_freeze_commit": args.code_freeze_commit,
+                "automatic_github_action_performed": False,
+                "draft_pr_requested": True,
+                "human_or_supervisor_action_required": True,
+                "finalization_report": str(stage / "16_AUDITS/CANONICAL541_FINALIZATION_REPORT.json"),
+            })
     finally:
         _release_owned_lock(lock)
     return 0

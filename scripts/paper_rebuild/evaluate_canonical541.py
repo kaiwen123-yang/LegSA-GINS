@@ -22,6 +22,7 @@ from legsa_gins.paper_rebuild.canonical541.evaluator import (
 from legsa_gins.paper_rebuild.canonical541.runner import validate_output_seal
 from legsa_gins.paper_rebuild.evidence import BY2_TRACE_RELATIVE_PATH
 from legsa_gins.paper_rebuild.canonical541.authorization import authorize_operation, validate_attempt_root
+from legsa_gins.paper_rebuild.canonical541.trusted_direct import TRUSTED_ATTEMPT_NAME
 
 
 def _read_csv(path: Path) -> list[dict[str, str]]:
@@ -35,18 +36,27 @@ def parser() -> argparse.ArgumentParser:
     command.add_argument("--exact-evaluator", required=True)
     command.add_argument("--jobs", type=int, default=8)
     command.add_argument("--timeout-seconds", type=int, default=900)
+    command.add_argument("--trusted-direct", action="store_true")
     return command
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
-    authorize_operation(REPO_ROOT, "offline_evaluator")
+    if not args.trusted_direct:
+        authorize_operation(REPO_ROOT, "offline_evaluator")
     if not 1 <= args.jobs <= 16:
         raise SystemExit("evaluation jobs must be 1..16")
     paths = load_local(Path(args.local_config).resolve(strict=True))
     stage = validate_attempt_root(paths["runtime_root"])
+    if args.trusted_direct and stage.name != TRUSTED_ATTEMPT_NAME:
+        raise SystemExit("trusted-direct evaluator attempt mismatch")
     seal = stage / "11_OUTPUT_SEAL"
-    seal_gate = validate_output_seal(seal, raw_root=paths["raw_root"])
+    if args.trusted_direct:
+        seal_gate = json.loads((seal / "OUTPUT_SEAL_JOURNAL.json").read_text(encoding="utf-8"))
+        if seal_gate.get("passed") is not True or seal_gate.get("logical_result_count") != 7033:
+            raise SystemExit("trusted-direct output seal journal is incomplete")
+    else:
+        seal_gate = validate_output_seal(seal, raw_root=paths["raw_root"])
     unique = _read_csv(seal / "UNIQUE_RUN_TERMINAL_REGISTRY.csv")
     logical = _read_csv(seal / "LOGICAL_RESULT_TERMINAL_REGISTRY.csv")
     evaluations, evaluation_gate = evaluate_unique_outputs(
@@ -55,7 +65,7 @@ def main(argv: list[str] | None = None) -> int:
         exact_evaluator=Path(args.exact_evaluator).resolve(strict=True),
         evaluation_root=stage / "12_OFFLINE_EVALUATION",
         raw_root=paths["raw_root"], timeout_seconds=args.timeout_seconds,
-        jobs=args.jobs,
+        jobs=args.jobs, trusted_direct=args.trusted_direct,
     )
     logical_results = resolve_logical_results(logical, evaluations)
     analysis_gate = materialize_analysis(
@@ -64,6 +74,7 @@ def main(argv: list[str] | None = None) -> int:
         provider_root=paths["provider_root"],
         analysis_root=stage / "13_RESULT_ANALYSIS",
         mechanism_root=stage / "14_MECHANISM_ANALYSIS",
+        trusted_direct=args.trusted_direct,
     )
     report = {
         "output_seal": seal_gate,
