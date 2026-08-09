@@ -117,14 +117,13 @@ def _current_preparation_freeze(repo: Path) -> str:
 
 
 def _case_manifest(stage: Path) -> Path:
-    candidates = (
-        stage / "02_MATRIX_SPEC_LOCK/CANONICAL541_CASE_MANIFEST.csv",
-        stage / "02_MATRIX_SPEC_LOCK/CANONICAL_BY2_DEGRADATION_CASE_MANIFEST.csv",
-    )
-    found = [path for path in candidates if path.is_file()]
-    if len(found) != 1:
-        raise TrustedDirectError("exactly one small Canonical-541 case manifest is required")
-    return found[0].resolve(strict=True)
+    canonical = stage / "02_MATRIX_SPEC_LOCK/CANONICAL541_CASE_MANIFEST.csv"
+    if canonical.is_file() and not canonical.is_symlink():
+        return canonical.resolve(strict=True)
+    fallback = stage / "02_MATRIX_SPEC_LOCK/CANONICAL_BY2_DEGRADATION_CASE_MANIFEST.csv"
+    if fallback.is_file() and not fallback.is_symlink():
+        return fallback.resolve(strict=True)
+    raise TrustedDirectError("small Canonical-541 case manifest is missing")
 
 
 def _load_method_manifests(

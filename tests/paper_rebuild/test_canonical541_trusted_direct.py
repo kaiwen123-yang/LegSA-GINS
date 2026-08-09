@@ -24,6 +24,19 @@ def test_trusted_attempt_and_scientific_freeze_are_exact(tmp_path: Path) -> None
         direct.validate_trusted_identity(wrong, direct.SCIENTIFIC_FREEZE)
 
 
+def test_case_manifest_prefers_attempt_canonical_name_when_legacy_name_coexists(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "02_MATRIX_SPEC_LOCK"
+    root.mkdir()
+    canonical = root / "CANONICAL541_CASE_MANIFEST.csv"
+    canonical.write_text("case_id\nC00_clean_normal\n")
+    (root / "CANONICAL_BY2_DEGRADATION_CASE_MANIFEST.csv").write_text(
+        "case_id\nlegacy\n"
+    )
+    assert direct._case_manifest(tmp_path) == canonical.resolve()
+
+
 def test_trusted_expected_inputs_require_paths_without_hashing(tmp_path: Path, monkeypatch) -> None:
     imu = tmp_path / "input.imu"; gnss = tmp_path / "input.gnss"
     imu.write_text("imu\n"); gnss.write_text("gnss\n")
