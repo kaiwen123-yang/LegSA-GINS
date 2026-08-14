@@ -1,0 +1,2 @@
+case_id,method_id,enabled,data_mode,trace_mode,evaluation_status
+C00,EXT01_CLAMBDA,true,real_by2_raw,disabled,NOT_EVALUATED

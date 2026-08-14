@@ -1,0 +1,35 @@
+schema_version: horizontal_literature.heading_stream.v1
+primary_key: [gps_week, gps_tow_seconds, method_id, case_id]
+conservation: paired_epoch_count == success_row_count + failure_row_count
+fields:
+  gps_week: {type: integer, nullable: false}
+  gps_tow_seconds: {type: number, nullable: false}
+  method_id: {type: string, enum: [EXT01_CLAMBDA], nullable: false}
+  case_id: {type: string, enum: [C00], nullable: false}
+  status: {type: string, enum: [SUCCESS, FAILURE], nullable: false}
+  solution_type: {type: string, enum: [fixed, float, invalid], nullable: false}
+  failure_code: {type: string, nullable: true}
+  baseline_ned_m: {type: array_number_3, nullable: true}
+  baseline_length_m: {type: number, const: 0.350, nullable: true}
+  baseline_heading_deg: {type: number, nullable: true}
+  body_yaw_deg: {type: number, nullable: true}
+  pivot_identity: {type: signal_identity, nullable: true}
+  pivot_switched: {type: boolean, nullable: false}
+  ambiguity_candidate: {type: array_integer, nullable: true}
+  constrained_objective: {type: number, nullable: true}
+  second_objective: {type: number, nullable: true}
+  ratio: {type: number, nullable: true}
+  ratio_valid: {type: boolean, nullable: false}
+  search_complete: {type: boolean, nullable: false}
+  search_nodes: {type: integer, nullable: false}
+  constraint_error_m: {type: number, nullable: true}
+  residual_norm: {type: number, nullable: true}
+  runtime_seconds: {type: number, nullable: false}
+  pseudorange_valid: {type: boolean, nullable: false}
+  carrier_valid: {type: boolean, nullable: false}
+  lock_reset: {type: boolean, nullable: false}
+  half_cycle_valid: {type: boolean, nullable: false}
+  half_cycle_subtracted: {type: boolean, nullable: false}
+  receiver_clock_reset: {type: boolean, nullable: false}
+  cycle_slip: {type: boolean, nullable: false}
+  arc_reset: {type: boolean, nullable: false}
