@@ -1,14 +1,20 @@
 import csv
 import ctypes
+import math
+import statistics
 import struct
+from pathlib import Path
 
 import numpy as np
 import pytest
+import yaml
 
 import legsa_gins.paper_rebuild.horizontal_literature.shared_raw_backend as backend
 
 from legsa_gins.paper_rebuild.horizontal_literature.shared_raw_backend import (
     RawBackendError,
+    DoubleDifferenceStageError,
+    HALF_CYCLE_CONTRACT,
     RawxEpoch,
     RawxMeasurement,
     RtklibBroadcastProvider,
@@ -17,10 +23,14 @@ from legsa_gins.paper_rebuild.horizontal_literature.shared_raw_backend import (
     TrackingContinuity,
     build_gps_l1_double_difference_model,
     correlated_dd_covariance,
+    dd_matrix_condition_diagnostics,
+    decode_nav_hpposecef,
     decode_nav_sat,
     decode_rawx,
     decode_sfrbx,
     gps_l1_code_spp,
+    gps_l1_epoch_accounting,
+    integer_compatible_carrier_cycles,
     iter_ubx_frames,
     line_of_sight,
     pair_epochs,
@@ -31,6 +41,7 @@ from legsa_gins.paper_rebuild.horizontal_literature.shared_raw_backend import (
     signal_frequency_hz,
     strict_raw_tracking_eligible,
     single_and_double_differences,
+    tracking_epoch_summary,
     ubx_checksum,
 )
 
@@ -104,7 +115,13 @@ def test_pairing_reference_switch_cycle_slip_and_correlated_dd():
     assert second == low.identity and switched
 
     continuity = TrackingContinuity()
-    assert continuity.update(1, _epoch(1.0), _measurement(lock=1000)).arc_reset
+    first_flags = continuity.update(
+        1, _epoch(1.0), _measurement(lock=1000),
+        ambiguity_reinitialized_by_method=True,
+    )
+    assert first_flags.first_observation
+    assert first_flags.ambiguity_reinitialized_by_method
+    assert not first_flags.cycle_slip and not first_flags.arc_reset
     flags = continuity.update(1, _epoch(2.0), _measurement(lock=10))
     assert flags.lock_reset and flags.cycle_slip and flags.arc_reset
     half = continuity.update(1, _epoch(3.0), _measurement(lock=20, trk=0x0F))
@@ -115,10 +132,12 @@ def test_pairing_reference_switch_cycle_slip_and_correlated_dd():
     assert repeated_half_measurement.half_cycle_subtracted
     invalid = continuity.update(1, _epoch(4.0), _measurement(lock=30, trk=0x01))
     assert invalid.pseudorange_valid and not invalid.carrier_valid and invalid.arc_reset
+    repeated_invalid = continuity.update(1, _epoch(4.5), _measurement(lock=35, trk=0x01))
+    assert not repeated_invalid.cycle_slip and not repeated_invalid.arc_reset
     restored = continuity.update(1, _epoch(5.0), _measurement(lock=40, trk=0x07))
     assert restored.carrier_valid and restored.arc_reset
     clock = continuity.update(1, _epoch(6.0, status=0x02), _measurement(lock=50))
-    assert clock.receiver_clock_reset and clock.arc_reset
+    assert clock.receiver_clock_reset and clock.arc_reset and not clock.cycle_slip
 
     rollover = TrackingContinuity()
     rollover.update(1, _epoch(604799.0, week=2400), _measurement(lock=10))
@@ -185,6 +204,39 @@ def test_reconstruct_scans_python_bytes_and_audits_rawx_sfrbx_nav_sat(tmp_path):
     assert decode_nav_sat(nav_sat_payload).satellites[0].elevation_deg == 31
 
 
+def test_nav_hpposecef_units_bounds_and_reconstruction(tmp_path):
+    payload = (
+        bytes((0, 1, 2, 3))
+        + struct.pack("<Iiii", 123456, 637813700, -12345, 6789)
+        + struct.pack("<bbbBI", 99, -99, 1, 7, 250)
+    )
+    epoch = decode_nav_hpposecef(payload)
+    np.testing.assert_allclose(
+        epoch.position_ecef_m,
+        [6_378_137.0099, -123.4599, 67.8901],
+        atol=1e-10,
+    )
+    assert epoch.position_accuracy_m == pytest.approx(0.025)
+    assert epoch.reserved1 == b"\x01\x02\x03" and epoch.reserved2 == 7
+
+    frame = _ubx_frame(0x01, 0x13, payload)
+    source = tmp_path / "raw.csv"
+    with source.open("w", newline="", encoding="utf-8") as stream:
+        writer = csv.DictWriter(stream, fieldnames=["data"])
+        writer.writeheader()
+        writer.writerow({"data": repr(frame)})
+    reconstruction = reconstruct_ubx_stream(source)
+    assert reconstruction.message_counts == {"01-13": 1}
+    assert reconstruction.nav_hpposecef_epochs == (epoch,)
+
+    invalid_hp = bytearray(payload)
+    invalid_hp[20] = 100
+    with pytest.raises(RawBackendError, match="-99..99"):
+        decode_nav_hpposecef(bytes(invalid_hp))
+    with pytest.raises(RawBackendError, match="boundary"):
+        decode_nav_hpposecef(payload[:-1])
+
+
 class _GeometryProvider:
     status = "SYNTHETIC_TEST_ONLY"
 
@@ -194,6 +246,131 @@ class _GeometryProvider:
     def state(self, identity, gps_week, gps_tow_seconds, pseudorange_m=None):
         return SatelliteState(np.asarray(self.positions[identity], dtype=float), np.zeros(3),
                               health=0)
+
+
+def test_no_false_zero_common_raw_epochs():
+    measurements1 = tuple(
+        _measurement(sv, trk=(0x0F if sv <= 3 else (0x03 if sv == 4 else 0x01)))
+        for sv in range(1, 6)
+    )
+    measurements2 = tuple(
+        _measurement(sv, trk=(0x0F if sv <= 4 else 0x03)) for sv in range(1, 6)
+    )
+    accounting = gps_l1_epoch_accounting(
+        _epoch(10.0, measurements1), _epoch(10.0, measurements2)
+    )
+    assert accounting.common_raw_satellite_count == 5
+    assert accounting.common_pr_valid_satellite_count == 5
+    assert accounting.common_cp_valid_satellite_count == 4
+    assert accounting.common_pr_cp_valid_satellite_count == 4
+    assert accounting.common_half_cycle_valid_satellite_count == 3
+    assert accounting.common_integer_compatible_satellite_count == 3
+    with pytest.raises(DoubleDifferenceStageError) as caught:
+        build_gps_l1_double_difference_model(
+            _epoch(10.0, measurements1), _epoch(10.0, measurements2),
+            _GeometryProvider({}), [6_378_137.0, 0.0, 0.0],
+        )
+    assert caught.value.code == "INSUFFICIENT_HALF_CYCLE_VALID"
+    assert caught.value.accounting.common_raw_satellite_count == 5
+
+
+def test_satellite_state_failure_does_not_zero_raw_count():
+    class FailedStateProvider:
+        status = "TEST_FAILURE"
+
+        def state(self, identity, gps_week, gps_tow_seconds, pseudorange_m=None):
+            raise RawBackendError(f"no state for {identity}")
+
+    measurements = tuple(_measurement(sv, trk=0x0F) for sv in range(1, 6))
+    first, second = _epoch(11.0, measurements), _epoch(11.0, measurements)
+    with pytest.raises(DoubleDifferenceStageError) as caught:
+        build_gps_l1_double_difference_model(
+            first, second, FailedStateProvider(), [6_378_137.0, 0.0, 0.0]
+        )
+    error = caught.value
+    assert error.code == "INSUFFICIENT_SATELLITE_STATES"
+    assert error.accounting.common_raw_satellite_count == 5
+    assert error.accounting.common_integer_compatible_satellite_count == 5
+    assert error.accounting.satellite_state_available_count == 0
+
+
+def test_tracking_flags_are_per_measurement():
+    continuity = TrackingContinuity()
+    epoch1 = _epoch(20.0, (_measurement(1, lock=100, trk=0x0F),
+                           _measurement(2, lock=100, trk=0x01)))
+    summary1 = tracking_epoch_summary(
+        continuity, 1, epoch1, [SignalIdentity(0, 1, 0, 0)],
+        ambiguity_reinitialized_by_method=True,
+    )
+    assert summary1.measurement_count == 2
+    assert summary1.used_carrier_count == 1
+    assert summary1.excluded_cp_invalid_count == 1
+    assert summary1.excluded_half_cycle_unknown_count == 0
+    assert summary1.sub_half_cycle_set_count == 1
+    assert summary1.actual_cycle_slip_count == 0
+    assert summary1.ambiguity_reinitialized_by_method
+
+    epoch2 = _epoch(21.0, (_measurement(1, lock=10, trk=0x07),
+                           _measurement(2, lock=110, trk=0x03)))
+    summary2 = tracking_epoch_summary(continuity, 1, epoch2)
+    assert summary2.actual_lock_reset_count == 1
+    assert summary2.half_cycle_state_change_count == 1
+    assert summary2.actual_cycle_slip_count == 2
+    assert summary2.excluded_half_cycle_unknown_count == 1
+
+
+def test_method_reinitialization_is_not_cycle_slip():
+    continuity = TrackingContinuity()
+    measurement = _measurement(3, lock=500, trk=0x0F)
+    first = continuity.update(
+        1, _epoch(30.0), measurement,
+        ambiguity_reinitialized_by_method=True,
+    )
+    second = continuity.update(
+        1, _epoch(31.0), _measurement(3, lock=600, trk=0x0F),
+        ambiguity_reinitialized_by_method=True,
+    )
+    assert first.ambiguity_reinitialized_by_method and second.ambiguity_reinitialized_by_method
+    assert not first.cycle_slip_detected and not second.cycle_slip_detected
+    assert not first.arc_reset_due_to_tracking and not second.arc_reset_due_to_tracking
+
+
+def test_half_cycle_contract_against_ubx_spec():
+    assert HALF_CYCLE_CONTRACT.ubx_document_sha256 == (
+        "3d6539cd5ab3efe1254c54e4dba25d17421bfe48ac96e633e602d8d214c13668"
+    )
+    assert HALF_CYCLE_CONTRACT.rtklib_commit == (
+        "180043ee24b6d2b168f98b64be15f69d50046b1a"
+    )
+    subtracted = _measurement(3, trk=0x0F)
+    # subHalfCyc reports a correction already present in cpMes.  The pinned
+    # RTKLIB RXM-RAWX decoder likewise copies L=cpMes without a second +/-0.5.
+    assert integer_compatible_carrier_cycles(subtracted) == subtracted.cp_mes_cycles
+    assert strict_raw_tracking_eligible(subtracted)
+    with pytest.raises(RawBackendError, match="unresolved"):
+        integer_compatible_carrier_cycles(_measurement(3, trk=0x03))
+
+
+def test_integer_compatibility_diagnostic():
+    first = _epoch(40.0, (
+        _measurement(1, trk=0x0F),
+        _measurement(2, trk=0x07, cp_std=6),
+        _measurement(3, trk=0x03),
+        _measurement(4, trk=0x0F, cp_std=15),
+    ))
+    second = _epoch(40.0, (
+        _measurement(1, trk=0x07),
+        _measurement(2, trk=0x0F, cp_std=6),
+        _measurement(3, trk=0x0F),
+        _measurement(4, trk=0x0F),
+    ))
+    accounting = gps_l1_epoch_accounting(first, second)
+    assert accounting.common_raw_satellite_count == 4
+    assert accounting.common_pr_cp_valid_satellite_count == 4
+    assert accounting.common_half_cycle_valid_satellite_count == 3
+    assert accounting.common_integer_compatible_satellite_count == 2
+    assert accounting.common_rtklib_phase_compatible_satellite_count == 1
+    assert tuple(item.sv_id for item in accounting.common_integer_compatible_identities) == (1, 2)
 
 
 def test_gps_code_spp_and_real_dd_matrix_are_finite():
@@ -237,6 +414,58 @@ def test_gps_code_spp_and_real_dd_matrix_are_finite():
     assert model.covariance_m2.shape == (10, 10)
     assert np.all(np.isfinite(model.covariance_m2))
     assert np.all(np.linalg.eigvalsh(model.covariance_m2) > 0)
+    assert model.receiver_order == "GNSS2_MINUS_GNSS1"
+    assert model.dd_sign_convention == "(GNSS2-GNSS1)_SATELLITE_MINUS_PIVOT"
+    assert model.ambiguity_satellite_identities == model.satellites
+    assert len(model.ambiguity_signal_identities) == model.ambiguity_design_m.shape[1]
+    conditions = dd_matrix_condition_diagnostics(model)
+    assert conditions.raw_design_rank == conditions.unknown_count
+    assert conditions.whitened_design_rank == conditions.unknown_count
+    assert np.isfinite(conditions.raw_design_condition)
+    assert np.isfinite(conditions.whitened_design_condition)
+
+
+def test_ambiguity_identity_vector_alignment():
+    """The model metadata order is exactly the ambiguity-design column order."""
+    identities = tuple(SignalIdentity(0, sv, 0, 0) for sv in (3, 7, 11))
+    accounting = backend.GpsL1EpochAccounting(
+        common_raw_identities=identities,
+        common_pr_valid_identities=identities,
+        common_cp_valid_identities=identities,
+        common_pr_cp_valid_identities=identities,
+        common_half_cycle_valid_identities=identities,
+        common_integer_compatible_identities=identities,
+        satellite_state_available_identities=identities,
+        elevation_eligible_identities=identities,
+        dd_eligible_identities=identities,
+    )
+    model = backend.DoubleDifferenceModel(
+        pivot=SignalIdentity(0, 2, 0, 0),
+        satellites=identities,
+        observation_m=np.zeros(6),
+        ambiguity_design_m=np.vstack((np.zeros((3, 3)), np.eye(3))),
+        baseline_design=np.zeros((6, 3)),
+        covariance_m2=np.eye(6),
+        elevations_rad={},
+        accounting=accounting,
+    )
+    ambiguity = [1, -2, 3]
+    assert [backend.identity_text(item) for item in model.ambiguity_satellite_identities] == [
+        "0:3:0:0", "0:7:0:0", "0:11:0:0"
+    ]
+    assert len(model.ambiguity_satellite_identities) == len(ambiguity)
+    assert model.receiver_order == "GNSS2_MINUS_GNSS1"
+
+
+def test_receiver_clock_reset_resets_arc_without_false_cycle_slip():
+    continuity = TrackingContinuity()
+    measurement = _measurement(7, trk=0x0F, lock=500)
+    continuity.update(1, _epoch(1.0, (measurement,)), measurement)
+    reset_epoch = RawxEpoch(2.0, 2408, 18, 0x02, 1, (measurement,))
+    flags = continuity.update(1, reset_epoch, measurement)
+    assert flags.receiver_clock_reset is True
+    assert flags.arc_reset_due_to_tracking is True
+    assert flags.cycle_slip_detected is False
 
 
 def test_rtklib_ctypes_adapter_loads_multiple_nav_and_transmit_state(tmp_path, monkeypatch):
@@ -309,6 +538,112 @@ def test_rtklib_ctypes_adapter_loads_multiple_nav_and_transmit_state(tmp_path, m
         assert audit.iode == 12
         assert provider.frequency_hz(SignalIdentity(0, 7, 0, 0)) == pytest.approx(1575.42e6)
     assert fake.freed
-    build_gps_l1_double_difference_model,
-    decode_nav_sat,
-    gps_l1_code_spp,
+
+
+def _independent_rawx_tracking(stream):
+    """Minimal test-only RAWX decoder, independent of the DD builder/decoder."""
+    epochs = {}
+    cursor = 0
+    while cursor < len(stream):
+        assert stream[cursor:cursor + 2] == b"\xb5\x62"
+        message_class, message_id, length = struct.unpack_from("<BBH", stream, cursor + 2)
+        end = cursor + 6 + length
+        body = stream[cursor + 2:end]
+        first = second = 0
+        for value in body:
+            first = (first + value) & 0xFF
+            second = (second + first) & 0xFF
+        assert stream[end:end + 2] == bytes((first, second))
+        if (message_class, message_id) == (0x02, 0x15):
+            payload = stream[cursor + 6:end]
+            tow, week, _leap, count, _rec_stat, version = struct.unpack_from(
+                "<dHbBBB", payload
+            )
+            assert version == 1 and len(payload) == 16 + 32 * count
+            tracking = {}
+            for index in range(count):
+                offset = 16 + 32 * index
+                gnss, sv, sig, freq = struct.unpack_from("<BBBB", payload, offset + 20)
+                trk_stat = payload[offset + 30]
+                tracking[(gnss, sv, sig, freq)] = trk_stat
+            assert (week, tow) not in epochs
+            epochs[(week, tow)] = tracking
+        cursor = end + 2
+    return epochs
+
+
+def test_independent_common_satellite_counts():
+    repository = Path(__file__).resolve().parents[2]
+    local_config = repository / "configs/paper_rebuild/DATA_PATHS.CLEAN3R4.local.yaml"
+    if not local_config.is_file():
+        pytest.skip("ignored Phase1R local data-path configuration is unavailable")
+    configured = yaml.safe_load(local_config.read_text(encoding="utf-8"))
+    raw_root = Path(configured["paths"]["by2_fix_root"])
+    raw_paths = (raw_root / "gnss1-raw.csv", raw_root / "gnss2-raw.csv")
+    if not all(path.is_file() for path in raw_paths):
+        pytest.skip("hash-locked BY2 raw CSV files are unavailable")
+
+    reconstructions = tuple(reconstruct_ubx_stream(path) for path in raw_paths)
+    direct1, direct2 = (
+        _independent_rawx_tracking(reconstruction.stream)
+        for reconstruction in reconstructions
+    )
+    keys = sorted(set(direct1) & set(direct2))
+    assert len(keys) == 1509
+    backend_pairs, failures = pair_epochs(
+        reconstructions[0].rawx_epochs, reconstructions[1].rawx_epochs
+    )
+    assert len(backend_pairs) == 1509 and failures == []
+    backend_by_key = {
+        (first.gps_week, first.gps_tow_seconds): gps_l1_epoch_accounting(first, second)
+        for first, second in backend_pairs
+    }
+
+    raw_counts, pr_cp_counts, half_counts = [], [], []
+    for key in keys:
+        first = {
+            identity: status for identity, status in direct1[key].items()
+            if (identity[0], identity[2], identity[3]) == (0, 0, 0)
+        }
+        second = {
+            identity: status for identity, status in direct2[key].items()
+            if (identity[0], identity[2], identity[3]) == (0, 0, 0)
+        }
+        common = set(first) & set(second)
+        pr_cp = {
+            identity for identity in common
+            if first[identity] & 0x03 == 0x03 and second[identity] & 0x03 == 0x03
+        }
+        half = {
+            identity for identity in pr_cp
+            if first[identity] & 0x04 and second[identity] & 0x04
+        }
+        direct_counts = (len(common), len(pr_cp), len(half))
+        observed = backend_by_key[key]
+        backend_counts = (
+            observed.common_raw_satellite_count,
+            observed.common_pr_cp_valid_satellite_count,
+            observed.common_half_cycle_valid_satellite_count,
+        )
+        if direct_counts != backend_counts:
+            dump1 = [(item[1], f"0x{first[item]:02X}") for item in sorted(first)]
+            dump2 = [(item[1], f"0x{second[item]:02X}") for item in sorted(second)]
+            pytest.fail(
+                f"first independent/backend difference at {key}: "
+                f"direct={direct_counts} backend={backend_counts}; "
+                f"receiver1(sv,trkStat)={dump1}; receiver2(sv,trkStat)={dump2}"
+            )
+        raw_counts.append(len(common))
+        pr_cp_counts.append(len(pr_cp))
+        half_counts.append(len(half))
+
+    assert (min(raw_counts), statistics.mean(raw_counts), max(raw_counts),
+            sum(value == 0 for value in raw_counts)) == pytest.approx(
+                (5, 7.9609012591, 10, 0), abs=1e-10
+            )
+    assert (min(pr_cp_counts), statistics.mean(pr_cp_counts), max(pr_cp_counts)) == pytest.approx(
+        (3, 6.4188204109, 9), abs=1e-10
+    )
+    assert (min(half_counts), statistics.mean(half_counts), max(half_counts)) == pytest.approx(
+        (2, 4.3585155732, 9), abs=1e-10
+    )

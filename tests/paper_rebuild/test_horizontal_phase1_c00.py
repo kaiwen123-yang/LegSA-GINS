@@ -7,6 +7,7 @@ import subprocess
 import sys
 
 import numpy as np
+import pytest
 import yaml
 
 import legsa_gins.paper_rebuild.horizontal_literature.phase1_runner as phase1
@@ -22,6 +23,7 @@ from legsa_gins.paper_rebuild.horizontal_literature.phase1_runner import (
     run_phase1,
     runtime_manifest_template,
 )
+import legsa_gins.paper_rebuild.horizontal_literature.phase1r_runner as phase1r
 
 
 def _digest(data: bytes) -> str:
@@ -234,3 +236,159 @@ def test_post_mkdir_failure_writes_machine_terminal_and_preserves_partial_root(
     status = json.loads(paths.output_files["phase1_status"].read_text(encoding="utf-8"))
     assert status["error_type"] == "RuntimeError"
     assert status["trace_used_online"] is False
+
+
+def test_workers_1_and_16_identical():
+    left = {
+        "result": {"epoch_index": 7, "ambiguity_vector": [2, -1],
+                   "body_yaw_deg": 12.5, "global_optimum_certified": True},
+        "dd": {"common_raw_satellite_count": 8},
+        "search": {"termination_reason": "GLOBAL_BOUND_CERTIFIED",
+                   "branch_and_bound_nodes_expanded": 19},
+        "runtime": {"runtime_seconds": 0.1, "worker_pid": 101},
+    }
+    right = json.loads(json.dumps(left))
+    right["runtime"].update(runtime_seconds=0.7, worker_pid=202)
+    assert phase1r._scientific_part(left) == phase1r._scientific_part(right)
+    right["result"]["ambiguity_vector"] = [2, 0]
+    assert phase1r._scientific_part(left) != phase1r._scientific_part(right)
+
+
+def test_all_1509_epochs_conserved():
+    rows = [
+        {"gps_week": 2408, "gps_tow_seconds": 460873.998 + 0.2 * index,
+         "integer_solution_returned": index % 3 != 0}
+        for index in range(phase1r.EXPECTED_PAIR_COUNT)
+    ]
+    continuity = phase1r._continuity(rows)
+    assert len(rows) == phase1r.EXPECTED_PAIR_COUNT == 1509
+    assert continuity["integer_solution_epoch_count"] == sum(
+        row["integer_solution_returned"] for row in rows
+    )
+
+
+def test_trace_not_opened_before_native_freeze(tmp_path):
+    trace = tmp_path / "trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv"
+    trace.write_text("time,yaw\n1,2\n", encoding="utf-8")
+    fake = SimpleNamespace(
+        native_freeze=tmp_path / "missing_native_freeze.json",
+        target_root=tmp_path,
+        output_files={},
+        base=SimpleNamespace(by2_fix_root=tmp_path),
+    )
+    with pytest.raises(FileNotFoundError):
+        phase1r._trace_metrics_after_freeze(fake, (), ())
+    assert trace.read_text(encoding="utf-8") == "time,yaw\n1,2\n"
+
+
+def test_phase1r_output_contract_has_no_ambiguity_acceptance_claim():
+    assert phase1r.RESULT_FIELDS.index("ambiguity_satellite_identities") \
+        < phase1r.RESULT_FIELDS.index("ambiguity_vector")
+    assert "ambiguity_acceptance_test_defined" in phase1r.RESULT_FIELDS
+    assert "ambiguity_accepted" in phase1r.RESULT_FIELDS
+    assert "global_optimum_certified" in phase1r.SEARCH_FIELDS
+    assert "candidate_cap_applied" in phase1r.SEARCH_FIELDS
+
+
+def test_phase1r_terminal_cannot_pass_empty_validity_evidence():
+    status, _ = phase1r._terminal_from_evidence(
+        {"row_level_scientific_equality": True},
+        {"search_objective_crosscheck_passed": True,
+         "objective_identity_crosscheck_passed": True,
+         "code_phase_cross_covariance_crosscheck_passed": True},
+        [], {"quality_statistics": {}, "output_row_count": 0},
+        {"native_rows": 1509, "dd_rows": 1509, "search_rows": 1509,
+         "proxy_rows": 1509, "integer_solution_rows": 0,
+         "fractional_dd_rows": 0, "rtklib_diagnostic_rows": 0,
+         "rtklib_matched_proxy_rows": 0},
+    )
+    assert status == "BLOCKED_PHASE1R_VALIDITY_EVIDENCE_EMPTY"
+
+
+def test_phase1r_terminal_requires_rtklib_rows_to_match_proxy_epochs():
+    status, _ = phase1r._terminal_from_evidence(
+        {"row_level_scientific_equality": True},
+        {"search_objective_crosscheck_passed": True,
+         "objective_identity_crosscheck_passed": True,
+         "code_phase_cross_covariance_crosscheck_passed": True},
+        [], {"quality_statistics": {}, "output_row_count": 4,
+             "matched_proxy_count": 0},
+        {"native_rows": 1509, "dd_rows": 1509, "search_rows": 1509,
+         "proxy_rows": 1509, "integer_solution_rows": 1,
+         "fractional_dd_rows": 1, "rtklib_diagnostic_rows": 4,
+         "rtklib_matched_proxy_rows": 0},
+    )
+    assert status == "BLOCKED_PHASE1R_RTKLIB_DIAGNOSTIC_JOIN_FAILED"
+
+
+def test_phase1r_epoch_fingerprint_binds_generated_navigation_hashes():
+    audit = {
+        "ubx_hashes": {"gnss1.ubx": "1" * 64},
+        "observation_hashes": {"gnss1.obs": "2" * 64},
+        "navigation_hashes": {"gnss1.nav": "3" * 64},
+        "cache_manifest_sha256": "4" * 64,
+    }
+    first = phase1r._epoch_fingerprint("0" * 64, audit)
+    changed = json.loads(json.dumps(audit))
+    changed["navigation_hashes"]["gnss1.nav"] = "5" * 64
+    assert first != phase1r._epoch_fingerprint("0" * 64, changed)
+
+
+def test_phase1r_original_c00_hash_tree_rejects_symlinks(tmp_path):
+    source = tmp_path / "source.txt"
+    source.write_text("immutable", encoding="utf-8")
+    (tmp_path / "alias.txt").symlink_to(source)
+    with pytest.raises(phase1r.Phase1RRunnerError, match="symlink"):
+        phase1r._hash_tree(tmp_path)
+
+
+def test_phase1r_containment_rejects_symlinked_runtime_ancestor(tmp_path):
+    target = tmp_path / "target"
+    outside = tmp_path / "outside"
+    target.mkdir()
+    outside.mkdir()
+    (target / ".cache").symlink_to(outside, target_is_directory=True)
+    with pytest.raises(phase1r.Phase1RRunnerError, match="symlink"):
+        phase1r._assert_contained(target / ".cache/fingerprint/NAV", target)
+
+
+def test_phase1r_native_freeze_rejects_stale_run_provenance(tmp_path, monkeypatch):
+    monkeypatch.setattr(phase1r, "EXPECTED_PAIR_COUNT", 1)
+    target = tmp_path / "validated"
+    target.mkdir()
+    outputs = {}
+    for name in phase1r.NATIVE_FREEZE_NAMES:
+        path = target / f"{name}.csv"
+        if name == "failures":
+            path.write_text("epoch_index\n", encoding="utf-8")
+        else:
+            path.write_text("epoch_index\n0\n", encoding="utf-8")
+        outputs[name] = path
+    freeze_path = target / "PHASE1R_NATIVE_FREEZE.json"
+    raw_hashes = {"gnss1-raw.csv": "1" * 64, "gnss2-raw.csv": "2" * 64}
+    original_hashes = {"native.csv": "3" * 64}
+    freeze_path.write_text(json.dumps({
+        "native_hashes": {name: phase1r.sha256_file(path) for name, path in outputs.items()},
+        "native_frozen_before_trace_open": True,
+        "trace_open_count_at_freeze": 0,
+        "paired_epoch_count": 1,
+        "native_row_count": 1,
+        "failure_row_count": 0,
+        "worker_determinism": {"row_level_scientific_equality": True},
+        "run_fingerprint": "a" * 64,
+        "raw_source_hashes": raw_hashes,
+        "original_c00_hashes": original_hashes,
+        "original_c00_tree_digest": phase1r._tree_digest(original_hashes),
+    }), encoding="utf-8")
+    paths = SimpleNamespace(
+        target_root=target, native_freeze=freeze_path, output_files=outputs,
+    )
+    phase1r._validate_native_freeze(
+        paths, fingerprint="a" * 64, raw_hashes=raw_hashes,
+        original_hashes=original_hashes,
+    )
+    with pytest.raises(phase1r.Phase1RRunnerError, match="fingerprint"):
+        phase1r._validate_native_freeze(
+            paths, fingerprint="b" * 64, raw_hashes=raw_hashes,
+            original_hashes=original_hashes,
+        )

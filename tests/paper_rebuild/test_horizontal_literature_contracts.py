@@ -50,3 +50,19 @@ def test_literature_identity_hashes_and_no_code_reuse_are_locked():
     assert "01_SHARED_RAW_BACKEND/STOCHASTIC_MODEL_CONTRACT.yaml" in runtime_files
     assert "11_REPORT/PHASE1_STATUS.json" in runtime_files
     assert not any("seal" in value.lower() for value in runtime_files)
+
+
+def test_phase1r_contract_locks_validation_without_trace_tuning():
+    contract = yaml.safe_load((CONFIG / "PHASE1R_VALIDATION_CONTRACT_V1.yaml").read_text())
+    assert contract["immutable_parent"]["freeze_commit"] == (
+        "2dd8fbaba986b07349a33d56d4b7618a1fada4d0"
+    )
+    assert contract["parallel_execution"]["default_workers"] == 16
+    assert contract["parallel_execution"]["semantic_worker_determinism_required"] is True
+    assert contract["half_cycle_contract"]["production_adjustment_cycles"] == 0.0
+    assert contract["half_cycle_contract"]["sub_half_cyc_role"] == (
+        "OBSERVED_CORRECTION_STATE_NOT_INVALIDITY"
+    )
+    assert contract["strict_search"]["ambiguity_acceptance_test_defined"] is False
+    assert contract["diagnostic_only_sources"]["trace"]["allowed_before_native_hash_freeze"] is False
+    assert len(contract["required_outputs"]) == 11

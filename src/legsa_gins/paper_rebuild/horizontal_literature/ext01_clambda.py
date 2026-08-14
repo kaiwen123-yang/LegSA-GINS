@@ -1,9 +1,11 @@
 """Strict constrained integer least-squares implementation.
 
 Small synthetic problems retain a complete finite enumeration oracle.  The
-production path obtains globally ordered integer candidates from the standard
-RTKLIB LAMBDA implementation through its C ABI and evaluates every candidate
-with the full fixed-length conditional-baseline objective.
+production path uses standard RTKLIB LAMBDA decorrelation and ordinary-ILS
+candidates only to seed a finite incumbent.  An exact best-first
+branch-and-bound then evaluates the full fixed-length conditional-baseline
+objective until its frontier bound certifies the global first and second
+solutions.  Any explicit resource limit fails closed without a certificate.
 """
 
 from __future__ import annotations
@@ -65,6 +67,117 @@ class Candidate:
     baseline_objective: float
     constraint_error_m: float
 
+    @property
+    def ambiguity_quadratic_term(self) -> float:
+        """The integer-only term in P01 Eq. (22)."""
+        return self.ambiguity_objective
+
+    @property
+    def conditional_baseline_constraint_term(self) -> float:
+        """The fixed-length conditional-baseline term in P01 Eq. (22)."""
+        return self.baseline_objective
+
+    @property
+    def total_constrained_objective(self) -> float:
+        """Full C-LAMBDA objective, excluding the common float residual."""
+        return self.objective
+
+
+@dataclass(frozen=True)
+class ProductionObjectiveEvaluation:
+    """Exact production-objective and observation-residual decomposition.
+
+    The candidate objective is the increase relative to the joint float
+    least-squares minimum.  ``whitened_total_residual_squared`` evaluates the
+    same integer/baseline candidate directly in observation space.  Their
+    difference, after adding ``float_residual_objective``, is retained as a
+    numerical audit rather than silently assumed to be zero.
+    """
+
+    candidate: Candidate
+    float_residual_objective: float
+    whitened_code_residual_norm: float
+    whitened_phase_residual_norm: float
+    whitened_total_residual_norm: float
+    whitened_total_residual_squared: float
+    objective_identity_error: float
+    code_phase_cross_covariance_zero: bool
+
+    @property
+    def ambiguity_quadratic_term(self) -> float:
+        return self.candidate.ambiguity_quadratic_term
+
+    @property
+    def conditional_baseline_constraint_term(self) -> float:
+        return self.candidate.conditional_baseline_constraint_term
+
+    @property
+    def total_constrained_objective(self) -> float:
+        return self.candidate.total_constrained_objective
+
+
+GLOBAL_BOUND_CERTIFIED = "GLOBAL_BOUND_CERTIFIED"
+NUMERICAL_FAILURE = "NUMERICAL_FAILURE"
+NO_FEASIBLE_MODEL = "NO_FEASIBLE_MODEL"
+
+
+@dataclass(frozen=True)
+class SearchCertificate:
+    """Machine-auditable certificate for the strict integer search.
+
+    ``lambda_seed_count_*`` describes only RTKLIB incumbent seeding.  It is
+    deliberately separate from tree nodes and integer leaves: the seed count
+    is never an enumeration cap.  A configured protective node limit can only
+    terminate with ``NUMERICAL_FAILURE`` and can never produce a global
+    certificate.
+    """
+
+    lambda_seed_count_requested: int
+    lambda_seed_count_returned: int
+    branch_and_bound_nodes_expanded: int
+    integer_leaves_evaluated: int
+    unique_integer_candidates_evaluated: int
+    frontier_lower_bound_at_termination: float | None
+    best_total_objective: float | None
+    second_total_objective: float | None
+    termination_reason: str
+    global_optimum_certified: bool
+    runtime_budget_exhausted: bool
+    configured_node_limit: int | None
+    node_limit_exhausted: bool
+    candidate_cap_applied: bool = False
+
+
+@dataclass(frozen=True)
+class StrictSearchOutcome:
+    best: Candidate | None
+    second: Candidate | None
+    certificate: SearchCertificate
+    failure_code: str | None = None
+
+    def _legacy_tuple(self) -> tuple[
+            Candidate | None, Candidate | None, int, int, bool,
+            str | None, float | None]:
+        """Keep the Phase-1 seven-value interface while callers migrate."""
+        return (
+            self.best,
+            self.second,
+            self.certificate.branch_and_bound_nodes_expanded,
+            self.certificate.unique_integer_candidates_evaluated,
+            self.certificate.global_optimum_certified,
+            self.failure_code,
+            self.certificate.frontier_lower_bound_at_termination,
+        )
+
+    def __iter__(self):
+        return iter(self._legacy_tuple())
+
+    def __len__(self) -> int:
+        return 7
+
+    def __getitem__(self, index):
+        return self._legacy_tuple()[index]
+
 
 @dataclass(frozen=True)
 class CLambdaResult:
@@ -80,6 +193,23 @@ class CLambdaResult:
     status: str = "fixed"
     failure_code: str | None = None
     completion_bound: float | None = None
+    lambda_seed_count_requested: int = 0
+    lambda_seed_count_returned: int = 0
+    branch_and_bound_nodes_expanded: int = 0
+    integer_leaves_evaluated: int = 0
+    unique_integer_candidates_evaluated: int = 0
+    frontier_lower_bound_at_termination: float | None = None
+    termination_reason: str = GLOBAL_BOUND_CERTIFIED
+    global_optimum_certified: bool = False
+    runtime_budget_exhausted: bool = False
+    configured_node_limit: int | None = None
+    node_limit_exhausted: bool = False
+    candidate_cap_applied: bool = False
+    best_total_objective: float | None = None
+    second_total_objective: float | None = None
+    integer_solution_returned: bool = False
+    ambiguity_acceptance_test_defined: bool = False
+    ambiguity_accepted: bool | None = None
 
 
 @dataclass(frozen=True)
@@ -330,7 +460,13 @@ def constrained_baseline(center: Sequence[float], covariance: np.ndarray,
 
 
 def evaluate_candidate(solution: FloatSolution, ambiguity: Sequence[int], length_m: float) -> Candidate:
-    integer = np.asarray(ambiguity, dtype=int)
+    supplied = np.asarray(ambiguity)
+    if supplied.shape != solution.ambiguity.shape or np.any(~np.isfinite(supplied.astype(float))):
+        raise CLambdaError("ambiguity candidate dimension mismatch or non-finite value")
+    rounded = np.rint(supplied.astype(float))
+    if not np.allclose(supplied.astype(float), rounded, rtol=0.0, atol=1e-10):
+        raise CLambdaError("ambiguity candidate must be integer valued")
+    integer = rounded.astype(np.int64)
     delta = solution.ambiguity - integer
     ambiguity_objective = float(delta @ np.linalg.solve(solution.covariance_aa, delta))
     conditional_center = conditional_float_baseline(solution, integer)
@@ -339,6 +475,87 @@ def evaluate_candidate(solution: FloatSolution, ambiguity: Sequence[int], length
                      ambiguity_objective + constrained.objective,
                      ambiguity_objective, constrained.objective,
                      constrained.constraint_error_m)
+
+
+def _whitened_norm(residual: np.ndarray, covariance: np.ndarray,
+                   name: str) -> float:
+    covariance = _positive_definite(covariance, name)
+    value = np.asarray(residual, dtype=float)
+    if value.ndim != 1 or value.size != covariance.shape[0] or np.any(~np.isfinite(value)):
+        raise CLambdaError(f"{name} residual has incompatible dimensions")
+    # Q=L L' and ||L^-1 r|| is exactly sqrt(r'Q^-1 r).  Avoid explicitly
+    # forming Q^-1 so the diagnostic uses the production covariance scaling.
+    whitened = np.linalg.solve(np.linalg.cholesky(covariance), value)
+    return float(np.linalg.norm(whitened))
+
+
+def evaluate_production_objective(
+        solution: FloatSolution,
+        ambiguity: Sequence[int],
+        length_m: float,
+        observation: Sequence[float],
+        ambiguity_design: np.ndarray,
+        baseline_design: np.ndarray,
+        observation_covariance: np.ndarray,
+        *,
+        code_observation_count: int | None = None,
+        cross_covariance_tolerance: float = 1e-12,
+) -> ProductionObjectiveEvaluation:
+    """Evaluate an integer candidate with the exact production objective.
+
+    The helper is intentionally independent of candidate provenance.  It can
+    therefore compare a production winner and a diagnostic proxy-derived
+    integer vector without changing either the model or search.  The Phase-1
+    DD builder orders code rows before carrier rows; callers must pass the code
+    row count explicitly when that layout is not an equal split.
+    """
+    y = np.asarray(observation, dtype=float)
+    a_design = np.asarray(ambiguity_design, dtype=float)
+    b_design = np.asarray(baseline_design, dtype=float)
+    covariance = _positive_definite(observation_covariance, "observation covariance")
+    if y.ndim != 1 or np.any(~np.isfinite(y)):
+        raise CLambdaError("observation must be a finite vector")
+    if a_design.shape != (y.size, solution.ambiguity.size):
+        raise CLambdaError("ambiguity design has incompatible dimensions")
+    if b_design.shape != (y.size, 3) or covariance.shape != (y.size, y.size):
+        raise CLambdaError("baseline design or covariance has incompatible dimensions")
+    if code_observation_count is None:
+        if y.size % 2:
+            raise CLambdaError("code_observation_count is required for an odd row count")
+        code_observation_count = y.size // 2
+    if not 0 < code_observation_count < y.size:
+        raise CLambdaError("code_observation_count must split code and phase rows")
+
+    candidate = evaluate_candidate(solution, ambiguity, length_m)
+    residual = y - a_design @ candidate.ambiguity - b_design @ candidate.baseline
+    code_slice = slice(0, code_observation_count)
+    phase_slice = slice(code_observation_count, y.size)
+    code_covariance = covariance[code_slice, code_slice]
+    phase_covariance = covariance[phase_slice, phase_slice]
+    cross_covariance = covariance[code_slice, phase_slice]
+    covariance_scale = max(1.0, float(np.max(np.abs(covariance))))
+    cross_zero = bool(np.all(
+        np.abs(cross_covariance) <= cross_covariance_tolerance * covariance_scale
+    ))
+    code_norm = _whitened_norm(
+        residual[code_slice], code_covariance, "code covariance"
+    )
+    phase_norm = _whitened_norm(
+        residual[phase_slice], phase_covariance, "phase covariance"
+    )
+    total_norm = _whitened_norm(residual, covariance, "observation covariance")
+    total_squared = total_norm * total_norm
+    expected_total = solution.residual_objective + candidate.objective
+    return ProductionObjectiveEvaluation(
+        candidate=candidate,
+        float_residual_objective=solution.residual_objective,
+        whitened_code_residual_norm=code_norm,
+        whitened_phase_residual_norm=phase_norm,
+        whitened_total_residual_norm=total_norm,
+        whitened_total_residual_squared=total_squared,
+        objective_identity_error=float(total_squared - expected_total),
+        code_phase_cross_covariance_zero=cross_zero,
+    )
 
 
 def search_exact(solution: FloatSolution, length_m: float = 0.350,
@@ -392,11 +609,8 @@ def search_exact(solution: FloatSolution, length_m: float = 0.350,
 
 def search_strict_lambda(solution: FloatSolution, bridge: RTKLIBLambdaBridge,
                          length_m: float = 0.350, initial_candidate_count: int = 8,
-                         node_limit: int = 1_000_000,
-                         timeout_seconds: float = 1.0) -> tuple[
-                             Candidate | None, Candidate | None, int, int,
-                             bool, str | None, float | None
-                         ]:
+                         node_limit: int | None = None,
+                         timeout_seconds: float = 1.0) -> StrictSearchOutcome:
     """Search the exact C-LAMBDA objective with a proven stopping bound.
 
     Standard RTKLIB LAMBDA supplies initial candidates and its standard integer
@@ -408,26 +622,82 @@ def search_strict_lambda(solution: FloatSolution, bridge: RTKLIBLambdaBridge,
     current second-best full objective.  This is search-and-shrink, not an
     ordinary-LAMBDA fix followed by a baseline-length gate.
     """
-    if initial_candidate_count < 2 or node_limit < 1:
+    if initial_candidate_count < 2 or (node_limit is not None and node_limit < 1):
         raise CLambdaError("invalid strict LAMBDA candidate bounds")
+
+    def outcome(
+            evaluated: dict[tuple[int, ...], Candidate], *,
+            seed_count_returned: int,
+            nodes: int,
+            leaves: int,
+            frontier_bound: float | None,
+            termination_reason: str,
+            certified: bool,
+            failure_code: str | None,
+            runtime_budget_exhausted: bool = False,
+            node_limit_exhausted: bool = False,
+    ) -> StrictSearchOutcome:
+        ordered_candidates = sorted(
+            evaluated.values(), key=lambda item: (item.objective, tuple(item.ambiguity))
+        )
+        best = ordered_candidates[0] if ordered_candidates else None
+        second = ordered_candidates[1] if len(ordered_candidates) > 1 else None
+        certificate = SearchCertificate(
+            lambda_seed_count_requested=initial_candidate_count,
+            lambda_seed_count_returned=seed_count_returned,
+            branch_and_bound_nodes_expanded=nodes,
+            integer_leaves_evaluated=leaves,
+            unique_integer_candidates_evaluated=len(evaluated),
+            frontier_lower_bound_at_termination=frontier_bound,
+            best_total_objective=(None if best is None else best.objective),
+            second_total_objective=(None if second is None else second.objective),
+            termination_reason=termination_reason,
+            global_optimum_certified=certified,
+            runtime_budget_exhausted=runtime_budget_exhausted,
+            configured_node_limit=node_limit,
+            node_limit_exhausted=node_limit_exhausted,
+            candidate_cap_applied=False,
+        )
+        return StrictSearchOutcome(best, second, certificate, failure_code)
+
     if not math.isfinite(timeout_seconds) or timeout_seconds <= 0:
-        return None, None, 0, 0, False, SearchTimeout.code, None
+        return outcome(
+            {}, seed_count_returned=0, nodes=0, leaves=0,
+            frontier_bound=None, termination_reason=SearchTimeout.code,
+            certified=False, failure_code=SearchTimeout.code,
+            runtime_budget_exhausted=True,
+        )
 
     started = time.perf_counter()
     evaluated: dict[tuple[int, ...], Candidate] = {}
+    seeds: list[LambdaIntegerCandidate] = []
     try:
         seeds = bridge.candidates(
             solution.ambiguity, solution.covariance_aa, initial_candidate_count
         )
         reduced = bridge.decorrelate(solution.ambiguity, solution.covariance_aa)
+        for item in seeds:
+            key = tuple(int(value) for value in item.ambiguity)
+            evaluated[key] = evaluate_candidate(solution, item.ambiguity, length_m)
     except LambdaBridgeError:
-        return None, None, 0, 0, False, LambdaBridgeError.code, None
-    for item in seeds:
-        key = tuple(int(value) for value in item.ambiguity)
-        evaluated[key] = evaluate_candidate(solution, item.ambiguity, length_m)
+        return outcome(
+            evaluated, seed_count_returned=len(seeds), nodes=0, leaves=0,
+            frontier_bound=None, termination_reason=NUMERICAL_FAILURE,
+            certified=False, failure_code=LambdaBridgeError.code,
+        )
+    except (CLambdaError, np.linalg.LinAlgError):
+        return outcome(
+            evaluated, seed_count_returned=len(seeds), nodes=0, leaves=0,
+            frontier_bound=None, termination_reason=NUMERICAL_FAILURE,
+            certified=False, failure_code=NUMERICAL_FAILURE,
+        )
     ordered = sorted(evaluated.values(), key=lambda item: (item.objective, tuple(item.ambiguity)))
     if len(ordered) < 2:
-        return None, None, 0, len(evaluated), False, SearchIncomplete.code, None
+        return outcome(
+            evaluated, seed_count_returned=len(seeds), nodes=0, leaves=0,
+            frontier_bound=None, termination_reason=NO_FEASIBLE_MODEL,
+            certified=False, failure_code=SearchIncomplete.code,
+        )
     incumbent = float(ordered[1].objective)
 
     qbb = solution.covariance[-3:, -3:]
@@ -476,33 +746,61 @@ def search_strict_lambda(solution: FloatSolution, bridge: RTKLIBLambdaBridge,
     root_bound = partial_objective_lower_bound((), 0.0)
     heapq.heappush(frontier, (root_bound, serial, dimension - 1, (), 0.0))
     nodes = 0
+    leaves = 0
     completion_bound: float | None = None
     tolerance = 1e-11
 
     while frontier:
+        # Certification is a bound comparison, not an expanded tree node.
+        completion_bound = float(frontier[0][0])
+        if completion_bound + tolerance >= incumbent:
+            return outcome(
+                evaluated, seed_count_returned=len(seeds), nodes=nodes,
+                leaves=leaves, frontier_bound=completion_bound,
+                termination_reason=GLOBAL_BOUND_CERTIFIED, certified=True,
+                failure_code=None,
+            )
         if time.perf_counter() - started >= timeout_seconds:
-            return None, None, nodes, len(evaluated), False, SearchTimeout.code, completion_bound
+            return outcome(
+                evaluated, seed_count_returned=len(seeds), nodes=nodes,
+                leaves=leaves, frontier_bound=completion_bound,
+                termination_reason=SearchTimeout.code, certified=False,
+                failure_code=SearchTimeout.code, runtime_budget_exhausted=True,
+            )
+        if node_limit is not None and nodes >= node_limit:
+            return outcome(
+                evaluated, seed_count_returned=len(seeds), nodes=nodes,
+                leaves=leaves, frontier_bound=completion_bound,
+                termination_reason=NUMERICAL_FAILURE, certified=False,
+                failure_code=SearchIncomplete.code, node_limit_exhausted=True,
+            )
         full_lower_bound, _, index, suffix, ambiguity_bound = heapq.heappop(frontier)
         nodes += 1
         completion_bound = float(full_lower_bound)
-        if full_lower_bound + tolerance >= incumbent:
-            ordered = sorted(evaluated.values(), key=lambda item: (item.objective, tuple(item.ambiguity)))
-            return ordered[0], ordered[1], nodes, len(evaluated), True, None, completion_bound
-        if nodes > node_limit:
-            return None, None, nodes, len(evaluated), False, SearchIncomplete.code, completion_bound
         if index < 0:
+            leaves += 1
             reduced_integer = np.asarray(suffix, dtype=float)
             original = np.linalg.solve(reduced.transformation.T.astype(float), reduced_integer)
             integer = np.rint(original).astype(np.int64)
             if not np.allclose(original, integer, rtol=0.0, atol=1e-7):
-                return None, None, nodes, len(evaluated), False, LambdaBridgeError.code, completion_bound
+                return outcome(
+                    evaluated, seed_count_returned=len(seeds), nodes=nodes,
+                    leaves=leaves, frontier_bound=completion_bound,
+                    termination_reason=NUMERICAL_FAILURE, certified=False,
+                    failure_code=LambdaBridgeError.code,
+                )
             key = tuple(int(value) for value in integer)
             if key not in evaluated:
                 candidate = evaluate_candidate(solution, integer, length_m)
                 # Verify both the unimodular back-transform and the tree metric.
                 if not math.isclose(candidate.ambiguity_objective, ambiguity_bound,
                                     rel_tol=2e-7, abs_tol=2e-7):
-                    return None, None, nodes, len(evaluated), False, LambdaBridgeError.code, completion_bound
+                    return outcome(
+                        evaluated, seed_count_returned=len(seeds), nodes=nodes,
+                        leaves=leaves, frontier_bound=completion_bound,
+                        termination_reason=NUMERICAL_FAILURE, certified=False,
+                        failure_code=LambdaBridgeError.code,
+                    )
                 evaluated[key] = candidate
                 ordered = sorted(
                     evaluated.values(), key=lambda item: (item.objective, tuple(item.ambiguity))
@@ -539,8 +837,11 @@ def search_strict_lambda(solution: FloatSolution, bridge: RTKLIBLambdaBridge,
                                child_ambiguity_bound)
                 )
 
-    ordered = sorted(evaluated.values(), key=lambda item: (item.objective, tuple(item.ambiguity)))
-    return ordered[0], ordered[1], nodes, len(evaluated), True, None, math.inf
+    return outcome(
+        evaluated, seed_count_returned=len(seeds), nodes=nodes, leaves=leaves,
+        frontier_bound=math.inf, termination_reason=GLOBAL_BOUND_CERTIFIED,
+        certified=True, failure_code=None,
+    )
 
 
 def solve_clambda(y: Sequence[float], ambiguity_design: np.ndarray,
@@ -549,7 +850,7 @@ def solve_clambda(y: Sequence[float], ambiguity_design: np.ndarray,
                   lambda_bridge_path: str | Path | None = None,
                   strict: bool | None = None,
                   initial_candidate_count: int = 8,
-                  strict_node_limit: int = 1_000_000,
+                  strict_node_limit: int | None = None,
                   timeout_seconds: float = 1.0,
                   synthetic_max_dimension: int = 4) -> CLambdaResult:
     started = time.perf_counter()
@@ -559,30 +860,106 @@ def solve_clambda(y: Sequence[float], ambiguity_design: np.ndarray,
         if lambda_bridge_path is None:
             return CLambdaResult(None, None, None, False, False, 0, 0,
                                  time.perf_counter() - started, floating, "invalid",
-                                 "LAMBDA_BRIDGE_UNAVAILABLE")
+                                 "LAMBDA_BRIDGE_UNAVAILABLE",
+                                 termination_reason=NUMERICAL_FAILURE,
+                                 configured_node_limit=strict_node_limit)
         try:
             bridge = RTKLIBLambdaBridge(lambda_bridge_path)
         except LambdaBridgeError:
             return CLambdaResult(None, None, None, False, False, 0, 0,
                                  time.perf_counter() - started, floating, "invalid",
-                                 LambdaBridgeError.code)
-        best, second, nodes, candidates, complete, failure, bound = search_strict_lambda(
+                                 LambdaBridgeError.code,
+                                 termination_reason=NUMERICAL_FAILURE,
+                                 configured_node_limit=strict_node_limit)
+        strict_outcome = search_strict_lambda(
             floating, bridge, length_m, initial_candidate_count,
             strict_node_limit, timeout_seconds,
         )
-        if not complete:
-            return CLambdaResult(None, None, None, False, False, nodes, candidates,
-                                 time.perf_counter() - started, floating, "invalid",
-                                 failure, bound)
+        certificate = strict_outcome.certificate
+        if not certificate.global_optimum_certified:
+            return CLambdaResult(
+                None, None, None, False, False,
+                certificate.branch_and_bound_nodes_expanded,
+                certificate.unique_integer_candidates_evaluated,
+                time.perf_counter() - started, floating, "invalid",
+                strict_outcome.failure_code,
+                certificate.frontier_lower_bound_at_termination,
+                lambda_seed_count_requested=certificate.lambda_seed_count_requested,
+                lambda_seed_count_returned=certificate.lambda_seed_count_returned,
+                branch_and_bound_nodes_expanded=certificate.branch_and_bound_nodes_expanded,
+                integer_leaves_evaluated=certificate.integer_leaves_evaluated,
+                unique_integer_candidates_evaluated=(
+                    certificate.unique_integer_candidates_evaluated
+                ),
+                frontier_lower_bound_at_termination=(
+                    certificate.frontier_lower_bound_at_termination
+                ),
+                termination_reason=certificate.termination_reason,
+                global_optimum_certified=False,
+                runtime_budget_exhausted=certificate.runtime_budget_exhausted,
+                configured_node_limit=certificate.configured_node_limit,
+                node_limit_exhausted=certificate.node_limit_exhausted,
+                candidate_cap_applied=certificate.candidate_cap_applied,
+                best_total_objective=certificate.best_total_objective,
+                second_total_objective=certificate.second_total_objective,
+                integer_solution_returned=False,
+                ambiguity_acceptance_test_defined=False,
+                ambiguity_accepted=None,
+            )
+        best, second = strict_outcome.best, strict_outcome.second
+        if best is None or second is None:
+            raise CLambdaError("certified strict search did not return two candidates")
+        nodes = certificate.branch_and_bound_nodes_expanded
+        candidates = certificate.unique_integer_candidates_evaluated
+        bound = certificate.frontier_lower_bound_at_termination
     else:
         if floating.ambiguity.size > synthetic_max_dimension:
             raise SearchIncomplete("finite enumeration is restricted to small synthetic tests")
         best, second, nodes, candidates = search_exact(floating, length_m, node_limit)
         bound = None
+        certificate = SearchCertificate(
+            lambda_seed_count_requested=0,
+            lambda_seed_count_returned=0,
+            branch_and_bound_nodes_expanded=nodes,
+            integer_leaves_evaluated=candidates,
+            unique_integer_candidates_evaluated=candidates,
+            frontier_lower_bound_at_termination=None,
+            best_total_objective=best.objective,
+            second_total_objective=(None if second is None else second.objective),
+            termination_reason=GLOBAL_BOUND_CERTIFIED,
+            global_optimum_certified=True,
+            runtime_budget_exhausted=False,
+            configured_node_limit=node_limit,
+            node_limit_exhausted=False,
+            candidate_cap_applied=False,
+        )
     ratio_valid = second is not None and best.objective > 0 and math.isfinite(second.objective)
     ratio = second.objective / best.objective if ratio_valid else None
-    return CLambdaResult(best, second, ratio, ratio_valid, True, nodes, candidates,
-                         time.perf_counter() - started, floating, "fixed", None, bound)
+    return CLambdaResult(
+        best, second, ratio, ratio_valid, True, nodes, candidates,
+        time.perf_counter() - started, floating, "fixed", None, bound,
+        lambda_seed_count_requested=certificate.lambda_seed_count_requested,
+        lambda_seed_count_returned=certificate.lambda_seed_count_returned,
+        branch_and_bound_nodes_expanded=certificate.branch_and_bound_nodes_expanded,
+        integer_leaves_evaluated=certificate.integer_leaves_evaluated,
+        unique_integer_candidates_evaluated=(
+            certificate.unique_integer_candidates_evaluated
+        ),
+        frontier_lower_bound_at_termination=(
+            certificate.frontier_lower_bound_at_termination
+        ),
+        termination_reason=certificate.termination_reason,
+        global_optimum_certified=certificate.global_optimum_certified,
+        runtime_budget_exhausted=certificate.runtime_budget_exhausted,
+        configured_node_limit=certificate.configured_node_limit,
+        node_limit_exhausted=certificate.node_limit_exhausted,
+        candidate_cap_applied=certificate.candidate_cap_applied,
+        best_total_objective=certificate.best_total_objective,
+        second_total_objective=certificate.second_total_objective,
+        integer_solution_returned=True,
+        ambiguity_acceptance_test_defined=False,
+        ambiguity_accepted=None,
+    )
 
 
 def wrap_degrees(angle: float) -> float:

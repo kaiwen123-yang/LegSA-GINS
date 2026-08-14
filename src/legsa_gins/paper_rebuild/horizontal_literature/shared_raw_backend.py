@@ -13,7 +13,7 @@ import ctypes
 import math
 import struct
 from collections import Counter, defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Iterable, Protocol, Sequence
 
@@ -24,12 +24,31 @@ class RawBackendError(ValueError):
     pass
 
 
+class DoubleDifferenceStageError(RawBackendError):
+    """A fail-closed DD construction error with its first failed stage.
+
+    ``accounting`` is deliberately attached to failures as well as successful
+    models.  In particular, a satellite-state failure must never erase the
+    provider-independent raw/common-satellite evidence collected first.
+    """
+
+    def __init__(self, code: str, message: str, accounting: object | None = None):
+        super().__init__(f"{code}: {message}")
+        self.code = code
+        self.accounting = accounting
+
+
 @dataclass(frozen=True, order=True)
 class SignalIdentity:
     gnss_id: int
     sv_id: int
     sig_id: int
     freq_id: int
+
+
+def identity_text(identity: SignalIdentity) -> str:
+    """Stable serialization used by row-level ambiguity and tracking audits."""
+    return f"{identity.gnss_id}:{identity.sv_id}:{identity.sig_id}:{identity.freq_id}"
 
 
 @dataclass(frozen=True)
@@ -60,6 +79,40 @@ class RawxMeasurement:
     @property
     def half_cycle_subtracted(self) -> bool:
         return bool(self.tracking_status & 0x08)
+
+    # Official UBX field-name aliases.  Keeping both spellings prevents an
+    # audit writer from accidentally translating the four independent trkStat
+    # bits into one misleading aggregate flag.
+    @property
+    def pr_valid(self) -> bool:
+        return self.pseudorange_valid
+
+    @property
+    def cp_valid(self) -> bool:
+        return self.carrier_valid
+
+    @property
+    def half_cyc(self) -> bool:
+        return self.half_cycle_valid
+
+    @property
+    def sub_half_cyc(self) -> bool:
+        return self.half_cycle_subtracted
+
+    def tracking_audit(self) -> dict[str, int | bool | float | str]:
+        """Return the unaggregated receiver measurement fields for audit."""
+        return {
+            "identity": identity_text(self.identity),
+            "prValid": self.pr_valid,
+            "cpValid": self.cp_valid,
+            "halfCyc": self.half_cyc,
+            "subHalfCyc": self.sub_half_cyc,
+            "locktime_ms": self.locktime_ms,
+            "prStdev": self.pr_std_code,
+            "cpStdev": self.cp_std_code,
+            "doStdev": self.do_std_code,
+            "trkStat": self.tracking_status,
+        }
 
 
 @dataclass(frozen=True)
@@ -99,6 +152,31 @@ class NavSatEpoch:
     itow_ms: int
     version: int
     satellites: tuple[NavSatEntry, ...]
+
+
+@dataclass(frozen=True)
+class NavHpPosEcefEpoch:
+    """UBX-NAV-HPPOSECEF v0 with the exact documented integer components."""
+
+    itow_ms: int
+    version: int
+    ecef_cm: tuple[int, int, int]
+    ecef_hp_0p1mm: tuple[int, int, int]
+    position_accuracy_0p1mm: int
+    reserved1: bytes = b"\x00\x00\x00"
+    reserved2: int = 0
+
+    @property
+    def position_ecef_m(self) -> np.ndarray:
+        # UBX-18053584 R02 section 5.14.6: precise coordinate in cm is
+        # ecef + ecefHp*1e-2, hence metres are cm*1e-2 + hp*1e-4.
+        return np.asarray(self.ecef_cm, dtype=float) * 1.0e-2 + np.asarray(
+            self.ecef_hp_0p1mm, dtype=float
+        ) * 1.0e-4
+
+    @property
+    def position_accuracy_m(self) -> float:
+        return self.position_accuracy_0p1mm * 1.0e-4
 
 
 @dataclass(frozen=True)
@@ -149,6 +227,7 @@ class UbxReconstruction:
     input_cell_count: int
     discarded_byte_count: int
     checksum_failure_count: int
+    nav_hpposecef_epochs: tuple[NavHpPosEcefEpoch, ...] = ()
 
 
 def parse_csv_data_cell(cell: str) -> bytes:
@@ -274,6 +353,7 @@ def reconstruct_ubx_stream(csv_path: Path, output_path: Path | None = None,
     rawx_epochs: list[RawxEpoch] = []
     sfrbx_messages: list[SfrbxWords] = []
     nav_sat_epochs: list[NavSatEpoch] = []
+    nav_hpposecef_epochs: list[NavHpPosEcefEpoch] = []
     source = Path(csv_path)
     cells = tuple(read_csv_data_cells(source, column))
     cell_frames, discarded, checksum_failures = _scan_valid_ubx_frames(b"".join(cells))
@@ -286,6 +366,8 @@ def reconstruct_ubx_stream(csv_path: Path, output_path: Path | None = None,
             sfrbx_messages.append(decode_sfrbx(payload))
         elif (msg_class, msg_id) == (0x01, 0x35):
             nav_sat_epochs.append(decode_nav_sat(payload))
+        elif (msg_class, msg_id) == (0x01, 0x13):
+            nav_hpposecef_epochs.append(decode_nav_hpposecef(payload))
         frames.append(frame)
     stream = b"".join(frames)
     if output_path is not None:
@@ -303,6 +385,7 @@ def reconstruct_ubx_stream(csv_path: Path, output_path: Path | None = None,
         input_cell_count=len(cells),
         discarded_byte_count=discarded,
         checksum_failure_count=checksum_failures,
+        nav_hpposecef_epochs=tuple(nav_hpposecef_epochs),
     )
 
 
@@ -367,6 +450,41 @@ def decode_nav_sat(payload: bytes) -> NavSatEpoch:
             flags=flags,
         ))
     return NavSatEpoch(itow, version, tuple(satellites))
+
+
+def decode_nav_hpposecef(payload: bytes) -> NavHpPosEcefEpoch:
+    """Decode UBX-NAV-HPPOSECEF (0x01 0x13), protocol-29 version 0.
+
+    Units and high-precision bounds follow UBX-18053584 R02 section 5.14.6.
+    The receiver position remains diagnostic-only; this function merely
+    preserves the source fields and applies their documented unit conversion.
+    """
+    if len(payload) != 28:
+        raise RawBackendError("NAV-HPPOSECEF record boundary mismatch")
+    version = payload[0]
+    if version != 0:
+        raise RawBackendError("unsupported NAV-HPPOSECEF version")
+    reserved1 = payload[1:4]
+    itow_ms, x_cm, y_cm, z_cm, x_hp, y_hp, z_hp, reserved2, p_acc = struct.unpack_from(
+        "<IiiibbbBI", payload, 4
+    )
+    high_precision = (x_hp, y_hp, z_hp)
+    if any(value < -99 or value > 99 for value in high_precision):
+        raise RawBackendError("NAV-HPPOSECEF high-precision component outside -99..99")
+    epoch = NavHpPosEcefEpoch(
+        itow_ms=itow_ms,
+        version=version,
+        ecef_cm=(x_cm, y_cm, z_cm),
+        ecef_hp_0p1mm=high_precision,
+        position_accuracy_0p1mm=p_acc,
+        reserved1=reserved1,
+        reserved2=reserved2,
+    )
+    position = epoch.position_ecef_m
+    radius = float(np.linalg.norm(position))
+    if np.any(~np.isfinite(position)) or not 1.0e6 <= radius <= 1.0e8:
+        raise RawBackendError("NAV-HPPOSECEF ECEF position outside physical bounds")
+    return epoch
 
 
 # u-blox gnssId/sigId registry.  Only explicitly verified Phase-1 signals pass.
@@ -621,40 +739,148 @@ def pair_epochs(left: Sequence[RawxEpoch], right: Sequence[RawxEpoch],
 class TrackingFlags:
     pseudorange_valid: bool
     carrier_valid: bool
-    lock_reset: bool
     half_cycle_valid: bool
     half_cycle_subtracted: bool
     receiver_clock_reset: bool
-    cycle_slip: bool
-    arc_reset: bool
+    ambiguity_reinitialized_by_method: bool
+    tracking_lock_reset_detected: bool
+    cycle_slip_detected: bool
+    half_cycle_state_changed: bool
+    carrier_validity_changed: bool
+    time_reversal_detected: bool
+    first_observation: bool
+    arc_reset_due_to_tracking: bool
+
+    # Backward-compatible names retain *tracking-event* semantics.  They no
+    # longer alias ordinary method-per-epoch ambiguity initialization.
+    @property
+    def lock_reset(self) -> bool:
+        return self.tracking_lock_reset_detected
+
+    @property
+    def cycle_slip(self) -> bool:
+        return self.cycle_slip_detected
+
+    @property
+    def arc_reset(self) -> bool:
+        return self.arc_reset_due_to_tracking
 
 
 class TrackingContinuity:
     def __init__(self) -> None:
         self._previous: dict[tuple[int, SignalIdentity], tuple[int, int, float, bool, bool, bool]] = {}
 
-    def update(self, receiver: int, epoch: RawxEpoch, measurement: RawxMeasurement) -> TrackingFlags:
+    def update(self, receiver: int, epoch: RawxEpoch, measurement: RawxMeasurement,
+               *, ambiguity_reinitialized_by_method: bool = False) -> TrackingFlags:
         key = (receiver, measurement.identity)
         previous = self._previous.get(key)
         carrier_valid = measurement.carrier_valid
         half_valid = measurement.half_cycle_valid
         half_subtracted = measurement.half_cycle_subtracted
         clock_reset = bool(epoch.receiver_status & 0x02)
-        lock_reset = previous is not None and measurement.locktime_ms < previous[0]
-        time_reversal = previous is not None and (epoch.gps_week, epoch.gps_tow_seconds) <= (previous[1], previous[2])
-        restored = previous is not None and carrier_valid != previous[3]
-        half_transition = previous is not None and half_valid != previous[4]
-        sub_transition = previous is not None and half_subtracted != previous[5]
-        slip = (not carrier_valid or not half_valid
-                or clock_reset or lock_reset or time_reversal
-                or restored or half_transition or sub_transition)
-        reset = previous is None or slip
+        first_observation = previous is None
+        lock_reset = carrier_valid and (
+            measurement.locktime_ms == 0
+            or (previous is not None and measurement.locktime_ms < previous[0])
+        )
+        time_reversal = previous is not None and (
+            epoch.gps_week, epoch.gps_tow_seconds
+        ) <= (previous[1], previous[2])
+        carrier_transition = previous is not None and carrier_valid != previous[3]
+        half_transition = previous is not None and (
+            half_valid != previous[4] or half_subtracted != previous[5]
+        )
+        # RTKLIB's RXM-RAWX decoder declares slip on a lock counter reset or a
+        # subHalfCyc transition; rtkpos additionally treats half-valid parity
+        # transitions as slips.  Merely observing an invalid carrier, seeing a
+        # satellite for the first time, applying a receiver clock reset, or
+        # independently initializing this method's ambiguity is not relabeled
+        # as a detected receiver cycle slip.
+        slip = lock_reset or carrier_transition or half_transition
         self._previous[key] = (measurement.locktime_ms, epoch.gps_week,
                                epoch.gps_tow_seconds, carrier_valid, half_valid,
                                half_subtracted)
-        return TrackingFlags(measurement.pseudorange_valid, carrier_valid,
-                             lock_reset, half_valid, half_subtracted,
-                             clock_reset, slip, reset)
+        return TrackingFlags(
+            pseudorange_valid=measurement.pseudorange_valid,
+            carrier_valid=carrier_valid,
+            half_cycle_valid=half_valid,
+            half_cycle_subtracted=half_subtracted,
+            receiver_clock_reset=clock_reset,
+            ambiguity_reinitialized_by_method=ambiguity_reinitialized_by_method,
+            tracking_lock_reset_detected=lock_reset,
+            cycle_slip_detected=slip,
+            half_cycle_state_changed=half_transition,
+            carrier_validity_changed=carrier_transition,
+            time_reversal_detected=time_reversal,
+            first_observation=first_observation,
+            # A receiver clock reset or a nonmonotonic receiver timestamp
+            # invalidates the current phase arc even though neither event is
+            # mislabeled as a detected carrier cycle slip.
+            arc_reset_due_to_tracking=(slip or clock_reset or time_reversal),
+        )
+
+
+@dataclass(frozen=True)
+class TrackingEpochSummary:
+    receiver: int
+    measurement_count: int
+    used_carrier_count: int
+    excluded_cp_invalid_count: int
+    excluded_half_cycle_unknown_count: int
+    sub_half_cycle_set_count: int
+    actual_lock_reset_count: int
+    actual_cycle_slip_count: int
+    half_cycle_state_change_count: int
+    ambiguity_reinitialized_by_method: bool
+    pivot_changed: bool
+    satellite_set_changed: bool
+
+
+def tracking_epoch_summary(
+    continuity: TrackingContinuity,
+    receiver: int,
+    epoch: RawxEpoch,
+    used_identities: Iterable[SignalIdentity] = (),
+    *,
+    ambiguity_reinitialized_by_method: bool = False,
+    pivot_changed: bool = False,
+    satellite_set_changed: bool = False,
+) -> TrackingEpochSummary:
+    """Aggregate honest event *counts* without all/any validity booleans."""
+    used = set(used_identities)
+    gps_l1 = [
+        measurement for measurement in epoch.measurements
+        if (measurement.identity.gnss_id, measurement.identity.sig_id,
+            measurement.identity.freq_id) == (0, 0, 0)
+    ]
+    flags = [
+        continuity.update(
+            receiver, epoch, measurement,
+            ambiguity_reinitialized_by_method=ambiguity_reinitialized_by_method,
+        )
+        for measurement in gps_l1
+    ]
+    used_carrier_count = sum(
+        measurement.identity in used and measurement.carrier_valid
+        and measurement.half_cycle_valid
+        for measurement in gps_l1
+    )
+    return TrackingEpochSummary(
+        receiver=receiver,
+        measurement_count=len(gps_l1),
+        used_carrier_count=used_carrier_count,
+        excluded_cp_invalid_count=sum(not item.carrier_valid for item in flags),
+        excluded_half_cycle_unknown_count=sum(
+            item.carrier_valid and not item.half_cycle_valid for item in flags
+        ),
+        sub_half_cycle_set_count=sum(item.half_cycle_subtracted for item in flags),
+        actual_lock_reset_count=sum(item.tracking_lock_reset_detected for item in flags),
+        actual_cycle_slip_count=sum(item.cycle_slip_detected for item in flags),
+        half_cycle_state_change_count=sum(item.half_cycle_state_changed for item in flags),
+        ambiguity_reinitialized_by_method=ambiguity_reinitialized_by_method,
+        pivot_changed=pivot_changed,
+        satellite_set_changed=satellite_set_changed,
+    )
 
 
 def select_reference(measurements: Sequence[RawxMeasurement], elevations_rad: dict[SignalIdentity, float],
@@ -722,17 +948,214 @@ def gps_l1_code_eligible(measurement: RawxMeasurement, min_cno_dbhz: int = 20) -
     )
 
 
+@dataclass(frozen=True)
+class HalfCycleContract:
+    """Source-locked interpretation of UBX-RXM-RAWX carrier phase.
+
+    The u-blox R02 specification defines ``cpMes`` as the carrier-phase
+    measurement and ``subHalfCyc`` as "half cycle subtracted from phase".  At
+    pinned RTKLIB commit 180043ee, ``decode_rxmrawx`` copies ``cpMes`` without
+    adding or subtracting 0.5 (src/rcv/ublox.c:343-355, 392-419), emits
+    ``LLI_HALFC`` when ``halfCyc`` is false, emits ``LLI_HALFS`` for audit when
+    ``subHalfCyc`` is set, and declares a slip when that state changes.
+
+    Consequently the direct DD backend uses a valid ``cpMes`` *as reported*;
+    applying a second half-cycle correction would double-correct the receiver
+    measurement.  A carrier is integer-compatible only while ``cpValid`` and
+    ``halfCyc`` are both true and the phase/uncertainty fields are valid.
+    ``subHalfCyc`` is preserved and its transition starts a new tracking arc,
+    but its steady value is not itself an exclusion.
+    """
+
+    ubx_document: str = "UBX-18053584 R02 sections 5.15.3.1 and trkStat"
+    ubx_document_sha256: str = (
+        "3d6539cd5ab3efe1254c54e4dba25d17421bfe48ac96e633e602d8d214c13668"
+    )
+    rtklib_commit: str = "180043ee24b6d2b168f98b64be15f69d50046b1a"
+    phase_value_policy: str = "CPMES_AS_REPORTED_NO_SECOND_HALF_CYCLE_SHIFT"
+    unresolved_policy: str = "EXCLUDE_WHEN_HALFCYC_FALSE"
+    sub_half_cycle_policy: str = "PRESERVE_STATE_AND_RESET_ARC_ON_TRANSITION"
+
+
+HALF_CYCLE_CONTRACT = HalfCycleContract()
+
+
+def integer_compatible_carrier_cycles(measurement: RawxMeasurement) -> float:
+    """Return faithful integer-compatible phase cycles or fail closed."""
+    if not measurement.carrier_valid:
+        raise RawBackendError("carrier phase is not cpValid")
+    if not measurement.half_cycle_valid:
+        raise RawBackendError("carrier half-cycle ambiguity is unresolved")
+    if measurement.cp_std_code == 0x0F:
+        raise RawBackendError("RAWX cpStdev=15 is invalid")
+    if not math.isfinite(measurement.cp_mes_cycles) or measurement.cp_mes_cycles == -0.5:
+        raise RawBackendError("RAWX cpMes is invalid")
+    # subHalfCyc describes a correction already present in cpMes.  RTKLIB's
+    # RXM-RAWX decoder likewise copies L=cpMes and does not apply +/-0.5 here.
+    return measurement.cp_mes_cycles
+
+
 def strict_raw_tracking_eligible(measurement: RawxMeasurement,
                                  min_cno_dbhz: int = 20) -> bool:
     """Eligibility for real GPS-L1 code/carrier DD, before arc continuity."""
     if not gps_l1_code_eligible(measurement, min_cno_dbhz):
         return False
-    return (
-        measurement.carrier_valid
-        and measurement.half_cycle_valid
-        and measurement.cp_std_code != 0x0F
-        and math.isfinite(measurement.cp_mes_cycles)
-        and measurement.locktime_ms > 0
+    try:
+        integer_compatible_carrier_cycles(measurement)
+    except RawBackendError:
+        return False
+    return measurement.locktime_ms > 0
+
+
+@dataclass(frozen=True)
+class GpsL1EpochAccounting:
+    """Monotone GPS-L1 eligibility evidence for one exact receiver pair."""
+
+    common_raw_identities: tuple[SignalIdentity, ...]
+    common_pr_valid_identities: tuple[SignalIdentity, ...]
+    common_cp_valid_identities: tuple[SignalIdentity, ...]
+    common_pr_cp_valid_identities: tuple[SignalIdentity, ...]
+    common_half_cycle_valid_identities: tuple[SignalIdentity, ...]
+    common_integer_compatible_identities: tuple[SignalIdentity, ...]
+    common_rtklib_phase_compatible_identities: tuple[SignalIdentity, ...] = ()
+    satellite_state_available_identities: tuple[SignalIdentity, ...] = ()
+    elevation_eligible_identities: tuple[SignalIdentity, ...] = ()
+    dd_eligible_identities: tuple[SignalIdentity, ...] = ()
+    duplicate_identities: tuple[SignalIdentity, ...] = ()
+
+    @property
+    def common_raw_satellite_count(self) -> int:
+        return len(self.common_raw_identities)
+
+    @property
+    def common_pr_valid_satellite_count(self) -> int:
+        return len(self.common_pr_valid_identities)
+
+    @property
+    def common_cp_valid_satellite_count(self) -> int:
+        return len(self.common_cp_valid_identities)
+
+    @property
+    def common_pr_cp_valid_satellite_count(self) -> int:
+        return len(self.common_pr_cp_valid_identities)
+
+    @property
+    def common_half_cycle_valid_satellite_count(self) -> int:
+        return len(self.common_half_cycle_valid_identities)
+
+    @property
+    def common_integer_compatible_satellite_count(self) -> int:
+        return len(self.common_integer_compatible_identities)
+
+    @property
+    def satellite_state_available_count(self) -> int:
+        return len(self.satellite_state_available_identities)
+
+    @property
+    def common_rtklib_phase_compatible_satellite_count(self) -> int:
+        return len(self.common_rtklib_phase_compatible_identities)
+
+    @property
+    def elevation_eligible_satellite_count(self) -> int:
+        return len(self.elevation_eligible_identities)
+
+    @property
+    def dd_eligible_satellite_count(self) -> int:
+        return len(self.dd_eligible_identities)
+
+    def as_counts(self) -> dict[str, int]:
+        return {
+            name: int(getattr(self, name))
+            for name in (
+                "common_raw_satellite_count",
+                "common_pr_valid_satellite_count",
+                "common_cp_valid_satellite_count",
+                "common_pr_cp_valid_satellite_count",
+                "common_half_cycle_valid_satellite_count",
+                "common_integer_compatible_satellite_count",
+                "common_rtklib_phase_compatible_satellite_count",
+                "satellite_state_available_count",
+                "elevation_eligible_satellite_count",
+                "dd_eligible_satellite_count",
+            )
+        }
+
+
+def _gps_l1_measurement_groups(
+    epoch: RawxEpoch,
+) -> dict[SignalIdentity, tuple[RawxMeasurement, ...]]:
+    grouped: dict[SignalIdentity, list[RawxMeasurement]] = defaultdict(list)
+    for measurement in epoch.measurements:
+        if (measurement.identity.gnss_id, measurement.identity.sig_id,
+                measurement.identity.freq_id) == (0, 0, 0):
+            grouped[measurement.identity].append(measurement)
+    return {identity: tuple(values) for identity, values in grouped.items()}
+
+
+def gps_l1_epoch_accounting(receiver1: RawxEpoch,
+                            receiver2: RawxEpoch) -> GpsL1EpochAccounting:
+    """Count common GPS L1 stages before any state-provider operation.
+
+    This routine is intentionally independent of SPP, ephemeris, elevation,
+    reference selection and the DD builder.  Its first six stages therefore
+    remain truthful when every satellite-state request fails.
+    """
+    if (receiver1.gps_week, receiver1.gps_tow_seconds) != (
+        receiver2.gps_week, receiver2.gps_tow_seconds
+    ):
+        raise RawBackendError("accounting epochs must have exact GPS week/TOW equality")
+    first_groups = _gps_l1_measurement_groups(receiver1)
+    second_groups = _gps_l1_measurement_groups(receiver2)
+    raw = set(first_groups) & set(second_groups)
+    duplicates = {
+        identity for identity in raw
+        if len(first_groups[identity]) != 1 or len(second_groups[identity]) != 1
+    }
+    unique = raw - duplicates
+    first = {identity: first_groups[identity][0] for identity in unique}
+    second = {identity: second_groups[identity][0] for identity in unique}
+    pr_valid = {
+        identity for identity in unique
+        if first[identity].pseudorange_valid and second[identity].pseudorange_valid
+    }
+    cp_valid = {
+        identity for identity in unique
+        if first[identity].carrier_valid and second[identity].carrier_valid
+    }
+    pr_cp_valid = pr_valid & cp_valid
+    half_cycle = {
+        identity for identity in pr_cp_valid
+        if first[identity].half_cycle_valid and second[identity].half_cycle_valid
+    }
+    integer_compatible: set[SignalIdentity] = set()
+    for identity in half_cycle:
+        try:
+            integer_compatible_carrier_cycles(first[identity])
+            integer_compatible_carrier_cycles(second[identity])
+        except RawBackendError:
+            continue
+        integer_compatible.add(identity)
+    # Pinned RTKLIB applies an additional receiver-quality filter in
+    # decode_rxmrawx(): cpMes!=-0.5 and cpStdev<=5.  Preserve this population
+    # separately; it is a diagnostic cross-check and is not silently conflated
+    # with the official UBX cpStdev=15 invalidity semantics used by EXT01.
+    rtklib_compatible = {
+        identity for identity in integer_compatible
+        if first[identity].cp_mes_cycles != -0.5
+        and second[identity].cp_mes_cycles != -0.5
+        and first[identity].cp_std_code <= 5
+        and second[identity].cp_std_code <= 5
+    }
+    ordered = lambda values: tuple(sorted(values))
+    return GpsL1EpochAccounting(
+        common_raw_identities=ordered(raw),
+        common_pr_valid_identities=ordered(pr_valid),
+        common_cp_valid_identities=ordered(cp_valid),
+        common_pr_cp_valid_identities=ordered(pr_cp_valid),
+        common_half_cycle_valid_identities=ordered(half_cycle),
+        common_integer_compatible_identities=ordered(integer_compatible),
+        common_rtklib_phase_compatible_identities=ordered(rtklib_compatible),
+        duplicate_identities=ordered(duplicates),
     )
 
 
@@ -882,21 +1305,78 @@ class DoubleDifferenceModel:
     baseline_design: np.ndarray
     covariance_m2: np.ndarray
     elevations_rad: dict[SignalIdentity, float]
+    accounting: GpsL1EpochAccounting
+    receiver_order: str = "GNSS2_MINUS_GNSS1"
+    dd_sign_convention: str = "(GNSS2-GNSS1)_SATELLITE_MINUS_PIVOT"
+    phase_convention: str = HALF_CYCLE_CONTRACT.phase_value_policy
+    pivot_changed: bool = False
+
+    @property
+    def ambiguity_satellite_identities(self) -> tuple[SignalIdentity, ...]:
+        """Identity order corresponding one-for-one with an ambiguity vector."""
+        return self.satellites
+
+    @property
+    def ambiguity_signal_identities(self) -> tuple[str, ...]:
+        return tuple(identity_text(identity) for identity in self.satellites)
+
+    @property
+    def pivot_identity(self) -> str:
+        return identity_text(self.pivot)
 
 
-def _unique_measurements(epoch: RawxEpoch, min_cno_dbhz: int) -> dict[SignalIdentity, RawxMeasurement]:
-    selected: dict[SignalIdentity, RawxMeasurement] = {}
-    duplicates: set[SignalIdentity] = set()
-    for measurement in epoch.measurements:
-        if not strict_raw_tracking_eligible(measurement, min_cno_dbhz):
-            continue
-        if measurement.identity in selected:
-            duplicates.add(measurement.identity)
-        else:
-            selected[measurement.identity] = measurement
-    for identity in duplicates:
-        selected.pop(identity, None)
-    return selected
+@dataclass(frozen=True)
+class MatrixConditionDiagnostics:
+    observation_count: int
+    unknown_count: int
+    raw_design_rank: int
+    raw_design_condition: float
+    covariance_condition: float
+    raw_normal_rank: int
+    raw_normal_condition: float
+    whitened_design_rank: int
+    whitened_design_condition: float
+    whitened_normal_rank: int
+    whitened_normal_condition: float
+
+
+def dd_matrix_condition_diagnostics(model: DoubleDifferenceModel) -> MatrixConditionDiagnostics:
+    """Report raw and covariance-whitened scaling/rank without trace input."""
+    design = np.column_stack((model.ambiguity_design_m, model.baseline_design))
+    covariance = np.asarray(model.covariance_m2, dtype=float)
+    try:
+        cholesky = np.linalg.cholesky(covariance)
+        whitened = np.linalg.solve(cholesky, design)
+    except np.linalg.LinAlgError as exc:
+        raise DoubleDifferenceStageError(
+            "NORMAL_MATRIX_RANK_DEFICIENT",
+            "DD covariance is not positive definite",
+            model.accounting,
+        ) from exc
+    raw_normal = design.T @ design
+    whitened_normal = whitened.T @ whitened
+    return MatrixConditionDiagnostics(
+        observation_count=int(design.shape[0]),
+        unknown_count=int(design.shape[1]),
+        raw_design_rank=int(np.linalg.matrix_rank(design)),
+        raw_design_condition=float(np.linalg.cond(design)),
+        covariance_condition=float(np.linalg.cond(covariance)),
+        raw_normal_rank=int(np.linalg.matrix_rank(raw_normal)),
+        raw_normal_condition=float(np.linalg.cond(raw_normal)),
+        whitened_design_rank=int(np.linalg.matrix_rank(whitened)),
+        whitened_design_condition=float(np.linalg.cond(whitened)),
+        whitened_normal_rank=int(np.linalg.matrix_rank(whitened_normal)),
+        whitened_normal_condition=float(np.linalg.cond(whitened_normal)),
+    )
+
+
+def _require_dd_stage(accounting: GpsL1EpochAccounting, attribute: str,
+                      code: str, description: str, minimum: int = 4) -> None:
+    count = len(getattr(accounting, attribute))
+    if count < minimum:
+        raise DoubleDifferenceStageError(
+            code, f"{description}: {count} < {minimum}", accounting
+        )
 
 
 def build_gps_l1_double_difference_model(
@@ -913,16 +1393,42 @@ def build_gps_l1_double_difference_model(
         receiver2.gps_week, receiver2.gps_tow_seconds
     ):
         raise RawBackendError("DD epochs must have exact GPS week/TOW equality")
+    accounting = gps_l1_epoch_accounting(receiver1, receiver2)
+    _require_dd_stage(accounting, "common_raw_identities", "INSUFFICIENT_COMMON_RAW",
+                      "common GPS-L1 raw satellites")
+    _require_dd_stage(accounting, "common_pr_valid_identities", "INSUFFICIENT_PR_VALID",
+                      "common GPS-L1 prValid satellites")
+    _require_dd_stage(accounting, "common_cp_valid_identities", "INSUFFICIENT_CP_VALID",
+                      "common GPS-L1 cpValid satellites")
+    _require_dd_stage(accounting, "common_pr_cp_valid_identities",
+                      "INSUFFICIENT_PR_CP_VALID",
+                      "common GPS-L1 prValid+cpValid satellites")
+    _require_dd_stage(accounting, "common_half_cycle_valid_identities",
+                      "INSUFFICIENT_HALF_CYCLE_VALID",
+                      "common GPS-L1 resolved-half-cycle satellites")
+    _require_dd_stage(accounting, "common_integer_compatible_identities",
+                      "INSUFFICIENT_INTEGER_COMPATIBLE_PHASE",
+                      "common GPS-L1 integer-compatible phases")
     position = np.asarray(receiver_ecef_m, dtype=float)
     if position.shape != (3,) or np.any(~np.isfinite(position)):
         raise RawBackendError("invalid DD receiver position")
-    first = _unique_measurements(receiver1, min_cno_dbhz)
-    second = _unique_measurements(receiver2, min_cno_dbhz)
-    common = sorted(set(first) & set(second))
+    first_groups = _gps_l1_measurement_groups(receiver1)
+    second_groups = _gps_l1_measurement_groups(receiver2)
+    first = {
+        identity: first_groups[identity][0]
+        for identity in accounting.common_integer_compatible_identities
+    }
+    second = {
+        identity: second_groups[identity][0]
+        for identity in accounting.common_integer_compatible_identities
+    }
     geometry: dict[SignalIdentity, np.ndarray] = {}
     elevations: dict[SignalIdentity, float] = {}
-    for identity in common:
+    states: dict[SignalIdentity, np.ndarray] = {}
+    for identity in accounting.common_integer_compatible_identities:
         mean_range = 0.5 * (first[identity].pr_mes_m + second[identity].pr_mes_m)
+        if not math.isfinite(mean_range) or not 1.0e6 < mean_range < 1.0e8:
+            continue
         try:
             state = provider.state(
                 identity, receiver1.gps_week, receiver1.gps_tow_seconds, mean_range
@@ -931,22 +1437,47 @@ def build_gps_l1_double_difference_model(
             continue
         if state.health != 0:
             continue
-        corrected = earth_rotation_correct_satellite(
-            state.position_ecef_m, mean_range / _SPEED_OF_LIGHT_MPS
-        )
-        _azimuth, elevation = azimuth_elevation(position, corrected)
+        try:
+            corrected = earth_rotation_correct_satellite(
+                state.position_ecef_m, mean_range / _SPEED_OF_LIGHT_MPS
+            )
+            _azimuth, elevation = azimuth_elevation(position, corrected)
+        except RawBackendError:
+            continue
+        states[identity] = corrected
         if elevation >= minimum_elevation_rad:
-            geometry[identity] = line_of_sight(position, corrected)
             elevations[identity] = elevation
-    if len(geometry) < 4:
-        raise RawBackendError("DD model requires at least four eligible GPS L1 satellites")
+    accounting = replace(
+        accounting,
+        satellite_state_available_identities=tuple(sorted(states)),
+        elevation_eligible_identities=tuple(sorted(elevations)),
+    )
+    _require_dd_stage(accounting, "satellite_state_available_identities",
+                      "INSUFFICIENT_SATELLITE_STATES",
+                      "source-backed healthy satellite states")
+    _require_dd_stage(accounting, "elevation_eligible_identities",
+                      "INSUFFICIENT_ELEVATION_ELIGIBLE",
+                      "satellites above the frozen elevation threshold")
+    dd_eligible = tuple(
+        identity for identity in sorted(elevations)
+        if strict_raw_tracking_eligible(first[identity], min_cno_dbhz)
+        and strict_raw_tracking_eligible(second[identity], min_cno_dbhz)
+    )
+    accounting = replace(accounting, dd_eligible_identities=dd_eligible)
+    _require_dd_stage(accounting, "dd_eligible_identities", "INSUFFICIENT_DD_DIMENSION",
+                      "final quality/state/elevation eligible satellites")
+    for identity in dd_eligible:
+        geometry[identity] = line_of_sight(position, states[identity])
     candidates = [first[identity] for identity in geometry]
-    pivot, _switched = select_reference(candidates, elevations, previous_pivot)
+    pivot, switched = select_reference(candidates, elevations, previous_pivot)
     satellites = tuple(identity for identity in sorted(geometry) if identity != pivot)
     dimension = len(satellites)
     code_sd = {identity: second[identity].pr_mes_m - first[identity].pr_mes_m for identity in geometry}
     phase_sd = {
-        identity: (second[identity].cp_mes_cycles - first[identity].cp_mes_cycles)
+        identity: (
+            integer_compatible_carrier_cycles(second[identity])
+            - integer_compatible_carrier_cycles(first[identity])
+        )
                   * wavelength_m(identity)
         for identity in geometry
     }
@@ -975,5 +1506,16 @@ def build_gps_l1_double_difference_model(
     if (np.any(~np.isfinite(observation)) or np.any(~np.isfinite(baseline_design))
             or np.any(~np.isfinite(covariance))):
         raise RawBackendError("non-finite DD model")
-    return DoubleDifferenceModel(pivot, satellites, observation, ambiguity_design,
-                                 baseline_design, covariance, elevations)
+    model = DoubleDifferenceModel(
+        pivot, satellites, observation, ambiguity_design, baseline_design,
+        covariance, elevations, accounting, pivot_changed=switched,
+    )
+    condition = dd_matrix_condition_diagnostics(model)
+    if (condition.whitened_design_rank < condition.unknown_count
+            or not math.isfinite(condition.whitened_design_condition)):
+        raise DoubleDifferenceStageError(
+            "NORMAL_MATRIX_RANK_DEFICIENT",
+            f"whitened rank {condition.whitened_design_rank} < {condition.unknown_count}",
+            accounting,
+        )
+    return model
