@@ -66,3 +66,26 @@ def test_phase1r_contract_locks_validation_without_trace_tuning():
     assert contract["strict_search"]["ambiguity_acceptance_test_defined"] is False
     assert contract["diagnostic_only_sources"]["trace"]["allowed_before_native_hash_freeze"] is False
     assert len(contract["required_outputs"]) == 11
+
+
+def test_phase1r_r2_contract_preserves_r1_and_locks_svd_gls_repair():
+    contract = yaml.safe_load((CONFIG / "PHASE1R_VALIDATION_CONTRACT_V2.yaml").read_text())
+    assert contract["attempt_id"] == "C00_VALIDATED_R2"
+    assert contract["immutable_parents"]["phase1r_r1_terminal"] == (
+        "BLOCKED_PHASE1R_SEARCH_OBJECTIVE_CROSSCHECK_FAILED"
+    )
+    assert contract["immutable_parents"]["mutation_allowed"] is False
+    assert contract["immutable_parents"]["original_result_artifact_count"] == 3
+    assert contract["immutable_parents"]["original_result_tree_digest"] == (
+        "19fc1402a10bc0b658c8db065316b47aa0b56e5782a698198b3beda0bd7b4b52"
+    )
+    assert contract["immutable_parents"]["phase1r_r1_artifact_count"] == 1548
+    assert contract["immutable_parents"]["phase1r_r1_tree_digest"] == (
+        "a511104a67ed17f24da6bac073c3e718708aa7921407308b8908da8a4f651526"
+    )
+    assert contract["numerical_repair"]["observation_whitening"] == "CHOLESKY_QYY"
+    assert contract["numerical_repair"]["least_squares"] == "RANK_CHECKED_SVD"
+    assert contract["numerical_repair"]["trace_selected"] is False
+    assert len(contract["required_outputs"]) == 11
+    assert all("C00_VALIDATED_R2" in path or "PHASE1R_R2" in path
+               for path in contract["required_outputs"])

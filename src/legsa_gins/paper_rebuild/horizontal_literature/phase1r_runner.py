@@ -74,7 +74,14 @@ from .shared_raw_backend import (
 PASS_REPAIRED = "PASS_PHASE1R_EXT01_REPAIRED_C00_READY_FOR_NATIVE_COMPARISON"
 PASS_VALIDATED = "PASS_PHASE1R_EXT01_IMPLEMENTATION_VALIDATED_BY2_C00_APPLICABILITY_RESULT"
 UNSUPPORTED = "UNSUPPORTED_EXT01_ON_BY2_WITHOUT_PHASE_BIAS_CALIBRATION"
-PHASE1R_CONTRACT = "PHASE1R_VALIDATION_CONTRACT_V1.yaml"
+PHASE1R_CONTRACT = "PHASE1R_VALIDATION_CONTRACT_V2.yaml"
+PHASE1R_ATTEMPT_ID = "C00_VALIDATED_R2"
+PHASE1R_R1_BLOCKER = "BLOCKED_PHASE1R_SEARCH_OBJECTIVE_CROSSCHECK_FAILED"
+PHASE1R_R1_CODE_COMMIT = "42e6ea68fddfb555b1fccf69e968b5d289e9a17d"
+PHASE1R_R1_ARTIFACT_COUNT = 1548
+PHASE1R_R1_TREE_DIGEST = "a511104a67ed17f24da6bac073c3e718708aa7921407308b8908da8a4f651526"
+ORIGINAL_C00_ARTIFACT_COUNT = 3
+ORIGINAL_C00_TREE_DIGEST = "19fc1402a10bc0b658c8db065316b47aa0b56e5782a698198b3beda0bd7b4b52"
 EXPECTED_PAIR_COUNT = 1509
 DEFAULT_WORKERS = 16
 MAX_WORKERS = 20
@@ -110,6 +117,9 @@ class Phase1RRunnerError(RuntimeError):
 @dataclass(frozen=True)
 class Phase1RPaths:
     base: Phase1Paths
+    prior_attempt_root: Path
+    prior_report: Path
+    prior_status: Path
     target_root: Path
     parts_root: Path
     native_freeze: Path
@@ -169,15 +179,19 @@ def _release_run_lock(lock: Path, token: str) -> None:
 
 def load_phase1r_paths(config_path: Path) -> Phase1RPaths:
     base = load_paths(config_path)
-    target = base.stage_root / "02_EXT01_CLAMBDA/C00_VALIDATED"
+    prior = base.stage_root / "02_EXT01_CLAMBDA/C00_VALIDATED"
+    target = base.stage_root / f"02_EXT01_CLAMBDA/{PHASE1R_ATTEMPT_ID}"
     return Phase1RPaths(
         base=base,
+        prior_attempt_root=prior,
+        prior_report=base.stage_root / "11_REPORT/PHASE1R_EXT01_C00_VALIDITY_REPORT.md",
+        prior_status=base.stage_root / "11_REPORT/PHASE1R_STATUS.json",
         target_root=target,
         parts_root=target / ".epoch_parts",
         native_freeze=target / "PHASE1R_NATIVE_FREEZE.json",
         output_files={name: target / filename for name, filename in VALIDATED_FILENAMES.items()},
-        report=base.stage_root / "11_REPORT/PHASE1R_EXT01_C00_VALIDITY_REPORT.md",
-        status=base.stage_root / "11_REPORT/PHASE1R_STATUS.json",
+        report=base.stage_root / "11_REPORT/PHASE1R_R2_EXT01_C00_VALIDITY_REPORT.md",
+        status=base.stage_root / "11_REPORT/PHASE1R_R2_STATUS.json",
         contract=base.code_root / "configs/paper_rebuild/horizontal_literature" / PHASE1R_CONTRACT,
         rnx2rtkp=base.rtklib_root / "app/consapp/rnx2rtkp/gcc/rnx2rtkp",
     )
@@ -276,6 +290,20 @@ def _tree_digest(rows: Mapping[str, str]) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def _prior_attempt_hashes(paths: Phase1RPaths) -> dict[str, str]:
+    """Hash-lock the completed R1 blocker before a non-overwriting R2 run."""
+    rows = {
+        str((paths.prior_attempt_root / relative).relative_to(paths.base.stage_root)): digest
+        for relative, digest in _hash_tree(paths.prior_attempt_root).items()
+    }
+    for artifact in (paths.prior_report, paths.prior_status):
+        _assert_contained(artifact, paths.base.stage_root)
+        if not artifact.is_file():
+            raise Phase1RRunnerError(f"prior Phase-1R artifact is missing: {artifact.name}")
+        rows[str(artifact.relative_to(paths.base.stage_root))] = sha256_file(artifact)
+    return rows
+
+
 def _git_lines(root: Path, *arguments: str) -> list[str]:
     result = subprocess.run(
         ["git", *arguments], cwd=root, text=True, capture_output=True, check=False, timeout=30
@@ -328,7 +356,9 @@ def _external_audit(paths: Phase1RPaths) -> dict[str, Any]:
     }
 
 
-def _validate_start(paths: Phase1RPaths, resume: bool) -> tuple[dict[str, str], dict[str, str]]:
+def _validate_start(
+    paths: Phase1RPaths, resume: bool,
+) -> tuple[dict[str, str], dict[str, str], dict[str, str]]:
     base = paths.base
     _assert_no_symlink_components(base.clean_root)
     _assert_contained(base.stage_root, base.clean_root)
@@ -345,8 +375,8 @@ def _validate_start(paths: Phase1RPaths, resume: bool) -> tuple[dict[str, str], 
     if not paths.contract.is_file():
         raise Phase1RRunnerError("Phase-1R tracked contract is missing")
     for protected in (
-        original, paths.target_root, paths.parts_root, paths.native_freeze,
-        paths.report, paths.status,
+        original, paths.prior_attempt_root, paths.prior_report, paths.prior_status,
+        paths.target_root, paths.parts_root, paths.native_freeze, paths.report, paths.status,
     ):
         _assert_contained(protected, base.stage_root)
     for output in paths.output_files.values():
@@ -355,14 +385,31 @@ def _validate_start(paths: Phase1RPaths, resume: bool) -> tuple[dict[str, str], 
         raise Phase1RRunnerError("validated output root already exists; use --resume")
     if not paths.target_root.exists() and (paths.report.exists() or paths.status.exists()):
         raise Phase1RRunnerError("Phase-1R report/status exists without validated root")
+    if not paths.prior_attempt_root.is_dir() or not paths.prior_status.is_file():
+        raise Phase1RRunnerError("immutable Phase-1R R1 blocker is missing")
+    prior_status = json.loads(paths.prior_status.read_text(encoding="utf-8"))
+    if (prior_status.get("terminal_status") != PHASE1R_R1_BLOCKER
+            or prior_status.get("code", {}).get("code_commit") != PHASE1R_R1_CODE_COMMIT
+            or prior_status.get("original_c00_tree_digest_before") != ORIGINAL_C00_TREE_DIGEST
+            or prior_status.get("original_c00_tree_digest_after") != ORIGINAL_C00_TREE_DIGEST
+            or prior_status.get("original_c00_immutable") is not True):
+        raise Phase1RRunnerError("Phase-1R R2 requires the preserved R1 objective blocker")
     lock = read_hash_lock(base.raw_hash_lock)
     raw_hashes = verify_raw_sources(base.raw_root, _raw_relatives(base), lock)
     original_hashes = _hash_tree(original)
-    return raw_hashes, original_hashes
+    prior_hashes = _prior_attempt_hashes(paths)
+    if (len(original_hashes) != ORIGINAL_C00_ARTIFACT_COUNT
+            or _tree_digest(original_hashes) != ORIGINAL_C00_TREE_DIGEST):
+        raise Phase1RRunnerError("immutable original Phase-1 C00 identity is not frozen")
+    if (len(prior_hashes) != PHASE1R_R1_ARTIFACT_COUNT
+            or _tree_digest(prior_hashes) != PHASE1R_R1_TREE_DIGEST):
+        raise Phase1RRunnerError("immutable Phase-1R R1 attempt identity is not frozen")
+    return raw_hashes, original_hashes, prior_hashes
 
 
 def _run_fingerprint(paths: Phase1RPaths, raw_hashes: Mapping[str, str],
-                     external: Mapping[str, Any]) -> str:
+                     external: Mapping[str, Any],
+                     prior_hashes: Mapping[str, str]) -> str:
     sources = (
         paths.base.code_root / "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py",
         paths.base.code_root / "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py",
@@ -378,6 +425,7 @@ def _run_fingerprint(paths: Phase1RPaths, raw_hashes: Mapping[str, str],
         "node_limit": STRICT_NODE_LIMIT,
         "external_binary_hashes": dict(external["binary_hashes"]),
         "external_bridge_source_hashes": dict(external["bridge_source_hashes"]),
+        "prior_phase1r_attempt_tree_digest": _tree_digest(prior_hashes),
     }
     return hashlib.sha256(json.dumps(payload, sort_keys=True).encode("utf-8")).hexdigest()
 
@@ -1079,6 +1127,7 @@ def _write_native_outputs(
     fingerprint: str,
     raw_hashes: Mapping[str, str],
     original_hashes: Mapping[str, str],
+    prior_hashes: Mapping[str, str],
     worker_audit: Mapping[str, Any],
     determinism: Mapping[str, Any],
     resource_probe: Mapping[str, Any],
@@ -1116,6 +1165,8 @@ def _write_native_outputs(
         "raw_source_hashes": dict(raw_hashes),
         "original_c00_hashes": dict(original_hashes),
         "original_c00_tree_digest": _tree_digest(original_hashes),
+        "prior_phase1r_attempt_hashes": dict(prior_hashes),
+        "prior_phase1r_attempt_tree_digest": _tree_digest(prior_hashes),
         "paired_epoch_count": len(parts),
         "native_row_count": len(results),
         "failure_row_count": len(failures),
@@ -1146,6 +1197,7 @@ def _validate_native_freeze(
     fingerprint: str | None = None,
     raw_hashes: Mapping[str, str] | None = None,
     original_hashes: Mapping[str, str] | None = None,
+    prior_hashes: Mapping[str, str] | None = None,
 ) -> dict[str, Any]:
     _assert_contained(paths.native_freeze, paths.target_root)
     for output in paths.output_files.values():
@@ -1188,6 +1240,12 @@ def _validate_native_freeze(
                 or freeze.get("original_c00_tree_digest") != _tree_digest(original_hashes)):
             raise Phase1RRunnerError(
                 "native freeze original-C00 provenance differs from current run"
+            )
+    if prior_hashes is not None:
+        if (freeze.get("prior_phase1r_attempt_hashes") != dict(prior_hashes)
+                or freeze.get("prior_phase1r_attempt_tree_digest") != _tree_digest(prior_hashes)):
+            raise Phase1RRunnerError(
+                "native freeze prior-Phase1R provenance differs from current run"
             )
     return freeze
 
@@ -1524,10 +1582,11 @@ def _trace_metrics_after_freeze(
     fingerprint: str | None = None,
     raw_hashes: Mapping[str, str] | None = None,
     original_hashes: Mapping[str, str] | None = None,
+    prior_hashes: Mapping[str, str] | None = None,
 ) -> dict[str, Any]:
     _validate_native_freeze(
         paths, fingerprint=fingerprint, raw_hashes=raw_hashes,
-        original_hashes=original_hashes,
+        original_hashes=original_hashes, prior_hashes=prior_hashes,
     )
     trace = paths.base.by2_fix_root / "trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv"
     if not trace.is_file():
@@ -1671,10 +1730,11 @@ def _run_rtklib_diagnostic(
     fingerprint: str | None = None,
     raw_hashes: Mapping[str, str] | None = None,
     original_hashes: Mapping[str, str] | None = None,
+    prior_hashes: Mapping[str, str] | None = None,
 ) -> dict[str, Any]:
     _validate_native_freeze(
         paths, fingerprint=fingerprint, raw_hashes=raw_hashes,
-        original_hashes=original_hashes,
+        original_hashes=original_hashes, prior_hashes=prior_hashes,
     )
     config = paths.target_root / "RTKLIB_DIAGNOSTIC_GPS_L1.conf"
     output = paths.target_root / "RTKLIB_DIAGNOSTIC_GPS_L1.pos"
@@ -1886,17 +1946,26 @@ def _write_report(paths: Phase1RPaths, status: str, summary: Mapping[str, Any]) 
     failure_text = ", ".join(
         f"{name}={count}" for name, count in summary["failure_classes"].items()
     ) or "none"
-    text = f"""# Phase 1R EXT01 C00 validity report
+    text = f"""# Phase 1R R2 EXT01 C00 validity report
 
 Terminal status: `{status}`
 
 The previous Phase-1 engineering output under `02_EXT01_CLAMBDA/C00/` was
-hash-checked before and after this run and was not overwritten.  This validated
-run consumed true hash-locked RXM-RAWX bytes and RTKLIB broadcast satellite
-states.  Trace was first opened only after the six native outputs were frozen
+hash-checked before and after this run and was not overwritten.  This R2 run
+also hash-checked and preserved the completed R1 objective-crosscheck blocker
+under `02_EXT01_CLAMBDA/C00_VALIDATED/`.  It consumed true hash-locked RXM-RAWX
+bytes and RTKLIB broadcast satellite states.  Trace was first opened only after
+the six native outputs were frozen
 and revalidated, solely for descriptive same-source metrics.
 
 ## Root cause and repairs
+
+R1 exposed a numerical implementation defect in `joint_gls`: it formed and
+inverted the GLS normal matrix, squaring the condition number and violating the
+observation-space objective identity on real heteroscedastic DD models.  R2
+Cholesky-whitens `Qyy`, solves the whitened design with a rank-checked SVD, and
+forms covariance as `V diag(1/s^2) V'`.  This repair was defined and tested
+without trace or heading-error input.
 
 The 432 false zeros were a reporting-order defect: the old runner initialized
 the common-raw count to zero and computed it only after SPP and DD construction.
@@ -1940,7 +2009,7 @@ export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_TH
 python3 scripts/paper_rebuild/run_horizontal_literature_phase1r.py \\
   --paths-config configs/paper_rebuild/DATA_PATHS.CLEAN3R4.local.yaml \\
   --method-id EXT01_CLAMBDA --case-id C00_VALIDATED \\
-  --trace-mode post-native-descriptive --workers 16 --resume
+  --trace-mode post-native-descriptive --workers 16
 ```
 """
     _write_text_atomic(paths.report, text)
@@ -1951,6 +2020,7 @@ def _finalize(
     config_path: Path,
     raw_hashes: Mapping[str, str],
     original_hashes: Mapping[str, str],
+    prior_hashes: Mapping[str, str],
     external: Mapping[str, Any],
     code: Mapping[str, Any],
     cache_audit: Mapping[str, Any],
@@ -1972,11 +2042,13 @@ def _finalize(
         paths, pairs, proxy_rows,
         fingerprint=str(native_freeze["run_fingerprint"]),
         raw_hashes=raw_hashes, original_hashes=original_hashes,
+        prior_hashes=prior_hashes,
     )
     rtklib = _run_rtklib_diagnostic(
         paths, observation_paths, navigation_paths, proxies,
         fingerprint=str(native_freeze["run_fingerprint"]),
         raw_hashes=raw_hashes, original_hashes=original_hashes,
+        prior_hashes=prior_hashes,
     )
     _write_csv_atomic(paths.output_files["proxy"], proxy_rows, PROXY_FIELDS)
     half_fields = sorted({key for row in half_cycle_rows for key in row})
@@ -2018,8 +2090,9 @@ def _finalize(
         validation_counts,
     )
     summary: dict[str, Any] = {
-        "schema_version": "horizontal_literature.phase1r_summary.v1",
+        "schema_version": "horizontal_literature.phase1r_summary.v2",
         "terminal_status": status,
+        "attempt_id": PHASE1R_ATTEMPT_ID,
         "method_id": "EXT01_CLAMBDA",
         "case_id": "C00_VALIDATED",
         "data_mode": "real_by2_raw",
@@ -2134,6 +2207,7 @@ def _finalize(
         "config_hash": sha256_file(config_path),
         "phase1r_contract_sha256": sha256_file(paths.contract),
         "original_c00_tree_digest_before": _tree_digest(original_hashes),
+        "prior_phase1r_attempt_tree_digest_before": _tree_digest(prior_hashes),
         "native_freeze_sha256": sha256_file(paths.native_freeze),
         "synthetic_data_used": False,
         "semisynthetic_data_used": False,
@@ -2153,11 +2227,20 @@ def _finalize(
         "classic18_run": False,
         "common_backbone_navigation_run": False,
     }
-    write_json_atomic(paths.output_files["summary"], _jsonable(summary))
-    _write_report(paths, status, summary)
     current_original = _hash_tree(paths.base.stage_root / "02_EXT01_CLAMBDA/C00")
     if current_original != dict(original_hashes):
         raise Phase1RRunnerError("immutable original Phase-1 EXT01/C00 changed during Phase-1R")
+    current_prior = _prior_attempt_hashes(paths)
+    if current_prior != dict(prior_hashes):
+        raise Phase1RRunnerError("immutable Phase-1R R1 blocker changed during R2")
+    summary.update({
+        "original_c00_tree_digest_after": _tree_digest(current_original),
+        "original_c00_immutable": True,
+        "prior_phase1r_attempt_tree_digest_after": _tree_digest(current_prior),
+        "prior_phase1r_attempt_immutable": True,
+    })
+    write_json_atomic(paths.output_files["summary"], _jsonable(summary))
+    _write_report(paths, status, summary)
     target_hashes = _hash_tree(paths.target_root)
     artifacts = {
         str((paths.target_root / relative).relative_to(paths.base.stage_root)): digest
@@ -2168,8 +2251,6 @@ def _finalize(
     terminal = {
         **summary,
         "output_hashes": artifacts,
-        "original_c00_tree_digest_after": _tree_digest(current_original),
-        "original_c00_immutable": True,
         "validated_output_root": str(paths.target_root),
         "report_path": str(paths.report),
     }
@@ -2194,10 +2275,10 @@ def run_phase1r(
         raise Phase1RRunnerError(f"workers must be in 1..{MAX_WORKERS}")
     config_path = Path(config_path).resolve(strict=True)
     paths = load_phase1r_paths(config_path)
-    raw_hashes, original_hashes = _validate_start(paths, resume)
+    raw_hashes, original_hashes, prior_hashes = _validate_start(paths, resume)
     code = _code_freeze(paths)
     external = _external_audit(paths)
-    base_fingerprint = _run_fingerprint(paths, raw_hashes, external)
+    base_fingerprint = _run_fingerprint(paths, raw_hashes, external, prior_hashes)
     paths.target_root.mkdir(parents=True, exist_ok=True)
     _assert_contained(paths.target_root, paths.base.stage_root)
     run_lock, run_token = _acquire_run_lock(paths.target_root)
@@ -2245,26 +2326,54 @@ def run_phase1r(
         if paths.native_freeze.is_file():
             native_freeze = _validate_native_freeze(
                 paths, fingerprint=fingerprint, raw_hashes=raw_hashes,
-                original_hashes=original_hashes,
+                original_hashes=original_hashes, prior_hashes=prior_hashes,
             )
         else:
             _write_native_outputs(
                 paths, parts, tracking, fingerprint, raw_hashes, original_hashes,
+                prior_hashes,
                 worker_audit, determinism, resource,
             )
             native_freeze = _validate_native_freeze(
                 paths, fingerprint=fingerprint, raw_hashes=raw_hashes,
-                original_hashes=original_hashes,
+                original_hashes=original_hashes, prior_hashes=prior_hashes,
             )
         return _finalize(
-            paths, config_path, raw_hashes, original_hashes, external, code, cache_audit,
+            paths, config_path, raw_hashes, original_hashes, prior_hashes,
+            external, code, cache_audit,
             (reconstruction1, reconstruction2), pairs, parts, tracking, event_map,
             observation_paths, navigation_paths, native_freeze,
         )
     except Exception as exc:
+        immutability_errors: list[str] = []
+        current_original: dict[str, str] = {}
+        current_prior: dict[str, str] = {}
+        try:
+            current_original = _hash_tree(
+                paths.base.stage_root / "02_EXT01_CLAMBDA/C00"
+            )
+        except Exception as audit_exc:
+            immutability_errors.append(
+                f"original_c00:{type(audit_exc).__name__}:{audit_exc}"
+            )
+        try:
+            current_prior = _prior_attempt_hashes(paths)
+        except Exception as audit_exc:
+            immutability_errors.append(
+                f"phase1r_r1:{type(audit_exc).__name__}:{audit_exc}"
+            )
+        original_immutable = current_original == dict(original_hashes)
+        prior_immutable = current_prior == dict(prior_hashes)
+        if not original_immutable:
+            immutability_errors.append("original_c00:hash_map_changed")
+        if not prior_immutable:
+            immutability_errors.append("phase1r_r1:hash_map_changed")
         terminal = {
-            "schema_version": "horizontal_literature.phase1r_status.v1",
-            "terminal_status": "BLOCKED_PHASE1R_RUNTIME_FAILURE",
+            "schema_version": "horizontal_literature.phase1r_status.v2",
+            "terminal_status": (
+                "BLOCKED_PHASE1R_IMMUTABILITY_VIOLATION"
+                if immutability_errors else "BLOCKED_PHASE1R_RUNTIME_FAILURE"
+            ),
             "error_type": type(exc).__name__,
             "error": str(exc),
             "partial_validated_root_preserved": True,
@@ -2276,6 +2385,16 @@ def run_phase1r(
             "code": code,
             "raw_source_hashes": dict(raw_hashes),
             "original_c00_tree_digest_before": _tree_digest(original_hashes),
+            "original_c00_tree_digest_after": (
+                _tree_digest(current_original) if current_original else None
+            ),
+            "original_c00_immutable": original_immutable,
+            "prior_phase1r_attempt_tree_digest_before": _tree_digest(prior_hashes),
+            "prior_phase1r_attempt_tree_digest_after": (
+                _tree_digest(current_prior) if current_prior else None
+            ),
+            "prior_phase1r_attempt_immutable": prior_immutable,
+            "immutability_audit_errors": immutability_errors,
         }
         write_json_atomic(paths.status, _jsonable(terminal))
         return terminal

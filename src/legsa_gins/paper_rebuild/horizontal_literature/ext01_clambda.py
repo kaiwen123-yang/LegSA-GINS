@@ -351,18 +351,43 @@ def joint_gls(y: Sequence[float], ambiguity_design: np.ndarray,
     if a_design.shape[0] != yv.size or b_design.shape != (yv.size, 3) or covariance_y.shape != (yv.size, yv.size):
         raise CLambdaError("incompatible GLS dimensions")
     design = np.column_stack((a_design, b_design))
-    weighted_design = np.linalg.solve(covariance_y, design)
-    normal = design.T @ weighted_design
-    covariance = np.linalg.inv(_positive_definite(normal, "GLS normal matrix"))
-    estimate = covariance @ design.T @ np.linalg.solve(covariance_y, yv)
+    if design.shape[0] < design.shape[1]:
+        raise CLambdaError("GLS design matrix is underdetermined")
+
+    # Whiten once with Qyy=L L' and solve min ||L^-1(y-Xx)|| by SVD.  Forming
+    # X'Qyy^-1X and inverting it squares the design condition number; on the
+    # real short-baseline DD scaling this was large enough to measurably break
+    # the observation-space versus parameter-space objective identity.
+    whitening_factor = np.linalg.cholesky(covariance_y)
+    whitened_design = np.linalg.solve(whitening_factor, design)
+    whitened_observation = np.linalg.solve(whitening_factor, yv)
+    left, singular_values, right_transpose = np.linalg.svd(
+        whitened_design, full_matrices=False
+    )
+    if singular_values.size != design.shape[1] or np.any(~np.isfinite(singular_values)):
+        raise CLambdaError("GLS SVD did not return a finite full parameter spectrum")
+    rank_tolerance = (
+        np.finfo(float).eps * max(whitened_design.shape) * singular_values[0]
+    )
+    numerical_rank = int(np.count_nonzero(singular_values > rank_tolerance))
+    if numerical_rank != design.shape[1]:
+        raise CLambdaError(
+            f"GLS design matrix rank deficient: rank={numerical_rank}, "
+            f"parameters={design.shape[1]}"
+        )
+    right = right_transpose.T
+    estimate = right @ ((left.T @ whitened_observation) / singular_values)
+    inverse_singular_squared = 1.0 / np.square(singular_values)
+    covariance = (right * inverse_singular_squared) @ right.T
+    covariance = _positive_definite(covariance, "GLS parameter covariance")
     n = a_design.shape[1]
     qaa = covariance[:n, :n]
     qba = covariance[n:, :n]
     conditional = covariance[n:, n:] - qba @ np.linalg.solve(qaa, qba.T)
     conditional = _positive_definite(conditional, "conditional baseline covariance")
-    residual = yv - design @ estimate
+    whitened_residual = whitened_observation - whitened_design @ estimate
     return FloatSolution(estimate[:n], estimate[n:], covariance, qaa, qba,
-                         conditional, float(residual @ np.linalg.solve(covariance_y, residual)))
+                         conditional, float(whitened_residual @ whitened_residual))
 
 
 def conditional_float_baseline(solution: FloatSolution, ambiguity: Sequence[int]) -> np.ndarray:

@@ -151,6 +151,60 @@ def test_production_objective_decomposition_sums_and_matches_whitened_residual()
     )
 
 
+def test_whitened_svd_gls_preserves_objective_identity_at_high_condition():
+    """Regression for real-DD-like scaling that broke normal equations."""
+    rng = np.random.default_rng(991)
+    observation_count = 30
+    parameter_count = 5
+    left = np.linalg.qr(rng.normal(size=(observation_count, parameter_count)))[0]
+    right = np.linalg.qr(rng.normal(size=(parameter_count, parameter_count)))[0]
+    singular_values = np.geomspace(1e3, 1e-5, parameter_count)
+    whitened_design = left @ np.diag(singular_values) @ right.T
+
+    # Exercise observation whitening as well as the high-condition design.
+    observation_std = np.geomspace(0.02, 5.0, observation_count)
+    observation_cholesky = np.diag(observation_std)
+    design = observation_cholesky @ whitened_design
+    covariance = observation_cholesky @ observation_cholesky.T
+    truth = np.array([3.0, -2.0, 0.21, 0.28, 0.0])
+    whitened_observation = (
+        whitened_design @ truth
+        + rng.normal(scale=2e-4, size=observation_count)
+    )
+    observation = observation_cholesky @ whitened_observation
+    ambiguity_design, baseline_design = design[:, :2], design[:, 2:]
+
+    assert np.linalg.cond(whitened_design) > 9e7
+    floating = joint_gls(
+        observation, ambiguity_design, baseline_design, covariance
+    )
+    audited = evaluate_production_objective(
+        floating, [3, -2], 0.350,
+        observation, ambiguity_design, baseline_design, covariance,
+        code_observation_count=observation_count // 2,
+    )
+    assert np.all(np.isfinite(floating.covariance))
+    np.linalg.cholesky(floating.covariance)
+    assert abs(audited.objective_identity_error) <= 1e-4
+    assert audited.total_constrained_objective == pytest.approx(
+        audited.ambiguity_quadratic_term
+        + audited.conditional_baseline_constraint_term,
+        rel=1e-10, abs=1e-10,
+    )
+    assert audited.whitened_total_residual_squared == pytest.approx(
+        audited.float_residual_objective + audited.total_constrained_objective,
+        abs=1e-4,
+    )
+
+
+def test_whitened_svd_gls_rejects_rank_deficient_design():
+    y, a, b, covariance, _, _ = _problem(0.0)
+    b = b.copy()
+    b[:, 2] = b[:, 1]
+    with pytest.raises(ValueError, match="rank deficient"):
+        joint_gls(y, a, b, covariance)
+
+
 def test_proxy_candidate_objective_evaluation():
     """A diagnostic candidate is evaluated without a second objective path."""
     y, a, b, covariance, true_ambiguity, _ = _problem(2e-4)
