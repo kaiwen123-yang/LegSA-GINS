@@ -1,0 +1,31 @@
+{
+  "base_head_at_native_execution": "b6fac17b91ef33e7e3296de5f439939f3b7a1f5e",
+  "case_id": "C00",
+  "current_runner_sha256": "40193b4b2e1f66efa5ba8ff74ceb8a9da4b84012c31f095aa1789459be5f88f7",
+  "current_runner_size_bytes": 141465,
+  "frozen_native_runner_sha256": "881f3ee3865df73cf6db1ebc82c379a2101470120c8e39b0c81864c96f353a59",
+  "frozen_native_runner_size_bytes": 119477,
+  "method_id": "EXT03_YANG2024",
+  "native_freeze_sha256": "e172100ad64a2c20ee6772f9b7cb1e212cfb940fde8c3ac94c970b101671b3f0",
+  "native_rerun": false,
+  "native_source_fingerprint": "35dd196aef5ae310e328705de2f483238e9e15bc9cbd67364d73de4950e1235a",
+  "patch_direction": "FROZEN_NATIVE_RUNNER_TO_CURRENT_POST_NATIVE_CAPABLE_RUNNER",
+  "patch_format": "UNIFIED_DIFF_ZERO_CONTEXT",
+  "patch_relative_path": "docs/paper_rebuild/provenance/EXT03_PHASE3_RUNNER_NATIVE_TO_FINAL.patch",
+  "patch_sha256": "399186445245be20cfa3fd4958d89119a3983fcd5befcfba3ead66f98d6e1fd5",
+  "reconstruction": {
+    "expected_result_sha256": "881f3ee3865df73cf6db1ebc82c379a2101470120c8e39b0c81864c96f353a59",
+    "operation": "Copy the committed current runner into an isolated tree at its repository-relative path, reverse-apply the tracked patch with patch --batch -R -p1, then verify SHA-256.",
+    "runner_relative_path": "src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py"
+  },
+  "recovery_role": "TRACKED_DETERMINISTIC_NATIVE_SOURCE_RECONSTRUCTION",
+  "schema_version": "horizontal_literature.phase3.tracked_native_source_provenance.v1",
+  "semantic_boundary": {
+    "all_post_freeze_changes_post_native_only": true,
+    "minimum_changed_old_line": 1015,
+    "native_atomic_finalizer_lines_in_frozen_source": "997-1004",
+    "native_rawx_spp_dd_tracking_kf_constraint_mlambda_scheduler_serialization_changed": false,
+    "post_native_diagnostics_recovery_and_terminal_reporting_changed": true
+  },
+  "stage_provenance_bundle_relative_path": "11_REPORT/PHASE3_EXT03_C00_NATIVE_SOURCE_PROVENANCE_R2"
+}

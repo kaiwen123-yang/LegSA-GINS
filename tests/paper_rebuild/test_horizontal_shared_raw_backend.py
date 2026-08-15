@@ -13,11 +13,14 @@ import legsa_gins.paper_rebuild.horizontal_literature.shared_raw_backend as back
 
 from legsa_gins.paper_rebuild.horizontal_literature.shared_raw_backend import (
     RawBackendError,
+    PntPosBridgeError,
     DoubleDifferenceStageError,
     HALF_CYCLE_CONTRACT,
     RawxEpoch,
     RawxMeasurement,
     RtklibBroadcastProvider,
+    RTKLIB_NAVSYS_BDS,
+    RTKLIB_NAVSYS_GPS,
     SatelliteState,
     SignalIdentity,
     TrackingContinuity,
@@ -510,6 +513,7 @@ def test_rtklib_ctypes_adapter_loads_multiple_nav_and_transmit_state(tmp_path, m
             self.legsa_satpos_transmit_broadcast = FakeFunction(self._transmit_state)
             self.legsa_broadcast_ephemeris_audit = FakeFunction(self._ephemeris_audit)
             self.legsa_sat_frequency_hz = FakeFunction(lambda handle, sat, code: 1575.42e6)
+            self.legsa_pntpos_rawx_epoch_v1 = FakeFunction(self._pntpos)
 
         def _free(self, handle):
             self.freed = True
@@ -543,6 +547,46 @@ def test_rtklib_ctypes_adapter_loads_multiple_nav_and_transmit_state(tmp_path, m
             iode._obj.value = 12
             return 1
 
+        @staticmethod
+        def _pntpos(handle, week, tow, navsys, count, gnss, sv, signal, frequency,
+                    pseudorange, pr_valid, carrier, doppler, cno, cp_std,
+                    tracking, initial, rr, qr, dtr, solution_status,
+                    valid_satellite_count, constructed_observation_count,
+                    message, message_capacity):
+            assert navsys in {RTKLIB_NAVSYS_GPS, RTKLIB_NAVSYS_BDS}
+            assert message_capacity == 4096
+            assert all(frequency[index] == 0 for index in range(count))
+            assert all(np.isfinite(carrier[index]) and np.isfinite(doppler[index])
+                       for index in range(count))
+            identities = tuple(
+                (gnss[index], sv[index], signal[index], frequency[index])
+                for index in range(count)
+            )
+            if len(set(identities)) != count:
+                return -3
+            constructed_observation_count._obj.value = 1
+            if not pr_valid[0]:
+                message.value = b"lack of valid sats ns=0"
+                return 0
+            if navsys == RTKLIB_NAVSYS_GPS:
+                assert tuple(gnss) == (0,) * count
+                assert set(signal) <= {0, 3, 4}
+            else:
+                assert tuple(gnss) == (3,) * count
+                assert set(signal) <= {0, 1, 2, 3}
+            assert pseudorange[0] == pytest.approx(20e6)
+            assert tuple(initial) == pytest.approx((1.0, 2.0, 3.0))
+            for index, value in enumerate((1e6, 2e6, 3e6, 4.0, 5.0, 6.0)):
+                rr[index] = value
+            for index, value in enumerate((1.0, 2.0, 3.0, 0.1, 0.2, 0.3)):
+                qr[index] = value
+            for index in range(6):
+                dtr[index] = index * 1e-6
+            solution_status._obj.value = 5
+            valid_satellite_count._obj.value = 7
+            message.value = b""
+            return 1
+
     fake = FakeLibrary()
     monkeypatch.setattr(ctypes, "CDLL", lambda _path: fake)
     bridge = tmp_path / "bridge.so"
@@ -558,7 +602,128 @@ def test_rtklib_ctypes_adapter_loads_multiple_nav_and_transmit_state(tmp_path, m
         assert audit.signed_age_seconds == pytest.approx(100.0)
         assert audit.iode == 12
         assert provider.frequency_hz(SignalIdentity(0, 7, 0, 0)) == pytest.approx(1575.42e6)
+        spp = provider.pntpos_rawx_epoch(
+            _epoch(100.0, (_measurement(7),)), RTKLIB_NAVSYS_GPS, [1.0, 2.0, 3.0]
+        )
+        assert spp.accepted and spp.bridge_status == 1
+        np.testing.assert_allclose(spp.position_ecef_m, [1e6, 2e6, 3e6])
+        np.testing.assert_allclose(spp.velocity_ecef_mps, [4.0, 5.0, 6.0])
+        np.testing.assert_allclose(
+            spp.position_covariance_ecef_m2,
+            [[1.0, 0.1, 0.3], [0.1, 2.0, 0.2], [0.3, 0.2, 3.0]],
+        )
+        assert spp.solution_status == 5 and spp.valid_satellite_count == 7
+        gps_multifrequency = tuple(
+            RawxMeasurement(SignalIdentity(0, 7 + index, signal, 0), 20e6,
+                            100.0, -2.0, 1000, 40, 1, 2, 3, 0x07)
+            for index, signal in enumerate((0, 3, 4))
+        )
+        gps_mapped = provider.pntpos_rawx_epoch(
+            _epoch(100.0, gps_multifrequency), RTKLIB_NAVSYS_GPS, [1.0, 2.0, 3.0]
+        )
+        assert gps_mapped.accepted and gps_mapped.selected_raw_measurement_count == 3
+        bds_multifrequency = tuple(
+            RawxMeasurement(SignalIdentity(3, 7 + index, signal, 0), 20e6,
+                            100.0, -2.0, 1000, 40, 1, 2, 3, 0x07)
+            for index, signal in enumerate((0, 1, 2, 3))
+        )
+        bds_mapped = provider.pntpos_rawx_epoch(
+            _epoch(100.0, bds_multifrequency), RTKLIB_NAVSYS_BDS, [1.0, 2.0, 3.0]
+        )
+        assert bds_mapped.accepted and bds_mapped.selected_raw_measurement_count == 4
+        rejected = provider.pntpos_rawx_epoch(
+            _epoch(100.0, (_measurement(7, trk=0x00),)),
+            RTKLIB_NAVSYS_GPS, [1.0, 2.0, 3.0],
+        )
+        assert not rejected.accepted
+        assert rejected.message == "lack of valid sats ns=0"
+        assert rejected.constructed_observation_count == 1
+        with pytest.raises(PntPosBridgeError) as caught:
+            provider.pntpos_rawx_epoch(
+                _epoch(100.0, (_measurement(7), _measurement(7))),
+                RTKLIB_NAVSYS_GPS, [1.0, 2.0, 3.0],
+            )
+        assert caught.value.code == "PNTPOS_BRIDGE_DUPLICATE_SATELLITE_SLOT"
     assert fake.freed
+
+
+def test_actual_pntpos_bridge_provenance_and_duplicate_guard_when_configured():
+    repository = Path(__file__).resolve().parents[2]
+    local_config = repository / "configs/paper_rebuild/DATA_PATHS.CLEAN3R4.local.yaml"
+    if not local_config.is_file():
+        pytest.skip("ignored local bridge configuration is unavailable")
+    paths = yaml.safe_load(local_config.read_text(encoding="utf-8"))["paths"]
+    bridge = Path(paths["horizontal_literature_rtklib_bridge"])
+    rtklib_root = Path(paths["horizontal_literature_rtklib_root"])
+    navigation = rtklib_root / "test/data/rinex/brdc1820.10n"
+    if not bridge.is_file() or not navigation.is_file():
+        pytest.skip("external pinned bridge fixture is unavailable")
+    measurement = _measurement(1)
+    with RtklibBroadcastProvider(bridge, [navigation]) as provider:
+        provenance = provider.pntpos_bridge_provenance()
+        assert provenance.abi == "legsa_pntpos_rawx_epoch_v1_with_explicit_pr_valid"
+        assert provenance.rtklib_commit == "180043ee24b6d2b168f98b64be15f69d50046b1a"
+        assert provenance.rtklib_license == "BSD-2-Clause"
+        assert provenance.build_command == "make -B all"
+        assert all(len(value) == 64 for value in (
+            provenance.bridge_library_sha256, provenance.rtklib_library_sha256,
+            provenance.bridge_source_sha256, provenance.bridge_header_sha256,
+            provenance.patch_sha256,
+        ))
+        with pytest.raises(PntPosBridgeError) as caught:
+            provider.pntpos_rawx_epoch(
+                _epoch(345600.0, (measurement, measurement), week=1590),
+                RTKLIB_NAVSYS_GPS, [0.0, 0.0, 0.0],
+            )
+        assert caught.value.code == "PNTPOS_BRIDGE_DUPLICATE_SATELLITE_SLOT"
+
+
+def test_actual_pntpos_is_order_deterministic_and_drops_l2_only_records_when_configured():
+    repository = Path(__file__).resolve().parents[2]
+    local_config = repository / "configs/paper_rebuild/DATA_PATHS.CLEAN3R4.local.yaml"
+    if not local_config.is_file():
+        pytest.skip("ignored local bridge configuration is unavailable")
+    paths = yaml.safe_load(local_config.read_text(encoding="utf-8"))["paths"]
+    bridge = Path(paths["horizontal_literature_rtklib_bridge"])
+    navigation = bridge.parent.parent / "build/ubx_20080526.nav"
+    if not bridge.is_file() or not navigation.is_file():
+        pytest.skip("external pinned pntpos fixture is unavailable")
+    raw_codes = (
+        (18, 20374092.016), (9, 20466294.850), (12, 20502549.463),
+        (5, 20139221.883), (30, 21548661.481), (14, 22697162.091),
+        (15, 23560321.579), (22, 20840902.010), (26, 25139488.542),
+    )
+    measurements = [
+        RawxMeasurement(SignalIdentity(0, satellite, 0, 0), pseudorange,
+                        0.0, 0.0, 1000, 45, 1, 2, 3, 0x01)
+        for satellite, pseudorange in raw_codes
+    ]
+    # A valid GPS L2-only satellite crosses the ABI but cannot influence
+    # single-frequency pntpos because pinned prange() consumes P[0].
+    measurements.append(
+        RawxMeasurement(SignalIdentity(0, 1, 3, 0), 24e6,
+                        0.0, 0.0, 1000, 45, 1, 2, 3, 0x01)
+    )
+    initial = [-3869309.8278, 3436565.4776, 3717365.8937]
+    with RtklibBroadcastProvider(bridge, [navigation]) as provider:
+        forward = provider.pntpos_rawx_epoch(
+            _epoch(107969.999, measurements, week=1481),
+            RTKLIB_NAVSYS_GPS, initial,
+        )
+        reverse = provider.pntpos_rawx_epoch(
+            _epoch(107969.999, tuple(reversed(measurements)), week=1481),
+            RTKLIB_NAVSYS_GPS, initial,
+        )
+    assert forward.accepted and reverse.accepted
+    assert forward.selected_raw_measurement_count == 10
+    assert forward.constructed_observation_count == 9
+    assert reverse.constructed_observation_count == 9
+    np.testing.assert_array_equal(forward.position_ecef_m, reverse.position_ecef_m)
+    np.testing.assert_array_equal(
+        forward.position_covariance_ecef_m2, reverse.position_covariance_ecef_m2
+    )
+    np.testing.assert_array_equal(forward.receiver_clock_biases_s,
+                                  reverse.receiver_clock_biases_s)
 
 
 def _independent_rawx_tracking(stream):

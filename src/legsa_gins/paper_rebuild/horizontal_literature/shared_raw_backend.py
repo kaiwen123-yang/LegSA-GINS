@@ -10,6 +10,7 @@ from __future__ import annotations
 import csv
 import ast
 import ctypes
+import hashlib
 import math
 import struct
 from collections import Counter, defaultdict
@@ -22,6 +23,19 @@ import numpy as np
 
 class RawBackendError(ValueError):
     pass
+
+
+class PntPosBridgeError(RawBackendError):
+    """Negative in-memory RTKLIB bridge result with a stable failure code."""
+
+    def __init__(self, code: str, bridge_status: int, message: str = ""):
+        detail = f"{code}: bridge_status={bridge_status}"
+        if message:
+            detail += f" message={message}"
+        super().__init__(detail)
+        self.code = code
+        self.bridge_status = bridge_status
+        self.bridge_message = message
 
 
 class DoubleDifferenceStageError(RawBackendError):
@@ -198,6 +212,42 @@ class EphemerisAudit:
     toc_tow_seconds: float
     health: int
     iode: int
+
+
+@dataclass(frozen=True)
+class RtklibPntPosResult:
+    accepted: bool
+    bridge_status: int
+    position_ecef_m: np.ndarray | None
+    velocity_ecef_mps: np.ndarray | None
+    position_covariance_ecef_m2: np.ndarray | None
+    receiver_clock_biases_s: np.ndarray | None
+    solution_status: int
+    valid_satellite_count: int
+    constructed_observation_count: int
+    selected_raw_measurement_count: int
+    message: str
+
+
+@dataclass(frozen=True)
+class RtklibPntPosBridgeProvenance:
+    abi: str
+    rtklib_commit: str
+    rtklib_license: str
+    build_command: str
+    bridge_library_path: str
+    bridge_library_sha256: str
+    rtklib_library_path: str
+    rtklib_library_sha256: str
+    bridge_source_sha256: str
+    bridge_header_sha256: str
+    patch_path: str
+    patch_sha256: str
+
+
+RTKLIB_NAVSYS_GPS = 1
+RTKLIB_NAVSYS_BDS = 32
+RTKLIB_NAVSYS_GPS_BDS = RTKLIB_NAVSYS_GPS | RTKLIB_NAVSYS_BDS
 
 
 class SatelliteStateProvider(Protocol):
@@ -630,6 +680,45 @@ class RtklibBroadcastProvider:
         lib.legsa_broadcast_ephemeris_audit.restype = ctypes.c_int
         lib.legsa_sat_frequency_hz.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_char_p]
         lib.legsa_sat_frequency_hz.restype = ctypes.c_double
+        int_pointer = ctypes.POINTER(ctypes.c_int)
+        lib.legsa_pntpos_rawx_epoch_v1.argtypes = [
+            ctypes.c_void_p, ctypes.c_int, ctypes.c_double, ctypes.c_int,
+            ctypes.c_int, int_pointer, int_pointer, int_pointer, int_pointer,
+            double_pointer, int_pointer, double_pointer, double_pointer,
+            int_pointer, int_pointer, int_pointer, double_pointer,
+            double_pointer, double_pointer, double_pointer,
+            int_pointer, int_pointer, int_pointer, ctypes.POINTER(ctypes.c_char),
+            ctypes.c_int,
+        ]
+        lib.legsa_pntpos_rawx_epoch_v1.restype = ctypes.c_int
+
+    def pntpos_bridge_provenance(self) -> RtklibPntPosBridgeProvenance:
+        """Hash the external ABI, pinned RTKLIB binary, source, and patch."""
+
+        def sha256(path: Path) -> str:
+            digest = hashlib.sha256()
+            with path.open("rb") as stream:
+                for block in iter(lambda: stream.read(1024 * 1024), b""):
+                    digest.update(block)
+            return digest.hexdigest()
+
+        bridge_library = Path(self._library._name).resolve()
+        root = bridge_library.parent.parent
+        rtklib_library = bridge_library.parent / "librtklib_legsa.so"
+        source = root / "legsa_rtklib_bridge.c"
+        header = root / "legsa_rtklib_bridge.h"
+        patch = root / "EXT03_PNTPOS_BRIDGE.patch"
+        required = (bridge_library, rtklib_library, source, header, patch)
+        if any(not path.is_file() for path in required):
+            raise RawBackendError("in-memory pntpos bridge provenance is incomplete")
+        return RtklibPntPosBridgeProvenance(
+            "legsa_pntpos_rawx_epoch_v1_with_explicit_pr_valid",
+            "180043ee24b6d2b168f98b64be15f69d50046b1a", "BSD-2-Clause",
+            "make -B all",
+            str(bridge_library), sha256(bridge_library),
+            str(rtklib_library), sha256(rtklib_library),
+            sha256(source), sha256(header), str(patch), sha256(patch),
+        )
 
     def close(self) -> None:
         handle = getattr(self, "_handle", None)
@@ -713,6 +802,114 @@ class RtklibBroadcastProvider:
         return EphemerisAudit(age.value, toe_week.value, toe_tow.value,
                               toc_week.value, toc_tow.value, health.value,
                               iode.value)
+
+    def pntpos_rawx_epoch(
+        self,
+        epoch: RawxEpoch,
+        navsys_mask: int,
+        initial_position_ecef_m: Sequence[float],
+    ) -> RtklibPntPosResult:
+        """Run pinned RTKLIB ``pntpos`` entirely in memory from raw code.
+
+        Only the audited GPS/BDS signal mappings supported by bridge ABI v1
+        are forwarded.  ``prValid`` is passed explicitly; a finite/nonzero
+        number never substitutes for receiver validity.  Carrier and Doppler
+        arrays cross the ABI for shape auditing but the C bridge deliberately
+        leaves RTKLIB ``L`` and ``D`` zero for this strict raw-code SPP path.
+        A normal RTKLIB rejection is returned as ``accepted=False`` so callers
+        can preserve a failure row; negative bridge contract failures raise a
+        :class:`PntPosBridgeError` with a stable code.
+        """
+
+        if navsys_mask not in {
+            RTKLIB_NAVSYS_GPS, RTKLIB_NAVSYS_BDS, RTKLIB_NAVSYS_GPS_BDS
+        }:
+            raise PntPosBridgeError("PNTPOS_INVALID_NAVSYS_MASK", -1)
+        initial = np.asarray(initial_position_ecef_m, dtype=float)
+        if initial.shape != (3,) or np.any(~np.isfinite(initial)):
+            raise PntPosBridgeError("PNTPOS_INVALID_INITIAL_POSITION", -1)
+        supported = {
+            (0, 0, 0), (0, 3, 0), (0, 4, 0),
+            (3, 0, 0), (3, 1, 0), (3, 2, 0), (3, 3, 0),
+        }
+        enabled_gnss = {0} if navsys_mask == RTKLIB_NAVSYS_GPS else (
+            {3} if navsys_mask == RTKLIB_NAVSYS_BDS else {0, 3}
+        )
+        selected = tuple(
+            measurement for measurement in epoch.measurements
+            if measurement.identity.gnss_id in enabled_gnss
+            and (
+                measurement.identity.gnss_id,
+                measurement.identity.sig_id,
+                measurement.identity.freq_id,
+            ) in supported
+        )
+        if not selected:
+            raise PntPosBridgeError("PNTPOS_NO_SUPPORTED_RAW_MEASUREMENTS", -1)
+
+        count = len(selected)
+        int_array = ctypes.c_int * count
+        double_array = ctypes.c_double * count
+        gnss = int_array(*(item.identity.gnss_id for item in selected))
+        sv = int_array(*(item.identity.sv_id for item in selected))
+        signal = int_array(*(item.identity.sig_id for item in selected))
+        frequency = int_array(*(item.identity.freq_id for item in selected))
+        pseudorange = double_array(*(item.pr_mes_m for item in selected))
+        pr_valid = int_array(*(int(item.pseudorange_valid) for item in selected))
+        carrier = double_array(*(item.cp_mes_cycles for item in selected))
+        doppler = double_array(*(item.do_mes_hz for item in selected))
+        cno = int_array(*(item.cno_dbhz for item in selected))
+        cp_std = int_array(*(item.cp_std_code for item in selected))
+        tracking = int_array(*(item.tracking_status for item in selected))
+        initial_rr = (ctypes.c_double * 3)(*map(float, initial))
+        rr = (ctypes.c_double * 6)()
+        qr = (ctypes.c_double * 6)()
+        dtr = (ctypes.c_double * 6)()
+        solution_status = ctypes.c_int()
+        valid_satellite_count = ctypes.c_int()
+        constructed_observation_count = ctypes.c_int()
+        message_buffer = ctypes.create_string_buffer(4096)
+        status = int(self._library.legsa_pntpos_rawx_epoch_v1(
+            self._handle, epoch.gps_week, epoch.gps_tow_seconds, navsys_mask,
+            count, gnss, sv, signal, frequency, pseudorange, pr_valid,
+            carrier, doppler, cno, cp_std, tracking, initial_rr,
+            rr, qr, dtr, ctypes.byref(solution_status),
+            ctypes.byref(valid_satellite_count),
+            ctypes.byref(constructed_observation_count), message_buffer,
+            len(message_buffer),
+        ))
+        message = message_buffer.value.decode("utf-8", errors="replace")
+        if status < 0:
+            codes = {
+                -1: "PNTPOS_BRIDGE_INVALID_INPUT",
+                -2: "PNTPOS_BRIDGE_SIGNAL_MAPPING_REJECTED",
+                -3: "PNTPOS_BRIDGE_DUPLICATE_SATELLITE_SLOT",
+                -4: "PNTPOS_BRIDGE_MAXOBS_EXCEEDED",
+                -5: "PNTPOS_BRIDGE_ALLOCATION_FAILED",
+            }
+            raise PntPosBridgeError(codes.get(status, "PNTPOS_BRIDGE_UNKNOWN_FAILURE"),
+                                    status, message)
+        if status == 0:
+            return RtklibPntPosResult(
+                False, status, None, None, None, None,
+                solution_status.value, valid_satellite_count.value,
+                constructed_observation_count.value, count, message,
+            )
+        rr_value = np.asarray(tuple(rr), dtype=float)
+        qr_value = np.asarray(tuple(qr), dtype=float)
+        dtr_value = np.asarray(tuple(dtr), dtype=float)
+        if np.any(~np.isfinite(rr_value)) or np.any(~np.isfinite(qr_value)) or np.any(~np.isfinite(dtr_value)):
+            raise PntPosBridgeError("PNTPOS_BRIDGE_NONFINITE_OUTPUT", -6, message)
+        covariance = np.array([
+            [qr_value[0], qr_value[3], qr_value[5]],
+            [qr_value[3], qr_value[1], qr_value[4]],
+            [qr_value[5], qr_value[4], qr_value[2]],
+        ])
+        return RtklibPntPosResult(
+            True, status, rr_value[:3], rr_value[3:], covariance, dtr_value,
+            solution_status.value, valid_satellite_count.value,
+            constructed_observation_count.value, count, message,
+        )
 
 
 def pair_epochs(left: Sequence[RawxEpoch], right: Sequence[RawxEpoch],
