@@ -89,3 +89,58 @@ def test_phase1r_r2_contract_preserves_r1_and_locks_svd_gls_repair():
     assert len(contract["required_outputs"]) == 11
     assert all("C00_VALIDATED_R2" in path or "PHASE1R_R2" in path
                for path in contract["required_outputs"])
+
+
+def test_phase2_ext02_contract_is_additive_trace_closed_and_exactly_bounded():
+    contract = yaml.safe_load(
+        (CONFIG / "PHASE2_EXT02_CWLS_CONTRACT_V1.yaml").read_text(encoding="utf-8")
+    )
+    assert contract["schema_version"] == "horizontal_literature.phase2_ext02_cwls.v1"
+    assert contract["method_id"] == "EXT02_CWLS" and contract["case_id"] == "C00"
+    assert contract["formal_reproduction_level"] == "FAITHFUL_ALGORITHM_REPRODUCTION"
+    assert contract["paper_source"]["doi"] == "10.1109/TIM.2022.3193412"
+    algorithm = contract["algorithm"]
+    assert algorithm["K_policy"] == "ALL_UNIQUE_CANDIDATES"
+    assert algorithm["delta_Delta"] == 0.05
+    assert algorithm["sphere_refinement"] == {"tolerance": 1.0e-10, "max_iterations": 20}
+    assert algorithm["objective_oracle"]["original_epoch_indices"] == list(range(0, 1509, 150))
+    assert algorithm["objective_oracle"]["integer_rounding_implementation"] == (
+        "ORACLE_LOCAL_CEIL_X_MINUS_0P5"
+    )
+    assert algorithm["objective_oracle"]["production_import_allowlist"] == [
+        "solve_unit_sphere_quadratic"
+    ]
+    assert algorithm["acceptance"][
+        "search_complete_requires_every_unique_candidate_converged_finite"
+    ] is True
+    observation = contract["observation_contract"]
+    assert observation["required_paired_epoch_count"] == 1509
+    assert observation["HPPOSECEF_solver_input"] is False
+    assert observation["phase_bias_calibration"] == "NONE"
+    assert contract["data_flags"]["trace_open_count_before_native_freeze"] == 0
+    assert contract["parallel_execution"]["default_workers"] == 16
+    assert contract["parallel_execution"]["maximum_workers"] == 20
+    assert contract["parallel_execution"]["atomic_writer_policy"] == (
+        "NO_REPLACE_FAIL_ON_ANY_TARGET_COLLISION"
+    )
+    assert contract["parallel_execution"]["resource_admission"][
+        "projected_RSS_exclusive_limit_fraction_of_available_RAM"
+    ] == 0.70
+    assert {
+        "INSUFFICIENT_PR_CP_VALID", "INSUFFICIENT_INTEGER_COMPATIBLE_PHASE",
+        "INSUFFICIENT_ELEVATION_ELIGIBLE", "NORMAL_MATRIX_RANK_DEFICIENT",
+    } <= set(contract["failure_codes"])
+    assert contract["git_provenance"] == {
+        "code_commit_role": "BASE_HEAD_ONLY_NOT_COMPLETE_RUNTIME_SOURCE_IDENTITY",
+        "authorized_dirty_runtime_delta_allowed": True,
+        "complete_runtime_source_identity": "SOURCE_HASHES_PLUS_SOURCE_FINGERPRINT",
+        "reject_dirty_git": False,
+    }
+    native = contract["runtime_topology"]["native_files"]
+    assert len(native) == 10
+    assert native["native_freeze"] == "EXT02_C00_NATIVE_FREEZE.json"
+    assert "objective_oracle_diagnostics" in native and "tracking_diagnostics" in native
+
+    schema = yaml.safe_load((CONFIG / "STANDARD_HEADING_STREAM_SCHEMA_V1.yaml").read_text())
+    assert schema["fields"]["method_id"]["enum"] == ["EXT01_CLAMBDA", "EXT02_CWLS"]
+    assert "accepted_wrapped_solution" in schema["fields"]["solution_state"]["enum"]

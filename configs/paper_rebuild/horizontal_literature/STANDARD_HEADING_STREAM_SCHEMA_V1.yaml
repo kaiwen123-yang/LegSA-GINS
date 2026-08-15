@@ -4,20 +4,39 @@ conservation: paired_epoch_count == success_row_count + failure_row_count
 fields:
   gps_week: {type: integer, nullable: false}
   gps_tow_seconds: {type: number, nullable: false}
-  method_id: {type: string, enum: [EXT01_CLAMBDA], nullable: false}
+  method_id: {type: string, enum: [EXT01_CLAMBDA, EXT02_CWLS], nullable: false}
   case_id: {type: string, enum: [C00], nullable: false}
   status: {type: string, enum: [SUCCESS, FAILURE], nullable: false}
-  solution_type: {type: string, enum: [fixed, float, invalid], nullable: false}
+  solution_type: {type: string, enum: [fixed, float, invalid, accepted_wrapped_solution], nullable: false}
+  solution_state: {type: string, enum: [accepted_wrapped_solution, invalid], nullable: true}
+  method_native_accepted: {type: boolean, nullable: true}
+  ambiguity_correctness_known: {type: boolean, nullable: true}
+  common_backbone_yaw_std_deg: {type: number, const: 1.5, nullable: true}
   failure_code: {type: string, nullable: true}
   baseline_ned_m: {type: array_number_3, nullable: true}
   baseline_length_m: {type: number, const: 0.350, nullable: true}
   baseline_heading_deg: {type: number, nullable: true}
+  baseline_elevation_deg: {type: number, nullable: true}
   body_yaw_deg: {type: number, nullable: true}
   pivot_identity: {type: signal_identity, nullable: true}
   pivot_switched: {type: boolean, nullable: false}
   ambiguity_candidate: {type: array_integer, nullable: true}
+  recovered_integer_vector_present: {type: boolean, nullable: true}
+  recovered_integer_vector: {type: array_integer, nullable: true}
+  ambiguity_satellite_identities: {type: array_signal_identity, nullable: true}
   constrained_objective: {type: number, nullable: true}
   second_objective: {type: number, nullable: true}
+  final_second_objective: {type: number, nullable: true}
+  wrapped_phase_rms_cycles: {type: number, nullable: true}
+  wrapped_phase_p95_cycles: {type: number, nullable: true}
+  wrapped_phase_max_abs_cycles: {type: number, nullable: true}
+  pseudorange_residual_rms_m: {type: number, nullable: true}
+  refinement_iterations: {type: integer, nullable: true}
+  candidate_threshold_delta: {type: number, const: 0.05, nullable: true}
+  K_policy: {type: string, enum: [ALL_UNIQUE_CANDIDATES], nullable: true}
+  raw_candidate_count: {type: integer, nullable: true}
+  unique_candidate_count: {type: integer, nullable: true}
+  refined_candidate_count: {type: integer, nullable: true}
   ratio: {type: number, nullable: true}
   ratio_valid: {type: boolean, nullable: false}
   search_complete: {type: boolean, nullable: false}

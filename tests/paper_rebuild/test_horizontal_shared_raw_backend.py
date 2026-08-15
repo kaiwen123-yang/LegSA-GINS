@@ -228,9 +228,30 @@ def test_nav_hpposecef_units_bounds_and_reconstruction(tmp_path):
     reconstruction = reconstruct_ubx_stream(source)
     assert reconstruction.message_counts == {"01-13": 1}
     assert reconstruction.nav_hpposecef_epochs == (epoch,)
+    assert reconstruction.nav_hpposecef_semantic_decode_enabled is True
+
+    opaque = reconstruct_ubx_stream(
+        source, decode_nav_hpposecef_semantics=False,
+    )
+    assert opaque.stream == frame
+    assert opaque.message_counts == {"01-13": 1}
+    assert opaque.nav_hpposecef_epochs == ()
+    assert opaque.nav_hpposecef_semantic_decode_enabled is False
 
     invalid_hp = bytearray(payload)
     invalid_hp[20] = 100
+    invalid_source = tmp_path / "invalid-hpposecef.csv"
+    invalid_frame = _ubx_frame(0x01, 0x13, bytes(invalid_hp))
+    with invalid_source.open("w", newline="", encoding="utf-8") as stream:
+        writer = csv.DictWriter(stream, fieldnames=["data"])
+        writer.writeheader()
+        writer.writerow({"data": repr(invalid_frame)})
+    opaque_invalid = reconstruct_ubx_stream(
+        invalid_source, decode_nav_hpposecef_semantics=False,
+    )
+    assert opaque_invalid.stream == invalid_frame
+    assert opaque_invalid.nav_hpposecef_epochs == ()
+
     with pytest.raises(RawBackendError, match="-99..99"):
         decode_nav_hpposecef(bytes(invalid_hp))
     with pytest.raises(RawBackendError, match="boundary"):

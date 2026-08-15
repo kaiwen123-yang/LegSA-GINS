@@ -228,6 +228,7 @@ class UbxReconstruction:
     discarded_byte_count: int
     checksum_failure_count: int
     nav_hpposecef_epochs: tuple[NavHpPosEcefEpoch, ...] = ()
+    nav_hpposecef_semantic_decode_enabled: bool = True
 
 
 def parse_csv_data_cell(cell: str) -> bytes:
@@ -345,9 +346,24 @@ def _scan_valid_ubx_frames(data: bytes) -> tuple[list[bytes], int, int]:
     return frames, discarded, checksum_failures
 
 
-def reconstruct_ubx_stream(csv_path: Path, output_path: Path | None = None,
-                           column: str = "data") -> UbxReconstruction:
-    """Reconstruct checksum-valid UBX frames in original CSV/cell order."""
+def reconstruct_ubx_stream(
+    csv_path: Path,
+    output_path: Path | None = None,
+    column: str = "data",
+    *,
+    decode_nav_hpposecef_semantics: bool = True,
+) -> UbxReconstruction:
+    """Reconstruct checksum-valid UBX frames in original CSV/cell order.
+
+    ``decode_nav_hpposecef_semantics`` is a default-preserving provenance
+    switch.  When false, NAV-HPPOSECEF frames remain byte-for-byte in the
+    reconstructed stream and message counts, but their receiver-position
+    payload is not interpreted.  Native methods that must remain independent
+    of a receiver position proxy can therefore reuse RAWX/SFRBX without even
+    semantically opening NAV-HPPOSECEF.
+    """
+    if not isinstance(decode_nav_hpposecef_semantics, bool):
+        raise RawBackendError("decode_nav_hpposecef_semantics must be boolean")
     frames: list[bytes] = []
     counts: Counter[str] = Counter()
     rawx_epochs: list[RawxEpoch] = []
@@ -366,7 +382,8 @@ def reconstruct_ubx_stream(csv_path: Path, output_path: Path | None = None,
             sfrbx_messages.append(decode_sfrbx(payload))
         elif (msg_class, msg_id) == (0x01, 0x35):
             nav_sat_epochs.append(decode_nav_sat(payload))
-        elif (msg_class, msg_id) == (0x01, 0x13):
+        elif ((msg_class, msg_id) == (0x01, 0x13)
+              and decode_nav_hpposecef_semantics):
             nav_hpposecef_epochs.append(decode_nav_hpposecef(payload))
         frames.append(frame)
     stream = b"".join(frames)
@@ -386,6 +403,7 @@ def reconstruct_ubx_stream(csv_path: Path, output_path: Path | None = None,
         discarded_byte_count=discarded,
         checksum_failure_count=checksum_failures,
         nav_hpposecef_epochs=tuple(nav_hpposecef_epochs),
+        nav_hpposecef_semantic_decode_enabled=decode_nav_hpposecef_semantics,
     )
 
 
