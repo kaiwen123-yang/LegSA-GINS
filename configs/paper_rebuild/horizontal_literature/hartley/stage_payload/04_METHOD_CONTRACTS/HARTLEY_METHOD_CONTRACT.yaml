@@ -1,0 +1,219 @@
+schema_version: 1
+contract_id: LSE01_HARTLEY_CONTACT_AIDED_INEKF
+contract_phase: H0_H2
+contract_status: PAPER_CODE_FRAME_FOOT_AND_BY2_INPUT_CONTRACT_READY
+
+source_authority:
+  main:
+    source_type: PAPER_DIRECT
+    identity: HARTLEY_IJRR2020_ARXIV1904.09251V2
+    doi: 10.1177/0278364919894385
+    sha256: b519bbd4b0182da64f3fe0ec2834e7fec89be05931f1a7cffa6dc13f999b3f5c
+  original_method_crosscheck:
+    source_type: PAPER_DIRECT
+    identity: HARTLEY_RSS2018_ARXIV1805.10410V1
+    doi: 10.15607/RSS.2018.XIV.050
+    sha256: b7c744a06116899a3c54ec632adc1bbc9396230a92b582fa899269ce0ae9311a
+
+reproduction_identity:
+  algorithm_core: FAITHFUL_ALGORITHM_REPRODUCTION
+  by2_adaptation: WITH_DECLARED_GO2_HIGH_LEVEL_FK_PROXY
+  selected_formulation:
+    navigation_frame: WORLD_CENTRIC
+    error_definition: RIGHT_INVARIANT
+    aiding: POINT_CONTACT_FORWARD_KINEMATICS
+    imu_biases: ESTIMATED_EUCLIDEAN_AUGMENTATION
+    contact_set: SWITCHING_MULTI_POINT_CONTACTS
+  explicitly_not:
+    - LEFT_INVARIANT_PRIMARY
+    - ROBO_CENTRIC_PRIMARY
+    - LANDMARK_AIDED_PRIMARY
+    - SINGLE_PERMANENTLY_FIXED_FOOT
+    - ZERO_VELOCITY_UPDATE_ONLY
+    - GO2_ONBOARD_STATE_ESTIMATOR
+
+state:
+  source_type: PAPER_DIRECT
+  group: SE_N_PLUS_2_3
+  group_elements:
+    - R_WB
+    - v_WB
+    - p_WB
+    - d_WC_i_FOR_EACH_CURRENT_CONTACT
+  euclidean_augmentation:
+    - b_g
+    - b_a
+  right_invariant_error: eta_r_equals_Xbar_X_inverse
+  euclidean_error: zeta_equals_theta_bar_minus_theta
+  covariance_ordering:
+    - xi_R
+    - xi_v
+    - xi_p
+    - xi_d_1_to_N
+    - zeta_g
+    - zeta_a
+  covariance_dimension: 15_plus_3N
+
+continuous_process:
+  source_type: PAPER_DIRECT
+  corrected_inputs:
+    omega_bar: omega_tilde_minus_b_g_bar
+    acceleration_bar: acceleration_tilde_minus_b_a_bar
+  equations:
+    R_dot: R_times_skew_omega_bar_minus_w_g
+    v_dot: R_times_acceleration_bar_minus_w_a_plus_g
+    p_dot: v
+    d_i_dot: minus_R_times_h_R_i_times_w_v_i
+    b_g_dot: w_bg
+    b_a_dot: w_ba
+  deterministic_contact_position: CONSTANT_WHILE_ACTIVE
+  contact_motion_noise: BROWNIAN_POINT_CONTACT_VELOCITY
+  covariance: AUGMENTED_RIGHT_INVARIANT_RICCATI_EQ_28
+  bias_theory_label: IMPERFECT_INEKF
+
+contact_measurement:
+  source_type: PAPER_DIRECT
+  form: RIGHT_INVARIANT_FORWARD_KINEMATIC_POINT_CONTACT
+  per_contact_equation: h_p_i_equals_R_transpose_times_d_i_minus_p_plus_J_p_i_w_alpha_i
+  per_contact_H_blocks:
+    xi_R: ZERO
+    xi_v: ZERO
+    xi_p: MINUS_IDENTITY_3
+    xi_d_i: PLUS_IDENTITY_3
+    other_contacts: ZERO
+    zeta_g: ZERO
+    zeta_a: ZERO
+  paper_noise_covariance: R_bar_J_p_Sigma_alpha_J_p_transpose_R_bar_transpose
+  active_contact_policy: STACK_ALL_ACTIVE_CONTACTS
+  group_correction_side: LEFT
+  bias_correction: ADDITIVE_EUCLIDEAN
+  covariance_correction: JOSEPH_FORM_EQ_29
+
+contact_lifecycle:
+  source_type: PAPER_DIRECT
+  addition:
+    mean: d_new_bar_equals_p_bar_plus_R_bar_h_p
+    covariance: RIGHT_INVARIANT_F_G_AUGMENTATION_EQ_32
+  maintenance:
+    retain_contact_state: true
+    process_noise: CONTACT_BROWNIAN_MOTION
+    kinematic_update: true
+  removal:
+    state_action: DELETE_CONTACT_GROUP_ROW_AND_COLUMN
+    covariance: P_new_equals_M_P_M_transpose
+
+discretization_target:
+  source_type: PAPER_DIRECT
+  selected_policy: FULL_IJRR_MATHEMATICAL_TARGET
+  policies:
+    FULL_IJRR_MATHEMATICAL_TARGET:
+      selection_source: HUMAN_FROZEN_DECISION
+      primary_backend: true
+      corrected_imu_hold: ZERO_ORDER_HOLD
+      deterministic_state: EXACT_EQ_50_GAMMA_0_1_2
+      state_transition: ANALYTICAL_RIGHT_INVARIANT_PHI_EQS_58_OR_60
+      discrete_process_covariance: SEPARATELY_VERIFIED_NUMERICAL_EQ_52_INTEGRAL
+      exact_integral_label_allowed_only_after_verification: true
+      article_reported_result_path: false
+    PAPER_REPORTED_EQ61_REGRESSION:
+      selection_source: PAPER_DIRECT
+      mandatory_companion_backend: true
+      corrected_imu_hold: ZERO_ORDER_HOLD
+      deterministic_state: EXACT_EQ_50_GAMMA_0_1_2
+      state_transition: ANALYTICAL_RIGHT_INVARIANT_PHI_EQS_58_OR_60
+      discrete_process_covariance: APPROXIMATION_EQ_61_PHI_QBAR_K_PHI_TRANSPOSE_DT
+      exact_integral: false
+      article_reported_result_path: true
+  distinction_required: true
+  implementation_status: NOT_IMPLEMENTED_IN_H0_H2
+  official_code_status:
+    source_type: OFFICIAL_CODE
+    value: EARLY_OFFICIAL_CPP_NUMERICAL_APPROXIMATION_NOT_FULL_IJRR2020
+    identity: RossHartley/invariant-ekf@ef16e8a1df72f9272111a488880e3fe9d161f59f
+    mean_orientation: EXP_SO3_WITH_IDENTITY_BRANCH_BELOW_1E_MINUS_10
+    mean_velocity_and_position: FROZEN_R_K_APPROXIMATION
+    state_transition: PHI_EQUALS_I_PLUS_A_DT
+    discrete_process_covariance: QD_HAT_EQUALS_PHI_AD_X_Q_PHI_AD_X_TRANSPOSE_DT
+    source_paths:
+      - src/LieGroup.cpp:20-69
+      - src/InEKF.cpp:125-184
+
+official_example_parameters:
+  source_type: OFFICIAL_CODE
+  identity: RossHartley/invariant-ekf@ef16e8a1df72f9272111a488880e3fe9d161f59f
+  constructor_defaults:
+    gyroscope_noise_std: 0.01
+    accelerometer_noise_std: 0.1
+    gyroscope_bias_noise_std: 1.0e-5
+    accelerometer_bias_noise_std: 1.0e-4
+    landmark_noise_std: 0.1
+    contact_noise_std: 0.1
+  kinematics_example:
+    repeats_gyro_accel_and_bias_defaults: true
+    contact_noise_override_std: 0.01
+    landmark_noise_used: false
+  landmark_example:
+    repeats_gyro_accel_bias_and_landmark_defaults: true
+    contact_noise_used: false
+  source_paths:
+    - src/NoiseParams.cpp:22-29
+    - src/examples/kinematics.cpp:57-66
+    - src/examples/landmarks.cpp:56-65
+
+by2_proxy_boundary:
+  adaptation_label_source: HUMAN_FROZEN_DECISION
+  raw_encoder_urdf_fk: false
+  high_level_fk_like_translation_proxy: true
+  proxy_frame:
+    source_type: BY2_COMPLETE_RECORD_PREFIX_INPUT_ONLY
+    value: GO2_ROBOT_BODY_RELATIVE_FLU;_IMU_SENSOR_IS_ROTATED_SEPARATELY_BY_ACTIVE_RZRYRX_MINUS_1_0_0_DEG
+    foot_order_native: [FR, FL, RR, RL]
+    foot_order_canonical: [FL, FR, RL, RR]
+    native_to_canonical_mapping: [1, 0, 3, 2]
+    data_identity: REAL_BY2_COMPLETE_RECORD_PREFIX_63277
+  proxy_translation_covariance:
+    source_type: BY2_COMPLETE_RECORD_PREFIX_INPUT_ONLY
+    value: FROZEN_BY2_INPUT_ONLY_FK_PROXY_COVARIANCE
+    primary_scale: 1.0
+    sensitivity_scales: [0.25, 1.0, 4.0]
+    eigenvalue_floor_m2: 1.0e-8
+    eigenvalue_floor_dominates_all_final_per_leg_matrices: true
+    encoder_precision_claim: false
+    filter_eligible: true
+  contact_thresholds:
+    source_type: BY2_COMPLETE_RECORD_PREFIX_INPUT_ONLY
+    policy_id: FROZEN_BY2_INPUT_ONLY_CONTACT_POLICY
+    value_native_off_on:
+      FR: [24.8, 34.2]
+      FL: [25.2, 33.8]
+      RR: [23.4, 30.6]
+      RL: [24.0, 32.0]
+    minimum_dwell_seconds: 0.012035608291625977
+    filter_eligible: true
+    foot_speed_role: DIAGNOSTIC_ONLY
+    foot_speed_online_allowed: false
+    foot_speed_changes_threshold_or_state: false
+    foot_speed_offline_fk_covariance_residual_used: true
+
+  source_completeness_boundary:
+    raw_source_complete: false
+    complete_record_prefix_filter_eligible: true
+    complete_record_count: 63277
+    timestamped_record_starts: 63278
+    trailing_incomplete_record_count: 1
+    trailing_record_used_online: false
+    imputation_used: false
+    interpolation_used: false
+
+scientific_role:
+  sensor_scope: PURELY_PROPRIOCEPTIVE_IMU_CONTACT_KINEMATICS
+  exact_statement: GLOBAL_POSITION_AND_ROTATION_ABOUT_GRAVITY_ARE_UNOBSERVABLE
+  absolute_yaw_metric: NOT_APPLICABLE_WITH_OBSERVABILITY_PROOF
+  external_heading_scope_excluded: true
+
+h0_h2_prohibitions:
+  real_by2_hartley_run: false
+  gauge_ensemble_run: false
+  trace_evaluation: false
+  parameter_tuning: false
+  ext06_work: false

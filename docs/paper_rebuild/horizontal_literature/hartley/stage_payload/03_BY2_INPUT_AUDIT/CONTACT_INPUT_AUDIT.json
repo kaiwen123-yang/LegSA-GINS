@@ -1,0 +1,392 @@
+{
+  "canonical_filter_eligible": true,
+  "complete_record_count": 63277,
+  "contact_input_stable": true,
+  "contact_policy": "FROZEN_BY2_INPUT_ONLY_CONTACT_POLICY",
+  "data_identity": "REAL_BY2_COMPLETE_RECORD_PREFIX_63277",
+  "data_mode": "real_by2_raw",
+  "data_status": "REAL_BY2_COMPLETE_RECORD_PREFIX",
+  "decision_source": "foot_force_only",
+  "foot_speed_online_allowed": false,
+  "filter_run_executed": false,
+  "foot_speed_changes_threshold_or_state_classification": false,
+  "foot_speed_role": "DIAGNOSTIC_ONLY",
+  "gait_type_cross_tab": {
+    "1": {
+      "FL": {
+        "force_contact_fraction": 0.54854054395752,
+        "sample_count": 63277
+      },
+      "FR": {
+        "force_contact_fraction": 0.5226069503927178,
+        "sample_count": 63277
+      },
+      "RL": {
+        "force_contact_fraction": 0.5524124089321555,
+        "sample_count": 63277
+      },
+      "RR": {
+        "force_contact_fraction": 0.5681211182578187,
+        "sample_count": 63277
+      }
+    }
+  },
+  "gait_type_role": "input_audit_grouping_only",
+  "mode_counts": {
+    "0": 3,
+    "1": 4461,
+    "3": 58813
+  },
+  "per_leg": {
+    "FL": {
+      "contact_dwell_seconds": {
+        "finite_count": 592,
+        "finite_rate": 1.0,
+        "maximum": 20.30398201942444,
+        "mean": 0.2768482408813528,
+        "minimum": 0.010071754455566406,
+        "p01": 0.023813300132751465,
+        "p05": 0.21798187494277954,
+        "p25": 0.24000513553619385,
+        "p50": 0.24614441394805908,
+        "p75": 0.2539859414100647,
+        "p95": 0.2640117883682251,
+        "p99": 0.2700020384788513,
+        "std": 0.824312065518716,
+        "total_count": 592
+      },
+      "contact_fraction": 0.54854054395752,
+      "contact_input_stable": true,
+      "foot_speed_norm_diagnostic_by_force_state": {
+        "contact": {
+          "finite_count": 34710,
+          "finite_rate": 1.0,
+          "maximum": 2.456340851469508,
+          "mean": 1.0183080240860092,
+          "minimum": 0.0,
+          "p01": 0.0068296932461572295,
+          "p05": 0.0141803712514252,
+          "p25": 1.0025548599524872,
+          "p50": 1.162175131231086,
+          "p75": 1.2571094941025807,
+          "p95": 1.487982203497653,
+          "p99": 1.7668506268312236,
+          "std": 0.44094688343434013,
+          "total_count": 34710
+        },
+        "no_contact": {
+          "finite_count": 28567,
+          "finite_rate": 1.0,
+          "maximum": 2.8188573196690947,
+          "mean": 1.8171731813979954,
+          "minimum": 0.006327375658123736,
+          "p01": 0.6414160286236845,
+          "p05": 0.8747914667830855,
+          "p25": 1.3639951777134476,
+          "p50": 1.8941784155388444,
+          "p75": 2.2887332204031576,
+          "p95": 2.53771324489895,
+          "p99": 2.640532196484854,
+          "std": 0.5382862784062697,
+          "total_count": 28567
+        }
+      },
+      "no_contact_dwell_seconds": {
+        "finite_count": 592,
+        "finite_rate": 1.0,
+        "maximum": 0.6179871559143066,
+        "mean": 0.22743940393666964,
+        "minimum": 0.0199582576751709,
+        "p01": 0.03760265111923218,
+        "p05": 0.21399500370025634,
+        "p25": 0.22399109601974487,
+        "p50": 0.2280052900314331,
+        "p75": 0.2322254776954651,
+        "p95": 0.244149363040924,
+        "p99": 0.2762024760246278,
+        "std": 0.03009392103862408,
+        "total_count": 592
+      },
+      "no_contact_fraction": 0.4514594560424799,
+      "off_transition_count": 592,
+      "on_transition_count": 591,
+      "diagnostic_no_contact_median_speed_greater_than_contact": true,
+      "force_only_stability_criteria": {
+        "at_least_one_off_transition": true,
+        "at_least_one_on_transition": true,
+        "contact_dwell_distribution_nonempty": true,
+        "contact_fraction_at_least_0p01": true,
+        "no_contact_dwell_distribution_nonempty": true,
+        "no_contact_fraction_at_least_0p01": true,
+        "transition_count_at_least_two": true
+      },
+      "transition_count": 1183
+    },
+    "FR": {
+      "contact_dwell_seconds": {
+        "finite_count": 585,
+        "finite_rate": 1.0,
+        "maximum": 20.551974534988403,
+        "mean": 0.2662869424901457,
+        "minimum": 0.02401900291442871,
+        "p01": 0.20552817344665528,
+        "p05": 0.21800384521484376,
+        "p25": 0.2260143756866455,
+        "p50": 0.23199987411499023,
+        "p75": 0.23800230026245117,
+        "p95": 0.247338581085205,
+        "p99": 0.2528647994995117,
+        "std": 0.83954314115676,
+        "total_count": 585
+      },
+      "contact_fraction": 0.5226069503927178,
+      "contact_input_stable": true,
+      "foot_speed_norm_diagnostic_by_force_state": {
+        "contact": {
+          "finite_count": 33069,
+          "finite_rate": 1.0,
+          "maximum": 2.2002167973868456,
+          "mean": 0.9859889603983069,
+          "minimum": 0.0,
+          "p01": 0.006071872732542518,
+          "p05": 0.013245926919639483,
+          "p25": 0.9076049114107079,
+          "p50": 1.1236841034467833,
+          "p75": 1.2465091024472816,
+          "p95": 1.502649762799541,
+          "p99": 1.822524735749224,
+          "std": 0.44988570192285454,
+          "total_count": 33069
+        },
+        "no_contact": {
+          "finite_count": 30208,
+          "finite_rate": 1.0,
+          "maximum": 2.9172784624440107,
+          "mean": 1.7677731268873893,
+          "minimum": 0.003304355427068141,
+          "p01": 0.6341636819727284,
+          "p05": 0.8351102495960441,
+          "p25": 1.3204885146593142,
+          "p50": 1.8134439656868682,
+          "p75": 2.256444677642935,
+          "p95": 2.504595343011725,
+          "p99": 2.606642260582046,
+          "std": 0.5398452714238878,
+          "total_count": 30208
+        }
+      },
+      "no_contact_dwell_seconds": {
+        "finite_count": 584,
+        "finite_rate": 1.0,
+        "maximum": 0.741995096206665,
+        "mean": 0.2445195733684383,
+        "minimum": 0.026015281677246094,
+        "p01": 0.2216421914100647,
+        "p05": 0.23025274276733398,
+        "p25": 0.23801857233047485,
+        "p50": 0.2439723014831543,
+        "p75": 0.24997437000274658,
+        "p95": 0.25799336433410647,
+        "p99": 0.2664621710777282,
+        "std": 0.024654979016579256,
+        "total_count": 584
+      },
+      "no_contact_fraction": 0.4773930496072823,
+      "off_transition_count": 584,
+      "on_transition_count": 584,
+      "diagnostic_no_contact_median_speed_greater_than_contact": true,
+      "force_only_stability_criteria": {
+        "at_least_one_off_transition": true,
+        "at_least_one_on_transition": true,
+        "contact_dwell_distribution_nonempty": true,
+        "contact_fraction_at_least_0p01": true,
+        "no_contact_dwell_distribution_nonempty": true,
+        "no_contact_fraction_at_least_0p01": true,
+        "transition_count_at_least_two": true
+      },
+      "transition_count": 1168
+    },
+    "RL": {
+      "contact_dwell_seconds": {
+        "finite_count": 589,
+        "finite_rate": 1.0,
+        "maximum": 20.54398226737976,
+        "mean": 0.280205286621845,
+        "minimum": 0.013967275619506836,
+        "p01": 0.20718438148498536,
+        "p05": 0.22980403900146484,
+        "p25": 0.2399916648864746,
+        "p50": 0.2460029125213623,
+        "p75": 0.2540156841278076,
+        "p95": 0.26401476860046386,
+        "p99": 0.2742688465118408,
+        "std": 0.8361815853921392,
+        "total_count": 589
+      },
+      "contact_fraction": 0.5524124089321555,
+      "contact_input_stable": true,
+      "foot_speed_norm_diagnostic_by_force_state": {
+        "contact": {
+          "finite_count": 34955,
+          "finite_rate": 1.0,
+          "maximum": 4.444015468919545,
+          "mean": 0.9465376472606958,
+          "minimum": 0.0,
+          "p01": 0.006365188849297828,
+          "p05": 0.013661514585343117,
+          "p25": 0.8369307405095137,
+          "p50": 1.0378635577193795,
+          "p75": 1.1749557883867054,
+          "p95": 1.587337541359749,
+          "p99": 1.9464044484506373,
+          "std": 0.44644127311846876,
+          "total_count": 34955
+        },
+        "no_contact": {
+          "finite_count": 28322,
+          "finite_rate": 1.0,
+          "maximum": 3.6563983912151703,
+          "mean": 1.7456077021655036,
+          "minimum": 0.11804205768051844,
+          "p01": 0.5988028548896978,
+          "p05": 0.801441162387867,
+          "p25": 1.3008036641837082,
+          "p50": 1.805044716846059,
+          "p75": 2.213637902802046,
+          "p95": 2.476239613206255,
+          "p99": 2.579214849252365,
+          "std": 0.5324495640828976,
+          "total_count": 28322
+        }
+      },
+      "no_contact_dwell_seconds": {
+        "finite_count": 588,
+        "finite_rate": 1.0,
+        "maximum": 0.2819831371307373,
+        "mean": 0.2270266892147713,
+        "minimum": 0.012117147445678711,
+        "p01": 0.20443379640579223,
+        "p05": 0.21469671726226808,
+        "p25": 0.22215968370437622,
+        "p50": 0.2280045747756958,
+        "p75": 0.23392921686172485,
+        "p95": 0.24199893474578857,
+        "p99": 0.2620395803451538,
+        "std": 0.021528724206081404,
+        "total_count": 588
+      },
+      "no_contact_fraction": 0.44758759106784457,
+      "off_transition_count": 588,
+      "on_transition_count": 588,
+      "diagnostic_no_contact_median_speed_greater_than_contact": true,
+      "force_only_stability_criteria": {
+        "at_least_one_off_transition": true,
+        "at_least_one_on_transition": true,
+        "contact_dwell_distribution_nonempty": true,
+        "contact_fraction_at_least_0p01": true,
+        "no_contact_dwell_distribution_nonempty": true,
+        "no_contact_fraction_at_least_0p01": true,
+        "transition_count_at_least_two": true
+      },
+      "transition_count": 1176
+    },
+    "RR": {
+      "contact_dwell_seconds": {
+        "finite_count": 590,
+        "finite_rate": 1.0,
+        "maximum": 17.793994665145874,
+        "mean": 0.28807012751951055,
+        "minimum": 0.015992403030395508,
+        "p01": 0.20257428884506223,
+        "p05": 0.23801428079605103,
+        "p25": 0.25002485513687134,
+        "p50": 0.2560102939605713,
+        "p75": 0.26200932264328003,
+        "p95": 0.2739888906478882,
+        "p99": 0.2820305919647217,
+        "std": 0.7269753264385209,
+        "total_count": 590
+      },
+      "contact_fraction": 0.5681211182578187,
+      "contact_input_stable": true,
+      "foot_speed_norm_diagnostic_by_force_state": {
+        "contact": {
+          "finite_count": 35949,
+          "finite_rate": 1.0,
+          "maximum": 3.814659443371959,
+          "mean": 0.9793811324166122,
+          "minimum": 0.0,
+          "p01": 0.006493506727186319,
+          "p05": 0.01363923869978988,
+          "p25": 0.8775125409709695,
+          "p50": 1.0898230023831958,
+          "p75": 1.2039937955293167,
+          "p95": 1.4977790262006172,
+          "p99": 2.181426216805902,
+          "std": 0.4530563920804153,
+          "total_count": 35949
+        },
+        "no_contact": {
+          "finite_count": 27328,
+          "finite_rate": 1.0,
+          "maximum": 3.8257772252226547,
+          "mean": 1.8180857454866686,
+          "minimum": 0.005911888800747155,
+          "p01": 0.6289739581526607,
+          "p05": 0.8678087565298561,
+          "p25": 1.344880959249116,
+          "p50": 1.9024408945472633,
+          "p75": 2.3040450036868654,
+          "p95": 2.573939966848988,
+          "p99": 2.68135221849763,
+          "std": 0.5572044526993754,
+          "total_count": 27328
+        }
+      },
+      "no_contact_dwell_seconds": {
+        "finite_count": 590,
+        "finite_rate": 1.0,
+        "maximum": 0.3800013065338135,
+        "mean": 0.21825588234400345,
+        "minimum": 0.017985820770263672,
+        "p01": 0.13090039014816285,
+        "p05": 0.20600640773773193,
+        "p25": 0.2140136957168579,
+        "p50": 0.21801602840423584,
+        "p75": 0.22398114204406738,
+        "p95": 0.2359930992126465,
+        "p99": 0.2540142583847046,
+        "std": 0.020763239930760378,
+        "total_count": 590
+      },
+      "no_contact_fraction": 0.4318788817421812,
+      "off_transition_count": 590,
+      "on_transition_count": 589,
+      "diagnostic_no_contact_median_speed_greater_than_contact": true,
+      "force_only_stability_criteria": {
+        "at_least_one_off_transition": true,
+        "at_least_one_on_transition": true,
+        "contact_dwell_distribution_nonempty": true,
+        "contact_fraction_at_least_0p01": true,
+        "no_contact_dwell_distribution_nonempty": true,
+        "no_contact_fraction_at_least_0p01": true,
+        "transition_count_at_least_two": true
+      },
+      "transition_count": 1179
+    }
+  },
+  "schema_version": "hartley.contact_input_audit.v1",
+  "stability_rule": {
+    "diagnostic_speed_ordering": "median_no_contact_greater_than_median_contact",
+    "minimum_fraction_per_state_per_leg": 0.01,
+    "minimum_transition_count_per_leg": 2,
+    "requires_both_dwell_distributions_per_leg": true,
+    "requires_on_and_off_transition_per_leg": true
+  },
+  "raw_source_complete": false,
+  "status": "FROZEN_BY2_INPUT_ONLY_CONTACT_POLICY",
+  "terminal_status": "PASS_LSE01_H0_H2_HARTLEY_SOURCE_METHOD_AND_BY2_CONTRACT_READY",
+  "timestamped_record_starts": 63278,
+  "trailing_incomplete_record_count": 1,
+  "trailing_record_used_online": false
+}

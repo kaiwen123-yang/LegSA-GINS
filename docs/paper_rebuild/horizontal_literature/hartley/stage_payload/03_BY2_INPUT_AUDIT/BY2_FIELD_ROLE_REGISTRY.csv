@@ -1,0 +1,24 @@
+field,present,shape,unit,rate,role,online_allowed,reason
+stamp.sec,true,[63277]+final[1],s,249.26035538123253_Hz_complete_prefix,timestamp,true,required chronological sensor timestamp
+stamp.nanosec,true,[63277]+final[1],ns,249.26035538123253_Hz_complete_prefix,timestamp,true,required subsecond sensor timestamp
+imu_state.gyroscope,true,"[63277,3]+final[3]",rad/s,249.26035538123253_Hz_complete_prefix,IMU angular-rate input,true,Hartley propagation input after frozen frame mapping
+imu_state.accelerometer,true,"[63277,3]+final[3]",m/s^2,249.26035538123253_Hz_complete_prefix,IMU specific-force input,true,Hartley propagation input after frozen frame mapping
+foot_force,true,"[63277,4]+final[4]",source_native_force_units,249.26035538123253_Hz_complete_prefix,FROZEN_BY2_INPUT_ONLY_CONTACT_POLICY,true,deterministic force-only hysteresis policy frozen on the eligible complete-record prefix
+foot_position_body,true,"[63277,12]+final[12]",m,249.26035538123253_Hz_complete_prefix,high-level FK-like body-relative translation proxy,true,declared proxy only; not raw encoder/URDF FK and not truth
+foot_speed_body,partial,"[63277,12]+final[4/12]",m/s,249.26035538123253_Hz_complete_prefix,DIAGNOSTIC_ONLY,false,used only by offline audits including the preregistered FK-covariance residual; final timestamped record lacks 8 of 12 values and is excluded whole; never changes threshold or contact state
+gait_type,true,[63277]+final[1],enum,249.26035538123253_Hz_complete_prefix,input-audit grouping only,false,audit-only under approved scope
+mode,true,[63277]+final[1],enum,249.26035538123253_Hz_complete_prefix,input-audit only,false,audit-only under approved scope
+imu_state.quaternion,true,FORBIDDEN_NOT_MATERIALIZED,dimensionless,249.26035538123253_Hz_key_presence_only,forbidden attitude field,false,63278 key occurrences confirmed lexically; values explicitly skipped
+imu_state.rpy,true,FORBIDDEN_NOT_MATERIALIZED,rad,249.26035538123253_Hz_key_presence_only,forbidden attitude field,false,63278 key occurrences confirmed lexically; values explicitly skipped
+position,true,FORBIDDEN_NOT_MATERIALIZED,m,249.26035538123253_Hz_key_presence_only,forbidden Go2 pose/position,false,63278 key occurrences confirmed lexically; Go2 position is not truth or Hartley input
+velocity,true,FORBIDDEN_NOT_MATERIALIZED,m/s,249.26035538123253_Hz_key_presence_only,forbidden Go2 velocity,false,63278 key occurrences confirmed lexically; not authorized for LSE01 input
+yaw_speed,true,FORBIDDEN_NOT_MATERIALIZED,rad/s,249.26035538123253_Hz_key_presence_only,forbidden yaw field,false,63278 key occurrences confirmed lexically; cannot close gauge yaw
+GNSS,false,ABSENT_FROM_BY2_BODY_STREAM,mixed,not_applicable,forbidden exteroceptive source,false,purely proprioceptive Hartley scope
+Fixposition_trace,false,EXTERNAL_NOT_OPENED,mixed,not_applicable,forbidden reference selector/input,false,trace is evaluation-only and was not opened
+A1_status_heading,false,EXTERNAL_NOT_OPENED,deg,not_applicable,forbidden heading source,false,external heading excluded from Hartley reproduction
+LegSA_output,false,EXTERNAL_NOT_OPENED,mixed,not_applicable,forbidden solver input/reference,false,algorithm output cannot enter LSE01 input or audit
+EXT01_output,false,EXTERNAL_NOT_OPENED,mixed,not_applicable,forbidden external-method output,false,EXT01-EXT05 execution/output use is outside approved scope
+EXT02_output,false,EXTERNAL_NOT_OPENED,mixed,not_applicable,forbidden external-method output,false,EXT01-EXT05 execution/output use is outside approved scope
+EXT03_output,false,EXTERNAL_NOT_OPENED,mixed,not_applicable,forbidden external-method output,false,EXT01-EXT05 execution/output use is outside approved scope
+EXT04_output,false,EXTERNAL_NOT_OPENED,mixed,not_applicable,forbidden external-method output,false,EXT01-EXT05 execution/output use is outside approved scope
+EXT05_output,false,EXTERNAL_NOT_OPENED,mixed,not_applicable,forbidden external-method output,false,EXT01-EXT05 execution/output use is outside approved scope

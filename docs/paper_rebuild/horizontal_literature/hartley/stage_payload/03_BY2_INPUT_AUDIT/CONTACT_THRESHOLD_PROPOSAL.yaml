@@ -1,0 +1,30 @@
+schema_version: hartley.contact_threshold_policy.v2
+status: FROZEN_BY2_INPUT_ONLY_CONTACT_POLICY
+terminal_status: PASS_LSE01_H0_H2_HARTLEY_SOURCE_METHOD_AND_BY2_CONTRACT_READY
+data_identity: REAL_BY2_COMPLETE_RECORD_PREFIX_63277
+data_status: REAL_BY2_COMPLETE_RECORD_PREFIX
+data_mode: real_by2_raw
+raw_source_complete: false
+complete_record_prefix_filter_eligible: true
+complete_record_count: 63277
+timestamped_record_starts: 63278
+trailing_incomplete_record_count: 1
+trailing_record_used_online: false
+decision_signal: foot_force_only
+diagnostic_signal_not_used_for_decision: foot_speed_body
+foot_speed_role: DIAGNOSTIC_ONLY
+foot_speed_online_allowed: false
+foot_speed_changes_threshold_or_state: false
+threshold_rule: per_leg_two_mode_medians_off_low_plus_0p40_gap_on_low_plus_0p60_gap
+minimum_dwell_samples_source: 3
+minimum_dwell_seconds: 0.012035608291625977
+median_dt_seconds: 0.004011869430541992
+thresholds_native_units:
+  FR: {off: 24.8, on: 34.2}
+  FL: {off: 25.2, on: 33.8}
+  RR: {off: 23.4, on: 30.6}
+  RL: {off: 24.0, on: 32.0}
+reference_tuned: false
+output_metric_tuned: false
+slip_rejection_enabled: false
+filter_run_executed: false

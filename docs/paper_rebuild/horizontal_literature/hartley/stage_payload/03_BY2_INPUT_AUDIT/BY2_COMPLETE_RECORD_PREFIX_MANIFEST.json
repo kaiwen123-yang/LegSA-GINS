@@ -1,0 +1,120 @@
+{
+  "accepted_prefix_interval": [
+    0,
+    92351234
+  ],
+  "audit_required_field_shapes": {
+    "gait_type": 1
+  },
+  "complete_prefix_duration": 305.197970657,
+  "complete_prefix_duration_exact": "305197970657 ns",
+  "complete_prefix_duration_ns": 305197970657,
+  "complete_prefix_end_byte_offset": 92351234,
+  "complete_prefix_sha256": "03cd96cd65d7f5af30f6a0c78d37f07ae4d32c65e78531807db7192454dff097",
+  "complete_record_count": 63277,
+  "complete_record_prefix_filter_eligible": true,
+  "data_identity": "REAL_BY2_COMPLETE_RECORD_PREFIX_63277",
+  "data_mode": "real_by2_raw",
+  "data_status": "REAL_BY2_COMPLETE_RECORD_PREFIX",
+  "duration_ns": 305197970657,
+  "duration_seconds": 305.197970657,
+  "first_complete_record_start_byte": 596,
+  "first_complete_record_start_line": 7,
+  "first_complete_timestamp": {
+    "nanosec": 887078145,
+    "ns": 1772784044887078145,
+    "sec": 1772784044
+  },
+  "first_complete_timestamp_ns": 1772784044887078145,
+  "first_complete_timestamp_seconds": 1772784044.887078,
+  "imputation_used": false,
+  "incomplete_record_count": 1,
+  "interpolation_used": false,
+  "last_complete_record_end_byte_exclusive": 92351234,
+  "last_complete_record_end_line": 4682504,
+  "last_complete_record_start_byte": 92349766,
+  "last_complete_record_start_line": 4682431,
+  "last_complete_timestamp": {
+    "nanosec": 85048802,
+    "ns": 1772784350085048802,
+    "sec": 1772784350
+  },
+  "last_complete_timestamp_ns": 1772784350085048802,
+  "last_complete_timestamp_seconds": 1772784350.085049,
+  "mandatory_field_shape_summary": {
+    "accepted_projected_arrays": {
+      "accelerometer": [
+        63277,
+        3
+      ],
+      "foot_force": [
+        63277,
+        4
+      ],
+      "foot_position_body": [
+        63277,
+        4,
+        3
+      ],
+      "foot_speed_body": [
+        63277,
+        4,
+        3
+      ],
+      "gyroscope": [
+        63277,
+        3
+      ]
+    },
+    "audit_required_per_physical_record": {
+      "gait_type": 1
+    },
+    "primary_structural_per_physical_record": {
+      "foot_force": 4,
+      "foot_position_body": 12,
+      "foot_speed_body": 12,
+      "imu_state.accelerometer": 3,
+      "imu_state.gyroscope": 3,
+      "stamp.nanosec": 1,
+      "stamp.sec": 1
+    }
+  },
+  "mandatory_field_shapes": {
+    "foot_force": 4,
+    "foot_position_body": 12,
+    "foot_speed_body": 12,
+    "imu_state.accelerometer": 3,
+    "imu_state.gyroscope": 3,
+    "stamp.nanosec": 1,
+    "stamp.sec": 1
+  },
+  "no_imputation": true,
+  "no_interpolation": true,
+  "physical_record_start_count": 63278,
+  "physical_record_start_token": "stamp:",
+  "policy_id": "BY2_COMPLETE_RECORD_POLICY_V1",
+  "prefix_bytes": 92351234,
+  "prefix_end_exclusive": 92351234,
+  "prefix_sha256": "03cd96cd65d7f5af30f6a0c78d37f07ae4d32c65e78531807db7192454dff097",
+  "raw_bare_lf_count": 1,
+  "raw_before_after_identity_match": true,
+  "raw_crlf_count": 4682568,
+  "raw_line_count": 4682569,
+  "raw_mtime_ns_after": 1772784354000000000,
+  "raw_mtime_ns_before": 1772784354000000000,
+  "raw_mutated": false,
+  "raw_sha256": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278",
+  "raw_sha256_after": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278",
+  "raw_size_bytes": 92352512,
+  "raw_source_complete": false,
+  "raw_source_line_count": 4682569,
+  "raw_source_mutated": false,
+  "raw_source_path_alias": "<RAW_ROOT>/BY2_BY3/2026-03-06/\u9ad8\u5c42\u6570\u636e/by2.txt",
+  "raw_source_sha256": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278",
+  "raw_source_size": 92352512,
+  "record_separator_included_in_prefix": true,
+  "schema_version": "hartley.by2_complete_record_prefix_manifest.v1",
+  "semisynthetic_data_used": false,
+  "synthetic_data_used": false,
+  "trailing_incomplete_record_count": 1
+}

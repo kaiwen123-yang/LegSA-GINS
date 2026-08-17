@@ -1,0 +1,96 @@
+schema_version: 1
+contract_id: LSE01_HARTLEY_BY2_FRAME
+contract_status: CLOSED_MAINTAINED_SOFTWARE_DIRECTION_REAL_BY2_COMPLETE_RECORD_PREFIX
+data_identity: REAL_BY2_COMPLETE_RECORD_PREFIX_63277
+data_status: REAL_BY2_COMPLETE_RECORD_PREFIX
+raw_source_complete: false
+complete_record_prefix_filter_eligible: true
+
+paper_frame:
+  formulation: WORLD_CENTRIC_RIGHT_INVARIANT
+  rotation: R_WB_ACTIVE_BODY_TO_WORLD
+  gravity_gauge: WORLD_UP
+  stationary_specific_force_body_expected_axis: POSITIVE_Z
+  absolute_heading_observed: false
+
+by2_imu_mapping:
+  raw_sensor_frame: GO2_BODY_FLU
+  corrected_robot_body_frame: GO2_BODY_FLU
+  hartley_body_frame: GO2_BODY_FLU
+  transform_chain:
+    - RAW_IMU_SENSOR_SOURCE_AXES_TO_CORRECTED_ROBOT_BODY_FLU_BY_FROZEN_INSTALLATION_ROTATION
+    - CORRECTED_ROBOT_BODY_FLU_TO_HARTLEY_BODY_BY_IDENTITY
+  frozen_imu_install_rpy_deg: [-1.0, 0.0, 0.0]
+  direction: SENSOR_TO_BODY_ACTIVE_RZ_RY_RX
+  matrix:
+    - [1.0, 0.0, 0.0]
+    - [0.0, 0.9998476951563913, 0.01745240643728351]
+    - [0.0, -0.01745240643728351, 0.9998476951563913]
+  inverse_interpretation_selected: false
+  maintained_code_evidence:
+    path: src/legsa_gins/input_generation/imu_txt_builder.py
+    rule: CORRECTION_MATRIX_LEFT_MULTIPLIES_EACH_SENSOR_VECTOR
+    note: SOFTWARE_DIRECTION_FREEZE_NOT_NEW_PHYSICAL_INSTALLATION_CALIBRATION
+  foot_position_body_mapping:
+    source_frame: ROBOT_BODY_FLU_ALREADY
+    receives_imu_installation_rotation: false
+    hartley_body_mapping: IDENTITY
+
+proper_rotation_tests:
+  determinant: 1.0
+  determinant_plus_one: true
+  orthogonality_error_fro: 0.0
+  right_handed: true
+  round_trip_error_fro: 0.0
+  known_axis_sensor_positive_y_in_body: [0.0, 0.9998476951563913, -0.01745240643728351]
+  known_axis_sensor_positive_z_in_body: [0.0, 0.01745240643728351, 0.9998476951563913]
+  known_axis_sign_pass: true
+
+input_only_stationary_sanity:
+  complete_message_count_available: 63277
+  selection_rule: LOWEST_ONE_PERCENT_STABLE_SORT_OF_GYRO_NORM_OVER_MEDIAN_PLUS_MAX_FOOT_SPEED_NORM_OVER_MEDIAN
+  selected_sample_count: 633
+  selected_gyro_norm_median_radps: 0.006985405045971301
+  selected_max_foot_speed_norm_median_mps: 0.021942319569801246
+  sensor_to_body_stationary_gravity_cancellation_norm_mps2: 0.20591299391339885
+  inverse_candidate_stationary_gravity_cancellation_norm_mps2: 0.23197377843950862
+  selected_candidate_has_lower_residual: true
+  interpretation: LEVEL_BODY_CORROBORATION_ONLY_LOW_MOTION_DOES_NOT_PROVE_PHYSICALLY_LEVEL
+  direction_selection_source: MAINTAINED_SOFTWARE_SEMANTICS_NOT_LEVEL_BODY_COMPARISON
+  foot_speed_role: DIAGNOSTIC_ONLY
+  foot_speed_online_allowed: false
+  gravity_aligned_initialization:
+    corrected_mean_specific_force_body_mps2: [-0.1423245110971291, 0.1487915535872073, 9.509044229287252]
+    initial_roll_deg: 0.8964552251045289
+    initial_pitch_deg: 0.8573929075977925
+    initial_yaw_deg: 0.0
+    yaw_role: ARBITRARY_UNOBSERVED_GAUGE
+    rule: R0_TIMES_F_BAR_PLUS_0_0_MINUS_NORM_F_BAR
+    cancellation_residual_mps2: [2.2063514210080015e-17, 0.0, 1.7763568394002505e-15]
+    cancellation_residual_norm_mps2: 1.776493855757274e-15
+    passed_near_machine_precision: true
+
+reporting_gauge:
+  mapping: HARTLEY_WORLD_UP_TO_NED_SHAPED_REPORTING_GAUGE
+  matrix:
+    - [1.0, 0.0, 0.0]
+    - [0.0, -1.0, 0.0]
+    - [0.0, 0.0, -1.0]
+  determinant: 1.0
+  state_mapping:
+    rotation: R_reporting_body_equals_Q_times_R_worldup_body
+    velocity: v_reporting_equals_Q_times_v_worldup
+    position: p_reporting_equals_Q_times_p_worldup
+    contacts: d_reporting_i_equals_Q_times_d_worldup_i
+    body_biases: UNCHANGED
+  covariance_mapping: P_reporting_equals_T_times_P_worldup_times_T_transpose_WITH_Q_ON_SPATIAL_ERROR_BLOCKS_AND_IDENTITY_ON_BODY_BIASES
+  observed_north_created: false
+  heading_role: UNOBSERVED_GAUGE_ONLY
+
+forbidden_selectors_opened: false
+quaternion_opened: false
+rpy_opened: false
+pose_velocity_yaw_opened: false
+reference_trace_opened: false
+filter_run_executed: false
+failure_policy: BLOCKED_LSE01_SENSOR_TO_BODY_FRAME_UNRESOLVED

@@ -1,0 +1,66 @@
+schema_version: 1
+contract_id: LSE01_BY2_HIGH_LEVEL_FK_PROXY_AND_CONTACT
+contract_status: REAL_BY2_COMPLETE_RECORD_PREFIX_READY
+data_identity: REAL_BY2_COMPLETE_RECORD_PREFIX_63277
+data_status: REAL_BY2_COMPLETE_RECORD_PREFIX
+data_mode: real_by2_raw
+raw_source_complete: false
+complete_record_prefix_filter_eligible: true
+
+fk_proxy:
+  source_field: foot_position_body
+  source_role: GO2_HIGH_LEVEL_FK_LIKE_TRANSLATION_PROXY
+  frame: GO2_BODY_RELATIVE_FLU
+  grouped_native_order: [FR, FL, RR, RL]
+  timestamp_alignment: SAME_MESSAGE_AS_IMU
+  raw_joint_encoder_urdf_fk: false
+  truth_role: false
+  kinematic_pose_rotation_role: IDENTITY_PLACEHOLDER_UNUSED_BY_POINT_CONTACT
+  translation_covariance_status: FROZEN_INPUT_ONLY_ROBUST_POLICY
+  translation_covariance_policy: FROZEN_BY2_INPUT_ONLY_FK_PROXY_COVARIANCE
+  translation_covariance_primary_scale: 1.0
+  translation_covariance_sensitivity_scales: [0.25, 1.0, 4.0]
+  translation_covariance_eigenvalue_floor_m2: 1.0e-8
+  eigenvalue_floor_dominates_all_final_per_leg_matrices: true
+  orientation_covariance_status: NONINFORMATIVE_PLACEHOLDER_NOT_USED
+
+contact_detector_input_only_proposal:
+  policy_id: FROZEN_BY2_INPUT_ONLY_CONTACT_POLICY
+  decision_signal: foot_force
+  threshold_rule: PER_LEG_TWO_MODE_MEDIANS_OFF_LOW_PLUS_0P40_GAP_ON_LOW_PLUS_0P60_GAP
+  thresholds_native_units:
+    FR: {off: 24.8, on: 34.2}
+    FL: {off: 25.2, on: 33.8}
+    RR: {off: 23.4, on: 30.6}
+    RL: {off: 24.0, on: 32.0}
+  minimum_dwell_source_samples: 3
+  median_dt_seconds: 0.004011869430541992
+  minimum_dwell_seconds: 0.012035608291625977
+  reference_tuned: false
+  output_metric_tuned: false
+  slip_rejection_enabled: false
+
+diagnostics:
+  foot_speed_body_role: DIAGNOSTIC_ONLY
+  foot_speed_changes_threshold_or_contact_state: false
+  foot_speed_online_allowed: false
+  foot_speed_offline_fk_covariance_residual_used: true
+  gait_type_role: INPUT_AUDIT_GROUPING_ONLY
+  mode_role: INPUT_AUDIT_ONLY
+  complete_prefix_contact_input_identifiable: true
+  complete_prefix_contact_input_stable: true
+  transition_counts: {FR: 1168, FL: 1183, RR: 1179, RL: 1176}
+  candidate_position_discontinuity_counts: {FR: 2, FL: 1, RR: 1, RL: 2}
+
+complete_record_prefix_gate:
+  timestamped_record_starts: 63278
+  complete_record_count: 63277
+  trailing_incomplete_record_count: 1
+  trailing_record_diagnostic: BY2_PROJECTED_MESSAGE_63278_FOOT_SPEED_BODY_4_NOT_12
+  trailing_record_used_online: false
+  imputation_used: false
+  interpolation_used: false
+  terminal_status: PASS_LSE01_H0_H2_HARTLEY_SOURCE_METHOD_AND_BY2_CONTRACT_READY
+  canonical_audit_published: true
+  canonical_input_audit_ready: true
+  filter_run_executed: false
