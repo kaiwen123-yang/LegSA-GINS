@@ -104,28 +104,47 @@ contact_lifecycle:
 
 discretization_target:
   source_type: PAPER_DIRECT
-  selected_policy: FULL_IJRR_MATHEMATICAL_TARGET
+  h3_h4_selection_source: HUMAN_FROZEN_DECISION_ALIGNED_WITH_IJRR_REPORTED_RESULTS
+  selected_policy: HARTLEY_IJRR2020_REPORTED_BACKEND
   policies:
-    FULL_IJRR_MATHEMATICAL_TARGET:
-      selection_source: HUMAN_FROZEN_DECISION
+    HARTLEY_IJRR2020_REPORTED_BACKEND:
+      selection_source: PAPER_DIRECT_AND_HUMAN_FROZEN_DECISION
       primary_backend: true
-      corrected_imu_hold: ZERO_ORDER_HOLD
-      deterministic_state: EXACT_EQ_50_GAMMA_0_1_2
-      state_transition: ANALYTICAL_RIGHT_INVARIANT_PHI_EQS_58_OR_60
-      discrete_process_covariance: SEPARATELY_VERIFIED_NUMERICAL_EQ_52_INTEGRAL
-      exact_integral_label_allowed_only_after_verification: true
-      article_reported_result_path: false
-    PAPER_REPORTED_EQ61_REGRESSION:
-      selection_source: PAPER_DIRECT
-      mandatory_companion_backend: true
       corrected_imu_hold: ZERO_ORDER_HOLD
       deterministic_state: EXACT_EQ_50_GAMMA_0_1_2
       state_transition: ANALYTICAL_RIGHT_INVARIANT_PHI_EQS_58_OR_60
       discrete_process_covariance: APPROXIMATION_EQ_61_PHI_QBAR_K_PHI_TRANSPOSE_DT
       exact_integral: false
       article_reported_result_path: true
+    EXACT_QD_REFERENCE_DIAGNOSTIC:
+      selection_source: PAPER_DIRECT
+      primary_backend: false
+      diagnostic_reference: true
+      corrected_imu_hold: ZERO_ORDER_HOLD
+      deterministic_state: EXACT_EQ_50_GAMMA_0_1_2
+      state_transition: ANALYTICAL_RIGHT_INVARIANT_PHI_EQS_58_OR_60
+      discrete_process_covariance: INDEPENDENTLY_EVALUATED_EQ_52_COVARIANCE_INTEGRAL
+      exact_integral_label_allowed_only_after_independent_verification: true
+      article_reported_result_path: false
+    OFFICIAL_CPP_EARLY_REGRESSION:
+      selection_source: OFFICIAL_CODE
+      primary_backend: false
+      regression_reference: true
+      corrected_imu_hold: ZERO_ORDER_HOLD
+      deterministic_state: FROZEN_R_VELOCITY_POSITION_APPROXIMATION
+      state_transition: PHI_EQUALS_I_PLUS_A_DT
+      discrete_process_covariance: OFFICIAL_MAPPED_Q_APPROXIMATION
+      event_lifecycle: OFFICIAL_EVENT_LIFECYCLE
+      article_reported_result_path: false
   distinction_required: true
-  implementation_status: NOT_IMPLEMENTED_IN_H0_H2
+  identities_may_not_be_conflated: true
+  implementation_status: H3_H4_IMPLEMENTATION_TARGET_REGISTERED
+  historical_h0_h2_future_plan:
+    selected_policy_at_h0_h2_close: FULL_IJRR_MATHEMATICAL_TARGET
+    intended_primary_covariance_at_h0_h2_close: SEPARATELY_VERIFIED_NUMERICAL_EQ_52_INTEGRAL
+    superseded_for_h3_h4_by: HARTLEY_IJRR2020_REPORTED_BACKEND
+    historical_report_rewritten: false
+    reason: IJRR_ARTICLE_STATES_REPORTED_RESULTS_USED_EQ_61
   official_code_status:
     source_type: OFFICIAL_CODE
     value: EARLY_OFFICIAL_CPP_NUMERICAL_APPROXIMATION_NOT_FULL_IJRR2020
@@ -180,6 +199,13 @@ by2_proxy_boundary:
     eigenvalue_floor_dominates_all_final_per_leg_matrices: true
     encoder_precision_claim: false
     filter_eligible: true
+    h3_h4_semantic_supersession:
+      registered_role: GO2_FK_PROXY_REPEATABILITY_LOWER_BOUND
+      approximate_covariance_m2: 1.0e-8_I3
+      future_filter_primary: false
+      physical_proxy_sigma_candidates_m: [0.005, 0.010, 0.020]
+      physical_proxy_primary_sigma_m: 0.010
+      reference_or_final_odometry_selection_allowed: false
   contact_thresholds:
     source_type: BY2_COMPLETE_RECORD_PREFIX_INPUT_ONLY
     policy_id: FROZEN_BY2_INPUT_ONLY_CONTACT_POLICY

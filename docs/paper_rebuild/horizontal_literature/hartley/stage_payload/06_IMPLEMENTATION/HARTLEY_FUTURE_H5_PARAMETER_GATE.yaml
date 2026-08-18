@@ -1,0 +1,97 @@
+schema_version: 1
+gate_id: HARTLEY_FUTURE_H5_PARAMETER_GATE
+gate_status: CLOSED_BY_RECOVERED_CROSS_CONFIRMED_NUMERIC_PROFILE
+h5_go2_parameter_gate_closed: true
+gate_closure_evidence:
+  executable_check: h5_go2_imu_paper_contact_eq61_adapter
+  paper_table1_all_six_executable_check: paper_table1_all_six_parameter_typed_mapping
+  paper_table1_encoder_correction_executable_check: paper_table1_joint_encoder_measurement_correction
+  artifact: 07_SYNTHETIC_VALIDATION/GO2_ALLAN_PROFILE_DIMENSIONAL_VALIDATION.csv
+  pass_required: true
+
+go2_profile:
+  profile_id: GO2_IMU_ALLAN_90MIN_RECOVERED_V1
+  evidence_label: THESIS_AND_CONTEMPORANEOUS_TERMINAL_RECORD_CROSS_CONFIRMED
+  numeric_average_axis_profile_recovered: true
+  exact_Allan_curve_recomputable: false
+  raw_artifact_reproducibility_claim: false
+  exact_sampling_rate_claim_allowed: false
+  continuous_density_to_qc_mapping:
+    square_each_density_exactly_once: true
+    sqrt_dt_preprocessing: false
+    discrete_sample_std_is_qc_input: false
+
+production_backend:
+  backend_id: HARTLEY_IJRR2020_REPORTED_BACKEND
+  deterministic_mean: IJRR_EQ_50
+  analytical_transition: IJRR_EQS_58_OR_60
+  discrete_process_covariance: IJRR_EQ_61
+
+preregistered_runs:
+  - run_id: H5_PRIMARY_GO2_ALLAN_RECOVERED
+    status: PREREGISTERED_NOT_EXECUTED
+    imu_parameters: GO2_IMU_ALLAN_90MIN_RECOVERED_V1
+    imu_parameter_interface: ContinuousNoiseDensity
+    imu_semantics: FOUR_CONTINUOUS_ASDS
+    contact_process_parameter:
+      interface: PaperTable1DiscreteStd
+      field: contact_linear_velocity_noise_std_m_per_s
+      value: 0.05
+      unit: m/s
+      semantics: PAPER_NATIVE_DISCRETE_STD
+      qbar_adapter: HartleyInEkf::eq61MappedQbarGo2ImuPaperContact
+      qd_adapter: HartleyInEkf::eq61ProcessCovarianceGo2ImuPaperContact
+      reinterpret_as_continuous_asd: false
+      enters_continuous_qc: false
+    sigma_fk_m: 0.010
+    fk_interface: MeasurementStdMeters
+    fk_covariance_role: MEASUREMENT_R_ONLY
+    fk_enters_process_qc: false
+    paper_table1_joint_encoder_measurement_substitutes_fk_proxy: false
+    primary: true
+  - run_id: H5_PAPER_TABLE1_PARAMETER_REGRESSION
+    status: PREREGISTERED_NOT_EXECUTED
+    imu_parameters: HARTLEY_IJRR2020_TABLE_1_ALL_STOCHASTIC_PARAMETERS
+    parameter_interface: PaperTable1DiscreteStd
+    qbar_adapter: HartleyInEkf::eq61MappedQbarPaperTable1
+    qd_adapter: HartleyInEkf::eq61ProcessCovariancePaperTable1
+    reinterpret_as_continuous_asd: false
+    all_six_table1_stochastic_parameters_retained: true
+    joint_encoder_measurement_parameter:
+      interface: PaperTable1DiscreteStd
+      field: joint_encoder_noise_std_deg
+      value: 1.0
+      unit: deg
+      role: MEASUREMENT_R_ONLY
+      covariance_api: contactMeasurementCovarianceFromPaperTable1JointEncoder
+      foot_position_jacobian_unit: m/rad
+      covariance_mapping: R_EQUALS_J_SIGMA_RAD_SQUARED_I_J_TRANSPOSE
+      no_deg_to_meter_scalar: true
+    primary: false
+  - run_id: H5_FK_PROXY_SENSITIVITY
+    status: PREREGISTERED_NOT_EXECUTED
+    imu_parameters: GO2_IMU_ALLAN_90MIN_RECOVERED_V1
+    sigma_fk_m: [0.005, 0.010, 0.020]
+    primary_sigma_fk_m: 0.010
+    primary: false
+
+fk_proxy_gate:
+  repeatability_result_role: GO2_FK_PROXY_REPEATABILITY_LOWER_BOUND
+  repeatability_approximate_covariance_m2: 1.0e-8_I3
+  repeatability_future_filter_primary: false
+  physical_proxy_covariance_primary: 1.0e-4_I3
+  reference_accuracy_used_for_selection: false
+  final_odometry_used_for_selection: false
+
+execution_boundary:
+  h5_run_count: 0
+  real_BY2_filter_run_count: 0
+  gauge_ensemble_real_run_count: 0
+  reference_open_count: 0
+  ext06_run_count: 0
+  canonical541_run_count: 0
+  real_BY2_navigation_output_count: 0
+  h5_execution_authorization: HUMAN_AUTHORIZATION_REQUIRED
+  ready_for_real_by2_h5: false
+  external_stage_publication: true
+  external_stage_hash_parity_verified: true

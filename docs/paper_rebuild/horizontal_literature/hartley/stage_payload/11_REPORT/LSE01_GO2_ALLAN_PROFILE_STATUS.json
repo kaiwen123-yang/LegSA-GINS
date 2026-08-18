@@ -1,0 +1,89 @@
+{
+  "evidence_label": "THESIS_AND_CONTEMPORANEOUS_TERMINAL_RECORD_CROSS_CONFIRMED",
+  "external_stage_hash_parity_verified": true,
+  "external_stage_publication_claim": true,
+  "full_ijrr_backend_validated": true,
+  "go2_allan_exact_curve_recomputable": false,
+  "go2_allan_profile_recovered": true,
+  "h5_go2_parameter_gate_closed": true,
+  "h5_primary_typed_adapter": {
+    "contact_process_cpp_type": "PaperTable1DiscreteStd",
+    "contact_process_semantics": "PAPER_NATIVE_DISCRETE_STD",
+    "contact_process_std_m_per_s": 0.05,
+    "executable_check": "h5_go2_imu_paper_contact_eq61_adapter",
+    "fk_enters_qc": false,
+    "fk_measurement_cpp_type": "MeasurementStdMeters",
+    "fk_measurement_std_m": 0.01,
+    "go2_contact_asd_in_qc": 0.0,
+    "mixed_qd_adapter": "HartleyInEkf::eq61ProcessCovarianceGo2ImuPaperContact",
+    "pass": true
+  },
+  "paper_table1_regression_typed_adapter": {
+    "all_six_stochastic_parameters_retained": true,
+    "encoder_covariance_api": "contactMeasurementCovarianceFromPaperTable1JointEncoder",
+    "encoder_covariance_mapping": "R_EQUALS_J_SIGMA_RAD_SQUARED_I_J_TRANSPOSE",
+    "encoder_measurement_correction_check": "paper_table1_joint_encoder_measurement_correction",
+    "encoder_noise_std_deg": 1.0,
+    "encoder_role": "MEASUREMENT_R_ONLY",
+    "foot_position_jacobian_unit": "m/rad",
+    "no_deg_to_meter_scalar": true,
+    "parameter_retention_check": "paper_table1_all_six_parameter_typed_mapping"
+  },
+  "h5_execution_authorization": "HUMAN_AUTHORIZATION_REQUIRED",
+  "h5_run_count": 0,
+  "limitations": {
+    "exact_Allan_curve_recomputable": false,
+    "exact_fitting_implementation_auditable": false,
+    "exact_per_axis_values_available": false,
+    "exact_sampling_rate_claim_allowed": false,
+    "numeric_average_axis_profile_recovered": true,
+    "original_fitting_script_available": false,
+    "original_static_csv_available": false,
+    "raw_artifact_reproducibility_claim": false
+  },
+  "noise_profile": {
+    "accelerometer_bias_random_walk_density": {
+      "continuous_psd_unit": "m^2/s^5",
+      "continuous_psd_value": 2.542149625744e-8,
+      "unit": "m/s^3/sqrt(Hz)",
+      "value": 1.594412e-4
+    },
+    "accelerometer_measurement_white_noise_density": {
+      "continuous_psd_unit": "m^2/s^3",
+      "continuous_psd_value": 1.652240306025e-6,
+      "unit": "m/s^2/sqrt(Hz)",
+      "value": 1.285395e-3
+    },
+    "gyro_bias_random_walk_density": {
+      "continuous_psd_unit": "rad^2/s^3",
+      "continuous_psd_value": 8.981235790641001e-10,
+      "unit": "rad/s^2/sqrt(Hz)",
+      "value": 2.996871e-5
+    },
+    "gyro_measurement_white_noise_density": {
+      "continuous_psd_unit": "rad^2/s",
+      "continuous_psd_value": 8.208969916900001e-8,
+      "unit": "rad/s/sqrt(Hz)",
+      "value": 2.865130e-4
+    }
+  },
+  "profile_id": "GO2_IMU_ALLAN_90MIN_RECOVERED_V1",
+  "profile_registration_scope_only": true,
+  "ready_for_real_by2_h5": false,
+  "qc_mapping": {
+    "continuous_density_input": true,
+    "continuous_psd_input_to_qc": true,
+    "density_squared_exactly_once": true,
+    "discrete_sample_std_input_to_qc": false,
+    "sqrt_dt_preprocessing": false
+  },
+  "run_counters": {
+    "canonical541_run_count": 0,
+    "ext06_run_count": 0,
+    "gauge_ensemble_real_run_count": 0,
+    "real_BY2_filter_run_count": 0,
+    "real_BY2_navigation_output_count": 0,
+    "reference_open_count": 0
+  },
+  "terminal_status": "PASS_LSE01_TASK_A_GO2_ALLAN_PROFILE_REGISTERED_AND_H5_GATE_CLOSED"
+}
