@@ -70,6 +70,33 @@ struct PaperTable1DiscreteStd {
   void validate() const;
 };
 
+struct PaperTable1ProcessStd {
+  // The five process-side IJRR Table-1 values.  This H5 type intentionally
+  // cannot represent the measurement-side one-degree encoder statistic.
+  double angular_velocity_noise_std_rad_per_s{0.002};
+  double linear_acceleration_noise_std_m_per_s2{0.04};
+  double gyroscope_bias_random_walk_std_rad_per_s2{0.001};
+  double accelerometer_bias_random_walk_std_m_per_s3{0.001};
+  double contact_linear_velocity_noise_std_m_per_s{0.05};
+
+  void validate() const;
+};
+
+struct H5Eq61NoisePolicy {
+  enum class Kind { GO2_CONTINUOUS_IMU_PAPER_CONTACT, PAPER_TABLE1_PROCESS };
+  Kind kind{Kind::GO2_CONTINUOUS_IMU_PAPER_CONTACT};
+  ContinuousNoiseDensity go2_imu_density{};
+  PaperTable1ProcessStd paper_process{};
+
+  static H5Eq61NoisePolicy go2ImuPaperContact(
+      ContinuousNoiseDensity imu_density,
+      double contact_linear_velocity_noise_std_m_per_s = 0.05);
+  static H5Eq61NoisePolicy paperTable1Process(
+      PaperTable1ProcessStd process = PaperTable1ProcessStd{});
+  void validate() const;
+  std::string tag() const;
+};
+
 struct MeasurementStdMeters {
   // Forward-kinematics proxy measurement standard deviation; R only, never Qc.
   double value_m{0.0};
@@ -142,12 +169,27 @@ struct BackendDiagnostics {
   CorrectionDiagnostics correction;
 };
 
+struct H5RuntimeDiagnostics {
+  std::size_t propagation_calls{0};
+  std::size_t eq61_calls{0};
+  std::size_t eq52_calls{0};
+  std::size_t lifecycle_calls{0};
+  std::size_t corrected_contacts{0};
+  std::size_t removed_contacts{0};
+  std::size_t added_contacts{0};
+  std::string process_noise_policy_tag{"LEGACY_CONTINUOUS_DENSITY"};
+  Matrix last_qbar;
+};
+
 class HartleyInEkf {
  public:
   HartleyInEkf(StateMean mean, Matrix covariance,
                ContinuousNoiseDensity noise_density,
                BackendIdentity identity =
                    BackendIdentity::HARTLEY_IJRR2020_REPORTED_BACKEND,
+               Vector3 gravity_world = Vector3(0.0, 0.0, -9.81));
+  HartleyInEkf(StateMean mean, Matrix covariance,
+               H5Eq61NoisePolicy h5_noise_policy,
                Vector3 gravity_world = Vector3(0.0, 0.0, -9.81));
 
   const StateMean& stateMean() const { return mean_; }
@@ -156,6 +198,9 @@ class HartleyInEkf {
   int stateDimension() const;
   BackendIdentity diagnosticBackendIdentity() const { return identity_; }
   const BackendDiagnostics& diagnostics() const { return diagnostics_; }
+  const H5RuntimeDiagnostics& h5RuntimeDiagnostics() const {
+    return h5_runtime_diagnostics_;
+  }
 
   void propagate(const Vector3& omega_measurement_rad_per_s,
                  const Vector3& acceleration_measurement_m_per_s2,
@@ -166,6 +211,13 @@ class HartleyInEkf {
       const std::vector<ContactMeasurement>& measurements);
   void augmentContacts(const std::vector<ContactMeasurement>& measurements);
   void removeContacts(const std::vector<int>& leg_ids);
+  void initializeContactsEq32WithIndependentPrior(
+      const std::vector<ContactMeasurement>& measurements,
+      double independent_contact_prior_std_m = 0.1);
+  CorrectionDiagnostics processContactLifecycle(
+      const std::vector<ContactMeasurement>& surviving_measurements,
+      const std::vector<int>& ended_leg_ids,
+      const std::vector<ContactMeasurement>& added_measurements);
 
   static StateMean exactMeanStep(const StateMean& state,
                                  const Vector3& corrected_omega_rad_per_s,
@@ -197,6 +249,8 @@ class HartleyInEkf {
       const Vector3& gravity_world, const ContinuousNoiseDensity& density);
   static Matrix eq61MappedQbarPaperTable1(
       const StateMean& state, const PaperTable1DiscreteStd& paper_parameters);
+  static Matrix eq61MappedQbarPaperTable1Process(
+      const StateMean& state, const PaperTable1ProcessStd& paper_parameters);
   static Matrix eq61MappedQbarGo2ImuPaperContact(
       const StateMean& state, const ContinuousNoiseDensity& go2_imu_density,
       const PaperTable1DiscreteStd& paper_parameters);
@@ -223,6 +277,9 @@ class HartleyInEkf {
   BackendIdentity identity_;
   Vector3 gravity_world_;
   BackendDiagnostics diagnostics_;
+  bool h5_policy_enabled_{false};
+  H5Eq61NoisePolicy h5_noise_policy_{};
+  H5RuntimeDiagnostics h5_runtime_diagnostics_{};
 
   void validateStateAndCovariance() const;
   void applyLeftCorrection(const Vector& delta);

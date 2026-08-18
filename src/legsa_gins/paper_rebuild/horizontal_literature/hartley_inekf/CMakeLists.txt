@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+find_package(OpenSSL REQUIRED)
 
 add_library(hartley_inekf STATIC src/backend.cpp)
 target_include_directories(hartley_inekf PUBLIC include)
@@ -18,5 +19,12 @@ target_link_libraries(hartley_backend_tests PRIVATE hartley_inekf)
 add_executable(hartley_backend_validator tools/validate_backend.cpp)
 target_link_libraries(hartley_backend_validator PRIVATE hartley_inekf)
 
+add_executable(hartley_h5_backend_tests tests/h5_backend_tests.cpp)
+target_link_libraries(hartley_h5_backend_tests PRIVATE hartley_inekf)
+
+add_executable(hartley_h5_runner tools/run_h5.cpp)
+target_link_libraries(hartley_h5_runner PRIVATE hartley_inekf OpenSSL::Crypto)
+
 enable_testing()
 add_test(NAME hartley_backend_tests COMMAND hartley_backend_tests)
+add_test(NAME hartley_h5_backend_tests COMMAND hartley_h5_backend_tests)

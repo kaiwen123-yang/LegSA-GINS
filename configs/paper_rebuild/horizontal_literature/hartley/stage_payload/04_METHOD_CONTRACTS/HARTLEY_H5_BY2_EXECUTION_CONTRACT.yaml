@@ -1,0 +1,102 @@
+schema_version: hartley.h5.execution.v1
+phase_status: PREREGISTERED_PHASE1_NOT_EXECUTED
+backend_id: HARTLEY_IJRR2020_REPORTED_BACKEND
+equations: [IJRR_EQ_50, IJRR_ANALYTICAL_PHI_EQS_58_OR_60, IJRR_EQ_61]
+eq52_available: false
+real_BY2_EQ52_run: false
+input:
+  resolver: configs/paper_rebuild/DATA_PATHS.CLEAN3R4.local.yaml
+  raw_size_bytes: 92352512
+  raw_sha256: 95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278
+  accepted_prefix_interval: [0, 92351234]
+  prefix_sha256: 03cd96cd65d7f5af30f6a0c78d37f07ae4d32c65e78531807db7192454dff097
+  delimiter_terminated_records: 63277
+  decoded_fields: [stamp, imu_state.gyroscope, imu_state.accelerometer, foot_force, foot_position_body]
+  forbidden_fields_lexically_skipped: true
+  sensor_to_body_rpy_deg: [-1.0, 0.0, 0.0]
+  imu_only_frame_rotation: true
+  canonical_foot_order: [FL, FR, RL, RR]
+  imputation: false
+  interpolation: false
+cache:
+  byte_order: little_endian
+  header_bytes: 256
+  record_bytes: 192
+  record_layout: int64_timestamp__22_float64_allowed_values__contact_add_remove_reserved_masks__padding
+  exclusive_create_and_fsync: true
+  post_generation_raw_reverification: full_and_prefix_size_sha256_before_after_equal
+  manifest_records: [first_timestamp_ns, last_timestamp_ns, cache_size_bytes, cache_schema, contact_event_ledger_sha256]
+runtime_provenance:
+  task_start_head: b1b3b0ec5e5d811c1658541a98b660f326500ac3
+  task_start_dirty_or_precommit_recorded: true
+  scoped_source_manifest:
+    - scripts/paper_rebuild/run_hartley_h5_by2.py
+    - src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h5.py
+    - src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/tools/run_h5.cpp
+    - src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/src/backend.cpp
+    - src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/include/hartley_inekf/backend.hpp
+    - src/legsa_gins/paper_rebuild/horizontal_literature/hartley_inekf/CMakeLists.txt
+  native_executable_sha256_verified_before_and_after_launch: true
+  native_recomputes_config_hash: true
+  native_exact_run_policy_sigma_binding: true
+  later_final_commit_mapping_recorded: true
+chronology:
+  initialization_statistics_interval: '[t0,t0+5s)'
+  initialization_interval_excludes_execution_rows: false
+  first_row: INITIALIZE_NO_PROPAGATION
+  later_rows: PROPAGATE_PREVIOUS_IMU_AND_CONTACTS_THEN_CURRENT_LIFECYCLE
+  state_rows: 63277
+  propagation_calls: 63276
+  lifecycle_order: [correct_all_survivors_one_stack, remove_ended, augment_new]
+initialization:
+  median_gyro_norm_max_rad_per_s: 0.05
+  median_accel_norm_error_from_9p81_max_m_per_s2: 0.5
+  yaw_rad: 0.0
+  position_velocity: zero
+  gyro_bias: mean_corrected_gyro
+  accelerometer_bias_equation: R0_times_fbar_minus_ba_plus_g_equals_zero
+  base_covariance_source: IJRR_TABLE1_INITIAL_STDS
+  initial_contact_covariance: EQ32_PLUS_INDEPENDENT_0p1_SQUARED_I_PER_CONTACT
+  later_contact_covariance: EQ32_ONLY
+checkpoints:
+  union: [first, last, nearest_each_elapsed_integer_second_tie_earlier, contact_event_after_settled_lifecycle]
+  full_covariance_storage: COVARIANCE_CHECKPOINTS.npz
+  full_covariance_csv_forbidden: true
+  intermediate_bin_deleted_before_freeze: true
+  index_npz_exact_key_dimension_parity_required: true
+execution_order:
+  - H5_PRIMARY_GO2_ALLAN_EQ61_FK10MM
+  - H5_FK05MM_SENSITIVITY
+  - H5_FK20MM_SENSITIVITY
+  - H5_PAPER_TABLE1_PROCESS_REGRESSION_WITH_GO2_FK_PROXY
+paper_process_regression_classification:
+  run_id: H5_PAPER_TABLE1_PROCESS_REGRESSION_WITH_GO2_FK_PROXY
+  paper_branch_label: PAPER_PROCESS_PARAMETER_REGRESSION
+  measurement_adapter_label: WITH_NONPAPER_GO2_FK_PROXY_MEASUREMENT_ADAPTER
+companions_require_primary_gate: true
+runtime_outputs_tracked: false
+native_finalization:
+  command: finalize-native
+  exact_run_order_required: true
+  provider_cache_duplicated: false
+  provider_cache_publication_count: 1
+  full_per_epoch_outputs_published: true
+  comparison_scope: NATIVE_ONLY_NO_REFERENCE_NO_RANKING
+  comparison_includes_differences_from_primary:
+    [state, rotation, velocity, position, gyro_bias, accel_bias, innovation_distribution, nis_distribution, covariance, runtime]
+  local_layout:
+    - 08_BY2_NATIVE/00_PROVIDER
+    - 08_BY2_NATIVE/01_PRIMARY_GO2_ALLAN_EQ61_FK10MM
+    - 08_BY2_NATIVE/02_FK05MM
+    - 08_BY2_NATIVE/03_FK20MM
+    - 08_BY2_NATIVE/04_PAPER_PROCESS_REGRESSION
+    - 08_BY2_NATIVE/05_NATIVE_COMPARISON
+    - 11_REPORT
+  h6_h7_executed: false
+  external_stage_publication: false
+  storage_health_exact_json_provenance_required: SUPERVISOR_READ_ONLY_QUERY
+  supervisor_evidence_copied_byte_exact_once:
+    - SUPERVISOR_STORAGE_HEALTH.json
+    - SUPERVISOR_FILE_ACCESS_AUDIT.json
+    - SUPERVISOR_ATTEMPT_LEDGER.json
+  source_strace_logs_published: false

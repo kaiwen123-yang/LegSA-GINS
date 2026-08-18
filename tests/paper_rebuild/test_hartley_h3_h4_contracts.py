@@ -463,6 +463,7 @@ def test_implementation_and_equation_maps_point_to_real_exact_symbols() -> None:
 def test_h5_runs_fk_semantics_and_reference_independent_selection_are_frozen() -> None:
     contract = _yaml(H5_PROFILE_PATH)
     assert contract["contract_status"] == "PREREGISTERED_NOT_EXECUTED"
+    assert contract["h5_phase1_status"] == "IMPLEMENTED_FIXTURE_VALIDATED_NOT_EXECUTED"
     assert contract["production_backend"] == "HARTLEY_IJRR2020_REPORTED_BACKEND"
     assert contract["backend_mean"] == "EXACT_EQ_50_GAMMA_0_1_2"
     assert contract["backend_transition"] == (
@@ -471,18 +472,24 @@ def test_h5_runs_fk_semantics_and_reference_independent_selection_are_frozen() -
     assert contract["backend_process_covariance"] == (
         "PAPER_REPORTED_APPROXIMATION_EQ_61"
     )
+    assert contract["eq52_available_in_h5_runtime"] is False
+    expected_runs = (
+        "H5_PRIMARY_GO2_ALLAN_EQ61_FK10MM",
+        "H5_FK05MM_SENSITIVITY",
+        "H5_FK20MM_SENSITIVITY",
+        "H5_PAPER_TABLE1_PROCESS_REGRESSION_WITH_GO2_FK_PROXY",
+    )
+    assert tuple(contract["run_order"]) == expected_runs
     runs = contract["run_identities"]
-    assert set(runs) == {
-        "H5_PRIMARY_GO2_ALLAN_RECOVERED",
-        "H5_PAPER_TABLE1_PARAMETER_REGRESSION",
-        "H5_FK_PROXY_SENSITIVITY",
-    }
+    assert set(runs) == set(expected_runs)
     assert all(run["execution_status"] == "PREREGISTERED_NOT_EXECUTED" for run in runs.values())
-    assert runs["H5_PRIMARY_GO2_ALLAN_RECOVERED"]["sigma_fk_m"] == 0.010
-    assert runs["H5_PRIMARY_GO2_ALLAN_RECOVERED"]["primary"] is True
-    primary = runs["H5_PRIMARY_GO2_ALLAN_RECOVERED"]
-    contact_process = primary["contact_process_parameter"]
-    assert contact_process == {
+    primary = runs[expected_runs[0]]
+    assert primary["sigma_fk_m"] == 0.010
+    assert primary["process_cpp_type"] == "H5Eq61NoisePolicy"
+    assert primary["contact_enters_continuous_qc"] is False
+    assert primary["imu_parameter_cpp_type"] == "ContinuousNoiseDensity"
+    assert primary["qc_parameter_cpp_type"] == "ContinuousNoisePsd"
+    assert primary["contact_process_parameter"] == {
         "cpp_type": "PaperTable1DiscreteStd",
         "field": "contact_linear_velocity_noise_std_m_per_s",
         "value": 0.05,
@@ -496,24 +503,28 @@ def test_h5_runs_fk_semantics_and_reference_independent_selection_are_frozen() -
     }
     assert primary["fk_measurement_cpp_type"] == "MeasurementStdMeters"
     assert primary["fk_enters_process_qc"] is False
-    assert runs["H5_PAPER_TABLE1_PARAMETER_REGRESSION"][
-        "imu_parameter_interface"
-    ] == "PaperTable1DiscreteStd"
-    assert runs["H5_PAPER_TABLE1_PARAMETER_REGRESSION"][
-        "reinterpret_as_continuous_asd"
-    ] is False
-    assert runs["H5_PAPER_TABLE1_PARAMETER_REGRESSION"]["qbar_adapter"] == (
-        "HartleyInEkf::eq61MappedQbarPaperTable1"
+    regression = runs[expected_runs[-1]]
+    assert regression["process_cpp_type"] == "PaperTable1ProcessStd"
+    assert regression["paper_branch_label"] == "PAPER_PROCESS_PARAMETER_REGRESSION"
+    assert regression["measurement_adapter_label"] == (
+        "WITH_NONPAPER_GO2_FK_PROXY_MEASUREMENT_ADAPTER"
     )
-    paper_measurement = runs["H5_PAPER_TABLE1_PARAMETER_REGRESSION"][
-        "joint_encoder_measurement_parameter"
-    ]
-    assert paper_measurement == {
+    assert regression["process_value_count"] == len(regression["process_values"]) == 5
+    assert regression["sigma_fk_m"] == 0.010
+    historical = regression["historical_h3_h4_six_parameter_regression"]
+    assert historical["all_six_table1_stochastic_parameters_retained"] is True
+    assert historical["qbar_adapter"] == "HartleyInEkf::eq61MappedQbarPaperTable1"
+    assert historical["joint_encoder_measurement_parameter"]["covariance_mapping"] == (
+        "R_EQUALS_J_SIGMA_RAD_SQUARED_I_J_TRANSPOSE"
+    )
+    assert historical["joint_encoder_measurement_parameter"]["no_deg_to_meter_scalar"] is True
+    assert historical["imu_parameter_interface"] == "PaperTable1DiscreteStd"
+    assert historical["reinterpret_as_continuous_asd"] is False
+    assert historical["qbar_adapter"] == "HartleyInEkf::eq61MappedQbarPaperTable1"
+    assert historical["joint_encoder_measurement_parameter"] == {
         "cpp_field": "joint_encoder_noise_std_deg",
         "cpp_type": "PaperTable1DiscreteStd",
-        "covariance_api": (
-            "contactMeasurementCovarianceFromPaperTable1JointEncoder"
-        ),
+        "covariance_api": "contactMeasurementCovarianceFromPaperTable1JointEncoder",
         "covariance_mapping": "R_EQUALS_J_SIGMA_RAD_SQUARED_I_J_TRANSPOSE",
         "foot_position_jacobian_unit": "m/rad",
         "no_deg_to_meter_scalar": True,
@@ -521,53 +532,65 @@ def test_h5_runs_fk_semantics_and_reference_independent_selection_are_frozen() -
         "unit": "deg",
         "value": 1.0,
     }
-    assert runs["H5_FK_PROXY_SENSITIVITY"]["sigma_fk_m"] == [0.005, 0.010, 0.020]
-    assert runs["H5_FK_PROXY_SENSITIVITY"]["covariance_m2"] == {
-        "sigma_0p005": "2.5e-5_I3",
-        "sigma_0p010": "1.0e-4_I3",
-        "sigma_0p020": "4.0e-4_I3",
-    }
-    fk = contract["fk_proxy_semantics"]
-    assert fk["h0_h2_repeatability_result"]["role"] == (
-        "GO2_FK_PROXY_REPEATABILITY_LOWER_BOUND"
+    assert runs["H5_FK05MM_SENSITIVITY"]["sigma_fk_m"] == 0.005
+    assert runs["H5_FK05MM_SENSITIVITY"]["covariance_m2"] == "2.5e-5_I3"
+    assert runs["H5_FK20MM_SENSITIVITY"]["sigma_fk_m"] == 0.020
+    assert runs["H5_FK20MM_SENSITIVITY"]["covariance_m2"] == "4.0e-4_I3"
+    encoder = contract["joint_encoder_boundary"]
+    assert encoder["status"] == "SYNTHETIC_AND_CASSIE_REGRESSION_ONLY"
+    assert encoder["by2_applicability"] == (
+        "NOT_APPLICABLE_TO_BY2_WITHOUT_RAW_JOINTS_AND_JACOBIAN"
     )
+    assert encoder["h5_runtime_field"] is False
+    assert encoder["synthetic_jacobian_allowed_for_real_by2"] is False
+    assert encoder["degree_to_meter_scalar_allowed"] is False
+    fk = contract["fk_proxy_semantics"]
+    assert fk["h0_h2_repeatability_result"]["role"] == "GO2_FK_PROXY_REPEATABILITY_LOWER_BOUND"
     assert fk["h0_h2_repeatability_result"]["future_filter_primary"] is False
     assert fk["physical_proxy_covariance"]["primary_sigma_m"] == 0.010
     assert fk["selection_using_reference_accuracy"] is False
     assert fk["selection_using_final_odometry"] is False
-    assert contract["selection_and_execution_boundary"][
-        "h5_execution_authorization"
-    ] == "HUMAN_AUTHORIZATION_REQUIRED"
+    assert contract["selection_and_execution_boundary"]["h5_execution_authorization"] == (
+        "HUMAN_AUTHORIZATION_REQUIRED"
+    )
+    assert contract["selection_and_execution_boundary"]["h3_h4_external_stage_publication"] is True
+    assert contract["selection_and_execution_boundary"]["h3_h4_external_stage_hash_parity_verified"] is True
+    assert contract["selection_and_execution_boundary"]["h5_external_stage_publication"] is False
+    assert contract["selection_and_execution_boundary"]["h5_external_stage_hash_parity_verified"] is False
     assert contract["selection_and_execution_boundary"][
         "ready_for_real_by2_h5"
     ] is False
 
     gate = _yaml(H5_GATE_PATH)
     assert gate["h5_go2_parameter_gate_closed"] is True
-    assert gate["gate_closure_evidence"] == {
-        "executable_check": "h5_go2_imu_paper_contact_eq61_adapter",
-        "paper_table1_all_six_executable_check": (
-            "paper_table1_all_six_parameter_typed_mapping"
-        ),
-        "paper_table1_encoder_correction_executable_check": (
-            "paper_table1_joint_encoder_measurement_correction"
-        ),
-        "artifact": "07_SYNTHETIC_VALIDATION/GO2_ALLAN_PROFILE_DIMENSIONAL_VALIDATION.csv",
-        "pass_required": True,
-    }
     assert gate["production_backend"] == {
         "backend_id": "HARTLEY_IJRR2020_REPORTED_BACKEND",
         "deterministic_mean": "IJRR_EQ_50",
         "analytical_transition": "IJRR_EQS_58_OR_60",
         "discrete_process_covariance": "IJRR_EQ_61",
+        "eq52_runtime_selector_present": False,
     }
-    assert gate["go2_profile"]["numeric_average_axis_profile_recovered"] is True
-    assert gate["go2_profile"]["exact_Allan_curve_recomputable"] is False
+    assert gate["gate_closure_evidence"] == {
+        "executable_check": "h5_go2_imu_paper_contact_eq61_adapter",
+        "paper_table1_all_six_executable_check": "paper_table1_all_six_parameter_typed_mapping",
+        "paper_table1_encoder_correction_executable_check": "paper_table1_joint_encoder_measurement_correction",
+        "artifact": "07_SYNTHETIC_VALIDATION/GO2_ALLAN_PROFILE_DIMENSIONAL_VALIDATION.csv",
+        "pass_required": True,
+    }
     assert gate["go2_profile"]["continuous_density_to_qc_mapping"] == {
         "square_each_density_exactly_once": True,
         "sqrt_dt_preprocessing": False,
         "discrete_sample_std_is_qc_input": False,
     }
+    assert gate["go2_profile"]["numeric_average_axis_profile_recovered"] is True
+    assert gate["go2_profile"]["exact_Allan_curve_recomputable"] is False
+    assert tuple(run["run_id"] for run in gate["preregistered_runs"]) == expected_runs
+    assert gate["preregistered_runs"][0]["primary"] is True
+    assert gate["preregistered_runs"][0]["contact_process_parameter"]["enters_continuous_qc"] is False
+    assert gate["preregistered_runs"][0]["fk_enters_process_qc"] is False
+    assert all(run["status"] == "BLOCKED_PENDING_PRIMARY_GATE"
+               for run in gate["preregistered_runs"][1:])
+    assert gate["joint_encoder_boundary"]["enters_h5_real_runtime"] is False
     assert gate["fk_proxy_gate"]["repeatability_future_filter_primary"] is False
     assert gate["fk_proxy_gate"]["reference_accuracy_used_for_selection"] is False
     assert gate["fk_proxy_gate"]["final_odometry_used_for_selection"] is False
@@ -576,26 +599,30 @@ def test_h5_runs_fk_semantics_and_reference_independent_selection_are_frozen() -
     assert primary_gate["contact_process_parameter"]["semantics"] == (
         "PAPER_NATIVE_DISCRETE_STD"
     )
-    assert primary_gate["contact_process_parameter"]["enters_continuous_qc"] is False
-    assert primary_gate["fk_enters_process_qc"] is False
-    regression_gate = gate["preregistered_runs"][1]
-    assert regression_gate["all_six_table1_stochastic_parameters_retained"] is True
-    assert regression_gate["joint_encoder_measurement_parameter"][
-        "covariance_mapping"
-    ] == "R_EQUALS_J_SIGMA_RAD_SQUARED_I_J_TRANSPOSE"
-    assert regression_gate["joint_encoder_measurement_parameter"][
-        "no_deg_to_meter_scalar"
-    ] is True
-    assert gate["gate_closure_evidence"]["paper_table1_all_six_executable_check"] == (
-        "paper_table1_all_six_parameter_typed_mapping"
+    regression_gate = gate["preregistered_runs"][-1][
+        "historical_h3_h4_six_parameter_regression"
+    ]
+    assert gate["preregistered_runs"][-1]["paper_branch_label"] == (
+        "PAPER_PROCESS_PARAMETER_REGRESSION"
     )
-    assert gate["gate_closure_evidence"][
-        "paper_table1_encoder_correction_executable_check"
-    ] == "paper_table1_joint_encoder_measurement_correction"
+    assert gate["preregistered_runs"][-1]["measurement_adapter_label"] == (
+        "WITH_NONPAPER_GO2_FK_PROXY_MEASUREMENT_ADAPTER"
+    )
+    assert gate["real_BY2_EQ52_run"] is False
+    assert regression_gate["all_six_table1_stochastic_parameters_retained"] is True
+    assert regression_gate["joint_encoder_measurement_parameter"]["covariance_mapping"] == (
+        "R_EQUALS_J_SIGMA_RAD_SQUARED_I_J_TRANSPOSE"
+    )
+    assert regression_gate["joint_encoder_measurement_parameter"]["no_deg_to_meter_scalar"] is True
     assert gate["execution_boundary"]["ready_for_real_by2_h5"] is False
+    assert gate["execution_boundary"]["real_BY2_filter_run_count"] == 0
     assert gate["execution_boundary"]["h5_execution_authorization"] == (
         "HUMAN_AUTHORIZATION_REQUIRED"
     )
+    assert gate["execution_boundary"]["h3_h4_external_stage_publication"] is True
+    assert gate["execution_boundary"]["h3_h4_external_stage_hash_parity_verified"] is True
+    assert gate["execution_boundary"]["h5_external_stage_publication"] is False
+    assert gate["execution_boundary"]["h5_external_stage_hash_parity_verified"] is False
 
 
 def test_current_parameter_registry_replaces_unknown_gate_with_recovered_profile() -> None:
@@ -617,12 +644,21 @@ def test_current_parameter_registry_replaces_unknown_gate_with_recovered_profile
         assert by_parameter[role]["proposed_for_BY2"] == "true"
     assert by_parameter["joint_encoder_noise_std"]["value"] == "1.0"
     assert by_parameter["joint_encoder_noise_std"]["unit"] == "deg"
+    h5_table1_parameters = (
+        "linear_acceleration_noise_std", "angular_velocity_noise_std",
+        "accelerometer_bias_random_walk_std", "gyroscope_bias_random_walk_std",
+        "contact_linear_velocity_noise_std", "initial_orientation_std",
+        "initial_velocity_std", "initial_imu_position_std",
+        "initial_right_foot_position_std", "initial_left_foot_position_std",
+        "initial_gyroscope_bias_std", "initial_accelerometer_bias_std",
+    )
+    assert all(by_parameter[name]["proposed_for_BY2"] == "true"
+               for name in h5_table1_parameters)
+    assert by_parameter["joint_encoder_noise_std"]["proposed_for_BY2"] == "false"
     assert by_parameter["joint_encoder_noise_std"][
         "paper_or_code_identity"
-    ] == (
-        "HARTLEY_IJRR2020_TABLE1_MEASUREMENT_R_JACOBIAN_ADAPTER_"
-        "PAPER_NATIVE_DISCRETE_STD"
-    )
+    ] == ("SYNTHETIC_AND_CASSIE_REGRESSION_ONLY__"
+          "NOT_APPLICABLE_TO_BY2_WITHOUT_RAW_JOINTS_AND_JACOBIAN")
     assert all(row["trace_tuned"] == "false" for row in rows)
 
 

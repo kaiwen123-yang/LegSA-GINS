@@ -323,6 +323,64 @@ void PaperTable1DiscreteStd::validate() const {
   }
 }
 
+void PaperTable1ProcessStd::validate() const {
+  const double values[] = {
+      angular_velocity_noise_std_rad_per_s,
+      linear_acceleration_noise_std_m_per_s2,
+      gyroscope_bias_random_walk_std_rad_per_s2,
+      accelerometer_bias_random_walk_std_m_per_s3,
+      contact_linear_velocity_noise_std_m_per_s,
+  };
+  for (const double value : values) {
+    requireFinite(value, "paper Table-1 process standard deviation");
+    if (value < 0.0) {
+      throw std::invalid_argument(
+          "paper Table-1 process standard deviations must be nonnegative");
+    }
+  }
+}
+
+H5Eq61NoisePolicy H5Eq61NoisePolicy::go2ImuPaperContact(
+    ContinuousNoiseDensity imu_density,
+    double contact_linear_velocity_noise_std_m_per_s) {
+  if (imu_density.contact_velocity_m_per_s_per_sqrt_hz != 0.0) {
+    throw std::invalid_argument(
+        "H5 Go2 policy rejects contact ASD; contact is paper-native Eq61 only");
+  }
+  H5Eq61NoisePolicy result;
+  result.kind = Kind::GO2_CONTINUOUS_IMU_PAPER_CONTACT;
+  result.go2_imu_density = imu_density;
+  result.paper_process.contact_linear_velocity_noise_std_m_per_s =
+      contact_linear_velocity_noise_std_m_per_s;
+  result.validate();
+  return result;
+}
+
+H5Eq61NoisePolicy H5Eq61NoisePolicy::paperTable1Process(
+    PaperTable1ProcessStd process) {
+  H5Eq61NoisePolicy result;
+  result.kind = Kind::PAPER_TABLE1_PROCESS;
+  result.paper_process = process;
+  result.validate();
+  return result;
+}
+
+void H5Eq61NoisePolicy::validate() const {
+  paper_process.validate();
+  if (kind == Kind::GO2_CONTINUOUS_IMU_PAPER_CONTACT) {
+    go2_imu_density.validate();
+    if (go2_imu_density.contact_velocity_m_per_s_per_sqrt_hz != 0.0) {
+      throw std::invalid_argument("H5 contact noise must not enter continuous Qc");
+    }
+  }
+}
+
+std::string H5Eq61NoisePolicy::tag() const {
+  return kind == Kind::GO2_CONTINUOUS_IMU_PAPER_CONTACT
+             ? "GO2_CONTINUOUS_IMU_PAPER_NATIVE_CONTACT_EQ61"
+             : "PAPER_TABLE1_FIVE_PROCESS_EQ61";
+}
+
 void MeasurementStdMeters::validate() const {
   requireFinite(value_m, "measurement standard deviation meters");
   if (!(value_m > 0.0)) {
@@ -528,6 +586,22 @@ HartleyInEkf::HartleyInEkf(StateMean mean, Matrix covariance,
       gravity_world_(gravity_world) {
   noise_density_.validate();
   diagnostics_.backend_identity = identity_;
+  validateStateAndCovariance();
+}
+
+HartleyInEkf::HartleyInEkf(StateMean mean, Matrix covariance,
+                           H5Eq61NoisePolicy h5_noise_policy,
+                           Vector3 gravity_world)
+    : mean_(std::move(mean)),
+      covariance_(std::move(covariance)),
+      noise_density_(h5_noise_policy.go2_imu_density),
+      identity_(BackendIdentity::HARTLEY_IJRR2020_REPORTED_BACKEND),
+      gravity_world_(gravity_world),
+      h5_policy_enabled_(true),
+      h5_noise_policy_(std::move(h5_noise_policy)) {
+  h5_noise_policy_.validate();
+  diagnostics_.backend_identity = identity_;
+  h5_runtime_diagnostics_.process_noise_policy_tag = h5_noise_policy_.tag();
   validateStateAndCovariance();
 }
 
@@ -792,6 +866,35 @@ Matrix HartleyInEkf::eq61MappedQbarPaperTable1(
   return symmetrized(L * paper_native_statistics * L.transpose());
 }
 
+Matrix HartleyInEkf::eq61MappedQbarPaperTable1Process(
+    const StateMean& state,
+    const PaperTable1ProcessStd& paper_parameters) {
+  paper_parameters.validate();
+  const int contact_count = static_cast<int>(state.contacts.size());
+  const int noise_dimension = 12 + 3 * contact_count;
+  Matrix statistics = Matrix::Zero(noise_dimension, noise_dimension);
+  statistics.block<3, 3>(0, 0) =
+      std::pow(paper_parameters.angular_velocity_noise_std_rad_per_s, 2) *
+      Matrix3::Identity();
+  statistics.block<3, 3>(3, 3) =
+      std::pow(paper_parameters.linear_acceleration_noise_std_m_per_s2, 2) *
+      Matrix3::Identity();
+  for (int index = 0; index < contact_count; ++index) {
+    statistics.block<3, 3>(6 + 3 * index, 6 + 3 * index) =
+        std::pow(paper_parameters.contact_linear_velocity_noise_std_m_per_s, 2) *
+        Matrix3::Identity();
+  }
+  const int bias = 6 + 3 * contact_count;
+  statistics.block<3, 3>(bias, bias) =
+      std::pow(paper_parameters.gyroscope_bias_random_walk_std_rad_per_s2, 2) *
+      Matrix3::Identity();
+  statistics.block<3, 3>(bias + 3, bias + 3) =
+      std::pow(paper_parameters.accelerometer_bias_random_walk_std_m_per_s3, 2) *
+      Matrix3::Identity();
+  const Matrix L = continuousL(state);
+  return symmetrized(L * statistics * L.transpose());
+}
+
 Matrix HartleyInEkf::eq61MappedQbarGo2ImuPaperContact(
     const StateMean& state, const ContinuousNoiseDensity& go2_imu_density,
     const PaperTable1DiscreteStd& paper_parameters) {
@@ -879,6 +982,7 @@ void HartleyInEkf::propagate(const Vector3& omega_measurement_rad_per_s,
   diagnostics_.propagation.A = continuousA(initial, gravity_world_);
   diagnostics_.propagation.L = continuousL(initial);
   diagnostics_.propagation.Qc = continuousQc(initial, noise_density_);
+  ++h5_runtime_diagnostics_.propagation_calls;
 
   if (identity_ == BackendIdentity::OFFICIAL_CPP_EARLY_REGRESSION) {
     diagnostics_.propagation.Phi =
@@ -894,17 +998,97 @@ void HartleyInEkf::propagate(const Vector3& omega_measurement_rad_per_s,
     diagnostics_.propagation.Phi =
         analyticalPhi(initial, omega, acceleration, dt_seconds, gravity_world_);
     if (identity_ == BackendIdentity::HARTLEY_IJRR2020_REPORTED_BACKEND) {
-      diagnostics_.propagation.Qd = eq61ProcessCovariance(
-          initial, omega, acceleration, dt_seconds, gravity_world_, noise_density_);
+      if (h5_policy_enabled_) {
+        const Matrix Phi = diagnostics_.propagation.Phi;
+        Matrix qbar;
+        if (h5_noise_policy_.kind ==
+            H5Eq61NoisePolicy::Kind::GO2_CONTINUOUS_IMU_PAPER_CONTACT) {
+          PaperTable1DiscreteStd contact_adapter;
+          contact_adapter.contact_linear_velocity_noise_std_m_per_s =
+              h5_noise_policy_.paper_process
+                  .contact_linear_velocity_noise_std_m_per_s;
+          qbar = eq61MappedQbarGo2ImuPaperContact(
+              initial, h5_noise_policy_.go2_imu_density, contact_adapter);
+        } else {
+          qbar = eq61MappedQbarPaperTable1Process(
+              initial, h5_noise_policy_.paper_process);
+        }
+        h5_runtime_diagnostics_.last_qbar = qbar;
+        diagnostics_.propagation.Qd =
+            symmetrized(Phi * qbar * Phi.transpose() * dt_seconds);
+      } else {
+        diagnostics_.propagation.Qd = eq61ProcessCovariance(
+            initial, omega, acceleration, dt_seconds, gravity_world_, noise_density_);
+      }
+      ++h5_runtime_diagnostics_.eq61_calls;
     } else {
       diagnostics_.propagation.Qd = eq52ProcessCovarianceGaussLegendre64(
           initial, omega, acceleration, dt_seconds, gravity_world_, noise_density_);
+      ++h5_runtime_diagnostics_.eq52_calls;
     }
     mean_ = exactMeanStep(initial, omega, acceleration, dt_seconds, gravity_world_);
   }
   covariance_ = symmetrized(diagnostics_.propagation.Phi * covariance_ *
                                 diagnostics_.propagation.Phi.transpose() +
                             diagnostics_.propagation.Qd);
+  validateStateAndCovariance();
+}
+
+CorrectionDiagnostics HartleyInEkf::processContactLifecycle(
+    const std::vector<ContactMeasurement>& surviving_measurements,
+    const std::vector<int>& ended_leg_ids,
+    const std::vector<ContactMeasurement>& added_measurements) {
+  if (identity_ != BackendIdentity::HARTLEY_IJRR2020_REPORTED_BACKEND) {
+    throw std::logic_error("production lifecycle requires reported H5 backend");
+  }
+  const std::vector<int> active = activeContactIdentities();
+  std::set<int> ended(ended_leg_ids.begin(), ended_leg_ids.end());
+  if (ended.size() != ended_leg_ids.size()) {
+    throw std::invalid_argument("duplicate ended contact identity");
+  }
+  std::set<int> expected_survivors;
+  for (int id : active) {
+    if (!ended.count(id)) expected_survivors.insert(id);
+  }
+  std::set<int> provided_survivors;
+  for (const auto& measurement : surviving_measurements) {
+    provided_survivors.insert(measurement.leg_id);
+  }
+  if (provided_survivors != expected_survivors) {
+    throw std::invalid_argument("survivor correction must cover every surviving contact");
+  }
+  CorrectionDiagnostics correction;
+  if (!surviving_measurements.empty()) {
+    correction = correctContactsImpl(surviving_measurements, false);
+  }
+  removeContacts(ended_leg_ids);
+  augmentContacts(added_measurements);
+  ++h5_runtime_diagnostics_.lifecycle_calls;
+  h5_runtime_diagnostics_.corrected_contacts += surviving_measurements.size();
+  h5_runtime_diagnostics_.removed_contacts += ended_leg_ids.size();
+  h5_runtime_diagnostics_.added_contacts += added_measurements.size();
+  return correction;
+}
+
+void HartleyInEkf::initializeContactsEq32WithIndependentPrior(
+    const std::vector<ContactMeasurement>& measurements,
+    double independent_contact_prior_std_m) {
+  requireFinite(independent_contact_prior_std_m,
+                "independent initial-contact prior std");
+  if (!(independent_contact_prior_std_m > 0.0) || !mean_.contacts.empty()) {
+    throw std::invalid_argument(
+        "initial-contact prior requires positive std and empty contact state");
+  }
+  augmentContacts(measurements);
+  const double variance = independent_contact_prior_std_m *
+                          independent_contact_prior_std_m;
+  const std::vector<int> ids = activeContactIdentities();
+  for (const int id : ids) {
+    const int offset = contactOffset(ids, id);
+    covariance_.block<3, 3>(offset, offset) +=
+        variance * Matrix3::Identity();
+  }
+  covariance_ = symmetrized(covariance_);
   validateStateAndCovariance();
 }
 

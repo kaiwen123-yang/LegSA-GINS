@@ -1,6 +1,6 @@
 schema_version: 1
-registry_id: HARTLEY_BACKEND_IDENTITY_REGISTRY_H3_H4
-registry_status: IDENTITIES_APIS_AND_TOLERANCES_FROZEN
+registry_id: HARTLEY_BACKEND_IDENTITY_REGISTRY_H3_H5
+registry_status: H3_H4_PRESERVED_H5_REPORTED_BACKEND_ONLY
 method_id: LSE01_HARTLEY_CONTACT_AIDED_INEKF
 navigation_frame: WORLD_CENTRIC
 error_definition: RIGHT_INVARIANT
@@ -22,6 +22,7 @@ backend_identities:
     discrete_process_covariance: IJRR_EQ_52_INDEPENDENT_HIGH_ACCURACY_INTEGRAL
     production_replacement_allowed: false
     article_reported_result_path: false
+    available_in_h5_runtime: false
   OFFICIAL_CPP_EARLY_REGRESSION:
     role: PINNED_EARLY_OFFICIAL_IMPLEMENTATION_REGRESSION
     primary: false
@@ -56,6 +57,8 @@ implementation:
     - discreteSampleStdFromDensity
     - isotropicMeasurementCovariance
     - contactMeasurementCovarianceFromPaperTable1JointEncoder
+    - H5Eq61NoisePolicy
+    - PaperTable1ProcessStd
   backend_class: HartleyInEkf
   state_and_diagnostic_api:
     - stateMean
@@ -66,6 +69,9 @@ implementation:
     - augmentContacts
     - removeContacts
     - diagnostics
+    - h5RuntimeDiagnostics
+    - processContactLifecycle
+    - initializeContactsEq32WithIndependentPrior
   mathematical_api:
     - exactMeanStep
     - officialEarlyMeanStep
@@ -98,6 +104,10 @@ noise_interface_types:
   paper_table1_joint_encoder_deg_to_meter_scalar_allowed: false
   paper_table1_contact_reinterpreted_as_continuous_asd: false
   go2_h5_mixed_adapter: HartleyInEkf::eq61ProcessCovarianceGo2ImuPaperContact
+  h5_stateful_policy_type: H5Eq61NoisePolicy
+  h5_paper_process_type: PaperTable1ProcessStd
+  h5_paper_process_field_count: 5
+  h5_joint_encoder_runtime_status: NOT_APPLICABLE_TO_BY2_WITHOUT_RAW_JOINTS_AND_JACOBIAN
   fk_measurement_covariance_api: isotropicMeasurementCovariance
   fk_measurement_enters_qc: false
   density_to_psd_rule: SQUARE_EXACTLY_ONCE_WITH_NO_SQRT_DT_PREPROCESSING
@@ -170,12 +180,21 @@ ideal_observability_tolerances:
   contact_dimension_crossing_without_explicit_state_map: false
 
 execution_boundary:
-  synthetic_validation_only_in_h3_h4: true
-  real_BY2_navigation_executed: false
-  reference_opened: false
-  ext06_executed: false
-  canonical541_executed: false
-  external_stage_publication: true
-  external_stage_hash_parity_verified: true
-  ready_for_real_by2_h5: false
-  h5_execution_authorization: HUMAN_AUTHORIZATION_REQUIRED
+  historical_h3_h4_snapshot:
+    synthetic_validation_only_in_h3_h4: true
+    real_BY2_navigation_executed: false
+    reference_opened: false
+    ext06_executed: false
+    canonical541_executed: false
+    external_stage_publication: true
+    external_stage_hash_parity_verified: true
+    ready_for_real_by2_h5: false
+    h5_execution_authorization: HUMAN_AUTHORIZATION_REQUIRED
+  h5_native_snapshot:
+    real_BY2_navigation_execution_status: FOUR_NATIVE_RUNS_FROZEN_LOCAL_ONLY
+    real_BY2_EQ52_run: false
+    external_stage_publication: false
+    reference_open_count: 0
+    trace_open_count: 0
+  h5_runtime_backend_identity: HARTLEY_IJRR2020_REPORTED_BACKEND
+  h5_runtime_eq52_available: false
