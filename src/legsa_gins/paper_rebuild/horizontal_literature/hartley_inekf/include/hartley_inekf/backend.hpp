@@ -214,6 +214,7 @@ class HartleyInEkf {
   void initializeContactsEq32WithIndependentPrior(
       const std::vector<ContactMeasurement>& measurements,
       double independent_contact_prior_std_m = 0.1);
+  void applyInitialGaugeTransform(const Matrix3& world_rotation);
   CorrectionDiagnostics processContactLifecycle(
       const std::vector<ContactMeasurement>& surviving_measurements,
       const std::vector<int>& ended_leg_ids,

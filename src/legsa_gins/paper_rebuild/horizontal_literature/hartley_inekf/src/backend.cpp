@@ -1092,6 +1092,28 @@ void HartleyInEkf::initializeContactsEq32WithIndependentPrior(
   validateStateAndCovariance();
 }
 
+void HartleyInEkf::applyInitialGaugeTransform(const Matrix3& world_rotation) {
+  if (!world_rotation.allFinite() ||
+      (world_rotation.transpose() * world_rotation - Matrix3::Identity())
+              .cwiseAbs()
+              .maxCoeff() > 1.0e-12 ||
+      std::abs(world_rotation.determinant() - 1.0) > 1.0e-12) {
+    throw std::invalid_argument("initial gauge rotation must be in SO(3)");
+  }
+  mean_.rotation = world_rotation * mean_.rotation;
+  mean_.velocity = world_rotation * mean_.velocity;
+  mean_.position = world_rotation * mean_.position;
+  for (auto& contact : mean_.contacts) {
+    contact.second = world_rotation * contact.second;
+  }
+  Matrix transform = Matrix::Identity(stateDimension(), stateDimension());
+  for (int offset = 0; offset < stateDimension() - 6; offset += 3) {
+    transform.block<3, 3>(offset, offset) = world_rotation;
+  }
+  covariance_ = transform * covariance_ * transform.transpose();
+  validateStateAndCovariance();
+}
+
 CorrectionDiagnostics HartleyInEkf::correctContacts(
     const std::vector<ContactMeasurement>& measurements) {
   return correctContactsImpl(measurements, true);

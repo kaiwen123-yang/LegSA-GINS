@@ -239,17 +239,40 @@ int main(int argc, char** argv) {
 		const double sigma_fk = std::stod(cfg.at("sigma_fk_m"));
 		require(cfg.at("backend_id") == "HARTLEY_IJRR2020_REPORTED_BACKEND", "H5 backend identity mismatch");
 		require(cfg.count("eq52") == 0, "Eq52 selector is forbidden in H5 config");
+		const bool h6_gauge_run = cfg.count("execution_phase") != 0;
+		double initial_gauge_yaw_deg = 0.0;
 		const std::map<std::string, std::pair<std::string, double> > bindings{
 			{"H5_PRIMARY_GO2_ALLAN_EQ61_FK10MM", {"GO2_CONTINUOUS_IMU_PAPER_NATIVE_CONTACT_EQ61", 0.010}},
 			{"H5_FK05MM_SENSITIVITY", {"GO2_CONTINUOUS_IMU_PAPER_NATIVE_CONTACT_EQ61", 0.005}},
 			{"H5_FK20MM_SENSITIVITY", {"GO2_CONTINUOUS_IMU_PAPER_NATIVE_CONTACT_EQ61", 0.020}},
 			{"H5_PAPER_TABLE1_PROCESS_REGRESSION_WITH_GO2_FK_PROXY", {"PAPER_TABLE1_FIVE_PROCESS_EQ61", 0.010}},
 		};
-		const auto binding = bindings.find(run_id);
-		require(binding != bindings.end(), "unregistered H5 run identity");
-		require(cfg.at("process_policy") == binding->second.first &&
-		        std::abs(sigma_fk - binding->second.second) < 1.0e-15,
-		        "H5 run-id/policy/sigma binding mismatch");
+		if (!h6_gauge_run) {
+			const auto binding = bindings.find(run_id);
+			require(binding != bindings.end(), "unregistered H5 run identity");
+			require(cfg.at("process_policy") == binding->second.first &&
+			        std::abs(sigma_fk - binding->second.second) < 1.0e-15,
+			        "H5 run-id/policy/sigma binding mismatch");
+			require(cfg.count("initial_gauge_yaw_deg") == 0,
+			        "H5 config must not inject an initial gauge");
+		} else {
+			require(cfg.at("execution_phase") == "H6_GAUGE_ENSEMBLE",
+			        "unknown post-H5 execution phase");
+			const std::map<std::string, double> h6_bindings{
+				{"H6_YAW_M150", -150.0}, {"H6_YAW_M100", -100.0},
+				{"H6_YAW_M050", -50.0}, {"H6_YAW_000_PARITY", 0.0},
+				{"H6_YAW_P050", 50.0}, {"H6_YAW_P100", 100.0},
+				{"H6_YAW_P150", 150.0},
+			};
+			const auto binding = h6_bindings.find(run_id);
+			require(binding != h6_bindings.end(), "unregistered H6 gauge-run identity");
+			initial_gauge_yaw_deg = std::stod(cfg.at("initial_gauge_yaw_deg"));
+			require(cfg.at("process_policy") ==
+			            "GO2_CONTINUOUS_IMU_PAPER_NATIVE_CONTACT_EQ61" &&
+			        std::abs(sigma_fk - 0.010) < 1.0e-15 &&
+			        std::abs(initial_gauge_yaw_deg - binding->second) < 1.0e-15,
+			        "H6 run-id/policy/sigma/yaw binding mismatch");
+		}
 
 		CacheHeader header{};
 		const auto rows = readCache(cache_path, header);
@@ -281,6 +304,13 @@ int main(int argc, char** argv) {
 		covariance.diagonal() << orientation_std * orientation_std, orientation_std * orientation_std,
 		                         orientation_std * orientation_std, 1, 1, 1, .01, .01, .01,
 		        .000025, .000025, .000025, .0025, .0025, .0025;
+		Matrix3 initial_gauge_rotation = Matrix3::Identity();
+		if (h6_gauge_run) {
+			const double yaw_rad = initial_gauge_yaw_deg * M_PI / 180.0;
+			// H6 defines alpha about e_g=g/||g||=[0,0,-1].  This preserves
+			// H3-H4 left multiplication while making the signed H6 axis explicit.
+			initial_gauge_rotation = expSO3(Vector3(0.0, 0.0, -yaw_rad));
+		}
 		ContinuousNoiseDensity go2;
 		go2.gyro_measurement_rad_per_s_per_sqrt_hz = 2.865130e-4;
 		go2.accelerometer_measurement_m_per_s2_per_sqrt_hz = 1.285395e-3;
@@ -295,6 +325,36 @@ int main(int argc, char** argv) {
 		}
 		HartleyInEkf filter(mean, covariance, policy);
 		filter.initializeContactsEq32WithIndependentPrior(measurements(rows.front(), rows.front().contact_mask, sigma_fk));
+		const StateMean zero_gauge_initialized_mean = filter.stateMean();
+		const Matrix zero_gauge_initialized_covariance = filter.stateCovariance();
+		// The zero-degree branch is intentionally a complete numerical no-op.
+		if (h6_gauge_run && initial_gauge_yaw_deg != 0.0) {
+			filter.applyInitialGaugeTransform(initial_gauge_rotation);
+		}
+		const StateMean initialized_mean = filter.stateMean();
+		double initial_contact_transform_residual = 0.0;
+		double initial_covariance_congruence_relative_fro_error = 0.0;
+		if (h6_gauge_run) {
+			const auto ids = filter.activeContactIdentities();
+			for (const int id : ids) {
+				initial_contact_transform_residual = std::max(
+				    initial_contact_transform_residual,
+				    (filter.stateMean().contacts.at(id) -
+				     initial_gauge_rotation *
+				         zero_gauge_initialized_mean.contacts.at(id))
+				        .norm());
+			}
+			Matrix transform = Matrix::Identity(filter.stateDimension(),
+			                                    filter.stateDimension());
+			for (int offset = 0; offset < filter.stateDimension() - 6; offset += 3) {
+				transform.block<3, 3>(offset, offset) = initial_gauge_rotation;
+			}
+			const Matrix expected =
+			    transform * zero_gauge_initialized_covariance * transform.transpose();
+			initial_covariance_congruence_relative_fro_error =
+			    (filter.stateCovariance() - expected).norm() /
+			    std::max(1.0, zero_gauge_initialized_covariance.norm());
+		}
 
 		std::ofstream nav(output / "NAV.csv"), diagonal(output / "COVARIANCE_DIAGONALS.csv"),
 		contact_state(output / "CONTACT_STATE.csv"), events(output / "CONTACT_EVENT_LEDGER.csv"),
@@ -398,12 +458,18 @@ int main(int argc, char** argv) {
 		std::ofstream comparison(output/"NATIVE_COMPARISON.csv");
 		enableOutputExceptions(comparison, "NATIVE_COMPARISON.csv");
 		csvHeader(comparison,"run_id,comparison_scope,reference_opened,trace_used,state_rows,final_position_norm_m,final_velocity_norm_m_per_s"); comparison<<run_id<<",NATIVE_ONLY,false,false,"<<rows.size()<<','<<filter.stateMean().position.norm()<<','<<filter.stateMean().velocity.norm()<<'\n';
-		const Vector3 init_residual = mean.rotation * (accel_mean-mean.accelerometer_bias) + gravity;
-		const double init_roll = std::atan2(mean.rotation(2,1), mean.rotation(2,2));
-		const double init_pitch = std::asin(-mean.rotation(2,0));
+		const Vector3 init_residual = initialized_mean.rotation *
+		    (accel_mean-initialized_mean.accelerometer_bias) + gravity;
+		const double init_roll = std::atan2(initialized_mean.rotation(2,1), initialized_mean.rotation(2,2));
+		const double init_pitch = std::asin(-initialized_mean.rotation(2,0));
+		const double init_yaw = std::atan2(initialized_mean.rotation(1,0), initialized_mean.rotation(0,0));
 		std::ofstream summary(output/"NATIVE_SUMMARY.json");
 		enableOutputExceptions(summary, "NATIVE_SUMMARY.json");
-		summary<<"{\n  \"run_id\": \""<<run_id<<"\",\n  \"backend_id\": \"HARTLEY_IJRR2020_REPORTED_BACKEND\",\n  \"process_policy\": \""<<cfg.at("process_policy")<<"\",\n  \"sigma_fk_m\": "<<sigma_fk<<",\n  \"process_noise_policy_tag\": \""<<stats.process_noise_policy_tag<<"\",\n  \"data_mode\": \"real_by2_raw\",\n  \"raw_source_sha256\": \""<<hex(header.raw_sha,32)<<"\",\n  \"prefix_sha256\": \""<<hex(header.prefix_sha,32)<<"\",\n  \"cache_sha256\": \""<<cfg.at("cache_sha256")<<"\",\n  \"config_hash\": \""<<cfg.at("config_hash")<<"\",\n  \"code_commit\": \""<<cfg.at("code_commit")<<"\",\n  \"task_start_head\": \""<<cfg.at("task_start_head")<<"\",\n  \"task_start_dirty_or_precommit\": "<<cfg.at("task_start_dirty_or_precommit")<<",\n  \"scoped_source_manifest_sha256\": \""<<cfg.at("scoped_source_manifest_sha256")<<"\",\n  \"native_executable_sha256\": \""<<cfg.at("native_executable_sha256")<<"\",\n  \"later_final_commit_mapping\": \""<<cfg.at("later_final_commit_mapping")<<"\",\n  \"state_order\": \"rotation_velocity_position_contacts_sorted_FL_FR_RL_RR_gyro_bias_accel_bias\",\n  \"state_rows\": "<<rows.size()<<",\n  \"propagation_calls\": "<<stats.propagation_calls<<",\n  \"eq61_calls\": "<<stats.eq61_calls<<",\n  \"eq52_calls\": 0,\n  \"joint_encoder_adapter_call_count\": 0,\n  \"survivor_update_calls\": "<<update_calls<<",\n  \"survivor_update_measurement_count\": "<<update_measurements<<",\n  \"transition_event_count_excluding_initial_add\": "<<transition_events<<",\n  \"lifecycle_add_count\": "<<stats.added_contacts<<",\n  \"lifecycle_remove_count\": "<<stats.removed_contacts<<",\n  \"initial_contact_count\": "<<int(__builtin_popcount(rows.front().contact_mask))<<",\n  \"initialization_window_rows\": "<<init_count<<",\n  \"initialization_window_half_open\": true,\n  \"initial_median_gyro_norm_rad_per_s\": "<<median(gyro_norms)<<",\n  \"initial_median_accel_norm_m_per_s2\": "<<median(accel_norms)<<",\n  \"initial_rotation_row_major\": ["<<mean.rotation(0,0)<<','<<mean.rotation(0,1)<<','<<mean.rotation(0,2)<<','<<mean.rotation(1,0)<<','<<mean.rotation(1,1)<<','<<mean.rotation(1,2)<<','<<mean.rotation(2,0)<<','<<mean.rotation(2,1)<<','<<mean.rotation(2,2)<<"],\n  \"initial_rpy_rad\": ["<<init_roll<<','<<init_pitch<<",0],\n  \"initial_gyro_mean\": ["<<gyro_mean.x()<<','<<gyro_mean.y()<<','<<gyro_mean.z()<<"],\n  \"initial_accel_mean\": ["<<accel_mean.x()<<','<<accel_mean.y()<<','<<accel_mean.z()<<"],\n  \"initial_gyro_bias\": ["<<gyro_mean.x()<<','<<gyro_mean.y()<<','<<gyro_mean.z()<<"],\n  \"initial_accel_bias\": ["<<mean.accelerometer_bias.x()<<','<<mean.accelerometer_bias.y()<<','<<mean.accelerometer_bias.z()<<"],\n  \"initial_acceleration_residual_world\": ["<<init_residual.x()<<','<<init_residual.y()<<','<<init_residual.z()<<"],\n  \"initial_acceleration_residual_norm\": "<<init_residual.norm()<<",\n  \"dt_count\": "<<(rows.size()-1)<<",\n  \"dt_min_seconds\": "<<dt_min<<",\n  \"dt_max_seconds\": "<<dt_max<<",\n  \"dt_mean_seconds\": "<<(dt_sum/(rows.size()-1))<<",\n  \"dropped_input_rows\": 0,\n  \"forbidden_value_decode_count\": 0,\n  \"reference_open_count\": 0,\n  \"trace_open_count\": 0,\n  \"nonfinite_state_count\": 0,\n  \"nonfinite_covariance_count\": 0,\n  \"nonfinite_output_count\": 0,\n  \"rotation_gate_failure_count\": 0,\n  \"state_dimension_failure_count\": 0,\n  \"covariance_checkpoint_count\": "<<checkpoint_number<<",\n  \"covariance_checkpoint_failure_count\": 0,\n  \"synthetic_data_used\": false,\n  \"semisynthetic_data_used\": false,\n  \"reference_opened\": false,\n  \"trace_used_online\": false,\n  \"receiver_imu_as_body_imu\": false,\n  \"final_v23_output_solver_input\": false,\n  \"LegSA_output_solver_input\": false,\n  \"per_case_tuning\": false,\n  \"output_only_correction\": false,\n  \"epoch_deleted_for_metric\": false,\n  \"old_runtime_input_count\": 0\n}\n";
+		summary<<"{\n  \"run_id\": \""<<run_id<<"\",\n  \"backend_id\": \"HARTLEY_IJRR2020_REPORTED_BACKEND\",\n  \"process_policy\": \""<<cfg.at("process_policy")<<"\",\n  \"sigma_fk_m\": "<<sigma_fk<<",\n  \"process_noise_policy_tag\": \""<<stats.process_noise_policy_tag<<"\",\n  \"data_mode\": \"real_by2_raw\",\n  \"raw_source_sha256\": \""<<hex(header.raw_sha,32)<<"\",\n  \"prefix_sha256\": \""<<hex(header.prefix_sha,32)<<"\",\n  \"cache_sha256\": \""<<cfg.at("cache_sha256")<<"\",\n  \"config_hash\": \""<<cfg.at("config_hash")<<"\",\n  \"code_commit\": \""<<cfg.at("code_commit")<<"\",\n  \"task_start_head\": \""<<cfg.at("task_start_head")<<"\",\n  \"task_start_dirty_or_precommit\": "<<cfg.at("task_start_dirty_or_precommit")<<",\n  \"scoped_source_manifest_sha256\": \""<<cfg.at("scoped_source_manifest_sha256")<<"\",\n  \"native_executable_sha256\": \""<<cfg.at("native_executable_sha256")<<"\",\n  \"later_final_commit_mapping\": \""<<cfg.at("later_final_commit_mapping")<<"\",\n  \"state_order\": \"rotation_velocity_position_contacts_sorted_FL_FR_RL_RR_gyro_bias_accel_bias\",\n  \"state_rows\": "<<rows.size()<<",\n  \"propagation_calls\": "<<stats.propagation_calls<<",\n  \"eq61_calls\": "<<stats.eq61_calls<<",\n  \"eq52_calls\": 0,\n  \"joint_encoder_adapter_call_count\": 0,\n  \"survivor_update_calls\": "<<update_calls<<",\n  \"survivor_update_measurement_count\": "<<update_measurements<<",\n  \"transition_event_count_excluding_initial_add\": "<<transition_events<<",\n  \"lifecycle_add_count\": "<<stats.added_contacts<<",\n  \"lifecycle_remove_count\": "<<stats.removed_contacts<<",\n  \"initial_contact_count\": "<<int(__builtin_popcount(rows.front().contact_mask))<<",\n  \"initialization_window_rows\": "<<init_count<<",\n  \"initialization_window_half_open\": true,\n  \"initial_median_gyro_norm_rad_per_s\": "<<median(gyro_norms)<<",\n  \"initial_median_accel_norm_m_per_s2\": "<<median(accel_norms)<<",\n  \"initial_rotation_row_major\": ["<<initialized_mean.rotation(0,0)<<','<<initialized_mean.rotation(0,1)<<','<<initialized_mean.rotation(0,2)<<','<<initialized_mean.rotation(1,0)<<','<<initialized_mean.rotation(1,1)<<','<<initialized_mean.rotation(1,2)<<','<<initialized_mean.rotation(2,0)<<','<<initialized_mean.rotation(2,1)<<','<<initialized_mean.rotation(2,2)<<"],\n  \"initial_rpy_rad\": ["<<init_roll<<','<<init_pitch<<','<<(h6_gauge_run ? init_yaw : 0.0)<<"],\n  \"initial_gyro_mean\": ["<<gyro_mean.x()<<','<<gyro_mean.y()<<','<<gyro_mean.z()<<"],\n  \"initial_accel_mean\": ["<<accel_mean.x()<<','<<accel_mean.y()<<','<<accel_mean.z()<<"],\n  \"initial_gyro_bias\": ["<<gyro_mean.x()<<','<<gyro_mean.y()<<','<<gyro_mean.z()<<"],\n  \"initial_accel_bias\": ["<<initialized_mean.accelerometer_bias.x()<<','<<initialized_mean.accelerometer_bias.y()<<','<<initialized_mean.accelerometer_bias.z()<<"],\n  \"initial_acceleration_residual_world\": ["<<init_residual.x()<<','<<init_residual.y()<<','<<init_residual.z()<<"],\n  \"initial_acceleration_residual_norm\": "<<init_residual.norm()<<",\n  \"dt_count\": "<<(rows.size()-1)<<",\n  \"dt_min_seconds\": "<<dt_min<<",\n  \"dt_max_seconds\": "<<dt_max<<",\n  \"dt_mean_seconds\": "<<(dt_sum/(rows.size()-1))<<",\n  \"dropped_input_rows\": 0,\n  \"forbidden_value_decode_count\": 0,\n  \"reference_open_count\": 0,\n  \"trace_open_count\": 0,\n  \"nonfinite_state_count\": 0,\n  \"nonfinite_covariance_count\": 0,\n  \"nonfinite_output_count\": 0,\n  \"rotation_gate_failure_count\": 0,\n  \"state_dimension_failure_count\": 0,\n  \"covariance_checkpoint_count\": "<<checkpoint_number<<",\n  \"covariance_checkpoint_failure_count\": 0,\n  \"synthetic_data_used\": false,\n  \"semisynthetic_data_used\": false,\n  \"reference_opened\": false,\n  \"trace_used_online\": false,\n  \"receiver_imu_as_body_imu\": false,\n  \"final_v23_output_solver_input\": false,\n  \"LegSA_output_solver_input\": false,\n  \"per_case_tuning\": false,\n  \"output_only_correction\": false,\n  \"epoch_deleted_for_metric\": false,\n  \"old_runtime_input_count\": 0";
+		if (h6_gauge_run) {
+			summary<<",\n  \"execution_phase\": \"H6_GAUGE_ENSEMBLE\",\n  \"initial_gauge_yaw_deg\": "<<initial_gauge_yaw_deg<<",\n  \"initial_gauge_left_multiplication\": true,\n  \"initial_gauge_world_axis\": \"NORMALIZED_WORLD_GRAVITY_NEGATIVE_Z\",\n  \"expected_native_euler_yaw_offset_deg\": "<<-initial_gauge_yaw_deg<<",\n  \"initial_velocity_general_rule_applied\": true,\n  \"initial_position_general_rule_applied\": true,\n  \"initial_contact_general_rule_applied\": true,\n  \"initial_bias_blocks_unchanged\": true,\n  \"initial_covariance_congruence_rule_applied\": true,\n  \"zero_degree_explicit_numerical_noop\": "<<(initial_gauge_yaw_deg == 0.0 ? "true" : "false")<<",\n  \"initial_contact_transform_residual\": "<<initial_contact_transform_residual<<",\n  \"initial_covariance_congruence_relative_fro_error\": "<<initial_covariance_congruence_relative_fro_error;
+		}
+		summary<<"\n}\n";
 		finishOutput(nav); finishOutput(diagonal); finishOutput(contact_state);
 		finishOutput(events); finishOutput(innovations); finishOutput(nis);
 		finishOutput(checkpoint_index); finishOutput(execution_ledger);
