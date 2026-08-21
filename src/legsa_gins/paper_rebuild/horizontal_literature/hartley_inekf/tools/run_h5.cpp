@@ -41,9 +41,19 @@ struct CacheRecord {
 	int64_t timestamp_ns; double values[22]; uint8_t contact_mask; uint8_t add_mask;
 	uint8_t remove_mask; uint8_t reserved; unsigned char padding[4];
 };
+struct H6RContactHeader {
+	char magic[16]; uint32_t version; uint32_t header_size; uint32_t record_size;
+	uint64_t record_count; int32_t leg_ids[4]; unsigned char padding[12];
+};
+struct H6RContactRecord {
+	int64_t timestamp_ns; int64_t row_index; uint8_t active[4];
+	unsigned char padding[4]; double contact_xyz[12];
+};
 #pragma pack(pop)
 static_assert(sizeof(CacheHeader) == kHeaderBytes, "cache header ABI");
 static_assert(sizeof(CacheRecord) == kRecordBytes, "cache record ABI");
+static_assert(sizeof(H6RContactHeader) == 64, "H6R contact header ABI");
+static_assert(sizeof(H6RContactRecord) == 120, "H6R contact record ABI");
 
 void require(bool condition, const std::string& message) {
 	if (!condition) throw std::runtime_error(message);
@@ -240,6 +250,11 @@ int main(int argc, char** argv) {
 		require(cfg.at("backend_id") == "HARTLEY_IJRR2020_REPORTED_BACKEND", "H5 backend identity mismatch");
 		require(cfg.count("eq52") == 0, "Eq52 selector is forbidden in H5 config");
 		const bool h6_gauge_run = cfg.count("execution_phase") != 0;
+		const bool h6r_full_precision = cfg.count("evidence_serialization") != 0;
+		if (h6r_full_precision) {
+			require(cfg.at("evidence_serialization") == "H6R_FULL_PRECISION_CONTACT_V1",
+			        "unknown evidence serialization mode");
+		}
 		double initial_gauge_yaw_deg = 0.0;
 		const std::map<std::string, std::pair<std::string, double> > bindings{
 			{"H5_PRIMARY_GO2_ALLAN_EQ61_FK10MM", {"GO2_CONTINUOUS_IMU_PAPER_NATIVE_CONTACT_EQ61", 0.010}},
@@ -256,13 +271,17 @@ int main(int argc, char** argv) {
 			require(cfg.count("initial_gauge_yaw_deg") == 0,
 			        "H5 config must not inject an initial gauge");
 		} else {
-			require(cfg.at("execution_phase") == "H6_GAUGE_ENSEMBLE",
+			require(cfg.at("execution_phase") == "H6_GAUGE_ENSEMBLE" ||
+			        cfg.at("execution_phase") == "H6R_FULL_PRECISION_CONTACT_RECOVERY",
 			        "unknown post-H5 execution phase");
 			const std::map<std::string, double> h6_bindings{
 				{"H6_YAW_M150", -150.0}, {"H6_YAW_M100", -100.0},
 				{"H6_YAW_M050", -50.0}, {"H6_YAW_000_PARITY", 0.0},
 				{"H6_YAW_P050", 50.0}, {"H6_YAW_P100", 100.0},
-				{"H6_YAW_P150", 150.0},
+				{"H6_YAW_P150", 150.0}, {"H6R_YAW_M150", -150.0},
+				{"H6R_YAW_M100", -100.0}, {"H6R_YAW_M050", -50.0},
+				{"H6R_YAW_000", 0.0}, {"H6R_YAW_P050", 50.0},
+				{"H6R_YAW_P100", 100.0}, {"H6R_YAW_P150", 150.0},
 			};
 			const auto binding = h6_bindings.find(run_id);
 			require(binding != h6_bindings.end(), "unregistered H6 gauge-run identity");
@@ -273,6 +292,10 @@ int main(int argc, char** argv) {
 			        std::abs(initial_gauge_yaw_deg - binding->second) < 1.0e-15,
 			        "H6 run-id/policy/sigma/yaw binding mismatch");
 		}
+		require(h6r_full_precision ==
+		            (h6_gauge_run && cfg.at("execution_phase") ==
+		                                 "H6R_FULL_PRECISION_CONTACT_RECOVERY"),
+		        "H6R evidence serialization and execution phase must be selected together");
 
 		CacheHeader header{};
 		const auto rows = readCache(cache_path, header);
@@ -362,6 +385,18 @@ int main(int argc, char** argv) {
 		checkpoint_index(output / "COVARIANCE_CHECKPOINT_INDEX.csv"),
 		execution_ledger(output / "EXECUTION_LEDGER.csv"),
 		full_covariance(output / "COVARIANCE_CHECKPOINTS.bin", std::ios::binary);
+		std::ofstream full_precision_contact;
+		if (h6r_full_precision) {
+			full_precision_contact.open(output / "CONTACT_STATE_FLOAT64.raw", std::ios::binary);
+			enableOutputExceptions(full_precision_contact, "CONTACT_STATE_FLOAT64.raw");
+			H6RContactHeader contact_header{};
+			std::copy_n("LEGS_H6R_F64", 12, contact_header.magic);
+			contact_header.version = 1; contact_header.header_size = sizeof(H6RContactHeader);
+			contact_header.record_size = sizeof(H6RContactRecord);
+			contact_header.record_count = rows.size();
+			for (int leg = 0; leg < 4; ++leg) contact_header.leg_ids[leg] = leg;
+			full_precision_contact.write(reinterpret_cast<const char*>(&contact_header), sizeof(contact_header));
+		}
 		enableOutputExceptions(nav, "NAV.csv");
 		enableOutputExceptions(diagonal, "COVARIANCE_DIAGONALS.csv");
 		enableOutputExceptions(contact_state, "CONTACT_STATE.csv");
@@ -439,6 +474,20 @@ int main(int argc, char** argv) {
 			Vector yaw=Vector::Zero(P.rows()); yaw(2)=-1; diagonal << ',' << (yaw.transpose()*P*yaw)(0,0);
 			for(int axis=0; axis<3; ++axis) {Vector g=Vector::Zero(P.rows()); double n=std::sqrt(ids.size()+1.0); g(6+axis)=1/n; for(std::size_t k=0; k<ids.size(); ++k) g(9+3*k+axis)=1/n; diagonal<<','<<(g.transpose()*P*g)(0,0);} diagonal<<'\n';
 			for(int leg=0; leg<4; ++leg) { auto found=state.contacts.find(leg); contact_state<<rows[index].timestamp_ns<<','<<index<<','<<leg<<','<<kLegs[leg]<<','<<(found!=state.contacts.end()); if(found==state.contacts.end()) contact_state<<",,,\n"; else contact_state<<','<<found->second.x()<<','<<found->second.y()<<','<<found->second.z()<<'\n'; }
+			if (h6r_full_precision) {
+				H6RContactRecord record{};
+				record.timestamp_ns = rows[index].timestamp_ns;
+				record.row_index = static_cast<int64_t>(index);
+				const double nan = std::numeric_limits<double>::quiet_NaN();
+				std::fill_n(record.contact_xyz, 12, nan);
+				for (int leg = 0; leg < 4; ++leg) {
+					const auto found = state.contacts.find(leg);
+					record.active[leg] = found != state.contacts.end();
+					if (found != state.contacts.end()) for (int axis = 0; axis < 3; ++axis)
+						record.contact_xyz[3 * leg + axis] = found->second(axis);
+				}
+				full_precision_contact.write(reinterpret_cast<const char*>(&record), sizeof(record));
+			}
 			for(int leg=0; leg<4; ++leg) if((rows[index].add_mask|rows[index].remove_mask)&(1u<<leg)) events<<rows[index].timestamp_ns<<','<<index<<','<<leg<<','<<kLegs[leg]<<','<<((rows[index].add_mask&(1u<<leg))?"ADD":"REMOVE")<<','<<rows[index].values[6+leg]<<','<<int(rows[index].contact_mask)<<','<<int(rows[index].add_mask)<<','<<int(rows[index].remove_mask)<<'\n';
 			if(index && correction.innovation.size()) for(int k=0; k<correction.innovation.size()/3; ++k) innovations<<rows[index].timestamp_ns<<','<<index<<','<<survivor_ids[k]<<','<<kLegs[survivor_ids[k]]<<','<<correction.innovation(3*k)<<','<<correction.innovation(3*k+1)<<','<<correction.innovation(3*k+2)<<'\n';
 			nis<<rows[index].timestamp_ns<<','<<index<<','<<survivor_ids.size()<<','<<correction.nis<<','<<correction.factorization_ok<<'\n';
@@ -467,7 +516,8 @@ int main(int argc, char** argv) {
 		enableOutputExceptions(summary, "NATIVE_SUMMARY.json");
 		summary<<"{\n  \"run_id\": \""<<run_id<<"\",\n  \"backend_id\": \"HARTLEY_IJRR2020_REPORTED_BACKEND\",\n  \"process_policy\": \""<<cfg.at("process_policy")<<"\",\n  \"sigma_fk_m\": "<<sigma_fk<<",\n  \"process_noise_policy_tag\": \""<<stats.process_noise_policy_tag<<"\",\n  \"data_mode\": \"real_by2_raw\",\n  \"raw_source_sha256\": \""<<hex(header.raw_sha,32)<<"\",\n  \"prefix_sha256\": \""<<hex(header.prefix_sha,32)<<"\",\n  \"cache_sha256\": \""<<cfg.at("cache_sha256")<<"\",\n  \"config_hash\": \""<<cfg.at("config_hash")<<"\",\n  \"code_commit\": \""<<cfg.at("code_commit")<<"\",\n  \"task_start_head\": \""<<cfg.at("task_start_head")<<"\",\n  \"task_start_dirty_or_precommit\": "<<cfg.at("task_start_dirty_or_precommit")<<",\n  \"scoped_source_manifest_sha256\": \""<<cfg.at("scoped_source_manifest_sha256")<<"\",\n  \"native_executable_sha256\": \""<<cfg.at("native_executable_sha256")<<"\",\n  \"later_final_commit_mapping\": \""<<cfg.at("later_final_commit_mapping")<<"\",\n  \"state_order\": \"rotation_velocity_position_contacts_sorted_FL_FR_RL_RR_gyro_bias_accel_bias\",\n  \"state_rows\": "<<rows.size()<<",\n  \"propagation_calls\": "<<stats.propagation_calls<<",\n  \"eq61_calls\": "<<stats.eq61_calls<<",\n  \"eq52_calls\": 0,\n  \"joint_encoder_adapter_call_count\": 0,\n  \"survivor_update_calls\": "<<update_calls<<",\n  \"survivor_update_measurement_count\": "<<update_measurements<<",\n  \"transition_event_count_excluding_initial_add\": "<<transition_events<<",\n  \"lifecycle_add_count\": "<<stats.added_contacts<<",\n  \"lifecycle_remove_count\": "<<stats.removed_contacts<<",\n  \"initial_contact_count\": "<<int(__builtin_popcount(rows.front().contact_mask))<<",\n  \"initialization_window_rows\": "<<init_count<<",\n  \"initialization_window_half_open\": true,\n  \"initial_median_gyro_norm_rad_per_s\": "<<median(gyro_norms)<<",\n  \"initial_median_accel_norm_m_per_s2\": "<<median(accel_norms)<<",\n  \"initial_rotation_row_major\": ["<<initialized_mean.rotation(0,0)<<','<<initialized_mean.rotation(0,1)<<','<<initialized_mean.rotation(0,2)<<','<<initialized_mean.rotation(1,0)<<','<<initialized_mean.rotation(1,1)<<','<<initialized_mean.rotation(1,2)<<','<<initialized_mean.rotation(2,0)<<','<<initialized_mean.rotation(2,1)<<','<<initialized_mean.rotation(2,2)<<"],\n  \"initial_rpy_rad\": ["<<init_roll<<','<<init_pitch<<','<<(h6_gauge_run ? init_yaw : 0.0)<<"],\n  \"initial_gyro_mean\": ["<<gyro_mean.x()<<','<<gyro_mean.y()<<','<<gyro_mean.z()<<"],\n  \"initial_accel_mean\": ["<<accel_mean.x()<<','<<accel_mean.y()<<','<<accel_mean.z()<<"],\n  \"initial_gyro_bias\": ["<<gyro_mean.x()<<','<<gyro_mean.y()<<','<<gyro_mean.z()<<"],\n  \"initial_accel_bias\": ["<<initialized_mean.accelerometer_bias.x()<<','<<initialized_mean.accelerometer_bias.y()<<','<<initialized_mean.accelerometer_bias.z()<<"],\n  \"initial_acceleration_residual_world\": ["<<init_residual.x()<<','<<init_residual.y()<<','<<init_residual.z()<<"],\n  \"initial_acceleration_residual_norm\": "<<init_residual.norm()<<",\n  \"dt_count\": "<<(rows.size()-1)<<",\n  \"dt_min_seconds\": "<<dt_min<<",\n  \"dt_max_seconds\": "<<dt_max<<",\n  \"dt_mean_seconds\": "<<(dt_sum/(rows.size()-1))<<",\n  \"dropped_input_rows\": 0,\n  \"forbidden_value_decode_count\": 0,\n  \"reference_open_count\": 0,\n  \"trace_open_count\": 0,\n  \"nonfinite_state_count\": 0,\n  \"nonfinite_covariance_count\": 0,\n  \"nonfinite_output_count\": 0,\n  \"rotation_gate_failure_count\": 0,\n  \"state_dimension_failure_count\": 0,\n  \"covariance_checkpoint_count\": "<<checkpoint_number<<",\n  \"covariance_checkpoint_failure_count\": 0,\n  \"synthetic_data_used\": false,\n  \"semisynthetic_data_used\": false,\n  \"reference_opened\": false,\n  \"trace_used_online\": false,\n  \"receiver_imu_as_body_imu\": false,\n  \"final_v23_output_solver_input\": false,\n  \"LegSA_output_solver_input\": false,\n  \"per_case_tuning\": false,\n  \"output_only_correction\": false,\n  \"epoch_deleted_for_metric\": false,\n  \"old_runtime_input_count\": 0";
 		if (h6_gauge_run) {
-			summary<<",\n  \"execution_phase\": \"H6_GAUGE_ENSEMBLE\",\n  \"initial_gauge_yaw_deg\": "<<initial_gauge_yaw_deg<<",\n  \"initial_gauge_left_multiplication\": true,\n  \"initial_gauge_world_axis\": \"NORMALIZED_WORLD_GRAVITY_NEGATIVE_Z\",\n  \"expected_native_euler_yaw_offset_deg\": "<<-initial_gauge_yaw_deg<<",\n  \"initial_velocity_general_rule_applied\": true,\n  \"initial_position_general_rule_applied\": true,\n  \"initial_contact_general_rule_applied\": true,\n  \"initial_bias_blocks_unchanged\": true,\n  \"initial_covariance_congruence_rule_applied\": true,\n  \"zero_degree_explicit_numerical_noop\": "<<(initial_gauge_yaw_deg == 0.0 ? "true" : "false")<<",\n  \"initial_contact_transform_residual\": "<<initial_contact_transform_residual<<",\n  \"initial_covariance_congruence_relative_fro_error\": "<<initial_covariance_congruence_relative_fro_error;
+			summary<<",\n  \"execution_phase\": \""<<cfg.at("execution_phase")<<"\",\n  \"initial_gauge_yaw_deg\": "<<initial_gauge_yaw_deg<<",\n  \"initial_gauge_left_multiplication\": true,\n  \"initial_gauge_world_axis\": \"NORMALIZED_WORLD_GRAVITY_NEGATIVE_Z\",\n  \"expected_native_euler_yaw_offset_deg\": "<<-initial_gauge_yaw_deg<<",\n  \"initial_velocity_general_rule_applied\": true,\n  \"initial_position_general_rule_applied\": true,\n  \"initial_contact_general_rule_applied\": true,\n  \"initial_bias_blocks_unchanged\": true,\n  \"initial_covariance_congruence_rule_applied\": true,\n  \"zero_degree_explicit_numerical_noop\": "<<(initial_gauge_yaw_deg == 0.0 ? "true" : "false")<<",\n  \"initial_contact_transform_residual\": "<<initial_contact_transform_residual<<",\n  \"initial_covariance_congruence_relative_fro_error\": "<<initial_covariance_congruence_relative_fro_error;
+			if (h6r_full_precision) summary<<",\n  \"evidence_serialization\": \"H6R_FULL_PRECISION_CONTACT_V1\"";
 		}
 		summary<<"\n}\n";
 		finishOutput(nav); finishOutput(diagonal); finishOutput(contact_state);
@@ -475,6 +525,7 @@ int main(int argc, char** argv) {
 		finishOutput(checkpoint_index); finishOutput(execution_ledger);
 		finishOutput(full_covariance); finishOutput(runtime); finishOutput(comparison);
 		finishOutput(summary);
+		if (h6r_full_precision) finishOutput(full_precision_contact);
 		std::cout << "PASS_HARTLEY_H5_NATIVE run_id=" << run_id << " rows=" << rows.size() << '\n';
 		return 0;
 	} catch(const std::exception& error) { std::cerr<<"FAIL_HARTLEY_H5_NATIVE error="<<error.what()<<'\n'; return 1; }

@@ -1,0 +1,172 @@
+schema_version: hartley.h6r.execution.v1
+contract_id: LSE01_H6R_FULL_PRECISION_CONTACT_RECOVERY
+contract_status: FROZEN_BEFORE_H6R_EXECUTION
+task_start_head: fbf771b3a43afcc11bc85596efc422a0cd7b9046
+method_id: LSE01_HARTLEY_CONTACT_AIDED_INEKF
+backend_id: HARTLEY_IJRR2020_REPORTED_BACKEND
+process_profile: GO2_IMU_ALLAN_90MIN_RECOVERED_V1
+sigma_fk_m: 0.010
+path_roles:
+  external_stage: HARTLEY_LSE01_STAGE
+  h5_anchor: H5_PRIMARY
+  original_h6_scratch: ORIGINAL_H6_SCRATCH
+  h6r_scratch: H6R_LOCAL_EXT4_SCRATCH
+  tracked_absolute_paths_allowed: false
+
+gate_state_machine:
+  order:
+    - PREPARE_AND_FORENSIC_PASS
+    - ZERO_DEGREE_PARITY_PASS
+    - SIX_NONZERO_MEMBER_PARITY_PASS
+    - OLD_FORMAT_BLOCKER_REPRODUCTION_FREEZE
+    - FULL_PRECISION_CONTACT_PASS
+    - COMPLETE_GAUGE_EQUIVALENCE_PASS
+    - FROZEN_WINDOW_REUSE_PASS
+    - IDEAL_AND_BIAS_OBSERVABILITY_PASS
+    - TOPOLOGY_NIS_AND_COVARIANCE_PASS
+    - FINALIZED_PASS
+    - EXCLUSIVE_PUBLICATION_PARITY
+  public_command_bypass_allowed: false
+  raw_failure_evidence_deleted_on_failure: false
+  later_gate_after_failure_allowed: false
+  contact_npz_open_before_old_format_freeze_allowed: false
+
+formal_code_provenance:
+  task_start_dirty_or_precommit: true
+  task_start_untracked_files_are_unrelated_and_preserved: true
+  task_start_must_be_ancestor: true
+  all_scoped_files_must_equal_HEAD_blobs: true
+  staged_or_unstaged_scoped_change_allowed: false
+  allowed_untracked_files:
+    - scripts/paper_rebuild/run_canonical541_offline_eval_aggregate.py
+    - src/legsa_gins/paper_rebuild/canonical541/offline_eval_aggregate.py
+  execution_code_committed: REQUIRED_TRUE
+
+input_identity:
+  data_mode: real_by2_raw
+  dataset_id: REAL_BY2_COMPLETE_RECORD_PREFIX_63277
+  raw_sha256: 95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278
+  complete_prefix_sha256: 03cd96cd65d7f5af30f6a0c78d37f07ae4d32c65e78531807db7192454dff097
+  provider_cache_sha256: c169e26d66f35fe200bb17a695353cd2d751482df1cd97996a7a8afff8662065
+  contact_event_ledger_sha256: 8e80cde9b90ade49753d8fd97e554af3c032c664d1d336f663838cbb68204358
+  state_rows: 63277
+
+original_h6:
+  status: BLOCKED_LSE01_H6_GAUGE_EQUIVARIANCE_FAILURE
+  commit: fbf771b3a43afcc11bc85596efc422a0cd7b9046
+  immutable: true
+  outputs_overwritten_or_deleted: false
+  tolerance_registry_sha256: 2c8ea39f828b9e3ef7433d6f2c7e01b407a927e0603612a3d7a606a596e53395
+  contact_position_tolerance_m: 0.0005
+  tolerance_changed: false
+
+evidence_only_change:
+  evidence_serialization: H6R_FULL_PRECISION_CONTACT_V1
+  old_serializer: STD_OSTREAM_DEFAULTFLOAT_PRECISION_6_SIGNIFICANT_DIGITS
+  old_serializer_compatibility_bytes_preserved: true
+  authoritative_contact_format: CONTACT_STATE_FLOAT64.npz
+  forbidden_changes:
+    - propagation_equations
+    - measurement_equations
+    - process_or_measurement_noise
+    - initialization
+    - contact_detector_or_lifecycle
+    - gauge_transform
+    - covariance_update
+    - numerical_tolerances
+    - input_provider
+
+full_precision_schema:
+  timestamp_ns: int64[63277]
+  row_index: int64[63277]
+  active_mask: bool[63277,4]
+  contact_xyz: float64[63277,4,3]
+  inactive_entries: NaN
+  leg_ids: int32[4]
+  leg_names: [FL, FR, RL, RR]
+
+replay:
+  initial_yaw_degrees: [-150, -100, -50, 0, 50, 100, 150]
+  strictly_chronological_per_member: true
+  numerical_library_threads_per_member: 1
+  zero_member_first: true
+  maximum_independent_nonzero_processes: 6
+  only_intended_difference: INITIAL_GLOBAL_YAW_GAUGE
+
+old_format_reproduction:
+  comparison_order: FREEZE_BEFORE_OPENING_FULL_PRECISION_NPZ
+  tolerance_m: 2.0e-15
+  tolerance_role: IEEE754_REPLAY_IDENTITY_ONLY_NOT_SCIENTIFIC_ACCEPTANCE
+  frozen_maxima_m:
+    H6R_YAW_M150: 0.000528077325202676
+    H6R_YAW_M100: 0.000923046274946653
+    H6R_YAW_M050: 0.000559717674079685
+    H6R_YAW_P050: 0.000541568944548006
+    H6R_YAW_P100: 0.000814567299539196
+    H6R_YAW_P150: 0.000555922436068516
+  changes_scientific_tolerance: false
+
+full_precision_contact_gate:
+  comparator_input: CONTACT_STATE_FLOAT64.npz
+  every_epoch: true
+  every_matching_active_leg: true
+  every_coordinate: true
+  acceptance_uses_maximum_not_percentile: true
+  tolerance_m: 0.0005
+
+observability:
+  selection_recomputed: false
+  source_selection_csv_sha256: 8c7f82f8df888833b088308c5e82798d70b4559ab76184b3d0c7d80912274578
+  source_selection_freeze_sha256: 34640a4f558ba574d4073254529d1b20ec7b2e32a9d8e1e99722bd61d5320e9b
+  source_segment_count: 3358
+  selected_windows: [WIN000, WIN001, WIN002, WIN003, WIN004]
+  svd_before_original_selection_freeze: false
+  ideal_expected_gauge_dimension: 4
+  ideal_gauge: [gravity_axis_rotation, translation_x, translation_y, translation_z]
+  tolerance_multipliers: [0.1, 1.0, 10.0]
+  principal_angles_per_model_window_tolerance: 4
+  principal_angle_output: OBSERVABILITY_PRINCIPAL_ANGLES_R1.csv
+  transient_failure_evidence_retained: true
+  compat_temp_deleted_only_after_observability_success: true
+  one_contact_eligible_window: UNAVAILABLE
+  three_contact_eligible_window: UNAVAILABLE
+  additional_bias_augmented_small_singular_values_are_structural_gauges: false
+
+nis:
+  groups: [active_contact_count, exact_active_contact_identity_set, initial_static_four_contact, dynamic_four_contact]
+  zero_contact_epochs: PROPAGATION_ONLY_EXCLUDED_FROM_CHI_SQUARE
+  variable_degrees_of_freedom: true
+  sigma_fk_tuned: false
+  low_nis_interpretation: CONSERVATIVE_AND_OR_CORRELATED_PROXY_STATISTICS_NOT_ACCURACY
+
+storage:
+  execution_filesystem: LINUX_LOCAL_EXT4_SCRATCH
+  external_health_query_read_only: true
+  repair_authorized: false
+  publication: EXCLUSIVE_CREATE_WITH_HASH_PARITY
+  cleanup_authority: SUPERVISOR_ONLY_AFTER_FINAL_PROOF
+  worker_deletes_original_h6_scratch: false
+  retain_h6r_scratch_while_external_storage_unhealthy: true
+
+forbidden_access_and_execution:
+  reference_open_count: 0
+  trace_open_count: 0
+  GNSS_input_count: 0
+  Go2_onboard_pose_or_yaw_input_count: 0
+  LegSA_output_input_count: 0
+  EXT_output_input_count: 0
+  absolute_yaw_RMSE_computed: false
+  absolute_position_RMSE_computed: false
+  relative_pose_error_computed: false
+  h7_executed: false
+  ext06_executed: false
+
+terminal_statuses:
+  pass: PASS_LSE01_H6R_REAL_DATA_GAUGE_AND_OBSERVABILITY_CONFIRMED
+  blockers:
+    - BLOCKED_LSE01_H6R_ZERO_DEGREE_PARITY_FAILURE
+    - BLOCKED_LSE01_H6R_OLD_FORMAT_BLOCKER_NOT_REPRODUCED
+    - BLOCKED_LSE01_H6R_FULL_PRECISION_CONTACT_FAILURE
+    - BLOCKED_LSE01_H6R_IDEAL_NULLSPACE_FAILURE
+    - BLOCKED_LSE01_H6R_KNOWN_GAUGE_FAILURE
+    - BLOCKED_LSE01_H6R_STORAGE_UNSAFE_AND_NO_LOCAL_SCRATCH
