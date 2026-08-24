@@ -1,0 +1,16 @@
+schema_version: lc02.error_sign.v1
+position_error: "nominal_INS_position - true_position"
+velocity_error: "nominal_INS_velocity - true_velocity"
+attitude_error: "left navigation-frame small angle; C_true=(I+[phi x])C_nominal"
+error_state_innovation: "nu_k = Z_k - H_k X_k^-; Z_k itself is predicted antenna position minus observed GNSS position"
+paper_position_measurement: "Z_k = r_INS_predicted_antenna^n - r_GNSS_observed^n"
+feedback:
+  position: "nominal_position <- nominal_position - delta_position"
+  velocity: "nominal_velocity <- nominal_velocity - delta_velocity"
+  attitude: "C_b_n <- Exp(phi) C_b_n"
+  gyro_bias: "b_g <- b_g + delta_b_g"
+  accel_bias: "b_a <- b_a + delta_b_a"
+  gyro_scale: "s_g <- s_g + delta_s_g"
+  accel_scale: "s_a <- s_a + delta_s_a"
+provenance_class: CITED_SOURCE
+sign_selection_by_rmse: false

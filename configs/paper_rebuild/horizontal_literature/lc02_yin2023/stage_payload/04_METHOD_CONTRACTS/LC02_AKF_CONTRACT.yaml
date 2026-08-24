@@ -1,0 +1,24 @@
+schema_version: lc02.akf.v1
+branch_id: YIN2023_AKF
+residual: "V_k = H_k X_k^- - Z_k"
+adaptive_statistic: "Delta_X_tilde = sqrt((V_k^T V_k)/tr(P_Vk))"
+paper_P_Vk: "Phi_(k-1) P_(k-1)^+ Phi_(k-1)^T + Q_k"
+threshold_k: 1.0
+alpha:
+  when_abs_stat_le_k: 1.0
+  when_abs_stat_gt_k: "k/abs(Delta_X_tilde)"
+gain: "K_ak = (P_k^-/alpha) H^T [H(P_k^-/alpha)H^T + R_k]^-1"
+state_update: "X_ak = X_k^- + K_ak(Z_k-HX_k^-)"
+covariance_update: "P_ak = (1/alpha)(I-K_ak H)P_k^-"
+measurement_R_boundary:
+  embedded_in_RAEKF: "improved PDOP^2 Q r^2"
+  embedded_provenance: PAPER_DIRECT
+  separately_reported_AKF_baseline: null
+  separately_reported_provenance: CURRENTLY_UNKNOWN
+  future_common_R_choice_provenance: PAPER_DERIVED
+dimensional_caveat:
+  status: PAPER_DIRECT_BUT_DIMENSIONALLY_UNCLEAR
+  detail: "V^T V has measurement-squared units while tr(P_Vk), as printed, is state covariance; the paper does not print an H projection or normalization resolving the mismatch."
+  implementation_policy: "Do not silently repair; any projection/normalization is PAPER_DERIVED_POLICY_BASELINE."
+provenance_class: PAPER_DIRECT
+reproduction_level: FAITHFUL_MODULE_REPRODUCTION

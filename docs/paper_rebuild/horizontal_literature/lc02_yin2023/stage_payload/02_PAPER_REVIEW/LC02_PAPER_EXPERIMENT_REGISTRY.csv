@@ -1,0 +1,7 @@
+experiment_id,pages,input_and_setup,comparison,role_in_lc02,provenance_class
+R_SELECTION,8-10,"single-antenna NovAtel OEM718D 5 Hz; self-developed POS 100 Hz; SPAN-LCI 200 Hz; 28 Apr 2022 about 30 min","EKF plus seven R forms; selects a=2 b=1","parameter-source evidence only; paper performance not imported",PAPER_DIRECT
+VEHICLE_1,10-13,"land vehicle; route locations marked in Figure 6","EKF/AKF/RKF/RAKF position velocity attitude","paper claim boundary only",PAPER_DIRECT
+SATELLITE_SYSTEM,13-15,"single GPS versus GPS+GLONASS+BDS","RAKF satellite count and position errors","paper claim boundary only",PAPER_DIRECT
+VEHICLE_2,15-17,"second land route","EKF/AKF/RKF/RAKF position velocity attitude","paper claim boundary only",PAPER_DIRECT
+DISTURBANCE_1S,17-19,"one-second anomalous perturbation to GNSS elevation data","four branches","paper robustness claim only; no BY2 injection",PAPER_DIRECT
+DISTURBANCE_5S,19-21,"five successive seconds of anomalous GNSS-elevation perturbations","four branches","paper robustness claim only; no BY2 injection",PAPER_DIRECT

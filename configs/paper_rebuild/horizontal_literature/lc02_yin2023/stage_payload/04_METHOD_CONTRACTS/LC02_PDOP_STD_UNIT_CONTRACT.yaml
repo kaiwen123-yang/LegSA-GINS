@@ -1,0 +1,22 @@
+schema_version: lc02.pdop_std_units.v1
+PDOP:
+  source_message: UBX-NAV-PVT
+  raw_scale: 0.01
+  units: dimensionless
+  valid_rule: "finite and >0"
+STD:
+  source_message: UBX-NAV-COV
+  covariance_frame: NED
+  covariance_units: m2
+  std_construction: "sqrt of NN, EE, DD diagonal"
+  std_units: m
+  require_posCovValid: true
+  require_symmetric_PSD: true
+Q_accuracy:
+  definition: "sqrt(trace(C_pos,NED))"
+  units: m
+  role: "3D accuracy used with fix/solution class to select Table 1 Q"
+  provenance_class: BY2_PHYSICAL_INSTANTIATION
+missing_invalid_policy: reject_epoch_fail_closed
+no_silent_hAcc_duplication: true
+velocity_covariance_used_online: false

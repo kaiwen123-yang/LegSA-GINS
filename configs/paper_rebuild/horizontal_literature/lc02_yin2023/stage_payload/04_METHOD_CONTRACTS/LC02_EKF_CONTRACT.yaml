@@ -1,0 +1,22 @@
+schema_version: lc02.ekf.v1
+branch_id: YIN2023_EKF
+prediction:
+  mean: "X_k^- = Phi_(k-1) X_(k-1)^+"
+  covariance: "P_k^- = Phi P_(k-1)^+ Phi^T + Q_d"
+innovation: "nu_k = Z_k - H_k X_k^-"
+innovation_covariance: "S_k = H_k P_k^- H_k^T + R_k"
+gain: "K_k = P_k^- H_k^T S_k^-1"
+state_update: "X_k^+ = X_k^- + K_k nu_k"
+covariance_update: "P_k^+ = (I-K_k H_k)P_k^-; Joseph form is an algebraically equivalent numerical realization for the base EKF"
+measurement_R:
+  separately_reported_baseline_R: null
+  separately_reported_baseline_R_provenance: CURRENTLY_UNKNOWN
+  future_controlled_common_R: "R_k from LC02_IMPROVED_R_CONTRACT.yaml"
+  future_controlled_common_R_provenance: PAPER_DERIVED
+  note: "The paper directly assigns improved R to the proposed RAEKF chain, but does not uniquely state the standalone EKF baseline's R."
+process_Q: LC02_PROCESS_NOISE_CONTRACT.yaml
+feedback_reset: LC02_ERROR_STATE_SIGN_CONTRACT.yaml
+provenance:
+  base_recursion: CITED_SOURCE
+  measurement_model: PAPER_DIRECT
+reproduction_level: FAITHFUL_ALGORITHM_REPRODUCTION
