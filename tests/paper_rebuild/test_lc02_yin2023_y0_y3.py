@@ -30,6 +30,7 @@ EXPECTED_TOP = {
     "06_NON_DUPLICATION_AUDIT",
     "11_REPORT",
 }
+EXPECTED_AUGMENTED_TOP = EXPECTED_TOP | {"07_Y4A_REPRODUCIBILITY_CLOSURE"}
 
 
 def _stage() -> Path:
@@ -290,9 +291,15 @@ def test_generated_by2_input_audit_and_forbidden_counters() -> None:
 
 def test_exact_stage_layout_no_solver_or_C00_outputs_and_gates_false() -> None:
     stage = _stage()
-    assert {item.name for item in stage.iterdir()} == EXPECTED_TOP
     assert len(audit._required_stage_files()) == 47
-    assert {str(path.relative_to(stage)) for path in stage.rglob("*") if path.is_file()} == set(audit._required_stage_files())
+    actual_files = {str(path.relative_to(stage)) for path in stage.rglob("*") if path.is_file()}
+    base_files = set(audit._required_stage_files())
+    assert base_files.issubset(actual_files)
+    if actual_files == base_files:
+        assert {item.name for item in stage.iterdir()} == EXPECTED_TOP
+    else:
+        assert actual_files == base_files | set(audit._allowed_y4a_append_files())
+        assert {item.name for item in stage.iterdir()} == EXPECTED_AUGMENTED_TOP
     assert not any(path.is_symlink() or path.suffix.lower() == ".zip" for path in stage.rglob("*"))
     assert audit.validate_stage(stage) == []
     status = json.loads((stage / "11_REPORT/LC02_Y0_Y3_STATUS.json").read_text())
@@ -324,7 +331,12 @@ def test_existing_stage_replacement_is_explicit_and_exact() -> None:
     clean_root = Path(audit.load_local_paths(LOCAL_PATHS)["clean_root"])
     with pytest.raises(ValueError, match="explicit --replace-existing-audit-stage"):
         audit._prepare_exact_stage_target(stage, clean_root, replace_existing_audit_stage=False)
-    audit._prepare_exact_stage_target(stage, clean_root, replace_existing_audit_stage=True)
+    actual_files = {str(path.relative_to(stage)) for path in stage.rglob("*") if path.is_file()}
+    if actual_files == set(audit._required_stage_files()):
+        audit._prepare_exact_stage_target(stage, clean_root, replace_existing_audit_stage=True)
+    else:
+        with pytest.raises(ValueError, match="not the exact known 47-file audit layout"):
+            audit._prepare_exact_stage_target(stage, clean_root, replace_existing_audit_stage=True)
 
 
 def test_stage_structure_rejects_fifo_special_entry(tmp_path: Path) -> None:

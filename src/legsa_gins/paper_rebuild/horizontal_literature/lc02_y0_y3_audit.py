@@ -606,7 +606,65 @@ def _required_stage_files() -> frozenset[str]:
     })
 
 
-def _stage_structure_errors(stage: Path) -> list[str]:
+def _allowed_y4a_append_files() -> frozenset[str]:
+    """Exact append-only Y4A namespace; never valid for Y0--Y3 replacement."""
+
+    root = "07_Y4A_REPRODUCIBILITY_CLOSURE"
+    return frozenset(
+        {
+            f"{root}/00_SOURCE_REGISTRY/YIN2023_Y4A_SOURCE_REGISTRY.csv",
+            f"{root}/00_SOURCE_REGISTRY/YIN2023_SOURCE_ACCESS_LOG.md",
+            f"{root}/00_SOURCE_REGISTRY/YIN2023_Y0_Y3_IMMUTABILITY_BASELINE.sha256",
+            f"{root}/01_SYMBOL_RECONCILIATION/YIN2023_UNRESOLVED_SYMBOL_REGISTRY.csv",
+            f"{root}/01_SYMBOL_RECONCILIATION/YIN2023_LK_ZK_DECISION.json",
+            f"{root}/01_SYMBOL_RECONCILIATION/YIN2023_NOTATION_ERRATA_REGISTRY.md",
+            f"{root}/02_AKF_CLOSURE/YIN2023_AKF_SOURCE_MAP.csv",
+            f"{root}/02_AKF_CLOSURE/YIN2023_AKF_FINAL_CONTRACT.yaml",
+            f"{root}/02_AKF_CLOSURE/YIN2023_AKF_CLOSURE_DECISION.json",
+            f"{root}/03_RKF_CLOSURE/YIN2023_STANDARDIZED_RESIDUAL_SOURCE_MAP.csv",
+            f"{root}/03_RKF_CLOSURE/YIN2023_STANDARDIZED_RESIDUAL_CONTRACT.yaml",
+            f"{root}/03_RKF_CLOSURE/YIN2023_STANDARDIZED_RESIDUAL_DECISION.json",
+            f"{root}/03_RKF_CLOSURE/YIN2023_IGGIII_SOURCE_MAP.csv",
+            f"{root}/03_RKF_CLOSURE/YIN2023_IGGIII_EQUIVALENT_WEIGHT_CONTRACT.yaml",
+            f"{root}/03_RKF_CLOSURE/YIN2023_IGGIII_MATRIX_DECISION.json",
+            f"{root}/03_RKF_CLOSURE/YIN2023_ZERO_WEIGHT_POLICY_SOURCE_MAP.csv",
+            f"{root}/03_RKF_CLOSURE/YIN2023_ZERO_WEIGHT_POLICY_CONTRACT.yaml",
+            f"{root}/03_RKF_CLOSURE/YIN2023_ZERO_WEIGHT_POLICY_DECISION.json",
+            f"{root}/04_RAEKF_CLOSURE/YIN2023_RAEKF_FINAL_CONTRACT.yaml",
+            f"{root}/04_RAEKF_CLOSURE/YIN2023_RAEKF_FEEDBACK_RESET_DECISION.json",
+            f"{root}/04_RAEKF_CLOSURE/YIN2023_RAEKF_COVARIANCE_INTERPRETATION.md",
+            f"{root}/05_MATHEMATICAL_ORACLES/Y4A_LINEAR_ORACLE_RESULTS.csv",
+            f"{root}/05_MATHEMATICAL_ORACLES/Y4A_LIMIT_AND_EQUIVALENCE_PROOFS.md",
+            f"{root}/05_MATHEMATICAL_ORACLES/Y4A_ORACLE_SUMMARY.json",
+            f"{root}/06_ADMISSION_DECISION/YIN2023_FORMAL_ADMISSION_RUBRIC.yaml",
+            f"{root}/06_ADMISSION_DECISION/LC02_C00_MECHANISM_ACTIVATION_FORECAST.md",
+            f"{root}/06_ADMISSION_DECISION/Y4A_FORBIDDEN_ACCESS_AUDIT.json",
+            f"{root}/06_ADMISSION_DECISION/LC02_YIN2023_NO_GO_REASON.md",
+            f"{root}/06_ADMISSION_DECISION/LC02_NEXT_PAPER_SELECTION_REQUIREMENTS.md",
+            "11_REPORT/LC02_Y4A_REPRODUCIBILITY_CLOSURE_REPORT.md",
+            "11_REPORT/LC02_Y4A_STATUS.json",
+            "11_REPORT/LC02_FORMAL_ADMISSION_DECISION.md",
+        }
+    )
+
+
+def _allowed_y4a_pass_append_files() -> frozenset[str]:
+    """Outcome-A variant: exact Y4A namespace without the two no-go documents."""
+
+    no_go_only = {
+        "07_Y4A_REPRODUCIBILITY_CLOSURE/06_ADMISSION_DECISION/LC02_YIN2023_NO_GO_REASON.md",
+        "07_Y4A_REPRODUCIBILITY_CLOSURE/06_ADMISSION_DECISION/LC02_NEXT_PAPER_SELECTION_REQUIREMENTS.md",
+    }
+    return _allowed_y4a_append_files().difference(no_go_only)
+
+
+def _allowed_y4a_append_variants() -> tuple[frozenset[str], frozenset[str]]:
+    """Return the only two authorized append-only Y4A file sets."""
+
+    return (_allowed_y4a_pass_append_files(), _allowed_y4a_append_files())
+
+
+def _stage_structure_errors(stage: Path, *, allow_y4a_append: bool = False) -> list[str]:
     required = _required_stage_files()
     if not stage.exists():
         return ["stage does not exist"]
@@ -620,13 +678,22 @@ def _stage_structure_errors(stage: Path) -> list[str]:
         if not item.is_symlink() and not item.is_file() and not item.is_dir()
     )
     actual_files = {str(item.relative_to(stage)) for item in entries if item.is_file() and not item.is_symlink()}
-    for relative in sorted(required.difference(actual_files)):
+    expected = required
+    if allow_y4a_append and actual_files != required:
+        candidates = tuple(required | variant for variant in _allowed_y4a_append_variants())
+        expected = actual_files if actual_files in candidates else required | _allowed_y4a_append_files()
+    for relative in sorted(expected.difference(actual_files)):
         errors.append(f"missing {relative}")
-    for relative in sorted(actual_files.difference(required)):
+    for relative in sorted(actual_files.difference(expected)):
         errors.append(f"unexpected nested file {relative}")
-    if len(actual_files) != 47:
-        errors.append(f"stage file count is {len(actual_files)}, expected 47")
-    allowed_dirs = {str(Path(relative).parent) for relative in required}
+    if len(actual_files) != len(expected):
+        errors.append(f"stage file count is {len(actual_files)}, expected {len(expected)}")
+    allowed_dirs: set[str] = set()
+    for relative in expected:
+        parent = Path(relative).parent
+        while parent != Path("."):
+            allowed_dirs.add(str(parent))
+            parent = parent.parent
     actual_dirs = {str(item.relative_to(stage)) for item in entries if item.is_dir() and not item.is_symlink()}
     for relative in sorted(actual_dirs.difference(allowed_dirs)):
         errors.append(f"unexpected directory {relative}")
@@ -638,7 +705,7 @@ def _stage_structure_errors(stage: Path) -> list[str]:
 
 def validate_stage(stage: Path) -> list[str]:
     required = _required_stage_files()
-    errors = _stage_structure_errors(stage)
+    errors = _stage_structure_errors(stage, allow_y4a_append=True)
     if not stage.is_dir() or stage.is_symlink():
         return errors
     allowed_top_level = {
@@ -651,11 +718,22 @@ def validate_stage(stage: Path) -> list[str]:
         "06_NON_DUPLICATION_AUDIT",
         "11_REPORT",
     }
+    actual_files = {
+        str(path.relative_to(stage))
+        for path in stage.rglob("*")
+        if path.is_file() and not path.is_symlink()
+    }
+    if actual_files != required:
+        allowed_top_level.add("07_Y4A_REPRODUCIBILITY_CLOSURE")
     unexpected = sorted(item.name for item in stage.iterdir() if item.name not in allowed_top_level)
     errors.extend(f"unexpected top-level entry {name}" for name in unexpected)
     forbidden_names = {"NAV.csv", "EVAL_NAV.csv", "C00", "solver", "comparison_result", "trace"}
     for path in stage.rglob("*"):
-        if path.is_file() and any(token.lower() in path.name.lower() for token in forbidden_names):
+        relative = str(path.relative_to(stage))
+        is_declared_y4a_contract = any(
+            relative in variant for variant in _allowed_y4a_append_variants()
+        )
+        if path.is_file() and not is_declared_y4a_contract and any(token.lower() in path.name.lower() for token in forbidden_names):
             errors.append(f"forbidden runtime-like artifact {path.relative_to(stage)}")
         if not path.is_file():
             continue
