@@ -1,0 +1,7 @@
+input,label,interval,piecewise_membership,boundary_values,provenance,closure_status,limitation
+L_k1,small,"(-inf,5];(5,15);[15,inf)","1;(15-L)/10;0","mu(5)=1;mu(15)=0",PAPER_DIRECT,CLOSED_FROM_RENDERED_FIG4,"analytic equation not printed"
+L_k1,medium,"(-inf,5];(5,15);[15,25];(25,35);[35,inf)","0;(L-5)/10;1;(35-L)/10;0","mu(5)=0;mu(15)=1;mu(25)=1;mu(35)=0",PAPER_DIRECT,CLOSED_FROM_RENDERED_FIG4,"analytic equation not printed"
+L_k1,large,"(-inf,25];(25,35);[35,inf)","0;(L-25)/10;1","mu(25)=0;mu(35)=1",PAPER_DIRECT,CLOSED_FROM_RENDERED_FIG4,"analytic equation not printed"
+L_k2,small,"(-inf,5];(5,15);[15,inf)","1;(15-L)/10;0","mu(5)=1;mu(15)=0",PAPER_DIRECT,CLOSED_FROM_RENDERED_FIG4,"analytic equation not printed"
+L_k2,medium,"(-inf,5];(5,15];(15,25);[25,inf)","0;(L-5)/10;(25-L)/10;0","mu(5)=0;mu(15)=1;mu(25)=0",PAPER_DIRECT,CLOSED_FROM_RENDERED_FIG4,"the rising interval includes apex L=15 with membership exactly one; analytic equation not printed"
+L_k2,large,"(-inf,15];(15,25);[25,inf)","0;(L-15)/10;1","mu(15)=0;mu(25)=1",PAPER_DIRECT,CLOSED_FROM_RENDERED_FIG4,"analytic equation not printed"

@@ -1,0 +1,36 @@
+schema: lc02_chang2021.measurement.v1
+method_id: LC02_CHANG2021_FSTCKF
+paper_measurement:
+  dimension: 6
+  order: [delta_v_E, delta_v_N, delta_v_U, delta_L, delta_lambda, delta_h]
+  residual: "z = [delta_v_INS_g - delta_v_GNSS_g; delta_p_INS_g - delta_p_GNSS_g]"
+  H: "[0_(6x3), I_(6x6), 0_(6x6)]"
+  H_shape: [6, 15]
+  provenance: PAPER_DIRECT
+  printed_identity_gate: PASS
+physical_identity:
+  ins_nominal_point: CURRENTLY_UNKNOWN
+  gnss_solution_point: CURRENTLY_UNKNOWN
+  lever_arm: CURRENTLY_UNKNOWN
+  paper_position_units: [radian, radian, metre]
+  paper_velocity_units: [metre_per_second, metre_per_second, metre_per_second]
+  covariance_axis_and_unit_construction: CURRENTLY_UNKNOWN
+by2_candidate:
+  identity: GNSS1_PVT_PLUS_NAV_COV_SINGLE_RECEIVER_SOLUTION_STREAM
+  receiver_count: 1
+  position_and_velocity_used: true
+  pvt_frame: geodetic_position_plus_local_NED_velocity
+  nav_cov_frame: local_NED
+  ned_to_enu_vector_transform: "[[0,1,0],[1,0,0],[0,0,-1]]"
+  covariance_transform: "R_ENU = T_NED_to_ENU R_NED T_NED_to_ENU^T"
+  provenance: BY2_INSTANTIATION
+  availability: PASS
+  faithful_unit_instantiation: FAIL
+  limitation: "NAV-COV supplies metric local covariance, while the printed position state and H use latitude/longitude/height; the paper does not select a local-metre residual or the required curvature conversion."
+invalid_policy:
+  require_pvt_fix_ok: true
+  require_nav_cov_position_valid: true
+  require_nav_cov_velocity_valid: true
+  require_finite_psd_covariance: true
+  missing_or_invalid: REJECT_EPOCH
+  provenance: BY2_INSTANTIATION

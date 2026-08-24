@@ -1,0 +1,28 @@
+schema: lc02_chang2021.beta_to_state.v1
+paper_beta:
+  equation: 25
+  dimension: [6, 6]
+  identity: "diag(beta_k1 I3, beta_k2 I3)"
+  meaning: velocity-and-position measurement-space smoothing
+  provenance: PAPER_DIRECT
+paper_lambda:
+  equation: 15
+  count: 15
+  identity: "lambda_ki=max(1,sqrt(N_ii/M_ii)), i=1..n"
+  provenance: PAPER_DIRECT
+required_state_order:
+  - attitude_3
+  - velocity_ENU_3
+  - position_LLH_3
+  - gyro_error_3
+  - accelerometer_error_3
+mapping:
+  selected: null
+  provenance: CURRENTLY_UNKNOWN
+  gate: FAIL
+  candidate_policies_not_selected:
+    - "use the Moore-Penrose inverse H^T, which populates only the velocity/position subspace and leaves the nine unobserved state directions unpopulated"
+    - "use a different generalized/right inverse whose arbitrary nullspace terms can populate or cross-couple unobserved state directions"
+    - "apply velocity beta to velocity states, position beta to position states, and unit fading elsewhere"
+    - "group attitude and gyro errors with velocity, and position and accelerometer errors with position"
+claim_boundary: "The paper's beta matrix acts inside Eq. 12; it is not itself a printed 15-state a_i vector or Lambda mapping."

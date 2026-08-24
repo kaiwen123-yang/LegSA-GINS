@@ -1,0 +1,28 @@
+schema: lc02_chang2021.noise_and_initialization.v1
+paper_direct:
+  process_noise: "w_k ~ N(0,Q_k)"
+  measurement_noise: "v_k ~ N(0,R_k), independent of w_k"
+  innovation_history:
+    k_equals_zero: "E[e_0 e_0^T] = e_0 e_0^T"
+    k_ge_one: "E[e_k e_k^T] = (rho E[e_(k-1)e_(k-1)^T] + e_k e_k^T)/(1+rho)"
+    rho: 0.95
+  moving_average_window_N: 40
+paper_experiment_only:
+  GNSS_velocity_std_mps: 0.5
+  GNSS_position_std_m: 5.0
+  accelerometer_bias_ug: 100
+  accelerometer_random_walk_ug_std: 5
+  gyro_bias_deg_per_hour: 1
+  gyro_random_walk_deg_per_hour_std: 0.01
+currently_unknown:
+  - initial_state_mean
+  - initial_covariance
+  - continuous_noise_density
+  - process_noise_mapping
+  - Q_k_construction
+  - R_k_axis_specific_construction
+  - first_39_epoch_sliding_window_policy
+  - nonfinite_innovation_policy
+  - covariance_floor_or_regularization
+decision: INCOMPLETE
+gate: FAIL

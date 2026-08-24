@@ -1,0 +1,31 @@
+schema: lc02_chang2021.frame_sign_reset.v1
+paper:
+  body_frame_symbol: b
+  geographic_frame_symbol: g
+  geographic_velocity_order: [east, north, up]
+  geographic_position_order: [latitude, longitude, height]
+  attitude_error_relation: CURRENTLY_UNKNOWN
+  residual_sign: INS_MINUS_GNSS
+  state_feedback_sign: CURRENTLY_UNKNOWN
+  covariance_reset_jacobian: CURRENTLY_UNKNOWN
+  gnss_antenna_to_imu_lever_arm: CURRENTLY_UNKNOWN
+  physical_point_identity: CURRENTLY_UNKNOWN
+  provenance_by_field:
+    geographic_orders: PAPER_DIRECT
+    residual_sign: PAPER_DIRECT
+    attitude_error_relation: CURRENTLY_UNKNOWN
+    feedback_reset: CURRENTLY_UNKNOWN
+    physical_points_and_lever_arm: CURRENTLY_UNKNOWN
+by2_imu_instantation:
+  selected_source: BY2_GO2_BODY
+  raw_go2_frame: FLU
+  future_lc02_body_frame: FRD
+  maintained_mapping_order:
+    - "raw Go2 FLU -> diag(1,-1,-1) FRD"
+    - "active RzRyRx(-1 degree,0,0) installation correction in FRD"
+  maintained_code_provenance: src/legsa_gins/input_generation/imu_txt_builder.py
+  quaternion_rpy_used: false
+  onboard_position_velocity_yaw_used: false
+  provenance: BY2_INSTANTIATION
+decision: NOT_UNIQUELY_EXECUTABLE
+gate: FAIL
