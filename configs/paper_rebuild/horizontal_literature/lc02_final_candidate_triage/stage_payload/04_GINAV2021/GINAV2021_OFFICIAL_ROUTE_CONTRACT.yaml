@@ -1,0 +1,87 @@
+schema_version: 1
+candidate_id: LC02C_GINAV2021_OFFICIAL_SPP_INS_LC
+reproduction_level: EXACT_OFFICIAL_SOFTWARE_REPRODUCTION
+classification_labels:
+  - EXACT_OFFICIAL_SOFTWARE_REPRODUCTION
+  - STANDARD_LC_LITERATURE_BASELINE
+  - NOT_A_NOVEL_FILTER_METHOD
+official_identity:
+  repository: https://github.com/kaichen686/GINav
+  commit: bc6b3ab6c40db996a4fd8e8ca5b748fe21a23666
+  tree: 94940c5b72c6003f696f6ed3684ee5b10875e792
+  config: conf/LC/GINav_SPP_LC_CPT.ini
+  matlab_requirement: MATLAB_2016A_OR_NEWER
+core_policy:
+  official_core_unmodified: true
+  source_explicit_adapters_only: true
+  external_solution_import_interface_exists: false
+  invented_external_pvt_interface_forbidden: true
+system_input_route:
+  required_inputs:
+    - RINEX_OBSERVATION
+    - RINEX_NAVIGATION
+    - OFFICIAL_IMU_CSV
+  dispatch: src/main_func/gi_Loose.m
+  chain:
+    - gnss_solver
+    - gnss_ins_lc
+  system_level_raw_input_differs_from_external_pvt_input: true
+filter_contract:
+  state_dimension: 15
+  state_order:
+    - ATTITUDE_ERROR_3
+    - VELOCITY_ERROR_3
+    - POSITION_ERROR_3
+    - GYRO_BIAS_ERROR_3
+    - ACCELEROMETER_BIAS_ERROR_3
+  nominal_mechanization: src/ins/ins_mech.m
+  covariance_time_update: src/ins/ins_time_updata.m
+  transition_model: src/ins/update_trans_mat.m
+  initialization: src/ins/ins_init.m
+  measurement_update: src/gnss_ins_lc/gnss_ins_lc.m
+  filter_update: src/gnss_ins_lc/lc_filter.m
+  feedback: src/gnss_ins_lc/lc_feedback.m
+  position_and_velocity_measurement: true
+  lever_arm_position_and_velocity_correction: true
+  source_defined_spp_robust_path: true
+  robust_path_identity: IGG3_AFTER_GNSS_LOCK_COUNT_GREATER_THAN_10_WITH_C0_2_C1_5
+initialization_and_epoch_behavior:
+  alignment_velocity_source: TDCP
+  initial_attitude_source_semantics: CLOSED
+  initial_attitude_runtime_activation: NOT_EXECUTED_FUTURE_VALIDATION
+  tdcp_motion_condition_literal: dot(vn,vn)>3
+  tdcp_motion_condition_units: SQUARED_SPEED_M2_PER_S2
+  noninteger_observation_epoch_behavior: FILTERED_BY_OFFICIAL_PROCESSOR
+  time_and_noninteger_epoch_source_semantics: CLOSED
+  runtime_activation: NOT_EXECUTED_FUTURE_VALIDATION
+frames_and_adapters:
+  official_body_frame: RFU
+  active_go2_source_frame: FLU
+  go2_vector_adapter: '[R,F,U]=[-L,F,U] from FLU [F,L,U]'
+  active_solver_lever_frd_m:
+    - 0.03
+    - 0.03
+    - -0.30
+  ginav_lever_rfu_m:
+    - 0.03
+    - 0.03
+    - 0.30
+  lever_conversion: '[R,F,U]=[R,F,-D] from FRD [F,R,D] with equal first two locked components'
+by2_future_input_contract:
+  gnss_receiver: GNSS1_ONLY
+  gnss_adapter: HASH_LOCKED_GNSS1_RAW_OBSERVATION_AND_NAVIGATION_TO_RINEX_SOURCE_EXPLICIT
+  imu_adapter: HASH_LOCKED_GO2_BODY_GYRO_ACCEL_FLU_TO_OFFICIAL_RFU_CSV_SOURCE_EXPLICIT
+  forbidden_substitutions:
+    - GNSS1_STATUS_AS_EXTERNAL_PVT
+    - GNSS2
+    - DUAL_ANTENNA_YAW
+    - GO2_ORIENTATION_OR_PVT
+    - TRACE_REFERENCE_OR_ERROR
+sample_regression:
+  official_sample_available: true
+  executed: false
+claim_boundary:
+  static_source_contract_closed: true
+  implementation_authorized: false
+  execution_authorized: false
+  performance_evidence: false

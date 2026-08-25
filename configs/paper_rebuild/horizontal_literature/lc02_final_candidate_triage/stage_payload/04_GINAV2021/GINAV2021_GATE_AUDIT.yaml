@@ -1,0 +1,45 @@
+schema_version: 1
+candidate_id: LC02C_GINAV2021_OFFICIAL_SPP_INS_LC
+gates:
+  - gate: G1
+    result: PASS
+    evidence: DOI-identified 2021 paper and official BSD-2-Clause repository are source-closed at an exact commit and tree.
+  - gate: G2
+    result: PASS
+    evidence: Official documentation configuration and source provide SPP/INS loosely coupled mode with internal GNSS solution dispatch.
+  - gate: G3
+    result: PASS
+    evidence: One-receiver internal SPP position and velocity feeding a conventional 15-state ESKF is structurally distinct from LC01 two-receiver invariant rigid-vector filtering.
+  - gate: G4
+    result: PASS
+    evidence: Official source closes nominal state Earth model strapdown mechanization and frame conventions for the exact software route.
+  - gate: G5
+    result: PASS
+    evidence: Official config and ins_init ins_time_updata and update_trans_mat close noise units transition and covariance discretization.
+  - gate: G6
+    result: PASS
+    evidence: Official source closes position and velocity residuals covariances lever corrections validity branches and RFU physical-point convention; active FLU and lever provenance close source-explicit adapters.
+  - gate: G7
+    result: PASS
+    evidence: gnss_ins_lc lc_filter lc_feedback and udsol_lc close prediction update covariance feedback and solution lifecycle.
+  - gate: G8
+    result: PASS
+    evidence: The exact official SPP/INS config selects the source-defined robust path and official code uniquely supplies its IGG-3 thresholds branches and covariance inflation; no adaptive fading or H-infinity branch is invented.
+  - gate: G9
+    result: PASS
+    evidence: Official ins_align tdcp2vel ins_init filter and feedback sources close executable alignment initialization state injection and reset behavior.
+  - gate: G10
+    result: PASS
+    evidence: Hash-locked GNSS1 raw observation/navigation and Go2 body gyro/accelerometer can feed source-explicit RINEX and RFU CSV adapters; thresholds remain future validation obligations rather than performance gates.
+  - gate: G11
+    result: PASS
+    evidence: No trace reference error output historical metric or accuracy result completes any official equation policy sign threshold or selection.
+  - gate: G12
+    result: PASS
+    evidence: The pinned unmodified official system route qualifies as EXACT_OFFICIAL_SOFTWARE_REPRODUCTION and satisfies the exact-reproduction arm of G12.
+summary:
+  pass_count: 12
+  fail_count: 0
+  not_evaluated_source_unavailable_count: 0
+  all_pass_required: true
+decision: PASS_STATIC_SELECTION_GATE
