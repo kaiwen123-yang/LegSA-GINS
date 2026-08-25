@@ -18,11 +18,13 @@ from legsa_gins.paper_rebuild.horizontal_literature.ginav2021.constants import (
     TDCP_THRESHOLD_LITERAL,
 )
 from legsa_gins.paper_rebuild.horizontal_literature.ginav2021.matlab import (
+    MatlabRuntimeError,
     build_matlab_batch_command,
     parse_environment_probe,
     render_environment_probe,
     render_official_run_script,
     render_tdcp_probe_script,
+    validate_matlab_environment,
 )
 from legsa_gins.paper_rebuild.horizontal_literature.ginav2021.source import (
     AccessLedger,
@@ -143,6 +145,40 @@ def test_environment_harness_is_r2016a_function_file_and_tsv_parser(
     assert parsed["release"] == "R2016a"
     assert parsed["matlab_license_available"] is True
     assert parsed["required_function_availability"]["exepos"].endswith("exepos.m")
+
+
+def _valid_matlab_environment(release: str) -> dict[str, object]:
+    required = (
+        "global_variable", "decode_cfg", "read_infile", "readimu", "exepos",
+        "waitbar", "figure", "plot_trajectory_kine", "gnss_solver",
+        "ins_align", "tdcp2vel",
+    )
+    return {
+        "release": release,
+        "matlab_license_available": True,
+        "usejava_awt": True,
+        "required_function_availability": {
+            name: f"/pinned/{name}.m" for name in required
+        },
+    }
+
+
+@pytest.mark.parametrize("release", ("2025b", "R2016a"))
+def test_matlab_release_accepts_optional_leading_r(release: str) -> None:
+    validate_matlab_environment(_valid_matlab_environment(release))
+
+
+def test_matlab_release_rejects_pre_r2016a() -> None:
+    with pytest.raises(MatlabRuntimeError, match="R2016a or newer"):
+        validate_matlab_environment(_valid_matlab_environment("2015b"))
+
+
+@pytest.mark.parametrize(
+    "release", ("", "R2016", "2016c", "r2016a", "2025B", "R02025b")
+)
+def test_matlab_release_rejects_malformed_values(release: str) -> None:
+    with pytest.raises(MatlabRuntimeError, match="unrecognized MATLAB release"):
+        validate_matlab_environment(_valid_matlab_environment(release))
 
 
 def test_tdcp_probe_keeps_literal_threshold_and_no_yaw_substitution(tmp_path: Path) -> None:

@@ -35,7 +35,10 @@ from legsa_gins.paper_rebuild.horizontal_literature.ginav2021.publication import
     PARITY_RELATIVE,
     PublicationError,
     _guarded_atomic_rename,
+    _json_bytes,
+    _publication_temporary_root,
     _replace_aliases,
+    _sanitized_bytes,
     compact_artifact_paths,
     publish_compact_stage,
     validate_exact_destination,
@@ -399,6 +402,46 @@ def test_compact_publication_is_exact_self_contained_and_path_aliased(
     assert str(tmp_path) not in published_text
 
 
+def test_attempt_specific_publication_preserves_legacy_partial_sentinel(
+    tmp_path: Path,
+) -> None:
+    roots = _publication_roots(tmp_path)
+    stage = roots["stage"]
+    status = _write_minimum_publication_evidence(stage)
+    legacy_partial = roots["destination"].with_name(STAGE_NAME + ".partial")
+    legacy_partial.mkdir()
+    sentinel = legacy_partial / "ATTEMPT1_SENTINEL.bin"
+    sentinel.write_bytes(b"immutable-attempt-1-partial\x00\xff")
+    sentinel_before = hashlib.sha256(sentinel.read_bytes()).hexdigest()
+    temporary, identity = _publication_temporary_root(
+        roots["destination"], stage
+    )
+
+    assert temporary != legacy_partial
+    assert temporary.parent == roots["destination"].parent
+    assert temporary.name.endswith(identity[:16])
+    report = publish_compact_stage(
+        stage,
+        roots["destination"],
+        terminal_status=TDCP_TERMINAL,
+        final_status_payload=status,
+        expected_destination_stage_root=roots["destination"],
+        clean_root=roots["clean"],
+        protected_roots=(
+            roots["code"], roots["clean"], roots["raw"], roots["paper"],
+            roots["legacy"],
+        ),
+        path_aliases={tmp_path: "<TEST_ROOT>"},
+    )
+
+    assert report["pass"] is True
+    assert report["publication_temporary_identity_sha256"] == identity
+    assert roots["destination"].is_dir()
+    assert not temporary.exists()
+    assert sentinel.read_bytes() == b"immutable-attempt-1-partial\x00\xff"
+    assert hashlib.sha256(sentinel.read_bytes()).hexdigest() == sentinel_before
+
+
 def test_publication_rejects_unallowlisted_evidence_and_source_symlinks(
     tmp_path: Path,
 ) -> None:
@@ -419,14 +462,13 @@ def test_publication_rejects_unallowlisted_evidence_and_source_symlinks(
         compact_artifact_paths(stage, terminal_status=TDCP_TERMINAL)
 
 
-@pytest.mark.parametrize("leaf", (STAGE_NAME, STAGE_NAME + ".partial"))
 def test_publication_rejects_dangling_destination_symlink(
-    tmp_path: Path, leaf: str
+    tmp_path: Path,
 ) -> None:
     roots = _publication_roots(tmp_path)
     stage = roots["stage"]
     status = _write_minimum_publication_evidence(stage)
-    protected_leaf = roots["destination"].with_name(leaf)
+    protected_leaf = roots["destination"]
     protected_leaf.symlink_to(tmp_path / "missing-target")
     with pytest.raises(PublicationError, match="destination|symlink|partial"):
         publish_compact_stage(
@@ -571,6 +613,92 @@ def test_publication_aliases_drive_and_wsl_path_forms(tmp_path: Path) -> None:
     ) == "<SCRATCH_ROOT>\\status.json"
 
 
+def test_json_publication_recursively_sanitizes_decoded_string_values(
+    tmp_path: Path,
+) -> None:
+    linux_root = tmp_path / "scratch"
+    mounted_root = Path("/mnt/q/evidence")
+    windows_unc = (
+        "\\\\wsl.localhost\\TestDistribution"
+        + str(linux_root).replace("/", "\\")
+    )
+    payload = {
+        "candidate": {
+            "full_matlab_error": {
+                "command": [
+                    "matlab.exe",
+                    "try,addpath('" + windows_unc
+                    + "\\00_SOURCE_AND_ENVIRONMENT\\harness');exit(0);",
+                ],
+                "nested": [
+                    {"drive_path": "Q:\\evidence\\status.json"},
+                    {"linux_path": str(linux_root / "status.json")},
+                ],
+                "key_paths": {
+                    str(linux_root / "linux-key"): "linux",
+                    "Q:\\evidence\\drive-key": "drive",
+                },
+            }
+        }
+    }
+    aliases = {
+        linux_root: "<SCRATCH_ROOT>",
+        mounted_root: "<STAGE_ROOT>",
+    }
+    source = tmp_path / "source.json"
+    source.write_text(json.dumps(payload), encoding="utf-8")
+
+    source_bytes, changed = _sanitized_bytes(source, aliases)
+    generated_bytes = _json_bytes(payload, aliases)
+    assert changed is True
+    assert source_bytes == generated_bytes
+    decoded = json.loads(source_bytes.decode("utf-8"))
+    command = decoded["candidate"]["full_matlab_error"]["command"][1]
+    assert (
+        "<SCRATCH_ROOT>\\00_SOURCE_AND_ENVIRONMENT\\harness" in command
+    )
+    assert decoded["candidate"]["full_matlab_error"]["nested"] == [
+        {"drive_path": "<STAGE_ROOT>\\status.json"},
+        {"linux_path": "<SCRATCH_ROOT>/status.json"},
+    ]
+    assert decoded["candidate"]["full_matlab_error"]["key_paths"] == {
+        "<SCRATCH_ROOT>/linux-key": "linux",
+        "<STAGE_ROOT>\\drive-key": "drive",
+    }
+    assert "wsl.localhost" not in source_bytes.decode("utf-8").casefold()
+
+    unaliased = tmp_path / "unaliased.json"
+    unaliased.write_text(
+        json.dumps({"nested": [{"path": "/home/not-authorized/input"}]}),
+        encoding="utf-8",
+    )
+    with pytest.raises(PublicationError, match="unaliased machine-local path"):
+        _sanitized_bytes(unaliased, aliases)
+    with pytest.raises(PublicationError, match="unaliased machine-local path"):
+        _json_bytes({"path": "/home/not-authorized/input"}, aliases)
+
+    unaliased_key = tmp_path / "unaliased-key.json"
+    unaliased_key.write_text(
+        json.dumps({"nested": [{"/home/not-authorized/key": "value"}]}),
+        encoding="utf-8",
+    )
+    with pytest.raises(PublicationError, match="unaliased machine-local path"):
+        _sanitized_bytes(unaliased_key, aliases)
+    with pytest.raises(PublicationError, match="unaliased machine-local path"):
+        _json_bytes({"/home/not-authorized/key": "value"}, aliases)
+
+    collision = {
+        str(linux_root / "same-key"): "source path",
+        "<SCRATCH_ROOT>/same-key": "existing alias",
+    }
+    collision_source = tmp_path / "collision.json"
+    collision_source.write_text(json.dumps(collision), encoding="utf-8")
+    with pytest.raises(PublicationError, match="key collision"):
+        _sanitized_bytes(collision_source, aliases)
+    with pytest.raises(PublicationError, match="key collision"):
+        _json_bytes(collision, aliases)
+
+
 def test_cleanliness_aggregate_recovers_failed_candidate_proof(
     tmp_path: Path,
 ) -> None:
@@ -633,6 +761,9 @@ def test_publication_failure_preserves_allowed_terminal_and_is_incomplete(
     assert payload["formal_lc02_admission"] is False
     assert payload["formal_lc02_slot"] == "VACANT"
     assert not roots["destination"].exists()
+    assert payload["publication"]["copied_file_count"] == 3
+    assert len(payload["publication"]["files"]) == 3
+    assert payload["publication"]["partial_exists"] is True
     for key in (
         "data_mode", "raw_source_hashes", "provider_hashes",
         "synthetic_data_used", "semisynthetic_data_used", "trace_used_online",

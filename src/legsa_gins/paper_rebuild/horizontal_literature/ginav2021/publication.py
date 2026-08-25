@@ -264,6 +264,31 @@ def _replace_aliases(text: str, aliases: Mapping[str | Path, str]) -> str:
     return text
 
 
+def _sanitize_json_value(
+    value: Any, aliases: Mapping[str | Path, str]
+) -> Any:
+    """Sanitize decoded JSON string values before deterministic encoding."""
+
+    if isinstance(value, str):
+        return _replace_aliases(value, aliases)
+    if isinstance(value, Mapping):
+        sanitized: dict[Any, Any] = {}
+        for key, item in value.items():
+            sanitized_key = (
+                _replace_aliases(key, aliases)
+                if isinstance(key, str) else key
+            )
+            if sanitized_key in sanitized:
+                raise PublicationError(
+                    "JSON mapping key collision after path sanitization"
+                )
+            sanitized[sanitized_key] = _sanitize_json_value(item, aliases)
+        return sanitized
+    if isinstance(value, (list, tuple)):
+        return [_sanitize_json_value(item, aliases) for item in value]
+    return value
+
+
 def _sanitized_bytes(
     source: Path, aliases: Mapping[str | Path, str]
 ) -> tuple[bytes, bool]:
@@ -272,6 +297,15 @@ def _sanitized_bytes(
         text = original.decode("utf-8")
     except UnicodeDecodeError:
         return original, False
+    if source.suffix.casefold() == ".json":
+        try:
+            payload = json.loads(text)
+        except ValueError as exc:
+            raise PublicationError(
+                f"compact JSON evidence is invalid: {source.name}"
+            ) from exc
+        sanitized = _json_bytes(payload, aliases)
+        return sanitized, sanitized != original
     sanitized = _replace_aliases(text, aliases).encode("utf-8")
     return sanitized, sanitized != original
 
@@ -290,11 +324,36 @@ def _write_exclusive(path: Path, content: bytes) -> None:
         os.close(descriptor)
 
 
-def _json_bytes(payload: Mapping[str, Any], aliases: Mapping[str | Path, str]) -> bytes:
+def _json_bytes(payload: Any, aliases: Mapping[str | Path, str]) -> bytes:
+    sanitized_payload = _sanitize_json_value(payload, aliases)
     encoded = json.dumps(
-        payload, ensure_ascii=False, indent=2, sort_keys=True
+        sanitized_payload, ensure_ascii=False, indent=2, sort_keys=True
     ) + "\n"
-    return _replace_aliases(encoded, aliases).encode("utf-8")
+    return encoded.encode("utf-8")
+
+
+def _publication_temporary_root(
+    destination_root: Path, source_root: Path
+) -> tuple[Path, str]:
+    """Return a validated attempt-specific sibling without touching legacy partials."""
+
+    source_identity = str(source_root.resolve(strict=True)).encode("utf-8")
+    identity = hashlib.sha256(
+        b"ginav2021.compact-publication-attempt.v1\0" + source_identity
+    ).hexdigest()
+    temporary = destination_root.with_name(
+        destination_root.name + ".partial." + identity[:16]
+    )
+    expected_name = re.fullmatch(
+        re.escape(destination_root.name) + r"\.partial\.[0-9a-f]{16}",
+        temporary.name,
+    )
+    if expected_name is None or temporary.parent != destination_root.parent:
+        raise PublicationError("invalid attempt-specific publication temporary identity")
+    return (
+        assert_no_symlink_components(temporary, allow_missing_leaf=True),
+        identity,
+    )
 
 
 def _fsync_directory(path: Path) -> None:
@@ -418,14 +477,18 @@ def publish_compact_stage(
     )
     if _is_relative_to(destination_root.resolve(strict=False), source_root.resolve(strict=True)):
         raise PublicationError("publication destination overlaps scratch source")
-    temporary_root = destination_root.with_name(destination_root.name + ".partial")
-    if os.path.lexists(destination_root) or os.path.lexists(temporary_root):
-        raise PublicationError(
-            "non-overwriting destination or guarded partial already exists"
-        )
     if not destination_root.parent.is_dir():
         raise PublicationError("exact publication parent directory does not exist")
     assert_no_symlink_components(destination_root.parent, allow_missing_leaf=False)
+    temporary_root, temporary_identity = _publication_temporary_root(
+        destination_root, source_root
+    )
+    if os.path.lexists(destination_root):
+        raise PublicationError("non-overwriting destination already exists")
+    if os.path.lexists(temporary_root):
+        raise PublicationError(
+            "non-overwriting attempt-specific publication temporary already exists"
+        )
 
     selected = compact_artifact_paths(source_root, terminal_status=terminal_status)
     report: dict[str, Any] = {
@@ -435,7 +498,10 @@ def publish_compact_stage(
         "phase": "PREFLIGHT_COMPLETE",
         "source_stage_root": str(source_root),
         "destination_stage_root": str(destination_root),
+        "publication_temporary_identity_sha256": temporary_identity,
+        "attempt_temporary_root": str(temporary_root),
         "retained_partial_root": str(temporary_root),
+        "copied_file_count": 0,
         "files": [],
     }
     try:
@@ -490,6 +556,8 @@ def publish_compact_stage(
                 "prepared_hash_verified": destination_hash
                 == hashlib.sha256(content).hexdigest(),
             })
+            report["files"] = list(ledger)
+            report["copied_file_count"] = len(ledger)
         destination_status = copy.deepcopy(dict(final_status_payload))
         destination_status.update({
             "artifact_publication_complete": True,
@@ -509,6 +577,8 @@ def publish_compact_stage(
             "prepared_hash_verified": True,
             "finalized_destination_status": True,
         })
+        report["files"] = list(ledger)
+        report["copied_file_count"] = len(ledger)
         parity_payload = {
             "schema_version": "ginav2021.publication_parity_ledger.v2",
             "terminal_status": terminal_status,
@@ -528,6 +598,7 @@ def publish_compact_stage(
         report.update({
             "phase": "FINALIZED_TEMPORARY_DESTINATION",
             "files": ledger,
+            "copied_file_count": len(ledger),
             "file_count": len(ledger) + 1,
             "parity_ledger_sha256": sha256_file(parity_path),
         })

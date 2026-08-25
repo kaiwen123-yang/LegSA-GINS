@@ -458,7 +458,7 @@ def validate_matlab_environment(
     expected_source_root: str | Path | None = None,
 ) -> None:
     release = str(payload.get("release") or "")
-    match = re.fullmatch(r"R(\d{4})([ab])", release)
+    match = re.fullmatch(r"R?(\d{4})([ab])", release)
     if match is None:
         raise MatlabRuntimeError(f"unrecognized MATLAB release: {release}")
     release_key = (int(match.group(1)), match.group(2))
