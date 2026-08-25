@@ -50,6 +50,7 @@ def parser() -> argparse.ArgumentParser:
     execute.add_argument("--paths-config", type=Path, default=DEFAULT_PATHS_CONFIG)
     execute.add_argument("--ginav-root", type=Path, required=True)
     execute.add_argument("--matlab-executable", type=Path, required=True)
+    execute.add_argument("--libarchive-path", type=Path, required=True)
     execute.add_argument("--scratch-root", type=Path, required=True)
     execute.add_argument("--stage-root", type=Path, required=True)
     execute.add_argument("--paper-root", type=Path, required=True)
@@ -73,6 +74,7 @@ def main(argv: list[str] | None = None) -> int:
                     paths_config=args.paths_config,
                     ginav_root=args.ginav_root,
                     matlab_executable=args.matlab_executable,
+                    libarchive_path=args.libarchive_path,
                     scratch_root=args.scratch_root,
                     destination_stage_root=args.stage_root,
                     paper_root=args.paper_root,

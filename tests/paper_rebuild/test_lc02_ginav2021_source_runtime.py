@@ -4,7 +4,6 @@ import csv
 import json
 import os
 from pathlib import Path
-from types import SimpleNamespace
 
 import pytest
 
@@ -36,8 +35,6 @@ from legsa_gins.paper_rebuild.horizontal_literature.ginav2021.source import (
 from legsa_gins.paper_rebuild.horizontal_literature.ginav2021.transaction import (
     TransactionError,
     _classify_sample_archive_members,
-    _extract_sample,
-    _parse_7z_slt_members,
     _probe_summary,
 )
 
@@ -235,26 +232,40 @@ def test_static_runtime_contract_is_json_yaml_and_execution_stays_conditional() 
     assert contract["authorization"]["BY2_C00"] == "conditional_on_G0_G3_pass"
     assert contract["authorization"]["trace_evaluation"] is False
     assert contract["phase1_implementation_note"]["matlab_launched"] is False
+    backend = contract["official_sample"]["archive_backend"]
+    assert backend["library_sha256"] == (
+        "b668621ff255cc106907516dc58c6454b32323328fe6014614f4719d9c3a6bb6"
+    )
+    assert backend["subprocess_used"] is False
+    assert contract["official_sample"]["archive_inventory"] == (
+        "archive_read_next_header_only_no_payload_API"
+    )
 
 
-def _archive_listing(*paths: str) -> str:
-    blocks = []
-    for path in paths:
-        blocks.append(
-            f"Path = {path}\nSize = 10\nAttributes = A\nEncrypted = -\n"
-        )
-    return "archive metadata\n----------\n" + "\n".join(blocks)
+def _archive_members(*paths: str) -> tuple[dict[str, object], ...]:
+    return tuple(
+        {
+            "index": index,
+            "path": path,
+            "bytes": 10,
+            "kind": "regular",
+            "directory": False,
+            "encrypted": False,
+            "link_or_reparse": False,
+            "sparse_extent_count": 0,
+            "size_is_set": True,
+        }
+        for index, path in enumerate(paths)
+    )
 
 
 def test_official_archive_inventory_is_metadata_only_and_reference_unopened() -> None:
-    members = _parse_7z_slt_members(
-        _archive_listing(
+    members = _archive_members(
             "data/cpt.19o",
             "data/cpt.19c",
             "data/cpt_imu.csv",
             "data/cpt_pva_ref.mat",
             "data/cpt.ubx",
-        )
     )
     inventory = _classify_sample_archive_members(members)
     assert inventory["bundled_serialized_output_present"] is False
@@ -265,64 +276,11 @@ def test_official_archive_inventory_is_metadata_only_and_reference_unopened() ->
 
     with pytest.raises(TransactionError, match="serialized solution"):
         _classify_sample_archive_members(
-            _parse_7z_slt_members(
-                _archive_listing(
+            _archive_members(
                     "data/cpt.19o", "data/cpt.19c", "data/cpt_imu.csv",
                     "data/cpt_pva_ref.mat", "result/cpt.pos",
-                )
             )
         )
-    with pytest.raises(TransactionError, match="unsafe official archive"):
-        _parse_7z_slt_members(_archive_listing("../escape.19o"))
-
-
-def test_official_archive_extracts_exact_selected_members_only(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    inventory = _classify_sample_archive_members(
-        _parse_7z_slt_members(
-            _archive_listing(
-                "data/cpt.19o",
-                "data/cpt.19c",
-                "data/cpt_imu.csv",
-                "data/cpt_pva_ref.mat",
-                "data/cpt.ubx",
-            )
-        )
-    )
-    extractor = tmp_path / "7z"
-    extractor.write_text("test", encoding="ascii")
-    observed: dict[str, tuple[str, ...]] = {}
-
-    def fake_run(command: tuple[str, ...], **kwargs: object) -> SimpleNamespace:
-        observed["command"] = tuple(command)
-        destination = Path(next(item[2:] for item in command if item.startswith("-o")))
-        selected = command[command.index("-spd") + 1:]
-        for member in selected:
-            path = destination / member
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text("selected", encoding="ascii")
-        return SimpleNamespace(returncode=0, stdout="", stderr="")
-
-    monkeypatch.setattr(
-        "legsa_gins.paper_rebuild.horizontal_literature.ginav2021.transaction."
-        "shutil.which",
-        lambda name: str(extractor),
-    )
-    monkeypatch.setattr(
-        "legsa_gins.paper_rebuild.horizontal_literature.ginav2021.transaction."
-        "subprocess.run",
-        fake_run,
-    )
-    archive = tmp_path / "sample.7z"
-    archive.write_bytes(b"metadata-only-test")
-    destination = tmp_path / "sample"
-    result = _extract_sample(archive, destination, AccessLedger(), inventory)
-    assert result["reference_member_open_count"] == 0
-    assert result["ubx_member_open_count"] == 0
-    assert "data/cpt_pva_ref.mat" not in observed["command"]
-    assert "data/cpt.ubx" not in observed["command"]
-    assert not (destination / "data/cpt_pva_ref.mat").exists()
 
 
 def test_probe_summary_records_every_ins_align_invocation_separately_from_spp(

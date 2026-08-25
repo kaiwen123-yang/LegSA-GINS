@@ -48,6 +48,11 @@ from .constants import (
     TERMINAL_STATUSES,
 )
 from .imu_adapter import ImuAdapterError, adapt_go2_imu
+from .libarchive7z import (
+    Libarchive7zBackend,
+    Libarchive7zError,
+    frozen_inventory_binding_sha256,
+)
 from .matlab import (
     MatlabRuntimeError,
     build_matlab_batch_command,
@@ -116,6 +121,7 @@ class TransactionOptions:
     paths_config: Path
     ginav_root: Path
     matlab_executable: Path
+    libarchive_path: Path
     scratch_root: Path
     destination_stage_root: Path
     paper_root: Path
@@ -301,6 +307,12 @@ def _initial_provenance(options: TransactionOptions) -> dict[str, Any]:
         "official_source_identity": None,
         "matlab_environment": None,
         "converter_identity": None,
+        "official_sample_archive_backend": None,
+        "official_sample_archive_backend_preflight_completed": False,
+        "technical_pre_sample_backend_failure": False,
+        "official_sample_regression_executed": False,
+        "official_sample_archive_inventory_completed": False,
+        "official_sample_extraction_count": 0,
         "gate_execution_counts": {
             "G0_matlab_candidate_attempts": 0,
             "G1_official_sample_runs": 0,
@@ -432,6 +444,24 @@ def _terminal_payload(
         "old_runtime_input_count": 0,
         "code_commit": provenance["code_commit"],
         "config_hash": provenance.get("config_hash"),
+        "official_sample_archive_backend": copy.deepcopy(
+            provenance.get("official_sample_archive_backend")
+        ),
+        "official_sample_archive_backend_preflight_completed": bool(
+            provenance.get("official_sample_archive_backend_preflight_completed")
+        ),
+        "technical_pre_sample_backend_failure": bool(
+            provenance.get("technical_pre_sample_backend_failure")
+        ),
+        "official_sample_regression_executed": bool(
+            provenance.get("official_sample_regression_executed")
+        ),
+        "official_sample_archive_inventory_completed": bool(
+            provenance.get("official_sample_archive_inventory_completed")
+        ),
+        "official_sample_extraction_count": int(
+            provenance.get("official_sample_extraction_count", 0)
+        ),
         "consolidated_provenance_path": (
             "11_REPORT/GINAV_CONSOLIDATED_PROVENANCE.json"
         ),
@@ -567,72 +597,6 @@ def _load_local_paths(
     return paths
 
 
-def _parse_7z_slt_members(text: str) -> tuple[dict[str, Any], ...]:
-    """Parse metadata-only ``7z l -slt`` output without opening members."""
-
-    separator_seen = False
-    current: dict[str, str] = {}
-    records: list[dict[str, Any]] = []
-
-    def finish() -> None:
-        if not current:
-            return
-        raw_path = current.get("Path", "")
-        normalized = raw_path.replace("\\", "/")
-        pure = PurePosixPath(normalized)
-        if (
-            not raw_path or pure.is_absolute() or ".." in pure.parts
-            or re.match(r"^[A-Za-z]:", normalized) or normalized.startswith("//")
-        ):
-            raise TransactionError(f"unsafe official archive member path: {raw_path!r}")
-        attributes = current.get("Attributes", "")
-        is_directory = "D" in attributes
-        link_fields = {
-            key: value for key, value in current.items()
-            if "link" in key.casefold() or "reparse" in key.casefold()
-        }
-        if any(value not in {"", "-"} for value in link_fields.values()):
-            raise TransactionError(f"official archive link member is forbidden: {raw_path}")
-        if current.get("Encrypted", "-") not in {"", "-"}:
-            raise TransactionError(f"official archive encrypted member is forbidden: {raw_path}")
-        try:
-            size = int(current.get("Size", "0") or 0)
-        except ValueError as exc:
-            raise TransactionError(f"invalid official archive member size: {raw_path}") from exc
-        records.append(
-            {
-                "path": pure.as_posix(),
-                "bytes": size,
-                "attributes": attributes,
-                "directory": is_directory,
-                "encrypted": False,
-                "link_or_reparse": False,
-            }
-        )
-        current.clear()
-
-    for raw in text.splitlines():
-        line = raw.rstrip("\r\n")
-        if line.strip() == "----------":
-            separator_seen = True
-            continue
-        if not separator_seen:
-            continue
-        if not line.strip():
-            finish()
-            continue
-        if " = " in line:
-            key, value = line.split(" = ", 1)
-            current[key] = value
-    finish()
-    if not separator_seen or not records:
-        raise TransactionError("7z metadata listing has no archive members")
-    folded = [str(item["path"]).casefold() for item in records]
-    if len(folded) != len(set(folded)):
-        raise TransactionError("official archive has case-fold duplicate member paths")
-    return tuple(records)
-
-
 def _classify_sample_archive_members(
     members: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
@@ -692,24 +656,52 @@ def _classify_sample_archive_members(
         "bundled_serialized_output_paths": serialized_outputs,
         "bundled_serialized_output_count": len(serialized_outputs),
         "bundled_serialized_output_present": False,
-        "inventory_operation": "7z_list_slt_metadata_only",
+        "inventory_operation": "libarchive_next_header_only",
+        "inventory_payload_api_calls": 0,
         "pass": True,
     }
 
 
 def _inventory_sample_archive(
-    archive: Path, extractor: str, ledger: AccessLedger
+    archive: Path, backend: Libarchive7zBackend, ledger: AccessLedger
 ) -> dict[str, Any]:
     ledger.record(archive, role="OFFICIAL_GINAV_SAMPLE_ARCHIVE")
-    command = (extractor, "l", "-slt", str(archive))
-    result = subprocess.run(command, capture_output=True, text=True, timeout=300)
-    if result.returncode != 0:
-        raise TransactionError(
-            "official sample metadata listing failed: "
-            + (result.stderr or result.stdout).strip()
-        )
-    inventory = _classify_sample_archive_members(_parse_7z_slt_members(result.stdout))
-    return {**inventory, "archive_sha256": sha256_file(archive), "command": list(command)}
+    backend_inventory = backend.inventory(archive)
+    inventory = _classify_sample_archive_members(backend_inventory["members"])
+    selected_roles = {
+        inventory["selected_observation_member"]: "selected_observation",
+        inventory["selected_navigation_member"]: "selected_navigation",
+        inventory["selected_imu_member"]: "selected_imu",
+    }
+    inventory_ledger = []
+    for member in inventory["members"]:
+        path = str(member["path"])
+        role = selected_roles.get(path)
+        if role is None and path in inventory["reference_member_paths"]:
+            role = "excluded_reference"
+        elif role is None and path in inventory["ubx_member_paths"]:
+            role = "excluded_ubx"
+        elif role is None:
+            role = "excluded_unselected"
+        inventory_ledger.append({
+            "path": path,
+            "role": role,
+            "declared_bytes": member["bytes"],
+            "header_metadata_sha256": member.get("header_metadata_sha256"),
+            "payload_read_calls": 0,
+        })
+    result = {
+        **inventory,
+        **{key: value for key, value in backend_inventory.items() if key != "members"},
+        "archive_backend": copy.deepcopy(backend.identity),
+        "member_inventory_ledger": inventory_ledger,
+        "reference_member_payload_read_calls": 0,
+        "ubx_member_payload_read_calls": 0,
+    }
+    result["frozen_inventory_binding_sha256"] = (
+        frozen_inventory_binding_sha256(result)
+    )
+    return result
 
 
 def _extract_sample(
@@ -717,44 +709,10 @@ def _extract_sample(
     destination: Path,
     ledger: AccessLedger,
     inventory: Mapping[str, Any],
+    backend: Libarchive7zBackend,
 ) -> dict[str, Any]:
-    executable = shutil.which("7z") or shutil.which("7zz")
-    if executable is None:
-        raise TransactionError("7z extractor is unavailable for official sample")
-    if destination.exists():
-        raise TransactionError(f"sample extraction root already exists: {destination}")
-    destination.mkdir(parents=True, exist_ok=False)
-    selected_members = tuple(
-        str(inventory[key]) for key in (
-            "selected_observation_member", "selected_navigation_member",
-            "selected_imu_member",
-        )
-    )
-    command = (
-        executable, "x", str(archive), f"-o{destination}", "-y", "-spd",
-        *selected_members,
-    )
-    result = subprocess.run(command, capture_output=True, text=True, timeout=300)
-    if result.returncode != 0:
-        raise TransactionError(f"official sample extraction failed: {result.stderr.strip()}")
-    extracted = tuple(sorted(
-        path.relative_to(destination).as_posix()
-        for path in destination.rglob("*") if path.is_file()
-    ))
-    if extracted != tuple(sorted(selected_members)):
-        raise ForbiddenInputError(
-            "official sample exact-member extraction conservation failed"
-        )
-    return {
-        "extractor": executable,
-        "command": list(command),
-        "reference_member_excluded_without_open": True,
-        "reference_member_open_count": 0,
-        "ubx_members_excluded_without_open": True,
-        "ubx_member_open_count": 0,
-        "selected_members": list(selected_members),
-        "extracted_members": list(extracted),
-    }
+    ledger.record(archive, role="OFFICIAL_GINAV_SAMPLE_ARCHIVE_EXACT_EXTRACTION")
+    return backend.extract_selected(archive, destination, inventory)
 
 
 def _resolve_sample_inputs(
@@ -939,8 +897,11 @@ def _run_sample_regression(
     stage: Path,
     ginav_root: Path,
     matlab_executable: Path,
+    archive_backend: Libarchive7zBackend,
+    expected_archive_sha256: str,
     timeout_seconds: float,
     access_ledger: AccessLedger,
+    progress: dict[str, Any],
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     section = _stage_dir(stage, "01_OFFICIAL_SAMPLE_REGRESSION")
     archive = ginav_root / OFFICIAL_SAMPLE_RELATIVE
@@ -948,27 +909,46 @@ def _run_sample_regression(
     summaries: list[dict[str, Any]] = []
     runs: list[dict[str, Any]] = []
     cleanliness: list[dict[str, Any]] = []
-    extractor = shutil.which("7z") or shutil.which("7zz")
-    if extractor is None:
-        raise TransactionError("7z extractor is unavailable for official sample")
     archive_inventory = _inventory_sample_archive(
-        archive, extractor, access_ledger
+        archive, archive_backend, access_ledger
+    )
+    progress["official_sample_archive_inventory_completed"] = True
+    inventory_archive_sha256 = archive_inventory.get("archive_sha256")
+    archive_inventory["pinned_source_lock_sample_sha256"] = (
+        expected_archive_sha256
+    )
+    archive_inventory["archive_sha256_matches_pinned_source_lock"] = (
+        inventory_archive_sha256 == expected_archive_sha256
     )
     write_json(
         section / "OFFICIAL_SAMPLE_ARCHIVE_INVENTORY.json",
         archive_inventory,
     )
+    if inventory_archive_sha256 != expected_archive_sha256:
+        raise SourceIdentityError(
+            "G1 archive inventory SHA256 does not match the pinned official "
+            "source-lock sample SHA256"
+        )
+    frozen_binding = archive_inventory["frozen_inventory_binding_sha256"]
     for index in (1, 2):
         run_root = section / f"pristine_run_{index}"
         run_root.mkdir(exist_ok=False)
         extraction = _extract_sample(
-            archive, run_root / "sample_data", access_ledger, archive_inventory
+            archive, run_root / "sample_data", access_ledger, archive_inventory,
+            archive_backend,
         )
+        if extraction.get("frozen_inventory_binding_sha256") != frozen_binding:
+            raise SourceIdentityError(
+                "official sample pristine extraction is not bound to the single "
+                "frozen G1 archive inventory"
+            )
+        progress["official_sample_extraction_count"] = index
         inputs = _resolve_sample_inputs(run_root / "sample_data", archive_inventory)
         derived = run_root / "GINav_SPP_LC_CPT.ini"
         config_contract = derive_official_sample_config(
             official_config, derived, inputs["data_dir"]
         )
+        progress["official_sample_regression_executed"] = True
         run = _run_official(
             run_id=f"G1_OFFICIAL_SAMPLE_RUN_{index}", run_root=run_root,
             ginav_root=ginav_root, matlab_executable=matlab_executable,
@@ -1014,6 +994,8 @@ def _run_sample_regression(
             "bundled_serialized_output_present"
         ],
         "archive_inventory_path": "OFFICIAL_SAMPLE_ARCHIVE_INVENTORY.json",
+        "archive_inventory_binding_sha256": frozen_binding,
+        "both_pristine_extractions_bound_to_same_inventory": True,
         "reference_member_extracted": False,
         "reference_member_opened": False,
         "old_repository_result_opened": False,
@@ -1477,6 +1459,7 @@ def run_transaction(options: TransactionOptions) -> dict[str, Any]:
         options.paper_root: "<PAPER_ROOT>",
         options.legacy_freeze_root: "<LEGACY_FREEZE_ROOT>",
         options.matlab_executable: "<MATLAB_EXECUTABLE>",
+        options.libarchive_path: "<LIBARCHIVE_LIBRARY>",
         local["horizontal_literature_rtklib_root"]: "<RTKLIB_ROOT>",
         local["horizontal_literature_convbin"]: "<CONVBIN_EXECUTABLE>",
     }
@@ -1606,6 +1589,41 @@ def run_transaction(options: TransactionOptions) -> dict[str, Any]:
     }
 
     try:
+        archive_backend = Libarchive7zBackend(options.libarchive_path)
+        provenance["official_sample_archive_backend"] = copy.deepcopy(
+            archive_backend.identity
+        )
+        provenance["official_sample_archive_backend_preflight_completed"] = True
+        path_aliases[Path(archive_backend.identity["library_path"])] = (
+            "<LIBARCHIVE_LIBRARY>"
+        )
+    except (OSError, ValueError, TypeError, AttributeError, Libarchive7zError) as exc:
+        provenance["technical_pre_sample_backend_failure"] = True
+        provenance["official_sample_archive_backend"] = {
+            "schema_version": "ginav2021.libarchive7z_backend.v1",
+            "backend": "ctypes_libarchive_public_abi",
+            "requested_library_path": str(options.libarchive_path),
+            "install_performed": False,
+            "subprocess_used": False,
+            "preflight_pass": False,
+            "preflight_error": str(exc),
+        }
+        provenance["official_sample_archive_backend_preflight_completed"] = False
+        provenance["official_sample_regression_executed"] = False
+        provenance["official_sample_archive_inventory_completed"] = False
+        provenance["official_sample_extraction_count"] = 0
+        _write_cleanliness(stage, all_cleanliness)
+        return finalize(
+            "BLOCKED_LC02_GINAV_OFFICIAL_SAMPLE_REGRESSION_FAILURE",
+            detail=f"technical pre-sample archive backend failure: {exc}",
+        )
+
+    sample_progress = {
+        "official_sample_regression_executed": False,
+        "official_sample_archive_inventory_completed": False,
+        "official_sample_extraction_count": 0,
+    }
+    try:
         provenance["data_mode"] = "official_sample_regression"
         provenance["dataset_role"] = "OFFICIAL_SOFTWARE_REGRESSION_NOT_BY2_EVIDENCE"
         provenance["raw_source_hashes"] = {
@@ -1624,9 +1642,15 @@ def run_transaction(options: TransactionOptions) -> dict[str, Any]:
         sample_status, cleanliness = _run_sample_regression(
             stage=stage, ginav_root=options.ginav_root,
             matlab_executable=matlab_executable,
+            archive_backend=archive_backend,
+            expected_archive_sha256=source_lock["named_files"][
+                OFFICIAL_SAMPLE_RELATIVE.as_posix()
+            ]["sha256"],
             timeout_seconds=options.sample_timeout_seconds,
             access_ledger=global_access,
+            progress=sample_progress,
         )
+        provenance.update(sample_progress)
         all_cleanliness.extend(cleanliness)
         provenance["gate_execution_counts"]["G1_official_sample_runs"] = 2
         for summary in sample_status["summaries"]:
@@ -1638,13 +1662,15 @@ def run_transaction(options: TransactionOptions) -> dict[str, Any]:
                 f"{run_key}_output": summary["output_sha256"],
             })
     except SourceIdentityError as exc:
+        provenance.update(sample_progress)
         _write_cleanliness(stage, all_cleanliness)
         return finalize(
             "BLOCKED_LC02_GINAV_SOURCE_IDENTITY_MISMATCH",
             detail=str(exc),
         )
     except (OSError, ValueError, TransactionError, MatlabRuntimeError,
-            OutputContractError, ForbiddenInputError) as exc:
+            OutputContractError, ForbiddenInputError, Libarchive7zError) as exc:
+        provenance.update(sample_progress)
         _write_cleanliness(stage, all_cleanliness)
         return finalize(
             "BLOCKED_LC02_GINAV_OFFICIAL_SAMPLE_REGRESSION_FAILURE",

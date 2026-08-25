@@ -11,6 +11,7 @@ The runner is deliberately explicit:
 python3 scripts/paper_rebuild/run_lc02_ginav2021.py verify-source --ginav-root <GINAV_ROOT>
 python3 scripts/paper_rebuild/run_lc02_ginav2021.py execute \
   --ginav-root <GINAV_ROOT> --matlab-executable <MATLAB_EXECUTABLE> \
+  --libarchive-path <PINNED_RESOLVED_LIBARCHIVE_FILE> \
   --scratch-root <FRESH_EXT4_SCRATCH> --stage-root <EXACT_STAGE_ROOT> \
   --paper-root <PAPER_ROOT> --legacy-freeze-root <LEGACY_FREEZE_ROOT>
 ```
@@ -34,13 +35,30 @@ Linux uses `-nosplash -r`, and environment evidence is deterministic TSV. The
 route does not rely on `-batch`, `jsonencode`, `isstring`, or script-local
 functions.
 
-G1 first inventories the archive with metadata-only `7z l -slt`, rejecting
-unsafe/duplicate/link/encrypted members and positively proving that no
-serialized `.pos`, `.sol`, or `.out` is bundled. It then runs two pristine
-exact-member extractions containing only the selected observation, broadcast
-navigation, and IMU. The extraction command excludes `cpt_pva_ref.mat` and
-bundled UBX; neither is opened. The tracked historical GINav result is never
-copied or read.
+G1 requires an explicit resolved regular libarchive shared-object file. The
+backend accepts only the pinned file SHA-256 and public libarchive 3.6.0 ABI,
+enables only the NONE filter and 7zip format, and never searches `PATH`, invokes
+an archive subprocess, installs software, or uses a general extract API. A
+header-only `archive_read_next_header` pass rejects unsafe, non-NFC,
+case/prefix-colliding, linked, encrypted, sparse, special, unset/negative, or
+over-limit members and positively proves that no serialized `.pos`, `.sol`, or
+`.out` is bundled. Inventory calls no payload API; this does not claim that a
+solid archive implementation performs no internal decoding.
+
+The G1 inventory SHA-256 must first equal the pinned official source-lock sample
+SHA-256. One relocation-safe frozen binding then covers the archive hash/size,
+ordered headers, and exact selected roles. Each of the two fresh archive readers
+must reproduce that hash/size identity before any header or payload API is used,
+and both pristine extractions must report the same frozen binding.
+Only the selected observation, broadcast navigation, and IMU files are streamed
+through `archive_read_data_block` into dirfd/no-follow, exclusive leaves with
+offset, size, fsync, and readback-hash conservation. Every unselected member is
+handled with `archive_read_data_skip`. `cpt_pva_ref.mat` and bundled UBX have
+literal zero payload-read calls and are never materialized. The tracked
+historical GINav result is never copied or read. A missing or incompatible
+backend is recorded as a technical pre-sample backend failure with zero sample
+runs under the existing official-sample blocker terminal; it is not described
+as an observed official-sample regression.
 Only `data_dir` changes in the sample configuration. The new runs are compared
 by row count, source status sequence/transitions, finite state/covariance fields,
 and a digest of the serialized official 33-column schema.
