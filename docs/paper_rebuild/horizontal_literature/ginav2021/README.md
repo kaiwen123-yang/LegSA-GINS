@@ -41,9 +41,13 @@ enables only the NONE filter and 7zip format, and never searches `PATH`, invokes
 an archive subprocess, installs software, or uses a general extract API. A
 header-only `archive_read_next_header` pass rejects unsafe, non-NFC,
 case/prefix-colliding, linked, encrypted, sparse, special, unset/negative, or
-over-limit members and positively proves that no serialized `.pos`, `.sol`, or
-`.out` is bundled. Inventory calls no payload API; this does not claim that a
-solid archive implementation performs no internal decoding.
+over-limit members. A directory filetype may carry exactly one trailing POSIX
+slash; its exact decoded archive pathname is retained, while the canonical name
+with that slash removed drives collision checks. Both forms remain frozen in
+header identity. Regular files and all other trailing-slash or empty-component
+forms remain rejected. The inventory positively proves that no serialized `.pos`,
+`.sol`, or `.out` is bundled. Inventory calls no payload API; this does not
+claim that a solid archive implementation performs no internal decoding.
 
 The G1 inventory SHA-256 must first equal the pinned official source-lock sample
 SHA-256. One relocation-safe frozen binding then covers the archive hash/size,

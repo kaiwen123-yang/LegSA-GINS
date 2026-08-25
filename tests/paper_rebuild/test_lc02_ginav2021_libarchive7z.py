@@ -314,6 +314,20 @@ def _official_entries() -> list[FakeEntry]:
     ]
 
 
+def _official_entries_with_directory(
+    *, trailing_slash: bool = True,
+) -> list[FakeEntry]:
+    directory = b"data_cpt/" if trailing_slash else b"data_cpt"
+    return [
+        FakeEntry(directory, b"", size=0, filetype=libarchive7z.S_IFDIR),
+        FakeEntry(b"data_cpt/cpt.19o", b"observation"),
+        FakeEntry(b"data_cpt/cpt.19c", b"navigation"),
+        FakeEntry(b"data_cpt/cpt_imu.csv", b"imu"),
+        FakeEntry(b"data_cpt/cpt_pva_ref.mat", b"forbidden-reference"),
+        FakeEntry(b"data_cpt/cpt.ubx", b"excluded-ubx"),
+    ]
+
+
 def _classified_inventory(backend: Libarchive7zBackend, archive: Path) -> dict[str, Any]:
     raw = backend.inventory(archive)
     classified = _classify_sample_archive_members(raw["members"])
@@ -550,6 +564,130 @@ def test_inventory_rejects_unsafe_non_utf8_or_non_nfc_paths(
     fake = FakeLibrary([FakeEntry(path)])
     backend, _ = _backend(tmp_path, monkeypatch, fake)
     with pytest.raises(Libarchive7zError):
+        backend.inventory(_archive(tmp_path))
+
+
+def test_canonical_directory_single_trailing_slash_is_normalized_and_extractable(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fake = FakeLibrary(_official_entries_with_directory())
+    backend, _ = _backend(tmp_path, monkeypatch, fake)
+    archive = _archive(tmp_path)
+    inventory = _classified_inventory(backend, archive)
+    directory = inventory["members"][0]
+    assert directory["path"] == "data_cpt"
+    assert directory["archive_pathname_utf8"] == "data_cpt/"
+    assert directory["kind"] == "directory"
+    assert directory["directory"] is True
+    assert directory["directory_pathname_trailing_slash"] is True
+    assert fake.data_paths == []
+    result = backend.extract_selected(archive, tmp_path / "selected", inventory)
+    assert result["extracted_members"] == [
+        "data_cpt/cpt.19c",
+        "data_cpt/cpt.19o",
+        "data_cpt/cpt_imu.csv",
+    ]
+    assert fake.skip_paths.count(b"data_cpt/") == 1
+    assert b"data_cpt/" not in fake.data_paths
+    assert (tmp_path / "selected/data_cpt").is_dir()
+    assert not (tmp_path / "selected/data_cpt/cpt_pva_ref.mat").exists()
+
+
+def test_directory_without_trailing_slash_remains_canonical(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fake = FakeLibrary(_official_entries_with_directory(trailing_slash=False))
+    backend, _ = _backend(tmp_path, monkeypatch, fake)
+    inventory = backend.inventory(_archive(tmp_path))
+    directory = inventory["members"][0]
+    assert directory["path"] == "data_cpt"
+    assert directory["archive_pathname_utf8"] == "data_cpt"
+    assert directory["directory_pathname_trailing_slash"] is False
+
+
+@pytest.mark.parametrize("filetype", (libarchive7z.S_IFREG, stat.S_IFIFO))
+def test_regular_or_special_file_trailing_slash_is_rejected(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, filetype: int
+) -> None:
+    fake = FakeLibrary([FakeEntry(b"data/file/", filetype=filetype)])
+    backend, _ = _backend(tmp_path, monkeypatch, fake)
+    with pytest.raises(LibarchiveInventoryError, match="trailing slash"):
+        backend.inventory(_archive(tmp_path))
+
+
+@pytest.mark.parametrize(
+    "path",
+    (
+        None,
+        b"",
+        b"/",
+        b"//",
+        b"data_cpt//",
+        b"data//nested/",
+        b"/absolute/",
+        b"../escape/",
+        b"data/../escape/",
+        b"data/./",
+        b"data\\dir/",
+        b"\\\\server\\share/",
+        b"C" + b":/drive/",
+        b"data/\x01control/",
+        b"data/\x00nul/",
+        b"data/\xffinvalid/",
+        "data/e\u0301/".encode("utf-8"),
+    ),
+)
+def test_directory_trailing_slash_keeps_all_path_guards(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    path: bytes | None,
+) -> None:
+    fake = FakeLibrary(
+        [FakeEntry(path, b"", size=0, filetype=libarchive7z.S_IFDIR)]
+    )
+    backend, _ = _backend(tmp_path, monkeypatch, fake)
+    with pytest.raises(Libarchive7zError):
+        backend.inventory(_archive(tmp_path))
+
+
+def test_directory_trailing_slash_form_is_part_of_frozen_header_identity(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    with_slash = _official_entries_with_directory(trailing_slash=True)
+    without_slash = _official_entries_with_directory(trailing_slash=False)
+    fake = FakeLibrary(readers=[with_slash, without_slash])
+    backend, _ = _backend(tmp_path, monkeypatch, fake)
+    archive = _archive(tmp_path)
+    inventory = _classified_inventory(backend, archive)
+    with pytest.raises(LibarchiveExtractionError, match="changed from inventory"):
+        backend.extract_selected(archive, tmp_path / "header-drift", inventory)
+
+
+@pytest.mark.parametrize(
+    "entries",
+    (
+        [
+            FakeEntry(b"data/", b"", size=0, filetype=libarchive7z.S_IFDIR),
+            FakeEntry(b"data", b"", size=0, filetype=libarchive7z.S_IFDIR),
+        ],
+        [
+            FakeEntry(b"data/", b"", size=0, filetype=libarchive7z.S_IFDIR),
+            FakeEntry(b"data", b"payload", filetype=libarchive7z.S_IFREG),
+        ],
+        [
+            FakeEntry(b"data", b"payload", filetype=libarchive7z.S_IFREG),
+            FakeEntry(b"data/", b"", size=0, filetype=libarchive7z.S_IFDIR),
+        ],
+    ),
+)
+def test_normalized_directory_name_collisions_fail_closed(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    entries: list[FakeEntry],
+) -> None:
+    fake = FakeLibrary(entries)
+    backend, _ = _backend(tmp_path, monkeypatch, fake)
+    with pytest.raises(LibarchiveInventoryError, match="collid|duplicate"):
         backend.inventory(_archive(tmp_path))
 
 

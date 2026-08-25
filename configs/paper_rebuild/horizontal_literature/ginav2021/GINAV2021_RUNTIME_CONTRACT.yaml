@@ -71,6 +71,8 @@
     "each_extraction_revalidates_fresh_hash_size_before_header_or_payload": true,
     "both_pristine_extractions_require_same_frozen_inventory_binding": true,
     "archive_member_path_link_encryption_duplicate_guards": true,
+    "archive_directory_path_rule": "zero_or_one_trailing_POSIX_slash_only_for_directory_filetype_with_raw_and_canonical_forms_frozen_in_header_identity",
+    "archive_regular_file_trailing_slash_allowed": false,
     "archive_member_sparse_special_size_and_resource_guards": true,
     "archive_resource_limits": {
       "maximum_member_count": 100000,

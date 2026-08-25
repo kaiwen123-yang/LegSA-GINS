@@ -207,8 +207,9 @@ def _strict_text(raw: bytes | None, *, field: str, error_type: type[Libarchive7z
 def _safe_member_path(
     raw: bytes | None,
     *,
+    directory: bool,
     error_type: type[Libarchive7zError] = LibarchiveInventoryError,
-) -> str:
+) -> tuple[str, str, bool]:
     value = _strict_text(
         raw, field="pathname", error_type=error_type
     )
@@ -224,20 +225,34 @@ def _safe_member_path(
         raise error_type(
             f"archive member path has a control character or exceeds bounds: {value!r}"
         )
-    pure = PurePosixPath(value)
+    trailing_slash = value.endswith("/")
+    if trailing_slash:
+        if not directory:
+            raise error_type(
+                "archive regular/special member path has a trailing slash: "
+                f"{value!r}"
+            )
+        if value.endswith("//"):
+            raise error_type(
+                f"archive directory path has more than one trailing slash: {value!r}"
+            )
+        canonical = value[:-1]
+    else:
+        canonical = value
+    pure = PurePosixPath(canonical)
     if (
         pure.is_absolute()
-        or value.startswith("//")
-        or any(part in {"", ".", ".."} for part in value.split("/"))
+        or canonical.startswith("//")
+        or any(part in {"", ".", ".."} for part in canonical.split("/"))
         or any(":" in part for part in pure.parts)
     ):
         raise error_type(f"unsafe archive member path: {value!r}")
     normalized = pure.as_posix()
-    if normalized != value:
+    if normalized != canonical:
         raise error_type(
             f"archive member path is not canonical POSIX form: {value!r}"
         )
-    return normalized
+    return normalized, value, trailing_slash
 
 
 def _validate_member_collisions(members: Sequence[Mapping[str, Any]]) -> None:
@@ -362,6 +377,7 @@ def frozen_inventory_binding_sha256(inventory: Mapping[str, Any]) -> str:
     member_fields = (
         "index", "path", "bytes", "kind", "directory", "encrypted",
         "link_or_reparse", "sparse_extent_count", "size_is_set",
+        "archive_pathname_utf8", "directory_pathname_trailing_slash",
         "header_metadata_sha256",
     )
     for item in inventory.get("members", ()):
@@ -681,8 +697,10 @@ class Libarchive7zBackend:
         self, entry: Any, *, index: int,
         error_type: type[Libarchive7zError] = LibarchiveInventoryError,
     ) -> dict[str, Any]:
-        path = _safe_member_path(
+        filetype = int(self._call("archive_entry_filetype", entry)) & S_IFMT
+        path, archive_pathname, directory_trailing_slash = _safe_member_path(
             self._call("archive_entry_pathname_utf8", entry),
+            directory=filetype == S_IFDIR,
             error_type=error_type,
         )
         if int(self._call("archive_entry_size_is_set", entry)) != 1:
@@ -690,7 +708,6 @@ class Libarchive7zBackend:
         size = int(self._call("archive_entry_size", entry))
         if size < 0 or size > MAX_ARCHIVE_MEMBER_BYTES:
             raise error_type(f"archive member size is invalid or exceeds cap: {path}: {size}")
-        filetype = int(self._call("archive_entry_filetype", entry)) & S_IFMT
         if filetype == S_IFREG:
             kind = "regular"
         elif filetype == S_IFDIR:
@@ -723,12 +740,15 @@ class Libarchive7zBackend:
             "link_or_reparse": False,
             "sparse_extent_count": 0,
             "size_is_set": True,
+            "archive_pathname_utf8": archive_pathname,
+            "directory_pathname_trailing_slash": directory_trailing_slash,
         }
         header_digest_fields = {
             key: member[key]
             for key in (
                 "index", "path", "bytes", "kind", "directory", "encrypted",
                 "link_or_reparse", "sparse_extent_count", "size_is_set",
+                "archive_pathname_utf8", "directory_pathname_trailing_slash",
             )
         }
         member["header_metadata_sha256"] = hashlib.sha256(
@@ -916,7 +936,8 @@ class Libarchive7zBackend:
                     comparison_fields = (
                         "index", "path", "bytes", "kind", "directory",
                         "encrypted", "link_or_reparse", "sparse_extent_count",
-                        "size_is_set",
+                        "size_is_set", "archive_pathname_utf8",
+                        "directory_pathname_trailing_slash",
                         "header_metadata_sha256",
                     )
                     if any(member.get(key) != frozen.get(key) for key in comparison_fields):
