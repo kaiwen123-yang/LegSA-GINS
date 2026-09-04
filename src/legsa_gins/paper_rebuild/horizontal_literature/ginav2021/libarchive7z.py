@@ -376,7 +376,7 @@ def frozen_inventory_binding_sha256(inventory: Mapping[str, Any]) -> str:
     members = []
     member_fields = (
         "index", "path", "bytes", "kind", "directory", "encrypted",
-        "link_or_reparse", "sparse_extent_count", "size_is_set",
+        "link_or_reparse", "sparse_extent_count", "size_is_set", "size_contract",
         "archive_pathname_utf8", "directory_pathname_trailing_slash",
         "header_metadata_sha256",
     )
@@ -703,17 +703,34 @@ class Libarchive7zBackend:
             directory=filetype == S_IFDIR,
             error_type=error_type,
         )
-        if int(self._call("archive_entry_size_is_set", entry)) != 1:
-            raise error_type(f"archive member size is unset: {path}")
-        size = int(self._call("archive_entry_size", entry))
-        if size < 0 or size > MAX_ARCHIVE_MEMBER_BYTES:
-            raise error_type(f"archive member size is invalid or exceeds cap: {path}: {size}")
         if filetype == S_IFREG:
             kind = "regular"
+            raw_size_state = int(
+                self._call("archive_entry_size_is_set", entry)
+            )
+            size_is_set = raw_size_state != 0
+            if not size_is_set:
+                raise error_type(f"archive member size is unset: {path}")
+            size = int(self._call("archive_entry_size", entry))
+            if size < 0 or size > MAX_ARCHIVE_MEMBER_BYTES:
+                raise error_type(
+                    f"archive member size is invalid or exceeds cap: {path}: {size}"
+                )
+            size_contract = "REQUIRED_SET_NONNEGATIVE_WITHIN_CAP_FOR_REGULAR_FILE"
         elif filetype == S_IFDIR:
             kind = "directory"
-            if size != 0:
-                raise error_type(f"archive directory has nonzero size: {path}")
+            raw_size_state = int(
+                self._call("archive_entry_size_is_set", entry)
+            )
+            size_is_set = raw_size_state != 0
+            if size_is_set:
+                declared_size = int(self._call("archive_entry_size", entry))
+                if declared_size != 0:
+                    raise error_type(
+                        f"archive directory has nonzero size: {path}: {declared_size}"
+                    )
+            size = 0
+            size_contract = "NOT_APPLICABLE_FOR_DIRECTORY"
         else:
             raise error_type(f"archive member is special, not regular/directory: {path}")
         if self._call("archive_entry_symlink_utf8", entry) is not None:
@@ -739,7 +756,8 @@ class Libarchive7zBackend:
             "encrypted": False,
             "link_or_reparse": False,
             "sparse_extent_count": 0,
-            "size_is_set": True,
+            "size_is_set": size_is_set,
+            "size_contract": size_contract,
             "archive_pathname_utf8": archive_pathname,
             "directory_pathname_trailing_slash": directory_trailing_slash,
         }
@@ -748,6 +766,7 @@ class Libarchive7zBackend:
             for key in (
                 "index", "path", "bytes", "kind", "directory", "encrypted",
                 "link_or_reparse", "sparse_extent_count", "size_is_set",
+                "size_contract",
                 "archive_pathname_utf8", "directory_pathname_trailing_slash",
             )
         }
@@ -936,7 +955,7 @@ class Libarchive7zBackend:
                     comparison_fields = (
                         "index", "path", "bytes", "kind", "directory",
                         "encrypted", "link_or_reparse", "sparse_extent_count",
-                        "size_is_set", "archive_pathname_utf8",
+                        "size_is_set", "size_contract", "archive_pathname_utf8",
                         "directory_pathname_trailing_slash",
                         "header_metadata_sha256",
                     )

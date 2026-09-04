@@ -438,6 +438,9 @@ def test_inventory_is_next_header_only_and_keeps_fd_ownership_and_hashes(
     assert inventory["api_call_counts"].get("archive_read_data_block", 0) == 0
     assert inventory["api_call_counts"].get("archive_read_data_skip", 0) == 0
     assert all(item["header_metadata_sha256"] for item in inventory["members"])
+    assert {item["size_contract"] for item in inventory["members"]} == {
+        "REQUIRED_SET_NONNEGATIVE_WITHIN_CAP_FOR_REGULAR_FILE"
+    }
     assert fake.close_fd_was_open == [True]
     assert fake.free_fd_was_open == [True]
     with pytest.raises(OSError) as closed:
@@ -579,6 +582,9 @@ def test_canonical_directory_single_trailing_slash_is_normalized_and_extractable
     assert directory["archive_pathname_utf8"] == "data_cpt/"
     assert directory["kind"] == "directory"
     assert directory["directory"] is True
+    assert directory["bytes"] == 0
+    assert directory["size_is_set"] is True
+    assert directory["size_contract"] == "NOT_APPLICABLE_FOR_DIRECTORY"
     assert directory["directory_pathname_trailing_slash"] is True
     assert fake.data_paths == []
     result = backend.extract_selected(archive, tmp_path / "selected", inventory)
@@ -591,6 +597,84 @@ def test_canonical_directory_single_trailing_slash_is_normalized_and_extractable
     assert b"data_cpt/" not in fake.data_paths
     assert (tmp_path / "selected/data_cpt").is_dir()
     assert not (tmp_path / "selected/data_cpt/cpt_pva_ref.mat").exists()
+
+
+def test_unset_size_directory_inventory_and_extraction_are_valid_without_payload_read(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    entries = _official_entries_with_directory()
+    entries[0] = FakeEntry(
+        b"data_cpt/", b"directory-payload-must-not-be-read", size_is_set=0,
+        filetype=libarchive7z.S_IFDIR,
+    )
+    fake = FakeLibrary(entries)
+    backend, _ = _backend(tmp_path, monkeypatch, fake)
+    archive = _archive(tmp_path)
+    inventory = _classified_inventory(backend, archive)
+    directory = inventory["members"][0]
+    assert directory["bytes"] == 0
+    assert directory["size_is_set"] is False
+    assert directory["size_contract"] == "NOT_APPLICABLE_FOR_DIRECTORY"
+    assert len(fake.archive_entry_size.calls) == 5
+    assert fake.data_paths == []
+
+    result = backend.extract_selected(archive, tmp_path / "selected-unset", inventory)
+    assert result["extracted_members"] == [
+        "data_cpt/cpt.19c",
+        "data_cpt/cpt.19o",
+        "data_cpt/cpt_imu.csv",
+    ]
+    assert len(fake.archive_entry_size.calls) == 10
+    assert fake.skip_paths.count(b"data_cpt/") == 1
+    assert b"data_cpt/" not in fake.data_paths
+    assert (tmp_path / "selected-unset/data_cpt").is_dir()
+
+
+def test_truthy_noncanonical_size_state_is_normalized_for_regular_file(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fake = FakeLibrary([FakeEntry(b"data/file", b"payload", size_is_set=64)])
+    backend, _ = _backend(tmp_path, monkeypatch, fake)
+    member = backend.inventory(_archive(tmp_path))["members"][0]
+    assert member["bytes"] == len(b"payload")
+    assert member["size_is_set"] is True
+    assert member["size_contract"] == (
+        "REQUIRED_SET_NONNEGATIVE_WITHIN_CAP_FOR_REGULAR_FILE"
+    )
+
+
+def test_truthy_noncanonical_size_state_is_valid_for_zero_size_directory(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fake = FakeLibrary(
+        [
+            FakeEntry(
+                b"data/", b"", size=0, size_is_set=64,
+                filetype=libarchive7z.S_IFDIR,
+            )
+        ]
+    )
+    backend, _ = _backend(tmp_path, monkeypatch, fake)
+    member = backend.inventory(_archive(tmp_path))["members"][0]
+    assert member["bytes"] == 0
+    assert member["size_is_set"] is True
+    assert member["size_contract"] == "NOT_APPLICABLE_FOR_DIRECTORY"
+
+
+def test_directory_with_set_nonzero_size_is_rejected(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fake = FakeLibrary(
+        [
+            FakeEntry(
+                b"data/", b"ignored", size=1, size_is_set=64,
+                filetype=libarchive7z.S_IFDIR,
+            )
+        ]
+    )
+    backend, _ = _backend(tmp_path, monkeypatch, fake)
+    with pytest.raises(LibarchiveInventoryError, match="directory has nonzero size"):
+        backend.inventory(_archive(tmp_path))
 
 
 def test_directory_without_trailing_slash_remains_canonical(

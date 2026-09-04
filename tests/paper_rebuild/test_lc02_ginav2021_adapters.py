@@ -29,9 +29,15 @@ from legsa_gins.paper_rebuild.horizontal_literature.ginav2021.time_contract impo
     NavPvtTime,
     RawxTime,
     RinexEpoch,
+    TimeContractError,
+    associate_nav_pvt_by_stream_order,
+    five_phase_row_conservation_audit,
     gpst_calendar_to_gps,
+    gps_to_gpst_calendar,
     gps_to_utc_unix_ns,
     normalize_rinex_epochs,
+    official_epoch_acceptance_audit,
+    parse_rinex_epochs,
     prove_single_constant_normalization,
     utc_unix_ns_to_gps,
 )
@@ -502,11 +508,11 @@ def test_no_search_constant_time_normalization_and_row_ledger(tmp_path: Path) ->
         RinexEpoch(1, 6, "", second, "41.998", 998_000_000, 0, 1),
     )
     rawx = (RawxTime(10, 2200, first.sow_nanoseconds), RawxTime(30, 2200, second.sow_nanoseconds))
-    pvt = (NavPvtTime(9, 101_000, True), NavPvtTime(29, 102_000, True))
+    pvt = (NavPvtTime(11, 101_000, True), NavPvtTime(31, 102_000, True))
     proof = prove_single_constant_normalization(rawx, pvt, epochs)
     assert proof["constant_offset_nanoseconds"] == 2_000_000
     assert proof["candidate_offset_search_performed"] is False
-    assert [row["authoritative_message_sequence"] for row in proof["ledger"]] == [9, 29]
+    assert [row["authoritative_message_sequence"] for row in proof["ledger"]] == [11, 31]
 
     # Rebuild equivalent calendar epoch lines to exercise serialized rewrite.
     calendar_first = gpst_calendar_to_gps(
@@ -524,7 +530,7 @@ def test_no_search_constant_time_normalization_and_row_ledger(tmp_path: Path) ->
         RawxTime(30, calendar_second.week, calendar_second.sow_nanoseconds),
     )
     calendar_pvt = (
-        NavPvtTime(9, 101_000, True), NavPvtTime(29, 102_000, True),
+        NavPvtTime(11, 101_000, True), NavPvtTime(31, 102_000, True),
     )
     calendar_proof = prove_single_constant_normalization(
         calendar_rawx, calendar_pvt, calendar_epochs
@@ -541,3 +547,163 @@ def test_no_search_constant_time_normalization_and_row_ledger(tmp_path: Path) ->
     rows = normalize_rinex_epochs(source, destination, calendar_proof)
     assert len(rows) == 2
     assert "42.0000000" in destination.read_text(encoding="ascii")
+
+
+def test_causal_association_canonicalizes_semantic_duplicate_and_ignores_pre_first() -> None:
+    rawx = (
+        RawxTime(10, 2200, 100_998_000_000),
+        RawxTime(20, 2200, 101_998_000_000),
+    )
+    pvt = (
+        NavPvtTime(9, 999_000, True),
+        NavPvtTime(11, 101_000, True),
+        NavPvtTime(12, 101_000, True),
+        NavPvtTime(25, 102_000, True),
+    )
+    audit = associate_nav_pvt_by_stream_order(rawx, pvt)
+    assert audit["pre_first_nav_pvt_ignored_count"] == 1
+    assert audit["unique_association_count"] == 1
+    assert audit["semantic_duplicate_association_count"] == 1
+    assert audit["conflicting_association_count"] == 0
+    assert audit["missing_association_count"] == 0
+    assert audit["rows"][0]["canonical_message_sequence"] == 11
+    assert audit["rows"][1]["window_ends_at_eof"] is True
+    assert audit["rows"][1]["canonical_message_sequence"] == 25
+
+
+def test_causal_association_true_conflict_and_missing_fail_closed() -> None:
+    rawx = (
+        RawxTime(10, 2200, 100_998_000_000),
+        RawxTime(20, 2200, 101_998_000_000),
+    )
+    conflict = associate_nav_pvt_by_stream_order(
+        rawx,
+        (NavPvtTime(11, 101_000, True), NavPvtTime(12, 101_001, True)),
+    )
+    assert conflict["conflicting_association_count"] == 1
+    assert conflict["missing_association_count"] == 1
+    epochs = (
+        RinexEpoch(0, 1, "", GpsTime(2200, 100_998_000_000), "0.998", 998_000_000, 0, 1),
+        RinexEpoch(1, 2, "", GpsTime(2200, 101_998_000_000), "1.998", 998_000_000, 0, 1),
+    )
+    with pytest.raises(TimeContractError, match="missing"):
+        prove_single_constant_normalization(
+            rawx, (NavPvtTime(11, 101_000, True),), epochs
+        )
+    with pytest.raises(TimeContractError, match="conflicting semantic signatures"):
+        prove_single_constant_normalization(
+            rawx,
+            (
+                NavPvtTime(11, 101_000, True),
+                NavPvtTime(12, 101_001, True),
+                NavPvtTime(21, 102_000, True),
+            ),
+            epochs,
+        )
+
+
+def test_signed_modulo_week_relation_and_five_phase_row_conservation() -> None:
+    week_ns = 604_800 * 1_000_000_000
+    rawx = (RawxTime(10, 2200, week_ns - 2_000_000),)
+    epochs = (
+        RinexEpoch(
+            0, 1, "", GpsTime(2200, week_ns - 2_000_000),
+            "59.998", 998_000_000, 0, 1,
+        ),
+    )
+    proof = prove_single_constant_normalization(
+        rawx, (NavPvtTime(11, 0, True),), epochs
+    )
+    assert proof["constant_offset_nanoseconds"] == 2_000_000
+    normalized_rows = ({"epoch_index": 0},)
+    selected = (
+        RinexEpoch(0, 1, "", GpsTime(2201, 0), "0.000", 0, 0, 1),
+    )
+    audit = five_phase_row_conservation_audit(
+        rawx_epoch_count=1,
+        original_rinex_epochs=epochs,
+        proof=proof,
+        normalized_rows=normalized_rows,
+        selected_rinex_epochs=selected,
+    )
+    assert audit["pass"] is True
+    assert audit["deleted_or_merged_epoch_count"] == 0
+
+
+def test_1509_file_rows_preserve_five_phase_distribution_at_plus_2ms(
+    tmp_path: Path,
+) -> None:
+    count = 1509
+    normalized_start_ns = 100_000 * 1_000_000_000
+    rawx = tuple(
+        RawxTime(
+            index * 3,
+            2200,
+            normalized_start_ns + index * 200_000_000 - 2_000_000,
+        )
+        for index in range(count)
+    )
+    pvt = tuple(
+        NavPvtTime(
+            index * 3 + 1,
+            (normalized_start_ns + index * 200_000_000) // 1_000_000,
+            True,
+        )
+        for index in range(count)
+    )
+    lines = [
+        _header_line("3.04           OBSERVATION DATA    M", "RINEX VERSION / TYPE"),
+        _header_line("", "END OF HEADER"),
+    ]
+    for item in rawx:
+        year, month, day, hour, minute, second = gps_to_gpst_calendar(
+            GpsTime(item.week, item.tow_nanoseconds)
+        )
+        lines.append(
+            f"> {year:04d} {month:02d} {day:02d} {hour:02d} {minute:02d} "
+            f"{float(second):10.7f}  0  0\n"
+        )
+    source = tmp_path / "literal_1509.rnx"
+    destination = tmp_path / "normalized_1509.rnx"
+    source.write_text("".join(lines), encoding="ascii")
+    epochs = parse_rinex_epochs(source)
+    proof = prove_single_constant_normalization(rawx, pvt, epochs)
+    rows = normalize_rinex_epochs(source, destination, proof)
+    selected = parse_rinex_epochs(destination)
+    assert proof["selected_epoch_count"] == 1509
+    assert proof["constant_offset_nanoseconds"] == 2_000_000
+    assert [row["epoch_index"] for row in proof["ledger"]] == list(range(1509))
+    assert proof["association_audit"]["unique_association_count"] == 1509
+    histogram: dict[int, int] = {}
+    for epoch in selected:
+        histogram[epoch.fractional_nanoseconds] = (
+            histogram.get(epoch.fractional_nanoseconds, 0) + 1
+        )
+    assert histogram == {
+        0: 302,
+        200_000_000: 302,
+        400_000_000: 302,
+        600_000_000: 302,
+        800_000_000: 301,
+    }
+    eligibility = official_epoch_acceptance_audit(selected)
+    assert eligibility["literal_accepted_epoch_count"] == 302
+    assert eligibility["literal_rejected_noninteger_epoch_count"] == 1207
+    assert eligibility["deleted_epoch_count"] == 0
+    assert [row["official_fractional_nanoseconds_after"] for row in rows] == [
+        epoch.fractional_nanoseconds for epoch in selected
+    ]
+    audit = five_phase_row_conservation_audit(
+        rawx_epoch_count=count,
+        original_rinex_epochs=epochs,
+        proof=proof,
+        normalized_rows=rows,
+        selected_rinex_epochs=selected,
+    )
+    assert audit["pass"] is True
+    assert audit["selected_rinex_official_accepted_count"] == 302
+    assert audit["selected_rinex_official_rejected_count"] == 1207
+    assert audit["accepted_plus_rejected_equals_input"] is True
+    assert audit["deleted_or_merged_epoch_count"] == 0
+    assert all(row["normalization_retained_epoch_count"] == 1509 for row in rows)
+    assert all(row["normalization_deleted_or_merged_epoch_count"] == 0 for row in rows)

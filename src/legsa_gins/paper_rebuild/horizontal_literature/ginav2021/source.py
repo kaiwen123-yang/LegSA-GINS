@@ -50,6 +50,21 @@ def sha256_file(path: str | Path, *, limit: int | None = None) -> str:
     return digest.hexdigest()
 
 
+def copy_file_content_exact(source: str | Path, destination: str | Path) -> str:
+    """Copy bytes only, never source timestamps, mode bits, or other metadata."""
+
+    src = Path(source).resolve(strict=True)
+    dst = Path(destination)
+    with src.open("rb") as reader, dst.open("xb") as writer:
+        shutil.copyfileobj(reader, writer, length=4 * 1024 * 1024)
+        writer.flush()
+        os.fsync(writer.fileno())
+    source_hash = sha256_file(src)
+    if sha256_file(dst) != source_hash:
+        raise SourceIdentityError(f"content-only copy parity mismatch: {src} -> {dst}")
+    return source_hash
+
+
 def _git(root: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
     try:
         return subprocess.run(
@@ -215,8 +230,7 @@ def materialize_runtime_source_mirror(
         if src.is_symlink():
             os.symlink(os.readlink(src), dst)
         elif src.is_file():
-            shutil.copy2(src, dst)
-            copied[relative] = sha256_file(dst)
+            copied[relative] = copy_file_content_exact(src, dst)
         else:
             raise SourceIdentityError(f"unsupported tracked entry in source mirror: {relative}")
     (destination / "result").mkdir(exist_ok=False)
@@ -244,6 +258,18 @@ def materialize_runtime_source_mirror(
         },
         "empty_result_directory_created": True,
     }
+
+
+def runtime_source_mirror_relative_files(
+    official_root: str | Path,
+) -> tuple[str, ...]:
+    """Enumerate every tracked file that a runtime mirror will materialize."""
+
+    source = Path(official_root).expanduser().resolve(strict=True)
+    return tuple(
+        relative for relative in _tracked_files(source)
+        if not relative.startswith(RUNTIME_MIRROR_EXCLUDED_PREFIXES)
+    )
 
 
 def verify_runtime_mirror(mirror_root: str | Path, manifest: Mapping[str, Any]) -> None:

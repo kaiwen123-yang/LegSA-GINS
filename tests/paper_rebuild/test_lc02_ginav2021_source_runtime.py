@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -30,8 +31,36 @@ from legsa_gins.paper_rebuild.horizontal_literature.ginav2021.source import (
     CoreCleanlinessGuard,
     ForbiddenInputError,
     materialize_runtime_source_mirror,
+    copy_file_content_exact,
     verify_source_identity,
 )
+
+
+def test_content_only_copy_never_invokes_metadata_copy(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = tmp_path / "source.bin"
+    destination = tmp_path / "destination.bin"
+    source.write_bytes(b"content-only")
+
+    def forbidden(*_args: object, **_kwargs: object) -> None:
+        pytest.fail("metadata-preserving copy operation was invoked")
+    monkeypatch.setattr("shutil.copy2", forbidden)
+    monkeypatch.setattr("shutil.copystat", forbidden)
+    monkeypatch.setattr("os.utime", forbidden)
+    digest = copy_file_content_exact(source, destination)
+    assert destination.read_bytes() == source.read_bytes()
+    assert digest == hashlib.sha256(source.read_bytes()).hexdigest()
+    transaction_source = (
+        Path(__file__).resolve().parents[2]
+        / "src/legsa_gins/paper_rebuild/horizontal_literature/ginav2021/transaction.py"
+    ).read_text(encoding="utf-8")
+    mirror_source = (
+        Path(__file__).resolve().parents[2]
+        / "src/legsa_gins/paper_rebuild/horizontal_literature/ginav2021/source.py"
+    ).read_text(encoding="utf-8")
+    assert "shutil.copy2" not in transaction_source
+    assert "shutil.copy2" not in mirror_source
 from legsa_gins.paper_rebuild.horizontal_literature.ginav2021.transaction import (
     TransactionError,
     _classify_sample_archive_members,
@@ -186,6 +215,7 @@ def test_tdcp_probe_keeps_literal_threshold_and_no_yaw_substitution(tmp_path: Pa
         output_csv=tmp_path / "probe.csv", windows=False,
     )
     assert TDCP_THRESHOLD_LITERAL in rendered
+    assert f'"{TDCP_THRESHOLD_LITERAL}"' in rendered
     assert "speed2>3" in rendered
     assert "ins_align(rtk,obs_epoch,NaN,nav)" in rendered
     assert "while true" in rendered
@@ -232,6 +262,12 @@ def test_static_runtime_contract_is_json_yaml_and_execution_stays_conditional() 
     assert contract["authorization"]["BY2_C00"] == "conditional_on_G0_G3_pass"
     assert contract["authorization"]["trace_evaluation"] is False
     assert contract["phase1_implementation_note"]["matlab_launched"] is False
+    transaction_source = (
+        REPOSITORY
+        / "src/legsa_gins/paper_rebuild/horizontal_literature/ginav2021/transaction.py"
+    ).read_text(encoding="utf-8")
+    assert "302/302" not in transaction_source
+    assert "eligible_integer_epoch_count\"] == 302" not in transaction_source
     backend = contract["official_sample"]["archive_backend"]
     assert backend["library_sha256"] == (
         "b668621ff255cc106907516dc58c6454b32323328fe6014614f4719d9c3a6bb6"
@@ -289,7 +325,12 @@ def test_probe_summary_records_every_ins_align_invocation_separately_from_spp(
     path = tmp_path / "probe.csv"
     fieldnames = (
         "epoch_index", "gps_week", "gps_sow", "common_phase_satellites",
-        "tdcp_equation_count", "robust_retained_count", "threshold_pass",
+        "tdcp_equation_count", "robust_retained_count", "velocity_east_mps",
+        "velocity_north_mps", "velocity_up_mps", "velocity_right_mps",
+        "velocity_forward_mps", "velocity_body_up_mps",
+        "velocity_ned_north_mps", "velocity_ned_east_mps",
+        "velocity_ned_down_mps", "speed_mps", "speed_squared_m2ps2",
+        "threshold_literal", "threshold_pass",
         "official_tdcp_flag", "prior_spp_available", "prior_spp_status",
         "spp_status", "spp_satellite_count", "spp_pair_available",
         "tdcp_velocity_attempted", "alignment_attempted", "alignment_result",
@@ -299,6 +340,7 @@ def test_probe_summary_records_every_ins_align_invocation_separately_from_spp(
             "epoch_index": 0, "gps_week": 2200, "gps_sow": 1,
             "common_phase_satellites": 0, "tdcp_equation_count": 0,
             "robust_retained_count": 0, "threshold_pass": 0,
+            "threshold_literal": "dot(vn,vn)>3",
             "official_tdcp_flag": 0, "prior_spp_available": 0,
             "prior_spp_status": 0, "spp_status": 5,
             "spp_satellite_count": 7, "spp_pair_available": 0,
@@ -309,6 +351,7 @@ def test_probe_summary_records_every_ins_align_invocation_separately_from_spp(
             "epoch_index": 1, "gps_week": 2200, "gps_sow": 2,
             "common_phase_satellites": 6, "tdcp_equation_count": 6,
             "robust_retained_count": 5, "threshold_pass": 1,
+            "threshold_literal": "dot(vn,vn)>3",
             "official_tdcp_flag": 1, "prior_spp_available": 1,
             "prior_spp_status": 5, "spp_status": 5,
             "spp_satellite_count": 8, "spp_pair_available": 1,
@@ -326,6 +369,27 @@ def test_probe_summary_records_every_ins_align_invocation_separately_from_spp(
     assert summary["prior_spp_available_epoch_count"] == 1
     assert summary["tdcp_velocity_attempt_count"] == 1
     assert summary["spp_pair_available_epoch_count"] == 1
+    assert summary["transport_recovery_audit"][
+        "known_unquoted_threshold_rows_recovered"
+    ] == 0
+
+    quoted = path.read_text(encoding="utf-8")
+    path.write_text(
+        quoted.replace('"dot(vn,vn)>3"', "dot(vn,vn)>3"), encoding="utf-8"
+    )
+    recovered = _probe_summary(path)
+    assert recovered["eligible_integer_epoch_count"] == 2
+    assert recovered["spp_pair_available_epoch_count"] == 1
+    assert recovered["transport_recovery_audit"][
+        "known_unquoted_threshold_rows_recovered"
+    ] == 2
+    assert recovered["transport_recovery_audit"]["scientific_values_changed"] is False
+
+    path.write_text(
+        quoted.replace('"dot(vn,vn)>3"', "dot(xx,vn)>3"), encoding="utf-8"
+    )
+    with pytest.raises(TransactionError, match="transport is ambiguous"):
+        _probe_summary(path)
 
     rows[1]["alignment_attempted"] = 0
     with path.open("w", encoding="utf-8", newline="") as handle:

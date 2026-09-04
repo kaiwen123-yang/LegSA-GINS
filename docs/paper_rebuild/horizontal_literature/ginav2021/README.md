@@ -41,11 +41,18 @@ enables only the NONE filter and 7zip format, and never searches `PATH`, invokes
 an archive subprocess, installs software, or uses a general extract API. A
 header-only `archive_read_next_header` pass rejects unsafe, non-NFC,
 case/prefix-colliding, linked, encrypted, sparse, special, unset/negative, or
-over-limit members. A directory filetype may carry exactly one trailing POSIX
+over-limit regular-file members. A regular file must have set, nonnegative size
+metadata within the member cap and carries the stable
+`REQUIRED_SET_NONNEGATIVE_WITHIN_CAP_FOR_REGULAR_FILE` contract. Directory size
+metadata is not applicable: unset metadata is valid and normalized to zero with
+`NOT_APPLICABLE_FOR_DIRECTORY`; when directory size metadata is set, its value
+must be zero. A directory filetype may carry exactly one trailing POSIX
 slash; its exact decoded archive pathname is retained, while the canonical name
 with that slash removed drives collision checks. Both forms remain frozen in
-header identity. Regular files and all other trailing-slash or empty-component
-forms remain rejected. The inventory positively proves that no serialized `.pos`,
+header identity. The size contract is also frozen in the header digest,
+inventory binding, and extraction header comparison. Regular files and all other
+trailing-slash or empty-component forms remain rejected. The inventory positively
+proves that no serialized `.pos`,
 `.sol`, or `.out` is bundled. Inventory calls no payload API; this does not
 claim that a solid archive implementation performs no internal decoding.
 
@@ -94,11 +101,22 @@ vectors map to RFU as
 `[R,F,U]=[-L,F,U]`. The runtime CSV remains untracked and unpublished.
 
 G3 inventories the literal RINEX fractional seconds without navigation. A
-normalization is permitted only when every RAWX epoch has exactly one
-same-receiver NAV-PVT row with valid date, valid time, and fully resolved GNSS
-time, and every derived offset is the same exact integer nanosecond value. The
-algorithm never enumerates candidate offsets and does not assume the historical
-2 ms observation. The source-explicit probe calls official `ins_align`,
+normalization is permitted only by causal same-receiver stream order. RAWX row
+`i` owns NAV-PVT messages strictly after its message sequence and strictly
+before the next RAWX sequence; the last window ends at EOF, and pre-first-RAWX
+NAV-PVT is ignored. Candidates require `validDate`, `validTime`, and
+`fullyResolved`. The only consumed semantic signature is `iTOW` plus those
+three validity bits. Message sequence, window membership, and candidate count
+are audit/transport fields. One signature is canonicalized deterministically to
+its minimum message sequence even if repeated; zero signatures are MISSING and
+multiple signatures are CONFLICT, both fail closed. Every selected row must
+also prove one constant signed modulo-week `NAV-PVT iTOW - RAWX rcvTow`
+relation. The algorithm never enumerates or scores candidate offsets and does
+not use RMSE. The five phases RAWX, literal RINEX, association ledger,
+normalized RINEX, and selected RINEX must conserve retained-row count and order
+with zero deletion or merge. The official integer-second predicate partitions
+those retained rows into eligible and rejected counts; it never filters the
+normalized file. The source-explicit probe calls official `ins_align`,
 `gnss_solver`, and `tdcp2vel` over every official-match-eligible integer epoch;
 the literal activation condition is `dot(vn,vn)>3`. It supplies no alternative
 yaw. Each eligible row records `alignment_attempted=true` exactly when official
@@ -142,3 +160,79 @@ The tracked runtime contract is
 Phase-1 implementation and tests do not themselves authorize or claim a MATLAB,
 sample, BY2, stage-publication, trace-evaluation, representative-case, or
 comparison execution.
+
+The separately gated r4c recovery authenticates the exact sealed production
+r4b and its source r4, repairs only the known CSV transport split of the
+`dot(vn,vn)>3` literal, and never reruns G0--G3. Future probe CSV writes quote
+that literal. Recovery accepts the legacy transport only for the exact
+28-column header/29-column row/index-17-and-18 fragment shape, records raw and
+canonical hashes, and preserves all scientific values. Its recovered G3 rows
+must dynamically equal the independently recomputed configured-run inventory
+in both count and exact time set; no 302-row rule remains. The fresh r4c root is
+non-overwriting, G4-only, uses the same `_g4_scientific_run_and_freeze` helper
+as the full transaction, permits at most one G4 invocation, publishes nothing,
+and seals only after current-code and immutable r4/r4b reauthentication.
+
+The dedicated `resume-existing-r4-from-g3c` runner entry only prepares a fresh,
+non-overwriting, single-level continuation root. It content-hash-locks the
+exact frozen r4 full tree plus its G0, G1, GNSS-adapter, and IMU-adapter trees.
+Preparation also requires the user-supplied absolute MATLAB executable and
+binds its resolved path and SHA-256 to frozen r4 G0; execution must present the
+same path and content identity.
+It also requires the fixed status, provenance, resume summary, archived driver,
+pre-execution-control hashes, exact short layout, prior noninteger-policy
+terminal, G0/G3/G4 zero counts, official-sample PASS, formal admission false,
+and BY2 C00 unexecuted. Arbitrary self-binding is rejected. The new root records
+all four prior gates as reused with zero execution in the continuation, caps
+later G3 and G4 at one execution each, and performs no MATLAB launch or RINEX
+generation during the preparation call.
+
+The separate `execute-resume-existing-r4-from-g3c` entry consumes only that
+authenticated prepared root and uses the same internal G3c-to-G4 scientific
+suffix implementation as the full transaction. Before creating `r4b/s`, its
+read-only preflight revalidates frozen r4, the reused G2 payload hashes, the
+hash-locked raw CSV reconstruction against the frozen UBX, and an explicitly
+supplied absolute MATLAB executable whose SHA-256 must equal frozen r4 G0's
+`GINAV_MATLAB_ENVIRONMENT.json`; PATH fallback is forbidden. Runtime paths use
+the short `r4b/s/{g0,g1,g2n,g2i,g3c,g3p,g4,n,r}` layout and must pass the exact
+`/usr/bin/wslpath -w --` 239-character budget ledger. G0/G1/G2 directories are
+control-only `REUSED_NOT_EXECUTED` records, and this-continuation execution
+counts remain zero for all three gates.
+
+Runtime source mirrors and native `.pos` freezes copy file contents only and
+then verify SHA-256 parity; source timestamps, modes, and other metadata are not
+preserved. Suffix provenance is constructed fresh from an allowlist of source
+r4 identity, official-sample reuse, and G2 evidence. Old terminal, admission,
+blocker, transaction, and file-access fields are not inherited; the access
+ledger is fresh. Raw-path identity is explicitly local-path configuration plus
+the raw hash lock plus reconstructed-UBX equality to frozen r4.
+Before stage creation, the suffix also binds the current repository HEAD,
+tracked dirty status and binary-diff hash restricted to the approved LC02
+implementation paths, every implementation-file SHA-256, the runtime-contract
+hash, and one aggregate binding. Unrelated untracked paths are neither listed
+nor hashed. The same identity is recomputed at finalization and must match
+exactly. Preparation writes that identity into its authentication lock;
+execution must reproduce it before creating any stage directory and then uses
+that exact prepared object in PRE_EXEC and provenance. Fresh consolidated
+provenance is updated before writing with this
+continuation's terminal, completion/admission state, actual blocker when
+applicable, fresh access audit, G4 execution/result state, and gate counts.
+
+G3c persists `RAWX_NAVPVT_ASSOCIATION_SEMANTIC_DIAGNOSIS.json` and
+`RAWX_NAVPVT_ASSOCIATION_CANDIDATES.csv`. The CSV inventories every one of the
+1,509 RAWX causal windows and every authoritative candidate, including explicit
+missing, duplicate, and conflict classifications. Index 1508 separately records
+the superseded exact-key miss and its actual B-window NAV-PVT candidate with
+raw row/timestamp, UTC, fix, position, velocity, accuracy, heading, and flag
+fields. Only iTOW and `validDate`/`validTime`/`fullyResolved` are scientifically
+consumed; all other decoded NAV-PVT fields are audit-only. G4 is eligible only
+after recovered G3 eligibility matches the independently recomputed configured
+run inventory in both dynamic count and exact GPS time set. Every
+terminal writes its audit/provenance/status/parity/summary/manifest set and then
+writes the seal last; publication remains false.
+The Windows-path ledger covers both complete tracked non-`data`/`result`
+source-mirror inventories, every generated harness file, and all principal
+MATLAB input/output paths. The final artifact manifest is rooted at the whole
+continuation, so it directly includes the prepared lock,
+`PRE_EXECUTION_CONTROL.json`, and root WSL-path ledger/budget; it excludes only
+itself and the subsequently written final seal.

@@ -374,6 +374,102 @@ def formal_admission(summary: Mapping[str, Any], *, process_returncode: int) -> 
     }
 
 
+REQUIRED_NATIVE_PROVENANCE_KEYS = (
+    "data_mode", "dataset_role", "raw_source_hashes", "provider_hashes",
+    "synthetic_data_used", "semisynthetic_data_used", "trace_used_online",
+    "receiver_imu_as_body_imu", "final_v23_output_solver_input",
+    "LegSA_output_solver_input", "per_case_tuning", "output_only_correction",
+    "epoch_deleted_for_metric", "old_runtime_input_count", "code_commit",
+    "config_hash",
+)
+
+
+def validated_native_provenance(provenance: Mapping[str, Any]) -> dict[str, Any]:
+    """Fail before any native/freeze output is created."""
+
+    missing = [key for key in REQUIRED_NATIVE_PROVENANCE_KEYS if key not in provenance]
+    if missing:
+        raise OutputContractError(
+            "native provenance is incomplete: " + ",".join(missing)
+        )
+    return {key: provenance[key] for key in REQUIRED_NATIVE_PROVENANCE_KEYS}
+
+
+def analyze_frozen_native_solution_metadata_only(
+    native_solution: str | Path,
+    output_root: str | Path,
+    *,
+    process_returncode: int,
+    provenance: Mapping[str, Any],
+    source_artifact_hashes: Mapping[str, str],
+) -> dict[str, Any]:
+    """Analyze an immutable native result without copying or rewriting science files."""
+
+    native_provenance = validated_native_provenance(provenance)
+    source = Path(native_solution).resolve(strict=True)
+    expected_native = source_artifact_hashes.get("GINAV_BY2_C00_NATIVE_SOLUTION.pos")
+    if expected_native != sha256_file(source):
+        raise OutputContractError("metadata-only native source hash mismatch")
+    rows = read_official_solution(source)
+    summary = summarize_solution(rows)
+    summary["finite_lc_update_count"] = sum(
+        row.status == LC_UPDATE_STATUS and row.state_finite and row.covariance_finite
+        for row in rows
+    )
+    admission = formal_admission(summary, process_returncode=process_returncode)
+    conservation = {
+        "row_count": summary["row_count"],
+        "alignment_output_count": summary["alignment_output_count"],
+        "internal_spp_fed_lc_update_count": summary[
+            "internal_spp_fed_lc_update_count"
+        ],
+        "ins_only_propagation_count": summary["ins_only_propagation_count"],
+    }
+    conservation["pass"] = conservation["row_count"] == sum(
+        conservation[key] for key in (
+            "alignment_output_count", "internal_spp_fed_lc_update_count",
+            "ins_only_propagation_count",
+        )
+    )
+    if not conservation["pass"]:
+        raise OutputContractError("metadata-only native row conservation failed")
+    root = Path(output_root)
+    root.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "schema_version": "ginav2021.by2_c00_native_summary.metadata_only.v1",
+        **native_provenance,
+        **summary,
+        **admission,
+        "metadata_only": True,
+        "scientific_files_copied_or_rewritten": False,
+        "source_artifact_hashes": dict(source_artifact_hashes),
+        "native_row_conservation": conservation,
+        "trace_or_reference_opened": False,
+        "performance_judged_against_reference": False,
+    }
+    (root / "GINAV_BY2_C00_NATIVE_SUMMARY.json").write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    freeze = {
+        "schema_version": "ginav2021.by2_c00_native_freeze.metadata_only.v1",
+        **native_provenance,
+        "metadata_only": True,
+        "source_native_solution_path": str(source),
+        "source_artifact_hashes": dict(source_artifact_hashes),
+        "scientific_files_copied_or_rewritten": False,
+        "formal_admission": admission,
+        "scientific_digest_sha256": summary["scientific_digest_sha256"],
+        "trace_open_count_at_freeze": 0,
+        "reference_open_count_at_freeze": 0,
+    }
+    (root / "GINAV_BY2_C00_NATIVE_FREEZE.json").write_text(
+        json.dumps(freeze, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return payload
+
+
 def freeze_native_solution(
     native_solution: str | Path,
     output_root: str | Path,
@@ -383,6 +479,7 @@ def freeze_native_solution(
     provenance: Mapping[str, Any],
     normalization_root: str | Path | None = None,
 ) -> dict[str, Any]:
+    native_provenance = validated_native_provenance(provenance)
     source = Path(native_solution).resolve(strict=True)
     root = Path(output_root)
     root.mkdir(parents=True, exist_ok=True)
@@ -431,24 +528,6 @@ def freeze_native_solution(
     if returncode is None:
         raise OutputContractError("native result is missing MATLAB return code")
     admission = formal_admission(summary, process_returncode=int(returncode))
-    required_provenance_keys = (
-        "data_mode", "dataset_role", "raw_source_hashes", "provider_hashes",
-        "synthetic_data_used", "semisynthetic_data_used", "trace_used_online",
-        "receiver_imu_as_body_imu", "final_v23_output_solver_input",
-        "LegSA_output_solver_input", "per_case_tuning",
-        "output_only_correction", "epoch_deleted_for_metric",
-        "old_runtime_input_count", "code_commit", "config_hash",
-    )
-    missing_provenance = [
-        key for key in required_provenance_keys if key not in provenance
-    ]
-    if missing_provenance:
-        raise OutputContractError(
-            "native provenance is incomplete: " + ",".join(missing_provenance)
-        )
-    native_provenance = {
-        key: provenance[key] for key in required_provenance_keys
-    }
     native_summary = {
         "schema_version": "ginav2021.by2_c00_native_summary.v1",
         **native_provenance,
