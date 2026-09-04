@@ -1,7 +1,7 @@
 # AGENTS.md — LegSA-GINS Active Project Rules
 
-Last updated: 2026-09-04  
-Canonical-541 numerical evidence completed: 2026-08-09 22:18 UTC+8  
+Last updated: 2026-09-04
+Canonical-541 numerical evidence completed: 2026-08-09 22:18 UTC+8
 Horizontal literature comparison, cross-layer synthesis, and exploratory plotting completed: 2026-09-04
 
 ## 0. Authority and reading order
