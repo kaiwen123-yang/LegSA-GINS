@@ -289,6 +289,375 @@ The historical 1.813898 deg final_v23 result is a legacy identity, not the curre
 
 ---
 
+<!-- CANONICAL541_DETAILED_RESULTS_BEGIN -->
+
+## 7A. Canonical-541 detailed numerical results and interpretation
+
+This subsection completes the Canonical-541 record with the full 541-case
+aggregate values, paired comparisons, family behavior, module actions, and
+claim limits. The terminal numerical state is:
+
+```text
+541 / 541 canonical cases
+5951 / 5951 unique solver runs
+5951 / 5951 unique offline evaluations
+7033 / 7033 logical evaluation rows
+0 solver failures
+0 evaluation failures
+15 / 15 aggregate outputs
+```
+
+Terminal:
+
+```text
+PASS_CANONICAL541_OFFLINE_EVALUATION_AND_AGGREGATE_READY_FOR_SEPARATE_PLOTTING
+```
+
+### 7A.1 Overall 541-case means
+
+Values below are equal-weight means of the case-level RMSE values over all
+541 cases, not one epoch-pooled global RMSE.
+
+| Method | East m | North m | Horizontal m | Up m | 3D m | Roll deg | Pitch deg | Yaw deg |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| F01 Single | 0.6349 | 0.6742 | 0.945565 | 1.142035 | 1.562490 | 1.409577 | 1.788949 | 13.407726 |
+| F02 Basic | 0.7074 | 0.7471 | 1.066095 | 1.147250 | 1.661130 | 1.421226 | 1.794461 | 5.702272 |
+| F03 Strong | 0.6320 | 0.6633 | 0.939803 | 1.140743 | 1.557760 | 1.370176 | 1.781466 | 6.436740 |
+| A04 Core candidate | 0.6289 | 0.6617 | 0.935235 | 1.139936 | 1.554172 | 1.358080 | 1.772151 | 6.498098 |
+| F04 Full extension | 0.6332 | 0.6628 | 0.942838 | 1.172371 | 1.586502 | 1.273262 | 1.674899 | 5.329333 |
+
+Current interpretation:
+
+```text
+Strong:
+successful dual-yaw + receiver-velocity backbone.
+
+A04 / AB1011:
+best current mean position result;
+current core and leading manuscript candidate;
+Strong + RD + RP + HV, Source-Aware disabled.
+
+F04 / AB1111:
+best average roll/pitch/yaw among the listed main methods;
+selected high-tail and quality-mismatch protection;
+worse average position, Up, and 3D than Strong/A04;
+not a universally superior default estimator.
+```
+
+### 7A.2 A04 versus Strong
+
+Delta convention:
+
+```text
+delta = candidate - reference
+delta < 0 is better for lower-is-better metrics
+```
+
+A04 relative to Strong:
+
+| Metric | Mean delta | A04 win rate |
+|---|---:|---:|
+| Horizontal RMSE | -0.004568 m | 87.6% |
+| Up RMSE | -0.000807 m | 97.6% |
+| 3D RMSE | -0.003589 m | 94.8% |
+| Roll RMSE | -0.012096 deg | 98.2% |
+| Pitch RMSE | -0.009315 deg | 96.9% |
+| Yaw RMSE | +0.061358 deg mean | 90.0% case wins; median delta about -0.02833 deg |
+
+The yaw mean is pulled upward by a small number of extreme cases. The
+case-level median and win rate show that A04 usually improves yaw slightly,
+but it does not improve the yaw mean over all 541 cases.
+
+Across the 60 degradation types, A04 versus Strong has majority-seed
+improvement in approximately:
+
+```text
+Horizontal: 54 / 60 degradation types
+Up:         60 / 60 degradation types
+3D:         59 / 60 degradation types
+Roll:       59 / 60 degradation types
+Pitch:      60 / 60 degradation types
+Yaw:        56 / 60 degradation types
+```
+
+The main A04 result is therefore a small absolute but highly consistent
+gain, not a large universal accuracy jump.
+
+### 7A.3 Full versus Strong
+
+Full relative to Strong:
+
+| Metric | Mean delta | Full win rate |
+|---|---:|---:|
+| Horizontal RMSE | +0.003035 m | 17.6% |
+| Up RMSE | +0.031628 m | 4.4% |
+| 3D RMSE | +0.028742 m | 9.1% |
+| Roll RMSE | -0.096914 deg | 95.9% |
+| Pitch RMSE | -0.106567 deg | 96.5% |
+| Yaw RMSE | -1.107407 deg | 70.4% |
+
+Full generally improves attitude but usually worsens position, especially
+Up and 3D. Its yaw mean gain is substantially influenced by selected severe
+cases; it must not be described as uniformly better.
+
+### 7A.4 Full versus A04 / no-SA
+
+Full relative to A04 isolates the net effect of always-on Source-Aware
+within the current full context:
+
+| Metric | Mean delta | Full win rate |
+|---|---:|---:|
+| Horizontal RMSE | +0.007603 m | 15.9% |
+| Up RMSE | +0.032435 m | 4.4% |
+| 3D RMSE | +0.032330 m | 7.9% |
+| Roll RMSE | -0.084818 deg | 13.5% case wins; mean is tail-driven |
+| Pitch RMSE | -0.097252 deg | 80.6% |
+| Yaw RMSE | -1.168765 deg | 13.1% case wins; median delta about +0.02088 deg |
+
+For roll and yaw, a small set of severe cases produces a favorable mean
+while the median and case-win rate show that Full is worse in most ordinary
+cases. This is a tail-protection result, not a general nominal-accuracy
+result.
+
+### 7A.5 Tail behavior
+
+Selected across-case P95 values:
+
+| Metric | Strong P95 | Full P95 | Interpretation |
+|---|---:|---:|---|
+| Horizontal RMSE | 4.3815 m | 4.1367 m | Full lower |
+| 3D RMSE | 5.4039 m | 5.2202 m | Full lower |
+| Roll RMSE | 2.7339 deg | 2.2693 deg | Full lower |
+| Pitch RMSE | 3.3750 deg | 2.5905 deg | Full lower |
+| Yaw RMSE | 31.9055 deg | 15.4346 deg | Full substantially lower |
+
+Full reduces several high-percentile tails even though its mean position is
+worse. It does not guarantee the best absolute maximum in every metric; for
+example, its worst observed yaw case is not better than Strong's worst yaw
+case.
+
+### 7A.6 Module ablation conclusions
+
+Raw Doppler:
+
+```text
+Full versus no-RD:
+Horizontal mean delta ≈ -0.00482 m
+Up mean delta         ≈ -0.00052 m
+3D mean delta         ≈ -0.00362 m
+
+RD-only versus Strong:
+Horizontal mean delta ≈ -0.00379 m; about 91.1% wins
+Up mean delta         ≈ -0.00046 m; about 97.0% wins
+3D mean delta         ≈ -0.00281 m; about 94.1% wins
+Yaw mean delta        ≈ -0.02925 deg
+```
+
+Raw Doppler is the clearest additional measurement module: small in
+absolute magnitude, but highly consistent over cases, families, and seeds.
+
+Go2 roll/pitch weak prior:
+
+```text
+Full versus no-RP:
+Horizontal mean delta ≈ -0.00072 m
+Up mean delta         ≈ -0.00061 m
+3D mean delta         ≈ -0.00092 m
+Roll mean delta       ≈ -0.01099 deg
+Pitch mean delta      ≈ -0.00261 deg
+Yaw mean delta        ≈ -0.07064 deg
+```
+
+RP produces a small but highly consistent attitude benefit. It is a weak
+auxiliary observation and must not be called truth.
+
+Go2 horizontal-velocity weak prior:
+
+```text
+Full versus no-HV:
+Horizontal mean delta ≈ -0.00043 m
+3D mean delta         ≈ -0.00032 m
+Horizontal/3D case win rate ≈ 30.7%
+```
+
+HV is near-neutral overall. Its favorable mean is driven by selected
+windows/cases rather than broad case-level dominance. It is not a primary
+standalone innovation claim.
+
+Source-Aware:
+
+```text
+SA-only versus Strong:
+Horizontal mean delta ≈ +0.00897 m
+Up mean delta         ≈ +0.03269 m
+3D mean delta         ≈ +0.03352 m
+
+Full versus no-SA:
+position is worse in the large majority of cases;
+selected severe quality-mismatch and mixed-source cases improve.
+```
+
+Always-on Source-Aware is selectively useful but not generally beneficial.
+It does not implement nominal-silent/fault-active behavior in the completed
+algorithm.
+
+### 7A.7 Family-level Full versus Strong behavior
+
+Approximate family-level mean deltas:
+
+| Family | Horizontal delta m | 3D delta m | Yaw delta deg | Interpretation |
+|---|---:|---:|---:|---|
+| Clean | +0.0023 | +0.0358 | -0.0075 | small attitude gain, position cost |
+| GNSS outage | +0.1580 | +0.1430 | -0.0084 | position clearly worse |
+| Sampling/dropout | +0.0525 | +0.0945 | -0.0179 | position worse |
+| Position-value degradation | -0.0269 | +0.0239 | -1.9449 | horizontal/yaw gain; Up can erase 3D gain |
+| Std/status mismatch | -0.1053 | -0.1054 | -2.0906 | clear Full benefit |
+| Dual-yaw degradation | +0.0023 | +0.0358 | +0.0492 | no general Full advantage |
+| Velocity/Raw-Doppler degradation | +0.0024 | +0.0362 | -0.0044 | near clean trade-off |
+| Go2 prior/metadata | +0.0023 | +0.0358 | -0.0030 | near clean trade-off |
+| Multi-source mixed | -0.0609 | -0.0554 | -8.2169 | clear selected Full benefit |
+
+Representative favorable Full cases:
+
+```text
+D27:
+bad position values with optimistic reported quality;
+Full materially improves horizontal, Up, 3D, and yaw.
+
+D60:
+mixed position, heading, and velocity degradation with optimistic quality;
+Full materially improves position and yaw.
+```
+
+Representative unfavorable Full cases:
+
+```text
+D04:
+20 s GNSS-position outage;
+Full substantially worsens horizontal and 3D error.
+
+D12:
+60% random GNSS loss;
+Full worsens horizontal and 3D error.
+
+D58:
+outage + yaw spikes + recovery-oriented sequence;
+Full gives only a very small yaw benefit while worsening position.
+```
+
+These examples must be shown together when discussing applicability. Do
+not select only favorable D27/D60 examples.
+
+### 7A.8 Clean mechanism-action counts
+
+For the Full clean case:
+
+```text
+GNSS position updates:             274
+receiver-velocity updates:         274
+dual-yaw attempts:                 274
+dual-yaw accepted:                 268
+
+Scheme-C normal/downweight/reject: 121 / 147 / 6
+
+Raw-Doppler provider rows:         1248
+Raw-Doppler actual updates:        223
+Raw-Doppler rejects:               0
+satellite count min/median/max:    7 / 10 / 12
+Raw-Doppler residual P95:          about 2.510 m/s
+
+Go2 RP updates:                    274
+Go2 HV updates:                    274
+
+Source-Aware evaluations:          1587
+Source-Aware changed weights:      1346
+Source-Aware clean touch rate:     about 84.8%
+```
+
+The module switches were active in the real solver. The Source-Aware clean
+touch rate confirms that it was almost continuously active rather than
+nominal-silent.
+
+### 7A.9 Metric coverage and uncertainty boundary
+
+```text
+defined evaluation fields:        542
+supported fields:                 412
+full 5951-row coverage fields:    334
+unsupported fields:               130
+```
+
+Most unsupported fields are velocity-error or velocity-calibration metrics
+for which the selected same-source reference does not provide a suitable
+reference velocity. Unsupported fields remain `NA`; never convert them to
+zero.
+
+Uncertainty results use diagonal `KF_GINS_STD.txt` fields:
+
+```text
+diagonal normalized-error consistency diagnostic only
+not full-covariance NEES
+```
+
+The predicted STD values are generally overconfident relative to the
+same-source reference. No integrity or calibrated-confidence claim is
+allowed from these diagonal results.
+
+Recovery-time fields remain `NA` where no frozen recovery rule or
+identifiable event window exists. Do not invent a threshold after seeing
+the results.
+
+### 7A.10 Canonical-541 claim boundary
+
+Allowed:
+
+```text
+Canonical-541 completed 541 cases, 5951 unique runs/evaluations,
+and 7033 logical rows with zero evaluation failures;
+
+Strong is a successful dual-yaw + receiver-velocity backbone;
+
+Raw Doppler gives a small but highly consistent benefit;
+
+RP gives a small but consistent attitude benefit;
+
+HV is near-neutral overall;
+
+A04 is the current core and leading manuscript candidate;
+
+always-on Source-Aware has a robustness-accuracy trade-off;
+
+Full provides selected quality-mismatch, mixed-fault, and attitude-tail
+protection.
+```
+
+Not allowed:
+
+```text
+Full universally outperforms Strong or A04;
+
+Source-Aware is nominal-silent/fault-active;
+
+all four added modules contribute equally;
+
+D01-D60 are 60 independently collected real environments;
+
+the Fixposition-derived reference is independent ground truth;
+
+Canonical-541 alone proves cross-sequence or cross-platform generalization;
+
+unsupported velocity metrics are zero;
+
+diagonal consistency is full NEES.
+```
+
+No ordinary plotting, manuscript organization, horizontal comparison, or
+documentation task may rerun the Canonical numerical chain.
+
+<!-- CANONICAL541_DETAILED_RESULTS_END -->
+
+---
+
 ## 8. Horizontal comparison registry
 
 Horizontal root:
