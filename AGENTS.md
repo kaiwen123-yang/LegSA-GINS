@@ -1,6 +1,6 @@
 # AGENTS.md — LegSA-GINS Active Project Rules
 
-Last updated: 2026-09-04
+Last updated: 2026-09-05
 Canonical-541 numerical evidence completed: 2026-08-09 22:18 UTC+8
 Horizontal literature comparison, cross-layer synthesis, and exploratory plotting completed: 2026-09-04
 
@@ -861,6 +861,69 @@ Do not spend time globally cleaning their automatic dashboard templates as part 
 
 ---
 
+## 12b. Canonical-541 publication-figure task (authorized 2026-09-04)
+
+A second publication-figure task is authorized alongside Section 12. It builds the
+manuscript figures for the Canonical-541 matrix and the internal ablation from frozen
+results only.
+
+Inputs (read-only, frozen):
+
+```text
+<CANONICAL541_ATTEMPT>/12_OFFLINE_EVALUATION/UNIQUE_EVALUATION_RESULTS.csv
+<CANONICAL541_ATTEMPT>/12_OFFLINE_EVALUATION/LOGICAL_EVALUATION_RESULTS.csv
+<CANONICAL541_ATTEMPT>/13_AGGREGATE/*.csv
+<CANONICAL541_ATTEMPT>/12_OFFLINE_EVALUATION/RUN_*/error_series.csv.gz (display curves only)
+<CANONICAL541_ATTEMPT>/08_FULL_ALGORITHM_RUNS and 10_INTERNAL_ABLATION_RUNS C00 NAV files (body-frame bias diagnostic only)
+```
+
+Authorized derived analysis (plotting-side, no solver, evaluator, or provider rerun):
+
+```text
+case-level pairwise tables A04_vs_F03, A04_vs_F02, F04_vs_F02 built by joining
+LOGICAL_EVALUATION_RESULTS.csv on case_id; bootstrap confidence intervals of paired
+deltas; family-stratified Wilcoxon signed-rank tests; N/E/U bias versus random
+decomposition (signed mean, standard deviation, bias share of RMSE) and the body-frame
+mean of the horizontal error vector using the C00 solver yaw.
+```
+
+Derived tables must reproduce the Section 7A.2 A04-versus-Strong values
+(horizontal mean delta -0.004568 m, win rate 87.6%) before any figure is rendered;
+mismatch is fail-closed.
+
+Manuscript identities: Single (F01), Dual-basic (F02), Backbone (F03 = AB0000, an
+ablation row of the proposed method, never labelled a strong baseline), Core (A04),
+Full (F04). The proposed-method identity remains provisional until
+`docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md` is executed on BY2H and BY2O.
+
+Output root:
+
+```text
+<CLEAN_ROOT>/stages/CLEAN6_PUBLICATION_FIGURES/01_CANONICAL541/
+```
+
+Figure set (main text candidates; final selection after BY2H/BY2O):
+
+```text
+MFIG01 matrix overview (541-case means/medians, ECDFs)
+MFIG02 Core-versus-Backbone consistency (per-type deltas with seed spread, family win/tie/loss, majority-seed counts)
+MFIG03 Full trade-off and tail protection (family deltas, mean/median/win-rate, across-case P95, paired scatter)
+MFIG04 module ablation (Dual-basic -> Backbone -> +RD -> +RP/HV -> +SA)
+MFIG05 representative cases D27, D60 together with D04, D12, D58 (favorable and unfavorable shown together)
+MFIG06 mechanism panels (Scheme-C actions, Source-Aware R-scale and touch rate, Raw-Doppler updates)
+supplementary: 60-type x method heatmaps, diagonal consistency diagnostic, remaining atlases
+```
+
+The visual contract of Section 13 applies unchanged (panel labels only, no machine
+title, no scope badge, no field-coverage panel, no absolute path, no PASS/FAIL,
+units on separate axes, readable at about 174 mm double-column width, grayscale-safe).
+The execution contract of Section 14 applies unchanged. Exploratory atlases under
+`14_PAPER_FOCUSED_PLOTTING/` and `14_HORIZONTAL_FULL_PLOTTING/` stay read-only.
+
+Out of scope: any solver, provider, evaluator, or Canonical rerun; recovery-time
+thresholds invented after seeing results; per-case or per-figure metric recomputation
+that replaces a frozen aggregate value.
+
 ## 13. Publication visual contract
 
 Publication figures are not engineering dashboards.
@@ -1020,6 +1083,7 @@ Current allowed sequence:
 2. preserve the exploratory atlases as read-only evidence libraries;
 3. run explicitly authorized real generalization experiments;
 4. use generalization evidence to freeze the final A04/F04 manuscript role.
+5. execute docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md on BY2H and BY2O before freezing the proposed-method identity.
 ```
 
 Do not restart Canonical-541, reselect horizontal literature algorithms, rerun GINav, reopen Hartley absolute-reference evaluation, or run corrected Classic-18 by default.
