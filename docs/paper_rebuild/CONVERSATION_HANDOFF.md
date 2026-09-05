@@ -29,7 +29,7 @@ the manuscript still adds one sentence declaring reuse of graduation-design mate
 as TIM requests for thesis material.
 
 Proposed-method identity: `PROVISIONAL_PENDING_BY2H_BY2O`, decided only by
-`docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md` (commit hash: `<fill after commit>`).
+`docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md` (commit hash: `b9f9a44f288966c95961f7a15564b2b57bf07b65`).
 
 ## 3. Comparison structure
 
@@ -76,7 +76,7 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 
 ## 7. Open items
 
-- [ ] Decision-rule file committed; hash recorded above.
+- [x] Decision-rule file committed; hash recorded above.
 - [ ] AGENTS section 12b (Canonical-541 publication figures) inserted.
 - [ ] Stale tracked docs (ACTIVE_CONTEXT, NEXT_STAGE_INSTRUCTIONS, GINav/Hartley BLOCKED reports) synchronised before BY2H/BY2O run.
 - [ ] Bias/random decomposition result reported (conversation A) and consumed by C and D.
