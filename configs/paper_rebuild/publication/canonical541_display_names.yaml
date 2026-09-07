@@ -42,6 +42,6 @@ representative_cases:      # favourable and unfavourable cases are always shown 
   - {case_id: D27_seed_00, label: "Bad position with over-optimistic std", verdict: favourable}
   - {case_id: D60_seed_00, label: "Multi-source bad inputs, then recovery", verdict: favourable}
   - {case_id: D04_seed_00, label: "GNSS position outage, 20 s", verdict: unfavourable}
-  - {case_id: D12_seed_00, label: "Random dropout of 60 % of GNSS updates", verdict: unfavourable}
+  - {case_id: D12_seed_00, label: "Random 60 % GNSS dropout", verdict: unfavourable}
   - {case_id: D58_seed_00, label: "Outage with yaw spike, then recovery", verdict: unfavourable}
 reference_label: Truth      # AGENTS section 13; the same-source caveat lives in prose
