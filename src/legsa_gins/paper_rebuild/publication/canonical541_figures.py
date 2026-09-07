@@ -120,12 +120,13 @@ def mfig00_reference_comparison(b: Bundle):
     # (d) height versus time, common origin so that the constant offset stays visible
     a4.plot(t, h_ref, color="black", lw=1.2, label=ref_label)
     a4.plot(t, h_est, color=style.COLORS["A04"], lw=0.8, label=b.label_of("A04"))
-    a4.set_xlabel("Time (s)"); a4.set_ylabel("Height relative to reference start (m)"); a4.legend(loc="upper right", ncol=2)
+    a4.set_xlabel("Time (s)"); a4.set_ylabel("Height (m)\nrelative to reference start"); a4.legend(loc="upper right", ncol=2)
     for ax in (a2, a3, a4):
         ax.set_xlim(60, 345)
     for ax, letter in zip((a1, a2, a3, a4), "abcd"):
         style.panel_label(ax, letter, x=-0.18)
-    yaw_rmse = {m: b.method_stat(b.config_of(m), "yaw_rmse_deg", "mean") for m in ("F01", "F02", "A04")}
+    c00 = b.unique[b.unique["case_id"] == dt.CLEAN_CASE_ID].set_index("effective_configuration_id")["yaw_rmse_deg"].astype(float)
+    yaw_rmse = {m: float(c00[b.config_of(m)]) for m in ("F01", "F02", "A04")}
     caption = (
         f"Clean case (C00): Core estimate against the reference ({ref_label}). (a) Horizontal trajectory in a local east-north frame; "
         f"(b) yaw; (c) yaw error of Single ({yaw_rmse['F01']:.2f}° RMSE), Dual-basic ({yaw_rmse['F02']:.2f}°) and Core ({yaw_rmse['A04']:.2f}°); "
@@ -166,8 +167,8 @@ def mfig01_matrix_overview(b: Bundle):
     for m, c, lab in zip(MAIN_METHODS, cfgs, labels):
         _ecdf(a3, b.metric_values("horizontal_rmse_m", c), label=lab, **_method_style(m))
         _ecdf(a4, b.metric_values("yaw_rmse_deg", c), label=lab, **_method_style(m))
-    a3.set_xscale("log"); a3.set_xlabel("Horizontal RMSE (m)"); a3.set_ylabel("ECDF over 541 cases (fraction)")
-    a4.set_xscale("log"); a4.set_xlabel("Yaw RMSE (°)"); a4.set_ylabel("ECDF over 541 cases (fraction)")
+    a3.set_xscale("log"); a3.set_xlabel("Horizontal RMSE (m)"); a3.set_ylabel("ECDF over 541 cases\n(fraction)")
+    a4.set_xscale("log"); a4.set_xlabel("Yaw RMSE (°)"); a4.set_ylabel("ECDF over 541 cases\n(fraction)")
     a3.set_ylim(0, 1.02); a4.set_ylim(0, 1.02)
     a3.legend(loc="lower right"); a4.legend(loc="lower right")
     for ax, letter in zip((a1, a2, a3, a4), "abcd"):
@@ -195,7 +196,7 @@ def _type_panel(ax, b: Bundle, comparison: str, metric: str, unit: str, linthres
     ax.set_yscale("symlog", linthresh=linthresh, linscale=0.6)
     ax.set_xlim(-0.8, len(dtb) - 0.2)
     ax.set_xticks(x); ax.set_xticklabels(dtb["degradation_id"], rotation=90, fontsize=style.MIN_TEXT_PT)
-    ax.set_ylabel(f"Δ {b.names['metrics'][metric]['label']}, Core − Backbone ({unit})")
+    ax.set_ylabel(f"Δ {b.names['metrics'][metric]['label']} ({unit})\nCore − Backbone")
     # family bands
     top = ax.get_ylim()[1]
     start = 0
@@ -229,7 +230,7 @@ def mfig02_core_vs_backbone_consistency(b: Bundle):
         a2.text(xi, c + 1, str(c), ha="center", va="bottom", fontsize=style.MIN_TEXT_PT)
     a2.set_ylim(0, 68)
     a2.set_xticks(x); a2.set_xticklabels([b.names["metrics"][m]["label"].replace(" RMSE", "") for m in metrics], rotation=25, ha="right")
-    a2.set_ylabel("Types improved in ≥5 of 9 seeds (count)")
+    a2.set_ylabel("Improved types (count)\n≥5 of 9 seeds improved")
     # (d) win rate by family, horizontal and yaw
     fam = b.derived_family[b.derived_family["comparison"] == "A04_vs_F03"]
     order = [f for f in _family_order(b)]
@@ -241,7 +242,7 @@ def mfig02_core_vs_backbone_consistency(b: Bundle):
     a4.axhline(0.5, color="black", lw=0.5, ls=(0, (3, 2)))
     a4.set_ylim(0, 1.05)
     a4.set_xticks(xs); a4.set_xticklabels([FAMILY_SHORT[f] for f in order], rotation=30, ha="right")
-    a4.set_ylabel("Win rate vs Backbone (fraction)")
+    a4.set_ylabel("Win rate (fraction)\nCore vs Backbone")
     a4.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2, columnspacing=1.0)
     for ax, letter, xo in ((a1, "a", -0.06), (a3, "b", -0.06), (a2, "c", -0.24), (a4, "d", -0.24)):
         style.panel_label(ax, letter, x=xo)
@@ -291,7 +292,7 @@ def mfig03_full_tradeoff_tails(b: Bundle):
     a3.plot(x, win_pct, "o", color="black", ms=3.4, mfc="white", label="Case win rate")
     a3.axhline(0, color="black", lw=0.5); a3.axhline(50, color="black", lw=0.5, ls=(0, (3, 2)))
     a3.set_xticks(x); a3.set_xticklabels([b.names["metrics"][m]["label"].replace(" RMSE", "") for m in metrics], rotation=25, ha="right")
-    a3.set_ylabel("Change and win rate, Full vs Core (%)")
+    a3.set_ylabel("Change and win rate (%)\nFull vs Core")
     a3.set_ylim(-45, 105)
     a3.legend(loc="lower left", bbox_to_anchor=(0.02, 1.0), ncol=2, columnspacing=0.8, fontsize=style.MIN_TEXT_PT)
     # (d) paired scatter
@@ -359,7 +360,7 @@ def mfig04_module_ablation(b: Bundle):
             ax.text(xi, v + (0.06 * ymax if v >= 0 else -0.06 * ymax), f"win {100*wr:.0f}%", ha="center", va="bottom" if v >= 0 else "top", fontsize=style.MIN_TEXT_PT)
         ax.set_ylim(-1.35 * ymax, 1.35 * ymax)
         ax.set_xticks(xs); ax.set_xticklabels(list(loo.values()), rotation=25, ha="right")
-        ax.set_ylabel(f"Δ {b.names['metrics'][metric]['label']}, Full − Full w/o module ({unit})")
+        ax.set_ylabel(f"Δ {b.names['metrics'][metric]['label']} ({unit})\nFull − Full w/o module")
     for ax, letter in zip((a1, a2, a3, a4), "abcd"):
         style.panel_label(ax, letter, x=-0.14)
     caption = (
@@ -393,7 +394,7 @@ def mfig05_representative_cases(b: Bundle):
                     continue
                 ax.plot(s["time"], s[col], label=b.label_of(m), **_method_style(m))
             ax.text(0.0, 1.03, f"{case['label']} [{cid[:3]}, {case['verdict']}]", transform=ax.transAxes, ha="left", va="bottom", fontsize=style.MIN_TEXT_PT)
-            ax.set_ylabel("Horizontal error (m)" if k == 0 else "Yaw error (°)")
+            ax.set_ylabel("Horizontal\nerror (m)" if k == 0 else "Yaw\nerror (°)")
             ax.set_xlim(60, 345)
             if r == len(cases) - 1:
                 ax.set_xlabel("Time (s)")
@@ -433,7 +434,7 @@ def mfig06_mechanism(b: Bundle):
     frac = [_module_mean(b, "F04", f, "source_aware_changed_weight_count") / _module_mean(b, "F04", f, "source_aware_evaluation_count") for f in order]
     a1.bar(xs, frac, color=style.COLORS["F04"], width=0.62)
     a1.set_ylim(0, 1.05); a1.set_xticks(xs); a1.set_xticklabels(short, rotation=30, ha="right")
-    a1.set_ylabel("SA changed-weight share (fraction)")
+    a1.set_ylabel("SA changed-weight\nshare (fraction)")
     # (b) Scheme-C mix (Core)
     parts = [("scheme_c_normal_count", "Normal", style.COLORS["A04"]), ("scheme_c_downweight_count", "Down-weight", "#9ECAE1"), ("scheme_c_reject_count", "Reject", style.COLORS["F04"])]
     counts = np.array([[_module_mean(b, "A04", f, m) for f in order] for m, _, _ in parts])
@@ -443,14 +444,14 @@ def mfig06_mechanism(b: Bundle):
         a2.bar(xs, row, bottom=bottom, color=col, width=0.62, label=lab, edgecolor="black", lw=0.3)
         bottom += row
     a2.set_ylim(0, 1.05); a2.set_xticks(xs); a2.set_xticklabels(short, rotation=30, ha="right")
-    a2.set_ylabel("Scheme-C action share (fraction)"); a2.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=3, fontsize=style.MIN_TEXT_PT)
+    a2.set_ylabel("Scheme-C action\nshare (fraction)"); a2.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=3, fontsize=style.MIN_TEXT_PT)
     # (c) raw Doppler updates and rejects (Core)
     upd = [_module_mean(b, "A04", f, "raw_doppler_update_count") for f in order]
     rej = [_module_mean(b, "A04", f, "raw_doppler_reject_count") for f in order]
     a3.bar(xs - 0.19, upd, width=0.38, color=style.COLORS["A04"], label="Updates")
     a3.bar(xs + 0.19, rej, width=0.38, color=style.COLORS["light"], edgecolor="black", lw=0.3, hatch=style.HATCH_SECONDARY, label="Rejects")
     a3.set_xticks(xs); a3.set_xticklabels(short, rotation=30, ha="right")
-    a3.set_ylabel("Raw-Doppler epochs per case (count)"); a3.set_ylim(0, 300); a3.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2)
+    a3.set_ylabel("Raw-Doppler epochs\nper case (count)"); a3.set_ylim(0, 300); a3.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2)
     # (d) yaw tail counts
     t = b.tail[b.tail["metric_name"] == "yaw_rmse_deg"]
     methods = ["F02", "F03", "A04", "F04"]
@@ -461,7 +462,7 @@ def mfig06_mechanism(b: Bundle):
         for xi, v in zip(xm + (k - 0.5) * 0.38, vals):
             a4.text(xi, v + 0.6, str(v), ha="center", va="bottom", fontsize=style.MIN_TEXT_PT)
     a4.set_xticks(xm); a4.set_xticklabels(_labels(b, methods), rotation=20, ha="right")
-    a4.set_ylabel("Cases beyond threshold (count)"); a4.set_ylim(0, 52); a4.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2, fontsize=style.MIN_TEXT_PT)
+    a4.set_ylabel("Cases beyond\nthreshold (count)"); a4.set_ylim(0, 52); a4.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=2, fontsize=style.MIN_TEXT_PT)
     for ax, letter in zip((a1, a2, a3, a4), "abcd"):
         style.panel_label(ax, letter, x=-0.2)
     caption = (
