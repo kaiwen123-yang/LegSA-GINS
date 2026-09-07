@@ -77,11 +77,21 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 ## 7. Open items
 
 - [x] Decision-rule file committed; hash recorded above.
-- [ ] AGENTS section 12b (Canonical-541 publication figures) inserted.
+- [x] AGENTS section 12b (Canonical-541 publication figures) inserted.
 - [ ] Stale tracked docs (ACTIVE_CONTEXT, NEXT_STAGE_INSTRUCTIONS, GINav/Hartley BLOCKED reports) synchronised before BY2H/BY2O run.
-- [ ] Bias/random decomposition result reported (conversation A) and consumed by C and D.
-- [ ] Derived pairwise `A04_vs_F02`, `F04_vs_F02`, `A04_vs_F03` added under the publication namespace.
+- [x] Bias/random decomposition result reported (conversation A) and consumed by C and D.
+- [x] Derived pairwise `A04_vs_F02`, `F04_vs_F02`, `A04_vs_F03` added under the publication namespace.
 
 ## Conversation log
 
 - 2026-09-04 (A): file created; decisions in sections 1-4 agreed with the human.
+- 2026-09-05 (A, derived analysis): identity gate PASS (5951/7033/541/11; C00 yaw values match AGENTS section 7 to 4e-7). Case-level join reproduces section 7A.2 A04-vs-Strong values exactly and matches frozen PAIRWISE_SUMMARY for full_vs_strong, full_vs_no_SA, strong_vs_basic. Module: src/legsa_gins/paper_rebuild/publication/derived_tables.py; CLI: scripts/paper_rebuild/build_canonical541_derived_tables.py; tables under <CLEAN_ROOT>/stages/CLEAN6_PUBLICATION_FIGURES/01_CANONICAL541/00_DERIVED_TABLES/.
+  New pairwise (candidate - reference, 541 cases, bootstrap 95% CI, Wilcoxon p<1e-7 for all):
+  A04-Basic: H -0.131 m [-0.200,-0.075] win 95.6%; yaw mean +0.80 deg [+0.05,+1.65], median -0.40, win 87.6%, P95 +0.70.
+  F04-Basic: H -0.123 m [-0.177,-0.078] win 89.6%; Up +0.025 m win 5.4%; yaw mean -0.37 [-1.37,+0.64], median -0.38, win 91.5%, P95 -1.13.
+  A04-Single: H -0.010 m win 88.7%; yaw -6.91 deg win 97.8%.
+  A04-Strong yaw mean CI [-0.08,+0.20] includes zero: report median/win rate only.
+  Yaw-mean reversal versus Basic is confined to D14, D15, D27, D59, D60 (gross position faults): Basic keeps yaw anchored because it never gates; scheme-C rejects valid yaw after position/velocity contamination; SA partially repairs (yaw>30 deg cases: Basic 19, Strong 29, A04 30, Full 20). Must be stated in the manuscript.
+  Position decomposition: C00 N/E/U statistics identical across all five internal configurations (north -0.035/sd 0.236, east +0.045/sd 0.255, up -0.413/sd 0.706 m) -> position error is input-bound, not estimator-bound. Body-frame mean of the horizontal error = forward about -0.22 m, right about +0.15 m (0.265 m, 55-57% of horizontal MSE, identical for Single through Full): fixed POI/IMU offset signature, to be source-proven from Fixposition POI configuration or mount CAD (never fitted from RMSE). Up: constant -0.413 m (25% of MSE) plus slow wander (LF rms 0.67 m, HF 0.12 m) = input height solution wander; check gnss1-status fix type and pos_acc_v.
+  Consequences: (1) internal-method position curves coincide in C00, plot once with "input-bound" caption; (2) POI physical transform is a measurement-point definition to be added as a new evaluator contract version if source-proven; (3) LC01 gap is input-structure dominated (1 Hz status vs 5 Hz two-receiver HPPOSECEF); A04@5Hz parity experiment promoted to required.
+  Open items added: [ ] Fixposition POI offset source-proof (conversation C); [ ] gnss1-status fix-type / pos_acc_v audit (C).
