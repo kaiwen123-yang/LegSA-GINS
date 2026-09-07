@@ -8,6 +8,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 import yaml
 
@@ -18,6 +19,43 @@ DISPLAY_NAMES_PATH = CONFIG_ROOT / "canonical541_display_names.yaml"
 REGISTRY_PATH = CONFIG_ROOT / "CANONICAL541_PUBLICATION_FIGURE_REGISTRY.csv"
 
 NUMERIC_AGG_COLUMNS = ["count", "mean", "std", "median", "iqr", "p10", "p25", "p75", "p90", "p95", "p99", "min", "max"]
+PARITY_CONTRACT_PATH = Path(__file__).resolve().parents[4] / "configs" / "paper_rebuild" / "final_v23_parity_contract.yaml"
+
+
+def evaluation_time_origin(path: Path = PARITY_CONTRACT_PATH) -> float:
+    """Absolute UNIX origin of the solver's relative time axis (frozen contract value)."""
+    doc = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
+
+    def find(node):
+        if isinstance(node, dict):
+            for k, v in node.items():
+                if k == "base_time_unix_seconds":
+                    return float(v)
+                hit = find(v)
+                if hit is not None:
+                    return hit
+        elif isinstance(node, list):
+            for v in node:
+                hit = find(v)
+                if hit is not None:
+                    return hit
+        return None
+
+    value = find(doc)
+    if value is None:
+        raise KeyError("base_time_unix_seconds not found in final_v23_parity_contract.yaml")
+    return value
+
+
+def load_reference_trace(trace_path: Path, time_origin: float) -> pd.DataFrame:
+    """Hash-locked Fixposition trace as the evaluator sees it: relative time = time - origin,
+    yaw converted with the frozen formula wrap360(90 deg - yaw_ENU) into the solver's NED convention.
+    Evaluation-only use (plotting); no time-offset, sign or frame search."""
+    tr = pd.read_csv(trace_path, usecols=["time", "lat", "lon", "height", "yaw", "pitch", "roll"])
+    tr = tr.drop_duplicates("time").sort_values("time").reset_index(drop=True)
+    tr["t"] = tr["time"].astype(float) - float(time_origin)
+    tr["yaw_ned_deg"] = np.mod(90.0 - tr["yaw"].astype(float), 360.0)
+    return tr
 
 
 def load_display_names(path: Path = DISPLAY_NAMES_PATH) -> dict:
@@ -63,6 +101,18 @@ class Bundle:
     case_manifest: pd.DataFrame
     series_resolver: object
     sources: list[str] = field(default_factory=list)
+    trace_path: Path | None = None
+    time_origin: float = 0.0
+    _trace: pd.DataFrame | None = None
+
+    def reference_trace(self) -> pd.DataFrame | None:
+        """Reference trace restricted to nothing (full file); None when no trace path was given."""
+        if self.trace_path is None:
+            return None
+        if self._trace is None:
+            self._trace = load_reference_trace(self.trace_path, self.time_origin)
+            self.sources.append(str(self.trace_path))
+        return self._trace
 
     # ---- helpers used by several figures --------------------------------------
     def config_of(self, method_id: str) -> str:
@@ -112,7 +162,7 @@ class Bundle:
         return out
 
 
-def load_bundle(attempt_root: Path, derived_dir: Path, handoff_subset: bool = False) -> Bundle:
+def load_bundle(attempt_root: Path, derived_dir: Path, handoff_subset: bool = False, trace_path: Path | None = None) -> Bundle:
     attempt_root, derived_dir = Path(attempt_root), Path(derived_dir)
     names = load_display_names()
     agg = attempt_root / "13_AGGREGATE"
@@ -135,4 +185,5 @@ def load_bundle(attempt_root: Path, derived_dir: Path, handoff_subset: bool = Fa
     ])
     resolver = dt.handoff_subset_resolver(attempt_root) if handoff_subset else dt.attempt_series_resolver(attempt_root)
     return Bundle(attempt_root, derived_dir, names, unique, method_summary, pairwise_frozen, module_action, type_summary,
-                  derived_summary, derived_family, derived_type, tail, case_manifest, resolver)
+                  derived_summary, derived_family, derived_type, tail, case_manifest, resolver,
+                  trace_path=Path(trace_path) if trace_path else None, time_origin=evaluation_time_origin())

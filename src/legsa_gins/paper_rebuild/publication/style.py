@@ -22,20 +22,23 @@ MIN_PNG_WIDTH_PX = 4096
 BASE_FONT_PT = 8.0
 
 METHOD_ORDER = ["F01", "F02", "F03", "A04", "F04"]
+# Okabe-Ito colour-blind-safe palette; every method also has its own line style and marker
 COLORS = {
-    "F01": "#7F7F7F",  # Single
-    "F02": "#F58518",  # Dual-basic
-    "F03": "#4C78A8",  # Backbone
-    "A04": "#2CA02C",  # Core
-    "F04": "#D62728",  # Full
+    "F01": "#4D4D4D",  # Single: dark grey (luminance 0.30)
+    "F02": "#E69F00",  # Dual-basic: orange (0.69)
+    "F03": "#56B4E9",  # Backbone: sky blue (0.66)
+    "A04": "#0072B2",  # Core: blue (0.41)
+    "F04": "#D55E00",  # Full: vermillion (0.49)
     "neutral": "#4D4D4D",
     "light": "#BFBFBF",
     "window": "#D9D9D9",
     "recovery": "#EFEFEF",
 }
-LINESTYLES = {"F01": (0, (1, 1)), "F02": (0, (4, 2)), "F03": "-", "A04": "-", "F04": (0, (6, 2, 1, 2))}
+LINESTYLES = {"F01": (0, (1, 1)), "F02": (0, (5, 2)), "F03": (0, (4, 1, 1, 1, 1, 1)), "A04": "-", "F04": (0, (6, 2, 1, 2))}
 MARKERS = {"F01": "x", "F02": "s", "F03": "o", "A04": "^", "F04": "D"}
-LINEWIDTHS = {"F01": 0.9, "F02": 0.9, "F03": 1.3, "A04": 1.0, "F04": 1.0}
+LINEWIDTHS = {"F01": 0.9, "F02": 0.9, "F03": 1.0, "A04": 1.2, "F04": 1.0}
+HATCH_SECONDARY = "////"   # second series of grouped bars, so bars stay distinguishable in grayscale
+MIN_TEXT_PT = 7.0          # IEEE: nothing below about 7 pt at final size
 
 
 def apply_rcparams() -> None:
@@ -45,9 +48,10 @@ def apply_rcparams() -> None:
         "font.size": BASE_FONT_PT,
         "axes.titlesize": BASE_FONT_PT,
         "axes.labelsize": BASE_FONT_PT,
-        "xtick.labelsize": BASE_FONT_PT - 1,
-        "ytick.labelsize": BASE_FONT_PT - 1,
-        "legend.fontsize": BASE_FONT_PT - 1,
+        "xtick.labelsize": MIN_TEXT_PT,
+        "ytick.labelsize": MIN_TEXT_PT,
+        "legend.fontsize": MIN_TEXT_PT,
+        "hatch.linewidth": 0.4,
         "legend.frameon": False,
         "axes.spines.top": False,
         "axes.spines.right": False,
@@ -76,6 +80,14 @@ def new_figure(nrows: int, ncols: int, height_in: float, kind: str = "double", *
     apply_rcparams()
     fig, axes = plt.subplots(nrows, ncols, figsize=(width_inches(kind), height_in), squeeze=False, gridspec_kw=gridspec_kw)
     return fig, axes
+
+
+def new_gridspec_figure(height_in: float, nrows: int, ncols: int, kind: str = "double", **gridspec_kw):
+    """Figure plus GridSpec for layouts that mix full-width and half-width panels."""
+    apply_rcparams()
+    fig = plt.figure(figsize=(width_inches(kind), height_in))
+    gs = fig.add_gridspec(nrows, ncols, **gridspec_kw)
+    return fig, gs
 
 
 def panel_label(ax, letter: str, x: float = -0.16, y: float = 1.04) -> None:

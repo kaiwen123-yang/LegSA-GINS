@@ -26,7 +26,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from legsa_gins.paper_rebuild.publication import canonical541_figures as figs  # noqa: E402
 from legsa_gins.paper_rebuild.publication import derived_tables as dt  # noqa: E402
-from legsa_gins.paper_rebuild.publication import qa, style  # noqa: E402
+from legsa_gins.paper_rebuild.publication import qa, style, tables  # noqa: E402
 from legsa_gins.paper_rebuild.publication.loaders import load_bundle, load_registry  # noqa: E402
 
 
@@ -37,6 +37,8 @@ def main() -> int:
     ap.add_argument("--out-dir", required=True, type=Path)
     ap.add_argument("--figures", nargs="*", default=None, help="subset of figure ids (default: every registry row)")
     ap.add_argument("--handoff-subset", action="store_true", help="resolve error series from the c541_handoff layout")
+    ap.add_argument("--trace-path", type=Path, default=None,
+                    help="hash-locked BY2 reference trace CSV (evaluation-only use: drawn as the reference in MFIG00 and checked against frozen errors)")
     args = ap.parse_args()
 
     registry = load_registry()
@@ -44,7 +46,7 @@ def main() -> int:
     unknown = sorted(set(wanted) - set(figs.FIGURES))
     if unknown:
         raise SystemExit(f"no renderer for {unknown}")
-    bundle = load_bundle(args.attempt_root, args.derived_dir, handoff_subset=args.handoff_subset)
+    bundle = load_bundle(args.attempt_root, args.derived_dir, handoff_subset=args.handoff_subset, trace_path=args.trace_path)
     gate = dt.identity_gate(bundle.unique)
     if not gate["pass"]:
         raise SystemExit("identity gate FAILED: " + json.dumps([c for c in gate["checks"] if not c["pass"]]))
@@ -67,6 +69,7 @@ def main() -> int:
         qa_rows.append({"figure_id": f"{a}|{b_}", "check": "no_duplicate_figures", "pass": False, "detail": f"hamming {d}"})
     if len(hashes) > 1 and not any(r["check"] == "no_duplicate_figures" for r in qa_rows):
         qa_rows.append({"figure_id": "ALL", "check": "no_duplicate_figures", "pass": True, "detail": f"{len(hashes)} figures"})
+    tables.write_degradation_type_table(bundle.case_manifest, out)
     pd.DataFrame(index_rows).to_csv(out / "FIGURE_INDEX.csv", index=False)
     qa_df = pd.DataFrame(qa_rows)
     qa_df.to_csv(out / "QA_REPORT.csv", index=False)

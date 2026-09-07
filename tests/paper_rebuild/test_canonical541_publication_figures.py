@@ -63,6 +63,21 @@ def test_qa_passes_a_compliant_figure(tmp_path):
     plt.close(fig)
 
 
+def test_reference_trace_uses_frozen_time_origin_and_yaw_formula(tmp_path):
+    from legsa_gins.paper_rebuild.publication.loaders import evaluation_time_origin, load_reference_trace
+
+    origin = evaluation_time_origin()
+    assert origin == 1772784000.0
+    p = tmp_path / "trace.csv"
+    p.write_text("time,lat,lon,height,yaw,pitch,roll\n"
+                 "1772784066.0,40.0,116.0,41.0,90.0,0,0\n"
+                 "1772784066.0,40.0,116.0,41.0,90.0,0,0\n"
+                 "1772784067.0,40.0,116.0,41.0,-135.0,0,0\n")
+    tr = load_reference_trace(p, origin)
+    assert list(tr["t"]) == [66.0, 67.0]  # duplicate timestamp dropped, relative time = time - origin
+    assert list(tr["yaw_ned_deg"]) == [0.0, 225.0]  # wrap360(90 deg - yaw_ENU)
+
+
 def test_duplicate_detection_uses_perceptual_hash():
     a = np.zeros(256, dtype=np.uint8); b = a.copy(); b[:3] = 1; c = np.ones(256, dtype=np.uint8)
     pairs = qa.duplicate_pairs({"x": a, "y": b, "z": c})
@@ -75,9 +90,10 @@ def test_smoke_render_from_frozen_tables(tmp_path):
     from legsa_gins.paper_rebuild.publication.loaders import load_bundle
 
     bundle = load_bundle(Path(os.environ["LEGSA_C541_ATTEMPT_ROOT"]), Path(os.environ["LEGSA_C541_DERIVED_DIR"]),
-                         handoff_subset=bool(os.environ.get("LEGSA_C541_HANDOFF_SUBSET")))
-    for fid in ("MFIG01_matrix_overview", "MFIG06_mechanism"):
+                         handoff_subset=bool(os.environ.get("LEGSA_C541_HANDOFF_SUBSET")),
+                         trace_path=os.environ.get("LEGSA_C541_TRACE_PATH"))
+    for fid in ("MFIG00_reference_comparison", "MFIG01_matrix_overview", "MFIG06_mechanism"):
         fig, caption = figs.FIGURES[fid](bundle)
         assert all(r["pass"] for r in qa.check_figure(fig, fid)), fid
-        assert "541" in caption or "Source-Aware" in caption
+        assert any(k in caption for k in ("541", "Source-Aware", "reference"))
         plt.close(fig)
