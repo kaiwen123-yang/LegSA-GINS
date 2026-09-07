@@ -1,3 +1,4 @@
+> SUPERSEDED: AGENTS.md sections 3, 7, 12, 12b and 18 are authoritative as of 2026-09-07; this file is retained for history.
 # LegSA-GINS Clean Rebuild Active Context
 
 ## Identity

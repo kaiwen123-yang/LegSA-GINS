@@ -135,6 +135,9 @@ Authoritative result roots:
 <CANONICAL541_ATTEMPT>/12_OFFLINE_EVALUATION/
 <CANONICAL541_ATTEMPT>/13_AGGREGATE/
 <CANONICAL541_ATTEMPT>/14_PAPER_FOCUSED_PLOTTING/
+<CLEAN6_ROOT> = <CLEAN_ROOT>/stages/CLEAN6_PUBLICATION_FIGURES
+<CLEAN6_ROOT>/01_CANONICAL541/00_DERIVED_TABLES   (AGENTS §12b derived tables; identity gate + frozen validation PASS)
+<CLEAN6_ROOT>/01_CANONICAL541/01_FIGURES_BY2_DRAFT (BY2 draft renders; superseded when BY2H/BY2O land)
 ```
 
 Default numerical sources:
@@ -924,6 +927,13 @@ Out of scope: any solver, provider, evaluator, or Canonical rerun; recovery-time
 thresholds invented after seeing results; per-case or per-figure metric recomputation
 that replaces a frozen aggregate value.
 
+Status (2026-09-07):
+
+Derived tables: src/legsa_gins/paper_rebuild/publication/derived_tables.py, CLI scripts/paper_rebuild/build_canonical541_derived_tables.py, commit 39a1f4e.
+Plotting layer: src/legsa_gins/paper_rebuild/publication/{style,qa,loaders,canonical541_figures}.py; registry configs/paper_rebuild/publication/CANONICAL541_PUBLICATION_FIGURE_REGISTRY.csv; display names configs/paper_rebuild/publication/canonical541_display_names.yaml; CLI scripts/paper_rebuild/render_canonical541_publication_figures.py.
+Figures MFIG01-MFIG06 + SFIG01 rendered from frozen tables with machine QA all-pass. Final renders wait for BY2H/BY2O and docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md.
+Confirmed on 56 642 full-rate samples: body-frame horizontal error offset forward -0.20..-0.22 m, right +0.15..+0.17 m (0.261-0.265 m, 54-56% of horizontal MSE, all five configurations); position error is input-bound.
+
 ## 13. Publication visual contract
 
 Publication figures are not engineering dashboards.
@@ -1079,11 +1089,11 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 Current allowed sequence:
 
 ```text
-1. build the four publication figures in Section 12;
-2. preserve the exploratory atlases as read-only evidence libraries;
-3. run explicitly authorized real generalization experiments;
-4. use generalization evidence to freeze the final A04/F04 manuscript role.
-5. execute docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md on BY2H and BY2O before freezing the proposed-method identity.
+1. run BY2H and BY2O (CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE, CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE) with BY2-frozen parameters, then execute A04_F04_ROLE_DECISION_RULE.md;
+2. run CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF (Core fed 5 Hz GNSS1 HPPOSECEF; EXT05C single-receiver IEKF);
+3. source-prove the Fixposition POI offset and audit gnss1-status fix type / pos_acc_v (conversation C);
+4. horizontal publication figures FIG02/FIG03 on the shared plotting layer (conversation B);
+5. re-render Canonical-541 figures with the three-sequence data; freeze manuscript identity.
 ```
 
 Do not restart Canonical-541, reselect horizontal literature algorithms, rerun GINav, reopen Hartley absolute-reference evaluation, or run corrected Classic-18 by default.

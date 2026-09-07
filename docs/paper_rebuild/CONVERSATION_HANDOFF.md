@@ -78,7 +78,7 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 
 - [x] Decision-rule file committed; hash recorded above.
 - [x] AGENTS section 12b (Canonical-541 publication figures) inserted.
-- [ ] Stale tracked docs (ACTIVE_CONTEXT, NEXT_STAGE_INSTRUCTIONS, GINav/Hartley BLOCKED reports) synchronised before BY2H/BY2O run.
+- [x] Stale tracked docs (ACTIVE_CONTEXT, NEXT_STAGE_INSTRUCTIONS, GINav/Hartley BLOCKED reports) synchronised before BY2H/BY2O run.
 - [x] Bias/random decomposition result reported (conversation A) and consumed by C and D.
 - [x] Derived pairwise `A04_vs_F02`, `F04_vs_F02`, `A04_vs_F03` added under the publication namespace.
 
