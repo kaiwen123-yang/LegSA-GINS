@@ -21,7 +21,7 @@ from legsa_gins.paper_rebuild.subprocess_guard import run_process_group
 def native_counters(profile, n=3, receiver=None):
     result = {source: 0 for source in validation.COUNTER_SOURCES.values()}
     result["position_update_count"] = n
-    result["receiver_velocity_update_count"] = n if receiver is None else receiver
+    result["receiver_velocity_update_count"] = (0 if profile == "basic_dual_yaw_EKF" else n) if receiver is None else receiver
     if profile != "single_antenna_EKF":
         result.update(dual_yaw_attempt_count=n, dual_yaw_accepted_count=n, yaw_NORMAL=n)
     if profile in {"AB1011", "AB1111"}:
@@ -67,7 +67,7 @@ def native_manifest(config):
             result["actual_solver_input_paths"][role] = config[path]
             result["actual_solver_input_roles"][role] = purpose
     for key in rc.BACKEND_PROVENANCE_KEYS:
-        result[key] = json.dumps(config[key]) if key.startswith("raw_doppler_backend_source_") else config[key]
+        result[key] = validation.native_loader_string(config, key)
     result["raw_doppler_backend_lineage_proven"] = config["enable_raw_doppler"]
     return result
 
@@ -117,14 +117,16 @@ def test_full_requires_all_five_positive(key):
         validation.validate_profile_counters("AB1111", counts, 3)
 
 
-def test_f02_literal_receiver_gate_and_explicit_alternative():
+def test_f02_receiver_gate_derived_from_frozen_features():
     counts = native_counters("basic_dual_yaw_EKF", receiver=0)
-    with pytest.raises(validation.CounterMismatch, match="receiver_velocity_update_count != 3"):
+    assert validation.validate_profile_counters("basic_dual_yaw_EKF", counts, 3)
+    counts["receiver_velocity_update_count"] = 3
+    with pytest.raises(validation.CounterMismatch, match="receiver_velocity_update_count != 0"):
         validation.validate_profile_counters("basic_dual_yaw_EKF", counts, 3)
-    assert validation.validate_profile_counters("basic_dual_yaw_EKF", counts, 3, f02_receiver_expected=0)
+    counts["receiver_velocity_update_count"] = 0
     counts.update(yaw_NORMAL=2, yaw_DOWNWEIGHT=1)
     with pytest.raises(validation.CounterMismatch, match="F02 downweight"):
-        validation.validate_profile_counters("basic_dual_yaw_EKF", counts, 3, f02_receiver_expected=0)
+        validation.validate_profile_counters("basic_dual_yaw_EKF", counts, 3)
 
 
 def test_dual_yaw_closures_and_duplicate_counter():
@@ -319,10 +321,20 @@ def test_occlusion_values_copied_from_hash_locked_record(tmp_path):
 def test_failure_run_continues_all_five_with_fake_executable(tmp_path, monkeypatch):
     fixture_manifests = {}
     configs = {}
+    gnss_provider = tmp_path / "synthetic_gnss15.txt"
+    gnss_provider.write_text("".join(str(time) + " 0" * 14 + "\n" for time in (1.1, 2.0, 2.9)))
+    timeline = {"first_imu_time": 0.5, "last_imu_time": 3.5,
+        "first_gnss_time": 1.1, "last_gnss_time": 2.9, "gnss_row_count": 3,
+        "config_starttime": 1.0, "config_endtime": 3.0,
+        "effective_starttime": 1.0, "effective_endtime": 2.9,
+        "overlap_start": 1.0, "overlap_end": 2.9,
+        "gnss_rows_in_overlap": 3, "gnss_rows_after_start_before_end": 3,
+        "trace_solver_input": False, "final_v23_output_solver_input": False, "paper_performance_claim": False}
     for method, profile in rc.METHODS.items():
         config = synthetic_config(profile)
+        config["gnsspath"] = str(gnss_provider)
         config["run_id"] = "synthetic_native_" + method
-        text = yaml.safe_dump(config)
+        text = "\n".join(key + ": " + json.dumps(value, ensure_ascii=False) for key, value in config.items()) + "\n"
         fixture_manifests[profile] = {**native_manifest(config), **native_counters(profile)}
         configs[method] = {"text": text, "profile": {"frozen_parameter_hash": rc.frozen_parameter_hash(text)},
             "identity": {"path": str(tmp_path / (method + ".yaml")), "sha256": "a" * 64}}
@@ -339,7 +351,9 @@ def test_failure_run_continues_all_five_with_fake_executable(tmp_path, monkeypat
         "(root/'KF_GINS_Navresult.nav').write_text('0 1.25'+' 0'*9+'\\n0 2.25'+' 0'*9+'\\n')\n"
         "(root/'KF_GINS_STD.txt').write_text('1.25'+' 0'*9+'\\n2.25'+' 0'*9+'\\n')\n"
         "manifests=" + repr(fixture_manifests) + "\n"
-        "(root/'RUN_MANIFEST.json').write_text(json.dumps(manifests[profile]))\n")
+        "(root/'RUN_MANIFEST.json').write_text(json.dumps(manifests[profile]))\n"
+        "timeline=" + repr(timeline) + "\n"
+        "(root/'PORT_INPUT_TIMELINE_SNAPSHOT.json').write_text(json.dumps(timeline))\n")
     state = {"code_freeze_commit": "b" * 40, "execution_worktree": str(tmp_path)}
     monkeypatch.setattr(runner, "execution_state", lambda *args: state)
     monkeypatch.setattr(runner, "EXPECTED_GNSS_ROWS", {"BY2H": 3})
@@ -359,7 +373,7 @@ def test_failure_run_continues_all_five_with_fake_executable(tmp_path, monkeypat
     prepared = {"stage": tmp_path, "configurations": configs,
         "provider_checks": {"synthetic_provider": {"sha256": "c" * 64}},
         "frozen_metadata_checks": {"02_PROVIDER_FREEZE/PROVIDER_MANIFEST.json": {"sha256": "c" * 64}},
-        "provider_manifest": {"raw_source_hashes": {}}, "f02_receiver_expected": None,
+        "provider_manifest": {"raw_source_hashes": {}},
         "contract": {"identity": {"dataset_id": "BY2H"}, "window_contract": {"t_start": 1, "t_end": 3}}}
     records = runner.run_profiles(registry=SimpleNamespace(code_root=tmp_path, raw_root=tmp_path / "unused_raw"),
         sequence=SimpleNamespace(dataset_id="BY2H", stage_id="SYNTHETIC_ONLY", data_mode="synthetic"),

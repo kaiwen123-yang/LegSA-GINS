@@ -230,8 +230,9 @@ def _literal(value: Any) -> str:
 
 def _native_override_literal(key: str, value: Any) -> str:
     if key in {"raw_doppler_backend_source_files", "raw_doppler_backend_source_hashes"}:
-        # Sealed YAML stores list/dict values. The frozen C++ loader retains the
-        # unquoted JSON collection as a string; UTF-8 avoids literal \u escapes.
+        # Sealed YAML stores list/dict values. The frozen C++ loader normalizes
+        # brackets/commas before transporting a string; it is not preserved JSON.
+        # UTF-8 avoids literal \u escapes. Keep the frozen serialization unchanged.
         expected_type = list if key.endswith("source_files") else dict
         if not isinstance(value, expected_type):
             raise RuntimeConfigError(f"native provenance collection has wrong type: {key}")

@@ -12,6 +12,7 @@ from typing import Any, Mapping
 
 import yaml
 
+from .profile_expectations import profile_flags
 from .runtime_config import (BACKEND_PROVENANCE_KEYS, METHODS, NATIVE_IDENTITY,
                              RuntimeConfigError, frozen_parameter_hash,
                              scientific_runtime_config_hash)
@@ -192,12 +193,110 @@ def _strict_count(value: Any, key: str) -> int:
     return value
 
 
+def native_loader_string(config: Mapping[str, Any] | str, key: str) -> str:
+    """Reproduce port_config_loader.cpp normalizeLine/readKeyValues/stringOrDefault.
+
+    The production caller supplies bound raw YAML. Mapping input uses the C-03
+    JSON-literal serialization for the selected value, for synthetic fixtures.
+    Whitespace, comma removal, comment stripping and outer quote removal are
+    intentionally the native parser's literal behavior, not JSON decoding.
+    """
+    if isinstance(config, str):
+        lines = config.splitlines()
+    else:
+        if key not in config:
+            raise SolverValidationError(f"native provenance configuration key missing: {key}")
+        lines = [key + ": " + json.dumps(config[key], ensure_ascii=False, allow_nan=False)]
+    found = None
+    whitespace = " \t\r\n\v\f"
+    for raw in lines:
+        line = raw.split("#", 1)[0].translate(str.maketrans({"[": " ", "]": " ", ",": " "})).strip(whitespace)
+        delimiter = line.find("=")
+        if delimiter < 0:
+            delimiter = line.find(":")
+        if delimiter < 0 or line[:delimiter].strip(whitespace) != key:
+            continue
+        found = line[delimiter + 1:].strip(whitespace)
+    if found is None:
+        raise SolverValidationError(f"native provenance configuration line missing: {key}")
+    if len(found) >= 2 and found[0] == found[-1] and found[0] in {"'", '"'}:
+        found = found[1:-1]
+    return found
+
+
+def expected_update_epochs(config: Mapping[str, Any] | str,
+                           native_time_audit: Mapping[str, Any],
+                           gnss_path: str | Path) -> dict[str, Any]:
+    """Count only input epochs under C-04b A.1's literal eligibility rule.
+
+    effective_starttime is the sealed PORT_INPUT_TIMELINE_SNAPSHOT.json field;
+    it is never inferred from NAV, update counters, or the first actual update.
+    This intentionally preserves a mismatch when initialization skips more rows
+    than the registered audit boundary explains.
+    """
+    cfg = _mapping(config) if isinstance(config, str) else dict(config)
+    audit = dict(native_time_audit)
+    def number(source, key):
+        value = source.get(key)
+        if type(value) not in (int, float) or not math.isfinite(value):
+            raise SolverValidationError(f"time audit requires finite number: {key}")
+        return float(value)
+    start, end = number(cfg, "starttime"), number(cfg, "endtime")
+    first_imu, last_imu = number(audit, "first_imu_time"), number(audit, "last_imu_time")
+    first_gnss, last_gnss = number(audit, "first_gnss_time"), number(audit, "last_gnss_time")
+    effective, effective_end = number(audit, "effective_starttime"), number(audit, "effective_endtime")
+    if start >= end or first_imu > last_imu or first_gnss > last_gnss:
+        raise SolverValidationError("invalid configured/native time ordering")
+    # Native snapshot uses fixed precision(10); reproduce its serialization.
+    printed = lambda value: float(format(value, ".10f"))
+    expected_fields = {"config_starttime": printed(start), "config_endtime": printed(end),
+        "effective_starttime": max(printed(start), first_imu),
+        "effective_endtime": min(printed(end), last_imu, last_gnss),
+        "overlap_start": effective, "overlap_end": effective_end}
+    for key, expected in expected_fields.items():
+        if number(audit, key) != expected:
+            raise SolverValidationError(f"native time audit is inconsistent with frozen config/input bounds: {key}")
+    for flag in ("trace_solver_input", "final_v23_output_solver_input", "paper_performance_claim"):
+        if audit.get(flag) is not False:
+            raise SolverValidationError(f"native time audit forbidden flag: {flag}")
+    provider = Path(gnss_path)
+    if "gnsspath" in cfg and Path(str(cfg["gnsspath"])) != provider:
+        raise SolverValidationError("eligible-epoch GNSS path differs from bound configuration")
+    rows = _numeric_rows(provider, 15)
+    if any(len(row) != 15 for row in rows):
+        raise SolverValidationError("eligible-epoch count requires frozen GNSS 15-column provider")
+    times = [row[0] for row in rows]
+    if any(right <= left for left, right in zip(times, times[1:])):
+        raise SolverValidationError("GNSS provider time is not strictly increasing")
+    if (_strict_count(audit.get("gnss_row_count"), "gnss_row_count") != len(times)
+            or first_gnss != printed(times[0]) or last_gnss != printed(times[-1])):
+        raise SolverValidationError("native GNSS timeline differs from provider epochs")
+    configured = [time for time in times if start <= time <= end]
+    eligible = [time for time in times if effective < time <= end]
+    if any(time > effective_end for time in eligible):
+        raise SolverValidationError("configured GNSS eligible epochs extend beyond native effective end")
+    skipped = [time for time in configured if time <= effective]
+    overlap_count = sum(effective < time <= effective_end for time in times)
+    for key in ("gnss_rows_in_overlap", "gnss_rows_after_start_before_end"):
+        if _strict_count(audit.get(key), key) != overlap_count:
+            raise SolverValidationError(f"native overlap count differs from provider epochs: {key}")
+    return {"effective_starttime": effective, "effective_endtime": effective_end,
+        "effective_starttime_source": "PORT_INPUT_TIMELINE_SNAPSHOT.json.effective_starttime",
+        "effective_starttime_rule": "max(config.starttime, native first_imu_time)",
+        "configured_window_rows": len(configured), "expected_update_count": len(eligible),
+        "expected_update_rule": "GNSS15.t > effective_starttime and GNSS15.t <= config.endtime",
+        "skipped_epoch_times": skipped, "skipped_epoch_count": len(skipped),
+        "eligible_epoch_times": eligible, "gnss_provider_rows": len(times),
+        "expected_count_derived_from_actual_counters": False,
+        "expected_count_derived_from_NAV": False}
+
+
 def validate_profile_counters(effective_profile: str, manifest: Mapping[str, Any],
-                              expected_gnss_rows: int,
-                              f02_receiver_expected: int | None = None) -> dict[str, int]:
+                              expected_gnss_rows: int) -> dict[str, int]:
     if effective_profile not in METHODS.values():
         raise CounterMismatch(f"unknown frozen profile: {effective_profile}")
     n = _strict_count(expected_gnss_rows, "expected_gnss_rows")
+    flags = profile_flags(effective_profile)
     counters, errors = {}, []
     for key, source in COUNTER_SOURCES.items():
         value = manifest.get(source)
@@ -223,26 +322,25 @@ def validate_profile_counters(effective_profile: str, manifest: Mapping[str, Any
                     errors.append(f"native nested counter differs: {source}")
     if counters["position_update_count"] != n:
         errors.append(f"position_update_count != {n}")
-    receiver_expected = n
-    if effective_profile == "basic_dual_yaw_EKF" and f02_receiver_expected is not None:
-        receiver_expected = _strict_count(f02_receiver_expected, "f02_receiver_expected")
+    receiver_expected = n if flags["receiver_velocity"] else 0
     if counters["receiver_velocity_update_count"] != receiver_expected:
         errors.append(f"receiver_velocity_update_count != {receiver_expected}")
-    yaw = effective_profile != "single_antenna_EKF"
+    yaw = flags["dual_yaw"]
     if counters["dual_yaw_attempt_count"] != (n if yaw else 0):
         errors.append("dual_yaw_attempt_count differs from profile GNSS-row contract")
     if counters["dual_yaw_attempt_count"] != sum(counters[f"dual_yaw_{action}_count"] for action in ("normal", "downweight", "reject")):
         errors.append("dual-yaw action counts do not close")
     if counters["dual_yaw_accepted_count"] != counters["dual_yaw_normal_count"] + counters["dual_yaw_downweight_count"]:
         errors.append("dual-yaw accepted count does not close")
-    if effective_profile == "basic_dual_yaw_EKF" and any(counters[f"dual_yaw_{key}_count"] != 0 for key in ("downweight", "reject")):
+    if yaw and not flags["scheme_c"] and any(counters[f"dual_yaw_{key}_count"] != 0 for key in ("downweight", "reject")):
         errors.append("F02 downweight/reject must both be zero")
-    active_aux = effective_profile in {"AB1011", "AB1111"}
-    for key in ("raw_doppler_update_count", "go2_roll_pitch_update_count", "go2_horizontal_velocity_update_count"):
-        if (counters[key] > 0) != active_aux:
+    for key, feature in (("raw_doppler_update_count", "raw_doppler"),
+                         ("go2_roll_pitch_update_count", "go2_rp"),
+                         ("go2_horizontal_velocity_update_count", "go2_hv")):
+        if (counters[key] > 0) != flags[feature]:
             errors.append(f"{key} violates frozen profile")
     for key in ("source_aware_evaluation_count", "source_aware_weight_changed_count"):
-        if (counters[key] > 0) != (effective_profile == "AB1111"):
+        if (counters[key] > 0) != flags["source_aware"]:
             errors.append(f"{key} violates frozen profile")
     if counters["source_aware_weight_changed_count"] > counters["source_aware_evaluation_count"]:
         errors.append("Source-Aware changed count exceeds evaluations")
@@ -295,18 +393,15 @@ def validate_clean5_manifest(manifest: Mapping[str, Any], config: Mapping[str, A
     for role, (key, purpose) in roles.items():
         if paths[role] != cfg.get(key) or actual_roles[role] != purpose:
             raise SolverValidationError(f"solver input ledger differs from frozen configuration: {role}")
-    # Source-file collections are transported by the native loader as JSON strings.
-    # Disabled RD statuses do not populate obs/nav/conversion; validate these when enabled.
+    # The native YAML-like parser replaces brackets and commas before string
+    # transport. Its source-file/source-hash values are therefore NOT JSON.
+    # Disabled RD statuses do not populate obs/nav/conversion; validate when enabled.
     provenance_keys = set(BACKEND_PROVENANCE_KEYS) if cfg["enable_raw_doppler"] else {
         "raw_doppler_backend_source_files", "raw_doppler_backend_source_hashes", "helper_executable_hash"}
     for key in sorted(provenance_keys):
         actual = manifest.get(key)
-        if key.startswith("raw_doppler_backend_source_"):
-            try:
-                actual = json.loads(actual) if isinstance(actual, str) else actual
-            except ValueError as exc:
-                raise SolverValidationError(f"native backend provenance invalid JSON: {key}") from exc
-        if actual != cfg.get(key):
+        expected_value = native_loader_string(config, key)
+        if type(actual) is not str or actual != expected_value:
             raise SolverValidationError(f"native backend provenance mismatch: {key}")
     if cfg["enable_raw_doppler"] and manifest.get("raw_doppler_backend_lineage_proven") is not True:
         raise SolverValidationError("Raw Doppler backend lineage is not proven")

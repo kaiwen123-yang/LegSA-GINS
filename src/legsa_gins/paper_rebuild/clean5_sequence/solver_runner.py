@@ -31,7 +31,7 @@ from .generation_audit import (WRITE_FLAGS, audit_records, code_freeze_state,
 from .registry import load_registry
 from .runtime_config import (CONFIG_FILENAMES, METHODS, PATH_ROLES,
                              frozen_parameter_hash, scientific_runtime_config_hash)
-from .solver_validation import (bind_output_config, validate_clean5_manifest,
+from .solver_validation import (bind_output_config, expected_update_epochs, validate_clean5_manifest,
                                 validate_profile_counters, validate_run_outputs)
 from .solver_seal import seal_outputs, validate_output_seal
 
@@ -40,9 +40,8 @@ C03_COMMIT = "1441993e41a93eb5589be0ba31771b4b154eedc2"
 FROZEN_EXECUTABLE_SHA256 = "9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f"
 EXECUTABLE_RELATIVE = Path("build/canonical541_cpp/legsa_v23_port_core_demo")
 EXPECTED_GNSS_ROWS = {"BY2H": 272, "BY2O": 409}
-# Literal C-04 contract: None means the same receiver-velocity count as GNSS.
-# No profile flags or numeric parameters are changed to satisfy this outer gate.
-F02_RECEIVER_EXPECTED = None
+# These C-03 counts identify the frozen provider metadata only. Runtime counter
+# expectations are derived from the native effective start and profile features.
 SOLVER_TIMEOUT_SECONDS = 1800
 RAW_CHECKPOINT_SCHEMA = "paper_rebuild.final_v23_external_raw_checkpoint.v1"
 FORBIDDEN_FLAGS = ("trace_used_online", "synthetic_data_used", "semisynthetic_data_used",
@@ -330,7 +329,7 @@ def run_one(*, registry, sequence, prepared, method, executable, state):
               "provider_manifest_sha256": prepared["frozen_metadata_checks"]["02_PROVIDER_FREEZE/PROVIDER_MANIFEST.json"]["sha256"],
               "raw_source_hashes": prepared["provider_manifest"]["raw_source_hashes"],
               "old_runtime_input_count": 0, "retry_count": 0, "evaluator_execution_count": 0,
-              "f02_receiver_expected": prepared.get("f02_receiver_expected", F02_RECEIVER_EXPECTED),
+              "module_expectation_source": "final_v23_clean_parity.METHOD_FEATURES and canonical541 bit table",
               **{key: False for key in FORBIDDEN_FLAGS}}
     try:
         text, hashes = bind_output_config(config["text"], run_dir, config["profile"]["frozen_parameter_hash"])
@@ -381,15 +380,19 @@ def run_one(*, registry, sequence, prepared, method, executable, state):
             record["native_provenance_flags"] = {key: manifest.get(key) for key in FORBIDDEN_FLAGS}
             record["all_native_counters"] = {key: value for key, value in manifest.items()
                                               if "count" in key or key.startswith("yaw_")}
+            eligibility = expected_update_epochs(native_config,
+                _json(run_dir / "PORT_INPUT_TIMELINE_SNAPSHOT.json"), Path(native_config["gnsspath"]))
+            record["epoch_eligibility"] = eligibility
+            record["effective_starttime"] = eligibility["effective_starttime"]
+            record["effective_starttime_source"] = "PORT_INPUT_TIMELINE_SNAPSHOT.json.effective_starttime"
             try:
-                record["counters"] = validate_profile_counters(effective, manifest, EXPECTED_GNSS_ROWS[sequence.dataset_id],
-                                                                f02_receiver_expected=record["f02_receiver_expected"])
+                record["counters"] = validate_profile_counters(effective, manifest, eligibility["expected_update_count"])
             except Exception as exc:
                 record["counters"] = getattr(exc, "counters", {})
                 record["validation_errors"].append(f"Counter validation: {exc}")
                 if record["terminal_status"] == "COMPLETED":
                     record["terminal_status"] = "counter_mismatch"
-            validate_clean5_manifest(manifest, native_config, prepared["contract"])
+            validate_clean5_manifest(manifest, text, prepared["contract"])
         except Exception as exc:
             record["validation_errors"].append(f"Native manifest validation: {exc}")
             if record["terminal_status"] == "COMPLETED":
@@ -424,7 +427,6 @@ def supervise(args, registry, sequence, state, executable):
         if gate.get("code_freeze_commit") != state["code_freeze_commit"] or gate.get("run_count") != 5:
             raise RuntimeError("BY2H must finish and seal all five terminals under this freeze before BY2O")
     prepared = preflight(registry, sequence, executable)
-    prepared["f02_receiver_expected"] = 0 if args.f02_receiver_expected == "zero" else None
     runs_root = prepared["stage"] / "04_SOLVER_RUNS"
     runs_root.mkdir(exist_ok=False)
     audit_dir = runs_root / "00_SEQUENCE_AUDIT"
@@ -438,7 +440,7 @@ def supervise(args, registry, sequence, state, executable):
                 "provider_files": prepared["provider_checks"], "provider_hashes": prepared["provider_checks"],
                 "provider_manifest_path": str(prepared["stage"] / "02_PROVIDER_FREEZE/PROVIDER_MANIFEST.json"),
                 "provider_manifest_sha256": prepared["frozen_metadata_checks"]["02_PROVIDER_FREEZE/PROVIDER_MANIFEST.json"]["sha256"],
-                "contract": prepared["contract"], "f02_receiver_expected_policy": args.f02_receiver_expected,
+                "contract": prepared["contract"], "module_expectation_policy": "frozen_canonical_features",
                 "frozen_metadata_checks": prepared["frozen_metadata_checks"],
                 "synthetic_data_used": False, "semisynthetic_data_used": False,
                 "trace_used_online": False, "evaluator_execution_count": 0, "plot_execution_count": 0,
@@ -494,6 +496,10 @@ def supervise(args, registry, sequence, state, executable):
 
 
 def main(argv=None, *, execution_script=None):
+    supplied = list(sys.argv[1:] if argv is None else argv)
+    if "--phase" in supplied:
+        from .revalidation import main as revalidate_main
+        return revalidate_main(supplied)
     root = Path(__file__).resolve().parents[4]
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sequence", choices=("BY2H", "BY2O"), required=True)
@@ -501,8 +507,6 @@ def main(argv=None, *, execution_script=None):
     parser.add_argument("--code-freeze-commit", required=True)
     parser.add_argument("--executable", type=Path, required=True)
     parser.add_argument("--paths-config", type=Path, required=True)
-    parser.add_argument("--f02-receiver-expected", choices=("window", "zero"), default="window",
-                        help="Validation-only gate; zero requires explicit human correction of C-04 A.5")
     parser.add_argument("--registry", type=Path, default=root / "configs/paper_rebuild/clean5/CLEAN5_SEQUENCE_REGISTRY.yaml")
     parser.add_argument("--_checkpoint", choices=("pre_run", "post_run"), help=argparse.SUPPRESS)
     args = parser.parse_args(argv)

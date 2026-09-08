@@ -117,6 +117,10 @@ def test_failed_fake_executable_does_not_block_following_profiles(tmp_path, monk
     for root in (raw, code, stage / "04_SOLVER_RUNS"):
         root.mkdir(parents=True)
     fake = tmp_path / "fake-solver"
+    gnss_provider = stage / "gnss.txt"
+    gnss_provider.write_text("".join(" ".join(map(str, [t]+[0]*14))+"\n" for t in (1,2,3)))
+    imu_provider = stage / "imu.txt"
+    imu_provider.write_text("".join(" ".join(map(str, [t]+[0]*6))+"\n" for t in (0,1,2,3,4)))
     counter_map = {profile: _counter_fixture(profile, 3) for profile in METHODS.values()}
     fake.write_text("#!/usr/bin/python3\nimport json,sys,yaml\nfrom pathlib import Path\n"
                     "cfg=yaml.safe_load(Path(sys.argv[sys.argv.index('--config')+1]).read_text())\n"
@@ -125,6 +129,7 @@ def test_failed_fake_executable_does_not_block_following_profiles(tmp_path, monk
                     " print('synthetic failure after F01',file=sys.stderr)\n sys.exit(42)\n"
                     f"counters={counter_map!r}\n"
                     "(root/'RUN_MANIFEST.json').write_text(json.dumps(counters[cfg['algorithm_id']]))\n"
+                    "(root/'PORT_INPUT_TIMELINE_SNAPSHOT.json').write_text(json.dumps(dict(config_starttime=0.0,config_endtime=4.0,effective_starttime=0.0,effective_endtime=3.0,first_imu_time=0.0,last_imu_time=4.0,first_gnss_time=1.0,last_gnss_time=3.0,gnss_rows_after_start_before_end=3,gnss_rows_in_overlap=3,gnss_row_count=3,overlap_start=0.0,overlap_end=3.0,trace_solver_input=False,final_v23_output_solver_input=False,paper_performance_claim=False)))\n"
                     "nav=''.join(' '.join(map(str,[t]+[0]*9))+'\\n' for t in [1,2,3])\n"
                     "(root/'KF_GINS_Navresult.nav').write_text(nav)\n"
                     "(root/'KF_GINS_STD.txt').write_text(nav)\n"
@@ -134,7 +139,8 @@ def test_failed_fake_executable_does_not_block_following_profiles(tmp_path, monk
     for method, profile in METHODS.items():
         text = yaml.safe_dump({**NATIVE_IDENTITY, "algorithm_id": profile,
                                "run_id": f"CLEAN5_BY2H_{method}_{profile}",
-                               "outputpath": str(stage / "old"), "starttime": 0, "endtime": 4})
+                               "outputpath": str(stage / "old"), "starttime": 0, "endtime": 4,
+                               "gnsspath": str(gnss_provider), "imupath": str(imu_provider)})
         configurations[method] = {"text": text, "profile": {"frozen_parameter_hash": frozen_parameter_hash(text)},
                                   "identity": {"path": "synthetic-config", "sha256": "synthetic"}}
     prepared = {"stage": stage, "configurations": configurations, "provider_checks": {},
@@ -145,7 +151,6 @@ def test_failed_fake_executable_does_not_block_following_profiles(tmp_path, monk
     monkeypatch.setattr(runner, "execution_state", lambda *_: state)
     # Native-manifest semantics are independently exercised by the validation tests.
     monkeypatch.setattr(runner, "validate_clean5_manifest", lambda *_: {})
-    monkeypatch.setattr(runner, "EXPECTED_GNSS_ROWS", {"BY2H": 3})
     registry = SimpleNamespace(code_root=code, raw_root=raw)
     sequence = SimpleNamespace(dataset_id="BY2H", stage_id="SYNTHETIC_TEST_ONLY", data_mode="synthetic_test")
     records = runner.run_profiles(registry=registry, sequence=sequence, prepared=prepared,
