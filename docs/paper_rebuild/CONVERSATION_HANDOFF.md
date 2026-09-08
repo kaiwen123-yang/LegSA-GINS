@@ -21,15 +21,16 @@ file overrides `AGENTS.md`; it only records paper-phase decisions and task owner
 | Single | `F01` = `single_antenna_EKF` | baseline (position + receiver velocity, no yaw) |
 | Dual-basic | `F02` = `basic_dual_yaw_EKF` | baseline (dual yaw only, fixed 1.5 deg std) |
 | Backbone | `F03` = `A02` = `AB0000` | proposed method without RD/RP/HV/SA; ablation row only, never a "strong baseline" |
-| Core | `A04` = `AB1011` | candidate proposed method (Source-Aware disabled) |
-| Full | `F04` = `A01` = `AB1111` | candidate proposed method (Source-Aware enabled) |
+| Core | `A04` = `AB1011` | proposed method (Source-Aware disabled) |
+| Full | `F04` = `A01` = `AB1111` | protection extension (Source-Aware enabled) |
 
 The graduation-design algorithm (`final_v23`, the backbone) has never been published;
 the manuscript still adds one sentence declaring reuse of graduation-design material,
 as TIM requests for thesis material.
 
-Proposed-method identity: `PROVISIONAL_PENDING_BY2H_BY2O`, decided only by
-`docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md` (commit hash: `b9f9a44f288966c95961f7a15564b2b57bf07b65`).
+Proposed-method identity: `A04`, decided 2026-09-08 by
+`docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md` (rule commit: `b9f9a44f288966c95961f7a15564b2b57bf07b65`;
+evidence commit: `09caf1e7e6151f18cc25dafad4a7ef5704ae62d2`).
 
 ## 3. Comparison structure
 
@@ -46,8 +47,8 @@ Proposed-method identity: `PROVISIONAL_PENDING_BY2H_BY2O`, decided only by
 
 | Purpose | Stage id / dataset id |
 |---|---|
-| Same-day poor-heading run | `BY2H`, `CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE` |
-| Same-day single-antenna occlusion run | `BY2O`, `CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE` |
+| Same-day poor-heading run | `BY2H`, `CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE`; status: `EVALUATED` |
+| Same-day single-antenna occlusion run | `BY2O`, `CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE`; status: `EVALUATED` |
 | C00 input-parity experiment (A04 fed 5 Hz GNSS1 HPPOSECEF; EXT05C single-receiver IEKF) | `CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF` |
 | Publication figures | `CLEAN6_PUBLICATION_FIGURES/01_CANONICAL541`, `.../02_HORIZONTAL` |
 
@@ -60,7 +61,7 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 |---|---|---|---|
 | A | Claude (matrix-figure conversation) | derived tables (A04 vs F03 / F02, F04 vs F02, bootstrap CI, stratified Wilcoxon, bias/random decomposition), publication plotting common layer, Canonical-541 figures, captions, this file | common layer + BY2 draft figures rendered; waiting for BY2H/BY2O |
 | B | new conversation | horizontal publication figures FIG02/FIG03 (FIG04 supplementary), reuses A's common layer | common layer available (src/legsa_gins/paper_rebuild/publication/) |
-| C | Codex / execution conversation | BY2H, BY2O, input-parity runs and evaluation | waits for authorization |
+| C | Codex / execution conversation | BY2H, BY2O, input-parity runs and evaluation | generalization complete, stage 2/3 pending |
 | D | new conversation | yaw uncertainty budget, consistency diagnostic, bias/precision wording | after A's decomposition |
 | E | new conversation | manuscript | last |
 | F | new conversation | clean submission repository, data/code release | last |
@@ -74,6 +75,18 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
   from the frozen aggregate tables.
 - Horizontal synthesis tables for conversation B: `<CLEAN4 root>/13_HORIZONTAL_CROSS_LAYER_SYNTHESIS/`.
 
+- BY2H/BY2O evaluated stages: `<CLEAN5_BY2H_ROOT>` / `<CLEAN5_BY2O_ROOT>` (AGENTS section 3).
+  Each stage provides `08_AGGREGATE/`, `07_OFFLINE_EVALUATION/PER_RUN/`,
+  `02_PROVIDER_FREEZE/PROVIDER_MANIFEST.json`, and `01_SEQUENCE_CONTRACT/`.
+  The V2 `EVENT_WINDOW_V2.json` is the contract-pinned
+  `01_SEQUENCE_CONTRACT/C04B_CONTINUATION_2_ba7d380bb11d/EVENT_WINDOW_V2.json`
+  (`window_contract.event_report_relative_path`, checked by `event_window_report_sha256`).
+  `01_SEQUENCE_CONTRACT/OCCLUSION_WINDOW.json` applies to BY2O; BY2H is not applicable.
+- Decision evidence: `<CLEAN_ROOT>/stages/CLEAN5_DECISION/`.
+- Three-sequence handoff: `~/clean5_handoff.zip`, produced by
+  `scripts/paper_rebuild/clean5_pack_v1.py`; 10 Hz series are display-only, and metrics
+  remain the frozen aggregate values. Reference trace is external via `--trace-path`.
+
 ## 7. Open items
 
 - [x] Decision-rule file committed; hash recorded above.
@@ -81,6 +94,11 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 - [x] Stale tracked docs (ACTIVE_CONTEXT, NEXT_STAGE_INSTRUCTIONS, GINav/Hartley BLOCKED reports) synchronised before BY2H/BY2O run.
 - [x] Bias/random decomposition result reported (conversation A) and consumed by C and D.
 - [x] Derived pairwise `A04_vs_F02`, `F04_vs_F02`, `A04_vs_F03` added under the publication namespace.
+
+- [ ] BY2O 门控拒绝/降权历元的 post-hoc 时间线（A/D）。
+- [ ] BY2H/BY2O 水平误差体坐标分解（A）。
+- [ ] SA 的 Up 代价按源分解（A/D）。
+- [ ] 输入侧发现：gnss1-status sys_stamp − header.stamp 中位 0.205 s（BY2H/BY2O 实测），位置流为右天线相位中心（半基线 0.175 m，杆臂补 0.03 m）——作为前向/右向固定偏差的两个候选来源，在 stage 2 的 5 Hz HPPOSECEF 实验中检验，stage 3 溯源时一并核对（C）。
 
 ## Conversation log
 
@@ -105,3 +123,4 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 - 2026-09-08 (C): C-04 code freeze 417ae5b096d3b292c998e444291da5b1f43000f4; record commit=this commit (docs(clean5): record BY2H/BY2O five-configuration solver runs and output seal). Ten solver exits 0: BY2H 5 counter_mismatch; BY2O 1 counter_mismatch + 4 technical_failure; both seals PARTIAL, zero solver trace/bag/fpl/raw opens, zero evaluation/plotting, pre/post 22/22 unchanged per sequence. OUTPUT_SEAL SHA256 BY2H 825aa1834e5fe8408bc3e94892a9c5c037d7cd55c47a60b6dcd183fc2e896896, BY2O c5c190213fc15ac283a03092a454e48407ff43411042d8440f2f523c9597647e; retained native counter mismatches and validator/loader collection-transport defect, no retries. Full counters, stderr tails, audit/checkpoint hashes and claim boundaries: CLEAN5_SOLVER_RUN_RECORD.md.
 - 2026-09-08 (C): C-04b continuation 2 complete; event implementation ba7d380bb11db5cdc5b3a56ed9f86b148e3db554; contract/execution freeze 7a5b48f0920f1c52c3d0f286855231769631e3ee; record commit=this commit. BY2/BY2H/BY2O event and xcorr gates PASS (windows 66/340, 413/683, 3186/3563); v1 revalidation 10/10 PASS reused with unchanged validators and v1 artifacts retained as SUPERSEDED_NOT_EVALUATED. V2 ten runs COMPLETED (exit 0), both seals PASS; zero solver reference-trace/bag/fpl/raw opens, zero evaluation/plotting; event and solver pre/post raw checkpoints 22/22 unchanged per sequence, checkpoint access hash-only. OUTPUT_SEAL_V2 SHA256 BY2H e34f283f753a2e564379bcace85e383d407e8b84b9309f9163f8de4a818374f5, BY2O ab037dadf7725bb47022ee0a86d9c0ee8f8b45a87acc152270bebc23c5d95285. 306 tests passed; full event intervals, initialization, dropout ledger, counters and audit evidence are appended in CLEAN5_SOLVER_RUN_RECORD.md.
 - 2026-09-08 (C): C-05 complete; code freeze 64a25e667c10ba30499108edaa8f559a5bef8b64; record commit=this commit. Revised A2 evaluator identity PASS before any BY2H/BY2O evaluator execution: C00 A04/F04 24 metric checks PASS, synthetic 0/1000 m and 90 deg gates PASS, three identical 80-byte headers with zero data-line reads. V2 offline evaluations 10/10 PASS; per-run coverage=finite=1, evaluator reference opens exactly one each, bag/fpl/raw-write/outside-write counts 0. Both pre/post seals unchanged; 432 tests passed. Decision inputs SHA256 d9867e64d9e57caea19cfd83b7c7dfba5e9fc95e789859fefbc1820b8230ef1e: heading FAIL, position FAIL; no Outcome written. Full tables, source rows, gate and aggregate hashes, audits and decision JSON original: CLEAN5_OFFLINE_EVALUATION_RECORD.md.
+- 2026-09-08 (C): C-05/C-06 complete; proposed method A04 by the pre-registered rule (rule commit b9f9a44f288966c95961f7a15564b2b57bf07b65, evidence commit 09caf1e7e6151f18cc25dafad4a7ef5704ae62d2); heading test FAIL, position bound FAIL. The rule text is unchanged; only its Outcome block is filled. Generalization complete; stage 2/3 pending. Three-sequence handoff script: scripts/paper_rebuild/clean5_pack_v1.py; artifact: ~/clean5_handoff.zip.

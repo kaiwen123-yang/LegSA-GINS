@@ -158,6 +158,32 @@ Default numerical sources:
 13_AGGREGATE/METRIC_COVERAGE_REPORT.csv
 ```
 
+CLEAN5 evaluated sequence roots:
+
+```text
+<CLEAN5_BY2H_ROOT> = <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE
+<CLEAN5_BY2O_ROOT> = <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE
+<CLEAN5_DECISION_ROOT> = <CLEAN_ROOT>/stages/CLEAN5_DECISION
+```
+
+Default CLEAN5 numerical sources (under each sequence root):
+
+```text
+08_AGGREGATE/UNIQUE_EVALUATION_RESULTS.csv
+08_AGGREGATE/LOGICAL_EVALUATION_RESULTS.csv
+08_AGGREGATE/UNIQUE_METHOD_SUMMARY.csv
+08_AGGREGATE/LOGICAL_METHOD_SUMMARY.csv
+08_AGGREGATE/PAIRWISE_CASE_LEVEL.csv
+08_AGGREGATE/PAIRWISE_SUMMARY.csv
+08_AGGREGATE/MODULE_ACTION_SUMMARY.csv
+08_AGGREGATE/RUNTIME_SUMMARY.csv
+08_AGGREGATE/METRIC_COVERAGE_REPORT.csv
+08_AGGREGATE/WINDOW_SEGMENT_SUMMARY.csv
+08_AGGREGATE/FINAL_EVALUATION_SUMMARY.json
+08_AGGREGATE/FIELD_DEFINITIONS.json
+<CLEAN5_DECISION_ROOT>/A04_F04_DECISION_INPUTS.json
+```
+
 Do not reconstruct current metrics from screenshots, legacy tables, or old summaries.
 
 ---
@@ -272,7 +298,7 @@ F04:
 quality-mismatch and tail-protection extension
 
 final manuscript identity:
-PROVISIONAL_PENDING_GENERALIZATION
+A04 (decided by pre-registered rule, 2026-09-08)
 ```
 
 Do not claim Full universally dominates Strong or A04. Do not claim Source-Aware is nominal-silent/fault-active; clean touch rate is about 84.8%.
@@ -284,6 +310,26 @@ F02: H / 3D / yaw = 0.355526 m / 0.893102 m / 2.338427 deg
 F03: H / 3D / yaw = 0.352517 m / 0.890581 m / 1.962413 deg
 A04: H / 3D / yaw = 0.352386 m / 0.890358 m / 1.934076 deg
 F04: H / 3D / yaw = 0.354803 m / 0.926378 m / 1.954959 deg
+```
+
+Formal BY2H full-window anchors:
+
+```text
+F01: H / 3D / Up / yaw RMSE / yaw P95 = 0.350287 m / 0.938231 m / 0.870389 m / 3.901904 deg / 7.587503 deg
+F02: H / 3D / Up / yaw RMSE / yaw P95 = 0.353305 m / 0.940934 m / 0.872085 m / 2.122373 deg / 4.498102 deg
+F03: H / 3D / Up / yaw RMSE / yaw P95 = 0.349399 m / 0.937819 m / 0.870301 m / 2.007379 deg / 3.968948 deg
+A04: H / 3D / Up / yaw RMSE / yaw P95 = 0.349360 m / 0.937628 m / 0.870112 m / 2.059813 deg / 4.106967 deg
+F04: H / 3D / Up / yaw RMSE / yaw P95 = 0.351939 m / 0.982015 m / 0.916783 m / 2.068136 deg / 4.117244 deg
+```
+
+Formal BY2O full-window anchors:
+
+```text
+F01: H / 3D / Up / yaw RMSE / yaw P95 = 0.348856 m / 1.226955 m / 1.176316 m / 6.904339 deg / 11.147493 deg
+F02: H / 3D / Up / yaw RMSE / yaw P95 = 0.351268 m / 1.230122 m / 1.178903 m / 2.799343 deg / 4.331735 deg
+F03: H / 3D / Up / yaw RMSE / yaw P95 = 0.348291 m / 1.226749 m / 1.176268 m / 3.311780 deg / 5.416607 deg
+A04: H / 3D / Up / yaw RMSE / yaw P95 = 0.348045 m / 1.226528 m / 1.176111 m / 3.314214 deg / 5.474313 deg
+F04: H / 3D / Up / yaw RMSE / yaw P95 = 0.350912 m / 1.602733 m / 1.563846 m / 3.404182 deg / 5.610167 deg
 ```
 
 The 77-epoch common-support values A04 2.231055 deg and F04 2.226267 deg are diagnostic-only. They must never replace the formal C00 values.
@@ -810,10 +856,12 @@ Priority remaining evidence gaps:
 ```text
 independent or more independent reference;
 additional real sequences/platforms;
-real single-antenna obstruction or one-side quality degradation;
+[x] real single-antenna obstruction or one-side quality degradation;
 cross-sequence/cross-platform generalization;
-final A04/F04 role selection.
+[x] final A04/F04 role selection.
 ```
+
+BY2O records GNSS2 RTK float for 57 epochs, not a stream outage.
 
 Do not automatically repeat the full 541 × 11 matrix on another dataset.
 
@@ -1087,14 +1135,15 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 
 ## 18. Current next actions
 
-Current allowed sequence:
+Current next actions:
 
 ```text
-1. run BY2H and BY2O (CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE, CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE) with BY2-frozen parameters, then execute docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md;
-2. run CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF (Core fed 5 Hz GNSS1 HPPOSECEF; EXT05C single-receiver IEKF);
-3. source-prove the Fixposition POI offset and audit gnss1-status fix type / pos_acc_v; obtain the full trace fields for the reference uncertainty statement (conversation C/D);
-4. horizontal publication figures FIG02/FIG03 on the shared plotting layer (conversation B);
-5. re-render MFIG00/MFIG05 with the three-sequence data; freeze manuscript identity and display names.
+1. stage 2 parity: CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF (requires separate human authorization);
+2. stage 3 source provenance: Fixposition POI offset, gnss1-status timing / fix type / pos_acc_v, right-antenna phase-center and lever-arm definitions (conversation C/D);
+3. final three-sequence publication figures using BY2/BY2H/BY2O frozen evidence (conversation A);
+4. post-hoc BY2O gate rejection/downweight epoch timeline (A/D);
+5. post-hoc BY2H/BY2O horizontal-error body-frame decomposition (A);
+6. post-hoc Source-Aware Up cost decomposition by source (A/D).
 ```
 
 Do not restart Canonical-541, reselect horizontal literature algorithms, rerun GINav, reopen Hartley absolute-reference evaluation, or run corrected Classic-18 by default.

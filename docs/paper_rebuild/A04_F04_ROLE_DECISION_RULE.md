@@ -93,16 +93,16 @@ This file is committed and its commit hash is recorded in
 ## Outcome (append only, after both sequences are sealed and evaluated)
 
 ```text
-BY2H yaw gate:            <PASS|FAIL>
-BY2H yawRMSE  A04 / F04:  <value> / <value>
-BY2H yawP95   A04 / F04:  <value> / <value>
-BY2H hRMSE    A04 / F04:  <value> / <value>
-BY2H upRMSE   A04 / F04:  <value> / <value>
-BY2O window (input-side): <t0>..<t1>
-BY2O hRMSE  full / outside  A04 / F04: <values>
-BY2O upRMSE full / outside  A04 / F04: <values>
-Heading test:             <PASS|FAIL>
-Position bound:           <PASS|FAIL>
-Proposed method:          <A04|F04>
-Evidence commit / attempt: <hash> / <attempt id>
+BY2H yaw gate:            PASS
+BY2H yawRMSE  A04 / F04:  2.059813 / 2.068136
+BY2H yawP95   A04 / F04:  4.106967 / 4.117244
+BY2H hRMSE    A04 / F04:  0.349360 / 0.351939
+BY2H upRMSE   A04 / F04:  0.870112 / 0.916783
+BY2O window (input-side): 3369.943067..3411.951585
+BY2O hRMSE  full / outside  A04 / F04: 0.348045 / 0.350912 ; 0.361919 / 0.364983
+BY2O upRMSE full / outside  A04 / F04: 1.176111 / 1.563846 ; 1.214641 / 1.612776
+Heading test:             FAIL
+Position bound:           FAIL (BY2H PASS; BY2O full/outside Up FAIL)
+Proposed method:          A04
+Evidence commit / attempt: 09caf1e7e6151f18cc25dafad4a7ef5704ae62d2 / BY2H OUTPUT_SEAL.json sha256 e34f283f753a2e564379bcace85e383d407e8b84b9309f9163f8de4a818374f5 ; BY2O OUTPUT_SEAL.json sha256 ab037dadf7725bb47022ee0a86d9c0ee8f8b45a87acc152270bebc23c5d95285
 ```
