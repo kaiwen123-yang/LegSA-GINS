@@ -176,16 +176,16 @@ time_contract:
       negative_time: false
       status: PASS
 window_contract:
-  rule: B_prime
-  three_stream_common_coverage: valid propagation Go2 IMU AND GNSS1 status pos_valid AND constructed A1 with rel_valid/ant_valid/ant_state==2
-  epoch_association: GNSS1 pos_valid sys_stamp bracketed by valid propagation Go2 IMU rows, with its exact header.stamp in
-    constructed A1 output and rel_valid/ant_valid/ant_state==2; helper validates both receivers
-  stream_clock_note: IMU timestamp and GNSS1 sys_stamp are absolute source times; A1 uses GNSS1 header.stamp. All displayed
-    relative to R1; association is by exact source row, no clock adjustment
+  three_stream_common_coverage: valid propagation Go2 IMU AND GNSS1 status pos_valid
+    AND constructed A1 with rel_valid/ant_valid/ant_state==2
+  epoch_association: GNSS1 pos_valid sys_stamp bracketed by valid propagation Go2
+    IMU rows, with its exact header.stamp in constructed A1 output and rel_valid/ant_valid/ant_state==2;
+    helper validates both receivers
+  stream_clock_note: IMU timestamp and GNSS1 sys_stamp are absolute source times;
+    A1 uses GNSS1 header.stamp. All displayed relative to R1; association is by exact
+    source row, no clock adjustment
   first_common_epoch: 400.20381903648376
   last_common_epoch: 692.2076218128204
-  limiting_stream:
-  - propagation_go2_imu
   stream_ranges:
     a1_constructed_header:
       first: 399.99984669685364
@@ -205,27 +205,183 @@ window_contract:
       max: 692.9191179275513
       min: 394.9430739879608
       negative_time: false
-  t_start_formula: ceil(first_common_epoch) + 10.0
-  t_end_formula: floor(last_common_epoch) - 9.0
-  head_margin_seconds: 10.0
-  tail_margin_seconds: 9.0
-  t_end: 683.0
-  t_start: 411.0
-  rule_reproduces_by2_frozen_window_66_340: true
-  margins_uniqueness:
-    scope: unique integer pair for the fixed ceil/floor formulas and frozen BY2 endpoints; not an optimization over sequences
-    by2_first_common_epoch: 55.20679450035095
-    by2_last_common_epoch: 349.20453906059265
-    head_equation: 66 - ceil(55.20679450035095) = 10
-    tail_equation: floor(349.20453906059265) - 340 = 9
-    unique_integer_pair:
-    - 10
-    - 9
-  margin_definition_note: tail margin definition corrected to common-coverage end; margins (10, 9) uniquely reproduce the
-    frozen BY2 window
-  rule_A_role: report_only_unused_for_window_selection
   no_method_specific_window: true
   preserve_internal_missing_epochs: true
+  rule: event_onset_v2
+  t_end: 683.0
+  t_start: 413.0
+  unadjusted_start_formula: floor(max(t_on_g, t_on_b))
+  t_start_formula: unadjusted start; if first propagation IMU >= start is delayed
+    >1.0 s, floor(that IMU time)
+  t_end_formula: floor(last_common_epoch) - 9.0
+  constants:
+    body_mean_definition: sample arithmetic mean of all frozen HV speeds in (t-1,t];
+      provider must supply a full 1 s history
+    body_mean_warmup_definition: first provider timestamp <= t-1; no zero padding
+      or future samples
+    body_mean_window_seconds: 1.0
+    body_persistence_definition: consecutive observed above-threshold causal means
+      spanning >=3 s; onset is the first sample, confirmed by the later sample
+    body_persistence_seconds: 3.0
+    by2_control:
+      kick_time_lower_bound: 62.579067
+      required_end: 340.0
+      required_start: 66.0
+      start_reference: 66.0
+    by2o_start_strictly_after_seconds: 3154.351049
+    candidate_epoch_scope: closed frozen three-stream common coverage, strictly after
+      kick if DETECTED
+    end_formula: floor(last_common_epoch)-9
+    gap_policy: onset selection unchanged; source holes censor onset timing; internal
+      dropout remains in the window; no artificial samples inserted
+    gnss_consecutive_epochs: 3
+    imu_gnss_time_offset: 0.0
+    kick:
+      detector: kick_alignment.detect_frozen_go2_kick unchanged
+      normalization_baseline_max_samples: 1000
+      not_detected_policy: report only; no replacement event, threshold change, or
+        retry
+      numerical_scale_floor: 1.0e-12
+      robust_mad_scale: 1.4826
+      segment: initial segment before first mode/gait change
+      zscore_threshold: 6.0
+    max_onset_difference_seconds: 1.0
+    onset_censoring:
+      clock_gate: 'either censored: full-common-coverage xcorr primary abs(lag)<=1
+        s and available; neither censored: abs(point delta)<=1 s; xcorr still reported'
+      gnss_hole_dt_greater_than_median_multiplier: 2.0
+      interval: earliest triggering hole left endpoint through observed onset; uncensored
+        onset is a point interval
+      lookback_seconds: 3.0
+      raw_body_hole_dt_greater_than_seconds: 0.1
+      raw_to_hv_sample_identity: replay UTC-relative float str, Decimal auxiliary
+        offset subtraction and .12f from clean1r2r1_formal.rebase_auxiliary_time_csv;
+        exact encoded equality, no time tolerance
+      trigger: observed onset is the first sample after a hole, or a hole intersects
+        the closed [onset-3,onset] lookback; hole left endpoint must precede onset
+    onset_difference_definition: 'uncensored: t_on_g-t_on_b in ms; if either onset
+      is censored, only [g_low-b_high,g_high-b_low] in ms; no offset applied'
+    propagation_initialization:
+      adjust_when_delay_strictly_greater_than_seconds: 1.0
+      adjusted_start: floor(t_init); no samples inserted or removed
+      time: first original frozen propagation IMU timestamp >= floor(max(onsets))
+    speed_threshold_mps: 0.15
+    start_formula: floor(max(t_on_g,t_on_b))
+    tail_margin_seconds: 9
+    xcorr_primary_maximum_absolute_lag_seconds: 1.0
+  kick:
+    constants:
+      detector: kick_alignment.detect_frozen_go2_kick unchanged
+      normalization_baseline_max_samples: 1000
+      not_detected_policy: report only; no replacement event, threshold change, or
+        retry
+      numerical_scale_floor: 1.0e-12
+      robust_mad_scale: 1.4826
+      segment: initial segment before first mode/gait change
+      zscore_threshold: 6.0
+    detector_source_sha256: 71a82f229d083552e2707a4e6c881bfd1d4d93b7f5e84e42d726a7c933bc835e
+    kick_time_R1: null
+    status: NOT_DETECTED
+  t_on_g: 410.203951
+  t_on_b: 411.7570643425
+  delta_t_onset_ms: null
+  v1_window:
+    rule: B_prime
+    t_start: 411.0
+    t_end: 683.0
+  v1_to_v2:
+    t_start:
+      v1: 411.0
+      v2: 413.0
+    t_end:
+      v1: 683.0
+      v2: 683.0
+  event_report_relative_path: 01_SEQUENCE_CONTRACT/C04B_CONTINUATION_2_ba7d380bb11d/EVENT_WINDOW_V2.json
+  event_attempt: C04B_CONTINUATION_2_ba7d380bb11d
+  onset_censored_b: true
+  onset_censored_g: false
+  body_onset_interval_R1:
+  - 407.01705837249756
+  - 411.7570643425
+  gnss_onset_interval_R1:
+  - 410.203951
+  - 410.203951
+  delta_t_onset_interval_ms:
+  - -1553.1133424999553
+  - 3186.892627502459
+  clock_consistency_gate:
+    basis: full_coverage_xcorr
+    delta_interval_is_not_point_offset: true
+    offset_applied_seconds: 0.0
+    passed: true
+    xcorr_used_as_hard_gate: true
+  xcorr_gate:
+    available: true
+    by2_difference_report_only: true
+    by2_primary_lag_seconds: -0.35000000000000003
+    difference_from_by2_primary_lag_seconds: -0.09999999999999998
+    lag_sign: corr(sg(t), sb(t+lag)); positive means body speed occurs later
+    maximum_absolute_lag_seconds: 1.0
+    offset_applied_seconds: 0.0
+    passed: true
+    primary_lag_seconds: -0.45
+  propagation_start_adjustment:
+    adjusted: true
+    adjusted_start: 413.0
+    delay_limit_seconds: 1.0
+    first_imu_time_at_or_after_start: 413.041069
+    initialization_delay_seconds: 2.041068999999993
+    original_imu_row_index_zero_based: 2677
+    rule: delay >1 s => floor(t_init)
+    unadjusted_start: 411.0
+  preserve_internal_dropout:
+  - duration_seconds: 0.5580441951751709
+    left_row_index_zero_based: 2679
+    overlap_seconds: 0.037091970443725586
+    preserved_without_interpolation_or_deletion: true
+    right_row_index_zero_based: 2680
+    source: raw_go2
+    t_end: 413.0370919704437
+    t_start: 412.47904777526855
+  - duration_seconds: 0.17571473121643066
+    left_row_index_zero_based: 3010
+    overlap_seconds: 0.17571473121643066
+    preserved_without_interpolation_or_deletion: true
+    right_row_index_zero_based: 3011
+    source: raw_go2
+    t_end: 415.0807819366455
+    t_start: 414.9050672054291
+  - duration_seconds: 6.024010999999973
+    left_row_index_zero_based: 2676
+    overlap_seconds: 0.04106899999999314
+    preserved_without_interpolation_or_deletion: true
+    right_row_index_zero_based: 2677
+    source: propagation_imu
+    t_end: 413.041069
+    t_start: 407.017058
+  - duration_seconds: 0.17601200000001427
+    left_row_index_zero_based: 3006
+    overlap_seconds: 0.17601200000001427
+    preserved_without_interpolation_or_deletion: true
+    right_row_index_zero_based: 3007
+    source: propagation_imu
+    t_end: 415.081079
+    t_start: 414.905067
+  kick_dropout_hypothesis:
+    body_onset_after_first_hole_end: true
+    first_raw_go2_hole:
+      duration_seconds: 4.740005970001221
+      left_row_index_zero_based: 2677
+      right_row_index_zero_based: 2678
+      t_end: 411.7570643424988
+      t_start: 407.01705837249756
+    kick_status: NOT_DETECTED
+    kick_time_assigned: false
+    statement: The kick may have occurred during the first raw Go2 dropout; this is
+      not a detected kick or clock-offset estimate.
+    status: HYPOTHESIS_ONLY
+    used_to_select_window: false
+  adjusted_for_imu_dropout: true
 initialization_contract:
   rule_source: configs/paper_rebuild/clean1_by2_clean_protocol.yaml#initialization
   by2_initialization_rules:
@@ -241,10 +397,10 @@ initialization_contract:
     contracts.
   position_rule: first GNSS1 status pos_valid epoch with sys_stamp - base_time >= t_start
   initpos:
-  - 39.984845799999995
-  - 116.34312919999999
-  - 41.7130012512207
-  position_epoch_R1: 411.21180534362793
+  - 39.9848666
+  - 116.3431276
+  - 41.691001892089844
+  position_epoch_R1: 413.20335483551025
   initvel:
   - 0
   - 0
@@ -252,11 +408,11 @@ initialization_contract:
   initatt:
   - 0
   - 0
-  - 351.3071121880813
+  - 353.25599329459806
   yaw_rule: first constructed A1 aligned_time >= t_start; wrap360(90 - body_candidate)
-  yaw_epoch_R1: 411.99984669685364
-  yaw_ned_deg_0_360: 351.3071121880813
-  yaw_wrap180_equivalent_deg: -8.692887811918695
+  yaw_epoch_R1: 413.99984669685364
+  yaw_ned_deg_0_360: 353.25599329459806
+  yaw_wrap180_equivalent_deg: -6.744006705401944
   yaw_equivalent_note: Same angle representation only; no change to initialization source, offset or physical transform
   yaw_input_domain_check:
     accepted_input_domain: finite real degrees; no initatt yaw range restriction in the loader or engine
@@ -302,6 +458,56 @@ initialization_contract:
   common_initialization_all_methods: true
   single_antenna_dual_yaw_initialization_only: true
   trace_initialization: false
+  source_provenance:
+    body_candidate_deg: 96.74400670540197
+    candidate_t_start: 413.0
+    initvel:
+    - 0
+    - 0
+    - 0
+    method_specific_initialization: false
+    physical_a1_audit:
+      formal_input_source: status
+      gnss1_filter:
+        ant_state_filter_present: true
+        ant_valid_filter_present: true
+        input_count: 298
+        kept_count: 298
+        label: gnss1
+        rejected_ant_state_count: 0
+        rejected_ant_valid_count: 0
+        rejected_rel_valid_count: 0
+        rel_valid_filter_present: true
+      gnss1_missing_rel_or_time_count: 0
+      gnss2_filter:
+        ant_state_filter_present: true
+        ant_valid_filter_present: true
+        input_count: 298
+        kept_count: 298
+        label: gnss2
+        rejected_ant_state_count: 0
+        rejected_ant_valid_count: 0
+        rejected_rel_valid_count: 0
+        rel_valid_filter_present: true
+      gnss2_missing_rel_or_time_count: 0
+      interpolation_outside_range_count: 1
+      phase: N4H1P
+      trace_solver_input: false
+      trace_yaw_for_solver: false
+      yaw_formula: -atan2(rel_e,rel_n)
+      yaw_ned_formula: 90_minus_yaw_body
+      yaw_row_count: 297
+      yaw_source: A1_dual_diff_status
+    physical_a1_row_count: 297
+    physical_a1_source: maintained pure status_yaw_builder.build_a1_dual_diff_yaw_rows
+    physical_a1_source_sha256: 4435dd71593b1447152986ab91e2fe0394177470791a4c09815a851b75504193
+    position_rule: first GNSS1 status pos_valid epoch with sys_stamp - base_time >=
+      t_start
+    provider_files_written: 0
+    rule_source: configs/paper_rebuild/clean1_by2_clean_protocol.yaml#initialization
+    trace_initialization: false
+    yaw_rule: first constructed A1 aligned_time >= t_start; wrap360(90 - body_candidate)
+    zero_initial_velocity_roll_pitch_preserved: true
 frozen_parameters:
   imu_preprocessing:
     source_frame: FLU
@@ -818,3 +1024,15 @@ forbidden:
 - modify_cpp
 - spoof_dataset_or_stage_identity_for_solver_admission
 - solver_evaluator_provider_execution_in_C02
+contract_version: 2
+supersedes_v1_sha256: 60553d29a417a23abbeb04411c0b05dc7a4e87d181488894569e574486c312dc
+amended_before_unblinding: true
+amendment_reason: 'The human acquisition protocol requires the kick before the algorithm
+  start; v1 B-prime does not encode this event order, and BY2O v1 starts about 0.35
+  s before its kick. Amendment requested before any CLEAN5 reference-trace unblinding
+  or evaluation. Second amendment: censored-onset fallback and IMU-availability shift
+  are input-side, pre-unblinding rules. Event report SHA-256: 1c613ac36c203717fe2527ced79718a886b6a031c7547f1ab7b418a974c7e095.'
+human_protocol_statement: 无 PTP 跨设备对时；启动时蹬一脚；算法起点 = 蹬脚后 GNSS 与机身 IMU 同时出现运动的时刻；结束
+  = 去掉末尾若干秒。
+amendment_code_commit: ba7d380bb11db5cdc5b3a56ed9f86b148e3db554
+event_window_report_sha256: 1c613ac36c203717fe2527ced79718a886b6a031c7547f1ab7b418a974c7e095
