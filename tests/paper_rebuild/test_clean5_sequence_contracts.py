@@ -235,6 +235,21 @@ def test_contract_time_window_and_initialization_reproduce_c01b_report(dataset):
     common = report["d_window_candidates"]["common_coverage"]
     window = contract["window_contract"]
     assert window["first_common_epoch"] == common["first"] and window["last_common_epoch"] == common["last"]
+    if contract.get("contract_version", 1) == 2:
+        from legsa_gins.paper_rebuild.clean5_sequence.contract_v2 import validate_amendment
+        from legsa_gins.paper_rebuild.clean5_sequence.solver_runner import C02_COMMIT, _git_bytes
+        relative = f"configs/paper_rebuild/clean5/CLEAN5_{dataset}_SEQUENCE_CONTRACT.yaml"
+        assert validate_amendment(_git_bytes(REPO_ROOT,C02_COMMIT,relative).decode(), (REPO_ROOT/relative).read_text())["passed"]
+        event_path = root/"stages"/contract["identity"]["stage_id"]/"01_SEQUENCE_CONTRACT/EVENT_WINDOW_V2.json"
+        assert hashlib.sha256(event_path.read_bytes()).hexdigest() == contract["event_window_report_sha256"]
+        event = json.loads(event_path.read_text())
+        assert event["ready_for_v2_contract"]
+        assert window["t_start"] == event["v2_window"]["t_start"]
+        init_v2 = contract["initialization_contract"]
+        assert all(init_v2[key] == value for key,value in event["initialization_v2"].items())
+        # The original C-01b initialization remains a provenance regression.
+        contract = yaml.safe_load(_git_bytes(REPO_ROOT,C02_COMMIT,relative))
+        window = contract["window_contract"]
     assert window["t_start"] == math.ceil(common["first"])+10
     assert window["t_end"] == math.floor(common["last"])-9
     init = contract["initialization_contract"]

@@ -19,7 +19,7 @@ EXTRA_FIELDS = ("dataset_id", "data_mode", "synthetic_data_used", "semisynthetic
                 "frozen_parameter_hash", "code_freeze_commit", "execution_worktree",
                 "exit_code", "runtime_seconds", "nav_rows", "nav_time_start", "nav_time_end",
                 "degradation_parameters_json", "counters_json", "formal_manifest_path",
-                "formal_manifest_sha256")
+                "formal_manifest_sha256", "effective_starttime", "t_init", "skipped_epochs_json")
 TERMINAL_STATUSES = {"COMPLETED", "technical_failure", "algorithm_failure", "counter_mismatch"}
 AUDIT_FIELDS = ("trace_open_count", "bag_open_count", "fpl_open_count", "raw_open_count",
                 "raw_write_open_count", "write_open_count", "write_outside_run_count")
@@ -70,11 +70,8 @@ def _degradation(metadata: Mapping[str, Any]) -> tuple[dict[str, Any], dict[str,
 
 
 def _flags(profile: str) -> dict[str, bool]:
-    return {"position_update": True, "dual_yaw": profile != "single_antenna_EKF",
-            "scheme_c": profile not in {"single_antenna_EKF", "basic_dual_yaw_EKF"},
-            "receiver_velocity": profile != "basic_dual_yaw_EKF",
-            "raw_doppler": profile in {"AB1011", "AB1111"}, "source_aware": profile == "AB1111",
-            "go2_rp": profile in {"AB1011", "AB1111"}, "go2_hv": profile in {"AB1011", "AB1111"}}
+    from .profile_expectations import profile_flags
+    return profile_flags(profile)
 
 
 def _registries(records: Sequence[Mapping[str, Any]], metadata: Mapping[str, Any],
@@ -102,6 +99,8 @@ def _registries(records: Sequence[Mapping[str, Any]], metadata: Mapping[str, Any
             "code_freeze_commit": metadata["code_freeze_commit"],
             "execution_worktree": metadata["execution_worktree"],
             "degradation_parameters_json": _json(degradation), "counters_json": _json(record.get("counters", {})),
+            "effective_starttime": record.get("effective_starttime"), "t_init": record.get("t_init"),
+            "skipped_epochs_json": _json(record.get("skipped_epochs", [])),
             **{key: record.get(key, "") for key in ("exit_code", "runtime_seconds", "nav_rows", "nav_time_start", "nav_time_end")},
             **_flags(profile)}
         wrapper = run_dir / "CLEAN5_FORMAL_RUN_MANIFEST.json"
@@ -142,6 +141,10 @@ def _write_csv(path: Path, prefix: Sequence[str], rows: Sequence[Mapping[str, An
 def seal_outputs(stage_root: str | Path, run_records: Sequence[Mapping[str, Any]],
                  metadata: Mapping[str, Any], audit_summaries: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     stage, records = Path(stage_root).resolve(strict=True), list(run_records)
+    runs_subdir = metadata.get("runs_subdir", "04_SOLVER_RUNS")
+    seal_subdir = metadata.get("seal_subdir", "05_OUTPUT_SEAL")
+    if (runs_subdir, seal_subdir) not in (("04_SOLVER_RUNS", "05_OUTPUT_SEAL"), ("04_SOLVER_RUNS_V2", "05_OUTPUT_SEAL_V2")):
+        raise SealValidationError("unregistered run/seal namespace")
     if len(records) != 5 or [row.get("method_id") for row in records] != list(METHODS):
         raise SealValidationError("seal requires the five ordered unique run terminal records")
     if len({row["run_id"] for row in records}) != 5:
@@ -168,7 +171,7 @@ def seal_outputs(stage_root: str | Path, run_records: Sequence[Mapping[str, Any]
         if record["terminal_status"] not in TERMINAL_STATUSES or METHODS[record["method_id"]] != record["effective_profile"]:
             raise SealValidationError("run terminal/profile identity mismatch")
         run_dir = Path(record["run_dir"])
-        if run_dir.is_symlink() or run_dir.resolve(strict=True) != stage / "04_SOLVER_RUNS" / record["run_id"]:
+        if run_dir.is_symlink() or run_dir.resolve(strict=True) != stage / runs_subdir / record["run_id"]:
             raise SealValidationError("run directory escaped its sequence stage")
         if record["terminal_status"] == "COMPLETED":
             for name in (*REQUIRED_NATIVE_OUTPUTS, "CLEAN5_RUNTIME_CONFIG.yaml", "CLEAN5_FORMAL_RUN_MANIFEST.json"):
@@ -184,13 +187,14 @@ def seal_outputs(stage_root: str | Path, run_records: Sequence[Mapping[str, Any]
                           "terminal_status": record["terminal_status"]})
     if not files:
         raise SealValidationError("no output files available to seal")
-    root = stage / "05_OUTPUT_SEAL"
+    root = stage / seal_subdir
     root.mkdir(exist_ok=False)
     unique, logical = _registries(records, metadata, degradation)
     unique_path, logical_path = root / "UNIQUE_RUN_TERMINAL_REGISTRY.csv", root / "LOGICAL_RESULT_TERMINAL_REGISTRY.csv"
     _write_csv(unique_path, UNIQUE_FIELDS, unique)
     _write_csv(logical_path, LOGICAL_FIELDS, logical)
     payload = {"schema_version": "paper_rebuild.clean5.output_seal.v1", "stage_root": str(stage),
+        "runs_subdir": runs_subdir, "seal_subdir": seal_subdir, "contract_version": metadata.get("contract_version", 1),
         "dataset_id": dataset, "data_mode": metadata["data_mode"], "synthetic_data_used": False,
         "semisynthetic_data_used": False, "sealed_at": datetime.now(timezone.utc).isoformat(),
         "unique_run_count": 5, "logical_result_count": 7, "file_count": len(files), "files": files,
@@ -224,6 +228,9 @@ def validate_output_seal(path: str | Path) -> dict[str, Any]:
     _regular_file(seal_path)
     payload = json.loads(seal_path.read_text(encoding="utf-8"))
     stage = Path(payload["stage_root"]).resolve(strict=True)
+    runs_subdir = payload.get("runs_subdir", "04_SOLVER_RUNS")
+    if runs_subdir not in ("04_SOLVER_RUNS", "04_SOLVER_RUNS_V2"):
+        raise SealValidationError("unregistered sealed run namespace")
     seen = set()
     for entry in [*payload["files"], *payload["registries"]]:
         relative = Path(entry["relative_path"])
@@ -239,6 +246,6 @@ def validate_output_seal(path: str | Path) -> dict[str, Any]:
     for run_id, status in payload["run_terminals"].items():
         if status == "COMPLETED":
             for name in (*REQUIRED_NATIVE_OUTPUTS, "CLEAN5_RUNTIME_CONFIG.yaml", "CLEAN5_FORMAL_RUN_MANIFEST.json"):
-                if f"04_SOLVER_RUNS/{run_id}/{name}" not in seen:
+                if f"{runs_subdir}/{run_id}/{name}" not in seen:
                     raise SealValidationError("COMPLETED run lacks required file in seal")
     return {"passed": True, "file_count": payload["file_count"], "output_seal_sha256": sha256_file(seal_path)}

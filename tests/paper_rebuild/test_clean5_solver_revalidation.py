@@ -103,8 +103,10 @@ def epoch_inputs(tmp_path):
     times = [0.5, 1.0, 1.5, 2.0, 3.0, 4.0, 4.5]
     path = tmp_path / "synthetic_gnss15.txt"
     path.write_text("".join(str(time) + " 0" * 14 + "\n" for time in times))
-    config = {"starttime": 1.0, "endtime": 4.0, "gnsspath": str(path)}
-    audit = {"first_imu_time": 1.5, "last_imu_time": 5.0,
+    imu_path = tmp_path / "synthetic_imu7.txt"
+    imu_path.write_text("".join(str(time) + " 0" * 6 + "\n" for time in (1.5, 2.0, 3.0, 5.0)))
+    config = {"starttime": 1.0, "endtime": 4.0, "gnsspath": str(path), "imupath": str(imu_path)}
+    audit = {"first_imu_time": 1.5, "last_imu_time": 5.0, "imu_row_count": 4,
         "first_gnss_time": 0.5, "last_gnss_time": 4.5, "gnss_row_count": len(times),
         "config_starttime": 1.0, "config_endtime": 4.0,
         "effective_starttime": 1.5, "effective_endtime": 4.0,
@@ -115,13 +117,17 @@ def epoch_inputs(tmp_path):
     return config, audit, path
 
 
-def test_expected_epochs_uses_strict_native_start_and_inclusive_config_end(epoch_inputs):
+def test_expected_epochs_uses_first_aligned_imu_and_inclusive_config_end(epoch_inputs):
     result = validation.expected_update_epochs(*epoch_inputs)
     assert result["configured_window_rows"] == 5
+    assert result["t_init"] == 1.5
+    assert result["next_imu_time"] == 2.0
     assert result["expected_update_count"] == 3
     assert result["skipped_epoch_times"] == [1.0, 1.5]
     assert result["eligible_epoch_times"] == [2.0, 3.0, 4.0]
     assert result["effective_starttime_source"] == "PORT_INPUT_TIMELINE_SNAPSHOT.json.effective_starttime"
+    assert all(row["reason"] == "precedes_first_aligned_imu_sample" for row in result["skipped_epochs"])
+    assert result["causative_imu_gap"] is None
     assert not result["expected_count_derived_from_actual_counters"]
     assert not result["expected_count_derived_from_NAV"]
 
@@ -146,7 +152,7 @@ def test_expected_epochs_refuses_nonfinite_or_non15_provider(epoch_inputs):
         validation.expected_update_epochs(config, audit, path)
 
 
-def test_by2h_actual_native_counters_do_not_satisfy_literal_272_epoch_gate():
+def test_by2h_actual_native_counters_still_reject_superseded_272_epoch_gate():
     manifest = FROZEN_V1_NATIVE_STRINGS["BY2H"]["actual_module_counters"]
     assert manifest["position_update_count"] == 270
     with pytest.raises(validation.CounterMismatch) as failure:
@@ -189,3 +195,92 @@ def test_canonical_pattern_assertion_hash_and_feature_mismatch(tmp_path, monkeyp
     monkeypatch.setattr(expectations, "C00_MODULE_ACTION_SHA256", sha256_file(source))
     with pytest.raises(ValueError, match="pattern mismatch"):
         expectations.verify_canonical_patterns(source)
+
+
+def test_by2h_copied_boundary_timestamps_select_t_init_independently(tmp_path):
+    # Only boundary timestamps copied from the frozen BY2H providers; the small
+    # zero-filled payloads and remaining GNSS grid are explicitly synthetic.
+    imu_times = [394.945055, 407.017058, 413.041069, 413.047045, 692.919118]
+    gnss_times = [411.211805, 412.203816, 413.203355] + [float(t) + 0.2 for t in range(414, 683)]
+    imu = tmp_path / "synthetic_boundary_imu7.txt"
+    gnss = tmp_path / "synthetic_boundary_gnss15.txt"
+    imu.write_text("".join(str(t) + " 0" * 6 + "\n" for t in imu_times))
+    gnss.write_text("".join(str(t) + " 0" * 14 + "\n" for t in gnss_times))
+    config = {"starttime": 411.0, "endtime": 683.0, "imupath": str(imu), "gnsspath": str(gnss)}
+    audit = {"first_imu_time": imu_times[0], "last_imu_time": imu_times[-1], "imu_row_count": len(imu_times),
+        "first_gnss_time": gnss_times[0], "last_gnss_time": gnss_times[-1], "gnss_row_count": len(gnss_times),
+        "config_starttime": 411.0, "config_endtime": 683.0, "effective_starttime": 411.0,
+        "effective_endtime": gnss_times[-1], "overlap_start": 411.0, "overlap_end": gnss_times[-1],
+        "gnss_rows_in_overlap": 272, "gnss_rows_after_start_before_end": 272,
+        "trace_solver_input": False, "final_v23_output_solver_input": False, "paper_performance_claim": False}
+    result = validation.expected_update_epochs(config, audit, gnss)
+    assert result["native_effective_starttime"] == 411.0
+    assert result["t_init"] == 413.041069
+    assert result["expected_update_count"] == 270
+    assert result["configured_window_rows"] == 272
+    assert result["skipped_epoch_times"] == [411.211805, 412.203816]
+    gap = result["causative_imu_gap"]
+    assert (gap["start_s"], gap["end_s"]) == (407.017058, 413.041069)
+    assert gap["duration_seconds"] == pytest.approx(6.024011)
+    assert validation.validate_profile_counters("AB1111",
+        FROZEN_V1_NATIVE_STRINGS["BY2H"]["actual_module_counters"], result["expected_update_count"])
+    assert validation.validate_nav_alignment(413.047045, result)["passed"]
+
+
+def test_aligned_native_field_if_present_must_match_provider(epoch_inputs):
+    config, audit, path = epoch_inputs
+    audit["first_aligned_imu_time"] = 1.5
+    assert validation.expected_update_epochs(config, audit, path)["native_aligned_imu_fields"] == {"first_aligned_imu_time": 1.5}
+    audit["first_aligned_imu_time"] = 2.0
+    with pytest.raises(validation.SolverValidationError, match="aligned IMU field"):
+        validation.expected_update_epochs(config, audit, path)
+
+
+@pytest.mark.parametrize("times", [(1.5, 1.5, 3.0, 5.0), (1.5, 2.0, float("nan"), 5.0)])
+def test_imu_increment_times_must_be_finite_strictly_increasing(epoch_inputs, times):
+    config, audit, path = epoch_inputs
+    Path(config["imupath"]).write_text("".join(str(t) + " 0" * 6 + "\n" for t in times))
+    with pytest.raises(validation.SolverValidationError):
+        validation.expected_update_epochs(config, audit, path)
+
+
+def test_initialization_requires_a_following_imu_increment(epoch_inputs):
+    config, audit, path = epoch_inputs
+    config["starttime"] = audit["config_starttime"] = audit["effective_starttime"] = audit["overlap_start"] = 3.9
+    config["endtime"] = audit["config_endtime"] = 6.0
+    audit["effective_endtime"] = audit["overlap_end"] = 4.5
+    with pytest.raises(validation.SolverValidationError, match="following increment"):
+        validation.expected_update_epochs(config, audit, path)
+
+
+@pytest.mark.parametrize("first_nav,accepted", [(2.0, True), (2.25, True), (2.5, True), (2.500001, False), (1.5, False)])
+def test_nav_first_matches_next_input_imu_with_one_interval_max(epoch_inputs, first_nav, accepted):
+    result = validation.expected_update_epochs(*epoch_inputs)
+    if accepted:
+        proof = validation.validate_nav_alignment(first_nav, result)
+        assert proof["passed"] and proof["tolerance_seconds"] == 0.5
+    else:
+        with pytest.raises(validation.SolverValidationError, match="NAV first time"):
+            validation.validate_nav_alignment(first_nav, result)
+
+
+def test_normal_alignment_bracket_does_not_invent_an_imu_hole(tmp_path):
+    imu = tmp_path / "synthetic_imu7.txt"
+    gnss = tmp_path / "synthetic_gnss15.txt"
+    imu_times = [0.998, 1.003, 1.008, 2.003]
+    gnss_times = [1.0, 1.5, 2.0]
+    imu.write_text("".join(str(t) + " 0" * 6 + "\n" for t in imu_times))
+    gnss.write_text("".join(str(t) + " 0" * 14 + "\n" for t in gnss_times))
+    config = {"starttime": 1.0, "endtime": 2.0, "imupath": str(imu), "gnsspath": str(gnss)}
+    audit = {"first_imu_time": 0.998, "last_imu_time": 2.003, "imu_row_count": 4,
+        "first_gnss_time": 1.0, "last_gnss_time": 2.0, "gnss_row_count": 3,
+        "config_starttime": 1.0, "config_endtime": 2.0, "effective_starttime": 1.0,
+        "effective_endtime": 2.0, "overlap_start": 1.0, "overlap_end": 2.0,
+        "gnss_rows_in_overlap": 2, "gnss_rows_after_start_before_end": 2,
+        "trace_solver_input": False, "final_v23_output_solver_input": False, "paper_performance_claim": False}
+    result = validation.expected_update_epochs(config, audit, gnss)
+    assert result["t_init"] == 1.003
+    assert result["skipped_epoch_times"] == [1.0]
+    assert result["initialization_bracketing_interval"]["duration_seconds"] == pytest.approx(0.005)
+    assert result["causative_imu_gap"] is None
+    assert result["skipped_epochs"][0]["note"] == "initialization boundary exclusion; no IMU hole identified"

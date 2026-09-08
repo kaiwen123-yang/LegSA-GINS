@@ -227,12 +227,11 @@ def native_loader_string(config: Mapping[str, Any] | str, key: str) -> str:
 def expected_update_epochs(config: Mapping[str, Any] | str,
                            native_time_audit: Mapping[str, Any],
                            gnss_path: str | Path) -> dict[str, Any]:
-    """Count only input epochs under C-04b A.1's literal eligibility rule.
+    """Derive initialization and eligible GNSS epochs from frozen provider input.
 
-    effective_starttime is the sealed PORT_INPUT_TIMELINE_SNAPSHOT.json field;
-    it is never inferred from NAV, update counters, or the first actual update.
-    This intentionally preserves a mismatch when initialization skips more rows
-    than the registered audit boundary explains.
+    t_init is the first increment-IMU time >= config.starttime, following the
+    native initialization loop. The old native effective_starttime remains a
+    separately checked report field; NAV and actual counters never select t_init.
     """
     cfg = _mapping(config) if isinstance(config, str) else dict(config)
     audit = dict(native_time_audit)
@@ -271,24 +270,87 @@ def expected_update_epochs(config: Mapping[str, Any] | str,
     if (_strict_count(audit.get("gnss_row_count"), "gnss_row_count") != len(times)
             or first_gnss != printed(times[0]) or last_gnss != printed(times[-1])):
         raise SolverValidationError("native GNSS timeline differs from provider epochs")
+    imu_path = cfg.get("imupath")
+    if not isinstance(imu_path, str) or not imu_path:
+        raise SolverValidationError("initialization epoch requires the bound frozen IMU path")
+    imu_rows = _numeric_rows(Path(imu_path), 7)
+    if any(len(row) != 7 for row in imu_rows):
+        raise SolverValidationError("initialization epoch requires frozen IMU 7-column increments")
+    imu_times = [row[0] for row in imu_rows]
+    if any(right <= left for left, right in zip(imu_times, imu_times[1:])):
+        raise SolverValidationError("IMU provider time is not strictly increasing")
+    if (_strict_count(audit.get("imu_row_count"), "imu_row_count") != len(imu_times)
+            or first_imu != printed(imu_times[0]) or last_imu != printed(imu_times[-1])):
+        raise SolverValidationError("native IMU timeline differs from provider epochs")
+    index = next((i for i, value in enumerate(imu_times) if value >= start), None)
+    if index is None or index + 1 >= len(imu_times):
+        raise SolverValidationError("no aligned IMU initialization sample and following increment")
+    t_init = imu_times[index]
+    if t_init >= end:
+        raise SolverValidationError("aligned IMU initialization does not precede config end")
+    previous = imu_times[index - 1] if index else None
+    following = imu_times[index + 1]
+    aligned_fields = {}
+    for key in ("first_aligned_imu_time", "aligned_first_imu_time", "aligned_imu_starttime", "t_init"):
+        if key in audit:
+            value = number(audit, key)
+            if value != printed(t_init):
+                raise SolverValidationError(f"native aligned IMU field differs from input-derived t_init: {key}")
+            aligned_fields[key] = value
+    bracket = None if previous is None else {"start_s": previous, "end_s": t_init,
+        "duration_seconds": t_init - previous}
+    # C-04b C.1 preregisters the IMU-hole threshold dt > 0.1 s. It is report-only.
+    causal_gap = (dict(bracket) if bracket is not None and previous < start < t_init
+                  and bracket["duration_seconds"] > 0.1 else None)
     configured = [time for time in times if start <= time <= end]
-    eligible = [time for time in times if effective < time <= end]
+    eligible = [time for time in times if t_init < time <= end]
     if any(time > effective_end for time in eligible):
         raise SolverValidationError("configured GNSS eligible epochs extend beyond native effective end")
-    skipped = [time for time in configured if time <= effective]
+    skipped = [time for time in configured if time <= t_init]
     overlap_count = sum(effective < time <= effective_end for time in times)
     for key in ("gnss_rows_in_overlap", "gnss_rows_after_start_before_end"):
         if _strict_count(audit.get(key), key) != overlap_count:
             raise SolverValidationError(f"native overlap count differs from provider epochs: {key}")
-    return {"effective_starttime": effective, "effective_endtime": effective_end,
+    return {"t_init": t_init, "t_init_source": "frozen increment IMU provider first time >= config.starttime",
+        "t_init_rule": "first IMU7.t >= config.starttime", "aligned_imu_row_index": index,
+        "previous_imu_time": previous, "next_imu_time": following,
+        "next_imu_interval": following - t_init, "imu_provider_rows": len(imu_times),
+        "native_aligned_imu_fields": aligned_fields, "initialization_bracketing_interval": bracket,
+        "causative_imu_gap": causal_gap, "imu_hole_threshold_seconds": 0.1,
+        "imu_hole_threshold_source": "C-04b C.1: dt > 0.1 s, report-only",
+        "native_effective_starttime": effective, "effective_starttime": effective,
+        "effective_endtime": effective_end,
         "effective_starttime_source": "PORT_INPUT_TIMELINE_SNAPSHOT.json.effective_starttime",
-        "effective_starttime_rule": "max(config.starttime, native first_imu_time)",
+        "effective_starttime_rule": "max(config.starttime, native first_imu_time); report-only for update eligibility",
         "configured_window_rows": len(configured), "expected_update_count": len(eligible),
-        "expected_update_rule": "GNSS15.t > effective_starttime and GNSS15.t <= config.endtime",
+        "expected_update_rule": "GNSS15.t > t_init and GNSS15.t <= config.endtime",
         "skipped_epoch_times": skipped, "skipped_epoch_count": len(skipped),
+        "skipped_epochs": [{"time": time, "reason": "precedes_first_aligned_imu_sample",
+            "causative_imu_gap": causal_gap,
+            "note": "initialization boundary exclusion; no IMU hole identified" if causal_gap is None else
+                    "configured start lies inside the preregistered IMU hole"} for time in skipped],
         "eligible_epoch_times": eligible, "gnss_provider_rows": len(times),
         "expected_count_derived_from_actual_counters": False,
         "expected_count_derived_from_NAV": False}
+
+
+def validate_nav_alignment(first_nav_time: float, eligibility: Mapping[str, Any]) -> dict[str, Any]:
+    """Check the first saved state against the next frozen IMU increment."""
+    values = {"first_nav_time": first_nav_time, "t_init": eligibility.get("t_init"),
+              "next_imu_time": eligibility.get("next_imu_time"),
+              "next_imu_interval": eligibility.get("next_imu_interval")}
+    if any(type(value) not in (int, float) or not math.isfinite(value) for value in values.values()):
+        raise SolverValidationError("NAV initialization alignment requires finite input times")
+    t_init, following, interval = values["t_init"], values["next_imu_time"], values["next_imu_interval"]
+    if interval <= 0 or following <= t_init or interval != following - t_init:
+        raise SolverValidationError("NAV initialization alignment has inconsistent IMU interval")
+    difference = abs(first_nav_time - following)
+    if first_nav_time <= t_init or difference > interval:
+        raise SolverValidationError("NAV first time differs from the next aligned IMU sample by more than one interval")
+    return {"passed": True, **values, "absolute_difference_seconds": difference,
+            "tolerance_seconds": interval, "tolerance_source": "one following frozen IMU sample interval",
+            "t_init_selected_from_NAV": False}
+
 
 
 def validate_profile_counters(effective_profile: str, manifest: Mapping[str, Any],

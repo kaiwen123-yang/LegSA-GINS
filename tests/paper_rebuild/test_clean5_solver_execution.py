@@ -129,7 +129,7 @@ def test_failed_fake_executable_does_not_block_following_profiles(tmp_path, monk
                     " print('synthetic failure after F01',file=sys.stderr)\n sys.exit(42)\n"
                     f"counters={counter_map!r}\n"
                     "(root/'RUN_MANIFEST.json').write_text(json.dumps(counters[cfg['algorithm_id']]))\n"
-                    "(root/'PORT_INPUT_TIMELINE_SNAPSHOT.json').write_text(json.dumps(dict(config_starttime=0.0,config_endtime=4.0,effective_starttime=0.0,effective_endtime=3.0,first_imu_time=0.0,last_imu_time=4.0,first_gnss_time=1.0,last_gnss_time=3.0,gnss_rows_after_start_before_end=3,gnss_rows_in_overlap=3,gnss_row_count=3,overlap_start=0.0,overlap_end=3.0,trace_solver_input=False,final_v23_output_solver_input=False,paper_performance_claim=False)))\n"
+                    "(root/'PORT_INPUT_TIMELINE_SNAPSHOT.json').write_text(json.dumps(dict(config_starttime=0.0,config_endtime=4.0,effective_starttime=0.0,effective_endtime=3.0,first_imu_time=0.0,last_imu_time=4.0,first_gnss_time=1.0,last_gnss_time=3.0,gnss_rows_after_start_before_end=3,gnss_rows_in_overlap=3,gnss_row_count=3,imu_row_count=5,overlap_start=0.0,overlap_end=3.0,trace_solver_input=False,final_v23_output_solver_input=False,paper_performance_claim=False)))\n"
                     "nav=''.join(' '.join(map(str,[t]+[0]*9))+'\\n' for t in [1,2,3])\n"
                     "(root/'KF_GINS_Navresult.nav').write_text(nav)\n"
                     "(root/'KF_GINS_STD.txt').write_text(nav)\n"
@@ -151,7 +151,7 @@ def test_failed_fake_executable_does_not_block_following_profiles(tmp_path, monk
     monkeypatch.setattr(runner, "execution_state", lambda *_: state)
     # Native-manifest semantics are independently exercised by the validation tests.
     monkeypatch.setattr(runner, "validate_clean5_manifest", lambda *_: {})
-    registry = SimpleNamespace(code_root=code, raw_root=raw)
+    registry = SimpleNamespace(code_root=code, raw_root=raw, clean_root=stage)
     sequence = SimpleNamespace(dataset_id="BY2H", stage_id="SYNTHETIC_TEST_ONLY", data_mode="synthetic_test")
     records = runner.run_profiles(registry=registry, sequence=sequence, prepared=prepared,
                                   executable={"path": str(fake), "sha256": "synthetic"}, state=state)

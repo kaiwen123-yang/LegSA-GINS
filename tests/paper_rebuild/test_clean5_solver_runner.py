@@ -323,7 +323,9 @@ def test_failure_run_continues_all_five_with_fake_executable(tmp_path, monkeypat
     configs = {}
     gnss_provider = tmp_path / "synthetic_gnss15.txt"
     gnss_provider.write_text("".join(str(time) + " 0" * 14 + "\n" for time in (1.1, 2.0, 2.9)))
-    timeline = {"first_imu_time": 0.5, "last_imu_time": 3.5,
+    imu_provider = tmp_path / "synthetic_imu7.txt"
+    imu_provider.write_text("".join(str(time) + " 0" * 6 + "\n" for time in (0.5, 1.0, 1.25, 2.25, 3.5)))
+    timeline = {"first_imu_time": 0.5, "last_imu_time": 3.5, "imu_row_count": 5,
         "first_gnss_time": 1.1, "last_gnss_time": 2.9, "gnss_row_count": 3,
         "config_starttime": 1.0, "config_endtime": 3.0,
         "effective_starttime": 1.0, "effective_endtime": 2.9,
@@ -333,6 +335,7 @@ def test_failure_run_continues_all_five_with_fake_executable(tmp_path, monkeypat
     for method, profile in rc.METHODS.items():
         config = synthetic_config(profile)
         config["gnsspath"] = str(gnss_provider)
+        config["imupath"] = str(imu_provider)
         config["run_id"] = "synthetic_native_" + method
         text = "\n".join(key + ": " + json.dumps(value, ensure_ascii=False) for key, value in config.items()) + "\n"
         fixture_manifests[profile] = {**native_manifest(config), **native_counters(profile)}
@@ -375,7 +378,7 @@ def test_failure_run_continues_all_five_with_fake_executable(tmp_path, monkeypat
         "frozen_metadata_checks": {"02_PROVIDER_FREEZE/PROVIDER_MANIFEST.json": {"sha256": "c" * 64}},
         "provider_manifest": {"raw_source_hashes": {}},
         "contract": {"identity": {"dataset_id": "BY2H"}, "window_contract": {"t_start": 1, "t_end": 3}}}
-    records = runner.run_profiles(registry=SimpleNamespace(code_root=tmp_path, raw_root=tmp_path / "unused_raw"),
+    records = runner.run_profiles(registry=SimpleNamespace(code_root=tmp_path, clean_root=tmp_path, raw_root=tmp_path / "unused_raw"),
         sequence=SimpleNamespace(dataset_id="BY2H", stage_id="SYNTHETIC_ONLY", data_mode="synthetic"),
         prepared=prepared, executable={"path": str(executable), "sha256": sha256_file(executable)}, state=state)
     assert len(launched) == 5
@@ -384,3 +387,34 @@ def test_failure_run_continues_all_five_with_fake_executable(tmp_path, monkeypat
     assert [row["terminal_status"] for row in records] == ["technical_failure", *(["COMPLETED"] * 4)]
     assert "fixture failure" in records[0]["stderr_tail"]
     assert all((Path(row["run_dir"]) / "CLEAN5_FORMAL_RUN_MANIFEST.json").is_file() for row in records)
+
+
+def test_v2_seal_namespace_preserves_v1_and_detects_missing_output(seal_fixture):
+    stage, records, metadata, audits = seal_fixture
+    (stage / "04_SOLVER_RUNS").rename(stage / "04_SOLVER_RUNS_V2")
+    for record in records:
+        record["run_dir"] = str(stage / "04_SOLVER_RUNS_V2" / record["run_id"])
+    v1 = stage / "04_SOLVER_RUNS"
+    v1.mkdir()
+    sentinel = v1 / "SYNTHETIC_V1_SENTINEL.txt"
+    sentinel.write_bytes(b"synthetic v1 preserved exactly\n")
+    sentinel_hash = sha256_file(sentinel)
+    old_seal = stage / "05_OUTPUT_SEAL"
+    old_seal.mkdir()
+    old_seal_sentinel = old_seal / "SYNTHETIC_V1_SENTINEL.txt"
+    old_seal_sentinel.write_bytes(b"synthetic v1 seal preserved exactly\n")
+    old_seal_hash = sha256_file(old_seal_sentinel)
+    metadata.update(runs_subdir="04_SOLVER_RUNS_V2", seal_subdir="05_OUTPUT_SEAL_V2", contract_version=2)
+    result = seal.seal_outputs(stage, records, metadata, audits)
+    assert Path(result["output_seal_path"]).parent == stage / "05_OUTPUT_SEAL_V2"
+    assert seal.validate_output_seal(result["output_seal_path"])["passed"]
+    payload = json.loads(Path(result["output_seal_path"]).read_text())
+    assert payload["contract_version"] == 2
+    assert payload["runs_subdir"] == "04_SOLVER_RUNS_V2"
+    assert sha256_file(sentinel) == sentinel_hash
+    assert sha256_file(old_seal_sentinel) == old_seal_hash
+    (Path(records[0]["run_dir"]) / "KF_GINS_Navresult.nav").unlink()
+    with pytest.raises(seal.SealValidationError, match="missing"):
+        seal.validate_output_seal(result["output_seal_path"])
+    assert sha256_file(sentinel) == sentinel_hash
+    assert sha256_file(old_seal_sentinel) == old_seal_hash

@@ -27,7 +27,7 @@ from .runtime_config import METHODS, CONFIG_FILENAMES
 from .solver_runner import (C02_COMMIT, audit_solver_openat, verify_executable,
                             verify_provider_files)
 from .solver_seal import validate_output_seal
-from .solver_validation import (expected_update_epochs, validate_clean5_manifest,
+from .solver_validation import (expected_update_epochs, validate_nav_alignment, validate_clean5_manifest,
     validate_outputpath_only, validate_profile_counters, validate_run_outputs)
 
 C04_RECORD_COMMIT = "8b83642e3692b7bd3752391744ca2c53c6cfb89b"
@@ -111,6 +111,7 @@ def revalidate_run(run_dir, contract, rendered_config):
     eligibility = expected_update_epochs(cfg, snapshot, Path(cfg["gnsspath"]))
     report["epoch_eligibility"] = eligibility
     report["effective_starttime"] = eligibility["effective_starttime"]
+    report["t_init"] = eligibility["t_init"]
     report["skipped_update_diagnostic"] = skipped_update_epochs(run_dir, eligibility["eligible_epoch_times"])
     for name, operation in (
         ("output_structure", lambda: validate_run_outputs(run_dir, contract)),
@@ -119,6 +120,8 @@ def revalidate_run(run_dir, contract, rendered_config):
     ):
         try:
             report[name] = operation()
+            if name == "output_structure":
+                report["nav_alignment"] = validate_nav_alignment(report[name]["nav_time_start"], eligibility)
         except Exception as exc:
             report["errors"].append({"gate": name, "type": type(exc).__name__, "message": str(exc)})
             report["terminal_status"] = getattr(exc, "terminal_status", "technical_failure")
@@ -192,7 +195,7 @@ def main(argv=None):
     registry = load_registry(args.code_root / "configs/paper_rebuild/clean5/CLEAN5_SEQUENCE_REGISTRY.yaml", args.paths_config)
     state = _published_source(args, registry)
     verify_executable(args.executable, registry.code_root)
-    root = registry.clean_root / "stages/CLEAN5_BY2_CONTROL_PROVIDER_PARITY/00_C04B_REVALIDATION"
+    root = registry.clean_root / "stages/CLEAN5_BY2_CONTROL_PROVIDER_PARITY/00_C04B_REVALIDATION_V2"
     if args._revalidation_worker:
         from .probes import forbidden_path_guard
         with forbidden_path_guard(registry.raw_root, set()):
@@ -210,7 +213,7 @@ def main(argv=None):
     for name, text in (("stdout.log", completed.stdout), ("stderr.log", completed.stderr)):
         with (root / name).open("x") as handle:
             handle.write(text)
-    audit = audit_solver_openat(log, cwd=registry.code_root, raw_root=registry.raw_root, run_dir=root)
+    audit = audit_solver_openat(log, cwd=registry.code_root, raw_root=registry.raw_root, run_dir=root, clean_root=registry.clean_root)
     write_json_exclusive(root / "REVALIDATION_STRACE_AUDIT.json", audit)
     result = _read(root / "REVALIDATION_RESULT.json") if (root / "REVALIDATION_RESULT.json").is_file() else {}
     passed = (completed.returncode == 0 and audit["pass"] and result.get("passed") is True

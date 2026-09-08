@@ -52,7 +52,7 @@ def test_superseded_requires_all_ten_and_zero_open_audit(tmp_path, monkeypatch,
         commands.append(command)
         result = {"passed": declared_pass, "expected_run_count": 10, "passed_run_count": passed_count,
             "runs": [{"passed": index < passed_count} for index in range(10)]}
-        (control / "00_C04B_REVALIDATION/REVALIDATION_RESULT.json").write_text(json.dumps(result))
+        (control / "00_C04B_REVALIDATION_V2/REVALIDATION_RESULT.json").write_text(json.dumps(result))
         return SimpleNamespace(returncode=0, stdout="synthetic revalidation\n", stderr="")
     monkeypatch.setattr(mod, "run_process_group", fake_process)
     args = ["--phase", "revalidate", "--paths-config", str(code / "local.yaml"),
@@ -69,7 +69,7 @@ def test_superseded_requires_all_ten_and_zero_open_audit(tmp_path, monkeypatch,
             assert value["status"] == "SUPERSEDED_NOT_EVALUATED"
             assert value["amended_before_unblinding"] is True
             assert value["trace_opened"] is False
-    gate = json.loads((control / "00_C04B_REVALIDATION/REVALIDATION_GATE.json").read_text())
+    gate = json.loads((control / "00_C04B_REVALIDATION_V2/REVALIDATION_GATE.json").read_text())
     assert gate["stop_before_event_window_and_contract_v2"] == (not expected_markers)
     with pytest.raises(FileExistsError):
         mod.main(args)

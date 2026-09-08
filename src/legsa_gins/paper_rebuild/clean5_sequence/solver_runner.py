@@ -31,7 +31,7 @@ from .generation_audit import (WRITE_FLAGS, audit_records, code_freeze_state,
 from .registry import load_registry
 from .runtime_config import (CONFIG_FILENAMES, METHODS, PATH_ROLES,
                              frozen_parameter_hash, scientific_runtime_config_hash)
-from .solver_validation import (bind_output_config, expected_update_epochs, validate_clean5_manifest,
+from .solver_validation import (bind_output_config, expected_update_epochs, validate_nav_alignment, validate_clean5_manifest,
                                 validate_profile_counters, validate_run_outputs)
 from .solver_seal import seal_outputs, validate_output_seal
 
@@ -41,7 +41,7 @@ FROZEN_EXECUTABLE_SHA256 = "9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683ac
 EXECUTABLE_RELATIVE = Path("build/canonical541_cpp/legsa_v23_port_core_demo")
 EXPECTED_GNSS_ROWS = {"BY2H": 272, "BY2O": 409}
 # These C-03 counts identify the frozen provider metadata only. Runtime counter
-# expectations are derived from the native effective start and profile features.
+# expectations use input-derived t_init and the frozen profile features.
 SOLVER_TIMEOUT_SECONDS = 1800
 RAW_CHECKPOINT_SCHEMA = "paper_rebuild.final_v23_external_raw_checkpoint.v1"
 FORBIDDEN_FLAGS = ("trace_used_online", "synthetic_data_used", "semisynthetic_data_used",
@@ -150,7 +150,10 @@ def verify_provider_files(provider_root, manifest):
     return checks
 
 
-def preflight(registry, sequence, executable_identity):
+def preflight(registry, sequence, executable_identity, contract_version=1):
+    if contract_version == 2:
+        from .runtime_v2 import preflight_v2
+        return preflight_v2(registry, sequence, executable_identity)
     stage = guard_path(registry.clean_root / "stages" / sequence.stage_id, role="C-04 stage",
                        allowed_root=registry.clean_root, must_exist=True)
     if (stage / "04_SOLVER_RUNS").exists() or (stage / "05_OUTPUT_SEAL").exists():
@@ -249,6 +252,7 @@ def run_checkpoint(args, registry, sequence, phase, audit_dir):
                "--sequence", sequence.dataset_id, "--code-root", str(registry.code_root),
                "--code-freeze-commit", args.code_freeze_commit, "--executable", str(args.executable),
                "--paths-config", str(args.paths_config), "--registry", str(args.registry), "--_checkpoint", phase]
+    command.extend(["--contract-version", str(getattr(args, "contract_version", 1))])
     completed = run_process_group(command, cwd=registry.code_root, timeout_seconds=1800,
                                   timeout_message="CLEAN5 raw hash checkpoint timeout",
                                   launch_failure_message="CLEAN5 raw checkpoint launch failed")
@@ -272,13 +276,14 @@ def run_checkpoint(args, registry, sequence, phase, audit_dir):
     return checkpoint, audit
 
 
-def audit_solver_openat(log, *, cwd, raw_root, run_dir):
-    records = open_records(log, cwd)
+def audit_solver_openat(log, *, cwd, raw_root, run_dir, clean_root=None):
+    from .io_audit import audited_open_records, write_scope_audit
+    records = audited_open_records(log, cwd)
     def inside(path, root):
         return path == root or root in path.parents
-    raw = [row for row in records if inside(Path(row["path"]), raw_root)]
-    writes = [row for row in records if any(flag in row["flags"] for flag in WRITE_FLAGS)]
-    outside = [row for row in writes if not inside(Path(row["path"]), run_dir)]
+    raw = [row for row in records if inside(Path(row["path"]), raw_root)
+           or inside(Path(row.get("lexical_path", row["path"])), raw_root)]
+    scope = write_scope_audit(records, raw_root=raw_root, allowed_write_roots=[run_dir], clean_root=clean_root)
     forbidden = {"trace": sum(Path(row["path"]).name.lower().startswith("trace_") for row in records),
                  "bag": sum(Path(row["path"]).suffix.lower() == ".bag" for row in records),
                  "fpl": sum(Path(row["path"]).suffix.lower() == ".fpl" for row in records)}
@@ -289,17 +294,15 @@ def audit_solver_openat(log, *, cwd, raw_root, run_dir):
         failures.append("Solver opened raw_root")
     if any(forbidden.values()):
         failures.append("Solver opened trace/bag/fpl")
-    if outside:
+    if not scope["pass"]:
         failures.append("Solver write-open outside this run directory")
     return {"pass": not failures, "failures": failures, "session_count": 1,
             "total_open_count": len(records), "raw_open_count": len(raw),
-            "forbidden_open_counts": forbidden, "write_open_count": len(writes),
+            "forbidden_open_counts": forbidden,
             "trace_open_count": forbidden["trace"], "bag_open_count": forbidden["bag"],
-            "fpl_open_count": forbidden["fpl"], "write_outside_run_count": len(outside),
-            "outside_run_write_open_count": len(outside), "outside_run_write_open_records": outside,
-            "raw_write_open_count": sum(any(flag in row["flags"] for flag in WRITE_FLAGS) for row in raw),
+            "fpl_open_count": forbidden["fpl"],
             "strace_sha256": sha256_file(log), "raw_open_records": raw,
-            "write_open_records": writes}
+            **{key: value for key, value in scope.items() if key != "pass"}}
 
 
 def _write_text(path, text):
@@ -310,7 +313,7 @@ def _write_text(path, text):
 def run_one(*, registry, sequence, prepared, method, executable, state):
     effective = METHODS[method]
     run_id = f"{sequence.dataset_id}_{method}_{effective}"
-    run_dir = prepared["stage"] / "04_SOLVER_RUNS" / run_id
+    run_dir = prepared["stage"] / prepared.get("runs_subdir", "04_SOLVER_RUNS") / run_id
     run_dir.mkdir(exist_ok=False)
     config = prepared["configurations"][method]
     record = {"run_id": run_id, "dataset_id": sequence.dataset_id, "stage_id": sequence.stage_id,
@@ -357,7 +360,8 @@ def run_one(*, registry, sequence, prepared, method, executable, state):
         if completed.returncode:
             record["validation_errors"].append(f"Solver exit code {completed.returncode}")
         try:
-            audit = audit_solver_openat(log, cwd=registry.code_root, raw_root=registry.raw_root, run_dir=run_dir)
+            audit = audit_solver_openat(log, cwd=registry.code_root, raw_root=registry.raw_root, run_dir=run_dir,
+                                       clean_root=registry.clean_root)
         except Exception as exc:
             audit = {"pass": False, "failures": [str(exc)], "raw_open_count": None,
                      "forbidden_open_counts": {"trace": None, "bag": None, "fpl": None},
@@ -384,6 +388,9 @@ def run_one(*, registry, sequence, prepared, method, executable, state):
                 _json(run_dir / "PORT_INPUT_TIMELINE_SNAPSHOT.json"), Path(native_config["gnsspath"]))
             record["epoch_eligibility"] = eligibility
             record["effective_starttime"] = eligibility["effective_starttime"]
+            record["t_init"] = eligibility["t_init"]
+            record["skipped_epochs"] = eligibility["skipped_epochs"]
+            record["nav_alignment"] = validate_nav_alignment(record["nav_time_start"], eligibility)
             record["effective_starttime_source"] = "PORT_INPUT_TIMELINE_SNAPSHOT.json.effective_starttime"
             try:
                 record["counters"] = validate_profile_counters(effective, manifest, eligibility["expected_update_count"])
@@ -421,17 +428,23 @@ def run_profiles(*, registry, sequence, prepared, executable, state):
 def supervise(args, registry, sequence, state, executable):
     if not shutil.which("strace"):
         raise RuntimeError("strace is required; no solver launch without an openat audit")
+    version = getattr(args, "contract_version", 1)
+    runs_subdir, seal_subdir = ("04_SOLVER_RUNS_V2", "05_OUTPUT_SEAL_V2") if version == 2 else ("04_SOLVER_RUNS", "05_OUTPUT_SEAL")
     if sequence.dataset_id == "BY2O":
-        previous = registry.clean_root / "stages" / registry.sequences["BY2H"].stage_id / "05_OUTPUT_SEAL/SEAL_GATE.json"
+        previous = registry.clean_root / "stages" / registry.sequences["BY2H"].stage_id / seal_subdir / "SEAL_GATE.json"
         gate = _json(previous)
         if gate.get("code_freeze_commit") != state["code_freeze_commit"] or gate.get("run_count") != 5:
             raise RuntimeError("BY2H must finish and seal all five terminals under this freeze before BY2O")
-    prepared = preflight(registry, sequence, executable)
-    runs_root = prepared["stage"] / "04_SOLVER_RUNS"
+        if version == 2 and not gate.get("passed"):
+            raise RuntimeError("BY2H V2 seal gate failed; stop before BY2O")
+    prepared = preflight(registry, sequence, executable, version)
+    prepared["runs_subdir"] = runs_subdir
+    runs_root = prepared["stage"] / runs_subdir
     runs_root.mkdir(exist_ok=False)
     audit_dir = runs_root / "00_SEQUENCE_AUDIT"
     audit_dir.mkdir(exist_ok=False)
     metadata = {"dataset_id": sequence.dataset_id, "stage_id": sequence.stage_id, "data_mode": sequence.data_mode,
+                "contract_version": version, "runs_subdir": runs_subdir, "seal_subdir": seal_subdir,
                 "case_id": f"CLEAN5_{sequence.dataset_id}_NATURAL", "case_family": "natural_sequence", **state,
                 "frozen_executable": executable, "executable_sha256": executable["sha256"],
                 "c02_commit": C02_COMMIT, "c03_record_commit": C03_COMMIT,
@@ -487,7 +500,7 @@ def supervise(args, registry, sequence, state, executable):
             "failures": failures, "solver_strace_audits_passed": audit_pass, "output_seal": seal,
             "pre_run": pre, "post_run": post, "pre_run_strace": pre_audit, "post_run_strace": post_audit,
             "provider_post_run": provider_post, "sealed_at": _now(), **metadata}
-    seal_root = prepared["stage"] / "05_OUTPUT_SEAL"
+    seal_root = prepared["stage"] / seal_subdir
     seal_root.mkdir(exist_ok=True)
     write_json_exclusive(seal_root / "SEAL_GATE.json", gate)
     print(json.dumps({"dataset_id": sequence.dataset_id, "seal_gate": gate["status"],
@@ -498,6 +511,9 @@ def supervise(args, registry, sequence, state, executable):
 def main(argv=None, *, execution_script=None):
     supplied = list(sys.argv[1:] if argv is None else argv)
     if "--phase" in supplied:
+        if supplied[supplied.index("--phase")+1] in ("render-v2", "amend-contracts-v2"):
+            from .runtime_v2 import main as v2_main
+            return v2_main(supplied, execution_script=execution_script)
         from .revalidation import main as revalidate_main
         return revalidate_main(supplied)
     root = Path(__file__).resolve().parents[4]
@@ -507,6 +523,7 @@ def main(argv=None, *, execution_script=None):
     parser.add_argument("--code-freeze-commit", required=True)
     parser.add_argument("--executable", type=Path, required=True)
     parser.add_argument("--paths-config", type=Path, required=True)
+    parser.add_argument("--contract-version", type=int, choices=(1, 2), default=1)
     parser.add_argument("--registry", type=Path, default=root / "configs/paper_rebuild/clean5/CLEAN5_SEQUENCE_REGISTRY.yaml")
     parser.add_argument("--_checkpoint", choices=("pre_run", "post_run"), help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
@@ -523,7 +540,8 @@ def main(argv=None, *, execution_script=None):
             raise RuntimeError("Sequence registry must come from the code freeze")
         sequence = registry.sequences[args.sequence]
         if args._checkpoint:
-            audit_dir = registry.clean_root / "stages" / sequence.stage_id / "04_SOLVER_RUNS/00_SEQUENCE_AUDIT"
+            folder = "04_SOLVER_RUNS_V2" if args.contract_version == 2 else "04_SOLVER_RUNS"
+            audit_dir = registry.clean_root / "stages" / sequence.stage_id / folder / "00_SEQUENCE_AUDIT"
             raw_checkpoint_worker(registry, sequence, args._checkpoint, audit_dir)
             return 0
         return supervise(args, registry, sequence, state, executable)
