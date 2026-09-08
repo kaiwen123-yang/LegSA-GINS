@@ -23,6 +23,8 @@ from ..paths import guard_path, load_yaml_mapping
 from ..subprocess_guard import run_process_group
 from . import alignment_diagnostics as diagnostics
 from . import event_window
+from .event_attempt import event_locations
+from .a4_reuse import reuse_gate
 from .generation_audit import (audit_records, selected_lock, validate_checkpoint,
                                write_json_exclusive)
 from .io_audit import audited_open_records, write_scope_audit
@@ -85,9 +87,10 @@ def require_revalidation_gate(registry, code_freeze_commit):
 def require_prior_sequence_gates(registry,dataset,code_freeze_commit):
     for prior in ORDER[:ORDER.index(dataset)]:
         prior_stage = stage_root(registry,prior)
-        path = prior_stage / "06_ALIGNMENT_DIAGNOSTICS/00_AUDIT/EVENT_PHASE_GATE.json"
+        locations = event_locations(prior_stage,code_freeze_commit)
+        path = locations["diagnostics"] / "00_AUDIT/EVENT_PHASE_GATE.json"
         gate = _read(path)
-        expected_event = prior_stage / "01_SEQUENCE_CONTRACT/EVENT_WINDOW_V2.json"
+        expected_event = locations["event"]
         if gate.get("event_path") != str(expected_event):
             raise RuntimeError("Prior event path differs from its exact stage-owned file")
         expected_event = guard_path(expected_event,role="prior event",allowed_root=prior_stage,
@@ -123,6 +126,7 @@ def metadata_inputs(registry, dataset):
         report_path = registry.clean_root / "stages/CLEAN5_BY2_CONTROL_PROBES/PROBE_REPORT.json"
         contract = {"identity": {"dataset_id":"BY2","data_mode":"real_by2_raw"},
                     "window_contract": {"t_start":66.0,"t_end":340.0},
+                    "initialization_contract": {"initvel":[0,0,0],"initatt":[0,0,0]},
                     "time_contract": {"base_time":BASE_TIMES[dataset]}}
         contract_ref = {"source":"C-03 BY2 control provider manifest window/base_time", "sha256":manifest_ref["sha256"]}
     else:
@@ -231,11 +235,14 @@ def requested_gap_relation(report, event, dataset):
 def event_worker(args, registry, dataset, state, a4):
     prepared = metadata_inputs(registry,dataset)
     stage,seq = prepared["stage"],prepared["sequence"]
-    diag_root = stage / "06_ALIGNMENT_DIAGNOSTICS"
+    locations = event_locations(stage,args.code_freeze_commit)
+    diag_root = locations["diagnostics"]
     validate_checkpoint(_read(diag_root / "00_AUDIT/pre_event_CHECKPOINT.json"),phase="pre_event",lock=prepared["lock"])
     if _read(diag_root / "00_AUDIT/pre_event_STRACE_AUDIT.json").get("pass") is not True:
         raise RuntimeError("Event worker requires a passing independent pre-event strace checkpoint")
     provenance = {"first_code_freeze_commit":args.code_freeze_commit,**state,
+                  "event_attempt":locations["attempt"],
+                  "event_report_relative_path":locations["event"].relative_to(stage).as_posix(),
                   "human_protocol_statement":event_window.HUMAN_STATEMENT,
                   "input_provenance":prepared["provenance"],"A4_revalidation_gate":a4,
                   "data_mode":seq.data_mode,"synthetic_data_used":False,"semisynthetic_data_used":False,
@@ -251,17 +258,24 @@ def event_worker(args, registry, dataset, state, a4):
         kick = event_window.detect_kick_report(seq.body_path,base_time=prepared["base_time"],diagnostic_dir=diag_root)
         raw_times = diagnostics.read_raw_go2_times(seq.body_path,base_time=prepared["base_time"])
         holes = diagnostics.summarize_time_holes(imu_times)
+        xcorr = diagnostics.normalized_speed_xcorr(**speed_arguments,common_coverage=prepared["common_coverage"])
+        by2_lag = (xcorr.get("peak") or {}).get("lag_seconds") if dataset == "BY2" else None
+        if dataset != "BY2":
+            by2_path = event_locations(stage_root(registry,"BY2"),args.code_freeze_commit)["diagnostics"] / "ALIGNMENT_DIAGNOSTICS.json"
+            by2_lag = _read(by2_path)["xcorr"]["peak"]["lag_seconds"]
         event = event_window.compute_event_window(dataset_id=dataset,**speed_arguments,
+                    raw_body_times=raw_times,imu_times=imu_times,xcorr=xcorr,by2_peak_lag_seconds=by2_lag,
                     common_coverage=prepared["common_coverage"],kick_report=kick,
                     v1_window={key:prepared["contract"]["window_contract"][key] for key in ("t_start","t_end")},
                     first_imu_hole_end=holes["first_hole_end"],occlusion_window=prepared["occlusion_window"])
         report = diagnostics.diagnose(dataset_id=dataset,imu_times=imu_times,raw_body_times=raw_times,
-                    **speed_arguments,common_coverage=prepared["common_coverage"],v2_window=event["v2_window"])
+                    **speed_arguments,common_coverage=prepared["common_coverage"],v2_window=event["v2_window"],
+                    xcorr=xcorr,event_report=event,by2_peak_lag_seconds=by2_lag)
         relation = requested_gap_relation(report,event,dataset)
         if relation is not None:
             report["by2h_411_413_gap_diagnostic"] = relation
         event["initialization_v2"] = None
-        if event["ready_for_v2_contract"] and dataset != "BY2":
+        if event["ready_for_v2_contract"]:
             try:
                 event["initialization_v2"] = prepare_initialization(seq,contract=prepared["contract"],
                                                 base_time=prepared["base_time"],t_start=event["v2_window"]["t_start"])
@@ -285,14 +299,14 @@ def event_worker(args, registry, dataset, state, a4):
         report = {"dataset_id":dataset,"first_line":diagnostics.REPORT_FIRST_LINE,"diagnostic_only":True,
                   "status":"UNAVAILABLE","error":f"{type(exc).__name__}: {exc}",**provenance}
         text = diagnostics.REPORT_FIRST_LINE+"\n\nUnavailable: "+report["error"]+"\n"
-    write_json_exclusive(stage / "01_SEQUENCE_CONTRACT/EVENT_WINDOW_V2.json",event)
+    write_json_exclusive(locations["event"],event)
     write_json_exclusive(diag_root / "ALIGNMENT_DIAGNOSTICS.json",report)
     _write_text(diag_root / "ALIGNMENT_DIAGNOSTICS.md",text)
     print(json.dumps({"dataset_id":dataset,"event_status":event["status"],"ready_for_v2_contract":event["ready_for_v2_contract"]}),flush=True)
     return event
 
 
-def checkpoint_worker(registry,dataset,phase):
+def checkpoint_worker(registry,dataset,phase,code_freeze_commit):
     prepared = metadata_inputs(registry,dataset)
     lock,seq = prepared["lock"],prepared["sequence"]
     hashes = verify_raw_sources(registry.raw_root,sorted(lock["rows"]),lock["rows"])
@@ -302,7 +316,8 @@ def checkpoint_worker(registry,dataset,phase):
                "trace_read_role":"outer_raw_integrity_hash_audit_only","trace_provider_or_solver_input":False,
                "verified_hashes":hashes,"synthetic_data_used":False,"semisynthetic_data_used":False}
     validate_checkpoint(payload,phase=phase,lock=lock)
-    write_json_exclusive(prepared["stage"] / "06_ALIGNMENT_DIAGNOSTICS/00_AUDIT" / f"{phase}_CHECKPOINT.json",payload)
+    directory = event_locations(prepared["stage"],code_freeze_commit)["diagnostics"]
+    write_json_exclusive(directory / "00_AUDIT" / f"{phase}_CHECKPOINT.json",payload)
 
 
 def phase_audit(log, *, registry, dataset, phase, prepared):
@@ -312,9 +327,10 @@ def phase_audit(log, *, registry, dataset, phase, prepared):
     checkpoint = phase != "events"
     admitted = raw_paths if checkpoint else {seq.body_path,seq.fix_root/"gnss1-status.csv",seq.fix_root/"gnss2-status.csv"}
     raw = audit_records(records,registry.raw_root,admitted,checkpoint_phase=checkpoint)
-    roots = [stage / "06_ALIGNMENT_DIAGNOSTICS"]
+    locations = event_locations(stage,prepared["event_commit"])
+    roots = [locations["diagnostics"]]
     if not checkpoint:
-        roots.append(stage / "01_SEQUENCE_CONTRACT/EVENT_WINDOW_V2.json")
+        roots.append(locations["event"])
     writes = write_scope_audit(records,raw_root=registry.raw_root,clean_root=registry.clean_root,allowed_write_roots=roots)
     forbidden = {"trace":sum(Path(row["path"]).name.lower().startswith("trace_") for row in records),
                  "bag":sum(Path(row["path"]).suffix.lower()==".bag" for row in records),
@@ -327,7 +343,8 @@ def phase_audit(log, *, registry, dataset, phase, prepared):
 
 
 def run_phase(args,registry,dataset,phase,prepared):
-    audit_root = prepared["stage"] / "06_ALIGNMENT_DIAGNOSTICS/00_AUDIT"
+    prepared["event_commit"] = args.code_freeze_commit
+    audit_root = event_locations(prepared["stage"],args.code_freeze_commit)["diagnostics"] / "00_AUDIT"
     log = audit_root / f"{phase}_OPENAT.strace"
     command = [shutil.which("strace") or "strace","-f","-qq","-yy","-s","4096","-e","trace=openat","-o",str(log),
                sys.executable,"-B",str(registry.code_root/"scripts/paper_rebuild/clean5_prepare_event_window_v2.py"),
@@ -353,13 +370,15 @@ def run_phase(args,registry,dataset,phase,prepared):
 def prepare_sequence(args,registry,dataset,state,a4):
     prepared = metadata_inputs(registry,dataset)
     stage = prepared["stage"]
-    diag_root = stage / "06_ALIGNMENT_DIAGNOSTICS"
-    if diag_root.exists() or (stage / "01_SEQUENCE_CONTRACT/EVENT_WINDOW_V2.json").exists():
+    locations = event_locations(stage,args.code_freeze_commit)
+    diag_root = locations["diagnostics"]
+    if diag_root.exists() or locations["event"].parent.exists():
         raise FileExistsError("C-04b event/diagnostic attempt already exists; no overwrite or automatic retry")
-    diag_root.mkdir(exist_ok=False)
+    diag_root.mkdir(parents=True,exist_ok=False)
     audit_root = diag_root / "00_AUDIT"
     audit_root.mkdir(exist_ok=False)
-    (stage / "01_SEQUENCE_CONTRACT").mkdir(exist_ok=True)
+    locations["event"].parent.mkdir(parents=True,exist_ok=False)
+    write_json_exclusive(audit_root / "A4_REUSE_GATE.json",a4)
     write_json_exclusive(audit_root / "PREFLIGHT.json",{**state,"A4_revalidation_gate":a4,"input_provenance":prepared["provenance"]})
     pre_audit = run_phase(args,registry,dataset,"pre_event",prepared)
     if not pre_audit["pass"]:
@@ -372,7 +391,7 @@ def prepare_sequence(args,registry,dataset,state,a4):
     finally:
         post_audit = run_phase(args,registry,dataset,"post_event",prepared)
     failures = []
-    event_path = stage / "01_SEQUENCE_CONTRACT/EVENT_WINDOW_V2.json"
+    event_path = locations["event"]
     event = _read(event_path) if event_path.is_file() else {"status":"UNAVAILABLE","ready_for_v2_contract":False}
     post = None
     try:
@@ -418,7 +437,7 @@ def prepare_all(args,registry,state,a4):
             "not_executed_sequences":list(ORDER[len(records):]),"sequence_gates":records,
             "ready_for_contract_amendment":passed,"contracts_written":0,
             "human_protocol_statement":event_window.HUMAN_STATEMENT,"A4_revalidation_gate":a4,**state}
-    root = stage_root(registry,"BY2") / "06_ALIGNMENT_DIAGNOSTICS"
+    root = event_locations(stage_root(registry,"BY2"),args.code_freeze_commit)["diagnostics"]
     if root.is_dir():
         write_json_exclusive(root / "B_C_PREPARATION_GATE.json",gate)
     print(json.dumps({"preparation_gate":gate["status"],"sequences_completed":gate["sequences_completed"],
@@ -443,7 +462,7 @@ def main(argv=None,*,execution_script=None):
             raise RuntimeError("Event preparation CLI must come from the published code root")
         registry = load_registry(root / "configs/paper_rebuild/clean5/CLEAN5_SEQUENCE_REGISTRY.yaml",args.paths_config)
         state = _published_source(args,registry)
-        a4 = require_revalidation_gate(registry,args.code_freeze_commit)
+        a4 = reuse_gate(registry,args.code_freeze_commit)
         state["frozen_executable"] = verify_executable(args.executable or root / EXECUTABLE_RELATIVE,root)
         if not shutil.which("strace"):
             raise RuntimeError("strace is required before any raw input operation")
@@ -457,7 +476,7 @@ def main(argv=None,*,execution_script=None):
                 with forbidden_path_guard(registry.raw_root,admitted):
                     event_worker(args,registry,args._sequence,state,a4)
             else:
-                checkpoint_worker(registry,args._sequence,args._worker)
+                checkpoint_worker(registry,args._sequence,args._worker,args.code_freeze_commit)
             return 0
         if args._sequence is not None:
             raise RuntimeError("Sequence selection is internal; public execution always uses BY2, BY2H, BY2O")

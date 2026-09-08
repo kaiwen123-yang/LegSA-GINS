@@ -10,6 +10,7 @@ import yaml
 
 from ..manifest import sha256_file
 from .contract_v2 import amend_contract, validate_amendment
+from .event_attempt import event_locations
 from .generation_audit import selected_lock, validate_checkpoint, write_json_exclusive
 from .registry import load_registry
 from .runtime_config import (METHODS, CONFIG_FILENAMES, OVERRIDE_CATEGORIES, build_runtime_config,
@@ -32,19 +33,20 @@ def stage_path(registry, dataset):
     return registry.clean_root / "stages" / name
 
 
-def event_inputs(registry):
-    joint = read(stage_path(registry, "BY2") / "06_ALIGNMENT_DIAGNOSTICS/B_C_PREPARATION_GATE.json")
+def event_inputs(registry, event_commit):
+    joint = read(event_locations(stage_path(registry,"BY2"),event_commit)["diagnostics"] / "B_C_PREPARATION_GATE.json")
     order = ["BY2", "BY2H", "BY2O"]
     if (joint.get("passed") is not True or joint.get("ready_for_contract_amendment") is not True
             or joint.get("sequences_completed") != order or joint.get("sequence_order") != order
-            or len(joint.get("sequence_gates", [])) != 3):
+            or len(joint.get("sequence_gates", [])) != 3 or joint.get("code_freeze_commit") != event_commit):
         raise RuntimeError("Joint event preparation gate must PASS all three sequences")
     output = {}
     for dataset in ("BY2", "BY2H", "BY2O"):
         stage = stage_path(registry, dataset)
-        audit_dir = stage / "06_ALIGNMENT_DIAGNOSTICS/00_AUDIT"
+        locations = event_locations(stage,event_commit)
+        audit_dir = locations["diagnostics"] / "00_AUDIT"
         gate = read(audit_dir / "EVENT_PHASE_GATE.json")
-        event_path = stage / "01_SEQUENCE_CONTRACT/EVENT_WINDOW_V2.json"
+        event_path = locations["event"]
         event = read(event_path)
         if (gate != joint["sequence_gates"][order.index(dataset)]
                 or gate.get("dataset_id") != dataset or event.get("dataset_id") != dataset
@@ -75,7 +77,7 @@ def amend_both_contracts(registry, commit):
     from .revalidation import _git
     if _git(registry.code_root, "rev-parse", "HEAD") != commit:
         raise RuntimeError("Amendment source freeze differs")
-    events = event_inputs(registry)
+    events = event_inputs(registry,commit)
     pending = []
     for dataset in ("BY2H", "BY2O"):
         relative = f"configs/paper_rebuild/clean5/CLEAN5_{dataset}_SEQUENCE_CONTRACT.yaml"
@@ -132,7 +134,12 @@ def frozen_inputs(registry, dataset, executable):
 
 
 def render_material(registry, state, executable, paths_config):
-    events = event_inputs(registry)
+    contract_sources = {dataset:yaml.safe_load((registry.code_root / f"configs/paper_rebuild/clean5/CLEAN5_{dataset}_SEQUENCE_CONTRACT.yaml").read_text())
+                        for dataset in ("BY2H","BY2O")}
+    event_commit = contract_sources["BY2H"]["amendment_code_commit"]
+    if contract_sources["BY2O"]["amendment_code_commit"] != event_commit:
+        raise RuntimeError("The two amended contracts must share one event freeze")
+    events = event_inputs(registry,event_commit)
     local = yaml.safe_load(Path(paths_config).read_text())["paths"]
     sealed = load_sealed_profiles(local["base_provider_gate"])
     pending, inputs, reports = {}, {}, {}

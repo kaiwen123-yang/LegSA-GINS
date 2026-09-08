@@ -240,7 +240,7 @@ def test_contract_time_window_and_initialization_reproduce_c01b_report(dataset):
         from legsa_gins.paper_rebuild.clean5_sequence.solver_runner import C02_COMMIT, _git_bytes
         relative = f"configs/paper_rebuild/clean5/CLEAN5_{dataset}_SEQUENCE_CONTRACT.yaml"
         assert validate_amendment(_git_bytes(REPO_ROOT,C02_COMMIT,relative).decode(), (REPO_ROOT/relative).read_text())["passed"]
-        event_path = root/"stages"/contract["identity"]["stage_id"]/"01_SEQUENCE_CONTRACT/EVENT_WINDOW_V2.json"
+        event_path = root/"stages"/contract["identity"]["stage_id"]/window["event_report_relative_path"]
         assert hashlib.sha256(event_path.read_bytes()).hexdigest() == contract["event_window_report_sha256"]
         event = json.loads(event_path.read_text())
         assert event["ready_for_v2_contract"]

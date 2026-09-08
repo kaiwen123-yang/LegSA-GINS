@@ -7,6 +7,9 @@ import pytest
 
 from legsa_gins.paper_rebuild.clean5_sequence import amendment_inputs as amendment
 from legsa_gins.paper_rebuild.manifest import sha256_file
+from legsa_gins.paper_rebuild.clean5_sequence.event_attempt import event_locations
+
+EVENT_COMMIT = "b" * 40
 
 
 def _a4_fixture(tmp_path):
@@ -98,11 +101,11 @@ def test_requested_411_413_interval_retains_full_actual_gap():
 def test_event_audit_allows_only_admitted_raw_reads_and_explicit_writes(tmp_path):
     raw,code,clean=(tmp_path/name for name in ("raw","code","clean"))
     for root in (raw,code,clean):root.mkdir()
-    stage=clean/"stage";diag=stage/"06_ALIGNMENT_DIAGNOSTICS"
+    stage=clean/"stage";diag=event_locations(stage,EVENT_COMMIT)["diagnostics"]
     diag.mkdir(parents=True)
     body=raw/"body.txt";body.write_text("synthetic")
     seq=SimpleNamespace(body_path=body,fix_root=raw)
-    prepared={"stage":stage,"sequence":seq,"lock":{"rows":{}}}
+    prepared={"stage":stage,"sequence":seq,"lock":{"rows":{}},"event_commit":EVENT_COMMIT}
     registry=SimpleNamespace(raw_root=raw,clean_root=clean,code_root=code)
     log=diag/"synthetic.strace"
     log.write_text(f'1 openat(AT_FDCWD, "{body}", O_RDONLY) = 3\n'
@@ -123,22 +126,22 @@ def test_event_trace_open_fails_even_when_read_only(tmp_path):
     seq=SimpleNamespace(body_path=raw/"body.txt",fix_root=raw)
     registry=SimpleNamespace(raw_root=raw,clean_root=stage,code_root=code)
     audit=amendment.phase_audit(log,registry=registry,dataset="BY2H",phase="events",
-                               prepared={"stage":stage,"sequence":seq,"lock":{"rows":{}}})
+                               prepared={"stage":stage,"sequence":seq,"lock":{"rows":{}},"event_commit":EVENT_COMMIT})
     assert not audit["pass"] and audit["forbidden_open_counts"]["trace"]==1
 
 
 def test_stop_at_first_failed_event_and_do_not_prepare_later_sequences(tmp_path,monkeypatch):
     control=tmp_path/"control"
-    (control/"06_ALIGNMENT_DIAGNOSTICS").mkdir(parents=True)
+    event_locations(control,EVENT_COMMIT)["diagnostics"].mkdir(parents=True)
     calls=[]
     def prepare(args,registry,dataset,state,a4):
         calls.append(dataset)
         return {"dataset_id":dataset,"passed":dataset=="BY2"}
     monkeypatch.setattr(amendment,"prepare_sequence",prepare)
     monkeypatch.setattr(amendment,"stage_root",lambda *_:control)
-    assert amendment.prepare_all(SimpleNamespace(),SimpleNamespace(),{}, {})==3
+    assert amendment.prepare_all(SimpleNamespace(code_freeze_commit=EVENT_COMMIT),SimpleNamespace(),{}, {})==3
     assert calls==["BY2","BY2H"]
-    gate=json.loads((control/"06_ALIGNMENT_DIAGNOSTICS/B_C_PREPARATION_GATE.json").read_text())
+    gate=json.loads((event_locations(control,EVENT_COMMIT)["diagnostics"]/"B_C_PREPARATION_GATE.json").read_text())
     assert gate["not_executed_sequences"]==["BY2O"]
     assert gate["contracts_written"]==0
 
@@ -157,16 +160,22 @@ def test_post_checkpoint_runs_after_event_worker_nonzero(tmp_path,monkeypatch):
         return {"pass":phase!="events","worker_exit_code":2 if phase=="events" else 0}
     monkeypatch.setattr(amendment,"run_phase",phase)
     state={"frozen_executable":{"path":"synthetic"}}
-    gate=amendment.prepare_sequence(SimpleNamespace(),SimpleNamespace(code_root=tmp_path),"BY2",state,{})
+    gate=amendment.prepare_sequence(SimpleNamespace(code_freeze_commit=EVENT_COMMIT),SimpleNamespace(code_root=tmp_path),"BY2",state,{})
     assert phases==["pre_event","events","post_event"]
     assert not gate["passed"]
-    assert (stage/"06_ALIGNMENT_DIAGNOSTICS/00_AUDIT/EVENT_PHASE_GATE.json").is_file()
+    assert (event_locations(stage,EVENT_COMMIT)["diagnostics"]/"00_AUDIT/EVENT_PHASE_GATE.json").is_file()
 
 
 def test_failed_motion_gate_still_writes_event_and_diagnostics_without_initialization(tmp_path,monkeypatch):
-    stage=tmp_path/"stage";diag=stage/"06_ALIGNMENT_DIAGNOSTICS"
+    stage=tmp_path/"stage";locations=event_locations(stage,EVENT_COMMIT);diag=locations["diagnostics"]
     (diag/"00_AUDIT").mkdir(parents=True)
-    (stage/"01_SEQUENCE_CONTRACT").mkdir()
+    locations["event"].parent.mkdir(parents=True)
+    (tmp_path/"stages"/amendment.CONTROL_STAGE).mkdir(parents=True)
+    old_event=stage/"01_SEQUENCE_CONTRACT/EVENT_WINDOW_V2.json"
+    old_event.write_bytes(b"synthetic old event sentinel\n")
+    old_diagnostic=stage/"06_ALIGNMENT_DIAGNOSTICS/ALIGNMENT_DIAGNOSTICS.json"
+    old_diagnostic.write_bytes(b"synthetic old diagnostics sentinel\n")
+    old_hashes={path:sha256_file(path) for path in (old_event,old_diagnostic)}
     seq=SimpleNamespace(data_mode="synthetic_test",body_path=tmp_path/"unused-body.txt")
     prepared={"stage":stage,"sequence":seq,"lock":{},"provenance":{},"base_time":0.,
               "contract":{"window_contract":{"t_start":11.,"t_end":40.}},
@@ -175,7 +184,8 @@ def test_failed_motion_gate_still_writes_event_and_diagnostics_without_initializ
                   ("gnss_runtime_input","go2_horizontal_velocity_prior","imu_runtime_input")}}}
     monkeypatch.setattr(amendment,"metadata_inputs",lambda *_:prepared)
     monkeypatch.setattr(amendment,"validate_checkpoint",lambda *_,**__:None)
-    monkeypatch.setattr(amendment,"_read",lambda *_:{"pass":True})
+    monkeypatch.setattr(amendment,"_read",lambda path: {"xcorr":{"peak":{"lag_seconds":0.0}}}
+                        if Path(path).name=="ALIGNMENT_DIAGNOSTICS.json" else {"pass":True})
     speeds={"gnss_times":list(range(50)),"gnss_speeds":[.3 if t>=10 else 0. for t in range(50)],
             "body_times":[i/10 for i in range(501)],"body_speeds":[.3 if i>=150 else 0. for i in range(501)]}
     monkeypatch.setattr(amendment.event_window,"load_speed_inputs",lambda *_:speeds)
@@ -183,10 +193,58 @@ def test_failed_motion_gate_still_writes_event_and_diagnostics_without_initializ
     monkeypatch.setattr(amendment.diagnostics,"read_imu_increment_times",lambda *_:[i/100 for i in range(5001)])
     monkeypatch.setattr(amendment.diagnostics,"read_raw_go2_times",lambda *_,**__:[i/100 for i in range(5001)])
     monkeypatch.setattr(amendment,"prepare_initialization",lambda *_,**__:pytest.fail("Initialization must not run after a failed event gate"))
-    result=amendment.event_worker(SimpleNamespace(code_freeze_commit="synthetic"),SimpleNamespace(),"BY2H",{}, {})
+    result=amendment.event_worker(SimpleNamespace(code_freeze_commit=EVENT_COMMIT),SimpleNamespace(clean_root=tmp_path),"BY2H",{}, {})
     assert result["status"]=="CLOCK_OFFSET_SUSPECTED"
     assert result["initialization_v2"] is None
-    event=json.loads((stage/"01_SEQUENCE_CONTRACT/EVENT_WINDOW_V2.json").read_text())
+    event=json.loads(locations["event"].read_text())
     assert event["ready_for_v2_contract"] is False
     assert (diag/"ALIGNMENT_DIAGNOSTICS.json").is_file()
     assert (diag/"ALIGNMENT_DIAGNOSTICS.md").read_text().splitlines()[0]==amendment.diagnostics.REPORT_FIRST_LINE
+    assert event["event_attempt"]==locations["attempt"]
+    assert event["event_report_relative_path"]==locations["event"].relative_to(stage).as_posix()
+    assert {path:sha256_file(path) for path in old_hashes}==old_hashes
+
+
+@pytest.mark.parametrize("target_kind", ["old_event", "old_diagnostics", "old_audit", "other_commit", "provider"])
+def test_event_audit_rejects_any_write_to_old_or_other_attempt(tmp_path,target_kind):
+    raw,code,clean=(tmp_path/name for name in ("raw","code","clean"))
+    for path in (raw,code,clean):path.mkdir()
+    stage=clean/"stage";stage.mkdir()
+    locations=event_locations(stage,EVENT_COMMIT)
+    locations["diagnostics"].mkdir(parents=True)
+    targets={"old_event":stage/"01_SEQUENCE_CONTRACT/EVENT_WINDOW_V2.json",
+        "old_diagnostics":stage/"06_ALIGNMENT_DIAGNOSTICS/ALIGNMENT_DIAGNOSTICS.json",
+        "old_audit":stage/"06_ALIGNMENT_DIAGNOSTICS/00_AUDIT/old.json",
+        "other_commit":event_locations(stage,"c"*40)["diagnostics"]/"diagnostic.json",
+        "provider":stage/"02_PROVIDER_FREEZE/provider.csv"}
+    target=targets[target_kind]
+    target.parent.mkdir(parents=True,exist_ok=True)
+    target.write_bytes(b"existing synthetic sentinel\n")
+    before=sha256_file(target)
+    log=locations["diagnostics"]/"synthetic_OPENAT.strace"
+    log.write_text(f'1 openat(AT_FDCWD, "{target}", O_WRONLY|O_TRUNC) = 4\n')
+    prepared={"stage":stage,"sequence":SimpleNamespace(body_path=raw/"body.txt",fix_root=raw),
+              "lock":{"rows":{}},"event_commit":EVENT_COMMIT}
+    audit=amendment.phase_audit(log,registry=SimpleNamespace(raw_root=raw,clean_root=clean,code_root=code),
+                              dataset="BY2H",phase="events",prepared=prepared)
+    assert audit["pass"] is False and audit["write_audit"]["pass"] is False
+    assert sha256_file(target)==before
+
+
+def test_existing_commit_attempt_refuses_overwrite_before_any_phase(tmp_path,monkeypatch):
+    stage=tmp_path/"stage";stage.mkdir()
+    locations=event_locations(stage,EVENT_COMMIT)
+    locations["event"].parent.mkdir(parents=True)
+    locations["event"].write_bytes(b"existing synthetic current-attempt report\n")
+    before=sha256_file(locations["event"])
+    monkeypatch.setattr(amendment,"metadata_inputs",lambda *_:{"stage":stage})
+    monkeypatch.setattr(amendment,"run_phase",lambda *_:pytest.fail("Existing attempt must never launch a phase"))
+    with pytest.raises(FileExistsError,match="no overwrite"):
+        amendment.prepare_sequence(SimpleNamespace(code_freeze_commit=EVENT_COMMIT),None,"BY2H",{}, {})
+    assert sha256_file(locations["event"])==before
+
+
+@pytest.mark.parametrize("commit", ["", "b"*12, "z"*40, "../"+"b"*40])
+def test_event_locations_require_full_hex_commit_without_path_injection(tmp_path,commit):
+    with pytest.raises(ValueError,match="full committed"):
+        event_locations(tmp_path,commit)

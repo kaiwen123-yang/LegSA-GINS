@@ -88,3 +88,34 @@ def test_imu_loader_requires_exact_columns(tmp_path):
     path.write_text("0 1 2\n")
     with pytest.raises(Exception,match="seven columns"):
         diag.read_imu_increment_times(path)
+
+
+def test_diagnostics_reuse_frozen_xcorr_and_report_by2_difference_only(monkeypatch):
+    correlation=diag.normalized_speed_xcorr(**signal_fixture(.5))
+    monkeypatch.setattr(diag,"normalized_speed_xcorr",lambda **_:pytest.fail("Do not recompute supplied full-coverage xcorr"))
+    report=diag.diagnose(dataset_id="BY2H",imu_times=[0,.01,.02],raw_body_times=[0,.01,.02],
+                         xcorr=correlation,by2_peak_lag_seconds=-.1,**signal_fixture())
+    assert report["xcorr"] is correlation
+    assert report["xcorr_gate"]["passed"]
+    assert report["xcorr_gate"]["difference_from_by2_primary_lag_seconds"]==pytest.approx(.6)
+    assert report["xcorr_gate"]["by2_difference_report_only"]
+    assert report["xcorr_gate"]["offset_applied_seconds"]==0.0
+
+
+def test_censored_diagnostic_markdown_reports_interval_and_hypothesis():
+    correlation=diag.normalized_speed_xcorr(**signal_fixture(.5))
+    event={"onset_censored_b":True,"onset_censored_g":False,
+           "body_onset_interval_R1":[7.,11.],"gnss_onset_interval_R1":[10.,10.],
+           "delta_t_onset_ms":None,"delta_t_onset_interval_ms":[-1000.,3000.],
+           "clock_consistency_gate":{"basis":"full_coverage_xcorr","passed":True},
+           "propagation_start_adjustment":{"unadjusted_start":11.,"first_imu_time_at_or_after_start":13.04,
+               "initialization_delay_seconds":2.04,"adjusted":True,"adjusted_start":13.},
+           "preserve_internal_dropout":[],"kick_dropout_hypothesis":{"statement":"Synthetic hypothesis only."}}
+    report=diag.diagnose(dataset_id="BY2H",imu_times=[0,.01,.02],raw_body_times=[0,.01,.02],
+                         xcorr=correlation,event_report=event,**signal_fixture())
+    text=diag.markdown_report(report)
+    assert text.splitlines()[0]==diag.REPORT_FIRST_LINE
+    assert "Onset difference interval only (ms): [-1000.0, 3000.0]" in text
+    assert "Uncensored onset difference" not in text
+    assert "HYPOTHESIS ONLY: Synthetic hypothesis only." in text
+    assert "original=11.0; t_init=13.04" in text

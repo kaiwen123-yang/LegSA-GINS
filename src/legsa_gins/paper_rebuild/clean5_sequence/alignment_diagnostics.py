@@ -8,7 +8,7 @@ import numpy as np
 
 from legsa_gins.datasets.by2.go2_body_state_parser import parse_go2_body_state_text
 
-from .event_window import EventWindowError, _series
+from .event_window import EventWindowError, _series, xcorr_gate_report
 from .probes import open_probe_file, reject_forbidden_path
 
 REPORT_FIRST_LINE = "DIAGNOSTIC ONLY — imu_gnss_time_offset stays 0.0"
@@ -194,16 +194,26 @@ def normalized_speed_xcorr(*, gnss_times, gnss_speeds, body_times, body_speeds, 
 
 
 def diagnose(*, dataset_id, imu_times, raw_body_times, gnss_times, gnss_speeds,
-             body_times, body_speeds, common_coverage, v2_window=None):
-    return {"schema_version": "paper_rebuild.clean5.alignment_diagnostics.v1",
+             body_times, body_speeds, common_coverage, v2_window=None, xcorr=None,
+             event_report=None, by2_peak_lag_seconds=None):
+    correlation = xcorr if xcorr is not None else normalized_speed_xcorr(
+        gnss_times=gnss_times,gnss_speeds=gnss_speeds,body_times=body_times,
+        body_speeds=body_speeds,common_coverage=common_coverage)
+    result = {"schema_version": "paper_rebuild.clean5.alignment_diagnostics.v2",
             "first_line": REPORT_FIRST_LINE, "dataset_id": dataset_id, "diagnostic_only": True,
             "constants": diagnostic_constants(), "imu_gnss_time_offset": 0.0,
             "imu_increment_holes": summarize_time_holes(imu_times,v2_window=v2_window),
             "raw_go2_holes": summarize_time_holes(raw_body_times,v2_window=v2_window),
-            "xcorr": normalized_speed_xcorr(gnss_times=gnss_times,gnss_speeds=gnss_speeds,
-                         body_times=body_times,body_speeds=body_speeds,common_coverage=common_coverage),
+            "xcorr": correlation,
+            "xcorr_gate": xcorr_gate_report(correlation,by2_peak_lag_seconds=by2_peak_lag_seconds),
             "v2_window": v2_window, "trace_content_read": False, "offset_selected_for_solver": False,
             "event_window_reselected_from_correlation": False}
+    if event_report is not None:
+        keys = ("onset_censored_b","onset_censored_g","body_onset_interval_R1","gnss_onset_interval_R1",
+                "delta_t_onset_ms","delta_t_onset_interval_ms","clock_consistency_gate",
+                "propagation_start_adjustment","preserve_internal_dropout","kick_dropout_hypothesis")
+        result["event_timing"] = {key:event_report[key] for key in keys}
+    return result
 
 
 def markdown_report(report):
@@ -229,4 +239,24 @@ def markdown_report(report):
               "Raw speed magnitudes are resampled at 10 Hz; lag step is 0.05 s over [-5, 5] s.",
               "Interpolation never extrapolates or crosses a source bracket greater than twice that source's median interval.",
               "No clock correction or solver-input modification is inferred from these diagnostics.",""]
+    gate = report["xcorr_gate"]
+    lines += [f"Primary |lag| <= 1 s diagnostic gate: {gate['passed']}; available: {gate['available']}.",
+              f"Primary lag difference from BY2 (report only): {gate['difference_from_by2_primary_lag_seconds']} s.",""]
+    timing = report.get("event_timing")
+    if timing is not None:
+        lines += [f"Onset censored: GNSS={timing['onset_censored_g']}, raw Go2={timing['onset_censored_b']}.",
+                  f"GNSS onset interval R1: {timing['gnss_onset_interval_R1']}; body onset interval R1: {timing['body_onset_interval_R1']}."]
+        if timing["onset_censored_g"] or timing["onset_censored_b"]:
+            lines += [f"Onset difference interval only (ms): {timing['delta_t_onset_interval_ms']}."]
+        else:
+            lines += [f"Uncensored onset difference (ms): {timing['delta_t_onset_ms']}."]
+        selected = timing["clock_consistency_gate"]
+        shift = timing["propagation_start_adjustment"]
+        lines += [f"Clock consistency gate: {selected['basis']}; passed={selected['passed']}.",
+                  f"Propagation start: original={shift['unadjusted_start']}; t_init={shift['first_imu_time_at_or_after_start']}; "
+                  f"delay={shift['initialization_delay_seconds']} s; adjusted={shift['adjusted']}; final={shift['adjusted_start']}.",
+                  f"Internal dropout intervals preserved: {len(timing['preserve_internal_dropout'])}."]
+        if timing["kick_dropout_hypothesis"] is not None:
+            lines += ["HYPOTHESIS ONLY: "+timing["kick_dropout_hypothesis"]["statement"]]
+        lines += [""]
     return "\n".join(lines)

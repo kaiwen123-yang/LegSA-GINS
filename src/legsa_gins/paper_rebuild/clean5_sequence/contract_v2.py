@@ -61,12 +61,20 @@ def amend_contract(old_text, event, event_sha256, code_commit):
             "no_method_specific_window", "preserve_internal_missing_epochs")
     replacement = {key: original_window[key] for key in keep if key in original_window}
     replacement.update(rule="event_onset_v2", **window,
-        t_start_formula="floor(max(t_on_g, t_on_b))", t_end_formula="floor(last_common_epoch) - 9.0",
+        unadjusted_start_formula="floor(max(t_on_g, t_on_b))",
+        t_start_formula="unadjusted start; if first propagation IMU >= start is delayed >1.0 s, floor(that IMU time)",
+        t_end_formula="floor(last_common_epoch) - 9.0",
         constants=event["constants"], kick={key: value for key, value in event["kick"].items()
             if key in ("status", "kick_time_R1", "detector_source_sha256", "constants")},
         t_on_g=event["t_on_g"], t_on_b=event["t_on_b"], delta_t_onset_ms=event["delta_t_onset_ms"],
         v1_window={key: original_window[key] for key in ("rule", "t_start", "t_end")},
         v1_to_v2={key: {"v1": original_window[key], "v2": window[key]} for key in ("t_start", "t_end")})
+    for key in ("event_report_relative_path", "event_attempt", "onset_censored_b", "onset_censored_g",
+                "body_onset_interval_R1", "gnss_onset_interval_R1", "delta_t_onset_interval_ms",
+                "clock_consistency_gate", "xcorr_gate", "propagation_start_adjustment",
+                "preserve_internal_dropout", "kick_dropout_hypothesis"):
+        replacement[key] = event[key]
+    replacement["adjusted_for_imu_dropout"] = event["propagation_start_adjustment"]["adjusted"]
     initialization = dict(old["initialization_contract"])
     updates = event["initialization_v2"]
     allowed = {"initpos", "initatt", "position_epoch_R1", "yaw_epoch_R1", "yaw_ned_deg_0_360",
@@ -75,7 +83,9 @@ def amend_contract(old_text, event, event_sha256, code_commit):
         raise ValueError("Initialization amendment has unauthorized or missing fields")
     initialization.update(updates)
     additions = {"contract_version": 2, "supersedes_v1_sha256": sha256(old_text.encode()).hexdigest(),
-        "amended_before_unblinding": True, "amendment_reason": AMENDMENT_REASON,
+        "amended_before_unblinding": True, "amendment_reason": AMENDMENT_REASON +
+        " Second amendment: censored-onset fallback and IMU-availability shift are input-side, pre-unblinding rules. " +
+        "Event report SHA-256: " + event_sha256 + ".",
         "human_protocol_statement": HUMAN_PROTOCOL_STATEMENT, "amendment_code_commit": code_commit,
         "event_window_report_sha256": event_sha256}
     prefix, parts = sections(old_text)
