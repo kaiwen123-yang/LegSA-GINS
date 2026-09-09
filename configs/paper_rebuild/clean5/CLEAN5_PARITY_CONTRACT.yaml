@@ -1,25 +1,21 @@
-schema_version: paper_rebuild.clean5.input_parity_preregistration.v1
-contract_status: PREREGISTERED_BEFORE_ANY_VARIANT_SOLVE_WITH_EXPLICIT_UNAVAILABLE_GATES
-task: P-01
-human_authorization_date: '2026-09-08'
-starting_commit: aed61a4892ceda36327269fc865922127edc3310
+schema_version: paper_rebuild.clean5.input_parity_preregistration.v2
+contract_version: 2
+contract_status: PREREGISTERED_BEFORE_P02_PROVIDER_GENERATION_AND_SOLVES
+task: P-02
+starting_commit: 42382cf9353e5006014a330232c3e58b1aa4d925
+human_provider_authorization_date: '2026-09-08'
+human_v3_authorization_date: '2026-09-09'
 stage_id: CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF
-audit_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/00_PARITY_TARGET_AND_AUDITS
-authority: P-01 read-only sources, numerical input/reference audit, preregistration, commit and push; zero variant
-  solves
-current_execution_counts:
-  variant_solves: 0
-  solver_invocations: 0
-  provider_generations: 0
-  evaluator_invocations: 0
-future_provider_family_prefix: CLEAN5_PARITY_
-future_execution_authorized_by_this_file: false
-main_evidence_chain: 'READ_ONLY: providers, outputs, evaluation contracts and frozen v2 numbers unchanged'
+stage_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF
+provider_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/02_PARITY_PROVIDERS
+run_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/03_PARITY_RUNS
+seal_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/04_PARITY_SEAL
+aggregate_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/08_AGGREGATE
+execution_authorized: true
+solver_invocation_limit: 8
+serial_only: true
+automatic_solver_retries: 0
 data_mode: real_by2_raw
-audit_sequence_data_modes:
-  BY2: real_by2_raw
-  BY2H: real_by2h_raw
-  BY2O: real_by2o_raw
 synthetic_data_used: false
 semisynthetic_data_used: false
 trace_used_online: false
@@ -30,16 +26,6 @@ per_case_tuning: false
 output_only_correction: false
 epoch_deleted_for_metric: false
 old_runtime_input_count: 0
-trace_role: offline reference-geometry audit only in P-01; 未用于任何拟合
-audit_sequences:
-- BY2
-- BY2H
-- BY2O
-future_variant_sequence: BY2
-audit_source_registry: configs/paper_rebuild/clean5/CLEAN5_SEQUENCE_REGISTRY.yaml
-raw_locks:
-  BY2: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv
-  BY2H_BY2O: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv
 frozen_runtime:
   primary: A04
   controls:
@@ -56,20 +42,22 @@ frozen_runtime:
   - 66.0
   - 340.0
   base_time: 1772784000.0
-  parameter_policy: Copy every frozen runtime parameter token byte-for-byte, including initialization, noise, thresholds,
-    module switches, lever, preprocessing and 66..340 window.
+  parameter_policy: Every scientific line is byte identical to its own frozen F01/F03/A04 profile, including window
+    and initial state. Same profile frozen_parameter_hash equal across variants; distinct profiles retain their
+    distinct switches/hashes.
   allowed_runtime_line_replacements:
-  - stage_id
-  - protocol_id
-  - case_id
-  - run_id
-  - run_label
-  - outputpath
   - imupath
   - gnsspath
   - raw_doppler_factor_path
   - go2_attitude_prior_path
   - go2_horizontal_velocity_prior_path
+  - outputpath
+  - stage_id
+  - protocol_id
+  - case_id
+  - data_mode
+  - run_id
+  - run_label
   transport_policy: Only listed identity/path lines may change, with an explicit before/after ledger. Scientific
     tokens on every other line must be byte-identical. No reserialization of numeric parameters. All true identities
     also recorded in the outer manifest. Any additional native provenance/counter requirement blocks execution;
@@ -142,6 +130,8 @@ frozen_runtime:
           path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/GO2_HORIZONTAL_VELOCITY_WEAK_PRIORS.csv
           sha256: f390c8e51f1bec1162c0f6c628ebbcd0449923cfbf9211bebb36004dc2b2aab0
   no_main_provider_generation_or_overwrite: true
+  native_identity_transport: Use existing C-04 CLEAN2R2A native compatibility identity only; outer manifest records
+    true P02 family/variant. Native formal checks and scientific parameters stay enabled and unchanged.
 evaluation:
   v2_sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
   base_time: 1772784000.0
@@ -159,173 +149,190 @@ evaluation:
     yaw: yaw
   v2_semantics: 'Exact frozen executable: crop NAV to trace overlap; interpolate geodetic lat/lon/height and roll/pitch;
     unwrap ENU yaw before interpolation; yaw=wrap360(90-yaw); local ENU position error.'
-  v3_status: PRE_REGISTERED_POINT_TRANSFORM_ONLY; implementation SHA UNAVAILABLE; not executed
-  v3_policy: New separately identified evaluator contract; preserve v2 source, metrics and numbers. Apply same physical
-    point transform to internal method and EXT05C outputs using each method own attitude. Never write corrected
-    NAV back to solver/output chain.
-  v3_inherits_v2_except:
-  - declared physical evaluation point transform
+  v3_status: AUTHORIZED_2026_09_09
+  v3_policy: Transform copies of estimator IMU NAV into POI using own full NAV attitude and frozen A1 median, then
+    run unchanged aa0492 evaluator; preserve original NAV and all v2 identities/numbers.
   native_support_difference:
     canonical_epochs: 56642
     external_epochs: 58014
   reporting: Report frozen v2, native-support v3, coverage, exact time support and any separately labelled common-support
     diagnostics independently. No frozen row replacement.
-no_update_encoding:
-  chosen_provider_schema: 15 numeric fields + existing position_valid, velocity_valid, yaw_valid extension (18 columns
-    total)
-  new_cpp_changes: false
-  validity_column_indices_one_based:
-    position_valid: 16
-    velocity_valid: 17
-    yaw_valid: 18
-  non_A1_row: 1 rv_valid 0
-  A1_row: 1 rv_valid 1
-  missing_RV_within_tolerance: rv_valid=0; keep position row; finite placeholder velocity and std fields are not
-    observations
-  placeholder_values:
-    velocity_mps:
-    - 0.0
-    - 0.0
-    - 0.0
-    velocity_std_mps:
-    - 1.0
-    - 1.0
-    - 1.0
-    yaw_deg: 0.0
-    yaw_std_deg: 1.5
-  strict_15_column_status: BLOCKED_STRICT15_NO_RV_SKIP
-  large_yaw_std: Scheme-C >= frozen 6 deg rejects accepted update but increments attempt/reject; not chosen for
-    true skip
-  large_velocity_std: Not skip; EKFUpdate and velocity counter remain active
-  nan_inf: No legal independent skip semantic; forbidden encoding
-  source: cpp/legsa_v23_port_core/src/fileio/gnss_file_loader.cpp:38-71; src/kf_gins/gi_engine.cpp:364-386,931-972
-    within same C++ root
-  validation_state: Read-only source equality to scientific freeze and binary SHA verified. No runtime parsing test
-    in P-01; future provider parse/count proof required before solve.
-  auxiliary_scheduling_caveat: gi_engine.cpp:398-407 invokes RD/RP/HV at every GNSS row independently of RV/yaw
-    validity. :996, :1080, :1137 select nearest providers without consumption deduplication. Identical auxiliary
-    payload bytes do not imply identical selected observations, update times or counts.
-  future_counter_audit:
-  - position rows and accepted updates
-  - A1 source epochs / mapped rows / attempts / rejects / accepts
-  - RV source epochs / mapped rows / updates / absent skips
-  - RD/RP/HV source row identity / selected time / repeated selection / updates / rejects
+  evaluator_path: <CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py
+  canonical_attempt: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800
+  v3_human_source_declaration: 人类源声明（2026-09-09）：VRTK 单元安装在两根天线正中间，天线相位中心与单元参考点等高。设备 TF：POI→VRTK 零平移、单位旋转。
+  v3_human_transform_authorization: POI_est = p_IMU + C_b^n · [0.03, 0.03 − ½·b_med, −0.30]，b_med 取冻结 A1 provider
+    的 baseline_len_m 中位数（BY2），C_b^n 由 NAV 的 roll/pitch/yaw 构造；对 V0、V1、V2、V2e、EXT05C、LC01 的 NAV 同样施加后再进冻结评估器；输出到
+    v3/ 子目录，表结构同 v2。
+  TF_original: $FP,TF,2,2408,460875.000000,POI,VRTK,-0.00000,-0.00000,-0.00000,1.000000,0.000000,0.000000,0.000000*7D
+  TF_source: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/00_PARITY_TARGET_AND_AUDITS/B_ORIGINAL_TF_POI_MESSAGES_BY2.json
+  consistency_check_only_mm:
+    BY2: -2.5
+    BY2H: 7.0
+    BY2O: -0.2
+  consistency_values_used_in_transform: false
+  v3_lever_frd_m:
+  - 0.03
+  - -0.148095745932992
+  - -0.3
+  no_further_residual_correction: true
+raw_locks:
+  BY2: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv
+  BY2H_BY2O: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv
+frozen_a1_provider:
+  path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/providers/dual_yaw_provider.csv
+  sha256: ccf442f32a0037ba742d199d7ab078d5af112aea5981effce1f23a80510bdd86
+  baseline_column: baseline_length_m
+  requested_semantic_alias: baseline_len_m
+  column_alias_policy: Use actual frozen baseline_length_m, no reconstructed baseline or B2 fitted residual. The
+    requested baseline_len_m is the same physical quantity under this explicit source-column mapping.
+  rows: 302
+  baseline_median_m: 0.356191491865984
 variants:
-- id: V0
-  status: FROZEN_REFERENCE_ONLY
-  provider_family: null
-  definition: Reuse sealed Canonical BY2 C00 A04/F01/F03 result references; no rerun or provider mutation.
-  hypothesis: Reference for attribution; no new performance hypothesis.
-  expected_direction: Not applicable
+- id: V0-18
+  profiles:
+  - A04
+  definition: Append 1 1 1 to each V0 numeric line, preserve original fifteen-field bytes and sys_stamp time.
+  identity_gate: NAV/STD same shape and byte-identical or maximum absolute difference <=1e-9 to Canonical C00 A04
+    before other solves
 - id: V1
-  status: PRE_REGISTERED_NOT_EXECUTED
-  provider_family: CLEAN5_PARITY_V1
-  definition: 1 Hz gnss1-status; substitute corresponding header epoch for sys_stamp in GNSS time column only.
-  byte_contract: All non-time tokens/bytes and row identities in V0 GNSS remain equal; IMU, RD, RP, HV payloads
-    equal V0 byte-for-byte. Do not reselect RV/yaw/std for the shifted row.
-  row_map_gate: Unique raw gnss1-status row lineage for each frozen GNSS row, with no row loss, reorder or duplicate;
-    unavailable map blocks generation.
-  hypothesis: Reception latency contributes to along-track discrepancy.
-  expected_direction: Smaller forward signed-bias magnitude / position RMSE if timing is a contributor; yaw effect
-    not assumed.
+  profiles:
+  - F01
+  - F03
+  - A04
+  definition: 303 GNSS rows; only time token becomes corresponding status header epoch; all fourteen measurement
+    tokens byte-identical to V0. Receiver velocity matches same NAV-PVT iTOW identity with exact zero integer-ms
+    key difference. A1 yaw/std and position/RV std unchanged.
+  epoch_identity_vs_timestamp: Status header differs iTOW UTC by about0.15ms; retain requested header values and
+    report actual difference separately, never call numerical header difference zero.
+  missing_boundary_policy: 'First pre-window status row has no same-iTOW PVT: retain frozen numeric bytes as inactive
+    placeholders and set velocity_valid=0. Missing/mismatching valid RV inside66..340 blocks generation. All302
+    common RV vectors must match original tokens.'
 - id: V2
-  status: PRE_REGISTERED_CONDITIONAL_STD_SEMANTICS_UNAVAILABLE
-  provider_family: CLEAN5_PARITY_V2
-  position: GNSS1 UBX-NAV-HPPOSECEF, 5 Hz native iTOW, physical GNSS1 antenna point.
-  time: GPS epoch + locked GPS week*604800 + iTOW/1000 - locked leap seconds - base_time. Use message week/TIM-TP/raw
-    source, never trace or fitted offset.
-  std_requested_by_human: pAcc/vAcc as std
-  position_std_source: HPPOSECEF pAcc * 1e-4 m; isotropic ECEF pAcc^2 I3 maps to isotropic NED. This is declared
-    covariance instantiation, not calibrated uncertainty.
-  vAcc_semantics: 'UNAVAILABLE as speed std: HPPOSECEF has no vAcc; NAV-PVT vAcc is vertical position accuracy,
-    while sAcc is speed accuracy. No silent substitution of vAcc with sAcc, constant RV std or trace-derived uncertainty.'
-  std_gate: Before any V2 provider or solve, close and commit a source-backed interpretation of requested vAcc (position
-    vertical or speed accuracy). Until then V2 is not executable.
-  RV: Nearest NAV-PVT by iTOW-derived measurement UTC with |dt| <= 0.1 s; tie -> earlier measurement epoch; no interpolation/hold/extrapolation;
-    absent -> velocity_valid=0.
-  A1: Frozen GNSS2-GNSS1 status physical yaw, same validity/transform/std; match header measurement UTC to nearest
-    HP row within 0.1 s, tie -> earlier row; at most one yaw update per A1 epoch and row. No match/collision ->
-    blocked mapping, never repeat or delete silently.
-  encoding: Use no_update_encoding chosen 18-column existing extension. F01 yaw module remains disabled.
-  unchanged: Frozen scientific parameters and IMU/RD/RP/HV payloads; only declared GNSS source/std/epoch and yaw/RV
-    association changes.
-  hypothesis: Measurement-epoch 5 Hz position can reduce latency/discretization effects; changed observation noise
-    and scheduling can alter uncertainty and trajectory.
-  expected_direction: Potential smaller position RMSE; no guarantee and no numerical acceptance threshold selected
-    from audit.
+  profiles:
+  - F01
+  - F03
+  - A04
+  definition: 1510 HPPOSECEF native5Hz iTOW rows; shared_raw_backend.ecef_to_geodetic same conversion as EXT05C;
+    N/E std=PVT hAcc, D std=PVT vAcc at identical iTOW; same-epoch PVT velocity, frozen RVstd0.05m/s; A1 yaw valid
+    only at matching frozen physical A1 source epochs.
+  accuracy_gate: Report exactfloat64 equality and serialization differences; status float32 pos_acc_h/v must equal
+    same PVT hAcc/vAcc castfloat32. No tuning or adjustment of values.
+  source_gate: HP-LLH minus status at common1Hz epochs <=5mm qualifies same source; otherwise preserve explicit
+    source difference (not silently abort/adjust).
+  A1_boundary_policy: Frozen A1 has302epochs;301 match HP support,1leading pre-window unmatched. Last status-only
+    epoch is absent frozen physical A1 and remains yawvalid0. Equality of yawvalidcount uses matched A1 support;
+    record source/mapped/unmatched/eligible counts separately.
+- id: V2e
+  profiles:
+  - F01
+  definition: V2 position rows, pAcc isotropic std as EXT05C; RVvalid=0 and yawvalid=0 on every row. F01 numeric/profile
+    flags unchanged; position-only observations.
+  known_static_blocker: Frozen formal F01 runtime requires receiver_velocity_update_count>0 at port_runtime.cpp:200-245.
+    This authorized attempt is expected to fail native counter guard before NAV/STD write. Do not bypass, substitute
+    result or rerun. Missingmetrics remainUNAVAILABLE.
 - id: V3
-  status: PRE_REGISTERED_CONDITIONAL_REFERENCE_POINT_UNAVAILABLE
-  provider_family: CLEAN5_PARITY_V2 (same solver output)
-  definition: V2 output evaluated under separate v3 physical point contract; reference point target is antenna midpoint.
-  transform: l_IMU_to_midpoint_FRD = l_IMU_to_GNSS1_FRD + 0.5*b_GNSS2_minus_GNSS1_FRD; p_mid_ECEF = p_IMU_ECEF +
-    R_NED_to_ECEF * R_body_to_NED(method_attitude) * l_IMU_to_midpoint_FRD.
-  frozen_l_IMU_to_GNSS1_FRD_m:
-  - 0.03
-  - 0.03
-  - -0.3
-  frozen_b_GNSS2_minus_GNSS1_FRD_m:
-  - 0.0
-  - -0.35
-  - 0.0
-  derived_l_IMU_to_midpoint_FRD_m:
-  - 0.03
-  - -0.145
-  - -0.3
-  baseline_policy: Use frozen physical 0.350 m, not B2 residual or fitted lever; B5 measured half-baseline is an
-    independent descriptive check only.
-  reference_point_identity: UNAVAILABLE until source TF/POI/antenna evidence closes trace-point relationship. B2
-    agreement cannot itself establish it.
-  gate: B2/B5 source evidence must support this transform and reference point; mismatch/missing evidence blocks
-    v3. Never shift trace by its mean discrepancy.
-  external_application: Apply identical v3 physical contract to EXT05C frozen IMU output with EXT05C own attitude,
-    same evaluator window/columns; no EXT05C solver rerun.
-  hypothesis: A physical output/reference point mismatch contributes to body-fixed residual.
-  expected_direction: Reduce point-related bias if identity closes; otherwise UNAVAILABLE, not presumed improvement.
-- id: V4
-  status: OPTIONAL_CONDITION_MET_NOT_EXECUTED
-  provider_family: CLEAN5_PARITY_V4
-  condition: LC01 is dual receiver; A confirms EXT05A alias and two-receiver update.
-  definition: Optional dual-HPPOSECEF common-iTOW midpoint position, p_mid=(p1+p2)/2. Preserve correlation caveat;
-    R_mid=(R1+R2+R12+R21)/4; R12 source UNAVAILABLE.
-  gate: Separate future selection; before solve, preregister exact midpoint covariance and physically consistent
-    measurement lever. A midpoint observation with unchanged GNSS1 lever is invalid. Frozen parameter constraint
-    is retained; no automatic lever change.
-  hypothesis: Symmetric receiver information changes midpoint position observability and noise.
-  expected_direction: Potential smaller antenna asymmetry; correlated errors prevent promised sqrt(2) gain.
+  solver_runs: 0
+  definition: Post-process available V0/V1/V2/V2e/EXT05C/LC01 NAV copies using evaluator.v3_lever_frd_m and ownNAV
+    roll/pitch/yaw, then frozen evaluator. UnavailableV2e NAV remainsUNAVAILABLE.
+  output_identity: evaluator_contract_v3
+  separate_tables: true
+removed_variant:
+  id: V4
+  reason_user: V4 删除，理由 LC01−EXT05C = −0.002 m 已给出双接收机项
+  exact_reference_policy: Use full frozen LC01-EXT05C metrics with source rows, not rounded−0.002 as computation
+    input.
+no_update_encoding:
+  columns: 18
+  field_16: position_valid
+  field_17: velocity_valid
+  field_18: yaw_valid
+  native_format_flag: Auto-detected existing extension; no invented numerical configuration flag. Record18 in outer
+    manifest.
+  finite_placeholders: true
+  NaN_or_large_std_skip: false
+  auxiliary_scheduling: RD/RP/HV triggered perGNSS row; same files do not imply same selected times/counts. Record
+    counters and provider-time selection ledger.
+run_order:
+- - V0-18
+  - A04
+- - V1
+  - F01
+- - V1
+  - F03
+- - V1
+  - A04
+- - V2
+  - F01
+- - V2
+  - F03
+- - V2
+  - A04
+- - V2e
+  - F01
+counter_contract:
+  eligibility: GNSS18 time > first frozen IMU time >=starttime and <=endtime
+  position: sum eligible position_valid
+  RV: sum eligible velocity_valid when F01/F03/A04 frozen RVenabled
+  yaw_attempt: sum eligible yaw_valid when F03/A04 yawenabled;F01=0
+  forbidden_counts: 0
+  main_native_guard_unchanged: true
+provider_audits:
+- row/window/validity counts
+- fractional-second distribution
+- shared HP-LLH/status commonepoch difference
+- status/PVT accuracy equality
+- V1 non-time bytes
+- exact RV epoch keys
+- A1 full/mapped/unmatched/eligible epochs
+- strace zero trace/bag/fpl
+- three-sequence first1000 Go2 acceleration norm and frozen abstd/asstd/corrtime reportonly
+phase_rules:
+  first_commit_before_execution: true
+  push_and_remote_equality_before_detached_snapshot: true
+  no_edits_builds_commits_in_snapshot: true
+  provider_pre_post_raw_checkpoints: 22 BY2 files per independent hash-only strace session
+  solver_pre_post_raw_checkpoints: 22 BY2 files per independent hash-only strace session
+  solver_strace: zero raw/trace/bag/fpl opens; writes only own run
+  seal_before_first_evaluation: true
+  v3_source_NAV_immutable: true
 decomposition:
-  metric_vector:
+  metrics:
   - horizontal_rmse_m
   - position_3d_rmse_m
   - up_rmse_m
   - yaw_rmse_deg
-  time_term: V0 - V1
-  rate_term: V1 - V2
-  measurement_point_term: V2 - V3
-  estimator_term: V3 - EXT05C(v3)
-  positive_sign: For the first three lower-is-better RMSE differences, positive means improvement by next rung;
-    estimator term positive means internal method worse than EXT05C.
-  interpretation: Descriptive sequential differences, not additive physical squared-error components or causally
-    isolated effects. Rate term also changes message/std/scheduling. Estimator term retains RV/RD/RP/HV, initialization/noise/implementation/support
-    differences.
-  unavailable_propagation: If either endpoint is unexecuted, unavailable or differently supported without explicit
-    labelling, difference is UNAVAILABLE; never use nearby/legacy rows.
+  time: V0-V1
+  rate: V1-V2
+  module: V2_A04-V2_F03
+  estimator: V2e_F01-EXT05C
+  dual_receiver: LC01-EXT05C frozenreference
+  measurement_point: v2-v3 same run
+  source_rows_required: true
+  missing_endpoint: UNAVAILABLE
+  interpretation: No interpretation requested; report literal sequential differences with native support counts.
+body_frame_bias:
+  files:
+  - 08_AGGREGATE/BODY_FRAME_BIAS.csv
+  - 08_AGGREGATE/v3/BODY_FRAME_BIAS.csv
+  yaw_source: original each-run NAV yaw(NED), nevertraceyaw
+  formula: F=N*cos(yaw)+E*sin(yaw); R=E*cos(yaw)-N*sin(yaw); U=Up
+  statistics:
+  - signed_mean
+  - population_std
+  further_correction: false
 forbidden:
-- solver in P-01
-- main-chain provider/result/contract modification
-- per-case tuning
-- offset/lever/sign/time fitting
-- trace-based provider selection
-- receiver IMU propagation substitution
-- repeated 1 Hz yaw on 5 Hz rows
-- NaN sentinel or huge RV std presented as skip
-- metric-driven epoch deletion
-- v3 replacing v2 numbers
-- provider/output substitution
-- C++ modification
-- merge
-- tag
-- history rewrite
-future_manifest_required:
+- main provider/result/contract/evaluator mutation
+- C++ modification or frozenbinary replacement
+- scientificparameter edits
+- trace online/providerinput
+- percase tuning
+- time/sign/offset/lever fitting
+- metric-driven deletion
+- v3 replacingv2
+- knownfailure result substitution
+- retry or >8solver calls
+- merge/tag/forcepush
+required_manifest_fields:
 - data_mode
 - raw_source_hashes
 - provider_hashes
