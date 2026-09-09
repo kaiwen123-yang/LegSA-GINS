@@ -1,7 +1,9 @@
-schema_version: paper_rebuild.clean5.input_parity_preregistration.v2
-contract_version: 2
-contract_status: PREREGISTERED_BEFORE_P02_PROVIDER_GENERATION_AND_SOLVES
-task: P-02
+schema_version: paper_rebuild.clean5.input_parity_preregistration.v3
+contract_version: 3
+contract_status: PREREGISTERED_BEFORE_P03_PROVIDER_GENERATION_AND_SOLVES
+task: P-03
+active_execution_scope: p03
+p02_registration_history_follows: true
 starting_commit: 42382cf9353e5006014a330232c3e58b1aa4d925
 human_provider_authorization_date: '2026-09-08'
 human_v3_authorization_date: '2026-09-09'
@@ -368,3 +370,253 @@ required_manifest_fields:
 - reference_point
 - coverage
 - terminal_status
+
+# P03 active registration; P02 sections above remain immutable reference specifications.
+p03:
+  stage_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING
+  reference_stage_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF
+  reference_summary_sha256: 7ad4294999bdb7b3668bb7cd59869f49a42fb0d840f76b83c94b0704aee64d75
+  reference_terminal_sha256: aa56b7b3f828f7279afe562f46e5f88c07e4d9eb51a6b70ec785c7a3076b0377
+  reference_provider_bundle_sha256: 85b3ed069c30df31a78b2d64a1946721eb845c06dc840d51867ef92462f70e5c
+  reference_seal_sha256: 4196d3e188dcd556924fd36bd99d401f06270a9ac4a9d4141a827671563b06ce
+  source_base_commit: 8d47753d612eee3ab5c205b537cc7224c4e49829
+  scientific_scope: BY2 C00; only new CLEAN5_PARITY_* IMU inputs; six serial F03/A04 solves. P02 reference providers/results/metrics
+    stay immutable.
+  selected_residual_variant: V2is
+  selection_basis: Pre-registered applicability of input preprocessing differences; no selection by any new metric.
+  reference_section_policy: Top-level variants/run_order and eight-run limit below are preserved P02 registration
+    history only. This p03 block exclusively defines the new six-run execution. frozen_runtime/evaluation/frozen_a1_provider
+    retain their frozen identities.
+  run_order:
+  - - V2i
+    - F03
+  - - V2i
+    - A04
+  - - V2s
+    - F03
+  - - V2s
+    - A04
+  - - V2is
+    - F03
+  - - V2is
+    - A04
+  solver_invocation_limit: 6
+  new_evaluator_invocation_limit: 12
+  serial_only: true
+  automatic_retries: 0
+  variants:
+  - id: V2i
+    applicability: APPLICABLE_INPUT_HANDLING_DIFFERS
+    profiles:
+    - F03
+    - A04
+    definition: Generate IMU increments from the maintained external Go2 FRD projection using previous-sample zero-order
+      hold and the exact frozen external initial-5-second gyro mean; retain V2 relative timestamps and measured
+      intervals. No accelerometer bias/scale calibration.
+    hypothesis: Change only the two identified input handling choices; direction of signed RMSE difference not assumed.
+    claim_boundary: Frozen provider/calibration identity verified; original frozen runner text UNAVAILABLE. Current
+      maintained runner supplies ZOH source evidence. This is an input-handling intervention, not proof of complete
+      frozen EXT05C propagation equivalence.
+  - id: V2s
+    profiles:
+    - F03
+    - A04
+    definition: Multiply original unrounded three-axis specific force by the fixed s before measured-dt increments,
+      with original current-sample convention. Preserve every V2 timestamp and gyro token exactly.
+    hypothesis: Remove the fixed first-1000 gravity-norm discrepancy in the input; downstream metric sign is not
+      preselected.
+    calibration_role: Input-side static calibration, the same role as the frozen first-1000-frame gyro bias removal.
+      Not a solver parameter change or trace-derived correction.
+  - id: V2is
+    profiles:
+    - F03
+    - A04
+    definition: V2i preprocessing plus the identical preregistered s applied to unrounded three-axis force before
+      increments. Time and gyro tokens exactly equal V2i.
+    hypothesis: Apply both pre-registered input interventions; report interaction and residual without selecting
+      by results.
+  scale_calibration:
+    g_local_mps2: 9.801554354839126
+    mean_norm_first_1000_mps2: 9.508318843893118
+    s: 1.0308398903907543
+    definition: s = g_local / mean(norm(a_i), i=0..999); not norm(mean(a_i))
+    selection: fixed first 1000 complete BY2 frames; no results-based selection
+    gravity_spec:
+      g_local_mps2: 9.801554354839126
+      g_ellipsoid_surface_mps2: 9.80168335159263
+      frozen_initpos:
+      - 39.98482973
+      - 116.34312609
+      - 41.80208107
+      height_definition: ellipsoidal height in metres; frozen initpos[2]
+      constants:
+        a_m: 6378137.0
+        inverse_flattening: 298.257223563
+        GM_m3ps2: 398600441800000.0
+        omega_radps: 7.292115e-05
+        ge_mps2: 9.7803253359
+        k: 0.00193185265241
+        derived_e2: 0.0066943799901413165
+        derived_b_m: 6356752.314245179
+        derived_m: 0.0034497865068408447
+      formula: g0=ge*(1+k*sin(phi)^2)/sqrt(1-e2*sin(phi)^2); g(h)=g0*(1-2/a*(1+f+m-2*f*sin(phi)^2)*h+3*h^2/a^2)
+      defining_constants_source: https://earth-info.nga.mil/?action=wgs84&dir=wgs84
+      formula_source: https://ahrs.readthedocs.io/en/latest/geodesy/wgs84.html
+      source_boundary: NGA defining parameters and AHRS official implementation documentation; NGA registered PDF
+        not downloaded or directly formula-verified
+    source: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/00_AUDITS/B_SCALE_FACTOR.json
+    source_sha256: ff50f078707f780eb65c376e07c56c745b9887fa836439b579afd97826867573
+    fixed_before_any_P03_provider_generation: true
+    first_1000_are_fixed_input_interval: true
+    stationarity_interpretation: Fixed interval inherited from existing input calibration; no trace-based selection
+      and no new fitted bias.
+    accel_bias_subtracted_mps2:
+    - 0.0
+    - 0.0
+    - 0.0
+    temperature_fit_used: false
+  external_preprocessing:
+    native_summary: <CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/06_EXT05_PAVLASEK_TWO_RECEIVER/C00/EXT05A_C00_NATIVE_SUMMARY.json
+    native_summary_sha256: 466b99cb075e5dd7e2e93bb3a27e4ca8df4ffbbffd5bd81ec561e053bc614dea
+    summary_role: Read only provider.calibration and provider.position.fixed_ned_origin_geodetic_deg_m for exact
+      calibration provenance, never use results for fitting/selection.
+    exact_frozen_runner_text: UNAVAILABLE
+    frozen_runner_sha256: f3ef9ecd2f509c4785ab9d4b384204a782ecacded580d0222d3e013772ff09b1
+    current_maintained_runner_sha256: 9ca29e1e5d679c56ac1a68f70f4f917c484dbc5be11f76f903a9df8b014138db
+    runner_source_boundary: The original text was not found in the assigned CLEAN4 output, P01 provenance, or bounded
+      single-file Git history search. Current maintained source lines are labelled current-source evidence, not
+      original byte proof.
+    gyro_calibration_interval_seconds: 5.0
+    expected_calibration_sample_count: 1031
+    expected_gyro_bias_frd_radps:
+    - -0.0076655634452167005
+    - -0.0026948138158392793
+    - -0.0011093268712426007
+    sampling: Previous sample on each measured Go2 interval; no GNSS-event insertion into the IMU file.
+    unchanged_from_V2:
+    - stamp.sec+nanosec time source
+    - measured dt
+    - FLU-to-FRD then install roll=-1,pitch=0,yaw=0 degrees
+    - raw specific force; no input gravity subtraction
+    - six-decimal relative timestamps
+    - eight-decimal increment serialization
+    - all non-IMU input hashes
+    - native solver and initial state
+    - original .12g intermediate serialization parsed back to float before final .6f time and .8f increments
+    not_reproduced_in_input:
+    - external 9-state mechanization
+    - fixed external normal-gravity model
+    - external attitude initialization
+    - external midpoint rotation and GNSS event propagation
+    - external absence of bias/scale states
+    exact_raw_calibration_equality_required: true
+    exact_original_frozen_IMU_reconstruction_required: true
+  shared_source_sha256:
+    src/legsa_gins/input_generation/imu_txt_builder.py: dcc20ae00cb23d2c4685578e5104cf373204413d90ce26c36a15135ad42522ce
+    src/legsa_gins/datasets/by2/go2_body_state_parser.py: 3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6
+    src/legsa_gins/paper_rebuild/horizontal_literature/ext05_provider.py: 5172276f2bb5a9394b5431583203c2c8656f5acb0a233e8c9d5f910d20b941fc
+    src/legsa_gins/paper_rebuild/horizontal_literature/ext05_pavlasek.py: 89d5496ac2da1dd7d1fd0d194d47f7f49499ed8984915a31156ae53f669fbab5
+    src/legsa_gins/paper_rebuild/horizontal_literature/phase5_runner.py: 9ca29e1e5d679c56ac1a68f70f4f917c484dbc5be11f76f903a9df8b014138db
+    src/legsa_gins/input_generation/process_data_compat.py: 97dcd3aec7c22eb99fb7b6fa621e7ee095c447e532f9e39d5d7157c2a4a7494a
+    src/legsa_gins/paper_rebuild/final_v23_clean_input.py: e1b67d4e72a4c2bf12de3d309c310e8e37a25058bead6581c5094152f493e2ef
+  input_audit:
+    A_IMU_PREPROCESSING_COMPARISON_sha256: b401517b775e473feebcf4ac2f073db564fb1315092f37a7c9f040825e1a2414
+    datasets:
+    - BY2
+    - BY2H
+    - BY2O
+    mode: report-only
+    dt_definition: Integer nanosecond stamp differences of all consecutive complete messages; no gap deletion.
+    jitter_proxy: g_local * std(dt) in m/s, single-increment timing-jitter equivalent only, not observed sensor
+      noise or solver covariance.
+    windows: 10-second sliding window, 1-second step; full and terminal partial windows labelled separately, all
+      retained.
+    temperature: Emit original imu_state.temperature values without assuming units. All three sequences are constant
+      raw value 79; scale-vs-temperature attribution UNAVAILABLE.
+    scale_identification: Dynamic force-norm variation cannot distinguish constant physical scale from temperature
+      drift; no fit or correction from sliding windows.
+    audit_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/00_AUDITS
+    B_INPUT_AUDIT_sha256: 3a931e233cc24da40ed1037808dd1a5922dcdc84a572657291392455ca1eb3d2
+    B4_theory: Unit conversions, stationary OU prior, continuous-time theoretical decay/noise and free-error integration
+      only. Bias priors are not hard bounds. Scale P0 and Q are zero. No actual filter absorption inferred.
+  provider_gates:
+  - Verify original BY2 lock plus all V2 input hashes and shared source hashes.
+  - Rebuild frozen IMU byte-for-byte in memory before intervention; no baseline provider write.
+  - Reproduce exact frozen external initial-5s calibration dictionary from locked raw.
+  - Recompute s exactly from locked first 1000 raw messages and frozen A04 initpos; exact equality to preregistered
+    scalar.
+  - Same row count and timestamps for all variants; V2s gyro bytes unchanged, V2is gyro bytes equal V2i.
+  - Four non-IMU V2 providers reused immutably, all five hashes recorded per variant.
+  - Generation strace zero trace/.bag/.fpl; independent 22-file raw hash checkpoints before/after generation and
+    solver.
+  runtime_gates:
+  - Use frozen executable 9c00565c and exact per-profile scientific lines including initial state; no C++ changes/build.
+  - Per-profile frozen_parameter_hash identical to frozen source and across V2/V2i/V2s/V2is.
+  - 18-column validity and source-only eligibility replay determine attempts; same timestamps mean V2 schedule.
+    Record RD/RP/HV ledger.
+  - Serial six calls maximum, stop first failure, preserve partial, no retries.
+  - Each solver strace zero raw/trace/.bag/.fpl, writes only its own run; seal before first trace read.
+  evaluation:
+    contracts:
+    - evaluator_contract_v2
+    - evaluator_contract_v3
+    frozen_evaluator_sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+    base_time: 1772784000.0
+    window_seconds:
+    - 66.0
+    - 340.0
+    v3_transform: POI_est = p_IMU + C_b^n * [0.03, 0.03 - baseline_median_m/2, -0.30]; same frozen A1 median and
+      own NAV roll/pitch/yaw.
+    baseline_median_m: 0.356191491865984
+    lever_frd_m:
+    - 0.03
+    - -0.148095745932992
+    - -0.3
+    human_geometry_source: Top-level evaluation.v3_human_source_declaration and TF_original, unchanged.
+    new_calls: 12
+    reference_rows_per_version: 13
+    expected_total_rows_per_version: 19
+    reference_reuse: Copy P02 rows/body/decomposition with original numerical fields unchanged. Original sources
+      remain in p02_source_row/frozen_source_row; current source_row/result_source_row points to the new P03 table.
+      No re-evaluation of existing V2/EXT05C/LC01. P02 V2e native failure remains UNAVAILABLE.
+    body_frame_bias: Same P02 own-NAV-yaw rotation and population mean/std, v2 and v3 independently.
+    v3_uncertainty: UNAVAILABLE_FULL_COVARIANCE_NOT_TRANSPORTED; no further residual correction.
+  decomposition:
+    metrics:
+    - horizontal_rmse_m
+    - position_3d_rmse_m
+    - up_rmse_m
+    - yaw_rmse_deg
+    preserve_P02_rows: true
+    source_rows_required: true
+    imu_handling: V2 - V2i for F03/A04, v2/v3
+    accel_scale: V2 - V2s for F03/A04, v2/v3
+    combined_imu_handling_and_scale: V2 - V2is for F03/A04, v2/v3; supplemental literal combined difference
+    F01_upper: V2 F01 - EXT05C for v2/v3; literal user-requested reference difference, not an inferred mathematical
+      bound
+    residual: V2is A04(v3) - EXT05C(v3), selected by applicability before execution
+    missing_endpoint: UNAVAILABLE
+    interpretation: No performance interpretation.
+  phase_rules:
+    commit_and_push_before_detached_execution: true
+    remote_equality_required: true
+    snapshot_edits_or_builds: false
+    source_contract_snapshot_and_hash_required: true
+    audit_run_count_before_registration: 0
+    provider_generation_before_registration: 0
+    first_stage: contract v3 + code commit/push
+    second_stage: results record commit/push
+  forbidden:
+  - main evidence mutation
+  - non-IMU provider regeneration
+  - scientific parameter changes
+  - trace calibration/selection/fitting
+  - accelerometer bias fitting
+  - temperature correction
+  - resampling/retiming
+  - C++ changes
+  - metric-driven deletion
+  - further v3 residual correction
+  - solver retry
+  - more than six new solves
+  - re-evaluation or substitution of frozen results
