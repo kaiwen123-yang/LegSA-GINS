@@ -1,6 +1,7 @@
 """P-02 sealed-input evaluation and separate physical-point v3 postprocessing."""
 from __future__ import annotations
 import csv
+from io import StringIO
 import json
 import math
 from pathlib import Path
@@ -51,6 +52,38 @@ def transform_nav(nav, baseline_median_m):
     llh = np.asarray([ecef_to_geodetic(p) for p in xyz])
     out[:,2:4] = np.rad2deg(llh[:,:2]); out[:,4] = llh[:,2]
     return out
+
+
+def write_transformed_nav(source_path, target_path, transformed):
+    """Accept percent/hash comments; validate every numeric row before exclusive write.
+
+    Non-position numeric tokens are preserved verbatim. Numeric layout and values
+    must match the transformed array outside the three authorized LLH columns.
+    """
+    source_path,target_path=Path(source_path),Path(target_path)
+    if source_path.is_symlink() or not source_path.is_file():raise ValueError('Missing/symlink source NAV')
+    changed=np.asarray(transformed,float)
+    if changed.ndim!=2 or changed.shape[1]<11 or not np.isfinite(changed).all():
+        raise ValueError('Invalid transformed NAV matrix')
+    numeric=[line.split() for line in source_path.read_text().splitlines()
+             if line.strip() and not line.lstrip().startswith(('#','%'))]
+    if len(numeric)!=len(changed):raise ValueError('NAV row parser disagreement')
+    if any(len(tokens)!=changed.shape[1] for tokens in numeric):raise ValueError('NAV field count mismatch')
+    # Match the Canonical pandas parser exactly (float(token) can differ by one ulp).
+    original=pd.read_csv(StringIO("\n".join(" ".join(tokens) for tokens in numeric)),
+                         sep=r"\s+",engine="python",header=None,comment="%").to_numpy(float)
+    if not np.isfinite(original).all():raise ValueError('NAV contains nonfinite values')
+    retained=[k for k in range(changed.shape[1]) if k not in (2,3,4)]
+    if not np.array_equal(original[:,retained],changed[:,retained]):
+        raise ValueError('Unauthorized non-position NAV change')
+    if target_path==source_path or target_path.resolve()==source_path.resolve():
+        raise ValueError('Source NAV must remain immutable')
+    if target_path.is_symlink() or any(p.is_symlink() for p in target_path.parents):
+        raise ValueError('Symlink transformed NAV target')
+    with target_path.open('x',encoding='utf-8') as handle:
+        for tokens,row in zip(numeric,changed):
+            tokens[2:5]=[format(x,'.17g') for x in row[2:5]]
+            handle.write(' '.join(tokens)+'\n')
 
 
 def body_frame_bias(errors, nav):
@@ -211,6 +244,38 @@ def full_window_segments(rows):
     return segments
 
 
+def write_version_tables(*, target, rows, bias, headers, result_target=None):
+    """Write unchanged aggregate formulas, preserving final-path source identities."""
+    target=Path(target);result_target=Path(result_target or target)
+    for n,row in enumerate(rows,2):row['result_source_row']=str(result_target/'UNIQUE_EVALUATION_RESULTS.csv')+':'+str(n)
+    # Every row retains explicit original-source reference in addition to this table's identity.
+    for row in rows:
+        if 'frozen_source_row' not in row:row['frozen_source_row']=row.get('source_row')
+        row['source_row']=row['result_source_row']
+    tables={'UNIQUE_EVALUATION_RESULTS.csv':rows,'LOGICAL_EVALUATION_RESULTS.csv':rows}
+    available=[r for r in rows if r['evaluation_status']=='COMPLETED']
+    for name in ('UNIQUE_METHOD_SUMMARY.csv','LOGICAL_METHOD_SUMMARY.csv'):
+        tables[name]=canonical._summary_rows(available,('variant_id','method_id'),canonical._numeric_fields(available)) if available else []
+    tables['PAIRWISE_CASE_LEVEL.csv'],tables['PAIRWISE_SUMMARY.csv']=pairwise_tables(rows)
+    tables['MODULE_ACTION_SUMMARY.csv']=canonical._summary_rows(available,('variant_id','method_id'),[m for m in canonical.MODULE_SCALARS if any(m in r for r in available)]) if available else []
+    tables['RUNTIME_SUMMARY.csv']=canonical._summary_rows(rows,('variant_id','method_id'),['solver_runtime_seconds','wrapper_runtime_seconds','evaluation_runtime_seconds']) if rows else []
+    tables['METRIC_COVERAGE_REPORT.csv']=canonical._coverage_report(rows)
+    for coverage in tables['METRIC_COVERAGE_REPORT.csv']:
+        if coverage['metric_name'] in METRICS:
+            coverage['source_fields']='exact frozen evaluator error_series.csv; Canonical unchanged statistics'
+    for name,table in tables.items():_csv(target/name,table,headers[name])
+    _csv(target/'BODY_FRAME_BIAS.csv',bias)
+    _csv(target/'WINDOW_SEGMENT_SUMMARY.csv',full_window_segments(rows),SEGMENT_FIELDS)
+    write_json(target/'FIELD_DEFINITIONS.json',{'schema_version':'paper_rebuild.clean5.parity.evaluation_fields.v2',
+        'original_statistics_source':'canonical541.offline_eval_aggregate unchanged axis/norm helpers',
+        'window':[66.,340.],'segment_policy':'C00 full only; no degradation or secondary windows',
+        'pairwise_policy':'Within identical variant and evaluator contract only; F03-F01,A04-F01,A04-F03',
+        'pairwise_metrics':list(METRICS),'unavailable_policy':'No endpoint substitution; missing remains UNAVAILABLE',
+        'runtime_policy':'Native solver_runtime_seconds preserved; sealed wrapper runtime recorded separately, never substituted',
+        'body_frame_policy':'Own NAV yaw exact-epoch rotation; population standard deviation ddof=0',
+        'covariance_policy':'v3 position uncertainty not propagated; no v3 transformed consistency claim',
+        'statistical_inference':'UNAVAILABLE_SINGLE_C00_CASE'})
+
 def evaluate_ladder(*, registry, stage_root, contract, run_records, code_commit, baseline_median_m):
     stage=Path(stage_root); settings=contract['evaluation']
     if settings['v2_sha256']!=EVALUATOR_SHA256 or list(settings['window_seconds'])!=[66.,340.] or settings['base_time']!=1772784000:
@@ -260,13 +325,7 @@ def evaluate_ladder(*, registry, stage_root, contract, run_records, code_commit,
                     transformed=transform_nav(nav,baseline_median_m)
                     derived=evalroot/'v3'/'NAV_INPUTS'/record['run_id'];derived.mkdir(parents=True,exist_ok=False)
                     actual_nav=derived/'EVALUATOR_INPUT.nav'
-                    # Preserve every non-position token byte; write LLH with roundtrip precision.
-                    lines=navpath.read_text().splitlines(); numeric=[line for line in lines if line.strip() and not line.lstrip().startswith('#')]
-                    if len(numeric)!=len(transformed): raise ValueError('NAV row parser disagreement')
-                    with actual_nav.open('x') as handle:
-                        for original,changed in zip(numeric,transformed):
-                            tokens=original.split();tokens[2:5]=[format(x,'.17g') for x in changed[2:5]]
-                            handle.write(' '.join(tokens)+'\n')
+                    write_transformed_nav(navpath,actual_nav,transformed)
                     write_json(derived/'TRANSFORM_MANIFEST.json',{'evaluator_contract':'evaluator_contract_v3',
                         'input_nav':str(navpath),'input_sha256':source_hash,'output_sha256':sha256_file(actual_nav),
                         'baseline_median_m':baseline_median_m,'lever_frd_m':[.03,.03-.5*baseline_median_m,-.30],
@@ -315,33 +374,7 @@ def evaluate_ladder(*, registry, stage_root, contract, run_records, code_commit,
             print(f"Parity {version} {record['run_id']}: {row['evaluation_status']}",flush=True)
         target=out if version=='v2' else out/'v3'
         attempt=_resolve(settings['canonical_attempt'],registry);headers=canonical_headers(attempt)
-        for n,row in enumerate(rows,2):row['result_source_row']=str(target/'UNIQUE_EVALUATION_RESULTS.csv')+':'+str(n)
-        # Every row retains explicit original-source reference in addition to this table's identity.
-        for row in rows:
-            row['frozen_source_row']=row.get('source_row');row['source_row']=row['result_source_row']
-        tables={'UNIQUE_EVALUATION_RESULTS.csv':rows,'LOGICAL_EVALUATION_RESULTS.csv':rows}
-        available=[r for r in rows if r['evaluation_status']=='COMPLETED']
-        for name in ('UNIQUE_METHOD_SUMMARY.csv','LOGICAL_METHOD_SUMMARY.csv'):
-            tables[name]=canonical._summary_rows(available,('variant_id','method_id'),canonical._numeric_fields(available)) if available else []
-        tables['PAIRWISE_CASE_LEVEL.csv'],tables['PAIRWISE_SUMMARY.csv']=pairwise_tables(rows)
-        tables['MODULE_ACTION_SUMMARY.csv']=canonical._summary_rows(available,('variant_id','method_id'),[m for m in canonical.MODULE_SCALARS if any(m in r for r in available)]) if available else []
-        tables['RUNTIME_SUMMARY.csv']=canonical._summary_rows(rows,('variant_id','method_id'),['solver_runtime_seconds','wrapper_runtime_seconds','evaluation_runtime_seconds']) if rows else []
-        tables['METRIC_COVERAGE_REPORT.csv']=canonical._coverage_report(rows)
-        for coverage in tables['METRIC_COVERAGE_REPORT.csv']:
-            if coverage['metric_name'] in METRICS:
-                coverage['source_fields']='exact frozen evaluator error_series.csv; Canonical unchanged statistics'
-        for name,table in tables.items():_csv(target/name,table,headers[name])
-        _csv(target/'BODY_FRAME_BIAS.csv',bias)
-        _csv(target/'WINDOW_SEGMENT_SUMMARY.csv',full_window_segments(rows),SEGMENT_FIELDS)
-        write_json(target/'FIELD_DEFINITIONS.json',{'schema_version':'paper_rebuild.clean5.parity.evaluation_fields.v2',
-            'original_statistics_source':'canonical541.offline_eval_aggregate unchanged axis/norm helpers',
-            'window':[66.,340.],'segment_policy':'C00 full only; no degradation or secondary windows',
-            'pairwise_policy':'Within identical variant and evaluator contract only; F03-F01,A04-F01,A04-F03',
-            'pairwise_metrics':list(METRICS),'unavailable_policy':'No endpoint substitution; missing remains UNAVAILABLE',
-            'runtime_policy':'Native solver_runtime_seconds preserved; sealed wrapper runtime recorded separately, never substituted',
-            'body_frame_policy':'Own NAV yaw exact-epoch rotation; population standard deviation ddof=0',
-            'covariance_policy':'v3 position uncertainty not propagated; no v3 transformed consistency claim',
-            'statistical_inference':'UNAVAILABLE_SINGLE_C00_CASE'})
+        write_version_tables(target=target,rows=rows,bias=bias,headers=headers)
         rows_by_version[version]=rows;bias_by_version[version]=bias
     decomposition=build_decomposition(rows_by_version['v2'],rows_by_version['v3'])
     _csv(out/'PARITY_DECOMPOSITION.csv',decomposition)
