@@ -1,0 +1,519 @@
+schema_version: paper_rebuild.clean5.parity_p04.v1
+task: P-04
+starting_commit: 0bd86856dac706989f95cc8c3424be49babc05a9
+authorization:
+  scope: Read-only BY2 vertical diagnostics and eight CLEAN5_PARITY_* BY2H/BY2O solves; preserve main evidence chain
+  V3_human_statement: VRTK 单元安装在两根天线正中间，天线相位中心与单元参考点等高。设备 TF：POI→VRTK 零平移、单位旋转。
+  V2n_execution_authorized: false
+p04:
+  stage_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/12_PARITY_GENERALIZATION
+  diagnosis_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/11_VERTICAL_DIAGNOSIS
+  execution_ready: false
+  pending_gate: BY2O V1 row344 same-iTOW RV versus frozen RV byte equality; human clarification pending
+  run_order:
+  - - BY2H
+    - V1
+    - A04
+  - - BY2H
+    - V2
+    - A04
+  - - BY2H
+    - V2is
+    - A04
+  - - BY2H
+    - V2is
+    - F03
+  - - BY2O
+    - V1
+    - A04
+  - - BY2O
+    - V2
+    - A04
+  - - BY2O
+    - V2is
+    - A04
+  - - BY2O
+    - V2is
+    - F03
+  sequences:
+    BY2H:
+      dataset_id: BY2H
+      data_mode: real_by2h_raw
+      original_configs:
+        F01:
+          runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/03_RUNTIME_CONFIGS_V2/F01.yaml
+          runtime_config_sha256: f90f14e6079b4a32b1c1cf55825b12893928fa448d76618925a0979db284c294
+        F03:
+          runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/03_RUNTIME_CONFIGS_V2/AB0000.yaml
+          runtime_config_sha256: 9b50600226332691bf793c04cad59ac8469bc4eacd2003290a060b34d27adcb8
+        A04:
+          runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/03_RUNTIME_CONFIGS_V2/AB1011.yaml
+          runtime_config_sha256: 962a1db80cfb6c48714d42a12b3250530ff46c6d3836a7c3a8cd6a2c0e2379b1
+      provider_inputs:
+        imupath:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/02_PROVIDER_FREEZE/FINAL_V23_CLEAN_FRESH.imu
+          sha256: 9702f053553c0d9b2778602daf585901a43aad6949a977375a3374024c6a0921
+        gnsspath:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/02_PROVIDER_FREEZE/FINAL_V23_CLEAN_FRESH.gnss
+          sha256: fdec97d92f3bba8229b01fbffcfab5f2d9a754e48a39f46b279e53f6e5d8cfcb
+        raw_doppler_factor_path:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/02_PROVIDER_FREEZE/RAW_DOPPLER_VELOCITY.csv
+          sha256: d5c4a42790f2034423d1a3e060d37488ba01341b423933074c11471fcdbac21c
+        go2_attitude_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/02_PROVIDER_FREEZE/GO2_ROLL_PITCH_PRIOR.csv
+          sha256: 0406f137e167f1cc583b54a0cafdfcab95a2f8412472d9e928b2ca3ed6c7c666
+        go2_horizontal_velocity_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/02_PROVIDER_FREEZE/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+          sha256: 0e239e37afba207b486730e2dc7b2aca86ddc5d311eb193f0e791f3598cd42b7
+      provider_manifest:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/02_PROVIDER_FREEZE/PROVIDER_MANIFEST.json
+        sha256: 1e12f3935e9552a9e362d6f4d1d572afb3cf708657ee0660fbbf99d390e29a91
+      a1_gate:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/02_PROVIDER_FREEZE/YAW_PHYSICAL_GATE.json
+        sha256: 24888cab1cac488737ed1677c38904a14974f7a586a348a6fc90f51370116fc3
+      a1_baseline_column: per_epoch.baseline_length_m
+      a1_epoch_column: per_epoch.time + base_time
+      frozen_sequence_contract:
+        path: <CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_BY2H_SEQUENCE_CONTRACT.yaml
+        sha256: 64bf78d5d4241294922fbc6c18eaeb8ad4c2e40663ba8e5306ab67e1d07d4e19
+      runtime_config_audit:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/03_RUNTIME_CONFIGS_V2/RUNTIME_CONFIG_AUDIT.json
+        sha256: fba19b17d7c4bd20f1b879a6b2436ebbfdd8028a88ea1a6fcfd67cb0e1680b36
+      frozen_sequence_contract_v2_sha256: 64bf78d5d4241294922fbc6c18eaeb8ad4c2e40663ba8e5306ab67e1d07d4e19
+      base_time: 1772784000.0
+      window_seconds:
+      - 413.0
+      - 683.0
+      v1_rv_policy: STRICT_FROZEN_VALUES_AND_SAME_ITOW; missing outside window invalid only
+      scale_calibration:
+        s: 1.03152660049411
+        g_local_mps2: 9.801554730450597
+        mean_norm_first1000_mps2: 9.501989309587916
+        source: first 1000 own-sequence raw accelerometer norms; frozen own-sequence V2 initial latitude/ellipsoidal
+          height; NGA/AHRS formula
+      baseline_median_m: 0.35418777593777223
+      half_baseline_m: 0.17709388796888612
+      baseline_definition:
+        rule: numpy.median over all frozen per_epoch.baseline_length_m values; even count uses arithmetic mean of
+          middle two
+        frozen_gate_summary_rule: paper_rebuild/providers.py:80-85 selects sorted[round(.5*(n-1))]
+        frozen_gate_summary_unchanged: true
+      input_preflight:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/12_PARITY_GENERALIZATION/00_PREFLIGHT/BY2H_PROVIDER_PREFLIGHT.json
+        sha256: 5a53bf75d1602ec489e5ca28b9e56648ec8ace3ac8e0e40425409d116febfdae
+      input_preflight_status: PASS_INPUT_GATES
+      external_5s_calibration:
+        start_time_unix_seconds: 1772784394.943074
+        end_time_unix_seconds: 1772784399.943074
+        sample_count: 1090
+        used_preregistered_initial_interval: true
+        gyro_bias_frd_radps:
+        - -0.008096008750272556
+        - -0.0025580734041023936
+        - -0.0011801004990899466
+        mean_specific_force_frd_mps2:
+        - -0.1486942030181852
+        - -0.31791850521751397
+        - -9.495204820581957
+        gyro_norm_median_radps: 0.015177633787261342
+        acceleration_norm_median_mps2: 9.50211727878478
+        local_gravity_mps2: 9.801554725997004
+        max_internal_gap_seconds: 0.021987199783325195
+      reference:
+        summary:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/08_AGGREGATE/FINAL_EVALUATION_SUMMARY.json
+          sha256: eaa16b3a7d133ee55ef9a7e055cc20586a6c97383949ac758d9dea674729a56e
+        results:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/08_AGGREGATE/UNIQUE_EVALUATION_RESULTS.csv
+          sha256: 98734e2c580c9aef1afffaa3c24b12d14c1b5d9f86cb56bca991cea2e6f1dab3
+        logical_registry:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/05_OUTPUT_SEAL_V2/LOGICAL_RESULT_TERMINAL_REGISTRY.csv
+          sha256: 5d34556196426e7af43f42420fad5baf1bd6462a6a96ab2cc978b6be27fba624
+        output_seal:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/05_OUTPUT_SEAL_V2/OUTPUT_SEAL.json
+          sha256: e34f283f753a2e564379bcace85e383d407e8b84b9309f9163f8de4a818374f5
+        V0_A04:
+          nav:
+            path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/04_SOLVER_RUNS_V2/BY2H_A04_AB1011/KF_GINS_Navresult.nav
+            sha256: e3d1831499bef8ac9f6d3a5d74c7a59559931ee103853e45d14520636078463f
+          std:
+            path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/04_SOLVER_RUNS_V2/BY2H_A04_AB1011/KF_GINS_STD.txt
+            sha256: 2e8cdfdc5cc9c7347d859610cf8a9910b2f4d9b8423d29aa57fd90770dd847bc
+          manifest:
+            path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/04_SOLVER_RUNS_V2/BY2H_A04_AB1011/RUN_MANIFEST.json
+            sha256: 69482980c058c5c09d6250220a9b8fc68fd407005bac75b221295d2a9a6d237e
+          error_dir: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/07_OFFLINE_EVALUATION/PER_RUN/BY2H_A04_AB1011
+          error_files:
+          - path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/07_OFFLINE_EVALUATION/PER_RUN/BY2H_A04_AB1011/error_series.csv
+            sha256: ae390e1bd7c992b2a0a271920d994a3867d390d43dc9f6370c90ec505331fc37
+          - path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/07_OFFLINE_EVALUATION/PER_RUN/BY2H_A04_AB1011/error_series.csv.gz
+            sha256: ad7c8092de0a7278ebf6d84007cb9ea6382f7a8749649bfe005cb355e165de8a
+      execution_ready: true
+      decomposition_confound: 'HPPOSECEF versus status common-epoch max norm exceeds 5 mm: source difference retained;
+        rate_point_IMU is a combined intervention, not a pure causal attribution'
+      A1_outside_window_missing_HP_keys:
+      - 461218000
+      - 461219000
+    BY2O:
+      dataset_id: BY2O
+      data_mode: real_by2o_raw
+      original_configs:
+        F01:
+          runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/03_RUNTIME_CONFIGS_V2/F01.yaml
+          runtime_config_sha256: 3bfacc151ae2728756a6749337dc4a3d0a085494bdb0a271df99f2a27cd7ef35
+        F03:
+          runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/03_RUNTIME_CONFIGS_V2/AB0000.yaml
+          runtime_config_sha256: 93764e1002ccf71a0d28ca5a32c721d580c056c41e88919ab937836e49841f7d
+        A04:
+          runtime_config: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/03_RUNTIME_CONFIGS_V2/AB1011.yaml
+          runtime_config_sha256: c4ac31c57d89cb309cb2bb6c418f987ef57c84601e843cad93d0d608e9bf6d3e
+      provider_inputs:
+        imupath:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/02_PROVIDER_FREEZE/FINAL_V23_CLEAN_FRESH.imu
+          sha256: 6e8344dda6a90239f3fcfceea1bf3b7a298f2a93250f00dd1fc11e046257b37d
+        gnsspath:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/02_PROVIDER_FREEZE/FINAL_V23_CLEAN_FRESH.gnss
+          sha256: b036db8a1c8a5a5a30cd27ebc0310d8a93e0ac6560f1fb80712b2b67df26c3cf
+        raw_doppler_factor_path:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/02_PROVIDER_FREEZE/RAW_DOPPLER_VELOCITY.csv
+          sha256: dd9b178b37149eb3d97bd586bf078b1e11cf5e43f8771cbc38c9c21bcd6101f5
+        go2_attitude_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/02_PROVIDER_FREEZE/GO2_ROLL_PITCH_PRIOR.csv
+          sha256: 744394fb08ed8012215da3e89d228640cec663399739db1b65cf692dd3501f40
+        go2_horizontal_velocity_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/02_PROVIDER_FREEZE/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+          sha256: 450733cad0289f4694e49c78594c31b2366cb15a0ec872f21a066fd5718bc604
+      provider_manifest:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/02_PROVIDER_FREEZE/PROVIDER_MANIFEST.json
+        sha256: 287ffa8dfd407373deb9267edd96be80117c8e6663d339984045f17f73698a44
+      a1_gate:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/02_PROVIDER_FREEZE/YAW_PHYSICAL_GATE.json
+        sha256: 497dd87fcbcfd6ae3ead696adaee8af5744831b22d8e98e9e9911bfe9ec50303
+      a1_baseline_column: per_epoch.baseline_length_m
+      a1_epoch_column: per_epoch.time + base_time
+      frozen_sequence_contract:
+        path: <CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_BY2O_SEQUENCE_CONTRACT.yaml
+        sha256: bf42b2bee9ed96bd81d479bbb8b5533c58c6fce2ddbb5d9eabdeaf60cfd1144d
+      runtime_config_audit:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/03_RUNTIME_CONFIGS_V2/RUNTIME_CONFIG_AUDIT.json
+        sha256: 600ba31927d873eefbd0c23c9e30de7ff635fc868a310ff1613e8e97a8370f61
+      frozen_sequence_contract_v2_sha256: bf42b2bee9ed96bd81d479bbb8b5533c58c6fce2ddbb5d9eabdeaf60cfd1144d
+      base_time: 1772780400.0
+      window_seconds:
+      - 3186.0
+      - 3563.0
+      v1_rv_policy: STRICT_FROZEN_VALUES_AND_SAME_ITOW; missing outside window invalid only
+      scale_calibration:
+        s: 1.030101871899615
+        g_local_mps2: 9.80155452110735
+        mean_norm_first1000_mps2: 9.515131258845559
+        source: first 1000 own-sequence raw accelerometer norms; frozen own-sequence V2 initial latitude/ellipsoidal
+          height; NGA/AHRS formula
+      baseline_median_m: 0.35013463864843675
+      half_baseline_m: 0.17506731932421837
+      baseline_definition:
+        rule: numpy.median over all frozen per_epoch.baseline_length_m values; even count uses arithmetic mean of
+          middle two
+        frozen_gate_summary_rule: paper_rebuild/providers.py:80-85 selects sorted[round(.5*(n-1))]
+        frozen_gate_summary_unchanged: true
+        frozen_gate_summary_order_statistic_m: 0.34983557676424676
+      input_preflight:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/12_PARITY_GENERALIZATION/00_PREFLIGHT/BY2O_PROVIDER_PREFLIGHT.json
+        sha256: 3d1da1843017412f1c227c57ec34c8996c70bdf948c0b1efc7b3acef5c06ab2c
+      input_preflight_status: BLOCKED_V1_RV_CONFLICT
+      external_5s_calibration:
+        start_time_unix_seconds: 1772783501.5570683
+        end_time_unix_seconds: 1772783506.5570683
+        sample_count: 1035
+        used_preregistered_initial_interval: true
+        gyro_bias_frd_radps:
+        - -0.007913833091615875
+        - -0.002836379668625836
+        - -0.001496646090678174
+        mean_specific_force_frd_mps2:
+        - 0.3906388748671122
+        - -0.4288559686103404
+        - -9.497390441587324
+        gyro_norm_median_radps: 0.015289418986737115
+        acceleration_norm_median_mps2: 9.515264426058174
+        local_gravity_mps2: 9.801554516646359
+        max_internal_gap_seconds: 0.026026248931884766
+      V1_RV_conflict_status: PENDING_HUMAN_ANSWER
+      V1_RV_conflicts:
+      - index: 344
+        itow_ms: 460704000
+        header_time: 3485.999868631363
+        sys_time: 3486.232449
+        inside_window: true
+        frozen_RV_tokens:
+        - '-0.045000'
+        - '1.196000'
+        - '-0.025000'
+        same_itow_RV_tokens:
+        - '0.029000'
+        - '1.327000'
+        - '0.003000'
+      reference:
+        summary:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/08_AGGREGATE/FINAL_EVALUATION_SUMMARY.json
+          sha256: d7df2bc17b884b3536dbba25c9593874c7b1886d7a1da54de57fe6b9d9282fd4
+        results:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/08_AGGREGATE/UNIQUE_EVALUATION_RESULTS.csv
+          sha256: aa68bc4ba865842eb37358b9c4ccea3e230233e8602ec1610b390f8ffc2c4ced
+        logical_registry:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/05_OUTPUT_SEAL_V2/LOGICAL_RESULT_TERMINAL_REGISTRY.csv
+          sha256: ebe166534d91e3339bed722218ad9ec3145544464c9106442037d405ca19aa91
+        output_seal:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/05_OUTPUT_SEAL_V2/OUTPUT_SEAL.json
+          sha256: ab037dadf7725bb47022ee0a86d9c0ee8f8b45a87acc152270bebc23c5d95285
+        V0_A04:
+          nav:
+            path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/04_SOLVER_RUNS_V2/BY2O_A04_AB1011/KF_GINS_Navresult.nav
+            sha256: 0b69b02c25739b3a48a25bad3194e9e206f8d449bd3cb49ce0b4796af13bac91
+          std:
+            path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/04_SOLVER_RUNS_V2/BY2O_A04_AB1011/KF_GINS_STD.txt
+            sha256: 037c64ba5370d5f4744f0eb4926732471c39a718a103043c6479a7ad6edb7b45
+          manifest:
+            path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/04_SOLVER_RUNS_V2/BY2O_A04_AB1011/RUN_MANIFEST.json
+            sha256: 943729b0c3700f47a417f32e0b554c92b2ce8e7ec96080c6a3829f7b4615b5b6
+          error_dir: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/07_OFFLINE_EVALUATION/PER_RUN/BY2O_A04_AB1011
+          error_files:
+          - path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/07_OFFLINE_EVALUATION/PER_RUN/BY2O_A04_AB1011/error_series.csv
+            sha256: 3037c0269f32c6cae3f3640bc5af5dec874b5832ab084abe0104343aeb50e252
+          - path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/07_OFFLINE_EVALUATION/PER_RUN/BY2O_A04_AB1011/error_series.csv.gz
+            sha256: 13fa20cb2fc89e39de1f61177f7485ec0477c1cf1fad70a1dddefb17a3250ae0
+        occlusion_window:
+          path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/01_SEQUENCE_CONTRACT/OCCLUSION_WINDOW.json
+          sha256: 4ffabd12c71ef08ec3bb43bb5969fe97883b657c6d68aec2fc827f1fb56e349f
+      execution_ready: false
+      A1_outside_window_missing_HP_keys:
+      - 460361000
+  diagnosis:
+    sources:
+    - run_id: V0_A04
+      error_series:
+        path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/12_OFFLINE_EVALUATION/RUN_00006/error_series.csv.gz
+        sha256: f6cb2af49f8897488453d02568dfa0b76dd9aa55e1c0c610d9db139499ea0e0a
+      nav:
+        path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/10_INTERNAL_ABLATION_RUNS/RUN_00006/KF_GINS_Navresult.nav
+        sha256: 3463c03dbdebe3d21e7e7e8fb50e20a8c9e7eeb5b68a5f4f1c335ca024a33923
+      std:
+        path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/10_INTERNAL_ABLATION_RUNS/RUN_00006/KF_GINS_STD.txt
+        sha256: 849a6ed7641a2443a8495480e3429d9669a705b0a5c8277486ec2fc3188097f3
+      updates:
+        path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/10_INTERNAL_ABLATION_RUNS/RUN_00006/PORT_GNSS_UPDATE_TRACE.csv
+        sha256: 968416365a12d79c82e2e8ac000ed850acf581fb94f560b1db756731fc6f2b5a
+      manifest:
+        path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/10_INTERNAL_ABLATION_RUNS/RUN_00006/RUN_MANIFEST.json
+        sha256: b5534845478dc4f34e3c397f716768ab1d1b289866f20172e32043169cce3dd4
+    - run_id: V2_A04
+      error_series:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/07_OFFLINE_EVALUATION/v2/PER_RUN/CLEAN5_PARITY_V2_A04/error_series.csv.gz
+        sha256: dc3ff7a3361953c45a5e12304ea465702ac7ac749c377915eb8f6834eb2b7eba
+      nav:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/03_PARITY_RUNS/CLEAN5_PARITY_V2_A04/KF_GINS_Navresult.nav
+        sha256: 085d1af5c67e951ca8e806d5a5cc63f2e324cff86300351dfee613f1a0b79b97
+      std:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/03_PARITY_RUNS/CLEAN5_PARITY_V2_A04/KF_GINS_STD.txt
+        sha256: 47312beb497e7478674d767b92dad58544e7c0ee795a91f965b8f4432e98f8f6
+      updates:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/03_PARITY_RUNS/CLEAN5_PARITY_V2_A04/PORT_GNSS_UPDATE_TRACE.csv
+        sha256: a464e820093e0df2a19e28994fe717121db98f4e0911a21d19e4d3b96f499c51
+      manifest:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/03_PARITY_RUNS/CLEAN5_PARITY_V2_A04/RUN_MANIFEST.json
+        sha256: d827070de3178f5e4e324d438445e46c4b7d2d0808353e52d87fdbe32bce664a
+    - run_id: V2is_A04
+      error_series:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/07_OFFLINE_EVALUATION/v2/PER_RUN/CLEAN5_PARITY_V2is_A04/error_series.csv.gz
+        sha256: 0ac27e8d7cbe57f9d261ed0cb9ac20a7bd9a652414db33883d5b0913909cd30c
+      nav:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/03_PARITY_RUNS/CLEAN5_PARITY_V2is_A04/KF_GINS_Navresult.nav
+        sha256: 6d64492c9b514f7294a274cf72e42f898b037479d8d96c1fb9e36571f4f19924
+      std:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/03_PARITY_RUNS/CLEAN5_PARITY_V2is_A04/KF_GINS_STD.txt
+        sha256: d7fa73dce6642ae61828bc953a24db45a9c4581f99abe26553eb10fe94ac5fee
+      updates:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/03_PARITY_RUNS/CLEAN5_PARITY_V2is_A04/PORT_GNSS_UPDATE_TRACE.csv
+        sha256: fca9ddcbcb3434f6a87d4a959196e1dfb2b9998893646f71f959d0498f67ec1a
+      manifest:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/03_PARITY_RUNS/CLEAN5_PARITY_V2is_A04/RUN_MANIFEST.json
+        sha256: 29e3108287143317720be89c81d58ecc4769d495e6158a0b0ac6dce5bf81b5fb
+    - run_id: F02_V0
+      error_series:
+        path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/12_OFFLINE_EVALUATION/RUN_00002/error_series.csv.gz
+        sha256: cb0fd3b5f0c6bca17bc65f37620f1a0076118116955a673c7ea6be6520ca8844
+      nav:
+        path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/08_FULL_ALGORITHM_RUNS/RUN_00002/KF_GINS_Navresult.nav
+        sha256: 9eab6e1849f315e14e7d268f9eba277746f4d8737953d13de34edd787c629560
+      std:
+        path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/08_FULL_ALGORITHM_RUNS/RUN_00002/KF_GINS_STD.txt
+        sha256: 53044658d22e13901b0a6752016d58d51174ce9281bc4542c06a9088a6fb60f4
+      updates:
+        path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/08_FULL_ALGORITHM_RUNS/RUN_00002/PORT_GNSS_UPDATE_TRACE.csv
+        sha256: 8e92ae6d7ffa3b4bdea4d6449572a41ffd6433658591907e3465381879051efa
+      manifest:
+        path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/08_FULL_ALGORITHM_RUNS/RUN_00002/RUN_MANIFEST.json
+        sha256: bb181ba9be35be309e9e3db3949254b1a0b50dff1aa0d5a4d47614c1a7a6f334
+    - run_id: EXT05C
+      error_series:
+        path: <CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/06_EXT05_PAVLASEK_TWO_RECEIVER/C00/POST_NATIVE_TRACE_EVALUATION/EXT05C_PAVLASEK_SINGLE_RECEIVER_IEKF/EXACT_EVALUATOR_OUTPUT/error_series.csv
+        sha256: 94838d39aaa6718a78e95434c008543b9d6fe92e26671b15ef22afd3d81a293b
+      nav:
+        path: <CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/06_EXT05_PAVLASEK_TWO_RECEIVER/C00/POST_NATIVE_TRACE_EVALUATION/EXT05C_PAVLASEK_SINGLE_RECEIVER_IEKF/EXACT_EVALUATOR_INPUT.nav
+        sha256: 915192d6fcefaf7bef33c4028b571d1b723f7e0759063e2955aebd3d1ee7ace8
+      std: null
+      updates: null
+      manifest: null
+    - run_id: LC01
+      error_series:
+        path: <CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/06_EXT05_PAVLASEK_TWO_RECEIVER/C00/POST_NATIVE_TRACE_EVALUATION/EXT05A_PAVLASEK_TWO_RECEIVER_IEKF/EXACT_EVALUATOR_OUTPUT/error_series.csv
+        sha256: 0229784a13c0b763d63405e4d30acd70dbb04ad438b3a4fcbce0481c8f030277
+      nav:
+        path: <CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/06_EXT05_PAVLASEK_TWO_RECEIVER/C00/POST_NATIVE_TRACE_EVALUATION/EXT05A_PAVLASEK_TWO_RECEIVER_IEKF/EXACT_EVALUATOR_INPUT.nav
+        sha256: ccd25c2e1309ba2870e57e2208f476a6b48eaba69f0d038f26be2f168bb2c695
+      std: null
+      updates: null
+      manifest: null
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/10_INTERNAL_ABLATION_RUNS/RUN_00006/CANONICAL541_RUNTIME_CONFIG.yaml
+      sha256: 8f2b51509ba7d811e2f42dea6acf199f6206260ca8fbd811bd1d32bb730669c1
+    source_scope: header/hash and existing lineage only; no A error statistics computed
+    trace:
+      path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv
+      sha256: ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c
+    static_noise:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/11_VERTICAL_DIAGNOSIS/00_PREREGISTRATION/STATIC_NOISE.json
+      sha256: 00935a983f014429fa003b7badd638931b78c6e3f747cf03f46648477f9c2326
+    base_time: 1772784000
+    window_seconds:
+    - 66
+    - 340
+    evaluator_invocations: 0
+    solver_invocations: 0
+    rules:
+      spectrum:
+        support: median-native-dt uniform grid; diagnostic linear interpolation only; record native gaps and grid
+          interpolation count
+        acf: mean removed, biased FFT autocorrelation normalized by lag zero; linearly interpolate first nonpositive
+          crossing
+        fft: mean removed Hann periodogram; top five positive-frequency local maxima sorted by power; dominant period
+          is first peak; no physical-period assertion
+      update_phase: Actual position_update==1 GNSS times; complete consecutive update intervals only; phase [0,1)
+        in ten equal bins; report excluded edge support
+      bands: Centered 10 s arithmetic mean, partial edge windows retained; population variances; sum variances and
+        twice slow/residual covariance separately; do not assume orthogonality
+      correlation: Pearson using exact frozen NAV/error timestamps and native trace differences interpolated without
+        extrapolation; no shift or sign search
+      trace_velocity: Differentiate native irregular trace timestamps first via numpy.gradient, central interior
+        and first-order endpoints; height derivative Up; fixed first-point ECEF tangent N/E derivative; DERIVED_TRACE_DIFFERENCE_DIAGNOSTIC_ONLY,
+        not independent velocity truth
+      std: 'V0/V2 A04 only: existing v2 errors; time col0, position N/E/D cols1/2/3, velocity N/E/D cols4/5/6, attitude
+        degrees cols7/8/9; report invalid std count; source file_saver.cpp:275-326'
+      overconfident:
+        median_height_std_m_max: 0.1
+        height_rmse_m_min: 0.1
+        median_abs_height_error_over_std_strict_min: 3
+      classification_priority:
+      - FILTER_OVERCONFIDENT
+      - UPDATE_SAWTOOTH
+      - ATTITUDE_COUPLED
+      - SLOW_WANDER
+      - MEASUREMENT_NOISE
+      - UNDETERMINED
+      classification_thresholds:
+        UPDATE_SAWTOOTH: range of ten phase-bin mean(abs(err_u))/std(err_u) >= 0.5 and phase-bin trend Pearson >=
+          0.7
+        ATTITUDE_COUPLED: max abs Pearson(err_u,roll_err or pitch_err) >= 0.5
+        SLOW_WANDER: Var(centered10s mean)/Var(err_u) >= 0.5
+        MEASUREMENT_NOISE: abs Pearson(err_u,NAV Up velocity) >= 0.5 and std(PVT velD - native trace-derived Down)
+          >= 0.1 m/s
+      innovation: Existing vector innovations and predicted covariance only; missing fields UNAVAILABLE; no substitute
+        GNSS-minus-NAV or residual norm as signed innovation
+      noise_proxy: First 1000 complete own raw BY2 frames; FLU to FRD and [-1,0,0] deg mounting; population force/gyro
+        std times sqrt(mean integer-nanosecond dt); multiply 60 for per sqrt-hour, gyro additionally 180/pi; report-only
+        proxy includes motion and colored effects
+      labels_boundary: Descriptive operational labels only; no causal claim or further correction
+  evaluator:
+    path: <CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py
+    sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  reference_by2_summary:
+    path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/08_AGGREGATE/FINAL_EVALUATION_SUMMARY.json
+    sha256: d82fe2c515b22289fec5a1ac6bd58bb291da9a582e7cfa4fa2dd2761e2970b15
+  variants:
+    V0: Frozen own-sequence A04 solver and v2 results reused; v3 postprocessing once for H/O; BY2 v2/v3 reused from
+      P03
+    V1: Own status position 1 Hz at header epoch, same-iTOW PVT RV, unchanged non-time V0 measurement tokens; unavailable
+      leading RV only outside window invalid; BY2O conflict blocks execution pending human instruction
+    V2: Same P02 HPPOSECEF 5 Hz iTOW ECEF-to-LLH, same-epoch PVT hAcc/vAcc and RV; A1 validity only at corresponding
+      frozen epoch; record source/scheduling differences
+    V2is: V2 GNSS unchanged; own raw first1000 scale s and own local normal gravity; P03 maintained external preprocessing
+      and previous-sample ZOH increments on original retained row endpoints; source external frozen runner text
+      remains UNAVAILABLE, no exact estimator reproduction claim
+  parameters:
+    rule: Own frozen sequence contract v2 initial conditions/base/window and profile parameter lines byte-preserved;
+      equality within own sequence/profile; no cross-sequence initial-state equality assertion
+    allowed_config_changes:
+    - input paths
+    - 18-column format flag
+    - output paths
+    - identity keys
+    executable_sha256: 9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f
+    scientific_solver_commit: 64c81965b17ef1bf8ae2ce3e4dd7b1ae35110b00
+    frozen_parameter_hash_required_equal: true
+  v3:
+    label: evaluator_contract_v3
+    formula: POI_est = p_IMU + C_b^n * [0.03, 0.03 - 0.5*b_med, -0.30]
+    rotation: Frozen NAV roll/pitch/yaw, RzRyRx
+    baseline: Own frozen A1 per_epoch.baseline_length_m standard median, including middle-two average for even count;
+      frozen gate summary preserved
+    output: v3/ separately; never replaces v2; no solver rerun
+    full_covariance_transport: UNAVAILABLE; no v3 consistency assertion
+    fitting_used: false
+  decomposition:
+    time: V0 A04(v2) - V1 A04(v2)
+    rate_point_IMU: V1 A04(v2) - V2is A04(v3)
+    module: V2is A04(v3) - V2is F03(v3)
+    secondary: Same-version time/rate+IMU/module rows for v2 and v3 separately; do not label same-version combined
+      term as including point change
+    metrics:
+    - H_RMSE_m
+    - 3D_RMSE_m
+    - Up_RMSE_m
+    - yaw_RMSE_deg
+    each_endpoint_source_row_required: true
+  V2n_candidate:
+    trigger: V0 or V2 A04 meets OVERCONFIDENT rule AND any-axis implied/frozen VRW or ARW ratio >=10 or <=0.1
+    values_if_triggered:
+      vrw:
+      - 0.1906111905946932
+      - 0.1503662111562402
+      - 0.14280379205396676
+      arw:
+      - 1.684236476785467
+      - 1.8257889452769405
+      - 2.3839628953962846
+    input_calibration_window: Same first1000 raw frames as frozen gyro bias, no trace calibration
+    register_only: true
+    maximum_solver_invocations: 0
+    factor10_input_only_preflight: false
+  execution_rules:
+    detached_snapshot: First code/contract commit pushed and exact local/remote equality before execution
+    serial_solver_limit: 8
+    new_evaluator_invocation_limit: 18
+    raw_checkpoints: Selected frozen raw-lock rows pre/post generation and pre/post solver; exact hashes
+    provider_strace: No trace/.bag/.fpl; only registered raw observations; only own provider/audit writes
+    solver_strace: Zero raw/trace/.bag/.fpl; only own run output writes
+    seal: Hash every new solver/scheduling artifact before evaluation; verify NAV/STD/provider hashes before/after;
+      stop first gate failure; zero retries
+    counters: Derive native attempts from actual row validity and frozen scheduler, verify native counters
+    BY2O_segments: Frozen A04 occlusion intervals, no metric-selected window
+    data_mode: real_by2h_raw or real_by2o_raw; BY2 diagnostics existing frozen real errors
+    synthetic_data_used: false
+    semisynthetic_data_used: false
+    trace_used_online: false
+    per_case_tuning: false
+    output_only_correction: false
+    epoch_deleted_for_metric: false
+    old_runtime_input_count: 0
+    A1_validity_count: Equals frozen A1 epochs with corresponding HP epochs on runtime support; report full versus
+      matched counts and missing outside-window epochs separately
