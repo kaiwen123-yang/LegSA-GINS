@@ -1,0 +1,350 @@
+schema_version: paper_rebuild.clean5.input_parity_preregistration.v1
+contract_status: PREREGISTERED_BEFORE_ANY_VARIANT_SOLVE_WITH_EXPLICIT_UNAVAILABLE_GATES
+task: P-01
+human_authorization_date: '2026-09-08'
+starting_commit: aed61a4892ceda36327269fc865922127edc3310
+stage_id: CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF
+audit_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/00_PARITY_TARGET_AND_AUDITS
+authority: P-01 read-only sources, numerical input/reference audit, preregistration, commit and push; zero variant
+  solves
+current_execution_counts:
+  variant_solves: 0
+  solver_invocations: 0
+  provider_generations: 0
+  evaluator_invocations: 0
+future_provider_family_prefix: CLEAN5_PARITY_
+future_execution_authorized_by_this_file: false
+main_evidence_chain: 'READ_ONLY: providers, outputs, evaluation contracts and frozen v2 numbers unchanged'
+data_mode: real_by2_raw
+audit_sequence_data_modes:
+  BY2: real_by2_raw
+  BY2H: real_by2h_raw
+  BY2O: real_by2o_raw
+synthetic_data_used: false
+semisynthetic_data_used: false
+trace_used_online: false
+receiver_imu_as_body_imu: false
+final_v23_output_solver_input: false
+LegSA_output_solver_input: false
+per_case_tuning: false
+output_only_correction: false
+epoch_deleted_for_metric: false
+old_runtime_input_count: 0
+trace_role: offline reference-geometry audit only in P-01; 未用于任何拟合
+audit_sequences:
+- BY2
+- BY2H
+- BY2O
+future_variant_sequence: BY2
+audit_source_registry: configs/paper_rebuild/clean5/CLEAN5_SEQUENCE_REGISTRY.yaml
+raw_locks:
+  BY2: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv
+  BY2H_BY2O: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv
+frozen_runtime:
+  primary: A04
+  controls:
+  - F01
+  - F03
+  effective_configurations:
+    A04: AB1011
+    F01: single_antenna_EKF
+    F03: AB0000
+  scientific_solver_commit: 64c81965b17ef1bf8ae2ce3e4dd7b1ae35110b00
+  executable: <CODE_ROOT>/build/canonical541_cpp/legsa_v23_port_core_demo
+  executable_sha256: 9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f
+  window_seconds:
+  - 66.0
+  - 340.0
+  base_time: 1772784000.0
+  parameter_policy: Copy every frozen runtime parameter token byte-for-byte, including initialization, noise, thresholds,
+    module switches, lever, preprocessing and 66..340 window.
+  allowed_runtime_line_replacements:
+  - stage_id
+  - protocol_id
+  - case_id
+  - run_id
+  - run_label
+  - outputpath
+  - imupath
+  - gnsspath
+  - raw_doppler_factor_path
+  - go2_attitude_prior_path
+  - go2_horizontal_velocity_prior_path
+  transport_policy: Only listed identity/path lines may change, with an explicit before/after ledger. Scientific
+    tokens on every other line must be byte-identical. No reserialization of numeric parameters. All true identities
+    also recorded in the outer manifest. Any additional native provenance/counter requirement blocks execution;
+    never relax it silently.
+  original_configs:
+    F01:
+      run_id: RUN_00001
+      runtime_config: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/08_FULL_ALGORITHM_RUNS/RUN_00001/CANONICAL541_RUNTIME_CONFIG.yaml
+      runtime_config_sha256: 8f02e95e65668a4dc3e9654a195a2e9435a4e53a2a89afd2abae99926c19fae6
+      result_table: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/12_OFFLINE_EVALUATION/LOGICAL_EVALUATION_RESULTS.csv
+      result_table_line_including_header: 2
+      provider_inputs:
+        imupath:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FINAL_V23_CLEAN_CLEAN2R2A/FINAL_V23_CLEAN_FRESH.imu
+          sha256: a46fe2b50a5a99d550392f42e3952c871a7562c6d5625ea1b377691009ab643b
+        gnsspath:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FINAL_V23_CLEAN_CLEAN2R2A/FINAL_V23_CLEAN_FRESH.gnss
+          sha256: f4070ba795825cc243402e4acb551c62c6aad109e7040582bf57781226420e22
+        raw_doppler_factor_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/RAW_DOPPLER_VELOCITY.csv
+          sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+        go2_attitude_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/GO2_ATTITUDE_WEAK_PRIORS.csv
+          sha256: 2329770b8e9bc61c02fbf943e2e5fd9ea233d6fd8a3550f7a22410a536155c7a
+        go2_horizontal_velocity_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/GO2_HORIZONTAL_VELOCITY_WEAK_PRIORS.csv
+          sha256: f390c8e51f1bec1162c0f6c628ebbcd0449923cfbf9211bebb36004dc2b2aab0
+    F03:
+      run_id: RUN_00003
+      runtime_config: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/08_FULL_ALGORITHM_RUNS/RUN_00003/CANONICAL541_RUNTIME_CONFIG.yaml
+      runtime_config_sha256: 165f5e76ebd46c579fc3327c1b626703add04649d357b0fbd81b304ec3194726
+      result_table: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/12_OFFLINE_EVALUATION/LOGICAL_EVALUATION_RESULTS.csv
+      result_table_line_including_header: 1084
+      provider_inputs:
+        imupath:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FINAL_V23_CLEAN_CLEAN2R2A/FINAL_V23_CLEAN_FRESH.imu
+          sha256: a46fe2b50a5a99d550392f42e3952c871a7562c6d5625ea1b377691009ab643b
+        gnsspath:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FINAL_V23_CLEAN_CLEAN2R2A/FINAL_V23_CLEAN_FRESH.gnss
+          sha256: f4070ba795825cc243402e4acb551c62c6aad109e7040582bf57781226420e22
+        raw_doppler_factor_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/RAW_DOPPLER_VELOCITY.csv
+          sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+        go2_attitude_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/GO2_ATTITUDE_WEAK_PRIORS.csv
+          sha256: 2329770b8e9bc61c02fbf943e2e5fd9ea233d6fd8a3550f7a22410a536155c7a
+        go2_horizontal_velocity_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/GO2_HORIZONTAL_VELOCITY_WEAK_PRIORS.csv
+          sha256: f390c8e51f1bec1162c0f6c628ebbcd0449923cfbf9211bebb36004dc2b2aab0
+    A04:
+      run_id: RUN_00006
+      runtime_config: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/10_INTERNAL_ABLATION_RUNS/RUN_00006/CANONICAL541_RUNTIME_CONFIG.yaml
+      runtime_config_sha256: 8f2b51509ba7d811e2f42dea6acf199f6206260ca8fbd811bd1d32bb730669c1
+      result_table: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/12_OFFLINE_EVALUATION/LOGICAL_EVALUATION_RESULTS.csv
+      result_table_line_including_header: 3789
+      provider_inputs:
+        imupath:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FINAL_V23_CLEAN_CLEAN2R2A/FINAL_V23_CLEAN_FRESH.imu
+          sha256: a46fe2b50a5a99d550392f42e3952c871a7562c6d5625ea1b377691009ab643b
+        gnsspath:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FINAL_V23_CLEAN_CLEAN2R2A/FINAL_V23_CLEAN_FRESH.gnss
+          sha256: f4070ba795825cc243402e4acb551c62c6aad109e7040582bf57781226420e22
+        raw_doppler_factor_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/RAW_DOPPLER_VELOCITY.csv
+          sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+        go2_attitude_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/GO2_ATTITUDE_WEAK_PRIORS.csv
+          sha256: 2329770b8e9bc61c02fbf943e2e5fd9ea233d6fd8a3550f7a22410a536155c7a
+        go2_horizontal_velocity_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/GO2_HORIZONTAL_VELOCITY_WEAK_PRIORS.csv
+          sha256: f390c8e51f1bec1162c0f6c628ebbcd0449923cfbf9211bebb36004dc2b2aab0
+  no_main_provider_generation_or_overwrite: true
+evaluation:
+  v2_sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  base_time: 1772784000.0
+  window_seconds:
+  - 66.0
+  - 340.0
+  trace_sha256: ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c
+  trace_columns:
+    time: time
+    latitude: lat
+    longitude: lon
+    height: height
+    roll: roll
+    pitch: pitch
+    yaw: yaw
+  v2_semantics: 'Exact frozen executable: crop NAV to trace overlap; interpolate geodetic lat/lon/height and roll/pitch;
+    unwrap ENU yaw before interpolation; yaw=wrap360(90-yaw); local ENU position error.'
+  v3_status: PRE_REGISTERED_POINT_TRANSFORM_ONLY; implementation SHA UNAVAILABLE; not executed
+  v3_policy: New separately identified evaluator contract; preserve v2 source, metrics and numbers. Apply same physical
+    point transform to internal method and EXT05C outputs using each method own attitude. Never write corrected
+    NAV back to solver/output chain.
+  v3_inherits_v2_except:
+  - declared physical evaluation point transform
+  native_support_difference:
+    canonical_epochs: 56642
+    external_epochs: 58014
+  reporting: Report frozen v2, native-support v3, coverage, exact time support and any separately labelled common-support
+    diagnostics independently. No frozen row replacement.
+no_update_encoding:
+  chosen_provider_schema: 15 numeric fields + existing position_valid, velocity_valid, yaw_valid extension (18 columns
+    total)
+  new_cpp_changes: false
+  validity_column_indices_one_based:
+    position_valid: 16
+    velocity_valid: 17
+    yaw_valid: 18
+  non_A1_row: 1 rv_valid 0
+  A1_row: 1 rv_valid 1
+  missing_RV_within_tolerance: rv_valid=0; keep position row; finite placeholder velocity and std fields are not
+    observations
+  placeholder_values:
+    velocity_mps:
+    - 0.0
+    - 0.0
+    - 0.0
+    velocity_std_mps:
+    - 1.0
+    - 1.0
+    - 1.0
+    yaw_deg: 0.0
+    yaw_std_deg: 1.5
+  strict_15_column_status: BLOCKED_STRICT15_NO_RV_SKIP
+  large_yaw_std: Scheme-C >= frozen 6 deg rejects accepted update but increments attempt/reject; not chosen for
+    true skip
+  large_velocity_std: Not skip; EKFUpdate and velocity counter remain active
+  nan_inf: No legal independent skip semantic; forbidden encoding
+  source: cpp/legsa_v23_port_core/src/fileio/gnss_file_loader.cpp:38-71; src/kf_gins/gi_engine.cpp:364-386,931-972
+    within same C++ root
+  validation_state: Read-only source equality to scientific freeze and binary SHA verified. No runtime parsing test
+    in P-01; future provider parse/count proof required before solve.
+  auxiliary_scheduling_caveat: gi_engine.cpp:398-407 invokes RD/RP/HV at every GNSS row independently of RV/yaw
+    validity. :996, :1080, :1137 select nearest providers without consumption deduplication. Identical auxiliary
+    payload bytes do not imply identical selected observations, update times or counts.
+  future_counter_audit:
+  - position rows and accepted updates
+  - A1 source epochs / mapped rows / attempts / rejects / accepts
+  - RV source epochs / mapped rows / updates / absent skips
+  - RD/RP/HV source row identity / selected time / repeated selection / updates / rejects
+variants:
+- id: V0
+  status: FROZEN_REFERENCE_ONLY
+  provider_family: null
+  definition: Reuse sealed Canonical BY2 C00 A04/F01/F03 result references; no rerun or provider mutation.
+  hypothesis: Reference for attribution; no new performance hypothesis.
+  expected_direction: Not applicable
+- id: V1
+  status: PRE_REGISTERED_NOT_EXECUTED
+  provider_family: CLEAN5_PARITY_V1
+  definition: 1 Hz gnss1-status; substitute corresponding header epoch for sys_stamp in GNSS time column only.
+  byte_contract: All non-time tokens/bytes and row identities in V0 GNSS remain equal; IMU, RD, RP, HV payloads
+    equal V0 byte-for-byte. Do not reselect RV/yaw/std for the shifted row.
+  row_map_gate: Unique raw gnss1-status row lineage for each frozen GNSS row, with no row loss, reorder or duplicate;
+    unavailable map blocks generation.
+  hypothesis: Reception latency contributes to along-track discrepancy.
+  expected_direction: Smaller forward signed-bias magnitude / position RMSE if timing is a contributor; yaw effect
+    not assumed.
+- id: V2
+  status: PRE_REGISTERED_CONDITIONAL_STD_SEMANTICS_UNAVAILABLE
+  provider_family: CLEAN5_PARITY_V2
+  position: GNSS1 UBX-NAV-HPPOSECEF, 5 Hz native iTOW, physical GNSS1 antenna point.
+  time: GPS epoch + locked GPS week*604800 + iTOW/1000 - locked leap seconds - base_time. Use message week/TIM-TP/raw
+    source, never trace or fitted offset.
+  std_requested_by_human: pAcc/vAcc as std
+  position_std_source: HPPOSECEF pAcc * 1e-4 m; isotropic ECEF pAcc^2 I3 maps to isotropic NED. This is declared
+    covariance instantiation, not calibrated uncertainty.
+  vAcc_semantics: 'UNAVAILABLE as speed std: HPPOSECEF has no vAcc; NAV-PVT vAcc is vertical position accuracy,
+    while sAcc is speed accuracy. No silent substitution of vAcc with sAcc, constant RV std or trace-derived uncertainty.'
+  std_gate: Before any V2 provider or solve, close and commit a source-backed interpretation of requested vAcc (position
+    vertical or speed accuracy). Until then V2 is not executable.
+  RV: Nearest NAV-PVT by iTOW-derived measurement UTC with |dt| <= 0.1 s; tie -> earlier measurement epoch; no interpolation/hold/extrapolation;
+    absent -> velocity_valid=0.
+  A1: Frozen GNSS2-GNSS1 status physical yaw, same validity/transform/std; match header measurement UTC to nearest
+    HP row within 0.1 s, tie -> earlier row; at most one yaw update per A1 epoch and row. No match/collision ->
+    blocked mapping, never repeat or delete silently.
+  encoding: Use no_update_encoding chosen 18-column existing extension. F01 yaw module remains disabled.
+  unchanged: Frozen scientific parameters and IMU/RD/RP/HV payloads; only declared GNSS source/std/epoch and yaw/RV
+    association changes.
+  hypothesis: Measurement-epoch 5 Hz position can reduce latency/discretization effects; changed observation noise
+    and scheduling can alter uncertainty and trajectory.
+  expected_direction: Potential smaller position RMSE; no guarantee and no numerical acceptance threshold selected
+    from audit.
+- id: V3
+  status: PRE_REGISTERED_CONDITIONAL_REFERENCE_POINT_UNAVAILABLE
+  provider_family: CLEAN5_PARITY_V2 (same solver output)
+  definition: V2 output evaluated under separate v3 physical point contract; reference point target is antenna midpoint.
+  transform: l_IMU_to_midpoint_FRD = l_IMU_to_GNSS1_FRD + 0.5*b_GNSS2_minus_GNSS1_FRD; p_mid_ECEF = p_IMU_ECEF +
+    R_NED_to_ECEF * R_body_to_NED(method_attitude) * l_IMU_to_midpoint_FRD.
+  frozen_l_IMU_to_GNSS1_FRD_m:
+  - 0.03
+  - 0.03
+  - -0.3
+  frozen_b_GNSS2_minus_GNSS1_FRD_m:
+  - 0.0
+  - -0.35
+  - 0.0
+  derived_l_IMU_to_midpoint_FRD_m:
+  - 0.03
+  - -0.145
+  - -0.3
+  baseline_policy: Use frozen physical 0.350 m, not B2 residual or fitted lever; B5 measured half-baseline is an
+    independent descriptive check only.
+  reference_point_identity: UNAVAILABLE until source TF/POI/antenna evidence closes trace-point relationship. B2
+    agreement cannot itself establish it.
+  gate: B2/B5 source evidence must support this transform and reference point; mismatch/missing evidence blocks
+    v3. Never shift trace by its mean discrepancy.
+  external_application: Apply identical v3 physical contract to EXT05C frozen IMU output with EXT05C own attitude,
+    same evaluator window/columns; no EXT05C solver rerun.
+  hypothesis: A physical output/reference point mismatch contributes to body-fixed residual.
+  expected_direction: Reduce point-related bias if identity closes; otherwise UNAVAILABLE, not presumed improvement.
+- id: V4
+  status: OPTIONAL_CONDITION_MET_NOT_EXECUTED
+  provider_family: CLEAN5_PARITY_V4
+  condition: LC01 is dual receiver; A confirms EXT05A alias and two-receiver update.
+  definition: Optional dual-HPPOSECEF common-iTOW midpoint position, p_mid=(p1+p2)/2. Preserve correlation caveat;
+    R_mid=(R1+R2+R12+R21)/4; R12 source UNAVAILABLE.
+  gate: Separate future selection; before solve, preregister exact midpoint covariance and physically consistent
+    measurement lever. A midpoint observation with unchanged GNSS1 lever is invalid. Frozen parameter constraint
+    is retained; no automatic lever change.
+  hypothesis: Symmetric receiver information changes midpoint position observability and noise.
+  expected_direction: Potential smaller antenna asymmetry; correlated errors prevent promised sqrt(2) gain.
+decomposition:
+  metric_vector:
+  - horizontal_rmse_m
+  - position_3d_rmse_m
+  - up_rmse_m
+  - yaw_rmse_deg
+  time_term: V0 - V1
+  rate_term: V1 - V2
+  measurement_point_term: V2 - V3
+  estimator_term: V3 - EXT05C(v3)
+  positive_sign: For the first three lower-is-better RMSE differences, positive means improvement by next rung;
+    estimator term positive means internal method worse than EXT05C.
+  interpretation: Descriptive sequential differences, not additive physical squared-error components or causally
+    isolated effects. Rate term also changes message/std/scheduling. Estimator term retains RV/RD/RP/HV, initialization/noise/implementation/support
+    differences.
+  unavailable_propagation: If either endpoint is unexecuted, unavailable or differently supported without explicit
+    labelling, difference is UNAVAILABLE; never use nearby/legacy rows.
+forbidden:
+- solver in P-01
+- main-chain provider/result/contract modification
+- per-case tuning
+- offset/lever/sign/time fitting
+- trace-based provider selection
+- receiver IMU propagation substitution
+- repeated 1 Hz yaw on 5 Hz rows
+- NaN sentinel or huge RV std presented as skip
+- metric-driven epoch deletion
+- v3 replacing v2 numbers
+- provider/output substitution
+- C++ modification
+- merge
+- tag
+- history rewrite
+future_manifest_required:
+- data_mode
+- raw_source_hashes
+- provider_hashes
+- synthetic_data_used
+- semisynthetic_data_used
+- trace_used_online
+- receiver_imu_as_body_imu
+- final_v23_output_solver_input
+- LegSA_output_solver_input
+- per_case_tuning
+- output_only_correction
+- epoch_deleted_for_metric
+- old_runtime_input_count
+- code_commit
+- config_hash
+- provider_family
+- variant_id
+- parameter_byte_diff
+- evaluator_identity
+- reference_point
+- coverage
+- terminal_status
