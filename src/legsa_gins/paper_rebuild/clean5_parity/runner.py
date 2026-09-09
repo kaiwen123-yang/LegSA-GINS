@@ -23,6 +23,7 @@ def args_parser():
     p.add_argument('--code-freeze-commit',required=True)
     p.add_argument('--paths-config',required=True,type=Path)
     p.add_argument('--executable',required=True,type=Path)
+    p.add_argument('--resume-unexecuted',action='store_true')
     p.add_argument('--_phase',choices=['checkpoint','providers'])
     p.add_argument('--audit-dir',type=Path)
     p.add_argument('--checkpoint',choices=['pre_run','post_run'])
@@ -92,6 +93,8 @@ def main(argv=None):
         write_json(stage/'02_PARITY_PROVIDERS'/'PARITY_PROVIDER_BUNDLE.json',bundle)
         print('Provider generation complete',flush=True)
         return 0
+    if args.resume_unexecuted:
+        return continue_unexecuted(args,registry,stage,contract,contract_path,state)
     if (stage/'P02_EXECUTION_STARTED.json').exists():raise RuntimeError('P02 already started; no automatic retry')
     write_json(stage/'P02_EXECUTION_STARTED.json',{'state':state,'contract_sha256':sha256_file(contract_path),
                    'code_commit':args.code_freeze_commit,'data_mode':'real_by2_raw','synthetic_data_used':False,
@@ -130,5 +133,51 @@ def main(argv=None):
         return 0 if terminal['status']=='PASS' else 3
     except Exception as exc:
         write_json(stage/'P02_FAILURE.json',{'status':'FAILED','error':repr(exc),'code_commit':args.code_freeze_commit,
+                   'audits':audits,'data_mode':'real_by2_raw','synthetic_data_used':False,'semisynthetic_data_used':False})
+        raise
+
+
+def continue_unexecuted(args,registry,stage,contract,contract_path,state):
+    """Resume only six unexecuted runs; preserve original metadata and seal."""
+    from .recovery import prepare_continuation, ORIGINAL_SEAL_SHA
+    audits={}
+    if (stage/'P02_CONTINUATION_STARTED.json').exists():
+        raise RuntimeError('Continuation already started; no automatic retry')
+    try:
+        bundle,prior=prepare_continuation(stage=stage,contract_sha256=sha256_file(contract_path),
+                                          code_commit=args.code_freeze_commit,state=state)
+        audits['pre_solver_continued']=traced_child(args,registry,stage,
+            'continuation/pre_solver_continued',checkpoint='pre_run')
+        records=run_ladder(registry=registry,stage_root=stage,contract=contract,provider_bundle=bundle,
+                          executable=args.executable,code_commit=args.code_freeze_commit,prior_records=prior)
+        audits['post_solver_continued']=traced_child(args,registry,stage,
+            'continuation/post_solver_continued',checkpoint='post_run')
+        for value in bundle['variants'].values():
+            for entry in value['providers'].values():
+                if sha256_file(Path(entry['path']))!=entry['sha256']:raise RuntimeError('provider mutation')
+        if sha256_file(stage/'04_PARITY_SEAL'/'PARITY_OUTPUT_SEAL.json')!=ORIGINAL_SEAL_SHA:
+            raise RuntimeError('Original seal mutated')
+        seal=json.loads((stage/'04_PARITY_SEAL'/'PARITY_OUTPUT_SEAL_CONTINUED.json').read_text())
+        from .recovery import confined_file
+        for relative,digest in seal['files_sha256'].items():
+            if sha256_file(confined_file(stage,relative))!=digest:raise RuntimeError('continued sealed run mutation')
+        if len(records)==8 and all(r['terminal_status']=='COMPLETED' for r in records[:7]):
+            from .evaluation import evaluate_ladder
+            evaluation=evaluate_ladder(registry=registry,stage_root=stage,contract=contract,
+                run_records=records,code_commit=args.code_freeze_commit,baseline_median_m=bundle['baseline_median_m'])
+        else:evaluation={'status':'NOT_EXECUTED_PRIOR_RUN_GATE_FAILED'}
+        if execution_state(registry.code_root,args.code_freeze_commit)!=state:raise RuntimeError('snapshot mutated')
+        gate=evaluation_gate(evaluation,records)
+        terminal={'status':'COMPLETE_WITH_V2E_NATIVE_FAILURE' if gate['pass'] and len(records)==8 and records[-1]['terminal_status']=='FAILED_NATIVE_COUNTER_CONTRACT'
+                  else 'PASS' if gate['pass'] and len(records)==8 and all(r['terminal_status']=='COMPLETED' for r in records) else 'PARTIAL',
+                  'run_count':len(records),'completed_runs':sum(r['terminal_status']=='COMPLETED' for r in records),
+                  'runs':records,'evaluation':evaluation,'evaluation_gate':gate,'audits':audits,'code_commit':args.code_freeze_commit,
+                  'prior_native_invocations':2,'continuation_native_invocations':len(records)-2,'prior_reruns':0,
+                  'data_mode':'real_by2_raw','synthetic_data_used':False,'semisynthetic_data_used':False}
+        write_json(stage/'P02_CONTINUED_TERMINAL.json',terminal)
+        print(json.dumps({'terminal':terminal['status'],'runs':len(records),'completed':terminal['completed_runs']}),flush=True)
+        return 0 if terminal['status']=='PASS' else 3
+    except Exception as exc:
+        write_json(stage/'P02_CONTINUED_FAILURE.json',{'status':'FAILED','error':repr(exc),'code_commit':args.code_freeze_commit,
                    'audits':audits,'data_mode':'real_by2_raw','synthetic_data_used':False,'semisynthetic_data_used':False})
         raise

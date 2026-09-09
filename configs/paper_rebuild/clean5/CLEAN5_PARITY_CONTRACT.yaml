@@ -270,7 +270,20 @@ run_order:
 - - V2e
   - F01
 counter_contract:
-  eligibility: GNSS18 time > first frozen IMU time >=starttime and <=endtime
+  eligibility: Replay frozen C++ loader and engine schedule from GNSS18 and IMU times, then sum valid bits;
+    start GNSS>starttime, stop before IMU>endtime, refresh at most one stale GNSS per loop,
+    ordered abs(previous-GNSS)<0.001 or abs(current-GNSS)<=0.001 or previous<GNSS<current,
+    clear processed row validity. No NAV/counter/reference-derived threshold.
+  source: port_runtime.cpp:1416,1435,1463,1471; gi_engine.cpp:265,413; types.hpp:63
+  audit_revision:
+    original_execution_commit: d6581ae44e41d7e0640a39381ed76fbe66dea92f
+    original_contract_sha256: 33d3f3b0fc48bf50b5cc42c5fdf014737085bdc125d10ad3dbf7231b25fa3540
+    reason: Original Python expectation included a final GNSS beyond the last processed IMU tolerance;
+      native V1 F01 exit0 with 273 updates was incorrectly compared to 274.
+    recovery: Preserve original PARTIAL terminal, failed audit, seal and first two outputs;
+      revalidate independently under a new pushed detached snapshot, continue only six unexecuted runs.
+    solver_retries: 0
+    original_contract_snapshot: 01_PARITY_EXECUTION_AUDIT/code_validation/PRE_EXECUTION_CONTRACT.yaml
   position: sum eligible position_valid
   RV: sum eligible velocity_valid when F01/F03/A04 frozen RVenabled
   yaw_attempt: sum eligible yaw_valid when F03/A04 yawenabled;F01=0

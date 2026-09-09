@@ -60,16 +60,46 @@ def expected_counts(cfg):
     imu=np.loadtxt(cfg['imupath'],ndmin=2)
     if gnss.shape[1]!=18 or not np.isfinite(gnss).all(): raise ValueError('invalid GNSS18')
     if not np.isin(gnss[:,15:], [0,1]).all(): raise ValueError('invalid validity bits')
+    if not np.all(gnss[:,15]==1):raise ValueError('P02 schedule scope requires position_valid=1 on every row')
     if not np.all(np.diff(gnss[:,0])>0): raise ValueError('nonmonotonic GNSS time')
-    t_init=float(imu[np.flatnonzero(imu[:,0]>=cfg['starttime'])[0],0])
-    selected=gnss[(gnss[:,0]>t_init)&(gnss[:,0]<=cfg['endtime'])]
-    return {'t_init':t_init,'eligible_rows':len(selected),
+    eligible, schedule = scheduled_gnss_indices(gnss[:,0], imu[:,0], cfg['starttime'], cfg['endtime'])
+    selected=gnss[eligible]
+    return {**schedule,'eligible_rows':len(selected),
             'position_update_count':int(selected[:,15].sum()),
             'receiver_velocity_update_count':int(selected[:,16].sum()) if cfg['enable_receiver_velocity'] else 0,
             'dual_yaw_attempt_count':int(selected[:,17].sum()) if cfg['enable_dual_yaw'] else 0,
             'eligible_yaw_valid_bits':int(selected[:,17].sum()),
             'eligible_velocity_valid_bits':int(selected[:,16].sum()),
-            'source':'GNSS18 validity after frozen IMU initialization; independent of output/counters'}
+            'source':'Source-only C++ schedule replay; no NAV, counters or reference used'}
+
+def scheduled_gnss_indices(gnss_times, imu_times, start, end):
+    """Replay frozen loader/engine scheduling, including endpoint tolerance and refresh.
+
+    port_runtime.cpp:1416,1435,1463,1471; gi_engine.cpp:265,413;
+    types.hpp:63 (TIME_ALIGN_ERR=0.001). No state or measurement calculation.
+    """
+    g=np.asarray(gnss_times,float); it=np.asarray(imu_times,float)
+    if not len(it) or not len(g) or not np.isfinite(it).all() or not np.isfinite(g).all():
+        raise ValueError('empty/nonfinite scheduling inputs')
+    if np.any(np.diff(it)<=0) or np.any(np.diff(g)<=0):raise ValueError('nonmonotonic scheduling inputs')
+    ii=int(np.searchsorted(it,start,side='left'))
+    if ii==len(it):raise ValueError('no initialization IMU')
+    previous=float(it[ii]); initial=previous
+    gi=int(np.searchsorted(g,start,side='right')); valid=gi<len(g)
+    selected=[]; stopped=None
+    for current in it[ii+1:]:
+        if end>0 and current>end:
+            stopped=float(current);break
+        # The runtime advances at most ONE GNSS row per IMU loop.
+        if gi<len(g) and g[gi]<previous and gi+1<len(g):
+            gi+=1;valid=True
+        if valid and (abs(previous-g[gi])<.001 or abs(current-g[gi])<=.001
+                      or previous<g[gi]<current):
+            selected.append(gi);valid=False
+        previous=float(current)
+    return np.asarray(selected,dtype=int),{'t_init':initial,'last_processed_imu_time':previous,
+            'first_unprocessed_imu_time':stopped,'time_align_error_s':.001,
+            'schedule_source':'port_runtime.cpp:1416,1435,1463,1471; gi_engine.cpp:265,413; types.hpp:63'}
 
 def check_counters(native, cfg, expected):
     counters={k:native.get(v) for k,v in COUNTER_SOURCES.items()}
@@ -99,13 +129,19 @@ def compare_identity(run_root, canonical_root):
                      'max_absolute_difference':delta,'pass':same_shape and delta<=1e-9})
     return {'status':'PASS' if all(r['pass'] for r in rows) else 'FAIL','files':rows}
 
-def run_ladder(*,registry,stage_root,contract,provider_bundle,executable,code_commit):
+def run_ladder(*,registry,stage_root,contract,provider_bundle,executable,code_commit,prior_records=None):
     stage_root=Path(stage_root); executable=Path(executable)
     if sha256_file(executable)!=EXE_SHA: raise RuntimeError('frozen executable mismatch')
-    runs_root=stage_root/'03_PARITY_RUNS'; runs_root.mkdir(exist_ok=False)
-    seal_root=stage_root/'04_PARITY_SEAL'; seal_root.mkdir(exist_ok=False)
-    records=[]
-    for variant,method in RUN_ORDER:
+    runs_root=stage_root/'03_PARITY_RUNS'; seal_root=stage_root/'04_PARITY_SEAL'
+    records=list(prior_records or [])
+    if prior_records is None:
+        runs_root.mkdir(exist_ok=False);seal_root.mkdir(exist_ok=False)
+    else:
+        if len(records)!=2 or [(r['variant_id'],r['method_id']) for r in records]!=RUN_ORDER[:2]:
+            raise ValueError('Continuation must retain exactly the first two authorized runs')
+        if any(r['terminal_status']!='COMPLETED' for r in records):raise ValueError('Prior revalidation failed')
+        if {p.name for p in runs_root.iterdir()}!={r['run_id'] for r in records}:raise ValueError('Unexpected prior run directory')
+    for variant,method in RUN_ORDER[len(records):]:
         run_id=f'CLEAN5_PARITY_{variant}_{method}'
         root=runs_root/run_id;root.mkdir()
         source=contract['frozen_runtime']['original_configs'][method]
@@ -169,11 +205,19 @@ def run_ladder(*,registry,stage_root,contract,provider_bundle,executable,code_co
             write_json(seal_root/'V0_18_IDENTITY_GATE.json',gate)
             if gate['status']!='PASS':break
         if record['terminal_status']!='COMPLETED' and variant!='V2e':break
-    hashes={str(p.relative_to(stage_root)):sha256_file(p) for p in runs_root.rglob('*') if p.is_file()}
+    from .scheduling import audit_scheduling
+    scheduling_root=seal_root/'SCHEDULING'
+    for record in records:
+        root=Path(record['output_root'])
+        cfg=yaml.safe_load((root/'PARITY_RUNTIME_CONFIG.yaml').read_text())
+        record['auxiliary_scheduling_audit']=audit_scheduling(config=cfg,
+            output_root=scheduling_root/record['run_id'],native_trace=root/'PORT_GNSS_UPDATE_TRACE.csv')
+    hashes={str(p.relative_to(stage_root)):sha256_file(p) for parent in (runs_root,scheduling_root)
+            for p in parent.rglob('*') if p.is_file()}
     seal={'status':'SEALED','code_commit':code_commit,'run_count':len(records),
           'completed_count':sum(r['terminal_status']=='COMPLETED' for r in records),
           'files_sha256':hashes,'records':records,'all_native_success':all(r['terminal_status']=='COMPLETED' for r in records)}
-    write_json(seal_root/'PARITY_OUTPUT_SEAL.json',seal)
+    write_json(seal_root/('PARITY_OUTPUT_SEAL_CONTINUED.json' if prior_records is not None else 'PARITY_OUTPUT_SEAL.json'),seal)
     return records
 
 def diagnostic_counts(root):
