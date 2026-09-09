@@ -1,15 +1,15 @@
-schema_version: paper_rebuild.clean5.parity_p04.v1
-task: P-04
-starting_commit: 0bd86856dac706989f95cc8c3424be49babc05a9
+schema_version: paper_rebuild.clean5.parity_p04.v2
+task: P-04b
+starting_commit: 740b1cf0f98eaa9b53d3df4e9ebd77633a687b22
 authorization:
   scope: Read-only BY2 vertical diagnostics and eight CLEAN5_PARITY_* BY2H/BY2O solves; preserve main evidence chain
   V3_human_statement: VRTK 单元安装在两根天线正中间，天线相位中心与单元参考点等高。设备 TF：POI→VRTK 零平移、单位旋转。
   V2n_execution_authorized: false
+  P04b_RV_rule: V1 的 RV 一律取同历元 PVT；位置/航向 token 与 V0 逐字节相等仍断言；RV 与 V0 不同的行逐行登记（时间、冻结值、同历元值、冻结链所配历元的 sys_stamp 延迟）。
 p04:
   stage_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/12_PARITY_GENERALIZATION
   diagnosis_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/11_VERTICAL_DIAGNOSIS
-  execution_ready: false
-  pending_gate: BY2O V1 row344 same-iTOW RV versus frozen RV byte equality; human clarification pending
+  execution_ready: true
   run_order:
   - - BY2H
     - V1
@@ -84,7 +84,7 @@ p04:
       window_seconds:
       - 413.0
       - 683.0
-      v1_rv_policy: STRICT_FROZEN_VALUES_AND_SAME_ITOW; missing outside window invalid only
+      v1_rv_policy: SAME_ITOW_REMAP_AUTHORIZED
       scale_calibration:
         s: 1.03152660049411
         g_local_mps2: 9.801554730450597
@@ -149,11 +149,19 @@ p04:
           - path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/07_OFFLINE_EVALUATION/PER_RUN/BY2H_A04_AB1011/error_series.csv.gz
             sha256: ad7c8092de0a7278ebf6d84007cb9ea6382f7a8749649bfe005cb355e165de8a
       execution_ready: true
-      decomposition_confound: 'HPPOSECEF versus status common-epoch max norm exceeds 5 mm: source difference retained;
-        rate_point_IMU is a combined intervention, not a pure causal attribution'
+      decomposition_confound: 时标项含 RV 同历元重配；HPPOSECEF 与状态流共同历元差值超过 5 mm，保留 source 差异
       A1_outside_window_missing_HP_keys:
       - 461218000
       - 461219000
+      time_term_footnote: 时标项含 RV 同历元重配
+      historical_P04_input_preflight_status: PASS_INPUT_GATES
+      P04b_input_preflight:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/12_PARITY_GENERALIZATION/00_PREFLIGHT/P04B_BY2H_RV_REMAP_PREFLIGHT.json
+        sha256: c93ea68a1d46a2e94e46c0bd746aa8021bbfae366a125e190c5f3f91f247fad1
+      RV_reassignment_row_count: 0
+      RV_reassignment_rows: []
+      HP_status_difference_max_norm_m: 0.006801839331068227
+      HP_status_same_source_within_5mm: false
     BY2O:
       dataset_id: BY2O
       data_mode: real_by2o_raw
@@ -202,7 +210,7 @@ p04:
       window_seconds:
       - 3186.0
       - 3563.0
-      v1_rv_policy: STRICT_FROZEN_VALUES_AND_SAME_ITOW; missing outside window invalid only
+      v1_rv_policy: SAME_ITOW_REMAP_AUTHORIZED
       scale_calibration:
         s: 1.030101871899615
         g_local_mps2: 9.80155452110735
@@ -220,7 +228,7 @@ p04:
       input_preflight:
         path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/12_PARITY_GENERALIZATION/00_PREFLIGHT/BY2O_PROVIDER_PREFLIGHT.json
         sha256: 3d1da1843017412f1c227c57ec34c8996c70bdf948c0b1efc7b3acef5c06ab2c
-      input_preflight_status: BLOCKED_V1_RV_CONFLICT
+      input_preflight_status: PASS_INPUT_GATES
       external_5s_calibration:
         start_time_unix_seconds: 1772783501.5570683
         end_time_unix_seconds: 1772783506.5570683
@@ -238,7 +246,7 @@ p04:
         acceleration_norm_median_mps2: 9.515264426058174
         local_gravity_mps2: 9.801554516646359
         max_internal_gap_seconds: 0.026026248931884766
-      V1_RV_conflict_status: PENDING_HUMAN_ANSWER
+      V1_RV_conflict_status: RESOLVED_BY_EXPLICIT_P04B_AUTHORIZATION
       V1_RV_conflicts:
       - index: 344
         itow_ms: 460704000
@@ -285,9 +293,47 @@ p04:
         occlusion_window:
           path: <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE/01_SEQUENCE_CONTRACT/OCCLUSION_WINDOW.json
           sha256: 4ffabd12c71ef08ec3bb43bb5969fe97883b657c6d68aec2fc827f1fb56e349f
-      execution_ready: false
+      execution_ready: true
       A1_outside_window_missing_HP_keys:
       - 460361000
+      time_term_footnote: 时标项含 RV 同历元重配
+      historical_P04_input_preflight_status: BLOCKED_V1_RV_CONFLICT
+      decomposition_confound: 时标项含 RV 同历元重配；HPPOSECEF 与状态流共同历元差值超过 5 mm，保留 source 差异
+      P04b_input_preflight:
+        path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/12_PARITY_GENERALIZATION/00_PREFLIGHT/P04B_BY2O_RV_REMAP_PREFLIGHT.json
+        sha256: 5a9c9481c3a865e98dafd5b47ffe4ca8a8da0fd86f4de2dcc8059d969f72c1ca
+      RV_reassignment_row_count: 1
+      RV_reassignment_rows:
+      - row_index_zero_based: 344
+        itow_ms: 460704000
+        status_header_time: 3485.999868631363
+        status_sys_time: 3486.2324492931366
+        status_header_unix: 1772783885.9998686
+        status_sys_unix: 1772783886.2324493
+        same_itow_time: 3486.0
+        RV_valid: 1
+        inside_window: true
+        old_RV_tokens:
+        - '-0.045000'
+        - '1.196000'
+        - '-0.025000'
+        new_RV_tokens:
+        - '0.029000'
+        - '1.327000'
+        - '0.003000'
+        RV_tokens_changed: true
+        old_match_mode: receipt_nearest
+        old_PVT_itow_ms: 460704200
+        old_PVT_time: 3486.2000000476837
+        old_PVT_receipt_unix: 1772783886.3272424
+        old_PVT_receipt_time: 3486.32724237442
+        old_PVT_receipt_minus_itow_s: 0.1272423267364502
+        status_sys_minus_old_PVT_itow_s: 0.03244924545288086
+        same_itow_PVT_receipt_unix: 1772783886.130676
+        same_itow_PVT_receipt_minus_itow_s: 0.1306760311126709
+        missing_policy: exact same-iTOW observation
+      HP_status_difference_max_norm_m: 0.006717824437322678
+      HP_status_same_source_within_5mm: false
   diagnosis:
     sources:
     - run_id: V0_A04
@@ -442,8 +488,10 @@ p04:
   variants:
     V0: Frozen own-sequence A04 solver and v2 results reused; v3 postprocessing once for H/O; BY2 v2/v3 reused from
       P03
-    V1: Own status position 1 Hz at header epoch, same-iTOW PVT RV, unchanged non-time V0 measurement tokens; unavailable
-      leading RV only outside window invalid; BY2O conflict blocks execution pending human instruction
+    V1: Own status position 1 Hz at header epoch; every available RV from exact same-iTOW PVT. Position/std, yaw/std,
+      RV std tokens remain byte-equal to true V0. Missing leading same-epoch RV outside window retains only inactive
+      finite placeholder (RV_valid=0). Every changed RV row records original/target values and original receipt-nearest
+      PVT identity/delay; no change selected by metrics.
     V2: Same P02 HPPOSECEF 5 Hz iTOW ECEF-to-LLH, same-epoch PVT hAcc/vAcc and RV; A1 validity only at corresponding
       frozen epoch; record source/scheduling differences
     V2is: V2 GNSS unchanged; own raw first1000 scale s and own local normal gravity; P03 maintained external preprocessing
@@ -481,6 +529,7 @@ p04:
     - Up_RMSE_m
     - yaw_RMSE_deg
     each_endpoint_source_row_required: true
+    time_footnote: 时标项含 RV 同历元重配
   V2n_candidate:
     trigger: V0 or V2 A04 meets OVERCONFIDENT rule AND any-axis implied/frozen VRW or ARW ratio >=10 or <=0.1
     values_if_triggered:
@@ -517,3 +566,11 @@ p04:
     old_runtime_input_count: 0
     A1_validity_count: Equals frozen A1 epochs with corresponding HP epochs on runtime support; report full versus
       matched counts and missing outside-window epochs separately
+    P04b_limits: Eight new solver attempts, eighteen evaluator calls; P04 A solver/evaluator/diagnosis invocations
+      all zero; P05 separately registered in CLEAN5_PARITY_P05_CONTRACT.yaml
+  execution_phase: generalization
+  diagnosis_policy: P04 A already sealed; do not invoke diagnosis again
+  time_term_footnote: 时标项含 RV 同历元重配
+  input_gate_status: PASS_P04B_AUTHORIZED_SAME_ITOW_RV_REMAP
+  preserve_prior_records: P04 raw preflights, pending tables, A diagnosis/seal and prior partial delivery remain
+    immutable

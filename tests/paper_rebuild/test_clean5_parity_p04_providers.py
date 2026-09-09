@@ -83,3 +83,11 @@ def test_pending_registration_blocks_direct_provider_entry(tmp_path,monkeypatch,
     with pytest.raises(ValueError,match='execution gate is not ready'):
         providers.generate_providers(registry=registry,stage_root=stage,contract=contract,code_commit='test',dataset='BY2O')
     assert not stage.exists()
+
+
+def test_authorized_rv_remap_relaxes_only_value_conflict():
+    base,status,data,pv=source_fixture();pv[2000]['velocity_mps'][0]=.009
+    audit=gnss_preflight(data,status,{2000:{}},pv,base,[1.5,3],allow_rv_remap=True)
+    assert audit['status']=='PASS' and audit['V1_RV_mismatch_count']==1
+    assert audit['V1_non_time_measurement_bytes_can_remain_equal'] is False
+    assert gnss_preflight(data,status,{2000:{}},pv,base,[0,3],allow_rv_remap=True)['status']=='BLOCKED'

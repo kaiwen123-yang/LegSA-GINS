@@ -19,6 +19,7 @@ from ..clean5_imu_parity.input_audit import gravity_model
 from ..horizontal_literature.ext05_provider import (_imu_only_messages, ImuSample,
     euler_rpy_deg_to_matrix as external_rotation, calibrate_static_imu)
 from ..manifest import sha256_file
+from .rv_remap import POLICY, FOOTNOTE, replay_original_matches, remap_v1
 
 INPUT_KEYS=('imupath','gnsspath','raw_doppler_factor_path','go2_attitude_prior_path','go2_horizontal_velocity_prior_path')
 VARIANTS=('V1','V2','V2is')
@@ -67,7 +68,7 @@ def discover_sequence_sources(registry,dataset):
         'v1_rv_policy':'STRICT_FROZEN_VALUES_AND_SAME_ITOW; missing outside window invalid only'}
 
 
-def gnss_preflight(v0_bytes,status,hp,pvt,base_time,window):
+def gnss_preflight(v0_bytes,status,hp,pvt,base_time,window,*,allow_rv_remap=False):
     lines=v0_bytes.splitlines()
     if len(lines)!=len(status):raise ValueError('Frozen status/GNSS row count mismatch')
     mismatches=[];missing=[]
@@ -84,7 +85,7 @@ def gnss_preflight(v0_bytes,status,hp,pvt,base_time,window):
                     'frozen_RV_tokens':[v.decode() for v in f[7:10]],
                     'same_itow_RV_tokens':[v.decode() for v in actual]})
     acc=accuracy_audit(status,pvt)
-    blocked=bool(mismatches) or any(r['inside_window'] for r in missing) or not acc['all_equal_at_status_float32_precision']
+    blocked=(bool(mismatches) and not allow_rv_remap) or any(r['inside_window'] for r in missing) or not acc['all_equal_at_status_float32_precision']
     return {'status':'BLOCKED' if blocked else 'PASS','frozen_row_count':len(lines),'status_count':len(status),
         'HP_count':len(hp),'PVT_count':len(pvt),'V1_RV_equal_count':len(lines)-len(missing)-len(mismatches),
         'V1_RV_mismatch_count':len(mismatches),'V1_RV_mismatches':mismatches,
@@ -139,7 +140,19 @@ def _prepare(registry,spec,dataset):
     base=spec['base_time'];window=spec['window_seconds']
     raws=[seq.body_path,seq.fix_root/'gnss1-status.csv',seq.fix_root/'gnss1-raw.csv',seq.fix_root/'gnss2-raw.csv']
     raw_sources=verify_raw(registry,seq,raws)
-    status=csv_rows(raws[1]);hp,pvt=decode_receiver(raws[2]);gnss=gnss_preflight(paths['gnsspath'].read_bytes(),status,hp,pvt,base,window)
+    status=csv_rows(raws[1]);hp,pvt=decode_receiver(raws[2])
+    remap_authorized=spec.get('v1_rv_policy')==POLICY
+    v0_bytes=paths['gnsspath'].read_bytes()
+    gnss=gnss_preflight(v0_bytes,status,hp,pvt,base,window,allow_rv_remap=remap_authorized)
+    rv_audit=None;builder_bytes=v0_bytes
+    if remap_authorized:
+        original_matches=replay_original_matches(raws[1],raws[2],status,pvt,base)
+        builder_bytes,rv_audit=remap_v1(v0_bytes,status,pvt,original_matches,base_time=base,window=window)
+        rv_audit['source_hashes']=[source_spec(registry.code_root/name,registry) for name in (
+            'src/legsa_gins/input_generation/process_data_compat.py',
+            'src/legsa_gins/paper_rebuild/ubx_nav_pvt.py',
+            'src/legsa_gins/paper_rebuild/final_v23_clean_input.py',
+            'src/legsa_gins/paper_rebuild/clean5_parity_p04/rv_remap.py')]
     gate=json.loads(checked(spec['a1_gate'],registry).read_text());a1=gate['per_epoch']
     baseline,baseline_definition=frozen_baseline(gate)
     a1_times=[r['time']+base for r in a1]
@@ -166,12 +179,18 @@ def _prepare(registry,spec,dataset):
         scale_factor=scale,base_time=base)
     gnss_payloads=None;build_audit=None
     if gnss['status']=='PASS':
-        gnss_payloads,build_audit=build_variants(paths['gnsspath'].read_bytes(),status,hp,pvt,base_time=base,window=window,a1_source_times=a1_times)
+        gnss_payloads,build_audit=build_variants(builder_bytes,status,hp,pvt,base_time=base,window=window,a1_source_times=a1_times)
+        if rv_audit is not None:
+            build_audit['v1_non_time_measurement_tokens_byte_equal']=rv_audit['non_time_measurement_tokens_byte_equal_to_true_V0']
+            build_audit['byte_equality_reference']='true frozen V0, not in-memory RV-remapped builder argument'
+            build_audit['v1_RV_remap']=rv_audit
+            build_audit['time_term_footnote']=FOOTNOTE
     audit={'dataset_id':dataset,'data_mode':seq.data_mode,'synthetic_data_used':False,'semisynthetic_data_used':False,
         'trace_used_online':False,'receiver_imu_as_body_imu':False,'final_v23_output_solver_input':False,'LegSA_output_solver_input':False,
         'per_case_tuning':False,'output_only_correction':False,'epoch_deleted_for_metric':False,'old_runtime_input_count':0,
         'provider_file_generations':0,'solver_invocations':0,'evaluator_invocations':0,'raw_source_hashes':raw_sources,
         'source_specs':spec,'gnss':gnss,'gnss_provider_audit':build_audit,
+        'v1_RV_remap':rv_audit,'rv_remap_audit':rv_audit,'time_term_footnote':FOOTNOTE if remap_authorized else None,
         'epoch_inventory':{name:epoch_inventory(seq.fix_root/(name+'-raw.csv')) for name in ['gnss1','gnss2']},
         'baseline_median_m':baseline,'half_baseline_m':baseline/2,'baseline_definition':baseline_definition,'frozen_A1_count':len(a1),
         'A1_status_mapped_count':len(keys),'A1_HP_mapped_count':len(keys&set(hp)),
@@ -195,12 +214,13 @@ def _guard_stage(registry,stage_root):
 
 def preflight(*,registry,stage_root,source_specification,dataset,code_commit):
     stage=_guard_stage(registry,stage_root)
-    if (stage/'00_PREFLIGHT'/(dataset+'_PROVIDER_PREFLIGHT.json')).exists():
+    filename=('P04B_'+dataset+'_RV_REMAP_PREFLIGHT.json') if source_specification.get('v1_rv_policy')==POLICY else dataset+'_PROVIDER_PREFLIGHT.json'
+    if (stage/'00_PREFLIGHT'/filename).exists():
         raise FileExistsError('Existing provider preflight is immutable')
     audit,_,_=_prepare(registry,source_specification,dataset)
     audit['code_commit']=code_commit;audit['provider_source_sha256']=sha256_file(Path(__file__))
     out=Path(stage_root)/'00_PREFLIGHT';out.mkdir(parents=True,exist_ok=True)
-    write_json(out/(dataset+'_PROVIDER_PREFLIGHT.json'),audit)
+    write_json(out/filename,audit)
     return audit
 
 
@@ -226,7 +246,7 @@ def generate_providers(*,registry,stage_root,contract,code_commit,dataset):
     common={k:audit[k] for k in ('dataset_id','data_mode','synthetic_data_used','semisynthetic_data_used','trace_used_online',
         'receiver_imu_as_body_imu','final_v23_output_solver_input','LegSA_output_solver_input','per_case_tuning','output_only_correction',
         'epoch_deleted_for_metric','old_runtime_input_count','raw_source_hashes','baseline_median_m')}
-    common.update(code_commit=code_commit,config_hash=hashlib.sha256(json.dumps(p04,sort_keys=True).encode()).hexdigest())
+    common.update(v1_RV_remap=audit['v1_RV_remap'],rv_remap_audit=audit['rv_remap_audit'],time_term_footnote=audit['time_term_footnote'],code_commit=code_commit,config_hash=hashlib.sha256(json.dumps(p04,sort_keys=True).encode()).hexdigest())
     variants={}
     for variant in VARIANTS:
         root=output/variant;root.mkdir()

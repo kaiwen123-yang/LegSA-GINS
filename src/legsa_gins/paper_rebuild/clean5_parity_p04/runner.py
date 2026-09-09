@@ -124,6 +124,8 @@ def main(argv=None):
     if sha256_file(args.executable)!=EXE_SHA:raise ValueError('P04 executable identity mismatch')
     path=registry.code_root/'configs/paper_rebuild/clean5/CLEAN5_PARITY_P04_CONTRACT.yaml'
     contract=yaml.safe_load(path.read_text());spec=contract['p04'];run_order(contract)
+    if contract.get('task')=='P-04b' and (args._phase=='diagnosis' or (args._phase is None and args.phase!='generalization')):
+        raise ValueError('P04b executes generalization only; the completed P04 diagnosis remains sealed')
     stage=resolve(spec['stage_root'],registry);diagnosis_root=resolve(spec['diagnosis_root'],registry)
     if args._phase=='checkpoint':
         raw_checkpoint_worker(registry,registry.sequences[args.dataset],args.checkpoint,args.audit_dir);return 0

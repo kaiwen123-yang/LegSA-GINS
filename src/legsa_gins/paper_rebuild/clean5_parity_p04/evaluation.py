@@ -47,6 +47,7 @@ def decomposition(rows,confounds=None):
         def term(name,left,right,version=None):
             a=lookup[(d,*left)];b=lookup[(d,*right)];r=difference(name,a,b);r.update(dataset_id=d,left_evaluator_contract='evaluator_contract_'+left[0],right_evaluator_contract='evaluator_contract_'+right[0],decomposition_scope='primary_cross_version' if version is None else 'same_version',evaluator_contract='MIXED_EXPLICIT' if left[0]!=right[0] else 'evaluator_contract_'+left[0])
             if confounds and d in confounds:r['input_exception_confounds']=confounds[d]
+            if name=='time':r['time_term_footnote']='时标项含 RV 同历元重配'
             return r
         primary.extend([term('time',('v2','V0','A04'),('v2','V1','A04')),term('rate_point_IMU',('v2','V1','A04'),('v3','V2is','A04')),term('module',('v3','V2is','A04'),('v3','V2is','F03'))])
         for v in ['v2','v3']:
@@ -151,10 +152,15 @@ def evaluate_generalization(registry,contract,stage_root,records,code_commit,bun
         write_tables(target,rows[version],bias[version],segments[version],{})
     confounds={d:spec['sequences'][d].get('decomposition_confound','NONE') for d in ['BY2H','BY2O']};primary,byversion=decomposition(rows,confounds)
     _csv(stage/'08_AGGREGATE/PARITY_GENERALIZATION.csv',primary);_csv(stage/'08_AGGREGATE/PARITY_DECOMPOSITION_BY_VERSION.csv',byversion)
+    remap_rows=[]
+    for dataset,bundle in bundles.items():
+        remap=bundle['rv_remap_audit']
+        remap_rows.extend({'dataset_id':dataset,**r} for r in remap['changed_rows'])
+    _csv(stage/'08_AGGREGATE/RV_REASSIGNMENT_ROWS.csv',remap_rows)
     write_json(stage/'08_AGGREGATE/FROZEN_V0_ORIGINAL_FIELDS.json',raw_v0)
     complete=all(g['status']=='COMPLETED' for g in gates) and invocations==18
     result={'status':'COMPLETED' if complete else 'PARTIAL','code_commit':code_commit,'new_solver_count':8,'evaluator_invocation_count':invocations,'planned_evaluator_invocation_count':18,
-        'run_gates':gates,'rows':rows,'body_frame_bias':bias,'segments':segments,'generalization':primary,'decomposition_by_version':byversion,'data_mode':'real_raw_multisequence','synthetic_data_used':False,'semisynthetic_data_used':False,'trace_used_online':False,'fit_used':False,'epoch_deleted_for_metric':False,'reference_velocity_supported':False}
+        'run_gates':gates,'rows':rows,'body_frame_bias':bias,'segments':segments,'generalization':primary,'decomposition_by_version':byversion,'rv_reassignment_rows':remap_rows,'time_term_footnote':'时标项含 RV 同历元重配','data_mode':'real_raw_multisequence','synthetic_data_used':False,'semisynthetic_data_used':False,'trace_used_online':False,'fit_used':False,'epoch_deleted_for_metric':False,'reference_velocity_supported':False}
     write_json(stage/'08_AGGREGATE/FINAL_EVALUATION_SUMMARY.json',result)
     write_json(stage/'08_AGGREGATE/v3/FINAL_EVALUATION_SUMMARY.json',{'status':result['status'],'code_commit':code_commit,'evaluator_contract':'evaluator_contract_v3','rows':rows['v3'],'body_frame_bias':bias['v3'],'full_summary':'../FINAL_EVALUATION_SUMMARY.json'})
     for d in ['BY2H','BY2O']:

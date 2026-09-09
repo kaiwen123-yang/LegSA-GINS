@@ -18,6 +18,8 @@ def test_generalization_crossversion_and_sameversion_are_distinct():
     same=next(r for r in versions if r['dataset_id']=='BY2' and r['term']=='rate_IMU_same_point_contract')
     assert same['horizontal_rmse_m']==2
     assert all(r['input_exception_confounds']=='ONE_RECEIVER_VELOCITY_ROW_CHANGED' for r in primary if r['dataset_id']=='BY2O')
+    assert all(r['time_term_footnote']=='时标项含 RV 同历元重配' for r in primary+versions if r['term']=='time')
+    assert all('time_term_footnote' not in r for r in primary+versions if r['term']!='time')
 
 
 def test_window_denominator_does_not_use_by2_window():
