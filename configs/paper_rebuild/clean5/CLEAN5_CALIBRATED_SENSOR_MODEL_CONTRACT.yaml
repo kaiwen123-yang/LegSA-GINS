@@ -1,0 +1,175 @@
+schema_version: paper_rebuild.clean5.calibrated_sensor_model.v1
+task: P-06
+status: PREREGISTERED_BEFORE_ANY_CALIBRATION_COMPUTATION
+starting_commit: c0ecd4f2aac8adbc876510aa27b2de3c611e7fd7
+human_authorization_date: '2026-09-09'
+family: CLEAN5_CALIBRATED
+stage_root: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL
+calibration_root: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/00_CALIBRATION
+model_path: configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml
+classification: NOT_THE_PREREGISTERED_COMPARISON_PROTOCOL
+data_mode: real_raw_trace_free_calibration
+synthetic_data_used: false
+semisynthetic_data_used: false
+trace_used_online: false
+receiver_imu_as_body_imu: false
+final_v23_output_solver_input: false
+LegSA_output_solver_input: false
+per_case_tuning: false
+output_only_correction: false
+epoch_deleted_for_metric: false
+old_runtime_input_count: 0
+calibration:
+  dataset_id: BY2
+  base_time: 1772784000.0
+  window_seconds: [66.0, 340.0]
+  base_variant: V2s
+  base_definition: V2 5 Hz HPPOSECEF/iTOW, PVT hAcc/vAcc, same-epoch RV, A1 validity only at its epoch; frozen current-sample IMU integration plus frozen BY2 acceleration scale.
+  s: 1.0308398903907543
+  g_local_mps2: 9.801554354839126
+  scale_source: CLEAN5_PARITY_CONTRACT.yaml p03.scale_calibration; fixed first 1000 BY2 frames, no trace
+  scale_reestimated: false
+  frozen_vrw: [0.077, 0.077, 0.077]
+  frozen_abstd: [77.8, 77.8, 77.8]
+  axis_order: [N, E, D]
+  parameter_axis_mapping: N/E/D fitted components map in fixed index order to solver vrw[0:3] and abstd[0:3]; no fitted rotation or cross-axis covariance.
+  parameter_axis_limitation: This prescribed index mapping assigns NED residual fits to body/FRD solver noise components; it does not identify physical body-axis sensor covariance from NED covariance.
+  arw_policy: Frozen. Under this protocol the 1.5 degree A1 heading noise does not identify gyro random walk; arw is not calibrated.
+  frozen_arw: [0.985, 0.985, 0.985]
+  frozen_gbstd: [9.38, 9.38, 9.38]
+  frozen_initbastd: [77.8, 77.8, 77.8]
+  other_parameters: arw, gbstd, corrtime, initbastd, initial state, all switches and every other scientific token remain byte-identical to each sequence/profile source.
+  inputs:
+    provider_bundle:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/02_PARITY_PROVIDERS/PARITY_PROVIDER_BUNDLE.json
+      sha256: e28cd6fea67c210c1c97dd5a9cabb666e9259db2075e517af7c54036152898c9
+    imu_increment:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/02_PARITY_PROVIDERS/V2s/PARITY_IMU.imu
+      sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      columns_zero_based: {time: 0, dtheta: [1, 2, 3], dvel: [4, 5, 6]}
+    gnss_v2:
+      path: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/02_PARITY_PROVIDERS/V2/PARITY.gnss
+      sha256: 68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a
+      columns_zero_based: {time: 0, velocity: [7, 8, 9], yaw_deg: 13, yaw_std_deg: 14, rv_valid: 16, yaw_valid: 17}
+    a1:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/providers/dual_yaw_provider.csv
+      sha256: ccf442f32a0037ba742d199d7ab078d5af112aea5981effce1f23a80510bdd86
+      fields: [source_timestamp, body_yaw_ned_deg, yaw_std_deg]
+    go2_body:
+      path: <RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by2.txt
+      sha256: 95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278
+    pvt_raw:
+      path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv
+      sha256: 5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027
+    status:
+      path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-status.csv
+      sha256: 9761d2d7055356857bd7b26a251fdd60fdf6c2b18a882dac74bc35d164e42e08
+    raw_lock:
+      path: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv
+      sha256: f6e5d7965d17857e5b4a846501883f4675f2331a1164fab3de9e5ba9470f1ad7
+  orientation:
+    matrix: C_b_n = Rz(yaw_NED) * Ry(pitch) * Rx(roll)
+    matrix_source: cpp/legsa_v23_port_core/src/common/rotation.cpp:131-140
+    roll_pitch: Raw Go2 imu_state.rpy[0:2] in radians, linearly interpolated at each IMU timestamp; exactly the existing weak-prior operation, no added sign/installation adjustment.
+    roll_pitch_source: src/legsa_gins/paper_rebuild/providers.py:203-215
+    attitude_frame_claim: Frozen operational convention; no extra claim of independently verified physical FRD attitude calibration.
+    yaw: Frozen A1 body_yaw_ned_deg; source_timestamp joined to status header in integer milliseconds, then status time_gps_tow to iTOW; cross-check frozen V2 yaw-valid tokens.
+    yaw_interpolation: Unwrap shortest angular steps and linearly interpolate; no extrapolation.
+    maximum_a1_gap_seconds: 1.2
+    unsupported_pair_policy: Skip the whole pair if its interval crosses a longer A1 gap or lacks orientation support; record reason and count.
+  integration:
+    formula: residual_NED = sum(C_b_n(t_i) * dvel_i for t < t_i <= t+lag) + [0,0,g_local]*lag - (PVT_velocity(t+lag)-PVT_velocity(t))
+    dvel_semantics: Frozen V2s dvel already equals installed FRD specific force times s and measured dt; do not multiply by s or dt again.
+    imu_builder_source: src/legsa_gins/input_generation/imu_txt_builder.py:95-135
+    scale_builder_source: src/legsa_gins/paper_rebuild/clean5_imu_parity/providers.py:50-57
+    integration_convention: Frozen current sample (right endpoint), not external previous-sample ZOH.
+    coriolis_included: false
+    transport_rate_included: false
+    existing_imu_gaps: Preserve existing provider rows; report coverage/time differences and gaps without residual-based exclusion or reweighting.
+  fit:
+    lag_milliseconds: [200, 400, 600, 800, 1000, 1500, 2000]
+    pair_policy: Every exact integer-iTOW endpoint pair wholly inside [66,340]; overlapping pairs retained; no PVT interpolation or nearest-neighbour substitution.
+    missing_lag_policy: Report all seven lags; zero pairs is UNAVAILABLE and excluded from OLS. In particular 1.5 s cannot pair on a strict same-phase 5 Hz grid.
+    residual_variance_ddof: 1
+    minimum_samples_per_variance: 2
+    regression: Unweighted ordinary least squares with intercept, var_r(lag)=q*lag+c, independently on N/E/D, using all available finite lag variances.
+    minimum_available_lags: 2
+    vrw_formula: sqrt(q)*60
+    vrw_units: (m/s)/sqrt(h)
+    q_units: m^2/s^3
+    c_units: (m/s)^2
+    c_policy: GNSS velocity-noise diagnostic only; retain signed intercept without clipping or feedback.
+    residual_clipping: false
+    robust_regression: false
+    selection_by_trace_or_performance: false
+  bias_windows:
+    lag_seconds: 1.0
+    full_windows_seconds: [[66.0,126.0], [126.0,186.0], [186.0,246.0], [246.0,306.0]]
+    pair_membership: Pair start >= window start and pair end <= window end; no pair repeated between windows.
+    window_statistic: Mean of residual/1.0 second per axis over every supported pair.
+    across_window_std_ddof: 1
+    abstd_formula: std(window_mean_residual_acceleration)*100000
+    abstd_units: mGal
+    trailing_interval_seconds: [306.0, 340.0]
+    trailing_interval_policy: Report-only incomplete 34 s window, excluded from abstd by preregistration.
+  fallback:
+    per_axis: If q <= 0 or fewer than 3 nonempty full windows, use both frozen vrw and frozen abstd for that axis and mark FALLBACK.
+    unidentifiable_q: UNAVAILABLE/FALLBACK if fewer than two usable lag variances; never invent a positive slope.
+    all_axes: STOP_ALL_AXES_FALLBACK; report A only, no B/C solver/evaluator or stage-completion claim.
+  output_tables:
+  - LAG_RESIDUALS.csv
+  - LAG_VARIANCE_FIT.csv
+  - WINDOW_MEAN_ACCELERATION.csv
+  - CALIBRATED_PARAMETERS.csv
+  - CALIBRATION_AUDIT.json
+  output_model_fields: [s, vrw, abstd, q, c, lag_sample_counts, lag_variances, window_counts, input_sha256, process_sha256, code_commit, contract_sha256, fallback_status]
+blind_transfer:
+  calibration_count: 1
+  calibration_dataset: BY2
+  application_datasets: [BY2, BY2H, BY2O]
+  same_s_vrw_abstd_for_every_sequence: true
+  no_refit_on_BY2H_BY2O: true
+  source_model_commit_required_before_B: true
+execution:
+  run_profiles: [F01, F02, F03, A04, F04]
+  dataset_order: [BY2, BY2H, BY2O]
+  solver_limit: 15
+  evaluator_limit: 30
+  serial_only: true
+  retry_count: 0
+  raw_hash_policy: Calibration/provider/solver phases hash only authorized input roles; never use the old 22-file checkpoint that opens trace, bag or fpl.
+  calibration_strace: Assert zero trace/.bag/.fpl opens and zero writes outside own calibration root.
+  provider_and_solver_strace: Same zero forbidden opens; immutable inputs, explicit provenance and row-validity counters, exclusive output paths.
+  evaluation_strace: Trace content may be opened only by the frozen evaluator child after all 15 solver outputs are sealed.
+  freeze_policy: Contract/code push and exact remote equality before detached execution; no edits/builds/commits inside snapshots.
+  allowed_scientific_config_changes: [vrw, abstd]
+  provider_change: V2s using the single frozen BY2 s on each sequence; other V2 inputs and own sequence initialization/window remain frozen.
+  parameter_ledger: List every key before/after; restore vrw/abstd and allowed path/format/identity lines and assert byte identity to the own frozen profile.
+  preserve_explicit_initbastd: true
+identities:
+  scientific_solver_commit: 64c81965b17ef1bf8ae2ce3e4dd7b1ae35110b00
+  executable_sha256: 9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f
+  evaluator_sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+evaluation:
+  versions: [v2, v3]
+  v3_policy: Existing authorized fixed POI transform using each sequence frozen standard median A1 baseline, original NAV roll/pitch/yaw and lever [0.03,0.03-half_baseline,-0.30]; no fit or further correction.
+  consistency_axes: [height, north, east, yaw]
+  consistency_std_columns_zero_based: [3, 1, 2, 9]
+  v3_position_consistency: UNTRANSPORTED_STD_DIAGNOSTIC_ONLY; full transformed covariance consistency UNAVAILABLE.
+  external_BY2_v3: Reuse frozen LC01/EXT05C rows; no external rerun.
+  main_chain_comparison: Cite immutable frozen CSV rows; never replace original v2 anchors.
+robustness:
+  purpose: Recompute rule formula only; no new decision or Outcome.
+  rule_path: docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md
+  rule_sha256: a69803bdf8117601af61c20003f7dd64b6843d44d35b7ea1b93f43170202475a
+  threshold_equality: Preserve existing strict-pass semantics; equality belongs to A04.
+  versions: [v2, v3]
+  output: CALIBRATED_CHAIN_ROBUSTNESS_CHECK.json
+  outcome_changed: false
+closeout:
+  source_rule: All documentation numbers copied from frozen CSV rows; no metric recomputation in documentation or package generation.
+  report: docs/paper_rebuild/CLEAN5_STAGE2_CLOSEOUT.md
+  package: <USER_HOME>/clean5_handoff_v2.zip
+  old_main_anchors_and_outcome: Immutable
+  gyro_noise_calibration: NOT_EXECUTED
+  future_items: [CAD antenna-IMU height difference, conversation A figures, conversation D uncertainty, BY2O gating sensitivity to IMU integration convention]
