@@ -332,6 +332,32 @@ A04: H / 3D / Up / yaw RMSE / yaw P95 = 0.348045 m / 1.226528 m / 1.176111 m / 3
 F04: H / 3D / Up / yaw RMSE / yaw P95 = 0.350912 m / 1.602733 m / 1.563846 m / 3.404182 deg / 5.610167 deg
 ```
 
+Calibrated-sensor protocol anchors (V2s input + calibrated vrw/abstd, evaluator v3)
+
+`NOT_THE_PREREGISTERED_COMPARISON_PROTOCOL`. One BY2-calibrated sensor model (including s) is transferred unchanged to BY2H/BY2O. The main-chain anchors and the pre-registered A04 Outcome above remain unchanged.
+
+Source: `<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/08_AGGREGATE/v3/UNIQUE_EVALUATION_RESULTS.csv`; values below are original CSV tokens, without metric recomputation.
+
+| Sequence | Profile | H RMSE (m) | 3D RMSE (m) | Up RMSE (m) | yaw RMSE (deg) | CSV row |
+|---|---|---|---|---|---|---|
+| BY2 | F01 | 0.09177145533263088 | 0.10351109355664635 | 0.04788054380877193 | 8.089647422454789 | 2 |
+| BY2 | F02 | 0.10167042168391813 | 0.11245701732466279 | 0.048059401787514736 | 2.387502021110019 | 3 |
+| BY2 | F03 | 0.09942874018593109 | 0.1103501723708457 | 0.04786529188581187 | 2.149759240837629 | 4 |
+| BY2 | A04 | 0.09788305204693296 | 0.10995310369005244 | 0.05008585761522742 | 2.116232431517562 | 5 |
+| BY2 | F04 | 0.09833550004013293 | 0.10989606602860731 | 0.049063986389418376 | 2.102586167315052 | 6 |
+| BY2H | F01 | 0.06292589316025435 | 0.0773049305383686 | 0.04490416746278954 | 7.137487572272005 | 7 |
+| BY2H | F02 | 0.07052641924128063 | 0.08387963582274612 | 0.045407240554339263 | 1.7112292640294133 | 8 |
+| BY2H | F03 | 0.06888244431434563 | 0.08222261583580157 | 0.044897298584245335 | 1.827474957827435 | 9 |
+| BY2H | A04 | 0.0688386599992056 | 0.08272455961957677 | 0.04587582864392402 | 1.8292666502216393 | 10 |
+| BY2H | F04 | 0.06906331937087641 | 0.08261176077190832 | 0.04533167695234024 | 1.818619110302363 | 11 |
+| BY2O | F01 | 0.06284210260933396 | 0.07656942024179673 | 0.043746385631304584 | 5.739037942642961 | 12 |
+| BY2O | F02 | 0.05623289091150956 | 0.07277209282853116 | 0.04619133549031268 | 2.459463554105357 | 13 |
+| BY2O | F03 | 0.05572585547571861 | 0.07083587931327699 | 0.04373043367706825 | 2.590433964384844 | 14 |
+| BY2O | A04 | 0.056215385962533816 | 0.07156744632023422 | 0.04429141851287854 | 2.5886519847978273 | 15 |
+| BY2O | F04 | 0.05646322233551191 | 0.07280509497024816 | 0.04596179257946105 | 2.6519625108013902 | 16 |
+
+Reference-point v3 is reported separately; position consistency uses the original, untransported STD as a diagnostic only. CAD confirmation of antenna–IMU height difference remains open.
+
 The 77-epoch common-support values A04 2.231055 deg and F04 2.226267 deg are diagnostic-only. They must never replace the formal C00 values.
 
 The historical 1.813898 deg final_v23 result is a legacy identity, not the current Canonical C00 result.
@@ -859,6 +885,8 @@ additional real sequences/platforms;
 [x] real single-antenna obstruction or one-side quality degradation;
 cross-sequence/cross-platform generalization;
 [x] final A04/F04 role selection.
+[x] position gap decomposition (stage 2 frozen parity ladder and calibrated-chain record);
+remaining: BY2O gating sensitivity to IMU integration convention.
 ```
 
 BY2O records GNSS2 RTK float for 57 epochs, not a stream outage.
@@ -1138,12 +1166,13 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 Current next actions:
 
 ```text
-1. stage 2 parity: CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF (requires separate human authorization);
-2. stage 3 source provenance: Fixposition POI offset, gnss1-status timing / fix type / pos_acc_v, right-antenna phase-center and lever-arm definitions (conversation C/D);
-3. final three-sequence publication figures using BY2/BY2H/BY2O frozen evidence (conversation A);
-4. post-hoc BY2O gate rejection/downweight epoch timeline (A/D);
-5. post-hoc BY2H/BY2O horizontal-error body-frame decomposition (A);
-6. post-hoc Source-Aware Up cost decomposition by source (A/D).
+1. CAD verification of antenna–IMU height difference and lever-arm z; retain the source-defined v3 transform until independently confirmed;
+2. conversation A: frozen error-budget ladder, body-frame bias, sensitivity heatmap, and calibrated three-sequence tables; show evaluator version and protocol identity explicitly;
+3. conversation D: reference-uncertainty record using timing, baseline, derived diagnostic velocity difference, consistency ratios, and frozen calibrated vrw/abstd/c;
+4. remaining: BY2O gating sensitivity to IMU integration convention; any new execution requires its own bounded authorization;
+5. post-hoc BY2O rejection/downweight timeline and Source-Aware Up cost by source, using frozen artifacts.
 ```
+
+Stage 2 and the calibrated-chain execution are complete. Sources: `docs/paper_rebuild/CLEAN5_STAGE2_CLOSEOUT.md`, `docs/paper_rebuild/CLEAN5_CALIBRATED_CHAIN_RESULTS.md`, and `<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/`. The original main protocol and Outcome remain authoritative.
 
 Do not restart Canonical-541, reselect horizontal literature algorithms, rerun GINav, reopen Hartley absolute-reference evaluation, or run corrected Classic-18 by default.

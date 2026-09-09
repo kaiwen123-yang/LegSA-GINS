@@ -87,6 +87,11 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
   `scripts/paper_rebuild/clean5_pack_v1.py`; 10 Hz series are display-only, and metrics
   remain the frozen aggregate values. Reference trace is external via `--trace-path`.
 
+- Stage 2 parity root (`<CLEAN5_PARITY_ROOT>`): `<CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/`; P02 `08_AGGREGATE/`, P03 `10_IMU_PROCESSING/08_AGGREGATE/`, vertical diagnosis `11_VERTICAL_DIAGNOSIS/`, three-sequence ladder `12_PARITY_GENERALIZATION/08_AGGREGATE/`, and P05 grid `13_NOISE_MODEL_SENSITIVITY/08_AGGREGATE/`.
+- Calibrated root (`<CLEAN5_CALIBRATED_ROOT>`): `<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/`; `00_CALIBRATION/` holds the one-time BY2 fit and original plus supplementary audit evidence; `08_AGGREGATE/` and its `v3/` contain all five profiles on three sequences, pairwise, consistency and BODY_FRAME_BIAS tables. `CALIBRATED_CHAIN_ROBUSTNESS_CHECK.json/.csv` resides in `08_AGGREGATE/`.
+- Stage 2 closeout: `CLEAN5_STAGE2_CLOSEOUT.md`; calibrated run record: `CLEAN5_CALIBRATED_CHAIN_RESULTS.md`. Calibrated values are marked `NOT_THE_PREREGISTERED_COMPARISON_PROTOCOL`; the original main-chain anchors and Outcome are retained.
+- Extended handoff: `~/clean5_handoff_v2.zip`, produced by `scripts/paper_rebuild/clean5_pack_v2.py`. It inherits every v1 member byte-for-byte and adds frozen stage 2/calibrated tables, both evaluation versions and body-frame biases. Raw reference trace is excluded; the explicitly pinned trace-difference diagnostic table is `DERIVED_DIAGNOSTIC_ONLY`.
+
 ## 7. Open items
 
 - [x] Decision-rule file committed; hash recorded above.
@@ -96,9 +101,13 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 - [x] Derived pairwise `A04_vs_F02`, `F04_vs_F02`, `A04_vs_F03` added under the publication namespace.
 
 - [ ] BY2O 门控拒绝/降权历元的 post-hoc 时间线（A/D）。
-- [ ] BY2H/BY2O 水平误差体坐标分解（A）。
+- [x] BY2H/BY2O 水平误差体坐标分解：stage 2 与标定链各版 BODY_FRAME_BIAS.csv 已冻结；图件归对话 A。
 - [ ] SA 的 Up 代价按源分解（A/D）。
-- [ ] 输入侧发现：gnss1-status sys_stamp − header.stamp 中位 0.205 s（BY2H/BY2O 实测），位置流为右天线相位中心（半基线 0.175 m，杆臂补 0.03 m）——作为前向/右向固定偏差的两个候选来源，在 stage 2 的 5 Hz HPPOSECEF 实验中检验，stage 3 溯源时一并核对（C）。
+- [x] Stage 2 position gap decomposition 与输入时标/RV 同历元重配记录已冻结；v3 使用人类安装声明与冻结几何，不含 trace 拟合。
+- [ ] CAD 核对天线–IMU 高度差及杆臂 z；v3 上向残差仅报告，不据此继续修正。
+- [ ] 对话 A 图件：误差预算阶梯、体坐标偏差、敏感性热图、标定链三序列表；保留主链/标定链与 v2/v3 标识。
+- [ ] remaining: BY2O gating sensitivity to IMU integration convention；V2 与 V2is 同时改变处理约定和加速度计标度，不能作为独立积分因果项。
+- [ ] 对话 D 不确定度输入：时标约 0.205 s、BY2 半基线约 0.178 m、PVT−trace 差分垂直速度差标准差约 0.043 m/s（DERIVED_DIAGNOSTIC_ONLY）；各 run 的高度/北/东/yaw 一致性比见标定链 UNIQUE 表（v3 位置 STD 未传输）。BY2 冻结 s=1.0308398903907543；vrw=[9.478382094779873, 9.784198200134004, 7.6321402201126745] (m/s)/√h；abstd=[4817.482008954474, 8259.572423450163, 2257.241538343225] mGal；拟合 c=[0.010830809489394968, 0.013550612232080246, 0.020536668097236248] (m/s)²。原始数值、三轴窗数与来源见 `08_AGGREGATE/FROZEN_SENSOR_MODEL.csv` 和 `00_CALIBRATION/LAG_VARIANCE_FIT.csv`。
 
 ## Conversation log
 
@@ -124,3 +133,5 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 - 2026-09-08 (C): C-04b continuation 2 complete; event implementation ba7d380bb11db5cdc5b3a56ed9f86b148e3db554; contract/execution freeze 7a5b48f0920f1c52c3d0f286855231769631e3ee; record commit=this commit. BY2/BY2H/BY2O event and xcorr gates PASS (windows 66/340, 413/683, 3186/3563); v1 revalidation 10/10 PASS reused with unchanged validators and v1 artifacts retained as SUPERSEDED_NOT_EVALUATED. V2 ten runs COMPLETED (exit 0), both seals PASS; zero solver reference-trace/bag/fpl/raw opens, zero evaluation/plotting; event and solver pre/post raw checkpoints 22/22 unchanged per sequence, checkpoint access hash-only. OUTPUT_SEAL_V2 SHA256 BY2H e34f283f753a2e564379bcace85e383d407e8b84b9309f9163f8de4a818374f5, BY2O ab037dadf7725bb47022ee0a86d9c0ee8f8b45a87acc152270bebc23c5d95285. 306 tests passed; full event intervals, initialization, dropout ledger, counters and audit evidence are appended in CLEAN5_SOLVER_RUN_RECORD.md.
 - 2026-09-08 (C): C-05 complete; code freeze 64a25e667c10ba30499108edaa8f559a5bef8b64; record commit=this commit. Revised A2 evaluator identity PASS before any BY2H/BY2O evaluator execution: C00 A04/F04 24 metric checks PASS, synthetic 0/1000 m and 90 deg gates PASS, three identical 80-byte headers with zero data-line reads. V2 offline evaluations 10/10 PASS; per-run coverage=finite=1, evaluator reference opens exactly one each, bag/fpl/raw-write/outside-write counts 0. Both pre/post seals unchanged; 432 tests passed. Decision inputs SHA256 d9867e64d9e57caea19cfd83b7c7dfba5e9fc95e789859fefbc1820b8230ef1e: heading FAIL, position FAIL; no Outcome written. Full tables, source rows, gate and aggregate hashes, audits and decision JSON original: CLEAN5_OFFLINE_EVALUATION_RECORD.md.
 - 2026-09-08 (C): C-05/C-06 complete; proposed method A04 by the pre-registered rule (rule commit b9f9a44f288966c95961f7a15564b2b57bf07b65, evidence commit 09caf1e7e6151f18cc25dafad4a7ef5704ae62d2); heading test FAIL, position bound FAIL. The rule text is unchanged; only its Outcome block is filled. Generalization complete; stage 2/3 pending. Three-sequence handoff script: scripts/paper_rebuild/clean5_pack_v1.py; artifact: ~/clean5_handoff.zip.
+
+- 2026-09-09 (C): P-06 complete: one trace-free BY2 calibration, identical s/vrw/abstd transferred to BY2H/BY2O, 15/15 calibrated solves and 30/30 v2/v3 evaluations; stage 2 closeout and clean5_handoff_v2 package indexed in §6. Robustness review: heading FAIL maintained, position PASS reversed; original decision rule and A04 Outcome unchanged.
