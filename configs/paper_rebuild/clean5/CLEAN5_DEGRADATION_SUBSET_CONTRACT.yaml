@@ -2774,8 +2774,9 @@ runtime:
     acceptance retained as bounds/terminal closure, never guessed; SA contribution closure checked after yaw gates.
   checkpoint_required_members: 22
   checkpoint_selection: All RAW_FILE_HASH_LOCK rows with dataset==BY2
-  checkpoint_open_policy: PENDING_EXPLICIT_RESOLUTION_OF_22_FILE_HASH_CHECKPOINT_VS_TRACE_EVALUATOR_ONLY; generation
-    and solving blocked until resolved.
+  checkpoint_open_policy: C-01b/C-03 independent pre/post strace sessions; exactly one O_RDONLY streaming SHA256
+    open for each of 22 locked files including trace/.bag/.fpl; exact locked path set, per-file count one, zero
+    raw writes; CHECKPOINT_STRACE_AUDIT.json. Human clarified 2026-09-10; hash checkpoints are outside A7.
   seal_before_evaluation: true
 evaluation:
   evaluator:
@@ -2802,8 +2803,9 @@ evaluation:
     immutable.
   v3_std_policy: UNTRANSPORTED_STD_DIAGNOSTIC_ONLY for position; unchanged yaw state STD; no full transformed covariance
     consistency claim.
-  trace_policy: Only frozen evaluator subprocess opens trace; provider/solver strace must show zero trace/.bag/.fpl
-    opens.
+  trace_policy: Within generation/solving/evaluation, only the frozen evaluator subprocess opens trace, once
+    per evaluated run; provider/solver show zero trace/.bag/.fpl opens and evaluation zero .bag/.fpl opens.
+    Independent C-01b/C-03 hash checkpoints follow the separately authorized checkpoint_open_policy.
   new_solver_evaluation_limit: 2684
 statistics:
   pair_definitions:
