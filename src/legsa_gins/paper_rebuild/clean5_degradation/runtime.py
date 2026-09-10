@@ -22,6 +22,7 @@ from ..manifest import sha256_file
 from ..subprocess_guard import run_process_group
 from .common import FLAGS, pinned, resolve, resolved_pins, read_csv, write_json, seal_roots
 from .providers import build_base, generate_case
+from .checkpoint_process import audit_locked_opens
 
 
 def selection(contract, reg):
@@ -48,7 +49,7 @@ def selection(contract, reg):
 
 def checkpoint(contract, reg, stage, name, resolution):
     """Require an explicit human resolution; never infer permission from time."""
-    if resolution.get("mode") not in ("metadata_for_forbidden", "independent_hash_all"):
+    if resolution.get("mode") != "independent_hash_all":
         raise ValueError("Raw checkpoint scope requires explicit human resolution")
     if not resolution.get("human_instruction"):
         raise ValueError("Missing literal human checkpoint instruction")
@@ -56,7 +57,7 @@ def checkpoint(contract, reg, stage, name, resolution):
     if len(entries) != 22:
         raise ValueError("Raw checkpoint must cover exactly 22 BY2 members")
     if resolution["mode"] == "independent_hash_all":
-        output = stage / "01_CHECKPOINTS" / (name + ".json")
+        output = stage / "01_CHECKPOINTS" / name / "CHECKPOINT_RESULT.json"
         output.parent.mkdir(parents=True, exist_ok=True)
         log = output.with_suffix('.strace')
         program = ("import sys,json;from legsa_gins.paper_rebuild.clean5_degradation.checkpoint_process import hash_members;"
@@ -72,37 +73,20 @@ def checkpoint(contract, reg, stage, name, resolution):
         expected = {str(reg.raw_root / r['relative_path']) for r in entries}
         scope = write_scope_audit(opened, raw_root=reg.raw_root, clean_root=reg.clean_root,
                                  allowed_write_roots=[output.parent])
-        audit = {"passed": completed.returncode == 0 and len(raw) == 22
-                 and {r['path'] for r in raw} == expected and scope['pass']
-                 and all(r['return_code'] >= 0 and 'O_RDONLY' in r['flags'] for r in raw),
-                 "raw_open_count": len(raw), "scope": scope, "resolution": resolution,
+        opened_audit = audit_locked_opens(raw, expected)
+        payload = json.loads(output.read_text()) if output.is_file() else {}
+        result_pass = all(payload.get(key) == 22 for key in ('member_count', 'live_hash_count', 'passed_count'))
+        audit = {**opened_audit, "passed": completed.returncode == 0 and opened_audit['passed'] and scope['pass'] and result_pass,
+                 "checkpoint_name": name, "scope": scope, "resolution": resolution,
+                 "result_path": str(output), "result_sha256": sha256_file(output) if output.is_file() else None,
+                 "hash_result_pass": result_pass, "exit_code": completed.returncode,
                  "exception_role": "HUMAN_AUTHORIZED_HASH_ONLY_CHECKPOINT_NOT_SOLVER_OR_PROVIDER",
                  "strace_sha256": sha256_file(log)}
-        write_json(output.with_name(name + '_OPEN_AUDIT.json'), audit)
-        payload = json.loads(output.read_text()) if output.is_file() else {}
+        write_json(output.with_name('CHECKPOINT_STRACE_AUDIT.json'), audit)
         if not audit['passed'] or payload.get('passed_count') != 22:
             raise ValueError('Independent raw checkpoint failed: ' + completed.stderr[-1000:])
+        print('CHECKPOINT', name, '22/22', 'PASS', flush=True)
         return payload
-    rows = []
-    for entry in entries:
-        source = reg.raw_root / entry["relative_path"]
-        if source.is_symlink() or not source.is_file():
-            raise ValueError("Missing/symlink immutable raw member")
-        forbidden = source.name.startswith("trace_") or source.suffix in (".bag", ".fpl")
-        stat = source.stat()
-        digest = None if forbidden else sha256_file(source)
-        passed = stat.st_size == int(entry["size_bytes"])
-        passed &= (stat.st_mtime_ns == int(entry["mtime_ns"])) if forbidden else digest == entry["sha256"]
-        rows.append({"relative_path": entry["relative_path"], "expected_sha256": entry["sha256"],
-                     "actual_sha256": digest, "verification": "SEALED_HASH_PLUS_SIZE_MTIME_ONLY" if forbidden else "LIVE_SHA256",
-                     "passed": bool(passed)})
-    payload = {"members": rows, "member_count": 22, "passed_count": sum(r["passed"] for r in rows),
-               "live_hash_count": sum(r["actual_sha256"] is not None for r in rows), "resolution": resolution,
-               "trace_open_count": 0, "bag_open_count": 0, "fpl_open_count": 0}
-    write_json(stage / "01_CHECKPOINTS" / (name + ".json"), payload)
-    if payload["passed_count"] != 22:
-        raise ValueError("Raw checkpoint mismatch")
-    return payload
 
 
 def generate_providers(contract, reg, stage, code_commit, contract_hash):
@@ -144,7 +128,7 @@ def prepare(contract, reg, stage, code_commit, resolution, local_config, contrac
         if cfg['run_id'] != row['run_id'] or cfg['case_id'] != row['case_id']:
             raise ValueError('Selected configuration registry identity mismatch')
     if (not resolution or not resolution.get("human_instruction")
-            or resolution.get('mode') not in ('metadata_for_forbidden', 'independent_hash_all')):
+            or resolution.get('mode') != 'independent_hash_all'):
         raise ValueError("Checkpoint scope unresolved; no provider generation")
     stage.mkdir(parents=True, exist_ok=False)
     checkpoint(contract, reg, stage, "BEFORE_PROVIDER", resolution)

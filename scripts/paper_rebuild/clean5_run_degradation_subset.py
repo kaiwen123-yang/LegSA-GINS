@@ -86,13 +86,23 @@ def main():
         print('SOLVERS_SEALED', flush=True)
         return
     records = json.loads((stage / '03_RUNS/RUN_RECORDS.json').read_text())
+    checkpoint(contract, reg, stage, 'BEFORE_EVALUATION', resolution)
     results = evaluate_all(records, contract, reg, stage, commit)
     comparison, decision = build_comparison(contract, reg, stage, results, commit)
     horizontal_rows = horizontal(contract, reg, stage, results, commit)
     checkpoint(contract, reg, stage, 'AFTER_EVALUATION', resolution)
+    checkpoint_audits = [json.loads(p.read_text()) for p in sorted((stage / '01_CHECKPOINTS').glob('*/CHECKPOINT_STRACE_AUDIT.json'))]
+    expected_checkpoints = {'BEFORE_PROVIDER', 'AFTER_PROVIDER', 'BEFORE_SOLVER', 'AFTER_SOLVER',
+                            'BEFORE_EVALUATION', 'AFTER_EVALUATION'}
+    checkpoint_pass = (len(checkpoint_audits) == 6 and {r['checkpoint_name'] for r in checkpoint_audits} == expected_checkpoints
+                       and all(r['passed'] for r in checkpoint_audits))
+    write_json(stage / '01_CHECKPOINTS/CHECKPOINT_STRACE_AUDIT.json', {'passed': checkpoint_pass,
+               'checkpoint_count': len(checkpoint_audits), 'sessions': checkpoint_audits})
+    if not checkpoint_pass:
+        raise ValueError('Incomplete pre/post checkpoint session evidence')
     verify_seal(stage / '04_SEAL/SOLVER_OUTPUT_SEAL.json', stage)
     render(contract, stage, records, results, comparison, decision, horizontal_rows, commit, contract_commit)
-    seal_roots(stage, ['07_EVALUATION', '08_AGGREGATE', '09_HORIZONTAL_V3'], '04_SEAL/EVALUATION_ARTIFACT_SEAL.json',
+    seal_roots(stage, ['01_CHECKPOINTS', '07_EVALUATION', '08_AGGREGATE', '09_HORIZONTAL_V3'], '04_SEAL/EVALUATION_ARTIFACT_SEAL.json',
                {'code_commit': commit, 'data_mode': 'real_base_controlled_degradation', 'decision': decision['decision']})
     write_json(stage / 'FINAL_STATUS.json', {'status': 'COMPLETED', 'code_commit': commit,
                'solver_terminal_count': len(records), 'evaluation_terminal_count': len(results),

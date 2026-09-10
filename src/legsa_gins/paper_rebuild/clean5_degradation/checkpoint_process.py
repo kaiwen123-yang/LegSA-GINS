@@ -2,9 +2,26 @@
 from __future__ import annotations
 
 from pathlib import Path
+from collections import Counter
 
 from ..manifest import sha256_file
 from .common import read_csv, write_json
+
+
+def audit_locked_opens(records, expected_paths):
+    """Audit only raw-root open records from one independent hash session."""
+    expected = set(map(str, expected_paths))
+    observed = Counter(r['path'] for r in records)
+    writes = [r for r in records if any(flag in r['flags'] for flag in
+              ('O_WRONLY', 'O_RDWR', 'O_CREAT', 'O_TRUNC', 'O_APPEND'))]
+    readonly = all(r['return_code'] >= 0 and 'O_RDONLY' in r['flags'] for r in records)
+    once = all(observed[p] == 1 for p in expected)
+    return {'passed': len(expected) == 22 and set(observed) == expected and once and readonly and not writes,
+            'expected_raw_paths': sorted(expected), 'observed_raw_paths': sorted(observed),
+            'per_member_open_counts': {p: observed[p] for p in sorted(expected | set(observed))},
+            'all_member_open_counts_equal_one': once, 'raw_open_count': len(records),
+            'raw_write_open_count': len(writes), 'all_raw_opens_successful_readonly': readonly,
+            'hash_only': True, 'scientific_values_parsed': False}
 
 
 def hash_members(raw_lock, raw_root, output, resolution):
