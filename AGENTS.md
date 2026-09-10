@@ -891,6 +891,8 @@ remaining: BY2O gating sensitivity to IMU integration convention.
 
 BY2O records GNSS2 RTK float for 57 epochs, not a stream outage.
 
+P-07 corrected-chain degradation subset is complete: 61 mechanically selected cases, 480 excluded, NOT_TRANSFERABLE=[]; CAL 669 COMPLETED / 2 FAILED_TECHNICAL and V2S 663 / 8, with no retries. Across v3/v2, main-metric pair/version items are 23 maintained / 13 flipped / 24 incomplete; the decision is `HUMAN_DECISION_REQUIRED`, with 66 missing-evidence entries across pair/metric/version/chain. No full-matrix rerun was executed or automatically authorized. The 295 subset capture consistency failures retain their original wrapper terminal states and metrics; GINav horizontal v3 remains `UNAVAILABLE_EVALUATION_FAILED`. Sources: `docs/paper_rebuild/CLEAN5_DEGRADATION_SUBSET_RESULTS.md` and `<CLEAN_ROOT>/stages/CLEAN5_DEGSUBSET_BY2/08_AGGREGATE/DEGRADATION_SUBSET_DECISION.json`. The original main chain and Outcome are unchanged.
+
 Do not automatically repeat the full 541 × 11 matrix on another dataset.
 
 ---
@@ -1170,7 +1172,9 @@ Current next actions:
 2. conversation A: frozen error-budget ladder, body-frame bias, sensitivity heatmap, and calibrated three-sequence tables; show evaluator version and protocol identity explicitly;
 3. conversation D: reference-uncertainty record using timing, baseline, derived diagnostic velocity difference, consistency ratios, and frozen calibrated vrw/abstd/c;
 4. remaining: BY2O gating sensitivity to IMU integration convention; any new execution requires its own bounded authorization;
-5. post-hoc BY2O rejection/downweight timeline and Source-Aware Up cost by source, using frozen artifacts.
+5. post-hoc BY2O rejection/downweight timeline and Source-Aware Up cost by source, using frozen artifacts;
+6. human review of the P-07 decision: 13 primary flips, 24 incomplete primary pair/version items, and 66 missing-evidence entries; retain capture consistency diagnostics and GINav UNAVAILABLE; no automatic full-matrix rerun;
+7. registered, not executed: gyro z-axis scale input-side check using integrated gyro angle increments versus A1 angle increments on turn segments, with zero trace reads.
 ```
 
 Stage 2 and the calibrated-chain execution are complete. Sources: `docs/paper_rebuild/CLEAN5_STAGE2_CLOSEOUT.md`, `docs/paper_rebuild/CLEAN5_CALIBRATED_CHAIN_RESULTS.md`, and `<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/`. The original main protocol and Outcome remain authoritative.
