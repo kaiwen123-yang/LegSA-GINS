@@ -2,6 +2,17 @@ schema_version: clean6.storage_purge_policy.v1
 task: P-09ab
 authorization: human_authorized_inventory_quarantine_and_conditional_purge
 base_commit: 68ee6b3c5e918f5b24f25e442f7bb13c5fecb263
+continuation_amendment:
+  authorized_from_commit: f91cacc3725321ba843945fcd4b43ee3e8e2049a
+  task: P-09ab_drvfs_correction
+  inherit_B_candidates_and_sha256_exactly: true
+  recompute_candidate_payload_sha256: false
+  preserve_prior_failed_audit_and_empty_quarantine: true
+  fresh_preflight_required_for_continuation: true
+  quarantine_and_purge_require_same_preflight_receipt: true
+  any_preflight_FAIL_prevents_quarantine_dispatch: true
+  any_stage_exception_or_nonzero_exit_stops_dispatch: true
+  automatic_retry_or_rollback: false
 scope:
   inventory_root: <CLEAN_ROOT>/stages
   quarantine_root: <CLEAN_ROOT>/_PURGE_PENDING/<UTC_TIMESTAMP>
@@ -135,7 +146,7 @@ gates:
   C1: every_file_bulk_class_and_family_inside_stages_keep_matches_zero
   C2: all_required_record_references_exist_after_simulated_removal
   C3: every_exact_file_has_sha256_size_evidence_and_quarantine_timestamp_in_durable_ledger
-  C4: same_filesystem_rename_each_file_verify_streaming_sha256_immediately_before_and_after
+  C4: same_filesystem_plain_os_rename_destination_lexists_false_then_source_absent_destination_present_and_ledger_size_equal_B_sha256_reused
   C5: post_quarantine_repository_record_tests_and_decision_aggregate_three_sequence_CAL_readability_PASS
   failure_action: stop_preserve_current_quarantine_no_purge
   pre_move_gates: [C1, C2, C3]
@@ -148,6 +159,14 @@ physical_operations:
   forbid_cross_filesystem_copy_fallback: true
   forbid_protected_root_target: true
   checkpoint_after_every_move_and_unlink: true
+  quarantine_progress_every_files: 1000
+  quarantine_progress_file: QUARANTINE_PROGRESS.json
+  rename_flags: none
+  rename_single_exception: stop_immediately_preserve_partial_quarantine_no_rollback_no_purge
+  directory_rename: only_if_all_contained_files_are_in_exact_plan
+  implementation_move_unit: individual_regular_file
+  content_identity: B_ledger_sha256_reused_no_439_GB_payload_rehash
+  post_move_and_pre_unlink_checks: exact_path_single_regular_file_size_and_unchanged_metadata
   source_change_or_destination_collision: stop
   purge: unlink_only_listed_verified_quarantined_files_then_rmdir_empty_quarantine_directories
   no_original_stage_or_run_directory_removal: true
@@ -156,6 +175,7 @@ records:
   archive_ledger_bytes_unchanged: true
   annotations: 'bulk purged <date>; records at <ledger_path>'
   commit_subject: 'chore(storage): hash-ledgered purge of superseded bulk outputs; records retained'
+  unknown_supplement: extension_x_directory_type_byte_descending_top_20_all_UNKNOWN_retained
 future_p09c:
   target_peak_bytes: 250000000000
   if_remaining_available_below_target: require_batched_solve_evaluate_package_ledger_purge
