@@ -92,6 +92,8 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 - Stage 2 closeout: `CLEAN5_STAGE2_CLOSEOUT.md`; calibrated run record: `CLEAN5_CALIBRATED_CHAIN_RESULTS.md`. Calibrated values are marked `NOT_THE_PREREGISTERED_COMPARISON_PROTOCOL`; the original main-chain anchors and Outcome are retained.
 - Extended handoff: `~/clean5_handoff_v2.zip`, produced by `scripts/paper_rebuild/clean5_pack_v2.py`. It inherits every v1 member byte-for-byte and adds frozen stage 2/calibrated tables, both evaluation versions and body-frame biases. Raw reference trace is excluded; the explicitly pinned trace-difference diagnostic table is `DERIVED_DIAGNOSTIC_ONLY`.
 
+- P-09ab storage inventory (2026-09-11): C1/C2/C3 PASS, C4 FAIL (`renameat2(RENAME_NOREPLACE)` returned EINVAL), C5/D NOT_EXECUTED. Planned 57,233 files / 439,508,000,426 logical bytes; moved/purged/released by purge 0/0/0. The empty quarantine tree is retained. No root was bulk purged. Planned ledger records at `docs/paper_rebuild/purge/DELETION_LEDGER_20260911T040000Z.json.gz`; terminal and inventory record: `docs/paper_rebuild/purge/STORAGE_PURGE_20260911T040000Z.md`. Main-chain roots and Outcome remain unchanged.
+
 ## 7. Open items
 
 - [x] Decision-rule file committed; hash recorded above.

@@ -184,6 +184,8 @@ Default CLEAN5 numerical sources (under each sequence root):
 <CLEAN5_DECISION_ROOT>/A04_F04_DECISION_INPUTS.json
 ```
 
+P-09ab storage inventory (2026-09-11): C1/C2/C3 PASS, C4 FAIL (`renameat2(RENAME_NOREPLACE)` returned EINVAL), C5/D NOT_EXECUTED. Planned 57,233 files / 439,508,000,426 logical bytes; moved/purged/released by purge 0/0/0. The empty quarantine tree is retained. No root was bulk purged. Planned ledger records at `docs/paper_rebuild/purge/DELETION_LEDGER_20260911T040000Z.json.gz`; terminal and inventory record: `docs/paper_rebuild/purge/STORAGE_PURGE_20260911T040000Z.md`. Main-chain roots and Outcome remain unchanged.
+
 Do not reconstruct current metrics from screenshots, legacy tables, or old summaries.
 
 ---
