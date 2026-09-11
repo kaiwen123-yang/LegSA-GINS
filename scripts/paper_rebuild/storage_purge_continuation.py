@@ -16,29 +16,9 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 from legsa_gins.paper_rebuild.storage_purge import (
-    PLAN_COLUMNS, StoragePurge, _csv_bytes, _digest, _exists, _fail,
+    PLAN_COLUMNS, StoragePurge, directory_type, _csv_bytes, _digest, _exists, _fail,
     _json_bytes, _read, _write_new,
 )
-
-
-def directory_type(parts):
-    """First matching category in this fixed order; independent of file size."""
-    upper = [part.upper() for part in parts]
-    if "FROZEN_EVALUATOR" in upper:
-        return "FROZEN_EVALUATOR"
-    if "LOGS" in upper:
-        return "LOGS"
-    if any("BUILD" in p or p == "CMAKEFILES" for p in upper):
-        return "BUILD"
-    if any("PLOTTING" in p or "FIGURE" in p or "ATLAS" in p for p in upper):
-        return "PLOTTING_FIGURES_ATLAS"
-    for token, category in (("PROVIDER", "PROVIDER"), ("AGGREGATE", "AGGREGATE"),
-                            ("EVALUATION", "EVALUATION")):
-        if any(token in p for p in upper):
-            return category
-    if any("RUNS" in p or "OUTPUTS" in p for p in upper):
-        return "RUNS_OUTPUTS"
-    return "OTHER"
 
 
 def unknown_groups(data):

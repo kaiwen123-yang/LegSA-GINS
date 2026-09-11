@@ -88,6 +88,82 @@ def test_plan_does_not_move_and_inventory_totals_reconcile(world):
     assert str(world.clean) not in (world.audit / "DELETION_LEDGER.json").read_text()
 
 
+@pytest.mark.parametrize("name,size,expected", [
+    ("EVAL_NAV.csv", 1048576, "KEEP"), ("EVAL_NAV.csv", 1048577, "BULK_DELETABLE"),
+    ("other.txt", 1000000, "UNKNOWN"), ("other.txt", 1000001, "BULK_DELETABLE"),
+    ("other.raw", 1000001, "BULK_DELETABLE"), ("other.nav", 1000001, "BULK_DELETABLE"),
+    ("other.log", 1000001, "BULK_DELETABLE"), ("other.csv.gz", 2000000, "UNKNOWN"),
+    ("error_series_subset.csv.gz", 2000000, "BULK_DELETABLE"),
+    ("RUN_MANIFEST.json", 2000000, "KEEP"), ("go2_prior.csv", 2000000, "KEEP"),
+    ("ordinary.json", 1048576, "KEEP"), ("ordinary.json", 1048577, "UNKNOWN"),
+])
+def test_v2_size_extensions_and_original_keep_precedence(world, name, size, expected):
+    s = SimpleNamespace(st_mode=0o100600, st_size=size, st_nlink=1)
+    assert world.utility().classify(P07 + "/" + name, s)[0] == expected
+
+
+@pytest.mark.parametrize("directory", ["14_PLOTTING", "02_FIGURES/FROZEN_EVALUATOR", "07_ATLAS/logs"])
+@pytest.mark.parametrize("name", ["KF_GINS_Navresult.nav", "unknown.raw", "error_series.csv.gz"])
+def test_v2_plotting_entire_subtree_overrides_even_old_bulk(world, directory, name):
+    s = SimpleNamespace(st_mode=0o100600, st_size=2000000, st_nlink=1)
+    assert world.utility().classify(P07 + "/" + directory + "/" + name, s)[0] == "KEEP"
+
+
+@pytest.mark.parametrize("directory", ["FROZEN_EVALUATOR", "01_BUILD", "08_AGGREGATE", "PROVIDER"])
+def test_v2_extension_does_not_expand_excluded_directory_types(world, directory):
+    s = SimpleNamespace(st_mode=0o100600, st_size=2000000, st_nlink=1)
+    assert world.utility().classify(P07 + "/" + directory + "/large.csv", s)[0] != "BULK_DELETABLE"
+
+
+def test_v2_extensions_require_an_approved_family(world):
+    s = SimpleNamespace(st_mode=0o100600, st_size=2000000, st_nlink=1)
+    assert world.utility().classify("stages/CLEAN_UNAPPROVED/03_RUNS/RUN_1/large.csv", s)[0] == "UNKNOWN"
+
+
+def test_v2_plotting_stage_name_protects_the_entire_stage(world):
+    s = SimpleNamespace(st_mode=0o100600, st_size=2000000, st_nlink=1)
+    relative = "stages/CLEAN6_PUBLICATION_FIGURES/01_CANONICAL541/00_DERIVED_TABLES/large.txt"
+    assert world.utility().classify(relative, s)[0] == "KEEP"
+
+
+def test_v2_new_inventory_adds_candidates_and_reuses_unchanged_b_sha(world, monkeypatch):
+    original = world.candidate()
+    old = world.utility()
+    old.plan(hash_workers=1)
+    old_path = old.audit / "DELETION_LEDGER.json"
+    new_file = world.candidate("EVAL_NAV.csv", b"x" * 1048577)
+    fresh = mod.StoragePurge(world.clean, world.code, world.policy, world.closure,
+                             world.clean / "storage_purge/20260911T123456Z")
+    seen = []
+    actual_hash = mod.hash_file
+    def hash_only_new(path, **kwargs):
+        assert path != original
+        seen.append(path)
+        return actual_hash(path, **kwargs)
+    monkeypatch.setattr(mod, "hash_file", hash_only_new)
+    ledger = fresh.plan(hash_workers=1, prior_ledger=old_path,
+                        prior_ledger_sha256=mod._digest(old_path.read_bytes()))
+    assert ledger["candidate_count"] == 2 and seen == [new_file]
+    assert ledger["planning_mode"] == "FRESH_INVENTORY_POLICY_V2"
+    assert ledger["hash_evidence_counts"] == {"PRIOR_B_LEDGER_SHA256":1,
+        "EXACT_PATH_SEAL_SHA256":0, "FRESH_STREAMING_SHA256":1}
+    assert original.exists() and new_file.exists() and not fresh.quarantine.exists()
+
+
+def test_v2_changed_cached_source_is_hashed_again_in_b(world, monkeypatch):
+    original = world.candidate()
+    old = world.utility()
+    old.plan(hash_workers=1)
+    old_path = old.audit / "DELETION_LEDGER.json"
+    original.write_bytes(b"newly inventoried storage content\n")
+    fresh = mod.StoragePurge(world.clean, world.code, world.policy, world.closure,
+                             world.clean / "storage_purge/20260911T123456Z")
+    ledger = fresh.plan(hash_workers=1, prior_ledger=old_path,
+                        prior_ledger_sha256=mod._digest(old_path.read_bytes()))
+    assert ledger["hash_evidence_counts"]["PRIOR_B_LEDGER_SHA256"] == 0
+    assert ledger["entries"][0]["sha256"] == hashlib.sha256(original.read_bytes()).hexdigest()
+
+
 @pytest.mark.parametrize("relative,data", [
     (P07 + "/PORT_GNSS_UPDATE_TRACE.csv", b"small csv"),
     (P07 + "/LegSA_PORT_STD.csv", b"x" * 1048576),
@@ -105,12 +181,12 @@ def test_keep_precedence_over_bulk_family(world, relative, data):
 
 @pytest.mark.parametrize("relative,expected", [
     (P07 + "/LegSA_PORT_STD.csv", "BULK_DELETABLE"),
-    (P07 + "/EVAL_NAV.csv", "UNKNOWN"),
+    (P07 + "/EVAL_NAV.csv", "BULK_DELETABLE"),
     (P07 + "/EXACT_EVALUATOR_INPUT.nav", "BULK_DELETABLE"),
     (P07 + "/EVAL_NAV_V3.nav", "BULK_DELETABLE"),
     (P07 + "/stdout.log", "BULK_DELETABLE"),
     (PARITY + "/stdout.log", "BULK_DELETABLE"),
-    (PARITY + "/evaluator_stdout.log", "UNKNOWN"),
+    (PARITY + "/evaluator_stdout.log", "BULK_DELETABLE"),
     ("stages/unapproved/03_RUNS/RUN_1/KF_GINS_Navresult.nav", "UNKNOWN"),
     (P07 + "/tmp/working.bin", "BULK_DELETABLE"),
     (CAN + "/KF_GINS_STD.txt", "BULK_DELETABLE"),

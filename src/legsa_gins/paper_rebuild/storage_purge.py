@@ -48,6 +48,30 @@ C5_CHECKS = {"repository_record_tests", "decision_readability", "aggregate_reada
              "three_sequence_CAL_readability"}
 
 
+def plotting_subtree(parts):
+    return any("PLOTTING" in p.upper() or "FIGURE" in p.upper() or "ATLAS" in p.upper()
+               for p in parts)
+
+
+def directory_type(parts):
+    """Fixed category order shared by policy v2 and UNKNOWN reporting."""
+    upper = [part.upper() for part in parts]
+    if "FROZEN_EVALUATOR" in upper:
+        return "FROZEN_EVALUATOR"
+    if "LOGS" in upper:
+        return "LOGS"
+    if any("BUILD" in p or p == "CMAKEFILES" for p in upper):
+        return "BUILD"
+    if plotting_subtree(parts):
+        return "PLOTTING_FIGURES_ATLAS"
+    for token in ("PROVIDER", "AGGREGATE", "EVALUATION"):
+        if any(token in p for p in upper):
+            return token
+    if any("RUNS" in p or "OUTPUTS" in p for p in upper):
+        return "RUNS_OUTPUTS"
+    return "OTHER"
+
+
 @dataclass(frozen=True)
 class NativeKeepMetadata:
     """Only independently retained regular files may lack Linux identity metadata."""
@@ -283,7 +307,7 @@ class StoragePurge:
         _absolute_without_links(self.quarantine, missing=True)
         self.policy_bytes = _read(policy)
         self.policy = yaml.safe_load(self.policy_bytes)
-        if self.policy.get("schema_version") != "clean6.storage_purge_policy.v1":
+        if self.policy.get("schema_version") not in {"clean6.storage_purge_policy.v1", "clean6.storage_purge_policy.v2"}:
             _fail("unsupported storage policy")
         if self.policy.get("precedence") != ["KEEP", "BULK_DELETABLE", "UNKNOWN"]:
             _fail("KEEP precedence is mandatory")
@@ -411,6 +435,8 @@ class StoragePurge:
             reason = "symlink_directory_or_special_never_follow"
         elif s.st_nlink > 1:
             reason = "multiply_linked"
+        elif keep.get("plotting_figures_atlas_entire_subtrees") and plotting_subtree(parts[1:-1]):
+            reason = "complete_plotting_figures_atlas_subtree"
         elif relative in self.keep_files or any(_under(relative, d) for d in self.keep_dirs):
             reason = "reference_closure"
         elif self._embedded_git(relative):
@@ -437,6 +463,14 @@ class StoragePurge:
         if reason:
             return "KEEP", reason, "", ""
         family = self._family(relative)
+        expansion = bulk.get("extension_expansion_v2", {})
+        if (not file_class and family and expansion
+                and directory_type(parts[2:-1]) in expansion["directory_types"]
+                and s.st_size > expansion["single_file_strictly_larger_than_bytes"]
+                and (PurePosixPath(name).suffix.lower() in expansion["extensions"]
+                     or any(fnmatch.fnmatchcase(name.lower(), pattern)
+                            for pattern in expansion["compressed_filename_patterns"]))):
+            file_class = "large_extension_v2"
         if file_class and family:
             return "BULK_DELETABLE", "approved_class_and_family", family, file_class
         return "UNKNOWN", "family_or_class_not_approved", family, file_class
@@ -797,13 +831,32 @@ class StoragePurge:
             visit(obj)
         return by_path, by_hash
 
-    def plan(self, *, hash_workers=4, metadata_workers=8, native_dense_keep=False, seal_workers=8):
+    def plan(self, *, hash_workers=4, metadata_workers=8, native_dense_keep=False, seal_workers=8,
+             prior_ledger=None, prior_ledger_sha256=None):
         if not 1 <= hash_workers <= 8:
             _fail("hash_workers must be 1..8")
         if not 1 <= seal_workers <= 8:
             _fail("seal_workers must be 1..8")
         if _exists(self.audit) or _exists(self.quarantine):
             _fail("plan requires new audit and quarantine identities")
+        cached, cache_source = {}, None
+        if prior_ledger is not None:
+            prior_ledger = _absolute_without_links(prior_ledger)
+            if (prior_ledger.name != "DELETION_LEDGER.json" or prior_ledger.parent.parent != self.clean / "storage_purge"
+                    or not isinstance(prior_ledger_sha256, str) or not HEX.fullmatch(prior_ledger_sha256)):
+                _fail("prior B hash cache must be a pinned storage audit ledger")
+            prior_bytes = _read(prior_ledger)
+            if _digest(prior_bytes) != prior_ledger_sha256:
+                _fail("prior B hash cache SHA changed")
+            prior = json.loads(prior_bytes)
+            for row in prior["entries"]:
+                path = _relative(row["original_relative_path"])
+                if path in cached or not path.startswith("stages/") or not HEX.fullmatch(row["sha256"]):
+                    _fail("invalid prior B cache entry")
+                cached[path] = row
+            cache_source = {"path": self.portable(prior_ledger), "sha256": prior_ledger_sha256}
+        elif prior_ledger_sha256 is not None:
+            _fail("prior ledger SHA supplied without a ledger")
         inventory, candidates, metadata = [], [], []
         totals = {"KEEP": 0, "BULK_DELETABLE": 0, "UNKNOWN": 0}
         self.inventory_walking = True
@@ -837,10 +890,16 @@ class StoragePurge:
 
         def hash_candidate(row):
             relative = row["original_relative_path"]
+            previous = cached.get(relative)
+            cache_matches = previous and all(previous.get(k) == row[k]
+                for k in ("size_bytes", "device", "inode", "mtime_ns", "nlink"))
             known = by_path.get(relative, {})
-            if len(known) > 1:
+            if cache_matches:
+                sha, evidence = previous["sha256"], "PRIOR_B_LEDGER_SHA256"
+                provenance = previous["seal_provenance"]
+            elif len(known) > 1:
                 _fail(f"conflicting sealed hashes: {relative}")
-            if known:
+            elif known and previous is None:
                 sha, evidence = next(iter(known)), "EXACT_PATH_SEAL_SHA256"
                 provenance = known[sha]
             else:
@@ -850,6 +909,7 @@ class StoragePurge:
                 evidence = "FRESH_STREAMING_SHA256"
                 provenance = by_hash.get(sha, [])
             return dict(row, sha256=sha, hash_evidence=evidence, seal_provenance=provenance,
+                        **({"B_hash_cache": cache_source} if cache_matches else {}),
                         quarantine_relative_path="_PURGE_PENDING/" + self.timestamp + "/" + relative,
                         quarantine_timestamp=self.timestamp)
 
@@ -868,6 +928,13 @@ class StoragePurge:
                       native_dense_keep_enabled=bool(native_dense_keep),
                       native_independent_keep_count=sum(r["identity_status"] == "UNQUERIED" for r in inventory),
                       disk_available_bytes=os.statvfs(self.clean).f_bavail * os.statvfs(self.clean).f_frsize)
+        if self.policy["schema_version"] == "clean6.storage_purge_policy.v2":
+            ledger.update(planning_mode="FRESH_INVENTORY_POLICY_V2", candidate_selection_recomputed=True,
+                          continuation_strategy="drvfs_plain_rename_b_sha256.v1", candidate_payload_rehashed=False,
+                          payload_rehash_field_scope="C4_and_D_only_B_hash_counts_recorded_separately",
+                          hash_cache_source=cache_source,
+                          hash_evidence_counts={key: sum(r["hash_evidence"] == key for r in planned) for key in
+                              ("PRIOR_B_LEDGER_SHA256", "EXACT_PATH_SEAL_SHA256", "FRESH_STREAMING_SHA256")})
         grouped = {}
         for row in inventory:
             counts = grouped.setdefault(row["group"], dict(group=row["group"], regular_files=0,
@@ -1216,12 +1283,15 @@ def main(argv=None):
     parser.add_argument("--native-dense-keep", action="store_true",
                         help="plan only: identity-free metadata only for dense all-independent-KEEP directories")
     parser.add_argument("--c5-receipt", type=Path)
+    parser.add_argument("--prior-ledger", type=Path)
+    parser.add_argument("--prior-ledger-sha256")
     args = parser.parse_args(argv)
     try:
         utility = StoragePurge(args.clean_root, args.code_root, args.policy, args.closure, args.audit_root)
         if args.phase == "plan":
             result = utility.plan(hash_workers=args.hash_workers, metadata_workers=args.metadata_workers,
-                                  native_dense_keep=args.native_dense_keep, seal_workers=args.seal_workers)
+                                  native_dense_keep=args.native_dense_keep, seal_workers=args.seal_workers,
+                                  prior_ledger=args.prior_ledger, prior_ledger_sha256=args.prior_ledger_sha256)
         elif args.phase == "gate":
             result = utility.gate()
         elif args.phase == "quarantine":
