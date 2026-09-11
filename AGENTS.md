@@ -106,6 +106,8 @@ If the local active branch contains unpushed commits and the remote branch is st
 
 ## 3. Authoritative Canonical-541 roots and solver identity
 
+P-09c protocol v2 root: `<CANONICAL541_V2_ROOT> = <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2`. Scratch alias `<CANONICAL541_V2_SCRATCH>` resolves through ignored local key `canonical541_v2_scratch`. Terminal: `STOPPED_GATE_FAILURE` (2026-09-11); full outputs remain in scratch, provider/ledger/stop records in the new stage. Record: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_PILOT_STOP.md`.
+
 ```text
 <CANONICAL541_ATTEMPT> =
 /mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/
@@ -311,6 +313,12 @@ The reference is Fixposition-derived and not independent ground truth. This limi
 ---
 
 ## 7. Internal method identities and current interpretation
+
+### Protocol v2 anchors (P-09c)
+
+Manuscript protocol selection: v2 (preregistered target); numerical switch `NOT_EXECUTED` because the 33-run gate is `FAIL`. Protocol v1 remains the original preregistered record; existing main-chain anchors and A04 Outcome below are unchanged.
+
+P-07 CAL C00 eleven-profile byte anchors: F01/F02/F03/F04/A03/A04/A05/A06/A07/A08/A09 each `7/7` hash equal (`77/77`). P-06 fifteen-run byte checks: `105/105`. All v2-protocol C00 evaluation metrics and key-pair median/CI/win-rate values are `UNAVAILABLE_NOT_EVALUATED`; see the eleven-row anchor table and same-field key-pair table in `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_PILOT_STOP.md`. These hash matches do not override 22 `FAILED_TECHNICAL` outer terminals.
 
 ```text
 F01 = single-antenna EKF
@@ -895,6 +903,8 @@ Hartley does not provide legal absolute yaw RMSE or absolute position RMSE and m
 
 ## 11. Corrected Classic-18 and generalization
 
+P-09c explicitly authorized full protocol v2, but stopped in its first 33-run consistency group: BY2 11 COMPLETED, BY2H 11 FAILED_TECHNICAL, BY2O 11 FAILED_TECHNICAL (`KeyError: runtime_role` in outer identity validation). All native exits were 0 and 182/182 anchor hashes matched; overall gate remains FAIL. Remaining 5940 runs, all evaluations, aggregation and handoff are NOT_EXECUTED; no retry or cleanup occurred.
+
 Corrected Classic-18 is not required by default.
 
 It becomes conditionally necessary only if the manuscript claims systematic degradation superiority over external solution-level methods. In that case, the only allowed set is:
@@ -1196,6 +1206,8 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 ---
 
 ## 18. Current next actions
+
+P-09c current terminal: `STOPPED_GATE_FAILURE`; retain both G stage and ext4 scratch scene. The 256-run pilot was not completed, so full-duration/peak forecasts and the 64→128 decision are UNAVAILABLE/NOT_REACHED. Do not restart, regenerate or reclassify the 22 technical failures automatically. The pending full-v2 manuscript handoff is not delivered; the stop record is `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_PILOT_STOP.md`.
 
 Current next actions:
 

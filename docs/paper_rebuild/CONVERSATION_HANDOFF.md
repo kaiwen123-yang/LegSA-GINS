@@ -16,6 +16,8 @@ file overrides `AGENTS.md`; it only records paper-phase decisions and task owner
 
 ## 2. Method identities for the manuscript
 
+P-09c selects protocol v2 as the preregistered manuscript target while retaining v1 as the original preregistered record. Numerical switch and final v2 handoff are NOT_EXECUTED: the first sequence gate stopped with 22 outer technical failures. Method identity A04 and its existing Outcome remain unchanged.
+
 | Manuscript label | Registry id | Role |
 |---|---|---|
 | Single | `F01` = `single_antenna_EKF` | baseline (position + receiver velocity, no yaw) |
@@ -33,6 +35,8 @@ Proposed-method identity: `A04`, decided 2026-09-08 by
 evidence commit: `09caf1e7e6151f18cc25dafad4a7ef5704ae62d2`).
 
 ## 3. Comparison structure
+
+Protocol v2 comparison status: `UNAVAILABLE_NOT_EVALUATED`. P-07 eleven-profile C00 hashes match 77/77 and P-06 fifteen-run hashes match 105/105, but the 33-run terminal gate is FAIL. No v1 table is substituted for new v2 metrics; median/CI/win-rate and maintained/flipped tables are explicitly unavailable in the P-09c stop record.
 
 - Comparison tables/figures (with external methods): Single, Dual-basic, proposed
   (plus the other candidate as "+/- Source-Aware" where space allows).
@@ -67,6 +71,10 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 | F | new conversation | clean submission repository, data/code release | last |
 
 ## 6. Data handoff locations
+
+- Protocol v2: `<CANONICAL541_V2_ROOT>` (AGENTS §3), terminal `STOPPED_GATE_FAILURE`; retain `<CANONICAL541_V2_SCRATCH>/BATCH_001/03_RUNS/` and stage `99_STOP_REPORT/`.
+- P-09c record: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_PILOT_STOP.md`; family/config counters and attempted-run timings under `docs/paper_rebuild/clean6/P09C_*.csv`.
+- `scripts/paper_rebuild/c541_pack_v3.py` is implemented but NOT_EXECUTED. `~/c541_v2_handoff.zip` is NOT_PRODUCED; SHA-256 UNAVAILABLE.
 
 - Canonical-541 authoritative attempt: `<CANONICAL541_ATTEMPT>` (see AGENTS section 3).
 
@@ -170,3 +178,5 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 
 - 2026-09-09 (C): P-06 complete: one trace-free BY2 calibration, identical s/vrw/abstd transferred to BY2H/BY2O, 15/15 calibrated solves and 30/30 v2/v3 evaluations; stage 2 closeout and clean5_handoff_v2 package indexed in §6. Robustness review: heading FAIL maintained, position PASS reversed; original decision rule and A04 Outcome unchanged.
 - 2026-09-10 (C): V-CHK V6 PASS_BY_HUMAN_AMENDMENT; P-07 complete at execution contract 3326a9cbd50d80156fe46309cd1ee5336b5a3c3b and code 24cc761e4085561888a9d8546df8b89300d340fe: 61 cases / 480 excluded, NOT_TRANSFERABLE=[], CAL 669 completed / 2 failed and V2S 663 / 8, no retries; v2/v3 evaluations 2664 completed / 20 unavailable; six hash-only checkpoints 22/22 and provider/solver forbidden opens 0, evaluator trace once per call in child only; main pair/version items 23 maintained / 13 flipped / 24 incomplete, HUMAN_DECISION_REQUIRED, no full rerun; 295 subset capture consistency false retained and GINav horizontal v3 UNAVAILABLE_EVALUATION_FAILED; full tables, decision original, horizontal v3, seals and diagnostics in CLEAN5_DEGRADATION_SUBSET_RESULTS.md; AGENTS §§11/18 updated, gyro-z input check registered but unexecuted, original main chain and Outcome unchanged.
+
+- 2026-09-11 (P-09c): preregistration 56ae6021 / fcf3558f, code freeze b26569185638fabdd2ad121fc25cf784d5a8fdb3. Stopped after 33 solver terminals: 11 COMPLETED + 22 FAILED_TECHNICAL (missing runtime_role in outer validator); native exit 0 for all33, 182/182 byte-anchor checks matched, sequence gate FAIL. No remaining pilot solver, evaluator, aggregate, archive, cleanup or science retry. Full pilot/forecast/zip UNAVAILABLE; both scene roots retained.
