@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import csv
+import base64
 import ctypes
 import errno
 import hashlib
@@ -9,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import threading
+from types import SimpleNamespace
 
 import pytest
 
@@ -558,3 +560,116 @@ def test_inventory_groups_partition_explicit_and_nested_attempts(world):
     assert utility._inventory_group(nested + "/deeper/c.txt") == nested
     assert utility._inventory_group(stage + "/remainder.txt") == stage
     assert utility._inventory_group(CAN + "/KF_GINS_STD.txt") == CAN.split("/08_FULL")[0]
+
+
+def dense_fixture(world, *, extra=None):
+    directory = world.clean / P07
+    rows = []
+    for index in range(1000):
+        name = f"metadata_{index:04d}.json"
+        put(directory, name, b"{}")
+        rows.append(dict(name=name, size=2, attributes=32))
+    if extra:
+        name, content, attributes = extra
+        put(directory, name, content)
+        rows.append(dict(name=name, size=len(content), attributes=attributes))
+    return directory, {"directory_attributes": 16, "rows": rows}
+
+
+def test_native_dense_independent_keep_has_explicit_unqueried_identity(world, monkeypatch):
+    directory, native = dense_fixture(world)
+    utility = world.utility()
+    calls = []
+    def native_query(path):
+        calls.append(path)
+        assert path == directory
+        return native
+    monkeypatch.setattr(utility, "_native_directory_listing", native_query)
+    monkeypatch.setattr(mod, "hash_file", lambda *a, **k: pytest.fail("independent KEEP payload must not be hashed"))
+    ledger = utility.plan(hash_workers=1, native_dense_keep=True)
+    assert calls == [directory] and ledger["candidate_count"] == 0
+    assert ledger["native_independent_keep_count"] == 1000
+    with (utility.audit / "FILE_INVENTORY.csv").open() as stream:
+        rows = [r for r in csv.DictReader(stream) if r["file_type"] == "regular"]
+    assert len(rows) == 1000
+    assert all(r["classification"] == "KEEP" and r["identity_status"] == "UNQUERIED" for r in rows)
+    assert all(r[k] == "" for r in rows for k in ["nlink", "device", "inode", "mtime_ns"])
+
+
+def test_native_mixed_directory_falls_back_for_every_file(world, monkeypatch):
+    directory, native = dense_fixture(world, extra=("KF_GINS_Navresult.nav", b"NAV fixture", 32))
+    utility = world.utility()
+    monkeypatch.setattr(utility, "_native_directory_listing", lambda path: native)
+    results = utility._dense_directory_metadata(directory)
+    assert len(results) == 1001 and all(not isinstance(s, mod.NativeKeepMetadata) for _, s in results)
+    candidate = next((p, s) for p, s in results if p.suffix == ".nav")
+    assert candidate[1].st_nlink == 1
+    assert utility.classify(candidate[0].relative_to(world.clean).as_posix(), candidate[1])[0] == "BULK_DELETABLE"
+
+
+@pytest.mark.parametrize("kind", ["missing_name", "duplicate_name", "wrong_type", "negative_size", "size_not_integer", "root_reparse"])
+def test_native_metadata_mismatch_stops_without_candidates(world, monkeypatch, kind):
+    directory, native = dense_fixture(world)
+    if kind == "missing_name":
+        native["rows"].pop()
+    elif kind == "duplicate_name":
+        native["rows"][-1]["name"] = native["rows"][0]["name"]
+    elif kind == "wrong_type":
+        native["rows"][0]["attributes"] = 16
+    elif kind == "negative_size":
+        native["rows"][0]["size"] = -1
+    elif kind == "size_not_integer":
+        native["rows"][0]["size"] = "2"
+    else:
+        native["directory_attributes"] = 16 | 1024
+    utility = world.utility()
+    monkeypatch.setattr(utility, "_native_directory_listing", lambda path: native)
+    with pytest.raises(mod.PurgeError, match="native"):
+        utility._dense_directory_metadata(directory)
+    assert not utility.audit.exists() and not utility.quarantine.exists()
+
+
+def test_identity_free_native_metadata_can_never_classify_bulk_or_unknown(world):
+    utility = world.utility()
+    for filename in ["KF_GINS_Navresult.nav", "unknown.dat", "error_series.csv"]:
+        with pytest.raises(mod.PurgeError, match="cannot classify"):
+            utility.classify(P07 + "/" + filename, mod.NativeKeepMetadata(1048577, 32))
+    with pytest.raises(mod.PurgeError, match="invalid native"):
+        utility.classify(P07 + "/record.json", mod.NativeKeepMetadata(2, 1024))
+
+
+def test_native_reparse_entry_falls_back_and_never_follows(world, monkeypatch):
+    directory, native = dense_fixture(world)
+    link = directory / "link.json"
+    link.symlink_to(world.code, target_is_directory=True)
+    native["rows"].append(dict(name="link.json", size=0, attributes=16 | 1024))
+    utility = world.utility()
+    monkeypatch.setattr(utility, "_native_directory_listing", lambda path: native)
+    results = utility._dense_directory_metadata(directory)
+    link_stat = next(s for p, s in results if p == link)
+    assert mod.stat.S_ISLNK(link_stat.st_mode)
+    assert all(not isinstance(s, mod.NativeKeepMetadata) for _, s in results)
+    assert utility.classify(link.relative_to(world.clean).as_posix(), link_stat)[0] == "KEEP"
+    symlink_directory = directory.with_name("linked_directory")
+    symlink_directory.symlink_to(directory, target_is_directory=True)
+    with pytest.raises(OSError):
+        utility._dense_directory_metadata(symlink_directory)
+
+
+def test_native_listing_uses_exact_wslpath_encoded_literal_and_no_recursion(world, monkeypatch):
+    directory = world.clean / "stages/literal's directory"
+    directory.mkdir()
+    captured = {}
+    def wslpath(args, **kwargs):
+        assert args == ["wslpath", "-w", str(directory)]
+        return "G:\\literal's directory\n"
+    def powershell(args, **kwargs):
+        captured["script"] = base64.b64decode(args[-1]).decode("utf-16le")
+        assert args[0] == "powershell.exe" and args[-2] == "-EncodedCommand"
+        return SimpleNamespace(stdout=b'{"directory_attributes":16,"rows":[]}')
+    monkeypatch.setattr(mod.subprocess, "check_output", wslpath)
+    monkeypatch.setattr(mod.subprocess, "run", powershell)
+    assert world.utility()._native_directory_listing(directory)["rows"] == []
+    assert "'G:\\literal''s directory'" in captured["script"]
+    assert ".EnumerateFileSystemInfos()" in captured["script"]
+    assert "-Recurse" not in captured["script"] and "ReadAll" not in captured["script"]

@@ -7,6 +7,7 @@ explicit CLI commands for the supervisor; inventory never moves or deletes files
 from __future__ import annotations
 
 import argparse
+import base64
 import csv
 import ctypes
 import fnmatch
@@ -18,11 +19,13 @@ import os
 from pathlib import Path, PurePosixPath
 import re
 import stat
+import subprocess
 import sys
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from collections import deque
 from contextlib import contextmanager
 from datetime import datetime, timezone
+from dataclasses import dataclass
 from functools import wraps
 
 import yaml
@@ -39,9 +42,22 @@ CHUNK = 4 * 1024 * 1024
 PLAN_COLUMNS = ["original_relative_path", "size_bytes", "sha256", "family", "file_class",
                 "quarantine_relative_path", "hash_evidence", "seal_provenance"]
 INVENTORY_COLUMNS = ["original_relative_path", "group", "file_type", "size_bytes", "nlink",
-                     "classification", "reason", "family", "file_class"]
+                     "classification", "reason", "family", "file_class", "device", "inode",
+                     "mtime_ns", "metadata_source", "identity_status"]
 C5_CHECKS = {"repository_record_tests", "decision_readability", "aggregate_readability",
              "three_sequence_CAL_readability"}
+
+
+@dataclass(frozen=True)
+class NativeKeepMetadata:
+    """Only independently retained regular files may lack Linux identity metadata."""
+    st_size: int
+    attributes: int
+    st_mode: int = stat.S_IFREG
+    st_nlink: None = None
+    st_dev: None = None
+    st_ino: None = None
+    st_mtime_ns: None = None
 
 
 def _fail(message):
@@ -337,6 +353,16 @@ class StoragePurge:
         _relative(relative)
         parts = PurePosixPath(relative).parts
         name = parts[-1]
+        if isinstance(s, NativeKeepMetadata):
+            if (type(s.st_size) is not int or s.st_size < 0 or type(s.attributes) is not int
+                    or s.attributes < 0 or s.attributes & (16 | 1024)
+                    or s.st_mode != stat.S_IFREG or any(value is not None for value in
+                        (s.st_nlink, s.st_dev, s.st_ino, s.st_mtime_ns))):
+                _fail("invalid native KEEP metadata")
+            independent_reason = self._independent_keep(name, s.st_size)
+            if not independent_reason:
+                _fail("native identity-free metadata cannot classify a candidate or UNKNOWN file")
+            return "KEEP", independent_reason, "", ""
         keep = self.policy["keep"]
         bulk = self.policy["bulk_deletable"]
         file_class = ""
@@ -388,6 +414,14 @@ class StoragePurge:
         if file_class and family:
             return "BULK_DELETABLE", "approved_class_and_family", family, file_class
         return "UNKNOWN", "family_or_class_not_approved", family, file_class
+
+    def _independent_keep(self, name, size):
+        keep = self.policy["keep"]
+        if any(fnmatch.fnmatchcase(name, pattern) for pattern in keep["filename_patterns"]):
+            return "record_filename"
+        if name.lower().endswith((".json", ".csv")) and size <= keep["run_records"]["small_json_csv_max_bytes"]:
+            return "small_json_csv"
+        return ""
 
     def _embedded_git(self, relative):
         if any(_under(relative, root) for root in self.embedded_git_roots):
@@ -446,7 +480,83 @@ class StoragePurge:
             finally:
                 os.close(fd)
 
-    def _walk_plan(self, root, *, workers=8):
+    @staticmethod
+    def _native_directory_listing(directory):
+        """One exact directory, metadata only; no configurable Windows root mapping."""
+        windows_path = subprocess.check_output(["wslpath", "-w", str(directory)], text=True,
+                                               timeout=15).strip()
+        if not re.match(r"^[A-Za-z]:\\", windows_path) or "\n" in windows_path or "\r" in windows_path:
+            _fail("wslpath did not return one native drive directory")
+        literal = windows_path.replace("'", "''")
+        script = (
+            "$ErrorActionPreference='Stop'; $ProgressPreference='SilentlyContinue'; "
+            "[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new($false); "
+            f"$dir=[System.IO.DirectoryInfo]::new('{literal}'); "
+            "$rootAttributes=[int]$dir.Attributes; "
+            "if(($rootAttributes -band 1024) -ne 0){throw 'reparse directory forbidden'}; "
+            "$rows=[System.Collections.Generic.List[object]]::new(); "
+            "foreach($x in $dir.EnumerateFileSystemInfos()){ $a=[int]$x.Attributes; "
+            "$n=[int64]0; if(($a -band 16) -eq 0 -and ($a -band 1024) -eq 0){$n=$x.Length}; "
+            "$rows.Add(@{name=$x.Name;size=$n;attributes=$a}) }; "
+            "@{directory_attributes=$rootAttributes;rows=$rows} | ConvertTo-Json -Compress -Depth 4"
+        )
+        encoded = base64.b64encode(script.encode("utf-16le")).decode("ascii")
+        result = subprocess.run(["powershell.exe", "-NoLogo", "-NoProfile", "-NonInteractive",
+                                 "-EncodedCommand", encoded], stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE, check=True, timeout=60)
+        return json.loads(result.stdout.decode("utf-8-sig"))
+
+    def _dense_directory_metadata(self, directory):
+        with _parent_fd(directory) as (parent, name):
+            fd = os.open(name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC,
+                         dir_fd=parent)
+            try:
+                before = os.fstat(fd)
+                with os.scandir(fd) as scan:
+                    entries = sorted(list(scan), key=lambda entry: entry.name)
+                if len(entries) < 1000:
+                    return [(directory / entry.name, entry.stat(follow_symlinks=False)) for entry in entries]
+                # d_type checks do not follow links; if unavailable Python safely obtains lstat.
+                linux_types = {entry.name: "symlink" if entry.is_symlink() else "directory"
+                               if entry.is_dir(follow_symlinks=False) else "regular"
+                               if entry.is_file(follow_symlinks=False) else "special" for entry in entries}
+                native = self._native_directory_listing(directory)
+                attributes = native.get("directory_attributes")
+                if type(attributes) is not int or not attributes & 16 or attributes & 1024:
+                    _fail("native directory is not an ordinary non-reparse directory")
+                rows = native.get("rows")
+                if not isinstance(rows, list):
+                    _fail("native directory rows must be a list")
+                by_name = {}
+                for row in rows:
+                    if not isinstance(row, dict):
+                        _fail("malformed native directory row")
+                    filename, size, attributes = row.get("name"), row.get("size"), row.get("attributes")
+                    if (not isinstance(filename, str) or not filename or filename in by_name
+                            or "/" in filename or "\\" in filename or filename in {".", ".."}
+                            or type(size) is not int or size < 0 or type(attributes) is not int or attributes < 0):
+                        _fail("invalid or duplicate native metadata")
+                    by_name[filename] = row
+                if set(by_name) != set(linux_types):
+                    _fail("native/Linux directory names mismatch")
+                all_independent_keep = True
+                for filename, row in by_name.items():
+                    native_type = "symlink" if row["attributes"] & 1024 else "directory" if row["attributes"] & 16 else "regular"
+                    if linux_types[filename] != native_type:
+                        _fail("native/Linux directory types mismatch")
+                    if native_type != "regular" or not self._independent_keep(filename, row["size"]):
+                        all_independent_keep = False
+                if not _same_stat(before, os.fstat(fd)) or not _same_stat(before, _stat(directory)):
+                    _fail("directory changed during native metadata query")
+                if all_independent_keep:
+                    return [(directory / entry.name,
+                             NativeKeepMetadata(by_name[entry.name]["size"], by_name[entry.name]["attributes"]))
+                            for entry in entries]
+                return [(directory / entry.name, entry.stat(follow_symlinks=False)) for entry in entries]
+            finally:
+                os.close(fd)
+
+    def _walk_plan(self, root, *, workers=8, native_dense_keep=False):
         """Bounded directory parallelism; the owner observes parents before children."""
         if not 1 <= workers <= 16:
             _fail("metadata_workers must be 1..16")
@@ -456,7 +566,8 @@ class StoragePurge:
             while ready or pending:
                 while ready and len(pending) < workers:
                     directory = ready.popleft()
-                    pending[pool.submit(self._directory_metadata, directory)] = directory
+                    reader = self._dense_directory_metadata if native_dense_keep else self._directory_metadata
+                    pending[pool.submit(reader, directory)] = directory
                 completed, _ = wait(pending, return_when=FIRST_COMPLETED)
                 for future in completed:
                     directory = pending.pop(future)
@@ -576,7 +687,7 @@ class StoragePurge:
             visit(obj)
         return by_path, by_hash
 
-    def plan(self, *, hash_workers=4, metadata_workers=8):
+    def plan(self, *, hash_workers=4, metadata_workers=8, native_dense_keep=False):
         if not 1 <= hash_workers <= 8:
             _fail("hash_workers must be 1..8")
         if _exists(self.audit) or _exists(self.quarantine):
@@ -584,14 +695,18 @@ class StoragePurge:
         inventory, candidates, metadata = [], [], []
         totals = {"KEEP": 0, "BULK_DELETABLE": 0, "UNKNOWN": 0}
         self.inventory_walking = True
-        for path, s in self._walk_plan(self.clean / "stages", workers=metadata_workers):
+        for path, s in self._walk_plan(self.clean / "stages", workers=metadata_workers,
+                                      native_dense_keep=native_dense_keep):
             relative = path.relative_to(self.clean).as_posix()
             classification, reason, family, file_class = self.classify(relative, s)
             group = self._inventory_group(relative)
             file_type = "regular" if stat.S_ISREG(s.st_mode) else "directory" if stat.S_ISDIR(s.st_mode) else "symlink" if stat.S_ISLNK(s.st_mode) else "special"
             row = dict(original_relative_path=relative, group=group, file_type=file_type,
                        size_bytes=s.st_size if file_type == "regular" else 0, nlink=s.st_nlink,
-                       classification=classification, reason=reason, family=family, file_class=file_class)
+                       classification=classification, reason=reason, family=family, file_class=file_class,
+                       device=s.st_dev, inode=s.st_ino, mtime_ns=s.st_mtime_ns,
+                       metadata_source="WINDOWS_NATIVE_INDEPENDENT_KEEP" if isinstance(s, NativeKeepMetadata) else "LINUX_LSTAT",
+                       identity_status="UNQUERIED" if isinstance(s, NativeKeepMetadata) else "QUERIED")
             inventory.append(row)
             totals[classification] += 1
             if classification == "BULK_DELETABLE":
@@ -637,6 +752,8 @@ class StoragePurge:
                       **self.base_binding, plan_sha256=_digest(plan_data), entries=planned,
                       candidate_count=len(planned), candidate_bytes=sum(r["size_bytes"] for r in planned),
                       inventory_counts=totals, scientific_execution_count=0, raw_content_open_count=0,
+                      native_dense_keep_enabled=bool(native_dense_keep),
+                      native_independent_keep_count=sum(r["identity_status"] == "UNQUERIED" for r in inventory),
                       disk_available_bytes=os.statvfs(self.clean).f_bavail * os.statvfs(self.clean).f_frsize)
         grouped = {}
         for row in inventory:
@@ -982,12 +1099,15 @@ def main(argv=None):
         parser.add_argument("--" + name, required=True, type=Path)
     parser.add_argument("--hash-workers", type=int, default=4)
     parser.add_argument("--metadata-workers", type=int, default=8)
+    parser.add_argument("--native-dense-keep", action="store_true",
+                        help="plan only: identity-free metadata only for dense all-independent-KEEP directories")
     parser.add_argument("--c5-receipt", type=Path)
     args = parser.parse_args(argv)
     try:
         utility = StoragePurge(args.clean_root, args.code_root, args.policy, args.closure, args.audit_root)
         if args.phase == "plan":
-            result = utility.plan(hash_workers=args.hash_workers, metadata_workers=args.metadata_workers)
+            result = utility.plan(hash_workers=args.hash_workers, metadata_workers=args.metadata_workers,
+                                  native_dense_keep=args.native_dense_keep)
         elif args.phase == "gate":
             result = utility.gate()
         elif args.phase == "quarantine":
