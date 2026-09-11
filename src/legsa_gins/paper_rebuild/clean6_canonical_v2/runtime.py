@@ -31,6 +31,28 @@ PROFILE_KEYS = frozenset(('algorithm_id', 'ablation_variant', 'enable_dual_yaw',
     'enable_go2_roll_pitch_prior', 'enable_go2_horizontal_velocity_prior'))
 
 
+def append_sequence_runtime_role(text, role):
+    """Add only preregistered transport metadata after the scientific byte audit."""
+    if not isinstance(role, str) or not role or '\n' in role:
+        raise ValueError('Missing/invalid preregistered sequence runtime_role')
+    before = yaml.safe_load(text)
+    if 'runtime_role' in before:
+        if before['runtime_role'] != role:
+            raise ValueError('Existing sequence runtime_role differs from preregistration')
+        suffix = ''
+    else:
+        suffix = ('' if text.endswith('\n') else '\n') + 'runtime_role: ' + json.dumps(role) + '\n'
+    result = text + suffix
+    after = yaml.safe_load(result)
+    if after.pop('runtime_role') != role or after != {k: v for k, v in before.items() if k != 'runtime_role'}:
+        raise ValueError('Sequence role transport changed scientific configuration')
+    return result, {'transport_only': True, 'runtime_role': role,
+                    'original_text_sha256': hashlib.sha256(text.encode()).hexdigest(),
+                    'derived_text_sha256': hashlib.sha256(result.encode()).hexdigest(),
+                    'original_bytes_preserved_as_prefix': result.startswith(text),
+                    'appended_text': suffix, 'scientific_parameter_changed_keys': []}
+
+
 def csv_rows(path):
     with Path(path).open(newline='') as stream:
         return list(csv.DictReader(stream))
@@ -146,6 +168,9 @@ def run_one(source, bundle, contract, reg, run_root, code_commit, *, original_te
         text, diff = patch_calibrated_config(original_text, replacements, model,
             model_sha256=contract['runtime']['model']['sha256'],
             model_commit=contract['runtime']['model_freeze_commit'])
+        if dataset != 'BY2':
+            text, role_audit = append_sequence_runtime_role(text, contract['restart_authorization']['sequence_runtime_role'])
+            record['runtime_role_transport_audit'] = role_audit
         cfg = yaml.safe_load(text)
         if [cfg['starttime'], cfg['endtime']] != spec['window_seconds']:
             raise ValueError('Frozen sequence window changed')
@@ -162,18 +187,27 @@ def run_one(source, bundle, contract, reg, run_root, code_commit, *, original_te
         tmp = root/'tmp'
         tmp.mkdir()
         log = root/'SOLVER_OPENAT.strace'
+        from .resources import resource_command, read_process_resources
+        resource_path = root/'SOLVER_PROCESS_RESOURCES.txt'
+        native_command = [str(resolve(contract['runtime']['executable']['path'], reg)),
+            '--config', str(cfg_path), '--output-dir', str(root), '--debug-update-timeline',
+            '--debug-output-dir', str(root), '--debug-max-rows', '1000000']
         command = ['env', 'OMP_NUM_THREADS=1', 'OPENBLAS_NUM_THREADS=1', 'MKL_NUM_THREADS=1',
             'NUMEXPR_NUM_THREADS=1', 'TMPDIR='+str(tmp),
             'strace', '-f', '-qq', '-yy', '-s', '4096', '-e', 'trace=openat', '-o', str(log),
-            str(resolve(contract['runtime']['executable']['path'], reg)), '--config', str(cfg_path),
-            '--output-dir', str(root), '--debug-update-timeline', '--debug-output-dir', str(root),
-            '--debug-max-rows', '1000000']
+            *resource_command(native_command, resource_path)]
         record.update(command=command, launch_attempted=True)
         write_json(root/'RUN_STARTED.json', record)
         solve_start = time.monotonic()
         result = run_process_group(command, cwd=reg.code_root, timeout_seconds=contract['runtime']['timeout_s'],
             timeout_message='P09c solver timeout; no retry', launch_failure_message='P09c launch failure; no retry')
         record.update(solver_seconds=time.monotonic()-solve_start, exit_code=result.returncode)
+        try:
+            record['solver_process_resources'] = read_process_resources(resource_path)
+            record['solver_peak_rss_bytes'] = record['solver_process_resources']['peak_rss_bytes']
+        except (OSError, ValueError) as error:
+            record['solver_process_resources'] = {'status': 'UNAVAILABLE', 'failure': str(error)}
+            record['solver_peak_rss_bytes'] = None
         (root/'stdout.log').write_text(result.stdout)
         (root/'stderr.log').write_text(result.stderr)
         record['strace_audit'] = audit_solver_openat(log, cwd=reg.code_root, raw_root=reg.raw_root,

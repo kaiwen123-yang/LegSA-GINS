@@ -23,8 +23,14 @@ def load_contract(path):
         raise ValueError('P09c requires CAL and eleven profiles')
     if contract['runtime']['solver_limit'] != 5973 or contract['sequence_consistency']['run_count'] != 33:
         raise ValueError('Distinct run accounting mismatch')
-    if contract['execution']['initial_workers'] != 64 or contract['execution']['maximum_workers'] != 128:
-        raise ValueError('Frozen concurrency mismatch')
+    execution = contract['execution']
+    if (execution['solver_pool']['formula'] != 'min(nproc - 2, 22)' or
+            execution['evaluator_pool']['memory_budget_fraction'] != .75 or
+            execution['evaluator_pool']['rss_safety_factor'] != 1.25 or
+            execution['batch_size'] != 256 or 'worker_promotion' in execution):
+        raise ValueError('Human-amended resource policy mismatch')
+    if contract['restart_authorization']['native_rerun_count'] != 0:
+        raise ValueError('Original 33 native outputs must be reused')
     if contract['storage']['direct_G_fallback'] or contract['storage']['peak_limit_bytes'] != 250000000000:
         raise ValueError('Frozen ext4 retention policy mismatch')
     mappings = contract['providers']['mapping']

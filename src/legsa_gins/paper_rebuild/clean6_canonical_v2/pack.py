@@ -27,7 +27,9 @@ IDENT = {"run_id", "run_order", "execution_key", "case_id", "method_id", "matrix
     "finite_output", "reference_identity", "protocol_id", "evaluator_version", "evaluator_contract",
     "solver_terminal_status", "dataset_id", "data_mode", "synthetic_data_used", "semisynthetic_data_used",
     "trace_used_online", "controlled_degradation_applied", "uncertainty_status", "v3_std_policy",
-    "code_commit", "config_hash", "native_nav_sha256", "eval_nav_sha256", "std_sha256"}
+    "code_commit", "config_hash", "native_nav_sha256", "eval_nav_sha256", "std_sha256",
+    "native_execution_code_commit", "validation_code_commit", "continuation_code_commit",
+    "validation_config_hash", "original_native_reused"}
 KEEP_COL = re.compile(
     r"^(east|north|up|horizontal|position_3d|attitude_norm|roll|pitch|yaw)_"
     r"(rmse|mae|bias|signed_mean|signed_median|standard_deviation|median|"
@@ -178,8 +180,29 @@ def pack(stage, output_zip, *, package_dir=None):
             source = _safe_file(evaluation_root / name, stage)
             destination = target / "12_OFFLINE_EVALUATION" / version / name
             shutil.copyfile(source, destination)
+    # Preserve original failed evidence and the separately authorized restart.
+    restart_identity = None
+    restart_directories = []
+    restart_parent = stage/'RESTARTS'
+    if restart_parent.exists():
+        restarts = sorted(p for p in restart_parent.iterdir() if p.is_dir())
+        if len(restarts) != 1:
+            raise ValueError('Expected exactly one explicitly authorized protocol restart')
+        restart = restarts[0]
+        freeze = json.loads(_safe_file(restart/'CONTINUATION_FREEZE.json', stage).read_text())
+        gate = json.loads(_safe_file(restart/'SEQUENCE_CONSISTENCY_GATE.json', stage).read_text())
+        if gate['status'] != 'PASS' or (restart/'STOPPED.json').exists():
+            raise ValueError('Active restart must pass before handoff')
+        restart_identity = {'active_sequence_gate': str((restart/'SEQUENCE_CONSISTENCY_GATE.json').relative_to(stage)),
+            'active_sequence_gate_status': gate['status'], 'continuation_code_commit': freeze['code_commit'],
+            'original_native_code_commit': freeze['original_execution_freeze']['code_commit'],
+            'original_stage_STOPPED_and_gate_role': 'PRESERVED_PRE_RESTART_HISTORY',
+            'original_native_reused_count': 33}
+        restart_directories.append(restart)
+        validation_root = restart/'REVALIDATION_RUNS'
+        restart_directories.extend(sorted(p for p in validation_root.iterdir() if p.is_dir()))
     # Bounded identity/gate and registry copies; no traversal into providers/runs.
-    for directory in (stage, stage / "00_PREREGISTRATION", stage / "01_REGISTRY", stage / "07_FULL_ALGORITHM_REGISTRY"):
+    for directory in (stage, stage / "00_PREREGISTRATION", stage / "01_REGISTRY", stage / "07_FULL_ALGORITHM_REGISTRY", *restart_directories):
         if not directory.is_dir():
             continue
         for source in sorted(directory.iterdir()):
@@ -194,6 +217,7 @@ def pack(stage, output_zip, *, package_dir=None):
     _json(target / "HEADERS.json", headers)
     _json(target / "SOURCE_TABLE_ROWS.json", source_rows)
     _json(target / "IDENTITY_PROBE.json", {"passed": True, "versions": probes,
+        "restart_identity": restart_identity,
         "series_ok": sum(r["status"] == "OK" for r in subset_manifest),
         "series_algorithm_or_technical_unavailable": sum(r["status"] != "OK" for r in subset_manifest),
         "C00_native_NAV_10Hz_count": 11, "metric_recomputation_performed": False,

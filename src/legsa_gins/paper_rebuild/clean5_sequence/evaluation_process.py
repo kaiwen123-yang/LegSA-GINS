@@ -26,7 +26,9 @@ def write_json(path, payload):
 
 def evaluate(*, evaluator, trace, nav, std, outdir, base_time, window,
              trace_sha256, code_root, raw_root, clean_root, instrument=True,
-             consistency_policy=None):
+             consistency_policy=None, measure_resources=False):
+    if measure_resources and consistency_policy != "canonical_v2_wgs84_full_support":
+        raise ValueError("Process resource measurement is only enabled for the canonical v2 policy")
     evaluator, trace, nav, std, outdir, code_root = map(Path, (evaluator, trace, nav, std, outdir, code_root))
     if evaluator.is_symlink() or sha256_file(evaluator) != EVALUATOR_SHA256:
         raise RuntimeError("Archived evaluator identity mismatch")
@@ -63,12 +65,31 @@ def evaluate(*, evaluator, trace, nav, std, outdir, base_time, window,
             "--std", str(std), "--outdir", str(outdir), "--base_time", str(base_time),
             "--yaw_truth_mode", "enu"]
     log = outdir / "EVALUATOR_OPENAT.strace"
+    launch_argv = argv
+    resource_measurement = None
+    if measure_resources:
+        from ..clean6_canonical_v2.resources import resource_command, read_process_resources
+        resource_path = outdir / "EVALUATOR_PROCESS_RESOURCES.txt"
+        launch_argv = resource_command(argv, resource_path)
     command = ["env", *(f"{key}={value}" for key, value in environment.items()),
-               "strace", "-f", "-yy", "-s", "4096", "-e", "trace=openat,execve", "-o", str(log), *argv]
+               "strace", "-f", "-yy", "-s", "4096", "-e", "trace=openat,execve", "-o", str(log), *launch_argv]
     started = time.monotonic()
-    completed = run_process_group(command, cwd=code_root, timeout_seconds=1800,
-        timeout_message="CLEAN5 evaluator timeout; no retry", launch_failure_message="CLEAN5 evaluator launch failed")
-    runtime = time.monotonic() - started
+    try:
+        completed = run_process_group(command, cwd=code_root, timeout_seconds=1800,
+            timeout_message="CLEAN5 evaluator timeout; no retry", launch_failure_message="CLEAN5 evaluator launch failed")
+    finally:
+        runtime = time.monotonic() - started
+        if measure_resources:
+            try:
+                resource_measurement = read_process_resources(resource_path)
+            except (OSError, ValueError) as error:
+                resource_measurement = {"status": "UNAVAILABLE", "peak_rss_bytes": None,
+                    "wall_seconds": None, "user_cpu_seconds": None, "system_cpu_seconds": None,
+                    "exit_code": None, "source": str(resource_path),
+                    "failure_type": type(error).__name__, "failure_message": str(error)}
+            resource_measurement["evaluation_runtime_seconds"] = runtime
+            resource_measurement["runtime_measurement"] = "monotonic wall time enclosing the guarded process group, including launch/termination"
+            write_json(outdir / "EVALUATOR_RESOURCE_MEASUREMENT.json", resource_measurement)
     (outdir / "evaluator_stdout.log").write_text(completed.stdout, encoding="utf-8")
     (outdir / "evaluator_stderr.log").write_text(completed.stderr, encoding="utf-8")
     records = audited_open_records(log, code_root)
@@ -83,6 +104,8 @@ def evaluate(*, evaluator, trace, nav, std, outdir, base_time, window,
     scope = write_scope_audit(records, raw_root=raw_root, clean_root=clean_root, allowed_write_roots=[outdir])
     capture = json.loads((outdir / "EVALUATOR_CAPTURE.json").read_text()) if instrument and (outdir / "EVALUATOR_CAPTURE.json").is_file() else None
     bad = []
+    if measure_resources and resource_measurement["status"] != "AVAILABLE":
+        bad.append("evaluator peak RSS measurement unavailable")
     if completed.returncode:
         bad.append(f"evaluator_returncode={completed.returncode}")
     if len(trace_records) != 1 or any(row["return_code"] < 0 or "O_RDONLY" not in row["flags"] for row in trace_records):
@@ -108,6 +131,8 @@ def evaluate(*, evaluator, trace, nav, std, outdir, base_time, window,
              "runtime_seconds": runtime, "evaluator_argv": argv, "environment": environment,
              "instrumented": instrument, "trace_read_role": "archived_evaluator_child_only",
              "synthetic_data_used": Path(raw_root) not in trace.parents}
+    if measure_resources:
+        audit["process_resources"] = resource_measurement
     write_json(outdir / "EVALUATOR_STRACE_AUDIT.json", audit)
     if bad:
         raise RuntimeError("; ".join(bad) + "; stderr tail: " + completed.stderr[-2000:])
@@ -116,5 +141,8 @@ def evaluate(*, evaluator, trace, nav, std, outdir, base_time, window,
             raise RuntimeError("Evaluator missing " + name)
     with (outdir / "error_series.csv").open("rb") as source, gzip.open(outdir / "error_series.csv.gz", "wb", compresslevel=6) as target:
         shutil.copyfileobj(source, target)
-    return {"audit": audit, "capture": capture, "runtime_seconds": runtime,
-            "summary": json.loads((outdir / "summary.json").read_text()), "outdir": str(outdir)}
+    result = {"audit": audit, "capture": capture, "runtime_seconds": runtime,
+              "summary": json.loads((outdir / "summary.json").read_text()), "outdir": str(outdir)}
+    if measure_resources:
+        result["process_resources"] = resource_measurement
+    return result

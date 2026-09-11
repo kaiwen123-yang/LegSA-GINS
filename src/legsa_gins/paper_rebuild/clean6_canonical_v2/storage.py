@@ -13,6 +13,7 @@ import time
 
 from ..clean5_degradation.common import write_json
 from ..manifest import sha256_file
+from .resources import process_tree_rss
 
 FULL_NUMERICAL = frozenset(('KF_GINS_Navresult.nav', 'KF_GINS_STD.txt',
     'LegSA_PORT_NAV.nav', 'LegSA_PORT_STD.csv', 'EVAL_NAV.csv', 'EVAL_NAV_V3.nav'))
@@ -78,6 +79,7 @@ def retain_run(record, evaluation_roots, destination):
     destination = Path(destination)
     destination.mkdir(parents=True, exist_ok=False)
     retained = {}
+    validation_files = {}
     skipped = []
     sources = [('solver', source)] + [(version, Path(root)) for version, root in evaluation_roots.items()]
     original_files = {}
@@ -115,6 +117,32 @@ def retain_run(record, evaluation_roots, destination):
             retained[f'{role}/{out_relative}'] = {'sha256': sha256_file(output),
                 'size_bytes': output.stat().st_size, 'allocated_bytes': output.stat().st_blocks*512,
                 'source_sha256': pin['sha256'], 'compression': 'gzip' if compress else 'identity'}
+    # Post-hoc validation sidecars have their own code/config identity. They
+    # remain outside original_files, which is the scratch cleanup inventory.
+    for label, path_key, hash_keys, filename in (
+        ('record', 'validation_record_path', ('validation_record_sha256',), 'VALIDATION_RECORD.json'),
+        ('config', 'validation_config_path', ('validation_config_hash', 'validation_config_sha256'), 'VALIDATION_CONFIG.yaml')):
+        if not record.get(path_key):
+            continue
+        path = Path(record[path_key])
+        hashes = [record[key] for key in hash_keys if record.get(key)]
+        if not hashes or len(set(hashes)) != 1:
+            raise ValueError('Missing or contradictory validation sidecar hash: '+label)
+        expected = hashes[0]
+        if not path.is_file() or any(p.is_symlink() for p in (path, *path.parents)) or sha256_file(path) != expected:
+            raise ValueError('Validation sidecar differs from sealed identity: '+label)
+        output = destination/'validation'/filename
+        output.parent.mkdir(exist_ok=True)
+        with path.open('rb') as reader, output.open('xb') as writer:
+            shutil.copyfileobj(reader, writer, 1024*1024)
+        if sha256_file(output) != expected:
+            raise ValueError('Archived validation sidecar differs: '+label)
+        relative = 'validation/'+filename
+        retained[relative] = {'sha256': expected, 'size_bytes': output.stat().st_size,
+            'allocated_bytes': output.stat().st_blocks*512, 'source_sha256': expected,
+            'compression': 'identity', 'source_role': 'posthoc_validation_not_native_output'}
+        validation_files[label] = {'source_path': str(path), 'sha256': expected,
+                                   'archive_relative_path': relative, 'original_retained': True}
     if record['terminal_status'] == 'COMPLETED':
         nav = destination/'solver/NAV_10HZ.csv.gz'
         rows = thin_nav(source/'KF_GINS_Navresult.nav', nav)
@@ -137,6 +165,8 @@ def retain_run(record, evaluation_roots, destination):
                'retained_bytes': sum(p['size_bytes'] for p in retained.values()),
                'retained_allocated_bytes': sum(p['allocated_bytes'] for p in retained.values()),
                'source_bytes': sum(p['size_bytes'] for entries in original_files.values() for p in entries.values())}
+    if validation_files:
+        receipt['validation_files'] = validation_files
     unavailable = []
     if record['terminal_status'] != 'COMPLETED':
         unavailable = [{'role': role, 'status': 'UNAVAILABLE',
@@ -154,6 +184,17 @@ def retain_run(record, evaluation_roots, destination):
         'native_manifest_relative_path': 'solver/RUN_MANIFEST.json' if record['terminal_status'] == 'COMPLETED' else None,
         'native_manifest_substituted': False, 'protocol_id': record.get('protocol_id'),
         'code_commit': record.get('code_commit'), 'run_id': record['run_id'],
+        'origin_code_commit': record.get('code_commit'),
+        'original_native_code_commit': record.get('original_native_code_commit', record.get('code_commit')),
+        'continuation_code_commit': record.get('continuation_code_commit', record.get('code_commit')),
+        'original_terminal_status': record.get('original_terminal_status', record['terminal_status']),
+        'original_native_reused': bool(record.get('original_native_reused', False)),
+        'validation_record_relative_path': validation_files.get('record', {}).get('archive_relative_path'),
+        'validation_config_relative_path': validation_files.get('config', {}).get('archive_relative_path'),
+        **{key: record[key] for key in ('validation_code_commit', 'validation_record_path',
+            'validation_record_sha256', 'validation_config_path', 'validation_config_hash',
+            'validation_config_sha256') if key in record},
+        'validation_files': validation_files,
         'dataset_id': record['dataset_id'], 'case_id': record.get('case_id'),
         'method_id': record.get('method_id'), 'terminal_status': record['terminal_status'],
         'unavailable_members': unavailable, 'data_mode': record.get('data_mode'),
@@ -206,28 +247,102 @@ def machine_state():
 
 
 class ResourceMonitor:
-    def __init__(self, scratch, g_root, sample_path):
+    def __init__(self, scratch, g_root, sample_path, *, sample_interval_seconds=2, root_pid=None):
         self.scratch, self.g_root = Path(scratch), Path(g_root)
         self.sample_path = Path(sample_path)
+        if not math.isfinite(sample_interval_seconds) or sample_interval_seconds <= 0:
+            raise ValueError('Resource sample interval must be positive and finite')
+        self.sample_interval_seconds = sample_interval_seconds
+        self.root_pid = os.getpid() if root_pid is None else root_pid
         self.initial = machine_state()
         self.free_start = {label: shutil.disk_usage(path).free for label, path in (('scratch', scratch), ('g', g_root))}
         self.peak_growth = {'scratch': 0, 'g': 0}
         self.memory_peak = self.initial['memory_used_bytes']
+        self.owned_rss_peak = 0
+        self.owned_process_count_peak = 0
+        self.phases = []
+        self.active_phase = None
+        self.lock = threading.RLock()
+        self.monitor_failure = None
         self.started = time.monotonic()
         self.stop_event = threading.Event()
         self.thread = threading.Thread(target=self._loop, daemon=True)
 
     def sample(self):
+        with self.lock:
+            self.assert_healthy()
+            return self._sample_locked()
+
+    def assert_healthy(self):
+        with self.lock:
+            if self.monitor_failure is not None:
+                raise RuntimeError('Resource monitor failed; preserve scene before cleanup') from self.monitor_failure
+
+    def _sample_locked(self):
         state = machine_state()
+        owned = process_tree_rss(self.root_pid)
         self.memory_peak = max(self.memory_peak, state['memory_used_bytes'])
-        growth = {label: max(0, self.free_start[label]-shutil.disk_usage(path).free)
-                  for label, path in (('scratch', self.scratch), ('g', self.g_root))}
+        self.owned_rss_peak = max(self.owned_rss_peak, owned['owned_rss_bytes'])
+        self.owned_process_count_peak = max(self.owned_process_count_peak, owned['owned_process_count'])
+        disk_free = {label: shutil.disk_usage(path).free for label, path in (('scratch', self.scratch), ('g', self.g_root))}
+        growth = {label: max(0, self.free_start[label]-disk_free[label]) for label in disk_free}
         for label in growth: self.peak_growth[label] = max(self.peak_growth[label], growth[label])
+        if self.active_phase is not None:
+            phase = self.active_phase
+            phase['owned_process_tree_peak_rss_bytes'] = max(phase['owned_process_tree_peak_rss_bytes'], owned['owned_rss_bytes'])
+            phase['owned_process_count_peak'] = max(phase['owned_process_count_peak'], owned['owned_process_count'])
+            phase['memory_peak_bytes'] = max(phase['memory_peak_bytes'], state['memory_used_bytes'])
+            phase['minimum_available_memory_bytes'] = min(phase['minimum_available_memory_bytes'], state['memory_available_bytes'])
+            phase['sample_count'] += 1
+            for label in disk_free:
+                phase['filesystem_peak_growth_bytes'][label] = max(phase['filesystem_peak_growth_bytes'][label],
+                    phase['_free_start'][label]-disk_free[label])
         append_json(self.sample_path, {'elapsed_seconds': time.monotonic()-self.started, **state,
+                                      **owned, 'phase': self.active_phase['phase'] if self.active_phase else None,
                                       'filesystem_used_growth_bytes': growth})
+        return state, owned, disk_free
+
+    def begin_phase(self, name):
+        with self.lock:
+            self.assert_healthy()
+            if not isinstance(name, str) or not name or self.active_phase is not None:
+                raise ValueError('Named resource phase requires the previous phase to be ended')
+            state, owned, disk_free = self._sample_locked()
+            self.active_phase = {'phase': name, '_started': time.monotonic(), '_initial': state,
+                '_free_start': disk_free, 'owned_process_tree_peak_rss_bytes': owned['owned_rss_bytes'],
+                'owned_process_count_peak': owned['owned_process_count'], 'memory_peak_bytes': state['memory_used_bytes'],
+                'available_memory_at_start_bytes': state['memory_available_bytes'],
+                'minimum_available_memory_bytes': state['memory_available_bytes'],
+                'filesystem_peak_growth_bytes': {'scratch': 0, 'g': 0}, 'sample_count': 1}
+
+    def end_phase(self):
+        with self.lock:
+            self.assert_healthy()
+            if self.active_phase is None:
+                raise ValueError('No active resource phase to end')
+            final, _, _ = self._sample_locked()
+            phase = self.active_phase
+            total = final['cpu_ticks']-phase['_initial']['cpu_ticks']
+            idle = final['idle_ticks']-phase['_initial']['idle_ticks']
+            result = {k: v for k, v in phase.items() if not k.startswith('_')}
+            result.update(wall_seconds=time.monotonic()-phase['_started'],
+                owned_rss_peak_bytes=phase['owned_process_tree_peak_rss_bytes'],
+                cpu_utilization_fraction=(total-idle)/total if total else None,
+                measurement_scope='host affinity CPU and memory; owned controller+descendant summed RSS; disk free-space deltas',
+                owned_rss_measurement_scope='sampled sum over process leaders; shared resident pages counted per process',
+                sample_interval_seconds=self.sample_interval_seconds)
+            self.phases.append(result)
+            self.active_phase = None
+            return result
 
     def _loop(self):
-        while not self.stop_event.wait(2): self.sample()
+        try:
+            while not self.stop_event.wait(self.sample_interval_seconds):
+                self.sample()
+        except Exception as error:
+            with self.lock:
+                self.monitor_failure = error
+                self.stop_event.set()
 
     def __enter__(self):
         self.sample()
@@ -237,9 +352,25 @@ class ResourceMonitor:
     def __exit__(self, *args):
         self.stop_event.set()
         self.thread.join()
-        self.sample()
+        try:
+            self.assert_healthy()
+            if self.active_phase is not None:
+                self.end_phase()
+            else:
+                self.sample()
+            self.assert_healthy()
+        except Exception as error:
+            with self.lock:
+                if self.monitor_failure is None:
+                    self.monitor_failure = error
+            if not args[0]:
+                raise
+            # Preserve the operation's original failure while retaining monitor
+            # failure state. Neither failure authorizes archive cleanup.
+        return False
 
     def result(self):
+        self.assert_healthy()
         final = machine_state()
         total = final['cpu_ticks']-self.initial['cpu_ticks']
         idle = final['idle_ticks']-self.initial['idle_ticks']
@@ -248,7 +379,13 @@ class ResourceMonitor:
                 'memory_total_bytes': self.initial['memory_total_bytes'],
                 'memory_peak_bytes': self.memory_peak,
                 'memory_peak_fraction': self.memory_peak/self.initial['memory_total_bytes'],
+                'owned_process_tree_peak_rss_bytes': self.owned_rss_peak,
+                'owned_rss_peak_bytes': self.owned_rss_peak,
+                'owned_process_count_peak': self.owned_process_count_peak,
+                'phases': list(self.phases),
                 'cpu_utilization_fraction': (total-idle)/total if total else None,
-                'filesystem_peak_growth_bytes': self.peak_growth,
+                'filesystem_peak_growth_bytes': dict(self.peak_growth),
                 'measurement_scope': 'host visible affinity CPU and MemAvailable; filesystem free-space deltas; concurrent activity included',
-                'sample_interval_seconds': 2}
+                'owned_rss_measurement_scope': 'controller and current descendants; summed process RSS; shared mappings counted per process; sampled peak',
+                'monitor_status': 'PASS' if self.monitor_failure is None else 'FAILED',
+                'sample_interval_seconds': self.sample_interval_seconds}

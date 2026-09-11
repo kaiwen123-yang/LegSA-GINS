@@ -25,10 +25,20 @@ from .contract import load_contract, selection, verify_preregistration, STAGE_NA
 from .runtime import run_one, profile_template, NUMERICAL_FILES
 from .storage import (append_json, inventory, retain_run, cleanup_exact,
                       ResourceMonitor, machine_state)
+from .resources import solver_workers, choose_evaluator_workers
 
 
 def now():
     return datetime.now(timezone.utc).isoformat()
+
+
+def restart_root(stage, contract):
+    return stage/'RESTARTS'/contract['restart_authorization']['restart_id']
+
+
+def active_freeze_path(stage, contract):
+    amended = restart_root(stage, contract)/'CONTINUATION_FREEZE.json'
+    return amended if amended.exists() else stage/'00_PREREGISTRATION/EXECUTION_FREEZE.json'
 
 
 def freeze_sources(code_root):
@@ -77,7 +87,7 @@ def provider_child(args):
     from .providers import generate_one
     contract, reg = load_contract(args.contract), registry(args.local_config)
     stage = resolve(contract['stage_root'], reg)
-    freeze = json.loads((stage/'00_PREREGISTRATION/EXECUTION_FREEZE.json').read_text())
+    freeze = json.loads(active_freeze_path(stage, contract).read_text())
     if args.code_commit != freeze['code_commit'] or sha256_file(args.contract) != freeze['contract_hash']:
         raise ValueError('Provider child requires the existing committed execution freeze')
     if args.case_id in ('BY2H', 'BY2O'):
@@ -200,17 +210,77 @@ def run_group(jobs, pool, bundles, contract, reg, scratch_batch, code_commit, c0
     return records
 
 
-def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, args, workers, c00):
+def evaluate_batch(records, contract, reg, scratch_batch, code_commit, output, solver_peak):
+    """Use registered evaluations for RSS measurement; never rerun a probe."""
+    from .evaluation import one_evaluation
+    tasks = [(record, version) for record in records for version in ('v3', 'v2')]
+    completed = []
+    rss_peak = 0
+    initial = machine_state()
+    plans = []
+    prior = resolve(contract['stage_root'], reg)/'PILOT_GATE.json'
+    if prior.is_file():
+        rss_peak = json.loads(prior.read_text())['evaluator_peak_rss_bytes']
+    else:
+        probes = []
+        for dataset in ('BY2', 'BY2H', 'BY2O'):
+            record = next(r for r in records if r['dataset_id'] == dataset and r['terminal_status'] == 'COMPLETED')
+            probes.extend((record, version) for version in ('v3', 'v2'))
+        for record, version in probes:
+            # A single measured probe precedes allocation of the evaluator pool.
+            # Recheck the known memory bound before all subsequent probes.
+            if rss_peak:
+                choose_evaluator_workers(machine_state()['memory_available_bytes'], solver_peak, rss_peak, initial['nproc'])
+            row = one_evaluation(record, version, contract, reg, scratch_batch, code_commit)
+            completed.append(row)
+            write_json(output/f'EVALUATION_PROBE_{len(completed):02d}.json', row)
+            if row['evaluation_status'] != 'COMPLETED':
+                raise RuntimeError('Registered evaluator RSS probe failed; no retry')
+            rss_peak = max(rss_peak, row['evaluator_peak_rss_bytes'])
+            tasks.remove((record, version))
+            print('EVALUATOR_PROBE', row['run_id'], version, row['evaluation_runtime_seconds'], row['evaluator_peak_rss_bytes'], flush=True)
+    permitted = {'COMPLETED', 'NOT_RUN_ALGORITHM_FAILURE'}
+    while tasks:
+        state = machine_state()
+        count = choose_evaluator_workers(state['memory_available_bytes'], solver_peak, rss_peak, state['nproc'])
+        wave, tasks = tasks[:count], tasks[count:]
+        plan = {'wave': len(plans)+1, 'workers': count, 'available_memory_bytes': state['memory_available_bytes'],
+                'solver_peak_bytes': solver_peak, 'measured_evaluator_peak_rss_bytes': rss_peak,
+                'reserved_peak_bytes': solver_peak+count*rss_peak*1.25,
+                'memory_budget_bytes': state['memory_available_bytes']*.75}
+        plans.append(plan)
+        append_json(output/'EVALUATOR_POOL_LEDGER.jsonl', plan)
+        with ThreadPoolExecutor(max_workers=count) as pool:
+            futures = [pool.submit(one_evaluation, r, v, contract, reg, scratch_batch, code_commit) for r, v in wave]
+            results = [future.result() for future in as_completed(futures)]
+        completed.extend(results)
+        write_json(output/f'EVALUATION_WAVE_{len(plans):04d}.json', results)
+        if any(row['evaluation_status'] not in permitted for row in results):
+            raise RuntimeError('Evaluation wave failed; no next wave, retry or cleanup')
+        rss_peak = max([rss_peak]+[r['evaluator_peak_rss_bytes'] for r in results if r['evaluation_status'] == 'COMPLETED'])
+        if solver_peak+count*rss_peak*1.25 > plan['memory_budget_bytes']:
+            raise RuntimeError('Measured evaluator RSS exceeded registered 75% memory budget; retain scene')
+        print('EVALUATION_WAVE', len(plans), 'COMPLETE', len(completed), 'POOL', count, flush=True)
+    return completed, {'initial_machine': initial, 'solver_peak_bytes': solver_peak,
+                       'evaluator_peak_rss_bytes': rss_peak, 'wave_plans': plans,
+                       'evaluator_pool_sizes': sorted({p['workers'] for p in plans})}
+
+
+def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, args, workers, c00,
+             *, resumed_records=None):
     from .evaluation import one_evaluation
     batch_id = f'BATCH_{batch_number:03d}'
     output = stage/'BATCHES'/batch_id
-    output.mkdir(parents=True, exist_ok=False)
+    output.mkdir(parents=True, exist_ok=resumed_records is not None)
     scratch_batch = scratch/batch_id
-    scratch_batch.mkdir(parents=True, exist_ok=False)
+    scratch_batch.mkdir(parents=True, exist_ok=resumed_records is not None)
+    original_allocated = sum(p.stat().st_blocks*512 for p in scratch_batch.rglob('*') if p.is_file())
     append_json(stage/'BATCH_LEDGER.jsonl', {'event': 'BATCH_START', 'batch': batch_number,
         'workers': workers, 'run_count': len(jobs), 'utc': now(), 'code_commit': code_commit})
     all_records, evaluations, receipts = [], [], []
-    with ResourceMonitor(scratch, reg.clean_root, output/'RESOURCE_SAMPLES.jsonl') as monitor:
+    sample_name = 'RESOURCE_SAMPLES_RESTART.jsonl' if resumed_records is not None else 'RESOURCE_SAMPLES.jsonl'
+    with ResourceMonitor(scratch, reg.clean_root, output/sample_name) as monitor:
+        monitor.begin_phase('providers')
         with ThreadPoolExecutor(max_workers=workers) as pool:
             keys = list(dict.fromkeys(j['source']['case_id'] if j['dataset'] == 'BY2' else j['dataset'] for j in jobs))
             bundles, pending = {}, {}
@@ -225,24 +295,35 @@ def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, arg
                 else:
                     pending[pool.submit(provider_task, key, contract, reg, stage, code_commit, args)] = key
             for future in as_completed(pending): bundles[pending[future]] = future.result()
+            monitor.end_phase()
+            monitor.begin_phase('solver')
             groups = (jobs[:33], jobs[33:]) if batch_number == 1 else (jobs,)
             for index, group in enumerate(groups):
-                records = run_group(group, pool, bundles, contract, reg, scratch_batch, code_commit, c00)
+                reuse = resumed_records is not None and index == 0
+                records = resumed_records if reuse else run_group(group, pool, bundles, contract, reg, scratch_batch, code_commit, c00)
                 all_records.extend(records)
-                write_json(output/f'SOLVER_GROUP_{index}.json', records)
+                group_name = f'SOLVER_GROUP_{index}_REVALIDATED.json' if reuse else f'SOLVER_GROUP_{index}.json'
+                write_json(output/group_name, records)
                 if batch_number == 1 and index == 0:
                     gate = anchor_gate(records, contract)
-                    write_json(stage/'SEQUENCE_CONSISTENCY_GATE.json', gate)
+                    gate_root = restart_root(stage, contract) if resumed_records is not None else stage
+                    gate_path = gate_root/'SEQUENCE_CONSISTENCY_GATE.json'
+                    if gate_path.exists():
+                        if json.loads(gate_path.read_text()) != gate:
+                            raise ValueError('Revalidated sequence gate changed before remaining pilot solves')
+                    else:
+                        write_json(gate_path, gate)
                     if gate['status'] != 'PASS':
                         raise RuntimeError('Sequence/C00 byte gate failed; no remaining pilot solver launched')
                 if any(r['terminal_status'] == 'FAILED_TECHNICAL' for r in records):
                     raise RuntimeError('Technical solver failure; batch stopped, no retry or cleanup')
-            tasks = [pool.submit(one_evaluation, r, v, contract, reg, scratch_batch, code_commit)
-                     for r in all_records for v in ('v3', 'v2')]
-            for future in as_completed(tasks):
-                row = future.result()
-                evaluations.append(row)
-                print('EVALUATOR', row['run_id'], row['evaluator_version'], row['evaluation_status'], flush=True)
+            solver_measurements = monitor.end_phase()
+            monitor.begin_phase('evaluation')
+            evaluations, resource_plan = evaluate_batch(all_records, contract, reg, scratch_batch, code_commit,
+                output, solver_measurements['owned_process_tree_peak_rss_bytes'])
+            write_json(output/'RESOURCE_POOL_PLAN.json', resource_plan)
+            monitor.end_phase()
+            monitor.begin_phase('archive_cleanup')
             write_json(output/'SOLVER_RECORDS_BEFORE_ARCHIVE.json', all_records)
             write_json(output/'EVALUATION_RECORDS_BEFORE_ARCHIVE.json', evaluations)
             permitted = {'PASS', 'COMPLETED', 'SUCCESS', 'NOT_RUN_ALGORITHM_FAILURE'}
@@ -281,21 +362,29 @@ def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, arg
             write_json(output/'RUN_RECORDS.json', all_records)
             write_json(output/'EVALUATION_RECORDS.json', evaluations)
             # Whole-batch archive barrier before the first unlink.
+            monitor.assert_healthy()
             write_json(output/'BATCH_ARCHIVE_GATE.json', {'status': 'PASS', 'run_count': len(receipts)})
             for record, roots, receipt in archive_pairs:
+                monitor.assert_healthy()
                 for role, root in [('solver', Path(record['scratch_output_root'])), *roots.items()]:
                     cleanup_exact(root, receipt['original_files'][role], output/'CLEANUP_LEDGER.jsonl',
                                   scratch_root=scratch, archive_verified=True)
             write_json(output/'CLEANUP_COMPLETE.json', {'status': 'PASS', 'run_count': len(receipts)})
+            monitor.end_phase()
     measurements = monitor.result()
     result = {'status': 'PASS', 'batch': batch_number, 'workers': workers,
               'run_count': len(all_records), 'evaluation_count': len(evaluations),
               'terminal_counts': {s: sum(r['terminal_status'] == s for r in all_records)
                                   for s in sorted({r['terminal_status'] for r in all_records})},
               'measurements': measurements,
+              'resource_pool_plan': resource_plan,
+              'original_scratch_allocated_bytes': original_allocated,
               'run_measurements': [{'run_id': r['run_id'], 'runtime_seconds': r['runtime_seconds'],
                   'solver_seconds': r.get('solver_seconds'), 'solver_output_bytes': r['solver_output_bytes'],
+                  'solver_peak_rss_bytes': r.get('solver_peak_rss_bytes'),
                   'evaluation_seconds': {v: next(e.get('evaluation_runtime_seconds') for e in evaluations
+                      if e['run_id'] == r['run_id'] and e['evaluator_version'] == v) for v in ('v3', 'v2')},
+                  'evaluation_peak_rss_bytes': {v: next(e.get('evaluator_peak_rss_bytes') for e in evaluations
                       if e['run_id'] == r['run_id'] and e['evaluator_version'] == v) for v in ('v3', 'v2')},
                   **{k: next(p[k] for p in receipts if p['run_id'] == r['run_id'])
                      for k in ('source_bytes', 'retained_bytes', 'retained_allocated_bytes')}} for r in all_records]}
@@ -304,16 +393,25 @@ def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, arg
     if batch_number == 1:
         fixed = sum(p.stat().st_blocks*512 for sub in ('02_PROVIDERS', '02_SEQUENCE_PROVIDERS', '01_PROVIDER_AUDIT')
                     for p in (stage/sub).rglob('*') if p.is_file())
-        peak = 1.15*(max(p['retained_allocated_bytes'] for p in receipts)*5973 +
+        peak = 1.15*(max(p['retained_allocated_bytes'] for p in receipts)*5973 + original_allocated +
                      measurements['filesystem_peak_growth_bytes']['scratch'] + fixed*541/max(1, len(keys)))
         passed = peak <= contract['storage']['peak_limit_bytes']
-        promote = (measurements['cpu_utilization_fraction'] < .85 and measurements['memory_peak_fraction'] < .5)
+        prior_wall = 0.
+        if resumed_records is not None:
+            old_report = json.loads((stage/'99_STOP_REPORT/STOP_REPORT.json').read_text())
+            # Original attempts and restart are reported separately; sum active
+            # wall time only, never count the human pause as batch execution.
+            prior_wall = old_report['execution_prefix_wall_seconds']
         pilot = {'status': 'PASS' if passed else 'STOP_PROJECTED_PEAK',
                  'projected_peak_bytes': math.ceil(peak),
-                 'projected_wall_seconds': measurements['wall_seconds']*math.ceil(5973/256),
+                 'projected_wall_seconds': (measurements['wall_seconds']+prior_wall)*math.ceil(5973/256),
+                 'batch_active_wall_seconds': measurements['wall_seconds']+prior_wall,
+                 'original_prefix_wall_seconds': prior_wall,
                  'forecast_kind': 'conditional conservative planning extrapolation; not CI or measured full runtime',
                  'forecast_formula': contract['storage'].get('forecast_formula', '1.15*(max retained allocation*5973 + scratch peak + scaled fixed provider footprint)'),
-                 'next_workers': 128 if promote else 64, 'measurements': measurements,
+                 'next_workers': workers, 'measurements': measurements,
+                 'evaluator_peak_rss_bytes': resource_plan['evaluator_peak_rss_bytes'],
+                 'resource_pool_plan': resource_plan,
                  'sequence_consistency_gate': 'PASS', 'batch_verification': 'PASS'}
         write_json(stage/'PILOT_GATE.json', pilot)
         print('PILOT_GATE', json.dumps(pilot, ensure_ascii=False), flush=True)
@@ -321,15 +419,84 @@ def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, arg
     return result
 
 
+def prepare_restart(contract, reg, stage, scratch, args, jobs):
+    """The only authorized reuse path; original 33 native identities stay sealed."""
+    from .revalidation import revalidate_existing
+    amendment = contract['restart_authorization']
+    target = restart_root(stage, contract)
+    if target.exists():
+        raise FileExistsError('Restart identity already exists; no automatic retry')
+    freeze = verify_preregistration(Path(args.contract).resolve(), reg.code_root)
+    subprocess.run(['git', 'merge-base', '--is-ancestor', amendment['starting_commit'], freeze['code_commit']],
+                   cwd=reg.code_root, check=True)
+    for pin in amendment['retained_evidence_pins'].values():
+        pinned(pin, reg)
+    original = json.loads((stage/'00_PREREGISTRATION/EXECUTION_FREEZE.json').read_text())
+    if (original['code_commit'] != amendment['original_execution_code_commit'] or
+            original['contract_hash'] != amendment['original_contract_sha256']):
+        raise ValueError('Original native code/contract identity changed')
+    if scratch != Path(original['scratch_root']):
+        raise ValueError('Restart scratch differs from original frozen scratch root')
+    allowed = {'src/legsa_gins/paper_rebuild/clean6_canonical_v2/'+name+'.py'
+               for name in ('runner', 'runtime', 'storage', 'evaluation', 'contract', 'pack')}
+    allowed.update(('src/legsa_gins/paper_rebuild/clean5_degradation/runtime.py',
+                    'src/legsa_gins/paper_rebuild/clean5_sequence/evaluation_process.py',
+                    str(Path(args.contract).resolve().relative_to(reg.code_root))))
+    changed = []
+    for relative, digest in original['source_sha256'].items():
+        if sha256_file(reg.code_root/relative) != digest:
+            if relative not in allowed:
+                raise ValueError('Restart changed frozen source outside authorized repair: '+relative)
+            changed.append(relative)
+    for pin in (contract['runtime']['executable'], contract['runtime']['model'], contract['evaluation']['evaluator'],
+                contract['anchors']['C00_reference_seal'], contract['sequence_consistency']['reference_seal']):
+        pinned(pin, reg)
+    if shutil.disk_usage(reg.clean_root).free < 300_000_000_000 or shutil.disk_usage(scratch).free < 150_000_000_000:
+        raise ValueError('Restart G/ext4 free-space gate failed')
+    original_records = json.loads((stage/'BATCHES/BATCH_001/SOLVER_GROUP_0.json').read_text())
+    if ([r['run_id'] for r in original_records] != [j['source']['run_id'] for j in jobs[:33]] or
+            any(r['exit_code'] != 0 for r in original_records)):
+        raise ValueError('Original 33 sealed exit-zero registry changed')
+    if any(Path(r['output_root']) != scratch/'BATCH_001/03_RUNS'/r['run_id'] for r in original_records):
+        raise ValueError('Original run output root differs from exact frozen batch/run path')
+    if any((scratch/'BATCH_001/03_RUNS'/j['source']['run_id']).exists() for j in jobs[33:]):
+        raise ValueError('Unexpected already-started run; no automatic rerun')
+    target.mkdir(parents=True, exist_ok=False)
+    freeze.update(source_sha256=freeze_sources(reg.code_root), started_utc=now(),
+                  machine=machine_state(), scratch_root=str(scratch), original_execution_freeze=original,
+                  authorized_changed_source_paths=sorted(changed), original_native_reused_count=33, **FLAGS)
+    write_json(target/'CONTINUATION_FREEZE.json', freeze)
+    try:
+        checkpoint(contract, reg, target, 'PRE_RESTART', {'mode': 'independent_hash_all',
+            'human_instruction': 'P09c explicit restart independent raw integrity checkpoint'})
+        records = revalidate_existing(original_records, contract, reg, target, freeze['code_commit'])
+        gate = anchor_gate(records, contract)
+        write_json(target/'SEQUENCE_CONSISTENCY_GATE.json', gate)
+        if gate['status'] != 'PASS':
+            raise ValueError('Revalidated sequence/C00 byte gate failed; no remaining solver')
+        append_json(stage/'BATCH_LEDGER.jsonl', {'event': 'AUTHORIZED_REVALIDATION_PASS', 'utc': now(),
+            'reused_native_runs': 33, 'revalidated_runs': 22, 'matching_files': gate['matching_files'],
+            'native_code_commit': original['code_commit'], 'validation_code_commit': freeze['code_commit']})
+        print('REVALIDATED_SEQUENCE_GATE', json.dumps({k:v for k,v in gate.items() if k != 'checks'}), flush=True)
+        return freeze, records
+    except Exception as error:
+        write_json(target/'STOPPED.json', {'status': 'STOPPED_GATE_FAILURE', 'reason': str(error),
+            'utc': now(), 'retry_count': 0, 'scene_retained': True, 'original_native_reruns': 0})
+        append_json(stage/'BATCH_LEDGER.jsonl', {'event': 'RESTART_STOPPED', 'utc': now(), 'reason': str(error)})
+        raise
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--local-config', required=True)
     parser.add_argument('--contract', required=True)
-    parser.add_argument('--operation', choices=('start', 'continue', 'provider'), default='start')
+    parser.add_argument('--operation', choices=('start', 'restart', 'continue', 'provider'), default='start')
     parser.add_argument('--case-id')
     parser.add_argument('--code-commit')
     parser.add_argument('--stop-after-batch', type=int, default=1)
     args = parser.parse_args(argv)
+    args.contract = str(Path(args.contract).resolve())
+    args.local_config = str(Path(args.local_config).resolve())
     if args.operation == 'provider':
         provider_child(args)
         return 0
@@ -349,7 +516,11 @@ def main(argv=None):
     c00 = {r['method_id']: r for r in runs if r['case_id'] == 'C00_clean_normal'}
     freeze_path = stage/'00_PREREGISTRATION/EXECUTION_FREEZE.json'
     resolution = {'mode': 'independent_hash_all', 'human_instruction': 'P-09c based on P-08 preregistered independent pre/post hash-only checkpoints'}
-    if args.operation == 'start':
+    resumed_records = None
+    if args.operation == 'restart':
+        freeze, resumed_records = prepare_restart(contract, reg, stage, scratch, args, jobs)
+        start = 1
+    elif args.operation == 'start':
         freeze = verify_preregistration(Path(args.contract), reg.code_root)
         if stage.exists() or scratch.exists(): raise FileExistsError('Attempt exists; no automatic regeneration/retry')
         if shutil.disk_usage(reg.clean_root).free < 300_000_000_000:
@@ -370,7 +541,7 @@ def main(argv=None):
         checkpoint(contract, reg, stage, 'PRE_EXECUTION', resolution)
         start = 1
     else:
-        freeze = json.loads(freeze_path.read_text())
+        freeze = json.loads(active_freeze_path(stage, contract).read_text())
         validate_freeze(freeze, Path(args.contract), reg)
         pilot = json.loads((stage/'PILOT_GATE.json').read_text())
         if pilot['status'] != 'PASS': raise ValueError('Pilot not PASS; no continuation')
@@ -381,9 +552,10 @@ def main(argv=None):
     try:
         for number in range(start, min(args.stop_after_batch, math.ceil(len(jobs)/256))+1):
             validate_freeze(freeze, Path(args.contract), reg)
-            workers = 64 if number == 1 else json.loads((stage/'PILOT_GATE.json').read_text())['next_workers']
+            workers = solver_workers(machine_state()['nproc'])
             do_batch(number, jobs[(number-1)*256:number*256], contract, reg, stage, scratch,
-                     freeze['code_commit'], args, workers, c00)
+                     freeze['code_commit'], args, workers, c00,
+                     resumed_records=resumed_records if number == 1 else None)
         if args.stop_after_batch >= math.ceil(len(jobs)/256):
             checkpoint(contract, reg, stage, 'POST_EXECUTION', resolution)
             write_json(stage/'EXECUTION_COMPLETE.json', {'status': 'EXECUTION_COMPLETE_PENDING_AGGREGATE',
@@ -393,7 +565,8 @@ def main(argv=None):
     except Exception as exc:
         append_json(stage/'BATCH_LEDGER.jsonl', {'event': 'STOPPED', 'utc': now(), 'exception': type(exc).__name__,
             'reason': str(exc), 'retry_count': 0, 'scene_retained': True})
-        write_json(stage/'STOPPED.json', {'status': 'STOPPED_GATE_FAILURE', 'reason': str(exc),
+        stop_root = restart_root(stage, contract) if restart_root(stage, contract).exists() else stage
+        write_json(stop_root/'STOPPED.json', {'status': 'STOPPED_GATE_FAILURE', 'reason': str(exc),
             'retry_count': 0, 'scene_retained': True, 'utc': now()})
         raise
 

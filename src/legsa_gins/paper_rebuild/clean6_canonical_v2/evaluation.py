@@ -105,6 +105,11 @@ def one_evaluation(record, version, contract, reg, output_root, code_commit):
     row.update({k: record.get(k) for k in ("dataset_id", "data_mode", "controlled_degradation_applied", "config_hash", "raw_source_hashes", "provider_hashes")})
     row.update(protocol_id=contract.get("protocol_id", "CANONICAL_541_PROTOCOL_V2"), chain="CAL",
                code_commit=code_commit, evaluator_version=version, evaluator_contract="evaluator_contract_" + version,
+               native_execution_code_commit=record.get("code_commit"),
+               validation_code_commit=record.get("validation_code_commit"),
+               validation_config_hash=record.get("validation_config_hash", record.get("validation_config_sha256")),
+               continuation_code_commit=record.get("continuation_code_commit", code_commit),
+               original_native_reused=bool(record.get("original_native_reused", False)),
                effective_configuration_id=source_row.get("effective_profile", source_row.get("effective_configuration_id")),
                case_family=source_row.get("case_family", source_row.get("family")),
                degradation_id=source_row.get("degradation_type_id", source_row.get("degradation_id")),
@@ -113,6 +118,8 @@ def one_evaluation(record, version, contract, reg, output_root, code_commit):
                algorithm_failure=terminal == ALGORITHM_FAILURE, evaluation_invoked=False,
                evaluation_status="NOT_RUN_ALGORITHM_FAILURE" if terminal == ALGORITHM_FAILURE else "NOT_RUN_TECHNICAL_FAILURE",
                synthetic_data_used=False, semisynthetic_data_used=False, trace_used_online=False,
+               evaluator_peak_rss_bytes=None, evaluator_resource_status="NOT_INVOKED",
+               solver_peak_rss_bytes=record.get("solver_peak_rss_bytes"),
                reference_is_independent_ground_truth=False, source_row=str(root / "EVALUATION_RESULT.json"),
                evaluation_output_root=str(root), native_run_manifest=str(Path(record["output_root"]) / "RUN_MANIFEST.json"))
     if terminal != "COMPLETED":
@@ -154,7 +161,9 @@ def one_evaluation(record, version, contract, reg, output_root, code_commit):
         outcome = evaluate(evaluator=evaluator, trace=_resolve(trace_pin["path"], reg), nav=target, std=std_path,
                            outdir=root / "FROZEN_EVALUATOR", base_time=base_time, window=window,
                            trace_sha256=trace_pin["sha256"], code_root=reg.code_root,
-                           raw_root=reg.raw_root, clean_root=reg.clean_root, consistency_policy=POLICY)
+                           raw_root=reg.raw_root, clean_root=reg.clean_root, consistency_policy=POLICY,
+                           measure_resources=True)
+        row["evaluation_runtime_seconds"] = outcome["runtime_seconds"]
         capture = outcome["capture"]
         if capture.get("consistency", {}).get("passed") is not True:
             raise ValueError("P-09c actual EVAL_NAV WGS84 consistency gate failed")
@@ -187,5 +196,21 @@ def one_evaluation(record, version, contract, reg, output_root, code_commit):
                 row[key] = None
         row.update(evaluation_status="FAILED_EVALUATOR", technical_failure=True,
                    failure_type=type(error).__name__, failure_message=str(error))
+    # This sidecar is persisted before all post-child audits. Failed evaluators
+    # retain measured wall time/RSS; killed/truncated records stay UNAVAILABLE.
+    measurement_path = root / "FROZEN_EVALUATOR" / "EVALUATOR_RESOURCE_MEASUREMENT.json"
+    if measurement_path.is_file():
+        try:
+            measurement = json.loads(measurement_path.read_text())
+            row.update(evaluator_peak_rss_bytes=measurement["peak_rss_bytes"],
+                       evaluation_runtime_seconds=measurement["evaluation_runtime_seconds"],
+                       evaluator_resource_status=measurement["status"],
+                       evaluator_process_resources=measurement)
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            row.update(evaluator_resource_status="UNAVAILABLE", evaluator_peak_rss_bytes=None,
+                       evaluator_resource_failure=str(error))
+    elif row["evaluation_invoked"]:
+        row.update(evaluator_resource_status="UNAVAILABLE",
+                   evaluator_resource_failure="Resource sidecar absent; native process may not have launched")
     _write_json(root / "EVALUATION_RESULT.json", row)
     return row

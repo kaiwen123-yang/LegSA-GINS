@@ -244,6 +244,11 @@ def check_auxiliary(native, config, expected):
 
 
 def validate_identity(native, config, source, bundle):
+    required = {'stage_id', 'protocol_id', 'case_id', 'run_id', 'data_mode',
+                'algorithm_id', 'runtime_role', 'imupath', 'gnsspath'} | set(CONFIG_FLAG_TO_MANIFEST)
+    missing = sorted(required - set(config))
+    if missing:
+        raise ValueError('FAIL_NATIVE_IDENTITY_MISSING_CONFIG_KEYS: ' + ','.join(missing))
     expected = {key: config[key] for key in ('stage_id', 'protocol_id', 'case_id', 'run_id', 'data_mode', 'algorithm_id')}
     expected.update(phase=config['stage_id'], port_role=config['runtime_role'], clean_final_v23_parity_mode=True,
                     yaw_scheme_C_enabled=str(source['scheme_c']).lower() == 'true', go2_body_state_not_truth=True)
