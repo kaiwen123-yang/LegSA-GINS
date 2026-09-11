@@ -591,29 +591,62 @@ class StoragePurge:
                       for directory in self.closure.get(field, []) if _under(relative, directory))
         return max(groups, key=lambda group: len(PurePosixPath(group).parts))
 
-    def _seal_index(self, metadata_paths):
+    def _seal_record_relative(self, value, *, base=None):
+        """Resolve a *recorded string*, never a filesystem path or link.
+
+        Invalid/external spellings are rejected from exact-path evidence. They
+        may still contain a digest occurrence, which alone never avoids hashing
+        a candidate. Live identities are checked by inventory and C1/C4.
+        """
+        def rooted(text, *, explicit_base=False):
+            if (not isinstance(text, str) or not text or "\\" in text or "\x00" in text
+                    or re.match(r"^[A-Za-z]:", text)):
+                return None
+            if text == "<CLEAN_ROOT>" or text == self.clean.as_posix():
+                return ""
+            if text.startswith("<CLEAN_ROOT>/"):
+                return _relative(text[len("<CLEAN_ROOT>/"):])
+            if text.startswith("/"):
+                _relative(text[1:])  # Validate before PurePath can collapse separators.
+                prefix = self.clean.as_posix() + "/"
+                return _relative(text[len(prefix):]) if text.startswith(prefix) else None
+            if text.startswith("<"):
+                return None
+            if explicit_base or text == "stages" or text.startswith("stages/"):
+                return _relative(text)
+            return None
+        try:
+            direct = rooted(value)
+            if direct is not None:
+                return direct or None
+            if (not isinstance(value, str) or value.startswith(("/", "<"))
+                    or re.match(r"^[A-Za-z]:", value) or base is None):
+                return None
+            relative = _relative(value)
+            base_relative = rooted(base, explicit_base=True)
+            if base_relative is None:
+                return None
+            return _relative(base_relative + "/" + relative) if base_relative else relative
+        except (PurgeError, ValueError):
+            return None
+
+    def _seal_index(self, metadata_paths, candidate_paths, *, source_workers=8):
         """Use only unambiguous absolute/root-relative paths; hash occurrence is supplementary."""
+        if not 1 <= source_workers <= 8:
+            _fail("seal_workers must be 1..8")
+        candidate_paths = {_relative(path) for path in candidate_paths}
         explicit = self.closure.get("seal_sources", [])
         sources = {str(self.alias(item["path"])): item for item in explicit}
+        explicit_source_paths = set(sources)
         for path in metadata_paths:
             sources.setdefault(str(path), {"path": self.portable(path)})
         by_path, by_hash = {}, {}
 
         def resolved(value, spec):
-            if not isinstance(value, str):
-                return None
-            try:
-                if value.startswith(("<CLEAN_ROOT>/", "stages/")) or Path(value).is_absolute():
-                    path = self.alias(value)
-                elif spec.get("base"):
-                    path = self.alias(spec["base"]) / _relative(value)
-                else:
-                    return None
-                return path.relative_to(self.clean).as_posix()
-            except (ValueError, PurgeError, FileNotFoundError):
-                return None
+            return self._seal_record_relative(value, base=spec.get("base"))
 
-        for path_string, spec in sorted(sources.items()):
+        def read_source(item):
+            path_string, spec = item
             path = Path(path_string)
             try:
                 rel = path.relative_to(self.clean).as_posix()
@@ -622,13 +655,48 @@ class StoragePurge:
             if path.suffix.lower() not in {".json", ".csv"}:
                 _fail("seal/manifest source must be JSON or CSV metadata")
             s = _stat(path)
-            if self.classify(rel, s)[0] != "KEEP":
-                _fail("seal evidence itself must be retained")
-            data = _read(path)
-            file_hash = _digest(data)
+            # These KEEP predicates are independent of any live/shared state.
+            # Other source classes are checked by the owner before their bytes
+            # are opened, preserving the original retained-source requirement.
+            independently_kept = (self._independent_keep(path.name, s.st_size)
+                                  or rel in self.keep_files
+                                  or any(_under(rel, directory) for directory in self.keep_dirs))
+            data = _read(path) if independently_kept else None
+            file_hash = _digest(data) if data is not None else None
+            return path_string, spec, path, rel, s, data, file_hash
+
+        def ordered_sources():
+            # At most source_workers buffers/futures are prefetched in addition
+            # to the owner's current item, including for large explicit seals.
+            # Shared classification/index state is owned
+            # exclusively by the sorted consumer below.
+            remaining = iter(sorted(sources.items()))
+            pending = deque()
+            with ThreadPoolExecutor(max_workers=source_workers) as pool:
+                for _ in range(source_workers):
+                    item = next(remaining, None)
+                    if item is None:
+                        break
+                    pending.append(pool.submit(read_source, item))
+                while pending:
+                    value = pending.popleft().result()
+                    item = next(remaining, None)
+                    if item is not None:
+                        pending.append(pool.submit(read_source, item))
+                    yield value
+
+        for source_number, source in enumerate(ordered_sources(), 1):
+            path_string, spec, path, rel, s, data, file_hash = source
+            if data is None:
+                if self.classify(rel, s)[0] != "KEEP":
+                    _fail("seal evidence itself must be retained")
+                data = _read(path)
+                file_hash = _digest(data)
             if spec.get("sha256") and spec["sha256"] != file_hash:
                 _fail(f"seal source pin mismatch: {rel}")
             provenance = {"path": self.portable(path), "sha256": file_hash}
+            if source_number % 1000 == 0:
+                print(f"seal metadata {source_number}/{len(sources)} read in deterministic order", flush=True)
 
             def occurrence(sha, pointer):
                 item = dict(provenance, json_pointer=pointer)
@@ -637,6 +705,8 @@ class StoragePurge:
                     bucket.append(item)
 
             def exact_path(relpath, sha, pointer):
+                if relpath not in candidate_paths:
+                    return
                 item = dict(provenance, json_pointer=pointer)
                 bucket = by_path.setdefault(relpath, {}).setdefault(sha, [])
                 if len(bucket) < 3 and item not in bucket:
@@ -649,11 +719,16 @@ class StoragePurge:
                     if not HEX.fullmatch(sha):
                         _fail(f"invalid CSV seal sha256 at {rel}:{line_number}")
                     if row.get("run_root") and row.get("relative_path"):
-                        root = self.alias(row["run_root"])
-                        pathname = str(root / _relative(row["relative_path"]))
+                        root_relative = self._seal_record_relative(row["run_root"])
+                        try:
+                            relative_part = _relative(row["relative_path"])
+                        except PurgeError:
+                            relative_part = None
+                        relpath = (root_relative + "/" + relative_part
+                                   if root_relative and relative_part else None)
                     else:
                         pathname = row.get("path", row.get("relative_path"))
-                    relpath = resolved(pathname, spec)
+                        relpath = resolved(pathname, spec)
                     if relpath:
                         exact_path(relpath, sha, f"csv_row:{line_number}/sha256")
                     occurrence(sha, f"csv_row:{line_number}/sha256")
@@ -661,7 +736,7 @@ class StoragePurge:
             try:
                 obj = json.loads(data)
             except (ValueError, UnicodeDecodeError):
-                if path_string in {str(self.alias(x["path"])) for x in explicit}:
+                if path_string in explicit_source_paths:
                     _fail(f"invalid explicit seal JSON: {rel}")
                 continue
 
@@ -687,9 +762,11 @@ class StoragePurge:
             visit(obj)
         return by_path, by_hash
 
-    def plan(self, *, hash_workers=4, metadata_workers=8, native_dense_keep=False):
+    def plan(self, *, hash_workers=4, metadata_workers=8, native_dense_keep=False, seal_workers=8):
         if not 1 <= hash_workers <= 8:
             _fail("hash_workers must be 1..8")
+        if not 1 <= seal_workers <= 8:
+            _fail("seal_workers must be 1..8")
         if _exists(self.audit) or _exists(self.quarantine):
             _fail("plan requires new audit and quarantine identities")
         inventory, candidates, metadata = [], [], []
@@ -720,7 +797,8 @@ class StoragePurge:
         self.inventory_walking = False
         inventory.sort(key=lambda row: row["original_relative_path"])
         candidates.sort(key=lambda row: row["original_relative_path"])
-        by_path, by_hash = self._seal_index(metadata)
+        by_path, by_hash = self._seal_index(metadata,
+            {row["original_relative_path"] for row in candidates}, source_workers=seal_workers)
 
         def hash_candidate(row):
             relative = row["original_relative_path"]
@@ -1099,6 +1177,7 @@ def main(argv=None):
         parser.add_argument("--" + name, required=True, type=Path)
     parser.add_argument("--hash-workers", type=int, default=4)
     parser.add_argument("--metadata-workers", type=int, default=8)
+    parser.add_argument("--seal-workers", type=int, default=8)
     parser.add_argument("--native-dense-keep", action="store_true",
                         help="plan only: identity-free metadata only for dense all-independent-KEEP directories")
     parser.add_argument("--c5-receipt", type=Path)
@@ -1107,7 +1186,7 @@ def main(argv=None):
         utility = StoragePurge(args.clean_root, args.code_root, args.policy, args.closure, args.audit_root)
         if args.phase == "plan":
             result = utility.plan(hash_workers=args.hash_workers, metadata_workers=args.metadata_workers,
-                                  native_dense_keep=args.native_dense_keep)
+                                  native_dense_keep=args.native_dense_keep, seal_workers=args.seal_workers)
         elif args.phase == "gate":
             result = utility.gate()
         elif args.phase == "quarantine":

@@ -673,3 +673,134 @@ def test_native_listing_uses_exact_wslpath_encoded_literal_and_no_recursion(worl
     assert "'G:\\literal''s directory'" in captured["script"]
     assert ".EnumerateFileSystemInfos()" in captured["script"]
     assert "-Recurse" not in captured["script"] and "ReadAll" not in captured["script"]
+
+
+def test_lexical_seal_resolution_matches_previous_valid_candidate_mapping(world):
+    candidate = world.candidate()
+    utility = world.utility()
+    relative = candidate.relative_to(world.clean).as_posix()
+    parent_relative = candidate.parent.relative_to(world.clean).as_posix()
+    examples = [(str(candidate), None), ("<CLEAN_ROOT>/" + relative, None), (relative, None),
+                (candidate.name, str(candidate.parent)),
+                (candidate.name, "<CLEAN_ROOT>/" + parent_relative)]
+    for value, base in examples:
+        if value.startswith(("<CLEAN_ROOT>/", "stages/")) or Path(value).is_absolute():
+            old = utility.alias(value)
+        else:
+            old = utility.alias(base) / mod._relative(value)
+        assert utility._seal_record_relative(value, base=base) == old.relative_to(world.clean).as_posix() == relative
+
+
+@pytest.mark.parametrize("value,base", [
+    ("../escape.nav", "<CLEAN_ROOT>/stages/base"),
+    ("child/../escape.nav", "<CLEAN_ROOT>/stages/base"),
+    ("child//file.nav", "<CLEAN_ROOT>/stages/base"),
+    ("child/./file.nav", "<CLEAN_ROOT>/stages/base"),
+    ("child/file.nav/", "<CLEAN_ROOT>/stages/base"),
+    ("<CLEAN_ROOT>//stages/run/file.nav", None),
+    ("/outside/root/file.nav", "<CLEAN_ROOT>/stages/base"),
+    ("<CODE_ROOT>/file.nav", "<CLEAN_ROOT>/stages/base"),
+    ("C:/outside/file.nav", "<CLEAN_ROOT>/stages/base"),
+    ("C:\\outside\\file.nav", "<CLEAN_ROOT>/stages/base"),
+    ("file.nav", "C:/outside"),
+    ("file.nav", "<CLEAN_ROOT>/stages/base/.."),
+    ("file.nav", None),
+])
+def test_invalid_seal_record_strings_never_enter_exact_evidence(world, value, base):
+    assert world.utility()._seal_record_relative(value, base=base) is None
+
+
+def test_seal_record_resolution_never_opens_or_stats_recorded_paths(world, monkeypatch):
+    utility = world.utility()
+    relative = P07 + "/KF_GINS_Navresult.nav"
+    recorded = str(world.clean / relative)
+    def forbidden(*args, **kwargs):
+        pytest.fail("record string parsing must not access the filesystem")
+    with monkeypatch.context() as guard:
+        for name in ["open", "stat", "lstat", "scandir"]:
+            guard.setattr(mod.os, name, forbidden)
+        guard.setattr(Path, "stat", forbidden)
+        guard.setattr(Path, "lstat", forbidden)
+        guard.setattr(mod, "_read", forbidden)
+        guard.setattr(utility, "alias", forbidden)
+        for _ in range(100):
+            assert utility._seal_record_relative(recorded) == relative
+            assert utility._seal_record_relative("KF_GINS_Navresult.nav", base="<CLEAN_ROOT>/" + P07) == relative
+            assert utility._seal_record_relative(str(world.clean) + "//" + relative) is None
+            assert utility._seal_record_relative(str(world.clean) + "_external/escape.nav") is None
+
+
+def test_seal_index_only_stores_exact_paths_intersecting_real_candidates(world, monkeypatch):
+    candidate = world.candidate()
+    relative = candidate.relative_to(world.clean).as_posix()
+    sha = hashlib.sha256(candidate.read_bytes()).hexdigest()
+    noncandidate = put(world.clean, P07 + "/unknown.bin")
+    seal = put(world.clean, "stages/records/OUTPUT_SEAL.json", json.dumps({
+        str(candidate): sha, str(noncandidate): "a" * 64,
+        str(world.clean) + "/stages/../" + relative: "b" * 64,
+        "/outside/root/file.nav": "c" * 64,
+    }).encode())
+    utility = world.utility()
+    by_path, by_hash = utility._seal_index([seal], {relative})
+    assert set(by_path) == {relative} and set(by_path[relative]) == {sha}
+    assert "a" * 64 in by_hash and "b" * 64 in by_hash  # Occurrence is not exact-path evidence.
+
+
+def test_csv_index_does_not_route_recorded_run_roots_through_live_alias(world, monkeypatch):
+    candidate = world.candidate()
+    relative = candidate.relative_to(world.clean).as_posix()
+    sha = hashlib.sha256(candidate.read_bytes()).hexdigest()
+    seal = put(world.clean, "stages/records/OUTPUT_HASH_MANIFEST.csv", (
+        "run_root,relative_path,sha256\n" + str(candidate.parent) + "," + candidate.name + "," + sha + "\n"
+        + str(candidate.parent) + ",../escape.nav," + "a" * 64 + "\n").encode())
+    alias = "<CLEAN_ROOT>/" + seal.relative_to(world.clean).as_posix()
+    world.amend(seal_sources=[{"path": alias}])
+    utility = world.utility()
+    original_alias = utility.alias
+    def source_alias_only(value):
+        assert value == alias, "recorded CSV paths must remain lexical strings"
+        return original_alias(value)
+    monkeypatch.setattr(utility, "alias", source_alias_only)
+    by_path, _ = utility._seal_index([], {relative})
+    assert set(by_path) == {relative}
+    assert by_path[relative][sha][0]["json_pointer"] == "csv_row:2/sha256"
+
+
+def test_parallel_seal_source_reads_are_bounded_and_merge_in_sorted_order(world, monkeypatch):
+    candidate = world.candidate()
+    relative = candidate.relative_to(world.clean).as_posix()
+    sha = hashlib.sha256(candidate.read_bytes()).hexdigest()
+    sources = [put(world.clean, f"stages/records/OUTPUT_SEAL_{index:02d}.json",
+                   json.dumps({str(candidate): sha}).encode()) for index in range(16)]
+    utility = world.utility()
+    sequential = utility._seal_index(sources, {relative}, source_workers=1)
+    real_read = mod._read
+    active = peak = 0
+    lock, release = threading.Lock(), threading.Event()
+    def observed(path):
+        nonlocal active, peak
+        with lock:
+            active += 1
+            peak = max(peak, active)
+            if active == 4:
+                release.set()
+        assert release.wait(2), "four independent metadata readers should overlap"
+        try:
+            return real_read(path)
+        finally:
+            with lock:
+                active -= 1
+    monkeypatch.setattr(mod, "_read", observed)
+    parallel = utility._seal_index(list(reversed(sources)), {relative}, source_workers=4)
+    assert parallel == sequential and peak == 4 and active == 0
+    assert len(parallel[0][relative][sha]) == 3
+
+
+def test_real_seal_source_symlink_guard_remains_active(world):
+    candidate = world.candidate()
+    source = put(world.code, "outside.json", b"{}")
+    seal = world.clean / "stages/records/OUTPUT_SEAL.json"
+    seal.parent.mkdir(parents=True)
+    seal.symlink_to(source)
+    with pytest.raises(OSError):
+        world.utility()._seal_index([seal], {candidate.relative_to(world.clean).as_posix()})
