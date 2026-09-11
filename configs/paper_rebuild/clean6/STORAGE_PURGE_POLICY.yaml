@@ -1,12 +1,14 @@
-schema_version: clean6.storage_purge_policy.v1
+schema_version: clean6.storage_purge_policy.v2
 task: P-09ab
 authorization: human_authorized_inventory_quarantine_and_conditional_purge
 base_commit: 68ee6b3c5e918f5b24f25e442f7bb13c5fecb263
 continuation_amendment:
-  authorized_from_commit: f91cacc3725321ba843945fcd4b43ee3e8e2049a
-  task: P-09ab_drvfs_correction
-  inherit_B_candidates_and_sha256_exactly: true
-  recompute_candidate_payload_sha256: false
+  authorized_from_commit: 3cbe53b5aad3f2ce2cb7e631639d1bd926acc055
+  task: P-09ab_second_correction_policy_v2
+  regenerate_inventory_and_deletion_plan: true
+  prior_B_hash_reuse: only_for_same_source_path_size_and_pre_move_fingerprint
+  new_candidates_sha256: retained_exact_path_seal_else_fresh_streaming_hash
+  post_B_candidate_payload_sha256_recomputed: false
   preserve_prior_failed_audit_and_empty_quarantine: true
   fresh_preflight_required_for_continuation: true
   quarantine_and_purge_require_same_preflight_receipt: true
@@ -70,6 +72,7 @@ keep:
   complete_subtrees:
     - <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL
     - CLEAN4_final_method_directories_resolved_from_FINAL_METHOD_REGISTRY.csv_including_NAV
+  plotting_figures_atlas_entire_subtrees: true
   reference_closure:
     sources:
       - <CODE_ROOT>/AGENTS.md#section_3
@@ -108,6 +111,16 @@ bulk_deletable:
     requires_approved_family: true
     keep_precedence_still_applies: true
     deletion_unit: individual_regular_file_only
+  extension_expansion_v2:
+    requires_approved_family: true
+    directory_types: [RUNS_OUTPUTS, EVALUATION, LOGS, OTHER]
+    single_file_strictly_larger_than_bytes: 1000000
+    unit_note: decimal_MB_for_expansion_existing_1048576_byte_JSON_CSV_KEEP_remains_prioritized
+    extensions: ['.csv', '.txt', '.nav', '.log', '.strace', '.raw']
+    compressed_extension: '.csv.gz'
+    compressed_filename_patterns: ['error_series.csv.gz', 'error_series_*.csv.gz', 'error_series-*.csv.gz']
+    applied_after_all_original_KEEP_rules: true
+    directory_type_definition: storage_purge.directory_type
   families:
     canonical541_v1:
       stage: CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX
@@ -147,7 +160,7 @@ gates:
   C2: all_required_record_references_exist_after_simulated_removal
   C3: every_exact_file_has_sha256_size_evidence_and_quarantine_timestamp_in_durable_ledger
   C4: same_filesystem_plain_os_rename_destination_lexists_false_then_source_absent_destination_present_and_ledger_size_equal_B_sha256_reused
-  C5: post_quarantine_repository_record_tests_and_decision_aggregate_three_sequence_CAL_readability_PASS
+  C5: post_quarantine_storage_regression_reference_paths_decision_aggregate_three_sequence_CAL_readability_PASS
   failure_action: stop_preserve_current_quarantine_no_purge
   pre_move_gates: [C1, C2, C3]
   purge_requires: [C1, C2, C3, C4, C5]
@@ -165,8 +178,10 @@ physical_operations:
   rename_single_exception: stop_immediately_preserve_partial_quarantine_no_rollback_no_purge
   directory_rename: only_if_all_contained_files_are_in_exact_plan
   implementation_move_unit: individual_regular_file
-  content_identity: B_ledger_sha256_reused_no_439_GB_payload_rehash
-  post_move_and_pre_unlink_checks: exact_path_single_regular_file_size_and_unchanged_metadata
+  content_identity: new_B_ledger_sha256_reused_no_payload_rehash_in_C4_or_D
+  rename_postconditions: [source_absent, destination_present, destination_size_equals_ledger_size]
+  cross_rename_stat_metadata_equality: forbidden
+  pre_unlink_checks: exact_listed_path_no_symlink_single_regular_file_ledger_size
   source_change_or_destination_collision: stop
   purge: unlink_only_listed_verified_quarantined_files_then_rmdir_empty_quarantine_directories
   no_original_stage_or_run_directory_removal: true
