@@ -23665,9 +23665,7 @@ sequence_consistency:
     all other science/window/base/geometry unchanged
   BY2_C00_reuse: The 11 matrix C00 runs are the BY2 consistency runs; never duplicated
 execution:
-  worker_pool_shared: true
-  initial_workers: 64
-  maximum_workers: 128
+  worker_pool_shared: false
   batch_size: 256
   pilot_batch: 1
   pilot_includes_sequence_gate: true
@@ -23705,23 +23703,36 @@ execution:
   - memory peak bytes/fraction of physical MemTotal; record MemAvailable at start separately
   - per-run solve/evaluate seconds
   - per-run full/retained output bytes
-  - 64-worker batch wall seconds
+  - resource-adaptive batch wall seconds
   - scratch peak bytes
   - G peak bytes
   - full duration extrapolation
   - full peak extrapolation
+  - solver and evaluator pool sizes
+  - per-run evaluator peak RSS bytes
+  - solver phase process-tree RSS peak bytes
   pilot_continue_gate: projected peak bytes <=250000000000 AND sequence consistency PASS AND batch verification PASS
-  worker_promotion:
-    from_batch: 2
-    workers: 128
-    conditions_all:
-      pilot_CPU_utilization_lt: 0.85
-      pilot_memory_peak_fraction_lt: 0.5
-    otherwise_workers: 64
   ledger: BATCH_LEDGER.jsonl
   commit_push_every_batches: 8
   initial_gate_barrier: Complete 33 consistency solves and all seven-file P06/P07 byte comparisons before launching remaining
     pilot solves; any mismatch stops
+  solver_provider_pool_shared: true
+  solver_pool:
+    formula: min(nproc - 2, 22)
+    minimum_valid_workers: 1
+    maximum_workers: 22
+  evaluator_pool:
+    policy: measured_RSS_memory_budget
+    memory_budget_fraction: 0.75
+    rss_safety_factor: 1.25
+    maximum_workers: 22
+    cpu_reserve: 2
+    calibration: first registered run of each BY2/BY2H/BY2O dataset x v3/v2, serial; these six evaluations count in batch,
+      never rerun
+    constraint: measured solver phase tree RSS peak + evaluator_workers * max observed evaluator RSS * 1.25 <= available memory
+      * 0.75
+    recheck: before each evaluation wave; later measured RSS may reduce workers; no slot if budget insufficient
+  superseded_concurrency_policy: 64/128 initial and promotion clauses void by human restart amendment 2026-09-12
 storage:
   G_required_free_bytes_before_any_generation: 300000000000
   scratch_required_free_bytes: 150000000000
@@ -23824,3 +23835,35 @@ records:
   decision_rule_file_change: false
   main_chain_v1_change: false
   Outcome_change: false
+
+restart_authorization:
+  authorization_date: '2026-09-12'
+  starting_commit: 1a1ee3f1783f59bc7daf3c7adcb1711d1356e196
+  original_execution_code_commit: b26569185638fabdd2ad121fc25cf784d5a8fdb3
+  original_contract_sha256: 15ba185d4ad274fbda29a1292dda7ecf1ba2b2b9608e353166b40b27c460e7a8
+  scope: explicit human-authorized revalidation of 22 sealed exit-zero sequence runs and continuation from batch 1; no native
+    rerun of any original 33
+  retained_evidence_pins:
+    00_PREREGISTRATION/EXECUTION_FREEZE.json:
+      path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/00_PREREGISTRATION/EXECUTION_FREEZE.json
+      sha256: 9464557fbe7d1df28f230c2c5e4d770ceea868b67fcf171f923b08dee4651718
+    STOPPED.json:
+      path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/STOPPED.json
+      sha256: 02a258dcc1a3579ca831b23bcf100f21857758ec3aa224f7516872bd14c7ef2f
+    SEQUENCE_CONSISTENCY_GATE.json:
+      path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/SEQUENCE_CONSISTENCY_GATE.json
+      sha256: b9ba635ce4284d1a2687a896fc45c121179fa80b12131eacfa6966a4dd340100
+    BATCHES/BATCH_001/SOLVER_GROUP_0.json:
+      path: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2/BATCHES/BATCH_001/SOLVER_GROUP_0.json
+      sha256: 0fc8898732050cc8a63e57dfb51b3f6eee1f8f6daba313042fee0be54e1c3aa5
+  sequence_runtime_role: clean2r2a_formal_clean_ablation_solver
+  runtime_role_source: P06 CALIBRATED_RUN_MANIFEST native_manifest_sha256 -> frozen RUN_MANIFEST port_role; no role field fabricated
+    in wrapper
+  configuration_change: sequence transport runtime_role only; derived validation configs preserve original sealed configs and
+    bytes of scientific fields
+  original_evidence_policy: original native outputs, manifests, configs, seals, execution freeze, stop report and failed gate
+    immutable; new validation evidence and continuation freeze are separate
+  provenance: preserve each original code_commit; add validation_code_commit and continuation_code_commit; original33 sequence
+    gate requires original single native freeze
+  restart_id: RESTART_20260912
+  native_rerun_count: 0
