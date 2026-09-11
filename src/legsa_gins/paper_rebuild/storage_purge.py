@@ -19,7 +19,8 @@ from pathlib import Path, PurePosixPath
 import re
 import stat
 import sys
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
+from collections import deque
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from functools import wraps
@@ -432,6 +433,53 @@ class StoragePurge:
                     subdirs.append(path)
             stack.extend(reversed(subdirs))
 
+    @staticmethod
+    def _directory_metadata(directory):
+        """Worker reads one directory only; it never classifies or submits children."""
+        with _parent_fd(directory) as (parent, name):
+            fd = os.open(name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC,
+                         dir_fd=parent)
+            try:
+                with os.scandir(fd) as entries:
+                    return sorted([(directory / entry.name, entry.stat(follow_symlinks=False))
+                                   for entry in entries], key=lambda item: item[0].name)
+            finally:
+                os.close(fd)
+
+    def _walk_plan(self, root, *, workers=8):
+        """Bounded directory parallelism; the owner observes parents before children."""
+        if not 1 <= workers <= 16:
+            _fail("metadata_workers must be 1..16")
+        ready = deque([root])
+        pending = {}
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            while ready or pending:
+                while ready and len(pending) < workers:
+                    directory = ready.popleft()
+                    pending[pool.submit(self._directory_metadata, directory)] = directory
+                completed, _ = wait(pending, return_when=FIRST_COMPLETED)
+                for future in completed:
+                    directory = pending.pop(future)
+                    entries = future.result()
+                    # Parent retention is established before any child can be submitted.
+                    if any(path.name == ".git" for path, _ in entries):
+                        self.embedded_git_roots.add(directory.relative_to(self.clean).as_posix())
+                    children = []
+                    for path, s in entries:
+                        yield path, s
+                        if stat.S_ISDIR(s.st_mode):
+                            children.append(path)
+                    ready.extend(children)
+
+    def _inventory_group(self, relative):
+        parts = PurePosixPath(relative).parts
+        groups = ["/".join(parts[:2])]
+        groups.extend("/".join(parts[:index + 1]) for index, part in enumerate(parts)
+                      if part.startswith(".attempt_"))
+        groups.extend(directory for field in ("superseded_attempt_dirs", "clean4_nonfinal_attempt_dirs")
+                      for directory in self.closure.get(field, []) if _under(relative, directory))
+        return max(groups, key=lambda group: len(PurePosixPath(group).parts))
+
     def _seal_index(self, metadata_paths):
         """Use only unambiguous absolute/root-relative paths; hash occurrence is supplementary."""
         explicit = self.closure.get("seal_sources", [])
@@ -528,7 +576,7 @@ class StoragePurge:
             visit(obj)
         return by_path, by_hash
 
-    def plan(self, *, hash_workers=4):
+    def plan(self, *, hash_workers=4, metadata_workers=8):
         if not 1 <= hash_workers <= 8:
             _fail("hash_workers must be 1..8")
         if _exists(self.audit) or _exists(self.quarantine):
@@ -536,11 +584,10 @@ class StoragePurge:
         inventory, candidates, metadata = [], [], []
         totals = {"KEEP": 0, "BULK_DELETABLE": 0, "UNKNOWN": 0}
         self.inventory_walking = True
-        for path, s in self._walk(self.clean / "stages"):
+        for path, s in self._walk_plan(self.clean / "stages", workers=metadata_workers):
             relative = path.relative_to(self.clean).as_posix()
             classification, reason, family, file_class = self.classify(relative, s)
-            parts = PurePosixPath(relative).parts
-            group = "/".join(parts[:3] if len(parts) > 2 and parts[2].startswith(".attempt_") else parts[:2])
+            group = self._inventory_group(relative)
             file_type = "regular" if stat.S_ISREG(s.st_mode) else "directory" if stat.S_ISDIR(s.st_mode) else "symlink" if stat.S_ISLNK(s.st_mode) else "special"
             row = dict(original_relative_path=relative, group=group, file_type=file_type,
                        size_bytes=s.st_size if file_type == "regular" else 0, nlink=s.st_nlink,
@@ -556,6 +603,8 @@ class StoragePurge:
             if len(inventory) % 1000 == 0:
                 print(f"inventory {len(inventory)} entries; candidates {len(candidates)}", flush=True)
         self.inventory_walking = False
+        inventory.sort(key=lambda row: row["original_relative_path"])
+        candidates.sort(key=lambda row: row["original_relative_path"])
         by_path, by_hash = self._seal_index(metadata)
 
         def hash_candidate(row):
@@ -932,12 +981,13 @@ def main(argv=None):
     for name in ["clean-root", "code-root", "policy", "closure", "audit-root"]:
         parser.add_argument("--" + name, required=True, type=Path)
     parser.add_argument("--hash-workers", type=int, default=4)
+    parser.add_argument("--metadata-workers", type=int, default=8)
     parser.add_argument("--c5-receipt", type=Path)
     args = parser.parse_args(argv)
     try:
         utility = StoragePurge(args.clean_root, args.code_root, args.policy, args.closure, args.audit_root)
         if args.phase == "plan":
-            result = utility.plan(hash_workers=args.hash_workers)
+            result = utility.plan(hash_workers=args.hash_workers, metadata_workers=args.metadata_workers)
         elif args.phase == "gate":
             result = utility.gate()
         elif args.phase == "quarantine":

@@ -8,6 +8,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import threading
 
 import pytest
 
@@ -487,3 +488,73 @@ def test_special_fifo_is_rejected_without_blocking_hash(world):
     os.mkfifo(path)
     with pytest.raises(mod.PurgeError, match="regular"):
         mod.hash_file(path)
+
+
+def test_parallel_plan_matches_sequential_inventory_and_parent_git_retention(world, monkeypatch):
+    world.candidate()
+    for index in range(20):
+        put(world.clean, P07 + f"/working_{index}/unclassified.bin", bytes([index]))
+    git_root = P07 + "/nested_repository"
+    put(world.clean, git_root + "/.git", b"gitdir: synthetic")
+    protected = put(world.clean, git_root + "/child/deeper/KF_GINS_Navresult.nav", b"protected")
+    (world.clean / (P07 + "/outside_link")).symlink_to(world.code, target_is_directory=True)
+    sequential = world.utility()
+    monkeypatch.setattr(sequential, "_walk_plan", lambda root, **kwargs: sequential._walk(root))
+    first = sequential.plan(hash_workers=1)
+    parallel = mod.StoragePurge(world.clean, world.code, world.policy, world.closure,
+                               world.clean / "storage_purge/20260911T010204Z")
+    owner_thread = threading.get_ident()
+    class OwnerSet(set):
+        def add(self, value):
+            assert threading.get_ident() == owner_thread
+            return super().add(value)
+    parallel.embedded_git_roots = OwnerSet()
+    second = parallel.plan(hash_workers=1, metadata_workers=8)
+    for name in ["FILE_INVENTORY.csv", "STORAGE_INVENTORY.csv", "UNKNOWN_FILES.csv"]:
+        assert (sequential.audit / name).read_bytes() == (parallel.audit / name).read_bytes()
+    assert first["candidate_count"] == second["candidate_count"] == 1
+    assert protected.exists()
+    assert git_root in parallel.embedded_git_roots
+
+
+def test_parallel_metadata_worker_count_is_bounded(world, monkeypatch):
+    for index in range(16):
+        put(world.clean, f"stages/d{index}/fixture.bin", b"fixture")
+    utility = world.utility()
+    original = utility._directory_metadata
+    lock, release = threading.Lock(), threading.Event()
+    active = peak = 0
+    def measured(directory):
+        nonlocal active, peak
+        if directory == world.clean / "stages":
+            return original(directory)
+        with lock:
+            active += 1
+            peak = max(peak, active)
+            if active == 4:
+                release.set()
+        assert release.wait(2), "four directory workers should be concurrently active"
+        try:
+            return original(directory)
+        finally:
+            with lock:
+                active -= 1
+    monkeypatch.setattr(utility, "_directory_metadata", measured)
+    rows = list(utility._walk_plan(world.clean / "stages", workers=4))
+    assert len(rows) == 32 and peak == 4 and active == 0
+    with pytest.raises(mod.PurgeError, match="1..16"):
+        list(utility._walk_plan(world.clean / "stages", workers=17))
+
+
+def test_inventory_groups_partition_explicit_and_nested_attempts(world):
+    stage = "stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON"
+    frozen = stage + "/GINav.frozen_attempt2_2020"
+    partial = stage + "/GINav.partial_2020"
+    nested = stage + "/.attempt_evidence/FAILED_REGISTRY"
+    world.amend(clean4_nonfinal_attempt_dirs=[frozen, partial, nested])
+    utility = world.utility()
+    assert utility._inventory_group(frozen + "/a.txt") == frozen
+    assert utility._inventory_group(partial + "/b.txt") == partial
+    assert utility._inventory_group(nested + "/deeper/c.txt") == nested
+    assert utility._inventory_group(stage + "/remainder.txt") == stage
+    assert utility._inventory_group(CAN + "/KF_GINS_STD.txt") == CAN.split("/08_FULL")[0]

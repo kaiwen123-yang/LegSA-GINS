@@ -210,8 +210,12 @@ def main():
         'unresolved_required_paths': missing,
         'source_documents_sha256': {name: hashlib.sha256(_read(code/name)).hexdigest()
                                     for name in ('AGENTS.md', 'docs/paper_rebuild/CONVERSATION_HANDOFF.md')},
-        'frozen_source_sha256': {portable(resolve(path)): hashlib.sha256(_read(resolve(path))).hexdigest()
-                                 for path in mapping.get('frozen_source_paths', [])},
+        'frozen_source_sha256': {
+            **{portable(resolve(path)): hashlib.sha256(_read(resolve(path))).hexdigest()
+               for path in mapping.get('frozen_source_paths', [])},
+            **{portable(home/name): hashlib.sha256(_read(home/name)).hexdigest()
+               for name in ('c541_handoff.zip', 'clean5_handoff.zip', 'clean5_handoff_v2.zip')},
+        },
         'C2_reference_discovery_status': 'PASS' if not missing else 'FAIL',
         'scientific_execution_count': 0, 'raw_content_open_count': 0,
     }
