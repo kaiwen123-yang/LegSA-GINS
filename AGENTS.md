@@ -131,8 +131,11 @@ Authoritative result roots:
 
 ```text
 <CANONICAL541_ATTEMPT>/08_FULL_ALGORITHM_RUNS/
+# bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only)
 <CANONICAL541_ATTEMPT>/10_INTERNAL_ABLATION_RUNS/
+# bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only)
 <CANONICAL541_ATTEMPT>/12_OFFLINE_EVALUATION/
+# bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only)
 <CANONICAL541_ATTEMPT>/13_AGGREGATE/
 <CANONICAL541_ATTEMPT>/14_PAPER_FOCUSED_PLOTTING/
 <CLEAN6_ROOT> = <CLEAN_ROOT>/stages/CLEAN6_PUBLICATION_FIGURES
@@ -162,7 +165,9 @@ CLEAN5 evaluated sequence roots:
 
 ```text
 <CLEAN5_BY2H_ROOT> = <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE
+# bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only: 04_SOLVER_RUNS/, 04_SOLVER_RUNS_V2/, 07_OFFLINE_EVALUATION/)
 <CLEAN5_BY2O_ROOT> = <CLEAN_ROOT>/stages/CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE
+# bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only: 04_SOLVER_RUNS/, 04_SOLVER_RUNS_V2/, 07_OFFLINE_EVALUATION/)
 <CLEAN5_DECISION_ROOT> = <CLEAN_ROOT>/stages/CLEAN5_DECISION
 ```
 
@@ -187,6 +192,29 @@ Default CLEAN5 numerical sources (under each sequence root):
 P-09ab storage inventory (2026-09-11): C1/C2/C3 PASS, C4 FAIL (`renameat2(RENAME_NOREPLACE)` returned EINVAL), C5/D NOT_EXECUTED. Planned 57,233 files / 439,508,000,426 logical bytes; moved/purged/released by purge 0/0/0. The empty quarantine tree is retained. No root was bulk purged. Planned ledger records at `docs/paper_rebuild/purge/DELETION_LEDGER_20260911T040000Z.json.gz`; terminal and inventory record: `docs/paper_rebuild/purge/STORAGE_PURGE_20260911T040000Z.md`. Main-chain roots and Outcome remain unchanged.
 
 P-09ab DrvFs continuation (2026-09-11, audit `20260911T062436Z`): `STOPPED_PREFLIGHT_IO_PROBE_FAIL_NO_CANDIDATE_MOVE_OR_PURGE`. The audit-only zero-byte ordinary rename completed, then the implementation-added full-metadata equality assertion failed; source-absent/destination-present/size-zero postconditions hold, and the differing metadata field is UNAVAILABLE. Dispatch stopped before C1/C2/C3, candidate quarantine, C5 or D; candidate moved/purged files and bytes are 0. No root was bulk purged and no retry was made. Planned ledger records at `docs/paper_rebuild/purge/DELETION_LEDGER_20260911T062436Z.json.gz`; terminal, C5 NOT_EXECUTED rows and UNKNOWN top 20 at `docs/paper_rebuild/purge/STORAGE_PURGE_20260911T062436Z.md`. The prior failed audit and empty quarantine are retained.
+
+P-09ab policy-v2 exact-file completion (2026-09-11, audit `<CLEAN_ROOT>/storage_purge/20260911T070041Z`): C1/C2/C3/C4/C5/D PASS; 73,039 listed files / 530,120,461,090 logical bytes quarantined and purged. All annotations below mean listed bulk only; retained records remain at their registered locations. Final ledger SHA-256: `9e28e07eea72f9de8b3ebc2ba033139d2f694c9934357dab2a40a8e60ad4f814`. Completion record: `docs/paper_rebuild/purge/STORAGE_PURGE_20260911T070041Z.md`.
+
+Additional exact-file scope:
+
+```text
+<CLEAN5_PARITY_ROOT> = <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/
+<CLEAN5_PARITY_ROOT>/03_PARITY_RUNS/  # bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only)
+<CLEAN5_PARITY_ROOT>/07_OFFLINE_EVALUATION/  # bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only)
+<CLEAN5_PARITY_ROOT>/10_IMU_PROCESSING/  # bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only)
+<CLEAN5_PARITY_ROOT>/12_PARITY_GENERALIZATION/  # bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only)
+<CLEAN5_PARITY_ROOT>/13_NOISE_MODEL_SENSITIVITY/  # bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only)
+<CLEAN5_P07_ROOT> = <CLEAN_ROOT>/stages/CLEAN5_DEGSUBSET_BY2/
+<CLEAN5_P07_ROOT>/03_RUNS/  # bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only)
+<CLEAN5_P07_ROOT>/07_EVALUATION/  # bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only)
+<CANONICAL_STAGE> = <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/
+<CANONICAL_STAGE>/.attempt_20260808T192851P0800/01_COMPACT_READINESS_RUN/  # bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only)
+<CANONICAL_STAGE>/.attempt_20260808T192851P0800/02_MATRIX_SPEC_LOCK/INTERNAL_ABLATION_QUEUE_DRAFT.csv  # bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only)
+<CANONICAL_STAGE>/.attempt_20260808T195407P0800/01_COMPACT_READINESS_RUN/  # bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only)
+<CANONICAL_STAGE>/.attempt_20260808T195407P0800/02_MATRIX_SPEC_LOCK/INTERNAL_ABLATION_QUEUE_DRAFT.csv  # bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only)
+```
+
+P-07 retained subset results and decision: `<CLEAN5_P07_ROOT>/08_AGGREGATE/` and `<CLEAN5_P07_ROOT>/08_AGGREGATE/DEGRADATION_SUBSET_DECISION.json`; record: `docs/paper_rebuild/CLEAN5_DEGRADATION_SUBSET_RESULTS.md`.
 
 Do not reconstruct current metrics from screenshots, legacy tables, or old summaries.
 

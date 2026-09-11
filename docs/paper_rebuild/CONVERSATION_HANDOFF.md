@@ -69,6 +69,11 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 ## 6. Data handoff locations
 
 - Canonical-541 authoritative attempt: `<CANONICAL541_ATTEMPT>` (see AGENTS section 3).
+
+  - `<CANONICAL541_ATTEMPT>/08_FULL_ALGORITHM_RUNS/`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only).
+  - `<CANONICAL541_ATTEMPT>/10_INTERNAL_ABLATION_RUNS/`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only).
+  - `<CANONICAL541_ATTEMPT>/12_OFFLINE_EVALUATION/`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only).
+
 - Packed subset for conversation A: `~/c541_handoff.zip` produced by `c541_pack_v2.py`
   (aggregates, whitelisted evaluation columns, decimated representative error series,
   C00 NAV files, identity probe). Decimated series are display-only; every metric comes
@@ -82,15 +87,40 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
   `01_SEQUENCE_CONTRACT/C04B_CONTINUATION_2_ba7d380bb11d/EVENT_WINDOW_V2.json`
   (`window_contract.event_report_relative_path`, checked by `event_window_report_sha256`).
   `01_SEQUENCE_CONTRACT/OCCLUSION_WINDOW.json` applies to BY2O; BY2H is not applicable.
+
+  - `<CLEAN5_BY2H_ROOT>`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only: `04_SOLVER_RUNS/`, `04_SOLVER_RUNS_V2/`, `07_OFFLINE_EVALUATION/`).
+  - `<CLEAN5_BY2O_ROOT>`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only: `04_SOLVER_RUNS/`, `04_SOLVER_RUNS_V2/`, `07_OFFLINE_EVALUATION/`).
+
 - Decision evidence: `<CLEAN_ROOT>/stages/CLEAN5_DECISION/`.
 - Three-sequence handoff: `~/clean5_handoff.zip`, produced by
   `scripts/paper_rebuild/clean5_pack_v1.py`; 10 Hz series are display-only, and metrics
   remain the frozen aggregate values. Reference trace is external via `--trace-path`.
 
 - Stage 2 parity root (`<CLEAN5_PARITY_ROOT>`): `<CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/`; P02 `08_AGGREGATE/`, P03 `10_IMU_PROCESSING/08_AGGREGATE/`, vertical diagnosis `11_VERTICAL_DIAGNOSIS/`, three-sequence ladder `12_PARITY_GENERALIZATION/08_AGGREGATE/`, and P05 grid `13_NOISE_MODEL_SENSITIVITY/08_AGGREGATE/`.
+
+  - `<CLEAN5_PARITY_ROOT>/03_PARITY_RUNS/`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only).
+  - `<CLEAN5_PARITY_ROOT>/07_OFFLINE_EVALUATION/`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only).
+  - `<CLEAN5_PARITY_ROOT>/10_IMU_PROCESSING/`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only).
+  - `<CLEAN5_PARITY_ROOT>/12_PARITY_GENERALIZATION/`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only).
+  - `<CLEAN5_PARITY_ROOT>/13_NOISE_MODEL_SENSITIVITY/`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only).
+
 - Calibrated root (`<CLEAN5_CALIBRATED_ROOT>`): `<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/`; `00_CALIBRATION/` holds the one-time BY2 fit and original plus supplementary audit evidence; `08_AGGREGATE/` and its `v3/` contain all five profiles on three sequences, pairwise, consistency and BODY_FRAME_BIAS tables. `CALIBRATED_CHAIN_ROBUSTNESS_CHECK.json/.csv` resides in `08_AGGREGATE/`.
 - Stage 2 closeout: `CLEAN5_STAGE2_CLOSEOUT.md`; calibrated run record: `CLEAN5_CALIBRATED_CHAIN_RESULTS.md`. Calibrated values are marked `NOT_THE_PREREGISTERED_COMPARISON_PROTOCOL`; the original main-chain anchors and Outcome are retained.
 - Extended handoff: `~/clean5_handoff_v2.zip`, produced by `scripts/paper_rebuild/clean5_pack_v2.py`. It inherits every v1 member byte-for-byte and adds frozen stage 2/calibrated tables, both evaluation versions and body-frame biases. Raw reference trace is excluded; the explicitly pinned trace-difference diagnostic table is `DERIVED_DIAGNOSTIC_ONLY`.
+
+- P-07 corrected-chain degradation subset root (`<CLEAN5_P07_ROOT>`): `<CLEAN_ROOT>/stages/CLEAN5_DEGSUBSET_BY2/`; retained results are in `08_AGGREGATE/`, including `08_AGGREGATE/DEGRADATION_SUBSET_DECISION.json`. Record: `docs/paper_rebuild/CLEAN5_DEGRADATION_SUBSET_RESULTS.md`.
+
+  - `<CLEAN5_P07_ROOT>/03_RUNS/`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only).
+  - `<CLEAN5_P07_ROOT>/07_EVALUATION/`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only).
+
+- Earlier Canonical exact-file scope (`<CANONICAL_STAGE>` = `<CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/`):
+
+  - `<CANONICAL_STAGE>/.attempt_20260808T192851P0800/01_COMPACT_READINESS_RUN/`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only).
+  - `<CANONICAL_STAGE>/.attempt_20260808T192851P0800/02_MATRIX_SPEC_LOCK/INTERNAL_ABLATION_QUEUE_DRAFT.csv`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only).
+  - `<CANONICAL_STAGE>/.attempt_20260808T195407P0800/01_COMPACT_READINESS_RUN/`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only).
+  - `<CANONICAL_STAGE>/.attempt_20260808T195407P0800/02_MATRIX_SPEC_LOCK/INTERNAL_ABLATION_QUEUE_DRAFT.csv`: bulk purged 2026-09-11; records at docs/paper_rebuild/purge/DELETION_LEDGER_20260911T070041Z.json.gz (listed bulk only).
+
+- P-09ab policy-v2 completion (2026-09-11, audit `<CLEAN_ROOT>/storage_purge/20260911T070041Z`): C1/C2/C3/C4/C5/D PASS; 73,039 listed files / 530,120,461,090 logical bytes quarantined and purged. Final ledger SHA-256: `9e28e07eea72f9de8b3ebc2ba033139d2f694c9934357dab2a40a8e60ad4f814`. Completion record: `docs/paper_rebuild/purge/STORAGE_PURGE_20260911T070041Z.md`.
 
 - P-09ab storage inventory (2026-09-11): C1/C2/C3 PASS, C4 FAIL (`renameat2(RENAME_NOREPLACE)` returned EINVAL), C5/D NOT_EXECUTED. Planned 57,233 files / 439,508,000,426 logical bytes; moved/purged/released by purge 0/0/0. The empty quarantine tree is retained. No root was bulk purged. Planned ledger records at `docs/paper_rebuild/purge/DELETION_LEDGER_20260911T040000Z.json.gz`; terminal and inventory record: `docs/paper_rebuild/purge/STORAGE_PURGE_20260911T040000Z.md`. Main-chain roots and Outcome remain unchanged.
 
