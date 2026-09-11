@@ -25,7 +25,8 @@ def write_json(path, payload):
 
 
 def evaluate(*, evaluator, trace, nav, std, outdir, base_time, window,
-             trace_sha256, code_root, raw_root, clean_root, instrument=True):
+             trace_sha256, code_root, raw_root, clean_root, instrument=True,
+             consistency_policy=None):
     evaluator, trace, nav, std, outdir, code_root = map(Path, (evaluator, trace, nav, std, outdir, code_root))
     if evaluator.is_symlink() or sha256_file(evaluator) != EVALUATOR_SHA256:
         raise RuntimeError("Archived evaluator identity mismatch")
@@ -35,12 +36,21 @@ def evaluate(*, evaluator, trace, nav, std, outdir, base_time, window,
     config = {"evaluator": str(evaluator), "evaluator_sha256": EVALUATOR_SHA256,
               "trace": str(trace), "trace_sha256": trace_sha256,
               "window": list(window), "outdir": str(outdir)}
+    if consistency_policy is not None:
+        if consistency_policy != "canonical_v2_wgs84_full_support":
+            raise ValueError("Unknown evaluator consistency policy")
+        config["consistency_policy"] = consistency_policy
+        (outdir / ".tmp").mkdir()
     config_path = outdir / "CAPTURE_CONFIG.json"
     write_json(config_path, config)
     environment = {"PYTHONDONTWRITEBYTECODE": "1", "GIT_OPTIONAL_LOCKS": "0",
                    "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1",
                    "NUMEXPR_NUM_THREADS": "1", "MPLCONFIGDIR": str(outdir / ".matplotlib"),
                    "XDG_CACHE_HOME": str(outdir / ".cache"), "MPLBACKEND": "Agg"}
+    if consistency_policy is not None:
+        environment.update(TMPDIR=str(outdir / ".tmp"), TMP=str(outdir / ".tmp"),
+                           TEMP=str(outdir / ".tmp"), VECLIB_MAXIMUM_THREADS="1",
+                           BLIS_NUM_THREADS="1", NUMEXPR_MAX_THREADS="1")
     if instrument:
         environment["PYTHONPATH"] = os.pathsep.join((str(code_root / "scripts/paper_rebuild/clean5_evaluator_observer"), str(code_root / "src")))
         environment["CLEAN5_EVALUATOR_CAPTURE_CONFIG"] = str(config_path)

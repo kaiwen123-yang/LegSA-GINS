@@ -102,13 +102,19 @@ def install(config_path):
             state["trace_header"] = list(local["df"].columns)
             start, end = config["window"]
             times = local["gt_time"].to_numpy(float)
+            if config.get("consistency_policy") == "canonical_v2_wgs84_full_support":
+                times = returned["time"].to_numpy(float)
             state["reference_epoch_count"] = int(np.sum((times >= start) & (times <= end)))
             reference = returned
             print("CLEAN5_SELECTED_TRACE_COLUMNS " + json.dumps(state["selected_columns"], sort_keys=True), flush=True)
         elif name == "main" and reference is not None and "err_df" in frame.f_locals:
             import pandas as pd
             errors = pd.read_csv(Path(config["outdir"]) / "error_series.csv")
-            state["consistency"] = consistency_check(frame.f_locals["nav"], errors, reference)
+            if config.get("consistency_policy") == "canonical_v2_wgs84_full_support":
+                from ..clean6_canonical_v2.evaluation import wgs84_consistency_check
+                state["consistency"] = wgs84_consistency_check(frame.f_locals["nav"], errors, reference)
+            else:
+                state["consistency"] = consistency_check(frame.f_locals["nav"], errors, reference)
             state["hash_role"] = "existing evaluator handle; hash then rewind before parsing; zero extra trace opens"
             state["observation_only"] = True
             state["window"] = config["window"]

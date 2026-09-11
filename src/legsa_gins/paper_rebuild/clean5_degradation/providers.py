@@ -667,7 +667,8 @@ def _semantic_equivalence(base: BaseInputs, generated: canonical.ProviderBundle,
 
 
 def generate_case(base: BaseInputs, case_row: Mapping[str, Any], mapping: Mapping[str, Any], output_root: str | Path,
-                  *, code_commit: str | None = None, config_hash: str | None = None) -> dict[str, Any]:
+                  *, code_commit: str | None = None, config_hash: str | None = None,
+                  expected_family: str | None = None) -> dict[str, Any]:
     """Create exactly output_root/case_id once, returning five solver input pins.
 
     Caller owns preregistration, permitted-root resolution, raw-lock checkpoints,
@@ -693,8 +694,12 @@ def generate_case(base: BaseInputs, case_row: Mapping[str, Any], mapping: Mappin
     root = Path(output_root).expanduser()
     if not root.is_absolute() or '..' in root.parts or any(path.is_symlink() for path in (root, *root.parents)):
         raise DegradationProviderError('Output root must be absolute without symlinks')
-    if base.data_mode != 'synthetic_test' and not any(part.startswith('CLEAN5_DEGSUBSET_') for part in root.parts):
-        raise DegradationProviderError('Real provider output requires CLEAN5_DEGSUBSET_* family')
+    if expected_family not in (None, 'CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2'):
+        raise DegradationProviderError('Unregistered explicit provider family')
+    allowed_family = (expected_family in root.parts if expected_family else
+                      any(part.startswith('CLEAN5_DEGSUBSET_') for part in root.parts))
+    if base.data_mode != 'synthetic_test' and not allowed_family:
+        raise DegradationProviderError('Real provider output requires registered family')
     for pin in (*base.providers.values(), *base.auxiliary_roles.values()):
         source = Path(pin['path'])
         if root == source.parent or root.is_relative_to(source.parent) or source.is_relative_to(root):
@@ -751,7 +756,7 @@ def generate_case(base: BaseInputs, case_row: Mapping[str, Any], mapping: Mappin
                  'real_clean' if type_id == 'CLEAN' else 'real_base_controlled_degradation')
     result = {
         'schema_version': 'clean5.degradation_provider.v1', 'case_id': case_id,
-        'degradation_type_id': type_id, 'provider_family': 'CLEAN5_DEGSUBSET_'+case_id,
+        'degradation_type_id': type_id, 'provider_family': expected_family or 'CLEAN5_DEGSUBSET_'+case_id,
         'case_root': str(case_root), 'data_mode': data_mode,
         'synthetic_data_used': base.synthetic_data_used,
         'semisynthetic_data_used': base.semisynthetic_data_used,
