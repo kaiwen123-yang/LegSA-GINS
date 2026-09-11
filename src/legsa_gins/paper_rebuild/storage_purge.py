@@ -89,6 +89,32 @@ def _under(relative, directory):
     return relative == directory or relative.startswith(directory + "/")
 
 
+def _windows_extended_absolute(value):
+    """Canonical drive/UNC directory spelling for .NET's extended-length API."""
+    if (not isinstance(value, str) or not value or any(c in value for c in "\x00\r\n/")
+            or value.startswith("\\\\.\\")):
+        _fail("wslpath did not return one strict Windows absolute directory")
+    text = value
+    if text.startswith("\\\\?\\"):
+        text = text[4:]
+        if text.upper().startswith("UNC\\"):
+            text = "\\\\" + text[4:]
+    if re.match(r"^[A-Za-z]:\\", text):
+        root, remainder = text[:3], text[3:]
+        parts = remainder.split("\\") if remainder else []
+        prefix = "\\\\?\\" + root
+    elif text.startswith("\\\\"):
+        parts = text[2:].split("\\")
+        if len(parts) < 2:
+            _fail("UNC directory requires both server and share")
+        prefix = "\\\\?\\UNC\\"
+    else:
+        _fail("only absolute drive or UNC directories support the native metadata backend")
+    if any(not part or part in {".", ".."} or any(c in part for c in ':*?"<>|') for part in parts):
+        _fail("noncanonical Windows directory components")
+    return prefix + "\\".join(parts)
+
+
 def _absolute_without_links(path, *, missing=False):
     """Reject symlinks in every existing path component without resolving them."""
     if ".." in Path(path).parts:
@@ -485,17 +511,18 @@ class StoragePurge:
         """One exact directory, metadata only; no configurable Windows root mapping."""
         windows_path = subprocess.check_output(["wslpath", "-w", str(directory)], text=True,
                                                timeout=15).strip()
-        if not re.match(r"^[A-Za-z]:\\", windows_path) or "\n" in windows_path or "\r" in windows_path:
-            _fail("wslpath did not return one native drive directory")
-        literal = windows_path.replace("'", "''")
+        literal = _windows_extended_absolute(windows_path).replace("'", "''")
         script = (
             "$ErrorActionPreference='Stop'; $ProgressPreference='SilentlyContinue'; "
             "[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new($false); "
             f"$dir=[System.IO.DirectoryInfo]::new('{literal}'); "
             "$rootAttributes=[int]$dir.Attributes; "
+            "if($rootAttributes -lt 0){throw 'invalid negative directory attributes'}; "
+            "if(($rootAttributes -band 16) -eq 0){throw 'native path is not a directory'}; "
             "if(($rootAttributes -band 1024) -ne 0){throw 'reparse directory forbidden'}; "
             "$rows=[System.Collections.Generic.List[object]]::new(); "
             "foreach($x in $dir.EnumerateFileSystemInfos()){ $a=[int]$x.Attributes; "
+            "if($a -lt 0){throw 'invalid negative entry attributes'}; "
             "$n=[int64]0; if(($a -band 16) -eq 0 -and ($a -band 1024) -eq 0){$n=$x.Length}; "
             "$rows.Add(@{name=$x.Name;size=$n;attributes=$a}) }; "
             "@{directory_attributes=$rootAttributes;rows=$rows} | ConvertTo-Json -Compress -Depth 4"
@@ -504,7 +531,13 @@ class StoragePurge:
         result = subprocess.run(["powershell.exe", "-NoLogo", "-NoProfile", "-NonInteractive",
                                  "-EncodedCommand", encoded], stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, check=True, timeout=60)
-        return json.loads(result.stdout.decode("utf-8-sig"))
+        native = json.loads(result.stdout.decode("utf-8-sig"))
+        attributes = native.get("directory_attributes")
+        if type(attributes) is not int or attributes < 0:
+            _fail("invalid negative or noninteger native directory attributes")
+        if not attributes & 16 or attributes & 1024:
+            _fail("native directory is not an ordinary non-reparse directory")
+        return native
 
     def _dense_directory_metadata(self, directory):
         with _parent_fd(directory) as (parent, name):
@@ -522,7 +555,9 @@ class StoragePurge:
                                if entry.is_file(follow_symlinks=False) else "special" for entry in entries}
                 native = self._native_directory_listing(directory)
                 attributes = native.get("directory_attributes")
-                if type(attributes) is not int or not attributes & 16 or attributes & 1024:
+                if type(attributes) is not int or attributes < 0:
+                    _fail("invalid negative or noninteger native directory attributes")
+                if not attributes & 16 or attributes & 1024:
                     _fail("native directory is not an ordinary non-reparse directory")
                 rows = native.get("rows")
                 if not isinstance(rows, list):

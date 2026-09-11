@@ -607,7 +607,7 @@ def test_native_mixed_directory_falls_back_for_every_file(world, monkeypatch):
     assert utility.classify(candidate[0].relative_to(world.clean).as_posix(), candidate[1])[0] == "BULK_DELETABLE"
 
 
-@pytest.mark.parametrize("kind", ["missing_name", "duplicate_name", "wrong_type", "negative_size", "size_not_integer", "root_reparse"])
+@pytest.mark.parametrize("kind", ["missing_name", "duplicate_name", "wrong_type", "negative_size", "size_not_integer", "root_reparse", "root_negative_attributes", "entry_negative_attributes"])
 def test_native_metadata_mismatch_stops_without_candidates(world, monkeypatch, kind):
     directory, native = dense_fixture(world)
     if kind == "missing_name":
@@ -620,6 +620,10 @@ def test_native_metadata_mismatch_stops_without_candidates(world, monkeypatch, k
         native["rows"][0]["size"] = -1
     elif kind == "size_not_integer":
         native["rows"][0]["size"] = "2"
+    elif kind == "root_negative_attributes":
+        native["directory_attributes"] = -1
+    elif kind == "entry_negative_attributes":
+        native["rows"][0]["attributes"] = -1
     else:
         native["directory_attributes"] = 16 | 1024
     utility = world.utility()
@@ -670,9 +674,42 @@ def test_native_listing_uses_exact_wslpath_encoded_literal_and_no_recursion(worl
     monkeypatch.setattr(mod.subprocess, "check_output", wslpath)
     monkeypatch.setattr(mod.subprocess, "run", powershell)
     assert world.utility()._native_directory_listing(directory)["rows"] == []
-    assert "'G:\\literal''s directory'" in captured["script"]
+    assert "'\\\\?\\G:\\literal''s directory'" in captured["script"]
     assert ".EnumerateFileSystemInfos()" in captured["script"]
     assert "-Recurse" not in captured["script"] and "ReadAll" not in captured["script"]
+    assert captured["script"].index("$rootAttributes -lt 0") < captured["script"].index("$rootAttributes -band 1024")
+    assert "$a -lt 0" in captured["script"]
+
+
+@pytest.mark.parametrize("source,expected", [
+    ("G:\\directory\\child", "\\\\?\\G:\\directory\\child"),
+    ("G:\\", "\\\\?\\G:\\"),
+    ("\\\\server\\share\\directory", "\\\\?\\UNC\\server\\share\\directory"),
+    ("\\\\server\\share", "\\\\?\\UNC\\server\\share"),
+    ("\\\\?\\G:\\directory", "\\\\?\\G:\\directory"),
+    ("\\\\?\\UNC\\server\\share\\directory", "\\\\?\\UNC\\server\\share\\directory"),
+])
+def test_extended_length_windows_drive_and_unc_paths(source, expected):
+    assert mod._windows_extended_absolute(source) == expected
+
+
+@pytest.mark.parametrize("source", [
+    "G:relative", "relative\\directory", "G:/wrong/separators", "G:\\dir\\..\\other",
+    "G:\\dir\\\\other", "\\\\server", "\\\\.\\PhysicalDrive0", "\\\\?\\GLOBALROOT\\Device",
+    "G:\\dir\nother", "G:\\dir\x00other", "G:\\dir:stream",
+])
+def test_extended_length_rejects_relative_device_or_noncanonical_paths(source):
+    with pytest.raises(mod.PurgeError):
+        mod._windows_extended_absolute(source)
+
+
+@pytest.mark.parametrize("attributes", [-1, 16 | 1024])
+def test_native_listing_itself_rejects_negative_attributes_and_true_reparse(world, monkeypatch, attributes):
+    monkeypatch.setattr(mod.subprocess, "check_output", lambda *a, **k: "G:\\directory\n")
+    monkeypatch.setattr(mod.subprocess, "run", lambda *a, **k: SimpleNamespace(
+        stdout=json.dumps({"directory_attributes": attributes, "rows": []}).encode()))
+    with pytest.raises(mod.PurgeError, match="negative" if attributes < 0 else "reparse"):
+        world.utility()._native_directory_listing(world.clean / "stages")
 
 
 def test_lexical_seal_resolution_matches_previous_valid_candidate_mapping(world):
