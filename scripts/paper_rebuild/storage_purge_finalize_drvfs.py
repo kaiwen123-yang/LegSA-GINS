@@ -16,6 +16,7 @@ from legsa_gins.paper_rebuild.storage_purge import (
 from legsa_gins.paper_rebuild.storage_purge_dispatch import (
     PreflightChallenge, _pairs, _validate,
 )
+from legsa_gins.paper_rebuild.storage_purge_drvfs import STORAGE_TEST_FILES, pytest_xml_counts
 
 _spec = importlib.util.spec_from_file_location("original_storage_finalizer",
     Path(__file__).with_name("storage_purge_finalize_ledger.py"))
@@ -68,6 +69,8 @@ def enrich(control, events):
         moved = history[1]
         if moved.get("payload_rehashed") is not False or moved.get("sha256_origin") != "B_LEDGER":
             _fail("move event does not explicitly identify reused B SHA")
+        if any(moved.get(key) is not True for key in ("source_absent", "destination_present", "size_matches_ledger")):
+            _fail("move event does not verify the three authorized postconditions")
         output.append(dict(row, terminal="PURGED", sha256_origin="B_LEDGER", payload_rehashed=False,
             move_prepared_at_utc=history[0]["time_utc"],
             quarantine_metadata_verified_at_utc=moved["time_utc"],
@@ -83,8 +86,18 @@ def finalize(clean_root, code_root, policy, audit_root):
         control, binding = utility._ledger()
         names = [*RECEIPTS, "DELETION_LEDGER.json", "DELETION_PLAN.csv", "REFERENCE_CLOSURE.json",
                  "JOURNAL.jsonl", "FREE_SPACE_BEFORE.json", "FREE_SPACE_AFTER.json",
-                 "CONTINUATION_IMPORT.json", "UNKNOWN_BY_CLASS.csv", "C5_TESTS.xml",
+                 "UNKNOWN_BY_CLASS.csv", "C5_TESTS.xml", "C5_STORAGE_REGRESSION.xml",
+                 "C5_STORAGE_REGRESSION.stdout.log",
                  "RECORDS_BASELINE.json", "RECORDS_AFTER_QUARANTINE.json"]
+        if control.get("planning_mode") != "FRESH_INVENTORY_POLICY_V2":
+            names.append("CONTINUATION_IMPORT.json")
+        else:
+            names.append("PLANNING_SUMMARY.json")
+            if control.get("candidate_selection_recomputed") is not True or "origin_b" in control:
+                _fail("fresh B ledger mode is inconsistent")
+            cache = control.get("hash_cache_source")
+            if cache is not None:
+                binding["hash_cache_source_sha256"] = cache["sha256"]
         snapshots = {name:_read(utility.audit / name) for name in names}
         pre, quarantine, c5, purge = validate_receipts(snapshots, binding)
         if (pre["binding"].get("audit") != utility.portable(utility.audit)
@@ -100,9 +113,20 @@ def finalize(clean_root, code_root, policy, audit_root):
         if (quarantine.get("exact_quarantine_set") is not True
                 or purge.get("original_directories_retained") is not True or _exists(utility.quarantine)):
             _fail("exact quarantine completion/removal or original directory retention failed")
-        if (not (C5_CHECKS | {"reference_paths_readability"}) <= c5.get("checks", {}).keys()
+        if (not (C5_CHECKS | {"reference_paths_readability", "storage_regression_tests"}) <= c5.get("checks", {}).keys()
                 or any(v != "PASS" for v in c5["checks"].values())):
             _fail("C5 independent checks not all PASS")
+        record_counts = pytest_xml_counts(snapshots["C5_TESTS.xml"], expected_count=20)
+        for key, value in record_counts.items():
+            _old._count(c5.get("tests", {}).get(key), value, "C5 record tests " + key)
+        storage = c5.get("storage_regression_tests", {})
+        if (storage.get("status") != "PASS" or storage.get("test_files") != list(STORAGE_TEST_FILES)
+                or storage.get("xml_sha256") != _digest(snapshots["C5_STORAGE_REGRESSION.xml"])
+                or storage.get("stdout_sha256") != _digest(snapshots["C5_STORAGE_REGRESSION.stdout.log"])):
+            _fail("storage regression evidence/coverage does not match C5")
+        storage_counts = pytest_xml_counts(snapshots["C5_STORAGE_REGRESSION.xml"])
+        for key, value in storage_counts.items():
+            _old._count(storage.get(key), value, "C5 storage regression " + key)
         _old._count(c5.get("reference_path_count"), len(pre["references"]), "C5 required reference paths")
         if (c5.get("xml_sha256") != _digest(snapshots["C5_TESTS.xml"])
                 or c5.get("records_sha256") != _digest(snapshots["RECORDS_AFTER_QUARANTINE.json"])
@@ -137,6 +161,7 @@ def finalize(clean_root, code_root, policy, audit_root):
             operation_time_semantics="durable journal bounds surrounding plain rename and unlink; completion times are observations",
             journal_event_count=len(events), journal_terminal_event_sha256=events[-1]["event_sha256"],
             c5_checks=c5["checks"],
+            storage_regression_tests=storage,
             sources={name:dict(path=utility.portable(utility.audit / name), sha256=_digest(data),
                               size_bytes=len(data)) for name,data in snapshots.items()},
             free_space_evidence={phase:json.loads(snapshots["FREE_SPACE_"+phase.upper()+".json"])

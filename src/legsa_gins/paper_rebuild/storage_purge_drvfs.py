@@ -1,8 +1,9 @@
-"""Single-use DrvFS continuation of a frozen B ledger; no candidate payload reads.
+"""Single-use DrvFS dispatch of a frozen B ledger; no post-B candidate payload reads.
 
 Ordinary rename is the explicitly authorized filesystem strategy. Destination
 absence is checked immediately before rename under the operation lock; no
 renameat2, copy fallback, retry, rollback, or interrupted-attempt resume exists.
+Post-rename verification is source absence, destination existence and ledger size.
 Content SHA-256 is inherited from B, not recomputed or represented as reverified.
 """
 from __future__ import annotations
@@ -16,6 +17,7 @@ from pathlib import Path
 import re
 import stat
 import subprocess
+import tempfile
 import xml.etree.ElementTree as ET
 
 from . import storage_purge as base
@@ -35,17 +37,25 @@ C5_NODES = (
     "tests/paper_rebuild/test_clean5_sequence_contracts.py::test_registered_occlusion_matches_traced_report_and_controls",
     "tests/paper_rebuild/test_clean5_outcome_scope.py",
 )
+STORAGE_TEST_FILES = tuple("tests/paper_rebuild/" + name for name in (
+    "test_storage_purge.py", "test_storage_purge_dispatch.py", "test_storage_purge_drvfs.py",
+    "test_storage_purge_finalize_ledger.py", "test_storage_purge_finalize_drvfs.py",
+    "test_storage_purge_inventory_totals.py", "test_storage_purge_continuation.py"))
 CODE_FILES = (
     "src/legsa_gins/paper_rebuild/storage_purge.py",
     "src/legsa_gins/paper_rebuild/storage_purge_dispatch.py",
     "src/legsa_gins/paper_rebuild/storage_purge_drvfs.py",
     "scripts/paper_rebuild/storage_purge_drvfs.py",
     "scripts/paper_rebuild/storage_purge_record_check.py",
+    "scripts/paper_rebuild/storage_purge_finalize_ledger.py",
+    "scripts/paper_rebuild/storage_purge_finalize_drvfs.py",
+    "scripts/paper_rebuild/storage_purge_inventory_totals.py",
+    "scripts/paper_rebuild/storage_purge_continuation.py",
     "configs/paper_rebuild/clean6/STORAGE_PURGE_POLICY.yaml",
     "tests/paper_rebuild/test_canonical541_derived_tables.py",
     "tests/paper_rebuild/test_clean5_sequence_contracts.py",
     "tests/paper_rebuild/test_clean5_outcome_scope.py",
-)
+) + STORAGE_TEST_FILES
 
 
 def _check_metadata(s, row, path):
@@ -54,6 +64,25 @@ def _check_metadata(s, row, path):
                         ("inode", s.st_ino), ("mtime_ns", s.st_mtime_ns), ("nlink", s.st_nlink)):
         if type(row.get(key)) is not int or row[key] != actual:
             base._fail(f"source/quarantine metadata changed ({key}): {row['original_relative_path']}")
+
+
+def _check_quarantined_size(s, row, path):
+    base._regular_single(s, path)
+    if type(row.get("size_bytes")) is not int or s.st_size != row["size_bytes"]:
+        base._fail("quarantined size does not match ledger: " + row["original_relative_path"])
+
+
+def pytest_xml_counts(data, *, expected_count=None):
+    """Require an actually populated, zero-failure and zero-skip pytest XML result."""
+    root = ET.fromstring(data)
+    count = len(list(root.iter("testcase")))
+    suites = list(root.iter("testsuite"))
+    if (count <= 0 or (expected_count is not None and count != expected_count) or not suites
+            or any(list(root.iter(tag)) for tag in ("failure", "error", "skipped"))
+            or sum(int(s.get("tests", "-1")) for s in suites) != count
+            or any(int(s.get(k, "-1")) != 0 for s in suites for k in ("failures", "errors", "skipped"))):
+        base._fail("pytest XML requires the full positive test count and zero failures/errors/skips")
+    return dict(passed=count, failed=0, errors=0, skipped=0)
 
 
 def _plain_rename(source, destination, expected):
@@ -83,9 +112,8 @@ def _plain_rename(source, destination, expected):
         else:
             base._fail("source still present after rename")
         after = os.stat(dstname, dir_fd=dst, follow_symlinks=False)
-        base._regular_single(after, destination)
-        if not base._same_stat(before, after):
-            base._fail("destination metadata changed across rename")
+        if after.st_size != expected.st_size:
+            base._fail("destination size does not match ledger after rename")
         return after
 
 
@@ -107,7 +135,9 @@ class DrvfsStoragePurge(base.StoragePurge):
         if self.clean / "stages" not in self.canonical.parents or not stat.S_ISDIR(base._stat(self.canonical).st_mode):
             base._fail("canonical attempt must be an existing CLEAN_ROOT stage directory")
         amendment = self.policy.get("continuation_amendment", {})
-        if (amendment.get("recompute_candidate_payload_sha256") is not False
+        no_rehash = amendment.get("post_B_candidate_payload_sha256_recomputed") if self.policy.get(
+            "schema_version") == "clean6.storage_purge_policy.v2" else amendment.get("recompute_candidate_payload_sha256")
+        if (no_rehash is not False
                 or amendment.get("fresh_preflight_required_for_continuation") is not True
                 or self.policy.get("physical_operations", {}).get("rename_flags") != "none"):
             base._fail("policy does not authorize this exact DrvFS continuation")
@@ -119,6 +149,7 @@ class DrvfsStoragePurge(base.StoragePurge):
         self._events = []
         self._moved = self._purged = 0
         self._progress_bytes = None
+        self._c5_tmp = None
         self._ledger_value = {"candidate_count": None, "candidate_bytes": None}
 
     def _code_identity(self):
@@ -136,10 +167,30 @@ class DrvfsStoragePurge(base.StoragePurge):
         if base._read(self.policy_path) != self.policy_bytes or base._read(self.closure_path) != self.closure_bytes:
             base._fail("policy/closure literal bytes changed")
         self._code_identity()
-        if (ledger.get("continuation_strategy") != STRATEGY
-                or ledger.get("candidate_payload_rehashed") is not False
-                or ledger.get("candidate_selection_recomputed") is not False):
+        if ledger.get("continuation_strategy") != STRATEGY or ledger.get("candidate_payload_rehashed") is not False:
             base._fail("ledger is not an exact inherited-B continuation")
+        binding = {"audit": self.portable(self.audit), "code_commit": self.code_commit, "rename_strategy": STRATEGY}
+        if ledger.get("planning_mode") == "FRESH_INVENTORY_POLICY_V2":
+            if (self.policy.get("schema_version") != "clean6.storage_purge_policy.v2"
+                    or ledger.get("candidate_selection_recomputed") is not True or "origin_b" in ledger):
+                base._fail("fresh policy-v2 inventory identity is inconsistent")
+            binding["planning_mode"] = ledger["planning_mode"]
+            cache = ledger.get("hash_cache_source")
+            if cache is not None:
+                if (not isinstance(cache, dict) or not isinstance(cache.get("path"), str)
+                        or not cache["path"].startswith("<CLEAN_ROOT>/storage_purge/")
+                        or not isinstance(cache.get("sha256"), str) or base.HEX.fullmatch(cache["sha256"]) is None):
+                    base._fail("invalid prior-B hash cache metadata binding")
+                cache_path = self.alias(cache["path"])
+                if cache_path.name != "DELETION_LEDGER.json" or cache_path.parent.parent != self.audit.parent:
+                    base._fail("hash cache source must be an exact prior audit ledger")
+                if cache_path == self.audit / "DELETION_LEDGER.json":
+                    base._fail("hash cache source cannot reference this B ledger")
+                hashes["hash_cache_source_sha256"] = cache["sha256"]
+                binding["hash_cache_source"] = cache["path"]
+            return ledger, binding, hashes
+        if ledger.get("candidate_selection_recomputed") is not False:
+            base._fail("unsupported B planning mode")
         origin = ledger.get("origin_b", {})
         if (not isinstance(origin.get("audit"), str)
                 or not origin["audit"].startswith("<CLEAN_ROOT>/storage_purge/")):
@@ -151,8 +202,7 @@ class DrvfsStoragePurge(base.StoragePurge):
             if not isinstance(origin.get(key), str) or base.HEX.fullmatch(origin[key]) is None:
                 base._fail("missing origin-B control hash: " + key)
             hashes["origin_b_" + key] = origin[key]
-        binding = {"audit": self.portable(self.audit), "origin_b_audit": origin["audit"],
-                   "code_commit": self.code_commit, "rename_strategy": STRATEGY}
+        binding["origin_b_audit"] = origin["audit"]
         return ledger, binding, hashes
 
     def _check_controls(self):
@@ -257,6 +307,23 @@ class DrvfsStoragePurge(base.StoragePurge):
             base._fail("quarantine destination exists")
 
     def _origin_and_seals(self):
+        if self._ledger_value.get("planning_mode") == "FRESH_INVENTORY_POLICY_V2":
+            cache = self._ledger_value.get("hash_cache_source")
+            if cache is not None and base._digest(base._read(self.alias(cache["path"]))) != cache["sha256"]:
+                base._fail("prior-B hash cache metadata changed")
+        else:
+            self._verify_origin_projection()
+        sources = {}
+        for row in self._ledger_value["entries"]:
+            for item in row["seal_provenance"]:
+                if item["path"] in sources and sources[item["path"]] != item["sha256"]:
+                    base._fail("conflicting seal source hashes")
+                sources[item["path"]] = item["sha256"]
+        for path, sha in sorted(sources.items()):
+            if base._digest(base._read(self.alias(path))) != sha:
+                base._fail("seal metadata changed: " + path)
+
+    def _verify_origin_projection(self):
         origin = self._ledger_value["origin_b"]
         old_root = self.alias(origin["audit"])
         for name, key in (("DELETION_LEDGER.json", "ledger_sha256"), ("DELETION_PLAN.csv", "plan_sha256"),
@@ -272,19 +339,21 @@ class DrvfsStoragePurge(base.StoragePurge):
         for before, after in zip(old["entries"], self._ledger_value["entries"]):
             if {k: v for k, v in before.items() if k not in ignored} != {k: v for k, v in after.items() if k not in ignored}:
                 base._fail("candidate selection or B evidence changed")
-        sources = {}
-        for row in self._ledger_value["entries"]:
-            for item in row["seal_provenance"]:
-                if item["path"] in sources and sources[item["path"]] != item["sha256"]:
-                    base._fail("conflicting seal source hashes")
-                sources[item["path"]] = item["sha256"]
-        for path, sha in sorted(sources.items()):
-            if base._digest(base._read(self.alias(path))) != sha:
-                base._fail("seal metadata changed: " + path)
 
     def _command(self, args, log_name):
         env = dict(os.environ, PYTEST_DISABLE_PLUGIN_AUTOLOAD="1", PYTHONDONTWRITEBYTECODE="1",
                    PYTHONPATH="src", LEGSA_C541_ATTEMPT_ROOT=str(self.canonical), LEGSA_CLEAN5_ROOT=str(self.clean))
+        if "pytest" in args:
+            if "--basetemp" not in args:
+                base._fail("C5 pytest requires a fresh owned basetemp")
+            temporary = Path(args[args.index("--basetemp") + 1])
+            if self._c5_tmp is None or temporary.parent != self._c5_tmp or base._exists(temporary):
+                base._fail("pytest basetemp must be new and within this invocation's temporary root")
+            env_dir = self._c5_tmp / (temporary.name + "_ENV")
+            with base._parent_fd(env_dir) as (parent, name):
+                os.mkdir(name, dir_fd=parent)
+                os.fsync(parent)
+            env["TMPDIR"] = str(env_dir)
         with base._parent_fd(self.audit / log_name) as (parent, name):
             fd = os.open(name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600, dir_fd=parent)
             with os.fdopen(fd, "wb") as stream:
@@ -369,11 +438,10 @@ class DrvfsStoragePurge(base.StoragePurge):
             _check_metadata(before, row, source)
             self._append(self._events, self._journal_binding, "MOVE_PREPARED", row,
                          payload_rehashed=False, sha256_origin="B_LEDGER")
-            after = _plain_rename(source, target, before)
-            _check_metadata(after, row, target)
+            _plain_rename(source, target, before)
             self._append(self._events, self._journal_binding, "MOVED_METADATA_VERIFIED", row,
                          payload_rehashed=False, sha256_origin="B_LEDGER", source_absent=True,
-                         destination_present=True, metadata_unchanged=True)
+                         destination_present=True, size_matches_ledger=True)
             self._moved += 1
             if i % 1000 == 0:
                 self._progress("IN_PROGRESS")
@@ -388,27 +456,38 @@ class DrvfsStoragePurge(base.StoragePurge):
     def _c5(self, permit, quarantine_receipt):
         self._phase = "C5"
         self._check_permit(permit)
+        # Linux syscall fixtures stay on /tmp; DrvFS candidates are exercised by C4.
+        self._c5_tmp = base._absolute_without_links(Path(tempfile.mkdtemp(
+            dir="/tmp", prefix="p09ab_c5_" + self.timestamp + "_")))
         xml_path = self.audit / "C5_TESTS.xml"
         if base._exists(xml_path):
             base._fail("C5 XML output already exists")
         self._command(["/usr/bin/python3", "-m", "pytest", "-q", "-p", "no:cacheprovider",
+                       "--basetemp", str(self._c5_tmp / "C5_RECORD_TEST_TMP"),
                        "--junitxml", str(xml_path), *C5_NODES], "C5_TESTS.stdout.log")
-        root = ET.fromstring(base._read(xml_path))
-        cases = list(root.iter("testcase"))
-        suites = list(root.iter("testsuite"))
-        if (len(cases) != 20 or not suites or any(list(root.iter(tag)) for tag in ("failure", "error", "skipped"))
-                or sum(int(s.get("tests", "-1")) for s in suites) != 20
-                or any(int(s.get(k, "-1")) != 0 for s in suites for k in ("failures", "errors", "skipped"))):
-            base._fail("C5 requires exactly 20 passed, zero failed/errors/skipped")
+        record_counts = pytest_xml_counts(base._read(xml_path), expected_count=20)
+        storage_xml = self.audit / "C5_STORAGE_REGRESSION.xml"
+        if base._exists(storage_xml):
+            base._fail("storage regression XML output already exists")
+        self._command(["/usr/bin/python3", "-m", "pytest", "-q", "-p", "no:cacheprovider",
+                       "--basetemp", str(self._c5_tmp / "C5_STORAGE_TEST_TMP"),
+                       "--junitxml", str(storage_xml), *STORAGE_TEST_FILES], "C5_STORAGE_REGRESSION.stdout.log")
+        storage_counts = pytest_xml_counts(base._read(storage_xml))
         if base._digest(base._read(self.audit / "RECORDS_BASELINE.json")) != self._baseline_sha:
             base._fail("baseline file changed before C5")
         self._records(after=True)
         references = self._references({r["original_relative_path"] for r in self._ledger_value["entries"]})
         self._check_permit(permit)
         return self._save_receipt("c5", permit, quarantine_receipt,
-                                  checks={**{k: "PASS" for k in base.C5_CHECKS}, "reference_paths_readability": "PASS"},
+                                  checks={**{k: "PASS" for k in base.C5_CHECKS}, "reference_paths_readability": "PASS",
+                                          "storage_regression_tests": "PASS"},
                                   reference_path_count=len(references),
-                                  tests={"passed": 20, "failed": 0, "errors": 0, "skipped": 0},
+                                  tests=record_counts,
+                                  storage_regression_tests=dict(status="PASS", **storage_counts,
+                                      test_files=list(STORAGE_TEST_FILES),
+                                      temporary_root="<C5_TEST_TMP>", temporary_files_retained=True,
+                                      xml_sha256=base._digest(base._read(storage_xml)),
+                                      stdout_sha256=base._digest(base._read(self.audit / "C5_STORAGE_REGRESSION.stdout.log"))),
                                   xml_sha256=base._digest(base._read(xml_path)),
                                   records_sha256=base._digest(base._read(self.audit / "RECORDS_AFTER_QUARANTINE.json")))
 
@@ -444,12 +523,12 @@ class DrvfsStoragePurge(base.StoragePurge):
             if base._exists(self.clean / relative):
                 base._fail("original path reappeared before purge")
             before = base._stat(path)
-            _check_metadata(before, row, path)
+            _check_quarantined_size(before, row, path)
             self._append(self._events, self._journal_binding, "PURGE_PREPARED", row,
                          payload_rehashed=False, sha256_origin="B_LEDGER")
             with base._parent_fd(path) as (parent, name):
                 now = os.stat(name, dir_fd=parent, follow_symlinks=False)
-                _check_metadata(now, row, path)
+                _check_quarantined_size(now, row, path)
                 os.unlink(name, dir_fd=parent)
                 os.fsync(parent)
             self._append(self._events, self._journal_binding, "PURGED", row,

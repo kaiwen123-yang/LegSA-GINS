@@ -6,7 +6,7 @@ import pytest
 
 from legsa_gins.paper_rebuild import storage_purge as base
 from legsa_gins.paper_rebuild.storage_purge_dispatch import seal_receipt, DispatchRejected
-from test_storage_purge_drvfs import world
+from test_storage_purge_drvfs import world, fresh_ledger
 
 spec = importlib.util.spec_from_file_location("drvfs_finalizer", Path(__file__).resolve().parents[2]
     / "scripts/paper_rebuild/storage_purge_finalize_drvfs.py")
@@ -77,7 +77,8 @@ def test_self_hashed_but_invalid_downstream_cannot_finalize(field, value):
 def history():
     row = dict(original_relative_path="stages/S/file.nav", sha256="a"*64, size_bytes=8)
     events = [dict(row, sequence=i+1, action=action, time_utc=f"2026-09-11T00:00:0{i}+00:00",
-                   event_sha256=str(i)*64, payload_rehashed=False, sha256_origin="B_LEDGER")
+                   event_sha256=str(i)*64, payload_rehashed=False, sha256_origin="B_LEDGER",
+                   source_absent=True, destination_present=True, size_matches_ledger=True)
               for i,action in enumerate(mod.ACTIONS)]
     return {"entries":[row]}, events
 
@@ -136,3 +137,47 @@ def test_full_finalizer_rejects_missing_c5_check_keys(world):
     with pytest.raises(base.PurgeError, match="C5 independent checks"):
         mod.finalize(world.clean, world.code, world.policy, world.audit)
     assert not (world.audit / "FINAL").exists()
+
+
+@pytest.mark.parametrize("cache", [False, True])
+def test_fresh_b_finalizer_uses_planning_summary_and_keeps_storage_evidence(world, cache):
+    import json
+    fresh_ledger(world, cache=cache)
+    world.instance().run()
+    (world.audit / "PLANNING_SUMMARY.json").write_bytes(b'{"status":"PLANNED"}\n')
+    (world.audit / "UNKNOWN_BY_CLASS.csv").write_bytes(b"extension,directory_type,file_count,logical_bytes\n")
+    mod.finalize(world.clean, world.code, world.policy, world.audit)
+    final = json.loads((world.audit / "FINAL/DELETION_LEDGER.json").read_bytes())
+    assert "PLANNING_SUMMARY.json" in final["sources"]
+    assert "CONTINUATION_IMPORT.json" not in final["sources"]
+    assert final["storage_regression_tests"]["passed"] == 7
+    assert final["c5_checks"]["storage_regression_tests"] == "PASS"
+
+
+@pytest.mark.parametrize("field,value", [("status", "FAIL"), ("passed", 0), ("passed", 7.0),
+                                        ("skipped", 1), ("test_files", []), ("xml_sha256", "f" * 64)])
+def test_finalizer_rejects_incomplete_or_miscounted_storage_regression(world, field, value):
+    import json
+    world.instance().run()
+    (world.audit / "CONTINUATION_IMPORT.json").write_bytes(b"{}\n")
+    (world.audit / "UNKNOWN_BY_CLASS.csv").write_bytes(b"extension,directory_type,file_count,logical_bytes\n")
+    c5_path = world.audit / "C5_RECEIPT.json"
+    c5 = json.loads(c5_path.read_bytes())
+    c5["storage_regression_tests"][field] = value
+    c5 = seal_receipt(c5)
+    c5_path.write_bytes(base._json_bytes(c5))
+    purge_path = world.audit / "PURGE_RESULT.json"
+    purge = json.loads(purge_path.read_bytes())
+    purge["previous_receipt_sha256"] = c5["receipt_sha256"]
+    purge_path.write_bytes(base._json_bytes(seal_receipt(purge)))
+    with pytest.raises(base.PurgeError, match="storage"):
+        mod.finalize(world.clean, world.code, world.policy, world.audit)
+    assert not (world.audit / "FINAL").exists()
+
+
+@pytest.mark.parametrize("field", ["source_absent", "destination_present", "size_matches_ledger"])
+def test_finalizer_requires_each_authorized_move_postcondition(field):
+    control, events = history()
+    events[1][field] = False
+    with pytest.raises(base.PurgeError, match="three authorized postconditions"):
+        mod.enrich(control, events)

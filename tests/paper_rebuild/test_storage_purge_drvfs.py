@@ -84,10 +84,11 @@ def world(tmp_path, monkeypatch):
         calls.append((args, log_name))
         put(self.audit / log_name, b"synthetic subprocess transcript\n")
         if "pytest" in args:
-            suite = ET.Element("testsuite", tests="20", failures="0", errors="0", skipped="0")
-            for number in range(20):
+            count = 7 if mod.STORAGE_TEST_FILES[0] in args else 20
+            suite = ET.Element("testsuite", tests=str(count), failures="0", errors="0", skipped="0")
+            for number in range(count):
                 ET.SubElement(suite, "testcase", name=f"synthetic_{number}")
-            put(self.audit / "C5_TESTS.xml", ET.tostring(suite))
+            put(Path(args[args.index("--junitxml") + 1]), ET.tostring(suite))
         else:
             output = Path(args[args.index("--output") + 1])
             result = dict(status="PASS", checks={k: "PASS" for k in mod.RECORD_CHECKS}, records={},
@@ -98,6 +99,11 @@ def world(tmp_path, monkeypatch):
             write_json(output, result)
     monkeypatch.setattr(mod.DrvfsStoragePurge, "_code_identity", lambda self: None)
     monkeypatch.setattr(mod.DrvfsStoragePurge, "_command", command)
+    def synthetic_test_tmp(**kwargs):
+        path = tmp_path / "retained_c5_test_tmp"
+        path.mkdir()
+        return str(path)
+    monkeypatch.setattr(mod.tempfile, "mkdtemp", synthetic_test_tmp)
     def instance():
         return mod.DrvfsStoragePurge(clean, code, policy, closure, audit, code_commit="a" * 40,
                                     canonical_attempt=canonical, metadata_workers=2)
@@ -141,10 +147,55 @@ def test_success_is_bound_metadata_only_and_retains_all_original_directories(wor
         assert base._load(world.audit / name)["filesystem_alias"] == "G: / <CLEAN_ROOT>"
     assert not (world.audit / "FREE_SPACE_AFTER_STOP.json").exists()
     assert base._load(world.audit / "DRVFS_TERMINAL.json")["status"] == "PURGED"
-    assert len(world.calls) == 3
+    assert len(world.calls) == 4
     pytest_args = world.calls[1][0]
     assert tuple(pytest_args[-5:]) == mod.C5_NODES
-    assert "--baseline" in world.calls[2][0]
+    assert tuple(world.calls[2][0][-7:]) == mod.STORAGE_TEST_FILES
+    assert "--baseline" in world.calls[3][0]
+    assert receipts[2]["storage_regression_tests"]["passed"] == 7
+
+
+def fresh_ledger(world, *, cache=False):
+    value = base._load(world.audit / "DELETION_LEDGER.json")
+    origin = value.pop("origin_b")
+    value.update(planning_mode="FRESH_INVENTORY_POLICY_V2", candidate_selection_recomputed=True)
+    value["hash_cache_source"] = None
+    if cache:
+        value["hash_cache_source"] = dict(path=origin["audit"] + "/DELETION_LEDGER.json",
+                                          sha256=origin["ledger_sha256"])
+    write_json(world.audit / "DELETION_LEDGER.json", value)
+    return value
+
+
+@pytest.mark.parametrize("cache", [False, True])
+def test_fresh_policy_v2_b_runs_without_origin_projection(world, cache):
+    fresh_ledger(world, cache=cache)
+    result = world.instance().run()
+    assert result["binding"]["planning_mode"] == "FRESH_INVENTORY_POLICY_V2"
+    assert "origin_b_audit" not in result["binding"]
+    assert ("hash_cache_source_sha256" in result["control_hashes"]) is cache
+    assert result["purged_files"] == 2
+
+
+def test_changed_optional_fresh_b_cache_stops_before_any_move(world):
+    fresh_ledger(world, cache=True)
+    path = world.old_audit / "DELETION_LEDGER.json"
+    path.write_bytes(path.read_bytes() + b"\n")
+    with pytest.raises(base.PurgeError, match="hash cache"):
+        world.instance().run()
+    assert all(p.exists() for p in world.candidates)
+
+
+@pytest.mark.parametrize("bad", [{"candidate_selection_recomputed": False},
+                                 {"planning_mode": "UNREGISTERED"},
+                                 {"origin_b": {}}, {"candidate_payload_rehashed": True}])
+def test_fresh_b_must_have_exact_registered_planning_flags(world, bad):
+    value = fresh_ledger(world)
+    value.update(bad)
+    write_json(world.audit / "DELETION_LEDGER.json", value)
+    with pytest.raises(base.PurgeError):
+        world.instance().run()
+    assert all(p.exists() for p in world.candidates)
 
 
 def test_probe_exception_does_not_launch_quarantine_or_c5(world, monkeypatch):
@@ -312,6 +363,33 @@ def test_c5_failure_never_purges(world, monkeypatch, failure):
     assert all(not e["action"].startswith("PURG") for e in events)
 
 
+@pytest.mark.parametrize("failure", ["process", "skip", "empty", "missing_xml"])
+def test_storage_regression_gate_failure_never_purges(world, monkeypatch, failure):
+    def command(self, args, log_name):
+        if mod.STORAGE_TEST_FILES[0] not in args:
+            return world.command(self, args, log_name)
+        if failure == "process":
+            raise base.PurgeError("storage regression process exit nonzero")
+        world.command(self, args, log_name)
+        path = self.audit / "C5_STORAGE_REGRESSION.xml"
+        if failure == "missing_xml":
+            path.unlink()
+        else:
+            root = ET.fromstring(path.read_bytes())
+            if failure == "skip":
+                ET.SubElement(root[0], "skipped")
+                root.set("skipped", "1")
+            else:
+                root.clear()
+                root.attrib.update(tests="0", failures="0", errors="0", skipped="0")
+            path.write_bytes(ET.tostring(root))
+    monkeypatch.setattr(mod.DrvfsStoragePurge, "_command", command)
+    with pytest.raises((base.PurgeError, FileNotFoundError)):
+        world.instance().run()
+    assert all((world.clean / row["quarantine_relative_path"]).exists() for row in world.ledger["entries"])
+    assert not (world.audit / "PURGE_RESULT.json").exists()
+
+
 @pytest.mark.parametrize("target", ["preflight_literal", "plan", "ledger", "policy", "closure", "permit"])
 def test_tampering_between_preflight_and_quarantine_prevents_move(world, monkeypatch, target):
     utility = world.instance()
@@ -392,6 +470,55 @@ def test_rename_destination_conflicts_and_symlink_parent_are_never_followed(tmp_
     assert not (outside / "item").exists()
 
 
+@pytest.mark.parametrize("failure", ["source_present", "destination_absent", "size_mismatch"])
+def test_rename_three_postconditions_each_fail_closed(tmp_path, monkeypatch, failure):
+    source, destination = put(tmp_path / "source", b"fixture"), tmp_path / "destination"
+    rename = os.rename
+    def fake_rename(src, dst, **kwargs):
+        if failure == "source_present":
+            return
+        rename(src, dst, **kwargs)
+        if failure == "destination_absent":
+            destination.unlink()
+        else:
+            destination.write_bytes(b"longer fixture")
+    monkeypatch.setattr(mod.os, "rename", fake_rename)
+    with pytest.raises((base.PurgeError, FileNotFoundError)):
+        mod._plain_rename(source, destination, source.stat())
+
+
+def test_inode_mtime_changes_across_rename_with_matching_size_pass(tmp_path, monkeypatch):
+    source, destination = put(tmp_path / "source", b"fixture"), tmp_path / "destination"
+    before = source.stat()
+    rename = os.rename
+    def changed_metadata(src, dst, **kwargs):
+        rename(src, dst, **kwargs)
+        replacement = put(tmp_path / "replacement", b"fixture")
+        os.replace(replacement, destination)
+        os.utime(destination, ns=(before.st_atime_ns, before.st_mtime_ns + 1000000000))
+    monkeypatch.setattr(mod.os, "rename", changed_metadata)
+    after = mod._plain_rename(source, destination, before)
+    assert not source.exists() and destination.exists() and after.st_size == before.st_size
+    assert after.st_ino != before.st_ino and after.st_mtime_ns != before.st_mtime_ns
+
+
+def test_c4_and_d_allow_changed_quarantine_mtime_with_matching_size(world, monkeypatch):
+    rename = os.rename
+    def changed_metadata(src, dst, **kwargs):
+        rename(src, dst, **kwargs)
+        current = os.stat(dst, dir_fd=kwargs["dst_dir_fd"], follow_symlinks=False)
+        os.utime(dst, ns=(current.st_atime_ns, current.st_mtime_ns + 1000000000),
+                 dir_fd=kwargs["dst_dir_fd"], follow_symlinks=False)
+    monkeypatch.setattr(mod.os, "rename", changed_metadata)
+    result = world.instance().run()
+    assert result["purged_files"] == 2
+    events = [json.loads(line) for line in (world.audit / "JOURNAL.jsonl").read_text().splitlines()]
+    for event in events:
+        assert "metadata_unchanged" not in event
+        if event["action"] == "MOVED_METADATA_VERIFIED":
+            assert event["size_matches_ledger"] is True
+
+
 def test_rename_rejects_cross_filesystem_without_calling_os_rename(tmp_path, monkeypatch):
     source, target = put(tmp_path / "source", b"fixture"), tmp_path / "dest/item"
     before = source.stat()
@@ -405,17 +532,21 @@ def test_rename_rejects_cross_filesystem_without_calling_os_rename(tmp_path, mon
 
 def test_command_nonzero_is_checked_and_fixed_environment_is_used(world, monkeypatch):
     utility = world.instance()
+    utility._c5_tmp = world.code.parent / "command_temporary_root"
+    utility._c5_tmp.mkdir()
     # Bind the original production implementation, bypassing fixture subprocess stub.
     command = ORIGINAL_COMMAND.__get__(utility)
     runner = Mock(return_value=SimpleNamespace(returncode=3))
     monkeypatch.setattr(mod.subprocess, "run", runner)
     with pytest.raises(base.PurgeError, match="exit 3"):
-        command(["/usr/bin/python3", "-m", "pytest"], "fixture_command.log")
+        command(["/usr/bin/python3", "-m", "pytest", "--basetemp", str(utility._c5_tmp / "COMMAND_TMP")], "fixture_command.log")
     assert runner.call_count == 1
     kwargs = runner.call_args.kwargs
     assert kwargs["shell"] is False and kwargs["check"] is False
     assert kwargs["env"]["PYTHONDONTWRITEBYTECODE"] == "1"
     assert kwargs["env"]["LEGSA_CLEAN5_ROOT"] == str(world.clean)
+    assert Path(kwargs["env"]["TMPDIR"]).parent == utility._c5_tmp
+    assert Path(kwargs["env"]["TMPDIR"]).is_dir()
 
 
 def test_code_identity_checks_only_frozen_operation_paths_and_commit(world, monkeypatch):
