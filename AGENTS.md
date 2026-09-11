@@ -186,6 +186,8 @@ Default CLEAN5 numerical sources (under each sequence root):
 
 P-09ab storage inventory (2026-09-11): C1/C2/C3 PASS, C4 FAIL (`renameat2(RENAME_NOREPLACE)` returned EINVAL), C5/D NOT_EXECUTED. Planned 57,233 files / 439,508,000,426 logical bytes; moved/purged/released by purge 0/0/0. The empty quarantine tree is retained. No root was bulk purged. Planned ledger records at `docs/paper_rebuild/purge/DELETION_LEDGER_20260911T040000Z.json.gz`; terminal and inventory record: `docs/paper_rebuild/purge/STORAGE_PURGE_20260911T040000Z.md`. Main-chain roots and Outcome remain unchanged.
 
+P-09ab DrvFs continuation (2026-09-11, audit `20260911T062436Z`): `STOPPED_PREFLIGHT_IO_PROBE_FAIL_NO_CANDIDATE_MOVE_OR_PURGE`. The audit-only zero-byte ordinary rename completed, then the implementation-added full-metadata equality assertion failed; source-absent/destination-present/size-zero postconditions hold, and the differing metadata field is UNAVAILABLE. Dispatch stopped before C1/C2/C3, candidate quarantine, C5 or D; candidate moved/purged files and bytes are 0. No root was bulk purged and no retry was made. Planned ledger records at `docs/paper_rebuild/purge/DELETION_LEDGER_20260911T062436Z.json.gz`; terminal, C5 NOT_EXECUTED rows and UNKNOWN top 20 at `docs/paper_rebuild/purge/STORAGE_PURGE_20260911T062436Z.md`. The prior failed audit and empty quarantine are retained.
+
 Do not reconstruct current metrics from screenshots, legacy tables, or old summaries.
 
 ---
