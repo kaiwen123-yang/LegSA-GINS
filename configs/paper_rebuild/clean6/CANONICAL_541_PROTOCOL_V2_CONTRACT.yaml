@@ -23867,3 +23867,60 @@ restart_authorization:
     gate requires original single native freeze
   restart_id: RESTART_20260912
   native_rerun_count: 0
+
+io_recovery_authorization:
+  authorization_date: '2026-09-12'
+  io_fix_id: IO_RECOVERY_20260912
+  starting_commit: 5ce94dd9e937bbf00edb26f09b99a2c481c4e2ff
+  scientific_code_commit: 737a0fb5a4a5418500824855b89b0d25af69824a
+  scope: archive and I/O recovery from batch 8, then previously unexecuted batches 9 through 24; zero repeated solver or evaluator invocations
+  scientific_freeze_policy: preserve the original CONTINUATION_FREEZE and scientific contract bytes; record the archive I/O code commit separately
+  allowed_changed_paths:
+  - src/legsa_gins/paper_rebuild/clean6_canonical_v2/runner.py
+  - src/legsa_gins/paper_rebuild/clean6_canonical_v2/storage.py
+  - src/legsa_gins/paper_rebuild/clean6_canonical_v2/archive_io.py
+  - src/legsa_gins/paper_rebuild/clean6_canonical_v2/io_recovery.py
+  - scripts/paper_rebuild/clean6_recover_canonical541_v2_io.py
+  - tests/paper_rebuild/test_clean6_archive_io.py
+  - tests/paper_rebuild/test_clean6_io_recovery.py
+  contract_change: this appended execution authorization only; all prior scientific contract values remain unchanged
+  input_gate:
+    batches_1_to_7: BATCH_LEDGER entries, archive receipts and exact-file cleanup ledgers must agree
+    batch_8: verify existing solver and evaluator seals for all 256 runs before archive recovery; any missing prior seal or hash mismatch is a failed gate
+    partial_archive: record RUN_01963 file existence, stored size and corresponding scratch size; distinguish gzip and uncompressed sizes
+    no_substitution: a current inventory cannot be represented as a historical seal
+  retry_policy:
+    operations: archive reads and writes only
+    transient_errno: [12, 5, 11]
+    retries_after_initial_attempt: 3
+    backoff_seconds: [2, 4, 8]
+    exhausted_status: ARCHIVE_RETRY_PENDING
+    batch_end_pending_retry_rounds: 1
+    stop_when_pending_fraction_greater_than: 0.01
+    denominator: unique run count in the current batch
+    pending_policy: preserve full scratch and seals for pending runs; preserve solver and evaluation terminal states; only verified archive receipts authorize exact-file cleanup
+    final_completion_requires_pending_count: 0
+  archive_policy:
+    write_workers_max: 6
+    chunk_bytes: 8388608
+    gzip_level: 3
+    hash_location: WSL ext4 scratch; compute the SHA256 of successful bytes during streaming copy
+    destination_readback_hash: false
+    verification_claim: sealed scratch bytes equal completed write-stream bytes, with flush, close and destination size checked; no post-write G payload readback claim
+    existing_verified_receipts: reuse unchanged; gzip level 3 applies to new archive payloads only
+    incomplete_archive: preserve the original partial directory and stop evidence; archive into a separately identified attempt directory
+    receipt_publication: write receipt last; no receipt means no scratch cleanup
+  batch_policy:
+    size: 256
+    final_batch_size: 85
+    resume_from: 8
+    final_batch: 24
+    push_after_batches: [8, 16, 24]
+    measurements: [wall_seconds, CPU_utilization_fraction, G_growth_bytes, scratch_growth_bytes, hash_seconds, compression_seconds, copy_seconds]
+    low_CPU_threshold: 0.40
+    low_CPU_action: record the measured hash, compression and copy component durations and bottleneck classification in the batch ledger
+  immutable_science:
+  - provider generation and injection semantics
+  - solver executable, parameters, inputs, configurations and native output bytes
+  - evaluator executable, evaluation semantics and completed evaluation output bytes
+  - aggregation statistics, main chain v1, Outcome and decision rule file
