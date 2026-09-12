@@ -106,9 +106,9 @@ If the local active branch contains unpushed commits and the remote branch is st
 
 ## 3. Authoritative Canonical-541 roots and solver identity
 
-The explicit archive-only continuation from `5ce94dd` is registered in the contract execution appendix. Its current input gate is `FAIL_MISSING_PRIOR_EVALUATION_FULL_FILE_SEAL`: all batch-8 solver pins and 6375 evaluator-file pins from 255 receipts matched, but RUN_01963 lacks a complete historical evaluator-output seal. New solver/evaluator/archive/cleanup invocations are zero. Current record: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_IO_RECOVERY.md`. The prior archive stop below remains historical.
+Historical input gate for the explicit archive-only continuation from `5ce94dd`, before the 2026-09-12 human acceptance: `FAIL_MISSING_PRIOR_EVALUATION_FULL_FILE_SEAL`. All batch-8 solver pins and 6375 evaluator-file pins from 255 receipts matched; RUN_01963 lacked a complete historical evaluator-output seal. That input-check attempt invoked no new solver, evaluator, archive or cleanup. Its record remains `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_IO_RECOVERY.md`; the accepted current post-hoc seal and completed continuation below supersede that historical stop.
 
-P-09c protocol v2 root: `<CANONICAL541_V2_ROOT> = <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2`. Scratch alias `<CANONICAL541_V2_SCRATCH>` resolves through ignored local key `canonical541_v2_scratch`. The authorized restart terminal is `STOPPED_GATE_FAILURE` at batch 8 archive (2026-09-12 05:16:10 Asia/Shanghai): batches 1–7 passed; batch 8 has 256 completed solvers, 512 completed evaluations and 255/256 archive receipts. `RUN_01963` has no completed archive receipt after an archive SHA-read `OSError [Errno 12]`. Its full scratch batch and partial G archive remain; no batch-8 cleanup or retry occurred. Current record: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_STOP.md`. The earlier 33-run stop remains historical in `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_PILOT_STOP.md`.
+P-09c protocol v2 root: `<CANONICAL541_V2_ROOT> = <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2`. Scratch alias `<CANONICAL541_V2_SCRATCH>` resolves through ignored local key `canonical541_v2_scratch`. P-09c protocol v2 full execution, both frozen aggregates, v1/v2 comparison and validated handoff are complete: 5973 native terminals (5869 COMPLETED; 104 ALGORITHM_FAILURE_ALL_YAW_REJECTED), 11946 v3/v2 evaluator terminal records, archive pending 0. Scientific code `737a0fb5a4a5418500824855b89b0d25af69824a`; archive I/O code `ea478eea88aaf9739823dfc152fa108dd17f8d0c`. Original native reuse=33; native/evaluator repeat calls=0. Sequence/C00 gate PASS 182/182 (P-06 105/105; P-07 CAL C00 77/77). Full factual record: `docs/paper_rebuild/P09C_PROTOCOL_V2_FINAL.md`; source tables `<CANONICAL541_V2_ROOT>/13_AGGREGATE/v3/` and `/v2/`.
 
 ```text
 <CANONICAL541_ATTEMPT> =
@@ -318,11 +318,11 @@ The reference is Fixposition-derived and not independent ground truth. This limi
 
 ### Protocol v2 anchors (P-09c)
 
-The archive-only recovery input check stopped before execution because RUN_01963 has no complete historical evaluation-output seal. The available pins matched. Existing sequence/C00 anchors and all numerical rows below are unchanged; see `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_IO_RECOVERY.md`.
+The original role-validation stop, batch-8 archive interruption and missing historical evaluation seal remain preserved as historical records. RUN_01963 received the explicitly accepted current post-hoc seal; historical_full_file_seal_available=false. Its completed archive is identified by resolved rows; the original partial archive is retained.
 
-Manuscript protocol selection: v2 (preregistered target); full-matrix numerical switch remains `NOT_EXECUTED` because the authorized restart stopped during batch 8 archive. The restart sequence gate is PASS. Protocol v1 remains the original preregistered record; existing main-chain anchors and A04 Outcome below are unchanged.
+Manuscript protocol selection: v2. Protocol v1 remains the original preregistered record. Existing v1 main-chain anchors, method identities and A04 Outcome are unchanged. Full factual record: `docs/paper_rebuild/P09C_PROTOCOL_V2_FINAL.md`; source tables `<CANONICAL541_V2_ROOT>/13_AGGREGATE/v3/` and `/v2/`.
 
-P-07 CAL C00 eleven-profile byte anchors: F01/F02/F03/F04/A03/A04/A05/A06/A07/A08/A09 each `7/7` hash equal (`77/77`). P-06 fifteen-run byte checks: `105/105`. The restart completed the eleven C00 v3/v2 evaluations in batch 1; full-matrix key-pair median/CI/win-rate and v1/v2 maintained/flipped tables remain UNAVAILABLE because full aggregation was not executed. The 22 original metadata failures were explicitly revalidated in separate records, with original failed terminals preserved. Pilot evidence is `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_PILOT.md`; the current stop is `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_STOP.md`. No partial-case aggregate substitutes for the full registered comparison.
+P-07 CAL C00 eleven-profile native anchors each passed 7/7 byte checks (77/77 total); P-06 five configurations across three sequences passed 105/105. All eleven C00 v3/v2 evaluations are available, with the original 33 native outputs reused. The original 22 failed outer-validation records remain historical; separate revalidation records carry the repaired metadata.
 
 Protocol v2 CAL C00 anchors, primary evaluator v3, window 66–340 s. Values are copied from the completed first-batch evaluations; all eleven native anchors are byte-equal to P-07 CAL C00. [Full-precision v3/v2 rows](docs/paper_rebuild/clean6/P09C_RESTART_C00_ANCHORS.csv).
 
@@ -426,7 +426,25 @@ The historical 1.813898 deg final_v23 result is a legacy identity, not the curre
 
 <!-- CANONICAL541_DETAILED_RESULTS_BEGIN -->
 
+Protocol v2 full-matrix key pairs, primary evaluator v3. Delta is candidate minus reference; negative is better. Median intervals are paired percentile 95% CI (10000 resamples; seed 20260904). Finite and failure-aware denominators remain distinct.
+
+| Comparison | Metric | Median delta | Median 95% CI | Finite win rate | Finite N | Failure-aware win rate | Denominator |
+|---|---|---:|---|---:|---:|---:|---:|
+| A04_vs_F03 | horizontal_rmse_m | -0.001546 | [-0.001548, -0.001546] | 89.54% | 526 | 88.54% | 541 |
+| A04_vs_F03 | yaw_rmse_deg | -0.033527 | [-0.033532, -0.033527] | 94.68% | 526 | 93.53% | 541 |
+| A04_vs_F03 | yaw_p95_absolute_deg | -0.134468 | [-0.134468, -0.134467] | 97.91% | 526 | 96.67% | 541 |
+| full_vs_strong | horizontal_rmse_m | -0.001097 | [-0.001108, -0.001093] | 87.95% | 523 | 86.32% | 541 |
+| full_vs_strong | yaw_rmse_deg | -0.047173 | [-0.047229, -0.047173] | 97.32% | 523 | 95.38% | 541 |
+| full_vs_strong | yaw_p95_absolute_deg | -0.139524 | [-0.139525, -0.139524] | 97.90% | 523 | 95.93% | 541 |
+| full_vs_no_SA | horizontal_rmse_m | 0.000446 | [0.000437, 0.000452] | 24.29% | 527 | 24.21% | 541 |
+| full_vs_no_SA | yaw_rmse_deg | -0.013646 | [-0.013650, -0.013646] | 88.43% | 527 | 86.69% | 541 |
+| full_vs_no_SA | yaw_p95_absolute_deg | -0.005057 | [-0.005057, -0.005057] | 78.56% | 527 | 77.08% | 541 |
+
+All 15 pairs, five primary/secondary metrics and both evaluator versions: [full tables](docs/paper_rebuild/clean6/P09C_PROTOCOL_V2_FINAL_KEY_PAIRS.csv). Frozen MAINTAINED / FLIPPED / INCOMPLETE classifications: [v1/v2 comparison](docs/paper_rebuild/clean6/P09C_PROTOCOL_V2_FINAL_V1_V2_COMPARISONS.csv).
+
 ## 7A. Canonical-541 detailed numerical results and interpretation
+
+The numerical records in section 7A are protocol v1 preregistration history; the manuscript uses the protocol v2 tables in section 7 above.
 
 This subsection completes the Canonical-541 record with the full 541-case
 aggregate values, paired comparisons, family behavior, module actions, and
@@ -923,11 +941,11 @@ Hartley does not provide legal absolute yaw RMSE or absolute position RMSE and m
 
 ## 11. Corrected Classic-18 and generalization
 
-The subsequent archive-only continuation verified the first seven batch ledgers and all available batch-8 pins, then stopped at the missing RUN_01963 complete historical evaluation seal. It invoked no new solver or evaluator and changed none of the totals below.
+Historical archive-only input check, before the 2026-09-12 human acceptance: the first seven batch ledgers and available batch-8 pins passed, but the missing RUN_01963 historical evaluation seal stopped that check. It invoked no new solver or evaluator. The accepted current post-hoc seal and completed continuation are recorded below.
 
-The authorized P-09c restart revalidated all 22 prior metadata failures and reused all 33 original native outputs without rerun. P-06 sequence checks passed 105/105 and P-07 C00 checks passed 77/77. It subsequently stopped during batch 8 archive: 2048 unique runs attempted, 1989 native COMPLETED, 59 ALL_YAW_REJECTED (D14=34, D15=25), zero native/evaluator technical failures and one archive technical failure. Remaining 3925 unique runs and full aggregation/handoff are NOT_EXECUTED. The sequence gate remains PASS independently of this later archive stop.
+P-09c protocol v2 full execution, both frozen aggregates, v1/v2 comparison and validated handoff are complete: 5973 native terminals (5869 COMPLETED; 104 ALGORITHM_FAILURE_ALL_YAW_REJECTED), 11946 v3/v2 evaluator terminal records, archive pending 0. Scientific code `737a0fb5a4a5418500824855b89b0d25af69824a`; archive I/O code `ea478eea88aaf9739823dfc152fa108dd17f8d0c`. Original native reuse=33; native/evaluator repeat calls=0. Sequence/C00 gate PASS 182/182 (P-06 105/105; P-07 CAL C00 77/77). Full factual record: `docs/paper_rebuild/P09C_PROTOCOL_V2_FINAL.md`; source tables `<CANONICAL541_V2_ROOT>/13_AGGREGATE/v3/` and `/v2/`.
 
-P-09c original attempt (before the 2026-09-12 authorized restart) stopped in its first 33-run consistency group: BY2 11 COMPLETED, BY2H 11 FAILED_TECHNICAL, BY2O 11 FAILED_TECHNICAL (`KeyError: runtime_role` in outer identity validation). All native exits were 0 and 182/182 anchor hashes matched; overall gate remains FAIL. Remaining 5940 runs, all evaluations, aggregation and handoff are NOT_EXECUTED; no retry or cleanup occurred.
+Historical original P-09c attempt: 33 native exits were zero, but 22 outer records failed on runtime_role. Those original records and their FAIL gate are preserved; the authorized restart revalidated them and obtained the current 182/182 PASS gate without repeating native execution.
 
 Corrected Classic-18 is not required by default.
 
@@ -1231,11 +1249,11 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 
 ## 18. Current next actions
 
-Human decision, 2026-09-12: RUN_01963 existing v3/v2 outputs are explicitly accepted with a current post-hoc seal and the retained historical-gap explanation. Continue batch 8 archive/cleanup, batches 9–24, full aggregation/comparison and handoff. Only four stop categories remain: unregistered native nonzero exit; evaluator invocation failure or nonfinite output; sequence/C00 byte-gate FAIL; current-batch archive failure fraction greater than 1%. All bookkeeping inconsistencies are repaired automatically and recorded in BATCH_LEDGER notes without asking for permission. The earlier missing-seal stop paragraphs below are historical and superseded by this decision. Scientific code remains 737a0fb5a4a5418500824855b89b0d25af69824a.
+P-09c protocol v2 full execution, both frozen aggregates, v1/v2 comparison and validated handoff are complete: 5973 native terminals (5869 COMPLETED; 104 ALGORITHM_FAILURE_ALL_YAW_REJECTED), 11946 v3/v2 evaluator terminal records, archive pending 0. Scientific code `737a0fb5a4a5418500824855b89b0d25af69824a`; archive I/O code `ea478eea88aaf9739823dfc152fa108dd17f8d0c`. Original native reuse=33; native/evaluator repeat calls=0. Sequence/C00 gate PASS 182/182 (P-06 105/105; P-07 CAL C00 77/77). The original role-validation stop, batch-8 archive interruption and missing historical evaluation seal remain preserved as historical records. RUN_01963 received the explicitly accepted current post-hoc seal; historical_full_file_seal_available=false. Its completed archive is identified by resolved rows; the original partial archive is retained. All encountered bookkeeping repairs are collected in the final report notes table.
 
-The latest explicit I/O recovery authorization supersedes the earlier automatic-resume prohibition only for its registered scope. Its required input gate did not pass: RUN_01963 has no complete historical evaluator-output seal. Preserve the entire batch-8 scene and original stop records; archive recovery and batches 9–24 have not launched. The I/O amendment does not permit replacing a missing historical seal with a current inventory. Current record: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_IO_RECOVERY.md`.
+The accepted post-hoc seal and I/O freeze are under `<CANONICAL541_V2_ROOT>/IO_RECOVERY/IO_RECOVERY_20260912/`. The original failed input audit remains available; its historical seal gap is not rewritten as a historical PASS.
 
-P-09c authorized restart is stopped at batch 8 archive; do not automatically restart, regenerate, finish the partial archive or clean the retained scene. Continuation code is 737a0fb5a4a5418500824855b89b0d25af69824a. Original native reuse=33 and native reruns=0; sequence/C00 gate PASS 182/182. Batch-1 pilot passed (projected peak 221127477999 bytes <=250000000000). Batches 1–7 passed archive/cleanup; batch 8's 256 solvers and 512 evaluations completed, but archive receipts are 255/256 and cleanup was not executed. Missing receipt: RUN_01963, D20_seed_06, A03/AB0111; archive SHA-read error `[Errno 12] Cannot allocate memory`. Full-matrix aggregate, key pairs, v1/v2 maintained/flipped tables and final ZIP are NOT_EXECUTED/UNAVAILABLE. Current evidence: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_STOP.md`; first-batch measurements and resource coverage limitations are linked there. Execution services and the additional disk observer have stopped. Preserve `<CANONICAL541_V2_SCRATCH>/BATCH_008/` and all current stage artifacts.
+Final scratch release: the supplemental batch-14 exact ledger removed 198 derived preparation files (66,327,303 bytes); remaining scratch file count is 0. The original cleanup ledgers and batch timings remain unchanged. The final ZIP includes this supplemental bookkeeping evidence. P-09c execution and handoff are complete. Full factual record: `docs/paper_rebuild/P09C_PROTOCOL_V2_FINAL.md`; source tables `<CANONICAL541_V2_ROOT>/13_AGGREGATE/v3/` and `/v2/`. Validated package: `~/c541_v2_handoff.zip`, SHA-256 `30e6e263922ed317db0bc6e1cabe4b38d576bd0ec501e1f8f7b45fffa94beefb`. Early whole-execution disk peaks remain UNAVAILABLE where absolute baselines were not recorded; scoped batch and continuation measurements are reported explicitly. No further scientific execution is authorized by this completion record.
 
 Historical original-attempt stop (superseded only by the explicit bounded restart): `STOPPED_GATE_FAILURE`; the initial 256-run pilot was incomplete and its forecasts were UNAVAILABLE. Its 22 metadata failures and original freeze remain historical evidence. The later restart reused and archived the 33 native outputs, with their original scratch files removed only after batch-1 archive verification. The original stop record is `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_PILOT_STOP.md`. The former 64/128 decision clause is void under the restart authorization.
 
@@ -1251,6 +1269,6 @@ Current next actions:
 7. registered, not executed: gyro z-axis scale input-side check using integrated gyro angle increments versus A1 angle increments on turn segments, with zero trace reads.
 ```
 
-Stage 2 and the calibrated-chain execution are complete. Sources: `docs/paper_rebuild/CLEAN5_STAGE2_CLOSEOUT.md`, `docs/paper_rebuild/CLEAN5_CALIBRATED_CHAIN_RESULTS.md`, and `<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/`. The original main protocol and Outcome remain authoritative.
+Stage 2 and the calibrated-chain execution are complete. Sources: `docs/paper_rebuild/CLEAN5_STAGE2_CLOSEOUT.md`, `docs/paper_rebuild/CLEAN5_CALIBRATED_CHAIN_RESULTS.md`, and `<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/`. The original v1 protocol remains a preregistered record; its Outcome is unchanged. The manuscript uses the completed v2 protocol tables.
 
 Do not restart Canonical-541, reselect horizontal literature algorithms, rerun GINav, reopen Hartley absolute-reference evaluation, or run corrected Classic-18 by default.

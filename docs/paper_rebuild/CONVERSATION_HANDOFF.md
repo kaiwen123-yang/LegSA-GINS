@@ -16,9 +16,9 @@ file overrides `AGENTS.md`; it only records paper-phase decisions and task owner
 
 ## 2. Method identities for the manuscript
 
-The latest archive-only continuation has not changed method identities or output values. Its input gate stopped at RUN_01963 missing complete historical evaluation seal; available pins matched. The protocol-v2 full-matrix switch remains undelivered. See `CLEAN6_CANONICAL541_V2_IO_RECOVERY.md`.
+P-09c protocol v2 full execution, both frozen aggregates, v1/v2 comparison and validated handoff are complete: 5973 native terminals (5869 COMPLETED; 104 ALGORITHM_FAILURE_ALL_YAW_REJECTED), 11946 v3/v2 evaluator terminal records, archive pending 0. Scientific code `737a0fb5a4a5418500824855b89b0d25af69824a`; archive I/O code `ea478eea88aaf9739823dfc152fa108dd17f8d0c`. Original native reuse=33; native/evaluator repeat calls=0. Sequence/C00 gate PASS 182/182 (P-06 105/105; P-07 CAL C00 77/77).
 
-P-09c selects protocol v2 as the preregistered manuscript target while retaining v1 as the original preregistered record. Full-matrix numerical switch and final v2 handoff remain NOT_EXECUTED: the explicitly authorized restart stopped during batch 8 archive with `OSError [Errno 12] Cannot allocate memory`. Its sequence gate and first seven complete batches passed; original failure records are preserved. Method identity A04 and its existing Outcome remain unchanged.
+The manuscript adopts completed protocol v2; v1 remains the original preregistered record. Method identity A04 and its existing Outcome are unchanged. Full factual record: `docs/paper_rebuild/P09C_PROTOCOL_V2_FINAL.md`; source tables `<CANONICAL541_V2_ROOT>/13_AGGREGATE/v3/` and `/v2/`.
 
 | Manuscript label | Registry id | Role |
 |---|---|---|
@@ -38,9 +38,9 @@ evidence commit: `09caf1e7e6151f18cc25dafad4a7ef5704ae62d2`).
 
 ## 3. Comparison structure
 
-Archive recovery invoked zero solver/evaluator calls and produced no new pairwise comparisons. P-06/P-07 anchors and the registered finite/failure-aware comparison rules remain unchanged.
+Batch-8 archive recovery repeated zero solver/evaluator calls. Previously unexecuted batches 9–24 have completed; the finite, failure-aware and v1/v2 tables are available under the frozen definitions.
 
-Protocol v2 full-matrix comparison status: `NOT_EXECUTED / UNAVAILABLE_FULL_MATRIX_INCOMPLETE`. The restart sequence gate passed with P-07 C00 77/77 and P-06 105/105 hash matches. Batch 1 completed the C00 eleven-profile v3/v2 evaluations; these anchors are recorded in AGENTS section 7 and `docs/paper_rebuild/clean6/P09C_RESTART_C00_ANCHORS.csv`. Full-matrix median/CI/win-rate and v1/v2 maintained/flipped tables were not generated after the batch-8 archive stop. Neither partial-case statistics nor v1 tables substitute for them.
+Protocol v2 full-matrix comparison status: PASS. P-06 sequence anchors passed 105/105 and P-07 CAL C00 eleven configurations passed 77/77. Full factual record: `docs/paper_rebuild/P09C_PROTOCOL_V2_FINAL.md`; source tables `<CANONICAL541_V2_ROOT>/13_AGGREGATE/v3/` and `/v2/`. The full comparison retains every frozen MAINTAINED / FLIPPED / INCOMPLETE classification.
 
 - Comparison tables/figures (with external methods): Single, Dual-basic, proposed
   (plus the other candidate as "+/- Source-Aware" where space allows).
@@ -76,16 +76,17 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 
 ## 6. Data handoff locations
 
-- Human decision, 2026-09-12: accepted RUN_01963 current post-hoc evaluation seal while preserving the historical gap. Continue to the full handoff under the four-category stop rule; repair bookkeeping automatically and collect BATCH_LEDGER notes in the final report. Seal and acceptance evidence are in <CANONICAL541_V2_ROOT>/IO_RECOVERY/IO_RECOVERY_20260912/. Earlier missing-seal stop descriptions below are historical.
+- P-09c completed under the 2026-09-12 human decision. P-09c protocol v2 full execution, both frozen aggregates, v1/v2 comparison and validated handoff are complete: 5973 native terminals (5869 COMPLETED; 104 ALGORITHM_FAILURE_ALL_YAW_REJECTED), 11946 v3/v2 evaluator terminal records, archive pending 0. Scientific code `737a0fb5a4a5418500824855b89b0d25af69824a`; archive I/O code `ea478eea88aaf9739823dfc152fa108dd17f8d0c`. Original native reuse=33; native/evaluator repeat calls=0. Sequence/C00 gate PASS 182/182 (P-06 105/105; P-07 CAL C00 77/77). The original role-validation stop, batch-8 archive interruption and missing historical evaluation seal remain preserved as historical records. RUN_01963 received the explicitly accepted current post-hoc seal; historical_full_file_seal_available=false. Its completed archive is identified by resolved rows; the original partial archive is retained.
 
-- Latest I/O recovery input status: `FAIL_MISSING_PRIOR_EVALUATION_FULL_FILE_SEAL`. Batches 1–7 ledger audit PASS; batch-8 solver pins and 6375 existing evaluator-file pins PASS, zero hash mismatch. RUN_01963 lacks a complete historical evaluation-output seal. Its partial gzip exists and matches scratch after decompression. Current report: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_IO_RECOVERY.md`; detailed audits: `<CANONICAL541_V2_ROOT>/IO_RECOVERY/IO_RECOVERY_20260912/`. New execution, archive recovery and cleanup counts are zero; the final ZIP remains UNAVAILABLE.
+- Current I/O input acceptance: `ACCEPTED_AUTHORIZED_POSTHOC_SEAL`. Batches 1–7 ledger audit PASS; batch-8 existing pins matched, and RUN_01963 current seal covers all 25 v3/v2 files with its historical gap retained. Full factual record: `docs/paper_rebuild/P09C_PROTOCOL_V2_FINAL.md`; source tables `<CANONICAL541_V2_ROOT>/13_AGGREGATE/v3/` and `/v2/`.
 
-- P-09c explicit restart terminal, 2026-09-12 05:16:10 Asia/Shanghai: `STOPPED_GATE_FAILURE` during batch 8 archive SHA reading (`OSError [Errno 12] Cannot allocate memory`). Seven batches passed archive/cleanup. Total native terminals: 1989 COMPLETED +59 ALL_YAW_REJECTED (D14=34, D15=25); 3925 unique runs unexecuted. Native/evaluator technical failures=0; archive technical failure=1. Batch 8 has 256 completed solvers, 512 completed evaluations, 255/256 archive receipts; missing `RUN_01963` (D20_seed_06, A03/AB0111). Its full scratch batch and partial G archive remain, with no retry or cleanup. Current record: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_STOP.md`; machine report `<CANONICAL541_V2_ROOT>/RESTARTS/RESTART_20260912/RESTART_STOP_REPORT.json`. Final ZIP and SHA-256 are UNAVAILABLE.
-- P-09c restart first-batch and sequence gates remain PASS: original native reuse 33, reruns 0, P-06 105/105 and P-07 C00 77/77 byte checks. First-batch measured table: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_PILOT.md`. Peak forecast 221127477999 bytes was a continuation forecast; exact whole-execution disk peak is UNAVAILABLE because early absolute baselines were not stored. Coverage is documented in `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_RESOURCE_COVERAGE.md`. Do not automatically resume or finish the partial archive.
+- Historical interrupted restart and pilot evidence: `CLEAN6_CANONICAL541_V2_RESTART_STOP.md`, `CLEAN6_CANONICAL541_V2_RESTART_PILOT.md`, and `CLEAN6_CANONICAL541_V2_RESTART_RESOURCE_COVERAGE.md`. The accepted recovery completed batch-8 cleanup and all later batches. Original native reuse=33, repeat calls=0; full-matrix outputs now reside in the registered retained and aggregate roots.
 
 - Original protocol-v2 stop: `<CANONICAL541_V2_ROOT>/99_STOP_REPORT/`, terminal `STOPPED_GATE_FAILURE` as of 2026-09-11. Authorized restart reused the original outputs; batch-1 archives now reside in `RETAINED_RUNS/`, and its scratch files were ledger-cleaned after verification.
 - P-09c record: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_PILOT_STOP.md`; family/config counters and attempted-run timings under `docs/paper_rebuild/clean6/P09C_*.csv`.
-- `scripts/paper_rebuild/c541_pack_v3.py` is implemented but NOT_EXECUTED. `~/c541_v2_handoff.zip` is NOT_PRODUCED; SHA-256 UNAVAILABLE.
+- Final scratch release: the supplemental batch-14 exact ledger removed 198 derived preparation files (66,327,303 bytes); remaining scratch file count is 0. The original cleanup ledgers and batch timings remain unchanged. The final ZIP includes this supplemental bookkeeping evidence.
+
+- `scripts/paper_rebuild/c541_pack_v3.py` completed and validated `~/c541_v2_handoff.zip`; SHA-256 `30e6e263922ed317db0bc6e1cabe4b38d576bd0ec501e1f8f7b45fffa94beefb`. Identity probes, field whitelist, C00 thinned NAV, error-series thinning and recovery provenance passed validation.
 
 - Canonical-541 authoritative attempt: `<CANONICAL541_ATTEMPT>` (see AGENTS section 3).
 
