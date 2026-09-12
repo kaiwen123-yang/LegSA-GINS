@@ -23924,3 +23924,24 @@ io_recovery_authorization:
   - solver executable, parameters, inputs, configurations and native output bytes
   - evaluator executable, evaluation semantics and completed evaluation output bytes
   - aggregation statistics, main chain v1, Outcome and decision rule file
+  human_decision_20260912:
+    approved: true
+    authority: explicit human authorization and stop-rule amendment dated 2026-09-12
+    supersedes: earlier requirements that missing historical seals or other bookkeeping inconsistencies stop P-09c
+    posthoc_evaluation_seal_run_id: RUN_01963
+    posthoc_evaluation_versions: [v3, v2]
+    posthoc_seal_annotation: 'sealed post-hoc after archival interruption; content verified against scratch (size+sha256)'
+    historical_gap_policy: retain the original failed audit and missing-historical-seal explanation; current sealing never becomes a claim of historical sealing
+    allowed_stop_categories:
+    - NATIVE_UNREGISTERED_FAILURE
+    - EVALUATOR_FAILURE_OR_NONFINITE
+    - SEQUENCE_OR_C00_BYTE_GATE_FAILURE
+    - BATCH_ARCHIVE_FAILURE_OVER_ONE_PERCENT
+    native_stop_definition: native solver nonzero exit that is not a preregistered algorithm failure
+    evaluator_stop_definition: evaluator invocation failed or produced nonfinite output
+    anchor_stop_definition: sequence consistency or C00 byte-comparison gate FAIL
+    archive_stop_definition: failed unique archives divided by the current batch unique run count is greater than 0.01
+    bookkeeping_policy: repair automatically from existing artifacts, write details to BATCH_LEDGER.jsonl notes, and continue without asking for permission
+    bookkeeping_examples: [missing seal entries, receipt timestamps, progress files, path mappings, scheduling and report metadata]
+    scientific_rerun_policy: no repeated native solve or evaluator invocation; existing scientific bytes and metrics remain unchanged
+    completion_order: [batch_8_archive_and_cleanup, batches_9_through_24, aggregation, v1_v2_comparison, c541_pack_v3, AGENTS_and_handoff, final_report]
