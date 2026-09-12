@@ -106,6 +106,8 @@ If the local active branch contains unpushed commits and the remote branch is st
 
 ## 3. Authoritative Canonical-541 roots and solver identity
 
+The explicit archive-only continuation from `5ce94dd` is registered in the contract execution appendix. Its current input gate is `FAIL_MISSING_PRIOR_EVALUATION_FULL_FILE_SEAL`: all batch-8 solver pins and 6375 evaluator-file pins from 255 receipts matched, but RUN_01963 lacks a complete historical evaluator-output seal. New solver/evaluator/archive/cleanup invocations are zero. Current record: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_IO_RECOVERY.md`. The prior archive stop below remains historical.
+
 P-09c protocol v2 root: `<CANONICAL541_V2_ROOT> = <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2`. Scratch alias `<CANONICAL541_V2_SCRATCH>` resolves through ignored local key `canonical541_v2_scratch`. The authorized restart terminal is `STOPPED_GATE_FAILURE` at batch 8 archive (2026-09-12 05:16:10 Asia/Shanghai): batches 1–7 passed; batch 8 has 256 completed solvers, 512 completed evaluations and 255/256 archive receipts. `RUN_01963` has no completed archive receipt after an archive SHA-read `OSError [Errno 12]`. Its full scratch batch and partial G archive remain; no batch-8 cleanup or retry occurred. Current record: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_STOP.md`. The earlier 33-run stop remains historical in `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_PILOT_STOP.md`.
 
 ```text
@@ -315,6 +317,8 @@ The reference is Fixposition-derived and not independent ground truth. This limi
 ## 7. Internal method identities and current interpretation
 
 ### Protocol v2 anchors (P-09c)
+
+The archive-only recovery input check stopped before execution because RUN_01963 has no complete historical evaluation-output seal. The available pins matched. Existing sequence/C00 anchors and all numerical rows below are unchanged; see `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_IO_RECOVERY.md`.
 
 Manuscript protocol selection: v2 (preregistered target); full-matrix numerical switch remains `NOT_EXECUTED` because the authorized restart stopped during batch 8 archive. The restart sequence gate is PASS. Protocol v1 remains the original preregistered record; existing main-chain anchors and A04 Outcome below are unchanged.
 
@@ -919,6 +923,8 @@ Hartley does not provide legal absolute yaw RMSE or absolute position RMSE and m
 
 ## 11. Corrected Classic-18 and generalization
 
+The subsequent archive-only continuation verified the first seven batch ledgers and all available batch-8 pins, then stopped at the missing RUN_01963 complete historical evaluation seal. It invoked no new solver or evaluator and changed none of the totals below.
+
 The authorized P-09c restart revalidated all 22 prior metadata failures and reused all 33 original native outputs without rerun. P-06 sequence checks passed 105/105 and P-07 C00 checks passed 77/77. It subsequently stopped during batch 8 archive: 2048 unique runs attempted, 1989 native COMPLETED, 59 ALL_YAW_REJECTED (D14=34, D15=25), zero native/evaluator technical failures and one archive technical failure. Remaining 3925 unique runs and full aggregation/handoff are NOT_EXECUTED. The sequence gate remains PASS independently of this later archive stop.
 
 P-09c original attempt (before the 2026-09-12 authorized restart) stopped in its first 33-run consistency group: BY2 11 COMPLETED, BY2H 11 FAILED_TECHNICAL, BY2O 11 FAILED_TECHNICAL (`KeyError: runtime_role` in outer identity validation). All native exits were 0 and 182/182 anchor hashes matched; overall gate remains FAIL. Remaining 5940 runs, all evaluations, aggregation and handoff are NOT_EXECUTED; no retry or cleanup occurred.
@@ -1224,6 +1230,8 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 ---
 
 ## 18. Current next actions
+
+The latest explicit I/O recovery authorization supersedes the earlier automatic-resume prohibition only for its registered scope. Its required input gate did not pass: RUN_01963 has no complete historical evaluator-output seal. Preserve the entire batch-8 scene and original stop records; archive recovery and batches 9–24 have not launched. The I/O amendment does not permit replacing a missing historical seal with a current inventory. Current record: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_IO_RECOVERY.md`.
 
 P-09c authorized restart is stopped at batch 8 archive; do not automatically restart, regenerate, finish the partial archive or clean the retained scene. Continuation code is 737a0fb5a4a5418500824855b89b0d25af69824a. Original native reuse=33 and native reruns=0; sequence/C00 gate PASS 182/182. Batch-1 pilot passed (projected peak 221127477999 bytes <=250000000000). Batches 1–7 passed archive/cleanup; batch 8's 256 solvers and 512 evaluations completed, but archive receipts are 255/256 and cleanup was not executed. Missing receipt: RUN_01963, D20_seed_06, A03/AB0111; archive SHA-read error `[Errno 12] Cannot allocate memory`. Full-matrix aggregate, key pairs, v1/v2 maintained/flipped tables and final ZIP are NOT_EXECUTED/UNAVAILABLE. Current evidence: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_STOP.md`; first-batch measurements and resource coverage limitations are linked there. Execution services and the additional disk observer have stopped. Preserve `<CANONICAL541_V2_SCRATCH>/BATCH_008/` and all current stage artifacts.
 

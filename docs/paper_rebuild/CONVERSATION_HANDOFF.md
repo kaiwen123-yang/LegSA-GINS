@@ -16,6 +16,8 @@ file overrides `AGENTS.md`; it only records paper-phase decisions and task owner
 
 ## 2. Method identities for the manuscript
 
+The latest archive-only continuation has not changed method identities or output values. Its input gate stopped at RUN_01963 missing complete historical evaluation seal; available pins matched. The protocol-v2 full-matrix switch remains undelivered. See `CLEAN6_CANONICAL541_V2_IO_RECOVERY.md`.
+
 P-09c selects protocol v2 as the preregistered manuscript target while retaining v1 as the original preregistered record. Full-matrix numerical switch and final v2 handoff remain NOT_EXECUTED: the explicitly authorized restart stopped during batch 8 archive with `OSError [Errno 12] Cannot allocate memory`. Its sequence gate and first seven complete batches passed; original failure records are preserved. Method identity A04 and its existing Outcome remain unchanged.
 
 | Manuscript label | Registry id | Role |
@@ -35,6 +37,8 @@ Proposed-method identity: `A04`, decided 2026-09-08 by
 evidence commit: `09caf1e7e6151f18cc25dafad4a7ef5704ae62d2`).
 
 ## 3. Comparison structure
+
+Archive recovery invoked zero solver/evaluator calls and produced no new pairwise comparisons. P-06/P-07 anchors and the registered finite/failure-aware comparison rules remain unchanged.
 
 Protocol v2 full-matrix comparison status: `NOT_EXECUTED / UNAVAILABLE_FULL_MATRIX_INCOMPLETE`. The restart sequence gate passed with P-07 C00 77/77 and P-06 105/105 hash matches. Batch 1 completed the C00 eleven-profile v3/v2 evaluations; these anchors are recorded in AGENTS section 7 and `docs/paper_rebuild/clean6/P09C_RESTART_C00_ANCHORS.csv`. Full-matrix median/CI/win-rate and v1/v2 maintained/flipped tables were not generated after the batch-8 archive stop. Neither partial-case statistics nor v1 tables substitute for them.
 
@@ -71,6 +75,8 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 | F | new conversation | clean submission repository, data/code release | last |
 
 ## 6. Data handoff locations
+
+- Latest I/O recovery input status: `FAIL_MISSING_PRIOR_EVALUATION_FULL_FILE_SEAL`. Batches 1–7 ledger audit PASS; batch-8 solver pins and 6375 existing evaluator-file pins PASS, zero hash mismatch. RUN_01963 lacks a complete historical evaluation-output seal. Its partial gzip exists and matches scratch after decompression. Current report: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_IO_RECOVERY.md`; detailed audits: `<CANONICAL541_V2_ROOT>/IO_RECOVERY/IO_RECOVERY_20260912/`. New execution, archive recovery and cleanup counts are zero; the final ZIP remains UNAVAILABLE.
 
 - P-09c explicit restart terminal, 2026-09-12 05:16:10 Asia/Shanghai: `STOPPED_GATE_FAILURE` during batch 8 archive SHA reading (`OSError [Errno 12] Cannot allocate memory`). Seven batches passed archive/cleanup. Total native terminals: 1989 COMPLETED +59 ALL_YAW_REJECTED (D14=34, D15=25); 3925 unique runs unexecuted. Native/evaluator technical failures=0; archive technical failure=1. Batch 8 has 256 completed solvers, 512 completed evaluations, 255/256 archive receipts; missing `RUN_01963` (D20_seed_06, A03/AB0111). Its full scratch batch and partial G archive remain, with no retry or cleanup. Current record: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_STOP.md`; machine report `<CANONICAL541_V2_ROOT>/RESTARTS/RESTART_20260912/RESTART_STOP_REPORT.json`. Final ZIP and SHA-256 are UNAVAILABLE.
 - P-09c restart first-batch and sequence gates remain PASS: original native reuse 33, reruns 0, P-06 105/105 and P-07 C00 77/77 byte checks. First-batch measured table: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_PILOT.md`. Peak forecast 221127477999 bytes was a continuation forecast; exact whole-execution disk peak is UNAVAILABLE because early absolute baselines were not stored. Coverage is documented in `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_RESOURCE_COVERAGE.md`. Do not automatically resume or finish the partial archive.
