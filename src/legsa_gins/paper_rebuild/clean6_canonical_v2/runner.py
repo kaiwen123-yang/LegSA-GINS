@@ -269,15 +269,19 @@ def evaluate_batch(records, contract, reg, scratch_batch, code_commit, output, s
 def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, args, workers, c00,
              *, resumed_records=None):
     from .evaluation import one_evaluation
+    batch_write_json, batch_append_json = write_json, append_json
+    if getattr(args, 'io_context', None) is not None:
+        from .io_recovery import write_json as batch_write_json, append_json as batch_append_json
     batch_id = f'BATCH_{batch_number:03d}'
     output = stage/'BATCHES'/batch_id
     output.mkdir(parents=True, exist_ok=resumed_records is not None)
     scratch_batch = scratch/batch_id
     scratch_batch.mkdir(parents=True, exist_ok=resumed_records is not None)
     original_allocated = sum(p.stat().st_blocks*512 for p in scratch_batch.rglob('*') if p.is_file())
-    append_json(stage/'BATCH_LEDGER.jsonl', {'event': 'BATCH_START', 'batch': batch_number,
+    batch_append_json(stage/'BATCH_LEDGER.jsonl', {'event': 'BATCH_START', 'batch': batch_number,
         'workers': workers, 'run_count': len(jobs), 'utc': now(), 'code_commit': code_commit})
     all_records, evaluations, receipts = [], [], []
+    io_archive = None
     sample_name = 'RESOURCE_SAMPLES_RESTART.jsonl' if resumed_records is not None else 'RESOURCE_SAMPLES.jsonl'
     with ResourceMonitor(scratch, reg.clean_root, output/sample_name) as monitor:
         monitor.begin_phase('providers')
@@ -303,7 +307,7 @@ def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, arg
                 records = resumed_records if reuse else run_group(group, pool, bundles, contract, reg, scratch_batch, code_commit, c00)
                 all_records.extend(records)
                 group_name = f'SOLVER_GROUP_{index}_REVALIDATED.json' if reuse else f'SOLVER_GROUP_{index}.json'
-                write_json(output/group_name, records)
+                batch_write_json(output/group_name, records)
                 if batch_number == 1 and index == 0:
                     gate = anchor_gate(records, contract)
                     gate_root = restart_root(stage, contract) if resumed_records is not None else stage
@@ -312,7 +316,7 @@ def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, arg
                         if json.loads(gate_path.read_text()) != gate:
                             raise ValueError('Revalidated sequence gate changed before remaining pilot solves')
                     else:
-                        write_json(gate_path, gate)
+                        batch_write_json(gate_path, gate)
                     if gate['status'] != 'PASS':
                         raise RuntimeError('Sequence/C00 byte gate failed; no remaining pilot solver launched')
                 if any(r['terminal_status'] == 'FAILED_TECHNICAL' for r in records):
@@ -321,58 +325,65 @@ def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, arg
             monitor.begin_phase('evaluation')
             evaluations, resource_plan = evaluate_batch(all_records, contract, reg, scratch_batch, code_commit,
                 output, solver_measurements['owned_process_tree_peak_rss_bytes'])
-            write_json(output/'RESOURCE_POOL_PLAN.json', resource_plan)
+            batch_write_json(output/'RESOURCE_POOL_PLAN.json', resource_plan)
             monitor.end_phase()
             monitor.begin_phase('archive_cleanup')
-            write_json(output/'SOLVER_RECORDS_BEFORE_ARCHIVE.json', all_records)
-            write_json(output/'EVALUATION_RECORDS_BEFORE_ARCHIVE.json', evaluations)
+            batch_write_json(output/'SOLVER_RECORDS_BEFORE_ARCHIVE.json', all_records)
+            batch_write_json(output/'EVALUATION_RECORDS_BEFORE_ARCHIVE.json', evaluations)
             permitted = {'PASS', 'COMPLETED', 'SUCCESS', 'NOT_RUN_ALGORITHM_FAILURE'}
             if any(r['evaluation_status'] not in permitted for r in evaluations):
                 raise RuntimeError('Evaluation or WGS84 self-check failed; retain full batch scene')
-            pending_archive = {}
-            for record in all_records:
-                roots = {v: scratch_batch/'12_OFFLINE_EVALUATION'/v/record['run_id'] for v in ('v3', 'v2')}
-                destination = stage/'RETAINED_RUNS'/record['run_id']
-                pending_archive[pool.submit(retain_run, record, roots, destination)] = (record, roots)
-            archive_pairs = []
-            for future in as_completed(pending_archive):
-                receipt = future.result()
-                record, roots = pending_archive[future]
-                receipts.append(receipt)
-                archive_pairs.append((record, roots, receipt))
-                print('ARCHIVED', record['run_id'], receipt['retained_bytes'], flush=True)
-            write_json(output/'ARCHIVE_RECEIPTS.json', receipts)
-            for record in all_records:
-                destination = stage/'RETAINED_RUNS'/record['run_id']
-                record['scratch_output_root'] = record['output_root']
-                record['output_root'] = str(destination/'solver')
-                record['archive_receipt'] = str(destination/'ARCHIVE_RECEIPT.json')
-            for row in evaluations:
-                run_id, version = row['run_id'], row['evaluator_version']
-                destination = stage/'RETAINED_RUNS'/run_id
-                original_eval = scratch_batch/'12_OFFLINE_EVALUATION'/version/run_id
-                for key in ('evaluation_output_root', 'source_row', 'error_series_source', 'summary_source'):
-                    if row.get(key):
-                        path = Path(row[key])
-                        if not path.is_relative_to(original_eval):
-                            raise ValueError('Evaluation artifact path escapes run: '+key)
-                        row[key] = str(destination/version/path.relative_to(original_eval))
-                row['output_root'] = str(destination/'solver')
-                row['native_run_manifest'] = str(destination/'solver/RUN_MANIFEST.json')
-            write_json(output/'RUN_RECORDS.json', all_records)
-            write_json(output/'EVALUATION_RECORDS.json', evaluations)
-            # Whole-batch archive barrier before the first unlink.
-            monitor.assert_healthy()
-            write_json(output/'BATCH_ARCHIVE_GATE.json', {'status': 'PASS', 'run_count': len(receipts)})
-            for record, roots, receipt in archive_pairs:
+            io_context = getattr(args, 'io_context', None)
+            if io_context is not None:
+                from .io_recovery import archive_batch
+                all_records, evaluations, receipts, io_archive = archive_batch(
+                    all_records, evaluations, context=io_context, scratch_batch=scratch_batch,
+                    output=output, batch_number=batch_number, monitor=monitor)
+            else:
+                pending_archive = {}
+                for record in all_records:
+                    roots = {v: scratch_batch/'12_OFFLINE_EVALUATION'/v/record['run_id'] for v in ('v3', 'v2')}
+                    destination = stage/'RETAINED_RUNS'/record['run_id']
+                    pending_archive[pool.submit(retain_run, record, roots, destination)] = (record, roots)
+                archive_pairs = []
+                for future in as_completed(pending_archive):
+                    receipt = future.result()
+                    record, roots = pending_archive[future]
+                    receipts.append(receipt)
+                    archive_pairs.append((record, roots, receipt))
+                    print('ARCHIVED', record['run_id'], receipt['retained_bytes'], flush=True)
+                batch_write_json(output/'ARCHIVE_RECEIPTS.json', receipts)
+                for record in all_records:
+                    destination = stage/'RETAINED_RUNS'/record['run_id']
+                    record['scratch_output_root'] = record['output_root']
+                    record['output_root'] = str(destination/'solver')
+                    record['archive_receipt'] = str(destination/'ARCHIVE_RECEIPT.json')
+                for row in evaluations:
+                    run_id, version = row['run_id'], row['evaluator_version']
+                    destination = stage/'RETAINED_RUNS'/run_id
+                    original_eval = scratch_batch/'12_OFFLINE_EVALUATION'/version/run_id
+                    for key in ('evaluation_output_root', 'source_row', 'error_series_source', 'summary_source'):
+                        if row.get(key):
+                            path = Path(row[key])
+                            if not path.is_relative_to(original_eval):
+                                raise ValueError('Evaluation artifact path escapes run: '+key)
+                            row[key] = str(destination/version/path.relative_to(original_eval))
+                    row['output_root'] = str(destination/'solver')
+                    row['native_run_manifest'] = str(destination/'solver/RUN_MANIFEST.json')
+                batch_write_json(output/'RUN_RECORDS.json', all_records)
+                batch_write_json(output/'EVALUATION_RECORDS.json', evaluations)
+                # Whole-batch archive barrier before the first unlink.
                 monitor.assert_healthy()
-                for role, root in [('solver', Path(record['scratch_output_root'])), *roots.items()]:
-                    cleanup_exact(root, receipt['original_files'][role], output/'CLEANUP_LEDGER.jsonl',
-                                  scratch_root=scratch, archive_verified=True)
-            write_json(output/'CLEANUP_COMPLETE.json', {'status': 'PASS', 'run_count': len(receipts)})
+                batch_write_json(output/'BATCH_ARCHIVE_GATE.json', {'status': 'PASS', 'run_count': len(receipts)})
+                for record, roots, receipt in archive_pairs:
+                    monitor.assert_healthy()
+                    for role, root in [('solver', Path(record['scratch_output_root'])), *roots.items()]:
+                        cleanup_exact(root, receipt['original_files'][role], output/'CLEANUP_LEDGER.jsonl',
+                                      scratch_root=scratch, archive_verified=True)
+                batch_write_json(output/'CLEANUP_COMPLETE.json', {'status': 'PASS', 'run_count': len(receipts)})
             monitor.end_phase()
     measurements = monitor.result()
-    result = {'status': 'PASS', 'batch': batch_number, 'workers': workers,
+    result = {'status': io_archive['status'] if io_archive else 'PASS', 'batch': batch_number, 'workers': workers,
               'run_count': len(all_records), 'evaluation_count': len(evaluations),
               'terminal_counts': {s: sum(r['terminal_status'] == s for r in all_records)
                                   for s in sorted({r['terminal_status'] for r in all_records})},
@@ -386,10 +397,18 @@ def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, arg
                       if e['run_id'] == r['run_id'] and e['evaluator_version'] == v) for v in ('v3', 'v2')},
                   'evaluation_peak_rss_bytes': {v: next(e.get('evaluator_peak_rss_bytes') for e in evaluations
                       if e['run_id'] == r['run_id'] and e['evaluator_version'] == v) for v in ('v3', 'v2')},
-                  **{k: next(p[k] for p in receipts if p['run_id'] == r['run_id'])
+                  **{k: next((p[k] for p in receipts if p['run_id'] == r['run_id']), None)
                      for k in ('source_bytes', 'retained_bytes', 'retained_allocated_bytes')}} for r in all_records]}
-    write_json(output/'BATCH_RESULT.json', result)
-    append_json(stage/'BATCH_LEDGER.jsonl', {'event': 'BATCH_COMPLETE', 'utc': now(), **result})
+    if io_archive is not None:
+        phase = measurements['phases'][-1]
+        result.update(archive=io_archive, scientific_code_commit=code_commit,
+            io_fix_code_commit=io_context['freeze']['io_fix_code_commit'],
+            io_bottleneck=measurements['cpu_utilization_fraction'] is not None and measurements['cpu_utilization_fraction'] < .40,
+            archive_phase_cpu_utilization_fraction=phase['cpu_utilization_fraction'],
+            io_bottleneck_definition='batch visible-affinity CPU utilization below 40%; primary_io_cost is largest measured archive component, not a provider bottleneck claim')
+        batch_append_json(Path(io_context['root'])/'IO_BATCH_LEDGER.jsonl', {'event': 'BATCH_COMPLETE', 'utc': now(), **result})
+    batch_write_json(output/'BATCH_RESULT.json', result)
+    batch_append_json(stage/'BATCH_LEDGER.jsonl', {'event': 'BATCH_COMPLETE', 'utc': now(), **result})
     if batch_number == 1:
         fixed = sum(p.stat().st_blocks*512 for sub in ('02_PROVIDERS', '02_SEQUENCE_PROVIDERS', '01_PROVIDER_AUDIT')
                     for p in (stage/sub).rglob('*') if p.is_file())
@@ -413,7 +432,7 @@ def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, arg
                  'evaluator_peak_rss_bytes': resource_plan['evaluator_peak_rss_bytes'],
                  'resource_pool_plan': resource_plan,
                  'sequence_consistency_gate': 'PASS', 'batch_verification': 'PASS'}
-        write_json(stage/'PILOT_GATE.json', pilot)
+        batch_write_json(stage/'PILOT_GATE.json', pilot)
         print('PILOT_GATE', json.dumps(pilot, ensure_ascii=False), flush=True)
         if not passed: raise RuntimeError('Pilot projected peak exceeds 250 GB; no continuation')
     return result
