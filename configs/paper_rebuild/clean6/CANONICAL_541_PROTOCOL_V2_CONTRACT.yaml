@@ -23945,3 +23945,7 @@ io_recovery_authorization:
     bookkeeping_examples: [missing seal entries, receipt timestamps, progress files, path mappings, scheduling and report metadata]
     scientific_rerun_policy: no repeated native solve or evaluator invocation; existing scientific bytes and metrics remain unchanged
     completion_order: [batch_8_archive_and_cleanup, batches_9_through_24, aggregation, v1_v2_comparison, c541_pack_v3, AGENTS_and_handoff, final_report]
+    additional_io_paths:
+    - src/legsa_gins/paper_rebuild/clean6_canonical_v2/pack.py
+    - tests/paper_rebuild/test_clean6_pack_recovery.py
+    pack_bookkeeping_repair: preserve historical stop artifacts and include I/O recovery identities and post-hoc seals; use completed execution and aggregate terminals for handoff admission; metric definitions, whitelists and thinning semantics unchanged
