@@ -106,7 +106,7 @@ If the local active branch contains unpushed commits and the remote branch is st
 
 ## 3. Authoritative Canonical-541 roots and solver identity
 
-P-09c protocol v2 root: `<CANONICAL541_V2_ROOT> = <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2`. Scratch alias `<CANONICAL541_V2_SCRATCH>` resolves through ignored local key `canonical541_v2_scratch`. Terminal: `STOPPED_GATE_FAILURE` (2026-09-11); full outputs remain in scratch, provider/ledger/stop records in the new stage. Record: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_PILOT_STOP.md`.
+P-09c protocol v2 root: `<CANONICAL541_V2_ROOT> = <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2`. Scratch alias `<CANONICAL541_V2_SCRATCH>` resolves through ignored local key `canonical541_v2_scratch`. The authorized restart terminal is `STOPPED_GATE_FAILURE` at batch 8 archive (2026-09-12 05:16:10 Asia/Shanghai): batches 1–7 passed; batch 8 has 256 completed solvers, 512 completed evaluations and 255/256 archive receipts. `RUN_01963` has no completed archive receipt after an archive SHA-read `OSError [Errno 12]`. Its full scratch batch and partial G archive remain; no batch-8 cleanup or retry occurred. Current record: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_STOP.md`. The earlier 33-run stop remains historical in `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_PILOT_STOP.md`.
 
 ```text
 <CANONICAL541_ATTEMPT> =
@@ -316,9 +316,25 @@ The reference is Fixposition-derived and not independent ground truth. This limi
 
 ### Protocol v2 anchors (P-09c)
 
-Manuscript protocol selection: v2 (preregistered target); numerical switch `NOT_EXECUTED` because the 33-run gate is `FAIL`. Protocol v1 remains the original preregistered record; existing main-chain anchors and A04 Outcome below are unchanged.
+Manuscript protocol selection: v2 (preregistered target); full-matrix numerical switch remains `NOT_EXECUTED` because the authorized restart stopped during batch 8 archive. The restart sequence gate is PASS. Protocol v1 remains the original preregistered record; existing main-chain anchors and A04 Outcome below are unchanged.
 
-P-07 CAL C00 eleven-profile byte anchors: F01/F02/F03/F04/A03/A04/A05/A06/A07/A08/A09 each `7/7` hash equal (`77/77`). P-06 fifteen-run byte checks: `105/105`. All v2-protocol C00 evaluation metrics and key-pair median/CI/win-rate values are `UNAVAILABLE_NOT_EVALUATED`; see the eleven-row anchor table and same-field key-pair table in `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_PILOT_STOP.md`. These hash matches do not override 22 `FAILED_TECHNICAL` outer terminals.
+P-07 CAL C00 eleven-profile byte anchors: F01/F02/F03/F04/A03/A04/A05/A06/A07/A08/A09 each `7/7` hash equal (`77/77`). P-06 fifteen-run byte checks: `105/105`. The restart completed the eleven C00 v3/v2 evaluations in batch 1; full-matrix key-pair median/CI/win-rate and v1/v2 maintained/flipped tables remain UNAVAILABLE because full aggregation was not executed. The 22 original metadata failures were explicitly revalidated in separate records, with original failed terminals preserved. Pilot evidence is `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_PILOT.md`; the current stop is `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_STOP.md`. No partial-case aggregate substitutes for the full registered comparison.
+
+Protocol v2 CAL C00 anchors, primary evaluator v3, window 66–340 s. Values are copied from the completed first-batch evaluations; all eleven native anchors are byte-equal to P-07 CAL C00. [Full-precision v3/v2 rows](docs/paper_rebuild/clean6/P09C_RESTART_C00_ANCHORS.csv).
+
+| Method | Configuration | H RMSE (m) | 3D RMSE (m) | Up RMSE (m) | Yaw RMSE (deg) |
+|---|---|---:|---:|---:|---:|
+| F01 | single_antenna_EKF | 0.091771 | 0.103511 | 0.047881 | 8.089647 |
+| F02 | basic_dual_yaw_EKF | 0.101670 | 0.112457 | 0.048059 | 2.387502 |
+| F03 | AB0000 | 0.099429 | 0.110350 | 0.047865 | 2.149759 |
+| F04 | AB1111 | 0.098336 | 0.109896 | 0.049064 | 2.102586 |
+| A03 | AB0111 | 0.098475 | 0.109762 | 0.048481 | 2.105506 |
+| A04 | AB1011 | 0.097883 | 0.109953 | 0.050086 | 2.116232 |
+| A05 | AB1101 | 0.099349 | 0.110540 | 0.048466 | 2.142496 |
+| A06 | AB1110 | 0.098401 | 0.109954 | 0.049064 | 2.102604 |
+| A07 | AB1100 | 0.099407 | 0.110592 | 0.048466 | 2.142513 |
+| A08 | AB1000 | 0.099272 | 0.110907 | 0.049452 | 2.149459 |
+| A09 | AB0100 | 0.099532 | 0.110436 | 0.047850 | 2.140686 |
 
 ```text
 F01 = single-antenna EKF
@@ -903,7 +919,9 @@ Hartley does not provide legal absolute yaw RMSE or absolute position RMSE and m
 
 ## 11. Corrected Classic-18 and generalization
 
-P-09c explicitly authorized full protocol v2, but stopped in its first 33-run consistency group: BY2 11 COMPLETED, BY2H 11 FAILED_TECHNICAL, BY2O 11 FAILED_TECHNICAL (`KeyError: runtime_role` in outer identity validation). All native exits were 0 and 182/182 anchor hashes matched; overall gate remains FAIL. Remaining 5940 runs, all evaluations, aggregation and handoff are NOT_EXECUTED; no retry or cleanup occurred.
+The authorized P-09c restart revalidated all 22 prior metadata failures and reused all 33 original native outputs without rerun. P-06 sequence checks passed 105/105 and P-07 C00 checks passed 77/77. It subsequently stopped during batch 8 archive: 2048 unique runs attempted, 1989 native COMPLETED, 59 ALL_YAW_REJECTED (D14=34, D15=25), zero native/evaluator technical failures and one archive technical failure. Remaining 3925 unique runs and full aggregation/handoff are NOT_EXECUTED. The sequence gate remains PASS independently of this later archive stop.
+
+P-09c original attempt (before the 2026-09-12 authorized restart) stopped in its first 33-run consistency group: BY2 11 COMPLETED, BY2H 11 FAILED_TECHNICAL, BY2O 11 FAILED_TECHNICAL (`KeyError: runtime_role` in outer identity validation). All native exits were 0 and 182/182 anchor hashes matched; overall gate remains FAIL. Remaining 5940 runs, all evaluations, aggregation and handoff are NOT_EXECUTED; no retry or cleanup occurred.
 
 Corrected Classic-18 is not required by default.
 
@@ -1207,7 +1225,9 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 
 ## 18. Current next actions
 
-P-09c current terminal: `STOPPED_GATE_FAILURE`; retain both G stage and ext4 scratch scene. The 256-run pilot was not completed, so full-duration/peak forecasts and the 64→128 decision are UNAVAILABLE/NOT_REACHED. Do not restart, regenerate or reclassify the 22 technical failures automatically. The pending full-v2 manuscript handoff is not delivered; the stop record is `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_PILOT_STOP.md`.
+P-09c authorized restart is stopped at batch 8 archive; do not automatically restart, regenerate, finish the partial archive or clean the retained scene. Continuation code is 737a0fb5a4a5418500824855b89b0d25af69824a. Original native reuse=33 and native reruns=0; sequence/C00 gate PASS 182/182. Batch-1 pilot passed (projected peak 221127477999 bytes <=250000000000). Batches 1–7 passed archive/cleanup; batch 8's 256 solvers and 512 evaluations completed, but archive receipts are 255/256 and cleanup was not executed. Missing receipt: RUN_01963, D20_seed_06, A03/AB0111; archive SHA-read error `[Errno 12] Cannot allocate memory`. Full-matrix aggregate, key pairs, v1/v2 maintained/flipped tables and final ZIP are NOT_EXECUTED/UNAVAILABLE. Current evidence: `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_RESTART_STOP.md`; first-batch measurements and resource coverage limitations are linked there. Execution services and the additional disk observer have stopped. Preserve `<CANONICAL541_V2_SCRATCH>/BATCH_008/` and all current stage artifacts.
+
+Historical original-attempt stop (superseded only by the explicit bounded restart): `STOPPED_GATE_FAILURE`; the initial 256-run pilot was incomplete and its forecasts were UNAVAILABLE. Its 22 metadata failures and original freeze remain historical evidence. The later restart reused and archived the 33 native outputs, with their original scratch files removed only after batch-1 archive verification. The original stop record is `docs/paper_rebuild/CLEAN6_CANONICAL541_V2_PILOT_STOP.md`. The former 64/128 decision clause is void under the restart authorization.
 
 Current next actions:
 
