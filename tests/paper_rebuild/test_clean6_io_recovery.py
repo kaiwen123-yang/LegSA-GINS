@@ -1,10 +1,12 @@
 """Synthetic controller/I/O faults only; no provider, solver, or evaluator."""
 import errno
+import copy
 import json
 from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+import yaml
 
 from legsa_gins.paper_rebuild.clean6_canonical_v2 import io_recovery as io
 from legsa_gins.paper_rebuild.clean6_canonical_v2 import storage
@@ -335,3 +337,187 @@ def test_bad_staging_plan_fails_before_any_native_cleanup(tmp_path, monkeypatch)
     assert (Path(records[0]['output_root'])/'native.json').exists()
     assert not (output/'CLEANUP_LEDGER.jsonl').exists()
     assert not (output/'BATCH_ARCHIVE_GATE.json').exists()
+
+
+def posthoc_fixture(tmp_path):
+    solver, evaluator = tmp_path/'solver.json', tmp_path/'evaluator.json'
+    write(solver, []); write(evaluator, [])
+    rows = [{'run_id': f'R{i}', 'status': 'PASS', 'evaluation_full_file_seal_missing': []} for i in range(255)]
+    files = {v: {'summary.json': {'sha256': 'synthetic_metadata_pin', 'size_bytes': 1}} for v in ('v3', 'v2')}
+    rows.append({'run_id': 'RUN_01963', 'status': 'MISSING_PRIOR_SEAL', 'evaluation_full_file_seal_missing': ['v3/summary.json', 'v2/summary.json'],
+                 'current_scratch_inventory': files})
+    old = {'status': 'FAIL_MISSING_PRIOR_EVALUATION_FULL_FILE_SEAL', 'solver_count': 256, 'evaluation_count': 512,
+        'solver_records_sha256': sha256_file(solver), 'evaluation_records_sha256': sha256_file(evaluator),
+        'existing_receipt_count': 255, 'missing_run_id': 'RUN_01963', 'solver_seal_status': 'PASS',
+        'hash_mismatch_count': 0, 'current_inventory_is_historical_seal': False, 'evaluation_seal_status': 'UNAVAILABLE_FOR_RUN_01963',
+        'missing_prior_evaluation_seals': [{'run_id': 'RUN_01963', 'files': ['v3/summary.json', 'v2/summary.json']}], 'runs': rows}
+    old_path = tmp_path/'old.json'; write(old_path, old)
+    old_pin = {'path': str(old_path), 'sha256': sha256_file(old_path)}
+    decision = {'approved': True, 'posthoc_evaluation_seal_run_id': 'RUN_01963',
+                'posthoc_evaluation_versions': ['v3', 'v2'], 'posthoc_seal_annotation': io.POSTHOC_LABEL}
+    contract = tmp_path/'contract.yaml'
+    contract.write_text(yaml.safe_dump({'io_recovery_authorization': {'human_decision_20260912': decision}}))
+    seal = tmp_path/'seal.json'
+    write(seal, {'status': 'SEALED_POST_HOC_AFTER_ARCHIVAL_INTERRUPTION', 'run_id': 'RUN_01963',
+        'annotation': io.POSTHOC_LABEL, 'historical_full_file_seal_available': False, 'versions': ['v3', 'v2'],
+        'files': files, 'original_audit': old_pin})
+    acceptance = copy.deepcopy(old)
+    acceptance.update(status='ACCEPTED_AUTHORIZED_POSTHOC_SEAL', evaluation_seal_status='ACCEPTED_AUTHORIZED_POSTHOC_SEAL',
+        original_audit=old_pin, posthoc_evaluation_seal={'path': str(seal), 'sha256': sha256_file(seal),
+            'run_id': 'RUN_01963', 'versions': ['v3', 'v2'], 'annotation': io.POSTHOC_LABEL, 'historical_full_file_seal_available': False},
+        human_authorization={'contract_path': str(contract), 'contract_sha256': sha256_file(contract),
+                             'decision_key': 'io_recovery_authorization.human_decision_20260912'})
+    path = tmp_path/'accepted.json'; write(path, acceptance)
+    return path, solver, evaluator, decision, old
+
+
+def test_authorized_posthoc_acceptance_preserves_original_gap(tmp_path):
+    path, solver, evaluator, decision, original = posthoc_fixture(tmp_path)
+    result = io.verify_recovery_gate(path, sha256_file(path), solver, evaluator, authorization=decision)
+    assert result['status'] == 'ACCEPTED_AUTHORIZED_POSTHOC_SEAL'
+    assert result['missing_prior_evaluation_seals'] == original['missing_prior_evaluation_seals']
+    assert result['runs'] == original['runs']
+    assert result['posthoc_evaluation_seal']['historical_full_file_seal_available'] is False
+    with pytest.raises(ValueError, match='Explicit approved'):
+        io.verify_recovery_gate(path, sha256_file(path), solver, evaluator)
+    altered = json.loads(path.read_text()); altered['missing_prior_evaluation_seals'] = []
+    write(path, altered)
+    with pytest.raises(ValueError, match='concealed'):
+        io.verify_recovery_gate(path, sha256_file(path), solver, evaluator, authorization=decision)
+
+
+def test_only_registered_scientific_stop_categories_are_stops():
+    for kind in io.SCIENTIFIC_STOP_KINDS:
+        assert io.classify_controller_failure(io.ScientificStop(kind, 'evidence'))['status'] == 'SCIENTIFIC_STOP'
+    for error in (FileNotFoundError('seal metadata missing'), KeyError('runtime_seconds'), ValueError('path map'), RuntimeError('RSS')):
+        assert io.classify_controller_failure(error)['status'] == 'BOOKKEEPING_REPAIR'
+    with pytest.raises(io.ScientificStop, match='nonzero'):
+        io.check_science_terminals([{'run_id': 'r', 'exit_code': 134, 'terminal_status': 'FAILED_TECHNICAL'}])
+    io.check_science_terminals([{'run_id': 'r', 'exit_code': 134, 'terminal_status': 'ALGORITHM_FAILURE_ALL_YAW_REJECTED'}])
+    with pytest.raises(io.ScientificStop, match='nonfinite'):
+        io.check_science_terminals([], [{'run_id': 'r', 'evaluation_status': 'COMPLETED', 'horizontal_rmse_m': float('nan')}])
+    with pytest.raises(io.ScientificStop, match='failed'):
+        io.check_science_terminals([], [{'run_id': 'r', 'evaluation_status': 'FAILED_EVALUATOR', 'evaluation_invoked': True,
+                                        'evaluator_process_resources': {'exit_code': 1}}])
+
+
+def test_native_exit_zero_wrapper_repair_preserves_native_bytes(tmp_path):
+    native = tmp_path/'scratch/native'
+    for name in ('RUN_MANIFEST.json', 'KF_GINS_Navresult.nav', 'KF_GINS_STD.txt'):
+        write(native/name, {'synthetic_infrastructure': True})
+    before = storage.inventory(native)
+    record = {'run_id': 'r', 'output_root': str(native), 'exit_code': 0,
+              'terminal_status': 'FAILED_TECHNICAL', 'failure': 'missing progress metadata'}
+    repaired = io.repair_native_record(record, tmp_path/'stage', before_evaluation=True)
+    assert repaired['terminal_status'] == 'COMPLETED' and repaired['original_terminal_status'] == 'FAILED_TECHNICAL'
+    assert repaired['runtime_seconds'] is None and repaired['runtime_measurement_status'] == 'UNAVAILABLE'
+    for name, pin in before.items():
+        assert sha256_file(native/name) == pin['sha256']
+    assert json.loads((native/'OUTPUT_SEAL.json').read_text())['status'] == 'SEALED_BEFORE_EVALUATION'
+    assert (tmp_path/'stage/BATCH_LEDGER.notes').is_file()
+
+
+def test_exact_wave_group_recovery_uses_no_scientific_calls(tmp_path, monkeypatch):
+    records, evaluations, context, batch, output = setup_batch(tmp_path, 2)
+    write(output/'SOLVER_GROUP_0.json', records)
+    write(output/'EVALUATION_WAVE_0001.json', evaluations[:2])
+    for row in evaluations[2:]:
+        write(Path(row['evaluation_output_root'])/'EVALUATION_RESULT.json', row)
+    from legsa_gins.paper_rebuild.clean6_canonical_v2 import runner, evaluation
+    monkeypatch.setattr(runner, 'run_group', lambda *_a, **_k: pytest.fail('solver repeated'))
+    monkeypatch.setattr(evaluation, 'one_evaluation', lambda *_a, **_k: pytest.fail('evaluator repeated'))
+    recovered, rows = io.load_existing_batch_terminals(context['stage'], context['scratch'], 9,
+        expected_run_ids=[r['run_id'] for r in records])
+    assert [r['run_id'] for r in recovered] == [r['run_id'] for r in records]
+    assert len(rows) == 4 and all(r['horizontal_rmse_m'] == 123.456 for r in rows)
+
+
+def test_bookkeeping_note_is_also_in_main_batch_ledger_notes_field(tmp_path):
+    io.bookkeeping_note(tmp_path, 'restore_path_map', 'restored existing metadata', batch=8, run_id='RUN_01963')
+    detail = json.loads((tmp_path/'BATCH_LEDGER.notes').read_text())
+    event = json.loads((tmp_path/'BATCH_LEDGER.jsonl').read_text())
+    assert event['event'] == 'BOOKKEEPING_REPAIRED'
+    assert event['notes'] == [detail]
+    assert event['batch'] == 8 and event['run_id'] == 'RUN_01963'
+    assert detail['scientific_code_commit'] == io.SCIENTIFIC_COMMIT
+
+
+def test_evaluator_exit_zero_then_wrapper_keyerror_is_bookkeeping_only():
+    row = {'run_id': 'r', 'evaluation_status': 'FAILED_EVALUATOR', 'evaluation_invoked': True,
+           'evaluator_process_resources': {'exit_code': 0}, 'failure_type': 'KeyError', 'failure_message': 'runtime_seconds'}
+    before = copy.deepcopy(row)
+    io.check_science_terminals([], [row])
+    assert row == before and row['evaluation_status'] == 'FAILED_EVALUATOR'
+    row.pop('evaluator_process_resources')
+    io.check_science_terminals([], [row])  # missing evidence does not fabricate success
+
+
+@pytest.mark.parametrize('evidence', [{'evaluator_process_resources': {'exit_code': 2}},
+                                     {'evaluator_audit': {'exit_code': 137}},
+                                     {'failure_type': 'RuntimeError', 'failure_message': 'evaluator_returncode=1; stderr tail: failed'}])
+def test_evaluator_actual_nonzero_is_scientific_stop(evidence):
+    with pytest.raises(io.ScientificStop) as caught:
+        io.check_science_terminals([], [{'run_id': 'r', 'evaluation_invoked': True,
+            'evaluation_status': 'FAILED_EVALUATOR', **evidence}])
+    assert caught.value.kind == 'EVALUATOR_FAILURE_OR_NONFINITE'
+
+
+def test_evaluator_nonfinite_remains_scientific_even_with_success_exit():
+    with pytest.raises(io.ScientificStop):
+        io.check_science_terminals([], [{'run_id': 'r', 'evaluation_status': 'FAILED_EVALUATOR',
+            'evaluation_invoked': True, 'evaluator_process_resources': {'exit_code': 0}, 'failure_message': 'Nonfinite evaluator output'}])
+
+
+@pytest.mark.parametrize('remove_all_native,completion_recorded,partial_resolution',
+                         [(False, True, False), (True, True, False), (False, False, True)])
+def test_receipt_cleanup_recovery_never_rearchives_partial_sources(tmp_path, monkeypatch,
+        remove_all_native, completion_recorded, partial_resolution):
+    records, evaluations, context, batch, original_output = setup_batch(tmp_path, 1)
+    record = records[0]
+    native = Path(record['output_root'])
+    write(native/'extra.json', {'synthetic_extra': True})
+    record['output_seal'] = storage.inventory(native)
+    destination = Path(context['stage'])/'RETAINED_RUNS'/record['run_id']/'successful_attempt'
+    staged = batch/'ARCHIVE_STAGING/successful_attempt'/record['run_id']
+    roots = {v: batch/'12_OFFLINE_EVALUATION'/v/record['run_id'] for v in ('v3', 'v2')}
+    receipt = fake_retain(record, roots, destination, archive_code_commit='io-only', scratch_archive_root=staged)
+    write(staged/'member.json', {'synthetic_staging': True})
+    receipt['retained_files'] = {'member.json': storage.inventory(staged)['member.json']}
+    receipt['scratch_archive_roots'] = [str(staged)]
+    write(staged/'ARCHIVE_RECEIPT.json', receipt)
+    write(destination/'ARCHIVE_RECEIPT.json', receipt)
+    job = {'record': record, 'evaluations': evaluations, 'scratch_batch': str(batch), 'batch': 9}
+    plan = io.plan_prepared_cleanup(job, receipt, destination, context)
+    write(original_output/'PREPARED_CLEANUP_PLAN.json', {record['run_id']: plan})
+    final, rows = io._relocate(record, evaluations, destination, batch)
+    resolved = Path(context['root'])/'RESOLVED_RUNS'/record['run_id']
+    write(resolved/'RUN_RECORD.json', final)
+    kept = (resolved/'RUN_RECORD.json').read_bytes()
+    if not partial_resolution:
+        write(resolved/'EVALUATION_RECORDS.json', rows)
+        write(resolved/'RECEIPT_REFERENCE.json', {'path': str(destination/'ARCHIVE_RECEIPT.json'),
+                                               'sha256': sha256_file(destination/'ARCHIVE_RECEIPT.json')})
+    io.append_json(Path(context['root'])/'ARCHIVE_IO_LEDGER.jsonl', {'status': 'ARCHIVED',
+        'run_id': record['run_id'], 'destination': str(destination), 'batch': 9})
+    io.append_json(Path(context['root'])/'ARCHIVE_PENDING_LEDGER.jsonl', {'status': 'ARCHIVE_PENDING',
+        'run_id': record['run_id'], 'job': job})
+    names = list(receipt['original_files']['solver']) if remove_all_native else ['native.json']
+    for name in names:
+        pin = receipt['original_files']['solver'][name]
+        io.append_json(original_output/'CLEANUP_LEDGER.jsonl', {'status': 'DELETE_INTENT', 'path': str(native/name), **pin})
+        (native/name).unlink()
+        if completion_recorded:
+            io.append_json(original_output/'CLEANUP_LEDGER.jsonl', {'status': 'DELETED', 'path': str(native/name), **pin})
+    monkeypatch.setattr(storage, 'retain_run', lambda *_a, **_k: pytest.fail('verified archive repeated'))
+    reg = SimpleNamespace(clean_root=Path(context['stage']))
+    result = io.recover_archive_batch(context, reg, 9, records=records, evaluations=evaluations)
+    assert result['status'] == 'PASS' and result['solver_calls'] == result['evaluator_calls'] == 0
+    assert not list(native.rglob('*.*'))
+    assert all(not list(path.rglob('*.*')) for path in roots.values())
+    assert not list(staged.rglob('*.*')) and not io.load_pending(context['root'])
+    assert (resolved/'RUN_RECORD.json').read_bytes() == kept
+    assert (resolved/'EVALUATION_RECORDS.json').is_file() and (resolved/'RECEIPT_REFERENCE.json').is_file()
+    second = io.recover_archive_batch(context, reg, 9, records=records, evaluations=evaluations)
+    assert second['status'] == 'PASS'
+    second_output = Path(second['run_records_path']).parent
+    assert not (second_output/'CLEANUP_LEDGER.jsonl').exists()  # already reconciled, no duplicate delete

@@ -210,9 +210,19 @@ def run_group(jobs, pool, bundles, contract, reg, scratch_batch, code_commit, c0
     return records
 
 
-def evaluate_batch(records, contract, reg, scratch_batch, code_commit, output, solver_peak):
+def evaluate_batch(records, contract, reg, scratch_batch, code_commit, output, solver_peak, *, io_context=None):
     """Use registered evaluations for RSS measurement; never rerun a probe."""
     from .evaluation import one_evaluation
+    def choose_workers(state, peak):
+        try:
+            return choose_evaluator_workers(state['memory_available_bytes'], solver_peak, peak, state['nproc'])
+        except ValueError as error:
+            if io_context is None:
+                raise
+            from .io_recovery import bookkeeping_note
+            bookkeeping_note(io_context['stage'], 'reduce_evaluator_pool', str(error), workers=1,
+                             rss_measurement_status='AVAILABLE' if peak else 'UNAVAILABLE')
+            return 1
     tasks = [(record, version) for record in records for version in ('v3', 'v2')]
     completed = []
     rss_peak = 0
@@ -220,7 +230,10 @@ def evaluate_batch(records, contract, reg, scratch_batch, code_commit, output, s
     plans = []
     prior = resolve(contract['stage_root'], reg)/'PILOT_GATE.json'
     if prior.is_file():
-        rss_peak = json.loads(prior.read_text())['evaluator_peak_rss_bytes']
+        prior_peak = json.loads(prior.read_text()).get('evaluator_peak_rss_bytes')
+        if prior_peak is None and io_context is None:
+            raise ValueError('Prior evaluator RSS measurement is unavailable')
+        rss_peak = prior_peak or 0
     else:
         probes = []
         for dataset in ('BY2', 'BY2H', 'BY2O'):
@@ -230,19 +243,22 @@ def evaluate_batch(records, contract, reg, scratch_batch, code_commit, output, s
             # A single measured probe precedes allocation of the evaluator pool.
             # Recheck the known memory bound before all subsequent probes.
             if rss_peak:
-                choose_evaluator_workers(machine_state()['memory_available_bytes'], solver_peak, rss_peak, initial['nproc'])
+                choose_workers(machine_state(), rss_peak)
             row = one_evaluation(record, version, contract, reg, scratch_batch, code_commit)
             completed.append(row)
             write_json(output/f'EVALUATION_PROBE_{len(completed):02d}.json', row)
             if row['evaluation_status'] != 'COMPLETED':
+                if io_context is not None:
+                    from .io_recovery import check_science_terminals
+                    check_science_terminals(records, [row])
                 raise RuntimeError('Registered evaluator RSS probe failed; no retry')
-            rss_peak = max(rss_peak, row['evaluator_peak_rss_bytes'])
+            rss_peak = max(rss_peak, row.get('evaluator_peak_rss_bytes') or 0)
             tasks.remove((record, version))
             print('EVALUATOR_PROBE', row['run_id'], version, row['evaluation_runtime_seconds'], row['evaluator_peak_rss_bytes'], flush=True)
     permitted = {'COMPLETED', 'NOT_RUN_ALGORITHM_FAILURE'}
     while tasks:
         state = machine_state()
-        count = choose_evaluator_workers(state['memory_available_bytes'], solver_peak, rss_peak, state['nproc'])
+        count = choose_workers(state, rss_peak)
         wave, tasks = tasks[:count], tasks[count:]
         plan = {'wave': len(plans)+1, 'workers': count, 'available_memory_bytes': state['memory_available_bytes'],
                 'solver_peak_bytes': solver_peak, 'measured_evaluator_peak_rss_bytes': rss_peak,
@@ -256,13 +272,22 @@ def evaluate_batch(records, contract, reg, scratch_batch, code_commit, output, s
         completed.extend(results)
         write_json(output/f'EVALUATION_WAVE_{len(plans):04d}.json', results)
         if any(row['evaluation_status'] not in permitted for row in results):
+            if io_context is not None:
+                from .io_recovery import check_science_terminals
+                check_science_terminals(records, results)
             raise RuntimeError('Evaluation wave failed; no next wave, retry or cleanup')
-        rss_peak = max([rss_peak]+[r['evaluator_peak_rss_bytes'] for r in results if r['evaluation_status'] == 'COMPLETED'])
+        rss_peak = max([rss_peak]+[r['evaluator_peak_rss_bytes'] for r in results
+                                 if r['evaluation_status'] == 'COMPLETED' and r.get('evaluator_peak_rss_bytes') is not None])
         if solver_peak+count*rss_peak*1.25 > plan['memory_budget_bytes']:
-            raise RuntimeError('Measured evaluator RSS exceeded registered 75% memory budget; retain scene')
+            if io_context is None:
+                raise RuntimeError('Measured evaluator RSS exceeded registered 75% memory budget; retain scene')
+            from .io_recovery import bookkeeping_note
+            bookkeeping_note(io_context['stage'], 'reduce_next_evaluator_wave',
+                'Measured RSS exceeded prior plan; subsequent pool follows updated RSS', previous_workers=count,
+                measured_evaluator_peak_rss_bytes=rss_peak)
         print('EVALUATION_WAVE', len(plans), 'COMPLETE', len(completed), 'POOL', count, flush=True)
     return completed, {'initial_machine': initial, 'solver_peak_bytes': solver_peak,
-                       'evaluator_peak_rss_bytes': rss_peak, 'wave_plans': plans,
+                       'evaluator_peak_rss_bytes': rss_peak or None, 'wave_plans': plans,
                        'evaluator_pool_sizes': sorted({p['workers'] for p in plans})}
 
 
@@ -305,6 +330,9 @@ def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, arg
             for index, group in enumerate(groups):
                 reuse = resumed_records is not None and index == 0
                 records = resumed_records if reuse else run_group(group, pool, bundles, contract, reg, scratch_batch, code_commit, c00)
+                if getattr(args, 'io_context', None) is not None:
+                    from .io_recovery import repair_native_record
+                    records = [repair_native_record(row, stage, before_evaluation=True) for row in records]
                 all_records.extend(records)
                 group_name = f'SOLVER_GROUP_{index}_REVALIDATED.json' if reuse else f'SOLVER_GROUP_{index}.json'
                 batch_write_json(output/group_name, records)
@@ -318,13 +346,17 @@ def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, arg
                     else:
                         batch_write_json(gate_path, gate)
                     if gate['status'] != 'PASS':
+                        if getattr(args, 'io_context', None) is not None:
+                            from .io_recovery import ScientificStop
+                            raise ScientificStop('SEQUENCE_OR_C00_BYTE_GATE_FAILURE', 'Sequence/C00 byte gate failed')
                         raise RuntimeError('Sequence/C00 byte gate failed; no remaining pilot solver launched')
                 if any(r['terminal_status'] == 'FAILED_TECHNICAL' for r in records):
                     raise RuntimeError('Technical solver failure; batch stopped, no retry or cleanup')
             solver_measurements = monitor.end_phase()
             monitor.begin_phase('evaluation')
             evaluations, resource_plan = evaluate_batch(all_records, contract, reg, scratch_batch, code_commit,
-                output, solver_measurements['owned_process_tree_peak_rss_bytes'])
+                output, solver_measurements['owned_process_tree_peak_rss_bytes'],
+                **({'io_context': args.io_context} if getattr(args, 'io_context', None) is not None else {}))
             batch_write_json(output/'RESOURCE_POOL_PLAN.json', resource_plan)
             monitor.end_phase()
             monitor.begin_phase('archive_cleanup')
@@ -332,6 +364,9 @@ def do_batch(batch_number, jobs, contract, reg, stage, scratch, code_commit, arg
             batch_write_json(output/'EVALUATION_RECORDS_BEFORE_ARCHIVE.json', evaluations)
             permitted = {'PASS', 'COMPLETED', 'SUCCESS', 'NOT_RUN_ALGORITHM_FAILURE'}
             if any(r['evaluation_status'] not in permitted for r in evaluations):
+                if getattr(args, 'io_context', None) is not None:
+                    from .io_recovery import check_science_terminals
+                    check_science_terminals(all_records, evaluations)
                 raise RuntimeError('Evaluation or WGS84 self-check failed; retain full batch scene')
             io_context = getattr(args, 'io_context', None)
             if io_context is not None:

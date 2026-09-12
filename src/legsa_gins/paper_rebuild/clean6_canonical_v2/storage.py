@@ -90,6 +90,7 @@ def _prepare_retained_run(record, evaluation_roots, destination, *, archive_code
     skipped = []
     sources = [('solver', source)] + [(version, Path(root)) for version, root in evaluation_roots.items()]
     original_files = {}
+    posthoc_metadata = {key: record[key] for key in ('posthoc_evaluation_seal',) if key in record}
     def hash_file(path):
         started, cpu_started = time.monotonic(), time.thread_time()
         result = sha256_file(path)
@@ -177,6 +178,7 @@ def _prepare_retained_run(record, evaluation_roots, destination, *, archive_code
             if not any(k.startswith(version+'/') and k.endswith('/error_series.csv.gz') for k in retained):
                 raise ValueError('Required compressed errors missing: '+version)
     receipt = {'status': 'ARCHIVE_VERIFIED', 'run_id': record['run_id'], 'dataset_id': record['dataset_id'],
+               **posthoc_metadata,
                'terminal_status': record['terminal_status'], 'original_files': original_files,
                'retained_files': retained, 'sealed_not_retained_full_files': skipped,
                'retained_bytes': sum(p['size_bytes'] for p in retained.values()),
@@ -197,7 +199,7 @@ def _prepare_retained_run(record, evaluation_roots, destination, *, archive_code
             retained[version+'/summary.json'] = {'sha256': hash_file(summary),
                 'size_bytes': summary.stat().st_size, 'allocated_bytes': summary.stat().st_blocks*512}
     wrapper = destination/'RUN_MANIFEST.json'
-    write_json(wrapper, {'manifest_role': 'PROTOCOL_V2_ARCHIVE_WRAPPER',
+    write_json(wrapper, {'manifest_role': 'PROTOCOL_V2_ARCHIVE_WRAPPER', **posthoc_metadata,
         'native_manifest_relative_path': 'solver/RUN_MANIFEST.json' if record['terminal_status'] == 'COMPLETED' else None,
         'native_manifest_substituted': False, 'protocol_id': record.get('protocol_id'),
         'code_commit': record.get('code_commit'), 'run_id': record['run_id'],

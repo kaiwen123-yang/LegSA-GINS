@@ -451,3 +451,28 @@ def test_scratch_receipt_preparation_retries_with_exclusive_attempts(tmp_path, m
     assert delays == [2] and len(failed) == 1 and Path(failed[0]).exists()
     assert receipt['scratch_receipt_attempt_paths'] == [str(staging/f'ARCHIVE_RECEIPT.json.write_attempt_{i:02d}') for i in range(1, 5)]
     assert json.loads((archive/'ARCHIVE_RECEIPT.json').read_text()) == receipt
+
+
+def test_posthoc_evaluation_seal_annotation_passes_unchanged_to_permanent_metadata(tmp_path):
+    record, evaluations = scene(tmp_path)
+    source = Path(record['output_root'])
+    native_before = storage.inventory(source)
+    evaluation_before = {version: storage.inventory(root) for version, root in evaluations.items()}
+    sidecar = tmp_path/'IO_RECOVERY'/'POSTHOC_EVALUATION_SEAL.json'
+    sidecar.parent.mkdir()
+    sidecar.write_text('{"synthetic_test_sidecar":true}\n')
+    record['posthoc_evaluation_seal'] = {
+        'path': str(sidecar), 'sha256': storage.sha256_file(sidecar),
+        'annotation': 'sealed post-hoc after archival interruption; content verified against scratch (size+sha256)',
+        'historical_full_file_seal_available': False, 'versions': ['v3', 'v2']}
+    record_before = json.loads(json.dumps(record))
+    archive = tmp_path/'g'/'run'
+    receipt = storage.retain_run(record, evaluations, archive, archive_code_commit='archive_only',
+                                scratch_archive_root=tmp_path/'scratch'/'posthoc_staging')
+    stored_receipt = json.loads((archive/'ARCHIVE_RECEIPT.json').read_text())
+    stored_manifest = json.loads((archive/'RUN_MANIFEST.json').read_text())
+    for item in (receipt, stored_receipt, stored_manifest):
+        assert item['posthoc_evaluation_seal'] == record_before['posthoc_evaluation_seal']
+    assert record == record_before and storage.inventory(source) == native_before
+    assert {version: storage.inventory(root) for version, root in evaluations.items()} == evaluation_before
+    assert sidecar.exists() and storage.sha256_file(sidecar) == record['posthoc_evaluation_seal']['sha256']

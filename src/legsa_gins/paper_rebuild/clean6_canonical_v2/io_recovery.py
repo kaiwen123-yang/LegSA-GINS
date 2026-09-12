@@ -5,9 +5,11 @@ import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import copy
 import hashlib
+import math
 from datetime import datetime, timezone
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import time
@@ -21,21 +23,120 @@ from .archive_io import retry_io
 
 BASE = 'src/legsa_gins/paper_rebuild/clean6_canonical_v2/'
 IO_ALLOWLIST = frozenset((BASE+'runner.py', BASE+'storage.py', BASE+'archive_io.py', BASE+'io_recovery.py',
+    BASE+'pack.py', 'tests/paper_rebuild/test_clean6_pack_recovery.py',
     'scripts/paper_rebuild/clean6_recover_canonical541_v2_io.py',
     'tests/paper_rebuild/test_clean6_archive_io.py', 'tests/paper_rebuild/test_clean6_io_recovery.py',
     'configs/paper_rebuild/clean6/CANONICAL_541_PROTOCOL_V2_CONTRACT.yaml'))
 SCIENTIFIC_COMMIT = '737a0fb5a4a5418500824855b89b0d25af69824a'
+POSTHOC_LABEL = 'sealed post-hoc after archival interruption; content verified against scratch (size+sha256)'
+SCIENTIFIC_STOP_KINDS = frozenset(('NATIVE_UNREGISTERED_FAILURE', 'EVALUATOR_FAILURE_OR_NONFINITE',
+    'SEQUENCE_OR_C00_BYTE_GATE_FAILURE', 'BATCH_ARCHIVE_FAILURE_OVER_ONE_PERCENT'))
+
+
+class ScientificStop(RuntimeError):
+    def __init__(self, kind, message):
+        if kind not in SCIENTIFIC_STOP_KINDS:
+            raise ValueError('Unregistered scientific stop category')
+        self.kind = kind
+        super().__init__(message)
+
+
+def bookkeeping_note(stage, operation, reason, **details):
+    detail = {'status': 'BOOKKEEPING_REPAIR', 'operation': operation,
+        'reason': reason, 'utc': now(), 'scientific_code_commit': SCIENTIFIC_COMMIT, **details}
+    append_json(Path(stage)/'BATCH_LEDGER.notes', detail)
+    append_json(Path(stage)/'BATCH_LEDGER.jsonl', {'event': 'BOOKKEEPING_REPAIRED', 'utc': detail['utc'],
+        'notes': [detail], **{key: details[key] for key in ('batch', 'run_id') if key in details}})
+
+
+def classify_controller_failure(error):
+    if isinstance(error, ScientificStop):
+        return {'status': 'SCIENTIFIC_STOP', 'kind': error.kind, 'reason': str(error)}
+    return {'status': 'BOOKKEEPING_REPAIR', 'kind': type(error).__name__, 'reason': str(error)}
+
+
+def check_science_terminals(records, evaluations=()):
+    for record in records:
+        if record.get('terminal_status') == 'ALGORITHM_FAILURE_ALL_YAW_REJECTED':
+            continue
+        if record.get('exit_code') not in (None, 0):
+            raise ScientificStop('NATIVE_UNREGISTERED_FAILURE', 'Native nonzero exit: '+record['run_id'])
+    for row in evaluations:
+        if row.get('evaluation_status') == 'NOT_RUN_ALGORITHM_FAILURE':
+            continue
+        failure = str(row.get('failure_message', '')).lower()
+        nonfinite = row.get('finite_output') is False or 'nonfinite' in failure or 'non-finite' in failure or any(
+            isinstance(row.get(key), (int, float)) and not math.isfinite(row[key])
+            for key in ('horizontal_rmse_m', 'yaw_rmse_deg', 'yaw_p95_absolute_deg', 'up_rmse_m', 'position_3d_rmse_m'))
+        resources = row.get('evaluator_process_resources') or {}
+        audit = row.get('evaluator_audit') or {}
+        exit_codes = [resources.get('exit_code'), audit.get('exit_code'), row.get('evaluator_outer_exit_code')]
+        exit_codes.extend(int(code) for code in re.findall(r'evaluator_returncode=(-?\d+)', failure))
+        nonzero_exit = any(isinstance(code, int) and not isinstance(code, bool) and code != 0 for code in exit_codes)
+        explicit_call_failure = (row.get('evaluation_invoked') is True and (
+            'clean5 evaluator timeout; no retry' in failure or 'clean5 evaluator launch failed' in failure
+            or row.get('failure_type') in ('TimeoutExpired', 'CalledProcessError')))
+        failed_call = nonzero_exit or explicit_call_failure
+        if failed_call or nonfinite:
+            raise ScientificStop('EVALUATOR_FAILURE_OR_NONFINITE', 'Evaluator failed/nonfinite: '+row['run_id'])
+
+
+def repair_native_record(record, stage, *, before_evaluation=False):
+    """Repair wrapper metadata from existing native evidence; never execute."""
+    from .storage import inventory
+    row = copy.deepcopy(record)
+    check_science_terminals([row])
+    root = Path(row['output_root'])
+    repairs = []
+    if row.get('terminal_status') not in ('COMPLETED', 'ALGORITHM_FAILURE_ALL_YAW_REJECTED'):
+        if row.get('exit_code') != 0:
+            raise ValueError('Native terminal/exit metadata needs exact-evidence repair: '+row['run_id'])
+        if not all((root/name).is_file() for name in ('RUN_MANIFEST.json', 'KF_GINS_Navresult.nav', 'KF_GINS_STD.txt')):
+            raise ValueError('Native exit zero but required output path metadata is unresolved: '+row['run_id'])
+        row['original_terminal_status'] = row.get('terminal_status')
+        row['terminal_status'] = 'COMPLETED'
+        row['controller_metadata_repair'] = 'native exit zero; original wrapper failure retained; no solver repeated'
+        repairs.append('outer_terminal_from_native_exit_zero')
+    seal = root/'OUTPUT_SEAL.json'
+    if row.get('output_seal') and not seal.is_file() and before_evaluation:
+        for name, pin in row['output_seal'].items():
+            if sha256_file(root/name) != pin['sha256']:
+                raise ValueError('Native bytes differ from existing seal metadata; repair requires original identity evidence')
+        write_json(seal, {'status': 'SEALED_BEFORE_EVALUATION', 'files': row['output_seal'],
+            'bookkeeping_repair': 'restored from existing hash map before evaluator invocation', 'created_utc': now()})
+        repairs.append('restored_missing_seal_sidecar_from_existing_hash_map')
+    if not row.get('output_seal'):
+        if seal.is_file():
+            row['output_seal'] = _read(seal)['files']
+            repairs.append('restored_existing_native_seal_mapping')
+        else:
+            files = {name: {'sha256': pin['sha256'], 'size_bytes': pin['size_bytes']}
+                     for name, pin in inventory(root).items() if name != 'OUTPUT_SEAL.json'}
+            status = 'SEALED_BEFORE_EVALUATION' if before_evaluation else 'SEALED_POSTHOC_CURRENT_NATIVE_OUTPUT'
+            write_json(seal, {'status': status, 'files': files, 'bookkeeping_repair': True,
+                'historical_seal_asserted': False, 'created_utc': now()})
+            row['output_seal'] = files
+            repairs.append('current_native_seal_created_with_explicit_time_role')
+    row.setdefault('solver_output_bytes', sum(pin['size_bytes'] for pin in row['output_seal'].values()))
+    if row.get('runtime_seconds') is None:
+        row['runtime_seconds'] = row.get('solver_seconds')
+        row['runtime_measurement_status'] = 'UNAVAILABLE' if row['runtime_seconds'] is None else 'RESTORED_FROM_SOLVER_SECONDS'
+        repairs.append('runtime_seconds_preserved_as_available_or_unavailable')
+    if repairs:
+        bookkeeping_note(stage, 'repair_native_record', ','.join(repairs), run_id=row['run_id'])
+    return row
 
 
 def now():
     return datetime.now(timezone.utc).isoformat()
 
 
-def _read(path, expected_sha256=None):
+def _read(path, expected_sha256=None, *, with_digest=False):
     value, _ = retry_io(lambda: Path(path).read_bytes(), source=path, destination=path, operation='controller_json_read')
     if expected_sha256 is not None and hashlib.sha256(value).hexdigest() != expected_sha256:
         raise ValueError('Controller metadata bytes differ from pinned independent audit')
-    return json.loads(value)
+    result = json.loads(value)
+    return (result, hashlib.sha256(value).hexdigest()) if with_digest else result
 
 
 def sha256_file(path):
@@ -125,6 +226,12 @@ def register_io_freeze(contract_path, reg, identifier):
     if appendix.get('io_fix_id') != identifier or appendix.get('scientific_code_commit') != SCIENTIFIC_COMMIT:
         raise ValueError('Missing exact approved I/O authorization')
     allowed = set(appendix['allowed_changed_paths'])
+    decision = appendix.get('human_decision_20260912', {})
+    if decision.get('approved') is True:
+        additional = set(decision.get('additional_io_paths', []))
+        if additional-{BASE+'pack.py', 'tests/paper_rebuild/test_clean6_pack_recovery.py'}:
+            raise ValueError('Additional metadata-only I/O paths exceed explicit approval')
+        allowed.update(additional)
     if not allowed or allowed-IO_ALLOWLIST:
         raise ValueError('I/O authorization exceeds compiled narrow whitelist')
     stage = resolve(current['stage_root'], reg)
@@ -362,6 +469,10 @@ def archive_batch(records, evaluations, *, context, scratch_batch, output, batch
                     raise ValueError('Existing receipt/native seal disagree: '+key)
             receipts[key], destinations[key], receipt_jobs[key] = receipt, destination, job
     pending = load_pending(root)
+    # These runs already have successful receipts and are undergoing only exact
+    # cleanup recovery in this controller; never submit them to retain_run again.
+    for run_id in context.get('receipt_cleanup_run_ids', []):
+        pending.pop(run_id, None)
     timings = []
 
     def attempt(job, round_id):
@@ -404,7 +515,7 @@ def archive_batch(records, evaluations, *, context, scratch_batch, output, batch
     # Exactly one batch-end pass, including unresolved earlier-batch archives.
     wave_pass(list(pending.values()), 1)
     current_pending = sum(job['record']['run_id'] in pending for job in jobs)
-    gate = pending_gate(current_pending, len(records))
+    gate = pending_gate(current_pending, context.get('current_batch_run_count', len(records)))
     overall = {'pending_unique_count': len(pending), 'unique_denominator': min(5973, batch_number*256),
                'pending_fraction': len(pending)/min(5973, batch_number*256), 'role': 'record_only_no_stop_gate'}
     result = {'status': 'PASS' if not pending else 'PASS_WITH_ARCHIVE_PENDING', 'batch': batch_number,
@@ -420,7 +531,8 @@ def archive_batch(records, evaluations, *, context, scratch_batch, output, batch
     result['io_component_wall_scope'] = 'sum of worker operation wall durations; overlaps across workers'
     write_json(output/'ARCHIVE_IO_RESULT.json', result)
     if gate['status'] != 'PASS':
-        raise RuntimeError('Archive pending unique fraction exceeds one percent; retained pending scratch')
+        raise ScientificStop('BATCH_ARCHIVE_FAILURE_OVER_ONE_PERCENT',
+            'Archive pending unique fraction exceeds one percent; retained pending scratch')
     # Preserve the entire batch scene on any archive validation or pending gate
     # failure. No unlink occurs until both archive passes have reached this gate.
     for key, receipt in receipts.items():
@@ -460,21 +572,55 @@ def archive_batch(records, evaluations, *, context, scratch_batch, output, batch
     return final_records, final_evaluations, current_receipts, result
 
 
-def verify_recovery_gate(gate_path, expected_sha256, solver_path, evaluation_path):
-    if sha256_file(gate_path) != expected_sha256:
-        raise ValueError('Read-only recovery audit gate identity changed')
-    gate = _read(gate_path)
-    required = {'status': 'PASS', 'solver_count': 256, 'evaluation_count': 512,
+def verify_recovery_gate(gate_path, expected_sha256, solver_path, evaluation_path, *, authorization=None):
+    gate = _read(gate_path, expected_sha256)
+    posthoc = gate.get('status') == 'ACCEPTED_AUTHORIZED_POSTHOC_SEAL'
+    required = {'solver_count': 256, 'evaluation_count': 512,
         'existing_receipt_count': 255, 'missing_run_id': 'RUN_01963',
-        'solver_seal_status': 'PASS', 'evaluation_seal_status': 'PASS', 'hash_mismatch_count': 0,
-        'current_inventory_is_historical_seal': False, 'missing_prior_evaluation_seals': []}
+        'solver_seal_status': 'PASS', 'hash_mismatch_count': 0, 'current_inventory_is_historical_seal': False}
     if any(gate.get(key) != value for key, value in required.items()):
+        raise ValueError('Recovery solver/evaluator seal coverage is not PASS; no archive or cleanup')
+    if posthoc:
+        if (not authorization or authorization.get('approved') is not True
+                or authorization.get('posthoc_evaluation_seal_run_id') != 'RUN_01963'
+                or set(authorization.get('posthoc_evaluation_versions', [])) != {'v3', 'v2'}
+                or authorization.get('posthoc_seal_annotation') != POSTHOC_LABEL):
+            raise ValueError('Explicit approved RUN_01963 post-hoc seal decision is missing')
+        human = gate['human_authorization']
+        if (human.get('decision_key') != 'io_recovery_authorization.human_decision_20260912'
+                or sha256_file(human['contract_path']) != human['contract_sha256']):
+            raise ValueError('Post-hoc acceptance differs from the approved contract pin')
+        pinned_contract = yaml.safe_load(Path(human['contract_path']).read_text())
+        if pinned_contract['io_recovery_authorization']['human_decision_20260912'] != authorization:
+            raise ValueError('Post-hoc acceptance authorization differs from current decision')
+        old = _read(gate['original_audit']['path'], gate['original_audit']['sha256'])
+        if (old.get('status') != 'FAIL_MISSING_PRIOR_EVALUATION_FULL_FILE_SEAL'
+                or gate.get('missing_prior_evaluation_seals') != old.get('missing_prior_evaluation_seals')
+                or gate.get('runs') != old.get('runs')
+                or gate.get('evaluation_seal_status') != 'ACCEPTED_AUTHORIZED_POSTHOC_SEAL'):
+            raise ValueError('Original historical-seal gap was changed or concealed')
+        pin = gate['posthoc_evaluation_seal']
+        seal = _read(pin['path'], pin['sha256'])
+        if (pin.get('annotation') != POSTHOC_LABEL or pin.get('historical_full_file_seal_available') is not False
+                or pin.get('run_id') != 'RUN_01963' or set(pin.get('versions', [])) != {'v3', 'v2'}
+                or seal.get('status') != 'SEALED_POST_HOC_AFTER_ARCHIVAL_INTERRUPTION'
+                or seal.get('annotation') != POSTHOC_LABEL or seal.get('run_id') != 'RUN_01963'
+                or set(seal.get('versions', [])) != {'v3', 'v2'}
+                or seal.get('original_audit') != gate.get('original_audit')
+                or seal.get('historical_full_file_seal_available') is not False):
+            raise ValueError('Post-hoc seal identity or explicit historical-gap annotation differs')
+        prior_run = next(row for row in old['runs'] if row['run_id'] == 'RUN_01963')
+        if seal.get('files') != {v: prior_run['current_scratch_inventory'][v] for v in ('v3', 'v2')}:
+            raise ValueError('Post-hoc current seal differs from audited scratch bytes')
+    elif (gate.get('status') != 'PASS' or gate.get('evaluation_seal_status') != 'PASS'
+          or gate.get('missing_prior_evaluation_seals') != []):
         raise ValueError('Recovery solver/evaluator seal coverage is not PASS; no archive or cleanup')
     if gate.get('solver_records_sha256') != sha256_file(solver_path) or gate.get('evaluation_records_sha256') != sha256_file(evaluation_path):
         raise ValueError('Recovery records differ from read-only audited inputs')
     rows = gate.get('runs', [])
     if (len(rows) != 256 or len({r['run_id'] for r in rows}) != 256
-            or any(r.get('status') != 'PASS' or r.get('evaluation_full_file_seal_missing') for r in rows)):
+            or any((r.get('status') != 'PASS' or r.get('evaluation_full_file_seal_missing'))
+                   and not (posthoc and r['run_id'] == 'RUN_01963') for r in rows)):
         raise ValueError('Individual recovery seal coverage is not complete')
     return gate
 
@@ -483,9 +629,12 @@ def recover_archive8(context, reg, gate_path, gate_hash):
     stage, scratch = Path(context['stage']), Path(context['scratch'])
     before = stage/'BATCHES/BATCH_008'
     solver, evaluation = before/'SOLVER_RECORDS_BEFORE_ARCHIVE.json', before/'EVALUATION_RECORDS_BEFORE_ARCHIVE.json'
-    gate = verify_recovery_gate(gate_path, gate_hash, solver, evaluation)
+    gate = verify_recovery_gate(gate_path, gate_hash, solver, evaluation,
+        authorization=context.get('human_decision'))
     audited = {row['run_id']: row for row in gate['runs']}
     records, evaluations = _read(solver), _read(evaluation)
+    if gate.get('status') == 'ACCEPTED_AUTHORIZED_POSTHOC_SEAL':
+        next(row for row in records if row['run_id'] == 'RUN_01963')['posthoc_evaluation_seal'] = gate['posthoc_evaluation_seal']
     if len(records) != 256 or len(evaluations) != 512 or len({r['run_id'] for r in records}) != 256:
         raise ValueError('Batch 8 terminal registry identity mismatch')
     if any(r['terminal_status'] != 'COMPLETED' for r in records) or any(r['evaluation_status'] != 'COMPLETED' for r in evaluations):
@@ -521,7 +670,250 @@ def recover_archive8(context, reg, gate_path, gate_hash):
     return result
 
 
+def load_existing_batch_terminals(stage, scratch, batch_number, *, expected_run_ids=None):
+    """Recover exact persisted rows only; do not recompute science metrics."""
+    directory = Path(stage)/f'BATCHES/BATCH_{batch_number:03d}'
+    local = Path(scratch)/f'BATCH_{batch_number:03d}'
+    native, evaluations = {}, {}
+    solver_before = directory/'SOLVER_RECORDS_BEFORE_ARCHIVE.json'
+    eval_before = directory/'EVALUATION_RECORDS_BEFORE_ARCHIVE.json'
+    solver_paths = [solver_before] if solver_before.is_file() else sorted(directory.glob('SOLVER_GROUP_*.json'))
+    eval_paths = [eval_before] if eval_before.is_file() else sorted(directory.glob('EVALUATION_WAVE_*.json'))+sorted(directory.glob('EVALUATION_PROBE_*.json'))
+    for path in solver_paths:
+        for row in _read(path):
+            native.setdefault(row['run_id'], row)
+    for path in eval_paths:
+        value = _read(path)
+        for row in value if isinstance(value, list) else [value]:
+            evaluations.setdefault((row['run_id'], row['evaluator_version']), row)
+    if expected_run_ids is None:
+        expected_run_ids = list(native)
+        expected_count = 85 if batch_number == 24 else 256
+        if len(expected_run_ids) != expected_count:
+            raise ValueError('Existing solver groups do not reconstruct the registered batch; bookkeeping repair remains')
+    for run_id in expected_run_ids:
+        if run_id not in native:
+            path = local/'03_RUNS'/run_id/'P09C_RUN_TERMINAL.json'
+            if path.is_file():
+                native[run_id] = _read(path)
+        for version in ('v3', 'v2'):
+            key = (run_id, version)
+            if key not in evaluations:
+                path = local/'12_OFFLINE_EVALUATION'/version/run_id/'EVALUATION_RESULT.json'
+                if path.is_file():
+                    evaluations[key] = _read(path)
+    if set(native) != set(expected_run_ids) or set(evaluations) != {(r, v) for r in expected_run_ids for v in ('v3', 'v2')}:
+        raise ValueError('Existing terminal rows incomplete; never repeat a solver/evaluator to repair bookkeeping')
+    records = [repair_native_record(native[r], stage) for r in expected_run_ids]
+    rows = [evaluations[(r, v)] for r in expected_run_ids for v in ('v3', 'v2')]
+    check_science_terminals(records, rows)
+    if any(row.get('evaluation_status') not in ('COMPLETED', 'NOT_RUN_ALGORITHM_FAILURE') for row in rows):
+        raise ValueError('Evaluation call did not occur or row metadata is incomplete; repair without repeated evaluation')
+    bookkeeping_note(stage, 'load_existing_batch_terminals', 'reused exact BEFORE/GROUP/WAVE/per-run rows',
+                     batch=batch_number, solver_calls=0, evaluator_calls=0)
+    return records, rows
+
+
+def finish_existing_archive_cleanup(job, receipt, destination, context, output, monitor):
+    """Finish receipt-authorized cleanup; never archive an incomplete source."""
+    root, stage = Path(context['root']), Path(context['stage'])
+    batch = job['batch']
+    directories = [stage/f'BATCHES/BATCH_{batch:03d}']
+    if root.is_dir():
+        directories.extend(path for path in root.iterdir() if path.is_dir() and path.name.startswith(f'BATCH_{batch:03d}_'))
+    deleted, intents, prepared = {}, {}, {}
+    for directory in directories:
+        ledger = directory/'CLEANUP_LEDGER.jsonl'
+        if ledger.is_file():
+            for line in ledger.read_text().splitlines():
+                event = json.loads(line)
+                if event.get('status') == 'DELETED':
+                    deleted[event['path']] = event
+                elif event.get('status') == 'DELETE_INTENT':
+                    intents[event['path']] = event
+        plan_path = directory/'PREPARED_CLEANUP_PLAN.json'
+        if plan_path.is_file():
+            for item in _read(plan_path).get(job['record']['run_id'], []):
+                prepared[item['path']] = item
+    for item in plan_prepared_cleanup(job, receipt, destination, context):
+        prepared.setdefault(item['path'], item)
+    expected = []
+    original_roots = [('solver', Path(job['record']['output_root']))] + [
+        (version, Path(job['scratch_batch'])/'12_OFFLINE_EVALUATION'/version/job['record']['run_id']) for version in ('v3', 'v2')]
+    for role, directory in original_roots:
+        for relative, pin in receipt['original_files'][role].items():
+            if Path(relative).is_absolute() or '..' in Path(relative).parts:
+                raise ValueError('Receipt cleanup member escapes its original role')
+            expected.append({'path': str(directory/relative), **pin, 'cleanup_role': 'receipt_original_'+role})
+    expected.extend(prepared.values())
+    # Preflight every role, including files already deleted, before another unlink.
+    plan = []
+    for item in expected:
+        path = Path(item['path'])
+        if (not path.is_relative_to(Path(job['scratch_batch'])) or path == Path(job['scratch_batch'])
+                or any(parent.is_symlink() for parent in (path, *path.parents))):
+            raise ValueError('Recovered cleanup path is outside its owned scratch batch')
+        if item.get('cleanup_role', '').endswith('staging'):
+            staging_parent = Path(job['scratch_batch'])/'ARCHIVE_STAGING'
+            names = {job['record']['run_id'], *[job['record']['run_id']+f'.prepare_retry_{i:02d}' for i in (1, 2, 3)]}
+            if not path.is_relative_to(staging_parent) or not any(p.name in names for p in path.parents):
+                raise ValueError('Recovered prepared member belongs to another run')
+        if path.exists():
+            if not path.is_file() or path.stat().st_size != item['size_bytes'] or sha256_file(path) != item['sha256']:
+                raise ValueError('Remaining cleanup member differs from verified receipt/plan')
+            status = 'DELETE_REMAINING_VERIFIED'
+        else:
+            prior = deleted.get(str(path), {})
+            if prior.get('sha256') == item['sha256'] and prior.get('size_bytes') == item['size_bytes']:
+                status = 'ALREADY_DELETED_LEDGER_VERIFIED'
+            else:
+                intent = intents.get(str(path), {})
+                if intent.get('sha256') != item['sha256'] or intent.get('size_bytes') != item['size_bytes']:
+                    raise ValueError('Absent cleanup member lacks matching prior deletion ledger evidence')
+                status = 'ABSENT_WITH_MATCHING_DELETE_INTENT'
+        plan.append({**item, 'recovery_status': status, 'archive_receipt': str(Path(destination)/'ARCHIVE_RECEIPT.json')})
+    write_json(Path(output)/'CLEANUP_RECOVERY_PLANS'/f"{job['record']['run_id']}.json", plan)
+    for item in plan:
+        if item['recovery_status'] == 'ABSENT_WITH_MATCHING_DELETE_INTENT':
+            append_json(Path(output)/'CLEANUP_LEDGER.jsonl', {'status': 'DELETED', **item,
+                'bookkeeping_recovery': 'verified archive receipt plus exact prior DELETE_INTENT and current absence',
+                'current_file_hash_performed': False, 'unlink_performed_now': False})
+            continue
+        if item['recovery_status'] != 'DELETE_REMAINING_VERIFIED':
+            continue
+        monitor.assert_healthy()
+        path = Path(item['path'])
+        if path.stat().st_size != item['size_bytes'] or sha256_file(path) != item['sha256']:
+            raise ValueError('Remaining cleanup member changed after preflight')
+        append_json(Path(output)/'CLEANUP_LEDGER.jsonl', {'status': 'DELETE_INTENT', **item})
+        path.unlink()
+        append_json(Path(output)/'CLEANUP_LEDGER.jsonl', {'status': 'DELETED', **item})
+    append_json(root/'ARCHIVE_PENDING_LEDGER.jsonl', {'status': 'ARCHIVE_RESOLVED', 'run_id': job['record']['run_id'],
+        'batch': batch, 'archive_receipt': str(Path(destination)/'ARCHIVE_RECEIPT.json'),
+        'recovery_kind': 'existing_verified_receipt_remaining_exact_cleanup', 'utc': now()})
+    bookkeeping_note(stage, 'finish_existing_archive_cleanup', 'all native, evaluator and staging files reconciled against receipt and deletion ledger',
+        batch=batch, run_id=job['record']['run_id'], previously_deleted_count=sum(p['recovery_status'] == 'ALREADY_DELETED_LEDGER_VERIFIED' for p in plan),
+        newly_deleted_count=sum(p['recovery_status'] == 'DELETE_REMAINING_VERIFIED' for p in plan), archive_calls=0)
+    return plan
+
+
+def existing_archive_resolution(record, rows, context, batch_number):
+    """Repair missing resolution sidecars from a durable successful receipt."""
+    root = Path(context['root'])
+    resolved = root/'RESOLVED_RUNS'/record['run_id']
+    item_path, rows_path, ref_path = (resolved/name for name in ('RUN_RECORD.json', 'EVALUATION_RECORDS.json', 'RECEIPT_REFERENCE.json'))
+    item = _read(item_path) if item_path.is_file() else None
+    reference = _read(ref_path) if ref_path.is_file() else None
+    destination = Path(item['archive_receipt']).parent if item is not None else None
+    durable_archive = False
+    ledger = root/'ARCHIVE_IO_LEDGER.jsonl'
+    if ledger.is_file():
+        for line in ledger.read_text().splitlines():
+            event = json.loads(line)
+            if event.get('status') == 'ARCHIVED' and event.get('run_id') == record['run_id']:
+                candidate = Path(event['destination'])
+                if destination is None or candidate == destination:
+                    destination = candidate
+                    durable_archive = True
+    if destination is None or (reference is None and not durable_archive):
+        return None
+    receipt, digest = _read(destination/'ARCHIVE_RECEIPT.json', reference['sha256'] if reference else None, with_digest=True)
+    if receipt.get('status') != 'ARCHIVE_VERIFIED' or receipt.get('run_id') != record['run_id']:
+        raise ValueError('Existing receipt is not the registered successful archive')
+    generated, generated_rows = _relocate(record, rows, destination, Path(context['scratch'])/f'BATCH_{batch_number:03d}')
+    resolved.mkdir(parents=True, exist_ok=True)
+    repaired = []
+    if item is None:
+        item = generated
+        write_json(item_path, item)
+        repaired.append('RUN_RECORD.json')
+    elif item.get('run_id') != record['run_id']:
+        raise ValueError('Existing resolved run identity differs')
+    if rows_path.is_file():
+        archived_rows = _read(rows_path)
+        if {(r['run_id'], r['evaluator_version']) for r in archived_rows} != {(record['run_id'], v) for v in ('v3', 'v2')}:
+            raise ValueError('Existing resolved evaluator identities differ')
+    else:
+        archived_rows = generated_rows
+        write_json(rows_path, archived_rows)
+        repaired.append('EVALUATION_RECORDS.json')
+    if reference is None:
+        write_json(ref_path, {'path': str(destination/'ARCHIVE_RECEIPT.json'), 'sha256': digest,
+            'hash_source': 'already-read receipt metadata bytes; durable ARCHIVED ledger; no G payload readback'})
+        repaired.append('RECEIPT_REFERENCE.json')
+    if repaired:
+        bookkeeping_note(context['stage'], 'restore_resolution_sidecars', 'missing metadata reconstructed from successful archive receipt',
+            batch=batch_number, run_id=record['run_id'], repaired_files=repaired, archive_calls=0)
+    return item, archived_rows, receipt, destination
+
+
+def recover_archive_batch(context, reg, batch_number, *, records=None, evaluations=None, expected_run_ids=None):
+    """Archive-only continuation after a controller bookkeeping interruption."""
+    stage, scratch, root = Path(context['stage']), Path(context['scratch']), Path(context['root'])
+    if records is None or evaluations is None:
+        records, evaluations = load_existing_batch_terminals(stage, scratch, batch_number, expected_run_ids=expected_run_ids)
+    check_science_terminals(records, evaluations)
+    number = 1
+    output = root/f'BATCH_{batch_number:03d}_BOOKKEEPING_RECOVERY_{number:03d}'
+    while output.exists():
+        number += 1
+        output = root/f'BATCH_{batch_number:03d}_BOOKKEEPING_RECOVERY_{number:03d}'
+    output.mkdir(parents=True, exist_ok=False)
+    resolved_records, resolved_rows, unfinished, unfinished_rows, cleanup_existing = [], [], [], [], []
+    for record in records:
+        own_rows = [row for row in evaluations if row['run_id'] == record['run_id']]
+        existing = existing_archive_resolution(record, own_rows, context, batch_number)
+        if existing is not None:
+            item, archived_rows, receipt, destination = existing
+            resolved_records.append(item)
+            resolved_rows.extend(archived_rows)
+            job = load_pending(root).get(record['run_id'], {'record': record,
+                'evaluations': own_rows, 'scratch_batch': str(scratch/f'BATCH_{batch_number:03d}'), 'batch': batch_number})
+            cleanup_existing.append((job, receipt, destination))
+            continue
+        unfinished.append(record)
+        unfinished_rows.extend(own_rows)
+    with ResourceMonitor(scratch, reg.clean_root, output/'RESOURCE_SAMPLES.jsonl') as monitor:
+        monitor.begin_phase('archive_cleanup')
+        if unfinished:
+            context = {**context, 'current_batch_run_count': len(records),
+                       'receipt_cleanup_run_ids': [job['record']['run_id'] for job, _, _ in cleanup_existing]}
+            final, rows, receipts, archive = archive_batch(unfinished, unfinished_rows, context=context,
+                scratch_batch=scratch/f'BATCH_{batch_number:03d}', output=output, batch_number=batch_number, monitor=monitor)
+        else:
+            final, rows, receipts, archive = [], [], [], {'status': 'PASS', 'pending_run_ids': []}
+        for job, receipt, destination in cleanup_existing:
+            finish_existing_archive_cleanup(job, receipt, destination, context, output, monitor)
+        remaining_pending = sorted(load_pending(root))
+        archive.update(status='PASS_WITH_ARCHIVE_PENDING' if remaining_pending else 'PASS', pending_run_ids=remaining_pending)
+        phase = monitor.end_phase()
+    final, rows = resolved_records+final, resolved_rows+rows
+    if resolved_records:
+        bookkeeping_note(stage, 'restore_cleaned_archive_records', 'completed receipt and existing resolved rows reused',
+                         batch=batch_number, count=len(resolved_records))
+    # Separate final names keep archive_batch's partial subset record immutable.
+    write_json(output/'RECOVERED_RUN_RECORDS.json', final)
+    write_json(output/'RECOVERED_EVALUATION_RECORDS.json', rows)
+    result = {'status': archive['status'], 'batch': batch_number, 'run_count': len(final), 'evaluation_count': len(rows),
+        'solver_calls': 0, 'evaluator_calls': 0, 'provider_calls': 0, 'archive': archive,
+        'measurements': monitor.result(), 'archive_phase': phase, 'bookkeeping_recovery': True,
+        'run_records_path': str(output/'RECOVERED_RUN_RECORDS.json'),
+        'evaluation_records_path': str(output/'RECOVERED_EVALUATION_RECORDS.json'),
+        'scientific_code_commit': SCIENTIFIC_COMMIT, 'io_fix_code_commit': context['freeze']['io_fix_code_commit']}
+    write_json(output/'BATCH_RESULT.json', result)
+    append_json(root/'IO_BATCH_LEDGER.jsonl', {'event': 'BATCH_RECOVERED', 'result_path': str(output/'BATCH_RESULT.json'), **result})
+    bookkeeping_note(stage, 'recover_archive_batch', 'archive-only continuation completed from existing science rows',
+                     batch=batch_number, result_path=str(output/'BATCH_RESULT.json'))
+    return result
+
+
 def batch_result_path(stage, root, batch):
+    ledger = Path(root)/'IO_BATCH_LEDGER.jsonl'
+    if ledger.is_file():
+        for line in reversed(ledger.read_text().splitlines()):
+            row = json.loads(line)
+            if row.get('batch') == batch and row.get('result_path'):
+                return Path(row['result_path'])
     recovered = Path(root)/'BATCH_008_RECOVERY/BATCH_RESULT.json'
     return recovered if batch == 8 and recovered.is_file() else Path(stage)/f'BATCHES/BATCH_{batch:03d}/BATCH_RESULT.json'
 
@@ -549,12 +941,14 @@ def collect_final_records(stage, root):
         raise ValueError('Final execution requires all explicit batches 1 through 24')
     records, evaluations = {}, {}
     for number in range(1, 25):
-        directory = batch_result_path(stage, root, number).parent
-        for row in _read(directory/'RUN_RECORDS.json'):
+        path = batch_result_path(stage, root, number)
+        result = _read(path)
+        directory = path.parent
+        for row in _read(Path(result.get('run_records_path', directory/'RUN_RECORDS.json'))):
             if row['run_id'] in records:
                 raise ValueError('Duplicate completed run identity across batches')
             records[row['run_id']] = row
-        for row in _read(directory/'EVALUATION_RECORDS.json'):
+        for row in _read(Path(result.get('evaluation_records_path', directory/'EVALUATION_RECORDS.json'))):
             key = (row['run_id'], row['evaluator_version'])
             if key in evaluations:
                 raise ValueError('Duplicate evaluation identity across batches')
@@ -581,12 +975,13 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--local-config', required=True)
     parser.add_argument('--contract', required=True)
-    parser.add_argument('--operation', choices=('freeze-io', 'recover-archive8', 'continue-io'), required=True)
+    parser.add_argument('--operation', choices=('freeze-io', 'recover-archive8', 'recover-archive', 'continue-io'), required=True)
     parser.add_argument('--io-fix-id', required=True)
     parser.add_argument('--input-gate')
     parser.add_argument('--input-gate-sha256')
     parser.add_argument('--write-workers', type=int, default=6)
     parser.add_argument('--stop-after-batch', type=int, default=8)
+    parser.add_argument('--batch-number', type=int)
     args = parser.parse_args(argv)
     args.contract, args.local_config = str(Path(args.contract).resolve()), str(Path(args.local_config).resolve())
     reg = registry(args.local_config)
@@ -603,7 +998,8 @@ def main(argv=None):
             raise ValueError('Explicit independent recovery gate path and SHA required')
         before = stage/'BATCHES/BATCH_008'
         verify_recovery_gate(args.input_gate, args.input_gate_sha256,
-            before/'SOLVER_RECORDS_BEFORE_ARCHIVE.json', before/'EVALUATION_RECORDS_BEFORE_ARCHIVE.json')
+            before/'SOLVER_RECORDS_BEFORE_ARCHIVE.json', before/'EVALUATION_RECORDS_BEFORE_ARCHIVE.json',
+            authorization=current.get('io_recovery_authorization', {}).get('human_decision_20260912'))
     freeze = _read(root/'IO_FIX_FREEZE.json')
     validate_io_freeze(freeze, reg)
     scratch = Path(yaml.safe_load(Path(args.local_config).read_text())['paths']['canonical541_v2_scratch'])
@@ -619,7 +1015,8 @@ def main(argv=None):
     if filesystem != 'ext4':
         raise ValueError('I/O recovery requires original WSL ext4 scratch')
     context = {'root': str(root), 'stage': str(stage), 'scratch': str(scratch), 'freeze': freeze,
-               'io_fix_id': args.io_fix_id, 'write_workers': args.write_workers}
+               'io_fix_id': args.io_fix_id, 'write_workers': args.write_workers,
+               'human_decision': current.get('io_recovery_authorization', {}).get('human_decision_20260912')}
     if not 1 <= args.write_workers <= 6 or not 8 <= args.stop_after_batch <= 24:
         raise ValueError('I/O workers/batch bound exceeds authorization')
     try:
@@ -627,6 +1024,11 @@ def main(argv=None):
             if not args.input_gate or not args.input_gate_sha256:
                 raise ValueError('Explicit independent recovery gate path and SHA required')
             recover_archive8(context, reg, args.input_gate, args.input_gate_sha256)
+            return 0
+        if args.operation == 'recover-archive':
+            if args.batch_number is None or not 9 <= args.batch_number <= 24:
+                raise ValueError('Archive-only generic recovery requires explicit batch 9 through 24')
+            recover_archive_batch(context, reg, args.batch_number)
             return 0
         from .contract import load_contract, selection
         from .runner import create_jobs, do_batch
@@ -644,8 +1046,17 @@ def main(argv=None):
             raise ValueError('Batch 8 archive recovery must close before later science batches')
         for number in range(start, args.stop_after_batch+1):
             validate_io_freeze(freeze, reg)
-            do_batch(number, jobs[(number-1)*256:number*256], contract, reg, stage, scratch,
-                     SCIENTIFIC_COMMIT, args, solver_workers(machine_state()['nproc']), c00)
+            current_jobs = jobs[(number-1)*256:number*256]
+            try:
+                do_batch(number, current_jobs, contract, reg, stage, scratch,
+                         SCIENTIFIC_COMMIT, args, solver_workers(machine_state()['nproc']), c00)
+            except ScientificStop:
+                raise
+            except Exception as error:
+                bookkeeping_note(stage, 'automatic_archive_only_recovery', str(error), batch=number,
+                                 no_repeated_scientific_invocation=True)
+                recover_archive_batch(context, reg, number,
+                    expected_run_ids=[job['source']['run_id'] for job in current_jobs])
         if args.stop_after_batch == 24:
             records, evaluations = collect_final_records(stage, root)
             from ..clean5_degradation.runtime import checkpoint
@@ -659,10 +1070,15 @@ def main(argv=None):
                 'code_commit': SCIENTIFIC_COMMIT, 'io_fix_code_commit': freeze['io_fix_code_commit'], 'completed_utc': now()})
         return 0
     except Exception as error:
-        # Append-only I/O scope stop; earlier STOPPED.json artifacts are immutable.
-        append_json(root/'IO_STOP_LEDGER.jsonl', {'status': 'STOPPED_IO_RECOVERY', 'operation': args.operation,
-            'reason': str(error), 'exception': type(error).__name__, 'utc': now(), 'scene_retained': True})
-        raise
+        classification = classify_controller_failure(error)
+        if classification['status'] == 'SCIENTIFIC_STOP':
+            append_json(root/'IO_STOP_LEDGER.jsonl', {**classification, 'operation': args.operation,
+                'exception': type(error).__name__, 'utc': now(), 'scene_retained': True})
+            raise
+        bookkeeping_note(stage, args.operation, str(error), repair_status='ROOT_REPAIR_WITHOUT_NEW_PERMISSION',
+                         scientific_stop=False, scene_retained=True)
+        print('BOOKKEEPING_REPAIR_REQUIRED', str(error), flush=True)
+        return 2
 
 
 if __name__ == '__main__':
