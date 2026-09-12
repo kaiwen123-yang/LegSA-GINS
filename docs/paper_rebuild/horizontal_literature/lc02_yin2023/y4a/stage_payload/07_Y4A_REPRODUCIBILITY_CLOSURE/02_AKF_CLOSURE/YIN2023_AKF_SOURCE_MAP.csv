@@ -1,0 +1,26 @@
+semantic,primary_location,primary_content,secondary_source,secondary_content,uniquely_closed,decision,provenance
+residual_vector,Yin Eq.6,"bar_V_k=H_k Xhat_k-Z_k; Xhat stage not qualified",Official author response,"confirms residual not innovation and repeats H Xhat_k-Z_k with bar residual glyph",false,EXPRESSION_CLOSED_STAGE_UNRESOLVED,PAPER_DIRECT_PLUS_AUTHOR_RESPONSE
+residual_sign,Yin Eq.6,"predicted minus observed",AKF state update,"uses observed minus predicted; quadratic statistic sign-invariant",true,CLOSED,PAPER_DIRECT
+residual_norm,Yin Eq.6,bar_V_k^T bar_V_k,Yin VOR and v2,identical,true,EUCLIDEAN_SQUARED_NORM,PAPER_DIRECT
+denominator_symbol,Yin Eq.6,tr(P_(bar_V_k)),Yin immediately below Eq.6,"P_(bar_V_k) called covariance of a-priori state vector",true,LITERAL_SYMBOL_CLOSED,PAPER_DIRECT
+covariance_equation,Yin Eq.6,"P_(bar_V_k)=Phi_k P_(Xhat_(k-1)) Phi^T+Q_k; right Phi has no explicit k",Rendered v2 p.6 and official HTML transport lines104-110,identical,true,EXACT_PRINTED_TRANSCRIPTION,PAPER_DIRECT
+covariance_candidate_mapping,Y4A source reconciliation,"Phi_(k-1) P_(k-1)^plus Phi_(k-1)^T+Q_k",KF-GINS base model,"possible mapping but not the printed Yin equation",false,UNSELECTED_CANDIDATE,PAPER_DERIVED_POLICY_CANDIDATE
+denominator_dimension,Yin Eq.6,"3D residual numerator divided by trace of 21D state covariance",Jiang 2020 one-page synopsis,"no executable dimensional reconciliation",false,DIMENSIONALLY_INCONSISTENT_AS_PRINTED,CURRENTLY_UNKNOWN
+denominator_competing_semantics,Yin Eq.6,a-priori state covariance,CN117647251A claim 6,measurement-vector covariance,false,MULTIPLE_ATTRIBUTABLE_SEMANTICS,POST_PUBLICATION_RELATED_NOT_EXACT
+normalization,Yin Eq.6,no degrees-of-freedom or unit normalization printed,refs35-39 source chain,"no attributable Yin-specific completion",false,CURRENTLY_UNKNOWN,CURRENTLY_UNKNOWN
+threshold,Yin Eq.7,"k generally 1.0-1.5; experiment k=1.0",Yin VOR and v2,identical,true,k=1,PAPER_DIRECT
+alpha_piecewise,Yin Eq.7,"alpha=1 when |Delta_X_tilde_k|<=k; alpha=k/|Delta_X_tilde_k| when greater",Yin VOR and v2,"absolute-value glyph is identical; nonnegative square-root makes it numerically redundant only as a derived observation",true,CLOSED_FOR_FINITE_NONNEGATIVE_STATISTIC,PAPER_DIRECT_PLUS_DERIVED_EQUIVALENCE
+alpha_gain,Yin AKF bullet,"P^-/alpha enters gain on both numerator and projected covariance",Yin VOR and v2,identical,true,CLOSED_AS_PRINTED,PAPER_DIRECT
+posterior_covariance,Yin AKF bullet,"P_ak=(1/alpha)(I-K_ak H)P^-",Yin VOR and v2,identical,true,CLOSED_AS_PRINTED_NON_JOSEPH,PAPER_DIRECT
+zero_trace_policy,Yin Eq.6,not stated,source chain,no floor or skip rule,false,CURRENTLY_UNKNOWN,CURRENTLY_UNKNOWN
+nonfinite_policy,Yin Sec.2.3.2,not stated,source chain,no NaN/Inf behavior,false,CURRENTLY_UNKNOWN,CURRENTLY_UNKNOWN
+embedded_measurement_R,Yin Sec.2.3 and Figure3,improved PDOP^2 Q r^2 feeds proposed robust-adaptive method,Y0-Y3 improved-R contract,closed,true,CLOSED,PAPER_DIRECT
+standalone_AKF_measurement_R,Yin comparison experiment,not uniquely stated,Y0-Y3 branch boundary,unknown,false,CURRENTLY_UNKNOWN,CURRENTLY_UNKNOWN
+same_branch_prior,Yin AKF/RKF bullets,"both use Xhat_(k/k-1) and P_(k/k-1)",Yin method text,"calculate adaptive and robust filtering separately then fuse",true,SAME_UNMODIFIED_PRIOR_CLOSED,PAPER_DIRECT
+foundational_adaptive_source,Yang-He-Xu 2001,"adaptively robust filtering; author upload uses V_i/r_i and dependent max-based mapping",Official Springer metadata and attributable author upload,"candidate family context does not uniquely define Yin Eq.6",false,CANDIDATE_CONTEXT_ONLY,CITED_SOURCE_CANDIDATE
+survey_source,Yang-Ren-Xu 2013,"Main Progress of Adaptively Robust Filter with Applications in Navigation; seven-page official abstract/metadata",Official journal endpoint,"pdfUrl and previewPdfUrl are null; full equations unavailable",false,ABSTRACT_CONTEXT_ONLY,CITED_SOURCE_ACCESS_BOUNDARY
+dissertation_synopsis,Jiang 2020,"exact one-page 49(10):1376-1376 synopsis",Official DOI and index,"no attributable full dissertation was accessed",false,SYNOPSIS_ONLY,CITED_SOURCE_ACCESS_BOUNDARY
+adaptive_navigation_source,Jiang 2021,"11-page article metadata",Official Springer and NCWU endpoints,"subscription/exclusive Springer access; no full equations inspected",false,METADATA_ONLY,CITED_SOURCE_ACCESS_BOUNDARY
+robust_chain_boundary,Yang-Cheng-Shum-Tapley 1999,"standardized residual v_i/sigma_i and MAD robust scale in author upload",Official Springer metadata and attributable author upload,"robust-estimation chain supplies a different statistic rather than Yin Eq.6",false,DIFFERENT_CANDIDATE_NOT_UNIQUE,CITED_SOURCE_CANDIDATE
+dependent_observation_boundary,Yang 1994,"direct dependent-observation source was inaccessible; ResearchGate request-only",Official Springer metadata and ResearchGate boundary,"cannot uniquely complete Yin's adaptive statistic",false,INACCESSIBLE_DIRECT_EQUATIONS,CITED_SOURCE_ACCESS_BOUNDARY
+author_response_equation6,Official peer-review author response,"bar_V_k is residual H Xhat_k-Z_k; P_(bar_V_k) called prior-state covariance",Jina UTF-8 transport capture,"18,305 bytes; SHA-256 46c6bd33f49aab98ea0b9333f1ddce3298991ae55422ed440806a7d2dca313ce",false,STRENGTHENS_MULTIPLE_PLAUSIBLE_COMPLETIONS,PAPER_DIRECT_TRANSPORT_CAPTURE

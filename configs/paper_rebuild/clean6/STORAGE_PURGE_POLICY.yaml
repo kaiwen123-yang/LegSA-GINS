@@ -1,0 +1,201 @@
+schema_version: clean6.storage_purge_policy.v2
+task: P-09ab
+authorization: human_authorized_inventory_quarantine_and_conditional_purge
+base_commit: 68ee6b3c5e918f5b24f25e442f7bb13c5fecb263
+continuation_amendment:
+  authorized_from_commit: 3cbe53b5aad3f2ce2cb7e631639d1bd926acc055
+  task: P-09ab_second_correction_policy_v2
+  regenerate_inventory_and_deletion_plan: true
+  prior_B_hash_reuse: only_for_same_source_path_size_and_pre_move_fingerprint
+  new_candidates_sha256: retained_exact_path_seal_else_fresh_streaming_hash
+  post_B_candidate_payload_sha256_recomputed: false
+  preserve_prior_failed_audit_and_empty_quarantine: true
+  fresh_preflight_required_for_continuation: true
+  quarantine_and_purge_require_same_preflight_receipt: true
+  any_preflight_FAIL_prevents_quarantine_dispatch: true
+  any_stage_exception_or_nonzero_exit_stops_dispatch: true
+  automatic_retry_or_rollback: false
+scope:
+  inventory_root: <CLEAN_ROOT>/stages
+  quarantine_root: <CLEAN_ROOT>/_PURGE_PENDING/<UTC_TIMESTAMP>
+  audit_root: <CLEAN_ROOT>/storage_purge/<UTC_TIMESTAMP>
+  tracked_ledger: docs/paper_rebuild/purge/DELETION_LEDGER_<UTC_TIMESTAMP>.json.gz
+  scientific_execution_count: 0
+  raw_content_open_count: 0
+  p09c_execution_authorized: false
+  original_directories_retained: true
+precedence: [KEEP, BULK_DELETABLE, UNKNOWN]
+keep:
+  immutable_roots:
+    - data/raw/**
+    - '**/01_RAW_HASH_LOCK/**'
+    - all_git_worktrees_discovered_with_git_worktree_list
+    - <HOME>/*.zip
+    - frozen_executable_and_parent_build_directory
+    - archived_evaluator_directory
+    - pinned_RTKLIB_toolchain_directories
+  filename_patterns:
+    - '*_SEAL*.json'
+    - '*MANIFEST*.json'
+    - '*REGISTRY*.csv'
+    - '*CONTRACT*.yaml'
+    - '*CONTRACT*.json'
+    - '*DECISION*.json'
+    - '*GATE*.json'
+    - '*_LOCK*.csv'
+    - '*.md'
+    - '*.yaml'
+    - '*.yml'
+  nonbulk_subtree_name_contains:
+    - AGGREGATE
+    - PROVIDER_FREEZE
+    - PARITY_PROVIDERS
+    - PROBES
+    - SEQUENCE_CONTRACT
+    - DECISION
+    - HORIZONTAL
+  providers:
+    protect_provider_directories: true
+    roles: [IMU_input, GNSS_input, raw_doppler, go2_prior, dual_yaw, source_quality]
+    ambiguous_input_or_provider_filename: KEEP
+  run_records:
+    filenames:
+      - RUN_MANIFEST.json
+      - summary.json
+      - EVALUATION_RESULT.json
+      - P0*_RUN_TERMINAL.json
+      - CLEAN5_FORMAL_RUN_MANIFEST.json
+      - PORT_INPUT_TIMELINE_SNAPSHOT.json
+    small_json_csv_max_bytes: 1048576
+    small_json_csv_scope: all_directories_conservative_superset_of_run_directories
+    unit_note: 1_MiB_conservatively_includes_all_files_at_or_below_1_MB
+  complete_subtrees:
+    - <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL
+    - CLEAN4_final_method_directories_resolved_from_FINAL_METHOD_REGISTRY.csv_including_NAV
+  plotting_figures_atlas_entire_subtrees: true
+  reference_closure:
+    sources:
+      - <CODE_ROOT>/AGENTS.md#section_3
+      - <CODE_ROOT>/docs/paper_rebuild/CONVERSATION_HANDOFF.md#section_6
+      - <HOME>/clean5_handoff.zip
+      - <HOME>/clean5_handoff_v2.zip
+      - <HOME>/c541_handoff.zip
+    direct_record_and_package_source_files: KEEP_even_if_bulk_class
+    directory_references: directory_must_remain_not_recursive_bulk_exemption
+    manifest_payload_hash_entries: provenance_edges_not_recursive_record_retention
+    unresolved_required_record_reference: FAIL_C2
+  symlinks_and_special_files: KEEP_never_follow
+  multiply_linked_files: KEEP
+bulk_deletable:
+  requires_both_filename_class_and_family: true
+  exact_filenames:
+    - KF_GINS_Navresult.nav
+    - KF_GINS_STD.txt
+    - LegSA_PORT_NAV.nav
+    - LegSA_PORT_STD.csv
+    - PORT_GNSS_UPDATE_TRACE.csv
+    - error_series.csv
+    - error_series.csv.gz
+  staging_copies:
+    - EXACT_EVALUATOR_INPUT.nav
+    - EVAL_NAV_V3.nav
+  strace_patterns: ['*.strace', 'strace_*.log']
+  solver_logs:
+    filenames: [stdout.log, stderr.log, solver_stdout.log, solver_stderr.log, solver_stdout.txt, solver_stderr.txt]
+    requires_solver_run_directory: true
+  evaluator_logs:
+    filenames: [evaluator_stdout.log, evaluator_stdout.txt]
+    requires_evaluation_directory: true
+  temporary_directories:
+    component_patterns: [tmp, temp, .tmp, .temp, 'tmp_*', 'tmp-*']
+    requires_approved_family: true
+    keep_precedence_still_applies: true
+    deletion_unit: individual_regular_file_only
+  extension_expansion_v2:
+    requires_approved_family: true
+    directory_types: [RUNS_OUTPUTS, EVALUATION, LOGS, OTHER]
+    single_file_strictly_larger_than_bytes: 1000000
+    unit_note: decimal_MB_for_expansion_existing_1048576_byte_JSON_CSV_KEEP_remains_prioritized
+    extensions: ['.csv', '.txt', '.nav', '.log', '.strace', '.raw']
+    compressed_extension: '.csv.gz'
+    compressed_filename_patterns: ['error_series.csv.gz', 'error_series_*.csv.gz', 'error_series-*.csv.gz']
+    applied_after_all_original_KEEP_rules: true
+    directory_type_definition: storage_purge.directory_type
+  families:
+    canonical541_v1:
+      stage: CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX
+      attempt: .attempt_20260808T200855P0800
+      directories: [08_FULL_ALGORITHM_RUNS, 10_INTERNAL_ABLATION_RUNS, 12_OFFLINE_EVALUATION]
+    clean5_sequences_v1_v2:
+      stages: [CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE, CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE]
+      directory_patterns: ['04_SOLVER_RUNS*', '07_OFFLINE_EVALUATION*']
+    clean5_parity_ladder_and_p05:
+      stage: CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF
+      parent_paths: ['.', 10_IMU_PROCESSING, 12_PARITY_GENERALIZATION/BY2H, 12_PARITY_GENERALIZATION/BY2O, 13_NOISE_MODEL_SENSITIVITY]
+      directories: [03_PARITY_RUNS, 07_OFFLINE_EVALUATION]
+    clean5_p07:
+      stage: CLEAN5_DEGSUBSET_BY2
+      directories: [03_RUNS, 07_EVALUATION]
+      chains: [CLEAN5_DEGSUBSET_CAL, CLEAN5_DEGSUBSET_V2S]
+    superseded_attempts:
+      stage_prefixes: [CLEAN1, CLEAN2, CLEAN3R3, CLEAN3R4, CLEAN4]
+      attempt_component_pattern: '.attempt_*'
+      requires_unreferenced_by_AGENTS_section3_and_CLEAN4_registry: true
+    clean4_nonfinal_attempts:
+      stage: CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON
+      requires_attempt_directory_and_registry_confirmed_nonfinal_method: true
+      unknown_final_status: UNKNOWN
+unknown:
+  action: retain_and_list_every_file
+  classification_must_not_expand_for_space_target: true
+inventory:
+  outputs: [STORAGE_INVENTORY.csv, DELETION_PLAN.csv, UNKNOWN_FILES.csv, REFERENCE_CLOSURE.json, DELETION_LEDGER.json]
+  group_by: stage_and_attempt_directory
+  sizes: logical_bytes_with_disk_available_reported_separately
+  evidence: sha256_occurrence_in_retained_seal_or_manifest_else_fresh_streaming_sha256
+  no_raw_or_provider_payload_hashing: true
+  ledger_paths: portable_aliases_with_exact_original_relative_path
+gates:
+  C1: every_file_bulk_class_and_family_inside_stages_keep_matches_zero
+  C2: all_required_record_references_exist_after_simulated_removal
+  C3: every_exact_file_has_sha256_size_evidence_and_quarantine_timestamp_in_durable_ledger
+  C4: same_filesystem_plain_os_rename_destination_lexists_false_then_source_absent_destination_present_and_ledger_size_equal_B_sha256_reused
+  C5: post_quarantine_storage_regression_reference_paths_decision_aggregate_three_sequence_CAL_readability_PASS
+  failure_action: stop_preserve_current_quarantine_no_purge
+  pre_move_gates: [C1, C2, C3]
+  purge_requires: [C1, C2, C3, C4, C5]
+physical_operations:
+  supervisor_only: true
+  exact_manifest_only: true
+  forbid_glob_deletion: true
+  forbid_symlink_following_in_any_path_component: true
+  forbid_cross_filesystem_copy_fallback: true
+  forbid_protected_root_target: true
+  checkpoint_after_every_move_and_unlink: true
+  quarantine_progress_every_files: 1000
+  quarantine_progress_file: QUARANTINE_PROGRESS.json
+  rename_flags: none
+  rename_single_exception: stop_immediately_preserve_partial_quarantine_no_rollback_no_purge
+  directory_rename: only_if_all_contained_files_are_in_exact_plan
+  implementation_move_unit: individual_regular_file
+  content_identity: new_B_ledger_sha256_reused_no_payload_rehash_in_C4_or_D
+  rename_postconditions: [source_absent, destination_present, destination_size_equals_ledger_size]
+  cross_rename_stat_metadata_equality: forbidden
+  pre_unlink_checks: exact_listed_path_no_symlink_single_regular_file_ledger_size
+  source_change_or_destination_collision: stop
+  purge: unlink_only_listed_verified_quarantined_files_then_rmdir_empty_quarantine_directories
+  no_original_stage_or_run_directory_removal: true
+  unexpected_quarantine_entry: FAIL_no_recursive_delete
+records:
+  archive_ledger_bytes_unchanged: true
+  annotations: 'bulk purged <date>; records at <ledger_path>'
+  commit_subject: 'chore(storage): hash-ledgered purge of superseded bulk outputs; records retained'
+  unknown_supplement: extension_x_directory_type_byte_descending_top_20_all_UNKNOWN_retained
+future_p09c:
+  target_peak_bytes: 250000000000
+  if_remaining_available_below_target: require_batched_solve_evaluate_package_ledger_purge
+  error_series: gzip_only
+  staging_NAV_copies: do_not_retain
+  strace: compressed
+  NAV_STD: rolling_ledger_purge_after_evaluation_and_packaging
+  scientific_rules_unchanged: true

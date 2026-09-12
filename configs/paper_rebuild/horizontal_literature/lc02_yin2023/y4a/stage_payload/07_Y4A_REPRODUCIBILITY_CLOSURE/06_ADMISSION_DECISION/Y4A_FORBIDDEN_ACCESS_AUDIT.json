@@ -1,0 +1,95 @@
+{
+  "schema_version": "lc02.y4a.forbidden_access.v2",
+  "data_mode": "SOURCE_AND_STANDALONE_MATHEMATICAL_ORACLE_AUDIT",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "navigation_data_used": false,
+    "allowed_scientific_source_access": {
+        "official_yin_pdfs": 2,
+        "official_article_transport_captures": 1,
+        "official_peer_review_transport_captures": 1,
+        "cited_niu_pdf": 1,
+        "post_publication_related_patent_pdf": 1,
+        "attributable_cited_source_code_files": 2,
+        "public_author_upload_full_text_inspected_count": 4,
+        "request_only_author_upload_metadata_inspected_count": 1,
+        "standalone_linear_oracle_rows": 28
+    },
+    "administrative_validation_inventory": {
+        "original_files_content_read_for_integrity_count": 47,
+        "original_structured_JSON_YAML_CSV_parsed_count": 36,
+        "Y4A_structured_JSON_YAML_CSV_parsed_count": 22,
+        "augmented_stage_structured_JSON_YAML_CSV_parsed_count": 58,
+        "Y0_status_gate_documents_semantically_checked_count": 1,
+        "Canonical_files_hash_read_only_count": 2,
+        "authorized_frozen_Y0_Y3_input_contract_fact_reuse_count": 4,
+        "new_frozen_Y0_Y3_scientific_content_open_count": 0,
+        "old_performance_runtime_trace_fact_reuse_count": 0
+    },
+    "authorized_frozen_Y0_Y3_input_contract_fact_reuse": {
+        "source_boundary": "USER_ACCEPTED_FROZEN_Y0_Y3_INPUT_CONTRACT_FACTS_ONLY",
+        "facts": {
+            "GNSS1_epoch_and_Q_identity": "1510/1510; Q=1",
+            "PDOP_min": 1.13,
+            "PDOP_max": 1.74,
+            "per_axis_covariance_variation": true
+        },
+        "fact_count": 4,
+        "new_Y0_Y3_scientific_content_open_count": 0,
+        "old_performance_runtime_trace_reuse_count": 0
+    },
+  "forbidden_access_counters": {
+    "BY2_open_count": 0,
+    "raw_data_open_count": 0,
+    "trace_open_count": 0,
+    "reference_open_count": 0,
+    "native_output_open_count": 0,
+    "prior_runtime_output_open_count": 0,
+    "LC01_scientific_content_or_runtime_open_count": 0,
+    "Hartley_scientific_content_or_runtime_open_count": 0,
+    "EXT01_EXT04_scientific_content_or_runtime_open_count": 0,
+    "HORIZONTAL18_scientific_content_or_runtime_open_count": 0,
+    "Canonical_541_scientific_content_or_runtime_open_count": 0,
+    "internal_method_access_count": 0
+  },
+  "execution_counters": {
+    "navigation_filter_run_count": 0,
+    "Yin_solver_run_count": 0,
+    "C00_run_count": 0,
+    "comparison_run_count": 0,
+    "LC01_run_count": 0,
+    "other_method_run_count": 0,
+    "Canonical_541_run_count": 0,
+    "evaluator_run_count": 0
+  },
+  "online_provenance": {
+    "trace_used_online": false,
+    "receiver_imu_as_body_imu": false,
+    "final_v23_output_solver_input": false,
+    "LegSA_output_solver_input": false,
+    "per_case_tuning": false,
+    "output_only_correction": false,
+    "epoch_deleted_for_metric": false,
+    "old_runtime_input_count": 0
+  },
+  "canonical_untracked_files": {
+    "scripts/paper_rebuild/run_canonical541_offline_eval_aggregate.py": "00a54aac97ec54715c47dda9350635aa3ea3e969e5deb152e52e33614a6a6480",
+    "src/legsa_gins/paper_rebuild/canonical541/offline_eval_aggregate.py": "d021a503bc91dbd6a194182478770a1457cf0ca615c7d3adb2f7a6f68eadea16"
+  },
+    "access_semantics": {
+        "frozen_47_original_files_were_content_read_for_integrity_hashing": true,
+        "frozen_36_original_structured_files_were_parsed_for_format_validation": true,
+        "frozen_Y0_status_gate_document_was_semantically_checked_for_preservation": true,
+        "augmented_58_structured_files_were_parsed_by_validator": true,
+        "canonical_2_files_were_read_for_sha256_only": true,
+        "LC01_or_Canonical_scientific_execution_or_content_use": false,
+        "frozen_Y0_Y3_contract_fact_reuse_was_authorized_for_C00_forecast": true,
+        "scientific_access_counter_scope": "NEW_Y4A_SCIENTIFIC_OPENS_ONLY",
+        "old_performance_runtime_trace_reuse": false,
+        "Niu_and_TCRTKINS_were_opened_only_as_allowed_cited_source_evidence": true,
+        "Yang_and_Knight_sources_were_opened_only_as_allowed_cited_source_evidence": true,
+        "internal_comparison_method_stage_or_runtime_artifact_opened": false,
+        "other_method_executed": false
+  },
+  "forbidden_access_pass": true
+}

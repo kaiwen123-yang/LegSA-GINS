@@ -1,0 +1,23 @@
+{
+  "schema_version": "lc02.y4a.standardized_residual_decision.v2",
+  "L_k_versus_Z_k_closed": false,
+  "V_hat_k_versus_bar_V_k_closed": false,
+  "equation_9_bar_A_Xhat_k_defined": false,
+  "equation_9_uses_V_hat_k": false,
+  "numerator_unique": false,
+  "centering_unique": false,
+  "denominator_unique": false,
+  "covariance_stage_unique": false,
+  "global_scale_unique": false,
+  "processing_order_unique": false,
+  "correlated_handling_unique": false,
+  "near_zero_policy_unique": false,
+  "niu_candidate_source_attributable": true,
+  "niu_candidate_uniquely_adopted_by_yin": false,
+  "author_response_calls_tilde_V_i_standardized_residual": true,
+  "author_response_supplies_standardizer_equation": false,
+  "hard_gate": "standardized_residual_unique",
+  "hard_gate_pass": false,
+  "decision": "CURRENTLY_UNKNOWN",
+  "formal_reproduction_policy": "FAIL_CLOSED"
+}

@@ -1,0 +1,26 @@
+schema_version: paper_rebuild.clean5.sequence_registry.v1
+sequences:
+  BY2:
+    dataset_id: BY2
+    stage_id: CLEAN5_BY2_CONTROL_PROBES
+    fix_prefix: BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal
+    trace_name: trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv
+    go2_body: BY2_BY3/2026-03-06/高层数据/by2.txt
+    role: control
+    data_mode: real_by2_raw
+  BY2H:
+    dataset_id: BY2H
+    stage_id: CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE
+    fix_prefix: BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal
+    trace_name: trace_vrtk2_a87c6e_2026-03-06-08-06-39_minimal.csv
+    go2_body: BY2_BY3/2026-03-06/高层数据/by3.txt
+    role: natural_poor_heading
+    data_mode: real_by2h_raw
+  BY2O:
+    dataset_id: BY2O
+    stage_id: CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE
+    fix_prefix: BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal
+    trace_name: trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv
+    go2_body: BY2_BY3/2026-03-06/高层数据/by1.txt
+    role: natural_single_antenna_occlusion
+    data_mode: real_by2o_raw

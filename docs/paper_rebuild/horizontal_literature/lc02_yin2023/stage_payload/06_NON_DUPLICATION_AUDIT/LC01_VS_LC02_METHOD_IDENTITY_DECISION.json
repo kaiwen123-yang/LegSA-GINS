@@ -1,0 +1,14 @@
+{
+  "schema_version": "lc01_lc02.identity.v1",
+  "decision": "DISTINCT_COMPLEMENTARY_METHOD",
+  "performance_numbers_used": false,
+  "lc01_online_receiver_count": 2,
+  "lc02_online_receiver_count": 1,
+  "lc01_direct_rigid_relative_vector": true,
+  "lc02_direct_rigid_relative_vector": false,
+  "lc01_filter_family": "invariant EKF",
+  "lc02_filter_family": "conventional 21-state error EKF with quality-aware robust/adaptive treatment",
+  "formal_lc02_admitted_now": false,
+  "admission_limitation": "EQ13_FUSION_RESOLVED_P_RK_NOT_SOURCE_CLOSED",
+  "y0_y3_audit_terminal_status": "PASS_LC02_YIN2023_Y0_Y3_METHOD_NON_DUPLICATION_AND_BY2_CONTRACT_READY"
+}

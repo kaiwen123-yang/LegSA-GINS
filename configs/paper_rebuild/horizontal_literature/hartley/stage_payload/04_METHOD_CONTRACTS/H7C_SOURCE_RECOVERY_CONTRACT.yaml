@@ -1,0 +1,358 @@
+schema_version: hartley.h7c.source_recovery_contract.v1
+contract_id: LSE01_H7C_REFERENCE_EXTRINSIC_CLOSURE
+task_start_head: ff0202f8029ded5c141eb82ef526c85096abe786
+expected_branch: stage/clean3-math-repair
+method_id: LSE01_HARTLEY_CONTACT_AIDED_INEKF
+backend_id: HARTLEY_IJRR2020_REPORTED_BACKEND
+data_mode: real_by2_raw
+config_hash:
+  algorithm: SHA256_CANONICAL_JSON_OF_PARSED_YAML_WITH_CONFIG_HASH_VALUE_OMITTED
+  value: 45bd5ddc8d5be8cd69d6e2b0587049fef4a7f9dc5743776865484808d9d52571
+
+reference_access_freeze:
+  contract_must_be_frozen_before_raw_local_path_config_or_reference_access: true
+  raw_open_stat_or_hash_before_freeze_is_fatal: true
+  initial_pre_access_freeze:
+    trace_open_count: 0
+    reference_output_open_count: 0
+    reference_rows_read: 0
+    contract_freeze_sha256: 3375eab8d2b26b3f44b9969bc603aea6abac9806d53a29ac158a5e8de571d2ec
+    contract_freeze_size: 1215
+    contract_sha256: bb19f713796346440dd3af042acb87db2a02d82a05f664bb7f07bbc8595b33c3
+    contract_size: 10490
+    validly_froze_h1_through_h5_before_access: true
+  v1_path_resolution_failure:
+    classification: ADMINISTRATIVE_PATH_LAYOUT_CORRECTION_NOT_SCIENTIFIC_SEARCH
+    missing_constructed_path: >-
+      BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/vrtk2_a87c6e_2026-03-06-08-00-54_minimal.fpl
+    files_opened_and_hashed_before_failure:
+      - trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv
+      - user_io-out-poi_geodetic.csv
+      - user_io-out-poi_odometry.csv
+      - user_io-out-poi_smooth_odometry.csv
+      - tf.csv
+      - tf_static.csv
+      - userio-raw.csv
+      - user_io-status.csv
+    missing_path_statted_but_not_opened_or_hashed: true
+    cumulative_counters_at_failure:
+      local_resolver_open_count: 2
+      trace_open_count: 1
+      reference_output_open_count: 7
+      reference_rows_read: 0
+      raw_hash_open_count: 8
+      raw_stat_attempt_count: 9
+      fpl_bag_trajectory_values_decoded: 0
+    hash_values_retained_by_aborted_command: false
+  v2_path_correction_freeze:
+    zero_additional_raw_opens_between_v1_failure_and_v2_freeze: true
+    zero_additional_raw_stats_between_v1_failure_and_v2_freeze: true
+    cumulative_trace_open_count: 1
+    cumulative_reference_output_open_count: 7
+    cumulative_reference_rows_read: 0
+    scientific_extrinsic_search_execution_count: 0
+
+frozen_hypotheses:
+  H1:
+    statement: >-
+      trace_vrtk2 is a derived/exported view of user_io-out-poi_geodetic
+    initial_state: UNPROVEN
+  H2:
+    statement: reference physical point is FP_POI
+    initial_state: UNPROVEN
+  H3:
+    statement: YPR represents ENU0-to-FP_POI orientation
+    initial_state: UNPROVEN
+  H4:
+    statement: >-
+      user_io-out-poi_odometry provides full ECEF-to-FP_POI quaternion,
+      position, velocity, and angular velocity
+    initial_state: UNPROVEN
+  H5:
+    statement: >-
+      the only unresolved comparison transform is
+      T_FP_POI_from_GO2_BODY_IMU
+    initial_state: UNPROVEN
+    availability_assumed: false
+    conclusion_frozen_as_available: false
+
+proof_classifications:
+  allowed:
+    - SOURCE_EXPLICIT
+    - DETERMINISTIC_FIELD_MAPPING
+    - NUMERICAL_IDENTITY_CROSSCHECK
+    - UNPROVEN
+    - CONTRADICTED
+  numerical_identity_rule: >-
+    NUMERICAL_IDENTITY_CROSSCHECK may support lineage only after the source
+    field mapping is fixed; it may not choose a frame convention.
+
+transform_notation:
+  canonical: T_A_from_B
+  meaning: >-
+    T_A_from_B maps coordinates of a point expressed in frame B into frame A;
+    p_A = R_A_from_B * p_B + t_A_from_B.
+  required_comparison_transform: T_FP_POI_from_GO2_BODY_IMU
+  fixposition_output_transform_boundary: >-
+    Official FP_A-TF_POIVRTK semantics may close T_VRTK_from_POI or its exact
+    inverse depending on source convention; it does not by itself close the
+    Go2 mounting transform.
+
+raw_access_allowlist:
+  resolver: configs/paper_rebuild/DATA_PATHS.CLEAN3R4.local.yaml
+  resolver_key: RAW_ROOT
+  exported_csv_directory_relative_root: >-
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal
+  capture_stem_relative_path: >-
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal
+  layout_provenance:
+    classification: SOURCE_EXPLICIT
+    tracked_source_relative_path: src/legsa_gins/paper_rebuild/evidence.py
+    tracked_source_commit: ff0202f8029ded5c141eb82ef526c85096abe786
+    tracked_source_git_blob: 3f759059f9bf16f6dd57afcee26f47397706be42
+    tracked_source_sha256: c60b6d61cb2d1aae5431a3b973c8ea67f391df85964201c6ad03463b144dfa5a
+    proof: >-
+      BY2_RAW_RELATIVE_PATHS declares capture_stem.bag and capture_stem.fpl as
+      siblings of the exported capture_stem directory; CSV exports are children
+      of that directory.
+  exact_file_count: 10
+  files:
+    - name: trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv
+      relative_path: >-
+        BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv
+      role: EVALUATION_ONLY_DERIVED_TRACE_LINEAGE_CANDIDATE
+    - name: user_io-out-poi_geodetic.csv
+      relative_path: >-
+        BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/user_io-out-poi_geodetic.csv
+      role: FIXPOSITION_FP_POI_GEODETIC_OUTPUT
+    - name: user_io-out-poi_odometry.csv
+      relative_path: >-
+        BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/user_io-out-poi_odometry.csv
+      role: FIXPOSITION_FP_POI_FULL_POSE_AND_TWIST_OUTPUT
+    - name: user_io-out-poi_smooth_odometry.csv
+      relative_path: >-
+        BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/user_io-out-poi_smooth_odometry.csv
+      role: FIXPOSITION_FP_POI_SMOOTH_OUTPUT_SCHEMA_PROVENANCE_ONLY
+    - name: tf.csv
+      relative_path: >-
+        BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/tf.csv
+      role: FIXPOSITION_DYNAMIC_TF_OUTPUT
+    - name: tf_static.csv
+      relative_path: >-
+        BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/tf_static.csv
+      role: FIXPOSITION_STATIC_TF_OUTPUT
+    - name: userio-raw.csv
+      relative_path: >-
+        BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/userio-raw.csv
+      role: FIXPOSITION_FP_A_TF_AND_OUTPUT_RECORD_PROVENANCE
+    - name: user_io-status.csv
+      relative_path: >-
+        BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/user_io-status.csv
+      role: FIXPOSITION_OUTPUT_STATUS_AND_VALIDITY_PROVENANCE
+    - name: vrtk2_a87c6e_2026-03-06-08-00-54_minimal.fpl
+      relative_path: >-
+        BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal.fpl
+      role: FIXPOSITION_SCHEMA_CONFIGURATION_FRAME_TIMESTAMP_EXPORT_METADATA_ONLY
+    - name: vrtk2_a87c6e_2026-03-06-08-00-54_minimal.bag
+      relative_path: >-
+        BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal.bag
+      role: ROS_SCHEMA_TOPIC_FRAME_STATIC_TRANSFORM_OUTPUT_NAMING_TIMESTAMP_EXPORT_METADATA_ONLY
+  fpl_bag_trajectory_values_allowed: false
+  allowed_fpl_bag_information:
+    - schema
+    - topic
+    - frame
+    - static_transform
+    - output_configuration
+    - naming
+    - timestamp
+    - export_provenance
+
+lineage_gate:
+  field_mapping_must_be_fixed_before_numeric_comparison: true
+  expected_data_rows: 6040
+  expected_file_lines: 6041
+  required_fields:
+    - timestamp
+    - latitude
+    - longitude
+    - height
+    - roll
+    - pitch
+    - yaw
+    - status_or_validity_where_applicable
+  required_yaw_identity: trace.yaw == poi_geodetic.ypr.vector3.x
+  contradiction_terminal: BLOCKED_LSE01_H7C_REFERENCE_LINEAGE_CONTRADICTED
+
+pose_and_velocity_gate:
+  preferred_pose_source: user_io-out-poi_odometry.csv
+  required_pose_checks:
+    - quaternion_component_order
+    - quaternion_normalization
+    - parent_frame
+    - child_frame
+    - timestamp
+    - units
+    - handedness
+  velocity_absence_blocks_pose_evaluation: false
+  velocity_diagnostics_require_exact_closed_frame: true
+
+frame_graph_gate:
+  edge_convention: T_parent_from_child
+  sources:
+    - tf.csv
+    - tf_static.csv
+    - FP_A-TF messages in userio-raw.csv
+  body_alias_requires_explicit_provenance: true
+  missing_edge_or_alias_state: UNPROVEN
+  incompatible_source_terminal: BLOCKED_LSE01_H7C_FRAME_GRAPH_CONTRADICTED
+
+single_bounded_extrinsic_search:
+  execution_count: 1
+  sources:
+    - current tracked frame/config contracts
+    - current Git history for source/config provenance
+    - BY2 .fpl/.bag configuration metadata
+    - Fixposition Step-6 output translation/rotation records
+    - measured installation/CAD records already in project
+    - source-explicit antenna/POI/VRTK endpoint chains
+  exact_terms:
+    - FP_A-TF_POIVRTK
+    - POI VRTK
+    - output translation
+    - output rotation
+    - Step 6
+    - body_to_poi
+    - poi_to_body
+    - imu_to_poi
+    - poi_to_imu
+    - VRTK
+    - 0.03 0.03 -0.30
+    - 0.020 -0.175 -0.020
+    - 0.020 +0.175 -0.020
+  candidate_acceptance_requires:
+    - both_endpoints
+    - translation
+    - rotation
+    - convention
+    - direction
+    - applicable_configuration_and_time
+    - uniqueness
+  trajectory_or_rmse_fitting_allowed: false
+  project_measurement_lever_candidate_m: [0.03, 0.03, -0.30]
+  project_measurement_lever_admissible_without_endpoint_direction_proof: false
+  incompatible_source_terminal: BLOCKED_LSE01_H7C_EXTRINSIC_SOURCE_CONTRADICTED
+  further_h7_recovery_attempt_after_exhaustion_allowed: false
+
+frozen_h5_outputs:
+  filter_rerun_allowed: false
+  primary_branch:
+    run_id: H5_PRIMARY_GO2_ALLAN_EQ61_FK10MM
+    native_freeze_relative_path: 08_BY2_NATIVE/01_PRIMARY_GO2_ALLAN_EQ61_FK10MM/NATIVE_FREEZE.json
+    native_freeze_sha256: 4b13746c210e2d608f8642f2e10db8e7c06dc16d1dad3f443e594b66697418c8
+    native_freeze_size: 1918
+  nonselective_branches:
+    - run_id: H5_FK05MM_SENSITIVITY
+      native_freeze_relative_path: 08_BY2_NATIVE/02_FK05MM/NATIVE_FREEZE.json
+      native_freeze_sha256: 910d9f8ca102dd636b3735d41444e26061211c1d0e98a126f71c61f73548e741
+      native_freeze_size: 1918
+    - run_id: H5_FK20MM_SENSITIVITY
+      native_freeze_relative_path: 08_BY2_NATIVE/03_FK20MM/NATIVE_FREEZE.json
+      native_freeze_sha256: 177382f4441030009adf1b12bd886a9a9527efebeaff7436a01e668dc10c7637
+      native_freeze_size: 1918
+    - run_id: H5_PAPER_TABLE1_PROCESS_REGRESSION_WITH_GO2_FK_PROXY
+      native_freeze_relative_path: 08_BY2_NATIVE/04_PAPER_PROCESS_REGRESSION/NATIVE_FREEZE.json
+      native_freeze_sha256: d19883f6ab7121529642f8defca15c8ea0a6441533a795b6f5f1f60adc0a5789
+      native_freeze_size: 1918
+  branch_selection_from_reference: false
+  one_primary_derived_fixed_gauge_for_all_branches: true
+
+outcome_logic:
+  A:
+    condition: >-
+      H1-H4 are closed without contradiction and one unique full rigid
+      T_FP_POI_from_GO2_BODY_IMU is SOURCE_EXPLICIT.
+    terminal: PASS_LSE01_H7C_FULL_RELATIVE_EVALUATION_COMPLETE
+    full_reference_relative_pose_evaluation_complete: true
+    extrinsic_proven: true
+    lse01_complete: true
+    ready_for_ext06: true
+    ext06_executed: false
+  B:
+    condition: >-
+      H1-H4 are closed without contradiction and the single bounded search is
+      exhausted without a unique source-proven full rigid
+      T_FP_POI_from_GO2_BODY_IMU.
+    terminal: PASS_LSE01_COMPLETE_WITH_REFERENCE_EXTRINSIC_LIMITATION
+    full_reference_relative_pose_evaluation_complete: false
+    extrinsic_proven: false
+    lse01_complete: true
+    ready_for_ext06: true
+    ext06_executed: false
+  C:
+    terminals:
+      - BLOCKED_LSE01_H7C_REFERENCE_LINEAGE_CONTRADICTED
+      - BLOCKED_LSE01_H7C_FRAME_GRAPH_CONTRADICTED
+      - BLOCKED_LSE01_H7C_EXTRINSIC_SOURCE_CONTRADICTED
+
+outcome_b_required_status:
+  terminal: PASS_LSE01_COMPLETE_WITH_REFERENCE_EXTRINSIC_LIMITATION
+  lse01_algorithm_reproduction_complete: true
+  lse01_native_real_data_complete: true
+  lse01_yaw_unobservability_claim_complete: true
+  lse01_full_reference_relative_pose_evaluation_complete: false
+  reference_point: FP_POI
+  reference_full_pose_source_closed: true
+  go2_to_fp_poi_extrinsic_proven: false
+  absolute_yaw_RMSE: null
+  absolute_global_position_RMSE: null
+  filter_rerun_count: 0
+  lse01_complete: true
+  ready_for_ext06: true
+  ext06_executed: false
+
+metric_contract:
+  outcome_a_horizons_seconds: [1.0, 5.0, 10.0]
+  relative_translation_metric: Euclidean norm in metres
+  relative_rotation_metric: SO3 geodesic angle in radians and degrees
+  yaw_increment_requires_proven_orientation_relation: true
+  outcome_b_optional_diagnostic: CONJUGATION_INVARIANT_RELATIVE_ROTATION_ANGLE_MAGNITUDE_ERROR
+  outcome_b_diagnostic_labels_forbidden: [yaw, attitude_accuracy, pose_accuracy]
+  absolute_yaw_RMSE: null
+  absolute_global_position_RMSE: null
+  parameter_selection_performed: false
+
+forbidden_operations:
+  trace_online_use: false
+  trajectory_value_read_from_fpl_or_bag: false
+  reference_or_hartley_trajectory_based_frame_choice: false
+  trajectory_or_rmse_extrinsic_fit: false
+  Go2_onboard_pose_or_yaw_use: false
+  final_v23_output_use: false
+  LegSA_output_use: false
+  time_search: false
+  sign_search: false
+  axis_search: false
+  scale_alignment: false
+  branch_specific_alignment: false
+  branch_selection_or_promotion: false
+  parameter_selection: false
+  output_only_correction: false
+  epoch_deletion_for_metric: false
+  h5_filter_rerun: false
+  h6_or_h6r_rerun: false
+  hartley_synthetic_validation_rerun: false
+  ext01_through_ext06_execution: false
+  horizontal18_execution: false
+  canonical541_execution: false
+  other_method_execution: false
+
+publication:
+  mode: EXCLUSIVE_CREATE_FSYNC
+  scratch_filesystem: ext4
+  scratch_retention: RETAIN_WHILE_EXTERNAL_G_STORAGE_UNHEALTHY
+  compact_stage_relative_root: 12_POST_NATIVE_EVALUATION/10_H7C_REFERENCE_EXTRINSIC_CLOSURE
+  final_report: 11_REPORT/LSE01_H7C_FINAL_REPORT.md
+  final_status: 11_REPORT/LSE01_H7C_FINAL_STATUS.json
+  final_claim_boundary: 11_REPORT/LSE01_FINAL_CLAIM_BOUNDARY.md
+  predecessor_overwrite_allowed: false

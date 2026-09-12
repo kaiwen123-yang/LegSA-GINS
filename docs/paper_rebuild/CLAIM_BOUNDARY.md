@@ -1,5 +1,13 @@
 # Clean Rebuild Claim Boundary
 
+## CLEAN3 Supersession Boundary
+
+- All CLEAN2R2A1 full-minus-strong and Raw Doppler/source-aware/Go2 roll-pitch/Go2 horizontal-velocity ablation numbers are `SUPERSEDED_BY_CLEAN3_PENDING_RERUN`.
+- Those historical values cannot support an active module-effect, benefit, harm, accuracy, robustness, or superiority claim and cannot be used to tune CLEAN3.
+- Current CLEAN3 module-effect numbers, calibration, and 18-configuration table are `NOT_EVALUATED` / `NOT_PRODUCED`. S3 terminated technically before NAV/STD and byte comparison.
+- S3 byte parity is `NOT_EVALUATED`; `FAILED_TECHNICAL_S3_AB0000_FORMAL_COUNTER_CONTRACT_UNROUTED` is not evidence of either parity or mismatch.
+- S2 implementation and test completion is engineering evidence only. It is not performance evidence and `ready_for_paper_claims=false`.
+
 ## Allowed Now
 
 - State the clean-rebuild method definition and experiment protocol.

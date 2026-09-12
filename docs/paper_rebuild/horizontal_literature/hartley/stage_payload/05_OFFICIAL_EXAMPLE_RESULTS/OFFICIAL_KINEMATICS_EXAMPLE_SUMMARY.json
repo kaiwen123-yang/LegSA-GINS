@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "example": "kinematics",
+  "scientific_role": "OFFICIAL_CONTACT_LIFECYCLE_BUILD_SMOKE_NOT_NUMERICAL_TRUTH",
+  "repository": "https://github.com/RossHartley/invariant-ekf.git",
+  "commit": "ef16e8a1df72f9272111a488880e3fe9d161f59f",
+  "license": "BSD-3-Clause",
+  "local_patch": false,
+  "command": "cd <HARTLEY_CPP_ROOT>/bin && ./kinematics",
+  "executable_sha256": "7feb615e4392cd24399f890c5788f262bbf7beac186b0959f0460d6571f6892c",
+  "input": {
+    "path": "src/data/imu_kinematic_measurements.txt",
+    "sha256": "224e03c83062fb937bfe529aa3858a04e07ed3143f92f8e0868bacbeae08491b",
+    "rows": 59976,
+    "imu_rows": 19992,
+    "contact_rows": 19992,
+    "contact_indicator_values": 39984,
+    "kinematic_rows": 19992,
+    "kinematic_point_measurements": 39984
+  },
+  "official_execution": {
+    "return_code": 0,
+    "runtime_seconds": 0.22,
+    "max_rss_kib": 4032,
+    "stdout_lines": 60075
+  },
+  "event_counts": {
+    "propagation_calls": 19992,
+    "kinematic_correction_calls": 19780,
+    "kinematic_correction_measurements": 26741,
+    "contact_add_count": 34,
+    "contact_remove_count": 33,
+    "final_active_contact_count": 1
+  },
+  "final_state_dimensions": {
+    "X_rows": 6,
+    "X_cols": 6,
+    "theta_rows": 6,
+    "P_rows": 18,
+    "P_cols": 18
+  },
+  "diagnostics": {
+    "source": "UNTRACKED_OUT_OF_TREE_HARNESS_LINKED_TO_UNMODIFIED_OFFICIAL_LIBRARY",
+    "harness_sha256": "cc52a08ddd6dda8b21d066d2cc6dfadc6e27a0c9c955cc93038f77f46dfe7477",
+    "finite_state": true,
+    "finite_covariance": true,
+    "covariance_max_abs_asymmetry": 2.2456264278658544e-12,
+    "covariance_symmetry_tolerance": 1e-10,
+    "covariance_symmetric_within_tolerance": true,
+    "covariance_min_eigenvalue_symmetrized": 2.7730288943281978e-7,
+    "covariance_max_eigenvalue_symmetrized": 2.3272959657420311,
+    "covariance_psd_with_tolerance": true,
+    "rotation_determinant": 1.0000000000000082
+  },
+  "final_state_observation": {
+    "velocity": [0.14887802088125085, 0.012131360330369524, 0.03503162824998357],
+    "position": [2.3988249246365956, 0.015561227902428573, -0.11133116065649085],
+    "gyroscope_bias": [-0.0002583644013765186, 0.00028684704154884375, -0.0003047186486937437],
+    "accelerometer_bias": [-0.1787418320317025, -0.018196400846946802, 0.00230157370736141]
+  },
+  "paper_expected_value_available": false,
+  "plot_used_as_truth": false
+}

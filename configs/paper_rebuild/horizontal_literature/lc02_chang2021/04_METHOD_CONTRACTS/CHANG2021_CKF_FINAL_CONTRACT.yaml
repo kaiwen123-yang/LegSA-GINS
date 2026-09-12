@@ -1,0 +1,21 @@
+schema: lc02_chang2021.ckf_final.v1
+selected_identity: A_LITERAL_PRINTED_LINEAR_ERROR_STATE_RECURSION
+provenance: PAPER_DIRECT
+prediction:
+  state: "xhat_minus = F xhat_previous"
+  covariance: "P_minus = F P_previous F^T + Q"
+innovation:
+  residual: "e = z - H xhat_minus"
+  covariance: "Pzz = H P_minus H^T + R"
+update:
+  gain: "K = P_minus H^T Pzz^-1"
+  state: "xhat_plus = xhat_minus + K e"
+  covariance: "P_plus = P_minus - K Pzz K^T"
+strong_tracking_hook:
+  equation: "P_strong = Lambda (P_minus-Q) Lambda^T + Q"
+  placement: before_the_observation_update
+  status: PAPER_DIRECT_BUT_LAMBDA_NOT_SOURCE_CLOSED
+cubature_points:
+  used_by_selected_identity: false
+  reason: "The selected identity is the literal linear recursion; no cubature rule is printed."
+implementation_authorized: false

@@ -1,0 +1,14 @@
+{
+  "schema_version": "lc02.measurement_scope.v1",
+  "decision": "POSITION_ONLY_PAPER_FAITHFUL",
+  "measurement_dimension": 3,
+  "online_gnss_velocity": false,
+  "basis": [
+    "Paper Eq. (2)-(4) defines a 3-dimensional measurement and a 3x21 H matrix.",
+    "The printed Z_k is [delta r_N, delta r_E, delta r_D]^T.",
+    "The attributable cited KF-GINS implementation's GNSS update is position-only.",
+    "Position-plus-velocity wording in diagrams/general LC prose is lower-priority and has no executable velocity equation."
+  ],
+  "priority_rule": "explicit_equations > attributable_official_code > cited_implementation > flowchart_labels > general_convention",
+  "provenance_class": "PAPER_DERIVED"
+}

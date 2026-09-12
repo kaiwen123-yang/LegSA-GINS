@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "stage_id": "10_LC02_FINAL_CANDIDATE_TRIAGE",
+  "preflight_status": "PASS_FAIL_CLOSED_PREFLIGHT",
+  "branch": "stage/clean3-math-repair",
+  "task_start_head": "27c5647abe5ab253d8a4db2b602d8682a8a63b8f",
+  "tracked_worktree_clean_at_preflight": true,
+  "index_clean_at_preflight": true,
+  "tracked_target_config_absent_at_preflight": true,
+  "tracked_target_docs_absent_at_preflight": true,
+  "target_test_absent_at_preflight": true,
+  "external_stage10_absent_at_preflight": true,
+  "protected_untracked_files": {
+    "scripts/paper_rebuild/run_canonical541_offline_eval_aggregate.py": "00a54aac97ec54715c47dda9350635aa3ea3e969e5deb152e52e33614a6a6480",
+    "src/legsa_gins/paper_rebuild/canonical541/offline_eval_aggregate.py": "d021a503bc91dbd6a194182478770a1457cf0ca615c7d3adb2f7a6f68eadea16"
+  },
+  "tracked_predecessor_tree_oids": {
+    "configs_lc02_yin2023": "654ce7f3819bb6a17b606ad6a3d57f4d79d41d4e",
+    "docs_lc02_yin2023": "ecc6735a1cb03cd3ca8879ea72152c30e25de101",
+    "configs_lc02_chang2021": "3ae77bcd875951617316f02236d963660d6bacc3",
+    "docs_lc02_chang2021": "8337d49d0314b58be7fc1cd54367bb54cc7ea820"
+  },
+  "external_predecessor_normalized_manifests": {
+    "08_LC02_YIN2023_RAEKF": {
+      "file_count": 79,
+      "sha256": "17a55c6b1f2c02fa5f06b7ccb5c0d74cb01538a03cc2aa484f76f32b37d74729"
+    },
+    "09_LC02_CHANG2021_FSTCKF": {
+      "file_count": 37,
+      "sha256": "8b1dfa8bb667e2392c65b5afe4688cd02d7a4348fd1b33265af074c74ea375e2"
+    }
+  },
+  "preserved_registry_states": {
+    "08_LC02_YIN2023_RAEKF": "NO_GO_FORMAL_PRIMARY",
+    "09_LC02_CHANG2021_FSTCKF": "NO_GO_FORMAL_PRIMARY",
+    "LC01_PAVLASEK2021_TWO_RECEIVER_IEKF": "COMPLETED_ACTIVE_METHOD",
+    "formal_lc02_slot": "VACANT"
+  },
+  "predecessor_content_role": "ADMINISTRATIVE_IDENTITY_AND_CLAIM_BOUNDARY_ONLY_NO_PERFORMANCE_USE"
+}

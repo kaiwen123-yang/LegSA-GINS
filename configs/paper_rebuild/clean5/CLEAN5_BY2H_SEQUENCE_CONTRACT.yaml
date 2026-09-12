@@ -1,0 +1,1038 @@
+schema_version: paper_rebuild.clean5.sequence_contract.v1
+contract_status: FROZEN_BEFORE_PROVIDER_GENERATION
+frozen_date: '2026-09-07'
+authority: C-02 explicit sequence-contract freeze; C-03/C-04/C-05 execution requires its own authorization
+frozen_parameter_sources:
+- path: configs/paper_rebuild/final_v23_parity_contract.yaml
+  sha256: 2c215e680512bb1d630d46262c4e230a2ec58147ffc0a35b1c6a5ad21805c1da
+  sections:
+  - imu_preprocessing
+  - dual_yaw_contract
+  - receiver_velocity_contract
+  - profiles.clean_real_final_v23
+  - runtime_initialization
+  - filter_contract
+  - evaluator_contract
+- path: configs/paper_rebuild/clean1_by2_clean_protocol.yaml
+  sha256: fc3cea6a84cbb535be7fba705cc5001981022538f85f9d8d8ddcb74a23c08afd
+  sections:
+  - provider_generation
+  - initialization
+  - solver_common
+- path: configs/paper_rebuild/evaluator_contract.yaml
+  sha256: 6c08726e4cd823e5c8f66164b617ccdf06cc1da8ccd975b1967412d57848ac9b
+  sections:
+  - reference role
+  - frames
+  - forbidden_postprocessing
+  - aggregate
+- path: src/legsa_gins/paper_rebuild/final_v23_clean_parity.py
+  sha256: 18a46ec71ba323d014f1d1d2f9fc611de7c1f9c146950fb2a68dac6b09d625b0
+  sections:
+  - active_runtime_config.values numeric fields
+- path: AGENTS.md
+  sha256: 2e4c87023454b2f7be1be05a4da17e94a7fe6dd633775d3d3138f8619d4a2142
+  sections:
+  - section 3 scientific solver freeze and executable SHA256
+- path: configs/paper_rebuild/clean5/CLEAN5_SEQUENCE_REGISTRY.yaml
+  sha256: cf230fa682876be5d572d3754450a7922b558f11272ad65f90b7312245efa1e3
+  sections:
+  - sequences
+- path: cpp/legsa_v23_port_core/src/config/port_config_loader.cpp
+  sha256: 36d380d4f6db066768b53236ef1b2d2bb17cfca9178390623e81cc313a8d4703
+  role: read-only initatt yaw domain check
+- path: cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp
+  sha256: 4d2e329a1f6a11ed232941c3150a5569791f7ac5fceb0362e91e5dd856dc6a50
+  role: read-only initatt yaw domain check
+- path: cpp/legsa_v23_port_core/src/common/rotation.cpp
+  sha256: 7dd006b9612a13ee5173b5faa51a0f9bb9d8ccdfcea9c8f1a599269371a01331
+  role: read-only initatt yaw domain check
+- path: cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp
+  sha256: 9a00eabdbbd7d629da4e476461a69872c9eb26550a9c286fcc59931e1d04bc99
+  role: read-only initatt yaw domain check
+- path: <CLEAN_ROOT>/stages/CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE/00_RAW_INVENTORY_AND_PROBES/PROBE_REPORT.json
+  sha256: 6f29f668481f7e1ac31453b0a6a94f12adedda9f6c96c661453a70e892b089d5
+  role: C-01b input-only sequence evidence
+- path: <CLEAN_ROOT>/stages/CLEAN5_BY2_CONTROL_PROBES/PROBE_REPORT.json
+  sha256: 5684d32255b99e015b9e959ce7344e85c4ca49bd81eecbe1e861c59ece209965
+  role: BY2 control reproduces R1 and B-prime
+- path: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv
+  sha256: faa31580c7fff73b52fcf6d27c97cfdd9187e67a55968a2ab42e6737b0eabb67
+  row_count: 44
+- path: build/canonical541_cpp/legsa_v23_port_core_demo
+  sha256: 9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f
+  scientific_solver_freeze_commit: 64c81965b17ef1bf8ae2ce3e4dd7b1ae35110b00
+  source: AGENTS.md section 3; binary hash verified read-only in C-02
+- path: configs/paper_rebuild/final_v23_parity_contract.yaml#evaluator_contract.evaluator_sha256
+  sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  role: exact evaluator executable identity; not opened or executed in C-02
+identity:
+  dataset_id: BY2H
+  stage_id: CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE
+  data_mode: real_by2h_raw
+  fix_prefix: BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal
+  go2_body: BY2_BY3/2026-03-06/高层数据/by3.txt
+  trace_name: trace_vrtk2_a87c6e_2026-03-06-08-06-39_minimal.csv
+  trace_role: evaluation_only_C05_after_method_outputs_frozen
+  control_dataset: BY2
+  raw_lock_path: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv
+  raw_lock_sha256: faa31580c7fff73b52fcf6d27c97cfdd9187e67a55968a2ab42e6737b0eabb67
+  raw_lock_total_rows: 44
+  sequence_lock_rows: 22
+  raw_files_sha256:
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal.bag: 3024e12288ea0f34ac3eba3bd45a6116600928c1a71b0072c935fe19df23bb13
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal.fpl: 3faf45966c9b60b7c48ef72f1f2ebb3b3912fac1e1c557e36feea4fb2758d1e9
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/corr-raw.csv: 8b19b067477f65ce084c3578bf66b4f14a83222264b19bc727be2780fa20184d
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-raw.csv: b6e0e3108b0902350eb7655fe1a2db23a8f320136ddc6c54bcd7e5dbe2d17508
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-status.csv: 6e169474adea70ef9899ef02409015f7cd225aadf1efbe63e51af2a39e297ef2
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss2-raw.csv: 87e4056c85b58595792578a62aeceb1b594475d654e4e49eb7fccaf5bfff56aa
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss2-status.csv: 7773d3c52394b9941c7809a208fa04f6e72e82b7427aaf5de267e1122463c2f8
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/imu-biases.csv: d3358abbfdd1e9e8d164150414e1fde1d36426a86fb7df0250c592e58b045132
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/imu-data.csv: aa13439719b7aec288b1602edbf37bc20ea5fc3adbec8a37c77a1ffe57bd6f53
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/imu-temp.csv: 02be6a69d4a99fa9de28c2be534b9de8b414666ccbdefa831b5e55297882c5f3
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/ntrip-info.csv: def2b97196f00e65e678c225e165814d4b66fa6ffae8b3d1ad8cfd0d498a3405
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/ntrip-latency.csv: 04526cfc4148397cd99e7b531fd3eac2f7922107b0dfab4d8421fb72fe5b89e0
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/tf.csv: f54ba32b9083685b3f8670a06a36080fd173d2518a81cfef43672b5a5459451d
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/tf_static.csv: 5694bc7e25e7102c24c8ce3ac9ecea7c45ad629546f936185288a3428565fc43
+    ? BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/trace_vrtk2_a87c6e_2026-03-06-08-06-39_minimal.csv
+    : 8d11fe360753bfcdbc54f7bf793fcb25850c0997b7aaad4ec1c9f10859c0f84f
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/user_io-out-odom_status.csv: 879b3b2aa03fc3f316e566938639dada1bf65c3378ffbe397f010f64842c5cad
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/user_io-out-poi_geodetic.csv: 06beb2c645f6d98cb7ac917d454c41bcb65ba4df3e0cdc838a0f41324ef44284
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/user_io-out-poi_odometry.csv: 15e68534334c1945c9fda46645ac1047e19de8bf30ef335ba671a0a2f871bc05
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/user_io-out-poi_smooth_odometry.csv: 8621b7f6b0657da1cd74aca05a3d020cfcb3f695312d518b6ef3354e43beb48d
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/user_io-status.csv: 02b3010aa12a1b34e0c73efdc26bebb0e1d016a8c2f526e28352b192f08ffc96
+    BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/userio-raw.csv: 212ef459d37136f8624ee3d252185350df79d080c07597ce64c8d012667c0fbc
+    BY2_BY3/2026-03-06/高层数据/by3.txt: b2e80763c613a5a0d6739aea90ea3ed4f8c9170cf5f2f6b73e5a000a666f0c49
+  synthetic_data_used: false
+  semisynthetic_data_used: false
+time_contract:
+  base_time_rule: floor(first_pos_valid_gnss1_status_sys_stamp/3600)*3600
+  base_time: 1772784000.0
+  first_pos_valid_gnss1_status_sys_stamp: 1772784400.203819
+  utc_day_midnight: 1772755200.0
+  auxiliary_rebase_offset_seconds: 28800.0
+  auxiliary_rebase_formula: base_time - utc_day_midnight
+  rule_reproduces_by2_frozen_base_time: true
+  gnss_time: GNSS1 status sys_stamp - base_time
+  a1_time: GNSS1 status header.stamp - base_time
+  imu_time: Go2 body timestamp - base_time; frozen installation and zero time offset unchanged
+  R3_report_only: 1772784000.0
+  R1_relative_ranges:
+    a1_header_epochs:
+      first: 399.99984669685364
+      last: 695.9998443126678
+      max: 695.9998443126678
+      min: 399.99984669685364
+      negative_time: false
+      status: PASS
+    gnss1_status:
+      first: 400.20381903648376
+      last: 697.2062268257141
+      max: 697.2062268257141
+      min: 400.20381903648376
+      negative_time: false
+      status: PASS
+    gnss2_status:
+      first: 399.9416539669037
+      last: 696.9545664787292
+      max: 696.9545664787292
+      min: 399.9416539669037
+      negative_time: false
+      status: PASS
+    go2_body:
+      first: 394.9430739879608
+      last: 692.9191179275513
+      max: 692.9191179275513
+      min: 394.9430739879608
+      negative_time: false
+      status: PASS
+  R3_relative_ranges:
+    a1_header_epochs:
+      first: 399.99984669685364
+      last: 695.9998443126678
+      max: 695.9998443126678
+      min: 399.99984669685364
+      negative_time: false
+      status: PASS
+    gnss1_status:
+      first: 400.20381903648376
+      last: 697.2062268257141
+      max: 697.2062268257141
+      min: 400.20381903648376
+      negative_time: false
+      status: PASS
+    gnss2_status:
+      first: 399.9416539669037
+      last: 696.9545664787292
+      max: 696.9545664787292
+      min: 399.9416539669037
+      negative_time: false
+      status: PASS
+    go2_body:
+      first: 394.9430739879608
+      last: 692.9191179275513
+      max: 692.9191179275513
+      min: 394.9430739879608
+      negative_time: false
+      status: PASS
+window_contract:
+  three_stream_common_coverage: valid propagation Go2 IMU AND GNSS1 status pos_valid
+    AND constructed A1 with rel_valid/ant_valid/ant_state==2
+  epoch_association: GNSS1 pos_valid sys_stamp bracketed by valid propagation Go2
+    IMU rows, with its exact header.stamp in constructed A1 output and rel_valid/ant_valid/ant_state==2;
+    helper validates both receivers
+  stream_clock_note: IMU timestamp and GNSS1 sys_stamp are absolute source times;
+    A1 uses GNSS1 header.stamp. All displayed relative to R1; association is by exact
+    source row, no clock adjustment
+  first_common_epoch: 400.20381903648376
+  last_common_epoch: 692.2076218128204
+  stream_ranges:
+    a1_constructed_header:
+      first: 399.99984669685364
+      last: 695.9998443126678
+      max: 695.9998443126678
+      min: 399.99984669685364
+      negative_time: false
+    gnss1_pos_valid_sys:
+      first: 400.20381903648376
+      last: 697.2062268257141
+      max: 697.2062268257141
+      min: 400.20381903648376
+      negative_time: false
+    propagation_go2_imu:
+      first: 394.9430739879608
+      last: 692.9191179275513
+      max: 692.9191179275513
+      min: 394.9430739879608
+      negative_time: false
+  no_method_specific_window: true
+  preserve_internal_missing_epochs: true
+  rule: event_onset_v2
+  t_end: 683.0
+  t_start: 413.0
+  unadjusted_start_formula: floor(max(t_on_g, t_on_b))
+  t_start_formula: unadjusted start; if first propagation IMU >= start is delayed
+    >1.0 s, floor(that IMU time)
+  t_end_formula: floor(last_common_epoch) - 9.0
+  constants:
+    body_mean_definition: sample arithmetic mean of all frozen HV speeds in (t-1,t];
+      provider must supply a full 1 s history
+    body_mean_warmup_definition: first provider timestamp <= t-1; no zero padding
+      or future samples
+    body_mean_window_seconds: 1.0
+    body_persistence_definition: consecutive observed above-threshold causal means
+      spanning >=3 s; onset is the first sample, confirmed by the later sample
+    body_persistence_seconds: 3.0
+    by2_control:
+      kick_time_lower_bound: 62.579067
+      required_end: 340.0
+      required_start: 66.0
+      start_reference: 66.0
+    by2o_start_strictly_after_seconds: 3154.351049
+    candidate_epoch_scope: closed frozen three-stream common coverage, strictly after
+      kick if DETECTED
+    end_formula: floor(last_common_epoch)-9
+    gap_policy: onset selection unchanged; source holes censor onset timing; internal
+      dropout remains in the window; no artificial samples inserted
+    gnss_consecutive_epochs: 3
+    imu_gnss_time_offset: 0.0
+    kick:
+      detector: kick_alignment.detect_frozen_go2_kick unchanged
+      normalization_baseline_max_samples: 1000
+      not_detected_policy: report only; no replacement event, threshold change, or
+        retry
+      numerical_scale_floor: 1.0e-12
+      robust_mad_scale: 1.4826
+      segment: initial segment before first mode/gait change
+      zscore_threshold: 6.0
+    max_onset_difference_seconds: 1.0
+    onset_censoring:
+      clock_gate: 'either censored: full-common-coverage xcorr primary abs(lag)<=1
+        s and available; neither censored: abs(point delta)<=1 s; xcorr still reported'
+      gnss_hole_dt_greater_than_median_multiplier: 2.0
+      interval: earliest triggering hole left endpoint through observed onset; uncensored
+        onset is a point interval
+      lookback_seconds: 3.0
+      raw_body_hole_dt_greater_than_seconds: 0.1
+      raw_to_hv_sample_identity: replay UTC-relative float str, Decimal auxiliary
+        offset subtraction and .12f from clean1r2r1_formal.rebase_auxiliary_time_csv;
+        exact encoded equality, no time tolerance
+      trigger: observed onset is the first sample after a hole, or a hole intersects
+        the closed [onset-3,onset] lookback; hole left endpoint must precede onset
+    onset_difference_definition: 'uncensored: t_on_g-t_on_b in ms; if either onset
+      is censored, only [g_low-b_high,g_high-b_low] in ms; no offset applied'
+    propagation_initialization:
+      adjust_when_delay_strictly_greater_than_seconds: 1.0
+      adjusted_start: floor(t_init); no samples inserted or removed
+      time: first original frozen propagation IMU timestamp >= floor(max(onsets))
+    speed_threshold_mps: 0.15
+    start_formula: floor(max(t_on_g,t_on_b))
+    tail_margin_seconds: 9
+    xcorr_primary_maximum_absolute_lag_seconds: 1.0
+  kick:
+    constants:
+      detector: kick_alignment.detect_frozen_go2_kick unchanged
+      normalization_baseline_max_samples: 1000
+      not_detected_policy: report only; no replacement event, threshold change, or
+        retry
+      numerical_scale_floor: 1.0e-12
+      robust_mad_scale: 1.4826
+      segment: initial segment before first mode/gait change
+      zscore_threshold: 6.0
+    detector_source_sha256: 71a82f229d083552e2707a4e6c881bfd1d4d93b7f5e84e42d726a7c933bc835e
+    kick_time_R1: null
+    status: NOT_DETECTED
+  t_on_g: 410.203951
+  t_on_b: 411.7570643425
+  delta_t_onset_ms: null
+  v1_window:
+    rule: B_prime
+    t_start: 411.0
+    t_end: 683.0
+  v1_to_v2:
+    t_start:
+      v1: 411.0
+      v2: 413.0
+    t_end:
+      v1: 683.0
+      v2: 683.0
+  event_report_relative_path: 01_SEQUENCE_CONTRACT/C04B_CONTINUATION_2_ba7d380bb11d/EVENT_WINDOW_V2.json
+  event_attempt: C04B_CONTINUATION_2_ba7d380bb11d
+  onset_censored_b: true
+  onset_censored_g: false
+  body_onset_interval_R1:
+  - 407.01705837249756
+  - 411.7570643425
+  gnss_onset_interval_R1:
+  - 410.203951
+  - 410.203951
+  delta_t_onset_interval_ms:
+  - -1553.1133424999553
+  - 3186.892627502459
+  clock_consistency_gate:
+    basis: full_coverage_xcorr
+    delta_interval_is_not_point_offset: true
+    offset_applied_seconds: 0.0
+    passed: true
+    xcorr_used_as_hard_gate: true
+  xcorr_gate:
+    available: true
+    by2_difference_report_only: true
+    by2_primary_lag_seconds: -0.35000000000000003
+    difference_from_by2_primary_lag_seconds: -0.09999999999999998
+    lag_sign: corr(sg(t), sb(t+lag)); positive means body speed occurs later
+    maximum_absolute_lag_seconds: 1.0
+    offset_applied_seconds: 0.0
+    passed: true
+    primary_lag_seconds: -0.45
+  propagation_start_adjustment:
+    adjusted: true
+    adjusted_start: 413.0
+    delay_limit_seconds: 1.0
+    first_imu_time_at_or_after_start: 413.041069
+    initialization_delay_seconds: 2.041068999999993
+    original_imu_row_index_zero_based: 2677
+    rule: delay >1 s => floor(t_init)
+    unadjusted_start: 411.0
+  preserve_internal_dropout:
+  - duration_seconds: 0.5580441951751709
+    left_row_index_zero_based: 2679
+    overlap_seconds: 0.037091970443725586
+    preserved_without_interpolation_or_deletion: true
+    right_row_index_zero_based: 2680
+    source: raw_go2
+    t_end: 413.0370919704437
+    t_start: 412.47904777526855
+  - duration_seconds: 0.17571473121643066
+    left_row_index_zero_based: 3010
+    overlap_seconds: 0.17571473121643066
+    preserved_without_interpolation_or_deletion: true
+    right_row_index_zero_based: 3011
+    source: raw_go2
+    t_end: 415.0807819366455
+    t_start: 414.9050672054291
+  - duration_seconds: 6.024010999999973
+    left_row_index_zero_based: 2676
+    overlap_seconds: 0.04106899999999314
+    preserved_without_interpolation_or_deletion: true
+    right_row_index_zero_based: 2677
+    source: propagation_imu
+    t_end: 413.041069
+    t_start: 407.017058
+  - duration_seconds: 0.17601200000001427
+    left_row_index_zero_based: 3006
+    overlap_seconds: 0.17601200000001427
+    preserved_without_interpolation_or_deletion: true
+    right_row_index_zero_based: 3007
+    source: propagation_imu
+    t_end: 415.081079
+    t_start: 414.905067
+  kick_dropout_hypothesis:
+    body_onset_after_first_hole_end: true
+    first_raw_go2_hole:
+      duration_seconds: 4.740005970001221
+      left_row_index_zero_based: 2677
+      right_row_index_zero_based: 2678
+      t_end: 411.7570643424988
+      t_start: 407.01705837249756
+    kick_status: NOT_DETECTED
+    kick_time_assigned: false
+    statement: The kick may have occurred during the first raw Go2 dropout; this is
+      not a detected kick or clock-offset estimate.
+    status: HYPOTHESIS_ONLY
+    used_to_select_window: false
+  adjusted_for_imu_dropout: true
+initialization_contract:
+  rule_source: configs/paper_rebuild/clean1_by2_clean_protocol.yaml#initialization
+  by2_initialization_rules:
+    common_initialization: true
+    position_velocity_source: first_valid_gnss_at_or_after_common_start
+    roll_pitch_source: first_valid_go2_body_attitude_at_or_after_common_start
+    yaw_source: fixed_physical_dual_yaw_at_or_after_common_start
+    trace_initialization: false
+    method_specific_initialization: false
+    single_antenna_dual_yaw_initialization_only: true
+  C02_explicit_specialization: Use first GNSS1 position and first physical A1 NED yaw at or after B-prime t_start; initvel
+    and roll/pitch remain BY2 static zeros. This explicitly supersedes the older Go2 roll/pitch-source wording for these two
+    contracts.
+  position_rule: first GNSS1 status pos_valid epoch with sys_stamp - base_time >= t_start
+  initpos:
+  - 39.9848666
+  - 116.3431276
+  - 41.691001892089844
+  position_epoch_R1: 413.20335483551025
+  initvel:
+  - 0
+  - 0
+  - 0
+  initatt:
+  - 0
+  - 0
+  - 353.25599329459806
+  yaw_rule: first constructed A1 aligned_time >= t_start; wrap360(90 - body_candidate)
+  yaw_epoch_R1: 413.99984669685364
+  yaw_ned_deg_0_360: 353.25599329459806
+  yaw_wrap180_equivalent_deg: -6.744006705401944
+  yaw_equivalent_note: Same angle representation only; no change to initialization source, offset or physical transform
+  yaw_input_domain_check:
+    accepted_input_domain: finite real degrees; no initatt yaw range restriction in the loader or engine
+    wrap180_required_by_engine: false
+    serialization_domain: '[0, 360)'
+    loader: cpp/legsa_v23_port_core/src/config/port_config_loader.cpp:553 initatt vector multiplied by D2R, no range normalization
+    transport: cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp:36-43 makeInitialState copies init_att_rad
+    engine: cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp:109-113 initialize converts supplied Euler angles to quaternion
+    rotation: cpp/legsa_v23_port_core/src/common/rotation.cpp:131-144 euler2quaternion uses periodic sin/cos
+    output_and_residual_domains: matrix2euler outputs [0, 2*pi); wrapYawResidual uses [-pi, pi]; neither restricts initatt
+      input
+  initposstd: [10, 10, 10]
+  initvelstd: [1, 1, 1]
+  initattstd: [2, 2, 2]
+  initgyrbias: [0, 0, 0]
+  initaccbias: [0, 0, 0]
+  initgyrscale: [0, 0, 0]
+  initaccscale: [0, 0, 0]
+  initbgstd: [9.38, 9.38, 9.38]
+  initbastd: [77.8, 77.8, 77.8]
+  initsgstd: [0, 0, 0]
+  initsastd: [0, 0, 0]
+  by2_initialization_value_tokens:
+    initposstd: '[10, 10, 10]'
+    initvelstd: '[1, 1, 1]'
+    initattstd: '[2, 2, 2]'
+    initgyrbias: '[0, 0, 0]'
+    initaccbias: '[0, 0, 0]'
+    initgyrscale: '[0, 0, 0]'
+    initaccscale: '[0, 0, 0]'
+    initbgstd: '[9.38, 9.38, 9.38]'
+    initbastd: '[77.8, 77.8, 77.8]'
+    initsgstd: '[0, 0, 0]'
+    initsastd: '[0, 0, 0]'
+  by2_frozen_init_is_archived_static_contract: true
+  by2_first_epoch_vs_frozen_delta:
+    position_abs_m:
+    - 0.319
+    - 0.206
+    - 0.057
+    yaw_abs_deg: 0.374
+    role: record_only_not_a_gate_or_a_refit
+  common_initialization_all_methods: true
+  single_antenna_dual_yaw_initialization_only: true
+  trace_initialization: false
+  source_provenance:
+    body_candidate_deg: 96.74400670540197
+    candidate_t_start: 413.0
+    initvel:
+    - 0
+    - 0
+    - 0
+    method_specific_initialization: false
+    physical_a1_audit:
+      formal_input_source: status
+      gnss1_filter:
+        ant_state_filter_present: true
+        ant_valid_filter_present: true
+        input_count: 298
+        kept_count: 298
+        label: gnss1
+        rejected_ant_state_count: 0
+        rejected_ant_valid_count: 0
+        rejected_rel_valid_count: 0
+        rel_valid_filter_present: true
+      gnss1_missing_rel_or_time_count: 0
+      gnss2_filter:
+        ant_state_filter_present: true
+        ant_valid_filter_present: true
+        input_count: 298
+        kept_count: 298
+        label: gnss2
+        rejected_ant_state_count: 0
+        rejected_ant_valid_count: 0
+        rejected_rel_valid_count: 0
+        rel_valid_filter_present: true
+      gnss2_missing_rel_or_time_count: 0
+      interpolation_outside_range_count: 1
+      phase: N4H1P
+      trace_solver_input: false
+      trace_yaw_for_solver: false
+      yaw_formula: -atan2(rel_e,rel_n)
+      yaw_ned_formula: 90_minus_yaw_body
+      yaw_row_count: 297
+      yaw_source: A1_dual_diff_status
+    physical_a1_row_count: 297
+    physical_a1_source: maintained pure status_yaw_builder.build_a1_dual_diff_yaw_rows
+    physical_a1_source_sha256: 4435dd71593b1447152986ab91e2fe0394177470791a4c09815a851b75504193
+    position_rule: first GNSS1 status pos_valid epoch with sys_stamp - base_time >=
+      t_start
+    provider_files_written: 0
+    rule_source: configs/paper_rebuild/clean1_by2_clean_protocol.yaml#initialization
+    trace_initialization: false
+    yaw_rule: first constructed A1 aligned_time >= t_start; wrap360(90 - body_candidate)
+    zero_initial_velocity_roll_pitch_preserved: true
+frozen_parameters:
+  imu_preprocessing:
+    source_frame: FLU
+    solver_frame: FRD
+    flu_to_frd: [x, negative_y, negative_z]
+    install_rotation_order: Rz_yaw_Ry_pitch_Rx_roll
+    install_rpy_deg: [-1.0, 0.0, 0.0]
+    input_rate_hz: 500
+    input_rate_units_documented_in_archive: false
+    code_assumption:
+      gyro: rad_per_s
+      accelerometer: m_per_s2
+    output_incremental: true
+    gyro_bias_policy: mean_first_up_to_1000_install_corrected_frames
+    increment_policy: current_sample_times_dt
+    first_sample_output: skipped
+    invalid_dt_policy: drop_if_dt_lte_0_or_gt_0p1_seconds
+    output_columns: [time, dtheta_x, dtheta_y, dtheta_z, dvel_x, dvel_y, dvel_z]
+  dual_yaw_contract:
+    antenna_order: GNSS2_minus_GNSS1
+    physical_roles_from_active_governance:
+      GNSS1: robot_right
+      GNSS2: robot_left
+    archive_explicitly_labels_physical_roles: false
+    scheme: A1_dual_diff
+    status2_to_status1_interpolation: numpy_linear_with_endpoint_hold
+    status_interpolation_tolerance_seconds: none
+    baseline_formula: negative_atan2_rel_e_rel_n
+    body_candidate_formula: wrap(sign_times_baseline_plus_install_offset)
+    sign: 1.0
+    install_offset_deg: 0.0
+    ned_formula: wrap(90_deg_minus_body_candidate)
+    validity:
+      rel_valid: required_if_column_exists
+      ant_valid: required_if_column_exists
+      ant_state: equals_2_if_column_exists
+      missing_validity_column_policy: skip_that_gate
+    residual: wrap_safe
+  receiver_velocity_contract:
+    nav_pvt_full_message_offsets:
+      vel_n: {start: 54, end_exclusive: 58, type: little_endian_int32, scale_to_mps: 0.001}
+      vel_e: {start: 58, end_exclusive: 62, type: little_endian_int32, scale_to_mps: 0.001}
+      vel_d: {start: 62, end_exclusive: 66, type: little_endian_int32, scale_to_mps: 0.001}
+      archived_sAcc_bug: {start: 68, end_exclusive: 72}
+      corrected_sAcc: {start: 74, end_exclusive: 78, type: little_endian_uint32, scale_to_mps: 0.001}
+    sAcc_used_by_archived_provider: false
+    active_clean_parser_module: legsa_gins.paper_rebuild.ubx_nav_pvt
+    active_clean_parser_uses_corrected_sAcc_offset: true
+    provider_std_mps: [0.05, 0.05, 0.05]
+    solver_extra_std_addition_mps: [0.05, 0.05, 0.05]
+    solver_extra_std_is_floor: false
+    solver_source: final-v23-freeze/src/kf-gins/gi_engine.cpp:760-778
+    solver_source_sha256: 9c47637868b399afde9432e6ae8931638b02a2a11048f61f1d1653b48303392e
+    solver_std_combination: componentwise_add_then_square_for_R
+    effective_pre_scale_std_mps: [0.10, 0.10, 0.10]
+  filter_contract:
+    error_state_dimension: 21
+    process_noise_dimension: 18
+    state_groups: [position, velocity, attitude, gyro_bias, accel_bias, gyro_scale, accel_scale]
+    imu_gnss_time_alignment_tolerance_seconds: 0.001
+    start_boundary:
+      gnss_at_or_before_starttime: skipped
+      first_aligned_imu: initializes_state_without_output
+    imu_noise:
+      arw_deg_sqrt_h: [0.985, 0.985, 0.985]
+      vrw_mps_sqrt_h: [0.077, 0.077, 0.077]
+      gyro_bias_std_deg_h: [9.38, 9.38, 9.38]
+      accel_bias_std_mgal: [77.8, 77.8, 77.8]
+      gyro_scale_std_ppm: [0.0, 0.0, 0.0]
+      accel_scale_std_ppm: [0.0, 0.0, 0.0]
+      correlation_time_h: 1.0
+    antlever_frd_m: [0.03, 0.03, -0.30]
+    position_lever_correction: enabled
+    velocity_lever_correction: enabled
+    yaw_jacobian_H_phi_z: -1.0
+    yaw_residual: wrap_to_minus_pi_plus_pi
+    measurement_update_order: position_then_yaw_then_receiver_velocity_at_GNSS_epoch
+    state_feedback: once_after_position_yaw_velocity_sequence
+    scheme_C:
+      source: exact_tag_compile_time_constants
+      runner_environment_overrides_read_by_exact_tag_solver: false
+      historical_log_config_marker_present: true
+      yaw_std_min_deg: 0.5
+      yaw_std_soft_deg: 3.0
+      yaw_std_hard_deg: 6.0
+      yaw_res_soft_deg: 6.0
+      yaw_res_hard_deg: 15.0
+      yaw_downweight_scale: 2.5
+    output_writer:
+      text_format: '%-15.9lf'
+      nav:
+        column_count: 11
+        columns: [week_zero, time, latitude_deg, longitude_deg, height_m, vn_mps, ve_mps, vd_mps, roll_deg, pitch_deg, yaw_deg]
+      std:
+        column_count: 22
+        semantics: time_then_state_standard_deviations_in_NAV_attitude_bias_scale_output_units
+      imu_error:
+        column_count: 13
+        columns: [time, gyro_bias_x_deg_per_h, gyro_bias_y_deg_per_h, gyro_bias_z_deg_per_h, accel_bias_x_mGal, accel_bias_y_mGal, accel_bias_z_mGal, gyro_scale_x_ppm, gyro_scale_y_ppm, gyro_scale_z_ppm, accel_scale_x_ppm, accel_scale_y_ppm, accel_scale_z_ppm]
+  yaw_measurement:
+    yaw_measurement_std_deg: 1.5
+    yaw_noise_injection_enabled: false
+    yaw_noise_injection_std_deg: 0.0
+    yaw_noise_seed: null
+  provider_generation:
+    max_status_rows: null
+    max_raw_rows: null
+    max_imu_messages: null
+    yaw_source_mode: status
+    yaw_sign: 1.0
+    yaw_install_offset_deg: 0.0
+    yaw_std_mode: fixed_1p5
+    status_fixed_yaw_std_deg: 1.5
+    receiver_velocity_match_tolerance_seconds: 0.1
+    dual_yaw_match_tolerance_seconds: 0.6
+    receiver_velocity_std_mps: 0.05
+    imu_install_roll_deg: -1.0
+    imu_install_pitch_deg: 0.0
+    imu_install_yaw_deg: 0.0
+    imu_gnss_time_offset_seconds: 0.0
+    go2_velocity_frame_transform: go2_velocity_as_body_flu_then_rotate_by_go2_attitude
+    go2_roll_pitch_std_deg: 1.6
+    go2_horizontal_velocity_std_mps: 1.5
+    raw_doppler_min_sat: 5
+    raw_doppler_std_floor_mps: 0.2
+    raw_doppler_covariance_policy: conservative_isotropic_max_ecef_std_floor_0p2_mps
+    outage_enabled: false
+    outlier_mode: none
+    yaw_noise_std_deg: 0.0
+  solver_common:
+    numerical_precision: float64
+    timeout_seconds: 900
+    imu_data_columns: 7
+    imu_data_rate_hz: 500
+    init_gyro_bias: [0.0, 0.0, 0.0]
+    init_accel_bias: [0.0, 0.0, 0.0]
+    init_gyro_scale: [0.0, 0.0, 0.0]
+    init_accel_scale: [0.0, 0.0, 0.0]
+    init_position_std_m: [10.0, 10.0, 10.0]
+    init_velocity_std_mps: [1.0, 1.0, 1.0]
+    init_attitude_std_deg: [2.0, 2.0, 2.0]
+    init_gyro_bias_std_deg_h: [9.38, 9.38, 9.38]
+    init_accel_bias_std_mgal: [77.8, 77.8, 77.8]
+    init_gyro_scale_std_ppm: [0.0, 0.0, 0.0]
+    init_accel_scale_std_ppm: [0.0, 0.0, 0.0]
+    angle_random_walk_deg_sqrt_h: [0.985, 0.985, 0.985]
+    velocity_random_walk_mps_sqrt_h: [0.077, 0.077, 0.077]
+    gyro_bias_std_deg_h: [9.38, 9.38, 9.38]
+    accel_bias_std_mgal: [77.8, 77.8, 77.8]
+    gyro_scale_std_ppm: [0.0, 0.0, 0.0]
+    accel_scale_std_ppm: [0.0, 0.0, 0.0]
+    correlation_time_h: 1.0
+    antenna_lever_m: [0.03, 0.03, -0.30]
+    antenna_lever_source_status: user_frozen_measurement_lever_frd_no_rmse_selection
+    raw_doppler_min_sat: 5
+    raw_doppler_mode: doppler_ls_velocity
+    raw_doppler_time_tolerance_seconds: 0.05
+    raw_doppler_residual_gate_mps: 3.0
+    raw_doppler_R_scale: 1.0
+    go2_roll_pitch_std_deg: 1.6
+    go2_roll_pitch_time_tolerance_seconds: 0.02
+    go2_horizontal_velocity_std_mps: 1.5
+    go2_horizontal_velocity_time_tolerance_seconds: 0.08
+    go2_horizontal_velocity_std_scale: 1.0
+    go2_attitude_prior_source_aware_enabled: true
+    go2_horizontal_velocity_source_aware_enabled: true
+    go2_horizontal_velocity_adaptive_std_enabled: false
+    go2_horizontal_velocity_prior_mode: horizontal_2d
+    go2_vertical_velocity_enabled: false
+    source_aware_policy: clean_v1_conservative_innovation_covariance
+    source_aware_mode: lsim_oim
+    source_aware_max_R_scale: 25.0
+    source_aware_global_cap: 25.0
+    source_aware_use_innovation_covariance: true
+    source_aware_deadband_normalized: 1.5
+    source_aware_moderate_normalized: 2.5
+    source_aware_strong_normalized: 4.0
+    source_aware_receiver_position_cap: 5.0
+    source_aware_receiver_velocity_cap: 8.0
+    source_aware_dual_yaw_cap: 10.0
+    source_aware_raw_doppler_cap: 15.0
+    source_aware_go2_attitude_cap: 10.0
+    source_aware_go2_horizontal_velocity_cap: 10.0
+    source_aware_reject_extreme: false
+    source_aware_no_R_shrink: true
+    source_aware_trace_enabled: true
+    source_aware_enable_rolling_innovation_baseline: true
+    source_aware_rolling_window_size: 31
+    source_aware_rolling_mad_floor: 0.5
+    source_aware_method_family: clean_v1_conservative_quadratic
+    source_aware_method_k0: 1.5
+    source_aware_method_k1: 4.0
+    source_aware_method_c: 2.5
+    source_aware_method_alpha: 0.0
+    source_aware_method_phi: 1.0
+    source_aware_method_base_gain: 1.0
+    source_aware_effective_policy_branch: conservative_innovation_covariance_v1
+    source_aware_sources:
+      receiver_position: {enabled: true, lsim_enabled: true, oim_enabled: true}
+      receiver_velocity: {enabled: true, lsim_enabled: true, oim_enabled: true}
+      dual_antenna_yaw: {enabled: true, lsim_enabled: true, oim_enabled: true}
+      raw_doppler_velocity: {enabled: true, lsim_enabled: true, oim_enabled: true}
+      go2_attitude_roll_pitch: {enabled: true, lsim_enabled: true, oim_enabled: true}
+      go2_horizontal_velocity: {enabled: true, lsim_enabled: true, oim_enabled: true}
+    receiver_velocity_stress_mode: none
+    receiver_velocity_std_scale: 1.0
+    receiver_velocity_outage_start_seconds: 0.0
+    receiver_velocity_outage_duration_seconds: 0.0
+    receiver_velocity_additive_noise_std_mps: 0.0
+    receiver_velocity_additive_noise_seed: 20260510
+    diagnostic_stress_only: false
+    yaw_std_min_deg: 0.5
+    yaw_std_soft_deg: 3.0
+    yaw_std_hard_deg: 6.0
+    yaw_residual_soft_deg: 6.0
+    yaw_residual_hard_deg: 15.0
+    yaw_downweight_scale: 2.5
+  active_runtime_config_numeric_fields:
+    imudatalen: 7
+    imudatarate: 500
+    starttime: 66.0
+    endtime: 340.0
+    initpos:
+    - 39.98482973
+    - 116.34312609
+    - 41.80208107
+    initvel:
+    - 0
+    - 0
+    - 0
+    initatt:
+    - 0
+    - 0
+    - 0.688505
+    initgyrbias:
+    - 0
+    - 0
+    - 0
+    initaccbias:
+    - 0
+    - 0
+    - 0
+    initgyrscale:
+    - 0
+    - 0
+    - 0
+    initaccscale:
+    - 0
+    - 0
+    - 0
+    initposstd:
+    - 10
+    - 10
+    - 10
+    initvelstd:
+    - 1
+    - 1
+    - 1
+    initattstd:
+    - 2
+    - 2
+    - 2
+    arw:
+    - 0.985
+    - 0.985
+    - 0.985
+    vrw:
+    - 0.077
+    - 0.077
+    - 0.077
+    gbstd:
+    - 9.38
+    - 9.38
+    - 9.38
+    abstd:
+    - 77.8
+    - 77.8
+    - 77.8
+    gsstd:
+    - 0
+    - 0
+    - 0
+    asstd:
+    - 0
+    - 0
+    - 0
+    corrtime: 1.0
+    antlever:
+    - 0.03
+    - 0.03
+    - -0.3
+    initbgstd:
+    - 9.38
+    - 9.38
+    - 9.38
+    initbastd:
+    - 77.8
+    - 77.8
+    - 77.8
+    initsgstd:
+    - 0
+    - 0
+    - 0
+    initsastd:
+    - 0
+    - 0
+    - 0
+    basic_dual_yaw_fixed_std_deg: 1.5
+    receiver_velocity_std_scale: 1.0
+    receiver_velocity_outage_start_sec: 0
+    receiver_velocity_outage_duration_sec: 0
+    receiver_velocity_additive_noise_std_mps: 0
+    yaw_std_min_deg: 0.5
+    yaw_std_soft_deg: 3
+    yaw_std_hard_deg: 6
+    yaw_res_soft_deg: 6
+    yaw_res_hard_deg: 15
+    yaw_downweight_scale: 2.5
+    old_runtime_input_count: 0
+    legacy_provider_input_count: 0
+    legacy_row_input_count: 0
+    legacy_aggregate_input_count: 0
+  active_runtime_config_numeric_tokens:
+    imudatalen: '7'
+    imudatarate: '500'
+    starttime: '66.0'
+    endtime: '340.0'
+    initpos: '[39.98482973, 116.34312609, 41.80208107]'
+    initvel: '[0, 0, 0]'
+    initatt: '[0, 0, 0.688505]'
+    initgyrbias: '[0, 0, 0]'
+    initaccbias: '[0, 0, 0]'
+    initgyrscale: '[0, 0, 0]'
+    initaccscale: '[0, 0, 0]'
+    initposstd: '[10, 10, 10]'
+    initvelstd: '[1, 1, 1]'
+    initattstd: '[2, 2, 2]'
+    arw: '[0.985, 0.985, 0.985]'
+    vrw: '[0.077, 0.077, 0.077]'
+    gbstd: '[9.38, 9.38, 9.38]'
+    abstd: '[77.8, 77.8, 77.8]'
+    gsstd: '[0, 0, 0]'
+    asstd: '[0, 0, 0]'
+    corrtime: '1.0'
+    antlever: '[0.03, 0.03, -0.30]'
+    initbgstd: '[9.38, 9.38, 9.38]'
+    initbastd: '[77.8, 77.8, 77.8]'
+    initsgstd: '[0, 0, 0]'
+    initsastd: '[0, 0, 0]'
+    basic_dual_yaw_fixed_std_deg: '1.5'
+    receiver_velocity_std_scale: '1.0'
+    receiver_velocity_outage_start_sec: '0'
+    receiver_velocity_outage_duration_sec: '0'
+    receiver_velocity_additive_noise_std_mps: '0'
+    yaw_std_min_deg: '0.5'
+    yaw_std_soft_deg: '3'
+    yaw_std_hard_deg: '6'
+    yaw_res_soft_deg: '6'
+    yaw_res_hard_deg: '15'
+    yaw_downweight_scale: '2.5'
+    old_runtime_input_count: '0'
+    legacy_provider_input_count: '0'
+    legacy_row_input_count: '0'
+    legacy_aggregate_input_count: '0'
+runtime_sequence_overrides:
+  allowed_keys:
+  - starttime
+  - endtime
+  - initpos
+  - initatt
+  values:
+    starttime: 411.0
+    endtime: 683.0
+    initpos:
+    - 39.984845799999995
+    - 116.34312919999999
+    - 41.7130012512207
+    initatt:
+    - 0
+    - 0
+    - 351.3071121880813
+  note: Frozen numeric baseline retains BY2 values for exact source comparison; only these four fields are replaced by the
+    registered input-side sequence rules. Method switches are selected solely by the frozen method identities.
+yaw_physical_gate:
+  median_baseline_length_gate_m:
+  - 0.2
+  - 0.6
+  forbidden_regression_band_m:
+  - 3.5
+  - 4.5
+  forbidden_regression_action: hard_fail
+  out_of_band_epoch_action: label_only_no_epoch_deletion
+  status: PREVIEW_ONLY
+  formal_gate_stage: C-03 provider generation
+  preview:
+    epochs: 297
+    median_m: 0.35418777593777223
+    p05_m: 0.295333380036854
+    p95_m: 0.41231896539422086
+    epochs_3p5_to_4p5_m: 0
+    fraction_0p20_to_0p60_m: 0.9797979797979798
+    physical_preview: PASS
+method_set:
+  methods:
+    F01: single_antenna_EKF
+    F02: basic_dual_yaw_EKF
+    F03: AB0000
+    A04: AB1011
+    F04: AB1111
+  execution_order:
+  - F01
+  - F02
+  - F03
+  - A04
+  - F04
+  decision_pair:
+    comparison: full_vs_no_SA
+    candidate: F04
+    reference: A04
+  report_pairs:
+  - comparison: full_vs_strong
+    candidate: F04
+    reference: F03
+  - comparison: strong_vs_basic
+    candidate: F03
+    reference: F02
+  - comparison: basic_vs_single
+    candidate: F02
+    reference: F01
+  - comparison: no_SA_vs_strong
+    candidate: A04
+    reference: F03
+  - comparison: no_SA_vs_basic
+    candidate: A04
+    reference: F02
+  delta_definition: candidate_minus_reference
+  decision_rule_path: docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md
+  decision_rule_sha256: 4699d35abbfd8a56f282323b082aa5e29658e62a9575f3812836a6095f8fecce
+evaluator_contract:
+  evaluator_sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  arguments:
+  - --base_time
+  - '1772784000.0'
+  - --yaw_truth_mode
+  - enu
+  remaining_contract_reference: configs/paper_rebuild/evaluator_contract.yaml
+  remaining_contract_sha256: 6c08726e4cd823e5c8f66164b617ccdf06cc1da8ccd975b1967412d57848ac9b
+  exact_evaluator_semantics_source: configs/paper_rebuild/final_v23_parity_contract.yaml#evaluator_contract
+  exact_evaluator_semantics:
+    evaluator_sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+    solver_nav_columns_zero_based:
+      time: 1
+      latitude: 2
+      longitude: 3
+      height: 4
+      roll: 8
+      pitch: 9
+      yaw: 10
+    trace_column_selection: case_insensitive_exact_or_substring_candidate_search
+    time_conversion: subtract_base_time_unless_selected_time_column_contains_aligned_time
+    overlap_policy: crop_NAV_to_closed_trace_overlap
+    interpolation:
+      position_and_roll_pitch: numpy_linear_at_each_retained_NAV_epoch
+      yaw: unwrap_radians_then_linear_interpolate_then_convert_to_degrees
+    reference_yaw_conversion: wrap360(90_deg_minus_trace_ENU_yaw)
+    position_error_frame: local_ENU_at_first_interpolated_trace_position
+    match_tolerance_seconds: none
+    unmatched_policy: outside_overlap_dropped_and_all_interior_NAV_epochs_interpolated
+    denominator: retained_NAV_epoch_count
+    metrics:
+      rmse: sqrt_mean_square
+      p95: percentile_95_of_absolute_error
+      max: maximum_absolute_error
+      pass_ratio: mean_absolute_error_lte_fixed_threshold
+  precedence_note: C-02 explicitly freezes the exact evaluator SHA. The older evaluator_contract.yaml is retained as the reference-role/frame/forbidden-postprocessing
+    contract; its ECEF matching/max-gap/unmatched-row policies differ from the exact evaluator and must not silently replace
+    that executable.
+  recorded_source_differences:
+  - older YAML uses ECEF interpolation and gap/retain-unmatched policies; exact frozen evaluator crops to trace overlap and
+    linearly interpolates interior epochs with local ENU errors
+  aggregate_WINDOW:
+  - 411.0
+  - 683.0
+  trace_open_allowed_stage: C-05 only, after outputs of all five methods are frozen
+  reference_role: Fixposition-derived same-source evaluation reference
+  independent_ground_truth: false
+  C02_solver_count: 0
+  C02_evaluator_count: 0
+  C02_provider_generation_count: 0
+  C02_trace_content_reads: 0
+aggregate_tables:
+  required:
+  - UNIQUE_EVALUATION_RESULTS
+  - UNIQUE_METHOD_SUMMARY
+  - PAIRWISE_CASE_LEVEL
+  - PAIRWISE_SUMMARY
+  - MODULE_ACTION_SUMMARY
+  - RUNTIME_SUMMARY
+  - METRIC_COVERAGE_REPORT
+  same_WINDOW_for_all_methods: true
+  metric_coverage_required: true
+forbidden:
+- per_sequence_tuning
+- time_offset_search
+- sign_search
+- coordinate_or_axis_search
+- constant_offset_search
+- epoch_deletion
+- trace_outside_C05_evaluation
+- trace_as_provider_or_solver_input
+- run_541_matrix
+- modify_decision_rule_file
+- modify_BY2_modules
+- modify_cpp
+- spoof_dataset_or_stage_identity_for_solver_admission
+- solver_evaluator_provider_execution_in_C02
+contract_version: 2
+supersedes_v1_sha256: 60553d29a417a23abbeb04411c0b05dc7a4e87d181488894569e574486c312dc
+amended_before_unblinding: true
+amendment_reason: 'The human acquisition protocol requires the kick before the algorithm
+  start; v1 B-prime does not encode this event order, and BY2O v1 starts about 0.35
+  s before its kick. Amendment requested before any CLEAN5 reference-trace unblinding
+  or evaluation. Second amendment: censored-onset fallback and IMU-availability shift
+  are input-side, pre-unblinding rules. Event report SHA-256: 1c613ac36c203717fe2527ced79718a886b6a031c7547f1ab7b418a974c7e095.'
+human_protocol_statement: 无 PTP 跨设备对时；启动时蹬一脚；算法起点 = 蹬脚后 GNSS 与机身 IMU 同时出现运动的时刻；结束
+  = 去掉末尾若干秒。
+amendment_code_commit: ba7d380bb11db5cdc5b3a56ed9f86b148e3db554
+event_window_report_sha256: 1c613ac36c203717fe2527ced79718a886b6a031c7547f1ab7b418a974c7e095

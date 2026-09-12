@@ -1,0 +1,2953 @@
+schema_version: paper_rebuild.clean5.degradation_subset.v1
+stage_root: <CLEAN_ROOT>/stages/CLEAN5_DEGSUBSET_BY2
+authorization:
+  start_commit: ff0631428102902702cf82b3a5030467be30f581
+  vchk_commit: ace468ae7926cfbc156a0bdffd3e836ad621cec8
+  human_release_commit: 967d6b396b95ef7ec416b187813e0872a1c7fd1b
+  v6: PASS_BY_HUMAN_AMENDMENT
+  date: '2026-09-10'
+  provider_generation_requires_committed_contract: true
+selection:
+  rule: For each degradation_type_id, choose seed_index==0 and median severity (lower middle for even levels); if
+    no seed0 use minimum seed; add C00. Never alter selection using outputs.
+  severity_representation: Registry has no severity column. Each D01-D60 has one unique degradation_parameters_json
+    repeated across nine seeds; each is a single severity level.
+  seed_index_encoding: seed_00 is integer seed_index 0
+  registered_case_count: 541
+  selected_case_count: 61
+  excluded_case_count: 480
+  excluded_reason_counts:
+    nonselected_seeds: 480
+    NOT_TRANSFERABLE: 0
+  fallback_seed_types: []
+  NOT_TRANSFERABLE: []
+  selected_case_ids:
+  - C00_clean_normal
+  - D01_seed_00
+  - D02_seed_00
+  - D03_seed_00
+  - D04_seed_00
+  - D05_seed_00
+  - D06_seed_00
+  - D07_seed_00
+  - D08_seed_00
+  - D09_seed_00
+  - D10_seed_00
+  - D11_seed_00
+  - D12_seed_00
+  - D13_seed_00
+  - D14_seed_00
+  - D15_seed_00
+  - D16_seed_00
+  - D17_seed_00
+  - D18_seed_00
+  - D19_seed_00
+  - D20_seed_00
+  - D21_seed_00
+  - D22_seed_00
+  - D23_seed_00
+  - D24_seed_00
+  - D25_seed_00
+  - D26_seed_00
+  - D27_seed_00
+  - D28_seed_00
+  - D29_seed_00
+  - D30_seed_00
+  - D31_seed_00
+  - D32_seed_00
+  - D33_seed_00
+  - D34_seed_00
+  - D35_seed_00
+  - D36_seed_00
+  - D37_seed_00
+  - D38_seed_00
+  - D39_seed_00
+  - D40_seed_00
+  - D41_seed_00
+  - D42_seed_00
+  - D43_seed_00
+  - D44_seed_00
+  - D45_seed_00
+  - D46_seed_00
+  - D47_seed_00
+  - D48_seed_00
+  - D49_seed_00
+  - D50_seed_00
+  - D51_seed_00
+  - D52_seed_00
+  - D53_seed_00
+  - D54_seed_00
+  - D55_seed_00
+  - D56_seed_00
+  - D57_seed_00
+  - D58_seed_00
+  - D59_seed_00
+  - D60_seed_00
+sources:
+  case_registry:
+    path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/02_MATRIX_SPEC_LOCK/CANONICAL541_CASE_MANIFEST.csv
+    sha256: ac58b992a56f3ab05c585973fa6ceef1493d0d5cd6a9f0a9e18dae8edd998cb2
+  unique_run_registry:
+    path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/07_FULL_ALGORITHM_REGISTRY/CANONICAL541_UNIQUE_RUN_REGISTRY.csv
+    sha256: 114b44ca662ff480978321a3cf3e24930313cd377e50aa4df3317a88682ef927
+  provider_ready:
+    path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/06_PROVIDER_READY/CANONICAL541_PROVIDER_READY_MANIFEST.csv
+    sha256: 7aeab25576ef4d68cc26fd09a05758e3c73cb93b2ea67de5a94aaef601f13f14
+  component_validation:
+    path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/06_PROVIDER_READY/COMPONENT_VALIDATION_TABLE.csv
+    sha256: 6d7fa1142a400e04eab61bc72a26f6f48f88b43740414d77f35381894c6c8139
+  provider_reuse_proof:
+    path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/06_PROVIDER_READY/CROSS_STAGE_PROVIDER_REUSE_MANIFEST.json
+    sha256: 951834feab30d008f4709877afdfa60ec7a23daa960be31bf49f6699b07d60a5
+  pairwise_summary:
+    path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/13_AGGREGATE/PAIRWISE_SUMMARY.csv
+    sha256: 923291d80110570f0f75d3e13451b3d83375cb0f13066f7cfa18b30185f3837d
+  pairwise_case_level:
+    path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/13_AGGREGATE/PAIRWISE_CASE_LEVEL.csv
+    sha256: 47e1158b482cf2be585dd7f2a4c584acd98cc51071d6769a1121f1b67ee9e6fa
+  base_provider_bundle:
+    path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_PROVIDER_BUNDLE.json
+    sha256: cd29237a621ae7a8d4ef6fcaf44c113ca8b41a221bff9849c4e99740cc568b79
+  raw_lock:
+    path: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv
+    sha256: f6e5d7965d17857e5b4a846501883f4675f2331a1164fab3de9e5ba9470f1ad7
+  frozen_injection_library:
+  - path: <CODE_ROOT>/src/legsa_gins/paper_rebuild/canonical541/provider_generator.py
+    sha256: 3328272fc994deef38600d4236afaed64cb100ea6810426a5f089f6eeb49f3a4
+  - path: <CODE_ROOT>/src/legsa_gins/paper_rebuild/canonical541/seed_anchor.py
+    sha256: 9becbb782e5c754a06d9bd59c8dbda69b60a041c8b0aec52fd9957ed34c4ebcc
+  - path: <CODE_ROOT>/src/legsa_gins/paper_rebuild/canonical541/matrix_spec.py
+    sha256: 803138e8aa15f5eb0604b0fcab4db70ac9e9d22121ae4023172e5979501502ed
+  - path: <CODE_ROOT>/configs/paper_rebuild/degradation_60types_9seeds.yaml
+    sha256: 9d22768be55b8b88e126f1101e5619ac0afe97cdedc3af28c1458fa9ef83b76f
+providers:
+  roles:
+    imupath:
+      path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+      sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+    gnsspath:
+      path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_GNSS.gnss
+      sha256: 68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a
+    raw_doppler_factor_path:
+      path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+      sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    go2_attitude_prior_path:
+      path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+      sha256: 2329770b8e9bc61c02fbf943e2e5fd9ea233d6fd8a3550f7a22410a536155c7a
+    go2_horizontal_velocity_prior_path:
+      path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+      sha256: f390c8e51f1bec1162c0f6c628ebbcd0449923cfbf9211bebb36004dc2b2aab0
+  auxiliary_roles:
+    dual_yaw_audit:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/providers/dual_yaw_provider.csv
+      sha256: ccf442f32a0037ba742d199d7ab078d5af112aea5981effce1f23a80510bdd86
+    source_quality_metadata:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/source_quality_metadata.csv
+      sha256: e0fd26d58606b162d4ca61adc980b00c1b030b71c06275b11a277d4901df680b
+  format_columns: 18
+  position_RV_nominal_rate_hz: 5
+  heading_policy: A1 effective valid rows only; no held yaw measurements
+  missing_policy: validity=0 formal implementation; frozen library uses validity flags already
+  delete_row_control: NOT_APPLICABLE_FROZEN_LIBRARY_USES_VALIDITY_BITS
+  input_families:
+  - CLEAN5_DEGSUBSET_CAL
+  - CLEAN5_DEGSUBSET_V2S
+  mapping:
+  - degradation_type_id: CLEAN
+    case_id: C00_clean_normal
+    status: CLEAN_REFERENCE
+    mode: CLEAN_REFERENCE_BYTE_IDENTITY
+    operation: none
+    parameters:
+      operation: none
+    affected_sources: []
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/00_CASE_SPEC/case_spec_dump.json
+      sha256: 69896abd8b4d07ebe6ce3c6484cd1180277357f13984224237d7624d69cc3ff1
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_generation_log.json
+      sha256: 2ee58cae0e26f8babe08e1c21801f2dbc953ef603ea657ba0621797fd929a5b0
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 5cf988b7db7eeb77d0f81494e8d9d1f11721c354c04b8aa5224420e96394ce3e
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 0
+      affected_source: none
+      component: clean_reference_no_degradation
+      details: {}
+      status: PASS
+  - degradation_type_id: D01
+    case_id: D01_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TIME_WINDOWS_UNCHANGED
+    operation: outage
+    parameters:
+      duration_s: 3
+      operation: outage
+      sources:
+      - gnss_position
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D01_seed_00/02_PROVIDERS/provider_index.json
+      sha256: dcd9723973310eb7d0cdf314d3f23d8ed9b560730fc4645a734c4d14f380aaa2
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D01_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 79d472fa656bf1e9f310a292094e63d6f033358b9eb4606d6643897120608d2a
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D01_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 0a868ffa7d0387eac425362be86204b6ef565ec36b7b238af6ad44697f380ec8
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D01_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 410e9c72e1bbbb235a30a549d624a05fe8abe5e72b9a4eb3358b9715b03447dd
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 3
+      affected_source: gnss_position
+      component: outage
+      details:
+        interval:
+        - 204.7
+        - 207.7
+      status: PASS
+  - degradation_type_id: D02
+    case_id: D02_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TIME_WINDOWS_UNCHANGED
+    operation: outage
+    parameters:
+      duration_s: 5
+      operation: outage
+      sources:
+      - gnss_position
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D02_seed_00/02_PROVIDERS/provider_index.json
+      sha256: ea10ba39717fd43e5bfd19f85ec7c64dbb219ec8072a0d61fb2e38e94893bd32
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D02_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: bfa8a93e8c9fb9bae241bf675705f3f07b5a8f956fe0593a7b52b2b61ead0a7c
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D02_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: dc518fa6d7b2f134f15e5c2d68475d4c72887d6d87f801b2b660967e1c24cba9
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D02_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 6bfeb4d2e7623c5bd24ec01962be0eb2dac455118df14a42df25f1f16b4791e8
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 5
+      affected_source: gnss_position
+      component: outage
+      details:
+        interval:
+        - 203.7
+        - 208.7
+      status: PASS
+  - degradation_type_id: D03
+    case_id: D03_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TIME_WINDOWS_UNCHANGED
+    operation: outage
+    parameters:
+      duration_s: 10
+      operation: outage
+      sources:
+      - gnss_position
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D03_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 6922f38f0c170c67ac94a427bdf2539eee2fd0ead443e8b3cf8ea0d2c9300d5e
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D03_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: c12b71e5401490d07f1e0ac4f73651d6d3ed185b57d7ffa83109fa89b362dcea
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D03_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 0e40ca75bedefe8290f633f974ce043528dff4b4d7a64e2ec9ce5194cf72cc21
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D03_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: cf70cd15bb3579e9c2d107b53a2803a439b4163ea5bc25a146999df2d33383a6
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 10
+      affected_source: gnss_position
+      component: outage
+      details:
+        interval:
+        - 201.2
+        - 211.2
+      status: PASS
+  - degradation_type_id: D04
+    case_id: D04_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TIME_WINDOWS_UNCHANGED
+    operation: outage
+    parameters:
+      duration_s: 20
+      operation: outage
+      sources:
+      - gnss_position
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D04_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 6f0e2a7cce0434b6025d1d50b1748d29774c982d03b60e4b196c187414b045ac
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D04_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: fac41f80f97e8dd724b1a80179e54575a2e5000e96453be3644acf3d5b2f862d
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D04_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: e45b126e92be76b665b905df5d9ac0f3cf3b5e6e5050198b0d9f6b2968f692bc
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D04_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 6cdd1ec2637efb59361009a69dec09ca8616239edb6d1d8c273f8f6f92f2ffc8
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 20
+      affected_source: gnss_position
+      component: outage
+      details:
+        interval:
+        - 196.2
+        - 216.2
+      status: PASS
+  - degradation_type_id: D05
+    case_id: D05_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TIME_WINDOWS_UNCHANGED
+    operation: outage
+    parameters:
+      duration_s: 10
+      operation: outage
+      sources:
+      - gnss_position
+      - receiver_velocity
+    affected_sources:
+    - gnss_position
+    - receiver_velocity
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D05_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 7929ae756eed4bfe7974ad8f0bd65c1fa3a39d3f829e2e2a4f3d40839e65e48e
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D05_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 28fba531cd2b64f64b62dc38a03a56b760ee2fe9ffbe2b9fdd9269cbc4f2a39d
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D05_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: aae3dc19065e670e544be68ed8ab38c5e297ead0afe4c61764d06377260f21ef
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D05_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: c078002d882881901a63dc324aebf9c1d295c5ecca042b489e816ac7df96a40e
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 10
+      affected_source: gnss_position
+      component: outage
+      details:
+        interval:
+        - 201.2
+        - 211.2
+      status: PASS
+    - affected_epoch_count: 10
+      affected_source: receiver_velocity
+      component: outage
+      details:
+        interval:
+        - 201.2
+        - 211.2
+      status: PASS
+  - degradation_type_id: D06
+    case_id: D06_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TIME_WINDOWS_UNCHANGED
+    operation: outage
+    parameters:
+      duration_s: 20
+      operation: outage
+      sources:
+      - gnss_position
+      - receiver_velocity
+      - dual_yaw
+    affected_sources:
+    - gnss_position
+    - receiver_velocity
+    - dual_yaw
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D06_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 1ef32203363b5a487ef7ca20c74aa77348d5d13bb1cf57c2f7330895062ed37c
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D06_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: d842d2af77b42e2ca1c095cfc40e6fa580a53dc602f046811b43c0b30b791e7d
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D06_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 1ba0c8e38e1b355e5514fc7e4c4d4e7f9823b73c7d85fa5e94b98d9108ae9c4a
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D06_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 7122e2130afe0f7f4d16478523f7b91767539305d976ce5199347f063743d88d
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 20
+      affected_source: gnss_position
+      component: outage
+      details:
+        interval:
+        - 196.2
+        - 216.2
+      status: PASS
+    - affected_epoch_count: 20
+      affected_source: receiver_velocity
+      component: outage
+      details:
+        interval:
+        - 196.2
+        - 216.2
+      status: PASS
+    - affected_epoch_count: 20
+      affected_source: dual_yaw
+      component: outage
+      details:
+        interval:
+        - 196.2
+        - 216.2
+      status: PASS
+  - degradation_type_id: D07
+    case_id: D07_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TIME_WINDOWS_UNCHANGED
+    operation: repeated_outage
+    parameters:
+      duration_each_s: 3.0
+      interval_centers_relative_to_anchor_s:
+      - -6.0
+      - 0.0
+      - 6.0
+      interval_count: 3
+      operation: repeated_outage
+      seed_controls: interval_start_times
+      sources:
+      - gnss_position
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D07_seed_00/02_PROVIDERS/provider_index.json
+      sha256: b0549f4c87bdf9c68c894dbbde54665fc2aa9d2a351b62b3a0d93f3a0637febc
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D07_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 100e37ec36dcc5d15382172af5ba57324dd51ed30c1f87038685a7e1de1c957b
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D07_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 5c7edce57fe74b09ad1311c77f209011659ba4a4cabda317e1b14040280631c3
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D07_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: ced98b7d954dd3d98340ffed7518e224acd115ee4eb7ba58f3fce6d4b401541f
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 9
+      affected_source: gnss_position
+      component: repeated_3x3s_outage
+      details:
+        intervals:
+        - - 198.7
+          - 201.7
+        - - 204.7
+          - 207.7
+        - - 210.7
+          - 213.7
+      status: PASS
+  - degradation_type_id: D08
+    case_id: D08_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TARGET_RATE_PHASE_ON_NOMINAL_5HZ_INPUT
+    operation: downsample
+    parameters:
+      operation: downsample
+      seed_controls: phase
+      sources:
+      - gnss_position
+      - receiver_velocity
+      - dual_yaw
+      target_rate_hz: 5
+    affected_sources:
+    - gnss_position
+    - receiver_velocity
+    - dual_yaw
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D08_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 27f327c48bbb0c2228a128d41c7f9e26728b42537614639b69421a31d25559b6
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D08_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: a72139b35a70756ba48b2909fb6da2cc04ea10db4073482044c741a642f1b5c8
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D08_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 4dddc54f9463009e8ceed59b4f279370de62f8c0cb78751a8d3022665296315f
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D08_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 5cf988b7db7eeb77d0f81494e8d9d1f11721c354c04b8aa5224420e96394ce3e
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 0
+      affected_source: gnss_position+receiver_velocity+dual_yaw
+      component: downsample
+      details:
+        idempotent: true
+        target_rate_hz: 5.0
+      status: PASS
+  - degradation_type_id: D09
+    case_id: D09_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TARGET_RATE_PHASE_ON_NOMINAL_5HZ_INPUT
+    operation: downsample
+    parameters:
+      operation: downsample
+      seed_controls: phase
+      sources:
+      - gnss_position
+      - receiver_velocity
+      - dual_yaw
+      target_rate_hz: 2
+    affected_sources:
+    - gnss_position
+    - receiver_velocity
+    - dual_yaw
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D09_seed_00/02_PROVIDERS/provider_index.json
+      sha256: a147037198aa42c887919d5e7f7976792ab8b3cc69e16204b0f5d69a51cf0cf5
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D09_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 29ed50c74688d27d8f16990cc98e331453c50524e97bf71cacec62612794b207
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D09_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: d805f7b0d85811138906d844e5f4f174ad12cdccbf12fa5823b64ab34bb74708
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D09_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 5cf988b7db7eeb77d0f81494e8d9d1f11721c354c04b8aa5224420e96394ce3e
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 0
+      affected_source: gnss_position+receiver_velocity+dual_yaw
+      component: downsample
+      details:
+        idempotent: true
+        target_rate_hz: 2.0
+      status: PASS
+  - degradation_type_id: D10
+    case_id: D10_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TARGET_RATE_PHASE_ON_NOMINAL_5HZ_INPUT
+    operation: downsample
+    parameters:
+      operation: downsample
+      seed_controls: phase
+      sources:
+      - gnss_position
+      - receiver_velocity
+      - dual_yaw
+      target_rate_hz: 1
+    affected_sources:
+    - gnss_position
+    - receiver_velocity
+    - dual_yaw
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D10_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 96de6b1e183b7dcfa00e2ea3a0465342526896a5d2ff7ee54c4a440b838256ab
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D10_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 1f18fcddca488f72533c465d0db6664aca169238096f0bae031bffcfb4f7771f
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D10_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 9224635db4b91581c513513373ddd73aec3c0f02813e5ccb6e2213471186a1eb
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D10_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 5cf988b7db7eeb77d0f81494e8d9d1f11721c354c04b8aa5224420e96394ce3e
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 0
+      affected_source: gnss_position+receiver_velocity+dual_yaw
+      component: downsample
+      details:
+        idempotent: true
+        target_rate_hz: 1.0
+      status: PASS
+  - degradation_type_id: D11
+    case_id: D11_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: random_dropout
+    parameters:
+      dropout_ratio: 0.3
+      operation: random_dropout
+      seed_controls: dropout_pattern
+      sources:
+      - gnss_position
+      - receiver_velocity
+      - dual_yaw
+    affected_sources:
+    - gnss_position
+    - receiver_velocity
+    - dual_yaw
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D11_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 9d110c1265024266be7e390d6cb6df6f71182a580e2168deaf171441a9e70eef
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D11_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: ab03b6b9a1cf1c267db2ceac21596274bb013256ee77c6de99dcf376dfe8b300
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D11_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: e2fe87786802f16624efa4f4ad1dab460723e378f9c032398d5ed0f4ae85fec8
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D11_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: eb32d0599f9d0ee20ba4b184e5d8980666cc5f79153c809073737f1dd211073b
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 273
+      affected_source: gnss_position+receiver_velocity+dual_yaw
+      component: random_dropout
+      details:
+        ratio: 0.3
+      status: PASS
+  - degradation_type_id: D12
+    case_id: D12_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: random_dropout
+    parameters:
+      dropout_ratio: 0.6
+      operation: random_dropout
+      seed_controls: dropout_pattern
+      sources:
+      - gnss_position
+      - receiver_velocity
+      - dual_yaw
+    affected_sources:
+    - gnss_position
+    - receiver_velocity
+    - dual_yaw
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D12_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 507580f1b4e15aff4aba9d278360854be011bb42d909cf564166bfabd4f1a710
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D12_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 07226ccc6c79cc7847ecba89bd80895577f09bcf9992d1da417fe104a8f5167d
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D12_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 4da083aa2483f9a6cfe1eb0fb086fe893dd0af46b95d61366f51d32b15b338ed
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D12_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: d49cb4dea10f7e84f36ccb77ae023fe8d01bae1322430e3905e9511e06960c56
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 546
+      affected_source: gnss_position+receiver_velocity+dual_yaw
+      component: random_dropout
+      details:
+        ratio: 0.6
+      status: PASS
+  - degradation_type_id: D13
+    case_id: D13_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: gaussian_position_noise
+    parameters:
+      h_sigma_m: 0.5
+      operation: gaussian_position_noise
+      v_sigma_m: 1.0
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D13_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 30f8232c713e711ea74052b9fe3e40f13df58f8766567d3ee7583460e72ad96f
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D13_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: b4c469a2aa08037271f5abc9c2c353ef92ad509e8be7a6742cd1e19689a348d6
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D13_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: b4dcad53c3926d0efddca4086ba69fcd4226984f5f08f62c4e7fae3ca7f8e432
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D13_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 17769b2e161cece8a2873b4a6d581c1d6688feabfe2581876a0e7c155b485e30
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position
+      component: position_gaussian_noise
+      details:
+        h_sigma: 0.5
+        v_sigma: 1.0
+      status: PASS
+  - degradation_type_id: D14
+    case_id: D14_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: gaussian_position_noise
+    parameters:
+      h_sigma_m: 1.5
+      operation: gaussian_position_noise
+      v_sigma_m: 2.5
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D14_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 8094156b55d1df3487dd41d1bf0dd4efaad5c5b2c425ac3b9a0470e42e045645
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D14_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 30ec48db7c8c82d5b98ef7fb980f81b4e32e264772d3cf53289b5cd752744aaf
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D14_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 6f473bdef1422d697d07d6cd3e59f1e77d9e2206c30ab55cd5eca31bca62e3b9
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D14_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 17769b2e161cece8a2873b4a6d581c1d6688feabfe2581876a0e7c155b485e30
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position
+      component: position_gaussian_noise
+      details:
+        h_sigma: 1.5
+        v_sigma: 2.5
+      status: PASS
+  - degradation_type_id: D15
+    case_id: D15_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: gaussian_position_noise
+    parameters:
+      h_sigma_m: 3.0
+      operation: gaussian_position_noise
+      v_sigma_m: 5.0
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D15_seed_00/02_PROVIDERS/provider_index.json
+      sha256: a5c20c5b1a00f4c925e595376dbe77de4406c4296dec6df49e665cce411de271
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D15_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: db16ed1cfe55d4348454ed26afffa58a0ff9e7b375d8c8bd38a5df994ee28a78
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D15_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: b78cb03f1d1b53b31c191584891b639f658d849c8a9d7654176a81712c48f35f
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D15_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 17769b2e161cece8a2873b4a6d581c1d6688feabfe2581876a0e7c155b485e30
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position
+      component: position_gaussian_noise
+      details:
+        h_sigma: 3.0
+        v_sigma: 5.0
+      status: PASS
+  - degradation_type_id: D16
+    case_id: D16_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: static_position_bias
+    parameters:
+      horizontal_bias_m: 1.5
+      operation: static_position_bias
+      seed_controls: horizontal_direction_and_vertical_sign
+      vertical_bias_m: 0.5
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D16_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 788f39007311f979c08994e5efcc35af53c159a1f4560da978ca01aa33fab296
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D16_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 84a4ddb2d8144664077ebde7fefc3002cf089f6c08b6556696ce5ae32b07437f
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D16_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 841f5a8cfcc1f041a53196fc67514e2cad2ae643ff4c1f5b5994e20bdaee6479
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D16_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 17769b2e161cece8a2873b4a6d581c1d6688feabfe2581876a0e7c155b485e30
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position
+      component: position_static_bias
+      details:
+        direction_rad: 5.788180028253129
+        horizontal_m: 1.5
+        vertical_m: 0.5
+        vertical_sign: 1.0
+      status: PASS
+  - degradation_type_id: D17
+    case_id: D17_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: static_position_bias
+    parameters:
+      horizontal_bias_m: 3.0
+      operation: static_position_bias
+      seed_controls: horizontal_direction_and_vertical_sign
+      vertical_bias_m: 1.0
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D17_seed_00/02_PROVIDERS/provider_index.json
+      sha256: d8d229647149f51f45affa588025fb8bd38f870a26829fec48a3b56afb070e98
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D17_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 92aad619a902767b48024d7c4c983d975e97f4cb828d641fbbbb9de1c986b219
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D17_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 234bc3955c817901a3433ad876a2ae6385076c3ff6a8f16295936ea14a2aa99c
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D17_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 17769b2e161cece8a2873b4a6d581c1d6688feabfe2581876a0e7c155b485e30
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position
+      component: position_static_bias
+      details:
+        direction_rad: 5.788180028253129
+        horizontal_m: 3.0
+        vertical_m: 1.0
+        vertical_sign: 1.0
+      status: PASS
+  - degradation_type_id: D18
+    case_id: D18_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: slow_drift_bias
+    parameters:
+      horizontal_end_m: 3.0
+      horizontal_start_m: 0.0
+      operation: slow_drift_bias
+      vertical_end_m: 1.0
+      vertical_start_m: 0.0
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D18_seed_00/02_PROVIDERS/provider_index.json
+      sha256: d04dac4cd43729d0986de920946e3603472c4d757d4606b0bf0b35e73bad3a63
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D18_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: d22891ad81c42de6b5667fa9bc36f0ea64a22d457d36944a990c703be2a9ec6d
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D18_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 950fd88f9f53baf38210040dd9ca1159ae48caedc06e911f0157e2e77cbb9325
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D18_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 8f4acd4e5368a901553047297f58312a16546566a4f8f33a14b7ad5c0052bb07
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position
+      component: position_slow_drift
+      details:
+        horizontal_end_m: 3.0
+        vertical_end_m: 1.0
+      status: PASS
+  - degradation_type_id: D19
+    case_id: D19_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: sinusoidal_multipath
+    parameters:
+      angular_time_denominator_s: 30.0
+      horizontal_amplitude_m: 2.0
+      operation: sinusoidal_multipath
+      period_s: 188.49555921538757
+      phase_rule: 2*pi*U(component_substream)
+      seed_controls: phase
+      vertical_amplitude_m: 0.5
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D19_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 32e15a0e0165a1b715230db847e889ac43a4a61d086623f97a5b921c660e0d8a
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D19_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 5c19e2b548b98999e7fda70d298281a0816575fc8562e0db1fec9705ae43303d
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D19_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 320103f0f75e2b7f9a4819e79827f9000a5983bf21b1bb4fd186371c18d6cc90
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D19_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 17769b2e161cece8a2873b4a6d581c1d6688feabfe2581876a0e7c155b485e30
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position
+      component: position_sinusoidal_multipath
+      details:
+        horizontal_law: north=2*cos;east=2*sin
+        period_s: 188.49555921538757
+        phase_rad: 5.84740275561746
+        vertical_law: up=0.5*sin
+      status: PASS
+  - degradation_type_id: D20
+    case_id: D20_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: position_spike
+    parameters:
+      horizontal_m: 2.0
+      operation: position_spike
+      probability: 0.02
+      vertical_m: 1.0
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D20_seed_00/02_PROVIDERS/provider_index.json
+      sha256: d842e5f891a02c8917f32c09945cea604babae2752fd5014231639c4f691e4fa
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D20_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: babcfdf7dece30ad0ac8a3267c4fb4c758244a49634870a4be53fc15835a3e4c
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D20_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: f4d3f09da873b34d73fae11828f1b0ad70f4ca05b8411b4ff43b482ed0b818e8
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D20_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: a1aec31bec33ae4bde86bbf2af606145600c099ae26a1448fba4e476ccaaef70
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 6
+      affected_source: gnss_position
+      component: position_spikes
+      details:
+        horizontal_m: 2.0
+        probability: 0.02
+        vertical_m: 1.0
+      status: PASS
+  - degradation_type_id: D21
+    case_id: D21_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: position_spike
+    parameters:
+      horizontal_m: 4.0
+      operation: position_spike
+      probability: 0.05
+      vertical_m: 2.0
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D21_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 9aa19f7d9c1f7781f7e66f06387af92d79a9a6b3f0dc41d1ac3d04bc4ed6be87
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D21_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 811a60ff1a7f42b7348435b727f66ee01fb15634922634e24b667e1a5a23ad29
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D21_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 6e97afe34130df10e6da9900bb3e537965b4f9011a4c83504bdd1cf20ca43360
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D21_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 8f51d97ad47194c4ff15260b3548653a44a8289c4d9dd9788701b7e683cdc420
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 15
+      affected_source: gnss_position
+      component: position_spikes
+      details:
+        horizontal_m: 4.0
+        probability: 0.05
+        vertical_m: 2.0
+      status: PASS
+  - degradation_type_id: D22
+    case_id: D22_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_EPOCH_COUNT_TO_EQUAL_DURATION_SECONDS
+    operation: position_burst_spike
+    parameters:
+      burst_length_epochs_max: 5
+      burst_length_epochs_min: 3
+      horizontal_m: 8.0
+      operation: position_burst_spike
+      vertical_m: 4.0
+    affected_sources:
+    - gnss_position
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D22_seed_00/02_PROVIDERS/provider_index.json
+      sha256: a9e9aefc0cb701fd60001d482d5718ccc083d37c49517858ce73cfca48dc713a
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D22_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 47a02fac5cac6264d880f4b55288fcd92ade7bbf7cb4de0c0ddb7e59cd436f9f
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D22_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 86e9d3665b516d45e35005649dd9c884d22f1cf6a93c6c535fb9639d75b74681
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D22_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 43fe32ab865826295b18a5c2fd0b5a2d000dd4ef33e8c267d2cf640800fe87a7
+    intervals:
+    - start_s: 348.205852
+      end_s: 352.205852
+      source_ids:
+      - gnss_position
+      frozen_affected_count: 4
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    window_note: Keep frozen onset even if outside evaluation [66,340]; old 1 Hz epoch count maps to seconds; half-open
+      intervals.
+    frozen_components:
+    - affected_epoch_count: 4
+      affected_source: gnss_position
+      component: position_burst_spike
+      details:
+        burst_length: 4
+        horizontal_m: 8
+        vertical_m: 4
+      status: PASS
+  - degradation_type_id: D23
+    case_id: D23_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: std_inflation
+    parameters:
+      factor: 1.5
+      operation: std_inflation
+      source: gnss_position_std
+    affected_sources:
+    - gnss_position_std
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D23_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 54a2493e614344caa97962da078e293d590d9e8f2a726e9f77213ce3819ba307
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D23_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 19be889420ce388a17a8f08db79178c87437955fab6026de45554711bb8874f2
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D23_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 7e8fcaf6637894bc51e98d4bfec55123235ed8a2ac7a2d18ba10ba700c72f8bb
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D23_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 11e72162abdc40f7be718c96f3c09995bb3b7711dc999f6aac8ab040f43acfec
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position_std
+      component: position_std_scale
+      details:
+        factor: 1.5
+        values_unchanged: true
+      status: PASS
+  - degradation_type_id: D24
+    case_id: D24_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: std_inflation
+    parameters:
+      factor: 2.5
+      operation: std_inflation
+      source: gnss_position_std
+    affected_sources:
+    - gnss_position_std
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D24_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 6850a7a4c96dc5c35934e4ca9c5e1736bd661773ebd4b8da807b258883457be8
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D24_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: c96079758e9f25e9e161d9463dc850377942604bc2a668e8a12a478c4c1e98fe
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D24_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 051fbd7fff39e41dc682e7a3cf30b8239301931d707e7bdf730ae1b38df552fa
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D24_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 11e72162abdc40f7be718c96f3c09995bb3b7711dc999f6aac8ab040f43acfec
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position_std
+      component: position_std_scale
+      details:
+        factor: 2.5
+        values_unchanged: true
+      status: PASS
+  - degradation_type_id: D25
+    case_id: D25_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: std_inflation
+    parameters:
+      factor: 4.0
+      operation: std_inflation
+      source: gnss_position_std
+    affected_sources:
+    - gnss_position_std
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D25_seed_00/02_PROVIDERS/provider_index.json
+      sha256: ea5cef60d85f37df4e740146d27d92e005f2e371a2a14939ac00ea42ec3ad885
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D25_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: ec31d06008563e1485473973906aed199f2a75d78aea096ae14defccbc3f3084
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D25_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 85f5d86e0e24a3ae016fe11cd4867b5023bde9e93d51a3292d2172c8e7eab93d
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D25_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 11e72162abdc40f7be718c96f3c09995bb3b7711dc999f6aac8ab040f43acfec
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position_std
+      component: position_std_scale
+      details:
+        factor: 4.0
+        values_unchanged: true
+      status: PASS
+  - degradation_type_id: D26
+    case_id: D26_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: std_deflation
+    parameters:
+      factor: 0.25
+      operation: std_deflation
+      source: gnss_position_std
+    affected_sources:
+    - gnss_position_std
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D26_seed_00/02_PROVIDERS/provider_index.json
+      sha256: cc06a89b1f2187fa9dd35ee44135ae008d21cdf25b475866e7bec2910a24394b
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D26_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 62c310c28b0ba7c6395546d3ba688fd1b37e7fba208947ac17bf5c456a93cc78
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D26_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 385d93d56d81aca59323ecab5b1de6d5cb24169ac037af1bd69ef6b56a571862
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D26_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 11e72162abdc40f7be718c96f3c09995bb3b7711dc999f6aac8ab040f43acfec
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position_std
+      component: position_std_scale
+      details:
+        factor: 0.25
+        values_unchanged: true
+      status: PASS
+  - degradation_type_id: D27
+    case_id: D27_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: bad_position_optimistic_std
+    parameters:
+      h_sigma_m: 3.0
+      operation: bad_position_optimistic_std
+      std_factor: 0.25
+      v_sigma_m: 5.0
+    affected_sources:
+    - gnss_position
+    - gnss_position_std
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D27_seed_00/02_PROVIDERS/provider_index.json
+      sha256: b17e6845c1bd1e34b8238dbc18566056342db0266d9608ef455f1678fbdbeac4
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D27_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: cec345abecda49286889da6d897e6e9110898eeae5ff032fad1a43fbe5b08007
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D27_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 5710e2762e37ffd7460e5785f56e31e8bfaad6e940d6d35139839b51143fea58
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D27_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: e3ef273b71e7204d1ae9af68a63680229a2ab625321f67347b416046004ce65f
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position+std
+      component: bad_position_optimistic_std
+      details:
+        h_sigma: 3
+        std_factor: 0.25
+        v_sigma: 5
+      status: PASS
+  - degradation_type_id: D28
+    case_id: D28_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: good_position_pessimistic_std
+    parameters:
+      operation: good_position_pessimistic_std
+      std_factor: 4.0
+      value_change: unchanged
+    affected_sources:
+    - gnss_position_std
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D28_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 6642a5668292b1ccf8a47b21a60b1627a9905b8199e1fe5167e70ca22c82981c
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D28_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 4a5410c966542a027b6dfef09ea5f1a27998936a5343dce50b0336085124e595
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D28_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 7dadb615e40892a8b5ddb67f332f7f96aaf3596f51eb72616085312c673037f6
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D28_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 11e72162abdc40f7be718c96f3c09995bb3b7711dc999f6aac8ab040f43acfec
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position_std
+      component: position_std_scale
+      details:
+        factor: 4.0
+        values_unchanged: true
+      status: PASS
+  - degradation_type_id: D29
+    case_id: D29_seed_00
+    status: TRANSFERABLE
+    mode: AUDIT_METADATA_NO_ACTIVE_SOLVER_PATH
+    operation: status_quality_downgrade_only
+    parameters:
+      operation: status_quality_downgrade_only
+      value_change: unchanged
+    affected_sources:
+    - gnss_status_quality_flags
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D29_seed_00/02_PROVIDERS/provider_index.json
+      sha256: e8f7d0c14f5ed596a24b4857241555f33ca802cb10bb1d34b33949405946aa11
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D29_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 721dc28405b639d9a4a4156eb29534fe8065fc497517cd593c8703794e257a29
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D29_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: dd8e7df1eee4b515f807866f996e79ebd1104b7df15be60a0b7f37c519e7faed
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D29_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 686df69bc3a4a7bad6d2921cdc37449029b8cbc5197b210ca96ee72581339183
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: source_quality_metadata
+      component: gnss_status_quality_downgrade_only
+      details:
+        no_active_path: true
+        solver_values_unchanged: true
+      status: PASS
+  - degradation_type_id: D30
+    case_id: D30_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TIME_WINDOWS_UNCHANGED
+    operation: outage
+    parameters:
+      duration_s: 5
+      operation: outage
+      sources:
+      - dual_yaw
+    affected_sources:
+    - dual_yaw
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D30_seed_00/02_PROVIDERS/provider_index.json
+      sha256: b5be4f033ac412f39e926e6a3e0f88bc0ef7ca1f0f23a001abb5eed50a2d43fb
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D30_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: fdb66badd05f58f03341b71297a89ac71f1d7cef5b07d680b71615b54d307270
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D30_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 7dfad29a84ecd6d505626e5817aa2cdda865be49417ca21da357ad86000c6ba1
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D30_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 1a3e59394c4113e63c20a6e3748d7b02f5ecd1961028d12581644744726fac79
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 5
+      affected_source: dual_yaw
+      component: outage
+      details:
+        interval:
+        - 203.7
+        - 208.7
+      status: PASS
+  - degradation_type_id: D31
+    case_id: D31_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TIME_WINDOWS_UNCHANGED
+    operation: outage
+    parameters:
+      duration_s: 20
+      operation: outage
+      sources:
+      - dual_yaw
+    affected_sources:
+    - dual_yaw
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D31_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 04c7a61978b9a0cbf5db37786a62f28243b9d61db1b91b27da036f95097d0255
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D31_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: af55e6e905bd9f29082e558121046df1c3cdbe6a4a1b53903a33666bf5bdea18
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D31_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 87f6498d1be016a0c9f62ff7a795107f4480c707f13c69d38d68d70b3af1b070
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D31_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 58c4aa4513adedd6a1513787b3fa769194699721ac9f17c9e1ba0483d424c081
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 20
+      affected_source: dual_yaw
+      component: outage
+      details:
+        interval:
+        - 196.2
+        - 216.2
+      status: PASS
+  - degradation_type_id: D32
+    case_id: D32_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: dual_yaw_gaussian_noise
+    parameters:
+      operation: dual_yaw_gaussian_noise
+      sigma_deg: 1.0
+      yaw_wrap: required
+    affected_sources:
+    - dual_yaw
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D32_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 721e31d7f54cbdcf3bf846df6b69a0915bc52eab007c534d2f4b75e42abb0147
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D32_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: d163d149bd4c5fab08acdf415021b68dc3c8c201655f17948bdefe88ca24dc6a
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D32_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 0988d2eea3d0c85268ca94a2abf8bd052ddf595bc067d6a6e37fc1f7fa570387
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D32_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 725ea8268aaab4efd2d5853e3ff986f8730e71bc8a1c374e73958b6f564ecef9
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: dual_yaw
+      component: dual_yaw_noise
+      details:
+        sigma_deg: 1.0
+        std_factor: 1.0
+      status: PASS
+  - degradation_type_id: D33
+    case_id: D33_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: dual_yaw_gaussian_noise
+    parameters:
+      operation: dual_yaw_gaussian_noise
+      sigma_deg: 5.0
+      yaw_wrap: required
+    affected_sources:
+    - dual_yaw
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D33_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 56f94f54f57d9909818e5abb8bed6ef023097187acfc9b4b1ab2e6ef55062e31
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D33_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: fafcd89b79a9a0297e7835f248243661e3f8185ed4edbb3e5f2eaccbc11dc62b
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D33_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 03bbd8815a352593084263fac6e196cfe44cde7807065fc3cb1250aa8262022c
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D33_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 725ea8268aaab4efd2d5853e3ff986f8730e71bc8a1c374e73958b6f564ecef9
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: dual_yaw
+      component: dual_yaw_noise
+      details:
+        sigma_deg: 5.0
+        std_factor: 1.0
+      status: PASS
+  - degradation_type_id: D34
+    case_id: D34_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: dual_yaw_spike
+    parameters:
+      operation: dual_yaw_spike
+      probability: 0.05
+      signed_spike_magnitude_deg: 10.0
+      yaw_wrap: required
+    affected_sources:
+    - dual_yaw
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D34_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 0cda7cfdd7fbcca8ac075f4b7eaa5e7345726b0a282d6a4be2d02afea1d10a80
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D34_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 14528ffeccaef689176bc56ae20271bf4501ad8712b854f54bc50c3634c788fe
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D34_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 7b0eb8aa80137ddbf15cd5edf77b8632087327e0da9685268ebd15d92accc75e
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D34_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: c329d39206dfc9be022dd72810aa1083c3dc9daae4881d1273bebf1872acf35c
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 15
+      affected_source: dual_yaw
+      component: dual_yaw_spikes
+      details:
+        probability: 0.05
+        signed_magnitude_deg: 10.0
+      status: PASS
+  - degradation_type_id: D35
+    case_id: D35_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: dual_yaw_spike
+    parameters:
+      operation: dual_yaw_spike
+      probability: 0.1
+      signed_spike_magnitude_deg: 10.0
+      yaw_wrap: required
+    affected_sources:
+    - dual_yaw
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D35_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 78884d399a1027610787b3c83c963a683e1687a8c021eb281a1f2b96c1b881a1
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D35_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 0ed94c0c18f7cb48a76da633c6fe91f119c7c1e9cfb62dee385e6d99f280884b
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D35_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: d81beaa73755c3a881b633dcbbea6d008ba305d356e20df2b2379a5dc30556ee
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D35_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: de28747d9a90da603cfbc01e4033aba24fe149be8271e9bb18d1fe3c8081204d
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 30
+      affected_source: dual_yaw
+      component: dual_yaw_spikes
+      details:
+        probability: 0.1
+        signed_magnitude_deg: 10.0
+      status: PASS
+  - degradation_type_id: D36
+    case_id: D36_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: yaw_std_inflation
+    parameters:
+      factor: 1.5
+      operation: yaw_std_inflation
+    affected_sources:
+    - dual_yaw_std
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D36_seed_00/02_PROVIDERS/provider_index.json
+      sha256: e09b06b6b246f3f582829194c9e55c18a4393c5e478ad8adaef0688af5ec0069
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D36_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: c6307990ecd87fc4a894af748fa12e4c7dc231b412a10618c2102264a4b2ef28
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D36_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 1cee3475cd30698e41e7c1e56b201ffe66a8843b08b0aea95651a358c7b83d95
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D36_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: e540ce8da35b8971be08b4fa37404c8334672e8fe9a95c1efe4891757b879dbc
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: dual_yaw_std
+      component: dual_yaw_std_scale
+      details:
+        factor: 1.5
+      status: PASS
+  - degradation_type_id: D37
+    case_id: D37_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: yaw_std_inflation
+    parameters:
+      factor: 3.0
+      operation: yaw_std_inflation
+    affected_sources:
+    - dual_yaw_std
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D37_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 9c26252d19f96898567e21708edf67c17fa0f312d78d37244d9da3586436c777
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D37_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: d1433fcde3ed60958231baf46f34c771053c9fb162f983c0e19fe7ae79bb4692
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D37_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: e5695993e77986a1899e34a09322585790301f8c37a738c0d617c58e1a4392a0
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D37_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: e540ce8da35b8971be08b4fa37404c8334672e8fe9a95c1efe4891757b879dbc
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: dual_yaw_std
+      component: dual_yaw_std_scale
+      details:
+        factor: 3.0
+      status: PASS
+  - degradation_type_id: D38
+    case_id: D38_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: bad_yaw_optimistic_std
+    parameters:
+      operation: bad_yaw_optimistic_std
+      optional_spike_component: true
+      yaw_noise_sigma_deg: 10.0
+      yaw_std_factor: 0.25
+      yaw_wrap: required
+    affected_sources:
+    - dual_yaw
+    - dual_yaw_std
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D38_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 770e477fa329be4a8c6dff59f1109f69d532a2a8ed1be47ce8dc9c5326601e8a
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D38_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: f3c73734e45e8996dfebfd18ab505866ee60721124a7ba5934685918214a5fc9
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D38_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 67aca4ec1aacd0f4a654e17f2ccf335cdccc37e089bb51e82f2af85cc045afff
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D38_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: a64399c4e115be6d7510e7e53dff022fdfe5033314c055de8431331e1b1bb281
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: dual_yaw
+      component: bad_yaw_optimistic_std
+      details:
+        sigma_deg: 10.0
+        std_factor: 0.25
+      status: PASS
+  - degradation_type_id: D39
+    case_id: D39_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_EPOCH_COUNT_TO_EQUAL_DURATION_SECONDS
+    operation: baseline_quality_dropout
+    parameters:
+      burst_count: 3
+      burst_length_valid_epochs_max: 4
+      burst_length_valid_epochs_min: 2
+      fields:
+      - rel_valid
+      - quality
+      operation: baseline_quality_dropout
+      seed_controls: unavailable_bursts
+    affected_sources:
+    - dual_yaw_quality
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D39_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 757a4c7e0fac8bd6a9b7ef8705c55cb3aee9488ed2fb4927e368d9e0c09e0885
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D39_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: c16ab8eaa5e5d33857d6a47caf0902483a34019a12f96e1bbf18a1e5d67fede9
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D39_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: c442a06c2011efca656e27fcfa233db5f915c99d09557af5847904c45d7d76bb
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D39_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 48ce8a68c38e5092796137791bd03aeaf6c1876f5534283e837c5893da5b9383
+    intervals:
+    - start_s: 82.204517
+      end_s: 84.204517
+      source_ids:
+      - dual_yaw
+      frozen_affected_count: 2
+    - start_s: 182.204872
+      end_s: 184.204872
+      source_ids:
+      - dual_yaw
+      frozen_affected_count: 2
+    - start_s: 349.204539
+      end_s: 352.204539
+      source_ids:
+      - dual_yaw
+      frozen_affected_count: 3
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    window_note: Keep frozen onset even if outside evaluation [66,340]; old 1 Hz epoch count maps to seconds; half-open
+      intervals.
+    frozen_components:
+    - affected_epoch_count: 7
+      affected_source: dual_yaw_quality
+      component: baseline_quality_dropout
+      details:
+        burst_count: 3
+        burst_lengths:
+        - 3
+        - 2
+        - 2
+      status: PASS
+  - degradation_type_id: D40
+    case_id: D40_seed_00
+    status: TRANSFERABLE
+    mode: AUDIT_METADATA_NO_ACTIVE_SOLVER_PATH
+    operation: baseline_length_jitter_relacc
+    parameters:
+      baseline_length_additive_jitter_sigma_m: 0.03
+      baseline_length_jitter_m: seeded_small_jitter
+      baseline_length_solver_visible: false
+      minimum_baseline_length_m: 0.01
+      operation: baseline_length_jitter_relacc
+      preserve_baseline_direction: true
+      rel_acc_factor: 2.0
+      rel_acc_field_available: false
+      rel_acc_inflation: true
+      rel_acc_no_active_path: true
+      solver_runtime_input_expected_invariant: true
+      unit_aliasing_forbidden: true
+    affected_sources:
+    - dual_yaw_quality
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D40_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 27b720ce41b8047919e141b08bd155365e4983fc2e2add2e324568f968a7c8fb
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D40_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: f9d3b1111ebb4db9c355aa8674df5a67199d7c6757abb868741c99ecaec9ee39
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D40_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: cfabc02f11a9d0d25f859b291b37ef36c198301965df33f41bf8171f74d8a763
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D40_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 082c1c07b7eb6a2dae0acec32612e7a61fe0594edee11988206a7f42c41f1a62
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: dual_yaw_quality
+      component: baseline_length_jitter_relacc
+      details:
+        baseline_length_solver_visible: false
+        rel_acc_factor: 2
+        rel_acc_field_available: false
+        rel_acc_no_active_path: true
+        sigma_m: 0.03
+        solver_runtime_input_unchanged: true
+        solver_visible_mapping: none_audit_only_baseline_metadata
+        unit_aliasing_forbidden: true
+        yaw_unchanged: true
+      status: PASS
+  - degradation_type_id: D41
+    case_id: D41_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: gnss1_gnss2_asymmetric_noise
+    parameters:
+      h_sigma_m: 3.0
+      operation: gnss1_gnss2_asymmetric_noise
+      seed_controls: antenna_selection
+      v_sigma_m: 2.0
+    affected_sources:
+    - dual_yaw
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D41_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 945f231167521bee59c4a269d87c1d34c7505e7bcf1007cc1859e09a00a89af3
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D41_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 2fa992bbfd6ef33ab100942daf2df4d1a822fe41829ac36e6a3573c1f290d4d6
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D41_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 55cbeb2215d5637c1e4230862ba877e105a58954aeb6787f7783b3fde23a1867
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D41_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: c8ac7e79844feee04358a5900ed6bd2e738e2d6a4593f86877d5a93dcf00a744
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: GNSS2
+      component: asymmetric_antenna_noise
+      details:
+        geometry: GNSS2-GNSS1+90deg
+        horizontal_sigma_m: 3
+        vertical_sigma_m: 2
+      status: PASS
+  - degradation_type_id: D42
+    case_id: D42_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TIME_WINDOWS_UNCHANGED
+    operation: outage
+    parameters:
+      duration_s: 20
+      operation: outage
+      sources:
+      - receiver_velocity
+    affected_sources:
+    - receiver_velocity
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D42_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 348010808d24bc3ffe9c7d844c0320edfc07f11d59e617a0e979670c4769a297
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D42_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 76a4cf56bf2e28c20efe08cbbc9c8e679b79f7d458c2cb56708fb939c70f7417
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D42_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: c1332060d8ebc3746af02f6e1eba39789f49f99bddcfbc4a8f5fe42553f842c2
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D42_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 7104595cdcc86b2b854ffea57784c99eb214d7538a4925bad9c5d8d5f733dd26
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 20
+      affected_source: receiver_velocity
+      component: outage
+      details:
+        interval:
+        - 196.2
+        - 216.2
+      status: PASS
+  - degradation_type_id: D43
+    case_id: D43_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: receiver_velocity_noise
+    parameters:
+      operation: receiver_velocity_noise
+      sigma_mps: 0.5
+    affected_sources:
+    - receiver_velocity
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D43_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 08e74fca1dd3ddbd27ca0d5f0ab67b2fba04ec31ed00753c11e2de75f552e739
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D43_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: e7d2f089439bcd8fa6e2ae3e9c51a5bd9cf21b6f72707ec29612a1be3742864e
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D43_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 3858a40c22d3a1d515ffadbaa4d5dc770cea78248d813eff6058aa095ab600e9
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D43_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: c99bd3bb06e775bf758352fc57ae0762b1b319eede4afbb18e65bada39b168f3
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: receiver_velocity
+      component: velocity_noise
+      details:
+        sigma_mps: 0.5
+      status: PASS
+  - degradation_type_id: D44
+    case_id: D44_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: receiver_velocity_spike
+    parameters:
+      magnitude_mps: 2.0
+      operation: receiver_velocity_spike
+      probability: 0.02
+    affected_sources:
+    - receiver_velocity
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D44_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 14f8db8d7442db370420be67b2fb8defaed27b2244ade3d8d2072d79d82356df
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D44_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 6346a60119ed6374349c9b32ddb5792f8e969d16a3c98d24b8f5596baa81cdca
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D44_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 1c634065a2cc7222becaa9105e8b1fd2f010119495c64e3dd568098961e3500e
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D44_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: d2751a43406c880e85a395e06f7823b2f78f13f86b460754427241c62e0d6724
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 6
+      affected_source: receiver_velocity
+      component: velocity_spikes
+      details:
+        magnitude_mps: 2.0
+        probability: 0.02
+      status: PASS
+  - degradation_type_id: D45
+    case_id: D45_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: receiver_velocity_noise_optimistic_std
+    parameters:
+      operation: receiver_velocity_noise_optimistic_std
+      sigma_mps: 0.5
+      std_factor: 0.25
+    affected_sources:
+    - receiver_velocity
+    - receiver_velocity_std
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D45_seed_00/02_PROVIDERS/provider_index.json
+      sha256: dff03796e00be15311c9b7f2c6b48562d05feb886b0d4effda6284ac57c04c4a
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D45_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 16605ddd233fab90faa5315db1556ef41aa76aa6916dcfe6168a45f8316c3ad1
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D45_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 834180b06837b9cb3156026f2eaf1ad8a71097a827ece15cb3f56f3b12adfe51
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D45_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: d4c2c34b6ad2d121fcadd9d23ff94d473e932fe27215f5b035ba86e0d40f9402
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: receiver_velocity
+      component: velocity_bad_optimistic_std
+      details:
+        sigma_mps: 0.5
+        spike_component: false
+        std_factor: 0.25
+      status: PASS
+  - degradation_type_id: D46
+    case_id: D46_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TIME_WINDOWS_UNCHANGED
+    operation: outage
+    parameters:
+      duration_s: 20
+      operation: outage
+      sources:
+      - raw_doppler_velocity
+    affected_sources:
+    - raw_doppler_velocity
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D46_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 961e48acec4b804000943f33ef060243f0618e1a8bbbf9cb636ea507d7d0557f
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D46_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: c532fdd56fb3d64923091d985988426d6f4a8c05ad012092b921e85af590d18f
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D46_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: cf110e2c5e3652e65c79325f936c2dc1872db5ef1eb3c217da92b4a3800f524f
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D46_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 6fd9f4f2d98ceb58cd7ae41ced1ae4b66424c1cb0e336627c6f423baaf7ff6d8
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 100
+      affected_source: raw_doppler
+      component: outage
+      details:
+        interval:
+        - 196.2
+        - 216.2
+      status: PASS
+  - degradation_type_id: D47
+    case_id: D47_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: raw_doppler_velocity_noise
+    parameters:
+      operation: raw_doppler_velocity_noise
+      sigma_mps: 0.5
+    affected_sources:
+    - raw_doppler_velocity
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D47_seed_00/02_PROVIDERS/provider_index.json
+      sha256: d7d03698982be9727f7c7f305ff94df1b6f4d9cc1e5137db3b15decb54282ee2
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D47_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 9c28d6c7422df5c77087e038fe2942715113d5272860928192790543c236bf4d
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D47_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 159398ed73bf7515a99b2e01e2c71677382182c00551115d084cc68e83e8e68d
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D47_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: d1015751a90adae2fc14c638d9c24700e19de8420e53f8065ddf55fcfd3204d9
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 1248
+      affected_source: raw_doppler
+      component: velocity_noise
+      details:
+        sigma_mps: 0.5
+      status: PASS
+  - degradation_type_id: D48
+    case_id: D48_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: raw_doppler_velocity_spike
+    parameters:
+      magnitude_mps: 1.5
+      operation: raw_doppler_velocity_spike
+      probability: 0.02
+    affected_sources:
+    - raw_doppler_velocity
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D48_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 108275e8733a303c9deb0a4e54365fc741b324e9f53935c4d6e428e93e595cb5
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D48_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 50d5874d76417f57e4cf4e405b0c06db8397cebab82fd5477e8e8a4799f6b009
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D48_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: b6d278b12e8d54febee7fb08d863fb2553fcf44ff854f8e25db93c95ac9f3924
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D48_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 5b7f50d911f0193c8060ae125be7f53174bbbfb40cfab2576045362d426a2d6d
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 25
+      affected_source: raw_doppler
+      component: velocity_spikes
+      details:
+        magnitude_mps: 1.5
+        probability: 0.02
+      status: PASS
+  - degradation_type_id: D49
+    case_id: D49_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: raw_doppler_anomaly_optimistic_std
+    parameters:
+      anomaly: noise_or_spike_seeded
+      gaussian_sigma_mps: 0.5
+      operation: raw_doppler_anomaly_optimistic_std
+      optimistic_or_floor_std_policy: true
+      spike_component: false
+      std_factor: 0.25
+      std_floor_component: false
+    affected_sources:
+    - raw_doppler_velocity
+    - raw_doppler_std
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D49_seed_00/02_PROVIDERS/provider_index.json
+      sha256: eb617af022af2821926dd1911783876364ce5add00471a7af9ee6bec8931eafd
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D49_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 2fd6ad06331f746d7cf149b9bddfe0cfbac9b4c01a656b06ad4deb21221cdc90
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D49_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 85d363e94e0b3f8e5cb4871247dc947a381993952b5eee6a80c73f86004b8f67
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D49_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 1d10c0b17e20729f78369d509e010a70d6ec53d139677b1b051ba24ce5a27603
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 1248
+      affected_source: raw_doppler
+      component: velocity_bad_optimistic_std
+      details:
+        sigma_mps: 0.5
+        spike_component: false
+        std_factor: 0.25
+      status: PASS
+  - degradation_type_id: D50
+    case_id: D50_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: raw_receiver_velocity_conflict
+    parameters:
+      conflict_magnitude_mps: 1.0
+      operation: raw_receiver_velocity_conflict
+      raw_doppler_horizontal_offset_mps: 1.0
+      receiver_velocity_unchanged: true
+    affected_sources:
+    - raw_doppler_velocity
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D50_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 7d120329cd8359f0c44fe7e646abb0ef083d8076ed3cffaee41a2fd5d7a88620
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D50_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: a85bef72a8cfffc9aab3e9705bc8d7a58b8665c408a0ad4edb6ac042d7c549fc
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D50_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: b26abf1766c71cb1df43f4c4a47906fe934bf8d67f2635e7e13b79438441203d
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D50_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 723e78ce3d6433975c25c5164a40f437642f0a16fe7f8d46356b30c93ad637a6
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 1248
+      affected_source: raw_doppler
+      component: raw_receiver_velocity_conflict
+      details:
+        direction_rad: 5.788180028253129
+        raw_horizontal_offset_mps: 1.0
+        receiver_velocity_unchanged: true
+      status: PASS
+  - degradation_type_id: D51
+    case_id: D51_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: go2_roll_pitch_dropout_noise
+    parameters:
+      dropout_ratio: 0.5
+      operation: go2_roll_pitch_dropout_noise
+      remaining_noise_sigma_deg: 3.0
+    affected_sources:
+    - go2_roll_pitch_weak_prior
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D51_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 30d41a86f7c8d34b42a78112f3cf57d10e884b632c32fd9e365dfafa7f6109f1
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D51_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 008d1bc20599243207e85eda280fc623a2b7bf5551ed49081f82ed4c6be246e5
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D51_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 91dfc27de0f8cf643ba32515e69e556dfe80d92161038b9c99e797cd1b1f3c1e
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D51_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: b3be985dae1c7bc00f4fd9d1db14467614130b87e864f2c2d53938b3760548f5
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 63278
+      affected_source: go2_rp
+      component: go2_rp_dropout_noise
+      details:
+        dropout_ratio: 0.5
+        remaining_sigma_deg: 3
+      status: PASS
+  - degradation_type_id: D52
+    case_id: D52_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: go2_roll_pitch_bias
+    parameters:
+      bias_deg: 2.0
+      operation: go2_roll_pitch_bias
+      seed_controls: roll_pitch_direction
+    affected_sources:
+    - go2_roll_pitch_weak_prior
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D52_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 01f846505a959a416e308ade48fb781cd1e60bc2a86fae1c79a22329f57fa067
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D52_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 766498915c3cdc39388941e0f22304e42bce7753819bfca03007c734400094d2
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D52_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 94a49cb674d12e6d6b999a525c3775728a21e8adee28fdda06f2223781c59782
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D52_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 4094a8e28c126734b499fdef06e90905b175f0024929706e50e45e03af448b3b
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 63278
+      affected_source: go2_rp
+      component: go2_rp_bias
+      details:
+        direction_rad: 5.788180028253129
+        vector_magnitude_deg: 2
+      status: PASS
+  - degradation_type_id: D53
+    case_id: D53_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: go2_horizontal_velocity_noise
+    parameters:
+      operation: go2_horizontal_velocity_noise
+      sigma_mps: 1.0
+    affected_sources:
+    - go2_horizontal_velocity_weak_prior
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D53_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 4538ebb9fade94b02ae174b2a3d9560a4f7868186bbfacd172f98efdf235981b
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D53_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 4577b797db95c172080098d4807ff6594edf10cf2572bb4da7becb3faaf84642
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D53_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 88f1b836bd872232d6d3866e97c573c7142f42163fb88e7e8a6ec97e32f82483
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D53_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 8ce3c96734ebed7a4e51326c1ccf9f119573f984d88f08874261f358197e3bc7
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 63278
+      affected_source: go2_hv
+      component: go2_hv_noise
+      details:
+        sigma_mps: 1.0
+      status: PASS
+  - degradation_type_id: D54
+    case_id: D54_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: go2_horizontal_velocity_scale_or_dropout
+    parameters:
+      dropout_ratio: 0.5
+      operation: go2_horizontal_velocity_scale_or_dropout
+      scale: 1.5
+      seed_group_controls: scale_vs_dropout
+      seed_groups:
+        seed_00_to_seed_03:
+          dropout_ratio: 0.0
+          scale: 1.5
+        seed_04_to_seed_07:
+          dropout_ratio: 0.5
+          scale: 1.0
+        seed_08:
+          dropout_ratio: 0.5
+          scale: 1.5
+    affected_sources:
+    - go2_horizontal_velocity_weak_prior
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D54_seed_00/02_PROVIDERS/provider_index.json
+      sha256: a8b5bd82e99e9c3cea2ac5b31aab9f8da594cca7e09f0bb745b03ce931e70c83
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D54_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: eca4ade0264ffa9804f03a4229413667f525f60f2b1ce21c1499362210c5d325
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D54_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 029822805fe771a9626adde89b04459449a104f174cfeadfbb97cc5ee2e56869
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D54_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 8ce3c96734ebed7a4e51326c1ccf9f119573f984d88f08874261f358197e3bc7
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 63278
+      affected_source: go2_hv
+      component: go2_hv_scale_dropout
+      details:
+        dropout_count: 0
+        dropout_ratio: 0.0
+        scale: 1.5
+      status: PASS
+  - degradation_type_id: D55
+    case_id: D55_seed_00
+    status: TRANSFERABLE
+    mode: AUDIT_METADATA_NO_ACTIVE_SOLVER_PATH
+    operation: go2_contact_motion_metadata_uncertain
+    parameters:
+      operation: go2_contact_motion_metadata_uncertain
+      pattern: missing_or_uncertain_seeded
+      selection_ratio: 0.35
+      uncertainty_pattern: contact_uncertain_and_mode_gait_unknown
+    affected_sources:
+    - go2_source_metadata
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D55_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 45e1f41aa133fbeb84de2979bf10a9f649aceeacbd185ec57b838e00358f0d2f
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D55_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: a4a7ae6eb0ff2c2bc78f510ba78d2f8325c5e5d01e50fe2a9cb1d423844b2673
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D55_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 4034278c5cbb6998514de96640f981bf60c74410f0f43e977faa23e1021959fd
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D55_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 518428fa11cf7a3ac74ce515027ca20d25eca01aacb42c9c5a98e9bf896b8a13
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 106
+      affected_source: source_quality_metadata
+      component: go2_metadata_uncertain
+      details:
+        no_active_path: true
+        ratio: 0.35
+      status: PASS
+  - degradation_type_id: D56
+    case_id: D56_seed_00
+    status: TRANSFERABLE
+    mode: AUDIT_METADATA_NO_ACTIVE_SOLVER_PATH
+    operation: go2_foot_speed_contact_conflict
+    parameters:
+      even_pattern: high_force_high_speed
+      odd_pattern: low_force_low_speed
+      operation: go2_foot_speed_contact_conflict
+      pattern: foot_force_and_foot_speed_conflict_seeded
+      seed_08_pattern: alternating
+      selection_ratio: 0.3
+    affected_sources:
+    - go2_source_metadata
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D56_seed_00/02_PROVIDERS/provider_index.json
+      sha256: cbb1c11c950da29f2d2fecf9af54a96afce4beca74ab9a3172396e776ddfa7de
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D56_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 20503606536a43da888745a93a7892035e698e938d805b5a2e6079d02212cc4f
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D56_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: ef87ff61b430a2ad19d78b450d73991464c1f2e202b856f0c68dfa66aae7422e
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D56_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 813675e9ae5d675a93cd1061a1af602aed54a6c66179b54a04ec7af303c427f4
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 91
+      affected_source: source_quality_metadata
+      component: go2_foot_speed_contact_conflict
+      details:
+        no_active_path: true
+        ratio: 0.3
+      status: PASS
+  - degradation_type_id: D57
+    case_id: D57_seed_00
+    status: TRANSFERABLE
+    mode: INDEPENDENT_SOURCE_LATENCY_JITTER_STABLE_UNION
+    operation: multi_source_latency_jitter
+    parameters:
+      components:
+      - latency_shift
+      - timestamp_jitter
+      jitter_max_range_s:
+      - 0.02
+      - 0.05
+      jitter_range_ms:
+      - 20
+      - 50
+      latency_range_s:
+      - 0.1
+      - 0.3
+      operation: multi_source_latency_jitter
+      per_source_independent_substreams: true
+      stable_sort: true
+    affected_sources:
+    - gnss_position
+    - receiver_velocity
+    - dual_yaw
+    - raw_doppler_velocity
+    - go2_roll_pitch_weak_prior
+    - go2_horizontal_velocity_weak_prior
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D57_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 2553b58d8678ba2efa51882c30ecefefbb9e7dfc1130006bef9a413459de4fc1
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D57_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 035727278f041d3535a2552d071a3a13d7dd01869ca4cf8e7f2ea9317d3b41b8
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D57_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 646d81ed371252291ec50b08fc560e6101844bc8b55e6564f25b11f0ce1eb34e
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D57_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: a80ff55ac7e0cfe85bf9d43ba21cdadaa9583120c335317c7792f5683897f2c8
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    timing_note: 5 Hz describes the input measurement rate. The registered fault deliberately makes independent
+      P/RV/A1 timestamps irregular; union emits GNSS18 validity rows without resampling or changing amplitudes.
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position
+      component: latency_jitter
+      details:
+        jitter_max_s: 0.025616545567535644
+        latency_s: 0.10401432335291612
+      status: PASS
+    - affected_epoch_count: 303
+      affected_source: receiver_velocity
+      component: latency_jitter
+      details:
+        jitter_max_s: 0.030271267649136638
+        latency_s: 0.19501413306192633
+      status: PASS
+    - affected_epoch_count: 303
+      affected_source: dual_yaw
+      component: latency_jitter
+      details:
+        jitter_max_s: 0.047636523890068165
+        latency_s: 0.2739565090052485
+      status: PASS
+    - affected_epoch_count: 1248
+      affected_source: raw_doppler
+      component: latency_jitter
+      details:
+        jitter_max_s: 0.041243644841206684
+        latency_s: 0.26780336405241867
+      status: PASS
+    - affected_epoch_count: 63278
+      affected_source: go2_rp
+      component: latency_jitter
+      details:
+        jitter_max_s: 0.047919291584170666
+        latency_s: 0.19655564506844278
+      status: PASS
+    - affected_epoch_count: 63278
+      affected_source: go2_hv
+      component: latency_jitter
+      details:
+        jitter_max_s: 0.031059968614732182
+        latency_s: 0.14251141574244855
+      status: PASS
+  - degradation_type_id: D58
+    case_id: D58_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TIME_WINDOWS_UNCHANGED
+    operation: mixed_components
+    parameters:
+      components:
+      - position_outage_10s
+      - dual_yaw_spike
+      - clean_recovery_interval
+      degradation_duration_s: 10.0
+      operation: mixed_components
+      recovery_duration_s: 20.0
+      recovery_interval: required
+      yaw_spike_magnitude_deg: 10.0
+      yaw_spike_probability: 0.1
+    affected_sources:
+    - gnss_position
+    - dual_yaw
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D58_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 5ccb428fd521020b7f0d07b88113d2c7b0c5651d1687df92b013afdcef1208a8
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D58_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 796f29d9ad9bb5f9b6bdd5796445e23e37277409be9ea673b070109083f9c5b3
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D58_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 9e1c6d7b7ad320cbd598aabb6834c52a33fb1da8e67db34e2993aa408e6e1d95
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D58_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: a2b40dd466c2298f52f05b1b330bea1ad0b7222a98f93072d6f9759db3a26627
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 10
+      affected_source: gnss_position
+      component: outage
+      details:
+        interval:
+        - 201.2
+        - 211.2
+      status: PASS
+    - affected_epoch_count: 1
+      affected_source: dual_yaw
+      component: yaw_spikes_during_outage
+      details:
+        magnitude_deg: 10
+      status: PASS
+    - affected_epoch_count: 0
+      affected_source: all_sources
+      component: clean_recovery_interval
+      details:
+        interval:
+        - 211.2
+        - 231.2
+      status: PASS
+  - degradation_type_id: D59
+    case_id: D59_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_PER_MEASUREMENT_LAW_AMPLITUDE_AND_SUBSTREAMS
+    operation: mixed_components
+    parameters:
+      components:
+      - bad_position
+      - good_yaw
+      - raw_receiver_velocity_conflict
+      conflict_magnitude_mps: 1.0
+      operation: mixed_components
+    affected_sources:
+    - gnss_position
+    - raw_doppler_velocity
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D59_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 48af778a7a98f09ab493ae7a020e6b0b411c97a90204699b1184302ba1b71844
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D59_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 0ccd86c132bfecb76e1d2e7d03d6e69bb84e3ff79288a21313f5f65ce03c3897
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D59_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 384e965c164db5d55d6b8b7782b69f4c6f73a4ecff9d6b76516b1575672b2f2d
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D59_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: b0f13b41f83dcda064550ca97e127d025b75df31ff73db2519c7502aa0cd0b07
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 303
+      affected_source: gnss_position
+      component: bad_position
+      details:
+        h_sigma: 3
+        v_sigma: 5
+      status: PASS
+    - affected_epoch_count: 0
+      affected_source: dual_yaw
+      component: good_yaw_preserved
+      details:
+        values_unchanged: true
+      status: PASS
+    - affected_epoch_count: 1248
+      affected_source: raw_doppler
+      component: raw_receiver_conflict
+      details:
+        offset_mps: 1
+        receiver_unchanged: true
+      status: PASS
+  - degradation_type_id: D60
+    case_id: D60_seed_00
+    status: TRANSFERABLE
+    mode: FROZEN_TIME_WINDOWS_UNCHANGED
+    operation: mixed_components
+    parameters:
+      components:
+      - bad_position_optimistic_std
+      - bad_yaw_optimistic_std
+      - bad_velocity_optimistic_std
+      - clean_recovery_interval
+      degradation_duration_s: 20.0
+      operation: mixed_components
+      recovery_duration_s: 20.0
+      recovery_interval: required
+    affected_sources:
+    - gnss_position
+    - gnss_position_std
+    - dual_yaw
+    - dual_yaw_std
+    - receiver_velocity
+    - receiver_velocity_std
+    - raw_doppler_velocity
+    - raw_doppler_std
+    frozen_base_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/provider_index.json
+      sha256: f53cdbfc27fbdcac092503f7a2c84f5253e4436164299031b898201ab49710a2
+    frozen_case_provider_index:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D60_seed_00/02_PROVIDERS/provider_index.json
+      sha256: 9cd88f0c94d4acbc9fc85d4cffe3d68114b84929257839f0fc77f702863aa5db
+    frozen_case_manifest:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D60_seed_00/00_CASE_SPEC/case_spec_dump.json
+      sha256: 1eea9a6d57e6a28cf2af78e25a3d18c3a9b9a068e3bf35acbc8a6170365863db
+    frozen_provider_generation_log:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D60_seed_00/02_PROVIDERS/provider_generation_log.json
+      sha256: 1bbabc3a7c43d5b046eee16cb359ba8742e2dbb7d631e91fed2b6dd5a2c430fb
+    frozen_perturbation_ledger:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/D60_seed_00/02_PROVIDERS/CASE_PERTURBATION_LEDGER.csv.gz
+      sha256: 184332f8c412e4a9549c1d0f284d926f984b86b1d1eded042bd79400499a8304
+    row_rate_note: 'P/RV nominal 5 Hz vs frozen approximately 1 Hz: per-measurement std unchanged; approximately
+      5x contaminated measurement opportunities, actual counts reported. A1 only effective valid epochs; RD/RP/HV
+      retained source rate.'
+    frozen_components:
+    - affected_epoch_count: 160
+      affected_source: position+yaw+receiver_velocity+raw_doppler
+      component: multisource_bad_optimistic
+      details:
+        interval:
+        - 196.2
+        - 216.2
+      status: PASS
+    - affected_epoch_count: 0
+      affected_source: all_sources
+      component: clean_recovery_interval
+      details:
+        interval:
+        - 216.2
+        - 236.2
+      status: PASS
+  semantic_evidence:
+    output: 02_PROVIDERS/<case_id>/DEGRADATION_PROVIDER_MANIFEST.json:diff_summary
+    required_per_source:
+    - affected_row_count
+    - actual_time_start_s
+    - actual_time_end_s
+    - fieldwise_value_std_status_time_delta_amplitudes
+    - frozen_same_case_before_after_comparison
+    equivalence_rule: Equal registered operation, seed/component substreams and injection amplitude/probability
+      laws; fixed-window intervals unchanged; epoch counts become registered seconds. Realization counts and empirical
+      moments may differ with measurement rate. Validate allowed field/source scope and static amplitudes, document
+      NO_ACTIVE_PATH metadata families. Fail semantic gate before any solver on mismatch.
+    fixed_window_details: Exact frozen component details.interval(s) and recovery intervals are recorded per case
+      below.
+runtime:
+  scientific_solver_commit: 64c81965b17ef1bf8ae2ce3e4dd7b1ae35110b00
+  executable:
+    path: <CODE_ROOT>/build/canonical541_cpp/legsa_v23_port_core_demo
+    sha256: 9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f
+  model:
+    path: <CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml
+    sha256: 4ce6ca6c544c2ba39988ea0b0631a60207a4cea36987c3a2139052fedd3a4871
+  model_freeze_commit: 73d71c18ec21332c901f21fe1c4a82564472e6e8
+  chains:
+    CAL:
+      role: primary
+      input: V2s
+      noise: frozen calibrated vrw[3]/abstd[3]
+      s: frozen BY2 scale already applied in pinned IMU
+    V2S:
+      role: auxiliary
+      input: same pinned V2s inputs as CAL
+      noise: frozen canonical noise
+  profiles:
+  - F01
+  - F02
+  - F03
+  - F04
+  - A03
+  - A04
+  - A05
+  - A06
+  - A07
+  - A08
+  - A09
+  unique_config_count: 11
+  logical_aliases:
+    A01: F04
+    A02: F03
+  run_id_rule: Preserve selected original RUN_000NN and original case/profile identity; separate CLEAN5_DEGSUBSET_CAL
+    and CLEAN5_DEGSUBSET_V2S output parents.
+  run_count_per_chain: 671
+  solver_limit: 1342
+  jobs: 12
+  parallel_source: canonical541/trusted_direct.py JOBS=12
+  timeout_s: 1800
+  retry_count: 0
+  failed_runs: Record terminal failure once; continue other preregistered runs; do not retry or replace failed outputs.
+  allowed_scientific_diff_CAL:
+  - vrw
+  - abstd
+  allowed_scientific_diff_V2S: []
+  counter_expectation: Input-only frozen C++ timing replay, then GNSS call only when any GNSS18 validity bit is
+    1. P/RV/A1 exact scheduled valid-bit counts; RD/RP/HV nearest selection and static gate counts; state-dependent
+    acceptance retained as bounds/terminal closure, never guessed; SA contribution closure checked after yaw gates.
+  checkpoint_required_members: 22
+  checkpoint_selection: All RAW_FILE_HASH_LOCK rows with dataset==BY2
+  checkpoint_open_policy: C-01b/C-03 independent pre/post strace sessions; exactly one O_RDONLY streaming SHA256
+    open for each of 22 locked files including trace/.bag/.fpl; exact locked path set, per-file count one, zero
+    raw writes; CHECKPOINT_STRACE_AUDIT.json. Human clarified 2026-09-10; hash checkpoints are outside A7.
+  seal_before_evaluation: true
+evaluation:
+  evaluator:
+    path: <CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py
+    sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  trace:
+    path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv
+    sha256: ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c
+    role: EVALUATOR_CHILD_ONLY
+    parent_may_hash: false
+  base_time: 1772784000.0
+  window:
+  - 66.0
+  - 340.0
+  versions:
+  - v3
+  - v2
+  v3_baseline_median_m: 0.356191491865984
+  v3_lever_frd_m:
+  - 0.03
+  - -0.148095745932992
+  - -0.3
+  v3_policy: Frozen rigid physical point transform using each NAV attitude; LLH-only derived EVAL_NAV; native NAV
+    immutable.
+  v3_std_policy: UNTRANSPORTED_STD_DIAGNOSTIC_ONLY for position; unchanged yaw state STD; no full transformed covariance
+    consistency claim.
+  trace_policy: Within generation/solving/evaluation, only the frozen evaluator subprocess opens trace, once
+    per evaluated run; provider/solver show zero trace/.bag/.fpl opens and evaluation zero .bag/.fpl opens.
+    Independent C-01b/C-03 hash checkpoints follow the separately authorized checkpoint_open_policy.
+  new_solver_evaluation_limit: 2684
+statistics:
+  pair_definitions:
+  - comparison: full_vs_strong
+    candidate_method_id: F04
+    reference_method_id: F03
+  - comparison: strong_vs_basic
+    candidate_method_id: F03
+    reference_method_id: F02
+  - comparison: basic_vs_single
+    candidate_method_id: F02
+    reference_method_id: F01
+  - comparison: full_vs_no_RD
+    candidate_method_id: F04
+    reference_method_id: A03
+  - comparison: full_vs_no_SA
+    candidate_method_id: F04
+    reference_method_id: A04
+  - comparison: full_vs_no_RP
+    candidate_method_id: F04
+    reference_method_id: A05
+  - comparison: full_vs_no_HV
+    candidate_method_id: F04
+    reference_method_id: A06
+  - comparison: full_vs_no_Go2
+    candidate_method_id: F04
+    reference_method_id: A07
+  - comparison: RD_only_vs_strong
+    candidate_method_id: A08
+    reference_method_id: F03
+  - comparison: SA_only_vs_strong
+    candidate_method_id: A09
+    reference_method_id: F03
+  primary_metrics:
+  - horizontal_rmse_m
+  - yaw_rmse_deg
+  - yaw_p95_absolute_deg
+  secondary_metrics:
+  - up_rmse_m
+  - position_3d_rmse_m
+  four_columns:
+  - Canonical_full_frozen
+  - subset_frozen
+  - subset_CAL
+  - subset_V2S
+  frozen_column_version: Original Canonical evaluator v2, preserve full summary values; filtered subset uses frozen
+    case-level deltas, zero reruns.
+  evaluation_version_reporting: Produce the four-column comparison for v3 and v2 explicitly; original frozen columns
+    remain frozen v2 in both.
+  delta: candidate minus reference; negative is better
+  win: delta < -1e-12
+  tie: abs(delta) <= 1e-12
+  win_rate_denominator: All finite paired cases including ties
+  maintained: CAL median has same strict sign as Canonical full median AND CAL win rate lies on same strict side
+    of 0.5 as Canonical full win rate. Exact zero median or exactly 0.5 win rate fails strict same-side criterion.
+  bootstrap:
+    unit: paired case
+    statistic: median paired delta
+    resamples: 10000
+    seed: 260910007
+    interval: percentile 2.5,97.5; numpy linear quantile
+  wilcoxon:
+    alternative: two-sided
+    zero_method: wilcox
+    correction: false
+    method: auto
+    all_zero_p_value: 1.0
+    n_less_than_2: UNAVAILABLE
+  missing_pairs: Report actual N and unavailable cases; any missing main-metric pair prevents FULL_MATRIX_RERUN_NOT_REQUIRED.
+  decision_versions:
+  - v3
+  - v2
+  decision: All main-metric pairs maintained in both reported evaluations => FULL_MATRIX_RERUN_NOT_REQUIRED. Any
+    main-metric pair flip => HUMAN_DECISION_REQUIRED with version, magnitude and pair list. Missing evidence =>
+    HUMAN_DECISION_REQUIRED. No automatic full matrix rerun.
+  decision_filename: DEGRADATION_SUBSET_DECISION.json
+horizontal:
+  frozen_registry:
+    path: <CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/12_FINAL_EVIDENCE_INTEGRATION/FINAL_METHOD_REGISTRY.csv
+    sha256: 5b14e8a079dc81ad0344b7510af84898d5485090d368749227d30dc7e2f3832f
+  scope: All final CLEAN4 external methods and registered variants with IMU-point NAV; no NAV => UNAVAILABLE; no
+    new external solves.
+  legsa_rows:
+  - frozen_A04
+  - V2S_A04
+  - CAL_A04
+  external_rows:
+  - LC01_EXT05A
+  - EXT05C
+  - LC02_GINAV
+  - EXT01
+  - EXT02
+  - EXT03
+  - EXT04
+  - Hartley
+  - EXT05B
+  versions:
+  - v3
+  GINAV_fixed_window: Keep only original NAV rows in [66,340], no extrapolation; coverage77/275 retained separately
+    from native matched fraction.
+  metrics:
+  - horizontal_rmse_m
+  - position_3d_rmse_m
+  - up_rmse_m
+  - yaw_rmse_deg
+  - yaw_p95_absolute_deg
+  - forward_signed_mean_m
+  - right_signed_mean_m
+  - up_signed_mean_m
+  output: HORIZONTAL_TABLE_V3.csv
+prohibitions:
+  tuning: false
+  amplitude_changes: false
+  result_based_case_selection: false
+  raw_write: false
+  main_chain_change: false
+  Outcome_change: false
+  binary_change: false
+  evaluator_change: false
+  gyro_z_scale_followup_executed: false
+  full_matrix_automatic_rerun: false
+records:
+  report: <CODE_ROOT>/docs/paper_rebuild/CLEAN5_DEGRADATION_SUBSET_RESULTS.md
+  handoff_lines: 1
+  AGENTS_sections:
+  - 11
+  - 18
+  commit_push_order:
+  - contract
+  - code
+  - records
+data_roles:
+  C00:
+    data_mode: real_clean
+    synthetic_data_used: false
+    semisynthetic_data_used: false
+    controlled_degradation_applied: false
+  D01_D60:
+    data_mode: real_base_controlled_degradation
+    synthetic_data_used: false
+    semisynthetic_data_used: false
+    controlled_degradation_applied: true
+  policy: Preserve frozen Canonical case schema tokens; D rows are controlled injected faults on real raw base and
+    must be identified explicitly in every provider/run/evaluation manifest and table; never present D rows as unmodified
+    natural observations.

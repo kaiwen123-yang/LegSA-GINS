@@ -1,0 +1,53 @@
+schema_version: lc02.y4a.admission_rubric.v2
+method_id: LC02_YIN2023_RAEKF
+terminal_status: NO_GO_LC02_YIN2023_RAEKF_AS_FORMAL_PRIMARY
+outcome: OUTCOME_B
+hard_gates:
+  base_21_state_model_closed:
+    pass: true
+    evidence: Y0_Y3_CITED_KF_GINS_CONTRACT
+  position_only_measurement_closed:
+    pass: true
+    evidence: YIN_EXPLICIT_3D_Z_AND_3X21_H
+  improved_R_closed:
+    pass: true
+    evidence: YIN_PDOP2_Q_R2_AND_TABLE1
+  AKF_statistic_update_unique:
+    pass: false
+    evidence: EQ6_STATE_TRACE_DIMENSION_CONFLICT_AND_COMPETING_PATENT_SEMANTIC
+  L_k_versus_Z_k_closed:
+    pass: false
+    evidence: BOTH_OFFICIAL_VERSIONS_AUTHOR_RESPONSE_AND_RELATED_PATENT_PRESERVE_DISTINCT_SYMBOLS
+  standardized_residual_unique:
+    pass: false
+    evidence: EQ8_HAT_EQ9_BAR_RELATION_AND_STANDARDIZER_UNDEFINED_NIU_S_DIAGONAL_ONLY_CANDIDATE
+  IGGIII_matrix_construction_unique:
+    pass: false
+    evidence: EQ9_STATE_WEIGHT_UNDEFINED_EQ11_SELF_REFERENTIAL_BASE_EQUIVALENT_SPLIT_AND_GENERAL_MATRIX_UNRESOLVED
+  zero_weight_policy_unique:
+    pass: false
+    evidence: YIN_ZERO_INFORMATION_THEN_INVERSE_NIU_ROW_DELETION_NOT_UNIQUELY_ADOPTED
+  RAEKF_fusion_reset_unique:
+    pass: false
+    evidence: EQ12_13_14_AND_SAME_PRIOR_CLOSED_BUT_P_RK_EQ8_EQ9_EQ11_CHAIN_AND_FEEDBACK_RESET_UNRESOLVED
+  no_trace_or_performance_based_completion:
+    pass: true
+    evidence: ZERO_OLD_PERFORMANCE_RUNTIME_TRACE_REUSE_WITH_FOUR_AUTHORIZED_FROZEN_INPUT_CONTRACT_FACTS
+all_hard_gates_pass: false
+formal_pass_additional_requirements:
+  YIN2023_RKF_required_level: FAITHFUL_ALGORITHM_REPRODUCTION
+  YIN2023_RAEKF_required_level: FAITHFUL_ALGORITHM_REPRODUCTION
+  formal_lc02_admission_required: true
+formal_pass_additional_requirements_met: false
+branch_reproduction_levels:
+  YIN2023_EKF: FAITHFUL_ALGORITHM_REPRODUCTION
+  YIN2023_AKF: FAITHFUL_MODULE_REPRODUCTION
+  YIN2023_RKF: PAPER_DERIVED_POLICY_BASELINE
+  YIN2023_RAEKF: PAPER_DERIVED_POLICY_BASELINE
+formal_lc02_admission: false
+implementation_authorized: false
+production_solver_authorized: false
+C00_authorized: false
+representative_cases_authorized: false
+comparison_run_authorized: false
+next_action: SELECT_A_DIFFERENT_SOURCE_CLOSED_ROBUST_ADAPTIVE_PAPER_OR_OBTAIN_AUTHOR_CLARIFICATION

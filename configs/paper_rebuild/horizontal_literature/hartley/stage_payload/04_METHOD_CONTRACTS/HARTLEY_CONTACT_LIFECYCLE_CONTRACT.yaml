@@ -1,0 +1,109 @@
+schema_version: 1
+contract_id: LSE01_HARTLEY_SWITCHING_POINT_CONTACT_LIFECYCLE
+contract_status: PAPER_LIFECYCLE_AND_FROZEN_BY2_INPUT_ONLY_CONTACT_POLICY_CLOSED
+
+contact_model:
+  source_type: PAPER_DIRECT
+  type: DISCRETE_SWITCHING_POINT_CONTACT
+  deterministic_world_velocity: ZERO
+  stochastic_motion: BROWNIAN_CONTACT_VELOCITY
+  full_foot_pose_constraint: false
+  zero_velocity_update_only: false
+
+identity:
+  contact_key_requirement: STABLE_PER_LEG_OR_CONTACT_ID
+  each_contact_state: THREE_DIMENSIONAL_WORLD_POSITION
+  state_size_delta_per_contact: 3
+  process_all_legs_independently: true
+
+on_contact_add:
+  source_type: PAPER_DIRECT
+  reference: IJRR_EQS_31_32
+  precondition: CONTACT_ID_NOT_ALREADY_ACTIVE
+  mean_initialization: d_new_bar_equals_p_bar_plus_R_bar_h_p_i
+  covariance_error_relation: xi_d_new_equals_xi_p_plus_R_bar_J_p_i_w_alpha_i
+  covariance_update: P_new_equals_F_i_P_F_i_transpose_plus_G_i_Sigma_alpha_i_G_i_transpose
+  preserve_cross_covariance: true
+  duplicate_add: FAIL_CLOSED
+
+while_contact_active:
+  source_type: PAPER_DIRECT
+  retain_d_i_in_group: true
+  deterministic_d_i: CONSTANT
+  stochastic_d_i: CONTACT_BROWNIAN_MOTION
+  update_type: RIGHT_INVARIANT_POINT_CONTACT_FORWARD_KINEMATICS
+  multi_contact_update: STACK_ALL_ACTIVE_CONTACTS
+  slip_rejection: NOT_PART_OF_PRIMARY_HARTLEY_IDENTITY
+
+on_contact_remove:
+  source_type: PAPER_DIRECT
+  reference: IJRR_EQ_30
+  precondition: CONTACT_ID_ACTIVE
+  group_action: REMOVE_CONTACT_COLUMN_AND_CORRESPONDING_GROUP_ROW
+  covariance_action: P_new_equals_M_i_P_M_i_transpose
+  preserve_remaining_contact_order: true
+  missing_contact_remove: FAIL_CLOSED
+
+same_timestamp_event_order:
+  source_type: OFFICIAL_CODE
+  policy_source: HUMAN_FROZEN_TO_MATCH_PINNED_OFFICIAL_CPP_EXAMPLE_SEMANTICS
+  value: PREVIOUS_IMU_PROPAGATION_THEN_CURRENT_CONTACT_INDICATORS_THEN_ONE_STACKED_CORRECT_KINEMATICS
+  first_message: STORE_AS_PREVIOUS_SAMPLE_WITH_NO_PROPAGATION
+  later_messages:
+    - PROPAGATE_PREVIOUS_IMU_OVER_CURRENT_TIMESTAMP_MINUS_PREVIOUS_TIMESTAMP
+    - PROPAGATION_USES_PREVIOUSLY_LATCHED_CONTACT_SET
+    - DERIVE_AND_SET_CURRENT_FORCE_BASED_CONTACT_INDICATORS
+    - INVOKE_ONE_STACKED_CORRECT_KINEMATICS_WITH_CURRENT_FOOT_TRANSLATIONS
+  correct_kinematics_internal_order:
+    - CORRECT_SURVIVING_ACTIVE_CONTACTS_IN_ONE_STACKED_UPDATE
+    - REMOVE_CONTACTS_WHOSE_CURRENT_INDICATOR_IS_FALSE
+    - AUGMENT_NEWLY_ACTIVE_CONTACTS
+  source_paths:
+    - RossHartley/invariant-ekf@ef16e8a1df72f9272111a488880e3fe9d161f59f/src/examples/kinematics.cpp:80-153
+    - RossHartley/invariant-ekf@ef16e8a1df72f9272111a488880e3fe9d161f59f/src/InEKF.cpp:100-113
+    - RossHartley/invariant-ekf@ef16e8a1df72f9272111a488880e3fe9d161f59f/src/InEKF.cpp:382-548
+  paper_boundary: ADAPTER_TIE_BREAK_POLICY_NOT_A_UNIVERSAL_PAPER_DIRECT_ASYNCHRONOUS_ORDER
+
+detector_boundary:
+  paper_contact_sensor: BINARY_DISCRETE_EVENT
+  by2_force_hysteresis_thresholds:
+    source_type: BY2_COMPLETE_RECORD_PREFIX_INPUT_ONLY
+    policy_id: FROZEN_BY2_INPUT_ONLY_CONTACT_POLICY
+    value_native_off_on:
+      FR: [24.8, 34.2]
+      FL: [25.2, 33.8]
+      RR: [23.4, 30.6]
+      RL: [24.0, 32.0]
+    rule: PER_LEG_TWO_MODE_MEDIANS_OFF_LOW_PLUS_0P40_GAP_ON_LOW_PLUS_0P60_GAP
+    filter_eligible: true
+  minimum_dwell:
+    source_type: BY2_COMPLETE_RECORD_PREFIX_INPUT_ONLY
+    source_samples: 3
+    median_dt_seconds: 0.004011869430541992
+    value_seconds: 0.012035608291625977
+    filter_eligible: true
+  foot_speed_online_rejection: FORBIDDEN_IN_PRIMARY_REPRODUCTION
+  foot_speed_role: DIAGNOSTIC_ONLY
+  foot_speed_online_allowed: false
+  foot_speed_changes_threshold_or_state: false
+  trajectory_or_trace_threshold_tuning: FORBIDDEN
+  data_identity: REAL_BY2_COMPLETE_RECORD_PREFIX_63277
+  raw_source_complete: false
+  complete_record_prefix_filter_eligible: true
+  complete_record_count: 63277
+  timestamped_record_starts: 63278
+  trailing_incomplete_record_count: 1
+  trailing_record_used_online: false
+
+observability_boundary:
+  constant_dimension_windows_only: true
+  stack_across_add_remove_without_mapping: false
+  allowed_boundary_actions:
+    - END_WINDOW
+    - APPLY_EXPLICIT_F_AUGMENTATION_MAP
+    - APPLY_EXPLICIT_M_MARGINALIZATION_MAP
+
+h0_h2_execution:
+  contact_detector_policy: FROZEN_BY2_INPUT_ONLY_CONTACT_POLICY
+  filter_run: false
+  canonical_filter_eligible: true

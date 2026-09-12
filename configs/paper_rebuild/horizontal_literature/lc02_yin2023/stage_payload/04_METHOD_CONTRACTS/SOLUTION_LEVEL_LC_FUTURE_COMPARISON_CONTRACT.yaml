@@ -1,0 +1,17 @@
+schema_version: solution_level_lc.future_comparison.v1
+external_papers:
+  LC01_PRIMARY: LC01_PAVLASEK2021_TWO_RECEIVER_IEKF
+  LC02_PRIMARY: LC02_YIN2023_RAEKF
+lc02_internal_baselines: [YIN2023_EKF, YIN2023_AKF, YIN2023_RKF]
+counting_rule: "LC01 and LC02 are two external papers; Yin's four branches are one paper family and one formal external primary."
+boundaries:
+  rerun_LC01_for_Y0_Y3: false
+  reuse_HORIZONTAL18_V2_ranking: false
+  use_old_runtime_performance: false
+  tune_from_trace: false
+  require_future_clean_common_provider_and_evaluation: true
+authorization:
+  implementation_authorized: false
+  C00_authorized: false
+  representative_cases_authorized: false
+  comparison_run_authorized: false

@@ -1,0 +1,157 @@
+schema_version: horizontal_literature.phase5.ext05.contract.v1
+stage_id: CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON_EXT05_C00
+case_id: C00
+
+paper:
+  authors: [Natalia Pavlasek, Alex Walsh, James Richard Forbes]
+  title: Invariant Extended Kalman Filtering Using Two Position Receivers for Extended Pose Estimation
+  venue: 2021 IEEE International Conference on Robotics and Automation
+  pages: 5582-5588
+  doi: 10.1109/ICRA48506.2021.9561150
+  arxiv: 2104.14711
+  authoritative_author_pdf: https://arxiv.org/pdf/2104.14711v1
+  author_pdf_sha256: 7ee89ae8e04b35978ee076f81b41990baa8a1cbee2fefaa1f29d6336f4f3e697
+  official_code_search: NO_ATTRIBUTABLE_OFFICIAL_IMPLEMENTATION_FOUND
+  implementation_mode: CLEAN_ROOM_PRIMARY_SOURCE
+
+methods:
+  primary: EXT05A_PAVLASEK_TWO_RECEIVER_IEKF
+  appendix_baseline:
+    id: EXT05B_PAVLASEK_TWO_RECEIVER_MEKF_APPENDIX_EXACT
+    status: NOT_IMPLEMENTED_DUE_TO_INTERNAL_APPENDIX_INCONSISTENCY
+    human_waiver: true
+    defects:
+      - EQ45_LEFT_NAVIGATION_ERROR_CONFLICTS_WITH_EQ46_RIGHT_BODY_JACOBIAN
+      - EQ47_RELATIVE_NOISE_PLUS_CONFLICTS_WITH_EQ21_DIFFERENCE
+      - EQ48_INNOVATION_AND_EQ50_ATTITUDE_SIGN_CONFLICT
+      - NO_CORRECTION_INJECTION_RESET_EQUATION
+      - STACKED_ABSOLUTE_RELATIVE_MEASUREMENT_CROSS_COVARIANCE_OMITTED
+  diagnostic: EXT05C_PAVLASEK_SINGLE_RECEIVER_IEKF
+
+equation_to_code:
+  source: author_arXiv_v1_PDF_SHA256_7ee89ae8_page_numbers_are_PDF_pages
+  equations_15_16_pdf_page_4: ext05_provider.IMU_only_projection_and_deterministic_static_calibration
+  equations_17_19_pdf_page_4: PavlasekIEKF.propagate
+  equations_20_22_pdf_page_4: PavlasekIEKF.update
+  equation_23_pdf_page_4: process_drift_matrix_plus_PavlasekIEKF_process_noise_injection
+  equation_24_pdf_page_4: ExtendedPose.matrix
+  equation_25_pdf_page_4: continuous_error_matrices_L_and_continuous_noise_wedge_order
+  equation_26_pdf_page_4: process_drift_matrix
+  equations_27_29_pdf_page_4: left_invariant_error_components
+  equation_30_pdf_page_4: nine_vector_order_attitude_velocity_position
+  equations_31_32_pdf_page_4: continuous_error_matrices
+  continuous_to_discrete: van_loan_discretize
+  equation_33_pdf_page_4_and_equations_34_37_pdf_page_5: measurement_jacobian_and_PavlasekIEKF.update
+  equation_10_page_3_update_side: ExtendedPose.right_correct_X_hat_equals_X_check_right_multiply_Exp_minus_Kz
+  se23_exponential: actual_SO3_left_Jacobian_for_velocity_and_position_columns
+  covariance_posterior_completion: Joseph_form
+  equations_38_40_pdf_page_6: exact_paper_experiment_process_PSD_values
+  equations_41_43_pdf_page_6: paper_UWB_sensor_specific_R_values_not_reused_on_BY2
+  BY2_measurement_covariance_declared_instantiation: pAcc_R1_R2_with_correlated_stacked_absolute_relative_R_y
+
+frames_and_geometry:
+  navigation_frame: NED
+  body_frame: FRD
+  attitude_direction: C_nb_body_to_NED
+  left_invariant_error: X_true_inverse_X_hat
+  gnss1_identity: RIGHT
+  gnss2_identity: LEFT
+  relative_measurement: p_GNSS2_minus_p_GNSS1
+  imu_to_gnss1_frd_m: [0.03, 0.03, -0.30]
+  gnss2_minus_gnss1_frd_m: [0.0, -0.350, 0.0]
+  baseline_length_m: 0.350
+  go2_input_frame: FLU
+  imu_conversion_order:
+    - FLU_to_FRD_x_minusy_minusz
+    - active_RzRyRx_installation
+  imu_installation_rpy_deg: [-1.0, 0.0, 0.0]
+  fixed_ned_origin: FIRST_COMMON_GNSS1_HPPOSECEF_EPOCH
+  per_epoch_ned_origin: false
+
+solution_provider:
+  source: TWO_RECONSTRUCTED_UBX_NAV_HPPOSECEF_STREAMS
+  expected_common_epoch_count: 1510
+  expected_rawx_epoch_count_per_receiver: 1509
+  pairing: IDENTICAL_STRICT_COMMON_ITOW_NO_SEARCH
+  cadence_ms: 200
+  hpposecef_minus_rawx_ms: 2
+  pacc_official_unit: 0.1_mm
+  pacc_to_m_multiplier: 0.0001
+  R1: pAcc1_squared_times_I3
+  R2: pAcc2_squared_times_I3
+  Rrel_declared: R1_plus_R2
+  stacked_measurement_covariance:
+    block_11: R1
+    block_12: minus_R1
+    block_21: minus_R1
+    block_22: R1_plus_R2
+  solution_error_independence_exact: false
+  timing_search: false
+  sign_search: false
+  offset_search: false
+
+imu_calibration:
+  source_projection: TIMESTAMP_GYROSCOPE_ACCELEROMETER_ONLY
+  quaternion_materialized: false
+  rpy_materialized: false
+  yaw_materialized: false
+  interval_seconds: 5.0
+  primary_interval: FIRST_FIVE_SECONDS
+  fallback: FIRST_INPUT_ONLY_CONTIGUOUS_STATIC_FIVE_SECONDS
+  static_gyro_norm_median_max_radps: 0.05
+  static_acceleration_norm_minus_local_g_abs_max_mps2: 0.5
+  gyro_bias: WINDOW_MEAN_CONSTANT
+  accelerometer_bias_estimated: false
+  initial_gravity_direction: WINDOW_MEAN_ACCELEROMETER
+  final_error_search: false
+
+initialization:
+  roll_pitch: CALIBRATED_INITIAL_GRAVITY_C_nb_f_b_plus_g_n_equals_zero
+  yaw: FIRST_VALID_HORIZONTAL_GNSS2_MINUS_GNSS1_WITH_FIXED_BODY_TRANSFORM
+  position: p1_minus_C_nb_times_imu_to_gnss1_lever
+  velocity: ZERO_AT_VERIFIED_STATIC_INITIALIZATION_EPOCH
+  trace_access: false
+  go2_attitude_access: false
+  initial_covariance:
+    attitude_rad2: PI_OVER_3_SQUARED_TIMES_I3
+    velocity_m2ps2: 0.1_SQUARED_TIMES_I3
+    position_m2: 0.1_SQUARED_TIMES_I3
+
+process_noise_psd_paper_experiment:
+  gyro_rad2_per_s: [0.0004, 0.0004, 0.000324]
+  accelerometer_m2ps3: [0.0289, 0.0225, 0.0576]
+
+native_gate:
+  trace_open_count: 0
+  go2_quaternion_rpy_yaw_input: false
+  status_A1_yaw_input: false
+  ext01_ext04_output_input: false
+  LegSA_output_input: false
+  geometric_audit_after_native_freeze_only: true
+  geometric_audit_skip_initial_seconds: 5.0
+  geometric_median_abs_max_deg: 10.0
+  geometric_p95_abs_max_deg: 30.0
+  provider_epochs_after_last_imu_policy: CONSERVE_AS_BEYOND_PROPAGATION_SUPPORT
+
+evaluation:
+  offline_after_native_freeze: true
+  base_time_unix_seconds: 1772784000.0
+  window_seconds: [66.0, 340.0]
+  trace_yaw: unwrap_ENU_then_interpolate_then_wrap360_90_minus_yaw
+  alignment_search: false
+  time_search: false
+  frame_search: false
+  constant_offset_correction: false
+  error_based_epoch_deletion: false
+  independent_ground_truth: false
+  reference_role: FIXPOSITION_SAME_SOURCE_EVALUATION_REFERENCE
+
+parallelism:
+  default_processes: 16
+  authorized_maximum: 20
+  recursive_epoch_parallelism: false
+  thread_environment:
+    OMP_NUM_THREADS: 1
+    MKL_NUM_THREADS: 1
+    OPENBLAS_NUM_THREADS: 1
+    NUMEXPR_NUM_THREADS: 1

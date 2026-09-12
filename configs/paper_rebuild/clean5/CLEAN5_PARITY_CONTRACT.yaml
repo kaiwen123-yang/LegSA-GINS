@@ -1,0 +1,622 @@
+schema_version: paper_rebuild.clean5.input_parity_preregistration.v3
+contract_version: 3
+contract_status: PREREGISTERED_BEFORE_P03_PROVIDER_GENERATION_AND_SOLVES
+task: P-03
+active_execution_scope: p03
+p02_registration_history_follows: true
+starting_commit: 42382cf9353e5006014a330232c3e58b1aa4d925
+human_provider_authorization_date: '2026-09-08'
+human_v3_authorization_date: '2026-09-09'
+stage_id: CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF
+stage_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF
+provider_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/02_PARITY_PROVIDERS
+run_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/03_PARITY_RUNS
+seal_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/04_PARITY_SEAL
+aggregate_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/08_AGGREGATE
+execution_authorized: true
+solver_invocation_limit: 8
+serial_only: true
+automatic_solver_retries: 0
+data_mode: real_by2_raw
+synthetic_data_used: false
+semisynthetic_data_used: false
+trace_used_online: false
+receiver_imu_as_body_imu: false
+final_v23_output_solver_input: false
+LegSA_output_solver_input: false
+per_case_tuning: false
+output_only_correction: false
+epoch_deleted_for_metric: false
+old_runtime_input_count: 0
+frozen_runtime:
+  primary: A04
+  controls:
+  - F01
+  - F03
+  effective_configurations:
+    A04: AB1011
+    F01: single_antenna_EKF
+    F03: AB0000
+  scientific_solver_commit: 64c81965b17ef1bf8ae2ce3e4dd7b1ae35110b00
+  executable: <CODE_ROOT>/build/canonical541_cpp/legsa_v23_port_core_demo
+  executable_sha256: 9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f
+  window_seconds:
+  - 66.0
+  - 340.0
+  base_time: 1772784000.0
+  parameter_policy: Every scientific line is byte identical to its own frozen F01/F03/A04 profile, including window
+    and initial state. Same profile frozen_parameter_hash equal across variants; distinct profiles retain their
+    distinct switches/hashes.
+  allowed_runtime_line_replacements:
+  - imupath
+  - gnsspath
+  - raw_doppler_factor_path
+  - go2_attitude_prior_path
+  - go2_horizontal_velocity_prior_path
+  - outputpath
+  - stage_id
+  - protocol_id
+  - case_id
+  - data_mode
+  - run_id
+  - run_label
+  transport_policy: Only listed identity/path lines may change, with an explicit before/after ledger. Scientific
+    tokens on every other line must be byte-identical. No reserialization of numeric parameters. All true identities
+    also recorded in the outer manifest. Any additional native provenance/counter requirement blocks execution;
+    never relax it silently.
+  original_configs:
+    F01:
+      run_id: RUN_00001
+      runtime_config: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/08_FULL_ALGORITHM_RUNS/RUN_00001/CANONICAL541_RUNTIME_CONFIG.yaml
+      runtime_config_sha256: 8f02e95e65668a4dc3e9654a195a2e9435a4e53a2a89afd2abae99926c19fae6
+      result_table: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/12_OFFLINE_EVALUATION/LOGICAL_EVALUATION_RESULTS.csv
+      result_table_line_including_header: 2
+      provider_inputs:
+        imupath:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FINAL_V23_CLEAN_CLEAN2R2A/FINAL_V23_CLEAN_FRESH.imu
+          sha256: a46fe2b50a5a99d550392f42e3952c871a7562c6d5625ea1b377691009ab643b
+        gnsspath:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FINAL_V23_CLEAN_CLEAN2R2A/FINAL_V23_CLEAN_FRESH.gnss
+          sha256: f4070ba795825cc243402e4acb551c62c6aad109e7040582bf57781226420e22
+        raw_doppler_factor_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/RAW_DOPPLER_VELOCITY.csv
+          sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+        go2_attitude_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/GO2_ATTITUDE_WEAK_PRIORS.csv
+          sha256: 2329770b8e9bc61c02fbf943e2e5fd9ea233d6fd8a3550f7a22410a536155c7a
+        go2_horizontal_velocity_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/GO2_HORIZONTAL_VELOCITY_WEAK_PRIORS.csv
+          sha256: f390c8e51f1bec1162c0f6c628ebbcd0449923cfbf9211bebb36004dc2b2aab0
+    F03:
+      run_id: RUN_00003
+      runtime_config: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/08_FULL_ALGORITHM_RUNS/RUN_00003/CANONICAL541_RUNTIME_CONFIG.yaml
+      runtime_config_sha256: 165f5e76ebd46c579fc3327c1b626703add04649d357b0fbd81b304ec3194726
+      result_table: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/12_OFFLINE_EVALUATION/LOGICAL_EVALUATION_RESULTS.csv
+      result_table_line_including_header: 1084
+      provider_inputs:
+        imupath:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FINAL_V23_CLEAN_CLEAN2R2A/FINAL_V23_CLEAN_FRESH.imu
+          sha256: a46fe2b50a5a99d550392f42e3952c871a7562c6d5625ea1b377691009ab643b
+        gnsspath:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FINAL_V23_CLEAN_CLEAN2R2A/FINAL_V23_CLEAN_FRESH.gnss
+          sha256: f4070ba795825cc243402e4acb551c62c6aad109e7040582bf57781226420e22
+        raw_doppler_factor_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/RAW_DOPPLER_VELOCITY.csv
+          sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+        go2_attitude_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/GO2_ATTITUDE_WEAK_PRIORS.csv
+          sha256: 2329770b8e9bc61c02fbf943e2e5fd9ea233d6fd8a3550f7a22410a536155c7a
+        go2_horizontal_velocity_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/GO2_HORIZONTAL_VELOCITY_WEAK_PRIORS.csv
+          sha256: f390c8e51f1bec1162c0f6c628ebbcd0449923cfbf9211bebb36004dc2b2aab0
+    A04:
+      run_id: RUN_00006
+      runtime_config: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/10_INTERNAL_ABLATION_RUNS/RUN_00006/CANONICAL541_RUNTIME_CONFIG.yaml
+      runtime_config_sha256: 8f2b51509ba7d811e2f42dea6acf199f6206260ca8fbd811bd1d32bb730669c1
+      result_table: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/12_OFFLINE_EVALUATION/LOGICAL_EVALUATION_RESULTS.csv
+      result_table_line_including_header: 3789
+      provider_inputs:
+        imupath:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FINAL_V23_CLEAN_CLEAN2R2A/FINAL_V23_CLEAN_FRESH.imu
+          sha256: a46fe2b50a5a99d550392f42e3952c871a7562c6d5625ea1b377691009ab643b
+        gnsspath:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FINAL_V23_CLEAN_CLEAN2R2A/FINAL_V23_CLEAN_FRESH.gnss
+          sha256: f4070ba795825cc243402e4acb551c62c6aad109e7040582bf57781226420e22
+        raw_doppler_factor_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/RAW_DOPPLER_VELOCITY.csv
+          sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+        go2_attitude_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/GO2_ATTITUDE_WEAK_PRIORS.csv
+          sha256: 2329770b8e9bc61c02fbf943e2e5fd9ea233d6fd8a3550f7a22410a536155c7a
+        go2_horizontal_velocity_prior_path:
+          path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/clean_final_v23_time_basis/GO2_HORIZONTAL_VELOCITY_WEAK_PRIORS.csv
+          sha256: f390c8e51f1bec1162c0f6c628ebbcd0449923cfbf9211bebb36004dc2b2aab0
+  no_main_provider_generation_or_overwrite: true
+  native_identity_transport: Use existing C-04 CLEAN2R2A native compatibility identity only; outer manifest records
+    true P02 family/variant. Native formal checks and scientific parameters stay enabled and unchanged.
+evaluation:
+  v2_sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  base_time: 1772784000.0
+  window_seconds:
+  - 66.0
+  - 340.0
+  trace_sha256: ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c
+  trace_columns:
+    time: time
+    latitude: lat
+    longitude: lon
+    height: height
+    roll: roll
+    pitch: pitch
+    yaw: yaw
+  v2_semantics: 'Exact frozen executable: crop NAV to trace overlap; interpolate geodetic lat/lon/height and roll/pitch;
+    unwrap ENU yaw before interpolation; yaw=wrap360(90-yaw); local ENU position error.'
+  v3_status: AUTHORIZED_2026_09_09
+  v3_policy: Transform copies of estimator IMU NAV into POI using own full NAV attitude and frozen A1 median, then
+    run unchanged aa0492 evaluator; preserve original NAV and all v2 identities/numbers.
+  native_support_difference:
+    canonical_epochs: 56642
+    external_epochs: 58014
+  reporting: Report frozen v2, native-support v3, coverage, exact time support and any separately labelled common-support
+    diagnostics independently. No frozen row replacement.
+  evaluator_path: <CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py
+  canonical_attempt: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800
+  v3_human_source_declaration: 人类源声明（2026-09-09）：VRTK 单元安装在两根天线正中间，天线相位中心与单元参考点等高。设备 TF：POI→VRTK 零平移、单位旋转。
+  v3_human_transform_authorization: POI_est = p_IMU + C_b^n · [0.03, 0.03 − ½·b_med, −0.30]，b_med 取冻结 A1 provider
+    的 baseline_len_m 中位数（BY2），C_b^n 由 NAV 的 roll/pitch/yaw 构造；对 V0、V1、V2、V2e、EXT05C、LC01 的 NAV 同样施加后再进冻结评估器；输出到
+    v3/ 子目录，表结构同 v2。
+  TF_original: $FP,TF,2,2408,460875.000000,POI,VRTK,-0.00000,-0.00000,-0.00000,1.000000,0.000000,0.000000,0.000000*7D
+  TF_source: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/00_PARITY_TARGET_AND_AUDITS/B_ORIGINAL_TF_POI_MESSAGES_BY2.json
+  consistency_check_only_mm:
+    BY2: -2.5
+    BY2H: 7.0
+    BY2O: -0.2
+  consistency_values_used_in_transform: false
+  v3_lever_frd_m:
+  - 0.03
+  - -0.148095745932992
+  - -0.3
+  no_further_residual_correction: true
+raw_locks:
+  BY2: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv
+  BY2H_BY2O: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv
+frozen_a1_provider:
+  path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/providers/dual_yaw_provider.csv
+  sha256: ccf442f32a0037ba742d199d7ab078d5af112aea5981effce1f23a80510bdd86
+  baseline_column: baseline_length_m
+  requested_semantic_alias: baseline_len_m
+  column_alias_policy: Use actual frozen baseline_length_m, no reconstructed baseline or B2 fitted residual. The
+    requested baseline_len_m is the same physical quantity under this explicit source-column mapping.
+  rows: 302
+  baseline_median_m: 0.356191491865984
+variants:
+- id: V0-18
+  profiles:
+  - A04
+  definition: Append 1 1 1 to each V0 numeric line, preserve original fifteen-field bytes and sys_stamp time.
+  identity_gate: NAV/STD same shape and byte-identical or maximum absolute difference <=1e-9 to Canonical C00 A04
+    before other solves
+- id: V1
+  profiles:
+  - F01
+  - F03
+  - A04
+  definition: 303 GNSS rows; only time token becomes corresponding status header epoch; all fourteen measurement
+    tokens byte-identical to V0. Receiver velocity matches same NAV-PVT iTOW identity with exact zero integer-ms
+    key difference. A1 yaw/std and position/RV std unchanged.
+  epoch_identity_vs_timestamp: Status header differs iTOW UTC by about0.15ms; retain requested header values and
+    report actual difference separately, never call numerical header difference zero.
+  missing_boundary_policy: 'First pre-window status row has no same-iTOW PVT: retain frozen numeric bytes as inactive
+    placeholders and set velocity_valid=0. Missing/mismatching valid RV inside66..340 blocks generation. All302
+    common RV vectors must match original tokens.'
+- id: V2
+  profiles:
+  - F01
+  - F03
+  - A04
+  definition: 1510 HPPOSECEF native5Hz iTOW rows; shared_raw_backend.ecef_to_geodetic same conversion as EXT05C;
+    N/E std=PVT hAcc, D std=PVT vAcc at identical iTOW; same-epoch PVT velocity, frozen RVstd0.05m/s; A1 yaw valid
+    only at matching frozen physical A1 source epochs.
+  accuracy_gate: Report exactfloat64 equality and serialization differences; status float32 pos_acc_h/v must equal
+    same PVT hAcc/vAcc castfloat32. No tuning or adjustment of values.
+  source_gate: HP-LLH minus status at common1Hz epochs <=5mm qualifies same source; otherwise preserve explicit
+    source difference (not silently abort/adjust).
+  A1_boundary_policy: Frozen A1 has302epochs;301 match HP support,1leading pre-window unmatched. Last status-only
+    epoch is absent frozen physical A1 and remains yawvalid0. Equality of yawvalidcount uses matched A1 support;
+    record source/mapped/unmatched/eligible counts separately.
+- id: V2e
+  profiles:
+  - F01
+  definition: V2 position rows, pAcc isotropic std as EXT05C; RVvalid=0 and yawvalid=0 on every row. F01 numeric/profile
+    flags unchanged; position-only observations.
+  known_static_blocker: Frozen formal F01 runtime requires receiver_velocity_update_count>0 at port_runtime.cpp:200-245.
+    This authorized attempt is expected to fail native counter guard before NAV/STD write. Do not bypass, substitute
+    result or rerun. Missingmetrics remainUNAVAILABLE.
+- id: V3
+  solver_runs: 0
+  definition: Post-process available V0/V1/V2/V2e/EXT05C/LC01 NAV copies using evaluator.v3_lever_frd_m and ownNAV
+    roll/pitch/yaw, then frozen evaluator. UnavailableV2e NAV remainsUNAVAILABLE.
+  output_identity: evaluator_contract_v3
+  separate_tables: true
+removed_variant:
+  id: V4
+  reason_user: V4 删除，理由 LC01−EXT05C = −0.002 m 已给出双接收机项
+  exact_reference_policy: Use full frozen LC01-EXT05C metrics with source rows, not rounded−0.002 as computation
+    input.
+no_update_encoding:
+  columns: 18
+  field_16: position_valid
+  field_17: velocity_valid
+  field_18: yaw_valid
+  native_format_flag: Auto-detected existing extension; no invented numerical configuration flag. Record18 in outer
+    manifest.
+  finite_placeholders: true
+  NaN_or_large_std_skip: false
+  auxiliary_scheduling: RD/RP/HV triggered perGNSS row; same files do not imply same selected times/counts. Record
+    counters and provider-time selection ledger.
+run_order:
+- - V0-18
+  - A04
+- - V1
+  - F01
+- - V1
+  - F03
+- - V1
+  - A04
+- - V2
+  - F01
+- - V2
+  - F03
+- - V2
+  - A04
+- - V2e
+  - F01
+counter_contract:
+  eligibility: Replay frozen C++ loader and engine schedule from GNSS18 and IMU times, then sum valid bits;
+    start GNSS>starttime, stop before IMU>endtime, refresh at most one stale GNSS per loop,
+    ordered abs(previous-GNSS)<0.001 or abs(current-GNSS)<=0.001 or previous<GNSS<current,
+    clear processed row validity. No NAV/counter/reference-derived threshold.
+  source: port_runtime.cpp:1416,1435,1463,1471; gi_engine.cpp:265,413; types.hpp:63
+  audit_revision:
+    original_execution_commit: d6581ae44e41d7e0640a39381ed76fbe66dea92f
+    original_contract_sha256: 33d3f3b0fc48bf50b5cc42c5fdf014737085bdc125d10ad3dbf7231b25fa3540
+    reason: Original Python expectation included a final GNSS beyond the last processed IMU tolerance;
+      native V1 F01 exit0 with 273 updates was incorrectly compared to 274.
+    recovery: Preserve original PARTIAL terminal, failed audit, seal and first two outputs;
+      revalidate independently under a new pushed detached snapshot, continue only six unexecuted runs.
+    solver_retries: 0
+    original_contract_snapshot: 01_PARITY_EXECUTION_AUDIT/code_validation/PRE_EXECUTION_CONTRACT.yaml
+  position: sum eligible position_valid
+  RV: sum eligible velocity_valid when F01/F03/A04 frozen RVenabled
+  yaw_attempt: sum eligible yaw_valid when F03/A04 yawenabled;F01=0
+  forbidden_counts: 0
+  main_native_guard_unchanged: true
+provider_audits:
+- row/window/validity counts
+- fractional-second distribution
+- shared HP-LLH/status commonepoch difference
+- status/PVT accuracy equality
+- V1 non-time bytes
+- exact RV epoch keys
+- A1 full/mapped/unmatched/eligible epochs
+- strace zero trace/bag/fpl
+- three-sequence first1000 Go2 acceleration norm and frozen abstd/asstd/corrtime reportonly
+phase_rules:
+  first_commit_before_execution: true
+  push_and_remote_equality_before_detached_snapshot: true
+  no_edits_builds_commits_in_snapshot: true
+  provider_pre_post_raw_checkpoints: 22 BY2 files per independent hash-only strace session
+  solver_pre_post_raw_checkpoints: 22 BY2 files per independent hash-only strace session
+  solver_strace: zero raw/trace/bag/fpl opens; writes only own run
+  seal_before_first_evaluation: true
+  v3_source_NAV_immutable: true
+decomposition:
+  metrics:
+  - horizontal_rmse_m
+  - position_3d_rmse_m
+  - up_rmse_m
+  - yaw_rmse_deg
+  time: V0-V1
+  rate: V1-V2
+  module: V2_A04-V2_F03
+  estimator: V2e_F01-EXT05C
+  dual_receiver: LC01-EXT05C frozenreference
+  measurement_point: v2-v3 same run
+  source_rows_required: true
+  missing_endpoint: UNAVAILABLE
+  interpretation: No interpretation requested; report literal sequential differences with native support counts.
+body_frame_bias:
+  files:
+  - 08_AGGREGATE/BODY_FRAME_BIAS.csv
+  - 08_AGGREGATE/v3/BODY_FRAME_BIAS.csv
+  yaw_source: original each-run NAV yaw(NED), nevertraceyaw
+  formula: F=N*cos(yaw)+E*sin(yaw); R=E*cos(yaw)-N*sin(yaw); U=Up
+  statistics:
+  - signed_mean
+  - population_std
+  further_correction: false
+forbidden:
+- main provider/result/contract/evaluator mutation
+- C++ modification or frozenbinary replacement
+- scientificparameter edits
+- trace online/providerinput
+- percase tuning
+- time/sign/offset/lever fitting
+- metric-driven deletion
+- v3 replacingv2
+- knownfailure result substitution
+- retry or >8solver calls
+- merge/tag/forcepush
+required_manifest_fields:
+- data_mode
+- raw_source_hashes
+- provider_hashes
+- synthetic_data_used
+- semisynthetic_data_used
+- trace_used_online
+- receiver_imu_as_body_imu
+- final_v23_output_solver_input
+- LegSA_output_solver_input
+- per_case_tuning
+- output_only_correction
+- epoch_deleted_for_metric
+- old_runtime_input_count
+- code_commit
+- config_hash
+- provider_family
+- variant_id
+- parameter_byte_diff
+- evaluator_identity
+- reference_point
+- coverage
+- terminal_status
+
+# P03 active registration; P02 sections above remain immutable reference specifications.
+p03:
+  stage_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING
+  reference_stage_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF
+  reference_summary_sha256: 7ad4294999bdb7b3668bb7cd59869f49a42fb0d840f76b83c94b0704aee64d75
+  reference_terminal_sha256: aa56b7b3f828f7279afe562f46e5f88c07e4d9eb51a6b70ec785c7a3076b0377
+  reference_provider_bundle_sha256: 85b3ed069c30df31a78b2d64a1946721eb845c06dc840d51867ef92462f70e5c
+  reference_seal_sha256: 4196d3e188dcd556924fd36bd99d401f06270a9ac4a9d4141a827671563b06ce
+  source_base_commit: 8d47753d612eee3ab5c205b537cc7224c4e49829
+  scientific_scope: BY2 C00; only new CLEAN5_PARITY_* IMU inputs; six serial F03/A04 solves. P02 reference providers/results/metrics
+    stay immutable.
+  selected_residual_variant: V2is
+  selection_basis: Pre-registered applicability of input preprocessing differences; no selection by any new metric.
+  reference_section_policy: Top-level variants/run_order and eight-run limit below are preserved P02 registration
+    history only. This p03 block exclusively defines the new six-run execution. frozen_runtime/evaluation/frozen_a1_provider
+    retain their frozen identities.
+  run_order:
+  - - V2i
+    - F03
+  - - V2i
+    - A04
+  - - V2s
+    - F03
+  - - V2s
+    - A04
+  - - V2is
+    - F03
+  - - V2is
+    - A04
+  solver_invocation_limit: 6
+  new_evaluator_invocation_limit: 12
+  serial_only: true
+  automatic_retries: 0
+  variants:
+  - id: V2i
+    applicability: APPLICABLE_INPUT_HANDLING_DIFFERS
+    profiles:
+    - F03
+    - A04
+    definition: Generate IMU increments from the maintained external Go2 FRD projection using previous-sample zero-order
+      hold and the exact frozen external initial-5-second gyro mean; retain V2 relative timestamps and measured
+      intervals. No accelerometer bias/scale calibration.
+    hypothesis: Change only the two identified input handling choices; direction of signed RMSE difference not assumed.
+    claim_boundary: Frozen provider/calibration identity verified; original frozen runner text UNAVAILABLE. Current
+      maintained runner supplies ZOH source evidence. This is an input-handling intervention, not proof of complete
+      frozen EXT05C propagation equivalence.
+  - id: V2s
+    profiles:
+    - F03
+    - A04
+    definition: Multiply original unrounded three-axis specific force by the fixed s before measured-dt increments,
+      with original current-sample convention. Preserve every V2 timestamp and gyro token exactly.
+    hypothesis: Remove the fixed first-1000 gravity-norm discrepancy in the input; downstream metric sign is not
+      preselected.
+    calibration_role: Input-side static calibration, the same role as the frozen first-1000-frame gyro bias removal.
+      Not a solver parameter change or trace-derived correction.
+  - id: V2is
+    profiles:
+    - F03
+    - A04
+    definition: V2i preprocessing plus the identical preregistered s applied to unrounded three-axis force before
+      increments. Time and gyro tokens exactly equal V2i.
+    hypothesis: Apply both pre-registered input interventions; report interaction and residual without selecting
+      by results.
+  scale_calibration:
+    g_local_mps2: 9.801554354839126
+    mean_norm_first_1000_mps2: 9.508318843893118
+    s: 1.0308398903907543
+    definition: s = g_local / mean(norm(a_i), i=0..999); not norm(mean(a_i))
+    selection: fixed first 1000 complete BY2 frames; no results-based selection
+    gravity_spec:
+      g_local_mps2: 9.801554354839126
+      g_ellipsoid_surface_mps2: 9.80168335159263
+      frozen_initpos:
+      - 39.98482973
+      - 116.34312609
+      - 41.80208107
+      height_definition: ellipsoidal height in metres; frozen initpos[2]
+      constants:
+        a_m: 6378137.0
+        inverse_flattening: 298.257223563
+        GM_m3ps2: 398600441800000.0
+        omega_radps: 7.292115e-05
+        ge_mps2: 9.7803253359
+        k: 0.00193185265241
+        derived_e2: 0.0066943799901413165
+        derived_b_m: 6356752.314245179
+        derived_m: 0.0034497865068408447
+      formula: g0=ge*(1+k*sin(phi)^2)/sqrt(1-e2*sin(phi)^2); g(h)=g0*(1-2/a*(1+f+m-2*f*sin(phi)^2)*h+3*h^2/a^2)
+      defining_constants_source: https://earth-info.nga.mil/?action=wgs84&dir=wgs84
+      formula_source: https://ahrs.readthedocs.io/en/latest/geodesy/wgs84.html
+      source_boundary: NGA defining parameters and AHRS official implementation documentation; NGA registered PDF
+        not downloaded or directly formula-verified
+    source: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/00_AUDITS/B_SCALE_FACTOR.json
+    source_sha256: ff50f078707f780eb65c376e07c56c745b9887fa836439b579afd97826867573
+    fixed_before_any_P03_provider_generation: true
+    first_1000_are_fixed_input_interval: true
+    stationarity_interpretation: Fixed interval inherited from existing input calibration; no trace-based selection
+      and no new fitted bias.
+    accel_bias_subtracted_mps2:
+    - 0.0
+    - 0.0
+    - 0.0
+    temperature_fit_used: false
+  external_preprocessing:
+    native_summary: <CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/06_EXT05_PAVLASEK_TWO_RECEIVER/C00/EXT05A_C00_NATIVE_SUMMARY.json
+    native_summary_sha256: 466b99cb075e5dd7e2e93bb3a27e4ca8df4ffbbffd5bd81ec561e053bc614dea
+    summary_role: Read only provider.calibration and provider.position.fixed_ned_origin_geodetic_deg_m for exact
+      calibration provenance, never use results for fitting/selection.
+    exact_frozen_runner_text: UNAVAILABLE
+    frozen_runner_sha256: f3ef9ecd2f509c4785ab9d4b384204a782ecacded580d0222d3e013772ff09b1
+    current_maintained_runner_sha256: 9ca29e1e5d679c56ac1a68f70f4f917c484dbc5be11f76f903a9df8b014138db
+    runner_source_boundary: The original text was not found in the assigned CLEAN4 output, P01 provenance, or bounded
+      single-file Git history search. Current maintained source lines are labelled current-source evidence, not
+      original byte proof.
+    gyro_calibration_interval_seconds: 5.0
+    expected_calibration_sample_count: 1031
+    expected_gyro_bias_frd_radps:
+    - -0.0076655634452167005
+    - -0.0026948138158392793
+    - -0.0011093268712426007
+    sampling: Previous sample on each measured Go2 interval; no GNSS-event insertion into the IMU file.
+    unchanged_from_V2:
+    - stamp.sec+nanosec time source
+    - measured dt
+    - FLU-to-FRD then install roll=-1,pitch=0,yaw=0 degrees
+    - raw specific force; no input gravity subtraction
+    - six-decimal relative timestamps
+    - eight-decimal increment serialization
+    - all non-IMU input hashes
+    - native solver and initial state
+    - original .12g intermediate serialization parsed back to float before final .6f time and .8f increments
+    not_reproduced_in_input:
+    - external 9-state mechanization
+    - fixed external normal-gravity model
+    - external attitude initialization
+    - external midpoint rotation and GNSS event propagation
+    - external absence of bias/scale states
+    exact_raw_calibration_equality_required: true
+    exact_original_frozen_IMU_reconstruction_required: true
+  shared_source_sha256:
+    src/legsa_gins/input_generation/imu_txt_builder.py: dcc20ae00cb23d2c4685578e5104cf373204413d90ce26c36a15135ad42522ce
+    src/legsa_gins/datasets/by2/go2_body_state_parser.py: 3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6
+    src/legsa_gins/paper_rebuild/horizontal_literature/ext05_provider.py: 5172276f2bb5a9394b5431583203c2c8656f5acb0a233e8c9d5f910d20b941fc
+    src/legsa_gins/paper_rebuild/horizontal_literature/ext05_pavlasek.py: 89d5496ac2da1dd7d1fd0d194d47f7f49499ed8984915a31156ae53f669fbab5
+    src/legsa_gins/paper_rebuild/horizontal_literature/phase5_runner.py: 9ca29e1e5d679c56ac1a68f70f4f917c484dbc5be11f76f903a9df8b014138db
+    src/legsa_gins/input_generation/process_data_compat.py: 97dcd3aec7c22eb99fb7b6fa621e7ee095c447e532f9e39d5d7157c2a4a7494a
+    src/legsa_gins/paper_rebuild/final_v23_clean_input.py: e1b67d4e72a4c2bf12de3d309c310e8e37a25058bead6581c5094152f493e2ef
+  input_audit:
+    A_IMU_PREPROCESSING_COMPARISON_sha256: b401517b775e473feebcf4ac2f073db564fb1315092f37a7c9f040825e1a2414
+    datasets:
+    - BY2
+    - BY2H
+    - BY2O
+    mode: report-only
+    dt_definition: Integer nanosecond stamp differences of all consecutive complete messages; no gap deletion.
+    jitter_proxy: g_local * std(dt) in m/s, single-increment timing-jitter equivalent only, not observed sensor
+      noise or solver covariance.
+    windows: 10-second sliding window, 1-second step; full and terminal partial windows labelled separately, all
+      retained.
+    temperature: Emit original imu_state.temperature values without assuming units. All three sequences are constant
+      raw value 79; scale-vs-temperature attribution UNAVAILABLE.
+    scale_identification: Dynamic force-norm variation cannot distinguish constant physical scale from temperature
+      drift; no fit or correction from sliding windows.
+    audit_root: <CLEAN_ROOT>/stages/CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF/10_IMU_PROCESSING/00_AUDITS
+    B_INPUT_AUDIT_sha256: 3a931e233cc24da40ed1037808dd1a5922dcdc84a572657291392455ca1eb3d2
+    B4_theory: Unit conversions, stationary OU prior, continuous-time theoretical decay/noise and free-error integration
+      only. Bias priors are not hard bounds. Scale P0 and Q are zero. No actual filter absorption inferred.
+  provider_gates:
+  - Verify original BY2 lock plus all V2 input hashes and shared source hashes.
+  - Rebuild frozen IMU byte-for-byte in memory before intervention; no baseline provider write.
+  - Reproduce exact frozen external initial-5s calibration dictionary from locked raw.
+  - Recompute s exactly from locked first 1000 raw messages and frozen A04 initpos; exact equality to preregistered
+    scalar.
+  - Same row count and timestamps for all variants; V2s gyro bytes unchanged, V2is gyro bytes equal V2i.
+  - Four non-IMU V2 providers reused immutably, all five hashes recorded per variant.
+  - Generation strace zero trace/.bag/.fpl; independent 22-file raw hash checkpoints before/after generation and
+    solver.
+  runtime_gates:
+  - Use frozen executable 9c00565c and exact per-profile scientific lines including initial state; no C++ changes/build.
+  - Per-profile frozen_parameter_hash identical to frozen source and across V2/V2i/V2s/V2is.
+  - 18-column validity and source-only eligibility replay determine attempts; same timestamps mean V2 schedule.
+    Record RD/RP/HV ledger.
+  - Serial six calls maximum, stop first failure, preserve partial, no retries.
+  - Each solver strace zero raw/trace/.bag/.fpl, writes only its own run; seal before first trace read.
+  evaluation:
+    contracts:
+    - evaluator_contract_v2
+    - evaluator_contract_v3
+    frozen_evaluator_sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+    base_time: 1772784000.0
+    window_seconds:
+    - 66.0
+    - 340.0
+    v3_transform: POI_est = p_IMU + C_b^n * [0.03, 0.03 - baseline_median_m/2, -0.30]; same frozen A1 median and
+      own NAV roll/pitch/yaw.
+    baseline_median_m: 0.356191491865984
+    lever_frd_m:
+    - 0.03
+    - -0.148095745932992
+    - -0.3
+    human_geometry_source: Top-level evaluation.v3_human_source_declaration and TF_original, unchanged.
+    new_calls: 12
+    reference_rows_per_version: 13
+    expected_total_rows_per_version: 19
+    reference_reuse: Copy P02 rows/body/decomposition with original numerical fields unchanged. Original sources
+      remain in p02_source_row/frozen_source_row; current source_row/result_source_row points to the new P03 table.
+      No re-evaluation of existing V2/EXT05C/LC01. P02 V2e native failure remains UNAVAILABLE.
+    body_frame_bias: Same P02 own-NAV-yaw rotation and population mean/std, v2 and v3 independently.
+    v3_uncertainty: UNAVAILABLE_FULL_COVARIANCE_NOT_TRANSPORTED; no further residual correction.
+  decomposition:
+    metrics:
+    - horizontal_rmse_m
+    - position_3d_rmse_m
+    - up_rmse_m
+    - yaw_rmse_deg
+    preserve_P02_rows: true
+    source_rows_required: true
+    imu_handling: V2 - V2i for F03/A04, v2/v3
+    accel_scale: V2 - V2s for F03/A04, v2/v3
+    combined_imu_handling_and_scale: V2 - V2is for F03/A04, v2/v3; supplemental literal combined difference
+    F01_upper: V2 F01 - EXT05C for v2/v3; literal user-requested reference difference, not an inferred mathematical
+      bound
+    residual: V2is A04(v3) - EXT05C(v3), selected by applicability before execution
+    missing_endpoint: UNAVAILABLE
+    interpretation: No performance interpretation.
+  phase_rules:
+    commit_and_push_before_detached_execution: true
+    remote_equality_required: true
+    snapshot_edits_or_builds: false
+    source_contract_snapshot_and_hash_required: true
+    audit_run_count_before_registration: 0
+    provider_generation_before_registration: 0
+    first_stage: contract v3 + code commit/push
+    second_stage: results record commit/push
+  forbidden:
+  - main evidence mutation
+  - non-IMU provider regeneration
+  - scientific parameter changes
+  - trace calibration/selection/fitting
+  - accelerometer bias fitting
+  - temperature correction
+  - resampling/retiming
+  - C++ changes
+  - metric-driven deletion
+  - further v3 residual correction
+  - solver retry
+  - more than six new solves
+  - re-evaluation or substitution of frozen results

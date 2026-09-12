@@ -1,0 +1,13 @@
+# RAEKF covariance interpretation
+
+Yin Eq. 13 directly states `P_k = ϖ P_ak + (1-ϖ) P_rk`, where `ϖ` is U+03D6 varpi. This fusion factor is not Eq. 10's U+03C9 omega component weight. The convex expression is executable and preserves positive semidefiniteness when both branch covariances are PSD. Y4A does not characterize Eq. 13 itself as missing.
+
+The formal chain nevertheless remains non-executable because `P_rk` depends on the unresolved `L_k`/`Z_k` relationship, the missing relation between Eq. 8 `V_hat_k` and Eq. 9 `bar_V_k`, undefined `bar_A_(Xhat_k)`, the self-referential/overloaded Eq. 11 `bar_A(tilde_V_i)`, the standardized residual, general matrix assembly, and zero operation. A conventional base/equivalent split is only `PAPER_DERIVED`. The AKF covariance also inherits the dimensionally inconsistent Eq. 6 statistic.
+
+Eq. 13 is not the covariance of a generic linear combination of two correlated estimates unless a cross-covariance rule is supplied. If branches were independent, the covariance of `ϖ X_ak + (1-ϖ) X_rk` would use squared factors. If the result were interpreted as a statistical mixture, it would additionally include branch-mean spread. The deterministic oracles show both alternatives differ from the printed convex expression. This does not invalidate the paper's printed policy; it bounds its probabilistic claim.
+
+The same-prior relation is source-closed: Yin's adaptive and robust branch equations both start from identical `Xhat_(k/k-1)` and `P_(k/k-1)`, and the method text directs the two filters to be calculated separately and then fused. That closes shared inputs and separate branch results before fusion; it does not say whether an implementation schedules the branches in parallel or sequentially.
+
+The paper still does not state whether the fused error state is formed before any error-state feedback, whether feedback/reset happens exactly once after fusion, whether either branch is fed back first, or where a reset Jacobian is applied. The acknowledged KF-GINS source closes the base ESKF feedback/reset convention, but cannot supply Yin-specific branch orchestration. A later related SDUST patent cannot retroactively close the 2023 algorithm because it changes the measurement dimension, weights, IGG function, and improved-R rule.
+
+Therefore the covariance formula is `PAPER_DIRECT_AND_RESOLVED`. Missing cross-covariance is a limitation on the probabilistic interpretation of that executable equation, not ambiguity in Eq. 13 itself. The full RAEKF covariance/feedback/reset chain is nevertheless `NOT_UNIQUELY_SOURCE_CLOSED` because `P_rk` and the feedback/reset order are unresolved; it remains only a `PAPER_DERIVED_POLICY_BASELINE` candidate.

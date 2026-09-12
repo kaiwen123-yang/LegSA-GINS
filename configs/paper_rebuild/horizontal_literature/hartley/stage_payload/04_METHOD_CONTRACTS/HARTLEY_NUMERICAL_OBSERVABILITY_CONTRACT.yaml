@@ -1,0 +1,103 @@
+schema_version: 1
+contract_id: LSE01_HARTLEY_NUMERICAL_OBSERVABILITY
+contract_status: FROZEN_FOR_FUTURE_EXECUTION_NOT_EXECUTED
+
+state_definition:
+  ideal_ordering:
+    - xi_R
+    - xi_v
+    - xi_p
+    - xi_d_1_to_N
+  bias_augmented_ordering:
+    - xi_R
+    - xi_v
+    - xi_p
+    - xi_d_1_to_N
+    - zeta_g
+    - zeta_a
+  contact_identity_required: true
+
+matrix_contract:
+  ideal_A: HARTLEY_OBSERVABILITY_CONTRACT_yaml_linear_system_A
+  ideal_H: ONE_RIGHT_INVARIANT_ROW_BLOCK_PER_ACTIVE_CONTACT
+  transition:
+    ideal_bias_free: EXACT_MATRIX_EXPONENTIAL
+    bias_augmented: SAME_DISCRETIZATION_AS_FUTURE_FILTER
+  windowed_observability_matrix: STACK_H_K_TIMES_PHI_K_FROM_WINDOW_ORIGIN
+  use_measurement_rows_at_actual_timestamps: true
+
+window_contract:
+  constant_state_dimension: true
+  constant_contact_id_set: true
+  cross_contact_add_remove_boundary: false
+  minimum_distinct_measurement_times: 3
+  excitation_label_required: true
+  if_boundary_mapping_is_studied:
+    explicit_state_map_required: true
+    allowed_maps:
+      - PAPER_RIGHT_INVARIANT_AUGMENTATION_F
+      - PAPER_MARGINALIZATION_M
+    report_separately_from_constant_dimension_primary_result: true
+
+rank_tolerance:
+  source_class: H0_H2_DECLARED_NUMERICAL_TOLERANCE
+  trace_tuned: false
+  scalar_type: IEEE754_FLOAT64
+  svd_absolute_floor: 1.0e-12
+  svd_relative_to_sigma_max: 1.0e-9
+  threshold_rule: MAX_ABSOLUTE_FLOOR_AND_RELATIVE_TIMES_SIGMA_MAX
+  sensitivity_multipliers: [0.1, 1.0, 10.0]
+  rank_claim_requires_stability_across_sensitivity: true
+
+known_gauge_basis:
+  construct_from_current_gravity_vector: true
+  orthonormalize: THIN_QR
+  columns:
+    - GRAVITY_AXIS_ROTATION
+    - GLOBAL_TRANSLATION_X
+    - GLOBAL_TRANSLATION_Y
+    - GLOBAL_TRANSLATION_Z
+  bias_entries: ZERO
+  translation_rule: SAME_TRANSLATION_IN_P_AND_EVERY_CONTACT_POSITION
+
+nullspace_projection_metrics:
+  normalized_forward_residual:
+    formula: FROBENIUS_NORM_O_G_DIVIDED_BY_SPECTRAL_NORM_O_TIMES_FROBENIUS_NORM_G
+  gauge_to_numerical_nullspace_residual:
+    formula: SPECTRAL_NORM_IDENTITY_MINUS_N_N_TRANSPOSE_TIMES_Q_G
+  largest_gauge_principal_angle_deg:
+    formula: MAX_PRINCIPAL_ANGLE_BETWEEN_Q_G_AND_NUMERICAL_NULLSPACE
+  numerical_nullity:
+    formula: COUNT_SINGULAR_VALUES_AT_OR_BELOW_RANK_THRESHOLD
+  smallest_nongauge_singular_value:
+    formula: MIN_SINGULAR_VALUE_AFTER_PROJECTING_OUT_KNOWN_GAUGE
+  condition_number_after_gauge_projection:
+    formula: MAX_OVER_MIN_NONGAUGE_SINGULAR_VALUE
+
+ideal_acceptance:
+  expected_known_gauge_dimension: 4
+  expected_generic_nullity: 4
+  normalized_forward_residual_max: 1.0e-9
+  gauge_to_nullspace_residual_max: 1.0e-7
+  largest_gauge_principal_angle_deg_max: 1.0e-5
+
+bias_augmented_interpretation:
+  exact_gauge_directions_reported_separately: true
+  weak_observable_directions_reported_separately: true
+  additional_nullity_must_not_be_called_gauge_without_proof: true
+  insufficient_excitation_label: REQUIRED
+  large_yaw_error_as_rank_evidence: FORBIDDEN
+
+outputs_required_for_future_run:
+  - STATE_AND_CONTACT_SET_LEDGER
+  - WINDOW_TIMESTAMPS
+  - A_H_PHI_IDENTITIES
+  - SINGULAR_VALUE_VECTOR
+  - TOLERANCE_AND_SENSITIVITY_RESULTS
+  - KNOWN_GAUGE_BASIS
+  - NULLSPACE_PROJECTION_METRICS
+
+execution_status:
+  run_performed_in_h0_h2: false
+  by2_data_used: false
+  reference_trace_used: false

@@ -1,0 +1,125 @@
+schema_version: lc02.state_dynamics.v1
+method_id: LC02_YIN2023_RAEKF
+provenance:
+  paper_equations: PAPER_DIRECT
+  unprinted_dynamics: CITED_SOURCE
+  cited_implementation: KF-GINS
+  cited_commit: 08f9fce66028c65727b3f3c53f34f7dfd5a3c1c3
+navigation_frame:
+  name: local_NED
+  axes: [north, east, down]
+  provenance_class: CITED_SOURCE
+body_frame:
+  name: IMU_body_FRD
+  axes: [forward, right, down]
+  provenance_class: CITED_SOURCE
+by2_imu_frame_instantiation:
+  raw_frame: Go2_source_FLU
+  conversion_order:
+    - "proper FLU_to_FRD rotation diag(1,-1,-1)"
+    - "active RzRyRx(-1 deg,0 deg,0 deg) installation rotation in FRD"
+  output_frame: LC02_KF_GINS_body_FRD
+  source: "maintained imu_txt_builder.py and PHASE5_EXT05_PAVLASEK_CONTRACT_V1.yaml frame mapping only"
+  quaternion_or_RPY_used: false
+  provenance_class: PRIOR_PROJECT_CODE
+state:
+  dimension: 21
+  order:
+    - {name: delta_r_ins_n, indices: [0, 1, 2], dimension: 3, units: m, provenance_class: PAPER_DIRECT}
+    - {name: delta_v_ins_n, indices: [3, 4, 5], dimension: 3, units: m_per_s, provenance_class: PAPER_DIRECT}
+    - {name: phi_n, indices: [6, 7, 8], dimension: 3, units: rad, provenance_class: PAPER_DIRECT}
+    - {name: gyro_bias_b, indices: [9, 10, 11], dimension: 3, units: rad_per_s, provenance_class: PAPER_DIRECT}
+    - {name: accel_bias_b, indices: [12, 13, 14], dimension: 3, units: m_per_s2, provenance_class: PAPER_DIRECT}
+    - {name: gyro_scale_b, indices: [15, 16, 17], dimension: 3, units: dimensionless, provenance_class: PAPER_DIRECT}
+    - {name: accel_scale_b, indices: [18, 19, 20], dimension: 3, units: dimensionless, provenance_class: PAPER_DIRECT}
+attitude_error:
+  convention: "C_b^n,true = (I + [phi^n x]) C_b^n,nominal to first order"
+  feedback: "C_b^n,corrected = Exp(phi^n) C_b^n,nominal"
+  provenance_class: CITED_SOURCE
+imu_measurement_model:
+  gyro_increment: "dtheta_m = (I + diag(s_g)) dtheta_true + b_g dt + noise"
+  accel_increment: "dv_m = (I + diag(s_a)) dv_true + b_a dt + noise"
+  correction: "(measurement_increment - bias*dt) elementwise_divide (1 + scale)"
+  provenance_class: CITED_SOURCE
+nominal_mechanization:
+  formulation: "two-sample strapdown NED mechanization with coning/sculling, Earth rotation, transport rate, gravity, trapezoidal position update"
+  source_file: src/kf-gins/insmech.cpp
+  provenance_class: CITED_SOURCE
+continuous_model:
+  equation: "delta_x_dot = F delta_x + G w"
+  f_dimension: [21, 21]
+  g_dimension: [21, 18]
+  q_c_dimension: [18, 18]
+  f_blocks:
+    notation: "rmh=R_M+h; rnh=R_N+h; L=latitude; v_N,v_E,v_D=NED velocity; wie=Earth rotation; g=local gravity"
+    F_rr:
+      - ["-v_D/rmh", "0", "v_N/rmh"]
+      - ["v_E*tan(L)/rnh", "-(v_D+v_N*tan(L))/rnh", "v_E/rnh"]
+      - ["0", "0", "0"]
+    F_rv:
+      - ["1", "0", "0"]
+      - ["0", "1", "0"]
+      - ["0", "0", "1"]
+    F_vr:
+      - ["-2*v_E*wie*cos(L)/rmh-v_E^2/(rmh*rnh*cos(L)^2)", "0", "v_N*v_D/rmh^2-v_E^2*tan(L)/rnh^2"]
+      - ["2*wie*(v_N*cos(L)-v_D*sin(L))/rmh+v_N*v_E/(rmh*rnh*cos(L)^2)", "0", "(v_E*v_D+v_N*v_E*tan(L))/rnh^2"]
+      - ["2*wie*v_E*sin(L)/rmh", "0", "-v_E^2/rnh^2-v_N^2/rmh^2+2*g/(sqrt(R_M*R_N)+h)"]
+    F_vv:
+      - ["v_D/rmh", "-2*(wie*sin(L)+v_E*tan(L)/rnh)", "v_N/rmh"]
+      - ["2*wie*sin(L)+v_E*tan(L)/rnh", "(v_D+v_N*tan(L))/rnh", "2*wie*cos(L)+v_E/rnh"]
+      - ["-2*v_N/rmh", "-2*(wie*cos(L)+v_E/rnh)", "0"]
+    F_vphi: "skew(C_b^n f_ib^b)"
+    F_vba: "C_b^n"
+    F_vsa: "C_b^n diag(f_ib^b)"
+    F_phir:
+      - ["-wie*sin(L)/rmh", "0", "v_E/rnh^2"]
+      - ["0", "0", "-v_N/rmh^2"]
+      - ["-wie*cos(L)/rmh-v_E/(rmh*rnh*cos(L)^2)", "0", "-v_E*tan(L)/rnh^2"]
+    F_phiv:
+      - ["0", "1/rnh", "0"]
+      - ["-1/rmh", "0", "0"]
+      - ["0", "-tan(L)/rnh", "0"]
+    F_phiphi: "-skew(omega_in^n)"
+    F_phibg: "-C_b^n"
+    F_phisg: "-C_b^n diag(omega_ib^b)"
+    F_bg_bg: "-I/T_corr"
+    F_ba_ba: "-I/T_corr"
+    F_sg_sg: "-I/T_corr"
+    F_sa_sa: "-I/T_corr"
+    all_unlisted_3x3_blocks: ZERO
+  g_blocks:
+    accel_VRW_to_velocity: "C_b^n"
+    gyro_ARW_to_phi: "C_b^n"
+    gyro_bias_drive: I3
+    accel_bias_drive: I3
+    gyro_scale_drive: I3
+    accel_scale_drive: I3
+    all_unlisted_3x3_blocks: ZERO
+  noise_vector_order: [accel_VRW, gyro_ARW, gyro_bias_drive, accel_bias_drive, gyro_scale_drive, accel_scale_drive]
+  provenance_class: CITED_SOURCE
+discretization:
+  Phi: "I + F*dt"
+  Qd: "0.5*(Phi*G*Qc*G^T*Phi^T + G*Qc*G^T)*dt"
+  provenance_class: CITED_SOURCE
+initial_covariance:
+  structure: "diagonal from configured position, velocity, attitude, bias, and scale standard deviations squared"
+  exact_yin_numeric_values: null
+  provenance_class: CURRENTLY_UNKNOWN
+reset:
+  after_feedback: "set 21-state error mean to zero; retain covariance under cited small-error reset convention"
+  reset_jacobian_printed_by_paper: false
+  provenance_class: CITED_SOURCE
+current_repository_comparison:
+  decision: DO_NOT_BLINDLY_REUSE_CURRENT_TRUNCATED_PORT
+  path: cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp
+  sha256: 4d2e329a1f6a11ed232941c3150a5569791f7ac5fceb0362e91e5dd856dc6a50
+  omitted_F_blocks: [F_rr, F_vr, F_vv, F_phi_r, F_phi_v]
+  initialization_std_floors:
+    position_m: 1.0e-6
+    velocity_mps: 1.0e-6
+    attitude_rad: 1.0e-9
+    bias_and_scale: "max configured initial STD and first configured driving-noise STD"
+  correlation_time_policy: "max(configured corr_time, 1.0 s)"
+  nonpositive_dt_fallback_s: 0.01
+  note: "The clean repository preserves the state order and major signs but omits the listed Earth/transport F blocks and adds local floors/fallbacks absent from the cited paper-contemporaneous source contract."
+  provenance_class: PRIOR_PROJECT_CODE

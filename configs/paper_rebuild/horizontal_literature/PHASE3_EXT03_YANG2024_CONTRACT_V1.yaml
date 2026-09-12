@@ -1,0 +1,289 @@
+schema_version: horizontal_literature.phase3_ext03_yang2024.v1
+phase_id: PHASE3
+method_id: EXT03_YANG2024
+case_id: C00
+formal_reproduction_level: FAITHFUL_ALGORITHM_REPRODUCTION
+reproduction_qualifier: WITH_DECLARED_UNSPECIFIED_STOCHASTIC_INSTANTIATION
+evaluation_at_native_freeze: NOT_EVALUATED
+ready_for_paper_claims: false
+
+paper_source:
+  source_id: YANG_SHU_FANG_QIAO_DING_LI_TIM_2024_1003414
+  authors: [Hongli Yang, Yuanming Shu, Rongxin Fang, Lulu Qiao, Dong Ding, Guangxue Li]
+  title: "GPS/BDS Dual-Antenna Attitude Determination With Baseline-Length Constrained Ambiguity Resolution: Method and Performance Evaluation"
+  journal: IEEE Transactions on Instrumentation and Measurement
+  volume: 73
+  year: 2024
+  article_number: 1003414
+  document_number: 10462220
+  doi: 10.1109/TIM.2024.3374423
+  authoritative_math_source: FORMAL_PUBLISHER_PDF
+  access_note: PUBLISHER_PDF_ACCESS_CLOSED_HTTP_418_IN_EXECUTION_ENVIRONMENT
+  equation_contract_source_during_implementation: HUMAN_SUPPLIED_FORMAL_EQUATION_MAP
+  official_code_search:
+    searched_once: true
+    search_scope: [current_repository, configured_external_source_root, author_university_pages, official_GitHub_accounts, publisher_supplementary_material]
+    result: NO_ATTRIBUTABLE_OFFICIAL_SOURCE_CODE_OR_SUPPLEMENTARY_IMPLEMENTATION_LOCATED
+  implementation_lineage: CLEAN_ROOM_RECURSIVE_DD_KF_WITH_PINNED_RTKLIB_KERNELS
+
+equation_map:
+  "Eq.(1)": DD_CARRIER_PHASE_OBSERVATION
+  "Eq.(2)": STACKED_OBSERVATION_MODEL
+  "Eq.(3)": BASELINE_AND_DD_AMBIGUITY_DESIGN_MATRIX
+  "Eq.(4)": NED_BASELINE_YAW_AND_PITCH
+  "Eq.(5)": NONLINEAR_KNOWN_BASELINE_LENGTH
+  "Eq.(6)": FIRST_ORDER_BASELINE_LENGTH_LINEARIZATION
+  "Eq.(7)": BASELINE_LENGTH_PSEUDO_OBSERVATION
+  "Eqs.(8)-(9)": AUGMENTED_OBSERVATION_AND_DESIGN
+
+algorithm:
+  baseline_length_m: 0.350
+  baseline_receiver_order: GNSS2_MINUS_GNSS1
+  frame: NED
+  ratio_definition: SUBOPTIMAL_ILS_RESIDUAL_DIVIDED_BY_OPTIMAL_ILS_RESIDUAL
+  ratio_threshold: 3.0
+  ambiguity_solver: MLAMBDA_REDUCTION_AND_TWO_CANDIDATE_SEARCH
+  initial_baseline_covariance_m2: 900.0
+  initial_ambiguity_covariance_cycle2: 900.0
+  primary_baseline_sigma_m: 0.010
+  sensitivity_baseline_sigmas_m: [0.001, 0.005, 0.010, 0.020, 0.050]
+  constraint_linearization_priority:
+    - PREVIOUS_SUCCESSFULLY_RATIO_FIXED_BASELINE
+    - RAW_PSEUDORANGE_SPP_BASELINE_DIFFERENCE
+    - CURRENT_FINITE_FLOAT_BASELINE
+    - NO_VALID_CONSTRAINT_LINEARIZATION_POINT
+  dynamic_ambiguity_policy:
+    new_variance_cycle2: 900.0
+    vanished: REMOVE_WITH_COVARIANCE_REINDEX
+    affected_slip: RESET_ONLY_AFFECTED_STATE
+    pivot_change: EXACT_DD_BASIS_TRANSFORM_OR_REINITIALIZE_WITH_RECORDED_REASON
+    covariance: SYMMETRIC_POSITIVE_SEMIDEFINITE
+
+system_modes:
+  GPS_DUAL_FREQUENCY:
+    constellations: [GPS]
+    frequency_groups: [GPS_L1, GPS_L2]
+    pivot_count: 1
+  BDS_DUAL_FREQUENCY:
+    constellations: [BDS]
+    frequency_groups: [BDS_B1, BDS_B2]
+    pivot_count: 1
+  GPS_BDS_DUAL_FREQUENCY:
+    constellations: [GPS, BDS]
+    frequency_groups: [GPS_L1, GPS_L2, BDS_B1, BDS_B2]
+    pivot_count: 2
+    cross_system_double_differences: false
+    constellation_blocks_separate: true
+
+signal_registry:
+  GPS_L1:
+    ublox_identities: [[0, 0, 0]]
+    rinex_rtklib: [1C]
+    frequency_hz: 1575420000.0
+  GPS_L2:
+    ublox_identities: [[0, 3, 0], [0, 4, 0]]
+    rinex_rtklib: [2L, 2S_UNUSABLE_ON_BY2]
+    frequency_hz: 1227600000.0
+  BDS_B1:
+    ublox_identities: [[3, 0, 0], [3, 1, 0]]
+    rinex_rtklib: [2I]
+    frequency_hz: 1561098000.0
+  BDS_B2:
+    ublox_identities: [[3, 2, 0], [3, 3, 0]]
+    rinex_rtklib: [7I]
+    frequency_hz: 1207140000.0
+  excluded_constellations: [GLONASS, Galileo, QZSS, SBAS]
+
+requested_variants:
+  - {system_mode: GPS_DUAL_FREQUENCY, constraint_mode: UNCONSTRAINED, baseline_sigma_m: null}
+  - {system_mode: GPS_DUAL_FREQUENCY, constraint_mode: CONSTRAINED, baseline_sigma_m: 0.010}
+  - {system_mode: BDS_DUAL_FREQUENCY, constraint_mode: UNCONSTRAINED, baseline_sigma_m: null}
+  - {system_mode: BDS_DUAL_FREQUENCY, constraint_mode: CONSTRAINED, baseline_sigma_m: 0.010}
+  - {system_mode: GPS_BDS_DUAL_FREQUENCY, constraint_mode: UNCONSTRAINED, baseline_sigma_m: null}
+  - {system_mode: GPS_BDS_DUAL_FREQUENCY, constraint_mode: CONSTRAINED, baseline_sigma_m: 0.001}
+  - {system_mode: GPS_BDS_DUAL_FREQUENCY, constraint_mode: CONSTRAINED, baseline_sigma_m: 0.005}
+  - {system_mode: GPS_BDS_DUAL_FREQUENCY, constraint_mode: CONSTRAINED, baseline_sigma_m: 0.010}
+  - {system_mode: GPS_BDS_DUAL_FREQUENCY, constraint_mode: CONSTRAINED, baseline_sigma_m: 0.020}
+  - {system_mode: GPS_BDS_DUAL_FREQUENCY, constraint_mode: CONSTRAINED, baseline_sigma_m: 0.050}
+
+observation_contract:
+  data_mode: real_by2_raw
+  exact_pairing_key: [gps_week, gps_tow_seconds]
+  pairing_tolerance_seconds: 0.0
+  required_paired_epoch_count: 1509
+  real_rate_hz: 5.0
+  elevation_mask_deg: 15.0
+  elevation_mask_source: RTKLIB_180043EE_PRCOPT_DEFAULT_ELMIN
+  separate_pivot_per_constellation: true
+  cross_system_double_differences: false
+  combined_system_bias_handling:
+    production_DD_blocks: SEPARATE_WITHIN_GPS_AND_WITHIN_BDS
+    explicit_relative_hardware_bias_state: false
+    GPS_measurement_factor: 1.0
+    BDS_measurement_factor: 1.0
+    per_receiver_pntpos_clock_model: GPS_CLOCK_PLUS_BDS_MINUS_GPS_OFFSET
+    pntpos_clock_or_ISB_transferred_to_DD: false
+  double_difference_sign: "(GNSS2-GNSS1)_SATELLITE_MINUS_PIVOT"
+  covariance_policy: FULL_SHARED_PIVOT_CORRELATION
+  receiver_initialization: PINNED_RTKLIB_PNTPOS_RAW_CODE_SPP_ONLY
+  receiver_initialization_options:
+    mode: PMODE_SINGLE
+    navsys_by_mode: {GPS_DUAL_FREQUENCY: 1, BDS_DUAL_FREQUENCY: 32, GPS_BDS_DUAL_FREQUENCY: 33}
+    sateph: EPHOPT_BRDC
+    ionoopt: IONOOPT_BRDC
+    tropopt: TROPOPT_SAAS
+    pntpos_relative_humidity: 0.7
+    combined_clock_model: GPS_CLOCK_PLUS_BDS_MINUS_GPS_OFFSET
+  satellite_states: RTKLIB_180043EE_BROADCAST_TRANSMIT_TIME
+  corrections: [SATELLITE_CLOCK, EARTH_ROTATION, BROADCAST_IONOSPHERE_IN_PNTPOS, SAASTAMOINEN_TROPOSPHERE]
+  DD_troposphere:
+    implementation: RTKLIB_ZDRES_HYDROSTATIC_SAASTAMOINEN_EQUIVALENT
+    relative_humidity: 0.0
+  phase_value_policy: CPMES_AS_REPORTED_NO_SECOND_HALF_CYCLE_SHIFT
+  phase_bias_calibration: NONE
+
+cycle_slip_chain:
+  detectors: [LLI_RECEIVER_TRACKING_STATE, GEOMETRY_FREE, MELBOURNE_WUBBENA, PRIOR_DD_AMBIGUITY_CONSISTENCY]
+  receiver_event_categories:
+    actual_carrier_lli_or_validity_transition: ACTUAL_CARRIER_LLI_OR_TRACKING_VALIDITY_DISCONTINUITY
+    locktime_decrease: RECEIVER_LOCKTIME_RESET
+    halfCyc_or_subHalfCyc_transition: HALF_CYCLE_VALIDITY_OR_SUBHALFCYC_CHANGE
+    receiver_clock_reset: RECEIVER_CLOCK_RESET_EVENT
+  receiver_clock_reset_labeled_as_cycle_slip: false
+  receiver_event_counter_semantics: UNIQUE_AFFECTED_SIGNAL_IDENTITIES_RECEIVER_DIMENSION_DEDUPLICATED
+  threshold_source: RTKLIB_180043EE_DEFAULTS_OR_PREREGISTERED_PHYSICAL_VALUE
+  method_initialization_is_receiver_cycle_slip: false
+  method_initialization_is_lock_reset: false
+  half_cycle_change_is_ordinary_method_initialization: false
+  prior_DD_semantics: ONE_EPOCH_LAGGED_CHANGE_IN_PRIOR_KF_ESTIMATED_DD_AMBIGUITY_CYCLES
+  prior_DD_pivot_change_policy: EXACT_TARGET_BASIS_TRANSFORM_OR_PRIOR_DD_UNAVAILABLE_PIVOT_CHANGE_REINITIALIZED
+
+stochastic_instantiation:
+  paper_disclosed: [initial_baseline_covariance_m2, initial_ambiguity_covariance_cycle2, ratio_threshold, signal_systems_and_frequencies, baseline_length_m]
+  paper_unspecified: [measurement_noise_matrix, process_noise_matrix, baseline_pseudo_observation_variance]
+  unspecified_source: PINNED_RTKLIB_180043EE_DEFAULTS_EXCEPT_PREREGISTERED_BASELINE_SIGMA
+  trace_tuned: false
+  rtklib_measurement_defaults:
+    symbols: ["prcopt_default.err[1]", "prcopt_default.err[2]", "prcopt_default.eratio[0]", varerr]
+    phase_constant_m: 0.003
+    phase_elevation_m: 0.003
+    code_phase_ratio: 100.0
+    GPS_error_factor: 1.0
+    BDS_error_factor: 1.0
+    baseline_length_term_at_0p350m: 0.0
+    receiver_clock_stability_term_at_dt0: 0.0
+    single_difference_variance: "2*((fact*0.003)^2+(fact*0.003)^2/sin(elevation)^2)"
+    code_variance_multiplier: 10000.0
+    double_difference_covariance: SHARED_PIVOT_DDCOV
+    UBX_stdev_model_used: false
+
+data_flags:
+  synthetic_data_used: false
+  semisynthetic_data_used: false
+  trace_used_online: false
+  receiver_imu_as_body_imu: false
+  final_v23_output_solver_input: false
+  LegSA_output_solver_input: false
+  per_case_tuning: false
+  output_only_correction: false
+  epoch_deleted_for_metric: false
+  old_runtime_input_count: 0
+  trace_open_count_before_native_freeze: 0
+  HPPOSECEF_semantic_decode_count_before_native_freeze: 0
+  HPPOSECEF_solver_input: false
+  status_baseline_solver_input: false
+  Go2_yaw_solver_input: false
+  EXT01_output_solver_input: false
+  EXT02_output_solver_input: false
+  RTKLIB_diagnostic_output_solver_input: false
+  phase_bias_calibration: false
+
+parallel_execution:
+  default_workers: 16
+  maximum_workers: 20
+  worker_thread_environment: {OMP_NUM_THREADS: "1", MKL_NUM_THREADS: "1", OPENBLAS_NUM_THREADS: "1", NUMEXPR_NUM_THREADS: "1"}
+  parallel_unit: INDEPENDENT_SYSTEM_CONSTRAINT_SIGMA_VARIANT
+  epoch_parallelism_inside_recursive_variant: false
+  variant_epoch_order: STRICT_CHRONOLOGICAL
+  compact_cache: FINGERPRINTED_NUMPY_MEMORY_MAP
+  worker_raw_csv_access: false
+  atomic_writer_policy: NO_REPLACE_FAIL_ON_ANY_TARGET_COLLISION
+  resume_policy: FAIL_CLOSED_FINGERPRINT_AND_VARIANT_PART_HASH_VALIDATION
+  determinism_probe: WORKERS_1_VS_16_SCIENTIFIC_OUTPUT_EQUALITY
+  maximum20_gate:
+    recorded_probe_required: true
+    stable_RAM_swap_CPU_load_IO: true
+    thermal_evidence_required_where_available: true
+    zero_swap_activity: true
+
+lifecycle_modes: [preflight, signal-audit, resource-determinism-probe, native-only, post-native-diagnostics, full]
+pre_native_freezes:
+  official_source_search:
+    result_recorded_once: true
+    must_not_be_repeated_during_formal_run: true
+  signal_support:
+    output: EXT03_C00_SIGNAL_AVAILABILITY.csv
+    required_before_variant_schedule: true
+    unsupported_modes_skipped_independently: true
+trace_mode_native: disabled
+post_native_evaluator:
+  opens_only_after_validated_native_freeze: true
+  output_location: POST_NATIVE_CHILD_DIRECTORY
+  proxy_epoch_association: AUDITED_FIXED_PLUS_2MS_MATCHER
+  proxy_role: FIXPOSITION_SAME_SOURCE_DESCRIPTIVE_REFERENCE_NOT_INDEPENDENT_TRUTH
+  proxy_inconsistent_ratio_fixed_threshold_deg: 30.0
+  applicability_terminal_rule:
+    validated_poor_if_primary_ratio_fixed_count_zero: true
+    proxy_inconsistency_is_descriptive_not_terminal_selector: true
+    nonzero_fix_applicability_verdict: SUPERVISOR_EVIDENCE_DRIVEN_NO_ADDITIONAL_NUMERIC_CUTOFF
+    partial_mode_support_has_priority: true
+  trace_contract:
+    base_time_unix_seconds: 1772784000
+    window_start_seconds: 66.0
+    window_end_seconds: 340.0
+    yaw_processing: UNWRAP_THEN_INTERPOLATE
+    yaw_reference_ned_deg: wrap360(90-yaw_trace_enu_deg)
+    time_search: false
+    frame_search: false
+    alignment: false
+    constant_offset_correction: false
+    error_based_epoch_deletion: false
+  rtklib_diagnostic:
+    role: POST_NATIVE_DIAGNOSTIC_ONLY
+    source_commit: 180043ee
+    may_substitute_EXT03_output: false
+
+runtime_topology:
+  code_commit_semantics: BASE_HEAD_ONLY_WITH_HASHED_RUNTIME_SOURCE_OVERLAY
+  worktree_overlay_identity: HASHED_GIT_PORCELAIN_AND_RUNTIME_SOURCE_DEPENDENCY_OVERLAYS_NO_MACHINE_ROOT
+  required_runtime_dependency_hashes:
+    - lib/librtklib_legsa.so
+    - EXT03_PNTPOS_BRIDGE.patch
+    - Makefile
+  native_root: 04_EXT03_YANG2024/C00
+  report_root: 11_REPORT
+  native_files:
+    heading_results: EXT03_C00_NATIVE_HEADING_RESULTS.csv
+    failure_ledger: EXT03_C00_FAILURE_LEDGER.csv
+    runtime: EXT03_C00_RUNTIME.csv
+    signal_availability: EXT03_C00_SIGNAL_AVAILABILITY.csv
+    dd_diagnostics: EXT03_C00_DD_DIAGNOSTICS.csv
+    kf_state_diagnostics: EXT03_C00_KF_STATE_DIAGNOSTICS.csv
+    constraint_diagnostics: EXT03_C00_CONSTRAINT_DIAGNOSTICS.csv
+    ambiguity_state_diagnostics: EXT03_C00_AMBIGUITY_STATE_DIAGNOSTICS.csv
+    cycle_slip_diagnostics: EXT03_C00_CYCLE_SLIP_DIAGNOSTICS.csv
+    mlambda_diagnostics: EXT03_C00_MLAMBDA_DIAGNOSTICS.csv
+    mode_summary: EXT03_C00_MODE_SUMMARY.csv
+    sensitivity_summary: EXT03_C00_SENSITIVITY_SUMMARY.csv
+    stochastic_registry: EXT03_STOCHASTIC_PARAMETER_REGISTRY.csv
+    native_summary: EXT03_C00_NATIVE_SUMMARY.json
+    native_freeze: EXT03_C00_NATIVE_FREEZE.json
+  report_file: PHASE3_EXT03_C00_REPORT.md
+  status_file: PHASE3_STATUS.json
+
+terminal_states:
+  ready: PASS_PHASE3_EXT03_YANG2024_C00_READY_FOR_NATIVE_COMPARISON
+  validated_poor: PASS_PHASE3_EXT03_IMPLEMENTATION_VALIDATED_BY2_C00_APPLICABILITY_RESULT
+  partial_modes: PASS_PHASE3_EXT03_PARTIAL_SYSTEM_MODES_COMPLETE
+  unsupported_prefix: UNSUPPORTED_EXT03_ON_BY2_
+  blocked_prefix: BLOCKED_PHASE3_EXT03_

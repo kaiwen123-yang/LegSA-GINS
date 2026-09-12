@@ -1,0 +1,37 @@
+schema: lc02_chang2021.state_and_dynamics.v1
+method_id: LC02_CHANG2021_FSTCKF
+state:
+  dimension: 15
+  printed_order:
+    - {name: delta_phi_b, dimension: 3, meaning: attitude-angle error, frame: body, provenance: PAPER_DIRECT}
+    - {name: delta_v_g, dimension: 3, meaning: east-north-up velocity error, frame: geographic, provenance: PAPER_DIRECT}
+    - {name: delta_p_g, dimension: 3, meaning: latitude-longitude-height position error, frame: geographic, provenance: PAPER_DIRECT}
+    - {name: epsilon_b, dimension: 3, meaning: gyroscope error, frame: body, provenance: PAPER_DIRECT}
+    - {name: nabla_b, dimension: 3, meaning: accelerometer error, frame: body, provenance: PAPER_DIRECT}
+continuous_equations:
+  provenance: PAPER_DIRECT
+  printed:
+    - "delta_phi_dot_b = delta_omega_ig - omega_ig cross delta_phi_b + epsilon_b"
+    - "delta_v_dot_g = C_b_to_g (f_b cross delta_phi_b) - 2 delta_omega_ig cross v_g + C_b_to_g nabla_b"
+    - "delta_L_dot = delta_v_N/(R_e+h)"
+    - "delta_lambda_dot = delta_v_E sec(L)/(R_e+h) + delta_L v_E sec(L) tan(L)/(R_e+h)"
+    - "delta_h_dot = delta_v_U"
+    - "epsilon_dot_b = 0"
+    - "nabla_dot_b = 0"
+discrete_model:
+  printed: "x_k = F_k x_(k-1) + w_(k-1)"
+  F_description: "stems from Eq. 2"
+  provenance: PAPER_DIRECT
+closure:
+  full_F_matrix: CURRENTLY_UNKNOWN
+  noise_mapping_G: CURRENTLY_UNKNOWN
+  continuous_spectral_density_Qc: CURRENTLY_UNKNOWN
+  F_discretization: CURRENTLY_UNKNOWN
+  Q_discretization: CURRENTLY_UNKNOWN
+  bias_stochastic_model_beyond_zero_derivative: CURRENTLY_UNKNOWN
+  decision: NOT_UNIQUELY_EXECUTABLE
+  gate: FAIL
+limitations:
+  - "A Jacobian can be derived from Eq. 2, but the paper does not print the complete matrix, frame/error convention needed for every sign, or an attributable exact implementation."
+  - "No process-noise injection matrix or continuous/discrete noise construction is supplied."
+  - "A memory-only or convenience INS error model is forbidden."

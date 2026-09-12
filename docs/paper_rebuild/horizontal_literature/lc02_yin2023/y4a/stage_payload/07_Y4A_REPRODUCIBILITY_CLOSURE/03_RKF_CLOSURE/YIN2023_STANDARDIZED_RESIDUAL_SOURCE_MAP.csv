@@ -1,0 +1,26 @@
+semantic,source,location,source_statement,match_to_yin_2023,decision,provenance
+numerator,Yin 2023,Eq.8,"V_hat_k=L_k-H_k Xhat_(k/k-1)",DIRECT_BUT_L_RELATION_UNKNOWN,PARTIALLY_CLOSED,PAPER_DIRECT
+numerator,Official peer-review author response,Response 10,"Calls V_hat_k an innovation vector and L_k an observation vector; does not define tilde V_i from V_hat_k",DIRECT_AUTHOR_CLARIFICATION,PARTIALLY_CLOSED,PAPER_DIRECT_TRANSPORT_CAPTURE
+objective_residual,Yin 2023,Eq.9,"Omega uses bar_V_k throughout and never uses V_hat_k",DIRECT_HAT_BAR_MISMATCH,HAT_BAR_RELATION_UNRESOLVED,PAPER_DIRECT
+objective_state_weight,Yin 2023,Eq.9,"alpha_k bar_V_k^T bar_A_(Xhat_k) bar_V_k; bar_A_(Xhat_k) is not defined",DIRECT_UNDEFINED_SYMBOL,STATE_WEIGHT_MATRIX_UNRESOLVED,PAPER_DIRECT_OMISSION
+hat_bar_relation,Yin 2023,Eqs.8-9,"No equality or mapping between V_hat_k and bar_V_k",UNRESOLVED,UNRESOLVED,PAPER_DIRECT_OMISSION
+observation_alias,Yin 2023,"Eqs.2,6,8 and RKF update","L_k is called observation vector; Z_k is used in the measurement and update; no equality is stated",UNRESOLVED,UNRESOLVED,PAPER_DIRECT_OMISSION
+observation_alias,Official peer-review author response,Response 10,"L_k is the observation vector; the next sentence separately names the measurement vector Z_k",DOES_NOT_EQUATE_SYMBOLS,UNRESOLVED,PAPER_DIRECT_TRANSPORT_CAPTURE
+standardized_symbol,Yin 2023,Eqs.10-11,"tilde V_i is only called the standardized residual",UNRESOLVED,CURRENTLY_UNKNOWN,PAPER_DIRECT_OMISSION
+standardized_symbol,Official peer-review author response,Response 10,"Repeats that tilde V_i is the standardized residual without a formula",DOES_NOT_CLOSE,CURRENTLY_UNKNOWN,PAPER_DIRECT_TRANSPORT_CAPTURE
+centering,Yin 2023,Eq.10,"No centering, mean-removal, or residual-to-standardized-residual equation",UNRESOLVED,CURRENTLY_UNKNOWN,PAPER_DIRECT_OMISSION
+denominator,Yin 2023,Eq.10,"No standardizer denominator equation",UNRESOLVED,CURRENTLY_UNKNOWN,PAPER_DIRECT_OMISSION
+denominator,Niu 2022,Eq.20,"s_i/sqrt((H P^- H^T+R)_ii)",CITED_CANDIDATE_NOT_UNIQUE,SQRT_INNOVATION_COVARIANCE_DIAGONAL,CITED_SOURCE_CANDIDATE
+denominator,TCRTKINS Fusion.cpp,lines291-307,"abs(v_i)/sqrt((H P H^T+R)_ii)",CODE_FOR_REF39_NOT_YIN,CANDIDATE_CONFIRMED_FOR_NIU,OFFICIAL_CODE_FOR_CITED_SOURCE
+covariance_stage,Niu 2022,Eq.20,"Uses prior P^- and pre-robust R",CITED_CANDIDATE_NOT_UNIQUE,PRE_ROBUST_INNOVATION_COVARIANCE,CITED_SOURCE_CANDIDATE
+standardizer_chain,Knight 2009,Eq.17 access boundary,"Yin cites Knight inline at Eq.10; accessible author upload did not expose a complete machine-readable equation image",DIRECT_INLINE_CITATION_BUT_INCOMPLETE_ACCESS,CANNOT_CLOSE_STANDARDIZER,CITED_SOURCE_ACCESS_BOUNDARY
+standardizer_chain,Yang-Cheng-Shum-Tapley 1999,author-upload equations,"uses v_i/sigma_i with robust scale estimated by MAD",DIRECT_KNIGHT_IGGIII_SOURCE_BUT_DIFFERENT_SCALE,DISTINCT_PLAUSIBLE_COMPLETION,CITED_SOURCE_CANDIDATE
+standardizer_chain,Yang-He-Xu 2001,author-upload equations,"uses V_i/r_i and a dependent max-based mapping",FOUNDATIONAL_ADAPTIVE_ROBUST_SOURCE,DISTINCT_PLAUSIBLE_COMPLETION,CITED_SOURCE_CANDIDATE
+correlated_handling,Yang-Song-Xu 2002,author-upload equations,"uses symmetric bifactor sqrt(c_ii c_jj)",DIRECT_CORRELATED_WEIGHT_SOURCE,DISTINCT_PLAUSIBLE_COMPLETION,CITED_SOURCE_CANDIDATE
+dependent_chain,Yang 1994,official and request-only endpoints,"direct dependent-observation source inaccessible",NO_EXECUTABLE_EQUATIONS,CANNOT_CLOSE_STANDARDIZER,CITED_SOURCE_ACCESS_BOUNDARY
+global_scale,Yin 2023,Eq.10,"No MAD, RMS, robust scale, or global factor is stated",UNRESOLVED,CURRENTLY_UNKNOWN,PAPER_DIRECT_OMISSION
+component_order,Yin 2023,Eq.10,"No simultaneous, sequential, or recomputed component order is stated",UNRESOLVED,CURRENTLY_UNKNOWN,PAPER_DIRECT_OMISSION
+correlated_handling,Yin 2023,Eqs.10-11,"No whitening or marginal-standardization rule is stated",UNRESOLVED,CURRENTLY_UNKNOWN,PAPER_DIRECT_OMISSION
+near_zero_denominator,Yin 2023,Eqs.8-11,"No floor, skip, or nonfinite policy is stated",UNRESOLVED,CURRENTLY_UNKNOWN,PAPER_DIRECT_OMISSION
+equivalent_information_mapping,Yin 2023,Eq.11,"Same bar_A(tilde_V_i) symbol is self-referential on left and low/middle right branches; Latin w(tilde_V_i) multiplies the middle RHS; prose equates the overloaded bar_A symbol to R_i^-1",UNRESOLVED,CONVENTIONAL_BASE_EQUIVALENT_SPLIT_NOT_PAPER_DIRECT,PAPER_DIRECT_SELF_REFERENCE
+post_publication_check,CN117647251A,robust-filter claims,"Repeats L residual and Z update without equality",RELATED_CHANGED_METHOD,L_Z_STILL_UNRESOLVED,AUTHOR_INSTITUTION_POST_PUBLICATION_RELATED_PRIMARY

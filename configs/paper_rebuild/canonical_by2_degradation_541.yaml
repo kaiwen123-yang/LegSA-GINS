@@ -1,0 +1,85 @@
+schema_version: paper_rebuild.canonical_by2_degradation_541.v1
+stage_id: CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX
+dataset: BY2
+data_mode: real_base_controlled_degradation
+source_spec: clean://00_CONTEXT/DEGRADATION_MATRIX_SPEC.csv
+tracked_migration_layer2: configs/paper_rebuild/degradation_60types_9seeds.yaml
+case_axis:
+  degradation_type_count: 60
+  seed_count: 9
+  degraded_case_count: 540
+  clean_case_count: 1
+  total_case_count: 541
+  clean_case_id: C00_clean_normal
+  degraded_case_id_template: Dxx_seed_xx
+  placeholder_allowed: false
+randomness:
+  bit_generator: numpy.random.PCG64
+  stable_component_substreams: numpy.random.SeedSequence.spawn
+window:
+  start_s: 66.0
+  end_s: 340.0
+  interval_semantics: half_open
+parameter_source_priority:
+  - current_degradation_matrix_spec_csv
+  - current_clean_tracked_config_or_test
+  - preserved_last_effect_validated_generator_source
+  - master_prompt_canonical_fallback
+preserved_generator_laws:
+  D19:
+    symbol: handle_position_sinusoidal
+    law: sin(t/30+phase)
+    implied_period_s: 188.49555921538757
+    source_commit: 2f02424237071444dc54406c6437209b528948ec
+    fallback_used: false
+  D40:
+    symbol: handle_baseline_length_jitter
+    baseline_length_additive_sigma_m: 0.03
+    rel_acc_factor: 2.0
+    minimum_length_m: 0.01
+    rel_acc_field_available: false
+    rel_acc_no_active_path: true
+    baseline_length_solver_visible: false
+    solver_runtime_input_expected_invariant: true
+    unit_aliasing_forbidden: true
+    source_commit: 2f02424237071444dc54406c6437209b528948ec
+    fallback_used: false
+  D49:
+    symbol: handle_velocity_bad_optimistic
+    gaussian_sigma_mps: 0.5
+    std_factor: 0.25
+    spike_component: false
+    std_floor_component: false
+    source_commit: 2f02424237071444dc54406c6437209b528948ec
+    fallback_used: false
+  D55:
+    symbol: handle_go2_metadata_uncertain
+    selection_ratio: 0.35
+    mutation: contact_uncertain_and_mode_gait_unknown
+    source_commit: 2f02424237071444dc54406c6437209b528948ec
+    fallback_used: false
+master_overrides:
+  D07: {interval_centers_relative_to_anchor_s: [-6.0, 0.0, 6.0], duration_each_s: 3.0}
+  D19: {horizontal_amplitude_m: 2.0, vertical_amplitude_m: 0.5}
+  D34: {probability: 0.05, signed_spike_magnitude_deg: 10.0}
+  D35: {probability: 0.10, signed_spike_magnitude_deg: 10.0}
+  D39: {burst_count: 3, burst_length_valid_epochs_min: 2, burst_length_valid_epochs_max: 4}
+  D50: {receiver_velocity_unchanged: true, raw_doppler_horizontal_offset_mps: 1.0}
+  D54:
+    seed_00_to_seed_03: {scale: 1.5, dropout_ratio: 0.0}
+    seed_04_to_seed_07: {scale: 1.0, dropout_ratio: 0.5}
+    seed_08: {scale: 1.5, dropout_ratio: 0.5}
+  D56: {selected_ratio: 0.30, even_pattern: high_force_high_speed, odd_pattern: low_force_low_speed, seed_08_pattern: alternating}
+  D57: {latency_range_s: [0.1, 0.3], jitter_max_range_s: [0.020, 0.050], stable_sort: true}
+  D58: {degradation_duration_s: 10.0, yaw_spike_probability: 0.10, yaw_spike_magnitude_deg: 10.0, recovery_duration_s: 20.0}
+  D60: {degradation_duration_s: 20.0, recovery_duration_s: 20.0}
+boundaries:
+  trace_used_online: false
+  final_v23_output_solver_input: false
+  LegSA_output_solver_input: false
+  receiver_imu_as_body_imu: false
+  go2_truth_claim_allowed: false
+  synthetic_data_used: false
+  semisynthetic_data_used: false
+  per_case_tuning: false
+  metric_driven_rerun: false

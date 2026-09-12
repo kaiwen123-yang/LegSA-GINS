@@ -1,0 +1,32 @@
+schema_version: 1
+candidate_id: LC02C_GINAV2021_OFFICIAL_SPP_INS_LC
+selection_terminal: PASS_LC02_FINAL_CANDIDATE_SELECTED_GINAV2021_OFFICIAL_LC
+candidate_selection_status: UNIQUELY_SELECTED_STATIC_CANDIDATE
+formal_lc02_slot: VACANT
+formal_lc02_admission: false
+implementation_authorized: false
+synthetic_validation_authorized: false
+BY2_C00_authorized: false
+representative_cases_authorized: false
+comparison_authorized: false
+official_sample_regression_authorized: false
+matlab_execution_authorized: false
+adapter_generation_authorized: false
+source_repo_checkout_in_project_authorized: false
+future_prerequisites:
+  - SEPARATE_HUMAN_AUTHORIZATION
+  - RECHECK_OFFICIAL_COMMIT_TREE_AND_LICENSE
+  - FREEZE_SOURCE_EXPLICIT_RINEX_AND_IMU_ADAPTER_CONTRACTS
+  - VALIDATE_TDCP_SQUARED_SPEED_AND_NONINTEGER_EPOCH_BEHAVIOR_WITHOUT_PERFORMANCE_TUNING
+  - VALIDATE_RFU_FRAME_AND_PHYSICAL_POINT_CONVERSION
+  - RUN_OFFICIAL_SAMPLE_REGRESSION_BEFORE_ANY_BY2_ROUTE_IF_SEPARATELY_AUTHORIZED
+  - PRESERVE_TRACE_REFERENCE_AND_OTHER_METHOD_OUTPUT_DENYLIST
+prohibited_without_new_authorization:
+  - IMPLEMENTATION
+  - CODE_GENERATION
+  - SYNTHETIC_RUN
+  - BY2_C00
+  - REPRESENTATIVE_CASES
+  - COMPARISON
+  - TRACE_OR_REFERENCE_OPEN
+  - LC01_OR_OTHER_METHOD_RERUN

@@ -1,0 +1,47 @@
+# Shared display names for Canonical-541 publication figures (AGENTS section 12b).
+# Registry ids stay the only identity; these labels are presentation only.
+methods:
+  F01: {label: Single, configuration: single_antenna_EKF, role: baseline}
+  F02: {label: Dual-basic, configuration: basic_dual_yaw_EKF, role: baseline}
+  F03: {label: Backbone, configuration: AB0000, role: ablation_row}
+  A04: {label: Core, configuration: AB1011, role: candidate}
+  F04: {label: Full, configuration: AB1111, role: candidate}
+ablation_chain:            # left to right in the module-ablation figure
+  - {label: Dual-basic, configuration: basic_dual_yaw_EKF}
+  - {label: Backbone, configuration: AB0000}
+  - {label: +RD, configuration: AB1000}
+  - {label: +RD+RP+HV, configuration: AB1011}
+  - {label: +SA (Full), configuration: AB1111}
+leave_one_out:             # frozen PAIRWISE_SUMMARY comparisons, all "Full minus Full-without-X"
+  full_vs_no_RD: w/o RD
+  full_vs_no_SA: w/o SA
+  full_vs_no_RP: w/o RP
+  full_vs_no_HV: w/o HV
+  full_vs_no_Go2: w/o Go2 priors
+families:
+  clean: Clean
+  dual_yaw: Dual-antenna yaw
+  gnss_outage: GNSS outage
+  gnss_sampling: GNSS sampling
+  position_value: Position value
+  position_std_status: Position std / status
+  velocity_raw_doppler: Velocity / Doppler
+  go2_prior_metadata: Go2 prior metadata
+  multi_source_mixed: Multi-source mixed
+family_order: [dual_yaw, gnss_outage, gnss_sampling, position_value, position_std_status, velocity_raw_doppler, go2_prior_metadata, multi_source_mixed]
+metrics:
+  horizontal_rmse_m: {label: Horizontal RMSE, unit: m}
+  up_rmse_m: {label: Up RMSE, unit: m}
+  position_3d_rmse_m: {label: 3D RMSE, unit: m}
+  roll_rmse_deg: {label: Roll RMSE, unit: "°"}
+  pitch_rmse_deg: {label: Pitch RMSE, unit: "°"}
+  yaw_rmse_deg: {label: Yaw RMSE, unit: "°"}
+  horizontal_p95_m: {label: Horizontal P95, unit: m}
+  yaw_p95_absolute_deg: {label: Yaw P95, unit: "°"}
+representative_cases:      # favourable and unfavourable cases are always shown together; ids resolve to Table S1
+  - {case_id: D27_seed_00, label: "Bad position with over-optimistic std", verdict: favourable}
+  - {case_id: D60_seed_00, label: "Multi-source bad inputs, then recovery", verdict: favourable}
+  - {case_id: D04_seed_00, label: "GNSS position outage, 20 s", verdict: unfavourable}
+  - {case_id: D12_seed_00, label: "Random 60 % GNSS dropout", verdict: unfavourable}
+  - {case_id: D58_seed_00, label: "Outage with yaw spike, then recovery", verdict: unfavourable}
+reference_label: Truth      # AGENTS section 13; the same-source caveat lives in prose

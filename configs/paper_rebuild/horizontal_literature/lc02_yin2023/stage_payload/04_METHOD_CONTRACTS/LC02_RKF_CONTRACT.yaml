@@ -1,0 +1,39 @@
+schema_version: lc02.rkf.v1
+branch_id: YIN2023_RKF
+innovation: "V_hat_k = L_k - H_k X_k^-"
+innovation_observation_symbol:
+  paper_symbol: L_k
+  relation_to_measurement_Z_k: null
+  status: CURRENTLY_UNKNOWN
+  paper_does_not_define_L_k: true
+  permitted_policy: "set L_k=Z_k"
+  permitted_policy_provenance: PAPER_DERIVED
+  faithful_claim_allowed_for_policy: false
+standardized_innovation:
+  paper_symbol: V_tilde_i
+  exact_denominator: null
+  status: CURRENTLY_UNKNOWN
+  limitation: "Neither Yin Eq. (8)-(11) nor the identified cited sources uniquely specify L_k versus Z_k or whether scaling uses R_ii, innovation S_ii, a robust scale, or a whitened correlated residual."
+thresholds: {k0: 1.15, k1: 4.45}
+iggiii_weight:
+  low: "1, abs(V_tilde_i)<=k0"
+  middle: "(k0/abs(V_tilde_i))*((k1-abs(V_tilde_i))/(k1-k0))^3, k0<abs(V_tilde_i)<=k1"
+  high: "0, abs(V_tilde_i)>k1"
+equivalent_precision: "Abar_i = R_i^-1 * w_i"
+gain: "K_rk=P^-H^T[HP^-H^T+Abar^-1]^-1"
+state_update: "X_rk=X^-+K_rk(Z-HX^-)"
+covariance_update: "P_rk=(I-K_rk H)P^-"
+measurement_R_boundary:
+  embedded_in_RAEKF: "improved PDOP^2 Q r^2"
+  embedded_provenance: PAPER_DIRECT
+  separately_reported_RKF_baseline: null
+  separately_reported_provenance: CURRENTLY_UNKNOWN
+  future_common_R_choice_provenance: PAPER_DERIVED
+zero_weight_behavior:
+  paper_equation_executable: false
+  reason: "w_i=0 makes Abar_i singular while the next printed equation requires Abar^-1."
+  permitted_baseline: "Omit the rejected component, equivalently take its variance to infinity as a limiting policy."
+  permitted_baseline_provenance: PAPER_DERIVED
+  faithful_claim_allowed: false
+provenance_class: PAPER_DIRECT
+reproduction_level: PAPER_DERIVED_POLICY_BASELINE

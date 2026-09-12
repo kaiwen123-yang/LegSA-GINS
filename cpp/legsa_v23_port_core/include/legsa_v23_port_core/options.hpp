@@ -154,6 +154,9 @@ struct PortOptions {
   std::string clean_input_provenance_label;
   std::string config_policy_evidence_status = "source_backed_runtime_config";
   std::size_t propagation_count = 0;
+  std::size_t cov_health_fail_count = 0;
+  double cov_health_first_failure_time = -1.0;
+  std::string cov_health_status = "NOT_EVALUATED";
   std::size_t measurement_update_count = 0;
   std::size_t position_update_count = 0;
   std::size_t velocity_update_count = 0;

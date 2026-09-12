@@ -1,0 +1,151 @@
+{
+  "schema": "lc02_chang2021.r0_r4_status.v1",
+  "terminal_status": "NO_GO_LC02_CHANG2021_FSTCKF_AS_FORMAL_PRIMARY",
+  "terminal_semantics": "Conditional transaction executed R0-R2 source, mathematics, input, and non-duplication audit only; R3-R4 did not execute",
+  "conditional_outcome": "OUTCOME_B_NO_GO",
+  "executed_stages": ["R0", "R1", "R2"],
+  "r3_executed": false,
+  "r4_executed": false,
+  "implementation_executed": false,
+  "synthetic_validation_executed": false,
+  "task_start_head": "7770837a00dbb3a465317eded1b77c6db6861c1c",
+  "artifact_build_head": "7770837a00dbb3a465317eded1b77c6db6861c1c",
+  "postcommit_task_end_head": null,
+  "authorized_commit_subject": "Add Chang 2021 FSTCKF LC02 contracts",
+  "commit_created_by_worker": false,
+  "head_semantics": "artifact_build_head freezes the uncommitted payload build; any authorized postcommit task_end_head is reported externally and must be the exact permitted one-commit descendant",
+  "formal_lc02_admission": false,
+  "implementation_authorized": false,
+  "production_solver_authorized": false,
+  "c00_authorized": false,
+  "representative_cases_authorized": false,
+  "comparison_run_authorized": false,
+  "implementation_directory_created": false,
+  "synthetic_validation_directory_created": false,
+  "paper": {
+    "doi": "10.1007/s10291-021-01148-5",
+    "pages": 15,
+    "bytes": 9843279,
+    "sha256": "8c9b65fe3842f9580b69ffd02f728412861c932c166d1cb4fc9950fa0aaf1da7",
+    "copyright": "authors under exclusive licence to Springer-Verlag GmbH Germany part of Springer Nature 2021",
+    "all_pages_equations_figures_tables_visually_reviewed": true
+  },
+  "official_code_search": "NO_ATTRIBUTABLE_OFFICIAL_IMPLEMENTATION_FOUND",
+  "prior_chang_asset_audit": "NO_PRIOR_ASSET_IN_ACTIVE_REPOSITORY_OR_HISTORY",
+  "ckf_core_identity": "A_LITERAL_PRINTED_LINEAR_ERROR_STATE_RECURSION",
+  "eq12_decision": "UNRESOLVED_NON_SQUARE_INVERSE_AND_STATE_LIFT",
+  "non_duplication_decision": "DISTINCT_COMPLEMENTARY_METHOD",
+  "branch_reproduction_levels": {
+    "CHANG2021_CKF": "FAITHFUL_MODULE_REPRODUCTION",
+    "CHANG2021_STCKF_IFF": "PAPER_DERIVED_POLICY_BASELINE",
+    "CHANG2021_STCKF_FB": "PAPER_DERIVED_POLICY_BASELINE",
+    "CHANG2021_FSTCKF": "DIAGNOSTIC_ONLY"
+  },
+  "gate_summary": {
+    "gate_count": 12,
+    "pass_count": 5,
+    "fail_count": 7,
+    "all_pass_required": true
+  },
+  "external_stage_repair_history": {
+    "initial_publication_aggregate_sha256": "53ea9c956243ec8bc53c036d7d52bea550b4ffd459dce4743b60b6ab0c5af3b1",
+    "repair_preimage_required": true,
+    "initial_atomic_exchange_attempt": "UNSUPPORTED_ON_DRVFS_EINVAL_NO_STAGE_CHANGE",
+    "repair_mode": "GUARDED_TWO_RENAME_WITH_VERIFIED_ROLLBACK_NON_OVERWRITING",
+    "aggregate_atomic_exchange": false,
+    "postimage_aggregate": "EXTERNALLY_COMPUTED_AND_REPORTED_TO_AVOID_SELF_REFERENTIAL_PAYLOAD_HASH",
+    "final_review_correction_transaction": {
+      "preimage_aggregate_sha256": "ca78fe6d62cea131bebd4d6bd2a1bf7920e327dc0569146f3956a1ead3823ba1",
+      "repair_mode": "GUARDED_TWO_RENAME_WITH_VERIFIED_ROLLBACK_NON_OVERWRITING",
+      "postimage_aggregate": "EXTERNALLY_COMPUTED_AND_REPORTED_TO_AVOID_SELF_REFERENTIAL_PAYLOAD_HASH"
+    }
+  },
+  "by2_input_audit": {
+    "data_mode": "REAL_BY2_INPUT_AVAILABILITY_AUDIT",
+    "gnss1_pvt_count": 1510,
+    "gnss1_nav_cov_count": 1510,
+    "exact_itow_join_count": 1510,
+    "go2_authenticated_record_count": 63277,
+    "position_velocity_covariance_available": true,
+    "navigation_filter_run": false,
+    "faithful_measurement_unit_instantiation_closed": false
+  },
+  "access_audit": {
+    "tracked_active_report_performance_lines_accidentally_rendered": true,
+    "accidental_search_event_count": 1,
+    "accidentally_rendered_values_used_for_source_math_input_or_decision": false,
+    "external_runtime_tree_open_count": 0,
+    "serialized_nonselected_data_cells_materialized_by_initial_DictReader": true,
+    "forbidden_message_payload_decode_count": 0,
+    "forbidden_field_semantics_used_count": 0,
+    "raw_carrier_data_role_used": false,
+    "gnss2_data_role_used": false,
+    "yaw_data_role_used": false,
+    "trace_reference_open_count": 0,
+    "provider_or_runtime_output_open_count": 0,
+    "lc01_scientific_content_open_count": 0,
+    "lc01_run_count": 0,
+    "hartley_run_count": 0,
+    "ext01_ext04_run_count": 0,
+    "horizontal18_run_count": 0,
+    "canonical541_run_count": 0,
+    "other_method_execution_count": 0,
+    "stage08_administrative_hash_file_count": 79,
+    "canonical_administrative_hash_file_count": 2
+  },
+  "execution_counters": {
+    "navigation_filter_runs": 0,
+    "synthetic_filter_runs": 0,
+    "c00_runs": 0,
+    "representative_case_runs": 0,
+    "comparison_runs": 0,
+    "trace_accesses": 0,
+    "reference_accesses": 0
+  },
+  "validation": {
+    "correction_scoped_pytest_pre_repair": {
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=src python3 -m pytest -q tests/paper_rebuild/test_lc02_chang2021_r0_r4.py",
+      "return_code": 0,
+      "passed": 19,
+      "failed": 0,
+      "skipped": 1,
+      "skip_reason": "exact reviewed stage09 preimage awaits guarded two-rename repair"
+    },
+    "correction_full_paper_rebuild_pytest": {
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=src python3 -m pytest -q tests/paper_rebuild",
+      "return_code": 2,
+      "result": "INTERRUPTED_BY_SUPERVISOR_FOR_READ_ONLY_REVIEW_HANDOFF",
+      "passed_before_interrupt": 154,
+      "observed_failure_count_before_interrupt": 0,
+      "comprehensive_final_suite_delegated_to_root": true
+    },
+    "standalone_validator_pre_repair": {
+      "command": "PYTHONPATH=src python3 scripts/paper_rebuild/audit_lc02_chang2021_r0_r4.py --validate-only",
+      "return_code": 0,
+      "artifact_count": 37,
+      "structured_artifact_count": 26,
+      "external_stage_status": "EXACT_REVIEWED_PREIMAGE_PENDING_GUARDED_TWO_RENAME_REPAIR"
+    },
+    "final_review_scoped_pytest_pre_repair": {
+      "command": "env -u LEGSA_GINS_LC02_CHANG2021_PAPER PYTHONPATH=src PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest -q tests/paper_rebuild/test_lc02_chang2021_r0_r4.py",
+      "return_code": 0,
+      "passed": 19,
+      "failed": 0,
+      "skipped": 2,
+      "skip_reasons": [
+        "LEGSA_GINS_LC02_CHANG2021_PAPER is unset; static paper identity tests remained mandatory",
+        "exact ca78fe6d stage09 review preimage awaited the guarded correction transaction"
+      ]
+    },
+    "standalone_validator_final_review_pre_repair": {
+      "command": "PYTHONPATH=src python3 scripts/paper_rebuild/audit_lc02_chang2021_r0_r4.py --validate-only",
+      "return_code": 0,
+      "artifact_count": 37,
+      "structured_artifact_count": 26,
+      "external_stage_status": "EXACT_REVIEWED_PREIMAGE_PENDING_GUARDED_TWO_RENAME_REPAIR"
+    },
+    "python_compile_import": "PASS",
+    "structured_parse": {"result": "PASS", "json": 6, "yaml": 10, "csv": 10},
+    "git_diff_check": "PASS"
+  }
+}

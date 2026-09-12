@@ -117,7 +117,15 @@ void writeInitializationCovarianceDiagonal(std::ostream& out, const PortOptions&
         out << ", ";
       }
       first = false;
-      out << value * value;
+      const double variance = value * value;
+      if (std::isfinite(variance)) {
+        out << variance;
+      } else {
+        // A failed covariance-health diagnostic must remain valid JSON.
+        // The explicit FAILED status and first-failure time carry the error;
+        // null prevents a non-standard inf/NaN token masquerading as evidence.
+        out << "null";
+      }
     }
   }
   out << "]";
@@ -907,6 +915,15 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << "  \"clean_input_provenance_label\": \"" << escapeJson(options.clean_input_provenance_label) << "\",\n"
       << "  \"config_policy_evidence_status\": \"" << escapeJson(options.config_policy_evidence_status) << "\",\n"
       << "  \"propagation_count\": " << options.propagation_count << ",\n"
+      << "  \"cov_health_fail_count\": " << options.cov_health_fail_count << ",\n"
+      << "  \"cov_health_status\": \"" << escapeJson(options.cov_health_status) << "\",\n"
+      << "  \"cov_health_first_failure_time\": ";
+  if (options.cov_health_fail_count == 0) {
+    out << "null";
+  } else {
+    out << options.cov_health_first_failure_time;
+  }
+  out << ",\n"
       << "  \"measurement_update_count\": " << options.measurement_update_count << ",\n"
       << "  \"position_update_count\": " << options.position_update_count << ",\n"
       << "  \"velocity_update_count\": " << options.velocity_update_count << ",\n"

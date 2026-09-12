@@ -1,0 +1,72 @@
+schema_version: 1
+stage_id: 10_LC02_FINAL_CANDIDATE_TRIAGE
+rubric_id: LC02_FINAL_CANDIDATE_ADMISSION_RUBRIC_V1
+frozen_before_candidate_artifacts: true
+frozen_date: '2026-08-25'
+scope: STATIC_FORMAL_REPRODUCTION_ADMISSION_TRIAGE_ONLY
+candidate_set:
+  - LC02A_JIANG2021_ADAPTIVE_FADING_CKF
+  - LC02B_TAGHIZADEH2023_AHINF_CKF
+  - LC02C_GINAV2021_OFFICIAL_SPP_INS_LC
+candidate_set_closed: true
+fourth_candidate_authorized: false
+all_gates_mandatory: true
+allowed_gate_results:
+  - PASS
+  - FAIL
+  - NOT_EVALUATED_SOURCE_UNAVAILABLE
+gates:
+  - gate: G1
+    name: PUBLISHED_FAMILY
+    requirement: The candidate belongs to an identifiable published method family with a closed bibliographic identity.
+  - gate: G2
+    name: SOLUTION_LEVEL_LC_GNSS_INS
+    requirement: The candidate is a solution-level loosely coupled GNSS/INS method, or an official system route whose internal GNSS solution feeds its documented loosely coupled INS integration.
+  - gate: G3
+    name: DISTINCT_FROM_LC01
+    requirement: The candidate is structurally distinct from LC01 using sensors, receiver count, state and measurement structure, information source, and mechanism only.
+  - gate: G4
+    name: COMPLETE_NOMINAL_AND_MECHANIZATION
+    requirement: Nominal-state propagation, frame conventions, mechanization, gravity and Earth terms needed by the selected route are source-closed.
+  - gate: G5
+    name: PROCESS_NOISE_AND_DISCRETIZATION
+    requirement: Process model, noise semantics, continuous-to-discrete policy, covariance propagation, and required configuration units are source-closed.
+  - gate: G6
+    name: MEASUREMENT_AND_PHYSICAL_POINT
+    requirement: Measurement residual, covariance, frame, lever arm, antenna or IMU physical point, timing, and validity policy are source-closed.
+  - gate: G7
+    name: PREDICTION_UPDATE_AND_COVARIANCE
+    requirement: Prediction, innovation, gain, state and covariance update, numerical form, and covariance lifecycle are executable from attributed sources.
+  - gate: G8
+    name: UNIQUE_ADAPTIVE_ROBUST_FADING_OR_HINF_SEMANTICS
+    requirement: Every claimed adaptive, robust, fading, or H-infinity mechanism is uniquely executable; a source-closed standard-LC route passes only by explicitly having no such claimed branch and inventing none.
+  - gate: G9
+    name: EXECUTABLE_INITIALIZATION_FEEDBACK_AND_RESET
+    requirement: Initialization, alignment, state injection or feedback, covariance reset, restart, and termination semantics required by the selected route are source-closed.
+  - gate: G10
+    name: BY2_REQUIRED_FIELDS
+    requirement: Required BY2 source fields and source-explicit adapters can be named without substituting forbidden sources or inventing measurements; unexecuted threshold behavior is deferred to future validation.
+  - gate: G11
+    name: NO_REFERENCE_OR_ERROR_COMPLETION
+    requirement: Trace, reference, errors, outputs, historical metrics, or accuracy ranking are not used to complete equations, choose policies, select signs, tune parameters, or admit the candidate.
+  - gate: G12
+    name: FORMAL_REPRODUCTION_LEVEL
+    requirement: The route qualifies as EXACT_REPRODUCTION or FAITHFUL_ALGORITHM_REPRODUCTION from attributable paper, supplement, or official software sources.
+tie_break_order:
+  - OFFICIAL_IMPLEMENTATION
+  - FEWER_ADAPTERS
+  - CLEARER_POINT_AND_FRAME
+  - LOWER_SOURCE_AMBIGUITY
+  - LOWER_RUNTIME_AND_DEPENDENCY_RISK
+prohibited_selection_factors:
+  - ACCURACY
+  - PRESTIGE
+  - NOVELTY
+  - HISTORICAL_RMSE
+decision_rule: Select exactly one all-PASS candidate; if multiple candidates pass, apply the frozen tie-break order; if none pass, return the exact NO-GO terminal.
+allowed_terminal_outcomes:
+  - PASS_LC02_FINAL_CANDIDATE_SELECTED_JIANG2021
+  - PASS_LC02_FINAL_CANDIDATE_SELECTED_TAGHIZADEH2023
+  - PASS_LC02_FINAL_CANDIDATE_SELECTED_GINAV2021_OFFICIAL_LC
+  - NO_GO_LC02_NO_REMAINING_REFERENCE_PACK_CANDIDATE_MEETS_FORMAL_REPRODUCTION
+

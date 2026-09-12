@@ -1,0 +1,102 @@
+schema_version: 1
+contract_id: LSE01_HARTLEY_SEVEN_YAW_GAUGE_ENSEMBLE
+contract_status: FROZEN_NOT_EXECUTED
+
+scientific_purpose: NUMERICAL_EQUIVARIANCE_DEMONSTRATION_OF_GRAVITY_AXIS_YAW_GAUGE
+analytical_claim_source: HARTLEY_IDEAL_OBSERVABILITY_DERIVATION
+replacement_for_analytical_proof: false
+
+initial_yaw_degrees:
+  - -150
+  - -100
+  - -50
+  - 0
+  - 50
+  - 100
+  - 150
+reference_initial_yaw_degrees: 0
+duplicate_plus_minus_180_representation_avoided: true
+
+gauge_definition:
+  axis: NORMALIZED_WORLD_GRAVITY_VECTOR
+  rotation: Q_psi_equals_Exp_axis_times_psi
+  expected_native_relation:
+    R_psi: Q_psi_times_R_0
+    v_psi: Q_psi_times_v_0
+    p_psi: Q_psi_times_p_0
+    d_i_psi: Q_psi_times_d_i_0
+    b_g_psi: b_g_0
+    b_a_psi: b_a_0
+  right_invariant_covariance_transport:
+    J_psi_group_blocks: Q_psi_REPEATED_FOR_R_V_P_AND_EACH_CONTACT
+    J_psi_bias_blocks: IDENTITY_6
+    expected_relation: P_psi_equals_J_psi_P_0_J_psi_transpose
+
+controlled_variables:
+  identical_across_runs:
+    - INPUT_BYTES
+    - TIMESTAMPS
+    - CONTACT_EVENTS
+    - FK_PROXY_VALUES
+    - PROCESS_AND_MEASUREMENT_PARAMETERS
+    - INITIAL_BIASES
+    - INITIAL_NONGAUGE_STATE
+    - RANDOM_SEEDS
+    - NUMERICAL_OPTIONS
+  only_intended_difference: INITIAL_GLOBAL_YAW_GAUGE
+  if_initial_position_velocity_or_contacts_are_nonzero: APPLY_Q_PSI_TO_ALL_WORLD_EXPRESSED_INITIAL_VECTORS
+  initial_covariance: APPLY_J_PSI_CONGRUENCE_TO_REFERENCE_COVARIANCE
+
+native_output_freeze:
+  required_before_reference_open: true
+  hash_each_native_run: true
+  immutable_after_freeze: true
+  external_reference_needed_for_gauge_test: false
+  trace_online: false
+  trace_parameter_selection: false
+
+inverse_gauge_alignment_to_zero_run:
+  R_aligned: Q_psi_inverse_times_R_psi
+  v_aligned: Q_psi_inverse_times_v_psi
+  p_aligned: Q_psi_inverse_times_p_psi
+  d_i_aligned: Q_psi_inverse_times_d_i_psi
+  bias_aligned: UNCHANGED
+  P_aligned: J_psi_inverse_P_psi_J_psi_inverse_transpose
+
+required_metrics:
+  orientation_geodesic_difference_after_gauge_removal:
+    definition: NORM_Log_R0_transpose_times_R_aligned
+    unit: rad
+  velocity_difference_after_gauge_removal:
+    definition: L2_NORM_v_aligned_minus_v0
+    unit: m_per_s
+  position_difference_after_gauge_removal:
+    definition: L2_NORM_p_aligned_minus_p0
+    unit: m
+  contact_point_difference_after_gauge_removal:
+    definition: MAX_OVER_MATCHED_ACTIVE_CONTACTS_L2_NORM_d_i_aligned_minus_d_i0
+    unit: m
+  innovation_norm_difference:
+    definition: ABSOLUTE_DIFFERENCE_OF_STACKED_INNOVATION_L2_NORMS
+    unit: measurement_native
+  covariance_congruence_difference:
+    definition: FROBENIUS_NORM_P_aligned_minus_P0_DIVIDED_BY_MAX_1_AND_FROBENIUS_NORM_P0
+    unit: dimensionless
+  relative_yaw_increment_difference:
+    definition: ABS_WRAP_PI_OF_YAW_PSI_T_MINUS_YAW_PSI_T0_MINUS_YAW_0_T_PLUS_YAW_0_T0
+    unit: rad
+
+contact_lifecycle_alignment:
+  compare_only_same_contact_identity_set: true
+  event_ledger_must_match_exactly: true
+  state_resize_maps_must_be_identical: true
+  unmatched_contact_identity: FAIL_CLOSED
+
+pass_tolerances:
+  source_type: CURRENTLY_UNKNOWN
+  value: CURRENTLY_UNKNOWN_MUST_BE_DECLARED_BEFORE_EXECUTION_WITHOUT_REFERENCE_TUNING
+
+execution_prohibitions_in_h0_h2:
+  run_filter: false
+  open_reference_trace: false
+  calculate_metrics: false
