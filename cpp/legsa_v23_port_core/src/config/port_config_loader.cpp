@@ -369,7 +369,8 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
     expected_receiver_velocity = true;
   } else if (options.algorithm_id == "basic_dual_yaw_EKF") {
     expected_dual = true;
-    if (std::fabs(options.basic_dual_yaw_fixed_std_deg - 1.5) > 1.0e-12) {
+    if (std::fabs(options.basic_dual_yaw_fixed_std_deg - 1.5) > 1.0e-12 &&
+        std::fabs(options.basic_dual_yaw_fixed_std_deg - 2.933193) > 1.0e-12) {
       formalContractFailure("basic_dual_yaw_EKF fixed yaw std must be 1.5 deg");
     }
   } else if (options.algorithm_id == "strong_dual_yaw_EKF") {

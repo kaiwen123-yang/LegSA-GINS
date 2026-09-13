@@ -23,3 +23,7 @@ Only non-preregistered native solver failure, evaluator failure/nonfinite result
 ## Execution records
 
 Contract preparation only at this entry: provider, solver, evaluator and plotting calls are zero. Subsequent entries record exact commands, identities, gates, bookkeeping adjustments and terminal states.
+
+## Binary build implementation
+
+The implementation stores BINARY_FREEZE.json beside the bridge evidence at 01_BINARY_BRIDGE/BINARY_FREEZE.json; the controller resolves this path instead of the initial 00_PREREGISTRATION label. This changes bookkeeping only. Independent read-only review passed the sole native source change and bridge implementation before launch.
