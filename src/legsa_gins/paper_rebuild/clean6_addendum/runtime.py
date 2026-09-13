@@ -7,7 +7,7 @@ from pathlib import Path
 
 import yaml
 
-from ..clean5_degradation.common import write_json
+from ..clean5_degradation.common import write_json, resolve
 from ..clean6_canonical_v2.runtime import run_one
 from ..clean6_canonical_v2.evaluation import one_evaluation
 from ..manifest import sha256_file
@@ -78,10 +78,15 @@ def solve(source, bundle, case, contract, reg, root, code_commit):
     return record
 
 
-def evaluate(record, version, contract, reg, root, code_commit):
-    row = one_evaluation(record, version, contract, reg, root, code_commit)
+def finish_evaluation(row, record, contract, code_commit):
+    """Complete new addendum sidecars from an existing terminal; no evaluator call."""
+    row = dict(row)
     row.update(duration_s=record['duration_s'], **contract['data_roles'])
+    row['derived_metrics_code_commit'] = code_commit
     folder = Path(row['evaluation_output_root'])
+    for name in ('ADDENDUM_DERIVED_METRICS.json', 'ADDENDUM_EVALUATION_RESULT.json', 'EVALUATION_OUTPUT_SEAL.json'):
+        if (folder/name).exists() or (folder/name).is_symlink():
+            raise FileExistsError('Addendum sidecar already exists; no overwrite: '+name)
     if row['evaluation_status'] == 'COMPLETED':
         case = record['case_meta']
         metrics = outage_metrics(row['error_series_source'], case['outage_start_s'], case['outage_end_s'])
@@ -94,6 +99,22 @@ def evaluate(record, version, contract, reg, root, code_commit):
     # the registered addendum classification and full-rate-derived metrics.
     write_json(folder/'ADDENDUM_EVALUATION_RESULT.json', row)
     write_json(folder/'EVALUATION_OUTPUT_SEAL.json', {'status': 'SEALED_AFTER_DERIVED_METRICS',
+        **{key: row[key] for key in ('original_completed_evaluation_reused',
+            'historical_full_file_derived_seal_available', 'current_post_stop_snapshot') if key in row},
         'files': {p.relative_to(folder).as_posix(): {'sha256': sha256_file(p), 'size_bytes': p.stat().st_size}
                   for p in sorted(folder.rglob('*')) if p.is_file()}})
     return row
+
+
+def evaluate(record, version, contract, reg, root, code_commit):
+    folder = Path(root)/'12_OFFLINE_EVALUATION'/version/record['run_id']
+    if folder.exists() or folder.is_symlink():
+        raise FileExistsError('Evaluation output exists; evaluator must never be invoked again')
+    marker = resolve(contract['stage_root'], reg)/'01_EVALUATION_CALLS'/version/(record['run_id']+'.json')
+    write_json(marker, {'run_id': record['run_id'], 'evaluator_version': version,
+        'code_commit': code_commit, 'native_execution_code_commit': record['code_commit'],
+        'role': 'EXCLUSIVE_FIRST_EVALUATION_ADAPTER_ATTEMPT', 'repeat_authorized': False,
+        'evaluator_invocation_planned': record['terminal_status'] == 'COMPLETED',
+        'evaluation_output_root': str(folder)})
+    row = one_evaluation(record, version, contract, reg, root, code_commit)
+    return finish_evaluation(row, record, contract, code_commit)

@@ -22,7 +22,7 @@ def outage_metrics(path, start, end):
     opener = gzip.open if path.suffix == '.gz' else open
     values, times = [], []
     previous = None
-    with opener(path, 'rt', newline='') as stream:
+    with opener(path, 'rt', encoding='utf-8-sig', newline='') as stream:
         for row in csv.DictReader(stream):
             t = float(row['time'])
             if not math.isfinite(t) or (previous is not None and t <= previous):
@@ -155,6 +155,20 @@ def hypothesis_tables(unique, case_lookup, contract, *, n_boot=10000, seed=20260
             'H2_MATCHED_FAMILY_SUMMARY.csv': h2_summary, 'H3_SEED_SIGNS.csv': h3}, decisions
 
 
+def field_metadata(contract, n_boot):
+    """Correct explanatory endpoint wording, preserving original registration."""
+    relative = 'docs/paper_rebuild/clean6/ADDENDUM_METRIC_WORDING_ERRATUM.md'
+    source = Path(__file__).resolve().parents[4]/relative
+    fields = dict(contract['field_definitions'])
+    fields['fault_window_horizontal_rmse_m'] = 'Inherited unchanged P-09c value over start <= t <= end; both interval endpoints included.'
+    fields['post_window_horizontal_rmse_m'] = 'Inherited unchanged P-09c value over t > end.'
+    return {**fields, 'statistics': contract['statistics'], 'label': contract['label'],
+            'data_roles': contract['data_roles'], 'original_preregistered_field_definitions': contract['field_definitions'],
+            'wording_erratum': {'path': '<CODE_ROOT>/'+relative, 'sha256': sha256_file(source),
+                               'numerical_operation_changed': False},
+            'synthetic_fixture_bootstrap_override': n_boot != contract['statistics']['bootstrap']['resamples']}
+
+
 def aggregate_all(evaluations, records, contract, stage, code_commit, *, n_boot=None):
     """Write only 13_AGGREGATE_ADDENDUM; core aggregate readers are unnecessary."""
     cases = {r['case_id']: r for r in contract['case_rows']}
@@ -211,9 +225,7 @@ def aggregate_all(evaluations, records, contract, stage, code_commit, *, n_boot=
         for name, rows in tables.items():
             write_csv(root/name, rows)
         write_json(root/'HYPOTHESIS_DECISIONS.json', decisions)
-        write_json(root/'FIELD_DEFINITIONS.json', {**contract['field_definitions'], 'statistics': stats,
-                   'label': contract['label'], 'data_roles': contract['data_roles'],
-                   'synthetic_fixture_bootstrap_override': n_boot != stats['bootstrap']['resamples']})
+        write_json(root/'FIELD_DEFINITIONS.json', field_metadata(contract, n_boot))
         status = {'terminal_status': 'PASS_ADDENDUM_A1_A2_AGGREGATED_WITH_EXPLICIT_TERMINALS',
                   'evaluator_version': version, 'code_commit': code_commit, 'unique_rows': len(unique),
                   'logical_rows': len(logical), 'evaluation_status_counts': dict(Counter(r['evaluation_status'] for r in unique)),

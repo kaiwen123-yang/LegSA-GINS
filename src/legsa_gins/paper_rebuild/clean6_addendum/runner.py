@@ -125,7 +125,10 @@ def validate_freeze(freeze, args, reg):
 def provider_child(args):
     contract, reg = load_contract(args.contract), registry(args.local_config)
     stage = resolve(contract['stage_root'], reg)
-    freeze = json.loads((stage/'00_PREREGISTRATION/EXECUTION_FREEZE.json').read_text())
+    freeze_path = Path(args.freeze_path) if getattr(args, 'freeze_path', None) else stage/'00_PREREGISTRATION/EXECUTION_FREEZE.json'
+    if not freeze_path.is_relative_to(stage) or freeze_path.is_symlink():
+        raise ValueError('Provider freeze must be an existing record inside this stage')
+    freeze = json.loads(freeze_path.read_text())
     validate_freeze(freeze, args, reg)
     if args.code_commit != freeze['code_commit']:
         raise ValueError('Provider code commit differs from execution freeze')
@@ -154,6 +157,8 @@ def provider_task(case, contract, reg, stage, freeze, args):
         sys.executable, str(reg.code_root/'scripts/paper_rebuild/clean6_run_addendum_a1_a2.py'),
         '--operation', 'provider', '--local-config', args.local_config, '--contract', args.contract,
         '--case-id', case['case_id'], '--code-commit', freeze['code_commit']]
+    if getattr(args, 'freeze_path', None):
+        command.extend(['--freeze-path', args.freeze_path])
     result = run_process_group(command, cwd=reg.code_root, timeout_seconds=1800,
         timeout_message='Addendum provider timeout; no retry', launch_failure_message='Addendum provider launch failed')
     (root/'stdout.log').write_text(result.stdout)
@@ -319,14 +324,20 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--local-config', required=True)
     parser.add_argument('--contract', required=True)
-    parser.add_argument('--operation', choices=('start', 'provider'), default='start')
+    parser.add_argument('--operation', choices=('start', 'provider', 'resume'), default='start')
     parser.add_argument('--case-id')
     parser.add_argument('--code-commit')
+    parser.add_argument('--freeze-path')
+    parser.add_argument('--continuation-id')
+    parser.add_argument('--recovery-snapshot')
     args = parser.parse_args(argv)
     args.local_config, args.contract = str(Path(args.local_config).resolve()), str(Path(args.contract).resolve())
     if args.operation == 'provider':
         provider_child(args)
         return 0
+    if args.operation == 'resume':
+        from .resume import resume
+        return resume(args)
     contract, reg = load_contract(args.contract), registry(args.local_config)
     stage = resolve(contract['stage_root'], reg)
     paths = yaml.safe_load(Path(args.local_config).read_text())['paths']

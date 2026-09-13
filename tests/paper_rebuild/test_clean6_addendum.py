@@ -71,6 +71,64 @@ def test_end_metric_last_half_open_epoch_and_nonfinite(tmp_path):
     assert result['outage_end_horizontal_error_m'] == 2 and result['max_horizontal_error_in_window_m'] is None
 
 
+def test_frozen_evaluator_utf8_bom_header_reads_without_evaluator(tmp_path):
+    path = tmp_path/'error_series.csv.gz'
+    with gzip.open(path, 'wt', encoding='utf-8-sig') as stream:
+        stream.write('time,horizontal_err_m,yaw_err_deg\n1,8,2\n2,3,1\n3,99,0\n')
+    with gzip.open(path, 'rb') as stream:
+        assert stream.read(8).startswith(b'\xef\xbb\xbftime,')
+    metrics = outage_metrics(path, 1, 3)
+    assert metrics['outage_end_horizontal_error_m'] == 3
+    assert metrics['max_horizontal_error_in_window_m'] == 8
+    assert metrics['outage_end_evaluation_time_s'] == 2
+
+
+def test_completed_evaluation_sidecar_recovery_never_invokes_evaluator(tmp_path, monkeypatch):
+    from legsa_gins.paper_rebuild.clean6_addendum import runtime
+    contract = load_contract(CONTRACT)
+    folder = tmp_path/'existing_evaluation'
+    errors = folder/'FROZEN_EVALUATOR/error_series.csv.gz'
+    errors.parent.mkdir(parents=True)
+    with gzip.open(errors, 'wt', encoding='utf-8-sig') as stream:
+        stream.write('time,horizontal_err_m\n1,8\n2,3\n3,99\n')
+    old_hash = sha256_file(errors)
+    original = folder/'EVALUATION_RESULT.json'
+    original.write_text('{"synthetic_fixture":true}')
+    original_bytes = original.read_bytes()
+    def prohibited(*a, **kw):
+        raise AssertionError('Completed evaluator must not be called again')
+    monkeypatch.setattr(runtime, 'one_evaluation', prohibited)
+    row = {'evaluation_status': 'COMPLETED', 'evaluation_output_root': str(folder), 'error_series_source': str(errors),
+           'code_commit': 'a'*40, 'evaluator_version': 'v3', 'run_id': 'ADD_RUN_00001',
+           'original_completed_evaluation_reused': True, 'historical_full_file_derived_seal_available': False}
+    record = {'duration_s': 2, 'case_meta': {'outage_start_s': 1, 'outage_end_s': 3}}
+    finished = runtime.finish_evaluation(row, record, contract, 'b'*40)
+    assert finished['code_commit'] == 'a'*40 and finished['derived_metrics_code_commit'] == 'b'*40
+    assert finished['outage_end_horizontal_error_m'] == 3
+    assert sha256_file(errors) == old_hash and original.read_bytes() == original_bytes
+    assert json.loads((folder/'EVALUATION_OUTPUT_SEAL.json').read_text())['historical_full_file_derived_seal_available'] is False
+    with pytest.raises(FileExistsError):
+        runtime.finish_evaluation(row, record, contract, 'b'*40)
+
+
+def test_exclusive_evaluator_attempt_marker_prevents_repeat_after_interruption(tmp_path, monkeypatch):
+    from legsa_gins.paper_rebuild.clean6_addendum import runtime
+    from types import SimpleNamespace
+    contract = {'stage_root': str(tmp_path/'stage')}
+    reg = SimpleNamespace(code_root=tmp_path, clean_root=tmp_path, raw_root=tmp_path/'raw')
+    calls = []
+    def interrupted(*a, **kw):
+        calls.append(1)
+        raise RuntimeError('synthetic interrupted first attempt')
+    monkeypatch.setattr(runtime, 'one_evaluation', interrupted)
+    record = {'run_id': 'ADD_RUN_00001', 'code_commit': 'a'*40, 'terminal_status': 'COMPLETED'}
+    with pytest.raises(RuntimeError, match='synthetic interrupted'):
+        runtime.evaluate(record, 'v3', contract, reg, tmp_path/'scratch', 'b'*40)
+    with pytest.raises(FileExistsError):
+        runtime.evaluate(record, 'v3', contract, reg, tmp_path/'scratch', 'b'*40)
+    assert calls == [1]
+
+
 def test_exact_wilcoxon_small_n_ties_and_zero():
     assert wilcoxon([1]*9) == pytest.approx(2/512)
     assert wilcoxon([1, -1]) == 1
