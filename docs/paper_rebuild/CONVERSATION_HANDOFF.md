@@ -53,6 +53,8 @@ Protocol v2 full-matrix comparison status: PASS. P-06 sequence anchors passed 10
 
 ## 4. Planned stages and naming
 
+P-09d A1/A2 final status: `PASS_ADDENDUM_FAMILIES_A1_A2_COMPLETE`; A1 27 cases, A2 18 cases, 11 configurations, 495 native COMPLETED and v3/v2 each 495 COMPLETED. Failures, repeats, core calls and archive pending are 0. Source: `<CLEAN_ROOT>/stages/CLEAN6_ADDENDUM_FAMILIES_A1_A2/13_AGGREGATE_ADDENDUM/{v3,v2}`; full report: `ADDENDUM_FAMILIES_A1_A2_RESULTS.md`. H1/H2/H3 both versions: `PARTIALLY_SUPPORTED` / `SUPPORTED` / `OBSERVED_SOME_SEED_HARM`. Core tables stay separate and unchanged.
+
 | Purpose | Stage id / dataset id |
 |---|---|
 | Same-day poor-heading run | `BY2H`, `CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE`; status: `EVALUATED` |
@@ -75,6 +77,10 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 | F | new conversation | clean submission repository, data/code release | last |
 
 ## 6. Data handoff locations
+
+P-09d combined data handoff: `<HANDOFF_ROOT>/c541_v2_handoff_v3.zip` (`handoff_root` in ignored local config), SHA-256 `79e75f7d867a4930dc80c0f906173b48aab1bec6a5caac44b63bae993a848dd3`, 601520239 bytes, 9712 ZIP members; full CRC/member-hash validation PASS, 608 base members preserved. Delivery record: `docs/paper_rebuild/clean6/ADDENDUM_HANDOFF_V3.md`. All new handoff packages are on the project G: handoff root.
+
+P-09d A1/A2 final status: `PASS_ADDENDUM_FAMILIES_A1_A2_COMPLETE`; A1 27 cases, A2 18 cases, 11 configurations, 495 native COMPLETED and v3/v2 each 495 COMPLETED. Failures, repeats, core calls and archive pending are 0. Source: `<CLEAN_ROOT>/stages/CLEAN6_ADDENDUM_FAMILIES_A1_A2/13_AGGREGATE_ADDENDUM/{v3,v2}`; full report: `ADDENDUM_FAMILIES_A1_A2_RESULTS.md`. H1/H2/H3 both versions: `PARTIALLY_SUPPORTED` / `SUPPORTED` / `OBSERVED_SOME_SEED_HARM`. Core tables stay separate and unchanged.
 
 - P-09c completed under the 2026-09-12 human decision. P-09c protocol v2 full execution, both frozen aggregates, v1/v2 comparison and validated handoff are complete: 5973 native terminals (5869 COMPLETED; 104 ALGORITHM_FAILURE_ALL_YAW_REJECTED), 11946 v3/v2 evaluator terminal records, archive pending 0. Scientific code `737a0fb5a4a5418500824855b89b0d25af69824a`; archive I/O code `ea478eea88aaf9739823dfc152fa108dd17f8d0c`. Original native reuse=33; native/evaluator repeat calls=0. Sequence/C00 gate PASS 182/182 (P-06 105/105; P-07 CAL C00 77/77). The original role-validation stop, batch-8 archive interruption and missing historical evaluation seal remain preserved as historical records. RUN_01963 received the explicitly accepted current post-hoc seal; historical_full_file_seal_available=false. Its completed archive is identified by resolved rows; the original partial archive is retained.
 

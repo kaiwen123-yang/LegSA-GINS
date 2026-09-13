@@ -20,6 +20,8 @@ import yaml
 from ..manifest import sha256_file
 from .pack import SERIES_COLS, _gz_frame, _json, _safe_file, validate_archive
 
+BASE_PACKAGE_SHA256 = '30e6e263922ed317db0bc6e1cabe4b38d576bd0ec501e1f8f7b45fffa94beefb'
+
 
 def safe_member(name):
     p = Path(name)
@@ -101,7 +103,8 @@ def append_core_display(sources, stage):
         rows.append(item)
     _manifest(sources.target, 'CORE_SUPPLEMENT_SERIES_MANIFEST.csv', rows)
     failed_cases = set(unique.loc[unique.evaluation_status == 'NOT_RUN_ALGORITHM_FAILURE', 'case_id'])
-    timelines = unique[(unique.case_id.isin(failed_cases) & unique.method_id.isin(['F02', 'F04']))
+    timelines = unique[(unique.evaluation_status == 'NOT_RUN_ALGORITHM_FAILURE')
+                       | (unique.case_id.isin(failed_cases) & (unique.method_id == 'F02'))
                        | (unique.case_id == 'C00_clean_normal')]
     timeline_rows = []
     for ix, row in timelines.iterrows():
@@ -180,10 +183,22 @@ def append_addendum(sources, stage):
              'RESOLVED_RUN_RECORDS.json', 'RESOLVED_EVALUATION_RECORDS.json',
              'PROVIDER_MAPPING.csv', 'NATIVE_IDENTITY_MAPPING.csv',
              'ADDENDUM_FAMILIES_A1_A2_CONTRACT.yaml', 'ADDENDUM_NATIVE_IDENTITY_TRANSPORT.md',
+             'ADDENDUM_METRIC_WORDING_ERRATUM.md',
+             'ADDENDUM_ARCHIVE_IO_CONTINUATION.md',
+             'ARCHIVE_IO_INTERRUPT_REQUEST.json', 'ARCHIVE_IO_INTERRUPT_TERMINAL.json',
+             'INTERRUPT_SCENE_SNAPSHOT.json', 'REUSED_SCIENCE_RECORDS.json',
+             'STOPPED.json', 'CURRENT_POST_STOP_EVALUATION_SNAPSHOT.json',
+             'RECOVERED_FIRST_EVALUATION.json', 'UNSTARTED_EVALUATION_IDENTITIES.json',
+             'OWNED_STORAGE_LEDGER.jsonl',
              'ADDENDUM_EVALUATION_RESULT.json', 'ADDENDUM_DERIVED_METRICS.json',
              'EVALUATION_OUTPUT_SEAL.json'}
+    metadata_roots = {'00_PREREGISTRATION', '01_CHECKPOINTS', '01_PROVIDER_AUDIT',
+                      '01_EVALUATION_CALLS', 'BATCHES', 'CONTINUATIONS'}
     for source in sorted(stage.rglob('*')):
-        if source.is_file() and (source.name in names or source.name.startswith('CLEANUP_LEDGER')):
+        relative = source.relative_to(stage)
+        is_small_record = (relative.parts[0] in metadata_roots
+                           and source.suffix in {'.json', '.jsonl', '.csv', '.yaml', '.md'})
+        if source.is_file() and (source.name in names or source.name.startswith('CLEANUP_LEDGER') or is_small_record):
             if source.stat().st_size > 20_000_000:
                 raise ValueError('Unexpectedly large provenance member')
             sources.copy(source, 'addendum_provenance/' + source.relative_to(stage).as_posix())
@@ -191,6 +206,7 @@ def append_addendum(sources, stage):
     _manifest(sources.target, 'addendum_error_series_subset/SUBSET_MANIFEST.csv', all_series)
     _json(sources.target / 'ADDENDUM_IDENTITY_PROBE.json', dict(passed=True, versions=probes,
           core_aggregate_members_changed=0, metric_recomputation_performed=False,
+          data_mode='semisynthetic', synthetic_data_used=False, semisynthetic_data_used=True,
           label='ADDENDUM_FAMILIES_A1_A2 — pre-registered 2026-09-13, added after the 541-core results were seen, to cover a scenario absent from the library'))
 
 
@@ -250,13 +266,34 @@ def append_supplements(sources, code_root):
             sources.copy(source, 'supplemental/SEQUENCE_QUALITY/' + name)
         else:
             missing.append(dict(source='<CLEAN5_BY2O_ROOT>/01_SEQUENCE_CONTRACT/' + name, status='UNAVAILABLE_SOURCE_FILE'))
+    horizontal = stages/'CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/13_HORIZONTAL_CROSS_LAYER_SYNTHESIS'
+    for rel in ('00_METHOD_REGISTRY/FINAL_METHOD_REGISTRY_V2.csv',
+                '06_CROSS_LAYER_COMPARABILITY/OUTPUT_AND_METRIC_COMPATIBILITY.csv',
+                '02_RAW_DUAL_ANTENNA/RAW_PRIMARY_METHOD_C00_SUMMARY.csv',
+                '02_RAW_DUAL_ANTENNA/RAW_AVAILABILITY_AND_STATE_SUMMARY.csv',
+                '02_RAW_DUAL_ANTENNA/RAW_BASELINE_AND_HEADING_SUMMARY.csv',
+                '02_RAW_DUAL_ANTENNA/RAW_RUNTIME_AND_FAILURE_SUMMARY.csv',
+                '04_PROPRIOCEPTIVE_OBSERVABILITY/HARTLEY_OBSERVABILITY_SUMMARY.csv',
+                '04_PROPRIOCEPTIVE_OBSERVABILITY/HARTLEY_GAUGE_EQUIVALENCE_SUMMARY.csv'):
+        source = horizontal/rel
+        sources.copy(source, 'supplemental/HORIZONTAL/' + source.name)
+    source = horizontal.parent/'07_LSE01_HARTLEY_CONTACT_INEKF/10_OBSERVABILITY_R1/01_IDEAL_BIAS_FREE/OBSERVABILITY_SINGULAR_VALUES_R1.csv'
+    sources.copy(source, 'supplemental/HORIZONTAL/' + source.name)
+    geometry_path = Path(code_root)/'configs/paper_rebuild/publication/PROTOCOL_V2_FIGURE_GEOMETRY.yaml'
+    geometry = yaml.safe_load(geometry_path.read_text())
+    physical_source = Path(geometry['source_alias'].replace('<CODE_ROOT>', str(code_root)))
+    if sha256_file(physical_source) != geometry['source_sha256']:
+        raise ValueError('Frozen physical geometry source changed')
     _json(sources.target / 'PLOT_GEOMETRY_CONTRACT.json', dict(evaluation=contract['evaluation'],
-          source_contract_sha256=sha256_file(Path(code_root) / 'configs/paper_rebuild/clean6/ADDENDUM_FAMILIES_A1_A2_CONTRACT.yaml')))
+          source_contract_sha256=sha256_file(Path(code_root) / 'configs/paper_rebuild/clean6/ADDENDUM_FAMILIES_A1_A2_CONTRACT.yaml'),
+          physical_geometry=geometry, plotting_geometry_config_sha256=sha256_file(geometry_path)))
     _json(sources.target / 'SUPPLEMENT_UNAVAILABLE.json', missing)
 
 
 def pack_combined(base_package, addendum_root, clean_root, code_root, output, *, package_dir=None):
     base_package, output = Path(base_package).resolve(), Path(output).absolute()
+    if sha256_file(base_package) != BASE_PACKAGE_SHA256:
+        raise ValueError('Base package differs from the frozen P-09c handoff identity')
     validate_archive(base_package)
     if output.exists() or output.is_symlink():
         raise FileExistsError(output)
@@ -288,6 +325,8 @@ def pack_combined(base_package, addendum_root, clean_root, code_root, output, *,
                for p in sorted(target.rglob('*')) if p.is_file()}
     _json(target / 'PACKAGE_MANIFEST.json', dict(schema_version='canonical541_handoff_v3_with_addendum',
           members=members, core_and_addendum_tables_separate=True, raw_payload_included=False,
+          data_mode='mixed_real_base_and_semisynthetic_controlled_degradation',
+          synthetic_data_used=False, semisynthetic_data_used=True,
           metric_recomputation_performed=False))
     output.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(output, 'x', compression=zipfile.ZIP_DEFLATED, compresslevel=6) as archive:

@@ -316,6 +316,18 @@ The reference is Fixposition-derived and not independent ground truth. This limi
 
 ## 7. Internal method identities and current interpretation
 
+### Addendum families A1/A2 anchors
+
+P-09d terminal: `PASS_ADDENDUM_FAMILIES_A1_A2_COMPLETE`. Separate root: `<ADDENDUM_ROOT> = <CLEAN_ROOT>/stages/CLEAN6_ADDENDUM_FAMILIES_A1_A2`; aggregate tables: `13_AGGREGATE_ADDENDUM/{v3,v2}`. A1/D61 = 10/20/30 s × 9 seeds = 27 cases; A2/D62 = 10/20 s × 9 seeds = 18 cases. Each case has 11 configurations. Native terminals 495/495 COMPLETED; v3 and v2 each 495/495 COMPLETED; native/evaluation failures 0; retries 0; core solver/evaluator calls 0; archive pending 0; final scratch files 0.
+
+Contract commit `98c1d42eeabe707115f9e67c21ed993572e4d0d1`; contract SHA-256 `fd11e416a3bd1a67c992a3606de0bb988035cae5c80647efa2091d00614546ec`. Scientific addendum code `f93cb84c2e67432873362fe00324d1c2c28fd899`; BOM continuation `3a61d157ef82af4bfb12f3d1f5c6491742da592c`; archive I/O continuation `9802311754fdc49f151ff36b4ffbff715085dfd9`. PRE/POST raw checkpoints each PASS 22/22. Earlier technical events and reused outputs remain separately recorded.
+
+Seed ids 260306001–260306009 use anchors `[206.2, 107.20639, 189.207044, 227.201927, 148.204964, 226.215803, 258.208267, 247.210403, 299.203403]` s in that order. The original Go2 RP/HV source values and validity are retained; outage injection does not fabricate Go2 validity.
+
+Both evaluator versions retain H1 `PARTIALLY_SUPPORTED`, H2 `SUPPORTED`, H3 `OBSERVED_SOME_SEED_HARM`; H3 full_vs_no_Go2 harm case–metric rows 32, missing 0. The complete eight comparisons, duration groups and seed signs are in `docs/paper_rebuild/ADDENDUM_FAMILIES_A1_A2_RESULTS.md` and its linked CSV companions. Addendum tables never enter the frozen 541-core PAIRWISE_SUMMARY. `data_mode=semisynthetic`, `synthetic_data_used=false`, `semisynthetic_data_used=true`, `trace_used_online=false`.
+
+ADDENDUM_FAMILIES_A1_A2 — pre-registered 2026-09-13, added after the 541-core results were seen, to cover a scenario absent from the library.
+
 ### Protocol v2 anchors (P-09c)
 
 The original role-validation stop, batch-8 archive interruption and missing historical evaluation seal remain preserved as historical records. RUN_01963 received the explicitly accepted current post-hoc seal; historical_full_file_seal_available=false. Its completed archive is identified by resolved rows; the original partial archive is retained.
@@ -941,6 +953,8 @@ Hartley does not provide legal absolute yaw RMSE or absolute position RMSE and m
 
 ## 11. Corrected Classic-18 and generalization
 
+P-09d A1/A2 is complete: 495 native and 990 evaluator terminals COMPLETED, failure/retry/core-call/archive-pending counts 0; independent aggregates and full record are linked from §7. Exact cleanup removed 47,565 files / 65,698,307,966 bytes; scratch files 0. The original technical-stop, interruption and resource scopes remain preserved.
+
 Historical archive-only input check, before the 2026-09-12 human acceptance: the first seven batch ledgers and available batch-8 pins passed, but the missing RUN_01963 historical evaluation seal stopped that check. It invoked no new solver or evaluator. The accepted current post-hoc seal and completed continuation are recorded below.
 
 P-09c protocol v2 full execution, both frozen aggregates, v1/v2 comparison and validated handoff are complete: 5973 native terminals (5869 COMPLETED; 104 ALGORITHM_FAILURE_ALL_YAW_REJECTED), 11946 v3/v2 evaluator terminal records, archive pending 0. Scientific code `737a0fb5a4a5418500824855b89b0d25af69824a`; archive I/O code `ea478eea88aaf9739823dfc152fa108dd17f8d0c`. Original native reuse=33; native/evaluator repeat calls=0. Sequence/C00 gate PASS 182/182 (P-06 105/105; P-07 CAL C00 77/77). Full factual record: `docs/paper_rebuild/P09C_PROTOCOL_V2_FINAL.md`; source tables `<CANONICAL541_V2_ROOT>/13_AGGREGATE/v3/` and `/v2/`.
@@ -1248,6 +1262,10 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 ---
 
 ## 18. Current next actions
+
+P-09d combined data handoff: `<HANDOFF_ROOT>/c541_v2_handoff_v3.zip` (`handoff_root` in ignored local config), SHA-256 `79e75f7d867a4930dc80c0f906173b48aab1bec6a5caac44b63bae993a848dd3`, 601520239 bytes, 9712 ZIP members; full CRC/member-hash validation PASS, 608 base members preserved. Delivery record: `docs/paper_rebuild/clean6/ADDENDUM_HANDOFF_V3.md`. All new handoff packages are on the project G: handoff root.
+
+P-09d A1/A2 is complete: 495 native and 990 evaluator terminals COMPLETED, failure/retry/core-call/archive-pending counts 0; independent aggregates and full record are linked from §7. Exact cleanup removed 47,565 files / 65,698,307,966 bytes; scratch files 0. The original technical-stop, interruption and resource scopes remain preserved.
 
 P-09c protocol v2 full execution, both frozen aggregates, v1/v2 comparison and validated handoff are complete: 5973 native terminals (5869 COMPLETED; 104 ALGORITHM_FAILURE_ALL_YAW_REJECTED), 11946 v3/v2 evaluator terminal records, archive pending 0. Scientific code `737a0fb5a4a5418500824855b89b0d25af69824a`; archive I/O code `ea478eea88aaf9739823dfc152fa108dd17f8d0c`. Original native reuse=33; native/evaluator repeat calls=0. Sequence/C00 gate PASS 182/182 (P-06 105/105; P-07 CAL C00 77/77). The original role-validation stop, batch-8 archive interruption and missing historical evaluation seal remain preserved as historical records. RUN_01963 received the explicitly accepted current post-hoc seal; historical_full_file_seal_available=false. Its completed archive is identified by resolved rows; the original partial archive is retained. All encountered bookkeeping repairs are collected in the final report notes table.
 
