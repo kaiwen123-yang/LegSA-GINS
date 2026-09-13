@@ -53,6 +53,8 @@ Protocol v2 full-matrix comparison status: PASS. P-06 sequence anchors passed 10
 
 ## 4. Planned stages and naming
 
+P-10 figure delivery is complete: 29 composites (8 reissued + 21 new; 2 supplementary as an overlapping role), 87 PNG/PDF/SVG exports, 29/29 visual PASS. Figure root `<PUBLICATION_ROOT>/figures/v2/`; index `FIGURE_INDEX.md` has GPS Solutions and TIM section columns. ZIP `<HANDOFF_ROOT>/figures_v2_handoff.zip`, SHA-256 `d304001f0f77818cef0604b3b790cc414649c06892d1a7963b1c0d7869c52a60`, 29063129 bytes. Full record: `docs/paper_rebuild/PROTOCOL_V2_FIGURE_DELIVERY.md`. v1 original/copy bytes remain unchanged; no new scientific execution.
+
 P-09d A1/A2 final status: `PASS_ADDENDUM_FAMILIES_A1_A2_COMPLETE`; A1 27 cases, A2 18 cases, 11 configurations, 495 native COMPLETED and v3/v2 each 495 COMPLETED. Failures, repeats, core calls and archive pending are 0. Source: `<CLEAN_ROOT>/stages/CLEAN6_ADDENDUM_FAMILIES_A1_A2/13_AGGREGATE_ADDENDUM/{v3,v2}`; full report: `ADDENDUM_FAMILIES_A1_A2_RESULTS.md`. H1/H2/H3 both versions: `PARTIALLY_SUPPORTED` / `SUPPORTED` / `OBSERVED_SOME_SEED_HARM`. Core tables stay separate and unchanged.
 
 | Purpose | Stage id / dataset id |
@@ -70,8 +72,8 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 
 | Conversation | Owner | Scope | Status |
 |---|---|---|---|
-| A | Claude (matrix-figure conversation) | derived tables (A04 vs F03 / F02, F04 vs F02, bootstrap CI, stratified Wilcoxon, bias/random decomposition), publication plotting common layer, Canonical-541 figures, captions, this file | v1 BY2 figures retained; P-10 v2 rendering and visual QA pending final figure delivery |
-| B | new conversation | horizontal publication figures FIG02/FIG03 (FIG04 supplementary), reuses A's common layer | P-10 FIG01–FIG04 code ready; actual render/visual QA pending |
+| A | Claude (matrix-figure conversation) | derived tables (A04 vs F03 / F02, F04 vs F02, bootstrap CI, stratified Wilcoxon, bias/random decomposition), publication plotting common layer, Canonical-541 figures, captions, this file | P-10 complete: 29 v2 composites and visual QA passed; v1 bytes retained |
+| B | new conversation | horizontal publication figures FIG02/FIG03 (FIG04 supplementary), reuses A's common layer | P-10 FIG01–FIG04 rendered and visually verified |
 | C | Codex / execution conversation | BY2H, BY2O, input-parity runs and evaluation | BY2H/BY2O, stage 2 and calibrated-chain execution complete; P-09c and A1/A2 scientific execution complete |
 | D | subsequent conversation | uncertainty inputs listed in §7; preserve frozen inputs and distinguish manufacturer specification from derived diagnostics | pending |
 | E | subsequent conversation | two manuscript narratives: GPS Solutions and TIM; proposed F04 under protocol v2 | pending |
@@ -80,6 +82,8 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 Current handoff work: P-09d/P-10 implementation and publication package; the exact terminal record and figure index supersede stale waiting-for-sequence task status. New baseline EXT06 (Luo et al., single-antenna InEKF + leg odometry, no radar) is assigned to a subsequent conversation, not executed here.
 
 ## 6. Data handoff locations
+
+P-10 figure delivery is complete: 29 composites (8 reissued + 21 new; 2 supplementary as an overlapping role), 87 PNG/PDF/SVG exports, 29/29 visual PASS. Figure root `<PUBLICATION_ROOT>/figures/v2/`; index `FIGURE_INDEX.md` has GPS Solutions and TIM section columns. ZIP `<HANDOFF_ROOT>/figures_v2_handoff.zip`, SHA-256 `d304001f0f77818cef0604b3b790cc414649c06892d1a7963b1c0d7869c52a60`, 29063129 bytes. Full record: `docs/paper_rebuild/PROTOCOL_V2_FIGURE_DELIVERY.md`. v1 original/copy bytes remain unchanged; no new scientific execution.
 
 P-09d combined data handoff: `<HANDOFF_ROOT>/c541_v2_handoff_v3.zip` (`handoff_root` in ignored local config), SHA-256 `79e75f7d867a4930dc80c0f906173b48aab1bec6a5caac44b63bae993a848dd3`, 601520239 bytes, 9712 ZIP members; full CRC/member-hash validation PASS, 608 base members preserved. Delivery record: `docs/paper_rebuild/clean6/ADDENDUM_HANDOFF_V3.md`. All new handoff packages are on the project G: handoff root.
 
@@ -174,7 +178,7 @@ All new handoff packages go to `<HANDOFF_ROOT>` under the project G: root, never
 - [ ] SA 的 Up 代价按源分解（A/D）。
 - [x] Stage 2 position gap decomposition 与输入时标/RV 同历元重配记录已冻结；v3 使用人类安装声明与冻结几何，不含 trace 拟合。
 - [ ] CAD 核对天线–IMU 高度差及杆臂 z；v3 上向残差仅报告，不据此继续修正。
-- [ ] 对话 A 图件：误差预算阶梯、体坐标偏差、敏感性热图、标定链三序列表；保留主链/标定链与 v2/v3 标识。
+- [x] 对话 A 图件：P-10 误差预算阶梯、体坐标偏差、敏感性热图、标定链三序列图已完成；保留协议、标定链与评估点标识。
 - [ ] remaining: BY2O gating sensitivity to IMU integration convention；V2 与 V2is 同时改变处理约定和加速度计标度，不能作为独立积分因果项。
 - [ ] 对话 D 不确定度输入：时标约 0.205 s、BY2 半基线约 0.178 m、PVT−trace 差分垂直速度差标准差约 0.043 m/s（DERIVED_DIAGNOSTIC_ONLY）；各 run 的高度/北/东/yaw 一致性比见标定链 UNIQUE 表（v3 位置 STD 未传输）。BY2 冻结 s=1.0308398903907543；vrw=[9.478382094779873, 9.784198200134004, 7.6321402201126745] (m/s)/√h；abstd=[4817.482008954474, 8259.572423450163, 2257.241538343225] mGal；拟合 c=[0.010830809489394968, 0.013550612232080246, 0.020536668097236248] (m/s)²。原始数值、三轴窗数与来源见 `08_AGGREGATE/FROZEN_SENSOR_MODEL.csv` 和 `00_CALIBRATION/LAG_VARIANCE_FIT.csv`。
 
@@ -209,3 +213,5 @@ All new handoff packages go to `<HANDOFF_ROOT>` under the project G: root, never
 - 2026-09-11 (P-09c): preregistration 56ae6021 / fcf3558f, code freeze b26569185638fabdd2ad121fc25cf784d5a8fdb3. Stopped after 33 solver terminals: 11 COMPLETED + 22 FAILED_TECHNICAL (missing runtime_role in outer validator); native exit 0 for all33, 182/182 byte-anchor checks matched, sequence gate FAIL. No remaining pilot solver, evaluator, aggregate, archive, cleanup or science retry. Full pilot/forecast/zip UNAVAILABLE; both scene roots retained.
 
 - 2026-09-13 (Codex, P-09d/P-10): A1/A2 completed and sealed with 495 native / 990 evaluator terminals, zero failures/retries/core calls/pending; result and combined-package record committed at `dd50a2cd6d876dc71ccfbf37d127122ead46c323`. The 2026-09-13 human decision names F04 under protocol v2, with A04 retained as the v1 pre-registered decision and an ablation. Method statement and 19-file/29-occurrence reference-wording correction are registered; frozen contracts, rule/Outcome and v1 figures retain their bytes. Actual v2 figure rendering follows this documentation commit.
+
+- 2026-09-13 (Codex, P-10 final): 29 composites / 87 exports complete, 29/29 automatic and individual visual checks PASS; 8 reissued + 21 new, including 2 supplementary. P-10 figure delivery is complete: 29 composites (8 reissued + 21 new; 2 supplementary as an overlapping role), 87 PNG/PDF/SVG exports, 29/29 visual PASS. Figure root `<PUBLICATION_ROOT>/figures/v2/`; index `FIGURE_INDEX.md` has GPS Solutions and TIM section columns. ZIP `<HANDOFF_ROOT>/figures_v2_handoff.zip`, SHA-256 `d304001f0f77818cef0604b3b790cc414649c06892d1a7963b1c0d7869c52a60`, 29063129 bytes. Full record: `docs/paper_rebuild/PROTOCOL_V2_FIGURE_DELIVERY.md`. v1 original/copy bytes remain unchanged; no new scientific execution. D uncertainty record, E GPS Solutions/TIM narratives and EXT06 reproduction remain assigned to subsequent conversations and are not executed here.

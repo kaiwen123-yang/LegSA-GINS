@@ -1007,6 +1007,8 @@ Do not automatically repeat the full 541 × 11 matrix on another dataset.
 
 ## 12. Current publication-figure task
 
+P-10 figure delivery is complete: 29 composites (8 reissued + 21 new; 2 supplementary as an overlapping role), 87 PNG/PDF/SVG exports, 29/29 visual PASS. Figure root `<PUBLICATION_ROOT>/figures/v2/`; index `FIGURE_INDEX.md` has GPS Solutions and TIM section columns. ZIP `<HANDOFF_ROOT>/figures_v2_handoff.zip`, SHA-256 `d304001f0f77818cef0604b3b790cc414649c06892d1a7963b1c0d7869c52a60`, 29063129 bytes. Full record: `docs/paper_rebuild/PROTOCOL_V2_FIGURE_DELIVERY.md`. v1 original/copy bytes remain unchanged; no new scientific execution.
+
 P-10 (2026-09-13) carries the four registered composites below into `<PUBLICATION_ROOT>/figures/v2/` as FIG01–FIG04. No prior rendered `15_HORIZONTAL_PUBLICATION_FIGURES` directory was present at the P-10 source check. FIG02 uses compatible frozen v3 rows and the protocol v2 C00 F04/A04 rows. FIG01/FIG03/FIG04 retain their information-layer, native raw and observability roles; native diagnostics are not re-labelled as v3 navigation accuracy. The original task boundaries below are historical; the separate P-10 instruction also authorizes the matrix/addendum figure package.
 
 The active horizontal publication task contains exactly four composite figures:
@@ -1276,6 +1278,8 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 
 ## 18. Current next actions
 
+P-10 figure delivery is complete: 29 composites (8 reissued + 21 new; 2 supplementary as an overlapping role), 87 PNG/PDF/SVG exports, 29/29 visual PASS. Figure root `<PUBLICATION_ROOT>/figures/v2/`; index `FIGURE_INDEX.md` has GPS Solutions and TIM section columns. ZIP `<HANDOFF_ROOT>/figures_v2_handoff.zip`, SHA-256 `d304001f0f77818cef0604b3b790cc414649c06892d1a7963b1c0d7869c52a60`, 29063129 bytes. Full record: `docs/paper_rebuild/PROTOCOL_V2_FIGURE_DELIVERY.md`. v1 original/copy bytes remain unchanged; no new scientific execution.
+
 P-09d combined data handoff: `<HANDOFF_ROOT>/c541_v2_handoff_v3.zip` (`handoff_root` in ignored local config), SHA-256 `79e75f7d867a4930dc80c0f906173b48aab1bec6a5caac44b63bae993a848dd3`, 601520239 bytes, 9712 ZIP members; full CRC/member-hash validation PASS, 608 base members preserved. Delivery record: `docs/paper_rebuild/clean6/ADDENDUM_HANDOFF_V3.md`. All new handoff packages are on the project G: handoff root.
 
 P-09d A1/A2 is complete: 495 native and 990 evaluator terminals COMPLETED, failure/retry/core-call/archive-pending counts 0; independent aggregates and full record are linked from §7. Exact cleanup removed 47,565 files / 65,698,307,966 bytes; scratch files 0. The original technical-stop, interruption and resource scopes remain preserved.
@@ -1294,7 +1298,7 @@ Current next actions:
 
 ```text
 1. CAD verification of antenna–IMU height difference and lever-arm z; retain the source-defined v3 transform until independently confirmed;
-2. conversation A: frozen error-budget ladder, body-frame bias, sensitivity heatmap, and calibrated three-sequence tables; show evaluator version and protocol identity explicitly;
+2. P-10 figure delivery complete: error-budget ladder, body-frame bias, sensitivity heatmap and calibrated three-sequence figures are in figures/v2; subsequent manuscript selection belongs to conversation E;
 3. conversation D: reference-uncertainty record using timing, baseline, derived diagnostic velocity difference, consistency ratios, and frozen calibrated vrw/abstd/c;
 4. remaining: BY2O gating sensitivity to IMU integration convention; any new execution requires its own bounded authorization;
 5. post-hoc BY2O rejection/downweight timeline and Source-Aware Up cost by source, using frozen artifacts;
