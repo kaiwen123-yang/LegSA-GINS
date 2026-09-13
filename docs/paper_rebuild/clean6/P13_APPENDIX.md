@@ -43,3 +43,15 @@ Provider commit: d01f2be8fb0ef1633d4871ec57b0e6d4e9de44a7. Raw PRE checkpoint: 2
 | BY2O | 23022 | 0.106398459795671 | 0.103633801029819 | -0.412028739877216 | 233 | 1.1102230246251565e-16 |
 
 All three residual gates pass 1e-6. Nominal 15/18-column GNSS non-yaw_std token equality and all-2.933193 yaw_std gates pass for 1510/1483/2231 rows. All three IMU and RD hashes match their frozen V2s pins. Scaled residuals are reported separately from the inverse-k reproduction gate.
+
+## F01 invariant gate and main execution bookkeeping
+
+At cea410a21068edbaaa73691eb9669527ae6b3e08, all 50 preregistered F01 audits completed: 350/350 full-file comparisons passed, 50 lossless archives verified, exact scratch cleanup completed, zero repeat native calls and zero evaluator calls. Formal F01 remains the byte-exact v2 result. Six original reference records reside in the authorized v2 batch-8 I/O recovery ledger; their original seven-file seals match the retained archive receipts.
+
+The main registry contains 5880 unique native identities: 5410 core, 20 additional natural-sequence and 450 addendum runs. There are 23 batches (22 of 256, then 248), with 11760 primary/parallel evaluator terminal slots. BY2 C00 is counted once. F01 bridge/audit and the 21 downstream native jobs are separate ledgers.
+
+The P09c archive-only recovery functions are reused for every batch, including the first archive attempt, to preserve durable receipts and resume partial exact cleanup without repeating native/evaluator calls. Their inherited internal v2 scientific-commit and 5973-denominator labels are retained as pre-correction bookkeeping; P13 wrappers report the actual frozen P13 commit and 5880 main-run denominator. A complete delivery requires zero pending archives and actual two-version/receipt identity closure, not only a batch-controller exit.
+
+Natural-sequence consistency, window segments and body-frame bias are computed from the completed full-rate evaluator errors and original full NAV/STD before rolling cleanup, using the unchanged P05/parity/sequence functions. Frozen evaluator JSON stays intact; P13 diagnostic and evaluation sidecars identify the corrected protocol and semisynthetic case roles. The existing frozen_parameter_hash function is unchanged and is applied to the final YAML including sequence transport. A same-CAL/variant reference separately shows the sole native sensor-field difference, basic_dual_yaw_fixed_std_deg; HV/RP corrections remain provider changes in the separately locked SENSOR_MODEL_V21 group.
+
+Main controller, provider, F01, evaluator scheduling, downstream adapter, aggregation and diagnostic unit checks total 60 passing tests before the main run. Real-data gates are reported separately above.

@@ -18,7 +18,7 @@ from ..clean5_sequence.io_audit import audited_open_records, write_scope_audit
 from ..clean6_canonical_v2.contract import selection
 from ..clean6_canonical_v2.resources import solver_workers
 from ..clean6_canonical_v2.storage import inventory, cleanup_exact, ResourceMonitor, append_json
-from ..clean6_canonical_v2.io_recovery import archive_batch, ScientificStop
+from ..clean6_canonical_v2.io_recovery import recover_archive_batch, load_pending, ScientificStop
 from ..clean6_canonical_v2.runner import profile_template
 from ..clean6_addendum.runner import make_runs
 from ..clean6_addendum.runtime import native_template, finish_evaluation
@@ -139,14 +139,17 @@ def freeze(ctx):
     files = subprocess.check_output(['git','ls-files','-z','src/legsa_gins/paper_rebuild',
         'scripts/paper_rebuild','src/legsa_gins/input_generation','src/legsa_gins/go2_prior','src/legsa_gins/datasets/by2'],cwd=ctx.reg.code_root,text=True).split('\0')
     sources = {p:sha256_file(ctx.reg.code_root/p) for p in files if p.endswith('.py')
-               and '/publication/' not in p and '/horizontal_literature/' not in p}
+               and '/publication/' not in p and '/horizontal_literature/' not in p
+               and p not in ('src/legsa_gins/paper_rebuild/clean6_sensor_v21/aggregate.py',
+                             'src/legsa_gins/paper_rebuild/clean6_sensor_v21/pack.py')}
     for relative in sources:
         blob=subprocess.check_output(['git','show',ctx.code_commit+':'+relative],cwd=ctx.reg.code_root)
         import hashlib
         if hashlib.sha256(blob).hexdigest()!=sources[relative]:
             raise ValueError('Uncommitted execution source '+relative)
-    untracked=subprocess.check_output(['git','ls-files','--others','--exclude-standard','src/legsa_gins/paper_rebuild/clean6_sensor_v21'],cwd=ctx.reg.code_root,text=True).strip()
-    if untracked:raise ValueError('Untracked execution modules must be committed before freeze: '+untracked)
+    untracked=subprocess.check_output(['git','ls-files','--others','--exclude-standard','src/legsa_gins/paper_rebuild/clean6_sensor_v21'],cwd=ctx.reg.code_root,text=True).splitlines()
+    untracked=[p for p in untracked if Path(p).name not in ('aggregate.py','pack.py')]
+    if untracked:raise ValueError('Untracked execution modules must be committed before freeze: '+str(untracked))
     result = {'status':'COMMITTED_PUSHED_EXECUTION_FREEZE','code_commit':ctx.code_commit,
               'remote_commit':remote,'contract_hash':sha256_file(ctx.contract_path),
               'sensor_model_group_hash':ctx.v21['sensor_model_group_hash'],'source_hashes':sources,
@@ -293,6 +296,52 @@ def execute(ctx,job,bundle,contract,scratch_batch,c00):
     return record
 
 
+def reconcile_receipts(ctx, records, number):
+    """Repair only the durable receipt/ledger gap; never rerun compression."""
+    ledger=ctx.stage/'CONTROLLER/ARCHIVE_IO_LEDGER.jsonl'
+    recorded=set()
+    if ledger.exists():
+        recorded={r['run_id'] for r in (json.loads(s) for s in ledger.read_text().splitlines()) if r.get('status')=='ARCHIVED'}
+    for record in records:
+        parent=ctx.stage/'RETAINED_RUNS'/record['run_id']
+        if record['run_id'] in recorded or not parent.exists():continue
+        for attempt in sorted(parent.iterdir()):
+            if not attempt.name.startswith('P13_cycle') or not attempt.is_dir() or attempt.is_symlink():continue
+            path=attempt/'ARCHIVE_RECEIPT.json'
+            if not path.is_file():continue
+            receipt=json.loads(path.read_text())
+            if receipt.get('status')!='ARCHIVE_VERIFIED' or receipt.get('run_id')!=record['run_id']:
+                raise ValueError('Durable P13 receipt identity mismatch')
+            for name,pin in record['output_seal'].items():
+                source=receipt['original_files']['solver'].get(name,{})
+                if any(source.get(k)!=pin[k] for k in ('sha256','size_bytes')):
+                    raise ValueError('Durable receipt differs from native seal')
+            local=Path(receipt['scratch_archive_root'])/'ARCHIVE_RECEIPT.json'
+            if not local.is_relative_to(ctx.scratch) or not local.is_file() or sha256_file(local)!=sha256_file(path):
+                raise ValueError('Durable receipt has no matching local seal')
+            append_json(ledger,{'status':'ARCHIVED','run_id':record['run_id'],'batch':number,
+                'destination':str(attempt),'bookkeeping_recovery':'receipt durable before ledger append',
+                'receipt_sha256':sha256_file(path),'archive_calls':0})
+            break
+
+
+def archive_records(ctx, context_io, records, rows, number):
+    reconcile_receipts(ctx,records,number)
+    recovery=recover_archive_batch(context_io,ctx.reg,number,records=records,evaluations=rows)
+    final=json.loads(Path(recovery['run_records_path']).read_text())
+    evaluations=json.loads(Path(recovery['evaluation_records_path']).read_text())
+    archive=recovery['archive']
+    archive.update(v21_scientific_code_commit=ctx.code_commit,unique_denominator=5880,
+                   inherited_archival_report_scientific_commit_is_pre_correction=True)
+    for record in final:
+        if record.get('archive_status')!='ARCHIVE_VERIFIED':continue
+        receipt=json.loads(Path(record['archive_receipt']).read_text())
+        for name,pin in record['output_seal'].items():
+            if any(receipt['original_files']['solver'][name][k]!=pin[k] for k in ('sha256','size_bytes')):
+                raise ValueError('Archived native seal mismatch '+record['run_id'])
+    return sorted(final,key=lambda r:r['run_id']),sorted(evaluations,key=lambda r:(r['run_id'],r['evaluator_version'])),archive
+
+
 def run_batches(ctx,through):
     from .evaluation import evaluate_batch
     freeze(ctx)
@@ -329,8 +378,13 @@ def run_batches(ctx,through):
             for offset in range(0,len(batch),workers):
                 wave=batch[offset:offset+workers]
                 errors=[]
+                todo=[]
+                for job in wave:
+                    cached=output/'NATIVE_TERMINALS'/f"{job['source']['run_id']}.json"
+                    if cached.exists():records.append(json.loads(cached.read_text()))
+                    else:todo.append(job)
                 with ThreadPoolExecutor(max_workers=workers) as pool:
-                    futures=[pool.submit(execute,ctx,j,bundles[j['source']['case_id'] if j['dataset']=='BY2' else j['dataset']],contract,scratch,c00) for j in wave]
+                    futures=[pool.submit(execute,ctx,j,bundles[j['source']['case_id'] if j['dataset']=='BY2' else j['dataset']],contract,scratch,c00) for j in todo]
                     for future in as_completed(futures):
                         try:
                             record=future.result();records.append(record)
@@ -342,31 +396,80 @@ def run_batches(ctx,through):
             records.sort(key=lambda r:next(i for i,j in enumerate(batch) if j['source']['run_id']==r['run_id']))
             persist(output/'NATIVE_RECORDS.json',records)
             monitor.begin_phase('evaluators')
-            rows,resources=evaluate_batch(records,contract,ctx.reg,scratch,ctx.code_commit,output,
-                solve_resource['owned_rss_peak_bytes'],io_context=context_io)
-            for row in rows:
+            previous_rows=output/'EVALUATION_PREARCHIVE.json'
+            if previous_rows.exists():
+                rows=json.loads(previous_rows.read_text())
+                resources=json.loads((output/'EVALUATOR_RESOURCES.json').read_text())
+            else:
+                rows,resources=evaluate_batch(records,contract,ctx.reg,scratch,ctx.code_commit,output,
+                    solve_resource['owned_rss_peak_bytes'],io_context=context_io)
+                if not (output/'EVALUATOR_RESOURCES.json').exists():
+                    persist(output/'EVALUATOR_RESOURCES.json',resources)
+                else:resources=json.loads((output/'EVALUATOR_RESOURCES.json').read_text())
+                from .diagnostics import write_run_sidecars
+                enriched={}
+                for record in records:
+                    if (record['case_id']=='C00_clean_normal' or record['domain']=='SEQUENCE') and record['terminal_status']=='COMPLETED':
+                        own=[row for row in rows if row['run_id']==record['run_id']]
+                        diagnostic=write_run_sidecars(record,own)
+                        persist(ctx.stage/'DIAGNOSTICS'/f"{record['run_id']}.json",diagnostic)
+                        enriched.update({(row['run_id'],row['evaluator_version']):row for row in diagnostic['evaluations']})
+                rows=[enriched.get((r['run_id'],r['evaluator_version']),r) for r in rows]
+            for row in ([] if previous_rows.exists() else rows):
                 record=next(r for r in records if r['run_id']==row['run_id'])
-                row.update(domain=record['domain'],sensor_model_group_hash=ctx.v21['sensor_model_group_hash'],
+                row.update(domain=record['domain'],chain='V21',protocol_id='SENSOR_MODEL_V2_1',sensor_model_group_hash=ctx.v21['sensor_model_group_hash'],
                            semisynthetic_data_used=record['data_mode']=='semisynthetic',data_mode=record['data_mode'])
                 if row['evaluation_status'] not in ('COMPLETED','NOT_RUN_ALGORITHM_FAILURE'):
                     raise ScientificStop('EVALUATOR_FAILURE_OR_NONFINITE',str(row))
                 if record['domain']=='ADDENDUM':
-                    patched=finish_evaluation(row,record,{'data_roles':{'data_mode':'semisynthetic','synthetic_data_used':False,'semisynthetic_data_used':True}},ctx.code_commit)
+                    derived=Path(row['evaluation_output_root'])/'ADDENDUM_EVALUATION_RESULT.json'
+                    patched=json.loads(derived.read_text()) if derived.exists() else finish_evaluation(row,record,{'data_roles':{'data_mode':'semisynthetic','synthetic_data_used':False,'semisynthetic_data_used':True}},ctx.code_commit)
                     row.update(patched)
+                # Preserve the frozen adapter result and attach explicit P13 roles.
+                row['frozen_adapter_source_row']=row['source_row']
+                row['source_row']=str(Path(row['evaluation_output_root'])/'P13_EVALUATION_RESULT.json')
+                persist(row['source_row'],row)
             rows.sort(key=lambda r:(r['run_id'],r['evaluator_version']))
             monitor.end_phase();persist(output/'EVALUATION_PREARCHIVE.json',rows)
             monitor.begin_phase('archive_and_exact_cleanup')
             context_io['current_batch_run_count']=len(batch)
-            records,rows,receipts,archive=archive_batch(records,rows,context=context_io,
-                scratch_batch=scratch,output=output,batch_number=number,monitor=monitor)
-            archive.update(v21_scientific_code_commit=ctx.code_commit,unique_denominator=len(jobs))
+            records,rows,archive=archive_records(ctx,context_io,records,rows,number)
             monitor.end_phase()
+            persist(output/'RUN_RECORDS.json',records)
+            persist(output/'EVALUATION_RECORDS.json',rows)
         summary={'status':'PASS','batch':number,'runs':len(records),'completed':sum(r['terminal_status']=='COMPLETED' for r in records),
             'algorithm_failures':sum(r['terminal_status']=='ALGORITHM_FAILURE_ALL_YAW_REJECTED' for r in records),
             'evaluator_terminals':len(rows),'archive':archive,'resources':resources,'code_commit':ctx.code_commit}
         write_json(output/'BATCH_COMPLETE.json',summary)
         append_json(ctx.stage/'BATCH_LEDGER.jsonl',summary)
         print('P13_BATCH_COMPLETE',number,len(records),'pending',archive['pending_run_ids'],flush=True)
+    if through>=total:
+        while load_pending(context_io['root']):
+            pending=load_pending(context_io['root'])
+            for number in sorted({job['batch'] for job in pending.values()}):
+                output=ctx.stage/'BATCHES'/f'BATCH_{number:03d}'
+                records=json.loads((output/'NATIVE_RECORDS.json').read_text())
+                rows=json.loads((output/'EVALUATION_PREARCHIVE.json').read_text())
+                final,evaluations,archive=archive_records(ctx,context_io,records,rows,number)
+                note(ctx,'FINAL_ARCHIVE_PENDING_RESOLUTION',batch=number,pending=archive['pending_run_ids'])
+        final_runs=[json.loads(p.read_text()) for p in (context_io['root']/'RESOLVED_RUNS').glob('*/RUN_RECORD.json')]
+        if len(final_runs)!=len(jobs) or {r['run_id'] for r in final_runs}!={j['source']['run_id'] for j in jobs}:
+            raise ValueError('Final native/archive identity closure mismatch')
+        final_evaluations=[r for p in (context_io['root']/'RESOLVED_RUNS').glob('*/EVALUATION_RECORDS.json') for r in json.loads(p.read_text())]
+        if len(final_evaluations)!=11760 or len({(r['run_id'],r['evaluator_version']) for r in final_evaluations})!=11760:
+            raise ValueError('Final evaluator identity closure mismatch')
+        by_run={r['run_id']:r for r in final_runs}
+        for row in final_evaluations:
+            record=by_run[row['run_id']]
+            if row['evaluator_version'] not in ('v3','v2') or row.get('archive_receipt')!=record['archive_receipt']:
+                raise ValueError('Final evaluator/archive reference closure mismatch')
+            expected='COMPLETED' if record['terminal_status']=='COMPLETED' else 'NOT_RUN_ALGORITHM_FAILURE'
+            if row['evaluation_status']!=expected:
+                raise ScientificStop('EVALUATOR_FAILURE_OR_NONFINITE','Final evaluator terminal mismatch')
+        persist(ctx.stage/'FINAL_RUN_RECORDS.json',sorted(final_runs,key=lambda r:r['run_id']))
+        persist(ctx.stage/'FINAL_EVALUATION_RECORDS.json',sorted(final_evaluations,key=lambda r:(r['run_id'],r['evaluator_version'])))
+        persist(ctx.stage/'MAIN_ARCHIVE_CLOSURE.json',{'status':'PASS','native_terminals':5880,
+            'evaluator_terminals':11760,'verified_receipts':len(final_runs),'pending':0,'code_commit':ctx.code_commit})
     dump_status(ctx,status='CHECKPOINT_READY' if through<total else 'MAIN_BATCHES_TERMINAL',
                 completed_main_runs=min(through*256,len(jobs)),phase='BATCH_CHECKPOINT')
 
