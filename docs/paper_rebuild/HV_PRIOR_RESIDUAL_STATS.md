@@ -1,3 +1,5 @@
+> 2026-09-13 人类修订：当前主诊断改为 Go2 roll/pitch + A1 yaw，见 [HV_PRIOR_A1_YAW_DIAGNOSTIC.md](HV_PRIOR_A1_YAW_DIAGNOSTIC.md)。下文为原冻结 provider 对照记录，数值保留；不能将其作为 A1 yaw 旋转的标定量。
+
 # P-11a：冻结腿部速度先验的免真值残差统计
 
 2026-09-13。状态：`COMPUTED_FROZEN_PROVIDER_STATISTICS_HUMAN_DECISION_PENDING`。计算起点 `a012fbf0d0bcf0dd0abc1bd5775906232f2e521c`，新增统计脚本的完整 SHA-256 见末节。零 trace 读取、零求解器、零评估器、零 provider 生成；不修改合约、既有 provider、参数、v1 决定规则或 Outcome。参数采用与否留待人类。
