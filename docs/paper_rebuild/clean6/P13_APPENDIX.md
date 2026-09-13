@@ -9,7 +9,7 @@ The identity bridge uses unchanged CAL C00 inputs and std=1.5 with both binaries
 ## Validation definitions fixed before providers
 
 - HV residual reproduction uses the inverse-scaled new provider, retaining exact P-11b samples and statistics; final scaled residuals are reported separately.
-- GNSS source hashes remain fixed. New nominal and case tables preserve non-yaw_std tokens against their corresponding unchanged/injected reference. The yaw_std column is set to 2.933193 on every row. A frozen fault handler that changes yaw_std is logged explicitly and its scientific effect retained in a separately declared field only if needed; no conflict may be silently masked.
+- GNSS source hashes remain fixed. New nominal and case tables preserve non-yaw_std tokens against their corresponding unchanged/injected reference. Every nominal yaw_std token is 2.933193. Frozen fault handlers are then applied in their original order: a registered yaw_std multiplier (including D28) multiplies this new nominal value in the actual injected yaw_std column. The gate compares against the same frozen handler applied to the nominal v2.1 table, rather than erasing the registered fault to enforce a constant injected column.
 - Existing frozen_parameter_hash is unchanged. SENSOR_MODEL_V21 is separately hashed as three correction groups; runtime/provider diffs remain explicit.
 - Case-specific injected A1 determines HV rotation/support. Fully absent A1 makes all HV invalid; missing source Go2 validity is never promoted.
 - F01 sampling is C00 plus 49 non-C00 core cases ordered by SHA256 of P13_F01|case_id; the contract contains all fifty identities. Its seven scientific output files are compared to the original full-file seals, never to downsampled substitutes.
@@ -27,3 +27,9 @@ Contract preparation only at this entry: provider, solver, evaluator and plottin
 ## Binary build implementation
 
 The implementation stores BINARY_FREEZE.json beside the bridge evidence at 01_BINARY_BRIDGE/BINARY_FREEZE.json; the controller resolves this path instead of the initial 00_PREREGISTRATION label. This changes bookkeeping only. Independent read-only review passed the sole native source change and bridge implementation before launch.
+
+## Binary bridge and provider implementation freeze
+
+At code commit ca73cb1fb48a020fd2a450d79e520562c34eeb24, the bridge completed 22 native calls and passed all 44 full NAV/STD comparisons across C00 and eleven profiles. The old executable SHA256 is 9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f; the new executable SHA256 is 96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c. Provider and evaluator calls in the bridge are zero.
+
+The provider implementation passed independent read-only review and 17 focused tests before real provider generation. Eight downstream adapter tests also passed without provider, native or evaluator execution. These implementation checks do not replace the pending real three-sequence residual gates.
