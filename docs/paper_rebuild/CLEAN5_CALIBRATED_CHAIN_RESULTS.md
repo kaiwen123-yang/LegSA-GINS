@@ -431,3 +431,6 @@ BY2O 航向对 IMU 积分约定的敏感性仍为 open item；原 V2→V2is 同�
 | RC | 08_AGGREGATE/CALIBRATED_CHAIN_ROBUSTNESS_CHECK.csv | 20 | 77211ce62a1ef3f05e9cf25585578a3735803cc62499bc322ae6cde0ca0b0cb9 |
 
 复核方法：先比对双 seal 的 SHA256 和 files_sha256，再用 UTF-8-sig CSV reader 读取上表；物理行号从表头后一行开始，跨行引号字段按 CSV reader.line_num 跟踪。本记录每项数值是来源字段原 token，不舍入；逐行核对身份键、指标名和 token。主指标 47 行、一致性 30 行、body 30 行、pairwise 四指标投影 36 行、BY2O 分段 50 行、稳健性 20 行、模型 3 行；终态/计数表各 15 行。不存在指标重算或原始观测/trace 内容读入。
+
+
+> Reference terminology erratum (2026-09-13): the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit). This annotation supersedes the reference-origin wording in the retained historical text; numerical evidence and historical decisions are unchanged. See `docs/paper_rebuild/REFERENCE_WORDING_ERRATUM_20260913.md`.

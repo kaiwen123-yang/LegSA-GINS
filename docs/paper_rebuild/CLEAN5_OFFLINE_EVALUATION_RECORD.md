@@ -1185,3 +1185,6 @@ Source: `<CLEAN_ROOT>/stages/CLEAN5_DECISION/A04_F04_DECISION_INPUTS.json`; SHA-
   "reference_payload_read_count": 0
 }
 ```
+
+
+> Reference terminology erratum (2026-09-13): the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit). This annotation supersedes the reference-origin wording in the retained historical text; numerical evidence and historical decisions are unchanged. See `docs/paper_rebuild/REFERENCE_WORDING_ERRATUM_20260913.md`.

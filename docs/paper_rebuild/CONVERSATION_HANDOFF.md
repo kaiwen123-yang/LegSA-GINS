@@ -18,23 +18,25 @@ file overrides `AGENTS.md`; it only records paper-phase decisions and task owner
 
 P-09c protocol v2 full execution, both frozen aggregates, v1/v2 comparison and validated handoff are complete: 5973 native terminals (5869 COMPLETED; 104 ALGORITHM_FAILURE_ALL_YAW_REJECTED), 11946 v3/v2 evaluator terminal records, archive pending 0. Scientific code `737a0fb5a4a5418500824855b89b0d25af69824a`; archive I/O code `ea478eea88aaf9739823dfc152fa108dd17f8d0c`. Original native reuse=33; native/evaluator repeat calls=0. Sequence/C00 gate PASS 182/182 (P-06 105/105; P-07 CAL C00 77/77).
 
-The manuscript adopts completed protocol v2; v1 remains the original preregistered record. Method identity A04 and its existing Outcome are unchanged. Full factual record: `docs/paper_rebuild/P09C_PROTOCOL_V2_FINAL.md`; source tables `<CANONICAL541_V2_ROOT>/13_AGGREGATE/v3/` and `/v2/`.
+The manuscript adopts completed protocol v2; v1 remains the original preregistered record. The manuscript proposed method is F04 (AB1111) by the 2026-09-13 human decision; the v1 A04 decision and its existing Outcome are unchanged. Full factual record: `docs/paper_rebuild/P09C_PROTOCOL_V2_FINAL.md`; source tables `<CANONICAL541_V2_ROOT>/13_AGGREGATE/v3/` and `/v2/`.
 
 | Manuscript label | Registry id | Role |
 |---|---|---|
 | Single | `F01` = `single_antenna_EKF` | baseline (position + receiver velocity, no yaw) |
 | Dual-basic | `F02` = `basic_dual_yaw_EKF` | baseline (dual yaw only, fixed 1.5 deg std) |
 | Backbone | `F03` = `A02` = `AB0000` | proposed method without RD/RP/HV/SA; ablation row only, never a "strong baseline" |
-| Core | `A04` = `AB1011` | proposed method (Source-Aware disabled) |
-| Full | `F04` = `A01` = `AB1111` | protection extension (Source-Aware enabled) |
+| Core / no-SA | `A04` = `AB1011` | v1 pre-registered decision, retained as ablation |
+| Full / Proposed | `F04` = `A01` = `AB1111` | manuscript proposed method under protocol v2 |
 
 The graduation-design algorithm (`final_v23`, the backbone) has never been published;
 the manuscript still adds one sentence declaring reuse of graduation-design material,
 as TIM requests for thesis material.
 
-Proposed-method identity: `A04`, decided 2026-09-08 by
+Historical v1 proposed-method identity: `A04`, decided 2026-09-08 by
 `docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md` (rule commit: `b9f9a44f288966c95961f7a15564b2b57bf07b65`;
 evidence commit: `09caf1e7e6151f18cc25dafad4a7ef5704ae62d2`).
+
+Current manuscript statement: [PROTOCOL_V2_METHOD_STATEMENT.md](PROTOCOL_V2_METHOD_STATEMENT.md). Human decision: F04 under protocol v2; ablation ladder F01→F02→F03→A04→F04.
 
 ## 3. Comparison structure
 
@@ -42,14 +44,12 @@ Batch-8 archive recovery repeated zero solver/evaluator calls. Previously unexec
 
 Protocol v2 full-matrix comparison status: PASS. P-06 sequence anchors passed 105/105 and P-07 CAL C00 eleven configurations passed 77/77. Full factual record: `docs/paper_rebuild/P09C_PROTOCOL_V2_FINAL.md`; source tables `<CANONICAL541_V2_ROOT>/13_AGGREGATE/v3/` and `/v2/`. The full comparison retains every frozen MAINTAINED / FLIPPED / INCOMPLETE classification.
 
-- Comparison tables/figures (with external methods): Single, Dual-basic, proposed
-  (plus the other candidate as "+/- Source-Aware" where space allows).
-- Ablation table/figure: Dual-basic -> Backbone -> +RD -> +RP/HV -> +SA, all from the
-  frozen Canonical-541 tables (541 x 11 unique configurations).
+- Comparison tables/figures: F01, F02, proposed F04, plus A04 as no-SA ablation. Horizontal LegSA rows use v2-chain C00 F04/A04 and evaluator v3; external methods without compatible IMU-point NAV remain explicitly `Not comparable` (不可比).
+- Ablation table/figure: F01→F02→F03→A04→F04, with module-isolating A03/A05/A06/A07/A08/A09 rows. Frozen 541-core and separately pre-registered A1/A2 tables remain separate.
 - Delta convention everywhere: candidate - reference, negative is better; always report
   mean, median, and case win rate together.
-- Reference label inside figures follows AGENTS section 13 (`Truth`); prose carries the
-  same-source caveat. Risk noted for a metrology journal; the human owns this choice.
+- Reference label inside figures follows AGENTS section 13 (`Truth`); prose states:
+  the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit).
 
 ## 4. Planned stages and naming
 
@@ -60,7 +60,8 @@ P-09d A1/A2 final status: `PASS_ADDENDUM_FAMILIES_A1_A2_COMPLETE`; A1 27 cases, 
 | Same-day poor-heading run | `BY2H`, `CLEAN5_BY2H_NATURAL_POOR_HEADING_SEQUENCE`; status: `EVALUATED` |
 | Same-day single-antenna occlusion run | `BY2O`, `CLEAN5_BY2O_NATURAL_SINGLE_ANTENNA_OCCLUSION_SEQUENCE`; status: `EVALUATED` |
 | C00 input-parity experiment (A04 fed 5 Hz GNSS1 HPPOSECEF; EXT05C single-receiver IEKF) | `CLEAN5_BY2_C00_INPUT_PARITY_A04_5HZ_HPPOSECEF` |
-| Publication figures | `CLEAN6_PUBLICATION_FIGURES/01_CANONICAL541`, `.../02_HORIZONTAL` |
+| Publication figures | `CLEAN6_PUBLICATION_FIGURES/figures/v2`; byte-identical v1 archive at `figures/v1_prereg` |
+| Addendum A1/A2 | `CLEAN6_ADDENDUM_FAMILIES_A1_A2`; D61=27 cases, D62=18 cases, 495 unique runs; separate `13_AGGREGATE_ADDENDUM/{v3,v2}` |
 
 Rules for BY2H/BY2O: BY2-frozen parameters, own yaw physical gate, occlusion window
 defined from input-side flags before evaluation, no Canonical matrix rerun, no tuning.
@@ -69,18 +70,22 @@ defined from input-side flags before evaluation, no Canonical matrix rerun, no t
 
 | Conversation | Owner | Scope | Status |
 |---|---|---|---|
-| A | Claude (matrix-figure conversation) | derived tables (A04 vs F03 / F02, F04 vs F02, bootstrap CI, stratified Wilcoxon, bias/random decomposition), publication plotting common layer, Canonical-541 figures, captions, this file | common layer + BY2 draft figures rendered; waiting for BY2H/BY2O |
-| B | new conversation | horizontal publication figures FIG02/FIG03 (FIG04 supplementary), reuses A's common layer | common layer available (src/legsa_gins/paper_rebuild/publication/) |
-| C | Codex / execution conversation | BY2H, BY2O, input-parity runs and evaluation | generalization complete, stage 2/3 pending |
-| D | new conversation | yaw uncertainty budget, consistency diagnostic, bias/precision wording | after A's decomposition |
-| E | new conversation | manuscript | last |
+| A | Claude (matrix-figure conversation) | derived tables (A04 vs F03 / F02, F04 vs F02, bootstrap CI, stratified Wilcoxon, bias/random decomposition), publication plotting common layer, Canonical-541 figures, captions, this file | v1 BY2 figures retained; P-10 v2 rendering and visual QA pending final figure delivery |
+| B | new conversation | horizontal publication figures FIG02/FIG03 (FIG04 supplementary), reuses A's common layer | P-10 FIG01–FIG04 code ready; actual render/visual QA pending |
+| C | Codex / execution conversation | BY2H, BY2O, input-parity runs and evaluation | BY2H/BY2O, stage 2 and calibrated-chain execution complete; P-09c and A1/A2 scientific execution complete |
+| D | subsequent conversation | uncertainty inputs listed in §7; preserve frozen inputs and distinguish manufacturer specification from derived diagnostics | pending |
+| E | subsequent conversation | two manuscript narratives: GPS Solutions and TIM; proposed F04 under protocol v2 | pending |
 | F | new conversation | clean submission repository, data/code release | last |
+
+Current handoff work: P-09d/P-10 implementation and publication package; the exact terminal record and figure index supersede stale waiting-for-sequence task status. New baseline EXT06 (Luo et al., single-antenna InEKF + leg odometry, no radar) is assigned to a subsequent conversation, not executed here.
 
 ## 6. Data handoff locations
 
 P-09d combined data handoff: `<HANDOFF_ROOT>/c541_v2_handoff_v3.zip` (`handoff_root` in ignored local config), SHA-256 `79e75f7d867a4930dc80c0f906173b48aab1bec6a5caac44b63bae993a848dd3`, 601520239 bytes, 9712 ZIP members; full CRC/member-hash validation PASS, 608 base members preserved. Delivery record: `docs/paper_rebuild/clean6/ADDENDUM_HANDOFF_V3.md`. All new handoff packages are on the project G: handoff root.
 
 P-09d A1/A2 final status: `PASS_ADDENDUM_FAMILIES_A1_A2_COMPLETE`; A1 27 cases, A2 18 cases, 11 configurations, 495 native COMPLETED and v3/v2 each 495 COMPLETED. Failures, repeats, core calls and archive pending are 0. Source: `<CLEAN_ROOT>/stages/CLEAN6_ADDENDUM_FAMILIES_A1_A2/13_AGGREGATE_ADDENDUM/{v3,v2}`; full report: `ADDENDUM_FAMILIES_A1_A2_RESULTS.md`. H1/H2/H3 both versions: `PARTIALLY_SUPPORTED` / `SUPPORTED` / `OBSERVED_SOME_SEED_HARM`. Core tables stay separate and unchanged.
+
+All new handoff packages go to `<HANDOFF_ROOT>` under the project G: root, never the WSL home directory. Existing earlier ZIPs are at `<CLEAN_ROOT>/stages/CLEAN6_PUBLICATION_FIGURES/`; historical home-path records below are retained as history.
 
 - P-09c completed under the 2026-09-12 human decision. P-09c protocol v2 full execution, both frozen aggregates, v1/v2 comparison and validated handoff are complete: 5973 native terminals (5869 COMPLETED; 104 ALGORITHM_FAILURE_ALL_YAW_REJECTED), 11946 v3/v2 evaluator terminal records, archive pending 0. Scientific code `737a0fb5a4a5418500824855b89b0d25af69824a`; archive I/O code `ea478eea88aaf9739823dfc152fa108dd17f8d0c`. Original native reuse=33; native/evaluator repeat calls=0. Sequence/C00 gate PASS 182/182 (P-06 105/105; P-07 CAL C00 77/77). The original role-validation stop, batch-8 archive interruption and missing historical evaluation seal remain preserved as historical records. RUN_01963 received the explicitly accepted current post-hoc seal; historical_full_file_seal_available=false. Its completed archive is identified by resolved rows; the original partial archive is retained.
 
@@ -154,6 +159,10 @@ P-09d A1/A2 final status: `PASS_ADDENDUM_FAMILIES_A1_A2_COMPLETE`; A1 27 cases, 
 
 ## 7. Open items
 
+- [ ] D: carry the 0.205 s timing offset, 0.178 m half-baseline, PVT−trace vertical-velocity difference 0.043 m/s (derived diagnostic), consistency ratios, frozen calibrated vrw/abstd and c listed below, and the supplied Vision-RTK 2 nominal 0.4° at 1 m specification with explicit 0.35 m baseline conversion/assumptions. These are uncertainty-budget inputs, not a new accuracy claim.
+- [ ] E: prepare both GPS Solutions and TIM narratives using the protocol v2 F04 statement, all favorable/unfavorable addendum results and explicit finite/failure denominators.
+- [ ] EXT06: Luo et al., single-antenna InEKF + leg odometry without radar; source/reproduction/admission work belongs to a subsequent conversation. No EXT06 execution or admission is claimed here.
+
 - [x] Decision-rule file committed; hash recorded above.
 - [x] AGENTS section 12b (Canonical-541 publication figures) inserted.
 - [x] Stale tracked docs (ACTIVE_CONTEXT, NEXT_STAGE_INSTRUCTIONS, GINav/Hartley BLOCKED reports) synchronised before BY2H/BY2O run.
@@ -198,3 +207,5 @@ P-09d A1/A2 final status: `PASS_ADDENDUM_FAMILIES_A1_A2_COMPLETE`; A1 27 cases, 
 - 2026-09-10 (C): V-CHK V6 PASS_BY_HUMAN_AMENDMENT; P-07 complete at execution contract 3326a9cbd50d80156fe46309cd1ee5336b5a3c3b and code 24cc761e4085561888a9d8546df8b89300d340fe: 61 cases / 480 excluded, NOT_TRANSFERABLE=[], CAL 669 completed / 2 failed and V2S 663 / 8, no retries; v2/v3 evaluations 2664 completed / 20 unavailable; six hash-only checkpoints 22/22 and provider/solver forbidden opens 0, evaluator trace once per call in child only; main pair/version items 23 maintained / 13 flipped / 24 incomplete, HUMAN_DECISION_REQUIRED, no full rerun; 295 subset capture consistency false retained and GINav horizontal v3 UNAVAILABLE_EVALUATION_FAILED; full tables, decision original, horizontal v3, seals and diagnostics in CLEAN5_DEGRADATION_SUBSET_RESULTS.md; AGENTS §§11/18 updated, gyro-z input check registered but unexecuted, original main chain and Outcome unchanged.
 
 - 2026-09-11 (P-09c): preregistration 56ae6021 / fcf3558f, code freeze b26569185638fabdd2ad121fc25cf784d5a8fdb3. Stopped after 33 solver terminals: 11 COMPLETED + 22 FAILED_TECHNICAL (missing runtime_role in outer validator); native exit 0 for all33, 182/182 byte-anchor checks matched, sequence gate FAIL. No remaining pilot solver, evaluator, aggregate, archive, cleanup or science retry. Full pilot/forecast/zip UNAVAILABLE; both scene roots retained.
+
+- 2026-09-13 (Codex, P-09d/P-10): A1/A2 completed and sealed with 495 native / 990 evaluator terminals, zero failures/retries/core calls/pending; result and combined-package record committed at `dd50a2cd6d876dc71ccfbf37d127122ead46c323`. The 2026-09-13 human decision names F04 under protocol v2, with A04 retained as the v1 pre-registered decision and an ablation. Method statement and 19-file/29-occurrence reference-wording correction are registered; frozen contracts, rule/Outcome and v1 figures retain their bytes. Actual v2 figure rendering follows this documentation commit.

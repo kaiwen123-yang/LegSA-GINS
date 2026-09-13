@@ -104,3 +104,6 @@ Paths below are relative to `<CODE_ROOT>`. SHA-256 values identify the source re
 | `src/legsa_gins/paper_rebuild/clean5_sequence/raw_lock.py` | `61fe1b98a2eca7ca24c92918b125cc87e1f6e63ffbfecfd9db30541324dfd3fb` |
 | `src/legsa_gins/paper_rebuild/clean5_sequence/probes.py` | `99d4cf4ad19f0ad03a984ced81e67870a559da612ee6398aca3759d60540de33` |
 | `cpp/legsa_v23_port_core/src/config/port_config_loader.cpp` | `36d380d4f6db066768b53236ef1b2d2bb17cfca9178390623e81cc313a8d4703` |
+
+
+> Reference terminology erratum (2026-09-13): the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit). This annotation supersedes the reference-origin wording in the retained historical text; numerical evidence and historical decisions are unchanged. See `docs/paper_rebuild/REFERENCE_WORDING_ERRATUM_20260913.md`.

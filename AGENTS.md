@@ -100,6 +100,8 @@ The local branch may be ahead of GitHub. Never reset the local worktree to `main
 
 Machine-local absolute paths belong in the ignored local YAML. Do not hard-code them into shared Python or C++ source.
 
+P-09d/P-10 aliases: `<ADDENDUM_ROOT> = <CLEAN_ROOT>/stages/CLEAN6_ADDENDUM_FAMILIES_A1_A2`; `<PUBLICATION_ROOT> = <CLEAN_ROOT>/stages/CLEAN6_PUBLICATION_FIGURES`; `<HANDOFF_ROOT>` resolves through ignored local key `handoff_root`. The addendum scratch directory resolves through `addendum_a1_a2_scratch`.
+
 If the local active branch contains unpushed commits and the remote branch is stale, do not add an unrelated documentation commit directly to that stale remote branch. Use a separate documentation branch or let the human push the complete local history.
 
 ---
@@ -310,11 +312,13 @@ Trace is evaluation-only. Never use it for solver input, provider selection, fra
 
 Use wrap-safe yaw residuals. Never choose antenna order, ±90 deg transform, yaw sign, frame, time offset, or constant bias from RMSE.
 
-The reference is Fixposition-derived and not independent ground truth. This limitation belongs in manuscript prose and claim boundaries. For publication graphics, the human requires visible labels `Truth` or `Truth Trajectory`; do not place “same-source reference” wording inside the figure itself.
+The reference is Fixposition-derived and not independent ground truth. This limitation belongs in manuscript prose and claim boundaries. For publication graphics, the human requires visible labels `Truth` or `Truth Trajectory`; do not place “the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit)” wording inside the figure itself.
 
 ---
 
 ## 7. Internal method identities and current interpretation
+
+Human decision (2026-09-13): manuscript proposed method: F04 under protocol v2; A04 = v1 pre-registered decision, retained as ablation. The ablation ladder is F01→F02→F03→A04→F04. Primary evaluation point: v3. Full statement and exact frozen rows: `docs/paper_rebuild/PROTOCOL_V2_METHOD_STATEMENT.md`.
 
 ### Addendum families A1/A2 anchors
 
@@ -356,26 +360,26 @@ Protocol v2 CAL C00 anchors, primary evaluator v3, window 66–340 s. Values are
 F01 = single-antenna EKF
 F02 = basic dual-yaw EKF
 F03 = strong dual-yaw EKF = AB0000
-A04 = AB1011 = no Source-Aware; current core candidate
-F04 = AB1111 = Full; current quality-mismatch/tail-protection extension
+A04 = AB1011 = no Source-Aware; v1 pre-registered decision retained as ablation
+F04 = AB1111 = Full; manuscript proposed method under protocol v2
 ```
 
 Current manuscript role:
 
 ```text
 A04:
-core and leading main-method candidate
+v1 pre-registered decision (2026-09-08), retained as no-SA ablation
 
 F04:
-quality-mismatch and tail-protection extension
+protocol v2 proposed method (human decision, 2026-09-13)
 
 final manuscript identity:
-A04 (decided by pre-registered rule, 2026-09-08)
+F04 (AB1111); v1 rule text and A04 Outcome unchanged
 ```
 
 Do not claim Full universally dominates Strong or A04. Do not claim Source-Aware is nominal-silent/fault-active; clean touch rate is about 84.8%.
 
-Current formal full-C00 anchors:
+Historical protocol v1 full-C00 anchors (unchanged):
 
 ```text
 F02: H / 3D / yaw = 0.355526 m / 0.893102 m / 2.338427 deg
@@ -753,8 +757,8 @@ unsupported fields:               130
 ```
 
 Most unsupported fields are velocity-error or velocity-calibration metrics
-for which the selected same-source reference does not provide a suitable
-reference velocity. Unsupported fields remain `NA`; never convert them to
+for which the declared receiver reference does not provide a suitable
+reference velocity. Reference description: the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit). Unsupported fields remain `NA`; never convert them to
 zero.
 
 Uncertainty results use diagonal `KF_GINS_STD.txt` fields:
@@ -765,7 +769,7 @@ not full-covariance NEES
 ```
 
 The predicted STD values are generally overconfident relative to the
-same-source reference. No integrity or calibrated-confidence claim is
+declared receiver reference (the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit)). No integrity or calibrated-confidence claim is
 allowed from these diagonal results.
 
 Recovery-time fields remain `NA` where no frozen recovery rule or
@@ -773,6 +777,8 @@ identifiable event window exists. Do not invent a threshold after seeing
 the results.
 
 ### 7A.10 Canonical-541 claim boundary
+
+Historical v1 interpretation below is retained as recorded. Current manuscript authority is the 2026-09-13 human decision in §7: F04 under protocol v2; A04 remains the v1 decision and an ablation.
 
 Allowed:
 
@@ -825,6 +831,8 @@ documentation task may rerun the Canonical numerical chain.
 
 ## 8. Horizontal comparison registry
 
+Protocol v2 publication uses frozen v3 evaluation-point rows; LegSA rows are the v2-chain C00 F04 and A04. External methods without compatible IMU-point NAV/v3 evidence remain visible as `Not comparable` (不可比), with method-native information structure retained. Missing comparable NAV is not a zero error and does not remove the method from the registry.
+
 Horizontal root:
 
 ```text
@@ -870,6 +878,8 @@ Do not add another horizontal method by default. The present technical-route cov
 ---
 
 ## 9. Raw dual-antenna evidence boundaries
+
+Raw-layer outputs remain method-native diagnostics. Their presence in the figure registry does not create v3 navigation-point comparability. The v2 package lists unavailable/non-comparable external rows explicitly.
 
 Use method-native state names. Do not flatten them into a shared “fix success” rate.
 
@@ -997,6 +1007,8 @@ Do not automatically repeat the full 541 × 11 matrix on another dataset.
 
 ## 12. Current publication-figure task
 
+P-10 (2026-09-13) carries the four registered composites below into `<PUBLICATION_ROOT>/figures/v2/` as FIG01–FIG04. No prior rendered `15_HORIZONTAL_PUBLICATION_FIGURES` directory was present at the P-10 source check. FIG02 uses compatible frozen v3 rows and the protocol v2 C00 F04/A04 rows. FIG01/FIG03/FIG04 retain their information-layer, native raw and observability roles; native diagnostics are not re-labelled as v3 navigation accuracy. The original task boundaries below are historical; the separate P-10 instruction also authorizes the matrix/addendum figure package.
+
 The active horizontal publication task contains exactly four composite figures:
 
 ```text
@@ -1042,6 +1054,8 @@ Do not spend time globally cleaning their automatic dashboard templates as part 
 
 ## 12b. Canonical-541 publication-figure task (authorized 2026-09-04)
 
+P-10 authorizes the protocol v2 MFIG00–MFIG22 series, SFIG01–SFIG02, and the four horizontal composites registered in §12. The proposed-method label is F04. Output is `<PUBLICATION_ROOT>/figures/v2/`; the byte-identical copy of the eight existing v1 composites is at `figures/v1_prereg/`, with their original registered root retained. New figures consume the combined v3 handoff package and exact source-row hashes; historical v1 exports remain unchanged.
+
 A second publication-figure task is authorized alongside Section 12. It builds the
 manuscript figures for the Canonical-541 matrix and the internal ablation from frozen
 results only.
@@ -1072,8 +1086,7 @@ mismatch is fail-closed.
 
 Manuscript identities: Single (F01), Dual-basic (F02), Backbone (F03 = AB0000, an
 ablation row of the proposed method, never labelled a strong baseline), Core (A04),
-Full (F04). The proposed-method identity remains provisional until
-`docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md` is executed on BY2H and BY2O.
+Full (F04). The protocol v2 proposed method is F04 by the 2026-09-13 human decision; the executed v1 rule and A04 Outcome remain unchanged.
 
 Output root:
 
@@ -1137,7 +1150,7 @@ Truth
 Truth Trajectory
 ```
 
-Do not place `same-source reference`, `Fixposition-derived reference`, `not independent ground truth`, or their Chinese equivalents inside the figure. The human controls that explanation in manuscript prose.
+Do not place `the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit)`, `Fixposition-derived reference`, `not independent ground truth`, or their Chinese equivalents inside the figure. The human controls that explanation in manuscript prose.
 
 Figure-specific boundaries:
 
@@ -1266,6 +1279,8 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 P-09d combined data handoff: `<HANDOFF_ROOT>/c541_v2_handoff_v3.zip` (`handoff_root` in ignored local config), SHA-256 `79e75f7d867a4930dc80c0f906173b48aab1bec6a5caac44b63bae993a848dd3`, 601520239 bytes, 9712 ZIP members; full CRC/member-hash validation PASS, 608 base members preserved. Delivery record: `docs/paper_rebuild/clean6/ADDENDUM_HANDOFF_V3.md`. All new handoff packages are on the project G: handoff root.
 
 P-09d A1/A2 is complete: 495 native and 990 evaluator terminals COMPLETED, failure/retry/core-call/archive-pending counts 0; independent aggregates and full record are linked from §7. Exact cleanup removed 47,565 files / 65,698,307,966 bytes; scratch files 0. The original technical-stop, interruption and resource scopes remain preserved.
+
+Current manuscript method: F04 (AB1111), protocol v2, primary evaluator v3. A04 remains the v1 pre-registered decision and an ablation row. P-09d A1/A2 and P-10 publication work are explicitly authorized by the 2026-09-13 instruction. All new handoff ZIPs use `<HANDOFF_ROOT>` (the project handoff directory resolved by ignored local config). Method/reference wording: `PROTOCOL_V2_METHOD_STATEMENT.md` and `REFERENCE_WORDING_ERRATUM_20260913.md`.
 
 P-09c protocol v2 full execution, both frozen aggregates, v1/v2 comparison and validated handoff are complete: 5973 native terminals (5869 COMPLETED; 104 ALGORITHM_FAILURE_ALL_YAW_REJECTED), 11946 v3/v2 evaluator terminal records, archive pending 0. Scientific code `737a0fb5a4a5418500824855b89b0d25af69824a`; archive I/O code `ea478eea88aaf9739823dfc152fa108dd17f8d0c`. Original native reuse=33; native/evaluator repeat calls=0. Sequence/C00 gate PASS 182/182 (P-06 105/105; P-07 CAL C00 77/77). The original role-validation stop, batch-8 archive interruption and missing historical evaluation seal remain preserved as historical records. RUN_01963 received the explicitly accepted current post-hoc seal; historical_full_file_seal_available=false. Its completed archive is identified by resolved rows; the original partial archive is retained. All encountered bookkeeping repairs are collected in the final report notes table.
 

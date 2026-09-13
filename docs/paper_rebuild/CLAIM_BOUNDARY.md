@@ -15,7 +15,7 @@
 - State that raw hashes, provider lineage, and forbidden-input fields are required by contract.
 - State implementation, test, build, or clean-smoke completion only when the current clean artifact directly proves it.
 - Describe source-aware weighting as a bounded protection/interpretability mechanism and Go2 priors as weak auxiliary observations.
-- Report BY2 clean-normal descriptive metrics relative to the Fixposition-derived same-source reference after the V2 evidence audit passes, with the mounting/point caveat and without an independent-ground-truth claim.
+- Report BY2 clean-normal descriptive metrics relative to the declared receiver reference after the V2 evidence audit passes, with the mounting/point caveat and without an independent-ground-truth claim.
 
 ## Not Allowed Until Fresh Clean Evidence Exists
 
@@ -30,7 +30,7 @@
 
 - Go2 position, velocity, yaw, contact, or pose as truth.
 - Trace online use, trace-selected sign/offset, or trace-based tuning.
-- Calling the Fixposition-derived same-source reference independent or absolute ground truth, or omitting the position mounting/point caveat.
+- Calling the declared receiver reference independent or absolute ground truth, or omitting the position mounting/point caveat.
 - final_v23 or LegSA output as solver input.
 - Output substitution, direct NAV overwrite, output-only correction, or deletion of bad epochs for metrics.
 - Receiver IMU relabeled as Go2 body IMU.
@@ -38,3 +38,5 @@
 - selected-feedback, QA-fallback, or multi-state-QM main-innovation claims for `LegSA_Paper_V1`.
 
 The root `CLAIM_BOUNDARY.md` points here. Legacy claim text is history only.
+
+Reference description (2026-09-13): the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit).

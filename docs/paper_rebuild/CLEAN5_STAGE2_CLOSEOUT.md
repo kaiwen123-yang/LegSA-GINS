@@ -546,3 +546,6 @@ BY2O 的 V2→V2is 同时改变 IMU 积分端点约定与加速度计标度；�
 文档投影计数：parity 指标 58 行，分解 37+9+18 行，敏感性指标/一致性各 18 行，模型 3 行、lag 21 行、window 12 行，主链/标定/外部指标 47 行，标定一致性 30 行，robustness 20 行，v3 body 44 行，RV 原始差异 1 行。物理 CSV 行号按 header 后起算并保留跨行引号字段计数；每项数值只复制来源行 token，不舍入、不重算。
 
 封存验证入口与 hash：`K/04_CALIBRATED_SEAL/CALIBRATED_OUTPUT_SEAL.json` SHA256 `c28973484cd4e6d457e893c3c3df8b375a0656949fa8c0a36fbb45691b7b469d`；`K/04_CALIBRATED_SEAL/EVALUATION_ARTIFACT_SEAL.json` SHA256 `2cf31c0611d83c2f0ff9f35c138004db491b09760e81680b1ccdbbf3db5131db`。原始文件、原失败和各阶段 frozen CSV 均不改写；新 package 的内容与 SHA 由独立 pack 记录报告。
+
+
+> Reference terminology erratum (2026-09-13): the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit). This annotation supersedes the reference-origin wording in the retained historical text; numerical evidence and historical decisions are unchanged. See `docs/paper_rebuild/REFERENCE_WORDING_ERRATUM_20260913.md`.

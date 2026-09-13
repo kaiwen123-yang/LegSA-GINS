@@ -26,3 +26,6 @@ extrinsic search, and every reference-relative metric are
 `NOT_EVALUATED_AFTER_H1_LINEAGE_CONTRADICTION`. Absolute-yaw RMSE and absolute
 global-position RMSE remain JSON `null`. LSE01 is not complete,
 `ready_for_ext06=false`, and EXT06 was not executed.
+
+
+> Reference terminology erratum (2026-09-13): the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit). This annotation supersedes the reference-origin wording in the retained historical text; numerical evidence and historical decisions are unchanged. See `docs/paper_rebuild/REFERENCE_WORDING_ERRATUM_20260913.md`.
