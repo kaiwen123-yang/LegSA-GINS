@@ -33,3 +33,13 @@ The implementation stores BINARY_FREEZE.json beside the bridge evidence at 01_BI
 At code commit ca73cb1fb48a020fd2a450d79e520562c34eeb24, the bridge completed 22 native calls and passed all 44 full NAV/STD comparisons across C00 and eleven profiles. The old executable SHA256 is 9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f; the new executable SHA256 is 96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c. Provider and evaluator calls in the bridge are zero.
 
 The provider implementation passed independent read-only review and 17 focused tests before real provider generation. Eight downstream adapter tests also passed without provider, native or evaluator execution. These implementation checks do not replace the pending real three-sequence residual gates.
+
+## Three-sequence real provider gate
+Provider commit: d01f2be8fb0ef1633d4871ec57b0e6d4e9de44a7. Raw PRE checkpoint: 22/22 PASS. Provider access audit: zero forbidden opens, zero raw writes, zero writes outside the owned output root.
+| Sequence | HV matched n | Inverse-k sigma (m/s) | Final scaled sigma (m/s) | Corrected static pitch mean (deg) | Statistics compared | Maximum absolute difference |
+|---|---:|---:|---:|---:|---:|---:|
+| BY2 | 16968 | 0.13283767493317 | 0.131450299108858 | -0.444112110441446 | 183 | 8.3266726846886741e-17 |
+| BY2H | 17558 | 0.210120538793595 | 0.211255196456088 | -0.420844093009067 | 183 | 2.7755575615628914e-17 |
+| BY2O | 23022 | 0.106398459795671 | 0.103633801029819 | -0.412028739877216 | 233 | 1.1102230246251565e-16 |
+
+All three residual gates pass 1e-6. Nominal 15/18-column GNSS non-yaw_std token equality and all-2.933193 yaw_std gates pass for 1510/1483/2231 rows. All three IMU and RD hashes match their frozen V2s pins. Scaled residuals are reported separately from the inverse-k reproduction gate.
