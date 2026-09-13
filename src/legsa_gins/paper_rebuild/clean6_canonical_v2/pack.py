@@ -481,10 +481,23 @@ def pack(stage, output_zip, *, package_dir=None):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--stage-root", required=True)
-    parser.add_argument("--output", default=str(Path.home() / "c541_v2_handoff.zip"))
+    parser.add_argument("--stage-root")
+    parser.add_argument("--output", required=True)
     parser.add_argument("--package-dir")
+    parser.add_argument("--base-package")
+    parser.add_argument("--addendum-root")
+    parser.add_argument("--clean-root")
+    parser.add_argument("--code-root", default=str(Path(__file__).resolve().parents[4]))
     args = parser.parse_args(argv)
-    result = pack(args.stage_root, args.output, package_dir=args.package_dir)
+    if args.addendum_root:
+        if not args.base_package or not args.clean_root:
+            parser.error('--addendum-root requires --base-package and --clean-root')
+        from .addendum_pack import pack_combined
+        result = pack_combined(args.base_package, args.addendum_root, args.clean_root,
+                              args.code_root, args.output, package_dir=args.package_dir)
+    else:
+        if not args.stage_root:
+            parser.error('--stage-root is required for a core-only package')
+        result = pack(args.stage_root, args.output, package_dir=args.package_dir)
     print(json.dumps(result, ensure_ascii=False, sort_keys=True), flush=True)
     return 0
