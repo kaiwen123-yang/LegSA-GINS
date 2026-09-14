@@ -256,3 +256,12 @@ Native batch archive failures remain zero; the failed handoff attempt is
 recorded separately. The aggregate code commit and later package code commit
 are retained as separate identities. This is a human-authorized bookkeeping
 continuation, with no new scientific stopping condition.
+
+## Figure export resources
+
+The v2.1 figure export uses eight worker processes and one numerical thread
+per process on the observed 25197436928-byte-memory host. This is a plotting
+resource setting only; all 28 registered figures, source selectors, scales,
+frozen values and visual checks are retained. The completed data ZIP is
+validated once by the plotting parent, with its verified identity passed to
+workers. Only the MFIG00 plotting child may read the hash-locked Truth trace.
