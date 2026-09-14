@@ -7,6 +7,8 @@ Outputs are exclusive (or exact sealed resume) below a caller-owned directory.
 from __future__ import annotations
 
 import argparse
+import gzip
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -21,6 +23,7 @@ from . import aggregate, diagnostics, downstream, pack
 STAGE = '<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21'
 CAL = '<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL'
 OLD_PACKAGE_SHA256 = '79e75f7d867a4930dc80c0f906173b48aab1bec6a5caac44b63bae993a848dd3'
+VCHK_OUTPUT_LEDGER_SHA256 = '90c20b32cbf8d6e9d607ddaa33777faf94a94bf17ed62f9821561a9c6658f0e2'
 # Exact P06 tables assigned for formal F01 reuse, never other-method fallback.
 F01_TABLES = {
     ('v2', 'segment_rows'): ('08_AGGREGATE/WINDOW_SEGMENT_SUMMARY.csv', 'b795772038ed1e8ca8116a2fd9ec5d7d9e2c95abce37c66cd1c5c44130c4ce6d'),
@@ -396,22 +399,74 @@ def _retained(record, name, pins):
     return str(pins.check(found[0]))
 
 
-def vchk_inputs(reg, records, evaluations, pins):
+def _vchk_diagnostic_sources(root, catalog, pins):
+    """Derived diagnostics belong to the producer output seal, not raw inputs."""
+    ledger_path = pins.add(root/'OUTPUT_SHA256.csv', VCHK_OUTPUT_LEDGER_SHA256,
+                           'VCHK_producer_output_ledger_newly_pinned_for_P13')
+    ledger = {}
+    for row in read_csv(ledger_path):
+        relative = pack.safe_member(row['relative_path'])
+        if relative in ledger:
+            raise ValueError('Duplicate VCHK producer output-seal member')
+        ledger[relative] = row
+    for source in catalog['diagnostics'].values():
+        path = Path(source)
+        if not path.is_absolute() or not path.is_relative_to(root):
+            raise ValueError('VCHK diagnostic path leaves its frozen producer root')
+        relative = pack.safe_member(path.relative_to(root).as_posix())
+        if relative not in ledger:
+            raise ValueError('VCHK diagnostic lacks a producer output pin: '+relative)
+        row = ledger[relative]
+        pins.add(path, row['sha256'], 'frozen_VCHK_input_diagnostics')
+        if path.stat().st_size != int(row['size_bytes']):
+            raise ValueError('VCHK diagnostic size differs from producer output seal')
+
+
+def _vchk_plain_manifest(record, source, metadata_root, pins):
+    """Supply the frozen reader an exact decompressed native JSON manifest."""
+    source = Path(source)
+    if source.suffix != '.gz':
+        return str(source)
+    if metadata_root is None:
+        raise ValueError('Compressed VCHK manifest requires an explicit metadata output root')
+    root = Path(metadata_root)
+    if not root.is_absolute() or '..' in root.parts or any(p.is_symlink() for p in (root, *root.parents)):
+        raise ValueError('Unsafe VCHK metadata output root')
+    dataset = record['dataset_id']
+    if dataset not in diagnostics.DATASETS:
+        raise ValueError('Unknown VCHK manifest dataset')
+    expected = record['output_seal']['RUN_MANIFEST.json']
+    payload = gzip.decompress(pins.check(source).read_bytes())
+    if len(payload) != expected['size_bytes'] or hashlib.sha256(payload).hexdigest() != expected['sha256']:
+        raise ValueError('VCHK decompressed manifest differs from original native seal')
+    target = root/dataset/'RUN_MANIFEST.json'
+    if any(p.is_symlink() for p in (target, *target.parents)):
+        raise ValueError('Unsafe VCHK manifest output path')
+    if target.exists():
+        if not target.is_file() or target.read_bytes() != payload:
+            raise ValueError('Preserve differing existing VCHK metadata copy')
+    else:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with target.open('xb') as stream:
+            stream.write(payload)
+    pins.add(target, expected['sha256'], 'lossless_native_manifest_metadata_copy')
+    return str(target)
+
+
+def vchk_inputs(reg, records, evaluations, pins, *, metadata_root=None):
     root = resolve(downstream.VCHK_ROOT, reg)
     for name, digest in downstream.VCHK_PINS.items():
         pins.add(root/name, digest, 'frozen_VCHK_definition')
     catalog = _json(root/'INPUT_CATALOG.json')
-    ledger = {str(resolve(row['path'], reg)): row['sha256'] for row in read_csv(root/'INPUT_HASH_LEDGER.csv')}
-    for source in catalog['diagnostics'].values():
-        path = resolve(source, reg)
-        pins.add(path, ledger[str(path)], 'frozen_VCHK_input_diagnostics')
+    _vchk_diagnostic_sources(root, catalog, pins)
     new = {}
     for dataset in diagnostics.DATASETS:
         record = next(r for r in records if diagnostics._natural(r) and r['dataset_id'] == dataset and r['method_id'] == 'A04')
         row = next(r for r in evaluations if r['run_id'] == record['run_id'] and r['evaluator_version'] == 'v3')
         entry = dict(next(r for r in catalog['runs'] if (r['sequence'], r['method'], r['chain']) == (dataset, 'A04', 'CAL')))
+        manifest = _vchk_plain_manifest(record, _retained(record, 'RUN_MANIFEST.json', pins), metadata_root, pins)
         entry.update(error_series=str(pins.check(pack._series_path(row))),
-                     manifest=_retained(record, 'RUN_MANIFEST.json', pins),
+                     manifest=manifest,
                      gnss_update_trace=_retained(record, 'PORT_GNSS_UPDATE_TRACE.csv', pins),
                      evaluator_version='v3', original_catalog_evaluator_version='v2')
         new[dataset] = entry
@@ -485,7 +540,8 @@ def emit_diagnostics(stage, output, reg, v21, records, evaluations, down_evaluat
         emit('supplemental/SEQUENCE_QUALITY/'+dataset+'.csv', quality_rows(gnss), 'sequence_quality')
     residuals = residual_rows(_json(input_pins['p11b']['path']), _json(input_pins['p12']['path']), validations, input_pins=input_pins)
     emit('supplemental/V21/SENSOR_RESIDUALS.csv', residuals, 'sensor_residual_validation')
-    vchk = downstream.vchk_a04(reg, vchk_inputs(reg, records, evaluations, pins))
+    vchk = downstream.vchk_a04(reg, vchk_inputs(reg, records, evaluations, pins,
+        metadata_root=output/'VCHK_INPUT_METADATA'))
     vchk.update(new_evaluator_version='v3', old_catalog_evaluator_version='v2',
                 yaw_definition='Unchanged wrapped yaw error; v3 position lever transform does not alter yaw')
     emit('supplemental/V21/VCHK/A04_CHECK.json', vchk, 'vchk_a04')

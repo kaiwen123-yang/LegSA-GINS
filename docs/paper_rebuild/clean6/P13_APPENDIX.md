@@ -185,3 +185,32 @@ pin and role mappings (47 and 51 pins). Path-check calls are 50 to 4 and
 solvers or evaluators. The focused finalization/package/document tests pass
 39/39, including missing/symlinked consumed-file rejection, malformed member
 rejection, conflicting-pin rejection, and changed consumed-payload detection.
+
+## Finalization V-CHK bookkeeping continuation 02
+
+The metadata continuation at `eb70c2a30c45fd3146633dc932eb24a0cbecd5ca`
+completed the 5880 final/source record comparisons and receipt catalogues
+(5880 new, 21 downstream, 6468 baseline), then raised a KeyError before
+V-CHK statistics or aggregation. The three frozen INPUT_DIAGNOSTICS tables
+are derived outputs: their hashes belong to OUTPUT_SHA256.csv, not to the
+raw/input INPUT_HASH_LEDGER.csv. The adapter now checks those exact producer
+output rows, member paths, sizes and SHA-256 values. The four previously
+frozen V-CHK definition pins remain unchanged.
+
+OUTPUT_SHA256.csv is newly pinned for P-13 at
+`90c20b32cbf8d6e9d607ddaa33777faf94a94bf17ed62f9821561a9c6658f0e2`.
+This is a newly locked existing producer ledger, not a claimed previously
+published historical hash. No diagnostic value or historical file is changed.
+The frozen V-CHK manifest reader uses plain JSON; compressed retained native
+manifests are therefore copied losslessly to the finalization metadata child,
+requiring the original native manifest SHA-256 and byte size. Existing
+identical copies are reused; differing copies are preserved and rejected.
+
+Focused finalization/package/document tests pass 41/41. The actual three
+natural A04 inputs (RUN_00006, SEQUENCE_BY2H_A04, SEQUENCE_BY2O_A04) pass
+source seals, exact manifest decompression and the unchanged counter reader.
+The bounded proof is FINALIZATION_VCHK_ADAPTER_VALIDATION.json alongside
+the prior finalization freezes. Provider/native/evaluator calls are zero;
+the scientific source freeze, figures, rules and Outcome remain unchanged.
+Prior process records and partial diagnostic outputs are retained. This
+bookkeeping continuation is covered by the human conflict authorization.

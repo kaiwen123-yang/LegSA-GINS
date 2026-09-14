@@ -1,5 +1,8 @@
 """Synthetic-only finalization joins, source gates, and display schema tests."""
 import copy
+import csv
+import gzip
+import hashlib
 import json
 from pathlib import Path
 from types import SimpleNamespace
@@ -112,6 +115,47 @@ def test_metadata_capture_hashes_once_and_later_consumption_detects_change(tmp_p
     source.write_text('{"value": 2}')
     with pytest.raises(ValueError, match='input changed'):
         pins.check(source)
+
+
+def test_vchk_derived_diagnostics_use_output_seal_and_reject_changed_bytes(tmp_path, monkeypatch):
+    source = tmp_path/'INPUT_DIAGNOSTICS_BY2.csv'
+    source.write_text('bin_start_s,value\n1,2\n')
+    ledger = tmp_path/'OUTPUT_SHA256.csv'
+    with ledger.open('w', newline='') as stream:
+        writer = csv.DictWriter(stream, fieldnames=['relative_path', 'sha256', 'size_bytes'])
+        writer.writeheader()
+        writer.writerow({'relative_path': source.name, 'sha256': f.sha256_file(source),
+                         'size_bytes': source.stat().st_size})
+    monkeypatch.setattr(f, 'VCHK_OUTPUT_LEDGER_SHA256', f.sha256_file(ledger))
+    pins = f.Pins()
+    catalog = {'diagnostics': {'BY2': str(source)}}
+    f._vchk_diagnostic_sources(tmp_path, catalog, pins)
+    assert str(source) in pins.values
+    assert not (tmp_path/'INPUT_HASH_LEDGER.csv').exists()
+    source.write_text('bin_start_s,value\n1,3\n')
+    with pytest.raises(ValueError, match='input changed'):
+        f._vchk_diagnostic_sources(tmp_path, catalog, f.Pins())
+
+
+def test_vchk_manifest_copy_is_lossless_and_bound_to_original_native_seal(tmp_path):
+    payload = b'{\n  "counter": 17, "flag": true\n}\n'
+    source = tmp_path/'RUN_MANIFEST.json.gz'
+    source.write_bytes(gzip.compress(payload))
+    pins = f.Pins()
+    pins.add(source, f.sha256_file(source), 'retained_file_producer_seal')
+    record = {'dataset_id': 'BY2', 'output_seal': {'RUN_MANIFEST.json': {
+        'sha256': hashlib.sha256(payload).hexdigest(), 'size_bytes': len(payload)}}}
+    root = tmp_path/'metadata'
+    target = Path(f._vchk_plain_manifest(record, source, root, pins))
+    assert target.read_bytes() == payload and pins.values[str(target)] == record['output_seal']['RUN_MANIFEST.json']['sha256']
+    assert f._vchk_plain_manifest(record, source, root, pins) == str(target)
+    wrong = copy.deepcopy(record)
+    wrong['output_seal']['RUN_MANIFEST.json']['sha256'] = 'a'*64
+    with pytest.raises(ValueError, match='original native seal'):
+        f._vchk_plain_manifest(wrong, source, root, pins)
+    target.write_bytes(b'changed')
+    with pytest.raises(ValueError, match='Preserve differing existing'):
+        f._vchk_plain_manifest(record, source, root, pins)
 
 
 def test_final_index_exact_match_binds_all_metrics_and_scalar_types_to_producer(tmp_path):
