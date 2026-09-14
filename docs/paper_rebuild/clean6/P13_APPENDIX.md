@@ -54,4 +54,92 @@ The P09c archive-only recovery functions are reused for every batch, including t
 
 Natural-sequence consistency, window segments and body-frame bias are computed from the completed full-rate evaluator errors and original full NAV/STD before rolling cleanup, using the unchanged P05/parity/sequence functions. Frozen evaluator JSON stays intact; P13 diagnostic and evaluation sidecars identify the corrected protocol and semisynthetic case roles. The existing frozen_parameter_hash function is unchanged and is applied to the final YAML including sequence transport. A same-CAL/variant reference separately shows the sole native sensor-field difference, basic_dual_yaw_fixed_std_deg; HV/RP corrections remain provider changes in the separately locked SENSOR_MODEL_V21 group.
 
-Main controller, provider, F01, evaluator scheduling, downstream adapter, aggregation and diagnostic unit checks total 60 passing tests before the main run. Real-data gates are reported separately above.
+Provider, F01, evaluator scheduling, downstream adapter, aggregation and diagnostic unit checks total 60 passing tests before the main run. Main-controller registry and recovery interfaces passed independent read-only review. Real-data gates are reported separately above.
+
+## First main batch: completed execution evidence
+
+`<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/BATCHES/BATCH_001/BATCH_COMPLETE.json`
+has SHA-256 `4d81be9255ef998e29c778c84900a1778b32dcb55931520a807598231d2177da`.
+It records 256 completed native runs, 512 completed evaluator terminals, zero
+algorithm failures, 256 verified archives, and zero pending archives. The
+evaluator pool was 22 and evaluator repeat calls were zero. This is one completed
+batch out of 23; it is not a main-matrix completion statement.
+
+The first-batch resource log contains 1,067 samples over 3,126.36970731 seconds.
+Its sampled owned-process RSS peak is 4,897,312,768 bytes. Sampled filesystem
+growth peaks are 34,722,717,696 bytes for scratch and 7,247,495,168 bytes for G;
+the final sampled scratch growth is 29,401,088 bytes. Filesystem figures measure
+whole-filesystem changes from this batch's baseline, not exclusive process I/O.
+These measurements do not include the preceding binary bridge or F01 audit.
+
+`NATURAL_DIAGNOSTICS_ARCHIVE_CHECK.json` in the same batch directory has SHA-256
+`5a34012e53c7440bcd1c3532e805cd4a35dacb5ced167a851034c13590073133`.
+After cleanup, all 30 natural-run diagnostic payloads matched their archived
+producer seals: 60 evaluation rows, 240 consistency rows, 560 window rows and
+60 body-frame rows across v3/v2. This check performed no provider, native,
+evaluator or metric-recomputation call.
+
+Before v2.1 rendering, all 124 v2 figure files and all 30 v1 preserved files
+matched the original figure-package member pins, including the three MFIG21
+exports. The evidence is
+`<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/FIGURE_PREPARATION/PRESERVED_EDITIONS_PRE.json`.
+The v2.1 figure packer separately requires exactly 28 registered figures and
+84 exports, rejects an MFIG21 subtree, and rechecks the preserved editions.
+
+## Failure-time-series presentation adapter
+
+Before any real v2.1 packaging or rendering, code review found that the new
+failure-series manifest did not expose the evaluation-status column consumed
+by the nonzero-failure plot branch. The unexecuted packaging/presentation
+adapter now records the native-to-evaluation terminal mapping, domain and
+source identity. MFIG14 selects the first current CORE F04 failure by the
+existing sorted-case rule and binds its same-case new F02 control by run,
+dataset, case, method, effective configuration, status and protocol. Both
+archive members must come from the corrected chain. No old native timeline is
+used. A missing selected timeline is shown as `UNAVAILABLE` with the sealed
+failure count; it does not authorize selecting a different case. The zero-
+failure statement is explicitly limited to the 541-case core. This validation
+and presentation repair changes no scientific run, evaluator, decision rule or
+Outcome. Fifteen publication tests and thirteen pack tests passed, including
+nonzero and mixed-domain failures, recovered old cases, stale control sources
+and missing first-case timelines. Independent read-only review passed.
+
+## Batch-3 cleanup accounting audit
+
+Read-only inspection of the existing batch-3 records found 22,582 deleted
+files: 11,931 original files and 10,651 prepared files. Their ledger contains
+45,164 durable DELETE_INTENT/DELETED entries. The existing per-item hash,
+intent, deletion and completion checkpoints continue unchanged. This audit
+performed no new timing experiment, ptrace, scientific call or cleanup action.
+
+## Real failure-timeline metadata check
+
+Within sealed batch 5, BY2/D14_seed_04 has F04 RUN_01346/AB1111 with
+ALGORITHM_FAILURE_ALL_YAW_REJECTED and F02 RUN_01344/basic_dual_yaw_EKF with
+COMPLETED. Both v2/v3 evaluation terminals follow those native classifications.
+Each retained PORT_GNSS_UPDATE_TRACE.csv.gz has 1,369 finite, monotonic time
+rows. F02 has NORMAL=273 and NONE=1,096; F04 has REJECT=273 and NONE=1,096.
+The compressed SHA-256 values are respectively
+`b30890b4abb95c0ee0f66745dcda78e3bce40117ac8da63fab4dc28bcc8b650f`
+and `a1928fa3484b73addfb2f1fccea2725a067e01e5b1b5884a63f0bec5366119d3`.
+Producer rows, independent receipt references, compressed pins and decompressed
+native seals matched. This check is scoped to batch 5 and does not declare the
+final matrix's first failure. It generated no figure, package or aggregate and
+invoked no provider, native solver or evaluator.
+
+## Checkpoint-export validation
+
+The execution-record exporter uses canonical JSON comparison after indexing
+run and evaluator identities, preserving the distinction between boolean,
+integer and floating-point values. It binds every native record and batch's
+v2.1 execution identity to the independently hashed EXECUTION_FREEZE at
+`521901f0347e367281abed23b46686b84df86055`. Inherited archival and mathematical
+source commits remain separately labeled. Cleanup accounting requires both
+complete INTENT and DELETED inventories to equal receipt-original plus
+prepared-plan inventories by path, size and SHA-256. Optional accounting that
+cannot be proven is explicitly UNAVAILABLE.
+
+These three bookkeeping checks were tightened during source review before the
+first formal checkpoint export. They change no scientific call or stopping
+condition. The exporter writes only after the requested batch checkpoint is
+closed; its source SHA and complete metadata input pins accompany each export.
