@@ -291,7 +291,8 @@ def _changes(rows):
     selected = [row for row in rows if row['evaluator_version'] == 'v3' and row['method_id'] in PROFILES]
     groups = [
         ('C00 and three-sequence changes — v3', [r for r in selected if r['scope'] == 'CASE' and
-            r['statistic'] == 'value' and r['metric_name'] in metrics]),
+            r['statistic'] == 'value' and r['metric_name'] in metrics and
+            (r['dataset_id'] in ('BY2H', 'BY2O') or r['family_or_case'] == 'C00_clean_normal')]),
         ('D05, D06, A1/D61 and A2/D62 changes — v3', [r for r in selected if r['scope'] == 'DEGRADATION' and
             r['statistic'] == 'median' and r['degradation_id'] in ('D05', 'D06', 'D61', 'D62') and
             r['metric_name'] in (*metrics, 'fault_window_horizontal_rmse_m')]),

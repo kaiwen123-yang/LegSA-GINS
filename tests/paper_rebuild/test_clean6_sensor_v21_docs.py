@@ -68,12 +68,16 @@ def test_change_tables_project_sealed_tokens_and_keep_unavailable_pairs():
                   v2_value='', v21_value='', v21_minus_v2='', paired_finite_count='0',
                   availability='UNAVAILABLE', _csv_row='84')
     excluded = dict(case, evaluator_version='v2', v2_value='EXCLUDED_PARALLEL_TOKEN')
-    text = d._changes([case, outage, excluded])
+    injected_case = dict(case, family_or_case='D05_injected_case', v2_value='EXCLUDED_INJECTED_CASE_TOKEN')
+    other_sequence = dict(case, dataset_id='BY2H', family_or_case='BY2H_natural', v2_value='INCLUDED_BY2H_TOKEN')
+    text = d._changes([case, outage, excluded, injected_case, other_sequence])
     for token in ('0.10000000000000001', '0.20000000000000004',
                   '0.10000000000000003', 'C00_clean_normal', 'UNAVAILABLE',
                   'outage_end_horizontal_error_m', '| 42 |', '| 84 |'):
         assert token in text
     assert 'EXCLUDED_PARALLEL_TOKEN' not in text
+    assert 'EXCLUDED_INJECTED_CASE_TOKEN' not in text
+    assert 'INCLUDED_BY2H_TOKEN' in text
 
 
 def csv_bytes(rows):

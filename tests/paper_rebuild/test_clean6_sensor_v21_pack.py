@@ -37,9 +37,10 @@ def test_lossless_full_table_gzip_and_publication_package_reader(tmp_path):
         p.PackageWriter(writer.path, synthetic=True)
 
 
-def test_10hz_uses_time_bins_and_preserves_every_column_and_original_numeric_tokens(tmp_path):
+@pytest.mark.parametrize('bom', ['', '\ufeff'])
+def test_10hz_uses_time_bins_and_preserves_every_column_and_original_numeric_tokens(tmp_path, bom):
     source = tmp_path/'errors.csv'
-    source.write_text('time,err_n_m,diagnostic_extra\n0.005,1.000000,9\n0.025,2.0,8\n0.099,3.0,7\n0.100,4.000,6\n0.140,5.0,5\n0.201,6.000000,4\n')
+    source.write_text(bom+'time,err_n_m,diagnostic_extra\n0.005,1.000000,9\n0.025,2.0,8\n0.099,3.0,7\n0.100,4.000,6\n0.140,5.0,5\n0.201,6.000000,4\n')
     writer = p.PackageWriter(tmp_path/'curves.zip', synthetic=True)
     result = p.display_series(writer, source, 'error/r.csv.gz', sha(source), source_protocol=p.PROTOCOL, run_id='r')
     close(writer)

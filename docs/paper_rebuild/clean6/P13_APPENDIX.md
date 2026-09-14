@@ -214,3 +214,45 @@ the prior finalization freezes. Provider/native/evaluator calls are zero;
 the scientific source freeze, figures, rules and Outcome remain unchanged.
 Prior process records and partial diagnostic outputs are retained. This
 bookkeeping continuation is covered by the human conflict authorization.
+
+## Final-report projection scope
+
+The document generator's C00/three-sequence subsection originally selected
+every CASE row from the complete comparison CSV, including injected matrix
+cases. Its document-only selector now retains C00/BY2, BY2H and BY2O there;
+family and duration subsections retain their existing selectors. The complete
+comparison CSV, all scientific rows, metrics, deltas and hypotheses remain
+unchanged. Original CSV tokens and row references are preserved. The bounded
+document tests pass 12/12, including a controlled-case exclusion and a BY2H
+inclusion check. This affects only the later report generator; it is not
+imported by the running finalizer, solver or evaluator.
+
+## Package-only continuation after UTF-8 BOM handling
+
+The finalizer at `f9e3d82f614a803a20cb4934f36687fa3e1ffdc6` completed
+all aggregate tables and their full seal, V-CHK and robustness statistics,
+and the final source-pin ledger. Its handoff writer then rejected the first
+new display curve because the frozen evaluator's UTF-8 BOM was interpreted
+as part of the `time` header. This is a display-reader encoding error; the
+completed evaluator files and scientific metrics are unchanged.
+
+The package reader now uses UTF-8-SIG, consuming only an optional leading
+encoding marker. It retains every data column and selected numeric token,
+with the same first-existing-epoch 0.1 s bins and original CSV row mapping.
+Six actual v2/v3 streams (ADD_RUN_00002, RUN_00006, SEQUENCE_BY2H_A04)
+pass complete selected-token and row-map comparison. Full/kept row counts
+are 56642/2740 for each BY2 stream and 58580/2700 for each BY2H stream.
+Focused tests pass 45/45. Package progress is reported every 100 curves.
+
+The incomplete handoff is preserved byte-for-byte as
+`<HANDOFF_ROOT>/c541_v21_handoff.incomplete_bom_attempt01.zip`; its hash,
+size and member count are recorded in
+`<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/30_PACKAGE_CONTINUATION/PRE.json`.
+The continuation consumes the explicitly SHA-pinned completed source ledger
+and aggregate seal, verifies consumed inputs and formal identity, and invokes
+only the exclusive ZIP builder. It does not repeat source-record catalogue
+scans, diagnostics, bootstrap aggregation, providers, solvers or evaluators.
+Native batch archive failures remain zero; the failed handoff attempt is
+recorded separately. The aggregate code commit and later package code commit
+are retained as separate identities. This is a human-authorized bookkeeping
+continuation, with no new scientific stopping condition.

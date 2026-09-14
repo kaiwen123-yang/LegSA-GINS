@@ -272,7 +272,7 @@ def display_series(writer, source, member, expected_sha256, *, source_protocol, 
     with tempfile.TemporaryFile() as selected, tempfile.TemporaryFile() as mapping:
         with gzip.GzipFile(filename='', mode='wb', fileobj=selected, mtime=0) as gz:
             with io.TextIOWrapper(gz, encoding='utf-8', newline='') as out:
-                with opener(source, 'rt', encoding='utf-8', newline='') as stream:
+                with opener(source, 'rt', encoding='utf-8-sig', newline='') as stream:
                     reader = csv.reader(stream)
                     header = next(reader)
                     if len(header) != len(set(header)) or 'time' not in header:
@@ -556,6 +556,7 @@ def build_handoff(stage, output_zip, records, evaluations, *, source_pins,
                 raise ValueError('Evidence pin disagrees with catalog')
             writer.file(source, row['member'], row['sha256'], source_protocol='IMMUTABLE_PREREGISTRATION_OR_RESIDUAL_AUDIT')
         manifests = {'error_series_subset': [], 'addendum_error_series_subset': [], 'sequence_error_series_subset': []}
+        curve_count = 0
         for row in sorted(evaluations, key=lambda r: (r['evaluator_version'], r['run_id'])):
             if not curve_selector(row):
                 continue
@@ -586,6 +587,10 @@ def build_handoff(stage, output_zip, records, evaluations, *, source_pins,
                             source_protocol=source_protocol(source, row), run_id=row['run_id']))
             for prefix in prefixes:
                 manifests[prefix].append(dict(item))
+            curve_count += 1
+            if curve_count % 100 == 0:
+                print(json.dumps({'phase': 'PACKAGE_CURVES', 'completed': curve_count,
+                                  'last_run': row['run_id'], 'evaluator_version': row['evaluator_version']}), flush=True)
         for prefix, rows in manifests.items():
             writer.generated(prefix+'/SUBSET_MANIFEST.csv', _csv_bytes(rows))
             for version in VERSIONS:
