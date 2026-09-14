@@ -304,3 +304,13 @@ panel label (b). Its legend is moved into the empty upper-left area of
 panel (a), without changing data or axes. Only MFIG22 is re-exported;
 `FIGURE_PREPARATION/REPAIR03/` retains the preceding exports/root metadata
 and the before/after byte ledger for the other 27 figures.
+
+## Final documentation review scope
+
+The first document review applied the local-path check to the entire
+preserved AGENTS text and detected its existing historical local paths.
+No document was written. The corrected review checks newly inserted lines
+for local paths and separately requires exact preservation of all original
+section bodies and every section outside 7/11/18. Newly inserted local-path
+lines are zero. Existing frozen text is retained under its pre-correction
+markers; the numerical sources and document generator are unchanged.

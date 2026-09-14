@@ -318,6 +318,62 @@ The reference is Fixposition-derived and not independent ground truth. This limi
 
 ## 7. Internal method identities and current interpretation
 
+<!-- P13_SECTION_7_BEGIN -->
+### Protocol v2.1 current anchors (P-13)
+
+Current manuscript protocol: v2.1. F04 remains the proposed method; the v1 rule and A04 Outcome are unchanged. Primary evaluator: v3; v2 is parallel.
+
+| Sequence | Profile | Status | H RMSE (m) | 3D RMSE (m) | Up RMSE (m) | Yaw RMSE (deg) | Roll RMSE (deg) | Pitch RMSE (deg) | CSV row |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| BY2 | F02 | COMPLETED | 0.10193086285530993 | 0.11269262038758635 | 0.048059607649174926 | 2.3131754694996527 | 3.3382092245764645 | 2.918852028781131 | 2 |
+| BY2 | F03 | COMPLETED | 0.09919307794859032 | 0.11013793160092439 | 0.04786540780579205 | 2.250660249295421 | 3.3291820977434514 | 2.923446485452237 | 3 |
+| BY2 | F04 | COMPLETED | 0.09716199583877864 | 0.10881571662731311 | 0.04899394605194471 | 2.2211070025147257 | 2.254053976093779 | 2.2633582019083436 | 4 |
+| BY2 | A03 | COMPLETED | 0.09732041302814125 | 0.10869756330028135 | 0.048413814923538766 | 2.2090301507646393 | 2.253440585931212 | 2.2632130119301097 | 5 |
+| BY2 | A04 | COMPLETED | 0.09616685973422963 | 0.10839664016171717 | 0.05001766375197666 | 2.22360844484946 | 2.066601967091301 | 2.1396053708581535 | 6 |
+| BY2 | A05 | COMPLETED | 0.09789124513240088 | 0.10923369703914852 | 0.0484696265228925 | 2.2579230800811567 | 3.330586399014229 | 2.9238639927530827 | 7 |
+| BY2 | A06 | COMPLETED | 0.09825542533256626 | 0.1097912272228355 | 0.048989641433805076 | 2.224103947855017 | 2.25422161215289 | 2.263278546761912 | 8 |
+| BY2 | A07 | COMPLETED | 0.09911674040651422 | 0.11033189433397571 | 0.0484664696311919 | 2.260695738938855 | 3.330893141578931 | 2.9240352620142334 | 9 |
+| BY2 | A08 | COMPLETED | 0.09903075172575321 | 0.1106914749600939 | 0.04945212676390496 | 2.2593132413839867 | 3.3292873977318616 | 2.923219018869731 | 10 |
+| BY2 | A09 | COMPLETED | 0.09925543267175785 | 0.11018739966389386 | 0.04784999613200422 | 2.248764315320997 | 3.3293166284027964 | 2.9235984056315263 | 11 |
+| BY2H | A03 | COMPLETED | 0.068939219267719 | 0.0825261750110712 | 0.045364673576642374 | 1.768062843104732 | 1.9642618812485193 | 1.6980356895800854 | 12 |
+| BY2H | A04 | COMPLETED | 0.07017230953325597 | 0.08384840109553972 | 0.04589554816153109 | 1.7824851872621246 | 1.835168382951697 | 1.6592873174582772 | 13 |
+| BY2H | A05 | COMPLETED | 0.06801024807979977 | 0.08150639185702768 | 0.044921020354344546 | 1.7739301906361205 | 2.781679345582052 | 1.8806505467534202 | 14 |
+| BY2H | A06 | COMPLETED | 0.06908916686863224 | 0.08264646740953738 | 0.04535554648192444 | 1.7743380988924626 | 1.963487186032263 | 1.6983218961084199 | 15 |
+| BY2H | A07 | COMPLETED | 0.06850155672421525 | 0.08191827143337015 | 0.044923712235192974 | 1.774520669051904 | 2.7806233381287315 | 1.8813180137868417 | 16 |
+| BY2H | A08 | COMPLETED | 0.06853546616127866 | 0.08221670982833543 | 0.045414504875127014 | 1.7758540488181764 | 2.7810460547430735 | 1.879863499327224 | 17 |
+| BY2H | A09 | COMPLETED | 0.06889270822020953 | 0.0822567201306383 | 0.04494399582519593 | 1.7627328257218304 | 2.7807822480443742 | 1.8812371683388185 | 18 |
+| BY2H | F02 | COMPLETED | 0.07063888091064825 | 0.08397461970937586 | 0.04540798673169235 | 1.6567572212082546 | 2.7837750386115134 | 1.8799417805283283 | 19 |
+| BY2H | F03 | COMPLETED | 0.06889414440320393 | 0.08223248246837273 | 0.04489741685065756 | 1.7640484726849452 | 2.781127084792018 | 1.8813001224077461 | 20 |
+| BY2H | F04 | COMPLETED | 0.06855282395068205 | 0.08219724192687043 | 0.04535302535411786 | 1.773436559706182 | 1.963704160466064 | 1.6982671193113674 | 21 |
+| BY2O | A03 | COMPLETED | 0.05701069531318317 | 0.07321763295077699 | 0.04594129291630895 | 3.213744643444327 | 1.505574467754178 | 1.6962307935153256 | 22 |
+| BY2O | A04 | COMPLETED | 0.05642104424081327 | 0.07166108209524331 | 0.044181177596770684 | 3.188831733943275 | 1.4493535680834266 | 1.6792478396510406 | 23 |
+| BY2O | A05 | COMPLETED | 0.05648395151879894 | 0.07245331408188485 | 0.045376711452795065 | 3.1905238704844403 | 1.872754824475464 | 1.7382398811649729 | 24 |
+| BY2O | A06 | COMPLETED | 0.05790854742590718 | 0.07387160808779875 | 0.04586517869254179 | 3.194113001806082 | 1.5059000119082486 | 1.6960354796864674 | 25 |
+| BY2O | A07 | COMPLETED | 0.05731208785930977 | 0.07310336849060958 | 0.04538091085335998 | 3.187585327998862 | 1.872269867017242 | 1.7376240588860825 | 26 |
+| BY2O | A08 | COMPLETED | 0.057198769583016014 | 0.0719608586238077 | 0.04366538597178179 | 3.1701140175509566 | 1.8726066967916004 | 1.7379576589915084 | 27 |
+| BY2O | A09 | COMPLETED | 0.05726426166377618 | 0.07310806493209508 | 0.04544880080065924 | 3.2045094306884527 | 1.8708858828414452 | 1.7380053876729116 | 28 |
+| BY2O | F02 | COMPLETED | 0.05733296748353202 | 0.07362105267855322 | 0.0461843072593989 | 2.899741525819664 | 1.8741892051185538 | 1.736278656870533 | 29 |
+| BY2O | F03 | COMPLETED | 0.05721958446878508 | 0.07201252666057631 | 0.04372325638901775 | 3.199298927139811 | 1.870957628261041 | 1.738096829436202 | 30 |
+| BY2O | F04 | COMPLETED | 0.057041149159153724 | 0.0731928014290208 | 0.04586385814158297 | 3.197136492350906 | 1.5059072247937308 | 1.6961129933181778 | 31 |
+| BY2 | F01 | COMPLETED | 0.09177145533263088 | 0.10351109355664635 | 0.04788054380877193 | 8.089647422454789 | 3.3312964026882526 | 2.933247658474164 | 32 |
+| BY2H | F01 | COMPLETED | 0.06292589316025435 | 0.0773049305383686 | 0.04490416746278954 | 7.137487572272005 | 2.7849178101091736 | 1.8837935867303504 | 33 |
+| BY2O | F01 | COMPLETED | 0.06284210260933396 | 0.07656942024179673 | 0.043746385631304584 | 5.739037942642961 | 1.8638937566682607 | 1.7427301533457709 | 34 |
+
+`<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE_SEQUENCES/v3/UNIQUE_EVALUATION_RESULTS.csv`; SHA-256 `e26dfcd830d6c711ffbb7debd68293fbf7b7ea28240e16bce582381b61ea6a0b`
+
+Full factual report: `docs/paper_rebuild/P13_FINAL_REPORT.md`.
+
+数据包：`<HANDOFF_ROOT>/c541_v21_handoff.zip`; SHA-256 `98a77b4601b897956a6d87f5bfa92e008b584add35e48e2b22a9088ddec07585`
+
+新二进制 SHA-256：`96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c`；旧二进制：`9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f`。
+
+聚合来源 code_commit：`f9e3d82f614a803a20cb4934f36687fa3e1ffdc6`；文档准备 code_commit：`a2048cdeb52fb3b49e626970a1bc0b36219ca354`。
+<!-- P13_SECTION_7_END -->
+
+**pre-correction — original section text and numbers preserved.**
+
+<!-- P13_PRE_CORRECTION_SECTION_7_BEGIN -->
+
 Human decision (2026-09-13): manuscript proposed method: F04 under protocol v2; A04 = v1 pre-registered decision, retained as ablation. The ablation ladder is F01→F02→F03→A04→F04. Primary evaluation point: v3. Full statement and exact frozen rows: `docs/paper_rebuild/PROTOCOL_V2_METHOD_STATEMENT.md`.
 
 ### Addendum families A1/A2 anchors
@@ -457,6 +513,9 @@ Protocol v2 full-matrix key pairs, primary evaluator v3. Delta is candidate minu
 | full_vs_no_SA | yaw_p95_absolute_deg | -0.005057 | [-0.005057, -0.005057] | 78.56% | 527 | 77.08% | 541 |
 
 All 15 pairs, five primary/secondary metrics and both evaluator versions: [full tables](docs/paper_rebuild/clean6/P09C_PROTOCOL_V2_FINAL_KEY_PAIRS.csv). Frozen MAINTAINED / FLIPPED / INCOMPLETE classifications: [v1/v2 comparison](docs/paper_rebuild/clean6/P09C_PROTOCOL_V2_FINAL_V1_V2_COMPARISONS.csv).
+
+
+<!-- P13_PRE_CORRECTION_SECTION_7_END -->
 
 ## 7A. Canonical-541 detailed numerical results and interpretation
 
@@ -963,6 +1022,49 @@ Hartley does not provide legal absolute yaw RMSE or absolute position RMSE and m
 
 ## 11. Corrected Classic-18 and generalization
 
+<!-- P13_SECTION_11_BEGIN -->
+### Protocol v2.1 completed execution and diagnostics
+
+主链归档闭合：5880 新 native、11760 evaluator terminal slots、5880 已验证归档、pending=0。下游诊断：21 native、42 evaluator terminal slots、21 已验证归档、pending=0，九格原点诊断 `PASS`（按原记录报告，不作为额外停止条件）。正式核心每评估器 5951 行、附加族 495 行、三序列 33 行；三序列 BY2/C00 为同一组输出别名。完整 F01 正式复用 588 native，不计为新增主链求解。
+
+| Sequence | Gate | Max absolute difference | Compared statistics | Final scaled HV residual σ (m/s) |
+| --- | --- | --- | --- | --- |
+| BY2 | PASS_HV_RP_REPRODUCTION | 8.326672684688674e-17 | 183 | 0.13145029910885764 |
+| BY2H | PASS_HV_RP_REPRODUCTION | 2.7755575615628914e-17 | 183 | 0.21125519645608834 |
+| BY2O | PASS_HV_RP_REPRODUCTION | 1.1102230246251565e-16 | 233 | 0.10363380102981933 |
+
+F01 不变门：50/50 runs、350/350 完整文件；二进制桥接：44/44。三序列基础 GNSS15/18 非 yaw_std token 相同，yaw_std 全为 2.933193；注入表按原顺序保留预注册 yaw_std 倍乘，验证口径见 `docs/paper_rebuild/clean6/P13_APPENDIX.md`。IMU/RD 哈希门通过。
+
+| Evaluator | Profile | H7 | H8 | H9 | H10 | H11 |
+| --- | --- | --- | --- | --- | --- | --- |
+| v3 | F02 | NOT_SUPPORTED | UNCHANGED | NOT_SUPPORTED | PARTIALLY_SUPPORTED | REPORTED_NON_DIRECTIONAL |
+| v3 | F03 | NOT_SUPPORTED | NOT_SUPPORTED | NOT_SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v3 | F04 | NOT_SUPPORTED | SUPPORTED | SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v3 | A03 | INCOMPLETE | SUPPORTED | SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v3 | A04 | NOT_SUPPORTED | NOT_SUPPORTED | SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v3 | A05 | INCOMPLETE | SUPPORTED | SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v3 | A06 | INCOMPLETE | SUPPORTED | NOT_SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v3 | A07 | INCOMPLETE | SUPPORTED | NOT_SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v3 | A08 | INCOMPLETE | NOT_SUPPORTED | NOT_SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v3 | A09 | INCOMPLETE | SUPPORTED | NOT_SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v2 | F02 | NOT_SUPPORTED | UNCHANGED | NOT_SUPPORTED | PARTIALLY_SUPPORTED | REPORTED_NON_DIRECTIONAL |
+| v2 | F03 | NOT_SUPPORTED | NOT_SUPPORTED | NOT_SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v2 | F04 | NOT_SUPPORTED | SUPPORTED | SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v2 | A03 | INCOMPLETE | SUPPORTED | SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v2 | A04 | NOT_SUPPORTED | NOT_SUPPORTED | SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v2 | A05 | INCOMPLETE | SUPPORTED | SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v2 | A06 | INCOMPLETE | SUPPORTED | NOT_SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v2 | A07 | INCOMPLETE | SUPPORTED | NOT_SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v2 | A08 | INCOMPLETE | NOT_SUPPORTED | NOT_SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+| v2 | A09 | INCOMPLETE | SUPPORTED | NOT_SUPPORTED | PARTIALLY_SUPPORTED | INCOMPLETE |
+
+A04/F04 robustness and V-CHK A04 use the completed corrected chain without a new decision. Full family counts and all unavailable H7 entries: `docs/paper_rebuild/P13_FINAL_REPORT.md`.
+<!-- P13_SECTION_11_END -->
+
+**pre-correction — original section text and numbers preserved.**
+
+<!-- P13_PRE_CORRECTION_SECTION_11_BEGIN -->
+
 P-09d A1/A2 is complete: 495 native and 990 evaluator terminals COMPLETED, failure/retry/core-call/archive-pending counts 0; independent aggregates and full record are linked from §7. Exact cleanup removed 47,565 files / 65,698,307,966 bytes; scratch files 0. The original technical-stop, interruption and resource scopes remain preserved.
 
 Historical archive-only input check, before the 2026-09-12 human acceptance: the first seven batch ledgers and available batch-8 pins passed, but the missing RUN_01963 historical evaluation seal stopped that check. It invoked no new solver or evaluator. The accepted current post-hoc seal and completed continuation are recorded below.
@@ -1004,6 +1106,9 @@ P-07 corrected-chain degradation subset is complete: 61 mechanically selected ca
 Do not automatically repeat the full 541 × 11 matrix on another dataset.
 
 ---
+
+
+<!-- P13_PRE_CORRECTION_SECTION_11_END -->
 
 ## 12. Current publication-figure task
 
@@ -1278,6 +1383,26 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 
 ## 18. Current next actions
 
+<!-- P13_SECTION_18_BEGIN -->
+### Protocol v2.1 delivery state
+
+主链归档闭合：5880 新 native、11760 evaluator terminal slots、5880 已验证归档、pending=0。下游诊断：21 native、42 evaluator terminal slots、21 已验证归档、pending=0，九格原点诊断 `PASS`（按原记录报告，不作为额外停止条件）。正式核心每评估器 5951 行、附加族 495 行、三序列 33 行；三序列 BY2/C00 为同一组输出别名。完整 F01 正式复用 588 native，不计为新增主链求解。
+
+数据包：`<HANDOFF_ROOT>/c541_v21_handoff.zip`; SHA-256 `98a77b4601b897956a6d87f5bfa92e008b584add35e48e2b22a9088ddec07585`
+
+新二进制 SHA-256：`96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c`；旧二进制：`9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f`。
+
+聚合来源 code_commit：`f9e3d82f614a803a20cb4934f36687fa3e1ffdc6`；文档准备 code_commit：`a2048cdeb52fb3b49e626970a1bc0b36219ca354`。
+
+图包：`<HANDOFF_ROOT>/figures_v21_handoff.zip`; SHA-256 `20495ab65d1b7ae41a83de52aa34e80051b7154b45db4d5de63478a064e0c088`。v2.1 共 28 图、84 PNG/PDF/SVG 导出，已完成视觉核查；MFIG21 沿用原 v2 产物。
+
+Current references: `docs/paper_rebuild/P13_FINAL_REPORT.md` and `docs/paper_rebuild/PROTOCOL_V2_METHOD_STATEMENT.md`. Earlier protocol-v2 numbers below are pre-correction. The decision rule and Outcome remain unchanged.
+<!-- P13_SECTION_18_END -->
+
+**pre-correction — original section text and numbers preserved.**
+
+<!-- P13_PRE_CORRECTION_SECTION_18_BEGIN -->
+
 P-10 figure delivery is complete: 29 composites (8 reissued + 21 new; 2 supplementary as an overlapping role), 87 PNG/PDF/SVG exports, 29/29 visual PASS. Figure root `<PUBLICATION_ROOT>/figures/v2/`; index `FIGURE_INDEX.md` has GPS Solutions and TIM section columns. ZIP `<HANDOFF_ROOT>/figures_v2_handoff.zip`, SHA-256 `d304001f0f77818cef0604b3b790cc414649c06892d1a7963b1c0d7869c52a60`, 29063129 bytes. Full record: `docs/paper_rebuild/PROTOCOL_V2_FIGURE_DELIVERY.md`. v1 original/copy bytes remain unchanged; no new scientific execution.
 
 P-09d combined data handoff: `<HANDOFF_ROOT>/c541_v2_handoff_v3.zip` (`handoff_root` in ignored local config), SHA-256 `79e75f7d867a4930dc80c0f906173b48aab1bec6a5caac44b63bae993a848dd3`, 601520239 bytes, 9712 ZIP members; full CRC/member-hash validation PASS, 608 base members preserved. Delivery record: `docs/paper_rebuild/clean6/ADDENDUM_HANDOFF_V3.md`. All new handoff packages are on the project G: handoff root.
@@ -1309,3 +1434,5 @@ Current next actions:
 Stage 2 and the calibrated-chain execution are complete. Sources: `docs/paper_rebuild/CLEAN5_STAGE2_CLOSEOUT.md`, `docs/paper_rebuild/CLEAN5_CALIBRATED_CHAIN_RESULTS.md`, and `<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/`. The original v1 protocol remains a preregistered record; its Outcome is unchanged. The manuscript uses the completed v2 protocol tables.
 
 Do not restart Canonical-541, reselect horizontal literature algorithms, rerun GINav, reopen Hartley absolute-reference evaluation, or run corrected Classic-18 by default.
+
+<!-- P13_PRE_CORRECTION_SECTION_18_END -->
