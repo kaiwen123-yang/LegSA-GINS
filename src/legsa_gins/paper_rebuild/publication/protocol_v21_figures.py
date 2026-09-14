@@ -352,7 +352,7 @@ def mfig20(bundle):
             labels = paired.dataset_id.tolist()
             ax.set_ylim(bottom=0)
         else:
-            labels = [row.dataset_id + ('\nstanding' if row.window_id == 'BY2O_standing' else '\nfirst 1000')
+            labels = [row.dataset_id + ('\nstanding' if row.window_id == 'BY2O_standing' else '\nfirst\n1000')
                       for row in paired.itertuples()]
             ax.axhline(0, color='#555555', lw=.7)
         ax.set_xticks(x, labels)

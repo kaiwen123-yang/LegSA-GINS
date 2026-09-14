@@ -291,3 +291,10 @@ Only MFIG02 and MFIG20 are re-exported, using two plotting workers with one
 numerical thread each; all other figure files must remain byte-identical.
 This is the authorized figure-reader/coverage correction, with zero
 provider, native solver, evaluator or aggregate reruns.
+
+The actual raster review then identified crowded MFIG20 static-window tick
+labels. A final MFIG20-only export splits "first 1000" across two lines;
+all plotted coordinates, values, units and window identities remain unchanged.
+The preceding MFIG20 exports and root metadata are retained under
+`FIGURE_PREPARATION/REPAIR02/`, outside the final figure root. The other
+27 figures are pinned before and verified after this layout-only repair.
