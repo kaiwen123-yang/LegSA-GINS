@@ -10,6 +10,7 @@ The identity bridge uses unchanged CAL C00 inputs and std=1.5 with both binaries
 
 - HV residual reproduction uses the inverse-scaled new provider, retaining exact P-11b samples and statistics; final scaled residuals are reported separately.
 - GNSS source hashes remain fixed. New nominal and case tables preserve non-yaw_std tokens against their corresponding unchanged/injected reference. Every nominal yaw_std token is 2.933193. Frozen fault handlers are then applied in their original order: a registered yaw_std multiplier (including D28) multiplies this new nominal value in the actual injected yaw_std column. The gate compares against the same frozen handler applied to the nominal v2.1 table, rather than erasing the registered fault to enforce a constant injected column.
+  The final document generator explicitly limits the constant-column gate wording to the three nominal base tables and states the preserved injected multipliers; this is a wording clarification of the same gate, with no provider or result change.
 - Existing frozen_parameter_hash is unchanged. SENSOR_MODEL_V21 is separately hashed as three correction groups; runtime/provider diffs remain explicit.
 - Case-specific injected A1 determines HV rotation/support. Fully absent A1 makes all HV invalid; missing source Go2 validity is never promoted.
 - F01 sampling is C00 plus 49 non-C00 core cases ordered by SHA256 of P13_F01|case_id; the contract contains all fifty identities. Its seven scientific output files are compared to the original full-file seals, never to downsampled substitutes.
