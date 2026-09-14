@@ -395,8 +395,7 @@ def mfig22(bundle):
         ax.set_xlabel(label)
         ax.set_xlim(left=0)
         ax.invert_yaxis()
-    figure.legend(*axes[0, 0].get_legend_handles_labels(), loc='upper center',
-                   bbox_to_anchor=(.57, 1.02), ncol=2, fontsize=8)
+    axes[0, 0].legend(loc='upper left', fontsize=8, frameon=False)
     return figure, ('Protocol v2 pre-correction and v2.1 core medians for all ten rerun configurations, '
         'evaluator v3. Each pair uses identical finite successful case membership in both editions; '
         'n is the paired finite count over the registered core denominator. Algorithm failures and '

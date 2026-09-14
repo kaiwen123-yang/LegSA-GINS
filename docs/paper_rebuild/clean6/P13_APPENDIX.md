@@ -298,3 +298,9 @@ all plotted coordinates, values, units and window identities remain unchanged.
 The preceding MFIG20 exports and root metadata are retained under
 `FIGURE_PREPARATION/REPAIR02/`, outside the final figure root. The other
 27 figures are pinned before and verified after this layout-only repair.
+
+The complete raster pass also identified the MFIG22 shared legend touching
+panel label (b). Its legend is moved into the empty upper-left area of
+panel (a), without changing data or axes. Only MFIG22 is re-exported;
+`FIGURE_PREPARATION/REPAIR03/` retains the preceding exports/root metadata
+and the before/after byte ledger for the other 27 figures.
