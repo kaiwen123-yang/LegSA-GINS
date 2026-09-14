@@ -152,3 +152,36 @@ directories as two terminal records. The progress display was corrected to
 count JSON records inside both v2 and v3 directories (44 each at the correction).
 This affected only the interim message, not the controller, checkpoint exporter,
 scientific records, evaluator calls or archived counts.
+
+## Finalization metadata I/O continuation 01
+
+The first finalization process used commit
+`e7634926bdfd8b4ee850f5053f250499708405fc`. Its observed systemd interval was
+2,204 seconds, with 161.115 seconds of reported CPU time. Receipt registration
+performed full filesystem ancestor checks for every retained reference,
+including payloads never consumed by aggregation or packaging; metadata
+capture also calculated the same hash twice. No aggregate directory or new
+handoff ZIP existed when this metadata-only process was ended for continuation.
+This was not a native/evaluator failure or a new scientific stopping condition.
+
+Under the human bookkeeping authorization and AGENTS sections 15/16, the
+continuation first verifies the receipt and its independent reference, checks
+member names lexically, and registers unchanged producer hashes for unconsumed
+members without reopening them. Every consumed file still passes the original
+regular-file/no-symlink-ancestor check and SHA-256 verification; package checks
+remain unchanged. Metadata capture hashes once, and source/index and receipt
+loops publish progress counts. No selector, metric, hypothesis, scientific
+configuration, provider, solver, evaluator, decision rule, or Outcome changes.
+
+The original freeze remains at
+`<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/00_PREREGISTRATION/FINALIZATION_CODE_FREEZE.json`.
+The PRE continuation record has SHA-256
+`a9cb68cb0e44d1d806caadbfc6187cdb62b4ad2bd5dfebda4dfc0f618361e80b`.
+The compatibility record is the adjacent
+`FINALIZATION_IO_CONTINUATION_01_COMPATIBILITY.json`: MAIN `ADD_RUN_00002`
+and downstream `P13_LADDER_V0_A04` have exactly equal original/continued
+pin and role mappings (47 and 51 pins). Path-check calls are 50 to 4 and
+54 to 4 respectively. The bounded audit invokes zero providers, native
+solvers or evaluators. The focused finalization/package/document tests pass
+39/39, including missing/symlinked consumed-file rejection, malformed member
+rejection, conflicting-pin rejection, and changed consumed-payload detection.

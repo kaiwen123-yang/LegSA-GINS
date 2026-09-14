@@ -61,6 +61,59 @@ def test_receipt_pins_are_independent_and_consumed_file_mutation_is_detected(tmp
         f.receipt_catalog([{'run_id': 'r', 'archive_receipt': str(receipt)}], f.Pins(), resolved_root=resolved)
 
 
+def test_unconsumed_receipt_members_are_metadata_only_but_consumption_checks_safety(tmp_path, monkeypatch):
+    root = tmp_path/'archive'
+    outside = tmp_path/'outside.csv'
+    outside.write_text('outside')
+    root.mkdir()
+    (root/'linked.csv').symlink_to(outside)
+    receipt = put(root/'ARCHIVE_RECEIPT.json', {'status': 'ARCHIVE_VERIFIED', 'run_id': 'r',
+        'retained_files': {'missing.csv': {'sha256': 'a'*64},
+                           'linked.csv': {'sha256': f.sha256_file(outside)}}})
+    resolved = tmp_path/'resolved'
+    put(resolved/'r/RECEIPT_REFERENCE.json', {'path': str(receipt), 'sha256': f.sha256_file(receipt)})
+    original, checked = pack.safe_file, []
+    def observe(path):
+        checked.append(Path(path))
+        return original(path)
+    monkeypatch.setattr(pack, 'safe_file', observe)
+    pins = f.Pins()
+    f.receipt_catalog([{'run_id': 'r', 'archive_receipt': str(receipt)}], pins, resolved_root=resolved)
+    assert root/'missing.csv' not in checked and root/'linked.csv' not in checked
+    for name in ('missing.csv', 'linked.csv'):
+        with pytest.raises(ValueError, match='absolute regular file'):
+            pins.check(root/name)
+
+
+def test_retained_registration_requires_receipt_rejects_escape_and_conflicting_pins(tmp_path):
+    receipt = put(tmp_path/'ARCHIVE_RECEIPT.json', {})
+    pins = f.Pins()
+    with pytest.raises(ValueError, match='verified producer receipt'):
+        pins.register_retained(receipt, 'a.csv', 'a'*64)
+    pins.capture_metadata(receipt, 'resolved_archive_receipt')
+    for name in ('../outside.csv', '/absolute.csv', 'x/../../outside.csv'):
+        with pytest.raises(ValueError, match='Unsafe ZIP member'):
+            pins.register_retained(receipt, name, 'a'*64)
+    pins.register_retained(receipt, 'a.csv', 'a'*64)
+    with pytest.raises(ValueError, match='Conflicting independently sealed'):
+        pins.register_retained(receipt, 'a.csv', 'b'*64)
+
+
+def test_metadata_capture_hashes_once_and_later_consumption_detects_change(tmp_path, monkeypatch):
+    source = put(tmp_path/'checked.json', {'value': 1})
+    original, calls = f.sha256_file, []
+    def observe(path):
+        calls.append(Path(path))
+        return original(path)
+    monkeypatch.setattr(f, 'sha256_file', observe)
+    pins = f.Pins()
+    pins.capture_metadata(source, 'already_parsed_metadata')
+    assert calls == [source]
+    source.write_text('{"value": 2}')
+    with pytest.raises(ValueError, match='input changed'):
+        pins.check(source)
+
+
 def test_final_index_exact_match_binds_all_metrics_and_scalar_types_to_producer(tmp_path):
     native = {'run_id': 'r', 'nested': {'provider': ['one', 'two']}, 'flag': True}
     evaluations = [{'run_id': 'r', 'evaluator_version': version, 'metric': 1.25,

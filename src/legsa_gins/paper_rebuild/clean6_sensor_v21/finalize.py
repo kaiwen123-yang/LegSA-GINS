@@ -34,22 +34,40 @@ class Pins:
     def __init__(self):
         self.values, self.roles = {}, {}
 
-    def add(self, path, expected, role, *, verify=True):
-        path = pack.safe_file(path)
-        if len(expected) != 64 or any(c not in '0123456789abcdef' for c in expected):
+    def _record(self, path, expected, role):
+        if not isinstance(expected, str) or len(expected) != 64 or any(c not in '0123456789abcdef' for c in expected):
             raise ValueError('Invalid source SHA256 pin')
         key = str(path)
         if key in self.values and self.values[key] != expected:
             raise ValueError('Conflicting independently sealed source pins: '+key)
-        if verify and sha256_file(path) != expected:
-            raise ValueError('Pinned finalization input changed: '+key)
         self.values[key] = expected
         self.roles.setdefault(key, set()).add(role)
         return path
 
+    def add(self, path, expected, role, *, verify=True):
+        path = pack.safe_file(path)
+        if verify and sha256_file(path) != expected:
+            raise ValueError('Pinned finalization input changed: '+str(path))
+        return self._record(path, expected, role)
+
     def capture_metadata(self, path, role):
         """Record new producer metadata after its contents/identities are checked."""
-        return self.add(path, sha256_file(pack.safe_file(path)), role)
+        path = pack.safe_file(path)
+        return self._record(path, sha256_file(path), role)
+
+    def register_retained(self, receipt_path, relative, expected):
+        """Register a sealed reference; validate file safety/hash when consumed.
+
+        This does not claim that an unconsumed retained payload was reopened.
+        The receipt itself must already have passed its source/identity gate.
+        ``check`` and the package reader still verify every consumed file.
+        """
+        receipt_path = Path(receipt_path)
+        roles = self.roles.get(str(receipt_path), set())
+        if not roles.intersection({'resolved_archive_receipt', 'receipt_referenced_by_hash_pinned_v2_final_index'}):
+            raise ValueError('Retained pin requires a verified producer receipt')
+        path = receipt_path.parent / pack.safe_member(relative)
+        return self._record(path, expected, 'retained_file_producer_seal')
 
     def check(self, path):
         path = pack.safe_file(path)
@@ -112,7 +130,7 @@ def closure_gate(main, down, records, evaluations, down_records, down_evaluation
 def receipt_catalog(records, pins, *, resolved_root=None):
     """Use retained-file pins from completed producer receipts, without bulk rehash."""
     receipts = {}
-    for row in records:
+    for ordinal, row in enumerate(records, 1):
         path = pack.safe_file(row['archive_receipt'])
         if resolved_root is not None:
             reference = _json(Path(resolved_root)/row['run_id']/'RECEIPT_REFERENCE.json')
@@ -127,9 +145,11 @@ def receipt_catalog(records, pins, *, resolved_root=None):
             raise ValueError('Archive receipt is not a completed matching run')
         root = path.parent
         for relative, identity in receipt['retained_files'].items():
-            pack.safe_member(relative)
-            pins.add(root/relative, identity['sha256'], 'retained_file_producer_seal', verify=False)
+            pins.register_retained(path, relative, identity['sha256'])
         receipts[row['run_id']] = (root, receipt)
+        if ordinal % 256 == 0 or ordinal == len(records):
+            print(json.dumps({'phase': 'RECEIPT_CATALOG', 'completed': ordinal, 'total': len(records),
+                'retained_reference_policy': 'producer_seal_registration_then_consumption_verification'}), flush=True)
     return receipts
 
 
@@ -149,7 +169,7 @@ def verify_resolved_indices(records, evaluations, resolved_root, pins):
         raise ValueError('FINAL evaluator coverage differs from resolved native identities')
     def same(left, right):
         return pack._json_bytes(left) == pack._json_bytes(right)
-    for run_id, final in native.items():
+    for ordinal, (run_id, final) in enumerate(native.items(), 1):
         pack.safe_member(run_id)
         if len(Path(run_id).parts) != 1:
             raise ValueError('Resolved run identifier cannot contain a directory')
@@ -168,6 +188,8 @@ def verify_resolved_indices(records, evaluations, resolved_root, pins):
             seen.add(key)
         for path in (run_path, evaluation_path):
             pins.capture_metadata(path, 'controller_original_resolved_record_compared_exactly')
+        if ordinal % 256 == 0 or ordinal == len(native):
+            print(json.dumps({'phase': 'FINAL_VS_RESOLVED', 'completed': ordinal, 'total': len(native)}), flush=True)
     return {'status': 'PASS', 'native_rows': len(native), 'evaluation_rows': len(slots),
             'comparison': 'all fields; canonical JSON exact equality; no numerical tolerance',
             'source_rows_modified': False}
