@@ -265,3 +265,29 @@ resource setting only; all 28 registered figures, source selectors, scales,
 frozen values and visual checks are retained. The completed data ZIP is
 validated once by the plotting parent, with its verified identity passed to
 workers. Only the MFIG00 plotting child may read the hash-locked Truth trace.
+
+## Two-figure availability repair
+
+The initial export retained 26 successful figures and two failed figure
+records. MFIG02 required a finite paired result for every degradation type;
+the sealed v2.1 A04-versus-F03 table has 514 finite pairs including C00 for
+each displayed metric, with zero finite pairs for D37. The v2.1 drawing now
+retains all 60 registered type positions, leaves D37's metric value missing,
+and marks availability in axes coordinates. Family labels disclose finite
+and registered pair counts. No failed native run receives a fabricated
+metric, and no case or pair is replaced.
+
+MFIG20 encountered the frozen IMU table's literal UNAVAILABLE variance at
+1.5 seconds for all three axes (zero exact pairs and zero samples). The
+drawing preserves those missing variances, marks their availability without
+assigning a variance, and retains all six finite lags and the frozen q/c
+coefficients. No fit, data table, residual statistic or metric changes.
+
+Focused publication/package tests pass 23/23. The initial root metadata and
+two failed figure directories are preserved under
+`<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/FIGURE_PREPARATION/REPAIR01/`.
+Its PRE ledger pins all 104 files belonging to the 26 successful figures.
+Only MFIG02 and MFIG20 are re-exported, using two plotting workers with one
+numerical thread each; all other figure files must remain byte-identical.
+This is the authorized figure-reader/coverage correction, with zero
+provider, native solver, evaluator or aggregate reruns.

@@ -250,6 +250,8 @@ def test_residuals_reject_mismatched_window_support():
 def test_mfig20_has_three_unchanged_imu_and_three_residual_panels():
     samples = pd.DataFrame([dict(axis=axis, lag_s=lag, variance_m2ps2=.1+lag*.2)
                            for axis in ('north', 'east', 'up') for lag in (1., 2.)])
+    samples = pd.concat([samples, pd.DataFrame([dict(axis=axis, lag_s=1.5, variance_m2ps2='UNAVAILABLE')
+                        for axis in ('north', 'east', 'up')])], ignore_index=True)
     parameters = pd.DataFrame([dict(axis=axis, q_m2ps3=.2, c_m2ps2=.1) for axis in ('north', 'east', 'up')])
     bundle = SimpleNamespace(p=Tables({f.old.CAL+'00_CALIBRATION/LAG_VARIANCE_FIT.csv': samples,
         f.old.CAL+'00_CALIBRATION/CALIBRATED_PARAMETERS.csv': parameters, data.RESIDUALS: residual_table()}))
@@ -257,6 +259,29 @@ def test_mfig20_has_three_unchanged_imu_and_three_residual_panels():
     assert len(figure.axes) == 6
     assert len(figure.axes[-1].get_xticklabels()) == 4
     assert 'no regression is refitted' in caption
+    for ax in figure.axes[:3]:
+        assert np.isnan(ax.lines[0].get_ydata()).sum() == 1
+        assert np.allclose(ax.lines[1].get_ydata(), [.3, .5])
+    plt.close(figure)
+
+
+def test_mfig02_retains_type_with_no_finite_pair_without_zero_imputation():
+    cases = pd.DataFrame([dict(case_id=f'D{i:02}_s{seed}', degradation_id=f'D{i:02}', case_family='dual_yaw')
+        for i in range(1, 61) for seed in range(9)] +
+        [dict(case_id='C00_clean_normal', degradation_id='CLEAN', case_family='clean')])
+    pairs = pd.DataFrame([dict(row, comparison='A04_vs_F03', metric_name=metric,
+                              delta_candidate_minus_reference=-.5)
+        for row in cases.to_dict('records') if row['degradation_id'] != 'D37'
+        for metric in ('horizontal_rmse_m', 'yaw_rmse_deg')])
+    bundle = SimpleNamespace(aggregate=lambda _:pairs, core=lambda _:cases,
+                             p=Tables({}), notes=[])
+    figure, caption = f.mfig02(bundle)
+    for ax in figure.axes[:2]:
+        values = ax.lines[0].get_ydata()
+        assert len(values) == 60 and np.isnan(values[36])
+        assert np.all(values[np.isfinite(values)] == -.5)
+    assert all(note['type_finite_pair_counts']['D37'] == 0 for note in bundle.notes)
+    assert 'assigns no error value' in caption
     plt.close(figure)
 
 

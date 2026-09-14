@@ -47,6 +47,63 @@ def _rebound(drawer, bundle, mapping):
     return figure, caption
 
 
+def mfig02(bundle):
+    pairs = bundle.aggregate('PAIRWISE_CASE_LEVEL.csv')
+    rows = bundle.p.use(pairs[(pairs.comparison == 'A04_vs_F03') &
+                             pairs.metric_name.isin([METRICS[0][0], METRICS[2][0]])])
+    registered = bundle.core(['A04', 'F03'])[['case_id', 'degradation_id', 'case_family']].drop_duplicates()
+    types = [f'D{i:02}' for i in range(1, 61)]
+    if (registered.case_id.duplicated().any() or len(registered) != 541 or
+            set(registered.degradation_id) != {'CLEAN', *types}):
+        raise EvidenceUnavailable('Registered core type metadata must retain all 541 cases and 60 types')
+    figure, axes = old.canvas(2, 2, 5.4)
+    for column, (metric, label) in enumerate([METRICS[0], METRICS[2]]):
+        subset = rows[rows.metric_name == metric]
+        if subset.case_id.duplicated().any() or not subset.case_id.isin(registered.case_id).all():
+            raise EvidenceUnavailable('Paired case identities do not match the registered core')
+        groups = {key: group for key, group in subset.groupby('degradation_id')}
+        median = np.full(60, np.nan); lower = median.copy(); upper = median.copy()
+        counts = []
+        for index, kind in enumerate(types):
+            group = groups.get(kind)
+            values = np.array([]) if group is None else group.delta_candidate_minus_reference.to_numpy(float)
+            if not np.isfinite(values).all():
+                raise EvidenceUnavailable('Finite-pair table contains a nonfinite delta')
+            counts.append(len(values))
+            if len(values):
+                median[index], lower[index], upper[index] = np.median(values), values.min(), values.max()
+        x = np.arange(60); ax = axes[0, column]
+        ax.errorbar(x, median, yerr=[median-lower, upper-median], fmt='.', color=COLORS['A04'], lw=.6)
+        ax.axhline(0, color='black', lw=.6)
+        missing = np.array(counts) == 0
+        if missing.any():
+            ax.plot(x[missing], np.full(missing.sum(), .035), 'x', transform=ax.get_xaxis_transform(),
+                    color='#666666', ms=4, label='No finite pair')
+            old.legend(ax)
+        ax.set_xticks([0, 9, 19, 29, 39, 49, 59], ['D01', 'D10', 'D20', 'D30', 'D40', 'D50', 'D60'])
+        ax.set(xlim=(-1, 60), ylabel='Δ '+label)
+        families = sorted(registered.case_family.unique())
+        rates, family_counts = [], []
+        for family in families:
+            values = subset.loc[subset.case_family == family, 'delta_candidate_minus_reference'].to_numpy(float)
+            rates.append(100*np.mean(values < 0) if len(values) else np.nan)
+            family_counts.append((len(values), int(registered.case_family.eq(family).sum())))
+        ax = axes[1, column]
+        ax.barh(np.arange(len(families)), rates, color=COLORS['A04'])
+        ax.set_yticks(np.arange(len(families)), [old.FAMILIES.get(key, key) for key in families])
+        ax.set(xlim=(0, 100), xlabel='Finite paired win rate (%)')
+        for index, (available, total) in enumerate(family_counts):
+            ax.text(.98, index, f'{available}/{total}', transform=ax.get_yaxis_transform(),
+                    ha='right', va='center', fontsize=7, bbox={'facecolor':'white', 'edgecolor':'none', 'pad':.3})
+        bundle.notes.append({'metric': metric, 'type_finite_pair_counts': dict(zip(types, counts)),
+                             'family_finite_registered_counts': dict(zip(families, family_counts)),
+                             'missing_delta_policy': 'NaN display gap; availability cross is in axes coordinates, not a metric value'})
+    return figure, ('A04 minus F03, v3. All 60 registered type positions are retained. Markers show finite-pair '
+        'medians and whiskers the observed seed range, not confidence intervals. A lower-edge cross denotes '
+        'a type with no finite pair and assigns no error value. Family labels inside the axes give finite/registered '
+        'pair counts; win rates use finite pairs. A04 remains the v1 preregistered decision and an ablation row.')
+
+
 def _failure_pair(bundle, core, failures):
     """Bind the first CORE F04 failure and its F02 control to new native rows."""
     anchor = failures.sort_values(['case_id', 'dataset_id', 'run_id']).iloc[0]
@@ -261,12 +318,21 @@ def mfig20(bundle):
         if selected.empty or len(parameter) != 1:
             raise EvidenceUnavailable('Frozen IMU regression axis unavailable')
         x = pd.to_numeric(selected.lag_s).to_numpy(float)
-        y = pd.to_numeric(selected.variance_m2ps2).to_numpy(float)
+        unavailable = selected.variance_m2ps2.astype(str).eq('UNAVAILABLE').to_numpy()
+        y = pd.to_numeric(selected.variance_m2ps2, errors='coerce').to_numpy(float)
+        if not np.isfinite(x).all() or np.any(~np.isfinite(y) & ~unavailable):
+            raise EvidenceUnavailable('Unexpected nonfinite frozen IMU lag or variance')
         ax.plot(x, y, 'o', color=COLORS['A04'], ms=3, label='Observed')
         endpoints = np.array([x.min(), x.max()])
         row = parameter.iloc[0]
         ax.plot(endpoints, float(row.q_m2ps3)*endpoints+float(row.c_m2ps2),
                 color=COLORS['F04'], label='Frozen qτ + c')
+        if unavailable.any():
+            ax.plot(x[unavailable], np.full(unavailable.sum(), .035), 'x',
+                    transform=ax.get_xaxis_transform(), color='#666666', ms=4, label='Unavailable lag')
+            if hasattr(bundle, 'notes'):
+                bundle.notes.append({'axis': axis, 'unavailable_lag_s': x[unavailable].tolist(),
+                                     'variance_value_assigned': False})
         ax.set(xlabel='Lag τ (s)', ylabel=axis.title() + ' residual variance (m²/s²)')
         old.legend(ax)
     specs = [('HV', 'horizontal', 'sigma_HV_mps', 'm/s', 'HV residual scale (m/s)'),
@@ -294,7 +360,8 @@ def mfig20(bundle):
     figure.legend(*axes[1, 0].get_legend_handles_labels(), loc='upper center',
                    bbox_to_anchor=(.56, 1.01), ncol=2, fontsize=8)
     return figure, ('Top: unchanged BY2 IMU lag-variance observations and accepted qτ+c coefficients; '
-        'no regression is refitted. Bottom: HV residual scale σ_HV from P11b H-C before correction '
+        'no regression is refitted. Lower-edge crosses mark unavailable lag variances without assigning a value. '
+        'Bottom: HV residual scale σ_HV from P11b H-C before correction '
         'and the final scaled v2.1 provider on the same mask, followed by roll/pitch mean residuals '
         'against gravity for all four registered static windows. RP pairs preserve each window name, '
         'bounds and sample count; no windows are pooled. HV inverse-scaled H-A statistics belong '
@@ -340,6 +407,7 @@ def mfig22(bundle):
 FIGURES = {key: (title, _edition(drawer), kind, gps, tim)
            for key, (title, drawer, kind, gps, tim) in old.FIGURES.items() if key != 'MFIG21'}
 for key, title, drawer in (
+    ('MFIG02', 'A04 versus F03 across registered degradation types', mfig02),
     ('MFIG14', 'All-yaw-rejected accounting and native timeline', mfig14),
     ('MFIG16', 'Yaw errors and corrected heading-provider quality', mfig16),
     ('MFIG17', 'BY2 error-budget ladder under v2.1', mfig17),
