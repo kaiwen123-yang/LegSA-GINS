@@ -143,3 +143,11 @@ These three bookkeeping checks were tightened during source review before the
 first formal checkpoint export. They change no scientific call or stopping
 condition. The exporter writes only after the requested batch checkpoint is
 closed; its source SHA and complete metadata input pins accompany each export.
+
+## Live evaluator-count display correction
+
+During batch 9, a read-only progress command counted the two evaluator-version
+directories as two terminal records. The progress display was corrected to
+count JSON records inside both v2 and v3 directories (44 each at the correction).
+This affected only the interim message, not the controller, checkpoint exporter,
+scientific records, evaluator calls or archived counts.
