@@ -1383,6 +1383,12 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 
 ## 18. Current next actions
 
+### C-CLOSE freeze rule (2026-09-15)
+
+协议 v2.1 是论文唯一链；此后任何新发现只作为限制或后续工作写入论文，不再修改 provider、参数、求解器，不再重跑；唯一例外是逐字节身份门检出的数值错误；EXT06 只新增对比行。
+
+Conversation C is `COMPLETE`. Remaining work is conversation D (uncertainty), conversation E (TIM manuscript assembly), and the EXT06 baseline in an independent conversation. This rule supersedes the historical next-action and execution clauses below; current ownership and the shutdown verification record are in `docs/paper_rebuild/CONVERSATION_HANDOFF.md` §§5–7.
+
 <!-- P13_SECTION_18_BEGIN -->
 ### Protocol v2.1 delivery state
 
