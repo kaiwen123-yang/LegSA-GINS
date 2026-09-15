@@ -1,0 +1,19 @@
+{
+  "schema_version": "lc02.covariance_fusion.v1",
+  "decision": "EQ13_FUSION_RESOLVED_P_RK_NOT_SOURCE_CLOSED",
+  "audit_terminal_status": "PASS_LC02_YIN2023_Y0_Y3_METHOD_NON_DUPLICATION_AND_BY2_CONTRACT_READY",
+  "eq13_fusion_formula_resolved": true,
+  "eq13": "P_k = omega P_ak + (1-omega) P_rk",
+  "not_source_closed_input": "P_rk",
+  "limitations": [
+    "The paper does not define whether the RKF observation symbol L_k is the earlier measurement Z_k; setting L_k=Z_k is PAPER_DERIVED.",
+    "The standardized innovation V_tilde_i has no source-closed denominator or whitening rule.",
+    "The printed IGGIII zero weight makes Abar singular although the printed gain requires Abar inverse.",
+    "Cited sources do not identify Yin's intended rejection implementation."
+  ],
+  "paper_derived_policy_available": "row omission / infinite-variance limit",
+  "faithful_raekf_claim_allowed": false,
+  "formal_lc02_admission": false,
+  "audit_closure_pass": true,
+  "provenance_class": "PAPER_DERIVED"
+}

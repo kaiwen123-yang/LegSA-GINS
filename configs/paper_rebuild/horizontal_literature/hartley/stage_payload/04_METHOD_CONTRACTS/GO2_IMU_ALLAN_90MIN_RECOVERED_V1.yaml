@@ -1,0 +1,110 @@
+schema_version: 1
+profile_id: GO2_IMU_ALLAN_90MIN_RECOVERED_V1
+profile_status: NUMERIC_AVERAGE_AXIS_PROFILE_RECOVERED
+evidence_label: THESIS_AND_CONTEMPORANEOUS_TERMINAL_RECORD_CROSS_CONFIRMED
+
+dataset_metadata:
+  platform: Unitree Go2 body IMU
+  condition: stationary
+  reported_duration:
+    minutes: 90
+    seconds: 5400
+  reported_approximate_sample_count: about 2.4 million
+  axis_policy: ARITHMETIC_MEAN_OF_X_Y_Z
+  exact_sampling_rate_claim_allowed: false
+
+provenance_limitations:
+  original_static_csv_available: false
+  original_fitting_script_available: false
+  exact_per_axis_values_available: false
+  exact_Allan_curve_recomputable: false
+  exact_fitting_implementation_auditable: false
+  numeric_average_axis_profile_recovered: true
+  raw_artifact_reproducibility_claim_allowed: false
+
+continuous_stochastic_model:
+  omega_measurement: omega_m_equals_omega_plus_b_g_plus_n_g
+  acceleration_measurement: a_m_equals_a_plus_b_a_plus_n_a
+  gyro_bias_dynamics: b_g_dot_equals_w_bg
+  accelerometer_bias_dynamics: b_a_dot_equals_w_ba
+  density_symbols: [sigma_g, sigma_a, sigma_bg, sigma_ba]
+
+continuous_noise_density_asd:
+  gyro_measurement_white_noise_density:
+    symbol: sigma_g
+    api_name: gyro_measurement_white_noise_density_asd
+    value: 2.865130e-04
+    unit: rad/s/sqrt(Hz)
+    stochastic_role: gyro_measurement_white_noise
+    continuous_psd_api_name: gyro_measurement_white_noise_psd
+    continuous_psd_value: 8.208969916900001e-8
+    continuous_psd_unit: rad^2/s
+    qc_block: gyro_measurement
+  accelerometer_measurement_white_noise_density:
+    symbol: sigma_a
+    api_name: accelerometer_measurement_white_noise_density_asd
+    value: 1.285395e-03
+    unit: m/s^2/sqrt(Hz)
+    stochastic_role: accelerometer_measurement_white_noise
+    continuous_psd_api_name: accelerometer_measurement_white_noise_psd
+    continuous_psd_value: 1.652240306025e-6
+    continuous_psd_unit: m^2/s^3
+    qc_block: accelerometer_measurement
+  gyro_bias_random_walk_density:
+    symbol: sigma_bg
+    api_name: gyro_bias_random_walk_density_asd
+    value: 2.996871e-05
+    unit: rad/s^2/sqrt(Hz)
+    stochastic_role: gyro_bias_random_walk_drive
+    continuous_psd_api_name: gyro_bias_random_walk_psd
+    continuous_psd_value: 8.981235790641001e-10
+    continuous_psd_unit: rad^2/s^3
+    qc_block: gyro_bias_random_walk
+  accelerometer_bias_random_walk_density:
+    symbol: sigma_ba
+    api_name: accelerometer_bias_random_walk_density_asd
+    value: 1.594412e-04
+    unit: m/s^3/sqrt(Hz)
+    stochastic_role: accelerometer_bias_random_walk_drive
+    continuous_psd_api_name: accelerometer_bias_random_walk_psd
+    continuous_psd_value: 2.542149625744e-8
+    continuous_psd_unit: m^2/s^5
+    qc_block: accelerometer_bias_random_walk
+
+qc_construction_contract:
+  density_input_cpp_type: ContinuousNoiseDensity
+  density_semantics: CONTINUOUS_AMPLITUDE_SPECTRAL_DENSITY
+  psd_output_cpp_type: ContinuousNoisePsd
+  discrete_process_covariance_cpp_type: Eigen_MatrixXd
+  discrete_process_covariance_api_quantity: Qd
+  conversion_function: continuousPsdFromDensity
+  rule: SQUARE_EACH_CONTINUOUS_DENSITY_EXACTLY_ONCE
+  sqrt_dt_preprocessing_before_qc: false
+  dt_preprocessing_before_qc: false
+  double_squaring_allowed: false
+  continuous_psd_is_qc_input: true
+  discrete_sample_standard_deviation:
+    cpp_type: DiscreteSampleStd
+    api_name: discreteSampleStdFromDensity
+    role: EXPLICIT_SYNTHETIC_SAMPLER_CONVERSION_ONLY
+    qc_input: false
+    may_not_be_fed_back_into_qc: true
+    conversion_requires_explicit_dt: true
+
+bias_instability_diagnostics:
+  semantic_role: IMU_CHARACTERIZATION_DIAGNOSTIC_ONLY
+  accelerometer_bias_instability:
+    value: 7.781688e-04
+    unit: m/s^2
+  gyro_bias_instability:
+    value: 4.550529e-05
+    unit: rad/s
+  replaces_bias_random_walk_density: false
+  is_initial_bias_standard_deviation: false
+  possible_future_role: INITIAL_BIAS_COVARIANCE_SENSITIVITY_ONLY
+
+execution_boundary:
+  used_for_h3_h4_real_data_performance_claim: false
+  used_for_h3_h4_dimensional_and_numerical_regression_only: true
+  real_BY2_filter_run_count: 0
+  reference_open_count: 0

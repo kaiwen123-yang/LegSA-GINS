@@ -509,7 +509,12 @@ void GIEngine::newImuProcess() {
     pvapre_ = pvacur_;
     insPropagation(midimu, imucur_);
   }
-  checkCov();
+  if (!checkCov()) {
+    ++cov_health_fail_count_;
+    if (cov_health_fail_count_ == 1) {
+      cov_health_first_failure_time_ = timestamp_;
+    }
+  }
   pvapre_ = pvacur_;
   imupre_ = imucur_;
 }
@@ -541,6 +546,14 @@ double GIEngine::timestamp() const {
 
 std::size_t GIEngine::propagationCount() const {
   return propagation_count_;
+}
+
+std::size_t GIEngine::covHealthFailCount() const {
+  return cov_health_fail_count_;
+}
+
+double GIEngine::covHealthFirstFailureTime() const {
+  return cov_health_first_failure_time_;
 }
 
 std::size_t GIEngine::updateCount() const {
@@ -1000,7 +1013,11 @@ void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
     ++raw_doppler_status_.reject_count;
     return;
   }
-  const Vec3 residual_vec = subtract(pvacur_.vel_ned_mps, best->velocity_ned_mps);
+  const double imu_dt = imucur_.dt > 0.0 ? imucur_.dt : 0.01;
+  const Vec3 omega_b = scale(imucur_.dtheta, 1.0 / imu_dt);
+  const Vec3 lever_vel_n = multiply(pvacur_.cbn, cross(omega_b, options_.antlever_m));
+  const Vec3 antenna_vel_n = add(pvacur_.vel_ned_mps, lever_vel_n);
+  const Vec3 residual_vec = subtract(antenna_vel_n, best->velocity_ned_mps);
   const double residual = norm(residual_vec);
   if (!options_.source_aware_policy_config.enable_source_aware_weighting &&
       residual > options_.raw_doppler_config.raw_doppler_residual_gate_mps) {
@@ -1010,9 +1027,11 @@ void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
   }
   Matrix H(3, RANK, 0.0);
   setBlockIdentity(H, 0, V_ID);
+  setBlock(H, 0, PHI_ID, Rotation::skewSymmetric(lever_vel_n));
   const Vec3 stdv = RawDopplerFactor::positiveStd(*best);
   Matrix R = diagonalMatrix(scale(cwiseProduct(stdv, stdv), options_.raw_doppler_config.raw_doppler_R_scale));
-  // 中文说明：dz = nav.vel - raw_doppler_velocity_ned，与现有 receiver-native velocity residual 同号。
+  // 中文说明：dz = GNSS1 天线相位中心速度 - raw Doppler velocity；
+  // 杆臂速度与 receiver-native velocity update 使用相同的 antlever_m 及 H_phi 符号。
   const std::vector<double> dz{residual_vec[0], residual_vec[1], residual_vec[2]};
   source_aware::SourceMetadata metadata;
   metadata.source = source_aware::MeasurementSource::kRawDopplerVelocity;
@@ -1080,7 +1099,7 @@ void GIEngine::applyGo2AttitudeWeakPriorForTime(double update_time) {
     return;
   }
   const std::vector<double> dz = Go2WeakPriorFactor::residual(pvacur_, *best);
-  Matrix H = Go2WeakPriorFactor::designMatrix();
+  Matrix H = Go2WeakPriorFactor::designMatrix(pvacur_);
   Matrix R = Go2WeakPriorFactor::covariance(*best, options_.go2_attitude_prior_config);
   source_aware::SourceMetadata metadata;
   metadata.source = source_aware::MeasurementSource::kGo2AttitudeRollPitch;

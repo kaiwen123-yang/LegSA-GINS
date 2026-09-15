@@ -1,0 +1,125 @@
+schema_version: horizontal_literature.phase1r_validation.v2
+phase: PHASE1R_EXT01_VALIDITY_AUDIT_R2
+method_id: EXT01_CLAMBDA
+case_id: C00_VALIDATED
+attempt_id: C00_VALIDATED_R2
+
+immutable_parents:
+  phase1_freeze_commit: 2dd8fbaba986b07349a33d56d4b7618a1fada4d0
+  original_result_root: 02_EXT01_CLAMBDA/C00
+  original_result_artifact_count: 3
+  original_result_tree_digest: 19fc1402a10bc0b658c8db065316b47aa0b56e5782a698198b3beda0bd7b4b52
+  phase1r_r1_result_root: 02_EXT01_CLAMBDA/C00_VALIDATED
+  phase1r_r1_terminal: BLOCKED_PHASE1R_SEARCH_OBJECTIVE_CROSSCHECK_FAILED
+  phase1r_r1_code_commit: 42e6ea68fddfb555b1fccf69e968b5d289e9a17d
+  phase1r_r1_artifact_count: 1548
+  phase1r_r1_tree_digest: a511104a67ed17f24da6bac073c3e718708aa7921407308b8908da8a4f651526
+  phase1r_r1_original_c00_digest_before: 19fc1402a10bc0b658c8db065316b47aa0b56e5782a698198b3beda0bd7b4b52
+  phase1r_r1_original_c00_digest_after: 19fc1402a10bc0b658c8db065316b47aa0b56e5782a698198b3beda0bd7b4b52
+  phase1r_r1_original_c00_immutable: true
+  mutation_allowed: false
+
+numerical_repair:
+  r1_defect: GLS_NORMAL_EQUATION_INVERSION_LOSS_OF_PRECISION
+  observation_whitening: CHOLESKY_QYY
+  least_squares: RANK_CHECKED_SVD
+  covariance: V_DIAG_INVERSE_SINGULAR_VALUES_SQUARED_VT
+  objective_identity_absolute_tolerance: 0.0001
+  trace_selected: false
+
+physical_model:
+  receiver_order: GNSS2_MINUS_GNSS1
+  gnss1_mount: right
+  gnss2_mount: left
+  baseline_body_axis: PLUS_Y_LEFT
+  baseline_length_m: 0.350
+  ned_baseline_heading: atan2_E_N
+  body_yaw_from_baseline_deg: 90.0
+  trace_selected_sign_frame_time_or_bias: false
+
+raw_accounting:
+  signal: GPS_L1_CA
+  identity: {gnss_id: 0, sig_id: 0, freq_id: 0}
+  epoch_pairing: EXACT_GPS_WEEK_AND_RECEIVER_TOW
+  expected_pair_count: 1509
+  expected_common_raw: {min: 5, total: 12013, max: 10, zero_epoch_count: 0}
+  expected_common_pr_cp_valid: {min: 3, total: 9686, max: 9}
+  expected_common_pr_cp_half_cycle_valid: {min: 2, total: 6577, max: 9}
+
+half_cycle_contract:
+  authority:
+    ubx_document: UBX-18053584_R02
+    rtklib_commit: 180043ee24b6d2b168f98b64be15f69d50046b1a
+  cp_mes_semantics: RECEIVER_REPORTED_CYCLES_WITH_SUB_HALF_CYCLE_ALREADY_APPLIED
+  production_adjustment_cycles: 0.0
+  require_pr_valid: true
+  require_cp_valid: true
+  require_half_cyc_valid: true
+  reject_cp_stdev_code: 15
+  sub_half_cyc_role: OBSERVED_CORRECTION_STATE_NOT_INVALIDITY
+  bit3_transition_starts_new_tracking_arc: true
+  method_epochwise_ambiguity_reinitialization_is_cycle_slip: false
+
+stochastic_model:
+  pseudorange_sigma_m: max(0.50,0.01*2^prStdev)
+  carrier_sigma_cycles: max(0.004,0.004*cpStdev)
+  doppler_sigma_hz: max(0.02,0.002*2^doStdev)
+  code_phase_cross_covariance: ZERO_ASSUMED
+  double_difference_shared_pivot_covariance: PRESERVED
+  tuning_source: UBX_SEMANTICS_AND_FROZEN_PHYSICAL_POLICY_ONLY
+  trace_tuned: false
+
+strict_search:
+  lambda_provider: RTKLIB_lambda_and_lambda_reduction
+  lambda_seed_count: 8
+  seeds_are_incumbent_only: true
+  branch_and_bound: BEST_FIRST_SCHNORR_EUCHNER_WITH_EXACT_CONTINUOUS_SPHERE_BOUND
+  deterministic_node_budget: 1000000
+  wall_clock_changes_scientific_result: false
+  global_certificate_required_for_success: true
+  ambiguity_acceptance_test_defined: false
+  ratio_threshold: null
+
+parallel_execution:
+  default_workers: 16
+  maximum_workers: 20
+  numerical_threads_per_worker: 1
+  stable_order: ORIGINAL_EXACT_PAIR_INDEX
+  atomic_shards: true
+  resumable: true
+  semantic_worker_determinism_required: true
+
+diagnostic_only_sources:
+  nav_hpposecef:
+    role: SOLUTION_LEVEL_BASELINE_PROXY
+    allowed_as_solver_input: false
+  rtklib_relative_position:
+    role: INDEPENDENT_RAW_DATA_SANITY_CHECK
+    allowed_as_ext01_output: false
+    allowed_as_solver_input: false
+  trace:
+    role: FIXPOSITION_SAME_SOURCE_POST_NATIVE_REFERENCE
+    allowed_before_native_hash_freeze: false
+    allowed_as_solver_input: false
+    allowed_for_sign_time_parameter_or_acceptance_selection: false
+
+required_outputs:
+  - 02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_NATIVE_HEADING_RESULTS.csv
+  - 02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_FAILURE_LEDGER.csv
+  - 02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_RUNTIME.csv
+  - 02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_DD_DIAGNOSTICS.csv
+  - 02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_TRACKING_DIAGNOSTICS.csv
+  - 02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_HALF_CYCLE_DIAGNOSTICS.csv
+  - 02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_SEARCH_CERTIFICATES.csv
+  - 02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_PROXY_DIAGNOSTICS.csv
+  - 02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_SUMMARY.json
+  - 11_REPORT/PHASE1R_R2_EXT01_C00_VALIDITY_REPORT.md
+  - 11_REPORT/PHASE1R_R2_STATUS.json
+
+forbidden_execution:
+  canonical_541: true
+  ext02: true
+  ext03: true
+  ext04: true
+  classic_18: true
+  common_backbone_navigation: true

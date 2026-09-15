@@ -64,6 +64,8 @@ class GIEngine {
   const std::vector<double>& getCovariance() const;
   double timestamp() const;
   std::size_t propagationCount() const;
+  std::size_t covHealthFailCount() const;
+  double covHealthFirstFailureTime() const;
   std::size_t updateCount() const;
   std::size_t positionUpdateCount() const;
   std::size_t velocityUpdateCount() const;
@@ -136,6 +138,8 @@ class GIEngine {
   std::vector<double> dx_;
   double timestamp_ = 0.0;
   std::size_t propagation_count_ = 0;
+  std::size_t cov_health_fail_count_ = 0;
+  double cov_health_first_failure_time_ = -1.0;
   std::size_t update_count_ = 0;
   std::size_t position_update_count_ = 0;
   std::size_t velocity_update_count_ = 0;

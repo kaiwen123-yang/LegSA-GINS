@@ -1,0 +1,19 @@
+{
+  "schema_version": "paper_rebuild.clean3_s3_execution_freeze.v1",
+  "stage_id": "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE",
+  "protocol_id": "CLEAN3_S3_AB0000_PARITY",
+  "repair_implementation_commit": "0d8cc2bdccfd89b236ab4badeef9db5344dcf4d3",
+  "pre_parity_context_commit": "b451110267e71725d1d5259f6a37ab696197ed9a",
+  "runner_freeze_commit": "e28899156b03b32d3840476bf57ac01807494086",
+  "supersedes_runner_freeze_commit": "a0e763defdf7271c8b8435cf566a81eceb403938",
+  "supersedes_authorization_commit": "b874ca5f37e57a3ec3acd4947824e8d7c6e31067",
+  "supersession_reason": "PRE_STAGE_MANIFEST_PROVENANCE_CONTRACT_REPAIR",
+  "superseded_authorization_s3_started": false,
+  "final_cpp_tree": "40baa12045d6100e3342fd92a01079d253705a45",
+  "tracked_file_sha256": {
+    "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp": "6a5a43a8a7d124038f8a5850bfa6b94042a3c52bb9e81d22230e69ccf404664e",
+    "src/legsa_gins/paper_rebuild/clean3_math_repair.py": "f75643fa43a53c2925d71a87cf447ddb02b0c3318ea8361cbf70fbbdf0584134",
+    "scripts/paper_rebuild/run_clean3_math_repair.py": "cafd5db57432e536c11853d9bcb18f96a8609e8c1db108d6501f72df73ece985",
+    "tests/paper_rebuild/test_clean3_s3_parity_runner.py": "626532f28f4a4c4f436de5c539941ce0327a623494b227226f3d5699490696ac"
+  }
+}

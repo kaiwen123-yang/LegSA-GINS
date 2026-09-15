@@ -1,0 +1,63 @@
+schema_version: lc02.y4a.standardized_residual.v2
+branch_id: YIN2023_RKF
+paper_direct:
+  innovation: "V_hat_k = L_k - H_k Xhat_(k/k-1)"
+  L_description: OBSERVATION_VECTOR
+  equation_9_objective: "Omega = bar_V_k^T bar_A_k bar_V_k + alpha_k bar_V_k^T bar_A_(Xhat_k) bar_V_k = min"
+  equation_9_uses_V_hat_k: false
+  equation_9_residual_symbol: bar_V_k
+  equation_9_state_weight_symbol: bar_A_(Xhat_k)
+  standardized_symbol: tilde_V_i
+  scalar_weight_argument: "|tilde_V_i|"
+author_response:
+  source: OFFICIAL_PEER_REVIEW_AUTHOR_RESPONSE_JINA_TRANSPORT_CAPTURE
+  transport_sha256: 46c6bd33f49aab98ea0b9333f1ddce3298991ae55422ed440806a7d2dca313ce
+  V_hat_k_called_innovation: true
+  L_k_called_observation_vector: true
+  L_k_equated_to_Z_k: false
+  tilde_V_i_called_standardized_residual: true
+  standardizer_equation_supplied: false
+unresolved:
+  L_k_equals_Z_k: null
+  V_hat_k_equals_bar_V_k: null
+  bar_A_Xhat_k_definition: null
+  numerator_is_V_hat_component: null
+  centering_or_bias_removal: null
+  denominator: null
+  denominator_covariance_stage: null
+  global_scale_factor: null
+  component_processing_order: null
+  correlated_residual_whitening: null
+  near_zero_denominator_policy: null
+  nonfinite_policy: null
+cited_candidate_niu2022:
+  formula: "s_i/sqrt(S_ii), S=H P^- H^T+R"
+  numerator_center: ZERO_MEAN_INNOVATION
+  covariance_stage: PRE_ROBUST_PRIOR_INNOVATION_COVARIANCE
+  component_rule: MARGINAL_DIAGONAL_STANDARDIZATION
+  code_uses_absolute_value: true
+  source_status: CITED_SOURCE_CANDIDATE_NOT_UNIQUE_YIN_PROOF
+  non_uniqueness_reasons:
+    - "Yin cites Knight inline for Eq.10 rather than adopting Niu Eq.20 explicitly"
+    - "Niu is cited for a separately reported RKF experiment"
+    - "Yin changes the middle weight exponent and thresholds"
+    - "Yin preserves a distinct undefined L_k symbol"
+other_plausible_unselected_candidates:
+  - "V_hat_i/sqrt(R_ii)"
+  - "V_hat_i/sqrt((H P^- H^T+R)_ii)"
+  - "whitened correlated innovation L_cholesky^{-1} V_hat"
+  - "robust scale or globally normalized residual"
+source_chain_non_uniqueness:
+  knight_2009_inline_citation: "Accessible metadata/author-upload context points to Yang et al. 1999 but does not expose a unique Yin standardizer."
+  yang_1999: "Uses v_i/sigma_i with a MAD-derived robust scale."
+  yang_2001: "Uses V_i/r_i and a dependent max-based mapping."
+  yang_2002: "Uses a symmetric correlated bifactor construction."
+  yang_1994: "Direct dependent-observation source equations were inaccessible."
+  implication: MULTIPLE_PLAUSIBLE_COMPLETIONS_REMAIN_UNSELECTED
+closure:
+  standardized_residual_unique: false
+  equation_8_hat_versus_equation_9_bar_relation_unique: false
+  equation_9_state_weight_matrix_unique: false
+  decision: CURRENTLY_UNKNOWN
+  faithful_algorithm_use_authorized: false
+  allowed_only_as: PAPER_DERIVED_POLICY_BASELINE

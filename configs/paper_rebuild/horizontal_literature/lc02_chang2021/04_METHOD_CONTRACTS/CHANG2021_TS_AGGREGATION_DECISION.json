@@ -1,0 +1,19 @@
+{
+  "schema": "lc02_chang2021.ts_aggregation.v1",
+  "decision": "UNRESOLVED",
+  "gate_result": "FAIL",
+  "paper_prints": [
+    "six local Takagi-Sugeno consequents",
+    "six plotted membership functions"
+  ],
+  "paper_does_not_print": [
+    "rule firing-strength operator",
+    "normalization denominator",
+    "weighted aggregation or defuzzification equation",
+    "overlap endpoint policy",
+    "output clipping or lower bound"
+  ],
+  "candidate_not_selected": "normalized weighted average of local affine consequents",
+  "additional_risk": "The beta1 weighted output can fall below one over a plotted overlap unless a clamp or different aggregation is imposed; no such policy is stated.",
+  "implementation_authorized": false
+}

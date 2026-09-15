@@ -1,0 +1,5 @@
+branch_id,paper_native_name,role,reproduction_level,formal_external_primary,closure,provenance_class
+YIN2023_EKF,EKF,paper internal baseline,FAITHFUL_ALGORITHM_REPRODUCTION,false,"base recursion/model source-closed; exact paper numeric initialization is a future physical instantiation",CITED_SOURCE
+YIN2023_AKF,AKF,paper internal baseline,FAITHFUL_MODULE_REPRODUCTION,false,"printed module transcribed; Eq6 dimensional inconsistency retained and not silently repaired",PAPER_DIRECT
+YIN2023_RKF,RKF,paper internal baseline,PAPER_DERIVED_POLICY_BASELINE,false,"L_k versus Z_k unknown; standardizer undefined; zero-weight/rejection path not source-closed; L_k=Z_k and row omission only derived",PAPER_DERIVED
+YIN2023_RAEKF,RAKF,formal intended primary,PAPER_DERIVED_POLICY_BASELINE,true,"Eq12/13/14 fusion printed; inherited L_k/Z_k, standardizer, and zero-weight/rejection limitations leave robust covariance input unresolved",PAPER_DERIVED

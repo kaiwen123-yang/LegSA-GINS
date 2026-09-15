@@ -1,0 +1,48 @@
+schema_version: 1
+boundary_id: LC02_FINAL_CANDIDATE_ONLINE_INPUT_BOUNDARY_V1
+scope: STATIC_TRIAGE_AND_FUTURE_ROUTE_CLASSIFICATION
+allowed_candidate_inputs:
+  common:
+    - GO2_BODY_GYROSCOPE
+    - GO2_BODY_ACCELEROMETER
+  paper_candidate_dependent:
+    - GNSS1_SOLUTION_PVT
+    - GNSS1_SOLUTION_COVARIANCE
+  ginav_official_system_route:
+    - RINEX_OBSERVATION
+    - RINEX_NAVIGATION
+    - GO2_BODY_IMU_CSV_VIA_SOURCE_EXPLICIT_ADAPTER
+    - OFFICIAL_INTERNAL_GNSS_SOLVER_OUTPUT_TO_OFFICIAL_LC_INS
+forbidden_online_or_selection_inputs:
+  - GO2_QUATERNION
+  - GO2_RPY
+  - GO2_ONBOARD_PVT
+  - GO2_YAW
+  - GNSS2
+  - P2_MINUS_P1
+  - DUAL_ANTENNA_YAW
+  - EXT_CARRIERS
+  - LC01_OUTPUTS
+  - HARTLEY_OUTPUTS
+  - LEGSA_OUTPUTS
+  - FINAL_V23_OUTPUTS
+  - TRACE
+  - REFERENCE
+  - ERROR_SERIES
+forbidden_uses:
+  - EQUATION_COMPLETION
+  - POLICY_SELECTION
+  - SIGN_OR_OFFSET_SELECTION
+  - PARAMETER_TUNING
+  - CANDIDATE_SELECTION
+  - OUTPUT_CORRECTION
+ginav_route_constraints:
+  official_core_unmodified: true
+  source_explicit_adapters_only: true
+  official_internal_spp_ins_lc_required: true
+  invented_external_pvt_forbidden: true
+  go2_body_identity_source_closed: true
+  go2_source_frame: FLU
+  lever_arm_provenance_source_closed: true
+  threshold_behavior_status: FUTURE_VALIDATION_NOT_PERFORMANCE_GATE
+

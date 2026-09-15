@@ -1,0 +1,9 @@
+question,chang_evidence,cited_evidence,source_identity,provenance,decision,limitation
+base_recursion_identity,"Eq4 linear F/H; Eqs5-9 ordinary KF recursion","linear/linearized CKF becomes EKF and linear EKF becomes KF",ZHAO2015_DISSERTATION,CITED_SOURCE_COMPLETION,A_LITERAL_PRINTED_LINEAR_ERROR_STATE_RECURSION,"does not close Chang dynamics/noise"
+cubature_points,"none printed","standard 2n spherical-radial cubature points",ZHAO2015_DISSERTATION,CITED_SOURCE_COMPLETION,NOT_USED_BY_IDENTITY_A,"adding them would be redundant and unprinted"
+nonlinear_CKF_context,"paper calls recursion CKF","posterior sigma-point transformation CKF",CUI2017,CITED_SOURCE_COMPLETION,CONTEXT_ONLY,"does not prove an unprinted Chang transform"
+generic_CKF_context,"not cited by Chang","standard nonlinear cubature construction",ARASARATNAM2009,CITED_SOURCE_COMPLETION,CONTEXT_ONLY,"not in Chang reference list"
+15_state_navigation_model,"Eq1-2 print partial error dynamics","ENU/body definitions and mechanization",YANG2018_THESIS,CITED_SOURCE_COMPLETION,NOT_A_UNIQUE_COMPLETION,"source uses local-frame computed-minus-true attitude and a materially different 7-state 2-D field model"
+strong_tracking_inverse,"Eq12 prints H^-1 for 6x15 H","standard STF remains measurement-space",ZHOU_FRANK1996,CITED_SOURCE_COMPLETION,NO_RECTANGULAR_INVERSE_CLOSURE,"no pseudoinverse or state lift identified"
+multiple_fading_mapping,"Eq15 says i=1..15","observed-only factors with unit unobserved factors for H=[S,0]",GAO2011,CITED_SOURCE_COMPLETION,PLAUSIBLE_DIFFERENT_POLICY_NOT_SELECTED,"conflicts with a claim that all 15 factors are estimated"
+TS_aggregation,"memberships and local consequents only","normalized membership-weighted first-order TSK formula",RICHARDSON2017_DISSERTATION,CITED_SOURCE_COMPLETION,CANDIDATE_NOT_UNIQUE_CHANG_SEMANTICS,"Chang omits normalization aggregation and clipping"

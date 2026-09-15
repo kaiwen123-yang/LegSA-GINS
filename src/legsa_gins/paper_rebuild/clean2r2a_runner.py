@@ -241,6 +241,66 @@ def build_runtime_config(
     return _replace_config(text, replacements)
 
 
+def build_runtime_config_from_trusted_metadata(
+    *, method_id: str, auxiliary_manifest: str | Path,
+    provider_protocol: str | Path, output_dir: str | Path,
+) -> str:
+    """Build the frozen parent template without reading provider payload bytes.
+
+    This is intentionally narrower than :func:`build_runtime_config`.  It is
+    used only by the hard-locked Canonical-541 trusted-direct resume path,
+    where the already-written method-bound manifests are the input authority.
+    The auxiliary and protocol files are small metadata/config documents; all
+    referenced payload paths are required to exist but are never hashed here.
+    """
+
+    auxiliary_path = Path(auxiliary_manifest).resolve(strict=True)
+    protocol_path = Path(provider_protocol).resolve(strict=True)
+    auxiliary = json.loads(auxiliary_path.read_text(encoding="utf-8"))
+    protocol = load_yaml_mapping(protocol_path)
+    common = protocol.get("solver_common")
+    artifacts = auxiliary.get("auxiliary_artifacts")
+    if not isinstance(common, Mapping) or not isinstance(artifacts, Mapping):
+        raise Clean2R2ARunError("trusted metadata lacks solver_common/auxiliary artifacts")
+    roles = {
+        "raw_doppler": "raw_doppler_provider",
+        "go2_roll_pitch": "go2_attitude_prior",
+        "go2_horizontal_velocity": "go2_horizontal_velocity_prior",
+    }
+    aux_paths: dict[str, Path] = {}
+    for target, role in roles.items():
+        entry = artifacts.get(role)
+        if not isinstance(entry, Mapping) or not entry.get("path"):
+            raise Clean2R2ARunError(f"trusted auxiliary metadata lacks path: {role}")
+        aux_paths[target] = Path(str(entry["path"])).resolve(strict=True)
+    raw_backend = auxiliary.get("raw_doppler_backend")
+    if not isinstance(raw_backend, Mapping):
+        raise Clean2R2ARunError("trusted auxiliary metadata lacks raw Doppler backend")
+    template = active_runtime_config(
+        Path("/trusted-direct/imu"), Path("/trusted-direct/gnss"), Path(output_dir),
+        method_id="LegSA_Paper_V1", auxiliary_paths=aux_paths,
+        extra_config=_solver_extra_config(auxiliary, common),
+        run_id=run_directory(method_id),
+    )
+    flags = method_features(method_id)
+    return _replace_config(template, {
+        "stage_id": SOLVER_PARENT_STAGE_ID,
+        "protocol_id": SOLVER_PARENT_PROTOCOL_ID,
+        "case_id": CASE_ID,
+        "data_mode": DATA_MODE,
+        "run_id": run_directory(method_id),
+        "run_label": run_directory(method_id),
+        "algorithm_id": method_id,
+        "ablation_variant": method_id if method_id in AB_IDS else "STRUCTURAL_ONLY",
+        "enable_dual_yaw": str(flags["dual"]).lower(),
+        "enable_receiver_velocity": str(flags["receiver"]).lower(),
+        "enable_raw_doppler": str(flags["raw"]).lower(),
+        "enable_source_aware": str(flags["source_aware"]).lower(),
+        "enable_go2_roll_pitch_prior": str(flags["go2_roll_pitch"]).lower(),
+        "enable_go2_horizontal_velocity_prior": str(flags["go2_horizontal"]).lower(),
+    })
+
+
 def audit_base_provider_parity(
     *, clean_input_manifest: str | Path, auxiliary_manifest: str | Path,
     output_path: str | Path, repo_root: str | Path,

@@ -1,0 +1,32 @@
+schema_version: lc02.frame_lever_arm.v1
+generic_cited_endpoints:
+  gnss_measured_physical_point:
+    value: GNSS_antenna_phase_center
+    provenance_class: CITED_SOURCE
+  ins_nominal_physical_point:
+    value: INS_IMU_mechanization_origin
+    provenance_class: CITED_SOURCE
+by2_physical_instantiation:
+  gnss_measured_physical_point:
+    value: GNSS1_antenna_phase_center
+    provenance_class: BY2_PHYSICAL_INSTANTIATION
+  ins_nominal_physical_point:
+    value: Go2_body_IMU_mechanization_origin
+    provenance_class: BY2_PHYSICAL_INSTANTIATION
+  precision_external_calibration_available: false
+  status: ROUGH_BY2_PHYSICAL_INSTANTIATION
+  numerical_value_authorized_now: false
+  required_before_use: [declare_both_endpoints, declare_direction, declare_FRD_axes, record_units, no_RMSE_sign_selection]
+  claim_forbidden: PRECISION_EXTRINSIC_TRUTH
+lever_arm:
+  symbol: {value: l_GNSS_b, provenance_class: PAPER_DIRECT}
+  direction: {value: INS_IMU_origin_to_GNSS_antenna_phase_center, provenance_class: CITED_SOURCE}
+  expressed_in: {value: body_FRD, provenance_class: CITED_SOURCE}
+  nominal_antenna_position: {value: "r_INS^n + C_b^n*l_GNSS^b with local-curvature conversion for BLH", provenance_class: CITED_SOURCE}
+  residual_sign: {value: "predicted antenna position minus observed GNSS position", provenance_class: CITED_SOURCE}
+  attitude_jacobian: {value: "+skew(C_b^n*l_GNSS^b)", provenance_class: PAPER_DIRECT}
+measurement_covariance:
+  dimension: [3, 3]
+  frame: NED
+  variance_units: m2
+  provenance_class: PAPER_DIRECT

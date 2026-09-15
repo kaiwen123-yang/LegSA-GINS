@@ -1,0 +1,52 @@
+{
+  "schema_version": "paper_rebuild.clean3r2_s3_execution_freeze.v1",
+  "stage_id": "CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME",
+  "protocol_id": "CLEAN3_S3_AB0000_PARITY",
+  "case_id": "CLEAN1_BY2_CLEAN_NORMAL",
+  "algorithm_id": "AB0000",
+  "run_id": "CLEAN3_S3_AB0000",
+  "failed_attempt_stage_id": "CLEAN3_MATH_REPAIR_RP_JACOBIAN_RD_LEVERARM_SA_CLEAN_SILENCE",
+  "failed_attempt_terminal": "FAILED_TECHNICAL_S3_AB0000_FORMAL_COUNTER_CONTRACT_UNROUTED",
+  "failed_attempt_parity": "NOT_EVALUATED",
+  "failed_attempt_execution_commit": "3110131cbbb64caff71a4e493a0b64365e6fb936",
+  "failed_attempt_runner_freeze_commit": "e28899156b03b32d3840476bf57ac01807494086",
+  "repair_implementation_commit": "0d8cc2bdccfd89b236ab4badeef9db5344dcf4d3",
+  "amendment_parent_head": "9d51794d5c031cd0331d1fd8fe66d42c0fb690ed",
+  "code_freeze_commit": "8dd620ea6d9645b946a503275ddbf04d66c3baa2",
+  "runner_freeze_commit": "5209b6afeeb2b2a0ad99e640ffe50f8dd3b0c909",
+  "final_cpp_tree": "72db2c7cc86e92df5f9a475536faa67719c6e61a",
+  "authorization_document": "docs/paper_rebuild/CLEAN3R2_AUTHORIZATION.md",
+  "authorization_sha256": "eb267045d32af7ae407129b8b53fb6f4c8ed8a6dd75b7889a5a0fb53c3223237",
+  "authorization_hash_algorithm": "sha256",
+  "tracked_file_sha256": {
+    "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp": "21ebd360a94b5631002e55c7d035d7d1b2b7a8198247555ab2b14fc4de4da7d1",
+    "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp": "3ba0ef1aaa010fb0ddec76aa77825c2a2cc1f99dd248fd099196a3ccded3d5dd",
+    "src/legsa_gins/paper_rebuild/clean3_math_repair.py": "d233e4b8d832c2bf0a8b896451e7465cbdb5af7f6b19d1e1dd69bd3a1ef96b26",
+    "scripts/paper_rebuild/run_clean3_math_repair.py": "cafd5db57432e536c11853d9bcb18f96a8609e8c1db108d6501f72df73ece985",
+    "tests/paper_rebuild/test_clean3r2_counter_contract_routing.py": "93bf1dc7e0119ce709efbf5a027936803c61f486a6c20f6a05415acff337c048",
+    "tests/paper_rebuild/test_clean3_s3_parity_runner.py": "43fabb9fd4225e9f00e95fd4b8971c650442f31e89bfb673a086ffe25e95e6c8"
+  },
+  "parity_anchor_sha256": {
+    "KF_GINS_Navresult.nav": "800f0dc12d77fe01ff5262c4261457e1ec178344dba3efb249464ed16696ebc0",
+    "KF_GINS_STD.txt": "04ebff455853a89e3a32ebed5510a5c3b86acfa3b569448acd6c7b29c18a05e2"
+  },
+  "validation": {
+    "inherited_tests": "253 passed, 3 skipped",
+    "clean3r2_full_tests": "285 passed, 3 skipped",
+    "release_build_passed": true,
+    "diff_check_passed": true,
+    "reviewer_approved": true
+  },
+  "execution_authorization": {
+    "s3_solver_allowed_now": true,
+    "maximum_solver_executions": 1,
+    "evaluator_allowed_now": false,
+    "reference_trace_allowed_now": false,
+    "canonical_541_allowed_now": false,
+    "provider_regeneration_allowed_now": false,
+    "retry_allowed_now": false
+  },
+  "old_attempt_overwritten": false,
+  "ready_for_s4": false,
+  "ready_for_paper_claims": false
+}

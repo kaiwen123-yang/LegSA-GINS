@@ -1,0 +1,394 @@
+schema_version: horizontal_literature.phase2_ext02_cwls.v1
+phase_id: PHASE2
+method_id: EXT02_CWLS
+case_id: C00
+formal_reproduction_level: FAITHFUL_ALGORITHM_REPRODUCTION
+evaluation_at_native_freeze: NOT_EVALUATED
+ready_for_paper_claims: false
+
+paper_source:
+  source_id: LIU_BALLAL_CHEN_AL_NAFFOURI_TIM_2022_8005315
+  authors: [Xing Liu, Tarig Ballal, Hui Chen, Tareq Y. Al-Naffouri]
+  title: "Constrained Wrapped Least Squares: A Tool for High-Accuracy GNSS Attitude Determination"
+  journal: IEEE Transactions on Instrumentation and Measurement
+  volume: 71
+  year: 2022
+  article_number: 8005315
+  doi: 10.1109/TIM.2022.3193412
+  typesetting_crosscheck:
+    source_id: ARXIV_2112_14813
+    role: TYPESETTING_CROSSCHECK_ONLY
+  official_code_search:
+    searched: true
+    search_scope:
+      - current_clean_repository
+      - configured_external_source_root
+      - IEEE
+      - author_university_records
+      - arXiv
+      - GitHub
+      - publisher_supplements
+    result: NO_ATTRIBUTABLE_OFFICIAL_SOURCE_CODE_OR_SUPPLEMENTARY_IMPLEMENTATION_LOCATED
+    implementation_lineage: INDEPENDENT_CLEAN_ROOM_IMPLEMENTATION
+
+equation_map:
+  "Eqs.(5)-(8)": DD_OBSERVATION_AND_H_MATRIX
+  "Eq.(46)": STACKED_CONSTRAINED_WRAPPED_LEAST_SQUARES
+  "Eq.(54)": SINGLE_BASELINE_OBJECTIVE_WITH_X_EQUALS_D_TIMES_R
+  "Eqs.(56)-(58)": PHASE_CIRCLE_AND_INTEGER_BOUNDS
+  "Eqs.(59)-(60)": JOINT_CIRCLE_SYSTEMS
+  "Eqs.(62)-(65)": V1_V2_CENTERS_PEAKS_DELTA1_DELTA2
+  "Eqs.(66)-(72)": DELTA3_DELTA4_PROJECTIONS_PC_Q1_Q2
+  "Eq.(73)": COMPLETE_COARSE_OBJECTIVE
+  "Eqs.(74)-(75)": SPHERE_CONSTRAINED_UNWRAPPED_REFINEMENT_AND_RECOVERED_PHASE
+  "Algorithm 1": CIRCLE_CANDIDATES
+  "Algorithm 2": ALL_CANDIDATE_COARSE_AND_REFINE
+
+algorithm:
+  K_policy: ALL_UNIQUE_CANDIDATES
+  candidate_deduplication: MACHINE_PRECISION_GEOMETRIC_DIRECTION_ONLY
+  delta_Delta: 0.05
+  round_half_down: ceil(x-0.5)
+  wrap_interval_cycles: "(-0.5,0.5]"
+  baseline_length_m: 0.350
+  sphere_refinement:
+    tolerance: 1.0e-10
+    max_iterations: 20
+  objective_oracle:
+    required: true
+    subset_selection_role: INPUT_INDEX_ONLY_BEFORE_REAL_OBSERVATION_ACCESS
+    original_epoch_indices: [0, 150, 300, 450, 600, 750, 900, 1050, 1200, 1350, 1500]
+    initialization: DENSE_FIBONACCI_FULL_SPHERE
+    grid_direction_count: 4096
+    local_refinement: EQ74_EQ75_INTEGER_STABLE_EXACT_SPHERE
+    objective_implementation: INDEPENDENT_RESIDUAL_AND_CHOLESKY_PATH
+    integer_rounding_implementation: ORACLE_LOCAL_CEIL_X_MINUS_0P5
+    shared_low_level_primitive: MATHEMATICALLY_VERIFIED_SPHERE_QUADRATIC_SOLVER_ONLY
+    production_import_allowlist: [solve_unit_sphere_quadratic]
+    forbidden_dependency: ALGORITHM1_CIRCLE_CANDIDATES
+    comparison_tolerance: "max(1e-9,1e-9*max(1,abs(J_formal),abs(J_oracle)))"
+  acceptance:
+    solution_state: accepted_wrapped_solution
+    method_native_accepted: true
+    search_complete_requires_every_unique_candidate_converged_finite: true
+    incomplete_candidate_search_is_invalid: true
+    ambiguity_correctness_known: false
+    native_metric: accepted_wrapped_solution_rate
+    forbidden_metrics: [ambiguity_success_rate, fixed_rate, float_rate]
+
+observation_contract:
+  data_mode: real_by2_raw
+  constellation: GPS
+  signal: L1_CA
+  rawx_identity: [0, 0, 0]
+  exact_pairing_key: [gps_week, gps_tow_seconds]
+  pairing_tolerance_seconds: 0.0
+  required_paired_epoch_count: 1509
+  elevation_mask_deg: 10.0
+  baseline_order: GNSS2_MINUS_GNSS1
+  receiver_geometry_source: RAWX_SFRBX_RTKLIB_BROADCAST_STATE_AND_LOS
+  receiver_position_policy: RAW_CODE_SPP_ONLY
+  status_baseline_solver_input: false
+  HPPOSECEF_solver_input: false
+  RTKLIB_position_solver_input: false
+  tracking_fields: [prValid, cpValid, halfCyc, subHalfCyc, locktime_ms, trkStat]
+  pivot_policy: HIGHEST_ELEVATION_THEN_LOCKTIME_THEN_SVID
+  double_difference_sign: "(GNSS2-GNSS1)_SATELLITE_MINUS_PIVOT"
+  covariance_policy: FULL_CORRELATED_DOUBLE_DIFFERENCE_COVARIANCE
+  phase_value_policy: CPMES_AS_REPORTED_NO_SECOND_HALF_CYCLE_SHIFT
+  phase_bias_calibration: NONE
+  physical_output_transform:
+    antenna0: GNSS1_RIGHT
+    antenna_a: GNSS2_LEFT
+    x_a: GNSS2_MINUS_GNSS1
+    frame: NED
+    baseline_heading_deg: atan2(b_E,b_N)
+    body_yaw_deg: wrap360(baseline_heading_deg+90)
+    output_elevation_deg: atan2(-b_D,hypot(b_N,b_E))
+    selected_by_reference_data: false
+  single_baseline_output_boundary:
+    allowed: [direction, baseline_vector_m, baseline_heading_deg, baseline_elevation_deg, body_yaw_deg]
+    forbidden: [full_attitude, rotation_matrix, roll, pitch, yaw_pitch_roll]
+
+units_and_weights:
+  raw_code: m
+  raw_carrier: cycles
+  backend_DD_order_and_units: "[code_m,phase_m]"
+  paper_CWLS_order_and_units: "[phase_cycles,code_cycles]"
+  paper_H_units: cycles_per_m
+  paper_Q_units: cycles_squared
+  adapter: "observations/H divide by GPS-L1 wavelength; Q divides by wavelength^2; full covariance permutes code-phase to phase-code"
+  baseline_vector: m
+  angles: deg
+  runtime: s
+  code_sigma_m: "max(0.50, 0.01 * 2^prStdev)"
+  carrier_sigma_cycles: "max(0.004, 0.004 * cpStdev); cpStdev=15 invalid"
+  single_difference_variance: RECEIVER1_VARIANCE_PLUS_RECEIVER2_VARIANCE
+  double_difference_covariance: "diag(nonpivot_SD_variance) + pivot_SD_variance * 11^T"
+  objective_weight: FULL_Q_DD_INVERSE
+  trace_tuned: false
+
+common_backbone_contract:
+  yaw_std_deg: 1.5
+  role: LABEL_ONLY_NOT_SOLVER_INPUT
+
+failure_codes:
+  - INSUFFICIENT_COMMON_RAW
+  - INSUFFICIENT_PR_VALID
+  - INSUFFICIENT_CP_VALID
+  - INSUFFICIENT_PR_CP_VALID
+  - INSUFFICIENT_HALF_CYCLE_VALID
+  - INSUFFICIENT_INTEGER_COMPATIBLE_PHASE
+  - INSUFFICIENT_SATELLITE_STATES
+  - INSUFFICIENT_ELEVATION_ELIGIBLE
+  - INSUFFICIENT_DD_DIMENSION
+  - NORMAL_MATRIX_RANK_DEFICIENT
+  - NO_VALID_INTEGER_INTERVAL
+  - NO_CIRCLE_PAIR_CANDIDATE
+  - ALL_REFINEMENTS_FAILED
+  - SPHERE_SOLVER_FAILURE
+  - NONFINITE_OBJECTIVE
+  - NUMERICAL_FAILURE
+
+data_flags:
+  synthetic_data_used: false
+  semisynthetic_data_used: false
+  trace_used_online: false
+  receiver_imu_as_body_imu: false
+  final_v23_output_solver_input: false
+  LegSA_output_solver_input: false
+  per_case_tuning: false
+  output_only_correction: false
+  epoch_deleted_for_metric: false
+  old_runtime_input_count: 0
+  trace_open_count_before_native_freeze: 0
+  HPPOSECEF_semantic_decode_count_before_native_freeze: 0
+  HPPOSECEF_solver_input: false
+  status_baseline_solver_input: false
+  Go2_yaw_solver_input: false
+  EXT01_output_solver_input: false
+  RTKLIB_position_solver_input: false
+
+parallel_execution:
+  default_workers: 16
+  maximum_workers: 20
+  worker_thread_environment:
+    OMP_NUM_THREADS: "1"
+    MKL_NUM_THREADS: "1"
+    OPENBLAS_NUM_THREADS: "1"
+    NUMEXPR_NUM_THREADS: "1"
+  deterministic_sharding: CONTIGUOUS_ORIGINAL_INDEX_RANGES
+  compact_cache: FINGERPRINTED_NUMPY_MEMORY_MAP
+  worker_raw_csv_access: false
+  atomic_part_files: true
+  atomic_writer_policy: NO_REPLACE_FAIL_ON_ANY_TARGET_COLLISION
+  atomic_install_backends:
+    primary: LINUX_RENAMEAT2_RENAME_NOREPLACE
+    drvfs_fallback: WINDOWS_DOTNET_FILE_OR_DIRECTORY_MOVE_NO_OVERWRITE
+    drvfs_fallback_scope: SAME_PROVEN_9P_ANAME_DRVFS_MNT_DRIVE_ONLY
+    powershell_transport: UTF16LE_BASE64_ENCODED_COMMAND_WITH_ESCAPED_SINGLE_QUOTED_PATHS
+    file_and_parent_fsync: true
+    hardlink_fallback: UNAVAILABLE_ON_TARGET_DRVFS_EPERM
+  partial_attempt_evidence_preserved_on_resume_collision: true
+  resume_policy: FAIL_CLOSED_FINGERPRINT_AND_PART_HASH_VALIDATION
+  final_order: ORIGINAL_PAIRED_EPOCH_INDEX
+  scientific_determinism_probe: WORKERS_1_VS_REQUESTED_EXCLUDING_RUNTIME_AND_PID
+  resource_admission:
+    required: true
+    worker_failure_count: 0
+    projected_RSS_exclusive_limit_fraction_of_available_RAM: 0.70
+    cache_read_IO_must_be_positive: true
+    deterministic_output_size_projection:
+      paired_epoch_count: 1509
+      bytes_per_epoch: 1048576
+      fixed_bytes: 67108864
+      disk_safety_reserve_bytes: 1073741824
+      formula: 1509*bytes_per_epoch+fixed_bytes+disk_safety_reserve_bytes
+    maximum20_extra_requirements:
+      zero_swap_activity: true
+      thermal_evidence_available: true
+      maximum_temperature_delta_c: 5.0
+
+lifecycle_modes:
+  - preflight
+  - resource-determinism-probe
+  - native-only
+  - post-native-diagnostics
+  - full
+trace_mode_native: disabled
+post_native_evaluator:
+  opens_only_after_validated_native_freeze: true
+  trace_csv_contract:
+    observed_column_count: 10
+    first_column: time
+    exact_columns:
+      - time
+      - lat
+      - lon
+      - height
+      - processed_lat
+      - processed_lon
+      - processed_height
+      - yaw
+      - pitch
+      - roll
+    timestamp_alias_accepted: false
+  base_time_unix_seconds: 1772784000
+  window_start_seconds: 66.0
+  window_end_seconds: 340.0
+  gps_to_unix_seconds: 315964800+gps_week*604800+gps_tow_seconds-leap_seconds
+  leap_seconds:
+    expected_value: 18
+    authority: COMPACT_CACHE_PAIRED_EPOCHS_R1_R2_LEAP_FIELDS
+    require_identical_all_receiver_epochs: true
+  trace_yaw_processing: UNWRAP_THEN_INTERPOLATE
+  trace_unwrap_domain: FULL_VALIDATED_MONOTONIC_TRACE_BEFORE_NATIVE_WINDOW_GATE
+  native_epoch_match_gate_seconds: [66.0, 340.0]
+  matched_native_time_must_be_bracketed_by_trace: true
+  yaw_reference_ned_deg: wrap360(90-yaw_trace_enu_deg)
+  time_offset_seconds: 0.0
+  search_or_alignment: false
+  epoch_deletion: false
+  role: FIXPOSITION_SAME_SOURCE_DESCRIPTIVE_REFERENCE_NOT_INDEPENDENT_TRUTH
+  proxy_objective_gate:
+    evaluation: EXACT_PRODUCTION_WRAPPED_OBJECTIVE_AT_PROXY_DIRECTION
+    materiality_tolerance: "max(1e-9,1e-9*max(1,abs(J_prod),abs(J_proxy)))"
+    materially_lower_proxy_forbids_pass: true
+    proxy_never_substituted: true
+    required_geometry: [vector_angular_difference_deg, proxy_length_m, proxy_heading_deg, proxy_body_yaw_deg]
+  proxy_epoch_association:
+    receiver_streams_duplicate_free: true
+    candidate_grid: SORTED_INTERSECTION_OF_GNSS1_AND_GNSS2_HPPOSECEF_ITOW
+    rawx_target: round((gps_tow_seconds_mod_604800)*1000)_mod_604800000
+    nearest_requirement: UNIQUE_NEAREST_COMMON_EPOCH
+    midpoint_tie: UNAVAILABLE
+    local_cadence_ms: MINIMUM_POSITIVE_ADJACENT_COMMON_GRID_SPACING_AT_CANDIDATE
+    distance_requirement: abs(proxy_itow_minus_rawx_ms)_strictly_less_than_half_local_cadence
+    assignment_requirement: STRICT_MONOTONIC_ONE_TO_ONE
+    trace_or_accuracy_used: false
+    required_row_fields:
+      - rawx_itow_ms
+      - proxy_itow_ms
+      - proxy_itow_minus_rawx_ms
+      - proxy_local_common_grid_cadence_ms
+      - proxy_local_half_cadence_bound_ms
+      - proxy_association_policy
+      - proxy_association_status
+  required_trace_metrics:
+    - wrapsafe_bias_deg
+    - rmse_deg
+    - mae_deg
+    - median_absolute_deg
+    - p90_absolute_deg
+    - p95_absolute_deg
+    - p99_absolute_deg
+    - max_absolute_deg
+    - matched_count
+    - valid_coverage
+    - maximum_gap_seconds
+    - continuity
+  fractional_dd_diagnostics:
+    epoch_row_count: 1509
+    production_residual_retained: true
+    proxy_implied_model: "phase_cycles - H_cycles_per_m @ actual_HPPOSECEF_GNSS2_minus_GNSS1_vector_m"
+    proxy_baseline_forced_to_0p350_m: false
+    group_keys: [pivot_identity, satellite_identity, r1_subHalfCyc, r2_subHalfCyc]
+    stratify_by: [subHalfCyc_combination, lock_reset, cycle_slip, pivot_change, low_DD_dimension]
+    low_DD_dimension_definition: DD_dimension_le_3
+    phase_bias_calibration: NONE
+    descriptive_only: true
+  source_identity:
+    native_source_fingerprint_authority: NATIVE_FREEZE_MATCHING_NATIVE_SUMMARY
+    compact_cache_validation_fingerprint: NATIVE_SOURCE_FINGERPRINT
+    post_native_source_fingerprint_authority: CURRENT_POST_NATIVE_PREFLIGHT
+    post_only_source_fingerprint_divergence_allowed: true
+  invocation_accounting:
+    manifest_count_scope: SUCCESSFUL_POST_NATIVE_INVOCATION_ONLY
+    hpposecef_decode_pass_count_unit: GNSS_RECEIVER_STREAM
+    successful_invocation_receiver_stream_decode_pass_count: 2
+    prior_failed_post_native_attempts_included: false
+    prior_failed_post_native_attempts_not_in_successful_invocation_counts: true
+  recovery_outputs:
+    cli_option: --post-recovery-id
+    safe_slug_regex: "[A-Za-z0-9][A-Za-z0-9_-]{0,63}"
+    permitted_mode: post-native-diagnostics
+    output_root: C00/POST_NATIVE_RECOVERY_<ID>
+    post_file_basenames: SAME_AS_PRIMARY_POST_NATIVE_FILES
+    report_filename: PHASE2_EXT02_C00_REPORT_<ID>.md
+    status_filename: PHASE2_STATUS_<ID>.json
+    collision_policy: REFUSE_IF_ANY_RECOVERY_TARGET_EXISTS
+    primary_post_role: HASHED_IMMUTABLE_INPUT_ONLY
+    supersedes_for_proxy_diagnostics_only: true
+    frozen_native_inventory_mutated: false
+
+runtime_topology:
+  stage_root_relative: stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON
+  native_root_relative: 03_EXT02_CWLS/C00
+  report_root_relative: 11_REPORT
+  final_native_root_must_be_absent: true
+  final_terminal_output_must_be_absent: true
+  temporary_attempt_then_atomic_finalize: true
+  native_inventory_collision_policy: FAIL_BEFORE_FIRST_NATIVE_WRITE
+  native_csv_field_contract:
+    python_csv_decoded_character_limit: 8388608
+    limit_scope: SET_FOR_EACH_READ_AND_RESTORE_PRIOR_GLOBAL_LIMIT_IN_FINALLY
+    over_limit_behavior: PHASE2_RUNNER_ERROR_WITH_CSV_ERROR_CAUSE
+    sizing_basis: SECOND_FORMAL_ATTEMPT_READ_ONLY_SERIALIZATION_MEASUREMENT
+    measured_candidate_diagnostics_max_utf8_bytes: 429258
+    measured_candidate_diagnostics_epoch_index: 1497
+    measured_refinement_iterations_max_utf8_bytes: 402621
+    measured_refinement_iterations_epoch_index: 1496
+    minimum_margin_over_measured_max: GREATER_THAN_19X
+  native_files:
+    heading_results: EXT02_C00_NATIVE_HEADING_RESULTS.csv
+    failure_ledger: EXT02_C00_FAILURE_LEDGER.csv
+    runtime: EXT02_C00_RUNTIME.csv
+    dd_diagnostics: EXT02_C00_DD_DIAGNOSTICS.csv
+    candidate_diagnostics: EXT02_C00_CANDIDATE_DIAGNOSTICS.csv
+    refinement_diagnostics: EXT02_C00_REFINEMENT_DIAGNOSTICS.csv
+    objective_oracle_diagnostics: EXT02_C00_OBJECTIVE_ORACLE_DIAGNOSTICS.csv
+    tracking_diagnostics: EXT02_C00_TRACKING_DIAGNOSTICS.csv
+    native_summary: EXT02_C00_NATIVE_SUMMARY.json
+    native_freeze: EXT02_C00_NATIVE_FREEZE.json
+  report_files:
+    phase2_report: PHASE2_EXT02_C00_REPORT.md
+    phase2_status: PHASE2_STATUS.json
+  post_native_files:
+    proxy_diagnostics: EXT02_C00_PROXY_DIAGNOSTICS.csv
+    objective_diagnostics: EXT02_C00_POST_NATIVE_OBJECTIVE_DIAGNOSTICS.csv
+    trace_diagnostics: EXT02_C00_TRACE_DIAGNOSTICS.csv
+    fractional_dd_diagnostics: EXT02_C00_FRACTIONAL_DD_DIAGNOSTICS.csv
+    post_native_manifest: EXT02_C00_POST_NATIVE_DIAGNOSTICS_MANIFEST.json
+
+required_manifest_fields:
+  - data_mode
+  - raw_source_hashes
+  - provider_hashes
+  - synthetic_data_used
+  - semisynthetic_data_used
+  - trace_used_online
+  - receiver_imu_as_body_imu
+  - final_v23_output_solver_input
+  - LegSA_output_solver_input
+  - per_case_tuning
+  - output_only_correction
+  - epoch_deleted_for_metric
+  - old_runtime_input_count
+  - code_commit
+  - code_commit_role
+  - source_fingerprint
+  - runtime_source_hashes
+  - git_source_state
+  - config_hash
+
+git_provenance:
+  code_commit_role: BASE_HEAD_ONLY_NOT_COMPLETE_RUNTIME_SOURCE_IDENTITY
+  authorized_dirty_runtime_delta_allowed: true
+  complete_runtime_source_identity: SOURCE_HASHES_PLUS_SOURCE_FINGERPRINT
+  reject_dirty_git: false
+
+terminal_states:
+  ready_for_native_comparison: PASS_PHASE2_EXT02_CWLS_C00_READY_FOR_NATIVE_COMPARISON
+  implementation_validated: PASS_PHASE2_EXT02_IMPLEMENTATION_VALIDATED_BY2_C00_APPLICABILITY_RESULT
+  unsupported: UNSUPPORTED_EXT02_ON_BY2_DUE_TO_EXPLICIT_PAPER_ASSUMPTION_VIOLATION
+  blocked_prefix: BLOCKED_PHASE2_EXT02_
