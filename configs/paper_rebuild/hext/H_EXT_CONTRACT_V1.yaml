@@ -1,0 +1,345 @@
+schema_version: hext.external_sequences.contract.v1
+task: H-EXT-02_PROPOSAL_FROM_H-EXT-01
+status: DRAFT_PENDING_HUMAN_AUTHORIZATION
+execution_authorized: false
+frozen_main_chain: PROTOCOL_V2.1_UNCHANGED_EXTERNAL_COMPARISON_ROWS_ONLY
+sequence_registry: configs/paper_rebuild/clean5/CLEAN5_SEQUENCE_REGISTRY.yaml
+local_path_config: configs/paper_rebuild/DATA_PATHS.CLEAN3R4.local.yaml
+sequences:
+  BY2:
+    role: SHARED_PARAMETER_VARIANTS_ONLY
+    window:
+    - 66.0
+    - 340.0
+    base_time: 1772784000.0
+    trace: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv
+    trace_sha256: ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c
+    trace_hash_verification: DECLARED_METADATA_ONLY_NO_TRACE_ACCESS_IN_H_EXT_01
+    baseline_median_m: 0.356191491865984
+    hash_lock: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv
+    hash_lock_sha256: f6e5d7965d17857e5b4a846501883f4675f2331a1164fab3de9e5ba9470f1ad7
+    hash_lock_note: BY2_ORIGINAL_LOCK_CLEAN5_EXTENSION_HAS_NO_BY2_ROWS
+    expected:
+      status: OBSERVED_PENDING_HUMAN_CONFIRMATION
+      position_epochs: 1510
+      rawx_epochs: 1509
+      imu_samples: 63278
+      gps_week: 2408
+      leap_seconds: 18
+      cadence_ms: 200
+      hpposecef_minus_rawx_ms: 2
+      leading_hpposecef_without_rawx: 1
+    observation_source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/01_PROBE/BY2/PROBE.json
+    observation_sha256: 0176e99979c5a958c788ef1d3a907ffd6727287ec1c30155723ff3e75b358514
+    imu_gaps: []
+  BY2H:
+    role: LITERATURE_AND_SHARED_PARAMETER_VARIANTS
+    window:
+    - 413.0
+    - 683.0
+    base_time: 1772784000.0
+    trace: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/trace_vrtk2_a87c6e_2026-03-06-08-06-39_minimal.csv
+    trace_sha256: 8d11fe360753bfcdbc54f7bf793fcb25850c0997b7aaad4ec1c9f10859c0f84f
+    trace_hash_verification: DECLARED_METADATA_ONLY_NO_TRACE_ACCESS_IN_H_EXT_01
+    baseline_median_m: 0.35418777593777223
+    hash_lock: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv
+    hash_lock_sha256: faa31580c7fff73b52fcf6d27c97cfdd9187e67a55968a2ab42e6737b0eabb67
+    hash_lock_note: CLEAN5_LOCK
+    expected:
+      status: OBSERVED_PENDING_HUMAN_CONFIRMATION
+      position_epochs: 1483
+      rawx_epochs: 1483
+      imu_samples: 63222
+      gps_week: 2408
+      leap_seconds: 18
+      cadence_ms: 200
+      hpposecef_minus_rawx_ms: 2
+      leading_hpposecef_without_rawx: 0
+    observation_source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/01_PROBE/BY2H/PROBE.json
+    observation_sha256: f07d51100b9247cee47e4c6a02e9749ab4d9553a194cefd14af41311d7fa39d6
+    imu_gaps:
+    - left_index_zero_based: 2677
+      right_index_zero_based: 2678
+      start_absolute_s: 1772784407.0170584
+      end_absolute_s: 1772784411.7570643
+      duration_s: 4.740005970001221
+      start_relative_s: 407.01705837249756
+      end_relative_s: 411.7570643424988
+      window_position: BEFORE
+      gnss1_position_rate_1s_after:
+        sample_count: 5
+        median_mps: 1.1629548422991607
+        max_mps: 1.2295364091348944
+        net_mps: 1.141909064747431
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
+          no interpolation
+    - left_index_zero_based: 2678
+      right_index_zero_based: 2679
+      start_absolute_s: 1772784411.7570643
+      end_absolute_s: 1772784412.4790478
+      duration_s: 0.7219834327697754
+      start_relative_s: 411.7570643424988
+      end_relative_s: 412.47904777526855
+      window_position: BEFORE
+      gnss1_position_rate_1s_after:
+        sample_count: 5
+        median_mps: 1.1665263937746857
+        max_mps: 1.2238584655735893
+        net_mps: 1.1483305057913782
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
+          no interpolation
+    - left_index_zero_based: 2679
+      right_index_zero_based: 2680
+      start_absolute_s: 1772784412.4790478
+      end_absolute_s: 1772784413.037092
+      duration_s: 0.5580441951751709
+      start_relative_s: 412.47904777526855
+      end_relative_s: 413.0370919704437
+      window_position: WITHIN_OR_OVERLAPPING
+      gnss1_position_rate_1s_after:
+        sample_count: 5
+        median_mps: 1.202948539365888
+        max_mps: 1.2238584655735893
+        net_mps: 1.1953347197618207
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
+          no interpolation
+    - left_index_zero_based: 3010
+      right_index_zero_based: 3011
+      start_absolute_s: 1772784414.9050672
+      end_absolute_s: 1772784415.080782
+      duration_s: 0.17571473121643066
+      start_relative_s: 414.9050672054291
+      end_relative_s: 415.0807819366455
+      window_position: WITHIN_OR_OVERLAPPING
+      gnss1_position_rate_1s_after:
+        sample_count: 5
+        median_mps: 1.162076752118538
+        max_mps: 1.192972578866976
+        net_mps: 1.1434226508793779
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
+          no interpolation
+  BY2O:
+    role: LITERATURE_AND_SHARED_PARAMETER_VARIANTS
+    window:
+    - 3186.0
+    - 3563.0
+    base_time: 1772780400.0
+    trace: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv
+    trace_sha256: 4f7b3007c6a0b43ce1b0fb4908f23c042891154b4adbc7af4c3d8a47ca363cd9
+    trace_hash_verification: DECLARED_METADATA_ONLY_NO_TRACE_ACCESS_IN_H_EXT_01
+    baseline_median_m: 0.35013463864843675
+    hash_lock: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv
+    hash_lock_sha256: faa31580c7fff73b52fcf6d27c97cfdd9187e67a55968a2ab42e6737b0eabb67
+    hash_lock_note: CLEAN5_LOCK
+    expected:
+      status: OBSERVED_PENDING_HUMAN_CONFIRMATION
+      position_epochs: 2231
+      rawx_epochs: 2231
+      imu_samples: 95860
+      gps_week: 2408
+      leap_seconds: 18
+      cadence_ms: 200
+      hpposecef_minus_rawx_ms: 2
+      leading_hpposecef_without_rawx: 0
+    observation_source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/01_PROBE/BY2O/PROBE.json
+    observation_sha256: b882fa562d3dc08f56ea85d0cfd21f54b1ffc312c00d8a56e1dc49ad8ee56443
+    imu_gaps:
+    - left_index_zero_based: 29178
+      right_index_zero_based: 29179
+      start_absolute_s: 1772783640.7490525
+      end_absolute_s: 1772783641.01706
+      duration_s: 0.2680075168609619
+      start_relative_s: 3240.7490525245667
+      end_relative_s: 3241.0170600414276
+      window_position: WITHIN_OR_OVERLAPPING
+      gnss1_position_rate_1s_after:
+        sample_count: 5
+        median_mps: 1.2931938021459848
+        max_mps: 1.4029406821692068
+        net_mps: 1.2976578826231273
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
+          no interpolation
+    - left_index_zero_based: 41724
+      right_index_zero_based: 41725
+      start_absolute_s: 1772783701.2890525
+      end_absolute_s: 1772783701.3990593
+      duration_s: 0.11000680923461914
+      start_relative_s: 3301.2890524864197
+      end_relative_s: 3301.3990592956543
+      window_position: WITHIN_OR_OVERLAPPING
+      gnss1_position_rate_1s_after:
+        sample_count: 5
+        median_mps: 1.1358548492959462
+        max_mps: 1.212412700103071
+        net_mps: 1.1267932363887314
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
+          no interpolation
+    - left_index_zero_based: 54183
+      right_index_zero_based: 54184
+      start_absolute_s: 1772783762.0130477
+      end_absolute_s: 1772783762.3590465
+      duration_s: 0.34599876403808594
+      start_relative_s: 3362.01304769516
+      end_relative_s: 3362.359046459198
+      window_position: WITHIN_OR_OVERLAPPING
+      gnss1_position_rate_1s_after:
+        sample_count: 5
+        median_mps: 0.028603223843463817
+        max_mps: 0.0666952678410991
+        net_mps: 0.014871324326455911
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
+          no interpolation
+    - left_index_zero_based: 59858
+      right_index_zero_based: 59859
+      start_absolute_s: 1772783792.5411584
+      end_absolute_s: 1772783792.6490622
+      duration_s: 0.10790371894836426
+      start_relative_s: 3392.541158437729
+      end_relative_s: 3392.6490621566772
+      window_position: WITHIN_OR_OVERLAPPING
+      gnss1_position_rate_1s_after:
+        sample_count: 5
+        median_mps: 0.01779089721090511
+        max_mps: 0.02739527812465272
+        net_mps: 0.008765165480728086
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
+          no interpolation
+    - left_index_zero_based: 77290
+      right_index_zero_based: 77291
+      start_absolute_s: 1772783883.751066
+      end_absolute_s: 1772783883.917063
+      duration_s: 0.16599702835083008
+      start_relative_s: 3483.751065969467
+      end_relative_s: 3483.917062997818
+      window_position: WITHIN_OR_OVERLAPPING
+      gnss1_position_rate_1s_after:
+        sample_count: 5
+        median_mps: 1.2749568374232467
+        max_mps: 1.3627556803337606
+        net_mps: 1.2843358787738413
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
+          no interpolation
+    - left_index_zero_based: 89710
+      right_index_zero_based: 89711
+      start_absolute_s: 1772783944.8330667
+      end_absolute_s: 1772783944.9870598
+      duration_s: 0.1539931297302246
+      start_relative_s: 3544.833066701889
+      end_relative_s: 3544.9870598316193
+      window_position: WITHIN_OR_OVERLAPPING
+      gnss1_position_rate_1s_after:
+        sample_count: 5
+        median_mps: 1.051819113475398
+        max_mps: 1.1819851235548544
+        net_mps: 1.0471242858215877
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
+          no interpolation
+literature_parameter_inheritance:
+  path: configs/paper_rebuild/horizontal_literature/PHASE5_EXT05_PAVLASEK_CONTRACT_V1.yaml
+  sha256: a9476f909ed65c9b4760ac19dc3cde3d625fa3d390b2f133cae79182e2293392
+  mode: EXACT_MAPPING_DEEPCOPY_NO_METHOD_SPECIFIC_CHANGES
+methods:
+- id: LC01
+  native_method: EXT05A_PAVLASEK_TWO_RECEIVER_IEKF
+  parameters: LITERATURE_DEFAULT
+  role: EXTERNAL_COMPARISON
+- id: EXT05C
+  native_method: EXT05C_PAVLASEK_SINGLE_RECEIVER_IEKF
+  parameters: LITERATURE_DEFAULT
+  role: SINGLE_RECEIVER_DIAGNOSTIC
+- id: LC01-S
+  native_method: EXT05A_PAVLASEK_TWO_RECEIVER_IEKF
+  parameters: SHARED_PARAMETERS
+  role: EXTERNAL_COMPARISON
+- id: EXT05C-S
+  native_method: EXT05C_PAVLASEK_SINGLE_RECEIVER_IEKF
+  parameters: SHARED_PARAMETERS
+  role: SINGLE_RECEIVER_DIAGNOSTIC
+shared_parameters:
+  implementation: src/legsa_gins/paper_rebuild/hext/parameters.py
+  sensor_model: configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml
+  sensor_model_sha256: 4ce6ca6c544c2ba39988ea0b0631a60207a4cea36987c3a2139052fedd3a4871
+  audit: docs/paper_rebuild/hext/H_EXT_CONFIG_PARITY_AUDIT.md
+  audit_items:
+  - A4
+  - A5
+  - A6
+  - A10
+  gyro_psd_rad2_s:
+    default:
+    - 0.0004
+    - 0.0004
+    - 0.000324
+    variant_formula: (frozen_arw[axis] * pi / 180 / 60)^2
+    arw_deg_sqrt_h:
+    - 0.985
+    - 0.985
+    - 0.985
+  accel_psd_m2_s3:
+    default:
+    - 0.0289
+    - 0.0225
+    - 0.0576
+    variant: sensor_model.q
+    validation: q[axis] == (vrw[axis]/60)^2, rtol=1e-13
+  accel_scale:
+    default: 1.0
+    variant: 1.0308398903907543
+    placement: All three unrounded FRD force axes after FLU->FRD and installation,
+      before integration; frozen literature previous-sample propagation retained
+  imu_gap_policy:
+    default: frozen_filter_raise
+    variant: mirror_legsa_drop
+    implementation: INTERFACE_ONLY_NOT_IMPLEMENTED
+    decision_stage: H-EXT-02
+    A10_facts: Frozen BY2H increments 407.017058->413.041069 (6.024011 s) straddle
+      initialization with no left NAV; inside-window 414.905067->415.081079 (0.176012
+      s) uses retained timestamp dt and NAV changes. Raw 4.740005970001221 s gap is
+      not a demonstrated 4.7 s NAV step.
+    gap_table: sequences.*.imu_gaps
+  unchanged:
+  - No bias state
+  - Initial covariance
+  - pAcc squared R construction and correlated stacked R
+  - Static calibration criterion
+  - Geometry audit thresholds
+  - Lever/baseline/install constants
+  - Process noise injection structure
+budget:
+  native: 10
+  native_definition: BY2H/BY2O x 4 + BY2 x 2 shared-parameter variants
+  evaluator: 20
+  evaluator_definition: v3 primary + v2 parallel for each new native
+  concurrency_max: 20
+  numerical_threads_per_worker: 1
+  H_EXT_01_identity_runs_excluded: 2
+report_rules:
+  main_tables: All three sequences show literature and S rows; BY2 literature rows
+    remain frozen P-07 values.
+  main_text_selection: Use the version with smaller BY2 C00 v3 yaw RMSE for all three
+    sequences, uniformly. The other version appears completely in supplementary material;
+    neither version may be omitted.
+  selector_method_pair: LC01 versus LC01-S; EXT05C pair remains diagnostic
+  equal_yaw_rmse: HUMAN_DECISION_REQUIRED_NO_UNREGISTERED_TIE_BREAK
+  missing_yaw_rmse: HUMAN_DECISION_REQUIRED_NO_SUBSTITUTION
+  version_selection_is_post_result_declared_rule: true
+archive:
+  scratch_key: hext_scratch
+  scratch_filesystem: ext4
+  destination: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/
+  retry_errno:
+  - ENOMEM
+  - EIO
+  retries: 3
+  scope: archive I/O only; never scientific reruns
+  ledger: One row/checkpoint per batch/file; SHA-256 verify before complete; preserve
+    scratch on failures.
+required_human_decisions:
+- H-EXT-02 gap mechanism
+- BY2O pAcc inflation annotation (52 HPPOSECEF threshold epochs vs 57 status float
+  epochs)
+- Observed expected counts confirmation
+- Draft execution authorization
+no_parameter_search: true
+no_timing_sign_offset_search: true
+no_main_chain_change: true

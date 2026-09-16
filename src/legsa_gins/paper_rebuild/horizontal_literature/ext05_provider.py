@@ -119,13 +119,22 @@ def build_solution_position_provider(
     gnss2_raw: Path,
     *,
     raw_root: Path,
-    by2_hash_lock: Path,
+    by2_hash_lock: Path | None = None,
+    expected_position_epochs: int = EXPECTED_POSITION_EPOCHS,
+    expected_rawx_epochs: int = EXPECTED_RAWX_EPOCHS,
+    expected_gps_week: int = EXPECTED_GPS_WEEK,
+    expected_leap_seconds: int = EXPECTED_LEAP_SECONDS,
+    hash_lock: Path | None = None,
 ) -> SolutionPositionProvider:
-    """Decode all 1510 paired solution epochs without sign/time searching."""
+    """Decode paired solution epochs; default guards preserve frozen BY2."""
 
+    if hash_lock is None:
+        hash_lock = by2_hash_lock
+    if hash_lock is None or (by2_hash_lock is not None and by2_hash_lock != hash_lock):
+        raise Ext05ProviderError("missing or conflicting hash lock")
     source_hashes = {
-        "gnss1_raw": verify_hash_locked_file(gnss1_raw, raw_root=raw_root, hash_lock=by2_hash_lock),
-        "gnss2_raw": verify_hash_locked_file(gnss2_raw, raw_root=raw_root, hash_lock=by2_hash_lock),
+        "gnss1_raw": verify_hash_locked_file(gnss1_raw, raw_root=raw_root, hash_lock=hash_lock),
+        "gnss2_raw": verify_hash_locked_file(gnss2_raw, raw_root=raw_root, hash_lock=hash_lock),
     }
     first = reconstruct_ubx_stream(gnss1_raw, decode_nav_hpposecef_semantics=True)
     second = reconstruct_ubx_stream(gnss2_raw, decode_nav_hpposecef_semantics=True)
@@ -133,26 +142,26 @@ def build_solution_position_provider(
     hp2 = list(second.nav_hpposecef_epochs)
     rawx1 = list(first.rawx_epochs)
     rawx2 = list(second.rawx_epochs)
-    if len(hp1) != EXPECTED_POSITION_EPOCHS or len(hp2) != EXPECTED_POSITION_EPOCHS:
-        raise Ext05ProviderError("HPPOSECEF receiver count is not 1510/1510")
-    if len(rawx1) != EXPECTED_RAWX_EPOCHS or len(rawx2) != EXPECTED_RAWX_EPOCHS:
-        raise Ext05ProviderError("RAWX receiver count is not 1509/1509")
+    if len(hp1) != expected_position_epochs or len(hp2) != expected_position_epochs:
+        raise Ext05ProviderError(f"HPPOSECEF receiver count is not {expected_position_epochs}/{expected_position_epochs}")
+    if len(rawx1) != expected_rawx_epochs or len(rawx2) != expected_rawx_epochs:
+        raise Ext05ProviderError(f"RAWX receiver count is not {expected_rawx_epochs}/{expected_rawx_epochs}")
     itow1 = [epoch.itow_ms for epoch in hp1]
     itow2 = [epoch.itow_ms for epoch in hp2]
     if itow1 != itow2 or any(b <= a for a, b in zip(itow1, itow1[1:])):
         raise Ext05ProviderError("receiver HPPOSECEF common-iTOW identity failed")
     intervals = np.diff(np.asarray(itow1, dtype=np.int64))
-    if intervals.tolist() != [EXPECTED_POSITION_INTERVAL_MS] * (EXPECTED_POSITION_EPOCHS - 1):
+    if intervals.tolist() != [EXPECTED_POSITION_INTERVAL_MS] * (expected_position_epochs - 1):
         raise Ext05ProviderError("HPPOSECEF common-iTOW cadence is not fixed 200 ms")
     rawx_keys1 = [int(round(epoch.gps_tow_seconds * 1000.0)) for epoch in rawx1]
     rawx_keys2 = [int(round(epoch.gps_tow_seconds * 1000.0)) for epoch in rawx2]
     if rawx_keys1 != rawx_keys2:
         raise Ext05ProviderError("receiver RAWX timelines differ")
-    if itow1[1:] != [value + EXPECTED_HPPOS_MINUS_RAWX_MS for value in rawx_keys1]:
+    if itow1[expected_position_epochs - expected_rawx_epochs:] != [value + EXPECTED_HPPOS_MINUS_RAWX_MS for value in rawx_keys1]:
         raise Ext05ProviderError("fixed HPPOSECEF=RAWX+2ms relation failed")
     weeks = {epoch.gps_week for epoch in (*rawx1, *rawx2)}
     leaps = {epoch.leap_seconds for epoch in (*rawx1, *rawx2)}
-    if weeks != {EXPECTED_GPS_WEEK} or leaps != {EXPECTED_LEAP_SECONDS}:
+    if weeks != {expected_gps_week} or leaps != {expected_leap_seconds}:
         raise Ext05ProviderError("RAWX week/leap evidence is inconsistent")
 
     origin = hp1[0].position_ecef_m.copy()
@@ -174,9 +183,9 @@ def build_solution_position_provider(
         R2 = np.eye(3) * pacc2 * pacc2
         absolute = (
             GPS_EPOCH_UNIX_SECONDS
-            + EXPECTED_GPS_WEEK * 604800.0
+            + expected_gps_week * 604800.0
             + left.itow_ms * 1.0e-3
-            - EXPECTED_LEAP_SECONDS
+            - expected_leap_seconds
         )
         epochs.append(SolutionPositionEpoch(
             index=index,
@@ -204,10 +213,10 @@ def build_solution_position_provider(
         "hpposecef_equals_rawx_plus_ms": EXPECTED_HPPOS_MINUS_RAWX_MS,
         "position_epoch_count": len(epochs),
         "rawx_epoch_count_per_receiver": len(rawx1),
-        "leading_hpposecef_without_rawx_count": 1,
+        "leading_hpposecef_without_rawx_count": expected_position_epochs - expected_rawx_epochs,
         "fixed_interval_ms": EXPECTED_POSITION_INTERVAL_MS,
-        "gps_week": EXPECTED_GPS_WEEK,
-        "leap_seconds": EXPECTED_LEAP_SECONDS,
+        "gps_week": expected_gps_week,
+        "leap_seconds": expected_leap_seconds,
         "time_first_unix_seconds": epochs[0].absolute_time_unix_seconds,
         "time_last_unix_seconds": epochs[-1].absolute_time_unix_seconds,
         "fixed_ned_origin_ecef_m": origin.tolist(),
@@ -339,9 +348,15 @@ def build_imu_only_provider(
     go2_body: Path,
     *,
     raw_root: Path,
-    by2_hash_lock: Path,
+    by2_hash_lock: Path | None = None,
+    expected_imu_samples: int = EXPECTED_IMU_SAMPLES,
+    hash_lock: Path | None = None,
 ) -> tuple[tuple[ImuSample, ...], dict[str, Any], dict[str, Any]]:
-    source_hash = verify_hash_locked_file(go2_body, raw_root=raw_root, hash_lock=by2_hash_lock)
+    if hash_lock is None:
+        hash_lock = by2_hash_lock
+    if hash_lock is None or (by2_hash_lock is not None and by2_hash_lock != hash_lock):
+        raise Ext05ProviderError("missing or conflicting hash lock")
+    source_hash = verify_hash_locked_file(go2_body, raw_root=raw_root, hash_lock=hash_lock)
     install = euler_rpy_deg_to_matrix(*IMU_INSTALL_RPY_DEG)
     flu_to_frd = np.diag([1.0, -1.0, -1.0])
     transform = install @ flu_to_frd
@@ -353,8 +368,8 @@ def build_imu_only_provider(
             specific_force_frd_mps2=transform @ accel_flu,
         ))
     times = np.asarray([sample.absolute_time_unix_seconds for sample in samples])
-    if len(samples) != EXPECTED_IMU_SAMPLES:
-        raise Ext05ProviderError(f"Go2 IMU-only count is {len(samples)}, expected 63278")
+    if len(samples) != expected_imu_samples:
+        raise Ext05ProviderError(f"Go2 IMU-only count is {len(samples)}, expected {expected_imu_samples}")
     if np.any(~np.isfinite(times)) or np.any(np.diff(times) <= 0.0):
         raise Ext05ProviderError("Go2 IMU-only timestamps are not unique chronological")
     gyro = np.asarray([sample.angular_rate_frd_radps for sample in samples])

@@ -890,6 +890,10 @@ documentation task may rerun the Canonical numerical chain.
 
 ## 8. Horizontal comparison registry
 
+<!-- H_EXT_SECTION_8_BEGIN -->
+H-EXT-01：只读配置审计/三序列探针、外部适配与共享参数草案；仅增外部对比行，v2.1 冻结不变；BY2 默认身份门 2/2 PASS，H/O及变体求解、评估均未执行。
+<!-- H_EXT_SECTION_8_END -->
+
 Protocol v2 publication uses frozen v3 evaluation-point rows; LegSA rows are the v2-chain C00 F04 and A04. External methods without compatible IMU-point NAV/v3 evidence remain visible as `Not comparable` (不可比), with method-native information structure retained. Missing comparable NAV is not a zero error and does not remove the method from the registry.
 
 Horizontal root:
@@ -1382,6 +1386,10 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 ---
 
 ## 18. Current next actions
+
+<!-- H_EXT_SECTION_18_BEGIN -->
+H-EXT-01：只读配置审计/三序列探针、外部适配与共享参数草案；仅增外部对比行，v2.1 冻结不变；BY2 默认身份门 2/2 PASS，H/O及变体求解、评估均未执行。
+<!-- H_EXT_SECTION_18_END -->
 
 ### C-CLOSE freeze rule (2026-09-15)
 
