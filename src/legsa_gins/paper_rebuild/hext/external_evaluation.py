@@ -191,17 +191,21 @@ def _evaluate_process(*, sequence, evaluator: Path, nav: Path, outdir: Path):
 
 
 def evaluate(*, sequence, evaluator: Path, nav: Path, expected_nav_sha256: str,
-             outdir: Path, version: str, identity: Mapping[str, Any]):
-    """Future authorized evaluation of one sealed external NAV; not called in H-EXT-01."""
+             outdir: Path, version: str, identity: Mapping[str, Any],
+             nav_input_root: Path | None = None):
+    """Evaluate one sealed NAV; an explicit stage-06 root receives the v3 transform."""
     nav, outdir = Path(nav), Path(outdir)
     if nav.is_symlink() or sha256_file(nav) != expected_nav_sha256:
         raise ValueError("Sealed external NAV identity mismatch")
     allowed = (Path(sequence.output_root).resolve(), Path(sequence.hext_scratch).resolve())
     if not any(root in outdir.resolve().parents for root in allowed):
         raise ValueError("Evaluation output must be below an H-EXT output root")
+    transform_root = Path(nav_input_root) if nav_input_root is not None else outdir / "NAV_INPUTS"
+    if not any(root in transform_root.resolve().parents for root in allowed):
+        raise ValueError("Transformed NAV must be below an H-EXT output root")
     outdir.mkdir(parents=True, exist_ok=False)
     actual, original, transform = prepare_evaluator_nav(
-        sequence=sequence, nav=nav, outdir=outdir / "NAV_INPUTS", version=version)
+        sequence=sequence, nav=nav, outdir=transform_root, version=version)
     result = _evaluate_process(sequence=sequence, evaluator=evaluator, nav=actual,
                                outdir=outdir / "EXACT_EVALUATOR_OUTPUT")
     errors = canonical._read_error_series(Path(result["outdir"]))

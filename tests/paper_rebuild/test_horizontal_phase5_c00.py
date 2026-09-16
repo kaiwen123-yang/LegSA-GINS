@@ -157,7 +157,16 @@ def test_thread_environment_is_pinned_to_one() -> None:
         assert phase5.os.environ[name] == "1"
 
 
-def test_dirty_untracked_source_snapshot_is_hash_complete_and_explicit() -> None:
+@pytest.mark.parametrize("status", ["", " M src/legsa_gins/paper_rebuild/horizontal_literature/ext05_provider.py\n"])
+def test_dirty_untracked_source_snapshot_is_hash_complete_and_explicit(monkeypatch, status) -> None:
+    # Exercise both states explicitly; a committed checkout must not fail merely
+    # because the historical EXT05 development overlay is now clean.
+    original = phase5.subprocess.check_output
+    def git_output(command, **kwargs):
+        if command[:3] == ["git", "status", "--short"]:
+            return status
+        return original(command, **kwargs)
+    monkeypatch.setattr(phase5.subprocess, "check_output", git_output)
     snapshot = phase5._source_snapshot()
     assert snapshot["file_count"] == 15
     roles = [row["source_role"] for row in snapshot["files"].values()]
@@ -165,8 +174,8 @@ def test_dirty_untracked_source_snapshot_is_hash_complete_and_explicit() -> None
     assert roles.count("MAINTAINED_SHARED_RUNTIME") == 7
     assert roles.count("FOCUSED_TEST") == 2
     assert len([row for row in snapshot["files"].values() if row["runtime_bearing"]]) == 13
-    assert snapshot["dirty_or_untracked_snapshot_recorded"] is True
-    assert snapshot["git_head_alone_identifies_ext05_implementation"] is False
+    assert snapshot["dirty_or_untracked_snapshot_recorded"] is bool(status)
+    assert snapshot["git_head_alone_identifies_ext05_implementation"] is not bool(status)
     for evidence in snapshot["files"].values():
         assert len(evidence["sha256"]) == 64
         assert evidence["size_bytes"] > 0

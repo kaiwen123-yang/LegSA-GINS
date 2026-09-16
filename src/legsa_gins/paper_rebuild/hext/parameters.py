@@ -95,3 +95,26 @@ def require_implemented_gap_policy(parameters: Ext05Parameters) -> None:
         raise NotImplementedError("mirror_legsa_drop mechanism awaits H-EXT-02 human decision")
     if parameters.imu_gap_policy != "frozen_filter_raise":
         raise ValueError("unregistered IMU gap policy")
+
+
+H02_GAP_POLICY = "DROP_DT_GT_0P1_AND_CONTINUE"
+
+
+def load_h02_parameters(
+    phase5_contract_path: Path,
+    *,
+    variant_enabled: bool = False,
+    sensor_model_path: Path | None = None,
+) -> Ext05Parameters:
+    """H-EXT-02 applies the same authorized D1 policy to all four rows.
+
+    Literature/S values still come from the frozen PHASE5/calibrated contracts.
+    The H-EXT-01 default object and its frozen_filter_raise route are unchanged.
+    """
+    from dataclasses import replace
+
+    parameters = load_parameters(
+        phase5_contract_path, variant_enabled=variant_enabled,
+        sensor_model_path=sensor_model_path,
+    )
+    return replace(parameters, imu_gap_policy=H02_GAP_POLICY)

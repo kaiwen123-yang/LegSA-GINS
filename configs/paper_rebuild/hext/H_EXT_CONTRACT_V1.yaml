@@ -1,7 +1,7 @@
 schema_version: hext.external_sequences.contract.v1
-task: H-EXT-02_PROPOSAL_FROM_H-EXT-01
-status: DRAFT_PENDING_HUMAN_AUTHORIZATION
-execution_authorized: false
+task: H-EXT-02
+status: HUMAN_AUTHORIZED_PREREGISTRATION
+execution_authorized: true
 frozen_main_chain: PROTOCOL_V2.1_UNCHANGED_EXTERNAL_COMPARISON_ROWS_ONLY
 sequence_registry: configs/paper_rebuild/clean5/CLEAN5_SEQUENCE_REGISTRY.yaml
 local_path_config: configs/paper_rebuild/DATA_PATHS.CLEAN3R4.local.yaml
@@ -14,13 +14,13 @@ sequences:
     base_time: 1772784000.0
     trace: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv
     trace_sha256: ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c
-    trace_hash_verification: DECLARED_METADATA_ONLY_NO_TRACE_ACCESS_IN_H_EXT_01
+    trace_hash_verification: EVALUATOR_CHILD_SOLE_READ_HANDLE_ONLY
     baseline_median_m: 0.356191491865984
     hash_lock: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv
     hash_lock_sha256: f6e5d7965d17857e5b4a846501883f4675f2331a1164fab3de9e5ba9470f1ad7
     hash_lock_note: BY2_ORIGINAL_LOCK_CLEAN5_EXTENSION_HAS_NO_BY2_ROWS
     expected:
-      status: OBSERVED_PENDING_HUMAN_CONFIRMATION
+      status: HUMAN_CONFIRMED_OBSERVED_D4
       position_epochs: 1510
       rawx_epochs: 1509
       imu_samples: 63278
@@ -29,6 +29,7 @@ sequences:
       cadence_ms: 200
       hpposecef_minus_rawx_ms: 2
       leading_hpposecef_without_rawx: 1
+      common_position_epochs: 1510
     observation_source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/01_PROBE/BY2/PROBE.json
     observation_sha256: 0176e99979c5a958c788ef1d3a907ffd6727287ec1c30155723ff3e75b358514
     imu_gaps: []
@@ -40,13 +41,13 @@ sequences:
     base_time: 1772784000.0
     trace: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/trace_vrtk2_a87c6e_2026-03-06-08-06-39_minimal.csv
     trace_sha256: 8d11fe360753bfcdbc54f7bf793fcb25850c0997b7aaad4ec1c9f10859c0f84f
-    trace_hash_verification: DECLARED_METADATA_ONLY_NO_TRACE_ACCESS_IN_H_EXT_01
+    trace_hash_verification: EVALUATOR_CHILD_SOLE_READ_HANDLE_ONLY
     baseline_median_m: 0.35418777593777223
     hash_lock: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv
     hash_lock_sha256: faa31580c7fff73b52fcf6d27c97cfdd9187e67a55968a2ab42e6737b0eabb67
     hash_lock_note: CLEAN5_LOCK
     expected:
-      status: OBSERVED_PENDING_HUMAN_CONFIRMATION
+      status: HUMAN_CONFIRMED_OBSERVED_D4
       position_epochs: 1483
       rawx_epochs: 1483
       imu_samples: 63222
@@ -55,6 +56,7 @@ sequences:
       cadence_ms: 200
       hpposecef_minus_rawx_ms: 2
       leading_hpposecef_without_rawx: 0
+      common_position_epochs: 1483
     observation_source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/01_PROBE/BY2H/PROBE.json
     observation_sha256: f07d51100b9247cee47e4c6a02e9749ab4d9553a194cefd14af41311d7fa39d6
     imu_gaps:
@@ -71,8 +73,7 @@ sequences:
         median_mps: 1.1629548422991607
         max_mps: 1.2295364091348944
         net_mps: 1.141909064747431
-        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
-          no interpolation
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt; no interpolation
     - left_index_zero_based: 2678
       right_index_zero_based: 2679
       start_absolute_s: 1772784411.7570643
@@ -86,8 +87,7 @@ sequences:
         median_mps: 1.1665263937746857
         max_mps: 1.2238584655735893
         net_mps: 1.1483305057913782
-        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
-          no interpolation
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt; no interpolation
     - left_index_zero_based: 2679
       right_index_zero_based: 2680
       start_absolute_s: 1772784412.4790478
@@ -101,8 +101,7 @@ sequences:
         median_mps: 1.202948539365888
         max_mps: 1.2238584655735893
         net_mps: 1.1953347197618207
-        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
-          no interpolation
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt; no interpolation
     - left_index_zero_based: 3010
       right_index_zero_based: 3011
       start_absolute_s: 1772784414.9050672
@@ -116,8 +115,7 @@ sequences:
         median_mps: 1.162076752118538
         max_mps: 1.192972578866976
         net_mps: 1.1434226508793779
-        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
-          no interpolation
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt; no interpolation
   BY2O:
     role: LITERATURE_AND_SHARED_PARAMETER_VARIANTS
     window:
@@ -126,13 +124,13 @@ sequences:
     base_time: 1772780400.0
     trace: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv
     trace_sha256: 4f7b3007c6a0b43ce1b0fb4908f23c042891154b4adbc7af4c3d8a47ca363cd9
-    trace_hash_verification: DECLARED_METADATA_ONLY_NO_TRACE_ACCESS_IN_H_EXT_01
+    trace_hash_verification: EVALUATOR_CHILD_SOLE_READ_HANDLE_ONLY
     baseline_median_m: 0.35013463864843675
     hash_lock: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK_CLEAN5.csv
     hash_lock_sha256: faa31580c7fff73b52fcf6d27c97cfdd9187e67a55968a2ab42e6737b0eabb67
     hash_lock_note: CLEAN5_LOCK
     expected:
-      status: OBSERVED_PENDING_HUMAN_CONFIRMATION
+      status: HUMAN_CONFIRMED_OBSERVED_D4
       position_epochs: 2231
       rawx_epochs: 2231
       imu_samples: 95860
@@ -141,6 +139,7 @@ sequences:
       cadence_ms: 200
       hpposecef_minus_rawx_ms: 2
       leading_hpposecef_without_rawx: 0
+      common_position_epochs: 2231
     observation_source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/01_PROBE/BY2O/PROBE.json
     observation_sha256: b882fa562d3dc08f56ea85d0cfd21f54b1ffc312c00d8a56e1dc49ad8ee56443
     imu_gaps:
@@ -157,8 +156,7 @@ sequences:
         median_mps: 1.2931938021459848
         max_mps: 1.4029406821692068
         net_mps: 1.2976578826231273
-        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
-          no interpolation
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt; no interpolation
     - left_index_zero_based: 41724
       right_index_zero_based: 41725
       start_absolute_s: 1772783701.2890525
@@ -172,8 +170,7 @@ sequences:
         median_mps: 1.1358548492959462
         max_mps: 1.212412700103071
         net_mps: 1.1267932363887314
-        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
-          no interpolation
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt; no interpolation
     - left_index_zero_based: 54183
       right_index_zero_based: 54184
       start_absolute_s: 1772783762.0130477
@@ -187,8 +184,7 @@ sequences:
         median_mps: 0.028603223843463817
         max_mps: 0.0666952678410991
         net_mps: 0.014871324326455911
-        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
-          no interpolation
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt; no interpolation
     - left_index_zero_based: 59858
       right_index_zero_based: 59859
       start_absolute_s: 1772783792.5411584
@@ -202,8 +198,7 @@ sequences:
         median_mps: 0.01779089721090511
         max_mps: 0.02739527812465272
         net_mps: 0.008765165480728086
-        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
-          no interpolation
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt; no interpolation
     - left_index_zero_based: 77290
       right_index_zero_based: 77291
       start_absolute_s: 1772783883.751066
@@ -217,8 +212,7 @@ sequences:
         median_mps: 1.2749568374232467
         max_mps: 1.3627556803337606
         net_mps: 1.2843358787738413
-        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
-          no interpolation
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt; no interpolation
     - left_index_zero_based: 89710
       right_index_zero_based: 89711
       start_absolute_s: 1772783944.8330667
@@ -232,8 +226,7 @@ sequences:
         median_mps: 1.051819113475398
         max_mps: 1.1819851235548544
         net_mps: 1.0471242858215877
-        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt;
-          no interpolation
+        definition: adjacent HPPOSECEF ECEF Euclidean difference / actual UTC dt; no interpolation
 literature_parameter_inheritance:
   path: configs/paper_rebuild/horizontal_literature/PHASE5_EXT05_PAVLASEK_CONTRACT_V1.yaml
   sha256: a9476f909ed65c9b4760ac19dc3cde3d625fa3d390b2f133cae79182e2293392
@@ -285,18 +278,23 @@ shared_parameters:
   accel_scale:
     default: 1.0
     variant: 1.0308398903907543
-    placement: All three unrounded FRD force axes after FLU->FRD and installation,
-      before integration; frozen literature previous-sample propagation retained
+    placement: All three unrounded FRD force axes after FLU->FRD and installation, before integration; frozen
+      literature previous-sample propagation retained
   imu_gap_policy:
     default: frozen_filter_raise
     variant: mirror_legsa_drop
-    implementation: INTERFACE_ONLY_NOT_IMPLEMENTED
-    decision_stage: H-EXT-02
-    A10_facts: Frozen BY2H increments 407.017058->413.041069 (6.024011 s) straddle
-      initialization with no left NAV; inside-window 414.905067->415.081079 (0.176012
-      s) uses retained timestamp dt and NAV changes. Raw 4.740005970001221 s gap is
-      not a demonstrated 4.7 s NAV step.
+    implementation: H_EXT_02_ADAPTER_ALL_CONFIGURATIONS
+    decision_stage: H-EXT-02_AUTHORIZED
+    A10_facts: Frozen BY2H increments 407.017058->413.041069 (6.024011 s) straddle initialization with no left
+      NAV; inside-window 414.905067->415.081079 (0.176012 s) uses retained timestamp dt and NAV changes. Raw
+      4.740005970001221 s gap is not a demonstrated 4.7 s NAV step.
     gap_table: sequences.*.imu_gaps
+    execution_policy: DROP_DT_GT_0P1_AND_CONTINUE
+    mechanism: Classify adjacent raw IMU timestamps. Skip every propagation substep within invalid source interval,
+      retain GNSS updates at original times, advance clock without covariance inflation. Invalid endpoint sample
+      is not assimilated. First subsequent valid interval uses its own dt and the last retained previous sample;
+      thereafter frozen previous-sample hold. Nonpositive endpoints never rewind state; impossible overlapping
+      chronology is a technical failure. Frozen default identity path remains frozen_filter_raise.
   unchanged:
   - No bias state
   - Initial covariance
@@ -306,19 +304,19 @@ shared_parameters:
   - Lever/baseline/install constants
   - Process noise injection structure
 budget:
-  native: 10
-  native_definition: BY2H/BY2O x 4 + BY2 x 2 shared-parameter variants
-  evaluator: 20
-  evaluator_definition: v3 primary + v2 parallel for each new native
+  native: 14
+  native_definition: BY2 two S + BY2H four configurations x two starts + BY2O four configurations
+  evaluator: 28
+  evaluator_definition: 14 x (v3 primary + v2 parallel)
   concurrency_max: 20
   numerical_threads_per_worker: 1
   H_EXT_01_identity_runs_excluded: 2
+  H_EXT_02_prereg_identity_recheck_native: 2
+  identity_recheck_definition: Separate required prereg validation pair, zero evaluator, not admitted to tables
 report_rules:
-  main_tables: All three sequences show literature and S rows; BY2 literature rows
-    remain frozen P-07 values.
-  main_text_selection: Use the version with smaller BY2 C00 v3 yaw RMSE for all three
-    sequences, uniformly. The other version appears completely in supplementary material;
-    neither version may be omitted.
+  main_tables: All three sequences show literature and S rows; BY2 literature rows remain frozen P-07 values.
+  main_text_selection: Use the version with smaller BY2 C00 v3 yaw RMSE for all three sequences, uniformly.
+    The other version appears completely in supplementary material; neither version may be omitted.
   selector_method_pair: LC01 versus LC01-S; EXT05C pair remains diagnostic
   equal_yaw_rmse: HUMAN_DECISION_REQUIRED_NO_UNREGISTERED_TIE_BREAK
   missing_yaw_rmse: HUMAN_DECISION_REQUIRED_NO_SUBSTITUTION
@@ -332,14 +330,158 @@ archive:
   - EIO
   retries: 3
   scope: archive I/O only; never scientific reruns
-  ledger: One row/checkpoint per batch/file; SHA-256 verify before complete; preserve
-    scratch on failures.
-required_human_decisions:
-- H-EXT-02 gap mechanism
-- BY2O pAcc inflation annotation (52 HPPOSECEF threshold epochs vs 57 status float
-  epochs)
-- Observed expected counts confirmation
-- Draft execution authorization
+  ledger: One row/checkpoint per batch/file; SHA-256 verify before complete; preserve scratch on failures.
+required_human_decisions: []
 no_parameter_search: true
 no_timing_sign_offset_search: true
 no_main_chain_change: true
+authorization: H-EXT-02 prompt 2026-09-16
+human_decisions:
+  D1: imu_gap_policy = DROP_DT_GT_0P1_AND_CONTINUE：适配器丢弃 dt≤0 或 dt>0.1 s 的样本，与 LegSA invalid_dt_policy 相同；滤波器不改，不填充，不膨胀协方差，下一样本按自身
+    dt 传播；每个 gap 记录：起止、时长、gap 期间施加的 GNSS 更新数、跨 gap 的位置/速度/航向跳变。
+  D2: 起点约定：FILE_START 为主行（方法原生，与 BY2 冻结用法一致：固定 NED 原点与初始化在首个 common GNSS1 HPPOSECEF 历元，静态校验照旧，标定窗 = IMU 文件前
+    5 s）。CONTRACT_START 仅 BY2H 作诊断行：初始化在首个 ≥ t_start(413) 的 common GNSS1 历元，yaw 取其后首个有效基线，速度零，静态校验豁免并在合约中登记为偏离，标定窗不变，传播从
+    ≥ t_start 的首个未丢弃 IMU 样本开始。若任一序列 FILE_START 静态校验失败，则该序列 CONTRACT_START 升为主行并标记（BY2O 此时补跑 CONTRACT_START，预算内）。
+  D3: BY2O 不做特殊处理；表中标注 GNSS2 pAcc 超阈值 52 历元与 status float 57 历元；输出分段表，含合约遮挡窗口段（3369.94–3411.95 主、3495.94–3508.94
+    次）。
+  D4: expected 门按观测值：BY2H HPPOSECEF 1483/1483、RAWX 1483/1483、common 1483、首端额外 HP 历元 0、间隔全 200 ms、HP=RAWX+2
+    ms、IMU 63222；BY2O 2231/2231、2231/2231、2231、0、全 200 ms、+2 ms、IMU 95860；两序列周 2408、闰秒 18。BY2 保持 1510/1509/1/63278。
+  D5: 配置四组：LC01（文献）、EXT05C（文献，诊断）、LC01-S、EXT05C-S（共享参数，值 = parameters.py 已实现：gyro PSD 8.209651003126647e-08
+    rad²/s ×3；accel PSD = q 三轴；s=1.0308398903907543 施加于安装后的当前样本 FRD 比力）。报告规则：三序列主表文献行与 S 行都列；正文对比行取 BY2 C00
+    v3 航向 RMSE 更小的一版（LC01-S BY2 对冻结 2.994827°），三序列统一使用，另一版进补充材料；结果方向无论如何如实报。
+  D6: 几何审计照跑照记，不作准入门；失败行 status=AVAILABLE_GEOMETRIC_AUDIT_FAIL，指标照算。
+initialization:
+  FILE_START: Frozen first common valid position after first5s calibration (all three observed first common
+    epochs follow calibration); zero velocity; fixed NED origin first common GNSS1 of file.
+  CONTRACT_START: First common GNSS1 at or after sequence t_start; yaw from first valid subsequent baseline;
+    zero velocity; unchanged file-first5s calibration; static admission waived and recorded; NED origin stays
+    file first common; no propagation before start, first retained valid IMU interval at or after start.
+  fallback: Classify FILE_START static failure before launching native filters; select CONTRACT_START in its
+    budget slots; BY2H preplanned CONTRACT_START reused, not duplicated.
+  no_other_initial_covariance_change: true
+run_matrix:
+- run_id: BY2__LC01-S__FILE_START
+  sequence_id: BY2
+  configuration_id: LC01-S
+  start_mode: FILE_START
+  role: MAIN_START
+- run_id: BY2__EXT05C-S__FILE_START
+  sequence_id: BY2
+  configuration_id: EXT05C-S
+  start_mode: FILE_START
+  role: MAIN_START
+- run_id: BY2H__LC01__FILE_START
+  sequence_id: BY2H
+  configuration_id: LC01
+  start_mode: FILE_START
+  role: MAIN_START
+- run_id: BY2H__LC01__CONTRACT_START
+  sequence_id: BY2H
+  configuration_id: LC01
+  start_mode: CONTRACT_START
+  role: START_DIAGNOSTIC
+- run_id: BY2H__EXT05C__FILE_START
+  sequence_id: BY2H
+  configuration_id: EXT05C
+  start_mode: FILE_START
+  role: MAIN_START
+- run_id: BY2H__EXT05C__CONTRACT_START
+  sequence_id: BY2H
+  configuration_id: EXT05C
+  start_mode: CONTRACT_START
+  role: START_DIAGNOSTIC
+- run_id: BY2H__LC01-S__FILE_START
+  sequence_id: BY2H
+  configuration_id: LC01-S
+  start_mode: FILE_START
+  role: MAIN_START
+- run_id: BY2H__LC01-S__CONTRACT_START
+  sequence_id: BY2H
+  configuration_id: LC01-S
+  start_mode: CONTRACT_START
+  role: START_DIAGNOSTIC
+- run_id: BY2H__EXT05C-S__FILE_START
+  sequence_id: BY2H
+  configuration_id: EXT05C-S
+  start_mode: FILE_START
+  role: MAIN_START
+- run_id: BY2H__EXT05C-S__CONTRACT_START
+  sequence_id: BY2H
+  configuration_id: EXT05C-S
+  start_mode: CONTRACT_START
+  role: START_DIAGNOSTIC
+- run_id: BY2O__LC01__FILE_START
+  sequence_id: BY2O
+  configuration_id: LC01
+  start_mode: FILE_START
+  role: MAIN_START
+- run_id: BY2O__EXT05C__FILE_START
+  sequence_id: BY2O
+  configuration_id: EXT05C
+  start_mode: FILE_START
+  role: MAIN_START
+- run_id: BY2O__LC01-S__FILE_START
+  sequence_id: BY2O
+  configuration_id: LC01-S
+  start_mode: FILE_START
+  role: MAIN_START
+- run_id: BY2O__EXT05C-S__FILE_START
+  sequence_id: BY2O
+  configuration_id: EXT05C-S
+  start_mode: FILE_START
+  role: MAIN_START
+outputs:
+  root: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES
+  scratch: <HEXT_SCRATCH>/H_EXT_02
+  prereg: 03_PREREG
+  native: 04_NATIVE_RUNS/<SEQ>/<CONFIG>/<START>
+  geometry: 05_GEOMETRIC_AUDIT
+  v3_inputs: 06_V3_NAV_INPUTS
+  evaluation: 07_OFFLINE_EVALUATION/{v3,v2}/<run>
+  aggregate: 08_AGGREGATE
+  legsa_gap: 09_LEGSA_GAP_DIAGNOSTIC
+  figures: 10_FIGURES
+  publication: <PUBLICATION_ROOT>/figures/v21/FIG02S
+  publication_manifest: <PUBLICATION_ROOT>/figures/v21/HEXT_RENDER_MANIFEST.json
+  handoff: <HANDOFF_ROOT>/hext_three_sequences_handoff.zip
+evaluation:
+  evaluator_sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  STD: OMITTED_AS_FROZEN_EXTERNAL_CONTRACT
+  capture_consistency_gate: P07_EXTERNAL_PASSED_TRUE_REQUIRED_UNCHANGED
+  trace_open_count_per_evaluator_child: 1
+  parent_trace_payload_access: false
+  versions:
+  - v3
+  - v2
+  no_retry: true
+segments:
+  BY2O:
+  - id: PRIMARY_OCCLUSION
+    window:
+    - 3369.94
+    - 3411.95
+  - id: SECONDARY_OCCLUSION
+    window:
+    - 3495.94
+    - 3508.94
+bookkeeping_resolutions:
+- 22 raw rows receive size/metadata identity checks; 21 nontrace payloads receive pre/post SHA256. Trace SHA256
+  is verified only by each evaluator child sole read handle. Bag/fpl inventory hashes are outside native audit
+  scope.
+- Required BY2 default identity recheck pair is separate prereg validation (2 native,0 evaluator), outside
+  14 new comparison rows.
+- FILE_START static failure is classified before native launch; CONTRACT_START replaces its slots, so no budget
+  overrun.
+- Frozen BY2 v2 external rows reuse pinned CLEAN5 parity summary because no P07 v2 horizontal table exists;
+  sources retained.
+- To avoid circular ZIP SHA and commit2 dependency, commit2 records final receipt location; ZIP is finalized
+  after commit2 and embeds both commits. Actual package SHA/bytes/CRC/member hashes are in external receipt;
+  no self-referential hash claim.
+hard_stop:
+- D4 mismatch
+- evaluator/frozen table/raw hash mismatch
+- BY2 identity mismatch
+- unregistered native failure
+- evaluator failure
+- archive batch failure ratio >1%
+- existing 28 figures or RENDER_MANIFEST drift
