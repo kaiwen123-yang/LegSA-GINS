@@ -891,7 +891,8 @@ documentation task may rerun the Canonical numerical chain.
 ## 8. Horizontal comparison registry
 
 <!-- H_EXT_SECTION_8_BEGIN -->
-H-EXT-02：人工授权预注册，D1–D6 与代码冻结准备完成；仅新增外部对比行，v2.1 冻结不变；新适配 BY2 默认身份门 2/2 PASS，比较预算 native 14 / evaluator 28。
+H-EXT-02：仅新增外部对比行，v2.1 冻结不变；状态 HARD_STOP_EVALUATOR_CONSISTENCY：native 14 完成，evaluator 16 PASS / 1 FAIL / 11 未执行；完整主表与 FIG02S 未生成。
+部分证据包及真实包哈希：<HANDOFF_ROOT>/hext_three_sequences_handoff.zip 与同目录 hext_three_sequences_handoff.validation.json（提交后封存，非完整任务交付）。
 <!-- H_EXT_SECTION_8_END -->
 
 Protocol v2 publication uses frozen v3 evaluation-point rows; LegSA rows are the v2-chain C00 F04 and A04. External methods without compatible IMU-point NAV/v3 evidence remain visible as `Not comparable` (不可比), with method-native information structure retained. Missing comparable NAV is not a zero error and does not remove the method from the registry.
@@ -1388,7 +1389,8 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 ## 18. Current next actions
 
 <!-- H_EXT_SECTION_18_BEGIN -->
-H-EXT-02：人工授权预注册，D1–D6 与代码冻结准备完成；仅新增外部对比行，v2.1 冻结不变；新适配 BY2 默认身份门 2/2 PASS，比较预算 native 14 / evaluator 28。
+H-EXT-02：仅新增外部对比行，v2.1 冻结不变；状态 HARD_STOP_EVALUATOR_CONSISTENCY：native 14 完成，evaluator 16 PASS / 1 FAIL / 11 未执行；完整主表与 FIG02S 未生成。
+部分证据包及真实包哈希：<HANDOFF_ROOT>/hext_three_sequences_handoff.zip 与同目录 hext_three_sequences_handoff.validation.json（提交后封存，非完整任务交付）。
 <!-- H_EXT_SECTION_18_END -->
 
 ### C-CLOSE freeze rule (2026-09-15)
