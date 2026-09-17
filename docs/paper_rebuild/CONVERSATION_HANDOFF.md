@@ -241,3 +241,5 @@ All new handoff packages go to `<HANDOFF_ROOT>` under the project G: root, never
 - 2026-09-16 (H-EXT-01): 配置对等审计、BY2/BY2H/BY2O 只读探针、EXT05 序列适配及共享参数草案完成；BY2 默认 EXT05A/EXT05C 逐字节身份门 2/2 PASS，native=2、evaluator=0、trace打开/哈希=0；仅新增外部对比准备，v2.1/C-CLOSE冻结不变，H-EXT-02待人授权；详见 `hext/H_EXT_01_AUDIT_PROBE_ADAPTER.md`。
 
 - 2026-09-16 (H-EXT-02): code_freeze `c9e5133d244e0e3ab1e1385f322fbbf5948ee6d5`；BY2 新路径身份门 2/2 PASS；比较 native 14 完成，evaluator 16 PASS / 第17次 BY2H EXT05C-S FILE_START v3 consistency FAIL / 11 未执行，按授权硬停，无重试或参数/门限修改；完整主表与 FIG02S 未生成，原 v2.1/28图哈希不变；仅封存 HARD_STOP_PARTIAL_EVIDENCE，真实包 SHA/两次提交/CRC 见 `<HANDOFF_ROOT>/hext_three_sequences_handoff.validation.json`；详见 `hext/H_EXT_02_EXECUTION_RECORD.md`。
+
+- 2026-09-17 (H-EXT-03): 合约v1.1/code_freeze `b6aaece1b71737693e39ec72ce0ad0726b188592`；0 native、10新evaluator全PASS、原16复用；D8 13/14有界、原成功16/16回溯PASS，D7一native发散对应两科学槽NOT_RUN，旧第17次失败保留；D9 BY2H论文CONTRACT_START（amended_after_results_seen），三序列S；完整52行/版、遮挡/delta/FIG02S交付，09四项UNAVAILABLE；v2.1/原28图/旧包不变；完整包与提交/真实SHA见 `<HANDOFF_ROOT>/hext_three_sequences_handoff_v2.validation.json`。
