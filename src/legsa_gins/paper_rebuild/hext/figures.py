@@ -85,7 +85,8 @@ def select_plot_rows(rows, selection):
     for sequence in SEQUENCES:
         for method in methods:
             found = [row for row in rows if row.get("sequence_id") == sequence
-                     and row.get("method_id") == method and _truthy(row.get("main_row"))]
+                     and row.get("method_id") == method
+                     and _truthy(row.get("manuscript_row", row.get("main_row")))]
             if len(found) != 1:
                 raise ValueError("Missing or duplicate main row: " + sequence + "/" + method)
             row = found[0]
@@ -93,6 +94,9 @@ def select_plot_rows(rows, selection):
                 raise ValueError("FIG02S requires the v3 evaluation contract")
             if method == external and row.get("config") != config:
                 raise ValueError("Per-sequence external version substitution")
+            starts = selection.get("paper_primary_starts", {})
+            if method == external and sequence in starts and row.get("start_convention") != starts[sequence]:
+                raise ValueError("External manuscript start differs from D9")
             selected[(sequence, method)] = row
     return methods, selected
 
@@ -154,6 +158,16 @@ def make_fig02s(rows, selection):
 def caption(selection, source_rows):
     selected = selection["selected_config"]
     alternative = "S" if selected == "LIT" else "LIT"
+    start_text = (
+        "BY2 and BY2O external manuscript rows use FILE_START. BY2H uses CONTRACT_START, the same "
+        "protocol start as the proposed method, excluding the pre-window IMU interruption. This D9 "
+        "start amendment was made after results were seen (amended_after_results_seen=true); its "
+        "direction is mixed, with slightly worse yaw and better position. BY2H FILE_START remains "
+        "a method-native diagnostic in the tables. "
+        if selection.get("amended_after_results_seen") else
+        "External primary rows use FILE_START unless the preregistered initial static-calibration "
+        "criterion fails; BY2H CONTRACT_START rows are diagnostics unless that registered static "
+        "failure promotes the fallback to the primary row. ")
     return (
         "FIG02S. Three-sequence solution-level comparison: horizontal and Up RMSE, yaw RMSE and "
         "absolute-error P95, and roll/pitch RMSE. LC01 uses the globally selected " + selected +
@@ -162,9 +176,7 @@ def caption(selection, source_rows):
         "F04 (Full) is the frozen protocol-v2.1 proposed method; hatched A04 (Core) is an ablation. "
         "Errors are evaluated against the fused navigation solution output directly by the commercial "
         "low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test "
-        "never reads it (file-access audit). External primary rows use FILE_START unless the "
-        "preregistered initial static-calibration criterion fails; BY2H CONTRACT_START rows are "
-        "diagnostics unless that registered static failure promotes the fallback to the primary row. "
+        "never reads it (file-access audit). " + start_text +
         "Geometric-audit failures retain available numerical metrics. Native IMU gaps are dropped without "
         "interpolating samples, holding fabricated samples, or inflating covariance; the chosen "
         "gap-drop convention and the retained LegSA convention are reported separately. BY2O has "

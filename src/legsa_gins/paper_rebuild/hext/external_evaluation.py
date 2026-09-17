@@ -113,7 +113,21 @@ def metrics(errors, nav, identity: Mapping[str, Any], *, window, reference_count
     return row
 
 
-def _evaluate_process(*, sequence, evaluator: Path, nav: Path, outdir: Path):
+def _capture_identity_failures(capture, sequence, trace_records):
+    """D12 separates identity/access failures from a reported false consistency gate."""
+    failures = []
+    if (capture.get("trace_sha256") != sequence.trace_sha256
+            or capture.get("trace_handle_hash_count") != 1
+            or capture.get("selected_columns") != SELECTED_COLUMNS
+            or any(row["pid"] != capture.get("pid") for row in trace_records)):
+        failures.append("reference hash/process/column observation mismatch")
+    if not isinstance(capture.get("consistency", {}).get("passed"), bool):
+        failures.append("consistency observation absent or malformed")
+    return failures
+
+
+def _evaluate_process(*, sequence, evaluator: Path, nav: Path, outdir: Path,
+                      allow_consistency_failure: bool = False):
     """Frozen child convention, adapted from clean5_sequence.evaluation_process."""
     evaluator, nav, outdir = map(Path, (evaluator, nav, outdir))
     trace, code_root = Path(sequence.trace), Path(sequence.code_root)
@@ -165,21 +179,22 @@ def _evaluate_process(*, sequence, evaluator: Path, nav: Path, outdir: Path):
         failures.append("bag/fpl open")
     if not scope["pass"]:
         failures.append("write scope violation")
-    if (capture.get("trace_sha256") != sequence.trace_sha256
-            or capture.get("trace_handle_hash_count") != 1
-            or capture.get("selected_columns") != SELECTED_COLUMNS
-            or capture.get("consistency", {}).get("passed") is not True
-            or any(row["pid"] != capture.get("pid") for row in trace_records)):
-        failures.append("reference hash/process/column/consistency observation mismatch")
+    failures.extend(_capture_identity_failures(capture, sequence, trace_records))
+    technical_failures = list(failures)
+    consistency_passed = capture.get("consistency", {}).get("passed") is True
+    if not consistency_passed:
+        failures.append("reference consistency observation mismatch")
     audit = {
         "passed": not failures, "failures": failures, "trace_open_count": len(trace_records),
+        "technical_passed": not technical_failures, "technical_failures": technical_failures,
+        "consistency_passed": consistency_passed,
         "trace_open_records": trace_records, "raw_open_count": len(raw_records),
         "write_scope": scope, "strace_sha256": sha256_file(log), "exit_code": completed.returncode,
         "runtime_seconds": runtime, "evaluator_argv": argv, "environment": environment,
         "STD": STD_POLICY, "trace_read_role": "archived_evaluator_child_only",
     }
     write_json(outdir / "EVALUATOR_STRACE_AUDIT.json", audit)
-    if failures:
+    if technical_failures or (failures and not allow_consistency_failure):
         raise RuntimeError("; ".join(failures) + "; stderr tail: " + completed.stderr[-2000:])
     for name in ("summary.json", "error_series.csv"):
         if not (outdir / name).is_file():
@@ -192,11 +207,19 @@ def _evaluate_process(*, sequence, evaluator: Path, nav: Path, outdir: Path):
 
 def evaluate(*, sequence, evaluator: Path, nav: Path, expected_nav_sha256: str,
              outdir: Path, version: str, identity: Mapping[str, Any],
-             nav_input_root: Path | None = None):
+             nav_input_root: Path | None = None,
+             consistency_failure_policy: str = "HARD_STOP",
+             bounded_gate: Mapping[str, Any] | None = None):
     """Evaluate one sealed NAV; an explicit stage-06 root receives the v3 transform."""
     nav, outdir = Path(nav), Path(outdir)
     if nav.is_symlink() or sha256_file(nav) != expected_nav_sha256:
         raise ValueError("Sealed external NAV identity mismatch")
+    if consistency_failure_policy not in ("HARD_STOP", "D12_BOUNDED_UNAVAILABLE"):
+        raise ValueError("Unknown evaluator consistency-failure policy")
+    soft = consistency_failure_policy == "D12_BOUNDED_UNAVAILABLE"
+    if soft and (bounded_gate is None or bounded_gate.get("passed") is not True
+                 or bounded_gate.get("sealed_evaluator_nav_sha256") != expected_nav_sha256):
+        raise ValueError("D12 continuation requires a passed identity-bound native D8 gate")
     allowed = (Path(sequence.output_root).resolve(), Path(sequence.hext_scratch).resolve())
     if not any(root in outdir.resolve().parents for root in allowed):
         raise ValueError("Evaluation output must be below an H-EXT output root")
@@ -206,21 +229,32 @@ def evaluate(*, sequence, evaluator: Path, nav: Path, expected_nav_sha256: str,
     outdir.mkdir(parents=True, exist_ok=False)
     actual, original, transform = prepare_evaluator_nav(
         sequence=sequence, nav=nav, outdir=transform_root, version=version)
+    process_options = {"allow_consistency_failure": True} if soft else {}
     result = _evaluate_process(sequence=sequence, evaluator=evaluator, nav=actual,
-                               outdir=outdir / "EXACT_EVALUATOR_OUTPUT")
-    errors = canonical._read_error_series(Path(result["outdir"]))
+                               outdir=outdir / "EXACT_EVALUATOR_OUTPUT", **process_options)
     evaluation_identity = {
         **identity, "dataset_id": sequence.sequence_id, "evaluator_contract": "evaluator_contract_" + version,
         "evaluator_sha256": EVALUATOR_SHA256, "source_nav_sha256": expected_nav_sha256,
         "evaluator_nav_sha256": sha256_file(actual), "trace_sha256": sequence.trace_sha256,
         "base_time": sequence.base_time, "evaluation_invoked": True, "STD": STD_POLICY,
     }
-    row = metrics(errors, original, evaluation_identity, window=sequence.window,
-                  reference_count=result["capture"].get("reference_epoch_count"))
+    if soft and result["capture"]["consistency"]["passed"] is False:
+        row = {**evaluation_identity, "status": "UNAVAILABLE_EVALUATION_FAILED",
+               "evaluation_status": "UNAVAILABLE_EVALUATION_FAILED",
+               "failure_classification": "UNAVAILABLE_EVALUATION_FAILED",
+               "reason": "D12: bounded native output; evaluator consistency gate failed; no retry",
+               "metrics_admitted": False}
+        bias = {**evaluation_identity, "status": "UNAVAILABLE_EVALUATION_FAILED"}
+    else:
+        errors = canonical._read_error_series(Path(result["outdir"]))
+        row = metrics(errors, original, evaluation_identity, window=sequence.window,
+                      reference_count=result["capture"].get("reference_epoch_count"))
+        bias = {**evaluation_identity, **body_frame_bias(errors, original), "status": "AVAILABLE"}
     row.update(evaluation_runtime_seconds=result["runtime_seconds"], error_series_source=result["outdir"])
-    bias = {**evaluation_identity, **body_frame_bias(errors, original), "status": "AVAILABLE"}
     if sha256_file(nav) != expected_nav_sha256:
         raise RuntimeError("External source NAV changed during evaluation")
+    if sha256_file(evaluator) != EVALUATOR_SHA256:
+        raise RuntimeError("Archived evaluator identity changed during evaluation")
     payload = {"row": row, "body_frame_bias": bias, "audit": result["audit"], "transform": transform}
     write_json(outdir / "EVALUATION_RESULT.json", payload)
     return payload

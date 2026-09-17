@@ -1,5 +1,5 @@
-schema_version: hext.external_sequences.contract.v1
-task: H-EXT-02
+schema_version: hext.external_sequences.contract.v1.1
+task: H-EXT-03
 status: HUMAN_AUTHORIZED_PREREGISTRATION
 execution_authorized: true
 frozen_main_chain: PROTOCOL_V2.1_UNCHANGED_EXTERNAL_COMPARISON_ROWS_ONLY
@@ -278,23 +278,23 @@ shared_parameters:
   accel_scale:
     default: 1.0
     variant: 1.0308398903907543
-    placement: All three unrounded FRD force axes after FLU->FRD and installation, before integration; frozen
-      literature previous-sample propagation retained
+    placement: All three unrounded FRD force axes after FLU->FRD and installation, before integration; frozen literature
+      previous-sample propagation retained
   imu_gap_policy:
     default: frozen_filter_raise
     variant: mirror_legsa_drop
     implementation: H_EXT_02_ADAPTER_ALL_CONFIGURATIONS
     decision_stage: H-EXT-02_AUTHORIZED
-    A10_facts: Frozen BY2H increments 407.017058->413.041069 (6.024011 s) straddle initialization with no left
-      NAV; inside-window 414.905067->415.081079 (0.176012 s) uses retained timestamp dt and NAV changes. Raw
-      4.740005970001221 s gap is not a demonstrated 4.7 s NAV step.
+    A10_facts: Frozen BY2H increments 407.017058->413.041069 (6.024011 s) straddle initialization with no left NAV;
+      inside-window 414.905067->415.081079 (0.176012 s) uses retained timestamp dt and NAV changes. Raw 4.740005970001221
+      s gap is not a demonstrated 4.7 s NAV step.
     gap_table: sequences.*.imu_gaps
     execution_policy: DROP_DT_GT_0P1_AND_CONTINUE
     mechanism: Classify adjacent raw IMU timestamps. Skip every propagation substep within invalid source interval,
       retain GNSS updates at original times, advance clock without covariance inflation. Invalid endpoint sample
       is not assimilated. First subsequent valid interval uses its own dt and the last retained previous sample;
-      thereafter frozen previous-sample hold. Nonpositive endpoints never rewind state; impossible overlapping
-      chronology is a technical failure. Frozen default identity path remains frozen_filter_raise.
+      thereafter frozen previous-sample hold. Nonpositive endpoints never rewind state; impossible overlapping chronology
+      is a technical failure. Frozen default identity path remains frozen_filter_raise.
   unchanged:
   - No bias state
   - Initial covariance
@@ -304,19 +304,18 @@ shared_parameters:
   - Lever/baseline/install constants
   - Process noise injection structure
 budget:
-  native: 14
-  native_definition: BY2 two S + BY2H four configurations x two starts + BY2O four configurations
-  evaluator: 28
-  evaluator_definition: 14 x (v3 primary + v2 parallel)
-  concurrency_max: 20
+  native: 0
+  evaluator: 11
+  evaluator_definition: At most 11 original NOT_RUN slots; D8 skips unbounded slots before invocation; expected
+    10 calls
+  trace_open_count_per_evaluator_child: 1
+  retry: 0
+  concurrency_max: 1
   numerical_threads_per_worker: 1
-  H_EXT_01_identity_runs_excluded: 2
-  H_EXT_02_prereg_identity_recheck_native: 2
-  identity_recheck_definition: Separate required prereg validation pair, zero evaluator, not admitted to tables
 report_rules:
   main_tables: All three sequences show literature and S rows; BY2 literature rows remain frozen P-07 values.
-  main_text_selection: Use the version with smaller BY2 C00 v3 yaw RMSE for all three sequences, uniformly.
-    The other version appears completely in supplementary material; neither version may be omitted.
+  main_text_selection: Use the version with smaller BY2 C00 v3 yaw RMSE for all three sequences, uniformly. The
+    other version appears completely in supplementary material; neither version may be omitted.
   selector_method_pair: LC01 versus LC01-S; EXT05C pair remains diagnostic
   equal_yaw_rmse: HUMAN_DECISION_REQUIRED_NO_UNREGISTERED_TIE_BREAK
   missing_yaw_rmse: HUMAN_DECISION_REQUIRED_NO_SUBSTITUTION
@@ -335,29 +334,41 @@ required_human_decisions: []
 no_parameter_search: true
 no_timing_sign_offset_search: true
 no_main_chain_change: true
-authorization: H-EXT-02 prompt 2026-09-16
+authorization: H-EXT-03 prompt 2026-09-16
 human_decisions:
   D1: imu_gap_policy = DROP_DT_GT_0P1_AND_CONTINUE：适配器丢弃 dt≤0 或 dt>0.1 s 的样本，与 LegSA invalid_dt_policy 相同；滤波器不改，不填充，不膨胀协方差，下一样本按自身
     dt 传播；每个 gap 记录：起止、时长、gap 期间施加的 GNSS 更新数、跨 gap 的位置/速度/航向跳变。
-  D2: 起点约定：FILE_START 为主行（方法原生，与 BY2 冻结用法一致：固定 NED 原点与初始化在首个 common GNSS1 HPPOSECEF 历元，静态校验照旧，标定窗 = IMU 文件前
-    5 s）。CONTRACT_START 仅 BY2H 作诊断行：初始化在首个 ≥ t_start(413) 的 common GNSS1 历元，yaw 取其后首个有效基线，速度零，静态校验豁免并在合约中登记为偏离，标定窗不变，传播从
-    ≥ t_start 的首个未丢弃 IMU 样本开始。若任一序列 FILE_START 静态校验失败，则该序列 CONTRACT_START 升为主行并标记（BY2O 此时补跑 CONTRACT_START，预算内）。
+  D2: 起点约定：FILE_START 为主行（方法原生，与 BY2 冻结用法一致：固定 NED 原点与初始化在首个 common GNSS1 HPPOSECEF 历元，静态校验照旧，标定窗 = IMU 文件前 5 s）。CONTRACT_START
+    仅 BY2H 作诊断行：初始化在首个 ≥ t_start(413) 的 common GNSS1 历元，yaw 取其后首个有效基线，速度零，静态校验豁免并在合约中登记为偏离，标定窗不变，传播从 ≥ t_start 的首个未丢弃
+    IMU 样本开始。若任一序列 FILE_START 静态校验失败，则该序列 CONTRACT_START 升为主行并标记（BY2O 此时补跑 CONTRACT_START，预算内）。
   D3: BY2O 不做特殊处理；表中标注 GNSS2 pAcc 超阈值 52 历元与 status float 57 历元；输出分段表，含合约遮挡窗口段（3369.94–3411.95 主、3495.94–3508.94
     次）。
-  D4: expected 门按观测值：BY2H HPPOSECEF 1483/1483、RAWX 1483/1483、common 1483、首端额外 HP 历元 0、间隔全 200 ms、HP=RAWX+2
-    ms、IMU 63222；BY2O 2231/2231、2231/2231、2231、0、全 200 ms、+2 ms、IMU 95860；两序列周 2408、闰秒 18。BY2 保持 1510/1509/1/63278。
-  D5: 配置四组：LC01（文献）、EXT05C（文献，诊断）、LC01-S、EXT05C-S（共享参数，值 = parameters.py 已实现：gyro PSD 8.209651003126647e-08
-    rad²/s ×3；accel PSD = q 三轴；s=1.0308398903907543 施加于安装后的当前样本 FRD 比力）。报告规则：三序列主表文献行与 S 行都列；正文对比行取 BY2 C00
-    v3 航向 RMSE 更小的一版（LC01-S BY2 对冻结 2.994827°），三序列统一使用，另一版进补充材料；结果方向无论如何如实报。
+  D4: expected 门按观测值：BY2H HPPOSECEF 1483/1483、RAWX 1483/1483、common 1483、首端额外 HP 历元 0、间隔全 200 ms、HP=RAWX+2 ms、IMU
+    63222；BY2O 2231/2231、2231/2231、2231、0、全 200 ms、+2 ms、IMU 95860；两序列周 2408、闰秒 18。BY2 保持 1510/1509/1/63278。
+  D5: 配置四组：LC01（文献）、EXT05C（文献，诊断）、LC01-S、EXT05C-S（共享参数，值 = parameters.py 已实现：gyro PSD 8.209651003126647e-08 rad²/s
+    ×3；accel PSD = q 三轴；s=1.0308398903907543 施加于安装后的当前样本 FRD 比力）。报告规则：三序列主表文献行与 S 行都列；正文对比行取 BY2 C00 v3 航向 RMSE
+    更小的一版（LC01-S BY2 对冻结 2.994827°），三序列统一使用，另一版进补充材料；结果方向无论如何如实报。
   D6: 几何审计照跑照记，不作准入门；失败行 status=AVAILABLE_GEOMETRIC_AUDIT_FAIL，指标照算。
+  D7: 硬停分类：读取 EXT05C-S/BY2H/FILE_START 的全率 native NAV，报告首个越界历元、最大 |位置−首历元| 与最大 |速度|；该行 native 状态 ALGORITHM_FAILURE_DIVERGED，其
+    v3/v2 科学评估槽为 NOT_RUN_ALGORITHM_FAILURE。已发生的第 17 次评估原记录 FAILED_EVALUATOR_CONSISTENCY 保留，不重试；科学槽分类不抹去历史进程调用。
+  D8: 评估前有界门（仅外部行）：native NAV 全行有限；位置相对首历元的三维欧氏范数 ≤ 1e4 m；速度三维欧氏范数 ≤ 50 m/s；高度相对首历元绝对值 ≤ 1e3 m。原生 NAV.csv 的固定 NED
+    米制坐标；全文件、不只评估窗。场地尺度约 300 m，阈值远离真实轨迹。不通过 → ALGORITHM_FAILURE_DIVERGED，不调评估器。14 次 native 全部执行并记录；已通过的 16 次评估回溯核对，不通过只报告不改结果。
+  D9: D2 看到结果后修订：BY2H 论文对比行 = CONTRACT_START（协议起点，与提出方法相同；窗前 IMU 中断被协议起点排除）；FILE_START 保留为方法原生诊断行，同表列出。BY2、BY2O
+    保持 FILE_START。amended_after_results_seen=true；附 BY2H LC01 与 LC01-S × FILE_START/CONTRACT_START × v3/v2 共 8 行
+    H/yaw 数值；修订方向混合：航向略差、位置更好。旧 D2、run_matrix 的执行身份保留为历史，不改原 native。
+  D10: 主配置选择结果 S：BY2 C00 v3 yaw RMSE 1.5392385536245534 deg < 2.9948274600591076 deg；三序列统一使用 S 论文行，文献 LIT 行进入补充材料，表中两版都保留。
+  D11: 先确认 A10 两行 NAV 的真实来源；仅 v2.1 序列全率 NAV 如在 c541_v21_handoff.zip（SHA256 98a77b4601b897956a6d87f5bfa92e008b584add35e48e2b22a9088ddec07585）或
+    20_FINALIZE 归档内，可核包/成员哈希后只读提取至 hext_scratch 诊断；否则 UNAVAILABLE。禁止 NAV_10HZ 或旧校准链替代。
+  D12: 本任务起：评估器进程失败、身份不等或访问审计失败 = 硬停；一致性门失败先查 native D8：无界按 D7 分类继续，有界按 GINav 先例逐行 UNAVAILABLE_EVALUATION_FAILED、正式指标空缺并继续；均不重试。原
+    capture 阈值与科学计算不变。
 initialization:
-  FILE_START: Frozen first common valid position after first5s calibration (all three observed first common
-    epochs follow calibration); zero velocity; fixed NED origin first common GNSS1 of file.
-  CONTRACT_START: First common GNSS1 at or after sequence t_start; yaw from first valid subsequent baseline;
-    zero velocity; unchanged file-first5s calibration; static admission waived and recorded; NED origin stays
-    file first common; no propagation before start, first retained valid IMU interval at or after start.
-  fallback: Classify FILE_START static failure before launching native filters; select CONTRACT_START in its
-    budget slots; BY2H preplanned CONTRACT_START reused, not duplicated.
+  FILE_START: Frozen first common valid position after first5s calibration (all three observed first common epochs
+    follow calibration); zero velocity; fixed NED origin first common GNSS1 of file.
+  CONTRACT_START: First common GNSS1 at or after sequence t_start; yaw from first valid subsequent baseline; zero
+    velocity; unchanged file-first5s calibration; static admission waived and recorded; NED origin stays file first
+    common; no propagation before start, first retained valid IMU interval at or after start.
+  fallback: Classify FILE_START static failure before launching native filters; select CONTRACT_START in its budget
+    slots; BY2H preplanned CONTRACT_START reused, not duplicated.
   no_other_initial_covariance_change: true
 run_matrix:
 - run_id: BY2__LC01-S__FILE_START
@@ -443,17 +454,22 @@ outputs:
   figures: 10_FIGURES
   publication: <PUBLICATION_ROOT>/figures/v21/FIG02S
   publication_manifest: <PUBLICATION_ROOT>/figures/v21/HEXT_RENDER_MANIFEST.json
-  handoff: <HANDOFF_ROOT>/hext_three_sequences_handoff.zip
+  handoff: <HANDOFF_ROOT>/hext_three_sequences_handoff_v2.zip
+  continuation: 03_CONTINUATION/H_EXT_03
+  continuation_scratch: <HEXT_SCRATCH>/H_EXT_03
+  readonly_diagnostic: 09_LEGSA_GAP_DIAGNOSTIC/H_EXT_03
 evaluation:
   evaluator_sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
   STD: OMITTED_AS_FROZEN_EXTERNAL_CONTRACT
-  capture_consistency_gate: P07_EXTERNAL_PASSED_TRUE_REQUIRED_UNCHANGED
+  capture_consistency_gate: UNCHANGED_THRESHOLD_D12_FAILURE_CLASSIFICATION
   trace_open_count_per_evaluator_child: 1
   parent_trace_payload_access: false
   versions:
   - v3
   - v2
   no_retry: true
+  technical_or_identity_failure: HARD_STOP
+  bounded_consistency_failure: UNAVAILABLE_EVALUATION_FAILED_NO_RETRY_NO_METRICS
 segments:
   BY2O:
   - id: PRIMARY_OCCLUSION
@@ -466,18 +482,163 @@ segments:
     - 3508.94
 bookkeeping_resolutions:
 - 22 raw rows receive size/metadata identity checks; 21 nontrace payloads receive pre/post SHA256. Trace SHA256
-  is verified only by each evaluator child sole read handle. Bag/fpl inventory hashes are outside native audit
-  scope.
-- Required BY2 default identity recheck pair is separate prereg validation (2 native,0 evaluator), outside
-  14 new comparison rows.
+  is verified only by each evaluator child sole read handle. Bag/fpl inventory hashes are outside native audit scope.
+- Required BY2 default identity recheck pair is separate prereg validation (2 native,0 evaluator), outside 14 new
+  comparison rows.
 - FILE_START static failure is classified before native launch; CONTRACT_START replaces its slots, so no budget
   overrun.
-- Frozen BY2 v2 external rows reuse pinned CLEAN5 parity summary because no P07 v2 horizontal table exists;
-  sources retained.
-- To avoid circular ZIP SHA and commit2 dependency, commit2 records final receipt location; ZIP is finalized
-  after commit2 and embeds both commits. Actual package SHA/bytes/CRC/member hashes are in external receipt;
-  no self-referential hash claim.
+- Frozen BY2 v2 external rows reuse pinned CLEAN5 parity summary because no P07 v2 horizontal table exists; sources
+  retained.
+- To avoid circular ZIP SHA and commit2 dependency, commit2 records final receipt location; ZIP is finalized after
+  commit2 and embeds both commits. Actual package SHA/bytes/CRC/member hashes are in external receipt; no self-referential
+  hash claim.
+- H-EXT-03 retains H02 failed evaluation v3 as historical process evidence while scientific slots for its divergent
+  native are NOT_RUN_ALGORITHM_FAILURE in both versions.
+- D9 manuscript starts are separate from unchanged native execution topology; no native record is rewritten.
+- H03 code_freeze is commit1; final package embeds H02 and H03 authorization/result hashes. Result commit points
+  to external package receipt to avoid a self-referential ZIP hash.
 hard_stop:
+- evaluator process failure
+- evaluator/raw/frozen/native/archived-member identity mismatch
+- trace/open/process/write-scope identity mismatch
+- existing 28 figures or RENDER_MANIFEST drift
+- unexpected overwrite or retry
+- archive batch failure ratio >1%
+contract_version: '1.1'
+amended_after_results_seen: true
+prior_authorization:
+  task: H-EXT-02
+  authorization: H-EXT-02 prompt 2026-09-16
+  contract_sha256: bbe0ca4d82fead5bc154281d0c53df5445b08e27e7e0c34fd22a9efd40712f3d
+  prereg_commit: c9e5133d244e0e3ab1e1385f322fbbf5948ee6d5
+  result_commit: d8f1d013b4c1d68ddb1c2400cbfe35ac46cbea57
+  hard_stop_package: <HANDOFF_ROOT>/hext_three_sequences_handoff.zip
+  hard_stop_package_sha256: efb64041e5add0b8d47542e446ae80abe3e038a9bdc0ee1d9620f4216764cc15
+  preserved_byte_for_byte: true
+historical_H_EXT_02_budget:
+  native: 14
+  native_definition: BY2 two S + BY2H four configurations x two starts + BY2O four configurations
+  evaluator: 28
+  evaluator_definition: 14 x (v3 primary + v2 parallel)
+  concurrency_max: 20
+  numerical_threads_per_worker: 1
+  H_EXT_01_identity_runs_excluded: 2
+  H_EXT_02_prereg_identity_recheck_native: 2
+  identity_recheck_definition: Separate required prereg validation pair, zero evaluator, not admitted to tables
+paper_primary_starts:
+  BY2: FILE_START
+  BY2H: CONTRACT_START
+  BY2O: FILE_START
+selected_configuration: S
+native_execution_frozen: true
+bounded_output_gate:
+  source: NAV.csv
+  all_numeric_fields_finite: true
+  position_columns:
+  - north_m
+  - east_m
+  - down_m
+  velocity_columns:
+  - vn_mps
+  - ve_mps
+  - vd_mps
+  position_displacement_norm_max_m: 10000.0
+  velocity_norm_max_mps: 50.0
+  relative_height_abs_max_m: 1000.0
+  inclusive_threshold: true
+  full_native_file: true
+D9_amendment_evidence:
+- version: v3
+  configuration: LC01
+  start: FILE_START
+  h_rmse_m: 0.09745269819180266
+  yaw_rmse_deg: 2.1739364356142343
+  source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2H__LC01__FILE_START/EVALUATION_RESULT.json
+  sha256: 0c908613467f46b740d0736828a3b52c71102903fde1b5b2a44cb3962b0aec49
+- version: v3
+  configuration: LC01
+  start: CONTRACT_START
+  h_rmse_m: 0.0746064486934978
+  yaw_rmse_deg: 2.208612313835051
+  source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2H__LC01__CONTRACT_START/EVALUATION_RESULT.json
+  sha256: 41beb7a87a2a7116b1cce5bc2e8766d315a2cd4e74d4c464e019e7160d00d715
+- version: v3
+  configuration: LC01-S
+  start: FILE_START
+  h_rmse_m: 0.10670864118045774
+  yaw_rmse_deg: 1.7940541340876093
+  source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2H__LC01-S__FILE_START/EVALUATION_RESULT.json
+  sha256: 663c7b66c33ddb1281a431213a52dd6a202c5fd786409d2255d694eb2bff95ca
+- version: v3
+  configuration: LC01-S
+  start: CONTRACT_START
+  h_rmse_m: 0.08373314985151889
+  yaw_rmse_deg: 1.9430028350481119
+  source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v3/BY2H__LC01-S__CONTRACT_START/EVALUATION_RESULT.json
+  sha256: 8fbfbc6fad6cd781e1050d06e5a4dc1f7caf1e8ea2d0deb096790b24cc305b12
+- version: v2
+  configuration: LC01
+  start: FILE_START
+  h_rmse_m: 0.1768954441095971
+  yaw_rmse_deg: 2.1739364356142343
+  source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2H__LC01__FILE_START/EVALUATION_RESULT.json
+  sha256: 066246332f9283d7569538f3f203782ae38239d4f1103b978bc5bc5fca3efe95
+- version: v2
+  configuration: LC01
+  start: CONTRACT_START
+  h_rmse_m: 0.16527957194800608
+  yaw_rmse_deg: 2.208612313835051
+  source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2H__LC01__CONTRACT_START/EVALUATION_RESULT.json
+  sha256: 24111584c7b83bfec64cda54b5b0f2054b372ffdff3896f3d68639c4c4a82da6
+- version: v2
+  configuration: LC01-S
+  start: FILE_START
+  h_rmse_m: 0.18635526660363833
+  yaw_rmse_deg: 1.7940541340876093
+  source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2H__LC01-S__FILE_START/EVALUATION_RESULT.json
+  sha256: ff3534b31f01fc2fc50a7fec0dbdeb367f4672a87f8751a4ca82fd235790bd14
+- version: v2
+  configuration: LC01-S
+  start: CONTRACT_START
+  h_rmse_m: 0.17408779595517415
+  yaw_rmse_deg: 1.9430028350481119
+  source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2H__LC01-S__CONTRACT_START/EVALUATION_RESULT.json
+  sha256: da7d5e7af04cf6c7b5510c7f5fe9fd707fe04f14047d0641ceb18140e174b70a
+continuation_remaining_slots:
+- run_id: BY2H__EXT05C-S__FILE_START
+  version: v2
+  expected_action: D8_SKIP_ALGORITHM_FAILURE
+- run_id: BY2H__EXT05C-S__CONTRACT_START
+  version: v3
+  expected_action: EVALUATE_ONCE_IF_D8_PASS
+- run_id: BY2H__EXT05C-S__CONTRACT_START
+  version: v2
+  expected_action: EVALUATE_ONCE_IF_D8_PASS
+- run_id: BY2O__LC01__FILE_START
+  version: v3
+  expected_action: EVALUATE_ONCE_IF_D8_PASS
+- run_id: BY2O__LC01__FILE_START
+  version: v2
+  expected_action: EVALUATE_ONCE_IF_D8_PASS
+- run_id: BY2O__EXT05C__FILE_START
+  version: v3
+  expected_action: EVALUATE_ONCE_IF_D8_PASS
+- run_id: BY2O__EXT05C__FILE_START
+  version: v2
+  expected_action: EVALUATE_ONCE_IF_D8_PASS
+- run_id: BY2O__LC01-S__FILE_START
+  version: v3
+  expected_action: EVALUATE_ONCE_IF_D8_PASS
+- run_id: BY2O__LC01-S__FILE_START
+  version: v2
+  expected_action: EVALUATE_ONCE_IF_D8_PASS
+- run_id: BY2O__EXT05C-S__FILE_START
+  version: v3
+  expected_action: EVALUATE_ONCE_IF_D8_PASS
+- run_id: BY2O__EXT05C-S__FILE_START
+  version: v2
+  expected_action: EVALUATE_ONCE_IF_D8_PASS
+historical_H_EXT_02_hard_stop:
 - D4 mismatch
 - evaluator/frozen table/raw hash mismatch
 - BY2 identity mismatch

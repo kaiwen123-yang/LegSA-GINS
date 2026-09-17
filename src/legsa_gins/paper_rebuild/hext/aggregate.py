@@ -6,7 +6,9 @@ main-chain values retain their original scientific commit and source tokens.
 from __future__ import annotations
 
 import csv
+from collections import Counter
 import hashlib
+import gzip
 import io
 import json
 import math
@@ -21,7 +23,8 @@ from ..manifest import sha256_file
 from .sequence_paths import alias_path
 
 TABLE_FIELDS = (
-    "sequence_id", "method_id", "config", "start_convention", "main_row", "evaluation_status",
+    "sequence_id", "method_id", "config", "start_convention", "main_row", "manuscript_row",
+    "failure_classification", "evaluation_status",
     "geometric_audit_status", "h_rmse_m", "position_3d_rmse_m", "up_rmse_m", "yaw_rmse_deg",
     "yaw_p95_absolute_deg", "roll_rmse_deg", "pitch_rmse_deg", "body_forward_bias_m",
     "body_right_bias_m", "body_up_bias_m", "output_epoch_count", "matched_epoch_count", "coverage_ratio",
@@ -44,6 +47,8 @@ FROZEN_PINS = {
 }
 OCCLUSION_WINDOWS = (("occlusion_primary", 3369.94, 3411.95),
                      ("occlusion_secondary", 3495.94, 3508.94))
+H03_PRIMARY_STARTS = {"BY2": "FILE_START", "BY2H": "CONTRACT_START", "BY2O": "FILE_START"}
+H03_UNAVAILABLE = {"NOT_RUN_ALGORITHM_FAILURE", "UNAVAILABLE_EVALUATION_FAILED"}
 
 
 def _json(path: Path):
@@ -96,7 +101,9 @@ def normalize_row(source, *, sequence_id, method_id, config, start, geometric_st
                   notes, body_bias=None, gaps="NOT_APPLICABLE", pacc="NOT_APPLICABLE", floats="NOT_APPLICABLE"):
     row = {name: "UNAVAILABLE" for name in TABLE_FIELDS}
     row.update(sequence_id=sequence_id, method_id=method_id, config=config, start_convention=start,
-               main_row=False, geometric_audit_status=geometric_status,
+               main_row=False, manuscript_row=False,
+               failure_classification=_first(source, "failure_classification", default="NONE"),
+               geometric_audit_status=geometric_status,
                evaluation_status=_first(source, "evaluation_status", default="UNAVAILABLE"),
                gap_events_in_window=gaps, gnss2_pacc_inflated_epochs=pacc, gnss2_float_epochs=floats,
                notes=notes)
@@ -110,6 +117,8 @@ def normalize_row(source, *, sequence_id, method_id, config, start, geometric_st
             default=_first(source, f"body_{axis}_bias_m", f"body_{axis}_signed_mean_m"))
     if row["evaluation_status"] in AVAILABLE and geometric_status == "FAIL":
         row["evaluation_status"] = "AVAILABLE_GEOMETRIC_AUDIT_FAIL"
+    if row["evaluation_status"] not in AVAILABLE and row["failure_classification"] == "NONE":
+        row["failure_classification"] = _first(source, "unavailable_reason", default="UNAVAILABLE_UNCLASSIFIED")
     return row
 
 
@@ -135,13 +144,15 @@ def select_main_config(rows):
             "rule": "smaller BY2 C00 v3 LC01 yaw; uniform configuration across all sequences; both versions retained"}
 
 
-def mark_main_rows(rows, selection, primary_starts):
+def mark_main_rows(rows, selection, primary_starts, *, continuation_v11=False):
     result = []
     for source in rows:
         row = dict(source)
         row["main_row"] = row["method_id"] in LEGSA_METHODS or (
             row["method_id"] == selection["selected_method_id"]
             and row["start_convention"] == primary_starts[row["sequence_id"]])
+        row["manuscript_row"] = row["main_row"] and (
+            not continuation_v11 or row["method_id"] not in ("F01", "F03"))
         result.append(row)
     return result
 
@@ -191,6 +202,119 @@ def segment_rows(errors: pd.DataFrame, *, sequence_id: str, method_id: str,
             common[metric] = float(np.sqrt(np.mean(values**2))) if len(values) else "UNAVAILABLE"
         common["yaw_p95_absolute_deg"] = float(np.percentile(np.abs(part["yaw_err_deg"]), 95)) if len(part) else "UNAVAILABLE"
         result.append(common)
+    return result
+
+
+def unavailable_segments(*, sequence_id, method_id, start_convention, version, window,
+                         source, status, reason):
+    """Keep failed/missing rows visible; unavailable support is never a zero count."""
+    windows = [("full", *map(float, window))]
+    if sequence_id == "BY2O":
+        windows.extend(OCCLUSION_WINDOWS)
+    return [{"sequence_id": sequence_id, "method_id": method_id,
+             "start_convention": start_convention, "evaluator_contract": "evaluator_contract_"+version,
+             "segment_id": label, "window_start_s": low, "window_end_s": high,
+             "count": "UNAVAILABLE", "error_series_source": source, "endpoint_policy": "CLOSED",
+             "status": status, "unavailable_reason": reason,
+             **{metric: "UNAVAILABLE" for metric in METRIC_FIELDS}}
+            for label, low, high in windows]
+
+
+def validate_evaluation_payload(payload, *, version, continuation_v11=False):
+    """D12 separates successful capture from explicit, technically valid dispositions."""
+    source, audit = payload["row"], payload["audit"]
+    if source.get("evaluator_contract") != "evaluator_contract_"+version:
+        raise ValueError("Evaluator-version identity mismatch")
+    status = source.get("evaluation_status")
+    if continuation_v11 and status == "NOT_RUN_ALGORITHM_FAILURE":
+        valid = (source.get("failure_classification") == "ALGORITHM_FAILURE_DIVERGED"
+                 and source.get("evaluation_invoked") is False
+                 and audit.get("passed") is True and audit.get("trace_open_count") == 0)
+    elif continuation_v11 and status == "UNAVAILABLE_EVALUATION_FAILED":
+        valid = (source.get("failure_classification") in
+                 {"FAILED_EVALUATOR_CONSISTENCY", "UNAVAILABLE_EVALUATION_FAILED"}
+                 and source.get("evaluation_invoked") is True
+                 and audit.get("technical_passed") is True
+                 and audit.get("consistency_passed") is False and audit.get("trace_open_count") == 1)
+    else:
+        valid = (status in AVAILABLE and audit.get("passed") is True
+                 and audit.get("trace_open_count") == 1)
+    if not valid:
+        raise ValueError("Evaluator open/capture/disposition gate failed; aggregation refused")
+    if status in H03_UNAVAILABLE:
+        # A rejected evaluation may still have output files; none of their numbers is admitted.
+        source = {**source, **{name: "UNAVAILABLE" for name in
+                  (*METRIC_FIELDS, "output_epoch_count", "matched_epoch_count", "coverage_ratio")},
+                  "error_series_source": "UNAVAILABLE"}
+        bias = {"status": status}
+    else:
+        bias = payload["body_frame_bias"]
+    return source, bias
+
+
+def frozen_comparison_segments(sequences, descriptors=None, error_descriptors=None):
+    """Copy exact-window frozen CSV tokens; never derive from thinned NAV or adjacent windows.
+
+    Each descriptor supplies path, sha256 and version. Optional column_map maps
+    canonical field names to source names. The original source row and hash are retained.
+    """
+    candidates = []
+    for descriptor in descriptors or ():
+        sequence = sequences["BY2O"]
+        path = _evidence_path(descriptor["path"], sequence)
+        original_rows = list(csv.DictReader(io.StringIO(
+            pinned_payload(path, descriptor["sha256"]).decode("utf-8-sig"))))
+        mapping = descriptor.get("column_map", {})
+        for line, original in enumerate(original_rows, 2):
+            row = {**original, **{key: original.get(value) for key, value in mapping.items()}}
+            row.setdefault("sequence_id", row.get("dataset_id"))
+            row.setdefault("evaluator_contract", "evaluator_contract_"+descriptor["version"])
+            if row.get("sequence_id") != "BY2O" or row.get("method_id") not in ("F04", "A04"):
+                continue
+            row["frozen_source"] = _notes(source_table=alias_path(path, sequence), source_line=line,
+                source_table_sha256=descriptor["sha256"], original_row=original, result_reused=True,
+                rerun=False, metric_recomputation=False)
+            candidates.append(row)
+    for descriptor in error_descriptors or ():
+        if (descriptor["sequence_id"] != "BY2O" or descriptor["method_id"] not in ("F04", "A04")
+                or descriptor["version"] not in ("v3", "v2")):
+            raise ValueError("Frozen segment error source is outside BY2O F04/A04 v3/v2 scope")
+        sequence = sequences["BY2O"]
+        path = _evidence_path(descriptor["path"], sequence)
+        payload = pinned_payload(path, descriptor["sha256"])
+        if path.suffix == ".gz":
+            payload = gzip.decompress(payload)
+        errors = pd.read_csv(io.BytesIO(payload), encoding="utf-8-sig")
+        provenance = _notes(source=alias_path(path, sequence), source_sha256=descriptor["sha256"],
+            frozen_evaluation_reused=True, full_rate_error_series=True, evaluator_invoked=False,
+            trace_payload_reads=0, metric_scope="EXACT_CLOSED_WINDOW_OF_FROZEN_ERROR_SERIES",
+            archive_provenance=descriptor.get("provenance", {}))
+        derived = segment_rows(errors, sequence_id="BY2O", method_id=descriptor["method_id"],
+            start_convention="FROZEN_V21", version=descriptor["version"], window=sequence.window,
+            source=provenance)
+        for row in derived:
+            row["frozen_source"] = provenance
+        candidates.extend(derived)
+    result = []
+    for version in ("v3", "v2"):
+        for method in ("F04", "A04"):
+            placeholders = unavailable_segments(sequence_id="BY2O", method_id=method,
+                start_convention="FROZEN_V21", version=version, window=sequences["BY2O"].window,
+                source="UNAVAILABLE", status="UNAVAILABLE_FROZEN_SAME_WINDOW_SEGMENT",
+                reason="NO_HASH_VERIFIED_FROZEN_ROW_FOR_EXACT_WINDOW; NAV_10HZ_NOT_USED")
+            for row in placeholders:
+                matches = [r for r in candidates if r["method_id"] == method
+                    and r.get("evaluator_contract") == "evaluator_contract_"+version
+                    and _number(r.get("window_start_s")) == row["window_start_s"]
+                    and _number(r.get("window_end_s")) == row["window_end_s"]]
+                if len(matches) > 1:
+                    raise ValueError("Duplicate frozen same-window segment identity")
+                if matches:
+                    frozen = matches[0]
+                    row.update({key: frozen.get(key, "UNAVAILABLE") for key in (*METRIC_FIELDS, "count")})
+                    row.update(status=frozen.get("status", "AVAILABLE_FROZEN"),
+                               error_series_source=frozen["frozen_source"], unavailable_reason="")
+                result.append(row)
     return result
 
 
@@ -250,7 +374,7 @@ def load_frozen_rows(sequences, frozen_pins=None):
                         source_line=p07.index(original)+2, source_table_sha256=pins["p07_v3"],
                         scope="BY2_FROZEN_REGISTRY_REASON; NO_NEW_H_OR_O_EXECUTION"))
                 row.update(evaluation_status="UNAVAILABLE", evaluator_contract="evaluator_contract_"+version,
-                           code_commit=original["code_commit"])
+                           code_commit=original["code_commit"], failure_classification=reason)
                 rows[version].append(row)
         source_records.append({"version": version, "v21_source_sha256": pins["v21_"+version]})
     return rows, {"pins": pins, "sources": source_records}
@@ -285,16 +409,20 @@ def validate_run_identities(records):
 
 
 def aggregate_stage(*, sequences, records, output_root: Path, code_commit: str,
-                    budget_ledger: Mapping[str, Any], frozen_pins=None):
+                    budget_ledger: Mapping[str, Any], frozen_pins=None,
+                    continuation_v11=False, frozen_segment_sources=None, frozen_error_sources=None):
     """Write 08_AGGREGATE from the bounded, sealed run records."""
     validate_run_identities(records)
+    if continuation_v11 and (len(records) != 14 or any(
+            r.get("primary_start_mode", "FILE_START") != "FILE_START" for r in records)):
+        raise ValueError("H-EXT-03 must preserve the original fourteen native run identities")
     rows, source_manifest = load_frozen_rows(sequences, frozen_pins)
     segments, biases, gaps, geometries, result_sources = [], [], [], [], []
-    primary_starts = {name: "FILE_START" for name in sequences}
+    primary_starts = dict(H03_PRIMARY_STARTS) if continuation_v11 else {name: "FILE_START" for name in sequences}
     for record in records:
         seq = sequences[record["sequence_id"]]
-        primary = record.get("primary_start_mode", "FILE_START")
-        if primary == "CONTRACT_START":
+        primary = primary_starts[seq.sequence_id] if continuation_v11 else record.get("primary_start_mode", "FILE_START")
+        if primary == "CONTRACT_START" and not continuation_v11:
             primary_starts[seq.sequence_id] = primary
         native_path = _evidence_path(record["native_summary_path"], seq)
         native = _json(native_path)
@@ -303,6 +431,9 @@ def aggregate_stage(*, sequences, records, output_root: Path, code_commit: str,
         geom_status = "NOT_APPLICABLE_SINGLE_RECEIVER" if single else (
             ("PASS" if geom["thresholds_pass"] and geom.get("continuity", {}).get("no_180_degree_representation_discontinuity", True) else "FAIL")
             if isinstance(geom.get("thresholds_pass"), bool) else str(geom.get("terminal_status", "UNAVAILABLE")))
+        if continuation_v11 and not single and geom_status == "UNAVAILABLE" and geom.get("error"):
+            # Preserve the original unavailable statistics, while exposing the failed geometry check.
+            geom_status = "FAIL"
         geometric_row = {"run_id": record["run_id"], "sequence_id": seq.sequence_id,
             "method_id": record["configuration_id"], "start_convention": record["start_mode"],
             "geometric_audit_status": geom_status, "audit": geom, "source": alias_path(native_path, seq)}
@@ -317,16 +448,22 @@ def aggregate_stage(*, sequences, records, output_root: Path, code_commit: str,
         for version in ("v3", "v2"):
             result_path = _evidence_path(record["evaluations"][version], seq)
             payload = _json(result_path)
-            if payload["audit"].get("passed") is not True or payload["audit"].get("trace_open_count") != 1:
-                raise ValueError("Evaluator open/capture gate failed; aggregation refused")
-            source, bias = payload["row"], payload["body_frame_bias"]
-            if source.get("evaluator_contract") != "evaluator_contract_"+version:
-                raise ValueError("Evaluator-version identity mismatch")
+            source, bias = validate_evaluation_payload(payload, version=version,
+                                                       continuation_v11=continuation_v11)
+            if source["evaluation_status"] == "NOT_RUN_ALGORITHM_FAILURE" and record.get(
+                    "native_status") != "ALGORITHM_FAILURE_DIVERGED":
+                raise ValueError("Algorithm-failure disposition requires a diverged native classification")
             note = _notes(source=alias_path(result_path, seq), source_sha256=sha256_file(result_path),
                 native_source=alias_path(native_path, seq), native_sha256=sha256_file(native_path),
-                result_reused=False, scientific_code_commit=source.get("code_commit"),
+                result_reused=continuation_v11 and record.get("evaluation_dispositions", {}).get(version)
+                    == "REUSED_H02_COMPLETED",
+                native_result_reused=continuation_v11, scientific_code_commit=source.get("code_commit"),
                 static_initialization_waiver=record["start_mode"] == "CONTRACT_START",
-                diagnostic_start=record["start_mode"] != primary)
+                diagnostic_start=record["start_mode"] != primary,
+                amended_after_results_seen=continuation_v11 and seq.sequence_id == "BY2H",
+                native_status=record.get("native_status", "COMPLETED"),
+                historical_evaluation_status=payload.get("historical_evaluation_status", source.get("historical_evaluation_status")),
+                historical_evaluation_source=payload.get("historical_evaluation_source", source.get("historical_evaluation_source")))
             row = normalize_row(source, sequence_id=seq.sequence_id, method_id=record["configuration_id"],
                 config="S" if record["configuration_id"].endswith("-S") else "LIT", start=record["start_mode"],
                 geometric_status=geom_status, notes=note, body_bias=bias, gaps=gap_count,
@@ -336,15 +473,31 @@ def aggregate_stage(*, sequences, records, output_root: Path, code_commit: str,
                 "start_convention": row["start_convention"], "evaluator_contract": row["evaluator_contract"],
                 "body_forward_bias_m": row["body_forward_bias_m"], "body_right_bias_m": row["body_right_bias_m"],
                 "body_up_bias_m": row["body_up_bias_m"], "status": bias.get("status", "AVAILABLE"), "source": note})
-            errors_root = _evidence_path(source["error_series_source"], seq)
-            errors = canonical._read_error_series(errors_root if errors_root.is_dir() else errors_root.parent)
-            segments.extend(segment_rows(errors, sequence_id=seq.sequence_id, method_id=row["method_id"],
-                start_convention=row["start_convention"], version=version, window=seq.window,
-                source=alias_path(errors_root, seq)))
+            if source["evaluation_status"] in H03_UNAVAILABLE:
+                segments.extend(unavailable_segments(sequence_id=seq.sequence_id, method_id=row["method_id"],
+                    start_convention=row["start_convention"], version=version, window=seq.window,
+                    source=alias_path(result_path, seq), status=source["evaluation_status"],
+                    reason=source["failure_classification"]))
+            else:
+                errors_root = _evidence_path(source["error_series_source"], seq)
+                errors = canonical._read_error_series(errors_root if errors_root.is_dir() else errors_root.parent)
+                segments.extend(segment_rows(errors, sequence_id=seq.sequence_id, method_id=row["method_id"],
+                    start_convention=row["start_convention"], version=version, window=seq.window,
+                    source=alias_path(errors_root, seq)))
             result_sources.append({"run_id": record["run_id"], "version": version,
-                "source": alias_path(result_path, seq), "sha256": sha256_file(result_path)})
+                "source": alias_path(result_path, seq), "sha256": sha256_file(result_path),
+                "evaluation_status": row["evaluation_status"], "failure_classification": row["failure_classification"],
+                "evaluation_invoked": source.get("evaluation_invoked", True),
+                "trace_open_count": payload["audit"].get("trace_open_count")})
     selection = select_main_config(rows["v3"])
-    rows = {v: mark_main_rows(values, selection, primary_starts) for v, values in rows.items()}
+    if continuation_v11:
+        if selection["selected_config"] != "S":
+            raise ValueError("H-EXT-03 D10 fixed S selection disagrees with frozen BY2 evidence")
+        selection.update(authorization="H-EXT-03 prompt 2026-09-16", decision="D10_RECORDED_SELECTION",
+                         amended_after_results_seen=True, paper_primary_starts=primary_starts)
+        segments.extend(frozen_comparison_segments(sequences, frozen_segment_sources, frozen_error_sources))
+    rows = {v: mark_main_rows(values, selection, primary_starts, continuation_v11=continuation_v11)
+            for v, values in rows.items()}
     # Frozen biases remain explicit (not reconstructed from thinned NAV).
     for version, values in rows.items():
         for row in values:
@@ -366,6 +519,8 @@ def aggregate_stage(*, sequences, records, output_root: Path, code_commit: str,
                          ("GAP_EVENTS.csv", gaps), ("GEOMETRIC_AUDIT.csv", geometries)):
         _write_csv(output_root / name, values)
     definitions = {"columns": list(TABLE_FIELDS), "main_row": "selected external LC01 configuration at primary start, plus frozen F01/F02/F03/A04/F04",
+        "manuscript_row": "H-EXT-03: globally selected LC01-S at D9 paper start, plus F02/A04/F04; F01/F03 retained in table",
+        "failure_classification": "NONE or explicit unavailable/algorithm/evaluator classification; no failed metric becomes zero",
         "config": "LIT/S for external method; NOT_APPLICABLE_V21 for frozen internal methods",
         "unavailable_numeric": "UNAVAILABLE; never zero", "delta": "candidate minus reference; negative better",
         "coverage_ratio": "matched native output epochs / native output epochs within frozen closed window; not reference-row coverage",
@@ -376,12 +531,19 @@ def aggregate_stage(*, sequences, records, output_root: Path, code_commit: str,
         "occlusion_windows": OCCLUSION_WINDOWS, "selection": selection, "frozen_sources": source_manifest,
         "aggregation_code_commit": code_commit, "trace_payload_reads": 0}
     _write_json(output_root / "FIELD_DEFINITIONS.json", definitions)
-    summary = {"status": "COMPLETED_H_EXT_02_AGGREGATION", "selection": selection, "primary_starts": primary_starts,
-        "native_registered_count": len(records), "new_evaluation_rows": len(result_sources),
-        "row_counts": {v: len(values) for v, values in rows.items()}, "new_native_budget": 14, "new_evaluator_budget": 28,
+    summary = {"status": "COMPLETED_H_EXT_03_AGGREGATION" if continuation_v11 else "COMPLETED_H_EXT_02_AGGREGATION",
+        "selection": selection, "primary_starts": primary_starts,
+        "native_registered_count": len(records), "external_evaluation_terminal_records": len(result_sources),
+        "row_counts": {v: len(values) for v, values in rows.items()},
+        "new_native_budget": 0 if continuation_v11 else 14, "new_evaluator_budget": 11 if continuation_v11 else 28,
+        "evaluation_disposition_counts": dict(Counter(item["evaluation_status"] for item in result_sources)),
+        "failure_classification_counts": dict(Counter(item["failure_classification"] for item in result_sources)),
+        "native_classification_counts": dict(Counter(record.get("native_status", "COMPLETED") for record in records)),
         "budget_ledger": dict(budget_ledger), "frozen_sources": source_manifest, "result_sources": result_sources,
         "code_commit": code_commit, "trace_payload_reads": 0, "solver_invocations": 0, "evaluator_invocations": 0,
         "data_mode": "real_external_and_frozen_comparison", "synthetic_data_used": False, "semisynthetic_data_used": False,
         "files_sha256": {p.name: sha256_file(p) for p in output_root.iterdir() if p.is_file()}}
+    if not continuation_v11:
+        summary["new_evaluation_rows"] = len(result_sources)
     _write_json(output_root / "FINAL_SUMMARY.json", summary)
     return summary

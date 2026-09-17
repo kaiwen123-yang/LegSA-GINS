@@ -95,7 +95,10 @@ def test_stage06_transform_layout_without_any_evaluator_process(tmp_path, monkey
                 "runtime_seconds":0.,"outdir":str(target)}
     monkeypatch.setattr(external_evaluation,"_evaluate_process",fake_child)
     monkeypatch.setattr(external_evaluation,"run_process_group",lambda *a,**k:pytest.fail("real evaluator forbidden"))
-    result=external_evaluation.evaluate(sequence=seq,evaluator=tmp_path/"never_run.py",nav=nav,
+    evaluator = tmp_path / "never_run.py"
+    evaluator.write_text("# Synthetic identity fixture; never executed.\n")
+    monkeypatch.setattr(external_evaluation, "EVALUATOR_SHA256", hashlib.sha256(evaluator.read_bytes()).hexdigest())
+    result=external_evaluation.evaluate(sequence=seq,evaluator=evaluator,nav=nav,
         expected_nav_sha256=hashlib.sha256(nav.read_bytes()).hexdigest(),outdir=seq.hext_scratch/"07_OFFLINE_EVALUATION/v3/job",
         nav_input_root=seq.hext_scratch/"06_V3_NAV_INPUTS/job",version="v3",identity={"code_commit":"synthetic"})
     assert (seq.hext_scratch/"06_V3_NAV_INPUTS/job/EVALUATOR_INPUT.nav").is_file()
