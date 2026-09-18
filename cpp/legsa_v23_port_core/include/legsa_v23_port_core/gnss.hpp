@@ -8,6 +8,7 @@
 #pragma once
 
 #include "legsa_v23_port_core/types.hpp"
+#include "legsa_v23_port_core/baseline3d.hpp"
 
 namespace legsa_v23_port_core {
 
@@ -28,6 +29,7 @@ struct GnssData {
   // 中文说明：legacy 15 列没有 validity 后缀；formal 18 列必须显式给出 position/velocity/yaw validity。
   bool validity_explicit = false;
   bool isvalid = false;
+  Baseline3dMeasurement baseline3d;
 };
 
 }  // namespace legsa_v23_port_core

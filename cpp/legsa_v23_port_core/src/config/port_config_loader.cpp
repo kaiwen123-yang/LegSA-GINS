@@ -489,6 +489,29 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   options.qa_fallback_config.algorithm_id = options.algorithm_id;
   options.imu_path = stringOrDefault(kv, "imupath", stringOrDefault(kv, "imu_path", ""));
   options.gnss_path = stringOrDefault(kv, "gnsspath", stringOrDefault(kv, "gnss_path", ""));
+  options.dual_antenna_measurement_model =
+      stringOrDefault(kv, "dual_antenna_measurement_model", "scalar");
+  if (options.dual_antenna_measurement_model != "scalar" &&
+      options.dual_antenna_measurement_model != "baseline3d") {
+    throw std::runtime_error("BASELINE3D_UNKNOWN_MEASUREMENT_MODEL");
+  }
+  if (options.dual_antenna_measurement_model == "baseline3d") {
+    options.baseline3d_path = stringOrDefault(kv, "baseline3d_path", "");
+    auto required_positive = [&](const std::string& key) {
+      const auto found = kv.find(key);
+      if (found == kv.end()) throw std::runtime_error("BASELINE3D_REQUIRED_CONFIG: " + key);
+      std::istringstream stream(found->second);
+      double value = 0.0;
+      std::string trailing;
+      if (!(stream >> value) || (stream >> trailing) || !std::isfinite(value) || value <= 0.0) {
+        throw std::runtime_error("BASELINE3D_REQUIRED_POSITIVE_CONFIG: " + key);
+      }
+      return value;
+    };
+    if (options.baseline3d_path.empty()) throw std::runtime_error("BASELINE3D_REQUIRED_CONFIG: baseline3d_path");
+    options.baseline3d_length_m = required_positive("baseline3d_length_m");
+    options.baseline3d_k_b = required_positive("baseline3d_k_b");
+  }
   options.clean_input_provenance_label =
       stringOrDefault(kv, "clean_input_provenance_label", options.clean_input_provenance_label);
   options.propagation_imu_source =
@@ -1208,6 +1231,13 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   }
   if (clean3_s3_guard_requested && !options.clean1_formal_mode) {
     formalContractFailure("CLEAN3 S3 parity mode cannot weaken formal validation");
+  }
+  // T5bc does not authorize new QA/QM science. Check before Basic's force-off block.
+  if (options.dual_antenna_measurement_model == "baseline3d" &&
+      (options.quality_state_manager_config.enable_multi_state_qm ||
+       options.qa_fallback_config.enable_qa_fallback || options.qa_fallback_config.qa_active_mode ||
+       options.algorithm_id == quality_aware::kLegsaQaFallbackEkf)) {
+    throw std::runtime_error("BASELINE3D_SCOPE_REQUIRES_QA_QM_OFF");
   }
   if (options.clean1_formal_mode) {
     validateFormalMethodContract(kv, options);

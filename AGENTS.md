@@ -1399,6 +1399,14 @@ H-EXT-04 执行部分取消；仅库代码 NOT_AUTHORIZED_FOR_EXECUTION，T5 待
 v2.1、原28图及 RENDER_MANIFEST 不变；新派生仅 <HEXT_ROOT>/11_READONLY_CLOSEOUT_H_EXT_04L/，旧 H03 证据保留。
 <!-- H_EXT_SECTION_18_END -->
 
+<!-- T5BC_SECTION_18_BEGIN -->
+T5bc 人工例外（授权字符串：T5bc prompt 2026-09-19）：冻结链外 v3 候选试点，C00/三序列15次 native（F04-R5σ/R5W 各三序列；B3 F02′/A04′/F04′ 各三序列）与61例完整子集244次 native（F04类 R5/R5σ/R5W/B3 各61），另候选二进制关闭B3的BY2 C00 F02/F04身份门2次。预算 native≤261、evaluator≤518；不需身份评估器，native trace=0，评估器子进程各打开 trace 1次，禁止重试与参数搜索。全61 case ID逐项冻结在T5BC_CONTRACT_V1.yaml，不再沿用旧42例筛选或PENDING列表。
+预注册科学定义已由最新提示固定：模型基线0.35 m；σ/k/k_b均只应用BY2双fixed原始5 Hz的1 s免真值标定，0.2 s与BY2H/BY2O数值只报；向量k_b²分母为6·mean(S第二端+S第一端)。F02不跑R5σ/R5W。B3的GNSS标量yaw_valid全0，三维量测替代而不叠加。HV保留冻结1 Hz status A1，IMU/RD/RP/HV、评估器/窗口/评估点、门控/初始协方差/过程噪声不改。
+配置仅逐行文本替换，禁止YAML往返：标量只改gnsspath；B3只改gnsspath并增加四个必要键。a逐行字节差与b旧211项有效参数回显相等均为硬门。D37旧运行无回显，先证明与D36回显见证配置仅五个元数据/路径行不同，再派生期望回显；旧失败行保持不可用。C00保留real_clean，退化例外层semisynthetic角色与历史native配置标志分别记录。D57精确时间不匹配行无效，不做时间修复。全61例原yaw/A1故障列由新输入替换，逐例标记，不声称原航向注入保留。
+预注册提交并push后先标定，再两次NAV_10HZ逐字节身份门，然后provider及矩阵。单批归档IO失败>1%、身份/config/provider/冻结哈希或评估器进程不等硬停；原生失败沿用H-EXT-03/D12，发散归类后继续，无法分类才停。簿记冲突自行裁定附录记录。当前实测调用0；最终255项合成/回归测试通过（含C++18与T5a27），独立只读终审PASS，预注册push后按上述次序执行。首个历史B3合成一致性测试的角度表示失败保留；后续仅圆周角差测试修复，数值雅可比最大绝差8.8819e-11、B3/标量yaw修正差1.32339e-13 rad，C++18项通过。
+候选二进制仅B3与身份门使用，SHA256 cbf554baf9c83490e40b207b97f04ef77f51d9962f7bce463f1e644416ef789e；冻结96ae436d…二进制、v2.1任何产物、20_FINALIZE、28图和RENDER_MANIFEST不变。输出根<CLEAN_ROOT>/stages/CLEAN7_T5BC_V3_CANDIDATE_PILOT/；先ext4 scratch后归档G:。两次提交/push按用户授权执行；证据只进敏感性/限制与v3决策记录。记录docs/paper_rebuild/hext/T5BC_V3_CANDIDATE_PILOT.md。
+<!-- T5BC_SECTION_18_END -->
+
 <!-- T5A_SECTION_18_BEGIN -->
 T5a-R 人工例外（2026-09-18 本任务授权）：原三次 native 均按 INVALID_CONFIG_PARSE 保留历史记录，不进任何续作结果表；新矩阵 native 16、evaluator 32，条件保真 native 至多 1、其 evaluator 至多 2。当前已有有效参数回显，采用 a 字节门与 b 回显门，c 不需要，计划保真调用 0。先修复与合同 v1.1 预注册提交并 push 后执行。
 冻结解析器读取的 runtime config 只能逐行文本替换克隆，禁止 YAML 往返。仅 gnsspath 一行可变；其余字节相同，实际静态有效参数回显须与对应冻结回显逐字段相同。A0 只读回查所有冻结 v2.1 runtime config 及每序列每配置的回显，报告后继续，任何结论均不改主链。

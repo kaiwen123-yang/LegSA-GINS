@@ -1359,7 +1359,9 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   options.expected_update_count = expected_updates;
 
   ImuFileLoader imu_loader(options.imu_path);
-  GnssFileLoader gnss_loader(options.gnss_path);
+  GnssFileLoader gnss_loader = options.dual_antenna_measurement_model == "baseline3d"
+      ? GnssFileLoader(options.gnss_path, options.baseline3d_path)
+      : GnssFileLoader(options.gnss_path);
   if (!imu_loader.isOpen() || !gnss_loader.isOpen()) {
     throw std::runtime_error("failed to open configured IMU/GNSS inputs");
   }
@@ -1527,6 +1529,9 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   options.yaw_normal_count = engine.yawNormalCount();
   options.yaw_downweight_count = engine.yawDownweightCount();
   options.yaw_reject_count = engine.yawRejectCount();
+  if (options.dual_antenna_measurement_model == "baseline3d") {
+    options.baseline3d_counts = engine.baseline3dCounts();
+  }
   copyRawDopplerStatus(engine, options);
   copySourceAwareStatus(engine, options);
   copyGo2AttitudePriorStatus(engine, options);
@@ -1551,7 +1556,8 @@ void PortRuntime::runFromConfig(const std::string& config_path,
       options.expected_update_count > 0 &&
       static_cast<double>(options.actual_update_count) < 0.8 * static_cast<double>(options.expected_update_count);
   options.gnss_rows_skipped_unexpectedly = options.update_count_low;
-  if (debug_options.overclose_audit || debug_options.measurement_copy_guard || debug_options.covariance_gain) {
+  if (options.dual_antenna_measurement_model != "baseline3d" &&
+      (debug_options.overclose_audit || debug_options.measurement_copy_guard || debug_options.covariance_gain)) {
     const std::vector<GnssData> gnss_rows = readGnssRows(options.gnss_path);
     writeWriterSourceAudit(debug_dir / "PORT_WRITER_SOURCE_AUDIT.json");
     writeReferenceIndependenceSnapshot(debug_dir / "PORT_REFERENCE_INDEPENDENCE_SNAPSHOT.json", options);
@@ -1568,6 +1574,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   engine.writeSourceAwareTrace(output_dir);
   engine.writeFgoFeedbackTrace(output_dir);
   engine.writeQAFallbackTrace(output_dir);
+  engine.writeBaseline3dDiagnostics(output_dir);
 }
 
 }  // namespace legsa_v23_port_core
