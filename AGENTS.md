@@ -1397,6 +1397,12 @@ H-EXT-04 执行部分取消；仅库代码 NOT_AUTHORIZED_FOR_EXECUTION，T5 待
 v2.1、原28图及 RENDER_MANIFEST 不变；新派生仅 <HEXT_ROOT>/11_READONLY_CLOSEOUT_H_EXT_04L/，旧 H03 证据保留。
 <!-- H_EXT_SECTION_18_END -->
 
+<!-- T5A_SECTION_18_BEGIN -->
+T5a 人工例外（本任务提示词及 D3/D4 修订授权）：冻结链外三序列 F02/F04 航向输入源/频率敏感性，native 上限 16、v3/v2 evaluator 上限 32，先预注册提交并 push 后执行。此前五次灵敏度例外由本任务 16 次范围替代，不累加；不授权 H-EXT-04 已取消的其他执行。
+R1=E∩双 fixed，精确子集/差集硬门；BY2O R1F 保持冻结 valid 模式，R5 双 fixed、R5F 双方 fixed/float。yaw_std 固定 2.933193，二进制 96ae436d… 不变，非 yaw token 及 IMU/RD/RP/HV 不变，config 仅 gnsspath 可变。
+结果仅进入敏感性/限制段落，协议 v2.1 的任何行、原28图及 RENDER_MANIFEST 不变。独立输出 <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/；定义与运行矩阵见 configs/paper_rebuild/hext/T5A_CONTRACT_V1.yaml。当前状态：预注册准备，尚未执行。
+<!-- T5A_SECTION_18_END -->
+
 ### C-CLOSE freeze rule (2026-09-15)
 
 协议 v2.1 是论文唯一链；此后任何新发现只作为限制或后续工作写入论文，不再修改 provider、参数、求解器，不再重跑；唯一例外是逐字节身份门检出的数值错误；EXT06 只新增对比行。

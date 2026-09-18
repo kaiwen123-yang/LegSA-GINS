@@ -1,0 +1,324 @@
+schema_version: 1
+task: T5a
+stage_id: CLEAN7_T5A_HEADING_SENSITIVITY
+state: HUMAN_AUTHORIZED_PREREGISTRATION
+preregistered: true
+execution_ready: true
+start_commit: f7bf0193c659535e746a66c73049e4f9e267eedd
+human_authorization: T5a user instruction explicitly authorizes the bounded exception to AGENTS section 18.
+claim_scope: SENSITIVITY_AND_LIMITATIONS_ONLY
+protocol_v21_rows_replaced: 0
+output_root: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY
+scratch_root: <T5A_SCRATCH>
+scratch_local_config_key: t5a_scratch
+handoff: <HANDOFF_ROOT>/t5a_heading_sensitivity_handoff.zip
+output_directories:
+- 01_EPOCH_SETS
+- 02_PROVIDER_TABLES/<SEQ>/<VARIANT>
+- 03_NATIVE/<SEQ>/<CFG>/<VARIANT>
+- 04_EVAL/v3
+- 04_EVAL/v2
+- 05_AGGREGATE
+- 06_FIGURES
+- 07_HANDOFF
+budget:
+  native_max: 16
+  evaluator_max: 32
+  evaluator_versions:
+  - v3
+  - v2
+  evaluator_primary: v3
+  trace_opens_per_invoked_evaluator: 1
+  trace_opens_outside_evaluator_child: 0
+  retries: 0
+  parameter_search: 0
+  reservation: Durable fsynced reservation before each invocation; failure consumes its slot.
+matrix:
+  BY2:
+    configurations:
+    - F02
+    - F04
+    variants:
+    - R1
+    - R5
+  BY2H:
+    configurations:
+    - F02
+    - F04
+    variants:
+    - R1
+    - R5
+  BY2O:
+    configurations:
+    - F02
+    - F04
+    variants:
+    - R1
+    - R5
+    - R1F
+    - R5F
+frozen:
+  executable:
+    path: <CODE_ROOT>/build/p13_v21_cpp/legsa_v23_port_core_demo
+    sha256: 96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c
+  evaluator:
+    path: <CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py
+    sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  sequence_tables:
+    root: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE_SEQUENCES
+    filename: UNIQUE_EVALUATION_RESULTS.csv
+    v3_sha256: e26dfcd830d6c711ffbb7debd68293fbf7b7ea28240e16bce582381b61ea6a0b
+    v2_sha256: 6c5a165eaf68bf762cbc803466b4496a5b522dba968785115db9d0338990044d
+  gnss18_sha256:
+    BY2: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+    BY2H: 4cd2369e62e4fba4f0b84b00a75c312c53a8e7eac606802837cbc88892278ff5
+    BY2O: c5212cf72d07afd6d3ae0407fee87f841f2e0d909dfb8c1416bd7f38b0248bb4
+  runtime_config_template: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/<RUN_ID>/P13_cycle010_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+  runtime_configs:
+    BY2_F02:
+      run_id: RUN_00002
+      sha256: 40b0931b96b22babc8e806e3c526fb8abff98b000e4f1acd625de43ea5f31cda
+    BY2_F04:
+      run_id: RUN_00004
+      sha256: cad5967db4bccc3de0f66e15139cad83892f55ef9d2dc8e8fc345b4bb1e21a4f
+    BY2H_F02:
+      run_id: SEQUENCE_BY2H_F02
+      sha256: ee0ce4a4c5c472413b86b095df44ceedf80f2017072ed4ff70e5ae4265ea3b14
+    BY2H_F04:
+      run_id: SEQUENCE_BY2H_F04
+      sha256: 41487d5047df94581d28bf5cb6686bf5317d453fdd81b298f08f422680c5fb99
+    BY2O_F02:
+      run_id: SEQUENCE_BY2O_F02
+      sha256: 8090b571f137101f1b475255cfa9f8e4c74dff971e6839d321b2476b3337f87a
+    BY2O_F04:
+      run_id: SEQUENCE_BY2O_F04
+      sha256: 1ee1e12fa2bcdc5c0e759abec9529f446ae77599adc5c0959ca1f5d20c5dfed6
+  provider_authority: Frozen sequence row provider_hashes and retained RUN_MANIFEST; verify exact runtime config
+    against config_hash and ARCHIVE_RECEIPT.
+  raw_authority: Sequence registry and pinned RAW_FILE_HASH_LOCK; read only specified raw HPPOSECEF/PVT and status
+    sources, never trace.
+  shared_source_authority: Pin maintained imported source files to the code freeze and record individual SHA256;
+    do not import untracked H-EXT-04 execution drafts.
+  frozen_heading_conversion:
+    path: src/legsa_gins/input_generation/status_yaw_builder.py
+    commit: f7bf0193c659535e746a66c73049e4f9e267eedd
+    sha256: 4435dd71593b1447152986ab91e2fe0394177470791a4c09815a851b75504193
+  hext04l_data_manifest:
+    path: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/11_READONLY_CLOSEOUT_H_EXT_04L/DATA_MANIFEST.json
+    sha256: 5a9c2740fb5e856ede39384f1d58bb4c11c39162ea870ce9c0c399f30d378258
+  hext04l_segments:
+    path: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/11_READONLY_CLOSEOUT_H_EXT_04L/BY2O_SEGMENT_SUMMARY.csv
+    sha256: a68d5a36eb1ccf808a28842af309d1cccb9748c8e667b6b4ac2bf63580fe0e72
+definitions:
+  D1:
+    epoch_set: Every yaw_valid=1 row in the frozen GNSS18 table; retain complete provider set and separately report
+      closed evaluation-window counts.
+    time_formula: t = 315964800 + 2408*604800 + iTOW_ms/1000 - 18 - base_time
+    inversion: Exact integer milliseconds with at most 1 microsecond roundtrip error from frozen floating serialization;
+      no fit.
+    raw_grid: Exact same-iTOW intersection of both receiver HPPOSECEF streams, 200 ms grid; enumerate all unmatched
+      A1 epochs.
+    windows_s:
+      BY2:
+      - 66.0
+      - 340.0
+      BY2H:
+      - 413.0
+      - 683.0
+      BY2O:
+      - 3186.0
+      - 3563.0
+  D2:
+    baseline: GNSS2 HPPOSECEF minus GNSS1 HPPOSECEF at identical iTOW.
+    frame: Frozen EXT05 fixed NED frame at the first common GNSS1 HPPOSECEF epoch of the file.
+    conversion: Direct calls to unchanged status_yaw_builder.build_a1_dual_diff_yaw_rows and apply_yaw_install_and_ned;
+      no independently written atan2/offset/wrap formula.
+    adapter: Exact common-epoch raw NED positions serialized as status-shaped observation fields for the frozen
+      function; format conversion only, no interpolation between unequal raw epochs.
+    sign: 1.0
+    install_offset_deg: 0.0
+    fixed_validity: Both raw NAV-PVT carrSoln equal 2.
+    float_validity: For BY2O F variants only, each receiver carrSoln belongs to [1, 2].
+    yaw_std_deg: 2.933193
+  D3:
+    R1: E_seq intersect both receivers carrSoln fixed; preserve complete provider rows and separately report evaluation-window
+      counts.
+    R5: Every frozen-table row with valid D2 fixed-only raw yaw has yaw_valid=1.
+    R1F: 'BY2O: all frozen E_seq epochs including float, exact frozen valid token pattern; std 2.933193.'
+    R5F: BY2O only; R5 epoch selection with float_validity.
+    allowed_changed_zero_based_columns:
+    - 13
+    - 14
+    - 17
+    hard_byte_gate: Every other token, row order, header and whitespace byte unchanged.
+    unavailable_raw_yaw: Count and enumerate missing or invalid raw epochs; never substitute A1 or other outputs.
+    R1_subset_gate: Candidate valid set is subset of E_seq and excluded set equals exactly E_seq epochs where both
+      receiver carrSoln fixed is false; no other differences.
+    R1F_exact_valid_mask_gate: Every valid token equals the frozen token, throughout the complete provider table.
+    difference_reporting: For all sequences enumerate each excluded E epoch with iTOW, relative time, receiver2
+      carrSoln, primary/secondary/outside classification and frozen A1 yaw token; differences on BY2/H also continue
+      when the exact subset gate passes.
+    revision_observations:
+      sequence: BY2O
+      A1_valid_raw_GNSS1_fixed_GNSS2_float_epochs: 58
+      time_ranges_s_inclusive_step_1:
+      - - 3370
+        - 3412
+      - - 3495
+        - 3509
+      itow_ranges_ms_inclusive_step_1000:
+      - - 460588000
+        - 460630000
+      - - 460713000
+        - 460727000
+      full_provider_A1_counts:
+        BY2: 301
+        BY2H: 295
+        BY2O: 445
+      evaluation_window_A1_counts:
+        BY2: 275
+        BY2H: 271
+        BY2O: 378
+      native_invocations: 0
+      evaluator_invocations: 0
+      raw_hash_lock_verified: true
+      gnss1_raw_sha256: 6035d50419eaa0ff29d9a4b053dbed5d715fd2bec38f44ad4b4be02ca54a4ba9
+      gnss2_raw_sha256: 4f18ec7d618c675238d5c40a868ba01802a9d2da9325877d715f75f2f939119f
+      expected_BY2O_window_valid_counts:
+        R1: 320
+        R1F: 378
+    revision_authority: Human D3/D4 revision in this conversation, before preregistration and execution.
+  D4:
+    delta: wrap(yaw_raw - yaw_A1) into [-180, 180) on E_seq.
+    statistics: Count, signed mean, population standard deviation, absolute P95, signed P95 and full signed histogram;
+      no directional criterion.
+    histogram_edges_deg:
+    - -180
+    - -90
+    - -45
+    - -20
+    - -10
+    - -5
+    - -2
+    - -1
+    - 0
+    - 1
+    - 2
+    - 5
+    - 10
+    - 20
+    - 45
+    - 90
+    - 180
+    scopes: Full provider and closed evaluation window; BY2O additionally primary, secondary, inside union and outside.
+    occlusion_windows_closed_s:
+      primary:
+      - 3369.94
+      - 3411.95
+      secondary:
+      - 3495.94
+      - 3508.94
+    acceleration: Current frozen installed/debiased IMU dv/measured_dt plus body-frame gravity from frozen RP phi=roll_rad+1deg,
+      theta=pitch_rad (P-12 installed-frame convention); norm of f_body + R(phi,theta,0)^T*[0,0,g]. RP-supported
+      diagnostic, not acceleration truth.
+    acceleration_bins_mps2:
+    - '[0,0.3)'
+    - '[0.3,1]'
+    - (1,infinity)
+    status_timing: GNSS2-minus-GNSS1 header-stamp differences at matching GPS week/tow identities; report GPS time
+      and sys-stamp differences separately and enumerate unmatched identities; no fitted offset. Report actual GNSS2
+      header interpolation brackets at GNSS1 header, offsets and weights.
+    sigma: P-12 exact 1000 ms raw-yaw endpoint pairs with full IMU support; sqrt(sample_variance(delta_yaw minus
+      gyro integral)/2); Euler yaw-rate primary and frozen z-increment companion; report only, never change yaw_std.
+    missing_support: UNAVAILABLE with count and reason, never zero-filled.
+    float_reporting: All 378 BY2O window E epochs enter delta with fixed/float flag; float-only mean/std/P95 plus
+      overlaps with both closed occlusion intervals.
+    gravity_mps2: 9.801554354839126
+    association: Current IMU interval (previous,current], dt<=0.1s; RP chronological linear interpolation only between
+      adjacent samples with dt<=0.1s, no extrapolation; unsupported epochs UNAVAILABLE.
+  D5:
+    copy: Frozen v2.1 per-sequence F02/F04 runtime config.
+    allowed_changed_fields:
+    - gnsspath
+    hard_gate: Canonical field hash excluding gnsspath must be identical.
+    output_override: Frozen binary --output-dir and --debug-output-dir CLI options target the new scratch run; outputpath
+      field remains unchanged.
+    switches_to_report:
+    - enable_multi_state_qm
+    - enable_qa_fallback
+    expected_QM: false
+    expected_QA: false
+  D6:
+    decision_rule: NONE
+    reporting: Present every variant and frozen row together, all metric deltas variant minus frozen; no selection
+      or replacement of v2.1 rows.
+evaluation:
+  std: Pass --std with unchanged STD from the same native run for both evaluators.
+  v3: Same frozen v2.1 position-only NAV transform to antenna midpoint, per-sequence baseline and fixed lever; no
+    STD transport.
+  v2: Frozen native NAV and same-run STD.
+  parameters: Exact frozen per-sequence base_time/window and evaluator settings.
+  consistency_policy: canonical_v2_wgs84_full_support
+  D8:
+    all_native_rows_finite: true
+    max_position_displacement_from_first_m: 10000.0
+    max_speed_mps: 50.0
+    max_height_displacement_from_first_m: 1000.0
+    failure: ALGORITHM_FAILURE_DIVERGED; retain native evidence; skip both evaluator slots as NOT_RUN_ALGORITHM_FAILURE.
+  D12:
+    bounded_consistency_failure: UNAVAILABLE_EVALUATION_FAILED; no admitted metrics; continue without retry.
+    evaluator_process_identity_or_access_failure: HARD_STOP
+hard_stops:
+- D3 byte or required validity gate failure
+- D5 non-gnsspath config hash mismatch
+- Binary, evaluator, frozen table or IMU/RD/RP/HV identity mismatch
+- Evaluator process failure
+- H-EXT-03 inherited identity or access audit failure
+fail_soft: Other documented unavailable or algorithm outcomes continue without relaxing any hard gate.
+execution:
+  prerequisite: Definition resolved, tests and read-only review pass, commit 1 pushed and exact code_freeze receipt
+    verified.
+  checkpoint: Each sequence pre/post raw/provider/config/binary/evaluator/frozen-table hashes; frozen figures and
+    RENDER_MANIFEST unchanged.
+  storage: Write to new exclusive ext4 scratch; verify per-file archive SHA256 on G before archive completion.
+  audit: strace native and evaluator processes; zero native trace opens; exactly one reference open per evaluator
+    child.
+  forbidden: No C++ or binary edits, HV/RP/RD byte changes, std/gate changes, parameter search, v2.1 row/28-figure/RENDER_MANIFEST
+    edits, or historical result substitution.
+deliverables:
+- SENSITIVITY_TABLE_V3.csv
+- SENSITIVITY_TABLE_V2.csv
+- BY2O_SEGMENTS_BY_VARIANT.csv
+- GATING_COUNTS.csv
+- YAW_ERROR_SERIES per run
+- Three sequence yaw-error time-series figures, frozen/R1/R5, F02/F04 columns
+- SOURCE_CONSISTENCY.csv and delta histograms
+- T5A_FIGURE yaw/H bars, F02/F04 columns, BY2O inside/outside panels
+- T5A_RENDER_MANIFEST.json
+- FINAL_SUMMARY.json with actual budgets and hashes
+- T5A_HEADING_SENSITIVITY.md with verbatim tables and factual descriptions
+- Handoff ZIP with member SHA/CRC manifest and whole-package SHA256
+git:
+  commit_1: 'prereg(t5a): heading input source/rate sensitivity outside the frozen chain'
+  commit_2: 'feat(t5a): heading input source/rate sensitivity — R1/R5/R1F/R5F for F02/F04 on three sequences'
+  push_each: true
+  merge: false
+  tag: false
+provenance:
+  data_mode: real_raw_heading_sensitivity_outside_v21
+  synthetic_data_used: false
+  semisynthetic_data_used: false
+  trace_used_online: false
+  receiver_imu_as_body_imu: false
+  final_v23_output_solver_input: false
+  LegSA_output_solver_input: false
+  per_case_tuning: false
+  output_only_correction: false
+  epoch_deleted_for_metric: false
+  old_runtime_input_count: 0
+  required_per_run_fields:
+  - raw_source_hashes
+  - provider_hashes
+  - code_commit
+  - config_hash
+  - terminal_status
