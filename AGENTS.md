@@ -1400,7 +1400,7 @@ v2.1、原28图及 RENDER_MANIFEST 不变；新派生仅 <HEXT_ROOT>/11_READONLY
 <!-- T5A_SECTION_18_BEGIN -->
 T5a 人工例外（本任务提示词及 D3/D4 修订授权）：冻结链外三序列 F02/F04 航向输入源/频率敏感性，native 上限 16、v3/v2 evaluator 上限 32，先预注册提交并 push 后执行。此前五次灵敏度例外由本任务 16 次范围替代，不累加；不授权 H-EXT-04 已取消的其他执行。
 R1=E∩双 fixed，精确子集/差集硬门；BY2O R1F 保持冻结 valid 模式，R5 双 fixed、R5F 双方 fixed/float。yaw_std 固定 2.933193，二进制 96ae436d… 不变，非 yaw token 及 IMU/RD/RP/HV 不变，config 仅 gnsspath 可变。
-结果仅进入敏感性/限制段落，协议 v2.1 的任何行、原28图及 RENDER_MANIFEST 不变。独立输出 <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/；定义与运行矩阵见 configs/paper_rebuild/hext/T5A_CONTRACT_V1.yaml。当前状态：预注册准备，尚未执行。
+结果仅进入敏感性/限制段落，协议 v2.1 的任何行、原28图及 RENDER_MANIFEST 不变。独立输出 <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/；定义与运行矩阵见 configs/paper_rebuild/hext/T5A_CONTRACT_V1.yaml。当前状态：HARD_STOP_PARTIAL_EVIDENCE；code_freeze a4f2e429c56089e9874097764f337af1f696423b；实际 native 3/16、evaluator 0/32、重试 0，三个调用均为 TECHNICAL_INVALID_CONFIG_SERIALIZATION。safe_dump 改变行内字段表示，冻结 native 平面解析器读到默认参数/空 RD 来源；原 F02 D8 分类不作算法失败证据。T5a 科学任务 INCOMPLETE；仅封存部分表、图、故障与未应用修复提案，未自动续跑。详见 docs/paper_rebuild/hext/T5A_HEADING_SENSITIVITY.md。
 <!-- T5A_SECTION_18_END -->
 
 ### C-CLOSE freeze rule (2026-09-15)

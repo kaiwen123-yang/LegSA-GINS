@@ -263,3 +263,73 @@ def test_dual_error_exports_verify_both_hashes_and_exact_decompression_before_gz
     pins["FROZEN_EVALUATOR/error_series.csv.gz"] = _write(compressed, gzip.compress(b"time,yaw_err_deg\n1,3\n", mtime=0))
     with pytest.raises(ValueError, match="byte mismatch"):
         report._one_error_path(directory, sources=report.Sources({}), seal=pins, seal_root=root)
+
+
+def test_partial_postmortem_maps_three_native_slots_without_rewriting_summary_or_reading_new_errors(tmp_path, monkeypatch):
+    scratch, contract, local = _synthetic_attempt(tmp_path, monkeypatch)
+    summary_path = scratch / "07_HANDOFF/EXECUTION_SUMMARY.json"
+    summary = json.loads(summary_path.read_text())
+    summary.update(status="HARD_STOP_PARTIAL_EVIDENCE", native=summary["native"][:3],
+                   evaluations=summary["evaluations"][:4], diagnostics=summary["diagnostics"][:1])
+    for index, native in enumerate(summary["native"]):
+        native["status"] = "ALGORITHM_FAILURE_DIVERGED" if index < 2 else "HARD_STOP"
+        native["failure_classification"] = native["status"]
+    summary["native"][2]["file_hashes"] = {}  # No sealed update log after native hard stop.
+    for payload in summary["evaluations"]:
+        payload["row"].update(evaluation_status="NOT_RUN_ALGORITHM_FAILURE", evaluation_invoked=False,
+                              reason="ALGORITHM_FAILURE_DIVERGED")
+        payload.pop("audit")
+    _json(summary_path, summary)
+    original_summary = summary_path.read_bytes()
+    invalid_ids = ["BY2__F02__R1", "BY2__F02__R5", "BY2__F04__R1"]
+    adjudication_path = scratch / "07_HANDOFF/POSTMORTEM_ADJUDICATION.json"
+    original_adjudication_sha = _json(adjudication_path, {
+        "invalid_native_run_ids": invalid_ids, "classification": "TECHNICAL_INVALID_CONFIG_SERIALIZATION",
+        "reason": "Frozen flat parser differs from semantic PyYAML parsing; report-only adjudication."})
+    result = report.aggregate_t5a(scratch, code_freeze=FREEZE, contract_path=contract, local_paths_path=local)
+    assert summary_path.read_bytes() == original_summary
+    assert result["status"] == "AGGREGATED_PARTIAL_EVIDENCE"
+    assert result["execution_summary_mutated"] is False
+    assert set(result["technical_invalid_native_runs"]) == set(invalid_ids)
+    assert result["source_hashes"]["<T5A_SCRATCH>/07_HANDOFF/POSTMORTEM_ADJUDICATION.json"] == original_adjudication_sha
+    assert not any("/04_EVAL/" in name for name in result["source_hashes"])
+    for version in ("v3", "v2"):
+        rows = report._csv((scratch / "05_AGGREGATE" / ("SENSITIVITY_TABLE_" + version.upper() + ".csv")).read_bytes())
+        assert len(rows) == 22
+        variants = [row for row in rows if row["variant"] != report.FROZEN]
+        assert len(variants) == 16
+        for row in variants:
+            run_id = "__".join(row[key] for key in ("sequence_id", "configuration_id", "variant"))
+            assert row["evaluator_contract"] == "evaluator_contract_" + version
+            assert row["code_commit"] == FREEZE
+            assert json.loads(row["notes"])["native_run_id"] == run_id
+            assert all(row[metric] == "UNAVAILABLE" for metric in report.NUMERIC_FIELDS)
+            assert all(row["delta_" + metric] == "UNAVAILABLE" for metric in report.NUMERIC_FIELDS)
+            if run_id in invalid_ids:
+                assert row["evaluation_status"] == "NOT_RUN_TECHNICAL_INVALID"
+                assert row["failure_classification"] == "TECHNICAL_INVALID_CONFIG_SERIALIZATION"
+                assert json.loads(row["notes"])["native_status"] == "TECHNICAL_INVALID"
+            else:
+                assert row["evaluation_status"] == "NOT_RUN_NATIVE_SLOT"
+                assert row["failure_classification"] == "PREDECESSOR_HARD_STOP"
+    gates = report._csv((scratch / "05_AGGREGATE/GATING_COUNTS.csv").read_bytes())
+    invalid_gates = [row for row in gates if "__".join(row[key] for key in ("sequence_id", "configuration_id", "variant")) in invalid_ids]
+    assert len(invalid_gates) == 6
+    assert sum(row["status"] == "TECHNICAL_DIAGNOSTIC_ONLY" for row in invalid_gates) == 4
+    assert sum(row["status"] == "UNAVAILABLE_TECHNICAL_INVALID" for row in invalid_gates) == 2
+    assert all(row["failure_classification"] == "TECHNICAL_INVALID_CONFIG_SERIALIZATION" for row in invalid_gates)
+    assert all(row["scientific_evidence_admitted"] == "False" for row in invalid_gates)
+    consistency = report._csv((scratch / "05_AGGREGATE/SOURCE_CONSISTENCY.csv").read_bytes())
+    assert all(row["status"] == "UNAVAILABLE" for row in consistency if row["sequence_id"] in ("BY2H", "BY2O"))
+
+
+def test_missing_evaluator_records_retain_native_hard_stop_without_adjudication():
+    native = [{"run_id": "BY2__F04__R1", "sequence_id": "BY2", "configuration_id": "F04", "variant": "R1",
+               "status": "HARD_STOP", "failure_classification": "HARD_STOP_ACCESS_AUDIT"}]
+    payloads, invalid = report.enrich_evaluation_slots([], native, matrix=MATRIX, code_freeze=FREEZE,
+                                                      execution_status="HARD_STOP_PARTIAL_EVIDENCE")
+    assert not invalid and len(payloads) == 32
+    hard_stops = [payload["row"] for payload in payloads if payload["row"]["run_id"] == "BY2__F04__R1"]
+    assert len(hard_stops) == 2
+    assert all(row["evaluation_status"] == "NOT_RUN_NATIVE_HARD_STOP" for row in hard_stops)
+    assert all(row["failure_classification"] == "HARD_STOP_ACCESS_AUDIT" for row in hard_stops)

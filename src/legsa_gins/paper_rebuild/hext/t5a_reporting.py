@@ -7,6 +7,7 @@ full-rate evaluator errors; failed evaluations never contribute numbers.
 from __future__ import annotations
 
 import csv
+from copy import deepcopy
 from decimal import Decimal, InvalidOperation
 import gzip
 import hashlib
@@ -87,6 +88,90 @@ def scalar_delta(value, frozen):
     return str(left - right) if left.is_finite() and right.is_finite() else UNAVAILABLE
 
 
+def enrich_evaluation_slots(evaluations, native_records, *, matrix, code_freeze,
+                            execution_status, adjudication=None):
+    """Report-only slot identities and technical dispositions; inputs stay intact.
+
+    A postmortem may invalidate a native run's scientific admission. It never
+    upgrades a failed/missing evaluation, fabricates an invocation, or modifies
+    the original execution summary. All uninvoked slots remain explicit.
+    """
+    expected = {f"{sequence}__{profile}__{variant}": (sequence, profile, variant)
+                for sequence, item in matrix.items() for profile in item["configurations"]
+                for variant in item["variants"]}
+    native = {}
+    for record in native_records:
+        run_id = record.get("run_id") or "__".join(record[key] for key in ("sequence_id", "configuration_id", "variant"))
+        if run_id not in expected or run_id in native:
+            raise ValueError("Duplicate or unregistered native report identity")
+        native[run_id] = record
+    document = adjudication or {}
+    invalid = {}
+    for run_id in document.get("invalid_native_run_ids", []):
+        invalid[run_id] = {"classification": document.get("classification"),
+                           "status": "TECHNICAL_INVALID", "reason": document.get("reason", document.get("evidence_reason"))}
+    for run_id, value in document.get("run_adjudications", {}).items():
+        invalid[run_id] = {"classification": value.get("classification", document.get("classification")),
+                           "status": value.get("status", "TECHNICAL_INVALID"),
+                           "reason": value.get("reason", document.get("reason"))}
+    for run_id, value in invalid.items():
+        if (run_id not in native or not str(value.get("classification") or "").startswith("TECHNICAL_INVALID")
+                or not value.get("reason")):
+            raise ValueError("Postmortem must identify an invoked run, technical-invalid classification, and reason")
+    lookup = {}
+    for payload in evaluations:
+        row = payload["row"]
+        run_id = row.get("run_id") or "__".join(str(row.get(key)) for key in ("sequence_id", "configuration_id", "variant"))
+        version = row.get("evaluator_contract")
+        key = (run_id, version)
+        if run_id not in expected or version not in ("evaluator_contract_v3", "evaluator_contract_v2") or key in lookup:
+            raise ValueError("Duplicate or unregistered evaluator report identity")
+        lookup[key] = payload
+    result = []
+    for run_id, (sequence, profile, variant) in expected.items():
+        record = native.get(run_id)
+        for version in ("v3", "v2"):
+            evaluator_contract = "evaluator_contract_" + version
+            existing = lookup.get((run_id, evaluator_contract))
+            payload = deepcopy(existing) if existing is not None else {"row": {}}
+            row = payload["row"]
+            identity = {"run_id": run_id, "sequence_id": sequence, "configuration_id": profile,
+                        "variant": variant, "evaluator_contract": evaluator_contract, "code_commit": code_freeze}
+            for field, value in identity.items():
+                if row.get(field) not in (None, "", UNAVAILABLE, value):
+                    raise ValueError("Execution report identity conflicts with frozen slot: " + field)
+                row[field] = value
+            native_status = record.get("status", "UNAVAILABLE") if record is not None else "NOT_RUN"
+            payload["native_status_for_report"] = native_status
+            if run_id in invalid:
+                value = invalid[run_id]
+                invoked = (row.get("evaluation_invoked") is True or row.get("evaluation_status") in AVAILABLE
+                           or payload.get("audit", {}).get("trace_open_count") == 1)
+                row.update(evaluation_status="UNAVAILABLE_TECHNICAL_INVALID" if invoked else "NOT_RUN_TECHNICAL_INVALID",
+                           failure_classification=value["classification"],
+                           reason=value["reason"], metrics_admitted=False, evaluation_invoked=invoked)
+                payload["native_status_for_report"] = "TECHNICAL_INVALID"
+                payload["technical_adjudication"] = dict(value)
+                payload["body_frame_bias"] = {}
+            elif existing is None:
+                if record is None:
+                    status = "NOT_RUN_NATIVE_SLOT"
+                    classification = "PREDECESSOR_HARD_STOP" if execution_status.startswith("HARD_STOP") else "NOT_EXECUTED"
+                elif native_status.startswith("HARD_STOP"):
+                    status, classification = "NOT_RUN_NATIVE_HARD_STOP", record.get("failure_classification", native_status)
+                elif native_status.startswith("ALGORITHM_FAILURE"):
+                    status, classification = "NOT_RUN_ALGORITHM_FAILURE", record.get("failure_classification", native_status)
+                elif native_status == "COMPLETED":
+                    status, classification = "NOT_RUN_EVALUATOR_SLOT", "EVALUATOR_NOT_INVOKED"
+                else:
+                    status, classification = "NOT_RUN_NATIVE_UNAVAILABLE", record.get("failure_classification", native_status)
+                row.update(evaluation_status=status, failure_classification=classification,
+                           reason="No evaluator record; native status: " + native_status,
+                           evaluation_invoked=False, metrics_admitted=False)
+            result.append(payload)
+    return result, invalid
+
+
 def sensitivity_rows(frozen_rows, evaluations, matrix, version):
     """Pure 6 frozen + 16 variant table construction, including absent slots."""
     frozen = {}
@@ -140,7 +225,9 @@ def sensitivity_rows(frozen_rows, evaluations, matrix, version):
                                     start="FROZEN_V21_RUNTIME_CONFIG", geometric_status="NOT_APPLICABLE",
                                     body_bias=payload.get("body_frame_bias") if admitted else {},
                                     notes=json.dumps({"sensitivity_only": True, "frozen_rows_replaced": 0,
-                                                      "variant": variant, "native_run_id": source.get("run_id", "NOT_RUN")}, sort_keys=True))
+                                                      "variant": variant, "native_run_id": source.get("run_id", "NOT_RUN"),
+                                                      "native_status": payload.get("native_status_for_report", "UNAVAILABLE"),
+                                                      "technical_adjudication": payload.get("technical_adjudication", "NOT_APPLICABLE")}, sort_keys=True))
                 for field in ("gap_events_in_window", "gnss2_pacc_inflated_epochs", "gnss2_float_epochs"):
                     row[field] = source.get(field, "NOT_APPLICABLE")
                 row.update({**extras, "variant": variant, "role": "SENSITIVITY_OUTSIDE_FROZEN_CHAIN",
@@ -332,6 +419,11 @@ def aggregate_t5a(scratch_root, *, code_freeze, contract_path=CONTRACT, local_pa
         raise ValueError("Execution/report contract mismatch")
     windows = contract["definitions"]["D1"]["windows_s"]
     matrix = contract["matrix"]
+    adjudication_path = scratch / "07_HANDOFF/POSTMORTEM_ADJUDICATION.json"
+    adjudication = json.loads(sources.read(adjudication_path)) if adjudication_path.is_file() else None
+    report_evaluations, invalid_native = enrich_evaluation_slots(
+        summary.get("evaluations", []), summary.get("native", []), matrix=matrix,
+        code_freeze=code_freeze, execution_status=summary["status"], adjudication=adjudication)
     frozen_specs = contract["frozen"]
     spec = frozen_specs["hext04l_data_manifest"]
     h04 = json.loads(sources.read(spec["path"], spec["sha256"]))
@@ -344,7 +436,7 @@ def aggregate_t5a(scratch_root, *, code_freeze, contract_path=CONTRACT, local_pa
     for version in ("v3", "v2"):
         path = sources.resolve("<HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_" + version.upper() + "_THREE_SEQUENCES.csv")
         originals = _csv(sources.read(path, PINS[version]))
-        table = sensitivity_rows(list(enumerate(originals, 2)), summary.get("evaluations", []), matrix, version)
+        table = sensitivity_rows(list(enumerate(originals, 2)), report_evaluations, matrix, version)
         tables[version] = table
         _write_csv(output / ("SENSITIVITY_TABLE_" + version.upper() + ".csv"), sources.alias_values(table), (*TABLE_FIELDS, *EXTRA_FIELDS))
         for row in table:
@@ -395,7 +487,16 @@ def aggregate_t5a(scratch_root, *, code_freeze, contract_path=CONTRACT, local_pa
                                          "role": "FROZEN_H_EXT_04L_ROW_UNCHANGED"} for original in chosen)
             for variant in matrix[sequence]["variants"]:
                 record = native.get((sequence, profile, variant))
-                gates.extend(_native_gates(record, sequence, profile, variant, windows[sequence], sources, scratch))
+                gate_values = _native_gates(record, sequence, profile, variant, windows[sequence], sources, scratch)
+                run_id = "__".join((sequence, profile, variant))
+                if run_id in invalid_native:
+                    value = invalid_native[run_id]
+                    for gate_row in gate_values:
+                        gate_row.update(status="TECHNICAL_DIAGNOSTIC_ONLY" if gate_row["status"] != UNAVAILABLE else "UNAVAILABLE_TECHNICAL_INVALID",
+                                        native_status="TECHNICAL_INVALID", failure_classification=value["classification"],
+                                        technical_adjudication_reason=value["reason"], metrics_admitted=False,
+                                        scientific_evidence_admitted=False)
+                gates.extend(gate_values)
                 for version in ("v3", "v2"):
                     row = next(item for item in tables[version] if (item["sequence_id"], item["configuration_id"], item["variant"]) == (sequence, profile, variant))
                     if row["evaluation_status"] not in AVAILABLE:
@@ -436,11 +537,15 @@ def aggregate_t5a(scratch_root, *, code_freeze, contract_path=CONTRACT, local_pa
     _write_csv(output / "SOURCE_CONSISTENCY.csv", sources.alias_values(consistency))
     _write_json(output / "D4_DIAGNOSTICS.json", sources.alias_values(diagnostics))
     sources.verify_after()
-    manifest = {"schema_version": "t5a.reporting.v1", "status": "AGGREGATED", "code_commit": code_freeze,
+    manifest = {"schema_version": "t5a.reporting.v1.1",
+                "status": "AGGREGATED" if summary["status"] == "COMPLETED" else "AGGREGATED_PARTIAL_EVIDENCE", "code_commit": code_freeze,
                 "execution_status": summary["status"], "native_invocation_count": 0, "evaluator_invocation_count": 0,
                 "trace_open_count": 0, "data_mode": summary.get("data_mode", "real_raw_heading_sensitivity_outside_v21"),
                 "synthetic_data_used": summary.get("synthetic_data_used", False), "semisynthetic_data_used": summary.get("semisynthetic_data_used", False),
                 "frozen_rows_replaced": 0, "table_rows": {version: len(rows) for version, rows in tables.items()},
+                "postmortem_adjudication": sources.alias(adjudication_path) if adjudication is not None else "NOT_PRESENT",
+                "technical_invalid_native_runs": sources.alias_values(invalid_native),
+                "execution_summary_mutated": False,
                 "segment_rows": len(all_segments), "gating_rows": len(gates), "yaw_series_rows": len(yaw_index),
                 "matrix": matrix, "windows_s": windows, "source_hashes": sources.manifest(),
                 "scalar_delta_definition": "Exact decimal subtraction of serialized variant minus frozen scalar values",

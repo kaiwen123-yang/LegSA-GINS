@@ -245,3 +245,5 @@ All new handoff packages go to `<HANDOFF_ROOT>` under the project G: root, never
 - 2026-09-17 (H-EXT-03): 合约v1.1/code_freeze `b6aaece1b71737693e39ec72ce0ad0726b188592`；0 native、10新evaluator全PASS、原16复用；D8 13/14有界、原成功16/16回溯PASS，D7一native发散对应两科学槽NOT_RUN，旧第17次失败保留；D9 BY2H论文CONTRACT_START（amended_after_results_seen），三序列S；完整52行/版、遮挡/delta/FIG02S交付，09四项UNAVAILABLE；v2.1/原28图/旧包不变；完整包与提交/真实SHA见 `<HANDOFF_ROOT>/hext_three_sequences_handoff_v2.validation.json`。
 
 - 2026-09-18 (H-EXT-04L): 合约v1.2只读收束，native/evaluator/trace=0/0/0；BY2O九方法两版分段/段外及三序列输入-日志-误差诊断完成，QM/QA均关；LC01文献配置为主行、S补充（amended_after_results_seen）；两记分板、FIG02S v2/FIG02S-b自动与视觉QA PASS，原28图/119文件和RENDER_MANIFEST不变；H-EXT-04执行取消、库NOT_AUTHORIZED_FOR_EXECUTION、T5待预注册；42 tests PASS；详见 hext/H_EXT_04L_RECORD.md。
+
+- 2026-09-18 (T5a): code_freeze a4f2e429c56089e9874097764f337af1f696423b；HARD_STOP_PARTIAL_EVIDENCE，native 3/16、evaluator 0/32、trace 0、重试 0；三个调用因 YAML 重序列化与冻结 native 平面解析语义不匹配而技术无效，新增性能及差值全部 UNAVAILABLE，T5a 科学任务 INCOMPLETE；原 v2.1/28图不变，部分表/图/故障包和未应用修复提案见 hext/T5A_HEADING_SENSITIVITY.md。
