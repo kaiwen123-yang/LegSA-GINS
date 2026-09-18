@@ -587,3 +587,7 @@ BY2O,F04,R5F,evaluator_contract_v2,UNAVAILABLE,UNAVAILABLE,UNAVAILABLE,,,,,NOT_R
 FINAL_SUMMARY 状态 `HARD_STOP_PARTIAL_EVIDENCE`；native 3/16、evaluator 0/32、native/evaluator/parent trace 打开 0/0/0；冻结输入与原 28 图/manifest 复核通过。第二次提交封存部分结果，不表示 T5a 科学矩阵完成。
 
 封包后文字勘误：包内 PRESEAL 说明中 `port_config_loader.cpp` 的目录应为 `src/config/`；“strace 打开计数 0/0/0”指三个 native 的 reference trace 打开次数，而非所有 openat 系统调用。原始审计数值及科学状态不变，已封包保持原 SHA；外部 `07_HANDOFF/DOCUMENTATION_ERRATA.json` 登记此勘误。
+
+## T5a-R continuation (2026-09-18)
+
+上述 v1 部分记录及 v1 包保留。T5a-R 已完成配置修复与新 16/32 矩阵，完整结果见 [T5A_R_HEADING_SENSITIVITY.md](T5A_R_HEADING_SENSITIVITY.md)；历史三次调用按 INVALID_CONFIG_PARSE 排除。v2 ZIP SHA256 `b8d1451345d81bd87edb2288017d4f931d8a303f1ceb45feb67972264e7b1b20`。

@@ -247,3 +247,5 @@ All new handoff packages go to `<HANDOFF_ROOT>` under the project G: root, never
 - 2026-09-18 (H-EXT-04L): 合约v1.2只读收束，native/evaluator/trace=0/0/0；BY2O九方法两版分段/段外及三序列输入-日志-误差诊断完成，QM/QA均关；LC01文献配置为主行、S补充（amended_after_results_seen）；两记分板、FIG02S v2/FIG02S-b自动与视觉QA PASS，原28图/119文件和RENDER_MANIFEST不变；H-EXT-04执行取消、库NOT_AUTHORIZED_FOR_EXECUTION、T5待预注册；42 tests PASS；详见 hext/H_EXT_04L_RECORD.md。
 
 - 2026-09-18 (T5a): code_freeze a4f2e429c56089e9874097764f337af1f696423b；HARD_STOP_PARTIAL_EVIDENCE，native 3/16、evaluator 0/32、trace 0、重试 0；三个调用因 YAML 重序列化与冻结 native 平面解析语义不匹配而技术无效，新增性能及差值全部 UNAVAILABLE，T5a 科学任务 INCOMPLETE；原 v2.1/28图不变，部分表/图/故障包和未应用修复提案见 hext/T5A_HEADING_SENSITIVITY.md。
+
+- 2026-09-18 (T5a-R): code_freeze d9650fbdf20b2a981a85c1d9875c143c60bc6362；PASS_T5A_HEADING_SENSITIVITY_COMPLETE，16 native/32 evaluator 全部完成，a/b211 门通过，保真 0/0、重试 0、trace 0/32；A0 6539 配置与 33 回显样本已映射比较通过，旧 3 次 INVALID_CONFIG_PARSE 保留且排除；每版22行/100段行/74门控/1025源一致性/44误差序列/6组18图交付，v2.1/28图/v1包不变；v2 ZIP 1006成员、902400804 bytes、SHA256 b8d1451345d81bd87edb2288017d4f931d8a303f1ceb45feb67972264e7b1b20；完整原表与限制见 hext/T5A_R_HEADING_SENSITIVITY.md。

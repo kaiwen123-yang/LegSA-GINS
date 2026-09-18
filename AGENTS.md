@@ -1403,7 +1403,7 @@ v2.1、原28图及 RENDER_MANIFEST 不变；新派生仅 <HEXT_ROOT>/11_READONLY
 T5a-R 人工例外（2026-09-18 本任务授权）：原三次 native 均按 INVALID_CONFIG_PARSE 保留历史记录，不进任何续作结果表；新矩阵 native 16、evaluator 32，条件保真 native 至多 1、其 evaluator 至多 2。当前已有有效参数回显，采用 a 字节门与 b 回显门，c 不需要，计划保真调用 0。先修复与合同 v1.1 预注册提交并 push 后执行。
 冻结解析器读取的 runtime config 只能逐行文本替换克隆，禁止 YAML 往返。仅 gnsspath 一行可变；其余字节相同，实际静态有效参数回显须与对应冻结回显逐字段相同。A0 只读回查所有冻结 v2.1 runtime config 及每序列每配置的回显，报告后继续，任何结论均不改主链。
 D3 修订继续有效：R1=E∩双 fixed，精确子集/差集硬门；BY2O R1F 保持冻结 valid 模式，R5 双 fixed、R5F 双方 fixed/float。yaw_std 固定 2.933193，二进制 96ae436d… 与 IMU/RD/RP/HV、非 yaw 列均不变。a–c/D3/关键输入身份/评估器进程失败硬停，其余记录继续。
-新证据只进入敏感性/限制；协议 v2.1 行、原28图与 RENDER_MANIFEST 不变。续作根 <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/；v2 包 t5a_heading_sensitivity_handoff_v2.zip，v1 部分包保留。当前状态：T5a-R 预注册修订，尚未新执行；历史 code_freeze a4f2e429c56089e9874097764f337af1f696423b 与三次无效调用不改写。
+新证据只进入敏感性/限制；协议 v2.1 行、原28图与 RENDER_MANIFEST 不变。续作根 <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/；v2 包 t5a_heading_sensitivity_handoff_v2.zip，v1 部分包保留。当前状态：T5a-R PASS_T5A_HEADING_SENSITIVITY_COMPLETE，code_freeze d9650fbdf20b2a981a85c1d9875c143c60bc6362；16/16 native、32/32 evaluator 完成，a/b 门 16/16 PASS（b 为 211 静态回显项），保真 0/0、重试 0、trace native 0/evaluator 32。A0 6539 配置语法与归档哈希通过，33 回显样本已映射项无不一致（保留 1 ULP 往返差异与未映射覆盖边界）。新表每版 22 行、BY2O 分段 100 行、门控 74 行、D4 1025 行、误差序列 44 份，6 组图/18 导出机器与视觉 QA PASS。v2 包 902400804 bytes / 1006 members，SHA256 b8d1451345d81bd87edb2288017d4f931d8a303f1ceb45feb67972264e7b1b20；详见 docs/paper_rebuild/hext/T5A_R_HEADING_SENSITIVITY.md。历史 code_freeze a4f2e429c56089e9874097764f337af1f696423b 与三次无效调用原记录不改写。
 <!-- T5A_SECTION_18_END -->
 
 ### C-CLOSE freeze rule (2026-09-15)
