@@ -71,6 +71,11 @@ class PinnedInputs:
         return list(enumerate(csv.DictReader(io.StringIO(payload.decode('utf-8-sig'))), 2))
 
     def terminal(self, reference, root, filename):
+        if hasattr(self.ctx, 'read_terminal'):
+            # Explicit T5bc-R registry checks old/new freezes and report-only D57.
+            record = self.ctx.read_terminal(reference, root, filename)
+            self.read(reference)
+            return record
         if runtime._safe(reference['path']) != root / filename:
             raise ValueError('Sealed terminal occupies an unexpected slot')
         record = self.document(reference)
@@ -219,7 +224,7 @@ def aggregate_t5bc(ctx, *, contract=None, execution_summary_ref=None):
         raise FileExistsError('Existing aggregate evidence is never overwritten')
     contract = contract if contract is not None else ctx.registered(prepared=True)
     inputs = PinnedInputs(ctx)
-    summary_path = scratch/'09_HANDOFF/EXECUTION/FINAL_EXECUTION_SUMMARY.json'
+    summary_path = getattr(ctx, 'execution_summary_path', scratch/'09_HANDOFF/EXECUTION/FINAL_EXECUTION_SUMMARY.json')
     if execution_summary_ref is None:
         execution_summary_ref = dict(path=str(summary_path), sha256=runtime.sha256_file(summary_path))
     if runtime._safe(execution_summary_ref['path']) != summary_path:
@@ -239,8 +244,9 @@ def aggregate_t5bc(ctx, *, contract=None, execution_summary_ref=None):
     for run_id, spec in matrix.items():
         root = scratch/runtime._native_relative(spec)
         record = inputs.terminal(summary['native_terminals'][run_id], root, 'T5BC_NATIVE_SUMMARY.json')
-        if (any(record[k] != spec[k] for k in runtime.IDENTITY_KEYS) or record['code_commit'] != ctx.freeze
-                or record['contract_sha256'] != summary['contract_sha256']):
+        if (any(record[k] != spec[k] for k in runtime.IDENTITY_KEYS) or
+                (not hasattr(ctx, 'read_terminal') and (record['code_commit'] != ctx.freeze
+                or record['contract_sha256'] != summary['contract_sha256']))):
             raise ValueError('Native identity differs from registered run')
         native[run_id] = record
         identity = {**{k:spec[k] for k in runtime.IDENTITY_KEYS}, **{k:record[k] for k in
@@ -262,8 +268,9 @@ def aggregate_t5bc(ctx, *, contract=None, execution_summary_ref=None):
             eroot = scratch/'06_EVAL'/version/run_id
             ev = inputs.terminal(summary['evaluation_terminals'][run_id+'__'+version], eroot,
                                   'T5BC_EVALUATION_SUMMARY.json')
-            if (ev['native_summary'] != summary['native_terminals'][run_id] or ev['code_commit'] != ctx.freeze
-                    or ev['contract_sha256'] != summary['contract_sha256']):
+            if (ev['native_summary'] != summary['native_terminals'][run_id] or
+                    (not hasattr(ctx, 'read_terminal') and (ev['code_commit'] != ctx.freeze
+                    or ev['contract_sha256'] != summary['contract_sha256']))):
                 raise ValueError('Evaluator native/code-freeze binding differs')
             if any(ev['row'][k] != spec[k] for k in runtime.IDENTITY_KEYS) or ev['row']['evaluator_contract'] != 'evaluator_contract_'+version:
                 raise ValueError('Evaluator row identity differs')

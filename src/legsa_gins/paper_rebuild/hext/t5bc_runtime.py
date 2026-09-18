@@ -227,7 +227,8 @@ def _slot_path(output_root, scratch, relative):
 
 def _ledger_path(launch_ledger, scratch, kind):
     ledger = _safe(launch_ledger)
-    if ledger != scratch / "LAUNCH_LEDGERS" / (kind + ".jsonl"):
+    if ledger not in (scratch / "LAUNCH_LEDGERS" / (kind + ".jsonl"),
+                      scratch / "09_HANDOFF/CONTINUATION_R/LAUNCH_LEDGERS" / (kind + ".jsonl")):
         raise ValueError("T5bc ledger path or namespace differs")
     return ledger
 
@@ -477,6 +478,7 @@ def classify_heading_failure(root, config, *, variant):
             ("dual_yaw_attempt_count", "yaw_update"))}
         reason = "FAIL_CLEAN1_METHOD_CONTRACT_MISMATCH: actual formal module activation counters mismatch"
         stderr = (root / "stderr.log").read_text().strip()
+        exact_error = stderr in (reason, "legsa_v23_port_core_demo failed: " + reason)
         sidecar_evidence = {}
         if variant == "B3":
             sidecar = csv_rows(config["baseline3d_path"])
@@ -493,11 +495,12 @@ def classify_heading_failure(root, config, *, variant):
                 "scalar_yaw_valid_used_for_b3_classification":False}
         else:
             no_heading = bool(len(gnss)) and bool(np.all(gnss[:,17] == 0)) and counts["dual_yaw_attempt_count"] == 0
-        passed = bool(complete and no_heading and stderr == reason
+        passed = bool(complete and no_heading and exact_error
             and config.get("enable_dual_yaw") is True and all(counts[key] == expected[key] for key in counts))
-        return {"passed": passed, "classification": "ALGORITHM_FAILURE_NO_VALID_HEADING_INPUT" if passed else report["classification"],
+        classification = "B3_NOT_APPLICABLE_NO_HEADING_EPOCHS" if variant == "B3" else "ALGORITHM_FAILURE_NO_VALID_HEADING_INPUT"
+        return {"passed": passed, "classification": classification if passed else report["classification"],
             **sidecar_evidence, "provider_yaw_valid_count": None if variant=="B3" else int(np.count_nonzero(gnss[:,17])), "counters": counts,
-            "full_window_processed": complete, "exact_formal_counter_error": stderr == reason,
+            "full_window_processed": complete, "exact_formal_counter_error": exact_error,
             "update_trace_sha256": sha256_file(update), "loop_trace_sha256": sha256_file(loop)}
     except (ValueError, KeyError, OSError, IndexError, TypeError) as error:
         return {**report, "evidence_unavailable": str(error)}

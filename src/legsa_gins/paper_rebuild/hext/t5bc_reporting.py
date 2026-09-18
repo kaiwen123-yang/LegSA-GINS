@@ -427,12 +427,14 @@ def subset_distributions(rows, *, case_ids, metrics=METRIC_FIELDS):
                        "synthetic_data_used": any(row.get("synthetic_data_used") is True for row in cohort_rows),
                        "semisynthetic_data_used": any(row.get("semisynthetic_data_used") is True for row in cohort_rows)}
         for metric in metrics:
-            values, failed, not_run, unpaired = [], 0, 0, 0
+            values, failed, not_run, unpaired, not_applicable = [], 0, 0, 0, 0
             for case in cases:
                 candidate = lookup.get((case, variant), {})
                 reference = lookup.get((case, FROZEN), {})
                 status = candidate.get("evaluation_status", "NOT_RUN")
-                if str(status).startswith("NOT_RUN"):
+                if candidate.get('failure_classification') == 'B3_NOT_APPLICABLE_NO_HEADING_EPOCHS':
+                    not_applicable += 1
+                elif str(status).startswith("NOT_RUN"):
                     not_run += 1
                 elif status not in AVAILABLE:
                     failed += 1
@@ -447,6 +449,7 @@ def subset_distributions(rows, *, case_ids, metrics=METRIC_FIELDS):
             result.append({"variant": variant, "configuration_id": "F04", "metric": metric,
                            "case_count": len(cases), "valid_paired_count": len(array),
                            "unpaired_count": unpaired, "failure_count": failed, "not_run_count": not_run,
+                           "not_applicable_count": not_applicable,
                            "paired_delta_mean": float(np.mean(array)) if len(array) else UNAVAILABLE,
                            "paired_delta_median": float(np.median(array)) if len(array) else UNAVAILABLE,
                            "paired_delta_p95": float(np.percentile(array, 95)) if len(array) else UNAVAILABLE,
@@ -556,6 +559,9 @@ def gating_nis_rows(log, *, identity, window, source, baseline3d=None):
             for column in ("along_axis_residual_m", "length_mismatch_m"):
                 row.update(_diagnostic_statistics(part[column].tolist(), column, absolute_p95=True))
             row["reason_counts"] = {str(key): int(value) for key, value in part["reason"].value_counts(dropna=False).items()}
+            row['nis_rejected'] = row['reason_counts'].get('NIS_3DOF_REJECT', 0)
+            row['nis_rejection_rate'] = row['nis_rejected']/row['attempted'] if row['attempted'] else UNAVAILABLE
+            row['nis_rejection_denominator'] = 'all B3 attempts in this sequence/case/segment'
         else:
             row.update(nis_status="NOT_APPLICABLE_SCALAR_TRACE", along_axis_residual_m_status="NOT_APPLICABLE",
                        length_mismatch_m_status="NOT_APPLICABLE")
@@ -613,7 +619,9 @@ def subset_absolute_summary(rows, *, case_ids):
         if {row.get("case_id") for row in selected} != set(case_ids) or len(selected) != len(case_ids):
             raise ValueError("Subset summary requires exactly one row per registered case")
         failures = Counter(str(row.get("failure_classification", "UNAVAILABLE")) for row in selected
-                           if row.get("evaluation_status") not in AVAILABLE)
+                           if row.get("evaluation_status") not in AVAILABLE and
+                           row.get('failure_classification') != 'B3_NOT_APPLICABLE_NO_HEADING_EPOCHS')
+        not_applicable = sum(row.get('failure_classification') == 'B3_NOT_APPLICABLE_NO_HEADING_EPOCHS' for row in selected)
         for metric in ("yaw_rmse_deg", "h_rmse_m"):
             values = [float(row[metric]) for row in selected if row.get("evaluation_status") in AVAILABLE and _number(row.get(metric)) is not None]
             deltas = [float(row["delta_vs_frozen_" + metric]) for row in selected if _number(row.get("delta_vs_frozen_" + metric)) is not None]
@@ -626,6 +634,7 @@ def subset_absolute_summary(rows, *, case_ids):
                            "paired_delta_median": float(np.median(deltas)) if deltas else UNAVAILABLE,
                            "paired_delta_p95": float(np.percentile(deltas,95)) if deltas else UNAVAILABLE,
                            "failure_count": sum(failures.values()), "failure_classifications": dict(sorted(failures.items())),
+                           "not_applicable_count": not_applicable,
                            "data_mode": "real_clean_and_semisynthetic_separate_cases", "synthetic_data_used": False,
                            "semisynthetic_data_used": any(row.get("semisynthetic_data_used") is True for row in selected),
                            "quantile_method": "LINEAR", "directional_decision": "NOT_DEFINED"})

@@ -1473,3 +1473,7 @@ Stage 2 and the calibrated-chain execution are complete. Sources: `docs/paper_re
 Do not restart Canonical-541, reselect horizontal literature algorithms, rerun GINav, reopen Hartley absolute-reference evaluation, or run corrected Classic-18 by default.
 
 <!-- P13_PRE_CORRECTION_SECTION_18_END -->
+
+<!-- T5BCR_CONTINUATION_BEGIN -->
+T5bc-R explicit human continuation: see `docs/paper_rebuild/hext/T5BC_CONTINUATION_AUTHORIZATION.md`. Preserve the original d580c892 partial record, 62 native / 116 evaluator calls, two identity PASS receipts, old hard stop and partial-v1 ZIP. Only the fixed-prefix classifier and append-only controller continuation are changed; B3 no-heading epochs are `B3_NOT_APPLICABLE_NO_HEADING_EPOCHS`, excluded from algorithm failures and distributions, with missing D6 echo unavailable. Remaining exact budget 199 native / at most 398 evaluator calls; no retries. First continuation-freeze commit and push precede execution; second commit records results. Candidate/scalar binaries, providers and D1–D8 remain unchanged. Add read-only D30–D41 sidecar/HV lineage and D13/D14/D15/D27 B3-versus-frozen-F04 accept/attempt readouts. Original historical hard-stop statement above remains preserved.
+<!-- T5BCR_CONTINUATION_END -->
