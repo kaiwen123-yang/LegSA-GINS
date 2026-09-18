@@ -19,6 +19,8 @@ from typing import Any, Mapping
 import numpy as np
 import yaml
 
+from .t5a_config_fidelity import (compare_effective_echo, decode_echo,
+                                    validate_gnsspath_only_bytes)
 from ..canonical541 import offline_eval_aggregate as canonical
 from ..clean5_parity.evaluation import body_frame_bias, transform_nav, write_transformed_nav
 from ..clean5_parity_p04.evaluation import metrics as window_metrics
@@ -181,8 +183,9 @@ def audit_native_access(log, sequence, output_root, config, binary, scratch_root
     evaluator = [line for line in executions if "evaluate_nav_trace" in line]
     native = [line for line in executions if str(binary) in line]
     violation = bool(raw or bag_fpl or unexpected or evaluator or not scope["pass"] or len(native) > 1)
-    passed = not violation and expected <= opened and len(native) == 1
-    return {"passed": passed, "violation_detected": violation,
+    evidence_complete = len(native) == 1 and bool(records)
+    passed = not violation and expected <= opened and evidence_complete
+    return {"passed": passed, "violation_detected": violation, "evidence_complete": evidence_complete,
             "raw_open_count": len(raw), "trace_open_count": sum(Path(row["path"]) == sequence.trace for row in raw),
             "bag_fpl_open_count": len(bag_fpl), "evaluator_invocation_count": len(evaluator), "native_exec_count": len(native),
             "missing_enabled_inputs": sorted(expected - opened), "unexpected_clean_input_opens": unexpected,
@@ -250,19 +253,42 @@ def _field_hash(config):
 
 
 def clone_runtime_config(frozen_bytes, *, expected_sha256, gnsspath):
+    """Replace one scalar value while preserving frozen native flat-parser bytes."""
     if hashlib.sha256(frozen_bytes).hexdigest() != expected_sha256:
         raise RuntimeError("HARD_STOP_T5A_FROZEN_CONFIG_IDENTITY")
     if not isinstance(gnsspath, str) or not gnsspath or "\n" in gnsspath or "\r" in gnsspath:
         raise ValueError("invalid replacement gnsspath")
     frozen = _runtime_mapping(frozen_bytes)
-    changed = {**frozen, "gnsspath": gnsspath}
-    payload = yaml.safe_dump(changed, allow_unicode=True, sort_keys=False).encode()
+    matches = list(re.finditer(rb"(?m)^([ \t]*gnsspath[ \t]*:[ \t]*)([^\r\n]*)(\r?\n|$)", frozen_bytes))
+    if len(matches) != 1:
+        raise ValueError("frozen config must contain exactly one flat gnsspath line")
+    match = matches[0]
+    quoted = json.dumps(gnsspath, ensure_ascii=False).encode("utf-8")
+    # The frozen C++ parser removes comments, rewrites brackets/commas, prefers
+    # '=' over ':', strips outer quotes, and does not decode quoted escapes.
+    # Reject any replacement path that cannot round-trip through those rules.
+    native_line = (match[1] + quoted).decode("utf-8").split("#", 1)[0]
+    native_line = native_line.replace("[", " ").replace("]", " ").replace(",", " ").strip()
+    delimiter = native_line.find("=")
+    if delimiter < 0:
+        delimiter = native_line.find(":")
+    native_key = native_line[:delimiter].strip()
+    native_value = native_line[delimiter + 1:].strip()
+    if len(native_value) >= 2 and native_value[0] == native_value[-1] and native_value[0] in "\"'":
+        native_value = native_value[1:-1]
+    if native_key != "gnsspath" or native_value != gnsspath:
+        raise ValueError("replacement gnsspath is not representable by frozen native flat parser")
+    payload = frozen_bytes[:match.start(2)] + quoted + frozen_bytes[match.end(2):]
+    byte_gate = validate_gnsspath_only_bytes(frozen_bytes, payload, expected_gnsspath=gnsspath)
     copied = _runtime_mapping(payload)
     before, after = _field_hash(frozen), _field_hash(copied)
     if before != after:
         raise RuntimeError("HARD_STOP_T5A_NON_GNSS_CONFIG_HASH")
-    return payload, {"passed": True, "non_gnsspath_sha256_before": before,
+    return payload, {"passed": True, "independent_byte_gate": byte_gate,
+                     "canonical_field_hash_role": "SECONDARY_ONLY", "non_gnsspath_sha256_before": before,
                      "non_gnsspath_sha256_after": after, "changed_fields": ["gnsspath"],
+                     "serialization_policy": "EXACT_GNSSPATH_VALUE_BYTE_REPLACEMENT",
+                     "non_gnsspath_bytes_identical": True,
                      "frozen_config_sha256": expected_sha256,
                      "config_sha256": hashlib.sha256(payload).hexdigest(),
                      "enable_multi_state_qm": copied.get("enable_multi_state_qm"),
@@ -326,8 +352,14 @@ def _non_yaw_gate(frozen, candidate):
     return {"passed": True, "rows_including_headers": len(old), "changed_columns": [13, 14, 17]}
 
 
+def _echo_required(contract):
+    return (contract.get("task") == "T5a-R"
+            or str(contract.get("contract_version", contract.get("version", "1"))) == "1.1")
+
+
 def verify_native_inputs(sequence, *, contract, frozen_config_path, expected_config_sha256,
-                         frozen_provider_hashes, prepared_gnss, scratch_root, slot_identity):
+                         frozen_provider_hashes, prepared_gnss, scratch_root, slot_identity,
+                         frozen_echo_path=None, expected_echo_sha256=None):
     cfg_id = slot_identity["configuration_id"]
     variant = slot_identity["variant"]
     if (slot_identity["sequence_id"] != sequence.sequence_id or cfg_id not in ("F02", "F04")
@@ -343,6 +375,18 @@ def verify_native_inputs(sequence, *, contract, frozen_config_path, expected_con
     original = _runtime_mapping(original_bytes)
     if original["run_id"] != declared["run_id"]:
         raise RuntimeError("HARD_STOP_T5A_FROZEN_CONFIG_RUN_ID")
+    echo_identity = None
+    if _echo_required(contract) or frozen_echo_path is not None or expected_echo_sha256 is not None:
+        if frozen_echo_path is None or expected_echo_sha256 is None:
+            raise RuntimeError("HARD_STOP_T5AR_MISSING_FROZEN_ECHO_PIN")
+        if declared.get("effective_echo_sha256") != expected_echo_sha256:
+            raise RuntimeError("HARD_STOP_T5AR_FROZEN_ECHO_REGISTRATION")
+        if _safe(frozen_echo_path) != _safe(frozen_config_path).parent / "RUN_MANIFEST.json":
+            raise RuntimeError("HARD_STOP_T5AR_FROZEN_ECHO_SIBLING_IDENTITY")
+        echo_identity = _pinned(frozen_echo_path, expected_echo_sha256)
+        baseline_echo = decode_echo(Path(frozen_echo_path).read_bytes())
+        echo_identity["baseline_field_coverage"] = compare_effective_echo(
+            baseline_echo, baseline_echo, expected_gnsspath=original["gnsspath"])
     if set(frozen_provider_hashes) != set(PROVIDER_KEYS):
         raise RuntimeError("HARD_STOP_T5A_PROVIDER_ROLE_SET")
     providers = {key: _pinned(original[key], frozen_provider_hashes[key]) for key in PROVIDER_KEYS}
@@ -364,13 +408,14 @@ def verify_native_inputs(sequence, *, contract, frozen_config_path, expected_con
     identity = {"frozen_runtime_config": config_identity, "frozen_providers": providers,
                 "prepared_gnss": prepared, "frozen_binary": binary_identity,
                 "heading_byte_gate": byte_gate, "provider_validity_gate": prepared_gnss["byte_gate"],
-                "config_gate": config_gate}
+                "config_gate": config_gate, "frozen_effective_echo": echo_identity}
     return identity, cloned, _runtime_mapping(cloned)
 
 
 def run_native(sequence, *, contract, frozen_config_path, expected_config_sha256,
                frozen_provider_hashes, prepared_gnss, output_root, scratch_root, code_commit,
-               slot_identity, launch_ledger, allowed_run_ids, raw_source_hashes=None):
+               slot_identity, launch_ledger, allowed_run_ids, raw_source_hashes=None,
+               frozen_echo_path=None, expected_echo_sha256=None):
     """Launch one authorized native; parent owns code freeze and sequence checkpoints."""
     if not re.fullmatch(r"[0-9a-f]{40}", code_commit):
         raise ValueError("T5a execution requires a full code-freeze commit")
@@ -386,7 +431,8 @@ def run_native(sequence, *, contract, frozen_config_path, expected_config_sha256
                          expected_config_sha256=expected_config_sha256,
                          frozen_provider_hashes=frozen_provider_hashes,
                          prepared_gnss=prepared_gnss, scratch_root=scratch_root,
-                         slot_identity=specification)
+                         slot_identity=specification, frozen_echo_path=frozen_echo_path,
+                         expected_echo_sha256=expected_echo_sha256)
     identities, config_bytes, config = verify_native_inputs(sequence, **verify_kwargs)
     root.mkdir(parents=True, exist_ok=False)
     started = time.monotonic()
@@ -442,20 +488,39 @@ def run_native(sequence, *, contract, frozen_config_path, expected_config_sha256
             raise RuntimeError("HARD_STOP_SENSITIVITY_INPUT_OR_CONFIG_DRIFT")
         if record["access_audit"].get("violation_detected"):
             raise RuntimeError("HARD_STOP_SENSITIVITY_NATIVE_ACCESS_VIOLATION")
-        if record["access_audit"].get("passed") is not True:
+        access = record["access_audit"]
+        nonzero_missing_inputs_only = (
+            completed is not None and completed.returncode != 0
+            and access.get("evidence_complete") is True
+            and access.get("violation_detected") is False
+            and bool(access.get("missing_enabled_inputs"))
+            and access.get("native_exec_count") == 1
+            and all(access.get(key) == 0 for key in ("raw_open_count", "trace_open_count", "bag_fpl_open_count", "evaluator_invocation_count"))
+            and access.get("write_scope", {}).get("pass") is True
+            and not access.get("unexpected_clean_input_opens"))
+        if access.get("passed") is not True and not nonzero_missing_inputs_only:
             raise RuntimeError("HARD_STOP_T5A_NATIVE_ACCESS_AUDIT: native access evidence is missing, malformed, or incomplete")
+        if nonzero_missing_inputs_only:
+            record["missing_enabled_inputs_classification"] = "NATIVE_FAILED_BEFORE_ALL_INPUT_OPENS_COMPLETE_STRACE_NO_FORBIDDEN_OPENS"
         nav, std, manifest_path = root / "KF_GINS_Navresult.nav", root / "KF_GINS_STD.txt", root / "RUN_MANIFEST.json"
         # A native identity mismatch remains a hard stop even on nonzero exit.
         native = None
         if _safe(manifest_path).is_file():
             try:
-                native = json.loads(manifest_path.read_text())
+                native = decode_echo(manifest_path.read_bytes())
             except (ValueError, OSError):
                 pass
             if isinstance(native, dict):
                 record["native_identity_audit"] = validate_native_identity(native, config)
+                if identities["frozen_effective_echo"] is not None:
+                    frozen_echo = decode_echo(Path(identities["frozen_effective_echo"]["path"]).read_bytes())
+                    record["effective_echo_gate"] = compare_effective_echo(
+                        native, frozen_echo, expected_gnsspath=config["gnsspath"])
+                    _write(root / "EFFECTIVE_CONFIG_ECHO_GATE.json", record["effective_echo_gate"])
         if completed is None or completed.returncode:
             raise _UnavailableNative("UNAVAILABLE_NATIVE_PROCESS_FAILED", "native process failed: " + str(record["exit_code"]))
+        if identities["frozen_effective_echo"] is not None and record.get("effective_echo_gate", {}).get("passed") is not True:
+            raise RuntimeError("HARD_STOP_T5AR_EFFECTIVE_ECHO: successful native lacks valid effective echo")
         for path in (nav, std, manifest_path):
             if not _safe(path).is_file():
                 raise _UnavailableNative("UNAVAILABLE_NATIVE_OUTPUT_INVALID", "missing native output: " + path.name)
@@ -495,10 +560,19 @@ def run_native(sequence, *, contract, frozen_config_path, expected_config_sha256
         record.update(status="HARD_STOP", error_type=type(exc).__name__, error=str(exc),
                       failure_classification="HARD_STOP", evaluator_status="NOT_RUN_HARD_STOP")
         _write(root / "HARD_STOP.json", {**record, "runtime_seconds": time.monotonic() - started})
-        if record.get("access_audit", {}).get("passed") is not True:
-            # Unknown access never implies zero trace opens. Preserve the failed
-            # invocation and its exact artifacts before propagating the hard stop.
-            _seal_summary(root, record, started)
+        # Every consumed slot needs an immutable terminal summary, including
+        # an echo mismatch after a passing access audit. Unknown access never
+        # implies zero trace opens. Do not overwrite a partially completed seal.
+        if record.get("native_invocation_count") == 1:
+            summary = root / "T5A_NATIVE_SUMMARY.json"
+            seal = root / "OUTPUT_SEAL.json"
+            if not seal.exists() and not summary.exists():
+                _seal_summary(root, record, started)
+            elif not summary.exists():
+                record.update(output_seal_sha256=sha256_file(seal),
+                              trace_open_count=record.get("access_audit", {}).get("trace_open_count", "UNAVAILABLE"),
+                              runtime_seconds=time.monotonic() - started)
+                _write(summary, record)
         raise
 
 def _checked(path, expected, role):

@@ -150,3 +150,91 @@ def test_missing_pvt_alone_is_unknown_while_available_source_difference_is_retai
     assert unknown['count']==1 and unknown['mean_deg']==2
     assert r['sigma_pairs'][0]['source_supported'] is False
     assert r['sigma_pairs'][1]['source_supported'] is True
+
+
+def test_nearest_header_pair_with_offset_gps_identity_is_separate_from_same_itow():
+    imu,rp=motion()
+    first=[status(1.,101.,201.)]
+    second=[status(.025,100.05,200.15),status(1.025,101.05,201.15),status(2.025,102.05,202.15)]
+    r=diagnose('BY2',(0,3),rows(times=(1.,)),imu,rp,first,second)
+    row=r['timing_rows'][0]
+    assert row['status']=='UNAVAILABLE_STATUS_ITOW_MATCH'
+    assert row['gnss2_same_itow_count']==0
+    assert row['header_delta_s'] is row['sys_delta_s'] is row['gps_delta_s'] is None
+    assert row['nearest_header_pair_status']=='AVAILABLE'
+    assert row['nearest_header_pair_week_status']=='VERIFIED_2408'
+    assert row['nearest_header_pair_gnss2_week']==2408
+    assert row['nearest_header_pair_gnss2_itow_ms']==1025
+    assert row['nearest_header_pair_header_delta_s']==pytest.approx(.05)
+    assert row['nearest_header_pair_sys_delta_s']==pytest.approx(.15)
+    assert row['nearest_header_pair_gps_delta_s']==pytest.approx(.025,abs=1e-6)
+    assert row['nearest_header_pair_target_bracketed'] is True
+    assert row['fitted_offset_used'] is False
+    original=result_row(r,category='timing',scope='evaluation_window',quality='all',timing_field='header_delta_s')
+    assert original['pairing']=='EXACT_ITOW' and original['count']==0 and original['mean_s'] is None
+    new=result_row(r,category='timing',scope='evaluation_window',quality='all',timing_field='nearest_header_pair_header_delta_s')
+    assert new['pairing']=='NEAREST_HEADER_NO_FITTED_OFFSET' and new['count']==1
+    assert new['mean_s']==pytest.approx(.05) and new['fitted_offset_used'] is False
+    assert row['interpolation_left_offset_s']==pytest.approx(-.95)
+    assert row['interpolation_right_offset_s']==pytest.approx(.05)
+    assert row['interpolation_weight']==pytest.approx(.95)
+    json.dumps(r,allow_nan=False)
+
+
+def test_nearest_header_never_pairs_known_wrong_week_and_missing_week_is_explicit():
+    imu,rp=motion()
+    first=[status(1.,101.,201.)]
+    wrong=status(1.,101.001,201.001);wrong['time_gps_wno']=2409
+    current=status(1.025,101.3,201.4)
+    r=diagnose('BY2',(0,3),rows(times=(1.,)),imu,rp,first,[wrong,current])
+    row=r['timing_rows'][0]
+    assert row['gnss2_same_itow_count']==0 and row['gnss2_same_itow_rejected_week_count']==1
+    assert row['gnss2_header_candidates_rejected_week_count']==1
+    assert row['nearest_header_pair_gnss2_week']==2408
+    assert row['nearest_header_pair_gnss2_itow_ms']==1025
+    assert row['nearest_header_pair_header_delta_s']==pytest.approx(.3)
+    assert row['nearest_header_pair_target_bracketed'] is False
+    first[0]['time_gps_wno']=2409
+    bad=diagnose('BY2',(0,3),rows(times=(1.,)),imu,rp,first,[current])['timing_rows'][0]
+    assert bad['gnss1_same_itow_rejected_week_count']==1
+    assert bad['nearest_header_pair_header_delta_s'] is None
+    first[0]['time_gps_wno']=2408
+    current.pop('time_gps_wno')
+    missing=diagnose('BY2',(0,3),rows(times=(1.,)),imu,rp,first,[current])['timing_rows'][0]
+    assert missing['nearest_header_pair_week_status']=='UNAVAILABLE_WEEK_IDENTITY'
+    assert missing['nearest_header_pair_header_delta_s']==pytest.approx(.3)
+    assert missing['nearest_header_pair_gps_delta_s'] is None
+
+
+def test_nearest_header_equal_distance_uses_earlier_actual_header_without_fitting():
+    imu,rp=motion()
+    first=[status(1.,101.,201.)]
+    second=[status(1.1,101.25,201.25),status(.9,100.75,200.75)]
+    row=diagnose('BY2',(0,3),rows(times=(1.,)),imu,rp,first,second)['timing_rows'][0]
+    assert row['nearest_header_pair_tie_count']==2
+    assert row['nearest_header_pair_gnss2_itow_ms']==900
+    assert row['nearest_header_pair_header_delta_s']==-.25
+    assert row['nearest_header_pair_sys_delta_s']==-.25
+    assert row['nearest_header_pair_gps_delta_s']==pytest.approx(-.1,abs=1e-6)
+    assert row['fitted_offset_used'] is False
+
+
+def test_by2o_378_a1_epochs_keep_all_58_float_epochs_and_explicit_42_13_3_overlap_counts():
+    # Synthetic 1 Hz E reproduces the declared interval arithmetic; no files or
+    # real provider evidence are used. IMU/RP unsupported here is independent.
+    times=tuple(range(3186,3564))
+    float_times=set(range(3370,3413))|set(range(3495,3510))
+    data=rows(times,qualities=[1 if time in float_times else 2 for time in times])
+    imu,rp=motion(times=[3185.,3564.])
+    r=diagnose('BY2O',(3186,3563),data,imu,rp,[],[])
+    assert len(r['per_epoch'])==378
+    assert sum(row['raw_fixed_float_label']=='float_involved' for row in r['per_epoch'])==58
+    overlaps={row['scope']:row for row in r['source_consistency_rows'] if row['category']=='float_epoch_overlap'}
+    assert {scope:row['count'] for scope,row in overlaps.items()}=={
+        'evaluation_window':58,'occlusion_primary':42,'occlusion_secondary':13,'inside_union':55,'outside':3}
+    assert all(row['observed_equals_preregistered_expected'] for row in overlaps.values())
+    assert all(row['report_only'] and row['decision_rule']=='NONE' for row in overlaps.values())
+    assert overlaps['evaluation_window']['total_a1_epochs']==378
+    floats=result_row(r,category='delta',scope='evaluation_window',quality='float_involved',acceleration_bin='all')
+    assert floats['count']==58 and floats['mean_deg']==2.
+    json.dumps(r,allow_nan=False)

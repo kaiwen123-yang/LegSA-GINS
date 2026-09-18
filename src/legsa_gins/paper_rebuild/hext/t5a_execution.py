@@ -18,6 +18,7 @@ from .sequence_paths import load_sequence_paths
 from . import heading_provider as hp
 from .t5a_provider import raw_yaw_from_ned, build_t5a_variants
 from .t5a_diagnostics import diagnose
+from .t5a_parser_audit import run_parser_audit
 from .t5a_runtime import run_native, evaluate_native
 from ..clean5_parity.input_audit import decode_receiver
 from ..horizontal_literature.ext05_provider import fixed_ecef_to_ned_rotation
@@ -55,7 +56,7 @@ class Context:
         if git('diff','--name-only') or git('diff','--cached','--name-only'):raise RuntimeError('TRACKED_WORKTREE_DIFF_BEFORE_LAUNCH')
         local=yaml.safe_load(Path('configs/paper_rebuild/DATA_PATHS.CLEAN3R4.local.yaml').read_text())['paths']
         self.roots={k:Path(local[k]) for k in ('code_root','clean_root','raw_root','handoff_root','t5a_scratch')}
-        self.scratch=self.roots['t5a_scratch'];self.archive=self.roots['clean_root']/'stages'/self.contract['stage_id']
+        self.scratch=self.roots['t5a_scratch'];self.archive=self.resolve(self.contract['output_root'])
         if self.scratch.exists() or self.archive.exists():raise FileExistsError('Preserve existing T5a attempt, never auto-resume/retry')
         self.scratch.mkdir(parents=True);self.pins={};self.accesses=set();self.code_source_receipts={}
         tree=git('ls-tree','-r',code_freeze)
@@ -88,7 +89,9 @@ class Context:
         write_json(self.scratch/'07_HANDOFF/CODE_FREEZE.json',dict(code_freeze=code_freeze,pushed_head=code_freeze,contract_sha256=sha256_file(CONTRACT),matrix=self.matrix,original_figure_hashes=self.figure_snapshot))
         self.check_sources()
         write_json(self.scratch/'07_HANDOFF/SOURCE_CODE_FREEZE.json',dict(code_commit=self.freeze,sources=self.code_source_receipts))
-        self.native=[];self.evaluations=[];self.diagnostics=[];self.sources_by_sequence={};self.prepared={}
+        self.native=[];self.evaluations=[];self.diagnostics=[];self.sources_by_sequence={};self.prepared={};self.echoes={}
+        prior=self.contract['predecessor'];self.pin(self.resolve(prior['zip']),prior['zip_sha256'])
+        write_json(self.scratch/'07_HANDOFF/PREDECESSOR_INVALIDATION.json',dict(classification='INVALID_CONFIG_PARSE',historical_native_invocations=3,historical_evaluator_invocations=0,excluded_from_all_tables=True,original_records_preserved=True,prior=prior,new_budget=self.contract['budget']))
 
     def resolve(self,value):
         text=str(value)
@@ -140,6 +143,8 @@ class Context:
         row=matches[0];spec=self.contract['frozen']['runtime_configs'][s+'_'+cfg]
         path=self.resolve(self.contract['frozen']['runtime_config_template'].replace('<RUN_ID>',spec['run_id']))
         payload=self.read(path,spec['sha256']);config=yaml.safe_load(payload)
+        echo=path.with_name('RUN_MANIFEST.json');self.pin(echo,spec['effective_echo_sha256'])
+        self.echoes[s,cfg]=(echo,spec['effective_echo_sha256'])
         if row['config_hash']!=spec['sha256']:raise RuntimeError('FROZEN_CONFIG_TABLE_HASH')
         providers=json.loads(row['provider_hashes'])
         for k in PROVIDER_KEYS:self.pin(Path(config[k]),providers[k])
@@ -192,6 +197,12 @@ class Context:
     def execute(self):
         terminal='COMPLETED';error=None
         try:
+            print('T5a-R A0 read-only config/parser audit',flush=True)
+            fields=('run_id','dataset_id','method_id','config_hash','output_root','native_run_manifest','archive_receipt')
+            self.a0=run_parser_audit(self.roots['clean_root']/'stages/CLEAN6_SENSOR_MODEL_V21',
+                [{k:r.get(k,'') for k in fields} for r in self.tables['v3']],self.scratch/'07_HANDOFF/A0',self.freeze)
+            print('T5a-R A0 '+str(self.a0.get('status')),flush=True)
+            self.checkpoint('A0_POST')
             for s in self.sequences:
                 print('T5a sequence '+s+' prepare',flush=True);info=self.prepare(s)
                 for slot in [r for r in self.matrix if r['sequence_id']==s]:
@@ -200,7 +211,8 @@ class Context:
                     rec=run_native(self.sequences[s],contract=self.contract,frozen_config_path=config_path,
                         expected_config_sha256=sha256_file(config_path),frozen_provider_hashes=providers,
                         prepared_gnss=self.prepared[s,slot['variant']],output_root=self.scratch/'03_NATIVE'/s/slot['configuration_id']/slot['variant'],
-                        scratch_root=self.scratch,code_commit=self.freeze,slot_identity=slot,launch_ledger=self.scratch/'07_HANDOFF/NATIVE_LEDGER.jsonl',allowed_run_ids=self.native_ids,raw_source_hashes={r['path']:r['sha256'] for r in self.sources_by_sequence[s]})
+                        scratch_root=self.scratch,code_commit=self.freeze,slot_identity=slot,launch_ledger=self.scratch/'07_HANDOFF/NATIVE_LEDGER.jsonl',allowed_run_ids=self.native_ids,raw_source_hashes={r['path']:r['sha256'] for r in self.sources_by_sequence[s]},
+                        frozen_echo_path=self.echoes[s,slot['configuration_id']][0],expected_echo_sha256=self.echoes[s,slot['configuration_id']][1])
                     self.native.append(rec)
                     for v in ('v3','v2'):
                         if rec['status']!='COMPLETED':
@@ -221,7 +233,8 @@ class Context:
                 value=json.loads(path.read_text())
                 if value['run_id'] not in known:self.native.append(value);known.add(value['run_id'])
         result=dict(status=terminal,error=error,code_commit=self.freeze,contract_sha256=sha256_file(CONTRACT),native=self.native,evaluations=self.evaluations,diagnostics=self.diagnostics,
-                    input_hashes={self.alias(p):h for p,h in self.pins.items()},parent_trace_open_count=0,raw_source_hashes=self.sources_by_sequence)
+                    input_hashes={self.alias(p):h for p,h in self.pins.items()},parent_trace_open_count=0,raw_source_hashes=self.sources_by_sequence,
+                    a0=getattr(self,'a0',{'status':'NOT_EXECUTED'}),fidelity_native_invocations=0,fidelity_evaluator_invocations=0,fidelity_route='EFFECTIVE_ECHO_PRESENT',historical_invalid_native=3)
         write_json(self.scratch/'07_HANDOFF/EXECUTION_SUMMARY.json',result)
         self.archive_files()
         return result

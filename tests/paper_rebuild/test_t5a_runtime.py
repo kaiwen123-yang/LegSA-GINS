@@ -404,7 +404,7 @@ def test_native_identity_access_failure_hard_even_when_process_nonzero(tmp_path,
     with pytest.raises(RuntimeError,match="HARD_STOP"):
         se.run_native(**args)
     assert (args["output_root"]/"HARD_STOP.json").exists()
-    assert (args["output_root"]/"T5A_NATIVE_SUMMARY.json").exists() == (mode == "access_violation")
+    assert (args["output_root"]/"T5A_NATIVE_SUMMARY.json").exists()
 
 
 @pytest.mark.parametrize("mode", ["missing", "malformed", "incomplete"])
@@ -431,4 +431,136 @@ def test_native_unknown_access_is_sealed_hard_stop_even_when_process_fails(tmp_p
     assert summary["native_invocation_count"] == 1
     assert summary["evaluator_invocation_count"] == 0
     assert (args["output_root"] / "OUTPUT_SEAL.json").is_file()
+    assert len(args["launch_ledger"].read_text().splitlines()) == 1
+
+
+def _frozen_cpp_flat_tokens_for_regression(payload):
+    """Read-only Python model of port_config_loader.cpp readKeyValues rules."""
+    result = {}
+    for line in payload.decode("utf-8").splitlines():
+        line = line.split("#", 1)[0].replace("[", " ").replace("]", " ").replace(",", " ").strip()
+        delimiter = line.find("=")
+        if delimiter < 0:
+            delimiter = line.find(":")
+        if delimiter >= 0:
+            result[line[:delimiter].strip()] = line[delimiter + 1:].strip()
+    return result
+
+
+@pytest.mark.parametrize("line_ending", [b"\n", b"\r\n"])
+def test_config_clone_preserves_inline_native_flat_semantics(line_ending):
+    original = line_ending.join([
+        b'gnsspath: "/synthetic/frozen.gnss"',
+        b'initpos: [39.0, 116.0, 41.0]',
+        b'initatt: [0, 0, 0.688505]',
+        b'antlever: [0.03, 0.03, -0.3]',
+        b'vrw: [9.0, 9.5, 7.5]',
+        b'raw_doppler_backend_source_files: ["synthetic-raw", "synthetic-status"]',
+        b'raw_doppler_backend_source_hashes: {"synthetic-raw": "abc"}',
+        b'enable_multi_state_qm: false', b'enable_qa_fallback: false', b'',
+    ])
+    copied, gate = se.clone_runtime_config(original, expected_sha256=sha256(original).hexdigest(),
+                                            gnsspath="/synthetic/replacement.gnss")
+    assert copied == original.replace(b'"/synthetic/frozen.gnss"', b'"/synthetic/replacement.gnss"', 1)
+    old, new = _frozen_cpp_flat_tokens_for_regression(original), _frozen_cpp_flat_tokens_for_regression(copied)
+    assert {k:v for k,v in old.items() if k != "gnsspath"} == {k:v for k,v in new.items() if k != "gnsspath"}
+    assert all(new[key] for key in ("initpos", "initatt", "antlever", "vrw",
+                                   "raw_doppler_backend_source_files", "raw_doppler_backend_source_hashes"))
+    assert gate["non_gnsspath_bytes_identical"] is True
+
+
+@pytest.mark.parametrize("path", ["/synthetic/a#b", "/synthetic/a=b", "/synthetic/a[b]",
+                                  "/synthetic/a,b", '/synthetic/a"b', "/synthetic/a\\b"])
+def test_config_clone_rejects_paths_native_parser_cannot_represent(path):
+    original = b'gnsspath: "/synthetic/frozen.gnss"\n'
+    with pytest.raises(ValueError, match="not representable"):
+        se.clone_runtime_config(original, expected_sha256=sha256(original).hexdigest(), gnsspath=path)
+
+
+def _echo_fixture_for_native(args, cfg):
+    from legsa_gins.paper_rebuild.hext.t5a_config_fidelity import STATIC_ECHO_KEYS
+    manifest = {key: 0 for key in STATIC_ECHO_KEYS}
+    manifest.update({key: cfg[key] for key in ("run_id", "stage_id", "protocol_id", "case_id", "algorithm_id", "data_mode")})
+    manifest.update({target: cfg[key] for key, target in se.CONFIG_FLAG_TO_MANIFEST.items()})
+    manifest.update(se.FLAGS, phase=cfg["stage_id"], port_role=cfg["runtime_role"],
+                    schema_version="legsa-v23-port-core-run-manifest-v2",
+                    init_position_geodetic_deg_m=[39., 116.34312609000001, 41.])
+    enabled = se._enabled_inputs(cfg)
+    manifest["actual_solver_input_paths"] = {role: cfg[key] for role, (key, _) in enabled.items()}
+    manifest["actual_solver_input_roles"] = {role: purpose for role, (_, purpose) in enabled.items()}
+    echo = args["frozen_config_path"].with_name("RUN_MANIFEST.json")
+    echo.write_text(json.dumps(manifest))
+    args["contract"].update(task="T5a-R", contract_version="1.1")
+    args["contract"]["frozen"]["runtime_configs"]["BY2_F04"]["effective_echo_sha256"] = se.sha256_file(echo)
+    args.update(frozen_echo_path=echo, expected_echo_sha256=se.sha256_file(echo))
+    return manifest
+
+
+def test_v11_requires_echo_before_reservation_or_outputs(tmp_path, monkeypatch):
+    args, _ = native_fixture(tmp_path, monkeypatch)
+    args["contract"].update(task="T5a-R", contract_version="1.1")
+    monkeypatch.setattr(se, "run_process_group", lambda *a, **k: pytest.fail("must not invoke native"))
+    with pytest.raises(RuntimeError, match="MISSING_FROZEN_ECHO_PIN"):
+        se.run_native(**args)
+    assert not args["output_root"].exists()
+    assert not args["launch_ledger"].exists()
+
+
+@pytest.mark.parametrize("mode", ["pass", "effective_change", "frozen_echo_drift"])
+def test_v11_echo_gate_precedes_d8_and_seals_any_consumed_hard_stop(tmp_path, monkeypatch, mode):
+    args, cfg = native_fixture(tmp_path, monkeypatch)
+    baseline = _echo_fixture_for_native(args, cfg)
+    calls = []
+    def fake(command, **kwargs):
+        calls.append(command)
+        root = _synthetic_outputs(command)
+        actual = json.loads((root / "RUN_MANIFEST.json").read_text())
+        manifest = {**baseline, **actual}
+        if mode == "effective_change":
+            manifest["init_position_geodetic_deg_m"] = [0., 0., 0.]
+        (root / "RUN_MANIFEST.json").write_text(json.dumps(manifest))
+        if mode == "frozen_echo_drift":
+            args["frozen_echo_path"].write_text("synthetic tamper")
+        return SimpleNamespace(returncode=0, stdout="synthetic", stderr="")
+    monkeypatch.setattr(se, "run_process_group", fake)
+    monkeypatch.setattr(se, "audit_native_access", lambda *a: {"passed": True, "trace_open_count": 0})
+    if mode == "pass":
+        result = se.run_native(**args)
+        assert result["status"] == "COMPLETED" and result["effective_echo_gate"]["static_field_count"] == 211
+        assert (args["output_root"] / "EFFECTIVE_CONFIG_ECHO_GATE.json").exists()
+    else:
+        monkeypatch.setattr(se, "bounded_lla_native", lambda *a, **k: pytest.fail("no D8 after echo/hash hard stop"))
+        with pytest.raises(RuntimeError, match="HARD_STOP"):
+            se.run_native(**args)
+        result = json.loads((args["output_root"] / "T5A_NATIVE_SUMMARY.json").read_text())
+        assert result["status"] == "HARD_STOP" and result["native_invocation_count"] == 1
+        assert result["evaluator_invocation_count"] == 0
+        assert (args["output_root"] / "OUTPUT_SEAL.json").exists()
+        assert not (args["output_root"] / "BOUNDED_OUTPUT_GATE.json").exists()
+    assert len(calls) == 1 and len(args["launch_ledger"].read_text().splitlines()) == 1
+
+
+@pytest.mark.parametrize("complete,violation", [(True, False), (False, False), (True, True)])
+def test_nonzero_before_enabled_inputs_is_failsoft_only_with_complete_clean_access(tmp_path, monkeypatch, complete, violation):
+    args, cfg = native_fixture(tmp_path, monkeypatch)
+    _echo_fixture_for_native(args, cfg)
+    def fake(command, **kwargs):
+        root = Path(command[command.index("--output-dir") + 1])
+        (root / "NATIVE_OPENAT.strace").write_text("synthetic audited preflight failure")
+        return SimpleNamespace(returncode=1, stdout="", stderr="synthetic preflight failure")
+    monkeypatch.setattr(se, "run_process_group", fake)
+    monkeypatch.setattr(se, "audit_native_access", lambda *a: {
+        "passed": False, "evidence_complete": complete, "violation_detected": violation,
+        "native_exec_count": 1, "missing_enabled_inputs": ["synthetic_provider"],
+        "raw_open_count": 0, "trace_open_count": 0, "bag_fpl_open_count": 0,
+        "evaluator_invocation_count": 0, "write_scope": {"pass": True}, "unexpected_clean_input_opens": []})
+    if complete and not violation:
+        result = se.run_native(**args)
+        assert result["status"] == "UNAVAILABLE_NATIVE_PROCESS_FAILED"
+        assert "COMPLETE_STRACE" in result["missing_enabled_inputs_classification"]
+        assert result["trace_open_count"] == 0 and result["evaluator_invocation_count"] == 0
+    else:
+        with pytest.raises(RuntimeError, match="HARD_STOP"):
+            se.run_native(**args)
+    assert (args["output_root"] / "OUTPUT_SEAL.json").exists()
     assert len(args["launch_ledger"].read_text().splitlines()) == 1

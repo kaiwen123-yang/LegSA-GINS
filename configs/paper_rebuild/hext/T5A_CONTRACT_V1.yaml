@@ -1,17 +1,18 @@
 schema_version: 1
-task: T5a
-stage_id: CLEAN7_T5A_HEADING_SENSITIVITY
+task: T5a-R
+stage_id: CLEAN7_T5A_HEADING_SENSITIVITY_R
 state: HUMAN_AUTHORIZED_PREREGISTRATION
 preregistered: true
 execution_ready: true
-start_commit: f7bf0193c659535e746a66c73049e4f9e267eedd
-human_authorization: T5a user instruction explicitly authorizes the bounded exception to AGENTS section 18.
+start_commit: cabfa80abacd12508c9af5c3a2046a1b637826f7
+human_authorization: T5a-R user instruction authorizes 16 new matrix natives plus at most 1 conditional fidelity
+  native; 32 matrix evaluators plus at most 2 conditional fidelity evaluators; historical 3 calls invalid and excluded.
 claim_scope: SENSITIVITY_AND_LIMITATIONS_ONLY
 protocol_v21_rows_replaced: 0
-output_root: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY
+output_root: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R
 scratch_root: <T5A_SCRATCH>
 scratch_local_config_key: t5a_scratch
-handoff: <HANDOFF_ROOT>/t5a_heading_sensitivity_handoff.zip
+handoff: <HANDOFF_ROOT>/t5a_heading_sensitivity_handoff_v2.zip
 output_directories:
 - 01_EPOCH_SETS
 - 02_PROVIDER_TABLES/<SEQ>/<VARIANT>
@@ -33,6 +34,13 @@ budget:
   retries: 0
   parameter_search: 0
   reservation: Durable fsynced reservation before each invocation; failure consumes its slot.
+  fidelity_native_max: 1
+  fidelity_evaluator_max: 2
+  total_new_native_max: 17
+  total_new_evaluator_max: 34
+  historical_invalid_native: 3
+  fidelity_route: b_EFFECTIVE_ECHO_PRESENT_c_NOT_REQUIRED
+  actual_fidelity_native_planned: 0
 matrix:
   BY2:
     configurations:
@@ -78,21 +86,27 @@ frozen:
     BY2_F02:
       run_id: RUN_00002
       sha256: 40b0931b96b22babc8e806e3c526fb8abff98b000e4f1acd625de43ea5f31cda
+      effective_echo_sha256: 389a7c9eb97d566cdc56f7b722c012f2d3649544e9d38652da056b6115f089d0
     BY2_F04:
       run_id: RUN_00004
       sha256: cad5967db4bccc3de0f66e15139cad83892f55ef9d2dc8e8fc345b4bb1e21a4f
+      effective_echo_sha256: b4a7c40e9e7b66959b8278469e69c5a780b04985901dfa07431b4342c4cffd98
     BY2H_F02:
       run_id: SEQUENCE_BY2H_F02
       sha256: ee0ce4a4c5c472413b86b095df44ceedf80f2017072ed4ff70e5ae4265ea3b14
+      effective_echo_sha256: 64a4c88b13cc23e335079101c66653c6c4034f8de790b690300f0a76fb5718cd
     BY2H_F04:
       run_id: SEQUENCE_BY2H_F04
       sha256: 41487d5047df94581d28bf5cb6686bf5317d453fdd81b298f08f422680c5fb99
+      effective_echo_sha256: f73016df659a0ca39fdb7df2ad22d0f0d0b006952d0c40cb6b113d89cc28b135
     BY2O_F02:
       run_id: SEQUENCE_BY2O_F02
       sha256: 8090b571f137101f1b475255cfa9f8e4c74dff971e6839d321b2476b3337f87a
+      effective_echo_sha256: d18456e7d6d6f9dbd3b9779149ae025c7e9f7cd07175d04e40b6c09b56041506
     BY2O_F04:
       run_id: SEQUENCE_BY2O_F04
       sha256: 1ee1e12fa2bcdc5c0e759abec9529f446ae77599adc5c0959ca1f5d20c5dfed6
+      effective_echo_sha256: e19bd93ad58386cb1d5669994e13f21c35084ade15f9cb6daefab5a5c6953653
   provider_authority: Frozen sequence row provider_hashes and retained RUN_MANIFEST; verify exact runtime config
     against config_hash and ARCHIVE_RECEIPT.
   raw_authority: Sequence registry and pinned RAW_FILE_HASH_LOCK; read only specified raw HPPOSECEF/PVT and status
@@ -227,12 +241,15 @@ definitions:
     - (1,infinity)
     status_timing: GNSS2-minus-GNSS1 header-stamp differences at matching GPS week/tow identities; report GPS time
       and sys-stamp differences separately and enumerate unmatched identities; no fitted offset. Report actual GNSS2
-      header interpolation brackets at GNSS1 header, offsets and weights.
+      header interpolation brackets at GNSS1 header, offsets and weights. Also report nearest GNSS2 header minus
+      GNSS1 header/sys/GPS time with explicit selected identities and same-week guard; this diagnostic association
+      is not equal-iTOW association and never estimates a fitted offset.
     sigma: P-12 exact 1000 ms raw-yaw endpoint pairs with full IMU support; sqrt(sample_variance(delta_yaw minus
       gyro integral)/2); Euler yaw-rate primary and frozen z-increment companion; report only, never change yaw_std.
     missing_support: UNAVAILABLE with count and reason, never zero-filled.
     float_reporting: All 378 BY2O window E epochs enter delta with fixed/float flag; float-only mean/std/P95 plus
-      overlaps with both closed occlusion intervals.
+      overlaps with both closed occlusion intervals. Explicit source-consistency count rows enumerate the float
+      A1 overlap with primary, secondary, inside union and outside; retain each excluded epoch record.
     gravity_mps2: 9.801554354839126
     association: Current IMU interval (previous,current], dt<=0.1s; RP chronological linear interpolation only between
       adjacent samples with dt<=0.1s, no extrapolation; unsupported epochs UNAVAILABLE.
@@ -240,7 +257,9 @@ definitions:
     copy: Frozen v2.1 per-sequence F02/F04 runtime config.
     allowed_changed_fields:
     - gnsspath
-    hard_gate: Canonical field hash excluding gnsspath must be identical.
+    hard_gate: 'a: Exactly one changed line, gnsspath; every other byte identical. b: every available static effective-option
+      echo field equals corresponding frozen echo exactly, except authorized gnsspath; compare before admitting
+      native/evaluation. Canonical YAML field hash is only supplementary.'
     output_override: Frozen binary --output-dir and --debug-output-dir CLI options target the new scratch run; outputpath
       field remains unchanged.
     switches_to_report:
@@ -248,6 +267,7 @@ definitions:
     - enable_qa_fallback
     expected_QM: false
     expected_QA: false
+    clone_method: Direct single-line text replacement only; never parse YAML and reserialize.
   D6:
     decision_rule: NONE
     reporting: Present every variant and frozen row together, all metric deltas variant minus frozen; no selection
@@ -270,7 +290,7 @@ evaluation:
     evaluator_process_identity_or_access_failure: HARD_STOP
 hard_stops:
 - D3 byte or required validity gate failure
-- D5 non-gnsspath config hash mismatch
+- Config fidelity a/b/c applicable gate failure; non-gnsspath bytes or effective options differ
 - Binary, evaluator, frozen table or IMU/RD/RP/HV identity mismatch
 - Evaluator process failure
 - H-EXT-03 inherited identity or access audit failure
@@ -299,8 +319,8 @@ deliverables:
 - T5A_HEADING_SENSITIVITY.md with verbatim tables and factual descriptions
 - Handoff ZIP with member SHA/CRC manifest and whole-package SHA256
 git:
-  commit_1: 'prereg(t5a): heading input source/rate sensitivity outside the frozen chain'
-  commit_2: 'feat(t5a): heading input source/rate sensitivity — R1/R5/R1F/R5F for F02/F04 on three sequences'
+  commit_1: 'prereg(t5a): config-cloning fix, config fidelity gates, read-only parser audit'
+  commit_2: 'feat(t5a): heading input source/rate sensitivity — R1/R5/R1F/R5F, three sequences'
   push_each: true
   merge: false
   tag: false
@@ -322,3 +342,45 @@ provenance:
   - code_commit
   - config_hash
   - terminal_status
+contract_version: '1.1'
+predecessor:
+  classification: INVALID_CONFIG_PARSE
+  native_invocations: 3
+  evaluator_invocations: 0
+  excluded_from_all_scientific_tables: true
+  records_immutable: true
+  root: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY
+  zip: <HANDOFF_ROOT>/t5a_heading_sensitivity_handoff.zip
+  zip_sha256: 9adc683a013cf294efed420d5df4be72b58fdcd44243e98b119cf7c2d57bd44f
+  cause: YAML round-trip expanded inline arrays/maps; frozen native line parser silently used defaults or empty
+    RD lineage; PyYAML object equality was insufficient.
+config_fidelity:
+  a: Independent line-diff exactly [gnsspath], non-gnss bytes identical; native-representable new path; before every
+    invocation.
+  b: Pin frozen solver/RUN_MANIFEST.json using archived receipts; compare all registered static effective-option
+    fields recursively and exactly to new native echo before D8/evaluator. GNSS input path is the only allowed semantic
+    difference. Runtime counters/provider-derived statuses are not config echoes.
+  echo_coverage: 211 registered static keys in t5a_config_fidelity.py, including four CLI debug switches and
+    config-derived lsim_oim/multi_state_qm; every receipt lists all observed excluded keys. Runtime counters,
+    provider-derived statuses and raw_doppler/go2_prior/fgo activity flags are result fields, excluded from
+    parameter equality. The three activity flags are assigned from update_count in port_runtime.cpp lines
+    73/95/119. Settings absent from the effective echo remain protected by exact non-gnss bytes and the identical
+    frozen binary; A0 lists config fields not represented by echo, without claiming independent echo coverage.
+  c: 'Conditional only if no effective echo mechanism: one BY2 F02 fidelity native using cloned config but frozen
+    gnsspath; comparable frozen NAV_10HZ or evaluator-result hash exact. Excluded from result tables. Echo mechanism
+    is verified present, so c is NOT_REQUIRED, fidelity calls planned 0. No fallback native after a/b mismatch.'
+  failure: HARD_STOP on any applicable a/b/c inequality; do not retry.
+A0:
+  mode: READ_ONLY_FAIL_SOFT
+  scope: All frozen v2.1 runtime config files, including retained main/addendum/sequence/downstream and referenced
+    reused F01 configs; report unavailable references separately. No v2.1 mutations regardless of findings.
+  syntax: Check single-line flat-parser-compatible values for vectors/lists/maps and all present fields; identify
+    blocks, duplicates or unsupported scalar syntax; hash every inspected config and verify retained receipts where
+    available.
+  echo_sampling: At least one frozen run for each sequence and each configuration, all 33 sequence rows; compare
+    config fields represented by actual effective echo and report omitted coverage, defaults and floating unit-roundtrip
+    differences separately.
+  output: 07_HANDOFF/A0
+  native_invocations: 0
+  evaluator_invocations: 0
+  trace_opens: 0

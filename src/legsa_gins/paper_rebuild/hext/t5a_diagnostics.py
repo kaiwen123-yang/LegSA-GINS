@@ -15,6 +15,7 @@ from .readonly_closeout import region_masks
 
 GRAVITY_MPS2 = 9.801554354839126
 MAX_GAP_S = .1
+STATUS_GPS_WEEK = 2408
 HISTOGRAM_EDGES = [-180, -90, -45, -20, -10, -5, -2, -1, 0, 1, 2, 5, 10, 20, 45, 90, 180]
 QUALITY = ("all", "both_fixed", "float_involved", "other", "unknown")
 ACCEL_BINS = ("all", "lt_0p3", "from_0p3_to_1", "gt_1", "unavailable")
@@ -126,12 +127,51 @@ def _statistics(values, suffix, total=None):
 
 
 def _status_key(row):
-    return int(round(float(row["time_gps_tow"]) * 1000))
+    tow = float(row["time_gps_tow"])
+    if not math.isfinite(tow) or not 0 <= tow < 604800:
+        raise ValueError("Invalid status GPS time of week")
+    key = int(round(tow * 1000))
+    if key >= 604800000:
+        raise ValueError("Status iTOW rounds outside the declared GPS week")
+    return key
 
 
-def _status_map(rows):
+def _status_week(row):
+    raw = row.get("time_gps_wno")
+    if raw is None or str(raw).strip() == "":
+        return None, "UNAVAILABLE_WEEK_IDENTITY"
+    value = _finite(raw)
+    if value is None or value != int(value) or value < 0:
+        return None, "INVALID_WEEK_IDENTITY"
+    week = int(value)
+    return week, "VERIFIED_2408" if week == STATUS_GPS_WEEK else "GPS_WEEK_MISMATCH"
+
+
+def _week_eligible(row):
+    # Missing week is explicitly unverified; a known wrong/invalid week is never
+    # silently paired across a rollover or substituted into week 2408.
+    return _status_week(row)[1] in ("VERIFIED_2408", "UNAVAILABLE_WEEK_IDENTITY")
+
+
+def _pair_week_status(first, second):
+    left, left_status = _status_week(first)
+    right, right_status = _status_week(second)
+    if not _week_eligible(first) or not _week_eligible(second) or left is not None and right is not None and left != right:
+        return "GPS_WEEK_MISMATCH"
+    return "VERIFIED_2408" if left_status == right_status == "VERIFIED_2408" else "UNAVAILABLE_WEEK_IDENTITY"
+
+
+def _gps_time_or_none(row):
+    week, state = _status_week(row)
+    tow = _finite(row.get("time_gps_tow"))
+    return week * 604800 + tow if state == "VERIFIED_2408" and tow is not None and 0 <= tow < 604800 else None
+
+
+def _status_map(rows, *, enforce_week=True):
     out = {}
     for row in rows:
+        if enforce_week and not _week_eligible(row):
+            continue
         try:
             key = _status_key(row)
         except (ValueError, TypeError, KeyError):
@@ -150,19 +190,69 @@ def _time_or_none(fn, row):
 
 def _timings(epochs, status1, status2):
     maps = [_status_map(rows) for rows in (status1, status2)]
+    all_maps = [_status_map(rows, enforce_week=False) for rows in (status1, status2)]
     prepared, _ = _prepared_rows(apply_status_valid_filter(status2, "gnss2")[0])
+    rejected_week_count = sum(not _week_eligible(item["row"]) for item in prepared)
+    rejected_header_count = sum(not math.isfinite(float(item["t"])) for item in prepared)
+    prepared = [item for item in prepared if _week_eligible(item["row"]) and math.isfinite(float(item["t"]))]
     times = np.array([r["t"] for r in prepared], float)
     rows = []
     for epoch in epochs:
         row = dict(sequence_id=epoch["sequence_id"], time_s=epoch["time_s"], itow_ms=epoch["itow_ms"],
                    quality=epoch["raw_fixed_float_label"], status="UNAVAILABLE_STATUS_ITOW_MATCH",
                    header_delta_s=None, sys_delta_s=None, gps_delta_s=None,
+                   same_itow_pair_week_status="UNAVAILABLE", fitted_offset_used=False,
                    interpolation_status="UNAVAILABLE", interpolation_left_offset_s=None,
-                   interpolation_right_offset_s=None, interpolation_weight=None, nearest_header_offset_s=None)
+                   interpolation_right_offset_s=None, interpolation_weight=None, nearest_header_offset_s=None,
+                   nearest_header_pair_status="UNAVAILABLE_GNSS1_ITOW_MATCH",
+                   nearest_header_pair_policy="MINIMUM_ABSOLUTE_HEADER_DIFFERENCE_EARLIER_HEADER_THEN_INPUT_ORDER_ON_TIE",
+                   nearest_header_pair_week_status="UNAVAILABLE",
+                   nearest_header_pair_header_delta_s=None, nearest_header_pair_sys_delta_s=None,
+                   nearest_header_pair_gps_delta_s=None,
+                   nearest_header_pair_gnss1_week=None, nearest_header_pair_gnss1_itow_ms=None,
+                   nearest_header_pair_gnss2_week=None, nearest_header_pair_gnss2_itow_ms=None,
+                   nearest_header_pair_gnss2_tow_s=None, nearest_header_pair_gnss2_header_s=None,
+                   nearest_header_pair_gnss2_sys_s=None, nearest_header_pair_tie_count=None,
+                   nearest_header_pair_target_bracketed=False,
+                   gnss2_header_candidates_rejected_week_count=rejected_week_count,
+                   gnss2_header_candidates_nonfinite_count=rejected_header_count)
         matches = [mapping.get(int(epoch["itow_ms"]), []) for mapping in maps]
-        row.update(gnss1_same_itow_count=len(matches[0]), gnss2_same_itow_count=len(matches[1]))
+        row.update(gnss1_same_itow_count=len(matches[0]), gnss2_same_itow_count=len(matches[1]),
+                   gnss1_same_itow_rejected_week_count=len(all_maps[0].get(int(epoch["itow_ms"]), [])) - len(matches[0]),
+                   gnss2_same_itow_rejected_week_count=len(all_maps[1].get(int(epoch["itow_ms"]), [])) - len(matches[1]))
         if len(matches[0]) == 1:
-            target = _time_or_none(status_time_header, matches[0][0])
+            first = matches[0][0]
+            target = _time_or_none(status_time_header, first)
+            row["nearest_header_pair_status"] = "UNAVAILABLE_GNSS1_HEADER_TIME" if target is None else "UNAVAILABLE_GNSS2_HEADER_CANDIDATE"
+            if target is not None and len(times):
+                distances = np.abs(times - target)
+                nearest = int(np.argmin(distances))
+                second = prepared[nearest]["row"]
+                week_status = _pair_week_status(first, second)
+                # No fitted offset and no forced same-iTOW association: the
+                # selected receiver identity is retained beside each difference.
+                selected_itow = None
+                try:
+                    selected_itow = _status_key(second)
+                except (ValueError, TypeError, KeyError):
+                    pass
+                row.update(nearest_header_pair_status="AVAILABLE" if week_status == "VERIFIED_2408" else "AVAILABLE_HEADER_PAIR_WEEK_UNVERIFIED",
+                           nearest_header_pair_week_status=week_status,
+                           nearest_header_pair_gnss1_week=_status_week(first)[0],
+                           nearest_header_pair_gnss1_itow_ms=_status_key(first),
+                           nearest_header_pair_gnss2_week=_status_week(second)[0],
+                           nearest_header_pair_gnss2_itow_ms=selected_itow,
+                           nearest_header_pair_gnss2_tow_s=_finite(second.get("time_gps_tow")),
+                           nearest_header_pair_gnss2_header_s=float(times[nearest]),
+                           nearest_header_pair_gnss2_sys_s=_time_or_none(status_time_sys, second),
+                           nearest_header_pair_tie_count=int(np.count_nonzero(distances == distances[nearest])),
+                           nearest_header_pair_target_bracketed=bool(times[0] <= target <= times[-1]))
+                if selected_itow is None:
+                    row["nearest_header_pair_status"] = "AVAILABLE_HEADER_PAIR_GPS_IDENTITY_UNAVAILABLE"
+                if week_status != "GPS_WEEK_MISMATCH":
+                    for name, fn in (("header", status_time_header), ("sys", status_time_sys), ("gps", _gps_time_or_none)):
+                        a, b = _time_or_none(fn, first), _time_or_none(fn, second)
+                        row["nearest_header_pair_" + name + "_delta_s"] = b - a if a is not None and b is not None else None
             if target is not None and len(times) and times[0] <= target <= times[-1]:
                 right = int(np.searchsorted(times, target, side="left"))
                 left = right if times[right] == target else right - 1
@@ -173,11 +263,14 @@ def _timings(epochs, status1, status2):
                            nearest_header_offset_s=dl if abs(dl) <= abs(dr) else dr)
         if all(len(match) == 1 for match in matches):
             left, right = matches[0][0], matches[1][0]
+            row["same_itow_pair_week_status"] = _pair_week_status(left, right)
             for name, fn in (("header", status_time_header), ("sys", status_time_sys),
-                             ("gps", lambda x: float(x["time_gps_wno"]) * 604800 + float(x["time_gps_tow"]))):
+                             ("gps", _gps_time_or_none)):
                 a, b = _time_or_none(fn, left), _time_or_none(fn, right)
                 row[name + "_delta_s"] = b - a if a is not None and b is not None else None
             row["status"] = "AVAILABLE" if row["header_delta_s"] is not None else "UNAVAILABLE_HEADER_TIME"
+            if row["status"] == "AVAILABLE" and row["same_itow_pair_week_status"] != "VERIFIED_2408":
+                row["status"] = "AVAILABLE_ITOW_PAIR_WEEK_UNVERIFIED"
         rows.append(row)
     return rows
 
@@ -273,15 +366,38 @@ def diagnose(sequence_id, window, diagnostic_rows, imu7, rp, status1, status2):
                     report_only=True, **statistics))
     timing_rows = _timings(epochs, status1, status2)
     timing_fields = ("header_delta_s", "sys_delta_s", "gps_delta_s", "interpolation_left_offset_s",
-                     "interpolation_right_offset_s", "interpolation_weight", "nearest_header_offset_s")
+                     "interpolation_right_offset_s", "interpolation_weight", "nearest_header_offset_s",
+                     "nearest_header_pair_header_delta_s", "nearest_header_pair_sys_delta_s", "nearest_header_pair_gps_delta_s")
     for scope, mask in scopes.items():
         for quality in QUALITY:
             selected = [row for row, keep in zip(timing_rows, mask) if keep and (quality == "all" or row["quality"] == quality)]
             for field in timing_fields:
                 values = [row[field] for row in selected if row[field] is not None]
+                pairing = ("NEAREST_HEADER_NO_FITTED_OFFSET" if field.startswith("nearest_header_pair_")
+                           else "EXACT_ITOW" if field in ("header_delta_s", "sys_delta_s", "gps_delta_s")
+                           else "A1_GNSS2_HEADER_INTERPOLATION_BRACKETS")
                 source.append(dict(category="timing", sequence_id=sequence_id, scope=scope, quality=quality,
-                                   timing_field=field, total_epochs=len(selected), unmatched_count=len(selected) - len(values),
+                                   timing_field=field, pairing=pairing, fitted_offset_used=False,
+                                   expected_gps_week=STATUS_GPS_WEEK,
+                                   total_epochs=len(selected), unmatched_count=len(selected) - len(values),
                                    **_statistics(values, "dimensionless" if field == "interpolation_weight" else "s", len(selected))))
+    if sequence_id == "BY2O":
+        # Explicit count rows include every E epoch, independent of delta/IMU
+        # availability. These observed-vs-preregistered counts are report-only.
+        expected_counts = {"evaluation_window": 58, "occlusion_primary": 42,
+                           "occlusion_secondary": 13, "inside_union": 55, "outside": 3}
+        window_float_count = sum(bool(keep) and row["raw_fixed_float_label"] == "float_involved"
+                                 for row, keep in zip(epochs, scopes["evaluation_window"]))
+        for scope, expected_count in expected_counts.items():
+            selected = [row for row, keep in zip(epochs, scopes[scope]) if keep]
+            count = sum(row["raw_fixed_float_label"] == "float_involved" for row in selected)
+            source.append(dict(category="float_epoch_overlap", sequence_id=sequence_id, scope=scope,
+                               quality="float_involved", count=count, n=count, total_a1_epochs=len(selected),
+                               evaluation_window_float_count=window_float_count, expected_count=expected_count,
+                               observed_equals_preregistered_expected=count == expected_count,
+                               status="AVAILABLE_COUNT", report_only=True, decision_rule="NONE",
+                               count_definition="A1_VALID_E_AND_PVT_FLOAT_INVOLVED_IN_CLOSED_REGION",
+                               partition_definition="evaluation_window = occlusion_primary + occlusion_secondary + outside; inside_union = primary + secondary"))
     def json_ready(value):
         if isinstance(value, np.generic): return json_ready(value.item())
         if isinstance(value, float) and not math.isfinite(value): return None

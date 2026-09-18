@@ -34,7 +34,8 @@ def trace_accounting(scratch, ledgers):
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--code-freeze',required=True);args=parser.parse_args()
     local=yaml.safe_load(Path('configs/paper_rebuild/DATA_PATHS.CLEAN3R4.local.yaml').read_text())['paths']
-    scratch=Path(local['t5a_scratch']);archive=Path(local['clean_root'])/'stages/CLEAN7_T5A_HEADING_SENSITIVITY'
+    contract=yaml.safe_load(Path('configs/paper_rebuild/hext/T5A_CONTRACT_V1.yaml').read_text())
+    scratch=Path(local['t5a_scratch']);archive=Path(contract['output_root'].replace('<CLEAN_ROOT>',str(local['clean_root'])))
     summary=json.loads((scratch/'07_HANDOFF/EXECUTION_SUMMARY.json').read_text())
     if summary['code_commit']!=args.code_freeze:raise ValueError('Code freeze mismatch')
     def resolve(value):
@@ -57,7 +58,9 @@ def main():
     if completed and json.loads(visual_path.read_text()).get('status')!='PASS':raise RuntimeError('Visual review incomplete')
     file_hashes={p.relative_to(scratch).as_posix():sha256_file(p) for p in sorted(scratch.rglob('*')) if p.is_file() and p.suffix!='.zip'}
     final={**FLAGS,'status':'PASS_T5A_HEADING_SENSITIVITY_COMPLETE' if completed else 'HARD_STOP_PARTIAL_EVIDENCE',
-        'code_freeze':args.code_freeze,'native_budget':16,'native_invocations':len(ledgers['NATIVE']),
+        'code_freeze':args.code_freeze,'task':'T5a-R','historical_invalid_native':3,'historical_invalid_classification':'INVALID_CONFIG_PARSE',
+        'fidelity_native_invocations':summary.get('fidelity_native_invocations',0),'fidelity_evaluator_invocations':summary.get('fidelity_evaluator_invocations',0),'fidelity_gate_route':summary.get('fidelity_route'),'A0':summary.get('a0'),
+        'native_budget':16,'native_invocations':len(ledgers['NATIVE']),
         'evaluator_budget':32,'evaluator_invocations':len(ledgers['EVALUATOR']),
         'native_completed':sum(r['status']=='COMPLETED' for r in summary['native']),
         'evaluations_completed':sum(r['row'].get('evaluation_status')=='COMPLETED' for r in summary['evaluations']),
@@ -73,7 +76,7 @@ def main():
         data=p.read_bytes();members.append({'name':'T5A/'+p.relative_to(scratch).as_posix(),'source':p,'sha256':hashlib.sha256(data).hexdigest(),'size_bytes':len(data),'crc32':f'{zlib.crc32(data)&0xffffffff:08x}'})
     manifest={**FLAGS,'code_freeze':args.code_freeze,'members':[{k:v for k,v in r.items() if k!='source'} for r in members],
         'self_reference_policy':'MEMBER_MANIFEST.json is validated in the external ZIP_VERIFICATION.json including SHA256 and CRC32.'}
-    zpath=scratch/'07_HANDOFF/t5a_heading_sensitivity_handoff.zip'
+    zpath=scratch/'07_HANDOFF'/Path(contract['handoff']).name
     with zipfile.ZipFile(zpath,'x',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
         for r in members:z.write(r['source'],r['name'])
         z.writestr('MEMBER_MANIFEST.json',json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
