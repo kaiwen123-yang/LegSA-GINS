@@ -1,7 +1,7 @@
-schema_version: hext.external_sequences.contract.v1.1
-task: H-EXT-03
-status: HUMAN_AUTHORIZED_PREREGISTRATION
-execution_authorized: true
+schema_version: hext.external_sequences.contract.v1.2
+task: H-EXT-04L
+status: HUMAN_AUTHORIZED_READ_ONLY_CLOSEOUT
+execution_authorized: false
 frozen_main_chain: PROTOCOL_V2.1_UNCHANGED_EXTERNAL_COMPARISON_ROWS_ONLY
 sequence_registry: configs/paper_rebuild/clean5/CLEAN5_SEQUENCE_REGISTRY.yaml
 local_path_config: configs/paper_rebuild/DATA_PATHS.CLEAN3R4.local.yaml
@@ -305,21 +305,19 @@ shared_parameters:
   - Process noise injection structure
 budget:
   native: 0
-  evaluator: 11
-  evaluator_definition: At most 11 original NOT_RUN slots; D8 skips unbounded slots before invocation; expected
-    10 calls
-  trace_open_count_per_evaluator_child: 1
+  evaluator: 0
+  trace_payload_reads: 0
+  provider_generation: 0
   retry: 0
-  concurrency_max: 1
-  numerical_threads_per_worker: 1
 report_rules:
-  main_tables: All three sequences show literature and S rows; BY2 literature rows remain frozen P-07 values.
-  main_text_selection: Use the version with smaller BY2 C00 v3 yaw RMSE for all three sequences, uniformly. The
-    other version appears completely in supplementary material; neither version may be omitted.
-  selector_method_pair: LC01 versus LC01-S; EXT05C pair remains diagnostic
-  equal_yaw_rmse: HUMAN_DECISION_REQUIRED_NO_UNREGISTERED_TIE_BREAK
-  missing_yaw_rmse: HUMAN_DECISION_REQUIRED_NO_SUBSTITUTION
-  version_selection_is_post_result_declared_rule: true
+  main_tables: Retain both complete configurations, both evaluators and all prior start rows.
+  manuscript_row: LC01 literature configuration; BY2/BY2O FILE_START; BY2H CONTRACT_START
+  supplemental_row: LC01-S at the same sequence-specific starts
+  amended_after_results_seen: true
+  amendment_reason: 预注册规则按 BY2 航向选出 S，三序列结果显示 S 对基线并非一致有利（BY2O 航向 4.016 对 2.454，三序列 roll/pitch 均差），改用发表配置
+  lc01_description: IMU 过程噪声取自原文实验设定，未针对本 IMU 标定
+  favorable_scoreboard: Per sequence and metric lower value of LC01 and LC01-S at the fixed manuscript start; sensitivity
+    envelope only, not a new method.
 archive:
   scratch_key: hext_scratch
   scratch_filesystem: ext4
@@ -334,33 +332,13 @@ required_human_decisions: []
 no_parameter_search: true
 no_timing_sign_offset_search: true
 no_main_chain_change: true
-authorization: H-EXT-03 prompt 2026-09-16
+authorization: H-EXT-04L prompt 2026-09-18
 human_decisions:
-  D1: imu_gap_policy = DROP_DT_GT_0P1_AND_CONTINUE：适配器丢弃 dt≤0 或 dt>0.1 s 的样本，与 LegSA invalid_dt_policy 相同；滤波器不改，不填充，不膨胀协方差，下一样本按自身
-    dt 传播；每个 gap 记录：起止、时长、gap 期间施加的 GNSS 更新数、跨 gap 的位置/速度/航向跳变。
-  D2: 起点约定：FILE_START 为主行（方法原生，与 BY2 冻结用法一致：固定 NED 原点与初始化在首个 common GNSS1 HPPOSECEF 历元，静态校验照旧，标定窗 = IMU 文件前 5 s）。CONTRACT_START
-    仅 BY2H 作诊断行：初始化在首个 ≥ t_start(413) 的 common GNSS1 历元，yaw 取其后首个有效基线，速度零，静态校验豁免并在合约中登记为偏离，标定窗不变，传播从 ≥ t_start 的首个未丢弃
-    IMU 样本开始。若任一序列 FILE_START 静态校验失败，则该序列 CONTRACT_START 升为主行并标记（BY2O 此时补跑 CONTRACT_START，预算内）。
-  D3: BY2O 不做特殊处理；表中标注 GNSS2 pAcc 超阈值 52 历元与 status float 57 历元；输出分段表，含合约遮挡窗口段（3369.94–3411.95 主、3495.94–3508.94
-    次）。
-  D4: expected 门按观测值：BY2H HPPOSECEF 1483/1483、RAWX 1483/1483、common 1483、首端额外 HP 历元 0、间隔全 200 ms、HP=RAWX+2 ms、IMU
-    63222；BY2O 2231/2231、2231/2231、2231、0、全 200 ms、+2 ms、IMU 95860；两序列周 2408、闰秒 18。BY2 保持 1510/1509/1/63278。
-  D5: 配置四组：LC01（文献）、EXT05C（文献，诊断）、LC01-S、EXT05C-S（共享参数，值 = parameters.py 已实现：gyro PSD 8.209651003126647e-08 rad²/s
-    ×3；accel PSD = q 三轴；s=1.0308398903907543 施加于安装后的当前样本 FRD 比力）。报告规则：三序列主表文献行与 S 行都列；正文对比行取 BY2 C00 v3 航向 RMSE
-    更小的一版（LC01-S BY2 对冻结 2.994827°），三序列统一使用，另一版进补充材料；结果方向无论如何如实报。
-  D6: 几何审计照跑照记，不作准入门；失败行 status=AVAILABLE_GEOMETRIC_AUDIT_FAIL，指标照算。
-  D7: 硬停分类：读取 EXT05C-S/BY2H/FILE_START 的全率 native NAV，报告首个越界历元、最大 |位置−首历元| 与最大 |速度|；该行 native 状态 ALGORITHM_FAILURE_DIVERGED，其
-    v3/v2 科学评估槽为 NOT_RUN_ALGORITHM_FAILURE。已发生的第 17 次评估原记录 FAILED_EVALUATOR_CONSISTENCY 保留，不重试；科学槽分类不抹去历史进程调用。
-  D8: 评估前有界门（仅外部行）：native NAV 全行有限；位置相对首历元的三维欧氏范数 ≤ 1e4 m；速度三维欧氏范数 ≤ 50 m/s；高度相对首历元绝对值 ≤ 1e3 m。原生 NAV.csv 的固定 NED
-    米制坐标；全文件、不只评估窗。场地尺度约 300 m，阈值远离真实轨迹。不通过 → ALGORITHM_FAILURE_DIVERGED，不调评估器。14 次 native 全部执行并记录；已通过的 16 次评估回溯核对，不通过只报告不改结果。
-  D9: D2 看到结果后修订：BY2H 论文对比行 = CONTRACT_START（协议起点，与提出方法相同；窗前 IMU 中断被协议起点排除）；FILE_START 保留为方法原生诊断行，同表列出。BY2、BY2O
-    保持 FILE_START。amended_after_results_seen=true；附 BY2H LC01 与 LC01-S × FILE_START/CONTRACT_START × v3/v2 共 8 行
-    H/yaw 数值；修订方向混合：航向略差、位置更好。旧 D2、run_matrix 的执行身份保留为历史，不改原 native。
-  D10: 主配置选择结果 S：BY2 C00 v3 yaw RMSE 1.5392385536245534 deg < 2.9948274600591076 deg；三序列统一使用 S 论文行，文献 LIT 行进入补充材料，表中两版都保留。
-  D11: 先确认 A10 两行 NAV 的真实来源；仅 v2.1 序列全率 NAV 如在 c541_v21_handoff.zip（SHA256 98a77b4601b897956a6d87f5bfa92e008b584add35e48e2b22a9088ddec07585）或
-    20_FINALIZE 归档内，可核包/成员哈希后只读提取至 hext_scratch 诊断；否则 UNAVAILABLE。禁止 NAV_10HZ 或旧校准链替代。
-  D12: 本任务起：评估器进程失败、身份不等或访问审计失败 = 硬停；一致性门失败先查 native D8：无界按 D7 分类继续，有界按 GINav 先例逐行 UNAVAILABLE_EVALUATION_FAILED、正式指标空缺并继续；均不重试。原
-    capture 阈值与科学计算不变。
+  H_EXT_04L: Read-only closeout only; zero native, evaluator and trace reads.
+  manuscript_amendment: 预注册规则按 BY2 航向选出 S，三序列结果显示 S 对基线并非一致有利（BY2O 航向 4.016 对 2.454，三序列 roll/pitch 均差），改用发表配置
+  lc01_description: IMU 过程噪声取自原文实验设定，未针对本 IMU 标定
+  starts: BY2/BY2O FILE_START; BY2H CONTRACT_START
+  H_EXT_04_execution: CANCELLED; T5 requires preregistration; extra identity budget issue void
 initialization:
   FILE_START: Frozen first common valid position after first5s calibration (all three observed first common epochs
     follow calibration); zero velocity; fixed NED origin first common GNSS1 of file.
@@ -504,7 +482,7 @@ hard_stop:
 - existing 28 figures or RENDER_MANIFEST drift
 - unexpected overwrite or retry
 - archive batch failure ratio >1%
-contract_version: '1.1'
+contract_version: '1.2'
 amended_after_results_seen: true
 prior_authorization:
   task: H-EXT-02
@@ -529,7 +507,7 @@ paper_primary_starts:
   BY2: FILE_START
   BY2H: CONTRACT_START
   BY2O: FILE_START
-selected_configuration: S
+selected_configuration: LIT
 native_execution_frozen: true
 bounded_output_gate:
   source: NAV.csv
@@ -604,40 +582,6 @@ D9_amendment_evidence:
   yaw_rmse_deg: 1.9430028350481119
   source: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/07_OFFLINE_EVALUATION/v2/BY2H__LC01-S__CONTRACT_START/EVALUATION_RESULT.json
   sha256: da7d5e7af04cf6c7b5510c7f5fe9fd707fe04f14047d0641ceb18140e174b70a
-continuation_remaining_slots:
-- run_id: BY2H__EXT05C-S__FILE_START
-  version: v2
-  expected_action: D8_SKIP_ALGORITHM_FAILURE
-- run_id: BY2H__EXT05C-S__CONTRACT_START
-  version: v3
-  expected_action: EVALUATE_ONCE_IF_D8_PASS
-- run_id: BY2H__EXT05C-S__CONTRACT_START
-  version: v2
-  expected_action: EVALUATE_ONCE_IF_D8_PASS
-- run_id: BY2O__LC01__FILE_START
-  version: v3
-  expected_action: EVALUATE_ONCE_IF_D8_PASS
-- run_id: BY2O__LC01__FILE_START
-  version: v2
-  expected_action: EVALUATE_ONCE_IF_D8_PASS
-- run_id: BY2O__EXT05C__FILE_START
-  version: v3
-  expected_action: EVALUATE_ONCE_IF_D8_PASS
-- run_id: BY2O__EXT05C__FILE_START
-  version: v2
-  expected_action: EVALUATE_ONCE_IF_D8_PASS
-- run_id: BY2O__LC01-S__FILE_START
-  version: v3
-  expected_action: EVALUATE_ONCE_IF_D8_PASS
-- run_id: BY2O__LC01-S__FILE_START
-  version: v2
-  expected_action: EVALUATE_ONCE_IF_D8_PASS
-- run_id: BY2O__EXT05C-S__FILE_START
-  version: v3
-  expected_action: EVALUATE_ONCE_IF_D8_PASS
-- run_id: BY2O__EXT05C-S__FILE_START
-  version: v2
-  expected_action: EVALUATE_ONCE_IF_D8_PASS
 historical_H_EXT_02_hard_stop:
 - D4 mismatch
 - evaluator/frozen table/raw hash mismatch
@@ -646,3 +590,479 @@ historical_H_EXT_02_hard_stop:
 - evaluator failure
 - archive batch failure ratio >1%
 - existing 28 figures or RENDER_MANIFEST drift
+historical_v11_execution:
+  task: H-EXT-03
+  status: HUMAN_AUTHORIZED_PREREGISTRATION
+  authorization: H-EXT-03 prompt 2026-09-16
+  execution_authorized: true
+  budget:
+    native: 0
+    evaluator: 11
+    evaluator_definition: At most 11 original NOT_RUN slots; D8 skips unbounded slots before invocation; expected
+      10 calls
+    trace_open_count_per_evaluator_child: 1
+    retry: 0
+    concurrency_max: 1
+    numerical_threads_per_worker: 1
+  selected_configuration: S
+  report_rules:
+    main_tables: All three sequences show literature and S rows; BY2 literature rows remain frozen P-07 values.
+    main_text_selection: Use the version with smaller BY2 C00 v3 yaw RMSE for all three sequences, uniformly. The
+      other version appears completely in supplementary material; neither version may be omitted.
+    selector_method_pair: LC01 versus LC01-S; EXT05C pair remains diagnostic
+    equal_yaw_rmse: HUMAN_DECISION_REQUIRED_NO_UNREGISTERED_TIE_BREAK
+    missing_yaw_rmse: HUMAN_DECISION_REQUIRED_NO_SUBSTITUTION
+    version_selection_is_post_result_declared_rule: true
+  continuation_remaining_slots:
+  - run_id: BY2H__EXT05C-S__FILE_START
+    version: v2
+    expected_action: D8_SKIP_ALGORITHM_FAILURE
+  - run_id: BY2H__EXT05C-S__CONTRACT_START
+    version: v3
+    expected_action: EVALUATE_ONCE_IF_D8_PASS
+  - run_id: BY2H__EXT05C-S__CONTRACT_START
+    version: v2
+    expected_action: EVALUATE_ONCE_IF_D8_PASS
+  - run_id: BY2O__LC01__FILE_START
+    version: v3
+    expected_action: EVALUATE_ONCE_IF_D8_PASS
+  - run_id: BY2O__LC01__FILE_START
+    version: v2
+    expected_action: EVALUATE_ONCE_IF_D8_PASS
+  - run_id: BY2O__EXT05C__FILE_START
+    version: v3
+    expected_action: EVALUATE_ONCE_IF_D8_PASS
+  - run_id: BY2O__EXT05C__FILE_START
+    version: v2
+    expected_action: EVALUATE_ONCE_IF_D8_PASS
+  - run_id: BY2O__LC01-S__FILE_START
+    version: v3
+    expected_action: EVALUATE_ONCE_IF_D8_PASS
+  - run_id: BY2O__LC01-S__FILE_START
+    version: v2
+    expected_action: EVALUATE_ONCE_IF_D8_PASS
+  - run_id: BY2O__EXT05C-S__FILE_START
+    version: v3
+    expected_action: EVALUATE_ONCE_IF_D8_PASS
+  - run_id: BY2O__EXT05C-S__FILE_START
+    version: v2
+    expected_action: EVALUATE_ONCE_IF_D8_PASS
+  human_decisions:
+    D1: imu_gap_policy = DROP_DT_GT_0P1_AND_CONTINUE：适配器丢弃 dt≤0 或 dt>0.1 s 的样本，与 LegSA invalid_dt_policy 相同；滤波器不改，不填充，不膨胀协方差，下一样本按自身
+      dt 传播；每个 gap 记录：起止、时长、gap 期间施加的 GNSS 更新数、跨 gap 的位置/速度/航向跳变。
+    D2: 起点约定：FILE_START 为主行（方法原生，与 BY2 冻结用法一致：固定 NED 原点与初始化在首个 common GNSS1 HPPOSECEF 历元，静态校验照旧，标定窗 = IMU 文件前 5
+      s）。CONTRACT_START 仅 BY2H 作诊断行：初始化在首个 ≥ t_start(413) 的 common GNSS1 历元，yaw 取其后首个有效基线，速度零，静态校验豁免并在合约中登记为偏离，标定窗不变，传播从
+      ≥ t_start 的首个未丢弃 IMU 样本开始。若任一序列 FILE_START 静态校验失败，则该序列 CONTRACT_START 升为主行并标记（BY2O 此时补跑 CONTRACT_START，预算内）。
+    D3: BY2O 不做特殊处理；表中标注 GNSS2 pAcc 超阈值 52 历元与 status float 57 历元；输出分段表，含合约遮挡窗口段（3369.94–3411.95 主、3495.94–3508.94
+      次）。
+    D4: expected 门按观测值：BY2H HPPOSECEF 1483/1483、RAWX 1483/1483、common 1483、首端额外 HP 历元 0、间隔全 200 ms、HP=RAWX+2 ms、IMU
+      63222；BY2O 2231/2231、2231/2231、2231、0、全 200 ms、+2 ms、IMU 95860；两序列周 2408、闰秒 18。BY2 保持 1510/1509/1/63278。
+    D5: 配置四组：LC01（文献）、EXT05C（文献，诊断）、LC01-S、EXT05C-S（共享参数，值 = parameters.py 已实现：gyro PSD 8.209651003126647e-08 rad²/s
+      ×3；accel PSD = q 三轴；s=1.0308398903907543 施加于安装后的当前样本 FRD 比力）。报告规则：三序列主表文献行与 S 行都列；正文对比行取 BY2 C00 v3 航向 RMSE
+      更小的一版（LC01-S BY2 对冻结 2.994827°），三序列统一使用，另一版进补充材料；结果方向无论如何如实报。
+    D6: 几何审计照跑照记，不作准入门；失败行 status=AVAILABLE_GEOMETRIC_AUDIT_FAIL，指标照算。
+    D7: 硬停分类：读取 EXT05C-S/BY2H/FILE_START 的全率 native NAV，报告首个越界历元、最大 |位置−首历元| 与最大 |速度|；该行 native 状态 ALGORITHM_FAILURE_DIVERGED，其
+      v3/v2 科学评估槽为 NOT_RUN_ALGORITHM_FAILURE。已发生的第 17 次评估原记录 FAILED_EVALUATOR_CONSISTENCY 保留，不重试；科学槽分类不抹去历史进程调用。
+    D8: 评估前有界门（仅外部行）：native NAV 全行有限；位置相对首历元的三维欧氏范数 ≤ 1e4 m；速度三维欧氏范数 ≤ 50 m/s；高度相对首历元绝对值 ≤ 1e3 m。原生 NAV.csv 的固定
+      NED 米制坐标；全文件、不只评估窗。场地尺度约 300 m，阈值远离真实轨迹。不通过 → ALGORITHM_FAILURE_DIVERGED，不调评估器。14 次 native 全部执行并记录；已通过的 16
+      次评估回溯核对，不通过只报告不改结果。
+    D9: D2 看到结果后修订：BY2H 论文对比行 = CONTRACT_START（协议起点，与提出方法相同；窗前 IMU 中断被协议起点排除）；FILE_START 保留为方法原生诊断行，同表列出。BY2、BY2O
+      保持 FILE_START。amended_after_results_seen=true；附 BY2H LC01 与 LC01-S × FILE_START/CONTRACT_START × v3/v2 共 8
+      行 H/yaw 数值；修订方向混合：航向略差、位置更好。旧 D2、run_matrix 的执行身份保留为历史，不改原 native。
+    D10: 主配置选择结果 S：BY2 C00 v3 yaw RMSE 1.5392385536245534 deg < 2.9948274600591076 deg；三序列统一使用 S 论文行，文献 LIT 行进入补充材料，表中两版都保留。
+    D11: 先确认 A10 两行 NAV 的真实来源；仅 v2.1 序列全率 NAV 如在 c541_v21_handoff.zip（SHA256 98a77b4601b897956a6d87f5bfa92e008b584add35e48e2b22a9088ddec07585）或
+      20_FINALIZE 归档内，可核包/成员哈希后只读提取至 hext_scratch 诊断；否则 UNAVAILABLE。禁止 NAV_10HZ 或旧校准链替代。
+    D12: 本任务起：评估器进程失败、身份不等或访问审计失败 = 硬停；一致性门失败先查 native D8：无界按 D7 分类继续，有界按 GINav 先例逐行 UNAVAILABLE_EVALUATION_FAILED、正式指标空缺并继续；均不重试。原
+      capture 阈值与科学计算不变。
+manuscript_row: LC01
+supplemental_row: LC01-S
+H_EXT_04_disposition:
+  execution: CANCELLED
+  library: NOT_AUTHORIZED_FOR_EXECUTION
+  retained_library:
+  - D4 5 Hz heading provider transforms
+  - partial-update scheduling
+  - 2D relative-baseline projection
+  - synthetic library tests
+  excluded_execution:
+  - LC01-M
+  - LC01-2D
+  - S5
+  - native identity gate
+  - heading trace diagnostic
+  additional_identity_budget_issue: VOID
+  T5: AWAITING_PREREGISTRATION
+H_EXT_04L_readonly_derivation:
+  occlusion_primary_closed_s:
+  - 3369.94
+  - 3411.95
+  occlusion_secondary_closed_s:
+  - 3495.94
+  - 3508.94
+  outside: '[3186,3563] minus union of the two closed intervals'
+  source: Hash-verified frozen full-rate error series; H-EXT-03 endpoint and hash methodology
+  turn_threshold_abs_omega_deg_s: 5
+  omega_source: Frozen installed z gyro increments divided by measured dt; no trace
+  interpretation: FACTS_ONLY_NO_CAUSAL_ATTRIBUTION
+H_EXT_04L_amendment_all_metrics:
+- evaluator: v3
+  sequence_id: BY2
+  method_id: LC01
+  config: LIT
+  start_convention: FILE_START
+  evaluation_status: COMPLETED
+  geometric_audit_status: FROZEN_PRIOR_AUDIT
+  h_rmse_m: '0.0975479714305497'
+  position_3d_rmse_m: '0.10992033421878504'
+  up_rmse_m: '0.05066431825806066'
+  yaw_rmse_deg: '2.9948274600591076'
+  yaw_p95_absolute_deg: '4.968141341576708'
+  roll_rmse_deg: '1.2095627529559005'
+  pitch_rmse_deg: '1.5676244070222307'
+  body_forward_bias_m: '0.044245598415972275'
+  body_right_bias_m: '0.00021692112054168795'
+  body_up_bias_m: '-0.03516772470078074'
+  output_epoch_count: '58014'
+  matched_epoch_count: '58014'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V3_THREE_SEQUENCES.csv
+  source_sha256: 8c0535273809777ccb873ded828a5e8f4c2ef4d80ac4b244f1c8ce4f71647348
+- evaluator: v3
+  sequence_id: BY2
+  method_id: LC01-S
+  config: S
+  start_convention: FILE_START
+  evaluation_status: COMPLETED
+  geometric_audit_status: PASS
+  h_rmse_m: '0.10352490362681992'
+  position_3d_rmse_m: '0.11298219281551884'
+  up_rmse_m: '0.045250085330977255'
+  yaw_rmse_deg: '1.5392385536245534'
+  yaw_p95_absolute_deg: '2.842700226978146'
+  roll_rmse_deg: '4.243477935993363'
+  pitch_rmse_deg: '2.990040090051533'
+  body_forward_bias_m: '0.03390286321937726'
+  body_right_bias_m: '0.02443361812504349'
+  body_up_bias_m: '-0.02784923952796354'
+  output_epoch_count: '58014'
+  matched_epoch_count: '58014'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V3_THREE_SEQUENCES.csv
+  source_sha256: 8c0535273809777ccb873ded828a5e8f4c2ef4d80ac4b244f1c8ce4f71647348
+- evaluator: v3
+  sequence_id: BY2H
+  method_id: LC01
+  config: LIT
+  start_convention: FILE_START
+  evaluation_status: AVAILABLE_GEOMETRIC_AUDIT_FAIL
+  geometric_audit_status: FAIL
+  h_rmse_m: '0.09745269819180266'
+  position_3d_rmse_m: '0.11221210021012791'
+  up_rmse_m: '0.055628473363064763'
+  yaw_rmse_deg: '2.1739364356142343'
+  yaw_p95_absolute_deg: '4.4507696796692295'
+  roll_rmse_deg: '1.1863989371032602'
+  pitch_rmse_deg: '2.5158239595587855'
+  body_forward_bias_m: '0.02848007355774976'
+  body_right_bias_m: '0.00869859100365291'
+  body_up_bias_m: '-0.02893040967294242'
+  output_epoch_count: '59934'
+  matched_epoch_count: '59934'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V3_THREE_SEQUENCES.csv
+  source_sha256: 8c0535273809777ccb873ded828a5e8f4c2ef4d80ac4b244f1c8ce4f71647348
+- evaluator: v3
+  sequence_id: BY2H
+  method_id: LC01
+  config: LIT
+  start_convention: CONTRACT_START
+  evaluation_status: AVAILABLE_GEOMETRIC_AUDIT_FAIL
+  geometric_audit_status: FAIL
+  h_rmse_m: '0.0746064486934978'
+  position_3d_rmse_m: '0.08702598057754371'
+  up_rmse_m: '0.04480400773175869'
+  yaw_rmse_deg: '2.208612313835051'
+  yaw_p95_absolute_deg: '4.538322845863267'
+  roll_rmse_deg: '1.1679878463679607'
+  pitch_rmse_deg: '1.8254202884875959'
+  body_forward_bias_m: '0.028815154546869087'
+  body_right_bias_m: '0.008762410646978436'
+  body_up_bias_m: '-0.02773346909378872'
+  output_epoch_count: '59934'
+  matched_epoch_count: '59934'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V3_THREE_SEQUENCES.csv
+  source_sha256: 8c0535273809777ccb873ded828a5e8f4c2ef4d80ac4b244f1c8ce4f71647348
+- evaluator: v3
+  sequence_id: BY2H
+  method_id: LC01-S
+  config: S
+  start_convention: FILE_START
+  evaluation_status: AVAILABLE_GEOMETRIC_AUDIT_FAIL
+  geometric_audit_status: FAIL
+  h_rmse_m: '0.10670864118045774'
+  position_3d_rmse_m: '0.11421605267302865'
+  up_rmse_m: '0.040725576553664294'
+  yaw_rmse_deg: '1.7940541340876093'
+  yaw_p95_absolute_deg: '3.4608532278847117'
+  roll_rmse_deg: '4.487734181703292'
+  pitch_rmse_deg: '2.585795057656884'
+  body_forward_bias_m: '0.021070013375303627'
+  body_right_bias_m: '0.03826636353251276'
+  body_up_bias_m: '-0.01985427608182238'
+  output_epoch_count: '59934'
+  matched_epoch_count: '59934'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V3_THREE_SEQUENCES.csv
+  source_sha256: 8c0535273809777ccb873ded828a5e8f4c2ef4d80ac4b244f1c8ce4f71647348
+- evaluator: v3
+  sequence_id: BY2H
+  method_id: LC01-S
+  config: S
+  start_convention: CONTRACT_START
+  evaluation_status: AVAILABLE_GEOMETRIC_AUDIT_FAIL
+  geometric_audit_status: FAIL
+  h_rmse_m: '0.08373314985151889'
+  position_3d_rmse_m: '0.09295432836087884'
+  up_rmse_m: '0.0403641769018664'
+  yaw_rmse_deg: '1.9430028350481119'
+  yaw_p95_absolute_deg: '3.757132426132213'
+  roll_rmse_deg: '4.364596129834245'
+  pitch_rmse_deg: '2.725063976847397'
+  body_forward_bias_m: '0.021548567231533505'
+  body_right_bias_m: '0.03700271292248593'
+  body_up_bias_m: '-0.01970525681192095'
+  output_epoch_count: '59934'
+  matched_epoch_count: '59934'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V3_THREE_SEQUENCES.csv
+  source_sha256: 8c0535273809777ccb873ded828a5e8f4c2ef4d80ac4b244f1c8ce4f71647348
+- evaluator: v3
+  sequence_id: BY2O
+  method_id: LC01
+  config: LIT
+  start_convention: FILE_START
+  evaluation_status: COMPLETED
+  geometric_audit_status: PASS
+  h_rmse_m: '0.05430420090026619'
+  position_3d_rmse_m: '0.07036798614715979'
+  up_rmse_m: '0.04475161716620303'
+  yaw_rmse_deg: '2.4536970334279924'
+  yaw_p95_absolute_deg: '5.084107946490803'
+  roll_rmse_deg: '1.3651213087955518'
+  pitch_rmse_deg: '1.4638875207183732'
+  body_forward_bias_m: '0.025487541019168482'
+  body_right_bias_m: '0.004594168868675647'
+  body_up_bias_m: '-0.02871147564476309'
+  output_epoch_count: '78441'
+  matched_epoch_count: '78441'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V3_THREE_SEQUENCES.csv
+  source_sha256: 8c0535273809777ccb873ded828a5e8f4c2ef4d80ac4b244f1c8ce4f71647348
+- evaluator: v3
+  sequence_id: BY2O
+  method_id: LC01-S
+  config: S
+  start_convention: FILE_START
+  evaluation_status: COMPLETED
+  geometric_audit_status: PASS
+  h_rmse_m: '0.06046245535470896'
+  position_3d_rmse_m: '0.0724576681721276'
+  up_rmse_m: '0.03993000337367851'
+  yaw_rmse_deg: '4.015602467888004'
+  yaw_p95_absolute_deg: '6.909677894819197'
+  roll_rmse_deg: '4.074428765017513'
+  pitch_rmse_deg: '3.3006897967468083'
+  body_forward_bias_m: '0.014297762270224574'
+  body_right_bias_m: '0.013637707699183835'
+  body_up_bias_m: '-0.021388567414709507'
+  output_epoch_count: '78441'
+  matched_epoch_count: '78441'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V3_THREE_SEQUENCES.csv
+  source_sha256: 8c0535273809777ccb873ded828a5e8f4c2ef4d80ac4b244f1c8ce4f71647348
+- evaluator: v2
+  sequence_id: BY2
+  method_id: LC01
+  config: LIT
+  start_convention: FILE_START
+  evaluation_status: COMPLETED
+  geometric_audit_status: FROZEN_PRIOR_AUDIT
+  h_rmse_m: '0.16913911659210426'
+  position_3d_rmse_m: '0.3790089605253968'
+  up_rmse_m: '0.33917510432958425'
+  yaw_rmse_deg: '2.9948274600591076'
+  yaw_p95_absolute_deg: '4.968141341576708'
+  roll_rmse_deg: '1.2095627529559005'
+  pitch_rmse_deg: '1.5676244070222307'
+  body_forward_bias_m: '0.015193793113456611'
+  body_right_bias_m: '0.1439727687238375'
+  body_up_bias_m: '-0.3371422488877084'
+  output_epoch_count: '58014'
+  matched_epoch_count: '58014'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V2_THREE_SEQUENCES.csv
+  source_sha256: ae8e49a224c56a3ebf224ab32ef0b8843d6522f00aec2cd41edd25e10e7251fd
+- evaluator: v2
+  sequence_id: BY2
+  method_id: LC01-S
+  config: S
+  start_convention: FILE_START
+  evaluation_status: COMPLETED
+  geometric_audit_status: PASS
+  h_rmse_m: '0.17652071574947822'
+  position_3d_rmse_m: '0.38272800934051904'
+  up_rmse_m: '0.33958970250148685'
+  yaw_rmse_deg: '1.5392385536245534'
+  yaw_p95_absolute_deg: '2.842700226978146'
+  roll_rmse_deg: '4.243477935993363'
+  pitch_rmse_deg: '2.990040090051533'
+  body_forward_bias_m: '0.012654206244686226'
+  body_right_bias_m: '0.15079542326841622'
+  body_up_bias_m: '-0.33764391793427434'
+  output_epoch_count: '58014'
+  matched_epoch_count: '58014'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V2_THREE_SEQUENCES.csv
+  source_sha256: ae8e49a224c56a3ebf224ab32ef0b8843d6522f00aec2cd41edd25e10e7251fd
+- evaluator: v2
+  sequence_id: BY2H
+  method_id: LC01
+  config: LIT
+  start_convention: FILE_START
+  evaluation_status: AVAILABLE_GEOMETRIC_AUDIT_FAIL
+  geometric_audit_status: FAIL
+  h_rmse_m: '0.1768954441095971'
+  position_3d_rmse_m: '0.3777582160103777'
+  up_rmse_m: '0.3337802744570319'
+  yaw_rmse_deg: '2.1739364356142343'
+  yaw_p95_absolute_deg: '4.4507696796692295'
+  roll_rmse_deg: '1.1863989371032602'
+  pitch_rmse_deg: '2.5158239595587855'
+  body_forward_bias_m: '-0.0010377543963117396'
+  body_right_bias_m: '0.1515910038533376'
+  body_up_bias_m: '-0.3306142325673407'
+  output_epoch_count: '59934'
+  matched_epoch_count: '59934'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V2_THREE_SEQUENCES.csv
+  source_sha256: ae8e49a224c56a3ebf224ab32ef0b8843d6522f00aec2cd41edd25e10e7251fd
+- evaluator: v2
+  sequence_id: BY2H
+  method_id: LC01
+  config: LIT
+  start_convention: CONTRACT_START
+  evaluation_status: AVAILABLE_GEOMETRIC_AUDIT_FAIL
+  geometric_audit_status: FAIL
+  h_rmse_m: '0.16527957194800608'
+  position_3d_rmse_m: '0.37041987102894325'
+  up_rmse_m: '0.33150195165305263'
+  yaw_rmse_deg: '2.208612313835051'
+  yaw_p95_absolute_deg: '4.538322845863267'
+  roll_rmse_deg: '1.1679878463679607'
+  pitch_rmse_deg: '1.8254202884875959'
+  body_forward_bias_m: '-0.0008122055811868802'
+  body_right_bias_m: '0.15162425138451616'
+  body_up_bias_m: '-0.32955682428584476'
+  output_epoch_count: '59934'
+  matched_epoch_count: '59934'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V2_THREE_SEQUENCES.csv
+  source_sha256: ae8e49a224c56a3ebf224ab32ef0b8843d6522f00aec2cd41edd25e10e7251fd
+- evaluator: v2
+  sequence_id: BY2H
+  method_id: LC01-S
+  config: S
+  start_convention: FILE_START
+  evaluation_status: AVAILABLE_GEOMETRIC_AUDIT_FAIL
+  geometric_audit_status: FAIL
+  h_rmse_m: '0.18635526660363833'
+  position_3d_rmse_m: '0.3810609480453234'
+  up_rmse_m: '0.3323840560771343'
+  yaw_rmse_deg: '1.7940541340876093'
+  yaw_p95_absolute_deg: '3.4608532278847117'
+  roll_rmse_deg: '4.487734181703292'
+  pitch_rmse_deg: '2.585795057656884'
+  body_forward_bias_m: '-0.003229360548066997'
+  body_right_bias_m: '0.16130764491786387'
+  body_up_bias_m: '-0.3304245967878063'
+  output_epoch_count: '59934'
+  matched_epoch_count: '59934'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V2_THREE_SEQUENCES.csv
+  source_sha256: ae8e49a224c56a3ebf224ab32ef0b8843d6522f00aec2cd41edd25e10e7251fd
+- evaluator: v2
+  sequence_id: BY2H
+  method_id: LC01-S
+  config: S
+  start_convention: CONTRACT_START
+  evaluation_status: AVAILABLE_GEOMETRIC_AUDIT_FAIL
+  geometric_audit_status: FAIL
+  h_rmse_m: '0.17408779595517415'
+  position_3d_rmse_m: '0.37466447928168034'
+  up_rmse_m: '0.3317633363331191'
+  yaw_rmse_deg: '1.9430028350481119'
+  yaw_p95_absolute_deg: '3.757132426132213'
+  roll_rmse_deg: '4.364596129834245'
+  pitch_rmse_deg: '2.725063976847397'
+  body_forward_bias_m: '-0.003203971578295727'
+  body_right_bias_m: '0.16094721250306193'
+  body_up_bias_m: '-0.3298355440174935'
+  output_epoch_count: '59934'
+  matched_epoch_count: '59934'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V2_THREE_SEQUENCES.csv
+  source_sha256: ae8e49a224c56a3ebf224ab32ef0b8843d6522f00aec2cd41edd25e10e7251fd
+- evaluator: v2
+  sequence_id: BY2O
+  method_id: LC01
+  config: LIT
+  start_convention: FILE_START
+  evaluation_status: COMPLETED
+  geometric_audit_status: PASS
+  h_rmse_m: '0.15066051070538158'
+  position_3d_rmse_m: '0.36593204221949127'
+  up_rmse_m: '0.3334781402684757'
+  yaw_rmse_deg: '2.4536970334279924'
+  yaw_p95_absolute_deg: '5.084107946490803'
+  roll_rmse_deg: '1.3651213087955518'
+  pitch_rmse_deg: '1.4638875207183732'
+  body_forward_bias_m: '-0.0030556073567587273'
+  body_right_bias_m: '0.14307501959071925'
+  body_up_bias_m: '-0.33173879035646087'
+  output_epoch_count: '78441'
+  matched_epoch_count: '78441'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V2_THREE_SEQUENCES.csv
+  source_sha256: ae8e49a224c56a3ebf224ab32ef0b8843d6522f00aec2cd41edd25e10e7251fd
+- evaluator: v2
+  sequence_id: BY2O
+  method_id: LC01-S
+  config: S
+  start_convention: FILE_START
+  evaluation_status: COMPLETED
+  geometric_audit_status: PASS
+  h_rmse_m: '0.15238250109383988'
+  position_3d_rmse_m: '0.3630288503791225'
+  up_rmse_m: '0.3294988916035579'
+  yaw_rmse_deg: '4.015602467888004'
+  yaw_p95_absolute_deg: '6.909677894819197'
+  roll_rmse_deg: '4.074428765017513'
+  pitch_rmse_deg: '3.3006897967468083'
+  body_forward_bias_m: '-0.0059052410627735905'
+  body_right_bias_m: '0.14428402407586513'
+  body_up_bias_m: '-0.3275752040413335'
+  output_epoch_count: '78441'
+  matched_epoch_count: '78441'
+  coverage_ratio: '1.0'
+  source: <HEXT_ROOT>/08_AGGREGATE/HORIZONTAL_TABLE_V2_THREE_SEQUENCES.csv
+  source_sha256: ae8e49a224c56a3ebf224ab32ef0b8843d6522f00aec2cd41edd25e10e7251fd
+retained_historical_specification_fields:
+  scope: The following unchanged fields document completed H02/H03 execution; none authorize current execution.
+  fields:
+  - run_matrix
+  - bookkeeping_resolutions
+  - bounded_output_gate
+  - D9_amendment_evidence
+  - shared_parameters
+  - hard_stop

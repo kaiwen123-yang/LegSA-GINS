@@ -891,9 +891,10 @@ documentation task may rerun the Canonical numerical chain.
 ## 8. Horizontal comparison registry
 
 <!-- H_EXT_SECTION_8_BEGIN -->
-H-EXT-03：合约 v1.1 有界续作完成；新增 native 0、evaluator 10 PASS；28 科学槽为 26 成功/2 NOT_RUN_ALGORITHM_FAILURE，旧失败原记录保留。
-三序列统一 LC01-S；BY2H 论文 CONTRACT_START（结果后修订），FILE_START 诊断；完整表/遮挡/delta/FIG02S 完成，09 全率 NAV 缺失为 UNAVAILABLE。
-v2.1、原28图与 RENDER_MANIFEST 不变；完整包 <HANDOFF_ROOT>/hext_three_sequences_handoff_v2.zip，真实 SHA/CRC/两次提交见同名 validation.json。
+H-EXT-04L：合约 v1.2 只读收束；native/evaluator/trace 读取均为 0，分段补齐、段外诊断及 FIG02S/FIG02S-b 见 H_EXT_04L_RECORD.md。
+论文 LC01 采用文献配置（BY2/BY2O FILE_START，BY2H CONTRACT_START）；S 完整进补充，amended_after_results_seen=true。
+H-EXT-04 执行部分取消；仅库代码 NOT_AUTHORIZED_FOR_EXECUTION，T5 待预注册；额外身份验证预算问题作废。
+v2.1、原28图及 RENDER_MANIFEST 不变；新派生仅 <HEXT_ROOT>/11_READONLY_CLOSEOUT_H_EXT_04L/，旧 H03 证据保留。
 <!-- H_EXT_SECTION_8_END -->
 
 Protocol v2 publication uses frozen v3 evaluation-point rows; LegSA rows are the v2-chain C00 F04 and A04. External methods without compatible IMU-point NAV/v3 evidence remain visible as `Not comparable` (不可比), with method-native information structure retained. Missing comparable NAV is not a zero error and does not remove the method from the registry.
@@ -1390,9 +1391,10 @@ Generic code must not hard-code old stage IDs, old roles, old method allowlists,
 ## 18. Current next actions
 
 <!-- H_EXT_SECTION_18_BEGIN -->
-H-EXT-03：合约 v1.1 有界续作完成；新增 native 0、evaluator 10 PASS；28 科学槽为 26 成功/2 NOT_RUN_ALGORITHM_FAILURE，旧失败原记录保留。
-三序列统一 LC01-S；BY2H 论文 CONTRACT_START（结果后修订），FILE_START 诊断；完整表/遮挡/delta/FIG02S 完成，09 全率 NAV 缺失为 UNAVAILABLE。
-v2.1、原28图与 RENDER_MANIFEST 不变；完整包 <HANDOFF_ROOT>/hext_three_sequences_handoff_v2.zip，真实 SHA/CRC/两次提交见同名 validation.json。
+H-EXT-04L：合约 v1.2 只读收束；native/evaluator/trace 读取均为 0，分段补齐、段外诊断及 FIG02S/FIG02S-b 见 H_EXT_04L_RECORD.md。
+论文 LC01 采用文献配置（BY2/BY2O FILE_START，BY2H CONTRACT_START）；S 完整进补充，amended_after_results_seen=true。
+H-EXT-04 执行部分取消；仅库代码 NOT_AUTHORIZED_FOR_EXECUTION，T5 待预注册；额外身份验证预算问题作废。
+v2.1、原28图及 RENDER_MANIFEST 不变；新派生仅 <HEXT_ROOT>/11_READONLY_CLOSEOUT_H_EXT_04L/，旧 H03 证据保留。
 <!-- H_EXT_SECTION_18_END -->
 
 ### C-CLOSE freeze rule (2026-09-15)
