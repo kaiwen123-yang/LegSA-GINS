@@ -33,8 +33,14 @@ ALLOWED_STAGES = {
 }
 FIELDS = ("path", "relative_path", "size_bytes", "mtime_ns", "device", "inode",
           "nlink", "stage", "existing_sha256", "evidence_path", "evidence_sha256",
-          "basis", "classification", "row_type")
+          "basis", "classification", "row_type", "identity_evidence_path", "identity_evidence_sha256")
 KEEP_SUFFIXES = {".json", ".jsonl", ".yaml", ".yml", ".md", ".png", ".pdf", ".svg"}
+RETAINED_EXCEPTION_STAGE = "CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2"
+RETAINED_EXCEPTION_AUTHORIZATION = "P_PRIME_PROTOCOL_V2_RETAINED_BULK"
+CORE_C00_IDS = tuple(f"RUN_{index:05d}" for index in range(1, 12))
+SEQUENCE_REFERENCE_IDS = tuple(f"SEQUENCE_{sequence}_{profile}"
+                               for sequence in ("BY2H", "BY2O")
+                               for profile in ("F01", "F02", "F03", "F04", "A03", "A04", "A05", "A06", "A07", "A08", "A09"))
 
 
 def fail(message):
@@ -115,6 +121,44 @@ def _pin(path, expected):
         fail("record pin mismatch: " + str(path))
 
 
+def _validate_retained_exception(policy, protection, stages, *, verify_records):
+    exception = policy.get("protocol_v2_retained_exception")
+    if exception is None: return
+    stage = stages / RETAINED_EXCEPTION_STAGE
+    if (exception.get("authorization") != RETAINED_EXCEPTION_AUTHORIZATION
+            or exception.get("root") != str(stage / "RETAINED_RUNS")
+            or len(policy["stages"]) != 1 or policy["stages"][0]["path"] != str(stage)
+            or policy["stages"][0]["bulk_dirs"] != ["RETAINED_RUNS"]
+            or policy["output_root"] != str(stages / "CLEAN8_PROTOCOL_V3/V3R_PURGE/PROTOCOL_V2_RETAINED")):
+        fail("P-prime exception requires only the exact protocol-v2 retained root and independent audit")
+    if (len(exception.get("protected_run_ids", [])) != 33
+            or set(exception["protected_run_ids"]) != set(CORE_C00_IDS + SEQUENCE_REFERENCE_IDS)):
+        fail("P-prime must protect all 11 C00 and 22 sequence reference trees")
+    baseline = exception["immutable_protection_index"]
+    if baseline["path"] != str(stages / "CLEAN8_PROTOCOL_V3/V3R_PURGE/PROTECTION_INDEX.json"):
+        fail("P-prime must inherit the original P immutable protection index")
+    anchors = exception.get("c00_anchor_pins", [])
+    if {pin["path"] for pin in anchors} != {
+            str(stage / f"13_AGGREGATE/{version}/C00_FULL_ABLATION_ANCHORS.csv") for version in ("v2", "v3")}:
+        fail("P-prime requires both frozen C00 anchor tables")
+    if verify_records:
+        _pin(baseline["path"], baseline["sha256"])
+        original = read_json(baseline["path"])
+        if original["verification_pins"] != protection["verification_pins"]:
+            fail("P-prime immutable verification pins changed")
+        if not set(original.get("protected_paths", [])) <= set(protection.get("protected_paths", [])):
+            fail("P-prime weakened original precise path protection")
+        if not set(original.get("protected_root_objects", [])) <= set(protection.get("protected_root_objects", [])):
+            fail("P-prime weakened original root-object protection")
+        for pin in anchors:
+            _pin(pin["path"], pin["sha256"])
+            with safe(pin["path"]).open(newline="", encoding="utf-8") as stream:
+                rows = list(csv.DictReader(stream))
+            if (len(rows) != 11 or {row["run_id"] for row in rows} != set(CORE_C00_IDS)
+                    or any(row.get("case_id") != "C00_clean_normal" for row in rows)):
+                fail("P-prime C00 anchor identity mismatch")
+
+
 def validate_policy(policy, protection, *, verify_records=True):
     stages = safe(policy["stages_root"])
     if stages.name != "stages" or stages.parent.name != "clean_rebuild_202607":
@@ -159,13 +203,19 @@ def validate_policy(policy, protection, *, verify_records=True):
             if part.is_absolute() or ".." in part.parts or part == Path("."):
                 fail("bulk directory must be an exact stage-relative subdirectory")
             safe(root / part)
+    _validate_retained_exception(policy, protection, stages, verify_records=verify_records)
     return stages, quarantine, output
 
 
-def _compile_protection(protection):
+def _compile_protection(protection, policy=None):
     protection["_trees"] = {str(Path(p)) for p in protection.get("protected_paths", [])}
     protection["_trees"].update(str(Path(pin["path"])) for pin in protection.get("verification_pins", []))
     protection["_roots"] = set(protection.get("protected_root_objects", []))
+    exception = (policy or {}).get("protocol_v2_retained_exception")
+    if exception:
+        protection["_retained_exception_root"] = Path(exception["root"])
+        protection["_reference_run_trees"] = {str(Path(exception["root"]) / name)
+                                               for name in exception["protected_run_ids"]}
 
 
 def _protection_reason(path, stages, protection):
@@ -175,9 +225,14 @@ def _protection_reason(path, stages, protection):
     if trees is None: trees = set(protection.get("protected_paths", []))
     if any(str(parent) in trees for parent in (path, *path.parents)):
         return "CONTRACT_OR_DATA_PATHS_REFERENCE"
+    if any(str(parent) in protection.get("_reference_run_trees", set()) for parent in (path, *path.parents)):
+        return "P_PRIME_C00_OR_SEQUENCE_REFERENCE_TREE"
+    exception_root = protection.get("_retained_exception_root")
     parts = path.relative_to(stages).parts
     for part in parts[:-1]:
         upper = part.upper()
+        if upper == "RETAINED_RUNS" and exception_root is not None and within(path, exception_root):
+            continue
         if (re.match(r"^0[0-2](?:_|$)", upper) or
                 any(token in upper for token in ("PROVIDER", "INPUT", "RETAINED_RUNS", "HANDOFF", "RAW",
                                                  "CONFIG", "FROZEN", "BINARY", "EVALUATOR", "HASH_LOCK"))):
@@ -207,6 +262,52 @@ def _bulk_kind(path):
             "diagnostic", "innovation", "residual", "gating", "factor", "nis", "nav_error", "errors")):
         return "PER_RUN_DIAGNOSTIC_CSV"
     return None
+
+
+def _retained_bulk_kind(path):
+    """P-prime excludes diagnostic CSV even where ordinary P admitted it."""
+    name = path.name.lower()
+    if name.endswith(".gz"): name = name[:-3]
+    suffix = Path(name).suffix
+    if suffix in KEEP_SUFFIXES or any(token in name for token in ("manifest", "summary", "seal", "hash", "evaluation_result")):
+        return None
+    if suffix in (".log", ".txt", ".stdout", ".stderr") and any(token in name for token in ("stdout", "stderr")):
+        return "PER_RUN_STDOUT_STDERR"
+    if suffix == ".strace" or name.startswith("strace"):
+        return "PER_RUN_STRACE"
+    if suffix == ".nav" or name.startswith("nav_10hz") or re.search(r"(?:^|_)std(?:[._]|$)", name):
+        return "NATIVE_NAV_STD"
+    return None
+
+
+def _archive_evidence(directory, names, exception_root):
+    """Bind a gzip member to its stored-byte hash, never source_sha256."""
+    directory = Path(directory)
+    if "ARCHIVE_RECEIPT.json" not in names or not within(directory, exception_root): return {}
+    relative = directory.relative_to(exception_root)
+    if not relative.parts or not re.fullmatch(r"RUN_\d{5}", relative.parts[0]): return {}
+    if len(relative.parts) > 1 and (len(relative.parts) != 2 or not re.fullmatch(
+            r"IO_RECOVERY_\d{8}_cycle\d+_attempt\d+", relative.parts[1])):
+        return {}
+    receipt_path, manifest_path = directory / "ARCHIVE_RECEIPT.json", directory / "RUN_MANIFEST.json"
+    try: receipt, manifest = read_json(receipt_path), read_json(manifest_path)
+    except (FileNotFoundError, json.JSONDecodeError, UnicodeError): return {}
+    if (receipt.get("status") != "ARCHIVE_VERIFIED" or receipt.get("run_id") != relative.parts[0]
+            or manifest.get("run_id") != relative.parts[0] or manifest.get("dataset_id") != "BY2"
+            or manifest.get("protocol_id") != RETAINED_EXCEPTION_STAGE
+            or not re.fullmatch(r"D\d{2}_seed_\d{2}", str(manifest.get("case_id", "")))):
+        return {}
+    proof_hash, manifest_hash = digest(receipt_path), digest(manifest_path)
+    result = {}
+    for name, pin in receipt.get("retained_files", {}).items():
+        part = Path(name)
+        if part.is_absolute() or ".." in part.parts or not isinstance(pin, dict): continue
+        value, size = pin.get("sha256"), pin.get("size_bytes")
+        if (isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value)
+                and type(size) is int and size >= 0):
+            result[str(directory / part)] = (value, str(receipt_path), proof_hash, size,
+                                            str(manifest_path), manifest_hash)
+    return result
 
 
 def _seal_evidence(directory, names):
@@ -270,7 +371,7 @@ def plan(policy_path, protection_path):
         fail("existing plan must not be overwritten")
     write_json(output / "POLICY.json", policy)
     write_json(output / "PROTECTION_INDEX.json", protection)
-    _compile_protection(protection)
+    _compile_protection(protection, policy)
     evidence = _additional_evidence(policy)
     registered_roots = tuple(Path(entry["path"]) for entry in policy["stages"])
     bulk_roots = tuple(Path(entry["path"]) / relative
@@ -317,7 +418,10 @@ def plan(policy_path, protection_path):
                 by_stage[stage]["SKIPPED"] += 1
                 by_stage[stage]["EXCLUDED_DIRECTORIES"] += 1
                 reasons[reason] += 1
-            if any(within(parent, Path(s["path"])) for s in policy["stages"]):
+            exception_root = protection.get("_retained_exception_root")
+            if exception_root is not None and within(parent, exception_root):
+                evidence.update(_archive_evidence(parent, names, exception_root))
+            elif any(within(parent, Path(s["path"])) for s in policy["stages"]):
                 evidence.update(_seal_evidence(parent, names))
             for name in sorted(names + links):
                 path = parent / name
@@ -338,13 +442,18 @@ def plan(policy_path, protection_path):
                 if reason is None and entry is None: reason = "STAGE_NOT_REGISTERED_COMPLETED_WITH_VERIFIED_HANDOFF"
                 if reason is None and not any(within(path, Path(entry["path"]) / d) for d in entry["bulk_dirs"]):
                     reason = "OUTSIDE_REGISTERED_PER_CASE_OUTPUT_DIRECTORY"
-                kind = _bulk_kind(path)
+                retained = exception_root is not None and within(path, exception_root)
+                kind = _retained_bulk_kind(path) if retained else _bulk_kind(path)
                 if reason is None and kind is None: reason = "TYPE_NOT_REGISTERED_PER_CASE_BULK"
                 proof = evidence.get(str(path))
                 if reason is None and proof is None: reason = "NO_EXISTING_EXACT_PATH_OR_HASH_EVIDENCE"
+                if reason is None and retained and (len(proof) != 6 or proof[3] != info.st_size):
+                    reason = "ARCHIVE_RECEIPT_STORED_SIZE_MISMATCH"
                 if reason is None:
                     row.update(existing_sha256=proof[0], evidence_path=proof[1], evidence_sha256=proof[2],
                                basis="P1_P2_P3_PASS:" + kind, classification="CANDIDATE")
+                    if retained:
+                        row.update(identity_evidence_path=proof[4], identity_evidence_sha256=proof[5])
                 else: row["basis"] = reason
                 writers["INVENTORY.csv"].writerow(row)
                 writers["PURGE_LEDGER.csv" if reason is None else "SKIPPED.csv"].writerow(row)
@@ -368,6 +477,7 @@ def plan(policy_path, protection_path):
                "excluded_directory_bytes": None,
                "excluded_directory_bytes_status": "UNAVAILABLE_NOT_ENUMERATED",
                "inventory_scope": "REGISTERED_BULK_DIRS_WITH_PERMANENTLY_PROTECTED_SUBTREES_EXCLUDED",
+               "protocol_v2_retained_exception": policy.get("protocol_v2_retained_exception"),
                "byte_count_scope": "ENUMERATED_OBJECTS_ONLY_EXCLUDED_SUBTREE_BYTES_UNAVAILABLE",
                "skipped_reasons_unit": "ENUMERATED_SKIPPED_OBJECT_OR_EXCLUDED_DIRECTORY_ROWS",
                "protected_reference_sources": protection.get("reference_sources", []),
@@ -384,7 +494,7 @@ class Purge:
         self.policy = read_json(self.output / "POLICY.json")
         self.protection = read_json(self.output / "PROTECTION_INDEX.json")
         self.stages, self.quarantine, output = validate_policy(self.policy, self.protection, verify_records=False)
-        _compile_protection(self.protection)
+        _compile_protection(self.protection, self.policy)
         if output != self.output: fail("plan-directory binding")
         with (self.output / "PURGE_LEDGER.csv").open(newline="", encoding="utf-8") as stream:
             self.rows = list(csv.DictReader(stream))
@@ -466,6 +576,8 @@ class Purge:
             try:
                 validate_policy(self.policy, self.protection)
                 proof_pins = {(r["evidence_path"], r["evidence_sha256"]) for r in self.rows}
+                proof_pins.update((r["identity_evidence_path"], r["identity_evidence_sha256"])
+                                  for r in self.rows if r.get("identity_evidence_path"))
                 for path, expected in proof_pins: _pin(path, expected)
                 for row in self.rows:
                     source, target = safe(row["path"]), self.destination(row)
@@ -479,12 +591,13 @@ class Purge:
                     _plain_rename(source, target, info)
                     self.check_size(target, row)
                     self.event("MOVE_DONE", path=str(source))
+                if not self.rows: self.event("QUARANTINE_NOOP_ZERO_CANDIDATES", files=0, bytes=0)
                 self.event("QUARANTINE_COMPLETE", files=len(self.rows),
                            bytes=sum(int(r["size_bytes"]) for r in self.rows))
             except Exception as exc:
                 self._rollback(str(exc))
                 raise
-            return {"status": "QUARANTINE_COMPLETE", "files": len(self.rows)}
+            return {"status": "QUARANTINE_COMPLETE", "files": len(self.rows), "no_op": not self.rows}
 
     def _check_verifier_receipt(self, value):
         total = len(self.protection["verification_pins"])
@@ -606,6 +719,7 @@ class Purge:
                 with _parent_fd(parent) as (fd, name): os.rmdir(name, dir_fd=fd); os.fsync(fd)
                 self.event("RMDIR_DONE", path=str(parent))
             result = {"status": "PASS_LEDGERED_PURGE_COMPLETE", "files": len(self.rows),
+                      "no_op": not self.rows,
                       "deleted_bytes": sum(int(r["size_bytes"]) for r in self.rows),
                       "df_after": subprocess.check_output(["df", "-B1", str(self.stages)], text=True),
                       "skipped_reasons": self.summary["skipped_reasons"], "by_stage": self.summary["by_stage"]}

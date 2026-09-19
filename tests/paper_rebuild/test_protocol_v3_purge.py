@@ -3,6 +3,7 @@ import csv
 import hashlib
 import json
 from pathlib import Path
+import runpy
 import sys
 
 import pytest
@@ -347,3 +348,159 @@ def test_symlink_parent_inserted_after_plan_is_rejected(world):
     world["run"].rename(world["run"].with_name("moved"))
     world["run"].symlink_to(world["run"].with_name("moved"), target_is_directory=True)
     with pytest.raises(RuntimeError, match="symlink forbidden"): runner(world)
+
+
+def prepare_retained_exception(world, *, nav_size=purge.MIN_BYTES):
+    stage = world["stages"] / purge.RETAINED_EXCEPTION_STAGE
+    retained = stage / "RETAINED_RUNS"
+    archive = retained / "RUN_00012" / "IO_RECOVERY_20260912_cycle001_attempt01"
+    nav = put(archive / "solver/NAV_10HZ.csv.gz", b"N" * nav_size)
+    manifest = doc(archive / "RUN_MANIFEST.json", {
+        "protocol_id": purge.RETAINED_EXCEPTION_STAGE, "run_id": "RUN_00012",
+        "dataset_id": "BY2", "case_id": "D01_seed_00"})
+    receipt = doc(archive / "ARCHIVE_RECEIPT.json", {
+        "status": "ARCHIVE_VERIFIED", "run_id": "RUN_00012",
+        "retained_files": {"solver/NAV_10HZ.csv.gz": {
+            "sha256": hashed(nav), "source_sha256": "0" * 64, "size_bytes": nav_size}}})
+    baseline = doc(world["stages"] / "CLEAN8_PROTOCOL_V3/V3R_PURGE/PROTECTION_INDEX.json", world["protection"])
+    anchors = []
+    for version in ("v2", "v3"):
+        path = stage / f"13_AGGREGATE/{version}/C00_FULL_ABLATION_ANCHORS.csv"
+        put(path, ("run_id,case_id\n" + "".join(f"{run_id},C00_clean_normal\n" for run_id in purge.CORE_C00_IDS)).encode())
+        anchors.append({"path": str(path), "sha256": hashed(path)})
+    entry = dict(world["policy"]["stages"][0], path=str(stage), bulk_dirs=["RETAINED_RUNS"])
+    world["policy"]["stages"] = [entry]
+    world["policy"]["output_root"] = str(world["stages"] / "CLEAN8_PROTOCOL_V3/V3R_PURGE/PROTOCOL_V2_RETAINED")
+    world["policy"]["protocol_v2_retained_exception"] = {
+        "authorization": purge.RETAINED_EXCEPTION_AUTHORIZATION, "root": str(retained),
+        "protected_run_ids": list(purge.CORE_C00_IDS + purge.SEQUENCE_REFERENCE_IDS),
+        "immutable_protection_index": {"path": str(baseline), "sha256": hashed(baseline)},
+        "c00_anchor_pins": anchors}
+    return retained, archive, nav, manifest, receipt
+
+
+def test_pprime_nested_gzip_inherits_storage_hash_without_payload_hash(world, monkeypatch):
+    retained, archive, nav, manifest, receipt = prepare_retained_exception(world)
+    original = purge.digest
+    def forbid_payload(path):
+        assert Path(path) != nav
+        return original(path)
+    monkeypatch.setattr(purge, "digest", forbid_payload)
+    result = make_plan(world)
+    assert result["counts"]["CANDIDATE"] == 1
+    row = runner(world).rows[0]
+    assert row["existing_sha256"] == hashed(nav) and row["existing_sha256"] != "0" * 64
+    assert row["evidence_path"] == str(receipt)
+    assert row["identity_evidence_path"] == str(manifest)
+
+
+def test_pprime_keeps_all_c00_and_sequence_reference_trees(world, monkeypatch):
+    retained, *_ = prepare_retained_exception(world)
+    references = [retained / name for name in purge.CORE_C00_IDS + purge.SEQUENCE_REFERENCE_IDS]
+    for directory in references: put(directory / "solver/large.nav", b"R" * purge.MIN_BYTES)
+    original = purge.os.scandir
+    def guarded(path):
+        assert Path(path) not in references
+        return original(path)
+    monkeypatch.setattr(purge.os, "scandir", guarded)
+    result = make_plan(world)
+    assert result["counts"]["CANDIDATE"] == 1
+    assert result["skipped_reasons"]["P_PRIME_C00_OR_SEQUENCE_REFERENCE_TREE"] == 33
+
+
+def test_pprime_diagnostics_excluded_and_zero_ledger_runs_full_verifier(world):
+    retained, archive, nav, manifest, receipt = prepare_retained_exception(world, nav_size=99)
+    diagnostic = put(archive / "solver/error_series.csv.gz", b"E" * purge.MIN_BYTES)
+    data = json.loads(receipt.read_text())
+    data["retained_files"]["solver/error_series.csv.gz"] = {"sha256": hashed(diagnostic), "size_bytes": diagnostic.stat().st_size}
+    doc(receipt, data)
+    result = make_plan(world)
+    assert result["counts"].get("CANDIDATE", 0) == 0
+    assert result["skipped_reasons"]["TYPE_NOT_REGISTERED_PER_CASE_BULK"] == 1
+    run = runner(world)
+    assert run.quarantine_files()["no_op"] is True
+    assert not run.quarantine.exists()
+    assert run.verify_purge()["no_op"] is True
+    assert any(event["action"] == "VERIFIED" for event in run.events())
+    assert nav.exists() and diagnostic.exists()
+
+
+def test_pprime_cannot_weaken_pinned_original_references(world):
+    prepare_retained_exception(world)
+    world["protection"]["verification_pins"][0]["sha256"] = "1" * 64
+    with pytest.raises(RuntimeError, match="immutable verification pins changed"): make_plan(world)
+
+
+def test_pprime_requires_all_reference_ids(world):
+    prepare_retained_exception(world)
+    world["policy"]["protocol_v2_retained_exception"]["protected_run_ids"].remove("RUN_00001")
+    with pytest.raises(RuntimeError, match="all 11 C00"): make_plan(world)
+
+
+def test_pprime_never_authorizes_v21_retained_root(world):
+    prepare_retained_exception(world)
+    world["policy"]["protocol_v2_retained_exception"]["root"] = str(world["stages"] / "CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS")
+    with pytest.raises(RuntimeError, match="only the exact protocol-v2"): make_plan(world)
+
+
+def test_pprime_receipt_stored_size_mismatch_is_skipped(world):
+    _, _, nav, _, receipt = prepare_retained_exception(world)
+    data = json.loads(receipt.read_text()); data["retained_files"]["solver/NAV_10HZ.csv.gz"]["size_bytes"] += 1
+    doc(receipt, data)
+    result = make_plan(world)
+    assert result["counts"].get("CANDIDATE", 0) == 0
+    assert result["skipped_reasons"]["ARCHIVE_RECEIPT_STORED_SIZE_MISMATCH"] == 1
+
+
+def test_pprime_manifest_identity_is_rechecked_before_move(world):
+    _, _, nav, manifest, _ = prepare_retained_exception(world)
+    make_plan(world); run = runner(world)
+    data = json.loads(manifest.read_text()); data["case_id"] = "C00_clean_normal"; doc(manifest, data)
+    with pytest.raises(RuntimeError, match="record pin mismatch"): run.quarantine_files()
+    assert nav.exists()
+
+
+def test_phase_control_reads_independent_purge_round_and_persistent_forecast(tmp_path):
+    module = runpy.run_path(str(Path(__file__).parents[2] / "scripts/paper_rebuild/v3r_phase_control.py"))
+    update = module["update_control_metadata"]
+    original = tmp_path / "V3R_PURGE"
+    doc(original / "PURGE_RESULT.json", {"status": "PASS"})
+    nested = original / "PROTOCOL_V2_RETAINED"
+    doc(nested / "PLAN.json", {})
+    put(nested / "P4_VERIFIED.json", b'{"status":')
+    state = {"phase": "PURGE"}; job = {"purge_plan_dir": str(nested), "purge_round": "P_PRIME"}
+    update(state, job, tmp_path)
+    assert state["purge_subphase"] == "inventoried" and state["capacity_forecast"] == "UNAVAILABLE"
+    put(nested / "OPERATIONS.jsonl", b'{"action":"QUARANTINE_COMPLETE"}\n{"action":"VERIFIED"}\n')
+    forecast = doc(tmp_path / "00_CONTROL/CAPACITY_FORECAST.json", {
+        "matrix_remaining_allocated_bytes": 123, "aggregate_remaining_apparent_bytes": 45,
+        "available_bytes": 500, "threshold_60_percent_bytes": 300, "trigger": False})
+    update(state, job, tmp_path)
+    assert state["purge_subphase"] == "verified" and state["purge_round"] == "P_PRIME"
+    expected = json.loads(forecast.read_text())
+    assert state["capacity_forecast"] == expected
+    forecast.write_text('{"partial":')
+    update(state, job, tmp_path)
+    assert state["capacity_forecast"] == expected
+    assert state["capacity_forecast_read_status"] == "UNAVAILABLE"
+
+
+def test_phase_progress_includes_admitted_identity_without_duplicate_core(tmp_path):
+    module = runpy.run_path(str(Path(__file__).parents[2] / "scripts/paper_rebuild/v3r_phase_control.py"))
+    scratch = tmp_path / "scratch"
+    doc(scratch / "00_PREREGISTRATION/REGISTRY.json", [
+        {"run_id":"core1","domain":"CORE","method_id":"F01"},
+        {"run_id":"core4","domain":"CORE","method_id":"F04"},
+        {"run_id":"seq1","domain":"SEQUENCE","method_id":"F01"},
+        {"run_id":"add1","domain":"ADDENDUM","method_id":"F04"}])
+    doc(tmp_path / "00_CONTROL/V3R_RECONCILIATION/RECONCILIATION_MANIFEST.json", {
+        "status":"PASS_ARCHIVE_RECONCILIATION", "completed_batch_count":1,
+        "reused_runs":[{"run_id":"core1","evaluations":{"v2":{},"v3":{}}},
+                       {"run_id":"core4","evaluations":{"v2":{},"v3":{}}}],
+        "identity_native_only":[{"run_id":"seq1","evaluations":{}}]})
+    state = {"phase":"PURGE"}
+    module["update_control_metadata"](state, {"scratch":str(scratch)}, tmp_path)
+    assert state["completed_solver"] == 1 and state["completed_evaluator"] == 2
+    assert state["completed_all_solver"] == 3 and state["completed_all_evaluator"] == 4
+    assert state["progress"]["extra_sequences"]["evaluator_done"] == 0
+    assert state["completed_batches"] == 1 and state["total_batches"] == 2
