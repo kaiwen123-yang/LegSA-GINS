@@ -1,0 +1,19 @@
+schema_version: protocol_v2_publication_geometry_v1
+nominal_baseline_m: 0.350
+nominal_baseline_role: Human P-10 platform illustration and uncertainty-input nominal distance; not a fitted measurement and not the evaluator baseline.
+nominal_baseline_authority: Human task authorization 2026-09-13 and fixed project physical antenna geometry.
+imu_to_gnss1_frd_m: [0.03, 0.03, -0.30]
+antenna_order: GNSS1 right; GNSS2 left; vector GNSS2 minus GNSS1 points physically left.
+body_coordinate_frame: FRD (forward, right, down)
+source_alias: <CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_PARITY_CONTRACT.yaml
+source_sha256: b50e6d23cd26d005199793f862d8e03ab0624c273fb4ec6bd23a797393e3287e
+source_fields:
+  - evaluation.v3_human_transform_authorization
+  - evaluation.v3_lever_frd_m
+  - frozen_a1_provider.baseline_median_m
+observed_baseline_median_m: 0.356191491865984
+observed_baseline_role: Frozen BY2 A1 baseline median used only in the v3 rigid evaluation-point transform, distinct from the nominal 0.350 m diagram distance.
+v3_transform: POI_est = p_IMU + C_b_to_n * [0.03, 0.03 - observed_baseline_median_m/2, -0.30]
+display_only: true
+metric_recomputation_permitted: false
+alignment_fit_permitted: false

@@ -1,0 +1,20 @@
+{
+  "schema_version": "lc02.prior_reusability.v1",
+  "prior_implementation_found": true,
+  "code_classification": "PAPER_DERIVED_SIMPLIFICATION_NOT_FULL_REPRODUCTION",
+  "runtime_classification": "LEGACY_RUNTIME_NOT_ACTIVE_EVIDENCE",
+  "active_reusable_implementation": false,
+  "provider_reusable": false,
+  "runtime_reusable": false,
+  "performance_claims_imported": false,
+  "static_utilities_recoverable_only_after_equation_audit": true,
+  "decision": "DO_NOT_REUSE_PRIOR_YIN_ALIAS_AS_LC02",
+  "reasons": [
+    "wrong generic covariance-matching equations and thresholds",
+    "no four-branch 21-state implementation",
+    "no improved PDOP^2 Q r^2 construction",
+    "no source-closed robust state/covariance fusion chain",
+    "legacy provider boundary is not the current clean GNSS1 position-only composite",
+    "trace-capable configuration is incompatible with the LC02 online boundary"
+  ]
+}

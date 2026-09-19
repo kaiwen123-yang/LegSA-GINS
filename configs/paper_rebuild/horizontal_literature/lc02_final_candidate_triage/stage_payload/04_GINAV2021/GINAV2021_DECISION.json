@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "candidate_id": "LC02C_GINAV2021_OFFICIAL_SPP_INS_LC",
+  "decision": "SELECTED_FOR_FUTURE_FORMAL_REPRODUCTION",
+  "terminal_outcome": "PASS_LC02_FINAL_CANDIDATE_SELECTED_GINAV2021_OFFICIAL_LC",
+  "reproduction_level": "EXACT_OFFICIAL_SOFTWARE_REPRODUCTION",
+  "classification_labels": [
+    "EXACT_OFFICIAL_SOFTWARE_REPRODUCTION",
+    "STANDARD_LC_LITERATURE_BASELINE",
+    "NOT_A_NOVEL_FILTER_METHOD"
+  ],
+  "selected": true,
+  "formal_lc02_admission": false,
+  "official_core_unmodified": true,
+  "source_explicit_adapters_only": true,
+  "invented_external_pvt": false,
+  "performance_used": false,
+  "implementation_executed": false,
+  "sample_regression_executed": false,
+  "navigation_filter_run": false
+}

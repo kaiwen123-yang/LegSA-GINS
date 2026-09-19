@@ -1,0 +1,565 @@
+{
+  "all_legs_well_conditioned": true,
+  "contact_policy": {
+    "decision_signal": "foot_force_only",
+    "minimum_dwell_samples": 3,
+    "minimum_dwell_seconds": 0.012035608291625977,
+    "native_foot_order": [
+      "FR",
+      "FL",
+      "RR",
+      "RL"
+    ],
+    "off_thresholds": [
+      24.8,
+      25.2,
+      23.4,
+      24.0
+    ],
+    "on_thresholds": [
+      34.2,
+      33.8,
+      30.6,
+      32.0
+    ],
+    "transition_event_count": 4706
+  },
+  "eigenvalue_floor_m2": 1e-08,
+  "eligibility": {
+    "absolute_accel_norm_minus_9p81_at_most_mps2": 0.5,
+    "both_k_minus_1_and_k_contact": true,
+    "finite_position_velocity_required": true,
+    "gyro_norm_strictly_below_radps": 0.05,
+    "positive_finite_dt_required": true
+  },
+  "fallback_applied": false,
+  "fallback_condition_2norm": null,
+  "fallback_covariance_m2": null,
+  "fallback_elementwise_median_m2": null,
+  "fallback_final_eigenvalues_m2": null,
+  "fallback_raw_eigenvalues_m2": null,
+  "fallback_rule": "elementwise_median_then_symmetrize_project_floor",
+  "fallback_symmetric_m2": null,
+  "fallback_symmetry_error_inf": null,
+  "fallback_triggering_legs": [],
+  "filter_eligible": true,
+  "floor_dominance_statement": "ALL_RAW_MAX_EIGENVALUES_BELOW_1E-8_M2;FINAL_FLOOR_DOMINATES",
+  "floor_dominates_all_raw_leg_covariances": true,
+  "foot_speed_changes_contact_threshold_or_state": false,
+  "foot_speed_offline_fk_covariance_residual_used": true,
+  "foot_speed_online_allowed": false,
+  "foot_speed_role": "DIAGNOSTIC_ONLY",
+  "output_metric_tuned": false,
+  "per_leg": {
+    "FL": {
+      "component_center_m": [
+        2.1639149146435166e-05,
+        -2.8776572583127935e-05,
+        -1.5369927062913735e-05
+      ],
+      "covariance_center": "componentwise_raw_residual_median",
+      "covariance_denominator": "n_minus_1",
+      "eligibility_counts": {
+        "accel_gate": 8692,
+        "both_contact": 34118,
+        "eligible": 4287,
+        "finite_position_velocity": 63276,
+        "gyro_gate": 4311,
+        "pair_count": 63276,
+        "positive_finite_dt": 63276
+      },
+      "fallback_applied": false,
+      "final_condition_2norm": 1.0000000000000007,
+      "final_covariance_m2": [
+        [
+          1.0000000000000002e-08,
+          -1.550963648536927e-25,
+          3.877409121342317e-26
+        ],
+        [
+          -1.550963648536927e-25,
+          1.0000000000000008e-08,
+          -1.8611563782443123e-24
+        ],
+        [
+          3.877409121342317e-26,
+          -1.8611563782443123e-24,
+          1.0000000000000002e-08
+        ]
+      ],
+      "final_eigenvalues_m2": [
+        1e-08,
+        1e-08,
+        1e-08
+      ],
+      "final_symmetry_error_inf": 0.0,
+      "leg": "FL",
+      "native_leg_index": 1,
+      "raw_covariance_m2": [
+        [
+          1.557956889230099e-09,
+          -2.773266706789914e-11,
+          7.2634554941889104e-12
+        ],
+        [
+          -2.773266706789914e-11,
+          1.7342081676945276e-09,
+          4.768094409812525e-10
+        ],
+        [
+          7.2634554941889104e-12,
+          4.768094409812525e-10,
+          2.349989909403249e-10
+        ]
+      ],
+      "raw_symmetric_condition_2norm": 19.51908345624371,
+      "raw_symmetric_eigenvalues_m2": [
+        9.605538314147609e-11,
+        1.5561956247635392e-09,
+        1.8749130399599376e-09
+      ],
+      "residual_count": 4287,
+      "selected_covariance_m2": [
+        [
+          1.0000000000000002e-08,
+          -1.550963648536927e-25,
+          3.877409121342317e-26
+        ],
+        [
+          -1.550963648536927e-25,
+          1.0000000000000008e-08,
+          -1.8611563782443123e-24
+        ],
+        [
+          3.877409121342317e-26,
+          -1.8611563782443123e-24,
+          1.0000000000000002e-08
+        ]
+      ],
+      "symmetric_covariance_m2": [
+        [
+          1.557956889230099e-09,
+          -2.773266706789914e-11,
+          7.2634554941889104e-12
+        ],
+        [
+          -2.773266706789914e-11,
+          1.7342081676945276e-09,
+          4.768094409812525e-10
+        ],
+        [
+          7.2634554941889104e-12,
+          4.768094409812525e-10,
+          2.349989909403249e-10
+        ]
+      ],
+      "well_conditioned": true,
+      "well_conditioned_gate": {
+        "all_residuals_finite": true,
+        "final_condition_at_most_1e8": true,
+        "pre_floor_condition_at_most_1e8": true,
+        "residual_count_at_least_100": true,
+        "symmetry_error_at_most_1e_minus_12": true
+      },
+      "winsor_method": "linear",
+      "winsor_quantile_0p5_m": [
+        -7.90824672861662e-05,
+        -0.00016709097689527108,
+        -6.7905378505142e-05
+      ],
+      "winsor_quantile_99p5_m": [
+        0.00015661214090405547,
+        8.090082960604612e-05,
+        2.192666583523211e-05
+      ]
+    },
+    "FR": {
+      "component_center_m": [
+        -1.8981258604222617e-05,
+        -2.8638619765583573e-05,
+        1.4622446743051132e-05
+      ],
+      "covariance_center": "componentwise_raw_residual_median",
+      "covariance_denominator": "n_minus_1",
+      "eligibility_counts": {
+        "accel_gate": 8692,
+        "both_contact": 32484,
+        "eligible": 4285,
+        "finite_position_velocity": 63276,
+        "gyro_gate": 4311,
+        "pair_count": 63276,
+        "positive_finite_dt": 63276
+      },
+      "fallback_applied": false,
+      "final_condition_2norm": 1.0000000000000002,
+      "final_covariance_m2": [
+        [
+          1.0000000000000002e-08,
+          -6.203854594147708e-25,
+          2.0679515313825692e-25
+        ],
+        [
+          -6.203854594147708e-25,
+          9.999999999999999e-09,
+          4.1359030627651384e-25
+        ],
+        [
+          2.0679515313825692e-25,
+          4.1359030627651384e-25,
+          1e-08
+        ]
+      ],
+      "final_eigenvalues_m2": [
+        1e-08,
+        1e-08,
+        1e-08
+      ],
+      "final_symmetry_error_inf": 0.0,
+      "leg": "FR",
+      "native_leg_index": 0,
+      "raw_covariance_m2": [
+        [
+          1.4945422267718982e-09,
+          8.571387850921667e-11,
+          -3.322559108637181e-11
+        ],
+        [
+          8.571387850921667e-11,
+          1.5500070813043767e-09,
+          -3.9951238076681096e-10
+        ],
+        [
+          -3.322559108637181e-11,
+          -3.9951238076681096e-10,
+          1.8766773900233214e-10
+        ]
+      ],
+      "raw_symmetric_condition_2norm": 21.487003948236296,
+      "raw_symmetric_eigenvalues_m2": [
+        7.908719165586985e-11,
+        1.4537830560581398e-09,
+        1.6993467993645976e-09
+      ],
+      "residual_count": 4285,
+      "selected_covariance_m2": [
+        [
+          1.0000000000000002e-08,
+          -6.203854594147708e-25,
+          2.0679515313825692e-25
+        ],
+        [
+          -6.203854594147708e-25,
+          9.999999999999999e-09,
+          4.1359030627651384e-25
+        ],
+        [
+          2.0679515313825692e-25,
+          4.1359030627651384e-25,
+          1e-08
+        ]
+      ],
+      "symmetric_covariance_m2": [
+        [
+          1.4945422267718982e-09,
+          8.571387850921667e-11,
+          -3.322559108637181e-11
+        ],
+        [
+          8.571387850921667e-11,
+          1.5500070813043767e-09,
+          -3.9951238076681096e-10
+        ],
+        [
+          -3.322559108637181e-11,
+          -3.9951238076681096e-10,
+          1.8766773900233214e-10
+        ]
+      ],
+      "well_conditioned": true,
+      "well_conditioned_gate": {
+        "all_residuals_finite": true,
+        "final_condition_at_most_1e8": true,
+        "pre_floor_condition_at_most_1e8": true,
+        "residual_count_at_least_100": true,
+        "symmetry_error_at_most_1e_minus_12": true
+      },
+      "winsor_method": "linear",
+      "winsor_quantile_0p5_m": [
+        -0.00014257680756922132,
+        -0.00015509764916498802,
+        -1.832254829459895e-05
+      ],
+      "winsor_quantile_99p5_m": [
+        9.030545139560697e-05,
+        6.524360326663689e-05,
+        6.0067792361495006e-05
+      ]
+    },
+    "RL": {
+      "component_center_m": [
+        1.937565940532404e-05,
+        2.6724912170164594e-05,
+        -8.229794161498938e-07
+      ],
+      "covariance_center": "componentwise_raw_residual_median",
+      "covariance_denominator": "n_minus_1",
+      "eligibility_counts": {
+        "accel_gate": 8692,
+        "both_contact": 34366,
+        "eligible": 4302,
+        "finite_position_velocity": 63276,
+        "gyro_gate": 4311,
+        "pair_count": 63276,
+        "positive_finite_dt": 63276
+      },
+      "fallback_applied": false,
+      "final_condition_2norm": 1.0000000000000009,
+      "final_covariance_m2": [
+        [
+          1.0000000000000004e-08,
+          -8.271806125530277e-25,
+          -3.101927297073854e-25
+        ],
+        [
+          -8.271806125530277e-25,
+          1.0000000000000005e-08,
+          -5.169878828456423e-25
+        ],
+        [
+          -3.101927297073854e-25,
+          -5.169878828456423e-25,
+          1e-08
+        ]
+      ],
+      "final_eigenvalues_m2": [
+        1e-08,
+        1e-08,
+        1e-08
+      ],
+      "final_symmetry_error_inf": 0.0,
+      "leg": "RL",
+      "native_leg_index": 3,
+      "raw_covariance_m2": [
+        [
+          1.6945216229760701e-09,
+          9.491861630674773e-11,
+          5.5453606715179395e-11
+        ],
+        [
+          9.491861630674773e-11,
+          1.6188676792862457e-09,
+          3.8344474593682435e-10
+        ],
+        [
+          5.5453606715179395e-11,
+          3.8344474593682435e-10,
+          1.8103608852050156e-10
+        ]
+      ],
+      "raw_symmetric_condition_2norm": 21.41067041058341,
+      "raw_symmetric_eigenvalues_m2": [
+        8.457902448699398e-11,
+        1.598952749356132e-09,
+        1.8108936169396912e-09
+      ],
+      "residual_count": 4302,
+      "selected_covariance_m2": [
+        [
+          1.0000000000000004e-08,
+          -8.271806125530277e-25,
+          -3.101927297073854e-25
+        ],
+        [
+          -8.271806125530277e-25,
+          1.0000000000000005e-08,
+          -5.169878828456423e-25
+        ],
+        [
+          -3.101927297073854e-25,
+          -5.169878828456423e-25,
+          1e-08
+        ]
+      ],
+      "symmetric_covariance_m2": [
+        [
+          1.6945216229760701e-09,
+          9.491861630674773e-11,
+          5.5453606715179395e-11
+        ],
+        [
+          9.491861630674773e-11,
+          1.6188676792862457e-09,
+          3.8344474593682435e-10
+        ],
+        [
+          5.5453606715179395e-11,
+          3.8344474593682435e-10,
+          1.8103608852050156e-10
+        ]
+      ],
+      "well_conditioned": true,
+      "well_conditioned_gate": {
+        "all_residuals_finite": true,
+        "final_condition_at_most_1e8": true,
+        "pre_floor_condition_at_most_1e8": true,
+        "residual_count_at_least_100": true,
+        "symmetry_error_at_most_1e_minus_12": true
+      },
+      "winsor_method": "linear",
+      "winsor_quantile_0p5_m": [
+        -0.00010333118506998473,
+        -7.052530399585061e-05,
+        -3.85061080594451e-05
+      ],
+      "winsor_quantile_99p5_m": [
+        0.00014026639327791238,
+        0.00016119364496239072,
+        3.855482971921495e-05
+      ]
+    },
+    "RR": {
+      "component_center_m": [
+        -1.963068886193242e-05,
+        2.7412121534255846e-05,
+        1.0602750657728865e-06
+      ],
+      "covariance_center": "componentwise_raw_residual_median",
+      "covariance_denominator": "n_minus_1",
+      "eligibility_counts": {
+        "accel_gate": 8692,
+        "both_contact": 35359,
+        "eligible": 4298,
+        "finite_position_velocity": 63276,
+        "gyro_gate": 4311,
+        "pair_count": 63276,
+        "positive_finite_dt": 63276
+      },
+      "fallback_applied": false,
+      "final_condition_2norm": 1.0000000000000009,
+      "final_covariance_m2": [
+        [
+          1e-08,
+          -8.271806125530277e-25,
+          2.0679515313825692e-25
+        ],
+        [
+          -8.271806125530277e-25,
+          1e-08,
+          -2.3781442610899546e-24
+        ],
+        [
+          2.0679515313825692e-25,
+          -2.3781442610899546e-24,
+          9.999999999999995e-09
+        ]
+      ],
+      "final_eigenvalues_m2": [
+        1e-08,
+        1e-08,
+        1e-08
+      ],
+      "final_symmetry_error_inf": 0.0,
+      "leg": "RR",
+      "native_leg_index": 2,
+      "raw_covariance_m2": [
+        [
+          1.6084878141694221e-09,
+          -4.297665546372827e-11,
+          6.106299645230775e-11
+        ],
+        [
+          -4.297665546372827e-11,
+          1.5250324207958231e-09,
+          -3.2598847718163624e-10
+        ],
+        [
+          6.106299645230775e-11,
+          -3.2598847718163624e-10,
+          1.5967702336856555e-10
+        ]
+      ],
+      "raw_symmetric_condition_2norm": 19.718792622043654,
+      "raw_symmetric_eigenvalues_m2": [
+        8.41918971386242e-11,
+        1.5488428010622267e-09,
+        1.6601625601329604e-09
+      ],
+      "residual_count": 4298,
+      "selected_covariance_m2": [
+        [
+          1e-08,
+          -8.271806125530277e-25,
+          2.0679515313825692e-25
+        ],
+        [
+          -8.271806125530277e-25,
+          1e-08,
+          -2.3781442610899546e-24
+        ],
+        [
+          2.0679515313825692e-25,
+          -2.3781442610899546e-24,
+          9.999999999999995e-09
+        ]
+      ],
+      "symmetric_covariance_m2": [
+        [
+          1.6084878141694221e-09,
+          -4.297665546372827e-11,
+          6.106299645230775e-11
+        ],
+        [
+          -4.297665546372827e-11,
+          1.5250324207958231e-09,
+          -3.2598847718163624e-10
+        ],
+        [
+          6.106299645230775e-11,
+          -3.2598847718163624e-10,
+          1.5967702336856555e-10
+        ]
+      ],
+      "well_conditioned": true,
+      "well_conditioned_gate": {
+        "all_residuals_finite": true,
+        "final_condition_at_most_1e8": true,
+        "pre_floor_condition_at_most_1e8": true,
+        "residual_count_at_least_100": true,
+        "symmetry_error_at_most_1e_minus_12": true
+      },
+      "winsor_method": "linear",
+      "winsor_quantile_0p5_m": [
+        -0.00014870204016998123,
+        -6.807702198162457e-05,
+        -3.795548840311136e-05
+      ],
+      "winsor_quantile_99p5_m": [
+        9.173265078946256e-05,
+        0.00015735617429288255,
+        3.647537579947661e-05
+      ]
+    }
+  },
+  "primary_scale": 1.0,
+  "reference_tuned": false,
+  "schema_version": "hartley.fk_proxy_covariance.v1",
+  "sensitivity_scales": [
+    0.25,
+    1.0,
+    4.0
+  ],
+  "source_role": "INPUT_ONLY_FK_PROXY_COVARIANCE_AUDIT",
+  "status": "FROZEN_BY2_INPUT_ONLY_FK_PROXY_COVARIANCE",
+  "valid_recorded_median_fallback": false,
+  "well_conditioned_gate": {
+    "maximum_final_condition_2norm": 100000000.0,
+    "maximum_pre_floor_condition_2norm": 100000000.0,
+    "maximum_symmetry_error": 1e-12,
+    "minimum_residual_count": 100
+  },
+  "winsor_method": "linear",
+  "winsor_quantiles": [
+    0.005,
+    0.995
+  ]
+}

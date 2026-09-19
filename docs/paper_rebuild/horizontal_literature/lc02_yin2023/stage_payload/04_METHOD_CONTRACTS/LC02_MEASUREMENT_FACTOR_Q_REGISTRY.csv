@@ -1,0 +1,7 @@
+Q,solution_description,accuracy_min_m,accuracy_max_m,bounds_as_printed,ambiguity_policy,provenance_class
+1,Fixed integer,0.00,0.15,inclusive_as_table,"require solution-class semantic match and unique interval; otherwise reject",PAPER_DIRECT
+2,Converged float or noise Fixed integer,0.05,0.40,inclusive_as_table,"overlap with Q1 is not resolved by range alone",PAPER_DIRECT
+3,Converging float,0.20,1.00,inclusive_as_table,"require solution-class semantic match and unique interval",PAPER_DIRECT
+4,Converging float,0.50,2.00,inclusive_as_table,"overlap with Q3 requires semantic disambiguation",PAPER_DIRECT
+5,DGPS,1.00,5.00,inclusive_as_table,"overlap with Q6 requires semantic disambiguation",PAPER_DIRECT
+6,DGPS,2.00,10.00,inclusive_as_table,"overlap with Q5 requires semantic disambiguation",PAPER_DIRECT

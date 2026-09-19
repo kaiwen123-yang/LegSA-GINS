@@ -1,0 +1,2 @@
+component,run_id,dataset_id,case_id,case_family,degradation_id,method_id,effective_configuration_id,technical_status,reason,solver_terminal_status,v3_evaluation_status,v2_evaluation_status,retry_count,scratch_retained,partial_archive_retained
+batch_008_archive,RUN_01963,BY2,D20_seed_06,position_value,D20,A03,AB0111,FAILED_TECHNICAL_ARCHIVE,[Errno 12] Cannot allocate memory,COMPLETED,COMPLETED,COMPLETED,0,True,True

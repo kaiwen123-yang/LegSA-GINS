@@ -95,3 +95,6 @@ The independent aggregate cross-check passed. These values do not establish univ
 - Historical performance results, providers, runtimes, rows, aggregates, and figures were not reused.
 - Formal results were freshly regenerated from the current hash-locked raw inputs.
 - No paper figures were generated; the stage PR must remain unmerged pending human review.
+
+
+> Reference terminology erratum (2026-09-13): the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit). This annotation supersedes the reference-origin wording in the retained historical text; numerical evidence and historical decisions are unchanged. See `docs/paper_rebuild/REFERENCE_WORDING_ERRATUM_20260913.md`.

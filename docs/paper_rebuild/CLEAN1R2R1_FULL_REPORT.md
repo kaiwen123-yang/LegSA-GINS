@@ -15,3 +15,6 @@ The final four-method run used one executable, one common input, one window, and
 Exact archived evaluator crosschecks passed for all current outputs after the four-output seal. Fixposition trace was opened only during this offline evaluation. It is a same-source reference, not independent ground truth. Historical approximate `1.979` and `1.997` yaw values remain quarantined by metric identity and were not gates or tuning targets.
 
 Clean-normal interpretation is deliberately narrow: final_v23 was restored, strong equals the final_v23 implementation contract, all four methods ran under one public contract, proposed LegSA modules truly activated, and no catastrophic normal-condition regression occurred. This stage does not claim universal superiority, degradation robustness, independent-truth accuracy, multi-dataset generalization, or paper-final readiness.
+
+
+> Reference terminology erratum (2026-09-13): the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit). This annotation supersedes the reference-origin wording in the retained historical text; numerical evidence and historical decisions are unchanged. See `docs/paper_rebuild/REFERENCE_WORDING_ERRATUM_20260913.md`.

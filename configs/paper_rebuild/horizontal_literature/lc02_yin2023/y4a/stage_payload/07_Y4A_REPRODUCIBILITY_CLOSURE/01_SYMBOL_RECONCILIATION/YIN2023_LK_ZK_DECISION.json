@@ -1,0 +1,34 @@
+{
+  "schema_version": "lc02.y4a.lk_zk.v2",
+  "method_id": "LC02_YIN2023_RAEKF",
+  "paper_facts": {
+    "equation_2_measurement_symbol": "Z_k",
+    "equation_6_residual": "bar_V_k = H_k Xhat_k - Z_k; stage of Xhat_k is not qualified",
+    "equation_8_innovation": "Vhat_k = L_k - H_k Xhat_(k/k-1)",
+    "equation_8_description": "L_k is the observation vector",
+    "rkf_update_measurement_symbol": "Z_k",
+    "equation_9_objective_residual": "bar_V_k",
+    "V_hat_k_versus_bar_V_k_relation_stated": false
+  },
+  "versions_compared": [
+    "YIN2023_VOR_28_PAGE",
+    "YIN2023_V2_24_PAGE"
+  ],
+  "versions_semantically_identical": true,
+  "author_response_checked": true,
+  "author_response_result": "L_k is the observation vector; no equality with Z_k is stated",
+  "cited_source_search_closed_equality": false,
+  "allowed_decision_enum": [
+    "SOURCE_CLOSED_TYPOGRAPHICAL_ALIAS",
+    "DISTINCT_SYMBOLS_WITH_CLOSED_RELATION",
+    "UNRESOLVED"
+  ],
+  "decision": "UNRESOLVED",
+  "source_state": "PAPER_AND_AUTHOR_RESPONSE_DO_NOT_EQUATE_L_k_AND_Z_k",
+  "L_k_equals_Z_k": null,
+  "permitted_nonfaithful_policy": "L_k_EQUALS_Z_k",
+  "permitted_policy_provenance": "PAPER_DERIVED_POLICY_BASELINE",
+  "formal_reproduction_use_authorized": false,
+  "hard_gate": "L_k_versus_Z_k_closed",
+  "hard_gate_pass": false
+}

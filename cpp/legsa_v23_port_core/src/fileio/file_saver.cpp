@@ -117,7 +117,15 @@ void writeInitializationCovarianceDiagonal(std::ostream& out, const PortOptions&
         out << ", ";
       }
       first = false;
-      out << value * value;
+      const double variance = value * value;
+      if (std::isfinite(variance)) {
+        out << variance;
+      } else {
+        // A failed covariance-health diagnostic must remain valid JSON.
+        // The explicit FAILED status and first-failure time carry the error;
+        // null prevents a non-standard inf/NaN token masquerading as evidence.
+        out << "null";
+      }
     }
   }
   out << "]";
@@ -155,6 +163,9 @@ void writeActualSolverInputPaths(std::ostream& out, const PortOptions& options) 
   };
   add("propagation_imu", options.imu_path);
   add("gnss_position_receiver_velocity_dual_yaw", options.gnss_path);
+  if (options.dual_antenna_measurement_model == "baseline3d") {
+    add("dual_antenna_baseline3d", options.baseline3d_path);
+  }
   if (options.raw_doppler_config.enable_raw_doppler) {
     add("raw_doppler_velocity", options.raw_doppler_config.raw_doppler_factor_path);
   }
@@ -178,6 +189,9 @@ void writeActualSolverInputPaths(std::ostream& out, const PortOptions& options) 
 void writeActualSolverInputRoles(std::ostream& out, const PortOptions& options) {
   out << "{\"propagation_imu\": \"source_backed_propagation\", "
       << "\"gnss_position_receiver_velocity_dual_yaw\": \"validity_gated_measurements\"";
+  if (options.dual_antenna_measurement_model == "baseline3d") {
+    out << ", \"dual_antenna_baseline3d\": \"three_dimensional_gnss_baseline_measurement\"";
+  }
   if (options.raw_doppler_config.enable_raw_doppler) {
     out << ", \"raw_doppler_velocity\": \"source_backed_auxiliary_velocity\"";
   }
@@ -730,6 +744,26 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << "  \"go2_readiness_go2_position_truth_claim\": false,\n"
       << "  \"go2_readiness_go2_yaw_truth_claim\": false,\n"
       << "  \"lsim_oim\": " << (options.lsim_oim ? "true" : "false") << ",\n";
+  if (options.dual_antenna_measurement_model == "baseline3d") {
+    out << "  \"dual_antenna_measurement_model\": \"baseline3d\",\n"
+        << "  \"baseline3d_path\": \"" << escapeJson(options.baseline3d_path) << "\",\n"
+        << "  \"baseline3d_length_m\": " << options.baseline3d_length_m << ",\n"
+        << "  \"baseline3d_k_b\": " << options.baseline3d_k_b << ",\n"
+        << "  \"baseline3d_attempt_count\": " << options.baseline3d_counts.attempts << ",\n"
+        << "  \"baseline3d_accept_count\": " << options.baseline3d_counts.accepted << ",\n"
+        << "  \"baseline3d_reject_count\": " << options.baseline3d_counts.rejected << ",\n"
+        << "  \"baseline3d_invalid_count\": " << options.baseline3d_counts.invalid << ",\n"
+        << "  \"baseline3d_missing_exact_time_count\": " << options.baseline3d_counts.missing << ",\n"
+        << "  \"baseline3d_scalar_yaw_observation_used\": false,\n"
+        << "  \"baseline3d_formal_a1_counter_alias\": \"yaw_and_dual_yaw_counters\",\n"
+        << "  \"baseline3d_frame_contract\": \"observation_NED_equals_Cbn_NED_no_additional_rotation\",\n"
+        << "  \"baseline3d_nis_definition\": \"(dz-Hdx)^T(HPH^T+R_QA)^-1(dz-Hdx)\",\n"
+        << "  \"baseline3d_source_aware_innovation_definition\": \"existing_policy_uses_dz_dof3\",\n"
+        << "  \"baseline3d_nonbasic_nis_threshold\": 11.34,\n"
+        << "  \"baseline3d_nis_gate_enabled\": "
+        << (!options.enable_basic_dual_yaw_baseline && options.yaw_scheme_C_enabled ? "true" : "false")
+        << ",\n";
+  }
   out << "  \"actual_solver_input_paths\": ";
   writeActualSolverInputPaths(out, options);
   out << ",\n  \"actual_solver_input_roles\": ";
@@ -907,6 +941,15 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
       << "  \"clean_input_provenance_label\": \"" << escapeJson(options.clean_input_provenance_label) << "\",\n"
       << "  \"config_policy_evidence_status\": \"" << escapeJson(options.config_policy_evidence_status) << "\",\n"
       << "  \"propagation_count\": " << options.propagation_count << ",\n"
+      << "  \"cov_health_fail_count\": " << options.cov_health_fail_count << ",\n"
+      << "  \"cov_health_status\": \"" << escapeJson(options.cov_health_status) << "\",\n"
+      << "  \"cov_health_first_failure_time\": ";
+  if (options.cov_health_fail_count == 0) {
+    out << "null";
+  } else {
+    out << options.cov_health_first_failure_time;
+  }
+  out << ",\n"
       << "  \"measurement_update_count\": " << options.measurement_update_count << ",\n"
       << "  \"position_update_count\": " << options.position_update_count << ",\n"
       << "  \"velocity_update_count\": " << options.velocity_update_count << ",\n"

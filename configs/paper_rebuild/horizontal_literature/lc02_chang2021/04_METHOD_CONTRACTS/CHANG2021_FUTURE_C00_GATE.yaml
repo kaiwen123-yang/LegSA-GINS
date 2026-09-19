@@ -1,0 +1,20 @@
+schema: lc02_chang2021.future_c00_gate.v1
+terminal_status: NO_GO_LC02_CHANG2021_FSTCKF_AS_FORMAL_PRIMARY
+formal_lc02_admission: false
+implementation_authorized: false
+production_solver_authorized: false
+C00_authorized: false
+representative_cases_authorized: false
+comparison_run_authorized: false
+required_before_reconsideration:
+  - exact attributable definition of Eq12 non-square inverse and 6D-to-15D lift
+  - exact beta1/beta2 to all 15 fading-factor semantics
+  - full state dynamics noise initialization feedback and reset
+  - exact sliding-window startup and nonfinite policies
+  - exact Takagi-Sugeno firing normalization aggregation and clipping
+  - exact BY2 metric-position covariance conversion and physical point contract
+forbidden_selection_sources:
+  - trace
+  - final navigation error
+  - old runtime performance
+  - LC01 or other method outputs

@@ -1,0 +1,97 @@
+{
+  "adapter_identity": "GO2_HIGH_LEVEL_FK_LIKE_PROXY",
+  "canonical_filter_eligible": true,
+  "canonical_foot_order": [
+    "FL",
+    "FR",
+    "RL",
+    "RR"
+  ],
+  "complete_record_count": 63277,
+  "data_identity": "REAL_BY2_COMPLETE_RECORD_PREFIX_63277",
+  "data_mode": "real_by2_raw",
+  "data_status": "REAL_BY2_COMPLETE_RECORD_PREFIX",
+  "filter_run_executed": false,
+  "finite_position_rate": 1.0,
+  "finite_speed_rate": 1.0,
+  "kinematic_pose_rotation_role": "identity_placeholder_unused_by_point_contact",
+  "median_position_body_by_native_leg_m": {
+    "FL": [
+      0.17825116217136383,
+      0.12140750885009766,
+      -0.29606249928474426
+    ],
+    "FR": [
+      0.1727190464735031,
+      -0.1241423487663269,
+      -0.2954949140548706
+    ],
+    "RL": [
+      -0.19494140148162842,
+      0.14592672884464264,
+      -0.2933535873889923
+    ],
+    "RR": [
+      -0.197317972779274,
+      -0.1481158584356308,
+      -0.29361316561698914
+    ]
+  },
+  "native_flu_geometry_checks": {
+    "front_x_positive": true,
+    "left_y_positive": true,
+    "rear_x_negative": true,
+    "right_y_negative": true
+  },
+  "native_flu_geometry_sanity_pass": true,
+  "native_foot_order": [
+    "FR",
+    "FL",
+    "RR",
+    "RL"
+  ],
+  "native_to_canonical_mapping": [
+    1,
+    0,
+    3,
+    2
+  ],
+  "orientation_covariance_status": "NONINFORMATIVE_PLACEHOLDER_NOT_USED",
+  "position_discontinuity_audit": {
+    "FL": {
+      "candidate_discontinuity_count": 1,
+      "input_only_step_norm_threshold_m": 0.042122316116437554,
+      "maximum_position_step_m": 0.09854427902194372
+    },
+    "FR": {
+      "candidate_discontinuity_count": 2,
+      "input_only_step_norm_threshold_m": 0.04152115972939477,
+      "maximum_position_step_m": 0.13445105364419574
+    },
+    "RL": {
+      "candidate_discontinuity_count": 2,
+      "input_only_step_norm_threshold_m": 0.03999792027688051,
+      "maximum_position_step_m": 0.12709934905280496
+    },
+    "RR": {
+      "candidate_discontinuity_count": 1,
+      "input_only_step_norm_threshold_m": 0.0416677862091435,
+      "maximum_position_step_m": 0.10014944026272689
+    }
+  },
+  "raw_joint_encoder_urdf_fk": false,
+  "schema_version": "hartley.by2_fk_proxy_audit.v1",
+  "raw_source_complete": false,
+  "terminal_status": "PASS_LSE01_H0_H2_HARTLEY_SOURCE_METHOD_AND_BY2_CONTRACT_READY",
+  "time_alignment": {
+    "contract": "same_message_timestamp_as_imu",
+    "message_count": 63277,
+    "position_to_imu_max_offset_seconds": 0.0,
+    "speed_to_imu_max_offset_seconds": 0.0
+  },
+  "timestamped_record_starts": 63278,
+  "trailing_incomplete_record_count": 1,
+  "trailing_record_used_online": false,
+  "translation_covariance_policy": "FROZEN_BY2_INPUT_ONLY_FK_PROXY_COVARIANCE",
+  "translation_covariance_status": "FROZEN_INPUT_ONLY_ROBUST_POLICY"
+}

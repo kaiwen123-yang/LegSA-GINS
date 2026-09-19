@@ -1,0 +1,161 @@
+{
+  "schema_version": "lc02.y4a.status.v2",
+  "method_id": "LC02_YIN2023_RAEKF",
+  "outcome": "OUTCOME_B",
+  "terminal_status": "NO_GO_LC02_YIN2023_RAEKF_AS_FORMAL_PRIMARY",
+  "Y0_Y3_audit_closure_status_preserved": "PASS_LC02_YIN2023_Y0_Y3_METHOD_NON_DUPLICATION_AND_BY2_CONTRACT_READY",
+  "formal_lc02_admission": false,
+  "implementation_authorized": false,
+  "production_solver_authorized": false,
+  "C00_authorized": false,
+  "representative_cases_authorized": false,
+  "comparison_run_authorized": false,
+  "start_head": "5805a7cecb1b6d72c7bb16264b460ab353dd6a25",
+  "end_head": "5805a7cecb1b6d72c7bb16264b460ab353dd6a25",
+  "end_head_semantics": "PRECOMMIT_ARTIFACT_BUILD_ANCHOR",
+    "audit_code_hash": "087c6678cd5514d1e4a1c11b9c6c435f87a3f1a6b877ea75e618ea182da13b29",
+  "immutability": {
+    "original_Y0_Y3_file_count": 47,
+    "original_manifest_sha256": "2a20c89f0fec71c241cc736680f78991e1fff9cc086c17e5fb644fab2e2e239f",
+    "appended_file_count": 32,
+    "final_stage_file_count": 79,
+    "original_files_rehashed_before_and_after": true,
+    "original_files_changed": 0
+  },
+    "source_identities": {
+    "yin_vor_sha256": "b67f07908671bbda54ffd8a3981f7e365ff97f387698d2b558305044f11eec04",
+    "yin_v2_sha256": "198da0283cabddc97446bf9cf9138d8b7ee0b1d1a78f9bdbbe8265c711302f0c",
+        "peer_review_author_response_jina_transport_sha256": "46c6bd33f49aab98ea0b9333f1ddce3298991ae55422ed440806a7d2dca313ce",
+        "peer_review_hash_scope": "JINA_UTF8_MARKDOWN_TRANSPORT_BYTES_NOT_ORIGINAL_PDF",
+        "official_article_jina_transport_sha256": "26784270d28e208184610db5bfcb1dadae4c810885c7f5d52f5240e5acb73426",
+        "official_article_hash_scope": "JINA_UTF8_MARKDOWN_TRANSPORT_BYTES_NOT_PAPER_BINARY",
+    "niu2022_sha256": "96b953d6ebd819a620948767c90cc78ad544efe8b00a5bf9ab9ae328bcdec487",
+    "CN117647251A_sha256": "83069a9fa7441468ade83c9295e8ab440b0942506229dfbbfc22382e76934edd",
+    "TCRTKINS_commit": "13e8fa1a988f673c43af70746de1bcbeb1ec2ea3",
+        "TCRTKINS_tree": "00159f613872e6e9286ddfb5bead2c11b8d6c82f",
+        "KFGINS_gi_engine_sha256": "f6295267e0d1a48d41284c4fe7ea25cba7225367c4fd2e03f65e5e334ded4260",
+        "KFGINS_insmech_frozen_Y0_Y3_sha256": "d378260635afeceb3593ac3bf65a3c02c62efd1d0a742a1851db338eee88c30a"
+  },
+  "hard_gates": {
+    "base_21_state_model_closed": true,
+    "position_only_measurement_closed": true,
+    "improved_R_closed": true,
+    "AKF_statistic_update_unique": false,
+    "L_k_versus_Z_k_closed": false,
+    "standardized_residual_unique": false,
+    "IGGIII_matrix_construction_unique": false,
+    "zero_weight_policy_unique": false,
+    "RAEKF_fusion_reset_unique": false,
+    "no_trace_or_performance_based_completion": true
+  },
+  "branch_reproduction_levels": {
+    "YIN2023_EKF": "FAITHFUL_ALGORITHM_REPRODUCTION",
+    "YIN2023_AKF": "FAITHFUL_MODULE_REPRODUCTION",
+    "YIN2023_RKF": "PAPER_DERIVED_POLICY_BASELINE",
+    "YIN2023_RAEKF": "PAPER_DERIVED_POLICY_BASELINE"
+  },
+  "oracle_status": {
+    "type": "DETERMINISTIC_STANDALONE_LINEAR_ALGEBRA",
+    "count": 28,
+    "passed": 28,
+    "source_uniqueness_proved": false
+  },
+    "scientific_access_counters": {
+    "BY2_open_count": 0,
+    "raw_data_open_count": 0,
+    "trace_open_count": 0,
+    "reference_open_count": 0,
+    "native_output_open_count": 0,
+    "prior_runtime_output_open_count": 0,
+    "LC01_scientific_content_or_runtime_open_count": 0,
+    "Canonical_541_scientific_content_or_runtime_open_count": 0,
+        "internal_comparison_method_stage_or_runtime_open_count": 0
+    },
+    "scientific_access_counter_semantics": "NEW_Y4A_SCIENTIFIC_OPENS_ONLY",
+    "authorized_frozen_Y0_Y3_input_contract_fact_reuse": {
+        "fact_count": 4,
+        "facts": {
+            "GNSS1_epoch_and_Q_identity": "1510/1510; Q=1",
+            "PDOP_min": 1.13,
+            "PDOP_max": 1.74,
+            "per_axis_covariance_variation": true
+        },
+        "old_performance_runtime_trace_reuse_count": 0
+    },
+    "source_access_counts": {
+        "public_author_upload_full_text_inspected_count": 4,
+        "request_only_author_upload_metadata_inspected_count": 1
+    },
+    "administrative_validation_inventory": {
+        "original_files_content_read_for_integrity_count": 47,
+        "original_structured_JSON_YAML_CSV_parsed_count": 36,
+        "Y4A_structured_JSON_YAML_CSV_parsed_count": 22,
+        "augmented_stage_structured_JSON_YAML_CSV_parsed_count": 58,
+        "Y0_status_gate_documents_semantically_checked_count": 1,
+        "Canonical_files_hash_read_only_count": 2,
+        "authorized_frozen_Y0_Y3_input_contract_fact_reuse_count": 4,
+        "new_frozen_Y0_Y3_scientific_content_open_count": 0,
+        "old_performance_runtime_trace_fact_reuse_count": 0
+  },
+  "execution_counters": {
+    "navigation_filter_run_count": 0,
+    "Yin_solver_run_count": 0,
+    "C00_run_count": 0,
+    "comparison_run_count": 0,
+    "LC01_run_count": 0,
+    "Hartley_run_count": 0,
+    "EXT01_EXT04_run_count": 0,
+    "HORIZONTAL18_run_count": 0,
+    "other_method_run_count": 0,
+    "Canonical_541_run_count": 0,
+    "evaluator_run_count": 0
+  },
+    "validation": {
+    "exact_79_file_union": true,
+    "structured_formats_valid": true,
+    "tracked_stage_parity": true,
+    "no_symlink_special_pdf_zip": true,
+    "scoped_tests_pass": true,
+    "original_47_administratively_hashed": true,
+        "canonical_2_administratively_hashed": true
+    },
+    "uncommitted_draft_repair_history": {
+        "initial_draft_32_file_aggregate_sha256": "4798a559ccf95dd357fe4eb37f7610069e2576c3a864c926b5be2cd74203891a",
+        "first_correction_32_file_aggregate_sha256": "2f0cd31647f83bc11ff5810ef7927cea9cd9704ef4d7195d67efa773e35ca1a8",
+        "second_correction_32_file_aggregate_sha256": "bbc2b34d2f31767e778b00dea6f8ab4e491ab3cbc98dec5354ce79dadb4031b3",
+        "third_correction_32_file_aggregate_sha256": "f073ed1d1964814683d10cf4a761a88b97408496109664adbbd9d566b8067ee6",
+        "final_post_review_correction_32_file_aggregate_semantics": "EMITTED_BY_GUARDED_REPAIR_RESULT_NOT_EMBEDDED_TO_AVOID_SELF_REFERENTIAL_MANIFEST",
+        "publication_semantics": "FINAL_GUARDED_UNCOMMITTED_DRAFT_CORRECTION_NOT_FIRST_WRITE"
+    },
+  "durable_validation": {
+    "scoped": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=src python3 -m pytest -q tests/paper_rebuild/test_lc02_yin2023_y4a.py",
+      "result": "PASS_16_PASSED",
+      "return_code": 0,
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0
+    },
+    "combined_lc02": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=src python3 -m pytest -q tests/paper_rebuild/test_lc02_yin2023_y0_y3.py tests/paper_rebuild/test_lc02_yin2023_y4a.py",
+      "result": "PASS_36_PASSED",
+      "return_code": 0,
+      "passed": 36,
+      "failed": 0,
+      "skipped": 0
+    },
+    "full_paper_rebuild": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=src python3 -m pytest -q tests/paper_rebuild",
+      "result": "EXPECTED_UNCHANGED_TWO_STALE_FAILURES_ONLY",
+      "return_code": 1,
+      "passed": 1082,
+      "failed": 2,
+      "skipped": 20,
+      "new_failures": 0,
+      "failure_node_ids": [
+        "tests/paper_rebuild/test_horizontal_phase4_c00.py::test_preflight_hash_only_collision_and_paper_closure_when_available",
+        "tests/paper_rebuild/test_horizontal_phase5_c00.py::test_dirty_untracked_source_snapshot_is_hash_complete_and_explicit"
+      ]
+    }
+  }
+}

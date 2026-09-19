@@ -1,0 +1,16 @@
+{
+  "schema": "lc02_chang2021.eq12_inverse.v1",
+  "printed_H_shape": [6, 15],
+  "printed_expression": "H^-1 (E[e e^T] - beta R - H Q H^T) (H^T)^-1",
+  "ordinary_inverse_exists": false,
+  "decision": "UNRESOLVED_NON_SQUARE_INVERSE_AND_STATE_LIFT",
+  "gate_result": "FAIL",
+  "candidate_completions_not_selected": [
+    "Moore-Penrose H^T on both sides, which populates only the velocity/position subspace",
+    "an arbitrary generalized/right inverse of H whose nullspace terms can affect unobserved states",
+    "observable-state coordinate selection H=[S,0] followed by unit fading on unobserved states",
+    "a reduced 6-state N followed by an unspecified lift to 15 states"
+  ],
+  "source_closure": "No Chang equation, attributable official code, or cited source identifies Chang's intended completion.",
+  "implementation_authorized": false
+}

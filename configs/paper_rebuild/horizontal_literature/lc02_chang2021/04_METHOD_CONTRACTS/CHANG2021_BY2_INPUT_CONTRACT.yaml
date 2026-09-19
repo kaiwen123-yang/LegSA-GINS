@@ -1,0 +1,86 @@
+schema: lc02_chang2021.by2_input.v1
+data_mode: REAL_BY2_INPUT_AVAILABILITY_AUDIT
+selected_sources:
+  imu:
+    alias: BY2_GO2_BODY
+    fields: [stamp.sec, stamp.nanosec, imu_state.gyroscope, imu_state.accelerometer]
+    raw_frame: FLU
+    authenticated_record_count: 63277
+    first_stamp_ns: 1772784044887078145
+    last_stamp_ns: 1772784350085048802
+    duration_ns: 305197970657
+    full_bytes: 92352512
+    full_sha256: 95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278
+    authenticated_prefix_bytes: 92351234
+    authenticated_prefix_sha256: 03cd96cd65d7f5af30f6a0c78d37f07ae4d32c65e78531807db7192454dff097
+    unterminated_tail_bytes_excluded: 1278
+    provenance: BY2_INSTANTIATION
+  gnss:
+    alias: BY2_FIX_ROOT/gnss1-raw.csv
+    identity: ONE_GNSS1_SOLUTION_STREAM_COMPOSITE_PVT_PLUS_NAV_COV
+    bytes: 27874623
+    sha256: 5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027
+    pvt_count: 1510
+    nav_cov_count: 1510
+    exact_same_itow_join_count: 1510
+    first_itow_ms: 460873800
+    last_itow_ms: 461175600
+    itow_step_ms: 200
+    pvt_first_stamp_ns: 1772784055943332317
+    pvt_last_stamp_ns: 1772784357731925784
+    fix_type_values: [3]
+    gnss_fix_ok_values: [1]
+    diff_soln_values: [1]
+    carr_soln_values: [2]
+    position_cov_valid_count: 1510
+    velocity_cov_valid_count: 1510
+    position_cov_psd_count: 1510
+    velocity_cov_psd_count: 1510
+    pDOP_min_median_max: [1.13, 1.24, 1.74]
+    hAcc_m_min_median_max: [0.014, 0.014, 0.020]
+    vAcc_m_min_median_max: [0.010, 0.012, 0.037]
+    sAcc_mps_min_median_max: [0.071, 0.0935, 0.118]
+    position_std_N_m_min_median_max: [0.004409915433902583, 0.0077502082121051, 0.01542558675910479]
+    position_std_E_m_min_median_max: [0.003068809110011329, 0.005189058319471739, 0.014213191389492686]
+    position_std_D_m_min_median_max: [0.007336342235095827, 0.012106090929482108, 0.03717161593180555]
+    velocity_std_N_mps_min_median_max: [0.08557627087946162, 0.10936094943060509, 0.19482553811451167]
+    velocity_std_E_mps_min_median_max: [0.07206273271662876, 0.08887761958388432, 0.18138979954679182]
+    velocity_std_D_mps_min_median_max: [0.0725560089000035, 0.08074939779439219, 0.10905813828056254]
+    provenance: BY2_INSTANTIATION
+time_identity:
+  pvt_nav_cov_join: same_iTOW
+  imu_association_candidate: outer_acquisition_stamp_ns
+  pvt_epochs_within_go2_authenticated_coverage: 1471
+  first_overlap_offset_from_go2_start_ns: 11056254172
+  last_overlap_margin_before_go2_end_ns: 152542379
+  future_association_policy: CURRENTLY_UNKNOWN_MUST_BE_FROZEN_BEFORE_C00
+availability_decision:
+  position: PASS
+  velocity: PASS
+  position_covariance: PASS
+  velocity_covariance: PASS
+  go2_body_gyro_accelerometer: PASS
+  exact_paper_measurement_unit_instantiation: FAIL
+  overall_formal_BY2_compatibility_gate: FAIL
+forbidden_roles:
+  GNSS2: false
+  dual_receiver_baseline: false
+  receiver_or_status_yaw: false
+  RAWX_SFRBX_RTCM_semantic_decode_or_use: false
+  Go2_quaternion_RPY_position_velocity_yaw_or_foot_fields: false
+  trace_reference_provider_runtime_or_method_outputs: false
+access_truth:
+  serialized_multiplexed_GNSS1_rows_scanned: 30038
+  serialized_nonselected_data_cells_materialized_by_initial_DictReader: true
+  forbidden_message_payload_decode_count: 0
+  forbidden_field_semantics_used_count: 0
+  subsequent_selected_payload_decode: PVT_NAV_COV_ONLY
+  go2_full_source_bytes_streamed_for_hash_and_record_selection: true
+  go2_forbidden_fields_semantically_parsed: false
+  navigation_filter_run_count: 0
+  C00_run_count: 0
+  comparison_run_count: 0
+official_field_source:
+  document: u-blox F9 LAP 1.30 Interface Description UBX-22005157 R01
+  url: https://content.u-blox.com/sites/default/files/documents/u-blox-F9-LAP-1.30_InterfaceDescription_UBX-22005157.pdf
+  nav_cov_semantics: full symmetric position and velocity covariance in local NED

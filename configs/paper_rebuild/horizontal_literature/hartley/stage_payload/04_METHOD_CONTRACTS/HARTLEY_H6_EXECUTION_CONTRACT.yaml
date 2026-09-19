@@ -1,0 +1,130 @@
+schema_version: hartley.h6.execution.v1
+contract_id: LSE01_H6_REAL_DATA_GAUGE_AND_OBSERVABILITY
+contract_status: FROZEN_BEFORE_NONZERO_EXECUTION
+task_start_head: 4b25fa6337f4760557f501f102a38a1ac65c766e
+method_id: LSE01_HARTLEY_CONTACT_AIDED_INEKF
+backend_id: HARTLEY_IJRR2020_REPORTED_BACKEND
+process_profile: GO2_IMU_ALLAN_90MIN_RECOVERED_V1_PLUS_PAPER_NATIVE_CONTACT_EQ61
+sigma_fk_m: 0.010
+
+input_identity:
+  data_mode: real_by2_raw
+  dataset_id: REAL_BY2_COMPLETE_RECORD_PREFIX_63277
+  raw_sha256: 95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278
+  complete_prefix_sha256: 03cd96cd65d7f5af30f6a0c78d37f07ae4d32c65e78531807db7192454dff097
+  provider_cache_sha256: c169e26d66f35fe200bb17a695353cd2d751482df1cd97996a7a8afff8662065
+  contact_event_input_ledger_sha256: 8e80cde9b90ade49753d8fd97e554af3c032c664d1d336f663838cbb68204358
+  state_rows: 63277
+  propagation_calls: 63276
+  h5_primary_anchor: 08_BY2_NATIVE/01_PRIMARY_GO2_ALLAN_EQ61_FK10MM
+  h5_primary_anchor_reused: true
+  provider_cache_duplicated_per_member: false
+
+gauge_ensemble:
+  initial_alpha_degrees: [-150, -100, -50, 0, 50, 100, 150]
+  nonzero_native_run_count: 6
+  zero_member_source: FROZEN_H5_PRIMARY
+  zero_replay_policy: ONE_TEMPORARY_FULL_REPLAY_ONLY_FOR_RUNNER_PARITY
+  only_intended_difference: INITIAL_GLOBAL_YAW_GAUGE
+  controlled_variables:
+    - input_bytes
+    - provider_cache
+    - timestamps
+    - imu_values
+    - contact_indicators_and_event_order
+    - process_and_measurement_parameters
+    - initial_roll_pitch_velocity_position_biases
+    - initial_covariance_spectrum
+    - numerical_tolerances
+    - backend_equations
+
+gauge_sign_and_multiplication:
+  gravity_world_m_per_s2: [0.0, 0.0, -9.81]
+  normalized_world_gravity_axis_e_g: [0.0, 0.0, -1.0]
+  Q_alpha: Exp_SO3_of_e_g_times_alpha
+  preregistered_sign_test: log_SO3_Q_alpha_dot_e_g_equals_alpha
+  mean_action: LEFT_MULTIPLICATION
+  R_alpha: Q_alpha_times_R_zero
+  v_alpha: Q_alpha_times_v_zero
+  p_alpha: Q_alpha_times_p_zero
+  d_i_alpha: Q_alpha_times_d_i_zero
+  gyro_and_accelerometer_biases: UNCHANGED_BODY_FRAME_BLOCKS
+  expected_conventional_positive_Z_euler_yaw_offset_degrees: NEGATIVE_ALPHA
+  sign_selected_from_nonzero_results: false
+  h3_h4_relation: SAME_LEFT_ACTION_WITH_H6_ALPHA_EXPLICITLY_DEFINED_ABOUT_NEGATIVE_Z_GRAVITY_AXIS
+
+initial_covariance:
+  action: J_alpha_P_zero_J_alpha_transpose
+  ordering: [rotation, velocity, position, sorted_active_contacts, gyro_bias, accelerometer_bias]
+  J_group_blocks: Q_alpha_repeated_for_rotation_velocity_position_and_every_contact
+  J_bias_blocks: identity_6
+  application_point: AFTER_INITIAL_EQ32_CONTACT_AUGMENTATION_BEFORE_FIRST_OUTPUT_ROW
+  alpha_zero_implementation: EXPLICIT_COMPLETE_NUMERICAL_NOOP
+
+runner_parity_gate:
+  required_before_tolerance_freeze: true
+  required_before_nonzero_run: true
+  state_rows: EXACT_BYTES
+  contact_event_ledger: EXACT_BYTES
+  contact_state: EXACT_BYTES
+  nis_and_innovation: EXACT_BYTES
+  covariance_checkpoint_index: EXACT_BYTES
+  covariance_npz: CANONICAL_FLOAT64_ARRAY_BYTES
+  runtime_config_summary_identity_fields_excluded: true
+  failure_terminal: BLOCKED_LSE01_H6_ZERO_REPLAY_PARITY_FAILURE
+  temporary_replay_payload_deleted_after_report_freeze: true
+
+threading:
+  OMP_NUM_THREADS: 1
+  MKL_NUM_THREADS: 1
+  OPENBLAS_NUM_THREADS: 1
+  NUMEXPR_NUM_THREADS: 1
+  maximum_independent_nonzero_processes: 6
+  epoch_parallelism_per_filter_sequence: 1
+  observability_maximum_independent_processes: 8
+
+observability_window_selection:
+  allowed_inputs: [provider_timestamps, frozen_contact_identity_sets, gyro, accelerometer]
+  forbidden_selection_inputs: [trace, GNSS, onboard_RPY_or_yaw, filter_position_error, singular_values, rank]
+  maximal_constant_contact_and_dimension_segments: true
+  minimum_duration_seconds: 0.20
+  minimum_distinct_measurement_times: 20
+  roles_per_available_contact_count: [earliest, longest, highest_input_excitation]
+  tie_breaking: [earlier_start_time, lexical_contact_set_identity]
+  deduplicate_roles: true
+  include_initial_four_contact_static_window_when_eligible: true
+  zero_contact_role: PROPAGATION_ONLY_FLIGHT_DIAGNOSTIC_NOT_GENERIC_RANK_EVIDENCE
+  selection_freeze_before_svd: true
+
+observability_rank:
+  raw_structural_threshold_absolute_floor: 1.0e-12
+  raw_structural_threshold_relative_to_sigma_max: 1.0e-9
+  threshold_multipliers: [0.1, 1.0, 10.0]
+  normalized_singular_values_role: CONDITIONING_DIAGNOSTIC_ONLY
+  ideal_known_gauge_dimension: 4
+  ideal_expected_generic_nullity: 4
+  ideal_gauge: [gravity_axis_rotation, global_translation_x, global_translation_y, global_translation_z]
+  bias_augmented_extra_nullity_interpretation: WEAK_OR_UNEXCITED_NOT_GAUGE_WITHOUT_PROOF
+
+nis:
+  update_contact_set: current_contact_mask_bitand_bitnot_add_mask
+  degrees_of_freedom: three_times_survivor_corrected_contact_count
+  pool_across_contact_counts: false
+  zero_post_lifecycle_contact_epochs: PROPAGATION_ONLY_FLIGHT_DIAGNOSTIC
+  row_zero_initialization_is_flight: false
+  pure_add_augmentation_only_is_flight: false
+  chi_square_interval: CENTRAL_95_PERCENT
+  p_value: UPPER_TAIL_SURVIVAL_FUNCTION
+  sigma_fk_tuning_in_h6: false
+
+forbidden_access_and_execution:
+  reference_open_count: 0
+  trace_open_count: 0
+  GNSS_input_count: 0
+  Go2_onboard_pose_or_yaw_input_count: 0
+  LegSA_output_input_count: 0
+  EXT_output_input_count: 0
+  absolute_yaw_RMSE_computed: false
+  absolute_position_RMSE_computed: false
+  h7_executed: false
+  ext06_executed: false

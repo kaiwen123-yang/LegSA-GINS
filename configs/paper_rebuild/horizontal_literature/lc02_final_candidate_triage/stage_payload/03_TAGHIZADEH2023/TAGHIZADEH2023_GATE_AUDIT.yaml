@@ -1,0 +1,49 @@
+schema_version: 1
+candidate_id: LC02B_TAGHIZADEH2023_AHINF_CKF
+paper:
+  title: Low-cost integrated INS/GNSS using adaptive H-infinity Cubature Kalman Filter
+  doi: 10.1017/S0373463322000583
+source_boundary: ABSTRACT_AND_BIBLIOGRAPHIC_METADATA_ONLY_FULL_ALGORITHM_SOURCE_UNAVAILABLE
+gates:
+  - gate: G1
+    result: PASS
+    evidence: Cambridge metadata closes the published family DOI authors and 19-page Version-of-Record identity.
+  - gate: G2
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: The abstract states fusion with a commercial GNSS solution but does not close the executable solution-level loosely coupled interface.
+  - gate: G3
+    result: PASS
+    evidence: At family level adaptive H-infinity square-root CKF is structurally distinct from LC01 two-receiver invariant rigid-vector filtering; no performance value is used.
+  - gate: G4
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: Nominal state and mechanization details are unavailable.
+  - gate: G5
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: Process noise H-infinity design parameters and discretization details are unavailable.
+  - gate: G6
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: GNSS course or heading source measurement frame physical point lever arm wrap timing and validity policies are unavailable.
+  - gate: G7
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: Complete prediction square-root update and covariance lifecycle are unavailable.
+  - gate: G8
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: Adaptive and H-infinity equations coupling order thresholds and numerical branch semantics cannot be inferred from the abstract.
+  - gate: G9
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: Initialization feedback reset restart and termination policies are unavailable.
+  - gate: G10
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: BY2 course or heading source frame wrap speed validity startup and covariance mappings cannot be closed.
+  - gate: G11
+    result: PASS
+    evidence: This triage abstains from completing any missing semantic using reference errors historical output or performance reports.
+  - gate: G12
+    result: FAIL
+    evidence: Neither exact nor faithful algorithm reproduction is possible from the accessible attributed sources.
+summary:
+  pass_count: 3
+  fail_count: 1
+  not_evaluated_source_unavailable_count: 8
+  all_pass_required: true
+decision: NO_GO

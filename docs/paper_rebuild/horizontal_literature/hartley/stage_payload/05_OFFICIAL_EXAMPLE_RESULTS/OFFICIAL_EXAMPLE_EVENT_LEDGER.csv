@@ -1,0 +1,20 @@
+event_id,example,event_class,event_name,count,unit,evidence_source,status,notes
+E001,build,BUILD,cmake_configure,1,invocation,CMake configure return code 0,PASS,1.49 seconds
+E002,build,BUILD,cmake_build,1,invocation,CMake build return code 0,PASS,20.94 seconds
+E003,kinematics,EXECUTION,official_executable_run,1,invocation,official process return code 0,PASS,0.22 seconds and 4032 KiB maximum RSS
+E004,kinematics,INPUT,all_rows,59976,rows,hashed official input file,OBSERVED,No row used as external numerical truth
+E005,kinematics,INPUT,imu_rows,19992,rows,official parser plus out-of-tree harness,OBSERVED,19992 propagation calls
+E006,kinematics,INPUT,contact_rows,19992,rows,official parser plus out-of-tree harness,OBSERVED,39984 individual contact indicator values
+E007,kinematics,INPUT,kinematic_rows,19992,rows,official parser plus out-of-tree harness,OBSERVED,39984 point measurements supplied
+E008,kinematics,FILTER,stacked_kinematic_correction_calls,19780,calls,public-API out-of-tree harness,OBSERVED,26741 active already-augmented point rows used
+E009,kinematics,CONTACT_LIFECYCLE,contact_add,34,operations,public map before/after CorrectKinematics,OBSERVED,Eq. 31-32 augmentation path
+E010,kinematics,CONTACT_LIFECYCLE,contact_remove,33,operations,public map before/after CorrectKinematics,OBSERVED,Eq. 30 removal path
+E011,kinematics,FINAL_STATE,active_contacts,1,contacts,public InEKF API,OBSERVED,Final X is 6x6 and P is 18x18
+E012,kinematics,NUMERICAL_CHECK,finite_state_and_covariance,1,check,out-of-tree full-precision harness,PASS,Minimum symmetrized covariance eigenvalue 2.7730288943281978e-07
+E013,landmarks,EXECUTION,official_executable_run,1,invocation,official process return code 0,PASS,0.01 seconds and 4032 KiB maximum RSS
+E014,landmarks,INPUT,all_rows,20192,rows,hashed official input file,OBSERVED,No row used as external numerical truth
+E015,landmarks,INPUT,imu_rows,19992,rows,official parser plus out-of-tree harness,OBSERVED,Upstream atoi parser yields zero accepted propagation calls
+E016,landmarks,INPUT,landmark_rows,200,rows,official parser plus out-of-tree harness,OBSERVED,421 landmark measurements supplied
+E017,landmarks,FILTER,landmark_correction_calls,200,calls,public-API out-of-tree harness,OBSERVED,420 prior/already-estimated landmark rows used
+E018,landmarks,FILTER,landmark_add,1,operation,public map before/after CorrectLandmarks,OBSERVED,Final estimated landmark count is one
+E019,landmarks,NUMERICAL_CHECK,finite_state_and_covariance,1,check,out-of-tree full-precision harness,PASS,Minimum symmetrized covariance eigenvalue 9.27596869229605e-06

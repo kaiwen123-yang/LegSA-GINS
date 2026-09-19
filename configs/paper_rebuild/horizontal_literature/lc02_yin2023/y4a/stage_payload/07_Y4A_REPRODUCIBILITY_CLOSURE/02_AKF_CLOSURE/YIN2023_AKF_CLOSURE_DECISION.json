@@ -1,0 +1,38 @@
+{
+  "schema_version": "lc02.y4a.akf_decision.v2",
+  "branch_id": "YIN2023_AKF",
+  "questions": {
+    "residual_defined": true,
+    "bar_residual_glyph_preserved": true,
+    "printed_covariance_equation_transcribed_exactly": true,
+    "right_Phi_index_explicitly_printed": false,
+    "residual_state_stage_defined": false,
+    "residual_sign_defined": true,
+    "norm_defined": true,
+    "denominator_symbol_defined": true,
+    "denominator_dimensionally_coherent": false,
+    "normalization_defined": false,
+    "threshold_defined": true,
+    "alpha_piecewise_defined": true,
+    "alpha_gain_defined": true,
+    "posterior_covariance_defined": true,
+    "zero_trace_policy_defined": false,
+    "nonfinite_policy_defined": false
+  },
+  "source_outcome": "VOR_AND_V2_IDENTICAL_NO_REPAIR",
+  "source_state": "AUTHOR_RESPONSE_CONFIRMS_RESIDUAL_BUT_PRESERVES_Xhat_k_STAGE_AND_STATE_TRACE_WORDING",
+  "paper_derived_Phi_k_minus_1_covariance_mapping_selected": false,
+  "related_patent_outcome": "POST_PUBLICATION_RELATED_NOT_EXACT_AND_COMPETING_DENOMINATOR_SEMANTICS",
+  "hard_gate": "AKF_statistic_update_unique",
+  "hard_gate_pass": false,
+  "allowed_decision_enum": [
+    "PAPER_DIRECT_CLOSED",
+    "CITED_STANDARD_COMPLETION_CLOSED",
+    "MULTIPLE_PLAUSIBLE_COMPLETIONS",
+    "UNRESOLVED"
+  ],
+  "decision": "MULTIPLE_PLAUSIBLE_COMPLETIONS",
+  "reproduction_level": "FAITHFUL_MODULE_REPRODUCTION",
+  "implementation_authorized": false,
+  "formal_lc02_admission_effect": "FAIL"
+}

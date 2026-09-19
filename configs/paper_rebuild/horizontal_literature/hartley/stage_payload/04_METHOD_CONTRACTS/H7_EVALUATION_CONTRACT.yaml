@@ -1,0 +1,133 @@
+schema_version: hartley.h7.evaluation.v1
+contract_id: LSE01_H7_GAUGE_INVARIANT_RELATIVE_EVALUATION
+task_start_head: dee32bea365e4a3b478a35d4dd198894375c5dab
+method_id: LSE01_HARTLEY_CONTACT_AIDED_INEKF
+backend_id: HARTLEY_IJRR2020_REPORTED_BACKEND
+recovery_identity:
+  recovery_id: LSE01_H7R2_PATH_ALIAS_RECOVERY
+  role: ADMINISTRATIVE_PATH_ALIAS_AND_PROVENANCE_RECOVERY_NOT_NEW_SCIENCE
+  predecessor_h7_immutable: true
+  predecessor_h7r1_immutable: true
+  terminal_unchanged: true
+terminal_policy:
+  required_point_and_frame_gate: true
+  unresolved_terminal: BLOCKED_LSE01_H7_REFERENCE_POINT_OR_FRAME_IDENTITY_UNRESOLVED
+  metrics_after_unresolved_gate: NOT_EVALUATED
+
+reference_access_freeze:
+  reference_open_count: 0
+  trace_open_count: 0
+  reference_rows_read: 0
+  contract_must_be_frozen_before_reference_open: true
+  trace_stat_or_hash_before_point_frame_gate: false
+
+time_contract:
+  base_time_seconds: 1772784000.0
+  evaluation_window_seconds: [66.0, 340.0]
+  target_rate_hz: 10
+  target_grid_formula: t_j = 66.0 + 0.1*j; integer j >= 0; last t_j <= 340.0
+  expected_target_count: 2741
+  horizons_seconds: [1.0, 5.0, 10.0]
+  position_interpolation: LINEAR
+  velocity_interpolation: LINEAR
+  orientation_interpolation: QUATERNION_SLERP_OR_ALGEBRAICALLY_EQUIVALENT_CONTINUOUS_SO3
+  reference_yaw_interpolation: EXACT_EVALUATOR_UNWRAP_BEFORE_LINEAR_INTERPOLATION
+  valid_bracketing_required: true
+  extrapolation: FORBIDDEN
+
+reference_identity:
+  resolver: configs/paper_rebuild/DATA_PATHS.CLEAN3R4.local.yaml
+  resolver_role: DECLARATIVE_ONLY_NOT_OPENED_BY_H7R1
+  local_path_config_opened: false
+  reference_path_resolution: NOT_PERFORMED_DUE_TO_PRE_REFERENCE_POINT_FRAME_BLOCKER
+  raw_root_alias: RAW_ROOT
+  relative_path: BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv
+  raw_lock_role: EVALUATION_ONLY_REFERENCE
+  declared_size_bytes: 1081436
+  declared_sha256: ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c
+  declared_line_count: 6041
+  reference_role: FIXPOSITION_DERIVED_SAME_SOURCE_OFFLINE_REFERENCE
+  same_source: true
+  independent_ground_truth: false
+  trace_used_online: false
+
+exact_evaluator:
+  identity: evaluate_nav_trace_kfgins_v2.py
+  configured_role: ARCHIVED_EXACT_EVALUATOR_IMPLEMENTATION_ONLY
+  sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  ordinary_absolute_rmse_path_allowed_for_hartley: false
+  scalar_trace_fields: [time, latitude, longitude, ellipsoidal_height, roll, pitch, yaw]
+  reference_velocity: NOT_AVAILABLE
+  reference_full_so3_attitude: NOT_AVAILABLE
+  yaw_contract: UNWRAP_ENU_DEGREES_THEN_INTERPOLATE_THEN_WRAP360_90_MINUS_YAW_ENU
+  position_contract: WGS84_LLA_TO_ECEF_THEN_LOCAL_FRAME
+
+hartley_reporting_frame:
+  hartley_attitude: R_WB_ACTIVE_BODY_TO_WORLD
+  hartley_body_frame: GO2_BODY_FLU
+  hartley_position_physical_point: GO2_BODY_IMU_ORIGIN_USED_BY_REPRODUCED_INEKF
+  world_up_to_ned_shaped_reporting_rotation:
+    - [1.0, 0.0, 0.0]
+    - [0.0, -1.0, 0.0]
+    - [0.0, 0.0, -1.0]
+  determinant: 1.0
+  right_handed: true
+  round_trip: Q_TRANSPOSE_Q_EQUALS_IDENTITY
+  gravity_mapping: WORLD_UP_NEGATIVE_Z_GRAVITY_TO_NED_SHAPED_POSITIVE_Z_GRAVITY
+  creates_observed_north: false
+
+physical_point_and_frame_gate:
+  hartley_point_closed: true
+  hartley_attitude_frame_closed: true
+  reference_position_point_identity: UNRESOLVED_FROM_FROZEN_PROJECT_EVIDENCE
+  reference_attitude_body_frame_identity: UNRESOLVED_FROM_FROZEN_PROJECT_EVIDENCE
+  fixposition_poi_body_to_go2_body_imu_transform: ABSENT
+  project_measurement_lever_arm_m: [0.03, 0.03, -0.30]
+  project_measurement_lever_role: SOLVER_GNSS_MEASUREMENT_LEVER_ARM_NOT_EVALUATOR_POINT_TRANSFORM
+  fitted_transform_allowed: false
+  trajectory_error_may_infer_transform: false
+  gate_closed_for_metrics: false
+
+branches:
+  primary: H5_PRIMARY_GO2_ALLAN_EQ61_FK10MM
+  nonselective:
+    - H5_FK05MM_SENSITIVITY
+    - H5_FK20MM_SENSITIVITY
+    - H5_PAPER_TABLE1_PROCESS_REGRESSION_WITH_GO2_FK_PROXY
+  parameter_selection_from_reference: false
+  branch_promotion_from_reference: false
+  one_primary_derived_alignment_for_all_branches: true
+  branch_specific_alignment: false
+
+forbidden_operations:
+  time_search: false
+  offset_search: false
+  frame_search: false
+  axis_search: false
+  sign_search: false
+  scale_alignment: false
+  roll_pitch_alignment: false
+  vertical_axis_tilt_fit: false
+  trajectory_wide_procrustes_or_umeyama: false
+  dynamic_correction: false
+  epoch_deletion_based_on_error: false
+  piecewise_alignment: false
+  branch_specific_fitting: false
+  filter_rerun: false
+  hartley_synthetic_validation_rerun: false
+
+metric_contract:
+  relative_pose_horizons_seconds: [1.0, 5.0, 10.0]
+  relative_pose_convention: inverse(Delta_T_reference) times Delta_T_estimate
+  full_window_relative_yaw_start_seconds: 66.0
+  secondary_label: GAUGE_ALIGNED_SAME_SOURCE_DESCRIPTIVE
+  absolute_yaw_RMSE: NOT_APPLICABLE_WITH_OBSERVABILITY_PROOF
+  absolute_global_position_RMSE: NOT_APPLICABLE_WITH_GAUGE_PROOF
+  blocked_run_metric_state: NOT_EVALUATED
+
+execution_boundaries:
+  filter_rerun_count: 0
+  ext06_executed: false
+  canonical541_executed: false
+  horizontal18_executed: false
+  other_method_executed: false
