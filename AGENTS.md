@@ -1479,3 +1479,65 @@ T5bc-R explicit human continuation: see `docs/paper_rebuild/hext/T5BC_CONTINUATI
 
 T5bc-R completed: `PASS_T5BCR_COMPLETE`; code_freeze `e54df899db74ff8c11e37e09803c296965bfafba`. Added 199 native / 378 evaluator calls, original 62 / 116 preserved; total 261 native (2 identity + 259 matrix) / 494 evaluator, retries and identity reruns 0. Matrix: 247 COMPLETED, 8 ALGORITHM_FAILURE_DIVERGED, 3 scalar ALGORITHM_FAILURE_NO_VALID_HEADING_INPUT, 1 B3_NOT_APPLICABLE_NO_HEADING_EPOCHS. Evaluator terminal slots: 494 COMPLETED + 22 skipped algorithm failures + 2 NOT_APPLICABLE. D6 echo: 257 PASS, 4 UNAVAILABLE_NOT_EMITTED. Archive pending/failures 0; native/controller trace opens 0, evaluator trace opens 494. Every version has 36 pilot and 305 subset rows; 8 current figure groups / 24 exports passed actual visual review and 56 machine checks. The late-import source-graph bookkeeping stop after 189 / 358 and its local receipt adapter remain explicit historical evidence; no frozen source bytes or scientific runtime functions changed. D30-D41 B3 sidecars all equal C00; inherited frozen HV changes are documented. Full factual record and 17 exact CSV companions: `docs/paper_rebuild/hext/T5BC_CONTINUATION_RESULTS.md`. v2 ZIP: 12141243345 bytes / 16329 members, SHA256 `ecc1144523748c7492792669fb6f0ed21ab09aac838f89754874f032adfe7590`; all-member SHA/CRC/size and ext4/G equality verified. Original hard stops and partial packages remain preserved; protocol v2.1 remains the sole manuscript chain.
 <!-- T5BCR_CONTINUATION_END -->
+
+## V3-01-R permanent storage discipline (2026-09-19)
+
+The explicit V3-01-R authorization supersedes earlier V3 storage placement and
+64-worker dispatch only. Scientific freeze remains
+`7d43b9af26120ed5dde21f53e515386361072ba6`; no C++, parameter, case, seed, evaluator,
+HV, or non-heading provider change is authorized. The existing C/D commits and
+passed identity runs are reused. Protocol v2.1 evidence remains preserved.
+
+- Runtime results, logs, ledgers, and figures reside only in
+  `<CLEAN_ROOT>/stages/CLEAN8_PROTOCOL_V3`; packages are written only in
+  `<HANDOFF_ROOT>`. Use the existing exFAT I/O retry wrapper, verified copies, and
+  per-file SHA256. Do not rely on atomic rename/replacement on G:.
+- The only WSL runtime staging location is `<PROTOCOL_V3_SCRATCH>` (the registered
+  `CLEAN8_PROTOCOL_V3` directory), limited to 20 GB. No WSL archive is permitted.
+  Completed task output must leave no per-case runtime files or ARCHIVE on WSL.
+- Each batch solves, evaluates with v3 and v2, records NAV/STD and evaluator-input
+  hashes, evaluation results and RUN_MANIFEST, copies retained evidence to G:,
+  verifies every copied file, then releases its exact scratch inventory.
+  Full NAV/STD/EVAL_NAV payloads are not retained; hashes and evaluation evidence
+  remain. Trace access stays confined to evaluator children.
+  Record each deletion intent and completion as fsynced rows in an append-only
+  journal per archive slot; avoid separate tiny checkpoint files on exFAT.
+- Before every batch require actual E: free space from `df --output=avail /mnt/e`
+  at least 40 GB, G: at least 30 GB, and scratch at most 20 GB. Record and pause
+  ten minutes on failure; three consecutive failed checks hard-stop. The larger
+  virtual root-filesystem free-space figure cannot substitute for E:.
+- Native concurrency and batch size are 22, with numerical libraries using one
+  thread. Reconciled batches and four admitted identity natives are never rerun.
+  Only explicitly registered interrupted/unverified whole batches may be rerun;
+  any existing NAV/STD hash must match, otherwise hard-stop.
+- Run the independent controller in `tmux v3`. All control logs, batch ledgers,
+  `STATE.json`, `PROGRESS.txt`, and 60-second heartbeats live in
+  `<CLEAN_ROOT>/stages/CLEAN8_PROTOCOL_V3/00_CONTROL`. Primary progress is core
+  non-F01 5,410 native / 10,820 evaluator slots; separately expose core F01 541,
+  extra sequence 22, A1/A2 495, and the unchanged total 6,468 / 12,936.
+- On re-entry read STATE and verified batch ledgers first. Quarantined but
+  unverified purge work resumes verification; verified work resumes exact-ledger
+  deletion. Any P4 failure restores the quarantine and stops all later phases.
+  Matrix recovery never repeats a verified archived batch.
+- After matrix completion automatically run registered aggregate tables, figures,
+  and machine QA, then write DONE and SUMMARY. Actual visual review, manuscript
+  replacement text, final handoff and results commit follow in a later session.
+
+Here GB means 1,000,000,000 bytes.
+
+Before MATRIX, measure both allocated and apparent archive bytes for the eight
+reconciled batches, separately for native and evaluator slots. Project the
+remaining queue plus an explicit aggregate/control allowance; record this beside
+actual G: available bytes in PROGRESS and the execution record. If projected
+allocated occupancy exceeds 60% of available G:, retain error series for CORE
+C00 and D01–D60 seed_00 (all eleven methods), every extra sequence and all A1/A2;
+retain only evaluation metadata, seals and hashes for other CORE error series.
+Preserve the registered figure cases, full BY2O segment windows, and C00 Truth
+export. This storage rule never removes a result row or changes evaluation.
+The separately authorized P′ exception applies only to protocol-v2 RETAINED_RUNS
+eligible NAV/STD/strace/per-case logs at least 1 MB; C00 references, evaluation
+results, records, figures and v2.1 remain protected. A zero-candidate report does
+not authorize expanding the listed file types.
+
+Machine-local paths resolve through ignored local configuration; these rules do
+not authorize cleanup of any raw source, provider, protected root, or unlisted file.
