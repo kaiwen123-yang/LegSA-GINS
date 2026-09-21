@@ -215,3 +215,112 @@ verified. The three final startup-test roots were then released by exact
 inventory and per-item journal: 3,697 files/symlinks and 1,655 directories, all
 under the single authorized scratch; no symlink target followed. Receipt:
 `<V3_ROOT>/00_CONTROL/TEST_FIXTURE_RELEASE_STARTUP_FINAL/RESULT.json`.
+
+## V3-01-R post-matrix hard stop and read-only diagnosis
+
+The human authorized aggregation-only recovery from HEAD
+`1643b9047777ffb8c474321cf8f22e1f66284810` on 2026-09-21. No native,
+evaluator, provider, parameter, or C++ rerun/change is authorized. The original
+hard stop, reservations, sealed terminals and archive receipts remain unchanged.
+
+`00_CONTROL/STATE.json` records 6,468/6,468 native terminals, 12,936/12,936
+evaluator terminal slots, and 279/279 archived batches. Its original status is
+`HARD_STOP`, phase `MATRIX`, with `all_started_workers_drained=true`.
+The final `BATCH_0271/BATCH_COMPLETE.json` has filesystem timestamp
+`2026-09-20T15:30:14Z`, before the hard-stop receipt at
+`2026-09-20T15:38:53Z`. The timestamp is filesystem metadata, not an invented
+application-level archive timestamp. Final-batch receipt SHA256:
+`4468a39400bbcd5638907d56a6bd8607cae73ab064130a8d5030bb6d64e991f5`.
+
+The exception was raised in the Python parent controller's post-matrix source
+hash verification, before `finish_reports()` or `aggregate()`. The recorded
+launch/session controller PID is **14277**, running in `tmux v3`; the hard-stop
+receipt itself does not record a PID. The retained traceback is:
+
+```text
+scripts/paper_rebuild/v3_resume_storage.py:11 -> main
+protocol_v3/resume_storage.py:1612 -> ctx.matrix()
+protocol_v3/resume_storage.py:1448 -> runtime.verify_pin(source pin)
+protocol_v3/runtime.py:35 -> frozen._pinned
+hext/t5a_runtime.py:68 -> sha256_file
+manifest.py:92 -> source.open("rb")
+pathlib.py:1119 -> open
+protocol_v3/controller.py:158 -> guard -> PermissionError
+```
+
+The guard rejects every basename starting `trace_`, regardless of file role.
+The sole matching entry in the 576-item continuation source list, ordinal 151,
+is `<CODE_ROOT>/src/legsa_gins/datasets/by2/trace_reference_adapter.py`, SHA256
+`2c4356af0e9948580c84fc3da7ce7353e1c3f6a838dc8ad72839625e721fb935`.
+The path is established by the traceback and unique source-list match; the old
+guard omitted the path from its exception. This was a hash-locked Python source
+file, not a raw reference trajectory. Python's audit hook raised before the
+filesystem open. All 576 source pins matched before this authorized record
+append. No raw trace, bag or fpl read is attributable to the blocked call.
+
+The full read-only audit completed at `2026-09-21T03:46:43.553127Z`:
+
+| Evidence population | Count | Trace opens | Verification |
+| --- | ---: | ---: | --- |
+| Native terminals | 6,468 | 0 for every native | Sealed native audit and original strace hash |
+| Retained native strace logs | 512 | 0 | Decompressed, hash-checked and reparsed |
+| Native strace logs released by prior compact retention | 5,956 | 0 in every sealed audit | Audit strace hash equals archive discard receipt |
+| Invoked evaluator children | 12,370 | Exactly 1 each | Sealed evaluator audit, successful read-only trace record and child PID |
+| Retained evaluator strace logs | 1,024 | Exactly 1 each | Decompressed, hash-checked and reparsed |
+| Evaluator strace logs released by prior compact retention | 11,346 | Exactly 1 in every sealed audit | Audit strace hash equals archive discard receipt |
+| Evaluator slots skipped after algorithm failure | 566 | No invocation | `NOT_RUN_ALGORITHM_FAILURE`, empty audit |
+
+Released strace payloads are unavailable for fresh line-by-line parsing; the
+audit does not claim otherwise. Their retained sealed audit records and original
+strace hashes were checked against the verified archive discard receipts.
+No audit failure, native trace open, bag/fpl open, or evaluator process failure
+was found. Native terminals comprise 6,185 completed, 193
+`ALGORITHM_FAILURE_DIVERGED`, and 90
+`ALGORITHM_FAILURE_NO_VALID_HEADING_INPUT`. The 283 algorithm failures are
+scientific terminal outcomes and are not the controller hard stop.
+
+Evidence is under `<V3_ROOT>/00_CONTROL/AGGREGATE_RECOVERY/`:
+`HARD_STOP_DIAGNOSIS.json`, `STATE_BEFORE_RECOVERY.json`,
+`OPENAT_AUDIT_SUMMARY.json`, `OPENAT_AUDIT_ROWS.csv`, and
+`OPENAT_SOURCE_PINS.json`. Audit-row SHA256:
+`95c0e3c2b34f8d364eb720d509954520701ad1043df1838f5452fbe541f67199`;
+source-pin registry SHA256:
+`27114282f8b3fa1306936b9401657c867229e4735741a5edd94c27096796b3d2`.
+Original hard-stop SHA256:
+`da38632164b5da069a279a99e4e8f1c2601385d6146b2f6cee25f5c558ded157`;
+controller-log SHA256:
+`3b32a4a54950008c14777358cb2ca75469ac158051c9a98d6a9d6cef5cba52fa`.
+
+The existing BY2O segment implementation already reads sealed `error_series`;
+MFIG00 already reads the evaluator-child `MATCHED_TRAJECTORY` export. Both
+required payloads are retained. Recovery therefore requires a separate
+aggregation-only ledger adapter, not a raw-trace fallback or an evaluator call.
+The three sealed F04 v3 yaw values are 1.8862718548526467 (BY2),
+1.93377013508875 (BY2H), and 2.433814932823714 (BY2O) degrees, matching the
+required six-decimal values 1.886272 / 1.933770 / 2.433815. The adapter must
+check this gate before producing reports. Initial frozen reporting regression
+validation passed 19 tests; these synthetic fixtures are not scientific runs.
+
+The aggregation-only adapter and direct-to-handoff packer passed 21 and 17
+focused tests respectively; together with the 19 frozen reporting regressions,
+57 tests passed. Independent read-only implementation review approved the
+bounded repair. The F04 gate also compares all three full-precision scalars to
+the hash-locked T5a-R R5 table before checking the six-decimal display values;
+the emitted main table is checked again before the appendix and figures.
+Original scientific files, guard, solver, evaluator and provider bytes remain
+unchanged; the new entrypoint cannot invoke native/evaluator processes. Its
+reporting guard denies raw sources and permits only the exact hash-locked Python
+source path for the source-name exception. It reconstructs final indexes from
+sealed ledgers, reuses retention overlays, keeps the original hard-stop receipt
+and state snapshot, and updates only the operational state for the recovery.
+The new report companion contains all 33 sequence/configuration rows and the
+failure-family/configuration/classification comparison; v2.1 failure classes use
+`solver_terminal_status`, with every numerical token and failure membership
+unchanged. Actual aggregate, figure and handoff completion is recorded separately
+after execution; test/review PASS alone does not establish that completion.
+
+The actual read-only ledger integration check also passed: 6,468 registered
+identities, 6,468 native records, 12,936 evaluation slots and 6,754 checked
+metadata pins, with the three-sequence F04 gate PASS. It made no output writes
+or scientific calls. A final narrow read-only review approved the emitted-table
+gate and the same six-file repair scope before the fix commit.
