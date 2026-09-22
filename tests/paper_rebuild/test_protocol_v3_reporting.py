@@ -308,3 +308,138 @@ def test_all_ten_drawers_accept_synthetic_full_cohort_with_missing_type():
         finally:
             style.plt.close(figure)
     assert rendered == list(figures.FIGURE_IDS)
+
+
+def test_failure_panels_keep_class_run_id_axes_and_legend_for_all_failed_and_mixed_rows():
+    from legsa_gins.paper_rebuild.protocol_v3 import figures
+    from legsa_gins.paper_rebuild.publication import style
+
+    records = []
+    for index, kind in enumerate(("D27", "D60", "D04", "D12", "D58")):
+        for mi, method in enumerate(("F03", "A04", "F04")):
+            failed = index < 2 or (index == 2 and method != "F04")
+            row = sample(method, kind + "_seed_00", "NOT_RUN_ALGORITHM_FAILURE" if failed else "COMPLETED")
+            row.update(run_id=f"RUN_{2588 + index * 3 + mi:05}", degradation_id=kind)
+            if index == 2 and method == "F03":
+                row["failure_classification"] = "ALGORITHM_FAILURE_NO_VALID_HEADING_INPUT"
+            records.append(row)
+    bundle = object.__new__(figures.Bundle)
+    bundle.unique, bundle.notes = pd.DataFrame(records), []
+    bundle.evaluation_windows = {"BY2": {"window_seconds": [66, 340]}}
+    bundle.window = lambda case: (196., 216.)
+    series = pd.DataFrame(dict(time=[66., 200., 340.], horizontal_err_m=[1., 2., 3.], yaw_err_deg=[2., 1., 4.]))
+    bundle.runtime = SimpleNamespace(series=lambda _: (series.copy(), "<SYNTHETIC_TEST>"))
+    fig, _ = figures.mfig05(bundle)
+    try:
+        assert fig.get_figwidth() * 25.4 == pytest.approx(174)
+        assert all(check["pass"] for check in figures.figure_checks(fig, "MFIG05"))
+        assert [text.get_text() for text in fig.legends[0].get_texts()] == [
+            figures.drawing.linekw(method)["label"] for method in ("F03", "A04", "F04")]
+        for index, ax in enumerate(fig.axes[:6]):
+            kind = ("D27", "D60", "D04")[index // 2]
+            failed = [row for row in records if row["degradation_id"] == kind and report.state(row) != "COMPLETED"]
+            text = ax._v3_failure_annotation["artist"]
+            assert text.get_fontsize() >= 7 and ax.axison
+            assert ax.get_xlabel() == "Time (s)" and ax.get_ylabel()
+            assert len(ax.get_xticks()) and len(ax.get_yticks())
+            for row in failed:
+                assert row["run_id"] in text.get_text() and row["method_id"] in text.get_text()
+                assert row["failure_classification"] in text.get_text().replace("\n", "")
+            if index < 4:
+                assert not ax.lines
+                assert ax.get_xlim() == pytest.approx((66, 340))
+            else:
+                assert len(ax.lines) == 1
+                points = ax.lines[0].get_transform().transform(ax.lines[0].get_xydata())
+                assert points[:, 1].max() < text.get_window_extent(fig.canvas.get_renderer()).y0
+        # Missing or altered failure annotations and a missing proxy legend are
+        # actual regressions even though the old publication checks accept them.
+        fig.axes[0]._v3_failure_annotation["artist"].remove()
+        assert not all(check["pass"] for check in figures.figure_checks(fig, "MFIG05"))
+        fig.legends[0].remove()
+        assert not next(check["pass"] for check in figures.figure_checks(fig, "MFIG05")
+            if check["check"] == "complete_method_legend")
+    finally:
+        style.plt.close(fig)
+
+
+def test_failure_annotation_run_id_exception_is_narrow_and_shared():
+    from legsa_gins.paper_rebuild.protocol_v3 import figures
+    from legsa_gins.paper_rebuild.publication import style
+
+    fig, axes = figures.drawing.canvas(1, 1, 3)
+    ax = axes[0, 0]
+    ax.set(xlabel="Time (s)", ylabel="Yaw error (°)")
+    row = dict(sample(), run_id="RUN_02588", failure_classification="ALGORITHM_FAILURE_DIVERGED")
+    try:
+        figures.annotate_failures(ax, [row])
+        assert all(check["pass"] for check in figures.figure_checks(fig, "MFIG00"))
+        foreign = ax.text(.5, .2, "RUN_99999", fontsize=7)
+        assert not figures.figure_checks(fig, "MFIG00")[0]["pass"]
+        foreign.remove()
+        record = ax._v3_failure_annotation
+        record["artist"].set_text(record["text"] + "\n/mnt/forbidden")
+        assert not figures.figure_checks(fig, "MFIG00")[0]["pass"]
+    finally:
+        style.plt.close(fig)
+
+
+@pytest.mark.parametrize("figure_id", ["FIG02S", "FIG02S-b"])
+def test_sequence_failure_annotations_match_displayed_runs_and_pass_qa(figure_id):
+    from legsa_gins.paper_rebuild.protocol_v3 import figures
+    from legsa_gins.paper_rebuild.publication import style
+    from legsa_gins.paper_rebuild.hext.readonly_figures import STARTS
+
+    failed = [dict(sample("F04", status="NOT_RUN_ALGORITHM_FAILURE"), dataset_id="BY2", run_id="RUN_00001"),
+        dict(sample("F02", status="NOT_RUN_ALGORITHM_FAILURE"), dataset_id="BY2O", run_id="RUN_00002",
+            failure_classification="ALGORITHM_FAILURE_NO_VALID_HEADING_INPUT")]
+    bundle = SimpleNamespace(p=SimpleNamespace(table=lambda name: pd.DataFrame(failed)), notes=[])
+    horizontal = []
+    for sequence in report.SEQUENCES:
+        for method in ("F02", "A04", "F04", "LC01", "LC01-S"):
+            unavailable = any(row["dataset_id"] == sequence and row["method_id"] == method for row in failed)
+            row = {name: "UNAVAILABLE" if unavailable else 1.0 for name in report.METRIC_FIELDS}
+            row.update(sequence_id=sequence, method_id=method, evaluator_contract="evaluator_contract_v3",
+                evaluation_status="NOT_RUN_ALGORITHM_FAILURE" if unavailable else "COMPLETED",
+                start_convention=STARTS[sequence], manuscript_row=method != "LC01-S",
+                config="S" if method == "LC01-S" else "LIT" if method == "LC01" else "PROTOCOL_V3")
+            horizontal.append(row)
+    segments = [dict(sequence_id="BY2O", method_id=method, segment_id=segment,
+        evaluator_contract="evaluator_contract_v3", status="UNAVAILABLE" if method == "F02" else "AVAILABLE",
+        yaw_rmse_deg="UNAVAILABLE" if method == "F02" else .3, h_rmse_m="UNAVAILABLE" if method == "F02" else .1)
+        for method in ("F02", "A04", "F04", "LC01", "LC01-S")
+        for segment in ("occlusion_primary", "occlusion_secondary")]
+    if figure_id == "FIG02S":
+        fig, _ = figures.make_fig02s(horizontal, dict(selected_config="LIT", selected_method_id="LC01",
+            amended_after_results_seen=True, paper_primary_starts=STARTS))
+    else:
+        fig, _ = figures.make_fig02sb(segments)
+    try:
+        assert all(not ax.get_xlabel() for ax in fig.axes)
+        figures.annotate_sequence_failures(fig, figure_id, bundle)
+        checks = figures.figure_checks(fig, figure_id)
+        assert all(check["pass"] for check in checks), checks
+        for ax in fig.axes:
+            text = ax._v3_failure_annotation["artist"].get_text().replace("\n", "")
+            assert ax.get_xlabel() == ("Sequence" if figure_id == "FIG02S" else "Method")
+            assert "RUN_00002" in text and "BY2O F02" in text
+            assert "ALGORITHM_FAILURE_NO_VALID_HEADING_INPUT" in text
+            if figure_id == "FIG02S":
+                assert "RUN_00001" in text and "BY2 F04" in text and "ALGORITHM_FAILURE_DIVERGED" in text
+            else:
+                assert "RUN_00001" not in text and "ALGORITHM_FAILURE_DIVERGED" not in text
+    finally:
+        style.plt.close(fig)
+
+
+def test_sequence_annotation_leaves_successful_figure_axes_unchanged():
+    from legsa_gins.paper_rebuild.protocol_v3 import figures
+    from legsa_gins.paper_rebuild.publication import style
+    fig, axes = figures.drawing.canvas(1, 1, 3)
+    bundle = SimpleNamespace(p=SimpleNamespace(table=lambda name: pd.DataFrame([sample()])), notes=[])
+    try:
+        before = (axes[0, 0].get_xlabel(), axes[0, 0].get_ylim(), list(axes[0, 0].texts))
+        figures.annotate_sequence_failures(fig, "FIG02S", bundle)
+        assert before == (axes[0, 0].get_xlabel(), axes[0, 0].get_ylim(), list(axes[0, 0].texts))
+    finally:
+        style.plt.close(fig)

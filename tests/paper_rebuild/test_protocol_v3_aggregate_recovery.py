@@ -4,6 +4,7 @@ import hashlib
 from pathlib import Path
 import sys
 
+import numpy as np
 import pytest
 
 from legsa_gins.paper_rebuild.protocol_v3 import aggregate_recovery as recovery
@@ -191,6 +192,30 @@ def test_machine_figure_qa_failure_stops(tmp_path):
             for name in [*(f"MFIG{i:02}" for i in range(7)), "SFIG01", "FIG02S", "FIG02S-b"]])
     with pytest.raises(RuntimeError, match="FIGURE_QA"):
         recovery.verify_render(tmp_path, render)
+
+
+@pytest.mark.parametrize("passed", [np.bool_(True), np.bool_(False)])
+def test_render_qa_normalizes_numpy_boolean_without_accepting_false(tmp_path, passed):
+    figure_root = tmp_path / "08_FIGURES" / "SECOND_CONTINUATION"
+    entries = []
+    for name in [*(f"MFIG{i:02}" for i in range(7)), "SFIG01", "FIG02S", "FIG02S-b"]:
+        directory = figure_root / name
+        directory.mkdir(parents=True)
+        hashes = {}
+        for ext in ("png", "pdf", "svg"):
+            payload = (name + "." + ext).encode()
+            (directory / (name + "." + ext)).write_bytes(payload)
+            hashes[ext] = hashlib.sha256(payload).hexdigest()
+        entries.append(dict(figure_id=name, status="RENDERED", qa=[{"pass": passed}], output_sha256=hashes))
+    render = dict(status="COMPLETE", rendered_count=10, code_freeze=recovery.SCIENCE_FREEZE, figures=entries)
+    if passed:
+        recovery.verify_render(tmp_path, render, figure_root=figure_root)
+        entries[-1]["output_sha256"]["png"] = "0" * 64
+        with pytest.raises(RuntimeError, match="FIGURE_HASH"):
+            recovery.verify_render(tmp_path, render, figure_root=figure_root)
+    else:
+        with pytest.raises(RuntimeError, match="FIGURE_QA"):
+            recovery.verify_render(tmp_path, render, figure_root=figure_root)
 
 
 def test_missing_render_is_not_done(tmp_path):

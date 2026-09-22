@@ -8,16 +8,19 @@ from __future__ import annotations
 import csv
 import io
 import json
+import re
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 from matplotlib.colors import LogNorm
+from matplotlib.lines import Line2D
+from matplotlib.text import Text
 
 from ..publication import qa, style
 from ..publication import protocol_v2_figures as drawing
 from ..publication.protocol_v21_figures import mfig02
-from ..publication.protocol_v21_render import figure_checks
+from ..publication.protocol_v21_render import figure_checks as frozen_figure_checks
 from ..publication.canonical541_figures import _local_enu
 from ..hext.readonly_figures import make_fig02s, make_fig02sb
 from .reporting import (MAIN, METRICS, RuntimeResults, Sources, safe, sha256,
@@ -26,6 +29,107 @@ from .reporting import (MAIN, METRICS, RuntimeResults, Sources, safe, sha256,
 FIGURE_IDS = (*(f"MFIG{i:02}" for i in range(7)), "SFIG01", "FIG02S", "FIG02S-b")
 TRUTH_COLUMNS = ("time", "truth_latitude_deg", "truth_longitude_deg", "truth_height_m", "truth_yaw_deg",
     "estimate_latitude_deg", "estimate_longitude_deg", "estimate_height_m", "estimate_yaw_deg")
+
+
+def failure_rows(bundle, case, methods):
+    rows = bundle.unique[(bundle.unique.case_id == case) & bundle.unique.method_id.isin(methods)]
+    if len(rows) != len(methods) or rows.method_id.duplicated().any():
+        raise ValueError("Failure annotation requires unique registered case/method rows")
+    return [row for row in rows.to_dict("records") if state(row) != "COMPLETED"]
+
+
+def annotate_failures(ax, rows, *, top=.96):
+    """Put exact terminal identities in reserved axis space, above finite data."""
+    ax._v3_expected_failures = rows
+    if not rows:
+        return
+    groups = {}
+    for row in rows:
+        classification = str(row.get("failure_classification", ""))
+        run_id, method = str(row.get("run_id", "")), str(row.get("method_id", ""))
+        if (not classification.startswith("ALGORITHM_FAILURE_") or
+                not re.fullmatch(r"[A-Za-z0-9_-]+", run_id) or not method):
+            raise ValueError("Failure panel requires the original failure class, method and run_id")
+        groups.setdefault(classification, []).append((row.get("annotation_method", method), run_id))
+    lines = []
+    for classification, identities in groups.items():
+        lines.append(classification.replace("ALGORITHM_FAILURE_NO_VALID_HEADING_INPUT",
+            "ALGORITHM_FAILURE_\nNO_VALID_HEADING_INPUT"))
+        lines.extend(method + " / " + run_id for method, run_id in identities)
+    label = "\n".join(lines)
+    text = ax.text(.025, top, label, transform=ax.transAxes, va="top", ha="left",
+        fontsize=7, linespacing=1.15, color="#222222", zorder=6)
+    # Measure in the final physical canvas: a fixed data-space offset would cover
+    # curves in mixed panels and would vary with the error scale.
+    ax.figure.canvas.draw()
+    extent = text.get_window_extent(ax.figure.canvas.get_renderer())
+    if extent.width > .95 * ax.bbox.width:
+        # The three-column sequence composite has narrower axes than MFIG05.
+        # Preserve the exact category across a line break instead of shrinking.
+        label = label.replace("ALGORITHM_FAILURE_DIVERGED", "ALGORITHM_FAILURE_\nDIVERGED")
+        text.set_text(label)
+        ax.figure.canvas.draw()
+        extent = text.get_window_extent(ax.figure.canvas.get_renderer())
+    lower_fraction = (extent.y0 - ax.bbox.y0 - 5) / ax.bbox.height
+    if lower_fraction <= .15:
+        raise ValueError("Failure annotation leaves insufficient panel space")
+    if ax.lines or ax.containers:
+        low, high = ax.get_ylim()
+        ax.set_ylim(low, low + (high - low) / lower_fraction)
+    record = dict(rows=rows, text=label, artist=text, data_top_fraction=lower_fraction)
+    ax._v3_failure_annotation = record
+    return record
+
+
+def figure_checks(fig, figure_id):
+    """Keep frozen QA, admitting run IDs only inside verified failure labels."""
+    checks = frozen_figure_checks(fig, figure_id)
+    records = [ax._v3_failure_annotation for ax in fig.axes if hasattr(ax, "_v3_failure_annotation")]
+    permitted = {record["artist"]: record for record in records}
+    banned = []
+    for text in fig.findobj(Text):
+        if not text.get_visible() or not text.get_text().strip():
+            continue
+        value = text.get_text()
+        if text in permitted and value == permitted[text]["text"]:
+            for row in permitted[text]["rows"]:
+                value = value.replace(str(row["run_id"]), "")
+        if re.search(r"same.source|同源|/mnt/|/home/|RUN_\d+|\.csv|\bPASS\b|\bFAIL\b", value, re.I):
+            banned.append(text.get_text())
+    checks[0].update({"pass": not banned, "detail": banned})
+    renderer = fig.canvas.get_renderer()
+    for ax in fig.axes:
+        expected_rows = getattr(ax, "_v3_expected_failures", [])
+        if expected_rows and not hasattr(ax, "_v3_failure_annotation"):
+            checks.append(dict(figure_id=figure_id, check="failure_panel_annotation_present",
+                **{"pass": False}, detail="Required failure annotation is absent"))
+    for record in records:
+        artist = record["artist"]
+        ax, valid, clear = artist.axes, False, False
+        if ax is not None and artist in ax.texts:
+            box = artist.get_window_extent(renderer)
+            valid = (artist.get_visible() and artist.get_text() == record["text"] and
+                artist.get_fontsize() >= 7 and ax.axison and bool(ax.get_xlabel()) and bool(ax.get_ylabel()) and
+                box.x0 >= ax.bbox.x0 and box.x1 <= ax.bbox.x1 and box.y0 >= ax.bbox.y0 and box.y1 <= ax.bbox.y1)
+            clear = True
+            for line in ax.lines:
+                if line.get_visible():
+                    points = line.get_transform().transform(line.get_xydata())
+                    visible = points[np.isfinite(points).all(axis=1) & (points[:, 0] >= ax.bbox.x0) & (points[:, 0] <= ax.bbox.x1)]
+                    clear &= not len(visible) or bool((visible[:, 1] < box.y0).all())
+            for container in ax.containers:
+                for patch in getattr(container, "patches", []):
+                    clear &= patch.get_window_extent(renderer).y1 < box.y0
+        checks.append(dict(figure_id=figure_id, check="failure_panel_class_run_id_axes_and_fit",
+            **{"pass": bool(valid)}, detail=[{key: row[key] for key in ("method_id", "run_id", "failure_classification")}
+                for row in record["rows"]]))
+        checks.append(dict(figure_id=figure_id, check="failure_annotation_clear_of_finite_data",
+            **{"pass": bool(clear)}, detail=""))
+    if figure_id == "MFIG05":
+        expected = [drawing.linekw(method)["label"] for method in ("F03", "A04", "F04")]
+        actual = [text.get_text() for legend in fig.legends for text in legend.get_texts()]
+        checks.append(dict(figure_id=figure_id, check="complete_method_legend", **{"pass": actual == expected}, detail=actual))
+    return checks
 
 
 class Tables:
@@ -149,11 +253,16 @@ def mfig00(bundle):
             continue
         axes[1, 0].plot(errors.time, errors.yaw_err_deg, **drawing.linekw(method))
     axes[1, 0].set(xlabel="Time (s)", ylabel="Yaw error (°)")
+    annotate_failures(axes[1, 0], failure_rows(bundle, "C00_clean_normal", MAIN))
     axes[1, 1].plot(t, tr[2], color="black", label="Truth")
     axes[1, 1].plot(t, est[2], **drawing.linekw("F04"))
     axes[1, 1].set(xlabel="Time (s)", ylabel="Height relative to Truth start (m)")
     for ax in axes.flat:
-        drawing.legend(ax)
+        if ax is not axes[1, 0]:
+            drawing.legend(ax)
+    # Proxy handles retain failed methods and keep the mixed-panel note clear.
+    fig.legend(handles=[Line2D([], [], **drawing.linekw(method)) for method in MAIN],
+        loc="lower center", bbox_to_anchor=(.55, .015), ncol=5)
     return fig, ("Protocol-v3 C00 comparison at the frozen v3 evaluation point. Truth and estimate samples "
         "were exported inside the authorized evaluator child at its own matched epochs. The renderer opens "
         "no raw trace, fits no alignment, and never reconstructs Truth from estimation errors. "
@@ -196,6 +305,9 @@ def mfig03(bundle):
             axes[1, col].scatter(values.A04, values.F04, s=5, alpha=.45, color=style.COLORS["F04"])
             low, high = float(values.min().min()), float(values.max().max())
             axes[1, col].plot([low, high], [low, high], color="black", ls="--", lw=.6)
+        else:
+            axes[1, col].text(.5, .5, "No finite paired results", transform=axes[1, col].transAxes,
+                ha="center", va="center", fontsize=7)
         axes[1, col].set(xlabel="A04 " + label, ylabel="F04 " + label)
         bundle.notes.append(dict(metric=metric, finite_pairs_by_family=dict(zip(families, counts))))
     return fig, ("F04 minus A04 under protocol v3. Family markers are finite-pair medians; whiskers show "
@@ -241,14 +353,71 @@ def sfig01(bundle):
         "failed; unavailable cells are masked and never assigned zero. Failure counts are reported separately.")
 
 
+def mfig05(bundle):
+    types, methods = ("D27", "D60", "D04", "D12", "D58"), ("F03", "A04", "F04")
+    fig, axes = drawing.canvas(5, 2, 10.6)
+    fig.subplots_adjust(top=.945, bottom=.065, hspace=.48)
+    for rowidx, kind in enumerate(types):
+        case = sorted(bundle.unique.loc[bundle.unique.degradation_id == kind, "case_id"].unique())[0]
+        start, end = bundle.window(case)
+        failed = failure_rows(bundle, case, methods)
+        for method in methods:
+            series, status = bundle.series(case, method)
+            if series is None:
+                continue
+            for ax, column in zip(axes[rowidx], ("horizontal_err_m", "yaw_err_deg")):
+                ax.plot(series.time, series[column], **drawing.linekw(method))
+        for ax, ylabel in zip(axes[rowidx], ("Horizontal error (m)", "Yaw error (°)")):
+            ax.axvspan(start, end, color="#dddddd", alpha=.5, zorder=0)
+            ax.text(.02, .97, kind + " / seed " + case.rsplit("_", 1)[-1],
+                transform=ax.transAxes, va="top", fontsize=7)
+            ax.set(xlabel="Time (s)", ylabel=ylabel)
+            if len(failed) == len(methods):
+                dataset = bundle.unique.loc[bundle.unique.case_id == case, "dataset_id"].iloc[0]
+                ax.set_xlim(bundle.evaluation_windows[dataset]["window_seconds"])
+            annotate_failures(ax, failed, top=.81)
+        bundle.notes.extend(dict(case_id=case, method_id=row["method_id"], run_id=row["run_id"],
+            unavailable=row["failure_classification"]) for row in failed)
+    fig.legend(handles=[Line2D([], [], **drawing.linekw(method)) for method in methods],
+        loc="upper center", bbox_to_anchor=(.55, 1.0), ncol=3)
+    return fig, ("Representative types D27/D60 and D04/D12/D58 fixed before evaluation, deterministic "
+        "lowest seed. Grey spans are exact frozen case windows. Each unavailable algorithm series is "
+        "identified in both panels by its original failure category, method and run_id; no substitute "
+        "curve is drawn. Labels occupy reserved axis space above any finite curves.")
+
+
+def annotate_sequence_failures(figure, figure_id, bundle):
+    """Label failures of displayed runs: all sequences or only the BY2O run.
+
+    Every FIG02S panel contains the same three sequences; every FIG02S-b panel
+    contains a segment of the same BY2O run. A native failure applies to every
+    metric/segment of that run, but never to a different sequence.
+    """
+    rows = bundle.p.table("SEQUENCE_TABLE_V3.csv").to_dict("records")
+    methods = ("F02", "A04", "F04")
+    failed = [row for row in rows if row["method_id"] in methods and state(row) == "ALGORITHM_FAILURE"
+        and (figure_id == "FIG02S" or row["dataset_id"] == "BY2O")]
+    failed = [{**row, "annotation_method": row["dataset_id"] + " " + row["method_id"]} for row in failed]
+    for ax in figure.axes:
+        if failed:
+            ax.set_xlabel("Sequence" if figure_id == "FIG02S" else "Method")
+        annotate_failures(ax, failed)
+    bundle.notes.extend({key: row[key] for key in ("dataset_id", "method_id", "run_id", "failure_classification")}
+        for row in failed)
+
+
 DRAWERS = {"MFIG00": mfig00, "MFIG01": drawing.mfig01, "MFIG02": mfig02,
-    "MFIG03": mfig03, "MFIG04": mfig04, "MFIG05": drawing.mfig05,
+    "MFIG03": mfig03, "MFIG04": mfig04, "MFIG05": mfig05,
     "MFIG06": drawing.mfig06, "SFIG01": sfig01}
 
 
-def render(root, *, roots, code_freeze):
+def render(root, *, roots, code_freeze, output=None):
     root = safe(root)
-    aggregate_root, output = root / "07_AGGREGATE", root / "08_FIGURES"
+    aggregate_root = root / "07_AGGREGATE"
+    figure_root = root / "08_FIGURES"
+    output = safe(figure_root if output is None else output)
+    if output != figure_root and figure_root not in output.parents:
+        raise ValueError("V3 figure output must stay inside 08_FIGURES")
     if output.exists():
         raise FileExistsError("Existing v3 exports must be preserved")
     manifest = json.loads((aggregate_root / "AGGREGATE_MANIFEST.json").read_text())
@@ -283,6 +452,8 @@ def render(root, *, roots, code_freeze):
             else:
                 figure, caption = DRAWERS[figure_id](bundle)
                 details = {}
+            if figure_id in ("FIG02S", "FIG02S-b"):
+                annotate_sequence_failures(figure, figure_id, bundle)
             caption = caption.replace("v2.1 figure edition", "v3 figure edition")
             if "protocol-v3" not in caption.lower():
                 caption += " Protocol-v3 edition; all LegSA evidence comes from the new registered matrix."

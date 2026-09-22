@@ -332,19 +332,20 @@ def recovery_records(roots, repair_commit, audit_sha256):
         return receipt
 
 
-def verify_render(root, render):
+def verify_render(root, render, *, figure_root=None):
+    figure_root = root / "08_FIGURES" if figure_root is None else Path(figure_root)
     if render.get("status") != "COMPLETE" or render.get("rendered_count") != 10 or render.get("code_freeze") != SCIENCE_FREEZE:
         raise RuntimeError("HARD_STOP_V3R_REQUIRED_FIGURE_OR_MACHINE_QA_INCOMPLETE")
     expected = {*(f"MFIG{i:02}" for i in range(7)), "SFIG01", "FIG02S", "FIG02S-b"}
     if len(render.get("figures", [])) != 10 or {e.get("figure_id") for e in render["figures"]} != expected:
         raise RuntimeError("HARD_STOP_V3R_FIGURE_COVERAGE")
     for entry in render["figures"]:
-        if entry.get("status") != "RENDERED" or not entry.get("qa") or not all(row.get("pass") is True for row in entry["qa"]):
+        if entry.get("status") != "RENDERED" or not entry.get("qa") or not all(bool(row.get("pass")) for row in entry["qa"]):
             raise RuntimeError("HARD_STOP_V3R_FIGURE_QA")
         if set(entry.get("output_sha256", {})) != {"png", "pdf", "svg"}:
             raise RuntimeError("HARD_STOP_V3R_FIGURE_EXPORT_COVERAGE")
         for ext, digest in entry["output_sha256"].items():
-            if sha256_file(root / "08_FIGURES" / entry["figure_id"] / (entry["figure_id"] + "." + ext)) != digest:
+            if sha256_file(figure_root / entry["figure_id"] / (entry["figure_id"] + "." + ext)) != digest:
                 raise RuntimeError("HARD_STOP_V3R_FIGURE_HASH")
 
 
