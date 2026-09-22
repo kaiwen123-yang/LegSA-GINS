@@ -324,3 +324,126 @@ identities, 6,468 native records, 12,936 evaluation slots and 6,754 checked
 metadata pins, with the three-sequence F04 gate PASS. It made no output writes
 or scientific calls. A final narrow read-only review approved the emitted-table
 gate and the same six-file repair scope before the fix commit.
+
+
+## 2026-09-21 aggregate completion and new visual-QA hard stop
+
+The aggregation-only repair was committed as
+`76153ae374a100ee70f5b8b6bb2a9d03f7f7bc72`. Records recovery admitted all
+6,468 native terminals, 12,936 evaluator terminal slots (12,370 actual children
+and 566 not invoked), and 279 batches without scientific reruns. Aggregation
+completed 53 registered files; the failure/full-ablation companion completed
+8 files. Independent review passed every manifest hash, all 37 unchanged
+external rows per evaluator, the 52-row main table, 33-row full ablation,
+541/61/A1/A2/BY2O/sensitivity coverage and every failure-family/configuration cell.
+F04 full-precision yaw scalars equal T5a-R; displayed values are
+1.886272 / 1.933770 / 2.433815 degrees. Failures remain 283 versus 177, with
+F02 43 versus 0. Twenty F01 failure differences have identical NAV hashes to
+completed v2.1 records; they are classification differences, not worse outputs.
+
+All ten figure groups were rendered. The recovery verifier then rejected
+`numpy.bool_(True)` through an `is True` identity test. All 60 persisted JSON
+QA values, ten per-figure manifests, 30 export hashes and read-only raster-check
+values passed. This bookkeeping defect and its hard-stop record remain intact:
+`AGGREGATE_RECOVERY/REPORT_HARD_STOP.json`, SHA256
+`18e50ed45b2ef5ea6127b9255e96c5dd4ca088c52eb98b2f1b703e48230898dc`.
+
+Actual raster review found an independent, real **MFIG05 visual QA failure**:
+the D27/D60 four panels are blank without in-panel failure annotations, and the
+whole figure has no method legend. The frozen drawer records failed series only
+in manifest notes and obtains legend handles from the empty first D27 panel.
+Nine other figure groups passed actual visual review. No figure was changed or
+rerendered. The proposed serialized-JSON finalizer was cancelled before creating
+any file or starting a test after this genuine failure was identified.
+
+The user-specified figure-QA hard stop therefore applies. Operational STATE is
+HARD_STOP with visual review FAIL_MFIG05. SUMMARY.txt records the partial result;
+DONE, new ZIP/SHA256, results commit and push are **NOT EXECUTED**. The repair
+commit remains local. Result/manuscript documentation is prepared but uncommitted.
+The original September 20 hard stop, all sealed matrix outputs, current exported
+figures and the new hard-stop evidence are preserved. See
+`V3_01R_FINAL_REPORT.md` for full tables and claim boundaries.
+
+Visual-review receipt SHA256:
+`a89dae4bde5a7ba71925ae313af0eadb8bb72515bbba1691c78887986942ed38`.
+Visual hard-stop receipt SHA256:
+`14a6510e186afd3578a5f0d0ac9e341c803b2ac44278f3dcdb127df52328ca17`.
+SUMMARY.txt SHA256:
+`9e90c181ed7ff9f8fbe28c0fad98a9e6675cd812b2eca1f34ea9032fe3565662`.
+
+
+## 2026-09-22 second continuation: figure and visual closure
+
+The original aggregation repair `76153ae374a100ee70f5b8b6bb2a9d03f7f7bc72`
+was pushed first. Figure and validator repair
+`6b8d7aa5ed145fe9f2eb68811dcbc5f4ee1fa92c` passed read-only review and
+50 focused/related synthetic regression tests before actual rendering.
+Only the figure entrypoint ran: no reports, aggregate, native, evaluator or
+provider calls. The audit guard recorded zero process launches and zero raw
+or trace reads. All 59 CSV / 62 manifest-bound files and their three manifests
+retain the hashes from the prior independently reviewed version.
+
+All ten figure groups, 69 machine checks, 30 export hashes and 10/10 actual
+raster reviews passed. MFIG05 now shows original failure classes, methods and
+run IDs with retained axes and a complete proxy method legend. Its two failed
+case rows were visually checked by both supervisor and read-only reviewer.
+DONE UTC: `2026-09-22T08:22:35.752561+00:00` (16:22:35.752561 UTC+8).
+The old hard stops, old visual FAIL and 43 old figure files remain preserved;
+no historical stop was rewritten as PASS. The second-continuation receipts
+are under `<V3_ROOT>/00_CONTROL/FIGURE_CLOSEOUT_SECOND_CONTINUATION/`.
+
+The revised manuscript explicitly separates the two failure classifiers:
+283 and 177 are not directly comparable; a unified-rule comparison is deferred.
+It retains the family/configuration inventory and identical-NAV F01 explanation,
+shows dual_yaw only as v3 results, and documents one-second heading-fault cells
+and original-row-only standard-deviation faults. Required wording changes passed
+read-only review. The initially planned archive was subsequently omitted by the
+explicit user decision recorded below; final delivery uses stage evidence and hashes.
+
+## 2026-09-22 explicit package omission and final delivery
+
+交接包按用户决定省略；证据以 G: 阶段目录 + 记录哈希为准。
+
+The package process PID 6166 received SIGTERM at
+`2026-09-22T13:24:30.161161+00:00`; termination was confirmed at
+`2026-09-22T13:24:30.261484+00:00` (21:24:30 UTC+8, exit 143).
+The exact authorized deletion manifest contained only
+`<HANDOFF_ROOT>/protocol_v3r_complete_handoff.zip` and its empty `BUILD.log`:
+2 files, 17,645,950,746 bytes. Each file identity/hash was recorded before
+deletion and each deletion has its own checkpoint. Cleanup passed at
+`2026-09-22T13:28:11.011205+00:00`; all unrelated handoff entries were unchanged.
+No same-package sidecar or packaging receipt existed. The checked G: scratch
+locations were absent; the registered WSL scratch had no matching package file
+and its plotting-cache tmp directory was empty. Historical test files remain.
+
+`df /mnt/g` (1 KiB blocks; total 976,743,424): before deletion Used 904,367,616,
+Available 72,375,808, 93%; after deletion Used 887,136,000,
+Available 89,607,424, 91%. The exact deletion evidence is under
+`<V3_ROOT>/00_CONTROL/FIGURE_CLOSEOUT_SECOND_CONTINUATION/`.
+
+`09_HANDOFF/PACKAGE_DISPOSITION.json` records `SKIPPED_BY_USER`,
+`explicit_user_decision=true` and `zip_required=false`, with SHA256
+`1e698d6423d6f993ede805ed32930363442861bdab9a7be5dc708edcea27e3d5`.
+It binds DONE, render/visual/table receipts and cancellation/deletion evidence.
+Original DONE/COMPLETION bytes and DONE time remain unchanged; operational
+STATE/SUMMARY/PROGRESS now state the omission. Their previous versions are
+retained in `FIGURE_CLOSEOUT_SECOND_CONTINUATION/BEFORE_PACKAGE_OMISSION/`.
+The read-only final verifier accepts this explicit omission without a ZIP,
+checks the existing table/figure hashes, and performs no scientific or figure-QA
+calls. Its 9 new regression tests passed; the earlier figure repair's 50 tests
+remain a separate validation result.
+
+AGENTS.md now requires an explicit request before packaging; permits only
+records, hashes, receipts, aggregate tables, figures and documents; excludes all
+per-case products; and sets a target of at most 2 GB (2,000,000,000 bytes).
+
+The omission policy and verifier are committed as
+`65beb49e2db5e2a6cfb4e44117f25968a22e43ac`. Actual read-only acceptance passed
+at `2026-09-22T13:31:40.021901+00:00` with status
+`PASS_V3R_FINAL_DELIVERY_PACKAGE_SKIPPED_BY_USER`: 65 unchanged file identities,
+59 unchanged CSV files, ten figures, 69 recorded checks and 30 verified exports.
+ZIP reads, new figure-QA calls and native/evaluator/aggregate calls were zero.
+`09_HANDOFF/FINAL_ACCEPTANCE.json` SHA256:
+`50b1f09dcaf0f86e3c3148871f7cbce66d4ad416fbd71ed7bae78019df6a5bdd`.
+Final results commit and remote verification are recorded separately in
+`09_HANDOFF/FINAL_DELIVERY.json` to avoid self-referential commit metadata.
