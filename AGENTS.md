@@ -1541,3 +1541,17 @@ not authorize expanding the listed file types.
 
 Machine-local paths resolve through ignored local configuration; these rules do
 not authorize cleanup of any raw source, provider, protected root, or unlisted file.
+
+## Handoff package rule (2026-09-22; latest explicit user decision)
+
+Create a handoff package only when the human explicitly requests one. A stage
+completion or prior default packaging step does not authorize a new package.
+The current V3-01-R package is `SKIPPED_BY_USER`; a hash-bound explicit decision
+receipt permits final acceptance without a ZIP.
+
+When explicitly requested, handoff packages contain only records, hashes,
+receipts, aggregate tables, figures, and documents. All per-case products are
+excluded, including runtime/evaluation payloads, per-case manifests and results,
+error series, logs, NAV/STD/EVAL_NAV, and per-case archives.
+The package size target is at most 2 GB (2,000,000,000 bytes). This rule does not
+authorize deleting any existing evidence or expanding cleanup scope.
