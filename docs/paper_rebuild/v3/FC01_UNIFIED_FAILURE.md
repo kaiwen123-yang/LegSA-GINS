@@ -285,3 +285,132 @@ RD、Go2 RP、HV 仅配置了路径，F01 开关关闭，标记 `CONFIGURED_BUT_
 独立只读复核重新核验了 72 对输入、144 份清单、所有实际 IMU pin、16 组原文双行和 9 项冻结源文件，确认上述 token/字节计数与事件并集计数。分类、转移表和 541/61 指标汇总维持续作 1 的未执行状态；本次仅完成新增授权的输入差分。
 
 最终独立复核为 PASS，回执为 `FINAL_REVIEW_RECEIPT.json`；`FINAL_OUTPUT_SEAL.json` 封存本轮 33 个审计文件（自身及后写 Git 提交回执除外）。`INPUT_DIFF.csv` SHA-256 为 `05f3096182bfd539e85072ac934fcb0d77fdfba3c49ea751208953ac6d3cbd4e`；最终 seal SHA-256 为 `57cf7fbe0125d0bb0935b38055d3a7ada9a9ce01e40447f16c20bd5676adba0f`。Git 仅提交本报告；大表、清单及审计附件按仓库规则留在 `<FC01_CONT02>`。
+
+## 附录：F01 位置更新次数与 yaw_valid 的只读核对
+
+本次从 `cce42f792cd6241508f7ee8d89f7e1f3ad68a592` 追加，仅核对 F01 的 `C00_clean_normal`、`D57_seed_00`、`D05_seed_00`、`D09_seed_00` 至 `D12_seed_00`，两链共 14 个保留运行。结论是：**这 7 个工况的两链位置更新总次数全部相同，但六个故障工况的 GNSS 处理事件数不同。yaw_valid 参与历元调度，不是 F01 位置更新的直接筛选条件。**
+
+### 保留计数与 GNSS 全表行数
+
+位置次数取 native `RUN_MANIFEST.json.position_update_count`，并独立对原始 `PORT_GNSS_UPDATE_TRACE.csv`（若存为 gzip，则只在内存解压）的 `position_update` 列求和。14 项均完全一致。表中“GNSS 事件”是 trace 数据行数，也全部等于 manifest 的 `measurement_update_count`，不能代替位置次数。全部 trace 的 `update_index` 连续为 `1..N`、`gnss_time` 严格递增，存储及解压 SHA-256/字节数与封存 pin 一致。
+
+GNSS 总行数与 yaw_valid=1 行数来自该 F01 实际读取并通过 provider 哈希核验的 GNSS18 全文件，yaw_valid 是零基列 17。所有运行配置窗口均为 66–340 s；输入全表还包含窗口外行，不能直接用全表行数减更新次数推算运行内的丢弃数。下表的 D 编号均指 `seed_00`。
+
+| 工况 | 链 | manifest 位置更新 | trace 位置更新之和 | GNSS 全表 yaw_valid=1 | GNSS 全表总行数 | GNSS 事件 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| C00 | v2.1 | 1369 | 1369 | 301 | 1510 | 1369 |
+| C00 | v3 | 1369 | 1369 | 1510 | 1510 | 1369 |
+| D57 | v2.1 | 1365 | 1365 | 301 | 3321 | 3005 |
+| D57 | v3 | 1365 | 1365 | 0 | 3321 | 2736 |
+| D05 | v2.1 | 1319 | 1319 | 301 | 1510 | 1329 |
+| D05 | v3 | 1319 | 1319 | 1510 | 1510 | 1369 |
+| D09 | v2.1 | 548 | 548 | 301 | 1510 | 821 |
+| D09 | v3 | 548 | 548 | 604 | 1510 | 548 |
+| D10 | v2.1 | 274 | 274 | 301 | 1510 | 547 |
+| D10 | v3 | 274 | 274 | 303 | 1510 | 274 |
+| D11 | v2.1 | 960 | 960 | 211 | 1510 | 1268 |
+| D11 | v3 | 960 | 960 | 1060 | 1510 | 1333 |
+| D12 | v2.1 | 553 | 553 | 120 | 1510 | 933 |
+| D12 | v3 | 553 | 553 | 605 | 1510 | 1085 |
+
+14 个运行的 `enable_dual_yaw_update`、`enable_basic_dual_yaw_baseline`、`enable_qa_fallback` 均为 false；trace 的 `yaw_update` 之和全部为 0。C00 两链 trace 的解压内容哈希也完全相同。D57 的 v3 即使全表 yaw_valid=1 行数为 0，仍有 1,365 次位置更新，直接排除了“只有 yaw_valid=1 才允许 F01 位置更新”的解释。
+
+另对 trace 中 `position_update=velocity_update=yaw_update=0` 的事件计数：
+
+| 工况 | v2.1 三列均 0 的事件 | v3 三列均 0 的事件 | GNSS 事件差（v3−v2.1） |
+| --- | ---: | ---: | ---: |
+| C00 | 0 | 0 | 0 |
+| D57 | 269 | 0 | −269 |
+| D05 | 10 | 50 | +40 |
+| D09 | 273 | 0 | −273 |
+| D10 | 273 | 0 | −273 |
+| D11 | 18 | 83 | +65 |
+| D12 | 42 | 194 | +152 |
+
+各工况 GNSS 事件数的差恰好等于上述三列均为 0 的事件数之差。这是保留诊断 trace 的实测计数，与前文“仅航向有效的行仍可参与历元处理”的静态路径一致；这里没有重放解算器。位置总次数相同不证明位置更新时间序列、传播路径或 NAV 字节相同，也不证明 NAV 差异的唯一原因。
+
+### 冻结源码的具体行
+
+以下行号均针对二进制桥构建源 `ca73cb1fb48a020fd2a450d79e520562c34eeb24`，不是当前工作区可能已位移的行号。可用 `git show ca73cb1fb48a020fd2a450d79e520562c34eeb24:<文件路径>` 取原文。下述 loader、GIEngine、runtime 三文件与旧求解器冻结 `64c81965b17ef1bf8ae2ce3e4dd7b1ae35110b00` 及桥接前 `a01ceb931049f84af8c900b39e4cf01c52f627c6` 字节完全相同，两链均适用。
+
+文件路径以下表的 `cpp/legsa_v23_port_core/src/` 为共同前缀。
+
+| 文件与冻结行号 | 具体处理及含义 |
+| --- | --- |
+| `fileio/gnss_file_loader.cpp:53–73` | 53–54 行读取三个 valid；69–71 行分别设置 `has_position`、`has_velocity`、`has_yaw`；第 73 行无条件保留成功解析的行。不会因为 yaw_valid=0 删除位置有效行。 |
+| `kf_gins/gi_engine.cpp:247–256` | `addGnssData` 第 256 行设置 `isvalid = has_position || has_velocity || has_yaw`；这里没有检查 F01 的 `enable_dual_yaw_update`。这是 yaw_valid 在单天线配置中仍进入历元处理的入口。 |
+| `kf_gins/gi_engine.cpp:259–275` | 第 260 行由 `isvalid` 决定事件时间是否有效；266–273 行据其与前后 IMU 时刻的关系返回处理分支 1/2/3，否则为 0。 |
+| `kf_gins/gi_engine.cpp:361–379` | 364–365 行仅在 `has_position` 且未被 QA 拒绝时调用位置更新；377–379 行才用 `has_yaw && enable_dual_yaw_update && yaw_scheme_C_enabled` 门控实际 yaw 更新。 |
+| `kf_gins/gi_engine.cpp:413–414` | `gnssUpdate` 末尾清除本事件有效标志并递增 `update_count_`，不要求本事件的位置/速度/yaw counter 曾增长；所以 trace 可以出现三类更新标志均为 0 的事件。 |
+| `kf_gins/gi_engine.cpp:828–859` | `applyPositionUpdate` 在 858 行执行 `EKFUpdate` 后，859 行递增 `position_update_count_`；844 行是 Basic 分支的计数，本次 F01 不走该分支。 |
+| `kf_gins/gi_engine.cpp:486–510` | 491–492 行用有效事件时间选分支；493–510 行控制传播、`gnssUpdate`、`stateFeedback` 的顺序。505–510 行在 IMU 间的有效事件处拆分 IMU 增量并分两段传播。 |
+| `runtime/port_runtime.cpp:1471–1495` | 1471–1475 行在 GNSS 已陈旧时只推进一行；1485–1488 行保存各 counter，1492 行处理 IMU；1495 行判断 GNSS 事件计数是否增长。 |
+| `runtime/port_runtime.cpp:1503–1525` | 1514 行把位置 counter 是否增长写成 trace 的 `position_update`；1515–1516 行同理记录速度/yaw。1523–1525 行分别复制事件、位置、速度总次数。 |
+| `fileio/file_saver.cpp:927–930` | 927–930 行分别写出 `measurement_update_count`、`position_update_count`、`velocity_update_count`、`yaw_update_count`，因此不能混用事件计数与位置计数。 |
+
+最关键的原文是：
+
+```cpp
+// kf_gins/gi_engine.cpp:256
+  gnssdata_.isvalid = gnssdata_.has_position || gnssdata_.has_velocity || gnssdata_.has_yaw;
+// kf_gins/gi_engine.cpp:364-365
+  if (policy_gnss.has_position && !qa_reject_position) {
+    applyPositionUpdate(policy_gnss);
+// kf_gins/gi_engine.cpp:377-379
+    if (!qa_reject_yaw && policy_gnss.has_yaw && options_.enable_dual_yaw_update &&
+        options_.yaw_scheme_C_enabled) {
+      applyYawUpdate(policy_gnss);
+```
+
+这表示：当位置或速度有效时，yaw_valid 不决定该行能否成为有效 GNSS 历元；当位置、速度都无效而 yaw_valid=1 时，该行仍可触发 GNSS 历元分支，即使 F01 的 yaw 量测更新关闭。不能把后者的事件处理次数解释成位置更新次数。
+
+上述三个行为源文件的 SHA-256 分别为：
+
+| 文件 | SHA-256（上述三个冻结提交均相同） |
+| --- | --- |
+| `fileio/gnss_file_loader.cpp` | `a95e2bc2f3b9ebae935a049148f77a6f0b77684d148d7c0713429cde14522b2f` |
+| `kf_gins/gi_engine.cpp` | `4d2e329a1f6a11ed232941c3150a5569791f7ac5fceb0362e91e5dd856dc6a50` |
+| `runtime/port_runtime.cpp` | `9a00eabdbbd7d629da4e476461a69872c9eb26550a9c286fcc59931e1d04bc99` |
+
+正式 native 记录的 solver executable SHA-256 为：v2.1 七项均 `9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f`，v3 七项均 `96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c`，与二进制冻结桥对应。RUN_MANIFEST 中的 `helper_executable_hash` 不是 solver binary 哈希，本核对没有混用两者。
+
+### 保留来源及诊断 trace 哈希
+
+新增别名 `<V2_ROOT> = <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2`；`<PROTOCOL_V3_SCRATCH>` 为既有注册的 v3 scratch 路径。七个工况的运行编号及目录如下，每个目录内读取原 RUN_MANIFEST 与诊断 trace。
+
+| 工况 | run_id | v2.1 正式复用的 solver 目录 | v3 native 目录 |
+| --- | --- | --- | --- |
+| C00 | RUN_00001 | `<V2_ROOT>/RETAINED_RUNS/RUN_00001/solver` | `<V3_ROOT>/03_NATIVE/RUN_00001` |
+| D57 | RUN_05556 | `<V2_ROOT>/RETAINED_RUNS/RUN_05556/IO_RECOVERY_20260912_cycle220_attempt01/solver` | `<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/RUN_05556` |
+| D05 | RUN_00408 | `<V2_ROOT>/RETAINED_RUNS/RUN_00408/solver` | `<V3_ROOT>/03_NATIVE/RUN_00408` |
+| D09 | RUN_00804 | `<V2_ROOT>/RETAINED_RUNS/RUN_00804/solver` | `<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/RUN_00804` |
+| D10 | RUN_00903 | `<V2_ROOT>/RETAINED_RUNS/RUN_00903/solver` | `<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/RUN_00903` |
+| D11 | RUN_01002 | `<V2_ROOT>/RETAINED_RUNS/RUN_01002/solver` | `<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/RUN_01002` |
+| D12 | RUN_01101 | `<V2_ROOT>/RETAINED_RUNS/RUN_01101/solver` | `<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/RUN_01101` |
+
+六个退化工况的 manifest/GNSS 路径及完整哈希与已封 `<FC01_CONT02>/FORMAL_INPUT_PROVENANCE.csv`、`INPUT_DIFF.csv` 相同。新增 C00 的两份 RUN_MANIFEST SHA-256 为 v2.1 `15b728a514e3ef661935806860ff417766772819f8302712c2d8bef1a1366ff9`、v3 `dd55532bf0fb4ff702939335e118e3572690de9e8ce30ea77f661cc717c08c6e`。
+
+C00 的实际 v2.1 GNSS 是 `<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_GNSS.gnss`，SHA-256 `68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a`；实际 v3 GNSS 是 `<PROTOCOL_V3_SCRATCH>/02_PROVIDERS/CASES/BY2__C00_clean_normal__68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a/GNSS18.gnss`，SHA-256 `3485b93459fa4c6c695d51e3f9714c133de6b4627a443515aeb1ada191b04b97`。均通过冻结注册表、实际 manifest provider pin 与文件字节的绑定，不用其他配置的 C00 表代替。
+
+v2.1 trace 均存为 `PORT_GNSS_UPDATE_TRACE.csv.gz`，存储/解压 pin 来自实际 solver 目录上一级 `ARCHIVE_RECEIPT.json.retained_files`，并以正式 source record 的 `output_seal` 再核解压内容。v3 的 C00/D05 为 `.csv.gz`，其余五项为 `.csv`；pin 来自该 native 目录的 `ARCHIVE_RECEIPT.json.files`，并与 `V3_NATIVE_SUMMARY.file_hashes` 交叉核验。以下均是实际保留诊断 trace，不是真值 trace。
+
+| 工况 | 链 | 存储文件 SHA-256 | 解压 CSV 内容 SHA-256 |
+| --- | --- | --- | --- |
+| C00 | v2.1 | `1745fe68dbfc28a73ea376646d8f2fd3cfb39f5c08e5eaad1754f862b9d5889a` | `70a4a336a7e92a4f7b68e18e6c7da3a6930191adf2239dc4a378ed3bd5146f10` |
+| C00 | v3 | `1745fe68dbfc28a73ea376646d8f2fd3cfb39f5c08e5eaad1754f862b9d5889a` | `70a4a336a7e92a4f7b68e18e6c7da3a6930191adf2239dc4a378ed3bd5146f10` |
+| D57 | v2.1 | `980aa3baa7372313e9775df92a10985e75c9dacdfc26f3f0f8cf3c66b1cee62a` | `08c86a20f327c2570c811deebe8586cb6cc512e4c66812f02838986f5ece939c` |
+| D57 | v3 | `e2cbf1936ff636c4d6f675b8a35e1e506b2c24f60800b5c04fc49cff4d49794f` | `e2cbf1936ff636c4d6f675b8a35e1e506b2c24f60800b5c04fc49cff4d49794f` |
+| D05 | v2.1 | `55be555ed8f93df23643d3a050af55efff3f2575929d19391ac8f6e598c6fab6` | `acee0a45f514ed0f43ab239a066e6f038ba03870f7c54cba575d8d4e6fe531c8` |
+| D05 | v3 | `82cf3a74a883cd25d9c37ae7fd2dfc899ebc356b929b9a332c817f4ed5321778` | `586c6fedba26ad09ca8bdde3e90924bc4f1ef17d4932815b732fecdc3649d672` |
+| D09 | v2.1 | `7a6c692a956784972793dec72e81d9a11fb7cf46ab5fdc7e762a5e19f99e3edd` | `6ec89e11f21b5de41a9a4932a8728220e5193cf5d02c0bbd7e82f8085fdf58c9` |
+| D09 | v3 | `4ee687be30453a1a758556cdb028dfc1888005311fd9f41a5a44b43320546704` | `4ee687be30453a1a758556cdb028dfc1888005311fd9f41a5a44b43320546704` |
+| D10 | v2.1 | `07ba8117335025acf1825c553349b213a3476e72eae704b4291d7b44be158c11` | `cd7d037d214ec098d14b00aca4d5b11aa5cf770ef898b0e0e0e6bb6bebd34fdd` |
+| D10 | v3 | `8cbf2dacaade228b14b0eb51b73b9f0c227eadf63d037d17f0bb95d4e74ecbd3` | `8cbf2dacaade228b14b0eb51b73b9f0c227eadf63d037d17f0bb95d4e74ecbd3` |
+| D11 | v2.1 | `bc3f7ca80c760a15fc1a3f5f513997d6903ae8f0e1bc7fc24e483fff12c9bbe2` | `3ab042bd6ff99ace873ab4cf3ada078b987399910fa6cfb27440bc9de73af43c` |
+| D11 | v3 | `8a792864bf6906b14d904d0a1e04a4c2d9522c03e7dcb7b5629fc23a963ff1b5` | `8a792864bf6906b14d904d0a1e04a4c2d9522c03e7dcb7b5629fc23a963ff1b5` |
+| D12 | v2.1 | `9d94c06a9f9fd539b835f93514d417286a6ba018aaea18aebafbcaedc1e7d8af` | `d28841a5a64e7de3a9a6c0c52fbc02e80b0e074d8d04f32f10bd4cba5d46f665` |
+| D12 | v3 | `2fa44c1938e6e6470a70a7e2161541b160a8a06f8bbd4e045b19dd00bf0a0172` | `2fa44c1938e6e6470a70a7e2161541b160a8a06f8bbd4e045b19dd00bf0a0172` |
+
+本次只追加本报告附录，原报告保持精确字节前缀；没有新增或改写外部表、清单、回执、provider、源码或保留运行。统计读取的 71 个文件前后 SHA-256 不变；解算器、评估器、provider 生成调用及 NAV/真值 trace 读取均为 0。原统一分类硬停继续保留，本附录不恢复分类或指标汇总。
+
+独立只读复核重新统计全部 14 项、交叉核验 trace 封存哈希及冻结源码行号，结果 PASS；附录之外的报告原字节和 29 个无关未跟踪文件均保留。
