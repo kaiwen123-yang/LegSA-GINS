@@ -1555,3 +1555,4 @@ excluded, including runtime/evaluation payloads, per-case manifests and results,
 error series, logs, NAV/STD/EVAL_NAV, and per-case archives.
 The package size target is at most 2 GB (2,000,000,000 bytes). This rule does not
 authorize deleting any existing evidence or expanding cleanup scope.
+HX-INV（2026-09-23，只读盘点）：外部方法 23 行（双天线 6、四足 1、松耦合 12、单天线 4、other 0；EXT06 = Luo 待实现），解算/评估调用 0/0，65 项封存表 sha256 两次比对一致；matched.py 部分导入事故与 5 项子代理规则偏差均非硬停，见 docs/paper_rebuild/hext/HX_INVENTORY.md §9；清单 docs/paper_rebuild/hext/HX_INVENTORY.csv。
