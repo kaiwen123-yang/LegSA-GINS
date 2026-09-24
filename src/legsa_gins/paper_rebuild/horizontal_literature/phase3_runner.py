@@ -25,6 +25,7 @@ import numpy as np
 import yaml
 
 from . import phase2_runner as phase2
+from . import sequence_override
 from .ext03_yang2024 import (
     ADAPTER_STOCHASTIC_REGISTRY_REQUIRED_PARAMETERS,
     AmbiguityIdentity,
@@ -360,6 +361,23 @@ def load_phase3_contract(path: Path = CONTRACT_PATH) -> dict[str, Any]:
     return value
 
 
+def _expected_pair_count() -> int:
+    """Frozen BY2 count unless an HX-02 sequence spec is active for this process."""
+    return sequence_override.expected_pair_count(EXPECTED_PAIR_COUNT)
+
+
+def _declared_variants(contract: Mapping[str, Any], supported: set[str]) -> tuple[Variant, ...]:
+    """Supported contract variants; an HX-02 spec may restrict them to declared variant ids."""
+    variants = tuple(item for item in requested_variants(contract) if item.system_mode in supported)
+    declared = sequence_override.option("variant_ids")
+    if declared is None:
+        return variants
+    selected = tuple(item for item in variants if item.variant_id in set(declared))
+    if len(selected) != len(set(declared)):
+        raise Phase3RunnerError("declared HX-02 variant is not a supported contract variant")
+    return selected
+
+
 def requested_variants(contract: Mapping[str, Any] | None = None) -> tuple[Variant, ...]:
     source = load_phase3_contract() if contract is None else contract
     return tuple(Variant(str(row["system_mode"]), str(row["constraint_mode"]), None if row.get("baseline_sigma_m") is None else float(row["baseline_sigma_m"])) for row in source["requested_variants"])
@@ -369,6 +387,8 @@ def load_paths(config_path: Path) -> Phase3Paths:
     document = yaml.safe_load(Path(config_path).resolve().read_text(encoding="utf-8"))
     if not isinstance(document, dict) or document.get("schema_version") != "paper_rebuild.paths.v1":
         raise Phase3RunnerError("unsupported local paths schema")
+    if sequence_override.active() is not None:
+        return _sequence_paths(config_path, document.get("paths", {}))
     values = document.get("paths", {})
     required = ("code_root", "raw_root", "by2_fix_root", "clean_root", "horizontal_literature_rtklib_root", "horizontal_literature_convbin", "horizontal_literature_rtklib_bridge", "horizontal_literature_lambda_library", "horizontal_literature_bridge_root")
     if any(not isinstance(values.get(name), str) for name in required):
@@ -387,6 +407,28 @@ def load_paths(config_path: Path) -> Phase3Paths:
         clean, clean / "01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv",
         by2 / "gnss1-raw.csv", by2 / "gnss2-raw.csv",
         by2 / "trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv",
+        absolute("horizontal_literature_rtklib_root"), absolute("horizontal_literature_convbin"),
+        absolute("horizontal_literature_rtklib_bridge"), absolute("horizontal_literature_lambda_library"),
+        absolute("horizontal_literature_bridge_root"), stage, stage / "04_EXT03_YANG2024/C00",
+        report, report / "PHASE3_EXT03_C00_REPORT.md", report / "PHASE3_STATUS.json",
+    )
+
+
+def _sequence_paths(config_path: Path, values: Mapping[str, Any]) -> Phase3Paths:
+    """HX-02: raw streams, lock and stage root from the active sequence spec."""
+    def absolute(name: str) -> Path:
+        path = Path(values[name])
+        if not path.is_absolute():
+            raise Phase3RunnerError(f"local path is not absolute: {name}")
+        return path.resolve(strict=False)
+    stage = sequence_override.path("artifact_root")
+    fix_root = sequence_override.path("fix_root")
+    report = stage / "11_REPORT"
+    return Phase3Paths(
+        Path(config_path).resolve(), absolute("code_root"), sequence_override.path("raw_root"), fix_root,
+        absolute("clean_root"), sequence_override.path("raw_hash_lock"),
+        sequence_override.path("gnss1_raw"), sequence_override.path("gnss2_raw"),
+        fix_root / "NOT_OPENED_BY_NATIVE_RUN",
         absolute("horizontal_literature_rtklib_root"), absolute("horizontal_literature_convbin"),
         absolute("horizontal_literature_rtklib_bridge"), absolute("horizontal_literature_lambda_library"),
         absolute("horizontal_literature_bridge_root"), stage, stage / "04_EXT03_YANG2024/C00",
@@ -815,7 +857,7 @@ def _prepare_cache(preflight: PreflightResult, attempt: Path, *, resume: bool = 
     if cache.exists():
         if not resume:
             raise Phase3RunnerError("compact cache exists outside resume mode")
-        phase2.validate_compact_cache(cache, source_fingerprint=preflight.source_fingerprint, expected_pair_count=EXPECTED_PAIR_COUNT)
+        phase2.validate_compact_cache(cache, source_fingerprint=preflight.source_fingerprint, expected_pair_count=_expected_pair_count())
         if not all(path.is_file() for path in navs_existing):
             raise Phase3RunnerError("resume cache lacks reconstructed navigation files")
         return cache, navs_existing
@@ -829,8 +871,11 @@ def _prepare_cache(preflight: PreflightResult, attempt: Path, *, resume: bool = 
         phase2._run_convbin(preflight.paths.convbin, ubx, obs, nav)
         reconstructions.append(reconstruction); navs.append(nav)
     pairs, failures = pair_epochs(reconstructions[0].rawx_epochs, reconstructions[1].rawx_epochs, tolerance_seconds=0.0)
-    if failures or len(pairs) != EXPECTED_PAIR_COUNT:
+    if failures or len(pairs) != sequence_override.full_pair_count(EXPECTED_PAIR_COUNT):
         raise Phase3RunnerError(f"exact pair gate failed: {len(pairs)} pairs, {len(failures)} failures")
+    pairs = sequence_override.select_pairs(pairs)
+    if len(pairs) != _expected_pair_count():
+        raise Phase3RunnerError(f"declared start selection changed: {len(pairs)} pairs")
     phase2.write_compact_cache(cache, pairs, source_fingerprint=preflight.source_fingerprint, extra_manifest={"phase3_contract": True, "trace_open_count_before_native_freeze": 0, "HPPOSECEF_semantic_decode_count_before_native_freeze": 0})
     return cache, tuple(navs)
 
@@ -844,7 +889,7 @@ def _read_variant_part(path: Path, preflight: PreflightResult, variant: Variant)
     if value.get("schema_version") != "horizontal_literature.phase3.variant_part.v1" or value.get("source_fingerprint") != preflight.source_fingerprint or value.get("variant_id") != variant.variant_id:
         raise Phase3RunnerError("resume variant-part identity mismatch")
     records = value.get("records")
-    if not isinstance(records, list) or len(records) != EXPECTED_PAIR_COUNT or [row.get("epoch_index") for row in records] != list(range(EXPECTED_PAIR_COUNT)):
+    if not isinstance(records, list) or len(records) != _expected_pair_count() or [row.get("epoch_index") for row in records] != list(range(_expected_pair_count())):
         raise Phase3RunnerError("resume variant-part row conservation mismatch")
     digest = hashlib.sha256(_canonical(records).encode()).hexdigest()
     if digest != value.get("records_sha256"):
@@ -929,12 +974,12 @@ def _flatten_native(records: Sequence[Mapping[str, Any]], inventory: SignalInven
     registry.extend({**common_na, **row} for row in ADAPTER_STOCHASTIC_REGISTRY)
     for key, rows in (("heading_results", heading), ("failure_ledger", failures), ("runtime", runtime), ("signal_availability", signal_rows), ("dd_diagnostics", dd), ("kf_state_diagnostics", kf), ("constraint_diagnostics", constraint), ("ambiguity_state_diagnostics", ambiguity), ("cycle_slip_diagnostics", slips), ("mlambda_diagnostics", mlambda), ("mode_summary", summaries), ("sensitivity_summary", sensitivity), ("stochastic_registry", registry)):
         _write_csv(files[key], rows)
-    provenance = {"data_mode": "real_by2_raw", "synthetic_data_used": False, "semisynthetic_data_used": False, "trace_used_online": False, "receiver_imu_as_body_imu": False, "final_v23_output_solver_input": False, "LegSA_output_solver_input": False, "per_case_tuning": False, "output_only_correction": False, "epoch_deleted_for_metric": False, "old_runtime_input_count": 0, "status_baseline_solver_input": False, "Go2_yaw_solver_input": False, "EXT01_output_solver_input": False, "EXT02_output_solver_input": False, "RTKLIB_diagnostic_output_solver_input": False, "phase_bias_calibration": False, "code_commit": preflight.code_commit, "code_commit_semantics": "BASE_HEAD_ONLY_WITH_HASHED_RUNTIME_SOURCE_OVERLAY", "worktree_overlay_identity": preflight.worktree_overlay_identity, "config_hash": preflight.config_hash, "contract_hash": preflight.contract_hash, "runtime_source_hashes": preflight.runtime_source_hashes, "runtime_dependency_hashes": preflight.runtime_dependency_hashes, "raw_source_hashes": preflight.raw_source_hashes, "provider_hashes": preflight.provider_hashes}
-    summary = {"schema_version": "horizontal_literature.phase3.native_summary.v1", "method_id": METHOD_ID, "case_id": CASE_ID, "paired_epoch_count": EXPECTED_PAIR_COUNT, "supported_modes": list(inventory.supported_modes()), "unsupported_modes": [item.to_dict() for item in inventory.mode_support if not item.supported], "variant_count": len(variants), "expected_native_heading_rows": EXPECTED_PAIR_COUNT * len(variants), "native_heading_rows": len(heading), "trace_open_count": 0, "HPPOSECEF_semantic_decode_count": 0, "resource_probe": resource_probe, "model_registry": _jsonable(PAPER_MODEL_REGISTRY), "combined_system_bias_handling": {"DD_blocks": "SEPARATE_WITHIN_GPS_AND_WITHIN_BDS", "GPS_BDS_cross_DD": False, "explicit_relative_hardware_bias_state": False, "GPS_BDS_measurement_factors": [1.0, 1.0], "pntpos_clock_handling": "EACH_RECEIVER_INDEPENDENT_GPS_CLOCK_PLUS_BDS_MINUS_GPS_OFFSET_SPP_ONLY", "pntpos_clock_or_ISB_transferred_to_DD": False}, "pntpos_bridge_provenance": _jsonable(pntpos_bridge_provenance), "provenance": provenance, "official_code_search_result": preflight.contract["paper_source"]["official_code_search"]["result"]}
+    provenance = {"data_mode": sequence_override.data_mode("real_by2_raw"), "hx02_sequence_spec": sequence_override.echo(), "synthetic_data_used": False, "semisynthetic_data_used": False, "trace_used_online": False, "receiver_imu_as_body_imu": False, "final_v23_output_solver_input": False, "LegSA_output_solver_input": False, "per_case_tuning": False, "output_only_correction": False, "epoch_deleted_for_metric": False, "old_runtime_input_count": 0, "status_baseline_solver_input": False, "Go2_yaw_solver_input": False, "EXT01_output_solver_input": False, "EXT02_output_solver_input": False, "RTKLIB_diagnostic_output_solver_input": False, "phase_bias_calibration": False, "code_commit": preflight.code_commit, "code_commit_semantics": "BASE_HEAD_ONLY_WITH_HASHED_RUNTIME_SOURCE_OVERLAY", "worktree_overlay_identity": preflight.worktree_overlay_identity, "config_hash": preflight.config_hash, "contract_hash": preflight.contract_hash, "runtime_source_hashes": preflight.runtime_source_hashes, "runtime_dependency_hashes": preflight.runtime_dependency_hashes, "raw_source_hashes": preflight.raw_source_hashes, "provider_hashes": preflight.provider_hashes}
+    summary = {"schema_version": "horizontal_literature.phase3.native_summary.v1", "method_id": METHOD_ID, "case_id": CASE_ID, "paired_epoch_count": _expected_pair_count(), "supported_modes": list(inventory.supported_modes()), "unsupported_modes": [item.to_dict() for item in inventory.mode_support if not item.supported], "variant_count": len(variants), "expected_native_heading_rows": _expected_pair_count() * len(variants), "native_heading_rows": len(heading), "trace_open_count": 0, "HPPOSECEF_semantic_decode_count": 0, "resource_probe": resource_probe, "model_registry": _jsonable(PAPER_MODEL_REGISTRY), "combined_system_bias_handling": {"DD_blocks": "SEPARATE_WITHIN_GPS_AND_WITHIN_BDS", "GPS_BDS_cross_DD": False, "explicit_relative_hardware_bias_state": False, "GPS_BDS_measurement_factors": [1.0, 1.0], "pntpos_clock_handling": "EACH_RECEIVER_INDEPENDENT_GPS_CLOCK_PLUS_BDS_MINUS_GPS_OFFSET_SPP_ONLY", "pntpos_clock_or_ISB_transferred_to_DD": False}, "pntpos_bridge_provenance": _jsonable(pntpos_bridge_provenance), "provenance": provenance, "official_code_search_result": preflight.contract["paper_source"]["official_code_search"]["result"]}
     phase2._atomic_write_json(files["native_summary"], summary)
     hashes = {key: _sha256(files[key]) for key in FREEZE_HASH_KEYS}
     row_counts = {"heading_results": len(heading), "failure_ledger": len(failures), "runtime": len(runtime), "signal_availability": len(signal_rows), "dd_diagnostics": len(dd), "kf_state_diagnostics": len(kf), "constraint_diagnostics": len(constraint), "ambiguity_state_diagnostics": len(ambiguity), "cycle_slip_diagnostics": len(slips), "mlambda_diagnostics": len(mlambda), "mode_summary": len(summaries), "sensitivity_summary": len(sensitivity), "stochastic_registry": len(registry)}
-    freeze = {"schema_version": "horizontal_literature.phase3.native_freeze.v1", "source_fingerprint": preflight.source_fingerprint, "native_hashes": hashes, "native_row_counts": row_counts, "trace_open_count_at_freeze": 0, "HPPOSECEF_semantic_decode_count_at_freeze": 0, "status_baseline_solver_input": False, "Go2_yaw_solver_input": False, "EXT01_output_solver_input": False, "EXT02_output_solver_input": False, "LegSA_output_solver_input": False, "RTKLIB_diagnostic_output_solver_input": False, "phase_bias_calibration": False, "paired_epoch_count": EXPECTED_PAIR_COUNT, "variant_count": len(variants), "heading_row_count": len(heading), "provenance": provenance}
+    freeze = {"schema_version": "horizontal_literature.phase3.native_freeze.v1", "source_fingerprint": preflight.source_fingerprint, "native_hashes": hashes, "native_row_counts": row_counts, "trace_open_count_at_freeze": 0, "HPPOSECEF_semantic_decode_count_at_freeze": 0, "status_baseline_solver_input": False, "Go2_yaw_solver_input": False, "EXT01_output_solver_input": False, "EXT02_output_solver_input": False, "LegSA_output_solver_input": False, "RTKLIB_diagnostic_output_solver_input": False, "phase_bias_calibration": False, "paired_epoch_count": _expected_pair_count(), "variant_count": len(variants), "heading_row_count": len(heading), "provenance": provenance}
     _validate_runtime_dependency_hashes(preflight.paths.bridge_root, preflight.runtime_dependency_hashes)
     phase2._atomic_write_json(files["native_freeze"], freeze)
     return freeze
@@ -1656,7 +1701,7 @@ def run_phase3(config_path: Path, *, mode: str = "preflight", method_id: str = M
         cache, navs = _prepare_cache(preflight, hidden_attempt, resume=resume)
         reader = phase2.CompactCacheReader(cache)
         inventory = audit_signal_availability([reader.pair(index) for index in range(len(reader))], RtklibBroadcastProvider(preflight.paths.rtklib_bridge, navs))
-        variants = tuple(item for item in requested_variants(preflight.contract) if item.system_mode in set(inventory.supported_modes()))
+        variants = _declared_variants(preflight.contract, set(inventory.supported_modes()))
         determinism = _real_determinism_probe(cache, navs, preflight, variants, hidden_attempt)
         if not determinism["row_level_scientific_equality"]:
             raise Phase3RunnerError("workers 1 and 16 differ on real input-only recursive subset")
@@ -1702,7 +1747,7 @@ def run_phase3(config_path: Path, *, mode: str = "preflight", method_id: str = M
     pairs = [reader.pair(index) for index in range(len(reader))]
     inventory = audit_signal_availability(pairs, provider)
     supported = set(inventory.supported_modes())
-    variants = tuple(item for item in requested_variants(preflight.contract) if item.system_mode in supported)
+    variants = _declared_variants(preflight.contract, supported)
     if not variants:
         raise Phase3RunnerError("UNSUPPORTED_EXT03_ON_BY2_NO_DUAL_FREQUENCY_MODE_WITH_EPHEMERIS")
     signal_freeze = attempt / "SIGNAL_AUDIT/EXT03_C00_SIGNAL_SUPPORT_FREEZE.json"

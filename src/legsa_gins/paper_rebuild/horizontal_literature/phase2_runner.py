@@ -37,6 +37,7 @@ from typing import Any, Callable, Iterable, Mapping, Sequence
 import numpy as np
 import yaml
 
+from . import sequence_override
 from .shared_raw_backend import (
     DoubleDifferenceStageError,
     RawBackendError,
@@ -190,6 +191,11 @@ class PostNativeDestinations:
         return self.recovery_id is not None
 
 
+def _expected_pair_count() -> int:
+    """Frozen BY2 count unless an HX-02 sequence spec is active for this process."""
+    return sequence_override.expected_pair_count(EXPECTED_PAIR_COUNT)
+
+
 def _validated_post_recovery_id(value: str | None) -> str | None:
     if value is None:
         return None
@@ -312,6 +318,8 @@ def _require_contained(path: Path, root: Path, label: str) -> None:
 
 def load_paths(config_path: Path) -> Phase2Paths:
     config = Path(config_path).resolve()
+    if sequence_override.active() is not None:
+        return _sequence_paths(config)
     document = _load_mapping(config)
     if document.get("schema_version") != "paper_rebuild.paths.v1":
         raise Phase2RunnerError("unsupported local paths schema")
@@ -343,6 +351,37 @@ def load_paths(config_path: Path) -> Phase2Paths:
         gnss1_raw=by2 / "gnss1-raw.csv",
         gnss2_raw=by2 / "gnss2-raw.csv",
         trace=by2 / trace_name,
+        rtklib_root=_configured_absolute(values, "horizontal_literature_rtklib_root"),
+        convbin=_configured_absolute(values, "horizontal_literature_convbin"),
+        rtklib_bridge=_configured_absolute(values, "horizontal_literature_rtklib_bridge"),
+        bridge_root=_configured_absolute(values, "horizontal_literature_bridge_root"),
+        stage_root=stage,
+        native_root=stage / "03_EXT02_CWLS/C00",
+        report_root=report_root,
+        final_report=report_root / REPORT_FILE_NAME,
+        final_status=report_root / STATUS_FILE_NAME,
+    )
+
+
+def _sequence_paths(config: Path) -> Phase2Paths:
+    """HX-02: raw streams, lock and stage root from the active sequence spec."""
+    document = _load_mapping(config)
+    values = document.get("paths")
+    if document.get("schema_version") != "paper_rebuild.paths.v1" or not isinstance(values, dict):
+        raise Phase2RunnerError("unsupported local paths schema")
+    stage = sequence_override.path("artifact_root")
+    fix_root = sequence_override.path("fix_root")
+    report_root = stage / "11_REPORT"
+    return Phase2Paths(
+        config_path=config,
+        code_root=_configured_absolute(values, "code_root"),
+        raw_root=sequence_override.path("raw_root"),
+        by2_fix_root=fix_root,
+        clean_root=_configured_absolute(values, "clean_root"),
+        raw_hash_lock=sequence_override.path("raw_hash_lock"),
+        gnss1_raw=sequence_override.path("gnss1_raw"),
+        gnss2_raw=sequence_override.path("gnss2_raw"),
+        trace=fix_root / "NOT_OPENED_BY_NATIVE_RUN",
         rtklib_root=_configured_absolute(values, "horizontal_literature_rtklib_root"),
         convbin=_configured_absolute(values, "horizontal_literature_convbin"),
         rtklib_bridge=_configured_absolute(values, "horizontal_literature_rtklib_bridge"),
@@ -657,14 +696,21 @@ def preflight_phase2(
     paths = load_paths(config_path)
     if paths.code_root != REPOSITORY_ROOT.resolve():
         raise Phase2RunnerError("configured code_root is not this worktree")
-    expected_by2_relative = Path(
-        "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/"
-        "vrtk2_a87c6e_2026-03-06-08-00-54_minimal"
-    )
-    if paths.by2_fix_root != paths.raw_root / expected_by2_relative:
-        raise Phase2RunnerError("configured BY2 source identity drifted")
-    _require_contained(paths.by2_fix_root, paths.raw_root, "BY2 source")
-    _require_contained(paths.stage_root, paths.clean_root, "CLEAN4 stage")
+    if sequence_override.active() is None:
+        expected_by2_relative = Path(
+            "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/"
+            "vrtk2_a87c6e_2026-03-06-08-00-54_minimal"
+        )
+        if paths.by2_fix_root != paths.raw_root / expected_by2_relative:
+            raise Phase2RunnerError("configured BY2 source identity drifted")
+        _require_contained(paths.by2_fix_root, paths.raw_root, "BY2 source")
+        _require_contained(paths.stage_root, paths.clean_root, "CLEAN4 stage")
+    else:
+        if paths.gnss1_raw.parent != paths.by2_fix_root or paths.gnss2_raw.parent != paths.by2_fix_root:
+            raise Phase2RunnerError("HX-02 raw streams are outside the declared sequence folder")
+        _require_contained(paths.by2_fix_root, paths.raw_root, "HX-02 sequence source")
+        if paths.stage_root != sequence_override.path("artifact_root"):
+            raise Phase2RunnerError("HX-02 stage root differs from the declared artifact root")
     for target, label in (
         (paths.native_root, "native root"), (paths.report_root, "report root"),
         (paths.final_report, "final report"), (paths.final_status, "final status"),
@@ -1305,7 +1351,7 @@ def _prepare_or_resume_cache(
             raise Phase2RunnerError("cache exists outside resume mode")
         manifest = validate_compact_cache(
             cache_root, source_fingerprint=preflight.source_fingerprint,
-            expected_pair_count=EXPECTED_PAIR_COUNT,
+            expected_pair_count=_expected_pair_count(),
         )
         derived = manifest.get("derived_provider_files", {})
         for entry in derived.values():
@@ -1348,10 +1394,13 @@ def _prepare_or_resume_cache(
         reconstruction1.rawx_epochs, reconstruction2.rawx_epochs,
         tolerance_seconds=0.0,
     )
-    if pairing_failures or len(pairs) != EXPECTED_PAIR_COUNT:
+    if pairing_failures or len(pairs) != sequence_override.full_pair_count(EXPECTED_PAIR_COUNT):
         raise Phase2RunnerError(
             f"exact pairing gate failed: pairs={len(pairs)} failures={len(pairing_failures)}"
         )
+    pairs = sequence_override.select_pairs(pairs)
+    if len(pairs) != _expected_pair_count():
+        raise Phase2RunnerError(f"declared start selection changed: pairs={len(pairs)}")
     command1 = _run_convbin(preflight.paths.convbin, ubx1, observation1, navigation1)
     command2 = _run_convbin(preflight.paths.convbin, ubx2, observation2, navigation2)
     derived_paths = {
@@ -2384,7 +2433,7 @@ def _resource_admission_evidence(
         int(disk_after.get("available_bytes", 0)),
     )
     projected_output = (
-        EXPECTED_PAIR_COUNT * RESOURCE_PROJECTED_BYTES_PER_EPOCH
+        _expected_pair_count() * RESOURCE_PROJECTED_BYTES_PER_EPOCH
         + RESOURCE_PROJECTED_FIXED_BYTES
     )
     required_disk = projected_output + RESOURCE_DISK_SAFETY_RESERVE_BYTES
@@ -2445,7 +2494,7 @@ def _resource_admission_evidence(
         "rejection_reasons": rejection_reasons,
         "checks": checks,
         "deterministic_output_size_projection": {
-            "paired_epoch_count": EXPECTED_PAIR_COUNT,
+            "paired_epoch_count": _expected_pair_count(),
             "bytes_per_epoch": RESOURCE_PROJECTED_BYTES_PER_EPOCH,
             "fixed_bytes": RESOURCE_PROJECTED_FIXED_BYTES,
             "projected_output_bytes": projected_output,
@@ -2827,7 +2876,8 @@ def _native_provenance(
     provider_hashes: Mapping[str, str],
 ) -> dict[str, Any]:
     return {
-        "data_mode": DATA_MODE,
+        "data_mode": sequence_override.data_mode(DATA_MODE),
+        "hx02_sequence_spec": sequence_override.echo(),
         "raw_source_hashes": preflight.raw_source_hashes,
         "provider_hashes": dict(sorted(provider_hashes.items())),
         "synthetic_data_used": False,
@@ -3195,8 +3245,8 @@ def validate_native_freeze(native_root: Path) -> dict[str, Any]:
         if not candidate.is_file() or _sha256_file(candidate) != digest:
             raise Phase2RunnerError(f"native auxiliary evidence hash mismatch: {relative}")
     pair_count = int(freeze.get("paired_epoch_count", -1))
-    if pair_count != EXPECTED_PAIR_COUNT:
-        raise Phase2RunnerError("native freeze paired-epoch count is not 1509")
+    if pair_count != _expected_pair_count():
+        raise Phase2RunnerError("native freeze paired-epoch count differs from the declared count")
     exact_epoch_streams = (
         "heading_results", "runtime", "dd_diagnostics", "candidate_diagnostics",
         "refinement_diagnostics", "objective_oracle_diagnostics", "tracking_diagnostics",
@@ -3581,7 +3631,7 @@ def _validated_compact_cache_leap_seconds(cache_root: Path) -> tuple[int, dict[s
     cache = CompactCacheReader(cache_root)
     r1 = np.asarray(cache.epochs["r1_leap"], dtype=np.int64)
     r2 = np.asarray(cache.epochs["r2_leap"], dtype=np.int64)
-    if len(cache) != EXPECTED_PAIR_COUNT or r1.size != r2.size or r1.size == 0:
+    if len(cache) != _expected_pair_count() or r1.size != r2.size or r1.size == 0:
         raise Phase2RunnerError("compact-cache leap-second evidence is incomplete")
     values = np.unique(np.concatenate((r1, r2)))
     if values.tolist() != [EXPECTED_GPS_UTC_LEAP_SECONDS]:

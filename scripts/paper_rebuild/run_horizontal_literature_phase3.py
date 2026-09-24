@@ -16,6 +16,7 @@ SOURCE_ROOT = REPOSITORY_ROOT / "src"
 if str(SOURCE_ROOT) not in sys.path:
     sys.path.insert(0, str(SOURCE_ROOT))
 
+from legsa_gins.paper_rebuild.horizontal_literature import sequence_override  # noqa: E402
 from legsa_gins.paper_rebuild.horizontal_literature.phase3_runner import (  # noqa: E402
     ALLOWED_MODES, CASE_ID, DEFAULT_WORKERS, METHOD_ID, run_phase3,
     terminal_json, terminalize_failure,
@@ -32,7 +33,13 @@ def main() -> int:
     parser.add_argument("--workers", type=int, default=DEFAULT_WORKERS)
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--post-recovery-id")
+    parser.add_argument("--sequence-spec", type=Path,
+                        help="HX-02 declared sequence spec; native-only lifecycle, no trace")
     args = parser.parse_args()
+    if args.sequence_spec is not None:
+        if args.mode != "native-only" or args.trace_mode != "disabled" or args.post_recovery_id:
+            raise SystemExit("--sequence-spec requires --mode native-only and --trace-mode disabled")
+        sequence_override.activate(args.sequence_spec)
     try:
         result = run_phase3(
             args.paths_config, mode=args.mode, method_id=args.method_id,

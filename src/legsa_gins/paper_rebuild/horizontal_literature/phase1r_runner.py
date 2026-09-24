@@ -53,6 +53,8 @@ from .phase1_runner import (
     _run_convbin,
     load_paths,
 )
+from . import sequence_override
+from .phase1_runner import OUTPUT_RELATIVE_PATHS, Phase1Paths, _configured_path
 from .shared_raw_backend import (
     HALF_CYCLE_CONTRACT,
     DoubleDifferenceStageError,
@@ -177,8 +179,35 @@ def _release_run_lock(lock: Path, token: str) -> None:
         lock.unlink()
 
 
+def _expected_pair_count() -> int:
+    """Frozen BY2 count unless an HX-02 sequence spec is active for this process."""
+    return sequence_override.expected_pair_count(EXPECTED_PAIR_COUNT)
+
+
+def _sequence_base_paths(config_path: Path) -> Phase1Paths:
+    """HX-02: raw streams, lock and stage root from the active sequence spec."""
+    value = yaml.safe_load(Path(config_path).resolve(strict=True).read_text(encoding="utf-8"))
+    if not isinstance(value, dict) or value.get("schema_version") != "paper_rebuild.paths.v1":
+        raise Phase1RRunnerError("invalid CLEAN3R4 path schema")
+    mapping = value.get("paths")
+    stage = sequence_override.path("artifact_root")
+    raw_root = sequence_override.path("raw_root")
+    return Phase1Paths(
+        _configured_path(mapping, "code_root"), raw_root.parents[1], raw_root,
+        sequence_override.path("fix_root"), _configured_path(mapping, "clean_root"),
+        sequence_override.path("gnss1_raw"), sequence_override.path("gnss2_raw"),
+        sequence_override.path("raw_hash_lock"), stage,
+        {name: stage / relative for name, relative in OUTPUT_RELATIVE_PATHS.items()},
+        _configured_path(mapping, "horizontal_literature_rtklib_root"),
+        _configured_path(mapping, "horizontal_literature_convbin"),
+        _configured_path(mapping, "horizontal_literature_rtklib_bridge"),
+        _configured_path(mapping, "horizontal_literature_lambda_library"),
+        _configured_path(mapping, "horizontal_literature_bridge_root"),
+    )
+
+
 def load_phase1r_paths(config_path: Path) -> Phase1RPaths:
-    base = load_paths(config_path)
+    base = _sequence_base_paths(config_path) if sequence_override.active() is not None else load_paths(config_path)
     prior = base.stage_root / "02_EXT01_CLAMBDA/C00_VALIDATED"
     target = base.stage_root / f"02_EXT01_CLAMBDA/{PHASE1R_ATTEMPT_ID}"
     return Phase1RPaths(
@@ -356,9 +385,29 @@ def _external_audit(paths: Phase1RPaths) -> dict[str, Any]:
     }
 
 
+def _validate_sequence_start(
+    paths: Phase1RPaths, resume: bool,
+) -> tuple[dict[str, str], dict[str, str], dict[str, str]]:
+    """HX-02: the CLEAN4 C00/R1 immutability records do not live in the new artifact root."""
+    base = paths.base
+    if base.stage_root != sequence_override.path("artifact_root"):
+        raise Phase1RRunnerError("HX-02 stage root differs from the declared artifact root")
+    if not paths.contract.is_file():
+        raise Phase1RRunnerError("Phase-1R tracked contract is missing")
+    for protected in (paths.target_root, paths.parts_root, paths.native_freeze, paths.report, paths.status):
+        _assert_contained(protected, base.stage_root)
+    if paths.target_root.exists() and not resume:
+        raise Phase1RRunnerError("validated output root already exists; use --resume")
+    lock = read_hash_lock(base.raw_hash_lock)
+    raw_hashes = verify_raw_sources(base.raw_root, _raw_relatives(base), lock)
+    return raw_hashes, {}, {}
+
+
 def _validate_start(
     paths: Phase1RPaths, resume: bool,
 ) -> tuple[dict[str, str], dict[str, str], dict[str, str]]:
+    if sequence_override.active() is not None:
+        return _validate_sequence_start(paths, resume)
     base = paths.base
     _assert_no_symlink_components(base.clean_root)
     _assert_contained(base.stage_root, base.clean_root)
@@ -1211,20 +1260,20 @@ def _validate_native_freeze(
     if (freeze.get("native_frozen_before_trace_open") is not True
             or freeze.get("trace_open_count_at_freeze") != 0):
         raise Phase1RRunnerError("native freeze does not prove zero pre-freeze trace opens")
-    if (freeze.get("paired_epoch_count") != EXPECTED_PAIR_COUNT
-            or freeze.get("native_row_count") != EXPECTED_PAIR_COUNT):
+    if (freeze.get("paired_epoch_count") != _expected_pair_count()
+            or freeze.get("native_row_count") != _expected_pair_count()):
         raise Phase1RRunnerError("native freeze does not conserve all paired epochs")
     failure_count = freeze.get("failure_row_count")
     if (not isinstance(failure_count, int)
-            or not 0 <= failure_count <= EXPECTED_PAIR_COUNT):
+            or not 0 <= failure_count <= _expected_pair_count()):
         raise Phase1RRunnerError("native freeze failure-row count is invalid")
     expected_rows = {
-        "native": EXPECTED_PAIR_COUNT,
+        "native": _expected_pair_count(),
         "failures": failure_count,
-        "runtime": EXPECTED_PAIR_COUNT,
-        "dd": EXPECTED_PAIR_COUNT,
-        "tracking": EXPECTED_PAIR_COUNT,
-        "search": EXPECTED_PAIR_COUNT,
+        "runtime": _expected_pair_count(),
+        "dd": _expected_pair_count(),
+        "tracking": _expected_pair_count(),
+        "search": _expected_pair_count(),
     }
     for name, expected in expected_rows.items():
         if _csv_data_row_count(paths.output_files[name]) != expected:
@@ -1742,6 +1791,8 @@ def _run_rtklib_diagnostic(
     temporary = output.with_suffix(".pos.tmp")
     command = [
         str(paths.rnx2rtkp), "-k", str(config), "-o", str(temporary),
+        *sequence_override.rtklib_start_arguments(
+            (int(proxies[0]["gps_week"]), float(proxies[0]["gps_tow_seconds"])) if proxies else None),
         str(observation_paths[1]), str(observation_paths[0]),
         str(navigation_paths[0]), str(navigation_paths[1]),
     ]
@@ -1787,7 +1838,7 @@ def _run_rtklib_diagnostic(
         "receiver_order": "first_obs_GNSS2_second_obs_GNSS1",
         "baseline_constraint_used": False,
         "output_row_count": len(rows),
-        "coverage_of_1509": len(rows) / EXPECTED_PAIR_COUNT,
+        "coverage_of_1509": len(rows) / _expected_pair_count(),
         "quality_counts": dict(sorted(Counter(row["quality"] for row in rows).items())),
         "matched_proxy_count": matched,
         "quality_statistics": {
@@ -1905,10 +1956,10 @@ def _terminal_from_evidence(
     validation_counts: Mapping[str, int],
 ) -> tuple[str, list[dict[str, Any]]]:
     required_counts = {
-        "native_rows": EXPECTED_PAIR_COUNT,
-        "dd_rows": EXPECTED_PAIR_COUNT,
-        "search_rows": EXPECTED_PAIR_COUNT,
-        "proxy_rows": EXPECTED_PAIR_COUNT,
+        "native_rows": _expected_pair_count(),
+        "dd_rows": _expected_pair_count(),
+        "search_rows": _expected_pair_count(),
+        "proxy_rows": _expected_pair_count(),
     }
     if any(validation_counts.get(name) != expected
            for name, expected in required_counts.items()):
@@ -2038,12 +2089,15 @@ def _finalize(
         pairs, parts, proxies, event_map
     )
     half_cycle_rows = _aggregate_half_cycle(fractional_rows)
-    trace = _trace_metrics_after_freeze(
-        paths, pairs, proxy_rows,
-        fingerprint=str(native_freeze["run_fingerprint"]),
-        raw_hashes=raw_hashes, original_hashes=original_hashes,
-        prior_hashes=prior_hashes,
-    )
+    if sequence_override.active() is None:
+        trace = _trace_metrics_after_freeze(
+            paths, pairs, proxy_rows,
+            fingerprint=str(native_freeze["run_fingerprint"]),
+            raw_hashes=raw_hashes, original_hashes=original_hashes,
+            prior_hashes=prior_hashes,
+        )
+    else:
+        trace = {"status": "TRACE_DISABLED_HX02_REGISTERED_EVALUATOR_CHILD_ONLY", "trace_open_count": 0}
     rtklib = _run_rtklib_diagnostic(
         paths, observation_paths, navigation_paths, proxies,
         fingerprint=str(native_freeze["run_fingerprint"]),
@@ -2095,7 +2149,8 @@ def _finalize(
         "attempt_id": PHASE1R_ATTEMPT_ID,
         "method_id": "EXT01_CLAMBDA",
         "case_id": "C00_VALIDATED",
-        "data_mode": "real_by2_raw",
+        "data_mode": sequence_override.data_mode("real_by2_raw"),
+        "hx02_sequence_spec": sequence_override.echo(),
         "native_counts": {
             "paired_epochs": len(pairs),
             "native_rows": len(results),
@@ -2227,12 +2282,15 @@ def _finalize(
         "classic18_run": False,
         "common_backbone_navigation_run": False,
     }
-    current_original = _hash_tree(paths.base.stage_root / "02_EXT01_CLAMBDA/C00")
-    if current_original != dict(original_hashes):
-        raise Phase1RRunnerError("immutable original Phase-1 EXT01/C00 changed during Phase-1R")
-    current_prior = _prior_attempt_hashes(paths)
-    if current_prior != dict(prior_hashes):
-        raise Phase1RRunnerError("immutable Phase-1R R1 blocker changed during R2")
+    if sequence_override.active() is None:
+        current_original = _hash_tree(paths.base.stage_root / "02_EXT01_CLAMBDA/C00")
+        if current_original != dict(original_hashes):
+            raise Phase1RRunnerError("immutable original Phase-1 EXT01/C00 changed during Phase-1R")
+        current_prior = _prior_attempt_hashes(paths)
+        if current_prior != dict(prior_hashes):
+            raise Phase1RRunnerError("immutable Phase-1R R1 blocker changed during R2")
+    else:
+        current_original, current_prior = {}, {}
     summary.update({
         "original_c00_tree_digest_after": _tree_digest(current_original),
         "original_c00_immutable": True,
@@ -2269,8 +2327,9 @@ def run_phase1r(
 ) -> dict[str, Any]:
     if method_id != "EXT01_CLAMBDA" or case_id != "C00_VALIDATED":
         raise Phase1RRunnerError("Phase-1R method/case must be EXT01_CLAMBDA/C00_VALIDATED")
-    if trace_mode != "post-native-descriptive":
-        raise Phase1RRunnerError("trace mode must be literal post-native-descriptive")
+    allowed_trace_mode = "post-native-descriptive" if sequence_override.active() is None else "disabled"
+    if trace_mode != allowed_trace_mode:
+        raise Phase1RRunnerError(f"trace mode must be literal {allowed_trace_mode}")
     if not 1 <= workers <= MAX_WORKERS:
         raise Phase1RRunnerError(f"workers must be in 1..{MAX_WORKERS}")
     config_path = Path(config_path).resolve(strict=True)
@@ -2291,22 +2350,29 @@ def run_phase1r(
         pairs, pairing_failures = pair_epochs(
             reconstruction1.rawx_epochs, reconstruction2.rawx_epochs
         )
-        if pairing_failures or len(pairs) != EXPECTED_PAIR_COUNT:
+        if pairing_failures or len(pairs) != sequence_override.full_pair_count(EXPECTED_PAIR_COUNT):
             raise Phase1RRunnerError(
-                f"exact pairing differs from frozen 1509: pairs={len(pairs)} failures={len(pairing_failures)}"
+                f"exact pairing differs from declared count: pairs={len(pairs)} failures={len(pairing_failures)}"
             )
+        pairs = sequence_override.select_pairs(pairs)
+        if len(pairs) != _expected_pair_count():
+            raise Phase1RRunnerError(f"declared start selection changed: pairs={len(pairs)}")
         independent_counts = [gps_l1_epoch_accounting(*pair).as_counts() for pair in pairs]
         raw_values = [row["common_raw_satellite_count"] for row in independent_counts]
         pr_cp_values = [row["common_pr_cp_valid_satellite_count"] for row in independent_counts]
         half_values = [row["common_half_cycle_valid_satellite_count"] for row in independent_counts]
-        if (min(raw_values), sum(raw_values), max(raw_values), sum(value == 0 for value in raw_values)) != (
-            5, 12013, 10, 0
-        ):
-            raise Phase1RRunnerError("independent common-raw count contract mismatch")
-        if (min(pr_cp_values), sum(pr_cp_values), max(pr_cp_values)) != (3, 9686, 9):
-            raise Phase1RRunnerError("independent PR+CP count contract mismatch")
-        if (min(half_values), sum(half_values), max(half_values)) != (2, 6577, 9):
-            raise Phase1RRunnerError("independent half-cycle count contract mismatch")
+        # The frozen BY2 raw-count contract applies to BY2 C00; for HX-02 it is
+        # recomputed here and recorded in the native summary, never asserted
+        # for other sequences.
+        if sequence_override.active() is None or sequence_override.option("sequence_id") == "BY2":
+            if (min(raw_values), sum(raw_values), max(raw_values), sum(value == 0 for value in raw_values)) != (
+                5, 12013, 10, 0
+            ):
+                raise Phase1RRunnerError("independent common-raw count contract mismatch")
+            if (min(pr_cp_values), sum(pr_cp_values), max(pr_cp_values)) != (3, 9686, 9):
+                raise Phase1RRunnerError("independent PR+CP count contract mismatch")
+            if (min(half_values), sum(half_values), max(half_values)) != (2, 6577, 9):
+                raise Phase1RRunnerError("independent half-cycle count contract mismatch")
         positions, spp_failures = _precompute_spp(
             pairs, paths.base.rtklib_bridge, navigation_paths
         )
@@ -2318,10 +2384,10 @@ def run_phase1r(
         parts, worker_audit = _run_epoch_parts(
             paths, fingerprint, pairs, positions, spp_failures, navigation_paths, workers
         )
-        if len(parts) != EXPECTED_PAIR_COUNT:
+        if len(parts) != _expected_pair_count():
             raise Phase1RRunnerError("epoch-part conservation failed")
         tracking, event_map = _tracking_rows(pairs, parts)
-        if len(tracking) != EXPECTED_PAIR_COUNT:
+        if len(tracking) != _expected_pair_count():
             raise Phase1RRunnerError("tracking row conservation failed")
         if paths.native_freeze.is_file():
             native_freeze = _validate_native_freeze(
@@ -2348,20 +2414,21 @@ def run_phase1r(
         immutability_errors: list[str] = []
         current_original: dict[str, str] = {}
         current_prior: dict[str, str] = {}
-        try:
-            current_original = _hash_tree(
-                paths.base.stage_root / "02_EXT01_CLAMBDA/C00"
-            )
-        except Exception as audit_exc:
-            immutability_errors.append(
-                f"original_c00:{type(audit_exc).__name__}:{audit_exc}"
-            )
-        try:
-            current_prior = _prior_attempt_hashes(paths)
-        except Exception as audit_exc:
-            immutability_errors.append(
-                f"phase1r_r1:{type(audit_exc).__name__}:{audit_exc}"
-            )
+        if sequence_override.active() is None:
+            try:
+                current_original = _hash_tree(
+                    paths.base.stage_root / "02_EXT01_CLAMBDA/C00"
+                )
+            except Exception as audit_exc:
+                immutability_errors.append(
+                    f"original_c00:{type(audit_exc).__name__}:{audit_exc}"
+                )
+            try:
+                current_prior = _prior_attempt_hashes(paths)
+            except Exception as audit_exc:
+                immutability_errors.append(
+                    f"phase1r_r1:{type(audit_exc).__name__}:{audit_exc}"
+                )
         original_immutable = current_original == dict(original_hashes)
         prior_immutable = current_prior == dict(prior_hashes)
         if not original_immutable:

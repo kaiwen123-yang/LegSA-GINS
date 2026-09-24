@@ -16,6 +16,7 @@ SOURCE_ROOT = REPOSITORY_ROOT / "src"
 if str(SOURCE_ROOT) not in sys.path:
     sys.path.insert(0, str(SOURCE_ROOT))
 
+from legsa_gins.paper_rebuild.horizontal_literature import sequence_override
 from legsa_gins.paper_rebuild.horizontal_literature.phase1r_runner import (
     DEFAULT_WORKERS,
     PASS_REPAIRED,
@@ -37,7 +38,13 @@ def main() -> int:
     parser.add_argument("--trace-mode", default="post-native-descriptive")
     parser.add_argument("--workers", type=int, default=DEFAULT_WORKERS)
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--sequence-spec", type=Path,
+                        help="HX-02 declared sequence spec; requires --trace-mode disabled")
     args = parser.parse_args()
+    if args.sequence_spec is not None:
+        if args.trace_mode != "disabled":
+            raise SystemExit("--sequence-spec requires --trace-mode disabled")
+        sequence_override.activate(args.sequence_spec)
     try:
         result = run_phase1r(
             args.paths_config,

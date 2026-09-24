@@ -1,0 +1,267 @@
+schema_version: hx02.five_category.contract.v1
+task: HX-02
+title: Five-category external comparison on three sequences
+status: CODE_FREEZE_CONTRACT
+start_commit: 0f972b9ba5a3a79811e3b76211254af8c3338b27
+inventory:
+  csv: docs/paper_rebuild/hext/HX_INVENTORY.csv
+  md: docs/paper_rebuild/hext/HX_INVENTORY.md
+local_path_config: configs/paper_rebuild/DATA_PATHS.CLEAN3R4.local.yaml
+roots:
+  stage: <CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY
+  scratch_local_key: hx02_scratch            # <HX02_SCRATCH>, ext4, self-cleaning
+  scratch_directory_name: CLEAN9_EXTERNAL_COMPARISON
+  scratch_limit_bytes: 20000000000
+  external_local_key: hx02_external_root     # <EXTERNAL>
+  matlab_local_key: hx02_matlab_executable   # <MATLAB_EXE>; no PATH fallback
+  stage_layout: [00_CONTRACT, 00_CONTROL, 01_INPUT_PINS, RUNS, 90_AGGREGATE, 99_HARD_STOP]
+sequences:
+  BY2:
+    case: C00
+    start_convention: FILE_START
+    window: [66.0, 340.0]
+    base_time: 1772784000.0
+    baseline_median_m: 0.356191491865984
+    registered_rawx_epochs: 1509
+  BY2H:
+    case: CONTRACT_START
+    start_convention: CONTRACT_START
+    window: [413.0, 683.0]
+    base_time: 1772784000.0
+    baseline_median_m: 0.35418777593777223
+    registered_rawx_epochs: 1483
+  BY2O:
+    case: FILE_START
+    start_convention: FILE_START
+    window: [3186.0, 3563.0]
+    base_time: 1772780400.0
+    baseline_median_m: 0.35013463864843675
+    registered_rawx_epochs: 2231
+contract_start_application:
+  EXT01_EXT04: keep exact pairs whose receiver-1 RAWX time minus base_time >= 413.0 s (1423 of 1483 pairs)
+  RTKLIB: rnx2rtkp -ts at the first selected exact pair, 2026/03/06 08:07:11.198 GPST (RTKLIB start tolerance would otherwise admit the 412.998 s epoch)
+  EXT01_IN_RUN_RTKLIB_DIAGNOSTIC: same -ts as RTKLIB, so its rows cover exactly the selected pairs
+  GINAV: start_time = max(RINEX/IMU overlap start, ceil GPST(base_time + 413 s)) = 2026/03/06 08:07:11
+  HARTLEY: cache holds Go2 records at or after base_time + 413 s; contact hysteresis restarts at the first kept record
+heading_denominators:
+  definition: method-native paired-epoch table rows inside the closed window
+  BY2: 1370
+  BY2H: 1350
+  BY2O: 1885
+methods:
+  EXT01:
+    category: dual_antenna_ambiguity_heading
+    output_type: heading_only
+    config: LIT
+    runner: scripts/paper_rebuild/run_horizontal_literature_phase1r.py
+    runner_arguments: [--trace-mode, disabled, --workers, "16"]
+    valid_flag: integer_solution_returned == true (no ambiguity acceptance test exists)
+    parameters:
+      - {name: baseline_length_m, value: 0.350, source: "EXTERNAL_METHOD_CONTRACTS_V1.yaml:9; PHASE1R_VALIDATION_CONTRACT_V2.yaml:35"}
+      - {name: sigma_floors, value: "pseudorange 0.50 m, carrier 0.004 cycle, doppler 0.02 Hz", source: "EXTERNAL_METHOD_CONTRACTS_V1.yaml:73-84"}
+      - {name: pseudorange_sigma_m, value: "max(0.50,0.01*2^prStdev)", source: "PHASE1R_VALIDATION_CONTRACT_V2.yaml:64"}
+      - {name: carrier_sigma_cycles, value: "max(0.004,0.004*cpStdev)", source: "PHASE1R_VALIDATION_CONTRACT_V2.yaml:65"}
+      - {name: doppler_sigma_hz, value: "max(0.02,0.002*2^doStdev)", source: "PHASE1R_VALIDATION_CONTRACT_V2.yaml:66"}
+      - {name: lambda_seed_count, value: 8, source: "PHASE1R_VALIDATION_CONTRACT_V2.yaml:74"}
+      - {name: deterministic_node_budget, value: 1000000, source: "PHASE1R_VALIDATION_CONTRACT_V2.yaml:77"}
+      - {name: ambiguity_acceptance_test, value: "none (ratio_threshold null)", source: "PHASE1R_VALIDATION_CONTRACT_V2.yaml:80-81"}
+  EXT02:
+    category: dual_antenna_ambiguity_heading
+    output_type: heading_only
+    config: LIT
+    runner: scripts/paper_rebuild/run_horizontal_literature_phase2.py
+    runner_arguments: [--mode, native-only, --trace-mode, disabled, --workers, "16"]
+    valid_flag: method_native_accepted == true
+    parameters:
+      - {name: K_policy, value: ALL_UNIQUE_CANDIDATES, source: "PHASE2_EXT02_CWLS_CONTRACT_V1.yaml:48"}
+      - {name: delta_Delta, value: 0.05, source: "PHASE2_EXT02_CWLS_CONTRACT_V1.yaml:50 (paper value)"}
+      - {name: baseline_length_m, value: 0.350, source: "PHASE2_EXT02_CWLS_CONTRACT_V1.yaml:53"}
+      - {name: refinement, value: "tolerance 1.0e-10, max 20 iterations", source: "PHASE2_EXT02_CWLS_CONTRACT_V1.yaml:55-56"}
+      - {name: elevation_mask_deg, value: 10.0, source: "PHASE2_EXT02_CWLS_CONTRACT_V1.yaml:87"}
+      - {name: code_sigma_m, value: "max(0.50, 0.01*2^prStdev)", source: "PHASE2_EXT02_CWLS_CONTRACT_V1.yaml:124"}
+      - {name: carrier_sigma_cycles, value: "max(0.004, 0.004*cpStdev); cpStdev=15 invalid", source: "PHASE2_EXT02_CWLS_CONTRACT_V1.yaml:125"}
+      - {name: dd_covariance, value: "SD variance = receiver1 + receiver2; DD = diag(nonpivot SD) + pivot SD * 11^T; objective weight full Q_DD^-1", source: "PHASE2_EXT02_CWLS_CONTRACT_V1.yaml:126-128"}
+  EXT03:
+    category: dual_antenna_ambiguity_heading
+    output_type: heading_only
+    config: LIT
+    runner: scripts/paper_rebuild/run_horizontal_literature_phase3.py
+    runner_arguments: [--mode, native-only, --trace-mode, disabled, --workers, "16"]
+    declared_scope: {variant_ids: [GPS_BDS_DUAL_FREQUENCY__CONSTRAINED__0.010]}
+    valid_flag: solution_state != invalid; paper_ratio_fixed reported separately (ratio-fixed rate)
+    parameters:
+      - {name: baseline_length_m, value: 0.350, source: "PHASE3_EXT03_YANG2024_CONTRACT_V1.yaml:40"}
+      - {name: ratio_threshold, value: 3.0, source: "PHASE3_EXT03_YANG2024_CONTRACT_V1.yaml:44 (paper)"}
+      - {name: initial_baseline_covariance_m2, value: 900.0, source: "PHASE3_EXT03_YANG2024_CONTRACT_V1.yaml:46 (paper)"}
+      - {name: initial_ambiguity_covariance_cycle2, value: 900.0, source: "PHASE3_EXT03_YANG2024_CONTRACT_V1.yaml:47 (paper)"}
+      - {name: baseline_sigma_m, value: 0.010, source: "PHASE3_EXT03_YANG2024_CONTRACT_V1.yaml:48 (declared primary; sensitivity values :49 not run)"}
+      - {name: elevation_mask_deg, value: 15.0, source: "PHASE3_EXT03_YANG2024_CONTRACT_V1.yaml:115-116 (RTKLIB default)"}
+      - {name: unspecified_noise, value: "RTKLIB 180043ee defaults: phase 0.003 m + 0.003 m/sin(el), code/phase ratio 100, GPS/BDS factor 1.0", source: "PHASE3_EXT03_YANG2024_CONTRACT_V1.yaml:161-178"}
+  EXT04:
+    category: dual_antenna_ambiguity_heading
+    output_type: heading_only
+    config: LIT
+    runner: scripts/paper_rebuild/run_horizontal_literature_phase4.py
+    runner_arguments: [--mode, native-only, --trace-mode, disabled, --workers, "16"]
+    declared_scope: {system_modes: [GPS_BDS_DUAL_FREQUENCY], policy_ids: [FAR_ALL_AMBIGUITIES, EXT04_PAR_DECLARED_POLICY_V1]}
+    valid_flag: accepted_by_policy == true (FAR and primary PAR reported as EXT04_FAR / EXT04_PAR)
+    parameters:
+      - {name: baseline_length_m, value: 0.350, source: "PHASE4_EXT04_WU2025_CONTRACT_V1.yaml:74"}
+      - {name: elevation_mask_deg, value: 10.0, source: "PHASE4_EXT04_WU2025_CONTRACT_V1.yaml:118"}
+      - {name: minimum_cno_dbhz, value: 20, source: "PHASE4_EXT04_WU2025_CONTRACT_V1.yaml:119"}
+      - {name: ratio_threshold, value: 3.0, source: "PHASE4_EXT04_WU2025_CONTRACT_V1.yaml:158-163 (paper experimental value, second/best >= 3)"}
+      - {name: baseline_tolerance_m, value: 0.050, source: "PHASE4_EXT04_WU2025_CONTRACT_V1.yaml:164-168"}
+      - {name: posterior_chi_square_alpha, value: 0.01, source: "PHASE4_EXT04_WU2025_CONTRACT_V1.yaml:169-173 (declared, not in paper)"}
+      - {name: ADOP_threshold_cycles, value: 0.12, source: "PHASE4_EXT04_WU2025_CONTRACT_V1.yaml:174-177 (declared, not in paper)"}
+  RTKLIB:
+    inventory_id: RTKLIB_UNMODIFIED_MOVING_BASE
+    category: dual_antenna_ambiguity_heading
+    output_type: heading_only
+    config: "-"
+    executable: {path_alias: <EXTERNAL>/RTKLIB/app/consapp/rnx2rtkp/gcc/rnx2rtkp, sha256: 3a0ad1c55435b45e1f83b2e713a0b0fb837a5f0a118d76ead3df1f9e3e531eda}
+    configuration: {file: RTKLIB_UNMODIFIED_MOVING_BASE.conf, sha256: 97f0fe4157ce31909538e696184a7faadad059c3099ab912cbe2e97b0fc9e14f, key_values: "pos1-posmode=movingbase, pos1-frequency=l1+l2, pos2-armode=continuous, pos2-arthres=3, pos2-baselen=0.350"}
+    argv: [rnx2rtkp, -k, <conf>, -o, <pos>, "[-ts <first selected exact pair, GPST ms> for CONTRACT_START]", gnss2.obs, gnss1.obs, gnss1.nav, gnss2.nav]
+    valid_flag: associated Q=1 solution; Q=2 reported separately
+    body_yaw: GNSS2-GNSS1 baseline heading + 90 deg
+  HARTLEY_LIT:
+    inventory_id: Hartley
+    category: legged_state_estimation
+    output_type: relative_pose
+    config: LIT
+    run_id: H5_PAPER_TABLE1_PROCESS_REGRESSION_WITH_GO2_FK_PROXY
+    process_policy: PAPER_TABLE1_FIVE_PROCESS_EQ61
+    backend_id: HARTLEY_IJRR2020_REPORTED_BACKEND
+    parameters:
+      - {name: linear_acceleration_noise_std, value: "0.04 m/s^2", source: "HARTLEY_PARAMETER_SOURCE_REGISTRY.csv:4 (IJRR 2020 Table 1)"}
+      - {name: angular_velocity_noise_std, value: "0.002 rad/s", source: "registry :5"}
+      - {name: accelerometer_bias_random_walk_std, value: "0.001 m/s^3", source: "registry :6"}
+      - {name: gyroscope_bias_random_walk_std, value: "0.001 rad/s^2", source: "registry :7"}
+      - {name: contact_linear_velocity_noise_std, value: "0.05 m/s", source: "registry :8"}
+      - {name: joint_encoder_noise_std, value: "1.0 deg (not applicable: no joint encoder data in the Go2 log)", source: "registry :9"}
+      - {name: initial_std, value: "orientation 30 deg, velocity 1.0 m/s, IMU position 0.1 m, feet 0.1 m, gyro bias 0.005 rad/s, accel bias 0.05 m/s^2", source: "registry :10-16"}
+      - {name: fk_measurement_std_m, value: 0.010, source: "registry :44 (BY2 instantiation, not re-calibrated)"}
+      - {name: contact_force_on, value: "FR 34.2, FL 33.8, RR 30.6, RL 32.0", source: "registry :48"}
+      - {name: contact_force_off, value: "FR 24.8, FL 25.2, RR 23.4, RL 24.0", source: "registry :49"}
+      - {name: contact_minimum_dwell_s, value: 0.012035608291625977, source: "registry :50"}
+  HARTLEY_S:
+    inventory_id: Hartley
+    category: legged_state_estimation
+    output_type: relative_pose
+    config: S
+    run_id: H5_PRIMARY_GO2_ALLAN_EQ61_FK10MM
+    process_policy: GO2_CONTINUOUS_IMU_PAPER_NATIVE_CONTACT_EQ61
+    backend_id: HARTLEY_IJRR2020_REPORTED_BACKEND
+    parameters:
+      - {name: imu_noise, value: "GO2_IMU_ALLAN_90MIN_RECOVERED_V1: gyro 2.865130e-04 rad/s/sqrt(Hz), accel 1.285395e-03 m/s^2/sqrt(Hz), gyro bias RW 2.996871e-05 rad/s^2/sqrt(Hz), accel bias RW 1.594412e-04 m/s^3/sqrt(Hz)", source: "HARTLEY_PARAMETER_SOURCE_REGISTRY.csv:37-40"}
+      - {name: contact_linear_velocity_noise_std, value: "0.05 m/s", source: "registry :8 (CLEAN4 primary branch)"}
+      - {name: initial_std, value: "same as HARTLEY_LIT", source: "registry :10-16"}
+      - {name: fk_measurement_std_m, value: 0.010, source: "registry :44"}
+      - {name: contact_thresholds, value: "same as HARTLEY_LIT", source: "registry :48-50"}
+    runner_static_initialisation: "first 5 s of the input: median gyro norm < 0.05 rad/s and |median accel norm - 9.81| < 0.5 m/s^2, else the runner exits non-zero (runner behaviour, unchanged)"
+    runner_gap_behaviour: "no maximum-dt rule; an IMU gap is one zero-order-hold propagation step. BY2H 4.74 s gap at 407.017-411.757 s (then 0.722 s and 0.558 s gaps to 413.037 s) lies before the 413 s contract start and is not in the CONTRACT_START input"
+  GINAV:
+    inventory_id: LC02_GINAV
+    category: loosely_coupled_gnss_ins
+    output_type: imu_point_nav
+    config: "-"
+    configuration: {template: BY2_GINAV_SPP_LC.ini, template_sha256: 688ea8acaa910971b9cc3a37861328d6be1b678e82f8a409a1385207ebc66975, replaced_fields: [data_dir, start_time, end_time], non_sequence_lines_sha256: 0c148b7300a9ca8d86dddaeb49d8534558c6a61437e28e1d7c317ad5198c2b22}
+    matlab: {path_alias: <MATLAB_EXE>, sha256: 6dc32276086121e44edf4846f033066ba5b0fae9bad002d8917a411e0a59afa9}
+    inputs: GNSS1 RAWX/SFRBX -> convbin RINEX 3.04 + broadcast ephemeris; single-constant RAWX/NAV-PVT epoch normalisation; Go2 body IMU FLU->RFU format-2 increments
+    nav_adapter: .pos -> coverage-aware standard CSV -> 11-column NAV (clean5_degradation/evaluation.ginav_nav order), clipped to the window
+runs:
+  native_run_count: 24
+  order: [BY2, BY2H, BY2O]
+  methods_in_batch_order: [EXT01, EXT02, EXT03, EXT04, RTKLIB, HARTLEY_S, HARTLEY_LIT, GINAV]
+  run_directory: RUNS/<SEQ>__<METHOD>__<CONFIG>__<CASE>__NA
+  native_concurrency: 1
+  internal_workers_max: 16
+  quiet_machine_wait: "load1 <= 8 and load5 <= 10 before each native launch, at most 7200 s (waited time recorded)"
+  disk_guards_bytes: {/mnt/e: 40000000000, /mnt/g: 30000000000, scratch_max: 20000000000}
+  interrupted_native: "moved to <HX02_SCRATCH>/INTERRUPTED and launched again (counted); archived runs are never rerun"
+  interrupted_evaluation: "partial evaluation outputs move to INTERRUPTED_EVALUATION_<ts>/ inside the run and the registered evaluation runs again (counted)"
+evaluators:
+  heading_only: {module: legsa_gins.paper_rebuild.hext.hx02_heading_evaluation, reference_opens_per_call: 1}
+  relative_pose: {module: legsa_gins.paper_rebuild.hext.hx02_relative_pose_evaluation, reference_opens_per_call: 1, alignment: "one least-squares yaw-about-gravity + 3-D translation on [w0, w0+10] s from HARTLEY_S, applied unchanged to both branches"}
+  coverage: {module: legsa_gins.paper_rebuild.hext.hx02_coverage_evaluation, reference_opens_per_call: 0}
+  launcher: {module: legsa_gins.paper_rebuild.hext.hx02_evaluation_process}
+  imu_point_nav: {frozen_evaluator_alias: "<CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py", sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da, versions: [v3, v2], consistency_failure_policy: D12_BOUNDED_UNAVAILABLE}
+evaluator_call_budget:
+  heading_only: 15
+  frozen_imu_point_nav: 6
+  relative_pose: 3
+  reference_free_coverage: 3
+  legsa_solver_calls: 0
+  legsa_evaluator_calls: 0
+failure_classes:
+  ALGORITHM_FAILURE_DIVERGED: "displacement > 10 km, speed > 50 m/s, height > 1 km or non-finite state"
+  NO_OUTPUT: "native process returned 0 without the registered output"
+  ABNORMAL_EXIT: "non-zero exit, signal or timeout"
+  RUN_FAILED_ENVIRONMENT: "environment failure, e.g. MATLAB cannot be invoked"
+  rule: "every failure keeps its row with full stderr; no row deletion, no parameter change, no retry"
+decision_rule: none; all results reported
+hard_stops:
+  - identity gate failure (sealed values or 65 sealed-file SHA-256) at start or before the results commit
+  - any solver or evaluator call on a LegSA configuration
+  - a non-evaluator process opening a reference trajectory (trace/bag/fpl)
+  - a method-body file SHA-256 change
+  - a parameter echo differing from the registered CLEAN4 BY2 echo (or unreadable)
+  - convention diagnostic median within 20 deg of +/-90 or 180 deg
+  - disk below a guard line
+  - a native process opening old runtime material under <CLEAN_ROOT> (AGENTS.md old_runtime_input_count must be 0)
+  - evaluator child technical or access-audit failure
+input_pins_sha256: 723ae92bbe4a2622ad5a1f254c504439ac015e9705495eb9c8310b3e1c8a670f
+params_echo_reference_sha256: 02c707a5e0a7ed7b43849cbce5d29f0c1f486fce8306d46dc7dffdbdb01a671f
+code_sha256:   # runtime code and configurations, checked at controller start (frozen_code_check)
+  scripts/paper_rebuild/hx02_execute.py: 35ba3b8091e5c56dd47bab2bec584b0cdcf35fab9b6afa509f94d514cb485988
+  scripts/paper_rebuild/run_horizontal_literature_phase1r.py: 70802376ee7b62bfef60573b216eb9fdb9183f749bc6f489fd60e31096ff2004
+  scripts/paper_rebuild/run_horizontal_literature_phase2.py: 5e1c04b9f5b07cc9fee3eff7281974f05a73a94ad39c9a56e260a609e54acb86
+  scripts/paper_rebuild/run_horizontal_literature_phase3.py: 7193a0c68f260b4e25f4bfca431143d64043af80303306962a0df2991c658f79
+  scripts/paper_rebuild/run_horizontal_literature_phase4.py: 45a35f7927efb92eea71d7bd3d61b6dc447b3efa95fe533723f379fa078a09bf
+  src/legsa_gins/paper_rebuild/hext/hx02_aggregate.py: 2d7b067f65732c8b7cd17abe2d59c0439b414682e1dabc20d38a475f5f71ddf7
+  src/legsa_gins/paper_rebuild/hext/hx02_convention.py: ef707f932887ba163ae63df63628ba00fea5cf261a760c7f7d1b77290706dd3b
+  src/legsa_gins/paper_rebuild/hext/hx02_coverage_evaluation.py: 1f5afe16ff12327e6915dcfbea8adb5a730b7556eed8add920542f6170dbdeec
+  src/legsa_gins/paper_rebuild/hext/hx02_evaluation_process.py: c94093d1fbf94c9f4db9f6f59334666ea8897c59bcd67654afd4a9914c7764fb
+  src/legsa_gins/paper_rebuild/hext/hx02_execution.py: c05059f0afcc41023d16cb76c1e86e781727f9311a5bc9f448c37ae171ea0f7c
+  src/legsa_gins/paper_rebuild/hext/hx02_ginav.py: a07b110fb3f464b4e5d8236bcc23e81aeca0cf1789cad91fd1a74e9375f4fc1e
+  src/legsa_gins/paper_rebuild/hext/hx02_ginav_nav.py: 46333bcccc1bf92c5ececb5bf66de736d2761792bcb6ef80351f0cd7cea0ecca
+  src/legsa_gins/paper_rebuild/hext/hx02_hartley.py: 1e1164d71cdbb13c9b8a65a9fd712a80442dd26147182d9d6a8daf5a3cf8cdcf
+  src/legsa_gins/paper_rebuild/hext/hx02_heading_evaluation.py: eedb3faf56ccffca222d915c401d3075dc64583ce68a10f08add9f8b705fa994
+  src/legsa_gins/paper_rebuild/hext/hx02_heading_tables.py: df8bf4a6d9cf37dc59bb18bf8035037b3b6317af658ab2ab0c9a24352a13c065
+  src/legsa_gins/paper_rebuild/hext/hx02_native_cli.py: d51af303a6fe09fb39ae8538ba6df5b85f2c51549ad574fc46ec1aa81e295abf
+  src/legsa_gins/paper_rebuild/hext/hx02_params_echo.py: 644b46df4de8aec1c5982d8b36cf9596e7120ab42ed7f6033fee418b0961a373
+  src/legsa_gins/paper_rebuild/hext/hx02_relative_pose_evaluation.py: 0d9ce68cd1212c66a95efe0e3f635aa5bd954a2937f02924fcbacaabacbff8e4
+  src/legsa_gins/paper_rebuild/hext/hx02_rtklib.py: 73758583883f30a0d73cfb7fa0aee905fb73e4100ec5bf1b0309be811883e56d
+  src/legsa_gins/paper_rebuild/hext/hx02_sequence.py: ca7457c28e7fe54baf0d91420815ffb3125e0b9577c5f3e8fbafdc27a637c3d4
+  src/legsa_gins/paper_rebuild/hext/external_evaluation.py: 55f2ca5c1c14703c2a4af5cf80b1ca5176e19487aa3f645f3e9efb1e78060df4
+  src/legsa_gins/paper_rebuild/hext/sequence_paths.py: ece44c62792f8384a905cfde933e931a41a9b3dd9f690753c4a787eccc208194
+  src/legsa_gins/paper_rebuild/hext/t5a_runtime.py: a82ee2e5c5e56ded9ca078b752a00766780c811364914b5cecfaa23c1fa16bca
+  src/legsa_gins/paper_rebuild/horizontal_literature/sequence_override.py: 45617c22d1eccda66935202da3a76fc8c07354c75ae182994cd419b0e9912f25
+  src/legsa_gins/paper_rebuild/horizontal_literature/phase1_runner.py: 680b7217abe5055a976829cef2ef0a6a9513cd00c246d9ca00aa7d5014db42c1
+  src/legsa_gins/paper_rebuild/horizontal_literature/phase1r_runner.py: 886fa53a0470facb213480dc899fb1247c6e065899ff2097bbf8e09f44dbfa83
+  src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py: 85112d34e27f1fa8c3043bdcdeb2f418232cd2fffacb40cab3f387f179db6c9b
+  src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py: 2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5
+  src/legsa_gins/paper_rebuild/horizontal_literature/phase4_runner.py: 24c2e268bd5833fa72c89a1fb8380759b7eb5009bb65e9868d59fd3b1dcf8bd4
+  src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py: d72548fb9cea3f8d6075bd231ba9a2bb970f71382006edbec045a4c7ea8f6e5a
+  src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h7.py: 84ee803f7c707d6568227107cc7bfb317725ea9bd5f3a2bd3aac032b1f10beb7
+  src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h7c.py: 41db1e79cb439a9dbee0b972a69f42e0b8e74885f24a7b277848a4cf59cc5233
+  src/legsa_gins/paper_rebuild/horizontal_literature/ginav2021/imu_adapter.py: 4193d4c150227436aff2325306f9ac05c61acb0630a28e674c8c0de551fbc344
+  src/legsa_gins/paper_rebuild/horizontal_literature/ginav2021/matlab.py: 933aa13cb7b7d8d78699267e43e92a1af56ab5da2f1716836dce5bc7c054cd48
+  src/legsa_gins/paper_rebuild/horizontal_literature/ginav2021/outputs.py: 93e5307a28f20185067f918842512910d4bcfe658049f8a56adc7263d23542cc
+  src/legsa_gins/paper_rebuild/horizontal_literature/ginav2021/rinex_adapter.py: 6d5ec8b341f90087fc2294eb5d83051cedc488a83024c56d0a8eb079bcdbcf60
+  src/legsa_gins/paper_rebuild/horizontal_literature/ginav2021/time_contract.py: ceda61fd6786ec77835d9a90a6e56fd256b26a0565b4e771b14dd139d4921248
+  src/legsa_gins/paper_rebuild/horizontal_literature/ginav2021/transaction.py: b404fedafab4ce9e1fe5e36ede9f31a2a96e9484e580d9490c82438d89425733
+  src/legsa_gins/paper_rebuild/clean5_sequence/io_audit.py: 418819bff1b4eec124850314ef12a83c2d935b10dc1b1db7b9b5110098ed12d7
+  src/legsa_gins/paper_rebuild/clean5_parity/evaluation.py: cfd8b276c9fe663f823a5846dab6a54de72664688b798a6591f168dd86044d0a
+  src/legsa_gins/paper_rebuild/clean5_parity_p04/evaluation.py: 533b3b3bf0f6b1361fcd914c8011335aaa4c57ac7f29b41b33eeeab594793352
+  src/legsa_gins/paper_rebuild/evidence.py: c60b6d61cb2d1aae5431a3b973c8ea67f391df85964201c6ad03463b144dfa5a
+  src/legsa_gins/paper_rebuild/manifest.py: 05f29a41984518bea5f86b80e2a221dcbde978f9b9616ea61ad21cdad632bc91
+  src/legsa_gins/paper_rebuild/subprocess_guard.py: e582ee3d29dbd17246398e8e35bf8f006cf48e8aa71de92550739666ae39fac7
+  configs/paper_rebuild/horizontal_literature/EXTERNAL_METHOD_CONTRACTS_V1.yaml: 49423a448f42088e979bd3f68aed2798a2167eb1395407521b41d347f435035e
+  configs/paper_rebuild/horizontal_literature/PHASE1R_VALIDATION_CONTRACT_V2.yaml: 10a214e8be0f503bd738aa1aa2c5cf5431a4b9e1f7f86fa75cad70b37c3ccc04
+  configs/paper_rebuild/horizontal_literature/PHASE2_EXT02_CWLS_CONTRACT_V1.yaml: 107e2afc8388f58abd45ffac471133c41f37c99dfa0c8bc80e1fc6ac5a858b71
+  configs/paper_rebuild/horizontal_literature/PHASE3_EXT03_YANG2024_CONTRACT_V1.yaml: a3c84e54cb773f23d05cf37f452f458278b39dd22982ee31b7565e949fbe10c2
+  configs/paper_rebuild/horizontal_literature/PHASE4_EXT04_WU2025_CONTRACT_V1.yaml: e9c32eae71803b3f32c687b772695089ac5b146633d58955a5dad950c52f7abf
+  configs/paper_rebuild/horizontal_literature/hartley/stage_payload/04_METHOD_CONTRACTS/HARTLEY_PARAMETER_SOURCE_REGISTRY.csv: 9046aca437ff4587ce12558a2b59285b0bfa2ba99149dbcc5b5971ed1273cc7f
+  configs/paper_rebuild/hext/H_EXT_CONTRACT_V1.yaml: 7b748b5106dace0d809947dea65ae85c4a161ad18ca78aa395d2252b15c42863
+  configs/paper_rebuild/clean5/CLEAN5_SEQUENCE_REGISTRY.yaml: cf230fa682876be5d572d3754450a7922b558f11272ad65f90b7312245efa1e3
+  configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml: 698ede92e0251b896d488283544421a9f0dc3f689e2168ff841804e0950bc983

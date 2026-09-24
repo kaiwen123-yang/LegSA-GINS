@@ -27,7 +27,7 @@ import subprocess
 import time
 from collections import Counter, defaultdict
 from concurrent.futures import ProcessPoolExecutor, as_completed
-from dataclasses import dataclass, fields, is_dataclass
+from dataclasses import dataclass, fields, is_dataclass, replace
 from itertools import combinations
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
@@ -36,6 +36,7 @@ import numpy as np
 import yaml
 
 from . import phase2_runner as phase2
+from . import sequence_override
 from .ext01_clambda import (
     RTKLIBLambdaBridge,
     joint_gls,
@@ -165,6 +166,33 @@ POLICY_ORDER = (
     *(policy.policy_identity for policy in SENSITIVITY_POLICIES),
 )
 EXPECTED_HEADING_ROWS = EXPECTED_PAIR_COUNT * len(SYSTEM_MODES) * len(POLICY_ORDER)
+
+
+def _expected_pair_count() -> int:
+    """Frozen BY2 count unless an HX-02 sequence spec is active for this process."""
+    return sequence_override.expected_pair_count(EXPECTED_PAIR_COUNT)
+
+
+def _declared_subset(key: str, frozen: tuple[str, ...]) -> tuple[str, ...]:
+    declared = sequence_override.option(key)
+    if declared is None:
+        return frozen
+    subset = tuple(item for item in frozen if item in set(declared))
+    if not subset or len(subset) != len(set(declared)):
+        raise ValueError(f"declared HX-02 {key} is not a subset of the frozen EXT04 grid")
+    return subset
+
+
+def _system_modes() -> tuple[str, ...]:
+    return _declared_subset("system_modes", SYSTEM_MODES)
+
+
+def _policy_order() -> tuple[str, ...]:
+    return _declared_subset("policy_ids", POLICY_ORDER)
+
+
+def _expected_heading_rows() -> int:
+    return _expected_pair_count() * len(_system_modes()) * len(_policy_order())
 ALLOWED_MODES = frozenset({
     "preflight", "resource-determinism-probe", "native-only",
     "post-native-diagnostics", "post-native-r1-diagnostics",
@@ -1161,6 +1189,82 @@ def preflight_phase4(
     )
 
 
+def preflight_phase4_sequence(config_path: Path) -> PreflightResult:
+    """HX-02 preflight: the CLEAN4 execution lock and pre-existing stage manifest
+    belong to the frozen BY2 R2 attempt and are replaced by the declared sequence
+    spec plus the HX-02 code freeze; raw, provider, paper and runtime-source
+    identities are checked exactly as in the frozen preflight."""
+    configured = load_paths(config_path, artifact_root=sequence_override.path("artifact_root"))
+    fix_root = sequence_override.path("fix_root")
+    paths = replace(
+        configured, raw_root=sequence_override.path("raw_root"), by2_fix_root=fix_root,
+        raw_hash_lock=sequence_override.path("raw_hash_lock"),
+        gnss1_raw=sequence_override.path("gnss1_raw"), gnss2_raw=sequence_override.path("gnss2_raw"),
+        trace=fix_root / "NOT_OPENED_BY_NATIVE_RUN",
+    )
+    contract = load_contract()
+    if paths.code_root != REPOSITORY_ROOT.resolve():
+        raise Phase4RunnerError("configured code_root is not this worktree")
+    branch = _git_stdout(paths.code_root, "branch", "--show-current").strip()
+    if branch != EXPECTED_BRANCH:
+        raise Phase4RunnerError("unexpected branch")
+    execution_head = _git_stdout(paths.code_root, "rev-parse", "HEAD").strip()
+    raw_hashes = phase2._verify_locked_raw(paths)
+    provider_hashes = phase2._external_provider_audit(paths)
+    rnx2rtkp = paths.rtklib_root / "app/consapp/rnx2rtkp/gcc/rnx2rtkp"
+    if not rnx2rtkp.is_file():
+        raise Phase4RunnerError("unmodified RTKLIB diagnostic binary absent")
+    provider_hashes = {
+        **provider_hashes,
+        "lambda_library_sha256": _sha256(paths.lambda_library),
+        "rnx2rtkp_sha256": _sha256(rnx2rtkp),
+    }
+    paper_hashes = _paper_audit(paths, contract)
+    runtime_paths = (
+        CONTRACT_PATH, CLI_PATH, Path(__file__).resolve(),
+        Path(__file__).with_name("ext04_wu2025.py"), Path(__file__).with_name("ext01_clambda.py"),
+        Path(__file__).with_name("shared_raw_backend.py"),
+        Path(__file__).with_name("phase3_signal_inventory.py"),
+        Path(__file__).with_name("phase2_runner.py"),
+        Path(__file__).with_name("sequence_override.py"),
+    )
+    runtime_sources = {path.relative_to(REPOSITORY_ROOT).as_posix(): _sha256(path) for path in runtime_paths}
+    runtime_dependencies = _runtime_dependency_hashes(paths)
+    runtime_content_fingerprint = hashlib.sha256(_canonical({
+        "runtime_source_hashes": dict(sorted(runtime_sources.items())),
+        "runtime_dependency_hashes": dict(sorted(runtime_dependencies.items())),
+    }).encode()).hexdigest()
+    spec = dict(sequence_override.echo() or {})
+    overlay = {
+        "code_commit_semantics": "HX02_CODE_FREEZE_EXECUTION_HEAD",
+        "provenance_mode": "HX02_DECLARED_SEQUENCE_SPEC",
+        "execution_head": execution_head,
+        "runtime_source_overlay_sha256": hashlib.sha256(_canonical(runtime_sources).encode()).hexdigest(),
+        "runtime_dependency_overlay_sha256": hashlib.sha256(_canonical(runtime_dependencies).encode()).hexdigest(),
+        "sequence_spec": spec,
+    }
+    fingerprint = hashlib.sha256(_canonical({
+        "method": METHOD_ID, "case": CASE_ID, "execution_head": execution_head,
+        "contract": _sha256(CONTRACT_PATH), "config": _sha256(paths.config_path),
+        "raw": raw_hashes, "providers": provider_hashes, "paper": paper_hashes,
+        "runtime_sources": runtime_sources, "runtime_dependencies": runtime_dependencies,
+        "sequence_spec": spec,
+    }).encode()).hexdigest()
+    if paths.native_root.exists():
+        raise Phase4RunnerError("HX-02 native root already exists; no overwrite")
+    # The fingerprinted attempt lives inside the native root (as in the frozen C00 layout).
+    paths.native_root.mkdir(parents=True, exist_ok=False)
+    return PreflightResult(
+        paths, contract, execution_head, _sha256(CONTRACT_PATH), _sha256(paths.config_path),
+        raw_hashes, provider_hashes, paper_hashes, runtime_sources, runtime_dependencies,
+        overlay, fingerprint, execution_head, execution_head, "HX02_DECLARED_SEQUENCE_SPEC",
+        runtime_content_fingerprint, {},
+        {"provided": False, "role": "NOT_APPLICABLE_HX02_DECLARED_SEQUENCE_SPEC"},
+        Path(spec["spec_path"]), _sha256(Path(spec["spec_path"])),
+        {"artifact_root": str(paths.stage_root), "role": "HX02_RUN_SCRATCH"},
+    )
+
+
 def _attempt_root(preflight: PreflightResult) -> Path:
     return preflight.paths.native_root / f".EXT04_ATTEMPT_{preflight.source_fingerprint[:20]}"
 
@@ -1651,7 +1755,8 @@ def _compute_epoch(epoch_index: int) -> dict[str, Any]:
         raise Phase4RunnerError("worker was not initialized")
     receiver1, receiver2 = _WORKER_READER.pair(epoch_index)
     modes: list[dict[str, Any]] = []
-    for system_mode in SYSTEM_MODES:
+    policies = set(_policy_order())
+    for system_mode in _system_modes():
         started = time.perf_counter()
         spp_audit: dict[str, Any] = {}
         try:
@@ -1678,6 +1783,7 @@ def _compute_epoch(epoch_index: int) -> dict[str, Any]:
                 )
                 for decision in decisions
             ]
+            rows = [row for row in rows if row["policy_identity"] in policies]
             dd = {
                 "method_id": METHOD_ID, "case_id": CASE_ID,
                 "policy_identity": "SHARED_NATIVE_OBSERVATION_MODEL",
@@ -1740,6 +1846,7 @@ def _compute_epoch(epoch_index: int) -> dict[str, Any]:
                 failure_code=failure_code, failure_detail=str(exc),
                 mode_runtime_seconds=mode_runtime,
             )
+            rows = [row for row in rows if row["policy_identity"] in policies]
             modes.append({
                 "system_mode": system_mode, "rows": rows,
                 "dd": {
@@ -1882,7 +1989,7 @@ def _read_part(
     payload = value.get("payload")
     if hashlib.sha256(_canonical(payload).encode()).hexdigest() != value.get("payload_sha256"):
         raise Phase4RunnerError("epoch-part payload hash mismatch")
-    if payload.get("epoch_index") != epoch_index or len(payload.get("modes", ())) != len(SYSTEM_MODES):
+    if payload.get("epoch_index") != epoch_index or len(payload.get("modes", ())) != len(_system_modes()):
         raise Phase4RunnerError("epoch-part row conservation mismatch")
     return payload
 
@@ -1946,7 +2053,7 @@ def _scrub_runtime(value: Any) -> Any:
 def _determinism_probe(
     cache_root: Path, navigation_paths: Sequence[Path], preflight: PreflightResult,
 ) -> dict[str, Any]:
-    indices = tuple(round(index * (EXPECTED_PAIR_COUNT - 1) / 7) for index in range(8))
+    indices = tuple(round(index * (_expected_pair_count() - 1) / 7) for index in range(8))
     initializer = (
         str(cache_root), tuple(str(path) for path in navigation_paths),
         str(preflight.paths.rtklib_bridge), str(preflight.paths.lambda_library),
@@ -2079,13 +2186,13 @@ def _run_epoch_parts(
     parts_root = attempt / "EPOCH_PARTS"
     parts_root.mkdir(exist_ok=True)
     completed: dict[int, dict[str, Any]] = {}
-    for index in range(EXPECTED_PAIR_COUNT):
+    for index in range(_expected_pair_count()):
         path = _part_path(attempt, index)
         if path.exists():
             if not resume:
                 raise Phase4RunnerError("epoch part exists outside resume mode")
             completed[index] = _read_part(path, preflight.source_fingerprint, index)
-    missing = [index for index in range(EXPECTED_PAIR_COUNT) if index not in completed]
+    missing = [index for index in range(_expected_pair_count()) if index not in completed]
     if missing:
         initializer = (
             str(cache_root), tuple(str(path) for path in navigation_paths),
@@ -2109,13 +2216,13 @@ def _run_epoch_parts(
                     elapsed = time.perf_counter() - started
                     print(
                         f"EXT04 epoch parts {ordinal}/{len(missing)} new; "
-                        f"total {len(completed)}/{EXPECTED_PAIR_COUNT}; elapsed={elapsed:.1f}s",
+                        f"total {len(completed)}/{_expected_pair_count()}; elapsed={elapsed:.1f}s",
                         flush=True,
                     )
     ordered = [
         completed.get(index)
         or _read_part(_part_path(attempt, index), preflight.source_fingerprint, index)
-        for index in range(EXPECTED_PAIR_COUNT)
+        for index in range(_expected_pair_count())
     ]
     if any(payload is None for payload in ordered):
         raise Phase4RunnerError("epoch-part conservation failed")
@@ -2166,8 +2273,8 @@ def _distribution(values: Iterable[float]) -> dict[str, Any]:
 
 def _policy_summary(heading_rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     output: list[dict[str, Any]] = []
-    for policy in POLICY_ORDER:
-        for mode in SYSTEM_MODES:
+    for policy in _policy_order():
+        for mode in _system_modes():
             rows = [
                 row for row in heading_rows
                 if row["policy_identity"] == policy and row["system_mode"] == mode
@@ -2182,7 +2289,7 @@ def _policy_summary(heading_rows: Sequence[Mapping[str, Any]]) -> list[dict[str,
                 "policy_identity": policy,
                 "reproduction_level": rows[0]["reproduction_level"] if rows else None,
                 "system_mode": mode, "row_count": len(rows),
-                "expected_row_count": EXPECTED_PAIR_COUNT,
+                "expected_row_count": _expected_pair_count(),
                 "FAR_ACCEPTED_count": counts["FAR_ACCEPTED"],
                 "PAR_ACCEPTED_count": counts["PAR_ACCEPTED"],
                 "FAR_REJECTED_count": counts["FAR_REJECTED"],
@@ -2190,7 +2297,7 @@ def _policy_summary(heading_rows: Sequence[Mapping[str, Any]]) -> list[dict[str,
                 "INVALID_count": counts["INVALID"],
                 "failure_code_counts": dict(sorted(failure_counts.items())),
                 "accepted_count": len(accepted),
-                "accepted_rate": len(accepted) / EXPECTED_PAIR_COUNT,
+                "accepted_rate": len(accepted) / _expected_pair_count(),
                 "global_optimum_certified_count": sum(
                     bool(row.get("global_optimum_certified")) for row in rows
                 ),
@@ -2232,7 +2339,7 @@ def _policy_summary(heading_rows: Sequence[Mapping[str, Any]]) -> list[dict[str,
                 ),
                 "allocated_runtime_seconds_total": float(
                     sum(_numbers(rows, "mode_runtime_seconds"))
-                ) / len(POLICY_ORDER),
+                ) / len(_policy_order()),
                 "subset_runtime_seconds": _distribution(
                     _numbers(rows, "subset_runtime_seconds")
                 ),
@@ -2375,12 +2482,12 @@ def _flatten_native(
     chain_rows.sort(key=lambda row: (
         mode_index[row["system_mode"]], int(row["epoch_index"]), int(row["subset_step"]),
     ))
-    if len(heading) != EXPECTED_HEADING_ROWS:
+    if len(heading) != _expected_heading_rows():
         raise Phase4RunnerError(
-            f"heading row conservation failed: {len(heading)} != {EXPECTED_HEADING_ROWS}"
+            f"heading row conservation failed: {len(heading)} != {_expected_heading_rows()}"
         )
     counts = Counter((row["policy_identity"], row["system_mode"]) for row in heading)
-    if set(counts.values()) != {EXPECTED_PAIR_COUNT} or len(counts) != len(POLICY_ORDER) * len(SYSTEM_MODES):
+    if set(counts.values()) != {_expected_pair_count()} or len(counts) != len(_policy_order()) * len(_system_modes()):
         raise Phase4RunnerError("policy/mode row conservation failed")
     required = {
         "method_id", "policy_identity", "reproduction_level", "system_mode",
@@ -2474,7 +2581,7 @@ def _flatten_native(
     for key, rows in datasets.items():
         _write_csv(files[key], rows)
     flags = {
-        "data_mode": "real_by2_raw", "synthetic_data_used": False,
+        "data_mode": sequence_override.data_mode("real_by2_raw"), "synthetic_data_used": False,
         "semisynthetic_data_used": False, "trace_used_online": False,
         "receiver_imu_as_body_imu": False,
         "final_v23_output_solver_input": False,
@@ -2494,15 +2601,16 @@ def _flatten_native(
         "reproduction_level": REPRODUCTION_LEVEL,
         "paper_exact_policy_status": "NOT_IMPLEMENTED_UNDER_SPECIFIED",
         "official_code_search_result": "NO_ATTRIBUTABLE_OFFICIAL_IMPLEMENTATION_FOUND",
-        "paired_epoch_count": EXPECTED_PAIR_COUNT,
-        "system_modes": list(SYSTEM_MODES),
+        "paired_epoch_count": _expected_pair_count(),
+        "system_modes": list(_system_modes()),
+        "hx02_sequence_spec": sequence_override.echo(),
         "unsupported_submodes": [{
             "mode": "GALILEO_DUAL_FREQUENCY",
             "reason": "UNSUPPORTED_SUBMODE_NO_GALILEO_BROADCAST_EPHEMERIS",
         }],
-        "policy_order": list(POLICY_ORDER),
+        "policy_order": list(_policy_order()),
         "heading_row_count": len(heading),
-        "expected_heading_row_count": EXPECTED_HEADING_ROWS,
+        "expected_heading_row_count": _expected_heading_rows(),
         "row_counts": {key: len(rows) for key, rows in datasets.items()},
         "policy_summary": summaries,
         "resource_probe": resource_probe,
@@ -2546,8 +2654,8 @@ def _flatten_native(
         "execution_lock_evidence": dict(preflight.execution_lock_evidence),
         "native_hashes": native_hashes,
         "native_row_counts": {key: len(rows) for key, rows in datasets.items()},
-        "paired_epoch_count": EXPECTED_PAIR_COUNT,
-        "policy_count": len(POLICY_ORDER), "system_mode_count": len(SYSTEM_MODES),
+        "paired_epoch_count": _expected_pair_count(),
+        "policy_count": len(_policy_order()), "system_mode_count": len(_system_modes()),
         "heading_row_count": len(heading),
         "trace_open_count_at_freeze": 0,
         "HPPOSECEF_semantic_decode_count_at_freeze": 0,
@@ -2585,14 +2693,14 @@ def validate_native_freeze(root: Path) -> dict[str, Any]:
     for key, digest in value["native_hashes"].items():
         if _sha256(Path(root) / NATIVE_FILE_NAMES[key]) != digest:
             raise Phase4RunnerError(f"native hash mismatch: {key}")
-    expected = EXPECTED_PAIR_COUNT * len(POLICY_ORDER) * len(SYSTEM_MODES)
+    expected = _expected_heading_rows()
     if int(value.get("heading_row_count", -1)) != expected:
         raise Phase4RunnerError("native heading row conservation failed")
     headings = _read_csv(Path(root) / NATIVE_FILE_NAMES["heading_results"])
     if len(headings) != expected:
         raise Phase4RunnerError("native heading CSV row count mismatch")
     keys = Counter((row["policy_identity"], row["system_mode"]) for row in headings)
-    if set(keys.values()) != {EXPECTED_PAIR_COUNT} or len(keys) != len(POLICY_ORDER) * len(SYSTEM_MODES):
+    if set(keys.values()) != {_expected_pair_count()} or len(keys) != len(_policy_order()) * len(_system_modes()):
         raise Phase4RunnerError("native per-policy/mode conservation failed")
     order = [
         (POLICY_ORDER.index(row["policy_identity"]), SYSTEM_MODES.index(row["system_mode"]), int(row["epoch_index"]))
@@ -3707,8 +3815,10 @@ def _load_or_run_native_probes(
         "worker_determinism": _determinism_probe(
             cache_root, navigation_paths, preflight,
         ),
-        "EXT01_core_equivalence": _ext01_core_equivalence(
-            cache_root, navigation_paths, preflight,
+        "EXT01_core_equivalence": (
+            _ext01_core_equivalence(cache_root, navigation_paths, preflight)
+            if sequence_override.active() is None
+            else {"status": "NOT_RUN_HX02_DECLARED_GPS_BDS_FAR_PRIMARY_PAR_SCOPE", "checks": {}}
         ),
     }
     phase2._atomic_write_json(path, value)
@@ -3732,16 +3842,16 @@ def _native_execution(
         preflight, attempt, resume=resume,
     )
     reader = phase2.CompactCacheReader(cache_root)
-    if len(reader) != EXPECTED_PAIR_COUNT:
-        raise Phase4RunnerError("compact cache does not conserve 1509 exact pairs")
+    if len(reader) != _expected_pair_count():
+        raise Phase4RunnerError("compact cache does not conserve the declared exact pairs")
     pairs = [reader.pair(index) for index in range(len(reader))]
     provider = RtklibBroadcastProvider(preflight.paths.rtklib_bridge, navigation_paths)
     inventory = audit_signal_availability(pairs, provider)
     supported = set(inventory.supported_modes())
-    if set(SYSTEM_MODES) - supported:
+    if set(_system_modes()) - supported:
         raise Phase4RunnerError(
             "UNSUPPORTED_EXT04_ON_BY2_REQUIRED_DUAL_FREQUENCY_MODE_ABSENT: "
-            f"{sorted(set(SYSTEM_MODES) - supported)}"
+            f"{sorted(set(_system_modes()) - supported)}"
         )
     probes = _load_or_run_native_probes(
         preflight, attempt, cache_root, navigation_paths, resume=resume,
@@ -3783,7 +3893,7 @@ def _native_execution(
         "terminal_status": "PASS_PHASE4_EXT04_NATIVE_FROZEN_READY_FOR_POST_NATIVE",
         "source_fingerprint": preflight.source_fingerprint,
         "attempt_root": str(attempt), "paired_epoch_count": len(reader),
-        "supported_modes": list(SYSTEM_MODES), "formal_run_launched": True,
+        "supported_modes": list(_system_modes()), "formal_run_launched": True,
         "native_freeze": freeze, "trace_open_count": 0,
         "HPPOSECEF_semantic_decode_count": 0,
     }
@@ -4866,6 +4976,12 @@ def run_phase4(
         or workers != AUTHORIZED_WORKERS or trace_mode != "disabled"
     ):
         raise Phase4RunnerError("invalid Phase-4 invocation")
+    if sequence_override.active() is not None:
+        if mode != "native-only" or resume:
+            raise Phase4RunnerError("HX-02 sequence runs are native-only without resume")
+        return _native_execution(
+            preflight_phase4_sequence(config_path), workers=workers, resume=False, probe_only=False,
+        )
     allow_existing = mode in {
         "post-native-diagnostics", "post-native-r1-diagnostics",
         "create-execution-lock", "finalize-r1-pending",

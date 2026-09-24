@@ -91,8 +91,14 @@ def _prefix_lines(path: Path, byte_count: int) -> Iterator[bytes]:
         raise ImuAdapterError("authenticated Go2 prefix does not end at a line boundary")
 
 
-def iter_authenticated_go2_imu_records(path: str | Path) -> Iterator[Go2ImuRecord]:
-    """Materialize only stamp, gyro, and accelerometer from complete records."""
+def iter_authenticated_go2_imu_records(
+    path: str | Path, *, prefix_bytes: int | None = None,
+) -> Iterator[Go2ImuRecord]:
+    """Materialize only stamp, gyro, and accelerometer from complete records.
+
+    ``prefix_bytes`` defaults to the frozen BY2 complete-record prefix; HX-02
+    passes the equally derived prefix of another registered Go2 log.
+    """
 
     source = Path(path)
     sec: int | None = None
@@ -115,7 +121,7 @@ def iter_authenticated_go2_imu_records(path: str | Path) -> Iterator[Go2ImuRecor
             tuple(gyro), tuple(accel),
         )
 
-    for raw in _prefix_lines(source, GO2_PREFIX_BYTES):
+    for raw in _prefix_lines(source, GO2_PREFIX_BYTES if prefix_bytes is None else prefix_bytes):
         try:
             line = raw.decode("utf-8", errors="strict")
         except UnicodeDecodeError as exc:
@@ -185,10 +191,14 @@ def _percentile(sorted_values: Sequence[float], probability: float) -> float:
 
 def build_format2_increments(
     records: Sequence[Go2ImuRecord],
+    *, expected_records: int | None = None,
+    data_identity: str | None = None,
 ) -> tuple[tuple[GinavImuIncrement, ...], dict[str, Any]]:
-    if len(records) != GO2_COMPLETE_RECORDS:
+    expected_records = GO2_COMPLETE_RECORDS if expected_records is None else expected_records
+    data_identity = GO2_IMU_IDENTITY if data_identity is None else data_identity
+    if len(records) != expected_records:
         raise ImuAdapterError(
-            f"Go2 authenticated record count is {len(records)}, expected {GO2_COMPLETE_RECORDS}"
+            f"Go2 authenticated record count is {len(records)}, expected {expected_records}"
         )
     increments: list[GinavImuIncrement] = []
     all_dt_ns: list[int] = []
@@ -263,7 +273,7 @@ def build_format2_increments(
     )
     audit = {
         "schema_version": "ginav2021.go2_imu_adapter_audit.v1",
-        "data_identity": GO2_IMU_IDENTITY,
+        "data_identity": data_identity,
         "input_row_count": len(records),
         "output_row_count": len(increments),
         "first_record_skipped_no_prior_interval": True,
@@ -363,19 +373,30 @@ def adapt_go2_imu(
     destination_csv: str | Path,
     *,
     ledger: AccessLedger | None = None,
+    identity: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    """``identity`` (HX-02) replaces the frozen BY2 Go2 identity with another
+    registered log's raw size/SHA, complete-record prefix and record count."""
+    declared = identity or {
+        "raw_size_bytes": GO2_RAW_SIZE_BYTES, "raw_sha256": GO2_RAW_SHA256,
+        "prefix_bytes": GO2_PREFIX_BYTES, "prefix_sha256": GO2_PREFIX_SHA256,
+        "complete_records": GO2_COMPLETE_RECORDS, "data_identity": GO2_IMU_IDENTITY,
+    }
     source = Path(source_path).resolve(strict=True)
     stat_before = source.stat()
-    if stat_before.st_size != GO2_RAW_SIZE_BYTES:
+    if stat_before.st_size != int(declared["raw_size_bytes"]):
         raise ImuAdapterError("Go2 raw size differs from authenticated identity")
     full_hash = sha256_file(source)
-    prefix_hash = sha256_file(source, limit=GO2_PREFIX_BYTES)
-    if full_hash != GO2_RAW_SHA256 or prefix_hash != GO2_PREFIX_SHA256:
+    prefix_hash = sha256_file(source, limit=int(declared["prefix_bytes"]))
+    if full_hash != declared["raw_sha256"] or prefix_hash != declared["prefix_sha256"]:
         raise ImuAdapterError("Go2 raw or complete-prefix hash mismatch")
     if ledger is not None:
         ledger.record(source, role="GO2_BODY_IMU_GYRO_ACCEL_COMPLETE_PREFIX")
-    records = tuple(iter_authenticated_go2_imu_records(source))
-    increments, audit = build_format2_increments(records)
+    records = tuple(iter_authenticated_go2_imu_records(source, prefix_bytes=int(declared["prefix_bytes"])))
+    increments, audit = build_format2_increments(
+        records, expected_records=int(declared["complete_records"]),
+        data_identity=str(declared["data_identity"]),
+    )
     output = write_ginav_imu_csv(destination_csv, increments)
     stat_after = source.stat()
     if stat_before.st_size != stat_after.st_size or stat_before.st_mtime_ns != stat_after.st_mtime_ns:
@@ -387,7 +408,7 @@ def adapt_go2_imu(
         "source_path": str(source),
         "source_bytes": stat_before.st_size,
         "source_sha256": full_hash,
-        "authenticated_prefix_bytes": GO2_PREFIX_BYTES,
+        "authenticated_prefix_bytes": int(declared["prefix_bytes"]),
         "authenticated_prefix_sha256": prefix_hash,
         "output_path": str(output),
         "output_sha256": sha256_file(output),

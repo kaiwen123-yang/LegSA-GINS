@@ -19,6 +19,7 @@ SOURCE_ROOT = REPOSITORY_ROOT / "src"
 if str(SOURCE_ROOT) not in sys.path:
     sys.path.insert(0, str(SOURCE_ROOT))
 
+from legsa_gins.paper_rebuild.horizontal_literature import sequence_override  # noqa: E402
 from legsa_gins.paper_rebuild.horizontal_literature.phase4_runner import (  # noqa: E402
     ALLOWED_MODES,
     CASE_ID,
@@ -77,7 +78,26 @@ def main() -> int:
     parser.add_argument("--expected-r5-status-sha256")
     parser.add_argument("--expected-r6-report-sha256")
     parser.add_argument("--expected-r6-status-sha256")
+    parser.add_argument("--sequence-spec", type=Path,
+                        help="HX-02 declared sequence spec; native-only lifecycle, no trace")
     args = parser.parse_args()
+    if args.sequence_spec is not None:
+        if (args.mode != "native-only" or args.trace_mode != "disabled" or args.resume
+                or args.execution_lock or args.preexisting_manifest or args.artifact_root):
+            raise SystemExit("--sequence-spec requires --mode native-only, no lock/manifest/artifact-root")
+        sequence_override.activate(args.sequence_spec)
+        try:
+            result = run_phase4(
+                args.paths_config, mode=args.mode, method_id=args.method_id,
+                case_id=args.case_id, trace_mode=args.trace_mode, workers=args.workers,
+            )
+        except Exception as exc:  # the controller keeps full stderr; no rerun here
+            import traceback
+            traceback.print_exc()
+            result = {"terminal_status": "FAILED_HX02_SEQUENCE_NATIVE_RUN",
+                      "error_type": type(exc).__name__, "error": str(exc)}
+        print(terminal_json(result))
+        return 0 if str(result.get("terminal_status", "")).startswith("PASS_PHASE4_") else 2
     try:
         result = run_phase4(
             args.paths_config, mode=args.mode, method_id=args.method_id,
