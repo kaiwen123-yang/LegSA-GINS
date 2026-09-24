@@ -15,7 +15,7 @@
 | Hartley 运行器（由未改动源码 Release 构建，钉在 `01_INPUT_PINS/HARTLEY/hartley_h5_runner`） | `8bad8d8722c82f3aaa873908b79267b54dc5cc040ae4bf2fb4cc24d8656962fe` |
 | MATLAB `<MATLAB_EXE>` | `6dc32276086121e44edf4846f033066ba5b0fae9bad002d8917a411e0a59afa9` |
 
-运行时代码与配置的 SHA-256 全表登记在合约 `code_sha256`（53 项），控制器启动时逐项核对，任一不符即硬停；运行时还要求跟踪文件无改动、`INPUT_PINS.json` 与参数回显参照的哈希与合约一致。
+运行时代码与配置的 SHA-256 全表登记在合约 `code_sha256`（53 项），控制器启动时逐项核对，任一不符即硬停；运行时还要求跟踪文件无改动、`INPUT_PINS.json` 与参数回显参照的哈希与合约一致。上表为代码冻结时的值；修正 1、2（第 16 节）之后合约与三个改动文件的 SHA-256 见第 16 节，输入钉不变。
 
 ## 1. 硬规则（逐条写入，全部由代码执行）
 
@@ -213,7 +213,7 @@ EXT03 只跑主模式 GPS_BDS_DUAL_FREQUENCY / CONSTRAINED / σ = 0.010；EXT04 
 | 文件 | 角色 | SHA-256 |
 |---|---|---|
 | `src/legsa_gins/paper_rebuild/hext/hx02_heading_evaluation.py` | heading_only 评估子进程（B） | `eedb3faf56ccffca222d915c401d3075dc64583ce68a10f08add9f8b705fa994` |
-| `src/legsa_gins/paper_rebuild/hext/hx02_relative_pose_evaluation.py` | relative_pose 评估子进程（C） | `0d9ce68cd1212c66a95efe0e3f635aa5bd954a2937f02924fcbacaabacbff8e4` |
+| `src/legsa_gins/paper_rebuild/hext/hx02_relative_pose_evaluation.py` | relative_pose 评估子进程（C）；冻结值，修正 1 后的值见第 16 节 | `0d9ce68cd1212c66a95efe0e3f635aa5bd954a2937f02924fcbacaabacbff8e4` |
 | `src/legsa_gins/paper_rebuild/hext/hx02_coverage_evaluation.py` | 覆盖感知统计子进程（不开参考） | `1f5afe16ff12327e6915dcfbea8adb5a730b7556eed8add920542f6170dbdeec` |
 | `src/legsa_gins/paper_rebuild/hext/hx02_evaluation_process.py` | 登记子进程启动器与 openat 审计 | `c94093d1fbf94c9f4db9f6f59334666ea8897c59bcd67654afd4a9914c7764fb` |
 | `src/legsa_gins/paper_rebuild/hext/external_evaluation.py` | 冻结评估器封装（imu_point_nav，v3/v2，D12） | `55f2ca5c1c14703c2a4af5cf80b1ca5176e19487aa3f645f3e9efb1e78060df4` |
@@ -223,11 +223,11 @@ EXT03 只跑主模式 GPS_BDS_DUAL_FREQUENCY / CONSTRAINED / σ = 0.010；EXT04 
 
 **4.1 heading_only（EXT01–EXT04、RTKLIB）。** 输入为方法原生航向表（每个原生配对历元一行，方法自身有效标志，body yaw = GNSS2−GNSS1 基线航向 + 90°）。参考 yaw = wrap360(90 − interp(unwrap(yaw_ENU)))，只在前后括住的参考样本之间插值、不外推；误差 = wrap180(方法 − 参考)。分母 = 方法原生配对历元表在窗内的历元数（BY2 1370、BY2H 1350、BY2O 1885，见第 10 节）。指标：可用率（窗内有效历元/分母）；有效历元 wrap-safe RMSE、最大绝对误差、P95、圆均值偏差、段数与最大缺口（`_continuity_metrics`）；保持上一有效值的全窗 RMSE、最大绝对误差与 P95（从原生起点因果保持；首个有效值之前的窗内历元单独计为无航向历元，不记零）；EXT03 另报 ratio-fixed 率（及其 RMSE）；RTKLIB 以 Q=1 计有效，Q=2 比例与其误差另报。输出只有 `HEADING_METRICS.json` 与逐历元误差序列 CSV。不导入、不使用带 NOT_AUTHORIZED_FOR_EXECUTION 标记的文件。
 
-**4.2 relative_pose（Hartley-S、Hartley-LIT）。** Hartley 输出点按人工声明为 Go2 body IMU 原点 = LegSA 的 IMU 点，按 FRD 杠杆 [0.03, 0.03 − 0.5·b_med, −0.30] m （Hartley 体坐标为 Go2 FLU，即 FLU 杠杆 [0.03, −(0.03 − 0.5·b_med), 0.30]）平移到天线中点；b_med：BY2 0.356191491865984、BY2H 0.35418777593777223、BY2O 0.35013463864843675。10 Hz 网格 t_j = w0 + 0.1·j（闭窗）；参考 LLH 线性插值、yaw 用 unwrap 后插值，估计位置线性插值、姿态 SO(3) 测地插值，均只在括住处取值。在评估窗起始 10 s（BY2 [66,76]、BY2H [413,423]、BY2O [3186,3196]）内做一次最小二乘对齐，只解绕重力轴的 yaw（逐历元 yaw 偏差的圆均值）与三维平移（给定 yaw 后的均值），不解 roll/pitch/尺度/时间偏移；对齐由 Hartley-S 导出，原样用于两个分支，全窗不再调整（H7_EVALUATION_CONTRACT.yaml:99-117）。Hartley-S 无可用输出时，两分支的相对位姿指标均记 UNAVAILABLE，不做自对齐替代。指标：每 100 m 位置漂移（水平误差模长对参考累计水平路程的 OLS 斜率 ×100，带截距）、每分钟航向漂移（wrap-safe 航向误差按时间 unwrap 后对分钟的 OLS 斜率）、对齐后全窗水平/高程/yaw RMSE、最大水平误差、窗内参考路程，另报 1/5/10 s 相对位姿误差。发散界（第 1 节规则 6）在评估前对原生 NAV 检查。
+**4.2 relative_pose（Hartley-S、Hartley-LIT）。** Hartley 输出点按人工声明为 Go2 body IMU 原点 = LegSA 的 IMU 点，按 FRD 杠杆 [0.03, 0.03 − 0.5·b_med, −0.30] m （Hartley 体坐标为 Go2 FLU，即 FLU 杠杆 [0.03, −(0.03 − 0.5·b_med), 0.30]）平移到天线中点；b_med：BY2 0.356191491865984、BY2H 0.35418777593777223、BY2O 0.35013463864843675。10 Hz 网格 t_j = w0 + 0.1·j（闭窗）；参考 LLH 线性插值、yaw 用 unwrap 后插值，估计位置线性插值、姿态 SO(3) 测地插值，均只在括住处取值。（修正 1）Hartley-S 与 Hartley-LIT 各自用自己的输出，在评估窗起始 10 s（BY2 [66,76]、BY2H [413,423]、BY2O [3186,3196]）内做一次最小二乘对齐，只解绕重力轴的 yaw（逐历元 yaw 偏差的圆均值）与三维平移（给定 yaw 后的均值），不解 roll/pitch/尺度/时间偏移，全窗不再调整（对齐规则同 H7_EVALUATION_CONTRACT.yaml:99-117；原“由 Hartley-S 导出、两分支共用”一条由修正 1 改为各支自导出，两支互不共用）。一支无可用输出（原生失败、发散或对齐窗内括不住）只记该支 UNAVAILABLE，不影响另一支。每次评估调用只评一支。指标：每 100 m 位置漂移（水平误差模长对参考累计水平路程的 OLS 斜率 ×100，带截距）、每分钟航向漂移（wrap-safe 航向误差按时间 unwrap 后对分钟的 OLS 斜率）、对齐后全窗水平/高程/yaw RMSE、最大水平误差、窗内参考路程，另报 1/5/10 s 相对位姿误差。发散界（第 1 节规则 6）在评估前对原生 NAV 检查。
 
 **4.3 imu_point_nav（GINav）。** `.pos` → 覆盖感知标准 CSV（纬经度 12 位、高度 6 位、ENU 速度 9 位、时间 3 位小数）→ 11 列 NAV（`clean5_degradation/evaluation.ginav_nav` 列序，`%.17g`），按窗裁剪；冻结评估器 aa049248，v3 点（天线中点变换）并行 v2 点（IMU 点），`consistency_failure_policy = D12_BOUNDED_UNAVAILABLE`：先过 D8 有界门（同一发散界），一致性门失败时该版本单列为评估失败类别 UNAVAILABLE_EVALUATION_FAILED（不记零、不删历元）；同时由不开参考的子进程报覆盖感知指标：行覆盖（窗内输出行 / 闭窗整数秒数）、时间跨度覆盖（(末行 − 首行)/窗长）、最大缺口、段数（缺口 > 1.5 s 断段）、首个有效行时刻。窗内无输出记 NO_OUTPUT。
 
-**4.4 评估调用预算。** heading_only 15 次（5 方法 × 3 序列，EXT04 两策略同一次调用）、冻结评估器 ≤ 6 次（GINav v3/v2 × 3，D8 门未过则不调用）、relative_pose 3 次（每序列一次，两分支同一次调用）、不开参考的覆盖统计 3 次；LegSA 0/0。实际次数由账本计数器报告。
+**4.4 评估调用预算。** heading_only 15 次（5 方法 × 3 序列，EXT04 两策略同一次调用）、冻结评估器 ≤ 6 次（GINav v3/v2 × 3，D8 门未过则不调用）、relative_pose 6 次（修正 1：每序列每分支各 1 次）、不开参考的覆盖统计 3 次；LegSA 0/0。实际次数由账本计数器报告。
 
 ## 5. (d) LegSA 参照行与已封存外部行的来源（原样引用，不重算）
 
@@ -422,7 +422,7 @@ RTKLIB 动基线：配置 `RTKLIB_UNMODIFIED_MOVING_BASE.conf`（97f0fe41…，�
 
 ## 12. 执行、存储与目录
 
-`$HX02`：`00_CONTRACT`（合约副本与哈希）、`00_CONTROL`（身份门、方法本体钉、冻结前冒烟摘要、删除清单、PROGRESS/STATE/LEDGER）、`01_INPUT_PINS`、`RUNS/<run_id>/`（COMMAND.json、SEQUENCE_SPEC/参数、PARAMS_ECHO.json、INPUT_HASHES.json、`native/`、OUTPUT_HASHES.json、`eval/`、FAILURE.json 或 DONE.json、ARCHIVE_MANIFEST.json）、`90_AGGREGATE`、`99_HARD_STOP`。COMMAND.json 与 DONE.json 的溯源块记录 data_mode、合成与半合成数据标志（均 false）、trace_used_online、receiver_imu_as_body_imu、final_v23_output_solver_input、LegSA_output_solver_input、per_case_tuning、output_only_correction、epoch_deleted_for_metric（均 false）、old_runtime_input_count（由原生 openat 审计计数，`<CLEAN_ROOT>` 下 `01_RAW_HASH_LOCK/` 与 `$HX02` 之外的文件打开即计入，非 0 硬停）、code_commit 与 config_hash（合约 SHA-256）。每次原生启动前等待机器空闲（load1 ≤ 8 且 load5 ≤ 10，最多 7200 s，等待时间入账）。
+`$HX02`：`00_CONTRACT`（合约副本与哈希）、`00_CONTROL`（身份门、方法本体钉、冻结前冒烟摘要、删除清单、PROGRESS/STATE/LEDGER）、`01_INPUT_PINS`、`RUNS/<run_id>/`（COMMAND.json、SEQUENCE_SPEC/参数、PARAMS_ECHO.json、INPUT_HASHES.json、`native/`、OUTPUT_HASHES.json、`eval/`、FAILURE.json 或 DONE.json、ARCHIVE_MANIFEST.json）、`90_AGGREGATE`、`99_HARD_STOP`。COMMAND.json 与 DONE.json 的溯源块记录 data_mode、合成与半合成数据标志（均 false）、trace_used_online、receiver_imu_as_body_imu、final_v23_output_solver_input、LegSA_output_solver_input、per_case_tuning、output_only_correction、epoch_deleted_for_metric（均 false）、old_runtime_input_count（由原生 openat 审计计数，`<CLEAN_ROOT>` 下 `01_RAW_HASH_LOCK/` 与 `$HX02` 之外的文件打开即计入，非 0 硬停）、code_commit 与 config_hash（合约 SHA-256）。（修正 2）每次原生启动前等待机器空闲（load1 ≤ 8 且 load5 ≤ 10），最多 600 s，超时照常启动；启动时的实际 load1/load5、等待时间与是否超时写进该运行的 COMMAND.json。
 
 产出：`$HX02/90_AGGREGATE/EXTERNAL_FIVE_CATEGORY_TABLE.csv`（长表，列 category, method_id, config, sequence, start_mode, output_type, metric, value, denominator_or_valid_epochs, failure_flag, source, notes；五类全部有行，无实现的 EXT05B、LC01-M、LC01-S-M、LC01-2D、Yin、Chang、Jiang、Taghizadeh、HAO2018、EXT06 各一行、状态写“无实现”及盘点原因；other 类一行；D01/D02 不进表）与 `HX02_RESULTS.md`（五类宽表、每类一句结论、复现检查、约定诊断、失败清单、Outcome），复制到 `$W/docs/paper_rebuild/hext/HX02/`。汇总代码 `hext/hx02_aggregate.py`。
 
@@ -469,3 +469,23 @@ RTKLIB 动基线：配置 `RTKLIB_UNMODIFIED_MOVING_BASE.conf`（97f0fe41…，�
 
 硬停后：写报告、提交、等待，不自行续作。
 
+## 16. 修正记录
+
+修正登记时间：**2026-09-24T12:42:44Z**（UTC），早于任何相对位姿评估；提交 `prereg-amend(hx02): per-branch relative-pose alignment and idle-wait cap`。只改评估层与控制器调度参数，不动任何原生运行。
+
+| 编号 | 内容 | 原因 | 改动文件 |
+|---|---|---|---|
+| 修正 1 | §4.2、§4.4：Hartley-S 与 Hartley-LIT 各自在自己输出的评估窗起始 10 s 内导出对齐（绕重力轴 yaw + 三维平移，规则不变），互不共用；一支无可用输出只记该支 UNAVAILABLE，不影响另一支；相对位姿评估每序列每分支各 1 次，共 6 次。原规定为由 Hartley-S 导出、两分支共用，共 3 次。 | 两支滤波器的初始 yaw 与原点都是各自不可观的规范自由度。共用 Hartley-S 的对齐，会让 Hartley-LIT 的指标依赖另一分支的输出与可用性：Hartley-S 失败时 Hartley-LIT 也只能记 UNAVAILABLE。各自对齐后，两支的相对位姿指标相互独立。 | `src/legsa_gins/paper_rebuild/hext/hx02_relative_pose_evaluation.py` `d5a024d2218aeae3c1c24c211b170cabad7b4c730fd02b43c270fe2d6f1fa4d1`；`hx02_execution.py` `e8a529118e31281432752d051a4bcf341ff2bb5038af2b73549fa4dbcad2fb07`；`hx02_aggregate.py` `7e73aa216b66f1a77610ba6378ba74902a7f9ac31a499ab18585d0dfeb36f18a` |
+| 修正 2 | §12：原生启动前空闲等待上限由 7200 s 改为 600 s，超时照常启动，实际 load1/load5 写进该运行的 COMMAND.json。 | 7200 s 上限在负载持续偏高时可能让批次停滞近 2 h。600 s 上限保证进度，同时把启动时的实际负载留档，供事后核对。 | `hx02_execution.py`（同上） |
+
+修正后合约 `configs/paper_rebuild/hext/HX02_CONTRACT_V1.yaml` 的 SHA-256 为 `85b13d489d2941382ea3f416dade24253fe07ee66c2c7e83d18554487bba5b98`：`code_sha256` 仍为 53 项，其中上述 3 项已更新；新增 `amendments` 与 `amendment_state_at_registration`；`evaluator_call_budget.relative_pose` 由 3 改为 6。输入钉 `INPUT_PINS.json`（`723ae92b…`）与参数回显参照不变。HX-02 测试 43 项通过，新增逐支对齐、一支不可用不牵连另一支、每次调用只评一支、600 s 上限与超时记录四类检查。
+
+修正时的状态：
+
+- 控制器停止：GINav BY2 于 12:35:42.707Z 记为 EVALUATED，27 ms 后（12:35:42.734Z）控制器被 SIGSTOP 冻结；核对无原生进程、无相对位姿评估子进程后发 SIGINT，控制器于 12:35:42.844Z 以 KeyboardInterrupt 退出（退出码 130，未写硬停记录）。账本于 12:36:49Z 记 `CONTROLLER_STOPPED_FOR_AMENDMENT`。
+- 修正到达时，BY2 批的 8 个原生运行已全部完成。EXT01、EXT02、EXT03、EXT04、RTKLIB、GINav 六个运行的评估也已完成，停止后按原归档例程逐文件复核归档（12:37:50–12:39:14Z，账本 `ARCHIVED`），其 DONE.json 不动。Hartley-S、Hartley-LIT 两支原生已完成、尚未评估，留在 scratch，续作时按修正 1 逐支评估。
+- 已完成运行的空闲等待都未实际等待（启动时负载低于阈值），与修正 2 无关。
+
+声明：**修正时尚无任何相对位姿评估运行、未查看任何 Hartley 原生结果、已完成的原生运行与航向评估不受影响且不重做。**说明：Hartley BY2 两支原生由控制器自动运行，并自动做了参数回显比对（只比运行标识与参数，不读位姿）；我没有打开这两支的 NAV 或 NATIVE_SUMMARY。冻结前冒烟（第 13 节）曾在截断输入（BY2 前 3000 条记录）上运行 Hartley 两支，只看了退出码、行数、参数回显与发散门是否通过。
+
+续作：控制器以修正后的冻结清单从账本续作，续作时间与冻结核对结果记于账本的 `PREREG_AMENDMENT`、`CONTROLLER_START` 与 `FROZEN_CODE_CHECK` 事件。

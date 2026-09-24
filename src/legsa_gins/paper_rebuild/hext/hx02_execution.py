@@ -215,16 +215,23 @@ def disk_guard(control: Control, roots: Roots, when: str) -> dict[str, Any]:
     return record
 
 
-def quiet_machine(control: Control, max_wait_s: float = 7200.0) -> dict[str, Any]:
+QUIET_WAIT_CAP_S = 600.0   # HX-02 amendment 2 (was 7200 s): on timeout the native launches anyway
+
+
+def quiet_machine(control: Control, max_wait_s: float = QUIET_WAIT_CAP_S) -> dict[str, Any]:
+    """Wait for load1 <= 8 and load5 <= 10, at most ``max_wait_s``; the returned record (actual
+    load1/load5 at launch, waited time, timeout flag) goes into the run's COMMAND.json."""
     started = time.monotonic()
     while True:
         load1, load5, _ = os.getloadavg()
-        if (load1 <= 8.0 and load5 <= 10.0) or time.monotonic() - started > max_wait_s:
-            record = {"load1": load1, "load5": load5, "waited_s": time.monotonic() - started,
-                      "quiet": load1 <= 8.0 and load5 <= 10.0}
+        waited = time.monotonic() - started
+        quiet = load1 <= 8.0 and load5 <= 10.0
+        if quiet or waited >= max_wait_s:
+            record = {"load1": load1, "load5": load5, "waited_s": waited, "quiet": quiet,
+                      "timed_out": not quiet, "cap_s": max_wait_s}
             control.progress(f"QUIET_MACHINE {json.dumps(record)}")
             return record
-        time.sleep(30)
+        time.sleep(min(30.0, max(0.0, max_wait_s - waited)))
 
 
 # --------------------------------------------------------------------------- native audit
@@ -573,28 +580,44 @@ def evaluate_ginav(control: Control, roots: Roots, seq: hx02_sequence.HX02Sequen
     return result
 
 
-def evaluate_hartley(control: Control, roots: Roots, seq: hx02_sequence.HX02Sequence, runs: Mapping[str, Path]) -> dict[str, Any]:
-    branches = {}
-    for label, run_dir in runs.items():
-        nav = run_dir / "native" / "run" / "NAV.csv"
-        if nav.is_file():
-            branches[label] = {"nav": str(nav), "nav_sha256": sha256_file(nav)}
-    if "HARTLEY_S" not in branches:
-        return {"evaluation_status": "UNAVAILABLE_PRIMARY_ALIGNMENT_BRANCH_HAS_NO_NAV", "branches": list(branches)}
+def evaluate_hartley_branch(control: Control, roots: Roots, seq: hx02_sequence.HX02Sequence, method: str,
+                            run_dir: Path) -> dict[str, Any]:
+    """One registered relative-pose call for one branch; the alignment comes from this branch's own
+    output (HX-02 amendment 1). Returns the branch's evaluation status."""
+    nav = run_dir / "native" / "run" / "NAV.csv"
     spec = {"sequence_id": seq.sequence_id, "base_time": seq.base_time, "window": list(seq.window),
             "baseline_median_m": seq.baseline_median_m, "trace": seq.trace_path_evaluator_only,
-            "trace_sha256": seq.trace_sha256, "alignment_branch": "HARTLEY_S", "branches": branches}
-    control.event("EVALUATOR_LAUNCH", run=runs["HARTLEY_S"].name, counters={"evaluator_calls": 1},
-                  kind_detail="RELATIVE_POSE")
+            "trace_sha256": seq.trace_sha256, "branches": {method: {"nav": str(nav), "nav_sha256": sha256_file(nav)}}}
+    control.event("EVALUATOR_LAUNCH", run=run_dir.name, counters={"evaluator_calls": 1}, kind_detail="RELATIVE_POSE")
     try:
-        result = hx02_evaluation_process.run_child("RELATIVE_POSE", spec,
-                                                   workdir=runs["HARTLEY_S"] / "eval" / "RELATIVE_POSE",
+        result = hx02_evaluation_process.run_child("RELATIVE_POSE", spec, workdir=run_dir / "eval" / "RELATIVE_POSE",
                                                    code_root=roots.code, raw_root=roots.raw, clean_root=roots.clean,
                                                    trace=Path(seq.trace_path_evaluator_only))
     except hx02_evaluation_process.EvaluationProcessError as exc:
-        raise HardStop(f"relative-pose evaluator technical/access failure: {exc}") from exc
+        raise HardStop(f"relative-pose evaluator technical/access failure in {run_dir.name}: {exc}") from exc
     metrics = json.loads((Path(result["outdir"]) / "RELATIVE_POSE_METRICS.json").read_text(encoding="utf-8"))
-    return {"evaluation_status": "EVALUATED", "metrics": metrics}
+    return {"evaluation_status": metrics["branches"][method].get("evaluation_status", "UNAVAILABLE")}
+
+
+def finish_hartley_branches(control: Control, roots: Roots, seq: hx02_sequence.HX02Sequence) -> None:
+    """Divergence gate and relative-pose evaluation per branch; a branch without usable output is
+    recorded on its own and never affects the other branch (HX-02 amendment 1)."""
+    for method in ("HARTLEY_S", "HARTLEY_LIT"):
+        rid = run_id(seq.sequence_id, method)
+        if control.status(rid) != "NATIVE_COMPLETED":
+            continue
+        run_dir = roots.scratch / "RUNS" / rid
+        gate = hx02_hartley.divergence_gate(run_dir / "native" / "run" / "NAV.csv")
+        write_json(run_dir / "eval" / "DIVERGENCE_GATE.json", gate)
+        if not gate["passed"]:
+            status, evaluation = "ALGORITHM_FAILURE_DIVERGED", "NOT_RUN_ALGORITHM_FAILURE"
+            write_json(run_dir / "FAILURE.json", {"failure_classification": status, "gate": gate})
+        else:
+            status = "COMPLETED"
+            evaluation = evaluate_hartley_branch(control, roots, seq, method, run_dir)["evaluation_status"]
+        write_done(run_dir, {"run_id": rid, "status": status, "evaluation": evaluation})
+        control.event("EVALUATED", run=rid, state={"status": "EVALUATED"}, evaluation=evaluation)
+        control.progress("CONTROLLER_SELF_AUDIT " + json.dumps(controller_self_audit(roots, f"after {rid} evaluation")))
 
 
 # --------------------------------------------------------------------------- archive
@@ -827,34 +850,7 @@ def run_batch(control: Control, roots: Roots, sequence_id: str, pins: Mapping[st
             write_done(run_dir, {"run_id": rid, "status": "COMPLETED", "evaluation": result.get("evaluation_status")})
             control.event("EVALUATED", run=rid, state={"status": "EVALUATED"})
         control.progress("CONTROLLER_SELF_AUDIT " + json.dumps(controller_self_audit(roots, f"after {rid}")))
-    hartley_runs = {m: roots.scratch / "RUNS" / run_id(sequence_id, m) for m in ("HARTLEY_S", "HARTLEY_LIT")}
-    states = {m: control.status(run_id(sequence_id, m)) for m in hartley_runs}
-    if any(s in ("NATIVE_COMPLETED",) for s in states.values()):
-        diverged = {}
-        for method, run_dir in hartley_runs.items():
-            nav = run_dir / "native" / "run" / "NAV.csv"
-            if states[method] == "NATIVE_COMPLETED" and nav.is_file():
-                gate = hx02_hartley.divergence_gate(nav)
-                write_json(run_dir / "eval" / "DIVERGENCE_GATE.json", gate)
-                if not gate["passed"]:
-                    diverged[method] = gate
-        usable = {m: d for m, d in hartley_runs.items() if states[m] == "NATIVE_COMPLETED" and m not in diverged}
-        result = evaluate_hartley(control, roots, seq, usable) if "HARTLEY_S" in usable else {
-            "evaluation_status": "UNAVAILABLE_PRIMARY_ALIGNMENT_BRANCH_NOT_USABLE", "diverged": list(diverged)}
-        finalized = {}
-        for method, run_dir in hartley_runs.items():
-            if states[method] != "NATIVE_COMPLETED":
-                continue
-            status = "ALGORITHM_FAILURE_DIVERGED" if method in diverged else "COMPLETED"
-            if method in diverged:
-                write_json(run_dir / "FAILURE.json", {"failure_classification": status, "gate": diverged[method]})
-            write_json(run_dir / "eval" / "RELATIVE_POSE_RESULT_POINTER.json",
-                       {"evaluated_in": str(hartley_runs["HARTLEY_S"] / "eval" / "RELATIVE_POSE"),
-                        "evaluation_status": result.get("evaluation_status")})
-            write_done(run_dir, {"run_id": run_dir.name, "status": status, "evaluation": result.get("evaluation_status")})
-            finalized[run_dir.name] = {"status": "EVALUATED"}
-        # both branches become EVALUATED in one ledger line, so a resume never splits the pair
-        control.event("EVALUATED_PAIR", runs_state=finalized)
+    finish_hartley_branches(control, roots, seq)
     control.progress("CONTROLLER_SELF_AUDIT " + json.dumps(controller_self_audit(roots, f"before archive {sequence_id}")))
     disk_guard(control, roots, f"archive {sequence_id}")
     for method in METHODS:

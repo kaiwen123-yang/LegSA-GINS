@@ -368,34 +368,39 @@ def ginav_rows(stage: Path, sequence: str, stage_state: str) -> tuple[list[dict[
 
 
 def hartley_rows(stage: Path, sequence: str, stage_state: str) -> tuple[list[dict[str, str]], dict[str, Any]]:
-    runs = {method: _run(stage, sequence, method) for method in ("HARTLEY_S", "HARTLEY_LIT")}
-    states = {method: _run_state(run) if run.exists() else {} for method, run in runs.items()}
-    metrics_path = runs["HARTLEY_S"] / "eval" / "RELATIVE_POSE" / "OUTPUT" / "RELATIVE_POSE_METRICS.json"
-    metrics = _json(metrics_path) if metrics_path.is_file() else None
-    info = {"runs": {m: str(r.name) for m, r in runs.items()}, "metrics": metrics, "states": states}
-    rows = []
-    for method, run in runs.items():
-        state = states[method]
-        flag = _failure_flag(state)
+    """Per-branch relative-pose rows; each branch is aligned from its own output (HX-02 amendment 1)."""
+    rows: list[dict[str, str]] = []
+    info: dict[str, Any] = {"runs": {}, "states": {}}
+    for method in ("HARTLEY_S", "HARTLEY_LIT"):
+        run = _run(stage, sequence, method)
+        state = _run_state(run) if run.exists() else {}
+        info["runs"][method] = run.name
+        info["states"][method] = state
+        metrics_path = run / "eval" / "RELATIVE_POSE" / "OUTPUT" / "RELATIVE_POSE_METRICS.json"
+        metrics = _json(metrics_path) if metrics_path.is_file() else None
         branch = (metrics or {}).get("branches", {}).get(method)
+        flag = _failure_flag(state)
         common = dict(category="legged_state_estimation", method_id=HARTLEY_ID[method], config=TABLE_CONFIG[method],
                       sequence=sequence, start_mode=START_MODE[sequence], output_type="relative_pose")
-        if flag or branch is None:
+        if flag or branch is None or branch.get("evaluation_status") != "EVALUATED":
             if flag is None:
-                done = state.get("DONE.json", {})
-                flag = done.get("evaluation") or ("NOT_EXECUTED" if not state else "UNAVAILABLE")
+                flag = (branch or {}).get("evaluation_status") or state.get("DONE.json", {}).get("evaluation")
+            if not flag:
+                flag = "UNAVAILABLE" if state else (f"NOT_EXECUTED_{stage_state}" if stage_state else "NOT_EXECUTED")
             gate = run / "eval" / "DIVERGENCE_GATE.json"
             notes = json.dumps(_json(gate).get("maxima"), sort_keys=True) if gate.is_file() else ""
             rows.append(_row(**common, metric="run_status", value=flag, denominator_or_valid_epochs="UNAVAILABLE",
-                             failure_flag=flag, source=_run_source(run, state, None) if run.exists() else f"$HX02/RUNS/{run.name} (absent)",
+                             failure_flag=flag,
+                             source=_run_source(run, state, metrics_path if metrics else None) if run.exists()
+                             else f"$HX02/RUNS/{run.name} (absent)",
                              notes=("divergence maxima " + notes) if notes else "no relative-pose metrics for this branch"))
             continue
-        source = _run_source(runs["HARTLEY_S"], states["HARTLEY_S"], metrics_path) + f"; branch run $HX02/RUNS/{run.name}"
+        source = _run_source(run, state, metrics_path)
         denominator = f"scored={branch['scored_epochs']}/grid={metrics['grid_epochs']}"
-        alignment = metrics["alignment"]
-        align_note = (f"one 4-DOF alignment from Hartley-S on [{alignment['window_seconds'][0]}, {alignment['window_seconds'][1]}] s "
-                      f"({alignment['epochs']} epochs): yaw {alignment['yaw_offset_deg']:.6f} deg, translation "
-                      f"{[round(v, 4) for v in alignment['translation_enu_m']]} m; applied unchanged")
+        alignment = branch["alignment"]
+        align_note = (f"one 4-DOF alignment from this branch's own output on [{alignment['window_seconds'][0]}, "
+                      f"{alignment['window_seconds'][1]}] s ({alignment['epochs']} epochs): yaw {alignment['yaw_offset_deg']:.6f} deg, "
+                      f"translation {[round(v, 4) for v in alignment['translation_enu_m']]} m; applied unchanged")
         rpe = branch["relative_pose_error_yaw_translation"]["10s"]
         for metric, value, notes in (
                 ("position_drift_m_per_100m", branch["position_drift_m_per_100m"], branch["drift_definitions"]["position"]),
@@ -616,7 +621,7 @@ def conclusions(rows: Sequence[Mapping[str, str]]) -> dict[str, str]:
             elif s in status:
                 parts.append(f"{s} {status[s]}")
         legged.append(f"{method}：" + "，".join(parts))
-    text["legged_state_estimation"] = "；".join(legged) + "（相对位姿口径，出处：本任务 Hartley-S 运行目录 RELATIVE_POSE_METRICS.json）。"
+    text["legged_state_estimation"] = "；".join(legged) + "（相对位姿口径，各支自身对齐；出处：各分支运行目录 RELATIVE_POSE_METRICS.json）。"
     text["other"] = "该类无外部方法（HX_INVENTORY.md §2）。"
     return text
 
@@ -641,7 +646,7 @@ def results_markdown(rows, checks, info, identity, pins, counters, failures, com
     lines += ["", "LC01/LC01-S 为 v3 封存行（BY2H 取 CONTRACT_START；FILE_START 行见长表 notes=SUPPLEMENT）。", ""]
     lines += ["## 3. 单天线 GNSS/INS（imu_point_nav）", ""]
     lines += wide_table(rows, [("EXT05C", "LIT"), ("EXT05C-S", "S"), ("EXT06", "-")], lc_metrics[:2])
-    lines += ["", "## 4. 足式状态估计（relative_pose；10 s 窗一次 yaw+平移对齐，Hartley-S 导出、两分支共用）", ""]
+    lines += ["", "## 4. 足式状态估计（relative_pose；每支用自己的输出在窗首 10 s 内做一次 yaw+平移对齐，互不共用）", ""]
     lines += wide_table(rows, [("Hartley-S", "S"), ("Hartley-LIT", "LIT")],
                         [("position_drift_m_per_100m", "drift m/100m", 3), ("heading_drift_deg_per_min", "°/min", 3),
                          ("aligned_horizontal_rmse_m", "h RMSE m", 3), ("aligned_yaw_rmse_deg", "yaw RMSE°", 2)])

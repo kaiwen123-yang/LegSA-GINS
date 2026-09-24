@@ -254,3 +254,54 @@ def test_pair_event_updates_both_runs_in_one_ledger_line(tmp_path):
                                                                          "LIT": {"status": "EVALUATED"}}
     replayed = ex.Control(roots)
     assert replayed.status("S") == replayed.status("LIT") == "EVALUATED"
+
+
+def test_quiet_wait_is_capped_at_600_s_and_records_the_load(tmp_path, monkeypatch):
+    import inspect
+    assert ex.QUIET_WAIT_CAP_S == 600.0
+    assert inspect.signature(ex.quiet_machine).parameters["max_wait_s"].default == 600.0
+    control = ex.Control(_roots(tmp_path))
+    monkeypatch.setattr(ex.os, "getloadavg", lambda: (20.0, 18.0, 15.0))
+    record = ex.quiet_machine(control, max_wait_s=0.0)
+    assert record["timed_out"] is True and record["quiet"] is False
+    assert (record["load1"], record["load5"], record["cap_s"]) == (20.0, 18.0, 0.0)
+    monkeypatch.setattr(ex.os, "getloadavg", lambda: (1.0, 2.0, 3.0))
+    assert ex.quiet_machine(control)["timed_out"] is False
+
+
+def test_hartley_branches_are_evaluated_one_call_each_and_independently(tmp_path, monkeypatch):
+    roots = _roots(tmp_path, contract={"sequences": {"BY2": {"case": "C00"}}})
+    control = ex.Control(roots)
+    seq = SimpleNamespace(sequence_id="BY2", base_time=1.0, window=(66.0, 340.0), baseline_median_m=0.356,
+                          trace_path_evaluator_only=str(tmp_path / "raw/trace_vrtk_x.csv"), trace_sha256="t" * 64)
+    runs = {}
+    for method in ("HARTLEY_S", "HARTLEY_LIT"):
+        rid = ex.run_id("BY2", method)
+        run_dir = roots.scratch / "RUNS" / rid
+        (run_dir / "native" / "run").mkdir(parents=True)
+        (run_dir / "eval").mkdir()
+        (run_dir / "native" / "run" / "NAV.csv").write_text(f"{method}\n")
+        (run_dir / "COMMAND.json").write_text(json.dumps({"provenance": {"data_mode": "real_by2_raw"}}))
+        control.event("NATIVE_DONE", run=rid, state={"status": "NATIVE_COMPLETED"})
+        runs[method] = run_dir
+    monkeypatch.setattr(ex.hx02_hartley, "divergence_gate",
+                        lambda nav: {"passed": "HARTLEY_LIT" in nav.read_text(), "maxima": {}})
+    calls = []
+
+    def fake_child(kind, spec, *, workdir, **_):
+        assert kind == "RELATIVE_POSE" and len(spec["branches"]) == 1 and "alignment_branch" not in spec
+        (label,) = spec["branches"]
+        calls.append(label)
+        out = workdir / "OUTPUT"
+        out.mkdir(parents=True)
+        (out / "RELATIVE_POSE_METRICS.json").write_text(json.dumps({"branches": {label: {"evaluation_status": "EVALUATED"}}}))
+        return {"outdir": str(out)}
+    monkeypatch.setattr(ex.hx02_evaluation_process, "run_child", fake_child)
+    monkeypatch.setattr(ex, "controller_self_audit", lambda roots, when, log=None: {"when": when})
+    ex.finish_hartley_branches(control, roots, seq)
+    assert calls == ["HARTLEY_LIT"] and control.state["counters"]["evaluator_calls"] == 1
+    s_done = json.loads((runs["HARTLEY_S"] / "DONE.json").read_text())
+    lit_done = json.loads((runs["HARTLEY_LIT"] / "DONE.json").read_text())
+    assert s_done["status"] == "ALGORITHM_FAILURE_DIVERGED" and (runs["HARTLEY_S"] / "FAILURE.json").is_file()
+    assert lit_done["status"] == "COMPLETED" and lit_done["evaluation"] == "EVALUATED"
+    assert control.status(ex.run_id("BY2", "HARTLEY_S")) == control.status(ex.run_id("BY2", "HARTLEY_LIT")) == "EVALUATED"

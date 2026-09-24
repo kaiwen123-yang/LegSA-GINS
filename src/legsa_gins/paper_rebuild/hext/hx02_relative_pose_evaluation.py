@@ -12,8 +12,11 @@ forbidden-operation list at :99-117):
     frozen FRD lever [0.03, 0.03 - b_med/2, -0.30] m (clean5_parity transform);
     Hartley body frame is Go2 FLU, world frame is gravity-up;
   * one 4-DOF alignment (yaw about gravity + 3-D translation) solved by least
-    squares on the first 10 s of the window, derived from the primary branch and
-    applied unchanged to every branch, never re-fitted over the window.
+    squares on the first 10 s of the window from each branch's own output
+    (HX-02 amendment 1: branches never share an alignment), never re-fitted over
+    the window; a branch without bracketed alignment epochs is UNAVAILABLE on its
+    own and does not affect any other branch;
+  * one registered call evaluates exactly one branch (one reference open per branch).
 """
 from __future__ import annotations
 
@@ -261,6 +264,33 @@ def branch_metrics(grid: np.ndarray, estimate: Mapping[str, np.ndarray], referen
     return metrics, rows
 
 
+ALIGNMENT_RULE = ("per branch: one least-squares yaw-about-gravity + 3-D translation on the first 10 s of the "
+                  "window from the branch's own output (HX-02 amendment 1); never shared, never re-fitted")
+
+
+def branch_alignment(grid: np.ndarray, window: Sequence[float], interp: Mapping[str, np.ndarray],
+                     estimate: Mapping[str, np.ndarray], ref_enu: np.ndarray, lever: np.ndarray) -> dict[str, Any] | None:
+    """The branch's own 4-DOF alignment on [w0, w0 + 10 s]; None when fewer than two epochs are bracketed."""
+    align_mask = (grid <= float(window[0]) + ALIGNMENT_SECONDS + 1e-9) & interp["supported"] & estimate["supported"]
+    if int(np.count_nonzero(align_mask)) < 2:
+        return None
+    points = np.asarray([estimate["position"][i] + estimate["rotation"][i] @ lever for i in np.flatnonzero(align_mask)])
+    psi, _rz, translation, offsets = ls_yaw_translation_gauge(
+        estimate["rotation"][align_mask], points, np.radians(interp["yaw_enu_unwrapped_deg"][align_mask]),
+        ref_enu[align_mask])
+    return {
+        "psi": psi, "translation": translation,
+        "record": {
+            "window_seconds": [float(window[0]), float(window[0]) + ALIGNMENT_SECONDS],
+            "epochs": int(np.count_nonzero(align_mask)), "yaw_offset_deg": math.degrees(psi),
+            "translation_enu_m": translation.tolist(),
+            "per_epoch_yaw_offset_circular_std_deg": float(np.degrees(np.sqrt(-2.0 * np.log(max(
+                math.hypot(float(np.mean(np.sin(offsets))), float(np.mean(np.cos(offsets)))), 1e-300))))),
+            "rule": ALIGNMENT_RULE, "not_estimated": ["roll", "pitch", "scale", "time_offset"],
+        },
+    }
+
+
 def evaluate_payloads(spec: Mapping[str, Any], trace_payload: bytes, nav_payloads: Mapping[str, bytes]) -> dict[str, Any]:
     base_time = float(spec["base_time"])
     window = tuple(map(float, spec["window"]))
@@ -273,48 +303,39 @@ def evaluate_payloads(spec: Mapping[str, Any], trace_payload: bytes, nav_payload
     ref_ecef = geodetic_to_ecef(interp["lat"], interp["lon"], interp["height"])
     ref_enu = ecef_to_enu(ref_ecef, float(interp["lat"][origin_index]), float(interp["lon"][origin_index]), origin_ecef)
     lever = lever_flu(float(spec["baseline_median_m"]))
-    primary = str(spec["alignment_branch"])
-    branches = {label: read_hartley_nav(payload) for label, payload in nav_payloads.items()}
     grid_unix = grid + base_time
-    estimates = {label: interpolate_estimate(nav, grid_unix) for label, nav in branches.items()}
-    align_mask = (grid <= window[0] + ALIGNMENT_SECONDS + 1e-9) & interp["supported"] & estimates[primary]["supported"]
-    if int(np.count_nonzero(align_mask)) < 2:
-        raise RelativePoseError("alignment window lacks bracketed estimate/reference epochs")
-    est = estimates[primary]
-    points = np.asarray([est["position"][i] + est["rotation"][i] @ lever for i in np.flatnonzero(align_mask)])
-    psi, rz, translation, offsets = ls_yaw_translation_gauge(
-        est["rotation"][align_mask], points, np.radians(interp["yaw_enu_unwrapped_deg"][align_mask]), ref_enu[align_mask])
     result: dict[str, Any] = {
         "schema": SCHEMA, "sequence_id": spec["sequence_id"], "window_seconds": list(window),
         "base_time": base_time, "grid_step_s": GRID_STEP_S, "grid_epochs": int(grid.size),
         "reference_supported_grid_epochs": int(np.count_nonzero(interp["supported"])),
-        "alignment": {
-            "branch": primary, "window_seconds": [window[0], window[0] + ALIGNMENT_SECONDS],
-            "epochs": int(np.count_nonzero(align_mask)), "yaw_offset_deg": math.degrees(psi),
-            "translation_enu_m": translation.tolist(),
-            "per_epoch_yaw_offset_circular_std_deg": float(np.degrees(np.sqrt(-2.0 * np.log(max(
-                math.hypot(float(np.mean(np.sin(offsets))), float(np.mean(np.cos(offsets)))), 1e-300))))),
-            "rule": "one least-squares yaw-about-gravity + 3D translation on the first 10 s; primary-derived; applied unchanged to all branches",
-            "not_estimated": ["roll", "pitch", "scale", "time_offset"],
-        },
+        "alignment_rule": ALIGNMENT_RULE,
         "lever_flu_m": lever.tolist(), "reference_origin": "first supported grid epoch (local ENU)",
         "branches": {}, "series": {},
     }
-    for label, estimate in estimates.items():
+    for label, payload in nav_payloads.items():
+        nav = read_hartley_nav(payload)
+        estimate = interpolate_estimate(nav, grid_unix)
         valid = interp["supported"] & estimate["supported"]
+        nav_info = {"nav_rows": int(nav["time_ns"].size),
+                    "nav_first_rel_s": float(nav["time_unix_s"][0] - base_time),
+                    "nav_last_rel_s": float(nav["time_unix_s"][-1] - base_time),
+                    "unsupported_grid_epochs": int(grid.size - np.count_nonzero(valid))}
+        alignment = branch_alignment(grid, window, interp, estimate, ref_enu, lever)
+        if alignment is None:
+            result["branches"][label] = {"evaluation_status": "UNAVAILABLE_ALIGNMENT_WINDOW_NOT_BRACKETED", **nav_info}
+            result["series"][label] = []
+            continue
         metrics, rows = branch_metrics(grid, estimate, ref_enu, interp["yaw_enu_unwrapped_deg"], valid,
-                                       lever, psi, translation)
-        nav = branches[label]
-        metrics.update(nav_rows=int(nav["time_ns"].size),
-                       nav_first_rel_s=float(nav["time_unix_s"][0] - base_time),
-                       nav_last_rel_s=float(nav["time_unix_s"][-1] - base_time),
-                       unsupported_grid_epochs=int(grid.size - np.count_nonzero(valid)))
+                                       lever, alignment["psi"], alignment["translation"])
+        metrics.update(evaluation_status="EVALUATED", alignment=alignment["record"], **nav_info)
         result["branches"][label] = metrics
         result["series"][label] = rows
     return result
 
 
 def evaluate(spec: Mapping[str, Any]) -> dict[str, Any]:
+    if len(spec["branches"]) != 1:
+        raise RelativePoseError("one branch per registered relative-pose call")
     outdir = Path(spec["outdir"])
     outdir.mkdir(parents=True, exist_ok=False)
     nav_payloads = {}

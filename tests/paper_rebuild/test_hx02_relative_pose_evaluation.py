@@ -1,4 +1,7 @@
-"""HX-02 relative-pose evaluator: synthetic trajectories with known gauge offsets and drift rates."""
+"""HX-02 relative-pose evaluator: synthetic trajectories with known gauge offsets and drift rates.
+
+Amendment 1: every branch is aligned from its own output; one registered call evaluates one branch.
+"""
 from __future__ import annotations
 
 import csv
@@ -96,8 +99,7 @@ def _nav_bytes(turn_rate_deg_s, *, psi0_deg, translation, yaw_error_enu_rad=None
 
 
 def _spec(**extra):
-    return {"sequence_id": "SYN", "base_time": BASE, "window": list(WINDOW), "baseline_median_m": B_MED,
-            "alignment_branch": "HARTLEY_S", **extra}
+    return {"sequence_id": "SYN", "base_time": BASE, "window": list(WINDOW), "baseline_median_m": B_MED, **extra}
 
 
 def test_lever_is_frozen_frd_transform_in_flu():
@@ -108,7 +110,8 @@ def test_gauge_offsets_are_recovered_exactly_and_leave_no_error():
     trace = _trace_bytes(2.0)
     nav = _nav_bytes(2.0, psi0_deg=57.0, translation=(5.0, -3.0, 2.0))
     result = ev.evaluate_payloads(_spec(), trace, {"HARTLEY_S": nav})
-    alignment = result["alignment"]
+    alignment = result["branches"]["HARTLEY_S"]["alignment"]
+    assert result["branches"]["HARTLEY_S"]["evaluation_status"] == "EVALUATED"
     assert alignment["yaw_offset_deg"] == pytest.approx(57.0, abs=1e-6)
     assert alignment["translation_enu_m"] == pytest.approx([5.0, -3.0, 2.0], abs=1e-5)
     assert alignment["window_seconds"] == [10.0, 20.0]
@@ -129,7 +132,7 @@ def test_known_heading_drift_rate_is_recovered():
     metrics = result["branches"]["HARTLEY_S"]
     assert metrics["heading_drift_deg_per_min"] == pytest.approx(rate_deg_per_min, abs=1e-4)
     # the 10 s alignment absorbs the mean injected yaw over its epochs (0.25 deg), nothing more
-    assert result["alignment"]["yaw_offset_deg"] == pytest.approx(-120.0 + 0.25, abs=1e-4)
+    assert metrics["alignment"]["yaw_offset_deg"] == pytest.approx(-120.0 + 0.25, abs=1e-4)
 
 
 def test_known_position_drift_rate_follows_the_registered_ols_definition():
@@ -149,29 +152,33 @@ def test_known_position_drift_rate_follows_the_registered_ols_definition():
     assert metrics["heading_drift_deg_per_min"] == pytest.approx(0.0, abs=1e-6)
 
 
-def test_one_primary_alignment_is_applied_unchanged_to_the_other_branch():
+def test_each_branch_is_aligned_from_its_own_output():
     trace = _trace_bytes(2.0)
-    primary = _nav_bytes(2.0, psi0_deg=40.0, translation=(3.0, 1.0, 0.0))
-    other = _nav_bytes(2.0, psi0_deg=45.0, translation=(3.0, 1.0, 0.0))  # a different own-frame gauge
-    result = ev.evaluate_payloads(_spec(), trace, {"HARTLEY_S": primary, "HARTLEY_LIT": other})
-    assert result["alignment"]["branch"] == "HARTLEY_S"
-    assert result["alignment"]["yaw_offset_deg"] == pytest.approx(40.0, abs=1e-6)
-    lit = result["branches"]["HARTLEY_LIT"]
-    assert lit["yaw_rmse_deg"] == pytest.approx(5.0, abs=1e-4)
-    assert lit["horizontal_rmse_m"] > 0.1
+    first = _nav_bytes(2.0, psi0_deg=40.0, translation=(3.0, 1.0, 0.0))
+    other = _nav_bytes(2.0, psi0_deg=45.0, translation=(-2.0, 4.0, 1.0))  # a different own-frame gauge
+    result = ev.evaluate_payloads(_spec(), trace, {"HARTLEY_S": first, "HARTLEY_LIT": other})
+    s, lit = result["branches"]["HARTLEY_S"], result["branches"]["HARTLEY_LIT"]
+    assert s["alignment"]["yaw_offset_deg"] == pytest.approx(40.0, abs=1e-6)
+    assert lit["alignment"]["yaw_offset_deg"] == pytest.approx(45.0, abs=1e-6)
+    assert lit["alignment"]["translation_enu_m"] == pytest.approx([-2.0, 4.0, 1.0], abs=1e-5)
+    assert lit["yaw_rmse_deg"] < 1e-5 and lit["horizontal_rmse_m"] < 1e-5
+    assert "own output" in result["alignment_rule"] and "branch" not in s["alignment"]
 
 
-def test_no_extrapolation_and_alignment_needs_bracketed_epochs():
+def test_no_extrapolation_and_an_unbracketed_branch_is_unavailable_on_its_own():
     trace = _trace_bytes(2.0)
-    late = _nav_bytes(2.0, psi0_deg=0.0, translation=(0.0, 0.0, 0.0))
-    rows = late.decode().splitlines()
+    full = _nav_bytes(2.0, psi0_deg=0.0, translation=(0.0, 0.0, 0.0))
+    rows = full.decode().splitlines()
     kept = [rows[0]] + [row for row in rows[1:] if int(row.split(",")[0]) >= int(round((BASE + 30.0) * 1e9))]
-    with pytest.raises(ev.RelativePoseError, match="alignment window"):
-        ev.evaluate_payloads(_spec(), trace, {"HARTLEY_S": ("\n".join(kept) + "\n").encode()})
+    result = ev.evaluate_payloads(_spec(), trace, {"HARTLEY_S": ("\n".join(kept) + "\n").encode(),
+                                                   "HARTLEY_LIT": full})
+    assert result["branches"]["HARTLEY_S"]["evaluation_status"] == "UNAVAILABLE_ALIGNMENT_WINDOW_NOT_BRACKETED"
+    assert result["branches"]["HARTLEY_LIT"]["evaluation_status"] == "EVALUATED"
+    assert result["branches"]["HARTLEY_LIT"]["horizontal_rmse_m"] < 1e-5
     shifted = [rows[0]] + [row for row in rows[1:] if int(row.split(",")[0]) >= int(round((BASE + 15.0) * 1e9))]
     result = ev.evaluate_payloads(_spec(), trace, {"HARTLEY_S": ("\n".join(shifted) + "\n").encode()})
     assert result["branches"]["HARTLEY_S"]["unsupported_grid_epochs"] == 50
-    assert result["alignment"]["epochs"] == 51
+    assert result["branches"]["HARTLEY_S"]["alignment"]["epochs"] == 51
 
 
 def test_child_entry_opens_reference_once_and_checks_hashes(tmp_path):
@@ -189,3 +196,6 @@ def test_child_entry_opens_reference_once_and_checks_hashes(tmp_path):
     assert (tmp_path / "out" / "RELATIVE_POSE_ERROR_SERIES_HARTLEY_S.csv").is_file()
     with pytest.raises(ev.RelativePoseError, match="reference SHA-256"):
         ev.evaluate(dict(spec, outdir=str(tmp_path / "out2"), trace_sha256="0" * 64))
+    two = dict(spec, outdir=str(tmp_path / "out3"), branches={**spec["branches"], "HARTLEY_LIT": spec["branches"]["HARTLEY_S"]})
+    with pytest.raises(ev.RelativePoseError, match="one branch per registered"):
+        ev.evaluate(two)

@@ -104,14 +104,17 @@ def mock_stage(tmp_path):
                       "reference_path_length_m": 250.0,
                       "relative_pose_error_yaw_translation": {"10s": {"pair_count": 2641, "translation_rmse_m": 0.2,
                                                                       "yaw_rmse_deg": 0.5}}}
-            s_run = stage / "RUNS" / ex.run_id(sequence, "HARTLEY_S")
-            _write(s_run / "eval" / "RELATIVE_POSE" / "OUTPUT" / "RELATIVE_POSE_METRICS.json", {
-                "grid_epochs": 2741, "alignment": {"window_seconds": [window[0], window[0] + 10.0], "epochs": 101,
-                                                   "yaw_offset_deg": 12.0, "translation_enu_m": [1.0, 2.0, 0.0]},
-                "branches": {"HARTLEY_S": branch, "HARTLEY_LIT": dict(branch, position_drift_m_per_100m=3.5)}})
-            for method in ("HARTLEY_S", "HARTLEY_LIT"):
+            for method, drift in (("HARTLEY_S", 1.25), ("HARTLEY_LIT", 3.5)):
                 run = stage / "RUNS" / ex.run_id(sequence, method)
-                _write(run / "DONE.json", {"status": "COMPLETED", "evaluation": "EVALUATED"})
+                own = dict(branch, position_drift_m_per_100m=drift, evaluation_status="EVALUATED",
+                           alignment={"window_seconds": [window[0], window[0] + 10.0], "epochs": 101,
+                                      "yaw_offset_deg": 12.0 if method == "HARTLEY_S" else -33.0,
+                                      "translation_enu_m": [1.0, 2.0, 0.0]})
+                if (sequence, method) == ("BY2", "HARTLEY_LIT"):   # one branch unavailable, the other unaffected
+                    own = {"evaluation_status": "UNAVAILABLE_ALIGNMENT_WINDOW_NOT_BRACKETED", "nav_rows": 10}
+                _write(run / "eval" / "RELATIVE_POSE" / "OUTPUT" / "RELATIVE_POSE_METRICS.json",
+                       {"grid_epochs": 2741, "branches": {method: own}})
+                _write(run / "DONE.json", {"status": "COMPLETED", "evaluation": own["evaluation_status"]})
                 _write(run / "OUTPUT_HASHES.json", {"file_count": 0, "files": {}})
         else:
             for method in ("HARTLEY_S", "HARTLEY_LIT"):
@@ -152,6 +155,10 @@ def test_aggregate_writes_every_category_sealed_rows_and_failures(mock_stage):
     assert lookup[("EXT04_PAR", "BY2", "availability", "FILE_START")]["denominator_or_valid_epochs"].endswith("/1371")
     assert lookup[("Hartley-S", "BY2H", "run_status", "CONTRACT_START")]["failure_flag"] == "ABNORMAL_EXIT"
     assert lookup[("Hartley-LIT", "BY2O", "position_drift_m_per_100m", "FILE_START")]["value"] == "3.5"
+    assert "from this branch's own output" in lookup[("Hartley-LIT", "BY2O", "aligned_horizontal_rmse_m", "FILE_START")]["notes"]
+    assert "-33.000000 deg" in lookup[("Hartley-LIT", "BY2O", "aligned_horizontal_rmse_m", "FILE_START")]["notes"]
+    assert lookup[("Hartley-LIT", "BY2", "run_status", "FILE_START")]["value"] == "UNAVAILABLE_ALIGNMENT_WINDOW_NOT_BRACKETED"
+    assert lookup[("Hartley-S", "BY2", "position_drift_m_per_100m", "FILE_START")]["value"] == "1.25"
     assert lookup[("LC02_GINAV", "BY2", "frozen_evaluation_status", "FILE_START")]["failure_flag"] == \
         "UNAVAILABLE_EVALUATION_FAILED_D12"
     assert lookup[("LC02_GINAV", "BY2O", "frozen_evaluation_status", "FILE_START")]["failure_flag"] == \

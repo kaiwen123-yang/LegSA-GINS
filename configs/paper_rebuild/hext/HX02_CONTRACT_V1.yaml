@@ -175,20 +175,20 @@ runs:
   run_directory: RUNS/<SEQ>__<METHOD>__<CONFIG>__<CASE>__NA
   native_concurrency: 1
   internal_workers_max: 16
-  quiet_machine_wait: "load1 <= 8 and load5 <= 10 before each native launch, at most 7200 s (waited time recorded)"
+  quiet_machine_wait: "load1 <= 8 and load5 <= 10 before each native launch, at most 600 s (amendment 2; was 7200 s); on timeout the native launches anyway; actual load1/load5 at launch, waited time and timeout flag recorded in COMMAND.json"
   disk_guards_bytes: {/mnt/e: 40000000000, /mnt/g: 30000000000, scratch_max: 20000000000}
   interrupted_native: "moved to <HX02_SCRATCH>/INTERRUPTED and launched again (counted); archived runs are never rerun"
   interrupted_evaluation: "partial evaluation outputs move to INTERRUPTED_EVALUATION_<ts>/ inside the run and the registered evaluation runs again (counted)"
 evaluators:
   heading_only: {module: legsa_gins.paper_rebuild.hext.hx02_heading_evaluation, reference_opens_per_call: 1}
-  relative_pose: {module: legsa_gins.paper_rebuild.hext.hx02_relative_pose_evaluation, reference_opens_per_call: 1, alignment: "one least-squares yaw-about-gravity + 3-D translation on [w0, w0+10] s from HARTLEY_S, applied unchanged to both branches"}
+  relative_pose: {module: legsa_gins.paper_rebuild.hext.hx02_relative_pose_evaluation, reference_opens_per_call: 1, branches_per_call: 1, alignment: "per branch (amendment 1): one least-squares yaw-about-gravity + 3-D translation on [w0, w0+10] s from the branch's own output, never shared, never re-fitted; a branch without usable output is UNAVAILABLE on its own and does not affect the other"}
   coverage: {module: legsa_gins.paper_rebuild.hext.hx02_coverage_evaluation, reference_opens_per_call: 0}
   launcher: {module: legsa_gins.paper_rebuild.hext.hx02_evaluation_process}
   imu_point_nav: {frozen_evaluator_alias: "<CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py", sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da, versions: [v3, v2], consistency_failure_policy: D12_BOUNDED_UNAVAILABLE}
 evaluator_call_budget:
   heading_only: 15
   frozen_imu_point_nav: 6
-  relative_pose: 3
+  relative_pose: 6   # amendment 1: one call per sequence and branch (was 3)
   reference_free_coverage: 3
   legsa_solver_calls: 0
   legsa_evaluator_calls: 0
@@ -217,11 +217,11 @@ code_sha256:   # runtime code and configurations, checked at controller start (f
   scripts/paper_rebuild/run_horizontal_literature_phase2.py: 5e1c04b9f5b07cc9fee3eff7281974f05a73a94ad39c9a56e260a609e54acb86
   scripts/paper_rebuild/run_horizontal_literature_phase3.py: 7193a0c68f260b4e25f4bfca431143d64043af80303306962a0df2991c658f79
   scripts/paper_rebuild/run_horizontal_literature_phase4.py: 45a35f7927efb92eea71d7bd3d61b6dc447b3efa95fe533723f379fa078a09bf
-  src/legsa_gins/paper_rebuild/hext/hx02_aggregate.py: 2d7b067f65732c8b7cd17abe2d59c0439b414682e1dabc20d38a475f5f71ddf7
+  src/legsa_gins/paper_rebuild/hext/hx02_aggregate.py: 7e73aa216b66f1a77610ba6378ba74902a7f9ac31a499ab18585d0dfeb36f18a
   src/legsa_gins/paper_rebuild/hext/hx02_convention.py: ef707f932887ba163ae63df63628ba00fea5cf261a760c7f7d1b77290706dd3b
   src/legsa_gins/paper_rebuild/hext/hx02_coverage_evaluation.py: 1f5afe16ff12327e6915dcfbea8adb5a730b7556eed8add920542f6170dbdeec
   src/legsa_gins/paper_rebuild/hext/hx02_evaluation_process.py: c94093d1fbf94c9f4db9f6f59334666ea8897c59bcd67654afd4a9914c7764fb
-  src/legsa_gins/paper_rebuild/hext/hx02_execution.py: c05059f0afcc41023d16cb76c1e86e781727f9311a5bc9f448c37ae171ea0f7c
+  src/legsa_gins/paper_rebuild/hext/hx02_execution.py: e8a529118e31281432752d051a4bcf341ff2bb5038af2b73549fa4dbcad2fb07
   src/legsa_gins/paper_rebuild/hext/hx02_ginav.py: a07b110fb3f464b4e5d8236bcc23e81aeca0cf1789cad91fd1a74e9375f4fc1e
   src/legsa_gins/paper_rebuild/hext/hx02_ginav_nav.py: 46333bcccc1bf92c5ececb5bf66de736d2761792bcb6ef80351f0cd7cea0ecca
   src/legsa_gins/paper_rebuild/hext/hx02_hartley.py: 1e1164d71cdbb13c9b8a65a9fd712a80442dd26147182d9d6a8daf5a3cf8cdcf
@@ -229,7 +229,7 @@ code_sha256:   # runtime code and configurations, checked at controller start (f
   src/legsa_gins/paper_rebuild/hext/hx02_heading_tables.py: df8bf4a6d9cf37dc59bb18bf8035037b3b6317af658ab2ab0c9a24352a13c065
   src/legsa_gins/paper_rebuild/hext/hx02_native_cli.py: d51af303a6fe09fb39ae8538ba6df5b85f2c51549ad574fc46ec1aa81e295abf
   src/legsa_gins/paper_rebuild/hext/hx02_params_echo.py: 644b46df4de8aec1c5982d8b36cf9596e7120ab42ed7f6033fee418b0961a373
-  src/legsa_gins/paper_rebuild/hext/hx02_relative_pose_evaluation.py: 0d9ce68cd1212c66a95efe0e3f635aa5bd954a2937f02924fcbacaabacbff8e4
+  src/legsa_gins/paper_rebuild/hext/hx02_relative_pose_evaluation.py: d5a024d2218aeae3c1c24c211b170cabad7b4c730fd02b43c270fe2d6f1fa4d1
   src/legsa_gins/paper_rebuild/hext/hx02_rtklib.py: 73758583883f30a0d73cfb7fa0aee905fb73e4100ec5bf1b0309be811883e56d
   src/legsa_gins/paper_rebuild/hext/hx02_sequence.py: ca7457c28e7fe54baf0d91420815ffb3125e0b9577c5f3e8fbafdc27a637c3d4
   src/legsa_gins/paper_rebuild/hext/external_evaluation.py: 55f2ca5c1c14703c2a4af5cf80b1ca5176e19487aa3f645f3e9efb1e78060df4
@@ -265,3 +265,16 @@ code_sha256:   # runtime code and configurations, checked at controller start (f
   configs/paper_rebuild/hext/H_EXT_CONTRACT_V1.yaml: 7b748b5106dace0d809947dea65ae85c4a161ad18ca78aa395d2252b15c42863
   configs/paper_rebuild/clean5/CLEAN5_SEQUENCE_REGISTRY.yaml: cf230fa682876be5d572d3754450a7922b558f11272ad65f90b7312245efa1e3
   configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml: 698ede92e0251b896d488283544421a9f0dc3f689e2168ff841804e0950bc983
+amendments:   # registered before any relative-pose evaluation (HX02_PREREG.md section 16)
+  - id: 1
+    registered_utc: "2026-09-24T12:42:44Z"
+    scope: evaluation layer, relative_pose
+    change: "Hartley-S and Hartley-LIT each derive their own 4-DOF alignment (yaw about gravity + 3-D translation, least squares, rule unchanged) on the first 10 s of the evaluation window from their own output; alignments are never shared; a branch without usable output is UNAVAILABLE on its own and does not affect the other; one relative-pose evaluator call per sequence and branch, 6 in total"
+    replaces: "one alignment derived from Hartley-S and applied unchanged to both branches; 3 calls"
+    files: [src/legsa_gins/paper_rebuild/hext/hx02_relative_pose_evaluation.py, src/legsa_gins/paper_rebuild/hext/hx02_execution.py, src/legsa_gins/paper_rebuild/hext/hx02_aggregate.py]
+  - id: 2
+    registered_utc: "2026-09-24T12:42:44Z"
+    scope: controller scheduling
+    change: "quiet-machine wait capped at 600 s (was 7200 s); on timeout the native launches anyway; actual load1/load5 at launch recorded in COMMAND.json"
+    files: [src/legsa_gins/paper_rebuild/hext/hx02_execution.py]
+amendment_state_at_registration: "controller stopped at 2026-09-24T12:35:42.734Z (SIGSTOP 27 ms after EVALUATED BY2__GINAV__NONE__C00__NA, exit via KeyboardInterrupt), before any relative-pose evaluation; no Hartley native result viewed; completed native runs and heading evaluations unaffected and not redone"
