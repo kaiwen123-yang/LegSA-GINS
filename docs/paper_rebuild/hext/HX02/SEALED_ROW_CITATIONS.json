@@ -1,0 +1,218 @@
+[
+  {
+    "line": 17,
+    "method_id": "LC01",
+    "role": "MANUSCRIPT",
+    "sequence": "BY2",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "FILE_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 18,
+    "method_id": "EXT05C",
+    "role": "MANUSCRIPT",
+    "sequence": "BY2",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "FILE_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 40,
+    "method_id": "LC01-S",
+    "role": "MANUSCRIPT",
+    "sequence": "BY2",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "FILE_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 41,
+    "method_id": "EXT05C-S",
+    "role": "MANUSCRIPT",
+    "sequence": "BY2",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "FILE_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 42,
+    "method_id": "LC01",
+    "role": "SUPPLEMENT",
+    "sequence": "BY2H",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "FILE_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 43,
+    "method_id": "LC01",
+    "role": "MANUSCRIPT",
+    "sequence": "BY2H",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "CONTRACT_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 44,
+    "method_id": "EXT05C",
+    "role": "SUPPLEMENT",
+    "sequence": "BY2H",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "FILE_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 45,
+    "method_id": "EXT05C",
+    "role": "MANUSCRIPT",
+    "sequence": "BY2H",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "CONTRACT_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 46,
+    "method_id": "LC01-S",
+    "role": "SUPPLEMENT",
+    "sequence": "BY2H",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "FILE_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 47,
+    "method_id": "LC01-S",
+    "role": "MANUSCRIPT",
+    "sequence": "BY2H",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "CONTRACT_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 48,
+    "method_id": "EXT05C-S",
+    "role": "SUPPLEMENT",
+    "sequence": "BY2H",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "FILE_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 49,
+    "method_id": "EXT05C-S",
+    "role": "MANUSCRIPT",
+    "sequence": "BY2H",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "CONTRACT_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 50,
+    "method_id": "LC01",
+    "role": "MANUSCRIPT",
+    "sequence": "BY2O",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "FILE_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 51,
+    "method_id": "EXT05C",
+    "role": "MANUSCRIPT",
+    "sequence": "BY2O",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "FILE_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 52,
+    "method_id": "LC01-S",
+    "role": "MANUSCRIPT",
+    "sequence": "BY2O",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "FILE_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 53,
+    "method_id": "EXT05C-S",
+    "role": "MANUSCRIPT",
+    "sequence": "BY2O",
+    "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+    "start_mode": "FILE_START",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv"
+  },
+  {
+    "line": 9,
+    "method_id": "F01",
+    "role": "LEGSA_REFERENCE",
+    "sequence": "BY2H",
+    "sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv"
+  },
+  {
+    "line": 10,
+    "method_id": "F02",
+    "role": "LEGSA_REFERENCE",
+    "sequence": "BY2H",
+    "sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv"
+  },
+  {
+    "line": 12,
+    "method_id": "F04",
+    "role": "LEGSA_REFERENCE",
+    "sequence": "BY2H",
+    "sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv"
+  },
+  {
+    "line": 20,
+    "method_id": "F01",
+    "role": "LEGSA_REFERENCE",
+    "sequence": "BY2O",
+    "sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv"
+  },
+  {
+    "line": 21,
+    "method_id": "F02",
+    "role": "LEGSA_REFERENCE",
+    "sequence": "BY2O",
+    "sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv"
+  },
+  {
+    "line": 23,
+    "method_id": "F04",
+    "role": "LEGSA_REFERENCE",
+    "sequence": "BY2O",
+    "sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv"
+  },
+  {
+    "line": 24,
+    "method_id": "F01",
+    "role": "LEGSA_REFERENCE",
+    "sequence": "BY2",
+    "sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv"
+  },
+  {
+    "line": 25,
+    "method_id": "F02",
+    "role": "LEGSA_REFERENCE",
+    "sequence": "BY2",
+    "sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv"
+  },
+  {
+    "line": 27,
+    "method_id": "F04",
+    "role": "LEGSA_REFERENCE",
+    "sequence": "BY2",
+    "sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+    "table": "stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv"
+  }
+]

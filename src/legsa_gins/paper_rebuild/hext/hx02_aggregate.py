@@ -626,7 +626,153 @@ def conclusions(rows: Sequence[Mapping[str, str]]) -> dict[str, str]:
     return text
 
 
-def results_markdown(rows, checks, info, identity, pins, counters, failures, commits) -> str:
+CONTROL_EVENT_KINDS = ("CONTROLLER_START", "FROZEN_CODE_CHECK", "CONTROLLER_STOPPED_FOR_AMENDMENT", "PREREG_AMENDMENT",
+                       "HARD_STOP", "CONTROLLER_DONE")
+
+
+def control_records(stage: Path) -> dict[str, Any]:
+    """Amendments, stop points, incidents and controller events recorded under 00_CONTRACT/00_CONTROL (read only)."""
+    contract_dir, control_dir = Path(stage) / "00_CONTRACT", Path(stage) / "00_CONTROL"
+    amendments = [_json(p) for p in sorted(contract_dir.glob("AMENDMENT_*_IDENTITY.json"))] if contract_dir.is_dir() else []
+    stops = [_json(p) for p in sorted(control_dir.glob("AMENDMENT_*_STOP_POINT.json"))] if control_dir.is_dir() else []
+    incidents, events = [], []
+    if (control_dir / "INCIDENTS.jsonl").is_file():
+        incidents = [json.loads(line) for line in (control_dir / "INCIDENTS.jsonl").read_text(encoding="utf-8").splitlines()
+                     if line.strip()]
+    if (control_dir / "LEDGER.jsonl").is_file():
+        for line in (control_dir / "LEDGER.jsonl").read_text(encoding="utf-8").splitlines():
+            event = json.loads(line) if line.strip() else {}
+            if event.get("kind") in CONTROL_EVENT_KINDS:
+                events.append({key: event.get(key) for key in ("utc", "kind", "code_commit", "files", "frozen_utc",
+                                                               "exited_utc", "amendment_commit", "reason")})
+    notes = _json(control_dir / "RESULTS_NOTES.json").get("notes", []) if (control_dir / "RESULTS_NOTES.json").is_file() else []
+    return {"amendments": amendments, "stops": stops, "incidents": incidents, "control_events": events, "notes": notes,
+            "timings": run_timings(stage), "ext01_budget": ext01_search_budget(stage)}
+
+
+def _utc_seconds(text: str | None) -> float | None:
+    from datetime import datetime
+    return datetime.fromisoformat(text).timestamp() if text else None
+
+
+def run_timings(stage: Path) -> list[dict[str, Any]]:
+    """Wall-clock time of every registered native run from its COMMAND.json (start/end UTC)."""
+    rows = []
+    for sequence in execution.SEQUENCES:
+        for method in execution.METHODS:
+            run = _run(stage, sequence, method)
+            command = _json(run / "COMMAND.json") if (run / "COMMAND.json").is_file() else {}
+            start, end = command.get("start_utc"), command.get("end_utc")
+            wall = (_utc_seconds(end) - _utc_seconds(start)) if start and end else None
+            rows.append({"run_id": run.name, "sequence": sequence, "method": method, "start_utc": start, "end_utc": end,
+                         "wall_clock_s": wall, "runtime_seconds": command.get("runtime_seconds"),
+                         "returncode": command.get("returncode"), "classification": command.get("native_classification"),
+                         "runner_terminal_status": command.get("runner_terminal_status"),
+                         "quiet_wait_s": (command.get("quiet_machine") or {}).get("waited_s")})
+    return rows
+
+
+def ext01_search_budget(stage: Path) -> list[dict[str, Any]]:
+    """EXT01 per-epoch branch-and-bound budget flags from the native search certificates (read only)."""
+    from collections import Counter
+    contract = execution.hx02_sequence.load_contract()
+    out = []
+    for sequence in execution.SEQUENCES:
+        run = _run(stage, sequence, "EXT01")
+        path = run / "native/ARTIFACT/02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_SEARCH_CERTIFICATES.csv"
+        if not path.is_file():
+            out.append({"sequence": sequence, "available": False, "run_id": run.name})
+            continue
+        with path.open(newline="", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        declared = contract["sequences"][sequence]
+        start, end = map(float, declared["window"])
+        base = float(declared["base_time"])
+        in_window = [row for row in rows if start <= float(
+            execution.hx02_sequence.unix_time(int(row["gps_week"]), float(row["gps_tow_seconds"]), 18)) - base <= end]
+        nodes = [int(float(row["branch_and_bound_nodes_expanded"])) for row in rows
+                 if row["branch_and_bound_nodes_expanded"] not in ("", "nan")]
+        out.append({"sequence": sequence, "available": True, "run_id": run.name, "file": path.name, "sha256": sha256_file(path),
+                    "epochs": len(rows), "window_epochs": len(in_window),
+                    "node_limit_exhausted": sum(row["node_limit_exhausted"] == "true" for row in rows),
+                    "node_limit_exhausted_in_window": sum(row["node_limit_exhausted"] == "true" for row in in_window),
+                    "runtime_budget_exhausted": sum(row["runtime_budget_exhausted"] == "true" for row in rows),
+                    "runtime_budget_exhausted_in_window": sum(row["runtime_budget_exhausted"] == "true" for row in in_window),
+                    "configured_node_limit": sorted({row["configured_node_limit"] for row in rows}),
+                    "max_nodes_expanded": max(nodes) if nodes else None,
+                    "termination_reasons": dict(sorted(Counter(row["termination_reason"] for row in rows).items()))})
+    return out
+
+
+def timing_and_budget_markdown(records: Mapping[str, Any]) -> list[str]:
+    lines = []
+    if records.get("timings"):
+        lines += ["## 原生运行清单与墙钟时间（COMMAND.json 起止 UTC）", "",
+                  "| run | 分类 | 退出码 | 起（UTC） | 止（UTC） | 墙钟 [s] | runner 终态 |", "|---|---|---|---|---|---|---|"]
+        total = 0.0
+        for row in records["timings"]:
+            wall = row["wall_clock_s"]
+            total += wall or 0.0
+            lines.append(f"| {row['run_id']} | {row['classification'] or '—'} | {row['returncode']} | {row['start_utc'] or '—'} | "
+                         f"{row['end_utc'] or '—'} | {'—' if wall is None else f'{wall:.3f}'} | {row['runner_terminal_status'] or '—'} |")
+        lines += ["", f"24 次登记原生运行墙钟合计 {total:.1f} s（不含空闲等待、评估与归档；冻结前冒烟的用时见 00_CONTROL/PREFREEZE_SMOKE_SUMMARY*.json）。", ""]
+    if records.get("ext01_budget"):
+        lines += ["## EXT01 搜索预算（原生 SEARCH_CERTIFICATES 逐历元标记）", "",
+                  "| 序列 | 原生历元 | 窗内历元 | 触及节点上限（全表 / 窗内） | 触及运行时间预算（全表 / 窗内） | 节点上限 | 最大展开节点 | 终止原因 | 文件 SHA-256 |",
+                  "|---|---|---|---|---|---|---|---|---|"]
+        for row in records["ext01_budget"]:
+            if not row.get("available"):
+                lines.append(f"| {row['sequence']} | — | — | 无原生输出 | — | — | — | — | — |")
+                continue
+            reasons = "、".join(f"{k} {v}" for k, v in row["termination_reasons"].items())
+            lines.append(f"| {row['sequence']} | {row['epochs']} | {row['window_epochs']} | {row['node_limit_exhausted']} / "
+                         f"{row['node_limit_exhausted_in_window']} | {row['runtime_budget_exhausted']} / {row['runtime_budget_exhausted_in_window']} | "
+                         f"{'、'.join(row['configured_node_limit'])} | {row['max_nodes_expanded']} | {reasons} | `{row['sha256'][:16]}…` |")
+        lines.append("")
+    return lines
+
+
+def records_markdown(records: Mapping[str, Any]) -> list[str]:
+    lines = timing_and_budget_markdown(records)
+    if records.get("notes"):
+        lines += ["## 补充说明", ""]
+        for note in records["notes"]:
+            lines += [f"### {note['title']}", "", *note["lines"], ""]
+    lines += ["## 修正记录（结果之前登记，详见 HX02_PREREG.md §16）", ""]
+    if not records.get("amendments"):
+        lines += ["无。", ""]
+    else:
+        lines += ["| 修正 | 登记时间（UTC） | 内容 | 修正提交 | 修正后合约 SHA-256 |", "|---|---|---|---|---|"]
+        for amendment in records["amendments"]:
+            for item in amendment.get("amendments", []):
+                number, _, text = str(item).partition(": ")
+                lines.append(f"| {number} | {amendment.get('registered_utc')} | {text} | "
+                             f"`{str(amendment.get('amendment_commit'))[:12]}` | `{str(amendment.get('contract_sha256'))[:12]}…` |")
+        lines.append("")
+    for stop in records.get("stops", []):
+        lines += [f"- 指令写法：{stop.get('instruction')}", f"- 实际停止点：{stop.get('actual_stop_point')}",
+                  f"- 与指令不同的原因：{stop.get('reason')}",
+                  f"- 停止时按原例程归档：{'、'.join(stop.get('archived_at_stop', []))}；修正后按新规则评估："
+                  f"{'、'.join(stop.get('evaluated_after_amendment', []))}", ""]
+    if records.get("control_events"):
+        lines += ["| 账本事件 | UTC | 要点 |", "|---|---|---|"]
+        for event in records["control_events"]:
+            detail = {key: value for key, value in event.items() if key not in ("utc", "kind") and value not in (None, "")}
+            lines.append(f"| {event['kind']} | {event['utc']} | `{json.dumps(detail, ensure_ascii=False, sort_keys=True)[:300]}` |")
+        lines.append("")
+    lines += ["## 事故", ""]
+    if not records.get("incidents"):
+        lines += ["无。", ""]
+    else:
+        lines += ["| # | 阶段 | 时间（UTC） | 事件 | 发现 | 处理 | 后果 |", "|---|---|---|---|---|---|---|"]
+        for incident in records["incidents"]:
+            lines.append(f"| {incident.get('id')} | {incident.get('phase')} | {incident.get('utc_window')} | {incident.get('what')} | "
+                         f"{incident.get('detection')} | {incident.get('action')} | {incident.get('consequence')} |")
+        lines.append("")
+    return lines
+
+
+def results_markdown(rows, checks, info, identity, pins, counters, failures, commits, records=None) -> str:
     heading_metrics = [("availability", "avail", 1), ("valid_rmse_deg", "valid RMSE°", 3),
                        ("hold_rmse_deg", "hold RMSE°", 3), ("valid_max_abs_deg", "valid max°", 2)]
     lines = ["# HX-02 五类外部方法三序列结果", "",
@@ -673,14 +819,16 @@ def results_markdown(rows, checks, info, identity, pins, counters, failures, com
     lines += ["", "## 失败清单（带分母）", "", "| run | classification | denominator | note |", "|---|---|---|---|"]
     for item in failures or [{"run": "—", "classification": "无", "denominator": "—", "note": "—"}]:
         lines.append(f"| {item['run']} | {item['classification']} | {item['denominator']} | {item['note']} |")
-    lines += ["", "## Outcome", "", "```", json.dumps({
+    lines += [""] + records_markdown(records or {})
+    lines += ["## Outcome", "", "```", json.dumps({
         "native_runs_registered": 24, "native_calls": counters.get("native_calls"),
         "evaluator_calls_reference": counters.get("evaluator_calls"),
         "evaluator_calls_reference_free": counters.get("reference_free_evaluator_calls"),
         "legsa_native_calls": counters.get("legsa_native_calls", 0),
         "legsa_evaluator_calls": counters.get("legsa_evaluator_calls", 0),
         "identity_gate": identity, "method_body_pins": pins,
-        "failures": len(failures), "decision_rule": "none; all results reported"}, indent=2, sort_keys=True,
+        "failures": len(failures), "amendments": sum(len(a.get("amendments", [])) for a in (records or {}).get("amendments", [])),
+        "incidents": len((records or {}).get("incidents", [])), "decision_rule": "none; all results reported"}, indent=2, sort_keys=True,
         ensure_ascii=False), "```", ""]
     return "\n".join(lines)
 
@@ -741,7 +889,8 @@ def aggregate(roots: execution.Roots, *, docs_copy: Path | None = Path("docs/pap
             for name in ("METHOD_BODY_SHA256_BEFORE.json", "METHOD_BODY_SHA256_AFTER.json")}
     heads = sorted({_json(p).get("code_commit") for p in (stage / "RUNS").glob("*/COMMAND.json")}) if (stage / "RUNS").is_dir() else []
     commits = {"code_freeze": code_freeze, "execution_heads": heads}
-    markdown = results_markdown(rows, checks, info, identity, pins, counters, failures, commits)
+    records = control_records(stage)
+    markdown = results_markdown(rows, checks, info, identity, pins, counters, failures, commits, records)
     target.mkdir(parents=True)
     buffer = io.StringIO()
     writer = csv.DictWriter(buffer, fieldnames=TABLE_COLUMNS, lineterminator="\n")

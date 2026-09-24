@@ -1,0 +1,404 @@
+[
+  {
+    "declared_scope_heading_tables": {
+      "EXT01": {
+        "clean4_declared_scope_table_sha256": "4077df65ab3e1b29474342e8cbacb947d8bd45b0e968f1f201e7078862352ed9",
+        "hx02_table_sha256": "4077df65ab3e1b29474342e8cbacb947d8bd45b0e968f1f201e7078862352ed9",
+        "identical": true
+      }
+    },
+    "hx02_native_freeze_sha256": "d11ed040cdc15527f49843f06dab367de3eb8a2d98ed7926de65f37cf3721e91",
+    "known_reasons": [
+      "the freeze JSON embeds run paths, the HX-02 sequence spec and the execution commit",
+      "rtklib_bridge .so rebuilt after the CLEAN4 EXT01 R2 run (current liblegsa_rtklib_bridge.so 6df66600...); GPU/driver and library versions are not pinned by CLEAN4",
+      "runtime files record wall-clock timings"
+    ],
+    "method": "EXT01",
+    "method_output_identical_on_declared_scope": true,
+    "per_file": [
+      {
+        "clean4_sha256": "83ffda0d5919ddf9003a635a0d3a975fa6c5a346e9320e1b0b440de0b1c6ddf5",
+        "file_role": "dd",
+        "hx02_sha256": "83ffda0d5919ddf9003a635a0d3a975fa6c5a346e9320e1b0b440de0b1c6ddf5",
+        "identical": true
+      },
+      {
+        "clean4_sha256": "938efda03a11167f668a82a8a5883d1c262f5b3649f5d8b310bbcee963a5dd03",
+        "file_role": "failures",
+        "hx02_sha256": "5cefb59e9b3d36b35ef7472c635911fc6e0147c2daef02aaa83dd7413b71f0b0",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "d1931a93af9651b1a2b8f60e9e8ea7bab834138aaabe94b8636cd683d7cda3a1",
+        "file_role": "native",
+        "hx02_sha256": "d1931a93af9651b1a2b8f60e9e8ea7bab834138aaabe94b8636cd683d7cda3a1",
+        "identical": true
+      },
+      {
+        "clean4_sha256": "41dc93b61eeb8d099af521b74cdf8926e381134984c22175b4fa805fea824787",
+        "file_role": "runtime",
+        "hx02_sha256": "d416eaa93c60b2b57b022399478e4407c1336f82f028843bf602b02eaacf084b",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "2a5989a5c341fed42131245e54a21617dcf498a6afec887f29f312ad9f97467c",
+        "file_role": "search",
+        "hx02_sha256": "2a5989a5c341fed42131245e54a21617dcf498a6afec887f29f312ad9f97467c",
+        "identical": true
+      },
+      {
+        "clean4_sha256": "c25318b68a50aa74fbf16378f7b6099c02f59aa4810011f737a3b132cadb5e4c",
+        "file_role": "tracking",
+        "hx02_sha256": "c25318b68a50aa74fbf16378f7b6099c02f59aa4810011f737a3b132cadb5e4c",
+        "identical": true
+      }
+    ],
+    "registered_clean4_native_freeze_sha256": "6da2b5a05b9f784d35e288b64398182e77c235605d9aa90375bac9b166106493",
+    "status": "NOT_REPRODUCED"
+  },
+  {
+    "declared_scope_heading_tables": {
+      "EXT02": {
+        "clean4_declared_scope_table_sha256": "08fe64c3869d5391e7729b668f730ef2290e4cb5387c1668ed539e90089d199d",
+        "hx02_table_sha256": "08fe64c3869d5391e7729b668f730ef2290e4cb5387c1668ed539e90089d199d",
+        "identical": true
+      }
+    },
+    "hx02_native_freeze_sha256": "64e11583816853c26a64a96e22c22e48dac71070b155481ada55cd63d6811410",
+    "known_reasons": [
+      "the freeze JSON embeds run paths, the HX-02 sequence spec and the execution commit",
+      "runtime files record wall-clock timings"
+    ],
+    "method": "EXT02",
+    "method_output_identical_on_declared_scope": true,
+    "per_file": [
+      {
+        "clean4_sha256": "add9db13bfb9f35f08f6e49c08196fd2b9cee4a3efce24814ea05d2f5409b24f",
+        "file_role": "candidate_diagnostics",
+        "hx02_sha256": "add9db13bfb9f35f08f6e49c08196fd2b9cee4a3efce24814ea05d2f5409b24f",
+        "identical": true
+      },
+      {
+        "clean4_sha256": "b49727932e0b57f995180a20962908351478ad3eea3088f244624c718429c339",
+        "file_role": "dd_diagnostics",
+        "hx02_sha256": "b49727932e0b57f995180a20962908351478ad3eea3088f244624c718429c339",
+        "identical": true
+      },
+      {
+        "clean4_sha256": "0b0280cf66a45bd2262c8d38ef33f852e4fe9ea169d55dd033b1195d17767288",
+        "file_role": "failure_ledger",
+        "hx02_sha256": "0b0280cf66a45bd2262c8d38ef33f852e4fe9ea169d55dd033b1195d17767288",
+        "identical": true
+      },
+      {
+        "clean4_sha256": "ab7d3b011d2b6477f50269181ae045823cc07198a9ef0b71ee441efc03e8b677",
+        "file_role": "heading_results",
+        "hx02_sha256": "e3cd149a9fdd2f1d64599470605a369661bf9c3db1f14169726f51646a9883eb",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "50be11c14ab65bb88c6d543e36611d624f9d382b33911678d98a0d367ccaef00",
+        "file_role": "native_summary",
+        "hx02_sha256": "7666aacb41bc40d1750ed712d77c316119246fcaeda7c5b3ec267e063be807eb",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "6579723dc79fb993c931ced428b11105f621be587afd2acf392f9cf68db24c10",
+        "file_role": "objective_oracle_diagnostics",
+        "hx02_sha256": "6579723dc79fb993c931ced428b11105f621be587afd2acf392f9cf68db24c10",
+        "identical": true
+      },
+      {
+        "clean4_sha256": "3a979b3d666f43c01b73ac8b8fc6060cc7e71baa88c41f575fe97ec4f0f547e7",
+        "file_role": "refinement_diagnostics",
+        "hx02_sha256": "3a979b3d666f43c01b73ac8b8fc6060cc7e71baa88c41f575fe97ec4f0f547e7",
+        "identical": true
+      },
+      {
+        "clean4_sha256": "95213e702e3ad70e5e6c89b4ef5d9f598cd8ebd8912d435adde316e9097c3db7",
+        "file_role": "runtime",
+        "hx02_sha256": "9823c0a24716f338bac5cdd3955419b6389f07a842b31fa55b6a5f5dfb3cf987",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "ae2644caff3ef7df7e41ec7965e24ec9c1cbed3f53e3089e88f473801e3bd647",
+        "file_role": "tracking_diagnostics",
+        "hx02_sha256": "ae2644caff3ef7df7e41ec7965e24ec9c1cbed3f53e3089e88f473801e3bd647",
+        "identical": true
+      }
+    ],
+    "registered_clean4_native_freeze_sha256": "c1d8260df693ed213c004ae90f3446e546e88f599b662ec40879711b8b3f060d",
+    "status": "NOT_REPRODUCED"
+  },
+  {
+    "declared_scope_heading_tables": {
+      "EXT03": {
+        "clean4_declared_scope_table_sha256": "aaa3832b312ce104c5de1b464044704767ecf0f4ce5b89fbfa86d3df28b26296",
+        "hx02_table_sha256": "aaa3832b312ce104c5de1b464044704767ecf0f4ce5b89fbfa86d3df28b26296",
+        "identical": true
+      }
+    },
+    "hx02_native_freeze_sha256": "2acc0a075524081db38cd977cc30440abdd9e627428add973bcda9d63c80765b",
+    "known_reasons": [
+      "the freeze JSON embeds run paths, the HX-02 sequence spec and the execution commit",
+      "HX-02 runs only the declared scope (EXT03 primary variant; EXT04 GPS_BDS_DUAL_FREQUENCY FAR + primary PAR), so whole-file outputs cover fewer rows than CLEAN4",
+      "runtime files record wall-clock timings"
+    ],
+    "method": "EXT03",
+    "method_output_identical_on_declared_scope": true,
+    "per_file": [
+      {
+        "clean4_sha256": "bb320bde14474ccdc36dd3172be72f59d92d856ab51e41efec71aa46d39efeea",
+        "file_role": "ambiguity_state_diagnostics",
+        "hx02_sha256": "48cbfa74278a4097e0be67df5f89559acb51b00dc475dff147855d32d271ee11",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "02f006e7be18d34463cc1af77dc74ca4a1efade97edeced7d7b07f53e58acca4",
+        "file_role": "constraint_diagnostics",
+        "hx02_sha256": "4445e95343020dfbc158140246f6315167a54460a54b0aca91b6b80aa95e3601",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "2315370d20eb5a7c15097039bef5359ff9bcadf104f90c57a77cbd116b900594",
+        "file_role": "cycle_slip_diagnostics",
+        "hx02_sha256": "f92cd65b98fdbd033f2289c6535fd1576ab5b326f1d34c6ead2201dd8167a947",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "735ec09976ba2a7677aa5364532f5e9f890f772d48d1416f040f93b091a4a5e5",
+        "file_role": "dd_diagnostics",
+        "hx02_sha256": "06c3064bf9d6109f6aef1a73faa814ee82d494827b83067d431aa064a3ec9d27",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "c680383d87db580b5972f4b69018a032d64d39ce3354065bcdc5ddec9aa31b85",
+        "file_role": "failure_ledger",
+        "hx02_sha256": "7c82fe2fa5ab87a61fd649e85151938220d5a0594e9db7ab7dc6a25906815d6d",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "5e602df6dd302af88185c78396fbe8b0caa9f25d784b056fc002bec816195245",
+        "file_role": "heading_results",
+        "hx02_sha256": "44adf490b9fc70d26354fb03140dc7b84541ca8ec609a90d677b9669bce689f6",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "378ce19b132086e54548931dc47928e8277e16491e6d2f07e749d39fea130030",
+        "file_role": "kf_state_diagnostics",
+        "hx02_sha256": "25610e216fa794ec11134baf44d7130dfcf62f72f391e4b983aaf8f07d8d5932",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "2a6fb9e0a3252cbd6105cf54e6ee2a4055806dceb02b32d9924cf3b08c234cc8",
+        "file_role": "mlambda_diagnostics",
+        "hx02_sha256": "a00357ba83b73785ef6a3fe6ef4c148556d9834b872e050a11a93d078582a7f4",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "fc8eae22e36c2f8851c21a322b4061b22a037a6faf38322fb9f868ef54caf4f8",
+        "file_role": "mode_summary",
+        "hx02_sha256": "778a9ba34f62d6c101e3c1346025d8ccd6cde6d2c27c8d9f7ae682c96c74f9ca",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "25d4df740b511aa5e72d100eaf0379fc94649e72c3259a3f9f548c6e3d4346d5",
+        "file_role": "native_summary",
+        "hx02_sha256": "3e24a1770299adf1862dfa42f72a13c6c3a639ba63e70f5f92c37ebdd6af3ca3",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "9096183e1ca6456730a0e1bf8ccc514607b02d11e084f6ae105a132a185179c2",
+        "file_role": "runtime",
+        "hx02_sha256": "866a212f7de17c547bf136e17dfd6166dc25068ef836b77bd405a3f4d4bb1d82",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "3a0383243feecb21bc8c74894a020a94c557def88ea2a89833d8abde2d5e8d63",
+        "file_role": "sensitivity_summary",
+        "hx02_sha256": "778a9ba34f62d6c101e3c1346025d8ccd6cde6d2c27c8d9f7ae682c96c74f9ca",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "6c1bdeb1b3faec555c6da5dda2fd7a754939a7b301d95eaaceb8b81c94bba60b",
+        "file_role": "signal_availability",
+        "hx02_sha256": "6c1bdeb1b3faec555c6da5dda2fd7a754939a7b301d95eaaceb8b81c94bba60b",
+        "identical": true
+      },
+      {
+        "clean4_sha256": "cf6b8b49c40a22212e55267f9a2e391cc7e1844ef8f2adf16a1a76c6b63d0113",
+        "file_role": "stochastic_registry",
+        "hx02_sha256": "cf6b8b49c40a22212e55267f9a2e391cc7e1844ef8f2adf16a1a76c6b63d0113",
+        "identical": true
+      }
+    ],
+    "registered_clean4_native_freeze_sha256": "e172100ad64a2c20ee6772f9b7cb1e212cfb940fde8c3ac94c970b101671b3f0",
+    "status": "NOT_REPRODUCED"
+  },
+  {
+    "declared_scope_heading_tables": {
+      "EXT04_FAR": {
+        "clean4_declared_scope_table_sha256": "9d2cb8eb9a450c7881f4cfbff239a48a3f83f17b662b38f3d5d59bdf45dcbf4d",
+        "hx02_table_sha256": "9d2cb8eb9a450c7881f4cfbff239a48a3f83f17b662b38f3d5d59bdf45dcbf4d",
+        "identical": true
+      },
+      "EXT04_PAR": {
+        "clean4_declared_scope_table_sha256": "9d2cb8eb9a450c7881f4cfbff239a48a3f83f17b662b38f3d5d59bdf45dcbf4d",
+        "hx02_table_sha256": "9d2cb8eb9a450c7881f4cfbff239a48a3f83f17b662b38f3d5d59bdf45dcbf4d",
+        "identical": true
+      }
+    },
+    "hx02_native_freeze_sha256": "cfe00b194b9e2e11169976355c4dd1eff12110faf4c151a65ea7c71095599849",
+    "known_reasons": [
+      "the freeze JSON embeds run paths, the HX-02 sequence spec and the execution commit",
+      "HX-02 runs only the declared scope (EXT03 primary variant; EXT04 GPS_BDS_DUAL_FREQUENCY FAR + primary PAR), so whole-file outputs cover fewer rows than CLEAN4",
+      "rtklib_bridge .so rebuilt after the CLEAN4 EXT01 R2 run (current liblegsa_rtklib_bridge.so 6df66600...); GPU/driver and library versions are not pinned by CLEAN4",
+      "runtime files record wall-clock timings"
+    ],
+    "method": "EXT04",
+    "method_output_identical_on_declared_scope": true,
+    "per_file": [
+      {
+        "clean4_sha256": "5eae8a3183bc1548c3f15154dbb083ce2a1597fca132becdc7d6ad0bf65fd23b",
+        "file_role": "dd_diagnostics",
+        "hx02_sha256": "28b859456c3274166b504a83af0382821358afe61f0373e872125aef873242f5",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "51b414431d8f33cfa6c36fa08272c93af7a3e270cda427c786f56fed8f0971d9",
+        "file_role": "failure_ledger",
+        "hx02_sha256": "ab633c3e0e70306c32af9bd509023e68467976e73de663c9e89e75021f0138a8",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "7620dad30f698e98edf72ddc52abe9d308cac575c0cde1c0f89b07a3e7fe5488",
+        "file_role": "far_diagnostics",
+        "hx02_sha256": "ddc580fecd8c5f560a17dd1a5c29460228a5013b065a41e3e9f59c15aee1eaf3",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "b9713c833e1f47bc0bdaeb13d887b23c90794c3b773c790b42270b8ca88d70cb",
+        "file_role": "float_diagnostics",
+        "hx02_sha256": "8a09e558dbe682dc78b6bb39adb9db48a427eb259cfbdb39925aa3a2630c52f2",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "15ff5af6e14d61277b4631cf929047f0b0d11648ab692cb22f47bb7cdb288cb9",
+        "file_role": "heading_results",
+        "hx02_sha256": "a986e6f5665232912209cd766790347a4e4ee9112f9ad1ec6a3586baef67875a",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "08425526ddc3e0182cadc4b4d773507ec14b9b4e73f3bb0e9fbcb410d35171e5",
+        "file_role": "native_summary",
+        "hx02_sha256": "f4c1ba7bffb82471446388367d6caa2503c497ea05f599e299a8d0472eaa53a8",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "d983c56e997763627d09ad82172238bdf7a7c4d71edc8ffbc282da3da88de932",
+        "file_role": "par_diagnostics",
+        "hx02_sha256": "15ac32420d1c1094ff80f69a27543de90ebe374677962e161d1a41181ee7b0fb",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "e636ae60737d31dae392a219d29133889ec070f70a422d8924c32d7de0bb372d",
+        "file_role": "policy_registry",
+        "hx02_sha256": "e636ae60737d31dae392a219d29133889ec070f70a422d8924c32d7de0bb372d",
+        "identical": true
+      },
+      {
+        "clean4_sha256": "3c78f00a185f6cf2220fbd0ae1cb5ccb9ad6bc50646396caaf19b32b6403c3c4",
+        "file_role": "policy_summary",
+        "hx02_sha256": "d14baa410b61f81227b1f132d3f5fbbfb0cf5c22a6fa09e5d11eaa7b93cef581",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "1d17a0cf8c4367efee05a7d007c5b741046c3cd1c6bb56a38b3265c8a88e35bd",
+        "file_role": "quality_control_diagnostics",
+        "hx02_sha256": "09420301f0a70edd5b63ccbd0e1f183e3c877716b9f4c0c9adefc599623c733c",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "df360c13cc504faa328414ed26396f3c8f5462a3328b14bb4360ef775314798f",
+        "file_role": "runtime",
+        "hx02_sha256": "c5db7f103aca3626b844ee0bacccd663f0bb744cd75b79f055fecd84fc2420d0",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "194853b884da09c7579268aa1e9cc9690f3b9206a85d3697f4b0f5a312430ff4",
+        "file_role": "search_certificates",
+        "hx02_sha256": "2c81fe5cf450cec68d3d42c6d11656cb0813561743ce9367ec68d5311146d087",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "8f45c255a08b4f04f21f8c163869a7c730bcc1f8632e47dedb715cd71aec63a4",
+        "file_role": "sensitivity_summary",
+        "hx02_sha256": "9526ec1152bf29317faaf5a2a0a7c02e637b2df2bf1235ad1399138750cacc9e",
+        "identical": false
+      },
+      {
+        "clean4_sha256": "24f13b60022b4be68e2fdbd080d1c19fb6c2dd4acd07c8cbd2103c2ee8b70c69",
+        "file_role": "signal_availability",
+        "hx02_sha256": "24f13b60022b4be68e2fdbd080d1c19fb6c2dd4acd07c8cbd2103c2ee8b70c69",
+        "identical": true
+      },
+      {
+        "clean4_sha256": "d2aa77bea68055e5882e0814b8c02c5df48c898c0ca31df22b07b1501095f5f1",
+        "file_role": "stochastic_registry",
+        "hx02_sha256": "d2aa77bea68055e5882e0814b8c02c5df48c898c0ca31df22b07b1501095f5f1",
+        "identical": true
+      }
+    ],
+    "registered_clean4_native_freeze_sha256": "5f74a0928939c7e630bf8540d1259aeb51c86cf3fc07440fa43503ffc2d2bd46",
+    "status": "NOT_REPRODUCED"
+  },
+  {
+    "hx02_nav_sha256": "dc4d95a1e634ea7f7c3aecfcb3cdd50ded8ebf4378dfcd46917ed4875338a600",
+    "known_reasons": [],
+    "method": "HARTLEY_S",
+    "registered_clean4_nav_sha256": "dc4d95a1e634ea7f7c3aecfcb3cdd50ded8ebf4378dfcd46917ed4875338a600",
+    "role": "REGISTERED_CHECK",
+    "status": "REPRODUCED"
+  },
+  {
+    "hx02_nav_sha256": "b46ffe7cf930d96de53f165c54c06af6df6b48b626ccb0e103c1bb7d2e10430e",
+    "known_reasons": [],
+    "method": "HARTLEY_LIT",
+    "registered_clean4_nav_sha256": "b46ffe7cf930d96de53f165c54c06af6df6b48b626ccb0e103c1bb7d2e10430e",
+    "role": "INFORMATION_ONLY",
+    "status": "REPRODUCED"
+  },
+  {
+    "coverage_aware_value_identical_on_common_columns": false,
+    "identical": {
+      "pos": true,
+      "r4c_standard_nav": true,
+      "v3_attempt_window_nav": true
+    },
+    "known_reasons": [
+      "MATLAB release/driver state on this host may differ from the CLEAN4 r4c run"
+    ],
+    "method": "GINAV",
+    "note": "the coverage-aware file carries an extra status_name column, so it is compared value by value",
+    "observed": {
+      "pos": "39453826453515689416d3d32a8d39290b0fbb35b71525283b692f8fccb788b2",
+      "r4c_standard_nav": "99f3b09ea4f3964df815cfc64b88cdfe7a3460a1fe305cca52e4acd63e666e06",
+      "v3_attempt_window_nav": "f0fa3e71270cce08ce6174376a694a00a92f725116f8cec86eed4d8062529012"
+    },
+    "registered": {
+      "coverage_aware_standard_nav": "85902928bac61f4d717c3832d407f94f6d919957ed0f70e89c8fe212c2a2e44f",
+      "pos": "39453826453515689416d3d32a8d39290b0fbb35b71525283b692f8fccb788b2",
+      "r4c_standard_nav": "99f3b09ea4f3964df815cfc64b88cdfe7a3460a1fe305cca52e4acd63e666e06",
+      "v3_attempt_window_nav": "f0fa3e71270cce08ce6174376a694a00a92f725116f8cec86eed4d8062529012"
+    },
+    "status": "NOT_REPRODUCED"
+  },
+  {
+    "clean4_diagnostic_output_sha256": "5ac90d26b025694ce18e1e303bc7cae39eb4165a10d2c0714140bcb511b44a9d",
+    "hx02_pos_sha256": "f88f6ee233495c33e946ad8b5cbef1af2a0724f39d924a43ccee7305cc3ac960",
+    "method": "RTKLIB",
+    "note": "the CLEAN4 file was produced by the EXT03 post-native diagnostic with the same configuration",
+    "role": "INFORMATION_ONLY",
+    "status": "DIFFERENT"
+  }
+]

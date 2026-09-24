@@ -1556,3 +1556,4 @@ error series, logs, NAV/STD/EVAL_NAV, and per-case archives.
 The package size target is at most 2 GB (2,000,000,000 bytes). This rule does not
 authorize deleting any existing evidence or expanding cleanup scope.
 HX-INV（2026-09-23，只读盘点）：外部方法 23 行（双天线 6、四足 1、松耦合 12、单天线 4、other 0；EXT06 = Luo 待实现），解算/评估调用 0/0，65 项封存表 sha256 两次比对一致；matched.py 部分导入事故与 5 项子代理规则偏差均非硬停，见 docs/paper_rebuild/hext/HX_INVENTORY.md §9；清单 docs/paper_rebuild/hext/HX_INVENTORY.csv。
+HX-02（2026-09-24，五类外部方法三序列）：预注册 code_freeze `3e8a43b`，修正 `88594ef`（Hartley 两支各自对齐、空闲等待上限 600 s）；8 方法 × BY2 C00 / BY2H CONTRACT_START / BY2O FILE_START 共 24 次原生运行，参考评估 21 次（航向 15、冻结评估器 2、相对位姿 4）＋无参考覆盖 3 次，LegSA 解算/评估 0/0，控制器与原生进程读参考轨迹 0；失败照实记录（GINav BY2/BY2O D8 速度越界、Hartley BY2H 两支静止陀螺门 ABNORMAL_EXIT、EXT04 三序列有效率 0），无数值门槛；65 项封存表 sha256 两次比对一致，方法本体 423 项前后一致；结果 docs/paper_rebuild/hext/HX02/HX02_RESULTS.md 与 EXTERNAL_FIVE_CATEGORY_TABLE.csv。

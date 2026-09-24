@@ -217,7 +217,7 @@ code_sha256:   # runtime code and configurations, checked at controller start (f
   scripts/paper_rebuild/run_horizontal_literature_phase2.py: 5e1c04b9f5b07cc9fee3eff7281974f05a73a94ad39c9a56e260a609e54acb86
   scripts/paper_rebuild/run_horizontal_literature_phase3.py: 7193a0c68f260b4e25f4bfca431143d64043af80303306962a0df2991c658f79
   scripts/paper_rebuild/run_horizontal_literature_phase4.py: 45a35f7927efb92eea71d7bd3d61b6dc447b3efa95fe533723f379fa078a09bf
-  src/legsa_gins/paper_rebuild/hext/hx02_aggregate.py: 7e73aa216b66f1a77610ba6378ba74902a7f9ac31a499ab18585d0dfeb36f18a
+  src/legsa_gins/paper_rebuild/hext/hx02_aggregate.py: f66dc59001d5b2757526620f807cc932539790b14974e21ac3f878187f5fcebb   # post-run reporting change, see post_run_reporting_change
   src/legsa_gins/paper_rebuild/hext/hx02_convention.py: ef707f932887ba163ae63df63628ba00fea5cf261a760c7f7d1b77290706dd3b
   src/legsa_gins/paper_rebuild/hext/hx02_coverage_evaluation.py: 1f5afe16ff12327e6915dcfbea8adb5a730b7556eed8add920542f6170dbdeec
   src/legsa_gins/paper_rebuild/hext/hx02_evaluation_process.py: c94093d1fbf94c9f4db9f6f59334666ea8897c59bcd67654afd4a9914c7764fb
@@ -278,3 +278,12 @@ amendments:   # registered before any relative-pose evaluation (HX02_PREREG.md s
     change: "quiet-machine wait capped at 600 s (was 7200 s); on timeout the native launches anyway; actual load1/load5 at launch recorded in COMMAND.json"
     files: [src/legsa_gins/paper_rebuild/hext/hx02_execution.py]
 amendment_state_at_registration: "controller stopped at 2026-09-24T12:35:42.734Z (SIGSTOP 27 ms after EVALUATED BY2__GINAV__NONE__C00__NA, exit via KeyboardInterrupt), before any relative-pose evaluation; no Hartley native result viewed; completed native runs and heading evaluations unaffected and not redone"
+post_run_reporting_change:   # after CONTROLLER_DONE (2026-09-24T13:33:55Z); reporting layer only: no native run, evaluation, table row or column changed
+  file: src/legsa_gins/paper_rebuild/hext/hx02_aggregate.py
+  sha256_at_code_freeze: 7e73aa216b66f1a77610ba6378ba74902a7f9ac31a499ab18585d0dfeb36f18a   # as frozen in 88594ef and checked at controller start
+  sha256_after: f66dc59001d5b2757526620f807cc932539790b14974e21ac3f878187f5fcebb
+  change: "rendering only: native-run wall-clock table (COMMAND.json start/end UTC), EXT01 search budget, results notes, amendment record and incident sections; Outcome gains amendment and incident counts"
+  evidence: "$HX02/00_CONTROL/AGGREGATOR_CHANGE_EVIDENCE.json: the frozen (88594ef) and the changed aggregator both produce EXTERNAL_FIVE_CATEGORY_TABLE.csv 7475d7ef9780cdc9b2d82943dc786d58732076b9bad819f945f5010346190fba (480 rows); the formal 90_AGGREGATE CSV is the same file"
+  evidence_sha256: fd11a9cfc0597ec6d9732900e94d43ca044581f0f4e456b13dd05d3b6d8b0539
+  renders: "$HX02/00_CONTROL/AGGREGATE_RENDERS.json: render 1 kept unchanged in 00_CONTROL/AGGREGATE_RENDER_1_SUPERSEDED; render 2 (90_AGGREGATE) adds two results notes (per-file reproduction differences with one reason correction; failure denominators); all outputs except HX02_RESULTS.md and the manifest are byte-identical"
+  renders_sha256: b0e8c05aad712412dd1737c9394c90b0fb625acfccebe2b7febfea6828b49202

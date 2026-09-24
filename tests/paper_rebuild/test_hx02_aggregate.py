@@ -121,7 +121,35 @@ def mock_stage(tmp_path):
                 run = stage / "RUNS" / ex.run_id(sequence, method)
                 _write(run / "FAILURE.json", {"failure_classification": "ABNORMAL_EXIT", "returncode": 3})
                 _write(run / "DONE.json", {"status": "ABNORMAL_EXIT"})
+    for sequence in ("BY2", "BY2H", "BY2O"):
+        ext01 = stage / "RUNS" / ex.run_id(sequence, "EXT01")
+        _write(ext01 / "COMMAND.json", {"code_commit": "f" * 40, "start_utc": "2026-09-24T12:23:29.263968+00:00",
+                                        "end_utc": "2026-09-24T12:29:22.034181+00:00", "returncode": 0,
+                                        "native_classification": "COMPLETED", "runner_terminal_status": "PASS_X"})
+        cert = ext01 / "native/ARTIFACT/02_EXT01_CLAMBDA/C00_VALIDATED_R2/EXT01_C00_VALIDATED_SEARCH_CERTIFICATES.csv"
+        cert.parent.mkdir(parents=True)
+        base_tow = {"BY2": 460883.0, "BY2H": 461296.0, "BY2O": 457469.0}[sequence]
+        cert.write_text("epoch_index,gps_week,gps_tow_seconds,branch_and_bound_nodes_expanded,termination_reason,"
+                        "runtime_budget_exhausted,configured_node_limit,node_limit_exhausted\n"
+                        f"0,2408,{base_tow},511,GLOBAL_BOUND_CERTIFIED,false,1000000,false\n"
+                        f"1,2408,{base_tow + 0.2},1000000,NODE_LIMIT,false,1000000,true\n", encoding="utf-8")
     (stage / "00_CONTROL").mkdir(parents=True)
+    (stage / "00_CONTRACT").mkdir(parents=True)
+    _write(stage / "00_CONTRACT" / "AMENDMENT_1_2_IDENTITY.json", {
+        "amendment_commit": "a" * 40, "registered_utc": "2026-09-24T12:42:44Z", "contract_sha256": "b" * 64,
+        "amendments": ["1: per-branch relative-pose alignment; 6 relative-pose calls", "2: quiet-machine wait cap 600 s"]})
+    _write(stage / "00_CONTROL" / "AMENDMENT_1_2_STOP_POINT.json", {
+        "instruction": "下一次原生启动前停止", "actual_stop_point": "GINav BY2 评估完成后、相对位姿评估启动前",
+        "reason": "Hartley 两支为批末成对评估，指令假设的边界不存在", "archived_at_stop": ["R1"], "evaluated_after_amendment": ["R2"]})
+    (stage / "00_CONTROL" / "INCIDENTS.jsonl").write_text(json.dumps({
+        "id": 1, "phase": "stop", "utc_window": "t", "what": "停止程序第一次抓错 PID（tmux 服务进程）", "detection": "ps",
+        "action": "触发前撤下，未向任何进程发送信号，按控制器 Python 进程重挂", "consequence": "无后果"}, ensure_ascii=False) + "\n")
+    (stage / "00_CONTROL" / "LEDGER.jsonl").write_text(
+        json.dumps({"utc": "u1", "kind": "CONTROLLER_STOPPED_FOR_AMENDMENT", "frozen_utc": "f", "exited_utc": "e"}) + "\n"
+        + json.dumps({"utc": "u2", "kind": "FROZEN_CODE_CHECK", "files": 53}) + "\n")
+    _write(stage / "00_CONTROL" / "RESULTS_NOTES.json", {"notes": [
+        {"title": "报告层改动证据", "lines": ["两份 CSV 的 SHA-256 相同：`x`"]},
+        {"title": "GINav BY2 未进入冻结评估器", "lines": ["D8 速度越界 50.639 m/s"]}]})
     _write(stage / "00_CONTROL" / "STATE.json", {"counters": {"native_calls": 24, "evaluator_calls": 20,
                                                               "reference_free_evaluator_calls": 3,
                                                               "legsa_native_calls": 0, "legsa_evaluator_calls": 0}})
@@ -168,6 +196,12 @@ def test_aggregate_writes_every_category_sealed_rows_and_failures(mock_stage):
                     "## 失败清单", "## Outcome"):
         assert heading in markdown
     assert "无实现" in markdown and '"legsa_native_calls": 0' in markdown
+    assert "## 修正记录" in markdown and "批末成对评估" in markdown and "GINav BY2 评估完成后" in markdown
+    assert "## 事故" in markdown and "抓错 PID" in markdown and "无后果" in markdown
+    assert "## 补充说明" in markdown and "### 报告层改动证据" in markdown and "D8 速度越界 50.639 m/s" in markdown
+    assert "## 原生运行清单与墙钟时间" in markdown and "| 352.770 |" in markdown
+    assert "## EXT01 搜索预算" in markdown and "| 2 | 2 | 1 / 1 | 0 / 0 | 1000000 | 1000000 |" in markdown
+    assert '"incidents": 1' in markdown and '"amendments": 2' in markdown and "CONTROLLER_STOPPED_FOR_AMENDMENT" in markdown
     for name in ("EXTERNAL_FIVE_CATEGORY_TABLE.csv", "HX02_RESULTS.md"):
         text = (target / name).read_text(encoding="utf-8")
         assert (tmp_path / "docs" / name).read_text(encoding="utf-8") == text
