@@ -65,3 +65,9 @@ Outcome：无数值门槛，全部运行保留。官方代码 OFF-LIT、OFF-DEF 
 官方原仓库任务前后 status --porcelain 均为空，HEAD 保持 ef16e8a1df72f9272111a488880e3fe9d161f59f；58/58 受版本控制文件及构建副本相同，源码/构建描述 22/22 相同。文件清单摘要 SHA256 为 12eb49db447fd3ed86fb594d147f8d0c2a21df38a0db34a24b91b45bdb2c9cb1。出处：OFFICIAL_SOURCE_START.json、OFFICIAL_SOURCE_FINAL.json，摘要定义见后者 listing_definition。
 
 65 pin 在开始、预注册提交前、结果提交前均为 65/65，CSV 均 59/59；HX-02 12678/12678、HX-02D 82/82、方法本体 423/423、既有未跟踪文件 29/29 保持不变。门检查 4/4 通过，六个运行的误差序列独立重算与指标吻合，96 行长表逐字段核对一致。出处：SEALED_*.json、PROTECTED_TREES_FINAL.json、METHOD_BODY_FINAL.json、INDEPENDENT_VALIDATION.json、LONG_TABLE_VALIDATION.json。最终归档复制与 scratch 清理状态见 FINAL_INTEGRITY.json 和 COPY_VERIFICATION.json；未创建交接包。
+
+安装旋转范围补充（仅查缓存生成代码，未重跑）：`src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h5.py:54` 定义 `H5_SENSOR_TO_BODY_ROLL_DEG = -1.0`；第 212–216 行实现绕 X 轴旋转，第 392–393 行仅对 `gyro`、`accel` 调用该旋转。`foot_position_body` 在第 386–387 行仅按三元组分组并重排腿序，作为 `feet` 原值传入第 393 行；第 406–413 行直接编码进 H5_INPUT_CACHE。因此，−1° 安装修正没有同样施加到足端位置上。
+
+1° 失配的条件量级：仅以上代码不能判定实际 IMU/FK 坐标系是否失配；若日志足端位置本就在目标 body 系，传感器 IMU 单独转到该系无需再旋转足端。假设二者实际残留绕 X 轴 1° 的相对误差，则由上述旋转矩阵直接得到 `‖(R_x(1°)−I)p‖ = 2 sin(0.5°)√(p_y²+p_z²) ≈ 0.017453√(p_y²+p_z²)`。例如绕该轴的垂直距离为 0.30 m 时，足端位置差约 0.005236 m（5.24 mm，为登记 FK 标准差 0.010 m 的约 0.52 倍）；0.30 m 是量级示例，未从日志或缓存统计。对纯几何方向误差，同式给出每 100 m 垂直于该轴的位移约 1.745 m 的端点差，刚性旋转本身不改变三维路程；这不是本任务 OLS 位置漂移指标的预测。
+
+若 1° 误差进一步表现为重力方向估计误差，以 9.81 m/s² 作量级计算，横向重力分量为 `9.81 sin(1°) ≈ 0.171 m/s²`；在恒定、完全未补偿且无接触约束的理想积分中，10 s 位移项约为 `0.5×0.171×10² ≈ 8.56 m`。这不表示缓存必然造成该加速度，也不能代替含姿态初始化、偏置估计和接触更新的滤波器误差分析。仅凭本次源码核查，不能判定该潜在失配对已报告漂移的实际贡献。本补充新增原生/评估调用均为 0，未打开参考；既有指标与决策不变。补充后的报告哈希和复制核验见 `00_CONTROL/REPORT_INSTALLATION_ADDENDUM.json`；原 COPY_VERIFICATION.json 与 FINAL_INTEGRITY.json 保留为结果提交时的历史回执。
