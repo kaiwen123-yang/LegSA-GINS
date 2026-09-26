@@ -1,0 +1,22 @@
+{
+  "utc": "2026-09-26T09:08:44.348025+00:00",
+  "head": "ac2d9e4e7b2f69cc8c27a930d32b5854d3fe5317",
+  "disk_available_bytes": {
+    "/mnt/e": 128416944128,
+    "/mnt/g": 85338095616
+  },
+  "scratch_initial_empty": true,
+  "official_head": "ef16e8a1df72f9272111a488880e3fe9d161f59f",
+  "official_clean": true,
+  "official_file_count": 58,
+  "cache_sha256": {
+    "BY2": "c169e26d66f35fe200bb17a695353cd2d751482df1cd97996a7a8afff8662065",
+    "BY2H": "732d45c70815ba65c7832ecbfb41edf5c571fd4e80fb13df497a99fe9863436e",
+    "BY2O": "8786456127571475e88a89a47ab30f118b09a789e521690b82170985e4aaec35"
+  },
+  "git_pull_rebase": "completed; branch synchronized with origin",
+  "legsa_native": 0,
+  "legsa_evaluation": 0,
+  "real_native": 0,
+  "reference_evaluation": 0
+}
