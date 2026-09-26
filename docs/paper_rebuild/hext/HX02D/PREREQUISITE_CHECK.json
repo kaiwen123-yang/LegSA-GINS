@@ -1,0 +1,376 @@
+{
+  "status": "BLOCKED_PREREQUISITE_REPORT_COMMIT_NOT_FOUND",
+  "utc": "2026-09-26T08:28:58.536750+00:00",
+  "head": "e612eeb0ad37bf150a4076eb636424fe85f1d222",
+  "origin_branch_head": "e612eeb0ad37bf150a4076eb636424fe85f1d222",
+  "git_pull_rebase_result": "Already up to date.",
+  "report_path_last_commit": "e612eeb0ad37bf150a4076eb636424fe85f1d222",
+  "required_later_report_commit": null,
+  "request_pending": "Provide later report commit or explicitly authorize current HEAD.",
+  "counters_this_task": {
+    "legsa_native_calls": 0,
+    "external_native_calls": 0,
+    "evaluator_child_calls": 0,
+    "controller_trace_opens": 0,
+    "trace_opens": 0,
+    "bag_fpl_opens": 0,
+    "hx02_write_calls": 0
+  },
+  "strace_audit": "NOT_RUN_NO_EVALUATOR_CHILD",
+  "B_C": {
+    "B1": {
+      "status": "NOT_EVALUATED_PREREQUISITE_PENDING",
+      "value": null
+    },
+    "B2": {
+      "status": "NOT_EVALUATED_PREREQUISITE_PENDING",
+      "value": null
+    },
+    "B3": {
+      "status": "NOT_EVALUATED_PREREQUISITE_PENDING",
+      "value": null
+    },
+    "B4": {
+      "status": "NOT_EVALUATED_PREREQUISITE_PENDING",
+      "value": null
+    },
+    "C1": {
+      "status": "NOT_EVALUATED_PREREQUISITE_PENDING",
+      "value": null
+    },
+    "C2": {
+      "status": "NOT_EVALUATED_PREREQUISITE_PENDING",
+      "value": null
+    },
+    "C3": {
+      "status": "NOT_EVALUATED_PREREQUISITE_PENDING",
+      "value": null
+    },
+    "C4": {
+      "status": "NOT_EVALUATED_PREREQUISITE_PENDING",
+      "value": null
+    }
+  },
+  "hypotheses": {
+    "H1": "不能判定；B/C 尚未执行",
+    "H2": "不能判定；B/C 尚未执行",
+    "H3": "不能判定；B/C 尚未执行"
+  },
+  "historical_statuses": {
+    "11_REPORT/LSE01_H0_H2_STATUS.json": {
+      "terminal_status": "PASS_LSE01_H0_H2_HARTLEY_SOURCE_METHOD_AND_BY2_CONTRACT_READY",
+      "reference_open_count": 0
+    },
+    "11_REPORT/LSE01_H3_H4_STATUS.json": {
+      "terminal_status": "PASS_LSE01_H3_H4_FULL_IJRR_BACKEND_VALIDATED",
+      "reference_open_count": 0
+    },
+    "11_REPORT/LSE01_H5_STATUS.json": {
+      "terminal_status": "PASS_LSE01_H5_BY2_NATIVE_RUN_COMPLETE",
+      "reference_open_count": 0,
+      "trace_open_count": 0
+    },
+    "11_REPORT/LSE01_H6_STATUS.json": {
+      "terminal_status": "BLOCKED_LSE01_H6_GAUGE_EQUIVARIANCE_FAILURE",
+      "reference_open_count": 0,
+      "trace_open_count": 0
+    },
+    "11_REPORT/LSE01_H6R_STATUS.json": {
+      "terminal_status": "PASS_LSE01_H6R_REAL_DATA_GAUGE_AND_OBSERVABILITY_CONFIRMED",
+      "reference_open_count": 0,
+      "trace_open_count": 0
+    },
+    "11_REPORT/LSE01_FINAL_STATUS.json": {
+      "terminal_status": "BLOCKED_LSE01_H7_REFERENCE_POINT_OR_FRAME_IDENTITY_UNRESOLVED",
+      "reference_open_count": 0,
+      "trace_open_count": 0,
+      "absolute_yaw_RMSE": null,
+      "absolute_position_RMSE": null,
+      "relative_pose_metrics_complete": false,
+      "relative_yaw_increment_complete": false,
+      "lse01_complete": false
+    },
+    "11_REPORT/LSE01_H7R1_FINAL_STATUS.json": {
+      "terminal_status": "BLOCKED_LSE01_H7_REFERENCE_POINT_OR_FRAME_IDENTITY_UNRESOLVED",
+      "reference_open_count": 0,
+      "trace_open_count": 0,
+      "metric_files_created": 0,
+      "absolute_yaw_RMSE": null,
+      "absolute_position_RMSE": null,
+      "relative_pose_metrics_complete": false,
+      "relative_yaw_increment_complete": false,
+      "lse01_complete": false
+    },
+    "11_REPORT/LSE01_H7R2_FINAL_STATUS.json": {
+      "terminal_status": "BLOCKED_LSE01_H7_REFERENCE_POINT_OR_FRAME_IDENTITY_UNRESOLVED",
+      "reference_open_count": 0,
+      "trace_open_count": 0,
+      "metric_files_created": 0,
+      "absolute_yaw_RMSE": null,
+      "absolute_position_RMSE": null,
+      "relative_pose_metrics_complete": false,
+      "relative_yaw_increment_complete": false,
+      "lse01_complete": false
+    },
+    "11_REPORT/LSE01_H7C_FINAL_STATUS.json": {
+      "terminal_status": "BLOCKED_LSE01_H7C_REFERENCE_LINEAGE_CONTRADICTED",
+      "trace_open_count": 6,
+      "metric_files_created": 0,
+      "absolute_yaw_RMSE": null,
+      "absolute_position_RMSE": null,
+      "relative_pose_metrics_complete": false,
+      "relative_yaw_increment_complete": false,
+      "lse01_complete": false
+    }
+  },
+  "official_regression": {
+    "source": "<CLEAN4>/07_LSE01_HARTLEY_CONTACT_INEKF/07_SYNTHETIC_VALIDATION/OFFICIAL_CPP_REGRESSION.csv",
+    "rows": [
+      {
+        "category": "execution",
+        "metric": "unmodified_official_binary_return_code",
+        "official_value": "0",
+        "new_early_value": "0",
+        "absolute_difference": "0",
+        "tolerance": "0",
+        "classification": "event_interface",
+        "pass": "True"
+      },
+      {
+        "category": "counts",
+        "metric": "rows",
+        "official_value": "59976",
+        "new_early_value": "59976",
+        "absolute_difference": "0",
+        "tolerance": "0",
+        "classification": "event_or_state_order_mapped",
+        "pass": "True"
+      },
+      {
+        "category": "counts",
+        "metric": "imu_rows",
+        "official_value": "19992",
+        "new_early_value": "19992",
+        "absolute_difference": "0",
+        "tolerance": "0",
+        "classification": "event_or_state_order_mapped",
+        "pass": "True"
+      },
+      {
+        "category": "counts",
+        "metric": "contact_rows",
+        "official_value": "19992",
+        "new_early_value": "19992",
+        "absolute_difference": "0",
+        "tolerance": "0",
+        "classification": "event_or_state_order_mapped",
+        "pass": "True"
+      },
+      {
+        "category": "counts",
+        "metric": "contact_values",
+        "official_value": "39984",
+        "new_early_value": "39984",
+        "absolute_difference": "0",
+        "tolerance": "0",
+        "classification": "event_or_state_order_mapped",
+        "pass": "True"
+      },
+      {
+        "category": "counts",
+        "metric": "kinematic_rows",
+        "official_value": "19992",
+        "new_early_value": "19992",
+        "absolute_difference": "0",
+        "tolerance": "0",
+        "classification": "event_or_state_order_mapped",
+        "pass": "True"
+      },
+      {
+        "category": "counts",
+        "metric": "kinematic_points",
+        "official_value": "39984",
+        "new_early_value": "39984",
+        "absolute_difference": "0",
+        "tolerance": "0",
+        "classification": "event_or_state_order_mapped",
+        "pass": "True"
+      },
+      {
+        "category": "counts",
+        "metric": "propagation_calls",
+        "official_value": "19992",
+        "new_early_value": "19992",
+        "absolute_difference": "0",
+        "tolerance": "0",
+        "classification": "event_or_state_order_mapped",
+        "pass": "True"
+      },
+      {
+        "category": "counts",
+        "metric": "correction_calls",
+        "official_value": "19780",
+        "new_early_value": "19780",
+        "absolute_difference": "0",
+        "tolerance": "0",
+        "classification": "event_or_state_order_mapped",
+        "pass": "True"
+      },
+      {
+        "category": "counts",
+        "metric": "correction_measurements",
+        "official_value": "26741",
+        "new_early_value": "26741",
+        "absolute_difference": "0",
+        "tolerance": "0",
+        "classification": "event_or_state_order_mapped",
+        "pass": "True"
+      },
+      {
+        "category": "counts",
+        "metric": "additions",
+        "official_value": "34",
+        "new_early_value": "34",
+        "absolute_difference": "0",
+        "tolerance": "0",
+        "classification": "event_or_state_order_mapped",
+        "pass": "True"
+      },
+      {
+        "category": "counts",
+        "metric": "removals",
+        "official_value": "33",
+        "new_early_value": "33",
+        "absolute_difference": "0",
+        "tolerance": "0",
+        "classification": "event_or_state_order_mapped",
+        "pass": "True"
+      },
+      {
+        "category": "counts",
+        "metric": "final_active_contacts",
+        "official_value": "1",
+        "new_early_value": "1",
+        "absolute_difference": "0",
+        "tolerance": "0",
+        "classification": "event_or_state_order_mapped",
+        "pass": "True"
+      },
+      {
+        "category": "counts",
+        "metric": "final_state_dimension",
+        "official_value": "18",
+        "new_early_value": "18",
+        "absolute_difference": "0",
+        "tolerance": "0",
+        "classification": "event_or_state_order_mapped",
+        "pass": "True"
+      },
+      {
+        "category": "numerical",
+        "metric": "max_rotation_fro_difference",
+        "official_value": "0.0",
+        "new_early_value": "1.4909296560104722e-10",
+        "absolute_difference": "1.4909296560104722e-10",
+        "tolerance": "5e-08",
+        "classification": "floating_point",
+        "pass": "True"
+      },
+      {
+        "category": "numerical",
+        "metric": "max_velocity_norm_difference",
+        "official_value": "0.0",
+        "new_early_value": "2.9598027331364584e-10",
+        "absolute_difference": "2.9598027331364584e-10",
+        "tolerance": "5e-08",
+        "classification": "floating_point",
+        "pass": "True"
+      },
+      {
+        "category": "numerical",
+        "metric": "max_position_norm_difference",
+        "official_value": "0.0",
+        "new_early_value": "1.468634572112833e-10",
+        "absolute_difference": "1.468634572112833e-10",
+        "tolerance": "5e-08",
+        "classification": "floating_point",
+        "pass": "True"
+      },
+      {
+        "category": "numerical",
+        "metric": "max_gyro_bias_norm_difference",
+        "official_value": "0.0",
+        "new_early_value": "2.558559636893718e-10",
+        "absolute_difference": "2.558559636893718e-10",
+        "tolerance": "5e-08",
+        "classification": "floating_point",
+        "pass": "True"
+      },
+      {
+        "category": "numerical",
+        "metric": "max_accelerometer_bias_norm_difference",
+        "official_value": "0.0",
+        "new_early_value": "5.301841660857872e-10",
+        "absolute_difference": "5.301841660857872e-10",
+        "tolerance": "5e-08",
+        "classification": "floating_point",
+        "pass": "True"
+      },
+      {
+        "category": "numerical",
+        "metric": "max_contact_norm_difference",
+        "official_value": "0.0",
+        "new_early_value": "1.0156807278028371e-10",
+        "absolute_difference": "1.0156807278028371e-10",
+        "tolerance": "5e-08",
+        "classification": "floating_point",
+        "pass": "True"
+      },
+      {
+        "category": "numerical",
+        "metric": "max_covariance_relative_frobenius_difference",
+        "official_value": "0.0",
+        "new_early_value": "8.82418920330675e-11",
+        "absolute_difference": "8.82418920330675e-11",
+        "tolerance": "2e-07",
+        "classification": "floating_point",
+        "pass": "True"
+      },
+      {
+        "category": "diagnostic",
+        "metric": "max_covariance_abs_difference",
+        "official_value": "0.0",
+        "new_early_value": "4.799354802464961e-10",
+        "absolute_difference": "4.799354802464961e-10",
+        "tolerance": "2e-08",
+        "classification": "floating_point_stricter_legacy_diagnostic",
+        "pass": "True"
+      },
+      {
+        "category": "interface",
+        "metric": "official_rounded_stdout_fields",
+        "official_value": "0.0",
+        "new_early_value": "4.927314737113164e-06",
+        "absolute_difference": "4.927314737113164e-06",
+        "tolerance": "5e-06",
+        "classification": "rounded_stdout_parser_interface",
+        "pass": "True"
+      }
+    ]
+  },
+  "seal_start": "00_CONTROL/SEALED_TABLES_START.json",
+  "seal_stop": "00_CONTROL/SEALED_TABLES_PREREQUISITE_STOP.json",
+  "commit_created": false,
+  "push_performed": false,
+  "scope": "Partial read-only source record; not the completed HX-02D diagnostic.",
+  "initial_disk_available": {
+    "source": "df --output=target,avail /mnt/e /mnt/g at initial preflight; 1K blocks",
+    "e_available_1k_blocks": 125410312,
+    "g_available_1k_blocks": 83495680,
+    "e_available_bytes": 128420159488,
+    "g_available_bytes": 85499576320,
+    "e_required_bytes": 40000000000,
+    "g_required_bytes": 30000000000,
+    "pass": true
+  }
+}

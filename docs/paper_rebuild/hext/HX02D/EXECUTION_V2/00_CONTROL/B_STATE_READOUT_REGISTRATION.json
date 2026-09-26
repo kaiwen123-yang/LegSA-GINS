@@ -1,0 +1,7 @@
+{
+  "script": "scripts/paper_rebuild/hx02d_state_readout.py",
+  "sha256": "0fc7cb97db8e709501b61ff53ab3928cb88b7f32a18538aa3addc94e26697e33",
+  "reference_allowed": false,
+  "native_allowed": false,
+  "reason": "Separate saved gyro-bias and contact correction effects using retained endpoint rotations; no sequential state propagation."
+}

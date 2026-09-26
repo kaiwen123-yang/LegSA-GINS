@@ -1,0 +1,8 @@
+{
+  "src/legsa_gins/paper_rebuild/hext/hx02d_reference_free.py": "1bcfa0476ee3e340f2b9818bd78d2441d28ea509ef0ad70a2773e23221d3545a",
+  "src/legsa_gins/paper_rebuild/hext/hx02d_reference_evaluation.py": "814c114827e8350f466e20fc3649568a358e043dbf39cc39b2d9321227a80705",
+  "scripts/paper_rebuild/hx02d_execute.py": "7393b4c25a62c90c823478b62bc54d140b6596a27c55eb0775953c7f7bdac59b",
+  "scripts/paper_rebuild/hx02d_state_readout.py": "0fc7cb97db8e709501b61ff53ab3928cb88b7f32a18538aa3addc94e26697e33",
+  "scripts/paper_rebuild/hx02d_report.py": "2f8a378419d36451722263ae12a68beeed89002ceeace7204630095aa3124ae2",
+  "tests/paper_rebuild/test_hx02d_diagnostic.py": "ada48b1580b513c8b243e362b48b6d344a50d602b464166729396c6ae6208655"
+}

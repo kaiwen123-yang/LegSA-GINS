@@ -1,0 +1,59 @@
+{
+  "status": "无需补提交",
+  "starting_head": "e612eeb0ad37bf150a4076eb636424fe85f1d222",
+  "hx02_docs_status": "",
+  "pairs": [
+    {
+      "name": "AGGREGATE_MANIFEST.json",
+      "source_sha256": "ece213b4f2cfc62dc2572b5bb618332968061c97985f73c20093f8def988f0ab",
+      "docs_sha256": null,
+      "tracked": false
+    },
+    {
+      "name": "CONVENTION_DIAGNOSTICS.json",
+      "source_sha256": "794bc949dcadf3cc3d90689e068e26a73daa0a00943f23179e4f616970e9293a",
+      "docs_sha256": "794bc949dcadf3cc3d90689e068e26a73daa0a00943f23179e4f616970e9293a",
+      "tracked": true
+    },
+    {
+      "name": "COUNTERS.json",
+      "source_sha256": "a1387ea0f0b858ae8b3b2c80004c007b0b4d793c2d5d745e517343de032e6dae",
+      "docs_sha256": "a1387ea0f0b858ae8b3b2c80004c007b0b4d793c2d5d745e517343de032e6dae",
+      "tracked": true
+    },
+    {
+      "name": "EXTERNAL_FIVE_CATEGORY_TABLE.csv",
+      "source_sha256": "7475d7ef9780cdc9b2d82943dc786d58732076b9bad819f945f5010346190fba",
+      "docs_sha256": "7475d7ef9780cdc9b2d82943dc786d58732076b9bad819f945f5010346190fba",
+      "tracked": true
+    },
+    {
+      "name": "FAILURES.json",
+      "source_sha256": "5c90131dfbc54e219cb0026df87ab8275cdf4424df50e5c1871691acdd42a84b",
+      "docs_sha256": "5c90131dfbc54e219cb0026df87ab8275cdf4424df50e5c1871691acdd42a84b",
+      "tracked": true
+    },
+    {
+      "name": "HX02_RESULTS.md",
+      "source_sha256": "a7c12320ee0f3f633a8c6a63af71c60c4c70554208922bd16af60f971998e675",
+      "docs_sha256": "a7c12320ee0f3f633a8c6a63af71c60c4c70554208922bd16af60f971998e675",
+      "tracked": true
+    },
+    {
+      "name": "REPRODUCTION_CHECKS.json",
+      "source_sha256": "cf61780a637bf5ad7badc20669b1333cf3ccb268c3fe0eb7576e1975a8148704",
+      "docs_sha256": "cf61780a637bf5ad7badc20669b1333cf3ccb268c3fe0eb7576e1975a8148704",
+      "tracked": true
+    },
+    {
+      "name": "SEALED_ROW_CITATIONS.json",
+      "source_sha256": "ac91b0768caff97be673914903332ec244f5f450e5d8f00e69ac09c4ea916e90",
+      "docs_sha256": "ac91b0768caff97be673914903332ec244f5f450e5d8f00e69ac09c4ea916e90",
+      "tracked": true
+    }
+  ],
+  "source_only_manifest": "AGGREGATE_MANIFEST.json",
+  "render2_notes_present": false,
+  "table_sha256": "7475d7ef9780cdc9b2d82943dc786d58732076b9bad819f945f5010346190fba",
+  "user_resolution": "Current e612eeb accepted; later report commit was never created."
+}
