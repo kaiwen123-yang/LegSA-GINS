@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/scripts/paper_rebuild/hx03r2_execute.py", line 284, in <module>
+    if __name__=='__main__':main()
+  File "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/scripts/paper_rebuild/hx03r2_execute.py", line 276, in main
+    try:c.run(args.phase,args.workers)
+  File "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/scripts/paper_rebuild/hx03r2_execute.py", line 251, in run
+    results=[self.execute(s,True) for s in validation]
+  File "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/scripts/paper_rebuild/hx03r2_execute.py", line 251, in <listcomp>
+    results=[self.execute(s,True) for s in validation]
+  File "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/scripts/paper_rebuild/hx03r2_execute.py", line 162, in execute
+    child=launcher.run_child('HX03R2_FROZEN',spec,workdir=work,code_root=self.W,
+  File "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src/legsa_gins/paper_rebuild/hext/hx02_evaluation_process.py", line 112, in run_child
+    raise EvaluationProcessError("; ".join(failures) + "; stderr tail: " + completed.stderr[-3000:])
+legsa_gins.paper_rebuild.hext.hx02_evaluation_process.EvaluationProcessError: evaluator_returncode=1; reference must be opened exactly once, successfully and read-only; stderr tail: strace: test_ptrace_get_syscall_info: PTRACE_TRACEME: Operation not permitted
+strace: ptrace(PTRACE_TRACEME, ...): Operation not permitted
+
