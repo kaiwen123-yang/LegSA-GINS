@@ -1,0 +1,13 @@
+{
+  "base_time": 1772784000.0,
+  "evaluator": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/../16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py",
+  "nav": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX03_DEGRADATION/RUNS/BY2__LC01__LIT__C00__NA/eval/v3_NAV_INPUT/EVALUATOR_INPUT.nav",
+  "nav_sha256": "0bea5169d8500015dff472f96ecfd02992b0d7208ad5baeaa5378273ee9056d1",
+  "outdir": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03R2/RUNS/BY2__LC01__LIT__C00__NA__v3/OUTPUT",
+  "trace": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv",
+  "trace_sha256": "ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c",
+  "window": [
+    66.0,
+    340.0
+  ]
+}

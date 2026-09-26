@@ -1,0 +1,24 @@
+{
+  "utc": "2026-09-26T12:38:50.413187+00:00",
+  "phase": "registration",
+  "passed": true,
+  "sealed_count": 65,
+  "sealed_csv_count": 59,
+  "baseline_sha256": "7830a1a596077558d0f2289c066dbd81b1f53e6c25adc8ec0c8833ee055a503b",
+  "method_body_count": 423,
+  "unrelated_untracked_count": 29,
+  "code_pin_count": 42,
+  "old_record_pin_count": 2730,
+  "HX03_existing_metadata_unchanged": 14525,
+  "HX03_preservation": "all file paths/sizes/mtime_ns unchanged; read record pins and each used NAV verified separately",
+  "disk_available_bytes": {
+    "/mnt/e": 128405749760,
+    "/mnt/g": 44476399616
+  },
+  "external_evaluation": 6,
+  "launch_attempts": 7,
+  "preexec_launch_failures": 1,
+  "native_calls": 0,
+  "legsa_native": 0,
+  "legsa_evaluation": 0
+}

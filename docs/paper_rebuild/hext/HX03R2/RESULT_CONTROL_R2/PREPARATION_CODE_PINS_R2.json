@@ -1,0 +1,6 @@
+{
+  "src/legsa_gins/paper_rebuild/hext/hx03r2_observer.py": "6bca892775c1bdcbc8d9e0525df71f8cd23895eedc9b81d90ac5e9e88dce5074",
+  "scripts/paper_rebuild/hx03r2_prepare.py": "d3a938a1ae05e9fad7e46132ee8eea4486b4c56a661191607f021dd5e094ec6e",
+  "tests/paper_rebuild/test_hx03r2_observer.py": "1128b57b02b2268378c155f71fc079842460179375015b2855497d37265d602e",
+  "src/legsa_gins/paper_rebuild/clean6_canonical_v2/evaluation.py": "8dfacf094879e7c091f1ddf1d5dcb3164f43923dc0903734cb6d29e05eeccc10"
+}

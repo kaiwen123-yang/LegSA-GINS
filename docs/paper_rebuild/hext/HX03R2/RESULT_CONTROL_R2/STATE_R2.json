@@ -1,0 +1,14 @@
+{
+  "utc": "2026-09-26T12:51:35.374440+00:00",
+  "status": "MATRIX_COMPLETE",
+  "phase": "matrix",
+  "native_calls": 0,
+  "legsa_native": 0,
+  "legsa_evaluation": 0,
+  "external_evaluation": 492,
+  "launch_attempts": 493,
+  "preexec_launch_failures": 1,
+  "archived_evaluation_slots": 492,
+  "reference_opens_verified": 492,
+  "retries": 0
+}

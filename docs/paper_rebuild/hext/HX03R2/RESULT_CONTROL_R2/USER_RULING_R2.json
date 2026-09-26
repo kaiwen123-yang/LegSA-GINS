@@ -1,0 +1,24 @@
+{
+  "identity_gate": [
+    "summary.json exact bytes",
+    "error_series.csv exact bytes"
+  ],
+  "R1_available_scientific_metrics": "exact per-field equality",
+  "EVALUATION_RESULT_json": "R1 provenance only, not byte identity target",
+  "v3_controls": "20 archived WGS84 captures and source-file identity; no LegSA reevaluation",
+  "validation_slots": [
+    "LC01 C00 v3",
+    "LC01 C00 v2",
+    "EXT05C C00 v3",
+    "EXT05C C00 v2",
+    "LC01 D04_seed_00 v3",
+    "EXT05C D62_20s_seed_00 v3"
+  ],
+  "validation_position_threshold_m": 1e-09,
+  "BR_C00": "identical native NAV hash; reuse LC01",
+  "slots_counted_once_in_total": 492,
+  "D12_position_threshold_m": 0.01,
+  "D12_yaw_threshold_deg": 0.01,
+  "native_calls_budget": 0,
+  "legsa_evaluation_budget": 0
+}
