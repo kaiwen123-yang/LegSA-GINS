@@ -1,0 +1,14 @@
+{
+  "$W/src/legsa_gins/paper_rebuild/clean5_sequence/evaluator_capture.py": "beb6ff36022866795c608a7ebbc8c356698eaf614ba22b98cbb57b3b7f4f6c8c",
+  "$W/src/legsa_gins/paper_rebuild/publication/canonical541_figures.py": "55d7390b9e91855a550a55d852f2f62f05dc3ceb79e28e63fe3195c49d552073",
+  "$W/src/legsa_gins/paper_rebuild/clean6_canonical_v2/evaluation.py": "8dfacf094879e7c091f1ddf1d5dcb3164f43923dc0903734cb6d29e05eeccc10",
+  "$W/src/legsa_gins/paper_rebuild/hext/external_evaluation.py": "55f2ca5c1c14703c2a4af5cf80b1ca5176e19487aa3f645f3e9efb1e78060df4",
+  "$W/src/legsa_gins/paper_rebuild/hext/continuation.py": "c1ce7498f8cc95941299e3f63aa365509b2e2485d4e9b63b4ced99386629be6c",
+  "$W/src/legsa_gins/paper_rebuild/hext/hx03_evaluation.py": "ec00ae56b2a996688206298f18473082e533a58981326309ff53c0ac3a0dcd59",
+  "$W/scripts/paper_rebuild/hx03_execute.py": "552a5dbe92c7da1551d1bd472fe756e8d8d264f33504dbfdf5bc9aad76f3ea28",
+  "$W/configs/paper_rebuild/hext/H_EXT_CONTRACT_V1.yaml": "7b748b5106dace0d809947dea65ae85c4a161ad18ca78aa395d2252b15c42863",
+  "$W/docs/paper_rebuild/CLEAN5_OFFLINE_EVALUATION_RECORD.md": "80e76ef3de63d1be2c3d42a91b7dd460cd3c9b5c048dc2a2b9a344e3ae7d82cf",
+  "$W/docs/paper_rebuild/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2_PLAN.md": "e645501d22177a160dd0a3f27ad11170381ef3b8476131942d369d61f82faa28",
+  "$W/docs/paper_rebuild/hext/H_EXT_02_CONTINUATION_AUTHORIZATION.md": "037abc8ee96c31861770b472e110df35600020de54b72294f8147be30c9e8f32",
+  "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py": "aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da"
+}

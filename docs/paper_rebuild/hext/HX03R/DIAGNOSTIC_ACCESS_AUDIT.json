@@ -1,0 +1,17 @@
+{
+  "diagnostic_processes": 1,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "reference_opens": 0,
+  "nav_opens": 0,
+  "openat_records": 1902,
+  "write_open_records": 4,
+  "outside_scratch_writes": 0,
+  "execve_records": [
+    "12526 execve(\"/usr/bin/python3\", [\"python3\", \"/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03R1/diagnose_retained.py\"], 0x7ffe44071d88 /* 61 vars */) = 0"
+  ],
+  "strace_sha256": "7f03cf73b4308d5cd9929604af29d58ba52478605861f59ff3e48ff84aa04fd9",
+  "script_sha256": "124493a29bb3574690123cfaf1b8712a6908330d3125ef722a155f545a0e7580",
+  "passed": true,
+  "scope": "main retained-output diagnostic process; source/history inspection and hash gates are separate read-only commands"
+}
