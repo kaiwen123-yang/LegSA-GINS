@@ -1,0 +1,30 @@
+{
+  "configuration": "OFF-DEF",
+  "case": "STATIC",
+  "duration_s": 300.0,
+  "angular_rate_rad_s": 0.0,
+  "expected_rows": 75001,
+  "exit_code": 0,
+  "argv": [
+    "strace",
+    "-f",
+    "-yy",
+    "-s",
+    "4096",
+    "-e",
+    "trace=openat,execve",
+    "-o",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/OPENAT.strace",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/BUILD/hx02e_official_driver",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/INPUT.bin",
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/configs/paper_rebuild/hext/HX02E/OFF-DEF.cfg",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/NAV.csv"
+  ],
+  "synthetic_input": true,
+  "output_rows": 75001,
+  "position_max_norm_m": 0.0,
+  "yaw_integral_max_abs_difference_deg": 0.0,
+  "nav_sha256": "2879f75539f6fa96a5df01a7dca3ca8c7d444b5d258d45be0c68d4538c38f2fc",
+  "input_sha256": "486d233d450e0203f920ee38163c266c37f1fb24e6bbeba3ce9676efaeaf580f",
+  "passed": true
+}
