@@ -145,3 +145,11 @@ A2 精确清单（每行适用于 LC01、LC01-BR、EXT05C；窗口均半开）�
 身份门目标：LC01 NAV ccd25c2e1309ba2870e57e2208f476a6b48eaba69f0d038f26be2f168bb2c695；EXT05C NAV 915192d6fcefaf7bef33c4028b571d1b723f7e0759063e2955aebd3d1ee7ace8。
 
 决策规则：无数值门槛，全部结果与失败照实报告；不调参、不重新抽样、不重试。
+
+## 矩阵前调度记录修正（2026-09-26）
+
+用户要求身份门原生若超过 200 s 才将单个原生上限改为 3600 s。原控制器未单独记录原生退出墙钟，账本给出的保守上界为 LC01 ≤21.863835 s、EXT05C ≤20.854462 s、LC01-BR ≤20.753577 s（NATIVE_RESERVED 到该运行首个 EVALUATOR_RESERVED，BR 到 RUN_TERMINAL；见 HX03/IDENTITY_TIMING_AND_ENVIRONMENT.json）。三者均小于 200 s，原生与评估等待上限均保留 600 s，不执行等待上限修正。
+
+每个原生实际已通过未改动的 hx02_evaluation_process.py:37–44 以 OMP_NUM_THREADS=1、OPENBLAS_NUM_THREADS=1、MKL_NUM_THREADS=1 启动。此次将 child_environment 的明确覆盖项写入每个 COMMAND.json 的 environment_whitelist；身份门原 COMMAND 和归档清单保留于 $HX03/00_CONTROL/SCHEDULING_AMENDMENT，补充元数据后重新核归档清单，科学输出逐字节保留。后续原生新增 time.monotonic 墙钟回执 NATIVE_TIMING.json 与 NATIVE_COMPLETED 账本事件。线程数为调度参数，不是科学参数；本次新增解算/评估均为 0。
+
+仅调度记录代码 scripts/paper_rebuild/hx03_execute.py 变更：`22ecedd2620ee903a29b2d0c75d17e4150a5244f248413bddb50845c792e2a64` → `552a5dbe92c7da1551d1bd472fe756e8d8d264f33504dbfdf5bc9aad76f3ea28`；CODE_PINS.json：`4d84be8a682440ebdae9a6ef998bd5eb1dc927126f8dba27999a1f6af09a206e` → `4bf98c7dc357065d4a8a100b5c5da49c4b19a25b62ceae802a3a0f45ae4ff44b`。原登记提交 13d8553ccfd4862284dd54f5fb392f92e99fd2f5 保留；397 项输入、方法数学、注入与评估定义、运行清单、所有科学参数均不变。

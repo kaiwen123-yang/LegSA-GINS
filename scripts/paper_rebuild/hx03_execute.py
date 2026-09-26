@@ -252,10 +252,15 @@ class Controller:
             argv = [sys.executable, '-m', 'legsa_gins.paper_rebuild.hext.hx03_native', '--cache', str(rd / 'CACHE'),
                     '--output', str(rd / 'native'), '--method', run['method'], '--parameters', str(self.parameters), '--trace-mode', 'disabled']
             command = ['strace', '-f', '-yy', '-s', '4096', '-e', 'trace=openat,execve', '-o', str(rd / 'NATIVE_OPENAT.strace'), *argv]
-            write_json(rd / 'COMMAND.json', {'argv': command, 'cwd': '$W', 'trace_mode': 'disabled'})
+            environment_whitelist = launcher.child_environment(self.W, rd / 'native')
+            assert all(environment_whitelist[key] == '1' for key in
+                       ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS'))
+            write_json(rd / 'COMMAND.json', {'argv': command, 'cwd': '$W', 'trace_mode': 'disabled',
+                'environment_whitelist': environment_whitelist, 'native_wait_limit_s': 600})
             self.event('NATIVE_RESERVED', run_id=run['run_id'])
-            environment = {**os.environ, **launcher.child_environment(self.W, rd / 'native')}
+            environment = {**os.environ, **environment_whitelist}
             with (rd / 'native_stdout.log').open('x') as stdout, (rd / 'native_stderr.log').open('x') as stderr:
+                started = time.monotonic()
                 proc = subprocess.Popen(command, cwd=self.W, env=environment, stdout=stdout, stderr=stderr, start_new_session=True)
                 with self.lock:
                     self.processes[proc.pid] = proc
@@ -271,6 +276,10 @@ class Controller:
                 finally:
                     with self.lock:
                         self.processes.pop(proc.pid, None)
+            timing = {'wall_seconds': time.monotonic() - started, 'returncode': rc,
+                      'native_wait_limit_s': 600, 'clock': 'time.monotonic; Popen through wait'}
+            write_json(rd / 'NATIVE_TIMING.json', timing)
+            self.event('NATIVE_COMPLETED', run_id=run['run_id'], **timing)
             self.audit_native(rd)
             p = rd / 'native/NATIVE_RESULT.json'
             native = json.loads(p.read_text()) if p.is_file() else {'status': 'FAILED', 'failure': {
