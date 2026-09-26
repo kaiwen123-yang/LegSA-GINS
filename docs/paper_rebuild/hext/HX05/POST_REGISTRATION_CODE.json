@@ -1,0 +1,23 @@
+{
+  "frozen_code_unchanged": {
+    "src/legsa_gins/paper_rebuild/hext/hx05_leg_dr.py": "75c9fb48d236316078550fc70f849a80640049e7f33a5b3bae69614a6be91c0c",
+    "scripts/paper_rebuild/hx05_execute.py": "2a998a5e5adbe7a80aeb951dfd791963d40536d3bd027c9cafc7cc3c029956d7",
+    "src/legsa_gins/paper_rebuild/hext/hx05_common.py": "922e677b8d7d0727ba4b64760f2a7a5fafdb24057ce07ac66ee9d36003287abc",
+    "src/legsa_gins/paper_rebuild/hext/hx05_tables.py": "0a6870e54089a119b45092942862b4a9d31b4bcf6c6471603e0f8c035e9201d9",
+    "src/legsa_gins/paper_rebuild/hext/hx05_figures.py": "80f678f4be97fdff65ade35711df09467e3f847269ce48d807b2173c970e4a2f",
+    "src/legsa_gins/paper_rebuild/hext/hx02d_reference_free.py": "1bcfa0476ee3e340f2b9818bd78d2441d28ea509ef0ad70a2773e23221d3545a",
+    "src/legsa_gins/paper_rebuild/hext/hx02_evaluation_process.py": "c94093d1fbf94c9f4db9f6f59334666ea8897c59bcd67654afd4a9914c7764fb",
+    "src/legsa_gins/paper_rebuild/hext/hx02_relative_pose_evaluation.py": "d5a024d2218aeae3c1c24c211b170cabad7b4c730fd02b43c270fe2d6f1fa4d1",
+    "src/legsa_gins/paper_rebuild/publication/style.py": "bb6a4571ce81638ad44fa4f5cb39ad35ad121640fc54d03e92cf47b8a9a6bfb7",
+    "src/legsa_gins/paper_rebuild/publication/qa.py": "caf00d949c2a2f573e3aa0de7a17b7d4046cd7870fbb8beaccfa575e60bb9fdd",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h5.py": "3b9e57d5470cf33360564b0736a81a31ee67c1274c9a87b7e335921f58a399c2",
+    "scripts/paper_rebuild/hx05_prepare.py": "73c131c9fed61bcadafe889894fff37f711136b03e9a13837d4c8752c1097a43",
+    "tests/paper_rebuild/test_hx05_leg_dr.py": "94b759650a69138ad5c8ad136a2310d27bfb396833099554ff7a9a5a17d36f30",
+    "tests/paper_rebuild/test_hx05_tables.py": "1ac8093a58789d42b0dc3eddc244de5435651493d2c49f5793c9682311a64c75"
+  },
+  "new_reporting_only_files": {
+    "scripts/paper_rebuild/hx05_figure_layout.py": "3a688cdff8d1050c518ac1fbaa4620ec36365dee8c41569ac8125a846b7c99aa",
+    "scripts/paper_rebuild/hx05_closeout_report.py": "7bc90faf5354b58618990703ca0b1c492bd12ff5950fedb6a4c44964d265b1ef"
+  },
+  "scientific_definition_changed": false
+}

@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "reviewer": "Codex actual raster inspection via view_image",
+  "accepted_render": "FIGURES_ACCEPTED",
+  "checks": [
+    "All 24 panels have data or explicit unavailable states",
+    "All three legends visible in actual PNG",
+    "Panel letters and sequence titles match data bindings",
+    "Long drift labels are complete on two lines",
+    "GINav divergence and 2/271 support annotation visible",
+    "EXT04 absence and BY2H port initialization stop visible",
+    "Diverged/unavailable degradation groups use crosses and n/N",
+    "No method identity relies on color alone; direct row labels or distinct symbols/line styles"
+  ],
+  "numeric_binding_identity": true,
+  "data_sha256": "91f1bba426c12dd5f8456519ee0df7a41c298045e4852b364a435386d7ba745a",
+  "machine_checks": 25,
+  "original_qa_implementation_unchanged": true,
+  "rejected_layouts": {
+    "FIGURES": "Long labels required wrapping; preserved initial render",
+    "FIGURES_FINAL": "Intermediate compound-unit layout; not used",
+    "FIGURES_FINAL_V2": "Moved legend clipped in actual raster; not accepted"
+  },
+  "images": {
+    "FIG02S": {
+      "png_sha256": "9a3908f504f3294fad5e47110a0216e8d267a8c8f64c7c23dfb977d538f5dc45",
+      "png_width_px": 4183,
+      "png_height_px": 6569
+    },
+    "FIG02D": {
+      "png_sha256": "3759f66e43e42cb32d36cecb3e3efa245a6a44cf84ca54d384de8b1169a66009",
+      "png_width_px": 4180,
+      "png_height_px": 5228
+    },
+    "SFIG-HX": {
+      "png_sha256": "e5d2caaa322ec791c903689eb98b4b24224c97167c59b8b4722ef6ddcae1d95d",
+      "png_width_px": 4180,
+      "png_height_px": 3639
+    }
+  }
+}

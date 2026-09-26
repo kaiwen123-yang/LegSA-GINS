@@ -1,0 +1,14 @@
+{
+  "sequence": "BY2H",
+  "epochs": 60541,
+  "cache_sha256": "732d45c70815ba65c7832ecbfb41edf5c571fd4e80fb13df497a99fe9863436e",
+  "raw_sha256": "b2e80763c613a5a0d6739aea90ea3ed4f8c9170cf5f2f6b73e5a000a666f0c49",
+  "integer_ns_match": true,
+  "integration_gaps": {
+    "unobserved_interval_count": 27,
+    "unobserved_duration_s": 0.1340594850000505,
+    "policy": "No velocity imputation; zero displacement contribution on unobserved intervals, explicitly incomplete if any."
+  },
+  "zero_contact_epochs": 16,
+  "NAV_placeholder_policy": "Velocity is serialized as zero where unobserved; integration retains NaN gaps. Bias and state_dimension zero mean not estimated."
+}

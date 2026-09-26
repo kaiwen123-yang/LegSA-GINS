@@ -1,0 +1,1889 @@
+{
+  "data_sha256": "91f1bba426c12dd5f8456519ee0df7a41c298045e4852b364a435386d7ba745a",
+  "figures": [
+    {
+      "figure_id": "FIG02S",
+      "png": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/FIGURES_ACCEPTED/FIG02S.png",
+      "pdf": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/FIGURES_ACCEPTED/FIG02S.pdf",
+      "svg": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/FIGURES_ACCEPTED/FIG02S.svg",
+      "png_dpi": 693,
+      "png_width_px": 4183,
+      "png_height_px": 6569,
+      "png_sha256": "9a3908f504f3294fad5e47110a0216e8d267a8c8f64c7c23dfb977d538f5dc45",
+      "pdf_sha256": "3439c0c08909291cb93046c9e9db1d6c40501eb82a74d04e8d1b484a1059bb3d",
+      "svg_sha256": "e891756a6e0c6a19fc3db742d9040c043bbd19d131940a33a295f5cfe91fff6a",
+      "bindings": [
+        {
+          "sequence": "BY2",
+          "entries": [
+            {
+              "method": "EXT01",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.7153284671532847,
+              "source_id": "MAIN.01.BY2"
+            },
+            {
+              "method": "EXT02",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.7036496350364964,
+              "source_id": "MAIN.02.BY2"
+            },
+            {
+              "method": "EXT03",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.3948905109489051,
+              "source_id": "MAIN.03.BY2"
+            },
+            {
+              "method": "EXT04_FAR",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.0,
+              "source_id": "MAIN.04.BY2"
+            },
+            {
+              "method": "EXT04_PAR",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.0,
+              "source_id": "MAIN.05.BY2"
+            },
+            {
+              "method": "RTKLIB_UNMODIFIED_MOVING_BASE",
+              "config": "-",
+              "metric": "availability",
+              "value": 0.11167883211678832,
+              "source_id": "MAIN.06.BY2"
+            }
+          ],
+          "references": [],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2H",
+          "entries": [
+            {
+              "method": "EXT01",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.7844444444444445,
+              "source_id": "MAIN.01.BY2H"
+            },
+            {
+              "method": "EXT02",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.7614814814814815,
+              "source_id": "MAIN.02.BY2H"
+            },
+            {
+              "method": "EXT03",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.3459259259259259,
+              "source_id": "MAIN.03.BY2H"
+            },
+            {
+              "method": "EXT04_FAR",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.0,
+              "source_id": "MAIN.04.BY2H"
+            },
+            {
+              "method": "EXT04_PAR",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.0,
+              "source_id": "MAIN.05.BY2H"
+            },
+            {
+              "method": "RTKLIB_UNMODIFIED_MOVING_BASE",
+              "config": "-",
+              "metric": "availability",
+              "value": 0.1325925925925926,
+              "source_id": "MAIN.06.BY2H"
+            }
+          ],
+          "references": [],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2O",
+          "entries": [
+            {
+              "method": "EXT01",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.6514588859416446,
+              "source_id": "MAIN.01.BY2O"
+            },
+            {
+              "method": "EXT02",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.6318302387267904,
+              "source_id": "MAIN.02.BY2O"
+            },
+            {
+              "method": "EXT03",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.1427055702917772,
+              "source_id": "MAIN.03.BY2O"
+            },
+            {
+              "method": "EXT04_FAR",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.0,
+              "source_id": "MAIN.04.BY2O"
+            },
+            {
+              "method": "EXT04_PAR",
+              "config": "LIT",
+              "metric": "availability",
+              "value": 0.0,
+              "source_id": "MAIN.05.BY2O"
+            },
+            {
+              "method": "RTKLIB_UNMODIFIED_MOVING_BASE",
+              "config": "-",
+              "metric": "availability",
+              "value": 0.059416445623342175,
+              "source_id": "MAIN.06.BY2O"
+            }
+          ],
+          "references": [],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2",
+          "entries": [
+            {
+              "method": "EXT01",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": 120.36002862722869,
+              "source_id": "MAIN.01.BY2"
+            },
+            {
+              "method": "EXT02",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": 120.52876042302128,
+              "source_id": "MAIN.02.BY2"
+            },
+            {
+              "method": "EXT03",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": 84.34382296702495,
+              "source_id": "MAIN.03.BY2"
+            },
+            {
+              "method": "EXT04_FAR",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": "UNAVAILABLE_NO_VALID_EPOCHS",
+              "source_id": "MAIN.04.BY2"
+            },
+            {
+              "method": "EXT04_PAR",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": "UNAVAILABLE_NO_VALID_EPOCHS",
+              "source_id": "MAIN.05.BY2"
+            },
+            {
+              "method": "RTKLIB_UNMODIFIED_MOVING_BASE",
+              "config": "-",
+              "metric": "valid_rmse_deg",
+              "value": 14.566166015767248,
+              "source_id": "MAIN.06.BY2"
+            }
+          ],
+          "references": [
+            {
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "value": 1.8862718548526467,
+              "source_id": "MAIN.12.BY2"
+            },
+            {
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "value": 2.231952255808013,
+              "source_id": "MAIN.13.BY2"
+            }
+          ],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2H",
+          "entries": [
+            {
+              "method": "EXT01",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": 109.47799873325478,
+              "source_id": "MAIN.01.BY2H"
+            },
+            {
+              "method": "EXT02",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": 109.26902750701647,
+              "source_id": "MAIN.02.BY2H"
+            },
+            {
+              "method": "EXT03",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": 76.92401097656273,
+              "source_id": "MAIN.03.BY2H"
+            },
+            {
+              "method": "EXT04_FAR",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": "UNAVAILABLE_NO_VALID_EPOCHS",
+              "source_id": "MAIN.04.BY2H"
+            },
+            {
+              "method": "EXT04_PAR",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": "UNAVAILABLE_NO_VALID_EPOCHS",
+              "source_id": "MAIN.05.BY2H"
+            },
+            {
+              "method": "RTKLIB_UNMODIFIED_MOVING_BASE",
+              "config": "-",
+              "metric": "valid_rmse_deg",
+              "value": 27.0111690896743,
+              "source_id": "MAIN.06.BY2H"
+            }
+          ],
+          "references": [
+            {
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "value": 1.93377013508875,
+              "source_id": "MAIN.12.BY2H"
+            },
+            {
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "value": 2.2832413876665534,
+              "source_id": "MAIN.13.BY2H"
+            }
+          ],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2O",
+          "entries": [
+            {
+              "method": "EXT01",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": 102.03419456274673,
+              "source_id": "MAIN.01.BY2O"
+            },
+            {
+              "method": "EXT02",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": 100.81343990406083,
+              "source_id": "MAIN.02.BY2O"
+            },
+            {
+              "method": "EXT03",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": 112.4324012480508,
+              "source_id": "MAIN.03.BY2O"
+            },
+            {
+              "method": "EXT04_FAR",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": "UNAVAILABLE_NO_VALID_EPOCHS",
+              "source_id": "MAIN.04.BY2O"
+            },
+            {
+              "method": "EXT04_PAR",
+              "config": "LIT",
+              "metric": "valid_rmse_deg",
+              "value": "UNAVAILABLE_NO_VALID_EPOCHS",
+              "source_id": "MAIN.05.BY2O"
+            },
+            {
+              "method": "RTKLIB_UNMODIFIED_MOVING_BASE",
+              "config": "-",
+              "metric": "valid_rmse_deg",
+              "value": 23.138949511295703,
+              "source_id": "MAIN.06.BY2O"
+            }
+          ],
+          "references": [
+            {
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "value": 2.433814932823714,
+              "source_id": "MAIN.12.BY2O"
+            },
+            {
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "value": 2.309490986722553,
+              "source_id": "MAIN.13.BY2O"
+            }
+          ],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2",
+          "entries": [
+            {
+              "method": "LC01",
+              "config": "LIT",
+              "metric": "yaw_rmse_deg",
+              "value": 2.9948274600591076,
+              "source_id": "MAIN.09.BY2"
+            },
+            {
+              "method": "EXT05C",
+              "config": "LIT",
+              "metric": "yaw_rmse_deg",
+              "value": 12.048641737808111,
+              "source_id": "MAIN.10.BY2"
+            },
+            {
+              "method": "LC02_GINAV",
+              "config": "-",
+              "metric": "yaw_rmse_deg",
+              "value": "ALGORITHM_FAILURE_DIVERGED: NOT_RUN_ALGORITHM_FAILURE",
+              "source_id": "MAIN.11.BY2"
+            },
+            {
+              "method": "F01",
+              "config": "V3",
+              "metric": "yaw_rmse_deg",
+              "value": 8.089647422454789,
+              "source_id": "MAIN.14.BY2"
+            }
+          ],
+          "references": [
+            {
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "value": 1.8862718548526467,
+              "source_id": "MAIN.12.BY2"
+            },
+            {
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "value": 2.231952255808013,
+              "source_id": "MAIN.13.BY2"
+            }
+          ],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2H",
+          "entries": [
+            {
+              "method": "LC01",
+              "config": "LIT",
+              "metric": "yaw_rmse_deg",
+              "value": 2.208612313835051,
+              "source_id": "MAIN.09.BY2H"
+            },
+            {
+              "method": "EXT05C",
+              "config": "LIT",
+              "metric": "yaw_rmse_deg",
+              "value": 20.108223061254332,
+              "source_id": "MAIN.10.BY2H"
+            },
+            {
+              "method": "LC02_GINAV",
+              "config": "-",
+              "metric": "yaw_rmse_deg",
+              "value": 11.662263303395555,
+              "source_id": "MAIN.11.BY2H"
+            },
+            {
+              "method": "F01",
+              "config": "V3",
+              "metric": "yaw_rmse_deg",
+              "value": 7.137487572272005,
+              "source_id": "MAIN.14.BY2H"
+            }
+          ],
+          "references": [
+            {
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "value": 1.93377013508875,
+              "source_id": "MAIN.12.BY2H"
+            },
+            {
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "value": 2.2832413876665534,
+              "source_id": "MAIN.13.BY2H"
+            }
+          ],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2O",
+          "entries": [
+            {
+              "method": "LC01",
+              "config": "LIT",
+              "metric": "yaw_rmse_deg",
+              "value": 2.4536970334279924,
+              "source_id": "MAIN.09.BY2O"
+            },
+            {
+              "method": "EXT05C",
+              "config": "LIT",
+              "metric": "yaw_rmse_deg",
+              "value": 5.845502312798482,
+              "source_id": "MAIN.10.BY2O"
+            },
+            {
+              "method": "LC02_GINAV",
+              "config": "-",
+              "metric": "yaw_rmse_deg",
+              "value": "ALGORITHM_FAILURE_DIVERGED: NOT_RUN_ALGORITHM_FAILURE",
+              "source_id": "MAIN.11.BY2O"
+            },
+            {
+              "method": "F01",
+              "config": "V3",
+              "metric": "yaw_rmse_deg",
+              "value": 5.739037942642961,
+              "source_id": "MAIN.14.BY2O"
+            }
+          ],
+          "references": [
+            {
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "value": 2.433814932823714,
+              "source_id": "MAIN.12.BY2O"
+            },
+            {
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "value": 2.309490986722553,
+              "source_id": "MAIN.13.BY2O"
+            }
+          ],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2",
+          "entries": [
+            {
+              "method": "LC01",
+              "config": "LIT",
+              "metric": "horizontal_rmse_m",
+              "value": 0.0975479714305497,
+              "source_id": "MAIN.09.BY2"
+            },
+            {
+              "method": "EXT05C",
+              "config": "LIT",
+              "metric": "horizontal_rmse_m",
+              "value": 0.0877508129138417,
+              "source_id": "MAIN.10.BY2"
+            },
+            {
+              "method": "LC02_GINAV",
+              "config": "-",
+              "metric": "horizontal_rmse_m",
+              "value": "ALGORITHM_FAILURE_DIVERGED: NOT_RUN_ALGORITHM_FAILURE",
+              "source_id": "MAIN.11.BY2"
+            },
+            {
+              "method": "F01",
+              "config": "V3",
+              "metric": "horizontal_rmse_m",
+              "value": 0.09177145533263088,
+              "source_id": "MAIN.14.BY2"
+            }
+          ],
+          "references": [
+            {
+              "method": "F04",
+              "metric": "horizontal_rmse_m",
+              "value": 0.09790607774950152,
+              "source_id": "MAIN.12.BY2"
+            },
+            {
+              "method": "F02",
+              "metric": "horizontal_rmse_m",
+              "value": 0.10192187334932777,
+              "source_id": "MAIN.13.BY2"
+            }
+          ],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2H",
+          "entries": [
+            {
+              "method": "LC01",
+              "config": "LIT",
+              "metric": "horizontal_rmse_m",
+              "value": 0.0746064486934978,
+              "source_id": "MAIN.09.BY2H"
+            },
+            {
+              "method": "EXT05C",
+              "config": "LIT",
+              "metric": "horizontal_rmse_m",
+              "value": 0.06918972281588827,
+              "source_id": "MAIN.10.BY2H"
+            },
+            {
+              "method": "LC02_GINAV",
+              "config": "-",
+              "metric": "horizontal_rmse_m",
+              "value": 2.894928083236164,
+              "source_id": "MAIN.11.BY2H"
+            },
+            {
+              "method": "F01",
+              "config": "V3",
+              "metric": "horizontal_rmse_m",
+              "value": 0.06292589316025435,
+              "source_id": "MAIN.14.BY2H"
+            }
+          ],
+          "references": [
+            {
+              "method": "F04",
+              "metric": "horizontal_rmse_m",
+              "value": 0.06836245149191253,
+              "source_id": "MAIN.12.BY2H"
+            },
+            {
+              "method": "F02",
+              "metric": "horizontal_rmse_m",
+              "value": 0.07150053377515339,
+              "source_id": "MAIN.13.BY2H"
+            }
+          ],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2O",
+          "entries": [
+            {
+              "method": "LC01",
+              "config": "LIT",
+              "metric": "horizontal_rmse_m",
+              "value": 0.05430420090026619,
+              "source_id": "MAIN.09.BY2O"
+            },
+            {
+              "method": "EXT05C",
+              "config": "LIT",
+              "metric": "horizontal_rmse_m",
+              "value": 0.05195371361637804,
+              "source_id": "MAIN.10.BY2O"
+            },
+            {
+              "method": "LC02_GINAV",
+              "config": "-",
+              "metric": "horizontal_rmse_m",
+              "value": "ALGORITHM_FAILURE_DIVERGED: NOT_RUN_ALGORITHM_FAILURE",
+              "source_id": "MAIN.11.BY2O"
+            },
+            {
+              "method": "F01",
+              "config": "V3",
+              "metric": "horizontal_rmse_m",
+              "value": 0.06284210260933396,
+              "source_id": "MAIN.14.BY2O"
+            }
+          ],
+          "references": [
+            {
+              "method": "F04",
+              "metric": "horizontal_rmse_m",
+              "value": 0.054543210912875166,
+              "source_id": "MAIN.12.BY2O"
+            },
+            {
+              "method": "F02",
+              "metric": "horizontal_rmse_m",
+              "value": 0.054724671058797664,
+              "source_id": "MAIN.13.BY2O"
+            }
+          ],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2",
+          "entries": [
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-LIT",
+              "metric": "position_drift_m_per_100m",
+              "value": 33.63359978621048,
+              "source_id": "MAIN.07.BY2"
+            },
+            {
+              "method": "LEG-DR",
+              "config": "C4",
+              "metric": "position_drift_m_per_100m",
+              "value": 0.06942580845419305,
+              "source_id": "MAIN.08.BY2"
+            }
+          ],
+          "references": [],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2H",
+          "entries": [
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-LIT",
+              "metric": "position_drift_m_per_100m",
+              "value": 47.525516541439565,
+              "source_id": "MAIN.07.BY2H"
+            },
+            {
+              "method": "LEG-DR",
+              "config": "C4",
+              "metric": "position_drift_m_per_100m",
+              "value": 0.10752596591374582,
+              "source_id": "MAIN.08.BY2H"
+            }
+          ],
+          "references": [],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2O",
+          "entries": [
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-LIT",
+              "metric": "position_drift_m_per_100m",
+              "value": 28.55885167565558,
+              "source_id": "MAIN.07.BY2O"
+            },
+            {
+              "method": "LEG-DR",
+              "config": "C4",
+              "metric": "position_drift_m_per_100m",
+              "value": -0.37939114728288426,
+              "source_id": "MAIN.08.BY2O"
+            }
+          ],
+          "references": [],
+          "no_empty_panel": true
+        }
+      ]
+    },
+    {
+      "figure_id": "FIG02D",
+      "png": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/FIGURES_ACCEPTED/FIG02D.png",
+      "pdf": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/FIGURES_ACCEPTED/FIG02D.pdf",
+      "svg": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/FIGURES_ACCEPTED/FIG02D.svg",
+      "png_dpi": 711,
+      "png_width_px": 4180,
+      "png_height_px": 5228,
+      "png_sha256": "3759f66e43e42cb32d36cecb3e3efa245a6a44cf84ca54d384de8b1169a66009",
+      "pdf_sha256": "cb1ce5bb6b6955593b0c83687fa3ea5d4cf5d9336a8dc379564d26d899263849",
+      "svg_sha256": "f502afd384f7fa3a95c9f16db32615c2c32f2d555cefe133867e3e790f380f8c",
+      "bindings": [
+        {
+          "metric": "yaw_rmse_deg",
+          "entries": [
+            {
+              "family": "位置噪声",
+              "method": "LC01",
+              "metric": "yaw_rmse_deg",
+              "median": null,
+              "p95": null,
+              "finite_n": 0,
+              "registered_n": 18,
+              "failure_n": 18,
+              "source_id": "DEGRADATION.位置噪声.LC01"
+            },
+            {
+              "family": "位置偏差",
+              "method": "LC01",
+              "metric": "yaw_rmse_deg",
+              "median": 2.9948270626858737,
+              "p95": 2.994834795864177,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置偏差.LC01"
+            },
+            {
+              "family": "位置中断",
+              "method": "LC01",
+              "metric": "yaw_rmse_deg",
+              "median": 2.9980624597079233,
+              "p95": 3.074817725472829,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置中断.LC01"
+            },
+            {
+              "family": "速度中断",
+              "method": "LC01",
+              "metric": "yaw_rmse_deg",
+              "median": 2.9948274600591076,
+              "p95": 3.003737235780949,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.速度中断.LC01"
+            },
+            {
+              "family": "航向噪声",
+              "method": "LC01",
+              "metric": "yaw_rmse_deg",
+              "median": 3.2589641707615926,
+              "p95": 4.017470107158446,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向噪声.LC01"
+            },
+            {
+              "family": "航向中断",
+              "method": "LC01",
+              "metric": "yaw_rmse_deg",
+              "median": 3.016014157153275,
+              "p95": 3.305615359339911,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向中断.LC01"
+            },
+            {
+              "family": "多普勒",
+              "method": "LC01",
+              "metric": "yaw_rmse_deg",
+              "median": 2.9948274600591076,
+              "p95": 2.9948274600591076,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.多普勒.LC01"
+            },
+            {
+              "family": "时间戳",
+              "method": "LC01",
+              "metric": "yaw_rmse_deg",
+              "median": 2.980585070394497,
+              "p95": 3.076627795415496,
+              "finite_n": 9,
+              "registered_n": 9,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.时间戳.LC01"
+            },
+            {
+              "family": "A2",
+              "method": "LC01",
+              "metric": "yaw_rmse_deg",
+              "median": 2.9980624597079233,
+              "p95": 3.074817725472829,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.A2.LC01"
+            },
+            {
+              "family": "位置噪声",
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "median": 6.28774337981505,
+              "p95": 20.57884308348875,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置噪声.F02"
+            },
+            {
+              "family": "位置偏差",
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "median": 2.2319520580368017,
+              "p95": 2.231953387582373,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置偏差.F02"
+            },
+            {
+              "family": "位置中断",
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "median": 2.2317266237779174,
+              "p95": 2.234472852467108,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置中断.F02"
+            },
+            {
+              "family": "速度中断",
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "median": 2.231952255808013,
+              "p95": 2.2323507577096917,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.速度中断.F02"
+            },
+            {
+              "family": "航向噪声",
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "median": 2.2655904609909987,
+              "p95": 2.72006850887111,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向噪声.F02"
+            },
+            {
+              "family": "航向中断",
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "median": 2.2992679227714876,
+              "p95": 2.488319505922919,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向中断.F02"
+            },
+            {
+              "family": "多普勒",
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "median": 2.231952255808013,
+              "p95": 2.231952255808013,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.多普勒.F02"
+            },
+            {
+              "family": "时间戳",
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "median": null,
+              "p95": null,
+              "finite_n": 0,
+              "registered_n": 9,
+              "failure_n": 9,
+              "source_id": "DEGRADATION.时间戳.F02"
+            },
+            {
+              "family": "A2",
+              "method": "F02",
+              "metric": "yaw_rmse_deg",
+              "median": 2.2317266237779174,
+              "p95": 2.234472852467108,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.A2.F02"
+            },
+            {
+              "family": "位置噪声",
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "median": 1.9579970650012892,
+              "p95": 9.105167683056713,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置噪声.F04"
+            },
+            {
+              "family": "位置偏差",
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "median": 1.8862717641173519,
+              "p95": 1.886381853413094,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置偏差.F04"
+            },
+            {
+              "family": "位置中断",
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "median": 1.8856567591336388,
+              "p95": 1.8862357739880458,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置中断.F04"
+            },
+            {
+              "family": "速度中断",
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "median": 1.8849190807917067,
+              "p95": 1.8864297904855813,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.速度中断.F04"
+            },
+            {
+              "family": "航向噪声",
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "median": 1.9479439428815821,
+              "p95": 2.383515506938663,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向噪声.F04"
+            },
+            {
+              "family": "航向中断",
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "median": 1.9091471083735625,
+              "p95": 1.9988769617886242,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向中断.F04"
+            },
+            {
+              "family": "多普勒",
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "median": 1.886088043635536,
+              "p95": 1.8874680300718742,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.多普勒.F04"
+            },
+            {
+              "family": "时间戳",
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "median": null,
+              "p95": null,
+              "finite_n": 0,
+              "registered_n": 9,
+              "failure_n": 9,
+              "source_id": "DEGRADATION.时间戳.F04"
+            },
+            {
+              "family": "A2",
+              "method": "F04",
+              "metric": "yaw_rmse_deg",
+              "median": 1.884784054725689,
+              "p95": 1.8863402063635222,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.A2.F04"
+            }
+          ],
+          "no_empty_panel": true,
+          "interval": "median to empirical P95; not confidence interval"
+        },
+        {
+          "metric": "horizontal_rmse_m",
+          "entries": [
+            {
+              "family": "位置噪声",
+              "method": "LC01",
+              "metric": "horizontal_rmse_m",
+              "median": null,
+              "p95": null,
+              "finite_n": 0,
+              "registered_n": 18,
+              "failure_n": 18,
+              "source_id": "DEGRADATION.位置噪声.LC01"
+            },
+            {
+              "family": "位置偏差",
+              "method": "LC01",
+              "metric": "horizontal_rmse_m",
+              "median": 1.610600767583583,
+              "p95": 1.7528561912679683,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置偏差.LC01"
+            },
+            {
+              "family": "位置中断",
+              "method": "LC01",
+              "metric": "horizontal_rmse_m",
+              "median": 1.4073499260959883,
+              "p95": 7.769345298448628,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置中断.LC01"
+            },
+            {
+              "family": "速度中断",
+              "method": "LC01",
+              "metric": "horizontal_rmse_m",
+              "median": 0.2598048829329334,
+              "p95": 1.2341058880301619,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.速度中断.LC01"
+            },
+            {
+              "family": "航向噪声",
+              "method": "LC01",
+              "metric": "horizontal_rmse_m",
+              "median": 0.09828279428846022,
+              "p95": 0.09976145935501897,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向噪声.LC01"
+            },
+            {
+              "family": "航向中断",
+              "method": "LC01",
+              "metric": "horizontal_rmse_m",
+              "median": 3.1360505444241658,
+              "p95": 8.32627435418161,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向中断.LC01"
+            },
+            {
+              "family": "多普勒",
+              "method": "LC01",
+              "metric": "horizontal_rmse_m",
+              "median": 0.0975479714305497,
+              "p95": 0.0975479714305497,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.多普勒.LC01"
+            },
+            {
+              "family": "时间戳",
+              "method": "LC01",
+              "metric": "horizontal_rmse_m",
+              "median": 0.16674239425009407,
+              "p95": 0.30521013152996473,
+              "finite_n": 9,
+              "registered_n": 9,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.时间戳.LC01"
+            },
+            {
+              "family": "A2",
+              "method": "LC01",
+              "metric": "horizontal_rmse_m",
+              "median": 1.4073499260959883,
+              "p95": 7.769345298448628,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.A2.LC01"
+            },
+            {
+              "family": "位置噪声",
+              "method": "F02",
+              "metric": "horizontal_rmse_m",
+              "median": 1.576821443592605,
+              "p95": 2.2666526845039554,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置噪声.F02"
+            },
+            {
+              "family": "位置偏差",
+              "method": "F02",
+              "metric": "horizontal_rmse_m",
+              "median": 1.6121370422636965,
+              "p95": 1.7616927122048853,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置偏差.F02"
+            },
+            {
+              "family": "位置中断",
+              "method": "F02",
+              "metric": "horizontal_rmse_m",
+              "median": 2.9132198549853383,
+              "p95": 17.077197930243535,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置中断.F02"
+            },
+            {
+              "family": "速度中断",
+              "method": "F02",
+              "metric": "horizontal_rmse_m",
+              "median": 0.17052720613722688,
+              "p95": 2.7442604434865903,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.速度中断.F02"
+            },
+            {
+              "family": "航向噪声",
+              "method": "F02",
+              "metric": "horizontal_rmse_m",
+              "median": 0.10185183049395433,
+              "p95": 0.10237806013947166,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向噪声.F02"
+            },
+            {
+              "family": "航向中断",
+              "method": "F02",
+              "metric": "horizontal_rmse_m",
+              "median": 0.8612429989736238,
+              "p95": 17.05734040166351,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向中断.F02"
+            },
+            {
+              "family": "多普勒",
+              "method": "F02",
+              "metric": "horizontal_rmse_m",
+              "median": 0.10192187334932777,
+              "p95": 0.10192187334932777,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.多普勒.F02"
+            },
+            {
+              "family": "时间戳",
+              "method": "F02",
+              "metric": "horizontal_rmse_m",
+              "median": null,
+              "p95": null,
+              "finite_n": 0,
+              "registered_n": 9,
+              "failure_n": 9,
+              "source_id": "DEGRADATION.时间戳.F02"
+            },
+            {
+              "family": "A2",
+              "method": "F02",
+              "metric": "horizontal_rmse_m",
+              "median": 2.9132198549853383,
+              "p95": 17.077197930243535,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.A2.F02"
+            },
+            {
+              "family": "位置噪声",
+              "method": "F04",
+              "metric": "horizontal_rmse_m",
+              "median": 1.2624288869293778,
+              "p95": 1.9402875087451732,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置噪声.F04"
+            },
+            {
+              "family": "位置偏差",
+              "method": "F04",
+              "metric": "horizontal_rmse_m",
+              "median": 1.6106887502464278,
+              "p95": 1.7509209846427096,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置偏差.F04"
+            },
+            {
+              "family": "位置中断",
+              "method": "F04",
+              "metric": "horizontal_rmse_m",
+              "median": 0.10699059246223028,
+              "p95": 0.12800923887255744,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置中断.F04"
+            },
+            {
+              "family": "速度中断",
+              "method": "F04",
+              "metric": "horizontal_rmse_m",
+              "median": 0.1046479980224709,
+              "p95": 0.14416892399645714,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.速度中断.F04"
+            },
+            {
+              "family": "航向噪声",
+              "method": "F04",
+              "metric": "horizontal_rmse_m",
+              "median": 0.09780719975636712,
+              "p95": 0.09804095252155391,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向噪声.F04"
+            },
+            {
+              "family": "航向中断",
+              "method": "F04",
+              "metric": "horizontal_rmse_m",
+              "median": 2.50672973520372,
+              "p95": 15.217129054554114,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向中断.F04"
+            },
+            {
+              "family": "多普勒",
+              "method": "F04",
+              "metric": "horizontal_rmse_m",
+              "median": 0.09795698881590768,
+              "p95": 0.09870353765629135,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.多普勒.F04"
+            },
+            {
+              "family": "时间戳",
+              "method": "F04",
+              "metric": "horizontal_rmse_m",
+              "median": null,
+              "p95": null,
+              "finite_n": 0,
+              "registered_n": 9,
+              "failure_n": 9,
+              "source_id": "DEGRADATION.时间戳.F04"
+            },
+            {
+              "family": "A2",
+              "method": "F04",
+              "metric": "horizontal_rmse_m",
+              "median": 0.17667112573862742,
+              "p95": 0.2877465570267067,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.A2.F04"
+            }
+          ],
+          "no_empty_panel": true,
+          "interval": "median to empirical P95; not confidence interval"
+        },
+        {
+          "metric": "up_rmse_m",
+          "entries": [
+            {
+              "family": "位置噪声",
+              "method": "LC01",
+              "metric": "up_rmse_m",
+              "median": null,
+              "p95": null,
+              "finite_n": 0,
+              "registered_n": 18,
+              "failure_n": 18,
+              "source_id": "DEGRADATION.位置噪声.LC01"
+            },
+            {
+              "family": "位置偏差",
+              "method": "LC01",
+              "metric": "up_rmse_m",
+              "median": 0.5416892508670351,
+              "p95": 0.609789985306557,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置偏差.LC01"
+            },
+            {
+              "family": "位置中断",
+              "method": "LC01",
+              "metric": "up_rmse_m",
+              "median": 4.978736353257629,
+              "p95": 11.37368394886416,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置中断.LC01"
+            },
+            {
+              "family": "速度中断",
+              "method": "LC01",
+              "metric": "up_rmse_m",
+              "median": 0.6221857640099769,
+              "p95": 2.1252228737038084,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.速度中断.LC01"
+            },
+            {
+              "family": "航向噪声",
+              "method": "LC01",
+              "metric": "up_rmse_m",
+              "median": 0.050670335158112804,
+              "p95": 0.05068204302107804,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向噪声.LC01"
+            },
+            {
+              "family": "航向中断",
+              "method": "LC01",
+              "metric": "up_rmse_m",
+              "median": 9.186026179910845,
+              "p95": 11.877938192032005,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向中断.LC01"
+            },
+            {
+              "family": "多普勒",
+              "method": "LC01",
+              "metric": "up_rmse_m",
+              "median": 0.05066431825806066,
+              "p95": 0.05066431825806066,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.多普勒.LC01"
+            },
+            {
+              "family": "时间戳",
+              "method": "LC01",
+              "metric": "up_rmse_m",
+              "median": 0.05034603621967664,
+              "p95": 0.05054645175798957,
+              "finite_n": 9,
+              "registered_n": 9,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.时间戳.LC01"
+            },
+            {
+              "family": "A2",
+              "method": "LC01",
+              "metric": "up_rmse_m",
+              "median": 4.978736353257629,
+              "p95": 11.37368394886416,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.A2.LC01"
+            },
+            {
+              "family": "位置噪声",
+              "method": "F02",
+              "metric": "up_rmse_m",
+              "median": 1.4866107824265253,
+              "p95": 2.646600923958226,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置噪声.F02"
+            },
+            {
+              "family": "位置偏差",
+              "method": "F02",
+              "metric": "up_rmse_m",
+              "median": 0.5431973777928271,
+              "p95": 0.5880816211952308,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置偏差.F02"
+            },
+            {
+              "family": "位置中断",
+              "method": "F02",
+              "metric": "up_rmse_m",
+              "median": 0.35446853357640473,
+              "p95": 1.7266318066062567,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置中断.F02"
+            },
+            {
+              "family": "速度中断",
+              "method": "F02",
+              "metric": "up_rmse_m",
+              "median": 0.10130361054145291,
+              "p95": 0.3667220183884393,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.速度中断.F02"
+            },
+            {
+              "family": "航向噪声",
+              "method": "F02",
+              "metric": "up_rmse_m",
+              "median": 0.04806718715169754,
+              "p95": 0.04807357096657542,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向噪声.F02"
+            },
+            {
+              "family": "航向中断",
+              "method": "F02",
+              "metric": "up_rmse_m",
+              "median": 0.1440331016789963,
+              "p95": 1.7267497661215738,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向中断.F02"
+            },
+            {
+              "family": "多普勒",
+              "method": "F02",
+              "metric": "up_rmse_m",
+              "median": 0.04806842213318387,
+              "p95": 0.04806842213318387,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.多普勒.F02"
+            },
+            {
+              "family": "时间戳",
+              "method": "F02",
+              "metric": "up_rmse_m",
+              "median": null,
+              "p95": null,
+              "finite_n": 0,
+              "registered_n": 9,
+              "failure_n": 9,
+              "source_id": "DEGRADATION.时间戳.F02"
+            },
+            {
+              "family": "A2",
+              "method": "F02",
+              "metric": "up_rmse_m",
+              "median": 0.35446853357640473,
+              "p95": 1.7266318066062567,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.A2.F02"
+            },
+            {
+              "family": "位置噪声",
+              "method": "F04",
+              "metric": "up_rmse_m",
+              "median": 1.2358138260959528,
+              "p95": 2.251954880387484,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置噪声.F04"
+            },
+            {
+              "family": "位置偏差",
+              "method": "F04",
+              "metric": "up_rmse_m",
+              "median": 0.54265216495716,
+              "p95": 0.5908212803892976,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置偏差.F04"
+            },
+            {
+              "family": "位置中断",
+              "method": "F04",
+              "metric": "up_rmse_m",
+              "median": 0.050228910716215595,
+              "p95": 0.07966309267183512,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.位置中断.F04"
+            },
+            {
+              "family": "速度中断",
+              "method": "F04",
+              "metric": "up_rmse_m",
+              "median": 0.05495513273877202,
+              "p95": 0.31050099785539803,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.速度中断.F04"
+            },
+            {
+              "family": "航向噪声",
+              "method": "F04",
+              "metric": "up_rmse_m",
+              "median": 0.04899523413388909,
+              "p95": 0.04899744122736603,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向噪声.F04"
+            },
+            {
+              "family": "航向中断",
+              "method": "F04",
+              "metric": "up_rmse_m",
+              "median": 0.07927576241153542,
+              "p95": 1.8374280036516677,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.航向中断.F04"
+            },
+            {
+              "family": "多普勒",
+              "method": "F04",
+              "metric": "up_rmse_m",
+              "median": 0.04889007097077207,
+              "p95": 0.04900385698042948,
+              "finite_n": 27,
+              "registered_n": 27,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.多普勒.F04"
+            },
+            {
+              "family": "时间戳",
+              "method": "F04",
+              "metric": "up_rmse_m",
+              "median": null,
+              "p95": null,
+              "finite_n": 0,
+              "registered_n": 9,
+              "failure_n": 9,
+              "source_id": "DEGRADATION.时间戳.F04"
+            },
+            {
+              "family": "A2",
+              "method": "F04",
+              "metric": "up_rmse_m",
+              "median": 0.39983672375079515,
+              "p95": 1.836010757605478,
+              "finite_n": 18,
+              "registered_n": 18,
+              "failure_n": 0,
+              "source_id": "DEGRADATION.A2.F04"
+            }
+          ],
+          "no_empty_panel": true,
+          "interval": "median to empirical P95; not confidence interval"
+        }
+      ]
+    },
+    {
+      "figure_id": "SFIG-HX",
+      "png": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/FIGURES_ACCEPTED/SFIG-HX.png",
+      "pdf": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/FIGURES_ACCEPTED/SFIG-HX.pdf",
+      "svg": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/FIGURES_ACCEPTED/SFIG-HX.svg",
+      "png_dpi": 701,
+      "png_width_px": 4180,
+      "png_height_px": 3639,
+      "png_sha256": "e5d2caaa322ec791c903689eb98b4b24224c97167c59b8b4722ef6ddcae1d95d",
+      "pdf_sha256": "612f86fb88d314915d9efd98e3523fdeb5f309cc3d833e4828fb355e12e5945d",
+      "svg_sha256": "cbadcd8d9f1f9e03551bd9c1bf856bcecdae7b1083fd92f3cf90dbd70ef5a529",
+      "bindings": [
+        {
+          "sequence": "BY2",
+          "entries": [
+            {
+              "method": "Hartley-S",
+              "config": "S",
+              "value": 34.07743045460158,
+              "metric": "position_drift_m_per_100m",
+              "source_id": "SUPP.04.BY2"
+            },
+            {
+              "method": "Hartley-LIT",
+              "config": "LIT",
+              "value": 36.28141274476832,
+              "metric": "position_drift_m_per_100m",
+              "source_id": "SUPP.05.BY2"
+            },
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-LIT",
+              "value": 33.63359978621048,
+              "metric": "position_drift_m_per_100m",
+              "source_id": "MAIN.07.BY2"
+            },
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-DEF",
+              "value": 21.88907591581972,
+              "metric": "position_drift_m_per_100m",
+              "source_id": "SUPP.03.BY2"
+            },
+            {
+              "method": "LEG-DR",
+              "config": "C4",
+              "value": 0.06942580845419305,
+              "metric": "position_drift_m_per_100m",
+              "source_id": "MAIN.08.BY2"
+            }
+          ],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2H",
+          "entries": [
+            {
+              "method": "Hartley-S",
+              "config": "S",
+              "value": "ABNORMAL_EXIT: ABNORMAL_EXIT",
+              "metric": "position_drift_m_per_100m",
+              "source_id": "SUPP.04.BY2H"
+            },
+            {
+              "method": "Hartley-LIT",
+              "config": "LIT",
+              "value": "ABNORMAL_EXIT: ABNORMAL_EXIT",
+              "metric": "position_drift_m_per_100m",
+              "source_id": "SUPP.05.BY2H"
+            },
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-LIT",
+              "value": 47.525516541439565,
+              "metric": "position_drift_m_per_100m",
+              "source_id": "MAIN.07.BY2H"
+            },
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-DEF",
+              "value": 34.015027152331754,
+              "metric": "position_drift_m_per_100m",
+              "source_id": "SUPP.03.BY2H"
+            },
+            {
+              "method": "LEG-DR",
+              "config": "C4",
+              "value": 0.10752596591374582,
+              "metric": "position_drift_m_per_100m",
+              "source_id": "MAIN.08.BY2H"
+            }
+          ],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2O",
+          "entries": [
+            {
+              "method": "Hartley-S",
+              "config": "S",
+              "value": 9.04766538285815,
+              "metric": "position_drift_m_per_100m",
+              "source_id": "SUPP.04.BY2O"
+            },
+            {
+              "method": "Hartley-LIT",
+              "config": "LIT",
+              "value": 27.698785533651794,
+              "metric": "position_drift_m_per_100m",
+              "source_id": "SUPP.05.BY2O"
+            },
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-LIT",
+              "value": 28.55885167565558,
+              "metric": "position_drift_m_per_100m",
+              "source_id": "MAIN.07.BY2O"
+            },
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-DEF",
+              "value": 11.652023031652952,
+              "metric": "position_drift_m_per_100m",
+              "source_id": "SUPP.03.BY2O"
+            },
+            {
+              "method": "LEG-DR",
+              "config": "C4",
+              "value": -0.37939114728288426,
+              "metric": "position_drift_m_per_100m",
+              "source_id": "MAIN.08.BY2O"
+            }
+          ],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2",
+          "entries": [
+            {
+              "method": "Hartley-S",
+              "config": "S",
+              "value": -101.19336396722751,
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "SUPP.04.BY2"
+            },
+            {
+              "method": "Hartley-LIT",
+              "config": "LIT",
+              "value": 31.940420283998627,
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "SUPP.05.BY2"
+            },
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-LIT",
+              "value": 31.04264227100656,
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "MAIN.07.BY2"
+            },
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-DEF",
+              "value": 17.42370710170332,
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "SUPP.03.BY2"
+            },
+            {
+              "method": "LEG-DR",
+              "config": "C4",
+              "value": 0.17357997007153936,
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "MAIN.08.BY2"
+            }
+          ],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2H",
+          "entries": [
+            {
+              "method": "Hartley-S",
+              "config": "S",
+              "value": "ABNORMAL_EXIT: ABNORMAL_EXIT",
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "SUPP.04.BY2H"
+            },
+            {
+              "method": "Hartley-LIT",
+              "config": "LIT",
+              "value": "ABNORMAL_EXIT: ABNORMAL_EXIT",
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "SUPP.05.BY2H"
+            },
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-LIT",
+              "value": 40.76617582109213,
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "MAIN.07.BY2H"
+            },
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-DEF",
+              "value": 23.23976133867293,
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "SUPP.03.BY2H"
+            },
+            {
+              "method": "LEG-DR",
+              "config": "C4",
+              "value": -0.15615553122965237,
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "MAIN.08.BY2H"
+            }
+          ],
+          "no_empty_panel": true
+        },
+        {
+          "sequence": "BY2O",
+          "entries": [
+            {
+              "method": "Hartley-S",
+              "config": "S",
+              "value": 495.07712000208835,
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "SUPP.04.BY2O"
+            },
+            {
+              "method": "Hartley-LIT",
+              "config": "LIT",
+              "value": 13.39192769570303,
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "SUPP.05.BY2O"
+            },
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-LIT",
+              "value": 13.987313224414136,
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "MAIN.07.BY2O"
+            },
+            {
+              "method": "HARTLEY_OFFICIAL",
+              "config": "OFF-DEF",
+              "value": 7.50242412240796,
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "SUPP.03.BY2O"
+            },
+            {
+              "method": "LEG-DR",
+              "config": "C4",
+              "value": 1.4264538540844323,
+              "metric": "heading_drift_deg_per_min",
+              "source_id": "MAIN.08.BY2O"
+            }
+          ],
+          "no_empty_panel": true
+        }
+      ]
+    }
+  ]
+}

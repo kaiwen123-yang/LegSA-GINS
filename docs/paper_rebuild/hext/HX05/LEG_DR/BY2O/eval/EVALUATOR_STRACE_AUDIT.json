@@ -1,0 +1,81 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-m",
+    "legsa_gins.paper_rebuild.hext.hx02_relative_pose_evaluation",
+    "--spec",
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/RUNS/BY2O/eval/SPEC.json"
+  ],
+  "environment": {
+    "GIT_OPTIONAL_LOCKS": "0",
+    "MKL_NUM_THREADS": "1",
+    "MPLBACKEND": "Agg",
+    "MPLCONFIGDIR": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/RUNS/BY2O/eval/OUTPUT/.matplotlib",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src",
+    "XDG_CACHE_HOME": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/RUNS/BY2O/eval/OUTPUT/.cache"
+  },
+  "execve_programs": [
+    "/usr/bin/python3"
+  ],
+  "exit_code": 0,
+  "failures": [],
+  "kind": "RELATIVE_POSE",
+  "module": "legsa_gins.paper_rebuild.hext.hx02_relative_pose_evaluation",
+  "passed": true,
+  "raw_open_count": 1,
+  "runtime_seconds": 2.585033638999448,
+  "spec_sha256": "d2e1bb8e4f40322a92bdbd973daac3f08e8fb723a922459dd286b6e19b13e9c1",
+  "strace_sha256": "ce4fb4829b0b53ccc017cd4f434c41bbbedaa5bd20787debd69254d286affb59",
+  "trace_open_count": 1,
+  "trace_open_records": [
+    {
+      "anonymous_pipe": false,
+      "flags": "O_RDONLY|O_CLOEXEC",
+      "lexical_path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv",
+      "path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv",
+      "pid": 18019,
+      "return_code": 3
+    }
+  ],
+  "trace_read_role": "registered_evaluator_child_only",
+  "write_scope": {
+    "allowed_anonymous_pipe_write_count": 0,
+    "allowed_anonymous_pipe_write_records": [],
+    "allowed_device_write_count": 0,
+    "allowed_device_write_records": [],
+    "clean_root_outside_run_write_count": 0,
+    "outside_run_write_open_count": 0,
+    "outside_run_write_open_records": [],
+    "pass": true,
+    "raw_write_open_count": 0,
+    "write_open_count": 2,
+    "write_open_records": [
+      {
+        "anonymous_pipe": false,
+        "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+        "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/RUNS/BY2O/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_LEG-DR.csv",
+        "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/RUNS/BY2O/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_LEG-DR.csv",
+        "pid": 18019,
+        "return_code": 3
+      },
+      {
+        "anonymous_pipe": false,
+        "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+        "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/RUNS/BY2O/eval/OUTPUT/RELATIVE_POSE_METRICS.json",
+        "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX05/RUNS/BY2O/eval/OUTPUT/RELATIVE_POSE_METRICS.json",
+        "pid": 18019,
+        "return_code": 3
+      }
+    ],
+    "write_outside_run_count": 0,
+    "write_scope_exceptions": [
+      "/dev/null",
+      "/dev/pts/*",
+      "kernel-identified anonymous pipe"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "sequence": "BY2",
+  "epochs": 63277,
+  "cache_sha256": "c169e26d66f35fe200bb17a695353cd2d751482df1cd97996a7a8afff8662065",
+  "raw_sha256": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278",
+  "integer_ns_match": true,
+  "integration_gaps": {
+    "unobserved_interval_count": 43,
+    "unobserved_duration_s": 0.2044345769999545,
+    "policy": "No velocity imputation; zero displacement contribution on unobserved intervals, explicitly incomplete if any."
+  },
+  "zero_contact_epochs": 30,
+  "NAV_placeholder_policy": "Velocity is serialized as zero where unobserved; integration retains NaN gaps. Bias and state_dimension zero mean not estimated.",
+  "C4_array_gate": {
+    "source_sha256": "70f85a3687d3d44b2795ad878ecdf3acbba461f513d44154bf19575eb97ba468",
+    "max_absolute_differences": {
+      "time_ns": 0.0,
+      "go2_rotation": 0.0,
+      "go2_rpy_rad": 0.0,
+      "leg_body_velocity": 0.0,
+      "leg_go2_position": 0.0,
+      "contact_mask": 0.0,
+      "source_start_line": 0.0
+    },
+    "tolerance": 1e-06,
+    "passed": true
+  }
+}
