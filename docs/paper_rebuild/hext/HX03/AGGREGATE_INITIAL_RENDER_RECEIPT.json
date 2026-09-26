@@ -1,0 +1,20 @@
+{
+  "files": {
+    "DEGRADATION_EXTERNAL_SUMMARY.csv": "b6c0f1790675fdd522fded2f8a171b96c5eea33247ca00d32ba3c1023e807a63",
+    "DEGRADATION_EXTERNAL_TABLE.csv": "db78b124bc568c94fa73ce07e412343215eb6d28c11018dbcd7022377bb62d44",
+    "DEGRADATION_EXTERNAL_TABLE_V2.csv": "3064fdbdc4ac99baf6ce815385feca5e9163f440cac93dac9bc057cdf4c745c7",
+    "DEGRADATION_PAIRED.csv": "3bce76a6dbcc38cca2128e093fa429f37f657b117532e28e9233fce3832eb1cc",
+    "HX03_RESULTS.md": "5d9430997f7eef1e4ef56be605c4f680bc108dfab508ee2ea7f3b27ac80c573e"
+  },
+  "legsa_input_tables": {
+    "ADDENDUM_TABLE_V3.csv": "82aaef841c4e62d13ce4c4a2625b063ec3ac02ffc379db835cf1452486c978bb",
+    "CORE_541_DISTRIBUTION_V3.csv": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39"
+  },
+  "paired_rows": 744,
+  "quantile_method": "numpy percentile default linear",
+  "reference_opens": 0,
+  "rows_v2": 396,
+  "rows_v3": 396,
+  "scientific_calls": 0,
+  "summary_rows": 186
+}

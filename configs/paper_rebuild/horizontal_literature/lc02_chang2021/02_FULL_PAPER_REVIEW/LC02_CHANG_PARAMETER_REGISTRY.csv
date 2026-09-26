@@ -1,0 +1,33 @@
+parameter,value,unit,location,scope,provenance,closure_status,limitation
+n,15,state elements,Eq1,method,PAPER_DIRECT,CLOSED,
+m,6,measurement elements,Eq3-4,method,PAPER_DIRECT,CLOSED,
+rho,0.95,dimensionless,page8 experiment,method experiment,PAPER_DIRECT,CLOSED_VALUE,"paper does not state nonfinite policy"
+N,40,epochs,page8 experiment and Eq20,method experiment,PAPER_DIRECT,CLOSED_VALUE,"first N-1 epoch policy absent"
+alpha_hat_1,22,dimensionless,page5,method design,PAPER_DIRECT,CLOSED_EMPIRICAL_VALUE,"derived from unspecified numerous trajectory data"
+alpha_hat_2,13,dimensionless,page5,method design,PAPER_DIRECT,CLOSED_EMPIRICAL_VALUE,"derived from unspecified numerous trajectory data"
+T11,10,dimensionless,Fig3,method design,PAPER_DIRECT,CLOSED_VISUAL_VALUE,"read from rendered plot"
+T12,30,dimensionless,Fig3,method design,PAPER_DIRECT,CLOSED_VISUAL_VALUE,"read from rendered plot"
+T21,10,dimensionless,Fig3,method design,PAPER_DIRECT,CLOSED_VISUAL_VALUE,"read from rendered plot"
+T22,20,dimensionless,Fig3,method design,PAPER_DIRECT,CLOSED_VISUAL_VALUE,"read from rendered plot"
+L1_small_breakpoints,5;15,dimensionless,Fig4,method design,PAPER_DIRECT,CLOSED_VISUAL_PIECES,"no analytic formula printed"
+L1_medium_breakpoints,5;15;25;35,dimensionless,Fig4,method design,PAPER_DIRECT,CLOSED_VISUAL_PIECES,"no analytic formula printed"
+L1_large_breakpoints,25;35,dimensionless,Fig4,method design,PAPER_DIRECT,CLOSED_VISUAL_PIECES,"no analytic formula printed"
+L2_small_breakpoints,5;15,dimensionless,Fig4,method design,PAPER_DIRECT,CLOSED_VISUAL_PIECES,"no analytic formula printed"
+L2_medium_breakpoints,5;15;25,dimensionless,Fig4,method design,PAPER_DIRECT,CLOSED_VISUAL_PIECES,"no analytic formula printed"
+L2_large_breakpoints,15;25,dimensionless,Fig4,method design,PAPER_DIRECT,CLOSED_VISUAL_PIECES,"no analytic formula printed"
+beta1_small,-0.28 L1 + 13,dimensionless,Eq26,method design,PAPER_DIRECT,CLOSED_CONSEQUENT,
+beta1_medium,-0.17 L1 + 6,dimensionless,Eq26,method design,PAPER_DIRECT,CLOSED_CONSEQUENT,
+beta1_large,1,dimensionless,Eq26,method design,PAPER_DIRECT,CLOSED_CONSEQUENT,
+beta2_small,-0.28 L2 + 18,dimensionless,Eq27,method design,PAPER_DIRECT,CLOSED_CONSEQUENT,
+beta2_medium,-0.15 L2 + 13,dimensionless,Eq27,method design,PAPER_DIRECT,CLOSED_CONSEQUENT,
+beta2_large,1,dimensionless,Eq27,method design,PAPER_DIRECT,CLOSED_CONSEQUENT,
+STCKF_FB_beta,4.5,dimensionless,page7,internal paper baseline,PAPER_DIRECT,CLOSED_PAPER_BASELINE,
+simulation_INS_rate,100,Hz,Table3,paper experiment,PAPER_DIRECT,CLOSED_PAPER_EXPERIMENT,
+simulation_GNSS_rate,10,Hz,Table3,paper experiment,PAPER_DIRECT,CLOSED_PAPER_EXPERIMENT,
+simulation_accelerometer_bias,100,ug,Table3,paper experiment,PAPER_DIRECT,CLOSED_PAPER_EXPERIMENT,
+simulation_accelerometer_random_walk,5,ug std,Table3,paper experiment,PAPER_DIRECT,CLOSED_PAPER_EXPERIMENT,
+simulation_gyro_bias,1,deg/hour,Table3,paper experiment,PAPER_DIRECT,CLOSED_PAPER_EXPERIMENT,
+simulation_gyro_random_walk,0.01,deg/hour std,Table3,paper experiment,PAPER_DIRECT,CLOSED_PAPER_EXPERIMENT,
+simulation_GNSS_velocity_noise,0.5,m/s std,Table3,paper experiment,PAPER_DIRECT,CLOSED_PAPER_EXPERIMENT,
+simulation_GNSS_position_noise,5,m std,Table3,paper experiment,PAPER_DIRECT,CLOSED_PAPER_EXPERIMENT,
+Q_R_initial_covariance_values,,mixed,not printed,method,CURRENTLY_UNKNOWN,NOT_CLOSED,"prevents exact initialization/noise reproduction"

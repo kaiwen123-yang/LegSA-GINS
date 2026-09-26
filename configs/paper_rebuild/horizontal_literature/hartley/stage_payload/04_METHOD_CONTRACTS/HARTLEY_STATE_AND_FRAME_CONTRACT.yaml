@@ -1,0 +1,119 @@
+schema_version: 1
+contract_id: LSE01_HARTLEY_STATE_AND_PAPER_FRAME
+contract_status: PAPER_STATE_AND_PLATFORM_FRAME_CLOSED_REAL_BY2_COMPLETE_RECORD_PREFIX
+
+paper_state:
+  source_type: PAPER_DIRECT
+  formulation: WORLD_CENTRIC_RIGHT_INVARIANT
+  rotation:
+    symbol: R_WB
+    meaning: ROTATION_FROM_BODY_OR_IMU_FRAME_TO_PAPER_WORLD_FRAME
+    active_vector_rule: vector_W_equals_R_WB_times_vector_B
+  velocity:
+    symbol: v
+    meaning: BODY_OR_IMU_ORIGIN_VELOCITY_EXPRESSED_IN_WORLD
+  position:
+    symbol: p
+    meaning: BODY_OR_IMU_ORIGIN_POSITION_EXPRESSED_IN_WORLD
+  contacts:
+    symbol: d_i
+    meaning: CONTACT_POINT_I_POSITION_EXPRESSED_IN_WORLD
+  imu_measurements:
+    gyroscope_frame: BODY_OR_IMU
+    accelerometer_frame: BODY_OR_IMU
+    accelerometer_semantics: SPECIFIC_FORCE_USED_AS_R_TIMES_A_PLUS_GRAVITY
+  forward_kinematics:
+    h_p_i: CONTACT_POSITION_RELATIVE_TO_BODY_EXPRESSED_IN_BODY
+    h_R_i: ROTATION_FROM_CONTACT_FRAME_TO_BODY_OR_IMU_FRAME
+  gravity:
+    symbol: g
+    frame: PAPER_WORLD
+    direction_role: DEFINES_UNOBSERVABLE_ROTATION_AXIS
+    numeric_vector:
+      source_type: OFFICIAL_CODE
+      value: [0.0, 0.0, -9.81]
+      unit: m/s^2
+      identity: RossHartley/invariant-ekf@ef16e8a1df72f9272111a488880e3fe9d161f59f
+      source_path: src/InEKF.cpp:43-52
+      convention: HARTLEY_LOCAL_WORLD_UP_WITH_GRAVITY_ALONG_NEGATIVE_Z
+      paper_boundary: NUMERIC_VECTOR_IS_AN_OFFICIAL_CODE_INSTANTIATION_NOT_A_PAPER_FROZEN_CONSTANT
+
+error_coordinates:
+  source_type: PAPER_DIRECT
+  right_invariant_group_error: eta_r_equals_X_bar_X_inverse
+  interpretation: ERROR_EXPRESSED_IN_WORLD_OR_SPATIAL_FRAME
+  ordering:
+    - xi_R
+    - xi_v
+    - xi_p
+    - xi_d_1_to_N
+    - zeta_g
+    - zeta_a
+  bias_error_frame: BODY_FRAME_ADDITIVE_PARAMETER_ERROR
+
+paper_transform_invariants:
+  rotation_matrix_requirements:
+    - determinant_plus_one
+    - orthonormal
+    - right_handed
+  round_trip_rule: R_transpose_times_R_equals_identity
+  contact_measurement_rule: h_p_equals_R_transpose_times_d_minus_p
+  augmentation_rule: d_equals_p_plus_R_times_h_p
+
+platform_mapping_boundary:
+  raw_imu_sensor_to_robot_body:
+    source_type: MAINTAINED_CODE_AND_BY2_COMPLETE_RECORD_PREFIX_INPUT_ONLY
+    value: SENSOR_TO_BODY_ACTIVE_RZRYRX_MINUS_1_0_0_DEG
+    failure_token: BLOCKED_LSE01_SENSOR_TO_BODY_FRAME_UNRESOLVED
+    output_frame: CORRECTED_ROBOT_BODY_FLU
+  robot_body_to_hartley_body:
+    source_type: BY2_COMPLETE_RECORD_PREFIX_INPUT_ONLY
+    value: IDENTITY_GO2_BODY_FLU_TO_HARTLEY_BODY_FLU_AFTER_INSTALLATION_CORRECTION
+    foot_order_native: [FR, FL, RR, RL]
+    foot_order_canonical: [FL, FR, RL, RR]
+    native_to_canonical_mapping: [1, 0, 3, 2]
+    foot_position_body_already_robot_body_flu: true
+    foot_position_body_receives_imu_installation_rotation: false
+  hartley_world_to_project_ned_reporting:
+    source_type: DECLARED_REPORTING_GAUGE_ONLY
+    value: PROPER_ROTATION_DIAG_1_MINUS1_MINUS1
+    absolute_north_observed: false
+    state_mapping: R_V_P_AND_CONTACT_WORLD_COMPONENTS_LEFT_MULTIPLIED_BY_DIAG_1_MINUS1_MINUS1
+    covariance_mapping: T_P_T_TRANSPOSE_WITH_WORLD_SPATIAL_Q_BLOCKS_AND_BODY_BIAS_IDENTITY_BLOCKS
+  imu_install_minus_1_0_0_deg_direction:
+    source_type: MAINTAINED_CODE_WITH_INPUT_ONLY_STATIONARY_SANITY
+    value: SENSOR_TO_BODY_ACTIVE_RZRYRX
+    inverse_selected: false
+    stationary_gravity_residual_selected_mps2: 0.20591299391339885
+    stationary_gravity_residual_inverse_mps2: 0.23197377843950862
+    level_body_comparison_role: CORROBORATION_ONLY_NOT_DIRECTION_SELECTION
+    direction_selection_source: MAINTAINED_SOFTWARE_SEMANTICS
+    gravity_aligned_initial_roll_deg: 0.8964552251045289
+    gravity_aligned_initial_pitch_deg: 0.8573929075977925
+    gravity_aligned_initial_yaw_role: ARBITRARY_UNOBSERVED_GAUGE
+    gravity_aligned_cancellation_residual_norm_mps2: 1.776493855757274e-15
+  data_identity: REAL_BY2_COMPLETE_RECORD_PREFIX_63277
+  data_status: REAL_BY2_COMPLETE_RECORD_PREFIX
+  raw_source_complete: false
+  complete_record_prefix_filter_eligible: true
+  forbidden_transform_selectors:
+    - GO2_QUATERNION
+    - GO2_RPY
+    - REFERENCE_TRACE
+    - FINAL_ODOMETRY_ERROR
+
+required_later_frame_tests:
+  - determinant_plus_one
+  - right_handedness
+  - round_trip
+  - stationary_specific_force_cancels_gravity
+  - known_axis_gyro_sign
+  - foot_position_side_and_sign_sanity
+
+h0_h2_paper_payload_execution:
+  frame_test_executed: true
+  by2_data_opened: true
+  reason: ADMITTED_FIELDS_ONLY_COMPLETE_RECORD_PREFIX_CONTRACT_AUDIT
+  filter_run: false
+  reference_opened: false
+  canonical_filter_eligible: true

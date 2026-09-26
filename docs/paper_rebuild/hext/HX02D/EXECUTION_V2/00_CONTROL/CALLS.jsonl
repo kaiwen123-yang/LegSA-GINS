@@ -1,0 +1,8 @@
+{"state": "CALL_INTENT", "role": "B_REFERENCE_FREE", "sequence": "BY2", "argv": ["strace", "-f", "-yy", "-s", "4096", "-e", "trace=openat,execve", "-o", "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2/B_OPENAT.strace", "/usr/bin/python3", "-m", "legsa_gins.paper_rebuild.hext.hx02d_reference_free", "--spec", "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2/SPEC.json"]}
+{"state": "CALL_TERMINAL", "role": "B_REFERENCE_FREE", "sequence": "BY2", "passed": true}
+{"state": "CALL_INTENT", "role": "C_REGISTERED", "sequence": "BY2", "module": "legsa_gins.paper_rebuild.hext.hx02d_reference_evaluation"}
+{"state": "CALL_TERMINAL", "role": "C_REGISTERED", "sequence": "BY2", "passed": true}
+{"state": "CALL_INTENT", "role": "B_REFERENCE_FREE", "sequence": "BY2O", "argv": ["strace", "-f", "-yy", "-s", "4096", "-e", "trace=openat,execve", "-o", "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2O/B_OPENAT.strace", "/usr/bin/python3", "-m", "legsa_gins.paper_rebuild.hext.hx02d_reference_free", "--spec", "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2O/SPEC.json"]}
+{"state": "CALL_TERMINAL", "role": "B_REFERENCE_FREE", "sequence": "BY2O", "passed": true}
+{"state": "CALL_INTENT", "role": "C_REGISTERED", "sequence": "BY2O", "module": "legsa_gins.paper_rebuild.hext.hx02d_reference_evaluation"}
+{"state": "CALL_TERMINAL", "role": "C_REGISTERED", "sequence": "BY2O", "passed": true}

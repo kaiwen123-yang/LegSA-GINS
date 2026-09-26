@@ -1,0 +1,142 @@
+{
+  "b_arrays": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2/OUTPUT/B_ARRAYS.npz",
+  "b_arrays_sha256": "70f85a3687d3d44b2795ad878ecdf3acbba461f513d44154bf19575eb97ba468",
+  "base_time": 1772784000.0,
+  "baseline_median_m": 0.356191491865984,
+  "leg_integration_gaps": {
+    "policy": "No velocity imputation; zero displacement contribution on unobserved intervals, explicitly incomplete if any.",
+    "unobserved_duration_s": 0.2044345769999545,
+    "unobserved_interval_count": 43
+  },
+  "original_metrics": {
+    "HARTLEY_LIT": {
+      "alignment": {
+        "epochs": 101,
+        "not_estimated": [
+          "roll",
+          "pitch",
+          "scale",
+          "time_offset"
+        ],
+        "per_epoch_yaw_offset_circular_std_deg": 1.4709033145961374,
+        "rule": "per branch: one least-squares yaw-about-gravity + 3-D translation on the first 10 s of the window from the branch's own output (HX-02 amendment 1); never shared, never re-fitted",
+        "translation_enu_m": [
+          0.19756757830209695,
+          0.41882487121724116,
+          -0.21565463750594274
+        ],
+        "window_seconds": [
+          66.0,
+          76.0
+        ],
+        "yaw_offset_deg": 88.03253843063193
+      },
+      "drift_definitions": {
+        "heading": "OLS slope (with intercept) of time-unwrapped wrap-safe NED yaw error versus time in minutes",
+        "position": "OLS slope (with intercept) of horizontal error norm versus cumulative reference horizontal path, x100"
+      },
+      "evaluation_status": "EVALUATED",
+      "heading_drift_deg_per_min": 31.940420283998627,
+      "horizontal_max_m": 125.61360741756796,
+      "horizontal_rmse_m": 53.399513950646686,
+      "nav_first_rel_s": 44.887078285217285,
+      "nav_last_rel_s": 350.0850489139557,
+      "nav_rows": 63277,
+      "position_drift_m_per_100m": 36.28141274476832,
+      "reference_path_length_m": 328.4713109046748,
+      "relative_pose_error_yaw_translation": {
+        "10s": {
+          "grid_step_ms": 100,
+          "pair_count": 2641,
+          "translation_rmse_m": 7.3178721582792905,
+          "yaw_rmse_deg": 11.478969117608559
+        },
+        "1s": {
+          "grid_step_ms": 100,
+          "pair_count": 2731,
+          "translation_rmse_m": 1.6460363480388944,
+          "yaw_rmse_deg": 2.5544456199796257
+        },
+        "5s": {
+          "grid_step_ms": 100,
+          "pair_count": 2691,
+          "translation_rmse_m": 4.917687859661914,
+          "yaw_rmse_deg": 7.535275666165606
+        }
+      },
+      "scored_epochs": 2741,
+      "unsupported_grid_epochs": 0,
+      "up_rmse_m": 4.157753795820694,
+      "yaw_rmse_deg": 65.4987306952787
+    },
+    "HARTLEY_S": {
+      "alignment": {
+        "epochs": 101,
+        "not_estimated": [
+          "roll",
+          "pitch",
+          "scale",
+          "time_offset"
+        ],
+        "per_epoch_yaw_offset_circular_std_deg": 3.8384157650812414,
+        "rule": "per branch: one least-squares yaw-about-gravity + 3-D translation on the first 10 s of the window from the branch's own output (HX-02 amendment 1); never shared, never re-fitted",
+        "translation_enu_m": [
+          0.2174026059017806,
+          0.4082729844007242,
+          -0.3230702342048703
+        ],
+        "window_seconds": [
+          66.0,
+          76.0
+        ],
+        "yaw_offset_deg": 87.46271775104383
+      },
+      "drift_definitions": {
+        "heading": "OLS slope (with intercept) of time-unwrapped wrap-safe NED yaw error versus time in minutes",
+        "position": "OLS slope (with intercept) of horizontal error norm versus cumulative reference horizontal path, x100"
+      },
+      "evaluation_status": "EVALUATED",
+      "heading_drift_deg_per_min": -101.19336396722751,
+      "horizontal_max_m": 138.25723235355554,
+      "horizontal_rmse_m": 84.1550245962943,
+      "nav_first_rel_s": 44.887078285217285,
+      "nav_last_rel_s": 350.0850489139557,
+      "nav_rows": 63277,
+      "position_drift_m_per_100m": 34.07743045460158,
+      "reference_path_length_m": 328.4713109046748,
+      "relative_pose_error_yaw_translation": {
+        "10s": {
+          "grid_step_ms": 100,
+          "pair_count": 2641,
+          "translation_rmse_m": 66.38929386492886,
+          "yaw_rmse_deg": 80.12418293501025
+        },
+        "1s": {
+          "grid_step_ms": 100,
+          "pair_count": 2731,
+          "translation_rmse_m": 14.864239932253312,
+          "yaw_rmse_deg": 14.406941244407923
+        },
+        "5s": {
+          "grid_step_ms": 100,
+          "pair_count": 2691,
+          "translation_rmse_m": 50.158870216590735,
+          "yaw_rmse_deg": 59.614796481930554
+        }
+      },
+      "scored_epochs": 2741,
+      "unsupported_grid_epochs": 0,
+      "up_rmse_m": 4.34380454274841,
+      "yaw_rmse_deg": 78.68073841771553
+    }
+  },
+  "outdir": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2/OUTPUT",
+  "reference_path_length_m": 328.4713109046748,
+  "sequence_id": "BY2",
+  "trace": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv",
+  "trace_sha256": "ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c",
+  "window": [
+    66.0,
+    340.0
+  ]
+}

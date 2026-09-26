@@ -1,0 +1,5 @@
+{
+  "message": "evaluator_returncode=1; reference must be opened exactly once, successfully and read-only; stderr tail: strace: test_ptrace_get_syscall_info: PTRACE_TRACEME: Operation not permitted\nstrace: ptrace(PTRACE_TRACEME, ...): Operation not permitted\n",
+  "native_calls": 0,
+  "utc": "2026-09-26T12:32:11.093938+00:00"
+}

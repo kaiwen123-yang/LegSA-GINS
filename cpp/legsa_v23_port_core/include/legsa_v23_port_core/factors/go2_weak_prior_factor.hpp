@@ -21,7 +21,7 @@ class Go2WeakPriorFactor {
   static bool isActive(const Go2AttitudeWeakPriorMeasurement& measurement);
   static std::vector<double> residual(const NavState& state,
                                       const Go2AttitudeWeakPriorMeasurement& measurement);
-  static Matrix designMatrix();
+  static Matrix designMatrix(const NavState& state);
   static Matrix covariance(const Go2AttitudeWeakPriorMeasurement& measurement,
                            const Go2AttitudeWeakPriorConfig& config);
   static double wrapRad(double value);

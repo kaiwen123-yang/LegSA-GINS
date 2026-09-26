@@ -1,0 +1,32 @@
+{
+  "EXT05C": {
+    "expected": {
+      "evaluator_nav_sha256": "5bdb0c4d8fa8959354f3e05e5d0418d9b31607dec5cad37945dd47ddfbb29695",
+      "h_rmse_m": "0.0877508129138417",
+      "source_nav_sha256": "915192d6fcefaf7bef33c4028b571d1b723f7e0759063e2955aebd3d1ee7ace8",
+      "up_rmse_m": "0.05646995229568549",
+      "yaw_p95_absolute_deg": "16.868495836757056",
+      "yaw_rmse_deg": "12.048641737808111"
+    },
+    "observed_nav": "915192d6fcefaf7bef33c4028b571d1b723f7e0759063e2955aebd3d1ee7ace8",
+    "observed_yaw": 12.048641737808111,
+    "passed": true
+  },
+  "LC01": {
+    "expected": {
+      "evaluator_nav_sha256": "0bea5169d8500015dff472f96ecfd02992b0d7208ad5baeaa5378273ee9056d1",
+      "h_rmse_m": "0.0975479714305497",
+      "source_nav_sha256": "ccd25c2e1309ba2870e57e2208f476a6b48eaba69f0d038f26be2f168bb2c695",
+      "up_rmse_m": "0.05066431825806066",
+      "yaw_p95_absolute_deg": "4.968141341576708",
+      "yaw_rmse_deg": "2.9948274600591076"
+    },
+    "observed_nav": "ccd25c2e1309ba2870e57e2208f476a6b48eaba69f0d038f26be2f168bb2c695",
+    "observed_yaw": 2.9948274600591076,
+    "passed": true
+  },
+  "LC01-BR_no_fault": {
+    "observed_nav": "ccd25c2e1309ba2870e57e2208f476a6b48eaba69f0d038f26be2f168bb2c695",
+    "passed": true
+  }
+}

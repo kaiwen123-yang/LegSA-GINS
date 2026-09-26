@@ -1,0 +1,143 @@
+schema_version: 2
+contract_id: HARTLEY_FUTURE_H5_IMU_PROFILE_CONTRACT
+contract_status: PREREGISTERED_NOT_EXECUTED
+h5_phase1_status: IMPLEMENTED_FIXTURE_VALIDATED_NOT_EXECUTED
+production_backend: HARTLEY_IJRR2020_REPORTED_BACKEND
+backend_mean: EXACT_EQ_50_GAMMA_0_1_2
+backend_transition: ANALYTICAL_RIGHT_INVARIANT_PHI_EQS_58_OR_60
+backend_process_covariance: PAPER_REPORTED_APPROXIMATION_EQ_61
+eq52_available_in_h5_runtime: false
+real_BY2_EQ52_run: false
+run_order:
+  - H5_PRIMARY_GO2_ALLAN_EQ61_FK10MM
+  - H5_FK05MM_SENSITIVITY
+  - H5_FK20MM_SENSITIVITY
+  - H5_PAPER_TABLE1_PROCESS_REGRESSION_WITH_GO2_FK_PROXY
+companion_runs_require_primary_gate: true
+run_identities:
+  H5_PRIMARY_GO2_ALLAN_EQ61_FK10MM:
+    execution_status: PREREGISTERED_NOT_EXECUTED
+    imu_profile: GO2_IMU_ALLAN_90MIN_RECOVERED_V1
+    imu_parameter_cpp_type: ContinuousNoiseDensity
+    imu_parameter_semantics: CONTINUOUS_AMPLITUDE_SPECTRAL_DENSITY
+    qc_parameter_cpp_type: ContinuousNoisePsd
+    process_cpp_type: H5Eq61NoisePolicy
+    process_policy: GO2_CONTINUOUS_IMU_PAPER_NATIVE_CONTACT_EQ61
+    four_imu_asds_squared_once: true
+    contact_process_std_m_per_s: 0.05
+    contact_enters_continuous_qc: false
+    contact_process_parameter:
+      cpp_type: PaperTable1DiscreteStd
+      field: contact_linear_velocity_noise_std_m_per_s
+      value: 0.05
+      unit: m/s
+      semantics: PAPER_NATIVE_DISCRETE_STD
+      adapter: HartleyInEkf::eq61MappedQbarGo2ImuPaperContact
+      qd_adapter: HartleyInEkf::eq61ProcessCovarianceGo2ImuPaperContact
+      mapping: SQUARE_ONCE_IN_QBAR_THEN_MULTIPLY_BY_DT_IN_EQ61
+      reinterpret_as_continuous_asd: false
+      enter_continuous_qc: false
+    sigma_fk_m: 0.010
+    fk_measurement_cpp_type: MeasurementStdMeters
+    fk_covariance_api: isotropicMeasurementCovariance
+    fk_enters_process_qc: false
+    fk_proxy_role: DECLARED_PHYSICAL_PROXY_MEASUREMENT_STD
+    paper_table1_joint_encoder_measurement_substitutes_fk_proxy: false
+    primary: true
+  H5_FK05MM_SENSITIVITY:
+    execution_status: PREREGISTERED_NOT_EXECUTED
+    imu_profile: GO2_IMU_ALLAN_90MIN_RECOVERED_V1
+    process_cpp_type: H5Eq61NoisePolicy
+    process_policy: GO2_CONTINUOUS_IMU_PAPER_NATIVE_CONTACT_EQ61
+    sigma_fk_m: 0.005
+    primary_sigma_fk_m: 0.010
+    covariance_m2: 2.5e-5_I3
+    primary: false
+  H5_FK20MM_SENSITIVITY:
+    execution_status: PREREGISTERED_NOT_EXECUTED
+    imu_profile: GO2_IMU_ALLAN_90MIN_RECOVERED_V1
+    process_cpp_type: H5Eq61NoisePolicy
+    process_policy: GO2_CONTINUOUS_IMU_PAPER_NATIVE_CONTACT_EQ61
+    sigma_fk_m: 0.020
+    primary_sigma_fk_m: 0.010
+    covariance_m2: 4.0e-4_I3
+    primary: false
+  H5_PAPER_TABLE1_PROCESS_REGRESSION_WITH_GO2_FK_PROXY:
+    execution_status: PREREGISTERED_NOT_EXECUTED
+    process_cpp_type: PaperTable1ProcessStd
+    process_policy: PAPER_TABLE1_FIVE_PROCESS_EQ61
+    paper_branch_label: PAPER_PROCESS_PARAMETER_REGRESSION
+    measurement_adapter_label: WITH_NONPAPER_GO2_FK_PROXY_MEASUREMENT_ADAPTER
+    process_values:
+      angular_velocity_noise_std_rad_per_s: 0.002
+      linear_acceleration_noise_std_m_per_s2: 0.04
+      gyroscope_bias_random_walk_std_rad_per_s2: 0.001
+      accelerometer_bias_random_walk_std_m_per_s3: 0.001
+      contact_linear_velocity_noise_std_m_per_s: 0.05
+    process_value_count: 5
+    sigma_fk_m: 0.010
+    historical_h3_h4_six_parameter_regression:
+      status: SYNTHETIC_AND_CASSIE_REGRESSION_ONLY
+      imu_profile: HARTLEY_IJRR2020_TABLE_1
+      imu_parameter_interface: PaperTable1DiscreteStd
+      reinterpret_as_continuous_asd: false
+      explicit_backend_adapter_required: true
+      qbar_adapter: HartleyInEkf::eq61MappedQbarPaperTable1
+      qd_adapter: HartleyInEkf::eq61ProcessCovariancePaperTable1
+      dt_aware_eq61_mapping: true
+      all_six_table1_stochastic_parameters_retained: true
+      stochastic_parameters:
+        angular_velocity_noise_std: {value: 0.002, unit: rad/s}
+        linear_acceleration_noise_std: {value: 0.04, unit: m/s^2}
+        gyroscope_bias_random_walk_std: {value: 0.001, unit: rad/s^2}
+        accelerometer_bias_random_walk_std: {value: 0.001, unit: m/s^3}
+        contact_linear_velocity_noise_std: {value: 0.05, unit: m/s}
+        joint_encoder_noise_std: {value: 1.0, unit: deg}
+      joint_encoder_measurement_parameter:
+        cpp_type: PaperTable1DiscreteStd
+        cpp_field: joint_encoder_noise_std_deg
+        value: 1.0
+        unit: deg
+        role: MEASUREMENT_R_ONLY
+        covariance_api: contactMeasurementCovarianceFromPaperTable1JointEncoder
+        foot_position_jacobian_unit: m/rad
+        covariance_mapping: R_EQUALS_J_SIGMA_RAD_SQUARED_I_J_TRANSPOSE
+        no_deg_to_meter_scalar: true
+    primary: false
+fk_proxy_semantics:
+  h0_h2_repeatability_result:
+    role: GO2_FK_PROXY_REPEATABILITY_LOWER_BOUND
+    approximate_covariance_m2: 1.0e-8_I3
+    future_filter_primary: false
+  physical_proxy_covariance:
+    interface: MeasurementStdMeters
+    sigma_candidates_m: [0.005, 0.010, 0.020]
+    primary_sigma_m: 0.010
+    paper_table1_encoder_substitution_allowed: false
+  selection_using_reference_accuracy: false
+  selection_using_final_odometry: false
+joint_encoder_boundary:
+  value_deg: 1.0
+  status: SYNTHETIC_AND_CASSIE_REGRESSION_ONLY
+  by2_applicability: NOT_APPLICABLE_TO_BY2_WITHOUT_RAW_JOINTS_AND_JACOBIAN
+  h5_runtime_field: false
+  synthetic_jacobian_allowed_for_real_by2: false
+  degree_to_meter_scalar_allowed: false
+selection_and_execution_boundary:
+  branch_selected_using_reference_accuracy: false
+  real_BY2_navigation_authorized_in_h3_h4: false
+  data_mode: real_by2_raw
+  real_BY2_filter_run_count: 0
+  gauge_ensemble_real_run_count: 0
+  reference_open_count: 0
+  ext06_run_count: 0
+  canonical541_run_count: 0
+  h5_execution_authorization: HUMAN_AUTHORIZATION_REQUIRED
+  trace_used_online: false
+  imputation_used: false
+  interpolation_used: false
+  ready_for_real_by2_h5: false
+  h3_h4_external_stage_publication: true
+  h3_h4_external_stage_hash_parity_verified: true
+  h5_external_stage_publication: false
+  h5_external_stage_hash_parity_verified: false

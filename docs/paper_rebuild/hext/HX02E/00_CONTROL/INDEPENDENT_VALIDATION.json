@@ -1,0 +1,134 @@
+{
+  "status": "PASS",
+  "runs": [
+    {
+      "run": "BY2__HARTLEY_OFFICIAL__OFF-LIT__C00",
+      "passed": true,
+      "metric_recalculation_max_abs_error": 2.842170943040401e-14,
+      "metric_fields_checked": [
+        "horizontal_rmse_m",
+        "up_rmse_m",
+        "yaw_rmse_deg",
+        "horizontal_max_m",
+        "reference_path_length_m",
+        "position_drift_m_per_100m",
+        "heading_drift_deg_per_min"
+      ],
+      "rpe_pair_counts_checked": [
+        1,
+        5,
+        10
+      ],
+      "native_rows": 63277,
+      "initial_position_and_yaw_zero": true
+    },
+    {
+      "run": "BY2__HARTLEY_OFFICIAL__OFF-DEF__C00",
+      "passed": true,
+      "metric_recalculation_max_abs_error": 7.105427357601002e-15,
+      "metric_fields_checked": [
+        "horizontal_rmse_m",
+        "up_rmse_m",
+        "yaw_rmse_deg",
+        "horizontal_max_m",
+        "reference_path_length_m",
+        "position_drift_m_per_100m",
+        "heading_drift_deg_per_min"
+      ],
+      "rpe_pair_counts_checked": [
+        1,
+        5,
+        10
+      ],
+      "native_rows": 63277,
+      "initial_position_and_yaw_zero": true
+    },
+    {
+      "run": "BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START",
+      "passed": true,
+      "metric_recalculation_max_abs_error": 1.4210854715202004e-14,
+      "metric_fields_checked": [
+        "horizontal_rmse_m",
+        "up_rmse_m",
+        "yaw_rmse_deg",
+        "horizontal_max_m",
+        "reference_path_length_m",
+        "position_drift_m_per_100m",
+        "heading_drift_deg_per_min"
+      ],
+      "rpe_pair_counts_checked": [
+        1,
+        5,
+        10
+      ],
+      "native_rows": 60541,
+      "initial_position_and_yaw_zero": true
+    },
+    {
+      "run": "BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START",
+      "passed": true,
+      "metric_recalculation_max_abs_error": 1.0658141036401503e-14,
+      "metric_fields_checked": [
+        "horizontal_rmse_m",
+        "up_rmse_m",
+        "yaw_rmse_deg",
+        "horizontal_max_m",
+        "reference_path_length_m",
+        "position_drift_m_per_100m",
+        "heading_drift_deg_per_min"
+      ],
+      "rpe_pair_counts_checked": [
+        1,
+        5,
+        10
+      ],
+      "native_rows": 60541,
+      "initial_position_and_yaw_zero": true
+    },
+    {
+      "run": "BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START",
+      "passed": true,
+      "metric_recalculation_max_abs_error": 1.7763568394002505e-14,
+      "metric_fields_checked": [
+        "horizontal_rmse_m",
+        "up_rmse_m",
+        "yaw_rmse_deg",
+        "horizontal_max_m",
+        "reference_path_length_m",
+        "position_drift_m_per_100m",
+        "heading_drift_deg_per_min"
+      ],
+      "rpe_pair_counts_checked": [
+        1,
+        5,
+        10
+      ],
+      "native_rows": 95859,
+      "initial_position_and_yaw_zero": true
+    },
+    {
+      "run": "BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START",
+      "passed": true,
+      "metric_recalculation_max_abs_error": 7.105427357601002e-15,
+      "metric_fields_checked": [
+        "horizontal_rmse_m",
+        "up_rmse_m",
+        "yaw_rmse_deg",
+        "horizontal_max_m",
+        "reference_path_length_m",
+        "position_drift_m_per_100m",
+        "heading_drift_deg_per_min"
+      ],
+      "rpe_pair_counts_checked": [
+        1,
+        5,
+        10
+      ],
+      "native_rows": 95859,
+      "initial_position_and_yaw_zero": true
+    }
+  ],
+  "table_rows": 96,
+  "native_and_evaluator_intents": 6,
+  "reference_opened_by_validation": false
+}

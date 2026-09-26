@@ -1,0 +1,150 @@
+{
+  "BY2_HARTLEY_S": {
+    "components": {
+      "raw_sensor_z_integral": {
+        "cumulative_end_minus_start_deg": 402.92460461165865,
+        "ols_rate_deg_per_min": 75.65454105729556
+      },
+      "installation_and_3d_rotation": {
+        "cumulative_end_minus_start_deg": -1.3662212129945506,
+        "ols_rate_deg_per_min": -0.4849510524504135
+      },
+      "saved_gyro_bias_effect": {
+        "cumulative_end_minus_start_deg": -121.09513045236153,
+        "ols_rate_deg_per_min": -56.324419283150405
+      },
+      "contact_update_rotation_effect": {
+        "cumulative_end_minus_start_deg": 705.2461844677111,
+        "ols_rate_deg_per_min": 153.73582327006886
+      },
+      "actual_native_yaw_increment": {
+        "cumulative_end_minus_start_deg": 985.7094374140098,
+        "ols_rate_deg_per_min": 172.58099399176243
+      }
+    },
+    "exact_increment_identity_max_abs_deg": 1.1368683772161603e-13,
+    "source": {
+      "arrays": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2/OUTPUT/B_ARRAYS.npz",
+      "cache": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/01_INPUT_PINS/HARTLEY/BY2/H5_INPUT_CACHE.bin",
+      "native_step_order": "run_h5.cpp:430-443 previous IMU propagate, then current contact lifecycle; backend.cpp:1197-1211 changes R and gyro bias"
+    },
+    "correlations": {
+      "update_increment_vs_contact_switch": -0.013085202627518937,
+      "abs_update_increment_vs_contact_switch": -0.030990657888011388
+    },
+    "scope": "Algebraic per-interval comparison to saved states; not a propagated trajectory or filter execution."
+  },
+  "BY2_HARTLEY_LIT": {
+    "components": {
+      "raw_sensor_z_integral": {
+        "cumulative_end_minus_start_deg": 402.92460461165865,
+        "ols_rate_deg_per_min": 75.65454105729556
+      },
+      "installation_and_3d_rotation": {
+        "cumulative_end_minus_start_deg": -0.16895166571247455,
+        "ols_rate_deg_per_min": -0.10328635660561386
+      },
+      "saved_gyro_bias_effect": {
+        "cumulative_end_minus_start_deg": -104.56361176481516,
+        "ols_rate_deg_per_min": -22.95414255606232
+      },
+      "contact_update_rotation_effect": {
+        "cumulative_end_minus_start_deg": -39.68560106564291,
+        "ols_rate_deg_per_min": -12.289205674057555
+      },
+      "actual_native_yaw_increment": {
+        "cumulative_end_minus_start_deg": 258.5064401154867,
+        "ols_rate_deg_per_min": 40.30790647057011
+      }
+    },
+    "exact_increment_identity_max_abs_deg": 8.526512829121202e-14,
+    "source": {
+      "arrays": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2/OUTPUT/B_ARRAYS.npz",
+      "cache": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/01_INPUT_PINS/HARTLEY/BY2/H5_INPUT_CACHE.bin",
+      "native_step_order": "run_h5.cpp:430-443 previous IMU propagate, then current contact lifecycle; backend.cpp:1197-1211 changes R and gyro bias"
+    },
+    "correlations": {
+      "update_increment_vs_contact_switch": 0.03643592375681825,
+      "abs_update_increment_vs_contact_switch": 0.15584290316931704
+    },
+    "scope": "Algebraic per-interval comparison to saved states; not a propagated trajectory or filter execution."
+  },
+  "BY2_leg_gap_window": {
+    "intervals": 43,
+    "duration_s": 0.2044345769999545
+  },
+  "BY2O_HARTLEY_S": {
+    "components": {
+      "raw_sensor_z_integral": {
+        "cumulative_end_minus_start_deg": 390.8115786159484,
+        "ols_rate_deg_per_min": 48.979050662439505
+      },
+      "installation_and_3d_rotation": {
+        "cumulative_end_minus_start_deg": -3.754690732204236,
+        "ols_rate_deg_per_min": -0.5750971732085772
+      },
+      "saved_gyro_bias_effect": {
+        "cumulative_end_minus_start_deg": -1196.7603247555094,
+        "ols_rate_deg_per_min": -185.17150364381322
+      },
+      "contact_update_rotation_effect": {
+        "cumulative_end_minus_start_deg": -1877.4867696795502,
+        "ols_rate_deg_per_min": -311.1630318278263
+      },
+      "actual_native_yaw_increment": {
+        "cumulative_end_minus_start_deg": -2687.190206551322,
+        "ols_rate_deg_per_min": -447.9305819824082
+      }
+    },
+    "exact_increment_identity_max_abs_deg": 8.526512829121202e-14,
+    "source": {
+      "arrays": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2O/OUTPUT/B_ARRAYS.npz",
+      "cache": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/01_INPUT_PINS/HARTLEY/BY2O/H5_INPUT_CACHE.bin",
+      "native_step_order": "run_h5.cpp:430-443 previous IMU propagate, then current contact lifecycle; backend.cpp:1197-1211 changes R and gyro bias"
+    },
+    "correlations": {
+      "update_increment_vs_contact_switch": 0.0020676523088552974,
+      "abs_update_increment_vs_contact_switch": -0.0024611294282955976
+    },
+    "scope": "Algebraic per-interval comparison to saved states; not a propagated trajectory or filter execution."
+  },
+  "BY2O_HARTLEY_LIT": {
+    "components": {
+      "raw_sensor_z_integral": {
+        "cumulative_end_minus_start_deg": 390.8115786159484,
+        "ols_rate_deg_per_min": 48.979050662439505
+      },
+      "installation_and_3d_rotation": {
+        "cumulative_end_minus_start_deg": 0.4701667187456191,
+        "ols_rate_deg_per_min": 0.13493422916907633
+      },
+      "saved_gyro_bias_effect": {
+        "cumulative_end_minus_start_deg": -134.36367301546625,
+        "ols_rate_deg_per_min": -24.986434553071227
+      },
+      "contact_update_rotation_effect": {
+        "cumulative_end_minus_start_deg": -35.760935575069425,
+        "ols_rate_deg_per_min": 8.891716394585856
+      },
+      "actual_native_yaw_increment": {
+        "cumulative_end_minus_start_deg": 221.15713674415576,
+        "ols_rate_deg_per_min": 33.019266733122734
+      }
+    },
+    "exact_increment_identity_max_abs_deg": 5.684341886080802e-14,
+    "source": {
+      "arrays": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2O/OUTPUT/B_ARRAYS.npz",
+      "cache": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/01_INPUT_PINS/HARTLEY/BY2O/H5_INPUT_CACHE.bin",
+      "native_step_order": "run_h5.cpp:430-443 previous IMU propagate, then current contact lifecycle; backend.cpp:1197-1211 changes R and gyro bias"
+    },
+    "correlations": {
+      "update_increment_vs_contact_switch": 0.01597768051723485,
+      "abs_update_increment_vs_contact_switch": 0.10241415662450486
+    },
+    "scope": "Algebraic per-interval comparison to saved states; not a propagated trajectory or filter execution."
+  },
+  "BY2O_leg_gap_window": {
+    "intervals": 23,
+    "duration_s": 0.11567400300005204
+  }
+}

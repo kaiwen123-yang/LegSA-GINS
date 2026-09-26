@@ -1,0 +1,14 @@
+{
+  "status": "TRANSPORT_STARTUP_INTERRUPTED_BEFORE_SCRIPT_OPEN",
+  "observed": "Process no longer present; retained strace contains only Python execve and dynamic-loader library opens; no execution script open, call ledger, run directory or reference access",
+  "termination_cause": "UNAVAILABLE",
+  "real_native_calls": 0,
+  "reference_evaluator_calls": 0,
+  "source_changed": false,
+  "retained_sha256": {
+    "CONTROLLER_OPENAT.strace": "80f66c789ed3c42563045e29b96b8fed19172c4fdc70e2d019e622416167c72a",
+    "controller_stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "controller_stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "continuation": "Same frozen code via independent tmux session; no scientific run repeated"
+}

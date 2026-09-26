@@ -64,6 +64,8 @@ class GIEngine {
   const std::vector<double>& getCovariance() const;
   double timestamp() const;
   std::size_t propagationCount() const;
+  std::size_t covHealthFailCount() const;
+  double covHealthFirstFailureTime() const;
   std::size_t updateCount() const;
   std::size_t positionUpdateCount() const;
   std::size_t velocityUpdateCount() const;
@@ -95,6 +97,9 @@ class GIEngine {
   source_aware::SourceAwareRuntimeStats sourceAwareStats() const;
   source_aware::QualityStateRuntimeStats qualityStateStats() const;
   void writeSourceAwareTrace(const std::string& output_dir) const;
+  const Baseline3dCounts& baseline3dCounts() const { return baseline3d_counts_; }
+  const std::vector<Baseline3dDiagnostics>& baseline3dDiagnostics() const { return baseline3d_diagnostics_; }
+  void writeBaseline3dDiagnostics(const std::string& output_dir) const;
 
  private:
   void initializeCovariance();
@@ -107,6 +112,8 @@ class GIEngine {
   void applyVelocityUpdate(GnssData& gnss);
   void applyYawUpdate(GnssData& gnss);
   void applyBasicDualYawUpdate(GnssData& gnss);
+  void applyBaseline3dUpdate(const GnssData& gnss, bool basic,
+                             const std::string& qa_action, double qa_R_scale);
   void applyRawDopplerUpdateForTime(double update_time);
   void applyGo2AttitudeWeakPriorForTime(double update_time);
   void applyGo2VelocityDiagnosticPriorForTime(double update_time);
@@ -136,6 +143,8 @@ class GIEngine {
   std::vector<double> dx_;
   double timestamp_ = 0.0;
   std::size_t propagation_count_ = 0;
+  std::size_t cov_health_fail_count_ = 0;
+  double cov_health_first_failure_time_ = -1.0;
   std::size_t update_count_ = 0;
   std::size_t position_update_count_ = 0;
   std::size_t velocity_update_count_ = 0;
@@ -143,6 +152,8 @@ class GIEngine {
   std::size_t yaw_normal_count_ = 0;
   std::size_t yaw_downweight_count_ = 0;
   std::size_t yaw_reject_count_ = 0;
+  Baseline3dCounts baseline3d_counts_;
+  std::vector<Baseline3dDiagnostics> baseline3d_diagnostics_;
   std::size_t source_aware_evaluation_count_ = 0;
   std::size_t source_aware_weight_changed_count_ = 0;
   std::vector<RawDopplerVelocityMeasurement> raw_doppler_measurements_;

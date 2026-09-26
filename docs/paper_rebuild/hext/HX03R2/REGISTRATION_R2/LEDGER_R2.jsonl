@@ -1,0 +1,29 @@
+{"available_bytes": {"/mnt/e": 128405749760, "/mnt/g": 44538527744}, "event": "DISK_GUARD", "scratch_bytes": 969, "utc": "2026-09-26T12:32:10.875312+00:00"}
+{"event": "RESERVED", "run_id": "BY2__LC01__LIT__C00__NA", "slot_id": "BY2__LC01__LIT__C00__NA__v3", "utc": "2026-09-26T12:32:10.992100+00:00", "validation": true, "version": "v3"}
+{"event": "HARD_STOP", "message": "evaluator_returncode=1; reference must be opened exactly once, successfully and read-only; stderr tail: strace: test_ptrace_get_syscall_info: PTRACE_TRACEME: Operation not permitted\nstrace: ptrace(PTRACE_TRACEME, ...): Operation not permitted\n", "slot_id": "BY2__LC01__LIT__C00__NA__v3", "utc": "2026-09-26T12:32:11.082025+00:00"}
+{"utc": "2026-09-26T12:33:30.369310+00:00", "event": "PREEXEC_NOT_STARTED", "slot_id": "BY2__LC01__LIT__C00__NA__v3", "evidence": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX03R2_AUDIT_REEVAL/00_CONTROL/PREEXEC_FAILURE_01_R2/DISPOSITION_R2.json", "proof": "no execve/openat, no OUTPUT, exact PTRACE_TRACEME refusal"}
+{"available_bytes": {"/mnt/e": 128405749760, "/mnt/g": 44535119872}, "event": "DISK_GUARD", "scratch_bytes": 969, "utc": "2026-09-26T12:33:31.387905+00:00"}
+{"event": "RESERVED", "run_id": "BY2__LC01__LIT__C00__NA", "slot_id": "BY2__LC01__LIT__C00__NA__v3", "utc": "2026-09-26T12:33:31.531559+00:00", "validation": true, "version": "v3"}
+{"event": "SCRATCH_DELETE_INTENT", "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03R2/RUNS/BY2__LC01__LIT__C00__NA__v3", "slot_id": "BY2__LC01__LIT__C00__NA__v3", "utc": "2026-09-26T12:33:36.868842+00:00"}
+{"event": "SCRATCH_DELETED", "slot_id": "BY2__LC01__LIT__C00__NA__v3", "utc": "2026-09-26T12:33:36.878939+00:00"}
+{"audit_status_R2": "PASS", "event": "ARCHIVED", "runtime_seconds": 3.294527285001095, "slot_id": "BY2__LC01__LIT__C00__NA__v3", "trace_open_count": 1, "utc": "2026-09-26T12:33:36.883742+00:00", "validation": true}
+{"event": "RESERVED", "run_id": "BY2__LC01__LIT__C00__NA", "slot_id": "BY2__LC01__LIT__C00__NA__v2", "utc": "2026-09-26T12:33:37.004674+00:00", "validation": true, "version": "v2"}
+{"event": "SCRATCH_DELETE_INTENT", "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03R2/RUNS/BY2__LC01__LIT__C00__NA__v2", "slot_id": "BY2__LC01__LIT__C00__NA__v2", "utc": "2026-09-26T12:33:41.958089+00:00"}
+{"event": "SCRATCH_DELETED", "slot_id": "BY2__LC01__LIT__C00__NA__v2", "utc": "2026-09-26T12:33:41.965836+00:00"}
+{"audit_status_R2": "PASS", "event": "ARCHIVED", "runtime_seconds": 2.825279385000613, "slot_id": "BY2__LC01__LIT__C00__NA__v2", "trace_open_count": 1, "utc": "2026-09-26T12:33:41.970468+00:00", "validation": true}
+{"event": "RESERVED", "run_id": "BY2__EXT05C__LIT__C00__NA", "slot_id": "BY2__EXT05C__LIT__C00__NA__v3", "utc": "2026-09-26T12:33:42.109079+00:00", "validation": true, "version": "v3"}
+{"event": "SCRATCH_DELETE_INTENT", "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03R2/RUNS/BY2__EXT05C__LIT__C00__NA__v3", "slot_id": "BY2__EXT05C__LIT__C00__NA__v3", "utc": "2026-09-26T12:33:47.861435+00:00"}
+{"event": "SCRATCH_DELETED", "slot_id": "BY2__EXT05C__LIT__C00__NA__v3", "utc": "2026-09-26T12:33:47.870380+00:00"}
+{"audit_status_R2": "PASS", "event": "ARCHIVED", "runtime_seconds": 3.147387601000446, "slot_id": "BY2__EXT05C__LIT__C00__NA__v3", "trace_open_count": 1, "utc": "2026-09-26T12:33:47.875242+00:00", "validation": true}
+{"event": "RESERVED", "run_id": "BY2__EXT05C__LIT__C00__NA", "slot_id": "BY2__EXT05C__LIT__C00__NA__v2", "utc": "2026-09-26T12:33:48.036017+00:00", "validation": true, "version": "v2"}
+{"event": "SCRATCH_DELETE_INTENT", "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03R2/RUNS/BY2__EXT05C__LIT__C00__NA__v2", "slot_id": "BY2__EXT05C__LIT__C00__NA__v2", "utc": "2026-09-26T12:33:55.654161+00:00"}
+{"event": "SCRATCH_DELETED", "slot_id": "BY2__EXT05C__LIT__C00__NA__v2", "utc": "2026-09-26T12:33:55.662782+00:00"}
+{"audit_status_R2": "PASS", "event": "ARCHIVED", "runtime_seconds": 3.132201967000583, "slot_id": "BY2__EXT05C__LIT__C00__NA__v2", "trace_open_count": 1, "utc": "2026-09-26T12:33:55.667474+00:00", "validation": true}
+{"event": "RESERVED", "run_id": "BY2__LC01__LIT__D04_seed_00__seed_00", "slot_id": "BY2__LC01__LIT__D04_seed_00__seed_00__v3", "utc": "2026-09-26T12:33:55.799469+00:00", "validation": true, "version": "v3"}
+{"event": "SCRATCH_DELETE_INTENT", "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03R2/RUNS/BY2__LC01__LIT__D04_seed_00__seed_00__v3", "slot_id": "BY2__LC01__LIT__D04_seed_00__seed_00__v3", "utc": "2026-09-26T12:34:01.427361+00:00"}
+{"event": "SCRATCH_DELETED", "slot_id": "BY2__LC01__LIT__D04_seed_00__seed_00__v3", "utc": "2026-09-26T12:34:01.435932+00:00"}
+{"audit_status_R2": "PASS", "event": "ARCHIVED", "runtime_seconds": 3.2750355410007614, "slot_id": "BY2__LC01__LIT__D04_seed_00__seed_00__v3", "trace_open_count": 1, "utc": "2026-09-26T12:34:01.440776+00:00", "validation": true}
+{"event": "RESERVED", "run_id": "BY2__EXT05C__LIT__D62_20s_seed_00__seed_00", "slot_id": "BY2__EXT05C__LIT__D62_20s_seed_00__seed_00__v3", "utc": "2026-09-26T12:34:01.563300+00:00", "validation": true, "version": "v3"}
+{"event": "SCRATCH_DELETE_INTENT", "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03R2/RUNS/BY2__EXT05C__LIT__D62_20s_seed_00__seed_00__v3", "slot_id": "BY2__EXT05C__LIT__D62_20s_seed_00__seed_00__v3", "utc": "2026-09-26T12:34:07.116104+00:00"}
+{"event": "SCRATCH_DELETED", "slot_id": "BY2__EXT05C__LIT__D62_20s_seed_00__seed_00__v3", "utc": "2026-09-26T12:34:07.125424+00:00"}
+{"audit_status_R2": "PASS", "event": "ARCHIVED", "runtime_seconds": 3.3799791680012277, "slot_id": "BY2__EXT05C__LIT__D62_20s_seed_00__seed_00__v3", "trace_open_count": 1, "utc": "2026-09-26T12:34:07.130472+00:00", "validation": true}

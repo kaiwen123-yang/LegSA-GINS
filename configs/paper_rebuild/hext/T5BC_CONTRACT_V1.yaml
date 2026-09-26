@@ -1,0 +1,399 @@
+schema_version: 1
+contract_version: '1.0'
+task: T5bc
+stage_id: CLEAN7_T5BC_V3_CANDIDATE_PILOT
+state: HUMAN_AUTHORIZED_PREREGISTRATION
+preregistered: true
+execution_ready: true
+code_freeze: null
+start_commit: 404b252eba9f87941b4c93a79deff76fcfa730b5
+human_authorization: 'T5bc prompt 2026-09-19: 261 native / 518 evaluator maximum; two commits and pushes; bookkeeping
+  conflicts adjudicated in appendix.'
+claim_scope: SENSITIVITY_LIMITATIONS_AND_V3_DECISION_RECORD_ONLY
+protocol_v21_rows_replaced: 0
+output_root: <CLEAN_ROOT>/stages/CLEAN7_T5BC_V3_CANDIDATE_PILOT
+scratch_root: <T5BC_SCRATCH>
+handoff: <HANDOFF_ROOT>/t5bc_v3_candidate_pilot_handoff.zip
+output_directories:
+- 01_CALIBRATION
+- 02_IDENTITY_GATE
+- 03_PROVIDER_TABLES
+- 04_NATIVE_C00_SEQ
+- 05_NATIVE_SUBSET61
+- 06_EVAL/v3
+- 06_EVAL/v2
+- 07_AGGREGATE
+- 08_FIGURES
+- 09_HANDOFF
+budget:
+  sequence_native: 15
+  subset_native: 244
+  subset_N: 61
+  matrix_native: 259
+  identity_native: 2
+  native_total: 261
+  evaluator: 518
+  identity_evaluator: 0
+  identity_comparable_product: NAV_10HZ.csv.gz
+  evaluator_versions:
+  - v3
+  - v2
+  evaluator_primary: v3
+  trace_opens_per_evaluator_child: 1
+  trace_opens_outside_evaluator_child: 0
+  parameter_search: 0
+  reservation: Durable no-repeat reservation before each real invocation; no automatic native/evaluator retry.
+matrix:
+  sequences:
+  - BY2
+  - BY2H
+  - BY2O
+  scalar:
+    variants:
+    - R5SIGMA
+    - R5W
+    configurations:
+    - F04
+    binary: FROZEN_V21
+  baseline3d:
+    variant: B3
+    configurations:
+    - F02
+    - A04
+    - F04
+    display_configurations:
+    - F02_prime
+    - A04_prime
+    - F04_prime
+    binary: T5BC_CANDIDATE
+  subset:
+    sequence: BY2
+    variants:
+    - R5
+    - R5SIGMA
+    - R5W
+    - B3
+    configuration: F04
+    case_ids: &id001
+    - C00_clean_normal
+    - D01_seed_00
+    - D02_seed_00
+    - D03_seed_00
+    - D04_seed_00
+    - D05_seed_00
+    - D06_seed_00
+    - D07_seed_00
+    - D08_seed_00
+    - D09_seed_00
+    - D10_seed_00
+    - D11_seed_00
+    - D12_seed_00
+    - D13_seed_00
+    - D14_seed_00
+    - D15_seed_00
+    - D16_seed_00
+    - D17_seed_00
+    - D18_seed_00
+    - D19_seed_00
+    - D20_seed_00
+    - D21_seed_00
+    - D22_seed_00
+    - D23_seed_00
+    - D24_seed_00
+    - D25_seed_00
+    - D26_seed_00
+    - D27_seed_00
+    - D28_seed_00
+    - D29_seed_00
+    - D30_seed_00
+    - D31_seed_00
+    - D32_seed_00
+    - D33_seed_00
+    - D34_seed_00
+    - D35_seed_00
+    - D36_seed_00
+    - D37_seed_00
+    - D38_seed_00
+    - D39_seed_00
+    - D40_seed_00
+    - D41_seed_00
+    - D42_seed_00
+    - D43_seed_00
+    - D44_seed_00
+    - D45_seed_00
+    - D46_seed_00
+    - D47_seed_00
+    - D48_seed_00
+    - D49_seed_00
+    - D50_seed_00
+    - D51_seed_00
+    - D52_seed_00
+    - D53_seed_00
+    - D54_seed_00
+    - D55_seed_00
+    - D56_seed_00
+    - D57_seed_00
+    - D58_seed_00
+    - D59_seed_00
+    - D60_seed_00
+  identity:
+    sequence: BY2
+    case: C00_clean_normal
+    configurations:
+    - F02
+    - F04
+    binary: T5BC_CANDIDATE
+    baseline3d: false
+frozen:
+  source_index:
+    path: configs/paper_rebuild/hext/T5BC_FROZEN_SOURCE_INDEX.yaml
+    sha256: aa95097353bd10d810cadc50cf22466c54df01b99a2da9339521089d70a160e3
+    scope: Nine sequence configs/echoes; all 61 exact frozen F04 case configs/providers/archive and terminal receipts;
+      D37 echo witness; T5a R5 and literature comparator pins.
+  executable:
+    path: <CODE_ROOT>/build/p13_v21_cpp/legsa_v23_port_core_demo
+    sha256: 96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c
+  evaluator_sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  evaluator_path: <CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py
+  heading_conversion:
+    path: src/legsa_gins/input_generation/status_yaw_builder.py
+    sha256: 4435dd71593b1447152986ab91e2fe0394177470791a4c09815a851b75504193
+  sequence_tables:
+    root: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE_SEQUENCES
+    filename: UNIQUE_EVALUATION_RESULTS.csv
+    v3_sha256: e26dfcd830d6c711ffbb7debd68293fbf7b7ea28240e16bce582381b61ea6a0b
+    v2_sha256: 6c5a165eaf68bf762cbc803466b4496a5b522dba968785115db9d0338990044d
+  core_v3_table:
+    path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE/v3/UNIQUE_EVALUATION_RESULTS.csv
+    sha256: 45054701213cedb2057523c6f4706dfebd170ccea824bc882e8d281653f892d5
+  original_render_manifest_sha256: 800df76ad82b68e3fca7aded30081f6d1ad01241175978baf440c9e0f290dd4e
+  identity_nav_10hz_sha256:
+    BY2_F02: ff31bf5a4b7004eb4ce5e91429ecf2e55586dc591bf01efcfa2fd9a99f740512
+    BY2_F04: c0292d7b307c3a920e29612a7685d303a6a13a1bf19588459492f535318f3701
+  baseline_median_m: &id002
+    BY2: 0.356191491865984
+    BY2H: 0.35418777593777223
+    BY2O: 0.35013463864843675
+candidate:
+  state: BUILT_SYNTHETIC_TESTED
+  path: <CODE_ROOT>/build/t5bc_v3_candidate_cpp/legsa_v23_port_core_demo
+  build_type: Release
+  sha256: cbf554baf9c83490e40b207b97f04ef77f51d9962f7bce463f1e644416ef789e
+definitions:
+  D1:
+    subset_source:
+      path: configs/paper_rebuild/clean5/CLEAN5_DEGRADATION_SUBSET_CONTRACT.yaml
+      sha256: 9af4216d1c2e58011e712e60bfcb82ba58ea587034daf14a34c9985cf6b06cd6
+      selected_case_ids: *id001
+    case_count: 61
+    case_ids: *id001
+    comparator: Frozen v2.1 F04 same-case rows from the pinned 541 aggregate, copied read-only; source row tokens
+      and hashes retained.
+    no_selection: true
+    heading_fault_policy: All 61 retained. Original yaw/A1 fault columns are replaced by D2; report replaced and
+      retained fault components, never claim the old heading injection survives. No new vector injection.
+  D2:
+    source: HPPOSECEF GNSS2 minus GNSS1 at exactly common iTOW, fixed EXT05 NED frame; 5 Hz; both PVT carrSoln fixed
+      only.
+    conversion: Direct calls to frozen status_yaw_builder A1 conversion through unchanged T5a adapter; no alternative
+      transform.
+    L_m: 0.35
+    R5_yaw_std_deg: 2.933193
+    R5SIGMA: Constant BY2 D3 1 s sigma, converted rad to degree.
+    R5W: degrees(k * sqrt(pAcc1_m^2+pAcc2_m^2) / 0.35)
+    B3:
+      observation: z = p2-p1 in fixed NED
+      prediction: C_nb * [0,-0.35,0]_FRD
+      covariance: k_b^2 * (pAcc1_m^2+pAcc2_m^2) * I3
+      scalar_yaw_valid: 0
+      stacking: false
+      residual: h-z
+      jacobian: H_phi=skew(h), existing positive-left phi stateFeedback convention
+      nis_threshold_3dof: 11.34
+      F02_gate: false
+      slot: Existing A1 scheme-C and a1_measurement_action; semantics unchanged.
+      observability: Single baseline has rank two; rotation about the baseline axis remains unobservable.
+      sidecar_columns:
+      - time
+      - b_n
+      - b_e
+      - b_d
+      - pAcc1
+      - pAcc2
+      - valid
+    provider_clipping: false
+    pacc_decode_m: HPPOSECEF unsigned pAcc multiplied by 1e-4
+    byte_gate: Every byte outside yaw/yaw_std/yaw_valid is identical to the corresponding frozen table. B3 yaw_valid
+      is zero on every row.
+    time_join: V2 inverse time formula, exact raw-grid match within 1 microsecond; no nearest or interpolation;
+      unmatched D57 rows valid=0.
+  D3:
+    trace_participates: false
+    primary_sequence: BY2
+    applied_sequences:
+    - BY2
+    - BY2H
+    - BY2O
+    L_m: 0.35
+    lag_ms: 1000
+    check_lag_ms: 200
+    variance_ddof: 1
+    scalar_residual: r_psi = unwrapped psi(t+1)-psi(t)-integral installed omega_z dt
+    sigma_rad: sqrt(Var(r_psi)/2)
+    S: pAcc1_m^2+pAcc2_m^2
+    k_squared: Var(r_psi) * L^2 / mean_pairs(S_second+S_first)
+    vector_residual: r = b_second - Q_n * b_first
+    Q_n: C_start * Exp(sum installed body gyro increments over the actual pair interval) * C_start^T; C_start from
+      starting raw yaw and frozen RP.
+    k_b_squared: trace(Cov(r)) / (6 * mean_pairs(S_second+S_first))
+    pairs: Exact 1 s and 0.2 s endpoints on raw 200 ms grid; both fixed across interval; frozen IMU/RP support;
+      no residual trimming, wrapping, clipping or floor.
+    S_bins: Three deterministic BY2 tertile bins of per-pair (S_first+S_second)/2; report boundaries/counts, sigma_bin,
+      k*sqrt(S_bin), heading equivalent in degrees, k_b*sqrt(S_bin), vector residual dispersion.
+    checks: BY2 0.2 s, and BY2H/BY2O 1 s/0.2 s sigma/k/k_b are report only; only BY2 1 s is applied.
+    limitation: Residuals include gyro, initial raw-heading and frozen-RP mapping motion errors.
+  D4:
+    scalar_binary: Frozen 96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c for F04 R5/R5SIGMA/R5W.
+    B3_binary: Candidate only for F02/A04/F04 B3 and two identity runs.
+    F02_scalar_weight_variants: 'NOT_RUN: frozen parser permits only 1.5/2.933193 and basic path uses configured
+      constant. No optional guard extension included.'
+    HV: Frozen 1 Hz status A1 HV provider bytes preserved.
+    forbidden_changes:
+    - gate thresholds
+    - initial covariance
+    - process noise
+    - IMU model
+    - evaluators
+    - evaluation points/windows
+    - IMU/RD/RP/HV bytes
+    - v2.1 artifacts
+    - 20_FINALIZE
+    - 28 figures
+    - RENDER_MANIFEST.json
+    - result-driven parameter search
+  D5:
+    identity_before_matrix: true
+    identity_runs:
+    - BY2_F02
+    - BY2_F04
+    product: NAV_10HZ.csv.gz byte-for-byte equal to frozen v2.1 retained product using frozen thin_nav serialization.
+    old_effective_options: 211
+    options_equality: Every original static option equal, excluding only declared input/output path changes; enumerate
+      four new B3 keys.
+    cpp_tests: 18
+    jacobian_and_small_angle_yaw_test: Numerical Jacobian and actual scalar/B3 yaw correction difference below 1e-6
+      rad.
+    baseline3d: false
+    scalar: true
+  D6:
+    clone: Frozen runtime file bytes, line replacement only; YAML roundtrip forbidden.
+    scalar_changed_keys:
+    - gnsspath
+    B3_changed_or_added_keys:
+    - gnsspath
+    - dual_antenna_measurement_model
+    - baseline3d_path
+    - baseline3d_length_m
+    - baseline3d_k_b
+    gate_a: Exact changed-line list; every other byte identical.
+    gate_b: 211 old static effective options equal plus explicit four B3 settings; runtime outputpath uses existing
+      CLI override only.
+    D37_echo: 'DERIVED_EXPECTED_OPTIONS_FROM_BYTE_IDENTICAL_CONFIG: D36 frozen echo witness; config differs only
+      case_id/run_id/run_label/gnsspath/outputpath. No invented historical D37 echo.'
+  D7:
+    versions:
+    - v3
+    - v2
+    std: true
+    frozen_eval_baseline_lengths: *id002
+    evaluation: Same frozen per-sequence base_time/window/trace/point; 61 cases retain source_registry_row and case_meta
+      and canonical full-metric derivation from newly evaluated error series.
+    bounded_gate: H-EXT-03 D8/D12; preserve native failures and unavailability, no retries.
+    NIS: R5W source-aware innovation NIS rows with actual covariance and dof=1 only; report selection coverage.
+      B3 actual innovation NIS dof=3. Central 95% chi-square coverage is descriptive only; no gate changed.
+    subset_summary: Absolute yaw/H mean, median, P95 worst-5-percent threshold, paired-delta distributions and explicit
+      failure classes; missing data never replaced with zero.
+  D8:
+    criterion: null
+    presentation: All rows parallel, facts only, no v2.1 replacement, sensitivity/limitations and v3 decision record
+      only.
+gates:
+  identity_before_scientific_matrix:
+    configurations:
+    - BY2_F02
+    - BY2_F04
+    inputs: Frozen inputs, B3 disabled, candidate binary.
+    product: Exact NAV_10HZ.csv.gz using frozen thin_nav implementation and archive-receipt pins.
+    effective_options: 211 fields exactly equal.
+  hard_stops:
+  - Candidate scalar-off identity failure
+  - Jacobian or scalar-consistency test failure
+  - Config byte or effective-options failure
+  - Frozen binary/evaluator/table/provider/figure hash mismatch
+  - Non-yaw table byte mismatch
+  - Evaluator process or trace-access failure
+  - Single-batch archive I/O failures >1 percent
+  - Unclassifiable native failure
+  other_failures: Bounded D12 classifications continue; unbounded -> ALGORITHM_FAILURE_DIVERGED; D57 no valid input
+    plus exact formal activation guard -> ALGORITHM_FAILURE_NO_VALID_HEADING_INPUT; attempts>0 all rejected -> ALGORITHM_FAILURE_ALL_YAW_REJECTED;
+    no evaluator for unavailable native. Bookkeeping conflicts documented and adjudicated.
+  bounded_output_policy: Inherit H-EXT-03 D8/D12 and same-native unmodified STD with v3/v2 evaluation.
+  archive_batch_definition: One explicitly archived tree/slot is one batch. Failure fraction=failed attempted files
+    / attempted files within that batch; no cumulative dilution. Existing byte mismatch always hard-stops. Missing-file
+    recovery copies only absent same-hash members, never science re-execution.
+preparation_validation:
+  status: PASS_SYNTHETIC_PRE_EXECUTION_VALIDATION
+  data_mode: synthetic
+  synthetic_data_used: true
+  semisynthetic_data_used: false
+  real_native_count: 0
+  evaluator_count: 0
+  trace_open_count: 0
+  joint_tests: 187
+  calibration_provider_aggregate_tests: 68
+  distinct_test_count: 255
+  cpp_synthetic_tests_included: 18
+  t5a_regression_tests_included: 27
+  environment_warning_count: 14
+  environment_warnings: Matplotlib/pyparsing and unused Axes3D; plots are 2D.
+  read_only_review_status: PASS_REQUESTED_REPAIRS_CLOSED
+  complete_integration_status: READY_FOR_CODE_FREEZE_PUSH_THEN_ORDERED_EXECUTION
+  test_log_sha256:
+    T5BC_PREREG_FINAL_JOINT_TESTS.log: 4818479845519261c1aaa322d3c42e31b57937b081a2fe4d753c492ec4712b9e
+    T5BC_PREREG_CALIBRATION_AGGREGATE_TESTS.log: a0b23513f7292cab800d5ffc86caa1bbd6f0d1aa59aaa5648d4d6fb34c07bd43
+  jacobian_max_abs_difference: 8.8819e-11
+  scalar_yaw_correction_max_difference_rad: 1.32339e-13
+  historical_initial_test_failure_preserved: true
+  historical_failure_cause: Circular yaw representation assertion; after continuation authorization only test angle
+    difference changed to atan2(sin(d),cos(d)). No model/threshold/covariance change.
+  metadata_followup: 'Row and outer code_commit/config_hash bindings, including skipped evaluations: 3 evaluator
+    and 2 controller targeted tests passed; no numerical/call/budget change.'
+required_outputs:
+- CALIBRATION_SUMMARY.csv
+- PILOT_TABLE_V3.csv
+- PILOT_TABLE_V2.csv
+- LC01_CROSSCHECK.csv
+- SUBSET61_TABLE_V3.csv
+- SUBSET61_SUMMARY.csv
+- BY2O_SEGMENTS_BY_VARIANT.csv
+- GATING_COUNTS.csv
+- NIS_CONSISTENCY.csv
+- ATTITUDE.csv
+- T5BC_RENDER_MANIFEST.json
+- FINAL_SUMMARY.json
+- Full raw tables and factual record with bookkeeping appendix
+- Handoff inventory, per-member SHA256/CRC, whole ZIP SHA256 and bytes
+status: HUMAN_AUTHORIZED_PREREGISTRATION
+authorization: T5bc prompt 2026-09-19
+code_freeze_resolution: The first requested commit SHA, verified equal to the pushed branch before raw preparation
+  or execution; injected into resolved local contract without editing the tracked contract.
+bookkeeping:
+  D37: Frozen failure before RUN_MANIFEST; D36 witness 5-line proof only; frozen metrics remain unavailable.
+  data_roles: Preserve frozen config/echo false semisynthetic flags as historical native metadata; outer authoritative
+    P13 terminal labels D01-D60 semisynthetic=true, controlled_degradation_applied=true. C00 real_clean.
+  D57: No time-grid repair; exact match, unmatched validity=0, count and classify.
+  PILOT_rows: 36
+  PILOT_row_definition: 9 frozen + 6 read-only T5a R5 + 15 new + 6 read-only LC01/LC01-S. LC01_CROSSCHECK also provides
+    explicit B3 F02 differences.
+  subset_rows: 305
+  pending_cases: []

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "candidate_id": "LC02A_JIANG2021_ADAPTIVE_FADING_CKF",
+  "decision": "NO_GO",
+  "decision_reason": "MANDATORY_FORMAL_REPRODUCTION_GATES_NOT_ALL_PASS",
+  "full_algorithm_source_status": "NOT_EVALUATED_SOURCE_UNAVAILABLE",
+  "official_implementation_status": "NO_ATTRIBUTABLE_OFFICIAL_IMPLEMENTATION_FOUND_IN_BOUNDED_SEARCH",
+  "selected": false,
+  "formal_lc02_admission": false,
+  "exact_reproduction_available": false,
+  "faithful_algorithm_reproduction_available": false,
+  "formulas_inferred": false,
+  "performance_used": false,
+  "implementation_executed": false,
+  "navigation_filter_run": false
+}

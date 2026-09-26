@@ -1,0 +1,11 @@
+{
+  "utc": "2026-09-26T11:50:08.186812+00:00",
+  "passed": true,
+  "sealed_matched": 65,
+  "sealed_csv_matched": 59,
+  "unrelated_matched": 29,
+  "full_tables_exact_csv_blocks": 3,
+  "forbidden_document_terms_found": 0,
+  "diff_scope": "AGENTS.md plus HX03 results and audit documents",
+  "scientific_calls_added": 0
+}

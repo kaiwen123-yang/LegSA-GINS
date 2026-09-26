@@ -1,0 +1,111 @@
+{
+  "schema": "hx02e.official_hartley.v1",
+  "official_commit": "ef16e8a1df72f9272111a488880e3fe9d161f59f",
+  "official_source_manifest": "$HX02E/00_CONTROL/OFFICIAL_SOURCE_START.json",
+  "official_source_manifest_sha256": "14e22d44060d3ce7b526f7fbe611b49b3afafca0488641a31cd95c9141b57fed",
+  "source_sha256": {
+    "scripts/paper_rebuild/hx02e_build.py": "f3fe7405736d48e328b6aa45c84d2eb1149d6c01865f9252b84d637b7809ff68",
+    "scripts/paper_rebuild/hx02e_execute.py": "e4dbc1eaad3cfa1d664c823d27483db2a3df8d59cb3a726f758f692009f51740",
+    "scripts/paper_rebuild/hx02e_report.py": "c573ddc96ca872487675322e549118d0d70006ce9de10b7e0fa09dd88fb4a505",
+    "src/legsa_gins/paper_rebuild/hext/hx02e_official_driver.cpp": "0be82d5f5ff271f55efba844df1b32a27cbd773f17b363f7b87d4e180aeff424",
+    "tests/paper_rebuild/test_hx02e_official_driver.py": "ca9cea58262b42f18c35c3b42d287d6d68234f251a57168f0c2ce3f4b6d8bacb",
+    "configs/paper_rebuild/hext/HX02E/OFF-LIT.cfg": "9579398d8d907b8fa1957fd6f779c1d41c7773bfecc0519b5f87678cdd77166b",
+    "configs/paper_rebuild/hext/HX02E/OFF-DEF.cfg": "7cb34c1db3e1152cc96bd923a0ddeb76d3201b7bdfd0dda5f22dd78a0caa3164",
+    "src/legsa_gins/paper_rebuild/hext/hx02_evaluation_process.py": "c94093d1fbf94c9f4db9f6f59334666ea8897c59bcd67654afd4a9914c7764fb",
+    "src/legsa_gins/paper_rebuild/hext/hx02_relative_pose_evaluation.py": "d5a024d2218aeae3c1c24c211b170cabad7b4c730fd02b43c270fe2d6f1fa4d1",
+    "src/legsa_gins/paper_rebuild/hext/hx02d_reference_free.py": "1bcfa0476ee3e340f2b9818bd78d2441d28ea509ef0ad70a2773e23221d3545a",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h7.py": "84ee803f7c707d6568227107cc7bfb317725ea9bd5f3a2bd3aac032b1f10beb7",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h7c.py": "41db1e79cb439a9dbee0b972a69f42e0b8e74885f24a7b277848a4cf59cc5233",
+    "src/legsa_gins/paper_rebuild/clean5_sequence/io_audit.py": "418819bff1b4eec124850314ef12a83c2d935b10dc1b1db7b9b5110098ed12d7",
+    "src/legsa_gins/paper_rebuild/subprocess_guard.py": "e582ee3d29dbd17246398e8e35bf8f006cf48e8aa71de92550739666ae39fac7"
+  },
+  "sequences": {
+    "BY2": {
+      "case": "C00",
+      "start_convention": "FILE_START",
+      "base_time": 1772784000.0,
+      "window": [
+        66.0,
+        340.0
+      ],
+      "baseline_median_m": 0.356191491865984,
+      "trace_relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv",
+      "trace_sha256": "ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c",
+      "cache_sha256": "c169e26d66f35fe200bb17a695353cd2d751482df1cd97996a7a8afff8662065",
+      "record_count": 63277,
+      "first_timestamp_ns": 1772784044887078145,
+      "last_timestamp_ns": 1772784350085048802,
+      "recorded_reference_path_length_m": 328.4713109046748
+    },
+    "BY2H": {
+      "case": "CONTRACT_START",
+      "start_convention": "CONTRACT_START",
+      "base_time": 1772784000.0,
+      "window": [
+        413.0,
+        683.0
+      ],
+      "baseline_median_m": 0.35418777593777223,
+      "trace_relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/trace_vrtk2_a87c6e_2026-03-06-08-06-39_minimal.csv",
+      "trace_sha256": "8d11fe360753bfcdbc54f7bf793fcb25850c0997b7aaad4ec1c9f10859c0f84f",
+      "cache_sha256": "732d45c70815ba65c7832ecbfb41edf5c571fd4e80fb13df497a99fe9863436e",
+      "record_count": 60541,
+      "first_timestamp_ns": 1772784413037092065,
+      "last_timestamp_ns": 1772784692911046145,
+      "recorded_reference_path_length_m": null
+    },
+    "BY2O": {
+      "case": "FILE_START",
+      "start_convention": "FILE_START",
+      "base_time": 1772780400.0,
+      "window": [
+        3186.0,
+        3563.0
+      ],
+      "baseline_median_m": 0.35013463864843675,
+      "trace_relative_path": "BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv",
+      "trace_sha256": "4f7b3007c6a0b43ce1b0fb4908f23c042891154b4adbc7af4c3d8a47ca363cd9",
+      "cache_sha256": "8786456127571475e88a89a47ab30f118b09a789e521690b82170985e4aaec35",
+      "record_count": 95859,
+      "first_timestamp_ns": 1772783501557068457,
+      "last_timestamp_ns": 1772783972835103576,
+      "recorded_reference_path_length_m": 337.4220465887643
+    }
+  },
+  "configurations": [
+    "OFF-LIT",
+    "OFF-DEF"
+  ],
+  "native_budget": 6,
+  "reference_evaluation_budget": 6,
+  "legsa_native_budget": 0,
+  "legsa_evaluation_budget": 0,
+  "initialization": "First retained cache timestamp; mean specific force over [t0,t0+1s); yaw, velocity, position and biases zero; no stationary gate; BY2H first available record at/after contract 413 s",
+  "contact_input": "Pinned HX-02 force-hysteresis flags, canonical FL FR RL RR; no detector regeneration",
+  "imu_input": "Cached FLU gyro and specific force used as stored; sensor-to-body -1 deg roll already in cache; no FRD conversion or additional installation rotation",
+  "configuration_resolution": "User explicitly adopted 0.010^2 I Go2 FK translation covariance also for OFF-DEF; not an official fixed Cassie covariance",
+  "point_rotation_covariance_rad2": 1000000,
+  "lit_initial_contact_covariance": "After initial contact creation via CorrectKinematics, configure independent initial diagonal covariance once through RobotState.setP and InEKF.setState; initially present foot std=0.1 m. Later augmentation entirely official.",
+  "def_initial_covariance": "RobotState default I15; initial and later contact covariance entirely official augmentation",
+  "maximum_native_seconds": 600,
+  "divergence_bounds": {
+    "displacement_m": 10000,
+    "speed_mps": 50,
+    "height_m": 1000,
+    "nonfinite_state": true
+  },
+  "failure_rules": [
+    "ALGORITHM_FAILURE_DIVERGED",
+    "NO_OUTPUT",
+    "ABNORMAL_EXIT"
+  ],
+  "no_retry": true,
+  "no_parameter_tuning": true,
+  "decision": "No numerical threshold; official configurations are the legged-state-estimation comparison rows regardless of result; HX-02 transplant and HX-02D go to supplementary material",
+  "unusable_output": "Retain failure row; unavailable metrics empty, reference evaluator skipped if no two finite chronological NAV rows; actual counts always reported",
+  "disk_guards_bytes": {
+    "/mnt/e": 40000000000,
+    "/mnt/g": 30000000000,
+    "scratch_max": 20000000000
+  }
+}

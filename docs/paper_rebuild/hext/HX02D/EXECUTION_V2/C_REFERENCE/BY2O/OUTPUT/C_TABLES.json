@@ -1,0 +1,457 @@
+{
+  "sequence_id": "BY2O",
+  "trace_sha256_observed": "4f7b3007c6a0b43ce1b0fb4908f23c042891154b4adbc7af4c3d8a47ca363cd9",
+  "trace_open_count_in_child": 1,
+  "window": [
+    3186.0,
+    3563.0
+  ],
+  "time_zero": "Start of HX-02 evaluation window, not first NAV record.",
+  "reference_path_length_m": 337.4220465887643,
+  "branches": {
+    "HARTLEY_LIT": {
+      "C1": {
+        "samples": [
+          {
+            "elapsed_s": 10,
+            "t_rel_s": 3196.0,
+            "err_n_m": -0.6417332825805282,
+            "err_e_m": 0.9383325525009734,
+            "err_u_m": -0.10772873345913897,
+            "yaw_error_ned_wrapped_deg": 4.867380554301633,
+            "yaw_error_ned_unwrapped_deg": 4.867380554301633
+          },
+          {
+            "elapsed_s": 30,
+            "t_rel_s": 3216.0,
+            "err_n_m": 2.45215777274079,
+            "err_e_m": 4.611037288363537,
+            "err_u_m": -0.34433942227986436,
+            "yaw_error_ned_wrapped_deg": 10.762488348459812,
+            "yaw_error_ned_unwrapped_deg": 10.762488348459812
+          },
+          {
+            "elapsed_s": 60,
+            "t_rel_s": 3246.0,
+            "err_n_m": 15.523607514398238,
+            "err_e_m": 12.359457888913958,
+            "err_u_m": -0.8429941355246062,
+            "yaw_error_ned_wrapped_deg": 26.13798681555565,
+            "yaw_error_ned_unwrapped_deg": 26.13798681555565
+          },
+          {
+            "elapsed_s": 120,
+            "t_rel_s": 3306.0,
+            "err_n_m": 87.35490578710147,
+            "err_e_m": 30.457106101662802,
+            "err_u_m": -1.2632727401190718,
+            "yaw_error_ned_wrapped_deg": 88.7474343630854,
+            "yaw_error_ned_unwrapped_deg": 88.7474343630854
+          },
+          {
+            "elapsed_s": 240,
+            "t_rel_s": 3426.0,
+            "err_n_m": 67.08155927934982,
+            "err_e_m": -3.1714429621132467,
+            "err_u_m": -2.072098375179106,
+            "yaw_error_ned_wrapped_deg": 103.10870690573734,
+            "yaw_error_ned_unwrapped_deg": 103.10870690573734
+          }
+        ],
+        "series": "HARTLEY_LIT_C1_1S.csv",
+        "frozen_alignment": {
+          "epochs": 101,
+          "not_estimated": [
+            "roll",
+            "pitch",
+            "scale",
+            "time_offset"
+          ],
+          "per_epoch_yaw_offset_circular_std_deg": 1.723620802299267,
+          "rule": "per branch: one least-squares yaw-about-gravity + 3-D translation on the first 10 s of the window from the branch's own output (HX-02 amendment 1); never shared, never re-fitted",
+          "translation_enu_m": [
+            0.014368596519523172,
+            0.46544593717947247,
+            -0.15202842234584896
+          ],
+          "window_seconds": [
+            3186.0,
+            3196.0
+          ],
+          "yaw_offset_deg": 95.15069514269234
+        },
+        "metrics": {
+          "horizontal_rmse_m": 77.55220891065909,
+          "yaw_rmse_deg": 91.0449580846975,
+          "position_drift_m_per_100m": 27.698785533651787,
+          "endpoint_horizontal_error_m": 131.85226091752446,
+          "endpoint_error_m_per_100m": 39.0763621554997,
+          "heading_drift_deg_per_min": 13.391927695703037
+        },
+        "reproduction_check": {
+          "horizontal_rmse_m": {
+            "new": 77.55220891065909,
+            "old": 77.55220891065909,
+            "abs_difference": 0.0
+          },
+          "yaw_rmse_deg": {
+            "new": 91.0449580846975,
+            "old": 91.0449580846975,
+            "abs_difference": 0.0
+          },
+          "position_drift_m_per_100m": {
+            "new": 27.698785533651787,
+            "old": 27.698785533651794,
+            "abs_difference": 7.105427357601002e-15
+          },
+          "heading_drift_deg_per_min": {
+            "new": 13.391927695703037,
+            "old": 13.39192769570303,
+            "abs_difference": 7.105427357601002e-15
+          }
+        }
+      },
+      "C2": {
+        "transform_frame": "Apply to already aligned ENU antenna-midpoint trajectory; mirror E only and/or negate ENU yaw, then refit the same initial 10 s yaw+translation.",
+        "transforms": {
+          "original": {
+            "horizontal_rmse_m": 77.55220891065909,
+            "yaw_rmse_deg": 91.0449580846975,
+            "position_drift_m_per_100m": 27.698785533651787,
+            "endpoint_horizontal_error_m": 131.85226091752446,
+            "endpoint_error_m_per_100m": 39.0763621554997,
+            "heading_drift_deg_per_min": 13.391927695703037,
+            "alignment": {
+              "yaw_offset_deg": -3.260756405699993e-15,
+              "translation_enu_m": [
+                -2.429299885565937e-16,
+                0.0,
+                -2.4732691142639626e-17
+              ],
+              "epochs": 101
+            }
+          },
+          "east_mirror": {
+            "horizontal_rmse_m": 168.3049673963675,
+            "yaw_rmse_deg": 91.0449580846975,
+            "position_drift_m_per_100m": 14.821330307331992,
+            "endpoint_horizontal_error_m": 130.55021802020934,
+            "endpoint_error_m_per_100m": 38.69048253960667,
+            "heading_drift_deg_per_min": 13.391927695703037,
+            "alignment": {
+              "yaw_offset_deg": -3.260756405699993e-15,
+              "translation_enu_m": [
+                -0.2595817199348584,
+                0.0,
+                -2.4732691142639626e-17
+              ],
+              "epochs": 101
+            }
+          },
+          "yaw_negated": {
+            "horizontal_rmse_m": 170.30520865408639,
+            "yaw_rmse_deg": 100.38691621093906,
+            "position_drift_m_per_100m": 27.234189648474516,
+            "endpoint_horizontal_error_m": 137.0720523234304,
+            "endpoint_error_m_per_100m": 40.623324323110396,
+            "heading_drift_deg_per_min": 79.5827828252403,
+            "alignment": {
+              "yaw_offset_deg": -169.70382809284203,
+              "translation_enu_m": [
+                -1.052155033333494,
+                8.797218211852133,
+                -2.4732691142639626e-17
+              ],
+              "epochs": 101
+            }
+          },
+          "east_mirror_and_yaw_negated": {
+            "horizontal_rmse_m": 72.12713850317851,
+            "yaw_rmse_deg": 100.38691621093906,
+            "position_drift_m_per_100m": 31.999413722993957,
+            "endpoint_horizontal_error_m": 135.79536837135836,
+            "endpoint_error_m_per_100m": 40.24496020464839,
+            "heading_drift_deg_per_min": 79.5827828252403,
+            "alignment": {
+              "yaw_offset_deg": -169.70382809284203,
+              "translation_enu_m": [
+                -0.7967533625024197,
+                8.843614934376843,
+                -2.4732691142639626e-17
+              ],
+              "epochs": 101
+            }
+          }
+        },
+        "max_horizontal_improvement_factor": 1.075215383835607,
+        "max_yaw_improvement_factor": 1.0
+      },
+      "C3": {
+        "unwrapped_error_vs_unwrapped_reference_turn": {
+          "slope": -0.33054818549275067,
+          "intercept": 10.189444881533987,
+          "r2": 0.6713248463827586,
+          "n": 3771
+        },
+        "wrapped_error_sensitivity": {
+          "slope": -0.3305481854927506,
+          "intercept": 10.189444881534001,
+          "r2": 0.6713248463827587,
+          "n": 3771
+        },
+        "reference_turn_range_deg": [
+          -383.30626525011394,
+          5.0326407258818335
+        ],
+        "definition": "OLS with intercept, NED estimate-minus-reference continuous error versus NED reference yaw increment; all 10 Hz epochs."
+      }
+    },
+    "HARTLEY_S": {
+      "C1": {
+        "samples": [
+          {
+            "elapsed_s": 10,
+            "t_rel_s": 3196.0,
+            "err_n_m": -0.6285632858762789,
+            "err_e_m": 0.8862048249399124,
+            "err_u_m": -0.4732085475350478,
+            "yaw_error_ned_wrapped_deg": 2.1601146903332165,
+            "yaw_error_ned_unwrapped_deg": 2.1601146903332165
+          },
+          {
+            "elapsed_s": 30,
+            "t_rel_s": 3216.0,
+            "err_n_m": 11.590034279427694,
+            "err_e_m": 33.81761123580264,
+            "err_u_m": -0.7917098822839954,
+            "yaw_error_ned_wrapped_deg": 99.44469663728137,
+            "yaw_error_ned_unwrapped_deg": 99.44469663728137
+          },
+          {
+            "elapsed_s": 60,
+            "t_rel_s": 3246.0,
+            "err_n_m": 25.172604468422186,
+            "err_e_m": 21.155893176568384,
+            "err_u_m": -1.0145608457412079,
+            "yaw_error_ned_wrapped_deg": 39.98222619480728,
+            "yaw_error_ned_unwrapped_deg": 39.98222619480728
+          },
+          {
+            "elapsed_s": 120,
+            "t_rel_s": 3306.0,
+            "err_n_m": 32.35104357796525,
+            "err_e_m": 190.74036217835453,
+            "err_u_m": 2.9083943698706647,
+            "yaw_error_ned_wrapped_deg": -118.65146223365673,
+            "yaw_error_ned_unwrapped_deg": 241.3485377663433
+          },
+          {
+            "elapsed_s": 240,
+            "t_rel_s": 3426.0,
+            "err_n_m": -6.988501988115761,
+            "err_e_m": 64.3481370910956,
+            "err_u_m": -0.3685903364694296,
+            "yaw_error_ned_wrapped_deg": 7.667173287762125,
+            "yaw_error_ned_unwrapped_deg": 1087.6671732877621
+          }
+        ],
+        "series": "HARTLEY_S_C1_1S.csv",
+        "frozen_alignment": {
+          "epochs": 101,
+          "not_estimated": [
+            "roll",
+            "pitch",
+            "scale",
+            "time_offset"
+          ],
+          "per_epoch_yaw_offset_circular_std_deg": 6.590682328675637,
+          "rule": "per branch: one least-squares yaw-about-gravity + 3-D translation on the first 10 s of the window from the branch's own output (HX-02 amendment 1); never shared, never re-fitted",
+          "translation_enu_m": [
+            0.27964487720925246,
+            0.43472037938050295,
+            0.14310007722536672
+          ],
+          "window_seconds": [
+            3186.0,
+            3196.0
+          ],
+          "yaw_offset_deg": 89.53055573867738
+        },
+        "metrics": {
+          "horizontal_rmse_m": 89.67592802145968,
+          "yaw_rmse_deg": 94.41347354224968,
+          "position_drift_m_per_100m": 9.047665382858149,
+          "endpoint_horizontal_error_m": 59.97604330438135,
+          "endpoint_error_m_per_100m": 17.774784994259015,
+          "heading_drift_deg_per_min": 495.0771200020887
+        },
+        "reproduction_check": {
+          "horizontal_rmse_m": {
+            "new": 89.67592802145968,
+            "old": 89.67592802145968,
+            "abs_difference": 0.0
+          },
+          "yaw_rmse_deg": {
+            "new": 94.41347354224968,
+            "old": 94.41347354224968,
+            "abs_difference": 0.0
+          },
+          "position_drift_m_per_100m": {
+            "new": 9.047665382858149,
+            "old": 9.04766538285815,
+            "abs_difference": 1.7763568394002505e-15
+          },
+          "heading_drift_deg_per_min": {
+            "new": 495.0771200020887,
+            "old": 495.07712000208835,
+            "abs_difference": 3.410605131648481e-13
+          }
+        }
+      },
+      "C2": {
+        "transform_frame": "Apply to already aligned ENU antenna-midpoint trajectory; mirror E only and/or negate ENU yaw, then refit the same initial 10 s yaw+translation.",
+        "transforms": {
+          "original": {
+            "horizontal_rmse_m": 89.67592802145968,
+            "yaw_rmse_deg": 94.41347354224968,
+            "position_drift_m_per_100m": 9.047665382858149,
+            "endpoint_horizontal_error_m": 59.97604330438134,
+            "endpoint_error_m_per_100m": 17.774784994259015,
+            "heading_drift_deg_per_min": 495.0771200020887,
+            "alignment": {
+              "yaw_offset_deg": -3.7365984099442886e-15,
+              "translation_enu_m": [
+                -3.3746383025734957e-16,
+                2.286399892297352e-16,
+                -2.63815372188156e-17
+              ],
+              "epochs": 101
+            }
+          },
+          "east_mirror": {
+            "horizontal_rmse_m": 114.50599191567866,
+            "yaw_rmse_deg": 94.41347354224968,
+            "position_drift_m_per_100m": 8.906918702841317,
+            "endpoint_horizontal_error_m": 59.69672916882451,
+            "endpoint_error_m_per_100m": 17.69200613070205,
+            "heading_drift_deg_per_min": 495.0771200020887,
+            "alignment": {
+              "yaw_offset_deg": -3.7365984099442886e-15,
+              "translation_enu_m": [
+                -0.25958171993485846,
+                2.286399892297352e-16,
+                -2.63815372188156e-17
+              ],
+              "epochs": 101
+            }
+          },
+          "yaw_negated": {
+            "horizontal_rmse_m": 117.97178610788922,
+            "yaw_rmse_deg": 111.52161062986885,
+            "position_drift_m_per_100m": 2.625918053222712,
+            "endpoint_horizontal_error_m": 45.188250066329985,
+            "endpoint_error_m_per_100m": 13.392204369326082,
+            "heading_drift_deg_per_min": -402.1024094811453,
+            "alignment": {
+              "yaw_offset_deg": -170.0110445658393,
+              "translation_enu_m": [
+                -1.0288109481230117,
+                8.802101299177115,
+                -2.63815372188156e-17
+              ],
+              "epochs": 101
+            }
+          },
+          "east_mirror_and_yaw_negated": {
+            "horizontal_rmse_m": 91.78007425677224,
+            "yaw_rmse_deg": 111.52161062986885,
+            "position_drift_m_per_100m": -0.62460183656151,
+            "endpoint_horizontal_error_m": 44.83196142764157,
+            "endpoint_error_m_per_100m": 13.286612976502058,
+            "heading_drift_deg_per_min": -402.1024094811453,
+            "alignment": {
+              "yaw_offset_deg": -170.0110445658393,
+              "translation_enu_m": [
+                -0.7731641735293767,
+                8.84712791313164,
+                -2.63815372188156e-17
+              ],
+              "epochs": 101
+            }
+          }
+        },
+        "max_horizontal_improvement_factor": 1.0,
+        "max_yaw_improvement_factor": 1.0
+      },
+      "C3": {
+        "unwrapped_error_vs_unwrapped_reference_turn": {
+          "slope": -8.132479923602647,
+          "intercept": -731.28621120805,
+          "r2": 0.6840200168713231,
+          "n": 3771
+        },
+        "wrapped_error_sensitivity": {
+          "slope": 0.20931224918874503,
+          "intercept": 57.21260211845245,
+          "r2": 0.045345524298363915,
+          "n": 3771
+        },
+        "reference_turn_range_deg": [
+          -383.30626525011394,
+          5.0326407258818335
+        ],
+        "definition": "OLS with intercept, NED estimate-minus-reference continuous error versus NED reference yaw increment; all 10 Hz epochs."
+      }
+    }
+  },
+  "C4": {
+    "foot_speed_body": {
+      "horizontal_rmse_m": 6.322411570286109,
+      "yaw_rmse_deg": 6.005779065553343,
+      "position_drift_m_per_100m": -0.3793911464144297,
+      "endpoint_horizontal_error_m": 3.4713165090348252,
+      "endpoint_error_m_per_100m": 1.028775844414671,
+      "heading_drift_deg_per_min": 1.4264538540844307,
+      "alignment": {
+        "yaw_offset_deg": -77.09299267547405,
+        "translation_enu_m": [
+          0.24773308013326487,
+          0.2271149156369213,
+          -0.020777033721350584
+        ],
+        "epochs": 101
+      },
+      "evaluation_point": "Same antenna-midpoint lever as HX-02",
+      "integration_gap_record": {
+        "policy": "No velocity imputation; zero displacement contribution on unobserved intervals, explicitly incomplete if any.",
+        "unobserved_duration_s": 1.275670690000041,
+        "unobserved_interval_count": 274
+      },
+      "claim_limit": "Conditional input diagnostic with onboard Go2 attitude; not an independently proven performance bound."
+    },
+    "finite_difference": {
+      "horizontal_rmse_m": 10.965794152373965,
+      "yaw_rmse_deg": 6.005779065553343,
+      "position_drift_m_per_100m": -0.9182746369955969,
+      "endpoint_horizontal_error_m": 3.000214830993716,
+      "endpoint_error_m_per_100m": 0.8891579140500712,
+      "heading_drift_deg_per_min": 1.4264538540844307,
+      "alignment": {
+        "yaw_offset_deg": -77.09299267547405,
+        "translation_enu_m": [
+          0.2715249544324253,
+          0.42791712350346717,
+          -0.01741291853756386
+        ],
+        "epochs": 101
+      },
+      "evaluation_point": "Same antenna-midpoint lever as HX-02",
+      "integration_gap_record": {
+        "policy": "No velocity imputation; zero displacement contribution on unobserved intervals, explicitly incomplete if any.",
+        "unobserved_duration_s": 1.275670690000041,
+        "unobserved_interval_count": 274
+      },
+      "claim_limit": "Conditional input diagnostic with onboard Go2 attitude; not an independently proven performance bound."
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "utc": "2026-09-26T12:08:59.955938+00:00",
+  "passed": true,
+  "baseline_source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/00_CONTROL/FIGURE_CLOSEOUT_SECOND_CONTINUATION/BASELINE.json",
+  "baseline_sha256": "7830a1a596077558d0f2289c066dbd81b1f53e6c25adc8ec0c8833ee055a503b",
+  "sealed_start_matched": 65,
+  "sealed_before_commit_matched": 65,
+  "sealed_csv_before_commit_matched": 59,
+  "method_body_before_commit_matched": 423,
+  "unrelated_untracked_matched": 29,
+  "read_input_hashes_unchanged": 1079,
+  "hx03_existing_files_metadata_unchanged": 14505,
+  "hx03_preservation_evidence": "existing file inventory, byte sizes and mtime_ns unchanged; SHA256 for all diagnostic inputs; no full native-payload content read",
+  "disk_available_bytes": {
+    "/mnt/e": 128405798912,
+    "/mnt/g": 44560809984
+  },
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "reference_opens": 0
+}

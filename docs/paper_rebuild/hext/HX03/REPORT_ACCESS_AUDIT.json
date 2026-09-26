@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "reference_opens": 0,
+  "e_write_opens": 0,
+  "scientific_calls": 0,
+  "strace_sha256": "01733630497d1a558c3038a15e4147d0dfba246e9c9cf7784c7fa29273a6b093",
+  "source": "REPORT_OPENAT.strace"
+}

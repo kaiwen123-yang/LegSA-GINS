@@ -1,0 +1,21 @@
+figure,page,content,implementation_semantics,review_mode,provenance_class
+1,2,GNSS and IMU disturbance examples,"motivation only",rendered_visual,PAPER_DIRECT
+2,4,GNSS/INS disturbance monitoring and isolation flow,"labels mention position and velocity; lower priority than explicit 3D equations",rendered_visual,PAPER_DIRECT
+3,5,improved robust-adaptive flowchart,"compute improved R; compute AKF and RKF; choose omega 0.85/0.15; fuse RAEKF; zero-weight inversion not shown",full_resolution_render_and_transcription,PAPER_DIRECT
+4,8,NovAtel command configuration,"GNSS 5 Hz; raw IMU and GNSS logging",rendered_visual,PAPER_DIRECT
+5,8,experimental car and sensors,"single antenna vehicle setup",rendered_visual,PAPER_DIRECT
+6,9,land experiment trajectories,"two disturbance locations marked",rendered_visual,PAPER_DIRECT
+7,10,R alternatives,"seven diagonal R constructions",rendered_visual,PAPER_DIRECT
+8,11,experiment-1 position and velocity errors,"offline paper result only",rendered_visual,PAPER_DIRECT
+9,12,experiment-1 attitude errors,"offline paper result only",rendered_visual,PAPER_DIRECT
+10,13,experiment-1 RMS comparison,"offline paper result only",rendered_visual,PAPER_DIRECT
+11,14,satellite-count comparison,"single GPS versus GPS+GLONASS+BDS",rendered_visual,PAPER_DIRECT
+12,14-15,satellite-system position errors,"offline paper result only",rendered_visual,PAPER_DIRECT
+13,15,second land trajectory,"vehicle experiment 2",rendered_visual,PAPER_DIRECT
+14,15-16,experiment-2 position and velocity errors,"offline paper result only",rendered_visual,PAPER_DIRECT
+15,16-17,experiment-2 attitude errors,"offline paper result only",rendered_visual,PAPER_DIRECT
+16,16-17,experiment-2 RMS comparison,"offline paper result only",rendered_visual,PAPER_DIRECT
+17,18,one-second disturbance errors,"injected GNSS-elevation disturbances",rendered_visual,PAPER_DIRECT
+18,19,one-second disturbance RMS,"offline paper result only",rendered_visual,PAPER_DIRECT
+19,20,five-second disturbance errors,"successive injected disturbances",rendered_visual,PAPER_DIRECT
+20,21,five-second disturbance RMS,"offline paper result only",rendered_visual,PAPER_DIRECT

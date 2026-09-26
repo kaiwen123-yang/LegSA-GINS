@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "source": "$V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+  "csv_line": 4,
+  "fields": {
+    "method_id": "F04",
+    "case_id": null,
+    "yaw_rmse_deg": "1.8862718548526467",
+    "source_nav_sha256": "2fda678fbc9d760e7bd4b93b6e7f99861b41ea91aef86252566ea059abbeb0f4"
+  },
+  "legsa_calls": 0
+}

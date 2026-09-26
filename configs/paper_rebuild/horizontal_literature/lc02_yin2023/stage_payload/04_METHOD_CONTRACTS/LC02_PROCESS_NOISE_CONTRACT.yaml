@@ -1,0 +1,15 @@
+schema_version: lc02.process_noise.v1
+noise_dimension: 18
+order: [accel_VRW, gyro_ARW, gyro_bias_drive, accel_bias_drive, gyro_scale_drive, accel_scale_drive]
+continuous_Qc:
+  accel_VRW: "diag(vrw^2)"
+  gyro_ARW: "diag(arw^2)"
+  gyro_bias_drive: "diag(2*std_bg^2/T_bg)"
+  accel_bias_drive: "diag(2*std_ba^2/T_ba)"
+  gyro_scale_drive: "diag(2*std_sg^2/T_sg)"
+  accel_scale_drive: "diag(2*std_sa^2/T_sa)"
+discrete_Qd: "0.5*(Phi*G*Qc*G^T*Phi^T + G*Qc*G^T)*dt"
+paper_prints_numeric_imu_noise: false
+future_numeric_source: BY2_PHYSICAL_INSTANTIATION
+future_requirements: [units_declared, sampling_semantics_declared, no_trace_tuning, no_per_case_tuning]
+provenance_class: CITED_SOURCE

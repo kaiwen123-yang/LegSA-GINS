@@ -1,0 +1,166 @@
+--- hx03_evaluation.py (unchanged)
++++ hx03r2_observer.py (new)
+@@ -1,15 +1,92 @@
+-"""HX-03 frozen evaluator child registered with the unchanged HX-02 launcher."""
++"""HX-03R-2: select the existing WGS84 observer and retain its actual arrays.
++
++Neither the frozen evaluator nor either existing observer is edited. The second
++observer call uses already-loaded arrays and only exposes its local residuals.
++"""
+ from __future__ import annotations
+ 
+ import argparse
++import gzip
++import hashlib
+ import json
+ from pathlib import Path
+ import runpy
+ import sys
+ 
++import numpy as np
++import pandas as pd
++
+ from ..clean5_sequence.evaluation_process import EVALUATOR_SHA256
+ from ..clean5_sequence.evaluator_capture import install
+-from .hx03_injection import sha, write_json
++from ..clean6_canonical_v2 import evaluation as wgs84
++
++OBSERVER_SHA256 = "8dfacf094879e7c091f1ddf1d5dcb3164f43923dc0903734cb6d29e05eeccc10"
++
++
++def sha(path):
++    digest = hashlib.sha256()
++    with Path(path).open('rb') as handle:
++        for chunk in iter(lambda: handle.read(1 << 20), b''):
++            digest.update(chunk)
++    return digest.hexdigest()
++
++
++def write_json(path, value):
++    with Path(path).open('x', encoding='utf-8') as handle:
++        handle.write(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True, allow_nan=False) + '\n')
++
++
++def observe_arrays(nav, errors, reference):
++    """Run the unchanged function and capture locals at its return, without edits."""
++    fn = wgs84.wgs84_consistency_check
++    captured = {}
++    previous = sys.getprofile()
++    if previous is not None:
++        raise RuntimeError('Residual recording requires a completed evaluator profile')
++
++    def retain(frame, event, returned):
++        if event == 'return' and frame.f_code is fn.__code__ and isinstance(returned, dict):
++            for key in ('t', 'expected_enu', 'actual_enu', 'residual', 'expected_yaw', 'yaw_residual'):
++                captured[key] = frame.f_locals[key].copy()
++
++    sys.setprofile(retain)
++    try:
++        result = fn(nav, errors, reference)
++    finally:
++        sys.setprofile(previous)
++    if len(captured) != 6:
++        raise RuntimeError('WGS84 local-array capture incomplete')
++    actual, expected, residual = (captured[key] for key in ('actual_enu', 'expected_enu', 'residual'))
++    # These are norms/differences of the actual observer arrays, not a projection.
++    hres = np.hypot(residual[:, 0], residual[:, 1])
++    frame = pd.DataFrame({
++        'time_s': captured['t'],
++        'evaluator_horizontal_error_m': errors.horizontal_err_m.to_numpy(float),
++        'observer_horizontal_error_m': np.hypot(expected[:, 0], expected[:, 1]),
++        'horizontal_magnitude_difference_m': np.hypot(expected[:, 0], expected[:, 1]) - errors.horizontal_err_m.to_numpy(float),
++        'east_difference_m': residual[:, 0], 'north_difference_m': residual[:, 1],
++        'horizontal_vector_discrepancy_m': hres,
++        'evaluator_up_error_m': actual[:, 2], 'observer_up_error_m': expected[:, 2],
++        'up_difference_m': residual[:, 2],
++        'evaluator_yaw_error_deg': errors.yaw_err_deg.to_numpy(float),
++        'observer_yaw_error_deg': captured['expected_yaw'],
++        'yaw_difference_deg': captured['yaw_residual'],
++    })
++    extrema = {}
++    for name, values in [('horizontal', hres), ('up', np.abs(residual[:, 2])), ('yaw', np.abs(captured['yaw_residual']))]:
++        index = int(np.argmax(values))
++        extrema[name] = {'index_zero_based': index, 'time_s': float(captured['t'][index]),
++                         'maximum': float(values[index]), 'row': frame.iloc[index].to_dict()}
++    for key, name in [('horizontal_max_m', 'horizontal'), ('up_max_m', 'up'), ('yaw_max_deg', 'yaw')]:
++        if result[key] != extrema[name]['maximum']:
++            raise RuntimeError('Residual arrays differ from observer maxima')
++    metrics = {
++        'horizontal_rmse_m': float(np.sqrt(np.mean(np.sum(expected[:, :2]**2, axis=1)))),
++        'up_rmse_m': float(np.sqrt(np.mean(expected[:, 2]**2))),
++        'yaw_rmse_deg': float(np.sqrt(np.mean(captured['expected_yaw']**2))),
++        'yaw_p95_deg': float(np.percentile(np.abs(captured['expected_yaw']), 95)),
++    }
++    return result, frame, extrema, metrics
+ 
+ 
+ def main():
+@@ -17,18 +94,63 @@
+     parser.add_argument('--spec', type=Path, required=True)
+     spec = json.loads(parser.parse_args().spec.read_text())
+     evaluator = Path(spec['evaluator'])
+-    if sha(evaluator) != EVALUATOR_SHA256:
+-        raise ValueError('HARD_STOP_EVALUATOR_IDENTITY')
++    if sha(evaluator) != EVALUATOR_SHA256 or sha(Path(wgs84.__file__)) != OBSERVER_SHA256:
++        raise RuntimeError('HARD_STOP_EVALUATOR_OR_OBSERVER_IDENTITY')
++    if sha(spec['nav']) != spec['nav_sha256']:
++        raise RuntimeError('HARD_STOP_ARCHIVED_EVALUATOR_NAV_IDENTITY')
+     out = Path(spec['outdir'])
+     out.mkdir(parents=True, exist_ok=False)
+-    config = out / 'CAPTURE_CONFIG.json'
++    config = out / 'CAPTURE_CONFIG_R2.json'
+     write_json(config, {'evaluator': str(evaluator), 'evaluator_sha256': EVALUATOR_SHA256,
+         'trace': spec['trace'], 'trace_sha256': spec['trace_sha256'], 'window': spec['window'],
+-        'outdir': str(out), 'STD': 'OMITTED_AS_FROZEN_EXTERNAL_CONTRACT'})
++        'outdir': str(out), 'STD': 'OMITTED_AS_FROZEN_EXTERNAL_CONTRACT',
++        'consistency_policy': wgs84.POLICY})
+     install(config)
++    original_observer = sys.getprofile()
++    arrays = {}
++
++    def observe(frame, event, returned):
++        if event == 'return' and frame.f_code.co_filename == str(evaluator):
++            if frame.f_code.co_name == 'load_trace':
++                arrays['reference'] = returned
++            elif frame.f_code.co_name == 'main' and 'err_df' in frame.f_locals:
++                arrays['nav'] = frame.f_locals['nav']
++        original_observer(frame, event, returned)
++
++    sys.setprofile(observe)
+     sys.argv = [str(evaluator), '--trace', spec['trace'], '--nav', spec['nav'], '--outdir', str(out),
+                 '--base_time', str(spec['base_time']), '--yaw_truth_mode', 'enu']
+-    runpy.run_path(str(evaluator), run_name='__main__')
++    try:
++        runpy.run_path(str(evaluator), run_name='__main__')
++    finally:
++        sys.setprofile(None)
++    if set(arrays) != {'nav', 'reference'}:
++        raise RuntimeError('HARD_STOP_MISSING_OBSERVED_EVALUATOR_ARRAYS')
++    capture = json.loads((out/'EVALUATOR_CAPTURE.json').read_text())
++    if capture['trace_handle_hash_count'] != 1 or capture['trace_sha256'] != spec['trace_sha256']:
++        raise RuntimeError('HARD_STOP_REFERENCE_IDENTITY')
++    errors = pd.read_csv(out/'error_series.csv')
++    result, residuals, extrema, observer_metrics = observe_arrays(arrays['nav'], errors, arrays['reference'])
++    if result != capture['consistency']:
++        raise RuntimeError('HARD_STOP_OBSERVER_ARRAY_REPLAY_DIFFERENCE')
++    # Deterministic gzip is a per-run data file, not a handoff archive.
++    residual_path = out/'AUDIT_RESIDUALS_R2.csv.gz'
++    residual_columns = ['time_s', 'east_difference_m', 'north_difference_m',
++        'horizontal_vector_discrepancy_m', 'horizontal_magnitude_difference_m',
++        'up_difference_m', 'yaw_difference_deg']
++    with residual_path.open('xb') as binary:
++        with gzip.GzipFile(fileobj=binary, mode='wb', filename='', mtime=0) as compressed:
++            compressed.write(residuals[residual_columns].to_csv(index=False, lineterminator='\n').encode())
++    write_json(out/'AUDIT_DETAIL_R2.json', {
++        'observer_source': 'src/legsa_gins/paper_rebuild/clean6_canonical_v2/evaluation.py:39-85',
++        'observer_sha256': OBSERVER_SHA256, 'policy': wgs84.POLICY, 'consistency': result,
++        'extrema': extrema, 'observer_metrics': observer_metrics, 'rows': len(residuals),
++        'residuals_sha256': sha(residual_path), 'residual_sign': 'observer_minus_evaluator',
++        'residual_columns': residual_columns,
++        'horizontal_gate': 'norm of east/north residual vector; magnitude difference also retained',
++        'reference_extra_opens': 0, 'unchanged_observer_calls': 2,
++        'validation_position_passed': max(result['horizontal_max_m'], result['up_max_m']) <= 1e-9,
++    })
+ 
+ 
+ if __name__ == '__main__':

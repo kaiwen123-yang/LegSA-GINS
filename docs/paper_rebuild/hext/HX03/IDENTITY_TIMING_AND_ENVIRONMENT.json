@@ -1,0 +1,108 @@
+{
+  "all_upper_bounds_below_threshold": true,
+  "evaluator_calls_added": 0,
+  "evaluator_wait_limit_s": 600,
+  "native_calls_added": 0,
+  "native_wait_limit_s": 600,
+  "rows": [
+    {
+      "end_event": {
+        "event": "EVALUATOR_RESERVED",
+        "role": "FULL",
+        "run_id": "BY2__EXT05C__LIT__C00__NA",
+        "utc": "2026-09-26T11:06:36.321804+00:00",
+        "version": "v3"
+      },
+      "environment_whitelist": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "MKL_NUM_THREADS": "1",
+        "MPLBACKEND": "Agg",
+        "MPLCONFIGDIR": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__EXT05C__LIT__C00__NA/native/.matplotlib",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src",
+        "XDG_CACHE_HOME": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__EXT05C__LIT__C00__NA/native/.cache"
+      },
+      "exact_native_wall_seconds": null,
+      "native_wait_limit_s": 600,
+      "new_output_hashes_sha256": "19f82c90251222ee0652b6fa6f3ce10fcfeeeb534d31bdc717d717091c1f166d",
+      "old_output_hashes_sha256": "2bfb8445021d7e241acadd35cfc2ebd2b562519a6a741176941a41bdd6c901ed",
+      "run_id": "BY2__EXT05C__LIT__C00__NA",
+      "start_event": {
+        "event": "NATIVE_RESERVED",
+        "run_id": "BY2__EXT05C__LIT__C00__NA",
+        "utc": "2026-09-26T11:06:15.467342+00:00"
+      },
+      "wall_seconds_upper_bound": 20.854462
+    },
+    {
+      "end_event": {
+        "event": "RUN_TERMINAL",
+        "failure_class": "NONE",
+        "reused": false,
+        "run_id": "BY2__LC01-BR__LIT__C00__NA",
+        "utc": "2026-09-26T11:06:36.203459+00:00"
+      },
+      "environment_whitelist": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "MKL_NUM_THREADS": "1",
+        "MPLBACKEND": "Agg",
+        "MPLCONFIGDIR": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__LC01-BR__LIT__C00__NA/native/.matplotlib",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src",
+        "XDG_CACHE_HOME": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__LC01-BR__LIT__C00__NA/native/.cache"
+      },
+      "exact_native_wall_seconds": null,
+      "native_wait_limit_s": 600,
+      "new_output_hashes_sha256": "b616342ebb083269832b9636f64801d2c6c80c58f8ecc43d03d5cd078ed40d00",
+      "old_output_hashes_sha256": "a3df8a77b7b2aac197f1fecb425791cd0b84141268b652587d6bb159312b46e0",
+      "run_id": "BY2__LC01-BR__LIT__C00__NA",
+      "start_event": {
+        "event": "NATIVE_RESERVED",
+        "run_id": "BY2__LC01-BR__LIT__C00__NA",
+        "utc": "2026-09-26T11:06:15.449882+00:00"
+      },
+      "wall_seconds_upper_bound": 20.753577
+    },
+    {
+      "end_event": {
+        "event": "EVALUATOR_RESERVED",
+        "role": "FULL",
+        "run_id": "BY2__LC01__LIT__C00__NA",
+        "utc": "2026-09-26T11:06:37.327263+00:00",
+        "version": "v3"
+      },
+      "environment_whitelist": {
+        "GIT_OPTIONAL_LOCKS": "0",
+        "MKL_NUM_THREADS": "1",
+        "MPLBACKEND": "Agg",
+        "MPLCONFIGDIR": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__LC01__LIT__C00__NA/native/.matplotlib",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src",
+        "XDG_CACHE_HOME": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03/RUNS/BY2__LC01__LIT__C00__NA/native/.cache"
+      },
+      "exact_native_wall_seconds": null,
+      "native_wait_limit_s": 600,
+      "new_output_hashes_sha256": "d601cee97ad2eb1329184781da64e44d3b63b47736d1fda2572886193b56bb2e",
+      "old_output_hashes_sha256": "b8f601a71c8e764870a318cf9e11cc0069079be0d33f18418e16733304ba0b91",
+      "run_id": "BY2__LC01__LIT__C00__NA",
+      "start_event": {
+        "event": "NATIVE_RESERVED",
+        "run_id": "BY2__LC01__LIT__C00__NA",
+        "utc": "2026-09-26T11:06:15.463428+00:00"
+      },
+      "wall_seconds_upper_bound": 21.863835
+    }
+  ],
+  "threshold_s": 200,
+  "timing_note": "Exact native wall time was not separately recorded. Reservation precedes Popen and endpoint follows wait, so these are conservative upper bounds, sufficient for the 200 s decision. No rerun.",
+  "user_instruction": "After identity gate: report native wall time; extend only if >200 s; record OMP/OPENBLAS/MKL=1 per COMMAND.json"
+}

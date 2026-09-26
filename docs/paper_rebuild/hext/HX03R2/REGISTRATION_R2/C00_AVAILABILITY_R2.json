@@ -1,0 +1,23 @@
+[
+  {
+    "method": "LC01",
+    "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX03_DEGRADATION/RUNS/BY2__LC01__LIT__C00__NA",
+    "native_nav_sha256": "ccd25c2e1309ba2870e57e2208f476a6b48eaba69f0d038f26be2f168bb2c695",
+    "existing_evaluation_slots": 2,
+    "replacement_validation_status": "NOT_RUN_PENDING_GATE_CLARIFICATION"
+  },
+  {
+    "method": "EXT05C",
+    "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX03_DEGRADATION/RUNS/BY2__EXT05C__LIT__C00__NA",
+    "native_nav_sha256": "915192d6fcefaf7bef33c4028b571d1b723f7e0759063e2955aebd3d1ee7ace8",
+    "existing_evaluation_slots": 2,
+    "replacement_validation_status": "NOT_RUN_PENDING_GATE_CLARIFICATION"
+  },
+  {
+    "method": "LC01-BR",
+    "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX03_DEGRADATION/RUNS/BY2__LC01-BR__LIT__C00__NA",
+    "native_nav_sha256": "ccd25c2e1309ba2870e57e2208f476a6b48eaba69f0d038f26be2f168bb2c695",
+    "existing_evaluation_slots": 0,
+    "replacement_validation_status": "NOT_RUN_PENDING_GATE_CLARIFICATION"
+  }
+]

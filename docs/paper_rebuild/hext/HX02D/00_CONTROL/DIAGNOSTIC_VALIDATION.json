@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "BY2 contact/force histogram conservation",
+      "passed": true
+    },
+    {
+      "check": "BY2 S B1 direct-array independent RMS",
+      "passed": true
+    },
+    {
+      "check": "BY2 S C1 against retained HX02 error CSV, no reference open",
+      "rows": 275,
+      "max_abs_difference": 1.1368683772161603e-13,
+      "passed": true
+    },
+    {
+      "check": "BY2 LIT B1 direct-array independent RMS",
+      "passed": true
+    },
+    {
+      "check": "BY2 LIT C1 against retained HX02 error CSV, no reference open",
+      "rows": 275,
+      "max_abs_difference": 1.1368683772161603e-13,
+      "passed": true
+    },
+    {
+      "check": "BY2O contact/force histogram conservation",
+      "passed": true
+    },
+    {
+      "check": "BY2O S B1 direct-array independent RMS",
+      "passed": true
+    },
+    {
+      "check": "BY2O S C1 against retained HX02 error CSV, no reference open",
+      "rows": 378,
+      "max_abs_difference": 1.1368683772161603e-13,
+      "passed": true
+    },
+    {
+      "check": "BY2O LIT B1 direct-array independent RMS",
+      "passed": true
+    },
+    {
+      "check": "BY2O LIT C1 against retained HX02 error CSV, no reference open",
+      "rows": 378,
+      "max_abs_difference": 1.1368683772161603e-13,
+      "passed": true
+    },
+    {
+      "check": "Failed and successful B arrays identical after JSON-only repair",
+      "arrays": 29,
+      "passed": true
+    },
+    {
+      "check": "Only dump function AST changed after failed B call",
+      "passed": true
+    }
+  ],
+  "unit_tests": "7 passed in 0.21s",
+  "unit_test_file_sha256": "ada48b1580b513c8b243e362b48b6d344a50d602b464166729396c6ae6208655",
+  "reference_opens_this_validation": 0,
+  "native_calls_this_validation": 0
+}

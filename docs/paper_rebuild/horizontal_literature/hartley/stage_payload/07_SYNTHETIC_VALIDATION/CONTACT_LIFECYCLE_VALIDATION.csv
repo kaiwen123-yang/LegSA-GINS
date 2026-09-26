@@ -1,0 +1,6 @@
+case,active_ids,expected_active_ids,dimension,expected_dimension,direct_map_max_abs,cross_covariance_residual,contact_mean_residual,symmetry_max_abs,minimum_eigenvalue,tolerance,remaining_index_integrity,pass
+single_add_lower_id,0;2;5,0;2;5,24,24,0,0,0,0,4.925409056296862e-05,2e-12,True,True
+simultaneous_add_lower_and_middle_ids,0;2;4;5,0;2;4;5,27,27,0,0,0,0,4.16681970043494e-05,2e-12,True,True
+single_remove_remaining_index_integrity,0;4;5,0;4;5,24,24,0,0,0,0,4.1671336477799495e-05,2e-12,True,True
+simultaneous_remove,2;5,2;5,21,21,0,0,0,0,0.008589160875822552,2e-12,True,True
+mixed_remove_add_same_epoch,0;1;3;5,0;1;3;5,27,27,0,0,0,0,2.8900206142379758e-05,1e-10,True,True

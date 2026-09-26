@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "terminal_outcome": "PASS_LC02_FINAL_CANDIDATE_SELECTED_GINAV2021_OFFICIAL_LC",
+  "selected_candidate_id": "LC02C_GINAV2021_OFFICIAL_SPP_INS_LC",
+  "candidate_set_size": 3,
+  "candidate_set_closed": true,
+  "fourth_candidate_authorized": false,
+  "all_pass_candidates": [
+    "LC02C_GINAV2021_OFFICIAL_SPP_INS_LC"
+  ],
+  "selection_cardinality": 1,
+  "exactly_one_selected": true,
+  "tie_break_applied": false,
+  "reproduction_level": "EXACT_OFFICIAL_SOFTWARE_REPRODUCTION",
+  "classification_labels": [
+    "EXACT_OFFICIAL_SOFTWARE_REPRODUCTION",
+    "STANDARD_LC_LITERATURE_BASELINE",
+    "NOT_A_NOVEL_FILTER_METHOD"
+  ],
+  "candidate_decisions": {
+    "LC02A_JIANG2021_ADAPTIVE_FADING_CKF": "NO_GO",
+    "LC02B_TAGHIZADEH2023_AHINF_CKF": "NO_GO",
+    "LC02C_GINAV2021_OFFICIAL_SPP_INS_LC": "SELECTED_FOR_FUTURE_FORMAL_REPRODUCTION"
+  },
+  "candidate_selection_tier": {
+    "selected": true,
+    "selection_basis": "ALL_TWELVE_STATIC_GATES_PASS_WITHOUT_PERFORMANCE",
+    "ranking_artifact": "LC02_FINAL_CANDIDATE_RANKING_WITHOUT_PERFORMANCE.csv"
+  },
+  "formal_primary_tier": {
+    "formal_lc02_slot": "VACANT",
+    "formal_lc02_admission": false,
+    "reason": "SEPARATE_IMPLEMENTATION_VALIDATION_AND_HUMAN_ADMISSION_REQUIRED"
+  },
+  "formal_lc02_slot": "VACANT",
+  "formal_lc02_admission": false,
+  "implementation_authorized": false,
+  "execution_authorized": false,
+  "performance_used": false
+}

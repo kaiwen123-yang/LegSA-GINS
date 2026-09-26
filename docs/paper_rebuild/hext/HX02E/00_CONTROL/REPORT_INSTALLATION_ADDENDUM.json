@@ -1,0 +1,58 @@
+{
+  "utc": "2026-09-26T10:43:34.398403+00:00",
+  "scope": "Report-only installation-rotation clarification requested after results commit",
+  "parent_results_commit": "a99bdc65cdeee7d0691cf703375b5a55fddf5b96",
+  "source": "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h5.py",
+  "source_sha256": "3b9e57d5470cf33360564b0736a81a31ee67c1274c9a87b7e335921f58a399c2",
+  "source_lines": [
+    54,
+    [
+      212,
+      216
+    ],
+    [
+      386,
+      393
+    ],
+    [
+      406,
+      413
+    ]
+  ],
+  "source_unchanged": true,
+  "foot_position_body_installation_rotation_applied": false,
+  "actual_physical_frame_mismatch": "CANNOT_DETERMINE_FROM_CACHE_GENERATOR_ALONE",
+  "illustrative_scale": {
+    "angle_deg": 1,
+    "rotation_chord_factor": 0.01745307099674787,
+    "example_perpendicular_radius_m": 0.3,
+    "example_point_difference_m": 0.005235921299024361,
+    "assumed_gravity_m_per_s2": 9.81,
+    "conditional_gravity_leak_m_per_s2": 0.17120810714975127
+  },
+  "report_previous_sha256": "3efacc228f276527b2b2233a9d98062f180939b6ff838a081789e6467c76a31a",
+  "report_updated_sha256": "d9ce5856086392a3bccb0062afebbca82dd35391b44baa3c3b271ca1b5c9cb67",
+  "report_copy_verified": true,
+  "table_sha256_unchanged": "30fda253e5fa4f56b829ae9e5184cefc0258c74d57c0e3fadbae98e407cbd888",
+  "sealed_start": {
+    "utc": "2026-09-26T10:43:33.739278+00:00",
+    "matched": 65,
+    "csv_matched": 59,
+    "two_directory_csv_matched": 58,
+    "baseline_sha256": "7830a1a596077558d0f2289c066dbd81b1f53e6c25adc8ec0c8833ee055a503b"
+  },
+  "sealed_before_commit": {
+    "utc": "2026-09-26T10:43:34.392591+00:00",
+    "matched": 65,
+    "csv_matched": 59,
+    "two_directory_csv_matched": 58,
+    "baseline_sha256": "7830a1a596077558d0f2289c066dbd81b1f53e6c25adc8ec0c8833ee055a503b"
+  },
+  "new_legsa_native": 0,
+  "new_legsa_evaluation": 0,
+  "new_official_native": 0,
+  "new_relative_pose_evaluation": 0,
+  "reference_opens": 0,
+  "historical_receipts_unchanged": true,
+  "supplements_only": "90_AGGREGATE/HX02E_RESULTS.md report hash; prior metrics and run evidence unchanged"
+}

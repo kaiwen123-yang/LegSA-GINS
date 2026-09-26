@@ -1,0 +1,9 @@
+{
+  "commit": "ff7178429f4cda93fe2c2124e8a18a8555e782b9",
+  "pushed": true,
+  "utc": "2026-09-26T11:06:13.999549+00:00",
+  "prereg_full_text_reported_before_execution": true,
+  "code_pins_sha256": "4bf98c7dc357065d4a8a100b5c5da49c4b19a25b62ceae802a3a0f45ae4ff44b",
+  "original_registration_commit": "13d8553ccfd4862284dd54f5fb392f92e99fd2f5",
+  "amendment": "native environment receipts; waits both remain 600 s"
+}
