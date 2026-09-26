@@ -1,0 +1,7 @@
+{
+  "resolved": true,
+  "formula": "Use HX02D C4 omega-cross-foot plus foot_speed_body, 3D trapezoids, no gap filling; BY2 tolerance 1e-6",
+  "prior_pending_record": "PREPARATION.json",
+  "real_integrations_at_registration": 0,
+  "reference_evaluations_at_registration": 0
+}

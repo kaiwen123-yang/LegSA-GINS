@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "sequence": "BY2",
+      "method": "F04",
+      "value": 1.8862718548526467,
+      "display": "1.886272",
+      "source": {
+        "file": "$V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv",
+        "sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+        "lines": [
+          27
+        ],
+        "fields": [
+          "yaw_rmse_deg"
+        ],
+        "operation": "exact archived field; display rounded to six decimal places"
+      }
+    },
+    {
+      "sequence": "BY2H",
+      "method": "F04",
+      "value": 1.93377013508875,
+      "display": "1.933770",
+      "source": {
+        "file": "$V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv",
+        "sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+        "lines": [
+          12
+        ],
+        "fields": [
+          "yaw_rmse_deg"
+        ],
+        "operation": "exact archived field; display rounded to six decimal places"
+      }
+    },
+    {
+      "sequence": "BY2O",
+      "method": "F04",
+      "value": 2.433814932823714,
+      "display": "2.433815",
+      "source": {
+        "file": "$V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv",
+        "sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+        "lines": [
+          23
+        ],
+        "fields": [
+          "yaw_rmse_deg"
+        ],
+        "operation": "exact archived field; display rounded to six decimal places"
+      }
+    },
+    {
+      "sequence": "BY2",
+      "method": "LC01",
+      "value": 2.9948274600591076,
+      "source": {
+        "file": "$HX02/90_AGGREGATE/EXTERNAL_FIVE_CATEGORY_TABLE.csv",
+        "sha256": "7475d7ef9780cdc9b2d82943dc786d58732076b9bad819f945f5010346190fba",
+        "lines": [
+          304
+        ],
+        "fields": [
+          "value"
+        ],
+        "operation": "exact archived field; display rounded to six decimal places"
+      }
+    }
+  ],
+  "source_long_table_hashes": {
+    "$HX02/90_AGGREGATE/EXTERNAL_FIVE_CATEGORY_TABLE.csv": "7475d7ef9780cdc9b2d82943dc786d58732076b9bad819f945f5010346190fba",
+    "$HX02E/90_AGGREGATE/HARTLEY_OFFICIAL_TABLE.csv": "30fda253e5fa4f56b829ae9e5184cefc0258c74d57c0e3fadbae98e407cbd888",
+    "$HX03R2/90_AGGREGATE/DEGRADATION_EXTERNAL_TABLE_R2.csv": "17cfce3191231c1631b0b3b1c2d8196a838690e1e9eae83bbcef0621f23d4989"
+  }
+}

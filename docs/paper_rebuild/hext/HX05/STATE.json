@@ -1,0 +1,10 @@
+{
+  "status": "READY_FOR_REGISTRATION_COMMIT",
+  "definition_ruling": "RESOLVED_C4_FULL_FORMULA",
+  "leg_dr_integrations": 0,
+  "legsa_native": 0,
+  "legsa_evaluation": 0,
+  "external_native": 0,
+  "reference_evaluations": 0,
+  "reference_opens": 0
+}
