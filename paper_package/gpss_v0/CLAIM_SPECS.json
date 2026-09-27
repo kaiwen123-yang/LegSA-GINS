@@ -2171,6 +2171,160 @@
     "value": 0.35,
     "digits": 2
   },
+  "P|BY2|LC01-F04|yaw|delta_rmse|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2",
+        "segment": "full",
+        "pair_A_minus_B": "LC01-F04",
+        "metric": "yaw"
+      },
+      "column": "delta_rmse",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": 1.1103372814582677,
+    "digits": 2
+  },
+  "P|BY2H|LC01-F04|yaw|delta_rmse|2": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
+    "locator": {
+      "where": {
+        "sequence": "BY2H",
+        "segment": "full",
+        "pair_A_minus_B": "LC01-F04",
+        "metric": "yaw"
+      },
+      "column": "delta_rmse",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": 0.2741892278945445,
+    "digits": 2
+  },
+  "S|F04|occlusion_primary|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv",
+    "locator": {
+      "where": {
+        "method_id": "F04",
+        "segment_id": "occlusion_primary",
+        "variant": "PROTOCOL_V3",
+        "evaluator_contract": "evaluator_contract_v3"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 0.2325140820805299,
+    "digits": 3
+  },
+  "S|LC01|occlusion_primary|yaw_rmse_deg": {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv",
+    "locator": {
+      "where": {
+        "method_id": "LC01",
+        "segment_id": "occlusion_primary",
+        "variant": "",
+        "evaluator_contract": "evaluator_contract_v3"
+      },
+      "column": "yaw_rmse_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 4.008201405335621,
+    "digits": 3
+  },
+  "X|A2|F04|horizontal_rmse_m|median": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/DEGRADATION_MANUSCRIPT.csv",
+    "locator": {
+      "where": {
+        "family": "A2"
+      },
+      "column": "F04",
+      "display_digits": 3,
+      "regex": "horizontal_rmse_m=([-+\\d.eE]+)/"
+    },
+    "mode": "CSV",
+    "value": 0.176671,
+    "digits": 3
+  },
+  "X|A2|LC01|horizontal_rmse_m|median": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/DEGRADATION_MANUSCRIPT.csv",
+    "locator": {
+      "where": {
+        "family": "A2"
+      },
+      "column": "LC01",
+      "display_digits": 3,
+      "regex": "horizontal_rmse_m=([-+\\d.eE]+)/"
+    },
+    "mode": "CSV",
+    "value": 1.40735,
+    "digits": 3
+  },
+  "D|replacement|6,468": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
+    "locator": {
+      "line_start": 68,
+      "line_end": 68,
+      "literal": "6,468",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 6468.0,
+    "digits": 0
+  },
+  "D|replacement|283": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
+    "locator": {
+      "line_start": 78,
+      "line_end": 78,
+      "literal": "283",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 283.0,
+    "digits": 0
+  },
+  "D|replacement|193": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
+    "locator": {
+      "line_start": 78,
+      "line_end": 78,
+      "literal": "193",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 193.0,
+    "digits": 0
+  },
+  "D|replacement|90": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
+    "locator": {
+      "line_start": 79,
+      "line_end": 79,
+      "literal": "90",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 90.0,
+    "digits": 0
+  },
+  "E|BY2H|RTKLIB_UNMODIFIED_MOVING_BASE|availability": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/EXTERNAL_THREE_SEQUENCE_MANUSCRIPT.csv",
+    "locator": {
+      "where": {
+        "method": "RTKLIB_UNMODIFIED_MOVING_BASE"
+      },
+      "column": "BY2H",
+      "display_digits": 3,
+      "regex": "availability=([-+\\d.eE]+)"
+    },
+    "mode": "CSV",
+    "value": 0.132593,
+    "digits": 3
+  },
   "D|contract|0.03": {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/configs/paper_rebuild/final_v23_parity_contract.yaml",
     "locator": {
@@ -2631,22 +2785,6 @@
     "value": 95.0,
     "digits": 0
   },
-  "P|BY2|LC01-F04|yaw|delta_rmse|2": {
-    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
-    "locator": {
-      "where": {
-        "sequence": "BY2",
-        "segment": "full",
-        "pair_A_minus_B": "LC01-F04",
-        "metric": "yaw"
-      },
-      "column": "delta_rmse",
-      "display_digits": 2
-    },
-    "mode": "CSV",
-    "value": 1.1103372814582677,
-    "digits": 2
-  },
   "P|BY2|LC01-F04|yaw|mbb95_high|2": {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
     "locator": {
@@ -2677,22 +2815,6 @@
     },
     "mode": "CSV",
     "value": -0.2151695911095197,
-    "digits": 2
-  },
-  "P|BY2H|LC01-F04|yaw|delta_rmse|2": {
-    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC_DISTINGUISHABILITY.csv",
-    "locator": {
-      "where": {
-        "sequence": "BY2H",
-        "segment": "full",
-        "pair_A_minus_B": "LC01-F04",
-        "metric": "yaw"
-      },
-      "column": "delta_rmse",
-      "display_digits": 2
-    },
-    "mode": "CSV",
-    "value": 0.2741892278945445,
     "digits": 2
   },
   "P|BY2H|LC01-F04|yaw|mbb95_high|2": {
@@ -2845,38 +2967,6 @@
     },
     "mode": "DOC",
     "value": 0.073,
-    "digits": 3
-  },
-  "S|F04|occlusion_primary|yaw_rmse_deg": {
-    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv",
-    "locator": {
-      "where": {
-        "method_id": "F04",
-        "segment_id": "occlusion_primary",
-        "variant": "PROTOCOL_V3",
-        "evaluator_contract": "evaluator_contract_v3"
-      },
-      "column": "yaw_rmse_deg",
-      "display_digits": 3
-    },
-    "mode": "CSV",
-    "value": 0.2325140820805299,
-    "digits": 3
-  },
-  "S|LC01|occlusion_primary|yaw_rmse_deg": {
-    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv",
-    "locator": {
-      "where": {
-        "method_id": "LC01",
-        "segment_id": "occlusion_primary",
-        "variant": "",
-        "evaluator_contract": "evaluator_contract_v3"
-      },
-      "column": "yaw_rmse_deg",
-      "display_digits": 3
-    },
-    "mode": "CSV",
-    "value": 4.008201405335621,
     "digits": 3
   },
   "D|unc3|3.78": {
@@ -3171,54 +3261,6 @@
     "value": 0.2192205046241588,
     "digits": 2
   },
-  "D|replacement|6,468": {
-    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
-    "locator": {
-      "line_start": 68,
-      "line_end": 68,
-      "literal": "6,468",
-      "display_digits": 0
-    },
-    "mode": "DOC",
-    "value": 6468.0,
-    "digits": 0
-  },
-  "D|replacement|283": {
-    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
-    "locator": {
-      "line_start": 78,
-      "line_end": 78,
-      "literal": "283",
-      "display_digits": 0
-    },
-    "mode": "DOC",
-    "value": 283.0,
-    "digits": 0
-  },
-  "D|replacement|193": {
-    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
-    "locator": {
-      "line_start": 78,
-      "line_end": 78,
-      "literal": "193",
-      "display_digits": 0
-    },
-    "mode": "DOC",
-    "value": 193.0,
-    "digits": 0
-  },
-  "D|replacement|90": {
-    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
-    "locator": {
-      "line_start": 79,
-      "line_end": 79,
-      "literal": "90",
-      "display_digits": 0
-    },
-    "mode": "DOC",
-    "value": 90.0,
-    "digits": 0
-  },
   "C|F04|yaw_rmse_deg|finite_count|0": {
     "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_SUMMARY_V3.csv",
     "locator": {
@@ -3281,11 +3323,11 @@
       "line_start": 90,
       "line_end": 90,
       "literal": "\u22120.346",
-      "display_digits": 3
+      "display_digits": 2
     },
     "mode": "DOC",
     "value": -0.346,
-    "digits": 3
+    "digits": 2
   },
   "D|budget|98.8": {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
@@ -3317,11 +3359,11 @@
       "line_start": 90,
       "line_end": 90,
       "literal": "\u22120.029",
-      "display_digits": 3
+      "display_digits": 2
     },
     "mode": "DOC",
     "value": -0.029,
-    "digits": 3
+    "digits": 2
   },
   "D|budget|+0.0003": {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
@@ -3329,11 +3371,11 @@
       "line_start": 90,
       "line_end": 90,
       "literal": "+0.0003",
-      "display_digits": 4
+      "display_digits": 2
     },
     "mode": "DOC",
     "value": 0.0003,
-    "digits": 4
+    "digits": 2
   },
   "D|budget|37.1": {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
@@ -3391,11 +3433,11 @@
       "line_start": 28,
       "line_end": 28,
       "literal": "0.0023",
-      "display_digits": 4
+      "display_digits": 3
     },
     "mode": "DOC",
     "value": 0.0023,
-    "digits": 4
+    "digits": 3
   },
   "D|budget|\u22121.61": {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
@@ -3427,11 +3469,11 @@
       "line_start": 95,
       "line_end": 95,
       "literal": "\u221210.5",
-      "display_digits": 1
+      "display_digits": 2
     },
     "mode": "DOC",
     "value": -10.5,
-    "digits": 1
+    "digits": 2
   },
   "D|budget|20": {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
@@ -3511,11 +3553,11 @@
       "line_start": 95,
       "line_end": 95,
       "literal": "30.8",
-      "display_digits": 1
+      "display_digits": 3
     },
     "mode": "DOC",
     "value": 30.8,
-    "digits": 1
+    "digits": 3
   },
   "D|budget|30": {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
@@ -3769,34 +3811,6 @@
     "value": 18.0,
     "digits": 0
   },
-  "X|A2|F04|horizontal_rmse_m|median": {
-    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/DEGRADATION_MANUSCRIPT.csv",
-    "locator": {
-      "where": {
-        "family": "A2"
-      },
-      "column": "F04",
-      "display_digits": 3,
-      "regex": "horizontal_rmse_m=([-+\\d.eE]+)/"
-    },
-    "mode": "CSV",
-    "value": 0.176671,
-    "digits": 3
-  },
-  "X|A2|LC01|horizontal_rmse_m|median": {
-    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/DEGRADATION_MANUSCRIPT.csv",
-    "locator": {
-      "where": {
-        "family": "A2"
-      },
-      "column": "LC01",
-      "display_digits": 3,
-      "regex": "horizontal_rmse_m=([-+\\d.eE]+)/"
-    },
-    "mode": "CSV",
-    "value": 1.40735,
-    "digits": 3
-  },
   "X|A2|F02|horizontal_rmse_m|median": {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/DEGRADATION_MANUSCRIPT.csv",
     "locator": {
@@ -3894,5 +3908,41 @@
     "mode": "CSV",
     "value": 1.610689,
     "digits": 3
+  },
+  "D|dist|0.35": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC02_DISTINGUISHABILITY.md",
+    "locator": {
+      "line_start": 14,
+      "line_end": 14,
+      "literal": "0.35",
+      "display_digits": 2
+    },
+    "mode": "DOC",
+    "value": 0.35,
+    "digits": 2
+  },
+  "D|unc3|10": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC03_MANUSCRIPT_TEXT.md",
+    "locator": {
+      "line_start": 11,
+      "line_end": 11,
+      "literal": "10",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 10.0,
+    "digits": 0
+  },
+  "D|budget|40": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC01_UNCERTAINTY_BUDGET.md",
+    "locator": {
+      "line_start": 44,
+      "line_end": 44,
+      "literal": "40",
+      "display_digits": 0
+    },
+    "mode": "DOC",
+    "value": 40.0,
+    "digits": 0
   }
 }

@@ -1,0 +1,27 @@
+Parameter,Value,Unit,Basis
+Heading standard-deviation marker,2.933193,deg,Primary-sequence increment-residual proxy; not independent denser-grid white noise
+Horizontal-velocity scale,1/0.962142,ratio,Fixed source model; no transfer-sequence refit
+Horizontal-velocity standard deviation,0.132838,m/s,Residual proxy; not an independently identified white-noise component
+Roll/pitch standard deviation,1.6,deg,Robot weak prior
+Accelerometer scale,1.0308398903907543,ratio,Reference-free primary-sequence calibration
+VRW index north/0,9.478382094779873,(m/s)/sqrt(h),Parameter-index proxy; not identified physical body-axis covariance
+Accelerometer-bias std index north/0,4817.482008954474,mGal,Transferred unchanged
+VRW index east/1,9.784198200134004,(m/s)/sqrt(h),Parameter-index proxy; not identified physical body-axis covariance
+Accelerometer-bias std index east/1,8259.572423450163,mGal,Transferred unchanged
+VRW index down/2,7.6321402201126745,(m/s)/sqrt(h),Parameter-index proxy; not identified physical body-axis covariance
+Accelerometer-bias std index down/2,2257.241538343225,mGal,Transferred unchanged
+arw_deg_sqrt_h,"[0.985, 0.985, 0.985]",deg/sqrt(h),Fixed implementation setting
+gyro_bias_std_deg_h,"[9.38, 9.38, 9.38]",deg/h,Fixed implementation setting
+yaw_std_min_deg,0.5,deg,Fixed implementation setting
+yaw_std_soft_deg,3.0,deg,Fixed implementation setting
+yaw_std_hard_deg,6.0,deg,Fixed implementation setting
+yaw_res_soft_deg,6.0,deg,Fixed implementation setting
+yaw_res_hard_deg,15.0,deg,Fixed implementation setting
+yaw_downweight_scale,2.5,variance ratio,Fixed implementation setting
+antlever_frd_m,"[0.03, 0.03, -0.3]",m,Fixed implementation setting
+BY2 base time,1772784000.0,Unix s,Sequence time origin
+BY2 evaluation window,"[66,340]",s,Contract window
+BY2H base time,1772784000.0,Unix s,Sequence time origin
+BY2H evaluation window,"[413,683]",s,Contract window
+BY2O base time,1772780400.0,Unix s,Sequence time origin
+BY2O evaluation window,"[3186,3563]",s,Contract window

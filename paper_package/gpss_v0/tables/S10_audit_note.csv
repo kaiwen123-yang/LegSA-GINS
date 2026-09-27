@@ -1,0 +1,2 @@
+Item,Statement,Consequence
+Audit tool correction after results,The observer projection was corrected to WGS84; the original evaluator scientific outputs were unchanged.,Previously audit-unavailable entries could be admitted using the corrected check; no new trajectory was selected.

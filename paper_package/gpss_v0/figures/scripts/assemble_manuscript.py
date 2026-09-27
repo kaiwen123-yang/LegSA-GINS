@@ -17,6 +17,8 @@ def docspec(alias,literal):
     assert matches,(alias,literal)
     digits=len(literal.split('.')[-1]) if '.' in literal else 0
     if alias=='hx':digits=min(3,digits)
+    if alias=='budget' and literal in ['−0.346','−0.029','+0.0003','−1.61','−10.5']:digits=2
+    if alias=='budget' and literal in ['0.0023','30.8']:digits=3
     SPECS[key]={'path':str(p),'locator':{'line_start':matches[0],'line_end':matches[0],'literal':literal,'display_digits':digits},'mode':'DOC','value':float(literal.replace('−','-').replace(',','').replace(' ','')),'digits':digits}
     return key
 main=V/'07_AGGREGATE/MAIN_TABLE_V3.csv'
@@ -27,9 +29,11 @@ for s in ['BY2','BY2H','BY2O']:
    csvspec('M|'+s+'|'+m+'|'+c,main,where,c,0 if c.endswith('count') else 3)
 def emit(key,section,quoted=None):
     if key=='BR':csvspec(key,H/'EXTERNAL_THREE_SEQUENCE_SUPPLEMENT.csv',{'method':'LC01-BR'},'BY2',3,r'horizontal_rmse_m=([-+\d.eE]+)')
+    if key.startswith('E|'):
+        _,s,m,c=key.split('|');csvspec(key,H/'EXTERNAL_THREE_SEQUENCE_MANUSCRIPT.csv',{'method':m},s,3,re.escape(c)+r'=([-+\d.eE]+)')
     if key.startswith('NEG|') or key.startswith('PCT|'):
         op,inner=key.split('|',1);shown=emit(inner,section,quoted);input_id=LEDGER[-1]['claim_id'];sp=SPECS[inner];value=sp['value']*(-1 if op=='NEG' else 100);digits=sp['digits'] if op=='NEG' else 0;display=f'{value:.{digits}f}';cid=f'N{len(LEDGER)+1:05d}'
-        LEDGER.append(dict(claim_id=cid,section=section,quoted_text=quoted or display,value=display,unit='as stated in quoted text',source_path=LEDGER[-1]['source_path'],source_locator=json.dumps({'display_digits':digits}),derivation=json.dumps({'inputs':[input_id],'expression':('-' if op=='NEG' else '100*')+input_id}),check_mode='DERIVED'));return display
+        LEDGER.append(dict(claim_id=cid,section=section,quoted_text=quoted or display,value=display,unit=('%' if op=='PCT' else LEDGER[-1]['unit']),source_path=LEDGER[-1]['source_path'],source_locator=json.dumps({'display_digits':digits}),derivation=json.dumps({'inputs':[input_id],'expression':('-' if op=='NEG' else '100*')+input_id}),check_mode='DERIVED'));return display
     if key.startswith('D|'):
         _,alias,literal=key.split('|');docspec(alias,literal)
     if key.startswith('G|'):
@@ -50,7 +54,24 @@ def emit(key,section,quoted=None):
     sp=SPECS[key];value=sp['value'];display=f"{value:.{sp['digits']}f}"
     cid=f'N{len(LEDGER)+1:05d}'
     path=sp['path'].replace(str(W)+'/','').replace(str(V),'<V3>')
-    LEDGER.append(dict(claim_id=cid,section=section,quoted_text=quoted or display,value=display,unit=sp.get('unit','as stated in quoted text'),source_path=path,source_locator=json.dumps(sp['locator']),derivation='direct',check_mode=sp['mode']))
+    unit='count'
+    if any(t in key for t in ['yaw_rmse','yaw_p95','roll_rmse','pitch_rmse','|yaw|']):unit='deg'
+    if any(t in key for t in ['horizontal_rmse','h_rmse','up_rmse','|horizontal|']):unit='m'
+    if any(t in key for t in ['finite_count','failure_count','registered_count']):unit='cases'
+    if 'matched_epoch_count' in key:unit='epochs'
+    if key.startswith('G|') or key in ['D|contract|0.03','D|contract|-0.30']:unit='m'
+    if 'availability' in key:unit='fraction'
+    if 'drift_pct' in key:unit='%'
+    if key=='D|contract|90':unit='deg'
+    if quoted and '[['+key+']]' in quoted:
+        tail=quoted.split('[['+key+']]',1)[1]
+        m=re.match(r'[\s,\]\[−–+\d.]*(°|%|ms|m(?:/s)?|s|Hz)(?![A-Za-z])',tail)
+        if not m and any(x in key for x in ['D|budget|2.00','D|budget|4.18']):unit='deg'
+        if m:unit={'°':'deg'}.get(m.group(1),m.group(1))
+    if key in ['D|unc3|2.20','D|unc3|4.44']:unit='deg'
+    if key in ['D|hx|0.111679','D|hx|0.132593','D|hx|0.059416']:unit='fraction'
+    if key in ['D|hx|33.633600','D|hx|47.525517','D|hx|28.558852']:unit='m per 100 m'
+    LEDGER.append(dict(claim_id=cid,section=section,quoted_text=quoted or display,value=display,unit=unit,source_path=path,source_locator=json.dumps(sp['locator']),derivation='direct',check_mode=sp['mode']))
     return display
 def table_md(name):
     rows=list(csv.DictReader((P/'tables'/f'{name}.csv').open()));cols=list(rows[0]);esc=lambda x:str(x).replace('|','\\|').replace('\n',' ')
@@ -73,6 +94,10 @@ def render(text,doc):
             original=required_unc(line[6:-2]);alias='unc3'
             for match in re.finditer(r'(?<![\w.])\d+(?:\.\d+)?(?![\w.])',original):
                 docspec(alias,match.group());emit('D|'+alias+'|'+match.group(),section,original)
+                suffix=original[match.end():];u=re.match(r'[\s,\]\[−–+\d.]*(°|%|m|s|Hz)(?![A-Za-z])',suffix)
+                if original.startswith('Values are exact') and match.group()!='95':LEDGER[-1]['unit']='deg' if match.start()<original.index('for heading') else 'm'
+                if match.group()=='2' and 'Vision-RTK 2' in original:LEDGER[-1]['unit']='model identifier'
+                if u:LEDGER[-1]['unit']={'°':'deg'}.get(u.group(1),u.group(1))
             lines.append(original);continue
         start=len(LEDGER)
         line=re.sub(r'\[\[([^\]]+)\]\]',lambda m:emit(m.group(1),section,line),line)

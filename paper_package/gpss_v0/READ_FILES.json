@@ -10,6 +10,31 @@
     "bytes": 14160381
   },
   {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/AGENTS.md",
+    "sha256": "6e0190994d953ab819bb801c77ee0f9d8b2b5cbb2529fc78cd6c53437024c7e1",
+    "bytes": 97658
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/configs/paper_rebuild/canonical_by2_internal_ablation_modes.yaml",
+    "sha256": "cc6ca5cb3dcdeaa9fbabba1622652b89b0624ce47e2f0e513908185a83e45875",
+    "bytes": 1081
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/configs/paper_rebuild/clean5/CLEAN5_BY2H_SEQUENCE_CONTRACT.yaml",
+    "sha256": "64bf78d5d4241294922fbc6c18eaeb8ad4c2e40663ba8e5306ab67e1d07d4e19",
+    "bytes": 41427
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/configs/paper_rebuild/clean5/CLEAN5_BY2O_SEQUENCE_CONTRACT.yaml",
+    "sha256": "bf42b2bee9ed96bd81d479bbb8b5533c58c6fce2ddbb5d9eabdeaf60cfd1144d",
+    "bytes": 45079
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/configs/paper_rebuild/clean6/ADDENDUM_FAMILIES_A1_A2_CONTRACT.yaml",
+    "sha256": "fd11e416a3bd1a67c992a3606de0bb988035cae5c80647efa2091d00614546ec",
+    "bytes": 34356
+  },
+  {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/configs/paper_rebuild/degradation_60types_9seeds.yaml",
     "sha256": "9d22768be55b8b88e126f1101e5619ac0afe97cdedc3af28c1458fa9ef83b76f",
     "bytes": 19504
@@ -25,6 +50,26 @@
     "bytes": 3579
   },
   {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/configs/paper_rebuild/v3/PROTOCOL_V3_CONTRACT.yaml",
+    "sha256": "ec24079cba346f88eb047fb5d5ad48467b8060f4b8e3c7c31c48de9bac6dff31",
+    "bytes": 10278
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/cpp/legsa_v23_port_core/include/legsa_v23_port_core/options.hpp",
+    "sha256": "54b3757d0ef41c99adbb37fa9b579461a29afe9a10b3da7ae259152644ac1762",
+    "bytes": 10054
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/cpp/legsa_v23_port_core/src/factors/go2_weak_prior_loader.cpp",
+    "sha256": "8973994b1b0f1b1b974fd7108d1cd2a2a622d1735de074476d427a7445949de2",
+    "bytes": 14351
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/cpp/legsa_v23_port_core/src/factors/raw_doppler_factor.cpp",
+    "sha256": "46786a1a0e4e31db2aba87023d754a5bd2e6480cd57be1eeec4f41f6dcc2946f",
+    "bytes": 1362
+  },
+  {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp",
     "sha256": "19962a218121639dd85e646e20c1e922273ae739d3beac856c8dd9c04aea15b2",
     "bytes": 76823
@@ -35,9 +80,34 @@
     "bytes": 30176
   },
   {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/ACTIVE_CONTEXT.md",
+    "sha256": "b959154e73ec84f618222ef251e0efdd88093edd9054f87cff60037c6971205a",
+    "bytes": 8612
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/CLEAN5_PARITY_PLAN.md",
+    "sha256": "c71f1043f9830ad067d5f15171b326659a0683726910dc855cb85f0ebea85370",
+    "bytes": 27822
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/CLEAN5_SENSOR_CALIBRATION_RECORD.md",
+    "sha256": "15f02e165b18ea7b5832499653589d631ad206793f98a1962b6b20f8b01a3f19",
+    "bytes": 6148
+  },
+  {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/CLEAN5_STAGE2_CLOSEOUT.md",
     "sha256": "a23164b9924ec95e35302473f4e8c615c85f7fddba45e39b053994abd2a0e4b8",
     "bytes": 68558
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/CONVERSATION_HANDOFF.md",
+    "sha256": "4679cd3f87dbb141c8a51a5f4fd66e66d7969c209e1cf0fccfaefa3b12dee9a4",
+    "bytes": 44813
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/DATA_ROLES.md",
+    "sha256": "acdae76572bb01f0af8c645cff8e956e0f9e98859bfc4eec8012e27b6f6676d3",
+    "bytes": 3449
   },
   {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/PROTOCOL_V2_METHOD_STATEMENT.md",
@@ -45,9 +115,34 @@
     "bytes": 13605
   },
   {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX02/HX02_RESULTS.md",
+    "sha256": "a7c12320ee0f3f633a8c6a63af71c60c4c70554208922bd16af60f971998e675",
+    "bytes": 38570
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX02D/HX02D_HARTLEY_DIAGNOSTIC.md",
+    "sha256": "7d0643cf396198372c4c50f91d6f0d9709bfa14bebf4f3621cb655ac8787e7aa",
+    "bytes": 37418
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX02E/HX02E_RESULTS.md",
+    "sha256": "d9ce5856086392a3bccb0062afebbca82dd35391b44baa3c3b271ca1b5c9cb67",
+    "bytes": 9621
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX02_PREREG.md",
+    "sha256": "927f75832ae6ea16aecf55f5935c83367469ec7993030689e3f9b44bae4d2775",
+    "bytes": 54019
+  },
+  {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/BY2O_SEGMENT_TABLE_EXT.csv",
     "sha256": "6b02289d477523400d35de3e4a77dee20290be52b23c579eb42dfcae675a2ad2",
     "bytes": 49807
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/CAPTIONS_HX05.md",
+    "sha256": "7fa1a9180cb8f50ab929c676f15836d4fb5f23fcf6f4951b04ee2caef334f33f",
+    "bytes": 2399
   },
   {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/D43_VELOCITY_NOISE_SUPPLEMENT.csv",
@@ -105,6 +200,31 @@
     "bytes": 13914
   },
   {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/LEG_DR/BY2/RESULT.json",
+    "sha256": "462ddd3b50e38f29a283336b8c48dd8a2aa62c8fbd4f0609d4ac76bfdb9a6483",
+    "bytes": 7579
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/LEG_DR/BY2H/RESULT.json",
+    "sha256": "6681648373a1bed627c49ce29356f736cc8143cfb11fdfddd60fb187054bc819",
+    "bytes": 6820
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/LEG_DR/BY2O/RESULT.json",
+    "sha256": "105566ee09b8784609f3538e03a8fd5ca832fe76df960056c3deebdd524dd2d1",
+    "bytes": 6819
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/MANUSCRIPT_DATA.json",
+    "sha256": "91f1bba426c12dd5f8456519ee0df7a41c298045e4852b364a435386d7ba745a",
+    "bytes": 1023883
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/MANUSCRIPT_TABLES_FULL.md",
+    "sha256": "0b0c0354a6ca7b8117ab1b9ff352cb0273295ece037b26ef5cc99706099a923f",
+    "bytes": 29402
+  },
+  {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/SFIG-HX.pdf",
     "sha256": "612f86fb88d314915d9efd98e3523fdeb5f309cc3d833e4828fb355e12e5945d",
     "bytes": 24533
@@ -120,14 +240,34 @@
     "bytes": 47079
   },
   {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05/SOURCE_CITATIONS.json",
+    "sha256": "5c878699e65daf353d990396f43c4976822dcf96053130d2e0d4414d3f57c746",
+    "bytes": 821330
+  },
+  {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX05_PREREG.md",
     "sha256": "a9cc7ad3d857f629c7442c594fc8d299f336873d004abf8d1a7765ec1c645af9",
     "bytes": 15512
   },
   {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX_INVENTORY.md",
+    "sha256": "345def135e832256ade0a88be30a73a50563c2198dfb32019dfe7093c621ef40",
+    "bytes": 219950
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/T5A_R_HEADING_SENSITIVITY.md",
+    "sha256": "ae7cec545cf8d766568cc67b03a56c8e08933bb2e51153abf8a0a45cf51f3cf6",
+    "bytes": 388099
+  },
+  {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/ERROR_SERIES_RETENTION_INDEX.csv",
     "sha256": "c94ab6244a3ffa7cd4064a9f48995ce7f4918aa1687605bd5e04bc890a5a767a",
     "bytes": 557505
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/PROTOCOL_V3_PREREG.md",
+    "sha256": "060daf89fbf6b2e36af9286d98fcd47e35f80271faed3ecb2f2b359976f10f59",
+    "bytes": 16481
   },
   {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
@@ -153,6 +293,11 @@
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC03_MANUSCRIPT_TEXT.md",
     "sha256": "a1638ea1ed0fc9733590b631df04da778634049d32fb36e20af9508f8c3e6f26",
     "bytes": 7215
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNCERTAINTY_HANDOFF.md",
+    "sha256": "eb54d41299f00f009e3ef8940bb288e84ad5a2a0cdb7a1889d466676b9d263c9",
+    "bytes": 7020
   },
   {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/uncertainty/UNC_BUDGET.csv",
@@ -296,6 +441,16 @@
     "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/T5BCR_REFERENCE_THREE_SEQUENCES_V3.csv",
     "sha256": "eedb79e24acdc9da064118e84be0960d1c755daf83d9e9acb0e16f34bf5f677e",
     "bytes": 23060
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/08_FIGURES/CAPTIONS.md",
+    "sha256": "d6acbbd3c3090614851d0b2fe12370e147a0fd14301c03c4d817823f25d66761",
+    "bytes": 3591
+  },
+  {
+    "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/08_FIGURES/FIGURE_INDEX.md",
+    "sha256": "fddc17c7298923f5020ad9e48028bf793903bbe229e5dfc6ae4cb21c4c908816",
+    "bytes": 429
   },
   {
     "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/08_FIGURES/SFIG01/SFIG01.pdf",
