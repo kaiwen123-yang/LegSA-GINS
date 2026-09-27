@@ -1480,6 +1480,11 @@ T5bc-R explicit human continuation: see `docs/paper_rebuild/hext/T5BC_CONTINUATI
 T5bc-R completed: `PASS_T5BCR_COMPLETE`; code_freeze `e54df899db74ff8c11e37e09803c296965bfafba`. Added 199 native / 378 evaluator calls, original 62 / 116 preserved; total 261 native (2 identity + 259 matrix) / 494 evaluator, retries and identity reruns 0. Matrix: 247 COMPLETED, 8 ALGORITHM_FAILURE_DIVERGED, 3 scalar ALGORITHM_FAILURE_NO_VALID_HEADING_INPUT, 1 B3_NOT_APPLICABLE_NO_HEADING_EPOCHS. Evaluator terminal slots: 494 COMPLETED + 22 skipped algorithm failures + 2 NOT_APPLICABLE. D6 echo: 257 PASS, 4 UNAVAILABLE_NOT_EMITTED. Archive pending/failures 0; native/controller trace opens 0, evaluator trace opens 494. Every version has 36 pilot and 305 subset rows; 8 current figure groups / 24 exports passed actual visual review and 56 machine checks. The late-import source-graph bookkeeping stop after 189 / 358 and its local receipt adapter remain explicit historical evidence; no frozen source bytes or scientific runtime functions changed. D30-D41 B3 sidecars all equal C00; inherited frozen HV changes are documented. Full factual record and 17 exact CSV companions: `docs/paper_rebuild/hext/T5BC_CONTINUATION_RESULTS.md`. v2 ZIP: 12141243345 bytes / 16329 members, SHA256 `ecc1144523748c7492792669fb6f0ed21ab09aac838f89754874f032adfe7590`; all-member SHA/CRC/size and ext4/G equality verified. Original hard stops and partial packages remain preserved; protocol v2.1 remains the sole manuscript chain.
 <!-- T5BCR_CONTINUATION_END -->
 
+UA-01 / UA-01-R / UA-01-R2（2026-09-27）：冻结 v3 链只读不确定度统计，输入 pin 14/14、误差序列 37/37、yaw/h/up 身份门 111/111 PASS。
+解算/评估/参考读取 0/0/0；固定种子 20260927，单线程；既有未跟踪 29/29 未触碰，两个历史硬停记录保留。
+输出 `<CLEAN_ROOT>/stages/CLEAN8_PROTOCOL_V3/10_UNCERTAINTY/`；报告及 CSV：`docs/paper_rebuild/v3/uncertainty/`。
+commit=this commit（`UA-01 uncertainty read-only statistics; no solver/evaluator/trace reads`）；不 push、不做交接包，不修改冻结科学链。
+
 ## V3-01-R permanent storage discipline (2026-09-19)
 
 The explicit V3-01-R authorization supersedes earlier V3 storage placement and

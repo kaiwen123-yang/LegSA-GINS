@@ -1,0 +1,469 @@
+{
+  "task": "UA-01-R2",
+  "inputs": [
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__LC01__CONTRACT_START/EXACT_EVALUATOR_OUTPUT/error_series.csv",
+      "sha256": "9d7888364ccea06ea01051da48d778565ecf5751884543f68cd19d93707f412c",
+      "bytes": 10813393,
+      "lines": 59935,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2__LC01-S__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv",
+      "sha256": "04942059385707fc0a576c5fecd5badf7a2a5e151156c26f73605c0a585c501c",
+      "bytes": 10394337,
+      "lines": 58015,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2O__LC01__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv",
+      "sha256": "bccd253cef7e498c7155ecd4dfc7b2d3475f462da0473579872d6d7e6eca94ce",
+      "bytes": 14160381,
+      "lines": 78442,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/configs/paper_rebuild/DATA_PATHS.CLEAN3R4.local.yaml",
+      "sha256": "693ca35a70531b0fa979e3e2eb4d7ef954c7db992428cc142dbd64bd32880dca",
+      "bytes": 3098,
+      "lines": 33,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/configs/paper_rebuild/degradation_60types_9seeds.yaml",
+      "sha256": "9d22768be55b8b88e126f1101e5619ac0afe97cdedc3af28c1458fa9ef83b76f",
+      "bytes": 19504,
+      "lines": 452,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/hext/HX03R2/DEGRADATION_EXTERNAL_TABLE_R2.csv",
+      "sha256": "17cfce3191231c1631b0b3b1c2d8196a838690e1e9eae83bbcef0621f23d4989",
+      "bytes": 158521,
+      "lines": 397,
+      "expected_sha256": "17cfce3191231c1631b0b3b1c2d8196a838690e1e9eae83bbcef0621f23d4989",
+      "pin_pass": true
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/docs/paper_rebuild/v3/ERROR_SERIES_RETENTION_INDEX.csv",
+      "sha256": "c94ab6244a3ffa7cd4064a9f48995ce7f4918aa1687605bd5e04bc890a5a767a",
+      "bytes": 557505,
+      "lines": 6469,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_GNSS.gnss",
+      "sha256": "68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a",
+      "bytes": 251694,
+      "lines": 1510,
+      "expected_sha256": "68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a",
+      "pin_pass": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+      "sha256": "74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647",
+      "bytes": 5091513,
+      "lines": 63277,
+      "expected_sha256": "74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647",
+      "pin_pass": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_GNSS.gnss",
+      "sha256": "88d18be4ec1b4efe4d74f8fc59683d7209fc803f52c60268a763ce457fa55f00",
+      "bytes": 247428,
+      "lines": 1483,
+      "expected_sha256": "88d18be4ec1b4efe4d74f8fc59683d7209fc803f52c60268a763ce457fa55f00",
+      "pin_pass": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_IMU.imu",
+      "sha256": "d32e4891080e300e6edde4526146636f15ec54df945a0470c57fbbdc3aa5115c",
+      "bytes": 5098435,
+      "lines": 63217,
+      "expected_sha256": "d32e4891080e300e6edde4526146636f15ec54df945a0470c57fbbdc3aa5115c",
+      "pin_pass": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_GNSS.gnss",
+      "sha256": "96ffaa3a88f97d2519381baf20c1e139269665281ff0de2f56fb55f0b2446394",
+      "bytes": 374246,
+      "lines": 2231,
+      "expected_sha256": "96ffaa3a88f97d2519381baf20c1e139269665281ff0de2f56fb55f0b2446394",
+      "pin_pass": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_IMU.imu",
+      "sha256": "48943f3e704ceebbf517bfb073856c1c215b5216e3a5d8b6cd91e7ea7586e49b",
+      "bytes": 7820907,
+      "lines": 95853,
+      "expected_sha256": "48943f3e704ceebbf517bfb073856c1c215b5216e3a5d8b6cd91e7ea7586e49b",
+      "pin_pass": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_DEGSUBSET_BY2/09_HORIZONTAL_V3/LC01_EXT05A/FROZEN_EVALUATOR/error_series.csv",
+      "sha256": "b7af06c18399d525f31e57e86357f196413f5f505999877a5cf9f9fe5a9179c1",
+      "bytes": 10492283,
+      "lines": 58015,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/11_READONLY_CLOSEOUT_H_EXT_04L/MAIN_TABLE_V3.csv",
+      "sha256": "9cadef700c3f20a107ca5f054e1b696353db2b4fc67ad86c3f062de50ba9957e",
+      "bytes": 60045,
+      "lines": 53,
+      "expected_sha256": "9cadef700c3f20a107ca5f054e1b696353db2b4fc67ad86c3f062de50ba9957e",
+      "pin_pass": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00001/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "cfa6d87495f1ba15370268c5b254579a4916eea0c9a863504c1f1e0d25dd4999",
+      "bytes": 5788172,
+      "lines": 56643,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00002/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "77549e7b3d05d29d6101ea866bec0dcd3900d0a6b94adebc12a575857371812f",
+      "bytes": 5787163,
+      "lines": 56643,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00003/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "6aa5848dac4666630bc899c3b37627f50348d21cba17106bbd1d4bd1996cda57",
+      "bytes": 5787391,
+      "lines": 56643,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548",
+      "bytes": 5786321,
+      "lines": 56643,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00005/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "63f8e7161cfd08339b2063e82fff9b283286c75785447f97652dc8e4717ea256",
+      "bytes": 5786710,
+      "lines": 56643,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00006/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "1ed647cb1726d1a1cb91e1407b2bba00ad094d881649c2eada936a5ab00bd86c",
+      "bytes": 5776472,
+      "lines": 56643,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00007/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "21043f66843706ecbddb94c7be4be33294fbe9a2eb684943abad252763e51073",
+      "bytes": 5787289,
+      "lines": 56643,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00008/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "9b2959dc4562086e80f691a6116f0aee741bc09b207f8aec13751904e194dbc0",
+      "bytes": 5787760,
+      "lines": 56643,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00009/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "ad5339a8de26978aa76e794dd27b058fcc169c6411534c805db6d3581345cb68",
+      "bytes": 5787241,
+      "lines": 56643,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00010/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "38c369b52858bcbe32613d74c182eb513e1a88005cb2db9c5337b22543007d49",
+      "bytes": 5788261,
+      "lines": 56643,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00011/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "4beb052724f45d0155fdcda94653be99ea51b57865e1dcac1ffb3d8530e82e4e",
+      "bytes": 5787555,
+      "lines": 56643,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_A03/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "aa91edd1e9cb5f35cc2c4c3653793a6bf5880fd0409ef59aac6140f76fd2f4f9",
+      "bytes": 5985464,
+      "lines": 58581,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_A04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "e28630ebea1c9fba1dc7c343a82471b86328a2cf8a1b26370ca98fbb7abd438d",
+      "bytes": 5979738,
+      "lines": 58581,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_A05/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "842b0a9a43e3f1b1a293871c842d0f6fcb164c48cc210ce0ebc3ce19eba1ce68",
+      "bytes": 5992201,
+      "lines": 58581,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_A06/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "a4f2567e618c00da6ce1912d1a14203641a240c12c05b6bba09dadf3e7f66c20",
+      "bytes": 5985569,
+      "lines": 58581,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_A07/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "067887555a23ed496fd1ca5c6861a34f41c22712244ec0323fe73189f1ebb5c3",
+      "bytes": 5991614,
+      "lines": 58581,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_A08/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "e4609953bbb0cefd40e836a5a7f7f58a91259b7b9592769ab69e4396acfb9ab6",
+      "bytes": 5992121,
+      "lines": 58581,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_A09/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "86c2fafe4b33f225a7f92bbbeb4a8d56e5075c2974cd27237f20fbca3d56790a",
+      "bytes": 5991135,
+      "lines": 58581,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F01/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "ec3d6cbcb205069b6cb92b4b846b7309b1177ae1f72c2a591138d6b132f26382",
+      "bytes": 5998453,
+      "lines": 58581,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F02/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "13b20be5f3145e5b041701f0cfcf993928143d361e112baada69abaef83002f9",
+      "bytes": 5982464,
+      "lines": 58581,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F03/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "4a9ded9aa8d2c3523c271aff8c9d8eb59961549a95e9dd2098518455ad1ee922",
+      "bytes": 5990603,
+      "lines": 58581,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "eef9485bb7420ba23a32bfe6a4eb9d2882f31001892c0435297a44b9b8b67dfb",
+      "bytes": 5985885,
+      "lines": 58581,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_A03/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "dd8bbbbaeb0adead71ffb83a3bc850198bd2436ad6f51dd2d1e8b45e0620c69f",
+      "bytes": 7787526,
+      "lines": 76549,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_A04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "1dfa90a01615b99f61632959de587e616ceff9e2d1d3bfe1c086730ced22909f",
+      "bytes": 7776618,
+      "lines": 76549,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_A05/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "3bd4ca5964faa3b6b69d6a89711fee20d6cae6422be432216d0edda72da14b36",
+      "bytes": 7791521,
+      "lines": 76549,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_A06/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "b7bce2542f954efe16e4067d10e504f769cc5ddffcdbe849c369b7b5fa31c015",
+      "bytes": 7789260,
+      "lines": 76549,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_A07/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "8452aa6fc9693927b8987aed431b0f613d229b35969017cee9b1b1df598eef6c",
+      "bytes": 7791538,
+      "lines": 76549,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_A08/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "15a3a03f1327352e1ede5c8021e99d2630d932c3cc2190cca1bb8e1dbad9e398",
+      "bytes": 7792569,
+      "lines": 76549,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_A09/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "e31c3b542162b9d025a1fed3fed3bb0cf50602e1222533bea17ee6e82301807b",
+      "bytes": 7790693,
+      "lines": 76549,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F01/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "3072f180b49ed7a59c34f04e3359b4ad810b9c6fc2048543aeed4c2dfc20bcbe",
+      "bytes": 7752531,
+      "lines": 76549,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F02/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "f9ea3df87aff0aff26876bc6f3933ad48e269383f5c0ebaaaea570f235998c45",
+      "bytes": 7794926,
+      "lines": 76549,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F03/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "1e551aa58a8465a6b2c3f29bc43cb44848d75cf9b958481f8c52a5fa33840426",
+      "bytes": 7790061,
+      "lines": 76549,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "7c89c024b6088b3d2ba7f1b647a5b742e18e411695f4c39bd821e0eb1cc8a67b",
+      "bytes": 7788877,
+      "lines": 76549,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FAILURE_FAMILY_CONFIG.csv",
+      "sha256": "d374c4370952dc54c328bf868548848059d398801851e021fb664b349773cb50",
+      "bytes": 53015,
+      "lines": 595,
+      "expected_sha256": "d374c4370952dc54c328bf868548848059d398801851e021fb664b349773cb50",
+      "pin_pass": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv",
+      "sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+      "bytes": 323074,
+      "lines": 34,
+      "expected_sha256": "44aeaa0302afab54c8179bbb977c9fdac11ebf4f013ac9becdc731840342f4b1",
+      "pin_pass": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/ADDENDUM_SUMMARY_V3.csv",
+      "sha256": "ab88f5703eb0d9441915984e69ab7fa45fb587a1592dcf00ff54c3d65efdf890",
+      "bytes": 10280,
+      "lines": 78,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/ADDENDUM_TABLE_V3.csv",
+      "sha256": "82aaef841c4e62d13ce4c4a2625b063ec3ac02ffc379db835cf1452486c978bb",
+      "bytes": 4924232,
+      "lines": 496,
+      "expected_sha256": "82aaef841c4e62d13ce4c4a2625b063ec3ac02ffc379db835cf1452486c978bb",
+      "pin_pass": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv",
+      "sha256": "13a2c4e8de7638fa8672bb49d6556f531061a3924fe7dbf6911adfcf53779876",
+      "bytes": 67539,
+      "lines": 151,
+      "expected_sha256": "13a2c4e8de7638fa8672bb49d6556f531061a3924fe7dbf6911adfcf53779876",
+      "pin_pass": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_DISTRIBUTION_V3.csv",
+      "sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+      "bytes": 3223434,
+      "lines": 39677,
+      "expected_sha256": "301cec24cb454781138aa39dd3b86a4b37b7855773e6d28e891b7231047d4c39",
+      "pin_pass": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/CORE_541_SUMMARY_V3.csv",
+      "sha256": "1e0181936e4cf40de57bd1e6f0724acdf1644bb7616aaff0121bbd8a54febd35",
+      "bytes": 11863,
+      "lines": 78,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv",
+      "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+      "bytes": 51910,
+      "lines": 53,
+      "expected_sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+      "pin_pass": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/SUBSET61_SUMMARY_V3.csv",
+      "sha256": "8c4f55d32ebe2f9c124db70fef3eccfffd5467251f6adfa5809480b0798f20e6",
+      "bytes": 11536,
+      "lines": 78,
+      "expected_sha256": null,
+      "pin_pass": null
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/SUBSET61_TABLE_V3.csv",
+      "sha256": "f88d4a82e81fc881cba46db9ab1b511164dbcc2508842259a54a37947c4d0519",
+      "bytes": 6471105,
+      "lines": 672,
+      "expected_sha256": null,
+      "pin_pass": null
+    }
+  ]
+}
