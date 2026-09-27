@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="493.228346pt" height="230.4pt" viewBox="0 0 493.228346 230.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-27T19:09:21.680283</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.8.4, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 230.4 
+L 493.228346 230.4 
+L 493.228346 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 77.986931 187.562667 
+L 168.258474 187.562667 
+L 168.258474 64.256 
+L 77.986931 64.256 
+z
+" clip-path="url(#pe60742218b)" style="fill: #eeeeee; stroke: #555555; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 50.905468 94.72 
+C 52.581288 94.72 54.188697 94.18502 55.373681 93.232883 
+C 56.558665 92.280747 57.224476 90.989191 57.224476 89.642667 
+C 57.224476 88.296142 56.558665 87.004586 55.373681 86.05245 
+C 54.188697 85.100313 52.581288 84.565333 50.905468 84.565333 
+C 49.229647 84.565333 47.622238 85.100313 46.437254 86.05245 
+C 45.25227 87.004586 44.58646 88.296142 44.58646 89.642667 
+C 44.58646 90.989191 45.25227 92.280747 46.437254 93.232883 
+C 47.622238 94.18502 49.229647 94.72 50.905468 94.72 
+z
+" clip-path="url(#pe60742218b)" style="fill: #0072b2; stroke: #0072b2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 195.339937 94.72 
+C 197.015757 94.72 198.623166 94.18502 199.80815 93.232883 
+C 200.993134 92.280747 201.658945 90.989191 201.658945 89.642667 
+C 201.658945 88.296142 200.993134 87.004586 199.80815 86.05245 
+C 198.623166 85.100313 197.015757 84.565333 195.339937 84.565333 
+C 193.664116 84.565333 192.056707 85.100313 190.871723 86.05245 
+C 189.686739 87.004586 189.020929 88.296142 189.020929 89.642667 
+C 189.020929 90.989191 189.686739 92.280747 190.871723 93.232883 
+C 192.056707 94.18502 193.664116 94.72 195.339937 94.72 
+z
+" clip-path="url(#pe60742218b)" style="fill: #0072b2; stroke: #0072b2; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_1">
+    <defs>
+     <path id="m7d340c65cd" d="M -0 4.242641 
+L 4.242641 0 
+L 0 -4.242641 
+L -4.242641 -0 
+z
+" style="stroke: #d55e00; stroke-linejoin: miter"/>
+    </defs>
+    <g clip-path="url(#pe60742218b)">
+     <use xlink:href="#m7d340c65cd" x="123.122702" y="89.642667" style="fill: #d55e00; stroke: #d55e00; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="line2d_2">
+    <defs>
+     <path id="mb7dbb8ec53" d="M -3 3 
+L 3 3 
+L 3 -3 
+L -3 -3 
+z
+" style="stroke: #000000; stroke-linejoin: miter"/>
+    </defs>
+    <g clip-path="url(#pe60742218b)">
+     <use xlink:href="#mb7dbb8ec53" x="137.566149" y="158.549333" style="stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="text_1">
+    <text style="font: 700 9px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif; text-anchor: start" x="19.129884" y="24.6528" transform="rotate(-0 19.129884 24.6528)">(a)</text>
+   </g>
+   <g id="text_2">
+    <text style="font: 7px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif; text-anchor: middle" x="50.905468" y="75.861333" transform="rotate(-0 50.905468 75.861333)">GNSS2 (left)</text>
+   </g>
+   <g id="text_3">
+    <text style="font: 7px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif; text-anchor: middle" x="195.339937" y="75.861333" transform="rotate(-0 195.339937 75.861333)">GNSS1 (right)</text>
+   </g>
+   <g id="patch_5">
+    <path d="M 193.343208 89.642667 
+Q 123.126288 89.642667 54.586419 89.642667 
+" style="fill: none; stroke: #0072b2; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 57.786419 91.242667 
+L 54.586419 89.642667 
+L 57.786419 88.042667 
+" style="fill: none; stroke: #0072b2; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="text_4">
+    <text style="font: 7px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif; text-anchor: middle" x="123.122702" y="71.509333" transform="rotate(-0 123.122702 71.509333)">GNSS2 − GNSS1</text>
+   </g>
+   <g id="text_5">
+    <text style="font: 8px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif" transform="translate(32.162515 47.660333)">Median:</text>
+    <text style="font: 8px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif" transform="translate(31.940015 56.277333)">0.356 m</text>
+   </g>
+   <g id="text_6">
+    <text style="font: 7px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif" transform="translate(43.082198 119.094792)">Evaluation point:</text>
+    <text style="font: 7px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif" transform="translate(42.108761 126.634667)">antenna midpoint</text>
+   </g>
+   <g id="text_7">
+    <text style="font: 7px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif; text-anchor: start" x="148.398734" y="164.352" transform="rotate(-0 148.398734 164.352)">Body IMU</text>
+   </g>
+   <g id="patch_6">
+    <path d="M 137.156225 156.593669 
+Q 130.344604 124.096852 123.762349 92.694289 
+" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #555555; stroke-linecap: round"/>
+    <path d="M 122.852862 96.154468 
+L 123.762349 92.694289 
+L 125.9848 95.497986 
+" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #555555; stroke-linecap: round"/>
+   </g>
+   <g id="text_8">
+    <text style="font: 7px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif" transform="translate(33.410394 150.5725) rotate(-90)">Lever arm</text>
+   </g>
+   <g id="patch_7">
+    <path d="M 123.122702 60.077188 
+Q 123.122702 43.220474 123.122702 27.481795 
+" style="fill: none; stroke: #000000; stroke-linecap: round"/>
+    <path d="M 121.522702 30.681795 
+L 123.122702 27.481795 
+L 124.722702 30.681795 
+" style="fill: none; stroke: #000000; stroke-linecap: round"/>
+   </g>
+   <g id="text_9">
+    <text style="font: 7px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif; text-anchor: start" x="133.955287" y="33.792" transform="rotate(-0 133.955287 33.792)">+X forward</text>
+   </g>
+   <g id="patch_8">
+    <path d="M 75.984967 197.717333 
+Q 48.649118 197.717333 22.431303 197.717333 
+" style="fill: none; stroke: #000000; stroke-linecap: round"/>
+    <path d="M 25.631303 199.317333 
+L 22.431303 197.717333 
+L 25.631303 196.117333 
+" style="fill: none; stroke: #000000; stroke-linecap: round"/>
+   </g>
+   <g id="text_10">
+    <text style="font: 7px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif; text-anchor: start" x="21.115858" y="213.674667" transform="rotate(-0 21.115858 213.674667)">+Y (FLU); −Y (FRD)</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_9">
+    <path d="M 284.347678 187.562667 
+L 455.86361 187.562667 
+L 455.86361 42.496 
+L 284.347678 42.496 
+L 284.347678 187.562667 
+z
+" clip-path="url(#p39dba96346)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #999999; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_11">
+    <text style="font: 700 9px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif; text-anchor: start" x="266.112827" y="24.6528" transform="rotate(-0 266.112827 24.6528)">(b)</text>
+   </g>
+   <g id="text_12">
+    <text style="font: 9px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif" transform="translate(341.342207 100.122573)">[NEED: photo]</text>
+    <text style="font: 9px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif" transform="translate(322.575801 113.73001)">Go2 with both antennas</text>
+    <text style="font: 9px 'Arial', 'Helvetica', 'Liberation Sans', 'DejaVu Sans', sans-serif" transform="translate(322.831035 127.337448)">and mounting geometry</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pe60742218b">
+   <rect x="14.79685" y="20.736" width="216.651704" height="195.84"/>
+  </clipPath>
+  <clipPath id="p39dba96346">
+   <rect x="261.779792" y="20.736" width="216.651704" height="195.84"/>
+  </clipPath>
+ </defs>
+</svg>

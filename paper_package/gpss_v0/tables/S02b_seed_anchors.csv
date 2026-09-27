@@ -1,0 +1,10 @@
+seed_index,seed_value,anchor_name,anchor_time_s
+seed_00,260306001,user_original_206p2s,206.200
+seed_01,260306002,early_motion,88.000
+seed_02,260306003,mid_straight,146.000
+seed_03,260306004,turn_segment,190.000
+seed_04,260306005,low_speed_segment,230.000
+seed_05,260306006,high_motion_segment,118.000
+seed_06,260306007,lower_quality_but_valid_A1,272.000
+seed_07,260306008,raw_doppler_residual_candidate,304.000
+seed_08,260306009,late_recovery_segment,332.000

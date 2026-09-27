@@ -1,0 +1,44 @@
+[
+  {
+    "figure_id": "Fig03",
+    "check": "no_forbidden_text",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "figure_id": "Fig03",
+    "check": "no_suptitle",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "figure_id": "Fig03",
+    "check": "panel_labels",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "figure_id": "Fig03",
+    "check": "axis_units",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "figure_id": "Fig03",
+    "check": "png_min_width",
+    "pass": true,
+    "detail": "4110px"
+  },
+  {
+    "figure_id": "Fig03",
+    "check": "png_not_blank",
+    "pass": true,
+    "detail": "std=50.0"
+  },
+  {
+    "figure_id": "Fig03",
+    "check": "png_file_size",
+    "pass": true,
+    "detail": "772236 bytes"
+  }
+]
