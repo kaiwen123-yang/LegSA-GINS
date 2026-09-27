@@ -1,0 +1,23 @@
+{
+  "data_mode": "recorded_gnss_readonly_diagnostic",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "raw_hashes": "12/12",
+  "DG01_outputs_unchanged": 121,
+  "rtklib_tracked_unchanged": 927,
+  "registered_inputs_unchanged": 62,
+  "baseline_untracked_unchanged": 29,
+  "convbin_calls": 6,
+  "other_external_native_calls": 0,
+  "LegSA_calls": 0,
+  "evaluator_calls": 0,
+  "provider_calls": 0,
+  "reference_reads": 0,
+  "checks": "49/49",
+  "figure_machine_qa": "14/14",
+  "figure_raster_review": "2/2",
+  "scratch_removed": true,
+  "git_scope_pass": true,
+  "registration_commit": "86567e8bd07f7bb4645cc95cecb11d073ce66e7c",
+  "result_commit_locator": "git log -1 --format=%H -- docs/paper_rebuild/hext/DG01R/DG01R_REPORT.md"
+}

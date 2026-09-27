@@ -1,0 +1,134 @@
+[
+  {
+    "sequence": "BY2",
+    "receiver": 1,
+    "argv": [
+      "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin",
+      "-r",
+      "ubx",
+      "-v",
+      "3.04",
+      "-f",
+      "5",
+      "-od",
+      "-os",
+      "-o",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2_R1.obs",
+      "-n",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2_R1.nav",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/UBX/BY2_R1.ubx"
+    ],
+    "returncode": 0,
+    "convbin_sha256": "85b6b981374c7df957492d9423a3c650a35cb5e7253598651070adf4d9f1df2a"
+  },
+  {
+    "sequence": "BY2",
+    "receiver": 2,
+    "argv": [
+      "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin",
+      "-r",
+      "ubx",
+      "-v",
+      "3.04",
+      "-f",
+      "5",
+      "-od",
+      "-os",
+      "-o",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2_R2.obs",
+      "-n",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2_R2.nav",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/UBX/BY2_R2.ubx"
+    ],
+    "returncode": 0,
+    "convbin_sha256": "85b6b981374c7df957492d9423a3c650a35cb5e7253598651070adf4d9f1df2a"
+  },
+  {
+    "sequence": "BY2H",
+    "receiver": 1,
+    "argv": [
+      "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin",
+      "-r",
+      "ubx",
+      "-v",
+      "3.04",
+      "-f",
+      "5",
+      "-od",
+      "-os",
+      "-o",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2H_R1.obs",
+      "-n",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2H_R1.nav",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/UBX/BY2H_R1.ubx"
+    ],
+    "returncode": 0,
+    "convbin_sha256": "85b6b981374c7df957492d9423a3c650a35cb5e7253598651070adf4d9f1df2a"
+  },
+  {
+    "sequence": "BY2H",
+    "receiver": 2,
+    "argv": [
+      "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin",
+      "-r",
+      "ubx",
+      "-v",
+      "3.04",
+      "-f",
+      "5",
+      "-od",
+      "-os",
+      "-o",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2H_R2.obs",
+      "-n",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2H_R2.nav",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/UBX/BY2H_R2.ubx"
+    ],
+    "returncode": 0,
+    "convbin_sha256": "85b6b981374c7df957492d9423a3c650a35cb5e7253598651070adf4d9f1df2a"
+  },
+  {
+    "sequence": "BY2O",
+    "receiver": 1,
+    "argv": [
+      "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin",
+      "-r",
+      "ubx",
+      "-v",
+      "3.04",
+      "-f",
+      "5",
+      "-od",
+      "-os",
+      "-o",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2O_R1.obs",
+      "-n",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2O_R1.nav",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/UBX/BY2O_R1.ubx"
+    ],
+    "returncode": 0,
+    "convbin_sha256": "85b6b981374c7df957492d9423a3c650a35cb5e7253598651070adf4d9f1df2a"
+  },
+  {
+    "sequence": "BY2O",
+    "receiver": 2,
+    "argv": [
+      "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin",
+      "-r",
+      "ubx",
+      "-v",
+      "3.04",
+      "-f",
+      "5",
+      "-od",
+      "-os",
+      "-o",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2O_R2.obs",
+      "-n",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2O_R2.nav",
+      "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/UBX/BY2O_R2.ubx"
+    ],
+    "returncode": 0,
+    "convbin_sha256": "85b6b981374c7df957492d9423a3c650a35cb5e7253598651070adf4d9f1df2a"
+  }
+]

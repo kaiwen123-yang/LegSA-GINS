@@ -1,0 +1,250 @@
+{
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2_INTER_DETAIL.csv.gz": {
+    "sha256": "80eed5396e3acbeba5099b77a7d7cbb1ff98c3e76508af00197c35b362ce981b",
+    "bytes": 6112201
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2_FRACTIONAL_DD_DETAIL.csv.gz": {
+    "sha256": "55b811c6302cb9711dcac29474b6cb3d9de58b480dd515f7a2e8af0aadc55692",
+    "bytes": 514474
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2_R1_clock.csv.gz": {
+    "sha256": "71348a25f1f2c1fadffb441a0feac4055ba905351edde7455196f1c139adbcf7",
+    "bytes": 14246
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2_R1_hp.csv.gz": {
+    "sha256": "5ae9d078541e7e31d66b72f97f49d1cca9cc0f10b178a2f7741c668ed8e1d688",
+    "bytes": 33353
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2_R2_hp.csv.gz": {
+    "sha256": "7a2c448249eaa1a2e79f4d9a74c5be2fd6054b0fa4694f6035459754693824d3",
+    "bytes": 33363
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2_R2_clock.csv.gz": {
+    "sha256": "3000d34a3b68c03256b35c294d282484ad73081d42172061a414eeebf54238aa",
+    "bytes": 14129
+  },
+  "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.nav": {
+    "sha256": "107409d66734988652ba4a38ea7b8bf31094ee2746232c1885fbaa1eec136205",
+    "bytes": 19543
+  },
+  "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.nav": {
+    "sha256": "299d5e881d480e388194e981e402785b3b494d002838b435df5404345ad54974",
+    "bytes": 18609
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2H_INTER_DETAIL.csv.gz": {
+    "sha256": "b764b3ea90e32e92bab4bd2aa8479d0625598a82f163341afc6e495f0bca3d2d",
+    "bytes": 6235898
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2H_FRACTIONAL_DD_DETAIL.csv.gz": {
+    "sha256": "56fa8f55de1eb23a4a08b4cacafc65d44674682efce7747c318331c377e18127",
+    "bytes": 533821
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2H_R1_hp.csv.gz": {
+    "sha256": "bbf5c2e9b86653c998bc078af705c0071a80ac476763d36054c0e6b3225a7907",
+    "bytes": 32770
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2H_R2_hp.csv.gz": {
+    "sha256": "da13f3100061ec46ca68d07b08a0d27f51f38d885b18a8fd382e1a5b2f17e277",
+    "bytes": 33090
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2H_R1_clock.csv.gz": {
+    "sha256": "c24d7a105da9d3317d65091f75447eedf0b92244597d1ea94d2b104a019e404e",
+    "bytes": 13623
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2H_R2_clock.csv.gz": {
+    "sha256": "f35f2a56bfd278c84b52241a548a667c4d8c8a40b5803a2d57623c52c1fa6d2a",
+    "bytes": 13970
+  },
+  "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss1.nav": {
+    "sha256": "fa12cb9485682b433e19f11f6058fc7dca37ee652dd65e374a87758f6ddb8dca",
+    "bytes": 20477
+  },
+  "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss2.nav": {
+    "sha256": "080d03a74c686a39a14d8f26ae13028a619e61b611ccbec72ddbccf42011c83b",
+    "bytes": 19867
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2O_INTER_DETAIL.csv.gz": {
+    "sha256": "5a55736b7f65332d7c3721dc929cbe3135482aac157fdd44c68a20a1d7bd3397",
+    "bytes": 7997518
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2O_FRACTIONAL_DD_DETAIL.csv.gz": {
+    "sha256": "ce064df25cfb13f6d3aceecca15a007fc6f1a10e5ff55c6911077981e926adc2",
+    "bytes": 655544
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2O_R1_hp.csv.gz": {
+    "sha256": "ffe6b53034592cc44a0929cae7666e4d0233167a960e05b4489482d21b2ba601",
+    "bytes": 44618
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2O_R2_hp.csv.gz": {
+    "sha256": "76026364d9dee05af2670d5edef38af986cb1e512e0dd68e50f9d912a8fdf93e",
+    "bytes": 45897
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2O_R1_clock.csv.gz": {
+    "sha256": "def8cc28855985a958d394b9c133e5d68380530f830d79a9fb75ff013f4b53a1",
+    "bytes": 22078
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01/BY2O_R2_clock.csv.gz": {
+    "sha256": "5cb146ad97bde7acded7b70f19a8e358dcefb6a17e20c59d0314707ff0ee24b0",
+    "bytes": 21112
+  },
+  "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss1.nav": {
+    "sha256": "c8b68013684793b1578bb4ab22a2108ba5bcdfb3a08f68547d384d26a7de3e56",
+    "bytes": 23603
+  },
+  "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss2.nav": {
+    "sha256": "32a1e033290f1eae0b39301008df2e3eaa6f443399076e5fbeda6d9eb6db1755",
+    "bytes": 21735
+  },
+  "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin": {
+    "sha256": "85b6b981374c7df957492d9423a3c650a35cb5e7253598651070adf4d9f1df2a",
+    "bytes": 2427232
+  },
+  "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv": {
+    "sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+    "bytes": 27874623
+  },
+  "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-status.csv": {
+    "sha256": "9761d2d7055356857bd7b26a251fdd60fdf6c2b18a882dac74bc35d164e42e08",
+    "bytes": 180182
+  },
+  "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-raw.csv": {
+    "sha256": "39249696329530452a1049b5b39e2c1d8f7e89ae2190d2c95bce70f5b4f44583",
+    "bytes": 26827144
+  },
+  "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-status.csv": {
+    "sha256": "a89763da91481f454d24c6b404a1484901acf54bdf4ffd11113cc7475c223b1e",
+    "bytes": 180165
+  },
+  "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-raw.csv": {
+    "sha256": "b6e0e3108b0902350eb7655fe1a2db23a8f320136ddc6c54bcd7e5dbe2d17508",
+    "bytes": 27331317
+  },
+  "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-status.csv": {
+    "sha256": "6e169474adea70ef9899ef02409015f7cd225aadf1efbe63e51af2a39e297ef2",
+    "bytes": 177572
+  },
+  "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss2-raw.csv": {
+    "sha256": "87e4056c85b58595792578a62aeceb1b594475d654e4e49eb7fccaf5bfff56aa",
+    "bytes": 26928657
+  },
+  "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss2-status.csv": {
+    "sha256": "7773d3c52394b9941c7809a208fa04f6e72e82b7427aaf5de267e1122463c2f8",
+    "bytes": 177858
+  },
+  "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss1-raw.csv": {
+    "sha256": "6035d50419eaa0ff29d9a4b053dbed5d715fd2bec38f44ad4b4be02ca54a4ba9",
+    "bytes": 40997421
+  },
+  "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss1-status.csv": {
+    "sha256": "c3958ba9442c1a84b25c3be6ab649cc3aad2e5976c3f525127a2136d9b72255f",
+    "bytes": 265951
+  },
+  "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss2-raw.csv": {
+    "sha256": "4f18ec7d618c675238d5c40a868ba01802a9d2da9325877d715f75f2f939119f",
+    "bytes": 38866433
+  },
+  "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption\u6570\u636e/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss2-status.csv": {
+    "sha256": "584f489fb3768358b5ee36d752d39b9614398db174ab8b45244910688898d8d9",
+    "bytes": 265699
+  },
+  "<RTKLIB_ROOT>/app/consapp/convbin/convbin.c": {
+    "sha256": "1557fa3892f7181248622aa8aae6dd6e7251708a5b675a179633ade57c60b956",
+    "bytes": 24489
+  },
+  "<RTKLIB_ROOT>/app/consapp/convbin/gcc/makefile": {
+    "sha256": "1ae8e21bd61c547a594437bb8fe362091a1c3f59d99c3a70e98cfb50b23b82b6",
+    "bytes": 4855
+  },
+  "<RTKLIB_ROOT>/src/rcv/ublox.c": {
+    "sha256": "d08da0090cb0a93d3d78c77bc29b658f9f8371485d8855b08b442c6da29dccb7",
+    "bytes": 49949
+  },
+  "<RTKLIB_ROOT>/src/rinex.c": {
+    "sha256": "de6c39dc2ad64d0e9bee4859e8ff91504a36c14f650185e50bc2e30d60c33871",
+    "bytes": 107814
+  },
+  "<RTKLIB_ROOT>/src/convrnx.c": {
+    "sha256": "d10e77a66636fc1ff939d587a70f57dd719984784a879748863d32b810b7dc96",
+    "bytes": 49871
+  },
+  "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.obs": {
+    "sha256": "f3bb057c79aeb967a82123e9840b5173a97d80842f336c30f17853b0bd10be5b",
+    "bytes": 4327844
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2_R1.obs": {
+    "sha256": "036794e397c767598e037b9c85543414841ccc9855c33aca06311bb43bc37590",
+    "bytes": 7722861
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2_R1.nav": {
+    "sha256": "7b72d45273106a3396bb0647f89c95e983bdc2802440e7b1f2760f1b16655e0a",
+    "bytes": 17999
+  },
+  "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.obs": {
+    "sha256": "11a77bb45cbf7461f02bfec3d48cdace38525f54cfd4b2af1306903c2b8dab2e",
+    "bytes": 3948755
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2_R2.obs": {
+    "sha256": "890c33a400d0123ac853b026a469cc526d4c1e6ee84b445c1456f63a77c5a7f9",
+    "bytes": 6949684
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2_R2.nav": {
+    "sha256": "ddfbefcf1645c30661f9d7ab36c81cd753cd0caff672c5df63b6847373221b0c",
+    "bytes": 17675
+  },
+  "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss1.obs": {
+    "sha256": "8ac02d4d59a6ad205b2c34e301e34c717a901132b73c82978ef24e4e742867a3",
+    "bytes": 4231338
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2H_R1.obs": {
+    "sha256": "ab85f69955da0d6ea30ee1045ba40825c5b03cc16cd977e35caafd17de7ea841",
+    "bytes": 7562993
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2H_R1.nav": {
+    "sha256": "4e78974b056896425e6aa8effdfa71e454fea1f2320e63671309f0cac2afec26",
+    "bytes": 20153
+  },
+  "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss2.obs": {
+    "sha256": "e283c27456ca7faa7f9efca863ffd5fd131567b60a25278e93d7348c248534da",
+    "bytes": 4199718
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2H_R2.obs": {
+    "sha256": "3c712167bf168de339031487b6a8b78e341c4d14e854b4a1b105818bd7adf45b",
+    "bytes": 7577061
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2H_R2.nav": {
+    "sha256": "3ea3292357645b34d82ffbf70cf67adb11df8a44405d946fb069721975dc066e",
+    "bytes": 19543
+  },
+  "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss1.obs": {
+    "sha256": "bb0c81ab5727e44c21739c875f7a99b3d2c16a201c4629ba7814dc230afa7b01",
+    "bytes": 6265538
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2O_R1.obs": {
+    "sha256": "498485e84c09ae40e66043b547f68bad32cf05e8a00bb3053bc2c3f9b472cf87",
+    "bytes": 10265996
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2O_R1.nav": {
+    "sha256": "ff972c6c9436093e5a8a29de69284d7d677653b16f011950838412f5d112efb9",
+    "bytes": 21735
+  },
+  "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss2.obs": {
+    "sha256": "7d07520747e48913a0f6baf1a80c98f8848fa01717a345a9794f9d10ccd9949e",
+    "bytes": 5839938
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2O_R2.obs": {
+    "sha256": "f519a865249f6bc65ad6de0e439623f38ccca06ed524608fb3bd5f59f63bde14",
+    "bytes": 9748324
+  },
+  "<CLEAN_ROOT>/stages/CLEAN10_GNSS_RAW_DIAGNOSTIC/DG01R/CONVBIN/BY2O_R2.nav": {
+    "sha256": "6a54587323331d50e3eb7ee665a3634a9614e35c447b46a07ced84945a0dab82",
+    "bytes": 20515
+  },
+  "<W>/src/legsa_gins/paper_rebuild/publication/style.py": {
+    "sha256": "bb6a4571ce81638ad44fa4f5cb39ad35ad121640fc54d03e92cf47b8a9a6bfb7",
+    "bytes": 5194
+  },
+  "<W>/src/legsa_gins/paper_rebuild/publication/qa.py": {
+    "sha256": "caf00d949c2a2f573e3aa0de7a17b7d4046cd7870fbb8beaccfa575e60bb9fdd",
+    "bytes": 3948
+  }
+}
