@@ -1485,6 +1485,12 @@ UA-01 / UA-01-R / UA-01-R2（2026-09-27）：冻结 v3 链只读不确定度统�
 输出 `<CLEAN_ROOT>/stages/CLEAN8_PROTOCOL_V3/10_UNCERTAINTY/`；报告及 CSV：`docs/paper_rebuild/v3/uncertainty/`。
 commit=this commit（`UA-01 uncertainty read-only statistics; no solver/evaluator/trace reads`）；不 push、不做交接包，不修改冻结科学链。
 
+UA-02（2026-09-27）不确定度交付：只读复算自 UA-01（58d6d9c），冻结科学链不变。
+文件清单：4 md + UNC_BUDGET.csv + 9 派生 CSV/JSON + unc02_derive_and_check.py + UNC02_DELIVERY_SHA256.txt，共 16 个交付文件。
+pin 12/12、断言 277/277；清单前后 15/15；解算/评估/参考读取 0/0/0，strace 子进程 0；既有未跟踪 29/29 未触碰。
+交付 `docs/paper_rebuild/v3/uncertainty/`；日志 `<CLEAN_ROOT>/stages/CLEAN8_PROTOCOL_V3/10_UNCERTAINTY/`。
+commit=SELF（本段所在唯一 UA-02 提交；完整哈希见上述日志目录 UA02_COMMIT_RECEIPT.json）；push 按 UA-02 明确授权执行。
+
 ## V3-01-R permanent storage discipline (2026-09-19)
 
 The explicit V3-01-R authorization supersedes earlier V3 storage placement and
