@@ -1,0 +1,229 @@
+{
+  "audits": [
+    {
+      "execve": [
+        "/home/kaiwen/research/LegSA-GINS-EXTERNAL/RTKLIB/app/consapp/rnx2rtkp/gcc/rnx2rtkp"
+      ],
+      "kind": "native",
+      "outside_writes": [],
+      "passed": true,
+      "reference_raw_opens": 0,
+      "run": "BY2_V0",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/NATIVE_OPENAT.strace"
+    },
+    {
+      "execve": [
+        "/home/kaiwen/research/LegSA-GINS-EXTERNAL/RTKLIB/app/consapp/rnx2rtkp/gcc/rnx2rtkp"
+      ],
+      "kind": "native",
+      "outside_writes": [],
+      "passed": true,
+      "reference_raw_opens": 0,
+      "run": "BY2H_V0",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/NATIVE_OPENAT.strace"
+    },
+    {
+      "execve": [
+        "/home/kaiwen/research/LegSA-GINS-EXTERNAL/RTKLIB/app/consapp/rnx2rtkp/gcc/rnx2rtkp"
+      ],
+      "kind": "native",
+      "outside_writes": [],
+      "passed": true,
+      "reference_raw_opens": 0,
+      "run": "BY2O_V0",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/NATIVE_OPENAT.strace"
+    },
+    {
+      "kind": "heading_evaluation",
+      "passed": true,
+      "reference_opens": 1,
+      "run": "BY2_V0",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "kind": "heading_evaluation",
+      "passed": true,
+      "reference_opens": 1,
+      "run": "BY2H_V0",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "kind": "heading_evaluation",
+      "passed": true,
+      "reference_opens": 1,
+      "run": "BY2O_V0",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "execve": [
+        "/home/kaiwen/research/LegSA-GINS-EXTERNAL/RTKLIB/app/consapp/rnx2rtkp/gcc/rnx2rtkp"
+      ],
+      "kind": "native",
+      "outside_writes": [],
+      "passed": true,
+      "reference_raw_opens": 0,
+      "run": "BY2_V0E",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0E/NATIVE_OPENAT.strace"
+    },
+    {
+      "kind": "heading_evaluation",
+      "passed": true,
+      "reference_opens": 1,
+      "run": "BY2_V0E",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0E/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "execve": [
+        "/home/kaiwen/research/LegSA-GINS-EXTERNAL/RTKLIB/app/consapp/rnx2rtkp/gcc/rnx2rtkp"
+      ],
+      "kind": "native",
+      "outside_writes": [],
+      "passed": true,
+      "reference_raw_opens": 0,
+      "run": "BY2H_V0E",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/NATIVE_OPENAT.strace"
+    },
+    {
+      "kind": "heading_evaluation",
+      "passed": true,
+      "reference_opens": 1,
+      "run": "BY2H_V0E",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "execve": [
+        "/home/kaiwen/research/LegSA-GINS-EXTERNAL/RTKLIB/app/consapp/rnx2rtkp/gcc/rnx2rtkp"
+      ],
+      "kind": "native",
+      "outside_writes": [],
+      "passed": true,
+      "reference_raw_opens": 0,
+      "run": "BY2O_V0E",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/NATIVE_OPENAT.strace"
+    },
+    {
+      "kind": "heading_evaluation",
+      "passed": true,
+      "reference_opens": 1,
+      "run": "BY2O_V0E",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "execve": [
+        "/home/kaiwen/research/LegSA-GINS-EXTERNAL/RTKLIB/app/consapp/rnx2rtkp/gcc/rnx2rtkp"
+      ],
+      "kind": "native",
+      "outside_writes": [],
+      "passed": true,
+      "reference_raw_opens": 0,
+      "run": "BY2_V1",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V1/NATIVE_OPENAT.strace"
+    },
+    {
+      "kind": "heading_evaluation",
+      "passed": true,
+      "reference_opens": 1,
+      "run": "BY2_V1",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V1/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "execve": [
+        "/home/kaiwen/research/LegSA-GINS-EXTERNAL/RTKLIB/app/consapp/rnx2rtkp/gcc/rnx2rtkp"
+      ],
+      "kind": "native",
+      "outside_writes": [],
+      "passed": true,
+      "reference_raw_opens": 0,
+      "run": "BY2H_V1",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/NATIVE_OPENAT.strace"
+    },
+    {
+      "kind": "heading_evaluation",
+      "passed": true,
+      "reference_opens": 1,
+      "run": "BY2H_V1",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "execve": [
+        "/home/kaiwen/research/LegSA-GINS-EXTERNAL/RTKLIB/app/consapp/rnx2rtkp/gcc/rnx2rtkp"
+      ],
+      "kind": "native",
+      "outside_writes": [],
+      "passed": true,
+      "reference_raw_opens": 0,
+      "run": "BY2O_V1",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/NATIVE_OPENAT.strace"
+    },
+    {
+      "kind": "heading_evaluation",
+      "passed": true,
+      "reference_opens": 1,
+      "run": "BY2O_V1",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "execve": [
+        "/home/kaiwen/research/LegSA-GINS-EXTERNAL/RTKLIB/app/consapp/rnx2rtkp/gcc/rnx2rtkp"
+      ],
+      "kind": "native",
+      "outside_writes": [],
+      "passed": true,
+      "reference_raw_opens": 0,
+      "run": "BY2_V2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V2/NATIVE_OPENAT.strace"
+    },
+    {
+      "kind": "heading_evaluation",
+      "passed": true,
+      "reference_opens": 1,
+      "run": "BY2_V2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V2/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "execve": [
+        "/home/kaiwen/research/LegSA-GINS-EXTERNAL/RTKLIB/app/consapp/rnx2rtkp/gcc/rnx2rtkp"
+      ],
+      "kind": "native",
+      "outside_writes": [],
+      "passed": true,
+      "reference_raw_opens": 0,
+      "run": "BY2H_V2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/NATIVE_OPENAT.strace"
+    },
+    {
+      "kind": "heading_evaluation",
+      "passed": true,
+      "reference_opens": 1,
+      "run": "BY2H_V2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "execve": [
+        "/home/kaiwen/research/LegSA-GINS-EXTERNAL/RTKLIB/app/consapp/rnx2rtkp/gcc/rnx2rtkp"
+      ],
+      "kind": "native",
+      "outside_writes": [],
+      "passed": true,
+      "reference_raw_opens": 0,
+      "run": "BY2O_V2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/NATIVE_OPENAT.strace"
+    },
+    {
+      "kind": "heading_evaluation",
+      "passed": true,
+      "reference_opens": 1,
+      "run": "BY2O_V2",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "kind": "heading_evaluation",
+      "passed": true,
+      "reference_opens": 1,
+      "run": "BY2_V0convbin",
+      "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0convbin/eval/EVALUATOR_STRACE_AUDIT.json"
+    }
+  ],
+  "passed": true,
+  "time": "2026-09-27T13:30:22.977887+00:00"
+}

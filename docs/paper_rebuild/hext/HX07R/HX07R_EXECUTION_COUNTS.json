@@ -1,0 +1,16 @@
+{
+  "actual": {
+    "LegSA_evaluator": 0,
+    "LegSA_solver": 0,
+    "heading_evaluations": 13,
+    "other_external": 0,
+    "reference_opens": 13,
+    "rnx2rtkp": 12
+  },
+  "budget": {
+    "heading_evaluations": 13,
+    "reference_opens": 13,
+    "rnx2rtkp": 12
+  },
+  "time": "2026-09-27T13:30:22.977688+00:00"
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "G2b": {
+      "different_lines": 0,
+      "first_five": [],
+      "new_Q_counts": {
+        "1": 177,
+        "2": 483
+      },
+      "noncomment_new_lines": 660,
+      "noncomment_original_lines": 660,
+      "original_Q_counts": {
+        "1": 177,
+        "2": 483
+      },
+      "stop_condition": false
+    },
+    "denominator": 1370,
+    "expected": 153,
+    "observed": 153,
+    "passed": true,
+    "sequence": "BY2"
+  },
+  {
+    "G2b": {
+      "different_lines": 0,
+      "first_five": [],
+      "new_Q_counts": {
+        "1": 180,
+        "2": 332
+      },
+      "noncomment_new_lines": 512,
+      "noncomment_original_lines": 512,
+      "original_Q_counts": {
+        "1": 180,
+        "2": 332
+      },
+      "stop_condition": false
+    },
+    "denominator": 1350,
+    "expected": 179,
+    "observed": 179,
+    "passed": true,
+    "sequence": "BY2H"
+  },
+  {
+    "G2b": {
+      "different_lines": 0,
+      "first_five": [],
+      "new_Q_counts": {
+        "1": 165,
+        "2": 339
+      },
+      "noncomment_new_lines": 504,
+      "noncomment_original_lines": 504,
+      "original_Q_counts": {
+        "1": 165,
+        "2": 339
+      },
+      "stop_condition": false
+    },
+    "denominator": 1885,
+    "expected": 112,
+    "observed": 112,
+    "passed": true,
+    "sequence": "BY2O"
+  }
+]

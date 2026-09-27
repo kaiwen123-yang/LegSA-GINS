@@ -1,0 +1,71 @@
+{
+  "checks": [
+    {
+      "check": "no_forbidden_text",
+      "detail": "",
+      "figure_id": "SFIG-HX7",
+      "pass": true
+    },
+    {
+      "check": "no_suptitle",
+      "detail": "",
+      "figure_id": "SFIG-HX7",
+      "pass": true
+    },
+    {
+      "check": "panel_labels",
+      "detail": "",
+      "figure_id": "SFIG-HX7",
+      "pass": true
+    },
+    {
+      "check": "axis_units",
+      "detail": "",
+      "figure_id": "SFIG-HX7",
+      "pass": true
+    },
+    {
+      "check": "png_min_width",
+      "detail": "4179px",
+      "figure_id": "SFIG-HX7",
+      "pass": true
+    },
+    {
+      "check": "png_not_blank",
+      "detail": "std=47.4",
+      "figure_id": "SFIG-HX7",
+      "pass": true
+    },
+    {
+      "check": "png_file_size",
+      "detail": "580373 bytes",
+      "figure_id": "SFIG-HX7",
+      "pass": true
+    }
+  ],
+  "identity": {
+    "figure_id": "SFIG-HX7",
+    "pdf": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/FIGURES/SFIG-HX7.pdf",
+    "pdf_sha256": "01dd6993165e95b67fcf95ad90d4a989b821221a12908ea1489bf8854f9795af",
+    "png": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/FIGURES/SFIG-HX7.png",
+    "png_dpi": 632,
+    "png_height_px": 4187,
+    "png_sha256": "8230469e67bbe4f559cfe9333eb0f6ebc365253c40a82f19b2e65af6f0e6a6fa",
+    "png_width_px": 4179,
+    "svg": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/FIGURES/SFIG-HX7.svg",
+    "svg_sha256": "72d2f8d7d5ae49567153740b8d814db29cab3027bbdad48b2b571c31fae07eba"
+  },
+  "identity_note": "Hashes reflect final files, including SVG trailing-whitespace normalization after saving.",
+  "passed": true,
+  "visual_review": {
+    "count": 1,
+    "observations": [
+      "Four panels (a)-(d) readable; units and denominators visible; no clipped text or overlapping legends.",
+      "Availability uses the full 0-100 percent axis; all four registered variants remain visible.",
+      "Q-state timelines distinguish fixed, float and none; heading error axis covers -180 to +180 degrees and retains outliers.",
+      "Satellite stacks use a common scale; Galileo and QZSS appear in V1; no Reference/Truth payload or label was added."
+    ],
+    "reviewed_at_utc": "2026-09-27T13:35:30.294243+00:00",
+    "status": "PASS"
+  }
+}
