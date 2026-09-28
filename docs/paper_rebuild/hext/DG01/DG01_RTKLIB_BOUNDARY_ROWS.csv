@@ -1,0 +1,2 @@
+time,Q,age_s,ratio,nav_matched,both_fixed,sequence,grid,native_time,valid,rtklib_q,native_in_window,pos_minus_native_s
+3186,1,0,4.7000000000000002,True,True,BY2O,2302020,3185.9979999065399,1,1,False,0.0020000934600830078

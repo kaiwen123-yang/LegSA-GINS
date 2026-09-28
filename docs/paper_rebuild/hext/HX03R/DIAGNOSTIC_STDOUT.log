@@ -1,0 +1,354 @@
+retained run 1
+retained run 2
+retained run 3
+retained run 4
+retained run 5
+retained run 6
+retained run 7
+retained run 8
+retained run 9
+retained run 10
+retained run 11
+retained run 12
+retained run 13
+retained run 14
+retained run 15
+retained run 16
+retained run 17
+retained run 18
+retained run 19
+retained run 20
+retained run 21
+retained run 22
+retained run 23
+retained run 24
+retained run 25
+retained run 26
+retained run 27
+retained run 28
+retained run 29
+retained run 30
+retained run 31
+retained run 32
+retained run 33
+retained run 34
+retained run 35
+retained run 36
+retained run 37
+retained run 38
+retained run 39
+retained run 40
+retained run 41
+retained run 42
+retained run 43
+retained run 44
+retained run 45
+retained run 46
+retained run 47
+retained run 48
+retained run 49
+retained run 50
+retained run 51
+retained run 52
+retained run 53
+retained run 54
+retained run 55
+retained run 56
+retained run 57
+retained run 58
+retained run 59
+retained run 60
+retained run 61
+retained run 62
+retained run 63
+retained run 64
+retained run 65
+retained run 66
+retained run 67
+retained run 68
+retained run 69
+retained run 70
+retained run 71
+retained run 72
+retained run 73
+retained run 74
+retained run 75
+retained run 76
+retained run 77
+retained run 78
+retained run 79
+retained run 80
+retained run 81
+retained run 82
+retained run 83
+retained run 84
+retained run 85
+retained run 86
+retained run 87
+retained run 88
+retained run 89
+retained run 90
+retained run 91
+retained run 92
+retained run 93
+retained run 94
+retained run 95
+retained run 96
+retained run 97
+retained run 98
+retained run 99
+retained run 100
+retained run 101
+retained run 102
+retained run 103
+retained run 104
+retained run 105
+retained run 106
+retained run 107
+retained run 108
+retained run 109
+retained run 110
+retained run 111
+retained run 112
+retained run 113
+{
+  "logical_rows": 146,
+  "unique_physical_runs": 113,
+  "counts_by_type_method": {
+    "D03/LC01": 8,
+    "D03/EXT05C": 8,
+    "D04/LC01": 9,
+    "D04/EXT05C": 9,
+    "D05/LC01": 8,
+    "D05/EXT05C": 8,
+    "D31/LC01": 9,
+    "D06/LC01": 9,
+    "D06/EXT05C": 9,
+    "D62/LC01-BR": 18,
+    "D62/LC01": 17,
+    "D61/LC01": 17,
+    "D62/EXT05C": 17
+  },
+  "logical": {
+    "frozen_horizontal_rmse_m": {
+      "n": 146,
+      "min": 0.4475916681185041,
+      "median": 1.714319302481146,
+      "p95": 8.32627435418161,
+      "max": 14.158956594632556
+    },
+    "frozen_horizontal_max_m": {
+      "n": 146,
+      "min": 5.967034094316545,
+      "median": 19.68057313985921,
+      "p95": 72.76896361044531,
+      "max": 109.20616490213224
+    },
+    "audit_horizontal_max_m": {
+      "n": 146,
+      "min": 0.014002199486893187,
+      "median": 0.03913079253370084,
+      "p95": 0.16314122201501563,
+      "max": 0.22220119215083572
+    },
+    "audit_up_max_m": {
+      "n": 146,
+      "min": 1.1464836102703657e-05,
+      "median": 0.00017379213479529199,
+      "p95": 0.000721077309108864,
+      "max": 0.001034029066758535
+    },
+    "audit_yaw_max_deg": {
+      "n": 146,
+      "min": 6.0254023992456496e-12,
+      "median": 3.001332515850663e-11,
+      "p95": 3.4788172342814505e-11,
+      "max": 1.192006493511144e-10
+    },
+    "audit_hmax_over_frozen_hrmse": {
+      "n": 146,
+      "min": 0.00919822415637047,
+      "median": 0.022802420226922474,
+      "p95": 0.03182324835507483,
+      "max": 0.03456866907434101
+    },
+    "series_recheck_max_relative_difference": {
+      "n": 146,
+      "min": 0.0,
+      "median": 0.0,
+      "p95": 1.7877478892705497e-16,
+      "max": 2.0622221185631925e-16
+    },
+    "error_series_dt_median_s": {
+      "n": 146,
+      "min": 0.0040099620819233905,
+      "median": 0.0040099620819233905,
+      "p95": 0.0040099620819233905,
+      "max": 0.0040099620819233905
+    },
+    "error_series_dt_p95_s": {
+      "n": 146,
+      "min": 0.00800228118891937,
+      "median": 0.00800228118891937,
+      "p95": 0.00800228118891937,
+      "max": 0.00800228118891937
+    }
+  },
+  "unique": {
+    "frozen_horizontal_rmse_m": {
+      "n": 113,
+      "min": 0.4475916681185041,
+      "median": 2.204915527168733,
+      "p95": 8.32627435418161,
+      "max": 14.158956594632556
+    },
+    "frozen_horizontal_max_m": {
+      "n": 113,
+      "min": 5.967034094316545,
+      "median": 22.90102728762393,
+      "p95": 76.56675517294903,
+      "max": 109.20616490213224
+    },
+    "audit_horizontal_max_m": {
+      "n": 113,
+      "min": 0.014002199486893187,
+      "median": 0.050655073933148255,
+      "p95": 0.16314122201501563,
+      "max": 0.22220119215083572
+    },
+    "audit_up_max_m": {
+      "n": 113,
+      "min": 1.1464836102703657e-05,
+      "median": 0.00019357007363751677,
+      "p95": 0.000721077309108864,
+      "max": 0.001034029066758535
+    },
+    "audit_yaw_max_deg": {
+      "n": 113,
+      "min": 6.0254023992456496e-12,
+      "median": 3.001332515850663e-11,
+      "p95": 3.4788172342814505e-11,
+      "max": 1.192006493511144e-10
+    },
+    "audit_hmax_over_frozen_hrmse": {
+      "n": 113,
+      "min": 0.00919822415637047,
+      "median": 0.021966489174247233,
+      "p95": 0.03182324835507483,
+      "max": 0.03456866907434101
+    },
+    "series_recheck_max_relative_difference": {
+      "n": 113,
+      "min": 0.0,
+      "median": 0.0,
+      "p95": 1.7877478892705497e-16,
+      "max": 2.0622221185631925e-16
+    },
+    "error_series_dt_median_s": {
+      "n": 113,
+      "min": 0.0040099620819233905,
+      "median": 0.0040099620819233905,
+      "p95": 0.0040099620819233905,
+      "max": 0.0040099620819233905
+    },
+    "error_series_dt_p95_s": {
+      "n": 113,
+      "min": 0.00800228118891937,
+      "median": 0.00800228118891937,
+      "p95": 0.00800228118891937,
+      "max": 0.00800228118891937
+    }
+  },
+  "controls": {
+    "frozen_horizontal_rmse_m": {
+      "n": 20,
+      "min": 0.09285795127705328,
+      "median": 0.1113753384599325,
+      "p95": 3.503533649807864,
+      "max": 10.133454582184038
+    },
+    "audit_horizontal_max_m": {
+      "n": 20,
+      "min": 2.7284670529393762e-14,
+      "median": 2.8635718045471116e-14,
+      "p95": 3.036789005366737e-14,
+      "max": 3.351623381340333e-14
+    },
+    "audit_up_max_m": {
+      "n": 20,
+      "min": 1.2500417367888872e-14,
+      "median": 1.317002062961592e-14,
+      "p95": 1.574296248918472e-14,
+      "max": 1.9539925233402755e-14
+    },
+    "audit_yaw_max_deg": {
+      "n": 20,
+      "min": 0.0,
+      "median": 0.0,
+      "p95": 0.0,
+      "max": 0.0
+    },
+    "audit_hmax_over_frozen_hrmse": {
+      "n": 20,
+      "min": 3.307483498503001e-15,
+      "median": 2.5398111864753425e-13,
+      "p95": 2.9824209015072914e-13,
+      "max": 3.0460586388821444e-13
+    }
+  },
+  "equivalent_time_offset_s": {
+    "n": 0,
+    "min": null,
+    "median": null,
+    "p95": null,
+    "max": null
+  },
+  "observer_vs_frozen_h_rmse_relative_difference": {
+    "n": 0,
+    "min": null,
+    "median": null,
+    "p95": null,
+    "max": null
+  },
+  "unique_cross_run_regressions": [
+    {
+      "n": 113,
+      "x": "frozen_horizontal_max_m",
+      "y": "audit_horizontal_max_m",
+      "slope": 0.002127006436241559,
+      "intercept": 0.0002705213681350922,
+      "r2": 0.9469042880015941,
+      "scope": "cross-run maxima; epochs not necessarily coincident; not a time-offset test"
+    },
+    {
+      "n": 113,
+      "x": "frozen_horizontal_rmse_m",
+      "y": "audit_horizontal_max_m",
+      "slope": 0.017911248732512812,
+      "intercept": 0.007988222458174208,
+      "r2": 0.9450904895500375,
+      "scope": "cross-run maxima; epochs not necessarily coincident; not a time-offset test"
+    },
+    {
+      "n": 113,
+      "x": "frozen_horizontal_error_vector_secant_rate_max_mps",
+      "y": "audit_horizontal_max_m",
+      "slope": 1.6857196906260292e-06,
+      "intercept": 0.03248895953073705,
+      "r2": 0.6738887940354374,
+      "scope": "cross-run maxima; epochs not necessarily coincident; not a time-offset test"
+    }
+  ],
+  "audit_failure_counts_unique": {
+    "audit_horizontal_max_m": 113,
+    "audit_up_max_m": 0,
+    "audit_yaw_max_deg": 0
+  },
+  "v2_failed_unique": 113,
+  "missing_observer_metrics_logical": 146,
+  "missing_argmax_logical": 146,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "reference_opens": 0,
+  "diagnostic_scope": "retained summary/error-series/capture statistics only; no NAV or reference reconstruction"
+}

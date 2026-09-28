@@ -1,0 +1,44 @@
+[
+  {
+    "example": "kinematics",
+    "argv": [
+      "strace",
+      "-f",
+      "-yy",
+      "-s",
+      "4096",
+      "-e",
+      "trace=openat,execve",
+      "-o",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/OFFICIAL_EXAMPLE/kinematics/OPENAT.strace",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/BUILD/official/bin/kinematics"
+    ],
+    "returncode": 0,
+    "expected_output_in_repository": false,
+    "expected_output_comparison": "NOT_AVAILABLE",
+    "binary_sha256": "765e4d9bec9d4e3d2d65d6550babdadc7c94e50390b455fdbf7c03918e675014",
+    "stdout_sha256": "e4cb9855712ed52e3891474431453c1e58342837d565e9d13aafcdbae97d2d1d",
+    "stdout_bytes": 2804894
+  },
+  {
+    "example": "landmarks",
+    "argv": [
+      "strace",
+      "-f",
+      "-yy",
+      "-s",
+      "4096",
+      "-e",
+      "trace=openat,execve",
+      "-o",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/OFFICIAL_EXAMPLE/landmarks/OPENAT.strace",
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/BUILD/official/bin/landmarks"
+    ],
+    "returncode": 0,
+    "expected_output_in_repository": false,
+    "expected_output_comparison": "NOT_AVAILABLE",
+    "binary_sha256": "5e8560159aa6a6db7e47969c71d9eaa03d5cfd4a2c6e059fd739642df0638798",
+    "stdout_sha256": "ecd92beb0168bf1d46c18490a559129bf377c10fb2a0d304d9659342a1b0596a",
+    "stdout_bytes": 755234
+  }
+]

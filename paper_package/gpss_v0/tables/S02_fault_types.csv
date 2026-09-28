@@ -1,0 +1,61 @@
+Type,Family,Definition,Parameters,Seeds
+D01,gnss outage,GNSS position outage 3s,"{""operation"": ""outage"", ""sources"": [""gnss_position""], ""duration_s"": 3}",00–08; anchors in S2b
+D02,gnss outage,GNSS position outage 5s,"{""operation"": ""outage"", ""sources"": [""gnss_position""], ""duration_s"": 5}",00–08; anchors in S2b
+D03,gnss outage,GNSS position outage 10s,"{""operation"": ""outage"", ""sources"": [""gnss_position""], ""duration_s"": 10}",00–08; anchors in S2b
+D04,gnss outage,GNSS position outage 20s,"{""operation"": ""outage"", ""sources"": [""gnss_position""], ""duration_s"": 20}",00–08; anchors in S2b
+D05,gnss outage,GNSS position velocity outage 10s,"{""operation"": ""outage"", ""sources"": [""gnss_position"", ""receiver_velocity""], ""duration_s"": 10}",00–08; anchors in S2b
+D06,gnss outage,GNSS all update outage 20s,"{""operation"": ""outage"", ""sources"": [""gnss_position"", ""receiver_velocity"", ""dual_yaw""], ""duration_s"": 20}",00–08; anchors in S2b
+D07,gnss outage,GNSS repeated short outage,"{""operation"": ""repeated_outage"", ""sources"": [""gnss_position""], ""interval_count"": 3, ""duration_each_s"": 3, ""seed_controls"": ""interval_start_times""}",00–08; anchors in S2b
+D08,gnss sampling,GNSS downsample 5Hz,"{""operation"": ""downsample"", ""sources"": [""gnss_position"", ""receiver_velocity"", ""dual_yaw""], ""target_rate_hz"": 5, ""seed_controls"": ""phase""}",00–08; anchors in S2b
+D09,gnss sampling,GNSS downsample 2Hz,"{""operation"": ""downsample"", ""sources"": [""gnss_position"", ""receiver_velocity"", ""dual_yaw""], ""target_rate_hz"": 2, ""seed_controls"": ""phase""}",00–08; anchors in S2b
+D10,gnss sampling,GNSS downsample 1Hz,"{""operation"": ""downsample"", ""sources"": [""gnss_position"", ""receiver_velocity"", ""dual_yaw""], ""target_rate_hz"": 1, ""seed_controls"": ""phase""}",00–08; anchors in S2b
+D11,gnss sampling,GNSS random dropout 30,"{""operation"": ""random_dropout"", ""sources"": [""gnss_position"", ""receiver_velocity"", ""dual_yaw""], ""dropout_ratio"": 0.3, ""seed_controls"": ""dropout_pattern""}",00–08; anchors in S2b
+D12,gnss sampling,GNSS random dropout 60,"{""operation"": ""random_dropout"", ""sources"": [""gnss_position"", ""receiver_velocity"", ""dual_yaw""], ""dropout_ratio"": 0.6, ""seed_controls"": ""dropout_pattern""}",00–08; anchors in S2b
+D13,position value,position noise mild,"{""operation"": ""gaussian_position_noise"", ""h_sigma_m"": 0.5, ""v_sigma_m"": 1.0}",00–08; anchors in S2b
+D14,position value,position noise medium,"{""operation"": ""gaussian_position_noise"", ""h_sigma_m"": 1.5, ""v_sigma_m"": 2.5}",00–08; anchors in S2b
+D15,position value,position noise strong,"{""operation"": ""gaussian_position_noise"", ""h_sigma_m"": 3.0, ""v_sigma_m"": 5.0}",00–08; anchors in S2b
+D16,position value,position static bias 1p5m,"{""operation"": ""static_position_bias"", ""horizontal_bias_m"": 1.5, ""vertical_bias_m"": 0.5, ""seed_controls"": ""horizontal_direction_and_vertical_sign""}",00–08; anchors in S2b
+D17,position value,position static bias 3m,"{""operation"": ""static_position_bias"", ""horizontal_bias_m"": 3.0, ""vertical_bias_m"": 1.0, ""seed_controls"": ""horizontal_direction_and_vertical_sign""}",00–08; anchors in S2b
+D18,position value,position slow drift bias,"{""operation"": ""slow_drift_bias"", ""horizontal_start_m"": 0.0, ""horizontal_end_m"": 3.0, ""vertical_start_m"": 0.0, ""vertical_end_m"": 1.0}",00–08; anchors in S2b
+D19,position value,position sinusoidal multipath,"{""operation"": ""sinusoidal_multipath"", ""horizontal_amplitude_m"": 2.0, ""vertical_amplitude_m"": 0.5, ""seed_controls"": ""phase""}",00–08; anchors in S2b
+D20,position value,position spike mild,"{""operation"": ""position_spike"", ""probability"": 0.02, ""horizontal_m"": 2.0, ""vertical_m"": 1.0}",00–08; anchors in S2b
+D21,position value,position spike medium,"{""operation"": ""position_spike"", ""probability"": 0.05, ""horizontal_m"": 4.0, ""vertical_m"": 2.0}",00–08; anchors in S2b
+D22,position value,position spike burst strong,"{""operation"": ""position_burst_spike"", ""burst_length_epochs_min"": 3, ""burst_length_epochs_max"": 5, ""horizontal_m"": 8.0, ""vertical_m"": 4.0}",00–08; anchors in S2b
+D23,position std status,position std inflation 1p5,"{""operation"": ""std_inflation"", ""source"": ""gnss_position_std"", ""factor"": 1.5}",00–08; anchors in S2b
+D24,position std status,position std inflation 2p5,"{""operation"": ""std_inflation"", ""source"": ""gnss_position_std"", ""factor"": 2.5}",00–08; anchors in S2b
+D25,position std status,position std inflation 4p0,"{""operation"": ""std_inflation"", ""source"": ""gnss_position_std"", ""factor"": 4.0}",00–08; anchors in S2b
+D26,position std status,position std deflation 0p25,"{""operation"": ""std_deflation"", ""source"": ""gnss_position_std"", ""factor"": 0.25}",00–08; anchors in S2b
+D27,position std status,bad position optimistic std,"{""operation"": ""bad_position_optimistic_std"", ""h_sigma_m"": 3.0, ""v_sigma_m"": 5.0, ""std_factor"": 0.25}",00–08; anchors in S2b
+D28,position std status,good position pessimistic std,"{""operation"": ""good_position_pessimistic_std"", ""value_change"": ""unchanged"", ""std_factor"": 4.0}",00–08; anchors in S2b
+D29,position std status,gnss status quality downgrade only,"{""operation"": ""status_quality_downgrade_only"", ""value_change"": ""unchanged""}",00–08; anchors in S2b
+D30,dual yaw,dual yaw outage 5s,"{""operation"": ""outage"", ""sources"": [""dual_yaw""], ""duration_s"": 5}",00–08; anchors in S2b
+D31,dual yaw,dual yaw outage 20s,"{""operation"": ""outage"", ""sources"": [""dual_yaw""], ""duration_s"": 20}",00–08; anchors in S2b
+D32,dual yaw,dual yaw noise mild,"{""operation"": ""dual_yaw_gaussian_noise"", ""sigma_deg"": 1.0, ""yaw_wrap"": ""required""}",00–08; anchors in S2b
+D33,dual yaw,dual yaw noise strong,"{""operation"": ""dual_yaw_gaussian_noise"", ""sigma_deg"": 5.0, ""yaw_wrap"": ""required""}",00–08; anchors in S2b
+D34,dual yaw,dual yaw spike 5pct,"{""operation"": ""dual_yaw_spike"", ""probability"": 0.05, ""yaw_wrap"": ""required""}",00–08; anchors in S2b
+D35,dual yaw,dual yaw spike 10pct,"{""operation"": ""dual_yaw_spike"", ""probability"": 0.1, ""yaw_wrap"": ""required""}",00–08; anchors in S2b
+D36,dual yaw,dual yaw std inflation 1p5,"{""operation"": ""yaw_std_inflation"", ""factor"": 1.5}",00–08; anchors in S2b
+D37,dual yaw,dual yaw std inflation 3p0,"{""operation"": ""yaw_std_inflation"", ""factor"": 3.0}",00–08; anchors in S2b
+D38,dual yaw,bad yaw optimistic std,"{""operation"": ""bad_yaw_optimistic_std"", ""yaw_noise_sigma_deg"": 10.0, ""optional_spike_component"": true, ""yaw_std_factor"": 0.25, ""yaw_wrap"": ""required""}",00–08; anchors in S2b
+D39,dual yaw,baseline quality dropout,"{""operation"": ""baseline_quality_dropout"", ""fields"": [""rel_valid"", ""quality""], ""seed_controls"": ""unavailable_bursts""}",00–08; anchors in S2b
+D40,dual yaw,baseline length jitter relacc,"{""operation"": ""baseline_length_jitter_relacc"", ""baseline_length_jitter_m"": ""seeded_small_jitter"", ""rel_acc_inflation"": true}",00–08; anchors in S2b
+D41,dual yaw,gnss1 gnss2 asymmetric noise,"{""operation"": ""gnss1_gnss2_asymmetric_noise"", ""h_sigma_m"": 3.0, ""v_sigma_m"": 2.0, ""seed_controls"": ""antenna_selection""}",00–08; anchors in S2b
+D42,velocity raw doppler,receiver velocity outage 20s,"{""operation"": ""outage"", ""sources"": [""receiver_velocity""], ""duration_s"": 20}",00–08; anchors in S2b
+D43,velocity raw doppler,receiver velocity noise 0p5,"{""operation"": ""receiver_velocity_noise"", ""sigma_mps"": 0.5}",00–08; anchors in S2b
+D44,velocity raw doppler,receiver velocity spike 2mps,"{""operation"": ""receiver_velocity_spike"", ""probability"": 0.02, ""magnitude_mps"": 2.0}",00–08; anchors in S2b
+D45,velocity raw doppler,receiver velocity bad optimistic std,"{""operation"": ""receiver_velocity_noise_optimistic_std"", ""sigma_mps"": 0.5, ""std_factor"": 0.25}",00–08; anchors in S2b
+D46,velocity raw doppler,raw doppler outage 20s,"{""operation"": ""outage"", ""sources"": [""raw_doppler_velocity""], ""duration_s"": 20}",00–08; anchors in S2b
+D47,velocity raw doppler,raw doppler noise 0p5,"{""operation"": ""raw_doppler_velocity_noise"", ""sigma_mps"": 0.5}",00–08; anchors in S2b
+D48,velocity raw doppler,raw doppler spike 1p5mps,"{""operation"": ""raw_doppler_velocity_spike"", ""probability"": 0.02, ""magnitude_mps"": 1.5}",00–08; anchors in S2b
+D49,velocity raw doppler,raw doppler bad optimistic std,"{""operation"": ""raw_doppler_anomaly_optimistic_std"", ""anomaly"": ""noise_or_spike_seeded"", ""optimistic_or_floor_std_policy"": true}",00–08; anchors in S2b
+D50,velocity raw doppler,raw receiver velocity conflict,"{""operation"": ""raw_receiver_velocity_conflict"", ""conflict_magnitude_mps"": 1.0}",00–08; anchors in S2b
+D51,go2 prior metadata,go2 roll pitch dropout noise,"{""operation"": ""go2_roll_pitch_dropout_noise"", ""dropout_ratio"": 0.5, ""remaining_noise_sigma_deg"": 3.0}",00–08; anchors in S2b
+D52,go2 prior metadata,go2 roll pitch bias,"{""operation"": ""go2_roll_pitch_bias"", ""bias_deg"": 2.0, ""seed_controls"": ""roll_pitch_direction""}",00–08; anchors in S2b
+D53,go2 prior metadata,go2 horizontal velocity noise,"{""operation"": ""go2_horizontal_velocity_noise"", ""sigma_mps"": 1.0}",00–08; anchors in S2b
+D54,go2 prior metadata,go2 horizontal velocity scale dropout,"{""operation"": ""go2_horizontal_velocity_scale_or_dropout"", ""scale"": 1.5, ""dropout_ratio"": 0.5, ""seed_group_controls"": ""scale_vs_dropout""}",00–08; anchors in S2b
+D55,go2 prior metadata,go2 contact motion metadata uncertain,"{""operation"": ""go2_contact_motion_metadata_uncertain"", ""pattern"": ""missing_or_uncertain_seeded""}",00–08; anchors in S2b
+D56,go2 prior metadata,go2 foot speed contact conflict,"{""operation"": ""go2_foot_speed_contact_conflict"", ""pattern"": ""foot_force_and_foot_speed_conflict_seeded""}",00–08; anchors in S2b
+D57,multi source mixed,multi source latency jitter,"{""operation"": ""multi_source_latency_jitter"", ""components"": [""latency_shift"", ""timestamp_jitter""], ""latency_range_s"": [0.1, 0.3], ""jitter_range_ms"": [20, 50]}",00–08; anchors in S2b
+D58,multi source mixed,outage yaw spike then recovery,"{""operation"": ""mixed_components"", ""components"": [""position_outage_10s"", ""dual_yaw_spike"", ""clean_recovery_interval""], ""recovery_interval"": ""required""}",00–08; anchors in S2b
+D59,multi source mixed,bad position good yaw raw conflict,"{""operation"": ""mixed_components"", ""components"": [""bad_position"", ""good_yaw"", ""raw_receiver_velocity_conflict""], ""conflict_magnitude_mps"": 1.0}",00–08; anchors in S2b
+D60,multi source mixed,multisource bad optimistic then recovery,"{""operation"": ""mixed_components"", ""components"": [""bad_position_optimistic_std"", ""bad_yaw_optimistic_std"", ""bad_velocity_optimistic_std"", ""clean_recovery_interval""], ""recovery_interval"": ""required""}",00–08; anchors in S2b

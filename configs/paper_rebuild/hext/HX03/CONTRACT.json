@@ -1,0 +1,59 @@
+{
+  "D05_policy": "seed_00 run and compare with D03; reuse seeds01..08 only after same-method exact NAV equality",
+  "all_rows_retained": true,
+  "base_cache": {
+    "path": "$STAGES/CLEAN7_HEXT_EXTERNAL_SEQUENCES/02_BY2_IDENTITY/PROVIDER_CACHE/CACHE_MANIFEST.json",
+    "sha256": "24a73d240a604ba1cf80df9a86fdf8f11b7d15e16f5daff7ff5992cb1bd89e55"
+  },
+  "base_time": 1772784000.0,
+  "evaluator": "$STAGES/../16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py",
+  "evaluator_sha256": "aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da",
+  "expected_matrix_native_if_D05_equal": 282,
+  "expected_total_evaluation_if_D05_equal_and_all_outputs": 548,
+  "failure_thresholds": {
+    "displacement_m": 10000,
+    "height_excursion_m": 1000,
+    "speed_mps": 50
+  },
+  "identity": {
+    "EXT05C": {
+      "evaluator_nav_sha256": "5bdb0c4d8fa8959354f3e05e5d0418d9b31607dec5cad37945dd47ddfbb29695",
+      "h_rmse_m": "0.0877508129138417",
+      "source_nav_sha256": "915192d6fcefaf7bef33c4028b571d1b723f7e0759063e2955aebd3d1ee7ace8",
+      "up_rmse_m": "0.05646995229568549",
+      "yaw_p95_absolute_deg": "16.868495836757056",
+      "yaw_rmse_deg": "12.048641737808111"
+    },
+    "LC01": {
+      "evaluator_nav_sha256": "0bea5169d8500015dff472f96ecfd02992b0d7208ad5baeaa5378273ee9056d1",
+      "h_rmse_m": "0.0975479714305497",
+      "source_nav_sha256": "ccd25c2e1309ba2870e57e2208f476a6b48eaba69f0d038f26be2f168bb2c695",
+      "up_rmse_m": "0.05066431825806066",
+      "yaw_p95_absolute_deg": "4.968141341576708",
+      "yaw_rmse_deg": "2.9948274600591076"
+    }
+  },
+  "identity_evaluation": 4,
+  "identity_native": 3,
+  "idle_wait_limit_s": 600,
+  "ignored_type_confirmations_evaluation": "No repeated evaluation; all nine rows use the frozen C00 metrics after NAV identity",
+  "legsa_evaluation_budget": 0,
+  "legsa_native_budget": 0,
+  "matrix_evaluation_versions": [
+    "v3",
+    "v2"
+  ],
+  "max_native_concurrency": 22,
+  "maximum_matrix_native": 298,
+  "maximum_total_evaluation": 580,
+  "maximum_total_native": 301,
+  "parameters": {
+    "path": "$W/configs/paper_rebuild/horizontal_literature/PHASE5_EXT05_PAVLASEK_CONTRACT_V1.yaml",
+    "sha256": "a9476f909ed65c9b4760ac19dc3cde3d625fa3d390b2f133cae79182e2293392"
+  },
+  "schema_version": "hx03.v1",
+  "window": [
+    66,
+    340
+  ]
+}

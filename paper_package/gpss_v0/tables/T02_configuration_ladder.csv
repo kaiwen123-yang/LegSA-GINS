@@ -1,0 +1,6 @@
+Method,GNSS position,Receiver velocity,Heading,Residual gate,Raw Doppler,Source-aware,Roll/pitch,Horizontal velocity
+F01,On,On,Off,Off,Off,Off,Off,Off
+F02,On,Off,On,Off,Off,Off,Off,Off
+F03,On,On,On,On,Off,Off,Off,Off
+A04,On,On,On,On,On,Off,On,On
+F04,On,On,On,On,On,On,On,On

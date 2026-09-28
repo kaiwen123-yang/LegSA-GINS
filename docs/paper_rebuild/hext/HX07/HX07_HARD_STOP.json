@@ -1,0 +1,18 @@
+{
+  "LegSA_evaluator_calls": 0,
+  "LegSA_solver_calls": 0,
+  "gate": {
+    "difference": 4,
+    "expected": 153,
+    "observed": 157,
+    "passed": false,
+    "sequence": "BY2",
+    "tolerance_epochs": 2
+  },
+  "heading_evaluator_calls": 0,
+  "other_external_calls": 0,
+  "reference_opens": 0,
+  "rnx2rtkp_calls": 1,
+  "status": "HARD_STOP_V0_REPRODUCTION",
+  "time": "2026-09-27T12:46:24.602022+00:00"
+}

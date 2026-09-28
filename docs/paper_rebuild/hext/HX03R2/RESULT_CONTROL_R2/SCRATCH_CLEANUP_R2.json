@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "utc": "2026-09-26T12:55:32.218177+00:00",
+  "scratch_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03R2",
+  "exists_after_cleanup": false,
+  "files_sha256": {
+    "UNIT_IDENTITY_FINAL_R2.xml": "614e527f6d3d782bc8aa6671baad2e9e578e7a748a5ec7db93ae1e7ef4a393ad",
+    "UNIT_GATE_R2.xml": "72920f0fa1def780d6d5495bb805adf2bae1537911e00f65cedee1abc4b3be5e",
+    "finalize_results_R2.py": "ca58cdd4b102d5b7f47b176a5050a8074af44af2c430df20f46b9907b34f3a63",
+    "verify_artifacts_R2.py": "9a9e361db2ea07172c8552be466528ebd9d1cb9d03d09841713c7bd5bbb35657",
+    "PUBLISH_R2/AGGREGATE_RECEIPT_R2.json": "d38588f017265ac6df718f0a056515dd3dc71a8f35603c0d9a2011daa752577d",
+    "PUBLISH_R2/EVALUATOR_AUDITS_R2.json": "b4e611ddf9c612e5a221d680886abbc54e9f7b9d7faa9b6c2883ea2f544f5beb",
+    "PUBLISH_R2/AUDIT_MAXIMA_R2.csv": "efb0544cb4f3237dc8b46ec5e220bace5e7bb047290cabf697be712d421dc72f",
+    "PUBLISH_R2/AUDIT_SLOT_DETAIL_R2.json": "34fdd9a55c891fa919a0a10dcf7839821272dd170777cc43dedc0160522ae358",
+    "PUBLISH_R2/HX03R2_RESULTS.md": "03038e210124d2ab23e5a4589714b67edd7347e75e0cfe03e86bf129507da086",
+    "PUBLISH_R2/ARTIFACT_VERIFICATION_R2.json": "57462356526e40f94c27298e8a8e088b0d07c98ce97fe066d9c6ff69004387d8",
+    "PUBLISH_R2/A1_A2_EQUIVALENCE_R2.csv": "7d13ce8d8fe6a2326c13991f617d19a424e9b6aa533520774ed06df7aadc3e3f",
+    "PUBLISH_R2/ALGORITHM_FAILURES_R2.csv": "c505d4772e5f2b46e8c99d1948ba082268d327084764588f93bc9c0b59c39d57",
+    "unit_identity_final_tmp/test_raw_output_whitespace_cha0/summary.json": "738f62ec59e09ab8244dfd5b67debc392261f80165820417c9a041b2b28b56b7",
+    "unit_identity_final_tmp/test_raw_output_whitespace_cha0/error_series.csv": "82f561e067675bb1c50409dfb35386b40a27db3ac05f0ee285e7bf518db6ea7c",
+    "FINAL_AUDIT_R2/EVALUATOR_AUDITS_R2.json": "b4e611ddf9c612e5a221d680886abbc54e9f7b9d7faa9b6c2883ea2f544f5beb",
+    "FINAL_AUDIT_R2/AUDIT_MAXIMA_R2.csv": "efb0544cb4f3237dc8b46ec5e220bace5e7bb047290cabf697be712d421dc72f",
+    "FINAL_AUDIT_R2/AUDIT_SLOT_DETAIL_R2.json": "34fdd9a55c891fa919a0a10dcf7839821272dd170777cc43dedc0160522ae358",
+    "FINAL_AUDIT_R2/ARTIFACT_VERIFICATION_R2.json": "57462356526e40f94c27298e8a8e088b0d07c98ce97fe066d9c6ff69004387d8",
+    "unit_gate_tmp/test_raw_output_whitespace_cha0/summary.json": "738f62ec59e09ab8244dfd5b67debc392261f80165820417c9a041b2b28b56b7",
+    "unit_gate_tmp/test_raw_output_whitespace_cha0/error_series.csv": "82f561e067675bb1c50409dfb35386b40a27db3ac05f0ee285e7bf518db6ea7c"
+  },
+  "archive_root": "SCRATCH_REMAINDER_R2",
+  "handoff_created": false
+}

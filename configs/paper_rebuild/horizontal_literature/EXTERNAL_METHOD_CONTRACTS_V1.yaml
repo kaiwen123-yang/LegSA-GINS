@@ -1,0 +1,151 @@
+schema_version: horizontal_literature.external_methods.v1
+phase: PHASE1
+evaluation: NOT_EVALUATED
+enabled_methods: [EXT01_CLAMBDA]
+enabled_cases: [C00]
+methods:
+  EXT01_CLAMBDA:
+    status: REAL_C00_IMPLEMENTATION
+    baseline_length_m: 0.350
+    selected_observation_group: {gnss: GPS, signal: L1_CA, rawx_identity: [0, 0, 0]}
+    search:
+      policy: rtklib_lambda_reduction_plus_strict_constrained_branch_and_bound
+      per_epoch_budget_exhaustion: SEARCH_TIMEOUT
+      completion_requires: frontier_ambiguity_lower_bound_not_below_second_full_constrained_objective
+    physical_transform:
+      gnss1: right
+      gnss2: left
+      baseline: GNSS2_MINUS_GNSS1
+      body_axis: +Y_left
+      frame: NED
+      baseline_heading: atan2(E,N)
+      body_yaw: wrap(beta + 90 deg)
+      wrap_safe: true
+literature:
+  UBX_ZED_F9T_R02:
+    organization: u-blox
+    title: ZED-F9T Interface Description
+    document: UBX-18053584 R02
+    source: https://content.u-blox.com/sites/default/files/ZED-F9T_InterfaceDescription_%28UBX-18053584%29.pdf
+    sha256: 3d6539cd5ab3efe1254c54e4dba25d17421bfe48ac96e633e602d8d214c13668
+    role: observation_protocol_specification_only
+  P01:
+    authors: P. J. G. Teunissen
+    year: 2006
+    title: The LAMBDA method for the GNSS compass
+    journal: Artificial Satellites 41(3):89-103
+    doi: 10.2478/v10018-007-0009-1
+    source: https://sciendo.com/2/v2/download/article/10.2478/v10018-007-0009-1.pdf
+    sha256: e9e19c60d1f651994c878678f530d288a82eb707e26770ce48b449774317aec4
+    mapped_sections: [Eq1, Eq13, Eq19, Eq21, Eq22, Eq30, Eq34-Eq39, Sec4.4.2]
+  P23:
+    authors: P. J. G. Teunissen
+    year: 2010
+    title: Integer least-squares theory for the GNSS compass
+    journal: Journal of Geodesy 84:433-447
+    doi: 10.1007/s00190-010-0380-8
+    source: https://link.springer.com/content/pdf/10.1007/s00190-010-0380-8.pdf
+    sha256: 734e256229dada2bb1c10a3f290527681a2d2bfa14b3540dd00473e927848546
+    mapped_sections: [Eq43-Eq48, ClassIV_Eq54]
+  P25:
+    authors: P. J. G. Teunissen; G. Giorgi; P. J. Buist
+    year: 2011
+    title: Testing of a new single-frequency GNSS carrier phase attitude determination method
+    journal: GPS Solutions 15:15-28
+    doi: 10.1007/s10291-010-0164-x
+    source: https://link.springer.com/content/pdf/10.1007/s10291-010-0164-x.pdf
+    sha256: 11a514002e93bf659ee0245de55030a2d2d614768838dced64de8621670b407a
+    mapped_sections: [field_method_specification]
+source_policy:
+  papers_are_theory_and_specification_only: true
+  paper_pdfs_copied_into_repository: false
+  third_party_code_copied: false
+  external_runtime_dependency: true
+external_dependency:
+  name: RTKLIB
+  version: 2.4.3_b34
+  remote: https://github.com/tomojitakasu/RTKLIB.git
+  commit: 180043ee24b6d2b168f98b64be15f69d50046b1a
+  license: BSD-2-Clause
+  upstream_source_patch: none
+  reused_parts: [convbin, broadcast_ephemeris, satellite_clock, satellite_position, signal_frequency, lambda_reduction]
+  excluded_answer: ordinary_moving_baseline_solution
+stochastic_model:
+  source: UBX_RXM_RAWX_REPORTED_INDICATORS
+  trace_tuned: false
+  sigma_floors:
+    pseudorange_m: 0.50
+    carrier_cycles: 0.004
+    doppler_hz: 0.02
+  code_policy: max(rawx_reported_sigma_m, 0.50_m_physical_raw_code_floor)
+  rawx_scale:
+    pseudorange_m: "0.01 * 2^prStdev"
+    carrier_cycles: "0.004 * cpStdev; cpStdev=15 is invalid"
+    doppler_hz: "0.002 * 2^doStdev"
+forbidden:
+  trace_online: true
+  trace_selection: true
+  status_yaw_or_baseline_answer: true
+  receiver_imu: true
+  go2_yaw: true
+  final_v23_output: true
+  LegSA_output: true
+  per_case_tuning: true
+  output_only_correction: true
+  epoch_deleted_for_metric: true
+manifest_required_fields:
+  - data_mode
+  - raw_source_hashes
+  - provider_hashes
+  - synthetic_data_used
+  - semisynthetic_data_used
+  - trace_used_online
+  - receiver_imu_as_body_imu
+  - final_v23_output_solver_input
+  - LegSA_output_solver_input
+  - per_case_tuning
+  - output_only_correction
+  - epoch_deleted_for_metric
+  - old_runtime_input_count
+  - code_commit
+  - config_hash
+  - stochastic_contract_hash
+  - paper_source_hashes
+  - ubx_specification_hash
+  - raw_hash_lock_path
+  - raw_hash_lock_sha256
+  - raw_hashes_validated
+  - satellite_state_provider_identity
+  - output_hashes
+  - paired_epoch_count
+  - success_row_count
+  - failure_row_count
+runtime_topology:
+  stage_name: CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON
+  output_root_must_be_absent_before_run: true
+  intermediate_files:
+    gnss1_reconstructed_ubx: 01_SHARED_RAW_BACKEND/gnss1_reconstructed.ubx
+    gnss2_reconstructed_ubx: 01_SHARED_RAW_BACKEND/gnss2_reconstructed.ubx
+    gnss1_reconstructed_obs: 01_SHARED_RAW_BACKEND/gnss1_reconstructed.obs
+    gnss2_reconstructed_obs: 01_SHARED_RAW_BACKEND/gnss2_reconstructed.obs
+    gnss1_reconstructed_nav: 01_SHARED_RAW_BACKEND/gnss1_reconstructed.nav
+    gnss2_reconstructed_nav: 01_SHARED_RAW_BACKEND/gnss2_reconstructed.nav
+  files:
+    execution_contract: 00_CONTRACTS/EXECUTION_CONTRACT_V1.md
+    external_method_contracts: 00_CONTRACTS/EXTERNAL_METHOD_CONTRACTS_V1.yaml
+    heading_stream_schema: 00_CONTRACTS/STANDARD_HEADING_STREAM_SCHEMA_V1.yaml
+    compatibility_registry: 00_CONTRACTS/CASE_METHOD_COMPATIBILITY_V1.csv
+    raw_observation_audit: 01_SHARED_RAW_BACKEND/RAW_OBSERVATION_AUDIT.json
+    epoch_pairing_summary: 01_SHARED_RAW_BACKEND/EPOCH_PAIRING_SUMMARY.csv
+    signal_availability_summary: 01_SHARED_RAW_BACKEND/SIGNAL_AVAILABILITY_SUMMARY.csv
+    tracking_continuity_summary: 01_SHARED_RAW_BACKEND/TRACKING_CONTINUITY_SUMMARY.csv
+    dd_observation_diagnostics: 01_SHARED_RAW_BACKEND/DD_OBSERVATION_DIAGNOSTICS.csv
+    stochastic_contract: 01_SHARED_RAW_BACKEND/STOCHASTIC_MODEL_CONTRACT.yaml
+    ext01_heading_results: 02_EXT01_CLAMBDA/C00/EXT01_C00_NATIVE_HEADING_RESULTS.csv
+    ext01_failure_ledger: 02_EXT01_CLAMBDA/C00/EXT01_C00_FAILURE_LEDGER.csv
+    ext01_runtime: 02_EXT01_CLAMBDA/C00/EXT01_C00_RUNTIME.csv
+    native_summary: 06_NATIVE_C00/EXT01_C00_NATIVE_SUMMARY.json
+    baseline_summary: 06_NATIVE_C00/EXT01_C00_BASELINE_SUMMARY.csv
+    ambiguity_summary: 06_NATIVE_C00/EXT01_C00_AMBIGUITY_SUMMARY.csv
+    phase1_report: 11_REPORT/PHASE1_EXT01_C00_REPORT.md
+    phase1_status: 11_REPORT/PHASE1_STATUS.json

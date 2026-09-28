@@ -1,0 +1,62 @@
+{
+ "UA01_C00_SERIES_STATS.csv": {
+  "expected": "79382d85fd641d1a708e3a8ac44346000cb9a599acdbee83ebcbc650b4ddee04",
+  "actual": "79382d85fd641d1a708e3a8ac44346000cb9a599acdbee83ebcbc650b4ddee04",
+  "pass": true
+ },
+ "UA01_C00_PAIRED_SERIES.csv": {
+  "expected": "071c4ca886d30d33acebcf274f0ab2162dd6087049bf4f167dc4115818af96b4",
+  "actual": "071c4ca886d30d33acebcf274f0ab2162dd6087049bf4f167dc4115818af96b4",
+  "pass": true
+ },
+ "UA01_BY2O_SEGMENT_BANDS.csv": {
+  "expected": "a3f3471438d80109656b63aac7f3b49c8da2551a8b8bd1649d2522723e16e231",
+  "actual": "a3f3471438d80109656b63aac7f3b49c8da2551a8b8bd1649d2522723e16e231",
+  "pass": true
+ },
+ "UA01_TYPE_SEED_DISPERSION.csv": {
+  "expected": "1c0584fc9b21a6df41106dac81903794a64b204234786136af39c29c11ceebca",
+  "actual": "1c0584fc9b21a6df41106dac81903794a64b204234786136af39c29c11ceebca",
+  "pass": true
+ },
+ "UA01_FAMILY_DISPERSION_SUMMARY.csv": {
+  "expected": "bd1567e262c1fba57413353986053676799e473568560520e185d68ae5b1b208",
+  "actual": "bd1567e262c1fba57413353986053676799e473568560520e185d68ae5b1b208",
+  "pass": true
+ },
+ "UA01_PAIRED_OVERALL.csv": {
+  "expected": "7ef92f4e9b2d7a05b61a9c6e2d964cb96e668c142145ae5164aa2733845b854f",
+  "actual": "7ef92f4e9b2d7a05b61a9c6e2d964cb96e668c142145ae5164aa2733845b854f",
+  "pass": true
+ },
+ "UA01_EXTERNAL_PAIRED.csv": {
+  "expected": "5f0bcf02139b0842ae8eff1656ae7acc51222185ca9f630bdc5ed364765a4276",
+  "actual": "5f0bcf02139b0842ae8eff1656ae7acc51222185ca9f630bdc5ed364765a4276",
+  "pass": true
+ },
+ "UA01_DISTRIBUTION_QUANTILES.csv": {
+  "expected": "463f302d8e95f78d2986cb223e1f430d65468e916eeb3589713fecb41829e92b",
+  "actual": "463f302d8e95f78d2986cb223e1f430d65468e916eeb3589713fecb41829e92b",
+  "pass": true
+ },
+ "UA01_ADDENDUM_STATS.csv": {
+  "expected": "0d7385ef6ba7b7305480a5f3cc6c409f11fb78f1d5009acaf2b08bbbbaa1da13",
+  "actual": "0d7385ef6ba7b7305480a5f3cc6c409f11fb78f1d5009acaf2b08bbbbaa1da13",
+  "pass": true
+ },
+ "UA01_ADDENDUM_PAIRED.csv": {
+  "expected": "86057129bd35a2e6a785b8802d0d425bb9b8e1c704c3c565952fbcc9347544aa",
+  "actual": "86057129bd35a2e6a785b8802d0d425bb9b8e1c704c3c565952fbcc9347544aa",
+  "pass": true
+ },
+ "UA01_MOTION_STATS.csv": {
+  "expected": "815496e6a51918cd3bf0a95920c3c2e358683f7dcd5324f8bb633ced357b291c",
+  "actual": "815496e6a51918cd3bf0a95920c3c2e358683f7dcd5324f8bb633ced357b291c",
+  "pass": true
+ },
+ "UA01_IDENTITY_CHECKS.csv": {
+  "expected": "69c361fc8bdd24855ded30038b154895f94ff47b2650a0a25552481e6e88b6bd",
+  "actual": "69c361fc8bdd24855ded30038b154895f94ff47b2650a0a25552481e6e88b6bd",
+  "pass": true
+ }
+}

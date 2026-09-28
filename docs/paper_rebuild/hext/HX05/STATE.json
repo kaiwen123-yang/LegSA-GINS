@@ -1,0 +1,46 @@
+{
+  "status": "HX05_CLOSEOUT_COMPLETE",
+  "registration_commit": "0ebb341dcf968aca71ce7fe057204794935ac1d9",
+  "counts": {
+    "legsa_native": 0,
+    "legsa_evaluation": 0,
+    "external_native": 0,
+    "leg_dr_integrations": 3,
+    "relative_pose_evaluation": 3,
+    "reference_opens": 3
+  },
+  "pin_checks": {
+    "START": {
+      "sealed": 65,
+      "methods": 423,
+      "unrelated": 29,
+      "receipt_sha256": "1a1d789b647e9b40497ee5fef0bfe438440fd05e748eb5185e5853db0b85bd29"
+    },
+    "REGISTRATION": {
+      "sealed": 65,
+      "methods": 423,
+      "unrelated": 29,
+      "receipt_sha256": "cc1681a6ff25bc7d9b2e0c38fdfb7c853d2543978ba1d139d846270859d3d890"
+    },
+    "CLOSEOUT": {
+      "sealed": 65,
+      "methods": 423,
+      "unrelated": 29,
+      "receipt_sha256": "742fffae9691483acc55d8626a5f8bc7f8061e99e790c31915ded7216d345a62"
+    }
+  },
+  "old_stage_metadata_unchanged": true,
+  "source_pin_count": 33,
+  "cleanup_files": 80,
+  "cleanup_bytes": 10880935,
+  "scratch_remaining_files": 0,
+  "figure_machine_checks": "25/25",
+  "actual_visual_review": "3/3",
+  "no_package": true,
+  "storage": {
+    "df_output": "    Avail\n125390936\n 37343488\n",
+    "E_available_bytes": 128400318464,
+    "G_available_bytes": 38239731712,
+    "scratch_bytes": 0
+  }
+}

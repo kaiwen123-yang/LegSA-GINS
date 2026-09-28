@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "counts": {
+    "legsa_native": 0,
+    "legsa_evaluation": 0,
+    "external_native": 0,
+    "leg_dr_integrations": 3,
+    "relative_pose_evaluation": 3,
+    "reference_opens": 3
+  },
+  "run_archives": [
+    {
+      "sequence": "BY2",
+      "passed": true,
+      "trace_open_count": 1,
+      "strace_sha256": "d75b1d96a55868a3c7cfa726edd2dac8a246325e75fbe8031e92b7be021481f5",
+      "metric_file_sha256": "ddec9695ff6b499bf4129e5d780eab4cc398ad244cc47f18345c085c5751c291"
+    },
+    {
+      "sequence": "BY2H",
+      "passed": true,
+      "trace_open_count": 1,
+      "strace_sha256": "e36198e13df3c7f2d335f606d65115319b9ad95764bff586490969c6542de004",
+      "metric_file_sha256": "6926a1d673a7c248e986ca07a29901d9d6a1b1b66b9c4f3389b0edd9c864adc0"
+    },
+    {
+      "sequence": "BY2O",
+      "passed": true,
+      "trace_open_count": 1,
+      "strace_sha256": "ce4fb4829b0b53ccc017cd4f434c41bbbedaa5bd20787debd69254d286affb59",
+      "metric_file_sha256": "d161e20149765c8b2bbaa5a66ed827a8d2e11b24b306a1739b94c3f49a18cdea"
+    }
+  ],
+  "full_window_heading_crosschecks": [
+    {
+      "method": "EXT01",
+      "passed": true
+    },
+    {
+      "method": "EXT02",
+      "passed": true
+    },
+    {
+      "method": "EXT03",
+      "passed": true
+    },
+    {
+      "method": "EXT04_FAR",
+      "passed": true
+    },
+    {
+      "method": "EXT04_PAR",
+      "passed": true
+    },
+    {
+      "method": "RTKLIB_UNMODIFIED_MOVING_BASE",
+      "passed": true
+    }
+  ],
+  "F04_and_LC01_anchors": true,
+  "R2_restored_rows": 146,
+  "main_rows": 14,
+  "supplement_rows": 12,
+  "degradation_rows": 9,
+  "segment_rows": 65,
+  "source_cells": 213,
+  "source_files": 36,
+  "numeric_data_sha256": "91f1bba426c12dd5f8456519ee0df7a41c298045e4852b364a435386d7ba745a",
+  "no_reference_open_in_reporting": true
+}

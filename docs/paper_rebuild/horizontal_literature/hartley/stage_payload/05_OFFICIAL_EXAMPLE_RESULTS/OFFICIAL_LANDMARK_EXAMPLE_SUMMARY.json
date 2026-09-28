@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "example": "landmarks",
+  "scientific_role": "OFFICIAL_LANDMARK_PATH_BUILD_SMOKE_NOT_INERTIAL_PROPAGATION_TRUTH",
+  "repository": "https://github.com/RossHartley/invariant-ekf.git",
+  "commit": "ef16e8a1df72f9272111a488880e3fe9d161f59f",
+  "license": "BSD-3-Clause",
+  "local_patch": false,
+  "command": "cd <HARTLEY_CPP_ROOT>/bin && ./landmarks",
+  "executable_sha256": "3d7ec57bdb864ca1231a7d14d547ec76d02a8a0e1786634054ea1efdd2d66544",
+  "input": {
+    "path": "src/data/imu_landmark_measurements.txt",
+    "sha256": "fe9f4cb906d4189108b5a0162614504979b2f249cc640424908d850a23139b67",
+    "rows": 20192,
+    "imu_rows": 19992,
+    "landmark_rows": 200,
+    "landmark_measurements": 421
+  },
+  "official_execution": {
+    "return_code": 0,
+    "runtime_seconds": 0.01,
+    "max_rss_kib": 4032,
+    "stdout_lines": 20291
+  },
+  "event_counts": {
+    "propagation_calls": 0,
+    "landmark_correction_calls": 200,
+    "landmark_correction_measurements": 420,
+    "landmark_add_count": 1,
+    "final_estimated_landmark_count": 1
+  },
+  "final_state_dimensions": {
+    "X_rows": 6,
+    "X_cols": 6,
+    "theta_rows": 6,
+    "P_rows": 18,
+    "P_cols": 18
+  },
+  "diagnostics": {
+    "source": "UNTRACKED_OUT_OF_TREE_HARNESS_LINKED_TO_UNMODIFIED_OFFICIAL_LIBRARY",
+    "harness_sha256": "cc52a08ddd6dda8b21d066d2cc6dfadc6e27a0c9c955cc93038f77f46dfe7477",
+    "finite_state": true,
+    "finite_covariance": true,
+    "covariance_max_abs_asymmetry": 5.551115123125783e-16,
+    "covariance_symmetry_tolerance": 1e-10,
+    "covariance_symmetric_within_tolerance": true,
+    "covariance_min_eigenvalue_symmetrized": 9.27596869229605e-6,
+    "covariance_max_eigenvalue_symmetrized": 1.5000287005917698,
+    "covariance_psd_with_tolerance": true,
+    "rotation_determinant": 0.9999999999999992
+  },
+  "final_state_observation": {
+    "velocity": [0.0, 0.0, 0.0],
+    "position": [1.0505355730213919, -0.5354667134643939, 0.2560620958902099],
+    "gyroscope_bias": [0.0, 0.0, 0.0],
+    "accelerometer_bias": [0.0, 0.0, 0.0]
+  },
+  "upstream_parser_limitation": {
+    "present": true,
+    "evidence": "src/examples/landmarks.cpp parses decimal timestamps and IMU values with atoi through stoi98; dt jumps of one second fail the strict dt < 1 gate",
+    "interpretation": "finite run validates the compiled landmark correction path but not IMU propagation"
+  },
+  "paper_expected_value_available": false,
+  "plot_used_as_truth": false
+}

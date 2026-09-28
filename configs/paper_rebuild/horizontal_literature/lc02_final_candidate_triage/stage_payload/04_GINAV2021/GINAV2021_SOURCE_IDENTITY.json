@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "candidate_id": "LC02C_GINAV2021_OFFICIAL_SPP_INS_LC",
+  "paper": {
+    "title": "GINav: a MATLAB-based software for the data processing and analysis of a GNSS/INS integrated navigation system",
+    "doi": "10.1007/s10291-021-01144-9"
+  },
+  "official_repository": "https://github.com/kaichen686/GINav",
+  "branch": "main",
+  "head_commit": "bc6b3ab6c40db996a4fd8e8ca5b748fe21a23666",
+  "tree_oid": "94940c5b72c6003f696f6ed3684ee5b10875e792",
+  "source_lock_policy": {
+    "controlling_identity": "WHOLE_TREE_OID",
+    "controlling_tree_oid": "94940c5b72c6003f696f6ed3684ee5b10875e792",
+    "per_file_hash_registry_role": "NAMED_GATE_EVIDENCE_SUBSET"
+  },
+  "tag_count": 0,
+  "license": {
+    "spdx": "BSD-2-Clause",
+    "path": "LICENSE",
+    "bytes": 1323,
+    "sha256": "97bf25caf038104d0d74d963a2f3b4b8dffb3a8a55bef39547852204333b7504"
+  },
+  "readme": {
+    "path": "README.md",
+    "bytes": 6417,
+    "sha256": "4d543134d7012f0bbe3086c87cac8fee4373fbe38afe1a9921f1fee55fcbc2aa"
+  },
+  "manual": {
+    "path": "doc/GINav User Manual.pdf",
+    "pages": 26,
+    "bytes": 4461097,
+    "sha256": "9a2c287f892c50b7260c5112999750c4b34e2b938506cb2736085454363c6a65",
+    "committed_to_triage_payload": false
+  },
+  "official_spp_ins_lc_config": {
+    "path": "conf/LC/GINav_SPP_LC_CPT.ini",
+    "bytes": 8048,
+    "sha256": "6250830f6785d62e323b51b6852fc15d982ee1768f5a90f9dd031760c98c2196"
+  },
+  "official_sample": {
+    "path": "data/data_cpt.7z",
+    "bytes": 21295419,
+    "sha256": "4758adb3f44e33cacea4b124eab3b591e723a3c722369f5fd303b3b3338bf209",
+    "regression_available": true,
+    "regression_executed": false,
+    "committed_to_triage_payload": false
+  },
+  "runtime_requirement": "MATLAB_2016A_OR_NEWER",
+  "identity_rechecked_date": "2026-08-25",
+  "source_checkout_committed": false,
+  "software_executed": false
+}

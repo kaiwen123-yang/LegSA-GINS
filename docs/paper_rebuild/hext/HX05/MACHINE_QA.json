@@ -1,0 +1,156 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "figure_id": "FIG02S",
+      "check": "no_forbidden_text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "figure_id": "FIG02S",
+      "check": "no_suptitle",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "figure_id": "FIG02S",
+      "check": "panel_labels",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "figure_id": "FIG02S",
+      "check": "axis_units",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "figure_id": "FIG02S",
+      "check": "png_min_width",
+      "pass": true,
+      "detail": "4183px"
+    },
+    {
+      "figure_id": "FIG02S",
+      "check": "png_not_blank",
+      "pass": true,
+      "detail": "std=41.0"
+    },
+    {
+      "figure_id": "FIG02S",
+      "check": "png_file_size",
+      "pass": true,
+      "detail": "562765 bytes"
+    },
+    {
+      "figure_id": "FIG02S",
+      "check": "legend_and_bound_panels",
+      "pass": true,
+      "detail": "15 panels"
+    },
+    {
+      "figure_id": "FIG02D",
+      "check": "no_forbidden_text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "figure_id": "FIG02D",
+      "check": "no_suptitle",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "figure_id": "FIG02D",
+      "check": "panel_labels",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "figure_id": "FIG02D",
+      "check": "axis_units",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "figure_id": "FIG02D",
+      "check": "png_min_width",
+      "pass": true,
+      "detail": "4180px"
+    },
+    {
+      "figure_id": "FIG02D",
+      "check": "png_not_blank",
+      "pass": true,
+      "detail": "std=33.2"
+    },
+    {
+      "figure_id": "FIG02D",
+      "check": "png_file_size",
+      "pass": true,
+      "detail": "457502 bytes"
+    },
+    {
+      "figure_id": "FIG02D",
+      "check": "legend_and_bound_panels",
+      "pass": true,
+      "detail": "3 panels"
+    },
+    {
+      "figure_id": "SFIG-HX",
+      "check": "no_forbidden_text",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "figure_id": "SFIG-HX",
+      "check": "no_suptitle",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "figure_id": "SFIG-HX",
+      "check": "panel_labels",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "figure_id": "SFIG-HX",
+      "check": "axis_units",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "figure_id": "SFIG-HX",
+      "check": "png_min_width",
+      "pass": true,
+      "detail": "4180px"
+    },
+    {
+      "figure_id": "SFIG-HX",
+      "check": "png_not_blank",
+      "pass": true,
+      "detail": "std=40.0"
+    },
+    {
+      "figure_id": "SFIG-HX",
+      "check": "png_file_size",
+      "pass": true,
+      "detail": "312469 bytes"
+    },
+    {
+      "figure_id": "SFIG-HX",
+      "check": "legend_and_bound_panels",
+      "pass": true,
+      "detail": "6 panels"
+    },
+    {
+      "figure_id": "ALL",
+      "check": "no_duplicate_rasters",
+      "pass": true,
+      "detail": "[]"
+    }
+  ],
+  "actual_visual_review": "PENDING"
+}

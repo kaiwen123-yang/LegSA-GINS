@@ -1,0 +1,9 @@
+row,source,type,enters,magnitude,effect,cancels_in_paired_comparison
+1,reference_heading_slow_bias,B,yaw,"<=1.14 deg (manufacturer 0.4 deg @1 m scaled to 0.35 m); receiver-reported attitude std 0.886/0.910/0.970 deg median, max 1.45/1.32/1.83 deg; short-term (<5 s) noise <=0.059 deg from static-segment coasting estimators",inside bias+slow part of every row,yes
+2,common_mode_fast_heading_term,B,yaw,fast std 1.229-1.311 / 1.391-1.415 / 1.053-1.079 deg (BY2/BY2H/BY2O) across all estimators; 0.059 deg static,48/53/20 % of F04 yaw MSE,yes
+3,installation_yaw_estimator_bias,B,yaw,F04 -1.086/-0.538/+0.339 deg; F02 -1.390 (BY2); LC01 -1.353/-0.805/+0.300; LC01-S -0.357 (BY2),33/8/2 % of F04 yaw MSE,no
+4,reference_position,B,"horizontal,height",pAcc median 0.0188/0.0185/0.0180 m (P95<=0.026) lower bound; receiver-reported position std ~0.05 m/axis upper bound,floor 0.02-0.07 m horizontal,yes
+5,along_track_common_offset,B,horizontal,forward mean +0.0444/+0.0303/+0.0282 m (all IMU-point methods); 37/25/31 ms equivalent at 1.19/1.20/0.89 m/s,20.4/19.3/25.0 % of horizontal MSE,yes
+6,evaluation_point_lever_arm,B,"horizontal,height","lever arm [0.03,0.03-0.178,-0.30] m; lateral verified <=7 mm; vertical not CAD-verified, bounded by height residual mean -0.0170/-0.0072/-0.0188 m; attitude x lever leakage <=17 mm (F04) inside measured error",horizontal <=7 mm; height <=0.02 m bias,yes
+9,fault_seed_sampling,A,per-type statistics,"F04 yaw SD median 0.0023 deg, P90 0.268, <0.1 deg for 50/60 types, >=1 deg D14,D15,D41,D59; horizontal SD median 0.00045 m, P90 0.0204, >=0.1 m D06,D22,D60",per type,pairs by case_id
+10,window_realization,A,absolute levels,"F04 yaw MBB95 [1.604,2.158]/[1.602,2.037]/[1.364,3.613] deg; horizontal [0.0452,0.1520]/[0.0452,0.0853]/[0.0376,0.0730] m",+-0.3/+-0.2/+-1.1 deg; +-0.05/+-0.02/+-0.02 m,partly; paired series carry own intervals

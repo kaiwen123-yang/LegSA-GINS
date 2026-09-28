@@ -14,6 +14,7 @@
 #include "legsa_v23_port_core/source_aware/measurement_source.hpp"
 #include "legsa_v23_port_core/source_aware/quality_state_manager.hpp"
 #include "legsa_v23_port_core/types.hpp"
+#include "legsa_v23_port_core/baseline3d.hpp"
 
 #include <string>
 
@@ -37,6 +38,12 @@ struct PortOptions {
   std::string algorithm_id;
   std::string imu_path;
   std::string gnss_path;
+  // T5bc opt-in only. Zero denotes unset, never a scientific default.
+  std::string dual_antenna_measurement_model = "scalar";
+  std::string baseline3d_path;
+  double baseline3d_length_m = 0.0;
+  double baseline3d_k_b = 0.0;
+  Baseline3dCounts baseline3d_counts;
   std::string propagation_imu_source = "configured_imu_runtime_input";
   bool common_initialization = false;
   bool common_initialization_dual_yaw_used = false;
@@ -154,6 +161,9 @@ struct PortOptions {
   std::string clean_input_provenance_label;
   std::string config_policy_evidence_status = "source_backed_runtime_config";
   std::size_t propagation_count = 0;
+  std::size_t cov_health_fail_count = 0;
+  double cov_health_first_failure_time = -1.0;
+  std::string cov_health_status = "NOT_EVALUATED";
   std::size_t measurement_update_count = 0;
   std::size_t position_update_count = 0;
   std::size_t velocity_update_count = 0;

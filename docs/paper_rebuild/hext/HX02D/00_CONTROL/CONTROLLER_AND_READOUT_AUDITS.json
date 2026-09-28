@@ -1,0 +1,352 @@
+{
+  "00_CONTROL/CONTROLLER_OPENAT.strace": {
+    "passed": true,
+    "reference_bag_fpl_open_count": 0,
+    "write_scope": {
+      "pass": true,
+      "write_open_count": 7,
+      "write_outside_run_count": 0,
+      "outside_run_write_open_count": 0,
+      "outside_run_write_open_records": [],
+      "write_open_records": [
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/00_CONTROL/DIAGNOSTIC_CHILD_REGISTRATION.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/00_CONTROL/DIAGNOSTIC_CHILD_REGISTRATION.json",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/B_REFERENCE_FREE/BY2/SPEC.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/B_REFERENCE_FREE/BY2/SPEC.json",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/00_CONTROL/CALLS.jsonl",
+          "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/00_CONTROL/CALLS.jsonl",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/B_REFERENCE_FREE/BY2/stdout.log",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/B_REFERENCE_FREE/BY2/stdout.log",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/B_REFERENCE_FREE/BY2/stderr.log",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/B_REFERENCE_FREE/BY2/stderr.log",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/B_REFERENCE_FREE/BY2/B_STRACE_AUDIT.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/B_REFERENCE_FREE/BY2/B_STRACE_AUDIT.json",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/00_CONTROL/CALLS.jsonl",
+          "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/00_CONTROL/CALLS.jsonl",
+          "anonymous_pipe": false
+        }
+      ],
+      "allowed_device_write_count": 0,
+      "allowed_device_write_records": [],
+      "allowed_anonymous_pipe_write_count": 0,
+      "allowed_anonymous_pipe_write_records": [],
+      "raw_write_open_count": 0,
+      "clean_root_outside_run_write_count": 0,
+      "write_scope_exceptions": [
+        "/dev/null",
+        "/dev/pts/*",
+        "kernel-identified anonymous pipe"
+      ]
+    },
+    "execve_programs": [
+      "/usr/bin/python3"
+    ],
+    "sha256": "82d19364bc786e2194c8cbc9b226ed931e6ac3d435cf2233328a408988e15d6b"
+  },
+  "EXECUTION_V2/00_CONTROL/CONTROLLER_OPENAT.strace": {
+    "passed": true,
+    "reference_bag_fpl_open_count": 0,
+    "write_scope": {
+      "pass": true,
+      "write_open_count": 26,
+      "write_outside_run_count": 0,
+      "outside_run_write_open_count": 0,
+      "outside_run_write_open_records": [],
+      "write_open_records": [
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/DIAGNOSTIC_CHILD_REGISTRATION.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/DIAGNOSTIC_CHILD_REGISTRATION.json",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2/SPEC.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2/SPEC.json",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2/stdout.log",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2/stdout.log",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2/stderr.log",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2/stderr.log",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2/B_STRACE_AUDIT.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2/B_STRACE_AUDIT.json",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2/SPEC.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2/SPEC.json",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2/evaluator_stdout.log",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2/evaluator_stdout.log",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2/evaluator_stderr.log",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2/evaluator_stderr.log",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2/EVALUATOR_STRACE_AUDIT.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2/EVALUATOR_STRACE_AUDIT.json",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2O/SPEC.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2O/SPEC.json",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2O/stdout.log",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2O/stdout.log",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2O/stderr.log",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2O/stderr.log",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2O/B_STRACE_AUDIT.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2O/B_STRACE_AUDIT.json",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2O/SPEC.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2O/SPEC.json",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2O/evaluator_stdout.log",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2O/evaluator_stdout.log",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2O/evaluator_stderr.log",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2O/evaluator_stderr.log",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2O/EVALUATOR_STRACE_AUDIT.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/C_REFERENCE/BY2O/EVALUATOR_STRACE_AUDIT.json",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "flags": "O_WRONLY|O_CREAT|O_APPEND|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/CALLS.jsonl",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/EXECUTION_COUNTERS.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/00_CONTROL/EXECUTION_COUNTERS.json",
+          "anonymous_pipe": false
+        }
+      ],
+      "allowed_device_write_count": 0,
+      "allowed_device_write_records": [],
+      "allowed_anonymous_pipe_write_count": 0,
+      "allowed_anonymous_pipe_write_records": [],
+      "raw_write_open_count": 0,
+      "clean_root_outside_run_write_count": 0,
+      "write_scope_exceptions": [
+        "/dev/null",
+        "/dev/pts/*",
+        "kernel-identified anonymous pipe"
+      ]
+    },
+    "execve_programs": [
+      "/usr/bin/python3"
+    ],
+    "sha256": "501ae07c11da2efab1aa8ed675690c5fb1d272d9051f0efa0dfd9a4d570d3f22"
+  },
+  "EXECUTION_V2/00_CONTROL/B_STATE_READOUT_OPENAT.strace": {
+    "passed": true,
+    "reference_bag_fpl_open_count": 0,
+    "write_scope": {
+      "pass": true,
+      "write_open_count": 5,
+      "write_outside_run_count": 0,
+      "outside_run_write_open_count": 0,
+      "outside_run_write_open_records": [],
+      "write_open_records": [
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_SAVED_STATE_READOUT/BY2_HARTLEY_S_B2_DECOMPOSITION_1S.csv",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_SAVED_STATE_READOUT/BY2_HARTLEY_S_B2_DECOMPOSITION_1S.csv",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_SAVED_STATE_READOUT/BY2_HARTLEY_LIT_B2_DECOMPOSITION_1S.csv",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_SAVED_STATE_READOUT/BY2_HARTLEY_LIT_B2_DECOMPOSITION_1S.csv",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_SAVED_STATE_READOUT/BY2O_HARTLEY_S_B2_DECOMPOSITION_1S.csv",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_SAVED_STATE_READOUT/BY2O_HARTLEY_S_B2_DECOMPOSITION_1S.csv",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_SAVED_STATE_READOUT/BY2O_HARTLEY_LIT_B2_DECOMPOSITION_1S.csv",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_SAVED_STATE_READOUT/BY2O_HARTLEY_LIT_B2_DECOMPOSITION_1S.csv",
+          "anonymous_pipe": false
+        },
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_SAVED_STATE_READOUT/B2_STATE_DECOMPOSITION.json",
+          "flags": "O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC",
+          "return_code": 3,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_SAVED_STATE_READOUT/B2_STATE_DECOMPOSITION.json",
+          "anonymous_pipe": false
+        }
+      ],
+      "allowed_device_write_count": 0,
+      "allowed_device_write_records": [],
+      "allowed_anonymous_pipe_write_count": 0,
+      "allowed_anonymous_pipe_write_records": [],
+      "raw_write_open_count": 0,
+      "clean_root_outside_run_write_count": 0,
+      "write_scope_exceptions": [
+        "/dev/null",
+        "/dev/pts/*",
+        "kernel-identified anonymous pipe"
+      ]
+    },
+    "execve_programs": [
+      "/usr/bin/python3"
+    ],
+    "sha256": "741786aa127d6c7e411193211f3ed97202b5f85bea455e190c800851f176b364"
+  }
+}

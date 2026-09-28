@@ -1,0 +1,24 @@
+semantic,source,location,statement,closed_for_yin_2023,decision,provenance
+k0,Yin 2023,Eq.10 and experiment text,1.15,true,CLOSED,PAPER_DIRECT
+k1,Yin 2023,Eq.10 and experiment text,4.45,true,CLOSED,PAPER_DIRECT
+component_symbol,Yin 2023,Eq.10,"ω U+03C9 omega is the component IGGIII weight; it is distinct from Eqs.12-14 ϖ U+03D6 varpi",true,CLOSED_GLYPH_IDENTITY,PAPER_DIRECT
+low_band,Yin 2023,Eq.10,"ω_i=1 for |tilde_V_i|<=k0",true,CLOSED,PAPER_DIRECT
+middle_band,Yin 2023,Eq.10,"ω_i=(k0/|tilde_V_i|)*((k1-|tilde_V_i|)/(k1-k0))^3 for k0<|tilde_V_i|<=k1",true,CLOSED_SCALAR_FORM,PAPER_DIRECT
+upper_band,Yin 2023,Eq.10,"ω_i=0 for |tilde_V_i|>k1",true,CLOSED_SCALAR_FORM,PAPER_DIRECT
+effective_zero_domain,Y4A algebra,Eq.10 boundary evaluation,"middle expression also equals zero at |tilde_V_i|=k1; operational zero/singularity domain is |tilde_V_i|>=k1",true,CLOSED_DERIVATION,PAPER_DERIVED_FROM_PRINTED_EQUATION
+equation_11_middle_multiplier,Yin 2023,Eq.11,"Latin w(tilde_V_i) multiplies the repeated bar_A(tilde_V_i) in the middle branch; this printed glyph is distinct from Eq.10 Greek omega",true,CLOSED_GLYPH_IDENTITY,PAPER_DIRECT
+equivalent_scalar_information,Yin 2023,Eq.11,"Same bar_A(tilde_V_i) appears on the left and low/middle right branches; the middle RHS additionally uses Latin w(tilde_V_i); prose also states bar_A(tilde_V_i)=R_i^-1",false,SELF_REFERENTIAL_BASE_EQUIVALENT_IDENTITY_UNRESOLVED,PAPER_DIRECT
+conventional_scalar_split,Y4A source reconciliation,Eq.11 candidate,"bar_A_equivalent_i=A_base_i*w(tilde_V_i) with A_base_i=R_i^-1",false,UNSELECTED_CONVENTIONAL_COMPLETION,PAPER_DERIVED_POLICY_BASELINE
+author_clarification,Official peer-review author response,Response 10,"bar_A(tilde_V_i) is called the equivalent weight function; the Eq.10 weighting function enters Eq.11's Latin w multiplier; inverse equivalent weight is observation covariance; no distinct base symbol is introduced and the response does not equate the glyphs",false,CLOSES_WEIGHTING_FUNCTION_RELATION_NOT_BASE_EQUIVALENT_IDENTITY_OR_ASSEMBLY,PAPER_DIRECT_TRANSPORT_CAPTURE
+matrix_assembly,Yin 2023 and author response,Eq.11 and Response 10,"Calls the overloaded bar_A(tilde_V_i) an equivalent weight but gives neither a base/equivalent split nor general correlated-matrix assembly",false,CURRENTLY_UNKNOWN,PAPER_DIRECT_OMISSION
+off_diagonal_rule,Yin 2023 and author response,Eq.11 and Response 10,"No off-diagonal rule is stated",false,CURRENTLY_UNKNOWN,PAPER_DIRECT_OMISSION
+symmetry_PSD,Yin 2023 and author response,Eq.11 and Response 10,"No symmetry or PSD construction is stated",false,CURRENTLY_UNKNOWN,PAPER_DIRECT_OMISSION
+units,Yin 2023,Eqs.10-11,"Eq.10 Greek ω and Eq.11 Latin w are dimensionless weighting functions; A has inverse-variance units",true,CLOSED_SCALAR_UNITS,PAPER_DERIVED_FROM_PRINTED_EQUATION
+direct_IGGIII_chain,Knight 2009,inline citation at Yin Eq.10,"Knight points to the Yang-Cheng-Shum-Tapley IGGIII family; complete equation image unavailable in accessible author upload",false,INLINE_CITATION_DOES_NOT_CLOSE_YIN_ASSEMBLY,CITED_SOURCE_ACCESS_BOUNDARY
+direct_IGGIII_chain,Yang-Cheng-Shum-Tapley 1999,author-upload equations,"uses standardized v_i/sigma_i, MAD robust scale, zero static weight, and middle exponent two",false,DIRECT_SOURCE_DIFFERS_FROM_YIN_EXPONENT_THREE,CITED_SOURCE_CANDIDATE
+adaptive_robust_chain,Yang-He-Xu 2001,author-upload equations,"uses V_i/r_i and a dependent max-based mapping",false,DISTINCT_FOUNDATIONAL_COMPLETION,CITED_SOURCE_CANDIDATE
+correlated_candidate,Yang-Song-Xu 2002,author-upload equations,"symmetric bifactor sqrt(c_ii c_jj); zero factor eliminates a static observation",false,FOUNDATIONAL_CANDIDATE_NOT_EXPLICITLY_ADOPTED,CITED_SOURCE_CANDIDATE
+dependent_source,Yang 1994,official and request-only endpoints,"direct dependent-observation source inaccessible",false,DIRECT_EQUATIONS_UNAVAILABLE,CITED_SOURCE_ACCESS_BOUNDARY
+correlated_candidate,Niu 2022,Eqs.21-24,"Exponent-two inflation; eta_ij=sqrt(eta_ii eta_jj); Rbar_ij=eta_ij R_ij",false,DIFFERENT_CITED_CANDIDATE,CITED_SOURCE_CANDIDATE
+code_candidate,TCRTKINS Fusion.cpp,lines317-389,"Exponent-two factors and upper-row deletion",false,DIFFERENT_CITED_CODE,OFFICIAL_CODE_FOR_CITED_SOURCE
+post_publication_candidate,CN117647251A,IGG claims,"Exponent two and changed method",false,POST_PUBLICATION_RELATED_NOT_EXACT,AUTHOR_INSTITUTION_POST_PUBLICATION_RELATED_PRIMARY

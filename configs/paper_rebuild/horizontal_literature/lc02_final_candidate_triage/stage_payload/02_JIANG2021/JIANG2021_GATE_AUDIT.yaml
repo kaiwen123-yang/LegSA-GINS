@@ -1,0 +1,49 @@
+schema_version: 1
+candidate_id: LC02A_JIANG2021_ADAPTIVE_FADING_CKF
+paper:
+  title: Performance evaluation of the filters with adaptive factor and fading factor for GNSS/INS integrated systems
+  doi: 10.1007/s10291-021-01165-4
+source_boundary: ABSTRACT_AND_BIBLIOGRAPHIC_METADATA_ONLY_FULL_ALGORITHM_SOURCE_UNAVAILABLE
+gates:
+  - gate: G1
+    result: PASS
+    evidence: Publisher and Crossmark metadata close the published family and DOI identity.
+  - gate: G2
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: The abstract identifies GNSS/INS filtering but does not close the complete solution-level loosely coupled interface.
+  - gate: G3
+    result: PASS
+    evidence: At family level the abstract-defined cubature adaptive/fading mechanism is structurally distinct from LC01 two-receiver invariant rigid-vector filtering; no performance value is used.
+  - gate: G4
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: Nominal state and mechanization details are unavailable.
+  - gate: G5
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: Process noise and discretization details are unavailable.
+  - gate: G6
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: Measurement frame physical point lever arm timing and validity details are unavailable.
+  - gate: G7
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: Complete CKF prediction update and covariance lifecycle are unavailable.
+  - gate: G8
+    result: FAIL
+    evidence: Candidate-direct material distinguishes conventional adaptive-factor and fading-factor CKF branches but does not uniquely select executable semantics; cited generic sources expose incompatible choices and cannot complete the candidate.
+  - gate: G9
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: Initialization feedback reset restart and termination policies are unavailable.
+  - gate: G10
+    result: NOT_EVALUATED_SOURCE_UNAVAILABLE
+    evidence: BY2-required fields units frame timing startup and validity mappings cannot be closed.
+  - gate: G11
+    result: PASS
+    evidence: This triage abstains from completing any missing semantic using reference errors historical output or performance reports.
+  - gate: G12
+    result: FAIL
+    evidence: Neither exact nor faithful algorithm reproduction is possible from the accessible attributed sources.
+summary:
+  pass_count: 3
+  fail_count: 2
+  not_evaluated_source_unavailable_count: 7
+  all_pass_required: true
+decision: NO_GO

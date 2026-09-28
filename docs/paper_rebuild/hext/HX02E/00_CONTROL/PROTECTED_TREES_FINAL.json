@@ -1,0 +1,19 @@
+{
+  "started_utc": "2026-09-26T09:23:02.772804+00:00",
+  "trees": {
+    "HX02_FIVE_CATEGORY": {
+      "files": 12678,
+      "matched": 12678,
+      "changed": 0,
+      "new_or_missing": 0
+    },
+    "HX02D_HARTLEY_DIAGNOSTIC": {
+      "files": 82,
+      "matched": 82,
+      "changed": 0,
+      "new_or_missing": 0
+    }
+  },
+  "status": "PASS",
+  "finished_utc": "2026-09-26T09:26:25.891433+00:00"
+}

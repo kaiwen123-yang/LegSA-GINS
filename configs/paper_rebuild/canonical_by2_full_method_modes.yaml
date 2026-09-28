@@ -1,0 +1,10 @@
+schema_version: paper_rebuild.canonical_by2_full_methods.v1
+stage_id: CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX
+case_count: 541
+logical_row_count: 2164
+methods:
+  - {method_id: F01, canonical_method_id: single_antenna_EKF, effective_profile: single_antenna_EKF}
+  - {method_id: F02, canonical_method_id: basic_dual_yaw_EKF, effective_profile: basic_dual_yaw_EKF}
+  - {method_id: F03, canonical_method_id: strong_dual_yaw_EKF, effective_profile: AB0000, execution_profile: strong_dual_yaw_EKF}
+  - {method_id: F04, canonical_method_id: LegSA_Paper_V1, effective_profile: AB1111, execution_profile: LegSA_Paper_V1}
+forbidden_axes: [FGO, multi_state_QM, QA_fallback, contact_FK]

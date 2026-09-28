@@ -1,5 +1,19 @@
 # Clean Rebuild Next Actions
 
+## CLEAN3R2 Terminal Scope
+
+- Active stage: `CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME`.
+- Code freeze: `8dd620ea6d9645b946a503275ddbf04d66c3baa2`.
+- Runner freeze: `5209b6afeeb2b2a0ad99e640ffe50f8dd3b0c909`.
+- Authorization document SHA-256: `eb267045d32af7ae407129b8b53fb6f4c8ed8a6dd75b7889a5a0fb53c3223237`.
+- Terminal: `FAILED_TECHNICAL_SOLVER_MANIFEST_CONTRACT`.
+- Formal S3 byte parity: `NOT_EVALUATED`.
+- The sole attempt is consumed; `retry_count=0`; `ready_for_S4=false`; `ready_for_paper_claims=false`.
+
+The loader set the exact CLEAN3R2 S3 role, but `PortRuntime::runFromConfig` overwrote it with the generic formal four-method role. The runner correctly rejected the actual manifest. Unsealed NAV/STD hashes equal the anchors, but the formal ledger, post-validation, seal, and stream comparison did not occur, so those files are not parity evidence.
+
+The newer human authorization creates the non-overwriting `CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX` route. First close the bounded stage/role repair and one compact readiness gate. Then freeze the repaired solver/config, audit provider reuse, rebuild all 5951 method-bound manifests, execute and seal 5951 unique identities, and only afterward run the exact offline evaluator. The old CLEAN3/CLEAN3R2 failures and old Canonical-541 attempt remain immutable; manifest validation is not weakened.
+
 ## CLEAN0 Closure
 
 - Raw hash lock and post-delete full verification: complete.

@@ -1,0 +1,17 @@
+{
+  "utc": "2026-09-26T12:33:30.369310+00:00",
+  "status": "PREEXEC_NOT_STARTED",
+  "cause": "outer controller strace -f interfered with child strace PTRACE_TRACEME",
+  "python_child_executed": false,
+  "evaluator_calls": 0,
+  "reference_opens": 0,
+  "action": "remove -f only from outer controller tracing; keep child launcher unchanged",
+  "files_sha256": {
+    "SPEC_R2.json": "b6fb2d17616a3bd5c9ec852935259690c58de9c929b692d32000e5ad6d0e3867",
+    "evaluator_stderr_R2.log": "2d4f80a22bca65ac37d1fa514fb1c25a1d05ac8d505fa48b54f0c8f34f488916",
+    "EVALUATOR_OPENAT_R2.strace": "e3e43701a3fe4bdd79502bc4858abf5d190271aa09db0aa2482d515abb161d48",
+    "evaluator_stdout_R2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "EVALUATOR_STRACE_AUDIT_R2.json": "5009ae8aa41b71ae5f0ec0d16899fab3fd217e0444ebf9a8f6772546071e9460"
+  },
+  "scientific_retry": false
+}

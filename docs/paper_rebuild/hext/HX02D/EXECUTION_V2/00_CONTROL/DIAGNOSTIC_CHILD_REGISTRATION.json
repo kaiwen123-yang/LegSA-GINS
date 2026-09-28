@@ -1,0 +1,20 @@
+{
+  "kind": "HX02D",
+  "module": "legsa_gins.paper_rebuild.hext.hx02d_reference_evaluation",
+  "source_sha256": {
+    "src/legsa_gins/paper_rebuild/hext/hx02d_reference_free.py": "1bcfa0476ee3e340f2b9818bd78d2441d28ea509ef0ad70a2773e23221d3545a",
+    "src/legsa_gins/paper_rebuild/hext/hx02d_reference_evaluation.py": "814c114827e8350f466e20fc3649568a358e043dbf39cc39b2d9321227a80705",
+    "scripts/paper_rebuild/hx02d_execute.py": "7393b4c25a62c90c823478b62bc54d140b6596a27c55eb0775953c7f7bdac59b",
+    "src/legsa_gins/paper_rebuild/hext/hx02_evaluation_process.py": "c94093d1fbf94c9f4db9f6f59334666ea8897c59bcd67654afd4a9914c7764fb",
+    "src/legsa_gins/paper_rebuild/hext/hx02_relative_pose_evaluation.py": "d5a024d2218aeae3c1c24c211b170cabad7b4c730fd02b43c270fe2d6f1fa4d1",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h7.py": "84ee803f7c707d6568227107cc7bfb317725ea9bd5f3a2bd3aac032b1f10beb7",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h7c.py": "41db1e79cb439a9dbee0b972a69f42e0b8e74885f24a7b277848a4cf59cc5233"
+  },
+  "registered_before_any_child": true,
+  "registration_scope": "Current controller process only; launcher source bytes unchanged",
+  "expected_reference_children": 2,
+  "expected_reference_opens_per_child": 1,
+  "native_calls_budget": 0,
+  "B_raw_access": "Pinned Go2 message logs only",
+  "C_reference_access": "Pinned HX-02 trace only, one read-only open; all C calculations in this module"
+}

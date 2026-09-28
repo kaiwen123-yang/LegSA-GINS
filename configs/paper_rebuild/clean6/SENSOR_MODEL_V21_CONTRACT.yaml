@@ -1,0 +1,750 @@
+schema_version: 1
+task: P-13
+protocol_id: SENSOR_MODEL_V2_1
+state: HUMAN_AUTHORIZED_PREREGISTRATION
+executable: true
+preregistered: true
+start_commit: a01ceb931049f84af8c900b39e4cf01c52f627c6
+frozen_identities:
+  core_contract:
+    path: configs/paper_rebuild/clean6/CANONICAL_541_PROTOCOL_V2_CONTRACT.yaml
+    sha256: 8c034244cdbd10951c0dc94f0b58cb76a35c9f470249a34542d6e259b364587c
+  addendum_contract:
+    path: configs/paper_rebuild/clean6/ADDENDUM_FAMILIES_A1_A2_CONTRACT.yaml
+    sha256: fd11e416a3bd1a67c992a3606de0bb988035cae5c80647efa2091d00614546ec
+  calibrated_model_contract:
+    path: configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_SENSOR_MODEL_CONTRACT.yaml
+    sha256: 79d9e4521999e1e5fa328f1921ca455df859a89559473b3864ed5f92c1600948
+  calibrated_model:
+    path: configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml
+    sha256: 4ce6ca6c544c2ba39988ea0b0631a60207a4cea36987c3a2139052fedd3a4871
+  executable: &id001
+    path: <CODE_ROOT>/build/canonical541_cpp/legsa_v23_port_core_demo
+    sha256: 9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f
+    scientific_solver_commit: 64c81965b17ef1bf8ae2ce3e4dd7b1ae35110b00
+    change_allowed: Only the F02 guard may additionally accept 2.933193; retain original executable and freeze new
+      SHA before bridging.
+  evaluator:
+    path: <CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py
+    sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+    change_allowed: false
+  p11b:
+    path: <CLEAN_ROOT>/stages/CLEAN6_HV_PRIOR_CALIBRATION/HV_FRAME_AUDIT.json
+    sha256: f40a31edf608ebf3c149b7e55cc252e6462c018c929adb69d626f11e8ab6850c
+    report: docs/paper_rebuild/HV_FRAME_AUDIT.md
+  ha_diagnostic:
+    path: <CLEAN_ROOT>/stages/CLEAN6_HV_PRIOR_CALIBRATION/HV_PRIOR_A1_YAW_DIAGNOSTIC.json
+    sha256: e3496b037c548239758d6a657bde882e138ab01b88305a369a92012c211a39f2
+    report: docs/paper_rebuild/HV_PRIOR_A1_YAW_DIAGNOSTIC.md
+  p12:
+    path: <CLEAN_ROOT>/stages/CLEAN6_HV_PRIOR_CALIBRATION/SENSOR_MODEL_CLOSEOUT_AUDIT.json
+    sha256: 34f4e2dea11363c2f91f5c2ab9d7dcc53d3dc5d7ea9d12d1dacd40eea677daa0
+    report: docs/paper_rebuild/SENSOR_MODEL_CLOSEOUT_AUDIT.md
+  provider_hash_authority: Preserve the exact per-sequence CAL/V2s source and provider hash records in the pinned
+    contracts and audit JSON input_files; no old or reconstructed result may replace an unavailable frozen input.
+    Copy the resolved identities into the provider gate ledger before generation.
+scope_and_accounting:
+  sequences:
+  - BY2
+  - BY2H
+  - BY2O
+  sequence_windows_s:
+    BY2:
+    - 66.0
+    - 340.0
+    BY2H:
+    - 413.0
+    - 683.0
+    BY2O:
+    - 3186.0
+    - 3563.0
+  profiles:
+  - F02
+  - F03
+  - F04
+  - A03
+  - A04
+  - A05
+  - A06
+  - A07
+  - A08
+  - A09
+  profile_configuration_map:
+    F02: basic_dual_yaw_EKF
+    F03: AB0000
+    F04: AB1111
+    A03: AB0111
+    A04: AB1011
+    A05: AB1101
+    A06: AB1110
+    A07: AB1100
+    A08: AB1000
+    A09: AB0100
+  logical_aliases:
+    A01: F04
+    A02: F03
+  core_cases: 541
+  addendum_cases: 45
+  addendum_family_cases:
+    A1_D61: 27
+    A2_D62: 18
+  requested_matrix_rows: 5860
+  requested_sequence_rows: 30
+  requested_rows_total: 5890
+  BY2_C00_overlap_rows: 10
+  unique_main_chain_reruns: 5880
+  main_chain_evaluator_terminal_slots: 11760
+  accounting_rule: 10*(541+45)+3*10=5890 requested entries; the ten BY2 sequence/C00 entries alias ten core C00
+    runs, giving 5880 distinct reruns. Logical A01/A02 rows are aliases, never additional native executions. Algorithm-failure
+    evaluator slots are NOT_RUN_ALGORITHM_FAILURE, not evaluator invocations.
+  F01:
+    formal_outputs: Byte-for-byte reuse of v2; never replaced by the audit reruns.
+    extra_audit_solver_runs: 50
+    sample_rule_state: FROZEN
+    sample_rule_requirement: C00 plus first49 non-C00 F01 cases ranked ascending SHA256 UTF8(P13_F01|case_id); independent
+      of outputs.
+    compared_file_set_state: FROZEN
+    evaluator_rerun: false
+    invariant_gate: NOT_EVALUATED
+    samples:
+    - run_id: RUN_00001
+      case_id: C00_clean_normal
+      method_id: F01
+    - run_id: RUN_02707
+      case_id: D28_seed_02
+      method_id: F01
+    - run_id: RUN_04555
+      case_id: D46_seed_08
+      method_id: F01
+    - run_id: RUN_00375
+      case_id: D04_seed_06
+      method_id: F01
+    - run_id: RUN_04599
+      case_id: D47_seed_03
+      method_id: F01
+    - run_id: RUN_05468
+      case_id: D56_seed_01
+      method_id: F01
+    - run_id: RUN_02597
+      case_id: D27_seed_01
+      method_id: F01
+    - run_id: RUN_03928
+      case_id: D40_seed_05
+      method_id: F01
+    - run_id: RUN_01695
+      case_id: D18_seed_00
+      method_id: F01
+    - run_id: RUN_00452
+      case_id: D05_seed_04
+      method_id: F01
+    - run_id: RUN_04566
+      case_id: D47_seed_00
+      method_id: F01
+    - run_id: RUN_05908
+      case_id: D60_seed_05
+      method_id: F01
+    - run_id: RUN_00815
+      case_id: D09_seed_01
+      method_id: F01
+    - run_id: RUN_05204
+      case_id: D53_seed_04
+      method_id: F01
+    - run_id: RUN_00903
+      case_id: D10_seed_00
+      method_id: F01
+    - run_id: RUN_03895
+      case_id: D40_seed_02
+      method_id: F01
+    - run_id: RUN_01849
+      case_id: D19_seed_05
+      method_id: F01
+    - run_id: RUN_02421
+      case_id: D25_seed_03
+      method_id: F01
+    - run_id: RUN_02311
+      case_id: D24_seed_02
+      method_id: F01
+    - run_id: RUN_01860
+      case_id: D19_seed_06
+      method_id: F01
+    - run_id: RUN_02993
+      case_id: D31_seed_01
+      method_id: F01
+    - run_id: RUN_01739
+      case_id: D18_seed_04
+      method_id: F01
+    - run_id: RUN_02850
+      case_id: D29_seed_06
+      method_id: F01
+    - run_id: RUN_04654
+      case_id: D47_seed_08
+      method_id: F01
+    - run_id: RUN_01387
+      case_id: D14_seed_08
+      method_id: F01
+    - run_id: RUN_02674
+      case_id: D27_seed_08
+      method_id: F01
+    - run_id: RUN_05215
+      case_id: D53_seed_05
+      method_id: F01
+    - run_id: RUN_01288
+      case_id: D13_seed_08
+      method_id: F01
+    - run_id: RUN_01882
+      case_id: D19_seed_08
+      method_id: F01
+    - run_id: RUN_00353
+      case_id: D04_seed_04
+      method_id: F01
+    - run_id: RUN_00045
+      case_id: D01_seed_03
+      method_id: F01
+    - run_id: RUN_00980
+      case_id: D10_seed_07
+      method_id: F01
+    - run_id: RUN_00463
+      case_id: D05_seed_05
+      method_id: F01
+    - run_id: RUN_01827
+      case_id: D19_seed_03
+      method_id: F01
+    - run_id: RUN_02773
+      case_id: D28_seed_08
+      method_id: F01
+    - run_id: RUN_02861
+      case_id: D29_seed_07
+      method_id: F01
+    - run_id: RUN_01354
+      case_id: D14_seed_05
+      method_id: F01
+    - run_id: RUN_01915
+      case_id: D20_seed_02
+      method_id: F01
+    - run_id: RUN_04126
+      case_id: D42_seed_05
+      method_id: F01
+    - run_id: RUN_02157
+      case_id: D22_seed_06
+      method_id: F01
+    - run_id: RUN_02718
+      case_id: D28_seed_03
+      method_id: F01
+    - run_id: RUN_02025
+      case_id: D21_seed_03
+      method_id: F01
+    - run_id: RUN_02531
+      case_id: D26_seed_04
+      method_id: F01
+    - run_id: RUN_04984
+      case_id: D51_seed_02
+      method_id: F01
+    - run_id: RUN_00969
+      case_id: D10_seed_06
+      method_id: F01
+    - run_id: RUN_00573
+      case_id: D06_seed_06
+      method_id: F01
+    - run_id: RUN_01662
+      case_id: D17_seed_06
+      method_id: F01
+    - run_id: RUN_00925
+      case_id: D10_seed_02
+      method_id: F01
+    - run_id: RUN_01717
+      case_id: D18_seed_02
+      method_id: F01
+    - run_id: RUN_05567
+      case_id: D57_seed_01
+      method_id: F01
+    compared_files:
+    - KF_GINS_Navresult.nav
+    - KF_GINS_STD.txt
+    - LegSA_PORT_NAV.nav
+    - LegSA_PORT_STD.csv
+    - KF_GINS_IMU_ERR.txt
+    - EVAL_NAV.csv
+    - PORT_GNSS_UPDATE_TRACE.csv
+  downstream_runs_counted_in_5880: false
+  downstream_exact_identity_ledger_state: PENDING_FREEZE_BEFORE_EXECUTION
+  existing_v1_v2_outputs: Preserve all original bytes, ledgers, decisions and packages.
+  extra_binary_bridge_solver_calls: 22
+sensor_model_requested:
+  calibration_policy:
+    dataset: BY2
+    calibration_count: 1
+    blind_transfer:
+    - BY2H
+    - BY2O
+    refit_allowed: false
+    note: Apply the human-specified rounded numerical constants exactly. Other sequences provide reported checks
+      only; no per-sequence or per-case tuning.
+  go2_hv: &id002
+    source: Raw Go2 body-frame FLU velocity, Go2 roll/pitch, and observation A1 NED body yaw.
+    flu_to_frd: diag(1,-1,-1)
+    formula: v_H_NED = horizontal(k_HV * Rz(A1_NED) * Ry(-Go2_pitch) * Rx(Go2_roll) * diag(1,-1,-1) * v_body_FLU)
+    k_HV_expression: 1 / 0.962142
+    k_HV_denominator: 0.962142
+    sigma_HV_mps: 0.132838
+    a1_interpolation: Unwrap shortest angular steps and linearly interpolate in time; no extrapolation; invalidate
+      the open interval of a gap greater than 1.2 s, retaining observed endpoints, as in P-11b.
+    maximum_a1_gap_s: 1.2
+    go2_yaw_used_for_HV: false
+    installation_angle_fit: false
+    invalid_row_policy: Use the supported explicit provider validity field; do not synthesize zero measurements,
+      NaN observations or enormous standard deviations as updates.
+    noise_limitation: 0.132838 is the rounded BY2 unscaled H-A residual proxy, including PVT, A1, timing and weak-prior
+      errors; it is not independently identified white sensor noise. Final scaled residuals require separate reporting
+      (B02).
+  go2_rp: &id003
+    formula:
+    - Go2_roll
+    - -Go2_pitch
+    input_frame: FLU
+    output_frame: FRD
+    std_deg: 1.6
+    std_changed: false
+    frozen_static_pitch_residual_means_deg:
+    - 2.028821
+    - 2.212328
+    - -4.296193
+    corrected_static_pitch_residual_means_deg:
+    - -0.444112
+    - -0.420844
+    - -0.412029
+    sequence_order:
+    - BY2
+    - BY2H
+    - BY2O
+    evidence_role: P-12 observation-only frame check, not independent attitude truth.
+  dual_yaw: &id004
+    old_std_deg: 1.5
+    status_fixed_yaw_std_deg: 2.933193
+    basic_dual_yaw_fixed_std_deg: 2.933193
+    gnss_yaw_std_zero_based_column: 14
+    gnss_formats_columns:
+    - 15
+    - 18
+    scheme_C_thresholds_changed: false
+    evidence: 'BY2 Euler yaw-rate increment-residual proxy 2.933193 degrees; BY2O 2.936449 degrees as a check, BY2H
+      8.406459 degrees reported without refit. Human supplied physical scale: 0.35 m baseline, approximately 2.5-3
+      degrees.'
+unchanged_model_and_p12_limits:
+  gyro_scale:
+    correction_applied: false
+    z_slopes:
+    - 0.991971
+    - 0.944907
+    - 1.036122
+    z_bootstrap_95pct_CI:
+    - - 0.953341
+      - 1.043298
+    - - 0.804485
+      - 1.049073
+    - - 0.986089
+      - 1.09523
+    turn_segment_counts:
+    - 14
+    - 12
+    - 12
+    xy_scale: NOT_OBSERVABLE
+    reason: All z intervals include one; finite turn samples and coupled A1/motion error do not identify a new correction.
+  arw_deg_sqrt_h:
+  - 0.985
+  - 0.985
+  - 0.985
+  gbstd_deg_h:
+  - 9.38
+  - 9.38
+  - 9.38
+  p12_first_window_arw_proxies:
+    BY2:
+    - 3.258305
+    - 1.017005
+    - 1.192574
+    BY2H:
+    - 1.033009
+    - 1.095999
+    - 2.189563
+    BY2O:
+    - 2.152673
+    - 1.038402
+    - 1.217219
+  p12_BY2O_standing_arw_proxy:
+  - 15.531849
+  - 3.28569
+  - 5.93439
+  p12_pooled_gbstd_proxy_deg_h:
+  - 37.453926
+  - 24.707103
+  - 26.198129
+  noise_reason: Short 4.59-4.87 s first windows and robot micromotion do not establish a white-noise Allan slope;
+    standing-window proxies differ. Pooled gbstd is APPROXIMATE and includes temperature, real motion and Earth-rate
+    projection. BY2/BY2H each have one prescribed window and no individual cross-window std. Existing per-sequence
+    first-1000-frame gyro debiasing remains unchanged.
+  installation_rpy_deg:
+  - -1.0
+  - 0.0
+  - 0.0
+  p12_installation_roll_proxy_mean_deg:
+    BY2: -3.422178
+    BY2H: UNAVAILABLE
+    BY2O: -4.150564
+  p12_installation_roll_sample_counts:
+    BY2: 3
+    BY2H: 0
+    BY2O: 97
+  p12_pitch_installation: NOT_OBSERVABLE
+  p12_yaw_effective_method1_deg:
+  - 4.544357
+  - 3.905588
+  - 1.617459
+  p12_yaw_effective_method2_deg:
+  - 3.952922
+  - 3.9083
+  - 1.162595
+  installation_reason: Roll uses sparse/noisy baseline-gravity proxies and includes antenna height mismatch; pitch
+    lacks an independent body-level reference; effective yaw conflates A1, slip and velocity error. The two yaw
+    methods share observations and are not independent identification. Preserve all triggered P-12 flags.
+  unchanged_calibrated_values:
+    s: 1.0308398903907543
+    vrw:
+    - 9.478382094779873
+    - 9.784198200134004
+    - 7.6321402201126745
+    abstd:
+    - 4817.482008954474
+    - 8259.572423450163
+    - 2257.241538343225
+  other_parameters: Keep all other scientific tokens, initialization, timing, switches, weights and physical transforms
+    frozen.
+  manuscript_limits_required: true
+conflict_resolution_rule: Preserve scientific content, adjust validation/bookkeeping/wording, record each in P13
+  appendix, continue without new permission.
+validation_gates_requested:
+  global_state: NOT_EVALUATED
+  preregistration: Resolved executable contract committed, pushed and remote equality verified before any provider.
+  HV_RP:
+    absolute_tolerance: 1.0e-06
+    sample_identity: Exact P-11b/P-12 masks, timestamps, matching, tie rules, windows and ddof=1.
+    requested_target: Three-sequence H-A and FLU-to-FRD residual statistics from pinned JSON.
+    HV_common_sample_counts:
+    - 16968
+    - 17558
+    - 23022
+    HV_unscaled_sigma_reference_mps:
+    - 0.132838
+    - 0.210121
+    - 0.106398
+    RP_static_means_roll_pitch_deg:
+    - - 0.688255
+      - -0.444112
+    - - 0.666042
+      - -0.420844
+    - - 0.677666
+      - -0.412029
+    RP_static_stds_roll_pitch_deg:
+    - - 0.212923
+      - 0.272702
+    - - 0.217379
+      - 0.273699
+    - - 0.208591
+      - 0.273803
+    note: Full-precision pinned JSON is authoritative. HV is divided by k_HV before comparison; final scaled residuals
+      separately reported.
+  immutable_tables: Original hashes fixed; IMU/RD full-file equality; new GNSS token equality outside yaw_std; all
+    yaw_std values 2.933193.
+  parameter_diff: Original frozen_parameter_hash unchanged; separate canonical JSON SHA256 of SENSOR_MODEL_V21 with
+    three correction groups.
+  F01: Fifty separately recorded byte-comparison audit runs plus byte-exact v2 formal-output reuse.
+  fail_closed: Preserve failed evidence, classify exact gate, and stop dependent work without automatic scientific
+    retries.
+hypotheses:
+  report_all: true
+  decision_definitions_state: FROZEN_BEFORE_PROVIDER
+  decision_rule_and_Outcome_changed: false
+  no_posthoc_definition_selection: true
+  H7:
+    text: Heading consistency ratio decreases to 1-2.
+    definition: Frozen evaluator yaw_abs_error_over_std_median (median absolute wrap-safe yaw error divided by matched
+      yaw STD). Per profile/clean sequence report old/new ratio; supported if new in [1,2] and lower than old; missing=INCOMPLETE.
+  H8:
+    text: Clean-sequence downweight/reject counts decrease; report change in matrix ALL_YAW_REJECTED failure counts.
+    definition: Per profile/clean sequence report yaw_DOWNWEIGHT and yaw_REJECT separately and their sum; decrease
+      predicate is new sum < old sum; zero-to-zero UNCHANGED. Matrix failures reported by family/profile without
+      directional hypothesis.
+  H9:
+    text: A2 outage-end horizontal error is less than 10 m for the 20 s outage.
+    threshold_m: 10.0
+    strict_less_than: true
+    metric_definition: Inherit addendum outage_end_horizontal_error_m from the last matched epoch in the half-open
+      outage interval.
+    definition: Per profile and every A2 20s seed test outage_end_horizontal_error_m <10; per-profile all/some/none
+      -> SUPPORTED/PARTIALLY_SUPPORTED/NOT_SUPPORTED; any missing -> INCOMPLETE with available components retained.
+  H10:
+    text: C00 and three-sequence roll/pitch RMSE decrease.
+    definition: 'Each profile/sequence/C00 and each roll/pitch RMSE: supported iff new < old, unchanged if equal;
+      no pooled replacement. A joint label requires all applicable components and full coverage.'
+  H11:
+    text: Report yaw RMSE changes without prespecifying their direction.
+    direction: NOT_PRESET
+    definition: Report signed new-minus-old yaw RMSE for all cells without a directional hypothesis; REPORTED_NON_DIRECTIONAL
+      with complete coverage, otherwise INCOMPLETE.
+  coverage: All ten profiles, all requested sequences/cases, v3 primary and v2 parallel; each applicable component
+    reported separately. No new method selection/Outcome.
+execution_requested_after_resolution:
+  implementation_namespace: src/legsa_gins/paper_rebuild/
+  entrypoint_namespace: scripts/paper_rebuild/
+  provider_scope: Regenerate go2_hv, go2_rp and yaw_std in 15/18-column GNSS tables for all three base sequences,
+    the frozen 541 core cases and 45 A1/A2 injected bundles. Retain all unchanged injection specifications, seeds,
+    case identities and unaffected input tokens; Use adopted B05 yaw-before-HV dependency.
+  versions:
+  - v3
+  - v2
+  primary_evaluator: v3
+  evaluator_semantics: Inherit frozen per-sequence base times, windows, v3 point transform and v2 semantics unchanged.
+  pipeline_authority: frozen_identities.core_contract
+  batch_size: 256
+  commit_push_every_batches: 8
+  solver_workers: min(nproc - 2, 22)
+  evaluator_max_workers: 22
+  evaluator_pool: Inherit measured RSS budget, 0.75 available-memory fraction and 1.25 safety factor from amended
+    P-09c.
+  numerical_threads_per_worker: 1
+  phase_order:
+  - provider
+  - solve
+  - full_file_seal
+  - v3_v2_evaluation
+  - retain_and_compress
+  - archive
+  - verify_receipt
+  - exact_scratch_cleanup
+  raw_checkpoints: Inherit P-09c separately traced pre/post raw hash checkpoints, including the exact 22-file BY2
+    set, read-only once per locked file; sequence-specific raw locks remain authoritative. Checkpoint trace hashing
+    is separate from online access; provider/solver must have zero trace/.bag/.fpl opens.
+  native_retry_count: 0
+  evaluator_retry_count: 0
+  algorithm_failure: ALGORITHM_FAILURE_ALL_YAW_REJECTED
+  algorithm_failure_evaluation: NOT_RUN_ALGORITHM_FAILURE
+  technical_failures: Separate terminal classes; never replace with an algorithm failure, success or numeric result.
+  io_recovery: Inherit P-09c bounded archive I/O retries, maximum six write workers, 8 MiB chunks and gzip level
+    3; retain pending scratch and historical receipts. Archive-pending fraction greater than 0.01 stops; completion
+    requires zero pending. Bookkeeping repair may use existing bytes only, without scientific reruns.
+  downstream_same_chain:
+    error_budget_ladder:
+      variants:
+      - V0
+      - V1
+      - V2
+      - V2i
+      - V2s
+      - V2is
+      profiles:
+      - A04
+      - F03
+    nine_cell_grid:
+      profile: A04
+      policy: Preserve original nine cells and report all; no optimum selection or refreeze.
+    V_CHK: A04 items only; preserve original subset, comparison and admission boundaries.
+    A04_F04_robustness: Repeat the frozen checks without rerunning or changing the decision rule or Outcome.
+    provenance: Freeze original diagnostic identities before their own execution; preserve variants and grids. Resolve
+      validation wording in the appendix without changing scientific inputs/definitions.
+data_roles_and_provenance:
+  real_base_sequences:
+    data_mode: real
+    synthetic_data_used: false
+    semisynthetic_data_used: false
+  injected_cases:
+    data_mode: semisynthetic
+    synthetic_data_used: false
+    semisynthetic_data_used: true
+  table_policy: Never mix controlled-injection results into a natural real-data result table.
+  trace_used_online: false
+  receiver_imu_as_body_imu: false
+  final_v23_output_solver_input: false
+  LegSA_output_solver_input: false
+  per_case_tuning: false
+  output_only_correction: false
+  epoch_deleted_for_metric: false
+  old_runtime_input_count: 0
+  required_manifest_fields:
+  - data_mode
+  - raw_source_hashes
+  - provider_hashes
+  - synthetic_data_used
+  - semisynthetic_data_used
+  - trace_used_online
+  - receiver_imu_as_body_imu
+  - final_v23_output_solver_input
+  - LegSA_output_solver_input
+  - per_case_tuning
+  - output_only_correction
+  - epoch_deleted_for_metric
+  - old_runtime_input_count
+  - code_commit
+  - config_hash
+  observation_roles: GNSS/A1/RD are observations; Go2 is a weak prior; trace is evaluation-only; no source is promoted
+    to truth for calibration.
+storage_requested_after_resolution:
+  new_root: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21
+  scratch_alias: sensor_model_v21_scratch
+  scratch_filesystem: WSL ext4
+  direct_G_fallback: false
+  minimum_G_free_bytes: 300000000000
+  minimum_scratch_free_bytes: 150000000000
+  attempt_peak_limit_bytes: 250000000000
+  cleanup_policy: 'P-09c rolling cleanup only: exact attempt-owned regular-file manifests after verified archive
+    receipts, checkpoint each item, never follow symlinks or target protected roots. No wildcard or broader deletion
+    authorization. Preserve raw data, v1/v2 assets, formal F01 bytes, seals, ledgers and partials.'
+  measurements: Record elapsed time, CPU, RSS, scratch/G growth, physical/logical bytes and measured scope; absent
+    early peaks stay UNAVAILABLE.
+  policy_authority: Human stop conditions supersede prior resource/pilot governance stops; preserve resource limits
+    by reducing concurrency and exact archived cleanup.
+aggregation_and_delivery_requested:
+  version_roots:
+  - 13_AGGREGATE/v3
+  - 13_AGGREGATE/v2
+  tables: All same-name core, addendum and three-sequence tables, in separate domains, with the frozen statistical
+    definitions.
+  core_tables:
+  - UNIQUE_EVALUATION_RESULTS.csv
+  - LOGICAL_EVALUATION_RESULTS.csv
+  - UNIQUE_METHOD_SUMMARY.csv
+  - LOGICAL_METHOD_SUMMARY.csv
+  - CASE_SUMMARY.csv
+  - DEGRADATION_TYPE_SUMMARY.csv
+  - FAMILY_SUMMARY.csv
+  - PAIRWISE_CASE_LEVEL.csv
+  - PAIRWISE_SUMMARY.csv
+  - SEED_SUMMARY.csv
+  - RECOVERY_SUMMARY.csv
+  - UNCERTAINTY_CALIBRATION_SUMMARY.csv
+  - MODULE_ACTION_SUMMARY.csv
+  - RUNTIME_SUMMARY.csv
+  - METRIC_COVERAGE_REPORT.csv
+  - FINAL_EVALUATION_SUMMARY.json
+  - EVALUATION_AND_AGGREGATE_STATUS.json
+  - FAILURE_AWARE_PAIRWISE_SUMMARY.csv
+  - FAILURE_COUNTS_BY_FAMILY_CONFIG.csv
+  - ALL_YAW_REJECTED_BY_FAMILY.csv
+  comparison_table: V2_V21_COMPARISON.csv
+  comparison_policy: Every metric for all ten rerun profiles, with exact joins by dataset/case/ configuration/evaluator;
+    v2, v2.1, delta and availability, grouped by family and duration. Include C00, three sequences, A2/D05/A1/D06,
+    consistency ratios and v2/v2.1 failure counts side by side. Do not fabricate deltas for failures.
+  hypotheses: Report H7-H11 with frozen definitions, all outcomes and missingness.
+  method_statement: Append v2.1 to docs/paper_rebuild/PROTOCOL_V2_METHOD_STATEMENT.md.
+  discovery_record: Residual audit -> coordinate-convention correction -> measured residual contraction; report
+    actual numbers and limits.
+  AGENTS_updates: Sections 7, 11 and 18 after completion; retain v2 numbers marked pre-correction, with v2.1 anchors
+    linked to actual artifacts.
+  figure_root: <PUBLICATION_ROOT>/figures/v21
+  figures: Reissue every registered figure except MFIG21; retain existing MFIG21 and all v1/v2 figure bytes.
+  MFIG20: Add HV and RP residual before/after comparison panels from pinned and new verified residual tables.
+  FIGURE_INDEX: Mark v2.1 and distinguish unchanged MFIG21 provenance.
+  data_zip: <HANDOFF_ROOT>/c541_v21_handoff.zip
+  figures_zip: <HANDOFF_ROOT>/figures_v21_handoff.zip
+  handoff_root_resolution: Ignored local handoff_root; human destination is the project G-drive handoff directory.
+  zip_validation: Verify member identities, retained source hashes, no duplicate members, CRC and exact final SHA-256
+    before a delivery claim.
+  commit_push_order:
+  - resolved_contract
+  - provider_and_validation_gates
+  - execution_records_every_8_batches
+  - aggregate_and_data_package
+  - figures_and_figure_package
+  final_report: Validation gate numbers; ten-profile v2-to-v2.1 tables; consistency ratios; H7-H11; F01 invariance;
+    ZIP SHA-256; full commit hashes. No interpretation.
+  current_results: NOT_EXECUTED
+authorization:
+  date: '2026-09-14'
+  source: Human P-13 conflict adjudication, all five accepted
+  require_committed_pushed_contract_before_provider: true
+  routine_conflict_policy: Preserve scientific content, adjust validation/bookkeeping/wording, record each in P13
+    appendix, continue without new permission.
+  stop_conditions:
+  - native_solver_failure_outside_preregistered_algorithm_classes
+  - evaluator_failure_or_nonfinite_result
+  - F01_or_binary_bridge_byte_gate_or_HV_RP_reproduction_gate_failure
+  - batch_archive_failure_fraction_gt_0_01
+  other_conditions: Repair bookkeeping/validation in place with append-only incident records; never fabricate evidence
+    or repeat a completed scientific run.
+resolved_conflicts:
+- id: B01
+  status: RESOLVED_BY_HUMAN
+  requirement: Freeze executable 9c00565c while setting formal F02 std to 2.933193 degrees.
+  evidence: cpp/legsa_v23_port_core/src/config/port_config_loader.cpp:372-373
+  conflict: The frozen scientific loader rejects basic_dual_yaw_EKF unless its fixed yaw std is 1.5 within 1e-12,
+    with error 'basic_dual_yaw_EKF fixed yaw std must be 1.5 deg'. The frozen executable contains this guard.
+  forbidden_workarounds:
+  - bypass_guard
+  - change_algorithm_identity
+  - patch_binary
+  - silently_keep_F02_at_1_5
+  - silently_omit_F02
+  adopted_resolution: Accept only existing 1.5 and preregistered 2.933193 in the F02 fixed-std guard; no other native
+    source change. Preserve old executable. Freeze new SHA. Under std=1.5 compare C00 x 11 new/old NAV and STD bytes;
+    require PASS before v2.1. 2.933193 is below scheme-C soft threshold 3.0 degrees; thresholds unchanged.
+- id: B02
+  status: RESOLVED_BY_HUMAN
+  requirement: Final scaled HV provider residuals reproduce unscaled P-11b H-A to 1e-6.
+  conflict: Multiplying by k_HV changes residuals; the final residual cannot generally equal the unscaled residual.
+  adopted_resolution: Inverse-scale new HV by dividing by k_HV, reproduce P-11b H-A residual statistics at absolute
+    tolerance 1e-6. Report final scaled residuals separately.
+- id: B03
+  status: RESOLVED_BY_HUMAN
+  requirement: Change GNSS yaw_std column while preserving the GNSS full-file hash.
+  conflict: Changing zero-based column 14 in a 15/18-column file changes its full-file bytes and SHA-256.
+  adopted_resolution: Original source hashes unchanged. New GNSS15/18 has token equality outside zero-based column14;
+    every yaw_std token is 2.933193 before applying frozen fault transformations. After injection, retain all frozen
+    fault effects except the preregistered nominal yaw_std is 2.933193; compare each case with the equivalent old
+    injected table outside column14.
+- id: B04
+  status: RESOLVED_BY_HUMAN
+  requirement: frozen_parameter_hash differs in exactly three fields.
+  conflict: The existing hash covers runtime scientific configuration only. status_fixed_yaw_std_deg is a provider-generator
+    field, HV std lives in CSV, and RP sign/velocity frame/scale are provider transformations. Of the named scalar
+    runtime fields only basic_dual_yaw_fixed_std_deg changes.
+  adopted_resolution: Keep frozen_parameter_hash definition. Independently hash a SENSOR_MODEL_V21 group containing
+    HV, RP and sigma_A1 corrections. Report all actual runtime-key and provider-token differences.
+- id: B05
+  status: RESOLVED_BY_HUMAN
+  requirement: Regenerate A1/D61 yaw-outage bundles while HV now depends on A1 yaw.
+  conflict: Building HV from clean yaw before the outage would retain otherwise unavailable heading information
+    in the weak prior. The original addendum preserves Go2 validity, while the new A1 gap rule changes derived HV
+    validity.
+  adopted_resolution: Apply frozen A1 injections first; derive HV using injected valid A1. A1 gaps >1.2s invalidate
+    HV in their open interval, including all-HV-invalid for fully absent A1. Retain Go2 source validity separately
+    and apply the frozen direct RP/HV perturbations to the corrected source values.
+binary_bridge:
+  old_executable: *id001
+  new_executable: <CODE_ROOT>/build/p13_v21_cpp/legsa_v23_port_core_demo
+  freeze_record: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/00_PREREGISTRATION/BINARY_FREEZE.json
+  inputs: Unchanged V2s/CAL C00 providers and old runtime parameters, yaw std 1.5 for both binaries
+  profiles:
+  - F01
+  - F02
+  - F03
+  - F04
+  - A03
+  - A04
+  - A05
+  - A06
+  - A07
+  - A08
+  - A09
+  compared_files:
+  - KF_GINS_Navresult.nav
+  - KF_GINS_STD.txt
+  - LegSA_PORT_NAV.nav
+  - LegSA_PORT_STD.csv
+  gate: All44 file pairs byte equal; both binaries complete all11 configs
+  native_solver_calls: 22
+  new_binary_v21_use_requires: PASS_BINARY_IDENTITY_BRIDGE
+  evaluators: 0
+sensor_model_group:
+  group: SENSOR_MODEL_V21
+  HV: *id002
+  RP: *id003
+  sigma_A1: *id004
+sensor_model_group_hash: e10af38a0315726584f2f4ac99935db706336c4b56d8b02672e15fb9cca9b620

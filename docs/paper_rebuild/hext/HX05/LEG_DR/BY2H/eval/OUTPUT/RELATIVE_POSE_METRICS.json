@@ -1,0 +1,86 @@
+{
+  "alignment_rule": "per branch: one least-squares yaw-about-gravity + 3-D translation on the first 10 s of the window from the branch's own output (HX-02 amendment 1); never shared, never re-fitted",
+  "base_time": 1772784000.0,
+  "branches": {
+    "LEG-DR": {
+      "alignment": {
+        "epochs": 100,
+        "not_estimated": [
+          "roll",
+          "pitch",
+          "scale",
+          "time_offset"
+        ],
+        "per_epoch_yaw_offset_circular_std_deg": 1.7382154452068033,
+        "rule": "per branch: one least-squares yaw-about-gravity + 3-D translation on the first 10 s of the window from the branch's own output (HX-02 amendment 1); never shared, never re-fitted",
+        "translation_enu_m": [
+          0.3226755136846839,
+          0.7847604434149363,
+          -0.1435926005152749
+        ],
+        "window_seconds": [
+          413.0,
+          423.0
+        ],
+        "yaw_offset_deg": -64.18129271760468
+      },
+      "drift_definitions": {
+        "heading": "OLS slope (with intercept) of time-unwrapped wrap-safe NED yaw error versus time in minutes",
+        "position": "OLS slope (with intercept) of horizontal error norm versus cumulative reference horizontal path, x100"
+      },
+      "evaluation_status": "EVALUATED",
+      "heading_drift_deg_per_min": -0.15615553122965237,
+      "horizontal_max_m": 14.310499977618024,
+      "horizontal_rmse_m": 9.178417411465594,
+      "nav_first_rel_s": 413.0370922088623,
+      "nav_last_rel_s": 692.9110462665558,
+      "nav_rows": 60541,
+      "position_drift_m_per_100m": 0.10752596591374582,
+      "reference_path_length_m": 325.51391570418065,
+      "relative_pose_error_yaw_translation": {
+        "10s": {
+          "grid_step_ms": 100,
+          "pair_count": 2600,
+          "translation_rmse_m": 1.2923299564695245,
+          "yaw_rmse_deg": 2.3408768357291105
+        },
+        "1s": {
+          "grid_step_ms": 100,
+          "pair_count": 2690,
+          "translation_rmse_m": 0.1418837902305084,
+          "yaw_rmse_deg": 0.9589046643595469
+        },
+        "5s": {
+          "grid_step_ms": 100,
+          "pair_count": 2650,
+          "translation_rmse_m": 0.6580164529047724,
+          "yaw_rmse_deg": 2.1094069972664253
+        }
+      },
+      "scored_epochs": 2700,
+      "unsupported_grid_epochs": 1,
+      "up_rmse_m": 5.0686589326733404,
+      "yaw_rmse_deg": 2.1475301461368606
+    }
+  },
+  "grid_epochs": 2701,
+  "grid_step_s": 0.1,
+  "lever_flu_m": [
+    0.03,
+    0.14709388796888612,
+    0.3
+  ],
+  "nav_sha256": {
+    "LEG-DR": "392b0534c28ac959a8287e5c915da167c59994b28cfd7dd7f1585c0802504093"
+  },
+  "reference_origin": "first supported grid epoch (local ENU)",
+  "reference_supported_grid_epochs": 2701,
+  "schema": "hx02.relative_pose_evaluation.v1",
+  "sequence_id": "BY2H",
+  "trace_open_count_in_child": 1,
+  "trace_sha256_observed": "8d11fe360753bfcdbc54f7bf793fcb25850c0997b7aaad4ec1c9f10859c0f84f",
+  "window_seconds": [
+    413.0,
+    683.0
+  ]
+}

@@ -1,0 +1,29 @@
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src/legsa_gins/paper_rebuild/hext/hx02d_reference_free.py", line 343, in <module>
+    main()
+  File "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src/legsa_gins/paper_rebuild/hext/hx02d_reference_free.py", line 339, in main
+    diagnose(json.loads(args.spec.read_text()))
+  File "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src/legsa_gins/paper_rebuild/hext/hx02d_reference_free.py", line 321, in diagnose
+    dump(out / "B_TABLES.json", result)
+  File "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair/src/legsa_gins/paper_rebuild/hext/hx02d_reference_free.py", line 26, in dump
+    json.dump(value, handle, indent=2, ensure_ascii=False, allow_nan=False)
+  File "/usr/lib/python3.10/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+  File "/usr/lib/python3.10/json/encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  [Previous line repeated 2 more times]
+  File "/usr/lib/python3.10/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/usr/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type int64 is not JSON serializable

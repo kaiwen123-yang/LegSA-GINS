@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "case_rows": 396,
+  "summary_rows": 186,
+  "paired_rows": 744,
+  "case_unique_count": 396,
+  "metric_values_reconciled_to_archived_result": true,
+  "quantiles_independently_checked": "sorted linear interpolation; statistics.median",
+  "paired_sources_only": [
+    "CORE_541_DISTRIBUTION_V3.csv",
+    "ADDENDUM_TABLE_V3.csv"
+  ],
+  "scientific_calls": 0,
+  "reference_opens": 0
+}

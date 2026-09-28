@@ -1,0 +1,25 @@
+schema: lc02_chang2021.fuzzy_controller.v1
+inputs:
+  velocity_statistic:
+    symbol: L_k1
+    equation: "N bar_e_k1^T Pzz_1^-1 bar_e_k1"
+  position_statistic:
+    symbol: L_k2
+    equation: "N bar_e_k2^T Pzz_2^-1 bar_e_k2"
+  window_size: 40
+paper_direct_components:
+  chi_square_split: true
+  membership_plot_boundaries: true
+  six_local_consequents: true
+  beta_matrix: "diag(beta1 I3,beta2 I3)"
+currently_unknown_components:
+  - sliding_window_startup_for_first_39_epochs
+  - singular_or_nonfinite_Pzz_policy
+  - firing_strength_operator
+  - firing_strength_normalization
+  - consequent_aggregation
+  - clipping_or_saturation
+  - unique_beta_to_15_state_fading_map
+decision: INCOMPLETE_NOT_EXECUTABLE
+gate: FAIL
+implementation_authorized: false

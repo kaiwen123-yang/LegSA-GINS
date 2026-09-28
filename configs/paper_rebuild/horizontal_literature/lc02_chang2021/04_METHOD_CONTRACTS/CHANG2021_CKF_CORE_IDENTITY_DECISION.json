@@ -1,0 +1,24 @@
+{
+  "schema": "lc02_chang2021.ckf_identity.v1",
+  "allowed_decisions": {
+    "A": "literal printed linear error-state recursion",
+    "B": "full cubature transform defined by a cited source with the paper printing a reduced special case",
+    "C": "equation-complete nominal INS plus cubature error-state filter",
+    "D": "unresolved"
+  },
+  "decision": "A",
+  "decision_label": "LITERAL_PRINTED_LINEAR_ERROR_STATE_RECURSION",
+  "gate_result": "PASS",
+  "evidence": [
+    "Eq. 4 is a linear discrete error-state/measurement model.",
+    "Eqs. 5-9 print the complete ordinary linear Kalman recursion.",
+    "No cubature points, weights, sigma/cubature propagation, or nonlinear measurement transform are printed.",
+    "Zhao's attributable primary derivation states CKF equals EKF for linear/linearized models and EKF equals KF for a linear model."
+  ],
+  "excluded": {
+    "B": "a cited generic CKF does not prove Chang used an unprinted transform; for this linear model it would collapse to the printed moments",
+    "C": "no equation-complete nominal mechanization plus cubature error-state implementation is printed or attributable",
+    "D": "the literal printed recursion itself is unambiguous"
+  },
+  "claim_boundary": "Selection of A closes the base recursion identity only; it does not close Eq. 12, state dynamics, fuzzy control, or formal reproduction."
+}

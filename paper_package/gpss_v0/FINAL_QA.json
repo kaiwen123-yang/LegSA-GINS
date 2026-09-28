@@ -1,0 +1,122 @@
+{
+  "body_word_count": 9871,
+  "word_count_method": "English alphabetic words including hyphenated compounds; excludes table rows, captions, headings, equations, abstract, declarations and reference list",
+  "section_word_counts": {
+    "Abstract": 209,
+    "1 Introduction": 670,
+    "2 Related work": 724,
+    "3 Platform, sensors and data": 866,
+    "4 Method": 2017,
+    "5 Experimental design": 1648,
+    "6 Results": 2583,
+    "7 Discussion": 736,
+    "8 Limitations and future work": 431,
+    "9 Conclusions": 196,
+    "Declarations": 84
+  },
+  "ledger_pass": 207,
+  "ledger_fail": 0,
+  "figure_status_counts": {
+    "DRAWN_SCHEMATIC": 2,
+    "REDRAWN": 4,
+    "COPIED": 4,
+    "PLACEHOLDER_NEED_PHOTO": 1
+  },
+  "new_figure_qa": [
+    {
+      "figure": "Fig01",
+      "passed": 7,
+      "failed": 0
+    },
+    {
+      "figure": "Fig02",
+      "passed": 6,
+      "failed": 0
+    },
+    {
+      "figure": "Fig03",
+      "passed": 7,
+      "failed": 0
+    },
+    {
+      "figure": "Fig04",
+      "passed": 7,
+      "failed": 0
+    },
+    {
+      "figure": "Fig05",
+      "passed": 7,
+      "failed": 0
+    },
+    {
+      "figure": "Fig06",
+      "passed": 7,
+      "failed": 0
+    }
+  ],
+  "raster_review": [
+    {
+      "figure": "Fig01",
+      "png_width": 4110,
+      "png_height": 1920,
+      "visual_review": "PASS; actual raster inspected"
+    },
+    {
+      "figure": "Fig02",
+      "png_width": 4110,
+      "png_height": 2580,
+      "visual_review": "PASS; actual raster inspected"
+    },
+    {
+      "figure": "Fig03",
+      "png_width": 4110,
+      "png_height": 2700,
+      "visual_review": "PASS; actual raster inspected"
+    },
+    {
+      "figure": "Fig04",
+      "png_width": 4110,
+      "png_height": 1800,
+      "visual_review": "PASS; actual raster inspected"
+    },
+    {
+      "figure": "Fig05",
+      "png_width": 4110,
+      "png_height": 1920,
+      "visual_review": "PASS; actual raster inspected"
+    },
+    {
+      "figure": "Fig06",
+      "png_width": 4110,
+      "png_height": 1920,
+      "visual_review": "PASS; actual raster inspected"
+    },
+    {
+      "figure": "Fig07",
+      "png_width": 4183,
+      "png_height": 6569,
+      "visual_review": "PASS; actual raster inspected"
+    },
+    {
+      "figure": "Fig08",
+      "png_width": 4180,
+      "png_height": 5228,
+      "visual_review": "PASS; actual raster inspected"
+    },
+    {
+      "figure": "SFig01",
+      "png_width": 4180,
+      "png_height": 3639,
+      "visual_review": "PASS; actual raster inspected"
+    },
+    {
+      "figure": "SFig02",
+      "png_width": 4182,
+      "png_height": 4446,
+      "visual_review": "PASS; actual raster inspected"
+    }
+  ],
+  "package_bytes_at_check": 6790572,
+  "forbidden_terms": 0,
+  "copied_figure_hashes_match": true
+}

@@ -1,0 +1,51 @@
+schema_version: 1
+contract_id: LSE01_GO2_FOOT_ORDER
+contract_status: CLOSED_THREE_WAY_AGREEMENT_REAL_BY2_COMPLETE_RECORD_PREFIX
+data_identity: REAL_BY2_COMPLETE_RECORD_PREFIX_63277
+data_status: REAL_BY2_COMPLETE_RECORD_PREFIX
+raw_source_complete: false
+complete_record_prefix_filter_eligible: true
+
+native_source_order:
+  labels: [FR, FL, RR, RL]
+  grouped_xyz_indices:
+    FR: [0, 1, 2]
+    FL: [3, 4, 5]
+    RR: [6, 7, 8]
+    RL: [9, 10, 11]
+  force_indices: {FR: 0, FL: 1, RR: 2, RL: 3}
+canonical_method_order: [FL, FR, RL, RR]
+native_to_canonical_mapping: [1, 0, 3, 2]
+canonical_to_native_mapping: [1, 0, 3, 2]
+
+source_agreement:
+  pinned_unitree:
+    repository: unitreerobotics/unitree_ros2
+    commit: 668d1ec5a05d1c38d3306bdca7d59f2ba3581a88
+    message_file: cyclonedds_ws/src/unitree/unitree_go/msg/SportModeState.msg
+    message_file_sha256: 4034e8c6805e002c5ad2327912f52219c712853a51a518378acb1d22764d122c
+    example_file: example/src/src/read_motion_state.cpp
+    example_file_sha256: 08c02c6724ff6e46a24d12d6fc57353cef2ce91376a0fe557508813a4bea0630
+    evidence: FOUR_CONSECUTIVE_XYZ_TRIPLES_INDEXED_0_TO_3;_OFFICIAL_FILES_DO_NOT_ATTACH_LEG_NAMES
+  maintained_parser:
+    path: src/legsa_gins/datasets/by2/go2_body_state_parser.py
+    evidence: PRESERVES_NATIVE_FLAT_ARRAY_INDICES_0_THROUGH_11_WITH_GROUPING_3I_TO_3I_PLUS_2
+  hash_locked_by2_geometry:
+    complete_message_count_used: 63277
+    median_position_body_m:
+      FR: [0.1727190464735031, -0.1241423487663269, -0.2954949140548706]
+      FL: [0.17825116217136383, 0.12140750885009766, -0.29606249928474426]
+      RR: [-0.197317972779274, -0.1481158584356308, -0.29361316561698914]
+      RL: [-0.19494140148162842, 0.14592672884464264, -0.2933535873889923]
+    front_x_positive: true
+    rear_x_negative: true
+    right_y_negative: true
+    left_y_positive: true
+  label_assignment:
+    human_expected_native_order: [FR, FL, RR, RL]
+    rule: ASSIGN_INDEXED_TRIPLES_BY_FRONT_REAR_X_SIGN_AND_RIGHT_LEFT_Y_SIGN
+    official_grouping_parser_grouping_and_static_geometry_disagree: false
+
+failure_policy: BLOCKED_LSE01_FOOT_ORDER_CONTRACT_UNRESOLVED_ON_ANY_SOURCE_DISAGREEMENT
+reference_or_output_selected: false
+filter_run_executed: false

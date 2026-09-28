@@ -1,0 +1,79 @@
+schema_version: lc02.y4a.akf.v2
+method_id: LC02_YIN2023_RAEKF
+branch_id: YIN2023_AKF
+state_dimension: 21
+measurement_dimension: 3
+paper_direct:
+  statistic_residual_state_symbol: Xhat_k
+  statistic_residual_state_stage: null
+  statistic_residual_stage_status: CURRENTLY_UNKNOWN
+  branch_update_prior_state: Xhat_(k/k-1)
+  branch_update_prior_covariance: P_(k/k-1)
+  predicted_covariance: P_k_minus
+  measurement: Z_k
+  residual_for_statistic: "bar_V_k = H_k Xhat_k - Z_k"
+  residual_sign: PREDICTED_MINUS_OBSERVED
+  statistic_numerator: "bar_V_k^T bar_V_k"
+  statistic_denominator: "tr(P_(bar_V_k))"
+  P_bar_V_k_definition_printed: "P_(bar_V_k) = Phi_k P_(Xhat_(k-1)) Phi^T + Q_k"
+  right_Phi_index_as_printed: NONE_EXPLICIT
+  P_bar_V_k_paper_description: COVARIANCE_OF_A_PRIORI_STATE_VECTOR
+  statistic: "Delta_X_tilde_k = sqrt((bar_V_k^T bar_V_k)/tr(P_(bar_V_k)))"
+  threshold_k: 1.0
+  adaptive_factor:
+    paper_condition_abs_Delta_X_tilde_le_k: 1.0
+    paper_condition_abs_Delta_X_tilde_gt_k: "k/|Delta_X_tilde_k|"
+    absolute_value_glyph_preserved: true
+    nonnegative_sqrt_makes_absolute_value_numerically_redundant_when_defined:
+      value: true
+      provenance: PAPER_DERIVED_ALGEBRAIC_EQUIVALENCE
+  gain: "K_ak=(P_k_minus/alpha_k)H_k^T [H_k(P_k_minus/alpha_k)H_k^T+R_k]^-1"
+  state_update: "Xhat_ak=Xhat_(k/k-1)+K_ak(Z_k-H_k Xhat_(k/k-1))"
+  covariance_update: "P_ak=(1/alpha_k)(I-K_ak H_k)P_k_minus"
+  posterior_form: SIMPLE_NON_JOSEPH_AS_PRINTED
+semantic_checks:
+  residual_norm: EUCLIDEAN_SQUARED_NORM
+  statistic_sign_effect: NONE_BECAUSE_QUADRATIC
+  residual_space: MEASUREMENT_3D
+  denominator_space_as_described: ERROR_STATE_21D
+  dimensionally_coherent: false
+  coordinate_scaling_invariant: false
+  threshold_units_defined: false
+  degrees_of_freedom_normalization_defined: false
+  zero_or_nonpositive_trace_policy_defined: false
+  nonfinite_policy_defined: false
+  same_prior_with_RKF_defined_by_yin_2023: true
+  same_prior_evidence: "Both branch equations use the same Xhat_(k/k-1), P_(k/k-1), and the text directs separate branch calculations before fusion."
+source_reconciliation:
+  VOR_equals_v2_semantically: true
+  rendered_v2_page_6_and_official_HTML_transport_match: true
+  author_response_confirms_bar_V_k_is_residual: true
+  author_response_resolves_Xhat_k_stage: false
+  ref35_closes_denominator: false
+  yang_he_xu_2001_closes_exact_statistic: false
+  post_publication_patent_is_exact_2023_source: false
+  patent_competing_description: COVARIANCE_OF_MEASUREMENT_VECTOR
+  unique_executable_interpretation: false
+paper_derived_candidate_mapping_not_selected:
+  expression: "P_(bar_V_k) -> Phi_(k-1) P_(k-1)^plus Phi_(k-1)^T + Q_k"
+  provenance: PAPER_DERIVED_POLICY_CANDIDATE
+  paper_direct: false
+  selected: false
+permitted_policy_candidates_not_selected:
+  - "Literal state-trace equation despite incompatible units"
+  - "Replace denominator with tr(H P^- H^T + R)"
+  - "Use a normalized innovation or residual covariance statistic"
+  - "Apply a coordinate or degrees-of-freedom normalization"
+measurement_R_boundary:
+  proposed_RAEKF_embedded_path: "PDOP^2 Q diag(r_N^2,r_E^2,r_D^2)"
+  proposed_path_provenance: PAPER_DIRECT_FORMULA_WITH_PAPER_DERIVED_DIAGONALIZATION
+  separately_reported_AKF_baseline: null
+  separately_reported_provenance: CURRENTLY_UNKNOWN
+closure:
+  AKF_statistic_update_unique: false
+  blocker: AKF_STATISTIC_DIMENSION_AND_NORMALIZATION_NOT_UNIQUE
+  paper_direct_update_equations_transcribed: true
+  reproduction_level: FAITHFUL_MODULE_REPRODUCTION
+  implementation_authorized: false
+  production_solver_authorized: false
+  C00_authorized: false

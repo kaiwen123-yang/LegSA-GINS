@@ -1,0 +1,23 @@
+schema_version: paper_rebuild.canonical_by2_seed_anchor.v1
+stage_id: CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX
+window_s: [66.0, 340.0]
+rng: numpy.random.Generator(numpy.random.PCG64(seed_value))
+component_substreams: numpy.random.SeedSequence(seed_value).spawn(component_count)
+trace_used: false
+algorithm_output_used: false
+seeds:
+  - {seed_index: seed_00, seed_value: 260306001, anchor_name: user_original_206p2s, rule: fixed_206p2}
+  - {seed_index: seed_01, seed_value: 260306002, anchor_name: early_motion, rule: first_1s_speed_gt_0p20_with_position_and_yaw_valid, fallback_percentile: 0.15}
+  - {seed_index: seed_02, seed_value: 260306003, anchor_name: mid_straight, rule: nearest_45pct_3s_speed_gt_0p30_yawrate_lt_5, fallback_percentile: 0.45}
+  - {seed_index: seed_03, seed_value: 260306004, anchor_name: turn_segment, rule: max_2s_median_abs_yawrate_speed_gt_0p15, fallback_percentile: 0.55}
+  - {seed_index: seed_04, seed_value: 260306005, anchor_name: low_speed_segment, rule: min_2s_median_speed_in_0p05_0p25_yawrate_lt_10, fallback_percentile: 0.30}
+  - {seed_index: seed_05, seed_value: 260306006, anchor_name: high_motion_segment, rule: max_2s_z_speed_plus_z_foot_speed_plus_half_z_yawrate, fallback_percentile: 0.65}
+  - {seed_index: seed_06, seed_value: 260306007, anchor_name: lower_quality_but_valid_A1, rule: lowest_decile_quality_with_physical_baseline_gate, fallback_percentile: 0.70}
+  - {seed_index: seed_07, seed_value: 260306008, anchor_name: raw_doppler_residual_candidate, rule: highest_valid_provider_diagnostic_score, fallback_percentile: 0.75}
+  - {seed_index: seed_08, seed_value: 260306009, anchor_name: late_recovery_segment, rule: 85pct_with_30s_after, fallback_percentile: 0.85}
+interval_policy:
+  anchor_represents: interval_center
+  interval: "[anchor-duration/2,anchor+duration/2)"
+  shift_before_clip: true
+  truncate_only_if_duration_exceeds_window: true
+  repeated_D07_centers_s: [-6.0, 0.0, 6.0]

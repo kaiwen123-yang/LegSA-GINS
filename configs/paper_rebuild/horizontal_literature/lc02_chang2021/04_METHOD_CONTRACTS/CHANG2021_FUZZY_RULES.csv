@@ -1,0 +1,7 @@
+input,label,consequent,domain_semantics,provenance,closure_status
+L_k1,small,"beta_k1=-0.28 L_k1+13",Takagi-Sugeno local consequent,PAPER_DIRECT,CLOSED_LOCAL_RULE
+L_k1,medium,"beta_k1=-0.17 L_k1+6",Takagi-Sugeno local consequent,PAPER_DIRECT,CLOSED_LOCAL_RULE
+L_k1,large,"beta_k1=1",Takagi-Sugeno local consequent,PAPER_DIRECT,CLOSED_LOCAL_RULE
+L_k2,small,"beta_k2=-0.28 L_k2+18",Takagi-Sugeno local consequent,PAPER_DIRECT,CLOSED_LOCAL_RULE
+L_k2,medium,"beta_k2=-0.15 L_k2+13",Takagi-Sugeno local consequent,PAPER_DIRECT,CLOSED_LOCAL_RULE
+L_k2,large,"beta_k2=1",Takagi-Sugeno local consequent,PAPER_DIRECT,CLOSED_LOCAL_RULE

@@ -1,0 +1,93 @@
+schema_version: lc02.y4a.raekf.v2
+method_id: LC02_YIN2023_RAEKF
+paper_native_name: RAKF
+dimensions:
+  error_state: 21
+  measurement: 3
+closed_prerequisites:
+  base_21_state_model_closed: true
+  position_only_measurement_closed: true
+  improved_R_closed: true
+improved_measurement_covariance:
+  scalar_axis_formula: "R_i=PDOP^2 Q r_i^2"
+  scalar_formula_provenance: PAPER_DIRECT
+  explicit_3x3_diagonalization_provenance: PAPER_DERIVED
+  embedded_in_proposed_RAEKF: true
+branches:
+  adaptive:
+    contract: YIN2023_AKF_FINAL_CONTRACT.yaml
+    paper_update_equations_transcribed: true
+    unique_statistic: false
+    reproduction_level: FAITHFUL_MODULE_REPRODUCTION
+  robust:
+    standardized_residual_contract: YIN2023_STANDARDIZED_RESIDUAL_CONTRACT.yaml
+    IGGIII_contract: YIN2023_IGGIII_EQUIVALENT_WEIGHT_CONTRACT.yaml
+    zero_weight_contract: YIN2023_ZERO_WEIGHT_POLICY_CONTRACT.yaml
+    L_k_versus_Z_k_closed: false
+    V_hat_k_versus_bar_V_k_closed: false
+    equation_9_bar_A_Xhat_k_defined: false
+    standardized_residual_unique: false
+    equation_11_scalar_equivalent_information_mapping_unique: false
+    matrix_construction_unique: false
+    zero_weight_policy_unique: false
+    reproduction_level: PAPER_DERIVED_POLICY_BASELINE
+fusion_paper_direct:
+  controlling_statistic: Delta_X_tilde_k
+  paper_fusion_symbol: "ϖ (U+03D6 GREEK PI SYMBOL; varpi)"
+  explicitly_distinct_from_IGGIII_omega_U_03C9: true
+  threshold_c: 1.0
+  varpi_when_abs_Delta_X_tilde_le_c: 0.85
+  varpi_when_abs_Delta_X_tilde_gt_c: 0.15
+  absolute_value_glyph_preserved: true
+  nonnegative_sqrt_makes_absolute_value_numerically_redundant_when_defined:
+    value: true
+    provenance: PAPER_DERIVED_ALGEBRAIC_EQUIVALENCE
+  state: "Xhat_k=ϖ Xhat_ak+(1-ϖ)Xhat_rk"
+  covariance: "P_k=ϖ P_ak+(1-ϖ)P_rk"
+  equation_13_formula_resolved: true
+  same_unmodified_prior_for_both_branches: true
+  same_prior_evidence: "Both branch equations use identical Xhat_(k/k-1), P_(k/k-1); method text directs adaptive and robust filtering separately and then fusion."
+  branch_results_computed_separately_before_fusion: true
+fusion_execution_unresolved:
+  controlling_statistic_unique: false
+  reason_controlling_statistic: "Inherits the dimensionally inconsistent Eq.6 statistic"
+  branch_runtime_order_parallel_or_sequential: null
+  fusion_occurs_before_error_feedback: null
+  feedback_applied_once_after_fusion: null
+  branch_feedback_before_fusion: null
+  covariance_reset_jacobian_after_fusion: null
+  branch_cross_covariance_defined: false
+  branch_mean_spread_included: false
+  P_rk_uniquely_executable: false
+  P_rk_limitations:
+    - "Eq.8 V_hat_k is not related to Eq.9 bar_V_k"
+    - "Eq.9 bar_A_(Xhat_k) is undefined"
+    - "Eq.11 overloads bar_A(tilde_V_i) without a unique base/equivalent split"
+    - "The standardized residual, correlated matrix, and zero operation remain unclosed"
+post_publication_patent_boundary:
+  says_branches_share_predicted_state_and_covariance: true
+  usable_to_backfill_yin_2023: false
+  reasons:
+    - "Four-dimensional position-plus-dual-antenna-heading measurement"
+    - "Fusion weights 0.8/0.2 rather than 0.85/0.15"
+    - "IGG middle exponent two rather than three"
+    - "Different improved-R powers and threshold ranges"
+feedback_reset_source_boundary:
+  base_ESKF_feedback_and_reset_closed_by_cited_KF_GINS: true
+  Yin_branch_orchestration_closed_by_base_source: false
+  faithful_raekf_feedback_reset_unique: false
+covariance_interpretation:
+  printed_convex_formula_executable_if_P_rk_exists: true
+  probabilistic_interpretation_unique: false
+  cross_covariance_absence_is_interpretation_limitation_not_equation_13_executability_ambiguity: true
+  mixture_mean_spread_absence_is_material: true
+closure:
+  RAEKF_fusion_reset_unique: false
+  exact_decision: NO_GO_LC02_YIN2023_RAEKF_AS_FORMAL_PRIMARY
+  reproduction_level: PAPER_DERIVED_POLICY_BASELINE
+  formal_lc02_admission: false
+  implementation_authorized: false
+  production_solver_authorized: false
+  C00_authorized: false
+  representative_cases_authorized: false
+  comparison_run_authorized: false

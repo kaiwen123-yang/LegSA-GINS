@@ -1,0 +1,196 @@
+[
+  {
+    "log": "00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/OPENAT.strace",
+    "reference_open_count": 0,
+    "passed": true,
+    "write_scope": {
+      "pass": true,
+      "write_open_count": 1,
+      "write_outside_run_count": 0,
+      "outside_run_write_open_count": 0,
+      "outside_run_write_open_records": [],
+      "write_open_records": [
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/NAV.csv",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+          "return_code": 4,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/NAV.csv",
+          "anonymous_pipe": false
+        }
+      ],
+      "allowed_device_write_count": 0,
+      "allowed_device_write_records": [],
+      "allowed_anonymous_pipe_write_count": 0,
+      "allowed_anonymous_pipe_write_records": [],
+      "raw_write_open_count": 0,
+      "clean_root_outside_run_write_count": 0,
+      "write_scope_exceptions": [
+        "/dev/null",
+        "/dev/pts/*",
+        "kernel-identified anonymous pipe"
+      ]
+    },
+    "execve": [
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/BUILD/hx02e_official_driver"
+    ]
+  },
+  {
+    "log": "00_CONTROL/DRIVER_GATES/OFF-DEF_YAW/OPENAT.strace",
+    "reference_open_count": 0,
+    "passed": true,
+    "write_scope": {
+      "pass": true,
+      "write_open_count": 1,
+      "write_outside_run_count": 0,
+      "outside_run_write_open_count": 0,
+      "outside_run_write_open_records": [],
+      "write_open_records": [
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/DRIVER_GATES/OFF-DEF_YAW/NAV.csv",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+          "return_code": 4,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/DRIVER_GATES/OFF-DEF_YAW/NAV.csv",
+          "anonymous_pipe": false
+        }
+      ],
+      "allowed_device_write_count": 0,
+      "allowed_device_write_records": [],
+      "allowed_anonymous_pipe_write_count": 0,
+      "allowed_anonymous_pipe_write_records": [],
+      "raw_write_open_count": 0,
+      "clean_root_outside_run_write_count": 0,
+      "write_scope_exceptions": [
+        "/dev/null",
+        "/dev/pts/*",
+        "kernel-identified anonymous pipe"
+      ]
+    },
+    "execve": [
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/BUILD/hx02e_official_driver"
+    ]
+  },
+  {
+    "log": "00_CONTROL/DRIVER_GATES/OFF-LIT_STATIC/OPENAT.strace",
+    "reference_open_count": 0,
+    "passed": true,
+    "write_scope": {
+      "pass": true,
+      "write_open_count": 1,
+      "write_outside_run_count": 0,
+      "outside_run_write_open_count": 0,
+      "outside_run_write_open_records": [],
+      "write_open_records": [
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/DRIVER_GATES/OFF-LIT_STATIC/NAV.csv",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+          "return_code": 4,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/DRIVER_GATES/OFF-LIT_STATIC/NAV.csv",
+          "anonymous_pipe": false
+        }
+      ],
+      "allowed_device_write_count": 0,
+      "allowed_device_write_records": [],
+      "allowed_anonymous_pipe_write_count": 0,
+      "allowed_anonymous_pipe_write_records": [],
+      "raw_write_open_count": 0,
+      "clean_root_outside_run_write_count": 0,
+      "write_scope_exceptions": [
+        "/dev/null",
+        "/dev/pts/*",
+        "kernel-identified anonymous pipe"
+      ]
+    },
+    "execve": [
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/BUILD/hx02e_official_driver"
+    ]
+  },
+  {
+    "log": "00_CONTROL/DRIVER_GATES/OFF-LIT_YAW/OPENAT.strace",
+    "reference_open_count": 0,
+    "passed": true,
+    "write_scope": {
+      "pass": true,
+      "write_open_count": 1,
+      "write_outside_run_count": 0,
+      "outside_run_write_open_count": 0,
+      "outside_run_write_open_records": [],
+      "write_open_records": [
+        {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/DRIVER_GATES/OFF-LIT_YAW/NAV.csv",
+          "flags": "O_WRONLY|O_CREAT|O_TRUNC",
+          "return_code": 4,
+          "lexical_path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/00_CONTROL/DRIVER_GATES/OFF-LIT_YAW/NAV.csv",
+          "anonymous_pipe": false
+        }
+      ],
+      "allowed_device_write_count": 0,
+      "allowed_device_write_records": [],
+      "allowed_anonymous_pipe_write_count": 0,
+      "allowed_anonymous_pipe_write_records": [],
+      "raw_write_open_count": 0,
+      "clean_root_outside_run_write_count": 0,
+      "write_scope_exceptions": [
+        "/dev/null",
+        "/dev/pts/*",
+        "kernel-identified anonymous pipe"
+      ]
+    },
+    "execve": [
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/BUILD/hx02e_official_driver"
+    ]
+  },
+  {
+    "log": "00_CONTROL/OFFICIAL_EXAMPLE/kinematics/OPENAT.strace",
+    "reference_open_count": 0,
+    "passed": true,
+    "write_scope": {
+      "pass": true,
+      "write_open_count": 0,
+      "write_outside_run_count": 0,
+      "outside_run_write_open_count": 0,
+      "outside_run_write_open_records": [],
+      "write_open_records": [],
+      "allowed_device_write_count": 0,
+      "allowed_device_write_records": [],
+      "allowed_anonymous_pipe_write_count": 0,
+      "allowed_anonymous_pipe_write_records": [],
+      "raw_write_open_count": 0,
+      "clean_root_outside_run_write_count": 0,
+      "write_scope_exceptions": [
+        "/dev/null",
+        "/dev/pts/*",
+        "kernel-identified anonymous pipe"
+      ]
+    },
+    "execve": [
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/BUILD/official/bin/kinematics"
+    ]
+  },
+  {
+    "log": "00_CONTROL/OFFICIAL_EXAMPLE/landmarks/OPENAT.strace",
+    "reference_open_count": 0,
+    "passed": true,
+    "write_scope": {
+      "pass": true,
+      "write_open_count": 0,
+      "write_outside_run_count": 0,
+      "outside_run_write_open_count": 0,
+      "outside_run_write_open_records": [],
+      "write_open_records": [],
+      "allowed_device_write_count": 0,
+      "allowed_device_write_records": [],
+      "allowed_anonymous_pipe_write_count": 0,
+      "allowed_anonymous_pipe_write_records": [],
+      "raw_write_open_count": 0,
+      "clean_root_outside_run_write_count": 0,
+      "write_scope_exceptions": [
+        "/dev/null",
+        "/dev/pts/*",
+        "kernel-identified anonymous pipe"
+      ]
+    },
+    "execve": [
+      "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02E/BUILD/official/bin/landmarks"
+    ]
+  }
+]

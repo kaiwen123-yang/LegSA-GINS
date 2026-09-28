@@ -1,0 +1,50 @@
+# Yin 2023 Y4A source-access log
+
+This is a source/contract audit, not a navigation run. The official 28-page version of record and official 24-page v2 were independently rendered and inspected across Equations 6–14, the robust/adaptive flow, cited references, and the data/code statement. Their mathematical semantics are identical: the update changes layout and pagination but does not define `L_k` versus `Z_k`, the standardized residual, the correlated equivalent-weight construction, or the zero-weight operation.
+
+## Primary paper and supplement endpoints
+
+- DOI: `10.3390/rs15174125`.
+- VOR PDF: official MDPI `remotesensing-15-04125.pdf`, 28 pages, 4,550,872 bytes, SHA-256 `b67f07908671bbda54ffd8a3981f7e365ff97f387698d2b558305044f11eec04`.
+- v2 PDF: official MDPI `remotesensing-15-04125-v2.pdf`, 24 pages, 21,097,265 bytes, SHA-256 `198da0283cabddc97446bf9cf9138d8b7ee0b1d1a78f9bdbbe8265c711302f0c`.
+- License: CC BY 4.0.
+- The official article, version-notes, and peer-review endpoints returned HTTP 403 directly in this environment. The full official article HTML was independently transported through `https://r.jina.ai/http://www.mdpi.com/2072-4292/15/17/4125`. The retained UTF-8 Markdown transport is 104,971 bytes, SHA-256 `26784270d28e208184610db5bfcb1dadae4c810885c7f5d52f5240e5acb73426`; that hash identifies transported HTML/Markdown bytes, not a paper binary.
+
+The supplement search is literal and bounded. The official version log lists HTML, XML, and PDF entries only. The full official HTML has no `Supplementary Materials` section. Conventional `remotesensing-15-04125-s001.pdf` and `remotesensing-15-04125-s001.zip` attachment endpoints returned HTTP 404. The decision is `NO_ATTRIBUTABLE_SUPPLEMENT_FOUND`; it is not a metaphysical claim that no unpublished material exists.
+
+## Official peer-review response
+
+The official Susy author-coverletter origin endpoint returned HTTP 403 directly. Its full reported 11-page text was retrieved from the exact transport URL `https://r.jina.ai/http://susy.mdpi.com/user/review/displayFile/41299766/4MoqTeV7?file=author-coverletter%26report=31242108` as an 18,305-byte UTF-8 Markdown capture, SHA-256 `46c6bd33f49aab98ea0b9333f1ddce3298991ae55422ed440806a7d2dca313ce`. This is a transport-byte hash, not an original-PDF hash.
+
+The author response confirms that `bar_V_k` in Eq. 6 is a residual, `H_k Xhat_k-Z_k`, not the Eq. 8 hatted innovation; calls `L_k` “the observation vector” without equating it to `Z_k`; calls the overloaded `bar_A(tilde V_i)` the equivalent weight function; and says the Eq. 10 weighting function enters Eq. 11's Latin `w(tilde V_i)` multiplier and inverse equivalent weight is observation-noise covariance. This closes the semantic relation but does not equate Eq. 10 Greek `ω` with Eq. 11 Latin `w`. It does not relate `V_hat_k` to `bar_V_k`, define `bar_A_(Xhat_k)`, introduce distinct Eq. 11 base/equivalent information symbols, or supply the standardizer/general matrix/zero operation.
+
+## Cited adaptive and robust source chain
+
+All access was limited to attributable publisher, author, institution, or repository endpoints. Four public author-upload full texts were inspected: Knight 2009 and Yang 1999/2001/2002. One request-only author-upload record, Yang 1994, was inspected as metadata only. No recovered PDF is committed or published in the stage, and all public author-upload reuse licenses are unstated unless explicitly noted.
+
+- Yang, Ren, and Xu 2013: the official English title is *Main Progress of Adaptively Robust Filter with Applications in Navigation*, DOI `10.16547/j.cnki.10-1096.2013.01.006`, 7 pages. The official journal endpoint is `https://chwz.cbpt.cnki.net/portal/journal/portal/client/paper/fc98d242cf75f6fc40f60c52b04b2b76`; `pdfUrl` and `previewPdfUrl` were null, and CNKI full text was not accessed. The peer-response bibliography renders “Main Process”; the official journal title controls. Its accessible abstract does not close Eq. 6.
+- Jiang 2020, DOI `10.11947/j.AGCS.2020.20190429`, is exactly the one-page Acta Geodaetica et Cartographica Sinica 49(10):1376–1376 dissertation synopsis. No attributable full dissertation or reuse license was found; it cannot close Eq. 6.
+- Jiang et al. 2021, DOI `10.1007/s10291-021-01165-4`, is an 11-page GPS Solutions paper. The official Springer endpoint is subscription-only under exclusive licence to Springer-Verlag GmbH Germany; `https://www2.ncwu.edu.cn/cehui/info/1109/1814.htm` is institutional metadata only. No lawful full equation text was recovered.
+- Knight and Wang 2009, DOI `10.1017/S0373463309990142`, was checked at the exact Cambridge record `https://www.cambridge.org/core/journals/journal-of-navigation/article/abs/comparison-of-outlier-detection-procedures-and-robust-estimation-methods-in-gps-positioning/8C40F30ED6ACF28B3B80FD119BF59D36`, the UNSW metadata page `https://research.unsw.edu.au/people/associate-professor-jinling-wang/publications?page=2&type=journalarticles`, and the public Jinling-Wang-attributable upload `https://www.researchgate.net/publication/231786405_A_Comparison_of_Outlier_Detection_Procedures_and_Robust_Estimation_Methods_in_GPS_Positioning`. Cambridge is subscription content; UNSW is metadata-only; the author-upload reuse license is unstated. Knight identifies Yang 1999 as the direct IGGIII source and discusses studentised residuals, but does not uniquely define Yin's Kalman standardizer, correlated matrix, or zero inverse.
+- Yang, Cheng, Shum, and Tapley 1999, DOI `10.1007/s001900050252`, was checked at Springer and the attributable upload `https://www.researchgate.net/publication/225929212_Robust_estimation_of_systematic_errors_of_satellite_laser_range`. It uses `v'_i=v_i/sigma_i`, MAD-based robust scale machinery, zero static weight above the upper cutoff, and a middle exponent of two—not Yin's printed cubic term. It does not define Yin's Kalman innovation normalization or singular inverse operation.
+- Yang, He, and Xu 2001, DOI `10.1007/s001900000157`, was checked at Springer and `https://www.researchgate.net/publication/225571259_Adaptively_robust_filtering_for_kinematic_geodetic_positioning`. It uses `V'_i=V_i/r_i`; its dependent-observation mapping scales by `c/max(abs(V'_i),abs(V'_j))`; and its adaptive discrepancy uses a robust current-measurement estimate versus prediction with a predicted-position covariance trace. This is one cited-standard construction, not a unique translation to Yin's symbols.
+- Yang, Song, and Xu 2002, DOI `10.1007/s00190-002-0256-7`, was checked at Springer and `https://www.researchgate.net/publication/227183024_Robust_estimator_for_correlated_observations_based_on_bifactor_equivalent_weights`. It defines `pbar_ij=c_ij p_ij`, `c_ij=sqrt(c_ii c_jj)`, and zero diagonal-factor elimination in static adjustment. It explicitly differs from potentially asymmetric IGGIII and cannot be silently substituted for Yin Eq. 11.
+- Yang 1994, *Robust estimation for dependent observations*, DOI `10.1007/BF03655325`, is subscription-only at Springer; the ResearchGate record is request-only. Its exact dependent-observation equations were not inspected.
+
+The recovered chain strengthens non-uniqueness: observation-scale, robust-scale, studentised, innovation-covariance, max-based dependent, and symmetric-bifactor constructions are all plausible but distinct. It does not close a Yin gate.
+
+## Other attributable evidence
+
+Niu et al. 2022 (`10.3390/rs14102449`) was inspected from its official 34-page CC BY PDF, 13,374,059 bytes, SHA-256 `96b953d6ebd819a620948767c90cc78ad544efe8b00a5bf9ab9ae328bcdec487`, and attributable TCRTKINS commit `13e8fa1a988f673c43af70746de1bcbeb1ec2ea3`, tree `00159f613872e6e9286ddfb5bead2c11b8d6c82f`. It specifies `s_i/sqrt(S_ii)`, correlated covariance inflation, and row deletion. Yin cites Knight inline, changes the middle exponent and thresholds, and cites Niu for a standalone RKF experiment, so Niu remains a candidate rather than unique Yin closure.
+
+The post-publication SDUST patent CN117647251A was inspected from its official 21-page PDF, 1,146,875 bytes, SHA-256 `83069a9fa7441468ade83c9295e8ab440b0942506229dfbbfc22382e76934edd`. It changes the method to a four-dimensional position-plus-heading measurement, changes fusion factors to 0.8/0.2, uses exponent two, and changes improved-R powers. It cannot backfill Yin 2023.
+
+The paper-acknowledged KF-GINS base source is pinned at commit `08f9fce66028c65727b3f3c53f34f7dfd5a3c1c3`. The exact `src/kf-gins/gi_engine.cpp` endpoint carries frozen SHA-256 `f6295267e0d1a48d41284c4fe7ea25cba7225367c4fd2e03f65e5e334ded4260`; the separate frozen Y0–Y3 mechanization source `src/kf-gins/insmech.cpp` carries SHA-256 `d378260635afeceb3593ac3bf65a3c02c62efd1d0a742a1851db338eee88c30a`. These close only the base model.
+
+## Administrative and scientific access boundary
+
+Only ignored source cache files and ephemeral `/tmp` source-recovery material were used; none is copied into the stage. Niu, TCRTKINS, and the Yang/Knight chain were opened as allowed cited-source evidence, not as internal comparison-method runtime artifacts.
+
+The immutable original-stage inventory contains 47 files, all content-read administratively for integrity hashes. Of them, 36 JSON/YAML/CSV files were parsed and validated, and the Y0 status document's terminal and authorization gates were semantically checked for preservation. The augmented 79-file stage contains 22 additional Y4A structured files, so the validator traverses 58 structured files. The two Canonical files were hash-read only.
+
+The C00 forecast reuses exactly four user-accepted frozen Y0–Y3 input-contract facts: the 1,510/1,510 epoch and `Q=1` identity, PDOP minimum 1.13, PDOP maximum 1.74, and per-axis covariance variation. This authorized fact reuse required no new scientific opening of Y0–Y3 content and is distinct from old performance/runtime/trace reuse, which remained zero. New BY2/raw, trace, reference, native-output, prior-runtime, and internal comparison-method scientific opens were zero. No navigation, Yin, C00, evaluator, comparison, LC01, other-method, or Canonical execution occurred.

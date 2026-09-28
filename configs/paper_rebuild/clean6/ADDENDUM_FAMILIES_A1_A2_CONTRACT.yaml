@@ -1,0 +1,1031 @@
+schema_version: paper_rebuild.clean6.addendum_a1_a2.v1
+task: P-09d
+preregistered_date: '2026-09-13'
+start_commit: ff516c3aabc58b6b9971a43abc2a9ea7482d87f3
+protocol_id: ADDENDUM_FAMILIES_A1_A2_protocol_v2_CAL
+stage_root: <CLEAN_ROOT>/stages/CLEAN6_ADDENDUM_FAMILIES_A1_A2
+scratch_alias: addendum_a1_a2_scratch
+core_contract:
+  path: <CODE_ROOT>/configs/paper_rebuild/clean6/CANONICAL_541_PROTOCOL_V2_CONTRACT.yaml
+  sha256: 8c034244cdbd10951c0dc94f0b58cb76a35c9f470249a34542d6e259b364587c
+core_root: <CLEAN_ROOT>/stages/CLEAN6_BY2_CANONICAL_541_PROTOCOL_V2
+label: ADDENDUM_FAMILIES_A1_A2 — pre-registered 2026-09-13, added after the 541-core results were seen, to cover
+  a scenario absent from the library
+motivation:
+- D01–D04 only invalidate GNSS position; receiver velocity remains available. D05 invalidates position and receiver
+  velocity but retains Raw Doppler; D06 additionally removes heading. The library has no all-GNSS-off scenario.
+- The condition in which the leg horizontal-velocity prior (HV) is the only auxiliary velocity observation has not
+  been tested.
+- 'Previously seen D05 protocol-v2 result: fault-window horizontal RMSE Full minus no-RD median about -5.0 m. This
+  is motivation disclosed before addendum execution, not addendum evidence.'
+authorization:
+  contract_commit_and_push_before_any_provider: true
+  code_commit_and_push_before_execution: true
+  core_solver_calls: 0
+  core_evaluator_calls: 0
+  core_aggregate_mutations: 0
+  method_human_decision: '2026-09-13: manuscript F04 (AB1111); ablation F01→F02→F03→A04→F04; A04 v1 decision and
+    Outcome unchanged'
+families:
+- degradation_type_id: D61
+  case_family: A1
+  name: GNSS all off
+  durations_s:
+  - 10
+  - 20
+  - 30
+  sources: &id001
+  - gnss_position
+  - receiver_velocity
+  - raw_doppler
+  - dual_yaw
+  case_count: 27
+- degradation_type_id: D62
+  case_family: A2
+  name: GNSS position and all velocity off, heading retained
+  durations_s:
+  - 10
+  - 20
+  sources: &id002
+  - gnss_position
+  - receiver_velocity
+  - raw_doppler
+  case_count: 18
+anchors:
+  policy:
+    path: <CODE_ROOT>/configs/paper_rebuild/canonical_by2_seed_anchor_policy.yaml
+    sha256: aac6cc1600753baeeb01f120368e3075f6ca30aafc44c7063e4ad74977f14d3b
+  manifest:
+    path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/03_SEEDS_AND_ANCHORS/CANONICAL_BY2_ANCHOR_SELECTION_MANIFEST.csv
+    sha256: 6e5efc20b52ada8be88349db08fb04a0351f1cf9736def6dca4fe357e52dbfd2
+  rows:
+  - seed_index: seed_00
+    seed_value: '260306001'
+    anchor_name: user_original_206p2s
+    anchor_time_s: '206.2'
+    selection_status: selected
+    trace_used: 'False'
+    algorithm_output_used: 'False'
+  - seed_index: seed_01
+    seed_value: '260306002'
+    anchor_name: early_motion
+    anchor_time_s: '107.20639'
+    selection_status: fallback_percentile
+    trace_used: 'False'
+    algorithm_output_used: 'False'
+  - seed_index: seed_02
+    seed_value: '260306003'
+    anchor_name: mid_straight
+    anchor_time_s: '189.207044'
+    selection_status: selected
+    trace_used: 'False'
+    algorithm_output_used: 'False'
+  - seed_index: seed_03
+    seed_value: '260306004'
+    anchor_name: turn_segment
+    anchor_time_s: '227.201927'
+    selection_status: selected
+    trace_used: 'False'
+    algorithm_output_used: 'False'
+  - seed_index: seed_04
+    seed_value: '260306005'
+    anchor_name: low_speed_segment
+    anchor_time_s: '148.204964'
+    selection_status: fallback_percentile
+    trace_used: 'False'
+    algorithm_output_used: 'False'
+  - seed_index: seed_05
+    seed_value: '260306006'
+    anchor_name: high_motion_segment
+    anchor_time_s: '226.215803'
+    selection_status: selected
+    trace_used: 'False'
+    algorithm_output_used: 'False'
+  - seed_index: seed_06
+    seed_value: '260306007'
+    anchor_name: lower_quality_but_valid_A1
+    anchor_time_s: '258.208267'
+    selection_status: fallback_percentile
+    trace_used: 'False'
+    algorithm_output_used: 'False'
+  - seed_index: seed_07
+    seed_value: '260306008'
+    anchor_name: raw_doppler_residual_candidate
+    anchor_time_s: '247.210403'
+    selection_status: selected
+    trace_used: 'False'
+    algorithm_output_used: 'False'
+  - seed_index: seed_08
+    seed_value: '260306009'
+    anchor_name: late_recovery_segment
+    anchor_time_s: '299.203403'
+    selection_status: selected
+    trace_used: 'False'
+    algorithm_output_used: 'False'
+  interval: '[anchor-duration/2,anchor+duration/2); shift before clip to [66,340]; canonical541.seed_anchor.place_interval;
+    no anchor reselection'
+sources:
+  raw_lock:
+    path: <CLEAN_ROOT>/01_RAW_HASH_LOCK/RAW_FILE_HASH_LOCK.csv
+    sha256: f6e5d7965d17857e5b4a846501883f4675f2331a1164fab3de9e5ba9470f1ad7
+  frozen_injection_library:
+  - path: <CODE_ROOT>/src/legsa_gins/paper_rebuild/canonical541/provider_generator.py
+    sha256: 3328272fc994deef38600d4236afaed64cb100ea6810426a5f089f6eeb49f3a4
+  - path: <CODE_ROOT>/src/legsa_gins/paper_rebuild/canonical541/seed_anchor.py
+    sha256: 9becbb782e5c754a06d9bd59c8dbda69b60a041c8b0aec52fd9957ed34c4ebcc
+  - path: <CODE_ROOT>/src/legsa_gins/paper_rebuild/canonical541/matrix_spec.py
+    sha256: 803138e8aa15f5eb0604b0fcab4db70ac9e9d22121ae4023172e5979501502ed
+  - path: <CODE_ROOT>/configs/paper_rebuild/degradation_60types_9seeds.yaml
+    sha256: 9d22768be55b8b88e126f1101e5619ac0afe97cdedc3af28c1458fa9ef83b76f
+  unique_run_registry:
+    path: <CLEAN_ROOT>/stages/CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX/.attempt_20260808T200855P0800/07_FULL_ALGORITHM_REGISTRY/CANONICAL541_UNIQUE_RUN_REGISTRY.csv
+    sha256: 114b44ca662ff480978321a3cf3e24930313cd377e50aa4df3317a88682ef927
+  base_provider_bundle:
+    path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_PROVIDER_BUNDLE.json
+    sha256: cd29237a621ae7a8d4ef6fcaf44c113ca8b41a221bff9849c4e99740cc568b79
+providers:
+  roles:
+    imupath:
+      path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+      sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+    gnsspath:
+      path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_GNSS.gnss
+      sha256: 68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a
+    raw_doppler_factor_path:
+      path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+      sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    go2_attitude_prior_path:
+      path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+      sha256: 2329770b8e9bc61c02fbf943e2e5fd9ea233d6fd8a3550f7a22410a536155c7a
+    go2_horizontal_velocity_prior_path:
+      path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+      sha256: f390c8e51f1bec1162c0f6c628ebbcd0449923cfbf9211bebb36004dc2b2aab0
+  auxiliary_roles:
+    dual_yaw_audit:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2A_BY2_CLEAN_MODULE_ABLATION_REBUILD/04_BASE_PROVIDER/FRESH_AUXILIARIES_CLEAN2R2A/providers/dual_yaw_provider.csv
+      sha256: ccf442f32a0037ba742d199d7ab078d5af112aea5981effce1f23a80510bdd86
+    source_quality_metadata:
+      path: <CLEAN_ROOT>/stages/CLEAN2R2B_BY2_CANONICAL_541_CASE_MATRIX/05_PROVIDER_GENERATION/FINALIZED/C00_clean_normal/02_PROVIDERS/source_quality_metadata.csv
+      sha256: e0fd26d58606b162d4ca61adc980b00c1b030b71c06275b11a277d4901df680b
+  format_columns: 18
+  validity_columns_zero_based:
+    gnss_position: 15
+    receiver_velocity: 16
+    dual_yaw: 17
+  operation: canonical541.provider_generator._outage
+  go2_rp_hv: Preserve original validity, data values and all timestamps, including any originally missing observations;
+    never fabricate availability.
+  A2_heading: Keep original valid A1 observations; do not enable originally invalid or held yaw.
+  semantic_evidence: 'For every case and source: original/modified valid counts, rows inside/outside half-open interval,
+    changed fields, full before/after source hashes; unchanged payload/timestamps and unaffected RP/HV byte identity;
+    18-column finite monotonic grid and exact validity masks.'
+runtime:
+  scientific_solver_commit: 64c81965b17ef1bf8ae2ce3e4dd7b1ae35110b00
+  executable:
+    path: <CODE_ROOT>/build/canonical541_cpp/legsa_v23_port_core_demo
+    sha256: 9c00565c45b654453b2b378f3d5995e5dc21d1271323a9b683acdab75993235f
+  model:
+    path: <CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml
+    sha256: 4ce6ca6c544c2ba39988ea0b0631a60207a4cea36987c3a2139052fedd3a4871
+  model_freeze_commit: 73d71c18ec21332c901f21fe1c4a82564472e6e8
+  chains:
+    CAL:
+      role: primary
+      input: V2s
+      noise: frozen calibrated vrw[3]/abstd[3]
+      s: frozen BY2 scale already applied in pinned IMU
+  profiles:
+  - F01
+  - F02
+  - F03
+  - F04
+  - A03
+  - A04
+  - A05
+  - A06
+  - A07
+  - A08
+  - A09
+  unique_config_count: 11
+  logical_aliases:
+    A01: F04
+    A02: F03
+  run_id_rule: ADD_RUN_00001..ADD_RUN_00495; no canonical RUN identifiers reused
+  run_count_per_chain: 495
+  solver_limit: 495
+  jobs: 22
+  parallel_source: 'P-09d human authorization: 22 concurrent solvers'
+  timeout_s: 1800
+  retry_count: 0
+  failed_runs: No retry; algorithm failures counted as method failures; technical failures distinct; batch verification
+    failure stops with scene retained
+  allowed_scientific_diff_CAL:
+  - vrw
+  - abstd
+  counter_expectation: Input-only frozen C++ timing replay, then GNSS call only when any GNSS18 validity bit is
+    1. P/RV/A1 exact scheduled valid-bit counts; RD/RP/HV nearest selection and static gate counts; state-dependent
+    acceptance retained as bounds/terminal closure, never guessed; SA contribution closure checked after yaw gates.
+  checkpoint_required_members: 22
+  checkpoint_selection: All RAW_FILE_HASH_LOCK rows with dataset==BY2
+  checkpoint_open_policy: C-01b/C-03 independent pre/post strace sessions; exactly one O_RDONLY streaming SHA256
+    open for each of 22 locked files including trace/.bag/.fpl; exact locked path set, per-file count one, zero
+    raw writes; CHECKPOINT_STRACE_AUDIT.json. Human clarified 2026-09-10; hash checkpoints are outside A7.
+  seal_before_evaluation: true
+  matrix_solver_limit: 495
+  sequence_gate_run_count: 0
+  sequence_extra_unique_runs: 0
+  frozen_calibration_values:
+    s: 1.0308398903907543
+    vrw:
+    - 9.478382094779873
+    - 9.784198200134004
+    - 7.6321402201126745
+    abstd:
+    - 4817.482008954474
+    - 8259.572423450163
+    - 2257.241538343225
+  native_identity_policy: Frozen native stage/role retained; outer protocol identity explicit in manifest; case
+    and method identities preserved
+evaluation:
+  evaluator:
+    path: <CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py
+    sha256: aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da
+  trace:
+    path: <RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv
+    sha256: ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c
+    role: EVALUATOR_CHILD_ONLY
+    parent_may_hash: false
+  base_time: 1772784000.0
+  window:
+  - 66.0
+  - 340.0
+  versions:
+  - v3
+  - v2
+  v3_baseline_median_m: 0.356191491865984
+  v3_lever_frd_m:
+  - 0.03
+  - -0.148095745932992
+  - -0.3
+  v3_policy: Frozen rigid physical point transform using each NAV attitude; LLH-only derived EVAL_NAV; native NAV
+    immutable.
+  v3_std_policy: UNTRANSPORTED_STD_DIAGNOSTIC_ONLY for position; unchanged yaw state STD; no full transformed covariance
+    consistency claim.
+  trace_policy: Within generation/solving/evaluation, only the frozen evaluator subprocess opens trace, once per
+    evaluated run; provider/solver show zero trace/.bag/.fpl opens and evaluation zero .bag/.fpl opens. Independent
+    C-01b/C-03 hash checkpoints follow the separately authorized checkpoint_open_policy.
+  new_solver_evaluation_limit: 990
+  matrix_evaluation_identities: 990
+  unique_rows_per_version: 495
+  logical_rows_per_version: 585
+  primary_version: v3
+  self_check:
+    reference_support: full jointly cleaned reference support; actual evaluated NAV
+    coordinates: WGS84 geodetic ECEF to ENU with reference LLH anchor
+    failure: EVALUATION_SUSPECT is a batch gate failure; stop and preserve outputs
+    trace_reads: only evaluator child (plus separately traced authorized raw hash checkpoints)
+statistics:
+  pair_definitions:
+  - comparison: full_vs_no_HV
+    candidate_method_id: F04
+    reference_method_id: A06
+  - comparison: full_vs_no_Go2
+    candidate_method_id: F04
+    reference_method_id: A07
+  - comparison: full_vs_no_RD
+    candidate_method_id: F04
+    reference_method_id: A03
+  - comparison: full_vs_no_RP
+    candidate_method_id: F04
+    reference_method_id: A05
+  - comparison: A04_vs_F03
+    candidate_method_id: A04
+    reference_method_id: F03
+  - comparison: full_vs_strong
+    candidate_method_id: F04
+    reference_method_id: F03
+  - comparison: F04_vs_F02
+    candidate_method_id: F04
+    reference_method_id: F02
+  - comparison: F04_vs_F01
+    candidate_method_id: F04
+    reference_method_id: F01
+  primary_metrics:
+  - fault_window_horizontal_rmse_m
+  - outage_end_horizontal_error_m
+  secondary_metrics:
+  - post_window_horizontal_rmse_m
+  - horizontal_rmse_m
+  - up_rmse_m
+  - yaw_rmse_deg
+  - max_horizontal_error_in_window_m
+  delta: candidate minus reference; negative is better
+  win: delta < -1e-12
+  tie: abs(delta) <= 1e-12
+  win_rate_denominator: All finite paired cases including ties
+  maintained: same strict median sign and same strict side of 0.5 win rate as v1; exact zero/0.5 => not maintained;
+    missing pairs => INCOMPLETE
+  bootstrap:
+    unit: paired case
+    statistic: median paired delta plus original Canonical publication mean delta
+    resamples: 10000
+    seed: 20260904
+    interval: percentile 2.5,97.5 numpy linear; same draws for mean and median
+    source: publication/derived_tables.py bootstrap_mean_ci; median is explicitly preregistered extension
+  wilcoxon:
+    alternative: two-sided
+    zero_rule: abs(delta)<=1e-12 removed
+    rank_ties: average
+    n_nonzero_le_20: Exact conditional sign enumeration of signed ranks, including ties; all-zero p=1
+    n_nonzero_gt_20: P-09c normal approximation with tie and continuity correction
+    interpretation: Exploratory paired tests; no multiplicity-adjusted confirmatory claim; repeated durations share
+      nine anchors.
+  frozen_comparison: Addendum only, each evaluator version separate; no 541-core table mutation or pooling.
+  failure_aware:
+    one_algorithm_failure: successful method wins
+    both_algorithm_failure: failure tie, both methods failure count incremented
+    technical_missing: separate missing denominator, never fabricated metrics
+    finite_metric_statistics: both-success finite pairs only
+    rate_denominator: both available terminal methods including algorithm failure ties; technical/not-started excluded
+      and explicitly counted
+  add_key_pairs: []
+  family_sample_sizes:
+    A1: 27
+    A2: 18
+  duration_group_sample_size: 9
+prohibitions:
+  tuning: false
+  amplitude_changes: false
+  result_based_case_selection: false
+  raw_write: false
+  main_chain_change: false
+  Outcome_change: false
+  binary_change: false
+  evaluator_change: false
+  gyro_z_scale_followup_executed: false
+  full_matrix_automatic_rerun: false
+data_roles:
+  data_mode: semisynthetic
+  synthetic_data_used: false
+  semisynthetic_data_used: true
+  controlled_degradation_applied: true
+  trace_used_online: false
+  policy: Injected observation outages on hash-locked real BY2 base; separate addendum tables, never natural real-data
+    results or 541-core aggregate rows. Native frozen schema tokens are retained as native provenance and explicitly
+    distinguished from addendum classification.
+execution:
+  solver_workers: 22
+  evaluator_max_workers: 22
+  batch_size: 99
+  case_order: family D61 then D62; increasing duration; seed_00..08; runtime.profiles order
+  phase_order:
+  - preregistration push
+  - code push
+  - raw hash checkpoint
+  - provider and access audit
+  - solve and full-file seal
+  - v3/v2 evaluation and new error-series metrics
+  - retain full error series plus display NAV and update timeline
+  - archive verification
+  - exact owned scratch-file cleanup and ledger
+  - post raw checkpoint
+  - separate aggregation and handoff
+  retry_count: 0
+  failure_classification: 'P-09c unchanged: ALGORITHM_FAILURE_ALL_YAW_REJECTED / NOT_RUN_ALGORITHM_FAILURE; FAILED_TECHNICAL
+    and evaluation failures separate. No repeated solver/evaluator calls. Stop on scientific/audit failure; bookkeeping
+    recovery from existing artifacts only.'
+  checkpoint_policy: C-01b/C-03 independent pre/post strace sessions; exactly one O_RDONLY streaming SHA256 open
+    for each of 22 locked files including trace/.bag/.fpl; exact locked path set, per-file count one, zero raw writes;
+    CHECKPOINT_STRACE_AUDIT.json. Human clarified 2026-09-10; hash checkpoints are outside A7.
+  single_thread_environment:
+    OMP_NUM_THREADS: '1'
+    OPENBLAS_NUM_THREADS: '1'
+    MKL_NUM_THREADS: '1'
+    NUMEXPR_NUM_THREADS: '1'
+    VECLIB_MAXIMUM_THREADS: '1'
+    BLIS_NUM_THREADS: '1'
+storage:
+  G_required_free_bytes_before_any_generation: 300000000000
+  scratch_required_free_bytes: 150000000000
+  scratch_filesystem: WSL ext4 only; local alias in ignored config
+  direct_G_fallback: false
+  latest_amendment_supersedes_initial_fallback: true
+  peak_limit_bytes: 250000000000
+  peak_scope: combined attempt-owned scratch plus G retained outputs; record physical and logical bytes separately
+  per_run_permanent:
+  - RUN_MANIFEST.json
+  - summary.json (v3,v2)
+  - error_series.csv.gz (v3,v2)
+  - NAV_10HZ.csv.gz
+  - PORT_GNSS_UPDATE_TRACE.csv.gz
+  - OUTPUT_SEAL full-file sha256 entries including deleted NAV/STD
+  delete_only_after: batch evaluation, thinning/compression, archive and pack verification completed; exact owned
+    regular-file ledger; no symlinks or roots
+  deletion_scope: complete NAV/STD plus attempt-owned scratch after verified archive; preserve ledger and seals
+    forever
+  automatic_regeneration: false
+  pilot_peak_forecast: No new pilot or core gate runs; bounded 99-run batches and same 250 GB owned occupancy cap.
+  pilot_duration_forecast: Use actual addendum batches only; forecasts are estimates, not completion evidence.
+outputs:
+  aggregate_root: 13_AGGREGATE_ADDENDUM/{v3,v2}
+  unique_rows_per_version: 495
+  logical_rows_per_version: 585
+  core_pairwise_merge: false
+  handoff_zip: <HANDOFF_ROOT>/c541_v2_handoff_v3.zip
+  handoff_root: <PAPER_ROOT>/handoff
+case_rows:
+- case_id: D61_10s_seed_00
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_00
+  seed_value: 260306001
+  anchor_time_s: 206.2
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 201.2
+  outage_end_s: 211.2
+  sources: *id001
+- case_id: D61_10s_seed_01
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_01
+  seed_value: 260306002
+  anchor_time_s: 107.20639
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 102.20639
+  outage_end_s: 112.20639
+  sources: *id001
+- case_id: D61_10s_seed_02
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_02
+  seed_value: 260306003
+  anchor_time_s: 189.207044
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 184.207044
+  outage_end_s: 194.207044
+  sources: *id001
+- case_id: D61_10s_seed_03
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_03
+  seed_value: 260306004
+  anchor_time_s: 227.201927
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 222.201927
+  outage_end_s: 232.201927
+  sources: *id001
+- case_id: D61_10s_seed_04
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_04
+  seed_value: 260306005
+  anchor_time_s: 148.204964
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 143.204964
+  outage_end_s: 153.204964
+  sources: *id001
+- case_id: D61_10s_seed_05
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_05
+  seed_value: 260306006
+  anchor_time_s: 226.215803
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 221.215803
+  outage_end_s: 231.215803
+  sources: *id001
+- case_id: D61_10s_seed_06
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_06
+  seed_value: 260306007
+  anchor_time_s: 258.208267
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 253.20826699999998
+  outage_end_s: 263.208267
+  sources: *id001
+- case_id: D61_10s_seed_07
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_07
+  seed_value: 260306008
+  anchor_time_s: 247.210403
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 242.210403
+  outage_end_s: 252.210403
+  sources: *id001
+- case_id: D61_10s_seed_08
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_08
+  seed_value: 260306009
+  anchor_time_s: 299.203403
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 294.203403
+  outage_end_s: 304.203403
+  sources: *id001
+- case_id: D61_20s_seed_00
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_00
+  seed_value: 260306001
+  anchor_time_s: 206.2
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 196.2
+  outage_end_s: 216.2
+  sources: *id001
+- case_id: D61_20s_seed_01
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_01
+  seed_value: 260306002
+  anchor_time_s: 107.20639
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 97.20639
+  outage_end_s: 117.20639
+  sources: *id001
+- case_id: D61_20s_seed_02
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_02
+  seed_value: 260306003
+  anchor_time_s: 189.207044
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 179.207044
+  outage_end_s: 199.207044
+  sources: *id001
+- case_id: D61_20s_seed_03
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_03
+  seed_value: 260306004
+  anchor_time_s: 227.201927
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 217.201927
+  outage_end_s: 237.201927
+  sources: *id001
+- case_id: D61_20s_seed_04
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_04
+  seed_value: 260306005
+  anchor_time_s: 148.204964
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 138.204964
+  outage_end_s: 158.204964
+  sources: *id001
+- case_id: D61_20s_seed_05
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_05
+  seed_value: 260306006
+  anchor_time_s: 226.215803
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 216.215803
+  outage_end_s: 236.215803
+  sources: *id001
+- case_id: D61_20s_seed_06
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_06
+  seed_value: 260306007
+  anchor_time_s: 258.208267
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 248.20826699999998
+  outage_end_s: 268.208267
+  sources: *id001
+- case_id: D61_20s_seed_07
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_07
+  seed_value: 260306008
+  anchor_time_s: 247.210403
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 237.210403
+  outage_end_s: 257.21040300000004
+  sources: *id001
+- case_id: D61_20s_seed_08
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_08
+  seed_value: 260306009
+  anchor_time_s: 299.203403
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 289.203403
+  outage_end_s: 309.203403
+  sources: *id001
+- case_id: D61_30s_seed_00
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_00
+  seed_value: 260306001
+  anchor_time_s: 206.2
+  duration_s: 30
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 191.2
+  outage_end_s: 221.2
+  sources: *id001
+- case_id: D61_30s_seed_01
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_01
+  seed_value: 260306002
+  anchor_time_s: 107.20639
+  duration_s: 30
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 92.20639
+  outage_end_s: 122.20639
+  sources: *id001
+- case_id: D61_30s_seed_02
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_02
+  seed_value: 260306003
+  anchor_time_s: 189.207044
+  duration_s: 30
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 174.207044
+  outage_end_s: 204.207044
+  sources: *id001
+- case_id: D61_30s_seed_03
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_03
+  seed_value: 260306004
+  anchor_time_s: 227.201927
+  duration_s: 30
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 212.201927
+  outage_end_s: 242.201927
+  sources: *id001
+- case_id: D61_30s_seed_04
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_04
+  seed_value: 260306005
+  anchor_time_s: 148.204964
+  duration_s: 30
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 133.204964
+  outage_end_s: 163.204964
+  sources: *id001
+- case_id: D61_30s_seed_05
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_05
+  seed_value: 260306006
+  anchor_time_s: 226.215803
+  duration_s: 30
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 211.215803
+  outage_end_s: 241.215803
+  sources: *id001
+- case_id: D61_30s_seed_06
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_06
+  seed_value: 260306007
+  anchor_time_s: 258.208267
+  duration_s: 30
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 243.20826699999998
+  outage_end_s: 273.208267
+  sources: *id001
+- case_id: D61_30s_seed_07
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_07
+  seed_value: 260306008
+  anchor_time_s: 247.210403
+  duration_s: 30
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 232.210403
+  outage_end_s: 262.21040300000004
+  sources: *id001
+- case_id: D61_30s_seed_08
+  degradation_type_id: D61
+  case_family: A1
+  seed_index: seed_08
+  seed_value: 260306009
+  anchor_time_s: 299.203403
+  duration_s: 30
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 284.203403
+  outage_end_s: 314.203403
+  sources: *id001
+- case_id: D62_10s_seed_00
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_00
+  seed_value: 260306001
+  anchor_time_s: 206.2
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 201.2
+  outage_end_s: 211.2
+  sources: *id002
+- case_id: D62_10s_seed_01
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_01
+  seed_value: 260306002
+  anchor_time_s: 107.20639
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 102.20639
+  outage_end_s: 112.20639
+  sources: *id002
+- case_id: D62_10s_seed_02
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_02
+  seed_value: 260306003
+  anchor_time_s: 189.207044
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 184.207044
+  outage_end_s: 194.207044
+  sources: *id002
+- case_id: D62_10s_seed_03
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_03
+  seed_value: 260306004
+  anchor_time_s: 227.201927
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 222.201927
+  outage_end_s: 232.201927
+  sources: *id002
+- case_id: D62_10s_seed_04
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_04
+  seed_value: 260306005
+  anchor_time_s: 148.204964
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 143.204964
+  outage_end_s: 153.204964
+  sources: *id002
+- case_id: D62_10s_seed_05
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_05
+  seed_value: 260306006
+  anchor_time_s: 226.215803
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 221.215803
+  outage_end_s: 231.215803
+  sources: *id002
+- case_id: D62_10s_seed_06
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_06
+  seed_value: 260306007
+  anchor_time_s: 258.208267
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 253.20826699999998
+  outage_end_s: 263.208267
+  sources: *id002
+- case_id: D62_10s_seed_07
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_07
+  seed_value: 260306008
+  anchor_time_s: 247.210403
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 242.210403
+  outage_end_s: 252.210403
+  sources: *id002
+- case_id: D62_10s_seed_08
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_08
+  seed_value: 260306009
+  anchor_time_s: 299.203403
+  duration_s: 10
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 294.203403
+  outage_end_s: 304.203403
+  sources: *id002
+- case_id: D62_20s_seed_00
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_00
+  seed_value: 260306001
+  anchor_time_s: 206.2
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 196.2
+  outage_end_s: 216.2
+  sources: *id002
+- case_id: D62_20s_seed_01
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_01
+  seed_value: 260306002
+  anchor_time_s: 107.20639
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 97.20639
+  outage_end_s: 117.20639
+  sources: *id002
+- case_id: D62_20s_seed_02
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_02
+  seed_value: 260306003
+  anchor_time_s: 189.207044
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 179.207044
+  outage_end_s: 199.207044
+  sources: *id002
+- case_id: D62_20s_seed_03
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_03
+  seed_value: 260306004
+  anchor_time_s: 227.201927
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 217.201927
+  outage_end_s: 237.201927
+  sources: *id002
+- case_id: D62_20s_seed_04
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_04
+  seed_value: 260306005
+  anchor_time_s: 148.204964
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 138.204964
+  outage_end_s: 158.204964
+  sources: *id002
+- case_id: D62_20s_seed_05
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_05
+  seed_value: 260306006
+  anchor_time_s: 226.215803
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 216.215803
+  outage_end_s: 236.215803
+  sources: *id002
+- case_id: D62_20s_seed_06
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_06
+  seed_value: 260306007
+  anchor_time_s: 258.208267
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 248.20826699999998
+  outage_end_s: 268.208267
+  sources: *id002
+- case_id: D62_20s_seed_07
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_07
+  seed_value: 260306008
+  anchor_time_s: 247.210403
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 237.210403
+  outage_end_s: 257.21040300000004
+  sources: *id002
+- case_id: D62_20s_seed_08
+  degradation_type_id: D62
+  case_family: A2
+  seed_index: seed_08
+  seed_value: 260306009
+  anchor_time_s: 299.203403
+  duration_s: 20
+  window_start_s: 66.0
+  window_end_s: 340.0
+  outage_start_s: 289.203403
+  outage_end_s: 309.203403
+  sources: *id002
+profile_configuration_map:
+  F01: single_antenna_EKF
+  F02: basic_dual_yaw_EKF
+  F03: AB0000
+  F04: AB1111
+  A03: AB0111
+  A04: AB1011
+  A05: AB1101
+  A06: AB1110
+  A07: AB1100
+  A08: AB1000
+  A09: AB0100
+field_definitions:
+  fault_window_horizontal_rmse_m: P-09c existing definition over the registered half-open outage interval; retain
+    frozen summary value.
+  post_window_horizontal_rmse_m: P-09c frozen definition t > outage_end_s, through full-window end, unchanged.
+  outage_end_horizontal_error_m: horizontal_err_m from full-rate sealed error_series at the last matched evaluation
+    epoch t with outage_start_s <= t < outage_end_s; no interpolation to endpoint; unavailable if no matched epoch
+    or that last epoch is nonfinite. Record selected time and full-rate source sha256.
+  max_horizontal_error_in_window_m: Maximum horizontal_err_m over all matched evaluation epochs t with outage_start_s
+    <= t < outage_end_s in full-rate sealed error_series; unavailable if no epochs or any in-window value nonfinite;
+    not maximum of the 10 Hz display sample.
+hypotheses:
+  H1:
+    text: In A1 the HV configurations A04/F04/A03/A05 have lower fault-window horizontal RMSE and outage-end horizontal
+      error than F03/A06/A07/A08/A09, with the gap growing with duration.
+    HV:
+    - A04
+    - F04
+    - A03
+    - A05
+    no_HV:
+    - F03
+    - A06
+    - A07
+    - A08
+    - A09
+    report: All 20 cross-group paired comparisons, both metrics, all seeds, family and duration medians. Report
+      full_vs_no_HV as the isolated HV contrast.
+    decision: For each of 20 contrasts and each metric, benefit requires negative family median; duration trend
+      requires median delta(30s)<median delta(20s)<median delta(10s). SUPPORTED if every benefit and trend holds;
+      PARTIALLY_SUPPORTED if some but not all hold; NOT_SUPPORTED if none hold; INCOMPLETE if required finite pairs
+      unavailable. Report component decisions and failure counts.
+  H2:
+    text: HV benefit in A2 with retained heading is greater than in A1.
+    contrast: full_vs_no_HV, and all 20 HV/no-HV contrasts as secondary; A2 delta minus A1 delta matched on same
+      duration and seed, only common 10/20s (n=18).
+    decision: Negative median difference for each primary metric = SUPPORTED; mixed signs = PARTIALLY_SUPPORTED;
+      no negative median = NOT_SUPPORTED; missing paired evidence = INCOMPLETE. Also report per-duration n=9.
+  H3:
+    text: With heading absent in A1, body priors may harm some seeds, as already observed in D06.
+    contrast: full_vs_no_Go2, full_vs_no_RP, full_vs_no_HV and A04_vs_F03; report both primary metrics and every
+      duration/seed sign.
+    decision: At least one positive finite full_vs_no_Go2 primary-metric delta = OBSERVED_SOME_SEED_HARM; none =
+      NOT_OBSERVED; missing evidence disclosed separately. No post-hoc removal of harmful seeds.

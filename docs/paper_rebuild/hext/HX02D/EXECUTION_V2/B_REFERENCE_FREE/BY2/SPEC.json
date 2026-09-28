@@ -1,0 +1,24 @@
+{
+  "sequence_id": "BY2",
+  "base_time": 1772784000.0,
+  "window": [
+    66.0,
+    340.0
+  ],
+  "reference_path_length_m": 328.4713109046748,
+  "cache": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/01_INPUT_PINS/HARTLEY/BY2/H5_INPUT_CACHE.bin",
+  "cache_manifest": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/01_INPUT_PINS/HARTLEY/BY2/H5_INPUT_CACHE_MANIFEST.json",
+  "branches": {
+    "HARTLEY_S": {
+      "nav": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_S__S__C00__NA/native/run/NAV.csv",
+      "nav_sha256": "dc4d95a1e634ea7f7c3aecfcb3cdd50ded8ebf4378dfcd46917ed4875338a600",
+      "metrics_source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_S__S__C00__NA/eval/RELATIVE_POSE/OUTPUT/RELATIVE_POSE_METRICS.json"
+    },
+    "HARTLEY_LIT": {
+      "nav": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_LIT__LIT__C00__NA/native/run/NAV.csv",
+      "nav_sha256": "b46ffe7cf930d96de53f165c54c06af6df6b48b626ccb0e103c1bb7d2e10430e",
+      "metrics_source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__HARTLEY_LIT__LIT__C00__NA/eval/RELATIVE_POSE/OUTPUT/RELATIVE_POSE_METRICS.json"
+    }
+  },
+  "outdir": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/EXECUTION_V2/B_REFERENCE_FREE/BY2/OUTPUT"
+}

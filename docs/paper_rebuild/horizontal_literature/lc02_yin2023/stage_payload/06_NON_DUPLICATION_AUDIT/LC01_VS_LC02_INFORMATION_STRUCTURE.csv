@@ -1,0 +1,10 @@
+dimension,LC01_PAVLASEK2021_TWO_RECEIVER_IEKF,LC02_YIN2023_RAEKF,identity_effect
+paper,"Pavlasek Walsh Forbes ICRA 2021","Yin et al. Remote Sensing 2023",different
+online_GNSS_receivers,2,1,different
+GNSS_information,"two receiver positions and rigid P2-P1 vector","one GNSS1 position/quality composite",different
+direct_geometric_attitude,"yes; full relative-position vector","no direct baseline-vector heading",different
+quality_inputs,"receiver position covariances","PDOP; Q solution class; NED position STD",different
+robust_adaptive_mechanism,none,"adaptive covariance and robust innovation branches",different
+raw_carrier_online,no,no,same_layer_only
+trace_online,no,no,clean_boundary_same
+performance_used_for_identity,no,no,forbidden

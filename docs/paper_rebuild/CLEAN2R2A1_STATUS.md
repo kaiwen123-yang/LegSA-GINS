@@ -1,5 +1,7 @@
 # CLEAN2R2A1 execution status
 
+> **Current disposition: `SUPERSEDED_BY_CLEAN3_PENDING_RERUN`.** The body below is retained unchanged as historical CLEAN2R2A1 provenance. Its full-minus-strong and RD/SA/RP/HV ablation values are not current CLEAN3 module-effect evidence and must not be used for active claims or tuning.
+
 Terminal status: `PASS_CLEAN2R2A1_BY2_CLEAN_MODULE_ABLATION_FRESH_EVIDENCE_READY_FOR_HUMAN_REVIEW`.
 
 ## Frozen scope
@@ -43,3 +45,6 @@ All FGO, multi-state QM, QA fallback, and contact/FK counters were zero. This st
 - Final ZIP entries: 255.
 - Final ZIP SHA-256: `1dbdd6cdd1a4c7b6ac13356ea6acb3ef6cc22958469d203a674f099e85e3eed8`.
 - ZIP integrity, manifest closure, embedded sidecar, and stage/ZIP manifest identity: PASS.
+
+
+> Reference terminology erratum (2026-09-13): the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit). This annotation supersedes the reference-origin wording in the retained historical text; numerical evidence and historical decisions are unchanged. See `docs/paper_rebuild/REFERENCE_WORDING_ERRATUM_20260913.md`.

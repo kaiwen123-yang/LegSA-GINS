@@ -19,7 +19,10 @@ class GnssFileLoader {
  public:
   GnssFileLoader() = default;
   explicit GnssFileLoader(const std::string& path);
+  GnssFileLoader(const std::string& path, const std::string& baseline3d_path);
   static std::vector<GnssData> loadFifteenColumn(const std::string& path);
+  static std::vector<GnssData> loadBaseline3d(const std::string& path,
+                                          const std::string& baseline3d_path);
   bool next(GnssData& gnss);
   bool isEof() const;
   bool isOpen() const;

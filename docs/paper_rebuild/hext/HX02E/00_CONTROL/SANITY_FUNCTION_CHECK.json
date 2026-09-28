@@ -1,0 +1,9 @@
+{
+  "valid_epochs": 75001,
+  "yaw_minus_raw_gyro_z_drift_deg_per_min": 0.0,
+  "yaw_minus_raw_gyro_z_rms_deg": 0.0,
+  "native_path_length_10hz_m": 0.0,
+  "path_grid_epochs": 3001,
+  "yaw_definition": "Unwrapped native FLU/up-world yaw increments minus raw sensor z left-hold integral; evaluation window; OLS per minute",
+  "path_definition": "Native IMU-point horizontal path on the supported HX-02 10 Hz window grid"
+}

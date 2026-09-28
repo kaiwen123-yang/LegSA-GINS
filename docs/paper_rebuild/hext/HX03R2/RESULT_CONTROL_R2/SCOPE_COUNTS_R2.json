@@ -1,0 +1,42 @@
+{
+  "counts": [
+    {
+      "evaluations_per_run": 2,
+      "failure_class": "NONE",
+      "reused": false,
+      "runs": 238
+    },
+    {
+      "evaluations_per_run": 0,
+      "failure_class": "NONE",
+      "reused": false,
+      "runs": 11
+    },
+    {
+      "evaluations_per_run": 0,
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "reused": false,
+      "runs": 28
+    },
+    {
+      "evaluations_per_run": 2,
+      "failure_class": "ALGORITHM_FAILURE_DIVERGED",
+      "reused": false,
+      "runs": 8
+    },
+    {
+      "evaluations_per_run": 0,
+      "failure_class": "NONE",
+      "reused": true,
+      "runs": 96
+    }
+  ],
+  "evaluator_calls_this_task": 0,
+  "existing_evaluation_slots": 492,
+  "identity_evaluation_slots": 4,
+  "matrix_evaluation_slots": 488,
+  "native_calls_this_task": 0,
+  "original_native": 285,
+  "reference_opens_this_process": 0,
+  "run_manifest_rows": 381
+}

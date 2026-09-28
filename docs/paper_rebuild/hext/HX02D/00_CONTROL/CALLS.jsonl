@@ -1,0 +1,2 @@
+{"state": "CALL_INTENT", "role": "B_REFERENCE_FREE", "sequence": "BY2", "argv": ["strace", "-f", "-yy", "-s", "4096", "-e", "trace=openat,execve", "-o", "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/B_REFERENCE_FREE/BY2/B_OPENAT.strace", "/usr/bin/python3", "-m", "legsa_gins.paper_rebuild.hext.hx02d_reference_free", "--spec", "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX02D/B_REFERENCE_FREE/BY2/SPEC.json"]}
+{"state": "CALL_TERMINAL", "role": "B_REFERENCE_FREE", "sequence": "BY2", "passed": false}

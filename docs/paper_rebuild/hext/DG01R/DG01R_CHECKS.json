@@ -1,0 +1,247 @@
+[
+  {
+    "check": "BY2_R1_raw_pin",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2_R1_status_pin",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2_R2_raw_pin",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2_R2_status_pin",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R1_raw_pin",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R1_status_pin",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R2_raw_pin",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R2_status_pin",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R1_raw_pin",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R1_status_pin",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R2_raw_pin",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R2_status_pin",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2_R0_identity",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2_R1_no_clock_missing",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2_R2A_original_pivot_exclusion",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2_R2A_retained_equal_R1",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2_R2B_half_cycle_algebra",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R0_identity",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R1_no_clock_missing",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R2A_original_pivot_exclusion",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R2A_retained_equal_R1",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R2B_half_cycle_algebra",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R0_identity",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R1_no_clock_missing",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R2A_original_pivot_exclusion",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R2A_retained_equal_R1",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R2B_half_cycle_algebra",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2_R1_phase_partition",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2_R1_observation_partition",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2_R1_field_bounds",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2_R2_phase_partition",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2_R2_observation_partition",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2_R2_field_bounds",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R1_phase_partition",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R1_observation_partition",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R1_field_bounds",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R2_phase_partition",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R2_observation_partition",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2H_R2_field_bounds",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R1_phase_partition",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R1_observation_partition",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R1_field_bounds",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R2_phase_partition",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R2_observation_partition",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "BY2O_R2_field_bounds",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "saved_examples_exact_original_lines",
+    "passed": true,
+    "detail": "6417 sides checked"
+  },
+  {
+    "check": "examples_at_most_20_per_category",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "six_successful_convbin_calls",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "check": "convbin_access_audit",
+    "passed": true,
+    "detail": ""
+  }
+]

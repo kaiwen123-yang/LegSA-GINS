@@ -1,0 +1,68 @@
+[
+  {
+    "classification": "ALGORITHM_FAILURE_DIVERGED",
+    "denominator": "UNAVAILABLE",
+    "note": "{\"all_numeric_rows_finite\": true, \"bounds\": {\"height_displacement_m\": 1000.0, \"position_displacement_m\": 10000.0, \"speed_mps\": 50.0}, \"failure_classification\": \"ALGORITHM_FAILURE_DIVERGED\", \"first_vio",
+    "run": "BY2/LC02_GINAV"
+  },
+  {
+    "classification": "ALGORITHM_FAILURE_DIVERGED",
+    "denominator": "UNAVAILABLE",
+    "note": "{\"all_numeric_rows_finite\": true, \"bounds\": {\"height_displacement_m\": 1000.0, \"position_displacement_m\": 10000.0, \"speed_mps\": 50.0}, \"failure_classification\": \"ALGORITHM_FAILURE_DIVERGED\", \"first_vio",
+    "run": "BY2O/LC02_GINAV"
+  },
+  {
+    "classification": "ABNORMAL_EXIT",
+    "denominator": "UNAVAILABLE",
+    "note": "no relative-pose metrics for this branch",
+    "run": "BY2H/Hartley-S"
+  },
+  {
+    "classification": "ABNORMAL_EXIT",
+    "denominator": "UNAVAILABLE",
+    "note": "no relative-pose metrics for this branch",
+    "run": "BY2H/Hartley-LIT"
+  },
+  {
+    "classification": "ALGORITHM_FAILURE_DIVERGED",
+    "denominator": "UNAVAILABLE",
+    "note": "sealed v3 row; role=SUPPLEMENT; evaluation_status=NOT_RUN_ALGORITHM_FAILURE; geometric_audit_status=NOT_APPLICABLE_SINGLE_RECEIVER",
+    "run": "BY2H/EXT05C-S"
+  },
+  {
+    "classification": "NO_METHOD_VALID_EPOCH",
+    "denominator": "0/1370",
+    "note": "method-native availability 0",
+    "run": "BY2/EXT04_FAR"
+  },
+  {
+    "classification": "NO_METHOD_VALID_EPOCH",
+    "denominator": "0/1370",
+    "note": "method-native availability 0",
+    "run": "BY2/EXT04_PAR"
+  },
+  {
+    "classification": "NO_METHOD_VALID_EPOCH",
+    "denominator": "0/1350",
+    "note": "method-native availability 0",
+    "run": "BY2H/EXT04_FAR"
+  },
+  {
+    "classification": "NO_METHOD_VALID_EPOCH",
+    "denominator": "0/1350",
+    "note": "method-native availability 0",
+    "run": "BY2H/EXT04_PAR"
+  },
+  {
+    "classification": "NO_METHOD_VALID_EPOCH",
+    "denominator": "0/1885",
+    "note": "method-native availability 0",
+    "run": "BY2O/EXT04_FAR"
+  },
+  {
+    "classification": "NO_METHOD_VALID_EPOCH",
+    "denominator": "0/1885",
+    "note": "method-native availability 0",
+    "run": "BY2O/EXT04_PAR"
+  }
+]

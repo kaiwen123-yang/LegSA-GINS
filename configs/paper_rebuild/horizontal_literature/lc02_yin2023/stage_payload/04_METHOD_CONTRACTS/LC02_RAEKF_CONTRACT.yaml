@@ -1,0 +1,25 @@
+schema_version: lc02.raekf.v1
+branch_id: YIN2023_RAEKF
+paper_native_acronym: RAKF
+improved_R: LC02_IMPROVED_R_CONTRACT.yaml
+improved_R_provenance: PAPER_DIRECT
+adaptive_branch: LC02_AKF_CONTRACT.yaml
+robust_branch: LC02_RKF_CONTRACT.yaml
+selection_statistic: "same paper Delta_X_tilde used by the adaptive branch"
+c: 1.0
+omega:
+  when_abs_stat_le_c: 0.85
+  when_abs_stat_gt_c: 0.15
+state_fusion: "X_k = omega*X_ak + (1-omega)*X_rk"
+covariance_fusion: "P_k = omega*P_ak + (1-omega)*P_rk"
+fusion_formula_status: PAPER_DIRECT_AND_RESOLVED
+overall_covariance_chain_status: P_RK_NOT_SOURCE_CLOSED
+inherited_robust_limitations:
+  - "L_k versus Z_k is CURRENTLY_UNKNOWN; setting L_k=Z_k is PAPER_DERIVED."
+  - "The V_tilde_i standardizer is not source-closed."
+  - "The zero-weight/rejection path is not source-closed: w_i=0 makes the printed Abar^-1 path singular."
+overall_limitation: "P_rk is not uniquely executable because L_k versus Z_k, the V_tilde_i standardizer, and the zero-weight/rejection path are not source-closed. Eq. (13) itself is not missing."
+audit_effect: "Non-terminal Y0-Y3 limitation; audit contracts pass, formal admission and execution gates remain false."
+feedback_reset: LC02_ERROR_STATE_SIGN_CONTRACT.yaml
+provenance_class: PAPER_DIRECT
+reproduction_level: PAPER_DERIVED_POLICY_BASELINE

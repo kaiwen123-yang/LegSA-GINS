@@ -1,0 +1,62 @@
+{
+  "utc": "2026-09-26T12:53:36.483540+00:00",
+  "passed": true,
+  "slots": 492,
+  "scientific_files_equal": 984,
+  "archive_files_reverified": 6396,
+  "compressed_files_decompressed_and_reverified": 984,
+  "trace_opens_readonly_hash_checked": 492,
+  "child_pid_verified": 492,
+  "audit_status_counts": {
+    "PASS": 492
+  },
+  "maximum_discrepancy": {
+    "horizontal_max_m": 3.5704330589399866e-14,
+    "up_max_m": 4.263256414560601e-14,
+    "yaw_max_deg": 4.092726157978177e-12
+  },
+  "old_available_slots_with_numeric_fields": 252,
+  "old_available_numeric_fields_equal": 34776,
+  "launch_attempts": 493,
+  "preexec_failures": 1,
+  "scientific_evaluation_calls": 492,
+  "native_calls": 0,
+  "legsa_native": 0,
+  "legsa_evaluation": 0,
+  "parent_trace_checks": [
+    {
+      "log": "VALIDATION_CONTROLLER_OPENAT_R2.strace",
+      "sha256": "c3c0edf5ab17cf64611a9caa38963ad553d8341e44aac77cc0547ca5d3a17f1f",
+      "raw_opens": 0,
+      "E_write_opens": 0,
+      "coverage": "initial failed launch used -f; later controller traces cover main thread, with Python open guard also covering worker threads"
+    },
+    {
+      "log": "VALIDATION_CONTROLLER_MAIN_R2.strace",
+      "sha256": "a02cb72fd602ad6609884dd3161c004eb0c38806c76bd20e5988306aa45875ad",
+      "raw_opens": 0,
+      "E_write_opens": 0,
+      "coverage": "initial failed launch used -f; later controller traces cover main thread, with Python open guard also covering worker threads"
+    },
+    {
+      "log": "MATRIX_CONTROLLER_MAIN_R2.strace",
+      "sha256": "0f88cf4f09892f8430cf06e76cb5898d968c8c4b02b319af3ada308e047765ca",
+      "raw_opens": 0,
+      "E_write_opens": 0,
+      "coverage": "initial failed launch used -f; later controller traces cover main thread, with Python open guard also covering worker threads"
+    },
+    {
+      "log": "REPORT_OPENAT_R2.strace",
+      "sha256": "f518eec90bfd69dc0b4d134e2cea8eddab1621f5c33c4172f434fab589bcada5",
+      "raw_opens": 0,
+      "E_write_opens": 0,
+      "coverage": "initial failed launch used -f; later controller traces cover main thread, with Python open guard also covering worker threads"
+    }
+  ],
+  "audit_script_sha256": "9a9e361db2ea07172c8552be466528ebd9d1cb9d03d09841713c7bd5bbb35657",
+  "files_sha256": {
+    "EVALUATOR_AUDITS_R2.json": "b4e611ddf9c612e5a221d680886abbc54e9f7b9d7faa9b6c2883ea2f544f5beb",
+    "AUDIT_MAXIMA_R2.csv": "efb0544cb4f3237dc8b46ec5e220bace5e7bb047290cabf697be712d421dc72f",
+    "AUDIT_SLOT_DETAIL_R2.json": "34fdd9a55c891fa919a0a10dcf7839821272dd170777cc43dedc0160522ae358"
+  }
+}

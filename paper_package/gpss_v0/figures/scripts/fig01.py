@@ -1,0 +1,25 @@
+from common import *
+plt=plot_setup()
+from matplotlib.patches import Rectangle, Circle
+record(W/'docs/paper_rebuild/hext/HX05_PREREG.md')
+record(W/'configs/paper_rebuild/final_v23_parity_contract.yaml')
+fig,axs=plt.subplots(1,2,figsize=(174/25.4,3.2));fig.subplots_adjust(left=.03,right=.97,bottom=.06,top=.91,wspace=.14)
+a,b=axs
+for ax in axs:ax.set(xlim=(-1.2,1.2),ylim=(-1.3,1.4));ax.axis('off')
+a.text(.02,.98,'(a)',transform=a.transAxes,fontsize=9,fontweight='bold');b.text(.02,.98,'(b)',transform=b.transAxes,fontsize=9,fontweight='bold')
+a.add_patch(Rectangle((-.5,-.9),1,1.7,facecolor='#EEEEEE',edgecolor='#555555'))
+for x,label in [(-.8,'GNSS2 (left)'),(.8,'GNSS1 (right)')]:
+ a.add_patch(Circle((x,.45),.07,color='#0072B2'));a.text(x,.64,label,ha='center',fontsize=7)
+a.annotate('',(-.8,.45),(.8,.45),arrowprops=dict(arrowstyle='->',color='#0072B2',lw=1.5))
+a.text(0,.70,'GNSS2 − GNSS1',ha='center',fontsize=7)
+a.text(-.85,.91,'Median:\n0.356 m',ha='center',fontsize=8)
+a.plot(0,.45,'D',color='#D55E00');a.text(-.60,-.06,'Evaluation point:\nantenna midpoint',ha='center',fontsize=7)
+a.plot(.16,-.5,'ks');a.text(.28,-.58,'Body IMU',fontsize=7)
+a.annotate('',(0,.45),(.16,-.5),arrowprops=dict(arrowstyle='->',linestyle='--',color='#555555'))
+a.text(-1.05,-.37,'Lever arm',rotation=90,fontsize=7)
+a.annotate('',(0,1.35),(0,.83),arrowprops=dict(arrowstyle='->'));a.text(.12,1.22,'+X forward',fontsize=7)
+a.annotate('',(-1.15,-1.04),(-.5,-1.04),arrowprops=dict(arrowstyle='->'));a.text(-1.13,-1.26,'+Y (FLU); −Y (FRD)',fontsize=7)
+b.add_patch(Rectangle((-.95,-.9),1.9,2,fill=False,edgecolor='#999999',linestyle='--'))
+b.text(0,.15,'[NEED: photo]\nGo2 with both antennas\nand mounting geometry',ha='center',va='center',linespacing=1.8,fontsize=9)
+finish(fig,'Fig01','DRAWN_SCHEMATIC','a')
+mp=P/'FIGURE_MAP.csv';rows=list(csv.DictReader(mp.open()));r=rows[-1].copy();r.update(panel='b',status='PLACEHOLDER_NEED_PHOTO',qa_notes='Author photograph required; schematic is not a photograph');rows.append(r);writecsv(mp,rows)

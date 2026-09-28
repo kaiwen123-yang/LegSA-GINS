@@ -1,0 +1,16 @@
+{
+  "bytes": 1554490,
+  "compressed_sha256": "664724f91cd3c8ca91f8a933ae879c13fb3fb77b7e8976d6e78a8d748d051aac",
+  "download_utc": "2026-09-27T12:39:31.791402+00:00",
+  "nav_record_counts": {
+    "C": 2423,
+    "E": 6378,
+    "G": 484,
+    "I": 304,
+    "J": 127,
+    "R": 1412,
+    "S": 16465
+  },
+  "rnx_sha256": "8d5222d82ea957d96a6d4bbe318a6f384532ed4a22016c92be84d78a3dac11cc",
+  "url": "https://igs.bkg.bund.de/root_ftp/IGS/BRDC/2026/065/BRDC00WRD_R_20260650000_01D_MN.rnx.gz"
+}

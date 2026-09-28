@@ -23,11 +23,23 @@ std::vector<double> Go2WeakPriorFactor::residual(const NavState& state,
   return {wrapRad(state.euler_rad[0] - measurement.roll_rad), wrapRad(state.euler_rad[1] - measurement.pitch_rad)};
 }
 
-Matrix Go2WeakPriorFactor::designMatrix() {
+Matrix Go2WeakPriorFactor::designMatrix(const NavState& state) {
   Matrix H(2, RANK, 0.0);
-  // 中文说明：error-state attitude feedback 与 yaw update 同号，负号保证 toy pull test 朝 Go2 prior 收敛。
-  H(0, PHI_ID) = -1.0;
-  H(1, PHI_ID + 1) = -1.0;
+  const double pitch = state.euler_rad[1];
+  const double yaw = state.euler_rad[2];
+  const double cos_yaw = std::cos(yaw);
+  const double sin_yaw = std::sin(yaw);
+  const double cos_pitch = std::cos(pitch);
+  double sec_pitch = 1.0 / cos_pitch;
+  if (std::fabs(pitch) > 60.0 * D2R && std::fabs(sec_pitch) > 2.0) {
+    sec_pitch = std::copysign(2.0, sec_pitch);
+  }
+  // 中文说明：n 系失准角先按当前 yaw 旋转到 roll/pitch 局部方向；
+  // roll 项保留精确 sec(pitch)，高俯仰角时将其幅值限制为 2，防止数值放大。
+  H(0, PHI_ID) = -cos_yaw * sec_pitch;
+  H(0, PHI_ID + 1) = -sin_yaw * sec_pitch;
+  H(1, PHI_ID) = sin_yaw;
+  H(1, PHI_ID + 1) = -cos_yaw;
   return H;
 }
 

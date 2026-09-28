@@ -1,0 +1,9 @@
+dimension,LC01,LC02,comparison
+state_representation,"extended pose invariant state","conventional additive 21-state error state",distinct
+state_dimension,"9 error coordinates [attitude, velocity, position] (Pavlasek Eq. 30 / active PHASE5 contract)","21 error coordinates [position, velocity, attitude, gyro bias, accel bias, gyro scale, accel scale]",distinct
+measurement_dimension,"two position measurements including correlated rigid geometry","3D position residual",distinct
+attitude_observability,"direct two-point rigid baseline vector","inertial dynamics plus motion/position aiding; no direct GNSS heading",distinct
+lever_arm_role,"two receiver geometry","single antenna lever-arm attitude Jacobian",distinct
+filter_family,IEKF,"EKF/AKF/RKF/RAEKF",distinct
+native_output,"extended pose navigation","position velocity attitude navigation",partially_overlapping_output
+expected_failure_mode,"baseline geometry/correlation/receiver loss","quality metadata errors; outliers; under-specified robust rejection",complementary

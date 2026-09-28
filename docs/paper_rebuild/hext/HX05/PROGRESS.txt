@@ -1,0 +1,1 @@
+HX05_CLOSEOUT_COMPLETE: integration 3, relative evaluation 3, reference opens 3; solvers 0; 65 pins 3x65; scratch empty; no package.

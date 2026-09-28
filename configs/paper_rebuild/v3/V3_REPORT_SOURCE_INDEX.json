@@ -1,0 +1,92 @@
+{
+  "horizontal_tables": {
+    "v3": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/11_READONLY_CLOSEOUT_H_EXT_04L/MAIN_TABLE_V3.csv",
+      "sha256": "9cadef700c3f20a107ca5f054e1b696353db2b4fc67ad86c3f062de50ba9957e"
+    },
+    "v2": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/11_READONLY_CLOSEOUT_H_EXT_04L/MAIN_TABLE_V2.csv",
+      "sha256": "a84eec94f1ba5dbac10ecd5ce1eb1a00a08a1ffe08d92444ea34252f5da64d3a"
+    }
+  },
+  "frozen_core": {
+    "v3": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE/v3/UNIQUE_EVALUATION_RESULTS.csv",
+      "sha256": "45054701213cedb2057523c6f4706dfebd170ccea824bc882e8d281653f892d5"
+    },
+    "v2": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE/v2/UNIQUE_EVALUATION_RESULTS.csv",
+      "sha256": "abcf4943419c462312a806171de1cc6b11bcb159ab63cd98f9d1ed0fa0ee505d"
+    }
+  },
+  "frozen_addendum": {
+    "v3": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE_ADDENDUM/v3/UNIQUE_EVALUATION_RESULTS.csv",
+      "sha256": "9d8021712f62bb4107f52dedf3229c45b86a80a41797075abeb8cba42fda7f5a"
+    },
+    "v2": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE_ADDENDUM/v2/UNIQUE_EVALUATION_RESULTS.csv",
+      "sha256": "69beeefa8c47ba0ab84ffe15ec26dbef26da888a5acb4d90ae9848e9c9d4a401"
+    }
+  },
+  "frozen_sequences": {
+    "v3": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE_SEQUENCES/v3/UNIQUE_EVALUATION_RESULTS.csv",
+      "sha256": "e26dfcd830d6c711ffbb7debd68293fbf7b7ea28240e16bce582381b61ea6a0b"
+    },
+    "v2": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE_SEQUENCES/v2/UNIQUE_EVALUATION_RESULTS.csv",
+      "sha256": "6c5a165eaf68bf762cbc803466b4496a5b522dba968785115db9d0338990044d"
+    }
+  },
+  "sensitivity_pilot": {
+    "v3": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5BC_V3_CANDIDATE_PILOT/07_AGGREGATE/PILOT_TABLE_V3.csv",
+      "sha256": "1571cb918331135c04364017c490cbd21743705d803aa2741de4b38752f81e79"
+    },
+    "v2": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5BC_V3_CANDIDATE_PILOT/07_AGGREGATE/PILOT_TABLE_V2.csv",
+      "sha256": "9d63845d0481f1a1dd7755505f2985661aeff5343f911d6aa15036cc36ca8289"
+    }
+  },
+  "sensitivity_subset": {
+    "v3": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5BC_V3_CANDIDATE_PILOT/07_AGGREGATE/SUBSET61_TABLE_V3.csv",
+      "sha256": "5ba8f6c57ebb7eb03243eb0fcf0fe448c6334f30ec5597499e2e3d898ea3ad0f"
+    },
+    "v2": {
+      "path": "<CLEAN_ROOT>/stages/CLEAN7_T5BC_V3_CANDIDATE_PILOT/07_AGGREGATE/SUBSET61_TABLE_V2.csv",
+      "sha256": "2632a7c6e036042a714fe3299e404b7c04e57d8223c5b0359b04d0bf0d278e58"
+    }
+  },
+  "frozen_by2o_segments": {
+    "path": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/11_READONLY_CLOSEOUT_H_EXT_04L/BY2O_SEGMENT_SUMMARY.csv",
+    "sha256": "a68d5a36eb1ccf808a28842af309d1cccb9748c8e667b6b4ac2bf63580fe0e72"
+  },
+  "sensitivity_summary": {
+    "path": "<CLEAN_ROOT>/stages/CLEAN7_T5BC_V3_CANDIDATE_PILOT/07_AGGREGATE/SUBSET61_SUMMARY.csv",
+    "sha256": "94e710960c4c6d30ff508c63439ac84d4bd0b9e6bdd6d1f2a489297f47c243a8"
+  },
+  "selection": {
+    "path": "<CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/11_READONLY_CLOSEOUT_H_EXT_04L/FINAL_SUMMARY.json",
+    "sha256": "19c93b5d4a975cba2de5404c592638814d5b7223fe6e66bc74220bde6a9f94e5"
+  },
+  "by2o_window": [
+    3186.0,
+    3563.0
+  ],
+  "data_mode": "frozen_result_metadata",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "selected_validity": "BOTH_FIXED",
+  "variant": "R5",
+  "validity_rule": "both receivers carry a fixed carrier-phase solution (carrSoln = 2 at the exact epoch)",
+  "frozen_case_bundles": {
+    "path": "<CODE_ROOT>/configs/paper_rebuild/v3/V3_PROVIDER_SOURCE_INDEX.json",
+    "sha256": "130f93315d504bd7daddefc7eeabdbbeb10b763011531ade2766a0448a689a0e"
+  },
+  "evaluation_window_contract": {
+    "path": "<CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml",
+    "sha256": "698ede92e0251b896d488283544421a9f0dc3f689e2168ff841804e0950bc983"
+  }
+}

@@ -1,0 +1,9 @@
+batch,batch_status,solver_completed,algorithm_failure_all_yaw_rejected,solver_technical_failure,evaluations_completed,evaluations_not_run_algorithm_failure,archive_receipts,batch_archive_gate,cleanup_gate
+1,PASS,256,0,0,512,0,256,PASS,PASS
+2,PASS,256,0,0,512,0,256,PASS,PASS
+3,PASS,256,0,0,512,0,256,PASS,PASS
+4,PASS,256,0,0,512,0,256,PASS,PASS
+5,PASS,256,0,0,512,0,256,PASS,PASS
+6,PASS,197,59,0,394,118,256,PASS,PASS
+7,PASS,256,0,0,512,0,256,PASS,PASS
+8,STOPPED_GATE_FAILURE,256,0,0,512,0,255,NOT_REACHED,NOT_EXECUTED

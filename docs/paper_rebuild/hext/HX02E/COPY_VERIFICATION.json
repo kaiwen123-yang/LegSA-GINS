@@ -1,0 +1,2160 @@
+{
+  "status": "PASS_ALL_SOURCE_FILES_COPIED_AND_HASH_VERIFIED",
+  "utc": "2026-09-26T09:27:50.314956+00:00",
+  "files": [
+    {
+      "path": "00_CONTRACT/HX02E_PREREG.md",
+      "size": 17444,
+      "sha256": "5abeec54c8b9273230d68dd38a57d5088e617f3f97a495ebd29fef2cacf02e9a",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "00_CONTROL/ARCHIVE_PRECOPY_RECEIPT.json",
+      "size": 81820,
+      "sha256": "89527213118541d0ce616ef227dd96be8d688054c48429e47d0263b9619584aa",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/ARCHIVE_PRECOPY_RECEIPT.json"
+    },
+    {
+      "path": "00_CONTROL/BOOTSTRAP_ATTEMPT_1/CONTROLLER_OPENAT.strace",
+      "size": 4630,
+      "sha256": "80f66c789ed3c42563045e29b96b8fed19172c4fdc70e2d019e622416167c72a",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/BOOTSTRAP_ATTEMPT_1/CONTROLLER_OPENAT.strace"
+    },
+    {
+      "path": "00_CONTROL/BOOTSTRAP_ATTEMPT_1/controller_stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/BOOTSTRAP_ATTEMPT_1/controller_stderr.log"
+    },
+    {
+      "path": "00_CONTROL/BOOTSTRAP_ATTEMPT_1/controller_stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/BOOTSTRAP_ATTEMPT_1/controller_stdout.log"
+    },
+    {
+      "path": "00_CONTROL/BOOTSTRAP_INCIDENT.json",
+      "size": 803,
+      "sha256": "8014a2901de374099a80fe45a8711fde81e9e49f07d67eee0671d7eecd94f1ab",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/BOOTSTRAP_INCIDENT.json"
+    },
+    {
+      "path": "00_CONTROL/CONTROLLER_EXIT_CODE.txt",
+      "size": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/CONTROLLER_EXIT_CODE.txt"
+    },
+    {
+      "path": "00_CONTROL/CONTROLLER_OPENAT.strace",
+      "size": 720968,
+      "sha256": "ab9dc6a4c79f531a063ff2596b115f423edbab0f75704961c4f8cfc82475053a",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/CONTROLLER_OPENAT.strace"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/GATES.json",
+      "size": 5091,
+      "sha256": "130b2042d76d8a1202ed179d439261bb78aeecbae0a2c1bbe8c8876535168a43",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/GATES.json"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/GATE.json",
+      "size": 1199,
+      "sha256": "7f0c82292d2a4e255957a8010ace9394e31b12e148c76602f38228a2873ca753",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/GATE.json"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/INPUT.bin",
+      "size": 14400448,
+      "sha256": "486d233d450e0203f920ee38163c266c37f1fb24e6bbeba3ce9676efaeaf580f",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/NAV.csv",
+      "size": 5437128,
+      "sha256": "2879f75539f6fa96a5df01a7dca3ca8c7d444b5d258d45be0c68d4538c38f2fc",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/OPENAT.strace",
+      "size": 17519,
+      "sha256": "78f06583f3ebf5d79cf2a58929131c1f9dd5b6335b82afb17f486d841bf1d104",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/OPENAT.strace"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/stderr.log"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/stdout.log",
+      "size": 8099,
+      "sha256": "277c84e1a17dc26a27c34295ffdf52649f2d7234d75ed59bea1c6bcf34557019",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-DEF_STATIC/stdout.log"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-DEF_YAW/GATE.json",
+      "size": 1224,
+      "sha256": "073633f4ab4ae7b060230d2c8b628e6a545210b6c46217132cc0a163d6f4b1df",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-DEF_YAW/GATE.json"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-DEF_YAW/INPUT.bin",
+      "size": 2880448,
+      "sha256": "6d388dd932748b722c8ba5b3ba52bea11187f7aca0eca03cbbea51321d92e197",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-DEF_YAW/NAV.csv",
+      "size": 8251794,
+      "sha256": "00efa64b166e1647ad372bbbc065e10be056cea782e89b34a755480ebb70e5da",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-DEF_YAW/OPENAT.strace",
+      "size": 17501,
+      "sha256": "8f5611d61317b2eed51667af51c6578ca1f286251998b9aacea6b5169ccde3ec",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-DEF_YAW/OPENAT.strace"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-DEF_YAW/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-DEF_YAW/stderr.log"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-DEF_YAW/stdout.log",
+      "size": 7997,
+      "sha256": "25591d91dcbaa1825ca709ac3649b0651c1de07c298f46fc6a86a7e53e095786",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-DEF_YAW/stdout.log"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-LIT_STATIC/GATE.json",
+      "size": 1199,
+      "sha256": "a73e35a0192c3214a2e40dedd63647ad12a7b755e2e8658fe1e79a3c20e6bf4a",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-LIT_STATIC/GATE.json"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-LIT_STATIC/INPUT.bin",
+      "size": 14400448,
+      "sha256": "486d233d450e0203f920ee38163c266c37f1fb24e6bbeba3ce9676efaeaf580f",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-LIT_STATIC/NAV.csv",
+      "size": 5437128,
+      "sha256": "2879f75539f6fa96a5df01a7dca3ca8c7d444b5d258d45be0c68d4538c38f2fc",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-LIT_STATIC/OPENAT.strace",
+      "size": 17519,
+      "sha256": "9d2143716b5133b72ee30f1d8ce7b211da64af3568702c30a28eaf2e22a3568c",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-LIT_STATIC/OPENAT.strace"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-LIT_STATIC/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-LIT_STATIC/stderr.log"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-LIT_STATIC/stdout.log",
+      "size": 20204,
+      "sha256": "f42bc599cf0076de1bf9c1116a0470fa7421b447cf3fe4452af7c332f2ce47bc",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-LIT_STATIC/stdout.log"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-LIT_YAW/GATE.json",
+      "size": 1222,
+      "sha256": "0a6b24eb578e29d7d4b0531ca916536f2206cd3abfd7c4a750659dd1c0cc6754",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-LIT_YAW/GATE.json"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-LIT_YAW/INPUT.bin",
+      "size": 2880448,
+      "sha256": "6d388dd932748b722c8ba5b3ba52bea11187f7aca0eca03cbbea51321d92e197",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-LIT_YAW/NAV.csv",
+      "size": 8140636,
+      "sha256": "d606f6f00937600bd92392a29a357ab95732c33c5eb9ba12a8aeb07051ee1013",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-LIT_YAW/OPENAT.strace",
+      "size": 17501,
+      "sha256": "ceb9a0e85bd3590794813115f4f0a7f610f9355d0d96a6e45dc9947d7a259fb0",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-LIT_YAW/OPENAT.strace"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-LIT_YAW/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-LIT_YAW/stderr.log"
+    },
+    {
+      "path": "00_CONTROL/DRIVER_GATES/OFF-LIT_YAW/stdout.log",
+      "size": 20102,
+      "sha256": "e9ce81cffbc39deb7bc58aebe721300e94f8ada33841a663b6348efaae187fa7",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/DRIVER_GATES/OFF-LIT_YAW/stdout.log"
+    },
+    {
+      "path": "00_CONTROL/EXECUTION_AUDIT.json",
+      "size": 37809,
+      "sha256": "6c7662d2f976694f73c000ca08a4cc27ad61a4770aba81318545a84e944193f4",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/EXECUTION_AUDIT.json"
+    },
+    {
+      "path": "00_CONTROL/EXECUTION_COUNTS.json",
+      "size": 135,
+      "sha256": "186960921b37db9337ef36c1503525b298520efb94b6b2c816811f1c8026d3e9",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/EXECUTION_COUNTS.json"
+    },
+    {
+      "path": "00_CONTROL/GATE_ACCESS_AUDITS.json",
+      "size": 6949,
+      "sha256": "8622b213de0338ac74993f28d742ab81136b5fe9c9d1b8c922d5880ee4fc65f6",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/GATE_ACCESS_AUDITS.json"
+    },
+    {
+      "path": "00_CONTROL/INDEPENDENT_VALIDATION.json",
+      "size": 3512,
+      "sha256": "ee2145b7c86622e02782b0cef6f99f51d77b5c546bb440ffb4ff8f7f0cb82065",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/INDEPENDENT_VALIDATION.json"
+    },
+    {
+      "path": "00_CONTROL/LONG_TABLE_VALIDATION.json",
+      "size": 107,
+      "sha256": "1b66e4f98aa46b5564d63c752568d8bb83ed037109fc125ccdad5d279814b0ba",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/LONG_TABLE_VALIDATION.json"
+    },
+    {
+      "path": "00_CONTROL/METHOD_BODY_FINAL.json",
+      "size": 50488,
+      "sha256": "599b8b39f2da38e8d79fbd021355a2f5a744e52b2fec7932dcc42baaf48988fd",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/METHOD_BODY_FINAL.json"
+    },
+    {
+      "path": "00_CONTROL/METHOD_BODY_START.json",
+      "size": 50488,
+      "sha256": "e3ca7159b23386b3aad5b52595eb3f61cbbd393d6e1eb948c4d1d92d89554bd2",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/METHOD_BODY_START.json"
+    },
+    {
+      "path": "00_CONTROL/OFFICIAL_EXAMPLE/EXAMPLES.json",
+      "size": 1497,
+      "sha256": "997545acbde28a6bd417ed8b1cf35ee228f11241e1ef64f445aa32d96cb80f77",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/OFFICIAL_EXAMPLE/EXAMPLES.json"
+    },
+    {
+      "path": "00_CONTROL/OFFICIAL_EXAMPLE/kinematics/OPENAT.strace",
+      "size": 18703,
+      "sha256": "8fdb4fe0d3cdab144e08a94e052484a561f3e82a29613858d62828d15fc3b9d4",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/OFFICIAL_EXAMPLE/kinematics/OPENAT.strace"
+    },
+    {
+      "path": "00_CONTROL/OFFICIAL_EXAMPLE/kinematics/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/OFFICIAL_EXAMPLE/kinematics/stderr.log"
+    },
+    {
+      "path": "00_CONTROL/OFFICIAL_EXAMPLE/kinematics/stdout.log",
+      "size": 2804894,
+      "sha256": "e4cb9855712ed52e3891474431453c1e58342837d565e9d13aafcdbae97d2d1d",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/OFFICIAL_EXAMPLE/kinematics/stdout.log"
+    },
+    {
+      "path": "00_CONTROL/OFFICIAL_EXAMPLE/landmarks/OPENAT.strace",
+      "size": 18699,
+      "sha256": "8c0a517b44e88b204a9f322caa8a89d81b41f16d66a522c0a367d2bb3c4298ed",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/OFFICIAL_EXAMPLE/landmarks/OPENAT.strace"
+    },
+    {
+      "path": "00_CONTROL/OFFICIAL_EXAMPLE/landmarks/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/OFFICIAL_EXAMPLE/landmarks/stderr.log"
+    },
+    {
+      "path": "00_CONTROL/OFFICIAL_EXAMPLE/landmarks/stdout.log",
+      "size": 755234,
+      "sha256": "ecd92beb0168bf1d46c18490a559129bf377c10fb2a0d304d9659342a1b0596a",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/OFFICIAL_EXAMPLE/landmarks/stdout.log"
+    },
+    {
+      "path": "00_CONTROL/OFFICIAL_SOURCE_FINAL.json",
+      "size": 7374,
+      "sha256": "58ff9e5df9d35a64d3c9fc4c0bc8273caaf1b7ef40201dc7f6aab3434a0fa2e3",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/OFFICIAL_SOURCE_FINAL.json"
+    },
+    {
+      "path": "00_CONTROL/OFFICIAL_SOURCE_START.json",
+      "size": 7054,
+      "sha256": "14e22d44060d3ce7b526f7fbe611b49b3afafca0488641a31cd95c9141b57fed",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/OFFICIAL_SOURCE_START.json"
+    },
+    {
+      "path": "00_CONTROL/PREFLIGHT.json",
+      "size": 765,
+      "sha256": "ee8098f57bc5a9f3b199d890bec266397775a774b83fd5bc74fe6a33a98e85c6",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/PREFLIGHT.json"
+    },
+    {
+      "path": "00_CONTROL/PROTECTED_TREES_FINAL.json",
+      "size": 401,
+      "sha256": "2a7a3207310a25e16b4ca473da47d6ca19a270f7c980437aef42961f3e93d5d4",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/PROTECTED_TREES_FINAL.json"
+    },
+    {
+      "path": "00_CONTROL/PROTECTED_TREES_START.json",
+      "size": 3076737,
+      "sha256": "7dd0ab9529c7844e8335be768ce5e4d9236a975c18c605f678e415ab2683dc99",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/PROTECTED_TREES_START.json"
+    },
+    {
+      "path": "00_CONTROL/REAL_CALLS.jsonl",
+      "size": 9760,
+      "sha256": "a717b2d5ea59e788554297020013a13e7f725c70e85dc4fc022966a3bef11d43",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/REAL_CALLS.jsonl"
+    },
+    {
+      "path": "00_CONTROL/RESULTS.json",
+      "size": 32415,
+      "sha256": "7715eaf32383f82f529f1f31319fa0db7845e9f1e3e636aee254a0fbde3b5dcb",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/RESULTS.json"
+    },
+    {
+      "path": "00_CONTROL/RUN_FROZEN_CONTROLLER.sh",
+      "size": 1289,
+      "sha256": "7abd46dd899523e9b82e90702889e44b178b6a28333a1001e4b1ea05d560722f",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/RUN_FROZEN_CONTROLLER.sh"
+    },
+    {
+      "path": "00_CONTROL/SANITY_FUNCTION_CHECK.json",
+      "size": 419,
+      "sha256": "6c3045c150c7a77585e1e6446d73b99a0aedbf9eddb036a1fdbe78f94ec3bb04",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/SANITY_FUNCTION_CHECK.json"
+    },
+    {
+      "path": "00_CONTROL/SEALED_BEFORE_PREREG_COMMIT.json",
+      "size": 20762,
+      "sha256": "70eb8f3e2fca0e37b0d9bccc6e5cf608b34bf8a54e213d7d3c2f7b7e9dbb3b62",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/SEALED_BEFORE_PREREG_COMMIT.json"
+    },
+    {
+      "path": "00_CONTROL/SEALED_BEFORE_RESULTS_COMMIT.json",
+      "size": 20762,
+      "sha256": "840753f0b2dc0ca87db4127670d0bf11392393558be14d13c4d58cfbd1f4bfb1",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/SEALED_BEFORE_RESULTS_COMMIT.json"
+    },
+    {
+      "path": "00_CONTROL/SEALED_START.json",
+      "size": 20762,
+      "sha256": "3dbb01b27248f77ddb56f153993f381e84d779e897ccfb1eb721427ddc007dbd",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/SEALED_START.json"
+    },
+    {
+      "path": "00_CONTROL/UNTRACKED_START.json",
+      "size": 3658,
+      "sha256": "8016ed33b1c19fd751546a40de2696b2f7b8203cf9c2cb00e43a5cc2d01aa3c0",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/UNTRACKED_START.json"
+    },
+    {
+      "path": "00_CONTROL/USER_COVARIANCE_RESOLUTION.json",
+      "size": 299,
+      "sha256": "42f774ea2d2072f5be009b867893cd6771f64489a0d9baf27873f2ab433373f6",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/USER_COVARIANCE_RESOLUTION.json"
+    },
+    {
+      "path": "00_CONTROL/controller_stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/controller_stderr.log"
+    },
+    {
+      "path": "00_CONTROL/controller_stdout.log",
+      "size": 448,
+      "sha256": "cf9afc0612a81c9519b853e77c7b253f78265f68a5eb2859bbcecdbcb23d4ea6",
+      "stage_verified": true,
+      "docs_path": "00_CONTROL/controller_stdout.log"
+    },
+    {
+      "path": "90_AGGREGATE/AGGREGATE_COUNTS.json",
+      "size": 90,
+      "sha256": "9ec2345a72e5013e50a0613b47bda0518e42a0d4921f54049bca8460fcd7ef9e",
+      "stage_verified": true,
+      "docs_path": "AGGREGATE_COUNTS.json"
+    },
+    {
+      "path": "90_AGGREGATE/HARTLEY_OFFICIAL_TABLE.csv",
+      "size": 25183,
+      "sha256": "30fda253e5fa4f56b829ae9e5184cefc0258c74d57c0e3fadbae98e407cbd888",
+      "stage_verified": true,
+      "docs_path": "HARTLEY_OFFICIAL_TABLE.csv"
+    },
+    {
+      "path": "90_AGGREGATE/HX02E_RESULTS.md",
+      "size": 7556,
+      "sha256": "3efacc228f276527b2b2233a9d98062f180939b6ff838a081789e6467c76a31a",
+      "stage_verified": true,
+      "docs_path": "HX02E_RESULTS.md"
+    },
+    {
+      "path": "BUILD/BUILD_COMMANDS.json",
+      "size": 1442,
+      "sha256": "403e9514f13648d3dc4752a8a51fda6a2d4933697e47531b4a857feec146ea69",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/BUILD_RECEIPT.json",
+      "size": 9061,
+      "sha256": "49df85c0d0e7eebce0a18957a31784ee1633cebc36bbb2cecab0d432e1794178",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeCache.txt",
+      "size": 15555,
+      "sha256": "144d07ec2faf876efeb8ac1fb5551e5aa26579bd8474e823e41b38630103f719",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/3.22.1/CMakeCCompiler.cmake",
+      "size": 2441,
+      "sha256": "e226df1b454d69c8a4cdf53fc6c03ccdd621608d14eefe53d00aba36b1490d9c",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/3.22.1/CMakeCXXCompiler.cmake",
+      "size": 5439,
+      "sha256": "2b45b213952e8ff33366da3750a3a8ccdc914d32dde4b4cbb2051e959ab192ee",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/3.22.1/CMakeDetermineCompilerABI_C.bin",
+      "size": 15968,
+      "sha256": "8b6c6b524d4bb1fcfe045a744b521ae206e5e6d3c12ed92f0d8e1c1fc7d645fd",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/3.22.1/CMakeDetermineCompilerABI_CXX.bin",
+      "size": 15992,
+      "sha256": "c6fa130e03f0dc85cfc50e20a1c10e450f546af15deac617b77725156d8e0a97",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/3.22.1/CMakeSystem.cmake",
+      "size": 462,
+      "sha256": "34f10e225e84f184c28c72f54edc63d5edd7a9828d3f27cee53d0c8da308a561",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/3.22.1/CompilerIdC/CMakeCCompilerId.c",
+      "size": 24853,
+      "sha256": "f88399a39d56b310a14aa58ca95c614022a5899dc39317b98006d9f8dc71cbee",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/3.22.1/CompilerIdC/a.out",
+      "size": 16088,
+      "sha256": "558a82cee9297d551564deca8dcd059b5fa51cfa599e87596a7fa9c3c45cd06c",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/3.22.1/CompilerIdCXX/CMakeCXXCompilerId.cpp",
+      "size": 24597,
+      "sha256": "bd1f2250416e16ed26d6db1890f822a01d487df29d20e87407ef4ce72c314ba0",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/3.22.1/CompilerIdCXX/a.out",
+      "size": 16096,
+      "sha256": "33335d5a7d9ec56e273ddf34d3cf56c2c06255523d4f4ec29f9589e039a77eb9",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/CMakeDirectoryInformation.cmake",
+      "size": 749,
+      "sha256": "616fff98de0a6a75a45e427c28f693dc38e78139b8b78f39084aa0547c364902",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/CMakeOutput.log",
+      "size": 51855,
+      "sha256": "e49b21acef98baa1dad25a2800a618ecb9ab1e6fdd1c35a35540270324ba7fd3",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/Makefile.cmake",
+      "size": 8875,
+      "sha256": "1303d2f6e6f86ea560a5ad4e480a475f03f940ded472f5a71e57a25f85e79d21",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/Makefile2",
+      "size": 10065,
+      "sha256": "1f4a11a053b5b0dbbc97908641a3e3b2f790ec8f7be21403fbe1da41a0f9a970",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/TargetDirectories.txt",
+      "size": 794,
+      "sha256": "f2f860f1a56b7160a8614bcae23259199034f0514d41fdb4f71810643e605280",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/cmake.check_cache",
+      "size": 85,
+      "sha256": "a26189e394421da57f45706a07713c5720acd200a41711b0c0c590c3c63371c4",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/correction_speed.dir/DependInfo.cmake",
+      "size": 1591,
+      "sha256": "e8fdfcacdad2f97d8a2723a57afdc24f70c1655577e82079d512665ed2fac2cb",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/correction_speed.dir/build.make",
+      "size": 14808,
+      "sha256": "21b1edbf45d0e9740296e5d35ac668b4ea51aac1592d0e1b1e4d3e7713317f57",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/correction_speed.dir/cmake_clean.cmake",
+      "size": 1009,
+      "sha256": "46d33ef6a11c9939ee2bbf044c7adbf2743183b9deee13fbef5936fd3846638e",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/correction_speed.dir/compiler_depend.make",
+      "size": 119,
+      "sha256": "d9d664ba35efa0cd5fbcaeb538942153fbaf929b1ebe15bf6ccc995f584fbe86",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/correction_speed.dir/compiler_depend.ts",
+      "size": 123,
+      "sha256": "5de7728b38d785f074ebc671e635578aaf7926e461018f1280f54d3c1f9ddc83",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/correction_speed.dir/depend.make",
+      "size": 100,
+      "sha256": "115d95ea1e3152076b6d10ff2cacbcdf65d411eeed764a094003ee8d7f9039f0",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/correction_speed.dir/flags.make",
+      "size": 443,
+      "sha256": "789f172dc6aea2272a74ef21a9a1c5793fc5dfdf92d81d3e129b7a8ce5f29f81",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/correction_speed.dir/link.txt",
+      "size": 807,
+      "sha256": "0a7658f6fca811cd765e13ce5974cdfc4ccdb94a9828eaa0eac96631460d2fb1",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/correction_speed.dir/progress.make",
+      "size": 127,
+      "sha256": "43f0c4df9d945b5843844c2e376ea6cdff739d5d1264523215a6c14c7eb52e06",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/DependInfo.cmake",
+      "size": 1237,
+      "sha256": "2afcc65b58d4a93c090796163d0707e353d75e68fcaf9ffb35d19c00d918dcff",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/build.make",
+      "size": 11322,
+      "sha256": "bbe48af4f84295c1bbf6b9f51c315b6499cd94454608d27e0497a07567030e2e",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/cmake_clean.cmake",
+      "size": 757,
+      "sha256": "dba14304f3d8c0e76db35be2b817190e71d39a6cc1c7fca7df18674b673d0651",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/compiler_depend.make",
+      "size": 108,
+      "sha256": "95565f47ebe76b78ca0e27d73ab041baf4efdada00684afe24344040a71ea0ff",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/compiler_depend.ts",
+      "size": 112,
+      "sha256": "bbff748e0acbf45251745619dbb70ba6705524557ef1e27ca4fdcf87b55ccd63",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/depend.make",
+      "size": 89,
+      "sha256": "792bb5bf94a4d6ffc0f143f2aa9846d2ea9db60fdc7d78001354728493f55c8b",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/flags.make",
+      "size": 422,
+      "sha256": "6c67bc092c08e284e7ef92d5456d5102cc2eab594561e5bc0dd074023697c37a",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/link.txt",
+      "size": 543,
+      "sha256": "8ad2f0ac4e67e6ddf223dbf0ba7f17b250ecbf22aa42ab7f46062b78d2b8806b",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/progress.make",
+      "size": 108,
+      "sha256": "af387676a3ec085ef8a30490d268f9ddf87502ae7fd750a499c1ddc31bc77111",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/src/InEKF.cpp.o",
+      "size": 276528,
+      "sha256": "850c9180f464aef09d08ff3acb6b02dd79d3021da0eb400b7653723d0d8ef5c8",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/src/InEKF.cpp.o.d",
+      "size": 27289,
+      "sha256": "f74a570ec87e8b0f4f9d771c791bd274ad53a417054dcc56b90f7d17e09201b4",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/src/LieGroup.cpp.o",
+      "size": 10512,
+      "sha256": "a6c0f20eed54014c4c836931266557c8095d8875820c0a7d6f189f45d789ce11",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/src/LieGroup.cpp.o.d",
+      "size": 26536,
+      "sha256": "e326fa184dd27ae43e13d0daec2a886ef90dac53f8ba060c42fd2723fa3911a1",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/src/NoiseParams.cpp.o",
+      "size": 21200,
+      "sha256": "1ea7cf0da9fc16d3c88e334033d8047d8f646c0e2faf34d26d27c18c689c32f9",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/src/NoiseParams.cpp.o.d",
+      "size": 26545,
+      "sha256": "525ec8ea7f453696c448e3c82453d9bcb6aacf39aec0d351fa26e61e12843c75",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/src/RobotState.cpp.o",
+      "size": 43912,
+      "sha256": "0a5a72b1b5f2bd8c38ae4d9a54e36d7890433001ea5fc806b7a747ae30e94f63",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/inekf.dir/src/RobotState.cpp.o.d",
+      "size": 26653,
+      "sha256": "09c00de0045b5b5b989c42d239af6d7e2cb5e27292f46e4de1e0cbeaec1a578c",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/DependInfo.cmake",
+      "size": 1522,
+      "sha256": "466965275bd0f2d92b46b2379833a80b18327e0fdd7787935905b5b0ed4821e5",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/build.make",
+      "size": 14067,
+      "sha256": "1d70d0c811fe8933dfafdc38636fce2aa01be512eb5b8b46161c7d2dcd77ad01",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/cmake_clean.cmake",
+      "size": 925,
+      "sha256": "14f89a415cb433fe261e58f3e4a92f7468f23259776e812845f2c3d8e30657ed",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/compiler_depend.make",
+      "size": 113,
+      "sha256": "b0ce5812114b4d451c7b45d426d5b921db6b18531f28cca91175d5a38aa9eb4a",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/compiler_depend.ts",
+      "size": 117,
+      "sha256": "35cd688c99e273af40e4fcec1d12c68e5f5445467b5f2ed0cbeb989de72f93f9",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/depend.make",
+      "size": 94,
+      "sha256": "a6c47c33ace133ca9537f07938c146d9ba19cfff0d503b38a42446e8bc7305b8",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/flags.make",
+      "size": 443,
+      "sha256": "789f172dc6aea2272a74ef21a9a1c5793fc5dfdf92d81d3e129b7a8ce5f29f81",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/link.txt",
+      "size": 768,
+      "sha256": "208f148f7d438cf5ce3a9ed941e78bdb16372187446bb1140cad73a9c0586778",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/progress.make",
+      "size": 133,
+      "sha256": "5baddbc4f65b499a9f3657ddfe77a1cae41b0b8b50eb6c31551711e74c63ed48",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/src/InEKF.cpp.o",
+      "size": 277056,
+      "sha256": "1da3de323b80134231f4df4353b49ef7be36922d5de4a34d9d48e242cfa201f3",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/src/InEKF.cpp.o.d",
+      "size": 27294,
+      "sha256": "fd2e6d45887d8a97b1032bcf0b61fc58084556f771a91f8cfb4bb9c307cd3112",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/src/LieGroup.cpp.o",
+      "size": 10456,
+      "sha256": "dcfb9e15a1241ea682186622166e6136579bd8843df8055770043a4922c34231",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/src/LieGroup.cpp.o.d",
+      "size": 26541,
+      "sha256": "74e8594a3fab687930fd5284cb8274e641fc24c851e071bf2c8bc114b44cb5c4",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/src/NoiseParams.cpp.o",
+      "size": 21896,
+      "sha256": "a36e0950cc5fa019f82aa7414d5e0c7eb3c7e8fd32b0014d886e29c0b9e29faf",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/src/NoiseParams.cpp.o.d",
+      "size": 26550,
+      "sha256": "ef0555efb806594cde4640a1f1ab398020d5d614c3ecc6624dd87fc6f599e4dc",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/src/RobotState.cpp.o",
+      "size": 43808,
+      "sha256": "9fd7ff8811a9c6120f1c1ef56cc2d70441994caceb84c465fd9acc60166869ef",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/src/RobotState.cpp.o.d",
+      "size": 26658,
+      "sha256": "f5d5c59896b2bb4f25312b814b08e29b60a456655654c183318b347c4d6e9417",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/src/examples/kinematics.cpp.o",
+      "size": 58968,
+      "sha256": "002f4227549b2d00a54a23315ca9e85afbc3346dce1ed49b169449dbe12f5c0d",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/kinematics.dir/src/examples/kinematics.cpp.o.d",
+      "size": 49078,
+      "sha256": "25fa96cabf556e534b6270d0524b90f23355fb4da19713f5498fc6fa5e44ba3e",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/DependInfo.cmake",
+      "size": 1509,
+      "sha256": "70a5b52bb4a2cfeda2fdbad0c68ed1678966a864a897e63fcdca073521991e31",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/build.make",
+      "size": 13934,
+      "sha256": "194df36b167ec2b24de643bc9c81caf78b4fd31019d9a24d16cddeda97c43b9d",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/cmake_clean.cmake",
+      "size": 910,
+      "sha256": "486b3d668b81b977209f66cdbc1ddd71ea17f6d48ec7d84dde69e1930f8ef3aa",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/compiler_depend.make",
+      "size": 112,
+      "sha256": "5b5ff87c887edadd352b58c59d5906e26d7d5eb10f90f6135f1dc6c642fafd26",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/compiler_depend.ts",
+      "size": 116,
+      "sha256": "41283fb1f808c728d50fbba3ab27e4afbb3ca3435ced5b0d81aefe098c7e0cb1",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/depend.make",
+      "size": 93,
+      "sha256": "0d35ddfdbc5d605c8b5dff58f0420ed3b07fe4a1fd4dde013230610277fa41cd",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/flags.make",
+      "size": 443,
+      "sha256": "789f172dc6aea2272a74ef21a9a1c5793fc5dfdf92d81d3e129b7a8ce5f29f81",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/link.txt",
+      "size": 761,
+      "sha256": "be9640d83efd17c564d2232350ae3c041302576662a4eeee9d12857e723a8c16",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/progress.make",
+      "size": 133,
+      "sha256": "935623bacbb7e61a7e31f2a2ead56ea721b3159bf0844bbcd95ed49abc980b49",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/src/InEKF.cpp.o",
+      "size": 277056,
+      "sha256": "1da3de323b80134231f4df4353b49ef7be36922d5de4a34d9d48e242cfa201f3",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/src/InEKF.cpp.o.d",
+      "size": 27293,
+      "sha256": "1683208d4d6e71801a3cf72b26eb18e0d91dc15e3866390e79a01e5ae6363932",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/src/LieGroup.cpp.o",
+      "size": 10456,
+      "sha256": "dcfb9e15a1241ea682186622166e6136579bd8843df8055770043a4922c34231",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/src/LieGroup.cpp.o.d",
+      "size": 26540,
+      "sha256": "80b3f69fe3cb10982ea93672d8027b6541ed3a926ba678bfee22e5a9fb948ebe",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/src/NoiseParams.cpp.o",
+      "size": 21896,
+      "sha256": "a36e0950cc5fa019f82aa7414d5e0c7eb3c7e8fd32b0014d886e29c0b9e29faf",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/src/NoiseParams.cpp.o.d",
+      "size": 26549,
+      "sha256": "c5847ffbc967c8a6cba41168f8d778e8b93f26271c02622ed54893c242c0c2f3",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/src/RobotState.cpp.o",
+      "size": 43808,
+      "sha256": "9fd7ff8811a9c6120f1c1ef56cc2d70441994caceb84c465fd9acc60166869ef",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/src/RobotState.cpp.o.d",
+      "size": 26657,
+      "sha256": "8328a7ae9ce36802aac2d838944bc389529a2154caaf29df6a80d44caa367268",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/src/examples/landmarks.cpp.o",
+      "size": 56392,
+      "sha256": "81cb091dbaf7871b29e3b652d80a04379bc993cb6759ec0dce90de702d19a040",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/landmarks.dir/src/examples/landmarks.cpp.o.d",
+      "size": 49072,
+      "sha256": "7a5e9f54063c8a2278e16e67642b1cd9bc811a9eaedc070efb37c5baa27cd1d5",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/progress.marks",
+      "size": 3,
+      "sha256": "3840bc236ee03aacbb1ef7d5108ddfa347c59f10b68d4174affbb53140f31273",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/propagation_speed.dir/DependInfo.cmake",
+      "size": 1604,
+      "sha256": "be198fd1afa3c0a89c9fbbb612b3da9e32e45b05e5e2d773a4de45219e10e8ca",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/propagation_speed.dir/build.make",
+      "size": 14941,
+      "sha256": "9ded11c475b3d464250e7aac53ce54de9042786456c6b53b8106e1216f11db23",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/propagation_speed.dir/cmake_clean.cmake",
+      "size": 1024,
+      "sha256": "d1d8021d1b0786512163749ebc7e4a6c01ac42b4c68d1feca33a47fd8b7bc64c",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/propagation_speed.dir/compiler_depend.make",
+      "size": 120,
+      "sha256": "d5348c2b54f84442fa0a8bd5784a72dcf8e219a59c6408bccdc8228e6eaea65f",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/propagation_speed.dir/compiler_depend.ts",
+      "size": 124,
+      "sha256": "89db75ed9f8130dcab761382eefddfd042e08ad8d2c05764ef995f6d6ddf2b4a",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/propagation_speed.dir/depend.make",
+      "size": 101,
+      "sha256": "96742f7901e36aaafe690b4e1a8f653296f351b2917eeeead5d346ef2dc769e3",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/propagation_speed.dir/flags.make",
+      "size": 443,
+      "sha256": "789f172dc6aea2272a74ef21a9a1c5793fc5dfdf92d81d3e129b7a8ce5f29f81",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/propagation_speed.dir/link.txt",
+      "size": 814,
+      "sha256": "3e3437e8e87de24bb8d2fc785ee2c68b1a5f4c1affd3d64f5738c41a16301eaf",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/CMakeFiles/propagation_speed.dir/progress.make",
+      "size": 133,
+      "sha256": "5029bf479ce7f867aae0f63f1ba03f045a6c00460ced7debfca852534a8776e9",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/Makefile",
+      "size": 19968,
+      "sha256": "8df6c69007f4da20aa6418662a629061a4204b9adefde54a6584e553debd7854",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/cmake_install.cmake",
+      "size": 1750,
+      "sha256": "9eea8b49506b89ac0a0f13bfbfc68fb490c67dc19e96ee9ce41e47887cf0b73c",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/cmake/inekfConfig.cmake",
+      "size": 677,
+      "sha256": "c938f246791f935f25213f13be92a22b684135b548d9b30d2eab7ad3c3e07017",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/command_0.stderr.log",
+      "size": 908,
+      "sha256": "103c48a12893375839087295eeab8a456b43367fea360f30b9ec767fb5ee4d2d",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/command_0.stdout.log",
+      "size": 1013,
+      "sha256": "17b445205100f5a16e010b29f9e30cfa948f8c404d5393f833136454c994c328",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/command_1.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/command_1.stdout.log",
+      "size": 1503,
+      "sha256": "9e8f6cbd8e74eda4045b51bc6512289c58bbc4921902f4dbf90eac954336439d",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/command_2.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/command_2.stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/hx02e_official_driver",
+      "size": 66568,
+      "sha256": "0fa3ca6a3b553ab9bd16acd9b5c8844c4e54600f185d5476bc5028312dbf6944",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/.gitignore",
+      "size": 340,
+      "sha256": "a4ae66130d56a53f0da8bec5ee42d33756e3f42f5026b6c9f4ba95aafb680ef4",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/.vscode/c_cpp_properties.json",
+      "size": 611,
+      "sha256": "08356879307687b66962b263c9238d7b76cc8b3c54908a5dcc0e2273a9863c00",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/.vscode/settings.json",
+      "size": 1285,
+      "sha256": "0e6606fc12322d4d475b082b2ea7403a53def4bdd654075893f2c6cd246e57c7",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/CMakeLists.txt",
+      "size": 4669,
+      "sha256": "9dcc3958db67ebb431744acf41d67f4af9eac9b463c7b1bdf45793e3211f8e97",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/LICENSE",
+      "size": 1520,
+      "sha256": "929a5fa1d341d06ae2dd2222109bc2e07cac0ce0add82fb8ce51444710f20008",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/README.md",
+      "size": 3030,
+      "sha256": "4d38ebb8b292286af0a0e7c34c0e185890f5833a684a7a56d1ed7d5692af3347",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/bin/kinematics",
+      "size": 299080,
+      "sha256": "765e4d9bec9d4e3d2d65d6550babdadc7c94e50390b455fdbf7c03918e675014",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/bin/landmarks",
+      "size": 299032,
+      "sha256": "5e8560159aa6a6db7e47969c71d9eaa03d5cfd4a2c6e059fd739642df0638798",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/include/InEKF.h",
+      "size": 3872,
+      "sha256": "d0bea67bdf1e7318383c6cfaf399ba01237b94e59a79427fdbf185eb74447efd",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/include/LieGroup.h",
+      "size": 810,
+      "sha256": "a09e370efc36f783cf895fcd4a6544e0c3ca4e87cc0d2cf51010799df3836b87",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/include/NoiseParams.h",
+      "size": 2302,
+      "sha256": "99aa1298f4bb32c0744d9c02daafa7e29be64cddcb0f87e02998ce5af82038a3",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/include/RobotState.h",
+      "size": 2454,
+      "sha256": "b991ce7f6163e777b9e8cccf14f02c1cd3d987d75f914118d1587c42e30a9a53",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/inekfConfig.cmake.in",
+      "size": 519,
+      "sha256": "1d7830e482f8a0330f7f169c430f4800113a576093814360fefdf7cb0e6582a1",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/lib/libinekf.so",
+      "size": 273280,
+      "sha256": "3d1b190b0f933adbb3a042ac3d36e14e05ef2a68c788f3794e07287c1c30405a",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/matlab_example/README.md",
+      "size": 3370,
+      "sha256": "319870de86d7560731de35ae1db4a73b15b8ec257845a7c192557adbbe6783b3",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/InEKF.cpp",
+      "size": 24474,
+      "sha256": "15eb9856edd752c05886e92de731231dabfffdccf778dbd26b72635b9e562c92",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/LieGroup.cpp",
+      "size": 2628,
+      "sha256": "1672833749105473271e28d31095eaeda58ea26452e0ba06c5244035d5125bb9",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/NoiseParams.cpp",
+      "size": 3720,
+      "sha256": "e75acc4cf2db08e159d039d6a7deb3bf719d9bdb7e24bf54708b4617624e043d",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/RobotState.cpp",
+      "size": 6381,
+      "sha256": "8ff619510d8576120935fdc2515bd8eb9b2ab8e6ff76d49040e69c1de5843b25",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/data/correction_speed_test_data.txt",
+      "size": 3946703,
+      "sha256": "ef18e43196fb759f7cf8ff0bdc40c9efe5f7fc4fcbfb8e0096c935daf3802fe8",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/data/imu_kinematic_measurements.txt",
+      "size": 18942878,
+      "sha256": "224e03c83062fb937bfe529aa3858a04e07ed3143f92f8e0868bacbeae08491b",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/data/imu_landmark_kinematic_measurements.txt",
+      "size": 18962040,
+      "sha256": "0580a59631c28d2a6cfb1d3291382177ae3320ed3aab2665c6c33409a7a17be6",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/data/imu_landmark_measurements.txt",
+      "size": 1437900,
+      "sha256": "fe9f4cb906d4189108b5a0162614504979b2f249cc640424908d850a23139b67",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/data/propagation_speed_test_data.txt",
+      "size": 710047,
+      "sha256": "0d866ca665111958d96d9f25b46f45f82275e5290812988ace57cbf214666f5c",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples/kinematics.cpp",
+      "size": 5954,
+      "sha256": "3e8b7a2f98bf7510f9f8da5a44c2b44579bb7660eee997ce17290a241e424dad",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples/landmarks.cpp",
+      "size": 5111,
+      "sha256": "053732da6944ecb3fd2a26110c3b8d2f83875d6b10e6f3d0a1dcc17845f51c1e",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/GenIMUFromTraj.m",
+      "size": 949,
+      "sha256": "704b70455b3a48b049bfa4e712e879d833193715bc613c0d5b00a8bfafe0c7c8",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/GenTrajFromIMU.m",
+      "size": 1544,
+      "sha256": "a336831943a4eb8d530dc4b76c1a6868113e303bb26503477f6e6d25e9191e0a",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/InEKF/RIEKF.m",
+      "size": 26693,
+      "sha256": "bfa707481f2994e8d6e32faeace36973171dac5e7abf6fb9ff4eca301bd11675",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/InEKF/RIEKF_InitFcn.m",
+      "size": 2209,
+      "sha256": "3e4d2f2a28e8ad5059baf82a7f151d08b4a90cf1264836b1cff0464b408c3507",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/InEKF/RIEKF_test.slx",
+      "size": 32242,
+      "sha256": "7c035662db4735584ea9f24d48de6996f42c0da31e023d085f5f5976bc58be0e",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/InEKF/RIEKF_test.slx.autosave",
+      "size": 26355,
+      "sha256": "06b0f23b6557fd9aecfcc9309596d5152ab6f9f9b95bacd905221d035f77a905",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/InEKF/Rotation_to_Euler.m",
+      "size": 658,
+      "sha256": "bc20a6521f783d04e7f1a35ea5212ea43a18ae5ae93962d9c5b224ca1e794bf9",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/InEKF/plot_results.m",
+      "size": 9015,
+      "sha256": "f7ce461c9af9755a09a46de674210da706baae0d5d72be0c190a70d45066c1ae",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/data/ground_truth/orientation.mat",
+      "size": 1355474,
+      "sha256": "089906255d67c9ca315478b87371c17b974f1d7d83addceb167f6fca1c01c2f1",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/data/ground_truth/position.mat",
+      "size": 471733,
+      "sha256": "ea2de6f11be36e89e7f50ddc78ac15de72682f382184c72d3ab6e79ade50c522",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/data/ground_truth/velocity.mat",
+      "size": 508721,
+      "sha256": "f22653b42e12fc372c3145ffbce9fc6f60a8ab91518847165c0ac2c889e154d3",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/data/measurements/X_init.mat",
+      "size": 2086365,
+      "sha256": "e0eecc903483f068a12c9e4030c3cea18a638fb659d60b7a1ec4a1884ac8aadc",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/data/measurements/angular_velocity.mat",
+      "size": 257425,
+      "sha256": "bc83a0c71c6af10b828c5d05793ce7fc44194c95a6cc8b4929276e14bf2d950c",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/data/measurements/contact.mat",
+      "size": 64815,
+      "sha256": "230ed34ba4a8b36708518ca43bb6939c082f01350bffe65616ed307043db6dab",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/data/measurements/encoders.mat",
+      "size": 1782581,
+      "sha256": "4cbec3afa2aa126790ab18692b159454c20dd1210a8195f797e7c79eaa98d6d7",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/data/measurements/linear_acceleration.mat",
+      "size": 256561,
+      "sha256": "ce19a69a8ff7b467e20e3d8be905c34323e7a7f30477a1bc887959bc6d7f90ad",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/forward_kinematics/linux/J_VectorNav_to_LeftToeBottom.mexa64",
+      "size": 52960,
+      "sha256": "bc7f78d53a255930f5ed8427d2e204590f3be84346f6918adac37bda8889ec1f",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/forward_kinematics/linux/J_VectorNav_to_RightToeBottom.mexa64",
+      "size": 52808,
+      "sha256": "e4edeb65d1a0f518913878dada1beccc9c83025d91485cfa99cc37e7fe84f50c",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/forward_kinematics/linux/R_VectorNav_to_LeftToeBottom.mexa64",
+      "size": 30088,
+      "sha256": "dde3269b6e6f19c99f9a84fa4d5ab21db6af6814ce2b23b6d7d1a05e315fb2b6",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/forward_kinematics/linux/R_VectorNav_to_RightToeBottom.mexa64",
+      "size": 30056,
+      "sha256": "62420cdd0af58847589e3f244c61670714e7801e789ed00064e795be1dd0bd5b",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/forward_kinematics/linux/p_VectorNav_to_LeftToeBottom.mexa64",
+      "size": 34800,
+      "sha256": "a0023d90d589c8e16fd9447717bd5d5e891edd7441f2433408fd2c15f23a098e",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/forward_kinematics/linux/p_VectorNav_to_RightToeBottom.mexa64",
+      "size": 34784,
+      "sha256": "0c79e0673fb6a6fa152ca99898788bdc63fadcc1f622e0e23c21a177674f7034",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/forward_kinematics/windows/J_VectorNav_to_LeftToeBottom.mexw64",
+      "size": 168165,
+      "sha256": "44f22b7f18b86b219c48fe5825827878e52c3cb74d98cd82d8c47dcabad44cd0",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/forward_kinematics/windows/J_VectorNav_to_RightToeBottom.mexw64",
+      "size": 168166,
+      "sha256": "b4ca8b82924bb9c587e491bc11c5f9a790de708477836eb35a75e4bdc23777ed",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/forward_kinematics/windows/R_VectorNav_to_LeftToeBottom.mexw64",
+      "size": 149221,
+      "sha256": "b5811bf3179fa624af1b3f9dc0db4dbe228932638b71dcb28cf0bd7776002f77",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/forward_kinematics/windows/R_VectorNav_to_RightToeBottom.mexw64",
+      "size": 148710,
+      "sha256": "fa539f652c70e763de1a32f6beb0509a7684aa4a926400b2539f2b6b394effa6",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/forward_kinematics/windows/p_VectorNav_to_LeftToeBottom.mexw64",
+      "size": 151269,
+      "sha256": "768c1757a2da34c4d5603de6cf687b8bf3e45fae6a8bc8ecfcc4f5e0d6b2ff80",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/forward_kinematics/windows/p_VectorNav_to_RightToeBottom.mexw64",
+      "size": 151270,
+      "sha256": "81c73cbd1ca34cc6279b9d91af672b07e9a067797a7c10be0471565bee102dd0",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/gen_data_file.m",
+      "size": 7838,
+      "sha256": "9341af18d368a3d6a9e869bbd9759e794ed432970da381b65b70a36d7544d0f1",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/imu_kinematic_measurements.txt",
+      "size": 18942878,
+      "sha256": "224e03c83062fb937bfe529aa3858a04e07ed3143f92f8e0868bacbeae08491b",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/imu_landmark_kinematic_measurements.txt",
+      "size": 18962040,
+      "sha256": "0580a59631c28d2a6cfb1d3291382177ae3320ed3aab2665c6c33409a7a17be6",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/imu_landmark_measurements.txt",
+      "size": 1437900,
+      "sha256": "fe9f4cb906d4189108b5a0162614504979b2f249cc640424908d850a23139b67",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/examples_matlab/run_RIEKF_test.m",
+      "size": 288,
+      "sha256": "d68dc7b702a9345bb02c06943e936b97c1abe01509c4939bccbd7f38ca379fc8",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/tests/correction_speed.cpp",
+      "size": 4362,
+      "sha256": "c7b7839e5d508585d422e217d46a79e3ee928f8908ca6d67ea997c72f769bdc1",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "BUILD/official/src/tests/propagation_speed.cpp",
+      "size": 3544,
+      "sha256": "66c1817efc39246ab42e3c8aa37f734de1f1e5043fc5795f2e5138121d7adafe",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/NATIVE_AUDIT.json",
+      "size": 1737,
+      "sha256": "82efcae17b800ee9a8edab33cbb2dceb5837bd715457e4730824dd0de7a5fa47",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/NATIVE_AUDIT.json"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/NATIVE_OPENAT.strace",
+      "size": 17630,
+      "sha256": "4f82d2823e4b919f9e6f8efc71ac896387822300b35e03e503d03192e14fd2da",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/NATIVE_OPENAT.strace"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/NAV.csv",
+      "size": 31759396,
+      "sha256": "94e88c1adbd18659a6d63f92db7efc19a2a85ad46c4a0f0e086a4816dd1d2e77",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/RESULT.json",
+      "size": 5156,
+      "sha256": "c2c1099c3d562cfc2a1ca77e6582e715205d01b404e67acaa1c7cc1ef51f15df",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/RESULT.json"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/EVALUATOR_OPENAT.strace",
+      "size": 101998,
+      "sha256": "936b50ea8cf1d1ec4bb73162e87071aec35a258e71dcc9456d6e680d94852666",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/EVALUATOR_OPENAT.strace"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/EVALUATOR_STRACE_AUDIT.json",
+      "size": 3692,
+      "sha256": "e2ef685cacc082afc289a5951fbdde6da0e71f7a4f5f7c17c31a42db24686274",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-DEF.csv",
+      "size": 319962,
+      "sha256": "2c5674095e154f58c3b7bbde05c85d89aa018ac403ca9b24c4e3eae84f781130",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-DEF.csv"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/OUTPUT/RELATIVE_POSE_METRICS.json",
+      "size": 2965,
+      "sha256": "70ee38e8baf991eb652f81a8bbabc7bdab318da4c5d1eb32617d857001bbd714",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/OUTPUT/RELATIVE_POSE_METRICS.json"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/SPEC.json",
+      "size": 857,
+      "sha256": "db8b906e19fb5481d00a180d761cc40ded398c6536e5f836a4615ab8f68534b9",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/SPEC.json"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/evaluator_stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/evaluator_stderr.log"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/evaluator_stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/evaluator_stdout.log"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/native_stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/native_stderr.log"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/native_stdout.log",
+      "size": 13076,
+      "sha256": "ca3d05d7645022cb962d8a849166a1e3c84ca238690c05d607955160c0adfd85",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/native_stdout.log"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/NATIVE_AUDIT.json",
+      "size": 1737,
+      "sha256": "e694c95e766fafe48ffd1fae97f46015e6c339cc0a9ea23c719e9460444adad6",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/NATIVE_AUDIT.json"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/NATIVE_OPENAT.strace",
+      "size": 17630,
+      "sha256": "2895537fd88e628c209c435d5900a1cc1ac78fe9439187a76671ae485c23b783",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/NATIVE_OPENAT.strace"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/NAV.csv",
+      "size": 32019081,
+      "sha256": "346967d0460b456a07f4466d9362e194fb17cef24499027ac22ac5d472f1f649",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/RESULT.json",
+      "size": 5162,
+      "sha256": "13211502da129efd0602579a9cd9e02654b7dd55c6954de45d788838b5daef0a",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/RESULT.json"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/EVALUATOR_OPENAT.strace",
+      "size": 101998,
+      "sha256": "ba324d78b7076dc6d89d7cfe49fe30b989c09dc08a7e0a01d19955c348b75a16",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/EVALUATOR_OPENAT.strace"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/EVALUATOR_STRACE_AUDIT.json",
+      "size": 3692,
+      "sha256": "397992760d027324fc363dde41599c2868c3345718119a471da1f7040292fa0a",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-LIT.csv",
+      "size": 322906,
+      "sha256": "b81a25422b0cf3aa5b5227b3cefaaea2b2bc2402a51373912e4f5c410ba4a46d",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-LIT.csv"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/OUTPUT/RELATIVE_POSE_METRICS.json",
+      "size": 2968,
+      "sha256": "b0446f09b1453a3ad43fe7bcb97578a9e2eb87e64176e5b014817ebf5851627b",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/OUTPUT/RELATIVE_POSE_METRICS.json"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/SPEC.json",
+      "size": 857,
+      "sha256": "e4c95b7c35af219a8ea0f02d16f6e96c1ce44eef67ebfbd9a731eb5acf3bca82",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/SPEC.json"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/evaluator_stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/evaluator_stderr.log"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/evaluator_stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/evaluator_stdout.log"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/native_stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/native_stderr.log"
+    },
+    {
+      "path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/native_stdout.log",
+      "size": 13076,
+      "sha256": "f49bb49792f91ef62091766e0d5ad326b62c0abf8cc7778739e34efb535c6f5e",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/native_stdout.log"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/NATIVE_AUDIT.json",
+      "size": 1729,
+      "sha256": "b2ef7dbd82dfd76f77613902cb2f8b4d0388fb5399dec56e32cbfbf102f95397",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/NATIVE_AUDIT.json"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/NATIVE_OPENAT.strace",
+      "size": 17618,
+      "sha256": "07a4776a35c42e516727681480f3e940485874986489ba4a9c3460d921cb60a4",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/NATIVE_OPENAT.strace"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/NAV.csv",
+      "size": 50820895,
+      "sha256": "a6bb359821833ebf015fa9c957c026a1740bc626ab7e28f5f079370671a7ffdc",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/RESULT.json",
+      "size": 5152,
+      "sha256": "f2f5a23f752e1dfaf6a213334c12708d3874c3996121a13843175205b27da6b8",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/RESULT.json"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/EVALUATOR_OPENAT.strace",
+      "size": 101962,
+      "sha256": "18e8269ce232612cc89ed30b1f00d1ebcd48523bb9d06e09438835f63f3c5eab",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/EVALUATOR_OPENAT.strace"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/EVALUATOR_STRACE_AUDIT.json",
+      "size": 3663,
+      "sha256": "244ca517ed3c00048d4c532a4c719d9b061c888ce8662fe578e0afcd6945ed9e",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-DEF.csv",
+      "size": 449419,
+      "sha256": "fdca8b4c8f465ee7e7fbe35ac3609952bdf66386410a11fd8ea021257993d793",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-DEF.csv"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/OUTPUT/RELATIVE_POSE_METRICS.json",
+      "size": 2978,
+      "sha256": "732911f1c6ed0fcc9465f2f7903c53dc3650d81f86b83cb229508ca5015d505b",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/OUTPUT/RELATIVE_POSE_METRICS.json"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/SPEC.json",
+      "size": 851,
+      "sha256": "acbf92375cc5b6cef1dd10677d91f87d18ae85fd73bb2eac186a2d705f9c57c6",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/SPEC.json"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/evaluator_stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/evaluator_stderr.log"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/evaluator_stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/evaluator_stdout.log"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/native_stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/native_stderr.log"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/native_stdout.log",
+      "size": 20807,
+      "sha256": "c4be5dd5ccacc664d63cb4800580a40e31591222a3c7e7a7135887e1c85ab4ef",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/native_stdout.log"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/NATIVE_AUDIT.json",
+      "size": 1729,
+      "sha256": "80b47c0d406dccff043ef99813e8a9b0fdf9ff5113f4cdb3c1b34359bf09554c",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/NATIVE_AUDIT.json"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/NATIVE_OPENAT.strace",
+      "size": 17618,
+      "sha256": "c291e6b49ddb9dd4e291483b5fe941038a0873fe5296b4195dc1bc74330bf05b",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/NATIVE_OPENAT.strace"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/NAV.csv",
+      "size": 51081142,
+      "sha256": "d3aa5476aa623fc522031afc16a236c1b72491ca6194be57c675673be020a18a",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/RESULT.json",
+      "size": 5151,
+      "sha256": "d2d534be0f10510aa285ec253ebd945e0ddb5bce1746870abf63138acb3a8af9",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/RESULT.json"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/EVALUATOR_OPENAT.strace",
+      "size": 101962,
+      "sha256": "93ac0e63e0a59385b6a6f0f6996b353fdfa59bf94672819962ea75d88cd00421",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/EVALUATOR_OPENAT.strace"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/EVALUATOR_STRACE_AUDIT.json",
+      "size": 3664,
+      "sha256": "3f2cfc8a27ae6ff7bb8733fecdbfc5dcae5fbd8f414af96c58822f3db8eafba7",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-LIT.csv",
+      "size": 448734,
+      "sha256": "029d1f5ac665cb54034d36029f2a0ad80c7c9a5bad770a3c2d3f4f1c5d88f363",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-LIT.csv"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/OUTPUT/RELATIVE_POSE_METRICS.json",
+      "size": 2975,
+      "sha256": "cc7f5819604be376543c496fea6eeffb2f89f85377bb28ebf748964cd4ef80a8",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/OUTPUT/RELATIVE_POSE_METRICS.json"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/SPEC.json",
+      "size": 851,
+      "sha256": "55fd62f0febc805e1469f811d5c575ec0547ac6eb09eb91bd9cfbdec7caac154",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/SPEC.json"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/evaluator_stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/evaluator_stderr.log"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/evaluator_stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/evaluator_stdout.log"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/native_stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/native_stderr.log"
+    },
+    {
+      "path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/native_stdout.log",
+      "size": 20519,
+      "sha256": "89f6a46b97d95b625a492093ad5315b171efbc26ea5b38e7d45da7c334dee466",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/native_stdout.log"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/NATIVE_AUDIT.json",
+      "size": 1711,
+      "sha256": "14179092ab14c4df25e1e7cb2ddd2e28165c733a9c2f03c85b3fc8140af90336",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/NATIVE_AUDIT.json"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/NATIVE_OPENAT.strace",
+      "size": 17591,
+      "sha256": "03ac1e01e691ed258de2b3aa88ef8a3122f7b19bdf9935a601a81733d05b6e42",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/NATIVE_OPENAT.strace"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/NAV.csv",
+      "size": 33348547,
+      "sha256": "8eca73a5d718c89f09b14fdc8333954b9d7ca386fe7c62dc7fbc52f048b7e0ae",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/RESULT.json",
+      "size": 5106,
+      "sha256": "b6814b1d88ef1e86328996128faf7c23cc7246118fd193f08d4141c354785633",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/RESULT.json"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/EVALUATOR_OPENAT.strace",
+      "size": 101890,
+      "sha256": "aa2283585cf01d90a0b8e6be6c9623a6f9fef93b6887832f62aced5966809fbb",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/EVALUATOR_OPENAT.strace"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/EVALUATOR_STRACE_AUDIT.json",
+      "size": 3608,
+      "sha256": "a58de155d6c8b35533acbd8393ce6f60fa6d7ad598da987427e593f6296ce2c6",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-DEF.csv",
+      "size": 331672,
+      "sha256": "62aee114d0d75f82422c8b0dd80c4a89d9c0672f4a10f9b0aa69e845cb600bc9",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-DEF.csv"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/OUTPUT/RELATIVE_POSE_METRICS.json",
+      "size": 2960,
+      "sha256": "04046d230927c562dcfc98ce32ed4dfc95b4cb1b8d602dcfb86b8f718b21b7a3",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/OUTPUT/RELATIVE_POSE_METRICS.json"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/SPEC.json",
+      "size": 829,
+      "sha256": "8a8b95a77142fc1ddad0926218e44848d17be5258a89335524759ea7ac7a946d",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/SPEC.json"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/evaluator_stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/evaluator_stderr.log"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/evaluator_stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/evaluator_stdout.log"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/native_stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/native_stderr.log"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/native_stdout.log",
+      "size": 20674,
+      "sha256": "5908b07d18b68880453b1682e25887c68dc3c02a12d83626ce805ce813581d94",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/native_stdout.log"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/NATIVE_AUDIT.json",
+      "size": 1711,
+      "sha256": "8ad966d5e7442bd7faa0e28929ccb544c9e5ae0c7509ba3b039c0ec77214b8b5",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/NATIVE_AUDIT.json"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/NATIVE_OPENAT.strace",
+      "size": 17591,
+      "sha256": "e46b3c7902696f0f14ebbfb2e403affcbb4b0e7ea253fa63fb945a742b160dd0",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/NATIVE_OPENAT.strace"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/NAV.csv",
+      "size": 33670321,
+      "sha256": "432b1ec55e7a7ff960a93147e46ba76a061824453935d8432cda73826e39dbca",
+      "stage_verified": true,
+      "docs_path": null
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/RESULT.json",
+      "size": 5107,
+      "sha256": "1f08002877286381e8e19834408be6fa6f7ddd2433f2fa4ed80465cbd121bd2a",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/RESULT.json"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/EVALUATOR_OPENAT.strace",
+      "size": 101890,
+      "sha256": "f9ffef34573f450f6da8d8860307a422923a7473b897995a0a3891b4ca241c72",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/EVALUATOR_OPENAT.strace"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/EVALUATOR_STRACE_AUDIT.json",
+      "size": 3608,
+      "sha256": "43cfc08ed1d7d27ba8616b6a981d8f052a249dc00c67e7444209c5786994c786",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/EVALUATOR_STRACE_AUDIT.json"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-LIT.csv",
+      "size": 333465,
+      "sha256": "a4a29b92de324d257efca8b98a95e38fdfe33144c393c43cdb93ff193c21b3fe",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-LIT.csv"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/OUTPUT/RELATIVE_POSE_METRICS.json",
+      "size": 2964,
+      "sha256": "7d70b477037c86c8efe10fcad5a7fb5e80735194b528a59a46d2cbc1a213b192",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/OUTPUT/RELATIVE_POSE_METRICS.json"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/SPEC.json",
+      "size": 829,
+      "sha256": "aa43a0fa991faca9e71004c7fbb4976025c26d7a7bf28932e8cb63af6f05439a",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/SPEC.json"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/evaluator_stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/evaluator_stderr.log"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/evaluator_stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/evaluator_stdout.log"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/native_stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/native_stderr.log"
+    },
+    {
+      "path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/native_stdout.log",
+      "size": 20386,
+      "sha256": "7cab7476b86f3db160e7ecf86cc19ede52d750c10a8195c9885b55cbe50f6abd",
+      "stage_verified": true,
+      "docs_path": "RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/native_stdout.log"
+    }
+  ],
+  "file_count": 307,
+  "bytes": 399946051,
+  "source_deletion_policy": "Delete each exact source only after its stage SHA256 is rechecked; final scratch-empty result in FINAL_INTEGRITY.json",
+  "report_finalization": "Final audit prose appended; previous report SHA256 in ARCHIVE_PRECOPY_RECEIPT.json; numerical table unchanged",
+  "no_handoff_package": true
+}

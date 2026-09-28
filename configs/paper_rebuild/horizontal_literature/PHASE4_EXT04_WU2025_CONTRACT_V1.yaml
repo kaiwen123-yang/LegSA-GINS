@@ -1,0 +1,429 @@
+schema_version: horizontal_literature.phase4_ext04_wu2025.v1
+phase_id: PHASE4
+method_id: EXT04_WU2025
+case_id: C00
+formal_reproduction_target: FAITHFUL_MODULE_REPRODUCTION
+implemented_policy_identity: EXT04_PAR_DECLARED_POLICY_V1
+implemented_reproduction_level: PAPER_DERIVED_POLICY_BASELINE
+paper_exact_policy_identity: EXT04_PAR_PAPER_EXACT
+paper_exact_policy_status: NOT_IMPLEMENTED_UNDER_SPECIFIED
+evaluation_at_native_freeze: NOT_EVALUATED
+ready_for_paper_claims: false
+
+paper_source:
+  authors: [Jiaji Wu, Jinguang Jiang, Yuying Li, Tianci Tang, Jianghua Liu, Jingnan Liu]
+  title: "Robust Dual-Antenna GNSS/INS Attitude Determination via Constrained Ambiguity Resolution and Misalignment Compensation"
+  journal: IEEE Transactions on Instrumentation and Measurement
+  volume: 74
+  year: 2025
+  article_number: 9539914
+  doi: 10.1109/TIM.2025.3626898
+  authoritative_pdf_alias: HORIZONTAL_LITERATURE_EXTERNAL_ROOT/papers/EXT04_WU2025_PAPER.pdf
+  pdf_sha256: b2a06a0ce0b9ad17562e3ac996afaf037d2461f41620cdac225916370729f2a9
+  page_count: 14
+  render_directory_alias: HORIZONTAL_LITERATURE_EXTERNAL_ROOT/papers/EXT04_WU2025/rendered_pages_200dpi
+  render_inventory_sha256: 9d08911c72eab7392dacab86097c6963d8eae94a14bbf37437daa400bf30ae7e
+  text_extraction_alias: HORIZONTAL_LITERATURE_EXTERNAL_ROOT/papers/EXT04_WU2025/EXT04_WU2025_EXTRACTED_TEXT_PYMUPDF.txt
+  text_extraction_sha256: e7a441c90e6508c655eef0e76baf6ba270297e34ec47589a46249ed6459458f7
+  equation_policy_registry_alias: HORIZONTAL_LITERATURE_EXTERNAL_ROOT/papers/EXT04_WU2025/EXT04_WU2025_EQUATION_POLICY_REGISTRY.md
+  equation_policy_registry_sha256: 89ac8977e50d06a16900cb9adadf6cfbfe5ee59c8a21dff3bc4b6f7b078afb11
+  official_code_search:
+    searched_once: true
+    search_date: 2026-08-15
+    attributable_identity_urls_returned:
+      - https://eurekamag.com/research/100/252/100252530.php
+      - https://orcid.org/0000-0002-9974-328X
+      - https://jglobal.jst.go.jp/en/public/202502256070667762
+      - https://www.researchgate.net/publication/397084311_Robust_Dual-Antenna_GNSSINS_Attitude_Determination_via_Constrained_Ambiguity_Resolution_and_Misalignment_Compensation
+    result: NO_ATTRIBUTABLE_OFFICIAL_IMPLEMENTATION_FOUND
+    commit_or_tag: NOT_APPLICABLE_NO_CODE_FOUND
+    license: NOT_APPLICABLE_NO_CODE_FOUND
+    files_used: []
+    patch: NONE
+
+module_boundary:
+  retained:
+    - SECTION_II_A
+    - EQ_1_DD_CODE_PHASE_MODEL
+    - EQ_2_EXACT_KNOWN_BASELINE_LENGTH_CONSTRAINT
+    - EQ_3_COMPLETE_CONSTRAINED_INTEGER_OBJECTIVE
+    - SEARCH_AND_SHRINK
+    - FAR
+    - PAR
+    - AMBIGUITY_QUALITY_CONTROL
+    - EQ_4_GNSS_YAW_AND_PITCH
+  excluded:
+    - EQS_5_9_ACCELEROMETER_LEVELING_AND_DYNAMIC_ACCELERATION_COMPENSATION
+    - EQS_10_23_ERROR_QUATERNION_GNSS_INS_FILTER
+    - EQ_24_TEMPORAL_MISALIGNMENT_CALIBRATION
+    - GO2_IMU_QUATERNION_VELOCITY_CONTACT_FOOT_MODE_GAIT
+    - TRACE_AS_SOLVER_INPUT
+    - HPPOSECEF_AS_SOLVER_INPUT
+    - OTHER_METHOD_OUTPUT_AS_SOLVER_INPUT
+
+equation_code_map:
+  "Eq. (1)": DDObservationBlock_and_build_observation_model
+  "Eq. (2)": ObservationModel_validation_and_exact_baseline_sphere
+  "Eq. (3)": joint_gls_evaluate_subset_search_strict_lambda_and_build_search_chain
+  "Eq. (4)": attitude_from_ned_baseline
+  FAR: decide_far
+  PAR: deterministic_removal_order_build_search_chain_and_decide_par
+  QC: quality_metrics_and_evaluate_gates
+
+algorithm:
+  baseline_length_m: 0.350
+  baseline_receiver_order: GNSS2_MINUS_GNSS1
+  frame: NED
+  body_yaw_relation: WRAP_BASELINE_YAW_PLUS_90_DEG
+  float_solver: CHOLESKY_WHITENED_SVD_WITH_RANK_CHECK
+  covariance: FULL_SHARED_PIVOT_DD_BLOCKS
+  integer_solver: RTKLIB_LAMBDA_DECORRELATION_SEEDS_PLUS_GLOBALLY_CERTIFIED_BRANCH_AND_BOUND
+  candidate_seeds_are_incumbents_only: true
+  hidden_candidate_cap: false
+  hidden_node_cap: false
+  timeout_seconds_per_subset: 1.0
+  timeout_clock: PARENT_PROCESS_CPU_TIME
+  timeout_clock_scope: EXT04_LOCAL_REBINDING_DURING_FROZEN_EXT01_STRICT_SEARCH_ONLY
+  timeout_scope: ONE_EPOCH_SUBSET_ONLY
+  complete_objective: AMBIGUITY_QUADRATIC_PLUS_EXACT_CONDITIONAL_SPHERE_BASELINE_QUADRATIC
+  ambiguity_correctness_known: false
+
+system_modes:
+  GPS_DUAL_FREQUENCY:
+    constellations: [GPS]
+    frequency_groups: [GPS_L1, GPS_L2]
+  BDS_DUAL_FREQUENCY:
+    constellations: [BDS]
+    frequency_groups: [BDS_B1, BDS_B2]
+  GPS_BDS_DUAL_FREQUENCY:
+    constellations: [GPS, BDS]
+    frequency_groups: [GPS_L1, GPS_L2, BDS_B1, BDS_B2]
+    cross_system_double_differences: false
+    separate_constellation_pivots: true
+  GALILEO_DUAL_FREQUENCY:
+    supported: false
+    reason: UNSUPPORTED_SUBMODE_NO_GALILEO_BROADCAST_EPHEMERIS
+
+signal_registry:
+  GPS_L1: {ublox_identities: [[0, 0, 0]], frequency_hz: 1575420000.0}
+  GPS_L2: {ublox_identities: [[0, 3, 0], [0, 4, 0]], frequency_hz: 1227600000.0}
+  BDS_B1: {ublox_identities: [[3, 0, 0], [3, 1, 0]], frequency_hz: 1561098000.0}
+  BDS_B2: {ublox_identities: [[3, 2, 0], [3, 3, 0]], frequency_hz: 1207140000.0}
+
+observation_contract:
+  data_mode: real_by2_raw
+  exact_pairing_key: [gps_week, gps_tow_seconds]
+  pairing_tolerance_seconds: 0.0
+  required_paired_epoch_count: 1509
+  elevation_mask_deg: 10.0
+  minimum_cno_dbhz: 20
+  phase_value_policy: CPMES_AS_REPORTED_NO_SECOND_HALF_CYCLE_SHIFT
+  half_cycle_unknown_policy: EXCLUDE
+  receiver_initialization: PINNED_RTKLIB_PNTPOS_RAW_CODE_SPP_ONLY_BY_SYSTEM_MODE
+  satellite_states: RTKLIB_180043EE_BROADCAST_TRANSMIT_TIME
+  corrections: [EARTH_ROTATION, SAASTAMOINEN_DD_TROPOSPHERE]
+  DD_troposphere_relative_humidity: 0.0
+  separate_pivot_per_constellation: true
+  exact_same_RAWX_signal_identity_required_at_both_receivers: true
+  common_satellite_set_across_two_frequencies_per_constellation: true
+  cross_system_double_differences: false
+  double_difference_sign: "(GNSS2-GNSS1)_SATELLITE_MINUS_PIVOT"
+  phase_bias_calibration: NONE
+  stochastic_mapping:
+    pseudorange_sigma_m: "max(0.50,0.01*2^prStdev)"
+    carrier_sigma_cycles: "max(0.004,0.004*cpStdev)"
+    undifferenced_receiver_variances_summed: true
+    shared_pivot_correlations_preserved: true
+    trace_tuned: false
+
+declared_par_policy:
+  identity: EXT04_PAR_DECLARED_POLICY_V1
+  reproduction_level: PAPER_DERIVED_POLICY_BASELINE
+  ordering_worst_to_best:
+    - LOWER_MINIMUM_TWO_RECEIVER_CNO
+    - LOWER_SATELLITE_ELEVATION
+    - LARGER_MARGINAL_FLOAT_AMBIGUITY_VARIANCE
+    - LARGER_ABSOLUTE_NORMALIZED_PHASE_RESIDUAL
+    - CONSTELLATION
+    - SATELLITE_ID
+    - SIGNAL_ID
+  removal: ONE_AT_A_TIME_REBUILD_FLOAT_SUBSET_AND_STRICT_SEARCH
+  re_rank_after_each_rebuilt_float_subset: true
+  preserve:
+    minimum_nonpivot_DD_ambiguities: 3
+    baseline_geometry_rank: 3
+    minimum_valid_frequency_blocks: 1
+    separate_constellation_pivots: true
+  primary_gates:
+    objective_equivalence:
+      recorded_orientations: [second_over_best, best_over_second]
+      acceptance_convention: SECOND_OVER_BEST_GE_THRESHOLD
+      threshold: 3.0
+      source: PAPER_EXPERIMENTAL_VALUE
+      prompt_literal_conflict: BEST_OVER_SECOND_GE_3_IS_IMPOSSIBLE_FOR_MINIMIZED_ORDERED_OBJECTIVES
+    baseline_validation:
+      source_baseline: UNCONSTRAINED_CONDITIONAL_FIXED_BASELINE
+      residual: "norm(b_conditional_unconstrained)-0.350"
+      absolute_tolerance_m: 0.050
+      source: PAPER_BASELINE_PARAMETER_TRANSPARENTLY_REPURPOSED_AS_DECLARED_TOLERANCE
+    posterior_residual:
+      residual: COMPLETE_POSTFIT_DD_CODE_AND_PHASE
+      degrees_of_freedom: OBSERVATION_COUNT_MINUS_TWO_SPHERE_BASELINE_DOF
+      chi_square_upper_tail_alpha: 0.01
+      source: DECLARED_STATISTICAL_POLICY_NOT_PAPER_DISCLOSED
+    ADOP:
+      formula: "exp(logdet(Q_NhatNhat)/(2*m))"
+      threshold_cycles: 0.12
+      source: DECLARED_STANDARD_GNSS_POLICY_NOT_PAPER_DISCLOSED
+  sensitivity_one_at_a_time_no_selection:
+    - {identity: EXT04_PAR_DECLARED_POLICY_V1_RATIO_2P0, parameter: ratio, value: 2.0}
+    - {identity: EXT04_PAR_DECLARED_POLICY_V1_RATIO_5P0, parameter: ratio, value: 5.0}
+    - {identity: EXT04_PAR_DECLARED_POLICY_V1_BASELINE_0P020M, parameter: baseline_tolerance_m, value: 0.020}
+    - {identity: EXT04_PAR_DECLARED_POLICY_V1_BASELINE_0P100M, parameter: baseline_tolerance_m, value: 0.100}
+    - {identity: EXT04_PAR_DECLARED_POLICY_V1_POSTERIOR_ALPHA_0P001, parameter: posterior_alpha, value: 0.001}
+    - {identity: EXT04_PAR_DECLARED_POLICY_V1_ADOP_0P10, parameter: ADOP_cycles, value: 0.10}
+    - {identity: EXT04_PAR_DECLARED_POLICY_V1_ADOP_0P15, parameter: ADOP_cycles, value: 0.15}
+
+native_solution_states: [FAR_ACCEPTED, PAR_ACCEPTED, FAR_REJECTED, PAR_EXHAUSTED, INVALID]
+native_policy_order:
+  - FAR_ALL_AMBIGUITIES
+  - EXT04_PAR_DECLARED_POLICY_V1
+  - EXT04_PAR_DECLARED_POLICY_V1_RATIO_2P0
+  - EXT04_PAR_DECLARED_POLICY_V1_RATIO_5P0
+  - EXT04_PAR_DECLARED_POLICY_V1_BASELINE_0P020M
+  - EXT04_PAR_DECLARED_POLICY_V1_BASELINE_0P100M
+  - EXT04_PAR_DECLARED_POLICY_V1_POSTERIOR_ALPHA_0P001
+  - EXT04_PAR_DECLARED_POLICY_V1_ADOP_0P10
+  - EXT04_PAR_DECLARED_POLICY_V1_ADOP_0P15
+
+data_flags:
+  synthetic_data_used: false
+  semisynthetic_data_used: false
+  trace_used_online: false
+  receiver_imu_as_body_imu: false
+  final_v23_output_solver_input: false
+  LegSA_output_solver_input: false
+  per_case_tuning: false
+  output_only_correction: false
+  epoch_deleted_for_metric: false
+  old_runtime_input_count: 0
+  trace_open_count_before_native_freeze: 0
+  HPPOSECEF_semantic_decode_count_before_native_freeze: 0
+  HPPOSECEF_solver_input: false
+  status_baseline_solver_input: false
+  Go2_yaw_solver_input: false
+  EXT01_output_solver_input: false
+  EXT02_output_solver_input: false
+  EXT03_output_solver_input: false
+  RTKLIB_diagnostic_output_solver_input: false
+  phase_bias_calibration: false
+
+parallel_execution:
+  default_workers: 16
+  maximum_workers: 20
+  authorized_workers_this_run: 16
+  reason_20_not_authorized: CPU_COUNT_24_BUT_NO_THERMAL_READING
+  stable_16_worker_launch_gate:
+    load_1m_max_fraction_of_CPU_count: 0.50
+    load_5m_max_fraction_of_CPU_count: 0.65
+    available_memory_minimum: max(4GiB,0.25*total_memory)
+  worker_thread_environment: {OMP_NUM_THREADS: "1", MKL_NUM_THREADS: "1", OPENBLAS_NUM_THREADS: "1", NUMEXPR_NUM_THREADS: "1"}
+  parallel_unit: INDEPENDENT_EPOCH_ALL_MODES_AND_POLICIES
+  compact_cache: FINGERPRINTED_NUMPY_MEMORY_MAP
+  worker_raw_csv_access: false
+  deterministic_output_order: [policy, system_mode, epoch_index]
+  determinism_probe: WORKERS_1_VS_16_REAL_EPOCH_SCIENTIFIC_EQUALITY
+  determinism_comparison_includes:
+    - SOLUTION_STATE_AND_FAILURE_CODE
+    - CERTIFICATION_AND_TIMEOUT_STATE
+    - ACTIVE_AND_REMOVED_SUBSET_IDENTITIES
+    - ALL_FLOAT_MODEL_FIELDS
+    - ALL_GLOBALLY_CERTIFIED_CANDIDATE_OBJECTIVE_BASELINE_AND_QC_FIELDS
+  determinism_comparison_excludes_only:
+    runtime_fields: [runtime_seconds, subset_runtime_seconds, mode_runtime_seconds]
+    incomplete_timeout_progress_fields:
+      - lambda_seed_count_returned
+      - branch_and_bound_nodes_expanded
+      - integer_leaves_evaluated
+      - unique_integer_candidates_evaluated
+      - frontier_lower_bound_at_termination
+      - best_total_objective
+      - second_total_objective
+      - best_integer_ambiguities
+      - second_integer_ambiguities
+  uncertified_timeout_heading_solution_fields: BLANK
+  uncertified_timeout_raw_progress_diagnostics: PRESERVED
+  atomic_writer_policy: NO_REPLACE_FAIL_ON_ANY_TARGET_COLLISION
+  internal_epoch_shard_writer: DIRECT_O_EXCL_COMPLETE_WRITE_FLUSH_FSYNC_SELF_HASHED_ENVELOPE
+  internal_epoch_shard_partial_or_hash_mismatch: FAIL_CLOSED_NO_IN_PLACE_REPAIR
+  final_native_publication: ATOMIC_NOREPLACE_AFTER_WORKER_POOL_EXIT_FREEZE_LAST
+
+native_freeze_boundary:
+  trace_open_count: 0
+  HPPOSECEF_semantic_decode_count: 0
+  status_baseline_solver_input: false
+  Go2_yaw_solver_input: false
+  EXT01_output_solver_input: false
+  EXT02_output_solver_input: false
+  EXT03_output_solver_input: false
+  LegSA_output_solver_input: false
+  RTKLIB_diagnostic_output_solver_input: false
+  phase_bias_calibration: false
+  freeze_written_last: true
+  native_files_immutable_after_freeze: true
+
+post_native_diagnostics:
+  proxy:
+    role: FIXPOSITION_SAME_SOURCE_DESCRIPTIVE_REFERENCE_NOT_INDEPENDENT_TRUTH
+    fixed_association: AUDITED_UNIQUE_NEAREST_COMMON_GRID_CONFIRMED_PLUS_2MS
+    inconsistent_angle_threshold_deg: 30.0
+    may_alter_policy: false
+  trace:
+    base_time_unix_seconds: 1772784000
+    window_start_seconds: 66.0
+    window_end_seconds: 340.0
+    yaw_processing: UNWRAP_THEN_INTERPOLATE
+    yaw_reference_ned_deg: wrap360(90-yaw_trace_enu_deg)
+    time_search: false
+    frame_search: false
+    alignment: false
+    constant_offset_correction: false
+    error_based_epoch_deletion: false
+  fractional_phase:
+    role: DESCRIPTIVE_ACCEPTANCE_RELATIONSHIP_TO_FROZEN_PHASE2_GROUPS_ONLY
+    frozen_source: 03_EXT02_CWLS/C00/POST_NATIVE_RECOVERY_PROXY_TIME_ASSOCIATION_R1/EXT02_C00_FRACTIONAL_DD_DIAGNOSTICS.csv
+    previous_method_output_solver_input: false
+    calibration_or_subtraction: false
+  rtklib:
+    role: UNMODIFIED_RELATIVE_POSITIONING_DIAGNOSTIC_ONLY
+    solver_input: false
+    original_post_defect: POS_TOW_JOINED_DIRECTLY_TO_RAWX_TOW_IGNORED_FIXED_PLUS_2MS
+    corrected_revision: POST_NATIVE_R1_RTKLIB_FIXED_ASSOCIATION
+    corrected_join: POS_ITOW_EQUALS_EXISTING_PROXY_ITOW_MS
+    fixed_offset_ms: 2
+    nearest_or_time_search: false
+    failure_period_key: ORIGINAL_RAWX_EPOCH_KEY
+    original_post_payloads_mutated: false
+
+execution_provenance:
+  task_start_head: 82b8035863ab3f40a694d4ac0ce55c9166671941
+  branch: stage/clean3-math-repair
+  development_mode:
+    execution_head: EXACT_TASK_START_HEAD
+    allowed_dirty_state: SIX_APPROVED_UNTRACKED_ADDITIONS_PLUS_TWO_PRESERVED_UNREAD_CANONICAL_FILES
+    unrelated_drift: REJECT
+  committed_mode:
+    task_start_must_be_ancestor: true
+    exact_descendant_commit_count: 1
+    exact_commit_subject: Add EXT04 Wu 2025 constrained FAR PAR BY2 C00 reproduction
+    exact_diff_paths: SIX_APPROVED_TRACKED_PATHS
+    approved_paths_must_be_clean: true
+    external_execution_lock_required: true
+    execution_lock_schema: horizontal_literature.phase4.execution_lock.v2
+    execution_lock_pins: [SIX_APPROVED_FILE_HASHES, RUNTIME_CONTENT_FINGERPRINT, PREEXISTING_MANIFEST_SHA256, ARTIFACT_ROOT_POLICY]
+    execution_lock_unknown_commit_hash_pinned: false
+    execution_lock_path_and_exact_sha_explicit: true
+    preexisting_manifest_path_and_exact_sha_explicit: true
+  fresh_artifact_root:
+    role: PHASE4_OUTPUT_AND_REPORT_LAYOUT_ONLY
+    configured_clean_root_raw_provider_and_hash_lock_inputs_unchanged: true
+    required_initial_state: ABSENT_OR_EMPTY
+    initial_state_check_scope: INITIAL_PREFLIGHT_AND_INITIALIZATION_ONLY
+    reproduction_command_rendering_filesystem_probe: false
+    initialized_only_after_all_provenance_and_input_validation: true
+    initialization: GUARDED_NO_SYMLINK_NO_PROTECTED_ROOT_COLLISION_NOREPLACE
+    resume_identity: SELF_HASHED_EXACT_ARTIFACT_ROOT_MARKER
+    resume_validation_pins: [EXECUTION_LOCK, PREEXISTING_MANIFEST, SOURCE_FINGERPRINT, RUNTIME_CONTENT_FINGERPRINT, LIFECYCLE_STATE]
+    finalizer_recreates_artifact_root: false
+    execution_lock_location_independent: true
+    preexisting_manifest_location_independent: true
+
+runtime_topology:
+  native_root: 05_EXT04_WU2025_MODULE/C00
+  report_root: 11_REPORT
+  preexisting_hash_manifest:
+    filename: EXT04_PREEXISTING_STAGE_HASH_MANIFEST.sha256
+    sha256: 470629e9c0e2f973d3b5e78dde574a5222698018d52a38a8df9ee9ce14c9519c
+    line_count: 3330
+    content_may_be_read: false
+  native_files:
+    heading_results: EXT04_C00_NATIVE_HEADING_RESULTS.csv
+    failure_ledger: EXT04_C00_FAILURE_LEDGER.csv
+    runtime: EXT04_C00_RUNTIME.csv
+    signal_availability: EXT04_C00_SIGNAL_AVAILABILITY.csv
+    dd_diagnostics: EXT04_C00_DD_DIAGNOSTICS.csv
+    float_diagnostics: EXT04_C00_FLOAT_DIAGNOSTICS.csv
+    far_diagnostics: EXT04_C00_FAR_DIAGNOSTICS.csv
+    par_diagnostics: EXT04_C00_PAR_DIAGNOSTICS.csv
+    search_certificates: EXT04_C00_SEARCH_CERTIFICATES.csv
+    quality_control_diagnostics: EXT04_C00_QUALITY_CONTROL_DIAGNOSTICS.csv
+    policy_summary: EXT04_C00_POLICY_SUMMARY.csv
+    sensitivity_summary: EXT04_C00_SENSITIVITY_SUMMARY.csv
+    stochastic_registry: EXT04_STOCHASTIC_PARAMETER_REGISTRY.csv
+    policy_registry: EXT04_POLICY_PARAMETER_REGISTRY.csv
+    native_summary: EXT04_C00_NATIVE_SUMMARY.json
+    native_freeze: EXT04_C00_NATIVE_FREEZE.json
+  post_native_files:
+    proxy_diagnostics: EXT04_C00_PROXY_DIAGNOSTICS.csv
+    trace_diagnostics: EXT04_C00_TRACE_DIAGNOSTICS.csv
+    trace_summary: EXT04_C00_TRACE_SUMMARY.csv
+    fractional_phase: EXT04_C00_FRACTIONAL_PHASE_DIAGNOSTICS.csv
+    rtklib_summary: EXT04_C00_RTKLIB_DIAGNOSTIC.json
+    post_native_summary: EXT04_C00_POST_NATIVE_SUMMARY.json
+    post_native_freeze: EXT04_C00_POST_NATIVE_FREEZE.json
+  post_native_r1:
+    root: 05_EXT04_WU2025_MODULE/C00/POST_NATIVE_R1_RTKLIB_FIXED_ASSOCIATION
+    original_post_superseded_only_for: RTKLIB_FIXED_ASSOCIATION_METRICS
+    original_post_preserved_byte_for_byte: true
+    files:
+      proxy_diagnostics: EXT04_C00_R1_PROXY_DIAGNOSTICS.csv
+      trace_diagnostics: EXT04_C00_R1_TRACE_DIAGNOSTICS.csv
+      trace_summary: EXT04_C00_R1_TRACE_SUMMARY.csv
+      fractional_phase: EXT04_C00_R1_FRACTIONAL_PHASE_DIAGNOSTICS.csv
+      rtklib_summary: EXT04_C00_R1_RTKLIB_DIAGNOSTIC.json
+      post_native_summary: EXT04_C00_R1_POST_NATIVE_SUMMARY.json
+      post_native_freeze: EXT04_C00_R1_POST_NATIVE_FREEZE.json
+  report_file: PHASE4_EXT04_C00_REPORT.md
+  status_file: PHASE4_STATUS.json
+  R1_report_file: PHASE4_EXT04_C00_R1_REPORT.md
+  R1_status_file: PHASE4_STATUS_R1.json
+  R2_report_file: PHASE4_EXT04_C00_R2_REPORT.md
+  R2_status_file: PHASE4_STATUS_R2.json
+  R3_report_file: PHASE4_EXT04_C00_R3_REPORT.md
+  R3_status_file: PHASE4_STATUS_R3.json
+  R4_report_file: PHASE4_EXT04_C00_R4_REPORT.md
+  R4_status_file: PHASE4_STATUS_R4.json
+  R5_report_file: PHASE4_EXT04_C00_R5_REPORT.md
+  R5_status_file: PHASE4_STATUS_R5.json
+  R6_report_file: PHASE4_EXT04_C00_R6_REPORT.md
+  R6_status_file: PHASE4_STATUS_R6.json
+  execution_lock_file: PHASE4_EXT04_EXECUTION_LOCK_R2F.json
+  canonical_required_report_file: PHASE4_EXT04_C00_REPORT.md
+  canonical_required_status_file: PHASE4_STATUS.json
+  canonical_pending_archive_root: PHASE4_EXT04_PENDING_ARCHIVE_R6
+  canonical_transaction:
+    archive_schema: horizontal_literature.phase4.pending_archive.v2
+    archive_before_replacement: true
+    pending_generations: [ORIGINAL, R1, R2, R3, R4, R5, R6]
+    every_pending_input_hash_required: true
+    reviewer_summary_hash_required: true
+    execution_lock_identity_required: true
+    exact_path_install: CAS_TEMP_FSYNC_SAME_DIRECTORY_REPLACE
+    two_file_recovery: ARCHIVE_BACKED_IDEMPOTENT_RESUME
+    pre_mutation_freeze_validation: [NATIVE, ORIGINAL_POST_NATIVE, CORRECTED_R1_POST_NATIVE]
+    deterministic_temporary_paths_inspected_before_mutation: true
+    unknown_temporary_bytes: FAIL_CLOSED
+    archive_writer: FINAL_DIRECTORY_EXCLUSIVE_MKDIR_DIRECT_XB_FSYNC_MANIFEST_LAST
+    archive_nested_atomic_helper_used: false
+    archive_windows_dotnet_move_used: false
+    incomplete_archive_retry: NEW_IDENTITY_REQUIRED
+    collision_or_hash_drift: FAIL_CLOSED
+
+lifecycle_modes: [preflight, resource-determinism-probe, native-only, post-native-diagnostics, post-native-r1-diagnostics, create-execution-lock, full, finalize-r1-pending, finalize-canonical-after-review]
+terminal_states:
+  exact: PASS_PHASE4_EXT04_EXACT_PAR_MODULE_C00_READY_FOR_NATIVE_COMPARISON
+  declared: PASS_PHASE4_EXT04_CORE_VALIDATED_DECLARED_PAR_POLICY_C00_COMPLETE
+  validated_poor: PASS_PHASE4_EXT04_IMPLEMENTATION_VALIDATED_BY2_C00_APPLICABILITY_RESULT
+  not_distinct: DIAGNOSTIC_ONLY_EXT04_NOT_DISTINCT_FROM_EXT01_AFTER_UNDERSPECIFIED_PAR_POLICY
+  unsupported_prefix: UNSUPPORTED_EXT04_ON_BY2_
+  blocked_prefix: BLOCKED_PHASE4_EXT04_

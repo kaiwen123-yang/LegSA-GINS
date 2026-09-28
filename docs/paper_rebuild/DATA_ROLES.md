@@ -7,7 +7,7 @@
 | Fixposition raw and status | GNSS observations, quality fields, dual-receiver geometry, Raw Doppler source material | algorithm estimate, truth, direct performance metric |
 | Receiver IMU | Fixposition receiver diagnostic only | propagation input or replacement for Go2 body IMU |
 | Go2 body log | body IMU/state source, roll/pitch weak prior, horizontal-velocity weak prior, readiness/contact diagnostics | position, velocity, yaw, contact, or pose truth |
-| Trace | Fixposition-derived same-source evaluation reference, opened offline only after all four outputs are hash-frozen | online solver input, provider/alignment/start selection, sign/offset choice, tuning, feedback, output correction, independent-ground-truth claim |
+| Trace | the fused navigation solution output directly by the commercial low-cost dual-antenna GNSS/INS receiver (Fixposition Vision-RTK 2); the estimator under test never reads it (file-access audit); offline evaluation opens it only after output sealing | online solver input, provider/alignment/start selection, sign/offset choice, tuning, feedback, output correction, independent-ground-truth claim |
 | Raw Doppler | source-backed auxiliary velocity observation after fresh provider generation | receiver-velocity alias, algorithm output, truth |
 
 ## Dataset Roles

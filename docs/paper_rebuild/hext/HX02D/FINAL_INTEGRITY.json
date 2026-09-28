@@ -1,0 +1,59 @@
+{
+  "status": "PASS_HX02D_READONLY_DIAGNOSTIC_COMPLETE",
+  "utc": "2026-09-26T08:47:36.492151+00:00",
+  "starting_head": "e612eeb0ad37bf150a4076eb636424fe85f1d222",
+  "report_notes_commit": "无需补提交",
+  "hx02_preservation": {
+    "status": "PASS",
+    "file_count": 12678,
+    "matched": 12678,
+    "mismatches": [],
+    "new_or_missing_files": 0,
+    "baseline": "HX02_TREE_START.json"
+  },
+  "method_and_untracked": {
+    "method_body_count": 423,
+    "method_body_matched": 423,
+    "method_body_mismatches": [],
+    "unrelated_untracked_matched": 29,
+    "tracked_diff_before_agents_append": []
+  },
+  "sealed_start": {
+    "receipt": "00_CONTROL/SEALED_TABLES_RESUME_START.json",
+    "match": 65,
+    "csv_match": 59
+  },
+  "sealed_precommit": {
+    "receipt": "00_CONTROL/SEALED_TABLES_PRECOMMIT.json",
+    "match": 65,
+    "csv_match": 59
+  },
+  "baseline_sha256": "7830a1a596077558d0f2289c066dbd81b1f53e6c25adc8ec0c8833ee055a503b",
+  "counters": {
+    "legsa_native_calls": 0,
+    "external_native_calls": 0,
+    "reference_evaluator_children": 2,
+    "reference_free_B_children": 3,
+    "reference_free_B_successes": 2,
+    "reference_free_state_readout_children": 1,
+    "diagnostic_subprocesses_total": 6,
+    "reference_open_count": 2,
+    "controller_reference_opens": 0,
+    "B_reference_opens": 0,
+    "bag_fpl_opens": 0
+  },
+  "tests": {
+    "unit_tests_passed": 7,
+    "independent_checks_passed": 12
+  },
+  "copy_verification_sha256": "ec05391abb00f76177de998e3fe373edd19dc837c6f4850cfe5d62db5727414b",
+  "scratch_empty": true,
+  "scratch_bytes": 0,
+  "new_package_created": false,
+  "all_required_deliverables_present": true,
+  "reference_children_audit_pass": true,
+  "controller_reference_free_audit_pass": true,
+  "initial_B_serialization_failure_preserved": true,
+  "temporary_pytest_symlink_cleanup_exception_resolved": true,
+  "markdown_table_columns_check": "PASS"
+}

@@ -1,0 +1,2561 @@
+schema_version: 1
+task: T5bc
+state: HUMAN_AUTHORIZED_SOURCE_IDENTITIES
+data_mode: real_raw_and_semisynthetic_separate_cohorts
+synthetic_data_used: false
+semisynthetic_data_used: true
+runtime_invocations: 0
+trace_open_count: 0
+provider_payload_verification: Required pre/post execution; this index verifies comparator/config/echo bytes and
+  records provider pins from frozen table metadata.
+sequence_tables:
+  v3:
+    path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE_SEQUENCES/v3/UNIQUE_EVALUATION_RESULTS.csv
+    sha256: e26dfcd830d6c711ffbb7debd68293fbf7b7ea28240e16bce582381b61ea6a0b
+  v2:
+    path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE_SEQUENCES/v2/UNIQUE_EVALUATION_RESULTS.csv
+    sha256: 6c5a165eaf68bf762cbc803466b4496a5b522dba968785115db9d0338990044d
+runtime_sources:
+  BY2H_A04:
+    frozen_run_id: SEQUENCE_BY2H_A04
+    frozen_table_line: 13
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2H_A04/P13_cycle010_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 4b11192f9ed95d2657ccffb5ef4d5d88fca9d990fe067d0c0dcdc7de961b641d
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2H_A04/P13_cycle010_attempt01/solver/RUN_MANIFEST.json
+      sha256: c63ae216c95498906e4420c3c13c53a7f30b11e4a922dd85167e15d1cdc9ebbb
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GNSS18.gnss
+        sha256: 4cd2369e62e4fba4f0b84b00a75c312c53a8e7eac606802837cbc88892278ff5
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_ATTITUDE_PRIOR.csv
+        sha256: 7366cdb1c24fd647b65328fd2d3938331f288903677b0006a291ae646adbfd55
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 379d0676cbea5fda88437b6dc0508fcfe3d37b2fc6d5ccb40f39e732a6be54bf
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_IMU.imu
+        sha256: d32e4891080e300e6edde4526146636f15ec54df945a0470c57fbbdc3aa5115c
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/RAW_DOPPLER.csv
+        sha256: d5c4a42790f2034423d1a3e060d37488ba01341b423933074c11471fcdbac21c
+  BY2H_F02:
+    frozen_run_id: SEQUENCE_BY2H_F02
+    frozen_table_line: 19
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2H_F02/P13_cycle010_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: ee0ce4a4c5c472413b86b095df44ceedf80f2017072ed4ff70e5ae4265ea3b14
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2H_F02/P13_cycle010_attempt01/solver/RUN_MANIFEST.json
+      sha256: 64a4c88b13cc23e335079101c66653c6c4034f8de790b690300f0a76fb5718cd
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GNSS18.gnss
+        sha256: 4cd2369e62e4fba4f0b84b00a75c312c53a8e7eac606802837cbc88892278ff5
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_ATTITUDE_PRIOR.csv
+        sha256: 7366cdb1c24fd647b65328fd2d3938331f288903677b0006a291ae646adbfd55
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 379d0676cbea5fda88437b6dc0508fcfe3d37b2fc6d5ccb40f39e732a6be54bf
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_IMU.imu
+        sha256: d32e4891080e300e6edde4526146636f15ec54df945a0470c57fbbdc3aa5115c
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/RAW_DOPPLER.csv
+        sha256: d5c4a42790f2034423d1a3e060d37488ba01341b423933074c11471fcdbac21c
+  BY2H_F04:
+    frozen_run_id: SEQUENCE_BY2H_F04
+    frozen_table_line: 21
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2H_F04/P13_cycle010_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 41487d5047df94581d28bf5cb6686bf5317d453fdd81b298f08f422680c5fb99
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2H_F04/P13_cycle010_attempt01/solver/RUN_MANIFEST.json
+      sha256: f73016df659a0ca39fdb7df2ad22d0f0d0b006952d0c40cb6b113d89cc28b135
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GNSS18.gnss
+        sha256: 4cd2369e62e4fba4f0b84b00a75c312c53a8e7eac606802837cbc88892278ff5
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_ATTITUDE_PRIOR.csv
+        sha256: 7366cdb1c24fd647b65328fd2d3938331f288903677b0006a291ae646adbfd55
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 379d0676cbea5fda88437b6dc0508fcfe3d37b2fc6d5ccb40f39e732a6be54bf
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_IMU.imu
+        sha256: d32e4891080e300e6edde4526146636f15ec54df945a0470c57fbbdc3aa5115c
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/RAW_DOPPLER.csv
+        sha256: d5c4a42790f2034423d1a3e060d37488ba01341b423933074c11471fcdbac21c
+  BY2O_A04:
+    frozen_run_id: SEQUENCE_BY2O_A04
+    frozen_table_line: 23
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2O_A04/P13_cycle010_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 06d12783639a99c866e9c2b1891630be3dc9a12b9c5871e5a216b2b4b6c101ba
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2O_A04/P13_cycle010_attempt01/solver/RUN_MANIFEST.json
+      sha256: 23c49b6fccd5492d1c75ce2d930fb6e1c405d619f425f1993a04a84aa181908c
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GNSS18.gnss
+        sha256: c5212cf72d07afd6d3ae0407fee87f841f2e0d909dfb8c1416bd7f38b0248bb4
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_ATTITUDE_PRIOR.csv
+        sha256: 60d0ea7aeb84ea5df757f8b34fc04d1e1e39b78925c592118094b690b8424537
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 92bbe9165ed4ad6aa3f92c478f4a195ffccc7ec7b652506ba73533bd4190cdd2
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_IMU.imu
+        sha256: 48943f3e704ceebbf517bfb073856c1c215b5216e3a5d8b6cd91e7ea7586e49b
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/RAW_DOPPLER.csv
+        sha256: dd9b178b37149eb3d97bd586bf078b1e11cf5e43f8771cbc38c9c21bcd6101f5
+  BY2O_F02:
+    frozen_run_id: SEQUENCE_BY2O_F02
+    frozen_table_line: 29
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2O_F02/P13_cycle010_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 8090b571f137101f1b475255cfa9f8e4c74dff971e6839d321b2476b3337f87a
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2O_F02/P13_cycle010_attempt01/solver/RUN_MANIFEST.json
+      sha256: d18456e7d6d6f9dbd3b9779149ae025c7e9f7cd07175d04e40b6c09b56041506
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GNSS18.gnss
+        sha256: c5212cf72d07afd6d3ae0407fee87f841f2e0d909dfb8c1416bd7f38b0248bb4
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_ATTITUDE_PRIOR.csv
+        sha256: 60d0ea7aeb84ea5df757f8b34fc04d1e1e39b78925c592118094b690b8424537
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 92bbe9165ed4ad6aa3f92c478f4a195ffccc7ec7b652506ba73533bd4190cdd2
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_IMU.imu
+        sha256: 48943f3e704ceebbf517bfb073856c1c215b5216e3a5d8b6cd91e7ea7586e49b
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/RAW_DOPPLER.csv
+        sha256: dd9b178b37149eb3d97bd586bf078b1e11cf5e43f8771cbc38c9c21bcd6101f5
+  BY2O_F04:
+    frozen_run_id: SEQUENCE_BY2O_F04
+    frozen_table_line: 31
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2O_F04/P13_cycle010_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 1ee1e12fa2bcdc5c0e759abec9529f446ae77599adc5c0959ca1f5d20c5dfed6
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/SEQUENCE_BY2O_F04/P13_cycle010_attempt01/solver/RUN_MANIFEST.json
+      sha256: e19bd93ad58386cb1d5669994e13f21c35084ade15f9cb6daefab5a5c6953653
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GNSS18.gnss
+        sha256: c5212cf72d07afd6d3ae0407fee87f841f2e0d909dfb8c1416bd7f38b0248bb4
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_ATTITUDE_PRIOR.csv
+        sha256: 60d0ea7aeb84ea5df757f8b34fc04d1e1e39b78925c592118094b690b8424537
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 92bbe9165ed4ad6aa3f92c478f4a195ffccc7ec7b652506ba73533bd4190cdd2
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_IMU.imu
+        sha256: 48943f3e704ceebbf517bfb073856c1c215b5216e3a5d8b6cd91e7ea7586e49b
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/RAW_DOPPLER.csv
+        sha256: dd9b178b37149eb3d97bd586bf078b1e11cf5e43f8771cbc38c9c21bcd6101f5
+  BY2_A04:
+    frozen_run_id: RUN_00006
+    frozen_table_line: 6
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00006/P13_cycle010_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: dc17a36c5eca4ae97a987c44c7fe7c7e346d6c8c9d3ba7196d92ff1abd44cdbe
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00006/P13_cycle010_attempt01/solver/RUN_MANIFEST.json
+      sha256: 95fb9500e0fa231a9c483ca1a965a5bb15e09042c9f0339a160325bbbf6748f4
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+  BY2_F02:
+    frozen_run_id: RUN_00002
+    frozen_table_line: 2
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00002/P13_cycle010_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 40b0931b96b22babc8e806e3c526fb8abff98b000e4f1acd625de43ea5f31cda
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00002/P13_cycle010_attempt01/solver/RUN_MANIFEST.json
+      sha256: 389a7c9eb97d566cdc56f7b722c012f2d3649544e9d38652da056b6115f089d0
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+  BY2_F04:
+    frozen_run_id: RUN_00004
+    frozen_table_line: 4
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00004/P13_cycle010_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: cad5967db4bccc3de0f66e15139cad83892f55ef9d2dc8e8fc345b4bb1e21a4f
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00004/P13_cycle010_attempt01/solver/RUN_MANIFEST.json
+      sha256: b4a7c40e9e7b66959b8278469e69c5a780b04985901dfa07431b4342c4cffd98
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+t5a_r:
+  final_summary:
+    path: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/FINAL_SUMMARY.json
+    sha256: 0032357c6b30f0b89e234d3623b2982c083f52834fad9cc55af925d31dc8577b
+  r5_providers:
+    BY2:
+      path: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/02_PROVIDER_TABLES/BY2/R5/T5A.gnss
+      sha256: fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760
+    BY2H:
+      path: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/02_PROVIDER_TABLES/BY2H/R5/T5A.gnss
+      sha256: 4ff6ed07f1d189ab19934bc67c350e9f48f79527170c6fcafc85eba7cf1155bd
+    BY2O:
+      path: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/02_PROVIDER_TABLES/BY2O/R5/T5A.gnss
+      sha256: 2a0b0ebbcd66b59dd153b84b132c638e9ea31021653e58e3ac125ed21304fa13
+  tables:
+    SENSITIVITY_TABLE_V3.csv:
+      path: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/05_AGGREGATE/SENSITIVITY_TABLE_V3.csv
+      sha256: fd8ed33b803845a3a3b1c72ac5cf57c59e2a90654509da069f81aa5961328ee6
+    SENSITIVITY_TABLE_V2.csv:
+      path: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/05_AGGREGATE/SENSITIVITY_TABLE_V2.csv
+      sha256: 9aef9f55b5e19f510f5a8254e104c66f92e8212f5e9a2c685a17da736978d022
+    BY2O_SEGMENTS_BY_VARIANT.csv:
+      path: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/05_AGGREGATE/BY2O_SEGMENTS_BY_VARIANT.csv
+      sha256: 09bb5252540abeed196f75aacbf7b3b8009fe010e603bf6ed7e80c86ad08a297
+    AGGREGATE_MANIFEST.json:
+      path: <CLEAN_ROOT>/stages/CLEAN7_T5A_HEADING_SENSITIVITY/T5A_R/05_AGGREGATE/AGGREGATE_MANIFEST.json
+      sha256: b78c6ce35e68844c5f51c8457dd6da27b27375f987e1a0c728dba2bda4301f84
+hext04l:
+  hext04l_data_manifest:
+    path: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/11_READONLY_CLOSEOUT_H_EXT_04L/DATA_MANIFEST.json
+    sha256: 5a9c2740fb5e856ede39384f1d58bb4c11c39162ea870ce9c0c399f30d378258
+  HORIZONTAL_TABLE_V3_THREE_SEQUENCES.csv:
+    path: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/08_AGGREGATE/HORIZONTAL_TABLE_V3_THREE_SEQUENCES.csv
+    sha256: 8c0535273809777ccb873ded828a5e8f4c2ef4d80ac4b244f1c8ce4f71647348
+  HORIZONTAL_TABLE_V2_THREE_SEQUENCES.csv:
+    path: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/08_AGGREGATE/HORIZONTAL_TABLE_V2_THREE_SEQUENCES.csv
+    sha256: ae8e49a224c56a3ebf224ab32ef0b8843d6522f00aec2cd41edd25e10e7251fd
+  hext04l_segments:
+    path: <CLEAN_ROOT>/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/11_READONLY_CLOSEOUT_H_EXT_04L/BY2O_SEGMENT_SUMMARY.csv
+    sha256: a68d5a36eb1ccf808a28842af309d1cccb9748c8e667b6b4ac2bf63580fe0e72
+subset_registration: ALL_61_HUMAN_AUTHORIZED_2026_09_19
+subset_case_source:
+  path: configs/paper_rebuild/clean5/CLEAN5_DEGRADATION_SUBSET_CONTRACT.yaml
+  sha256: 9af4216d1c2e58011e712e60bfcb82ba58ea587034daf14a34c9985cf6b06cd6
+  selected_case_ids:
+  - C00_clean_normal
+  - D01_seed_00
+  - D02_seed_00
+  - D03_seed_00
+  - D04_seed_00
+  - D05_seed_00
+  - D06_seed_00
+  - D07_seed_00
+  - D08_seed_00
+  - D09_seed_00
+  - D10_seed_00
+  - D11_seed_00
+  - D12_seed_00
+  - D13_seed_00
+  - D14_seed_00
+  - D15_seed_00
+  - D16_seed_00
+  - D17_seed_00
+  - D18_seed_00
+  - D19_seed_00
+  - D20_seed_00
+  - D21_seed_00
+  - D22_seed_00
+  - D23_seed_00
+  - D24_seed_00
+  - D25_seed_00
+  - D26_seed_00
+  - D27_seed_00
+  - D28_seed_00
+  - D29_seed_00
+  - D30_seed_00
+  - D31_seed_00
+  - D32_seed_00
+  - D33_seed_00
+  - D34_seed_00
+  - D35_seed_00
+  - D36_seed_00
+  - D37_seed_00
+  - D38_seed_00
+  - D39_seed_00
+  - D40_seed_00
+  - D41_seed_00
+  - D42_seed_00
+  - D43_seed_00
+  - D44_seed_00
+  - D45_seed_00
+  - D46_seed_00
+  - D47_seed_00
+  - D48_seed_00
+  - D49_seed_00
+  - D50_seed_00
+  - D51_seed_00
+  - D52_seed_00
+  - D53_seed_00
+  - D54_seed_00
+  - D55_seed_00
+  - D56_seed_00
+  - D57_seed_00
+  - D58_seed_00
+  - D59_seed_00
+  - D60_seed_00
+subset_tables:
+  v3:
+    path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE/v3/UNIQUE_EVALUATION_RESULTS.csv
+    sha256: 45054701213cedb2057523c6f4706dfebd170ccea824bc882e8d281653f892d5
+  v2:
+    path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/20_FINALIZE/13_AGGREGATE/v2/UNIQUE_EVALUATION_RESULTS.csv
+    sha256: abcf4943419c462312a806171de1cc6b11bcb159ab63cd98f9d1ed0fa0ee505d
+subset_sources:
+  C00_clean_normal:
+    frozen_run_id: RUN_00004
+    frozen_table_line: 4
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00004/P13_cycle010_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: cad5967db4bccc3de0f66e15139cad83892f55ef9d2dc8e8fc345b4bb1e21a4f
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00004/P13_cycle010_attempt01/ARCHIVE_RECEIPT.json
+      sha256: b4581d54e66a8aa7a801f5e3dd52a3e087b235ec1cec30733a71e3d0bef29f2d
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00004/P13_cycle010_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 16da51a13e7c6afed25566332e4d4a1e7ab6098dc1ae6eb60f7ded620a1c6359
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00004/P13_cycle010_attempt01/solver/RUN_MANIFEST.json
+      sha256: b4a7c40e9e7b66959b8278469e69c5a780b04985901dfa07431b4342c4cffd98
+    data_roles:
+      data_mode: real_clean
+      synthetic_data_used: false
+      semisynthetic_data_used: false
+      controlled_degradation_applied: false
+  D01_seed_00:
+    frozen_run_id: RUN_00015
+    frozen_table_line: 14
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00015/P13_cycle010_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: b37bc1302ff79226db933ffcfe36850971ed9c882e83ab97803af90c11ff7651
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00015/P13_cycle010_attempt01/ARCHIVE_RECEIPT.json
+      sha256: ac741bc0213692748c764f72dba4eabdb9b104755a2f907a14c5323ac0335afd
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00015/P13_cycle010_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 253ebd82d18b13ef03fb7a7fea9e59cf64d052aa338c7f5898e7c2169bc6cf59
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D01_seed_00/GNSS18.gnss
+        sha256: ccfdc0d0d5d5a6205a8cc29f153f0f0fc6629d0993ee661504f1e848f54ef110
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00015/P13_cycle010_attempt01/solver/RUN_MANIFEST.json
+      sha256: b0cb1be17b2a39ae80be8c76107fe5c05efe4a7165c7e8f09cb5c5e7646ffe58
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D02_seed_00:
+    frozen_run_id: RUN_00114
+    frozen_table_line: 104
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00114/P13_cycle010_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 567cd22e4f79134c238d2cfeb014355f5c84a8804a8f22c721c5edd5963e64f6
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00114/P13_cycle010_attempt01/ARCHIVE_RECEIPT.json
+      sha256: b0f29a469c8d24aacf63edb599e05f8ba786c15403c95ff32a79f55c785e388a
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00114/P13_cycle010_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 4ab6789f772f419b2c76dce23ea3849a82fd67e21856757cd0f6352e3067776f
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D02_seed_00/GNSS18.gnss
+        sha256: 7ddf8217aaecb9e512b306273af0e8fa454bff6c8a19038d812cda5e87bbf60b
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00114/P13_cycle010_attempt01/solver/RUN_MANIFEST.json
+      sha256: ae897284e5ea525bfe8f22046d6adb6bf87946daff8bf68f41d4feb689785209
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D03_seed_00:
+    frozen_run_id: RUN_00213
+    frozen_table_line: 194
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00213/P13_cycle010_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 9a8e2921576ed73dae1ab927c15c99c94eeee3823848c7dd1bbb9af697876ce9
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00213/P13_cycle010_attempt01/ARCHIVE_RECEIPT.json
+      sha256: abf6d9be7a950459f81335f68ed1de2dcc93765074f16aef347e4de974474494
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00213/P13_cycle010_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: f9a2708fd6601077193698ffbdf8f8f18f502c952f635a42afbd9d46ce359f5a
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D03_seed_00/GNSS18.gnss
+        sha256: 6fc959f6fe6a44e9df0397e57827fd3aca4bd18771391a75d702d8837f76a650
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00213/P13_cycle010_attempt01/solver/RUN_MANIFEST.json
+      sha256: 9248fa9167f4adf94e9905d58ef5e0e09246b82b0ba9d345adbb65d09b8a17e6
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D04_seed_00:
+    frozen_run_id: RUN_00312
+    frozen_table_line: 284
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00312/P13_cycle020_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: f760ed73345b2e9737ca8b5fe2a029c5ba66256f9209ccceb013d1d0276c1ddb
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00312/P13_cycle020_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 044b75c22cfd1d3619513e54e6fc2e9e57718bbeba78cda6bea471d866bd4e95
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00312/P13_cycle020_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 8014795c7ecc149ee3bf4e36eefe24ba96cae375f20b8f79e5589a15054ed249
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D04_seed_00/GNSS18.gnss
+        sha256: 5f91ee5faa480e8100c0c47cae275ebcd1d0f7b615b1f74fa50766fdf977885f
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00312/P13_cycle020_attempt01/solver/RUN_MANIFEST.json
+      sha256: 7c3357dc8906d12ed9849bad65934bbaaa9378799dd68b371da34f45fa7e0694
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D05_seed_00:
+    frozen_run_id: RUN_00411
+    frozen_table_line: 374
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00411/P13_cycle020_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: c8afe9bc8bee6c20ac66cfdd0962e6581f97b5130788fc56c4521d79bddb686e
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00411/P13_cycle020_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 78814a20571d1a17073b41d00e0ccc4463fe7eb06f8f3d917fcdf778913c5ec5
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00411/P13_cycle020_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: c208c8a7a9d71d387c3a53ac3454401ca2681c0373d2b9c382f4a5b8110ad397
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D05_seed_00/GNSS18.gnss
+        sha256: cf38f902b85f1499d014db552e03e76869e4baac6403de7ea05a62d4e4f4355f
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00411/P13_cycle020_attempt01/solver/RUN_MANIFEST.json
+      sha256: 54adaed6793759b03625c971dbd4e5ea228bd0d074d806c32d238e4c042b4e0a
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D06_seed_00:
+    frozen_run_id: RUN_00510
+    frozen_table_line: 464
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00510/P13_cycle020_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 31d1815d85bb53a8d68863325f0da27b3a104143913b66225742a71608fa61ff
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00510/P13_cycle020_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 07746df622a8905faedda2427e654703f47db863cb606c9d5a1a7a33d2f8bd70
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00510/P13_cycle020_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 202cf58019bec622e5550f6f25ca68c68c5e0eff51dc8aae8eae4280410a65da
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D06_seed_00/GNSS18.gnss
+        sha256: 3e9eee10e392fb43808d437fe62665ecd61e3e07ab2f24c91ae00f98fd1220ab
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D06_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 76f02209f0522d44d9ad4e2484b7495dba625697e01c90c6a00b5304e40001c4
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00510/P13_cycle020_attempt01/solver/RUN_MANIFEST.json
+      sha256: 0f77c25e765e789f271ec8ca920e85426bafc7777dccc9db46ea84a466b55d89
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D07_seed_00:
+    frozen_run_id: RUN_00609
+    frozen_table_line: 554
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00609/P13_cycle030_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: f097e3dc91b7ef144f208bdcdacf0b3a7f137f51d889693e18b50e19bb5c1725
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00609/P13_cycle030_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 8a36083faadd29ea3b2b70166b9b97add4f7f8fb3e00a5d81f3e07ea759e1cd7
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00609/P13_cycle030_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 4b7fcd3ce05e54ddefec285989c87e5de88c4dd872c66bd632fdaa40c81d16b3
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D07_seed_00/GNSS18.gnss
+        sha256: 4bac19930907181f3a2105394f014da87f4393b95c608623cef1c96655fed49e
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00609/P13_cycle030_attempt01/solver/RUN_MANIFEST.json
+      sha256: 3fedaab06d6d5baf45eda897b494c45337c566fa8bf323cfd77a59ccb1396509
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D08_seed_00:
+    frozen_run_id: RUN_00708
+    frozen_table_line: 644
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00708/P13_cycle030_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 97e0d8f996f16b4e72041b42b3a0d7aea40f068ed97aea70912ddf3450158942
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00708/P13_cycle030_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 814dd84c062c256fabed071ed52d1d5095144614dc2b38490eb9a95a00aaeadd
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00708/P13_cycle030_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: fd8ff45fb8794dec4ec3ac833dd297389c4ca8687847bb0ec2841017d42b73b8
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00708/P13_cycle030_attempt01/solver/RUN_MANIFEST.json
+      sha256: 5cab78080f774aa1dc149b7b97ad47f73bde2c9233349e9ddba5202678330a13
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D09_seed_00:
+    frozen_run_id: RUN_00807
+    frozen_table_line: 734
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00807/P13_cycle030_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: bce1889ac8af171b298c097ff28e25c1e6f0e744ed940469043e32deefcc1b34
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00807/P13_cycle030_attempt01/ARCHIVE_RECEIPT.json
+      sha256: a62917984313b6e7495c9e25a9fca213dc4d5278b3044c4eca9956784b75ba3a
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00807/P13_cycle030_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 99e3752e58943412dcc8cd239bd9c91487a77d4a67045e1df247b555db9065bc
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D09_seed_00/GNSS18.gnss
+        sha256: 7324eb50b0cc3a913926cc9189dd3755b6de4fab11e03bf0939b2c70f463d9d3
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00807/P13_cycle030_attempt01/solver/RUN_MANIFEST.json
+      sha256: f58b74cc2226990a1983fc72246bad603b290f7039272d4db71d53e5a38f2fbb
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D10_seed_00:
+    frozen_run_id: RUN_00906
+    frozen_table_line: 824
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00906/P13_cycle040_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 8f1e3f9b3fdd6d4eaae859523eeb02edf4d637295a8849d3c4d6caa43cee984b
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00906/P13_cycle040_attempt01/ARCHIVE_RECEIPT.json
+      sha256: c6a8e4c1bd29ac9889669d5dd517bc7392a882fabf395a9420ac7791df9a2e3b
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00906/P13_cycle040_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: bfcfb307714922eb7a298639a9eca073e33a130da904fd8656eb7ecbed391ebd
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D10_seed_00/GNSS18.gnss
+        sha256: de5dba52fa8397334b5ee1556e241c227fa45c3b23e54f7e859a559ce7ef235e
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_00906/P13_cycle040_attempt01/solver/RUN_MANIFEST.json
+      sha256: 75588cc2099547fa75d69ac2ab77815b15db2e9c5b702e5f7b90bb03e9b93571
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D11_seed_00:
+    frozen_run_id: RUN_01005
+    frozen_table_line: 914
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01005/P13_cycle040_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 97aeda834d217db7fe8a0f92352f1e6078ec2325b82b4079e0f60f5edb3a2775
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01005/P13_cycle040_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 3d03ee6a3ceff8bce67afe3364871c06979a4316c924ab82d0a36bca5b77a2b8
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01005/P13_cycle040_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: e3d4dd95f55a909a10c571ff564093ae3d3cf47b238f0a88163f7430c31b79aa
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D11_seed_00/GNSS18.gnss
+        sha256: c5f58b070974493182fc086c87e7a40e8963e51d3f4fdb44cecb2451b1f44daf
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D11_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 05547a00c0ed995efc7831c349654b7b038e00112bdd6e099c9ed874a657aec6
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01005/P13_cycle040_attempt01/solver/RUN_MANIFEST.json
+      sha256: 7d2aafcdc200e549654947ad5d91b48dd5872a8a127ff9924171c4e7840b31b6
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D12_seed_00:
+    frozen_run_id: RUN_01104
+    frozen_table_line: 1004
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01104/P13_cycle040_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 918b01cd568f68c78376816d273113b880627e315a6404af332305a2317f400e
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01104/P13_cycle040_attempt01/ARCHIVE_RECEIPT.json
+      sha256: b1e107eac5412a1053b962ed16cc8477dcf24e9298628158ccc16c05e09e5d80
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01104/P13_cycle040_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 10f12d61817c0fb58074837d1c029616fb8a30f52277b76fb719f260a48bf84e
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D12_seed_00/GNSS18.gnss
+        sha256: 9aba490b55eb3e2c898fac6c3d480661792191740530afd4308a0bc630fc37ee
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D12_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: d6773c16862524e9b2df387139af7e65fedee3138082da41a8b172dbee406112
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01104/P13_cycle040_attempt01/solver/RUN_MANIFEST.json
+      sha256: 26551d11b344f4e384043fa80b8c1246d4a5c5201812a528308abf7c716d7e02
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D13_seed_00:
+    frozen_run_id: RUN_01203
+    frozen_table_line: 1094
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01203/P13_cycle050_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 83ce4693a7ee073262c2878fe1705e9f3ab89d670d965b08fcf06a97fa400ab5
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01203/P13_cycle050_attempt01/ARCHIVE_RECEIPT.json
+      sha256: a7eb9197cddbf818805175278ddf34a8071ee0565575a5c50a3b2cc4c756bd12
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01203/P13_cycle050_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: f9abd12771133c64df2169dac832b92e411348a4469cefe1c033626fc4755e4e
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D13_seed_00/GNSS18.gnss
+        sha256: e6807f74dbfeba7f92fab4a8d784ae5f825ce3c345164c46bcc83e2d4852f9c8
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01203/P13_cycle050_attempt01/solver/RUN_MANIFEST.json
+      sha256: 69548c03a9699a0f346d11583d9f7e93cf40e6f719c3417b76479b7cce8b977c
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D14_seed_00:
+    frozen_run_id: RUN_01302
+    frozen_table_line: 1184
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01302/P13_cycle050_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: bc54d86881b5c53b4ccb2d002c6163cb6a612187cea2ca75abd358ba0c44c79e
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01302/P13_cycle050_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 465595083829b00bbf1233a0b07da212dc76d918f30218301fa6e521fa9b6b98
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01302/P13_cycle050_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 49ee53c6669b43389f5182b80660215dca40b0a08041c33426d1d3681b0e554d
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D14_seed_00/GNSS18.gnss
+        sha256: e21fa64024a51d714767f27ff492f710bc63635dadb5dc0158f2dd49ecb71e89
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01302/P13_cycle050_attempt01/solver/RUN_MANIFEST.json
+      sha256: 72f7e7176e6f258046ba940b066344e10490d35fc31d4b8ad25896faac465224
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D15_seed_00:
+    frozen_run_id: RUN_01401
+    frozen_table_line: 1274
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01401/P13_cycle060_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 4a4d73ffd5d78b59dad1f84853f1d5c3baf6901edce12a46486ba206c9b4ca41
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01401/P13_cycle060_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 7ab79da33a9933561df8d5d055408679edde081f06d4e03069cfbae35bb0709d
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01401/P13_cycle060_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 262fc47aadc6df69c39253a9dc1ced481c697238599f004d538902880aff06c6
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D15_seed_00/GNSS18.gnss
+        sha256: 18a349c6d122820244c40bcf78ff92b9221060ceb5a04b1c115b2194402e343c
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01401/P13_cycle060_attempt01/solver/RUN_MANIFEST.json
+      sha256: 1b821f63744b17b3f8d8fefbd35e2870a3fba41f89750f3029552d5d9e17dcea
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D16_seed_00:
+    frozen_run_id: RUN_01500
+    frozen_table_line: 1364
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01500/P13_cycle060_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 8f1841151c079646268eec51d00bedde00c0c2e22a5b4da860dd3cccdf3cc0a5
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01500/P13_cycle060_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 62d42e660695f6fd190cfd0650eea6e3a7255d083dc11e929602f9766fa66bd7
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01500/P13_cycle060_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: cedae23cb8cd64d69a526c23b346610a165711a348b76d78a1b86ce4e837f7bb
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D16_seed_00/GNSS18.gnss
+        sha256: 39ea34fba12d9123ef106b2a8d35159880e44800e83dfa25fb880e4ef30dc2e8
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01500/P13_cycle060_attempt01/solver/RUN_MANIFEST.json
+      sha256: 3aabc5518e61f1d0713c7cc5b3ee6dc79120c2dbbdf551e1b3b81c9b5333017f
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D17_seed_00:
+    frozen_run_id: RUN_01599
+    frozen_table_line: 1454
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01599/P13_cycle060_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 47f6ab1c46bb7a3773782ec617447ca9349f62da1a1bfc97ed5b758c9364e739
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01599/P13_cycle060_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 9b57d6976890791fc48f039554090a0239879cb7563fd5b432813df4a253c5c5
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01599/P13_cycle060_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 984611fd1d8ab121dded8b06948916f0b25694f1db49795d85fd9f57941626a2
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D17_seed_00/GNSS18.gnss
+        sha256: 51b49c7f2f8ee910eb082db44cb47e314e0dc335ef289fa54524951e530a1292
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01599/P13_cycle060_attempt01/solver/RUN_MANIFEST.json
+      sha256: a108e2d67826de8c385d5ab641330ef05d81adc63a6072ca5891fc2b65d7e365
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D18_seed_00:
+    frozen_run_id: RUN_01698
+    frozen_table_line: 1544
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01698/P13_cycle070_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: c20df7d3afb9f5416b0d5e44a10b0b6f0e4f0dec77586c2341574ec44218c938
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01698/P13_cycle070_attempt01/ARCHIVE_RECEIPT.json
+      sha256: c704f9bf38e0fd852f7b77ce09883026963450dd3cc92ff092e2c537e45c07e2
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01698/P13_cycle070_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 00f90384be5cf8b1627b925577674c7782c312178c24f53d7a31496b0374ddfa
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D18_seed_00/GNSS18.gnss
+        sha256: 3e21dcc53d2e2c1dcc2b49723d7933cdd6bde13b504e48f753c8a802a0393ac0
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01698/P13_cycle070_attempt01/solver/RUN_MANIFEST.json
+      sha256: 453f41a8bca2cd66f2e89647c12c5819d4c0864e64430c54d3f474d2e87638e5
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D19_seed_00:
+    frozen_run_id: RUN_01797
+    frozen_table_line: 1634
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01797/P13_cycle070_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: db70b5ea6367889dfde100a720f9d40063ebc916e00add5a08147a3bb28a292f
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01797/P13_cycle070_attempt01/ARCHIVE_RECEIPT.json
+      sha256: cc82e037469749d423dedebf5e188fbe260bbb73a743fffbdd4c8fd23c2b2404
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01797/P13_cycle070_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: c96e693079ede283ae8383be861df0f14b900d9a0ca1ad3079eb88b05922b9c6
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D19_seed_00/GNSS18.gnss
+        sha256: b145a9b624463658120b0b2b975362762c14146596a8cb2dbe07b6dac06780ca
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01797/P13_cycle070_attempt01/solver/RUN_MANIFEST.json
+      sha256: b3c08f18d36222b6b34b50e1d777777e7bbf4bee18af2e3c4a22a88bda9dc911
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D20_seed_00:
+    frozen_run_id: RUN_01896
+    frozen_table_line: 1724
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01896/P13_cycle070_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 41a0d971eb7953fac691682300f596df85dde265aa442aef91308d1a013bb0d7
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01896/P13_cycle070_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 01637845050e4c454d4bed51fc472625c43d80bd31299e180452a9f067a0a01a
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01896/P13_cycle070_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: ae842bf51cdcd0679da7f6fcec67e27d4725b10230193c50cd0f348d1164bc34
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D20_seed_00/GNSS18.gnss
+        sha256: d5a1e76f4f24a617ed692abb14abad118e9ab2990247b9b15d67c203463dbcb3
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01896/P13_cycle070_attempt01/solver/RUN_MANIFEST.json
+      sha256: ed43606f4f56ff842d86f3abae727d559a456a6ca8931decab32d8414e530532
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D21_seed_00:
+    frozen_run_id: RUN_01995
+    frozen_table_line: 1814
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01995/P13_cycle080_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 608f126317203b8dcd953c6518b93f45d854a2a818e110de183f55e559071d7a
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01995/P13_cycle080_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 904128d72d0cfb1dc47511b5b7ca7a5bbc85fe26fe146cb7d0fcbe36ecff4aee
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01995/P13_cycle080_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: c202e51c5e30979d03b61da9dee73211659d7027d0870d8bf8cc5ae1b2db5d84
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D21_seed_00/GNSS18.gnss
+        sha256: df233f49f78bff7d42cbbb1a0a9ce11bba4ab5a01a4da064e40144007289fa3a
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_01995/P13_cycle080_attempt01/solver/RUN_MANIFEST.json
+      sha256: 530705204a11348a99cf7910733d1d85a64dc3c3b7f12a56e43b45b98eef13ee
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D22_seed_00:
+    frozen_run_id: RUN_02094
+    frozen_table_line: 1904
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02094/P13_cycle080_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: f191649766851e3cc01bc4f6b79049800b7c6344fa7bb53e06f0d1b7d07c9b65
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02094/P13_cycle080_attempt01/ARCHIVE_RECEIPT.json
+      sha256: a2067952e9dbf51b8ac510825bc91fddcd593cc4d53f4cdc747642d98646c5c9
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02094/P13_cycle080_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: ea18b3884aea5601385bbf9d706b1f35911b2f1aa54a19b0ba11842db6302230
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D22_seed_00/GNSS18.gnss
+        sha256: cf8229cae1dd3ff2204d66cf9c6c7abe2364e03442c3a78b63c66d29edcf8e7e
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02094/P13_cycle080_attempt01/solver/RUN_MANIFEST.json
+      sha256: 5a75357f49d26ef212d33b30f6b9169270fb271e7073bb5b39916fdae57d48fe
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D23_seed_00:
+    frozen_run_id: RUN_02193
+    frozen_table_line: 1994
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02193/P13_cycle080_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 9f587b61293bff9700ed65f8297319e829da8fb1d97b02869f8237b60e493460
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02193/P13_cycle080_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 1abb2b8427d1c8b0897e478adf0ecda67a953e869a3db408e064a862621602ce
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02193/P13_cycle080_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: aca68bb11fded66db1d855963fe190730e2087005d2163c4117e76cb77438a64
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D23_seed_00/GNSS18.gnss
+        sha256: 9d6d3fbf3cdbfb433d1bf10b61df8a3cbf5440a88fd97f886a2c0c28feb751f9
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02193/P13_cycle080_attempt01/solver/RUN_MANIFEST.json
+      sha256: 15d1fe60b3a9d213fa71427f96e47add06cb65c2bd701540133afdd2aa049c91
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D24_seed_00:
+    frozen_run_id: RUN_02292
+    frozen_table_line: 2084
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02292/P13_cycle090_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 53dfed66cd72bdaac8ca94edd535b6b84c11e29c02ae926c1c19cc21aac28a7c
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02292/P13_cycle090_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 5d3276250d426536a05215304c4db790075eaea09c111e80fd9fc67f877fb19d
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02292/P13_cycle090_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 510eb38042ce5a8e6af9c38277977808bcf5ae9f9239dd13ec074eed74673dde
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D24_seed_00/GNSS18.gnss
+        sha256: c2b8c5935299559fdf0c2498312e9e642cc3946983181b01b8a8e03086f0e413
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02292/P13_cycle090_attempt01/solver/RUN_MANIFEST.json
+      sha256: 9a4a53ff653248cddc2dca89185526ea3ca4e3e2ac4878e4668a898d5752d9a3
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D25_seed_00:
+    frozen_run_id: RUN_02391
+    frozen_table_line: 2174
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02391/P13_cycle090_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 76ff641527ff6fc79b5c5a8eb5b0bc28fc5dd384bdf8870d6380432308999777
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02391/P13_cycle090_attempt01/ARCHIVE_RECEIPT.json
+      sha256: fbcec65be60ec7f29b91fb425a178a6b47718372cdbd24fea79e780d692f690e
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02391/P13_cycle090_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 89363cdba140b4fd92f2ee86e95529de28b2744ac8764e8807c7f9017e6669bf
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D25_seed_00/GNSS18.gnss
+        sha256: a10f7179bc66878692cf427c3641cec7b5dbd6e384b6ab7e5c9fb5edb7b4e389
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02391/P13_cycle090_attempt01/solver/RUN_MANIFEST.json
+      sha256: 7beeb1f79a9dda17023d08c86b0851fb814f6ff71aa0bc063044ea370e24d6fe
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D26_seed_00:
+    frozen_run_id: RUN_02490
+    frozen_table_line: 2264
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02490/P13_cycle090_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 7f107cbdca4f189a2e34c9dcafad41914a60c337df1f3721386e0526349deda0
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02490/P13_cycle090_attempt01/ARCHIVE_RECEIPT.json
+      sha256: cf6ef1f46a3c9f7c4e1720691a7fe15d7d42e555f14a3deb115bc69570be7fd8
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02490/P13_cycle090_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 57f0e68c6effa9f6190de53b0a7a19b8871170e46fa056cfc5811257b404035c
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D26_seed_00/GNSS18.gnss
+        sha256: 906184cfbd4f08cdf200a56ed81b15f5b8298b51f3016e93773393d5410f0cef
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02490/P13_cycle090_attempt01/solver/RUN_MANIFEST.json
+      sha256: aa90fc673179c7a912b2091d4cd0e92a2b3aa3daa473b03c0dd1f2b43143941b
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D27_seed_00:
+    frozen_run_id: RUN_02589
+    frozen_table_line: 2354
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02589/P13_cycle100_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 6b1e87d3188e7d811b58a95ee51ce568f4758c83a8522dc27e5a4b0663a69145
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02589/P13_cycle100_attempt01/ARCHIVE_RECEIPT.json
+      sha256: ef831cc44707502627b7e4e3ed591d99701cea0ae6d5d1a67b0582031c2ee5ad
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02589/P13_cycle100_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: f62e5413b8d9ea00df02c5f3f7ac2f8e2b7c182918b289bfa0a4f366f0375589
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D27_seed_00/GNSS18.gnss
+        sha256: b64e12dfb94ca5bb21b48c33ec924d086fbfba53944de476ce64df76615d5d46
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02589/P13_cycle100_attempt01/solver/RUN_MANIFEST.json
+      sha256: 1898b85a1a1ce39bb79491255e1f31a28354b1976bab09ae96a0dae47469d713
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D28_seed_00:
+    frozen_run_id: RUN_02688
+    frozen_table_line: 2444
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02688/P13_cycle100_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: ad299ebcfc8c578a6446e2229ce5f1fdc7d300233eeba2b9556bf8f88c0cf362
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02688/P13_cycle100_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 65af66d3e94869abe5a560d08a454ee65573aa7bbc179b3a2252e72e6d793caa
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02688/P13_cycle100_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 84588b335b7e9ca25e6dd43a4173ee87e5ae012e69463859ef5d28ab2a321034
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D28_seed_00/GNSS18.gnss
+        sha256: a10f7179bc66878692cf427c3641cec7b5dbd6e384b6ab7e5c9fb5edb7b4e389
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02688/P13_cycle100_attempt01/solver/RUN_MANIFEST.json
+      sha256: eb222a3a218186d95b6d36787f0e6af978d59234a4c5a90dedd8729afc078639
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D29_seed_00:
+    frozen_run_id: RUN_02787
+    frozen_table_line: 2534
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02787/P13_cycle100_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: c56b143eaca1c884ca4f0dc6e9e83a9a477c2d524179132f54f63d3fc781d719
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02787/P13_cycle100_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 6f7d040f8612749d76ce7497c28a1d761ce1cba2d3dca972154761aa31a4945d
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02787/P13_cycle100_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: ec80c6ef41803af0f54ded04ef18250f6aa2e2ce8afc0c61191d7253df2e3ada
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02787/P13_cycle100_attempt01/solver/RUN_MANIFEST.json
+      sha256: 1509a2c2f60665469dd0ba67e3891397d015c0dca479db72c8966a50d117713b
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D30_seed_00:
+    frozen_run_id: RUN_02886
+    frozen_table_line: 2624
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02886/P13_cycle110_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 1d8bed544dd9bae023a8dbe3f119e2577f700d51faa8e10f42f59ca3d0df9514
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02886/P13_cycle110_attempt01/ARCHIVE_RECEIPT.json
+      sha256: baa2c2eaf96df0cd2a7ebea7b87bfbe35cf610b26ab6f45e0d8a47a652b98651
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02886/P13_cycle110_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: c67eca81e336c7efe21f73aaf93c1bc2b2125ace37c4618dd0805d439e6209cc
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D30_seed_00/GNSS18.gnss
+        sha256: 2e581467f678a96bf4897599ec53e07142806cc6ece206ade4d00db7dbc7ab6c
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D30_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 22d6d2726b07c4121cd7d72e4d9030099df87c27d9b96980f05debbd530133d5
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02886/P13_cycle110_attempt01/solver/RUN_MANIFEST.json
+      sha256: 11ffc550a43fdb0ee5cb856ec0abba98cfc2e8bb3594bdcf6876a05d383a8a65
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D31_seed_00:
+    frozen_run_id: RUN_02985
+    frozen_table_line: 2714
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02985/P13_cycle110_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 0dc7ab2c4eddfe1602f91e715a62405ab1903b43c3c3e827e9f86259ca5a9682
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02985/P13_cycle110_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 1b7e2107d9d6c9ae479ebe25a43796eb1a9daa61331e6a80c4631665e0872db8
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02985/P13_cycle110_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 1be0e0a338ec4c39f558cda144cf7ee7ea3d516d1fb9d073fabdc9c3b7d82afb
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D31_seed_00/GNSS18.gnss
+        sha256: 480bddce92e4fbebfa136060dd072d4643a47de14ca3450e510d4dfdaf1e4890
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D31_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 76f02209f0522d44d9ad4e2484b7495dba625697e01c90c6a00b5304e40001c4
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_02985/P13_cycle110_attempt01/solver/RUN_MANIFEST.json
+      sha256: 8a56778e69d3fd3c79eb75d75ac6b54e854cbd0d725e62d79533085ba2225d44
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D32_seed_00:
+    frozen_run_id: RUN_03084
+    frozen_table_line: 2804
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03084/P13_cycle120_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 1a18e51be493536af3abb4e0c1e0bc1e5a2233024e58625ca8e67238a87b580f
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03084/P13_cycle120_attempt01/ARCHIVE_RECEIPT.json
+      sha256: da4ff169c437ac749354dfcf5c814e19a49b2182489fa968ac0635c786380c33
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03084/P13_cycle120_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 75f426d548236ac255dd8bd1983db5ad87915525f132d62ab165e2b363c94088
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D32_seed_00/GNSS18.gnss
+        sha256: ec54ee7c59fe2894b867aab04ca73999709ed2e34af91b0f58997bb4f8d3031c
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D32_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: a861f5b4c61f6fce449be99fd6965b57ac5ceee4c08e9e48a0b994a03c998951
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03084/P13_cycle120_attempt01/solver/RUN_MANIFEST.json
+      sha256: fafbcb5a560e3da77ae09ff15bd395892cc529929d600fb29e2d584b435108a5
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D33_seed_00:
+    frozen_run_id: RUN_03183
+    frozen_table_line: 2894
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03183/P13_cycle120_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 5f476f1d4243f933ab5758dbcd60584c778b8d4756cd75df9417ca22c3a8b377
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03183/P13_cycle120_attempt01/ARCHIVE_RECEIPT.json
+      sha256: dfe25acee03bb7f1cdb9f6b24fc96530ce9dba7dea3c58ad5db6c30685943e50
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03183/P13_cycle120_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 4af865b9cf57861b48aba76aa39aaf8bb02a98699063bbf65062d2bde410f95f
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D33_seed_00/GNSS18.gnss
+        sha256: e40fbe547a13de784f079bcf8737b6f783a9390ab021434b7363960c15157900
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D33_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: e1349ec6dbaf9fea058be98ebca981ca28d657c92871f88e01831c30ccb487bf
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03183/P13_cycle120_attempt01/solver/RUN_MANIFEST.json
+      sha256: 8f3caa9819abf803bf1ba10b11d8dd319fa8b23fb4a2a540ec005f371b4bf5b2
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D34_seed_00:
+    frozen_run_id: RUN_03282
+    frozen_table_line: 2984
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03282/P13_cycle120_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 78f09bfba406605ac80105ad036c867d9ec296e18d6690eb847575eb6bfabf1e
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03282/P13_cycle120_attempt01/ARCHIVE_RECEIPT.json
+      sha256: bde9aad23ee26117d3ac8092bb1c54b8f9ef29ffd0fd082aacbbccd4d2409812
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03282/P13_cycle120_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 7c60c943a9155ab8e840dc97beb1729b75115e0994136403693aa8df8c9d6593
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D34_seed_00/GNSS18.gnss
+        sha256: f076a819178659e5f362c47733260d4d990d77a6d1310005ec9948235720272f
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D34_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: c204cd4dc9d85462031fc7231ebaceb73e535965bea138c17ab4c0412cff4997
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03282/P13_cycle120_attempt01/solver/RUN_MANIFEST.json
+      sha256: f4408a8f38c4048c6846f9f29e72010448880b894168cc82aeb84159fb9c5271
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D35_seed_00:
+    frozen_run_id: RUN_03381
+    frozen_table_line: 3074
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03381/P13_cycle130_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 3ef8cd425e516586f209ad9ce97ec34354054653b0036a6bcf538d0d293edd16
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03381/P13_cycle130_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 54c2b355f1572f16491ab478bc103417909dea05265867412610e9075d1ace35
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03381/P13_cycle130_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 0b9fb46653ed5afec3d3f5746f1f55c90b6962975e6d4f74ad292e9add62a01a
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D35_seed_00/GNSS18.gnss
+        sha256: 6ece0f1d001cfaa2cd1576b9de41638edb5b4dd4c9a752b00d13646b796017dd
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D35_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 42e2a1f2013cf8139353e058fcf203e14ad4b6194d2d7206db432756e9952d14
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03381/P13_cycle130_attempt01/solver/RUN_MANIFEST.json
+      sha256: 31fa6e26fbe8a8e1d5e67e31b2a454933816d4ad9de1e17c7fef969396479a68
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D36_seed_00:
+    frozen_run_id: RUN_03480
+    frozen_table_line: 3164
+    frozen_config: &id002
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03480/P13_cycle130_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: f85b51edf767fd54bd549ec7cceb05d381d530b3fc58c250a5b50e7889c9352a
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03480/P13_cycle130_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 7b6ac4969eadafcbcf903f1d204346e669a8a9ca8c6eeb32bef2ce6e4aa66e6e
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03480/P13_cycle130_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 359bb014a1dae0a315d19994660ae15c5fea21b1e9094cefbacee0b7cdbd6fd8
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D36_seed_00/GNSS18.gnss
+        sha256: 430a68233eed44ed5730c396f750d26c5863fc159ae1e483c0f8b909a007ad12
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo: &id001
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03480/P13_cycle130_attempt01/solver/RUN_MANIFEST.json
+      sha256: c7a2fe43d42b6aafc851ec8161bedadb49e19161067e0a5c09c0ae2fb83fc4f1
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D37_seed_00:
+    frozen_run_id: RUN_03579
+    frozen_table_line: 3254
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03579/P13_cycle130_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 66523c87d1c105a795703342744c34f9a0f1fcbf4599b94a419b56bd3881840f
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03579/P13_cycle130_attempt01/ARCHIVE_RECEIPT.json
+      sha256: e9522ce62057676f2da90a414a53d5e250f78caa21d92e68f1021e6b1eec3823
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03579/P13_cycle130_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 78dd31d5dee0145dfabe94a35e8dc24797eebc1822d73ab125e09f8a642a21e4
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D37_seed_00/GNSS18.gnss
+        sha256: 196294e3d64b3eb584a87d7f12404c37ce60dbb5f37f40d90b488edc842739c0
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo_status: ABSENT_HISTORICAL_ALL_YAW_REJECTED
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+    frozen_echo: *id001
+    frozen_echo_witness:
+      config: *id002
+      changed_keys:
+      - case_id
+      - run_id
+      - run_label
+      - gnsspath
+      - outputpath
+      classification: DERIVED_EXPECTED_OPTIONS_FROM_BYTE_IDENTICAL_CONFIG
+  D38_seed_00:
+    frozen_run_id: RUN_03678
+    frozen_table_line: 3344
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03678/P13_cycle140_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 439440554e2af0d0b679903e98e45b2feb3649a44a7c13065bb8b37596d893f4
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03678/P13_cycle140_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 473e3ce22db4e30b044f82cd3e9bfb82b32d36274da47d0ef17b67ef884c13d9
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03678/P13_cycle140_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 902c5baf4524c7babebea522d2d94963a87624ce15b8d5cfd51ce713d4af3f86
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D38_seed_00/GNSS18.gnss
+        sha256: 7ba2141486a670a16c83b3dd2cd43083bf865c838728e01a9a3edf3c1aff2fad
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D38_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: a722ba18a1c4a45ff42a3ced1d41bc3e1d68d2f661f3c05029c0bae456a6b7ad
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03678/P13_cycle140_attempt01/solver/RUN_MANIFEST.json
+      sha256: 24f908974a69653f295130f2b3908d9a11e9ec3e605c230f65997e46a3595467
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D39_seed_00:
+    frozen_run_id: RUN_03777
+    frozen_table_line: 3434
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03777/P13_cycle140_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: c9a46a19b6bd1139cdb533da12f7d38a37aab0eb1698ab7d79e8a94de971be30
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03777/P13_cycle140_attempt01/ARCHIVE_RECEIPT.json
+      sha256: bd5cf67156211afb219ce6de0bf0a048801940774235af849b0897697acb01a5
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03777/P13_cycle140_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 04f9d2b8df2bdb829d5b5182dbebae6497a0ffc67f8ba596352fcab5b78ee9b9
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D39_seed_00/GNSS18.gnss
+        sha256: 58952d772a5aac157676ba683dc044174e4309827ef5a72ede1552a015594c32
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D39_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 8197878b11785618d831ac29075ea879b880abb6eccd4e67a304d3decc262cec
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03777/P13_cycle140_attempt01/solver/RUN_MANIFEST.json
+      sha256: 9d5425feeaeef892000c9955c30c3ea11ea8c582b661e364601467df54324a45
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D40_seed_00:
+    frozen_run_id: RUN_03876
+    frozen_table_line: 3524
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03876/P13_cycle140_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 28a901c18852fc5df073bb559992a0cde536e3b92ed4b8bb9f6a67ec0d6945fe
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03876/P13_cycle140_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 4bf4d88eb466c4d417de4b12cd8d70ed34b719e6bf60fbf977b0dbe6e2f60e71
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03876/P13_cycle140_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 400ae04fc531359ed7024c1fdafe494a4bbe4a4075b460f241e7080679b41fde
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03876/P13_cycle140_attempt01/solver/RUN_MANIFEST.json
+      sha256: bbaf7e21b67905a238aa8800ffa91f4c0044d555131008399448a4b6b2d822d1
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D41_seed_00:
+    frozen_run_id: RUN_03975
+    frozen_table_line: 3614
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03975/P13_cycle150_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 11b98350404b758af38b26c88c6520daf07aabcb7c13bc86d2708c275eb6f0ba
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03975/P13_cycle150_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 35eac4f0e905abcaf17d066e81fb4199c8148cd7f816e952c90f1db4f1665cba
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03975/P13_cycle150_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 20c54eddc729d81b51397fe2888c4192eb899cbb21e67d28c08b229ebe8f71af
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D41_seed_00/GNSS18.gnss
+        sha256: 2e788d02b7aa257d36997b28a8f11a8f7ce5052c7446ed13450a47fa269ac037
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D41_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 07947f28cdbdc3441c5b5068dd8daefc6dfb2505a8ff139a7ffd44f007691d61
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_03975/P13_cycle150_attempt01/solver/RUN_MANIFEST.json
+      sha256: b2da56f8727153816fb886229d5f399baed3a0afda31b210e82e5424f3cf26bb
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D42_seed_00:
+    frozen_run_id: RUN_04074
+    frozen_table_line: 3704
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04074/P13_cycle150_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: f975d8d8b4509a93e6af19291ef97e134e423cf9f0808aab561f9ef8bf267b19
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04074/P13_cycle150_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 7fb4d57c1628002b7256be510d218e18737f64beba8c29c28ff1ca1f555bf845
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04074/P13_cycle150_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 550fa2c5bb36916d5f4e121b8dd43b55c8d125ec5610bec4854f75bb52b0aa97
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D42_seed_00/GNSS18.gnss
+        sha256: 5defbce31065cbdbabae24a14544c73ad59fddb351d909ad2bb32c40f7bc61f5
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04074/P13_cycle150_attempt01/solver/RUN_MANIFEST.json
+      sha256: 339b2b6bf4607de5c7e69276f7b34279d6c1ce7d19bdbdc17a48168191a0030e
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D43_seed_00:
+    frozen_run_id: RUN_04173
+    frozen_table_line: 3794
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04173/P13_cycle150_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 36290568a8090614f8330177140a42b19725b8ac15eb03e255b61bee22d2ae1a
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04173/P13_cycle150_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 78324980886a14b7950a9cd7e80e2bd157b1ee83bc7a63e383415ce41e85cfb0
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04173/P13_cycle150_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: dcf9af0f25b8fc8aa55c5e7034c437c1a4660d374174f5cf88e23f6391dfe1d2
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D43_seed_00/GNSS18.gnss
+        sha256: 856f6c89e787668b9d9d0a78e95178a0e1048035384ebbfecc2d1620a7a634b8
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04173/P13_cycle150_attempt01/solver/RUN_MANIFEST.json
+      sha256: 3cf05ddfcbb84467ad6cefd110e7deba03b1a6ce1bee4217b06b1a138b6656ac
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D44_seed_00:
+    frozen_run_id: RUN_04272
+    frozen_table_line: 3884
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04272/P13_cycle160_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 291e3f4e03b25118ffec59d9749d33e652c906d25ace7b9504d7e379a043a633
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04272/P13_cycle160_attempt01/ARCHIVE_RECEIPT.json
+      sha256: b66a2999b7dd0bd20a38bfdf96b42ecf02862343ca4a6822718790f07208cb6a
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04272/P13_cycle160_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: ff4f7cf70f33c23d1bef7463a6f27c50c0e08153ed62bf99f5a75de5b35f9d63
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D44_seed_00/GNSS18.gnss
+        sha256: 1d99893d91fdb1205cdb018162120292f355f42294a1cd5772fcc573e11e6d4f
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04272/P13_cycle160_attempt01/solver/RUN_MANIFEST.json
+      sha256: 715777ea744c5d4e9ebdf87d7ec7eac464acfe9f2e37f7aa011ed55bb2a73631
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D45_seed_00:
+    frozen_run_id: RUN_04371
+    frozen_table_line: 3974
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04371/P13_cycle160_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: d2d8013f63e83a6f49a0ab43547c35d72f2f3492ff531f9f874b039eafe14591
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04371/P13_cycle160_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 401a0838d6496de23ab7a2c6ad8c65d378a03e9cddb0d5e852da48434b88ba6b
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04371/P13_cycle160_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: a71f729fe3b14e206f7dcb66d5b3fc69ee020ea33d8bed637e09f996389d0f42
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D45_seed_00/GNSS18.gnss
+        sha256: a54f358b63215ad35d06e947f97f8d9fb2e4fe9a251937d2d8faf35c753147d5
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04371/P13_cycle160_attempt01/solver/RUN_MANIFEST.json
+      sha256: 28f0c3e64eb54ad910cefbc01171395339a1fe764d7e46f404e0557052fc6b9c
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D46_seed_00:
+    frozen_run_id: RUN_04470
+    frozen_table_line: 4064
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04470/P13_cycle160_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 3bb4942dd106c2784e48656ced86a1459782f83b8ed753cdb6855137211daf35
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04470/P13_cycle160_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 1a2ff3989ae41d95587e8835440fdc5516c22ffa0a26c9c39d71415f3b2be391
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04470/P13_cycle160_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 025a4cdebb92e2c699d4ae8ddd8de5ed1185264948bb544cd697c4b9adb431bb
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D46_seed_00/RAW_DOPPLER.csv
+        sha256: 3193ccb0233437d3539bbd6021cdad235a91b3c0bca2b7368e50f5814f3ca382
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04470/P13_cycle160_attempt01/solver/RUN_MANIFEST.json
+      sha256: 8e35ab757d16218c4645d0fffd5f2eccd7bff0c138ea62be2477cde2b4271e31
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D47_seed_00:
+    frozen_run_id: RUN_04569
+    frozen_table_line: 4154
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04569/P13_cycle170_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 98c977b29fbbb544f92ed3d4043bb4fed6c573f740c66645c8daf02e3d24347c
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04569/P13_cycle170_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 44d826382b55087201d0415675d7cb6d58669b76d553e5c84c8211ab10ee88b4
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04569/P13_cycle170_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 0ca2f757b1358ce88a6c41a0f5748d0b67fb12a854449174f05a34e145ae82a6
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D47_seed_00/RAW_DOPPLER.csv
+        sha256: a3d99851a412e892136851da48768bb2bda3ef64e8fc6c8dd3544d0cc941cd9e
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04569/P13_cycle170_attempt01/solver/RUN_MANIFEST.json
+      sha256: 0bd2506bbe05e924f400d45c9123ff0512e0c2b81965b470d4e6d00eba3aea5c
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D48_seed_00:
+    frozen_run_id: RUN_04668
+    frozen_table_line: 4244
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04668/P13_cycle170_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 74e1fec3fddb53b73e791bbf67afc829724cfe510685ce0d881724479cd5e73d
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04668/P13_cycle170_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 3186b1ed267baf3100c9cfb3ad190d42ebfd173386f0010964e742149d31c347
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04668/P13_cycle170_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: cf8fa359a58c81e45a94c5d85beba53515a70820634a797f91dc5a03f10ec53c
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D48_seed_00/RAW_DOPPLER.csv
+        sha256: aa2705e6babdc490cd381a1388390ce2c1eb540c741a1e9b75a212071c6dfc01
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04668/P13_cycle170_attempt01/solver/RUN_MANIFEST.json
+      sha256: 3cedb06a729583d84b9454d51b8ed5ad9fd96792989e0a69c3e5af1c3c425dbe
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D49_seed_00:
+    frozen_run_id: RUN_04767
+    frozen_table_line: 4334
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04767/P13_cycle180_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 58b7afd847534261baf53aefe36ed340b73a73e71e61c1dd5c529720f0938c91
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04767/P13_cycle180_attempt01/ARCHIVE_RECEIPT.json
+      sha256: a37b195e0956ddb7874e9c26fb8064c2c202beb5be5b7c2253b0bcb8b6938254
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04767/P13_cycle180_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 5058af29867a983db42953d739963d87db66d68cfab2373756dfec894e69c677
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D49_seed_00/RAW_DOPPLER.csv
+        sha256: 075484771b545bf3695ee983ff0c19089a8ca3fc801cc2d9aab40e12a7033e8a
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04767/P13_cycle180_attempt01/solver/RUN_MANIFEST.json
+      sha256: 3085e80beddc1e0525627e7c65ea5020b9f66613ab0637a91ccb0da4e49e37c1
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D50_seed_00:
+    frozen_run_id: RUN_04866
+    frozen_table_line: 4424
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04866/P13_cycle180_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 7f1a695bc8ae3857ed73f50fcdd70b422980a71534424ee9cd13a18279783246
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04866/P13_cycle180_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 373692347fe6293b75489f72b0a5931bb706f9abd163e1addda9e9027afbf68b
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04866/P13_cycle180_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 650118c8044125011db6d09ff47a612425a623ee33793675f0638af5c98f22f6
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D50_seed_00/RAW_DOPPLER.csv
+        sha256: 88d262e40da9121098eeba8899bc48f2ed5ccad9d0c92b9359c2e4e1421e0ff2
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04866/P13_cycle180_attempt01/solver/RUN_MANIFEST.json
+      sha256: 544f531e5b78d26d14653eaa08aaf83ef896cb839506741f6862d9970f63dc0d
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D51_seed_00:
+    frozen_run_id: RUN_04965
+    frozen_table_line: 4514
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04965/P13_cycle180_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 73d4c7bebcb21e92d7430b9509edc1eecc193abb8c55d4b8b0cb2b208e115fd3
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04965/P13_cycle180_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 5b5eda5dbbc7be78b3fc62993e88c5e4da0c0037d391382f15fe075fbace46b1
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04965/P13_cycle180_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 3910588e8ae811915ae68e77a3f3af1e3b91bcf795e94b389f4a34fd93c6beba
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D51_seed_00/GO2_ATTITUDE_PRIOR.csv
+        sha256: eed30360a98f44c3b5debdad218171d9c5f44ac8304d5290f42c2bb3ec7d35d0
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_04965/P13_cycle180_attempt01/solver/RUN_MANIFEST.json
+      sha256: b70002372fa9d4dcbea6b21e2379072615a6af592e0827062c85d568df8e70ca
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D52_seed_00:
+    frozen_run_id: RUN_05064
+    frozen_table_line: 4604
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05064/P13_cycle190_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: c7ec7eb987a3b0471b1d781aadc9413b6809f927d7a687fa870b1b3e3fbbb8cc
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05064/P13_cycle190_attempt01/ARCHIVE_RECEIPT.json
+      sha256: d4abbda0376c0a07d351e462d314e01fe5fa2382f05ccb66ea57726ee9edd4d1
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05064/P13_cycle190_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: f9e794042bb0b48088fd8df2daa79580411168c0eba2c6294a5c12c192cb00ad
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D52_seed_00/GO2_ATTITUDE_PRIOR.csv
+        sha256: 64fec75a459f3b229367c9630ccd9fc94d6f7189c60d27aff5810280d74ef3c9
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05064/P13_cycle190_attempt01/solver/RUN_MANIFEST.json
+      sha256: f8e018b8d15d2e9ff8a9edafc4c50d562953af9f33a520f69c737326630ce1f0
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D53_seed_00:
+    frozen_run_id: RUN_05163
+    frozen_table_line: 4694
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05163/P13_cycle190_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 087feb048d0a669fb2f367f9ca37bf511ac862bab51758219d6ef21a71572bec
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05163/P13_cycle190_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 18d094ea290d234476ba840c65e15c35577148d3ca5ba961f6e464f6bc07fad9
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05163/P13_cycle190_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: c61856594a448cde4768b0a12b160c3fa85bd76085766d658a8ac703c61f2123
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D53_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 4a88af49643aa0c015ed115821fb459a3739f990a786a1a4351c4478c304810d
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05163/P13_cycle190_attempt01/solver/RUN_MANIFEST.json
+      sha256: 1203de950e17557237606c2a960ab40c4b7cfc5d0fb1f05ac73f2dcc8aae9cb9
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D54_seed_00:
+    frozen_run_id: RUN_05262
+    frozen_table_line: 4784
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05262/P13_cycle190_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 8e3fcf5ffb9f3370659e76b8d00392fb6543b431ce11d23b42ad76e79248d1f4
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05262/P13_cycle190_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 7ee9783479ec8a26e75d73f0896c933998882cd61952680317c6d578564ecd21
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05262/P13_cycle190_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 1d852eeadd46dee02212ca66f593ed0f1bfad77a38351425f701702cfb576adc
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D54_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: b6fbdfae2c5e0862624a1763bcb1f9054d68159bb3fb95e27e3bb8c3c6138976
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05262/P13_cycle190_attempt01/solver/RUN_MANIFEST.json
+      sha256: 450252d8145bf14e30d2ec6a9a72aa2cd6c5fdb80b9a1e7b094cf1c7b5bfe78f
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D55_seed_00:
+    frozen_run_id: RUN_05361
+    frozen_table_line: 4874
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05361/P13_cycle200_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 63ca18647113d73072d92ffdfd12f47d3a7db522c2b656255a1b3eb3d8399607
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05361/P13_cycle200_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 4db0c7e8f35ab860fddde9d20dd19112c4fb9a213b1684d99e71e3ddc398a971
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05361/P13_cycle200_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: ec6fbe7ecbe223416badf0a4a1053328b92722f4dddcbf7d28e376541a18e7d8
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05361/P13_cycle200_attempt01/solver/RUN_MANIFEST.json
+      sha256: dac1fe01006ef30c6241019ec345ce1badbf1385a07d87107982fb061c74d95a
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D56_seed_00:
+    frozen_run_id: RUN_05460
+    frozen_table_line: 4964
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05460/P13_cycle200_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 5c0a41b1e140fa2577405238dab0f398f8a747895536c4b6428f64cdce41029f
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05460/P13_cycle200_attempt01/ARCHIVE_RECEIPT.json
+      sha256: dc3ec6b3eec046e55e0c30a9462606398295642619d155997cc926b56fa90594
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05460/P13_cycle200_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 785596a9ce28d2fe4c54bfeaca606e2fe51101264fe419d261967aa0f83972f3
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GNSS18.gnss
+        sha256: b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05460/P13_cycle200_attempt01/solver/RUN_MANIFEST.json
+      sha256: 5da5b0ac3d91a310f43f1779d64fc69ae63cb550f66f0795251c69e4f135eb49
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D57_seed_00:
+    frozen_run_id: RUN_05559
+    frozen_table_line: 5054
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05559/P13_cycle200_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: ab753c63278254f2d7a93859f8965d0bb6723a71fdb18256affae80524068f09
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05559/P13_cycle200_attempt01/ARCHIVE_RECEIPT.json
+      sha256: f1e98ccc2655afcd08d89b5955001829657f88f660803a59758c93f0ec000134
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05559/P13_cycle200_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 2462dedf0eeaac7f402229a11d11ac4a18999dc09fda67ad48acf08df8de9854
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D57_seed_00/GNSS18.gnss
+        sha256: 955a9e732f03fd1075ee6f71936d8a0a39752a917f706806a0015224e263c276
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D57_seed_00/GO2_ATTITUDE_PRIOR.csv
+        sha256: 1699c8b7338e0293d718ff2e8fe4ba6c4d8f43e4803a50f854cad11a10d7f9b2
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D57_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: d1e0c558282b5d3e67ea02aa01eadfb0374d79d7bf2e083b1bf01f67aa16a7d7
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D57_seed_00/RAW_DOPPLER.csv
+        sha256: 16497e93a5d38ee006c639922efa200209fe340f8961697a1c1c8b6f73cd8bcf
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05559/P13_cycle200_attempt01/solver/RUN_MANIFEST.json
+      sha256: 52f4f674bdd8d472579f741a6345f554c4ff565b6d2e52ea60d42bef4bd62626
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D58_seed_00:
+    frozen_run_id: RUN_05658
+    frozen_table_line: 5144
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05658/P13_cycle210_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 7a45f34b8674f26185bfedd2c4a6a0cc8d4b0b2ed68a5c8f01db511ff0c59600
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05658/P13_cycle210_attempt01/ARCHIVE_RECEIPT.json
+      sha256: c07a1d123b693a864989bdb177545ee9c2234d5ab5c13fca9ea766e3b3315844
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05658/P13_cycle210_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 1c8f063dbb5ad786cabdad220e70048f060b75353156a7c808273ac88f311c00
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D58_seed_00/GNSS18.gnss
+        sha256: 39a3d71e0c8ee0bef16cc643caabc03ebdf64642582a28d7d6dfeddcabed310d
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D58_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: c13c41955d7fcb1df26f7fa263918d5989dbf82553bf6e0bf5caf0127f7b8916
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv
+        sha256: 847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05658/P13_cycle210_attempt01/solver/RUN_MANIFEST.json
+      sha256: 8b6878785be272aa2f976302bc527ba126f74c0e50b6ac7da58832241e96bda3
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D59_seed_00:
+    frozen_run_id: RUN_05757
+    frozen_table_line: 5234
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05757/P13_cycle210_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 70d17b4d99b9ae981f7acf5d7427360183d07d76ba6e662691310c7c78e19569
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05757/P13_cycle210_attempt01/ARCHIVE_RECEIPT.json
+      sha256: 011ef8baaf12c63461fb786174d5321568dd20469d1aafe60765741943f04e1d
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05757/P13_cycle210_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: edfee1676841d1957573981a294866753f67e2ce35988dffd54aef811fd2858c
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D59_seed_00/GNSS18.gnss
+        sha256: 18a349c6d122820244c40bcf78ff92b9221060ceb5a04b1c115b2194402e343c
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D59_seed_00/RAW_DOPPLER.csv
+        sha256: 88d262e40da9121098eeba8899bc48f2ed5ccad9d0c92b9359c2e4e1421e0ff2
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05757/P13_cycle210_attempt01/solver/RUN_MANIFEST.json
+      sha256: efd9057163f0cf5e06f90b5ff80f533c668c4ce67dbaa1932a3ce1275c123348
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true
+  D60_seed_00:
+    frozen_run_id: RUN_05856
+    frozen_table_line: 5324
+    frozen_config:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05856/P13_cycle210_attempt01/solver/PROTOCOL_V21_RUNTIME_CONFIG.yaml
+      sha256: 9801f8458a2ff20ba27dde24852616045424904dd2912e1eebc9c4833c5b4374
+    archive_receipt:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05856/P13_cycle210_attempt01/ARCHIVE_RECEIPT.json
+      sha256: a9b5f1483707b3aee18aa757878de82082f419fd8be33b9466d12ea949c8d7d0
+    terminal:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05856/P13_cycle210_attempt01/solver/P13_RUN_TERMINAL.json
+      sha256: 0c107443a7a4bf9b5333b20ee1694fe4b2db783f787f2980746b6321dfa7450b
+    frozen_providers:
+      gnsspath:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D60_seed_00/GNSS18.gnss
+        sha256: e9634e61d9b4da2eea095261f11cfad7d488757a5f442e2074202e6d8af6fc3a
+      go2_attitude_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv
+        sha256: e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e
+      go2_horizontal_velocity_prior_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D60_seed_00/GO2_HORIZONTAL_VELOCITY_PRIOR.csv
+        sha256: 401c8a74b5299b4866f864ef75bd64ce519b547b2284484342ec79fb3fbc81d9
+      imupath:
+        path: <CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu
+        sha256: 74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647
+      raw_doppler_factor_path:
+        path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_CASE_PROVIDERS/D60_seed_00/RAW_DOPPLER.csv
+        sha256: 014a7a6a531feae55f27298793e4d19edcb79c44bc44e5258e51d99f83fd571b
+    frozen_echo:
+      path: <CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/RETAINED_RUNS/RUN_05856/P13_cycle210_attempt01/solver/RUN_MANIFEST.json
+      sha256: 176480474998cde9ebb409135e09a6aefcdd436f11d1397708c5e5788e9967fc
+    data_roles:
+      data_mode: semisynthetic
+      synthetic_data_used: false
+      semisynthetic_data_used: true
+      controlled_degradation_applied: true

@@ -1,0 +1,30 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "PYTHONPATH=src",
+    "TMPDIR=/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN9_EXTERNAL_COMPARISON/HX03R2",
+    "OPENBLAS_NUM_THREADS=1",
+    "OMP_NUM_THREADS=1",
+    "MKL_NUM_THREADS=1",
+    "strace",
+    "-yy",
+    "-s",
+    "4096",
+    "-e",
+    "trace=openat,execve",
+    "-o",
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX03R2_AUDIT_REEVAL/00_CONTROL/MATRIX_CONTROLLER_MAIN_R2.strace",
+    "python3",
+    "scripts/paper_rebuild/hx03r2_execute.py",
+    "--phase",
+    "matrix",
+    "--workers",
+    "6"
+  ],
+  "cwd": "/home/kaiwen/research/LegSA-GINS-WORKTREES/clean3-math-repair",
+  "workers": 6,
+  "native_calls": 0,
+  "remaining_evaluation_slots": 486,
+  "script_sha256": "5a61013caa927015289a642c3f98443e811791c6b58c85717b48e6df4cb98d6a"
+}
