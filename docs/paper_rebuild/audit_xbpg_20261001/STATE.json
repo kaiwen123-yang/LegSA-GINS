@@ -1,10 +1,22 @@
 {
   "task": "AUDIT_XBPG_20260105_20261001",
   "base_commit": "eb3cbed314693358c7c38442b6fbbb7afcf0342e",
-  "status": "IN_PROGRESS",
-  "completed": ["verified_worktree_and_raw_presence", "isolated_branch", "code_inventory"],
-  "active": ["native_semantic_review_and_tests", "four_sequence_full_stream_scan", "formal_identity_and_python_chain"],
-  "next": "Freeze input-qualified exploration protocol before reference performance evaluation",
+  "status": "IN_PROGRESS_SUBSTANTIVE_RESULTS",
+  "completed": [
+    "verified_source_and_frozen_identities",
+    "port_core_full_semantic_review",
+    "native_actual_target_build_and_counterexamples",
+    "88_raw_file_full_scan",
+    "protocol_committed_before_real_execution",
+    "four_RTK_and_four_RD_full_window_attempts",
+    "retained_output_validation_and_four_raster_QA"
+  ],
+  "active": [
+    "remaining_cpp_semantic_review",
+    "raw_gnss_semantic_review",
+    "consolidated_findings_and_exact_coverage"
+  ],
+  "next": "Merge semantic receipts incrementally; finalize reproducible partial audit with explicit remaining queue",
   "formal_solver_modified": false,
   "frozen_result_modified": false,
   "literature_reproduction_complete": false,

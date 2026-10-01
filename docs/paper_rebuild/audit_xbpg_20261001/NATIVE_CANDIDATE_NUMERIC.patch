@@ -1,0 +1,28 @@
+--- a/cpp/legsa_v23_port_core/src/common/types.cpp
++++ b/cpp/legsa_v23_port_core/src/common/types.cpp
+@@ -19,0 +20,3 @@
++  if (row >= rows || col >= cols) {
++    throw std::out_of_range("AUDIT_MATRIX_INDEX_OUT_OF_RANGE");
++  }
+@@ -23,0 +27,3 @@
++  if (row >= rows || col >= cols) {
++    throw std::out_of_range("AUDIT_MATRIX_INDEX_OUT_OF_RANGE");
++  }
+--- a/cpp/legsa_v23_port_core/src/common/rotation.cpp
++++ b/cpp/legsa_v23_port_core/src/common/rotation.cpp
+@@ -11,0 +12 @@
++#include <stdexcept>
+@@ -175,0 +177,6 @@
++  if (!std::isfinite(angle_rad)) {
++    throw std::domain_error("AUDIT_NONFINITE_ANGLE");
++  }
++  if (std::fabs(angle_rad) > 16.0 * kPi) {
++    angle_rad = std::fmod(angle_rad, 2.0 * kPi);
++  }
+@@ -185,0 +193,6 @@
++  if (!std::isfinite(angle_rad)) {
++    throw std::domain_error("AUDIT_NONFINITE_ANGLE");
++  }
++  if (std::fabs(angle_rad) > 16.0 * kPi) {
++    angle_rad = std::fmod(angle_rad, 2.0 * kPi);
++  }

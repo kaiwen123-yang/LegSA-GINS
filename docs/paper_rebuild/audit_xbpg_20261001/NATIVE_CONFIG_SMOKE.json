@@ -1,0 +1,181 @@
+{
+  "data_mode": "synthetic",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "post_hoc": true,
+  "real_data_open_count": 0,
+  "reference_open_count": 0,
+  "purpose": "real config/file-loader/runtime integration and scheduling; not accuracy",
+  "summaries": [
+    {
+      "label": "all_channels",
+      "version": "current",
+      "returncode": 0,
+      "config_sha256": "7ba1cab332eb182198bd0212fc63165c5074fefa9152ee72d648a1b2d13c8af4",
+      "binary_sha256": "cbf554baf9c83490e40b207b97f04ef77f51d9962f7bce463f1e644416ef789e",
+      "manifest": {
+        "data_mode": "synthetic",
+        "synthetic_data_used": true,
+        "semisynthetic_data_used": false,
+        "propagation_count": 100,
+        "measurement_update_count": 10,
+        "position_update_count": 10,
+        "receiver_velocity_update_count": 10,
+        "dual_yaw_update_count": 10,
+        "raw_doppler_update_count": 10,
+        "go2_roll_pitch_update_count": 10,
+        "go2_horizontal_velocity_update_count": 10,
+        "source_aware_evaluation_count": 60,
+        "cov_health_status": "PASS"
+      },
+      "output_rows": 100,
+      "finite_rows": 100,
+      "first_output_time": "1000.0100000000",
+      "last_output_time": "1001.0000000000"
+    },
+    {
+      "label": "all_channels",
+      "version": "frozen",
+      "returncode": 0,
+      "config_sha256": "7ba1cab332eb182198bd0212fc63165c5074fefa9152ee72d648a1b2d13c8af4",
+      "binary_sha256": "96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c",
+      "manifest": {
+        "data_mode": "synthetic",
+        "synthetic_data_used": true,
+        "semisynthetic_data_used": false,
+        "propagation_count": 100,
+        "measurement_update_count": 10,
+        "position_update_count": 10,
+        "receiver_velocity_update_count": 10,
+        "dual_yaw_update_count": 10,
+        "raw_doppler_update_count": 10,
+        "go2_roll_pitch_update_count": 10,
+        "go2_horizontal_velocity_update_count": 10,
+        "source_aware_evaluation_count": 60,
+        "cov_health_status": "PASS"
+      },
+      "output_rows": 100,
+      "finite_rows": 100,
+      "first_output_time": "1000.0100000000",
+      "last_output_time": "1001.0000000000"
+    },
+    {
+      "label": "all_gnss_invalid_aux_available",
+      "version": "current",
+      "returncode": 0,
+      "config_sha256": "1f16351f05bff1216c245ae69626d0f6092a8d293d2b8a909b413433e0000d6b",
+      "binary_sha256": "cbf554baf9c83490e40b207b97f04ef77f51d9962f7bce463f1e644416ef789e",
+      "manifest": {
+        "data_mode": "synthetic",
+        "synthetic_data_used": true,
+        "semisynthetic_data_used": false,
+        "propagation_count": 100,
+        "measurement_update_count": 0,
+        "position_update_count": 0,
+        "receiver_velocity_update_count": 0,
+        "dual_yaw_update_count": 0,
+        "raw_doppler_update_count": 0,
+        "go2_roll_pitch_update_count": 0,
+        "go2_horizontal_velocity_update_count": 0,
+        "source_aware_evaluation_count": 0,
+        "cov_health_status": "PASS"
+      },
+      "output_rows": 100,
+      "finite_rows": 100,
+      "first_output_time": "1000.0100000000",
+      "last_output_time": "1001.0000000000"
+    },
+    {
+      "label": "all_gnss_invalid_aux_available",
+      "version": "frozen",
+      "returncode": 0,
+      "config_sha256": "1f16351f05bff1216c245ae69626d0f6092a8d293d2b8a909b413433e0000d6b",
+      "binary_sha256": "96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c",
+      "manifest": {
+        "data_mode": "synthetic",
+        "synthetic_data_used": true,
+        "semisynthetic_data_used": false,
+        "propagation_count": 100,
+        "measurement_update_count": 0,
+        "position_update_count": 0,
+        "receiver_velocity_update_count": 0,
+        "dual_yaw_update_count": 0,
+        "raw_doppler_update_count": 0,
+        "go2_roll_pitch_update_count": 0,
+        "go2_horizontal_velocity_update_count": 0,
+        "source_aware_evaluation_count": 0,
+        "cov_health_status": "PASS"
+      },
+      "output_rows": 100,
+      "finite_rows": 100,
+      "first_output_time": "1000.0100000000",
+      "last_output_time": "1001.0000000000"
+    }
+  ],
+  "calls": [
+    {
+      "label": "all_channels",
+      "version": "current",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.013580717999957415
+    },
+    {
+      "label": "all_channels",
+      "version": "frozen",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.013680636000117374
+    },
+    {
+      "label": "all_gnss_invalid_aux_available",
+      "version": "current",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.010827170000084152
+    },
+    {
+      "label": "all_gnss_invalid_aux_available",
+      "version": "frozen",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.010645898999882775
+    }
+  ],
+  "comparisons": [
+    {
+      "label": "all_channels",
+      "file": "LegSA_PORT_NAV.nav",
+      "byte_identical": true
+    },
+    {
+      "label": "all_channels",
+      "file": "LegSA_PORT_STD.csv",
+      "byte_identical": true
+    },
+    {
+      "label": "all_channels",
+      "file": "EVAL_NAV.csv",
+      "byte_identical": true
+    },
+    {
+      "label": "all_gnss_invalid_aux_available",
+      "file": "LegSA_PORT_NAV.nav",
+      "byte_identical": true
+    },
+    {
+      "label": "all_gnss_invalid_aux_available",
+      "file": "LegSA_PORT_STD.csv",
+      "byte_identical": true
+    },
+    {
+      "label": "all_gnss_invalid_aux_available",
+      "file": "EVAL_NAV.csv",
+      "byte_identical": true
+    }
+  ]
+}

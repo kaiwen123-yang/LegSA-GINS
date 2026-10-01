@@ -1,0 +1,12 @@
+finding_id,severity,evidence_status,source,observed,impact_and_action,evidence_alias
+XB-D01,HIGH,已确认缺陷,trace_SESSION.csv:processed_lat/processed_lon,四段全量processed_lat实际是lon、processed_lon实际是lat，且嵌套标量舍入到1e-8度。,若按字段名取用会交换纬经。仅用源poi_geodetic已核实字段；旧trace文件不修改。,SUMMARY.json:trace_processed_*
+XB-D02,HIGH,条件性风险/近似,trace_SESSION.csv:time; user_io-out-poi_geodetic.csv:header.stamp,trace时间是到达Time，原始测量时刻每个恰重复2次；trace呈约20Hz，实际独立时间支持10Hz。,导出Time未承诺是测量时刻；将trace.time当测量时刻直接评价才会混入重复与传输延迟。应以源header唯一时刻评价并保留重复证据，不能据此判定全局导出bug。,SUMMARY.json:reference_measurement_time
+XB-D03,HIGH,当前不适用,gnss1/2-raw.csv:NAV-PVT; HPPOSECEF,四段双fixed=0；原双位置差向量长度中位11.26/14.10/14.94/35.17m。,不能作为可信机载短基线body-yaw/B3输入，不得以validEcef标记或status fix_type代替载波固定。,SUMMARY.json:carrier_state_pairs
+XB-D04,HIGH,已反证,gnss1/2-raw.csv:NAV-RELPOSNED; gnss1/2-status.csv:rel_pos_*,所有isMoving=false，RELPOS长度中位约2.9km。,refStation相对向量，不是机载GNSS2-GNSS1；禁止用作短基线航向。,S1..S4.json + decoded/S*/gnss*-raw.npz
+XB-D05,HIGH,条件性风险/近似,gnss1/2-raw.csv:RAWX.rcvTow,G1-G2接收历元标签差S1/S2=8ms、S3=7或8ms、S4=7ms；HP/PVT整数iTOW仍可配对。,不能继承BY2同RAWX时刻及+2ms假设，现有native解码器对时间差的行为必须实测。,SUMMARY.json:rawx_g1_minus_g2_ms
+XB-D06,HIGH,证据不足,tf_static.csv; userio-raw.csv:FP_A-TF; EXP01 frame_registry,POI→VRTK确为单位变换；Go2→VRTK及APC杆臂/安装角未绑定到四段。旧0.35m配置明确绑定另一nmb录制。,正式F01等不能复制BY2的lever/安装/初始yaw；阻塞仅限融合与绝对跨POI评价。,S1..S4.json:userio-raw.csv.fpa_tf_distinct_numeric_transforms
+XB-D07,MEDIUM,已反证,xb1..4.txt:stamp/imu_state,唯一stamp实录221–235Hz而非500Hz；gyro/q相邻重复约1.7–2.5%，acc约20.9–24.8%。,消息速率不等于独立IMU更新率，不用固定2ms替代实际dt。,xb1..4.json:time/fields
+XB-D08,MEDIUM,已确认缺陷,xb1..4.txt EOF; S1 gnss2-raw.csv row26305,四个日志各有一个尾残块；S1一行UBX声明payload长度超出实际bytes。,保留拒收行与原因，不补零、不修帧、不伪装完整。,xb*.json:rejects; S1.json:gnss2-raw.csv.rejects
+XB-D09,HIGH,证据不足,xb1..4.txt:stamp; capture provenance,Unix历元与GNSS存在唯一交集，但终端无独立到达时刻、PPS/NTP/采集代码时钟证明。,不能把时间重叠称作硬件同步，不能用参考误差拟合delay后进入主试跑。,SEQUENCE_PAIRING.csv
+XB-D10,MEDIUM,当前不适用,SportModeState foot_position_body/foot_speed_body,高层足端量存在；没有lowstate关节编码器、完整FK或接触估计器输入身份。,允许足端诊断；不能声称完整contact/FK文献复现。,xb1..4.json:fields
+XB-D11,HIGH,条件性风险/近似,user_io-out-poi_*; userio-raw.csv:NOV_B-INSPVAX,参考来自同一GNSS/IMU商业融合并与raw输入共享信息；平滑odometry单列。,所有允许的误差仅reference一致性；不是独立ground truth，参考排序偏差不会自动抵消。,Source documentation and input lineage below

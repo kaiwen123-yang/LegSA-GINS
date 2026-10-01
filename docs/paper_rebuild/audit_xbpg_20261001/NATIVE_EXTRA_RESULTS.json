@@ -1,0 +1,62 @@
+{
+  "data_mode": "synthetic",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "real_data_open_count": 0,
+  "reference_open_count": 0,
+  "post_hoc": true,
+  "test_source_sha256": "2245f348b3e560136f14e87fbce10bf14e358ec3723cb9c51a18ff0efd81ecab",
+  "native_binary_sha256": "905f77deb4aec22092e0a67294d93f1024089d563568cc086b7c7e1724195476",
+  "instrumentation": "same capture-only scratch engine as initial experiment",
+  "calls": [
+    {
+      "label": "compile",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 2.9477477499999623
+    },
+    {
+      "label": "position_steps",
+      "returncode": 0,
+      "stdout": "position_attitude_step_0.010000_maxabs=4.4642556098484221e-06\nposition_attitude_step_0.010000_frobenius_relative=1.6686639546722831e-05\nposition_attitude_step_0.001000_maxabs=2.4673785375961543e-07\nposition_attitude_step_0.001000_frobenius_relative=6.9137500898115049e-07\nposition_attitude_step_0.000100_maxabs=2.3500784149810272e-06\nposition_attitude_step_0.000100_frobenius_relative=7.7185473165890919e-06\nposition_attitude_step_0.000010_maxabs=2.8854615084089597e-05\nposition_attitude_step_0.000010_frobenius_relative=7.5499469962386745e-05\nposition_attitude_step_0.000001_maxabs=0.00012103664429907735\nposition_attitude_step_0.000001_frobenius_relative=0.00040973363277434151\n",
+      "stderr": "",
+      "elapsed_seconds": 0.0029380810000247948
+    },
+    {
+      "label": "async_lever",
+      "returncode": 0,
+      "stdout": "update_time_1.000000_Hphi_frobenius=0.21620823296072703\nupdate_time_1.000000_captured_residual_norm=0.15288230767489089\nupdate_time_1.500000_Hphi_frobenius=0.21620823296072703\nupdate_time_1.500000_captured_residual_norm=0.15281775722455387\nupdate_time_2.000000_Hphi_frobenius=0\nupdate_time_2.000000_captured_residual_norm=0.00031332074349920699\n",
+      "stderr": "",
+      "elapsed_seconds": 0.0016034029999900667
+    },
+    {
+      "label": "hv_sentinel",
+      "returncode": 0,
+      "stdout": "hv_R00_vertical_disabled_false=6\nhv_R00_vertical_disabled_true=8\n",
+      "stderr": "",
+      "elapsed_seconds": 0.0011743909999495372
+    },
+    {
+      "label": "consistency",
+      "returncode": 0,
+      "stdout": "independent_trials=2000\nmeasurement_dof=3\nvelocity_state_dof=3\nungated_mean_NIS=2.9864579332077601\nvelocity_posterior_mean_NEES=3.0468828206184622\nposterior_min_cholesky_pivot=0.20000000000000001\ntheoretical_mean=3\nmean_two_sided_approx_95pct_halfwidth=0.10735362127101256\nposterior_velocity_mean_axis_0=-0.014282136281595173\nposterior_velocity_mean_axis_1=-0.024855479921312498\nposterior_velocity_mean_axis_2=-0.013955356557948039\n",
+      "stderr": "",
+      "elapsed_seconds": 0.08404047099998024
+    },
+    {
+      "label": "saver",
+      "returncode": 0,
+      "stdout": "std_negative_nan_row=0,0,0,1,1,1,1,5.72958,11.4592,17.1887,206265,206265,206265,100000,100000,100000,1e+06,1e+06,1e+06,1e+06,1e+06,1e+06\nnav_writer_open_failure_throws=0\nreported_yaw_std_deg=17.188733853924695\npropagated_euler_yaw_std_deg=17.756775315287896\n",
+      "stderr": "",
+      "elapsed_seconds": 0.0022627590000183773
+    },
+    {
+      "label": "missing_provider",
+      "returncode": 0,
+      "stdout": "missing_rp_roll_pitch_loaded_as_zero=1\nmissing_rp_roll_pitch_native_updates=1\nmissing_formal_rd_vn_ve_vd_loaded_as_zero=1\nmissing_formal_rd_native_updates=1\n",
+      "stderr": "",
+      "elapsed_seconds": 0.001687933999960478
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+path,depth,semantic_lines,purpose,review_note,finding_ids,dynamic_evidence
+src/legsa_gins/input_generation/status_yaw_builder.py,SEMANTIC_REVIEW_COMPLETE,329,status双差/插值/固定符号与offset,PYTHON_INPUT_REVIEW.md,P-IN-04,test_provider_findings.py
+src/legsa_gins/input_generation/imu_txt_builder.py,SEMANTIC_REVIEW_COMPLETE,158,Go2 FLU转FRD、安装、初始gyro均值、rate到increment,PYTHON_INPUT_REVIEW.md,,
+src/legsa_gins/input_generation/ubx_nav_pvt.py,SEMANTIC_REVIEW_COMPLETE,117,NAV-PVT bytes/速度/sAcc/时间解码,PYTHON_INPUT_REVIEW.md,P-IN-01;P-IN-02,test_provider_findings.py
+src/legsa_gins/input_generation/process_data_compat.py,SEMANTIC_REVIEW_COMPLETE,490,status/PVT/IMU合并15列parity provider,PYTHON_INPUT_REVIEW.md,P-IN-03,test_provider_findings.py
+src/legsa_gins/paper_rebuild/clean5_parity/input_audit.py,SEMANTIC_REVIEW_COMPLETE,122,raw frame/身份/输入角色审计,PYTHON_INPUT_REVIEW.md,,
+src/legsa_gins/paper_rebuild/clean6_sensor_v21/providers.py,SEMANTIC_REVIEW_COMPLETE,520,冻结RP/HV弱先验/时间插值/共享源,PYTHON_INPUT_REVIEW.md,,test_provider_findings.py
+src/legsa_gins/paper_rebuild/protocol_v3/providers.py,SEMANTIC_REVIEW_COMPLETE,303,v3 HPPOSECEF航向替换/保持HV状态源,PYTHON_INPUT_REVIEW.md,N23,
+src/legsa_gins/raw_gnss/rtklib_solution_velocity_parser.py,SEMANTIC_REVIEW_COMPLETE,134,原生RD CSV有限性/速度/std标签,PYTHON_INPUT_REVIEW.md,P-IN-05,test_provider_findings.py
+src/legsa_gins/raw_gnss/rtklib_doppler_velocity_provider.py,SEMANTIC_REVIEW_COMPLETE,205,raw RD编译调用/ECEF转NED,PYTHON_INPUT_REVIEW.md,P-IN-06,
+src/legsa_gins/raw_gnss/rtklib_doppler_helper_builder.py,SEMANTIC_REVIEW_COMPLETE,368,生成C helper/RTKLIB源码适配/编译/诊断,PYTHON_INPUT_REVIEW.md,P-IN-06,新XB 4 full native helper calls
+src/legsa_gins/datasets/by2/trace_reference_adapter.py,SEMANTIC_REVIEW_COMPLETE,105,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/external_dual/trace_reference_adapter.py,SEMANTIC_REVIEW_COMPLETE,46,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/protocol_v3/evaluation_process.py,SEMANTIC_REVIEW_COMPLETE,157,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/protocol_v3/runtime.py,SEMANTIC_REVIEW_COMPLETE,349,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/protocol_v3/reporting.py,SEMANTIC_REVIEW_COMPLETE,558,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/protocol_v3/figures.py,SEMANTIC_REVIEW_COMPLETE,495,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/protocol_v3/aggregate_recovery.py,SEMANTIC_REVIEW_COMPLETE,583,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/clean5_parity/evaluation.py,SEMANTIC_REVIEW_COMPLETE,387,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+scripts/paper_rebuild/v3_evaluator_observer/sitecustomize.py,SEMANTIC_REVIEW_COMPLETE,87,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/clean5_sequence/evaluator_capture.py,SEMANTIC_REVIEW_COMPLETE,127,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/clean6_canonical_v2/aggregate.py,SEMANTIC_REVIEW_COMPLETE,418,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/clean6_canonical_v2/evaluation.py,SEMANTIC_REVIEW_COMPLETE,216,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/clean5_parity_p04/evaluation.py,SEMANTIC_REVIEW_COMPLETE,176,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/hext/external_evaluation.py,SEMANTIC_REVIEW_COMPLETE,260,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/hext/hx02_ginav_nav.py,SEMANTIC_REVIEW_COMPLETE,113,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/hext/hx02_hartley.py,SEMANTIC_REVIEW_COMPLETE,228,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/hext/hx02_ginav.py,SEMANTIC_REVIEW_COMPLETE,231,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/horizontal_literature/ginav2021/constants.py,SEMANTIC_REVIEW_COMPLETE,261,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/horizontal_literature/ginav2021/source.py,SEMANTIC_REVIEW_COMPLETE,451,运行/评价/聚合/外部适配；逐函数组见说明,PYTHON_EVALUATION_REVIEW.md,P-EVAL:见说明对应文件,STATIC_ONLY
+src/legsa_gins/paper_rebuild/canonical541/offline_eval_aggregate.py,PARTIAL_SEMANTIC,PARTIAL:230-380;487-665,仅指定行组审查；其余未审,PYTHON_EVALUATION_REVIEW.md,,STATIC_ONLY
+src/legsa_gins/paper_rebuild/hext/t5a_runtime.py,PARTIAL_SEMANTIC,PARTIAL:1-115;586-608,仅指定行组审查；其余未审,PYTHON_EVALUATION_REVIEW.md,,STATIC_ONLY
+src/legsa_gins/paper_rebuild/publication/canonical541_figures.py,PARTIAL_SEMANTIC,PARTIAL:25-67,仅指定行组审查；其余未审,PYTHON_EVALUATION_REVIEW.md,,STATIC_ONLY
+src/legsa_gins/paper_rebuild/publication/protocol_v2_figures.py,PARTIAL_SEMANTIC,PARTIAL:20-95,仅指定行组审查；其余未审,PYTHON_EVALUATION_REVIEW.md,,STATIC_ONLY
+src/legsa_gins/paper_rebuild/publication/protocol_v21_figures.py,PARTIAL_SEMANTIC,PARTIAL:1-90;部分mfig02,仅指定行组审查；其余未审,PYTHON_EVALUATION_REVIEW.md,,STATIC_ONLY
+src/legsa_gins/paper_rebuild/hext/hx02_execution.py,PARTIAL_SEMANTIC,PARTIAL:680-790,仅指定行组审查；其余未审,PYTHON_EVALUATION_REVIEW.md,,STATIC_ONLY

@@ -1,0 +1,321 @@
+{
+  "data_mode": "synthetic",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "real_data_open_count": 0,
+  "reference_open_count": 0,
+  "production_source_modified": false,
+  "post_hoc": true,
+  "patch_sha256": "24997fc767e82fb6d3e08f54463fde1120e5e725b3c5571a7eb4316bab8c0746",
+  "candidate_binary_sha256": "f498eeece34611a4496e13b4a4ccb235e35dbbdf992c1a61ab69f54741ebbb54",
+  "files": [
+    {
+      "path": "cpp/legsa_v23_port_core/src/common/types.cpp",
+      "original_sha256": "5a4de8e7d89f38e597587349df5c627a465248e86c67287e738c849ee781081d",
+      "candidate_sha256": "52610d9897ce87a59894d02487ee1e3fc5acd2254592b0296f06d76d70a92832"
+    },
+    {
+      "path": "cpp/legsa_v23_port_core/src/common/rotation.cpp",
+      "original_sha256": "7dd006b9612a13ee5173b5faa51a0f9bb9d8ccdfcea9c8f1a599269371a01331",
+      "candidate_sha256": "be9db184d1f7cd62461550a1bfe5b5afe4813910aa4c996c77b4b7c923168b54"
+    }
+  ],
+  "normal_angle_sample_count": 20001,
+  "normal_probe_sha256": {
+    "old": "2da4d06e50490d36106f15a263ba703117bec3e4bc5eafd09006e56c93fa1fda",
+    "candidate": "2da4d06e50490d36106f15a263ba703117bec3e4bc5eafd09006e56c93fa1fda"
+  },
+  "normal_probes_byte_identical": true,
+  "full_target_comparison": [
+    {
+      "mode": "synthetic-math",
+      "file": "LegSA_PORT_NAV.nav",
+      "byte_identical": true
+    },
+    {
+      "mode": "synthetic-math",
+      "file": "LegSA_PORT_STD.csv",
+      "byte_identical": true
+    },
+    {
+      "mode": "synthetic-math",
+      "file": "EVAL_NAV.csv",
+      "byte_identical": true
+    },
+    {
+      "mode": "raw-doppler-toy",
+      "file": "LegSA_PORT_NAV.nav",
+      "byte_identical": true
+    },
+    {
+      "mode": "raw-doppler-toy",
+      "file": "LegSA_PORT_STD.csv",
+      "byte_identical": true
+    },
+    {
+      "mode": "raw-doppler-toy",
+      "file": "EVAL_NAV.csv",
+      "byte_identical": true
+    },
+    {
+      "mode": "source-aware-toy",
+      "file": "LegSA_PORT_NAV.nav",
+      "byte_identical": true
+    },
+    {
+      "mode": "source-aware-toy",
+      "file": "LegSA_PORT_STD.csv",
+      "byte_identical": true
+    },
+    {
+      "mode": "source-aware-toy",
+      "file": "EVAL_NAV.csv",
+      "byte_identical": true
+    },
+    {
+      "mode": "quality-state-toy",
+      "file": "LegSA_PORT_NAV.nav",
+      "byte_identical": true
+    },
+    {
+      "mode": "quality-state-toy",
+      "file": "LegSA_PORT_STD.csv",
+      "byte_identical": true
+    },
+    {
+      "mode": "quality-state-toy",
+      "file": "EVAL_NAV.csv",
+      "byte_identical": true
+    },
+    {
+      "mode": "go2-weak-prior-toy",
+      "file": "LegSA_PORT_NAV.nav",
+      "byte_identical": true
+    },
+    {
+      "mode": "go2-weak-prior-toy",
+      "file": "LegSA_PORT_STD.csv",
+      "byte_identical": true
+    },
+    {
+      "mode": "go2-weak-prior-toy",
+      "file": "EVAL_NAV.csv",
+      "byte_identical": true
+    },
+    {
+      "mode": "qa-fallback-toy",
+      "file": "LegSA_PORT_NAV.nav",
+      "byte_identical": true
+    },
+    {
+      "mode": "qa-fallback-toy",
+      "file": "LegSA_PORT_STD.csv",
+      "byte_identical": true
+    },
+    {
+      "mode": "qa-fallback-toy",
+      "file": "EVAL_NAV.csv",
+      "byte_identical": true
+    }
+  ],
+  "limitations": [
+    "candidate only; not installed",
+    "Matrix allocation overflow and inverse not repaired",
+    "Go2/FGO/runtime duplicate wrappers not repaired",
+    "exception classification in higher Python controllers not executed",
+    "no real inputs or performance evaluation"
+  ],
+  "calls": [
+    {
+      "label": "configure",
+      "returncode": 0,
+      "stdout": "-- The CXX compiler identification is GNU 11.4.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring done\n-- Generating done\n-- Build files have been written to: <AUDIT_SCRATCH>/native_candidate_numeric/build\n",
+      "stderr": "",
+      "elapsed_seconds": 0.4176960519999966
+    },
+    {
+      "label": "build",
+      "returncode": 0,
+      "stdout": "[ 11%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/common/rotation.cpp.o\n[ 11%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/baseline3d.cpp.o\n[ 11%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/common/earth.cpp.o\n[ 14%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/common/types.cpp.o\n[ 18%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/config/port_config_loader.cpp.o\n[ 22%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/demo/legsa_v23_port_core_demo.cpp.o\n[ 25%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/factors/go2_weak_prior_factor.cpp.o\n[ 29%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/factors/go2_weak_prior_loader.cpp.o\n[ 33%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/factors/raw_doppler_factor.cpp.o\n[ 37%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/factors/raw_doppler_factor_loader.cpp.o\n[ 40%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/factors/satellite_state_provider.cpp.o\n[ 44%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/fgo_feedback/fgo_feedback.cpp.o\n[ 48%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/fileio/file_saver.cpp.o\n[ 51%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/fileio/gnss_file_loader.cpp.o\n[ 55%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/fileio/imu_file_loader.cpp.o\n[ 59%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/kf_gins/gi_engine.cpp.o\n[ 62%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/kf_gins/insmech.cpp.o\n[ 66%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/quality_aware/qa_fallback.cpp.o\n[ 70%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/runtime/port_runtime.cpp.o\n[ 74%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/source_aware/quality_state_manager.cpp.o\n[ 77%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/source_aware/quality_state_trace.cpp.o\n[ 81%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/source_aware/source_aware_policy.cpp.o\n[ 85%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/source_aware/source_aware_trace.cpp.o\n[ 88%] Building CXX object CMakeFiles/legsa_v23_port_core.dir/legsa_v23_port_core/src/writers/port_writers.cpp.o\n[ 92%] Linking CXX static library liblegsa_v23_port_core.a\n[ 92%] Built target legsa_v23_port_core\n[ 96%] Building CXX object CMakeFiles/legsa_v23_port_core_demo.dir/legsa_v23_port_core/src/demo/port_demo.cpp.o\n[100%] Linking CXX executable legsa_v23_port_core_demo\n[100%] Built target legsa_v23_port_core_demo\n",
+      "stderr": "",
+      "elapsed_seconds": 3.8964414299999817
+    },
+    {
+      "label": "compile_old",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.3003079480000679
+    },
+    {
+      "label": "compile_candidate",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.28980320200003007
+    },
+    {
+      "label": "old_column",
+      "returncode": 0,
+      "stdout": "mutated=42\n",
+      "stderr": "",
+      "elapsed_seconds": 0.0009375420000878876
+    },
+    {
+      "label": "candidate_column",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "AUDIT_MATRIX_INDEX_OUT_OF_RANGE\n",
+      "elapsed_seconds": 0.0008773890000384199
+    },
+    {
+      "label": "old_const_column",
+      "returncode": 0,
+      "stdout": "0\n",
+      "stderr": "",
+      "elapsed_seconds": 0.0008502959999532322
+    },
+    {
+      "label": "candidate_const_column",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "AUDIT_MATRIX_INDEX_OUT_OF_RANGE\n",
+      "elapsed_seconds": 0.000864843000044857
+    },
+    {
+      "label": "candidate_wrap_inf",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "AUDIT_NONFINITE_ANGLE\n",
+      "elapsed_seconds": 0.0009806919999846286
+    },
+    {
+      "label": "candidate_wrap_-inf",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "AUDIT_NONFINITE_ANGLE\n",
+      "elapsed_seconds": 0.0010658039999498214
+    },
+    {
+      "label": "candidate_wrap_nan",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "AUDIT_NONFINITE_ANGLE\n",
+      "elapsed_seconds": 0.0009838990000616832
+    },
+    {
+      "label": "candidate_wrap_1e308",
+      "returncode": 0,
+      "stdout": "-0.56232681979048493\n",
+      "stderr": "",
+      "elapsed_seconds": 0.000987293000093814
+    },
+    {
+      "label": "candidate_wrap_-1e308",
+      "returncode": 0,
+      "stdout": "0.56232681979048493\n",
+      "stderr": "",
+      "elapsed_seconds": 0.0009160070000007181
+    },
+    {
+      "label": "candidate_wrap_7",
+      "returncode": 0,
+      "stdout": "0.71681469282041377\n",
+      "stderr": "",
+      "elapsed_seconds": 0.000986037999950895
+    },
+    {
+      "label": "candidate_wrap2pi_inf",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "AUDIT_NONFINITE_ANGLE\n",
+      "elapsed_seconds": 0.001002985000013723
+    },
+    {
+      "label": "candidate_wrap2pi_-inf",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "AUDIT_NONFINITE_ANGLE\n",
+      "elapsed_seconds": 0.001093316000037703
+    },
+    {
+      "label": "candidate_wrap2pi_nan",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "AUDIT_NONFINITE_ANGLE\n",
+      "elapsed_seconds": 0.0010494849999531652
+    },
+    {
+      "label": "candidate_wrap2pi_1e308",
+      "returncode": 0,
+      "stdout": "5.7208584873891013\n",
+      "stderr": "",
+      "elapsed_seconds": 0.000952621999999792
+    },
+    {
+      "label": "candidate_wrap2pi_-1e308",
+      "returncode": 0,
+      "stdout": "0.56232681979048493\n",
+      "stderr": "",
+      "elapsed_seconds": 0.0010655889999497958
+    },
+    {
+      "label": "candidate_wrap2pi_7",
+      "returncode": 0,
+      "stdout": "0.71681469282041377\n",
+      "stderr": "",
+      "elapsed_seconds": 0.0010075760000063383
+    },
+    {
+      "label": "candidate_target_synthetic-math",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.010808665000013207
+    },
+    {
+      "label": "candidate_target_raw-doppler-toy",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.008102085000018633
+    },
+    {
+      "label": "candidate_target_source-aware-toy",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.008014109999976426
+    },
+    {
+      "label": "candidate_target_quality-state-toy",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.012722994999990078
+    },
+    {
+      "label": "candidate_target_go2-weak-prior-toy",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.007876131999978497
+    },
+    {
+      "label": "candidate_target_qa-fallback-toy",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.009896431000015582
+    }
+  ],
+  "original_receipt_patch_sha256": "71026c78124c42a03e70bfe08f6232d264aa9400db1a8cef91621d3dac9301fc",
+  "patch_format_conversion": {
+    "from_context_lines": 3,
+    "to_context_lines": 0,
+    "candidate_source_hashes_unchanged": true,
+    "build_or_tests_repeated": false,
+    "apply_check_returncode": 0,
+    "stderr": ""
+  }
+}
