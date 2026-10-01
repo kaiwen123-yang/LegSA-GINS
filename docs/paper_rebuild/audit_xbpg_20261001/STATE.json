@@ -1,0 +1,12 @@
+{
+  "task": "AUDIT_XBPG_20260105_20261001",
+  "base_commit": "eb3cbed314693358c7c38442b6fbbb7afcf0342e",
+  "status": "IN_PROGRESS",
+  "completed": ["verified_worktree_and_raw_presence", "isolated_branch", "code_inventory"],
+  "active": ["native_semantic_review_and_tests", "four_sequence_full_stream_scan", "formal_identity_and_python_chain"],
+  "next": "Freeze input-qualified exploration protocol before reference performance evaluation",
+  "formal_solver_modified": false,
+  "frozen_result_modified": false,
+  "literature_reproduction_complete": false,
+  "package_created": false
+}
