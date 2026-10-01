@@ -1,0 +1,8 @@
+{
+  "data_mode": "synthetic",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "returncode": 0,
+  "elapsed_seconds": 14.988258918000042,
+  "notes": "BUILD variable redirected after collection; production test text unchanged; no real inputs"
+}

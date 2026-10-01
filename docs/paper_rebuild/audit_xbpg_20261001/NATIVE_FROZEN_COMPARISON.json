@@ -1,0 +1,232 @@
+{
+  "data_mode": "synthetic",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "frozen_binary_sha256": "96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c",
+  "frozen_source_commit": "ca73cb1fb48a020fd2a450d79e520562c34eeb24",
+  "current_binary_sha256": "cbf554baf9c83490e40b207b97f04ef77f51d9962f7bce463f1e644416ef789e",
+  "results": [
+    {
+      "mode": "synthetic-math",
+      "returncode": 0,
+      "elapsed_seconds": 0.011637609999979759,
+      "stdout": "",
+      "stderr": "",
+      "files": [
+        {
+          "name": "LegSA_PORT_NAV.nav",
+          "frozen_sha256": "f6a8596d8c80551dc8868c9cc1ff224c9d244a91c5f390b025c05efaa2350ab9",
+          "current_sha256": "f6a8596d8c80551dc8868c9cc1ff224c9d244a91c5f390b025c05efaa2350ab9",
+          "byte_identical": true
+        },
+        {
+          "name": "LegSA_PORT_STD.csv",
+          "frozen_sha256": "33fb9ebbe2c88c81861a96570835417678369e77313aec8e90e588fdc38dde1a",
+          "current_sha256": "33fb9ebbe2c88c81861a96570835417678369e77313aec8e90e588fdc38dde1a",
+          "byte_identical": true
+        },
+        {
+          "name": "EVAL_NAV.csv",
+          "frozen_sha256": "445a9f46ff1c727205b66b8e4040ff827d03a83421e30b79737dad607b98c155",
+          "current_sha256": "445a9f46ff1c727205b66b8e4040ff827d03a83421e30b79737dad607b98c155",
+          "byte_identical": true
+        }
+      ],
+      "frozen_manifest_data_flags": {
+        "data_mode": "",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": false
+      },
+      "current_manifest_data_flags": {
+        "data_mode": "",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": false
+      }
+    },
+    {
+      "mode": "raw-doppler-toy",
+      "returncode": 0,
+      "elapsed_seconds": 0.008057534000045052,
+      "stdout": "",
+      "stderr": "",
+      "files": [
+        {
+          "name": "LegSA_PORT_NAV.nav",
+          "frozen_sha256": "20b5000e5dd3fd2491de013d50c812f472f951097736be8d437c7ec640647aa3",
+          "current_sha256": "20b5000e5dd3fd2491de013d50c812f472f951097736be8d437c7ec640647aa3",
+          "byte_identical": true
+        },
+        {
+          "name": "LegSA_PORT_STD.csv",
+          "frozen_sha256": "38873aa2f80e473575dc812a1fefefbd092597247061e719c3771f139141293f",
+          "current_sha256": "38873aa2f80e473575dc812a1fefefbd092597247061e719c3771f139141293f",
+          "byte_identical": true
+        },
+        {
+          "name": "EVAL_NAV.csv",
+          "frozen_sha256": "8ddf3b5cd7309b25c7d80020b3e665e7d76c83a065f6f309e37bc732f08be549",
+          "current_sha256": "8ddf3b5cd7309b25c7d80020b3e665e7d76c83a065f6f309e37bc732f08be549",
+          "byte_identical": true
+        }
+      ],
+      "frozen_manifest_data_flags": {
+        "data_mode": "",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": false
+      },
+      "current_manifest_data_flags": {
+        "data_mode": "",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": false
+      }
+    },
+    {
+      "mode": "source-aware-toy",
+      "returncode": 0,
+      "elapsed_seconds": 0.008143628999960129,
+      "stdout": "",
+      "stderr": "",
+      "files": [
+        {
+          "name": "LegSA_PORT_NAV.nav",
+          "frozen_sha256": "4d3405cd2da83d69e0b6950c3859b23f7c5c69889abf43b1f388833ea96c958a",
+          "current_sha256": "4d3405cd2da83d69e0b6950c3859b23f7c5c69889abf43b1f388833ea96c958a",
+          "byte_identical": true
+        },
+        {
+          "name": "LegSA_PORT_STD.csv",
+          "frozen_sha256": "69db5a9721e4b087e0f7a84c47af33632725e35cf0cd1753e34ae6f3c223a330",
+          "current_sha256": "69db5a9721e4b087e0f7a84c47af33632725e35cf0cd1753e34ae6f3c223a330",
+          "byte_identical": true
+        },
+        {
+          "name": "EVAL_NAV.csv",
+          "frozen_sha256": "e23307ad5f1387ba2b843cfce42c91ff96e73ffef50964d796e505b8eeb62c4c",
+          "current_sha256": "e23307ad5f1387ba2b843cfce42c91ff96e73ffef50964d796e505b8eeb62c4c",
+          "byte_identical": true
+        }
+      ],
+      "frozen_manifest_data_flags": {
+        "data_mode": "",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": false
+      },
+      "current_manifest_data_flags": {
+        "data_mode": "",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": false
+      }
+    },
+    {
+      "mode": "quality-state-toy",
+      "returncode": 0,
+      "elapsed_seconds": 0.01283465700009856,
+      "stdout": "",
+      "stderr": "",
+      "files": [
+        {
+          "name": "LegSA_PORT_NAV.nav",
+          "frozen_sha256": "9c8ceca60eedf701ce7dbc765a7523fbf6ea8d5c5f9694e433f3bab94eda1595",
+          "current_sha256": "9c8ceca60eedf701ce7dbc765a7523fbf6ea8d5c5f9694e433f3bab94eda1595",
+          "byte_identical": true
+        },
+        {
+          "name": "LegSA_PORT_STD.csv",
+          "frozen_sha256": "a2fac3131faac1d95f06722bfa6a745ad80c2765657bc6d40b2f3d78d2d92c3c",
+          "current_sha256": "a2fac3131faac1d95f06722bfa6a745ad80c2765657bc6d40b2f3d78d2d92c3c",
+          "byte_identical": true
+        },
+        {
+          "name": "EVAL_NAV.csv",
+          "frozen_sha256": "f011c467cc1ec12401ce0c6d366c248a2c85c320171770bee37ac0522a70590b",
+          "current_sha256": "f011c467cc1ec12401ce0c6d366c248a2c85c320171770bee37ac0522a70590b",
+          "byte_identical": true
+        }
+      ],
+      "frozen_manifest_data_flags": {
+        "data_mode": "",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": false
+      },
+      "current_manifest_data_flags": {
+        "data_mode": "",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": false
+      }
+    },
+    {
+      "mode": "go2-weak-prior-toy",
+      "returncode": 0,
+      "elapsed_seconds": 0.007953159999942727,
+      "stdout": "",
+      "stderr": "",
+      "files": [
+        {
+          "name": "LegSA_PORT_NAV.nav",
+          "frozen_sha256": "35b57c6cf51d3a121e5af61d8d48ff2e80390fed7e3368ada45a93833636c03e",
+          "current_sha256": "35b57c6cf51d3a121e5af61d8d48ff2e80390fed7e3368ada45a93833636c03e",
+          "byte_identical": true
+        },
+        {
+          "name": "LegSA_PORT_STD.csv",
+          "frozen_sha256": "33f90698e267e3a3e3f22edbc8afe37ebdb1e3e72aa45f2d3af74276a3ce3b0c",
+          "current_sha256": "33f90698e267e3a3e3f22edbc8afe37ebdb1e3e72aa45f2d3af74276a3ce3b0c",
+          "byte_identical": true
+        },
+        {
+          "name": "EVAL_NAV.csv",
+          "frozen_sha256": "fd98a20b1702b3b2e0354af0509a3bd16c90f332c80f13dc91c5d5c890ffb170",
+          "current_sha256": "fd98a20b1702b3b2e0354af0509a3bd16c90f332c80f13dc91c5d5c890ffb170",
+          "byte_identical": true
+        }
+      ],
+      "frozen_manifest_data_flags": {
+        "data_mode": "",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": false
+      },
+      "current_manifest_data_flags": {
+        "data_mode": "",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": false
+      }
+    },
+    {
+      "mode": "qa-fallback-toy",
+      "returncode": 0,
+      "elapsed_seconds": 0.009944910000058371,
+      "stdout": "",
+      "stderr": "",
+      "files": [
+        {
+          "name": "LegSA_PORT_NAV.nav",
+          "frozen_sha256": "309469f9b697edaf6b46890a48be17d60c11ff3f95c05ae419de90cfe5d8f55b",
+          "current_sha256": "309469f9b697edaf6b46890a48be17d60c11ff3f95c05ae419de90cfe5d8f55b",
+          "byte_identical": true
+        },
+        {
+          "name": "LegSA_PORT_STD.csv",
+          "frozen_sha256": "a60807942629ee3cff26cf71ae438bf18683ed2907bf50b7815cac076d02bf0f",
+          "current_sha256": "a60807942629ee3cff26cf71ae438bf18683ed2907bf50b7815cac076d02bf0f",
+          "byte_identical": true
+        },
+        {
+          "name": "EVAL_NAV.csv",
+          "frozen_sha256": "60fe19ebeb5ecabfac011dee53e371d5a523e26ad80a444936e1e9b19d7eb2e7",
+          "current_sha256": "60fe19ebeb5ecabfac011dee53e371d5a523e26ad80a444936e1e9b19d7eb2e7",
+          "byte_identical": true
+        }
+      ],
+      "frozen_manifest_data_flags": {
+        "data_mode": "",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": false
+      },
+      "current_manifest_data_flags": {
+        "data_mode": "",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": false
+      }
+    }
+  ]
+}
