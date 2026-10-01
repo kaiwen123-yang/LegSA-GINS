@@ -1,0 +1,14 @@
+{
+  "utc": "2026-10-01T10:12:00.241798+00:00",
+  "source_worktree": "<AUDIT_SOURCE_WORKTREE>",
+  "source_head": "eb3cbed314693358c7c38442b6fbbb7afcf0342e",
+  "original_tracked_changes": [],
+  "original_untracked_count": 29,
+  "baseline_untracked_code_config_count": 28,
+  "untracked_code_config_identity_changes": [],
+  "untracked_document_note": "One original untracked documentation file existed; no initial byte hash captured; not edited by this audit",
+  "audit_outside_allowed_tracked_changes": [],
+  "raw_and_frozen_write_operations_by_audit": 0,
+  "raw_final_whole_tree_rehash_performed": false,
+  "write_claim_scope": "Authorized path and command review; not filesystem snapshot proof for every external historical asset"
+}

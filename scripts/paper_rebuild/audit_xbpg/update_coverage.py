@@ -19,7 +19,7 @@ def main():
     path = docs / "CODE_REVIEW_COVERAGE.csv"
     rows = read(path)
     by_path = {r["path"]: r for r in rows}
-    for name in ("REVIEW_RECEIPTS.csv", "NATIVE_COVERAGE.csv", "RAW_GNSS_COVERAGE.csv", "NATIVE_OTHER_COVERAGE.csv"):
+    for name in ("REVIEW_RECEIPTS.csv", "NATIVE_COVERAGE.csv", "RAW_GNSS_COVERAGE.csv", "NATIVE_OTHER_COVERAGE.csv", "SHARED_SENSOR_COVERAGE.csv", "NATIVE_EXTERNAL_COVERAGE.csv", "FORMAL_CONTROL_COVERAGE.csv", "CONTRACT_COVERAGE.csv"):
         receipt = docs / name
         if not receipt.exists():
             continue
@@ -61,7 +61,8 @@ def main():
     lines = Counter()
     for row in remaining:
         parts = row["path"].split("/")
-        key = "/".join(parts[:4] if row["path"].startswith("src/legsa_gins/paper_rebuild/") else parts[:3])
+        depth = 4 if row["path"].startswith("src/legsa_gins/paper_rebuild/") else 3 if parts[0] == "src" else 2
+        key = "/".join(parts[:min(depth, len(parts)-1)]) or "ROOT_FILES"
         groups[key] += 1; lines[key] += int(row["lines"])
     with (docs/"REMAINING_REVIEW_QUEUE.csv").open("w", newline="") as stream:
         writer = csv.DictWriter(stream,["module","not_complete_files","file_lines","status"],lineterminator="\n")

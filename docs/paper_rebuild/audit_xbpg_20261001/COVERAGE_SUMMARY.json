@@ -1,12 +1,13 @@
 {
-  "baseline_files": 3085,
-  "baseline_lines": 552271,
-  "complete_semantic_files": 121,
-  "complete_semantic_lines": 24609,
+  "baseline_files": 3119,
+  "baseline_lines": 554133,
+  "complete_semantic_files": 248,
+  "complete_semantic_lines": 40419,
   "depth_counts": {
-    "UNREAD": 2958,
-    "SEMANTIC_REVIEW_COMPLETE": 121,
-    "PARTIAL_SEMANTIC": 6
+    "UNREAD": 2817,
+    "SEMANTIC_REVIEW_COMPLETE": 248,
+    "PARTIAL_SEMANTIC": 14,
+    "DYNAMIC_EXECUTION_ONLY_SEMANTIC_UNREAD": 40
   },
   "inventory_recreated": false,
   "new_audit_code_separate": true,

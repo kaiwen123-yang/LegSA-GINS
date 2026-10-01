@@ -57,7 +57,7 @@ def main():
                          native_echo=json.dumps({k: echoed.get(k,"ABSENT") for k in echo_keys},sort_keys=True),
                          echo_manifest_sha256=sha(manifest),
                          verification="BINARY_CONFIG_EVALUATOR_LIVE_HASH_MATCH;PROVIDERS_RECORDED_HASH_ONLY",
-                         note="Scalar raw HPPOSECEF heading; B3 absent. Input payload reuse not newly authorized."))
+                         note="Scalar raw HPPOSECEF heading; B3 absent. Historic provider payloads not rehashed in this identity check."))
     out = root / "docs/paper_rebuild/audit_xbpg_20261001/METHOD_IDENTITY.csv"
     common = {k:"NOT_APPLICABLE" for k in rows[0]}
     rows.extend([

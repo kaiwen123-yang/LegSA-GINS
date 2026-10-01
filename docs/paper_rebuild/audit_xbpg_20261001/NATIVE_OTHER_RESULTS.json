@@ -1,0 +1,26 @@
+{
+  "data_mode": "synthetic",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "post_hoc": true,
+  "real_data_open_count": 0,
+  "reference_open_count": 0,
+  "source_sha256": "f4035d2234a2ffc19c3eaa22938d600f5817db48a2ede6136fe7e7b4007e40a2",
+  "test_binary_sha256": "f38ee192a7b99be0c8da9f35e229daaea28e16def4d995fb00acb510d6617d1d",
+  "calls": [
+    {
+      "label": "compile",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.6850419729998976
+    },
+    {
+      "label": "counterexamples",
+      "returncode": 0,
+      "stdout": "old_predict_covariance_unchanged=1\nold_future_measurement_time=2\nold_last_imu_time=1\nold_final_state_time=1\nold_final_north_velocity=9.9009900990099009\nv23_F_velocity_phi_maxabs_fd_error=20.018660218325181\nv23_F_fd_step_rad=9.9999999999999995e-07\nv23_zero_input_F_v_scale_frobenius=1.7320508075688772\nv23_zero_input_F_phi_scale_frobenius=1.7320508075688772\nv23_rotating_specific_force_east_increment=0\nanalytic_constant_rate_east_increment=0.009999666671112184\nv23_in_window_gnss_records=3\nv23_consumed_yaw_records=2\nv23_final_time=2\n",
+      "stderr": "",
+      "elapsed_seconds": 0.002737820999982432
+    }
+  ]
+}

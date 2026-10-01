@@ -81,3 +81,5 @@
 `PYTHONPATH=src python3 -m pytest -q -rx tests/paper_rebuild/audit_xbpg/test_provider_findings.py`。7个strict xfail保留已确认旧函数不满足的语义，3个通过是局部反证；exit0表示反例预期成立，不表示旧实现缺陷修好了。正式源文件未编辑。
 
 全文阅读不等于端到端身份已彻底闭合：clean5 provider最初生成链、全部raw Doppler卫星求解/编译宏、全部historical generators尚未完整语义闭合，见覆盖表UNREAD，不用“legacy”隐去。
+
+后续补充：RAW_GNSS_REVIEW.md已闭合raw_gnss全部38文件及当前helper编译宏/调用关系；本段初始“尚未审raw Doppler”不再代表本轮最终覆盖。其它历史生成器仍按覆盖表逐项保留未审。

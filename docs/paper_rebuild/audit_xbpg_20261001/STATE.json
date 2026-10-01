@@ -1,7 +1,7 @@
 {
   "task": "AUDIT_XBPG_20260105_20261001",
   "base_commit": "eb3cbed314693358c7c38442b6fbbb7afcf0342e",
-  "status": "IN_PROGRESS_SUBSTANTIVE_RESULTS",
+  "status": "IN_PROGRESS_FINAL_RECONCILIATION",
   "completed": [
     "verified_source_and_frozen_identities",
     "port_core_full_semantic_review",
@@ -9,16 +9,25 @@
     "88_raw_file_full_scan",
     "protocol_committed_before_real_execution",
     "four_RTK_and_four_RD_full_window_attempts",
-    "retained_output_validation_and_four_raster_QA"
+    "retained_output_validation_and_four_raster_QA",
+    "all_identified_owned_cpp_semantic_review",
+    "raw_gnss_38_files_semantic_review",
+    "formal_control_contracts_and_shared_sensors_semantic_review",
+    "smoke_failure_output_exception_receipts",
+    "four_window_ephemeris_support_upper_bound",
+    "coverage_append_without_inventory_reset"
   ],
   "active": [
-    "remaining_cpp_semantic_review",
-    "raw_gnss_semantic_review",
-    "consolidated_findings_and_exact_coverage"
+    "final_report_coverage_identity_and_git_reconciliation"
   ],
-  "next": "Merge semantic receipts incrementally; finalize reproducible partial audit with explicit remaining queue",
+  "next": "Deliver bounded partial code audit with full remaining queue; no background execution",
   "formal_solver_modified": false,
   "frozen_result_modified": false,
   "literature_reproduction_complete": false,
-  "package_created": false
+  "package_created": false,
+  "full_repository_semantic_review_complete": false,
+  "coverage_summary": "COVERAGE_SUMMARY.json",
+  "scientific_real_legsa_runs": 0,
+  "gnss_full_window_calls": 8,
+  "git_receipts": "<AUDIT_ROOT>/GIT_RECEIPTS.jsonl"
 }

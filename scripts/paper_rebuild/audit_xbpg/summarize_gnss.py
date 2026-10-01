@@ -273,8 +273,12 @@ def main():
     write_csv(docs / "FIGURE_INDEX.csv", [dict(path=f"<AUDIT_ROOT>/figures/{p.name}", bytes=p.stat().st_size, sha256=sha(p),
               data_mode="real_xb_pg_raw", synthetic_data_used=False, semisynthetic_data_used=False,
               metrics_recomputed=False, actual_raster_review="PENDING") for p in sorted(plots.iterdir()) if p.suffix in (".png",".svg")])
-    print(json.dumps({"run_rows":len(runs),"metric_rows":len(metrics),"native_real_rtk":5,"native_real_rd":4,"convbin":8,
-                      "formal_legsa_real":0,"reference_evaluators":0,"figures":4}))
+    count=lambda predicate:sum(int(r["native_invocations"]) for r in runs if predicate(r))
+    print(json.dumps({"run_rows":len(runs),"metric_rows":len(metrics),
+                      "native_real_rtk":count(lambda r:r['method']=='EXPLORATORY_RTKLIB_UNCONSTRAINED' or r['phase']=='SMOKE'),
+                      "native_real_rd":count(lambda r:r['method']=='EXPLORATORY_CURRENT_RAW_DOPPLER_HELPER'),
+                      "convbin":count(lambda r:r['phase']=='CONVERSION'),
+                      "formal_legsa_real":count(lambda r:r['phase']=='MAIN_FULL_WINDOW'),"reference_evaluators":0,"figures":4}))
 
 
 if __name__ == "__main__":

@@ -125,7 +125,7 @@
       "returncode": 0,
       "status": null,
       "elapsed_seconds": 0.0012215130000186036,
-      "stdout": "endtime=200\nstarttime=-0.001\ndual_yaw=1\nlever0=0.01\nimu_path='中文路径/传感器\n",
+      "stdout": "endtime=200\nstarttime=-0.001\ndual_yaw=1\nlever0=0.01\nimu_path='\u4e2d\u6587\u8def\u5f84/\u4f20\u611f\u5668\n",
       "stderr": ""
     },
     "formal_target_synthetic-math": {
@@ -170,5 +170,8 @@
       "stdout": "",
       "stderr": ""
     }
-  }
+  },
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "access_count_evidence": "SYNTHETIC_FIXTURE_CALL_SCOPE_NOT_OS_AUDIT"
 }

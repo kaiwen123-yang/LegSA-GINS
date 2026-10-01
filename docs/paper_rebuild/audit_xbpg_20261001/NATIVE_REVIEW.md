@@ -229,7 +229,7 @@ Go2 RP/HV 常来自同一个内部融合器；若 propagation IMU 也是同一�
 |`runtime:1267–1346`|按开关loadRD/RP/HV/readiness/FGO；yaw-rate仅标notactivated；formal provider预检失败throw明确prefix；无reference open。但“不打开reference_path”仍不能排除provider来源污染。|
 |`runtime:1347–1406`|二次读时间+完整内存loader，估effective overlap，检查isOpen/explicitvalidity，setprovider和initialize；运行loop实际end使用options.endtime，不以该overlap统计偷偷裁掉所有IMU。|
 |`runtime:1407–1463`|parity不额外写initNAV；找首IMU≥start、首GNSS>start；GNSS等于start只作为之前记录跳过；debug行上限只限制部分日志。|
-|`runtime:1464–1522`|每IMU仅刷新一条staleGNSS避免覆盖；call add→newImu→health→append；乱序/超高GNSS频率未全面规范化；不能声称最优实时排程。|
+|`runtime:1464–1522`|每IMU仅刷新一条staleGNSS避免覆盖；call add→newImu→health→append；1473严格 `gnss.time < current_imu_time` 使等于上一IMU时刻的已消费记录到再下一loop才刷新。例如IMU=[0,.1,.2]、GNSS=[.1,.2]，.1已更新后，在.2 loop判断.1<.1为false，.2 GNSS从未进入engine便遇IMU EOF；实际可更新只有1条。此处为代码逐步推导，外层expected_counts回放由主审另测。乱序/超高GNSS频率未全面规范化；不能声称最优实时排程。|
 |`runtime:1524–1578`|回收模块计数、formal门、ratio=尝试update/时间列数量；先判是否有完整合同再writer；debug重新nearest原观测；run失败在末写NAV前可能无轨迹，但不能把原因抹去。|
 |`writers/port_writers.hpp:19–27` + `src/writers/port_writers.cpp:15–25`|另一层统一转发NAV/STD/eval/exact可选/manifest，无数学修正；实际runtime本地writeAll同职责，存在两条writer调用入口。|
 |`fileio/file_saver.hpp:19–30`; `file_saver.cpp:26–149`|目录创建；JSON只转义斜线与引号，控制字符未完整转义；STD单位scale；source-aware数组及初始化diag序列化。|
@@ -255,7 +255,7 @@ python3 scripts/paper_rebuild/audit_xbpg/native_candidate_numeric.py --local-con
 
 候选补丁采用零 context unified diff。检查命令为 `git apply --check --unidiff-zero docs/paper_rebuild/audit_xbpg_20261001/NATIVE_CANDIDATE_NUMERIC.patch`；仅在隔离副本应用时使用 `git apply --unidiff-zero <patch>`。本轮将三行 context 转为零 context 后仅重新执行 apply-check，没有重编译或重复原生实验；代码改动及已测试 candidate 文件哈希保持不变。外部原始 receipt 保留当时补丁哈希，共享摘要另记格式转换前哈希。
 
-脚本默认拒绝覆盖已存在的本轮输出，复现到另一个 local config 的新审查根/空scratch（初始runner支持unique run-id；后续runner依赖 `native_initial`）。不要删除历史证据来重跑。`NATIVE_OTHER_TARGETS.json` 记录另外两个target的隔离构建；构建通过不提高它们尚未完成的语义深度。
+脚本默认拒绝覆盖已存在的本轮输出，复现到另一个 local config 的新审查根/空scratch（初始runner支持unique run-id；后续runner依赖 `native_initial`）。不要删除历史证据来重跑。`NATIVE_OTHER_TARGETS.json` 记录另外两个target的隔离构建；后续独立完成的90文件/5,624行语义深审与新增反例见 `NATIVE_OTHER_REVIEW.md`，构建本身不作为语义证据。
 
 |证据|实际运行、数值与限制|
 |---|---|
@@ -290,4 +290,4 @@ FD采用中心差分，角/scale步长1e−6，位置误差0.01m。表中“最�
 
 应优先重新审视使用全部GNSS停更来证明RD/Go2独立维持的旧主张、依赖SA NIS统计的解释、强倾斜scalar yaw的模型表述、把STD当Euler姿态置信区间的图、未区分F01/F02/RV的消融因果；需要修复并冻结新协议后重跑才能给修后性能。本轮不改写原历史输出，不重跑Canonical-541，不因上述代码问题擅自删除旧结果。正常输入下Matrix/wrap候选未改变已测输出，不能据输入边界反例宣布旧正常NAV都错。B3验证不影响旧scalar二进制已有身份，也不证明可把旧结果升级为B3结果。
 
-剩余：原生完整21维独立IMU真值/噪声Monte Carlo尚未完成；P reset和完整F差异未以长时真实校正量量化；外层Python failureclassifier新异常尚未实测；raw provider身份与XB几何/参考、旧选择记录由其他审查模块闭合；cpp/src、cpp/include、legsa_v23_core 的全文件语义深审不在本报告已完成范围。所有审查结论、修复完成度和实数据可运行性必须分别陈述。
+剩余：原生完整21维独立IMU真值/噪声Monte Carlo尚未完成；P reset和完整F差异未以长时真实校正量量化；raw provider身份与XB几何/参考、旧选择记录及外层failureclassifier由主审/其他模块闭合，不能从本分审推定已完成。cpp/src、cpp/include、cpp/apps、legsa_v23_core 的90文件完整语义审查已另交 `NATIVE_OTHER_REVIEW.md`，其中全入口/全运动动态测试仍有限。所有审查结论、修复完成度和实数据可运行性必须分别陈述。
