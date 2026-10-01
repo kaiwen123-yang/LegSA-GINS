@@ -1,7 +1,7 @@
 {
   "task": "AUDIT_XBPG_20260105_20261001",
   "base_commit": "eb3cbed314693358c7c38442b6fbbb7afcf0342e",
-  "status": "IN_PROGRESS_FINAL_RECONCILIATION",
+  "status": "PARTIAL_CODE_AUDIT_AND_XBPG_FIRST_PASS_DELIVERED",
   "completed": [
     "verified_source_and_frozen_identities",
     "port_core_full_semantic_review",
@@ -17,10 +17,8 @@
     "four_window_ephemeris_support_upper_bound",
     "coverage_append_without_inventory_reset"
   ],
-  "active": [
-    "final_report_coverage_identity_and_git_reconciliation"
-  ],
-  "next": "Deliver bounded partial code audit with full remaining queue; no background execution",
+  "active": [],
+  "next": "Continue CODE_REVIEW_COVERAGE and REMAINING_REVIEW_QUEUE incrementally; prioritize formal_generation/clean5 provider lineage and independent defect candidates. F01 requires acquisition clock and installation evidence; no scientific background jobs.",
   "formal_solver_modified": false,
   "frozen_result_modified": false,
   "literature_reproduction_complete": false,
@@ -29,5 +27,19 @@
   "coverage_summary": "COVERAGE_SUMMARY.json",
   "scientific_real_legsa_runs": 0,
   "gnss_full_window_calls": 8,
-  "git_receipts": "<AUDIT_ROOT>/GIT_RECEIPTS.jsonl"
+  "git_receipts": "<AUDIT_ROOT>/GIT_RECEIPTS.jsonl",
+  "remaining_depth_counts": {
+    "partial_semantic_files": 14,
+    "dynamic_execution_without_full_semantic_files": 40,
+    "unread_files": 2817
+  },
+  "complete_semantic_files": 248,
+  "complete_semantic_lines": 40419,
+  "full_non_linear_21_state_nees_complete": false,
+  "main_method_combinations_executed": 0,
+  "main_method_combinations_input_unqualified": 20,
+  "latest_verified_prior_milestone": "9fa465a79f0f33d34eaf6603198317e8176728df",
+  "final_commit_receipt": "See terminal and <AUDIT_ROOT>/GIT_RECEIPTS.jsonl; no recursive self-SHA commit",
+  "final_report": "FINAL_SUMMARY.md",
+  "forbidden_scope_expansion_performed": false
 }
