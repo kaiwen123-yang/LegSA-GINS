@@ -26,18 +26,19 @@
 - N09_A1_EVAL：report optional RP A1 horizontal gains and vertical losses on fixed support；`5460eb7817fcda1a6ba63d13873639f730366d49`；PUSHED_VERIFIED。
 - N09_A2_EVAL：close all seventeen evaluations with unchanged A2 controls and explicit accounting；`a42059a36bfa44bdf6b6fea079574965288ecb64`；PUSHED_VERIFIED。
 - CASE_VIEW：link all ten candidate outcomes and fixed windows without rounding source values；`670443f9252ff74d6ed843ed275cd1a938d1613b`；PUSHED_VERIFIED。
+- CASE_VIEW_REVIEW：enforce identical time support before paired metric subtraction；`a321f4092bd44ea9a994565ac61a99e8a2016aff`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-CASE_VIEW_REVIEW：enforce identical time support before paired metric subtraction。
+N12_EVENTS：connect conditional innovation to actual R state divergence and one yaw rejection。
 
-只读复核110个原值/差值与22窗口均一致；补齐浏览脚本fail-closed支持门，当前10组本已同支撑，重新运行标量转录后两CSV字节不变。暂缓事件裁定文字直到扫描完成。没有新增runtime/evaluator/reference读取。
+四流各完整一次，31723 SA核对通过。C00/D15实际R精确差1182/2112（超容差980/2112），接受变化0/1；首RD更新和共同IMU43状态分叉已定位。D15一次原接受→候选原yaw硬门拒绝。全量缓存P分组证实scale零对角，正定前置不满足，不放宽门。此项native/eval0，非旧影子次数。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-N12/N16及N09各组事件核对、少量图和最终定义裁定。
+N16同批真实事件；N09 C00/A1/A2事件并行收尾，最后少量图与三候选裁定。
 
 ## 调用边界
 

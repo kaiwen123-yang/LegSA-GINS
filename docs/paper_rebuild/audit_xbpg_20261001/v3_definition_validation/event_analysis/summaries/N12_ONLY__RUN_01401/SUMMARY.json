@@ -1,0 +1,1935 @@
+{
+  "schema": "V3_DEFINITION_EVENT_CACHE_1",
+  "candidate_run_id": "N12_ONLY__RUN_01401",
+  "baseline_run_id": "RUN_01401",
+  "candidate_id": "N12_ONLY",
+  "candidate_source": "<VALIDATION_ROOT>/candidates/N12_ONLY/RUN_01401/observer/events.jsonl",
+  "baseline_source": "<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl",
+  "candidate_sha256": "6d56a24a6689922f861e7e3df149283d474112003003395f4e99f4ed9df43e7e",
+  "baseline_sha256": "5414549783be475dd6b7467b4e7246b77c6600aea425db92d102168257c4ee3a",
+  "candidate_analysis_status": "VALIDATED",
+  "baseline_analysis_status": "VALIDATED",
+  "analysis_status": "VALIDATED",
+  "measurement_counts": {
+    "PAIRED": 8214
+  },
+  "common_IMU_counts": {
+    "EXACTLY_EQUAL": 42,
+    "DIFFERENT_OR_UNRESOLVED": 56600
+  },
+  "original_RP_opportunities": [],
+  "raw_event_payload_opens_this_comparison": 0,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "covariance_coverage": {
+    "candidate": {
+      "ALL_IMU_END_CANDIDATE": {
+        "count": 56642,
+        "status_counts": {
+          "NONPOSITIVE_DIAGONAL": 56642
+        },
+        "first_anomaly": {
+          "pointer": {
+            "source_path": "<VALIDATION_ROOT>/candidates/N12_ONLY/RUN_01401/observer/events.jsonl",
+            "source_line": 15,
+            "event_seq": 15,
+            "event": "COVARIANCE_HEALTH",
+            "run_id": "N12_ONLY__RUN_01401",
+            "byte_offset": 23232,
+            "byte_length": 1349
+          },
+          "report": {
+            "dimension": 21,
+            "square": true,
+            "all_finite": true,
+            "positive_diagonal": false,
+            "normalization_attempted": false,
+            "normalized_finite": false,
+            "symmetry_tested": false,
+            "symmetric_within_tolerance": false,
+            "cholesky_attempted": false,
+            "positive_definite_diagnostic": false,
+            "nonfinite_flat_indices": [],
+            "nonpositive_diagonal_indices": [
+              15,
+              16,
+              17,
+              18,
+              19,
+              20
+            ],
+            "min_diagonal": 0,
+            "max_normalized_abs": "NaN",
+            "max_normalized_asymmetry": "NaN",
+            "symmetry_threshold": "NaN",
+            "asymmetry_row": 0,
+            "asymmetry_col": 0,
+            "pivots": [],
+            "pivots_evaluated": 0,
+            "min_pivot": "NaN",
+            "pivot_threshold": 1e-12,
+            "status": "NONPOSITIVE_DIAGONAL",
+            "diagnostic_symmetrization_only": true,
+            "jitter_or_clipping": false,
+            "filter_matrix_modified": false
+          }
+        },
+        "max_normalized_asymmetry": null,
+        "min_pivot": null
+      }
+    },
+    "baseline": {
+      "EKF_SNAPSHOT_BASELINE_ONLY": {
+        "count": 15860,
+        "status_counts": {
+          "NONPOSITIVE_DIAGONAL": 15860
+        },
+        "first_anomaly": {
+          "pointer": {
+            "source_path": "<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl",
+            "source_line": 271,
+            "event_seq": 271,
+            "event": "EKF_BEFORE",
+            "run_id": "RUN_01401",
+            "byte_offset": 419051,
+            "byte_length": 6602
+          },
+          "report": {
+            "dimension": 21,
+            "square": true,
+            "status": "NONPOSITIVE_DIAGONAL",
+            "all_finite": true,
+            "positive_diagonal": false,
+            "normalization_attempted": false,
+            "normalized_finite": false,
+            "symmetry_tested": false,
+            "symmetric_within_tolerance": false,
+            "cholesky_attempted": false,
+            "positive_definite_diagnostic": false,
+            "pivots": [],
+            "nonfinite_flat_indices": [],
+            "nonpositive_diagonal_indices": [
+              15,
+              16,
+              17,
+              18,
+              19,
+              20
+            ],
+            "min_diagonal": 0.0,
+            "max_normalized_abs": null,
+            "max_normalized_asymmetry": null,
+            "symmetry_threshold": null,
+            "min_pivot": null,
+            "pivot_threshold": 1e-12,
+            "diagnostic_symmetrization_only": true,
+            "jitter_or_clipping": false,
+            "filter_matrix_modified": false
+          }
+        },
+        "max_normalized_asymmetry": null,
+        "min_pivot": null
+      }
+    }
+  },
+  "data_mode": "semisynthetic",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "source_summaries": {
+    "candidate": {
+      "receiver_position": {
+        "attempts": 1369,
+        "actual_accepted": 1369,
+        "actual_EKF_updates": 1369,
+        "SA_evaluations": 1369,
+        "SA_active_evaluations": 1369,
+        "policy_accepted": 1369,
+        "observed_numeric_ranges": {
+          "raw_nis": {
+            "finite_count": 1369,
+            "min": 0.9756024820789528,
+            "max": 837393.2751164389
+          },
+          "conditional_nis": {
+            "finite_count": 1369,
+            "min": 0.9756024820789528,
+            "max": 837393.2751164389
+          },
+          "recomputed_actual_nis": {
+            "finite_count": 1369,
+            "min": 0.9756024820789528,
+            "max": 837393.2751164389
+          },
+          "lsim_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "oim_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 5.0
+          },
+          "combined_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 5.0
+          }
+        }
+      },
+      "dual_antenna_yaw": {
+        "attempts": 1369,
+        "actual_accepted": 1345,
+        "actual_EKF_updates": 1345,
+        "SA_evaluations": 1345,
+        "SA_active_evaluations": 1345,
+        "policy_accepted": 1345,
+        "observed_numeric_ranges": {
+          "raw_nis": {
+            "finite_count": 1345,
+            "min": 4.9702818715138556e-06,
+            "max": 9.908640788099097
+          },
+          "conditional_nis": {
+            "finite_count": 1345,
+            "min": 3.6165047561569212e-06,
+            "max": 87.32025966788699
+          },
+          "recomputed_actual_nis": {
+            "finite_count": 1345,
+            "min": 3.6165047561569212e-06,
+            "max": 87.32025966788699
+          },
+          "lsim_R_scale": {
+            "finite_count": 1345,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "oim_R_scale": {
+            "finite_count": 1345,
+            "min": 1.0,
+            "max": 3.9537599996122537
+          },
+          "combined_R_scale": {
+            "finite_count": 1345,
+            "min": 1.0,
+            "max": 3.9537599996122537
+          }
+        }
+      },
+      "receiver_velocity": {
+        "attempts": 1369,
+        "actual_accepted": 1369,
+        "actual_EKF_updates": 1369,
+        "SA_evaluations": 1369,
+        "SA_active_evaluations": 1369,
+        "policy_accepted": 1369,
+        "observed_numeric_ranges": {
+          "raw_nis": {
+            "finite_count": 1369,
+            "min": 0.511687300866134,
+            "max": 82466.78246997418
+          },
+          "conditional_nis": {
+            "finite_count": 1369,
+            "min": 0.4979455199329914,
+            "max": 97251.44369125763
+          },
+          "recomputed_actual_nis": {
+            "finite_count": 1369,
+            "min": 0.4979455199329914,
+            "max": 97251.44369125763
+          },
+          "lsim_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "oim_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 8.0
+          },
+          "combined_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 8.0
+          }
+        }
+      },
+      "raw_doppler_velocity": {
+        "attempts": 1369,
+        "actual_accepted": 1108,
+        "actual_EKF_updates": 1108,
+        "SA_evaluations": 1108,
+        "SA_active_evaluations": 1108,
+        "policy_accepted": 1108,
+        "observed_numeric_ranges": {
+          "raw_nis": {
+            "finite_count": 1108,
+            "min": 1.2803102473716714,
+            "max": 13597.066492025546
+          },
+          "conditional_nis": {
+            "finite_count": 1108,
+            "min": 0.23928386196805404,
+            "max": 13950.115109351427
+          },
+          "recomputed_actual_nis": {
+            "finite_count": 1108,
+            "min": 0.23928386196805404,
+            "max": 13950.115109351427
+          },
+          "lsim_R_scale": {
+            "finite_count": 1108,
+            "min": 1.0,
+            "max": 2.0
+          },
+          "oim_R_scale": {
+            "finite_count": 1108,
+            "min": 1.0,
+            "max": 15.0
+          },
+          "combined_R_scale": {
+            "finite_count": 1108,
+            "min": 1.0,
+            "max": 15.0
+          }
+        }
+      },
+      "go2_horizontal_velocity": {
+        "attempts": 1369,
+        "actual_accepted": 1369,
+        "actual_EKF_updates": 1369,
+        "SA_evaluations": 1369,
+        "SA_active_evaluations": 1369,
+        "policy_accepted": 1369,
+        "observed_numeric_ranges": {
+          "raw_nis": {
+            "finite_count": 1369,
+            "min": 1.8525676235050286,
+            "max": 15969.97919999494
+          },
+          "conditional_nis": {
+            "finite_count": 1369,
+            "min": 3.716274217065405,
+            "max": 16675.629138695123
+          },
+          "recomputed_actual_nis": {
+            "finite_count": 1369,
+            "min": 3.716274217065405,
+            "max": 16675.629138695123
+          },
+          "lsim_R_scale": {
+            "finite_count": 1369,
+            "min": 2.0,
+            "max": 2.0
+          },
+          "oim_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 10.0
+          },
+          "combined_R_scale": {
+            "finite_count": 1369,
+            "min": 2.0,
+            "max": 10.0
+          }
+        }
+      },
+      "go2_attitude_roll_pitch": {
+        "attempts": 1369,
+        "actual_accepted": 1369,
+        "actual_EKF_updates": 1369,
+        "SA_evaluations": 1369,
+        "SA_active_evaluations": 1369,
+        "policy_accepted": 1369,
+        "observed_numeric_ranges": {
+          "raw_nis": {
+            "finite_count": 1369,
+            "min": 0.0012736972831228835,
+            "max": 1433.6519458212742
+          },
+          "conditional_nis": {
+            "finite_count": 1369,
+            "min": 0.0007887688754106083,
+            "max": 1451.7873539474967
+          },
+          "recomputed_actual_nis": {
+            "finite_count": 1369,
+            "min": 0.0007887688754106083,
+            "max": 1451.7873539474967
+          },
+          "lsim_R_scale": {
+            "finite_count": 1369,
+            "min": 1.5,
+            "max": 1.5
+          },
+          "oim_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 10.0
+          },
+          "combined_R_scale": {
+            "finite_count": 1369,
+            "min": 1.5,
+            "max": 10.0
+          }
+        }
+      }
+    },
+    "baseline": {
+      "receiver_position": {
+        "attempts": 1369,
+        "actual_accepted": 1369,
+        "actual_EKF_updates": 1369,
+        "SA_evaluations": 1369,
+        "SA_active_evaluations": 1369,
+        "policy_accepted": 1369,
+        "observed_numeric_ranges": {
+          "raw_nis": {
+            "finite_count": 1369,
+            "min": 0.9756024820789528,
+            "max": 835534.2765490924
+          },
+          "conditional_nis": {
+            "finite_count": 1369,
+            "min": 0.9756024820789528,
+            "max": 835534.2765490924
+          },
+          "recomputed_actual_nis": {
+            "finite_count": 1369,
+            "min": 0.9756024820789528,
+            "max": 835534.2765490924
+          },
+          "lsim_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "oim_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 5.0
+          },
+          "combined_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 5.0
+          }
+        }
+      },
+      "dual_antenna_yaw": {
+        "attempts": 1369,
+        "actual_accepted": 1346,
+        "actual_EKF_updates": 1346,
+        "SA_evaluations": 1346,
+        "SA_active_evaluations": 1346,
+        "policy_accepted": 1346,
+        "observed_numeric_ranges": {
+          "raw_nis": {
+            "finite_count": 1346,
+            "min": 1.629728529216864e-07,
+            "max": 9.666514222352912
+          },
+          "conditional_nis": {
+            "finite_count": 1346,
+            "min": 2.7200717583477033e-08,
+            "max": 15.355871886311578
+          },
+          "recomputed_actual_nis": {
+            "finite_count": 1346,
+            "min": 1.629728529216864e-07,
+            "max": 9.666514222352912
+          },
+          "lsim_R_scale": {
+            "finite_count": 1346,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "oim_R_scale": {
+            "finite_count": 1346,
+            "min": 1.0,
+            "max": 1.0932115137907923
+          },
+          "combined_R_scale": {
+            "finite_count": 1346,
+            "min": 1.0,
+            "max": 1.0932115137907923
+          }
+        }
+      },
+      "receiver_velocity": {
+        "attempts": 1369,
+        "actual_accepted": 1369,
+        "actual_EKF_updates": 1369,
+        "SA_evaluations": 1369,
+        "SA_active_evaluations": 1369,
+        "policy_accepted": 1369,
+        "observed_numeric_ranges": {
+          "raw_nis": {
+            "finite_count": 1369,
+            "min": 0.511687300866134,
+            "max": 61024.9253022553
+          },
+          "conditional_nis": {
+            "finite_count": 1369,
+            "min": 0.4979455199329914,
+            "max": 67979.64568336293
+          },
+          "recomputed_actual_nis": {
+            "finite_count": 1369,
+            "min": 0.511687300866134,
+            "max": 61024.9253022553
+          },
+          "lsim_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "oim_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 8.0
+          },
+          "combined_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 8.0
+          }
+        }
+      },
+      "raw_doppler_velocity": {
+        "attempts": 1369,
+        "actual_accepted": 1108,
+        "actual_EKF_updates": 1108,
+        "SA_evaluations": 1108,
+        "SA_active_evaluations": 1108,
+        "policy_accepted": 1108,
+        "observed_numeric_ranges": {
+          "raw_nis": {
+            "finite_count": 1108,
+            "min": 1.3431716345675329,
+            "max": 9810.291438906082
+          },
+          "conditional_nis": {
+            "finite_count": 1108,
+            "min": 0.5517920788759069,
+            "max": 9924.979181562168
+          },
+          "recomputed_actual_nis": {
+            "finite_count": 1108,
+            "min": 1.3431716345675329,
+            "max": 9810.291438906082
+          },
+          "lsim_R_scale": {
+            "finite_count": 1108,
+            "min": 1.0,
+            "max": 2.0
+          },
+          "oim_R_scale": {
+            "finite_count": 1108,
+            "min": 1.0,
+            "max": 15.0
+          },
+          "combined_R_scale": {
+            "finite_count": 1108,
+            "min": 1.0,
+            "max": 15.0
+          }
+        }
+      },
+      "go2_horizontal_velocity": {
+        "attempts": 1369,
+        "actual_accepted": 1369,
+        "actual_EKF_updates": 1369,
+        "SA_evaluations": 1369,
+        "SA_active_evaluations": 1369,
+        "policy_accepted": 1369,
+        "observed_numeric_ranges": {
+          "raw_nis": {
+            "finite_count": 1369,
+            "min": 1.758961476221722,
+            "max": 15965.756817858633
+          },
+          "conditional_nis": {
+            "finite_count": 1369,
+            "min": 3.1508758769350167,
+            "max": 17154.384011877468
+          },
+          "recomputed_actual_nis": {
+            "finite_count": 1369,
+            "min": 1.758961476221722,
+            "max": 15965.756817858633
+          },
+          "lsim_R_scale": {
+            "finite_count": 1369,
+            "min": 2.0,
+            "max": 2.0
+          },
+          "oim_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 10.0
+          },
+          "combined_R_scale": {
+            "finite_count": 1369,
+            "min": 2.0,
+            "max": 10.0
+          }
+        }
+      },
+      "go2_attitude_roll_pitch": {
+        "attempts": 1369,
+        "actual_accepted": 1369,
+        "actual_EKF_updates": 1369,
+        "SA_evaluations": 1369,
+        "SA_active_evaluations": 1369,
+        "policy_accepted": 1369,
+        "observed_numeric_ranges": {
+          "raw_nis": {
+            "finite_count": 1369,
+            "min": 7.804756772055837e-05,
+            "max": 393.0281353143789
+          },
+          "conditional_nis": {
+            "finite_count": 1369,
+            "min": 0.0016249698562547786,
+            "max": 386.42188870259196
+          },
+          "recomputed_actual_nis": {
+            "finite_count": 1369,
+            "min": 7.804756772055837e-05,
+            "max": 393.0281353143789
+          },
+          "lsim_R_scale": {
+            "finite_count": 1369,
+            "min": 1.5,
+            "max": 1.5
+          },
+          "oim_R_scale": {
+            "finite_count": 1369,
+            "min": 1.0,
+            "max": 6.014688801515469
+          },
+          "combined_R_scale": {
+            "finite_count": 1369,
+            "min": 1.5,
+            "max": 6.014688801515469
+          }
+        }
+      }
+    }
+  },
+  "update_counts_by_window": {
+    "candidate": [
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "dual_antenna_yaw",
+        "measure": "SA_evaluation",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "dual_antenna_yaw",
+        "measure": "accepted",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "dual_antenna_yaw",
+        "measure": "actual_EKF_update",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "dual_antenna_yaw",
+        "measure": "attempt",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "dual_antenna_yaw",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "SA_evaluation",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "accepted",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "actual_EKF_update",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "attempt",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_horizontal_velocity",
+        "measure": "SA_evaluation",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_horizontal_velocity",
+        "measure": "accepted",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_horizontal_velocity",
+        "measure": "actual_EKF_update",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_horizontal_velocity",
+        "measure": "attempt",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_horizontal_velocity",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "raw_doppler_velocity",
+        "measure": "SA_evaluation",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "raw_doppler_velocity",
+        "measure": "accepted",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "raw_doppler_velocity",
+        "measure": "actual_EKF_update",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "raw_doppler_velocity",
+        "measure": "attempt",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "raw_doppler_velocity",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_position",
+        "measure": "SA_evaluation",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_position",
+        "measure": "accepted",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_position",
+        "measure": "actual_EKF_update",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_position",
+        "measure": "attempt",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_position",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_velocity",
+        "measure": "SA_evaluation",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_velocity",
+        "measure": "accepted",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_velocity",
+        "measure": "actual_EKF_update",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_velocity",
+        "measure": "attempt",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_velocity",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "dual_antenna_yaw",
+        "measure": "SA_evaluation",
+        "count": 1345,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "dual_antenna_yaw",
+        "measure": "accepted",
+        "count": 1345,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "dual_antenna_yaw",
+        "measure": "actual_EKF_update",
+        "count": 1345,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "dual_antenna_yaw",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "dual_antenna_yaw",
+        "measure": "not_accepted",
+        "count": 24,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_horizontal_velocity",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_horizontal_velocity",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_horizontal_velocity",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_horizontal_velocity",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_horizontal_velocity",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "raw_doppler_velocity",
+        "measure": "SA_evaluation",
+        "count": 1108,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "raw_doppler_velocity",
+        "measure": "accepted",
+        "count": 1108,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "raw_doppler_velocity",
+        "measure": "actual_EKF_update",
+        "count": 1108,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "raw_doppler_velocity",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "raw_doppler_velocity",
+        "measure": "not_accepted",
+        "count": 261,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_position",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_position",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_position",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_position",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_position",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_velocity",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_velocity",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_velocity",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_velocity",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_velocity",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "dual_antenna_yaw",
+        "measure": "SA_evaluation",
+        "count": 1345,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "dual_antenna_yaw",
+        "measure": "accepted",
+        "count": 1345,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "dual_antenna_yaw",
+        "measure": "actual_EKF_update",
+        "count": 1345,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "dual_antenna_yaw",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "dual_antenna_yaw",
+        "measure": "not_accepted",
+        "count": 24,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_horizontal_velocity",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_horizontal_velocity",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_horizontal_velocity",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_horizontal_velocity",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_horizontal_velocity",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "raw_doppler_velocity",
+        "measure": "SA_evaluation",
+        "count": 1108,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "raw_doppler_velocity",
+        "measure": "accepted",
+        "count": 1108,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "raw_doppler_velocity",
+        "measure": "actual_EKF_update",
+        "count": 1108,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "raw_doppler_velocity",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "raw_doppler_velocity",
+        "measure": "not_accepted",
+        "count": 261,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_position",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_position",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_position",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_position",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_position",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_velocity",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_velocity",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_velocity",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_velocity",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_velocity",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      }
+    ],
+    "baseline": [
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "dual_antenna_yaw",
+        "measure": "SA_evaluation",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "dual_antenna_yaw",
+        "measure": "accepted",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "dual_antenna_yaw",
+        "measure": "actual_EKF_update",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "dual_antenna_yaw",
+        "measure": "attempt",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "dual_antenna_yaw",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "SA_evaluation",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "accepted",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "actual_EKF_update",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "attempt",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_horizontal_velocity",
+        "measure": "SA_evaluation",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_horizontal_velocity",
+        "measure": "accepted",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_horizontal_velocity",
+        "measure": "actual_EKF_update",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_horizontal_velocity",
+        "measure": "attempt",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "go2_horizontal_velocity",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "raw_doppler_velocity",
+        "measure": "SA_evaluation",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "raw_doppler_velocity",
+        "measure": "accepted",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "raw_doppler_velocity",
+        "measure": "actual_EKF_update",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "raw_doppler_velocity",
+        "measure": "attempt",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "raw_doppler_velocity",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_position",
+        "measure": "SA_evaluation",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_position",
+        "measure": "accepted",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_position",
+        "measure": "actual_EKF_update",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_position",
+        "measure": "attempt",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_position",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_velocity",
+        "measure": "SA_evaluation",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_velocity",
+        "measure": "accepted",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_velocity",
+        "measure": "actual_EKF_update",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_velocity",
+        "measure": "attempt",
+        "count": 100,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FIXED_196_2_216_2_HALF_OPEN",
+        "source": "receiver_velocity",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "dual_antenna_yaw",
+        "measure": "SA_evaluation",
+        "count": 1346,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "dual_antenna_yaw",
+        "measure": "accepted",
+        "count": 1346,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "dual_antenna_yaw",
+        "measure": "actual_EKF_update",
+        "count": 1346,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "dual_antenna_yaw",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "dual_antenna_yaw",
+        "measure": "not_accepted",
+        "count": 23,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_horizontal_velocity",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_horizontal_velocity",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_horizontal_velocity",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_horizontal_velocity",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "go2_horizontal_velocity",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "raw_doppler_velocity",
+        "measure": "SA_evaluation",
+        "count": 1108,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "raw_doppler_velocity",
+        "measure": "accepted",
+        "count": 1108,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "raw_doppler_velocity",
+        "measure": "actual_EKF_update",
+        "count": 1108,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "raw_doppler_velocity",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "raw_doppler_velocity",
+        "measure": "not_accepted",
+        "count": 261,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_position",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_position",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_position",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_position",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_position",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_velocity",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_velocity",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_velocity",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_velocity",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_RUN_66_340_CLOSED",
+        "source": "receiver_velocity",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "dual_antenna_yaw",
+        "measure": "SA_evaluation",
+        "count": 1346,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "dual_antenna_yaw",
+        "measure": "accepted",
+        "count": 1346,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "dual_antenna_yaw",
+        "measure": "actual_EKF_update",
+        "count": 1346,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "dual_antenna_yaw",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "dual_antenna_yaw",
+        "measure": "not_accepted",
+        "count": 23,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_attitude_roll_pitch",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_horizontal_velocity",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_horizontal_velocity",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_horizontal_velocity",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_horizontal_velocity",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "go2_horizontal_velocity",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "raw_doppler_velocity",
+        "measure": "SA_evaluation",
+        "count": 1108,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "raw_doppler_velocity",
+        "measure": "accepted",
+        "count": 1108,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "raw_doppler_velocity",
+        "measure": "actual_EKF_update",
+        "count": 1108,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "raw_doppler_velocity",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "raw_doppler_velocity",
+        "measure": "not_accepted",
+        "count": 261,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_position",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_position",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_position",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_position",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_position",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_velocity",
+        "measure": "SA_evaluation",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_velocity",
+        "measure": "accepted",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_velocity",
+        "measure": "actual_EKF_update",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_velocity",
+        "measure": "attempt",
+        "count": 1369,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      },
+      {
+        "window": "FULL_STREAM",
+        "source": "receiver_velocity",
+        "measure": "not_accepted",
+        "count": 0,
+        "time_axis": "measurement_time_or_RP_gnss_event_time"
+      }
+    ]
+  },
+  "actual_final_counters": {
+    "candidate": {
+      "gnss_update_count": 1369,
+      "position_update_count": 1369,
+      "velocity_update_count": 1369,
+      "yaw_attempt_count": 1369,
+      "yaw_reject_count": 24,
+      "sa_active_evaluation_count": 7929,
+      "raw_doppler_update_count": 1108,
+      "rp_update_count": 1369,
+      "hv_update_count": 1369
+    },
+    "baseline": {
+      "gnss_update_count": 1369,
+      "position_update_count": 1369,
+      "velocity_update_count": 1369,
+      "yaw_attempt_count": 1369,
+      "yaw_reject_count": 23,
+      "sa_active_evaluation_count": 7930,
+      "raw_doppler_update_count": 1108,
+      "rp_update_count": 1369,
+      "hv_update_count": 1369
+    }
+  },
+  "NAV_comparison": "NOT_REQUESTED_SEPARATE_PAYLOAD_NO_INFERRED_NAV_RESULT",
+  "limits": [
+    "Actual R means EKF_BEFORE.R; policy acceptance is separate.",
+    "Added update has no baseline intermediate state. No interpolation or global event-seq pairing.",
+    "N09 res3 may split propagation even if RP is rejected; split and feedback counts remain separate.",
+    "State differences are exact binary64 diagnostics, not error against a reference.",
+    "Covariance failures are numeric diagnostics, not a proof of strict indefiniteness."
+  ],
+  "first_difference_categories": [
+    "FIRST_ACTUAL_R_EXACT_DIFFERENCE",
+    "FIRST_ACTUAL_R_ABOVE_FIXED_TOLERANCE",
+    "FIRST_ACTUAL_DELTA_DIFFERENCE",
+    "FIRST_DX_AFTER_DIFFERENCE",
+    "FIRST_DX_BEFORE_DIFFERENCE",
+    "FIRST_ACTUAL_INNOVATION_DIFFERENCE",
+    "FIRST_MATCHED_UPDATE_STATE_DIFFERENCE",
+    "FIRST_ACTUAL_ACCEPTANCE_DIFFERENCE",
+    "FIRST_ACTUAL_UPDATE_PRESENCE_DIFFERENCE",
+    "FIRST_COMMON_IMU_END_STATE_DIFFERENCE"
+  ],
+  "complete_summary": "<VALIDATION_ROOT>/analysis/comparisons/N12_ONLY__RUN_01401/SUMMARY.json"
+}

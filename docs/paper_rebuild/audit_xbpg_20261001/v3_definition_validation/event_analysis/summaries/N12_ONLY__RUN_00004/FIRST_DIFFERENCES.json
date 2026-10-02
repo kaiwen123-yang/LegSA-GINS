@@ -1,0 +1,964 @@
+{
+  "scope": "N12_ONLY__RUN_00004",
+  "source_summary": "<VALIDATION_ROOT>/analysis/comparisons/N12_ONLY__RUN_00004/SUMMARY.json",
+  "data_mode": "real_clean",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "delta_direction": "candidate minus baseline",
+  "actual_R_rule": "EKF_BEFORE.R only",
+  "first_measurements": {
+    "FIRST_ACTUAL_R_ABOVE_FIXED_TOLERANCE": {
+      "stable_key": "[1,\"raw_doppler_velocity\",66.200000048]",
+      "status": "PAIRED",
+      "differences": {
+        "actual_R": {
+          "status": "DIFFERENT",
+          "max_abs_delta": 0.0017948526081993516,
+          "delta": [
+            [
+              -0.0017948526081993516,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              -0.0017948526081993516,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              -0.0017948526081993516
+            ]
+          ],
+          "within_fixed_R_tolerance": false
+        },
+        "actual_delta": {
+          "status": "DIFFERENT",
+          "max_abs_delta": 0.0004380234080461516,
+          "delta": [
+            3.1978772828923914e-07,
+            8.254348741686763e-08,
+            4.0886526366205737e-08,
+            -0.0004380234080461516,
+            -0.00011358460654164668,
+            -5.361936922376872e-06,
+            2.764489287997762e-07,
+            -1.0656543288072598e-06,
+            -1.0814453445597546e-08,
+            -4.5663032730527646e-14,
+            1.847260568675789e-13,
+            6.575331374780972e-15,
+            -1.9972812500128773e-07,
+            -5.001574537917154e-08,
+            -3.794529993031676e-09,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "dx_after": {
+          "status": "DIFFERENT",
+          "max_abs_delta": 0.0004380234080461065,
+          "delta": [
+            3.1978772829788227e-07,
+            8.2543487406328e-08,
+            4.08865263312741e-08,
+            -0.0004380234080461065,
+            -0.00011358460654165015,
+            -5.361936922382293e-06,
+            2.764489287997694e-07,
+            -1.0656543288072463e-06,
+            -1.0814453445598393e-08,
+            -4.5663032730528454e-14,
+            1.8472605686757566e-13,
+            6.575331374785213e-15,
+            -1.9972812500130806e-07,
+            -5.0015745379170266e-08,
+            -3.794529993019738e-09,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "baseline": {
+        "source": "raw_doppler_velocity",
+        "gnss_input_seq": 1,
+        "measurement_time": 66.200000048,
+        "imu_seq": 43,
+        "attempt_pointer": {
+          "byte_length": 1404,
+          "byte_offset": 511081,
+          "event": "MEASUREMENT_ATTEMPT",
+          "event_seq": 288,
+          "run_id": "RUN_00004",
+          "source_line": 288,
+          "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+        },
+        "decision": {
+          "accepted": true,
+          "reason": "ACCEPTED"
+        },
+        "decision_pointer": {
+          "byte_length": 697,
+          "byte_offset": 550690,
+          "event": "MEASUREMENT_DECISION",
+          "event_seq": 295,
+          "run_id": "RUN_00004",
+          "source_line": 295,
+          "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+        },
+        "sa_pointer": {
+          "byte_length": 10266,
+          "byte_offset": 523016,
+          "event": "SA_EVALUATION",
+          "event_seq": 292,
+          "run_id": "RUN_00004",
+          "source_line": 292,
+          "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+        },
+        "sa_begin_pointer": {
+          "byte_length": 7250,
+          "byte_offset": 515766,
+          "event": "SA_EVALUATION_BEGIN",
+          "event_seq": 291,
+          "run_id": "RUN_00004",
+          "source_line": 291,
+          "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+        },
+        "counters_before": {
+          "gnss_update_count": 0,
+          "hv_update_count": 0,
+          "position_update_count": 1,
+          "raw_doppler_update_count": 0,
+          "rp_update_count": 0,
+          "sa_active_evaluation_count": 3,
+          "velocity_update_count": 1,
+          "yaw_attempt_count": 1,
+          "yaw_reject_count": 0
+        },
+        "counters_after": {
+          "gnss_update_count": 0,
+          "hv_update_count": 0,
+          "position_update_count": 1,
+          "raw_doppler_update_count": 1,
+          "rp_update_count": 0,
+          "sa_active_evaluation_count": 4,
+          "velocity_update_count": 1,
+          "yaw_attempt_count": 1,
+          "yaw_reject_count": 0
+        },
+        "sa": {
+          "expected_basis": "raw_dz",
+          "raw_dz": [
+            -0.9116077360501483,
+            0.037923560904419576,
+            -0.15824052409555656
+          ],
+          "conditional_nu": [
+            -0.2200526538595713,
+            -0.05706191978440546,
+            -0.0027111421191884366
+          ],
+          "Hdx_before": [
+            -0.691555082190577,
+            0.09498548068882504,
+            -0.15552938197636812
+          ],
+          "raw_nis": 9.161580876587138,
+          "conditional_nis": 0.5522180086906763,
+          "recomputed_actual_nis": 9.161580876587138,
+          "recomputed_actual_normalized": 1.7475297686150335,
+          "base_R": {
+            "cols": 3,
+            "data": [
+              0.08369622580899999,
+              0,
+              0,
+              0,
+              0.08369622580899999,
+              0,
+              0,
+              0,
+              0.08369622580899999
+            ],
+            "layout": "row_major",
+            "rows": 3
+          },
+          "sa_effective_R": {
+            "cols": 3,
+            "data": [
+              0.08549107841719934,
+              0,
+              0,
+              0,
+              0.08549107841719934,
+              0,
+              0,
+              0,
+              0.08549107841719934
+            ],
+            "layout": "row_major",
+            "rows": 3
+          },
+          "checks": {
+            "base_R_trace": true,
+            "dof": true,
+            "hph_trace": true,
+            "nis": true,
+            "normalized": true,
+            "residual_norm": true,
+            "sa_effective_R": true,
+            "same_pre_policy_snapshot": true,
+            "uses_cov": true
+          },
+          "scales": {
+            "lsim_R_scale": 1,
+            "oim_R_scale": 1.0214448452227143,
+            "combined_R_scale": 1.0214448452227143,
+            "source_cap": 15,
+            "accepted": true,
+            "rejected": false
+          }
+        },
+        "ekf": {
+          "before_pointer": {
+            "byte_length": 7980,
+            "byte_offset": 533282,
+            "event": "EKF_BEFORE",
+            "event_seq": 293,
+            "run_id": "RUN_00004",
+            "source_line": 293,
+            "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+          },
+          "after_pointer": {
+            "byte_length": 9428,
+            "byte_offset": 541262,
+            "event": "EKF_AFTER",
+            "event_seq": 294,
+            "run_id": "RUN_00004",
+            "source_line": 294,
+            "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+          },
+          "R": {
+            "cols": 3,
+            "data": [
+              0.08549107841719934,
+              0,
+              0,
+              0,
+              0.08549107841719934,
+              0,
+              0,
+              0,
+              0.08549107841719934
+            ],
+            "layout": "row_major",
+            "rows": 3
+          },
+          "actual_Hdx": [
+            -0.691555082190577,
+            0.09498548068882504,
+            -0.15552938197636812
+          ],
+          "actual_innovation": [
+            -0.2200526538595713,
+            -0.05706191978440546,
+            -0.0027111421191884366
+          ],
+          "actual_delta": [
+            1.6676321675616354e-05,
+            4.304487263629265e-06,
+            2.1321547096096884e-06,
+            -0.022842086903014352,
+            -0.00592322283997775,
+            -0.000279622259088929,
+            1.4416290451204296e-05,
+            -5.557184600134163e-05,
+            -5.639529355723071e-07,
+            -2.381241181404506e-12,
+            9.633112442047466e-12,
+            3.428909928740677e-13,
+            -1.0415441501108724e-05,
+            -2.60822672098594e-06,
+            -1.978809362907439e-07,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "dx_before": [
+            -0.45097040033136954,
+            -0.16587661707957596,
+            -0.36490357700623754,
+            -0.6913759752195545,
+            0.09487269968787986,
+            -0.15549780472385683,
+            -0.00021587415939022366,
+            -0.001708771685469254,
+            -0.0048785882878349075,
+            3.033038443986528e-11,
+            2.8425621516878905e-10,
+            1.6359150385403258e-09,
+            -0.00031356596472550995,
+            4.601664578327293e-05,
+            -7.236979177356736e-05,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "dx_after": [
+            -0.4509537240096939,
+            -0.16587231259231233,
+            -0.3649014448515279,
+            -0.7142180621225689,
+            0.08894947684790211,
+            -0.15577742698294575,
+            -0.00020145786893901936,
+            -0.0017643435314705956,
+            -0.004879152240770479,
+            2.7949143258460774e-11,
+            2.938893276108365e-10,
+            1.6362579295331998e-09,
+            -0.0003239814062266187,
+            4.340841906228699e-05,
+            -7.256767270985811e-05,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "checks": {
+            "actual_Hdx": true,
+            "actual_nu": true
+          }
+        }
+      },
+      "candidate": {
+        "source": "raw_doppler_velocity",
+        "gnss_input_seq": 1,
+        "measurement_time": 66.200000048,
+        "imu_seq": 43,
+        "attempt_pointer": {
+          "byte_length": 1414,
+          "byte_offset": 571584,
+          "event": "MEASUREMENT_ATTEMPT",
+          "event_seq": 331,
+          "run_id": "N12_ONLY__RUN_00004",
+          "source_line": 331,
+          "source_path": "<VALIDATION_ROOT>/candidates/N12_ONLY/RUN_00004/observer/events.jsonl"
+        },
+        "decision": {
+          "accepted": true,
+          "reason": "ACCEPTED"
+        },
+        "decision_pointer": {
+          "byte_length": 707,
+          "byte_offset": 611260,
+          "event": "MEASUREMENT_DECISION",
+          "event_seq": 338,
+          "run_id": "N12_ONLY__RUN_00004",
+          "source_line": 338,
+          "source_path": "<VALIDATION_ROOT>/candidates/N12_ONLY/RUN_00004/observer/events.jsonl"
+        },
+        "sa_pointer": {
+          "byte_length": 10268,
+          "byte_offset": 583559,
+          "event": "SA_EVALUATION",
+          "event_seq": 335,
+          "run_id": "N12_ONLY__RUN_00004",
+          "source_line": 335,
+          "source_path": "<VALIDATION_ROOT>/candidates/N12_ONLY/RUN_00004/observer/events.jsonl"
+        },
+        "sa_begin_pointer": {
+          "byte_length": 7260,
+          "byte_offset": 576299,
+          "event": "SA_EVALUATION_BEGIN",
+          "event_seq": 334,
+          "run_id": "N12_ONLY__RUN_00004",
+          "source_line": 334,
+          "source_path": "<VALIDATION_ROOT>/candidates/N12_ONLY/RUN_00004/observer/events.jsonl"
+        },
+        "counters_before": {
+          "gnss_update_count": 0,
+          "hv_update_count": 0,
+          "position_update_count": 1,
+          "raw_doppler_update_count": 0,
+          "rp_update_count": 0,
+          "sa_active_evaluation_count": 3,
+          "velocity_update_count": 1,
+          "yaw_attempt_count": 1,
+          "yaw_reject_count": 0
+        },
+        "counters_after": {
+          "gnss_update_count": 0,
+          "hv_update_count": 0,
+          "position_update_count": 1,
+          "raw_doppler_update_count": 1,
+          "rp_update_count": 0,
+          "sa_active_evaluation_count": 4,
+          "velocity_update_count": 1,
+          "yaw_attempt_count": 1,
+          "yaw_reject_count": 0
+        },
+        "sa": {
+          "expected_basis": "conditional_nu",
+          "raw_dz": [
+            -0.9116077360501483,
+            0.037923560904419576,
+            -0.15824052409555656
+          ],
+          "conditional_nu": [
+            -0.2200526538595713,
+            -0.05706191978440546,
+            -0.0027111421191884366
+          ],
+          "Hdx_before": [
+            -0.691555082190577,
+            0.09498548068882504,
+            -0.15552938197636812
+          ],
+          "raw_nis": 9.161580876587138,
+          "conditional_nis": 0.5522180086906763,
+          "recomputed_actual_nis": 0.5522180086906763,
+          "recomputed_actual_normalized": 0.4290369093254784,
+          "base_R": {
+            "cols": 3,
+            "data": [
+              0.08369622580899999,
+              0,
+              0,
+              0,
+              0.08369622580899999,
+              0,
+              0,
+              0,
+              0.08369622580899999
+            ],
+            "layout": "row_major",
+            "rows": 3
+          },
+          "sa_effective_R": {
+            "cols": 3,
+            "data": [
+              0.08369622580899999,
+              0,
+              0,
+              0,
+              0.08369622580899999,
+              0,
+              0,
+              0,
+              0.08369622580899999
+            ],
+            "layout": "row_major",
+            "rows": 3
+          },
+          "checks": {
+            "base_R_trace": true,
+            "dof": true,
+            "hph_trace": true,
+            "logged_residual_vector": true,
+            "nis": true,
+            "normalized": true,
+            "residual_norm": true,
+            "sa_effective_R": true,
+            "same_pre_policy_snapshot": true,
+            "uses_cov": true
+          },
+          "scales": {
+            "lsim_R_scale": 1,
+            "oim_R_scale": 1,
+            "combined_R_scale": 1,
+            "source_cap": 15,
+            "accepted": true,
+            "rejected": false
+          }
+        },
+        "ekf": {
+          "before_pointer": {
+            "byte_length": 7990,
+            "byte_offset": 593827,
+            "event": "EKF_BEFORE",
+            "event_seq": 336,
+            "run_id": "N12_ONLY__RUN_00004",
+            "source_line": 336,
+            "source_path": "<VALIDATION_ROOT>/candidates/N12_ONLY/RUN_00004/observer/events.jsonl"
+          },
+          "after_pointer": {
+            "byte_length": 9443,
+            "byte_offset": 601817,
+            "event": "EKF_AFTER",
+            "event_seq": 337,
+            "run_id": "N12_ONLY__RUN_00004",
+            "source_line": 337,
+            "source_path": "<VALIDATION_ROOT>/candidates/N12_ONLY/RUN_00004/observer/events.jsonl"
+          },
+          "R": {
+            "cols": 3,
+            "data": [
+              0.08369622580899999,
+              0,
+              0,
+              0,
+              0.08369622580899999,
+              0,
+              0,
+              0,
+              0.08369622580899999
+            ],
+            "layout": "row_major",
+            "rows": 3
+          },
+          "actual_Hdx": [
+            -0.691555082190577,
+            0.09498548068882504,
+            -0.15552938197636812
+          ],
+          "actual_innovation": [
+            -0.2200526538595713,
+            -0.05706191978440546,
+            -0.0027111421191884366
+          ],
+          "actual_delta": [
+            1.6996109403905594e-05,
+            4.387030751046133e-06,
+            2.173041235975894e-06,
+            -0.023280110311060503,
+            -0.006036807446519397,
+            -0.0002849841960113059,
+            1.4692739380004072e-05,
+            -5.663750033014889e-05,
+            -5.747673890179046e-07,
+            -2.4269042141350337e-12,
+            9.817838498915045e-12,
+            3.494663242488487e-13,
+            -1.0615169626110012e-05,
+            -2.6582424663651113e-06,
+            -2.0167546628377558e-07,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "dx_before": [
+            -0.45097040033136954,
+            -0.16587661707957596,
+            -0.36490357700623754,
+            -0.6913759752195545,
+            0.09487269968787986,
+            -0.15549780472385683,
+            -0.00021587415939022366,
+            -0.001708771685469254,
+            -0.0048785882878349075,
+            3.033038443986528e-11,
+            2.8425621516878905e-10,
+            1.6359150385403258e-09,
+            -0.00031356596472550995,
+            4.601664578327293e-05,
+            -7.236979177356736e-05,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "dx_after": [
+            -0.4509534042219656,
+            -0.16587223004882493,
+            -0.3649014039650016,
+            -0.714656085530615,
+            0.08883589224136046,
+            -0.15578278891986813,
+            -0.0002011814200102196,
+            -0.001765409185799403,
+            -0.004879163055223925,
+            2.7903480225730246e-11,
+            2.940740536677041e-10,
+            1.6362645048645746e-09,
+            -0.00032418113435162,
+            4.335840331690782e-05,
+            -7.257146723985113e-05,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "checks": {
+            "actual_Hdx": true,
+            "actual_nu": true
+          }
+        }
+      }
+    },
+    "FIRST_ACTUAL_ACCEPTANCE_DIFFERENCE": null
+  },
+  "first_common_IMU_end_state": {
+    "candidate": {
+      "counters": {
+        "gnss_update_count": 1,
+        "hv_update_count": 1,
+        "position_update_count": 1,
+        "raw_doppler_update_count": 1,
+        "rp_update_count": 1,
+        "sa_active_evaluation_count": 6,
+        "velocity_update_count": 1,
+        "yaw_attempt_count": 1,
+        "yaw_reject_count": 0
+      },
+      "end_boundary": "COVARIANCE_HEALTH",
+      "feedback_count": 1,
+      "health_pointer": {
+        "byte_length": 1366,
+        "byte_offset": 690658,
+        "event": "COVARIANCE_HEALTH",
+        "event_seq": 356,
+        "run_id": "N12_ONLY__RUN_00004",
+        "source_line": 356,
+        "source_path": "<VALIDATION_ROOT>/candidates/N12_ONLY/RUN_00004/observer/events.jsonl"
+      },
+      "imu_seq": 43,
+      "initialized": true,
+      "opportunity_pointer": {
+        "byte_length": 1912,
+        "byte_offset": 452324,
+        "event": "IMU_OPPORTUNITY",
+        "event_seq": 304,
+        "run_id": "N12_ONLY__RUN_00004",
+        "source_line": 304,
+        "source_path": "<VALIDATION_ROOT>/candidates/N12_ONLY/RUN_00004/observer/events.jsonl"
+      },
+      "propagation_count": 1,
+      "res": 2,
+      "split_count": 0,
+      "state": {
+        "Cbn": [
+          [
+            0.9998581015689737,
+            0.01682105959392076,
+            -0.0009103191888824915
+          ],
+          [
+            -0.01683377793032844,
+            0.9997225876066891,
+            -0.016473364852948084
+          ],
+          [
+            0.0006329672031537874,
+            0.016486351419393093,
+            0.999863890521803
+          ]
+        ],
+        "acc_bias": [
+          -0.00033125328140826376,
+          2.515091362469971e-05,
+          -7.235755755716011e-05
+        ],
+        "acc_scale": [
+          0,
+          0,
+          0
+        ],
+        "antlever_m": [
+          0.03,
+          0.03,
+          -0.3
+        ],
+        "gyr_bias": [
+          -5.162584263226105e-09,
+          -2.3174855867186355e-10,
+          1.6425106162653836e-09
+        ],
+        "gyr_scale": [
+          0,
+          0,
+          0
+        ],
+        "position_blh_rad_m": [
+          0.6978670030235153,
+          2.030570645606256,
+          41.43403342986128
+        ],
+        "qbn_wxyz": [
+          0.9999305700519244,
+          0.00824050120565612,
+          -0.0003858483874425749,
+          -0.008414293585029
+        ],
+        "rpy_rad": [
+          0.016487101644933583,
+          -0.0006329672454199141,
+          6.266350730726841
+        ],
+        "time": 66.199046,
+        "velocity_ned_mps": [
+          0.8526232073749782,
+          0.012386394892745945,
+          0.07487820886353933
+        ]
+      },
+      "state_pointer": {
+        "byte_length": 1584,
+        "byte_offset": 689074,
+        "event": "FEEDBACK_AFTER",
+        "event_seq": 355,
+        "run_id": "N12_ONLY__RUN_00004",
+        "source_line": 355,
+        "source_path": "<VALIDATION_ROOT>/candidates/N12_ONLY/RUN_00004/observer/events.jsonl"
+      },
+      "time": 66.199046
+    },
+    "baseline": {
+      "counters": {
+        "gnss_update_count": 1,
+        "hv_update_count": 1,
+        "position_update_count": 1,
+        "raw_doppler_update_count": 1,
+        "rp_update_count": 1,
+        "sa_active_evaluation_count": 6,
+        "velocity_update_count": 1,
+        "yaw_attempt_count": 1,
+        "yaw_reject_count": 0
+      },
+      "end_boundary": "NEXT_IMU_INPUT_OR_OPPORTUNITY_OR_EOF",
+      "feedback_count": 1,
+      "imu_seq": 43,
+      "initialized": true,
+      "opportunity_pointer": {
+        "byte_length": 1902,
+        "byte_offset": 392298,
+        "event": "IMU_OPPORTUNITY",
+        "event_seq": 261,
+        "run_id": "RUN_00004",
+        "source_line": 261,
+        "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+      },
+      "propagation_count": 1,
+      "res": 2,
+      "split_count": 0,
+      "state": {
+        "Cbn": [
+          [
+            0.9998581076397982,
+            0.016820718283511987,
+            -0.0009099579047985378
+          ],
+          [
+            -0.01683343073507049,
+            0.999722592797838,
+            -0.016473404604263796
+          ],
+          [
+            0.0006326109779034518,
+            0.016486384867366193,
+            0.9998638901957384
+          ]
+        ],
+        "acc_bias": [
+          -0.000331103290064467,
+          2.513338383926211e-05,
+          -7.23544170182189e-05
+        ],
+        "acc_scale": [
+          0,
+          0,
+          0
+        ],
+        "antlever_m": [
+          0.03,
+          0.03,
+          -0.3
+        ],
+        "gyr_bias": [
+          -5.162582880208702e-09,
+          -2.317371681235938e-10,
+          1.642397276775876e-09
+        ],
+        "gyr_scale": [
+          0,
+          0,
+          0
+        ],
+        "position_blh_rad_m": [
+          0.6978670030235339,
+          2.030570645606251,
+          41.43403342005906
+        ],
+        "qbn_wxyz": [
+          0.999930571419008,
+          0.008240519495482705,
+          -0.0003856689971267005,
+          -0.008414121435157157
+        ],
+        "rpy_rad": [
+          0.016487135093743107,
+          -0.0006326110200982584,
+          6.266351077975166
+        ],
+        "time": 66.199046,
+        "velocity_ned_mps": [
+          0.8522941490160663,
+          0.012422117698271371,
+          0.07487283519201987
+        ]
+      },
+      "state_pointer": {
+        "byte_length": 1576,
+        "byte_offset": 628262,
+        "event": "FEEDBACK_AFTER",
+        "event_seq": 312,
+        "run_id": "RUN_00004",
+        "source_line": 312,
+        "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl"
+      },
+      "time": 66.199046
+    },
+    "state_delta": {
+      "position_blh_rad_m": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 9.802221256904886e-09,
+        "delta": [
+          -1.8540724511240114e-14,
+          4.884981308350689e-15,
+          9.802221256904886e-09
+        ],
+        "unit": "rad,rad,m"
+      },
+      "velocity_ned_mps": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 0.0003290583589119489,
+        "delta": [
+          0.0003290583589119489,
+          -3.572280552542606e-05,
+          5.373671519454115e-06
+        ],
+        "unit": "m/s"
+      },
+      "rpy_rad": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 3.562253216557237e-07,
+        "delta": [
+          -3.344880952424467e-08,
+          -3.562253216557237e-07,
+          -3.4724832520538484e-07
+        ],
+        "unit": "rad"
+      },
+      "Cbn": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 3.612840839536729e-07,
+        "delta": [
+          [
+            -6.070824509762929e-09,
+            3.4131040877252716e-07,
+            -3.612840839536729e-07
+          ],
+          [
+            -3.471952579499338e-07,
+            -5.1911489551415e-09,
+            3.975131571132273e-08
+          ],
+          [
+            3.5622525033560375e-07,
+            -3.3447973099565154e-08,
+            3.2606461974893364e-10
+          ]
+        ],
+        "unit": "dimensionless"
+      },
+      "qbn_wxyz": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 1.7939031587440148e-07,
+        "delta": [
+          -1.367083557468618e-09,
+          -1.828982658554079e-08,
+          -1.7939031587440148e-07,
+          -1.7214987184377417e-07
+        ],
+        "unit": "dimensionless"
+      },
+      "gyr_bias": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 1.1333948950765874e-13,
+        "delta": [
+          -1.3830174026169567e-15,
+          -1.1390548269756191e-14,
+          1.1333948950765874e-13
+        ],
+        "unit": "rad/s"
+      },
+      "acc_bias": {
+        "status": "DIFFERENT",
+        "max_abs_delta": 1.499913437967809e-07,
+        "delta": [
+          -1.499913437967809e-07,
+          1.7529785437599442e-08,
+          -3.1405389412089355e-09
+        ],
+        "unit": "m/s^2"
+      },
+      "gyr_scale": {
+        "status": "EXACTLY_EQUAL",
+        "max_abs_delta": 0.0,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "unit": "dimensionless"
+      },
+      "acc_scale": {
+        "status": "EXACTLY_EQUAL",
+        "max_abs_delta": 0.0,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "unit": "dimensionless"
+      },
+      "antlever_m": {
+        "status": "EXACTLY_EQUAL",
+        "max_abs_delta": 0.0,
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "unit": "m"
+      }
+    },
+    "same_recorded_state_time": true,
+    "propagation_counts": {
+      "candidate": 1,
+      "baseline": 1
+    },
+    "split_counts": {
+      "candidate": 0,
+      "baseline": 0
+    },
+    "feedback_counts": {
+      "candidate": 1,
+      "baseline": 1
+    }
+  }
+}

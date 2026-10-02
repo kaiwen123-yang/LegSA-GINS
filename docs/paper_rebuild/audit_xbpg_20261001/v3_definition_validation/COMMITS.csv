@@ -21,3 +21,4 @@ N09_A2_NATIVE,close ten planned candidate calls and preserve A2 byte-identical c
 N09_A1_EVAL,report optional RP A1 horizontal gains and vertical losses on fixed support,5460eb7817fcda1a6ba63d13873639f730366d49,0,True,PUSHED_VERIFIED
 N09_A2_EVAL,close all seventeen evaluations with unchanged A2 controls and explicit accounting,a42059a36bfa44bdf6b6fea079574965288ecb64,0,True,PUSHED_VERIFIED
 CASE_VIEW,link all ten candidate outcomes and fixed windows without rounding source values,670443f9252ff74d6ed843ed275cd1a938d1613b,0,True,PUSHED_VERIFIED
+CASE_VIEW_REVIEW,enforce identical time support before paired metric subtraction,a321f4092bd44ea9a994565ac61a99e8a2016aff,0,True,PUSHED_VERIFIED
