@@ -23,18 +23,19 @@
 - A13：explain A1_30s across all eleven configurations；`36547a906cd9c2b3dd9b9da058a561c5663c7523`；PUSHED_VERIFIED。
 - A21：explain A2_10s across all eleven configurations；`2996f399a1133035f26c98c83a36daee562d7bc1`；PUSHED_VERIFIED。
 - A22：explain A2_20s across all eleven configurations；`d47bd8582dfbdff84a64896426b00f2d96201ebe`；PUSHED_VERIFIED。
+- U01：explain paired estimates and existing uncertainty intervals；`c3f1a014ea3b610fc0165009325fb7d601627a61`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-U01：explain paired estimates and existing uncertainty intervals。
+B01：separate historical protocol comparisons from formal V3 runs。
 
-完整读取23个UA/UNC CSV及2个PAIRWISE summary，共17656行；4685个精确源单元格转录。解释case bootstrap、type cluster、MBB与540/541、有限支持及分母；没有新bootstrap。明确SA均值/中位数不同方向、自然共同支持CI及RESOLVED文字/机器表差异。来源/字段见secondary读取表；本项只计数转录，前项validation历史保留。
+读取18张明确引用的旧协议/比较表27644行，转录1740个源单元格。保留旧CORE5951中F01协议混合、完整code_commit及NOT_RUN_ALGORITHM_FAILURE/ALL_YAW_REJECTED原词；旧新完成2x2与三序列不同方向分列。FAILURE_COMPARISON总192格含版本轴，非192失败；没有增加V3 native分母。只读、计数与转录，无科学重算。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-旧协议比较表的版本与状态转移解释。
+候选R5W/R5SIGMA/B3的原身份与尾部解释。
 
 ## 调用边界
 
