@@ -7,3 +7,4 @@ N16_CODE,exclude disabled HV dimension from quality statistics with native contr
 RUN_ENTRY,gate ten single-slot candidate calls with immutable input and access checks,17aba05b15cf8a80bc43dfece7c7be963b063839,0,True,PUSHED_VERIFIED
 N12_NATIVE,record two completed N12 closed-loop calls and changed acceptance,633db7fd8d2f92e78eb9a3a0e0e60328621e6f5c,0,True,PUSHED_VERIFIED
 N16_NATIVE,record independent N16 closed-loop calls without combining N12,5b0353f7bad7b4cd475ca06511c8a39f93e119ca,0,True,PUSHED_VERIFIED
+EVAL_ENTRY,bind frozen singleton evaluation and baseline reproduction gates,af74931169deb1f94576277f35df2b976a4286dc,0,True,PUSHED_VERIFIED

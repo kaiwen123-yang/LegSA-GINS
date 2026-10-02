@@ -12,18 +12,19 @@
 - RUN_ENTRY：gate ten single-slot candidate calls with immutable input and access checks；`17aba05b15cf8a80bc43dfece7c7be963b063839`；PUSHED_VERIFIED。
 - N12_NATIVE：record two completed N12 closed-loop calls and changed acceptance；`633db7fd8d2f92e78eb9a3a0e0e60328621e6f5c`；PUSHED_VERIFIED。
 - N16_NATIVE：record independent N16 closed-loop calls without combining N12；`5b0353f7bad7b4cd475ca06511c8a39f93e119ca`；PUSHED_VERIFIED。
+- EVAL_ENTRY：bind frozen singleton evaluation and baseline reproduction gates；`af74931169deb1f94576277f35df2b976a4286dc`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-EVAL_ENTRY：bind frozen singleton evaluation and baseline reproduction gates。
+N09_C00_NATIVE：verify N09 normal-GNSS controls reproduce ten scientific outputs。
 
-评价单例入口准备7baseline+10candidate未调用槽；74/74新版helper检查通过（先前57项通过回执另留），0真实evaluator。已补17槽未调用门、binary/READY/99身份门和实际error读取路径。基线转点NAV hash先核，143原字段按预注册容差；参考只由离线child同句柄读取。
+N09 C00 A04/F04 2/2完成；198固定身份与access通过，10/10科学输出BYTE_IDENTICAL。A1/A2四槽尚未执行保留PLANNED，不计失败或成功。当前真实native累计6，基线未重跑。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-先执行RUN_00004与RUN_01401基线口径核对，通过后评价N12/N16；继续N09有限原生队列。
+N09 A1两方法；评价首两基线口径门与N12/N16候选。
 
 ## 调用边界
 
