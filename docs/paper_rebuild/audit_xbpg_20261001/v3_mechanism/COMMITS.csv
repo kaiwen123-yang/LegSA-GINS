@@ -1,3 +1,4 @@
 item_id,description,commit_sha,push_exit_code,remote_contains_commit,status
 D01,correct V3 display precision denominators and reproduction wording,a62bd637303341a92b5016aaa7666e30994c4424,0,True,PUSHED_VERIFIED
 E01,document actual V3 fault exposure against evaluation support,6d326c9fa3c2279d6bfd5fbbc46d467d4523b44f,0,True,PUSHED_VERIFIED
+E02,补充核对 D39 seed00 的两个窗内区间及窗外空集,dff215f5d11ba35097dbcfbef290fe0a2cf6667f,0,True,PUSHED_VERIFIED

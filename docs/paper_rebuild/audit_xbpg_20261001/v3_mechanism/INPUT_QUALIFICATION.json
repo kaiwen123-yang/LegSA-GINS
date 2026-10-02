@@ -1,0 +1,21 @@
+{
+  "stage_id": "V3_MECHANISM_EVIDENCE_20261002T042234Z",
+  "native_identities": 11,
+  "unique_input_files": 11,
+  "input_uses": 55,
+  "hash_match_uses": 55,
+  "qualified_native": 11,
+  "frozen_binary_sha256": "96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c",
+  "frozen_binary_match": true,
+  "science_calls": 0,
+  "provider_generator_calls": 0,
+  "raw_reference_opens": 0,
+  "data_mode": "diagnostic_replay_preparation",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "new_semisynthetic_data_generated": false,
+  "raw_generation_chain_reexecuted": false,
+  "provider_identity_level": "LIVE_PAYLOAD_TO_FORMAL_RECORDED_PIN",
+  "semantic_review": "separate INPUT_LINEAGE.md; hash alone does not prove generation",
+  "original_payloads_modified": false
+}
