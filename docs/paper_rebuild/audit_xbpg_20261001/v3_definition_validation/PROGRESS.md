@@ -31,18 +31,19 @@
 - N09_C00_EVENTS：verify normal-GNSS event states remain exact under optional RP scheduling；`03e5c1eb085934c4a84aa66a5c237b017c835979`；PUSHED_VERIFIED。
 - P_BOUNDARY：explain frozen zero-scale covariance and bound key-snapshot symmetry evidence；`969b11dba49fec5d9dd1474be6c5e67f98b9a01c`；PUSHED_VERIFIED。
 - N09_A2_EVENTS：close A2 unchanged scheduling and actual accepted-source evidence；`ddd8671e7e37398ace9a61f300ba4d9bd4a48191`；PUSHED_VERIFIED。
+- N09_A1_EVENTS：close A1 RP updates with cache-only exact-key reconciliation；`d25ace278602214570c639e66464fe4523d219b5`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N09_A1_EVENTS：close A1 RP updates with cache-only exact-key reconciliation。
+N16_EVENTS：close active-axis R changes and retain D15 cap negative control。
 
-A1两方法各100个RP事前合格输入、100次实际尝试/接受/反馈、一次消费，res2=40/res3=60；HV在原100个GNSS机会中资格0。四事件流各读一次。本轮辅助分析器197与197.0文本键漏联各20条，原80摘要保留，独立有限数值精确唯一键辅助表闭合100；11项合成检查通过，未重读事件/重跑solver。首更新与共同末状态证据已保存；N09仍为可选设计扩展，新增本项科学调用0。
+N16两新候选流各读一次，930410行/15862个SA事件按固定容差核对，旧基线仅复用缓存。C00/D15实际R精确差2532/1765，其中HV1369/230；接受状态翻转0。首HV LSIM为2→1.5，实际二维R随之改变，D=999仍保留；D15 cap负对照及旧40影子/1329遮蔽分开。首更新/状态增量已保存，新增科学调用0。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-提交N16实际权重与负对照，然后发布少量说明图和最终限定裁定。
+发布三张实际新误差/权重说明图，汇总全队列调用和最终定义裁定。
 
 ## 调用边界
 

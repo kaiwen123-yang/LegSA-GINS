@@ -1,0 +1,484 @@
+{
+  "scope": "N16_ONLY / RUN_00004 and RUN_01401 only",
+  "data_mode": "mixed_real_clean_and_semisynthetic_sources",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "published_analyzer_commit": "291c6c6f87990430a07ad44882b92ed62337df12",
+  "N12_baseline_cache_publication_commit": "4a250c438298755bca6a5fbc0188e468ab68d1eb",
+  "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+  "commands": [
+    "python3 docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/event_analysis/analyze_events.py scan --roots configs/paper_rebuild/V3_DEFINITION_ROOTS.local.json --candidate-id N16_ONLY --run-id RUN_00004",
+    "python3 docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/event_analysis/analyze_events.py scan --roots configs/paper_rebuild/V3_DEFINITION_ROOTS.local.json --candidate-id N16_ONLY --run-id RUN_01401",
+    "python3 docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/event_analysis/analyze_events.py compare --roots configs/paper_rebuild/V3_DEFINITION_ROOTS.local.json --candidate-id N16_ONLY --run-id RUN_00004",
+    "python3 docs/paper_rebuild/audit_xbpg_20261001/v3_definition_validation/event_analysis/analyze_events.py compare --roots configs/paper_rebuild/V3_DEFINITION_ROOTS.local.json --candidate-id N16_ONLY --run-id RUN_01401"
+  ],
+  "scan_cli_results": [
+    {
+      "baseline_run_id": "RUN_00004",
+      "baseline_cache_reused": true,
+      "baseline_payload_opens": 0,
+      "baseline_status": "VALIDATED",
+      "candidate_payload_opens": 1,
+      "candidate_status": "VALIDATED",
+      "exit_code": 0
+    },
+    {
+      "baseline_run_id": "RUN_01401",
+      "baseline_cache_reused": true,
+      "baseline_payload_opens": 0,
+      "baseline_status": "VALIDATED",
+      "candidate_payload_opens": 1,
+      "candidate_status": "VALIDATED",
+      "exit_code": 0
+    }
+  ],
+  "candidate_new_scan_records": [
+    {
+      "schema": "V3_DEFINITION_EVENT_CACHE_1",
+      "source_path": "<VALIDATION_ROOT>/candidates/N16_ONLY/RUN_00004/observer/events.jsonl",
+      "run_id": "N16_ONLY__RUN_00004",
+      "candidate_id": "N16_ONLY",
+      "group": "C00",
+      "source_sha256": "a118ad5f7bdda1aa0f134fc75d5216b816ad9333802b8dbdfccaf5b39923c510",
+      "bytes_read_sha256": "a118ad5f7bdda1aa0f134fc75d5216b816ad9333802b8dbdfccaf5b39923c510",
+      "hash_scope": "FULL_STABLE_FILE",
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+      "identity_gate": {
+        "checks": {
+          "slot": true,
+          "status": true,
+          "access": true,
+          "native_count": true,
+          "exit": true,
+          "config": true,
+          "outputs": true
+        },
+        "receipt_sha256": "d7908107b70b8596019a49ee60fb1a14ca5ff72f0ce445cec4011a593cc87141",
+        "access_sha256": "39fcb17f4bdf81d585080c51db46ec6f062b6d2388ea5eb137a0d60070235d9f"
+      },
+      "stream_status": "COMPLETE",
+      "stream_error": null,
+      "analysis_status": "VALIDATED",
+      "events_read": 465209,
+      "bytes_read": 947070176,
+      "complete_payload_scan_count": 1,
+      "event_payload_opens_this_call": 1,
+      "payload_open_attempts_this_call": 1,
+      "physical_eof_reached": true,
+      "complete_valid_stream": true,
+      "cache_reused": false,
+      "sa_validation_counts": {
+        "VALIDATED": 7932
+      },
+      "numeric_tolerances": {
+        "nis_abs": 1e-09,
+        "nis_rel": 1e-08,
+        "R_abs": 1e-10,
+        "R_rel": 1e-10,
+        "covariance_symmetry_rel": 1e-10,
+        "covariance_pivot": 1e-12
+      },
+      "final_actual_counters": {
+        "gnss_update_count": 1369,
+        "position_update_count": 1369,
+        "velocity_update_count": 1369,
+        "yaw_attempt_count": 1369,
+        "yaw_reject_count": 21,
+        "sa_active_evaluation_count": 7932,
+        "raw_doppler_update_count": 1108,
+        "rp_update_count": 1369,
+        "hv_update_count": 1369
+      },
+      "data_mode": "real_clean",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": false,
+      "raw_provider_reference_reads": 0,
+      "new_native_calls": 0,
+      "evaluator_calls": 0,
+      "provider_calls": 0,
+      "elapsed_seconds": 262.8894419670105,
+      "numpy_version": "1.26.4",
+      "numeric_library_threads": 1,
+      "source_receipt": "<VALIDATION_ROOT>/analysis/event_cache/N16_ONLY__RUN_00004/SCAN_RECEIPT.json",
+      "source_metadata_unchanged": true
+    },
+    {
+      "schema": "V3_DEFINITION_EVENT_CACHE_1",
+      "source_path": "<VALIDATION_ROOT>/candidates/N16_ONLY/RUN_01401/observer/events.jsonl",
+      "run_id": "N16_ONLY__RUN_01401",
+      "candidate_id": "N16_ONLY",
+      "group": "D15",
+      "source_sha256": "603d38d1d542ef434579d57c78f87a6117f6f7988d9bd64db41c585f5f948850",
+      "bytes_read_sha256": "603d38d1d542ef434579d57c78f87a6117f6f7988d9bd64db41c585f5f948850",
+      "hash_scope": "FULL_STABLE_FILE",
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+      "identity_gate": {
+        "checks": {
+          "slot": true,
+          "status": true,
+          "access": true,
+          "native_count": true,
+          "exit": true,
+          "config": true,
+          "outputs": true
+        },
+        "receipt_sha256": "1b67b5e419a9d465bdfd021ea25ee39670565bbe4d1b060b5d4f4c0f82538e97",
+        "access_sha256": "83e8e0c25c81e5f7a5cca54bbf26ee014dc394a43bcc01b83a977d4ef3331334"
+      },
+      "stream_status": "COMPLETE",
+      "stream_error": null,
+      "analysis_status": "VALIDATED",
+      "events_read": 465201,
+      "bytes_read": 946257772,
+      "complete_payload_scan_count": 1,
+      "event_payload_opens_this_call": 1,
+      "payload_open_attempts_this_call": 1,
+      "physical_eof_reached": true,
+      "complete_valid_stream": true,
+      "cache_reused": false,
+      "sa_validation_counts": {
+        "VALIDATED": 7930
+      },
+      "numeric_tolerances": {
+        "nis_abs": 1e-09,
+        "nis_rel": 1e-08,
+        "R_abs": 1e-10,
+        "R_rel": 1e-10,
+        "covariance_symmetry_rel": 1e-10,
+        "covariance_pivot": 1e-12
+      },
+      "final_actual_counters": {
+        "gnss_update_count": 1369,
+        "position_update_count": 1369,
+        "velocity_update_count": 1369,
+        "yaw_attempt_count": 1369,
+        "yaw_reject_count": 23,
+        "sa_active_evaluation_count": 7930,
+        "raw_doppler_update_count": 1108,
+        "rp_update_count": 1369,
+        "hv_update_count": 1369
+      },
+      "data_mode": "semisynthetic",
+      "synthetic_data_used": false,
+      "semisynthetic_data_used": true,
+      "raw_provider_reference_reads": 0,
+      "new_native_calls": 0,
+      "evaluator_calls": 0,
+      "provider_calls": 0,
+      "elapsed_seconds": 263.0860507488251,
+      "numpy_version": "1.26.4",
+      "numeric_library_threads": 1,
+      "source_receipt": "<VALIDATION_ROOT>/analysis/event_cache/N16_ONLY__RUN_01401/SCAN_RECEIPT.json",
+      "source_metadata_unchanged": true
+    }
+  ],
+  "baseline_cache_reuse_records": [
+    {
+      "cache_identity": "BASELINE__RUN_00004",
+      "historical_scan_receipt": {
+        "schema": "V3_DEFINITION_EVENT_CACHE_1",
+        "source_path": "<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl",
+        "run_id": "RUN_00004",
+        "candidate_id": "BASELINE",
+        "group": "C00",
+        "source_sha256": "de76add0058d57a8e035bd6d588159175e1cf28ec0d55fb4c7d255ff08170311",
+        "bytes_read_sha256": "de76add0058d57a8e035bd6d588159175e1cf28ec0d55fb4c7d255ff08170311",
+        "hash_scope": "FULL_STABLE_FILE",
+        "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+        "identity_gate": {
+          "checks": {
+            "slot": true,
+            "status": true,
+            "access": true,
+            "manifest": true,
+            "exit": true,
+            "native_count": true,
+            "identity": true,
+            "outputs": true
+          },
+          "receipt_sha256": "ea697ceee0a87d6263aaaa35666c51c02cc2d32945887fffdec65e261ef64ab4",
+          "access_sha256": "51ca71909779932c7bd52e4c52105196445835a514744c0c0b3f2d1b6aff0b71"
+        },
+        "stream_status": "COMPLETE",
+        "stream_error": null,
+        "analysis_status": "VALIDATED",
+        "events_read": 408566,
+        "bytes_read": 864568683,
+        "complete_payload_scan_count": 1,
+        "event_payload_opens_this_call": 1,
+        "payload_open_attempts_this_call": 1,
+        "physical_eof_reached": true,
+        "complete_valid_stream": true,
+        "cache_reused": false,
+        "sa_validation_counts": {
+          "VALIDATED": 7932
+        },
+        "numeric_tolerances": {
+          "nis_abs": 1e-09,
+          "nis_rel": 1e-08,
+          "R_abs": 1e-10,
+          "R_rel": 1e-10,
+          "covariance_symmetry_rel": 1e-10,
+          "covariance_pivot": 1e-12
+        },
+        "final_actual_counters": {
+          "gnss_update_count": 1369,
+          "position_update_count": 1369,
+          "velocity_update_count": 1369,
+          "yaw_attempt_count": 1369,
+          "yaw_reject_count": 21,
+          "sa_active_evaluation_count": 7932,
+          "raw_doppler_update_count": 1108,
+          "rp_update_count": 1369,
+          "hv_update_count": 1369
+        },
+        "data_mode": "real_clean",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": false,
+        "raw_provider_reference_reads": 0,
+        "new_native_calls": 0,
+        "evaluator_calls": 0,
+        "provider_calls": 0,
+        "elapsed_seconds": 164.62448072433472,
+        "numpy_version": "1.26.4",
+        "numeric_library_threads": 1,
+        "source_receipt": "<VALIDATION_ROOT>/analysis/event_cache/BASELINE__RUN_00004/SCAN_RECEIPT.json"
+      },
+      "cache_reused_this_item": true,
+      "event_payload_opens_this_item": 0,
+      "new_complete_payload_scans_this_item": 0,
+      "source_hash_current_role": "PREVIOUS_COMPLETE_SCAN_HASH_REUSED_NOT_REHASHED_THIS_ITEM",
+      "current_metadata_and_admission_gates_passed": true
+    },
+    {
+      "cache_identity": "BASELINE__RUN_01401",
+      "historical_scan_receipt": {
+        "schema": "V3_DEFINITION_EVENT_CACHE_1",
+        "source_path": "<MECHANISM_ROOT>/replays/RUN_01401/observed/observer/events.jsonl",
+        "run_id": "RUN_01401",
+        "candidate_id": "BASELINE",
+        "group": "D15",
+        "source_sha256": "5414549783be475dd6b7467b4e7246b77c6600aea425db92d102168257c4ee3a",
+        "bytes_read_sha256": "5414549783be475dd6b7467b4e7246b77c6600aea425db92d102168257c4ee3a",
+        "hash_scope": "FULL_STABLE_FILE",
+        "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f",
+        "identity_gate": {
+          "checks": {
+            "slot": true,
+            "status": true,
+            "access": true,
+            "manifest": true,
+            "exit": true,
+            "native_count": true,
+            "identity": true,
+            "outputs": true
+          },
+          "receipt_sha256": "5e0c3b58426dea7cd87f7656c2a09cae8c54e1338fd9fe9b2dc7046254dbfada",
+          "access_sha256": "69f1e9af3b06b37ffc2209fb72c8bdecea2eae8f8db20f209a41ddd15f33b82f"
+        },
+        "stream_status": "COMPLETE",
+        "stream_error": null,
+        "analysis_status": "VALIDATED",
+        "events_read": 408558,
+        "bytes_read": 863772898,
+        "complete_payload_scan_count": 1,
+        "event_payload_opens_this_call": 1,
+        "payload_open_attempts_this_call": 1,
+        "physical_eof_reached": true,
+        "complete_valid_stream": true,
+        "cache_reused": false,
+        "sa_validation_counts": {
+          "VALIDATED": 7930
+        },
+        "numeric_tolerances": {
+          "nis_abs": 1e-09,
+          "nis_rel": 1e-08,
+          "R_abs": 1e-10,
+          "R_rel": 1e-10,
+          "covariance_symmetry_rel": 1e-10,
+          "covariance_pivot": 1e-12
+        },
+        "final_actual_counters": {
+          "gnss_update_count": 1369,
+          "position_update_count": 1369,
+          "velocity_update_count": 1369,
+          "yaw_attempt_count": 1369,
+          "yaw_reject_count": 23,
+          "sa_active_evaluation_count": 7930,
+          "raw_doppler_update_count": 1108,
+          "rp_update_count": 1369,
+          "hv_update_count": 1369
+        },
+        "data_mode": "semisynthetic",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": true,
+        "raw_provider_reference_reads": 0,
+        "new_native_calls": 0,
+        "evaluator_calls": 0,
+        "provider_calls": 0,
+        "elapsed_seconds": 177.03492522239685,
+        "numpy_version": "1.26.4",
+        "numeric_library_threads": 1,
+        "source_receipt": "<VALIDATION_ROOT>/analysis/event_cache/BASELINE__RUN_01401/SCAN_RECEIPT.json"
+      },
+      "cache_reused_this_item": true,
+      "event_payload_opens_this_item": 0,
+      "new_complete_payload_scans_this_item": 0,
+      "source_hash_current_role": "PREVIOUS_COMPLETE_SCAN_HASH_REUSED_NOT_REHASHED_THIS_ITEM",
+      "current_metadata_and_admission_gates_passed": true
+    }
+  ],
+  "totals": {
+    "new_candidate_event_streams": 2,
+    "candidate_event_payload_open_attempts": 2,
+    "complete_new_candidate_scans": 2,
+    "baseline_cache_reuses": 2,
+    "baseline_event_payload_opens": 0,
+    "partial_candidate_stream_reads": 0,
+    "failed_candidate_streams": 0,
+    "new_event_lines": 930410,
+    "new_event_bytes": 1893327948,
+    "new_SA_evaluations_validated": 15862,
+    "new_SA_failed_or_unavailable": 0,
+    "compare_calls": 2,
+    "comparison_event_payload_opens": 0,
+    "new_native_calls": 0,
+    "evaluator_calls": 0,
+    "provider_calls": 0,
+    "raw_provider_reference_NAV_STD_reads": 0
+  },
+  "stream_retry_count": 0,
+  "summary_count_provenance": "Each existing N16 MEASUREMENT_COMPARISON.csv and IMU_STATE_COMPARISON.csv fully read once for counts and selected registered old control keys; no event payload reopened.",
+  "covariance_pattern_query": "SELECT json_extract(data,'$.report.nonpositive_diagonal_indices'), json_extract(data,'$.report.min_diagonal'), json_extract(data,'$.report.all_finite'), COUNT(*) FROM covariance GROUP BY 1,2,3",
+  "covariance_pattern_query_scope": "Read-only full covariance/report grouping for the two new candidate caches; the two baseline patterns explicitly reuse the prior N12 complete-cache query. No raw event reads and no filter-matrix writes.",
+  "covariance_pattern_query_results": [
+    {
+      "cache": "<VALIDATION_ROOT>/analysis/event_cache/N16_ONLY__RUN_00004/cache.sqlite",
+      "nonpositive_diagonal_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "min_diagonal": 0,
+      "all_finite": true,
+      "matching_rows": 56642,
+      "query_performed_this_item": true
+    },
+    {
+      "cache": "<VALIDATION_ROOT>/analysis/event_cache/N16_ONLY__RUN_01401/cache.sqlite",
+      "nonpositive_diagonal_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "min_diagonal": 0,
+      "all_finite": true,
+      "matching_rows": 56642,
+      "query_performed_this_item": true
+    },
+    {
+      "cache": "<VALIDATION_ROOT>/analysis/event_cache/BASELINE__RUN_00004/cache.sqlite",
+      "nonpositive_diagonal_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "min_diagonal": 0,
+      "all_finite": true,
+      "matching_rows": 15864,
+      "query_performed_this_item": false,
+      "prior_query_evidence": "N12_ONLY_READ_RECEIPT.json#/covariance_pattern_query_results"
+    },
+    {
+      "cache": "<VALIDATION_ROOT>/analysis/event_cache/BASELINE__RUN_01401/cache.sqlite",
+      "nonpositive_diagonal_indices": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "min_diagonal": 0,
+      "all_finite": true,
+      "matching_rows": 15860,
+      "query_performed_this_item": false,
+      "prior_query_evidence": "N12_ONLY_READ_RECEIPT.json#/covariance_pattern_query_results"
+    }
+  ],
+  "old_same_snapshot_shadow_evidence": [
+    {
+      "source_path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_mechanism/groups/C00/INNOVATION_COMPACT.csv",
+      "source_data_row_1based": 12,
+      "evidence_role": "PRIOR_SAME_SNAPSHOT_SHADOW_NOT_APPLIED",
+      "source_row": {
+        "run_id": "RUN_00004",
+        "method_id": "F04",
+        "case_id": "C00_clean_normal",
+        "source": "go2_horizontal_velocity",
+        "fixed_window": "full",
+        "analysis_status": "VALIDATED",
+        "SA_events": "1369",
+        "validated": "1369",
+        "Hdx_nonzero": "1369",
+        "nis_changed": "1369",
+        "oim_raw_changed": "120",
+        "oim_capped_changed": "120",
+        "oim_cap_masked": "0",
+        "lsim_masked": "120",
+        "shadow_final_R_changed": "0",
+        "shadow_policy_acceptance_changed": "0",
+        "n16_eligible": "1369",
+        "n16_lsim_changed": "1369",
+        "n16_shadow_final_R_changed": "1369",
+        "source_path": "../../analysis/RUN_00004/SUMMARY.json",
+        "row_key": "/rows/2",
+        "original_counts_json": "{\"Hdx_nonzero\": 1369, \"SA_EVALUATION_count\": 1369, \"lsim_masked\": 120, \"n12:NIS_CHANGED_NO_FINAL_R_CHANGE\": 1249, \"n12:OIM_CHANGE_MASKED_BY_LSIM\": 120, \"n16:SHADOW_FINAL_R_CHANGED\": 1369, \"n16_eligible\": 1369, \"n16_lsim_changed\": 1369, \"n16_shadow_final_R_changed\": 1369, \"nis_changed\": 1369, \"oim_capped_changed\": 120, \"oim_raw_changed\": 120, \"status:VALIDATED_SAME_SNAPSHOT\": 1369}",
+        "actual_R_mutated": "False",
+        "closedloop_not_tested": "True"
+      }
+    },
+    {
+      "source_path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_mechanism/groups/D15/INNOVATION_COMPACT.csv",
+      "source_data_row_1based": 9,
+      "evidence_role": "PRIOR_SAME_SNAPSHOT_SHADOW_NOT_APPLIED",
+      "source_row": {
+        "run_id": "RUN_01401",
+        "method_id": "F04",
+        "case_id": "D15_seed_00",
+        "source": "go2_horizontal_velocity",
+        "fixed_window": "full",
+        "analysis_status": "VALIDATED",
+        "SA_events": "1369",
+        "validated": "1369",
+        "Hdx_nonzero": "1369",
+        "nis_changed": "1369",
+        "oim_raw_changed": "1369",
+        "oim_capped_changed": "402",
+        "oim_cap_masked": "967",
+        "lsim_masked": "1",
+        "shadow_final_R_changed": "401",
+        "shadow_policy_acceptance_changed": "0",
+        "n16_eligible": "1369",
+        "n16_lsim_changed": "1369",
+        "n16_shadow_final_R_changed": "40",
+        "source_path": "../../analysis/RUN_01401/SUMMARY.json",
+        "row_key": "/rows/2",
+        "original_counts_json": "{\"Hdx_nonzero\": 1369, \"SA_EVALUATION_count\": 1369, \"lsim_masked\": 1, \"n12:OIM_CHANGE_MASKED_BY_LSIM\": 1, \"n12:RAW_OIM_CHANGE_MASKED_BY_CAP\": 967, \"n12:SHADOW_FINAL_R_CHANGED\": 401, \"n16:LSIM_CHANGE_MASKED_BY_OIM_OR_CAP\": 1329, \"n16:SHADOW_FINAL_R_CHANGED\": 40, \"n16_eligible\": 1369, \"n16_lsim_changed\": 1369, \"n16_shadow_final_R_changed\": 40, \"nis_changed\": 1369, \"oim_cap_masked\": 967, \"oim_capped_changed\": 402, \"oim_raw_changed\": 1369, \"shadow_final_R_changed\": 401, \"status:VALIDATED_SAME_SNAPSHOT\": 1369}",
+        "actual_R_mutated": "False",
+        "closedloop_not_tested": "True"
+      }
+    }
+  ],
+  "large_outputs": "<VALIDATION_ROOT>/analysis/event_cache/N16_ONLY__<run> and comparisons/N16_ONLY__<run>; baseline caches reused in place.",
+  "interpretation": "VALIDATED denotes parsing, event association and arithmetic, not full-P positive definiteness or accuracy improvement."
+}

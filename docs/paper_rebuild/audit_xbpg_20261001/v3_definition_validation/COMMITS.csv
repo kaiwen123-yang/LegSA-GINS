@@ -26,3 +26,4 @@ N12_EVENTS,connect conditional innovation to actual R state divergence and one y
 N09_C00_EVENTS,verify normal-GNSS event states remain exact under optional RP scheduling,03e5c1eb085934c4a84aa66a5c237b017c835979,0,True,PUSHED_VERIFIED
 P_BOUNDARY,explain frozen zero-scale covariance and bound key-snapshot symmetry evidence,969b11dba49fec5d9dd1474be6c5e67f98b9a01c,0,True,PUSHED_VERIFIED
 N09_A2_EVENTS,close A2 unchanged scheduling and actual accepted-source evidence,ddd8671e7e37398ace9a61f300ba4d9bd4a48191,0,True,PUSHED_VERIFIED
+N09_A1_EVENTS,close A1 RP updates with cache-only exact-key reconciliation,d25ace278602214570c639e66464fe4523d219b5,0,True,PUSHED_VERIFIED
