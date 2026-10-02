@@ -1,0 +1,3 @@
+# This directory contains CORE result interpretation, not a crash dump.
+!core/
+!core/**
