@@ -468,9 +468,13 @@ ORIGINAL_CORE_541_SUMMARIES.csv 是原整体 summary 转录；各族原分布与
 
 INPUTS_READ.csv 记录全文读取到 EOF 的统计、合同和小型 bundle 元数据，不声称读取了其 provider payload。source_path/source_row_key/source_json_pointer 指回原记录，read_source_path/read_source_data_row 指回上一轮便携完整统计；同名原指标列保持原字符串。FIELD_MAP.csv 给出列/单位映射。各 README 中人工选出的导航值之外，全部原数保存在 CSV。
 
-每族时序栏仍为 PENDING_ROOT_SERIES_CHECK，根代理在交付该小项时补唯一 scanner 的同组检查。coverage=matched/output 不证明连续、完整支持或独立参考样本。reference 是商用融合参考而非独立真值；本入口不宣布数学或因果机制审核通过。
+各族时序状态以其 README 和 series_checks/CORE_<family>/RECEIPT.json 为准；未完成的族保留 PENDING_ROOT_SERIES_CHECK，根代理在交付该小项时补唯一 scanner 的同组检查。coverage=matched/output 不证明连续、完整支持或独立参考样本。reference 是商用融合参考而非独立真值；本入口不宣布数学或因果机制审核通过。
 """
-    (DEST / "CORE_OVERVIEW.md").write_text(overview, encoding="utf-8")
+    # The root agent owns subsequent group/series status amendments to this entry.
+    # A later family release must preserve an already published overview verbatim.
+    overview_path = DEST / "CORE_OVERVIEW.md"
+    if not overview_path.exists():
+        overview_path.write_text(overview, encoding="utf-8")
     print("DONE", json.dumps({"families": len(receipts), "read_files": len(READS), "full_core_eval_rows": len(values), "summary_mismatches": sum(r["summary_mismatch_cells"] for r in receipts)}), flush=True)
 
 

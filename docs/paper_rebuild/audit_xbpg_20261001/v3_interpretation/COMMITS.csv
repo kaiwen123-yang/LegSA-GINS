@@ -5,3 +5,4 @@ S00,freeze retained series validation scope and tolerance,0593770b2b3837012d1552
 N01b,verify BY2 retained errors and matched trajectory,ba44f33bad7dafd16c0ac74457fca3cd3f7d9e2f,0,True,PUSHED_VERIFIED
 N02,interpret and verify all BY2H natural configurations,f9d298aadba10c5710d42ccaf3a1882a3c93e85e,0,True,PUSHED_VERIFIED
 N03,interpret BY2O full and all fixed segments with retained checks,1fae06e5063c99c48a0c2c310b6c82526c45b227,0,True,PUSHED_VERIFIED
+C01,explain complete GNSS outage family and retained time support,a544cc5d2d3be0c5cb6475358b738d9a5317e59d,0,True,PUSHED_VERIFIED

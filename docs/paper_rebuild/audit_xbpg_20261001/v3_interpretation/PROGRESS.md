@@ -10,18 +10,19 @@
 - N01b：verify BY2 retained errors and matched trajectory；`ba44f33bad7dafd16c0ac74457fca3cd3f7d9e2f`；PUSHED_VERIFIED。
 - N02：interpret and verify all BY2H natural configurations；`f9d298aadba10c5710d42ccaf3a1882a3c93e85e`；PUSHED_VERIFIED。
 - N03：interpret BY2O full and all fixed segments with retained checks；`1fae06e5063c99c48a0c2c310b6c82526c45b227`；PUSHED_VERIFIED。
+- C01：explain complete GNSS outage family and retained time support；`a544cc5d2d3be0c5cb6475358b738d9a5317e59d`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-C01：explain complete GNSS outage family and retained time support。
+C02：explain sampling and dropout cases across all methods。
 
-D01-D07全部63案例×11方法；693native全完成，11088汇总格/6174配对差一致。154保留误差文件全文、25396数值MATCH。D06大误差与真实注册故障窗相符；区分旧event包络。新增局部ignore例外使CORE文档可跟踪；BY2O两段文字末位统一到已有DIFFERENCES原值。
+D08-D12全部45案例×11方法；495native全完成，8316汇总格/4410原配对差一致。110保留误差全文、18146数值MATCH，990字段不可复算。F04水平在45共同例均优于F03而劣于A04。实际bundle无局部故障窗，不人为分段；澄清D06的post是故障后至340s而非独立注册恢复窗。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-CORE gnss_sampling：D08-D12全部方法和保留时序。
+CORE position_value：D13-D22及保留时序。
 
 ## 调用边界
 
