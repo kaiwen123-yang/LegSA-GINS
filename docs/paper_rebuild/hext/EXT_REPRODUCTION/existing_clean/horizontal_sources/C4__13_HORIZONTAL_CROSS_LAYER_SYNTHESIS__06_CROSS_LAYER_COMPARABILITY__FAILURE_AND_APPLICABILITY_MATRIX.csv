@@ -1,0 +1,12 @@
+method_id,comparison_layer,initialization_behavior,availability_summary,primary_failure_or_boundary,applicability_ceiling,primary_role
+RAW01,LAYER_A_RAW_DUAL_ANTENNA,per-epoch ambiguity reinitialization,1077 integer results / 1509,fractional-DD phase-bias calibration unresolved,raw heading backend applicability only,PRIMARY_RAW_METHOD_1_OF_3__C00_APPLICABILITY_BOUNDARY
+RAW02,LAYER_A_RAW_DUAL_ANTENNA,epoch-wise constrained wrapped search,1057 accepted wrapped / 1509,452 invalid; physical heading poor; correctness unknown,raw heading backend applicability only,PRIMARY_RAW_METHOD_2_OF_3__C00_APPLICABILITY
+RAW03,LAYER_A_RAW_DUAL_ANTENNA,recursive DD KF with declared stochastic instantiation,"primary: 609 valid, 105 ratio-fixed / 1509",900 invalid; 101/105 ratio-fixed proxy-inconsistent,all ten modes retained; no best-mode selection,PRIMARY_RAW_METHOD_3_OF_3__C00_APPLICABILITY_DIAGNOSTIC
+EXT04,LAYER_A_RAW_DUAL_ANTENNA,epoch-wise FAR/PAR subset policy,0 accepted / 40743 policy rows,187 FAR rejected; 4368 PAR exhausted; 36188 invalid,supplementary failure mechanism only,SUPPLEMENTARY_DIAGNOSTIC_MODULE__NOT_COUNTED_IN_THE_THREE_PRIMARY_RAW_METHODS
+LC01,LAYER_B_SOLUTION_LEVEL_LC,dual-baseline yaw + gravity alignment,58014/58014 formal rows,same-source reference; not independent truth,valid full-navigation comparator,VALID_SOLUTION_LEVEL_DUAL_RECEIVER_COMPARATOR
+LC02,LAYER_B_SOLUTION_LEVEL_LC,"official late alignment, 113.002 s",77/275 formal; 80 native,48/116 SPP valid; 11 LC updates; severe error,C00 coverage-aware standard LC baseline,STANDARD_LC_LITERATURE_BASELINE__NOT_A_NOVEL_FILTER_METHOD
+LSE01,LAYER_C_PROPRIOCEPTIVE_OBSERVABILITY,world-centric contact-aided InEKF; unanchored gauge,63277 native rows,reference extrinsic/frame not closed,structural gauge/observability only,PROPRIOCEPTIVE_STATE_ESTIMATION_AND_OBSERVABILITY_EVIDENCE
+F02,INTERNAL_LEGSA_METHOD,common Canonical C00 initialization,56642/56642,same-source reference and BY2 scope,internal baseline,INTERNAL_BASIC_BASELINE
+F03,INTERNAL_LEGSA_METHOD,common Canonical C00 initialization,56642/56642,same-source reference and BY2 scope,internal strong baseline,INTERNAL_STRONG_BASELINE
+A04,INTERNAL_LEGSA_METHOD,common Canonical C00 initialization,56642/56642,generalization pending,core/main-method candidate,CORE_MAIN_METHOD_CANDIDATE
+F04,INTERNAL_LEGSA_METHOD,common Canonical C00 initialization,56642/56642,not universally superior; generalization pending,tail-protection extension,QUALITY_MISMATCH_AND_TAIL_PROTECTION_EXTENSION

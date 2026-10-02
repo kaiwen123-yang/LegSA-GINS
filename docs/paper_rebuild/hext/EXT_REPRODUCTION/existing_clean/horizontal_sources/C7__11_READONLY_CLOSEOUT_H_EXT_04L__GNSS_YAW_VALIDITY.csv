@@ -1,0 +1,13 @@
+sequence_id,segment_id,columns,total_rows,yaw_valid_rows,yaw_invalid_rows,first_valid_time_s,last_valid_time_s,validity_semantics,status
+BY2,all_provider_rows,18,1510,301,1209,56.0,356.0,explicit_column_18,AVAILABLE
+BY2,full,18,1371,275,1096,66.0,340.0,explicit_column_18,AVAILABLE
+BY2,outside,18,1371,275,1096,66.0,340.0,explicit_column_18,AVAILABLE
+BY2H,all_provider_rows,18,1483,295,1188,402.0,696.0,explicit_column_18,AVAILABLE
+BY2H,full,18,1351,271,1080,413.0,683.0,explicit_column_18,AVAILABLE
+BY2H,outside,18,1351,271,1080,413.0,683.0,explicit_column_18,AVAILABLE
+BY2O,all_provider_rows,18,2231,445,1786,3144.0,3588.0,explicit_column_18,AVAILABLE
+BY2O,full,18,1886,378,1508,3186.0,3563.0,explicit_column_18,AVAILABLE
+BY2O,occlusion_primary,18,210,42,168,3370.0,3411.0,explicit_column_18,AVAILABLE
+BY2O,occlusion_secondary,18,65,13,52,3496.0,3508.0,explicit_column_18,AVAILABLE
+BY2O,inside_union,18,275,55,220,3370.0,3508.0,explicit_column_18,AVAILABLE
+BY2O,outside,18,1611,323,1288,3186.0,3563.0,explicit_column_18,AVAILABLE

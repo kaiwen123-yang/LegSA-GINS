@@ -1011,6 +1011,9 @@
       "read_depth": "FULL_RECORD_READ"
     }
   },
-  "script_sha256": "750434b69e45ffa720ef7863514830b7c9bb967eefb450f3448fa79f3c15d228",
-  "not_total_hx_collection": true
+  "script_sha256": "18293d37dd715952227018660e33f2c2e7786b4d7a7743cdc6e7a877b297d4b6",
+  "not_total_hx_collection": true,
+  "field_mapping_source": "<CODE_ROOT>/configs/paper_rebuild/hext/HX02_CONTRACT_V1.yaml",
+  "field_mapping_source_sha256_newly_verified": "d38bf6de11c64f6b52190eb6eb07cb27781cbb3aec7fe17b49f985427b2d7da4",
+  "mapping_correction": "Original HX02 CASE words restored after supervisor checked the contract; start_policy independently records start_convention."
 }

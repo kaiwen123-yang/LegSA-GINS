@@ -1,0 +1,4 @@
+sequence_id,rows,integration_convention,imu_interval_gt_0_1_count,association,additional_bias_or_rotation
+BY2,63277,BY2_V2s_copied_byte_exact; timestamp_and_gyro_tokens_unchanged,0,"current increment on (previous_time,current_time]; omega=rad2deg(dtheta_z/dt); no extrapolation; dt>0.1s unsupported",False
+BY2H,63217,"frozen current sample, measured dt, FLU->FRD, Rx(-1 degree)",2,"current increment on (previous_time,current_time]; omega=rad2deg(dtheta_z/dt); no extrapolation; dt>0.1s unsupported",False
+BY2O,95853,"frozen current sample, measured dt, FLU->FRD, Rx(-1 degree)",6,"current increment on (previous_time,current_time]; omega=rad2deg(dtheta_z/dt); no extrapolation; dt>0.1s unsupported",False

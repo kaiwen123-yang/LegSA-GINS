@@ -1,0 +1,166 @@
+{
+  "status": "PASS",
+  "data_mode": "existing_result_index_validation",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "new_native_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_provider_calls": 0,
+  "new_performance_calculations": 0,
+  "original_time_series_payload_reads": 0,
+  "checks": [
+    {
+      "name": "public_record_ids_unique",
+      "passed": true,
+      "actual": 1797
+    },
+    {
+      "name": "all_674_run_directories_preserved",
+      "passed": true,
+      "actual": 674
+    },
+    {
+      "name": "source_tables_83_all_full_read",
+      "passed": true,
+      "actual": 83
+    },
+    {
+      "name": "HX03_492_original_evaluation_slots",
+      "passed": true,
+      "actual": 492
+    },
+    {
+      "name": "HX03R2_492_reevaluation_slots",
+      "passed": true,
+      "actual": 492
+    },
+    {
+      "name": "selected_evaluation_values_unchanged",
+      "passed": true,
+      "actual": {
+        "selected_leaf_values": 24639,
+        "differences": []
+      }
+    },
+    {
+      "name": "HX02_case_and_start_independent",
+      "passed": true,
+      "actual": []
+    },
+    {
+      "name": "reused_evaluation_not_labeled_missing",
+      "passed": true,
+      "actual": []
+    },
+    {
+      "name": "all_36_native_divergences_preserved",
+      "passed": true,
+      "actual": 36
+    },
+    {
+      "name": "input_locations_100_no_missing",
+      "passed": true,
+      "actual": 100
+    },
+    {
+      "name": "no_local_absolute_paths_in_shared_outputs",
+      "passed": true,
+      "actual": []
+    },
+    {
+      "name": "collector_scripts_parse",
+      "passed": true,
+      "actual": [
+        "collect_input_locations.py",
+        "collect_existing_hx.py",
+        "collect_hx02_hx07r_first.py",
+        "check_collection.py",
+        "make_public_hx_index.py",
+        "finalize_existing_hx.py"
+      ]
+    }
+  ],
+  "files": {
+    "collect_input_locations.py": {
+      "bytes": 8441,
+      "sha256": "7e05af9cd591603095b2c50ace6c71063cd19864c7d533fc1da6a1ea755eced2"
+    },
+    "HX05_SOURCE_CITATIONS.json": {
+      "bytes": 472503,
+      "sha256": "6d089c3957bf2e222c21f6ceec5949eadaf80e25a0f0cd1aa71530754d9daea8"
+    },
+    "collect_existing_hx.py": {
+      "bytes": 23987,
+      "sha256": "1762def903a4c9e011609514d5d683c2c87985f77c6b5ca3959bdb5b6a01b2ea"
+    },
+    "INPUT_LOCATIONS.csv": {
+      "bytes": 122571,
+      "sha256": "8c04aa8400923edec1b49f3055fb48fd2ec2f38209a3f0c0736057f2a9efc4c0"
+    },
+    "COLLECTION_CHECKS_PREVIOUS.json": {
+      "bytes": 4683,
+      "sha256": "0b6940982d1faba862ec4d813b9b4cc17ef524a3ad399d2f5abdfabfa1fd3e42"
+    },
+    "HX02_HX07R_FIRST_INDEX.csv": {
+      "bytes": 969606,
+      "sha256": "f1a39a2261327ab3cee65f59d0931b164fdb0203b2c96a473f19def30bbc798e"
+    },
+    "COLLECTION_RECEIPT.json": {
+      "bytes": 15423,
+      "sha256": "aa418afa201a9536975eff2f2493cd0634773aba4a472d682b722d48c09d7dd3"
+    },
+    "collect_hx02_hx07r_first.py": {
+      "bytes": 7500,
+      "sha256": "18293d37dd715952227018660e33f2c2e7786b4d7a7743cdc6e7a877b297d4b6"
+    },
+    "EXISTING_HX_RUNS.csv": {
+      "bytes": 1812017,
+      "sha256": "6fbc7bc8ecddb9e86763253b86e1b22353dc7a5c6f2be93229879fdbb143e1e4"
+    },
+    "INPUT_LOCATION_RECEIPT.json": {
+      "bytes": 11769,
+      "sha256": "30341a2b6d79400ad98a20851ad5d688b50a305562e15804aa4dbf5c4458b818"
+    },
+    "EXISTING_HX_README.md": {
+      "bytes": 10832,
+      "sha256": "75a32aa5be25fa0278927b693d347420937b02309776607a14d3820e474ce2df"
+    },
+    "EXISTING_HX_FILES.csv": {
+      "bytes": 2521047,
+      "sha256": "f337d0f73cc6854332ea8c79e239b2f2366d6183195fad5d0206effa041b2bf8"
+    },
+    "check_collection.py": {
+      "bytes": 4992,
+      "sha256": "ea275d6b0eaba7e84d188996af43479fe6a2d85311bbf6e8faae01a43281ca15"
+    },
+    "HX02_HX07R_FIRST_READ.md": {
+      "bytes": 4567,
+      "sha256": "e7580553215366cbd4d4e116b93e087405139cfbe512c4c8aa51c515f4f337c5"
+    },
+    "EXISTING_HX_TABLES.csv": {
+      "bytes": 79278,
+      "sha256": "00caf534bceb44594c3bc503d5c147f49b76cbb7b9c8ff198dbbe9ab4ec29591"
+    },
+    "make_public_hx_index.py": {
+      "bytes": 10848,
+      "sha256": "7f5405dbf4111e25f5c54d884741b29dbeb0c938531ae6f236eceee4e5069ac1"
+    },
+    "HX05_FIGURE_MANIFEST.json": {
+      "bytes": 34262,
+      "sha256": "f0cd2b7aeba147dfc07b1cace6e5ac7223015a673ddd0d5bd2de1154873da3df"
+    },
+    "HX02_HX07R_FIRST_RECEIPT.json": {
+      "bytes": 56773,
+      "sha256": "0a93ded111cf58ebf7eef868572e197a2df5eae15438c6e1dc06bab15c0b4e95"
+    },
+    "EXISTING_HX_INDEX.csv": {
+      "bytes": 3910945,
+      "sha256": "44d8f59cf29b1a824e50909b3c9f199c9f36697223e9f054dcc18df3db974089"
+    },
+    "finalize_existing_hx.py": {
+      "bytes": 9502,
+      "sha256": "c41c4e6b658fddcd52652bed392c25631cfd397bf41f3634aac8714883d5d513"
+    }
+  },
+  "original_time_series_payload_reads_scope": "NAV/pos/heading/error/reference payload; excludes explicitly full-read per-epoch failure/runtime result CSV"
+}

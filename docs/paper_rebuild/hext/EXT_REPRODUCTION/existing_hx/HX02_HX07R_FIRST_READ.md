@@ -29,3 +29,5 @@ HX07R取得13个目录的记录：四变体×三序列对应12份原生COMMAND�
 V0/V0E/V1/V2与V0-convbin保持独立身份；有效率和有效/保持误差具有不同支持。此处不重新计算任何性能，也不从变体差值宣称某星座、模糊度策略或文献公式的因果作用。旧HX07的157对153、超出±2门的硬停保留为输入历史不同的原记录，不能被HX07R的新评价反向改写为旧阶段已通过。
 
 首批仍未交付的部分：HX02E、HX03/R2、HX05与旧HX07全体索引；HX02/HX07R其余阶段汇总/分段/残差表正在同一只读总收集里登记。大payload本阶段只核位置与文件元数据，不宣称其正文/CRC已完整读取。方法忠实复现、数学审查、重新实现和新增科学执行均未开始。
+
+本轮索引字段更正：根代理最初把目录第4字段当作纯起点模式，随后核对 `HX02_CONTRACT_V1.yaml#/runs/run_directory` 与 `sequences`，恢复原 CASE 词。HX02 的 `case_id` 为 BY2=`C00`、BY2H=`CONTRACT_START`、BY2O=`FILE_START`；独立 `start_policy` 分别为 `FILE_START`、`CONTRACT_START`、`FILE_START`。这只更正本轮索引映射，不修改原运行身份或科学记录。RUN 行仍分别保留原 native_classification、runner_terminal_status 和 DONE.provenance.code_commit。

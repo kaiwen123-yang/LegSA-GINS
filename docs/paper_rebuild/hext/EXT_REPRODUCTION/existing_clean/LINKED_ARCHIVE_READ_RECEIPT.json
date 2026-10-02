@@ -1,0 +1,110 @@
+{
+  "archive_count": 3,
+  "explicit_members_read": 12,
+  "new_native_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_provider_calls": 0,
+  "raw_or_reference_payload_opens": 0,
+  "error_series_payload_reads": 0,
+  "new_sha256": 0,
+  "archives": [
+    {
+      "archive_path": "<HANDOFF_ROOT>/hext_three_sequences_handoff.zip",
+      "size_bytes": 1084956510,
+      "central_directory_member_count": 570,
+      "members_read": [
+        {
+          "member": "STAGE/99_HARD_STOP/EVALUATION_LEDGER.csv",
+          "data_rows": 28
+        },
+        {
+          "member": "STAGE/99_HARD_STOP/NATIVE_EXECUTION_RECORDS.json",
+          "top_level_items": 14
+        },
+        {
+          "member": "STAGE/99_HARD_STOP/STOP_REPORT.json",
+          "top_level_items": 24
+        }
+      ]
+    },
+    {
+      "archive_path": "<HANDOFF_ROOT>/hext_three_sequences_handoff_v2.zip",
+      "size_bytes": 1343115467,
+      "central_directory_member_count": 770,
+      "members_read": [
+        {
+          "member": "STAGE/03_CONTINUATION/EXECUTION/EXECUTION_RECORDS.json",
+          "top_level_items": 14
+        },
+        {
+          "member": "STAGE/08_AGGREGATE/FINAL_SUMMARY.json",
+          "top_level_items": 29
+        },
+        {
+          "member": "STAGE/08_AGGREGATE/HORIZONTAL_TABLE_V2_THREE_SEQUENCES.csv",
+          "data_rows": 52
+        },
+        {
+          "member": "STAGE/08_AGGREGATE/HORIZONTAL_TABLE_V3_THREE_SEQUENCES.csv",
+          "data_rows": 52
+        },
+        {
+          "member": "STAGE/08_AGGREGATE/SOURCE_RESOLUTION.json",
+          "top_level_items": 18
+        },
+        {
+          "member": "STAGE/99_HARD_STOP/EVALUATION_LEDGER.csv",
+          "data_rows": 28
+        },
+        {
+          "member": "STAGE/99_HARD_STOP/NATIVE_EXECUTION_RECORDS.json",
+          "top_level_items": 14
+        },
+        {
+          "member": "STAGE/99_HARD_STOP/STOP_REPORT.json",
+          "top_level_items": 24
+        }
+      ]
+    },
+    {
+      "archive_path": "<HANDOFF_ROOT>/c541_v21_handoff.zip",
+      "size_bytes": 1178359812,
+      "central_directory_member_count": 4700,
+      "members_read": [
+        {
+          "member": "sequence_error_series_subset/SUBSET_MANIFEST.csv",
+          "data_rows": 66
+        }
+      ],
+      "subset_manifest_headers": [
+        "run_id",
+        "case_id",
+        "dataset_id",
+        "method_id",
+        "effective_configuration_id",
+        "evaluator_version",
+        "outage_start_s",
+        "outage_end_s",
+        "data_mode",
+        "synthetic_data_used",
+        "semisynthetic_data_used",
+        "status",
+        "source_protocol",
+        "member",
+        "source_sha256",
+        "display_projection",
+        "frozen_member",
+        "full_metrics_source_sha256",
+        "rows_full",
+        "rows_kept",
+        "source_row_first",
+        "source_row_stride",
+        "source_row_map_member"
+      ],
+      "series_payload_reads": 0
+    }
+  ],
+  "data_mode": "read_only_existing_archive_member_collection",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false
+}
