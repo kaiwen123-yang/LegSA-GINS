@@ -1,0 +1,545 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "final_metric_row_N12_ONLY__RUN_00004",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N12_ONLY__RUN_00004_horizontal_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N12_ONLY__RUN_00004_up_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N12_ONLY__RUN_00004_yaw_rmse_deg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "final_metric_row_N12_ONLY__RUN_01401",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N12_ONLY__RUN_01401_horizontal_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N12_ONLY__RUN_01401_up_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N12_ONLY__RUN_01401_yaw_rmse_deg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "final_metric_row_N16_ONLY__RUN_00004",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N16_ONLY__RUN_00004_horizontal_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N16_ONLY__RUN_00004_up_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N16_ONLY__RUN_00004_yaw_rmse_deg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "final_metric_row_N16_ONLY__RUN_01401",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N16_ONLY__RUN_01401_horizontal_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N16_ONLY__RUN_01401_up_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N16_ONLY__RUN_01401_yaw_rmse_deg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "final_metric_row_N09_RP_ONLY__RUN_00006",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__RUN_00006_horizontal_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__RUN_00006_up_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__RUN_00006_yaw_rmse_deg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "final_metric_row_N09_RP_ONLY__RUN_00004",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__RUN_00004_horizontal_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__RUN_00004_up_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__RUN_00004_yaw_rmse_deg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "final_metric_row_N09_RP_ONLY__ADD_RUN_00105",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__ADD_RUN_00105_horizontal_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__ADD_RUN_00105_up_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__ADD_RUN_00105_yaw_rmse_deg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "final_metric_row_N09_RP_ONLY__ADD_RUN_00103",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__ADD_RUN_00103_horizontal_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__ADD_RUN_00103_up_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__ADD_RUN_00103_yaw_rmse_deg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "final_metric_row_N09_RP_ONLY__ADD_RUN_00402",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__ADD_RUN_00402_horizontal_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__ADD_RUN_00402_up_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__ADD_RUN_00402_yaw_rmse_deg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "final_metric_row_N09_RP_ONLY__ADD_RUN_00400",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__ADD_RUN_00400_horizontal_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__ADD_RUN_00400_up_rmse_m",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "display_N09_RP_ONLY__ADD_RUN_00400_yaw_rmse_deg",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_../../v3/PROTOCOL_V3_PREREG.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_../../v3/V3_01R_MANUSCRIPT_REPLACEMENT.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_V3_DEFINITION_DECISIONS.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_CASE_METRICS.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_CASE_SUPPORT.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_CASE_RESULTS_README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_event_analysis/summaries/N12_ONLY_README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_candidates/N12_ONLY/IMPLEMENTATION_AND_TESTS.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_event_analysis/summaries/N16_ONLY_README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_candidates/N16_ONLY/README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_event_analysis/N09_A1_README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_event_analysis/a1_join_validation.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_candidates/N09_RP_ONLY/IMPLEMENTATION_AND_TESTS.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_EVENT_READ_SUMMARY.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_P_MODEL_BOUNDARY.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_METHOD_APPLICABILITY.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_OPEN_ISSUES.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_TECHNICAL_INCIDENTS.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_RUN_MANIFEST.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_evaluation/EVAL_MANIFEST.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_CALL_ACCOUNTING.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_figures/README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_COMMITS.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_FINAL_DEFINITION_VALIDATION.md_PROGRESS.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_FINAL_DEFINITION_VALIDATION.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_CANDIDATE_QUEUE.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_FINAL_DEFINITION_VALIDATION.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_V3_DEFINITION_DECISIONS.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_CASE_RESULTS_README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_CASE_METRICS.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_CASE_SUPPORT.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_event_analysis/README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_P_MODEL_BOUNDARY.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_METHOD_APPLICABILITY.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_OPEN_ISSUES.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_CALL_ACCOUNTING.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_RUN_MANIFEST.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_evaluation/EVAL_MANIFEST.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_EVENT_READ_SUMMARY.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_figures/README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_PROGRESS.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_README.md_COMMITS.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_CASE_RESULTS_README.md_CASE_METRICS.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_CASE_RESULTS_README.md_CASE_SUPPORT.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_CASE_RESULTS_README.md_FINAL_DEFINITION_VALIDATION.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_event_analysis/README.md_../EVENT_READ_SUMMARY.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_event_analysis/README.md_../CALL_ACCOUNTING.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_event_analysis/README.md_summaries/N12_ONLY_README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_event_analysis/README.md_summaries/N16_ONLY_README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_event_analysis/README.md_summaries/N09_C00_README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_event_analysis/README.md_N09_A1_README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_event_analysis/README.md_summaries/N09_A2_README.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_event_analysis/README.md_a1_join_validation.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_event_analysis/README.md_../P_MODEL_BOUNDARY.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_event_analysis/README.md_../CANDIDATE_QUEUE.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_event_analysis/README.md_../V3_DEFINITION_DECISIONS.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_event_analysis/README.md_../common/covariance_diagnostics.hpp",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "local_link_event_analysis/README.md_VALIDATION_RECEIPT.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "all_changed_paths_within_authorized_directory",
+      "passed": true,
+      "detail": "281"
+    },
+    {
+      "check": "no_file_deletions_since_start",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "event_analyzer_hash_unchanged",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "full_metric_rows_preserved",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "full_support_rows_preserved",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_large_payloads",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_local_roots_or_credential_patterns",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "diff_check",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "checked_files": 281,
+  "largest_file_bytes": 321874,
+  "total_delivery_bytes": 4877779,
+  "new_science_calls": 0,
+  "new_payload_reads": 0,
+  "checks_scope": "Final document displayed numbers/links and Git-scoped delivery only; not new mathematical validation",
+  "data_mode": "documentation_and_source_check",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "file_count_scope": "snapshot before this receipt and FINAL_REVIEW.json were added; final explicit-staging gate separately scans every final staged file"
+}

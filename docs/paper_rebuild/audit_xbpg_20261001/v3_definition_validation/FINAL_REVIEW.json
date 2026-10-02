@@ -1,0 +1,42 @@
+{
+  "status": "LIMITED_DELIVERY_REVIEW_PASS",
+  "reviewer_role": "read_only_reviewer",
+  "reviewer_task": "planner",
+  "scope": [
+    "FINAL_DEFINITION_VALIDATION.md",
+    "README.md",
+    "CASE_RESULTS_README.md",
+    "METHOD_APPLICABILITY.csv",
+    "OPEN_ISSUES.csv",
+    "CALL_ACCOUNTING.json",
+    "EVENT_READ_SUMMARY.csv",
+    "collect_final_scope.py",
+    "N09 A1 exact-key correction tables and small receipts",
+    "N16/A2 small event receipts and statements",
+    "figure source index and existing root visual QA"
+  ],
+  "source_display_value_pairs_checked": 60,
+  "exact_decimal_differences_checked": 110,
+  "method_applicability_rows": 33,
+  "event_read_rows": 17,
+  "blocking_findings": 0,
+  "required_final_amendments": 0,
+  "earlier_nonblocking_finding": "N09 figure source column was an obsolete R-ratio descriptor; corrected to measurement_time/variant categorical lane without rerender or payload read",
+  "boundaries_confirmed": [
+    "Frozen historical heading/HV scope inherited",
+    "N12 conditional-NIS contract and adverse D15 performance distinguished",
+    "N16 inactive sentinel is quality-domain contribution, not a third R dimension",
+    "N09 optional extension absent original independent-RP requirement",
+    "A1 80 to 100 is auxiliary analyzer join correction with original summary retained",
+    "P normalized symmetry/Cholesky not tested; 211 raw snapshots are not full-stream PSD proof",
+    "No automatic follow-up, merge, whole-matrix PASS or global invalidation"
+  ],
+  "reviewer_science_calls": 0,
+  "reviewer_heavy_payload_reads": 0,
+  "reviewer_git_operations": 0,
+  "raster_review": "root previously viewed all three current images; reviewer did not repeat raster inspection",
+  "data_mode": "documentation_and_small_evidence_review",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "scientific_claim_ceiling": "review of scope, propagation, accounting and claims only; not a new global algorithm/reference validation"
+}

@@ -34,18 +34,19 @@
 - N09_A1_EVENTS：close A1 RP updates with cache-only exact-key reconciliation；`d25ace278602214570c639e66464fe4523d219b5`；PUSHED_VERIFIED。
 - N16_EVENTS：close active-axis R changes and retain D15 cap negative control；`0769ed061a890141c99c0ab60ecf0d6db44edd36`；PUSHED_VERIFIED。
 - EXPLANATORY_FIGURES：show adverse N12 yaw and A1 horizontal-up tradeoff in retained replay figures；`e44f13b4133b27fd3ea109a33b3de81595c429da`；PUSHED_VERIFIED。
+- SCOPE_ACCOUNTING：close registered call and event-read accounting with explicit limitations；`3b6441c94e3a30abe1bca7eb5027050c04bec8bd`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-SCOPE_ACCOUNTING：close registered call and event-read accounting with explicit limitations。
+FINAL_ADJUDICATION：adjudicate V3 contracts and bounded closed-loop outcomes without replacing original results。
 
-小型回执核对：10真实候选native、0新baseline native、9合成fixture进程；17evaluator/17reference打开；科学失败/重试0。17事件流各全文一次，7503330行/15435634091字节，131189个SA核对；候选566420个IMU末P和基线107196个更新P仍为零scale正对角门不满足，不能宣称P正定PASS。完整比较含A1保留80→另表100更正。只读审查无科学阻断，图来源表两分类轴字段已更正；无重绘/新载荷读取。
+本轮最终完成：继承原5Hz标量heading及HV status-heading范围。N12当前顺序NIS、N16 active质量域分别有必要契约修正与真实闭环证据，N12 D15五项变差；N09为可选扩展，A1各新增100 RP但Up变差，C00/A2不变。原V3保持；限定审查核60展示值对/110差值/33开关映射与全调用账本，无阻断，未推成全矩阵PASS或作废。10候选native/9fixture/17评价已闭合，无真实失败或重试。已有其他问题只保留证据边界，不自动追加任务。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-最终裁定：继承定义、必要计算契约修正、N09可选扩展与实际指标权衡；只保存已有问题边界，不自动续跑。
+无自动下一项。本轮停止在定义与三个单因素闭环裁定交付；不合入候选、不启动联合/全矩阵/论文或新审查。
 
 ## 调用边界
 
