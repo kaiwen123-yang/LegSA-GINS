@@ -8,6 +8,7 @@
 - [观察版与合成门](observer/IMPLEMENTATION.md) / [字段](observer/SCHEMA.md)：完整源码patch与固定构建pin，合成无干扰不代替真实对象身份核对。
 - [C00 三方法](groups/C00/README.md)：历史字节关系、实际更新和N12/N16同快照权重；[A1 20 s、seed_00](groups/A1/README.md)：区分RP入口阻断、HV候选不可用与恢复边界。
 - [A2 20 s、seed_00](groups/A2/README.md)：保留heading后的实际HV/RP接受、RD资格拒绝与影子权重边界。
+- [D15 seed_00](groups/D15/README.md)：位置噪声下NIS差异的双向权重变化、cap遮蔽及999哨兵的实际作用范围。
 - `FINAL_MECHANISM_FINDINGS.md`：阶段结束时分别裁定历史身份、重放事件、权重影响与尚未测试的闭环影响；当前完成范围看进度。
 - [进度](PROGRESS.md) / [提交记录](COMMITS.csv)：小项进度、完整 SHA、push/远端核对状态。最后一项自身 SHA 由 Git 和终端交付，不递归提交。
 
