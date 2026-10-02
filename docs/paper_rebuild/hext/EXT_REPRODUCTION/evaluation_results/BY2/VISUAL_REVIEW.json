@@ -1,7 +1,6 @@
 {
   "adopted_plot": "figures/attempt_002/HEADING_COMPARISON.png",
   "plot_sha256": "d2025556820808b200046db5dfcb3c7da7c919f6594c77d4fa2864b442eae490",
-  "plot_source_sha256": "4032c5f78df9dd9947a7b8e7dd15b20c97bce47f4ae1d6866d92d637129a3186",
   "actual_raster_review": "OPENED_AND_REVIEWED",
   "checks": [
     "native/reference display both wrap360; residuals unchanged",
@@ -15,5 +14,7 @@
   ],
   "attempt_001": "SUPERSEDED_DISPLAY_ONLY; retained at isolated root; original numerical outputs unchanged",
   "new_evaluator_invocations": 0,
-  "reference_opens": 0
+  "reference_opens": 0,
+  "plotter_source_sha256": "4032c5f78df9dd9947a7b8e7dd15b20c97bce47f4ae1d6866d92d637129a3186",
+  "error_series_sha256": "e1b3c947d070da2f5776aa1812685b606a5cb989fd2b0b706c47df6e966a3310"
 }

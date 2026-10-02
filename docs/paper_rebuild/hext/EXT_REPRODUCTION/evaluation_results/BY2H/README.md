@@ -22,6 +22,6 @@
 
 本序列1次真实评价child、1次只读reference、hash匹配；没有技术重试，4个旧变体逐行支持核验通过，无reuse缺项。完整逐历元ERROR_SERIES含无效行，SOURCE_FILES/ACCESS_AUDIT/CHILD_RECEIPT提供来源。重型baseline/ambiguity/状态保留在<EXT_REPRO_ROOT>/runs/BY2H__<METHOD>__RAW_REPRO_V1/。
 
-图attempt_001已生成。BY2视觉检查发现共用plotter的角度显示范围及状态辨识问题，正在仅从保存误差生成统一修订图；评价数字不变，最终图和视觉记录稍后追加。
+历史记录：attempt_001沿用旧显示。共用plotter的角度显示范围及状态辨识已在attempt_002修订；原评价数字不变。BY2H原分辨率再次打开确认轴标签完整，无需额外布局修订。
 
 现采用[修订连续图](figures/attempt_002/HEADING_COMPARISON.png)，已实际打开：统一显示角域、状态分层、断线及异常长度保留。它只读已存ERROR_SERIES；原attempt_001留隔离根，数字与原评价回执未改。
