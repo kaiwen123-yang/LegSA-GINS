@@ -17,3 +17,4 @@ EVENT_ENTRY,validate bounded event and covariance analysis with strict cache ide
 N09_A1_NATIVE,retain optional RP extension outputs for A1 without altering GNSS or HV counts,9ff5ee2afe68b25e3b19518a635f490e4e8e5a92,0,True,PUSHED_VERIFIED
 BASELINE_REMAINING_EVAL,close all seven historical evaluation baselines without native reruns,88f2042cef57f0b151117e3bc122ea7025454c5e,0,True,PUSHED_VERIFIED
 N09_C00_EVAL,confirm optional RP extension preserves both normal-GNSS evaluation controls,200633300888c15ad6b6e533af07d6903ffc0fa7,0,True,PUSHED_VERIFIED
+N09_A2_NATIVE,close ten planned candidate calls and preserve A2 byte-identical controls,5ffd498b43ff233fca8b7f55ba381f2d79b19166,0,True,PUSHED_VERIFIED

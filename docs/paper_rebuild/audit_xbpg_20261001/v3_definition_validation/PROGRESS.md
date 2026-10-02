@@ -22,18 +22,19 @@
 - N09_A1_NATIVE：retain optional RP extension outputs for A1 without altering GNSS or HV counts；`9ff5ee2afe68b25e3b19518a635f490e4e8e5a92`；PUSHED_VERIFIED。
 - BASELINE_REMAINING_EVAL：close all seven historical evaluation baselines without native reruns；`88f2042cef57f0b151117e3bc122ea7025454c5e`；PUSHED_VERIFIED。
 - N09_C00_EVAL：confirm optional RP extension preserves both normal-GNSS evaluation controls；`200633300888c15ad6b6e533af07d6903ffc0fa7`；PUSHED_VERIFIED。
+- N09_A2_NATIVE：close ten planned candidate calls and preserve A2 byte-identical controls；`5ffd498b43ff233fca8b7f55ba381f2d79b19166`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N09_A2_NATIVE：close ten planned candidate calls and preserve A2 byte-identical controls。
+N09_A1_EVAL：report optional RP A1 horizontal gains and vertical losses on fixed support。
 
-A2 A04/F04各一次COMPLETED，99固定身份/access通过，五输出各字节相同，共10/10；N09 C00+A2负对照20/20。全部计划native10/10，无新baseline native、失败或真实重试。A1结果保留待同口径评价，不将新增RP自动判为历史设计缺陷。
+A1 A04/F04共同支持各56642，全窗H14.37239919313786→9.277024159760655及14.8962849820269→10.437649334982114m；Up均升高，yaw/roll/pitch降低。固定fault窗同样H降Up升，before五项完全相同；三段27387/3678/25577。evaluator/ref本项2累计15，失败重试0，不称完整拒止能力或原设计缺陷。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-A1/A2候选评价分批提交；继续同批事件/P证据分析，不扩队列。
+最后A2两候选评价；完成已登记事件与有限P补注。
 
 ## 调用边界
 
