@@ -19,3 +19,4 @@ BASELINE_REMAINING_EVAL,close all seven historical evaluation baselines without 
 N09_C00_EVAL,confirm optional RP extension preserves both normal-GNSS evaluation controls,200633300888c15ad6b6e533af07d6903ffc0fa7,0,True,PUSHED_VERIFIED
 N09_A2_NATIVE,close ten planned candidate calls and preserve A2 byte-identical controls,5ffd498b43ff233fca8b7f55ba381f2d79b19166,0,True,PUSHED_VERIFIED
 N09_A1_EVAL,report optional RP A1 horizontal gains and vertical losses on fixed support,5460eb7817fcda1a6ba63d13873639f730366d49,0,True,PUSHED_VERIFIED
+N09_A2_EVAL,close all seventeen evaluations with unchanged A2 controls and explicit accounting,a42059a36bfa44bdf6b6fea079574965288ecb64,0,True,PUSHED_VERIFIED

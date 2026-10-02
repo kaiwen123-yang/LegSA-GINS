@@ -24,18 +24,19 @@
 - N09_C00_EVAL：confirm optional RP extension preserves both normal-GNSS evaluation controls；`200633300888c15ad6b6e533af07d6903ffc0fa7`；PUSHED_VERIFIED。
 - N09_A2_NATIVE：close ten planned candidate calls and preserve A2 byte-identical controls；`5ffd498b43ff233fca8b7f55ba381f2d79b19166`；PUSHED_VERIFIED。
 - N09_A1_EVAL：report optional RP A1 horizontal gains and vertical losses on fixed support；`5460eb7817fcda1a6ba63d13873639f730366d49`；PUSHED_VERIFIED。
+- N09_A2_EVAL：close all seventeen evaluations with unchanged A2 controls and explicit accounting；`a42059a36bfa44bdf6b6fea079574965288ecb64`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N09_A2_EVAL：close all seventeen evaluations with unchanged A2 controls and explicit accounting。
+CASE_VIEW：link all ten candidate outcomes and fixed windows without rounding source values。
 
-A2 A04/F04全窗各142字段相同，三固定段各142字段亦相同，NAV/STD有限、转点NAV与基线相同。17评价槽全部完成，实际evaluator/ref各17、attempt17，失败未启动未知重试均0；7baseline的1001字段复现，10候选均56642共同支持。
+无损关联10全窗+12固定分段，保留110个H/up/yaw/roll/pitch配对原值、source/row_key/field及Decimal差值，22窗口状态/分母完整。只读本轮小JSON/CSV，不新增native/evaluator/reference读取；7baseline/10candidate失败0，原结果不动。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-有限真实事件与P适用性、完整逐例浏览表及少量说明图；不增加科学调用。
+完成同批真实调度/创新证据与P边界，少量说明图后给三候选裁定。
 
 ## 调用边界
 
