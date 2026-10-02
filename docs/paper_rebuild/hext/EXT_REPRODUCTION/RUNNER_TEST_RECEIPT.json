@@ -1,0 +1,22 @@
+{
+  "command": [
+    "python3",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/paper_rebuild/test_ext_reproduction_runner.py"
+  ],
+  "exit_code": 0,
+  "elapsed_s": 1.5814027786254883,
+  "result": "....                                                                     [100%]\n4 passed in 1.42s\n",
+  "log": "<EXT_REPRO_ROOT>/tests/RUNNER_TESTS.log",
+  "log_sha256": "d8a663a81cc181eb028d17573d86a44e87e9eb4782bc7ccdebd61962aeaf7d77",
+  "earlier_preliminary_run": "4 passed in 1.34s before final stage-counter and identity-gate additions",
+  "synthetic_test_native_library_requests_this_run": 1,
+  "real_method_sequence_calls": 0,
+  "reference_reads": 0,
+  "evaluator_calls": 0,
+  "data_mode": "synthetic_tests",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false
+}

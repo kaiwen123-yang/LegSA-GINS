@@ -11,3 +11,5 @@
 公共路径使用别名。机器上的 `configs/paper_rebuild/EXT_REPRODUCTION_ROOTS.local.json` 是 ignored 根映射，`<EXT_REPRO_ROOT>/existing_clean.local.csv` 等本机镜像给出可直接打开的真实路径。旧结果主要在 `<CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON`、`CLEAN7_HEXT_EXTERNAL_SEQUENCES`、`CLEAN9_EXTERNAL_COMPARISON`。新运行只进入 `<EXT_REPRO_ROOT>`，编译和论文缓存进入 `<EXT_REPRO_BUILD>`。
 
 原 V3 的完整导航、文献方法的基线/航向和其他方法的相对位姿分别解释；未保存或无此输出的指标不填零。参考仅离线评价，固定判定不是已知整数正确性。
+
+执行入口：`PYTHONPATH=src OPENBLAS_NUM_THREADS=1 python3 scripts/paper_rebuild/run_ext_reproduction_batch.py --roots configs/paper_rebuild/EXT_REPRODUCTION_ROOTS.local.json --config configs/paper_rebuild/horizontal_literature/EXT_REPRODUCTION_V1.json --sequence BY2`（另两个序列仅替换sequence）。输出目录存在即拒绝，不自动续跑或覆盖；技术重试需明确独立attempt。单方法模块 `horizontal_literature.reproduction_runner` 供定向复查。所有原始NAV/参考只读，新基线/ambiguity/状态证据在新运行根，不上传raw。
