@@ -24,3 +24,4 @@ CASE_VIEW,link all ten candidate outcomes and fixed windows without rounding sou
 CASE_VIEW_REVIEW,enforce identical time support before paired metric subtraction,a321f4092bd44ea9a994565ac61a99e8a2016aff,0,True,PUSHED_VERIFIED
 N12_EVENTS,connect conditional innovation to actual R state divergence and one yaw rejection,4a250c438298755bca6a5fbc0188e468ab68d1eb,0,True,PUSHED_VERIFIED
 N09_C00_EVENTS,verify normal-GNSS event states remain exact under optional RP scheduling,03e5c1eb085934c4a84aa66a5c237b017c835979,0,True,PUSHED_VERIFIED
+P_BOUNDARY,explain frozen zero-scale covariance and bound key-snapshot symmetry evidence,969b11dba49fec5d9dd1474be6c5e67f98b9a01c,0,True,PUSHED_VERIFIED

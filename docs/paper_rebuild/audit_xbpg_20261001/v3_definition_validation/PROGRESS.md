@@ -29,18 +29,19 @@
 - CASE_VIEW_REVIEW：enforce identical time support before paired metric subtraction；`a321f4092bd44ea9a994565ac61a99e8a2016aff`；PUSHED_VERIFIED。
 - N12_EVENTS：connect conditional innovation to actual R state divergence and one yaw rejection；`4a250c438298755bca6a5fbc0188e468ab68d1eb`；PUSHED_VERIFIED。
 - N09_C00_EVENTS：verify normal-GNSS event states remain exact under optional RP scheduling；`03e5c1eb085934c4a84aa66a5c237b017c835979`；PUSHED_VERIFIED。
+- P_BOUNDARY：explain frozen zero-scale covariance and bound key-snapshot symmetry evidence；`969b11dba49fec5d9dd1474be6c5e67f98b9a01c`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-P_BOUNDARY：explain frozen zero-scale covariance and bound key-snapshot symmetry evidence。
+N09_A2_EVENTS：close A2 unchanged scheduling and actual accepted-source evidence。
 
-7原config的28个scale std字段均为0，闭合冻结初始化/过程噪声来源。仅已保存KEY_SNAPSHOTS中211个完整P描述性核算，均441项有限、6scale行列精确0，最大逐元素非对称1.1102230246251565e-16；没有新门/降维/Cholesky或全时序对称PASS。17缓存只读，原events重开0，solver/evaluator0。
+四条事件流各完整读取一次，共1745524行。两组各8014个测量键、56642共同IMU末状态完全相同；原固定中断窗各实际接受yaw/HV/RP 100次、RD 0次，无新增RP-only尝试。只读事件与缓存算术，新增native/evaluator/provider/reference均0。P正定门限制保持。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-完成N16/N09 A1/A2事件及本轮辅助join更正；三张真实图和最终三候选裁定。
+分别提交A1新增RP事件与关联更正、N16实际权重事件，再汇总限定裁定。
 
 ## 调用边界
 
