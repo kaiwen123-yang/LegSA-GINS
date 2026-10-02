@@ -23,3 +23,4 @@ B01,separate historical protocol comparisons from formal V3 runs,7c7b63fafac0c1f
 B02,explain frozen candidate sensitivity identities and tails,bf244f246be68c93af32c30185329279ae191b71,0,True,PUSHED_VERIFIED
 B03,explain external comparison classes and retained coverage,e1ea87c9e33a6a5ad04efd735368444abad0ee64,0,True,PUSHED_VERIFIED
 G01,interpret all ten existing V3 stage figures,41b7eacd5925e15072dff288ed9f3e0acaa97ea5,0,True,PUSHED_VERIFIED
+G02,interpret ten paper figures and preserve historical pins,415fb2e9582e1d16ae65d0e4041e72a523573c6c,0,True,PUSHED_VERIFIED

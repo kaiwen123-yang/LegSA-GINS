@@ -28,18 +28,19 @@
 - B02：explain frozen candidate sensitivity identities and tails；`bf244f246be68c93af32c30185329279ae191b71`；PUSHED_VERIFIED。
 - B03：explain external comparison classes and retained coverage；`e1ea87c9e33a6a5ad04efd735368444abad0ee64`；PUSHED_VERIFIED。
 - G01：interpret all ten existing V3 stage figures；`41b7eacd5925e15072dff288ed9f3e0acaa97ea5`；PUSHED_VERIFIED。
+- G02：interpret ten paper figures and preserve historical pins；`415fb2e9582e1d16ae65d0e4041e72a523573c6c`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-G02：interpret ten paper figures and preserve historical pins。
+S01：close all retained-series checks with explicit limits。
 
-实际阅读Fig01-Fig08/SFig01/SFig02十PNG，49图源关系与10目视回执保存。Fig07为HX05图非同名阶段图；Fig06为全窗H，Fig08上须P95非CI；Fig01b实拍占位仍缺。两个历史AGENTS/FIGURE_MAP recorded/current SHA并列，旧bytes未取得不臆测差异；104图关系48直接源均存在，1065总关系不冒称全数值PASS。无重绘。
+16组回执闭合2308error+1matched/1154native，131266946数据行，各主扫描1次到EOF/CRC，hash2309 MATCH。381501数值MATCH、332NULL、20777不可复算、0差异/损坏；逐文件读深度/计数/来源可查。新汇总保留matched原reason并澄清冻结范围；D22/D39局部窗口缺口与已释放载荷继续列明。合并仅读本轮CSV/JSON，未重开gzip。独立validation=true、科学调用0。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-保留时序全量回执闭合与不能复算项说明。
+将原手稿说法及旧代码问题关联到真实结果，保持触发未核实。
 
 ## 调用边界
 
