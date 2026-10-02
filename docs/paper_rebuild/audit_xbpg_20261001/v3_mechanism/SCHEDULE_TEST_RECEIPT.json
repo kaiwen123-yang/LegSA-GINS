@@ -1,0 +1,20 @@
+{
+  "data_mode": "synthetic_parser_fixture_only",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "pure_python_suite_invocations": 2,
+  "tests_per_final_suite": 4,
+  "final_passed": 4,
+  "failed_tests": 0,
+  "first_suite_resource_warnings_corrected": true,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "raw_reference_opens": 0,
+  "real_event_payload_reads": 0,
+  "checks": [
+    "original time predicate endpoint strictness",
+    "fixed full/before/during/after windows",
+    "HV false update_flag cannot qualify",
+    "qualified RP entry-blocked vs unavailable HV vs config-disabled RD"
+  ]
+}

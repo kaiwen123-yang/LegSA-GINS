@@ -7,18 +7,19 @@
 - D01：correct V3 display precision denominators and reproduction wording；`a62bd637303341a92b5016aaa7666e30994c4424`；PUSHED_VERIFIED。
 - E01：document actual V3 fault exposure against evaluation support；`6d326c9fa3c2279d6bfd5fbbc46d467d4523b44f`；PUSHED_VERIFIED。
 - E02：补充核对 D39 seed00 的两个窗内区间及窗外空集；`dff215f5d11ba35097dbcfbef290fe0a2cf6667f`；PUSHED_VERIFIED。
+- P01：预登记11个机制对象的原输入身份与22槽诊断协议；`b221e3244ed61f84b0c8278245ff23f85d780f0e`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-P01：预登记11个机制对象的原输入身份与22槽诊断协议。
+I01：封存观察插桩与合成无干扰门。
 
-55次输入引用对应11个实物，正文读取及hash均匹配；66个科学开关与原echo一致。冻结源码/二进制与runner分列，固定同快照NIS及N16判据、输出字节和科学counter门。当前22槽均PLANNED，真实native/evaluator调用0；只读review通过。
+隔离观察patch通过只读review；288项合成检查及38项科学文件字节比较通过。3个合成native进程、33子场景，失败/重试0；真实native/evaluator仍0。调度解析4项独立纯Python测试通过，入口/选中/接受与未调用原因分列。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-I01：观察性构建及合成无干扰测试，审查后再执行C00。
+C00：F03/A04/F04各执行原冻结版与观察版，逐对象检查历史和无干扰身份，读取机制事件。
 
 ## 调用边界
 

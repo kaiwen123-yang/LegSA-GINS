@@ -207,11 +207,12 @@ def main():
         raise RuntimeError('output containment or symlink gate failed')
     out.mkdir(parents=True, exist_ok=False)  # exclusive reservation: never reuse an old output slot
     observer = out / 'observer'
-    env = os.environ.copy(); env.pop('LEGSA_V3_OBSERVER_DIR', None)
+    env = os.environ.copy(); env.pop('LEGSA_V3_OBSERVER_DIR', None); env.pop('LEGSA_V3_OBSERVER_RUN_ID', None)
     env.update({name: '1' for name in ['OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS', 'NUMEXPR_NUM_THREADS']})
     if args.variant == 'observed':
         observer.mkdir()
         env['LEGSA_V3_OBSERVER_DIR'] = str(observer)
+        env['LEGSA_V3_OBSERVER_RUN_ID'] = args.run_id
     argv = [str(binary), '--config', str(config), '--output-dir', str(out),
             '--debug-update-timeline', '--debug-output-dir', str(out), '--debug-max-rows', '1000000']
     trace = out / 'NATIVE_ACCESS.strace'
