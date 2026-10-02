@@ -1,0 +1,53 @@
+{
+  "initial_run": {
+    "command": [
+      "python3",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/paper_rebuild/test_horizontal_ext01_clambda.py",
+      "tests/paper_rebuild/test_horizontal_shared_raw_backend.py",
+      "tests/paper_rebuild/test_ext_reproduction_backend.py"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 0.46039915084838867,
+    "log_path": "<EXT_REPRO_ROOT>/tests/EXT01_AND_SHARED_TESTS.log",
+    "log_sha256": "79f549df3549b24d4af33f434f86f746cf0f0de31a1bc1ea906dbe5a50b328ef",
+    "data_mode": "synthetic_tests",
+    "synthetic_data_used": true,
+    "semisynthetic_data_used": false,
+    "real_sequence_solver_calls": 0,
+    "evaluator_calls": 0,
+    "lambda_library_sha256_newly_verified": "28c25b1cc7fade9b956bfdf77005de8fcb0a382c8411ae6e608c83b82bff53f2"
+  },
+  "final_run": {
+    "command": [
+      "python3",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "tests/paper_rebuild/test_horizontal_ext01_clambda.py",
+      "tests/paper_rebuild/test_horizontal_shared_raw_backend.py",
+      "tests/paper_rebuild/test_ext_reproduction_backend.py"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 0.5433721542358398,
+    "log_path": "<EXT_REPRO_ROOT>/tests/EXT01_AND_SHARED_TESTS_FINAL.log",
+    "log_sha256": "4470eecac60710676e81e7d6546ed3ab6e82aa247df58d6850f7422454629526",
+    "test_output": "...............................sss.........                              [100%]\n=========================== short test summary info ============================\nSKIPPED [1] tests/paper_rebuild/test_horizontal_shared_raw_backend.py:654: ignored local bridge configuration is unavailable\nSKIPPED [1] tests/paper_rebuild/test_horizontal_shared_raw_backend.py:685: ignored local bridge configuration is unavailable\nSKIPPED [1] tests/paper_rebuild/test_horizontal_shared_raw_backend.py:765: ignored Phase1R local data-path configuration is unavailable\n40 passed, 3 skipped in 0.36s\n"
+  },
+  "intermediate_test_failures": [
+    {
+      "scope": "new dual-frequency test harness",
+      "error": "nonexistent test attribute line_of_sight_ned then covariance_m2",
+      "actual": "1 failed / 8 passed each of two attempts",
+      "resolution": "test fields corrected to existing los_ned/covariance_code_phase_m2; no production change or tolerance relaxation"
+    }
+  ],
+  "data_mode": "synthetic_tests",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "real_sequence_solver_calls": 0,
+  "evaluator_calls": 0
+}
