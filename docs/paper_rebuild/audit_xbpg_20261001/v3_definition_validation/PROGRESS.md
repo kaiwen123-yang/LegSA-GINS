@@ -10,18 +10,19 @@
 - N12_CODE：isolate conditional innovation and test same-event covariance contract；`bb6d4e015fef5cecee1532b2d67617679afe06bf`；PUSHED_VERIFIED。
 - N16_CODE：exclude disabled HV dimension from quality statistics with native controls；`35817c5077212c8e02d8f5881902b438055a037c`；PUSHED_VERIFIED。
 - RUN_ENTRY：gate ten single-slot candidate calls with immutable input and access checks；`17aba05b15cf8a80bc43dfece7c7be963b063839`；PUSHED_VERIFIED。
+- N12_NATIVE：record two completed N12 closed-loop calls and changed acceptance；`633db7fd8d2f92e78eb9a3a0e0e60328621e6f5c`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N12_NATIVE：record two completed N12 closed-loop calls and changed acceptance。
+N16_NATIVE：record independent N16 closed-loop calls without combining N12。
 
-N12两计划对象均实际完成，无重试；198固定身份单元格通过，10/10输出存在且不同。D15 yaw接受1346→1345，记录固定门下后续状态反馈影响；C00/D15 SA权重变化次数双向变化。离线指标和完整P待下一小项核对；不提前宣称精度改善。
+N16 2/2真实对象完成，198固定身份单元格及access通过，10科学输出均存在且与原hash不同，无重试。HV/yaw接受数保持，倍率不为1的原字段计数变化不冒充跨版本R差异计数。完整P/事件和离线指标待后续小项。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-N16两目标调用；同口径评价入口及N12指标/事件核对。
+N09六计划调用；冻结评价入口最后两个门检查后逐基线/候选评价。
 
 ## 调用边界
 

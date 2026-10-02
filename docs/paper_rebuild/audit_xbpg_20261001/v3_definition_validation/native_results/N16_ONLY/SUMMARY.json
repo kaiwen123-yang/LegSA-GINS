@@ -1,0 +1,19 @@
+{
+  "candidate_id": "N16_ONLY",
+  "planned_combinations": 2,
+  "actual_native_calls": 2,
+  "completed": 2,
+  "evaluator_calls_by_this_collector": 0,
+  "new_performance_calculation": false,
+  "operation": "lossless receipt/counter transcription only",
+  "statuses": [
+    {
+      "slot_id": "N16_ONLY__RUN_00004",
+      "status": "COMPLETED"
+    },
+    {
+      "slot_id": "N16_ONLY__RUN_01401",
+      "status": "COMPLETED"
+    }
+  ]
+}
