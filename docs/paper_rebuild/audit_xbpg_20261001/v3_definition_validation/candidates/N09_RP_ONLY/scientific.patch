@@ -1,0 +1,193 @@
+--- a/cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/gi_engine.hpp
++++ b/cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/gi_engine.hpp
+@@ -27,0 +28,9 @@
++
++// Candidate-only accounting. These are not GNSS update counters.
++struct RpOnlySchedulingStatus {
++  std::size_t input_records = 0, consumed_records = 0, superseded_records = 0;
++  std::size_t invalid_records = 0, opportunity_count = 0, eligible_count = 0;
++  std::size_t attempt_count = 0, accepted_count = 0, rejected_count = 0;
++  std::size_t skipped_count = 0, feedback_count = 0, rp_only_consumed_count = 0;
++  bool pending = false;
++};
+@@ -61,0 +71 @@
++  const RpOnlySchedulingStatus& rpOnlySchedulingStatus() const;
+@@ -128,0 +139,14 @@
++
++  void rpOnlyRegisterInput();
++  void rpOnlyConsumePending(const std::string& reason, bool rp_only_opportunity,
++                            bool superseded = false);
++  int rpOnlyDueRes() const;
++  void rpOnlyApplyAndFeedback();
++  void rpOnlyWrite(const std::string& event, const std::string& reason) const;
++  RpOnlySchedulingStatus rp_only_status_;
++  bool rp_only_explicit_all_invalid_ = false, rp_only_eligible_ = false;
++  long long rp_only_candidate_row_ = -1;
++  double rp_only_input_time_ = 0.0, rp_only_candidate_time_ = 0.0;
++  double rp_only_match_dt_ = 0.0;
++  int rp_only_res_ = 0;
++  std::string rp_only_qualification_reason_ = "NO_GNSS_INPUT";
+--- a/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp
++++ b/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp
+@@ -251,0 +252 @@
++  rpOnlyConsumePending("SUPERSEDED_BY_NEW_GNSS_INPUT", false, true);
+@@ -266,0 +268 @@
++  rpOnlyRegisterInput();
+@@ -523,0 +526 @@
++  const int rp_only_res = rpOnlyDueRes();
+@@ -532 +535,29 @@
+-  if (res == 0) {
++  if (rp_only_res != 0) {
++    rp_only_res_ = rp_only_res;
++    ++rp_only_status_.opportunity_count;
++    if (observer_.enabled()) observer_res_ = rp_only_res;
++    rpOnlyWrite("RP_ONLY_OPPORTUNITY", rp_only_qualification_reason_);
++    if (!rp_only_eligible_) {
++      ++rp_only_status_.skipped_count;
++      rpOnlyWrite("RP_ONLY_SKIPPED", rp_only_qualification_reason_);
++      rpOnlyConsumePending("INELIGIBLE_NO_HELPER_FULL_PROPAGATION", true);
++      insPropagation(imupre_, imucur_);
++    } else {
++      ++rp_only_status_.eligible_count;
++      if (rp_only_res == 1) {
++        rpOnlyApplyAndFeedback();
++        pvapre_ = pvacur_;
++        insPropagation(imupre_, imucur_);
++      } else if (rp_only_res == 2) {
++        insPropagation(imupre_, imucur_);
++        rpOnlyApplyAndFeedback();
++      } else {
++        ImuData midimu = imuInterpolate(imupre_, imucur_, rp_only_input_time_);
++        insPropagation(imupre_, midimu);
++        rpOnlyApplyAndFeedback();
++        pvapre_ = pvacur_;
++        insPropagation(midimu, imucur_);
++      }
++      rpOnlyConsumePending("RP_ONLY_BRANCH_COMPLETE", true);
++    }
++  } else if (res == 0) {
+@@ -550,0 +582 @@
++  if (res != 0) rpOnlyConsumePending("ORIGINAL_VALID_GNSS_PATH", false);
+--- /dev/null
++++ b/cpp/legsa_v23_port_core/src/kf_gins/gi_rp_only.cpp
+@@ -0,0 +1,120 @@
++// N09_RP_ONLY candidate: bounded invalid-GNSS opportunity, original RP helper.
++#include "legsa_v23_port_core/kf_gins/gi_engine.hpp"
++#include "legsa_v23_port_core/factors/go2_weak_prior_factor.hpp"
++#include <cmath>
++
++namespace legsa_v23_port_core {
++using mechanism_observer::Json;
++
++const RpOnlySchedulingStatus& GIEngine::rpOnlySchedulingStatus() const {
++  return rp_only_status_;
++}
++
++void GIEngine::rpOnlyRegisterInput() {
++  ++rp_only_status_.input_records;
++  rp_only_status_.pending = true;
++  rp_only_input_time_ = gnssdata_.time;
++  rp_only_res_ = 0;
++  rp_only_candidate_row_ = -1;
++  rp_only_candidate_time_ = 0.0;
++  rp_only_match_dt_ = 0.0;
++  rp_only_eligible_ = false;
++  rp_only_explicit_all_invalid_ = gnssdata_.validity_explicit &&
++      !gnssdata_.has_position && !gnssdata_.has_velocity && !gnssdata_.has_yaw;
++  rp_only_qualification_reason_ = "ORIGINAL_VALID_GNSS_PATH";
++  if (rp_only_explicit_all_invalid_) {
++    ++rp_only_status_.invalid_records;
++    if (!options_.go2_attitude_prior_config.enable_go2_attitude_weak_prior) {
++      rp_only_qualification_reason_ = "DISABLED_BY_CONFIG";
++    } else if (!go2_attitude_prior_status_.solver_enabled) {
++      rp_only_qualification_reason_ = "SOLVER_OR_PROVIDER_NOT_ENABLED";
++    } else {
++      // Exact original matcher: no quality prefilter, inclusive tolerance,
++      // <= replacement selects the last vector row on an equal distance.
++      double best_dt = options_.go2_attitude_prior_config.go2_attitude_prior_time_tolerance_sec;
++      for (std::size_t i = 0; i < go2_attitude_priors_.size(); ++i) {
++        const double dt = std::fabs(go2_attitude_priors_[i].time - rp_only_input_time_);
++        if (dt <= best_dt) {
++          rp_only_candidate_row_ = static_cast<long long>(i);
++          best_dt = dt;
++        }
++      }
++      if (rp_only_candidate_row_ < 0) {
++        rp_only_qualification_reason_ = go2_attitude_priors_.empty() ?
++            "NO_LOADED_ROWS" : "NO_TIME_MATCH";
++      } else {
++        const auto& selected = go2_attitude_priors_[static_cast<std::size_t>(rp_only_candidate_row_)];
++        rp_only_candidate_time_ = selected.time;
++        rp_only_match_dt_ = best_dt;
++        rp_only_eligible_ = Go2WeakPriorFactor::isActive(selected);
++        rp_only_qualification_reason_ = rp_only_eligible_ ?
++            "PREINNOVATION_QUALIFIED" : "INACTIVE_OR_NONPOSITIVE_STD";
++      }
++    }
++  }
++  rpOnlyWrite("RP_ONLY_INPUT", rp_only_qualification_reason_);
++}
++
++int GIEngine::rpOnlyDueRes() const {
++  if (!rp_only_status_.pending || !rp_only_explicit_all_invalid_) return 0;
++  return isToUpdate(imupre_.time, imucur_.time, rp_only_input_time_);
++}
++
++void GIEngine::rpOnlyConsumePending(const std::string& reason,
++                                   bool rp_only_opportunity, bool superseded) {
++  if (!rp_only_status_.pending) return;
++  rp_only_status_.pending = false;
++  ++rp_only_status_.consumed_records;
++  if (rp_only_opportunity) ++rp_only_status_.rp_only_consumed_count;
++  if (superseded) ++rp_only_status_.superseded_records;
++  rpOnlyWrite("RP_ONLY_CONSUMED", reason);
++}
++
++void GIEngine::rpOnlyApplyAndFeedback() {
++  ++rp_only_status_.attempt_count;
++  rpOnlyWrite("RP_ONLY_ATTEMPT", "ORIGINAL_RP_HELPER");
++  const std::size_t accepted_before = go2_attitude_prior_status_.update_count;
++  applyGo2AttitudeWeakPriorForTime(rp_only_input_time_);
++  const bool accepted = go2_attitude_prior_status_.update_count > accepted_before;
++  if (accepted) ++rp_only_status_.accepted_count;
++  else ++rp_only_status_.rejected_count;
++  // The original MEASUREMENT_DECISION carries the exact helper return reason;
++  // its measurement_attempt_seq links this result without re-evaluating policy.
++  rpOnlyWrite("RP_ONLY_RESULT", accepted ? "ACCEPTED" : "ORIGINAL_HELPER_REJECTED");
++  stateFeedback();
++  ++rp_only_status_.feedback_count;
++  rpOnlyWrite("RP_ONLY_FEEDBACK", "ONE_FEEDBACK_AFTER_ENTERED_BRANCH");
++}
++
++void GIEngine::rpOnlyWrite(const std::string& event, const std::string& reason) const {
++  if (!observer_.enabled()) return;
++  const auto& s = rp_only_status_;
++  Json counts;
++  counts.add("input_records", s.input_records).add("consumed_records", s.consumed_records)
++      .add("superseded_records", s.superseded_records).add("invalid_records", s.invalid_records)
++      .add("opportunity_count", s.opportunity_count).add("eligible_count", s.eligible_count)
++      .add("attempt_count", s.attempt_count).add("accepted_count", s.accepted_count)
++      .add("rejected_count", s.rejected_count).add("skipped_count", s.skipped_count)
++      .add("feedback_count", s.feedback_count).add("rp_only_consumed_count", s.rp_only_consumed_count);
++  Json x;
++  x.add("candidate", "N09_RP_ONLY").add("definition", "explicit_invalid_gnss_opportunity_original_rp_v1")
++      .add("input_id", s.input_records).add("pending", s.pending)
++      .add("explicit_all_invalid", rp_only_explicit_all_invalid_)
++      .add("gnss_event_time", rp_only_input_time_).add("rp_only_res", rp_only_res_)
++      .add("candidate_row_id", rp_only_candidate_row_).add("candidate_present", rp_only_candidate_row_ >= 0)
++      .add("preinnovation_qualified", rp_only_eligible_)
++      .add("time_tolerance_sec", options_.go2_attitude_prior_config.go2_attitude_prior_time_tolerance_sec)
++      .add("rp_config_enabled", options_.go2_attitude_prior_config.enable_go2_attitude_weak_prior)
++      .add("rp_solver_enabled", go2_attitude_prior_status_.solver_enabled)
++      .add("loaded_rp_rows", go2_attitude_priors_.size())
++      .add("qualification_reason", rp_only_qualification_reason_).add("reason", reason)
++      .raw("gnss", observerInput(gnssdata_).str()).raw("counters", counts.str())
++      .raw("state", observerState().str()).add("dx", dx_);
++  if (rp_only_candidate_row_ >= 0) {
++    x.add("candidate_time", rp_only_candidate_time_).add("candidate_abs_dt", rp_only_match_dt_);
++  } else {
++    x.add("candidate_time", "UNKNOWN").add("candidate_abs_dt", "UNKNOWN");
++  }
++  observerWrite(event, x);
++}
++}  // namespace legsa_v23_port_core
