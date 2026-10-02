@@ -1,8 +1,8 @@
 {
   "candidate_id": "N09_RP_ONLY",
   "planned_combinations": 6,
-  "actual_native_calls": 2,
-  "completed": 2,
+  "actual_native_calls": 4,
+  "completed": 4,
   "evaluator_calls_by_this_collector": 0,
   "new_performance_calculation": false,
   "operation": "lossless receipt/counter transcription only",
@@ -17,11 +17,11 @@
     },
     {
       "slot_id": "N09_RP_ONLY__ADD_RUN_00105",
-      "status": "PLANNED"
+      "status": "COMPLETED"
     },
     {
       "slot_id": "N09_RP_ONLY__ADD_RUN_00103",
-      "status": "PLANNED"
+      "status": "COMPLETED"
     },
     {
       "slot_id": "N09_RP_ONLY__ADD_RUN_00402",
