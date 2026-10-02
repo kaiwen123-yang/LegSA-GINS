@@ -1,0 +1,19 @@
+{
+  "adopted_plot": "figures/attempt_001/HEADING_COMPARISON.png",
+  "plot_sha256": "4c2a1538e0574ea6c85f33cfefe633b1fc9bcabae045edafa40ba48d50121aa5",
+  "plotter_source_sha256": "4032c5f78df9dd9947a7b8e7dd15b20c97bce47f4ae1d6866d92d637129a3186",
+  "error_series_sha256": "5edcff1792afbbd9370a8016b4afddbc41bf86d84355f858d6d064006e451e8d",
+  "actual_raster_review": "OPENED_AT_ORIGINAL_RESOLUTION_AND_REVIEWED",
+  "checks": [
+    "all axis/tick/legend labels visible",
+    "heading/reference wrap360; errors unchanged",
+    "invalid/native/ratio state lanes and missing intervals visible",
+    "full relative baseline magnitude retained; not global navigation"
+  ],
+  "limitations": [
+    "EXT01/02 often overlap; precise per-method masks and values in CSV",
+    "EXT03 float length excursions retained, hard-length curves compressed"
+  ],
+  "new_evaluator_invocations_for_visual_review": 0,
+  "reference_opens_for_visual_review": 0
+}

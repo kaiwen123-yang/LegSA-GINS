@@ -1,0 +1,269 @@
+{
+  "EXT01": {
+    "schema": "hx02.heading_evaluation.v1",
+    "method_id": "EXT01",
+    "window_seconds": [
+      3186.0,
+      3563.0
+    ],
+    "base_time": 1772780400.0,
+    "denominator_native_paired_epochs_in_window": 1885,
+    "valid_epochs_in_window": 1173,
+    "availability": 0.6222811671087534,
+    "valid_epochs_without_reference_support": 0,
+    "valid": {
+      "count": 1173,
+      "rmse_deg": 81.3636019930384,
+      "max_absolute_deg": 179.3441365402054,
+      "p95_absolute_deg": 157.4012352371248,
+      "mae_deg": 53.569481611593694,
+      "circular_bias_deg": 14.952453551794264,
+      "wrapsafe": {
+        "matched_count": 1173,
+        "valid_denominator": 1885,
+        "valid_coverage": 0.6222811671087534,
+        "wrapsafe_bias_deg": 21.472005504270605,
+        "circular_wrapsafe_bias_deg": 14.952453551794264,
+        "rmse_deg": 81.3636019930384,
+        "mae_deg": 53.569481611593694,
+        "median_absolute_deg": 6.051175793937659,
+        "p90_absolute_deg": 147.14486999022714,
+        "p95_absolute_deg": 157.4012352371248,
+        "p99_absolute_deg": 169.3789684688406,
+        "max_absolute_deg": 179.3441365402054,
+        "valid_count": 1173,
+        "segment_count": 23,
+        "longest_segment_epochs": 585,
+        "maximum_gap_seconds": 60.59999990463257,
+        "continuity_definition": "segments split when accepted original epoch indices are nonconsecutive"
+      }
+    },
+    "valid_segments": {
+      "segment_count": 23,
+      "longest_segment_epochs": 585,
+      "maximum_gap_seconds": 60.59999990463257,
+      "definition": "segments split when accepted original epoch indices are nonconsecutive"
+    },
+    "hold_last_valid": {
+      "count": 1885,
+      "rmse_deg": 103.3229221138902,
+      "max_absolute_deg": 179.3441365402054,
+      "p95_absolute_deg": 167.4092317732417,
+      "mae_deg": 76.2048507911162,
+      "circular_bias_deg": 45.628454442344605,
+      "held_epochs_in_window": 1885,
+      "no_heading_epochs_before_first_valid": 0,
+      "held_epochs_without_reference_support": 0,
+      "hold_source": "CAUSAL_LAST_METHOD_NATIVE_VALID_EPOCH_FROM_NATIVE_START"
+    },
+    "reference_semantics": "wrap360(90-interp(unwrap(yaw_ENU))) inside trace support; no extrapolation",
+    "error_convention": "wrap180(method_body_yaw_ned - reference_body_yaw_ned)",
+    "additional_support_diagnostics": {
+      "native_row_count": 2231,
+      "native_invalid_epochs_in_window": 712,
+      "status_counts_in_window_json": "{\"CERTIFIED_INTEGER_CANDIDATE\": 1173, \"INVALID\": 712}",
+      "fixed_definition": "NOT_APPLICABLE_NO_ACCEPTANCE_TEST",
+      "first_valid_native_t_rel_s": 3143.3980000019073,
+      "first_valid_window_t_rel_s": 3186.1979999542236,
+      "first_fixed_native_t_rel_s": null,
+      "first_fixed_window_t_rel_s": null,
+      "maximum_uncovered_interval_with_window_edges_s": 60.59999990463257,
+      "edge_gap_definition": "max gap between window start, native-valid epochs, window end; includes censored edges",
+      "held_age_count": 1885,
+      "held_age_max_s": 60.39999985694885,
+      "held_age_p95_s": 41.559999895095814
+    },
+    "native_identity": {
+      "method_id": "EXT01",
+      "run_id": "BY2O__EXT01__RAW_REPRO_V1",
+      "run_path": "<EXT_REPRO_ROOT>/runs/BY2O__EXT01__RAW_REPRO_V1/RUN.json",
+      "run_sha256": "c47b7497c8c1e68de8e2b004cc25d480a5fb645ece4e66c2fae50b5409a7ab9d",
+      "heading_table": "<EXT_REPRO_ROOT>/runs/BY2O__EXT01__RAW_REPRO_V1/HEADING.csv",
+      "heading_table_sha256": "489146b71243f7d988af153117bdcba88271a88a577ac497da0d07291b430fcf",
+      "native_status": "COMPLETED",
+      "native_code_commit": "9a844d518c559ca33d852a1c6d81f0f13df0ea59"
+    }
+  },
+  "EXT02": {
+    "schema": "hx02.heading_evaluation.v1",
+    "method_id": "EXT02",
+    "window_seconds": [
+      3186.0,
+      3563.0
+    ],
+    "base_time": 1772780400.0,
+    "denominator_native_paired_epochs_in_window": 1885,
+    "valid_epochs_in_window": 1210,
+    "availability": 0.6419098143236074,
+    "valid_epochs_without_reference_support": 0,
+    "valid": {
+      "count": 1210,
+      "rmse_deg": 81.4860714179598,
+      "max_absolute_deg": 179.3441365402105,
+      "p95_absolute_deg": 155.6205437995688,
+      "mae_deg": 54.416292597042286,
+      "circular_bias_deg": 13.820886228783166,
+      "wrapsafe": {
+        "matched_count": 1210,
+        "valid_denominator": 1885,
+        "valid_coverage": 0.6419098143236074,
+        "wrapsafe_bias_deg": 19.526496557483544,
+        "circular_wrapsafe_bias_deg": 13.820886228783166,
+        "rmse_deg": 81.4860714179598,
+        "mae_deg": 54.416292597042286,
+        "median_absolute_deg": 8.097457933502909,
+        "p90_absolute_deg": 145.68542199704808,
+        "p95_absolute_deg": 155.6205437995688,
+        "p99_absolute_deg": 168.75226583989323,
+        "max_absolute_deg": 179.3441365402105,
+        "valid_count": 1210,
+        "segment_count": 31,
+        "longest_segment_epochs": 307,
+        "maximum_gap_seconds": 36.0,
+        "continuity_definition": "segments split when accepted original epoch indices are nonconsecutive"
+      }
+    },
+    "valid_segments": {
+      "segment_count": 31,
+      "longest_segment_epochs": 307,
+      "maximum_gap_seconds": 36.0,
+      "definition": "segments split when accepted original epoch indices are nonconsecutive"
+    },
+    "hold_last_valid": {
+      "count": 1885,
+      "rmse_deg": 96.99785216664114,
+      "max_absolute_deg": 179.3441365402105,
+      "p95_absolute_deg": 167.27953710345523,
+      "mae_deg": 70.8902252124341,
+      "circular_bias_deg": 26.08639503087616,
+      "held_epochs_in_window": 1885,
+      "no_heading_epochs_before_first_valid": 0,
+      "held_epochs_without_reference_support": 0,
+      "hold_source": "CAUSAL_LAST_METHOD_NATIVE_VALID_EPOCH_FROM_NATIVE_START"
+    },
+    "reference_semantics": "wrap360(90-interp(unwrap(yaw_ENU))) inside trace support; no extrapolation",
+    "error_convention": "wrap180(method_body_yaw_ned - reference_body_yaw_ned)",
+    "additional_support_diagnostics": {
+      "native_row_count": 2231,
+      "native_invalid_epochs_in_window": 675,
+      "status_counts_in_window_json": "{\"INVALID\": 675, \"WRAPPED_CANDIDATE\": 1210}",
+      "fixed_definition": "NOT_APPLICABLE_NO_ACCEPTANCE_TEST",
+      "first_valid_native_t_rel_s": 3143.3980000019073,
+      "first_valid_window_t_rel_s": 3186.1979999542236,
+      "first_fixed_native_t_rel_s": null,
+      "first_fixed_window_t_rel_s": null,
+      "maximum_uncovered_interval_with_window_edges_s": 36.0,
+      "edge_gap_definition": "max gap between window start, native-valid epochs, window end; includes censored edges",
+      "held_age_count": 1885,
+      "held_age_max_s": 35.799999952316284,
+      "held_age_p95_s": 18.1599998474121
+    },
+    "native_identity": {
+      "method_id": "EXT02",
+      "run_id": "BY2O__EXT02__RAW_REPRO_V1",
+      "run_path": "<EXT_REPRO_ROOT>/runs/BY2O__EXT02__RAW_REPRO_V1/RUN.json",
+      "run_sha256": "54858674c9f75aa92f4c9ebdd70604978f87317b18d4decf18e1e58337fa22e7",
+      "heading_table": "<EXT_REPRO_ROOT>/runs/BY2O__EXT02__RAW_REPRO_V1/HEADING.csv",
+      "heading_table_sha256": "dfcb64f857da129557aed38b3326a81b986ca35bd3582f1d0c90f8f95ea50f71",
+      "native_status": "COMPLETED",
+      "native_code_commit": "9a844d518c559ca33d852a1c6d81f0f13df0ea59"
+    }
+  },
+  "EXT03": {
+    "schema": "hx02.heading_evaluation.v1",
+    "method_id": "EXT03",
+    "window_seconds": [
+      3186.0,
+      3563.0
+    ],
+    "base_time": 1772780400.0,
+    "denominator_native_paired_epochs_in_window": 1885,
+    "valid_epochs_in_window": 269,
+    "availability": 0.1427055702917772,
+    "valid_epochs_without_reference_support": 0,
+    "valid": {
+      "count": 269,
+      "rmse_deg": 103.75420005976044,
+      "max_absolute_deg": 178.14448813972695,
+      "p95_absolute_deg": 167.19206902637293,
+      "mae_deg": 87.38227696078988,
+      "circular_bias_deg": 87.27380705618953,
+      "wrapsafe": {
+        "matched_count": 269,
+        "valid_denominator": 1885,
+        "valid_coverage": 0.1427055702917772,
+        "wrapsafe_bias_deg": 68.32103614978216,
+        "circular_wrapsafe_bias_deg": 87.27380705618953,
+        "rmse_deg": 103.75420005976044,
+        "mae_deg": 87.38227696078988,
+        "median_absolute_deg": 99.80463400548348,
+        "p90_absolute_deg": 155.30459267686953,
+        "p95_absolute_deg": 167.19206902637293,
+        "p99_absolute_deg": 176.98698716401475,
+        "max_absolute_deg": 178.14448813972695,
+        "valid_count": 269,
+        "segment_count": 21,
+        "longest_segment_epochs": 86,
+        "maximum_gap_seconds": 92.20000004768372,
+        "continuity_definition": "segments split when accepted original epoch indices are nonconsecutive"
+      }
+    },
+    "valid_segments": {
+      "segment_count": 21,
+      "longest_segment_epochs": 86,
+      "maximum_gap_seconds": 92.20000004768372,
+      "definition": "segments split when accepted original epoch indices are nonconsecutive"
+    },
+    "hold_last_valid": {
+      "count": 1885,
+      "rmse_deg": 105.44165763394312,
+      "max_absolute_deg": 179.81358730328407,
+      "p95_absolute_deg": 156.34276280440696,
+      "mae_deg": 91.81620201768884,
+      "circular_bias_deg": 118.99365191325666,
+      "held_epochs_in_window": 1885,
+      "no_heading_epochs_before_first_valid": 0,
+      "held_epochs_without_reference_support": 0,
+      "hold_source": "CAUSAL_LAST_METHOD_NATIVE_VALID_EPOCH_FROM_NATIVE_START"
+    },
+    "reference_semantics": "wrap360(90-interp(unwrap(yaw_ENU))) inside trace support; no extrapolation",
+    "error_convention": "wrap180(method_body_yaw_ned - reference_body_yaw_ned)",
+    "ratio_fixed": {
+      "count": 5,
+      "rate": 0.002652519893899204,
+      "errors": {
+        "count": 5,
+        "rmse_deg": 43.407232183249846,
+        "max_absolute_deg": 90.77409852767693,
+        "p95_absolute_deg": 78.83945563384796,
+        "mae_deg": 28.883066045951228,
+        "circular_bias_deg": 20.964944587674864
+      }
+    },
+    "additional_support_diagnostics": {
+      "native_row_count": 2231,
+      "native_invalid_epochs_in_window": 1616,
+      "status_counts_in_window_json": "{\"float\": 264, \"invalid\": 1616, \"paper_ratio_fixed\": 5}",
+      "fixed_definition": "PAPER_RATIO_TEST",
+      "first_valid_native_t_rel_s": 3143.3980000019073,
+      "first_valid_window_t_rel_s": 3186.1979999542236,
+      "first_fixed_native_t_rel_s": 3146.1979999542236,
+      "first_fixed_window_t_rel_s": 3190.798000097275,
+      "maximum_uncovered_interval_with_window_edges_s": 114.80200004577637,
+      "edge_gap_definition": "max gap between window start, native-valid epochs, window end; includes censored edges",
+      "held_age_count": 1885,
+      "held_age_max_s": 114.79999995231628,
+      "held_age_p95_s": 95.95999999046325
+    },
+    "native_identity": {
+      "method_id": "EXT03",
+      "run_id": "BY2O__EXT03__RAW_REPRO_V1",
+      "run_path": "<EXT_REPRO_ROOT>/runs/BY2O__EXT03__RAW_REPRO_V1/RUN.json",
+      "run_sha256": "5589580bd84b60587e73903472c41670c5cb8ec968fc80460c5a5bac99900080",
+      "heading_table": "<EXT_REPRO_ROOT>/runs/BY2O__EXT03__RAW_REPRO_V1/HEADING.csv",
+      "heading_table_sha256": "68646a9dd774217eb08bef0647a60a50bb3568fa9a1331bb2de523f67f9687a7",
+      "native_status": "COMPLETED",
+      "native_code_commit": "9a844d518c559ca33d852a1c6d81f0f13df0ea59"
+    }
+  }
+}
