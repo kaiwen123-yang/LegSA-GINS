@@ -1,0 +1,387 @@
+source_path,row_key,identity,column,source_value
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,1,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2H""}",sequence_id,BY2H
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,1,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2H""}",method_id,A03
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,1,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2H""}",effective_profile,AB0111
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,1,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2H""}",yaw_rmse_deg,1.9325665788345574
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,1,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2H""}",horizontal_rmse_m,0.06869953440098187
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,1,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2H""}",up_rmse_m,0.04536362130072347
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,2,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2H""}",sequence_id,BY2H
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,2,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2H""}",method_id,A04
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,2,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2H""}",effective_profile,AB1011
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,2,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2H""}",yaw_rmse_deg,1.9339066257262114
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,2,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2H""}",horizontal_rmse_m,0.07004625078548787
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,2,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2H""}",up_rmse_m,0.04589460672660459
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,3,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2H""}",sequence_id,BY2H
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,3,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2H""}",method_id,A05
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,3,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2H""}",effective_profile,AB1101
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,3,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2H""}",yaw_rmse_deg,1.9409267306887934
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,3,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2H""}",horizontal_rmse_m,0.06784676733350983
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,3,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2H""}",up_rmse_m,0.0449252241770303
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,4,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2H""}",sequence_id,BY2H
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,4,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2H""}",method_id,A06
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,4,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2H""}",effective_profile,AB1110
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,4,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2H""}",yaw_rmse_deg,1.9340363022685139
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,4,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2H""}",horizontal_rmse_m,0.06889166491746555
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,4,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2H""}",up_rmse_m,0.04535465489863166
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,5,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2H""}",sequence_id,BY2H
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,5,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2H""}",method_id,A07
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,5,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2H""}",effective_profile,AB1100
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,5,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2H""}",yaw_rmse_deg,1.9411061338791484
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,5,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2H""}",horizontal_rmse_m,0.06833442278010676
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,5,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2H""}",up_rmse_m,0.04492806798506477
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,6,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2H""}",sequence_id,BY2H
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,6,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2H""}",method_id,A08
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,6,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2H""}",effective_profile,AB1000
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,6,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2H""}",yaw_rmse_deg,1.9413174678612943
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,6,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2H""}",horizontal_rmse_m,0.06839014156358125
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,6,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2H""}",up_rmse_m,0.045418644116405345
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,7,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2H""}",sequence_id,BY2H
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,7,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2H""}",method_id,A09
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,7,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2H""}",effective_profile,AB0100
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,7,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2H""}",yaw_rmse_deg,1.940209940221195
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,7,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2H""}",horizontal_rmse_m,0.06866604198275666
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,7,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2H""}",up_rmse_m,0.04494761721265958
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,8,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2H""}",sequence_id,BY2H
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,8,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2H""}",method_id,F01
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,8,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2H""}",effective_profile,single_antenna_EKF
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,8,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2H""}",yaw_rmse_deg,7.137487572272005
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,8,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2H""}",horizontal_rmse_m,0.06292589316025435
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,8,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2H""}",up_rmse_m,0.04490416746278954
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,9,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2H""}",sequence_id,BY2H
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,9,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2H""}",method_id,F02
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,9,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2H""}",effective_profile,basic_dual_yaw_EKF
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,9,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2H""}",yaw_rmse_deg,2.2832413876665534
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,9,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2H""}",horizontal_rmse_m,0.07150053377515339
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,9,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2H""}",up_rmse_m,0.045410027457013925
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,10,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2H""}",sequence_id,BY2H
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,10,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2H""}",method_id,F03
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,10,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2H""}",effective_profile,AB0000
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,10,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2H""}",yaw_rmse_deg,1.9408005859002146
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,10,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2H""}",horizontal_rmse_m,0.06866690198053112
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,10,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2H""}",up_rmse_m,0.044900829685629695
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,11,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2H""}",sequence_id,BY2H
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,11,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2H""}",method_id,F04
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,11,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2H""}",effective_profile,AB1111
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,11,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2H""}",yaw_rmse_deg,1.93377013508875
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,11,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2H""}",horizontal_rmse_m,0.06836245149191253
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,11,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2H""}",up_rmse_m,0.04535210822197352
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,12,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2O""}",sequence_id,BY2O
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,12,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2O""}",method_id,A03
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,12,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2O""}",effective_profile,AB0111
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,12,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,2.435462017432848
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,12,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2O""}",horizontal_rmse_m,0.05446524178850943
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,12,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2O""}",up_rmse_m,0.04593636119195229
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,13,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2O""}",sequence_id,BY2O
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,13,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2O""}",method_id,A04
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,13,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2O""}",effective_profile,AB1011
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,13,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,2.4291725340537145
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,13,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2O""}",horizontal_rmse_m,0.05394152069657263
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,13,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2O""}",up_rmse_m,0.0441769680957712
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,14,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2O""}",sequence_id,BY2O
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,14,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2O""}",method_id,A05
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,14,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2O""}",effective_profile,AB1101
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,14,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,2.434143653191529
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,14,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2O""}",horizontal_rmse_m,0.05401109031017777
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,14,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2O""}",up_rmse_m,0.04536483526202149
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,15,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2O""}",sequence_id,BY2O
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,15,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2O""}",method_id,A06
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,15,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2O""}",effective_profile,AB1110
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,15,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,2.4325386092109773
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,15,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2O""}",horizontal_rmse_m,0.055421321387195625
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,15,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2O""}",up_rmse_m,0.045860403327096844
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,16,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2O""}",sequence_id,BY2O
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,16,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2O""}",method_id,A07
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,16,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2O""}",effective_profile,AB1100
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,16,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,2.433865973592118
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,16,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2O""}",horizontal_rmse_m,0.05485002708514828
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,16,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2O""}",up_rmse_m,0.04536948900950476
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,17,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2O""}",sequence_id,BY2O
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,17,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2O""}",method_id,A08
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,17,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2O""}",effective_profile,AB1000
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,17,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,2.428659749594382
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,17,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2O""}",horizontal_rmse_m,0.05477666792578947
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,17,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2O""}",up_rmse_m,0.04365407453485476
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,18,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2O""}",sequence_id,BY2O
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,18,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2O""}",method_id,A09
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,18,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2O""}",effective_profile,AB0100
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,18,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,2.4355532825114414
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,18,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2O""}",horizontal_rmse_m,0.05475189029079194
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,18,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2O""}",up_rmse_m,0.04543744128383995
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,19,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2O""}",sequence_id,BY2O
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,19,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2O""}",method_id,F01
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,19,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2O""}",effective_profile,single_antenna_EKF
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,19,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,5.739037942642961
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,19,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2O""}",horizontal_rmse_m,0.06284210260933396
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,19,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2O""}",up_rmse_m,0.043746385631304584
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,20,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2O""}",sequence_id,BY2O
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,20,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2O""}",method_id,F02
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,20,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2O""}",effective_profile,basic_dual_yaw_EKF
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,20,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,2.309490986722553
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,20,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2O""}",horizontal_rmse_m,0.054724671058797664
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,20,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2O""}",up_rmse_m,0.04617448708387419
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,21,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2O""}",sequence_id,BY2O
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,21,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2O""}",method_id,F03
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,21,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2O""}",effective_profile,AB0000
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,21,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,2.4321841493167162
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,21,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2O""}",horizontal_rmse_m,0.05470913757288693
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,21,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2O""}",up_rmse_m,0.043711582963203474
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,22,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2O""}",sequence_id,BY2O
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,22,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2O""}",method_id,F04
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,22,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2O""}",effective_profile,AB1111
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,22,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,2.433814932823714
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,22,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2O""}",horizontal_rmse_m,0.054543210912875166
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,22,"{""case_family"": ""natural_sequence"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2O""}",up_rmse_m,0.04585890723786377
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,23,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2""}",sequence_id,BY2
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,23,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2""}",method_id,F01
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,23,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2""}",effective_profile,single_antenna_EKF
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,23,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2""}",yaw_rmse_deg,8.089647422454789
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,23,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2""}",horizontal_rmse_m,0.09177145533263088
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,23,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F01"", ""sequence_id"": ""BY2""}",up_rmse_m,0.04788054380877193
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,24,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2""}",sequence_id,BY2
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,24,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2""}",method_id,F02
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,24,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2""}",effective_profile,basic_dual_yaw_EKF
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,24,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2""}",yaw_rmse_deg,2.231952255808013
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,24,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2""}",horizontal_rmse_m,0.10192187334932777
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,24,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F02"", ""sequence_id"": ""BY2""}",up_rmse_m,0.04806842213318387
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,25,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2""}",sequence_id,BY2
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,25,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2""}",method_id,F03
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,25,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2""}",effective_profile,AB0000
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,25,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2""}",yaw_rmse_deg,1.9155910498740765
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,25,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2""}",horizontal_rmse_m,0.09992032386709424
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,25,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F03"", ""sequence_id"": ""BY2""}",up_rmse_m,0.047873659683683206
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,26,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2""}",sequence_id,BY2
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,26,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2""}",method_id,F04
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,26,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2""}",effective_profile,AB1111
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,26,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2""}",yaw_rmse_deg,1.8862718548526467
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,26,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2""}",horizontal_rmse_m,0.09790607774950152
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,26,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""sequence_id"": ""BY2""}",up_rmse_m,0.04899590433188947
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,27,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2""}",sequence_id,BY2
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,27,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2""}",method_id,A03
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,27,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2""}",effective_profile,AB0111
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,27,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2""}",yaw_rmse_deg,1.885675855927391
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,27,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2""}",horizontal_rmse_m,0.098049553384542
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,27,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A03"", ""sequence_id"": ""BY2""}",up_rmse_m,0.04841574250517361
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,28,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2""}",sequence_id,BY2
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,28,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2""}",method_id,A04
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,28,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2""}",effective_profile,AB1011
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,28,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2""}",yaw_rmse_deg,1.886000833151237
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,28,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2""}",horizontal_rmse_m,0.09691990156944293
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,28,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A04"", ""sequence_id"": ""BY2""}",up_rmse_m,0.05001891586618585
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,29,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2""}",sequence_id,BY2
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,29,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2""}",method_id,A05
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,29,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2""}",effective_profile,AB1101
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,29,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2""}",yaw_rmse_deg,1.913840178316258
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,29,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2""}",horizontal_rmse_m,0.0986391382864622
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,29,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A05"", ""sequence_id"": ""BY2""}",up_rmse_m,0.04847782288727539
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,30,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2""}",sequence_id,BY2
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,30,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2""}",method_id,A06
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,30,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2""}",effective_profile,AB1110
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,30,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2""}",yaw_rmse_deg,1.886870037275429
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,30,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2""}",horizontal_rmse_m,0.09899704794326429
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,30,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A06"", ""sequence_id"": ""BY2""}",up_rmse_m,0.04899160192849435
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,31,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2""}",sequence_id,BY2
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,31,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2""}",method_id,A07
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,31,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2""}",effective_profile,AB1100
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,31,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2""}",yaw_rmse_deg,1.9144225265420964
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,31,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2""}",horizontal_rmse_m,0.0998590361372145
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,31,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A07"", ""sequence_id"": ""BY2""}",up_rmse_m,0.04847391826840906
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,32,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2""}",sequence_id,BY2
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,32,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2""}",method_id,A08
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,32,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2""}",effective_profile,AB1000
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,32,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2""}",yaw_rmse_deg,1.914867170576267
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,32,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2""}",horizontal_rmse_m,0.0997600915358197
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,32,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A08"", ""sequence_id"": ""BY2""}",up_rmse_m,0.04946006528907314
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,33,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2""}",sequence_id,BY2
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,33,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2""}",method_id,A09
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,33,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2""}",effective_profile,AB0100
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,33,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2""}",yaw_rmse_deg,1.913874850848372
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,33,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2""}",horizontal_rmse_m,0.0999841569020399
+<V3_ROOT>/07C_FAILURE_FAMILY_CONFIG/FULL_ABLATION_TABLE_V3.csv,33,"{""case_family"": ""clean"", ""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""A09"", ""sequence_id"": ""BY2""}",up_rmse_m,0.04785826596629661
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,1,"{""method_id"": ""A03"", ""metric"": ""horizontal_rmse_m""}",method_id,A03
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,1,"{""method_id"": ""A03"", ""metric"": ""horizontal_rmse_m""}",registered_count,541
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,1,"{""method_id"": ""A03"", ""metric"": ""horizontal_rmse_m""}",finite_count,518
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,1,"{""method_id"": ""A03"", ""metric"": ""horizontal_rmse_m""}",algorithm_failure_count,23
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,1,"{""method_id"": ""A03"", ""metric"": ""horizontal_rmse_m""}",mean,0.619050596905346
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,1,"{""method_id"": ""A03"", ""metric"": ""horizontal_rmse_m""}",median,0.09828737967622787
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,1,"{""method_id"": ""A03"", ""metric"": ""horizontal_rmse_m""}",p95,3.559991135525838
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,1,"{""method_id"": ""A03"", ""metric"": ""horizontal_rmse_m""}",maximum,17.0073525485166
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,8,"{""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",method_id,A04
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,8,"{""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",registered_count,541
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,8,"{""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",finite_count,513
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,8,"{""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",algorithm_failure_count,28
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,8,"{""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",mean,0.577658775651872
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,8,"{""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",median,0.09784136547266481
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,8,"{""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",p95,3.015940224356186
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,8,"{""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",maximum,16.25373732694884
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,15,"{""method_id"": ""A05"", ""metric"": ""horizontal_rmse_m""}",method_id,A05
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,15,"{""method_id"": ""A05"", ""metric"": ""horizontal_rmse_m""}",registered_count,541
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,15,"{""method_id"": ""A05"", ""metric"": ""horizontal_rmse_m""}",finite_count,519
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,15,"{""method_id"": ""A05"", ""metric"": ""horizontal_rmse_m""}",algorithm_failure_count,22
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,15,"{""method_id"": ""A05"", ""metric"": ""horizontal_rmse_m""}",mean,0.6202543787398203
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,15,"{""method_id"": ""A05"", ""metric"": ""horizontal_rmse_m""}",median,0.09889186637625912
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,15,"{""method_id"": ""A05"", ""metric"": ""horizontal_rmse_m""}",p95,3.073935578247741
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,15,"{""method_id"": ""A05"", ""metric"": ""horizontal_rmse_m""}",maximum,19.267850475998117
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,22,"{""method_id"": ""A06"", ""metric"": ""horizontal_rmse_m""}",method_id,A06
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,22,"{""method_id"": ""A06"", ""metric"": ""horizontal_rmse_m""}",registered_count,541
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,22,"{""method_id"": ""A06"", ""metric"": ""horizontal_rmse_m""}",finite_count,519
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,22,"{""method_id"": ""A06"", ""metric"": ""horizontal_rmse_m""}",algorithm_failure_count,22
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,22,"{""method_id"": ""A06"", ""metric"": ""horizontal_rmse_m""}",mean,0.6292118909755263
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,22,"{""method_id"": ""A06"", ""metric"": ""horizontal_rmse_m""}",median,0.09935746184883108
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,22,"{""method_id"": ""A06"", ""metric"": ""horizontal_rmse_m""}",p95,3.66448799922278
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,22,"{""method_id"": ""A06"", ""metric"": ""horizontal_rmse_m""}",maximum,17.058374272437547
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,29,"{""method_id"": ""A07"", ""metric"": ""horizontal_rmse_m""}",method_id,A07
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,29,"{""method_id"": ""A07"", ""metric"": ""horizontal_rmse_m""}",registered_count,541
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,29,"{""method_id"": ""A07"", ""metric"": ""horizontal_rmse_m""}",finite_count,519
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,29,"{""method_id"": ""A07"", ""metric"": ""horizontal_rmse_m""}",algorithm_failure_count,22
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,29,"{""method_id"": ""A07"", ""metric"": ""horizontal_rmse_m""}",mean,0.6314094979089994
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,29,"{""method_id"": ""A07"", ""metric"": ""horizontal_rmse_m""}",median,0.10027140523391447
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,29,"{""method_id"": ""A07"", ""metric"": ""horizontal_rmse_m""}",p95,3.0877371914877103
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,29,"{""method_id"": ""A07"", ""metric"": ""horizontal_rmse_m""}",maximum,19.29326799915273
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,36,"{""method_id"": ""A08"", ""metric"": ""horizontal_rmse_m""}",method_id,A08
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,36,"{""method_id"": ""A08"", ""metric"": ""horizontal_rmse_m""}",registered_count,541
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,36,"{""method_id"": ""A08"", ""metric"": ""horizontal_rmse_m""}",finite_count,512
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,36,"{""method_id"": ""A08"", ""metric"": ""horizontal_rmse_m""}",algorithm_failure_count,29
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,36,"{""method_id"": ""A08"", ""metric"": ""horizontal_rmse_m""}",mean,0.6012920491121779
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,36,"{""method_id"": ""A08"", ""metric"": ""horizontal_rmse_m""}",median,0.10058944228030667
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,36,"{""method_id"": ""A08"", ""metric"": ""horizontal_rmse_m""}",p95,3.0184464255383894
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,36,"{""method_id"": ""A08"", ""metric"": ""horizontal_rmse_m""}",maximum,19.339604817126915
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,43,"{""method_id"": ""A09"", ""metric"": ""horizontal_rmse_m""}",method_id,A09
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,43,"{""method_id"": ""A09"", ""metric"": ""horizontal_rmse_m""}",registered_count,541
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,43,"{""method_id"": ""A09"", ""metric"": ""horizontal_rmse_m""}",finite_count,518
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,43,"{""method_id"": ""A09"", ""metric"": ""horizontal_rmse_m""}",algorithm_failure_count,23
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,43,"{""method_id"": ""A09"", ""metric"": ""horizontal_rmse_m""}",mean,0.6571263190355888
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,43,"{""method_id"": ""A09"", ""metric"": ""horizontal_rmse_m""}",median,0.10032851923012363
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,43,"{""method_id"": ""A09"", ""metric"": ""horizontal_rmse_m""}",p95,3.1742453368639407
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,43,"{""method_id"": ""A09"", ""metric"": ""horizontal_rmse_m""}",maximum,19.2534573114452
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,50,"{""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",method_id,F01
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,50,"{""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",registered_count,541
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,50,"{""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",finite_count,521
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,50,"{""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",algorithm_failure_count,20
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,50,"{""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",mean,0.6154159518827094
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,50,"{""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",median,0.09261054876350382
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,50,"{""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",p95,3.0181413938779036
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,50,"{""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",maximum,19.201183211733927
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,57,"{""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",method_id,F02
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,57,"{""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",registered_count,541
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,57,"{""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",finite_count,498
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,57,"{""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",algorithm_failure_count,43
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,57,"{""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",mean,0.8394700494452545
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,57,"{""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",median,0.10199492498489396
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,57,"{""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",p95,3.0080284475367183
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,57,"{""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",maximum,19.150371826829716
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,64,"{""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",method_id,F03
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,64,"{""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",registered_count,541
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,64,"{""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",finite_count,512
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,64,"{""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",algorithm_failure_count,29
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,64,"{""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",mean,0.6270788266872994
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,64,"{""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",median,0.1002369468362462
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,64,"{""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",p95,3.0214369297083286
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,64,"{""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",maximum,19.253266075529734
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,71,"{""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",method_id,F04
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,71,"{""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",registered_count,541
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,71,"{""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",finite_count,519
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,71,"{""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",algorithm_failure_count,22
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,71,"{""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",mean,0.6185612890785892
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,71,"{""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",median,0.09822807379435361
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,71,"{""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",p95,3.5510500790754915
+<V3_ROOT>/07_AGGREGATE/CORE_541_SUMMARY_V3.csv,71,"{""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",maximum,17.035245465541674
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,15,"{""case_family"": ""A1"", ""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",case_family,A1
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,15,"{""case_family"": ""A1"", ""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",method_id,A04
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,15,"{""case_family"": ""A1"", ""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",registered_count,27
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,15,"{""case_family"": ""A1"", ""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",finite_count,27
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,15,"{""case_family"": ""A1"", ""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",median,9.623720150677688
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,15,"{""case_family"": ""A1"", ""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",p95,40.57337373522971
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,15,"{""case_family"": ""A1"", ""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",maximum,43.004656543113725
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,22,"{""case_family"": ""A2"", ""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",case_family,A2
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,22,"{""case_family"": ""A2"", ""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",method_id,A04
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,22,"{""case_family"": ""A2"", ""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",registered_count,18
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,22,"{""case_family"": ""A2"", ""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",finite_count,18
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,22,"{""case_family"": ""A2"", ""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",median,0.1823583788974838
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,22,"{""case_family"": ""A2"", ""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",p95,0.2950151094990254
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,22,"{""case_family"": ""A2"", ""method_id"": ""A04"", ""metric"": ""horizontal_rmse_m""}",maximum,0.3466579213714408
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,99,"{""case_family"": ""A1"", ""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",case_family,A1
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,99,"{""case_family"": ""A1"", ""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",method_id,F01
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,99,"{""case_family"": ""A1"", ""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",registered_count,27
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,99,"{""case_family"": ""A1"", ""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",finite_count,27
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,99,"{""case_family"": ""A1"", ""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",median,9.85134578221371
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,99,"{""case_family"": ""A1"", ""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",p95,48.143774784893694
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,99,"{""case_family"": ""A1"", ""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",maximum,52.7826298920856
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,106,"{""case_family"": ""A2"", ""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",case_family,A2
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,106,"{""case_family"": ""A2"", ""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",method_id,F01
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,106,"{""case_family"": ""A2"", ""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",registered_count,18
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,106,"{""case_family"": ""A2"", ""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",finite_count,18
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,106,"{""case_family"": ""A2"", ""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",median,2.817567868999742
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,106,"{""case_family"": ""A2"", ""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",p95,16.720501430180477
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,106,"{""case_family"": ""A2"", ""method_id"": ""F01"", ""metric"": ""horizontal_rmse_m""}",maximum,19.200996381306364
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,113,"{""case_family"": ""A1"", ""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",case_family,A1
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,113,"{""case_family"": ""A1"", ""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",method_id,F02
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,113,"{""case_family"": ""A1"", ""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",registered_count,27
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,113,"{""case_family"": ""A1"", ""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",finite_count,27
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,113,"{""case_family"": ""A1"", ""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",median,9.883586718067164
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,113,"{""case_family"": ""A1"", ""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",p95,48.66896320088931
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,113,"{""case_family"": ""A1"", ""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",maximum,53.36588425103552
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,120,"{""case_family"": ""A2"", ""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",case_family,A2
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,120,"{""case_family"": ""A2"", ""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",method_id,F02
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,120,"{""case_family"": ""A2"", ""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",registered_count,18
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,120,"{""case_family"": ""A2"", ""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",finite_count,18
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,120,"{""case_family"": ""A2"", ""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",median,2.9132198549853383
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,120,"{""case_family"": ""A2"", ""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",p95,17.077197930243535
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,120,"{""case_family"": ""A2"", ""method_id"": ""F02"", ""metric"": ""horizontal_rmse_m""}",maximum,19.150371826829716
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,127,"{""case_family"": ""A1"", ""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",case_family,A1
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,127,"{""case_family"": ""A1"", ""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",method_id,F03
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,127,"{""case_family"": ""A1"", ""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",registered_count,27
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,127,"{""case_family"": ""A1"", ""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",finite_count,27
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,127,"{""case_family"": ""A1"", ""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",median,9.747229010882304
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,127,"{""case_family"": ""A1"", ""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",p95,48.60403493191852
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,127,"{""case_family"": ""A1"", ""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",maximum,53.325404895810074
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,134,"{""case_family"": ""A2"", ""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",case_family,A2
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,134,"{""case_family"": ""A2"", ""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",method_id,F03
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,134,"{""case_family"": ""A2"", ""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",registered_count,18
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,134,"{""case_family"": ""A2"", ""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",finite_count,18
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,134,"{""case_family"": ""A2"", ""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",median,2.850680656057537
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,134,"{""case_family"": ""A2"", ""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",p95,17.11498668249498
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,134,"{""case_family"": ""A2"", ""method_id"": ""F03"", ""metric"": ""horizontal_rmse_m""}",maximum,19.25817223332743
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,141,"{""case_family"": ""A1"", ""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",case_family,A1
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,141,"{""case_family"": ""A1"", ""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",method_id,F04
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,141,"{""case_family"": ""A1"", ""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",registered_count,27
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,141,"{""case_family"": ""A1"", ""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",finite_count,27
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,141,"{""case_family"": ""A1"", ""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",median,10.107797646034916
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,141,"{""case_family"": ""A1"", ""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",p95,42.42440238675533
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,141,"{""case_family"": ""A1"", ""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",maximum,45.266388031272534
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,148,"{""case_family"": ""A2"", ""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",case_family,A2
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,148,"{""case_family"": ""A2"", ""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",method_id,F04
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,148,"{""case_family"": ""A2"", ""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",registered_count,18
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,148,"{""case_family"": ""A2"", ""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",finite_count,18
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,148,"{""case_family"": ""A2"", ""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",median,0.17667112573862742
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,148,"{""case_family"": ""A2"", ""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",p95,0.2877465570267067
+<V3_ROOT>/07_AGGREGATE/ADDENDUM_FAMILY_SUMMARY_V3.csv,148,"{""case_family"": ""A2"", ""method_id"": ""F04"", ""metric"": ""horizontal_rmse_m""}",maximum,0.3456028253854473
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,71,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""full"", ""sequence_id"": ""BY2O""}",segment_id,full
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,71,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""full"", ""sequence_id"": ""BY2O""}",window_start_s,3186.0
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,71,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""full"", ""sequence_id"": ""BY2O""}",window_end_s,3563.0
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,71,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""full"", ""sequence_id"": ""BY2O""}",count,76548
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,71,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""full"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,2.433814932823714
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,71,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""full"", ""sequence_id"": ""BY2O""}",h_rmse_m,0.054543210912875166
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,72,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""occlusion_primary"", ""sequence_id"": ""BY2O""}",segment_id,occlusion_primary
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,72,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""occlusion_primary"", ""sequence_id"": ""BY2O""}",window_start_s,3369.94
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,72,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""occlusion_primary"", ""sequence_id"": ""BY2O""}",window_end_s,3411.95
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,72,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""occlusion_primary"", ""sequence_id"": ""BY2O""}",count,7612
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,72,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""occlusion_primary"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,0.2325140820805299
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,72,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""occlusion_primary"", ""sequence_id"": ""BY2O""}",h_rmse_m,0.0242039712178186
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,73,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""occlusion_secondary"", ""sequence_id"": ""BY2O""}",segment_id,occlusion_secondary
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,73,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""occlusion_secondary"", ""sequence_id"": ""BY2O""}",window_start_s,3495.94
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,73,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""occlusion_secondary"", ""sequence_id"": ""BY2O""}",window_end_s,3508.94
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,73,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""occlusion_secondary"", ""sequence_id"": ""BY2O""}",count,2754
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,73,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""occlusion_secondary"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,1.861542194198912
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,73,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""occlusion_secondary"", ""sequence_id"": ""BY2O""}",h_rmse_m,0.04051796645192961
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,74,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""inside_union"", ""sequence_id"": ""BY2O""}",segment_id,inside_union
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,74,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""inside_union"", ""sequence_id"": ""BY2O""}",window_start_s,3186.0
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,74,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""inside_union"", ""sequence_id"": ""BY2O""}",window_end_s,3563.0
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,74,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""inside_union"", ""sequence_id"": ""BY2O""}",count,10366
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,74,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""inside_union"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,0.9799785484386794
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,74,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""inside_union"", ""sequence_id"": ""BY2O""}",h_rmse_m,0.029433869992511425
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,75,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""outside"", ""sequence_id"": ""BY2O""}",segment_id,outside
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,75,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""outside"", ""sequence_id"": ""BY2O""}",window_start_s,3186.0
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,75,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""outside"", ""sequence_id"": ""BY2O""}",window_end_s,3563.0
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,75,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""outside"", ""sequence_id"": ""BY2O""}",count,66182
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,75,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""outside"", ""sequence_id"": ""BY2O""}",yaw_rmse_deg,2.5885939307825425
+<V3_ROOT>/07_AGGREGATE/BY2O_SEGMENT_TABLE.csv,75,"{""evaluator_contract"": ""evaluator_contract_v3"", ""method_id"": ""F04"", ""segment_id"": ""outside"", ""sequence_id"": ""BY2O""}",h_rmse_m,0.05749113451146813

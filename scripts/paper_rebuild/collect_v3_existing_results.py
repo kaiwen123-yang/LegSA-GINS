@@ -56,11 +56,15 @@ def main():
     ap.add_argument("--ledger-only", action="store_true",
                     help="first delivery batch; source-table inventory is still being assembled")
     args = ap.parse_args()
-    roots = json.loads(args.local_roots.read_text())["aliases"]
+    local_mapping = json.loads(args.local_roots.read_text())
+    roots = local_mapping["aliases"]
     out = Path(roots["<RESULTS_ROOT>"])
-    out.mkdir(parents=True, exist_ok=True)
     v3 = Path(roots["<V3_ROOT>"])
     code = Path(roots["<CODE_ROOT>"])
+    approved = code / "docs/paper_rebuild/audit_xbpg_20261001/v3_results"
+    if out.resolve() != approved.resolve() or out.is_symlink():
+        raise SystemExit("Refusing output outside the approved collection directory")
+    out.mkdir(parents=True, exist_ok=True)
 
     def portable(text):
         for alias, path in sorted(roots.items(), key=lambda kv: -len(kv[1])):
@@ -142,6 +146,44 @@ def main():
             archive_rows = list(csv.DictReader(f))
     rows += archive_rows
     csv_write(out / "CONTROL_RESULT_FILES.csv", rows[:len(CONTROL_FILES)])
+    historical_rows = []
+    history_base = v3 / "00_CONTROL/FIGURE_CLOSEOUT_SECOND_CONTINUATION"
+    for directory in [history_base / "PREVIOUS", history_base / "PREVIOUS_REVIEW_DOCS"]:
+        if not directory.is_dir():
+            continue
+        for path in sorted(directory.rglob("*")):
+            if not path.is_file() or path.is_symlink():
+                continue
+            row = base(path, "HISTORICAL_PREVIOUS_PRESENTATION_NOT_FINAL")
+            row["notes"] = "Preserved pre-repair presentation/history; not substituted for the adopted final version."
+            if path.suffix.lower() in {".json", ".txt", ".md", ".csv"}:
+                data = path.read_bytes()
+                row["verified_sha256"] = hashlib.sha256(data).hexdigest()
+                if path.suffix.lower() == ".json":
+                    obj = json.loads(data)
+                    row.update(read_status="READ_PARSED_FULL", row_count=len(obj),
+                               columns=";".join(obj) if isinstance(obj, dict) else "")
+                elif path.suffix.lower() == ".csv":
+                    reader = csv.DictReader(io.StringIO(data.decode("utf-8-sig")))
+                    row.update(row_count=sum(1 for _ in reader), columns=";".join(reader.fieldnames or []),
+                               read_status="READ_PARSED_FULL")
+                else:
+                    row.update(row_count=len(data.decode("utf-8-sig").splitlines()),
+                               read_status="READ_FULL_TEXT", columns="not_tabular")
+                row["columns"] = portable(row["columns"])
+            else:
+                row["read_status"] = "PRESENT_METADATA_ONLY"
+            historical_rows.append(row)
+    rows += historical_rows
+    csv_write(out / "HISTORICAL_RESULT_FILES.csv", historical_rows)
+    for alias in ["<PROTOCOL_V3_ARCHIVE>", "<PROTOCOL_V3_SCRATCH>"]:
+        path = Path(roots[alias])
+        locator = base(path, "HISTORICAL_STORAGE_ROOT_LOCATOR")
+        locator.update(read_status="PATH_CHECK_ONLY", storage_kind="DIRECTORY_LOCATOR",
+                       retention_status="DIRECTORY_EXISTS_NO_PAYLOAD_CLAIM" if path.is_dir()
+                       else "LOCATOR_NOT_FOUND",
+                       notes="A configured historical root does not prove any retained result or archive member exists.")
+        rows.append(locator)
 
     inventories = ["RUN_RESULT_FILES.csv"]
     if not args.ledger_only:
@@ -151,6 +193,16 @@ def main():
         if p.exists():
             with p.open(newline="") as f:
                 rows.extend(csv.DictReader(f))
+    baseline_path = code / "configs/paper_rebuild/V3_RESULTS_BASELINE.local.json"
+    baseline = json.loads(baseline_path.read_text())
+    tracked_at_start = set(baseline.get("initial_tracked_paths", []))
+    for row in rows:
+        source = row.get("source_path", "")
+        prefix = "<CODE_ROOT>/"
+        if source.startswith(prefix) and source[len(prefix):] in tracked_at_start:
+            row["repository_read_snapshot"] = baseline["head"]
+        else:
+            row["repository_read_snapshot"] = "external_or_unknown"
     csv_write(out / "V3_RESULT_FILES.csv", rows)
     # Every alias is resolved locally; this derived file remains ignored.
     local = []
@@ -159,14 +211,18 @@ def main():
         resolved = original
         for alias, path in roots.items():
             resolved = resolved.replace(alias, path)
+        member = row.get("archive_member", "")
+        file_location = resolved.split("!", 1)[0] if member else resolved
         windows = ""
-        if resolved.startswith("/mnt/g/"):
-            windows = "G:\\" + resolved[len("/mnt/g/"):].replace("/", "\\")
-        local.append({"source_path": original, "resolved_wsl_location": resolved,
-                      "resolved_windows_location": windows, "read_status": row.get("read_status", "")})
+        for alias, win_root in local_mapping.get("windows_roots", {}).items():
+            wsl_root = roots[alias]
+            if file_location == wsl_root or file_location.startswith(wsl_root + "/"):
+                windows = win_root + file_location[len(wsl_root):].replace("/", "\\")
+                break
+        local.append({"source_path": original, "resolved_wsl_location": file_location,
+                      "resolved_windows_location": windows, "archive_member": member,
+                      "read_status": row.get("read_status", "")})
     csv_write(out / "V3_RESULT_FILES.local.csv", local)
-    baseline_path = code / "configs/paper_rebuild/V3_RESULTS_BASELINE.local.json"
-    baseline = json.loads(baseline_path.read_text())
     failures = []
     for rel, expected in baseline["original_audit_file_sha256"].items():
         if hashlib.sha256((code / rel).read_bytes()).hexdigest() != expected:
@@ -176,8 +232,11 @@ def main():
                "synthetic_data_used": False, "semisynthetic_data_used": True,
                "source_data_note": "Includes existing registered semisynthetic rows; creates no experimental data.",
                "baseline_commit": baseline["head"], "file_inventory_rows": len(rows),
+               "distinct_source_locations": len({r.get("source_path", "") for r in rows}),
+               "inventory_grain": "Read observations; duplicate locations from separate source registries remain explicit.",
                "archive_containers_enumerated": sum(r["category"] == "B_EXISTING_HANDOFF_ARCHIVE" for r in archive_rows),
                "archive_table_members_parsed": sum(r["read_status"] == "ARCHIVE_MEMBER_READ_PARSED_FULL" for r in archive_rows),
+               "previous_presentation_history_files": len(historical_rows),
                "original_audit_files_compared": len(baseline["original_audit_file_sha256"]),
                "original_audit_files_changed": failures,
                "native_calls": 0, "evaluator_calls": 0, "provider_generator_calls": 0,

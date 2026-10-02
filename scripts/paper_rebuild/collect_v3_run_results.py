@@ -92,6 +92,13 @@ class Collector:
             return str(value).lower()
         return self.alias(value)
 
+    def resolve(self, value):
+        text = str(value)
+        for root, alias in self.aliases:
+            if text == alias or text.startswith(alias + "/"):
+                return Path(root + text[len(alias):])
+        raise ValueError("Source does not use a configured alias: " + text)
+
     def source_row(self, path, category, **extra):
         row = {"category": category, "source_path": self.alias(path),
                "read_status": "INDEX_ONLY_NOT_CHECKED", "retention_status": "unknown"}
@@ -140,6 +147,35 @@ class Collector:
                           retention_status="PRESENT", row_count=len(rows), columns=";".join(reader.fieldnames)))
         return rows
 
+    def compact_file_rows(self, rows):
+        """Dictionary repeated schemas; run identity scopes join losslessly by run_id."""
+        schemas = {}
+        result = []
+        for original in rows:
+            row = {key: "" if value == MISSING else value for key, value in original.items()}
+            columns = row.get("columns", "")
+            if columns:
+                if columns not in schemas:
+                    schemas[columns] = "S" + str(len(schemas) + 1).zfill(4)
+                row["columns"] = "SCHEMA:" + schemas[columns]
+            if row.get("source_row_key"):
+                version = row.get("version_scope", "").rsplit("/", 1)[-1]
+                receipt = row.get("receipt_source", "")
+                if "#/" in receipt:
+                    row["receipt_source"] = "@" + version + "_archive_receipt#" + receipt.split("#", 1)[1]
+                # These dimensions are exact joins to the unique native index key.
+                row["sequence_scope"] = "@"
+                row["method_scope"] = "@"
+                row["case_scope"] = "@"
+                notes = row.get("notes", "")
+                if notes.startswith("Hash is recorded unless verified_sha256 is populated; source member="):
+                    row["notes"] = "N1" + (";CONFLICT_PRESENT_BUT_RECEIPT_SAYS_RELEASED" if "CONFLICT_PRESENT_BUT_RECEIPT_SAYS_RELEASED" in notes else "")
+            result.append({key: row.get(key, "") for key in FILE_FIELDS})
+        self.write_csv("run_statistics/FILE_SCHEMA_INDEX.csv", [
+            {"schema_id": identifier, "columns": columns, "meaning": "Exact columns/header JSON-key string from the named input file; no result value conversion"}
+            for columns, identifier in schemas.items()])
+        return result
+
     def export_section(self, evaluations, section, prefix):
         groups = collections.defaultdict(list)
         for index, record in enumerate(evaluations):
@@ -162,6 +198,144 @@ class Collector:
         for (domain, version, part), rows in sorted(groups.items()):
             suffix = "_" + part if part else ""
             self.write_csv("run_statistics/" + prefix + "_" + domain + "_" + version + suffix + ".csv", rows)
+
+    def export_retained_metadata(self):
+        """Transcribe extra existing evaluator statistics omitted by the row ledger."""
+        locator_check = self.normalize_file_index()
+        with (self.output / "RUN_RESULT_FILES.csv").open(encoding="utf-8", newline="") as stream:
+            sources = [row for row in csv.DictReader(stream)
+                       if row["category"] in ["evaluator_summary", "evaluator_capture", "matched_trajectory_manifest"]
+                       and row["read_status"] == "READ_COMPLETE_JSON"]
+        with (self.output / "V3_RUN_RESULT_INDEX.csv").open(encoding="utf-8", newline="") as stream:
+            native_index = {row["run_id"]: row for row in csv.DictReader(stream)}
+        groups = collections.defaultdict(list)
+        checks = collections.Counter()
+        differences = []
+        mapping = set()
+
+        def flatten(value, prefix=""):
+            result = {}
+            for key, child in value.items():
+                escaped = key.replace("~", "~0").replace("/", "~1")
+                pointer = prefix + "/" + escaped
+                if isinstance(child, dict):
+                    result.update(flatten(child, pointer))
+                else:
+                    result[pointer] = child
+            return result
+
+        def read(source):
+            value, row = self.read_json(self.resolve(source["source_path"]), source["category"], source["verified_sha256"])
+            return source, value, row
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+            for source, value, read_row in pool.map(read, sources):
+                checks[source["category"] + ":" + read_row["read_status"]] += 1
+                if read_row.get("verified_sha256") != source["verified_sha256"]:
+                    differences.append({"source_path": source["source_path"], "first_read_sha256": source["verified_sha256"],
+                                        "second_read_sha256": read_row.get("verified_sha256", "unknown")})
+                if not isinstance(value, dict):
+                    continue
+                native = native_index[source["source_row_key"]]
+                version = source["version_scope"].rsplit("/", 1)[-1]
+                row = {"source_path": source["source_path"], "source_row_key": native["run_id"] + "|" + version,
+                       "source_json_pointer": "", "run_id": native["run_id"], "domain": native["domain"],
+                       "sequence_id": native["sequence_id"], "case_id": native["case_id"],
+                       "method_id": native["method_id"], "evaluator_version": version,
+                       "metadata_read_status": read_row["read_status"]}
+                row.update(flatten(value))
+                category = source["category"].upper()
+                groups[(category, native["domain"], version)].append(row)
+                mapping.update((category, key) for key in row if key.startswith("/"))
+        for (category, domain, version), rows in sorted(groups.items()):
+            rows.sort(key=lambda row: row["run_id"])
+            self.write_csv("run_statistics/" + category + "_" + domain + "_" + version + ".csv", rows)
+        self.write_csv("run_statistics/EVALUATOR_METADATA_COLUMN_MAP.csv", [
+            {"table_family": category, "column": column, "original_json_pointer": column,
+             "value_rule": "Original source value; scalar tokens preserved; arrays compact JSON; no metric computation"}
+            for category, column in sorted(mapping)])
+        summary_path = self.output / "RUN_COLLECTION_SUMMARY.json"
+        summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        summary["semisynthetic_data_used"] = True
+        summary["semisynthetic_data_generated"] = False
+        summary["synthetic_data_generated"] = False
+        summary["data_mode_note"] = "Existing real and semisynthetic result rows are used; no new synthetic data or performance experiment is generated. Original source-row flags are preserved."
+        summary["additional_evaluator_metadata_transcription"] = {
+            "source_file_count": len(sources), "read_counts": dict(checks),
+            "second_read_hash_differences": differences,
+            "reason": "Existing evaluator summary pass ratios, convergence and 3sigma fields are not all present in final row records; all are transcribed without recomputation.",
+        }
+        summary["receipt_locator_validation"] = locator_check
+        replaced = {row["path"] for row in self.outputs}
+        summary["outputs"] = [row for row in summary["outputs"] if row["path"] not in replaced] + self.outputs
+        summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        notes_path = self.output / "RUN_COLLECTION_NOTES.md"
+        notes = notes_path.read_text(encoding="utf-8")
+        notes = notes.replace("`run_statistics/EVALUATION_{CORE,SEQUENCE,ADDENDUM}_{v3,v2}.csv`",
+                              "`run_statistics/EVALUATION_CORE_{v3,v2}_{method_id}.csv` (541 rows per method) and `EVALUATION_{SEQUENCE,ADDENDUM}_{v3,v2}.csv`")
+        notes = notes.replace("`RUN_RESULT_FILES.csv` records the files actually read",
+                              "The shared `V3_RESULT_FILES.csv` includes the files actually read")
+        extra = "\n## Evaluator metadata transcription\n\n`EVALUATOR_SUMMARY_*` preserves every existing evaluator `summary.json` field, including pass ratios, convergence and diagonal 3sigma diagnostics that the final row ledger does not repeat. `EVALUATOR_CAPTURE_*` preserves the archived capture-consistency metadata. Slash-prefixed columns are exact JSON pointers into each row's source file; `EVALUATOR_METADATA_COLUMN_MAP.csv` documents them. Missing JSON fields stay `__FIELD_ABSENT__` and null stays null. These tables contain the actually existing evaluator metadata only: failed non-invoked slots remain visible in the full run and evaluation indexes, without invented summaries. The additional read compared source hashes with the first collection read and computed no performance metric.\n"
+        if "\n## Evaluator metadata transcription\n" in notes:
+            notes = notes.split("\n## Evaluator metadata transcription\n", 1)[0]
+        extra += "\nFor the compact file inventory, `SCHEMA:Snnnn` resolves through `run_statistics/FILE_SCHEMA_INDEX.csv`. Scope `@` joins `source_row_key` (run_id) to `V3_RUN_RESULT_INDEX.csv`; `@native_archive_receipt`, `@v3_archive_receipt`, and `@v2_archive_receipt` mean the exact receipt field in that same run-index row. The suffix is an RFC6901 JSON pointer, with slash and tilde escaped. Note `N1` means a historical recorded hash is not a new hash verification unless `verified_sha256` is populated. `original_path` is the historical source-member path. A released member's `source_path` is the receipt-relative storage locator checked for absence, not an assertion that a retained G: copy was ever created. Only PRESENT or GZIP_PAYLOAD_PRESENT_HEADER_READ asserts a current payload. Empty optional inventory metadata fields do not mean numeric zero.\n"
+        extra += ("\n`RUN_RESULT_FILES.csv` is the ignored local intermediate generated by this collector. "
+                  "The shared canonical `V3_RESULT_FILES.csv` includes all " + format(summary["file_index_rows"], ",") +
+                  " rows from that intermediate together with the separately collected source-table and archive records. "
+                  "Source paths, statuses, hashes and dictionary references are preserved in that merge.\n")
+        notes_path.write_text(notes + extra, encoding="utf-8")
+        print(json.dumps(summary["additional_evaluator_metadata_transcription"]), flush=True)
+
+    def normalize_file_index(self):
+        """Validate exact receipt members, RFC6901 pointers, and compact repeated fields."""
+        path = self.output / "RUN_RESULT_FILES.csv"
+        with path.open(encoding="utf-8", newline="") as stream:
+            rows = list(csv.DictReader(stream))
+        # A completed compact index already has exact @run_index receipt locators.
+        if rows and any(row.get("receipt_source", "").startswith("@") for row in rows):
+            return {"status": "EXACT_LOCATORS_ALREADY_NORMALIZED", "file_rows": len(rows)}
+        receipt_paths = sorted({row["receipt_source"].split("#", 1)[0] for row in rows
+                                if "#/" in row.get("receipt_source", "")})
+        receipts = {}
+        failed_receipts = []
+        receipt_hash_differences = []
+        first_hashes = {row["source_path"]: row["verified_sha256"] for row in rows
+                        if row.get("category", "").endswith("_archive_receipt")}
+        def read(alias):
+            value, metadata = self.read_json(self.resolve(alias), "receipt_locator_validation")
+            return alias, value, metadata
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+            for alias, value, metadata in pool.map(read, receipt_paths):
+                if first_hashes.get(alias) and first_hashes[alias] != metadata.get("verified_sha256"):
+                    receipt_hash_differences.append(alias)
+                if isinstance(value, dict):
+                    receipts[alias] = value
+                else:
+                    failed_receipts.append(alias)
+        checked, unresolved = 0, []
+        for row in rows:
+            locator = row.get("receipt_source", "")
+            if "#/" not in locator:
+                continue
+            alias, pointer = locator.split("#", 1)
+            match = re.search(r"source member=([^;]+)", row.get("notes", ""))
+            member = match.group(1) if match else pointer.split("/", 2)[-1].replace("~1", "/").replace("~0", "~")
+            receipt = receipts.get(alias, {})
+            found = next(((group, key) for key in [member, member + ".gz"]
+                          for group in ["files", "discarded_payloads", "omitted_payload_hashes"]
+                          if key in receipt.get(group, {})), None)
+            if found is None:
+                unresolved.append({"source_path": row["source_path"], "receipt_source": locator, "member": member})
+                continue
+            group, key = found
+            escaped = key.replace("~", "~0").replace("/", "~1")
+            row["receipt_source"] = alias + "#/" + group + "/" + escaped
+            checked += 1
+        self.write_csv("RUN_RESULT_FILES.csv", self.compact_file_rows(rows), FILE_FIELDS)
+        return {"status": "PASS" if not unresolved and not failed_receipts and not receipt_hash_differences else "PARTIAL_UNRESOLVED_LOCATORS",
+                "receipt_files_read": len(receipts), "exact_member_locators_checked": checked,
+                "unresolved_locators": unresolved, "unread_receipts": failed_receipts,
+                "second_read_hash_differences": receipt_hash_differences}
 
     def inspect_slot(self, native, evals):
         """Read exact retained metadata and receipt-referenced payload headers only."""
@@ -217,9 +391,10 @@ class Collector:
                         wanted[name] = ("sparse_nav", False)
             seen_physical = set()
             for member, (category, read_all) in wanted.items():
-                detail = retained.get(member) or discarded.get(member)
-                if detail is None and member + ".gz" in retained:
-                    detail = retained[member + ".gz"]
+                located = next(((group, key, receipt[group][key]) for key in [member, member + ".gz"]
+                                for group in ["files", "discarded_payloads", "omitted_payload_hashes"]
+                                if key in receipt.get(group, {})), None)
+                detail = located[2] if located else None
                 status_prefix = kind + "_" + category
                 if detail is None:
                     known_generated = member in native.get("file_hashes", {}) if kind == "native" else False
@@ -239,11 +414,13 @@ class Collector:
                     continue
                 seen_physical.add(str(path))
                 row = self.source_row(path, category, **scope_here)
-                row.update(receipt_source=self.alias(receipt_path) + "#/" + ("files/" if member in retained else "discarded_or_omitted/") + member,
+                group, exact_member, _ = located
+                escaped_member = exact_member.replace("~", "~0").replace("/", "~1")
+                row.update(receipt_source=self.alias(receipt_path) + "#/" + group + "/" + escaped_member,
                            recorded_sha256=detail.get("sha256", detail.get("source_sha256", "")),
                            original_path=self.alias(Path(receipt.get("source_root", str(root))) / member),
                            notes="Hash is recorded unless verified_sha256 is populated; source member=" + member)
-                released = member in discarded or (member + ".gz") in discarded
+                released = group in ("discarded_payloads", "omitted_payload_hashes")
                 values[status_prefix + "_path"] = self.alias(path)
                 values[status_prefix + "_recorded_source_sha256"] = detail.get("source_sha256", "unknown")
                 try:
@@ -428,7 +605,7 @@ class Collector:
         self.write_csv("V3_RUN_RESULT_INDEX.csv", index)
         self.write_csv("run_statistics/FAILURE_RUNS.csv", [row for row in index if row["native_status"] not in ["COMPLETED", "unknown"]])
         self.write_csv("run_statistics/NATURAL_C00_ALL_CONFIGS.csv", [row for row in index if row["natural_three_sequence_view"]])
-        self.write_csv("RUN_RESULT_FILES.csv", self.files, FILE_FIELDS)
+        self.write_csv("RUN_RESULT_FILES.csv", self.compact_file_rows(self.files), FILE_FIELDS)
         self.write_csv("run_statistics/REGISTRY_IDENTITY_DIFFERENCES.csv", identity_differences,
                        ["run_id", "field", "registry_value", "native_value"])
         self.write_csv("run_statistics/INDIVIDUAL_LEDGER_DIFFERENCES.csv", self.conflicts,
@@ -438,8 +615,8 @@ class Collector:
         summary = {
             "schema": "V3_RESULTS_READONLY_COLLECTION_V1", "phase": self.phase,
             "data_mode": "existing_results_descriptive_collection", "synthetic_data_used": False,
-            "semisynthetic_data_used": False,
-            "data_mode_note": "Collection itself makes no synthetic data. Scientific source rows preserve their original real/semisynthetic flags.",
+            "semisynthetic_data_used": True, "semisynthetic_data_generated": False, "synthetic_data_generated": False,
+            "data_mode_note": "Existing real and semisynthetic result rows are used; no new synthetic data or performance experiment is generated. Original source-row flags are preserved.",
             "native_calls": 0, "provider_generator_calls": 0, "evaluator_calls": 0, "aggregate_controller_calls": 0,
             "raw_reference_payload_opens": 0, "new_performance_statistics": 0,
             "native_records_read": len(natives), "evaluation_records_read": len(evaluations), "registry_records_read": len(registry),
@@ -472,9 +649,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--paths", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--phase", choices=["ledgers", "full"], default="full")
+    parser.add_argument("--phase", choices=["ledgers", "full", "metadata"], default="full")
     args = parser.parse_args()
-    Collector(load_paths(args.paths), args.output, args.phase).run()
+    collector = Collector(load_paths(args.paths), args.output, args.phase)
+    if args.phase == "metadata":
+        collector.export_retained_metadata()
+    else:
+        collector.run()
+        if args.phase == "full":
+            collector.export_retained_metadata()
 
 
 if __name__ == "__main__":
