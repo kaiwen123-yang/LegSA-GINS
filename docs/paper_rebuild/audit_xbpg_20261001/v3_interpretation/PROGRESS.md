@@ -24,18 +24,19 @@
 - A21：explain A2_10s across all eleven configurations；`2996f399a1133035f26c98c83a36daee562d7bc1`；PUSHED_VERIFIED。
 - A22：explain A2_20s across all eleven configurations；`d47bd8582dfbdff84a64896426b00f2d96201ebe`；PUSHED_VERIFIED。
 - U01：explain paired estimates and existing uncertainty intervals；`c3f1a014ea3b610fc0165009325fb7d601627a61`；PUSHED_VERIFIED。
+- B01：separate historical protocol comparisons from formal V3 runs；`7c7b63fafac0c1f2dd8861bfd5d2df31e2d9f1bd`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-B01：separate historical protocol comparisons from formal V3 runs。
+B02：explain frozen candidate sensitivity identities and tails。
 
-读取18张明确引用的旧协议/比较表27644行，转录1740个源单元格。保留旧CORE5951中F01协议混合、完整code_commit及NOT_RUN_ALGORITHM_FAILURE/ALL_YAW_REJECTED原词；旧新完成2x2与三序列不同方向分列。FAILURE_COMPARISON总192格含版本轴，非192失败；没有增加V3 native分母。只读、计数与转录，无科学重算。
+读取10张候选表1102行，2775个必要原值单元格无损转录；R5W/R5SIGMA/B3均保留原stage/variant/起点/失败。B3不是正式F04，D57 NOT_APPLICABLE不改标签；58/61有限与worst3/P95分开。R5SIGMA为1s差分残差std而非聚合观测；不按序列选最优替代主版本。无新统计实验或bootstrap。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-候选R5W/R5SIGMA/B3的原身份与尾部解释。
+最终展示实际采用的外部实现/输出类型和覆盖解释。
 
 ## 调用边界
 
