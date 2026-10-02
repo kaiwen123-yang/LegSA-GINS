@@ -8,18 +8,19 @@
 - N01a：interpret all eleven BY2 natural configurations；`3439053691a1de0624dc371243412bb64180228d`；PUSHED_VERIFIED。
 - S00：freeze retained series validation scope and tolerance；`0593770b2b3837012d155254cfc73448d76990b2`；PUSHED_VERIFIED。
 - N01b：verify BY2 retained errors and matched trajectory；`ba44f33bad7dafd16c0ac74457fca3cd3f7d9e2f`；PUSHED_VERIFIED。
+- N02：interpret and verify all BY2H natural configurations；`f9d298aadba10c5710d42ccaf3a1882a3c93e85e`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N02：interpret and verify all BY2H natural configurations。
+N03：interpret BY2O full and all fixed segments with retained checks。
 
-读取全部11配置、22评价记录及22完整error_series；3618数值项一致、12空值一致、198项不可复算。位置与航向排序不同，保留0.176s间隔。执行独立验证计算；未触发任何科学运行。
+读取11配置、22评价、原110分段行；22份error全文读完、990分段格一致。F04全窗yaw未优于F02/F03，主段优势与段外排序并列；保留R5/R5F选择历史。另修正BY2H文内两个字段名，无数值变更。已执行独立计算。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-BY2O全部11配置及full/primary/secondary/inside_union/outside原分段与保留时序。
+CORE gnss_outage：D01-D07全部63案例及11方法，与154保留误差文件。
 
 ## 调用边界
 
