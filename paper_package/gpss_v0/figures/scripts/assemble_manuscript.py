@@ -1,7 +1,37 @@
 """Render source-bound number tokens and selected tables into the manuscript."""
 from common import *
 import re
+from decimal import Decimal
 SPECS={};LEDGER=[]
+UA_CSV_TOKENS={
+    'UA|a1_30_h_mean':('UA01_ADDENDUM_STATS.csv',{'type':'D61','duration_s':'30','method':'F04','metric':'horizontal_rmse_m'},'mean',3,None),
+    'UA|a2_20_h_delta':('UA01_ADDENDUM_PAIRED.csv',{'type':'D62','duration_s':'20','pair':'F04-F03','metric':'horizontal_rmse_m'},'mean',2,None),
+    'UA|f04_f03_yaw_pairs':('UA01_PAIRED_OVERALL.csv',{'pair':'F04-F03','metric':'yaw_rmse_deg'},'n_pairs_finite',0,'N00208'),
+    'UA|paired_fault_registered':('UA01_PAIRED_OVERALL.csv',{'pair':'F04-F03','metric':'yaw_rmse_deg'},'n_registered',0,'N00209'),
+    'UA|f04_yaw_median_ci_low':('UA01_DISTRIBUTION_QUANTILES.csv',{'method':'F04','metric':'yaw_rmse_deg'},'cluster_q50_low',16,'N00210'),
+    'UA|f04_yaw_median_ci_high':('UA01_DISTRIBUTION_QUANTILES.csv',{'method':'F04','metric':'yaw_rmse_deg'},'cluster_q50_high',16,'N00211'),
+}
+DISPLAY_APPENDED_IDS={spec[4] for spec in UA_CSV_TOKENS.values() if spec[4]}
+UNC_DISPLAY_REPLACEMENTS={
+    'The reported values are exact for the recorded windows and reproduce bit-for-bit under the same software version and configuration':
+        'The retained V3 error-series exports match their recorded hashes, and the statistics supported by their fields agree with the existing records within the declared validation tolerances',
+    'Values are exact for the evaluated windows (bit-for-bit reproducible)':
+        'Values are the retained statistics for the evaluated windows, with export hashes and supported numerical checks verified within the declared validation tolerances',
+}
+def claim_id(key=None):
+    # D01 additions use new IDs without shifting any of the original 207 IDs.
+    fixed=UA_CSV_TOKENS[key][4] if key in UA_CSV_TOKENS else None
+    if fixed:
+        assert all(row['claim_id']!=fixed for row in LEDGER),fixed
+        return fixed
+    return f"N{1+sum(row['claim_id'] not in DISPLAY_APPENDED_IDS for row in LEDGER):05d}"
+def ua_csvspec(key):
+    filename,where,column,digits,_=UA_CSV_TOKENS[key]
+    p=U/filename
+    found=[row for row in readcsv(p) if all(row[k]==v for k,v in where.items())]
+    assert len(found)==1,(key,len(found))
+    source_value=found[0][column]
+    SPECS[key]={'path':p.relative_to(W).as_posix(),'locator':{'where':where,'column':column,'display_digits':digits},'mode':'CSV','value':float(source_value),'source_value':source_value,'digits':digits}
 DOCS={'budget':U/'UNC01_UNCERTAINTY_BUDGET.md','dist':U/'UNC02_DISTINGUISHABILITY.md','unc3':U/'UNC03_MANUSCRIPT_TEXT.md','replacement':W/'docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md','setup':W/'docs/paper_rebuild/CLEAN5_STAGE2_CLOSEOUT.md','hx':H/'HX05_CLOSEOUT.md','geometry':W/'docs/paper_rebuild/hext/HX05_PREREG.md','method':W/'docs/paper_rebuild/PROTOCOL_V2_METHOD_STATEMENT.md','contract':W/'configs/paper_rebuild/final_v23_parity_contract.yaml','options':W/'cpp/legsa_v23_port_core/include/legsa_v23_port_core/options.hpp'}
 def csvspec(key,p,where,col,digits=3,regex=None):
     loc={'where':where,'column':col,'display_digits':digits}
@@ -32,7 +62,7 @@ def emit(key,section,quoted=None):
     if key.startswith('E|'):
         _,s,m,c=key.split('|');csvspec(key,H/'EXTERNAL_THREE_SEQUENCE_MANUSCRIPT.csv',{'method':m},s,3,re.escape(c)+r'=([-+\d.eE]+)')
     if key.startswith('NEG|') or key.startswith('PCT|'):
-        op,inner=key.split('|',1);shown=emit(inner,section,quoted);input_id=LEDGER[-1]['claim_id'];sp=SPECS[inner];value=sp['value']*(-1 if op=='NEG' else 100);digits=sp['digits'] if op=='NEG' else 0;display=f'{value:.{digits}f}';cid=f'N{len(LEDGER)+1:05d}'
+        op,inner=key.split('|',1);shown=emit(inner,section,quoted);input_id=LEDGER[-1]['claim_id'];sp=SPECS[inner];value=sp['value']*(-1 if op=='NEG' else 100);digits=sp['digits'] if op=='NEG' else 0;display=f'{value:.{digits}f}';cid=claim_id()
         LEDGER.append(dict(claim_id=cid,section=section,quoted_text=quoted or display,value=display,unit=('%' if op=='PCT' else LEDGER[-1]['unit']),source_path=LEDGER[-1]['source_path'],source_locator=json.dumps({'display_digits':digits}),derivation=json.dumps({'inputs':[input_id],'expression':('-' if op=='NEG' else '100*')+input_id}),check_mode='DERIVED'));return display
     if key.startswith('D|'):
         _,alias,literal=key.split('|');docspec(alias,literal)
@@ -51,14 +81,18 @@ def emit(key,section,quoted=None):
         _,s,pair,metric,c,d=key.split('|');csvspec(key,U/'UNC_DISTINGUISHABILITY.csv',{'sequence':s,'segment':'full','pair_A_minus_B':pair,'metric':metric},c,int(d))
     if key.startswith('C|'):
         _,m,metric,c,d=key.split('|');csvspec(key,V/'07_AGGREGATE/CORE_541_SUMMARY_V3.csv',{'method_id':m,'metric':metric},c,int(d))
-    sp=SPECS[key];value=sp['value'];display=f"{value:.{sp['digits']}f}"
-    cid=f'N{len(LEDGER)+1:05d}'
+    if key.startswith('UA|'):ua_csvspec(key)
+    sp=SPECS[key];value=Decimal(sp['source_value']) if 'source_value' in sp else sp['value'];display=f"{value:.{sp['digits']}f}"
+    cid=claim_id(key)
     path=sp['path'].replace(str(W)+'/','').replace(str(V),'<V3>')
     unit='count'
     if any(t in key for t in ['yaw_rmse','yaw_p95','roll_rmse','pitch_rmse','|yaw|']):unit='deg'
     if any(t in key for t in ['horizontal_rmse','h_rmse','up_rmse','|horizontal|']):unit='m'
     if any(t in key for t in ['finite_count','failure_count','registered_count']):unit='cases'
     if 'matched_epoch_count' in key:unit='epochs'
+    if key in ['UA|a1_30_h_mean','UA|a2_20_h_delta']:unit='m'
+    if key in ['UA|f04_f03_yaw_pairs','UA|paired_fault_registered']:unit='cases'
+    if key in ['UA|f04_yaw_median_ci_low','UA|f04_yaw_median_ci_high']:unit='deg'
     if key.startswith('G|') or key in ['D|contract|0.03','D|contract|-0.30']:unit='m'
     if 'availability' in key:unit='fraction'
     if 'drift_pct' in key:unit='%'
@@ -83,7 +117,9 @@ def required_unc(section):
     for l in lines:
         if l.startswith(('**Measurement uncertainty.**','Three limitations concern','Values are exact')):paras.append(l)
     assert paras,section
-    return '\n\n'.join(paras)
+    display='\n\n'.join(paras)
+    for original,replacement in UNC_DISPLAY_REPLACEMENTS.items():display=display.replace(original,replacement)
+    return display
 def render(text,doc):
     section=doc;lines=[]
     for line in text.splitlines():
@@ -95,7 +131,7 @@ def render(text,doc):
             for match in re.finditer(r'(?<![\w.])\d+(?:\.\d+)?(?![\w.])',original):
                 docspec(alias,match.group());emit('D|'+alias+'|'+match.group(),section,original)
                 suffix=original[match.end():];u=re.match(r'[\s,\]\[−–+\d.]*(°|%|m|s|Hz)(?![A-Za-z])',suffix)
-                if original.startswith('Values are exact') and match.group()!='95':LEDGER[-1]['unit']='deg' if match.start()<original.index('for heading') else 'm'
+                if original.startswith(('Values are exact','Values are the retained statistics')) and match.group()!='95':LEDGER[-1]['unit']='deg' if match.start()<original.index('for heading') else 'm'
                 if match.group()=='2' and 'Vision-RTK 2' in original:LEDGER[-1]['unit']='model identifier'
                 if u:LEDGER[-1]['unit']={'°':'deg'}.get(u.group(1),u.group(1))
             lines.append(original);continue

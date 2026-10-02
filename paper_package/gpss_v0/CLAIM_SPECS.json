@@ -3944,5 +3944,99 @@
     "mode": "DOC",
     "value": 40.0,
     "digits": 0
+  },
+  "UA|a1_30_h_mean": {
+    "path": "docs/paper_rebuild/v3/uncertainty/UA01_ADDENDUM_STATS.csv",
+    "locator": {
+      "where": {
+        "type": "D61",
+        "duration_s": "30",
+        "method": "F04",
+        "metric": "horizontal_rmse_m"
+      },
+      "column": "mean",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 30.80599245730669,
+    "source_value": "30.80599245730669",
+    "digits": 3
+  },
+  "UA|a2_20_h_delta": {
+    "path": "docs/paper_rebuild/v3/uncertainty/UA01_ADDENDUM_PAIRED.csv",
+    "locator": {
+      "where": {
+        "type": "D62",
+        "duration_s": "20",
+        "pair": "F04-F03",
+        "metric": "horizontal_rmse_m"
+      },
+      "column": "mean",
+      "display_digits": 2
+    },
+    "mode": "CSV",
+    "value": -10.510165904595015,
+    "source_value": "-10.510165904595015",
+    "digits": 2
+  },
+  "UA|f04_f03_yaw_pairs": {
+    "path": "docs/paper_rebuild/v3/uncertainty/UA01_PAIRED_OVERALL.csv",
+    "locator": {
+      "where": {
+        "pair": "F04-F03",
+        "metric": "yaw_rmse_deg"
+      },
+      "column": "n_pairs_finite",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 511.0,
+    "source_value": "511",
+    "digits": 0
+  },
+  "UA|paired_fault_registered": {
+    "path": "docs/paper_rebuild/v3/uncertainty/UA01_PAIRED_OVERALL.csv",
+    "locator": {
+      "where": {
+        "pair": "F04-F03",
+        "metric": "yaw_rmse_deg"
+      },
+      "column": "n_registered",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 540.0,
+    "source_value": "540",
+    "digits": 0
+  },
+  "UA|f04_yaw_median_ci_low": {
+    "path": "docs/paper_rebuild/v3/uncertainty/UA01_DISTRIBUTION_QUANTILES.csv",
+    "locator": {
+      "where": {
+        "method": "F04",
+        "metric": "yaw_rmse_deg"
+      },
+      "column": "cluster_q50_low",
+      "display_digits": 16
+    },
+    "mode": "CSV",
+    "value": 1.8859878395987226,
+    "source_value": "1.8859878395987226",
+    "digits": 16
+  },
+  "UA|f04_yaw_median_ci_high": {
+    "path": "docs/paper_rebuild/v3/uncertainty/UA01_DISTRIBUTION_QUANTILES.csv",
+    "locator": {
+      "where": {
+        "method": "F04",
+        "metric": "yaw_rmse_deg"
+      },
+      "column": "cluster_q50_high",
+      "display_digits": 16
+    },
+    "mode": "CSV",
+    "value": 1.8862718548526467,
+    "source_value": "1.8862718548526467",
+    "digits": 16
   }
 }

@@ -78,6 +78,8 @@ Table S1 retains the actual parameter tokens for reproducibility. Unlike result 
 
 {{TABLE:S09_uncertainty_budget}}
 
+For the full-window F04-minus-F02 horizontal comparisons on BY2 and BY2H, the retained CSV verdict is `RESOLVED_NEGLIGIBLE`, with wording “comparable (difference below reporting resolution).” The earlier `RESOLVED` prose label is preserved in the historical uncertainty document and is superseded for this display by the retained table classification. Likewise, the narrow fault-type median interval reported in Section 6.4 has distinct full-precision endpoints; equal rounded endpoints do not imply zero width. Sources: `UNC_DISTINGUISHABILITY.csv` and `UA01_DISTRIBUTION_QUANTILES.csv`.
+
 **Table S9b.** Complete retained paired intervals. Differences are A minus B, with the pair named in the corresponding column; a negative interval favours A for an error metric. Heading quantities are degrees and horizontal quantities metres. Common-epoch count, matching method, batch and autocorrelation standard errors, moving-block limits, and the retained verdict are reported together. Statistical resolution and practical relevance remain separate judgements.
 
 {{TABLE:S09b_paired_intervals}}
