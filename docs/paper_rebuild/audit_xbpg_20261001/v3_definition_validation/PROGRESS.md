@@ -15,18 +15,19 @@
 - EVAL_ENTRY：bind frozen singleton evaluation and baseline reproduction gates；`af74931169deb1f94576277f35df2b976a4286dc`；PUSHED_VERIFIED。
 - N09_C00_NATIVE：verify N09 normal-GNSS controls reproduce ten scientific outputs；`556b8d0a8df4ae6ab5a150ac009eeed1b32edbbf`；PUSHED_VERIFIED。
 - BASELINE_C00_D15_EVAL：reproduce C00 and D15 frozen evaluation with exact recorded values；`e5d5b8ee0b7bc5bc941b373d60c3c389e8fd0ccb`；PUSHED_VERIFIED。
+- INHERITED_SCOPE：inherit original V3 contract and classify RP independence as optional extension；`f4bf6d30f47312a159d7874dbf4681d1a21963b0`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-INHERITED_SCOPE：inherit original V3 contract and classify RP independence as optional extension。
+N12_EVAL：report same-support N12 outcomes including D15 degradation。
 
-按补充约束读取两指定冻结期文档和7d43原预注册；直接继承raw 5Hz标量heading与status-heading HV既定边界。所读历史依据未给出全失效GNSS下RP独立更新要求，N09按可选能力扩展，已执行结果保留。N12/N16计算矛盾仍独立核查，不用旧PASS消除。不改队列、参数、容差或已完成输出。
+N12两例同口径评价完成，各56642共同历元、17项评价门通过。C00 H仅下降0.0000157007m，up/yaw微升；D15 H 3.5569029→3.5680833m、yaw 2.6986089→3.5539507deg，五项RMSE均升高。实际evaluator新增2累计4；无native新增/重试。必要计算契约与是否合入候选分开，不以性能更差推翻推导或丢弃结果。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-继续原有限队列；提交N12真实指标，评价N16；无新增研究项目。
+N16原定两例离线评价；N09 A1/F04继续；事件与P核对。
 
 ## 调用边界
 

@@ -1,0 +1,7 @@
+{
+  "pairing": "EXACT_TIMESTAMP_NO_INTERPOLATION",
+  "baseline_count": 56642,
+  "candidate_count": 56642,
+  "common_count": 56642,
+  "identical_support": true
+}
