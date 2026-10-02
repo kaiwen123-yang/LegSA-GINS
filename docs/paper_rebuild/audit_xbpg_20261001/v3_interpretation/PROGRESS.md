@@ -30,18 +30,19 @@
 - G01：interpret all ten existing V3 stage figures；`41b7eacd5925e15072dff288ed9f3e0acaa97ea5`；PUSHED_VERIFIED。
 - G02：interpret ten paper figures and preserve historical pins；`415fb2e9582e1d16ae65d0e4041e72a523573c6c`；PUSHED_VERIFIED。
 - S01：close all retained-series checks with explicit limits；`f6f0622bc99a97092bcdf6b9daaceab2ffdee7e7`；PUSHED_VERIFIED。
+- I01：map manuscript claims and known issues to actual results；`9f1fbe3364a53726a7f7e0944d656741a6b696ff`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-I01：map manuscript claims and known issues to actual results。
+Z01：deliver final V3 interpretation and validation reading guide。
 
-19条手稿/旧解释说法与精确源行字段关联，13条旧问题映射正式适用方法、工况、表图、缺失变量。当前作者已有的selflimits保留；确认N00157及N00149/N00199由已舍入DOC补精度的展示差、缺失511配对分母等。N09/N12/N11/N15/N16/倾斜近似与控制问题不从误差或累计counter推断真实触发；未修复/重放/新诊断。
+完成方法说明、三序列全部11配置、CORE八族、A1/A2五时长、配对与不确定度、展示引用和20张实际图的解释；2308 error_series及唯一matched各一次全文读取，381501项MATCH、332项MATCH_NULL、20777项不可复算。保存19项说法和13组旧问题映射；未将统计一致升级为科学正确性。最终交付检查读取本轮283份CSV共714388行并检查238个阅读链接；旧审查、既有结果目录及两份大索引未改。执行独立validation calculation；solver/provider/original evaluator/controller/bootstrap新调用为0。D22/D39的dict-window局部核算缺口、已释放载荷、历史pin旧字节和真实机制触发未核实均明确保留。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-最终阅读入口、综合结论和Git/diff边界验证后停止本阶段。
+本轮阶段停止：结果解释与有限证据核对已交付。候选下一步为最小A1/A2调度与HV接受证据、D15_seed_00的F04/A04加C00创新记录，以及展示原值精度/分母修正；本轮不自动修复、重放或恢复矩阵。
 
 ## 调用边界
 

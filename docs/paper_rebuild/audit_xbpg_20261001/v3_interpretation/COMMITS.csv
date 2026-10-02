@@ -25,3 +25,4 @@ B03,explain external comparison classes and retained coverage,e1ea87c9e33a6a5ad0
 G01,interpret all ten existing V3 stage figures,41b7eacd5925e15072dff288ed9f3e0acaa97ea5,0,True,PUSHED_VERIFIED
 G02,interpret ten paper figures and preserve historical pins,415fb2e9582e1d16ae65d0e4041e72a523573c6c,0,True,PUSHED_VERIFIED
 S01,close all retained-series checks with explicit limits,f6f0622bc99a97092bcdf6b9daaceab2ffdee7e7,0,True,PUSHED_VERIFIED
+I01,map manuscript claims and known issues to actual results,9f1fbe3364a53726a7f7e0944d656741a6b696ff,0,True,PUSHED_VERIFIED
