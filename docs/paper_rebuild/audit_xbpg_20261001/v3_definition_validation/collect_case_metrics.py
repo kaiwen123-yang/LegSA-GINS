@@ -30,6 +30,8 @@ def main():
         cdir = HERE / 'evaluation/results' / candidate / run
         pair = read_json(cdir / 'COMMON_SUPPORT.json')
         assert pair['pairing'] == 'EXACT_TIMESTAMP_NO_INTERPOLATION'
+        assert pair['identical_support'] is True, 'Cross-support metric subtraction is not authorized'
+        assert pair['common_count'] == pair['baseline_count'] == pair['candidate_count']
         paths = [(bdir / 'FULL_METRICS.json', cdir / 'FULL_METRICS.json')]
         if q['group'] in ['A1', 'A2']:
             paths.append((bdir / 'FIXED_WINDOW_METRICS.json', cdir / 'FIXED_WINDOW_METRICS.json'))

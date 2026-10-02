@@ -25,18 +25,19 @@
 - N09_A2_NATIVE：close ten planned candidate calls and preserve A2 byte-identical controls；`5ffd498b43ff233fca8b7f55ba381f2d79b19166`；PUSHED_VERIFIED。
 - N09_A1_EVAL：report optional RP A1 horizontal gains and vertical losses on fixed support；`5460eb7817fcda1a6ba63d13873639f730366d49`；PUSHED_VERIFIED。
 - N09_A2_EVAL：close all seventeen evaluations with unchanged A2 controls and explicit accounting；`a42059a36bfa44bdf6b6fea079574965288ecb64`；PUSHED_VERIFIED。
+- CASE_VIEW：link all ten candidate outcomes and fixed windows without rounding source values；`670443f9252ff74d6ed843ed275cd1a938d1613b`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-CASE_VIEW：link all ten candidate outcomes and fixed windows without rounding source values。
+CASE_VIEW_REVIEW：enforce identical time support before paired metric subtraction。
 
-无损关联10全窗+12固定分段，保留110个H/up/yaw/roll/pitch配对原值、source/row_key/field及Decimal差值，22窗口状态/分母完整。只读本轮小JSON/CSV，不新增native/evaluator/reference读取；7baseline/10candidate失败0，原结果不动。
+只读复核110个原值/差值与22窗口均一致；补齐浏览脚本fail-closed支持门，当前10组本已同支撑，重新运行标量转录后两CSV字节不变。暂缓事件裁定文字直到扫描完成。没有新增runtime/evaluator/reference读取。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-完成同批真实调度/创新证据与P边界，少量说明图后给三候选裁定。
+N12/N16及N09各组事件核对、少量图和最终定义裁定。
 
 ## 调用边界
 

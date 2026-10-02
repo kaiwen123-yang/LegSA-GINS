@@ -1,0 +1,16 @@
+{
+  "validation": "post-review same-support guard; no difference admitted on mismatched support",
+  "source_rows_checked_by_read_only_reviewer": 110,
+  "source_or_decimal_difference_errors": 0,
+  "case_windows_checked": 22,
+  "current_full_supports_exact": 10,
+  "guard_result_current_views_byte_identical": true,
+  "view_hashes": {
+    "CASE_METRICS.csv": "e8221ad1525b92a9ac0810f591f8cc4b1d15b89cb7738e8aac036c41ab5558b6",
+    "CASE_SUPPORT.csv": "568e3c873216c813329955f187aeefc009d78ab29d7ae742c1b6c31b092f43c5"
+  },
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "runtime_payload_reads": 0,
+  "calculation": "repeat 110 scalar subtractions to verify added support gate; not new performance metrics"
+}
