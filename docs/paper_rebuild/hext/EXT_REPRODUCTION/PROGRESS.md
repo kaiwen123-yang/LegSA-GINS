@@ -37,3 +37,7 @@
 第七项已推送且远端核对：`92be9286d7b98e17e6124f2f935adba9ef2b812d`。
 
 执行入口完成：独立单method/sequence程序与限定三方法批次入口，无旧controller/resume/delete。源码、配置、cache/NAV/库均与已登记pin核对；完整结果保留每个失败历元；新入口4项合成测试通过，序列化/失败候选记录/物理已知解/空SPP分母已验证。EXT03内部失败的不明阶段为UNKNOWN，EXT02不存在的float阶段为NOT_APPLICABLE。下一操作为BY2三身份全窗真实调用（以RUN/launch回执记录实际启动，不从队列数推调用数）。
+
+执行入口已推送且远端核对：`801ffe359c10466d8efd3d600a341cac1463aabf`。
+
+BY2原生批次完成：3/3方法全历史各1509历元，退出码均0，无技术重试。EXT01返回1077个带证书候选、432失败；EXT02返回1057、452失败；EXT03有效609（531 float、78 ratio-fixed）、900失败。全部HEADING逐历元行与RUN身份已转录；新详细状态/整数/协方差留新结果根。native openat角色核对未发现reference/raw参考载荷访问。此批尚未评价精度；fixed不是真整数已知。下一项BY2H原生批次及独立评价入口。
