@@ -1,0 +1,369 @@
+{
+  "stream_status": "COMPLETE",
+  "analysis_status": "VALIDATED",
+  "run_id": "ADD_RUN_00402",
+  "source_path": "<MECHANISM_ROOT>/replays/ADD_RUN_00402/observed/observer/events.jsonl",
+  "lines_read": 406614,
+  "event_counts": {
+    "OBSERVER_BEGIN": 1,
+    "CONFIGURATION": 1,
+    "INITIALIZED": 1,
+    "IMU_INPUT": 56643,
+    "IMU_COMPENSATE_BEFORE": 57417,
+    "IMU_COMPENSATE_AFTER": 57417,
+    "GNSS_INPUT": 1370,
+    "IMU_OPPORTUNITY": 56642,
+    "PROPAGATION_BEFORE": 57416,
+    "PROPAGATION_AFTER": 57416,
+    "GNSS_UPDATE_ENTRY": 1369,
+    "GNSS_DISPATCH": 1369,
+    "MEASUREMENT_ATTEMPT": 8014,
+    "SA_EVALUATION_BEGIN": 7594,
+    "SA_EVALUATION": 7594,
+    "EKF_BEFORE": 7594,
+    "EKF_AFTER": 7594,
+    "MEASUREMENT_DECISION": 8014,
+    "YAW_GATE_INPUT": 1369,
+    "VELOCITY_KINEMATICS": 1269,
+    "MEASUREMENT_SELECTED": 3846,
+    "RAW_DOPPLER_KINEMATICS": 1008,
+    "GNSS_UPDATE_CONSUMED": 1369,
+    "FEEDBACK_BEFORE": 1369,
+    "FEEDBACK_AFTER": 1369,
+    "IMU_SPLIT_BEFORE": 774,
+    "IMU_SPLIT_AFTER": 774,
+    "OBSERVER_END": 1
+  },
+  "pending_SA_begin_count": 0,
+  "stream_error": "",
+  "source_commit": "ca73cb1fb48a020fd2a450d79e520562c34eeb24",
+  "created_utc": "2026-10-02T05:23:39.538880+00:00",
+  "validation_only": true,
+  "actual_R_mutated": false,
+  "shadow_decision_applied": false,
+  "closedloop_not_tested": true,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "provider_calls": 0,
+  "reference_reads": 0,
+  "retained_error_series_reads": 0,
+  "rolling_history_recomputed": false,
+  "tolerances": {
+    "nis_abs": 1e-09,
+    "nis_rel": 1e-08,
+    "scale_abs": 1e-10,
+    "scale_rel": 1e-10,
+    "Hdx_nonzero": 1e-12
+  },
+  "boundary_rule": "normalized gates mapped to dof*threshold^2 and compared with fixed NIS tolerance",
+  "R_comparison_rule": "nonzero base_R entries compared by dimensionless scale with fixed scale tolerance; zero entries exact",
+  "rows": [
+    {
+      "source": "dual_antenna_yaw",
+      "fixed_window": "after",
+      "counts": {
+        "SA_EVALUATION_count": 598,
+        "status:VALIDATED_SAME_SNAPSHOT": 598,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 598,
+        "n16:NOT_ELIGIBLE": 598,
+        "Hdx_nonzero": 598,
+        "nis_changed": 598,
+        "oim_raw_changed": 83
+      }
+    },
+    {
+      "source": "dual_antenna_yaw",
+      "fixed_window": "before",
+      "counts": {
+        "SA_EVALUATION_count": 650,
+        "status:VALIDATED_SAME_SNAPSHOT": 650,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 650,
+        "n16:NOT_ELIGIBLE": 650,
+        "Hdx_nonzero": 650,
+        "nis_changed": 650,
+        "oim_raw_changed": 16
+      }
+    },
+    {
+      "source": "dual_antenna_yaw",
+      "fixed_window": "during",
+      "counts": {
+        "SA_EVALUATION_count": 100,
+        "status:VALIDATED_SAME_SNAPSHOT": 100,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 100,
+        "n16:NOT_ELIGIBLE": 100
+      }
+    },
+    {
+      "source": "go2_attitude_roll_pitch",
+      "fixed_window": "after",
+      "counts": {
+        "SA_EVALUATION_count": 618,
+        "status:VALIDATED_SAME_SNAPSHOT": 618,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 618,
+        "n16:NOT_ELIGIBLE": 618,
+        "Hdx_nonzero": 618,
+        "nis_changed": 618,
+        "oim_raw_changed": 165
+      }
+    },
+    {
+      "source": "go2_attitude_roll_pitch",
+      "fixed_window": "before",
+      "counts": {
+        "SA_EVALUATION_count": 650,
+        "status:VALIDATED_SAME_SNAPSHOT": 650,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 650,
+        "n16:NOT_ELIGIBLE": 650,
+        "Hdx_nonzero": 650,
+        "nis_changed": 650,
+        "oim_raw_changed": 7
+      }
+    },
+    {
+      "source": "go2_attitude_roll_pitch",
+      "fixed_window": "during",
+      "counts": {
+        "SA_EVALUATION_count": 101,
+        "status:VALIDATED_SAME_SNAPSHOT": 101,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 101,
+        "n16:NOT_ELIGIBLE": 101,
+        "Hdx_nonzero": 101,
+        "nis_changed": 101,
+        "oim_raw_changed": 72
+      }
+    },
+    {
+      "source": "go2_horizontal_velocity",
+      "fixed_window": "after",
+      "counts": {
+        "SA_EVALUATION_count": 618,
+        "status:VALIDATED_SAME_SNAPSHOT": 618,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 618,
+        "n16:NOT_ELIGIBLE": 618,
+        "Hdx_nonzero": 618,
+        "nis_changed": 618,
+        "oim_raw_changed": 72
+      }
+    },
+    {
+      "source": "go2_horizontal_velocity",
+      "fixed_window": "before",
+      "counts": {
+        "SA_EVALUATION_count": 650,
+        "status:VALIDATED_SAME_SNAPSHOT": 650,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 650,
+        "n16:NOT_ELIGIBLE": 650,
+        "Hdx_nonzero": 650,
+        "nis_changed": 650,
+        "oim_raw_changed": 13
+      }
+    },
+    {
+      "source": "go2_horizontal_velocity",
+      "fixed_window": "during",
+      "counts": {
+        "SA_EVALUATION_count": 101,
+        "status:VALIDATED_SAME_SNAPSHOT": 101,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 101,
+        "n16:NOT_ELIGIBLE": 101,
+        "Hdx_nonzero": 101,
+        "nis_changed": 101
+      }
+    },
+    {
+      "source": "raw_doppler_velocity",
+      "fixed_window": "after",
+      "counts": {
+        "SA_EVALUATION_count": 434,
+        "status:VALIDATED_SAME_SNAPSHOT": 434,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 434,
+        "n16:NOT_ELIGIBLE": 434,
+        "Hdx_nonzero": 434,
+        "nis_changed": 434,
+        "oim_raw_changed": 224
+      }
+    },
+    {
+      "source": "raw_doppler_velocity",
+      "fixed_window": "before",
+      "counts": {
+        "SA_EVALUATION_count": 536,
+        "status:VALIDATED_SAME_SNAPSHOT": 536,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 536,
+        "n16:NOT_ELIGIBLE": 536,
+        "Hdx_nonzero": 536,
+        "nis_changed": 536,
+        "oim_raw_changed": 172
+      }
+    },
+    {
+      "source": "receiver_position",
+      "fixed_window": "after",
+      "counts": {
+        "SA_EVALUATION_count": 619,
+        "status:VALIDATED_SAME_SNAPSHOT": 619,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 619,
+        "n16:NOT_ELIGIBLE": 619
+      }
+    },
+    {
+      "source": "receiver_position",
+      "fixed_window": "before",
+      "counts": {
+        "SA_EVALUATION_count": 650,
+        "status:VALIDATED_SAME_SNAPSHOT": 650,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 650,
+        "n16:NOT_ELIGIBLE": 650
+      }
+    },
+    {
+      "source": "receiver_velocity",
+      "fixed_window": "after",
+      "counts": {
+        "SA_EVALUATION_count": 619,
+        "status:VALIDATED_SAME_SNAPSHOT": 619,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 619,
+        "n16:NOT_ELIGIBLE": 619,
+        "Hdx_nonzero": 619,
+        "nis_changed": 619,
+        "oim_raw_changed": 169
+      }
+    },
+    {
+      "source": "receiver_velocity",
+      "fixed_window": "before",
+      "counts": {
+        "SA_EVALUATION_count": 650,
+        "status:VALIDATED_SAME_SNAPSHOT": 650,
+        "n12:SA_DISABLED_SHADOW_NOT_APPLIED": 650,
+        "n16:NOT_ELIGIBLE": 650,
+        "Hdx_nonzero": 650,
+        "nis_changed": 650,
+        "oim_raw_changed": 155
+      }
+    }
+  ],
+  "key_snapshot_selection": "first event per source/N12/N16 category, at most 24; full events remain external",
+  "key_snapshot_count": 6,
+  "configuration": {
+    "enable_source_aware_weighting": false,
+    "policy_version": "clean_v1_conservative_innovation_covariance",
+    "mode": "lsim_oim",
+    "method_family": "clean_v1_conservative_quadratic",
+    "deadband": 1.5,
+    "moderate": 2.5,
+    "strong": 4,
+    "global_cap": 25,
+    "max_R_scale": 25,
+    "position_cap": 5,
+    "receiver_velocity_cap": 8,
+    "yaw_cap": 10,
+    "raw_doppler_cap": 15,
+    "rp_cap": 10,
+    "hv_cap": 10,
+    "source_aware_go2_readiness_lsim_enabled": false,
+    "source_aware_go2_readiness_low_scale": 2,
+    "source_aware_go2_impact_or_rough_scale": 2,
+    "source_aware_go2_motion_unknown_scale": 1.25,
+    "source_aware_go2_in_place_turn_scale": 1.15,
+    "qa_active": false,
+    "fgo_enabled": false,
+    "reject_extreme": false,
+    "no_R_shrink": true,
+    "use_innovation_covariance": true,
+    "rolling_enabled": true,
+    "rolling_size": 31,
+    "sources": {
+      "receiver_position": {
+        "enabled": true,
+        "lsim_enabled": true,
+        "oim_enabled": true
+      },
+      "receiver_velocity": {
+        "enabled": true,
+        "lsim_enabled": true,
+        "oim_enabled": true
+      },
+      "dual_antenna_yaw": {
+        "enabled": true,
+        "lsim_enabled": true,
+        "oim_enabled": true
+      },
+      "raw_doppler_velocity": {
+        "enabled": true,
+        "lsim_enabled": true,
+        "oim_enabled": true
+      },
+      "go2_attitude_roll_pitch": {
+        "enabled": true,
+        "lsim_enabled": true,
+        "oim_enabled": true
+      },
+      "go2_horizontal_velocity": {
+        "enabled": true,
+        "lsim_enabled": true,
+        "oim_enabled": true
+      }
+    },
+    "TIME_ALIGN_ERR": 0.001,
+    "raw_doppler_enabled": true,
+    "rp_enabled": true,
+    "hv_diagnostic_enabled": true,
+    "hv_horizontal_enabled": true,
+    "hv_vertical_disabled": true,
+    "hv_mode": "horizontal_2d",
+    "yaw_scheme_C_enabled": true,
+    "dual_yaw_enabled": true,
+    "receiver_velocity_enabled": true,
+    "clean_final_v23_parity_mode": true,
+    "basic_dual_yaw": false,
+    "raw_doppler_tolerance": 0.05,
+    "rp_tolerance": 0.02,
+    "hv_tolerance": 0.08,
+    "raw_doppler_min_sat": 5,
+    "raw_doppler_residual_gate_mps": 3,
+    "rp_sourceaware": true,
+    "hv_sourceaware": true,
+    "hv_diagnostic_only": false,
+    "yaw_std_min_deg": 0.5,
+    "yaw_std_soft_deg": 3,
+    "yaw_std_hard_deg": 6,
+    "yaw_res_soft_deg": 6,
+    "yaw_res_hard_deg": 15,
+    "yaw_downweight_scale": 2.5
+  },
+  "validated_SA_events": 7594,
+  "failed_SA_events": 0,
+  "unavailable_SA_events": 0,
+  "unavailable_or_failed_SA_events": 0,
+  "all_SA_events_validated": true,
+  "data_mode": "semisynthetic",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "identity_gate_checks": {
+    "original": {
+      "slot_id": true,
+      "status": true,
+      "access_passed": true,
+      "scientific_manifest_match": true,
+      "one_native": true,
+      "exit_code": true,
+      "output_comparisons": true,
+      "identity_status": true
+    },
+    "observed": {
+      "slot_id": true,
+      "status": true,
+      "access_passed": true,
+      "scientific_manifest_match": true,
+      "one_native": true,
+      "exit_code": true,
+      "output_comparisons": true,
+      "identity_status": true
+    }
+  },
+  "historical_attribution_requires_complete_event_stream": true,
+  "event_csv": "<MECHANISM_ROOT>/analysis/ADD_RUN_00402/innovation/SA_EVENT_ANALYSIS.csv",
+  "complete_key_snapshots": "<MECHANISM_ROOT>/analysis/ADD_RUN_00402/innovation/KEY_SNAPSHOTS.jsonl"
+}
