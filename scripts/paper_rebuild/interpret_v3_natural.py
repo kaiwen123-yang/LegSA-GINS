@@ -64,15 +64,19 @@ def main():
                 if r['sequence_id'] == args.sequence]
     assert len(selected) == 11 and {r['method_id'] for r in selected} == set(METHODS)
     selected.sort(key=lambda r: METHODS.index(r['method_id']))
-    cache, values, configs, deltas = {}, [], [], []
+    cache, values, configs, deltas, config_maps = {}, [], [], [], {}
     for row in selected:
         config_path = row['native_runtime_config_path']
         text = resolve(config_path).read_text()
+        config_maps[row['method_id']] = {'path': config_path, 'fields': {}}
         for line_number, line in enumerate(text.splitlines(), 1):
             if ':' not in line or line.lstrip().startswith('#'):
                 continue
             key, value = line.split(':', 1)
             key = key.strip()
+            if key in config_maps[row['method_id']]['fields']:
+                raise ValueError('Duplicate flat runtime config key: ' + key)
+            config_maps[row['method_id']]['fields'][key] = (value.strip(), line_number)
             if key.startswith('enable_') or key in ('starttime', 'endtime', 'imupath', 'gnsspath',
                 'raw_doppler_factor_path', 'go2_attitude_prior_path', 'go2_horizontal_velocity_prior_path'):
                 configs.append(dict(sequence_id=args.sequence, method_id=row['method_id'], run_id=row['run_id'],
@@ -109,6 +113,24 @@ def main():
     write_csv(out / (prefix + '_RECORDED.csv'), values)
     write_csv(out / (prefix + '_CONFIG_INPUTS.csv'), configs)
     write_csv(out / (prefix + '_DIFFERENCES.csv'), deltas)
+    contrasts = []
+    for other in [m for m in METHODS if m != 'F04']:
+        left, right = config_maps['F04'], config_maps[other]
+        for key in sorted(set(left['fields']) | set(right['fields'])):
+            av, al = left['fields'].get(key, ('FIELD_ABSENT', 'NA'))
+            bv, bl = right['fields'].get(key, ('FIELD_ABSENT', 'NA'))
+            if av != bv:
+                def display_literal(value, source, line):
+                    try:
+                        return portable(value)
+                    except ValueError:
+                        return f'SOURCE_CONFIG_LINE:{source}#L{line}'
+                contrasts.append(dict(sequence_id=prefix, comparison='F04_minus_' + other,
+                    source_path=left['path'], source_line=al, reference_path=right['path'], reference_line=bl,
+                    field=key, candidate_literal=display_literal(av, left['path'], al),
+                    reference_literal=display_literal(bv, right['path'], bl),
+                    comparison_kind='ALL_FLAT_CONFIG_LITERAL_FIELDS; local paths aliased or source-line pointer; comments_not_normalized'))
+    write_csv(out / (prefix + '_CONFIG_CONTRASTS.csv'), contrasts)
     v3 = [lookup[m, 'v3'] for m in METHODS]
     v2 = [lookup[m, 'v2'] for m in METHODS]
     lines = [f'# {prefix}：全部 11 正式配置', '',
@@ -134,7 +156,9 @@ def main():
         ordered = sorted(v3, key=lambda r: float(r[metric]))
         lines.append(f'- `{metric}` 按原值从小到大：' + ' → '.join(f"{r['method_id']}({r[metric]})" for r in ordered) + '。')
     lines += ['', '下述判断须结合全部配置、差值和时序检查，不把名义小差包装成贡献。', '']
-    (out / (prefix + '.md')).write_text('\n'.join(lines), encoding='utf-8')
+    report_path = out / (prefix + '.md')
+    if not report_path.exists():
+        report_path.write_text('\n'.join(lines), encoding='utf-8')
     print(json.dumps({'sequence': prefix, 'recorded_rows': len(values), 'config_lines_read': len(configs),
         'new_validation_subtractions': len(deltas), 'solver_provider_evaluator_calls': 0}, ensure_ascii=False))
 

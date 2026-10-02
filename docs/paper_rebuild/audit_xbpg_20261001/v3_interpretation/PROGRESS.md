@@ -5,18 +5,19 @@
 ## 已完成并保存的小项
 
 - M01：explain formal methods and frozen metric definitions；`258b58c99246988b20419be3d6d45d603f76f61f`；PUSHED_VERIFIED。
+- N01a：interpret all eleven BY2 natural configurations；`3439053691a1de0624dc371243412bb64180228d`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N01a：interpret all eleven BY2 natural configurations。
+S00：freeze retained series validation scope and tolerance。
 
-已读取BY2全部11正式配置、22个同native双评价统计视图，保存7指标完整精度和支持字段、220条输入配置行及140项本轮标量差核算。F04相对F03位置/yaw名义改善较小、roll/pitch变化较大；相对A04四项均无名义优势。全部完成但不宣称合格。保留时序扫描尚未开始，本提交是明确完成的标量解释子项。
+封存2308份error_series和唯一matched的逐组只读扫描范围、13列schema、128运行统计字段和冻结summary定义；103个明确bundle元数据已读，正文读取0。数值容差预设1e-10+1e-10乘原值绝对值，时间1e-9，计数精确；缺损独立记录并继续，不复读成功载荷。21项独立纯算术手工检查通过。同步收紧3条方法来源读取深度标签，并补BY2实际配置字面差异表。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-BY2保留时序schema/容差、22文件全文扫描与唯一matched检查；完成后继续BY2H。
+启动BY2_NATURAL：22个error_series及1个matched，一次主扫描后立即提交结果。
 
 ## 调用边界
 
