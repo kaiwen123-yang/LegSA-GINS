@@ -65,3 +65,7 @@ BY2H数值完成：三方法RMSE89.127/89.193/63.995°，评分1059/1029/467，�
 BY2H数值结果已推送且远端核对：`0d4f1e0f46122ce5510e9da35fc0e44ca13ea71c`。
 
 图显示修订完成：两项针对性测试通过；仅plot_saved改变，评价函数AST不变。BY2/BY2H各一次plot-only从保存误差生成attempt_002，已实际打开并核对统一角域、失败/固定状态、断线及异常长度；2个PNG提交，PDF留结果根。新增evaluator/reference/native均0；原attempt_001保留，未用新图反算数字。下一项BY2O终态与失败分层说明。
+
+图显示修订已推送且远端核对：`62b1f795c05c225ce04bcda222de70099b9b119d`。
+
+失败解释小项完成：三份新EXT02事件流各完整读取一次（5223行、关联冲突0），103条NUMERICAL_FAILURE全量源键与231个未收敛候选迭代字段已保存；全103例均仍有其他已收敛候选，触发既定整候选池拒绝规则，不擅自改为成功。EXT03只核RUN/HEADING状态、未读其gzip，不把SPP拒绝当KF崩溃。新增solver/evaluator/reference调用0，无新性能计算。下一项BY2O终态与离线评价。
