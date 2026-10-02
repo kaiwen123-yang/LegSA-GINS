@@ -1,0 +1,19 @@
+commit_sha,small_item,push_status,verified_remote_head,branch
+86e6d72af8c29070ca952401292728d6fadd6931,docs(hext): acquire complete retained CLEAN4 EXT01 and EXT02 results,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+b96d8f2b1f751df8d083fe29b4a6c9f9c5200a64,docs(hext): acquire HX02 and all HX07R comparison identities,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+b38ef14376f3f16f15633ae4415ade3dbc31396b,docs(hext): complete retained comparison results and provenance indexes,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+3f04f76f90493869816e21b1adc811c415ff4acc,docs(hext): bind paper algorithms to verified complete raw inputs and run queue,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+f23fb864574b518b9489d9b5104dacc453786e6e,feat(hext): add clock-consistent DD adapter and validate exact EXT01 core,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+05fd24cc7da8a7296f2f868473a3179f033e2707,fix(hext): retain journal CWLS tangent candidates in versioned solver,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+92be9286d7b98e17e6124f2f935adba9ef2b812d,feat(hext): bind Yang KF to complete raw tracking and explicit stage evidence,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+801ffe359c10466d8efd3d600a341cac1463aabf,feat(hext): freeze bounded full-history execution and failure evidence,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+9a844d518c559ca33d852a1c6d81f0f13df0ea59,results(hext): retain complete BY2 raw-method runs and all failures,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+6955005b7ed70d7cd8e75f4859820372228d297a,docs(hext): distinguish frozen controls and provider-only degradation,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+385f7b49f1656457059c25da4d07af388e74d681,results(hext): complete full-history BY2H literature-method runs,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+1408772b530615a80cc163e915378c025a519f8b,Add frozen heading evaluation and common-support checks for EXT reproduction,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+34a7bb3ff678f48e5473048ac853e86053ab6270,Deliver BY2 full-window EXT heading results and shared-support comparisons,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+0d4f1e0f46122ce5510e9da35fc0e44ca13ea71c,Deliver BY2H full-window EXT results with fixed and availability denominators,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+62b1f795c05c225ce04bcda222de70099b9b119d,Clarify heading angle display and state visibility without reevaluation,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+2bbdba581a0d3c3ed9606bc047c07e23c81b217b,Explain every EXT02 refinement failure and preserve EXT03 input gate counts,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+7514b562e44b1c8b40aaa55a2f5214797e8aa8f5,Retain complete BY2O literature runs including bounded-search timeouts,PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001
+0116e5f0f693aa06b53b518b1e7d0494b8991f44,"Deliver BY2O heading accuracy, availability, failures and continuous figures",PUSHED_REMOTE_CONTAINS,0116e5f0f693aa06b53b518b1e7d0494b8991f44,audit/code-xbpg-20260105-20261001

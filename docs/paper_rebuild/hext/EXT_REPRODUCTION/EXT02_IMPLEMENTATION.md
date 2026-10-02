@@ -1,5 +1,7 @@
 # EXT02：独立版本的相切候选修正
 
+本文件保留实现/运行前依据及该测试小项的历史计数；当前三序列执行状态和真实结果见[最终比较](FINAL_COMPARISON.md)。
+
 本项实现标识为 `EXT02_CWLS_TANGENT_PEAKS_V1`，入口是
 `src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext02.py::solve_cwls(model)`。
 它返回原 `CWLSSolution`，参数、模型类型和结果字段与旧 `solve_single_baseline_cwls` 相同。

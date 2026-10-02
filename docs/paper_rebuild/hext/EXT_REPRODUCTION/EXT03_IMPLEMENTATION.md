@@ -1,5 +1,7 @@
 # EXT03 新版本：单历史适配与合成验证
 
+本文件保留实现/运行前依据及该测试小项的历史计数；当前三序列执行状态和真实结果见[最终比较](FINAL_COMPARISON.md)。
+
 接口在 [`reproduction_ext03.py`](../../../../src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py)：
 
 ```python

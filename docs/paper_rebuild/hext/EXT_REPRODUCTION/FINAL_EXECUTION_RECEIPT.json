@@ -1,0 +1,108 @@
+{
+  "status": "COMPLETED_WITH_RETAINED_EPOCH_FAILURES_AND_DECLARED_MODEL_LIMITS",
+  "data_mode": "real_raw",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "native_method_sequence_calls": 9,
+  "native_process_exit_failures": 0,
+  "native_technical_retries": 0,
+  "full_history_method_epoch_records": 15669,
+  "full_history_valid_method_epoch_records": 9100,
+  "full_history_invalid_method_epoch_records": 6569,
+  "call_unit": "one complete method/sequence entry; epoch solver/library calls and pool workers are not independent experiments",
+  "evaluator_child_invocations": 3,
+  "reference_read_opens": 3,
+  "evaluator_technical_retries": 0,
+  "reference_used_online": false,
+  "new_v3_or_rtklib_control_runs": 0,
+  "new_bootstrap_or_parameter_search": 0,
+  "new_degradation_runs": 0,
+  "raw_degradation_comparison": "NO_SAME_LAYER_REGISTERED_RAWX_CASES",
+  "primary_plot_generations": 3,
+  "plot_only_display_revisions": 2,
+  "adopted_raster_figures": 3,
+  "comparison_rows": 63,
+  "common_support_rows": 450,
+  "summary_calculations": "counts and availability fractions only; original metric strings copied unchanged",
+  "no_new_solver_or_reference_access_by_summary": true,
+  "scientific_source_hashes_match_all_nine_runs_and_current_files": {
+    "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "d72548fb9cea3f8d6075bd231ba9a2bb970f71382006edbec045a4c7ea8f6e5a",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "85112d34e27f1fa8c3043bdcdeb2f418232cd2fffacb40cab3f387f179db6c9b",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "cb098fb05283fb923f8ced007e01c382c2f47f68ac8bcb9999068e4d5070f31e",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext02.py": "87db20cb95b1f36970c7cc4e74e73967ad2f12883534f6d7b9bf007744f457f1",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": "e4aff2090078caa76e46999f40c096e3bb1c56a824183494a88ce5515d6fca9d",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "5763d6e91fb44e29b8d2e324bb209463b0b87bb77f18cda63430d98cb5c1b7e6"
+  },
+  "config_hash_all_nine_runs": "94e39922e194e0cd151ee8bdd27318010d5f997686a72260a1ba432fd62478de",
+  "native_launches": [
+    {
+      "run_id": "BY2__EXT01__RAW_REPRO_V1",
+      "status": "EXITED",
+      "exit_code": 0,
+      "source_path": "<EXT_REPRO_ROOT>/batches/BY2/EXT01.launch.json"
+    },
+    {
+      "run_id": "BY2__EXT02__RAW_REPRO_V1",
+      "status": "EXITED",
+      "exit_code": 0,
+      "source_path": "<EXT_REPRO_ROOT>/batches/BY2/EXT02.launch.json"
+    },
+    {
+      "run_id": "BY2__EXT03__RAW_REPRO_V1",
+      "status": "EXITED",
+      "exit_code": 0,
+      "source_path": "<EXT_REPRO_ROOT>/batches/BY2/EXT03.launch.json"
+    },
+    {
+      "run_id": "BY2H__EXT01__RAW_REPRO_V1",
+      "status": "EXITED",
+      "exit_code": 0,
+      "source_path": "<EXT_REPRO_ROOT>/batches/BY2H/EXT01.launch.json"
+    },
+    {
+      "run_id": "BY2H__EXT02__RAW_REPRO_V1",
+      "status": "EXITED",
+      "exit_code": 0,
+      "source_path": "<EXT_REPRO_ROOT>/batches/BY2H/EXT02.launch.json"
+    },
+    {
+      "run_id": "BY2H__EXT03__RAW_REPRO_V1",
+      "status": "EXITED",
+      "exit_code": 0,
+      "source_path": "<EXT_REPRO_ROOT>/batches/BY2H/EXT03.launch.json"
+    },
+    {
+      "run_id": "BY2O__EXT01__RAW_REPRO_V1",
+      "status": "EXITED",
+      "exit_code": 0,
+      "source_path": "<EXT_REPRO_ROOT>/batches/BY2O/EXT01.launch.json"
+    },
+    {
+      "run_id": "BY2O__EXT02__RAW_REPRO_V1",
+      "status": "EXITED",
+      "exit_code": 0,
+      "source_path": "<EXT_REPRO_ROOT>/batches/BY2O/EXT02.launch.json"
+    },
+    {
+      "run_id": "BY2O__EXT03__RAW_REPRO_V1",
+      "status": "EXITED",
+      "exit_code": 0,
+      "source_path": "<EXT_REPRO_ROOT>/batches/BY2O/EXT03.launch.json"
+    }
+  ],
+  "tests": "Synthetic/unit/native-library tests and their retries are separately recorded in the four method/runner receipts and EVALUATION_PROTOCOL.md; not counted as these real calls",
+  "final_transcription_checks": {
+    "original_source_cells_checked": 10629,
+    "exact_cell_mismatches": 0,
+    "markdown_local_links_checked": 63,
+    "missing_links": 0,
+    "extra_solver_or_reference_calls": 0
+  },
+  "final_read_only_review": "COMPLETED; exact source transcription, scope, links and small-file staging reviewed; wording corrections applied; no new execution"
+}
