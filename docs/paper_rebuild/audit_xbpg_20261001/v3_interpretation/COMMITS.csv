@@ -20,3 +20,4 @@ A21,explain A2_10s across all eleven configurations,2996f399a1133035f26c98c83a36
 A22,explain A2_20s across all eleven configurations,d47bd8582dfbdff84a64896426b00f2d96201ebe,0,True,PUSHED_VERIFIED
 U01,explain paired estimates and existing uncertainty intervals,c3f1a014ea3b610fc0165009325fb7d601627a61,0,True,PUSHED_VERIFIED
 B01,separate historical protocol comparisons from formal V3 runs,7c7b63fafac0c1f2dd8861bfd5d2df31e2d9f1bd,0,True,PUSHED_VERIFIED
+B02,explain frozen candidate sensitivity identities and tails,bf244f246be68c93af32c30185329279ae191b71,0,True,PUSHED_VERIFIED
