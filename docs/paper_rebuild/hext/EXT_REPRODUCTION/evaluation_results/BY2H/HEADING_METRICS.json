@@ -1,0 +1,269 @@
+{
+  "EXT01": {
+    "schema": "hx02.heading_evaluation.v1",
+    "method_id": "EXT01",
+    "window_seconds": [
+      413.0,
+      683.0
+    ],
+    "base_time": 1772784000.0,
+    "denominator_native_paired_epochs_in_window": 1350,
+    "valid_epochs_in_window": 1059,
+    "availability": 0.7844444444444445,
+    "valid_epochs_without_reference_support": 0,
+    "valid": {
+      "count": 1059,
+      "rmse_deg": 89.1273831340094,
+      "max_absolute_deg": 179.99542267188514,
+      "p95_absolute_deg": 172.7407756640465,
+      "mae_deg": 60.16337996427414,
+      "circular_bias_deg": -11.586776698044673,
+      "wrapsafe": {
+        "matched_count": 1059,
+        "valid_denominator": 1350,
+        "valid_coverage": 0.7844444444444445,
+        "wrapsafe_bias_deg": -12.95607794055694,
+        "circular_wrapsafe_bias_deg": -11.586776698044673,
+        "rmse_deg": 89.1273831340094,
+        "mae_deg": 60.16337996427414,
+        "median_absolute_deg": 24.98135409013247,
+        "p90_absolute_deg": 167.70287265708748,
+        "p95_absolute_deg": 172.7407756640465,
+        "p99_absolute_deg": 178.56328881767385,
+        "max_absolute_deg": 179.99542267188514,
+        "valid_count": 1059,
+        "segment_count": 11,
+        "longest_segment_epochs": 596,
+        "maximum_gap_seconds": 18.0,
+        "continuity_definition": "segments split when accepted original epoch indices are nonconsecutive"
+      }
+    },
+    "valid_segments": {
+      "segment_count": 11,
+      "longest_segment_epochs": 596,
+      "maximum_gap_seconds": 18.0,
+      "definition": "segments split when accepted original epoch indices are nonconsecutive"
+    },
+    "hold_last_valid": {
+      "count": 1350,
+      "rmse_deg": 90.56722220036819,
+      "max_absolute_deg": 179.99542267188514,
+      "p95_absolute_deg": 171.50001466525478,
+      "mae_deg": 65.89350042116415,
+      "circular_bias_deg": -15.26229319901995,
+      "held_epochs_in_window": 1350,
+      "no_heading_epochs_before_first_valid": 0,
+      "held_epochs_without_reference_support": 0,
+      "hold_source": "CAUSAL_LAST_METHOD_NATIVE_VALID_EPOCH_FROM_NATIVE_START"
+    },
+    "reference_semantics": "wrap360(90-interp(unwrap(yaw_ENU))) inside trace support; no extrapolation",
+    "error_convention": "wrap180(method_body_yaw_ned - reference_body_yaw_ned)",
+    "additional_support_diagnostics": {
+      "native_row_count": 1483,
+      "native_invalid_epochs_in_window": 291,
+      "status_counts_in_window_json": "{\"CERTIFIED_INTEGER_CANDIDATE\": 1059, \"INVALID\": 291}",
+      "fixed_definition": "NOT_APPLICABLE_NO_ACCEPTANCE_TEST",
+      "first_valid_native_t_rel_s": 401.19799995422363,
+      "first_valid_window_t_rel_s": 413.19799995422363,
+      "first_fixed_native_t_rel_s": null,
+      "first_fixed_window_t_rel_s": null,
+      "maximum_uncovered_interval_with_window_edges_s": 18.0,
+      "edge_gap_definition": "max gap between window start, native-valid epochs, window end; includes censored edges",
+      "held_age_count": 1350,
+      "held_age_max_s": 17.799999952316284,
+      "held_age_p95_s": 7.600000035762787
+    },
+    "native_identity": {
+      "method_id": "EXT01",
+      "run_id": "BY2H__EXT01__RAW_REPRO_V1",
+      "run_path": "<EXT_REPRO_ROOT>/runs/BY2H__EXT01__RAW_REPRO_V1/RUN.json",
+      "run_sha256": "a38c3988f035cfecee5a402e12476cedcd1b432348588812a6d3e63d523a8ff6",
+      "heading_table": "<EXT_REPRO_ROOT>/runs/BY2H__EXT01__RAW_REPRO_V1/HEADING.csv",
+      "heading_table_sha256": "92c6373e64eb4937813b216cb42cb2e1cf5281390715fb038f1659f051748443",
+      "native_status": "COMPLETED",
+      "native_code_commit": "9a844d518c559ca33d852a1c6d81f0f13df0ea59"
+    }
+  },
+  "EXT02": {
+    "schema": "hx02.heading_evaluation.v1",
+    "method_id": "EXT02",
+    "window_seconds": [
+      413.0,
+      683.0
+    ],
+    "base_time": 1772784000.0,
+    "denominator_native_paired_epochs_in_window": 1350,
+    "valid_epochs_in_window": 1029,
+    "availability": 0.7622222222222222,
+    "valid_epochs_without_reference_support": 0,
+    "valid": {
+      "count": 1029,
+      "rmse_deg": 89.19291751437154,
+      "max_absolute_deg": 179.99542267181522,
+      "p95_absolute_deg": 172.82136686073048,
+      "mae_deg": 60.25305461990837,
+      "circular_bias_deg": -10.824907593755597,
+      "wrapsafe": {
+        "matched_count": 1029,
+        "valid_denominator": 1350,
+        "valid_coverage": 0.7622222222222222,
+        "wrapsafe_bias_deg": -12.336208317823418,
+        "circular_wrapsafe_bias_deg": -10.824907593755597,
+        "rmse_deg": 89.19291751437154,
+        "mae_deg": 60.25305461990837,
+        "median_absolute_deg": 27.003532983953278,
+        "p90_absolute_deg": 167.74866633384795,
+        "p95_absolute_deg": 172.82136686073048,
+        "p99_absolute_deg": 178.56329965089753,
+        "max_absolute_deg": 179.99542267181522,
+        "valid_count": 1029,
+        "segment_count": 31,
+        "longest_segment_epochs": 244,
+        "maximum_gap_seconds": 18.0,
+        "continuity_definition": "segments split when accepted original epoch indices are nonconsecutive"
+      }
+    },
+    "valid_segments": {
+      "segment_count": 31,
+      "longest_segment_epochs": 244,
+      "maximum_gap_seconds": 18.0,
+      "definition": "segments split when accepted original epoch indices are nonconsecutive"
+    },
+    "hold_last_valid": {
+      "count": 1350,
+      "rmse_deg": 89.90959102143132,
+      "max_absolute_deg": 179.99542267181522,
+      "p95_absolute_deg": 171.50001466525558,
+      "mae_deg": 65.27067888478554,
+      "circular_bias_deg": -14.106682380355892,
+      "held_epochs_in_window": 1350,
+      "no_heading_epochs_before_first_valid": 0,
+      "held_epochs_without_reference_support": 0,
+      "hold_source": "CAUSAL_LAST_METHOD_NATIVE_VALID_EPOCH_FROM_NATIVE_START"
+    },
+    "reference_semantics": "wrap360(90-interp(unwrap(yaw_ENU))) inside trace support; no extrapolation",
+    "error_convention": "wrap180(method_body_yaw_ned - reference_body_yaw_ned)",
+    "additional_support_diagnostics": {
+      "native_row_count": 1483,
+      "native_invalid_epochs_in_window": 321,
+      "status_counts_in_window_json": "{\"INVALID\": 321, \"WRAPPED_CANDIDATE\": 1029}",
+      "fixed_definition": "NOT_APPLICABLE_NO_ACCEPTANCE_TEST",
+      "first_valid_native_t_rel_s": 401.19799995422363,
+      "first_valid_window_t_rel_s": 413.39800000190735,
+      "first_fixed_native_t_rel_s": null,
+      "first_fixed_window_t_rel_s": null,
+      "maximum_uncovered_interval_with_window_edges_s": 18.0,
+      "edge_gap_definition": "max gap between window start, native-valid epochs, window end; includes censored edges",
+      "held_age_count": 1350,
+      "held_age_max_s": 17.799999952316284,
+      "held_age_p95_s": 7.600000035762787
+    },
+    "native_identity": {
+      "method_id": "EXT02",
+      "run_id": "BY2H__EXT02__RAW_REPRO_V1",
+      "run_path": "<EXT_REPRO_ROOT>/runs/BY2H__EXT02__RAW_REPRO_V1/RUN.json",
+      "run_sha256": "9190e14a4eb61f6031e2ac6c3dea7b476009d654a8c12dc9096dae569c1762f8",
+      "heading_table": "<EXT_REPRO_ROOT>/runs/BY2H__EXT02__RAW_REPRO_V1/HEADING.csv",
+      "heading_table_sha256": "923b471ee30cbff62ba271f4a2cb9b65889003f65aa864c4079e78425b8adf88",
+      "native_status": "COMPLETED",
+      "native_code_commit": "9a844d518c559ca33d852a1c6d81f0f13df0ea59"
+    }
+  },
+  "EXT03": {
+    "schema": "hx02.heading_evaluation.v1",
+    "method_id": "EXT03",
+    "window_seconds": [
+      413.0,
+      683.0
+    ],
+    "base_time": 1772784000.0,
+    "denominator_native_paired_epochs_in_window": 1350,
+    "valid_epochs_in_window": 467,
+    "availability": 0.3459259259259259,
+    "valid_epochs_without_reference_support": 0,
+    "valid": {
+      "count": 467,
+      "rmse_deg": 63.99455641404237,
+      "max_absolute_deg": 175.88341831463384,
+      "p95_absolute_deg": 127.2369418118694,
+      "mae_deg": 46.584868968184715,
+      "circular_bias_deg": 1.6287815078227936,
+      "wrapsafe": {
+        "matched_count": 467,
+        "valid_denominator": 1350,
+        "valid_coverage": 0.3459259259259259,
+        "wrapsafe_bias_deg": 1.977789600010853,
+        "circular_wrapsafe_bias_deg": 1.6287815078227936,
+        "rmse_deg": 63.99455641404237,
+        "mae_deg": 46.584868968184715,
+        "median_absolute_deg": 26.78313101082938,
+        "p90_absolute_deg": 118.40288792270248,
+        "p95_absolute_deg": 127.2369418118694,
+        "p99_absolute_deg": 149.1899636669047,
+        "max_absolute_deg": 175.88341831463384,
+        "valid_count": 467,
+        "segment_count": 39,
+        "longest_segment_epochs": 119,
+        "maximum_gap_seconds": 77.79999995231628,
+        "continuity_definition": "segments split when accepted original epoch indices are nonconsecutive"
+      }
+    },
+    "valid_segments": {
+      "segment_count": 39,
+      "longest_segment_epochs": 119,
+      "maximum_gap_seconds": 77.79999995231628,
+      "definition": "segments split when accepted original epoch indices are nonconsecutive"
+    },
+    "hold_last_valid": {
+      "count": 1350,
+      "rmse_deg": 78.64031833811919,
+      "max_absolute_deg": 176.87697857270484,
+      "p95_absolute_deg": 171.15798961099537,
+      "mae_deg": 61.85569615308914,
+      "circular_bias_deg": 29.068469382231598,
+      "held_epochs_in_window": 1350,
+      "no_heading_epochs_before_first_valid": 0,
+      "held_epochs_without_reference_support": 0,
+      "hold_source": "CAUSAL_LAST_METHOD_NATIVE_VALID_EPOCH_FROM_NATIVE_START"
+    },
+    "reference_semantics": "wrap360(90-interp(unwrap(yaw_ENU))) inside trace support; no extrapolation",
+    "error_convention": "wrap180(method_body_yaw_ned - reference_body_yaw_ned)",
+    "ratio_fixed": {
+      "count": 70,
+      "rate": 0.05185185185185185,
+      "errors": {
+        "count": 70,
+        "rmse_deg": 56.43913023236012,
+        "max_absolute_deg": 146.5922610935935,
+        "p95_absolute_deg": 118.51422145526632,
+        "mae_deg": 39.792881032705104,
+        "circular_bias_deg": 24.12534252002979
+      }
+    },
+    "additional_support_diagnostics": {
+      "native_row_count": 1483,
+      "native_invalid_epochs_in_window": 883,
+      "status_counts_in_window_json": "{\"float\": 397, \"invalid\": 883, \"paper_ratio_fixed\": 70}",
+      "fixed_definition": "PAPER_RATIO_TEST",
+      "first_valid_native_t_rel_s": 410.59800004959106,
+      "first_valid_window_t_rel_s": 413.19799995422363,
+      "first_fixed_native_t_rel_s": 411.39800000190735,
+      "first_fixed_window_t_rel_s": 477.19799995422363,
+      "maximum_uncovered_interval_with_window_edges_s": 77.79999995231628,
+      "edge_gap_definition": "max gap between window start, native-valid epochs, window end; includes censored edges",
+      "held_age_count": 1350,
+      "held_age_max_s": 77.59999990463257,
+      "held_age_p95_s": 64.11000002622603
+    },
+    "native_identity": {
+      "method_id": "EXT03",
+      "run_id": "BY2H__EXT03__RAW_REPRO_V1",
+      "run_path": "<EXT_REPRO_ROOT>/runs/BY2H__EXT03__RAW_REPRO_V1/RUN.json",
+      "run_sha256": "b3d4267e3394b6b9fdc3df74c51936989ba2860363085506b955d532f3e6da99",
+      "heading_table": "<EXT_REPRO_ROOT>/runs/BY2H__EXT03__RAW_REPRO_V1/HEADING.csv",
+      "heading_table_sha256": "2e7d53bf462cf983635d73920e40499c919dc58559a1b03381da941372e4aa47",
+      "native_status": "COMPLETED",
+      "native_code_commit": "9a844d518c559ca33d852a1c6d81f0f13df0ea59"
+    }
+  }
+}

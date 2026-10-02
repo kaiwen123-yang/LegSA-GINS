@@ -1,0 +1,101 @@
+{
+  "schema": "ext_reproduction.heading_evaluation.v1",
+  "sequence_id": "BY2H",
+  "preparation_commit": "1408772b530615a80cc163e915378c025a519f8b",
+  "source_pins": {
+    "src/legsa_gins/paper_rebuild/hext/hx02_heading_evaluation.py": "eedb3faf56ccffca222d915c401d3075dc64583ce68a10f08add9f8b705fa994",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "85112d34e27f1fa8c3043bdcdeb2f418232cd2fffacb40cab3f387f179db6c9b",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_evaluation.py": "3576636cf0f3192af21d4fc8bbc6cba1c5a4a1c46e8fc741cfab960df5fbc360",
+    "docs/paper_rebuild/hext/EXT_REPRODUCTION/EVALUATION_PROTOCOL.md": "06ff4c0b179bc14c8035b815d13880bc294511aa18c1f768bb33349acc85c483"
+  },
+  "input_manifest": "<EXT_REPRO_ROOT>/inputs/BY2H/INPUT.json",
+  "input_manifest_sha256": "6b8c9e4d104ccbacc92fb5de368bf260cdf4fd9a7f6a21ee5dac7304b6e06706",
+  "pair_count": 1483,
+  "base_time": 1772784000.0,
+  "window": [
+    413.0,
+    683.0
+  ],
+  "trace": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/trace_vrtk2_a87c6e_2026-03-06-08-06-39_minimal.csv",
+  "trace_sha256": "8d11fe360753bfcdbc54f7bf793fcb25850c0997b7aaad4ec1c9f10859c0f84f",
+  "methods": [
+    {
+      "method_id": "EXT01",
+      "run_id": "BY2H__EXT01__RAW_REPRO_V1",
+      "run_path": "<EXT_REPRO_ROOT>/runs/BY2H__EXT01__RAW_REPRO_V1/RUN.json",
+      "run_sha256": "a38c3988f035cfecee5a402e12476cedcd1b432348588812a6d3e63d523a8ff6",
+      "heading_table": "<EXT_REPRO_ROOT>/runs/BY2H__EXT01__RAW_REPRO_V1/HEADING.csv",
+      "heading_table_sha256": "92c6373e64eb4937813b216cb42cb2e1cf5281390715fb038f1659f051748443",
+      "native_status": "COMPLETED",
+      "native_code_commit": "9a844d518c559ca33d852a1c6d81f0f13df0ea59"
+    },
+    {
+      "method_id": "EXT02",
+      "run_id": "BY2H__EXT02__RAW_REPRO_V1",
+      "run_path": "<EXT_REPRO_ROOT>/runs/BY2H__EXT02__RAW_REPRO_V1/RUN.json",
+      "run_sha256": "9190e14a4eb61f6031e2ac6c3dea7b476009d654a8c12dc9096dae569c1762f8",
+      "heading_table": "<EXT_REPRO_ROOT>/runs/BY2H__EXT02__RAW_REPRO_V1/HEADING.csv",
+      "heading_table_sha256": "923b471ee30cbff62ba271f4a2cb9b65889003f65aa864c4079e78425b8adf88",
+      "native_status": "COMPLETED",
+      "native_code_commit": "9a844d518c559ca33d852a1c6d81f0f13df0ea59"
+    },
+    {
+      "method_id": "EXT03",
+      "run_id": "BY2H__EXT03__RAW_REPRO_V1",
+      "run_path": "<EXT_REPRO_ROOT>/runs/BY2H__EXT03__RAW_REPRO_V1/RUN.json",
+      "run_sha256": "b3d4267e3394b6b9fdc3df74c51936989ba2860363085506b955d532f3e6da99",
+      "heading_table": "<EXT_REPRO_ROOT>/runs/BY2H__EXT03__RAW_REPRO_V1/HEADING.csv",
+      "heading_table_sha256": "2e7d53bf462cf983635d73920e40499c919dc58559a1b03381da941372e4aa47",
+      "native_status": "COMPLETED",
+      "native_code_commit": "9a844d518c559ca33d852a1c6d81f0f13df0ea59"
+    }
+  ],
+  "reused_variants": [
+    {
+      "method_id": "RTKLIB_V0",
+      "spec_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/eval/SPEC.json",
+      "spec_sha256": "336a818aa2bf47d5ad48884ca371fe8585ff4a1cb8a37bf4350e73d36a7ab69e",
+      "heading_table": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/HEADING_TABLE.csv",
+      "heading_table_sha256": "993886f8497bb30367cd7bf73719230120d07d3ebea37c43d2a9ad625bfbe741",
+      "metrics_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/eval/OUTPUT/HEADING_METRICS.json",
+      "error_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "error_recorded_pin": null
+    },
+    {
+      "method_id": "RTKLIB_V0E",
+      "spec_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/eval/SPEC.json",
+      "spec_sha256": "4139b2a83d6a1e08462672b5ff39d7444161af03ad292e0bf64beccb603a0c42",
+      "heading_table": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/HEADING_TABLE.csv",
+      "heading_table_sha256": "157f12a3dda6e7db7b7fae955fd13725eec6ee6f6d2835919dcde8013cb52595",
+      "metrics_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/eval/OUTPUT/HEADING_METRICS.json",
+      "error_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "error_recorded_pin": null
+    },
+    {
+      "method_id": "RTKLIB_V1",
+      "spec_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/eval/SPEC.json",
+      "spec_sha256": "c250e28906a184a60a119b91a8dc11bef79363c6729f2036682af5628837fc6b",
+      "heading_table": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/HEADING_TABLE.csv",
+      "heading_table_sha256": "fdd6d2aecbfac0e21eac7c4810c6d1143f1537d5099e94fbef4c4e80d230726b",
+      "metrics_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/eval/OUTPUT/HEADING_METRICS.json",
+      "error_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "error_recorded_pin": null
+    },
+    {
+      "method_id": "RTKLIB_V2",
+      "spec_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/eval/SPEC.json",
+      "spec_sha256": "b0dd89f8160897479e4679f7494061209497f8ed51159df0ec70b296685df914",
+      "heading_table": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/HEADING_TABLE.csv",
+      "heading_table_sha256": "e67692bbb97bf4f2979d81a6b30317b8099f96456e5eef359c34b15c0635c796",
+      "metrics_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/eval/OUTPUT/HEADING_METRICS.json",
+      "error_path": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv",
+      "error_recorded_pin": null
+    }
+  ],
+  "v3_table": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/NATURAL_C00_ALL_CONFIGS.csv",
+  "data_mode": "real_raw_offline_heading_evaluation",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "trace_used_online": false,
+  "outdir": "<EXT_REPRO_ROOT>/evaluation/BY2H"
+}

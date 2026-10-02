@@ -1,0 +1,21 @@
+{
+  "schema": "ext_reproduction.heading_evaluation.v1",
+  "sequence_id": "BY2H",
+  "evaluation_status": "COMPLETED",
+  "plot_status": "COMPLETED_VISUAL_REVIEW_PENDING",
+  "evaluator_child_attempts": 1,
+  "evaluator_child_invocations": 1,
+  "parent_reference_opens": 0,
+  "automatic_retries": 0,
+  "new_native_calls": 0,
+  "data_mode": "real_raw_offline_heading_evaluation",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "preparation_commit": "1408772b530615a80cc163e915378c025a519f8b",
+  "started_unix": 1790949442.5539334,
+  "child_exit_code": 0,
+  "reference_hash_matched": true,
+  "actual_reference_open_count": 1,
+  "numeric_child_status": "NUMERICALLY_COMPLETED",
+  "finished_unix": 1790949446.2618573
+}
