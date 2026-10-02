@@ -1,1 +1,2 @@
 item_id,description,commit_sha,push_exit_code,remote_contains_commit,status
+DEF,固定V3顺序创新有效维度与RP事件候选定义,bf561d56838d405a323077d29ad8be9173012545,0,True,PUSHED_VERIFIED
