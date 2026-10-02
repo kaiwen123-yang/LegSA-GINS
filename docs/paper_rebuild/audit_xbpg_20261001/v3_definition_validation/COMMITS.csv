@@ -14,3 +14,4 @@ INHERITED_SCOPE,inherit original V3 contract and classify RP independence as opt
 N12_EVAL,report same-support N12 outcomes including D15 degradation,c7280d1f138cd05fa9fa45b5409c46f69902926e,0,True,PUSHED_VERIFIED
 N16_EVAL,report N16 same-support improvements and small adverse C00 changes,f03b54b2fd1eef69d1c6208ada1f2f557a00e2ef,0,True,PUSHED_VERIFIED
 EVENT_ENTRY,validate bounded event and covariance analysis with strict cache identity,291c6c6f87990430a07ad44882b92ed62337df12,0,True,PUSHED_VERIFIED
+N09_A1_NATIVE,retain optional RP extension outputs for A1 without altering GNSS or HV counts,9ff5ee2afe68b25e3b19518a635f490e4e8e5a92,0,True,PUSHED_VERIFIED

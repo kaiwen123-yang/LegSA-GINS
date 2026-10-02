@@ -19,18 +19,19 @@
 - N12_EVAL：report same-support N12 outcomes including D15 degradation；`c7280d1f138cd05fa9fa45b5409c46f69902926e`；PUSHED_VERIFIED。
 - N16_EVAL：report N16 same-support improvements and small adverse C00 changes；`f03b54b2fd1eef69d1c6208ada1f2f557a00e2ef`；PUSHED_VERIFIED。
 - EVENT_ENTRY：validate bounded event and covariance analysis with strict cache identity；`291c6c6f87990430a07ad44882b92ed62337df12`；PUSHED_VERIFIED。
+- N09_A1_NATIVE：retain optional RP extension outputs for A1 without altering GNSS or HV counts；`9ff5ee2afe68b25e3b19518a635f490e4e8e5a92`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N09_A1_NATIVE：retain optional RP extension outputs for A1 without altering GNSS or HV counts。
+BASELINE_REMAINING_EVAL：close all seven historical evaluation baselines without native reruns。
 
-A1两方法真实native完成，全窗RP接受各1269→1369，GNSS/HV/yaw计数保持，10输出存在且不同；198固定身份字段与access通过。仅作为可选能力扩展，具体事件时间支持/P/性能待后续核。累计真实native8，原基线0新增，失败重试0。
+剩余5baseline各一次冻结评价，143字段/转点NAV hash均与旧记录精确相符。七基线1001/1001，全部数值差0；全窗各56642支持，A1/A2固定半开窗3678历元另列新派生。当前evaluator/ref累计11，native本项0，失败重试0。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-原计划A2两方法负对照；剩余5baseline评价与有限事件分析。
+N09 C00/A1/A2各两候选按组评价并提交；最后一项A2 native与有限事件分析。
 
 ## 调用边界
 
