@@ -380,3 +380,58 @@ def test_causal_hold_never_backfills_before_first_native_valid():
     assert metrics["hold_last_valid"]["no_heading_epochs_before_first_valid"] == 2
     assert all(row["error_hold_deg"] == "" and row["hold_source_epoch_index"] == -1 for row in rows[:2])
     assert rows[2]["error_valid_deg"] == "15.0" and rows[3]["error_hold_deg"] == "15.0"
+
+
+def test_plot_display_wrap360_status_lanes_preserve_errors_and_large_baseline(tmp_path, monkeypatch):
+    # This fixture starts from a saved derived CSV. No evaluator/reference is
+    # invoked, even synthetically, for the display-only amendment.
+    out = tmp_path / "saved_results"; out.mkdir()
+    rows = []
+    for method in ev.METHODS:
+        for i in range(5):
+            rows.append({"method_id": method, "epoch_index": i, "t_rel_s": i * .2,
+                         "valid": int(i != 4), "ratio_fixed": int(i == 2) if method == "EXT03" else "",
+                         "native_body_yaw_deg": [-179, 179, -1, 1, ""][i],
+                         "reference_yaw_ned_deg": [181, 179, 359, 1, 2][i],
+                         "error_valid_deg": [20, -20, -179, 179, ""][i],
+                         "baseline_n_m": [4000, -.1, .1, .1, ""][i],
+                         "baseline_e_m": .2, "baseline_length_m": [5000, .35, .35, .35, ""][i]})
+    original = _csv(rows)
+    (out / "ERROR_SERIES.csv").write_bytes(original)
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.colors import to_hex
+    closed = []
+    original_close = plt.close
+    monkeypatch.setattr(plt, "close", lambda fig: closed.append(fig))
+    result = ev.plot_saved(out, "BY2")
+    assert result["status"] == "COMPLETED_VISUAL_REVIEW_PENDING"
+    figure = next(fig for fig in closed if hasattr(fig, "axes"))
+    try:
+        heading, error, state, baseline = figure.axes
+        for line in heading.lines[:3]:
+            y = line.get_ydata(); x = line.get_xdata()
+            assert y[np.isfinite(y)].tolist() == [181, 179, 359, 1]
+            assert np.isnan(x).sum() == 1  # only actual 359 -> 1 display wrap
+        assert heading.lines[3].get_ydata()[np.isfinite(heading.lines[3].get_ydata())].tolist() == [181, 179, 359, 1, 2]
+        for line in error.lines:
+            y = line.get_ydata()
+            assert y[np.isfinite(y)].tolist() == [20, -20, -179, 179]
+        for i, color in enumerate(("#0072b2", "#d55e00", "#009e73")):
+            invalid, valid, fixed = state.collections[3*i:3*i+3]
+            assert np.allclose(invalid.get_offsets()[:, 1], i - .16)
+            assert np.allclose(valid.get_offsets()[:, 1], i)
+            assert to_hex(invalid.get_edgecolors()[0]) == "#7f7f7f"
+            assert to_hex(valid.get_facecolors()[0]) == color
+            if i == 2:
+                assert np.allclose(fixed.get_offsets()[:, 1], i + .16)
+                assert to_hex(fixed.get_edgecolors()[0]) == "#000000"
+        assert max(float(np.nanmax(line.get_ydata())) for line in baseline.lines) == 5000
+        assert baseline.get_ylim()[1] > 5000
+        assert (out / "ERROR_SERIES.csv").read_bytes() == original
+        assert result["source_sha256"] == ev.digest(original)
+        assert result["reference_opens"] == result["evaluator_invocations"] == 0
+        assert result["plot_implementation"] == "WRAP360_STATUS_LANES_V2"
+    finally:
+        original_close(figure)

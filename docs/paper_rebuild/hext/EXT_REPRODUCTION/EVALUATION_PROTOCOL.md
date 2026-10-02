@@ -250,3 +250,47 @@ V3 只引用已收集 33 行 `NATURAL_C00_ALL_CONFIGS.csv` 中该序列原 F04/v
   "no_git_mutations": true
 }
 ```
+
+## 真实 BY2 图查看后的 display-only amendment
+
+root 完成 BY2 真实评价并打开 attempt_001 图后指出：原 method yaw 的 −180..180 表示与 reference 的 0..360 表示在 heading 面板不一致；状态图把同一方法各状态放在同一 y，密集后难以区分。本次只修改 `plot_saved`，不修改评价、误差、指标、共同支撑或保存的 ERROR_SERIES。
+
+heading 面板在内存中将 native/reference 两列显示值统一 `value % 360.0`，然后沿用真实 gap/缺值断线及大于 180° 的 wrap 跳变断线。原 error 仍按原 −180..180 误差显示，不做该模变换。状态行以方法中心为基准：invalid 为灰色 x、偏移 −0.16；native valid 为方法色点、偏移 0；ratio-fixed 为黑色竖杠、偏移 +0.16。relative-baseline 的大浮点值完整保留，不裁剪。新图回执标识为 `WRAP360_STATUS_LANES_V2`。
+
+已有 attempt_001、已复制公开图与旧评价文件保留。root 将提交后显式执行各序列 `--plot-only`；本 worker 没有运行任何真实评价或真实绘图。新版只在视觉层替代旧图，数字不被重新计算。下列定向测试从临时生成的保存 CSV 开始，不调用 evaluator，也不读取任何真实或合成 reference。
+
+```json
+{
+  "amendment": "WRAP360_STATUS_LANES_V2",
+  "attempt": 1,
+  "timestamp_utc": "2026-10-02T14:00:58.951138+00:00",
+  "argv": [
+    "python3",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "--disable-warnings",
+    "-rA",
+    "tests/paper_rebuild/test_ext_reproduction_evaluation.py",
+    "-k",
+    "plot_display_wrap360_status or breaks_preserve"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 1.447752867003146,
+  "non_plot_module_ast_identical_to_HEAD": true,
+  "data_mode": "synthetic_saved_series_plot_test",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "real_native_processes": 0,
+  "real_evaluator_processes": 0,
+  "real_reference_reads": 0,
+  "real_plot_calls": 0,
+  "synthetic_evaluator_processes": 0,
+  "synthetic_reference_reads": 0,
+  "source_sha256": "4032c5f78df9dd9947a7b8e7dd15b20c97bce47f4ae1d6866d92d637129a3186",
+  "test_sha256": "fcfd4d03a85ccf97b92053a4d2980bdbfec02370186efdd5bf22295fa7b82012",
+  "stdout": "============================= test session starts ==============================\nplatform linux -- Python 3.10.12, pytest-6.2.5, py-1.10.0, pluggy-0.13.0\nrootdir: <CODE_ROOT>, configfile: pyproject.toml\nplugins: ament-flake8-0.12.15, ament-pep257-0.12.15, launch-testing-ros-0.19.13, ament-xmllint-0.12.15, launch-testing-1.0.14, launch-pytest-1.0.14, ament-lint-0.12.15, ament-copyright-0.12.15, colcon-core-0.20.1, cov-3.0.0\ncollected 35 items / 33 deselected / 2 selected\n\ntests/paper_rebuild/test_ext_reproduction_evaluation.py ..               [100%]\n\n==================================== PASSES ====================================\n__ test_plot_display_wrap360_status_lanes_preserve_errors_and_large_baseline ___\n----------------------------- Captured stderr call -----------------------------\nIn <PYTHON_USER_SITE>/matplotlib/mpl-data/stylelib/classic.mplstyle: 'parseString' deprecated - use 'parse_string'\nIn <PYTHON_USER_SITE>/matplotlib/mpl-data/stylelib/classic.mplstyle: 'resetCache' deprecated - use 'reset_cache'\nIn <PYTHON_USER_SITE>/matplotlib/mpl-data/stylelib/classic.mplstyle: 'parseString' deprecated - use 'parse_string'\nIn <PYTHON_USER_SITE>/matplotlib/mpl-data/stylelib/classic.mplstyle: 'resetCache' deprecated - use 'reset_cache'\nIn <PYTHON_USER_SITE>/matplotlib/mpl-data/stylelib/classic.mplstyle: 'parseString' deprecated - use 'parse_string'\nIn <PYTHON_USER_SITE>/matplotlib/mpl-data/stylelib/classic.mplstyle: 'resetCache' deprecated - use 'reset_cache'\nIn <PYTHON_USER_SITE>/matplotlib/mpl-data/stylelib/classic.mplstyle: 'parseString' deprecated - use 'parse_string'\nIn <PYTHON_USER_SITE>/matplotlib/mpl-data/stylelib/classic.mplstyle: 'resetCache' deprecated - use 'reset_cache'\n=========================== short test summary info ============================\nPASSED tests/paper_rebuild/test_ext_reproduction_evaluation.py::test_breaks_preserve_invalid_epochs_wrap_jumps_and_physical_time_gaps\nPASSED tests/paper_rebuild/test_ext_reproduction_evaluation.py::test_plot_display_wrap360_status_lanes_preserve_errors_and_large_baseline\n================ 2 passed, 33 deselected, 14 warnings in 1.20s =================\n",
+  "stderr": ""
+}
+```

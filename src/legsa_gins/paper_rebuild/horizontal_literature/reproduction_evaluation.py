@@ -658,28 +658,36 @@ def plot_saved(out, sequence):
         fig, axes = plt.subplots(4, 1, figsize=(10, 11), sharex=True, constrained_layout=True)
         colors = ("#0072B2", "#D55E00", "#009E73")
         grouped = {method: [row for row in rows if row["method_id"] == method] for method in METHODS}
+        display = {
+            method: [{**row, **{target: "" if number(row.get(source)) is None else number(row[source]) % 360.0
+                                for source, target in (("native_body_yaw_deg", "display_native_yaw_deg"),
+                                                       ("reference_yaw_ned_deg", "display_reference_yaw_deg"))}}
+                     for row in subset]
+            for method, subset in grouped.items()
+        }
         for i, (method, color) in enumerate(zip(METHODS, colors, strict=True)):
             subset = grouped[method]
-            axes[0].plot(*broken_line(subset, "native_body_yaw_deg", valid_field="valid", wrap=True), color=color, lw=.8,
+            axes[0].plot(*broken_line(display[method], "display_native_yaw_deg", valid_field="valid", wrap=True), color=color, lw=.8,
                          marker=".", markersize=1.7, label=method)
             axes[1].plot(*broken_line(subset, "error_valid_deg", valid_field="valid", wrap=True), color=color, lw=.8,
                          marker=".", markersize=1.7, label=method)
-            for label, marker, choose in (("invalid", "x", lambda r: r["valid"] == "0"),
-                                           ("native valid", ".", lambda r: r["valid"] == "1" and r.get("ratio_fixed") != "1"),
-                                           ("ratio fixed", "|", lambda r: r["valid"] == "1" and r.get("ratio_fixed") == "1")):
+            for label, marker, state_color, offset, choose in (
+                    ("invalid", "x", "#7f7f7f", -.16, lambda r: r["valid"] == "0"),
+                    ("native valid", ".", color, 0., lambda r: r["valid"] == "1" and r.get("ratio_fixed") != "1"),
+                    ("ratio fixed", "|", "black", .16, lambda r: r["valid"] == "1" and r.get("ratio_fixed") == "1")):
                 chosen = [row for row in subset if choose(row)]
-                axes[2].scatter([float(row["t_rel_s"]) for row in chosen], [i] * len(chosen), s=8, marker=marker,
-                                c=color, alpha=.6, label=label if i == 2 else None)
+                axes[2].scatter([float(row["t_rel_s"]) for row in chosen], [i + offset] * len(chosen),
+                                s=10, marker=marker, c=state_color, alpha=.8, label=label if i == 2 else None)
             for column, style, suffix in (("baseline_n_m", "-", "N"), ("baseline_e_m", "--", "E"),
                                           ("baseline_length_m", ":", "length")):
                 axes[3].plot(*broken_line(subset, column, valid_field="valid"), color=color, ls=style, lw=.8, marker=".", markersize=1.7,
                              label=method + " " + suffix)
-        axes[0].plot(*broken_line(grouped[METHODS[0]], "reference_yaw_ned_deg", wrap=True), c="black", lw=.65, label="Reference")
+        axes[0].plot(*broken_line(display[METHODS[0]], "display_reference_yaw_deg", wrap=True), c="black", lw=.65, label="Reference")
         for axis, letter in zip(axes, "abcd", strict=True):
             axis.text(.01, .94, "(" + letter + ")", transform=axis.transAxes, va="top")
             axis.grid(alpha=.2)
         axes[0].set_ylabel("Body yaw (deg)"); axes[1].set_ylabel("Yaw error (deg)")
-        axes[2].set_yticks(range(3)); axes[2].set_yticklabels(METHODS)
+        axes[2].set_yticks(range(3)); axes[2].set_yticklabels(METHODS); axes[2].set_ylim(-.4, 2.4)
         axes[3].set_ylabel("Relative baseline (m)"); axes[3].set_xlabel("Time from sequence base (s)")
         axes[0].legend(loc="upper center", bbox_to_anchor=(.5, 1.20), ncol=4, fontsize=8)
         axes[2].legend(loc="upper center", bbox_to_anchor=(.5, 1.20), ncol=3, fontsize=8)
@@ -689,7 +697,10 @@ def plot_saved(out, sequence):
         plt.close(fig)
         receipt.update(status="COMPLETED_VISUAL_REVIEW_PENDING", outputs=["HEADING_COMPARISON.png", "HEADING_COMPARISON.pdf"],
                        png_width_pixels=4200, reference_label_note="Fixposition-derived reference; not independent truth",
-                       plot_gap_rule_seconds=PLOT_GAP_SECONDS)
+                       plot_gap_rule_seconds=PLOT_GAP_SECONDS, plot_implementation="WRAP360_STATUS_LANES_V2",
+                       heading_display_rule="native/reference wrap360 then gap/wrap breaks; display only; errors unchanged",
+                       status_offsets={"invalid": -.16, "native_valid": 0., "ratio_fixed": .16},
+                       baseline_display_rule="original finite relative-baseline values; no clipping")
     except Exception as exc:
         receipt.update(status="PLOT_FAILED_NUMERIC_RESULTS_PRESERVED", failure_type=type(exc).__name__)
     write_json(target / "PLOT_RECEIPT.json", receipt)

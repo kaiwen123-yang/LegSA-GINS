@@ -25,3 +25,5 @@
 公开ERROR_SERIES.csv保留三方法所有窗口历元，包括失败；REUSED_ERROR_SERIES.csv保存所读旧误差。来源与逐个hash在SOURCE_FILES.csv。重型整数/完整状态仍在<EXT_REPRO_ROOT>/runs/BY2__<METHOD>__RAW_REPRO_V1/EPOCH_EVIDENCE.jsonl.gz。
 
 图attempt_001已实际打开；发现heading显示值域不统一及状态标记过密，记为需要显示更正。数字不受影响。只对已保存误差生成新图版本，不重读reference、不重评价，最终采用图由后续VISUAL_REVIEW登记。
+
+现采用[修订连续图](figures/attempt_002/HEADING_COMPARISON.png)，已实际打开：统一显示角域、状态分层、断线及异常长度保留。它只读已存ERROR_SERIES；原attempt_001留隔离根，数字与原评价回执未改。
