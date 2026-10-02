@@ -27,18 +27,19 @@
 - B01：separate historical protocol comparisons from formal V3 runs；`7c7b63fafac0c1f2dd8861bfd5d2df31e2d9f1bd`；PUSHED_VERIFIED。
 - B02：explain frozen candidate sensitivity identities and tails；`bf244f246be68c93af32c30185329279ae191b71`；PUSHED_VERIFIED。
 - B03：explain external comparison classes and retained coverage；`e1ea87c9e33a6a5ad04efd735368444abad0ee64`；PUSHED_VERIFIED。
+- G01：interpret all ten existing V3 stage figures；`41b7eacd5925e15072dff288ed9f3e0acaa97ea5`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-G01：interpret all ten existing V3 stage figures。
+G02：interpret ten paper figures and preserve historical pins。
 
-本轮只读planner已逐张打开10个阶段PNG；保存55条精确来源关系和10条目视回执。解释实际横纵轴/颜色/有限样本/失败，MFIG02种子范围非CI、MFIG05失败空白非零、MFIG06直接CORE计数非因果、热图mean/white含义。未渲染或反推图数值；三个导出格式不重复实验。
+实际阅读Fig01-Fig08/SFig01/SFig02十PNG，49图源关系与10目视回执保存。Fig07为HX05图非同名阶段图；Fig06为全窗H，Fig08上须P95非CI；Fig01b实拍占位仍缺。两个历史AGENTS/FIGURE_MAP recorded/current SHA并列，旧bytes未取得不臆测差异；104图关系48直接源均存在，1065总关系不冒称全数值PASS。无重绘。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-论文包10图逐图解释，核对历史pin差异边界。
+保留时序全量回执闭合与不能复算项说明。
 
 ## 调用边界
 
