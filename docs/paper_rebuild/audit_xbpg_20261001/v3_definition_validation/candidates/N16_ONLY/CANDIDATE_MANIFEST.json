@@ -1,0 +1,57 @@
+{
+  "candidate": "N16_ONLY",
+  "source_base": "<OBSERVED_SOURCE>",
+  "source_copy": "<VALIDATION_BUILD_ROOT>/source_N16_ONLY",
+  "source_copy_files": 156,
+  "source_copy_bytes": 751226,
+  "copy_identity": "ALL_REGULAR_FILES_MATCH_BEFORE_PATCH",
+  "symlinks": "NONE; rejected if present",
+  "candidate_patch": "N16_ONLY.patch",
+  "candidate_patch_sha256": "8ab05c50390cf07c9fd092e4c9b40773668a0495393f7d78746a185e71205513",
+  "changed_paths": [
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/source_aware/measurement_source.hpp",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_observer.cpp",
+    "cpp/legsa_v23_port_core/src/source_aware/source_aware_policy.cpp"
+  ],
+  "public_observation_layer": "INSTALLED_SEPARATE_PATCH",
+  "std_active_axes_contract": "default N/E/D active; actual horizontal_2d N/E only; finiteStd(empty)=false; std values unchanged",
+  "preparation_attempts": [
+    {
+      "attempt": 1,
+      "status": "STOPPED_BEFORE_COPY",
+      "reason": "one-off assertion expected 150 rg-visible files; actual source also has six .gitkeep files",
+      "mutations": 0,
+      "native_calls": 0
+    },
+    {
+      "attempt": 2,
+      "status": "SOURCE_COPY_AND_PATCH_COMPLETE",
+      "file_count_policy": "all regular files including .gitkeep; no arbitrary expected count"
+    }
+  ],
+  "data_mode": "synthetic_fixture_only",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "new_real_native_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_provider_calls": 0,
+  "common_observation_patch_sha256": "6437ed04f1c687593e581bb63d4f18bf589250179f6ad62de9690a2533f79469",
+  "common_install_result": {
+    "candidate_id": "N16_ONLY",
+    "source_root": "<VALIDATION_BUILD_ROOT>/source_N16_ONLY",
+    "new_diagnostic_header_sha256": "65d30fb58ce9fe6e560360a7635e79539287d06aa7002c86e2bac2138b1c83e6",
+    "scientific_matrix_modified": false,
+    "source_writes": 3,
+    "native_calls": 0,
+    "evaluator_calls": 0
+  },
+  "status": "IMPLEMENTED_BUILD_AND_SYNTHETIC_TESTS_COMPLETE",
+  "ready_file": "READY.json",
+  "source_manifest_sha256": "12c158009229755df33a39c219cfcf340b28553b849bdf4b5fca96b440793f70",
+  "observed_source_after_check": "156/156 original file hashes unchanged",
+  "native_fixture_processes": 3,
+  "synthetic_fixture_scenario_executions": 408,
+  "synthetic_fixture_failed_checks": 0,
+  "common_target_safety": "3 targets/parents non-symlink and resolved inside candidate; installer safety refinement needs no reinstall"
+}

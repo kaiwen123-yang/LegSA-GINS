@@ -1,0 +1,50 @@
+{
+  "candidate": "N16_ONLY",
+  "compiler": "GCC 11.4.0",
+  "standard": "C++17",
+  "release_flags": "-O3 -DNDEBUG",
+  "parallel_jobs": 2,
+  "commands": [
+    {
+      "command": [
+        "cmake",
+        "-S",
+        "<VALIDATION_BUILD_ROOT>/source_N16_ONLY/cpp",
+        "-B",
+        "<VALIDATION_BUILD_ROOT>/build_N16_ONLY",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_COMPILER=g++",
+        "-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.5617220890017052,
+      "log": "<VALIDATION_BUILD_ROOT>/build_N16_ONLY/configure.log"
+    },
+    {
+      "command": [
+        "cmake",
+        "--build",
+        "<VALIDATION_BUILD_ROOT>/build_N16_ONLY",
+        "--target",
+        "legsa_v23_port_core_demo",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 10.403327507003269,
+      "log": "<VALIDATION_BUILD_ROOT>/build_N16_ONLY/build.log"
+    }
+  ],
+  "native_fixture_processes": 0,
+  "real_native_processes": 0,
+  "status": "BUILD_COMPLETE_NOT_EXECUTED",
+  "legsa_v23_port_core_demo": {
+    "path": "<VALIDATION_BUILD_ROOT>/build_N16_ONLY/legsa_v23_port_core_demo",
+    "bytes": 902360,
+    "sha256": "36ec64659f58901600ecd59066098ab41aa4d4115cbf4acf52f612ef7056ee4e"
+  },
+  "liblegsa_v23_port_core.a": {
+    "path": "<VALIDATION_BUILD_ROOT>/build_N16_ONLY/liblegsa_v23_port_core.a",
+    "bytes": 1797700,
+    "sha256": "8151e1019a1f7b34169ad48726ecc11cf061238ffa90e36af99f531bd154d6d1"
+  }
+}
