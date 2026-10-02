@@ -16,18 +16,19 @@
 - N09_C00_NATIVE：verify N09 normal-GNSS controls reproduce ten scientific outputs；`556b8d0a8df4ae6ab5a150ac009eeed1b32edbbf`；PUSHED_VERIFIED。
 - BASELINE_C00_D15_EVAL：reproduce C00 and D15 frozen evaluation with exact recorded values；`e5d5b8ee0b7bc5bc941b373d60c3c389e8fd0ccb`；PUSHED_VERIFIED。
 - INHERITED_SCOPE：inherit original V3 contract and classify RP independence as optional extension；`f4bf6d30f47312a159d7874dbf4681d1a21963b0`；PUSHED_VERIFIED。
+- N12_EVAL：report same-support N12 outcomes including D15 degradation；`c7280d1f138cd05fa9fa45b5409c46f69902926e`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N12_EVAL：report same-support N12 outcomes including D15 degradation。
+N16_EVAL：report N16 same-support improvements and small adverse C00 changes。
 
-N12两例同口径评价完成，各56642共同历元、17项评价门通过。C00 H仅下降0.0000157007m，up/yaw微升；D15 H 3.5569029→3.5680833m、yaw 2.6986089→3.5539507deg，五项RMSE均升高。实际evaluator新增2累计4；无native新增/重试。必要计算契约与是否合入候选分开，不以性能更差推翻推导或丢弃结果。
+两例各56642共同历元。C00 H减少0.000279725m，yaw减少0.000189258deg，但Up/pitch微升；D15 H减少0.00295252m、yaw减少0.0376287deg，五项RMSE均下降。保留完整精度、支持及负面变化，不把小改善当普遍收益或必然合入依据。实际evaluator新增2累计6，无native新增/重试。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-N16原定两例离线评价；N09 A1/F04继续；事件与P核对。
+提交事件分析工具并核N12/N16真实R、首分叉与完整P；完成N09原队列。
 
 ## 调用边界
 

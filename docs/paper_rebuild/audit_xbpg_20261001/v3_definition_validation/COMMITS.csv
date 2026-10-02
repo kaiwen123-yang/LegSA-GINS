@@ -11,3 +11,4 @@ EVAL_ENTRY,bind frozen singleton evaluation and baseline reproduction gates,af74
 N09_C00_NATIVE,verify N09 normal-GNSS controls reproduce ten scientific outputs,556b8d0a8df4ae6ab5a150ac009eeed1b32edbbf,0,True,PUSHED_VERIFIED
 BASELINE_C00_D15_EVAL,reproduce C00 and D15 frozen evaluation with exact recorded values,e5d5b8ee0b7bc5bc941b373d60c3c389e8fd0ccb,0,True,PUSHED_VERIFIED
 INHERITED_SCOPE,inherit original V3 contract and classify RP independence as optional extension,f4bf6d30f47312a159d7874dbf4681d1a21963b0,0,True,PUSHED_VERIFIED
+N12_EVAL,report same-support N12 outcomes including D15 degradation,c7280d1f138cd05fa9fa45b5409c46f69902926e,0,True,PUSHED_VERIFIED
