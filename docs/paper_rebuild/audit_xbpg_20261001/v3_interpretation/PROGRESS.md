@@ -29,18 +29,19 @@
 - B03：explain external comparison classes and retained coverage；`e1ea87c9e33a6a5ad04efd735368444abad0ee64`；PUSHED_VERIFIED。
 - G01：interpret all ten existing V3 stage figures；`41b7eacd5925e15072dff288ed9f3e0acaa97ea5`；PUSHED_VERIFIED。
 - G02：interpret ten paper figures and preserve historical pins；`415fb2e9582e1d16ae65d0e4041e72a523573c6c`；PUSHED_VERIFIED。
+- S01：close all retained-series checks with explicit limits；`f6f0622bc99a97092bcdf6b9daaceab2ffdee7e7`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-S01：close all retained-series checks with explicit limits。
+I01：map manuscript claims and known issues to actual results。
 
-16组回执闭合2308error+1matched/1154native，131266946数据行，各主扫描1次到EOF/CRC，hash2309 MATCH。381501数值MATCH、332NULL、20777不可复算、0差异/损坏；逐文件读深度/计数/来源可查。新汇总保留matched原reason并澄清冻结范围；D22/D39局部窗口缺口与已释放载荷继续列明。合并仅读本轮CSV/JSON，未重开gzip。独立validation=true、科学调用0。
+19条手稿/旧解释说法与精确源行字段关联，13条旧问题映射正式适用方法、工况、表图、缺失变量。当前作者已有的selflimits保留；确认N00157及N00149/N00199由已舍入DOC补精度的展示差、缺失511配对分母等。N09/N12/N11/N15/N16/倾斜近似与控制问题不从误差或累计counter推断真实触发；未修复/重放/新诊断。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-将原手稿说法及旧代码问题关联到真实结果，保持触发未核实。
+最终阅读入口、综合结论和Git/diff边界验证后停止本阶段。
 
 ## 调用边界
 
