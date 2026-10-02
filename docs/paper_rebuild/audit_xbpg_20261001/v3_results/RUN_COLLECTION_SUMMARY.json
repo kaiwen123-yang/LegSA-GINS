@@ -1,0 +1,233 @@
+{
+  "schema": "V3_RESULTS_READONLY_COLLECTION_V1",
+  "phase": "ledgers",
+  "data_mode": "existing_results_descriptive_collection",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "data_mode_note": "Collection itself makes no synthetic data. Scientific source rows preserve their original real/semisynthetic flags.",
+  "native_calls": 0,
+  "provider_generator_calls": 0,
+  "evaluator_calls": 0,
+  "aggregate_controller_calls": 0,
+  "raw_reference_payload_opens": 0,
+  "new_performance_statistics": 0,
+  "native_records_read": 6468,
+  "evaluation_records_read": 12936,
+  "registry_records_read": 6468,
+  "native_unique_ids": 6468,
+  "evaluation_unique_slots": 12936,
+  "native_by_domain": {
+    "ADDENDUM": 495,
+    "CORE": 5951,
+    "SEQUENCE": 22
+  },
+  "native_by_status": {
+    "COMPLETED": 6185,
+    "ALGORITHM_FAILURE_DIVERGED": 193,
+    "ALGORITHM_FAILURE_NO_VALID_HEADING_INPUT": 90
+  },
+  "native_by_data_mode": {
+    "semisynthetic": 6435,
+    "real_clean": 33
+  },
+  "evaluation_by_status": {
+    "COMPLETED": 12370,
+    "NOT_RUN_ALGORITHM_FAILURE": 566
+  },
+  "actual_evaluator_invocations_recorded": 12370,
+  "missing_native_ids": [],
+  "extra_native_ids": [],
+  "missing_evaluation_slots": [],
+  "extra_evaluation_slots": [],
+  "duplicate_native_ids": [],
+  "duplicate_registry_ids": [],
+  "duplicate_evaluation_slots": [],
+  "registry_identity_difference_count": 0,
+  "individual_ledger_difference_count": 0,
+  "file_index_rows": 10,
+  "file_read_status_counts": {
+    "READ_COMPLETE_JSON": 7,
+    "READ_COMPLETE_CSV": 3
+  },
+  "file_retention_status_counts": {
+    "PRESENT": 10
+  },
+  "file_category_read_counts": {
+    "final_evaluation_ledger": {
+      "READ_COMPLETE_JSON": 1
+    },
+    "final_native_ledger": {
+      "READ_COMPLETE_JSON": 1
+    },
+    "frozen_registry_gate": {
+      "READ_COMPLETE_JSON": 2
+    },
+    "frozen_run_registry": {
+      "READ_COMPLETE_JSON": 1
+    },
+    "historical_storage_record": {
+      "READ_COMPLETE_CSV": 2
+    },
+    "retention_index": {
+      "READ_COMPLETE_CSV": 1
+    },
+    "storage_policy": {
+      "READ_COMPLETE_JSON": 2
+    }
+  },
+  "payload_status_counts": {},
+  "outputs": [
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/EVALUATION_ADDENDUM_v2.csv",
+      "row_count": 495,
+      "column_count": 181,
+      "size_bytes": 1977561
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/EVALUATION_ADDENDUM_v3.csv",
+      "row_count": 495,
+      "column_count": 181,
+      "size_bytes": 1984838
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/EVALUATION_CORE_v2.csv",
+      "row_count": 5951,
+      "column_count": 181,
+      "size_bytes": 23659851
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/EVALUATION_CORE_v3.csv",
+      "row_count": 5951,
+      "column_count": 181,
+      "size_bytes": 23777206
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/EVALUATION_SEQUENCE_v2.csv",
+      "row_count": 22,
+      "column_count": 181,
+      "size_bytes": 92833
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/EVALUATION_SEQUENCE_v3.csv",
+      "row_count": 22,
+      "column_count": 181,
+      "size_bytes": 93424
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/BODY_FRAME_BIAS_ADDENDUM_v2.csv",
+      "row_count": 495,
+      "column_count": 62,
+      "size_bytes": 826338
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/BODY_FRAME_BIAS_ADDENDUM_v3.csv",
+      "row_count": 495,
+      "column_count": 62,
+      "size_bytes": 829541
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/BODY_FRAME_BIAS_CORE_v2.csv",
+      "row_count": 5951,
+      "column_count": 62,
+      "size_bytes": 9737576
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/BODY_FRAME_BIAS_CORE_v3.csv",
+      "row_count": 5951,
+      "column_count": 62,
+      "size_bytes": 9785674
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/BODY_FRAME_BIAS_SEQUENCE_v2.csv",
+      "row_count": 22,
+      "column_count": 62,
+      "size_bytes": 38827
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/BODY_FRAME_BIAS_SEQUENCE_v3.csv",
+      "row_count": 22,
+      "column_count": 62,
+      "size_bytes": 39020
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/EVALUATION_TRANSFORM_ADDENDUM_v2.csv",
+      "row_count": 495,
+      "column_count": 28,
+      "size_bytes": 236682
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/EVALUATION_TRANSFORM_ADDENDUM_v3.csv",
+      "row_count": 495,
+      "column_count": 30,
+      "size_bytes": 268392
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/EVALUATION_TRANSFORM_CORE_v2.csv",
+      "row_count": 5951,
+      "column_count": 28,
+      "size_bytes": 2791163
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/EVALUATION_TRANSFORM_CORE_v3.csv",
+      "row_count": 5951,
+      "column_count": 30,
+      "size_bytes": 3163567
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/EVALUATION_TRANSFORM_SEQUENCE_v2.csv",
+      "row_count": 22,
+      "column_count": 28,
+      "size_bytes": 11536
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/EVALUATION_TRANSFORM_SEQUENCE_v3.csv",
+      "row_count": 22,
+      "column_count": 30,
+      "size_bytes": 13062
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/NATIVE_COUNTERS.csv",
+      "row_count": 6468,
+      "column_count": 93,
+      "size_bytes": 15172434
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/V3_RUN_RESULT_INDEX.csv",
+      "row_count": 6468,
+      "column_count": 100,
+      "size_bytes": 11506383
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/FAILURE_RUNS.csv",
+      "row_count": 283,
+      "column_count": 100,
+      "size_bytes": 528913
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/NATURAL_C00_ALL_CONFIGS.csv",
+      "row_count": 33,
+      "column_count": 100,
+      "size_bytes": 60156
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/RUN_RESULT_FILES.csv",
+      "row_count": 10,
+      "column_count": 19,
+      "size_bytes": 6191
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/REGISTRY_IDENTITY_DIFFERENCES.csv",
+      "row_count": 0,
+      "column_count": 4,
+      "size_bytes": 41
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_results/run_statistics/INDIVIDUAL_LEDGER_DIFFERENCES.csv",
+      "row_count": 0,
+      "column_count": 7,
+      "size_bytes": 55
+    }
+  ],
+  "hash_policy": "recorded_sha256 is copied from historical evidence; verified_sha256 is calculated only over bytes read in this invocation",
+  "large_payload_read_boundary": "NAV/STD are not reconstructed; existing error_series/matched payloads are header-only reads; existing result JSON and tables are fully read"
+}

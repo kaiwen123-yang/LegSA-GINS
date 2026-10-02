@@ -1,0 +1,17 @@
+# Protocol V3 per-run collection
+
+The run index has one row per physical native identity, with separate v3 and v2 evaluation columns. It does not count F03/A02 or F04/A01 aliases twice. BY2 C00 remains inside CORE; the natural-sequence view selects those 11 rows plus the 22 SEQUENCE rows.
+
+`run_statistics/EVALUATION_{CORE,SEQUENCE,ADDENDUM}_{v3,v2}.csv` contains every existing evaluation row, including the non-invoked failure slots, with all original scalar metric names and values. `source_path`, `source_row_key`, and the zero-based JSON pointer identify each original cell; a column name appends directly to that pointer. JSON floats use Decimal during reading, so metric decimal tokens are not rounded through binary floating point. Boolean tokens remain true/false, null remains null, and `__FIELD_ABSENT__` means the source never had that field. Blank original strings stay blank. The smaller run index uses unknown for absent descriptive fields.
+
+The only portable path transformation is an exact local-root alias replacement. `raw_source_hashes` cells retain exact pointers to the original JSON rather than repeating unnecessary device-specific raw filenames. Nested provider hashes retain their original JSON values. `BODY_FRAME_BIAS_*`, `EVALUATION_TRANSFORM_*`, and `NATIVE_COUNTERS.csv` preserve all existing associated numerical fields without calculation.
+
+The top-level PROTOCOL_V3 identity, config hash, code commit and native status are current-run fields. `source_registry_row` contains inherited preparation identities and historical fields; its old `terminal_status` or `runtime_config_hash` is not the V3 terminal or V3 config hash. Its exact source pointer is retained in the index. `case_meta` preserves registered duration, seed and support windows; unknown values are never filled with zero.
+
+`RUN_RESULT_FILES.csv` records the files actually read and the relevant payload paths named by each retained archive receipt. These archive roots are retained directories, not ZIP files. Gzip headers demonstrate current accessibility of those particular payloads, not a full payload read. Error-series release and full NAV/STD omission use explicit discard/omission receipts. Missing expected retained files remain EXPECTED_NOT_FOUND. Original strace payloads are metadata-only; retained audit JSON is fully read. No raw/reference input is opened.
+
+Every existing final result JSON, native summary, manifest, runtime config, evaluator summary, capture and access-audit file encountered through the authoritative per-slot receipts is read in full in phase `full`. Failures are retained even when NAV, STD, metrics, or an evaluator child were never generated. Sparse NAV and matched trajectories are separate categories; a matched trajectory is never relabelled as full NAV. `NOT_REGISTERED_FOR_THIS_SLOT` means no such member is in the actual slot receipt, not a claim that an undocumented copy cannot exist elsewhere.
+
+`REGISTRY_IDENTITY_DIFFERENCES.csv` and `INDIVIDUAL_LEDGER_DIFFERENCES.csv` preserve disagreements rather than choosing a source by timestamp or filename. The summary states exact checked counts and any missing slots. Hashes copied from existing evidence and hashes calculated during this collection are separate columns. Raw result payloads remain in place.
+
+Current phase: ledgers. Scientific verification, mathematical review, defect diagnosis, repair, replay, evaluator execution, aggregate execution and performance-statistic recomputation were not performed.
