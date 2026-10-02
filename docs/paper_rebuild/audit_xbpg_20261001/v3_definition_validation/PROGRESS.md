@@ -27,18 +27,19 @@
 - N09_A2_EVAL：close all seventeen evaluations with unchanged A2 controls and explicit accounting；`a42059a36bfa44bdf6b6fea079574965288ecb64`；PUSHED_VERIFIED。
 - CASE_VIEW：link all ten candidate outcomes and fixed windows without rounding source values；`670443f9252ff74d6ed843ed275cd1a938d1613b`；PUSHED_VERIFIED。
 - CASE_VIEW_REVIEW：enforce identical time support before paired metric subtraction；`a321f4092bd44ea9a994565ac61a99e8a2016aff`；PUSHED_VERIFIED。
+- N12_EVENTS：connect conditional innovation to actual R state divergence and one yaw rejection；`4a250c438298755bca6a5fbc0188e468ab68d1eb`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N12_EVENTS：connect conditional innovation to actual R state divergence and one yaw rejection。
+N09_C00_EVENTS：verify normal-GNSS event states remain exact under optional RP scheduling。
 
-四流各完整一次，31723 SA核对通过。C00/D15实际R精确差1182/2112（超容差980/2112），接受变化0/1；首RD更新和共同IMU43状态分叉已定位。D15一次原接受→候选原yaw硬门拒绝。全量缓存P分组证实scale零对角，正定前置不满足，不放宽门。此项native/eval0，非旧影子次数。
+C00两方法各8214测量键、56642共同IMU全精确相同，无接受/R/dx/状态首差异，无RP-only尝试。新全文3流1344150行，F04旧baseline仅复用完成cache；没有重复原JSONL读取。native/eval本项0，P正定先行门保持原非通过状态。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-N16同批真实事件；N09 C00/A1/A2事件并行收尾，最后少量图与三候选裁定。
+N16两候选、N09 A1/A2事件；P小快照补注、三张真实图及最终裁定。
 
 ## 调用边界
 

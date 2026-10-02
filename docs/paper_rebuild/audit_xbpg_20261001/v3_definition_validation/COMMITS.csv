@@ -22,3 +22,4 @@ N09_A1_EVAL,report optional RP A1 horizontal gains and vertical losses on fixed 
 N09_A2_EVAL,close all seventeen evaluations with unchanged A2 controls and explicit accounting,a42059a36bfa44bdf6b6fea079574965288ecb64,0,True,PUSHED_VERIFIED
 CASE_VIEW,link all ten candidate outcomes and fixed windows without rounding source values,670443f9252ff74d6ed843ed275cd1a938d1613b,0,True,PUSHED_VERIFIED
 CASE_VIEW_REVIEW,enforce identical time support before paired metric subtraction,a321f4092bd44ea9a994565ac61a99e8a2016aff,0,True,PUSHED_VERIFIED
+N12_EVENTS,connect conditional innovation to actual R state divergence and one yaw rejection,4a250c438298755bca6a5fbc0188e468ab68d1eb,0,True,PUSHED_VERIFIED
