@@ -14,18 +14,19 @@
 - C02：explain sampling and dropout cases across all methods；`3d17be52f0401b44e136eaa22d235f48850a72b3`；PUSHED_VERIFIED。
 - C03：explain position_value results and retained time support；`6e85c769b015bf3a97f557fda4ba202408d66c08`；PUSHED_VERIFIED。
 - C04：explain position_std_status results and retained time support；`142b0325cd6a176566c5bd74e9aaf1ff97257e0c`；PUSHED_VERIFIED。
+- C05：explain scalar heading faults and bounded series checks；`66be30984e14895e36111f3f4f48e69b6c8830eb`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-C05：explain scalar heading faults and bounded series checks。
+C06：explain velocity_raw_doppler results and retained time support。
 
-D30-D41全部108case×11方法，1188native全完成。18018汇总格/10584配对差一致。264误差全文、43506数值MATCH；D39原字典窗口未纳入冻结提取器，局部统计明确未算而全窗已核对。保留D40无激活路径、1s噪声/1Hz std映射、均值中位数相反等限制。
+D42-D50全部81case×11方法/891native完成；13860汇总格、7938配对差一致。198保留误差全文/32652数值一致。RV与RD输入/开关/实际窗口分别解释；均值方向不替代多数案例方向，未推断在线门控。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-CORE velocity_raw_doppler：D42-D50全部方法与保留时序。
+CORE go2_prior_metadata：D51-D56全部方法与保留时序。
 
 ## 调用边界
 

@@ -9,3 +9,4 @@ C01,explain complete GNSS outage family and retained time support,a544cc5d2d3be0
 C02,explain sampling and dropout cases across all methods,3d17be52f0401b44e136eaa22d235f48850a72b3,0,True,PUSHED_VERIFIED
 C03,explain position_value results and retained time support,6e85c769b015bf3a97f557fda4ba202408d66c08,0,True,PUSHED_VERIFIED
 C04,explain position_std_status results and retained time support,142b0325cd6a176566c5bd74e9aaf1ff97257e0c,0,True,PUSHED_VERIFIED
+C05,explain scalar heading faults and bounded series checks,66be30984e14895e36111f3f4f48e69b6c8830eb,0,True,PUSHED_VERIFIED
