@@ -1,0 +1,9 @@
+incident_id,layer,observed_issue,resolution_and_retention,extra_real_native_or_evaluator_calls,evidence
+N12_FIXTURE_COMPILE,fixture_compile,private API use in initial test harness,one technical compile retry; changed fixture to public EKFPredict/getCovariance; no solver science change,0,candidates/N12_ONLY/BUILD_AND_TEST_RECEIPT.json
+N12_FIXTURE_VALIDATOR,fixture_log_validation,KeyError snapshot on configuration record,skip non-snapshot schema; no new native execution,0,candidates/N12_ONLY/BUILD_AND_TEST_RECEIPT.json
+N16_SOURCE_PREP,preflight,initial source file-count assertion before copying,qualified exact source list; no science output or runtime retry,0,candidates/N16_ONLY/README.md
+EVENT_SYNTHETIC_SCHEMA,synthetic_cache_compare,nested Cbn mistaken for matrix object,correct schema and preserve failed synthetic cache; no native rerun,0,event_analysis/VALIDATION_RECEIPT.json
+A1_TEXT_KEY_JOIN,real_event_derived_cache_join,197 versus 197.0 text key omitted 20 of 100 RP opportunities in each original summary,original 80 summary and analyzer preserved; exact finite Decimal unique key supplement gives 100 accepted; 0 raw reread,0,event_analysis/N09_A1_README.md
+CASE_VIEW_SUPPORT_GUARD,source_browser_review,cross-support guard not explicit in initial browser collector,added fail-closed equal/common support checks; existing 110 scalar/22 support rows unchanged,0,CASE_VIEW_VALIDATION.json
+FIGURE_SOURCE_COLUMN,source_index_review,N09 accepted-event lane column retained obsolete R-ratio descriptor,two source-index fields and future script fixed; image/metric data unchanged; no rerender,0,figures/QA.json
+PNG_STAGING,git_local_staging,initial explicit add refused three PNGs under generic ignore,user explicitly authorized small figures; exact three paths added with -f; no ignore change; no failed push,0,PROGRESS.md

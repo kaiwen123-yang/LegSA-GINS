@@ -68,7 +68,7 @@ def main():
                 axes[-1].plot(tt,rr,ls='none',marker='.',ms=2.5,color=color,label='Original V3' if variant=='BASELINE' else candidate)
                 treatment='actual accepted EKF R; source base_R at pre-SA stage; point markers, no gap bridging'
             sources.append(dict(figure=candidate+'_'+run+'.png',variant=variant,run_id=run,source_path=cache+'/MEASUREMENTS.csv',
-                row_key='source='+source+';actual_accepted=True',column='trace(ekf.R)/trace(sa.base_R);measurement_time',rows=len(tt),plotted_finite=len(tt),
+                row_key='source='+source+';actual_accepted=True',column=('measurement_time;variant (categorical lane)' if candidate=='N09_RP_ONLY' else 'trace(ekf.R)/trace(sa.base_R);measurement_time'),rows=len(tt),plotted_finite=len(tt),
                 treatment=treatment))
         axes[0].legend(loc='upper right',fontsize=8)
         axes[-1].set_ylabel('Accepted RP updates\n(categorical rows)' if candidate=='N09_RP_ONLY' else 'Accepted R / base R\n'+source.replace('_',' '),fontsize=8)

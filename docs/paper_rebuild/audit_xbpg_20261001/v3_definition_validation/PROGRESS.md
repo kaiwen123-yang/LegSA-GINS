@@ -33,18 +33,19 @@
 - N09_A2_EVENTS：close A2 unchanged scheduling and actual accepted-source evidence；`ddd8671e7e37398ace9a61f300ba4d9bd4a48191`；PUSHED_VERIFIED。
 - N09_A1_EVENTS：close A1 RP updates with cache-only exact-key reconciliation；`d25ace278602214570c639e66464fe4523d219b5`；PUSHED_VERIFIED。
 - N16_EVENTS：close active-axis R changes and retain D15 cap negative control；`0769ed061a890141c99c0ab60ecf0d6db44edd36`；PUSHED_VERIFIED。
+- EXPLANATORY_FIGURES：show adverse N12 yaw and A1 horizontal-up tradeoff in retained replay figures；`e44f13b4133b27fd3ea109a33b3de81595c429da`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-EXPLANATORY_FIGURES：show adverse N12 yaw and A1 horizontal-up tradeoff in retained replay figures。
+SCOPE_ACCOUNTING：close registered call and event-read accounting with explicit limitations。
 
-三张新说明图已实际逐张查看：N12 D15不利yaw，N16 C00小幅误差/实际HV倍率变化，N09 A1水平下降但Up上升并显示真实RP事件。只读六份新error_series（含N09定向改图共8打开）和既有事件比较表；未读旧2308份保留误差，原论文图不变。无平滑/插值/伪轨迹，native/evaluator/reference新增0；初版新N09图原位保留。初次stage被通用PNG ignore拒绝，按用户本轮明确授权仅显式加入这三张小图，未改ignore规则，无科学重试。
+小型回执核对：10真实候选native、0新baseline native、9合成fixture进程；17evaluator/17reference打开；科学失败/重试0。17事件流各全文一次，7503330行/15435634091字节，131189个SA核对；候选566420个IMU末P和基线107196个更新P仍为零scale正对角门不满足，不能宣称P正定PASS。完整比较含A1保留80→另表100更正。只读审查无科学阻断，图来源表两分类轴字段已更正；无重绘/新载荷读取。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-闭合17个事件流和全部调用账本，提交最终三个候选技术裁定，停止于本轮边界。
+最终裁定：继承定义、必要计算契约修正、N09可选扩展与实际指标权衡；只保存已有问题边界，不自动续跑。
 
 ## 调用边界
 

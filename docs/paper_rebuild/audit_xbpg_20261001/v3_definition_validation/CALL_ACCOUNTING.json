@@ -1,0 +1,134 @@
+{
+  "status": "REGISTERED_QUEUE_CLOSED_WITH_EXPLICIT_LIMITS",
+  "data_mode": "mixed_index_of_real_clean_semisynthetic_and_separately_labelled_synthetic_fixtures",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": true,
+  "synthetic_scope": "9 fixture processes only; no synthetic fixture result enters real/semisynthetic metrics",
+  "planned_candidate_combinations": 10,
+  "unique_baseline_case_method_identities": 7,
+  "condition_groups": [
+    "C00",
+    "A1_20s_seed_00",
+    "A2_20s_seed_00",
+    "D15_seed_00"
+  ],
+  "underlying_natural_recordings": 1,
+  "actual_candidate_native_calls": 10,
+  "new_baseline_native_calls": 0,
+  "real_native_failures": 0,
+  "real_native_retries": 0,
+  "synthetic_native_fixture_processes": 9,
+  "fixture_receipts": [
+    {
+      "receipt": "common/TEST_RECEIPT.json",
+      "processes": 1
+    },
+    {
+      "receipt": "candidates/N12_ONLY/TEST_RECEIPT.json",
+      "processes": 2
+    },
+    {
+      "receipt": "candidates/N16_ONLY/FIXTURE_RECEIPT.json",
+      "processes": 3
+    },
+    {
+      "receipt": "candidates/N09_RP_ONLY/FIXTURE_RECEIPT.json",
+      "processes": 3
+    }
+  ],
+  "evaluator_children": 17,
+  "baseline_evaluator_children": 7,
+  "candidate_evaluator_children": 10,
+  "evaluator_reference_opens": 17,
+  "evaluator_failures": 0,
+  "evaluator_retries": 0,
+  "provider_generation_calls": 0,
+  "historical_controller_calls": 0,
+  "bootstrap_calls": 0,
+  "new_original_matrix_calls": 0,
+  "online_reference_reads": 0,
+  "baseline_metric_support_matches": 1001,
+  "baseline_metric_support_checks": 1001,
+  "baseline_match_scope": "7 new frozen-v3 evaluations against original records; 55+55 prior replay output hashes reused separately",
+  "unique_event_streams": 17,
+  "complete_event_scans": 17,
+  "event_rows_read": 7503330,
+  "event_bytes_read": 15435634091,
+  "event_SA_checks": 131189,
+  "covariance_reports_baseline": 107196,
+  "covariance_reports_candidate": 566420,
+  "covariance_limit": "all reports hit original zero scale diagonals; normalized symmetry/Cholesky not tested; separate raw key-snapshot supplement is not whole-stream PSD proof",
+  "comparisons": [
+    {
+      "slot_id": "N12_ONLY__RUN_00004",
+      "stream_formula_comparison": "VALIDATED",
+      "original_RP_opportunity_join": "NO_SUPPLEMENT_REQUIRED",
+      "correction_receipt": ""
+    },
+    {
+      "slot_id": "N12_ONLY__RUN_01401",
+      "stream_formula_comparison": "VALIDATED",
+      "original_RP_opportunity_join": "NO_SUPPLEMENT_REQUIRED",
+      "correction_receipt": ""
+    },
+    {
+      "slot_id": "N16_ONLY__RUN_00004",
+      "stream_formula_comparison": "VALIDATED",
+      "original_RP_opportunity_join": "NO_SUPPLEMENT_REQUIRED",
+      "correction_receipt": ""
+    },
+    {
+      "slot_id": "N16_ONLY__RUN_01401",
+      "stream_formula_comparison": "VALIDATED",
+      "original_RP_opportunity_join": "NO_SUPPLEMENT_REQUIRED",
+      "correction_receipt": ""
+    },
+    {
+      "slot_id": "N09_RP_ONLY__RUN_00006",
+      "stream_formula_comparison": "VALIDATED",
+      "original_RP_opportunity_join": "NO_SUPPLEMENT_REQUIRED",
+      "correction_receipt": ""
+    },
+    {
+      "slot_id": "N09_RP_ONLY__RUN_00004",
+      "stream_formula_comparison": "VALIDATED",
+      "original_RP_opportunity_join": "NO_SUPPLEMENT_REQUIRED",
+      "correction_receipt": ""
+    },
+    {
+      "slot_id": "N09_RP_ONLY__ADD_RUN_00105",
+      "stream_formula_comparison": "VALIDATED",
+      "original_RP_opportunity_join": "CORRECTED_IN_SUPPLEMENT",
+      "correction_receipt": "event_analysis/summaries/N09_RP_ONLY__ADD_RUN_00105/A1_JOIN_VALIDATION_RECEIPT.json"
+    },
+    {
+      "slot_id": "N09_RP_ONLY__ADD_RUN_00103",
+      "stream_formula_comparison": "VALIDATED",
+      "original_RP_opportunity_join": "CORRECTED_IN_SUPPLEMENT",
+      "correction_receipt": "event_analysis/summaries/N09_RP_ONLY__ADD_RUN_00103/A1_JOIN_VALIDATION_RECEIPT.json"
+    },
+    {
+      "slot_id": "N09_RP_ONLY__ADD_RUN_00402",
+      "stream_formula_comparison": "VALIDATED",
+      "original_RP_opportunity_join": "NO_SUPPLEMENT_REQUIRED",
+      "correction_receipt": ""
+    },
+    {
+      "slot_id": "N09_RP_ONLY__ADD_RUN_00400",
+      "stream_formula_comparison": "VALIDATED",
+      "original_RP_opportunity_join": "NO_SUPPLEMENT_REQUIRED",
+      "correction_receipt": ""
+    }
+  ],
+  "closeout_event_payload_reads": 0,
+  "closeout_NAV_STD_reads": 0,
+  "old_2308_retained_error_series_reads": 0,
+  "new_validation_calculations_performed": true,
+  "calculation_scope": "candidate closed-loop frozen evaluation; fixed-window metrics; event snapshot/R/state arithmetic; exact recorded scalar subtraction; no bootstrap",
+  "technical_incidents_source": "TECHNICAL_INCIDENTS.csv",
+  "science_manifests": [
+    "RUN_MANIFEST.csv",
+    "evaluation/EVAL_MANIFEST.csv"
+  ],
+  "no_automatic_followup": true
+}

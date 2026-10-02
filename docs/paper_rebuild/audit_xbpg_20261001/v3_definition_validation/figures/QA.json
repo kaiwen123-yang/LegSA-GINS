@@ -24,5 +24,6 @@
     "N16_C00": "small error differences; accepted HV multiplier 2 versus 1.5; no claim all metrics improve",
     "N09_A1_F04": "H smaller but Up larger during fixed window; original RP event gap and candidate events shown on explicitly categorical lanes"
   },
-  "render_warning": "optional Axes3D import warning from installed Matplotlib; 2D renders exited 0; environment unchanged"
+  "render_warning": "optional Axes3D import warning from installed Matplotlib; 2D renders exited 0; environment unchanged",
+  "review_source_index_amendment": "N09 two plotted columns clarified as measurement_time/variant categorical lane; R ratio kept as ancillary treatment metadata; no rerender/payload read"
 }

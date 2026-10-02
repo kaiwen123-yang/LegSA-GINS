@@ -1,6 +1,10 @@
 # 单例事件分析
 
-当前只完成实现和合成验证，真实事件、NAV、旧 error_series、reference 读取均为 0；native/evaluator/provider 调用均为 0。实际扫描由根代理审查、提交后单独执行。
+当前已完成登记范围内17个事件流（7个去重旧观察基线、10个新候选）各一次全文扫描，共7503330行、131189个SA同快照核对，10组缓存比较完成。计数/路径/hash入口见[EVENT_READ_SUMMARY.csv](../EVENT_READ_SUMMARY.csv)，总调用见[CALL_ACCOUNTING.json](../CALL_ACCOUNTING.json)。本分析入口本身没有新增native/evaluator/provider调用；本轮独立候选与评价调用分别为10/17，不能把局部零调用写成整轮零调用。
+
+实施提交时的“仅合成验证、真实载荷0”是当时的历史状态，已经由上述完成状态接续。不要再次执行已完成的scan/compare。以下命令是可复查的入口说明，非待续队列；所有已存在输出仍拒绝覆盖。
+
+结果入口：[N12](summaries/N12_ONLY_README.md)、[N16](summaries/N16_ONLY_README.md)、N09的[C00](summaries/N09_C00_README.md)、[A1](N09_A1_README.md)、[A2](summaries/N09_A2_README.md)。**A1原SUMMARY的机会关联80条是本轮辅助分析器文本键漏联；其实际尝试/接受应读另表精确关联的100条。**[a1_join_validation.py](a1_join_validation.py)只读完成缓存，原SUMMARY与冻结分析器保持，不把更正记成原V3缺陷。共同P的零scale边界与少量完整矩阵补注见[P_MODEL_BOUNDARY.md](../P_MODEL_BOUNDARY.md)。
 
 输入限于 [CANDIDATE_QUEUE.csv](../CANDIDATE_QUEUE.csv) 的 10 个候选和 7 个去重旧观察基线，路径来自 ignored `V3_DEFINITION_ROOTS.local.json`。先核候选完成/访问回执和旧观察版字节身份/访问回执，再打开事件；不读同输入 provider。
 
