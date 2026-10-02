@@ -1,0 +1,9 @@
+{
+  "attempt_001": "OPENED_REQUIRES_DISPLAY_CORRECTION",
+  "findings": [
+    "method yaw -180..180 and reference 0..360 require common display range only",
+    "state markers need visible separation"
+  ],
+  "numeric_results_unchanged": true,
+  "required_action": "plot-only derived version; no reference/evaluation"
+}
