@@ -21,18 +21,19 @@
 - A11：explain A1_10s across all eleven configurations；`d479558ab205c0a0d8b8a8a53deebca11c90c7ad`；PUSHED_VERIFIED。
 - A12：explain A1_20s across all eleven configurations；`0e9a36cc5e1c5ce282ade302e0d6ebf47d143221`；PUSHED_VERIFIED。
 - A13：explain A1_30s across all eleven configurations；`36547a906cd9c2b3dd9b9da058a561c5663c7523`；PUSHED_VERIFIED。
+- A21：explain A2_10s across all eleven configurations；`2996f399a1133035f26c98c83a36daee562d7bc1`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-A21：explain A2_10s across all eleven configurations。
+A22：explain A2_20s across all eleven configurations。
 
-A2 10 s：11配置×九种子、99native/198评价均完成，原全窗及up分布、全配对和worst已保存。F04-F03水平9/9更小，上向6/9更大；F04-A06水平9/9更小。保留heading与旧HV准备链，不将优势归已移除RD或完整GNSS拒止。198error全文读、32652 MATCH/18 NULL/1782不可复算/0差异；396UA格一致；独立validation已明确。
+A2 20 s：11配置九种子99native/198评价均完成，396原UA格MATCH。全窗H/yaw/up及每方法尾部已解释；F04-F03和F04-A06水平9例均低，上向各6例更高。全文读最后198误差，32652 MATCH/18 NULL/1782不可复算/0差异；至此2308error+1matched各主扫描一次。A2_30 NOT_REGISTERED，未补跑；所有窗口算术标validation，实际HV触发仍未知。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-A2_20s，最后198份保留误差的全文读取和解释。
+整理既有配对/不确定度解释，再逐项提交外部旧协议、候选和实际图像说明。
 
 ## 调用边界
 
