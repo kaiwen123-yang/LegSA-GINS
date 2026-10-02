@@ -12,18 +12,19 @@
 - N03：interpret BY2O full and all fixed segments with retained checks；`1fae06e5063c99c48a0c2c310b6c82526c45b227`；PUSHED_VERIFIED。
 - C01：explain complete GNSS outage family and retained time support；`a544cc5d2d3be0c5cb6475358b738d9a5317e59d`；PUSHED_VERIFIED。
 - C02：explain sampling and dropout cases across all methods；`3d17be52f0401b44e136eaa22d235f48850a72b3`；PUSHED_VERIFIED。
+- C03：explain position_value results and retained time support；`6e85c769b015bf3a97f557fda4ba202408d66c08`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-C03：explain position_value results and retained time support。
+C04：explain position_std_status results and retained time support。
 
-D13-D22全部90case×11方法；12原native发散均保留。15246汇总格/8778原配对差一致；218保留误差全文与35882数值核对一致。幅值/实际D22九种子窗口已列；seed00/06事件落在评价窗外。位置和航向排序不同，未证明机制。
+D23-D29全部63case×11方法；D27全99native发散，两口径198未调用槽保留。11088汇总格/5292原配对差一致。132保留误差全文、21768数值一致。D25/D28实际重复和D29无激活通路保持原身份及限制。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-CORE position_std_status：D23-D29全部配置与保留时序。
+CORE dual_yaw：D30-D41全部方法、实际航向注入及保留时序。
 
 ## 调用边界
 
