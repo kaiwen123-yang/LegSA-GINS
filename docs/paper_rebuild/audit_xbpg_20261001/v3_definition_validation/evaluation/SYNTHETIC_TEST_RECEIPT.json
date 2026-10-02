@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "checks": 74,
+  "passed": 74,
+  "new_test_script_processes": 1,
+  "test_invocation": 2,
+  "prior_test_receipt": "test_history/SYNTHETIC_TEST_RECEIPT_001.json",
+  "cumulative_test_script_processes": 2,
+  "cumulative_failed_test_processes": 0,
+  "native_fixture_processes": 0,
+  "real_native_calls": 0,
+  "evaluator_calls": 0,
+  "mock_evaluator_calls": 0,
+  "reference_payload_reads": 0,
+  "source_NAV_STD_payload_reads": 0,
+  "frozen_metric_function_calls": 0,
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "data_mode": "synthetic_helper_validation_only",
+  "script_sha256": "46378dba98908ea18c9f7592887d8f3e0134c0eedcca04db319bd571c37a6216",
+  "test_sha256": "e50e84ed073c3e6397692fcc6df6b5bb3ad985dae24ef293fe03a2677b95c6b7",
+  "limits": "Helper and source-contract checks only; no whole evaluator invocation or scientific agreement assertion."
+}

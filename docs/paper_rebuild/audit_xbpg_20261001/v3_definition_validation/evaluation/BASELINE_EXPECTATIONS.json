@@ -1,0 +1,5070 @@
+{
+  "ADD_RUN_00103": {
+    "source_path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/ADD_RUN_00103/v3/EVALUATION_RESULT.json",
+    "source_json_sha256": "f71950530040c772851f8b0022733d452855c279750d28d8944811ec95ea3462",
+    "capture_source_path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/ADD_RUN_00103/v3/FROZEN_EVALUATOR/EVALUATOR_CAPTURE.json",
+    "capture_source_sha256": "618d127c3f4022c9917357c60df1cfce40146b9d1835d1aba2f33442077d49d4",
+    "native_nav_sha256": "5df229a0fb404aea5a00f992953cd7d37cd2c32749a7f800e4cd2253fb562d85",
+    "std_sha256": "c69a3dccb0be7bef87793c35a5ad7a1c431136eedb39c267a03655ab5b278ea6",
+    "evaluator_nav_sha256": "cf40e6114e7ffd1c49d0a0391f872fd8e8feecc42bd552c62bd2a15fa907571c",
+    "config_sha256": "bbf7aa8330b4170dd27b901892897fe0633148f7e32f6dd1d1a84d55c7304818",
+    "columns": {
+      "north_signed_mean_m": {
+        "source_value": "-2.7938686843170917",
+        "row_key": "#/row/north_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "north_bias_m": {
+        "source_value": "-2.7938686843170917",
+        "row_key": "#/row/north_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "north_signed_median_m": {
+        "source_value": "-0.012128607973135499",
+        "row_key": "#/row/north_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "north_standard_deviation_m": {
+        "source_value": "14.46348165528044",
+        "row_key": "#/row/north_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "north_rmse_m": {
+        "source_value": "14.73085210766307",
+        "row_key": "#/row/north_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "north_mae_m": {
+        "source_value": "2.819161361712822",
+        "row_key": "#/row/north_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "north_median_absolute_error_m": {
+        "source_value": "0.0246295017203923",
+        "row_key": "#/row/north_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p50_absolute_m": {
+        "source_value": "0.0246295017203923",
+        "row_key": "#/row/north_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p75_absolute_m": {
+        "source_value": "0.04776014643095265",
+        "row_key": "#/row/north_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p90_absolute_m": {
+        "source_value": "0.1292358546352567",
+        "row_key": "#/row/north_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p95_absolute_m": {
+        "source_value": "6.815272180198953",
+        "row_key": "#/row/north_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p99_absolute_m": {
+        "source_value": "92.2612471015959",
+        "row_key": "#/row/north_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_max_absolute_m": {
+        "source_value": "133.00407998222337",
+        "row_key": "#/row/north_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_final_signed_error_m": {
+        "source_value": "0.0171266207529026",
+        "row_key": "#/row/north_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_final_absolute_error_m": {
+        "source_value": "0.0171266207529026",
+        "row_key": "#/row/north_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_iae_m": {
+        "source_value": "882.3438972041434",
+        "row_key": "#/row/north_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "north_ise_m": {
+        "source_value": "69093.82109952503",
+        "row_key": "#/row/north_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "east_signed_mean_m": {
+        "source_value": "0.3546620609447895",
+        "row_key": "#/row/east_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "east_bias_m": {
+        "source_value": "0.3546620609447895",
+        "row_key": "#/row/east_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "east_signed_median_m": {
+        "source_value": "0.00033161077142544997",
+        "row_key": "#/row/east_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "east_standard_deviation_m": {
+        "source_value": "2.18529569405266",
+        "row_key": "#/row/east_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "east_rmse_m": {
+        "source_value": "2.2138885355678375",
+        "row_key": "#/row/east_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "east_mae_m": {
+        "source_value": "0.3912413678672842",
+        "row_key": "#/row/east_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "east_median_absolute_error_m": {
+        "source_value": "0.0255187989611528",
+        "row_key": "#/row/east_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p50_absolute_m": {
+        "source_value": "0.0255187989611528",
+        "row_key": "#/row/east_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p75_absolute_m": {
+        "source_value": "0.048189709276323225",
+        "row_key": "#/row/east_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p90_absolute_m": {
+        "source_value": "0.24941524662015124",
+        "row_key": "#/row/east_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p95_absolute_m": {
+        "source_value": "0.38919741479422165",
+        "row_key": "#/row/east_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p99_absolute_m": {
+        "source_value": "13.714120325930448",
+        "row_key": "#/row/east_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_max_absolute_m": {
+        "source_value": "25.18325439041676",
+        "row_key": "#/row/east_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_final_signed_error_m": {
+        "source_value": "-0.0324087716195173",
+        "row_key": "#/row/east_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_final_absolute_error_m": {
+        "source_value": "0.0324087716195173",
+        "row_key": "#/row/east_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_iae_m": {
+        "source_value": "122.06887004576338",
+        "row_key": "#/row/east_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "east_ise_m": {
+        "source_value": "1590.0932691964326",
+        "row_key": "#/row/east_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "up_signed_mean_m": {
+        "source_value": "0.2433326668695531",
+        "row_key": "#/row/up_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "up_bias_m": {
+        "source_value": "0.2433326668695531",
+        "row_key": "#/row/up_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "up_signed_median_m": {
+        "source_value": "-0.0176042729093972",
+        "row_key": "#/row/up_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "up_standard_deviation_m": {
+        "source_value": "1.280907653038973",
+        "row_key": "#/row/up_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "up_rmse_m": {
+        "source_value": "1.3038156320506586",
+        "row_key": "#/row/up_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "up_mae_m": {
+        "source_value": "0.29597052527460604",
+        "row_key": "#/row/up_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "up_median_absolute_error_m": {
+        "source_value": "0.0341442773046738",
+        "row_key": "#/row/up_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p50_absolute_m": {
+        "source_value": "0.0341442773046738",
+        "row_key": "#/row/up_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p75_absolute_m": {
+        "source_value": "0.05946727774803315",
+        "row_key": "#/row/up_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p90_absolute_m": {
+        "source_value": "0.10365608314384851",
+        "row_key": "#/row/up_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p95_absolute_m": {
+        "source_value": "0.7891439865162071",
+        "row_key": "#/row/up_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p99_absolute_m": {
+        "source_value": "8.257419208867608",
+        "row_key": "#/row/up_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_max_absolute_m": {
+        "source_value": "8.387516910414305",
+        "row_key": "#/row/up_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_final_signed_error_m": {
+        "source_value": "0.0679107794752562",
+        "row_key": "#/row/up_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_final_absolute_error_m": {
+        "source_value": "0.0679107794752562",
+        "row_key": "#/row/up_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_iae_m": {
+        "source_value": "90.63539140399705",
+        "row_key": "#/row/up_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "up_ise_m": {
+        "source_value": "531.7105835326769",
+        "row_key": "#/row/up_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "roll_signed_mean_deg": {
+        "source_value": "1.202880641217764",
+        "row_key": "#/row/roll_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_bias_deg": {
+        "source_value": "1.202880641217764",
+        "row_key": "#/row/roll_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_signed_median_deg": {
+        "source_value": "0.7309576404283433",
+        "row_key": "#/row/roll_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_standard_deviation_deg": {
+        "source_value": "2.0984469569405086",
+        "row_key": "#/row/roll_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_rmse_deg": {
+        "source_value": "2.4187603163830307",
+        "row_key": "#/row/roll_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_mae_deg": {
+        "source_value": "1.7931157845608323",
+        "row_key": "#/row/roll_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_median_absolute_error_deg": {
+        "source_value": "1.211987182951745",
+        "row_key": "#/row/roll_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p50_absolute_deg": {
+        "source_value": "1.211987182951745",
+        "row_key": "#/row/roll_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p75_absolute_deg": {
+        "source_value": "2.6310318808280044",
+        "row_key": "#/row/roll_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p90_absolute_deg": {
+        "source_value": "4.617292083690882",
+        "row_key": "#/row/roll_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p95_absolute_deg": {
+        "source_value": "5.122607998645263",
+        "row_key": "#/row/roll_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p99_absolute_deg": {
+        "source_value": "5.771195619847134",
+        "row_key": "#/row/roll_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_max_absolute_deg": {
+        "source_value": "7.07397779913947",
+        "row_key": "#/row/roll_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_final_signed_error_deg": {
+        "source_value": "-0.0508975118363252",
+        "row_key": "#/row/roll_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_final_absolute_error_deg": {
+        "source_value": "0.0508975118363252",
+        "row_key": "#/row/roll_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_iae_deg": {
+        "source_value": "498.46287627271516",
+        "row_key": "#/row/roll_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_ise_deg": {
+        "source_value": "1623.4975203136507",
+        "row_key": "#/row/roll_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_signed_mean_deg": {
+        "source_value": "-0.9305292684902703",
+        "row_key": "#/row/pitch_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_bias_deg": {
+        "source_value": "-0.9305292684902703",
+        "row_key": "#/row/pitch_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_signed_median_deg": {
+        "source_value": "-0.9897154045510064",
+        "row_key": "#/row/pitch_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_standard_deviation_deg": {
+        "source_value": "2.143167160427253",
+        "row_key": "#/row/pitch_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_rmse_deg": {
+        "source_value": "2.3364610412011695",
+        "row_key": "#/row/pitch_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_mae_deg": {
+        "source_value": "1.8977504837479438",
+        "row_key": "#/row/pitch_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_median_absolute_error_deg": {
+        "source_value": "1.6588416521425842",
+        "row_key": "#/row/pitch_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p50_absolute_deg": {
+        "source_value": "1.6588416521425842",
+        "row_key": "#/row/pitch_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p75_absolute_deg": {
+        "source_value": "2.743100244442197",
+        "row_key": "#/row/pitch_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p90_absolute_deg": {
+        "source_value": "3.8143987252763085",
+        "row_key": "#/row/pitch_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p95_absolute_deg": {
+        "source_value": "4.445677946431564",
+        "row_key": "#/row/pitch_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p99_absolute_deg": {
+        "source_value": "5.735169553030187",
+        "row_key": "#/row/pitch_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_max_absolute_deg": {
+        "source_value": "8.930145902754475",
+        "row_key": "#/row/pitch_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_final_signed_error_deg": {
+        "source_value": "2.0871622915443027",
+        "row_key": "#/row/pitch_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_final_absolute_error_deg": {
+        "source_value": "2.0871622915443027",
+        "row_key": "#/row/pitch_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_iae_deg": {
+        "source_value": "526.4123678723824",
+        "row_key": "#/row/pitch_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_ise_deg": {
+        "source_value": "1523.046854893709",
+        "row_key": "#/row/pitch_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_signed_mean_deg": {
+        "source_value": "-1.2097927036265856",
+        "row_key": "#/row/yaw_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_bias_deg": {
+        "source_value": "-1.2097927036265856",
+        "row_key": "#/row/yaw_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_signed_median_deg": {
+        "source_value": "-1.1367831875548688",
+        "row_key": "#/row/yaw_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_standard_deviation_deg": {
+        "source_value": "1.5851187232232047",
+        "row_key": "#/row/yaw_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_rmse_deg": {
+        "source_value": "1.9940410608763517",
+        "row_key": "#/row/yaw_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_mae_deg": {
+        "source_value": "1.5881790151216246",
+        "row_key": "#/row/yaw_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_median_absolute_error_deg": {
+        "source_value": "1.326509762420926",
+        "row_key": "#/row/yaw_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p50_absolute_deg": {
+        "source_value": "1.326509762420926",
+        "row_key": "#/row/yaw_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p75_absolute_deg": {
+        "source_value": "2.3094949229869286",
+        "row_key": "#/row/yaw_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p90_absolute_deg": {
+        "source_value": "3.2408426371354158",
+        "row_key": "#/row/yaw_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p95_absolute_deg": {
+        "source_value": "3.760710561545067",
+        "row_key": "#/row/yaw_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p99_absolute_deg": {
+        "source_value": "5.343359905834221",
+        "row_key": "#/row/yaw_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_max_absolute_deg": {
+        "source_value": "8.890127982238425",
+        "row_key": "#/row/yaw_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_final_signed_error_deg": {
+        "source_value": "1.018323125793927",
+        "row_key": "#/row/yaw_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_final_absolute_error_deg": {
+        "source_value": "1.018323125793927",
+        "row_key": "#/row/yaw_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_iae_deg": {
+        "source_value": "438.11658942774585",
+        "row_key": "#/row/yaw_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_ise_deg": {
+        "source_value": "1100.1446070745274",
+        "row_key": "#/row/yaw_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_rmse_m": {
+        "source_value": "14.8962849820269",
+        "row_key": "#/row/horizontal_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_mean_m": {
+        "source_value": "2.8719699840325785",
+        "row_key": "#/row/horizontal_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_median_m": {
+        "source_value": "0.04186076750963465",
+        "row_key": "#/row/horizontal_median_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_mae_m": {
+        "source_value": "2.8719699840325785",
+        "row_key": "#/row/horizontal_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p50_m": {
+        "source_value": "0.04186076750963465",
+        "row_key": "#/row/horizontal_p50_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p75_m": {
+        "source_value": "0.06548761068295834",
+        "row_key": "#/row/horizontal_p75_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p90_m": {
+        "source_value": "0.29437321337135897",
+        "row_key": "#/row/horizontal_p90_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p95_m": {
+        "source_value": "6.833449457851286",
+        "row_key": "#/row/horizontal_p95_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p99_m": {
+        "source_value": "93.27494208043787",
+        "row_key": "#/row/horizontal_p99_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_max_m": {
+        "source_value": "135.36721018625636",
+        "row_key": "#/row/horizontal_max_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_final_m": {
+        "source_value": "0.0366558264986589",
+        "row_key": "#/row/horizontal_final_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_iae_m": {
+        "source_value": "897.8639748287917",
+        "row_key": "#/row/horizontal_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_ise_m": {
+        "source_value": "70683.91436872145",
+        "row_key": "#/row/horizontal_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_rmse_m": {
+        "source_value": "14.953235150566577",
+        "row_key": "#/row/position_3d_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_mean_m": {
+        "source_value": "2.9003375092267034",
+        "row_key": "#/row/position_3d_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_median_m": {
+        "source_value": "0.05859619281537775",
+        "row_key": "#/row/position_3d_median_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_mae_m": {
+        "source_value": "2.9003375092267034",
+        "row_key": "#/row/position_3d_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p50_m": {
+        "source_value": "0.05859619281537775",
+        "row_key": "#/row/position_3d_p50_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p75_m": {
+        "source_value": "0.08616038394985923",
+        "row_key": "#/row/position_3d_p75_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p90_m": {
+        "source_value": "0.30870033440418476",
+        "row_key": "#/row/position_3d_p90_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p95_m": {
+        "source_value": "6.878864715854202",
+        "row_key": "#/row/position_3d_p95_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p99_m": {
+        "source_value": "93.6483515431071",
+        "row_key": "#/row/position_3d_p99_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_max_m": {
+        "source_value": "135.6157193942642",
+        "row_key": "#/row/position_3d_max_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_final_m": {
+        "source_value": "0.0771720388822057",
+        "row_key": "#/row/position_3d_final_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_iae_m": {
+        "source_value": "906.0411138568567",
+        "row_key": "#/row/position_3d_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_ise_m": {
+        "source_value": "71215.62495225413",
+        "row_key": "#/row/position_3d_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "evaluation_status": {
+        "source_value": "COMPLETED",
+        "row_key": "#/row/evaluation_status",
+        "comparison_kind": "exact"
+      },
+      "matched_epoch_count": {
+        "source_value": 56642,
+        "row_key": "#/row/matched_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "output_epoch_count": {
+        "source_value": 56642,
+        "row_key": "#/row/output_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "unmatched_epoch_count": {
+        "source_value": 0,
+        "row_key": "#/row/unmatched_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "coverage_ratio": {
+        "source_value": "1.0",
+        "row_key": "#/row/coverage_ratio",
+        "comparison_kind": "numeric"
+      },
+      "reference_epoch_count": {
+        "source_value": 5480,
+        "row_key": "#/row/reference_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "time_start": {
+        "source_value": "66.005054",
+        "row_key": "#/row/time_start",
+        "comparison_kind": "time"
+      },
+      "time_end": {
+        "source_value": "339.997056",
+        "row_key": "#/row/time_end",
+        "comparison_kind": "time"
+      },
+      "sequence_window_start_s": {
+        "source_value": "66.0",
+        "row_key": "#/row/sequence_window_start_s",
+        "comparison_kind": "time"
+      },
+      "sequence_window_end_s": {
+        "source_value": "340.0",
+        "row_key": "#/row/sequence_window_end_s",
+        "comparison_kind": "time"
+      },
+      "reference_velocity_supported": {
+        "source_value": false,
+        "row_key": "#/row/reference_velocity_supported",
+        "comparison_kind": "exact"
+      },
+      "reference_is_independent_ground_truth": {
+        "source_value": false,
+        "row_key": "#/row/reference_is_independent_ground_truth",
+        "comparison_kind": "exact"
+      },
+      "finite_output": {
+        "source_value": true,
+        "row_key": "#/row/finite_output",
+        "comparison_kind": "exact"
+      },
+      "finite_ratio": {
+        "source_value": "1.0",
+        "row_key": "#/row/finite_ratio",
+        "comparison_kind": "numeric"
+      }
+    },
+    "reference_cleaned_epoch_count": 6040,
+    "recorded_hashes_are_newly_verified_payload_hashes": false
+  },
+  "ADD_RUN_00105": {
+    "source_path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/ADD_RUN_00105/v3/EVALUATION_RESULT.json",
+    "source_json_sha256": "d257d37f7f5128e8cbdf4b60bee8928e4f009afaa6cb1feb23976b11f5c1c466",
+    "capture_source_path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/ADD_RUN_00105/v3/FROZEN_EVALUATOR/EVALUATOR_CAPTURE.json",
+    "capture_source_sha256": "d14a16692621c053def210f3251a0016dcc9e4eea1b1ddac934ffd5fc8ca66ad",
+    "native_nav_sha256": "a7efcbc7bedbb7b7d09455bb8fed6f80de158e41b8caac3a062abc97f62e3889",
+    "std_sha256": "c8787028c3f32c45e81440054610ed97797bf5c2c86c301e1bbbe81566862e63",
+    "evaluator_nav_sha256": "52be3f73790e5681fa0c72e781bf9cc78bfcc5658f8a76b0a0971a5dbebf2e06",
+    "config_sha256": "354e1cae15b5b3dea279cebbe51fb5891f827ebf033e080d0bf5c3db57462240",
+    "columns": {
+      "north_signed_mean_m": {
+        "source_value": "-2.6799936915284475",
+        "row_key": "#/row/north_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "north_bias_m": {
+        "source_value": "-2.6799936915284475",
+        "row_key": "#/row/north_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "north_signed_median_m": {
+        "source_value": "-0.01186951066904645",
+        "row_key": "#/row/north_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "north_standard_deviation_m": {
+        "source_value": "13.889789140271592",
+        "row_key": "#/row/north_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "north_rmse_m": {
+        "source_value": "14.145974994599662",
+        "row_key": "#/row/north_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "north_mae_m": {
+        "source_value": "2.705914085645671",
+        "row_key": "#/row/north_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "north_median_absolute_error_m": {
+        "source_value": "0.02450843073492675",
+        "row_key": "#/row/north_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p50_absolute_m": {
+        "source_value": "0.02450843073492675",
+        "row_key": "#/row/north_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p75_absolute_m": {
+        "source_value": "0.04646798802991635",
+        "row_key": "#/row/north_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p90_absolute_m": {
+        "source_value": "0.12689035841725338",
+        "row_key": "#/row/north_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p95_absolute_m": {
+        "source_value": "6.503942123273461",
+        "row_key": "#/row/north_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p99_absolute_m": {
+        "source_value": "88.60133158574028",
+        "row_key": "#/row/north_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_max_absolute_m": {
+        "source_value": "127.90507263791643",
+        "row_key": "#/row/north_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_final_signed_error_m": {
+        "source_value": "0.0173543753172342",
+        "row_key": "#/row/north_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_final_absolute_error_m": {
+        "source_value": "0.0173543753172342",
+        "row_key": "#/row/north_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_iae_m": {
+        "source_value": "846.9055821158059",
+        "row_key": "#/row/north_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "north_ise_m": {
+        "source_value": "63722.279969463714",
+        "row_key": "#/row/north_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "east_signed_mean_m": {
+        "source_value": "0.4184446606734886",
+        "row_key": "#/row/east_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "east_bias_m": {
+        "source_value": "0.4184446606734886",
+        "row_key": "#/row/east_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "east_signed_median_m": {
+        "source_value": "0.00028811246582709997",
+        "row_key": "#/row/east_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "east_standard_deviation_m": {
+        "source_value": "2.506422567131223",
+        "row_key": "#/row/east_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "east_rmse_m": {
+        "source_value": "2.541111965079623",
+        "row_key": "#/row/east_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "east_mae_m": {
+        "source_value": "0.4489558222816054",
+        "row_key": "#/row/east_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "east_median_absolute_error_m": {
+        "source_value": "0.024946659370236497",
+        "row_key": "#/row/east_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p50_absolute_m": {
+        "source_value": "0.024946659370236497",
+        "row_key": "#/row/east_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p75_absolute_m": {
+        "source_value": "0.0469054362797969",
+        "row_key": "#/row/east_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p90_absolute_m": {
+        "source_value": "0.2399802436767601",
+        "row_key": "#/row/east_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p95_absolute_m": {
+        "source_value": "0.3560388049912009",
+        "row_key": "#/row/east_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p99_absolute_m": {
+        "source_value": "15.834912119934287",
+        "row_key": "#/row/east_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_max_absolute_m": {
+        "source_value": "28.19502194190973",
+        "row_key": "#/row/east_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_final_signed_error_m": {
+        "source_value": "-0.0350803418412613",
+        "row_key": "#/row/east_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_final_absolute_error_m": {
+        "source_value": "0.0350803418412613",
+        "row_key": "#/row/east_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_iae_m": {
+        "source_value": "140.22283801383526",
+        "row_key": "#/row/east_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "east_ise_m": {
+        "source_value": "2090.0868637728454",
+        "row_key": "#/row/east_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "up_signed_mean_m": {
+        "source_value": "0.24996381535115894",
+        "row_key": "#/row/up_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "up_bias_m": {
+        "source_value": "0.24996381535115894",
+        "row_key": "#/row/up_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "up_signed_median_m": {
+        "source_value": "-0.0176410925290452",
+        "row_key": "#/row/up_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "up_standard_deviation_m": {
+        "source_value": "1.3163762410772746",
+        "row_key": "#/row/up_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "up_rmse_m": {
+        "source_value": "1.3398986219328846",
+        "row_key": "#/row/up_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "up_mae_m": {
+        "source_value": "0.30354678795946777",
+        "row_key": "#/row/up_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "up_median_absolute_error_m": {
+        "source_value": "0.0345265983229259",
+        "row_key": "#/row/up_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p50_absolute_m": {
+        "source_value": "0.0345265983229259",
+        "row_key": "#/row/up_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p75_absolute_m": {
+        "source_value": "0.0603469439191364",
+        "row_key": "#/row/up_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p90_absolute_m": {
+        "source_value": "0.10703628161609224",
+        "row_key": "#/row/up_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p95_absolute_m": {
+        "source_value": "0.804054166413147",
+        "row_key": "#/row/up_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p99_absolute_m": {
+        "source_value": "8.548594830603445",
+        "row_key": "#/row/up_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_max_absolute_m": {
+        "source_value": "8.64110580275869",
+        "row_key": "#/row/up_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_final_signed_error_m": {
+        "source_value": "0.0675222714197483",
+        "row_key": "#/row/up_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_final_absolute_error_m": {
+        "source_value": "0.0675222714197483",
+        "row_key": "#/row/up_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_iae_m": {
+        "source_value": "92.99400132426464",
+        "row_key": "#/row/up_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "up_ise_m": {
+        "source_value": "561.7794949557109",
+        "row_key": "#/row/up_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "roll_signed_mean_deg": {
+        "source_value": "1.0719769982837042",
+        "row_key": "#/row/roll_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_bias_deg": {
+        "source_value": "1.0719769982837042",
+        "row_key": "#/row/roll_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_signed_median_deg": {
+        "source_value": "0.6074537890838911",
+        "row_key": "#/row/roll_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_standard_deviation_deg": {
+        "source_value": "1.9702277642179453",
+        "row_key": "#/row/roll_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_rmse_deg": {
+        "source_value": "2.242973947183646",
+        "row_key": "#/row/roll_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_mae_deg": {
+        "source_value": "1.6579121788020301",
+        "row_key": "#/row/roll_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_median_absolute_error_deg": {
+        "source_value": "1.1151624088961114",
+        "row_key": "#/row/roll_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p50_absolute_deg": {
+        "source_value": "1.1151624088961114",
+        "row_key": "#/row/roll_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p75_absolute_deg": {
+        "source_value": "2.428257278157801",
+        "row_key": "#/row/roll_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p90_absolute_deg": {
+        "source_value": "4.268472214887672",
+        "row_key": "#/row/roll_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p95_absolute_deg": {
+        "source_value": "4.796501860114439",
+        "row_key": "#/row/roll_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p99_absolute_deg": {
+        "source_value": "5.431444732549207",
+        "row_key": "#/row/roll_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_max_absolute_deg": {
+        "source_value": "6.877792947139454",
+        "row_key": "#/row/roll_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_final_signed_error_deg": {
+        "source_value": "-0.1710892068363421",
+        "row_key": "#/row/roll_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_final_absolute_error_deg": {
+        "source_value": "0.1710892068363421",
+        "row_key": "#/row/roll_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_iae_deg": {
+        "source_value": "461.8601057049163",
+        "row_key": "#/row/roll_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_ise_deg": {
+        "source_value": "1403.2093170207816",
+        "row_key": "#/row/roll_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_signed_mean_deg": {
+        "source_value": "-0.8809407095525561",
+        "row_key": "#/row/pitch_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_bias_deg": {
+        "source_value": "-0.8809407095525561",
+        "row_key": "#/row/pitch_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_signed_median_deg": {
+        "source_value": "-0.9206754399866242",
+        "row_key": "#/row/pitch_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_standard_deviation_deg": {
+        "source_value": "2.0336077979555682",
+        "row_key": "#/row/pitch_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_rmse_deg": {
+        "source_value": "2.2162168688223307",
+        "row_key": "#/row/pitch_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_mae_deg": {
+        "source_value": "1.7932669069444087",
+        "row_key": "#/row/pitch_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_median_absolute_error_deg": {
+        "source_value": "1.5591806728605775",
+        "row_key": "#/row/pitch_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p50_absolute_deg": {
+        "source_value": "1.5591806728605775",
+        "row_key": "#/row/pitch_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p75_absolute_deg": {
+        "source_value": "2.590470127828901",
+        "row_key": "#/row/pitch_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p90_absolute_deg": {
+        "source_value": "3.6238897995933375",
+        "row_key": "#/row/pitch_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p95_absolute_deg": {
+        "source_value": "4.2415184248106605",
+        "row_key": "#/row/pitch_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p99_absolute_deg": {
+        "source_value": "5.516126513886452",
+        "row_key": "#/row/pitch_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_max_absolute_deg": {
+        "source_value": "8.613750016754466",
+        "row_key": "#/row/pitch_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_final_signed_error_deg": {
+        "source_value": "1.845121571544297",
+        "row_key": "#/row/pitch_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_final_absolute_error_deg": {
+        "source_value": "1.845121571544297",
+        "row_key": "#/row/pitch_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_iae_deg": {
+        "source_value": "497.3426082424527",
+        "row_key": "#/row/pitch_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_ise_deg": {
+        "source_value": "1370.6131146115588",
+        "row_key": "#/row/pitch_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_signed_mean_deg": {
+        "source_value": "-1.2112139612178603",
+        "row_key": "#/row/yaw_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_bias_deg": {
+        "source_value": "-1.2112139612178603",
+        "row_key": "#/row/yaw_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_signed_median_deg": {
+        "source_value": "-1.1390756926722645",
+        "row_key": "#/row/yaw_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_standard_deviation_deg": {
+        "source_value": "1.5825795616261435",
+        "row_key": "#/row/yaw_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_rmse_deg": {
+        "source_value": "1.9928866823595006",
+        "row_key": "#/row/yaw_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_mae_deg": {
+        "source_value": "1.5876461445980685",
+        "row_key": "#/row/yaw_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_median_absolute_error_deg": {
+        "source_value": "1.3276654958735463",
+        "row_key": "#/row/yaw_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p50_absolute_deg": {
+        "source_value": "1.3276654958735463",
+        "row_key": "#/row/yaw_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p75_absolute_deg": {
+        "source_value": "2.3115114368621335",
+        "row_key": "#/row/yaw_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p90_absolute_deg": {
+        "source_value": "3.2351695060923618",
+        "row_key": "#/row/yaw_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p95_absolute_deg": {
+        "source_value": "3.7477224940480327",
+        "row_key": "#/row/yaw_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p99_absolute_deg": {
+        "source_value": "5.340584123347248",
+        "row_key": "#/row/yaw_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_max_absolute_deg": {
+        "source_value": "8.89337671323841",
+        "row_key": "#/row/yaw_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_final_signed_error_deg": {
+        "source_value": "1.0102524267939543",
+        "row_key": "#/row/yaw_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_final_absolute_error_deg": {
+        "source_value": "1.0102524267939543",
+        "row_key": "#/row/yaw_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_iae_deg": {
+        "source_value": "438.01600156143985",
+        "row_key": "#/row/yaw_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_ise_deg": {
+        "source_value": "1099.1010145062714",
+        "row_key": "#/row/yaw_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_rmse_m": {
+        "source_value": "14.37239919313786",
+        "row_key": "#/row/horizontal_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_mean_m": {
+        "source_value": "2.767976621975799",
+        "row_key": "#/row/horizontal_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_median_m": {
+        "source_value": "0.04084178824038125",
+        "row_key": "#/row/horizontal_median_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_mae_m": {
+        "source_value": "2.767976621975799",
+        "row_key": "#/row/horizontal_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p50_m": {
+        "source_value": "0.04084178824038125",
+        "row_key": "#/row/horizontal_p50_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p75_m": {
+        "source_value": "0.06376241632966956",
+        "row_key": "#/row/horizontal_p75_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p90_m": {
+        "source_value": "0.28971693767596524",
+        "row_key": "#/row/horizontal_p90_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p95_m": {
+        "source_value": "6.512597064420095",
+        "row_key": "#/row/horizontal_p95_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p99_m": {
+        "source_value": "90.00522433286747",
+        "row_key": "#/row/horizontal_p99_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_max_m": {
+        "source_value": "130.97582551301386",
+        "row_key": "#/row/horizontal_max_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_final_m": {
+        "source_value": "0.0391382769977317",
+        "row_key": "#/row/horizontal_final_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_iae_m": {
+        "source_value": "865.387723790892",
+        "row_key": "#/row/horizontal_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_ise_m": {
+        "source_value": "65812.36683323655",
+        "row_key": "#/row/horizontal_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_rmse_m": {
+        "source_value": "14.434721572789943",
+        "row_key": "#/row/position_3d_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_mean_m": {
+        "source_value": "2.7981356707477243",
+        "row_key": "#/row/position_3d_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_median_m": {
+        "source_value": "0.057950926336395495",
+        "row_key": "#/row/position_3d_median_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_mae_m": {
+        "source_value": "2.7981356707477243",
+        "row_key": "#/row/position_3d_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p50_m": {
+        "source_value": "0.057950926336395495",
+        "row_key": "#/row/position_3d_p50_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p75_m": {
+        "source_value": "0.08647775332450297",
+        "row_key": "#/row/position_3d_p75_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p90_m": {
+        "source_value": "0.3050538329538312",
+        "row_key": "#/row/position_3d_p90_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p95_m": {
+        "source_value": "6.562044169395509",
+        "row_key": "#/row/position_3d_p95_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p99_m": {
+        "source_value": "90.41371526631113",
+        "row_key": "#/row/position_3d_p99_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_max_m": {
+        "source_value": "131.25331958203336",
+        "row_key": "#/row/position_3d_max_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_final_m": {
+        "source_value": "0.0780452552307527",
+        "row_key": "#/row/position_3d_final_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_iae_m": {
+        "source_value": "874.1026334851794",
+        "row_key": "#/row/position_3d_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_ise_m": {
+        "source_value": "66374.14632819226",
+        "row_key": "#/row/position_3d_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "evaluation_status": {
+        "source_value": "COMPLETED",
+        "row_key": "#/row/evaluation_status",
+        "comparison_kind": "exact"
+      },
+      "matched_epoch_count": {
+        "source_value": 56642,
+        "row_key": "#/row/matched_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "output_epoch_count": {
+        "source_value": 56642,
+        "row_key": "#/row/output_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "unmatched_epoch_count": {
+        "source_value": 0,
+        "row_key": "#/row/unmatched_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "coverage_ratio": {
+        "source_value": "1.0",
+        "row_key": "#/row/coverage_ratio",
+        "comparison_kind": "numeric"
+      },
+      "reference_epoch_count": {
+        "source_value": 5480,
+        "row_key": "#/row/reference_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "time_start": {
+        "source_value": "66.005054",
+        "row_key": "#/row/time_start",
+        "comparison_kind": "time"
+      },
+      "time_end": {
+        "source_value": "339.997056",
+        "row_key": "#/row/time_end",
+        "comparison_kind": "time"
+      },
+      "sequence_window_start_s": {
+        "source_value": "66.0",
+        "row_key": "#/row/sequence_window_start_s",
+        "comparison_kind": "time"
+      },
+      "sequence_window_end_s": {
+        "source_value": "340.0",
+        "row_key": "#/row/sequence_window_end_s",
+        "comparison_kind": "time"
+      },
+      "reference_velocity_supported": {
+        "source_value": false,
+        "row_key": "#/row/reference_velocity_supported",
+        "comparison_kind": "exact"
+      },
+      "reference_is_independent_ground_truth": {
+        "source_value": false,
+        "row_key": "#/row/reference_is_independent_ground_truth",
+        "comparison_kind": "exact"
+      },
+      "finite_output": {
+        "source_value": true,
+        "row_key": "#/row/finite_output",
+        "comparison_kind": "exact"
+      },
+      "finite_ratio": {
+        "source_value": "1.0",
+        "row_key": "#/row/finite_ratio",
+        "comparison_kind": "numeric"
+      }
+    },
+    "reference_cleaned_epoch_count": 6040,
+    "recorded_hashes_are_newly_verified_payload_hashes": false
+  },
+  "ADD_RUN_00400": {
+    "source_path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/ADD_RUN_00400/v3/EVALUATION_RESULT.json",
+    "source_json_sha256": "5c9a27db04c613f7732f9bad4d743a598a05492241ced952621405469b44605d",
+    "capture_source_path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/ADD_RUN_00400/v3/FROZEN_EVALUATOR/EVALUATOR_CAPTURE.json",
+    "capture_source_sha256": "30b1aa3a8495d33aa23bcd7954f0e6acb7bbe9deaf157186885c63aa656d07c9",
+    "native_nav_sha256": "62e0f46842e91685f7eedb217b54f9ec7a75de14710881537c0df506e91f0fa0",
+    "std_sha256": "ae85d785a18df5879de71fb4393a59e4c5e43858d1c21a641063923b1fd16578",
+    "evaluator_nav_sha256": "9c8bdd220b71873ce14c23366b798da05541e65e43a05d5d8f4abf3a5a334cc7",
+    "config_sha256": "af11e764a2abea95b55cda32079c213c8d07de31e2211217effb095e796781de",
+    "columns": {
+      "north_signed_mean_m": {
+        "source_value": "0.028998715010142426",
+        "row_key": "#/row/north_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "north_bias_m": {
+        "source_value": "0.028998715010142426",
+        "row_key": "#/row/north_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "north_signed_median_m": {
+        "source_value": "-0.00731596706624815",
+        "row_key": "#/row/north_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "north_standard_deviation_m": {
+        "source_value": "0.17368456451866995",
+        "row_key": "#/row/north_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "north_rmse_m": {
+        "source_value": "0.1760887657526155",
+        "row_key": "#/row/north_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "north_mae_m": {
+        "source_value": "0.06621102703852358",
+        "row_key": "#/row/north_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "north_median_absolute_error_m": {
+        "source_value": "0.024523107551988048",
+        "row_key": "#/row/north_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p50_absolute_m": {
+        "source_value": "0.024523107551988048",
+        "row_key": "#/row/north_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p75_absolute_m": {
+        "source_value": "0.04735061742865195",
+        "row_key": "#/row/north_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p90_absolute_m": {
+        "source_value": "0.11930888398212008",
+        "row_key": "#/row/north_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p95_absolute_m": {
+        "source_value": "0.23316265185210172",
+        "row_key": "#/row/north_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p99_absolute_m": {
+        "source_value": "0.9994767222220421",
+        "row_key": "#/row/north_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_max_absolute_m": {
+        "source_value": "1.369604025727977",
+        "row_key": "#/row/north_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_final_signed_error_m": {
+        "source_value": "0.0175298442493971",
+        "row_key": "#/row/north_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_final_absolute_error_m": {
+        "source_value": "0.0175298442493971",
+        "row_key": "#/row/north_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_iae_m": {
+        "source_value": "19.453030045897155",
+        "row_key": "#/row/north_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "north_ise_m": {
+        "source_value": "9.700483638158914",
+        "row_key": "#/row/north_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "east_signed_mean_m": {
+        "source_value": "0.010757241017262404",
+        "row_key": "#/row/east_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "east_bias_m": {
+        "source_value": "0.010757241017262404",
+        "row_key": "#/row/east_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "east_signed_median_m": {
+        "source_value": "-0.0031436673359479",
+        "row_key": "#/row/east_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "east_standard_deviation_m": {
+        "source_value": "0.09436156679726442",
+        "row_key": "#/row/east_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "east_rmse_m": {
+        "source_value": "0.09497275147503133",
+        "row_key": "#/row/east_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "east_mae_m": {
+        "source_value": "0.05335638875511907",
+        "row_key": "#/row/east_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "east_median_absolute_error_m": {
+        "source_value": "0.025507283673302752",
+        "row_key": "#/row/east_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p50_absolute_m": {
+        "source_value": "0.025507283673302752",
+        "row_key": "#/row/east_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p75_absolute_m": {
+        "source_value": "0.0481084114632279",
+        "row_key": "#/row/east_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p90_absolute_m": {
+        "source_value": "0.1746845770112145",
+        "row_key": "#/row/east_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p95_absolute_m": {
+        "source_value": "0.25507302766158124",
+        "row_key": "#/row/east_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p99_absolute_m": {
+        "source_value": "0.35526548170809863",
+        "row_key": "#/row/east_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_max_absolute_m": {
+        "source_value": "0.5177807381144746",
+        "row_key": "#/row/east_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_final_signed_error_m": {
+        "source_value": "-0.032404526883067",
+        "row_key": "#/row/east_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_final_absolute_error_m": {
+        "source_value": "0.032404526883067",
+        "row_key": "#/row/east_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_iae_m": {
+        "source_value": "14.817237998409965",
+        "row_key": "#/row/east_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "east_ise_m": {
+        "source_value": "2.54829950561754",
+        "row_key": "#/row/east_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "up_signed_mean_m": {
+        "source_value": "0.33880998839101983",
+        "row_key": "#/row/up_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "up_bias_m": {
+        "source_value": "0.33880998839101983",
+        "row_key": "#/row/up_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "up_signed_median_m": {
+        "source_value": "-0.01760490866387385",
+        "row_key": "#/row/up_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "up_standard_deviation_m": {
+        "source_value": "1.7916068089446915",
+        "row_key": "#/row/up_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "up_rmse_m": {
+        "source_value": "1.8233615017572633",
+        "row_key": "#/row/up_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "up_mae_m": {
+        "source_value": "0.39140385753734336",
+        "row_key": "#/row/up_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "up_median_absolute_error_m": {
+        "source_value": "0.034148783314998446",
+        "row_key": "#/row/up_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p50_absolute_m": {
+        "source_value": "0.034148783314998446",
+        "row_key": "#/row/up_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p75_absolute_m": {
+        "source_value": "0.059435340087889525",
+        "row_key": "#/row/up_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p90_absolute_m": {
+        "source_value": "0.10423934302878354",
+        "row_key": "#/row/up_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p95_absolute_m": {
+        "source_value": "0.9443285531715261",
+        "row_key": "#/row/up_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p99_absolute_m": {
+        "source_value": "11.697561968554124",
+        "row_key": "#/row/up_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_max_absolute_m": {
+        "source_value": "13.43654891507118",
+        "row_key": "#/row/up_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_final_signed_error_m": {
+        "source_value": "0.0679963807415529",
+        "row_key": "#/row/up_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_final_absolute_error_m": {
+        "source_value": "0.0679963807415529",
+        "row_key": "#/row/up_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_iae_m": {
+        "source_value": "120.65186327805591",
+        "row_key": "#/row/up_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "up_ise_m": {
+        "source_value": "1046.787886587863",
+        "row_key": "#/row/up_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "roll_signed_mean_deg": {
+        "source_value": "1.1037473147820978",
+        "row_key": "#/row/roll_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_bias_deg": {
+        "source_value": "1.1037473147820978",
+        "row_key": "#/row/roll_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_signed_median_deg": {
+        "source_value": "0.7207288458051408",
+        "row_key": "#/row/roll_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_standard_deviation_deg": {
+        "source_value": "1.965901373387769",
+        "row_key": "#/row/roll_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_rmse_deg": {
+        "source_value": "2.2545567956422405",
+        "row_key": "#/row/roll_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_mae_deg": {
+        "source_value": "1.6887878972152712",
+        "row_key": "#/row/roll_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_median_absolute_error_deg": {
+        "source_value": "1.190214614505635",
+        "row_key": "#/row/roll_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p50_absolute_deg": {
+        "source_value": "1.190214614505635",
+        "row_key": "#/row/roll_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p75_absolute_deg": {
+        "source_value": "2.498464929244186",
+        "row_key": "#/row/roll_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p90_absolute_deg": {
+        "source_value": "4.207417219993403",
+        "row_key": "#/row/roll_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p95_absolute_deg": {
+        "source_value": "4.793989429755259",
+        "row_key": "#/row/roll_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p99_absolute_deg": {
+        "source_value": "5.582559308313985",
+        "row_key": "#/row/roll_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_max_absolute_deg": {
+        "source_value": "6.871291905296573",
+        "row_key": "#/row/roll_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_final_signed_error_deg": {
+        "source_value": "-0.049141941836325",
+        "row_key": "#/row/roll_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_final_absolute_error_deg": {
+        "source_value": "0.049141941836325",
+        "row_key": "#/row/roll_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_iae_deg": {
+        "source_value": "466.59058966554466",
+        "row_key": "#/row/roll_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_ise_deg": {
+        "source_value": "1390.4701007475696",
+        "row_key": "#/row/roll_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_signed_mean_deg": {
+        "source_value": "-0.8606966753241567",
+        "row_key": "#/row/pitch_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_bias_deg": {
+        "source_value": "-0.8606966753241567",
+        "row_key": "#/row/pitch_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_signed_median_deg": {
+        "source_value": "-0.9283472472536971",
+        "row_key": "#/row/pitch_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_standard_deviation_deg": {
+        "source_value": "2.095385041265083",
+        "row_key": "#/row/pitch_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_rmse_deg": {
+        "source_value": "2.2652675864170067",
+        "row_key": "#/row/pitch_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_mae_deg": {
+        "source_value": "1.841147218610141",
+        "row_key": "#/row/pitch_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_median_absolute_error_deg": {
+        "source_value": "1.603757241770552",
+        "row_key": "#/row/pitch_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p50_absolute_deg": {
+        "source_value": "1.603757241770552",
+        "row_key": "#/row/pitch_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p75_absolute_deg": {
+        "source_value": "2.6622012133576125",
+        "row_key": "#/row/pitch_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p90_absolute_deg": {
+        "source_value": "3.6926353375938707",
+        "row_key": "#/row/pitch_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p95_absolute_deg": {
+        "source_value": "4.306864749055371",
+        "row_key": "#/row/pitch_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p99_absolute_deg": {
+        "source_value": "5.558650765340451",
+        "row_key": "#/row/pitch_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_max_absolute_deg": {
+        "source_value": "8.568337323754463",
+        "row_key": "#/row/pitch_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_final_signed_error_deg": {
+        "source_value": "2.103307036544294",
+        "row_key": "#/row/pitch_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_final_absolute_error_deg": {
+        "source_value": "2.103307036544294",
+        "row_key": "#/row/pitch_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_iae_deg": {
+        "source_value": "509.3199642611172",
+        "row_key": "#/row/pitch_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_ise_deg": {
+        "source_value": "1424.3238828910926",
+        "row_key": "#/row/pitch_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_signed_mean_deg": {
+        "source_value": "-1.0826920927781338",
+        "row_key": "#/row/yaw_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_bias_deg": {
+        "source_value": "-1.0826920927781338",
+        "row_key": "#/row/yaw_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_signed_median_deg": {
+        "source_value": "-1.0156463522880586",
+        "row_key": "#/row/yaw_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_standard_deviation_deg": {
+        "source_value": "1.540863086589708",
+        "row_key": "#/row/yaw_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_rmse_deg": {
+        "source_value": "1.8832103492119665",
+        "row_key": "#/row/yaw_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_mae_deg": {
+        "source_value": "1.4894342913487812",
+        "row_key": "#/row/yaw_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_median_absolute_error_deg": {
+        "source_value": "1.248699135943852",
+        "row_key": "#/row/yaw_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p50_absolute_deg": {
+        "source_value": "1.248699135943852",
+        "row_key": "#/row/yaw_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p75_absolute_deg": {
+        "source_value": "2.162582246291123",
+        "row_key": "#/row/yaw_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p90_absolute_deg": {
+        "source_value": "3.022611223439427",
+        "row_key": "#/row/yaw_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p95_absolute_deg": {
+        "source_value": "3.510809034981677",
+        "row_key": "#/row/yaw_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p99_absolute_deg": {
+        "source_value": "5.2166509454605015",
+        "row_key": "#/row/yaw_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_max_absolute_deg": {
+        "source_value": "8.765617806238424",
+        "row_key": "#/row/yaw_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_final_signed_error_deg": {
+        "source_value": "1.0831322327939006",
+        "row_key": "#/row/yaw_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_final_absolute_error_deg": {
+        "source_value": "1.0831322327939006",
+        "row_key": "#/row/yaw_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_iae_deg": {
+        "source_value": "409.6216361515794",
+        "row_key": "#/row/yaw_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_ise_deg": {
+        "source_value": "977.0489689005078",
+        "row_key": "#/row/yaw_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_rmse_m": {
+        "source_value": "0.20006768091577798",
+        "row_key": "#/row/horizontal_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_mean_m": {
+        "source_value": "0.09570516065874168",
+        "row_key": "#/row/horizontal_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_median_m": {
+        "source_value": "0.041867469163798396",
+        "row_key": "#/row/horizontal_median_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_mae_m": {
+        "source_value": "0.09570516065874168",
+        "row_key": "#/row/horizontal_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p50_m": {
+        "source_value": "0.041867469163798396",
+        "row_key": "#/row/horizontal_p50_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p75_m": {
+        "source_value": "0.06475516574184895",
+        "row_key": "#/row/horizontal_p75_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p90_m": {
+        "source_value": "0.2612507345849664",
+        "row_key": "#/row/horizontal_p90_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p95_m": {
+        "source_value": "0.36855018075482404",
+        "row_key": "#/row/horizontal_p95_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p99_m": {
+        "source_value": "1.0193862751898393",
+        "row_key": "#/row/horizontal_p99_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_max_m": {
+        "source_value": "1.3946346248213224",
+        "row_key": "#/row/horizontal_max_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_final_m": {
+        "source_value": "0.0368422149432351",
+        "row_key": "#/row/horizontal_final_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_iae_m": {
+        "source_value": "27.480656755769406",
+        "row_key": "#/row/horizontal_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_ise_m": {
+        "source_value": "12.248783143776457",
+        "row_key": "#/row/horizontal_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_rmse_m": {
+        "source_value": "1.8343048391795516",
+        "row_key": "#/row/position_3d_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_mean_m": {
+        "source_value": "0.4328912324036406",
+        "row_key": "#/row/position_3d_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_median_m": {
+        "source_value": "0.0585004329326415",
+        "row_key": "#/row/position_3d_median_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_mae_m": {
+        "source_value": "0.4328912324036406",
+        "row_key": "#/row/position_3d_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p50_m": {
+        "source_value": "0.0585004329326415",
+        "row_key": "#/row/position_3d_p50_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p75_m": {
+        "source_value": "0.08535823165322756",
+        "row_key": "#/row/position_3d_p75_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p90_m": {
+        "source_value": "0.29380430515885153",
+        "row_key": "#/row/position_3d_p90_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p95_m": {
+        "source_value": "0.9760875978086619",
+        "row_key": "#/row/position_3d_p95_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p99_m": {
+        "source_value": "11.741286093866536",
+        "row_key": "#/row/position_3d_p99_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_max_m": {
+        "source_value": "13.506930106098691",
+        "row_key": "#/row/position_3d_max_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_final_m": {
+        "source_value": "0.0773359980595955",
+        "row_key": "#/row/position_3d_final_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_iae_m": {
+        "source_value": "132.05182726658472",
+        "row_key": "#/row/position_3d_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_ise_m": {
+        "source_value": "1059.0366697316392",
+        "row_key": "#/row/position_3d_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "evaluation_status": {
+        "source_value": "COMPLETED",
+        "row_key": "#/row/evaluation_status",
+        "comparison_kind": "exact"
+      },
+      "matched_epoch_count": {
+        "source_value": 56642,
+        "row_key": "#/row/matched_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "output_epoch_count": {
+        "source_value": 56642,
+        "row_key": "#/row/output_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "unmatched_epoch_count": {
+        "source_value": 0,
+        "row_key": "#/row/unmatched_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "coverage_ratio": {
+        "source_value": "1.0",
+        "row_key": "#/row/coverage_ratio",
+        "comparison_kind": "numeric"
+      },
+      "reference_epoch_count": {
+        "source_value": 5480,
+        "row_key": "#/row/reference_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "time_start": {
+        "source_value": "66.005054",
+        "row_key": "#/row/time_start",
+        "comparison_kind": "time"
+      },
+      "time_end": {
+        "source_value": "339.997056",
+        "row_key": "#/row/time_end",
+        "comparison_kind": "time"
+      },
+      "sequence_window_start_s": {
+        "source_value": "66.0",
+        "row_key": "#/row/sequence_window_start_s",
+        "comparison_kind": "time"
+      },
+      "sequence_window_end_s": {
+        "source_value": "340.0",
+        "row_key": "#/row/sequence_window_end_s",
+        "comparison_kind": "time"
+      },
+      "reference_velocity_supported": {
+        "source_value": false,
+        "row_key": "#/row/reference_velocity_supported",
+        "comparison_kind": "exact"
+      },
+      "reference_is_independent_ground_truth": {
+        "source_value": false,
+        "row_key": "#/row/reference_is_independent_ground_truth",
+        "comparison_kind": "exact"
+      },
+      "finite_output": {
+        "source_value": true,
+        "row_key": "#/row/finite_output",
+        "comparison_kind": "exact"
+      },
+      "finite_ratio": {
+        "source_value": "1.0",
+        "row_key": "#/row/finite_ratio",
+        "comparison_kind": "numeric"
+      }
+    },
+    "reference_cleaned_epoch_count": 6040,
+    "recorded_hashes_are_newly_verified_payload_hashes": false
+  },
+  "ADD_RUN_00402": {
+    "source_path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/ADD_RUN_00402/v3/EVALUATION_RESULT.json",
+    "source_json_sha256": "8161118b3ab102846ef576f0a5385e6b292516cd315a81e683b2c229a5be957b",
+    "capture_source_path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/ADD_RUN_00402/v3/FROZEN_EVALUATOR/EVALUATOR_CAPTURE.json",
+    "capture_source_sha256": "79e17bbb79b4a049eecc230b49dd4c76a1afaf45f243191f71a26ba0708c1700",
+    "native_nav_sha256": "03b11bff53eb5aa4dbf3462ec2e2e62ae522ab09a1273f64cd9e3b47b9646cbd",
+    "std_sha256": "4df7040c3204e7f6c913c1ca924c8a9bd04c33a6fd26cd38c7889735b4e0e2b0",
+    "evaluator_nav_sha256": "cb4b6c6e6473eb77659e1e8da6c8a380ad88f673a4d73cb456a8a5810bded92e",
+    "config_sha256": "bcb6c931dfddcc9c9d2011945be97f25b91ed0ec7f7b6d88ba9fc75c8af3667b",
+    "columns": {
+      "north_signed_mean_m": {
+        "source_value": "0.033473377641174314",
+        "row_key": "#/row/north_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "north_bias_m": {
+        "source_value": "0.033473377641174314",
+        "row_key": "#/row/north_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "north_signed_median_m": {
+        "source_value": "-0.007021001221755901",
+        "row_key": "#/row/north_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "north_standard_deviation_m": {
+        "source_value": "0.1820563296149601",
+        "row_key": "#/row/north_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "north_rmse_m": {
+        "source_value": "0.1851080067516791",
+        "row_key": "#/row/north_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "north_mae_m": {
+        "source_value": "0.06857931022674853",
+        "row_key": "#/row/north_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "north_median_absolute_error_m": {
+        "source_value": "0.024347090366656",
+        "row_key": "#/row/north_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p50_absolute_m": {
+        "source_value": "0.024347090366656",
+        "row_key": "#/row/north_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p75_absolute_m": {
+        "source_value": "0.0457813488274849",
+        "row_key": "#/row/north_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p90_absolute_m": {
+        "source_value": "0.1224010630712463",
+        "row_key": "#/row/north_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p95_absolute_m": {
+        "source_value": "0.2987344733627819",
+        "row_key": "#/row/north_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p99_absolute_m": {
+        "source_value": "1.0404395229850252",
+        "row_key": "#/row/north_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_max_absolute_m": {
+        "source_value": "1.3988337790097631",
+        "row_key": "#/row/north_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_final_signed_error_m": {
+        "source_value": "0.0178713149398479",
+        "row_key": "#/row/north_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_final_absolute_error_m": {
+        "source_value": "0.0178713149398479",
+        "row_key": "#/row/north_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_iae_m": {
+        "source_value": "20.193864351749912",
+        "row_key": "#/row/north_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "north_ise_m": {
+        "source_value": "10.713907483838414",
+        "row_key": "#/row/north_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "east_signed_mean_m": {
+        "source_value": "0.010374515994701796",
+        "row_key": "#/row/east_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "east_bias_m": {
+        "source_value": "0.010374515994701796",
+        "row_key": "#/row/east_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "east_signed_median_m": {
+        "source_value": "-0.00388100676448185",
+        "row_key": "#/row/east_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "east_standard_deviation_m": {
+        "source_value": "0.09331609085423523",
+        "row_key": "#/row/east_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "east_rmse_m": {
+        "source_value": "0.09389101871020576",
+        "row_key": "#/row/east_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "east_mae_m": {
+        "source_value": "0.05252871867271687",
+        "row_key": "#/row/east_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "east_median_absolute_error_m": {
+        "source_value": "0.02506563608794105",
+        "row_key": "#/row/east_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p50_absolute_m": {
+        "source_value": "0.02506563608794105",
+        "row_key": "#/row/east_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p75_absolute_m": {
+        "source_value": "0.0469579978543883",
+        "row_key": "#/row/east_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p90_absolute_m": {
+        "source_value": "0.17222201156144376",
+        "row_key": "#/row/east_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p95_absolute_m": {
+        "source_value": "0.25290688916491005",
+        "row_key": "#/row/east_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p99_absolute_m": {
+        "source_value": "0.35351186229171433",
+        "row_key": "#/row/east_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_max_absolute_m": {
+        "source_value": "0.515535211643531",
+        "row_key": "#/row/east_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_final_signed_error_m": {
+        "source_value": "-0.0350510064665683",
+        "row_key": "#/row/east_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_final_absolute_error_m": {
+        "source_value": "0.0350510064665683",
+        "row_key": "#/row/east_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_iae_m": {
+        "source_value": "14.597796006502598",
+        "row_key": "#/row/east_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "east_ise_m": {
+        "source_value": "2.4909573084249215",
+        "row_key": "#/row/east_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "up_signed_mean_m": {
+        "source_value": "0.3393665791094263",
+        "row_key": "#/row/up_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "up_bias_m": {
+        "source_value": "0.3393665791094263",
+        "row_key": "#/row/up_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "up_signed_median_m": {
+        "source_value": "-0.01766282420927725",
+        "row_key": "#/row/up_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "up_standard_deviation_m": {
+        "source_value": "1.795869858103128",
+        "row_key": "#/row/up_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "up_rmse_m": {
+        "source_value": "1.8276537479128219",
+        "row_key": "#/row/up_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "up_mae_m": {
+        "source_value": "0.39293436218446015",
+        "row_key": "#/row/up_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "up_median_absolute_error_m": {
+        "source_value": "0.03444427653355715",
+        "row_key": "#/row/up_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p50_absolute_m": {
+        "source_value": "0.03444427653355715",
+        "row_key": "#/row/up_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p75_absolute_m": {
+        "source_value": "0.0603851797973207",
+        "row_key": "#/row/up_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p90_absolute_m": {
+        "source_value": "0.10756041895802777",
+        "row_key": "#/row/up_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p95_absolute_m": {
+        "source_value": "0.9466638646067697",
+        "row_key": "#/row/up_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p99_absolute_m": {
+        "source_value": "11.72372359165454",
+        "row_key": "#/row/up_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_max_absolute_m": {
+        "source_value": "13.463713849927773",
+        "row_key": "#/row/up_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_final_signed_error_m": {
+        "source_value": "0.0676191990466508",
+        "row_key": "#/row/up_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_final_absolute_error_m": {
+        "source_value": "0.0676191990466508",
+        "row_key": "#/row/up_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_iae_m": {
+        "source_value": "121.11379344083001",
+        "row_key": "#/row/up_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "up_ise_m": {
+        "source_value": "1051.6992658294107",
+        "row_key": "#/row/up_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "roll_signed_mean_deg": {
+        "source_value": "0.9670594647522261",
+        "row_key": "#/row/roll_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_bias_deg": {
+        "source_value": "0.9670594647522261",
+        "row_key": "#/row/roll_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_signed_median_deg": {
+        "source_value": "0.5986154396837264",
+        "row_key": "#/row/roll_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_standard_deviation_deg": {
+        "source_value": "1.8266792060744887",
+        "row_key": "#/row/roll_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_rmse_deg": {
+        "source_value": "2.066872257850443",
+        "row_key": "#/row/roll_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_mae_deg": {
+        "source_value": "1.5479473505613555",
+        "row_key": "#/row/roll_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_median_absolute_error_deg": {
+        "source_value": "1.091332064308446",
+        "row_key": "#/row/roll_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p50_absolute_deg": {
+        "source_value": "1.091332064308446",
+        "row_key": "#/row/roll_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p75_absolute_deg": {
+        "source_value": "2.274866588352858",
+        "row_key": "#/row/roll_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p90_absolute_deg": {
+        "source_value": "3.861120815382495",
+        "row_key": "#/row/roll_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p95_absolute_deg": {
+        "source_value": "4.391731529997266",
+        "row_key": "#/row/roll_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p99_absolute_deg": {
+        "source_value": "5.147442331335222",
+        "row_key": "#/row/roll_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_max_absolute_deg": {
+        "source_value": "6.564453773139462",
+        "row_key": "#/row/roll_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_final_signed_error_deg": {
+        "source_value": "-0.1651323458363265",
+        "row_key": "#/row/roll_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_final_absolute_error_deg": {
+        "source_value": "0.1651323458363265",
+        "row_key": "#/row/roll_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_iae_deg": {
+        "source_value": "428.0116785613334",
+        "row_key": "#/row/roll_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_ise_deg": {
+        "source_value": "1171.178750204427",
+        "row_key": "#/row/roll_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_signed_mean_deg": {
+        "source_value": "-0.8042457462370304",
+        "row_key": "#/row/pitch_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_bias_deg": {
+        "source_value": "-0.8042457462370304",
+        "row_key": "#/row/pitch_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_signed_median_deg": {
+        "source_value": "-0.8481612219698889",
+        "row_key": "#/row/pitch_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_standard_deviation_deg": {
+        "source_value": "1.98411566977046",
+        "row_key": "#/row/pitch_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_rmse_deg": {
+        "source_value": "2.1409171425744247",
+        "row_key": "#/row/pitch_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_mae_deg": {
+        "source_value": "1.7329357202904503",
+        "row_key": "#/row/pitch_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_median_absolute_error_deg": {
+        "source_value": "1.5032704118088844",
+        "row_key": "#/row/pitch_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p50_absolute_deg": {
+        "source_value": "1.5032704118088844",
+        "row_key": "#/row/pitch_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p75_absolute_deg": {
+        "source_value": "2.502213431767508",
+        "row_key": "#/row/pitch_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p90_absolute_deg": {
+        "source_value": "3.490777659668919",
+        "row_key": "#/row/pitch_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p95_absolute_deg": {
+        "source_value": "4.093005036707344",
+        "row_key": "#/row/pitch_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p99_absolute_deg": {
+        "source_value": "5.328956490419604",
+        "row_key": "#/row/pitch_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_max_absolute_deg": {
+        "source_value": "8.498578684542622",
+        "row_key": "#/row/pitch_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_final_signed_error_deg": {
+        "source_value": "1.8627574485443008",
+        "row_key": "#/row/pitch_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_final_absolute_error_deg": {
+        "source_value": "1.8627574485443008",
+        "row_key": "#/row/pitch_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_iae_deg": {
+        "source_value": "479.0034889846013",
+        "row_key": "#/row/pitch_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_ise_deg": {
+        "source_value": "1271.0544353227813",
+        "row_key": "#/row/pitch_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_signed_mean_deg": {
+        "source_value": "-1.0848483960387707",
+        "row_key": "#/row/yaw_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_bias_deg": {
+        "source_value": "-1.0848483960387707",
+        "row_key": "#/row/yaw_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_signed_median_deg": {
+        "source_value": "-1.0181729400538586",
+        "row_key": "#/row/yaw_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_standard_deviation_deg": {
+        "source_value": "1.5390029402790169",
+        "row_key": "#/row/yaw_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_rmse_deg": {
+        "source_value": "1.8829301879186475",
+        "row_key": "#/row/yaw_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_mae_deg": {
+        "source_value": "1.4895082973564648",
+        "row_key": "#/row/yaw_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_median_absolute_error_deg": {
+        "source_value": "1.2498128516368183",
+        "row_key": "#/row/yaw_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p50_absolute_deg": {
+        "source_value": "1.2498128516368183",
+        "row_key": "#/row/yaw_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p75_absolute_deg": {
+        "source_value": "2.16631177360371",
+        "row_key": "#/row/yaw_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p90_absolute_deg": {
+        "source_value": "3.019325451254429",
+        "row_key": "#/row/yaw_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p95_absolute_deg": {
+        "source_value": "3.5032828423581313",
+        "row_key": "#/row/yaw_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p99_absolute_deg": {
+        "source_value": "5.209788040484939",
+        "row_key": "#/row/yaw_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_max_absolute_deg": {
+        "source_value": "8.770042880238407",
+        "row_key": "#/row/yaw_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_final_signed_error_deg": {
+        "source_value": "1.0747193207939176",
+        "row_key": "#/row/yaw_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_final_absolute_error_deg": {
+        "source_value": "1.0747193207939176",
+        "row_key": "#/row/yaw_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_iae_deg": {
+        "source_value": "409.6810198925034",
+        "row_key": "#/row/yaw_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_ise_deg": {
+        "source_value": "976.92985112203",
+        "row_key": "#/row/yaw_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_rmse_m": {
+        "source_value": "0.20755841962690857",
+        "row_key": "#/row/horizontal_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_mean_m": {
+        "source_value": "0.09745103309824389",
+        "row_key": "#/row/horizontal_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_median_m": {
+        "source_value": "0.040688399826381",
+        "row_key": "#/row/horizontal_median_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_mae_m": {
+        "source_value": "0.09745103309824389",
+        "row_key": "#/row/horizontal_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p50_m": {
+        "source_value": "0.040688399826381",
+        "row_key": "#/row/horizontal_p50_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p75_m": {
+        "source_value": "0.06283805680165355",
+        "row_key": "#/row/horizontal_p75_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p90_m": {
+        "source_value": "0.2688759026100732",
+        "row_key": "#/row/horizontal_p90_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p95_m": {
+        "source_value": "0.3776036199634851",
+        "row_key": "#/row/horizontal_p95_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p99_m": {
+        "source_value": "1.0585463949949536",
+        "row_key": "#/row/horizontal_p99_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_max_m": {
+        "source_value": "1.4212718313852903",
+        "row_key": "#/row/horizontal_max_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_final_m": {
+        "source_value": "0.0393440840787868",
+        "row_key": "#/row/horizontal_final_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_iae_m": {
+        "source_value": "28.05099627830751",
+        "row_key": "#/row/horizontal_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_ise_m": {
+        "source_value": "13.204864792263336",
+        "row_key": "#/row/horizontal_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_rmse_m": {
+        "source_value": "1.8394017287742785",
+        "row_key": "#/row/position_3d_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_mean_m": {
+        "source_value": "0.4339098172105047",
+        "row_key": "#/row/position_3d_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_median_m": {
+        "source_value": "0.057771760996573704",
+        "row_key": "#/row/position_3d_median_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_mae_m": {
+        "source_value": "0.4339098172105047",
+        "row_key": "#/row/position_3d_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p50_m": {
+        "source_value": "0.057771760996573704",
+        "row_key": "#/row/position_3d_p50_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p75_m": {
+        "source_value": "0.08493048653859014",
+        "row_key": "#/row/position_3d_p75_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p90_m": {
+        "source_value": "0.2916967653133994",
+        "row_key": "#/row/position_3d_p90_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p95_m": {
+        "source_value": "0.9966449652045323",
+        "row_key": "#/row/position_3d_p95_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p99_m": {
+        "source_value": "11.771203969086667",
+        "row_key": "#/row/position_3d_p99_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_max_m": {
+        "source_value": "13.53794979472838",
+        "row_key": "#/row/position_3d_max_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_final_m": {
+        "source_value": "0.0782324295398604",
+        "row_key": "#/row/position_3d_final_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_iae_m": {
+        "source_value": "132.3851671899002",
+        "row_key": "#/row/position_3d_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_ise_m": {
+        "source_value": "1064.904130621674",
+        "row_key": "#/row/position_3d_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "evaluation_status": {
+        "source_value": "COMPLETED",
+        "row_key": "#/row/evaluation_status",
+        "comparison_kind": "exact"
+      },
+      "matched_epoch_count": {
+        "source_value": 56642,
+        "row_key": "#/row/matched_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "output_epoch_count": {
+        "source_value": 56642,
+        "row_key": "#/row/output_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "unmatched_epoch_count": {
+        "source_value": 0,
+        "row_key": "#/row/unmatched_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "coverage_ratio": {
+        "source_value": "1.0",
+        "row_key": "#/row/coverage_ratio",
+        "comparison_kind": "numeric"
+      },
+      "reference_epoch_count": {
+        "source_value": 5480,
+        "row_key": "#/row/reference_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "time_start": {
+        "source_value": "66.005054",
+        "row_key": "#/row/time_start",
+        "comparison_kind": "time"
+      },
+      "time_end": {
+        "source_value": "339.997056",
+        "row_key": "#/row/time_end",
+        "comparison_kind": "time"
+      },
+      "sequence_window_start_s": {
+        "source_value": "66.0",
+        "row_key": "#/row/sequence_window_start_s",
+        "comparison_kind": "time"
+      },
+      "sequence_window_end_s": {
+        "source_value": "340.0",
+        "row_key": "#/row/sequence_window_end_s",
+        "comparison_kind": "time"
+      },
+      "reference_velocity_supported": {
+        "source_value": false,
+        "row_key": "#/row/reference_velocity_supported",
+        "comparison_kind": "exact"
+      },
+      "reference_is_independent_ground_truth": {
+        "source_value": false,
+        "row_key": "#/row/reference_is_independent_ground_truth",
+        "comparison_kind": "exact"
+      },
+      "finite_output": {
+        "source_value": true,
+        "row_key": "#/row/finite_output",
+        "comparison_kind": "exact"
+      },
+      "finite_ratio": {
+        "source_value": "1.0",
+        "row_key": "#/row/finite_ratio",
+        "comparison_kind": "numeric"
+      }
+    },
+    "reference_cleaned_epoch_count": 6040,
+    "recorded_hashes_are_newly_verified_payload_hashes": false
+  },
+  "RUN_00004": {
+    "source_path": "<V3_ROOT>/04_EVALUATION/RUN_00004/v3/EVALUATION_RESULT.json",
+    "source_json_sha256": "d00efef45c3f210425c0aa26dc8bdbaf8757e9fe16904120e2f9fbf3ed9fc8e1",
+    "capture_source_path": "<V3_ROOT>/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/EVALUATOR_CAPTURE.json",
+    "capture_source_sha256": "f7aef03e69a0e7aee0e67c2c7221432557e2c30e1b531da8b5f63d19c0c9fece",
+    "native_nav_sha256": "2fda678fbc9d760e7bd4b93b6e7f99861b41ea91aef86252566ea059abbeb0f4",
+    "std_sha256": "06fb77697eb2a2b5b53a9fb5702560907920f389de08fd45af2d6d9cb7fa1da9",
+    "evaluator_nav_sha256": "375663491799b93d5c69251f7cad0edc21bc8ac8732a59600fede2a67b0fb8db",
+    "config_sha256": "3ac059cbaf5cacbf68929ca6027074629ab4efc969b4e8a5ddbb2ca300f4c542",
+    "columns": {
+      "north_signed_mean_m": {
+        "source_value": "-0.006307047018417052",
+        "row_key": "#/row/north_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "north_bias_m": {
+        "source_value": "-0.006307047018417052",
+        "row_key": "#/row/north_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "north_signed_median_m": {
+        "source_value": "-0.00948782457139335",
+        "row_key": "#/row/north_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "north_standard_deviation_m": {
+        "source_value": "0.046644557411094294",
+        "row_key": "#/row/north_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "north_rmse_m": {
+        "source_value": "0.04706902992594382",
+        "row_key": "#/row/north_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "north_mae_m": {
+        "source_value": "0.03202617724300179",
+        "row_key": "#/row/north_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "north_median_absolute_error_m": {
+        "source_value": "0.0217239090919747",
+        "row_key": "#/row/north_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p50_absolute_m": {
+        "source_value": "0.0217239090919747",
+        "row_key": "#/row/north_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p75_absolute_m": {
+        "source_value": "0.04079967732467962",
+        "row_key": "#/row/north_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p90_absolute_m": {
+        "source_value": "0.06857549427396016",
+        "row_key": "#/row/north_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p95_absolute_m": {
+        "source_value": "0.11501864692279543",
+        "row_key": "#/row/north_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p99_absolute_m": {
+        "source_value": "0.15976232684228847",
+        "row_key": "#/row/north_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_max_absolute_m": {
+        "source_value": "0.4249584267570179",
+        "row_key": "#/row/north_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_final_signed_error_m": {
+        "source_value": "0.017525957112209",
+        "row_key": "#/row/north_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_final_absolute_error_m": {
+        "source_value": "0.017525957112209",
+        "row_key": "#/row/north_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_iae_m": {
+        "source_value": "8.791714655949937",
+        "row_key": "#/row/north_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "north_ise_m": {
+        "source_value": "0.6025348071232242",
+        "row_key": "#/row/north_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "east_signed_mean_m": {
+        "source_value": "0.021406564016344748",
+        "row_key": "#/row/east_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "east_bias_m": {
+        "source_value": "0.021406564016344748",
+        "row_key": "#/row/east_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "east_signed_median_m": {
+        "source_value": "0.00148972308544865",
+        "row_key": "#/row/east_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "east_standard_deviation_m": {
+        "source_value": "0.08313762986239247",
+        "row_key": "#/row/east_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "east_rmse_m": {
+        "source_value": "0.08584932429624616",
+        "row_key": "#/row/east_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "east_mae_m": {
+        "source_value": "0.04553562661642788",
+        "row_key": "#/row/east_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "east_median_absolute_error_m": {
+        "source_value": "0.023685944036394298",
+        "row_key": "#/row/east_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p50_absolute_m": {
+        "source_value": "0.023685944036394298",
+        "row_key": "#/row/east_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p75_absolute_m": {
+        "source_value": "0.04163972670866385",
+        "row_key": "#/row/east_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p90_absolute_m": {
+        "source_value": "0.07967467342516495",
+        "row_key": "#/row/east_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p95_absolute_m": {
+        "source_value": "0.2473455062233119",
+        "row_key": "#/row/east_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p99_absolute_m": {
+        "source_value": "0.35525604005296946",
+        "row_key": "#/row/east_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_max_absolute_m": {
+        "source_value": "0.5177716405465098",
+        "row_key": "#/row/east_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_final_signed_error_m": {
+        "source_value": "-0.0324027451998421",
+        "row_key": "#/row/east_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_final_absolute_error_m": {
+        "source_value": "0.0324027451998421",
+        "row_key": "#/row/east_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_iae_m": {
+        "source_value": "12.391306244722262",
+        "row_key": "#/row/east_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "east_ise_m": {
+        "source_value": "2.032635907124926",
+        "row_key": "#/row/east_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "up_signed_mean_m": {
+        "source_value": "-0.0168010434396984",
+        "row_key": "#/row/up_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "up_bias_m": {
+        "source_value": "-0.0168010434396984",
+        "row_key": "#/row/up_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "up_signed_median_m": {
+        "source_value": "-0.0194888180134649",
+        "row_key": "#/row/up_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "up_standard_deviation_m": {
+        "source_value": "0.046025249381584366",
+        "row_key": "#/row/up_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "up_rmse_m": {
+        "source_value": "0.04899590433188947",
+        "row_key": "#/row/up_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "up_mae_m": {
+        "source_value": "0.03753810211261861",
+        "row_key": "#/row/up_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "up_median_absolute_error_m": {
+        "source_value": "0.030769436659659748",
+        "row_key": "#/row/up_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p50_absolute_m": {
+        "source_value": "0.030769436659659748",
+        "row_key": "#/row/up_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p75_absolute_m": {
+        "source_value": "0.05265197530455575",
+        "row_key": "#/row/up_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p90_absolute_m": {
+        "source_value": "0.07899111352700922",
+        "row_key": "#/row/up_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p95_absolute_m": {
+        "source_value": "0.09923790735213835",
+        "row_key": "#/row/up_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p99_absolute_m": {
+        "source_value": "0.13776076692806755",
+        "row_key": "#/row/up_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_max_absolute_m": {
+        "source_value": "0.3415064349426196",
+        "row_key": "#/row/up_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_final_signed_error_m": {
+        "source_value": "0.0680041680527514",
+        "row_key": "#/row/up_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_final_absolute_error_m": {
+        "source_value": "0.0680041680527514",
+        "row_key": "#/row/up_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_iae_m": {
+        "source_value": "10.236740672440082",
+        "row_key": "#/row/up_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "up_ise_m": {
+        "source_value": "0.6503416600788784",
+        "row_key": "#/row/up_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "roll_signed_mean_deg": {
+        "source_value": "1.1036552635824757",
+        "row_key": "#/row/roll_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_bias_deg": {
+        "source_value": "1.1036552635824757",
+        "row_key": "#/row/roll_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_signed_median_deg": {
+        "source_value": "0.7207673513080124",
+        "row_key": "#/row/roll_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_standard_deviation_deg": {
+        "source_value": "1.9657048885288184",
+        "row_key": "#/row/roll_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_rmse_deg": {
+        "source_value": "2.254340402339318",
+        "row_key": "#/row/roll_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_mae_deg": {
+        "source_value": "1.6887407685282463",
+        "row_key": "#/row/roll_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_median_absolute_error_deg": {
+        "source_value": "1.1904071043869777",
+        "row_key": "#/row/roll_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p50_absolute_deg": {
+        "source_value": "1.1904071043869777",
+        "row_key": "#/row/roll_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p75_absolute_deg": {
+        "source_value": "2.498865574095511",
+        "row_key": "#/row/roll_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p90_absolute_deg": {
+        "source_value": "4.207274286773847",
+        "row_key": "#/row/roll_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p95_absolute_deg": {
+        "source_value": "4.7928653754085495",
+        "row_key": "#/row/roll_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p99_absolute_deg": {
+        "source_value": "5.5834012728939815",
+        "row_key": "#/row/roll_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_max_absolute_deg": {
+        "source_value": "6.872141904296569",
+        "row_key": "#/row/roll_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_final_signed_error_deg": {
+        "source_value": "-0.048973781836338",
+        "row_key": "#/row/roll_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_final_absolute_error_deg": {
+        "source_value": "0.048973781836338",
+        "row_key": "#/row/roll_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_iae_deg": {
+        "source_value": "466.5686055087294",
+        "row_key": "#/row/roll_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_ise_deg": {
+        "source_value": "1390.1152090059722",
+        "row_key": "#/row/roll_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_signed_mean_deg": {
+        "source_value": "-0.860889171297922",
+        "row_key": "#/row/pitch_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_bias_deg": {
+        "source_value": "-0.860889171297922",
+        "row_key": "#/row/pitch_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_signed_median_deg": {
+        "source_value": "-0.9284057376219153",
+        "row_key": "#/row/pitch_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_standard_deviation_deg": {
+        "source_value": "2.0955472187273014",
+        "row_key": "#/row/pitch_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_rmse_deg": {
+        "source_value": "2.265490744005314",
+        "row_key": "#/row/pitch_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_mae_deg": {
+        "source_value": "1.84125647850281",
+        "row_key": "#/row/pitch_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_median_absolute_error_deg": {
+        "source_value": "1.6037131252167853",
+        "row_key": "#/row/pitch_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p50_absolute_deg": {
+        "source_value": "1.6037131252167853",
+        "row_key": "#/row/pitch_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p75_absolute_deg": {
+        "source_value": "2.662184191966233",
+        "row_key": "#/row/pitch_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p90_absolute_deg": {
+        "source_value": "3.6931975628826876",
+        "row_key": "#/row/pitch_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p95_absolute_deg": {
+        "source_value": "4.307715620769906",
+        "row_key": "#/row/pitch_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p99_absolute_deg": {
+        "source_value": "5.55912916087136",
+        "row_key": "#/row/pitch_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_max_absolute_deg": {
+        "source_value": "8.570146205754469",
+        "row_key": "#/row/pitch_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_final_signed_error_deg": {
+        "source_value": "2.103030367544278",
+        "row_key": "#/row/pitch_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_final_absolute_error_deg": {
+        "source_value": "2.103030367544278",
+        "row_key": "#/row/pitch_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_iae_deg": {
+        "source_value": "509.3454171470359",
+        "row_key": "#/row/pitch_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_ise_deg": {
+        "source_value": "1424.5865284206527",
+        "row_key": "#/row/pitch_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_signed_mean_deg": {
+        "source_value": "-1.0864579081639958",
+        "row_key": "#/row/yaw_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_bias_deg": {
+        "source_value": "-1.0864579081639958",
+        "row_key": "#/row/yaw_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_signed_median_deg": {
+        "source_value": "-1.019122660216496",
+        "row_key": "#/row/yaw_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_standard_deviation_deg": {
+        "source_value": "1.5419567841535502",
+        "row_key": "#/row/yaw_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_rmse_deg": {
+        "source_value": "1.8862718548526467",
+        "row_key": "#/row/yaw_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_mae_deg": {
+        "source_value": "1.4920996851218773",
+        "row_key": "#/row/yaw_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_median_absolute_error_deg": {
+        "source_value": "1.2511036957521924",
+        "row_key": "#/row/yaw_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p50_absolute_deg": {
+        "source_value": "1.2511036957521924",
+        "row_key": "#/row/yaw_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p75_absolute_deg": {
+        "source_value": "2.167865433363076",
+        "row_key": "#/row/yaw_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p90_absolute_deg": {
+        "source_value": "3.027768403128167",
+        "row_key": "#/row/yaw_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p95_absolute_deg": {
+        "source_value": "3.518066976630167",
+        "row_key": "#/row/yaw_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p99_absolute_deg": {
+        "source_value": "5.221692511562299",
+        "row_key": "#/row/yaw_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_max_absolute_deg": {
+        "source_value": "8.770338719238396",
+        "row_key": "#/row/yaw_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_final_signed_error_deg": {
+        "source_value": "1.080624429793943",
+        "row_key": "#/row/yaw_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_final_absolute_error_deg": {
+        "source_value": "1.080624429793943",
+        "row_key": "#/row/yaw_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_iae_deg": {
+        "source_value": "410.3696947685959",
+        "row_key": "#/row/yaw_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_ise_deg": {
+        "source_value": "980.2678664463377",
+        "row_key": "#/row/yaw_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_rmse_m": {
+        "source_value": "0.09790607774950152",
+        "row_key": "#/row/horizontal_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_mean_m": {
+        "source_value": "0.06119131921466191",
+        "row_key": "#/row/horizontal_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_median_m": {
+        "source_value": "0.038924634128806146",
+        "row_key": "#/row/horizontal_median_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_mae_m": {
+        "source_value": "0.06119131921466191",
+        "row_key": "#/row/horizontal_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p50_m": {
+        "source_value": "0.038924634128806146",
+        "row_key": "#/row/horizontal_p50_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p75_m": {
+        "source_value": "0.05748542595863945",
+        "row_key": "#/row/horizontal_p75_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p90_m": {
+        "source_value": "0.11434126949299761",
+        "row_key": "#/row/horizontal_p90_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p95_m": {
+        "source_value": "0.2651433111192599",
+        "row_key": "#/row/horizontal_p95_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p99_m": {
+        "source_value": "0.3764794854791641",
+        "row_key": "#/row/horizontal_p99_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_max_m": {
+        "source_value": "0.5413779544115519",
+        "row_key": "#/row/horizontal_max_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_final_m": {
+        "source_value": "0.0368387984221103",
+        "row_key": "#/row/horizontal_final_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_iae_m": {
+        "source_value": "16.719866961437685",
+        "row_key": "#/row/horizontal_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_ise_m": {
+        "source_value": "2.635170714248151",
+        "row_key": "#/row/horizontal_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_rmse_m": {
+        "source_value": "0.1094814993576134",
+        "row_key": "#/row/position_3d_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_mean_m": {
+        "source_value": "0.07797491815187897",
+        "row_key": "#/row/position_3d_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_median_m": {
+        "source_value": "0.054884375066532196",
+        "row_key": "#/row/position_3d_median_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_mae_m": {
+        "source_value": "0.07797491815187897",
+        "row_key": "#/row/position_3d_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p50_m": {
+        "source_value": "0.054884375066532196",
+        "row_key": "#/row/position_3d_p50_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p75_m": {
+        "source_value": "0.07604453375637799",
+        "row_key": "#/row/position_3d_p75_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p90_m": {
+        "source_value": "0.15041094047782202",
+        "row_key": "#/row/position_3d_p90_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p95_m": {
+        "source_value": "0.28213065046927766",
+        "row_key": "#/row/position_3d_p95_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p99_m": {
+        "source_value": "0.38542952671248515",
+        "row_key": "#/row/position_3d_p99_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_max_m": {
+        "source_value": "0.5741853624510063",
+        "row_key": "#/row/position_3d_max_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_final_m": {
+        "source_value": "0.0773412176121616",
+        "row_key": "#/row/position_3d_final_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_iae_m": {
+        "source_value": "21.31250698787496",
+        "row_key": "#/row/position_3d_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_ise_m": {
+        "source_value": "3.2855123743270296",
+        "row_key": "#/row/position_3d_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "evaluation_status": {
+        "source_value": "COMPLETED",
+        "row_key": "#/row/evaluation_status",
+        "comparison_kind": "exact"
+      },
+      "matched_epoch_count": {
+        "source_value": 56642,
+        "row_key": "#/row/matched_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "output_epoch_count": {
+        "source_value": 56642,
+        "row_key": "#/row/output_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "unmatched_epoch_count": {
+        "source_value": 0,
+        "row_key": "#/row/unmatched_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "coverage_ratio": {
+        "source_value": "1.0",
+        "row_key": "#/row/coverage_ratio",
+        "comparison_kind": "numeric"
+      },
+      "reference_epoch_count": {
+        "source_value": 5480,
+        "row_key": "#/row/reference_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "time_start": {
+        "source_value": "66.005054",
+        "row_key": "#/row/time_start",
+        "comparison_kind": "time"
+      },
+      "time_end": {
+        "source_value": "339.997056",
+        "row_key": "#/row/time_end",
+        "comparison_kind": "time"
+      },
+      "sequence_window_start_s": {
+        "source_value": "66.0",
+        "row_key": "#/row/sequence_window_start_s",
+        "comparison_kind": "time"
+      },
+      "sequence_window_end_s": {
+        "source_value": "340.0",
+        "row_key": "#/row/sequence_window_end_s",
+        "comparison_kind": "time"
+      },
+      "reference_velocity_supported": {
+        "source_value": false,
+        "row_key": "#/row/reference_velocity_supported",
+        "comparison_kind": "exact"
+      },
+      "reference_is_independent_ground_truth": {
+        "source_value": false,
+        "row_key": "#/row/reference_is_independent_ground_truth",
+        "comparison_kind": "exact"
+      },
+      "finite_output": {
+        "source_value": true,
+        "row_key": "#/row/finite_output",
+        "comparison_kind": "exact"
+      },
+      "finite_ratio": {
+        "source_value": "1.0",
+        "row_key": "#/row/finite_ratio",
+        "comparison_kind": "numeric"
+      }
+    },
+    "reference_cleaned_epoch_count": 6040,
+    "recorded_hashes_are_newly_verified_payload_hashes": false
+  },
+  "RUN_00006": {
+    "source_path": "<V3_ROOT>/04_EVALUATION/RUN_00006/v3/EVALUATION_RESULT.json",
+    "source_json_sha256": "878c57219bfb42ffe30899198f192b682971db09eaa6beb1e46a1e36ecc7c579",
+    "capture_source_path": "<V3_ROOT>/04_EVALUATION/RUN_00006/v3/FROZEN_EVALUATOR/EVALUATOR_CAPTURE.json",
+    "capture_source_sha256": "d28115353f214ae050784752f18db874d1f42cd1e9c88403c1ff5348fa3c6967",
+    "native_nav_sha256": "5ea1ed7bcb86df2a23c46af54cae385a86f7c49b13cbae08bd60c871e4a8c53e",
+    "std_sha256": "bc30cdc8f63aa9e7582ab68634ed95963102e7216024227bcad47f5503f5761f",
+    "evaluator_nav_sha256": "497f66ef84d42998f46753eaac90fb83f21d09ae5f7d0247d57b636b9ee38d3c",
+    "config_sha256": "7577663e901b523293b56cc6a71a98bbbb796484108b910ad44e994be5fb3b39",
+    "columns": {
+      "north_signed_mean_m": {
+        "source_value": "-0.005010028922007733",
+        "row_key": "#/row/north_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "north_bias_m": {
+        "source_value": "-0.005010028922007733",
+        "row_key": "#/row/north_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "north_signed_median_m": {
+        "source_value": "-0.00898423383272725",
+        "row_key": "#/row/north_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "north_standard_deviation_m": {
+        "source_value": "0.04616308153652543",
+        "row_key": "#/row/north_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "north_rmse_m": {
+        "source_value": "0.0464341521592378",
+        "row_key": "#/row/north_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "north_mae_m": {
+        "source_value": "0.031487619420968394",
+        "row_key": "#/row/north_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "north_median_absolute_error_m": {
+        "source_value": "0.0215803748480221",
+        "row_key": "#/row/north_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p50_absolute_m": {
+        "source_value": "0.0215803748480221",
+        "row_key": "#/row/north_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p75_absolute_m": {
+        "source_value": "0.039418062554884274",
+        "row_key": "#/row/north_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p90_absolute_m": {
+        "source_value": "0.06657103225471944",
+        "row_key": "#/row/north_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p95_absolute_m": {
+        "source_value": "0.11339910199416865",
+        "row_key": "#/row/north_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p99_absolute_m": {
+        "source_value": "0.16100444926776028",
+        "row_key": "#/row/north_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_max_absolute_m": {
+        "source_value": "0.4249584267570179",
+        "row_key": "#/row/north_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_final_signed_error_m": {
+        "source_value": "0.0178674025922376",
+        "row_key": "#/row/north_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_final_absolute_error_m": {
+        "source_value": "0.0178674025922376",
+        "row_key": "#/row/north_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_iae_m": {
+        "source_value": "8.638017866623255",
+        "row_key": "#/row/north_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "north_ise_m": {
+        "source_value": "0.5871624351740732",
+        "row_key": "#/row/north_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "east_signed_mean_m": {
+        "source_value": "0.020752418200064328",
+        "row_key": "#/row/east_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "east_bias_m": {
+        "source_value": "0.020752418200064328",
+        "row_key": "#/row/east_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "east_signed_median_m": {
+        "source_value": "0.0010761700451666",
+        "row_key": "#/row/east_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "east_standard_deviation_m": {
+        "source_value": "0.08250256948927648",
+        "row_key": "#/row/east_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "east_rmse_m": {
+        "source_value": "0.08507253865662676",
+        "row_key": "#/row/east_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "east_mae_m": {
+        "source_value": "0.044853536855353204",
+        "row_key": "#/row/east_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "east_median_absolute_error_m": {
+        "source_value": "0.023323995620306598",
+        "row_key": "#/row/east_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p50_absolute_m": {
+        "source_value": "0.023323995620306598",
+        "row_key": "#/row/east_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p75_absolute_m": {
+        "source_value": "0.0406092179939268",
+        "row_key": "#/row/east_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p90_absolute_m": {
+        "source_value": "0.07624554649880508",
+        "row_key": "#/row/east_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p95_absolute_m": {
+        "source_value": "0.2452914106606803",
+        "row_key": "#/row/east_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p99_absolute_m": {
+        "source_value": "0.3534324227064402",
+        "row_key": "#/row/east_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_max_absolute_m": {
+        "source_value": "0.5155252406147497",
+        "row_key": "#/row/east_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_final_signed_error_m": {
+        "source_value": "-0.0350494594776025",
+        "row_key": "#/row/east_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_final_absolute_error_m": {
+        "source_value": "0.0350494594776025",
+        "row_key": "#/row/east_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_iae_m": {
+        "source_value": "12.217806865710129",
+        "row_key": "#/row/east_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "east_ise_m": {
+        "source_value": "1.9977933897177096",
+        "row_key": "#/row/east_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "up_signed_mean_m": {
+        "source_value": "-0.017233066720166904",
+        "row_key": "#/row/up_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "up_bias_m": {
+        "source_value": "-0.017233066720166904",
+        "row_key": "#/row/up_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "up_signed_median_m": {
+        "source_value": "-0.01967551513734995",
+        "row_key": "#/row/up_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "up_standard_deviation_m": {
+        "source_value": "0.046956504936450004",
+        "row_key": "#/row/up_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "up_rmse_m": {
+        "source_value": "0.05001891586618585",
+        "row_key": "#/row/up_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "up_mae_m": {
+        "source_value": "0.03821115990904565",
+        "row_key": "#/row/up_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "up_median_absolute_error_m": {
+        "source_value": "0.03096618175984565",
+        "row_key": "#/row/up_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p50_absolute_m": {
+        "source_value": "0.03096618175984565",
+        "row_key": "#/row/up_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p75_absolute_m": {
+        "source_value": "0.05367382976873357",
+        "row_key": "#/row/up_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p90_absolute_m": {
+        "source_value": "0.08093026855379419",
+        "row_key": "#/row/up_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p95_absolute_m": {
+        "source_value": "0.10244353619763666",
+        "row_key": "#/row/up_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p99_absolute_m": {
+        "source_value": "0.1419422812729771",
+        "row_key": "#/row/up_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_max_absolute_m": {
+        "source_value": "0.3415064349426196",
+        "row_key": "#/row/up_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_final_signed_error_m": {
+        "source_value": "0.0676264758155387",
+        "row_key": "#/row/up_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_final_absolute_error_m": {
+        "source_value": "0.0676264758155387",
+        "row_key": "#/row/up_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_iae_m": {
+        "source_value": "10.432655178789517",
+        "row_key": "#/row/up_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "up_ise_m": {
+        "source_value": "0.6790305809159617",
+        "row_key": "#/row/up_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "roll_signed_mean_deg": {
+        "source_value": "0.9672476984732105",
+        "row_key": "#/row/roll_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_bias_deg": {
+        "source_value": "0.9672476984732105",
+        "row_key": "#/row/roll_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_signed_median_deg": {
+        "source_value": "0.5987593435319951",
+        "row_key": "#/row/roll_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_standard_deviation_deg": {
+        "source_value": "1.8268228689040868",
+        "row_key": "#/row/roll_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_rmse_deg": {
+        "source_value": "2.067087299693141",
+        "row_key": "#/row/roll_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_mae_deg": {
+        "source_value": "1.5481543812998768",
+        "row_key": "#/row/roll_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_median_absolute_error_deg": {
+        "source_value": "1.0914276071754614",
+        "row_key": "#/row/roll_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p50_absolute_deg": {
+        "source_value": "1.0914276071754614",
+        "row_key": "#/row/roll_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p75_absolute_deg": {
+        "source_value": "2.2765147632655456",
+        "row_key": "#/row/roll_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p90_absolute_deg": {
+        "source_value": "3.861565322538707",
+        "row_key": "#/row/roll_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p95_absolute_deg": {
+        "source_value": "4.391055938490462",
+        "row_key": "#/row/roll_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p99_absolute_deg": {
+        "source_value": "5.148796414192063",
+        "row_key": "#/row/roll_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_max_absolute_deg": {
+        "source_value": "6.561720843139455",
+        "row_key": "#/row/roll_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_final_signed_error_deg": {
+        "source_value": "-0.1649957428363393",
+        "row_key": "#/row/roll_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_final_absolute_error_deg": {
+        "source_value": "0.1649957428363393",
+        "row_key": "#/row/roll_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_iae_deg": {
+        "source_value": "428.0688974465917",
+        "row_key": "#/row/roll_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_ise_deg": {
+        "source_value": "1171.406042150181",
+        "row_key": "#/row/roll_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_signed_mean_deg": {
+        "source_value": "-0.8045041810280158",
+        "row_key": "#/row/pitch_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_bias_deg": {
+        "source_value": "-0.8045041810280158",
+        "row_key": "#/row/pitch_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_signed_median_deg": {
+        "source_value": "-0.8487171770008644",
+        "row_key": "#/row/pitch_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_standard_deviation_deg": {
+        "source_value": "1.9842612864282212",
+        "row_key": "#/row/pitch_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_rmse_deg": {
+        "source_value": "2.141149184458976",
+        "row_key": "#/row/pitch_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_mae_deg": {
+        "source_value": "1.7330885833719774",
+        "row_key": "#/row/pitch_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_median_absolute_error_deg": {
+        "source_value": "1.5035894449531924",
+        "row_key": "#/row/pitch_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p50_absolute_deg": {
+        "source_value": "1.5035894449531924",
+        "row_key": "#/row/pitch_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p75_absolute_deg": {
+        "source_value": "2.503192952193956",
+        "row_key": "#/row/pitch_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p90_absolute_deg": {
+        "source_value": "3.490777659668919",
+        "row_key": "#/row/pitch_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p95_absolute_deg": {
+        "source_value": "4.0930252263096225",
+        "row_key": "#/row/pitch_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p99_absolute_deg": {
+        "source_value": "5.329857057336655",
+        "row_key": "#/row/pitch_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_max_absolute_deg": {
+        "source_value": "8.498578684542622",
+        "row_key": "#/row/pitch_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_final_signed_error_deg": {
+        "source_value": "1.8624649325442988",
+        "row_key": "#/row/pitch_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_final_absolute_error_deg": {
+        "source_value": "1.8624649325442988",
+        "row_key": "#/row/pitch_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_iae_deg": {
+        "source_value": "479.04429101561755",
+        "row_key": "#/row/pitch_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_ise_deg": {
+        "source_value": "1271.3251120267946",
+        "row_key": "#/row/pitch_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_signed_mean_deg": {
+        "source_value": "-1.0886263952048665",
+        "row_key": "#/row/yaw_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_bias_deg": {
+        "source_value": "-1.0886263952048665",
+        "row_key": "#/row/yaw_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_signed_median_deg": {
+        "source_value": "-1.021369188526819",
+        "row_key": "#/row/yaw_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_standard_deviation_deg": {
+        "source_value": "1.540094709526144",
+        "row_key": "#/row/yaw_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_rmse_deg": {
+        "source_value": "1.886000833151237",
+        "row_key": "#/row/yaw_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_mae_deg": {
+        "source_value": "1.4921874066919978",
+        "row_key": "#/row/yaw_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_median_absolute_error_deg": {
+        "source_value": "1.2524387078740489",
+        "row_key": "#/row/yaw_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p50_absolute_deg": {
+        "source_value": "1.2524387078740489",
+        "row_key": "#/row/yaw_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p75_absolute_deg": {
+        "source_value": "2.1709225157458434",
+        "row_key": "#/row/yaw_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p90_absolute_deg": {
+        "source_value": "3.02478290648391",
+        "row_key": "#/row/yaw_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p95_absolute_deg": {
+        "source_value": "3.509204065400018",
+        "row_key": "#/row/yaw_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p99_absolute_deg": {
+        "source_value": "5.213322418549175",
+        "row_key": "#/row/yaw_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_max_absolute_deg": {
+        "source_value": "8.774742453238417",
+        "row_key": "#/row/yaw_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_final_signed_error_deg": {
+        "source_value": "1.0722183207939224",
+        "row_key": "#/row/yaw_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_final_absolute_error_deg": {
+        "source_value": "1.0722183207939224",
+        "row_key": "#/row/yaw_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_iae_deg": {
+        "source_value": "410.43332730642123",
+        "row_key": "#/row/yaw_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_ise_deg": {
+        "source_value": "980.1607287859945",
+        "row_key": "#/row/yaw_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_rmse_m": {
+        "source_value": "0.09691990156944293",
+        "row_key": "#/row/horizontal_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_mean_m": {
+        "source_value": "0.06019701644940338",
+        "row_key": "#/row/horizontal_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_median_m": {
+        "source_value": "0.03787461177800775",
+        "row_key": "#/row/horizontal_median_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_mae_m": {
+        "source_value": "0.06019701644940338",
+        "row_key": "#/row/horizontal_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p50_m": {
+        "source_value": "0.03787461177800775",
+        "row_key": "#/row/horizontal_p50_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p75_m": {
+        "source_value": "0.05578345326129872",
+        "row_key": "#/row/horizontal_p75_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p90_m": {
+        "source_value": "0.11163104511431711",
+        "row_key": "#/row/horizontal_p90_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p95_m": {
+        "source_value": "0.26235551543509816",
+        "row_key": "#/row/horizontal_p95_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p99_m": {
+        "source_value": "0.37574744322403714",
+        "row_key": "#/row/horizontal_p99_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_max_m": {
+        "source_value": "0.540070122128247",
+        "row_key": "#/row/horizontal_max_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_final_m": {
+        "source_value": "0.0393409288790338",
+        "row_key": "#/row/horizontal_final_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_iae_m": {
+        "source_value": "16.446882611646924",
+        "row_key": "#/row/horizontal_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_ise_m": {
+        "source_value": "2.584955824891783",
+        "row_key": "#/row/horizontal_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_rmse_m": {
+        "source_value": "0.10906584829660972",
+        "row_key": "#/row/position_3d_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_mean_m": {
+        "source_value": "0.07767516345073393",
+        "row_key": "#/row/position_3d_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_median_m": {
+        "source_value": "0.0542825822860538",
+        "row_key": "#/row/position_3d_median_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_mae_m": {
+        "source_value": "0.07767516345073393",
+        "row_key": "#/row/position_3d_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p50_m": {
+        "source_value": "0.0542825822860538",
+        "row_key": "#/row/position_3d_p50_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p75_m": {
+        "source_value": "0.07602486531283792",
+        "row_key": "#/row/position_3d_p75_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p90_m": {
+        "source_value": "0.1504720935390385",
+        "row_key": "#/row/position_3d_p90_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p95_m": {
+        "source_value": "0.2776956648520764",
+        "row_key": "#/row/position_3d_p95_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p99_m": {
+        "source_value": "0.38465768513381726",
+        "row_key": "#/row/position_3d_p99_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_max_m": {
+        "source_value": "0.5741853624510063",
+        "row_key": "#/row/position_3d_max_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_final_m": {
+        "source_value": "0.0782371325924898",
+        "row_key": "#/row/position_3d_final_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_iae_m": {
+        "source_value": "21.237305170430865",
+        "row_key": "#/row/position_3d_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_ise_m": {
+        "source_value": "3.2639864058077457",
+        "row_key": "#/row/position_3d_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "evaluation_status": {
+        "source_value": "COMPLETED",
+        "row_key": "#/row/evaluation_status",
+        "comparison_kind": "exact"
+      },
+      "matched_epoch_count": {
+        "source_value": 56642,
+        "row_key": "#/row/matched_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "output_epoch_count": {
+        "source_value": 56642,
+        "row_key": "#/row/output_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "unmatched_epoch_count": {
+        "source_value": 0,
+        "row_key": "#/row/unmatched_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "coverage_ratio": {
+        "source_value": "1.0",
+        "row_key": "#/row/coverage_ratio",
+        "comparison_kind": "numeric"
+      },
+      "reference_epoch_count": {
+        "source_value": 5480,
+        "row_key": "#/row/reference_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "time_start": {
+        "source_value": "66.005054",
+        "row_key": "#/row/time_start",
+        "comparison_kind": "time"
+      },
+      "time_end": {
+        "source_value": "339.997056",
+        "row_key": "#/row/time_end",
+        "comparison_kind": "time"
+      },
+      "sequence_window_start_s": {
+        "source_value": "66.0",
+        "row_key": "#/row/sequence_window_start_s",
+        "comparison_kind": "time"
+      },
+      "sequence_window_end_s": {
+        "source_value": "340.0",
+        "row_key": "#/row/sequence_window_end_s",
+        "comparison_kind": "time"
+      },
+      "reference_velocity_supported": {
+        "source_value": false,
+        "row_key": "#/row/reference_velocity_supported",
+        "comparison_kind": "exact"
+      },
+      "reference_is_independent_ground_truth": {
+        "source_value": false,
+        "row_key": "#/row/reference_is_independent_ground_truth",
+        "comparison_kind": "exact"
+      },
+      "finite_output": {
+        "source_value": true,
+        "row_key": "#/row/finite_output",
+        "comparison_kind": "exact"
+      },
+      "finite_ratio": {
+        "source_value": "1.0",
+        "row_key": "#/row/finite_ratio",
+        "comparison_kind": "numeric"
+      }
+    },
+    "reference_cleaned_epoch_count": 6040,
+    "recorded_hashes_are_newly_verified_payload_hashes": false
+  },
+  "RUN_01401": {
+    "source_path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/RUN_01401/v3/EVALUATION_RESULT.json",
+    "source_json_sha256": "1ec74cb32bd95e2fa0178f24f5d37fe9da3351f3499c245079ef609f3542e68b",
+    "capture_source_path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/RUN_01401/v3/FROZEN_EVALUATOR/EVALUATOR_CAPTURE.json",
+    "capture_source_sha256": "d570708024489b84441af6132f332fd50c150d0b22a9840146b7a356b05cad1f",
+    "native_nav_sha256": "0fffaf88ed5916cf9acabc446cc9aaf64a1a6995b5705c1d1192a4eef40ba344",
+    "std_sha256": "1ad3c7348a2c977521facc516b530adcaf0c9fa65dbfd9ba28707c43b011a773",
+    "evaluator_nav_sha256": "d1fef028cfec0d4c58089dd4817225c87abebb5d6283bacba58963a894457e2a",
+    "config_sha256": "1648261e84e109a1dc37640205ec7c383b7917129fc58991f8a8c09bec1e69bb",
+    "columns": {
+      "north_signed_mean_m": {
+        "source_value": "0.11975058965700901",
+        "row_key": "#/row/north_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "north_bias_m": {
+        "source_value": "0.11975058965700901",
+        "row_key": "#/row/north_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "north_signed_median_m": {
+        "source_value": "0.19350567558675186",
+        "row_key": "#/row/north_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "north_standard_deviation_m": {
+        "source_value": "2.557206830097883",
+        "row_key": "#/row/north_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "north_rmse_m": {
+        "source_value": "2.5600091749098217",
+        "row_key": "#/row/north_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "north_mae_m": {
+        "source_value": "2.043799220386268",
+        "row_key": "#/row/north_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "north_median_absolute_error_m": {
+        "source_value": "1.709476495458488",
+        "row_key": "#/row/north_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p50_absolute_m": {
+        "source_value": "1.709476495458488",
+        "row_key": "#/row/north_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p75_absolute_m": {
+        "source_value": "2.8825301221089594",
+        "row_key": "#/row/north_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p90_absolute_m": {
+        "source_value": "4.242807851360759",
+        "row_key": "#/row/north_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p95_absolute_m": {
+        "source_value": "5.017626612598695",
+        "row_key": "#/row/north_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_p99_absolute_m": {
+        "source_value": "6.737774507667339",
+        "row_key": "#/row/north_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_max_absolute_m": {
+        "source_value": "9.72741919440383",
+        "row_key": "#/row/north_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "north_final_signed_error_m": {
+        "source_value": "-3.1249386802331234",
+        "row_key": "#/row/north_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_final_absolute_error_m": {
+        "source_value": "3.1249386802331234",
+        "row_key": "#/row/north_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "north_iae_m": {
+        "source_value": "559.1453082810756",
+        "row_key": "#/row/north_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "north_ise_m": {
+        "source_value": "1783.0980124998732",
+        "row_key": "#/row/north_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "east_signed_mean_m": {
+        "source_value": "0.06384421351915184",
+        "row_key": "#/row/east_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "east_bias_m": {
+        "source_value": "0.06384421351915184",
+        "row_key": "#/row/east_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "east_signed_median_m": {
+        "source_value": "-0.02821151776284965",
+        "row_key": "#/row/east_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "east_standard_deviation_m": {
+        "source_value": "2.468569465547774",
+        "row_key": "#/row/east_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "east_rmse_m": {
+        "source_value": "2.4693949238294595",
+        "row_key": "#/row/east_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "east_mae_m": {
+        "source_value": "1.9609429498857949",
+        "row_key": "#/row/east_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "east_median_absolute_error_m": {
+        "source_value": "1.6382283412162568",
+        "row_key": "#/row/east_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p50_absolute_m": {
+        "source_value": "1.6382283412162568",
+        "row_key": "#/row/east_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p75_absolute_m": {
+        "source_value": "2.8022014007958447",
+        "row_key": "#/row/east_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p90_absolute_m": {
+        "source_value": "4.0799695546501225",
+        "row_key": "#/row/east_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p95_absolute_m": {
+        "source_value": "4.880152731292603",
+        "row_key": "#/row/east_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_p99_absolute_m": {
+        "source_value": "6.42292986933678",
+        "row_key": "#/row/east_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_max_absolute_m": {
+        "source_value": "10.074870766534175",
+        "row_key": "#/row/east_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "east_final_signed_error_m": {
+        "source_value": "-6.435999226172864",
+        "row_key": "#/row/east_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_final_absolute_error_m": {
+        "source_value": "6.435999226172864",
+        "row_key": "#/row/east_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "east_iae_m": {
+        "source_value": "540.7074997742815",
+        "row_key": "#/row/east_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "east_ise_m": {
+        "source_value": "1691.9442998635382",
+        "row_key": "#/row/east_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "up_signed_mean_m": {
+        "source_value": "0.00721071102930817",
+        "row_key": "#/row/up_signed_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "up_bias_m": {
+        "source_value": "0.00721071102930817",
+        "row_key": "#/row/up_bias_m",
+        "comparison_kind": "numeric"
+      },
+      "up_signed_median_m": {
+        "source_value": "-0.0789947524355092",
+        "row_key": "#/row/up_signed_median_m",
+        "comparison_kind": "numeric"
+      },
+      "up_standard_deviation_m": {
+        "source_value": "3.9237944734168737",
+        "row_key": "#/row/up_standard_deviation_m",
+        "comparison_kind": "numeric"
+      },
+      "up_rmse_m": {
+        "source_value": "3.9238010989307734",
+        "row_key": "#/row/up_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "up_mae_m": {
+        "source_value": "3.09956109546472",
+        "row_key": "#/row/up_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "up_median_absolute_error_m": {
+        "source_value": "2.627388508344964",
+        "row_key": "#/row/up_median_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p50_absolute_m": {
+        "source_value": "2.627388508344964",
+        "row_key": "#/row/up_p50_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p75_absolute_m": {
+        "source_value": "4.427380666247407",
+        "row_key": "#/row/up_p75_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p90_absolute_m": {
+        "source_value": "6.455101431463613",
+        "row_key": "#/row/up_p90_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p95_absolute_m": {
+        "source_value": "7.675494200188293",
+        "row_key": "#/row/up_p95_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_p99_absolute_m": {
+        "source_value": "10.628787933502272",
+        "row_key": "#/row/up_p99_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_max_absolute_m": {
+        "source_value": "15.816604653525758",
+        "row_key": "#/row/up_max_absolute_m",
+        "comparison_kind": "numeric"
+      },
+      "up_final_signed_error_m": {
+        "source_value": "-0.7044307891564623",
+        "row_key": "#/row/up_final_signed_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_final_absolute_error_m": {
+        "source_value": "0.7044307891564623",
+        "row_key": "#/row/up_final_absolute_error_m",
+        "comparison_kind": "numeric"
+      },
+      "up_iae_m": {
+        "source_value": "847.7613066711165",
+        "row_key": "#/row/up_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "up_ise_m": {
+        "source_value": "4203.88038061793",
+        "row_key": "#/row/up_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "roll_signed_mean_deg": {
+        "source_value": "0.8803045235318065",
+        "row_key": "#/row/roll_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_bias_deg": {
+        "source_value": "0.8803045235318065",
+        "row_key": "#/row/roll_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_signed_median_deg": {
+        "source_value": "0.45458584325990614",
+        "row_key": "#/row/roll_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_standard_deviation_deg": {
+        "source_value": "2.561976162936044",
+        "row_key": "#/row/roll_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_rmse_deg": {
+        "source_value": "2.7089957389414723",
+        "row_key": "#/row/roll_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_mae_deg": {
+        "source_value": "1.948706624906656",
+        "row_key": "#/row/roll_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_median_absolute_error_deg": {
+        "source_value": "1.512881675147355",
+        "row_key": "#/row/roll_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p50_absolute_deg": {
+        "source_value": "1.512881675147355",
+        "row_key": "#/row/roll_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p75_absolute_deg": {
+        "source_value": "2.6685243687539213",
+        "row_key": "#/row/roll_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p90_absolute_deg": {
+        "source_value": "4.04852058609524",
+        "row_key": "#/row/roll_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p95_absolute_deg": {
+        "source_value": "4.756550328702134",
+        "row_key": "#/row/roll_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_p99_absolute_deg": {
+        "source_value": "8.312699695083744",
+        "row_key": "#/row/roll_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_max_absolute_deg": {
+        "source_value": "23.57232214417607",
+        "row_key": "#/row/roll_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_final_signed_error_deg": {
+        "source_value": "-0.7906013288363454",
+        "row_key": "#/row/roll_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_final_absolute_error_deg": {
+        "source_value": "0.7906013288363454",
+        "row_key": "#/row/roll_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_iae_deg": {
+        "source_value": "534.9700958362616",
+        "row_key": "#/row/roll_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "roll_ise_deg": {
+        "source_value": "2000.2747936187807",
+        "row_key": "#/row/roll_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_signed_mean_deg": {
+        "source_value": "-0.5869455415009158",
+        "row_key": "#/row/pitch_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_bias_deg": {
+        "source_value": "-0.5869455415009158",
+        "row_key": "#/row/pitch_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_signed_median_deg": {
+        "source_value": "-0.5752288155872805",
+        "row_key": "#/row/pitch_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_standard_deviation_deg": {
+        "source_value": "2.8002154053099835",
+        "row_key": "#/row/pitch_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_rmse_deg": {
+        "source_value": "2.861068224426527",
+        "row_key": "#/row/pitch_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_mae_deg": {
+        "source_value": "2.1072112950152606",
+        "row_key": "#/row/pitch_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_median_absolute_error_deg": {
+        "source_value": "1.7843514218434962",
+        "row_key": "#/row/pitch_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p50_absolute_deg": {
+        "source_value": "1.7843514218434962",
+        "row_key": "#/row/pitch_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p75_absolute_deg": {
+        "source_value": "2.925428423529439",
+        "row_key": "#/row/pitch_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p90_absolute_deg": {
+        "source_value": "4.0229079095042835",
+        "row_key": "#/row/pitch_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p95_absolute_deg": {
+        "source_value": "4.757245906144868",
+        "row_key": "#/row/pitch_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_p99_absolute_deg": {
+        "source_value": "7.1105427781300525",
+        "row_key": "#/row/pitch_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_max_absolute_deg": {
+        "source_value": "31.96392547233586",
+        "row_key": "#/row/pitch_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_final_signed_error_deg": {
+        "source_value": "2.20541691254428",
+        "row_key": "#/row/pitch_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_final_absolute_error_deg": {
+        "source_value": "2.20541691254428",
+        "row_key": "#/row/pitch_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_iae_deg": {
+        "source_value": "579.0427931537777",
+        "row_key": "#/row/pitch_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "pitch_ise_deg": {
+        "source_value": "2230.5179034837156",
+        "row_key": "#/row/pitch_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_signed_mean_deg": {
+        "source_value": "-1.570425770960913",
+        "row_key": "#/row/yaw_signed_mean_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_bias_deg": {
+        "source_value": "-1.570425770960913",
+        "row_key": "#/row/yaw_bias_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_signed_median_deg": {
+        "source_value": "-1.3152783306815081",
+        "row_key": "#/row/yaw_signed_median_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_standard_deviation_deg": {
+        "source_value": "2.194596340275051",
+        "row_key": "#/row/yaw_standard_deviation_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_rmse_deg": {
+        "source_value": "2.698608937739373",
+        "row_key": "#/row/yaw_rmse_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_mae_deg": {
+        "source_value": "1.9706976458031082",
+        "row_key": "#/row/yaw_mae_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_median_absolute_error_deg": {
+        "source_value": "1.457795226243448",
+        "row_key": "#/row/yaw_median_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p50_absolute_deg": {
+        "source_value": "1.457795226243448",
+        "row_key": "#/row/yaw_p50_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p75_absolute_deg": {
+        "source_value": "2.5865961309815333",
+        "row_key": "#/row/yaw_p75_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p90_absolute_deg": {
+        "source_value": "4.223459517839041",
+        "row_key": "#/row/yaw_p90_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p95_absolute_deg": {
+        "source_value": "6.084570547696179",
+        "row_key": "#/row/yaw_p95_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_p99_absolute_deg": {
+        "source_value": "8.861923363011915",
+        "row_key": "#/row/yaw_p99_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_max_absolute_deg": {
+        "source_value": "11.907419241611876",
+        "row_key": "#/row/yaw_max_absolute_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_final_signed_error_deg": {
+        "source_value": "1.352649899793903",
+        "row_key": "#/row/yaw_final_signed_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_final_absolute_error_deg": {
+        "source_value": "1.352649899793903",
+        "row_key": "#/row/yaw_final_absolute_error_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_iae_deg": {
+        "source_value": "532.9436238635928",
+        "row_key": "#/row/yaw_iae_deg",
+        "comparison_kind": "numeric"
+      },
+      "yaw_ise_deg": {
+        "source_value": "1933.2533351256145",
+        "row_key": "#/row/yaw_ise_deg",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_rmse_m": {
+        "source_value": "3.5569029035745645",
+        "row_key": "#/row/horizontal_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_mean_m": {
+        "source_value": "3.137162110172796",
+        "row_key": "#/row/horizontal_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_median_m": {
+        "source_value": "2.9168574131543803",
+        "row_key": "#/row/horizontal_median_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_mae_m": {
+        "source_value": "3.137162110172796",
+        "row_key": "#/row/horizontal_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p50_m": {
+        "source_value": "2.9168574131543803",
+        "row_key": "#/row/horizontal_p50_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p75_m": {
+        "source_value": "4.22233601268439",
+        "row_key": "#/row/horizontal_p75_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p90_m": {
+        "source_value": "5.415686094513552",
+        "row_key": "#/row/horizontal_p90_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p95_m": {
+        "source_value": "6.196571905907731",
+        "row_key": "#/row/horizontal_p95_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_p99_m": {
+        "source_value": "7.712248436559448",
+        "row_key": "#/row/horizontal_p99_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_max_m": {
+        "source_value": "10.786195453563929",
+        "row_key": "#/row/horizontal_max_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_final_m": {
+        "source_value": "7.154531975923711",
+        "row_key": "#/row/horizontal_final_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_iae_m": {
+        "source_value": "861.3339536398764",
+        "row_key": "#/row/horizontal_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "horizontal_ise_m": {
+        "source_value": "3475.042312363412",
+        "row_key": "#/row/horizontal_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_rmse_m": {
+        "source_value": "5.296014853588264",
+        "row_key": "#/row/position_3d_rmse_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_mean_m": {
+        "source_value": "4.809828012432645",
+        "row_key": "#/row/position_3d_mean_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_median_m": {
+        "source_value": "4.583017502742647",
+        "row_key": "#/row/position_3d_median_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_mae_m": {
+        "source_value": "4.809828012432645",
+        "row_key": "#/row/position_3d_mae_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p50_m": {
+        "source_value": "4.583017502742647",
+        "row_key": "#/row/position_3d_p50_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p75_m": {
+        "source_value": "6.137263884720195",
+        "row_key": "#/row/position_3d_p75_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p90_m": {
+        "source_value": "7.7315903053459065",
+        "row_key": "#/row/position_3d_p90_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p95_m": {
+        "source_value": "8.768100658953346",
+        "row_key": "#/row/position_3d_p95_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_p99_m": {
+        "source_value": "11.232604888592597",
+        "row_key": "#/row/position_3d_p99_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_max_m": {
+        "source_value": "16.120467763402655",
+        "row_key": "#/row/position_3d_max_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_final_m": {
+        "source_value": "7.189127244055876",
+        "row_key": "#/row/position_3d_final_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_iae_m": {
+        "source_value": "1318.0013247704715",
+        "row_key": "#/row/position_3d_iae_m",
+        "comparison_kind": "numeric"
+      },
+      "position_3d_ise_m": {
+        "source_value": "7678.922692981343",
+        "row_key": "#/row/position_3d_ise_m",
+        "comparison_kind": "numeric"
+      },
+      "evaluation_status": {
+        "source_value": "COMPLETED",
+        "row_key": "#/row/evaluation_status",
+        "comparison_kind": "exact"
+      },
+      "matched_epoch_count": {
+        "source_value": 56642,
+        "row_key": "#/row/matched_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "output_epoch_count": {
+        "source_value": 56642,
+        "row_key": "#/row/output_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "unmatched_epoch_count": {
+        "source_value": 0,
+        "row_key": "#/row/unmatched_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "coverage_ratio": {
+        "source_value": "1.0",
+        "row_key": "#/row/coverage_ratio",
+        "comparison_kind": "numeric"
+      },
+      "reference_epoch_count": {
+        "source_value": 5480,
+        "row_key": "#/row/reference_epoch_count",
+        "comparison_kind": "exact"
+      },
+      "time_start": {
+        "source_value": "66.005054",
+        "row_key": "#/row/time_start",
+        "comparison_kind": "time"
+      },
+      "time_end": {
+        "source_value": "339.997056",
+        "row_key": "#/row/time_end",
+        "comparison_kind": "time"
+      },
+      "sequence_window_start_s": {
+        "source_value": "66.0",
+        "row_key": "#/row/sequence_window_start_s",
+        "comparison_kind": "time"
+      },
+      "sequence_window_end_s": {
+        "source_value": "340.0",
+        "row_key": "#/row/sequence_window_end_s",
+        "comparison_kind": "time"
+      },
+      "reference_velocity_supported": {
+        "source_value": false,
+        "row_key": "#/row/reference_velocity_supported",
+        "comparison_kind": "exact"
+      },
+      "reference_is_independent_ground_truth": {
+        "source_value": false,
+        "row_key": "#/row/reference_is_independent_ground_truth",
+        "comparison_kind": "exact"
+      },
+      "finite_output": {
+        "source_value": true,
+        "row_key": "#/row/finite_output",
+        "comparison_kind": "exact"
+      },
+      "finite_ratio": {
+        "source_value": "1.0",
+        "row_key": "#/row/finite_ratio",
+        "comparison_kind": "numeric"
+      }
+    },
+    "reference_cleaned_epoch_count": 6040,
+    "recorded_hashes_are_newly_verified_payload_hashes": false
+  }
+}

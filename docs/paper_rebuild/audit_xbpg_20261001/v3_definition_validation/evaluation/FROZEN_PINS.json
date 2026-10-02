@@ -1,0 +1,91 @@
+{
+  "files": [
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/protocol_v3/evaluation_process.py",
+      "sha256": "179c354a8d2500791d0b2cfb1c89b815fdf25575d66cac4b44eb87967b6a4489",
+      "verification": "NEW_LOCAL_HASH_MATCH_TO_SUPERVISOR_FROZEN_PIN",
+      "frozen_runner_commit": "7d43b9af26120ed5dde21f53e515386361072ba6"
+    },
+    {
+      "path": "<CODE_ROOT>/scripts/paper_rebuild/v3_evaluator_observer/sitecustomize.py",
+      "sha256": "89d894869e33c51c269a15ddb65b4aef9b2e0191a0114741284ee65d5a522925",
+      "verification": "NEW_LOCAL_HASH_MATCH_TO_SUPERVISOR_FROZEN_PIN",
+      "frozen_runner_commit": "7d43b9af26120ed5dde21f53e515386361072ba6"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/clean5_sequence/evaluator_capture.py",
+      "sha256": "beb6ff36022866795c608a7ebbc8c356698eaf614ba22b98cbb57b3b7f4f6c8c",
+      "verification": "NEW_LOCAL_HASH_MATCH_TO_SUPERVISOR_FROZEN_PIN",
+      "frozen_runner_commit": "7d43b9af26120ed5dde21f53e515386361072ba6"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/clean6_canonical_v2/evaluation.py",
+      "sha256": "8dfacf094879e7c091f1ddf1d5dcb3164f43923dc0903734cb6d29e05eeccc10",
+      "verification": "NEW_LOCAL_HASH_MATCH_TO_SUPERVISOR_FROZEN_PIN",
+      "frozen_runner_commit": "7d43b9af26120ed5dde21f53e515386361072ba6"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/clean5_parity/evaluation.py",
+      "sha256": "cfd8b276c9fe663f823a5846dab6a54de72664688b798a6591f168dd86044d0a",
+      "verification": "NEW_LOCAL_HASH_MATCH_TO_SUPERVISOR_FROZEN_PIN",
+      "frozen_runner_commit": "7d43b9af26120ed5dde21f53e515386361072ba6"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/clean5_parity_p04/evaluation.py",
+      "sha256": "533b3b3bf0f6b1361fcd914c8011335aaa4c57ac7f29b41b33eeeab594793352",
+      "verification": "NEW_LOCAL_HASH_MATCH_TO_SUPERVISOR_FROZEN_PIN",
+      "frozen_runner_commit": "7d43b9af26120ed5dde21f53e515386361072ba6"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/canonical541/offline_eval_aggregate.py",
+      "sha256": "d021a503bc91dbd6a194182478770a1457cf0ca615c7d3adb2f7a6f68eadea16",
+      "verification": "NEW_LOCAL_HASH_MATCH_TO_SUPERVISOR_FROZEN_PIN",
+      "frozen_runner_commit": "7d43b9af26120ed5dde21f53e515386361072ba6"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py",
+      "sha256": "d72548fb9cea3f8d6075bd231ba9a2bb970f71382006edbec045a4c7ea8f6e5a",
+      "verification": "NEW_LOCAL_HASH_MATCH_TO_SUPERVISOR_FROZEN_PIN",
+      "frozen_runner_commit": "7d43b9af26120ed5dde21f53e515386361072ba6"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/clean5_sequence/io_audit.py",
+      "sha256": "418819bff1b4eec124850314ef12a83c2d935b10dc1b1db7b9b5110098ed12d7",
+      "verification": "NEW_LOCAL_PIN; supervisor included file in verified frozen source set",
+      "frozen_runner_commit": "7d43b9af26120ed5dde21f53e515386361072ba6"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/subprocess_guard.py",
+      "sha256": "e582ee3d29dbd17246398e8e35bf8f006cf48e8aa71de92550739666ae39fac7",
+      "verification": "NEW_LOCAL_PIN; supervisor included file in verified frozen source set",
+      "frozen_runner_commit": "7d43b9af26120ed5dde21f53e515386361072ba6"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/manifest.py",
+      "sha256": "05f29a41984518bea5f86b80e2a221dcbde978f9b9616ea61ad21cdad632bc91",
+      "verification": "NEW_LOCAL_PIN; supervisor included file in verified frozen source set",
+      "frozen_runner_commit": "7d43b9af26120ed5dde21f53e515386361072ba6"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/evidence.py",
+      "sha256": "c60b6d61cb2d1aae5431a3b973c8ea67f391df85964201c6ad03463b144dfa5a",
+      "verification": "NEW_LOCAL_PIN; supervisor included file in verified frozen source set",
+      "frozen_runner_commit": "7d43b9af26120ed5dde21f53e515386361072ba6"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/clean6_canonical_v2/resources.py",
+      "sha256": "76de6b0020b856831bc130230f697e4dc24a42cdece04a1bbc08985264009e9e",
+      "verification": "NEW_LOCAL_PIN; supervisor included file in verified frozen source set",
+      "frozen_runner_commit": "7d43b9af26120ed5dde21f53e515386361072ba6"
+    },
+    {
+      "path": "<FROZEN_EVALUATOR>",
+      "sha256": "aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da",
+      "verification": "SUPERVISOR_NEW_VERIFICATION; runner verifies again before each explicit slot",
+      "frozen_runner_commit": "external_archived_evaluator"
+    }
+  ],
+  "reference_path": "<V3_REFERENCE>",
+  "reference_sha256": "ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c",
+  "reference_read_policy": "child existing handle only; parent stat permitted; never parent hash"
+}

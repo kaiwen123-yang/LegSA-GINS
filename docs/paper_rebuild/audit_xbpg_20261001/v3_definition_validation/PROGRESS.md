@@ -11,18 +11,19 @@
 - N16_CODE：exclude disabled HV dimension from quality statistics with native controls；`35817c5077212c8e02d8f5881902b438055a037c`；PUSHED_VERIFIED。
 - RUN_ENTRY：gate ten single-slot candidate calls with immutable input and access checks；`17aba05b15cf8a80bc43dfece7c7be963b063839`；PUSHED_VERIFIED。
 - N12_NATIVE：record two completed N12 closed-loop calls and changed acceptance；`633db7fd8d2f92e78eb9a3a0e0e60328621e6f5c`；PUSHED_VERIFIED。
+- N16_NATIVE：record independent N16 closed-loop calls without combining N12；`5b0353f7bad7b4cd475ca06511c8a39f93e119ca`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N16_NATIVE：record independent N16 closed-loop calls without combining N12。
+EVAL_ENTRY：bind frozen singleton evaluation and baseline reproduction gates。
 
-N16 2/2真实对象完成，198固定身份单元格及access通过，10科学输出均存在且与原hash不同，无重试。HV/yaw接受数保持，倍率不为1的原字段计数变化不冒充跨版本R差异计数。完整P/事件和离线指标待后续小项。
+评价单例入口准备7baseline+10candidate未调用槽；74/74新版helper检查通过（先前57项通过回执另留），0真实evaluator。已补17槽未调用门、binary/READY/99身份门和实际error读取路径。基线转点NAV hash先核，143原字段按预注册容差；参考只由离线child同句柄读取。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-N09六计划调用；冻结评价入口最后两个门检查后逐基线/候选评价。
+先执行RUN_00004与RUN_01401基线口径核对，通过后评价N12/N16；继续N09有限原生队列。
 
 ## 调用边界
 
