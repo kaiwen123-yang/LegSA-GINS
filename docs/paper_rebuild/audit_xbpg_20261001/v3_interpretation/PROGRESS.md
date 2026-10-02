@@ -18,18 +18,19 @@
 - C06：explain velocity_raw_doppler results and retained time support；`c12d1fd8d889c25a0405893bfd0307bef43d8677`；PUSHED_VERIFIED。
 - C07：explain go2_prior_metadata results and retained time support；`0079eba42046be26391d86943e4e17188f5b5eef`；PUSHED_VERIFIED。
 - C08：explain mixed faults and reconcile all CORE failures；`331eecac3a10e740ab8c91098866805559764485`；PUSHED_VERIFIED。
+- A11：explain A1_10s across all eleven configurations；`d479558ab205c0a0d8b8a8a53deebca11c90c7ad`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-A11：explain A1_10s across all eleven configurations。
+A12：explain A1_20s across all eleven configurations。
 
-A1 10 s：99 native/198评价，11配置×9种子全完成；全文读取198 error_series，32652数值MATCH、18空值MATCH、1782字段不可复算、0差异；原UA396单元格核对MATCH。完整保留固定窗/全窗和消融非单调结果、HV准备与实际接受的证据边界。读取源与源键见本组RECORDED/UA/PROVIDER_METADATA和scanner回执；执行独立validation计算，无新科学进程。
+A1 20 s：99 native/198评价全完成，11配置九种子全量解释。F04-F03水平配对均值负、中位数正，保留九种子差异；SA对照7例更大。全文读198误差文件、32652 MATCH/18 MATCH_NULL/1782不可复算/0差异；396原UA格一致。按真实窗口保存派生误差，不把全窗当故障终点。来源见本组RECORDED、UA、SCOPE、PROVIDER及series回执；有独立validation，无新科学调用。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-A1_20s 全配置解释与现存时序核对。
+A1_30s 全配置解释与现存时序核对。
 
 ## 调用边界
 

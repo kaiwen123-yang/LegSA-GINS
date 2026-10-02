@@ -13,3 +13,4 @@ C05,explain scalar heading faults and bounded series checks,66be30984e14895e3611
 C06,explain velocity_raw_doppler results and retained time support,c12d1fd8d889c25a0405893bfd0307bef43d8677,0,True,PUSHED_VERIFIED
 C07,explain go2_prior_metadata results and retained time support,0079eba42046be26391d86943e4e17188f5b5eef,0,True,PUSHED_VERIFIED
 C08,explain mixed faults and reconcile all CORE failures,331eecac3a10e740ab8c91098866805559764485,0,True,PUSHED_VERIFIED
+A11,explain A1_10s across all eleven configurations,d479558ab205c0a0d8b8a8a53deebca11c90c7ad,0,True,PUSHED_VERIFIED
