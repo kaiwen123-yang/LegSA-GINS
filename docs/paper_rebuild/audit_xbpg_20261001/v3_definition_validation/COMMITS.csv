@@ -12,3 +12,4 @@ N09_C00_NATIVE,verify N09 normal-GNSS controls reproduce ten scientific outputs,
 BASELINE_C00_D15_EVAL,reproduce C00 and D15 frozen evaluation with exact recorded values,e5d5b8ee0b7bc5bc941b373d60c3c389e8fd0ccb,0,True,PUSHED_VERIFIED
 INHERITED_SCOPE,inherit original V3 contract and classify RP independence as optional extension,f4bf6d30f47312a159d7874dbf4681d1a21963b0,0,True,PUSHED_VERIFIED
 N12_EVAL,report same-support N12 outcomes including D15 degradation,c7280d1f138cd05fa9fa45b5409c46f69902926e,0,True,PUSHED_VERIFIED
+N16_EVAL,report N16 same-support improvements and small adverse C00 changes,f03b54b2fd1eef69d1c6208ada1f2f557a00e2ef,0,True,PUSHED_VERIFIED

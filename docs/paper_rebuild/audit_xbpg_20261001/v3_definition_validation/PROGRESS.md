@@ -17,18 +17,19 @@
 - BASELINE_C00_D15_EVAL：reproduce C00 and D15 frozen evaluation with exact recorded values；`e5d5b8ee0b7bc5bc941b373d60c3c389e8fd0ccb`；PUSHED_VERIFIED。
 - INHERITED_SCOPE：inherit original V3 contract and classify RP independence as optional extension；`f4bf6d30f47312a159d7874dbf4681d1a21963b0`；PUSHED_VERIFIED。
 - N12_EVAL：report same-support N12 outcomes including D15 degradation；`c7280d1f138cd05fa9fa45b5409c46f69902926e`；PUSHED_VERIFIED。
+- N16_EVAL：report N16 same-support improvements and small adverse C00 changes；`f03b54b2fd1eef69d1c6208ada1f2f557a00e2ef`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N16_EVAL：report N16 same-support improvements and small adverse C00 changes。
+EVENT_ENTRY：validate bounded event and covariance analysis with strict cache identity。
 
-两例各56642共同历元。C00 H减少0.000279725m，yaw减少0.000189258deg，但Up/pitch微升；D15 H减少0.00295252m、yaw减少0.0376287deg，五项RMSE均下降。保留完整精度、支持及负面变化，不把小改善当普遍收益或必然合入依据。实际evaluator新增2累计6，无native新增/重试。
+只读分析器及41项合成检查已review。真实流尚未读取；严格区分完整/部分读取、full/partial hash、int或str计数、cache/analyzer/source身份。实际EKF R与SA决定分列，P覆盖baseline只EKF/候选每IMU，首状态按共同IMU不插值；VALIDATED不等于P或科学PASS。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-提交事件分析工具并核N12/N16真实R、首分叉与完整P；完成N09原队列。
+只读核C00/D15两baseline与N12两候选事件；完成N09 A1小项及A2原队列。
 
 ## 调用边界
 
