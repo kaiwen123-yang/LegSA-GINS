@@ -22,18 +22,19 @@
 - A12：explain A1_20s across all eleven configurations；`0e9a36cc5e1c5ce282ade302e0d6ebf47d143221`；PUSHED_VERIFIED。
 - A13：explain A1_30s across all eleven configurations；`36547a906cd9c2b3dd9b9da058a561c5663c7523`；PUSHED_VERIFIED。
 - A21：explain A2_10s across all eleven configurations；`2996f399a1133035f26c98c83a36daee562d7bc1`；PUSHED_VERIFIED。
+- A22：explain A2_20s across all eleven configurations；`d47bd8582dfbdff84a64896426b00f2d96201ebe`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-A22：explain A2_20s across all eleven configurations。
+U01：explain paired estimates and existing uncertainty intervals。
 
-A2 20 s：11配置九种子99native/198评价均完成，396原UA格MATCH。全窗H/yaw/up及每方法尾部已解释；F04-F03和F04-A06水平9例均低，上向各6例更高。全文读最后198误差，32652 MATCH/18 NULL/1782不可复算/0差异；至此2308error+1matched各主扫描一次。A2_30 NOT_REGISTERED，未补跑；所有窗口算术标validation，实际HV触发仍未知。
+完整读取23个UA/UNC CSV及2个PAIRWISE summary，共17656行；4685个精确源单元格转录。解释case bootstrap、type cluster、MBB与540/541、有限支持及分母；没有新bootstrap。明确SA均值/中位数不同方向、自然共同支持CI及RESOLVED文字/机器表差异。来源/字段见secondary读取表；本项只计数转录，前项validation历史保留。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-整理既有配对/不确定度解释，再逐项提交外部旧协议、候选和实际图像说明。
+旧协议比较表的版本与状态转移解释。
 
 ## 调用边界
 
