@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "checks": 57,
+  "passed": 57,
+  "new_test_script_processes": 1,
+  "native_fixture_processes": 0,
+  "real_native_calls": 0,
+  "evaluator_calls": 0,
+  "mock_evaluator_calls": 0,
+  "reference_payload_reads": 0,
+  "source_NAV_STD_payload_reads": 0,
+  "frozen_metric_function_calls": 0,
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": false,
+  "data_mode": "synthetic_helper_validation_only",
+  "script_sha256": "e16d611d97f0a882d269f3f982a2ee05798d0f5db01ed2ac1292ac0ca878c7af",
+  "test_sha256": "cd1a73555f1497e5ba01c99da0a33f2db6d94954f8f9bfc37e9dcba96a7b0768",
+  "limits": "Helper and source-contract checks only; no whole evaluator invocation or scientific agreement assertion."
+}
