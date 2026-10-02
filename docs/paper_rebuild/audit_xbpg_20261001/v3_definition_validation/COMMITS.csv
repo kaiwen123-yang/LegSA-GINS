@@ -27,3 +27,4 @@ N09_C00_EVENTS,verify normal-GNSS event states remain exact under optional RP sc
 P_BOUNDARY,explain frozen zero-scale covariance and bound key-snapshot symmetry evidence,969b11dba49fec5d9dd1474be6c5e67f98b9a01c,0,True,PUSHED_VERIFIED
 N09_A2_EVENTS,close A2 unchanged scheduling and actual accepted-source evidence,ddd8671e7e37398ace9a61f300ba4d9bd4a48191,0,True,PUSHED_VERIFIED
 N09_A1_EVENTS,close A1 RP updates with cache-only exact-key reconciliation,d25ace278602214570c639e66464fe4523d219b5,0,True,PUSHED_VERIFIED
+N16_EVENTS,close active-axis R changes and retain D15 cap negative control,0769ed061a890141c99c0ab60ecf0d6db44edd36,0,True,PUSHED_VERIFIED

@@ -1,0 +1,28 @@
+{
+  "figures": 3,
+  "current_figures_raster_reviewed": 3,
+  "raster_views_including_initial_N09": 4,
+  "initial_render_calls": 1,
+  "targeted_rerender_calls": 1,
+  "rerender_reason": "N09 initially overlaid identical RP weights; revised only N09 to categorical accepted-event lanes and added adverse Up error panel",
+  "initial_new_N09_preserved": "<VALIDATION_ROOT>/figure_drafts/N09_RP_ONLY_ADD_RUN_00103_initial.png",
+  "original_paper_figures_changed": 0,
+  "unique_new_error_series_files_read": 6,
+  "new_error_series_file_opens_including_targeted_revision": 8,
+  "old_retained_error_series_read": 0,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "reference_reads": 0,
+  "no_smoothing_or_interpolation": true,
+  "gap_handling": "insert display NaN separator before gaps, preserve all actual samples",
+  "source_index": "SOURCES.csv",
+  "data_mode": "mixed_index_real_clean_and_semisynthetic",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "findings": {
+    "N12_D15": "H curves close; adverse early yaw evolution visible; actual accepted yaw R/base_R plotted",
+    "N16_C00": "small error differences; accepted HV multiplier 2 versus 1.5; no claim all metrics improve",
+    "N09_A1_F04": "H smaller but Up larger during fixed window; original RP event gap and candidate events shown on explicitly categorical lanes"
+  },
+  "render_warning": "optional Axes3D import warning from installed Matplotlib; 2D renders exited 0; environment unchanged"
+}

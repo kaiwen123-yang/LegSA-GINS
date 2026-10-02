@@ -32,18 +32,19 @@
 - P_BOUNDARY：explain frozen zero-scale covariance and bound key-snapshot symmetry evidence；`969b11dba49fec5d9dd1474be6c5e67f98b9a01c`；PUSHED_VERIFIED。
 - N09_A2_EVENTS：close A2 unchanged scheduling and actual accepted-source evidence；`ddd8671e7e37398ace9a61f300ba4d9bd4a48191`；PUSHED_VERIFIED。
 - N09_A1_EVENTS：close A1 RP updates with cache-only exact-key reconciliation；`d25ace278602214570c639e66464fe4523d219b5`；PUSHED_VERIFIED。
+- N16_EVENTS：close active-axis R changes and retain D15 cap negative control；`0769ed061a890141c99c0ab60ecf0d6db44edd36`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N16_EVENTS：close active-axis R changes and retain D15 cap negative control。
+EXPLANATORY_FIGURES：show adverse N12 yaw and A1 horizontal-up tradeoff in retained replay figures。
 
-N16两新候选流各读一次，930410行/15862个SA事件按固定容差核对，旧基线仅复用缓存。C00/D15实际R精确差2532/1765，其中HV1369/230；接受状态翻转0。首HV LSIM为2→1.5，实际二维R随之改变，D=999仍保留；D15 cap负对照及旧40影子/1329遮蔽分开。首更新/状态增量已保存，新增科学调用0。
+三张新说明图已实际逐张查看：N12 D15不利yaw，N16 C00小幅误差/实际HV倍率变化，N09 A1水平下降但Up上升并显示真实RP事件。只读六份新error_series（含N09定向改图共8打开）和既有事件比较表；未读旧2308份保留误差，原论文图不变。无平滑/插值/伪轨迹，native/evaluator/reference新增0；初版新N09图原位保留。初次stage被通用PNG ignore拒绝，按用户本轮明确授权仅显式加入这三张小图，未改ignore规则，无科学重试。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-发布三张实际新误差/权重说明图，汇总全队列调用和最终定义裁定。
+闭合17个事件流和全部调用账本，提交最终三个候选技术裁定，停止于本轮边界。
 
 ## 调用边界
 
