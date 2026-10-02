@@ -6,18 +6,19 @@
 
 - M01：explain formal methods and frozen metric definitions；`258b58c99246988b20419be3d6d45d603f76f61f`；PUSHED_VERIFIED。
 - N01a：interpret all eleven BY2 natural configurations；`3439053691a1de0624dc371243412bb64180228d`；PUSHED_VERIFIED。
+- S00：freeze retained series validation scope and tolerance；`0593770b2b3837012d155254cfc73448d76990b2`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-S00：freeze retained series validation scope and tolerance。
+N01b：verify BY2 retained errors and matched trajectory。
 
-封存2308份error_series和唯一matched的逐组只读扫描范围、13列schema、128运行统计字段和冻结summary定义；103个明确bundle元数据已读，正文读取0。数值容差预设1e-10+1e-10乘原值绝对值，时间1e-9，计数精确；缺损独立记录并继续，不复读成功载荷。21项独立纯算术手工检查通过。同步收紧3条方法来源读取深度标签，并补BY2实际配置字面差异表。
+22份BY2误差序列和唯一matched已各一次读到EOF/CRC，23/23原未压缩hash相等；全文1302766行含matched展示重复支持。3651 MATCH、2 MATCH_NULL、203不可从保留字段复算、0差异。完整时间向量相同，每文件679个大于0.01s间隔，最大0.091676s，无非有限/重复/逆时标。执行独立validation统计；没有新科学程序调用。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-启动BY2_NATURAL：22个error_series及1个matched，一次主扫描后立即提交结果。
+BY2H全部11配置及22份保留误差序列。
 
 ## 调用边界
 
