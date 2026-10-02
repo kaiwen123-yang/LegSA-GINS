@@ -61,7 +61,8 @@ def main():
                 and (r['window_id'] == 'full' or r['window_id'].startswith('registered_'))]
     text += ('下表按所有本组保留 case 统一列出 F03/A04/F04 的全窗及实际组件给出的故障/恢复窗，'
              '没有从中挑选有利种子。数值是**新 validation calculation**，不是原报告新增的故障窗指标；'
-             '原值仍在 ORIGINAL_RUN_VALUES 或 RECORDED 表。没有可定位实际组件窗口时，保留表中的全窗，'
+             '原值仍在 ORIGINAL_RUN_VALUES 或 RECORDED 表。未被冻结扫描清单纳入的实际组件窗口也可能存在，'
+             '缺少窗口行不等于原 bundle 无窗口（见 series_checks/WINDOW_LIMITATIONS.csv）。'
              '不把旧 helper 的 event 包络猜成真实注入窗。完整 11 方法和其他指标在 WINDOW_SUMMARY。\n\n')
     cols = ['case_id', 'run_id', 'method_id', 'window_id', 'start_s', 'end_s',
             'matched_epoch_count', 'horizontal_rmse_m', 'yaw_rmse_deg']

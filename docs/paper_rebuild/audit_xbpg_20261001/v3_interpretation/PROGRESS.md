@@ -13,18 +13,19 @@
 - C01：explain complete GNSS outage family and retained time support；`a544cc5d2d3be0c5cb6475358b738d9a5317e59d`；PUSHED_VERIFIED。
 - C02：explain sampling and dropout cases across all methods；`3d17be52f0401b44e136eaa22d235f48850a72b3`；PUSHED_VERIFIED。
 - C03：explain position_value results and retained time support；`6e85c769b015bf3a97f557fda4ba202408d66c08`；PUSHED_VERIFIED。
+- C04：explain position_std_status results and retained time support；`142b0325cd6a176566c5bd74e9aaf1ff97257e0c`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-C04：explain position_std_status results and retained time support。
+C05：explain scalar heading faults and bounded series checks。
 
-D23-D29全部63case×11方法；D27全99native发散，两口径198未调用槽保留。11088汇总格/5292原配对差一致。132保留误差全文、21768数值一致。D25/D28实际重复和D29无激活通路保持原身份及限制。
+D30-D41全部108case×11方法，1188native全完成。18018汇总格/10584配对差一致。264误差全文、43506数值MATCH；D39原字典窗口未纳入冻结提取器，局部统计明确未算而全窗已核对。保留D40无激活路径、1s噪声/1Hz std映射、均值中位数相反等限制。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-CORE dual_yaw：D30-D41全部方法、实际航向注入及保留时序。
+CORE velocity_raw_doppler：D42-D50全部方法与保留时序。
 
 ## 调用边界
 
