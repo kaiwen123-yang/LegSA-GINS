@@ -4,3 +4,4 @@ P_OBS,加入候选完整协方差只读诊断与原生负对照,6979459bb69154d7
 N09_CODE,isolate N09 RP scheduling and validate original branch controls,a66bc41fa7b8a1d5aefb00d0b43c17919c4da9de,0,True,PUSHED_VERIFIED
 N12_CODE,isolate conditional innovation and test same-event covariance contract,bb6d4e015fef5cecee1532b2d67617679afe06bf,0,True,PUSHED_VERIFIED
 N16_CODE,exclude disabled HV dimension from quality statistics with native controls,35817c5077212c8e02d8f5881902b438055a037c,0,True,PUSHED_VERIFIED
+RUN_ENTRY,gate ten single-slot candidate calls with immutable input and access checks,17aba05b15cf8a80bc43dfece7c7be963b063839,0,True,PUSHED_VERIFIED

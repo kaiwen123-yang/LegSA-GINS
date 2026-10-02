@@ -1,0 +1,97 @@
+{
+  "candidate_slots": [
+    {
+      "slot_id": "N12_ONLY__RUN_00004",
+      "preflight": "PASS",
+      "native_calls": 0,
+      "qualified_dependency_uses": 5,
+      "config_sha256": "3ac059cbaf5cacbf68929ca6027074629ab4efc969b4e8a5ddbb2ca300f4c542",
+      "binary_sha256": "72ceed0e037500498368c64adbdaab0659f3d625725be17abca41a4c8a83e2c4",
+      "candidate_output_exists": false
+    },
+    {
+      "slot_id": "N12_ONLY__RUN_01401",
+      "preflight": "PASS",
+      "native_calls": 0,
+      "qualified_dependency_uses": 5,
+      "config_sha256": "1648261e84e109a1dc37640205ec7c383b7917129fc58991f8a8c09bec1e69bb",
+      "binary_sha256": "72ceed0e037500498368c64adbdaab0659f3d625725be17abca41a4c8a83e2c4",
+      "candidate_output_exists": false
+    },
+    {
+      "slot_id": "N16_ONLY__RUN_00004",
+      "preflight": "PASS",
+      "native_calls": 0,
+      "qualified_dependency_uses": 5,
+      "config_sha256": "3ac059cbaf5cacbf68929ca6027074629ab4efc969b4e8a5ddbb2ca300f4c542",
+      "binary_sha256": "36ec64659f58901600ecd59066098ab41aa4d4115cbf4acf52f612ef7056ee4e",
+      "candidate_output_exists": false
+    },
+    {
+      "slot_id": "N16_ONLY__RUN_01401",
+      "preflight": "PASS",
+      "native_calls": 0,
+      "qualified_dependency_uses": 5,
+      "config_sha256": "1648261e84e109a1dc37640205ec7c383b7917129fc58991f8a8c09bec1e69bb",
+      "binary_sha256": "36ec64659f58901600ecd59066098ab41aa4d4115cbf4acf52f612ef7056ee4e",
+      "candidate_output_exists": false
+    },
+    {
+      "slot_id": "N09_RP_ONLY__RUN_00006",
+      "preflight": "PASS",
+      "native_calls": 0,
+      "qualified_dependency_uses": 5,
+      "config_sha256": "7577663e901b523293b56cc6a71a98bbbb796484108b910ad44e994be5fb3b39",
+      "binary_sha256": "b8dca5cb191dad2a1ebcfab25ce402974de2aac9235f7bc97a61665ded5c4e05",
+      "candidate_output_exists": false
+    },
+    {
+      "slot_id": "N09_RP_ONLY__RUN_00004",
+      "preflight": "PASS",
+      "native_calls": 0,
+      "qualified_dependency_uses": 5,
+      "config_sha256": "3ac059cbaf5cacbf68929ca6027074629ab4efc969b4e8a5ddbb2ca300f4c542",
+      "binary_sha256": "b8dca5cb191dad2a1ebcfab25ce402974de2aac9235f7bc97a61665ded5c4e05",
+      "candidate_output_exists": false
+    },
+    {
+      "slot_id": "N09_RP_ONLY__ADD_RUN_00105",
+      "preflight": "PASS",
+      "native_calls": 0,
+      "qualified_dependency_uses": 5,
+      "config_sha256": "354e1cae15b5b3dea279cebbe51fb5891f827ebf033e080d0bf5c3db57462240",
+      "binary_sha256": "b8dca5cb191dad2a1ebcfab25ce402974de2aac9235f7bc97a61665ded5c4e05",
+      "candidate_output_exists": false
+    },
+    {
+      "slot_id": "N09_RP_ONLY__ADD_RUN_00103",
+      "preflight": "PASS",
+      "native_calls": 0,
+      "qualified_dependency_uses": 5,
+      "config_sha256": "bbf7aa8330b4170dd27b901892897fe0633148f7e32f6dd1d1a84d55c7304818",
+      "binary_sha256": "b8dca5cb191dad2a1ebcfab25ce402974de2aac9235f7bc97a61665ded5c4e05",
+      "candidate_output_exists": false
+    },
+    {
+      "slot_id": "N09_RP_ONLY__ADD_RUN_00402",
+      "preflight": "PASS",
+      "native_calls": 0,
+      "qualified_dependency_uses": 5,
+      "config_sha256": "bcb6c931dfddcc9c9d2011945be97f25b91ed0ec7f7b6d88ba9fc75c8af3667b",
+      "binary_sha256": "b8dca5cb191dad2a1ebcfab25ce402974de2aac9235f7bc97a61665ded5c4e05",
+      "candidate_output_exists": false
+    },
+    {
+      "slot_id": "N09_RP_ONLY__ADD_RUN_00400",
+      "preflight": "PASS",
+      "native_calls": 0,
+      "qualified_dependency_uses": 5,
+      "config_sha256": "af11e764a2abea95b55cda32079c213c8d07de31e2211217effb095e796781de",
+      "binary_sha256": "b8dca5cb191dad2a1ebcfab25ce402974de2aac9235f7bc97a61665ded5c4e05",
+      "candidate_output_exists": false
+    }
+  ],
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "ledger_byte_unchanged": true
+}
