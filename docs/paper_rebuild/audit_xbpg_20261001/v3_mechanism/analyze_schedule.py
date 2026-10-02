@@ -161,9 +161,14 @@ def analyze(path, item, output, public):
                      ('flags_all_false_events', not g['flags_or'])]:
                     count[key] += int(yes)
     rows = []
+    # The completed event stream proves absent event classes have count zero;
+    # this is different from a missing input/unknown historical metric.
+    count_fields = sorted(set(k for count in summary.values() for k in count) | {
+        'function_entries', 'selected_measurement_attempts', 'accepted', 'not_accepted_function_returns',
+        'selected_but_rejected', 'no_selected_measurement_returns', 'repeated_accepted_same_loaded_row'})
     for (window, source), count in sorted(summary.items()):
         rows.append({'run_id': item['run_id'], 'group': item['group'], 'method_id': item['method_id'],
-                     'window': window, 'source': source, **count, 'source_path': source_alias,
+                     'window': window, 'source': source, **{k: count[k] for k in count_fields}, 'source_path': source_alias,
                      'scope': 'replay_observed; GNSS-input events vs attempts vs IMU opportunities are separate denominators'})
     write(public / (item['run_id'] + '_SCHEDULING.csv'), rows)
     manifest = json.loads((path.parent.parent / 'RUN_MANIFEST.json').read_text())

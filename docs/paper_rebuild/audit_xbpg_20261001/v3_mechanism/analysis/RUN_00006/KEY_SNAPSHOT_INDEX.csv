@@ -1,0 +1,7 @@
+source_path,source_line_1based,source_byte_offset,source_line_bytes,run_id,event_seq,source,n12_classification,n16_classification
+<MECHANISM_ROOT>/replays/RUN_00006/observed/observer/events.jsonl,270,410403,8721,RUN_00006,270,receiver_position,SA_DISABLED_SHADOW_NOT_APPLIED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00006/observed/observer/events.jsonl,277,445732,9822,RUN_00006,277,dual_antenna_yaw,SA_DISABLED_SHADOW_NOT_APPLIED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00006/observed/observer/events.jsonl,284,482879,10143,RUN_00006,284,receiver_velocity,SA_DISABLED_SHADOW_NOT_APPLIED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00006/observed/observer/events.jsonl,292,523047,10179,RUN_00006,292,raw_doppler_velocity,SA_DISABLED_SHADOW_NOT_APPLIED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00006/observed/observer/events.jsonl,299,560986,9981,RUN_00006,299,go2_horizontal_velocity,SA_DISABLED_SHADOW_NOT_APPLIED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00006/observed/observer/events.jsonl,306,597971,10112,RUN_00006,306,go2_attitude_roll_pitch,SA_DISABLED_SHADOW_NOT_APPLIED,NOT_ELIGIBLE

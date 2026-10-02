@@ -1,0 +1,14 @@
+source_path,source_line_1based,source_byte_offset,source_line_bytes,run_id,event_seq,source,n12_classification,n16_classification
+<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,270,410402,8711,RUN_00004,270,receiver_position,NO_MATERIAL_NIS_OR_R_CHANGE,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,277,445721,9812,RUN_00004,277,dual_antenna_yaw,NIS_CHANGED_NO_FINAL_R_CHANGE,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,284,482858,10133,RUN_00004,284,receiver_velocity,NIS_CHANGED_NO_FINAL_R_CHANGE,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,292,523016,10266,RUN_00004,292,raw_doppler_velocity,SHADOW_FINAL_R_CHANGED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,299,561039,10187,RUN_00004,299,go2_horizontal_velocity,OIM_CHANGE_MASKED_BY_LSIM,SHADOW_FINAL_R_CHANGED
+<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,306,598220,10130,RUN_00004,306,go2_attitude_roll_pitch,NIS_CHANGED_NO_FINAL_R_CHANGE,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,580,1111054,10401,RUN_00004,580,receiver_velocity,SHADOW_FINAL_R_CHANGED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,588,1151924,10277,RUN_00004,588,raw_doppler_velocity,NIS_CHANGED_NO_FINAL_R_CHANGE,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,907,1848028,10194,RUN_00004,907,go2_horizontal_velocity,NIS_CHANGED_NO_FINAL_R_CHANGE,SHADOW_FINAL_R_CHANGED
+<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,6727,14064022,10106,RUN_00004,6727,dual_antenna_yaw,SHADOW_FINAL_R_CHANGED,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,21252,44673003,10553,RUN_00004,21252,raw_doppler_velocity,RAW_OIM_CHANGE_MASKED_BY_CAP,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,159290,333274098,10398,RUN_00004,159290,go2_attitude_roll_pitch,OIM_CHANGE_MASKED_BY_LSIM,NOT_ELIGIBLE
+<MECHANISM_ROOT>/replays/RUN_00004/observed/observer/events.jsonl,218250,461654243,10505,RUN_00004,218250,raw_doppler_velocity,OIM_CHANGE_MASKED_BY_LSIM,NOT_ELIGIBLE
