@@ -8,18 +8,19 @@
 - P_OBS：加入候选完整协方差只读诊断与原生负对照；`6979459bb69154d70b6e88220e3dff29e3356568`；PUSHED_VERIFIED。
 - N09_CODE：isolate N09 RP scheduling and validate original branch controls；`a66bc41fa7b8a1d5aefb00d0b43c17919c4da9de`；PUSHED_VERIFIED。
 - N12_CODE：isolate conditional innovation and test same-event covariance contract；`bb6d4e015fef5cecee1532b2d67617679afe06bf`；PUSHED_VERIFIED。
+- N16_CODE：exclude disabled HV dimension from quality statistics with native controls；`35817c5077212c8e02d8f5881902b438055a037c`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N16_CODE：exclude disabled HV dimension from quality statistics with native controls。
+RUN_ENTRY：gate ten single-slot candidate calls with immutable input and access checks。
 
-N16三个新原生fixture进程、136独立场景/408场景执行；366项检查通过。96个三维对照保持原行为，6个旧契约反例保留。二维H/R和水平噪声不改，其他LSIM及OIM/cap保留；真实求解/评价0。隔离source、binary与公共观察层身份已审。
+三个候选代码门已完成。入口静态审查建议已落实：统一READY身份字段、已提交依赖门、固定manifest身份/禁止布尔/窗口参数、成功open完整解析与相对路径待审。py_compile通过，真实调用仍0。下一步先check-only再限定调用。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-提交限定单例入口并开始候选C00/D15；同口径离线评价与事件核对。
+N12 C00与D15真实候选、基线同口径离线评价和事件核对。
 
 ## 调用边界
 
