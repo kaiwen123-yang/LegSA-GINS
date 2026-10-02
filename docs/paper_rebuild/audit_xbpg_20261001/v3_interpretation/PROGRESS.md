@@ -26,18 +26,19 @@
 - U01：explain paired estimates and existing uncertainty intervals；`c3f1a014ea3b610fc0165009325fb7d601627a61`；PUSHED_VERIFIED。
 - B01：separate historical protocol comparisons from formal V3 runs；`7c7b63fafac0c1f2dd8861bfd5d2df31e2d9f1bd`；PUSHED_VERIFIED。
 - B02：explain frozen candidate sensitivity identities and tails；`bf244f246be68c93af32c30185329279ae191b71`；PUSHED_VERIFIED。
+- B03：explain external comparison classes and retained coverage；`e1ea87c9e33a6a5ad04efd735368444abad0ee64`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-B03：explain external comparison classes and retained coverage。
+G01：interpret all ten existing V3 stage figures。
 
-读取10张实际展示外部表1328行，4095单元格转录；阶段37外部行与后续HX05分开。保留heading/navigation/relative_pose、起点、几何FAIL、ports未验证、GINav2/271；算法failure与auditPASS不同轴。未用HX07R替代旧RTKLIB，未宣称三篇论文完成复现。仅已有来源描述、计数，无新外部运行或评价。
+本轮只读planner已逐张打开10个阶段PNG；保存55条精确来源关系和10条目视回执。解释实际横纵轴/颜色/有限样本/失败，MFIG02种子范围非CI、MFIG05失败空白非零、MFIG06直接CORE计数非因果、热图mean/white含义。未渲染或反推图数值；三个导出格式不重复实验。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-阶段10组现有图的实际阅读与直接来源解释。
+论文包10图逐图解释，核对历史pin差异边界。
 
 ## 调用边界
 
