@@ -15,18 +15,19 @@
 - C03：explain position_value results and retained time support；`6e85c769b015bf3a97f557fda4ba202408d66c08`；PUSHED_VERIFIED。
 - C04：explain position_std_status results and retained time support；`142b0325cd6a176566c5bd74e9aaf1ff97257e0c`；PUSHED_VERIFIED。
 - C05：explain scalar heading faults and bounded series checks；`66be30984e14895e36111f3f4f48e69b6c8830eb`；PUSHED_VERIFIED。
+- C06：explain velocity_raw_doppler results and retained time support；`c12d1fd8d889c25a0405893bfd0307bef43d8677`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-C06：explain velocity_raw_doppler results and retained time support。
+C07：explain go2_prior_metadata results and retained time support。
 
-D42-D50全部81case×11方法/891native完成；13860汇总格、7938配对差一致。198保留误差全文/32652数值一致。RV与RD输入/开关/实际窗口分别解释；均值方向不替代多数案例方向，未推断在线门控。
+D51-D56全部54case×11方法/594native完成；9702汇总格/5292配对差一致；132误差全文/21768数值一致。RP/HV真实准备依赖与396条recorded provider关系已列，D54三分支、D55/56无正式路径与重复输出明确。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-CORE go2_prior_metadata：D51-D56全部方法与保留时序。
+CORE multi_source_mixed：D57-D60、全部失败与CORE总分母闭合。
 
 ## 调用边界
 

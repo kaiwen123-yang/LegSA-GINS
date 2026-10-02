@@ -10,3 +10,4 @@ C02,explain sampling and dropout cases across all methods,3d17be52f0401b44e136ea
 C03,explain position_value results and retained time support,6e85c769b015bf3a97f557fda4ba202408d66c08,0,True,PUSHED_VERIFIED
 C04,explain position_std_status results and retained time support,142b0325cd6a176566c5bd74e9aaf1ff97257e0c,0,True,PUSHED_VERIFIED
 C05,explain scalar heading faults and bounded series checks,66be30984e14895e36111f3f4f48e69b6c8830eb,0,True,PUSHED_VERIFIED
+C06,explain velocity_raw_doppler results and retained time support,c12d1fd8d889c25a0405893bfd0307bef43d8677,0,True,PUSHED_VERIFIED
