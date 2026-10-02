@@ -9,3 +9,4 @@ N12_NATIVE,record two completed N12 closed-loop calls and changed acceptance,633
 N16_NATIVE,record independent N16 closed-loop calls without combining N12,5b0353f7bad7b4cd475ca06511c8a39f93e119ca,0,True,PUSHED_VERIFIED
 EVAL_ENTRY,bind frozen singleton evaluation and baseline reproduction gates,af74931169deb1f94576277f35df2b976a4286dc,0,True,PUSHED_VERIFIED
 N09_C00_NATIVE,verify N09 normal-GNSS controls reproduce ten scientific outputs,556b8d0a8df4ae6ab5a150ac009eeed1b32edbbf,0,True,PUSHED_VERIFIED
+BASELINE_C00_D15_EVAL,reproduce C00 and D15 frozen evaluation with exact recorded values,e5d5b8ee0b7bc5bc941b373d60c3c389e8fd0ccb,0,True,PUSHED_VERIFIED

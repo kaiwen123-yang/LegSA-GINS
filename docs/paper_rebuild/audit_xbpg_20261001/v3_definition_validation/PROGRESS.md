@@ -14,18 +14,19 @@
 - N16_NATIVE：record independent N16 closed-loop calls without combining N12；`5b0353f7bad7b4cd475ca06511c8a39f93e119ca`；PUSHED_VERIFIED。
 - EVAL_ENTRY：bind frozen singleton evaluation and baseline reproduction gates；`af74931169deb1f94576277f35df2b976a4286dc`；PUSHED_VERIFIED。
 - N09_C00_NATIVE：verify N09 normal-GNSS controls reproduce ten scientific outputs；`556b8d0a8df4ae6ab5a150ac009eeed1b32edbbf`；PUSHED_VERIFIED。
+- BASELINE_C00_D15_EVAL：reproduce C00 and D15 frozen evaluation with exact recorded values；`e5d5b8ee0b7bc5bc941b373d60c3c389e8fd0ccb`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-BASELINE_C00_D15_EVAL：reproduce C00 and D15 frozen evaluation with exact recorded values。
+INHERITED_SCOPE：inherit original V3 contract and classify RP independence as optional extension。
 
-复用两原版新重放NAV，无native新增。各转点NAV hash一致；143/143原指标及支持字段差值全0，17项evaluator门通过，NAV/STD全部列有限。实际evaluator2/参考child打开2，parent参考0，失败重试0。此前57项helper历史回执一并保留。
+按补充约束读取两指定冻结期文档和7d43原预注册；直接继承raw 5Hz标量heading与status-heading HV既定边界。所读历史依据未给出全失效GNSS下RP独立更新要求，N09按可选能力扩展，已执行结果保留。N12/N16计算矛盾仍独立核查，不用旧PASS消除。不改队列、参数、容差或已完成输出。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-N12两候选离线评价并逐项提交；N09 A1真实调用；候选事件/P核对。
+继续原有限队列；提交N12真实指标，评价N16；无新增研究项目。
 
 ## 调用边界
 
