@@ -4,3 +4,4 @@ E01,document actual V3 fault exposure against evaluation support,6d326c9fa3c2279
 E02,补充核对 D39 seed00 的两个窗内区间及窗外空集,dff215f5d11ba35097dbcfbef290fe0a2cf6667f,0,True,PUSHED_VERIFIED
 P01,预登记11个机制对象的原输入身份与22槽诊断协议,b221e3244ed61f84b0c8278245ff23f85d780f0e,0,True,PUSHED_VERIFIED
 I01,封存观察插桩与合成无干扰门,4194177cc5c769a4bd8a3cc8dd0a9f88ad91c939,0,True,PUSHED_VERIFIED
+C01,闭合C00三方法历史身份与调度创新权重证据,982258d9cf16292bd1ff9ce0b596966d081c6fc5,0,True,PUSHED_VERIFIED

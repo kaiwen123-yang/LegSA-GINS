@@ -1,0 +1,7 @@
+source,manifest_field,recorded_value,event_accepted_count,status
+receiver_position,position_update_count,1269,1269,EXACT_EQUAL
+receiver_velocity,receiver_velocity_update_count,1269,1269,EXACT_EQUAL
+dual_antenna_yaw,dual_yaw_accepted_count,1248,1248,EXACT_EQUAL
+raw_doppler_velocity,raw_doppler_update_count,969,969,EXACT_EQUAL
+go2_attitude_roll_pitch,go2_roll_pitch_update_count,1269,1269,EXACT_EQUAL
+go2_horizontal_velocity,go2_horizontal_velocity_update_count,1265,1265,EXACT_EQUAL

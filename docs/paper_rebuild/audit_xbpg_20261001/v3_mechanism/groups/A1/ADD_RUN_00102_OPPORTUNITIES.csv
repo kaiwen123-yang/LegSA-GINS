@@ -1,0 +1,17 @@
+window,reason,res,imu_opportunities,source_path
+after,GNSS_INPUT_NOT_PENDING,0,275,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+after,GNSS_UPDATE_SCHEDULED,2,276,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+after,GNSS_UPDATE_SCHEDULED,3,343,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+after,NOT_DUE,0,24683,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+before,GNSS_ALL_FLAGS_FALSE,0,35,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+before,GNSS_INPUT_NOT_PENDING,0,272,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+before,GNSS_UPDATE_SCHEDULED,2,279,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+before,GNSS_UPDATE_SCHEDULED,3,371,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+before,NOT_DUE,0,26430,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+during,GNSS_ALL_FLAGS_FALSE,0,3646,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+during,NOT_DUE,0,32,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+full,GNSS_ALL_FLAGS_FALSE,0,3681,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+full,GNSS_INPUT_NOT_PENDING,0,547,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+full,GNSS_UPDATE_SCHEDULED,2,555,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+full,GNSS_UPDATE_SCHEDULED,3,714,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
+full,NOT_DUE,0,51145,<MECHANISM_ROOT>/replays/ADD_RUN_00102/observed/observer/events.jsonl
