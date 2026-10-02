@@ -4,18 +4,19 @@
 
 ## 已完成并保存的小项
 
+- M01：explain formal methods and frozen metric definitions；`258b58c99246988b20419be3d6d45d603f76f61f`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-M01：explain formal methods and frozen metric definitions。
+N01a：interpret all eleven BY2 natural configurations。
 
-已全文读取11份BY2 C00配置、11份有效回显、v2/v3评价记录与冻结评价源码；已解释AB位序、RV差别、标量航向、物理点、插值、分母及参考边界。来源映射67条。独立验证计算尚未开始，保留时序正文读取0。旧契约与冻结插值/gap实现存在声明差异，未据此判定性能数值错误。
+已读取BY2全部11正式配置、22个同native双评价统计视图，保存7指标完整精度和支持字段、220条输入配置行及140项本轮标量差核算。F04相对F03位置/yaw名义改善较小、roll/pitch变化较大；相对A04四项均无名义优势。全部完成但不宣称合格。保留时序扫描尚未开始，本提交是明确完成的标量解释子项。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-BY2全部11配置；先封存时序schema/容差并读取该组22份error_series与唯一matched。
+BY2保留时序schema/容差、22文件全文扫描与唯一matched检查；完成后继续BY2H。
 
 ## 调用边界
 
