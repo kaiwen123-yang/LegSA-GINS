@@ -9,6 +9,28 @@ from pathlib import Path
 import re
 import shutil
 
+def successful_read_opens(text):
+    """Join strace's interleaved unfinished/resumed lines before role checks."""
+    pending={}; result=[]
+    for line in text.splitlines():
+        match=re.match(r'^(\d+)\s+(.*)$',line)
+        if not match:continue
+        pid,call=match.groups()
+        if call.startswith('openat(') and '<unfinished ...>' in call:
+            assert pid not in pending
+            pending[pid]=call.split('<unfinished ...>')[0]
+            continue
+        if call.startswith('<... openat resumed>'):
+            assert pid in pending
+            call=pending.pop(pid)+call.split('<... openat resumed>',1)[1]
+        if not call.startswith('openat(') or 'O_RDONLY' not in call:continue
+        returned=re.search(r'= (-?\d+)',call)
+        if not returned or int(returned.group(1))<0:continue
+        path=re.search(r'openat\([^,]+, "([^"\\]+)"',call)
+        if path:result.append(path.group(1))
+    assert not pending,'unresolved openat events in complete trace'
+    return result
+
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--roots',required=True);parser.add_argument('--sequence',required=True)
     args=parser.parse_args();roots=json.loads(Path(args.roots).read_text())['aliases']
@@ -42,12 +64,10 @@ def main():
                             unknown_stage_counts=json.dumps(receipt['unknown_stage_counts'],sort_keys=True),
                             source_path=f'<EXT_REPRO_ROOT>/runs/{receipt["run_id"]}/RUN.json')
         trace=root/'batches'/args.sequence/(method+'.openat')
-        data_reads=set();reference_reads=[];unclassified=[]
-        for line in trace.read_text().splitlines():
-            if 'openat(' not in line or 'O_RDONLY' not in line or re.search(r'= -1',line):continue
-            match=re.search(r'openat\([^,]+, "([^"\\]+)"',line)
-            if not match:continue
-            path=Path(match.group(1));path=path if path.is_absolute() else repo/path
+        data_reads=set();reference_reads=[];unclassified=[];libraries=set()
+        for name in successful_read_opens(trace.read_text()):
+            path=Path(name);path=path if path.is_absolute() else repo/path
+            if path.name in {'librtklib_legsa.so','liblegsa_rtklib_bridge.so'}:libraries.add(alias(str(path)))
             if path.suffix.lower() not in {'.csv','.ubx','.obs','.nav','.pos','.npy','.npz','.mat','.gz'}:continue
             text=str(path);data_reads.add(alias(text))
             if not text.startswith(str(root/'inputs')+'/') and not text.startswith(str(folder)+'/'):
@@ -58,6 +78,7 @@ def main():
         audits.append({'method':method,'trace':'<EXT_REPRO_ROOT>/batches/'+args.sequence+'/'+trace.name,
                        'checked_successful_read_openat_payload_suffixes':['csv','ubx','obs','nav','pos','npy','npz','mat','gz'],
                        'data_reads':sorted(data_reads),'reference_or_unclassified_data_reads':[],
+                       'actually_opened_rtklib_libraries':sorted(libraries),
                        'limit':'file-open role check; imported Python source is not reference payload; not a proof of all mathematical correctness'})
         if method=='EXT01':
             # Predetermined first feasible model only, no reference or score selection.

@@ -27,11 +27,7 @@
         "<EXT_REPRO_ROOT>/runs/BY2__EXT01__RAW_REPRO_V1/HEADING.csv"
       ],
       "reference_or_unclassified_data_reads": [],
-      "limit": "file-open role check; imported Python source is not reference payload; not a proof of all mathematical correctness",
-      "actually_opened_rtklib_libraries": [
-        "<EXT_REPRO_BUILD>/lib/liblegsa_rtklib_bridge.so",
-        "<EXT_REPRO_BUILD>/lib/librtklib_legsa.so"
-      ]
+      "limit": "file-open role check; imported Python source is not reference payload; not a proof of all mathematical correctness"
     },
     {
       "method": "EXT02",
@@ -57,11 +53,7 @@
         "<EXT_REPRO_ROOT>/runs/BY2__EXT02__RAW_REPRO_V1/HEADING.csv"
       ],
       "reference_or_unclassified_data_reads": [],
-      "limit": "file-open role check; imported Python source is not reference payload; not a proof of all mathematical correctness",
-      "actually_opened_rtklib_libraries": [
-        "<EXT_REPRO_BUILD>/lib/liblegsa_rtklib_bridge.so",
-        "<EXT_REPRO_BUILD>/lib/librtklib_legsa.so"
-      ]
+      "limit": "file-open role check; imported Python source is not reference payload; not a proof of all mathematical correctness"
     },
     {
       "method": "EXT03",
@@ -87,16 +79,10 @@
         "<EXT_REPRO_ROOT>/runs/BY2__EXT03__RAW_REPRO_V1/HEADING.csv"
       ],
       "reference_or_unclassified_data_reads": [],
-      "limit": "file-open role check; imported Python source is not reference payload; not a proof of all mathematical correctness",
-      "actually_opened_rtklib_libraries": [
-        "<EXT_REPRO_BUILD>/lib/liblegsa_rtklib_bridge.so",
-        "<EXT_REPRO_BUILD>/lib/librtklib_legsa.so"
-      ]
+      "limit": "file-open role check; imported Python source is not reference payload; not a proof of all mathematical correctness"
     }
   ],
   "native_method_sequence_calls": 3,
   "evaluator_calls": 0,
-  "reference_payload_reads_detected": 0,
-  "parser_revision": "R2 joins unfinished/resumed by process/thread before testing successful read; previous evidence retained; scientific outputs unchanged",
-  "payload_read_sets_after_resumed_join": "IDENTICAL_TO_PREVIOUS; only library proof added"
+  "reference_payload_reads_detected": 0
 }
