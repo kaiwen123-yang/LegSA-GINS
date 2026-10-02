@@ -19,18 +19,19 @@
 - C07：explain go2_prior_metadata results and retained time support；`0079eba42046be26391d86943e4e17188f5b5eef`；PUSHED_VERIFIED。
 - C08：explain mixed faults and reconcile all CORE failures；`331eecac3a10e740ab8c91098866805559764485`；PUSHED_VERIFIED。
 - A11：explain A1_10s across all eleven configurations；`d479558ab205c0a0d8b8a8a53deebca11c90c7ad`；PUSHED_VERIFIED。
+- A12：explain A1_20s across all eleven configurations；`0e9a36cc5e1c5ce282ade302e0d6ebf47d143221`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-A12：explain A1_20s across all eleven configurations。
+A13：explain A1_30s across all eleven configurations。
 
-A1 20 s：99 native/198评价全完成，11配置九种子全量解释。F04-F03水平配对均值负、中位数正，保留九种子差异；SA对照7例更大。全文读198误差文件、32652 MATCH/18 MATCH_NULL/1782不可复算/0差异；396原UA格一致。按真实窗口保存派生误差，不把全窗当故障终点。来源见本组RECORDED、UA、SCOPE、PROVIDER及series回执；有独立validation，无新科学调用。
+A1 30 s：99 native/198评价全完成；11方法和九种子全量原值、配对、top3、状态均保留。原UA396格一致；全文读取198误差，32652 MATCH/18 MATCH_NULL/1782不可复算，0数值差异。确认论文30.800来自先舍入30.8后补三位，原完整精度均值30.80599245730669；作为展示精度传播差异单列，未改原表/手稿。固定窗口是本轮validation，非原故障终点。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-A1_30s 全配置解释与现存时序核对。
+A2_10s 全配置解释与现存时序核对。
 
 ## 调用边界
 
