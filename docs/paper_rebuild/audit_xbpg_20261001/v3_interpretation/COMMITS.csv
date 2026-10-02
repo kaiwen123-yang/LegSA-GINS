@@ -15,3 +15,4 @@ C07,explain go2_prior_metadata results and retained time support,0079eba42046be2
 C08,explain mixed faults and reconcile all CORE failures,331eecac3a10e740ab8c91098866805559764485,0,True,PUSHED_VERIFIED
 A11,explain A1_10s across all eleven configurations,d479558ab205c0a0d8b8a8a53deebca11c90c7ad,0,True,PUSHED_VERIFIED
 A12,explain A1_20s across all eleven configurations,0e9a36cc5e1c5ce282ade302e0d6ebf47d143221,0,True,PUSHED_VERIFIED
+A13,explain A1_30s across all eleven configurations,36547a906cd9c2b3dd9b9da058a561c5663c7523,0,True,PUSHED_VERIFIED

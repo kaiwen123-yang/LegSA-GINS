@@ -20,18 +20,19 @@
 - C08：explain mixed faults and reconcile all CORE failures；`331eecac3a10e740ab8c91098866805559764485`；PUSHED_VERIFIED。
 - A11：explain A1_10s across all eleven configurations；`d479558ab205c0a0d8b8a8a53deebca11c90c7ad`；PUSHED_VERIFIED。
 - A12：explain A1_20s across all eleven configurations；`0e9a36cc5e1c5ce282ade302e0d6ebf47d143221`；PUSHED_VERIFIED。
+- A13：explain A1_30s across all eleven configurations；`36547a906cd9c2b3dd9b9da058a561c5663c7523`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-A13：explain A1_30s across all eleven configurations。
+A21：explain A2_10s across all eleven configurations。
 
-A1 30 s：99 native/198评价全完成；11方法和九种子全量原值、配对、top3、状态均保留。原UA396格一致；全文读取198误差，32652 MATCH/18 MATCH_NULL/1782不可复算，0数值差异。确认论文30.800来自先舍入30.8后补三位，原完整精度均值30.80599245730669；作为展示精度传播差异单列，未改原表/手稿。固定窗口是本轮validation，非原故障终点。
+A2 10 s：11配置×九种子、99native/198评价均完成，原全窗及up分布、全配对和worst已保存。F04-F03水平9/9更小，上向6/9更大；F04-A06水平9/9更小。保留heading与旧HV准备链，不将优势归已移除RD或完整GNSS拒止。198error全文读、32652 MATCH/18 NULL/1782不可复算/0差异；396UA格一致；独立validation已明确。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-A2_10s 全配置解释与现存时序核对。
+A2_20s，最后198份保留误差的全文读取和解释。
 
 ## 调用边界
 
