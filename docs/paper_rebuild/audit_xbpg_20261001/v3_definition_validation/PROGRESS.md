@@ -21,18 +21,19 @@
 - EVENT_ENTRY：validate bounded event and covariance analysis with strict cache identity；`291c6c6f87990430a07ad44882b92ed62337df12`；PUSHED_VERIFIED。
 - N09_A1_NATIVE：retain optional RP extension outputs for A1 without altering GNSS or HV counts；`9ff5ee2afe68b25e3b19518a635f490e4e8e5a92`；PUSHED_VERIFIED。
 - BASELINE_REMAINING_EVAL：close all seven historical evaluation baselines without native reruns；`88f2042cef57f0b151117e3bc122ea7025454c5e`；PUSHED_VERIFIED。
+- N09_C00_EVAL：confirm optional RP extension preserves both normal-GNSS evaluation controls；`200633300888c15ad6b6e533af07d6903ffc0fa7`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N09_C00_EVAL：confirm optional RP extension preserves both normal-GNSS evaluation controls。
+N09_A2_NATIVE：close ten planned candidate calls and preserve A2 byte-identical controls。
 
-N09 C00 A04/F04各142/142字段与基线完全相同，共同支持各56642，转点NAV hash亦相同；独立原生回执共10/10字节一致。evaluator/ref本项2累计13，失败重试0。N09按可选扩展解释，不冒称违反历史独立RP要求。
+A2 A04/F04各一次COMPLETED，99固定身份/access通过，五输出各字节相同，共10/10；N09 C00+A2负对照20/20。全部计划native10/10，无新baseline native、失败或真实重试。A1结果保留待同口径评价，不将新增RP自动判为历史设计缺陷。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-A1两候选同口径评价；A2最后native收尾及N12真实事件分析。
+A1/A2候选评价分批提交；继续同批事件/P证据分析，不扩队列。
 
 ## 调用边界
 

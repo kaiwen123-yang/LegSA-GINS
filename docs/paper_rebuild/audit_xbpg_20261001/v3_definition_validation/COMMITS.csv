@@ -16,3 +16,4 @@ N16_EVAL,report N16 same-support improvements and small adverse C00 changes,f03b
 EVENT_ENTRY,validate bounded event and covariance analysis with strict cache identity,291c6c6f87990430a07ad44882b92ed62337df12,0,True,PUSHED_VERIFIED
 N09_A1_NATIVE,retain optional RP extension outputs for A1 without altering GNSS or HV counts,9ff5ee2afe68b25e3b19518a635f490e4e8e5a92,0,True,PUSHED_VERIFIED
 BASELINE_REMAINING_EVAL,close all seven historical evaluation baselines without native reruns,88f2042cef57f0b151117e3bc122ea7025454c5e,0,True,PUSHED_VERIFIED
+N09_C00_EVAL,confirm optional RP extension preserves both normal-GNSS evaluation controls,200633300888c15ad6b6e533af07d6903ffc0fa7,0,True,PUSHED_VERIFIED
