@@ -1,0 +1,26 @@
+{
+  "item_id": "M01",
+  "commit_sha": "f6de3c4d6840cd4de416c3c4a478692ac279dafe",
+  "branch": "audit/code-xbpg-20260105-20261001",
+  "first_attempt": {
+    "status": "PUSH_FAILED",
+    "exit_code": 128,
+    "reason": "SSH connection closed during key exchange; remote remained at D15",
+    "remote_sha": "25ab500ab7bac7b59288f0dbb5b0c0fe66fd6433",
+    "utc": "2026-10-02T05:48:14.277239+00:00"
+  },
+  "bounded_retry": {
+    "push_exit_code": 0,
+    "remote_exit_code": 0,
+    "remote_sha": "f6de3c4d6840cd4de416c3c4a478692ac279dafe",
+    "remote_contains_commit": true,
+    "utc": "2026-10-02T05:50:30.274707+00:00"
+  },
+  "status": "PUSHED_VERIFIED_AFTER_ONE_RETRY",
+  "automatic_further_retries": 0,
+  "history_rewritten": false,
+  "force_push": false,
+  "data_mode": "git_delivery_receipt",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false
+}

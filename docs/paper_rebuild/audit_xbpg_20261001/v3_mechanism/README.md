@@ -10,7 +10,10 @@
 - [C00 三方法](groups/C00/README.md)：历史字节关系、实际更新和N12/N16同快照权重；[A1 20 s、seed_00](groups/A1/README.md)：区分RP入口阻断、HV候选不可用与恢复边界。
 - [A2 20 s、seed_00](groups/A2/README.md)：保留heading后的实际HV/RP接受、RD资格拒绝与影子权重边界。
 - [D15 seed_00](groups/D15/README.md)：位置噪声下NIS差异的双向权重变化、cap遮蔽及999哨兵的实际作用范围。
-- `FINAL_MECHANISM_FINDINGS.md`：阶段结束时分别裁定历史身份、重放事件、权重影响与尚未测试的闭环影响；当前完成范围看进度。
+- [最终裁定](FINAL_MECHANISM_FINDINGS.md)：11身份、22次真实native已完成，逐项区分历史身份、重放事件、影子权重与尚未测试的闭环影响；[问题—结果—表图映射](RESULT_CLAIM_SCOPE.md) / [16条来源记录](RESULT_CLAIM_SCOPE.csv) 保留旧状态与新证据。
+- [最终核对回执](FINAL_CHECKS.json) / [独立只读审阅](FINAL_REVIEW.md)：55项历史输出hash、55项观察版输出hash、调用/事件和新证据保留范围；通过的是身份与范围账，不是科学正确性。
 - [进度](PROGRESS.md) / [提交记录](COMMITS.csv)：小项进度、完整 SHA、push/远端核对状态。最后一项自身 SHA 由 Git 和终端交付，不递归提交。
 
 原 V3 NAV/STD 已按历史策略释放。新生成文件一律是新的重放输出，中间量为 `replay_observed`，不称“找回的历史日志”。大载荷仅放隔离输出根，实际本机根通过 ignored local config 解析；共享文件使用路径别名。不会重复扫描既有全部误差文件或调用旧矩阵控制器。
+
+本阶段已经完成，后续修补候选、因果干预和扩大重放均未执行。M01 首次 push 失败后的一次限定重试已成功，详见 [完整失败与恢复回执](M01_PUSH_RECOVERY.json)。

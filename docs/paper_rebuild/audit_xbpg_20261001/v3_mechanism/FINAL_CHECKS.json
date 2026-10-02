@@ -1,0 +1,1403 @@
+{
+  "scope": "bounded_replay_identity_and_observation_accounting; not scientific correctness PASS",
+  "all_accounting_checks_passed": true,
+  "checks": [
+    {
+      "check": "queue_and_invocation_slots",
+      "passed": true,
+      "source": "DIAGNOSTIC_QUEUE.csv;REPLAY_MANIFEST.csv"
+    },
+    {
+      "check": "real_calls_no_retry_all_byte_identical",
+      "passed": true,
+      "source": "REPLAY_MANIFEST.csv"
+    },
+    {
+      "check": "ledger_evaluator_zero",
+      "passed": true,
+      "source": "REPLAY_MANIFEST.csv"
+    },
+    {
+      "check": "C00:exact_identity_and_five_file_sets",
+      "passed": true,
+      "source": "DIAGNOSTIC_QUEUE.csv;groups/C00/IDENTITY.csv;OUTPUT_HASH_CHECKS.csv"
+    },
+    {
+      "check": "C00:identity_access_hashes",
+      "passed": true,
+      "source": "groups/C00/IDENTITY.csv;OUTPUT_HASH_CHECKS.csv"
+    },
+    {
+      "check": "C00:receipt_ledger_totals_and_no_new_evaluation",
+      "passed": true,
+      "source": "REPLAY_MANIFEST.csv;groups/C00/GROUP_RECEIPT.json"
+    },
+    {
+      "check": "RUN_00003:schedule_identity_denominator",
+      "passed": true,
+      "source": "groups/C00/SCHEDULING_COMPACT.csv full rows"
+    },
+    {
+      "check": "RUN_00003:complete_stream_and_all_SA_validated",
+      "passed": true,
+      "source": "analysis/RUN_00003/SUMMARY.json;groups/C00/RUN_00003_SCHEDULE_RECEIPT.json"
+    },
+    {
+      "check": "RUN_00006:schedule_identity_denominator",
+      "passed": true,
+      "source": "groups/C00/SCHEDULING_COMPACT.csv full rows"
+    },
+    {
+      "check": "RUN_00006:complete_stream_and_all_SA_validated",
+      "passed": true,
+      "source": "analysis/RUN_00006/SUMMARY.json;groups/C00/RUN_00006_SCHEDULE_RECEIPT.json"
+    },
+    {
+      "check": "RUN_00004:schedule_identity_denominator",
+      "passed": true,
+      "source": "groups/C00/SCHEDULING_COMPACT.csv full rows"
+    },
+    {
+      "check": "RUN_00004:complete_stream_and_all_SA_validated",
+      "passed": true,
+      "source": "analysis/RUN_00004/SUMMARY.json;groups/C00/RUN_00004_SCHEDULE_RECEIPT.json"
+    },
+    {
+      "check": "C00:indexed_new_evidence_still_present",
+      "passed": true,
+      "source": "groups/C00/EVIDENCE_LOCATIONS.csv (stat only, no new hash)"
+    },
+    {
+      "check": "A1:exact_identity_and_five_file_sets",
+      "passed": true,
+      "source": "DIAGNOSTIC_QUEUE.csv;groups/A1/IDENTITY.csv;OUTPUT_HASH_CHECKS.csv"
+    },
+    {
+      "check": "A1:identity_access_hashes",
+      "passed": true,
+      "source": "groups/A1/IDENTITY.csv;OUTPUT_HASH_CHECKS.csv"
+    },
+    {
+      "check": "A1:receipt_ledger_totals_and_no_new_evaluation",
+      "passed": true,
+      "source": "REPLAY_MANIFEST.csv;groups/A1/GROUP_RECEIPT.json"
+    },
+    {
+      "check": "ADD_RUN_00102:schedule_identity_denominator",
+      "passed": true,
+      "source": "groups/A1/SCHEDULING_COMPACT.csv full rows"
+    },
+    {
+      "check": "ADD_RUN_00102:complete_stream_and_all_SA_validated",
+      "passed": true,
+      "source": "analysis/ADD_RUN_00102/SUMMARY.json;groups/A1/ADD_RUN_00102_SCHEDULE_RECEIPT.json"
+    },
+    {
+      "check": "ADD_RUN_00105:schedule_identity_denominator",
+      "passed": true,
+      "source": "groups/A1/SCHEDULING_COMPACT.csv full rows"
+    },
+    {
+      "check": "ADD_RUN_00105:complete_stream_and_all_SA_validated",
+      "passed": true,
+      "source": "analysis/ADD_RUN_00105/SUMMARY.json;groups/A1/ADD_RUN_00105_SCHEDULE_RECEIPT.json"
+    },
+    {
+      "check": "ADD_RUN_00103:schedule_identity_denominator",
+      "passed": true,
+      "source": "groups/A1/SCHEDULING_COMPACT.csv full rows"
+    },
+    {
+      "check": "ADD_RUN_00103:complete_stream_and_all_SA_validated",
+      "passed": true,
+      "source": "analysis/ADD_RUN_00103/SUMMARY.json;groups/A1/ADD_RUN_00103_SCHEDULE_RECEIPT.json"
+    },
+    {
+      "check": "A1:indexed_new_evidence_still_present",
+      "passed": true,
+      "source": "groups/A1/EVIDENCE_LOCATIONS.csv (stat only, no new hash)"
+    },
+    {
+      "check": "A2:exact_identity_and_five_file_sets",
+      "passed": true,
+      "source": "DIAGNOSTIC_QUEUE.csv;groups/A2/IDENTITY.csv;OUTPUT_HASH_CHECKS.csv"
+    },
+    {
+      "check": "A2:identity_access_hashes",
+      "passed": true,
+      "source": "groups/A2/IDENTITY.csv;OUTPUT_HASH_CHECKS.csv"
+    },
+    {
+      "check": "A2:receipt_ledger_totals_and_no_new_evaluation",
+      "passed": true,
+      "source": "REPLAY_MANIFEST.csv;groups/A2/GROUP_RECEIPT.json"
+    },
+    {
+      "check": "ADD_RUN_00399:schedule_identity_denominator",
+      "passed": true,
+      "source": "groups/A2/SCHEDULING_COMPACT.csv full rows"
+    },
+    {
+      "check": "ADD_RUN_00399:complete_stream_and_all_SA_validated",
+      "passed": true,
+      "source": "analysis/ADD_RUN_00399/SUMMARY.json;groups/A2/ADD_RUN_00399_SCHEDULE_RECEIPT.json"
+    },
+    {
+      "check": "ADD_RUN_00402:schedule_identity_denominator",
+      "passed": true,
+      "source": "groups/A2/SCHEDULING_COMPACT.csv full rows"
+    },
+    {
+      "check": "ADD_RUN_00402:complete_stream_and_all_SA_validated",
+      "passed": true,
+      "source": "analysis/ADD_RUN_00402/SUMMARY.json;groups/A2/ADD_RUN_00402_SCHEDULE_RECEIPT.json"
+    },
+    {
+      "check": "ADD_RUN_00400:schedule_identity_denominator",
+      "passed": true,
+      "source": "groups/A2/SCHEDULING_COMPACT.csv full rows"
+    },
+    {
+      "check": "ADD_RUN_00400:complete_stream_and_all_SA_validated",
+      "passed": true,
+      "source": "analysis/ADD_RUN_00400/SUMMARY.json;groups/A2/ADD_RUN_00400_SCHEDULE_RECEIPT.json"
+    },
+    {
+      "check": "A2:indexed_new_evidence_still_present",
+      "passed": true,
+      "source": "groups/A2/EVIDENCE_LOCATIONS.csv (stat only, no new hash)"
+    },
+    {
+      "check": "D15:exact_identity_and_five_file_sets",
+      "passed": true,
+      "source": "DIAGNOSTIC_QUEUE.csv;groups/D15/IDENTITY.csv;OUTPUT_HASH_CHECKS.csv"
+    },
+    {
+      "check": "D15:identity_access_hashes",
+      "passed": true,
+      "source": "groups/D15/IDENTITY.csv;OUTPUT_HASH_CHECKS.csv"
+    },
+    {
+      "check": "D15:receipt_ledger_totals_and_no_new_evaluation",
+      "passed": true,
+      "source": "REPLAY_MANIFEST.csv;groups/D15/GROUP_RECEIPT.json"
+    },
+    {
+      "check": "RUN_01403:schedule_identity_denominator",
+      "passed": true,
+      "source": "groups/D15/SCHEDULING_COMPACT.csv full rows"
+    },
+    {
+      "check": "RUN_01403:complete_stream_and_all_SA_validated",
+      "passed": true,
+      "source": "analysis/RUN_01403/SUMMARY.json;groups/D15/RUN_01403_SCHEDULE_RECEIPT.json"
+    },
+    {
+      "check": "RUN_01401:schedule_identity_denominator",
+      "passed": true,
+      "source": "groups/D15/SCHEDULING_COMPACT.csv full rows"
+    },
+    {
+      "check": "RUN_01401:complete_stream_and_all_SA_validated",
+      "passed": true,
+      "source": "analysis/RUN_01401/SUMMARY.json;groups/D15/RUN_01401_SCHEDULE_RECEIPT.json"
+    },
+    {
+      "check": "D15:indexed_new_evidence_still_present",
+      "passed": true,
+      "source": "groups/D15/EVIDENCE_LOCATIONS.csv (stat only, no new hash)"
+    },
+    {
+      "check": "git_change_scope",
+      "passed": true,
+      "source": "git diff baseline plus untracked nonignored paths"
+    },
+    {
+      "check": "M01_wording_receipt_and_current_small_documents",
+      "passed": true,
+      "source": "MECHANISM_WORDING_CHECK_RECEIPT.json; nine small current documents"
+    },
+    {
+      "check": "display_receipt",
+      "passed": true,
+      "source": "display/CHECK_RECEIPT.json"
+    },
+    {
+      "check": "synthetic_noninterference_receipt",
+      "passed": true,
+      "source": "observer/SYNTHETIC_RECEIPT.json"
+    },
+    {
+      "check": "D39_supplemental_receipt_complete_and_old_receipts_unchanged",
+      "passed": true,
+      "source": "exposure/D39_WINDOW_VALIDATION_RECEIPT.json (existing supplemental read, not a read by this script)"
+    }
+  ],
+  "real_unique_native_identities": 11,
+  "real_native_invocations": 22,
+  "real_invocation_attempts": 22,
+  "real_native_failures": 0,
+  "real_evaluator_calls": 0,
+  "provider_generator_calls": 0,
+  "native_fixture_processes_separate": 3,
+  "fixture_subscenarios": 33,
+  "fixture_failures": 0,
+  "fixture_retries": 0,
+  "historical_output_hash_matches": 55,
+  "observer_output_hash_matches": 55,
+  "new_evaluations_or_fixed_algorithm_RMSE": 0,
+  "observer_shadow_feedback": false,
+  "independent_validation_calculation": true,
+  "counts": {
+    "observer_events": 4408460,
+    "SA_events_validated": 71848,
+    "manifest_counter_checks": 66,
+    "SA_failed": 0,
+    "SA_unavailable": 0,
+    "gnss_update_entries": 14759,
+    "gnss_input_identities_scheduled": 14759,
+    "gnss_schedule_extra_entries_over_unique_identities": 0,
+    "repeated_accepted_aux_loaded_rows_within_run": 0,
+    "Hdx_nonzero": 25446,
+    "nis_changed": 25446,
+    "oim_raw_changed": 8469,
+    "shadow_final_R_changed": 3472,
+    "shadow_policy_acceptance_changed": 0,
+    "lsim_masked": 1683,
+    "oim_cap_masked": 3314,
+    "n16_eligible": 5372,
+    "n16_shadow_final_R_changed": 4043,
+    "indexed_new_evidence_files_stat_checked": 363
+  },
+  "groups": [
+    {
+      "group": "C00",
+      "receipt": {
+        "group": "C00",
+        "unique_native_identities": 3,
+        "native_invocations": 6,
+        "native_failed": 0,
+        "historical_output_hash_checks": 15,
+        "observed_output_hash_checks": 15,
+        "hash_mismatches": 0,
+        "manifest_mismatches": 0,
+        "new_reference_reads": 0,
+        "new_evaluator_calls": 0,
+        "new_provider_calls": 0,
+        "new_performance_evaluations": 0,
+        "independent_validation_calculation": true,
+        "closed_loop_fix_applied": false,
+        "data_mode": "real_clean",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": false
+      },
+      "counts": {
+        "observer_events": 1205204,
+        "SA_events_validated": 19911,
+        "manifest_counter_checks": 18,
+        "SA_failed": 0,
+        "SA_unavailable": 0,
+        "gnss_update_entries": 4107,
+        "gnss_input_identities_scheduled": 4107,
+        "gnss_schedule_extra_entries_over_unique_identities": 0,
+        "repeated_accepted_aux_loaded_rows_within_run": 0,
+        "Hdx_nonzero": 6563,
+        "nis_changed": 6563,
+        "oim_raw_changed": 1426,
+        "shadow_final_R_changed": 975,
+        "shadow_policy_acceptance_changed": 0,
+        "lsim_masked": 435,
+        "oim_cap_masked": 16,
+        "n16_eligible": 1369,
+        "n16_shadow_final_R_changed": 1369,
+        "indexed_new_evidence_files_stat_checked": 99
+      },
+      "actual_schedule_counts": [
+        {
+          "run_id": "RUN_00003",
+          "method_id": "F03",
+          "window": "full",
+          "source": "dual_antenna_yaw",
+          "accepted": "1348",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00003",
+          "method_id": "F03",
+          "window": "full",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00003",
+          "method_id": "F03",
+          "window": "full",
+          "source": "go2_horizontal_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00003",
+          "method_id": "F03",
+          "window": "full",
+          "source": "raw_doppler_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00003",
+          "method_id": "F03",
+          "window": "full",
+          "source": "receiver_position",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00003",
+          "method_id": "F03",
+          "window": "full",
+          "source": "receiver_velocity",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00006",
+          "method_id": "A04",
+          "window": "full",
+          "source": "dual_antenna_yaw",
+          "accepted": "1348",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00006",
+          "method_id": "A04",
+          "window": "full",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00006",
+          "method_id": "A04",
+          "window": "full",
+          "source": "go2_horizontal_velocity",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00006",
+          "method_id": "A04",
+          "window": "full",
+          "source": "raw_doppler_velocity",
+          "accepted": "1069",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00006",
+          "method_id": "A04",
+          "window": "full",
+          "source": "receiver_position",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00006",
+          "method_id": "A04",
+          "window": "full",
+          "source": "receiver_velocity",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00004",
+          "method_id": "F04",
+          "window": "full",
+          "source": "dual_antenna_yaw",
+          "accepted": "1348",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00004",
+          "method_id": "F04",
+          "window": "full",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00004",
+          "method_id": "F04",
+          "window": "full",
+          "source": "go2_horizontal_velocity",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00004",
+          "method_id": "F04",
+          "window": "full",
+          "source": "raw_doppler_velocity",
+          "accepted": "1108",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00004",
+          "method_id": "F04",
+          "window": "full",
+          "source": "receiver_position",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_00004",
+          "method_id": "F04",
+          "window": "full",
+          "source": "receiver_velocity",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        }
+      ],
+      "missing_new_files": [],
+      "indexed_size_mismatches": []
+    },
+    {
+      "group": "A1",
+      "receipt": {
+        "group": "A1",
+        "unique_native_identities": 3,
+        "native_invocations": 6,
+        "native_failed": 0,
+        "historical_output_hash_checks": 15,
+        "observed_output_hash_checks": 15,
+        "hash_mismatches": 0,
+        "manifest_mismatches": 0,
+        "new_reference_reads": 0,
+        "new_evaluator_calls": 0,
+        "new_provider_calls": 0,
+        "new_performance_evaluations": 0,
+        "independent_validation_calculation": true,
+        "closed_loop_fix_applied": false,
+        "data_mode": "semisynthetic",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": true
+      },
+      "counts": {
+        "observer_events": 1191584,
+        "SA_events_validated": 18403,
+        "manifest_counter_checks": 18,
+        "SA_failed": 0,
+        "SA_unavailable": 0,
+        "gnss_update_entries": 3807,
+        "gnss_input_identities_scheduled": 3807,
+        "gnss_schedule_extra_entries_over_unique_identities": 0,
+        "repeated_accepted_aux_loaded_rows_within_run": 0,
+        "Hdx_nonzero": 6059,
+        "nis_changed": 6059,
+        "oim_raw_changed": 1272,
+        "shadow_final_R_changed": 876,
+        "shadow_policy_acceptance_changed": 0,
+        "lsim_masked": 381,
+        "oim_cap_masked": 15,
+        "n16_eligible": 1265,
+        "n16_shadow_final_R_changed": 1265,
+        "indexed_new_evidence_files_stat_checked": 99
+      },
+      "actual_schedule_counts": [
+        {
+          "run_id": "ADD_RUN_00102",
+          "method_id": "F03",
+          "window": "during",
+          "source": "dual_antenna_yaw",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00102",
+          "method_id": "F03",
+          "window": "during",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00102",
+          "method_id": "F03",
+          "window": "during",
+          "source": "go2_horizontal_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00102",
+          "method_id": "F03",
+          "window": "during",
+          "source": "raw_doppler_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00102",
+          "method_id": "F03",
+          "window": "during",
+          "source": "receiver_position",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00102",
+          "method_id": "F03",
+          "window": "during",
+          "source": "receiver_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00102",
+          "method_id": "F03",
+          "window": "full",
+          "source": "dual_antenna_yaw",
+          "accepted": "1248",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00102",
+          "method_id": "F03",
+          "window": "full",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00102",
+          "method_id": "F03",
+          "window": "full",
+          "source": "go2_horizontal_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00102",
+          "method_id": "F03",
+          "window": "full",
+          "source": "raw_doppler_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00102",
+          "method_id": "F03",
+          "window": "full",
+          "source": "receiver_position",
+          "accepted": "1269",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00102",
+          "method_id": "F03",
+          "window": "full",
+          "source": "receiver_velocity",
+          "accepted": "1269",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00105",
+          "method_id": "A04",
+          "window": "during",
+          "source": "dual_antenna_yaw",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00105",
+          "method_id": "A04",
+          "window": "during",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "100"
+        },
+        {
+          "run_id": "ADD_RUN_00105",
+          "method_id": "A04",
+          "window": "during",
+          "source": "go2_horizontal_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00105",
+          "method_id": "A04",
+          "window": "during",
+          "source": "raw_doppler_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00105",
+          "method_id": "A04",
+          "window": "during",
+          "source": "receiver_position",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00105",
+          "method_id": "A04",
+          "window": "during",
+          "source": "receiver_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00105",
+          "method_id": "A04",
+          "window": "full",
+          "source": "dual_antenna_yaw",
+          "accepted": "1248",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00105",
+          "method_id": "A04",
+          "window": "full",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "1269",
+          "qualified_but_entry_blocked_events": "100"
+        },
+        {
+          "run_id": "ADD_RUN_00105",
+          "method_id": "A04",
+          "window": "full",
+          "source": "go2_horizontal_velocity",
+          "accepted": "1265",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00105",
+          "method_id": "A04",
+          "window": "full",
+          "source": "raw_doppler_velocity",
+          "accepted": "969",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00105",
+          "method_id": "A04",
+          "window": "full",
+          "source": "receiver_position",
+          "accepted": "1269",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00105",
+          "method_id": "A04",
+          "window": "full",
+          "source": "receiver_velocity",
+          "accepted": "1269",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00103",
+          "method_id": "F04",
+          "window": "during",
+          "source": "dual_antenna_yaw",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00103",
+          "method_id": "F04",
+          "window": "during",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "100"
+        },
+        {
+          "run_id": "ADD_RUN_00103",
+          "method_id": "F04",
+          "window": "during",
+          "source": "go2_horizontal_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00103",
+          "method_id": "F04",
+          "window": "during",
+          "source": "raw_doppler_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00103",
+          "method_id": "F04",
+          "window": "during",
+          "source": "receiver_position",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00103",
+          "method_id": "F04",
+          "window": "during",
+          "source": "receiver_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00103",
+          "method_id": "F04",
+          "window": "full",
+          "source": "dual_antenna_yaw",
+          "accepted": "1248",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00103",
+          "method_id": "F04",
+          "window": "full",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "1269",
+          "qualified_but_entry_blocked_events": "100"
+        },
+        {
+          "run_id": "ADD_RUN_00103",
+          "method_id": "F04",
+          "window": "full",
+          "source": "go2_horizontal_velocity",
+          "accepted": "1265",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00103",
+          "method_id": "F04",
+          "window": "full",
+          "source": "raw_doppler_velocity",
+          "accepted": "1008",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00103",
+          "method_id": "F04",
+          "window": "full",
+          "source": "receiver_position",
+          "accepted": "1269",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00103",
+          "method_id": "F04",
+          "window": "full",
+          "source": "receiver_velocity",
+          "accepted": "1269",
+          "qualified_but_entry_blocked_events": "0"
+        }
+      ],
+      "missing_new_files": [],
+      "indexed_size_mismatches": []
+    },
+    {
+      "group": "A2",
+      "receipt": {
+        "group": "A2",
+        "unique_native_identities": 3,
+        "native_invocations": 6,
+        "native_failed": 0,
+        "historical_output_hash_checks": 15,
+        "observed_output_hash_checks": 15,
+        "hash_mismatches": 0,
+        "manifest_mismatches": 0,
+        "new_reference_reads": 0,
+        "new_evaluator_calls": 0,
+        "new_provider_calls": 0,
+        "new_performance_evaluations": 0,
+        "independent_validation_calculation": true,
+        "closed_loop_fix_applied": false,
+        "data_mode": "semisynthetic",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": true
+      },
+      "counts": {
+        "observer_events": 1200308,
+        "SA_events_validated": 19112,
+        "manifest_counter_checks": 18,
+        "SA_failed": 0,
+        "SA_unavailable": 0,
+        "gnss_update_entries": 4107,
+        "gnss_input_identities_scheduled": 4107,
+        "gnss_schedule_extra_entries_over_unique_identities": 0,
+        "repeated_accepted_aux_loaded_rows_within_run": 0,
+        "Hdx_nonzero": 6263,
+        "nis_changed": 6263,
+        "oim_raw_changed": 1318,
+        "shadow_final_R_changed": 872,
+        "shadow_policy_acceptance_changed": 0,
+        "lsim_masked": 431,
+        "oim_cap_masked": 15,
+        "n16_eligible": 1369,
+        "n16_shadow_final_R_changed": 1369,
+        "indexed_new_evidence_files_stat_checked": 99
+      },
+      "actual_schedule_counts": [
+        {
+          "run_id": "ADD_RUN_00399",
+          "method_id": "F03",
+          "window": "during",
+          "source": "dual_antenna_yaw",
+          "accepted": "100",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00399",
+          "method_id": "F03",
+          "window": "during",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00399",
+          "method_id": "F03",
+          "window": "during",
+          "source": "go2_horizontal_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00399",
+          "method_id": "F03",
+          "window": "during",
+          "source": "raw_doppler_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00399",
+          "method_id": "F03",
+          "window": "during",
+          "source": "receiver_position",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00399",
+          "method_id": "F03",
+          "window": "during",
+          "source": "receiver_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00399",
+          "method_id": "F03",
+          "window": "full",
+          "source": "dual_antenna_yaw",
+          "accepted": "1348",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00399",
+          "method_id": "F03",
+          "window": "full",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00399",
+          "method_id": "F03",
+          "window": "full",
+          "source": "go2_horizontal_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00399",
+          "method_id": "F03",
+          "window": "full",
+          "source": "raw_doppler_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00399",
+          "method_id": "F03",
+          "window": "full",
+          "source": "receiver_position",
+          "accepted": "1269",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00399",
+          "method_id": "F03",
+          "window": "full",
+          "source": "receiver_velocity",
+          "accepted": "1269",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00402",
+          "method_id": "A04",
+          "window": "during",
+          "source": "dual_antenna_yaw",
+          "accepted": "100",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00402",
+          "method_id": "A04",
+          "window": "during",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "100",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00402",
+          "method_id": "A04",
+          "window": "during",
+          "source": "go2_horizontal_velocity",
+          "accepted": "100",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00402",
+          "method_id": "A04",
+          "window": "during",
+          "source": "raw_doppler_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00402",
+          "method_id": "A04",
+          "window": "during",
+          "source": "receiver_position",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00402",
+          "method_id": "A04",
+          "window": "during",
+          "source": "receiver_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00402",
+          "method_id": "A04",
+          "window": "full",
+          "source": "dual_antenna_yaw",
+          "accepted": "1348",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00402",
+          "method_id": "A04",
+          "window": "full",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00402",
+          "method_id": "A04",
+          "window": "full",
+          "source": "go2_horizontal_velocity",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00402",
+          "method_id": "A04",
+          "window": "full",
+          "source": "raw_doppler_velocity",
+          "accepted": "970",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00402",
+          "method_id": "A04",
+          "window": "full",
+          "source": "receiver_position",
+          "accepted": "1269",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00402",
+          "method_id": "A04",
+          "window": "full",
+          "source": "receiver_velocity",
+          "accepted": "1269",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00400",
+          "method_id": "F04",
+          "window": "during",
+          "source": "dual_antenna_yaw",
+          "accepted": "100",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00400",
+          "method_id": "F04",
+          "window": "during",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "100",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00400",
+          "method_id": "F04",
+          "window": "during",
+          "source": "go2_horizontal_velocity",
+          "accepted": "100",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00400",
+          "method_id": "F04",
+          "window": "during",
+          "source": "raw_doppler_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00400",
+          "method_id": "F04",
+          "window": "during",
+          "source": "receiver_position",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00400",
+          "method_id": "F04",
+          "window": "during",
+          "source": "receiver_velocity",
+          "accepted": "0",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00400",
+          "method_id": "F04",
+          "window": "full",
+          "source": "dual_antenna_yaw",
+          "accepted": "1348",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00400",
+          "method_id": "F04",
+          "window": "full",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00400",
+          "method_id": "F04",
+          "window": "full",
+          "source": "go2_horizontal_velocity",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00400",
+          "method_id": "F04",
+          "window": "full",
+          "source": "raw_doppler_velocity",
+          "accepted": "1008",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00400",
+          "method_id": "F04",
+          "window": "full",
+          "source": "receiver_position",
+          "accepted": "1269",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "ADD_RUN_00400",
+          "method_id": "F04",
+          "window": "full",
+          "source": "receiver_velocity",
+          "accepted": "1269",
+          "qualified_but_entry_blocked_events": "0"
+        }
+      ],
+      "missing_new_files": [],
+      "indexed_size_mismatches": []
+    },
+    {
+      "group": "D15",
+      "receipt": {
+        "group": "D15",
+        "unique_native_identities": 2,
+        "native_invocations": 4,
+        "native_failed": 0,
+        "historical_output_hash_checks": 10,
+        "observed_output_hash_checks": 10,
+        "hash_mismatches": 0,
+        "manifest_mismatches": 0,
+        "new_reference_reads": 0,
+        "new_evaluator_calls": 0,
+        "new_provider_calls": 0,
+        "new_performance_evaluations": 0,
+        "independent_validation_calculation": true,
+        "closed_loop_fix_applied": false,
+        "data_mode": "semisynthetic",
+        "synthetic_data_used": false,
+        "semisynthetic_data_used": true
+      },
+      "counts": {
+        "observer_events": 811364,
+        "SA_events_validated": 14422,
+        "manifest_counter_checks": 12,
+        "SA_failed": 0,
+        "SA_unavailable": 0,
+        "gnss_update_entries": 2738,
+        "gnss_input_identities_scheduled": 2738,
+        "gnss_schedule_extra_entries_over_unique_identities": 0,
+        "repeated_accepted_aux_loaded_rows_within_run": 0,
+        "Hdx_nonzero": 6561,
+        "nis_changed": 6561,
+        "oim_raw_changed": 4453,
+        "shadow_final_R_changed": 749,
+        "shadow_policy_acceptance_changed": 0,
+        "lsim_masked": 436,
+        "oim_cap_masked": 3268,
+        "n16_eligible": 1369,
+        "n16_shadow_final_R_changed": 40,
+        "indexed_new_evidence_files_stat_checked": 66
+      },
+      "actual_schedule_counts": [
+        {
+          "run_id": "RUN_01403",
+          "method_id": "A04",
+          "window": "full",
+          "source": "dual_antenna_yaw",
+          "accepted": "957",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_01403",
+          "method_id": "A04",
+          "window": "full",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_01403",
+          "method_id": "A04",
+          "window": "full",
+          "source": "go2_horizontal_velocity",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_01403",
+          "method_id": "A04",
+          "window": "full",
+          "source": "raw_doppler_velocity",
+          "accepted": "59",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_01403",
+          "method_id": "A04",
+          "window": "full",
+          "source": "receiver_position",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_01403",
+          "method_id": "A04",
+          "window": "full",
+          "source": "receiver_velocity",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_01401",
+          "method_id": "F04",
+          "window": "full",
+          "source": "dual_antenna_yaw",
+          "accepted": "1346",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_01401",
+          "method_id": "F04",
+          "window": "full",
+          "source": "go2_attitude_roll_pitch",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_01401",
+          "method_id": "F04",
+          "window": "full",
+          "source": "go2_horizontal_velocity",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_01401",
+          "method_id": "F04",
+          "window": "full",
+          "source": "raw_doppler_velocity",
+          "accepted": "1108",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_01401",
+          "method_id": "F04",
+          "window": "full",
+          "source": "receiver_position",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        },
+        {
+          "run_id": "RUN_01401",
+          "method_id": "F04",
+          "window": "full",
+          "source": "receiver_velocity",
+          "accepted": "1369",
+          "qualified_but_entry_blocked_events": "0"
+        }
+      ],
+      "missing_new_files": [],
+      "indexed_size_mismatches": []
+    }
+  ],
+  "count_scopes": {
+    "observer_events": "All 11 observed histories; log records, not epochs or independent trials",
+    "SA_events_validated": "All 11 observed histories, including SA-disabled wrapper calls",
+    "weight_fields": "Hdx_nonzero/nis_changed/oim_raw_changed/shadow_final_R_changed/shadow_policy_acceptance_changed/lsim_masked/oim_cap_masked/n16_eligible/n16_shadow_final_R_changed are F04 only; per-event local shadows",
+    "schedule_counts": "full rows count each native once; during rows are separate views, never added to full",
+    "repeated_rows": "Within a native and source only; physical arrival time remains UNKNOWN"
+  },
+  "git_baseline": "b0fdb81f103a5f0e7c7432e5247a9341524c7fa6",
+  "unexpected_changed_paths": [],
+  "display_checks_recorded": 287,
+  "mechanism_wording_checks_recorded": 27,
+  "small_current_documents_newly_hash_verified": [
+    {
+      "path": "<CODE_ROOT>/paper_package/gpss_v0/MANUSCRIPT_GPSS_v0.md",
+      "recorded_sha256": "7d694edde2e5c0f6800dbc253237e090224ef120e88e8053784effdbee560a89",
+      "newly_verified_sha256": "7d694edde2e5c0f6800dbc253237e090224ef120e88e8053784effdbee560a89",
+      "matches": true
+    },
+    {
+      "path": "<CODE_ROOT>/paper_package/gpss_v0/manuscript_source.md",
+      "recorded_sha256": "5b4cf1d23c045dfbc53af291ee15dea1fc8ba6dc7d211723c99ba0a89dd24bc0",
+      "newly_verified_sha256": "5b4cf1d23c045dfbc53af291ee15dea1fc8ba6dc7d211723c99ba0a89dd24bc0",
+      "matches": true
+    },
+    {
+      "path": "<CODE_ROOT>/paper_package/gpss_v0/NUMBER_LEDGER.csv",
+      "recorded_sha256": "f39806e793f11e9a2525ee80bd867f522691cb1c09aeaacdbf37c81ca2ace3ba",
+      "newly_verified_sha256": "f39806e793f11e9a2525ee80bd867f522691cb1c09aeaacdbf37c81ca2ace3ba",
+      "matches": true
+    },
+    {
+      "path": "<CODE_ROOT>/paper_package/gpss_v0/SUPPLEMENT_GPSS_v0.md",
+      "recorded_sha256": "5810c0292f92b883d64bedabd676495e8eaf54e9fe4264d7add4d82be9086d40",
+      "newly_verified_sha256": "5810c0292f92b883d64bedabd676495e8eaf54e9fe4264d7add4d82be9086d40",
+      "matches": true
+    },
+    {
+      "path": "<CODE_ROOT>/paper_package/gpss_v0/supplement_source.md",
+      "recorded_sha256": "354a6ed1ea36e39d5a4ba7ca87316f09ecd6ead989ef7e290da1f60ad2853a31",
+      "newly_verified_sha256": "354a6ed1ea36e39d5a4ba7ca87316f09ecd6ead989ef7e290da1f60ad2853a31",
+      "matches": true
+    },
+    {
+      "path": "<CODE_ROOT>/paper_package/gpss_v0/CLAIM_SPECS.json",
+      "recorded_sha256": "23d404b7e4b06d1a5284cfd4bd19c593e58a86bf3645d1f708666b37d41a81ae",
+      "newly_verified_sha256": "23d404b7e4b06d1a5284cfd4bd19c593e58a86bf3645d1f708666b37d41a81ae",
+      "matches": true
+    },
+    {
+      "path": "<CODE_ROOT>/paper_package/gpss_v0/figures/scripts/assemble_manuscript.py",
+      "recorded_sha256": "42a93be8a79a764acf8b02defb55c92afc92701005039eb2729a6d31c15725c8",
+      "newly_verified_sha256": "42a93be8a79a764acf8b02defb55c92afc92701005039eb2729a6d31c15725c8",
+      "matches": true
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_mechanism/DISPLAY_CORRECTIONS.md",
+      "recorded_sha256": "7f94d5b3c054c63aa37ca84f72f2f3766c33cc338777c8475b0240c53d22d467",
+      "newly_verified_sha256": "7f94d5b3c054c63aa37ca84f72f2f3766c33cc338777c8475b0240c53d22d467",
+      "matches": true
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/audit_xbpg_20261001/v3_mechanism/DISPLAY_CORRECTIONS.csv",
+      "recorded_sha256": "2b29cecf9b78329777f6ba25ce927eaf30d2ac31426b25b178b9ce7f4671266e",
+      "newly_verified_sha256": "2b29cecf9b78329777f6ba25ce927eaf30d2ac31426b25b178b9ce7f4671266e",
+      "matches": true
+    }
+  ],
+  "D39_supplemental_receipt": {
+    "stage": "E02_D39_SEED00_SUPPLEMENTAL_WINDOWS",
+    "status": "COMPLETE",
+    "started_at_utc": "2026-10-02T04:36:55.665499+00:00",
+    "completed_at_utc": "2026-10-02T04:37:08.631187+00:00",
+    "selected_files": 22,
+    "supplemental_read": "true",
+    "supplemental_payload_open_attempts": 22,
+    "completed_files": 22,
+    "unavailable_files": 0,
+    "rows_read": 1246124,
+    "window_rows": 66,
+    "available_window_rows": 44,
+    "empty_intersection_rows": 22,
+    "full_source_hashes_recomputed": 0,
+    "old_main_scan_receipt_unchanged": true,
+    "old_file_checks_unchanged": true,
+    "original_main_scan_count_unchanged": 1,
+    "new_read_kind": "supplemental, one attempt per selected file; not another corpus scan",
+    "fixed_windows": [
+      [
+        "82.204517",
+        "84.204517"
+      ],
+      [
+        "182.204872",
+        "184.204872"
+      ],
+      [
+        "349.204539",
+        "352.204539"
+      ]
+    ],
+    "full_support": [
+      66,
+      340
+    ],
+    "data_mode": "validation_of_existing_semisynthetic_results",
+    "synthetic_data_used": false,
+    "semisynthetic_data_used": true,
+    "semisynthetic_data_generated": false,
+    "validation_calculation": true,
+    "solver_calls": 0,
+    "provider_generator_calls": 0,
+    "original_evaluator_calls": 0,
+    "controller_calls": 0,
+    "bootstrap_calls": 0,
+    "raw_reference_payload_opens": 0,
+    "nav_std_payload_opens": 0,
+    "d22_payload_opens": 0,
+    "other_error_series_payload_opens": 0,
+    "source_writes": 0
+  },
+  "read_scope_this_script": "small saved tables/receipts, nine small documents and exact indexed new file stat; no scientific payload read",
+  "data_mode": "separate_real_and_semisynthetic_replays_with_synthetic_fixture_gate",
+  "synthetic_data_used": true,
+  "semisynthetic_data_used": true,
+  "synthetic_scope": "fixture only; excluded from real replay/performance denominators"
+}
