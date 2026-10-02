@@ -1,0 +1,39 @@
+{
+  "case_id": "C00",
+  "code_commit": "407edc840340989b1351d1d1aef050637aacd2df",
+  "code_commit_role": "BASE_HEAD_ONLY_NOT_COMPLETE_RUNTIME_SOURCE_IDENTITY",
+  "final_native_root": "<CLEAN_ROOT>/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/03_EXT02_CWLS/C00",
+  "git_source_state": {
+    "authorized_dirty_runtime_delta_allowed": true,
+    "authorized_dirty_runtime_delta_entries": [
+      " M configs/paper_rebuild/horizontal_literature/STANDARD_HEADING_STREAM_SCHEMA_V1.yaml",
+      " M src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py",
+      "?? configs/paper_rebuild/horizontal_literature/PHASE2_EXT02_CWLS_CONTRACT_V1.yaml",
+      "?? scripts/paper_rebuild/run_horizontal_literature_phase2.py",
+      "?? src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py",
+      "?? src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py"
+    ],
+    "authorized_dirty_runtime_delta_present": true,
+    "code_commit_role": "BASE_HEAD_ONLY_NOT_COMPLETE_RUNTIME_SOURCE_IDENTITY",
+    "runtime_source_identity_role": "SOURCE_HASHES_PLUS_SOURCE_FINGERPRINT",
+    "runtime_source_paths": [
+      "configs/paper_rebuild/horizontal_literature/PHASE2_EXT02_CWLS_CONTRACT_V1.yaml",
+      "configs/paper_rebuild/horizontal_literature/STANDARD_HEADING_STREAM_SCHEMA_V1.yaml",
+      "scripts/paper_rebuild/run_horizontal_literature_phase2.py",
+      "src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py",
+      "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py",
+      "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py"
+    ]
+  },
+  "method_id": "EXT02_CWLS",
+  "runtime_source_hashes": {
+    "configs/paper_rebuild/horizontal_literature/PHASE2_EXT02_CWLS_CONTRACT_V1.yaml": "ecfeaeddb8707ed5097746db2c6fe03b5c17367084db0ff354f76643b2139ba7",
+    "configs/paper_rebuild/horizontal_literature/STANDARD_HEADING_STREAM_SCHEMA_V1.yaml": "0d524fcc219ec580638a30ddf8665f4d67521df99568deffea6360440c4c62c9",
+    "scripts/paper_rebuild/run_horizontal_literature_phase2.py": "8810712f2b50bd63587b121fce55ba14ca623fc485f533f6a9703a758268835f",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "82fccd3a6df1af6dee30739954934d7210339f0c1723a06d6c0b7486d41682a7",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "976e837207d7bd05d6d0a9e72406fd8f8244968c60f18e9e0bfd3d94fe9b04a5"
+  },
+  "schema_version": "horizontal_literature.phase2.attempt_identity.v1",
+  "source_fingerprint": "03e3b7141de02872991f295f76ebab289b03a7c7873ca3a27bebd8308b4666c3"
+}
