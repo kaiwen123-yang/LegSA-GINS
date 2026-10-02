@@ -17,18 +17,19 @@
 - C05：explain scalar heading faults and bounded series checks；`66be30984e14895e36111f3f4f48e69b6c8830eb`；PUSHED_VERIFIED。
 - C06：explain velocity_raw_doppler results and retained time support；`c12d1fd8d889c25a0405893bfd0307bef43d8677`；PUSHED_VERIFIED。
 - C07：explain go2_prior_metadata results and retained time support；`0079eba42046be26391d86943e4e17188f5b5eef`；PUSHED_VERIFIED。
+- C08：explain mixed faults and reconcile all CORE failures；`331eecac3a10e740ab8c91098866805559764485`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-C08：explain mixed faults and reconcile all CORE failures。
+A11：explain A1_10s across all eleven configurations。
 
-D57-D60全部36case×11：224完成/90无heading/82发散。6930汇总格/2002配对差一致；44误差全文/7236数值一致。八族+复用C00闭合5951native，283失败逐项保留，全方法状态及F04四格已保存；yaw尾部与水平尾部排序不同。
+A1 10 s：99 native/198评价，11配置×9种子全完成；全文读取198 error_series，32652数值MATCH、18空值MATCH、1782字段不可复算、0差异；原UA396单元格核对MATCH。完整保留固定窗/全窗和消融非单调结果、HV准备与实际接受的证据边界。读取源与源键见本组RECORDED/UA/PROVIDER_METADATA和scanner回执；执行独立validation计算，无新科学进程。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-A1 10s：九种子×11方法，实际HV准备/调度依赖与198保留误差。
+A1_20s 全配置解释与现存时序核对。
 
 ## 调用边界
 
