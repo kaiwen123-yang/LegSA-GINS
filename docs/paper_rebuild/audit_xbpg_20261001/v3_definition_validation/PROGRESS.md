@@ -20,18 +20,19 @@
 - N16_EVAL：report N16 same-support improvements and small adverse C00 changes；`f03b54b2fd1eef69d1c6208ada1f2f557a00e2ef`；PUSHED_VERIFIED。
 - EVENT_ENTRY：validate bounded event and covariance analysis with strict cache identity；`291c6c6f87990430a07ad44882b92ed62337df12`；PUSHED_VERIFIED。
 - N09_A1_NATIVE：retain optional RP extension outputs for A1 without altering GNSS or HV counts；`9ff5ee2afe68b25e3b19518a635f490e4e8e5a92`；PUSHED_VERIFIED。
+- BASELINE_REMAINING_EVAL：close all seven historical evaluation baselines without native reruns；`88f2042cef57f0b151117e3bc122ea7025454c5e`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-BASELINE_REMAINING_EVAL：close all seven historical evaluation baselines without native reruns。
+N09_C00_EVAL：confirm optional RP extension preserves both normal-GNSS evaluation controls。
 
-剩余5baseline各一次冻结评价，143字段/转点NAV hash均与旧记录精确相符。七基线1001/1001，全部数值差0；全窗各56642支持，A1/A2固定半开窗3678历元另列新派生。当前evaluator/ref累计11，native本项0，失败重试0。
+N09 C00 A04/F04各142/142字段与基线完全相同，共同支持各56642，转点NAV hash亦相同；独立原生回执共10/10字节一致。evaluator/ref本项2累计13，失败重试0。N09按可选扩展解释，不冒称违反历史独立RP要求。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-N09 C00/A1/A2各两候选按组评价并提交；最后一项A2 native与有限事件分析。
+A1两候选同口径评价；A2最后native收尾及N12真实事件分析。
 
 ## 调用边界
 
