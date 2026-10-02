@@ -1,0 +1,134 @@
+{
+  "status": "DERIVED_JOIN_CORRECTION_VALIDATED",
+  "run_id": "ADD_RUN_00105",
+  "candidate_id": "N09_RP_ONLY",
+  "rows": 100,
+  "original_reported_attempts": 80,
+  "corrected_unique_attempts": 100,
+  "corrected_actual_accepted": 100,
+  "text_key_omissions": [
+    {
+      "gnss_input_seq": 655,
+      "baseline_SQLite_time_literal": "197.0",
+      "candidate_cache_context_time_literal": "197"
+    },
+    {
+      "gnss_input_seq": 660,
+      "baseline_SQLite_time_literal": "198.0",
+      "candidate_cache_context_time_literal": "198"
+    },
+    {
+      "gnss_input_seq": 665,
+      "baseline_SQLite_time_literal": "199.0",
+      "candidate_cache_context_time_literal": "199"
+    },
+    {
+      "gnss_input_seq": 670,
+      "baseline_SQLite_time_literal": "200.0",
+      "candidate_cache_context_time_literal": "200"
+    },
+    {
+      "gnss_input_seq": 675,
+      "baseline_SQLite_time_literal": "201.0",
+      "candidate_cache_context_time_literal": "201"
+    },
+    {
+      "gnss_input_seq": 680,
+      "baseline_SQLite_time_literal": "202.0",
+      "candidate_cache_context_time_literal": "202"
+    },
+    {
+      "gnss_input_seq": 685,
+      "baseline_SQLite_time_literal": "203.0",
+      "candidate_cache_context_time_literal": "203"
+    },
+    {
+      "gnss_input_seq": 690,
+      "baseline_SQLite_time_literal": "204.0",
+      "candidate_cache_context_time_literal": "204"
+    },
+    {
+      "gnss_input_seq": 695,
+      "baseline_SQLite_time_literal": "205.0",
+      "candidate_cache_context_time_literal": "205"
+    },
+    {
+      "gnss_input_seq": 700,
+      "baseline_SQLite_time_literal": "206.0",
+      "candidate_cache_context_time_literal": "206"
+    },
+    {
+      "gnss_input_seq": 705,
+      "baseline_SQLite_time_literal": "207.0",
+      "candidate_cache_context_time_literal": "207"
+    },
+    {
+      "gnss_input_seq": 710,
+      "baseline_SQLite_time_literal": "208.0",
+      "candidate_cache_context_time_literal": "208"
+    },
+    {
+      "gnss_input_seq": 715,
+      "baseline_SQLite_time_literal": "209.0",
+      "candidate_cache_context_time_literal": "209"
+    },
+    {
+      "gnss_input_seq": 720,
+      "baseline_SQLite_time_literal": "210.0",
+      "candidate_cache_context_time_literal": "210"
+    },
+    {
+      "gnss_input_seq": 725,
+      "baseline_SQLite_time_literal": "211.0",
+      "candidate_cache_context_time_literal": "211"
+    },
+    {
+      "gnss_input_seq": 730,
+      "baseline_SQLite_time_literal": "212.0",
+      "candidate_cache_context_time_literal": "212"
+    },
+    {
+      "gnss_input_seq": 735,
+      "baseline_SQLite_time_literal": "213.0",
+      "candidate_cache_context_time_literal": "213"
+    },
+    {
+      "gnss_input_seq": 740,
+      "baseline_SQLite_time_literal": "214.0",
+      "candidate_cache_context_time_literal": "214"
+    },
+    {
+      "gnss_input_seq": 745,
+      "baseline_SQLite_time_literal": "215.0",
+      "candidate_cache_context_time_literal": "215"
+    },
+    {
+      "gnss_input_seq": 750,
+      "baseline_SQLite_time_literal": "216.0",
+      "candidate_cache_context_time_literal": "216"
+    }
+  ],
+  "matching": "gnss_input_seq + exact source + finite Decimal numeric equality; zero tolerance; keys unique",
+  "original_summary_preserved": true,
+  "original_analyzer_modified": false,
+  "raw_event_payload_opens": 0,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "provider_reads": 0,
+  "data_mode": "semisynthetic",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "source_pins": {
+    "baseline": {
+      "source_sha256": "b2d4288c231c4dccd428ec08d01518d1b09111914eead28f0b410148c837def1",
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f"
+    },
+    "candidate": {
+      "source_sha256": "049282f2eeeaf2f97ad7f6d7d47caa575c591db982e7ef620c4dbcfcd1f84156",
+      "analyzer_sha256": "0b05522117200f77f4cd6b72e4e05ae7ef2f88f2d8a6e3d66cfce4f4e96c543f"
+    }
+  },
+  "script_sha256": "3515dbcda239055ba32c05e029a1339f7f9c4a6ca48dfa37174365a2c509c37b",
+  "correction_scope": "Text-key omission in this round auxiliary analyzer, not an original V3 run-data or algorithm defect.",
+  "literal_scope": "Literals preserved from completed cache JSON/SQLite/derived CSV; no original event stream reread."
+}

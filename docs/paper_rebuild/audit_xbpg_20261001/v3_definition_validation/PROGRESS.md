@@ -30,18 +30,19 @@
 - N12_EVENTS：connect conditional innovation to actual R state divergence and one yaw rejection；`4a250c438298755bca6a5fbc0188e468ab68d1eb`；PUSHED_VERIFIED。
 - N09_C00_EVENTS：verify normal-GNSS event states remain exact under optional RP scheduling；`03e5c1eb085934c4a84aa66a5c237b017c835979`；PUSHED_VERIFIED。
 - P_BOUNDARY：explain frozen zero-scale covariance and bound key-snapshot symmetry evidence；`969b11dba49fec5d9dd1474be6c5e67f98b9a01c`；PUSHED_VERIFIED。
+- N09_A2_EVENTS：close A2 unchanged scheduling and actual accepted-source evidence；`ddd8671e7e37398ace9a61f300ba4d9bd4a48191`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-N09_A2_EVENTS：close A2 unchanged scheduling and actual accepted-source evidence。
+N09_A1_EVENTS：close A1 RP updates with cache-only exact-key reconciliation。
 
-四条事件流各完整读取一次，共1745524行。两组各8014个测量键、56642共同IMU末状态完全相同；原固定中断窗各实际接受yaw/HV/RP 100次、RD 0次，无新增RP-only尝试。只读事件与缓存算术，新增native/evaluator/provider/reference均0。P正定门限制保持。
+A1两方法各100个RP事前合格输入、100次实际尝试/接受/反馈、一次消费，res2=40/res3=60；HV在原100个GNSS机会中资格0。四事件流各读一次。本轮辅助分析器197与197.0文本键漏联各20条，原80摘要保留，独立有限数值精确唯一键辅助表闭合100；11项合成检查通过，未重读事件/重跑solver。首更新与共同末状态证据已保存；N09仍为可选设计扩展，新增本项科学调用0。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-分别提交A1新增RP事件与关联更正、N16实际权重事件，再汇总限定裁定。
+提交N16实际权重与负对照，然后发布少量说明图和最终限定裁定。
 
 ## 调用边界
 
