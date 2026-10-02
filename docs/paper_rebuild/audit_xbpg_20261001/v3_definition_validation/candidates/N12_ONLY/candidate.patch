@@ -1,0 +1,20 @@
+--- a/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp
++++ b/cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp
+@@ -1536,0 +1537 @@
++  // N12_ONLY: conditional innovation at this sequential event; EKF still receives raw dz.
+@@ -1538 +1539,5 @@
+-  innovation.residual_norm = vectorNorm(dz);
++  const std::vector<double> decision_Hdx = multiply(H, dx_);
++  for (std::size_t i = 0; i < innovation.residual.size(); ++i) {
++    innovation.residual[i] -= decision_Hdx[i];
++  }
++  innovation.residual_norm = vectorNorm(innovation.residual);
+@@ -1549,2 +1554,2 @@
+-      const std::vector<double> weighted_residual = multiply(s_inv, dz);
+-      innovation.nis = std::max(0.0, dotVector(dz, weighted_residual));
++      const std::vector<double> weighted_residual = multiply(s_inv, innovation.residual);
++      innovation.nis = std::max(0.0, dotVector(innovation.residual, weighted_residual));
+@@ -1564 +1569,2 @@
+-  metadata_copy.residual_norm = innovation.residual_norm;
++  // Metadata keeps its raw-residual diagnostic role; OIM uses the conditional norm above.
++  metadata_copy.residual_norm = vectorNorm(dz);

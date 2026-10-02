@@ -1,3 +1,4 @@
 item_id,description,commit_sha,push_exit_code,remote_contains_commit,status
 DEF,固定V3顺序创新有效维度与RP事件候选定义,bf561d56838d405a323077d29ad8be9173012545,0,True,PUSHED_VERIFIED
 P_OBS,加入候选完整协方差只读诊断与原生负对照,6979459bb69154d70b6e88220e3dff29e3356568,0,True,PUSHED_VERIFIED
+N09_CODE,isolate N09 RP scheduling and validate original branch controls,a66bc41fa7b8a1d5aefb00d0b43c17919c4da9de,0,True,PUSHED_VERIFIED

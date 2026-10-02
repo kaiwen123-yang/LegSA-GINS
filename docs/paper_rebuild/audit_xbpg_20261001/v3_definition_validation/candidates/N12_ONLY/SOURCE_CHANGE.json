@@ -1,0 +1,13 @@
+{
+  "candidate_id": "N12_ONLY",
+  "scientific_base_commit": "ca73cb1fb48a020fd2a450d79e520562c34eeb24",
+  "observation_base": "<OBSERVED_SOURCE>",
+  "changed_files": [
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp"
+  ],
+  "scientific_patch_sha256": "027d0cde6def2f9a02dc6b59f82f52f79130e252946d5b7cebc0be264638ed90",
+  "new_policy_evaluate_calls_added": 0,
+  "thresholds_changed": false,
+  "EKF_dz_changed": false,
+  "source_root": "<VALIDATION_BUILD_ROOT>/source_N12_ONLY"
+}
