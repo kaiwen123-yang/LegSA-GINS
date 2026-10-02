@@ -16,18 +16,19 @@
 - C04：explain position_std_status results and retained time support；`142b0325cd6a176566c5bd74e9aaf1ff97257e0c`；PUSHED_VERIFIED。
 - C05：explain scalar heading faults and bounded series checks；`66be30984e14895e36111f3f4f48e69b6c8830eb`；PUSHED_VERIFIED。
 - C06：explain velocity_raw_doppler results and retained time support；`c12d1fd8d889c25a0405893bfd0307bef43d8677`；PUSHED_VERIFIED。
+- C07：explain go2_prior_metadata results and retained time support；`0079eba42046be26391d86943e4e17188f5b5eef`；PUSHED_VERIFIED。
 
 ## 本次小项
 
-C07：explain go2_prior_metadata results and retained time support。
+C08：explain mixed faults and reconcile all CORE failures。
 
-D51-D56全部54case×11方法/594native完成；9702汇总格/5292配对差一致；132误差全文/21768数值一致。RP/HV真实准备依赖与396条recorded provider关系已列，D54三分支、D55/56无正式路径与重复输出明确。
+D57-D60全部36case×11：224完成/90无heading/82发散。6930汇总格/2002配对差一致；44误差全文/7236数值一致。八族+复用C00闭合5951native，283失败逐项保留，全方法状态及F04四格已保存；yaw尾部与水平尾部排序不同。
 
 本项提交身份由 Git 给出；push/远端核验回执在下一项更新到 COMMITS.csv，最后一项的完整 SHA 在终端交付。
 
 ## 下一项
 
-CORE multi_source_mixed：D57-D60、全部失败与CORE总分母闭合。
+A1 10s：九种子×11方法，实际HV准备/调度依赖与198保留误差。
 
 ## 调用边界
 

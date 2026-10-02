@@ -1,0 +1,12 @@
+method_id,registered,completed,diverged,no_valid_heading,source,calculation_kind
+F01,541,521,20,0,core/*/ORIGINAL_RUN_VALUES.csv + natural/BY2_RECORDED.csv; evaluator v3 only; keyed run_id; C00 reused once,VALIDATION_COUNT_ONLY
+F02,541,498,34,9,core/*/ORIGINAL_RUN_VALUES.csv + natural/BY2_RECORDED.csv; evaluator v3 only; keyed run_id; C00 reused once,VALIDATION_COUNT_ONLY
+F03,541,512,20,9,core/*/ORIGINAL_RUN_VALUES.csv + natural/BY2_RECORDED.csv; evaluator v3 only; keyed run_id; C00 reused once,VALIDATION_COUNT_ONLY
+F04,541,519,13,9,core/*/ORIGINAL_RUN_VALUES.csv + natural/BY2_RECORDED.csv; evaluator v3 only; keyed run_id; C00 reused once,VALIDATION_COUNT_ONLY
+A03,541,518,14,9,core/*/ORIGINAL_RUN_VALUES.csv + natural/BY2_RECORDED.csv; evaluator v3 only; keyed run_id; C00 reused once,VALIDATION_COUNT_ONLY
+A04,541,513,19,9,core/*/ORIGINAL_RUN_VALUES.csv + natural/BY2_RECORDED.csv; evaluator v3 only; keyed run_id; C00 reused once,VALIDATION_COUNT_ONLY
+A05,541,519,13,9,core/*/ORIGINAL_RUN_VALUES.csv + natural/BY2_RECORDED.csv; evaluator v3 only; keyed run_id; C00 reused once,VALIDATION_COUNT_ONLY
+A06,541,519,13,9,core/*/ORIGINAL_RUN_VALUES.csv + natural/BY2_RECORDED.csv; evaluator v3 only; keyed run_id; C00 reused once,VALIDATION_COUNT_ONLY
+A07,541,519,13,9,core/*/ORIGINAL_RUN_VALUES.csv + natural/BY2_RECORDED.csv; evaluator v3 only; keyed run_id; C00 reused once,VALIDATION_COUNT_ONLY
+A08,541,512,20,9,core/*/ORIGINAL_RUN_VALUES.csv + natural/BY2_RECORDED.csv; evaluator v3 only; keyed run_id; C00 reused once,VALIDATION_COUNT_ONLY
+A09,541,518,14,9,core/*/ORIGINAL_RUN_VALUES.csv + natural/BY2_RECORDED.csv; evaluator v3 only; keyed run_id; C00 reused once,VALIDATION_COUNT_ONLY
