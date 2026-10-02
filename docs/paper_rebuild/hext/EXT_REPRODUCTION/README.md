@@ -4,6 +4,7 @@
 
 - [既有横向结果入口](EXISTING_COMPARISON_RESULTS.md)：已读的结果、版本和保留边界。
 - [既有结果索引](EXISTING_COMPARISON_INDEX.csv)：文件/结果身份；细节进入分组索引。
+- [论文与实现依据](REPRODUCTION_NOTES.md)、[输入核对](INPUT_PREPARATION.json)、[运行队列](RUN_QUEUE.csv)。
 - [进度](PROGRESS.md)：每批完成范围、调用与提交状态。
 - [论文包成员索引](PAPER_PACKAGE_INDEX.csv)：本机 34 个 PDF 成员、29 个字节唯一文件；字节读取与全文阅读分开登记。论文原件不提交。
 

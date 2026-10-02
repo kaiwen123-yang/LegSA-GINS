@@ -1,0 +1,1031 @@
+{
+  "data_mode": "real_raw_reuse",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "library_identity": {
+    "liblegsa_rtklib_bridge.so": {
+      "path": "<EXT_REPRO_BUILD>/lib/liblegsa_rtklib_bridge.so",
+      "sha256": "6df66600892404dd1c892879fe6e10693e808995fe359e32a6afc983629f8a3b",
+      "hash_status": "NEWLY_VERIFIED"
+    },
+    "librtklib_legsa.so": {
+      "path": "<EXT_REPRO_BUILD>/lib/librtklib_legsa.so",
+      "sha256": "28c25b1cc7fade9b956bfdf77005de8fcb0a382c8411ae6e608c83b82bff53f2",
+      "hash_status": "NEWLY_VERIFIED"
+    }
+  },
+  "source_raw_hashes": "6 source raw CSV hashes newly verified against recorded HX02 pins; full local manifest retains exact source identities",
+  "rawx_decode": "UBX frame CRC verified; only RAWX decoded; no HPP/NAV solution fields decoded",
+  "complete_pairs": {
+    "BY2": 1509,
+    "BY2H": 1483,
+    "BY2O": 2231
+  },
+  "pair_failures": {
+    "BY2": 0,
+    "BY2H": 0,
+    "BY2O": 0
+  },
+  "native_method_calls": 0,
+  "evaluator_calls": 0,
+  "reference_reads": 0,
+  "local_manifest": "<EXT_REPRO_ROOT>/inputs/INPUT_MANIFEST.json",
+  "signal_inventory": {
+    "BY2": [
+      {
+        "receiver": 1,
+        "epoch_count": 1509,
+        "counts": [
+          {
+            "gnss_id": 0,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 13136
+          },
+          {
+            "gnss_id": 0,
+            "sig_id": 3,
+            "freq_id": 0,
+            "count": 9412
+          },
+          {
+            "gnss_id": 0,
+            "sig_id": 4,
+            "freq_id": 0,
+            "count": 1
+          },
+          {
+            "gnss_id": 1,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 1915
+          },
+          {
+            "gnss_id": 2,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 7408
+          },
+          {
+            "gnss_id": 2,
+            "sig_id": 6,
+            "freq_id": 0,
+            "count": 7600
+          },
+          {
+            "gnss_id": 3,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 19075
+          },
+          {
+            "gnss_id": 3,
+            "sig_id": 2,
+            "freq_id": 0,
+            "count": 6539
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 4003
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 5,
+            "freq_id": 0,
+            "count": 4096
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 1230
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 3,
+            "count": 1464
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 5,
+            "count": 1372
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 7,
+            "count": 1498
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 8,
+            "count": 1505
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 9,
+            "count": 1509
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 10,
+            "count": 1490
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 11,
+            "count": 1509
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 13,
+            "count": 1503
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 5,
+            "count": 75
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 7,
+            "count": 1376
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 8,
+            "count": 1201
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 9,
+            "count": 1326
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 10,
+            "count": 1227
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 11,
+            "count": 1291
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 13,
+            "count": 1357
+          }
+        ]
+      },
+      {
+        "receiver": 2,
+        "epoch_count": 1509,
+        "counts": [
+          {
+            "gnss_id": 0,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 12481
+          },
+          {
+            "gnss_id": 0,
+            "sig_id": 3,
+            "freq_id": 0,
+            "count": 8579
+          },
+          {
+            "gnss_id": 1,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 1762
+          },
+          {
+            "gnss_id": 2,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 7224
+          },
+          {
+            "gnss_id": 2,
+            "sig_id": 6,
+            "freq_id": 0,
+            "count": 7482
+          },
+          {
+            "gnss_id": 3,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 18281
+          },
+          {
+            "gnss_id": 3,
+            "sig_id": 2,
+            "freq_id": 0,
+            "count": 5464
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 3952
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 4,
+            "freq_id": 0,
+            "count": 5
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 5,
+            "freq_id": 0,
+            "count": 5045
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 1280
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 5,
+            "count": 348
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 7,
+            "count": 1490
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 8,
+            "count": 1482
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 9,
+            "count": 1498
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 10,
+            "count": 1366
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 11,
+            "count": 1506
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 13,
+            "count": 1497
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 5,
+            "count": 63
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 7,
+            "count": 1297
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 8,
+            "count": 1396
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 9,
+            "count": 1385
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 10,
+            "count": 1404
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 11,
+            "count": 1284
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 13,
+            "count": 1386
+          }
+        ]
+      }
+    ],
+    "BY2H": [
+      {
+        "receiver": 1,
+        "epoch_count": 1483,
+        "counts": [
+          {
+            "gnss_id": 0,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 13323
+          },
+          {
+            "gnss_id": 0,
+            "sig_id": 3,
+            "freq_id": 0,
+            "count": 9261
+          },
+          {
+            "gnss_id": 0,
+            "sig_id": 4,
+            "freq_id": 0,
+            "count": 4
+          },
+          {
+            "gnss_id": 1,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 1865
+          },
+          {
+            "gnss_id": 2,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 6756
+          },
+          {
+            "gnss_id": 2,
+            "sig_id": 6,
+            "freq_id": 0,
+            "count": 7264
+          },
+          {
+            "gnss_id": 3,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 18523
+          },
+          {
+            "gnss_id": 3,
+            "sig_id": 2,
+            "freq_id": 0,
+            "count": 6436
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 3936
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 5,
+            "freq_id": 0,
+            "count": 3932
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 1253
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 3,
+            "count": 1392
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 5,
+            "count": 1451
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 7,
+            "count": 1480
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 8,
+            "count": 1461
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 9,
+            "count": 1483
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 10,
+            "count": 1477
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 11,
+            "count": 1483
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 13,
+            "count": 1483
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 3,
+            "count": 113
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 7,
+            "count": 1300
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 8,
+            "count": 1476
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 9,
+            "count": 1310
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 10,
+            "count": 1206
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 11,
+            "count": 1291
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 13,
+            "count": 1348
+          }
+        ]
+      },
+      {
+        "receiver": 2,
+        "epoch_count": 1483,
+        "counts": [
+          {
+            "gnss_id": 0,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 12537
+          },
+          {
+            "gnss_id": 0,
+            "sig_id": 3,
+            "freq_id": 0,
+            "count": 8521
+          },
+          {
+            "gnss_id": 0,
+            "sig_id": 4,
+            "freq_id": 0,
+            "count": 9
+          },
+          {
+            "gnss_id": 1,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 2197
+          },
+          {
+            "gnss_id": 2,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 6786
+          },
+          {
+            "gnss_id": 2,
+            "sig_id": 6,
+            "freq_id": 0,
+            "count": 7278
+          },
+          {
+            "gnss_id": 3,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 18424
+          },
+          {
+            "gnss_id": 3,
+            "sig_id": 2,
+            "freq_id": 0,
+            "count": 5398
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 3946
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 4,
+            "freq_id": 0,
+            "count": 2
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 5,
+            "freq_id": 0,
+            "count": 4357
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 1254
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 3,
+            "count": 496
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 5,
+            "count": 1475
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 7,
+            "count": 1483
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 8,
+            "count": 1473
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 9,
+            "count": 1483
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 10,
+            "count": 1480
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 11,
+            "count": 1483
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 13,
+            "count": 1469
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 5,
+            "count": 11
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 7,
+            "count": 1357
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 8,
+            "count": 1478
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 9,
+            "count": 1325
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 10,
+            "count": 1469
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 11,
+            "count": 1305
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 13,
+            "count": 1335
+          }
+        ]
+      }
+    ],
+    "BY2O": [
+      {
+        "receiver": 1,
+        "epoch_count": 2231,
+        "counts": [
+          {
+            "gnss_id": 0,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 16987
+          },
+          {
+            "gnss_id": 0,
+            "sig_id": 3,
+            "freq_id": 0,
+            "count": 11828
+          },
+          {
+            "gnss_id": 0,
+            "sig_id": 4,
+            "freq_id": 0,
+            "count": 7
+          },
+          {
+            "gnss_id": 1,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 2591
+          },
+          {
+            "gnss_id": 2,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 14025
+          },
+          {
+            "gnss_id": 2,
+            "sig_id": 6,
+            "freq_id": 0,
+            "count": 13286
+          },
+          {
+            "gnss_id": 3,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 29411
+          },
+          {
+            "gnss_id": 3,
+            "sig_id": 2,
+            "freq_id": 0,
+            "count": 8348
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 5252
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 5,
+            "freq_id": 0,
+            "count": 5494
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 1807
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 5,
+            "count": 2119
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 7,
+            "count": 2231
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 8,
+            "count": 2227
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 9,
+            "count": 2225
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 10,
+            "count": 2221
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 11,
+            "count": 2220
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 12,
+            "count": 242
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 13,
+            "count": 2219
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 5,
+            "count": 1645
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 7,
+            "count": 2003
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 8,
+            "count": 2018
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 9,
+            "count": 2052
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 10,
+            "count": 1926
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 11,
+            "count": 2063
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 12,
+            "count": 34
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 13,
+            "count": 2140
+          }
+        ]
+      },
+      {
+        "receiver": 2,
+        "epoch_count": 2231,
+        "counts": [
+          {
+            "gnss_id": 0,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 17068
+          },
+          {
+            "gnss_id": 0,
+            "sig_id": 3,
+            "freq_id": 0,
+            "count": 12022
+          },
+          {
+            "gnss_id": 0,
+            "sig_id": 4,
+            "freq_id": 0,
+            "count": 3
+          },
+          {
+            "gnss_id": 1,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 2921
+          },
+          {
+            "gnss_id": 2,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 12746
+          },
+          {
+            "gnss_id": 2,
+            "sig_id": 6,
+            "freq_id": 0,
+            "count": 12157
+          },
+          {
+            "gnss_id": 3,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 22809
+          },
+          {
+            "gnss_id": 3,
+            "sig_id": 2,
+            "freq_id": 0,
+            "count": 7017
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 5357
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 4,
+            "freq_id": 0,
+            "count": 1
+          },
+          {
+            "gnss_id": 5,
+            "sig_id": 5,
+            "freq_id": 0,
+            "count": 5295
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 0,
+            "count": 1740
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 5,
+            "count": 1965
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 7,
+            "count": 2228
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 8,
+            "count": 2191
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 9,
+            "count": 2131
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 10,
+            "count": 2228
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 11,
+            "count": 2231
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 12,
+            "count": 21
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 0,
+            "freq_id": 13,
+            "count": 2219
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 5,
+            "count": 1299
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 7,
+            "count": 1976
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 8,
+            "count": 2060
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 9,
+            "count": 1740
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 10,
+            "count": 2184
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 11,
+            "count": 2043
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 12,
+            "count": 59
+          },
+          {
+            "gnss_id": 6,
+            "sig_id": 2,
+            "freq_id": 13,
+            "count": 2188
+          }
+        ]
+      }
+    ]
+  }
+}
