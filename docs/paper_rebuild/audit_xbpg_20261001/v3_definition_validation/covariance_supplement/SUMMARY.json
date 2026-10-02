@@ -1,0 +1,18 @@
+{
+  "scope": "cached prespecified first-source/first-anomaly snapshots only",
+  "data_mode": "mixed_index_real_clean_and_semisynthetic",
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": true,
+  "cache_files": 17,
+  "unique_complete_P_snapshots": 211,
+  "all_441_finite": 211,
+  "max_absolute_asymmetry": 1.1102230246251565e-16,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "event_payload_opens": 0,
+  "new_validation_calculation": true,
+  "symmetry_tolerance_added": false,
+  "full_time_series_symmetry_verified": false,
+  "full_P_positive_semidefinite_verified": false,
+  "original_diagnostic_changed": false
+}
