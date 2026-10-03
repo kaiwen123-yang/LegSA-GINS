@@ -182,6 +182,49 @@ def imu_pieces(imu: np.ndarray, begin_s: float, end_s: float, max_dt: float, int
     return pieces
 
 
+def initialization_body_rate(imu, timestamp, max_dt, intervals=None):
+    """Nearest completed calibrated current-sample rate, never a future rate.
+
+    Production supplies each increment's source-bound, unrounded interval. A
+    missing, stale, or gap-adjacent rate leaves initialization unavailable; no
+    antenna velocity is then passed off as an IMU velocity.
+    """
+    if intervals is None:
+        intervals = np.column_stack((imu[:-1, 0], imu[1:, 0]))
+        measured, provider_offset = imu[1:], 1
+        duration_source = "exact_synthetic_sample_stamps"
+    else:
+        intervals = np.asarray(intervals)
+        measured, provider_offset = imu, 0
+        duration_source = "unrounded_source_raw_stamps"
+    index = int(np.searchsorted(intervals[:, 1], timestamp, side="right")) - 1
+    if index < 0:
+        raise ValueError("IMU_INITIAL_BODY_RATE_NO_COMPLETED_INTERVAL")
+    left, right = intervals[index]
+    dt, age = float(right - left), float(timestamp - right)
+    if (not np.isfinite([left, right, timestamp]).all() or
+            not 0.0 < dt <= max_dt or age > max_dt or
+            not np.isfinite(measured[index, 1:4]).all()):
+        raise ValueError("IMU_INITIAL_BODY_RATE_INVALID_OR_STALE")
+    # A rate from before an uncovered interval cannot initialize inside that
+    # gap. Only interval support is checked here; no future rate is consumed.
+    if age > 1e-9:
+        if index + 1 == len(intervals):
+            raise ValueError("IMU_INITIAL_BODY_RATE_SUPPORT_UNAVAILABLE")
+        next_left, next_right = intervals[index + 1]
+        if next_left > right + 1e-7 or not 0.0 < next_right - next_left <= max_dt:
+            raise ValueError("IMU_INITIAL_BODY_RATE_GAP")
+    rate = measured[index, 1:4] / dt
+    return rate, {"source": "CALIBRATED_IMU_dtheta_div_original_current_sample_dt",
+                  "duration_source": duration_source,
+                  "provider_row_index_zero_based": index + provider_offset,
+                  "provider_timestamp_rel_s": float(measured[index, 0]),
+                  "interval_start_rel_s": float(left), "interval_end_rel_s": float(right),
+                  "effective_timestamp_rel_s": float(right), "age_at_initialization_s": age,
+                  "body_rate_frd_radps": rate.tolist(),
+                  "earth_rate_or_installation_reapplied": False}
+
+
 def position_valid(row):
     return (row is not None and row[15] > 0.5 and
             np.isfinite(row[1:7]).all() and np.all(row[4:7] > 0.0))

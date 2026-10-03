@@ -13,7 +13,7 @@ from legsa_gins.paper_rebuild.fgo_comparison.oisam import (
     retract, run_inputs, nonlinear_optimize,
 )
 from legsa_gins.paper_rebuild.fgo_comparison.oisam_inputs import (
-    SequenceInput, ecef_to_llh, exact_imu_intervals, imu_pieces, select_nodes,
+    SequenceInput, ecef_to_llh, exact_imu_intervals, imu_pieces, initialization_body_rate, select_nodes,
 )
 
 
@@ -146,7 +146,7 @@ def test_preintegration_residual_bias_and_manifold_jacobian():
 def test_earth_rate_removed_static_input_does_not_rotate_attitude():
     cfg = config()
     row = gnss_row(0.)
-    graph = OiSAMGraph(cfg, row, cfg["gravity_mps2"]["BY2"])
+    graph = OiSAMGraph(cfg, row, cfg["gravity_mps2"]["BY2"], init_body_rate=np.zeros(3))
     p0, v0, bias = graph.current()
     np.testing.assert_allclose(bias.gyroscope(), -p0.rotation().matrix().T @ graph.omega)
     imu = static_imu(1.)
@@ -162,7 +162,7 @@ def test_ajsw_qr_marginalization_and_static_noiseless_sequence():
     cfg.update(window_lower_nodes=3, window_upper_nodes=5, earth_rotation_radps=0.0)
     imu = static_imu(8.)
     rows = [gnss_row(float(i)) for i in range(9)]
-    graph = OiSAMGraph(cfg, rows[0], cfg["gravity_mps2"]["BY2"])
+    graph = OiSAMGraph(cfg, rows[0], cfg["gravity_mps2"]["BY2"], init_body_rate=np.zeros(3))
     events = []
     for row in rows[1:]:
         events.append(graph.step(row[0], row, imu_pieces(imu, graph.last_time, row[0], .1)))
@@ -186,7 +186,8 @@ def test_missing_imu_creates_nan_and_registered_independent_restart():
     with pytest.raises(ValueError, match="IMU_GAP"):
         imu_pieces(imu, 1., 2., .1)
     nodes = [(float(i), gnss_row(float(i)), i) for i in range(5)]
-    inputs = SequenceInput("BY2", np.vstack([n[1] for n in nodes]), imu, nodes, {})
+    intervals = np.column_stack((imu[:, 0] - .01, imu[:, 0]))
+    inputs = SequenceInput("BY2", np.vstack([n[1] for n in nodes]), imu, nodes, {}, intervals)
     outputs, events = [], []
     result = run_inputs(inputs, cfg, outputs.append, events.append)
     assert len(outputs) == result["expected_nodes"] == 5
@@ -200,7 +201,7 @@ def test_missing_imu_creates_nan_and_registered_independent_restart():
 def test_missing_gnss_does_not_fabricate_position_factor():
     cfg = config()
     cfg["earth_rotation_radps"] = 0.0
-    graph = OiSAMGraph(cfg, gnss_row(0.), cfg["gravity_mps2"]["BY2"])
+    graph = OiSAMGraph(cfg, gnss_row(0.), cfg["gravity_mps2"]["BY2"], init_body_rate=np.zeros(3))
     graph.step(1., None, imu_pieces(static_imu(1.), 0., 1., .1))
     assert graph.counts["gnss_factors"] == 1  # initial sensor position only
     assert graph.counts["imu_factors"] == 1
@@ -224,7 +225,7 @@ def test_node_timestamps_and_attitude_thresholds_are_not_retuned():
 def test_nonzero_acceleration_known_states_through_incremental_and_schur():
     cfg = config()
     cfg.update(window_lower_nodes=3, window_upper_nodes=5, earth_rotation_radps=0.0)
-    graph = OiSAMGraph(cfg, gnss_row(0.), cfg["gravity_mps2"]["BY2"])
+    graph = OiSAMGraph(cfg, gnss_row(0.), cfg["gravity_mps2"]["BY2"], init_body_rate=np.zeros(3))
     pose0 = graph.current()[0]
     acceleration = np.array([.4, -.2, .1])
     specific = pose0.rotation().matrix().T @ (acceleration - np.array([0, 0, cfg["gravity_mps2"]["BY2"]]))
@@ -246,7 +247,7 @@ def test_nonzero_acceleration_known_states_through_incremental_and_schur():
 def test_actual_ceres_relinearization_and_nonzero_pose_chart_jacobian():
     from legsa_gins.paper_rebuild.fgo_comparison.ceres_relinearize import GTSAMCost
     cfg = config()
-    graph = OiSAMGraph(cfg, gnss_row(0.), cfg["gravity_mps2"]["BY2"])
+    graph = OiSAMGraph(cfg, gnss_row(0.), cfg["gravity_mps2"]["BY2"], init_body_rate=np.zeros(3))
     perturbed = retract(graph.values, graph.indices,
                         np.r_[.02, -.03, .04, .3, -.2, .1, np.zeros(9)])
     solved, report = nonlinear_optimize(graph.factors, perturbed, graph.indices, cfg)
@@ -288,3 +289,53 @@ def test_raw_dt_restores_rounded_provider_intervals_without_gap_filling():
     wrong[0, 0] += 1e-4
     with pytest.raises(ValueError, match="IDENTITY_MISMATCH"):
         exact_imu_intervals(wrong, raw)
+
+
+def test_rotating_stationary_imu_initial_velocity_uses_completed_exact_rate():
+    cfg = config()
+    raw = np.array([0., .0100004, .0200011])
+    imu = np.zeros((2, 7))
+    imu[:, 0] = np.round(raw[1:], 6)
+    # The next, unfinished interval deliberately has a different rate. It
+    # must not enter the t=.015 initialization, or zero IMU velocity is lost.
+    imu[:, 3] = np.diff(raw) * [1., 9.]
+    intervals = exact_imu_intervals(imu, raw)
+    rate, source = initialization_body_rate(imu, .015, .1, intervals)
+    np.testing.assert_allclose(rate, [0., 0., 1.], atol=1e-15)
+    assert source["provider_row_index_zero_based"] == 0
+    assert source["effective_timestamp_rel_s"] == raw[1]
+    assert source["duration_source"] == "unrounded_source_raw_stamps"
+    row = gnss_row(.015)
+    rotation = gtsam.Rot3.Ypr(np.deg2rad(row[13]), 0., 0.).matrix()
+    row[7:10] = rotation @ np.cross(rate, cfg["lever_imu_to_gnss1_frd_m"])
+    graph = OiSAMGraph(cfg, row, cfg["gravity_mps2"]["BY2"], init_body_rate=rate)
+    np.testing.assert_allclose(graph.current()[1], 0., atol=1e-15)
+    assert graph.factors[2].error(graph.values) == pytest.approx(0., abs=1e-15)
+    inputs = SequenceInput("BY2", row[None, :], imu, [(.015, row, 0)], {}, intervals)
+    outputs, events = [], []
+    result = run_inputs(inputs, cfg, outputs.append, events.append)
+    np.testing.assert_allclose(outputs[0][4:7], 0., atol=1e-15)
+    segment = result["segments"][0]
+    assert segment["initial_body_rate"] == source
+    np.testing.assert_allclose(segment["initial_velocity"]["imu_velocity_ned_mps"], 0., atol=1e-15)
+    np.testing.assert_allclose(segment["initial_velocity"]["lever_velocity_ned_mps"], row[7:10], atol=1e-15)
+    assert segment["initial_velocity"]["mode"] == "GNSS1_velocity_minus_R_omega_cross_lever"
+    with pytest.raises(ValueError, match="NO_COMPLETED_INTERVAL"):
+        initialization_body_rate(imu, .005, .1, intervals)
+    with pytest.raises(ValueError, match="INVALID_OR_STALE"):
+        initialization_body_rate(imu, .5, .1, intervals)
+
+
+def test_unavailable_initial_rate_waits_without_fabricating_velocity_prior():
+    cfg = config()
+    nodes = [(float(i), gnss_row(float(i)), i) for i in range(2)]
+    # Without a preceding completed sample, t=0 has no legal angular rate.
+    inputs = SequenceInput("BY2", np.vstack([n[1] for n in nodes]), static_imu(1.), nodes, {})
+    outputs, events = [], []
+    result = run_inputs(inputs, cfg, outputs.append, events.append)
+    assert result["expected_nodes"] == result["actual_rows"] == 2
+    assert result["finite_nodes"] == result["A1_yaw_initialization_count"] == 1
+    assert outputs[0][-2] == 0 and np.isnan(outputs[0][1:10]).all()
+    assert outputs[0][-1] == "IMU_INITIAL_BODY_RATE_NO_COMPLETED_INTERVAL"
+    assert outputs[1][-1] == "INITIALIZED"
+    assert result["segments"][0]["initial_body_rate"]["effective_timestamp_rel_s"] == 1.

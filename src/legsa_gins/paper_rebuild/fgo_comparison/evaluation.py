@@ -163,7 +163,7 @@ def common_time_rows(rows,errors):
 def evaluate_sequence(roots_path,sequence,attempts):
     roots=aliases(roots_path);root=Path(roots['<FGO_ROOT>']);code=Path(roots['<CODE_ROOT>'])
     spec=yaml.safe_load((code/'configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml').read_text())['sequences'][sequence]
-    out=root/'evaluation'/sequence;out.mkdir(parents=True,exist_ok=False)
+    out=Path(roots.get('<FGO_EVALUATION_ROOT>',str(root/'evaluation')))/sequence;out.mkdir(parents=True,exist_ok=False)
     # All native outputs are sealed before any reference is opened.
     native={}
     for method,attempt in attempts.items():
@@ -197,7 +197,7 @@ def evaluate_sequence(roots_path,sequence,attempts):
         llh,rpy,xyz=reference_at(module,gt,selected.time.to_numpy(),spec['baseline_median_m'],point)
         pd.DataFrame(dict(time=selected.time.to_numpy(),x_ecef_m=xyz[:,0],y_ecef_m=xyz[:,1],z_ecef_m=xyz[:,2])).to_csv(out/('TRUTH_'+point+'.csv'),index=False,lineterminator='\n')
     write_csv(out/'METRICS.csv',rows+common)
-    dump(out/'EVALUATION.json',json_safe({'sequence':sequence,'rows':rows+common,'reference_sha256':digest,
+    dump(out/'EVALUATION.json',json_safe({'sequence':sequence,'rows':rows+common,'native_attempts':attempts,'reference_sha256':digest,
         'reference_read_count':1,'evaluator_child_count':1,'evaluator_sha256':EVALUATOR_SHA256,
         'output_interpolation':False,'reference_interpolation':'frozen linear LLH/RP; unwrap yaw; ENU yaw to NED',
         'physical_point_rule':'OiSAM IMU-to-POI existing transform; GNSS-only reference POI-to-GNSS1',

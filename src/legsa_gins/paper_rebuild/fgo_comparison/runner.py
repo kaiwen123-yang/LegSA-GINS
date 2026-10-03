@@ -183,6 +183,7 @@ def summarize_runs(roots_path):
     """Small exact-run ledger and access receipts, reusing the existing parser."""
     from ..clean5_sequence.io_audit import audited_open_records
     roots=aliases(roots_path);root=Path(roots['<FGO_ROOT>']);code=Path(roots['<CODE_ROOT>'])
+    final_attempts=json.loads(Path(roots_path).read_text()).get('final_attempts',{m:'MAIN' for m in METHODS})
     rows=[]
     for sequence in ('BY2','BY2H','BY2O'):
         for method in METHODS:
@@ -199,6 +200,7 @@ def summarize_runs(roots_path):
                 dump(out/'ACCESS.json',receipt)
                 if reference: raise ValueError('Unexpected online reference access')
                 rows.append({'sequence_id':sequence,'method_id':method,'attempt':attempt,'status':run['terminal_status'],
+                             'publication_role':'FINAL' if attempt==final_attempts[method] else 'SUPERSEDED_INITIAL_VELOCITY_POINT_BUG',
                              'total_scheduled_rows':len(states),'total_finite_position_rows':len(good),
                              'first_finite_time_s':good[0]['time_rel_s'] if good else None,
                              'last_finite_time_s':good[-1]['time_rel_s'] if good else None,

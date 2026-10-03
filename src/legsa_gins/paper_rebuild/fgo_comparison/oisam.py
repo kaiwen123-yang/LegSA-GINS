@@ -23,7 +23,7 @@ import time
 import numpy as np
 import gtsam
 
-from .oisam_inputs import (ecef_to_llh, ecef_to_ned_rotation, initialization_valid, imu_pieces,
+from .oisam_inputs import (ecef_to_llh, ecef_to_ned_rotation, initialization_body_rate, initialization_valid, imu_pieces,
                           llh_to_ecef, position_valid, read_sequence, sha256)
 
 M = 15
@@ -302,7 +302,7 @@ def marginalize_oldest(factors, values, indices):
 
 class OiSAMGraph:
     """One continuous IMU segment; no reference or other solution is accepted."""
-    def __init__(self, config, row, gravity):
+    def __init__(self, config, row, gravity, *, init_body_rate):
         self.config = config
         self.origin_llh = row[1:4].copy()
         self.origin = llh_to_ecef(self.origin_llh)
@@ -312,8 +312,15 @@ class OiSAMGraph:
         rotation = gtsam.Rot3.Ypr(np.deg2rad(row[13]), pitch, roll)
         lever = np.asarray(config["lever_imu_to_gnss1_frd_m"])
         pose = gtsam.Pose3(rotation, -rotation.matrix() @ lever)
+        init_body_rate = np.asarray(init_body_rate, float)
+        if init_body_rate.shape != (3,) or not np.isfinite(init_body_rate).all():
+            raise ValueError("IMU_INVALID_INITIAL_BODY_RATE")
+        # The provider velocity belongs to GNSS1, while the graph velocity
+        # belongs to the IMU. The calibrated rate already excludes the frozen
+        # initial gyro mean; do not add Earth rate or installation again.
+        lever_velocity = rotation.matrix() @ np.cross(init_body_rate, lever)
         vel_valid = row[16] > 0.5 and np.isfinite(row[7:13]).all() and np.all(row[10:13] > 0)
-        velocity = row[7:10].copy() if vel_valid else np.zeros(3)
+        velocity = row[7:10] - lever_velocity if vel_valid else np.zeros(3)
         gyro_bias = -rotation.matrix().T @ self.omega if config["earth_rate_removed_by_preprocessing"] else np.zeros(3)
         bias = gtsam.imuBias.ConstantBias(np.zeros(3), gyro_bias)
         self.values = gtsam.Values()
@@ -324,6 +331,11 @@ class OiSAMGraph:
         self.indices = [0]
         attitude_std = np.deg2rad([*config["initial_roll_pitch_std_deg"], row[14]])
         velocity_std = row[10:13] if vel_valid else np.full(3, config["initial_missing_velocity_std_mps"])
+        self.initial_velocity = {
+            "mode": "GNSS1_velocity_minus_R_omega_cross_lever" if vel_valid else "zero_with_broad_prior_missing_GNSS_velocity",
+            "gnss1_velocity_ned_mps": row[7:10].tolist() if vel_valid else None,
+            "lever_velocity_ned_mps": lever_velocity.tolist(),
+            "imu_velocity_ned_mps": velocity.tolist(), "prior_std_mps": velocity_std.tolist()}
         bias_std = np.r_[config["initial_accelerometer_bias_std_mps2"],
                          np.full(3, config["gyro_bias_stationary_std_radps"])]
         self.factors = [gtsam.PoseRotationPrior3D(x, pose, gtsam.noiseModel.Diagonal.Sigmas(attitude_std)),
@@ -459,7 +471,8 @@ def run_inputs(inputs, config, write_state, write_event):
             segments[-1]["end_s"] = graph.last_time
             segments[-1]["core_counts"] = dict(graph.counts)
             for key, value in graph.counts.items():
-                aggregate[key] = aggregate.get(key, 0) + value
+                aggregate[key] = (max(aggregate.get(key, 0), value) if key == 'nonlinear_max_iterations'
+                                  else aggregate.get(key, 0) + value)
             graph = None
 
     for timestamp, row, expected_second in inputs.nodes:
@@ -478,10 +491,14 @@ def run_inputs(inputs, config, write_state, write_event):
                     raise ValueError("IMU_SUPPORT_UNAVAILABLE")
                 if last_node is not None:
                     imu_pieces(inputs.imu, last_node, timestamp, config["maximum_imu_interval_s"], inputs.imu_intervals)
-                graph = OiSAMGraph(config, row, config["gravity_mps2"][inputs.sequence])
+                init_body_rate, rate_source = initialization_body_rate(
+                    inputs.imu, timestamp, config["maximum_imu_interval_s"], inputs.imu_intervals)
+                graph = OiSAMGraph(config, row, config["gravity_mps2"][inputs.sequence],
+                                   init_body_rate=init_body_rate)
                 segments.append({"segment_id": len(segments) + 1, "start_s": timestamp,
-                                 "reason": pending_reason, "initialization_source": "same_epoch_GNSS1_position_velocity_A1_yaw",
+                                 "reason": pending_reason, "initialization_source": "same_epoch_GNSS1_position_A1_yaw_and_completed_calibrated_IMU_rate",
                                  "A1_yaw_initialization_count": 1, "initial_yaw_deg": float(row[13]),
+                                 "initial_body_rate": rate_source, "initial_velocity": graph.initial_velocity,
                                  "initial_gyro_bias_radps": graph.current()[2].gyroscope().tolist()})
                 event = {"time_rel_s": timestamp, "mode": "SEGMENT_INITIALIZATION"}
                 status = "INITIALIZED"

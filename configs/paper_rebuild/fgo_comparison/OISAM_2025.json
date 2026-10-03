@@ -59,6 +59,7 @@
     "Absolute wrap-safe attitude increments trigger A-JSWR; no reference-dependent threshold",
     "Bias random-walk densities use sigma_stationary*sqrt(2/tau), rather than interpreting stationary sigma as density",
     "First-1000 gyro mean removal is represented by initial residual gyro bias -R0^T*omega_ie; no provider modification",
+    "Initial GNSS1 antenna velocity is converted to IMU velocity by subtracting R*(omega_body cross lever); omega uses the latest completed calibrated increment divided by its unrounded raw duration; absent legal rate leaves the node unavailable until initialization is supported",
     "Initial zero accelerometer bias uses the calibrated stationary bias uncertainty, not a falsely precise zero-bias constraint",
     "Observed IMU gaps preserve NaN nodes and restart an independent sensor-initialized segment only after continuous support resumes",
     "Fractional right-endpoint IMU intervals retain original GNSS timestamps; the next-IMU-sample availability delay is recorded, never labeled zero-latency causal output",
