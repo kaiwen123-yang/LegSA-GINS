@@ -51,3 +51,13 @@ BY2O的初次评价暴露Wen TC公里级位置偏差。随后仅用raw/nav和图
 `broadcast_identity.BroadcastClockGate`按完整广播物理身份及公开量化单位检查冲突；`raw_inputs.apply_broadcast_gate`在原始state/码/Doppler/粗初值前拒绝依赖冲突身份的观测，保留时间节点、原始/候选计数及排除原因。原NAV不删改，避免删除坏版本后无声回退；对冲突卫星还借既有`ephemeris_audit`确认RTKLIB去重后的实际选择。无clock冲突的合法版本保留，不新增残差门或更换损失函数。规则及参数跨序列一致，RAW_INPUT配置hash为`0df8c2cb24f264ce39121fe1eb2d4f8957523e50486d4c8c7bf667880699b6e2`。
 
 此项是在结果见后发现并修复的输入适配错误，有明确广播字段依据，不是调参择优。10项raw合成测试（原4项加6项冲突/版本/去重回退/缺身份/分母回归）通过，独立只读复核通过。新的输入在`<FGO_ROOT>/inputs_clock_conflict/`；逐数组等同性决定未受影响序列是否复用，只有实际改变输入的两个RAWX方法重跑，OiSAM链不变。
+
+实际准备结果如下；完整23数组shape/dtype/逐字节比较、NPZ与manifest哈希及零参考访问回执在`<FGO_ROOT>/diagnostics/INPUT_CLOCK_FIX_REUSE.json`。
+
+| 序列 | 保留节点（含窗前） | 原/新码因子候选 | 冲突排除数 | 运行处置 |
+|---|---:|---:|---:|---|
+| BY2 | 285 | 5438/5438 | 0 | 23数组及NPZ哈希完全一致，复用两方法MAIN |
+| BY2H | 282 | 5500/5500 | 0 | 23数组及NPZ哈希完全一致，复用两方法MAIN |
+| BY2O | 420 | 7569/7477 | 92 | 时间/节点不变，420个WLS初值可用；两方法均另建CLOCK_CONFLICT_FIX |
+
+新版准备各耗时0.710/0.650/0.925s，包含输入检查和更正生成，不包含前阶段既有原始缓存生成/依赖构建。它们不混入RUNS的native求解与适配计时，也不计作FGO方法×序列运行。
