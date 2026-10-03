@@ -106,13 +106,13 @@ def _descriptor_frame(descriptor, roots, window):
     return _window(frame, window, valid_column="plot_valid")
 
 
-def _segments(time, x, y, valid):
+def _segments(time, x, y, valid, cadence_s=None):
     """Insert breaks; never interpolate or remove either endpoint of a gap."""
     time, x, y = (np.asarray(v, float) for v in (time, x, y))
     valid = np.asarray(valid, bool) & np.isfinite(time) & np.isfinite(x) & np.isfinite(y)
     delta = np.diff(time)
     positive = delta[delta > 0]
-    cadence = float(np.median(positive)) if len(positive) else None
+    cadence = float(cadence_s) if cadence_s is not None else (float(np.median(positive)) if len(positive) else None)
     split = np.flatnonzero((delta > 1.5 * cadence) | (delta <= 0)) + 1 if cadence else np.empty(0, int)
     xx, yy = x.copy(), y.copy()
     xx[~valid], yy[~valid] = np.nan, np.nan
@@ -170,7 +170,7 @@ def _trajectory_line(axis, frame, style, origin, rotation, summary):
         return 0
     ecef = frame[XYZ].apply(pd.to_numeric, errors="coerce").to_numpy(float)
     enu = (ecef - origin) @ rotation.T
-    x, y, counts = _segments(frame.time, enu[:, 0], enu[:, 1], frame.plot_valid)
+    x, y, counts = _segments(frame.time, enu[:, 0], enu[:, 1], frame.plot_valid, style.get('cadence_s'))
     dense = counts["finite_count"] > 5000
     if counts["finite_count"]:
         axis.plot(x, y, color=style["color"], linestyle=style["ls"], linewidth=.85,
@@ -308,7 +308,11 @@ def render_sequence(roots_path, sequence):
             axis.set_title("(" + label + ")", loc="left", fontsize=9., pad=5)
             axis.grid(True)
             axis.set_axisbelow(True)
-        truth_style = {"label": "Truth", "color": "#202020", "ls": "-"}
+        # The frozen reference has paired messages within each 10 Hz packet.
+        # Median adjacent dt is a within-packet separation, not its cadence;
+        # using it would make the actual Truth trajectory almost invisible.
+        # Keep every reference row and break at genuine >0.15s packet gaps.
+        truth_style = {"label": "Truth", "color": "#202020", "ls": "-", "cadence_s": .1}
         for axis, point, methods in ((a, "GNSS1_ANTENNA", ("GNC", "WEN_TC")), (b, "POI_MIDPOINT", ("OISAM",))):
             _trajectory_line(axis, truth[point], truth_style, origin, rotation, summary["series"])
             missing = []
