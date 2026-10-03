@@ -12,6 +12,7 @@ import importlib.util
 from io import BytesIO
 import json
 from pathlib import Path
+import subprocess
 import time
 
 import numpy as np
@@ -162,6 +163,8 @@ def common_time_rows(rows,errors):
 
 def evaluate_sequence(roots_path,sequence,attempts):
     roots=aliases(roots_path);root=Path(roots['<FGO_ROOT>']);code=Path(roots['<CODE_ROOT>'])
+    started=time.perf_counter()
+    code_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=code,text=True).strip()
     spec=yaml.safe_load((code/'configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml').read_text())['sequences'][sequence]
     out=Path(roots.get('<FGO_EVALUATION_ROOT>',str(root/'evaluation')))/sequence;out.mkdir(parents=True,exist_ok=False)
     # All native outputs are sealed before any reference is opened.
@@ -198,12 +201,18 @@ def evaluate_sequence(roots_path,sequence,attempts):
         pd.DataFrame(dict(time=selected.time.to_numpy(),x_ecef_m=xyz[:,0],y_ecef_m=xyz[:,1],z_ecef_m=xyz[:,2])).to_csv(out/('TRUTH_'+point+'.csv'),index=False,lineterminator='\n')
     write_csv(out/'METRICS.csv',rows+common)
     dump(out/'EVALUATION.json',json_safe({'sequence':sequence,'rows':rows+common,'native_attempts':attempts,'reference_sha256':digest,
+        'code_commit':code_commit,'config_hash':sha256(code/'configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml'),
+        'evaluation_source_hash':sha256(Path(__file__)),
+        'native_manifest_hashes':{m:sha256(p/'RUN.json') for m,(_,_,p) in native.items()},
+        'evaluation_elapsed_s':time.perf_counter()-started,
         'reference_read_count':1,'evaluator_child_count':1,'evaluator_sha256':EVALUATOR_SHA256,
         'output_interpolation':False,'reference_interpolation':'frozen linear LLH/RP; unwrap yaw; ENU yaw to NED',
         'physical_point_rule':'OiSAM IMU-to-POI existing transform; GNSS-only reference POI-to-GNSS1',
         'reference_maximum_interval_s':float(np.max(np.diff(gt.time))),
         'data_mode':'real_raw_reuse','synthetic_data_used':False,'semisynthetic_data_used':False,
-        'trace_used_online':False,'epoch_deleted_for_metric':False,'per_case_tuning':False,'output_only_correction':False} ))
+        'trace_used_online':False,'epoch_deleted_for_metric':False,'per_case_tuning':False,'output_only_correction':False,
+        'receiver_imu_as_body_imu':False,'final_v23_output_solver_input':False,'LegSA_output_solver_input':False,
+        'old_runtime_input_count':0} ))
     return rows+common
 
 

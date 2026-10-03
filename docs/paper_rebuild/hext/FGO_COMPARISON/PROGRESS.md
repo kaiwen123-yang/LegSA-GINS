@@ -21,3 +21,5 @@ Wen实现提交 `b203c80423c25fe0cb0e57876d7d8f92d49e7601` 已推送并核远端
 2026-10-03：9个原始MAIN组合已实际完成，9次native在线参考读取均0；BY2 MAIN已离线评价一次（参考读取1）。末轮只读review以无参考合成反例发现OiSAM初始化速度物理点错误：GNSS1天线速度未减旋转杆臂速度，不能继续作为最终实现。现按固定lever及最近已完成IMU角速率作解析转换并记录来源，13项合成测试通过；原MAIN与BY2原评价保持原路径。仅OiSAM三组以INIT_VELOCITY_FIX重跑，GNC/Wen不重跑。新评价独立根由<FGO_EVALUATION_ROOT>指向evaluation_init_velocity。此为程序/物理点修复，不改配置择优。
 
 另修跨段maximum计数错误，原始18/23/74是把段内最大数相加；逐事件真实最大18/18/20。BY2O原MAIN有1次Ceres到20步但解可用，保留原状态/说明。此统计修复不改变任何原轨迹；原manifest保留在MAIN。OiSAM实现提交7ce0744已推送并核遠端。
+
+初始化速度修复提交7922e5b已推送并核远端；独立review复核13/13通过。最终评价/图表适配代码就绪：新评价根隔离、各native输出hash先于reference核对、单子进程单reference读取；旧F04/LC01/七种航向主变体完整支持来源沿原索引复用。新三方法、原始定位两方法、OiSAM/V3同POI的共同时间支持分别登记；固定5ms时刻门，不插值算法输出，不从errors重造NAV。三张4320px PNG及PDF/SVG组合图保留全部有限峰值、断点和已有边界，实际渲染/目视QA仍待最终评价。
