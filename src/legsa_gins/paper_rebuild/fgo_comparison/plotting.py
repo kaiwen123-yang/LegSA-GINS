@@ -205,7 +205,8 @@ def render_sequence(roots_path, sequence):
         raise PlotInputError("Sequence is outside the registered comparison")
     roots = json.loads(Path(roots_path).read_text(encoding="utf-8"))["aliases"]
     root = Path(roots["<FGO_ROOT>"])
-    evaluated = Path(roots.get("<FGO_EVALUATION_ROOT>", root / "evaluation")) / sequence
+    from .evaluation import evaluation_directory
+    evaluated = evaluation_directory(roots, sequence)
     evaluation = json.loads((evaluated / "EVALUATION.json").read_text(encoding="utf-8"))
     own = {r["method_id"]: r for r in evaluation["rows"] if r["support"] == "OWN_VALID"}
     if set(NEW_METHODS) - own.keys():
@@ -332,6 +333,28 @@ def render_sequence(roots_path, sequence):
             axis.set_ylabel("North (m)")
             axis.set_aspect("equal", adjustable="datalim")
             axis.margins(.08)
+        # Keep the complete failed trajectory in the main panel. If it makes
+        # the observed route unreadable, add a clearly bounded local detail;
+        # the same source-extent rule applies to every sequence.
+        route = (truth['GNSS1_ANTENNA'][XYZ].to_numpy(float) - origin) @ rotation.T
+        route = route[np.isfinite(route).all(axis=1)]
+        route_span = max(np.ptp(route[:, :2], axis=0)) if len(route) else 0.
+        panel_span = max(np.ptp(a.get_xlim()), np.ptp(a.get_ylim()))
+        if route_span > 0 and panel_span > 10 * route_span:
+            detail = a.inset_axes([.09, .63, .36, .30])
+            detail.set_gid('a_detail')
+            _trajectory_line(detail, truth['GNSS1_ANTENNA'], truth_style, origin, rotation, [])
+            for method in ('GNC', 'WEN_TC'):
+                _trajectory_line(detail, trajectories[method], styles[method], origin, rotation, [])
+            detail.set_xlim(route[:, 0].min()-10, route[:, 0].max()+10)
+            detail.set_ylim(route[:, 1].min()-10, route[:, 1].max()+10)
+            detail.set_aspect('equal', adjustable='box')
+            detail.tick_params(labelsize=4.5, length=2)
+            detail.set_title('Local detail (m)', fontsize=5.5, pad=2)
+            detail.grid(True)
+            summary['trajectory_detail_inset'] = {
+                'panel': 'a', 'xlim': list(detail.get_xlim()), 'ylim': list(detail.get_ylim()),
+                'rule': 'only if full span >10x reference route span; reference extent plus 10m; main panel keeps all output'}
         for axis, field, label in ((c, "horizontal_err_m", "Horizontal error (m)"),
                                    (d, "err_u_m", "Vertical error (m)"),
                                    (e, "yaw_err_deg", "Heading error (deg)")):
@@ -458,4 +481,8 @@ def render_sequence(roots_path, sequence):
         "GNC and Wen TC use offline full-batch optimization with future observations. "
         "Dense curves/weight marks are rasterized at 600 dpi in otherwise vector PDF/SVG exports."
     )
+    if sequence == 'BY2H':
+        summary['caption'] += ' Both LC01 starts retain the existing geometric-audit FAIL; CS is an after-results amendment, not a new validated main result.'
+    if 'trajectory_detail_inset' in summary:
+        summary['caption'] += ' Panel (a) retains the entire output; its labeled inset shows the reference route extent plus 10m to make the local trajectories readable.'
     return summary

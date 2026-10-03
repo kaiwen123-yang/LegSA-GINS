@@ -161,12 +161,17 @@ def common_time_rows(rows,errors):
     return result
 
 
-def evaluate_sequence(roots_path,sequence,attempts):
+def evaluation_directory(roots,sequence):
+    base=Path(roots.get('<FGO_EVALUATION_ROOT>',str(Path(roots['<FGO_ROOT>'])/'evaluation')))
+    return Path(roots.get(f'<FGO_EVALUATION_{sequence}>',str(base/sequence)))
+
+
+def evaluate_sequence(roots_path,sequence,attempts,access_log=None):
     roots=aliases(roots_path);root=Path(roots['<FGO_ROOT>']);code=Path(roots['<CODE_ROOT>'])
     started=time.perf_counter()
     code_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=code,text=True).strip()
     spec=yaml.safe_load((code/'configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml').read_text())['sequences'][sequence]
-    out=Path(roots.get('<FGO_EVALUATION_ROOT>',str(root/'evaluation')))/sequence;out.mkdir(parents=True,exist_ok=False)
+    out=evaluation_directory(roots,sequence);out.mkdir(parents=True,exist_ok=False)
     # All native outputs are sealed before any reference is opened.
     native={}
     for method,attempt in attempts.items():
@@ -203,6 +208,7 @@ def evaluate_sequence(roots_path,sequence,attempts):
     dump(out/'EVALUATION.json',json_safe({'sequence':sequence,'rows':rows+common,'native_attempts':attempts,'reference_sha256':digest,
         'code_commit':code_commit,'config_hash':sha256(code/'configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml'),
         'evaluation_source_hash':sha256(Path(__file__)),
+        'access_log':portable(resolve(access_log,roots),roots) if access_log else None,
         'native_manifest_hashes':{m:sha256(p/'RUN.json') for m,(_,_,p) in native.items()},
         'evaluation_elapsed_s':time.perf_counter()-started,
         'reference_read_count':1,'evaluator_child_count':1,'evaluator_sha256':EVALUATOR_SHA256,
@@ -219,7 +225,8 @@ def evaluate_sequence(roots_path,sequence,attempts):
 def main():
     p=argparse.ArgumentParser();p.add_argument('--roots',required=True);p.add_argument('--sequence',required=True,choices=['BY2','BY2H','BY2O'])
     p.add_argument('--gnc-attempt',default='MAIN');p.add_argument('--wen-attempt',default='MAIN');p.add_argument('--oisam-attempt',default='MAIN')
-    a=p.parse_args();rows=evaluate_sequence(a.roots,a.sequence,{'GNC':a.gnc_attempt,'WEN_TC':a.wen_attempt,'OISAM':a.oisam_attempt})
+    p.add_argument('--access-log',help='Actual enclosing strace output; provenance only')
+    a=p.parse_args();rows=evaluate_sequence(a.roots,a.sequence,{'GNC':a.gnc_attempt,'WEN_TC':a.wen_attempt,'OISAM':a.oisam_attempt},a.access_log)
     print(json.dumps(json_safe(rows)))
 
 

@@ -99,7 +99,7 @@ def _run_native(roots_path, sequence, method, attempt):
         provenance=result
         status=result.get('terminal_status','RECORDED_IN_METHOD_MANIFEST')
     else:
-        inp=Path(roots['<FGO_ROOT>'])/'inputs'/sequence
+        inp=Path(roots.get(f'<FGO_INPUT_{sequence}>',str(Path(roots['<FGO_ROOT>'])/'inputs'/sequence)))
         manifest=json.loads((inp/'INPUT_MANIFEST.json').read_text())
         if manifest['sequence']!=sequence or manifest['data_mode']!='real_raw_reuse': raise ValueError('Raw input scope mismatch')
         forbidden=['synthetic_data_used','semisynthetic_data_used','trace_used_online','receiver_imu_as_body_imu',
@@ -109,7 +109,8 @@ def _run_native(roots_path, sequence, method, attempt):
         with np.load(inp/'RAW_INPUT.npz',allow_pickle=False) as archive:
             data={k:archive[k] for k in archive.files}
         provenance={k:manifest[k] for k in ['raw_source_hashes','provider_hashes','navigation_hashes','input_sha256','base_time','window_seconds']}
-        provenance.update(input_manifest_sha256=sha256(inp/'INPUT_MANIFEST.json'),
+        provenance.update(input_manifest_path=portable(inp/'INPUT_MANIFEST.json',roots),
+                          input_manifest_sha256=sha256(inp/'INPUT_MANIFEST.json'),
                           **{k:manifest[k] for k in ['epoch_count','expected_window_one_hz_slots','missing_one_hz_slots']})
         if method=='GNC':
             from .gnc import solve
@@ -183,7 +184,8 @@ def summarize_runs(roots_path):
     """Small exact-run ledger and access receipts, reusing the existing parser."""
     from ..clean5_sequence.io_audit import audited_open_records
     roots=aliases(roots_path);root=Path(roots['<FGO_ROOT>']);code=Path(roots['<CODE_ROOT>'])
-    final_attempts=json.loads(Path(roots_path).read_text()).get('final_attempts',{m:'MAIN' for m in METHODS})
+    local=json.loads(Path(roots_path).read_text())
+    final_attempts=local.get('final_attempts',{m:'MAIN' for m in METHODS})
     rows=[]
     for sequence in ('BY2','BY2H','BY2O'):
         for method in METHODS:
@@ -199,8 +201,12 @@ def summarize_runs(roots_path):
                          'openat_log_sha256':sha256(log),'record_count':len(records),'passed':not reference}
                 dump(out/'ACCESS.json',receipt)
                 if reference: raise ValueError('Unexpected online reference access')
+                final=final_attempts[method]
+                if isinstance(final,dict): final=final[sequence]
+                reason=local.get('superseded_reasons',{}).get(f'{sequence}/{method}/{attempt}',
+                    'INITIAL_VELOCITY_POINT_BUG' if method=='OISAM' and attempt=='MAIN' else 'REPLACED_WITH_RECORDED_REASON')
                 rows.append({'sequence_id':sequence,'method_id':method,'attempt':attempt,'status':run['terminal_status'],
-                             'publication_role':'FINAL' if attempt==final_attempts[method] else 'SUPERSEDED_INITIAL_VELOCITY_POINT_BUG',
+                             'publication_role':'FINAL' if attempt==final else 'SUPERSEDED_'+reason,
                              'total_scheduled_rows':len(states),'total_finite_position_rows':len(good),
                              'first_finite_time_s':good[0]['time_rel_s'] if good else None,
                              'last_finite_time_s':good[-1]['time_rel_s'] if good else None,
