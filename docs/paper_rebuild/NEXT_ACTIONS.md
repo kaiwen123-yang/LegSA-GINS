@@ -1,5 +1,11 @@
 # Clean Rebuild Next Actions
 
+## 2026-10-03: FGO comparison closed; manuscript writing
+
+The user-authorized final external comparison is complete: OiSAM-FGO (2025), Wen TC-FGO (2021), and FGO-GNC (2022), each on the full BY2/BY2H/BY2O natural-sequence window. Read the [writing entry and results](hext/FGO_COMPARISON/README.md), [complete comparison table](hext/FGO_COMPARISON/COMPARISON_TABLE.csv), and three figures linked there. Nine final run identities are registered; five superseded bug/input-conflict attempts remain visible. No V3, moving-baseline, RTKLIB, or LC01 rerun was added.
+
+Next action is manuscript writing from these completed results and stated limitations. Experiment expansion is closed: no additional algorithm, dataset, RAWX fault matrix, V3 repair, or calibration research is required by this handoff. The older stage records below are preserved as history and do not reopen execution.
+
 ## CLEAN3R2 Terminal Scope
 
 - Active stage: `CLEAN3R2_MATH_REPAIR_COUNTER_CONTRACT_ROUTING_REPAIR_AND_S3_RESUME`.

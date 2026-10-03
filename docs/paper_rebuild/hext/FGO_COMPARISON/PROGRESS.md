@@ -37,3 +37,7 @@ BY2H提交c0b34f0b3c595989737390250c5e2d91b14340bc已推送并核远端。BY2O�
 BY2O受影响GNC/Wen TC两项CLOCK_CONFLICT_FIX全窗完成，全部420节点有限；离线窗内各377/378，3D RMSE为3.741719/15.701112m，耗时0.753843/41.391703s。OiSAM沿用INIT_VELOCITY_FIX：371/378、0.065686m、yaw 3.438791°；新旧评价中的OiSAM误差/轨迹及两份参考派生文件字节一致。最终BY2O六面板图完成实际栅格QA，通过。
 
 当前最终9组合完成，累计14次FGO native（9最终、5有明确原因的superseded尝试），全部在线reference打开0；累计5个真实离线评价child/5次reference读取（3最终序列评价、2被替代评价）。旧算法native/旧评价器重跑均0。COMPARISON_TABLE共100行，METRICS共27行；自身分母保留，共同支持独立登记。下一项仅完成写作README、交付核对及最终推送，不再新增实验。
+
+BY2O结果提交114cf3b186985db6036c9dd58e224c5144836ab4已推送并核远端。写作README补齐三篇身份/工程差异、9组H/V/3D/yaw/覆盖/耗时、共同支持OiSAM/V3、旧LC边界与三图入口。闭合核对读取本轮14份RUN/ACCESS及状态hash、5份离线评价与strace记录、三份实际栅格QA：全部通过；没有重新打开原始参考或启动科学任务。外部FINAL_SUMMARY.json绑定当前结果表/图hash及全部运行、评价身份。最终仅余只读交付复核和文档提交推送。
+
+最终限定只读交付复核PASS：README九组自身数值与三组OiSAM/V3共同支持逐项匹配CSV，27新指标行包含于100行总表；9 FINAL及5旧attempt、14份RUN/ACCESS、3最终评价的native hash、三图目视回执一致，17个相对链接可达，shared文件无本机路径泄漏。所有必要实现、针对性测试、实际运行、评价、图表及限制说明已完成；本组实验扩展终止，下一步仅论文写作。最终文档随本提交交付，推送与远端精确SHA回执保存在本机FINAL_PUBLICATION.json并在最终答复报告。
