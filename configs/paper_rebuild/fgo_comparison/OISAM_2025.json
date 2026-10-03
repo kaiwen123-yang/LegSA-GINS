@@ -1,0 +1,67 @@
+{
+  "method_id": "OISAM_2025",
+  "paper_doi": "10.1186/s43020-025-00173-w",
+  "implementation_identity": "independent_paper_core_GTSAM_factor_backend",
+  "solve_mode": "incremental_OiSAM_1Hz_current_node_with_30_40_node_AJSWR_and_Ceres_relinearization",
+  "node_hz": 1.0,
+  "window_lower_nodes": 30,
+  "window_upper_nodes": 40,
+  "relinearize_attitude_increment_deg": [3.0, 3.0, 15.0],
+  "nonlinear_max_iterations": 20,
+  "nonlinear_relative_cost_tolerance": 1e-6,
+  "nonlinear_scaled_step_tolerance": 1e-7,
+  "nonlinear_backend": "Ceres_2.2.0_via_pyceres_2.6",
+  "nonlinear_linear_solver": "SPARSE_NORMAL_CHOLESKY",
+  "lever_imu_to_gnss1_frd_m": [0.03, 0.03, -0.30],
+  "initial_roll_pitch_deg": [0.0, 0.0],
+  "initial_roll_pitch_std_deg": [10.0, 10.0],
+  "initial_missing_velocity_std_mps": 10.0,
+  "initial_accelerometer_bias_std_mps2": [0.04817482008954474, 0.08259572423450164, 0.02257241538343225],
+  "gyro_white_noise_rad_sqrt_s": 0.00028652488553573575,
+  "accel_white_noise_mps_sqrt_s": [0.15797303491299788, 0.1630699700022334, 0.1272023370018779],
+  "gyro_bias_stationary_std_radps": 0.00004547552328807448,
+  "accel_bias_stationary_std_mps2": [0.04817482008954474, 0.08259572423450164, 0.02257241538343225],
+  "bias_correlation_time_s": 3600.0,
+  "bias_model": "random_walk_density_equals_stationary_sigma_times_sqrt_2_over_tau",
+  "earth_rotation_radps": 0.00007292115,
+  "earth_model": "fixed_local_NED_first_order_GTSAM_Coriolis_including_attitude",
+  "earth_rate_removed_by_preprocessing": true,
+  "integration_covariance_m2ps3": 1e-8,
+  "preintegration_bias_initial_covariance": 1e-12,
+  "maximum_imu_interval_s": 0.1,
+  "maximum_gnss_node_offset_s": 0.100001,
+  "gap_policy": "explicit_NaN_then_independent_segment_initialization",
+  "gravity_mps2": {"BY2": 9.801554354839126, "BY2H": 9.8015547305, "BY2O": 9.8015545211},
+  "provider_template": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/{sequence}",
+  "execution_contract": "<CODE_ROOT>/configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml",
+  "frozen_provider_sha256": {
+    "BY2": {
+      "imupath": "74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647",
+      "gnsspath": "68ed8de7f91b267072bab09e968a9cab4b5220bc5eb116140adacdfde0382e7a"
+    },
+    "BY2H": {
+      "imupath": "d32e4891080e300e6edde4526146636f15ec54df945a0470c57fbbdc3aa5115c",
+      "gnsspath": "88d18be4ec1b4efe4d74f8fc59683d7209fc803f52c60268a763ce457fa55f00"
+    },
+    "BY2O": {
+      "imupath": "48943f3e704ceebbf517bfb073856c1c215b5216e3a5d8b6cd91e7ea7586e49b",
+      "gnsspath": "96ffaa3a88f97d2519381baf20c1e139269665281ff0de2f56fb55f0b2446394"
+    }
+  },
+  "parameter_source": "configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_SENSOR_MODEL.yaml and CLEAN5_CALIBRATED_SENSOR_MODEL_CONTRACT.yaml; physical calibration copied, no fitting",
+  "local_coordinate_order": "GTSAM pose[rotation,body_translation],world_velocity,bias[accelerometer,gyroscope]; conceptual state[p,q,v,bg,ba]",
+  "engineering_differences": [
+    "GTSAM 4.2 preintegration/factors replace OB-GINS factors; actual Ceres 2.2 via pyceres performs Algorithm 2 relinearization; not author code",
+    "Fixed local NED and first-order Earth rotation/Coriolis replace OB-GINS full Earth-aware mechanization",
+    "One legal A1 yaw initializes a segment; no repeated heading factor, RP or HV factor",
+    "After relinearization retain T1-1 nodes per Algorithm 2 line 15; next node rebuilds at T1",
+    "Cache tail after prefix Givens, before tail elimination, to retain prefix effects; exact incremental/full QR parity tested",
+    "Absolute wrap-safe attitude increments trigger A-JSWR; no reference-dependent threshold",
+    "Bias random-walk densities use sigma_stationary*sqrt(2/tau), rather than interpreting stationary sigma as density",
+    "First-1000 gyro mean removal is represented by initial residual gyro bias -R0^T*omega_ie; no provider modification",
+    "Initial zero accelerometer bias uses the calibrated stationary bias uncertainty, not a falsely precise zero-bias constraint",
+    "Observed IMU gaps preserve NaN nodes and restart an independent sensor-initialized segment only after continuous support resumes",
+    "Fractional right-endpoint IMU intervals retain original GNSS timestamps; the next-IMU-sample availability delay is recorded, never labeled zero-latency causal output",
+    "Unrounded raw timestamps recover each frozen provider increment's exact current-sample duration; raw inertial values are never applied a second time"
+  ]
+}

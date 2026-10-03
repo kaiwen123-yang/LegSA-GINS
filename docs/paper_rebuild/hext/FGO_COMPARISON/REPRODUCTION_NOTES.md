@@ -12,12 +12,19 @@
 | GNC数值求解与缺测 | Eq23，未公开数值项 | `gnc._fixed_weight_solve / _prepare_graph` | 稀疏GN/回溯；固定收敛容差与足够预算见GNC_2022.json。WLS初值，缺初值仅在有锚分量内Doppler传播；无先验补秩。缺Doppler切断边；秩亏/不收敛分量主输出NaN，全部节点/观测分母仍保留。 |
 | Wen TC状态与码/运动因子 | Eq21–23、30、32 | `wen_tc.TCProblem / solve` | ECEF p/v、体坐标加计偏置、实际观测星座钟偏；运动0.3m、偏置差0.01m/s²、INS联系0.15m/s。全批LM，无姿态状态/额外Doppler因子。缺末INS时未约束末速度不进入求解、输出NaN；其余图消元判秩，无阻尼冒充先验。 |
 | Wen外部AHRS/INS速度联系 | Eq3、25–27 | `wen_ahrs.prepare_ahrs / wen_tc` | Go2 quaternion经既有FLU/FRD安装关系、一次A1初始全球定向；校准比力积分加正常重力及杆臂速度差。原始stamp重建精确增量dt；缺口不填。区间内以左端偏置积分，为原文逐点右端加速度偏置式的固定离散适配。 |
+| OiSAM状态、因子 | Eq4–6 | `oisam.preintegrate / gnss_factor / marginalize_oldest` | GTSAM4.2只提供15维局部姿态/位置/速度/两偏置因子及预积分；不调用iSAM/iSAM2。GNSS杆臂、偏置随机游走、固定局部NED一阶地球率/Coriolis；与OB-GINS完整地球模型有明确差异。边缘化只消除触及旧节点的因子，不重复保留因子。 |
+| OiSAM结构化更新 | Eq13–14、Algorithm1、Fig4–5 | `oisam.BandedMatrix / IncrementalQR` | 每行4m带状存储、Givens消元、前缀变换后的2m尾缓存，增量与完整QR小例一致；重线性化前保持固定线性化锚。 |
+| OiSAM A-JSWR | Algorithm2 | `OiSAMGraph.step / ceres_relinearize.optimize` | T1/T2=30/40；相邻最优姿态变化RP3°/yaw15°或上限触发；真实Ceres2.2.0（pyceres2.6）重线性化，单线程LM+稀疏Cholesky，最多20迭代。按算法框删至29节点。当前节点输出，不回填过去输出。 |
 
 `raw_inputs` 复用既有RAWX缓存和广播库，不调用动基线求解器。缓存内容校验绑定前轮独立登记的INPUT身份；两接收机历元数与配对数均为1509/1483/2231且无配对失败，不因配对裁掉本次GNSS1历元。1Hz按距离整秒最近的实际RAWX时刻（容差0.05s）选取，保留实际时刻，不改写成整秒；原始/选中/名义缺失/各级筛选数量登记。传输与大气更正在原始码SPP近似位置计算，不借用任何完整导航轨迹。
 
 ## 初始化与缺测的事前处置
 
 OiSAM与Wen AHRS只使用合法传感器初始化。BY2H体IMU在407.017–413.041s有真实缺口，BY2O亦有短缺口，已在主运行前从provider时间确认。OiSAM不跨缺口填IMU：保留失败节点，下一段连续IMU及合法GNSS位置/A1 yaw支持时独立重新初始化；每段一次初始yaw登记次数/来源，不形成连续航向因子。Wen保留码/运动/偏置图，仅缺失的INS速度边不可用。所有规则三序列相同。
+
+OiSAM实际使用原始stamp恢复的精确IMU增量区间，不能把provider舍入时间差当积分dt。输入独立pin及raw锁核对通过：三序列63277/63217/95853区间。原始陀螺预处理已减初始均值，因此初始残余偏置设为解析量 `-R0.T @ omega_ie`，不重新拟合；噪声密度从已校准stationary sigma按 `sigma*sqrt(2/tau)` 转换。初始roll/pitch=0±10°、加计偏置不确定度取已校准stationary sigma；不是后验调参。右端样本拆边界最多等待下一个IMU样本，逐节点保存可用时间；不能宣称绝对零未来输入或将离线总耗时当实时延迟。
+
+隔离依赖在 `<FGO_BUILD>/oisam_venv`：NumPy1.26.4、GTSAM4.2、pyceres2.6/Ceres2.2.0。主系统科学环境未更改。[Ceres绑定](https://github.com/cvg/pyceres)只用于非线性重线性化分支，普通优化库没有替代OiSAM结构化增量算法。
 
 ## 输出与评价
 
