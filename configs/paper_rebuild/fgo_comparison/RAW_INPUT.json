@@ -1,5 +1,5 @@
 {
-  "schema": "fgo_comparison.raw_input.v1",
+  "schema": "fgo_comparison.raw_input.v2_clock_identity",
   "data_mode": "real_raw_reuse",
   "synthetic_data_used": false,
   "semisynthetic_data_used": false,
@@ -21,5 +21,9 @@
   "atmosphere": "RTKLIB broadcast Klobuchar + Saastamoinen; frequency-scaled ionosphere; broadcast TGD; satellite clock and relativity; one Earth-rotation correction",
   "constellation_clock_model": "one independent receiver code clock in metres for each actually observed system at an epoch",
   "initial_position_source": "raw-code RTKLIB coarse seed followed by un-rejected raw WLS; never provider navigation or trace",
+  "broadcast_clock_conflict_policy": "REJECT_AMBIGUOUS_PHYSICAL_KEY",
+  "broadcast_clock_physical_key": "satellite, absolute GPST toc/toe, IODE/AODE, IODC/AODC, all 15 orbital fields; not receiver/file order/transmission time",
+  "broadcast_clock_quantization": "RTKLIB180043ee/public GPS af0/1/2 LSB=2^(-31,-43,-55), BDS=2^(-33,-50,-66), plus RINEX text resolution; no residual-based tolerance",
+  "broadcast_clock_dependency_rule": "reject code and Doppler before state and bootstrap calls when any nearest applicable original Toe candidate conflicts or the actual post-uniqnav selected sat/toc/toe/IODE projects to any conflicting full key; missing selected metadata is unavailable; equal-Toe alternatives cannot rescue; never delete ambiguous navigation then fall back",
   "degradation_cases": []
 }

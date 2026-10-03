@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import collections
 import ctypes
+from dataclasses import replace
 import hashlib
 import json
 import math
@@ -21,6 +22,7 @@ from ..horizontal_literature import shared_raw_backend as raw
 from ..horizontal_literature.phase2_runner import CompactCacheReader, validate_compact_cache
 from ..horizontal_literature.reproduction_backend import rotate_with_geometric_flight
 from ..horizontal_literature.reproduction_prepare import LIBRARY_PINS, SEQUENCES
+from .broadcast_identity import BroadcastClockGate
 
 C = 299792458.0
 OMEGA = 7.2921151467e-5
@@ -184,9 +186,65 @@ def bootstrap_code(provider, epoch, config):
     except raw.RawBackendError: return None
 
 
+def apply_broadcast_gate(epoch, measurements, gate, provider=None):
+    """Screen code and its associated Doppler before state or seed evaluation.
+
+    The raw epoch is immutable. Its time and all raw/selected denominators are
+    retained even when every observation is unavailable. Coarse RTKLIB/GPS-SPP
+    initialization sees the same navigation exclusions as the factor input.
+    """
+    decisions, selection_audits = {}, {}
+    for measurement in epoch.measurements:
+        identity = measurement.identity
+        if identity.gnss_id not in (0, 3):
+            continue
+        key = (identity.gnss_id, identity.sv_id)
+        if key not in decisions:
+            satellite = ("G" if identity.gnss_id == 0 else "C") + f"{identity.sv_id:02d}"
+            before = gate.decision(satellite, epoch.gps_week, epoch.gps_tow_seconds)
+            after = None
+            if gate.has_conflicts(satellite):
+                if provider is None:
+                    raise ValueError("BROADCAST_SELECTION_AUDIT_PROVIDER_REQUIRED")
+                # uniqeph only compares adjacent sat/IODE and can discard a
+                # nearer legal key. Query the unchanged provider's actual
+                # retained selection before any state or bootstrap call.
+                try:
+                    audit = provider.ephemeris_audit(identity, epoch.gps_week, epoch.gps_tow_seconds)
+                except raw.RawBackendError:
+                    after = {"reason": "NO_POST_UNIQNAV_BROADCAST_NAVIGATION", "satellite": satellite,
+                             "conflicting_physical_keys": [],
+                             "dependency_stage": "POST_UNIQNAV_SELECTED_EPHEMERIS"}
+                    selected_identity = None
+                else:
+                    after = gate.selected_decision(satellite, audit)
+                    selected_identity = gate.selected_identity(satellite, audit)
+                selection_audits[key] = {"satellite": satellite, "selected_ephemeris": selected_identity,
+                                         "pre_uniqnav_decision": before, "post_uniqnav_decision": after}
+            decisions[key] = before or after
+
+    def unavailable(measurement):
+        identity = measurement.identity
+        return decisions.get((identity.gnss_id, identity.sv_id))
+
+    rejected = [measurement for measurement in measurements if unavailable(measurement)]
+    permitted = [measurement for measurement in measurements if not unavailable(measurement)]
+    raw_permitted = tuple(measurement for measurement in epoch.measurements if not unavailable(measurement))
+    coarse_epoch = epoch if len(raw_permitted) == len(epoch.measurements) else replace(epoch, measurements=raw_permitted)
+    reasons = collections.Counter(unavailable(measurement)["reason"] for measurement in rejected)
+    details = {"raw_signal_denominator": len(epoch.measurements),
+               "selected_code_denominator": len(measurements), "permitted_selected_codes": len(permitted),
+               "raw_signals_unavailable_for_bootstrap": len(epoch.measurements) - len(raw_permitted),
+               "excluded_selected_codes": dict(reasons),
+               "unavailable_satellites": [decisions[key] for key in sorted(decisions) if decisions[key]],
+               "post_uniqnav_selection_audits": [selection_audits[key] for key in sorted(selection_audits)],
+               "code_and_associated_doppler_excluded_together": True}
+    return coarse_epoch, permitted, details
+
+
 def prepare(roots_path, sequence, config_path):
     roots=aliases(roots_path); config=json.loads(Path(config_path).read_text())
-    dest=Path(roots['<FGO_ROOT>'])/'inputs'/sequence
+    dest=Path(roots.get(f'<FGO_INPUT_{sequence}>',str(Path(roots['<FGO_ROOT>'])/'inputs'/sequence)))
     dest.mkdir(parents=True,exist_ok=False)
     old=Path(roots['<EXT_REPRO_ROOT>'])/'inputs'/sequence
     info=json.loads((old/'INPUT.json').read_text())
@@ -196,6 +254,12 @@ def prepare(roots_path, sequence, config_path):
     for r in (1,2):
         if sha256(old/f'gnss{r}.nav') != info['source_files'][f'gnss{r}.nav']['sha256']:
             raise ValueError('Navigation input pin mismatch')
+    if config.get('broadcast_clock_conflict_policy') != 'REJECT_AMBIGUOUS_PHYSICAL_KEY':
+        raise ValueError('Broadcast clock identity gate must be explicitly configured')
+    navigation_paths = [old/'gnss1.nav', old/'gnss2.nav']
+    # Parse conflicting identities before the shared library's uniqnav can
+    # discard evidence. Keep original nav files and never delete-and-fallback.
+    broadcast_gate = BroadcastClockGate.from_paths(navigation_paths)
     binary=compile_corrections(roots); correction=Corrections(binary)
     reader=CompactCacheReader(old/'cache')
     base=SEQUENCES[sequence][2]; window=SEQUENCES[sequence][3]
@@ -212,16 +276,20 @@ def prepare(roots_path, sequence, config_path):
     dopp=np.full((n,3),np.nan); dcov=np.full((n,3,3),np.nan); fitcov=dcov.copy(); valid=np.zeros(n,bool)
     rows=[]; accounting=[]; previous=None; bootstrap_calls=0; code_calls=0
     started=time.perf_counter()
-    with raw.RtklibBroadcastProvider(Path(roots['<EXT_REPRO_BUILD>'])/'lib/liblegsa_rtklib_bridge.so',[old/'gnss1.nav',old/'gnss2.nav']) as provider:
+    with raw.RtklibBroadcastProvider(Path(roots['<EXT_REPRO_BUILD>'])/'lib/liblegsa_rtklib_bridge.so',navigation_paths) as provider:
         for k,idx in enumerate(selected):
             epoch,_=reader.pair(idx); prefilter=collections.Counter(); ms=selected_measurements(epoch,config,prefilter)
             if epoch.leap_seconds != 18: raise ValueError('GPS/UTC leap-second contract mismatch')
-            excluded=collections.Counter(); seed=previous
+            selected_count = len(ms)
+            coarse_epoch, ms, navigation_accounting = apply_broadcast_gate(epoch, ms, broadcast_gate, provider)
+            excluded=collections.Counter(navigation_accounting['excluded_selected_codes']); seed=previous
             if seed is None:
                 bootstrap_calls+=1
-                seed=bootstrap_code(provider,epoch,config)
+                seed=bootstrap_code(provider,coarse_epoch,config)
             if seed is None:
-                accounting.append({'epoch_index':k,'time_rel_s':float(t[k]),'raw_index':idx,'status':'NO_RAW_CODE_INITIAL_GEOMETRY','available_selected_signals':len(ms),'prefilter_counts':dict(prefilter)})
+                accounting.append({'epoch_index':k,'time_rel_s':float(t[k]),'raw_index':idx,'status':'NO_RAW_CODE_INITIAL_GEOMETRY',
+                    'available_selected_signals':selected_count,'retained_codes':0,'prefilter_counts':dict(prefilter),
+                    'excluded':dict(excluded),'broadcast_navigation_gate':navigation_accounting,'doppler_available':False})
                 continue
             records=[]
             for m in ms:
@@ -257,7 +325,9 @@ def prepare(roots_path, sequence, config_path):
                                    [r[1].clock_drift_sps for r in dm],frequencies,[r[0].do_mes_hz for r in dm],dsigma,initial[k])
                     if ds is not None: dopp[k],fitcov[k]=ds[:2];dcov[k]=np.eye(3)*config['doppler_graph_std_mps']**2
             accounting.append({'epoch_index':k,'time_rel_s':float(t[k]),'raw_index':idx,'status':'WLS_INITIALIZED' if valid[k] else 'WLS_UNAVAILABLE',
-                               'available_selected_signals':len(ms),'retained_codes':len(records),'prefilter_counts':dict(prefilter),'excluded':dict(excluded),'doppler_available':bool(np.isfinite(dopp[k]).all())})
+                               'available_selected_signals':selected_count,'retained_codes':len(records),'prefilter_counts':dict(prefilter),
+                               'excluded':dict(excluded),'broadcast_navigation_gate':navigation_accounting,
+                               'doppler_available':bool(np.isfinite(dopp[k]).all())})
             if k%50==0: print(json.dumps({'prepare':sequence,'epoch':k,'total':n,'raw_wls_initialized':int(valid[:k+1].sum())}),flush=True)
     data={key:np.asarray([r[key] for r in rows]) for key in rows[0]} if rows else {
         'epoch_index':np.empty(0,int),'system':np.empty(0,int),'sat_pos_ecef_m':np.empty((0,3)),
@@ -265,10 +335,13 @@ def prepare(roots_path, sequence, config_path):
     data.update(time_rel_s=t,initial_position_ecef_m=initial,initial_clock_m=clocks,doppler_velocity_ecef_mps=dopp,
                 doppler_covariance=dcov,doppler_fit_covariance=fitcov,spp_valid=valid,original_raw_index=np.asarray(selected))
     np.savez_compressed(dest/'RAW_INPUT.npz',**data)
-    manifest={'schema':'fgo_comparison.raw_input.v1','sequence':sequence,'base_time':base,'window_seconds':window,
+    manifest={'schema':'fgo_comparison.raw_input.v2_clock_identity','sequence':sequence,'base_time':base,'window_seconds':window,
               'data_mode':'real_raw_reuse','synthetic_data_used':False,'semisynthetic_data_used':False,'trace_used_online':False,
               'raw_source_hashes':info['raw_hash_locks'],'provider_hashes':{name:x['sha256'] for name,x in cm['files'].items()},
               'navigation_hashes':{f'gnss{r}.nav':sha256(old/f'gnss{r}.nav') for r in (1,2)},
+              'broadcast_clock_identity':broadcast_gate.report,
+              'broadcast_clock_conflict_excluded_observations':sum(a['excluded'].get('BROADCAST_CLOCK_CONFLICT',0) for a in accounting),
+              'broadcast_clock_conflict_affected_epochs':sum(a['excluded'].get('BROADCAST_CLOCK_CONFLICT',0)>0 for a in accounting),
               'corrections_binary_sha256':sha256(binary),'config_hash':sha256(config_path),
               'code_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=roots['<CODE_ROOT>'],text=True).strip(),
               'input_sha256':sha256(dest/'RAW_INPUT.npz'),'epoch_count':n,'code_observation_count':len(rows),
