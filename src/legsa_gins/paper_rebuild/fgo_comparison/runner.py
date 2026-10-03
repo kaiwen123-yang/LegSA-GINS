@@ -83,6 +83,12 @@ def _run_native(roots_path, sequence, method, attempt):
     denied=deny_reference_access(roots)
     configpath=code/'configs/paper_rebuild/fgo_comparison'/METHODS[method]
     config=json.loads(configpath.read_text())
+    names={'GNC':['gnc.py'],'WEN_TC':['wen_tc.py','wen_ahrs.py'],'OISAM':['oisam.py','oisam_inputs.py','ceres_relinearize.py','wen_ahrs.py','wen_tc.py']}[method]
+    sources=[code/'src/legsa_gins/paper_rebuild/fgo_comparison'/name for name in ['__init__.py','raw_inputs.py','runner.py',*names]]
+    sources=[p for p in sources if p.exists()]
+    source_hashes={str(p.relative_to(code)):sha256(p) for p in sources}
+    code_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=code,text=True).strip()
+    config_hash=sha256(configpath)
     out=Path(roots['<FGO_ROOT>'])/'runs'/sequence/method/attempt
     out.mkdir(parents=True,exist_ok=False)
     started=time.perf_counter()
@@ -95,10 +101,16 @@ def _run_native(roots_path, sequence, method, attempt):
     else:
         inp=Path(roots['<FGO_ROOT>'])/'inputs'/sequence
         manifest=json.loads((inp/'INPUT_MANIFEST.json').read_text())
+        if manifest['sequence']!=sequence or manifest['data_mode']!='real_raw_reuse': raise ValueError('Raw input scope mismatch')
+        forbidden=['synthetic_data_used','semisynthetic_data_used','trace_used_online','receiver_imu_as_body_imu',
+                   'final_v23_output_solver_input','LegSA_output_solver_input','per_case_tuning','output_only_correction','epoch_deleted_for_metric']
+        if any(manifest[k] is not False for k in forbidden) or manifest['old_runtime_input_count']!=0: raise ValueError('Forbidden input provenance')
         if sha256(inp/'RAW_INPUT.npz')!=manifest['input_sha256']: raise ValueError('Raw graph input identity changed')
         with np.load(inp/'RAW_INPUT.npz',allow_pickle=False) as archive:
             data={k:archive[k] for k in archive.files}
         provenance={k:manifest[k] for k in ['raw_source_hashes','provider_hashes','navigation_hashes','input_sha256','base_time','window_seconds']}
+        provenance.update(input_manifest_sha256=sha256(inp/'INPUT_MANIFEST.json'),
+                          **{k:manifest[k] for k in ['epoch_count','expected_window_one_hz_slots','missing_one_hz_slots']})
         if method=='GNC':
             from .gnc import solve
             result=solve(data,config)
@@ -122,17 +134,15 @@ def _run_native(roots_path, sequence, method, attempt):
         dump(out/'SOLVER.json',json_safe({k:v for k,v in result.items() if not isinstance(v,np.ndarray)}))
         status=result.get('terminal_status','RECORDED_IN_SOLVER')
     elapsed=time.perf_counter()-started
-    names={'GNC':['gnc.py'],'WEN_TC':['wen_tc.py','wen_ahrs.py'],'OISAM':['oisam.py','oisam_inputs.py','ceres_relinearize.py']}[method]
-    sources=[code/'src/legsa_gins/paper_rebuild/fgo_comparison'/name for name in ['__init__.py','raw_inputs.py','runner.py',*names]]
-    sources=[p for p in sources if p.exists()]
+    if source_hashes!={str(p.relative_to(code)):sha256(p) for p in sources} or sha256(configpath)!=config_hash:
+        raise ValueError('Scientific source/config changed during run')
     run={'schema':'fgo_comparison.native.v1','sequence':sequence,'method':method,'attempt':attempt,
          'terminal_status':status,'output_root':portable(out,roots),'data_mode':'real_raw_reuse',
          'synthetic_data_used':False,'semisynthetic_data_used':False,'trace_used_online':False,
          'receiver_imu_as_body_imu':False,'final_v23_output_solver_input':False,'LegSA_output_solver_input':False,
          'per_case_tuning':False,'output_only_correction':False,'epoch_deleted_for_metric':False,'old_runtime_input_count':0,
-         'code_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=code,text=True).strip(),
-         'config_hash':sha256(configpath),'config_path':portable(configpath,roots),
-         'implementation_source_hashes':{str(p.relative_to(code)):sha256(p) for p in sources},
+         'code_commit':code_commit,'config_hash':config_hash,'config_path':portable(configpath,roots),
+         'implementation_source_hashes':source_hashes,
          'solver_and_adapter_elapsed_s':elapsed,'hardware':hardware(),'mode':config.get('solve_mode',config.get('solver_mode')),
          'native_process_count':1,'evaluator_process_count':0,'reference_payload_reads':0,
          'reference_paths_denied':denied,'input_provenance':provenance,
@@ -167,6 +177,39 @@ def run_native(roots_path, sequence, method, attempt):
         dump(out/'RUN.json',failure)
         (out/'EXCEPTION.log').write_text(traceback.format_exc())
         raise
+
+
+def summarize_runs(roots_path):
+    """Small exact-run ledger and access receipts, reusing the existing parser."""
+    from ..clean5_sequence.io_audit import audited_open_records
+    roots=aliases(roots_path);root=Path(roots['<FGO_ROOT>']);code=Path(roots['<CODE_ROOT>'])
+    rows=[]
+    for sequence in ('BY2','BY2H','BY2O'):
+        for method in METHODS:
+            parent=root/'runs'/sequence/method
+            for path in sorted(parent.glob('*/RUN.json')):
+                run=json.loads(path.read_text());out=path.parent;attempt=out.name
+                states=list(csv.DictReader((out/'STATES.csv').open())) if (out/'STATES.csv').exists() else []
+                good=[r for r in states if float(r['valid'])>0 and all(np.isfinite(float(r[k])) for k in ['x_ecef_m','y_ecef_m','z_ecef_m'])]
+                log=root/'logs'/f'{method}_{sequence}_{attempt}_OPENAT.strace'
+                records=audited_open_records(log,code)
+                reference=[r for r in records if r['path'].startswith(roots['<RAW_ROOT>']+'/') and 'trace' in Path(r['path']).name.lower()]
+                receipt={'reference_payload_opens':len(reference),'reference_open_records':reference,
+                         'openat_log_sha256':sha256(log),'record_count':len(records),'passed':not reference}
+                dump(out/'ACCESS.json',receipt)
+                if reference: raise ValueError('Unexpected online reference access')
+                rows.append({'sequence_id':sequence,'method_id':method,'attempt':attempt,'status':run['terminal_status'],
+                             'total_scheduled_rows':len(states),'total_finite_position_rows':len(good),
+                             'first_finite_time_s':good[0]['time_rel_s'] if good else None,
+                             'last_finite_time_s':good[-1]['time_rel_s'] if good else None,
+                             'solver_and_adapter_elapsed_s':run['solver_and_adapter_elapsed_s'],
+                             'native_reference_opens':0,'code_commit':run['code_commit'],'config_hash':run['config_hash'],
+                             'cpu':run['hardware']['cpu'],'threads':run['hardware']['threads'].get('OMP_NUM_THREADS'),
+                             'solve_mode':run.get('mode'),'run_path':portable(path,roots),'run_manifest_sha256':sha256(path),
+                             'states_sha256':sha256(out/'STATES.csv') if states else None,
+                             'access_receipt_sha256':sha256(out/'ACCESS.json')})
+    write_csv(Path(roots['<FGO_DOCS>'])/'RUNS.csv',rows)
+    return rows
 
 
 def main():
