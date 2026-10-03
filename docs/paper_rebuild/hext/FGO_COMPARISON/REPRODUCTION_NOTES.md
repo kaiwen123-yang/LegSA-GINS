@@ -10,6 +10,8 @@
 | GNC伪距/Doppler图 | Eq5/13 | `gnc._Graph.residual_jacobian` | ECEF位置、每历元实际观测系统的米制钟偏；不分配自由速度。Doppler从原始频率解算，图STD 0.6m/s沿作者factor实际分母，保存WLS实际协方差诊断。 |
 | GNC鲁棒机制 | Eq17–21、Algorithm1 | `gnc.gm_loss / gnc_weight / solve` | cGM=2，theta初值max(1,3max(r²)/c²)，每轮/1.4至1；按Eq21驻点用平方权重，Eq22印刷矛盾明示。完整批处理使用未来观测；无滑窗边缘化。 |
 | GNC数值求解与缺测 | Eq23，未公开数值项 | `gnc._fixed_weight_solve / _prepare_graph` | 稀疏GN/回溯；固定收敛容差与足够预算见GNC_2022.json。WLS初值，缺初值仅在有锚分量内Doppler传播；无先验补秩。缺Doppler切断边；秩亏/不收敛分量主输出NaN，全部节点/观测分母仍保留。 |
+| Wen TC状态与码/运动因子 | Eq21–23、30、32 | `wen_tc.TCProblem / solve` | ECEF p/v、体坐标加计偏置、实际观测星座钟偏；运动0.3m、偏置差0.01m/s²、INS联系0.15m/s。全批LM，无姿态状态/额外Doppler因子。缺末INS时未约束末速度不进入求解、输出NaN；其余图消元判秩，无阻尼冒充先验。 |
+| Wen外部AHRS/INS速度联系 | Eq3、25–27 | `wen_ahrs.prepare_ahrs / wen_tc` | Go2 quaternion经既有FLU/FRD安装关系、一次A1初始全球定向；校准比力积分加正常重力及杆臂速度差。原始stamp重建精确增量dt；缺口不填。区间内以左端偏置积分，为原文逐点右端加速度偏置式的固定离散适配。 |
 
 `raw_inputs` 复用既有RAWX缓存和广播库，不调用动基线求解器。缓存内容校验绑定前轮独立登记的INPUT身份；两接收机历元数与配对数均为1509/1483/2231且无配对失败，不因配对裁掉本次GNSS1历元。1Hz按距离整秒最近的实际RAWX时刻（容差0.05s）选取，保留实际时刻，不改写成整秒；原始/选中/名义缺失/各级筛选数量登记。传输与大气更正在原始码SPP近似位置计算，不借用任何完整导航轨迹。
 
