@@ -1,0 +1,139 @@
+{
+  "status": "READY",
+  "time_utc": "2026-10-04T14:02:16.440342+00:00",
+  "actual_visual_review": "4 final PNGs individually opened; PDF/SVG not separately rendered",
+  "build_receipt_sha256": "472437b39e96e9c36f8d6c4fec119bdfe6ff20dd42113a27fe710a62f7e157e9",
+  "no_solver_or_evaluator": true,
+  "files": [
+    {
+      "path": "BUILD_RECEIPT.json",
+      "sha256": "472437b39e96e9c36f8d6c4fec119bdfe6ff20dd42113a27fe710a62f7e157e9",
+      "bytes": 19529
+    },
+    {
+      "path": "R15_BY2H_FGO_position_curves.pdf",
+      "sha256": "4db2672ff893148ce451822960acadd93f6e28e735e9bcb1d284efe4e484b467",
+      "bytes": 56090
+    },
+    {
+      "path": "R15_BY2H_FGO_position_curves.png",
+      "sha256": "b8fb45ad2ed4c9f85b92ebc6dc866ecbe4742617161af79da8ab533b457b6849",
+      "bytes": 787893
+    },
+    {
+      "path": "R15_BY2H_FGO_position_curves.svg",
+      "sha256": "8349aa2843b8def2d75b1e37d406cf09dff363506d926b15f1b74170a34babb5",
+      "bytes": 235329
+    },
+    {
+      "path": "R15_BY2O_FGO_position_curves.pdf",
+      "sha256": "9d3b7e7bce19aa0e6fde4bd5a5e3fb681f3d39d7244c1a0a78bf8852b96a9d99",
+      "bytes": 73557
+    },
+    {
+      "path": "R15_BY2O_FGO_position_curves.png",
+      "sha256": "de8f1e409e78e0eb836e615d2729e32ae3e961843084fa1965ce66cee34b1003",
+      "bytes": 861862
+    },
+    {
+      "path": "R15_BY2O_FGO_position_curves.svg",
+      "sha256": "faf27faf67310cb982cd689c5a92f37184f7cde0060685ea7295cda61d5bcb37",
+      "bytes": 323811
+    },
+    {
+      "path": "R15_BY2_FGO_position_curves.pdf",
+      "sha256": "153079eecf3e39e01474e72482c1e48a78fd38920f67e4d68283e00905061f40",
+      "bytes": 57871
+    },
+    {
+      "path": "R15_BY2_FGO_position_curves.png",
+      "sha256": "024876224b85af23fef890d71ff0a5c700dad32bddf23cb60044d385cf2f5748",
+      "bytes": 804991
+    },
+    {
+      "path": "R15_BY2_FGO_position_curves.svg",
+      "sha256": "1d028748139ab0f7d14d17a15c27e28107399372653ff090c80f29d3bbc7937a",
+      "bytes": 239214
+    },
+    {
+      "path": "R16_FGO_dynamic_secondary_strict_support.pdf",
+      "sha256": "d77f0d30a3c2761a02ce3ae299388c56e6b707d39d23fabec491188405f48a45",
+      "bytes": 25020
+    },
+    {
+      "path": "R16_FGO_dynamic_secondary_strict_support.png",
+      "sha256": "bca112c92a4e24a0151e438db0efd2698f62111a7ff6ea9a9ef6bad539b8584c",
+      "bytes": 399046
+    },
+    {
+      "path": "R16_FGO_dynamic_secondary_strict_support.svg",
+      "sha256": "ef1df1b2ae7f8031a90560b5c130e21fb96f51b02c73fa8fa72ec922402082c7",
+      "bytes": 17887
+    },
+    {
+      "path": "README.md",
+      "sha256": "816091eb684b9429c00a9d5722507a550289d2918af20e90be034f6e867d1149",
+      "bytes": 1576
+    },
+    {
+      "path": "build_fgo_position_figures.py",
+      "sha256": "9feab586ada240392b5008f5c398230462ae3a87986200ac9295e4ad36cbad90",
+      "bytes": 7047
+    },
+    {
+      "path": "data/BY2H_GNC_primary_saved_errors.csv.gz",
+      "sha256": "c56264dd6697df3800c9fea523bae6f4b5541e093eb6c797b8169e8edf79469f",
+      "bytes": 21901
+    },
+    {
+      "path": "data/BY2H_OISAM_primary_saved_errors.csv.gz",
+      "sha256": "70fc5a478391118a03a70457a842633fb4b4bc666f6b2cb909edf07e0c4f012e",
+      "bytes": 24969
+    },
+    {
+      "path": "data/BY2H_WEN_TC_primary_saved_errors.csv.gz",
+      "sha256": "9dc1606ad27566318ad877563b16f8446fadb0702cb00c3b044915377bb8e51a",
+      "bytes": 22274
+    },
+    {
+      "path": "data/BY2O_GNC_primary_saved_errors.csv.gz",
+      "sha256": "67e1fdb454bd6aca3dc533d93b20b6d0145b613dfe5aac28528f319477369546",
+      "bytes": 30171
+    },
+    {
+      "path": "data/BY2O_OISAM_primary_saved_errors.csv.gz",
+      "sha256": "b30504156e61d92f44d96449a0d98fdb26dec78a5c6a163d3189a446f32ffbbc",
+      "bytes": 34362
+    },
+    {
+      "path": "data/BY2O_WEN_TC_primary_saved_errors.csv.gz",
+      "sha256": "5afe762ab35f12f080cdef19caaba8d5e5df8cd93e5532dc95eb9349f24fa98a",
+      "bytes": 30686
+    },
+    {
+      "path": "data/BY2_GNC_primary_saved_errors.csv.gz",
+      "sha256": "6ed3675ff037dbe2665ab9201f6fd2d9e848e578a1fb5121fe5e9efd955777f1",
+      "bytes": 22310
+    },
+    {
+      "path": "data/BY2_OISAM_primary_saved_errors.csv.gz",
+      "sha256": "b22e680b5dc91f8b571e11bab84d1c9794a58a0ec583da2c71041e7d229b95d3",
+      "bytes": 25400
+    },
+    {
+      "path": "data/BY2_WEN_TC_primary_saved_errors.csv.gz",
+      "sha256": "52fc06f1e554a6a4097c9797c8ba1464fca02c3502504c0fee5f5119a330e108",
+      "bytes": 22673
+    },
+    {
+      "path": "data/all_36_saved_metrics.csv.gz",
+      "sha256": "06d73c6473eb1d516302d8c0b2c9729f17f0290fde943208997e0f531822b1fe",
+      "bytes": 4519
+    },
+    {
+      "path": "data/earlier_strict_Oi_identity_metrics.csv.gz",
+      "sha256": "e11d2618d32be8ecf62893b9634d38657faad94712b076f62fd76777c5474a0b",
+      "bytes": 1333
+    }
+  ]
+}
