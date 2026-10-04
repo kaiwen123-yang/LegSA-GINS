@@ -1,34 +1,34 @@
-method_id,metric,registered_count,finite_count,algorithm_failure_count,median,p95,maximum
-A03,horizontal_rmse_m,61,58,3,0.098,3.072,15.002
-A03,up_rmse_m,61,58,3,0.048,1.386,3.933
-A03,yaw_rmse_deg,61,58,3,1.886,2.116,10.111
-A04,horizontal_rmse_m,61,58,3,0.097,3.013,14.372
-A04,up_rmse_m,61,58,3,0.050,1.447,4.119
-A04,yaw_rmse_deg,61,58,3,1.886,4.010,29.799
-A05,horizontal_rmse_m,61,58,3,0.099,3.072,15.694
-A05,up_rmse_m,61,58,3,0.049,1.398,3.931
-A05,yaw_rmse_deg,61,58,3,1.914,12.778,61.302
-A06,horizontal_rmse_m,61,58,3,0.099,3.087,14.973
-A06,up_rmse_m,61,58,3,0.049,1.428,3.924
-A06,yaw_rmse_deg,61,58,3,1.887,2.170,11.690
-A07,horizontal_rmse_m,61,58,3,0.100,3.084,15.773
-A07,up_rmse_m,61,58,3,0.049,1.399,4.017
-A07,yaw_rmse_deg,61,58,3,1.914,7.334,35.720
-A08,horizontal_rmse_m,61,58,3,0.100,3.054,15.769
-A08,up_rmse_m,61,58,3,0.050,1.388,4.167
-A08,yaw_rmse_deg,61,58,3,1.915,18.644,147.908
-A09,horizontal_rmse_m,61,58,3,0.100,3.086,15.917
-A09,up_rmse_m,61,58,3,0.048,1.355,4.004
-A09,yaw_rmse_deg,61,58,3,1.914,7.284,44.481
-F01,horizontal_rmse_m,61,59,2,0.092,3.031,16.083
-F01,up_rmse_m,61,59,2,0.048,1.292,4.121
-F01,yaw_rmse_deg,61,59,2,8.090,22.466,134.068
-F02,horizontal_rmse_m,61,56,5,0.102,2.535,15.880
-F02,up_rmse_m,61,56,5,0.048,1.057,2.521
-F02,yaw_rmse_deg,61,56,5,2.232,2.664,152.335
-F03,horizontal_rmse_m,61,58,3,0.100,3.053,15.916
-F03,up_rmse_m,61,58,3,0.048,1.342,4.130
-F03,yaw_rmse_deg,61,58,3,1.916,15.996,52.938
-F04,horizontal_rmse_m,61,58,3,0.098,3.071,14.896
-F04,up_rmse_m,61,58,3,0.049,1.428,3.924
-F04,yaw_rmse_deg,61,58,3,1.886,2.126,10.347
+Method,metric,registered_count,finite_count,algorithm_failure_count,median,p95,maximum
+Doppler-aid ablation,horizontal_rmse_m,61,58,3,0.098,3.072,15.002
+Doppler-aid ablation,up_rmse_m,61,58,3,0.048,1.386,3.933
+Doppler-aid ablation,yaw_rmse_deg,61,58,3,1.886,2.116,10.111
+Unweighted LegSA-GINS,horizontal_rmse_m,61,58,3,0.097,3.013,14.372
+Unweighted LegSA-GINS,up_rmse_m,61,58,3,0.050,1.447,4.119
+Unweighted LegSA-GINS,yaw_rmse_deg,61,58,3,1.886,4.010,29.799
+Tilt-prior ablation,horizontal_rmse_m,61,58,3,0.099,3.072,15.694
+Tilt-prior ablation,up_rmse_m,61,58,3,0.049,1.398,3.931
+Tilt-prior ablation,yaw_rmse_deg,61,58,3,1.914,12.778,61.302
+Robot-velocity ablation,horizontal_rmse_m,61,58,3,0.099,3.087,14.973
+Robot-velocity ablation,up_rmse_m,61,58,3,0.049,1.428,3.924
+Robot-velocity ablation,yaw_rmse_deg,61,58,3,1.887,2.170,11.690
+Robot-prior ablation,horizontal_rmse_m,61,58,3,0.100,3.084,15.773
+Robot-prior ablation,up_rmse_m,61,58,3,0.049,1.399,4.017
+Robot-prior ablation,yaw_rmse_deg,61,58,3,1.914,7.334,35.720
+Backbone with Doppler aid,horizontal_rmse_m,61,58,3,0.100,3.054,15.769
+Backbone with Doppler aid,up_rmse_m,61,58,3,0.050,1.388,4.167
+Backbone with Doppler aid,yaw_rmse_deg,61,58,3,1.915,18.644,147.908
+Backbone with source-aware weighting,horizontal_rmse_m,61,58,3,0.100,3.086,15.917
+Backbone with source-aware weighting,up_rmse_m,61,58,3,0.048,1.355,4.004
+Backbone with source-aware weighting,yaw_rmse_deg,61,58,3,1.914,7.284,44.481
+GNSS/INS baseline,horizontal_rmse_m,61,59,2,0.092,3.031,16.083
+GNSS/INS baseline,up_rmse_m,61,59,2,0.048,1.292,4.121
+GNSS/INS baseline,yaw_rmse_deg,61,59,2,8.090,22.466,134.068
+Basic dual-heading GNSS/INS,horizontal_rmse_m,61,56,5,0.102,2.535,15.880
+Basic dual-heading GNSS/INS,up_rmse_m,61,56,5,0.048,1.057,2.521
+Basic dual-heading GNSS/INS,yaw_rmse_deg,61,56,5,2.232,2.664,152.335
+Gated-heading backbone,horizontal_rmse_m,61,58,3,0.100,3.053,15.916
+Gated-heading backbone,up_rmse_m,61,58,3,0.048,1.342,4.130
+Gated-heading backbone,yaw_rmse_deg,61,58,3,1.916,15.996,52.938
+LegSA-GINS,horizontal_rmse_m,61,58,3,0.098,3.071,14.896
+LegSA-GINS,up_rmse_m,61,58,3,0.049,1.428,3.924
+LegSA-GINS,yaw_rmse_deg,61,58,3,1.886,2.126,10.347

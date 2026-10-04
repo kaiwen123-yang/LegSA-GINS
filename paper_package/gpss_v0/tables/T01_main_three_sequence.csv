@@ -1,4 +1,4 @@
-Sequence,Window (s),Duration (s),Epochs (F04),Reference distance (m),Mean speed (m/s),Yaw-rate RMS (deg/s),Character
+Sequence,Window (s),Duration (s),Epochs (LegSA-GINS),Reference distance (m),Mean speed (m/s),Yaw-rate RMS (deg/s),Character
 BY2,"[66, 340]",274,56642,328.471,1.190,18.000,Primary calibration sequence
 BY2H,"[413, 683]",270,58580,325.514,1.200,17.500,Transfer sequence; contract start
 BY2O,"[3186, 3563]",377,76548,337.422,0.890,15.400,Antenna degradation and stationary interval

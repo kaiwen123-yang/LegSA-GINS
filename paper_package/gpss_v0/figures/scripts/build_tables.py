@@ -1,7 +1,9 @@
 """Select and format authorized publication sources; never re-evaluate a run."""
 from common import *
+from display_evidence import publication_budget_rows
 import re, yaml, collections
 MAP=[]
+COMPRESSED_TABLE_IDS={'T03_fault_families':'S16a','T04_nominal_navigation':'3;S11a','T05_by2o_segments':'4','T05b_heading_segments':'S16b','T06_ladder_results':'S11b','T07_external_methods':'S13a','T08_external_faults':'S13b'}
 def fmt(v):
     try:
         if str(v).strip() in ('','nan'):return 'Not reported'
@@ -9,6 +11,7 @@ def fmt(v):
         return f'{n:.3f}' if '.' in str(v) or 'e' in str(v).lower() else str(v)
     except (ValueError,TypeError):return str(v)
 def table(id,name,rows,sources,derivation):
+    id=COMPRESSED_TABLE_IDS.get(name,id)
     path='tables/'+name+'.csv';writecsv(P/path,[{k:fmt(v) for k,v in r.items()} for r in rows]);MAP.append(dict(manuscript_table=id,output_csv=path,source_files=';'.join(str(s) for s in sources),derivation=derivation))
 main=readcsv(V/'07_AGGREGATE/MAIN_TABLE_V3.csv')
 ladder=['F01','F02','F03','A04','F04'];seqs=['BY2','BY2H','BY2O']
@@ -29,8 +32,8 @@ methods=record(W/'configs/paper_rebuild/methods.yaml');md=yaml.safe_load(methods
 # Explicit configuration definitions from methods.yaml and canonical ablation map.
 rows=[]
 for m,vel,gate,rd,sa,rp,hv in [('F01',1,0,0,0,0,0),('F02',0,0,0,0,0,0),('F03',1,1,0,0,0,0),('A04',1,1,1,0,1,1),('F04',1,1,1,1,1,1)]:
- rows.append({'Method':m,'GNSS position':'On','Receiver velocity':'On' if vel else 'Off','Heading':'Off' if m=='F01' else 'On','Residual gate':'On' if gate else 'Off','Raw Doppler':'On' if rd else 'Off','Source-aware':'On' if sa else 'Off','Roll/pitch':'On' if rp else 'Off','Horizontal velocity':'On' if hv else 'Off'})
-table('2','T02_configuration_ladder',rows,[methods,W/'configs/paper_rebuild/canonical_by2_internal_ablation_modes.yaml'],'Translate enabled switches; F03=AB0000 and F04=AB1111; F02 lacks receiver velocity; source-aware is the A04-to-F04 difference.')
+ rows.append({'Method':m,'GNSS position':'On','Receiver velocity':'On' if vel else 'Off','Shared dual-yaw initialization':'On','Online heading':'Off' if m=='F01' else 'On','Residual gate':'On' if gate else 'Off','Raw Doppler':'On' if rd else 'Off','Source-aware':'On' if sa else 'Off','Roll/pitch':'On' if rp else 'Off','Horizontal velocity':'On' if hv else 'Off'})
+table('2','T02_configuration_ladder',rows,[methods,W/'configs/paper_rebuild/canonical_by2_internal_ablation_modes.yaml',W/'configs/paper_rebuild/final_v23_parity_contract.yaml'],'Translate online switches separately from shared dual-yaw initialization; F03=AB0000 and F04=AB1111; F02 lacks receiver velocity; source-aware is the A04-to-F04 difference.')
 faultp=record(W/'configs/paper_rebuild/degradation_60types_9seeds.yaml');fault=yaml.safe_load(faultp.read_text());groups=collections.defaultdict(list)
 for r in fault['degradation_types']:groups[r['family']].append(r)
 table('3','T03_fault_families',[{'Family':f.replace('_',' '),'Types':', '.join(r['id'] for r in rr),'Injected channels':', '.join(sorted(set(x for r in rr for x in r['affected_sources']))),'Cases per method':len(rr)*fault['matrix']['seeds_per_type']} for f,rr in groups.items()],[faultp],'Group registered type definitions by family; count types times seeds_per_type; no result aggregation.')
@@ -62,9 +65,17 @@ table('S6','S06_heading_weight',[{'Variant':names[v],**{s:next(r['yaw_rmse_deg']
 sub=readcsv(V/'07_AGGREGATE/SUBSET61_SUMMARY_V3.csv');table('S8','S08_subset61',[{k:r[k] for k in ['method_id','metric','registered_count','finite_count','algorithm_failure_count','median','p95','maximum']} for r in sub if r['metric'] in ['yaw_rmse_deg','horizontal_rmse_m','up_rmse_m']],[V/'07_AGGREGATE/SUBSET61_SUMMARY_V3.csv'],'Select yaw/horizontal/up summary rows; no subset-selection explanation.')
 for id,name,src,filterfn in [('S9a','S09_uncertainty_budget','UNC_BUDGET.csv',lambda r:r['row'] in ['1','2','3','4','5','6','9','10']),('S9b','S09b_paired_intervals','UNC_DISTINGUISHABILITY.csv',lambda r:True),('S9c','S09c_window_intervals','UNC_REALIZATION_INTERVALS.csv',lambda r:True)]:
  rr=readcsv(U/src);rr=[r for r in rr if filterfn(r)]
- if id=='S9a':rr=[{k:v for k,v in r.items() if k!='evidence'} for r in rr]
+ if id=='S9a':rr=publication_budget_rows(rr)
  table(id,name,rr,[U/src],'Select requested rows; retain original interval direction and denominators; numerical display rounding only.')
 table('S2','S02_fault_types',[{'Type':r['id'],'Family':r['family'].replace('_',' '),'Definition':r['name'].replace('_',' '),'Parameters':json.dumps(r['parameters'],ensure_ascii=False),'Seeds':'00–08; anchors in S2b'} for r in fault['degradation_types']],[faultp],'Direct YAML definitions, including source-specific fault parameters.')
 table('S2b','S02b_seed_anchors',[{k:r[k] for k in ['seed_index','seed_value','anchor_name','anchor_time_s']} for r in fault['seeds']],[faultp],'Direct seed and anchor definitions; no reference-driven selection.')
+
+# Publication-only summaries produced by independent read-only audits; original science inputs stay unchanged.
+repair=Path('/mnt/g/LegSA-GINS-project/修复_20261004')
+cadence=readcsv(repair/'DELIVERED_IMU_CADENCE_AUDIT.csv')
+table('S17','S17_delivered_imu_cadence',[{'Sequence':r['sequence'],'Formal output records':r['formal_output_records'],'Median output interval':r['median_output_dt_s']+' s','Mean records per second':r['mean_output_rate_hz'],'Intervals over 0.1 s':r['long_dt_over_0_1_s']} for r in cadence],[repair/'DELIVERED_IMU_CADENCE_AUDIT.json',repair/'DELIVERED_IMU_CADENCE_AUDIT.csv'],'Read-only timestamp summaries; exact intervals are kept in the external receipt; no estimator/evaluator used and no physical internal rate inferred.')
+hv=readcsv(repair/'HISTORICAL_HV_LEAVE_ONE_OUT_SUMMARY.csv')
+table('S18','S18_historical_hv_leave_one_out',[{'Family':'A1' if r['type']=='D61' else 'A2','Duration (s)':r['duration_s'],'Finite/registered pairs':r['finite_pairs']+'/'+r['registered_pairs'],'Mean delta H (m)':r['mean_delta'],'Median delta H (m)':r['median_delta'],'Negative/positive/zero':r['negative_pairs']+'/'+r['positive_pairs']+'/'+r['zero_pairs']} for r in hv if r['metric']=='horizontal_rmse_m'],[repair/'HISTORICAL_HV_LEAVE_ONE_OUT_REVIEW.json',repair/'HISTORICAL_HV_LEAVE_ONE_OUT_SUMMARY.csv'],'Existing historical scalar RMSE pairs F04-A06, arithmetic only; identity gates and exact values in external receipt; no native replay/bootstrap or independent-reference claim.')
+
 writecsv(P/'TABLE_MAP.csv',MAP)
 print('Tables',len(MAP))

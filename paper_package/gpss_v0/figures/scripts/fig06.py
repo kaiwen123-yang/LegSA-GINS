@@ -12,8 +12,8 @@ for ax,typ,letter in zip(axs,['D61','D62'],'ab'):
     duration=re.search(r'(10|20|30)',x['case_id'][3:])
    assert duration,x['case_id']
    xs.append(int(duration.group(1))+(j-1)*1.25);ys.append(float(x['horizontal_rmse_m']))
-  ax.scatter(xs,ys,s=15,marker=['o','^','D'][j],facecolors='none' if j<2 else COLORS[m],edgecolors=COLORS[m],label=m,alpha=.85)
+  ax.scatter(xs,ys,s=15,marker=['o','^','D'][j],facecolors='none' if j<2 else COLORS[m],edgecolors=COLORS[m],label=legend_name(m),alpha=.85)
  ax.set(xlabel='Injected interruption (s)',ylabel='Horizontal RMSE (m)',yscale='log');ax.set_xticks([10,20,30] if typ=='D61' else [10,20]);panel(ax,letter)
  ax.text(.5,1.05,'A1: all GNSS off' if typ=='D61' else 'A2: heading retained',ha='center',transform=ax.transAxes,fontsize=8)
-fig.legend(*axs[0].get_legend_handles_labels(),loc='upper center',ncol=3,frameon=False)
+fig.legend(*axs[0].get_legend_handles_labels(),loc='upper center',ncol=3,frameon=False,fontsize=7)
 finish(fig,'Fig06')

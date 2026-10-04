@@ -1,6 +1,7 @@
 """Render source-bound number tokens and selected tables into the manuscript."""
 from common import *
 import re
+from method_names import reader_text
 from decimal import Decimal
 SPECS={};LEDGER=[]
 UA_CSV_TOKENS={
@@ -24,7 +25,10 @@ def claim_id(key=None):
     if fixed:
         assert all(row['claim_id']!=fixed for row in LEDGER),fixed
         return fixed
-    return f"N{1+sum(row['claim_id'] not in DISPLAY_APPENDED_IDS for row in LEDGER):05d}"
+    used={row["claim_id"] for row in LEDGER}
+    candidate=1
+    while f"N{candidate:05d}" in used or f"N{candidate:05d}" in DISPLAY_APPENDED_IDS: candidate+=1
+    return f"N{candidate:05d}"
 def ua_csvspec(key):
     filename,where,column,digits,_=UA_CSV_TOKENS[key]
     p=U/filename
@@ -32,7 +36,7 @@ def ua_csvspec(key):
     assert len(found)==1,(key,len(found))
     source_value=found[0][column]
     SPECS[key]={'path':p.relative_to(W).as_posix(),'locator':{'where':where,'column':column,'display_digits':digits},'mode':'CSV','value':float(source_value),'source_value':source_value,'digits':digits}
-DOCS={'budget':U/'UNC01_UNCERTAINTY_BUDGET.md','dist':U/'UNC02_DISTINGUISHABILITY.md','unc3':U/'UNC03_MANUSCRIPT_TEXT.md','replacement':W/'docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md','setup':W/'docs/paper_rebuild/CLEAN5_STAGE2_CLOSEOUT.md','hx':H/'HX05_CLOSEOUT.md','geometry':W/'docs/paper_rebuild/hext/HX05_PREREG.md','method':W/'docs/paper_rebuild/PROTOCOL_V2_METHOD_STATEMENT.md','contract':W/'configs/paper_rebuild/final_v23_parity_contract.yaml','options':W/'cpp/legsa_v23_port_core/include/legsa_v23_port_core/options.hpp'}
+DOCS={'budget':U/'UNC01_UNCERTAINTY_BUDGET.md','dist':U/'UNC02_DISTINGUISHABILITY.md','unc3':P/'uncertainty_display_source.md','replacement':W/'docs/paper_rebuild/v3/V3_01R_MANUSCRIPT_REPLACEMENT.md','setup':W/'docs/paper_rebuild/CLEAN5_STAGE2_CLOSEOUT.md','hx':H/'HX05_CLOSEOUT.md','geometry':W/'docs/paper_rebuild/hext/HX05_PREREG.md','method':W/'docs/paper_rebuild/PROTOCOL_V2_METHOD_STATEMENT.md','contract':W/'configs/paper_rebuild/final_v23_parity_contract.yaml','options':W/'cpp/legsa_v23_port_core/include/legsa_v23_port_core/options.hpp'}
 def csvspec(key,p,where,col,digits=3,regex=None):
     loc={'where':where,'column':col,'display_digits':digits}
     if regex:loc['regex']=regex
@@ -81,6 +85,12 @@ def emit(key,section,quoted=None):
         _,s,pair,metric,c,d=key.split('|');csvspec(key,U/'UNC_DISTINGUISHABILITY.csv',{'sequence':s,'segment':'full','pair_A_minus_B':pair,'metric':metric},c,int(d))
     if key.startswith('C|'):
         _,m,metric,c,d=key.split('|');csvspec(key,V/'07_AGGREGATE/CORE_541_SUMMARY_V3.csv',{'method_id':m,'metric':metric},c,int(d))
+    if key.startswith('NAT|'):
+        _,seq,method,column=key.split('|');csvspec(key,P/'evidence/natural33.csv',{'sequence_id':seq,'method_id':method},column,0 if column.endswith('epochs') or column=='gap_restart_count' else 3)
+    if key.startswith('CLM|'):
+        _,family,duration,ablation,domain,metric,column,digits=key.split('|');csvspec(key,P/'evidence/claim_placement280.csv',{'family':family,'duration_s':duration,'ablation_method':ablation,'domain':domain,'metric':metric},column,int(digits))
+    if key.startswith('FGO|'):
+        _,seq,method,column=key.split('|');csvspec(key,P/'evidence/fgo_metrics.csv',{'sequence_id':seq,'method_id':method,'support':'OWN_VALID'},column,0 if column.endswith('count') else 3)
     if key.startswith('UA|'):ua_csvspec(key)
     sp=SPECS[key];value=Decimal(sp['source_value']) if 'source_value' in sp else sp['value'];display=f"{value:.{sp['digits']}f}"
     cid=claim_id(key)
@@ -94,6 +104,9 @@ def emit(key,section,quoted=None):
     if key in ['UA|f04_f03_yaw_pairs','UA|paired_fault_registered']:unit='cases'
     if key in ['UA|f04_yaw_median_ci_low','UA|f04_yaw_median_ci_high']:unit='deg'
     if key.startswith('G|') or key in ['D|contract|0.03','D|contract|-0.30']:unit='m'
+    if key.startswith('NAT|'):unit='deg' if 'yaw_' in key else 'epochs' if key.endswith('epochs') else 'restarts' if 'gap_restart_count' in key else 'm'
+    if key.startswith('CLM|'):unit='cases' if '|worsened|' in key or '|improved|' in key else 'deg' if '|yaw|' in key else 'm'
+    if key.startswith('FGO|'):unit='epochs' if key.endswith('count') else 'deg' if 'yaw_' in key else 'm'
     if 'availability' in key:unit='fraction'
     if 'drift_pct' in key:unit='%'
     if key=='D|contract|90':unit='deg'
@@ -108,14 +121,14 @@ def emit(key,section,quoted=None):
     LEDGER.append(dict(claim_id=cid,section=section,quoted_text=quoted or display,value=display,unit=unit,source_path=path,source_locator=json.dumps(sp['locator']),derivation='direct',check_mode=sp['mode']))
     return display
 def table_md(name):
-    rows=list(csv.DictReader((P/'tables'/f'{name}.csv').open()));cols=list(rows[0]);esc=lambda x:str(x).replace('|','\\|').replace('\n',' ')
+    rows=list(csv.DictReader((P/'tables'/f'{name}.csv').open()));cols=[c for c in rows[0] if c not in ['source_id','source_path','run_id','sha256']];esc=lambda x:str(x).replace('|','\\|').replace('\n',' ')
     return '| '+' | '.join(cols)+' |\n| '+' | '.join('---' for _ in cols)+' |\n'+'\n'.join('| '+' | '.join(esc(r[c]) for c in cols)+' |' for r in rows)
 def required_unc(section):
     text=record(DOCS['unc3']).read_text();blocks=re.split(r'\n## ',text);block=next(x for x in blocks if x.startswith(section+'.'))
     # Original English paragraphs end before any following explanatory subheading.
     lines=block.splitlines()[1:];paras=[]
     for l in lines:
-        if l.startswith(('**Measurement uncertainty.**','Three limitations concern','Values are exact')):paras.append(l)
+        if l.startswith(('**Measurement uncertainty.**','Three limitations concern','Values are')):paras.append(l)
     assert paras,section
     display='\n\n'.join(paras)
     for original,replacement in UNC_DISPLAY_REPLACEMENTS.items():display=display.replace(original,replacement)
@@ -131,12 +144,13 @@ def render(text,doc):
             for match in re.finditer(r'(?<![\w.])\d+(?:\.\d+)?(?![\w.])',original):
                 docspec(alias,match.group());emit('D|'+alias+'|'+match.group(),section,original)
                 suffix=original[match.end():];u=re.match(r'[\s,\]\[−–+\d.]*(°|%|m|s|Hz)(?![A-Za-z])',suffix)
-                if original.startswith(('Values are exact','Values are the retained statistics')) and match.group()!='95':LEDGER[-1]['unit']='deg' if match.start()<original.index('for heading') else 'm'
+                if original.startswith('Values are') and match.group()!='95':LEDGER[-1]['unit']='deg' if match.start()<original.index('for heading') else 'm'
                 if match.group()=='2' and 'Vision-RTK 2' in original:LEDGER[-1]['unit']='model identifier'
                 if u:LEDGER[-1]['unit']={'°':'deg'}.get(u.group(1),u.group(1))
-            lines.append(original);continue
+            lines.append(reader_text(original));continue
         start=len(LEDGER)
         line=re.sub(r'\[\[([^\]]+)\]\]',lambda m:emit(m.group(1),section,line),line)
+        line=reader_text(line)
         for entry in LEDGER[start:]:entry['quoted_text']=line
         lines.append(line)
     return '\n'.join(lines)+'\n'

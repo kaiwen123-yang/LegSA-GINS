@@ -6,7 +6,7 @@ These are unresolved author–year citations for the manuscript. The bibliograph
 
 Requested topic: Teunissen GNSS compass integer least squares.
 
-Locations: MANUSCRIPT_GPSS_v0.md:29 — 2.1 Dual-antenna heading.
+Locations: MANUSCRIPT_GPSS_v0.md:25 — 2.1 Dual-antenna heading.
 
 Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:174` (verbatim):
 
@@ -18,7 +18,7 @@ Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:174` (verbati
 
 Requested topic: Liu constrained wrapped least squares.
 
-Locations: MANUSCRIPT_GPSS_v0.md:29 — 2.1 Dual-antenna heading.
+Locations: MANUSCRIPT_GPSS_v0.md:25 — 2.1 Dual-antenna heading.
 
 Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:193` (verbatim):
 
@@ -30,7 +30,7 @@ Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:193` (verbati
 
 Requested topic: Yang baseline-length-constrained ambiguity resolution.
 
-Locations: MANUSCRIPT_GPSS_v0.md:29 — 2.1 Dual-antenna heading.
+Locations: MANUSCRIPT_GPSS_v0.md:25 — 2.1 Dual-antenna heading.
 
 Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:212` (verbatim):
 
@@ -42,7 +42,7 @@ Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:212` (verbati
 
 Requested topic: Wu constrained ambiguity and misalignment compensation.
 
-Locations: MANUSCRIPT_GPSS_v0.md:29 — 2.1 Dual-antenna heading.
+Locations: MANUSCRIPT_GPSS_v0.md:25 — 2.1 Dual-antenna heading.
 
 Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:231` (verbatim):
 
@@ -54,7 +54,7 @@ Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:231` (verbati
 
 Requested topic: two-receiver invariant GNSS/INS filter and its experimental noise parameters.
 
-Locations: MANUSCRIPT_GPSS_v0.md:37 — 2.2 GNSS/INS on ground and legged robots; MANUSCRIPT_GPSS_v0.md:252 — 5.4 External methods and comparable outputs.
+Locations: MANUSCRIPT_GPSS_v0.md:31 — 2.2 GNSS/INS on ground and legged robots.
 
 Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:288` (verbatim):
 
@@ -66,15 +66,15 @@ Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:288` (verbati
 
 Requested topic: KF-GINS mechanization and error-state model.
 
-Locations: MANUSCRIPT_GPSS_v0.md:35 — 2.2 GNSS/INS on ground and legged robots.
+Locations: MANUSCRIPT_GPSS_v0.md:29 — 2.2 GNSS/INS on ground and legged robots.
 
-[NEED: authors to supply a primary reference with authors, year, title, venue, and DOI for this topic; no matching complete bibliographic entry was identified in the designated inventory.]
+Primary bibliographic record independently identified on 2026-10-04: Niu X, Wang L, Chen Q, Tang H, Zhang Q, Zhang T (2025) KF-GINS: an open-sourced software for GNSS/INS integrated navigation. GPS Solutions 29:202. https://doi.org/10.1007/s10291-025-01967-w. The publisher and official i2Nav-WHU/KF-GINS repository agree on the authors/title/DOI and loosely coupled error-state implementation role. Publisher metadata also flags a correction, https://doi.org/10.1007/s10291-025-01993-8 (published 2025-12-05, volume 30:33, 2026); its full correction content was not accessible. This closes the absent R06 identity, while final author–year insertion and correction-content review remain necessary. This task read publisher metadata/abstract and official repository documentation, not the complete subscription article.
 
 ## R07
 
 Requested topic: Chen Chang Chen GINav.
 
-Locations: MANUSCRIPT_GPSS_v0.md:35 — 2.2 GNSS/INS on ground and legged robots.
+Locations: MANUSCRIPT_GPSS_v0.md:29 — 2.2 GNSS/INS on ground and legged robots.
 
 Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:402` (verbatim):
 
@@ -86,7 +86,7 @@ Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:402` (verbati
 
 Requested topic: Hartley contact-aided invariant EKF.
 
-Locations: MANUSCRIPT_GPSS_v0.md:41 — 2.3 Proprioceptive legged state estimation.
+Locations: MANUSCRIPT_GPSS_v0.md:35 — 2.3 Proprioceptive legged state estimation.
 
 Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:592` (verbatim):
 
@@ -98,7 +98,7 @@ Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:592` (verbati
 
 Requested topic: RTKLIB moving-base implementation and solution states.
 
-Locations: MANUSCRIPT_GPSS_v0.md:31 — 2.1 Dual-antenna heading.
+Locations: Not cited in the compressed main draft; retained as a historical bibliography request for the software comparison in the supplement.
 
 Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:250` (verbatim):
 
@@ -110,23 +110,23 @@ Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:250` (verbati
 
 Requested topic: absolute heading and observability in low-cost ground-robot GNSS/INS.
 
-Locations: MANUSCRIPT_GPSS_v0.md:11 — 1 Introduction.
+Locations: MANUSCRIPT_GPSS_v0.md:13 — 1 Introduction.
 
-[NEED: authors to supply a primary reference with authors, year, title, venue, and DOI for this topic; no matching complete bibliographic entry was identified in the designated inventory.]
+Primary identity checked 2026-10-04: Teunissen PJG (2010) Integer least-squares theory for the GNSS compass. Journal of Geodesy 84:433–447. https://doi.org/10.1007/s00190-010-0380-8. Publisher abstract supports unaided single-epoch attitude; it does not justify every low-cost INS observability claim.
 
 ## R11
 
 Requested topic: innovation-based fault detection and exclusion.
 
-Locations: MANUSCRIPT_GPSS_v0.md:47 — 2.4 Quality-aware weighting and residual checks.
+Locations: MANUSCRIPT_GPSS_v0.md:39 — 2.4 Quality-aware weighting and residual checks.
 
-[NEED: authors to supply a primary reference with authors, year, title, venue, and DOI for this topic; no matching complete bibliographic entry was identified in the designated inventory.]
+Primary identities checked 2026-10-04: Wang S, Zhan X, Zhai Y, Liu B (2020) Fault Detection and Exclusion for Tightly Coupled GNSS/INS System Considering Fault in State Prediction. Sensors 20:590. https://doi.org/10.3390/s20030590; open full text https://pmc.ncbi.nlm.nih.gov/articles/PMC7036913/. Zaminpardaz S, Teunissen PJG (2019) DIA-datasnooping and identifiability. Journal of Geodesy 93:85–101. https://doi.org/10.1007/s00190-018-1141-3. Supports prediction/measurement mixture and detect-versus-identify boundary. Publisher abstracts and selected fault-model sections were checked, not whole-paper reproduction.
 
 ## R12
 
 Requested topic: Yin adaptive covariance monitoring and isolation.
 
-Locations: MANUSCRIPT_GPSS_v0.md:47 — 2.4 Quality-aware weighting and residual checks.
+Locations: MANUSCRIPT_GPSS_v0.md:39 — 2.4 Quality-aware weighting and residual checks.
 
 Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:421` (verbatim):
 
@@ -135,3 +135,18 @@ Existing inventory entry, `docs/paper_rebuild/hext/HX_INVENTORY.md:421` (verbati
 ```
 
 The RTKLIB entry identifies software rather than a paper. Retain a software citation or request the authors’ preferred primary publication. For the Hartley entry, distinguish the journal treatment and earlier conference paper. The Wu comparison concerns the recorded heading module and does not claim implementation of the complete published architecture.
+
+
+## R13
+
+Requested topic: Fixposition Vision-RTK 2 architecture, conditional specifications, and recorded fusion-status interpretation.
+
+Locations: MANUSCRIPT_GPSS_v0.md:59 — 3.2 Observation streams and reference.
+
+Primary supplied source: Fixposition AG (2024), Quick Start Guide, Vision-RTK 2, version 2024.05. Supplied PDF: C:/Users/ykw/Desktop/快速开启保姆级教程.pdf; SHA256 8b337d994a6523c6258727f08755a12e9b1db1b3054575d537afdeec74fba415. The tutorial is a product guide, not the experimental device configuration.
+
+Current primary documentation (accessed 2026-10-04): https://docs.fixposition.com/fd/fp_a-odomstatus and https://docs.fixposition.com/fd/generating-a-log-of-the-vision-rtk-2. Camera use is supported by each experiment's recorded status, not inferred from the guide. Publisher text should be cited in final author–year/web-source form; do not present manufacturer specifications as calibrated reference confidence bounds.
+
+## Corrected FGO references and experiment binding
+
+Corrected selected paper branches and the nine accepted runs are bound in manuscript Section 6.6 and Supplement S22, with exact source identity in evidence/RESULT_IDENTITY_MAP.json and STEP1_FGO_FINAL_IMPLEMENTATION_AND_REPRODUCTION.md. Author-program/full-original-experiment equivalence remains unestablished. Exact paper citation strings must be finalized from the primary contracts; no new author, date or title is invented here.

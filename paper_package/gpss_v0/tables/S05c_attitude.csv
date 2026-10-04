@@ -1,10 +1,10 @@
 Sequence,Method,yaw_rmse_deg,roll_rmse_deg,pitch_rmse_deg
-BY2,F04,1.886,2.254,2.265
-BY2H,F04,1.934,1.966,1.698
-BY2O,F04,2.434,1.507,1.695
-BY2,LC01,2.995,1.210,1.568
-BY2,LC01-S,1.539,4.243,2.990
-BY2H,LC01,2.209,1.168,1.825
-BY2H,LC01-S,1.943,4.365,2.725
-BY2O,LC01,2.454,1.365,1.464
-BY2O,LC01-S,4.016,4.074,3.301
+BY2,LegSA-GINS,1.886,2.254,2.265
+BY2H,LegSA-GINS,1.934,1.966,1.698
+BY2O,LegSA-GINS,2.434,1.507,1.695
+BY2,Two-receiver IEKF,2.995,1.210,1.568
+BY2,Two-receiver IEKF with project-calibrated IMU,1.539,4.243,2.990
+BY2H,Two-receiver IEKF,2.209,1.168,1.825
+BY2H,Two-receiver IEKF with project-calibrated IMU,1.943,4.365,2.725
+BY2O,Two-receiver IEKF,2.454,1.365,1.464
+BY2O,Two-receiver IEKF with project-calibrated IMU,4.016,4.074,3.301

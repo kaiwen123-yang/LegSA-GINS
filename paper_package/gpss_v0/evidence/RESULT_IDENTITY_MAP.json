@@ -1,0 +1,92 @@
+{
+  "created_utc": "2026-10-04T08:29:56.213625+00:00",
+  "copies": [
+    {
+      "copy": "natural33.csv",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_NATURAL_FINAL/CORRECTED_RESULTS.csv",
+      "sha256": "3a2ace239d757daed6d196b8dbce44a74b7e228f819e0a73bbbded9dea61f6fc",
+      "bytes": 8047
+    },
+    {
+      "copy": "claim135.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/FULL_135_RESULTS.csv",
+      "sha256": "ce9b02c5fe7d2451eb60c23e61f9f4d752c428ff806933704f8e02bf649565ed",
+      "bytes": 71584
+    },
+    {
+      "copy": "claim_pairs2520.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/PAIRED_ALL_90_CASES_DOMAINS.csv",
+      "sha256": "4a1aab0babf454e29be65cd8e10928798c1bc2c8b3ddb62f90c5ac70111faf20",
+      "bytes": 556341
+    },
+    {
+      "copy": "claim_placement280.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/PLACEMENT_BLOCK_SUMMARY.csv",
+      "sha256": "e2097761bd1e04fc38ca5ea3902975195c789f8766acda3afb926be01d18d2ad",
+      "bytes": 39229
+    },
+    {
+      "copy": "fault_accepted_source_counts.csv",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_ACCEPTED_FAULT_SOURCE_COUNTS.csv",
+      "sha256": "e37c71de3a49380c773cb395804232e120543bcc6832a9b9402d6a59f4014e2d",
+      "bytes": 34935
+    },
+    {
+      "copy": "fgo_metrics.csv",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_FINAL/METRICS.csv",
+      "sha256": "ca94b8f945e7b2d5cde1725b480e7991a4286f98c7239b41ddc20d7dd8aa3357",
+      "bytes": 23899
+    },
+    {
+      "copy": "ext_comparison.csv",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/COMPARISON_TABLE.csv",
+      "sha256": "3eb691decd6a7f76920fc9b2a6806396b265e727d2646247680e06f63b88722b",
+      "bytes": 60941
+    },
+    {
+      "copy": "natural_receipt.json",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_NATURAL_FINAL/PUBLICATION_RECEIPT.json",
+      "sha256": "f12eebe54f1e29b5e70b37eece3f1e93d47e08d4d625130bb7e2909138f012b8",
+      "bytes": 2180
+    },
+    {
+      "copy": "claim_final_receipt.json",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_FINAL_DELIVERY_RECEIPT.json",
+      "sha256": "9120b27ef47cf5a97fceba439287eca8c78774062024c21ea10957d10f8b5669",
+      "bytes": 8302
+    },
+    {
+      "copy": "fgo_final_receipt.json",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_FINAL_COMPLETE_RECEIPT.json",
+      "sha256": "722c9399928747e54f9ec8be51f5f3ecf24ab12f8dce62ab31131c20c3f7663b",
+      "bytes": 5560
+    },
+    {
+      "copy": "ext_final_receipt.json",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/FINAL_EXECUTION_RECEIPT.json",
+      "sha256": "e61c93d2db61f470b26a75dccf8503113ca37204a49d2ef44b0722c1ac9a431f",
+      "bytes": 7613
+    },
+    {
+      "copy": "ext_heading_post_result_repair.json",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_REPAIR_RECEIPT.json",
+      "sha256": "cc7c70dccfbd454ada1d51efec26b9630613c6a470da0cc093a30002cafe27d3",
+      "bytes": 54230,
+      "identity_scope": "Post-result heading-domain source repair; old accepted executions not rebound"
+    },
+    {
+      "copy": "ext_heading_post_result_peer.json",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_INDEPENDENT_PEER_REVIEW.json",
+      "sha256": "4a945f84e699385ab0353de819e22089cb90ac3ca38b051348089e3efe5e51b6",
+      "bytes": 4107,
+      "identity_scope": "Post-result heading-domain source repair; old accepted executions not rebound"
+    }
+  ],
+  "historical_V3_scientific_freeze": "ca73cb1fb48a020fd2a450d79e520562c34eeb24",
+  "natural33_binary": "c53784f418b7bafa3441a0a707bc579ede45c3751e2910efd2ab7615a224eb2f",
+  "claim135_binary": "7ca1568ea75f11dad63aec5f16966c28f3ce6596207eb234c1b0f878b95fbe42",
+  "FGO_source22_aggregate": "1ae538d65e116028f90d80f0a721619b23ff514f0c11159a908cf303b6e009bd",
+  "EXT_execution": "EXT_REPRO_V2_TECH_RETRY_2",
+  "no_science_invoked": true,
+  "EXT_post_result_repair_execution_scope": "No rerun of old nine EXT or 135 claim runs; pure saved-vector conversion and bounded regression evidence only"
+}

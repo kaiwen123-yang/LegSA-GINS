@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "checks": [
+    {
+      "table": "S01_configuration.csv",
+      "numeric_cells": 19,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S02_fault_types.csv",
+      "numeric_cells": 0,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S02b_seed_anchors.csv",
+      "numeric_cells": 18,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S03_full_ablation.csv",
+      "numeric_cells": 198,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S04_failures.csv",
+      "numeric_cells": 396,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S05_external_supplement.csv",
+      "numeric_cells": 0,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S05b_D43.csv",
+      "numeric_cells": 90,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S05c_attitude.csv",
+      "numeric_cells": 27,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S06_heading_weight.csv",
+      "numeric_cells": 9,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S07_heading_source.csv",
+      "numeric_cells": 18,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S08_subset61.csv",
+      "numeric_cells": 198,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S09_uncertainty_budget.csv",
+      "numeric_cells": 8,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S09b_paired_intervals.csv",
+      "numeric_cells": 560,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S09c_window_intervals.csv",
+      "numeric_cells": 1221,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S10_audit_note.csv",
+      "numeric_cells": 0,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S17_delivered_imu_cadence.csv",
+      "numeric_cells": 9,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S18_historical_hv_leave_one_out.csv",
+      "numeric_cells": 15,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S20_corrected_natural33.csv",
+      "numeric_cells": 231,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S21_corrected_fault_blocks.csv",
+      "numeric_cells": 100,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S22_fgo_own_support.csv",
+      "numeric_cells": 44,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "S23_ext_native_support.csv",
+      "numeric_cells": 27,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "T01_main_three_sequence.csv",
+      "numeric_cells": 15,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "T02_configuration_ladder.csv",
+      "numeric_cells": 0,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "T03_fault_families.csv",
+      "numeric_cells": 8,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "T04_nominal_navigation.csv",
+      "numeric_cells": 84,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "T05_by2o_segments.csv",
+      "numeric_cells": 60,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "T05b_heading_segments.csv",
+      "numeric_cells": 74,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "T06_ladder_results.csv",
+      "numeric_cells": 60,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "T07_external_methods.csv",
+      "numeric_cells": 0,
+      "numeric_string_and_row_order_unchanged": true
+    },
+    {
+      "table": "T08_external_faults.csv",
+      "numeric_cells": 0,
+      "numeric_string_and_row_order_unchanged": true
+    }
+  ],
+  "all_checks_passed": true,
+  "source_number_tokens_unchanged": true,
+  "scope": "Pure numeric table strings and row order; source number-token identities; scientific saved result files are not rewritten"
+}

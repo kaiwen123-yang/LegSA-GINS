@@ -6,7 +6,7 @@ for ax,key,label,letter in zip(axs,['yaw_rmse_deg','horizontal_rmse_m'],['Yaw RM
  for m in ['F02','F03','A04','F04']:
   rr=sorted([x for x in r if x['method_id']==m and x['metric']==key],key=lambda x:float(x['ordered_rank']))
   sr=next(x for x in summ if x['method_id']==m and x['metric']==key)
-  ax.step([float(x['value']) for x in rr],[float(x['ecdf']) for x in rr],where='post',color=COLORS[m],ls=STYLES[m],label=f"{m}: n={sr['finite_count']}, failures={sr['algorithm_failure_count']}",lw=1)
+  ax.step([float(x['value']) for x in rr],[float(x['ecdf']) for x in rr],where='post',color=COLORS[m],ls=STYLES[m],label=f"{legend_name(m)}: n={sr['finite_count']}, failures={sr['algorithm_failure_count']}",lw=1)
  ax.set(xlabel=label,ylabel='ECDF (fraction)',xscale='log',ylim=(0,1.02));panel(ax,letter)
 fig.legend(*axs[0].get_legend_handles_labels(),loc='upper center',ncol=2,frameon=False,fontsize=7)
 finish(fig,'Fig05')

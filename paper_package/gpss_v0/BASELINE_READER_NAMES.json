@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "supplements": "METHOD_IDENTITY.json; no change to sealed first-block receipt",
+  "purpose": "Publication names only. Scientific IDs and result keys remain unchanged.",
+  "internal_aliases": {
+    "EXT05A": "LC01",
+    "EXT05A_PAVLASEK_TWO_RECEIVER_IEKF": "LC01",
+    "LC01_EXT05A": "LC01"
+  },
+  "internal_display_names": {
+    "F04": "LegSA-GINS",
+    "A01": "LegSA-GINS",
+    "F01": "GNSS/INS baseline",
+    "F02": "Basic dual-heading GNSS/INS",
+    "F03": "Gated-heading backbone",
+    "A02": "Gated-heading backbone",
+    "A03": "Doppler-aid ablation",
+    "A04": "Unweighted LegSA-GINS",
+    "A05": "Tilt-prior ablation",
+    "A06": "Robot-velocity ablation",
+    "A07": "Robot-prior ablation",
+    "A08": "Backbone with Doppler aid",
+    "A09": "Backbone with source-aware weighting"
+  },
+  "baseline_mapping": [
+    {
+      "internal_code": "LC01",
+      "reader_name": "Two-position-receiver invariant EKF",
+      "display_name": "Two-receiver IEKF",
+      "legend_name": "Two-receiver IEKF",
+      "boundary": "Pavlasek et al. (2021); retained literature configuration, not an alias of another independent baseline"
+    },
+    {
+      "internal_code": "LC01-S",
+      "reader_name": "Two-receiver invariant EKF with project-calibrated IMU model",
+      "display_name": "Two-receiver IEKF with project-calibrated IMU",
+      "legend_name": "IEKF, calibrated IMU",
+      "boundary": "Project IMU calibration settings, not the original literature noise"
+    },
+    {
+      "internal_code": "EXT05C",
+      "reader_name": "Single-receiver-update diagnostic variant of the two-receiver IEKF",
+      "display_name": "Single-receiver-update IEKF diagnostic",
+      "legend_name": "Single-receiver updates",
+      "boundary": "Dual-receiver yaw initialization; thereafter GNSS1 position and IMU only"
+    },
+    {
+      "internal_code": "EXT05C-S",
+      "reader_name": "Single-receiver-update IEKF diagnostic with project-calibrated IMU model",
+      "display_name": "Single-receiver-update IEKF diagnostic with project-calibrated IMU",
+      "legend_name": "Single updates, calibrated IMU",
+      "boundary": "Same diagnostic variant and shared dual-receiver initialization"
+    },
+    {
+      "internal_code": "LC01-BR",
+      "reader_name": "Heading-preserved modified two-receiver IEKF",
+      "display_name": "Heading-preserved IEKF diagnostic",
+      "legend_name": "Heading-preserved IEKF",
+      "boundary": "Project modification, not the original author method"
+    },
+    {
+      "internal_code": "EXT01",
+      "reader_name": "GNSS compass constrained integer least-squares branch",
+      "display_name": "GNSS-compass branch",
+      "legend_name": "GNSS compass",
+      "boundary": "Selected adapted paper branch, not complete author-system reproduction"
+    },
+    {
+      "internal_code": "EXT02",
+      "reader_name": "Constrained wrapped least-squares heading branch",
+      "display_name": "Wrapped-LS branch",
+      "legend_name": "Wrapped LS",
+      "boundary": "Selected adapted paper branch"
+    },
+    {
+      "internal_code": "EXT03",
+      "reader_name": "Baseline-length-constrained heading filter branch",
+      "display_name": "Baseline-constrained filter",
+      "legend_name": "Baseline filter",
+      "boundary": "Selected adapted paper branch"
+    },
+    {
+      "internal_code": "EXT04_FAR",
+      "reader_name": "Wu heading module with full ambiguity resolution",
+      "display_name": "Wu full-ambiguity heading module",
+      "legend_name": "Wu full AR",
+      "boundary": "Heading module, not complete paper GNSS/INS architecture"
+    },
+    {
+      "internal_code": "EXT04_PAR",
+      "reader_name": "Wu heading module with partial ambiguity resolution",
+      "display_name": "Wu partial-ambiguity heading module",
+      "legend_name": "Wu partial AR",
+      "boundary": "Heading module, not complete paper GNSS/INS architecture"
+    },
+    {
+      "internal_code": "EXT04",
+      "reader_name": "Wu heading module",
+      "display_name": "Wu heading module",
+      "legend_name": "Wu heading",
+      "boundary": "Module only"
+    },
+    {
+      "internal_code": "RTKLIB_UNMODIFIED_MOVING_BASE",
+      "reader_name": "RTKLIB moving-base configuration",
+      "display_name": "RTKLIB moving-base",
+      "legend_name": "RTKLIB",
+      "boundary": "Unmodified moving-base implementation/configuration identity retained"
+    },
+    {
+      "internal_code": "HARTLEY_OFFICIAL",
+      "reader_name": "Contact-aided invariant EKF author library",
+      "display_name": "Contact-aided IEKF author library",
+      "legend_name": "Contact IEKF (author)",
+      "boundary": "Adapted high-level foot positions and force-derived contacts, not complete original joint-kinematic inputs"
+    },
+    {
+      "internal_code": "Hartley-S",
+      "reader_name": "In-house contact IEKF port with project-calibrated IMU model",
+      "display_name": "Contact IEKF port, project-calibrated IMU",
+      "legend_name": "Port, calibrated IMU",
+      "boundary": "In-house port failed accuracy validation; not an author-library alias"
+    },
+    {
+      "internal_code": "Hartley-LIT",
+      "reader_name": "In-house contact IEKF port with literature parameters",
+      "display_name": "Contact IEKF port, literature parameters",
+      "legend_name": "Port, literature",
+      "boundary": "In-house port failed accuracy validation"
+    },
+    {
+      "internal_code": "LC02_GINAV",
+      "reader_name": "GINav GNSS/INS implementation",
+      "display_name": "GINav GNSS/INS",
+      "legend_name": "GINav",
+      "boundary": "Recorded failure/support retained"
+    },
+    {
+      "internal_code": "LEG-DR",
+      "reader_name": "Robot-motion dead reckoning with SDK attitude",
+      "display_name": "Robot-motion dead reckoning",
+      "legend_name": "SDK dead reckoning",
+      "boundary": "Robot-reported motion and onboard attitude; not independent reconstructed leg kinematics"
+    },
+    {
+      "internal_code": "OISAM",
+      "reader_name": "OiSAM selected adapted branch",
+      "display_name": "OiSAM",
+      "legend_name": "OiSAM",
+      "boundary": "Strict continuous branch; original full experimental campaign not reproduced"
+    },
+    {
+      "internal_code": "WEN_TC",
+      "reader_name": "Wen tightly coupled FGO selected adapted branch",
+      "display_name": "Wen tightly coupled FGO",
+      "legend_name": "Wen TC FGO",
+      "boundary": "Robot AHRS relation adapted, not original AHRS instrument"
+    },
+    {
+      "internal_code": "GNC",
+      "reader_name": "GNC GNSS positioning selected branch",
+      "display_name": "GNC",
+      "legend_name": "GNC",
+      "boundary": "Selected squared-weight objective and Algorithm 1 branch"
+    }
+  ]
+}

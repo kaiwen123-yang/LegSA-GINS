@@ -1,0 +1,37 @@
+Internal selector,Paper name,Short displayed name,Role/boundary
+F04,LegSA-GINS,LegSA-GINS,AB1111
+A01,LegSA-GINS,LegSA-GINS,AB1111 alias of F04
+F01,GNSS/INS baseline,GNSS/INS baseline,No subsequent dual-heading; shared dual-yaw initialization retained
+F02,Basic dual-heading GNSS/INS,Basic dual-heading GNSS/INS,No receiver-velocity update; basic online heading
+F03,Gated-heading backbone,Gated-heading backbone,AB0000
+A02,Gated-heading backbone,Gated-heading backbone,AB0000 alias of F03
+A03,LegSA-GINS without Doppler-derived velocity aiding,Doppler-aid ablation,AB0111
+A04,LegSA-GINS without source-aware weighting,Unweighted LegSA-GINS,AB1011
+A05,LegSA-GINS without robot tilt prior,Tilt-prior ablation,AB1101
+A06,LegSA-GINS without robot-reported horizontal velocity aiding,Robot-velocity ablation,AB1110
+A07,LegSA-GINS without robot priors,Robot-prior ablation,AB1100
+A08,Gated-heading backbone with Doppler,Backbone with Doppler aid,AB1000
+A09,Gated-heading backbone with source-aware weighting,Backbone with source-aware weighting,AB0100
+LC01,Two-position-receiver invariant EKF,Two-receiver IEKF,"Pavlasek et al. (2021); retained literature configuration, not an alias of another independent baseline"
+LC01-S,Two-receiver invariant EKF with project-calibrated IMU model,Two-receiver IEKF with project-calibrated IMU,"Project IMU calibration settings, not the original literature noise"
+EXT05C,Single-receiver-update diagnostic variant of the two-receiver IEKF,Single-receiver-update IEKF diagnostic,Dual-receiver yaw initialization; thereafter GNSS1 position and IMU only
+EXT05C-S,Single-receiver-update IEKF diagnostic with project-calibrated IMU model,Single-receiver-update IEKF diagnostic with project-calibrated IMU,Same diagnostic variant and shared dual-receiver initialization
+LC01-BR,Heading-preserved modified two-receiver IEKF,Heading-preserved IEKF diagnostic,"Project modification, not the original author method"
+EXT01,GNSS compass constrained integer least-squares branch,GNSS-compass branch,"Selected adapted paper branch, not complete author-system reproduction"
+EXT02,Constrained wrapped least-squares heading branch,Wrapped-LS branch,Selected adapted paper branch
+EXT03,Baseline-length-constrained heading filter branch,Baseline-constrained filter,Selected adapted paper branch
+EXT04_FAR,Wu heading module with full ambiguity resolution,Wu full-ambiguity heading module,"Heading module, not complete paper GNSS/INS architecture"
+EXT04_PAR,Wu heading module with partial ambiguity resolution,Wu partial-ambiguity heading module,"Heading module, not complete paper GNSS/INS architecture"
+EXT04,Wu heading module,Wu heading module,Module only
+RTKLIB_UNMODIFIED_MOVING_BASE,RTKLIB moving-base configuration,RTKLIB moving-base,Unmodified moving-base implementation/configuration identity retained
+HARTLEY_OFFICIAL,Contact-aided invariant EKF author library,Contact-aided IEKF author library,"Adapted high-level foot positions and force-derived contacts, not complete original joint-kinematic inputs"
+Hartley-S,In-house contact IEKF port with project-calibrated IMU model,"Contact IEKF port, project-calibrated IMU",In-house port failed accuracy validation; not an author-library alias
+Hartley-LIT,In-house contact IEKF port with literature parameters,"Contact IEKF port, literature parameters",In-house port failed accuracy validation
+LC02_GINAV,GINav GNSS/INS implementation,GINav GNSS/INS,Recorded failure/support retained
+LEG-DR,Robot-motion dead reckoning with SDK attitude,Robot-motion dead reckoning,Robot-reported motion and onboard attitude; not independent reconstructed leg kinematics
+OISAM,OiSAM selected adapted branch,OiSAM,Strict continuous branch; original full experimental campaign not reproduced
+WEN_TC,Wen tightly coupled FGO selected adapted branch,Wen tightly coupled FGO,"Robot AHRS relation adapted, not original AHRS instrument"
+GNC,GNC GNSS positioning selected branch,GNC,Selected squared-weight objective and Algorithm 1 branch
+EXT05A,Two-receiver IEKF,Two-receiver IEKF,Alias of LC01; not an additional algorithm
+EXT05A_PAVLASEK_TWO_RECEIVER_IEKF,Two-receiver IEKF,Two-receiver IEKF,Alias of LC01; not an additional algorithm
+LC01_EXT05A,Two-receiver IEKF,Two-receiver IEKF,Alias of LC01; not an additional algorithm

@@ -2,6 +2,7 @@
 import os
 os.environ.update(OMP_NUM_THREADS='1', MKL_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1', MPLCONFIGDIR=str(__import__('pathlib').Path(__file__).resolve().parents[1] / '_build'), PYTHONDONTWRITEBYTECODE='1')
 import sys, csv, json, hashlib, importlib.util
+from method_names import table_rows,legend_name
 from pathlib import Path
 W = Path(__file__).resolve().parents[4]
 P = W / 'paper_package/gpss_v0'
@@ -23,6 +24,8 @@ def readcsv(p):
     return list(csv.DictReader(record(p).open()))
 def writecsv(p, rows, fields=None):
     p=Path(p);p.parent.mkdir(parents=True,exist_ok=True)
+    if p.parent==P/'tables' and p.name!='S24_reproduction_name_map.csv':
+        rows=table_rows(rows);fields=list(rows[0])
     with p.open('w',newline='') as f:
         w=csv.DictWriter(f,fieldnames=fields or list(rows[0]),lineterminator='\n');w.writeheader();w.writerows(rows)
 def module(name):
@@ -40,6 +43,7 @@ def finish(fig, num, status='REDRAWN', panel='all'):
     qa=module('qa');checks=qa.check_figure(fig,num)
     for ext in ['png','pdf','svg']:
         fig.savefig(P/'figures'/f'{num}.{ext}',dpi=max(600,4097/fig.get_figwidth()))
+    svg=P/'figures'/f'{num}.svg';svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines())+'\n')
     checks+=qa.check_png(P/'figures'/f'{num}.png',num)
     for c in checks:c['pass']=bool(c['pass'])
     (P/'figures'/f'{num}_QA.json').write_text(json.dumps(checks,indent=2)+'\n')

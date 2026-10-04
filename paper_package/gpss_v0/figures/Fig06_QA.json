@@ -33,12 +33,12 @@
     "figure_id": "Fig06",
     "check": "png_not_blank",
     "pass": true,
-    "detail": "std=30.3"
+    "detail": "std=31.6"
   },
   {
     "figure_id": "Fig06",
     "check": "png_file_size",
     "pass": true,
-    "detail": "255771 bytes"
+    "detail": "275264 bytes"
   }
 ]

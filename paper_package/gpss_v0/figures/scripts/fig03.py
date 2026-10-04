@@ -6,7 +6,7 @@ for col,s in enumerate(['BY2','BY2H','BY2O']):
   d=error_data(s,m)
   for row,key in enumerate(['yaw_err_deg','horizontal_err_m']):
    # Display every retained error sample; no metric calculation or filtering.
-   axs[row,col].plot(d.time,d[key],color=COLORS[m],ls=STYLES[m],lw=.55,label=m,alpha=.8)
+   axs[row,col].plot(d.time,d[key],color=COLORS[m],ls=STYLES[m],lw=.55,label=legend_name(m),alpha=.8)
  for row in range(2):
   ax=axs[row,col];panel(ax,chr(97+row*3+col));ax.set_xlabel('Time (s)');ax.set_ylabel('Yaw error (°)' if row==0 else 'Horizontal error (m)')
   if s=='BY2O':

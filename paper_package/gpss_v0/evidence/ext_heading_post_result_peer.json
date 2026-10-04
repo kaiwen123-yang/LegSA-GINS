@@ -1,0 +1,77 @@
+{
+  "schema": "ext_post_result_independent_peer_closure.v1",
+  "captured_utc": "2026-10-04T08:28:43.976493+00:00",
+  "all_checks_passed": true,
+  "blocking_findings": [],
+  "independent_boundary_tests": 19,
+  "author_bounded_tests_receipt_only": 75,
+  "saved_records": 15669,
+  "valid_records": 9100,
+  "invalid_without_published_baseline": 6569,
+  "additional_saved_internal_attitudes": 1786,
+  "guard_trigger_count": 0,
+  "max_elementary_angle_difference_deg": 5.684341886080802e-14,
+  "claim_old_saved_source928_hash_exact": true,
+  "current_new_source_pins": {
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "d28604a587655623537bdf9125afc24a929388b218696829fe42c9ffd2192ede",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "4d4ef06794fe9d0f51417de2162b21bead31f171908619ae0cb8acbeb465d3a4",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "1a2e6e5876b80ece568e18733809a7786cea32387c233c83b14df97988200095"
+  },
+  "old_executed_source_pins": {
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0"
+  },
+  "old9_and135_execution_pins_not_rebound": true,
+  "solver_evaluator_calls": 0,
+  "raw_reference_reads": 0,
+  "source_or_old_result_edits": false,
+  "final_root_writer_executed_by_reviewer": false,
+  "files": {
+    "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_REPAIR_RECEIPT.json": {
+      "bytes": 54230,
+      "sha256": "cc7c70dccfbd454ada1d51efec26b9630613c6a470da0cc093a30002cafe27d3"
+    },
+    "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_INDEPENDENT_PEER_REVIEW.md": {
+      "bytes": 3490,
+      "sha256": "bb43937461e309c9c36e0bf7ce163b1d46f09d801cf9b1ba46b7e6b5b8f2b1df"
+    },
+    "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_INDEPENDENT_PEER_READ_COVERAGE.csv": {
+      "bytes": 1376,
+      "sha256": "a6e96d94bad84d93549c3ba1bdfb6f0a085b708f699e042440d40ed704182754"
+    },
+    "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_INDEPENDENT_SAVED_OUTPUT_REVIEW.json": {
+      "bytes": 32109,
+      "sha256": "fe66b1291d79aef667e3ab3defcbdf5c531de586b45a58a2dde56a03fc07f02f"
+    },
+    "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_INDEPENDENT_INTERNAL_REVIEW.json": {
+      "bytes": 449790,
+      "sha256": "1a1aff66ff24ce3f1ab814c925362a2d0607a86429f6eb89dc65209b7e01efd0"
+    },
+    "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_GUARD_INDEPENDENT_PEER.xml": {
+      "bytes": 3345,
+      "sha256": "fdf627534e35ccc349594b77a0a0fe67b58087a39cda5b88a6f4b7a8ec1020cc"
+    },
+    "/mnt/g/LegSA-GINS-project/修复_20261004/review_ext_heading_post_result_independent.py": {
+      "bytes": 5697,
+      "sha256": "0012f6af11df5cc9268a76986e64df1c5abb5c69c73a626a57cc5c2548b9bde7"
+    },
+    "/mnt/g/LegSA-GINS-project/修复_20261004/review_ext_heading_saved_internal_attitudes.py": {
+      "bytes": 4346,
+      "sha256": "13f9ebb737a59fbdff34b4307b4670d142f77bcd52b7fa8a806bb238eff92bd9"
+    },
+    "/mnt/g/LegSA-GINS-project/修复_20261004/audit_ext_heading_post_result_payloads.py": {
+      "bytes": 8752,
+      "sha256": "068780951e5580df836a2858060cf9244c4c14a51db43a75ac603c2886c673cc"
+    },
+    "/mnt/g/LegSA-GINS-project/修复_20261004/finalize_root_delivery.py": {
+      "bytes": 15856,
+      "sha256": "f3558afd1ee0c5a5046ce6c6f52fdf08096a9489b7ed94d48e3bd059b147b999"
+    }
+  },
+  "limits": [
+    "Numerical support gate only; practical heading threshold not independently calibrated.",
+    "Only published saved valid/internal vectors were numerically audited; no counterfactual failed solver internals inferred.",
+    "Snapshot928 is hash identity, not manual semantic/executed coverage."
+  ]
+}

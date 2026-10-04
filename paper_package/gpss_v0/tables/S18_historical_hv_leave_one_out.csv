@@ -1,0 +1,6 @@
+Family,Duration (s),Finite/registered pairs,Mean delta H (m),Median delta H (m),Negative/positive/zero
+A1,10,9/9,-0.001,-0.000,5/4/0
+A1,20,9/9,-0.010,-0.004,6/3/0
+A1,30,9/9,-0.020,-0.038,5/4/0
+A2,10,9/9,-1.416,-1.479,9/0/0
+A2,20,9/9,-7.966,-7.750,9/0/0
