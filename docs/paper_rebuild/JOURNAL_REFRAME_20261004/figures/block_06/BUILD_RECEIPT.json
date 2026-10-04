@@ -1,0 +1,286 @@
+{
+  "scope": "Presentation-only existing CSV redraw",
+  "no_solver_calls": true,
+  "no_evaluator_calls": true,
+  "raw_reference_payload_opens": 0,
+  "script_sha256": "9d2f76c762426346cb0ee7aa6ad076967956bd28bcdae7c30125bdb4a9346e9b",
+  "utilities_sha256": "e28173802e004aac9c5421b4e5439ae7e277f80e35ca16f2ed8b447673dd9371",
+  "inputs": [
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/FINAL_EXECUTION_RECEIPT.json",
+      "file_sha256": "e61c93d2db61f470b26a75dccf8503113ca37204a49d2ef44b0722c1ac9a431f",
+      "bytes": 7613,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2/ERROR_SERIES.csv",
+      "file_sha256": "f395e583eb537e1f4a632f790aa8a37caeb2fc6cd512009c9972cf47c4702671",
+      "decompressed_sha256": "f395e583eb537e1f4a632f790aa8a37caeb2fc6cd512009c9972cf47c4702671",
+      "bytes": 1090739,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_all_methods_all_window_epochs.csv.gz",
+        "sha256": "c53ba8e30d8db5492038c80bbe9d15de580d10b43627433bba369cf1d0c27c0e",
+        "plain_sha256": "f395e583eb537e1f4a632f790aa8a37caeb2fc6cd512009c9972cf47c4702671",
+        "rows": 4110,
+        "columns": [
+          "epoch_index",
+          "time_unix_s",
+          "t_rel_s",
+          "valid",
+          "reference_supported",
+          "error_valid_deg",
+          "hold_available",
+          "hold_source_epoch_index",
+          "error_hold_deg",
+          "method_id",
+          "time_key_us",
+          "native_body_yaw_deg",
+          "solution_state",
+          "failure_code",
+          "held_body_yaw_deg",
+          "hold_source_time_unix_s",
+          "held_age_s",
+          "reference_yaw_ned_deg",
+          "source_heading_epoch_index",
+          "error_ratio_fixed_deg",
+          "baseline_n_m",
+          "baseline_e_m",
+          "baseline_d_m",
+          "baseline_length_m",
+          "float_solved",
+          "search_attempted",
+          "search_complete",
+          "candidate_returned",
+          "acceptance_test_defined",
+          "ratio_fixed"
+        ]
+      }
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2/HEADING_METRICS.json",
+      "file_sha256": "c07ed12157f6fe5756567e48c5503d896da41a89084ff515389dedf653f40ffe",
+      "bytes": 11516,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2H/ERROR_SERIES.csv",
+      "file_sha256": "25e6db05fb2e4020cb97d7b20feef07111cff0d553626d8458a00d24fab4229f",
+      "decompressed_sha256": "25e6db05fb2e4020cb97d7b20feef07111cff0d553626d8458a00d24fab4229f",
+      "bytes": 1081412,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_all_methods_all_window_epochs.csv.gz",
+        "sha256": "1e1ecd1ae6c71dfeb4cab2339a40d0ce81dded2c82904406df300e00747a7de6",
+        "plain_sha256": "25e6db05fb2e4020cb97d7b20feef07111cff0d553626d8458a00d24fab4229f",
+        "rows": 4050,
+        "columns": [
+          "epoch_index",
+          "time_unix_s",
+          "t_rel_s",
+          "valid",
+          "reference_supported",
+          "error_valid_deg",
+          "hold_available",
+          "hold_source_epoch_index",
+          "error_hold_deg",
+          "method_id",
+          "time_key_us",
+          "native_body_yaw_deg",
+          "solution_state",
+          "failure_code",
+          "held_body_yaw_deg",
+          "hold_source_time_unix_s",
+          "held_age_s",
+          "reference_yaw_ned_deg",
+          "source_heading_epoch_index",
+          "error_ratio_fixed_deg",
+          "baseline_n_m",
+          "baseline_e_m",
+          "baseline_d_m",
+          "baseline_length_m",
+          "float_solved",
+          "search_attempted",
+          "search_complete",
+          "candidate_returned",
+          "acceptance_test_defined",
+          "ratio_fixed"
+        ]
+      }
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2H/HEADING_METRICS.json",
+      "file_sha256": "47461f7f226b9914649f7bd07db64535803469c00ac85065020264989d946876",
+      "bytes": 11460,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2O/ERROR_SERIES.csv",
+      "file_sha256": "9d9916bf1dfef567e407ac0ed69b209493d2cea2b81c3755d7e02909a2048e06",
+      "decompressed_sha256": "9d9916bf1dfef567e407ac0ed69b209493d2cea2b81c3755d7e02909a2048e06",
+      "bytes": 1436408,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2O_all_methods_all_window_epochs.csv.gz",
+        "sha256": "feb10fb7efb6ac0bd70551b649ee9d6ce2bd98ebdeb3c71e1f18b5a413c97211",
+        "plain_sha256": "9d9916bf1dfef567e407ac0ed69b209493d2cea2b81c3755d7e02909a2048e06",
+        "rows": 5655,
+        "columns": [
+          "epoch_index",
+          "time_unix_s",
+          "t_rel_s",
+          "valid",
+          "reference_supported",
+          "error_valid_deg",
+          "hold_available",
+          "hold_source_epoch_index",
+          "error_hold_deg",
+          "method_id",
+          "time_key_us",
+          "native_body_yaw_deg",
+          "solution_state",
+          "failure_code",
+          "held_body_yaw_deg",
+          "hold_source_time_unix_s",
+          "held_age_s",
+          "reference_yaw_ned_deg",
+          "source_heading_epoch_index",
+          "error_ratio_fixed_deg",
+          "baseline_n_m",
+          "baseline_e_m",
+          "baseline_d_m",
+          "baseline_length_m",
+          "float_solved",
+          "search_attempted",
+          "search_complete",
+          "candidate_returned",
+          "acceptance_test_defined",
+          "ratio_fixed"
+        ]
+      }
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2O/HEADING_METRICS.json",
+      "file_sha256": "6e8af78135cb0d768fe3b67972b856e24517c25a0010842ee38dd0aabedf5de3",
+      "bytes": 11497,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/nine_EXT_V2_saved_metrics.csv.gz",
+        "sha256": "96a9b62aea9966ec56bb31dc87b021b856385935865c304d20a0c1b283846d32",
+        "plain_sha256": "4d3f904d7f801fdc1e5bff2e72d26738fa6580636ca12c8fb0fe28ba4dd9b370",
+        "rows": 9,
+        "columns": [
+          "sequence",
+          "method",
+          "label",
+          "native_valid",
+          "denominator",
+          "rmse_deg",
+          "run_id"
+        ]
+      }
+    }
+  ],
+  "figures": [
+    {
+      "id": "R13_BY2_raw_heading_error_support",
+      "dominant_claim": "Large errors and missing native outputs persist in the accepted raw-observation implementations.",
+      "caption": "All native-valid saved heading errors and all original paired-epoch support, not held values. Three V2 methods retain their exact historical source snapshots.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R13_BY2_raw_heading_error_support.png",
+          "sha256": "db656c00e297e539256a0dced45fec88501ea2581301b7e94356917d14d1ea21",
+          "bytes": 888048
+        },
+        {
+          "path": "R13_BY2_raw_heading_error_support.pdf",
+          "sha256": "1252a1bbb0cfdfd2075a641305d1def3c641a32f622995df314ac3d95fd7f378",
+          "bytes": 138995
+        },
+        {
+          "path": "R13_BY2_raw_heading_error_support.svg",
+          "sha256": "9a269e5d772ee66d8040f7c14695910d56351bedc61700b30df99070ce397ba7",
+          "bytes": 703605
+        }
+      ],
+      "all_invalid_rows_retained": true,
+      "no_wrap_jump_connections": true
+    },
+    {
+      "id": "R13_BY2H_raw_heading_error_support",
+      "dominant_claim": "Large errors and missing native outputs persist in the accepted raw-observation implementations.",
+      "caption": "All native-valid saved heading errors and all original paired-epoch support, not held values. Three V2 methods retain their exact historical source snapshots.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R13_BY2H_raw_heading_error_support.png",
+          "sha256": "1e140303530dc73c4535f27ee81b3c27c2bd94ab262e4a98c432dea4e869e538",
+          "bytes": 956556
+        },
+        {
+          "path": "R13_BY2H_raw_heading_error_support.pdf",
+          "sha256": "8e916ee8c977c0fbb2e7347fb66a7f8eb7367ebde1e21ec65a9b48ac0d322a91",
+          "bytes": 154150
+        },
+        {
+          "path": "R13_BY2H_raw_heading_error_support.svg",
+          "sha256": "49f9e17b026a1514d62fc6522ec4f9b1a9e9f5ff1e072d0fb68fcc95c5b8080f",
+          "bytes": 734762
+        }
+      ],
+      "all_invalid_rows_retained": true,
+      "no_wrap_jump_connections": true
+    },
+    {
+      "id": "R13_BY2O_raw_heading_error_support",
+      "dominant_claim": "Large errors and missing native outputs persist in the accepted raw-observation implementations.",
+      "caption": "All native-valid saved heading errors and all original paired-epoch support, not held values. Three V2 methods retain their exact historical source snapshots.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R13_BY2O_raw_heading_error_support.png",
+          "sha256": "c3133414f402c6543a14390664f797cf5aad9821d08a8393e2732cef796258f4",
+          "bytes": 811686
+        },
+        {
+          "path": "R13_BY2O_raw_heading_error_support.pdf",
+          "sha256": "b36339f6d3ded23e26bb936b19009a971fdaad0475c5f142901371f513ef874a",
+          "bytes": 152280
+        },
+        {
+          "path": "R13_BY2O_raw_heading_error_support.svg",
+          "sha256": "95874b82b6e569058cfa6380b57348a65800a13aba560cce2c7805a725436e15",
+          "bytes": 756545
+        }
+      ],
+      "all_invalid_rows_retained": true,
+      "no_wrap_jump_connections": true
+    },
+    {
+      "id": "R14_raw_heading_all_nine_accuracy_coverage",
+      "dominant_claim": "Accuracy must be read alongside available-output coverage.",
+      "caption": "Nine saved own-support RMSEs and native-valid original paired denominators; no new science calls or metric recalculation.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R14_raw_heading_all_nine_accuracy_coverage.png",
+          "sha256": "9bac8ed5b635694bdf627bbea9073aa9b2cdc9823ffcd5cc12cc0db7ab54c4a9",
+          "bytes": 401451
+        },
+        {
+          "path": "R14_raw_heading_all_nine_accuracy_coverage.pdf",
+          "sha256": "e1225d1e153d4eea9dc7b88e02a717e625ac3229d34270eb42d2037242b3f576",
+          "bytes": 26338
+        },
+        {
+          "path": "R14_raw_heading_all_nine_accuracy_coverage.svg",
+          "sha256": "dae4173d077701397c15653189b20fe36e7d896a262a5e5996b4c779afc51b3a",
+          "bytes": 27631
+        }
+      ]
+    }
+  ],
+  "accepted_native_identity": "RAW_REPRO_V2_TECH_RETRY_2",
+  "no_latest_source_rebinding": true
+}
