@@ -1,0 +1,124 @@
+{
+  "status": "READY",
+  "time_utc": "2026-10-04T13:26:19.008781+00:00",
+  "actual_visual_review": "4 final PNGs individually opened; PDF/SVG not separately rendered",
+  "build_receipt_sha256": "23686458f9fa2d92c6a8ecc2d2dc4469a85d8f6c269f2a73f96d120498d7c235",
+  "no_solver_or_evaluator": true,
+  "files": [
+    {
+      "path": "BUILD_RECEIPT.json",
+      "sha256": "23686458f9fa2d92c6a8ecc2d2dc4469a85d8f6c269f2a73f96d120498d7c235",
+      "bytes": 12300
+    },
+    {
+      "path": "R01_BY2H_full_window.pdf",
+      "sha256": "69a7de3987e8d30b5408ebd77c13e29908073fa24f1d46be79e5b1ec8f9b2f26",
+      "bytes": 2232025
+    },
+    {
+      "path": "R01_BY2H_full_window.png",
+      "sha256": "1927a28921d4c97d69e75bff22eb9cf2183ea41c3405f6d056251c067eb7be94",
+      "bytes": 1024860
+    },
+    {
+      "path": "R01_BY2H_full_window.svg",
+      "sha256": "a1cb54d3c8bf628e3d7b5660a02d7ab21fa1286cc174f9ff322bcd30e74ab4f9",
+      "bytes": 5881375
+    },
+    {
+      "path": "R01_BY2O_full_window.pdf",
+      "sha256": "39a8d0d5e2d60ba51eb7f28db05f609971a79a895652de9056bf03f0b3773a9b",
+      "bytes": 2818500
+    },
+    {
+      "path": "R01_BY2O_full_window.png",
+      "sha256": "9cffb06d500cb97a9e7cf469697835f2c11ee339221ba353f3b711e27addf2c0",
+      "bytes": 732161
+    },
+    {
+      "path": "R01_BY2O_full_window.svg",
+      "sha256": "fe474f96361e921c02e883c8b1fd9ae1e314003a761bdb11932cfdb676696743",
+      "bytes": 7685978
+    },
+    {
+      "path": "R01_BY2_full_window.pdf",
+      "sha256": "a30a6bb60b7aeeaf88fdeccd2eb623af1a0166d9758da063437b290ef98d2ac6",
+      "bytes": 2129357
+    },
+    {
+      "path": "R01_BY2_full_window.png",
+      "sha256": "5ad284933006cf3c0e6a3e9124d7b45eaaef8711cdd988496934af7277948bb4",
+      "bytes": 885789
+    },
+    {
+      "path": "R01_BY2_full_window.svg",
+      "sha256": "be00dc5721613484f139013916d1db1c5410a05509d4711f5da6863c5a61da3d",
+      "bytes": 5687921
+    },
+    {
+      "path": "R02_natural_all_11_configurations.pdf",
+      "sha256": "d9e7a0ec6f9411b7dfdfc9d79a87b07c3a0ec6f88098ba97da632a4e3367d9f4",
+      "bytes": 26697
+    },
+    {
+      "path": "R02_natural_all_11_configurations.png",
+      "sha256": "4f63aec5040da5f101056d7feea49342fe80bf9cfe2c1693f970face1ca9cae4",
+      "bytes": 363193
+    },
+    {
+      "path": "R02_natural_all_11_configurations.svg",
+      "sha256": "4d18f824531512154167baea4e53296ca2815ca4604fd5641a943b141e6aac22",
+      "bytes": 30048
+    },
+    {
+      "path": "README.md",
+      "sha256": "01f57bb22f03f23bd5b6cbc565cb7879c0d849925bd97d81050bb2c68d5b3ec7",
+      "bytes": 3081
+    },
+    {
+      "path": "build_core_figures.py",
+      "sha256": "c4d2093734e153ce595ecb144d50a09d756ec7f2deb88ac38f1e34ab224848cd",
+      "bytes": 10825
+    },
+    {
+      "path": "data/BY2H_F04_errors.csv.gz",
+      "sha256": "d9f61f31ce6743b25aace4899b2d4140c53e0950a837ce8bf192eb11612f312a",
+      "bytes": 2369132
+    },
+    {
+      "path": "data/BY2H_LC01_errors.csv.gz",
+      "sha256": "4cba57ea3a83a9816e0ce6f3f0c17dfe5d9e79a10dfcfaaf7854b08cad86acdf",
+      "bytes": 2642261
+    },
+    {
+      "path": "data/BY2O_F04_errors.csv.gz",
+      "sha256": "f2a4e1d6513a84b31becf20eae7c561b68871270d8931fe5669bfc11344c7e86",
+      "bytes": 3074763
+    },
+    {
+      "path": "data/BY2O_LC01_errors.csv.gz",
+      "sha256": "be0e623d6c4a4c25d05f4287d7d475d23101dad4c36ecae7070cb75620f742e8",
+      "bytes": 3423645
+    },
+    {
+      "path": "data/BY2_F04_errors.csv.gz",
+      "sha256": "67ead67d927a5aad81382628bda5fa6afbecff573dbc9451f409f8cc6a5cfb70",
+      "bytes": 2289029
+    },
+    {
+      "path": "data/BY2_LC01_errors.csv.gz",
+      "sha256": "a35640eb3b1bad8507204409ab6b236c826f7fc1d38c18ddcb1948d9cbb9f15e",
+      "bytes": 2571200
+    },
+    {
+      "path": "data/curve_support.csv",
+      "sha256": "107ca2c65bab88c0f0612cbae8fe27efe481abfd6091493be4e89078d95022c2",
+      "bytes": 605
+    },
+    {
+      "path": "data/natural_all_33.csv",
+      "sha256": "45967269a6f25b9b7747fd3519fce067edadccf71e577fb9ac3417ddda816253",
+      "bytes": 3298
+    }
+  ]
+}
