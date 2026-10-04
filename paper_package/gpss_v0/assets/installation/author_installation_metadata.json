@@ -1,0 +1,25 @@
+{
+  "format": "JPEG",
+  "width_px": 1706,
+  "height_px": 1279,
+  "mode": "RGB",
+  "exif": {},
+  "schema": "author_installation_photo.v1",
+  "original_filename": "3ea6720b5e477e28ce8bec9d475423f5.jpg",
+  "source_path": "/mnt/c/Users/ykw/Desktop/3ea6720b5e477e28ce8bec9d475423f5.jpg",
+  "copied_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/assets/installation/author_installation_original.jpg",
+  "bytes": 309781,
+  "sha256": "a5aac11a5cde1e99bd31d0342b5e3351d428e92ae5f74ef5547f9a35508cb64b",
+  "source_mtime_utc": "2026-06-06T17:53:13.771133+00:00",
+  "source_mtime_is_acquisition_date": false,
+  "pixel_edits": false,
+  "copy_authorization": "User supplied this installation photograph and explicitly authorized repository preservation and commit/push through root.",
+  "visual_review": "Viewed actual image: quadruped body with top-mounted sensor/support assembly and visible cables in an outdoor scene.",
+  "not_established": [
+    "GNSS1/2 antenna identities or serial numbers",
+    "precise baseline/lever dimensions or measured mounting rotation",
+    "electrical connection and hardware firmware",
+    "acquisition date and membership in BY2/BY2H/BY2O sessions",
+    "reference physical output point or clock relation"
+  ]
+}
