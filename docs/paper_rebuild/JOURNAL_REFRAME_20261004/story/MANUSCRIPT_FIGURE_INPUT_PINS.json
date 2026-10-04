@@ -1,0 +1,115 @@
+{
+  "identity_only_not_human_full_read": true,
+  "files": [
+    {
+      "path": "docs/paper_rebuild/EXT_MEASURAND_20261004/README.md",
+      "bytes": 2908,
+      "sha256": "acb0f7b8b736187d0ae4e5844616fabb8535ede03cbc6064b9d33c0112be7716"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/venue/PRIMARY_LITERATURE_AND_CLAIM_MAP.csv",
+      "bytes": 7069,
+      "sha256": "43146b5f06ad2c7df701b82d312ee1038c78d2802f4374dfa4664ac794d5b375"
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md",
+      "bytes": 20649,
+      "sha256": "191a3d7f3ed7c496c488743051817588ab2580f5c17832ddcbb31e466e55e048"
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/03_SELECTION_HISTORY_AND_FULL_MATRIX_RESULTS.md",
+      "bytes": 15130,
+      "sha256": "8cd003b3ed87cebb9a3658c1c14525922527555655ac7f8c928406feaa759d12"
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/CASE_TYPE_STORY.csv",
+      "bytes": 810300,
+      "sha256": "d2a67af1d49496d5200f957cd92605d18a0cf0bbc5e3888ffafef02bea15d5c2"
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/EXTERNAL_METHOD_STORY.csv",
+      "bytes": 32500,
+      "sha256": "e60aabfbb6f744e4e67cb6ba7a86386237eb312491bb7ef11d20980d84de1a1d"
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/FROZEN_EXTERNAL_METRICS_OVERVIEW.csv",
+      "bytes": 35022,
+      "sha256": "e296d61d3d014524f892e6d8eec9cbcafc2f07a23a2deb73f9d5425fb287e5ae"
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/FULL_MATRIX_OUTCOME_LEDGER.csv",
+      "bytes": 19017,
+      "sha256": "8356405c84e4ebf5cbf4343eb00e23a3f4fce51decf5b8e3226772c38971e492"
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/METHOD_SOURCE_MAP.csv",
+      "bytes": 7795,
+      "sha256": "22fefa59f9a1fe4181cedf1f638dd3ecec36e46923975a7542890bc4626b996f"
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/NATURAL_METHOD_RESULTS.csv",
+      "bytes": 43923,
+      "sha256": "a8419158954c52ddeb948ce9460f751998862e09f5e24839461e2f040262aa8e"
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/SELECTION_HISTORY_LEDGER.csv",
+      "bytes": 6837,
+      "sha256": "417b9b2b229af7ae4f8bc9f8d64f0b64d08b678d39c0ce415d69cea8a8da6931"
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/SINGLE_MODULE_PAIRED_DIRECTION.csv",
+      "bytes": 16513,
+      "sha256": "d3d1fdd85b113d86828d24d8ed1963761891e37c1d664888def8ce4bf2bc1baa"
+    },
+    {
+      "path": "paper_package/gpss_v0/assets/installation/author_installation_metadata.json",
+      "bytes": 1285,
+      "sha256": "0c9282aa4d8d442cecc3aa0414ccfdf0002793a3f30b0c0c260c0ee89f63dd51"
+    },
+    {
+      "path": "paper_package/gpss_v0/figures/Fig01.png",
+      "bytes": 3701195,
+      "sha256": "fbb36e528e3883b1ff2b7a98fd410798d26155927d0990065089e2c490f37758"
+    },
+    {
+      "path": "paper_package/gpss_v0/figures/Fig03.svg",
+      "bytes": 715224,
+      "sha256": "5ecf54891e2a2bebe2064f4bb44ad83bf0be6bc0fd8a0c587dcd7f4388c154ab"
+    },
+    {
+      "path": "paper_package/gpss_v0/figures/Fig04.svg",
+      "bytes": 152503,
+      "sha256": "a03518f6385a25bd9e636d1fb1ec48facbcb5c435262db5d2f8ceaba4ed339b2"
+    },
+    {
+      "path": "paper_package/gpss_v0/figures/Fig05.svg",
+      "bytes": 58423,
+      "sha256": "cc6e1658a89406db231c60ab647bf73ed00d78555cfd5b52cc0774c708e82553"
+    },
+    {
+      "path": "paper_package/gpss_v0/figures/Fig06.svg",
+      "bytes": 44347,
+      "sha256": "cfdfbc528e65110464c033866ef7a0d06422fdc44cbe0ec7ebc5d4d7f46e223b"
+    },
+    {
+      "path": "paper_package/gpss_v0/manuscript_source.md",
+      "bytes": 49862,
+      "sha256": "95975f06449a7692574ac6203c18e800b382485f6019f1704af21abf071b7f0e"
+    },
+    {
+      "path": "paper_package/gpss_v0/tables/S09b_paired_intervals.csv",
+      "bytes": 10102,
+      "sha256": "3a97cc17fa895e471fe2a0d5bc9ac8f8d17ac45181bd8e6ad59af450d82fc098"
+    },
+    {
+      "path": "paper_package/gpss_v0/tables/T01_main_three_sequence.csv",
+      "bytes": 378,
+      "sha256": "b9ce9e5cc193a5cc48f51c91cc0f5b23a3c6dc34160503749cca248e4743e4ed"
+    },
+    {
+      "path": "paper_package/gpss_v0/tables/T05_by2o_segments.csv",
+      "bytes": 855,
+      "sha256": "bb87441eca2350e6b8e6a709c070fe046d6148fd414cfbfd0420044a620646a8"
+    }
+  ]
+}

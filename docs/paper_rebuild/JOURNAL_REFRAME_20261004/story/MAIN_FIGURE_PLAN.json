@@ -1,0 +1,426 @@
+{
+  "status": "8_FIGURE_ARGUMENT_PLAN_NOT_NEW_RENDERED_FIGURES",
+  "figures": [
+    {
+      "figure": 1,
+      "title_en": "A compact lateral baseline defines a conditional heading observation",
+      "dominant_claim_zh": "平台的短侧向基线提供方向观测，但几何与物理点必须先定义。",
+      "anchor_panel": "b",
+      "panels": [
+        {
+          "label": "a",
+          "role": "definition",
+          "visual": "作者供给机器人照片，标两天线/Go2IMU/商业融合装置位置，不由照片断言准确天线序号",
+          "source": [
+            "paper_package/gpss_v0/figures/Fig01.png",
+            "paper_package/gpss_v0/assets/installation/author_installation_metadata.json"
+          ],
+          "scope": "PHOTO_DECLARE_NOT_SURVEY",
+          "existing_sources": [
+            "paper_package/gpss_v0/figures/Fig01.png",
+            "paper_package/gpss_v0/assets/installation/author_installation_metadata.json"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "b",
+          "role": "methodological bridge",
+          "visual": "FRD三轴与p1/p2/midpoint/IMU的3D示意；+90°侧向投影",
+          "source": [
+            "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+          ],
+          "scope": "ORIGINAL_V3",
+          "existing_sources": [
+            "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "c",
+          "role": "failure domain",
+          "visual": "水平投影b_H与倾斜图，投影方向、Euler yaw分别命名；r→0数学无定义",
+          "source": [
+            "paper_package/gpss_v0/manuscript_source.md"
+          ],
+          "scope": "CONCEPTUAL_NOT_EMPIRICAL_BOUND",
+          "existing_sources": [
+            "paper_package/gpss_v0/manuscript_source.md"
+          ],
+          "locator_to_confirm": []
+        }
+      ],
+      "legend_en": "Platform and heading geometry. (a) The supplied photograph shows the compact quadruped installation. (b) The fixed receiver order defines the lateral baseline and its relation to the IMU and evaluation midpoint. (c) Heading uses the horizontal baseline projection; an inclined lateral baseline does not generally yield Euler yaw without an attitude model. Nominal separation and declared lever arms are installation parameters rather than an independent survey.",
+      "results_topic": "A lateral baseline supplies heading information under a declared geometry and attitude domain.",
+      "supplement": "安装照片原件/作者声明、坐标/杆臂全字段；假设噪声敏感性U01另SI，不画实测U。",
+      "visual_notes": "照片60%宽，几何40%；中点与IMU用不同符号；0.356m标RTK-derived median不当survey。",
+      "status": "PLAN_NOT_RENDERED_NEW_FIGURE"
+    },
+    {
+      "figure": 2,
+      "title_en": "Measurement eligibility determines when auxiliary observations enter the estimator",
+      "dominant_claim_zh": "辅助观测受不同准入与依赖条件控制，而非六个互相独立的输入。",
+      "anchor_panel": "b",
+      "panels": [
+        {
+          "label": "a",
+          "role": "definition",
+          "visual": "IMU propagation+p/RV/yaw/RD/RP/HV输入图，15active+6fixed简标",
+          "source": [
+            "docs/paper_rebuild/V3_STORY_20261004/METHOD_SOURCE_MAP.csv",
+            "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+          ],
+          "scope": "ORIGINAL_V3",
+          "existing_sources": [
+            "docs/paper_rebuild/V3_STORY_20261004/METHOD_SOURCE_MAP.csv",
+            "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "b",
+          "role": "claim-supporting definition",
+          "visual": "heading exactpair→BOTH_FIXED→wrap gate；A1heading虚线→HV外部Ĉ；global GNSS入口AND→RP/HV；主面板占60%",
+          "source": [
+            "paper_package/gpss_v0/manuscript_source.md",
+            "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+          ],
+          "scope": "ORIGINAL_V3",
+          "existing_sources": [
+            "paper_package/gpss_v0/manuscript_source.md",
+            "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "c",
+          "role": "method definition",
+          "visual": "R′=aR，maxmeta/innov与cap图；软硬门用简短piecewisekey",
+          "source": [
+            "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+          ],
+          "scope": "ORIGINAL_V3_ENGINEERING_RULE",
+          "existing_sources": [
+            "docs/paper_rebuild/V3_STORY_20261004/02_METHOD_CONFIG_METRIC_STORY.md"
+          ],
+          "locator_to_confirm": []
+        }
+      ],
+      "legend_en": "Eligibility and aiding structure. Solid arrows carry measurement inputs, while dashed arrows denote preparation or dispatch dependencies. Heading requires exact receiver-time pairing, qualifying receiver status and wrapped-residual admission. Robot horizontal velocity is formed using the heading stream and SDK tilt, and robot aids are also subject to the GNSS update entrance. Covariance inflation remains bounded. The graph represents the archived configuration rather than independent information channels.",
+      "results_topic": "The proposed configuration makes heading and robot-aid eligibility explicit.",
+      "supplement": "标准ESKF/Joseph细式、完整状态/门限、七QAshape moduleanalogue及source-to-function表。",
+      "visual_notes": "从左到右单向；来源颜色蓝GNSS/青SDK/灰传播，拒绝出口小灰叉；没有decorativebox或Git图。",
+      "status": "PLAN_NOT_RENDERED_NEW_FIGURE"
+    },
+    {
+      "figure": 3,
+      "title_en": "Natural recordings show version-specific navigation agreement",
+      "dominant_claim_zh": "三段自然实录的航向与水平位置agreement具有可见时间结构，不能只报一个平均。",
+      "anchor_panel": "a–c",
+      "panels": [
+        {
+          "label": "a–c",
+          "role": "claim-supporting evidence",
+          "visual": "三序列有符号yaw差；Proposed与Two-receiver IEKF原曲线各网格",
+          "source": [
+            "paper_package/gpss_v0/figures/Fig03.svg",
+            "docs/paper_rebuild/V3_STORY_20261004/NATURAL_METHOD_RESULTS.csv"
+          ],
+          "scope": "ORIGINAL_V3_NATIVE_GRIDS",
+          "existing_sources": [
+            "paper_package/gpss_v0/figures/Fig03.svg",
+            "docs/paper_rebuild/V3_STORY_20261004/NATURAL_METHOD_RESULTS.csv"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "d–f",
+          "role": "complementary evidence",
+          "visual": "三序列H误差原曲线；匹配/期望计数写caption",
+          "source": [
+            "paper_package/gpss_v0/figures/Fig03.svg",
+            "docs/paper_rebuild/V3_STORY_20261004/NATURAL_METHOD_RESULTS.csv"
+          ],
+          "scope": "ORIGINAL_V3_MIDPOINT",
+          "existing_sources": [
+            "paper_package/gpss_v0/figures/Fig03.svg",
+            "docs/paper_rebuild/V3_STORY_20261004/NATURAL_METHOD_RESULTS.csv"
+          ],
+          "locator_to_confirm": []
+        }
+      ],
+      "legend_en": "Navigation agreement in three natural recordings. Panels (a–c) show signed yaw discrepancies and panels (d–f) horizontal position discrepancies relative to the commercial fusion reference. Proposed denotes the archived LegSA-GINS configuration. Curves retain each method’s frozen matching support; paired statistics are reported separately. Reference and estimator share GNSS lineage, so the panels characterize agreement rather than independent absolute accuracy.",
+      "results_topic": "Natural recordings yield approximately two-degree heading agreement at the frozen midpoint contract.",
+      "supplement": "全部11配置natural66v2/v3分合同表、roll/pitch/Up/3D与共同时刻interval。",
+      "visual_notes": "固定3列2排，统一time units和lineweight，局部尖峰不能被ylimclip；图例1个统一放外。",
+      "status": "PLAN_NOT_RENDERED_NEW_FIGURE"
+    },
+    {
+      "figure": 4,
+      "title_en": "Regional yaw differences coexist with reversals outside the selected region",
+      "dominant_claim_zh": "BY2O选定区域的优势与窗外反转同时成立。",
+      "anchor_panel": "c",
+      "panels": [
+        {
+          "label": "a",
+          "role": "case illustration",
+          "visual": "BY2O yaw时间曲线，以淡色标primary/secondary且outside完整显示",
+          "source": [
+            "paper_package/gpss_v0/figures/Fig04.svg",
+            "paper_package/gpss_v0/tables/T05_by2o_segments.csv"
+          ],
+          "scope": "ORIGINAL_V3_POSTREVIEW_REGION",
+          "existing_sources": [
+            "paper_package/gpss_v0/figures/Fig04.svg",
+            "paper_package/gpss_v0/tables/T05_by2o_segments.csv"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "b",
+          "role": "definition",
+          "visual": "区域状态支持/持续时间信息，不只突出最优区域",
+          "source": [
+            "paper_package/gpss_v0/tables/T05_by2o_segments.csv",
+            "docs/paper_rebuild/V3_STORY_20261004/SELECTION_HISTORY_LEDGER.csv"
+          ],
+          "scope": "REGION_SELECTION_DISCLOSED",
+          "existing_sources": [
+            "paper_package/gpss_v0/tables/T05_by2o_segments.csv",
+            "docs/paper_rebuild/V3_STORY_20261004/SELECTION_HISTORY_LEDGER.csv"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "c",
+          "role": "paired evidence",
+          "visual": "primary/secondary/outside成对yaw ΔRMSE interval，legend定义A−B",
+          "source": [
+            "paper_package/gpss_v0/tables/S09b_paired_intervals.csv"
+          ],
+          "scope": "EXISTING_PAIRED_MBB_NOT_NEW_BOOTSTRAP",
+          "existing_sources": [
+            "paper_package/gpss_v0/tables/S09b_paired_intervals.csv"
+          ],
+          "locator_to_confirm": []
+        }
+      ],
+      "legend_en": "Regional comparison in BY2O. (a) Signed yaw discrepancies retain the full recording, with primary and secondary intervals marked. (b) Region definitions and receiver-state context distinguish the selected interval from its complement. (c) Existing paired intervals summarize common-support differences, including the outside-region reversal. Region selection used the recorded sequence and is not an independently prespecified held-out evaluation.",
+      "results_topic": "The selected region supports a local difference, while its complement prevents a global ordering claim.",
+      "supplement": "区域敏感性全部窗、共同支持数、block参数/CI及相关性字段。",
+      "visual_notes": "CI跨0要见0line；有bar不能冒充CI；state与motion共同变化，勿写fixed状态造成优势。",
+      "status": "PLAN_NOT_RENDERED_NEW_FIGURE"
+    },
+    {
+      "figure": 5,
+      "title_en": "Finite-output distributions must be read with completion and failure outcomes",
+      "dominant_claim_zh": "完整CORE的分布只有结合失败分母才能界定配置表现。",
+      "anchor_panel": "c",
+      "panels": [
+        {
+          "label": "a",
+          "role": "claim evidence",
+          "visual": "yaw finiteECDF：Position+heading、Position/velocity+heading、Without inflation、Proposed",
+          "source": [
+            "paper_package/gpss_v0/figures/Fig05.svg"
+          ],
+          "scope": "ORIGINAL_CORE_541_CONDITIONAL_FINITE",
+          "existing_sources": [
+            "paper_package/gpss_v0/figures/Fig05.svg"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "b",
+          "role": "complementary evidence",
+          "visual": "H finiteECDF同四配置",
+          "source": [
+            "paper_package/gpss_v0/figures/Fig05.svg"
+          ],
+          "scope": "ORIGINAL_CORE_541_CONDITIONAL_FINITE",
+          "existing_sources": [
+            "paper_package/gpss_v0/figures/Fig05.svg"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "c",
+          "role": "failure evidence",
+          "visual": "四配置541分母complete/diverged/noinitialheading条，11全配置SI",
+          "source": [
+            "docs/paper_rebuild/V3_STORY_20261004/FULL_MATRIX_OUTCOME_LEDGER.csv"
+          ],
+          "scope": "ORIGINAL_CORE_FULL_DENOMINATOR",
+          "existing_sources": [
+            "docs/paper_rebuild/V3_STORY_20261004/FULL_MATRIX_OUTCOME_LEDGER.csv"
+          ],
+          "locator_to_confirm": []
+        }
+      ],
+      "legend_en": "Controlled-case distributions and outcomes. (a,b) Empirical distributions of yaw and horizontal-position RMSE are conditional on finite completed outputs for the displayed configurations. (c) Completion, divergence and unavailable-heading initialization retain the original 541-case denominator. The proposed configuration completes 519 cases, with 13 divergences and nine unavailable initializations. Case placements reuse a recorded trajectory and do not represent independent field realizations.",
+      "results_topic": "The full CORE reveals finite performance gains together with nonzero failure boundaries.",
+      "supplement": "全部11配置ECDF/61类型heatmap、其他量纲与原全部588案例状态。",
+      "visual_notes": "fail灰/红/纹理固定；ECDFlegend写nfinite/N541；无输出不得贴到x0。",
+      "status": "PLAN_NOT_RENDERED_NEW_FIGURE"
+    },
+    {
+      "figure": 6,
+      "title_en": "Component effects differ across horizontal vertical and heading quantities",
+      "dominant_claim_zh": "单组件信息加入的收益并不一致：水平收益可同时伴随竖直或航向负向。",
+      "anchor_panel": "a",
+      "panels": [
+        {
+          "label": "a",
+          "role": "paired claim evidence",
+          "visual": "四单变量×H/Up/yaw等主要quantity的lower/higher计数；每格全pairedN",
+          "source": [
+            "docs/paper_rebuild/V3_STORY_20261004/SINGLE_MODULE_PAIRED_DIRECTION.csv"
+          ],
+          "scope": "ORIGINAL_CORE_SINGLE_SWITCH",
+          "existing_sources": [
+            "docs/paper_rebuild/V3_STORY_20261004/SINGLE_MODULE_PAIRED_DIRECTION.csv"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "b",
+          "role": "complementary definition",
+          "visual": "同四组件meanΔ与medianΔ两个分开展示，不以mean颜色标胜负",
+          "source": [
+            "docs/paper_rebuild/V3_STORY_20261004/SINGLE_MODULE_PAIRED_DIRECTION.csv"
+          ],
+          "scope": "SAVED_SUMMARY_ONLY_NO_NEW_METRICS",
+          "existing_sources": [
+            "docs/paper_rebuild/V3_STORY_20261004/SINGLE_MODULE_PAIRED_DIRECTION.csv"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "c",
+          "role": "failure membership",
+          "visual": "paired/one-sidedcomplete/bothfailed示意或小表",
+          "source": [
+            "docs/paper_rebuild/V3_STORY_20261004/SINGLE_MODULE_PAIRED_DIRECTION.csv"
+          ],
+          "scope": "ORIGINAL_DENOMINATOR_PRESERVED",
+          "existing_sources": [
+            "docs/paper_rebuild/V3_STORY_20261004/SINGLE_MODULE_PAIRED_DIRECTION.csv"
+          ],
+          "locator_to_confirm": []
+        }
+      ],
+      "legend_en": "Single-component effects on common completed cases. Lower and higher counts compare the full configuration with the corresponding one-switch ablation; missing membership is retained separately. Means and medians summarize the same saved paired differences. Robot horizontal velocity lowers horizontal RMSE in 472 of 519 pairs, while vertical RMSE is higher in 365 pairs. The counts are descriptive for dependent controlled cases, not independent-trial significance tests.",
+      "results_topic": "The ablations support conditional component effects rather than uniform all-axis improvement.",
+      "supplement": "56行全量direction/v2v3合同；组合关闭A07–09与同源标定/初始条件表。",
+      "visual_notes": "所有四组件展示相反方向，慎用绿=成功；mean/median单位分别deg/m不能共用一条数轴。",
+      "status": "PLAN_NOT_RENDERED_NEW_FIGURE"
+    },
+    {
+      "figure": 7,
+      "title_en": "Heading availability conditions robot-velocity aiding during outages",
+      "dominant_claim_zh": "heading保留与全GNSS失效是不同信息条件，HV不能被描述为无条件续桥。",
+      "anchor_panel": "a",
+      "panels": [
+        {
+          "label": "a",
+          "role": "methodological bridge",
+          "visual": "A1/D61与A2/D62故障窗P/RV/RD/yaw/RP/HV资格矩阵，画AND依赖",
+          "source": [
+            "docs/paper_rebuild/V3_STORY_20261004/CASE_TYPE_STORY.csv",
+            "docs/paper_rebuild/V3_STORY_20261004/03_SELECTION_HISTORY_AND_FULL_MATRIX_RESULTS.md"
+          ],
+          "scope": "ORIGINAL_V3_SCHEDULING",
+          "existing_sources": [
+            "docs/paper_rebuild/V3_STORY_20261004/CASE_TYPE_STORY.csv",
+            "docs/paper_rebuild/V3_STORY_20261004/03_SELECTION_HISTORY_AND_FULL_MATRIX_RESULTS.md"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "b",
+          "role": "claim evidence",
+          "visual": "原ADD27A1全点whole-windowHlogscatter",
+          "source": [
+            "paper_package/gpss_v0/figures/Fig06.svg"
+          ],
+          "scope": "ORIGINAL_ADD_FULL_WINDOW",
+          "existing_sources": [
+            "paper_package/gpss_v0/figures/Fig06.svg"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "c",
+          "role": "validation under new condition",
+          "visual": "原ADD18A2全点whole-windowHlogscatter",
+          "source": [
+            "paper_package/gpss_v0/figures/Fig06.svg"
+          ],
+          "scope": "ORIGINAL_ADD_FULL_WINDOW",
+          "existing_sources": [
+            "paper_package/gpss_v0/figures/Fig06.svg"
+          ],
+          "locator_to_confirm": []
+        }
+      ],
+      "legend_en": "Outage information conditions in the original addendum. (a) The masks distinguish simultaneous loss of position, receiver velocity, Doppler velocity and heading from position-related loss with heading retained; robot-aid eligibility follows the preparation and dispatch dependencies. (b,c) Whole-window horizontal RMSE retains all 27 complete-loss and 18 heading-retained cases. These scores do not by themselves describe in-outage updates, endpoint errors or recovery.",
+      "results_topic": "Robot-velocity aiding is conditional on surviving heading and update eligibility.",
+      "supplement": "135新合同fault/endpoint/recovery全量独立版本；actualGNSS-anchoraccepted账本，而非provider timestamp当更新时刻。",
+      "visual_notes": "顶部资格matrix先读后两个散点，单位log尺度注明；不用fault-time图词描述wholewindow。",
+      "status": "PLAN_NOT_RENDERED_NEW_FIGURE"
+    },
+    {
+      "figure": 8,
+      "title_en": "Availability accompanies angular agreement across observation routes",
+      "dominant_claim_zh": "不同GNSS航向路线必须同时报告支持与角量，较差结果只属于所列条件。",
+      "anchor_panel": "b",
+      "panels": [
+        {
+          "label": "a",
+          "role": "comparison definition",
+          "visual": "rawcompass3+RTKLIB4的input/core/adaptation简表，不混navRMSE",
+          "source": [
+            "docs/paper_rebuild/V3_STORY_20261004/EXTERNAL_METHOD_STORY.csv"
+          ],
+          "scope": "LATEST_EXT_V2_AND_RTKLIB_HX07R",
+          "existing_sources": [
+            "docs/paper_rebuild/V3_STORY_20261004/EXTERNAL_METHOD_STORY.csv"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "b",
+          "role": "practical consequence",
+          "visual": "3seqownvalid/expected支持条；held另hollowmarker不可混fresh",
+          "source": [
+            "docs/paper_rebuild/V3_STORY_20261004/FROZEN_EXTERNAL_METRICS_OVERVIEW.csv"
+          ],
+          "scope": "OWN_SUPPORT_ORIGINAL_DENOMINATOR",
+          "existing_sources": [
+            "docs/paper_rebuild/V3_STORY_20261004/FROZEN_EXTERNAL_METRICS_OVERVIEW.csv"
+          ],
+          "locator_to_confirm": []
+        },
+        {
+          "label": "c",
+          "role": "conditional benchmark evidence",
+          "visual": "同各method自身支持angularRMSE，与baselineprojection/Euler区别图注",
+          "source": [
+            "docs/paper_rebuild/V3_STORY_20261004/FROZEN_EXTERNAL_METRICS_OVERVIEW.csv",
+            "docs/paper_rebuild/EXT_MEASURAND_20261004/README.md"
+          ],
+          "scope": "CONDITION_SPECIFIC_NO_SOLVER_RANK",
+          "existing_sources": [
+            "docs/paper_rebuild/V3_STORY_20261004/FROZEN_EXTERNAL_METRICS_OVERVIEW.csv",
+            "docs/paper_rebuild/EXT_MEASURAND_20261004/README.md"
+          ],
+          "locator_to_confirm": []
+        }
+      ],
+      "legend_en": "Angular agreement and output support for raw-observation compass and moving-base routes. Inputs and project adaptations are identified before the numerical results. Output counts use each declared formal window; held values are distinguished from fresh valid solutions. Angular metrics retain their declared projection-heading and reference-yaw definitions. Large discrepancies under this installation do not establish universal method inadequacy or a same-input solver ordering.",
+      "results_topic": "External angular results must be interpreted jointly with their observation contract and availability.",
+      "supplement": "LC01-S/EXT05C初始化、GINav H2/271、Hartleyrelative及strict/segFGO全部量纲/结果放SI，navFGO不能挤在heading榜中。",
+      "visual_notes": "不要沿用旧Fig7的15面板大图当最新结果；支持条跟角差图并排，NA空框不是0。",
+      "status": "PLAN_NOT_RENDERED_NEW_FIGURE"
+    }
+  ]
+}

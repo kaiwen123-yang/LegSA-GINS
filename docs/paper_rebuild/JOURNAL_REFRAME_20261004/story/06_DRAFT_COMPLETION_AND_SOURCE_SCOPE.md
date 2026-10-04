@@ -1,0 +1,13 @@
+# 新论文草稿的完成范围与作者工作
+
+新manuscript_restructured.md是一篇完整结构的英文讨论稿，题目仍是描述性暂名，归档方法LegSA-GINS没有更名。正文围绕研究问题、准入依赖和完整正负证据展开；当前讨论稿不替换旧封稿。无[REF]或[NEED]占位引文，八项最小文献有真实DOI/作者链接；全文算法未读的文献仅引用其已核元数据或摘要能够支持的范围。
+
+八张新主图仍是图意/面板计划，不冒称已生成，当前十张旧图均实际打开审视。既有图、表可复用；root负责重绘与成品PPT。新Fig6单组件表和新Fig8最新外部输入/支持需制作，不能换标题沿用旧15面板图。英文图注草案在05/JSON，不将它们当已存在的出版图片。
+
+主文保留共享参考、安装/倾斜模型、条件HV调度、依赖注入与负向结果；Git身份、版本收据、完整函数映射、native结果哈希放可复现性SI。源表原token、内部代码和旧科学运行完全不动。
+
+正式投稿前需要作者完成：确定名称与贡献相对近年文献的准确差异；补齐论文作者/单位/基金/利益冲突/贡献/数据许可和公开仓库DOI；将全部实际比较方法原文引文按源登记导入参考库并审校；完成安装与参考输出点/时轴记录；把图计划变成最终图并按最终稿统计整稿词数。这里列作者事务，不在英文正文放占位声明或制造元信息。
+
+最低文献验证范围：Teunissen2010 publishermetadata/作者文选段与venue继承；Verhagen2013 publishermetadata/abstract继承；Farkas2024方法选段继承；Cucci2023 publisherabstract/作者说明继承；GarcíaCrespillo2023机构abstract继承；Hartley2020 publisherabstract/§1及作者source当前阅读；Solà2017 arXiv记录当前阅读；Zaminpardaz2019 publisherabstract/§1–2当前阅读。未把这八篇称本轮逐字全文审完。完整primary记录见同级venue/PRIMARY_LITERATURE_AND_CLAIM_MAP.csv；本轮只保持句子范围的引用。
+
+英文稿是新版本写作草稿，所有数字沿冻结来源。稍后若生成可编辑Word，只是该文字草稿的排版，需独立render和逐页查看，不能由Markdown证明Word已合格。
