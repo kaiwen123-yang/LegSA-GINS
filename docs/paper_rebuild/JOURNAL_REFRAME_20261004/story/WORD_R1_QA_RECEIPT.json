@@ -1,0 +1,136 @@
+{
+  "status": "PASS_EDITABLE_RESEARCH_DRAFT",
+  "utc": "2026-10-04T14:07:50.319088+00:00",
+  "docx_sha256": "0b2ba4b1ac6a1ee464e53c2a33bd0d759b021193878dfff208ade260735eb293",
+  "source_md_sha256": "16e52b8678e4ab420bed5a04ba4f8f02581e65863307fd5d37db12a179cf9eb9",
+  "preview_pdf_sha256": "ce1bd224e427f8d842632dd6ec3112e8e158b7cad7634bfee837352536f696ae",
+  "render_engine": "LibreOffice via bundled documents render_docx.py",
+  "render_exit_code": 0,
+  "page_count": 11,
+  "all_pages_actually_viewed": true,
+  "requested_image_detail": "original",
+  "native_display_equations": 6,
+  "native_inline_math_objects": 11,
+  "empty_math_objects": 0,
+  "native_editable_table_rows": 4,
+  "native_editable_table_columns": 7,
+  "reference_count": 11,
+  "three_primary_bibliography_identities_verified": true,
+  "r1_semantic_delta": "Only three author-year labels in section 3.4 and three bibliography entries; numeric results unchanged",
+  "canonical_yaw_tokens_verified": [
+    "1.886272",
+    "1.933770",
+    "2.433815"
+  ],
+  "placeholders_found": false,
+  "planned_figure_legends": 8,
+  "actual_main_figures_embedded": 0,
+  "scientific_executions": 0,
+  "submission_ready": false,
+  "remaining_author_items": [
+    "Final method name/title agreement",
+    "Actual eight main figures embedding and figure-specific source-based production",
+    "Author list, affiliations and funding",
+    "Author declarations and final data/code availability statement"
+  ],
+  "original_sealed_pins_unchanged": {
+    "manuscript_restructured.md": "21ac28e1c69ef1039c2e3465e97179b063551982f0e9dc965cedc1187c42ed89",
+    "MANUSCRIPT_FIGURE_READY_RECEIPT.json": "6a3dab0e97f9bb301c10821ebf71701247c9c319ebb0784e2f979cfacce00150",
+    "BLOCK1_READY_RECEIPT.json": "3e78a13ba8918c0831e2910cdf8bbf9a35b720a19118dfbcb30fbb4ab087d3fc",
+    "PPT_CONTENT_READY_RECEIPT.json": "7a41d914d612fb6e10dab29a3f6208296b5ca35f2b6c40ceb2484f5e66e25663"
+  },
+  "rendered_page_pins": [
+    {
+      "page": 1,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R1_QA\\page-1.png",
+      "sha256": "0e21639e15f16a80578bd90a84e17121408bb45028da94f8a64aa81ee142d6fc",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Title/abstract/keywords/introduction: legible, no overflow"
+    },
+    {
+      "page": 2,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R1_QA\\page-2.png",
+      "sha256": "50a8908471531127bba32490effd669af043c1f392912ffc4f03d4a5db5b0233",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Introduction/method/state and lever-arm equations: symbols and scripts readable"
+    },
+    {
+      "page": 3,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R1_QA\\page-3.png",
+      "sha256": "42cf234607b0b506747b6e4b795a26f78e10f98da8d1474f0b6634818f6fa4e1",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Projected heading/admission/HV equations: no missing symbols or clipped math"
+    },
+    {
+      "page": 4,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R1_QA\\page-4.png",
+      "sha256": "7aa2f7d8204e1b474e76eaf65e78604b16c28d9b92072de4c53c24a9ce1b0ad1",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Covariance equation and native 4x7 table: canonical values visible and full table fits"
+    },
+    {
+      "page": 5,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R1_QA\\page-5.png",
+      "sha256": "5969f1c1d70a9df0c1311ddff275bba7535b88945c1329b1b05985b79d211cec",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Controlled design/metrics/external routes: paragraph and heading flow legible"
+    },
+    {
+      "page": 6,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R1_QA\\page-6.png",
+      "sha256": "692111f361b4749b76031df319a99d2a910c63a55a638d26e82258435704b862",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "All three new in-text citations visible; results and counts unchanged"
+    },
+    {
+      "page": 7,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R1_QA\\page-7.png",
+      "sha256": "d486099b7d342b5282f4b44568df7dbad397a9a9559cd23e8bfa185516fe3d42",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Ablations/outages/negative external evidence: no clipping or heading collision"
+    },
+    {
+      "page": 8,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R1_QA\\page-8.png",
+      "sha256": "9eb161e4cd595b6b8ed8aa816f752a7aab5bd10cd80c64de2ad1860f2237e7e8",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Discussion/conclusions: mathematical and scientific boundaries readable"
+    },
+    {
+      "page": 9,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R1_QA\\page-9.png",
+      "sha256": "c80586395c0b4a28dfdfeaba385fa8ded6fe221b341905b72896f9b7dd5600cc",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Eleven bibliography items including all three newly verified primary identities fit on page"
+    },
+    {
+      "page": 10,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R1_QA\\page-10.png",
+      "sha256": "777fc1d0a7be9312081f9a281bcdc832a20705973234bbfa6c2a929be0f79b00",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Planned legends 1–6: no heading orphan or clipped legend"
+    },
+    {
+      "page": 11,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R1_QA\\page-11.png",
+      "sha256": "70b25b4bc02d8646af8bc584ecd558f0685499b47c6555a610537046018d1c2f",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Planned legends 7–8: intentional short final appendix page; no filler or missing content"
+    }
+  ],
+  "initial_unpublished_word_preserved_external": "G:/LegSA-GINS-project/修复_20261004/JOURNAL_WORD_QA/initial_manuscript_restructured.docx",
+  "all_8_prior_manuscript_figure_files_exact_bytes_unchanged": true,
+  "original_figure_plan_sha256": "9547527ede3731840a9acabf4bd03ed6c10806be6d0a94a06a426a06606142d3",
+  "figure_plan_final_pin_verified": true
+}

@@ -1,0 +1,63 @@
+{
+  "status": "READY_FOR_ROOT_REVIEW_AND_EXACT_PATH_COMMIT",
+  "utc": "2026-10-04T14:07:50.319088+00:00",
+  "all_checks_passed": true,
+  "file_count": 11,
+  "file_pins": {
+    "manuscript_restructured_r1.md": {
+      "sha256": "16e52b8678e4ab420bed5a04ba4f8f02581e65863307fd5d37db12a179cf9eb9",
+      "bytes": 32407
+    },
+    "manuscript_restructured_r1.docx": {
+      "sha256": "0b2ba4b1ac6a1ee464e53c2a33bd0d759b021193878dfff208ade260735eb293",
+      "bytes": 52007
+    },
+    "manuscript_restructured_r1_preview.pdf": {
+      "sha256": "ce1bd224e427f8d842632dd6ec3112e8e158b7cad7634bfee837352536f696ae",
+      "bytes": 282608
+    },
+    "MANUSCRIPT_R1_CHANGES.diff": {
+      "sha256": "9450d58a2b23ca9a68bb844388254354e830985f955539243859e126712b2949",
+      "bytes": 3011
+    },
+    "BIBLIOGRAPHY_ADDENDUM_R1.csv": {
+      "sha256": "ba39a1ecca19ff54a5bd833511cf1d91e3c478b6ff8912dd63fe8f1cb9cde2a8",
+      "bytes": 2454
+    },
+    "07_BIBLIOGRAPHY_AND_WORD_R1.md": {
+      "sha256": "030cd99c714813df7b95bec180b38f1df91cc84d1e217194832033c1b4899067",
+      "bytes": 2104
+    },
+    "build_word_r1.py": {
+      "sha256": "5e9dfa82a0c4648845a5c5af5e451b86835229f4d417123a2714fe395d06fd5e",
+      "bytes": 8432
+    },
+    "DOCX_R1_AUTHORING_RECEIPT.json": {
+      "sha256": "2c080328ca34583c5ff74e3dedefb0097b3ea152634e06befca3e9904cdcac56",
+      "bytes": 569
+    },
+    "WORD_R1_PAGE_VISUAL_REVIEW.csv": {
+      "sha256": "7a2684850b3ed65fdc29bfb919eefba7c990e9375a108e5a5241b4b59f29b6fe",
+      "bytes": 2834
+    },
+    "WORD_R1_QA_RECEIPT.json": {
+      "sha256": "0fd30a29881f8a0167eb430a79a7bac3744b8fe337584ac25f1f8d3836e47bca",
+      "bytes": 6567
+    }
+  },
+  "prior_sealed_pins_unchanged": {
+    "manuscript_restructured.md": "21ac28e1c69ef1039c2e3465e97179b063551982f0e9dc965cedc1187c42ed89",
+    "MANUSCRIPT_FIGURE_READY_RECEIPT.json": "6a3dab0e97f9bb301c10821ebf71701247c9c319ebb0784e2f979cfacce00150",
+    "BLOCK1_READY_RECEIPT.json": "3e78a13ba8918c0831e2910cdf8bbf9a35b720a19118dfbcb30fbb4ab087d3fc",
+    "PPT_CONTENT_READY_RECEIPT.json": "7a41d914d612fb6e10dab29a3f6208296b5ca35f2b6c40ceb2484f5e66e25663"
+  },
+  "scientific_execution": 0,
+  "git_stage_commit_push_performed": false,
+  "full_word_actual_visual_pages": 11,
+  "new_bibliography_items": 3,
+  "version": "r1 bibliography-only text revision with editable Word and visual QA",
+  "source_references": "Primary URLs and read scopes recorded in BIBLIOGRAPHY_ADDENDUM_R1.csv; algorithm scope remains prior local audit",
+  "stage_boundary": "Initial unpublished Word draft moved only after git ls-files confirmed untracked; preserved outside repo; committed original markdown unchanged",
+  "all_8_prior_manuscript_figure_files_exact_bytes_unchanged": true,
+  "preview_pdf_git_add_requires_force": true
+}
