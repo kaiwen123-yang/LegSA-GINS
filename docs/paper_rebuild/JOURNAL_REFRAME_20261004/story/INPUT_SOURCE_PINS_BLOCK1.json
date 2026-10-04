@@ -1,0 +1,56 @@
+{
+  "scope": "Narrative/label source identity; not fresh science execution or whole-repo semantic coverage",
+  "repo_head": "0be8443ee9ed94479515d6012edc62273c44d0a2",
+  "files": [
+    {
+      "path": "paper_package/gpss_v0/manuscript_source.md",
+      "sha256": "95975f06449a7692574ac6203c18e800b382485f6019f1704af21abf071b7f0e",
+      "bytes": 49862
+    },
+    {
+      "path": "paper_package/gpss_v0/METHOD_IDENTITY.json",
+      "sha256": "65eb5b8820e92a0c20d8b15571f6c1771a0d70d40c9a5c31ce7cd19c460b49f9",
+      "bytes": 3727
+    },
+    {
+      "path": "paper_package/gpss_v0/FIGURE_MAP.csv",
+      "sha256": "7cd08e37fc3e6e9d63973f023d25f4201ebf75da02f2146489bdc69e1237fab1",
+      "bytes": 11792
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/CURRENT_STORY_INDEX.md",
+      "sha256": "0562ef56c013bac4e1447184c541f694c0d1e9c3dcdc9baa0675d42c9f94db2e",
+      "bytes": 5373
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/METHOD_READER_NAME_MAP.csv",
+      "sha256": "1c54effcd5c23a36a6db80ea210c2ad1aee65de16f5f97832ada93aee3b974a3",
+      "bytes": 1453
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/CONFIG_CONTEXT_STORY.csv",
+      "sha256": "f4f6809984a2462ec5423512e7e34eb8453297dc031bdbe339b25c7141bebedb",
+      "bytes": 27430
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/CONFIG_COMPARISON_DIFFS.csv",
+      "sha256": "c7f7cd1940283ffba0082b2183d78fa9837ccb04a1a502014344f65fcd3362e3",
+      "bytes": 17603
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/EXTERNAL_METHOD_STORY.csv",
+      "sha256": "e60aabfbb6f744e4e67cb6ba7a86386237eb312491bb7ef11d20980d84de1a1d",
+      "bytes": 32500
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/NATURAL_METHOD_RESULTS.csv",
+      "sha256": "a8419158954c52ddeb948ce9460f751998862e09f5e24839461e2f040262aa8e",
+      "bytes": 43923
+    },
+    {
+      "path": "docs/paper_rebuild/V3_STORY_20261004/SINGLE_MODULE_PAIRED_DIRECTION.csv",
+      "sha256": "d3d1fdd85b113d86828d24d8ed1963761891e37c1d664888def8ce4bf2bc1baa",
+      "bytes": 16513
+    }
+  ]
+}

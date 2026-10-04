@@ -1,0 +1,12 @@
+current_section,proposed_job,move_or_reframe
+Abstract,Problem→conditional design→natural numbers→full matrix→scope,Move version genealogy and per-baseline adaptation details to SI
+Introduction,Low speed course vs body heading; compact baseline → conditional admission,Do not present unfavorable external scores as proof intrinsic impossibility
+Platform,"Define sensors, body/antenna points and fusion reference",One shared-reference sentence stays main; hashes/source logs SI
+Method 4.1,Standard ESKF support,Compress mechanization derivation; do not claim new KF
+Method 4.2–4.4,Heading admission→dependent robot aids→bounded covariance inflation,"Show actual upstream dependencies, no independent FK"
+Experiment,Natural3 + CORE541 + ADD45; matching and failure denominator,Different information layers are separate comparison cohorts
+Result 6.1–6.2,Natural agreement then regional difference with outside reversal,Figures serve scientific contrast rather than summary leaderboard
+Result 6.3–6.5,Completion/failure→single-component mixed directions→outage eligibility,Whole-window original and new fault-window diagnostic not interchangeable
+Result 6.6,Later contract diagnostic,Separate version subsection/SI; not replacement original V3
+Discussion/limitations,Why conditional results arise; reference/install/site/input boundary,Group by interpretation rather than audit issue IDs
+Conclusion,Answer R1/R2 in one short paragraph,No long checklist of audits or statement of universal robustness
