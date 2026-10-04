@@ -1,0 +1,106 @@
+{
+  "status": "CATALOG_READY",
+  "time_utc": "2026-10-04T14:11:54.716337+00:00",
+  "new_figures": 32,
+  "individual_final_PNGs_actually_opened": 32,
+  "PNG_PDF_SVG_exports": 96,
+  "block_files_integrity_checked": 187,
+  "unique_input_paths_across_build_receipts": 89,
+  "source_inputs_not_reread_by_this_indexer": true,
+  "blocks": [
+    {
+      "block": "block_01",
+      "ready_sha256": "cbab6ce456fe8d28d9ca0cef7511997e99e8bfb95e272b568dfa96da904ca8b3",
+      "build_sha256": "23686458f9fa2d92c6a8ecc2d2dc4469a85d8f6c269f2a73f96d120498d7c235",
+      "figures": 4
+    },
+    {
+      "block": "block_02",
+      "ready_sha256": "c360028b0c71fc75c424d0a843506af98b81554531667e66ecd60072c4b5fb7f",
+      "build_sha256": "4b443cb6dc867dbc364aa83a9a4ba4c06b08967b0cfd179ee124028634502b88",
+      "figures": 4
+    },
+    {
+      "block": "block_03",
+      "ready_sha256": "e275086b0a762d670f1f752f39b3cdface96c05b39f9d8e1f09a57cb5e9c68ec",
+      "build_sha256": "396236f1ee964ccb97616dc7239c71de26dccc5457110722706e2c92e0fdcdd8",
+      "figures": 4
+    },
+    {
+      "block": "block_04",
+      "ready_sha256": "79935445ea431f56971cc1d838881f044660f865129f03eb2244910c43f75e37",
+      "build_sha256": "3876ae3f58135b2cc7431da8b49dc72ef0e79bdde5d3c5fff67d9977c963ad4a",
+      "figures": 4
+    },
+    {
+      "block": "block_05",
+      "ready_sha256": "bdc8fb3f6ef7085839988c71e1b7afa69c7d0492c00eeca61b292671f3f14ee2",
+      "build_sha256": "980c3a87c2fcd1c2419184724255ac332dd3bc9df6f0a8b0de1d7f2e3479c750",
+      "figures": 4
+    },
+    {
+      "block": "block_06",
+      "ready_sha256": "4a824686040219cb245994cc3143d70e4bd7314371b370060d7d3a921c133eb5",
+      "build_sha256": "a7027dea1adbfd1df1d90474f600ff62f0fb8563171248a77a883e88d88d81f7",
+      "figures": 4
+    },
+    {
+      "block": "block_07",
+      "ready_sha256": "d845eb55d0214f64540fe7a55e514088c11694dc79c115ba03afc9b761560015",
+      "build_sha256": "472437b39e96e9c36f8d6c4fec119bdfe6ff20dd42113a27fe710a62f7e157e9",
+      "figures": 4
+    },
+    {
+      "block": "block_08",
+      "ready_sha256": "57e1ac6bafadf45d522f21537f5e0f406a74b38c10b930f56802c10370783b79",
+      "build_sha256": "0ccd995932ec5e9f90a4d3c1a54f0c1c3319811683670d1cabd2c0d9a0fb70f0",
+      "figures": 4
+    }
+  ],
+  "existing_roots": [
+    {
+      "root": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/figures",
+      "retained_files": 39,
+      "bytes": 19256213,
+      "archive_members_not_enumerated": true
+    },
+    {
+      "root": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX07R",
+      "retained_files": 3,
+      "bytes": 2216752,
+      "archive_members_not_enumerated": true
+    },
+    {
+      "root": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix",
+      "retained_files": 3,
+      "bytes": 4390199,
+      "archive_members_not_enumerated": true
+    },
+    {
+      "root": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/FGO_REPRODUCTION_FIX_20261004",
+      "retained_files": 9,
+      "bytes": 8404793,
+      "archive_members_not_enumerated": true
+    },
+    {
+      "root": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/SEGMENTED_RESULTS/publication",
+      "retained_files": 6,
+      "bytes": 1926694,
+      "archive_members_not_enumerated": true
+    },
+    {
+      "root": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/08_FIGURES",
+      "retained_files": 60,
+      "bytes": 18502280,
+      "archive_members_not_enumerated": true
+    }
+  ],
+  "existing_metadata_files": 120,
+  "existing_images_actually_reviewed": 6,
+  "no_solver_calls": true,
+  "no_evaluator_calls": true,
+  "raw_reference_payload_opens": 0,
+  "script_sha256": "c1c9b5e7e616a65b6e4b9b8bee453ea2447ddd0c7e84f26370dd5087a20640eb",
+  "catalog_sha256": "9325717ece74634124f405aa0ad854cfea71140df7bf1cade54d03e3f8ceccfc",
+  "existing_inventory_sha256": "a426f71b24125f4ce5b3ba441a1a8c43a72fdf4980a02fa4a41c09bcd6d95c88"
+}

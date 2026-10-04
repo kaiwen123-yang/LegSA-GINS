@@ -1,0 +1,34 @@
+{
+  "status": "READY",
+  "time_utc": "2026-10-04T14:13:50.566868+00:00",
+  "scope": "32 new figures and explicitly bounded existing-asset inventory",
+  "all_eight_existing_READY_blocks_untouched": true,
+  "no_science_calls": true,
+  "files": [
+    {
+      "path": "build_figure_catalog.py",
+      "bytes": 5762,
+      "sha256": "c1c9b5e7e616a65b6e4b9b8bee453ea2447ddd0c7e84f26370dd5087a20640eb"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3419,
+      "sha256": "6143d9cfcfc365541104cae6645faa5bbbf329f11ec6bcf8a940f331f4dee787"
+    },
+    {
+      "path": "FIGURE_CATALOG.csv",
+      "bytes": 34172,
+      "sha256": "9325717ece74634124f405aa0ad854cfea71140df7bf1cade54d03e3f8ceccfc"
+    },
+    {
+      "path": "EXISTING_ASSET_INVENTORY.csv",
+      "bytes": 43320,
+      "sha256": "a426f71b24125f4ce5b3ba441a1a8c43a72fdf4980a02fa4a41c09bcd6d95c88"
+    },
+    {
+      "path": "CATALOG_RECEIPT.json",
+      "bytes": 4143,
+      "sha256": "a222ed7ca18075e5f9e5effec51b1a15d76607cbf0e7ec78e89a3786b3615043"
+    }
+  ]
+}
