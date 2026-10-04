@@ -1,0 +1,27 @@
+{
+  "status": "PPT_CONTENT_READY_NOT_FINAL_DECK",
+  "utc": "2026-10-04T13:32:12.908810+00:00",
+  "slides": 52,
+  "main": 38,
+  "appendix": 14,
+  "points_per_slide": 3,
+  "no_scientific_execution": true,
+  "source_locator_unresolved": [],
+  "files": [
+    {
+      "path": "PPT_CONTENT_BLUEPRINT_52.json",
+      "sha256": "c0bed471c9f977c9a4c99c024278f29f69329e68e1e9016bdeb3f50d8120853a",
+      "bytes": 49619
+    },
+    {
+      "path": "PPT_CONTENT_BLUEPRINT_52.csv",
+      "sha256": "38edf65955c8d39eeca55c4ef6b650b929b05e493826c1b9525d029646b0d1d5",
+      "bytes": 34172
+    },
+    {
+      "path": "04_PPT_CONTENT_BLUEPRINT_52.md",
+      "sha256": "01a1a442638f3e862136a606e078c712facec169b966c18d720b5f915334c067",
+      "bytes": 34812
+    }
+  ]
+}
