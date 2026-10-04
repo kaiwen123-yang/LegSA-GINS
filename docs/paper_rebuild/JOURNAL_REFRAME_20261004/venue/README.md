@@ -19,3 +19,7 @@
 [Block01](BLOCK01_READY_RECEIPT.json)、[Block02](BLOCK02_ASSUMED_FIGURES_READY_RECEIPT.json)、[Block03](BLOCK03_READY_RECEIPT.json) 分别冻结各自文件身份；[Block01 阅读账本](BLOCK01_READ_COVERAGE.csv) 与 [Block03 阅读账本](BLOCK03_READ_COVERAGE.csv) 记录真正读到的范围。没有全仓每一字完成的声明。所有科学 raw/reference、生成器、native、evaluator 在本研究线均未启动/读取；仅常数假设脚本生成三张解析图。
 
 本目录是研究支撑包，正式稿和 PPT 由对应写作任务组织。作者、资金、设备模式、安装尺寸和独立性不由文稿代替事实。GPS/TIM 不以同一贡献仅改词拆成同时投稿的两稿。
+
+## RV 归因更正
+
+当前 GPS/TIM 说明已将“单模块诊断”限定到真正闭合的 RD/HV 条件对照。原 F02→F03 的 RV 与 heading-gate 共变是结构对照，不能识别 RV 单独效应；不据成绩差重命名为 pure-RV。此次仅修改解释文字，原数据、图表、科学运行和先前阶段收据保留。[此次版本与更正记录](RV_ATTRIBUTION_CORRECTION_READY_RECEIPT.json) 绑定修改后文件；Block03 原收据描述更正前文稿身份。

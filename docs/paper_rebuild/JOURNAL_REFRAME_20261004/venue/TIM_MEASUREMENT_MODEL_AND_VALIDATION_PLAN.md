@@ -128,7 +128,7 @@ BOTH_FIXED 是上游两个接收机的状态标记；它没有提供“整数已
 
 如果 SDK 点 P 与 IMU 点 I 不同，刚体地固点速度为 vP=vI+C(ωeb×ℓIP)。当前 native 的 RV/RD 杆臂采用 bias/scale 补偿后的 gyro Δθ/Δt 近似，并未显式扣 Earth-rate；不能把现有实现写成已校准的精确 ωeb。N08 切平面反馈协方差近似与 N17 截断 Earth-coupling 块也仍保留。
 
-实际 accepted-domain 证据限定：D61 heading/HV 故障内没有 accepted HV；D62 保留 heading，有条件 HV/RP 更新。两类 fault 内 RD accepted=0，故 F04–A03 差异不是故障内新 RD 观测桥接。测量链的 availability 必须指实际调度和准入，不能只看 flag/provider-valid。
+实际 accepted-domain 证据限定：D61 heading/HV 故障内没有 accepted HV；D62 保留 heading，有条件 HV/RP 更新。两类 fault 内 RD accepted=0，故 F04–A03 差异不是故障内新 RD 观测桥接。测量链的 availability 必须指实际调度和准入，不能只看 flag/provider-valid。 原 F02→F03 还共同改变航向门限，不能用该结构对照的成绩差校准 RV 信息增量或独立测量收益。
 
 ## 7. 输出点和时间运输不能只改坐标值
 
@@ -160,7 +160,7 @@ BOTH_FIXED 是上游两个接收机的状态标记；它没有提供“整数已
 |---|---|
 |明确全部量、frame/point/time、来源图；对版本/准入/共同支持作真实登记|证明接线、天线相位中心、SDK输出点、BODY→POI和时钟运输是实际装置事实|
 |推导 Jacobian 和交叉块；解析常数假设图；对有依据的参数区间做透明敏感性|把假设 ρ/σ 当实测，把 fixed STD 当标准不确定度，把名义 .35 m 当独立 surveyed长度|
-|已有受控故障和单模块比较限定作用域；从保留数据查实际 accepted counts|把相同三条基线/多 seed/插值行数当许多独立采集，或把注册 6,468 当未见结果外推验证|
+|已有受控故障与 RD/HV 开关对照限定作用域；从保留数据查实际 accepted counts；F02/F03 的 RV/heading-gate 共变不作 RV 独立归因|把相同三条基线/多 seed/插值行数当许多独立采集，或把注册 6,468 当未见结果外推验证|
 |若既有资料包含真实可识别误差与参考 U，可按明确合同分析其相关性；否则保留未辨识|从运动坐标样本协方差直接估误差 cov，或从共享参考一次 RMSE 唯一拆出 absolute accuracy|
 |为尚未标定模型作 MC/压力测试计划，区分模型内覆盖与物理覆盖|仅凭模型内 MC/PSD/合成 Jacobian 测试声称实际区间已校准或安全完整性保证|
 

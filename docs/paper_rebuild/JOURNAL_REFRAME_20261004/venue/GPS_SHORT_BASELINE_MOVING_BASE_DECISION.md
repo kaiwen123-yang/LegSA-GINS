@@ -22,7 +22,7 @@ GPS Solutions scope 包含 GNSS 数学、算法、数据分析、硬件和新应
 >
 > **GPS-RQ2.** When does robot-reported horizontal velocity add useful information after its heading dependency and shared GNSS lineage are made explicit, and where does that benefit disappear?
 
-这两个问题可以利用原全矩阵、真实三序列、真实失败与已闭合单模块诊断解释。6,468 个任务是条件实验矩阵，不是 6,468 个独立采集；它的注册/可追溯性支持结果可信，不自动证明模型新颖或绝对精度。
+这两个问题可以利用原全矩阵、真实三序列、真实失败与已闭合的 RD/SDK 水平速度条件对照解释。原 F02→F03 是结构配置对照，同时改变 RV 使用和航向门限；其成绩差不能识别 RV 的独立贡献，不能称为 pure-RV 单开关实验。6,468 个任务是条件实验矩阵，不是 6,468 个独立采集；它的注册/可追溯性支持结果可信，不自动证明模型新颖或绝对精度。
 
 现有 GPS 叙事仍要补齐实体输入事实和针对拟推广域的验证，不是“已有审计即投稿 ready”。它不需要为了消除每个工程小问题而改写/重跑原 6,468 个结果。
 
