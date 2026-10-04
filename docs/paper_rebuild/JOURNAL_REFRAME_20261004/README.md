@@ -1,35 +1,12 @@
-# 论文叙事与完整组会报告重构（2026-10-04）
+# 完整汇报与论文重构材料
 
-本轮依据作者最新要求：不限时、尽量完整展示，使用所给组会模板，以真实科研图表为主体；重新讨论正式命名，分别形成 GPS Solutions 和 TIM 的研究定位。原 V3 正式矩阵仅作为已封存证据读取，不重跑、不改写历史结果；后续修复诊断保持独立。
+先读 [中文阅读指南](README_先看这里.md)。
 
-## 已完成的模板读取
+- [100 页 PowerPoint](presentation/LegSA_GINS_研究汇报_20261004.pptx) / [PDF](presentation/LegSA_GINS_研究汇报_20261004.pdf)
+- [英文 R2 Word 草稿](story/manuscript_restructured_r2.docx) / [Markdown](story/manuscript_restructured_r2.md) / [预览 PDF](story/manuscript_restructured_r2_preview.pdf)
+- [32 张结果图目录](figures/README.md) / [RV 联合结构解释修正](figures/REVIEW_RV_CONFOUNDING_CORRECTION.md)
+- [GPS Solutions 路线](venue/GPS_SHORT_BASELINE_MOVING_BASE_DECISION.md) / [TIM 测量模型与验证计划](venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md)
+- [八张主图计划 R2](story/05_MAIN_FIGURE_ARGUMENT_PLAN_R2.md) / [待补记录与验收方式](venue/REQUIRED_RECORDS_AND_ACCEPTANCE.csv)
+- [PPT 源码与检查说明](presentation/README.md) / [最终逐页审查](presentation/FINAL_VISUAL_ACCEPTANCE.json)
 
-- 原文件：`C:/Users/ykw/Desktop/泛源定位与组合导航/组会模版.pptx`。
-- SHA256：`dd521f62d3ef710a0506a7f4677ed7e14564ecac2dc58785ae5b44088aadfb63`。
-- 36 页，12192000 × 6858000 EMU（1280 × 720 px，16:9）。已逐页渲染并实际查看全部 36 页。
-- 保留原模板北航蓝白配色、页眉标识、章节页风格；使用微软雅黑/Calibri 等模板原字体。模板校徽仅依作者指定模板保留，不推断作者姓名、导师或单位。
-- 原模板标题页占位内容过长、若干页密集正文和商业占比图不适合本科研报告。新稿使用大幅连续曲线、科学比较图、测量关系和少量表格，不照搬占位文字。
-- 原始模板保持不变。两张示例图表共 12 处负数 axis ID 在私有兼容副本中按 unsigned32 一致映射，解决导入格式问题；图表数据和原始文件均未修改。详见 `presentation/template_compatibility.json`。
-
-## 报告与论文的关系
-
-完整组会报告允许展开方法推导、全部序列、全部消融和比较结果。期刊主文采用集中论点与 6–8 张承担明确论证任务的主图，其余结果进入补充材料。页数依据内容确定，不为了凑页数重复曲线，也不把 6468 次运行解释为 6468 次独立实地试验。
-
-报告顺序：问题与测量几何 → 方法与输入依赖 → 数据和评价定义 → 三序列结果 → 消融与失效边界 → 外部比较 → 测量不确定度 → 投稿路线及待补证据。
-
-## 命名与主张
-
-本轮正式名称保持讨论状态；新图中临时用 Proposed 对应原 F04，内部编号保留在索引和备注中。V3 的短基线航向由接收机已解算位置构成，不能表述为本文内部实现了新的载波模糊度固定方法。GPS Solutions 的主题应据现有证据收敛；TIM 将明确被测量、标定、相关性和不确定度，而非用 RMSE 或代码通过率替代它们。
-
-## 实物图
-
-原照片是设备外观依据。学术化版本以原图的裁剪、局部放大与可核实标注为主。背景去除生成图已试制，但生成处理不能提供安装尺寸、天线相位中心、坐标轴或设备编号证据，不能替代原图用于测量论证。
-
-## 交付目录
-
-- `story/`：命名讨论、论文重构、图文论证及英文草稿。
-- `venue/`：期刊官方要求、GPS Solutions 定位、TIM 不确定度模型和补充测量计划。
-- `figures/`：冻结数据重绘的科学图、来源与生成脚本。
-- `presentation/`：完整报告源稿、成品和验证记录。
-
-每个完成且经检查的小块分别提交并推送 GitHub。历史源数据、算法和原 V3 成绩不因改写展示方式而更改。
+原始 V3 结果保持封存。本轮从已有结果构造图文，没有新求解或评价。正式命名仍待讨论；实测几何、时间、参考链和 TIM 不确定度验证仍需补充。论文草稿的八张主图尚待最终组装，不应视为投稿完成。
