@@ -18,15 +18,19 @@ Eq. (22) omits a square.  Setting Eq. (21) to zero gives
 
 This squared expression is the unique minimizer of Eq. (19) with the
 Eq. (20) penalty, and recovers exactly the GM objective in Eq. (18).
-Algorithm 1 Step 3 explicitly refers to Eq. (21); this implementation uses
-that internally consistent interpretation rather than the unsquared typo.
+Algorithm 1 Step 3 explicitly refers to Eq. (21); the default uses that
+internally consistent interpretation. Printed Eq. (22) is available only as
+an explicitly labelled diagnostic, not the same GM auxiliary minimization.
 Residual r is whitened (dimensionless), not an unscaled metre residual.
 
 Engineering choices disclosed for this adaptation: full-batch sparse
 Gauss-Newton with backtracking; independent GPS/BDS receiver clocks; raw-WLS
 initialization; Doppler-only propagation of missing *initial guesses* inside
-an anchored connected component; theta clamped to 1 for its last stage; and
-alternating minimization at theta=1 until numerical convergence.  Propagated
+an anchored connected component; Eq. (23) initial theta without a floor; and
+the exact Step 2, Step 3, theta/1.4 order with termination after theta < 1.
+The final weight update is returned without an extra state solve, as in the
+printed algorithm. Applied state weights and updated output weights retain
+distinct roles. There is no clamped theta-one convergence extension. Propagated
 initial guesses add no factor/prior and are never output as a fallback.
 Unanchored or rank-deficient components remain unavailable.  This module
 does not open any files, evaluate references, or select any parameter.
@@ -49,12 +53,14 @@ DEFAULTS: dict[str, Any] = {
     "cost_relative_tolerance": 1e-8,
     "step_tolerance_m": 1e-5,
     "gradient_tolerance": 1e-8,
-    "weight_tolerance": 1e-6,
     "rank_relative_tolerance": 1e-10,
     "max_inner_iterations": 100,
-    "max_final_alternations": 200,
+    "max_continuation_iterations": 200,
     "max_backtracking_steps": 30,
 }
+
+EQ21_SQUARED_GM = "EQ21_SQUARED_GM"
+EQ22_PRINTED_DIAGNOSTIC = "EQ22_PRINTED_UNSQUARED_DIAGNOSTIC"
 
 
 def gnc_weight(residual: np.ndarray, theta: float, c_gm: float) -> np.ndarray:
@@ -63,6 +69,14 @@ def gnc_weight(residual: np.ndarray, theta: float, c_gm: float) -> np.ndarray:
     if not np.isfinite(a) or a <= 0:
         raise ValueError("theta and c_gm must be positive and finite")
     return np.square(a / (a + np.square(np.asarray(residual, dtype=float))))
+
+
+def eq22_printed_weight(residual: np.ndarray, theta: float, c_gm: float) -> np.ndarray:
+    """Printed Eq. (22); not stationary for the Eq. (19)-(20) GM objective."""
+    a = float(theta) * float(c_gm) ** 2
+    if not np.isfinite(a) or a <= 0:
+        raise ValueError("theta and c_gm must be positive and finite")
+    return a / (a + np.square(np.asarray(residual, dtype=float)))
 
 
 def gm_loss(residual: np.ndarray, theta: float, c_gm: float) -> np.ndarray:
@@ -345,6 +359,9 @@ def solve(data: dict[str, Any], config: dict[str, Any] | None = None) -> dict[st
     Output ``residuals`` is whitened; ``residuals_m`` is in metres.  ``valid``
     requires initialized, full-rank, converged optimization.  Unavailable
     positions/clocks are NaN and status/denominators remain explicit.  The
+    ``weights`` are Step 3 output weights. ``state_solve_weights`` are the
+    weights actually applied in the last Step 2 state solve; these need not
+    agree because Algorithm 1 stops after a weight update and theta reduction.
     ``weight_history`` records actual weight updates per component, including
     the all-one initialization.  It is diagnostic runtime data, not a table
     of independently executed methods.
@@ -353,14 +370,20 @@ def solve(data: dict[str, Any], config: dict[str, Any] | None = None) -> dict[st
     cfg = dict(DEFAULTS)
     if config is not None:
         cfg.update(config)
+        if "max_final_alternations" in config or "weight_tolerance" in config:
+            raise ValueError("legacy theta-one alternation controls do not belong to the strict Algorithm 1 contract")
     for key in DEFAULTS:
         if not np.isfinite(cfg[key]) or cfg[key] <= 0:
             raise ValueError(f"{key} must be finite and positive")
-    if cfg["theta_divisor"] <= 1:
-        raise ValueError("theta_divisor must exceed one")
-    for key in ("max_inner_iterations", "max_final_alternations", "max_backtracking_steps"):
+    if cfg["theta_divisor"] != 1.4:
+        raise ValueError("paper Algorithm 1 requires theta_divisor=1.4")
+    for key in ("max_inner_iterations", "max_continuation_iterations", "max_backtracking_steps"):
         if int(cfg[key]) != cfg[key]:
             raise ValueError(f"{key} must be an integer")
+    variant = cfg.get("weight_equation_variant", EQ21_SQUARED_GM)
+    if variant not in (EQ21_SQUARED_GM, EQ22_PRINTED_DIAGNOSTIC):
+        raise ValueError("unknown weight_equation_variant")
+    weight_function = gnc_weight if variant == EQ21_SQUARED_GM else eq22_printed_weight
     d = _validate_input(data)
     n, m = len(d["time_rel_s"]), len(d["epoch_index"])
     position = np.full((n, 3), np.nan)
@@ -368,6 +391,7 @@ def solve(data: dict[str, Any], config: dict[str, Any] | None = None) -> dict[st
     valid = np.zeros(n, dtype=bool)
     status = np.full(n, "UNPROCESSED", dtype="U64")
     weights = np.full(m, np.nan)
+    state_solve_weights = np.full(m, np.nan)
     residuals = np.full(m, np.nan)
     usable = np.all(np.isfinite(d["sat_pos_ecef_m"]), axis=1) & np.isfinite(d["pseudorange_m"]) & np.isfinite(d["pr_sigma_m"]) & (d["pr_sigma_m"] > 0)
     observation_status = np.where(usable, "UNPROCESSED", "INVALID_RAW_OBSERVATION").astype("U64")
@@ -413,25 +437,58 @@ def solve(data: dict[str, Any], config: dict[str, Any] | None = None) -> dict[st
             observation_status[graph.observation_indices] = component["status"]
             continue
         initial_residual, _ = graph.residual_jacobian(state)
-        theta = max(1.0, 3.0 * float(np.max(np.square(initial_residual[: graph.n_observation]))) / cfg["c_gm"]**2)
+        theta = 3.0 * float(np.max(np.square(initial_residual[: graph.n_observation]))) / cfg["c_gm"]**2
         component["theta_initial"] = theta
         component["initialization"] = "RAW_WLS_WITH_DOPPLER_PROPAGATION_FOR_MISSING_INITIAL_GUESSES"
         weight_history.append({"component_id": component_id, "outer_iteration": -1, "theta": theta, "phase": "INITIAL_ALL_ONE", "observation_indices": graph.observation_indices.copy(), "weights": local_weights.copy()})
-        outer_iteration = 0
-        final_alternations = 0
-        previous_final_cost = None
+        component["weight_equation_variant"] = variant
+        component["termination_policy"] = "ALGORITHM1_REDUCE_THETA_THEN_STOP_WHEN_LT_ONE"
         success = False
-        failure = "MAX_FINAL_ALTERNATIONS"
-        while True:
+        failure = "MAX_CONTINUATION_ITERATIONS"
+        r = initial_residual
+        applied_weights = local_weights.copy()
+        theta_last_solved = None
+        weight_change = float("nan")
+        steps = 0
+        # Eq. (23) can be zero in an exact synthetic optimum. No theta floor
+        # is invented. Only a zero total initial objective permits this exact
+        # limiting solution; otherwise the continuation is undefined.
+        if theta == 0.0 and np.all(initial_residual == 0.0):
+            success = True
+            component["termination"] = "ZERO_INITIAL_OBJECTIVE_EXACT_SOLUTION"
+            weight_change = 0.0
+        elif not np.isfinite(theta) or theta <= 0:
+            failure = "UNDEFINED_EQ23_INITIAL_THETA"
+        for outer_iteration in range(int(cfg["max_continuation_iterations"])) if theta > 0 and np.isfinite(theta) else ():
+            applied_weights = local_weights.copy()
             state, inner = _fixed_weight_solve(graph, state, local_weights, cfg)
             r, _ = graph.residual_jacobian(state)
-            updated_weights = gnc_weight(r[: graph.n_observation], theta, cfg["c_gm"])
+            theta_last_solved = theta
+            steps += 1
+            if not np.all(np.isfinite(r)):
+                iterations.append({"component_id": component_id, "outer_iteration": outer_iteration,
+                                   "theta": theta, "phase": "ALGORITHM1_STEP2_NUMERICAL_FAILURE",
+                                   **inner, "converged": False, "termination": "NONFINITE_RESIDUAL"})
+                failure = "NUMERICAL_NONFINITE_RESIDUAL"
+                break
+            updated_weights = weight_function(r[: graph.n_observation], theta, cfg["c_gm"])
             weight_change = float(np.max(np.abs(updated_weights - local_weights)))
-            surrogate_cost = float(np.sum(gm_loss(r[: graph.n_observation], theta, cfg["c_gm"])) + np.sum(np.square(r[graph.n_observation :])))
+            doppler_cost = float(np.sum(np.square(r[graph.n_observation :])))
+            gm_cost = float(np.sum(gm_loss(r[: graph.n_observation], theta, cfg["c_gm"])) + doppler_cost)
+            weighted_cost_after_update = float(np.sum(updated_weights * r[: graph.n_observation] ** 2) + doppler_cost)
+            penalty = float(theta * cfg["c_gm"] ** 2 * np.sum((np.sqrt(updated_weights) - 1) ** 2))
+            theta_next = theta / cfg["theta_divisor"]
             record = {
                 "component_id": component_id, "outer_iteration": outer_iteration, "theta": theta,
-                "phase": "GNC_CONTINUATION" if theta > 1 else "FINAL_THETA_ONE_ALTERNATION",
-                **inner, "surrogate_cost": surrogate_cost, "maximum_weight_change": weight_change,
+                "theta_after_reduction": theta_next, "phase": "ALGORITHM1_STEP2_STEP3",
+                **inner, "weight_equation_variant": variant,
+                "surrogate_cost": gm_cost if variant == EQ21_SQUARED_GM else None,
+                "gm_cost_eq18_diagnostic": gm_cost, "doppler_squared_cost": doppler_cost,
+                "weighted_cost_after_update": weighted_cost_after_update,
+                "outlier_penalty_cost_eq20": penalty,
+                "auxiliary_cost_eq19_after_update": weighted_cost_after_update + penalty,
+                "maximum_weight_change": weight_change,
+                "updated_weights_applied_to_this_state": False,
                 "weight_min": float(updated_weights.min()), "weight_median": float(np.median(updated_weights)),
                 "weight_max": float(updated_weights.max()),
             }
@@ -441,23 +498,22 @@ def solve(data: dict[str, Any], config: dict[str, Any] | None = None) -> dict[st
             if not inner["converged"]:
                 failure = "NUMERICAL_" + inner["termination"]
                 break
-            if theta <= 1:
-                final_alternations += 1
-                cost_converged = previous_final_cost is not None and abs(previous_final_cost - surrogate_cost) <= cfg["cost_relative_tolerance"] * max(1.0, previous_final_cost)
-                if weight_change <= cfg["weight_tolerance"] and (cost_converged or final_alternations == 1):
-                    success = True
-                    break
-                previous_final_cost = surrogate_cost
-                if final_alternations >= cfg["max_final_alternations"]:
-                    break
-            theta = max(1.0, theta / cfg["theta_divisor"])
-            outer_iteration += 1
+            theta = theta_next
+            if theta < 1.0:
+                success = True
+                component["termination"] = "ALGORITHM1_THETA_LT_ONE_AFTER_REDUCTION"
+                break
         weights[graph.observation_indices] = local_weights
+        state_solve_weights[graph.observation_indices] = applied_weights
         residuals[graph.observation_indices] = r[: graph.n_observation]
-        component["outer_iterations"] = outer_iteration + 1
-        component["final_alternations"] = final_alternations
+        component["outer_iterations"] = steps
+        component["final_alternations"] = 0
         component["theta_final"] = theta
-        component["final_weight_consistency_max_abs"] = weight_change
+        component["theta_last_solved"] = theta_last_solved
+        component["final_weight_update_max_abs"] = weight_change
+        component["output_weights_role"] = "LAST_STEP3_UPDATE_NOT_USED_FOR_AN_EXTRA_STATE_SOLVE"
+        component["state_weights_role"] = "LAST_STEP2_APPLIED_WEIGHTS"
+        component["final_weight_consistency_max_abs"] = float(np.max(np.abs(local_weights - weight_function(r[:graph.n_observation], theta_last_solved, cfg["c_gm"])))) if theta_last_solved is not None else 0.0
         full_rank, eigenvalues = _full_translation_rank(graph, state, local_weights, cfg["rank_relative_tolerance"])
         component["final_translation_information_eigenvalues"] = eigenvalues
         if not full_rank:
@@ -472,6 +528,7 @@ def solve(data: dict[str, Any], config: dict[str, Any] | None = None) -> dict[st
             status[epochs] = component["status"] = "COMPLETED"
         else:
             status[epochs] = component["status"] = failure
+            component["termination"] = failure
         observation_status[graph.observation_indices] = component["status"]
     # These velocities are explicit differences of the optimized positions,
     # not additional state variables or a claimed independently estimated INS.
@@ -483,7 +540,8 @@ def solve(data: dict[str, Any], config: dict[str, Any] | None = None) -> dict[st
         doppler_residual[pairs] = d["doppler_velocity_ecef_mps"][:-1][pairs] - velocity[:-1][pairs]
     return {
         "position_ecef_m": position, "clock_m": clocks, "valid": valid, "status": status,
-        "weights": weights, "residuals": residuals, "residuals_m": residuals * d["pr_sigma_m"],
+        "weights": weights, "state_solve_weights": state_solve_weights,
+        "residuals": residuals, "residuals_m": residuals * d["pr_sigma_m"],
         "observation_status": observation_status, "doppler_edge_valid": edge_valid,
         "doppler_residuals_mps": doppler_residual, "velocity_ecef_mps": velocity,
         "velocity_role": "FINITE_DIFFERENCE_OF_ESTIMATED_POSITIONS_NOT_A_GRAPH_STATE",
@@ -492,6 +550,9 @@ def solve(data: dict[str, Any], config: dict[str, Any] | None = None) -> dict[st
         "valid_epoch_count": int(np.count_nonzero(valid)), "raw_observation_count": m,
         "usable_raw_observation_count": int(np.count_nonzero(usable)),
         "terminal_status": "COMPLETED" if n and np.all(valid) else "PARTIAL" if np.any(valid) else "FAILED",
-        "solve_mode": "FULL_BATCH_SPARSE_GAUSS_NEWTON_GM_GNC_FUTURE_OBSERVATIONS_USED",
-        "weight_equation": "EQ_21_STATIONARY_SQUARED_WEIGHT_EQ_22_TYPO_DISCLOSED",
+        "solve_mode": "FULL_BATCH_SPARSE_GAUSS_NEWTON_GM_GNC_FUTURE_OBSERVATIONS_USED" if variant == EQ21_SQUARED_GM else "FULL_BATCH_PRINTED_EQ22_UNSQUARED_DIAGNOSTIC_NOT_GM_AUXILIARY_OPTIMUM",
+        "weight_equation": variant,
+        "continuation_policy": "ALGORITHM1_STEP2_STEP3_THETA_DIV_1P4_STOP_AFTER_LT_ONE",
+        "weight_output_role": "LAST_STEP3_UPDATE_NOT_LAST_STEP2_STATE_WEIGHTS",
+        "theta_initialization": "EQ23_NO_FLOOR",
     }

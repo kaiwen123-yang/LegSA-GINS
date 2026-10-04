@@ -156,7 +156,8 @@ def _linear_at(source_times, values, query_times, maximum_gap_s):
 
 
 def integrate_ahrs(*, times, imu, raw_times, quaternion_times, rotation_ecef_from_body,
-                   gravity_ecef_mps2, seed_time_s, lever_body_m, maximum_gap_s=.1):
+                   gravity_ecef_mps2, seed_time_s, lever_body_m, maximum_gap_s=.1,
+                   ins_discretization="HIGH_RATE_INTEGRAL_LEGACY"):
     """Pure array integration for real preparation and separate synthetic tests.
 
     For IMU-specific force f, body bias b and antenna lever l, the antenna
@@ -202,9 +203,22 @@ def integrate_ahrs(*, times, imu, raw_times, quaternion_times, rotation_ecef_fro
         rotated_dvel = np.einsum("nij,nj->ni", sample_rotation[ix], imu[ix, 4:7])
         delta_velocity[i] = np.sum(rotated_dvel * (overlap / dt[ix])[:, None], axis=0) + gravity * coverage[i]
         bias_integral[i] = np.sum(sample_rotation[ix] * overlap[:, None, None], axis=0)
+    force_node, force_valid = _linear_at(end, imu[:,4:7]/dt[:,None], times, maximum_gap_s)
+    linear_body = force_node + np.einsum("nji,j->ni",node_rotation,gravity)
+    node_valid &= force_valid
+    if ins_discretization == "RIGHT_ENDPOINT_ACCELERATION_EQ25":
+        # The paper's A_k is body-frame linear acceleration, rather than specific
+        # force. This sensor adapter removes normal gravity once using the AHRS.
+        delta_velocity = np.einsum("nij,nj->ni",node_rotation[1:],linear_body[1:])*np.diff(times)[:,None]
+        bias_integral = node_rotation[1:]*np.diff(times)[:,None,None]
+    elif ins_discretization != "HIGH_RATE_INTEGRAL_LEGACY":
+        raise WenInputError("unknown INS acceleration discretization")
     valid = node_valid[:-1] & node_valid[1:] & (abs(coverage - np.diff(times)) <= 1e-6)
     return {"time_rel_s": times.copy(), "rotation_ecef_from_body": node_rotation,
             "node_valid": node_valid, "delta_velocity_ecef_mps": delta_velocity,
+            "linear_acceleration_body_mps2": linear_body,
+            "specific_force_body_mps2": force_node,
+            "ins_discretization": ins_discretization,
             "bias_integral_ecef_s": bias_integral,
             "lever_velocity_delta_ecef_mps": np.diff(lever_at_node, axis=0),
             "interval_valid": valid, "interval_imu_coverage_s": coverage,
@@ -284,7 +298,11 @@ def prepare_ahrs(roots_path, sequence, times, config=None):
         quaternion_times=qt, rotation_ecef_from_body=rotations,
         gravity_ecef_mps2=ecef_from_ned @ np.array([0., 0., gravity]),
         seed_time_s=initial[0], lever_body_m=preparation["imu_to_gnss1_lever_body_m"],
-        maximum_gap_s=preparation["maximum_ahrs_gap_s"])
+        maximum_gap_s=preparation["maximum_ahrs_gap_s"],
+        ins_discretization=config.get("ins_discretization","HIGH_RATE_INTEGRAL_LEGACY"))
+    local_rotations,_ = _rotation_at(qt, corrected_body_to_ned(raw["quaternion_wxyz"],alpha,preparation["imu_install_rpy_deg"]),
+                                    np.asarray(times,float),preparation["maximum_ahrs_gap_s"])
+    result["rotation_ned_from_body"] = local_rotations
     result["initialization"] = {"time_rel_s": float(initial[0]), "gnss_llh_deg_deg_m": initial[1:4].tolist(),
         "a1_body_yaw_ned_deg": float(initial[13]), "ahrs_heading_gauge_rad": float(alpha),
         "heading_alignment_count": 1, "gravity_mps2": float(gravity)}
@@ -301,5 +319,9 @@ def prepare_ahrs(roots_path, sequence, times, config=None):
         "go2_odometry_used": False, "second_imu_scale_or_install_applied": False,
         "gravity_source": "existing WGS84 gravity_model at sensor-only initial LLH",
         "coordinate_frame": "ECEF; fixed seed NED basis for AHRS/gravity; corrected FRD body bias",
-        "coriolis_or_transport_added": False, "attitude_estimated": False}
+        "coriolis_or_transport_added": False, "attitude_estimated": False,
+        "linear_acceleration_contract": "Go2 calibrated specific force plus AHRS-rotated fixed normal gravity in body; not author XSens Ti10 output",
+        "acceleration_interpolation": "linear interpolation of current-sample f=dvel/unrounded_dt at node times; maximum gap gate retained",
+        "author_AHRS_statistical_equivalence_proven": False,
+        "graph_R_GL": "current right-node ECEF position" if config.get("ins_discretization")=="RIGHT_ENDPOINT_ACCELERATION_EQ25" else "fixed seed basis"}
     return result

@@ -219,3 +219,67 @@ def test_config_pins_dimensions_and_no_machine_paths():
         assert all(len(digest) == 64 for digest in pins.values())
     assert "/home/" not in text and "/mnt/" not in text
     assert config["motion_sigma_m"] == .3 and config["velocity_link_sigma_mps"] == .15
+
+
+# 2026-10-04 paper-contract regression: exact Eq3/25 branch is distinct from
+# the inherited high-rate left-bias integration above.
+def _paper_graph(n=7):
+    data,ahrs,position,velocity,bias=_synthetic_graph(n)
+    ahrs["linear_acceleration_body_mps2"]=np.tile(bias,(n,1))
+    ahrs["rotation_ned_from_body"]=np.tile(np.eye(3),(n,1,1))
+    cfg={"ins_discretization":"RIGHT_ENDPOINT_ACCELERATION_EQ25","bias_endpoint":"RIGHT_EQ3"}
+    return data,ahrs,position,velocity,bias,cfg
+
+
+def test_paper_right_endpoint_nonconstant_bias_jacobian_and_dynamic_R_GL():
+    data,ahrs,*_,cfg=_paper_graph(4)
+    problem=WenProblem(data,ahrs,cfg)
+    x=problem.x0.copy(); x[:36]+=np.random.default_rng(6421).normal(0,.1,36)
+    _,analytic=problem.residual_jacobian(x)
+    numeric=np.empty(analytic.shape)
+    for j in range(problem.size):
+        delta=.01
+        plus,minus=x.copy(),x.copy(); plus[j]+=delta; minus[j]-=delta
+        numeric[:,j]=(problem.residual_jacobian(plus,jacobian=False)-problem.residual_jacobian(minus,jacobian=False))/(2*delta)
+    np.testing.assert_allclose(analytic.toarray(),numeric,rtol=2e-6,atol=8e-7)
+    offset=problem.m+6*(problem.n-1)
+    # INS0 uses b1, and the changing b0 is absent from its first block.
+    assert analytic[offset:offset+3,6:9].nnz==0
+    assert np.linalg.norm(analytic[offset:offset+3,15:18].toarray())>0
+
+
+def test_paper_endpoint_noiseless_sensor_equations_recover_full_state():
+    data,ahrs,position,velocity,bias,cfg=_paper_graph()
+    result=solve(data,ahrs,cfg)
+    assert result["converged"] and result["ins_discretization"]=="RIGHT_ENDPOINT_ACCELERATION_EQ25"
+    assert result["R_GL_position_dependence"]=="CURRENT_RIGHT_NODE_ECEF_WITH_ANALYTIC_JACOBIAN"
+    np.testing.assert_allclose(result["position_ecef_m"],position,rtol=0,atol=2e-4)
+    np.testing.assert_allclose(result["velocity_ecef_mps"],velocity,rtol=0,atol=2e-5)
+    np.testing.assert_allclose(result["accel_bias_body_mps2"],np.tile(bias,(len(position),1)),rtol=0,atol=2e-5)
+
+
+def test_wgs84_R_GL_derivative_is_current_position_not_frozen_anchor():
+    from legsa_gins.paper_rebuild.fgo_comparison.wen_tc import ned_to_ecef_and_derivative
+    p=np.array([[1.1e6,-4.7e6,4.2e6],[1.3e6,-4.2e6,4.0e6]])
+    rotation,derivative=ned_to_ecef_and_derivative(p)
+    assert not np.array_equal(rotation[0],rotation[1])
+    for k in range(3):
+        step=np.eye(3)[k]*.1
+        numeric=(ned_to_ecef_and_derivative(p+step)[0]-ned_to_ecef_and_derivative(p-step)[0])/.2
+        np.testing.assert_allclose(derivative[:,:,:,k],numeric,rtol=1e-7,atol=1e-14)
+    np.testing.assert_allclose(rotation @ np.swapaxes(rotation,1,2),np.tile(np.eye(3),(2,1,1)),atol=1e-14)
+
+
+def test_eq25_endpoint_acceleration_differs_from_high_rate_average():
+    times,raw,rotation,imu=_imu_example()
+    dt=np.diff(raw)
+    imu[:,4]=raw[1:]*dt # linearly changing physical body acceleration
+    legacy=integrate_ahrs(times=times,imu=imu,raw_times=raw,quaternion_times=raw,
+        rotation_ecef_from_body=rotation,gravity_ecef_mps2=[0,0,9.8],seed_time_s=0,lever_body_m=[0,0,0])
+    paper=integrate_ahrs(times=times,imu=imu,raw_times=raw,quaternion_times=raw,
+        rotation_ecef_from_body=rotation,gravity_ecef_mps2=[0,0,9.8],seed_time_s=0,lever_body_m=[0,0,0],
+        ins_discretization="RIGHT_ENDPOINT_ACCELERATION_EQ25")
+    np.testing.assert_allclose(paper["delta_velocity_ecef_mps"][:,0],times[1:]*np.diff(times),atol=1e-14)
+    assert np.max(abs(paper["delta_velocity_ecef_mps"][:,0]-legacy["delta_velocity_ecef_mps"][:,0]))>.4
+    np.testing.assert_allclose(paper["linear_acceleration_body_mps2"][:,2],0,atol=1e-14)
+    assert paper["interval_valid"].all()

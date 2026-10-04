@@ -35,12 +35,7 @@ class PairGeometry:
 
 def rotate_with_geometric_flight(satellite: Sequence[float], anchor: Sequence[float]) -> np.ndarray:
     """One Earth rotation only, with iterated geometric rather than code delay."""
-    sat, point = np.asarray(satellite, float), np.asarray(anchor, float)
-    corrected = sat
-    for _ in range(4):
-        flight = float(np.linalg.norm(corrected - point)) / C
-        corrected = raw.earth_rotation_correct_satellite(sat, flight)
-    return corrected
+    return raw.earth_rotation_correct_satellite_geometric(satellite, anchor)
 
 
 def pair_geometry(epoch1, epoch2, measurement1, measurement2, provider, anchor) -> PairGeometry:

@@ -48,6 +48,37 @@ def _array(value, shape, label, *, finite=True):
     return result
 
 
+def ned_to_ecef_and_derivative(position):
+    """Eq3/Appendix R_GL at the current ECEF position, with analytic dR/dp.
+
+    Internally NED and FRD replace the paper's ENU/body convention by an exact
+    axis permutation. WGS84 lat/lon derivatives follow inverse BLH Jacobian.
+    """
+    xyz=np.asarray(position,float)
+    x,y,z=xyz.T; rho=np.hypot(x,y)
+    a,e2=6378137.,6.6943799901413165e-3
+    lat=np.arctan2(z,rho*(1-e2))
+    for _ in range(10):
+        n=a/np.sqrt(1-e2*np.sin(lat)**2)
+        lat=np.arctan2(z+e2*n*np.sin(lat),rho)
+    lon=np.arctan2(y,x); sp,cp,sl,cl=np.sin(lat),np.cos(lat),np.sin(lon),np.cos(lon)
+    n=a/np.sqrt(1-e2*sp**2); height=rho/cp-n
+    dn=n*e2*sp*cp/(1-e2*sp**2)
+    rotation=np.stack((np.stack((-sp*cl,-sl,-cp*cl),axis=-1),
+        np.stack((-sp*sl,cl,-cp*sl),axis=-1),np.stack((cp,np.zeros_like(cp),-sp),axis=-1)),axis=1)
+    dlat=np.stack((np.stack((-cp*cl,np.zeros_like(cp),sp*cl),axis=-1),
+        np.stack((-cp*sl,np.zeros_like(cp),sp*sl),axis=-1),np.stack((-sp,np.zeros_like(cp),-cp),axis=-1)),axis=1)
+    dlon=np.stack((np.stack((sp*sl,-cl,cp*sl),axis=-1),
+        np.stack((-sp*cl,-sl,-cp*cl),axis=-1),np.zeros_like(xyz)),axis=1)
+    position_lat=np.stack(((dn*cp-(n+height)*sp)*cl,(dn*cp-(n+height)*sp)*sl,
+                          dn*(1-e2)*sp+(n*(1-e2)+height)*cp),axis=-1)
+    position_lon=np.stack((-y,x,np.zeros_like(x)),axis=-1)
+    position_h=np.stack((cp*cl,cp*sl,sp),axis=-1)
+    inverse=np.linalg.inv(np.stack((position_lat,position_lon,position_h),axis=-1))
+    derivative=dlat[:,:,:,None]*inverse[:,0,None,None,:]+dlon[:,:,:,None]*inverse[:,1,None,None,:]
+    return rotation,derivative
+
+
 class WenProblem:
     """Sparse analytic residual/Jacobian, with local position increments in x.
 
@@ -59,6 +90,10 @@ class WenProblem:
 
     def __init__(self, data: dict, ahrs: dict, config: dict | None = None):
         self.config = {**DEFAULT_CONFIG, **(config or {})}
+        self.paper_endpoint = self.config.get("ins_discretization") == "RIGHT_ENDPOINT_ACCELERATION_EQ25"
+        self.bias_endpoint = self.config.get("bias_endpoint", "LEFT_LEGACY")
+        if self.paper_endpoint and self.bias_endpoint != "RIGHT_EQ3":
+            raise WenInputError("Eq25 endpoint acceleration requires Eq3 right-endpoint body bias")
         self.times = np.asarray(data["time_rel_s"], dtype=float)
         self.n = len(self.times)
         if self.times.shape != (self.n,) or self.n < 3 or not np.isfinite(self.times).all() or np.any(np.diff(self.times) <= 0):
@@ -84,6 +119,9 @@ class WenProblem:
         self.dv = _array(ahrs["delta_velocity_ecef_mps"], (self.n - 1, 3), "AHRS delta velocity")
         self.bint = _array(ahrs["bias_integral_ecef_s"], (self.n - 1, 3, 3), "body-bias integral")
         self.lever_dv = _array(ahrs["lever_velocity_delta_ecef_mps"], (self.n - 1, 3), "lever velocity change")
+        if self.paper_endpoint:
+            self.body_acceleration = _array(ahrs["linear_acceleration_body_mps2"], (self.n,3), "AHRS linear acceleration")
+            self.ned_from_body = _array(ahrs["rotation_ned_from_body"], (self.n,3,3), "local AHRS attitude")
         valid = np.asarray(ahrs["interval_valid"])
         if valid.shape != (self.n - 1,) or not np.isin(valid, [0, 1]).all():
             raise WenInputError("AHRS interval validity shape/value mismatch")
@@ -148,6 +186,8 @@ class WenProblem:
         Thus LM damping cannot hide drift gauges or manufacture observability.
         This is a numerical rank test, never an added prior or pseudo-factor.
         """
+        state = np.asarray(x)[:9 * self.n].reshape(self.n, 9)
+        _, bint, ins_position_derivative = self.ins_terms(state)
         internal_gaps = np.flatnonzero(~self.ins_valid[:-1])
         dimension = 9 + 3 * len(internal_gaps)
         gap_columns = {int(k): 9 + 3 * j for j, k in enumerate(internal_gaps)}
@@ -160,7 +200,9 @@ class WenProblem:
                 break
             pmap = pmap + np.diff(self.times)[k] * vmap
             if self.ins_valid[k]:
-                vmap[:, 6:9] -= self.bint[k]
+                if self.paper_endpoint:
+                    vmap += ins_position_derivative[k] @ pmap
+                vmap[:, 6:9] -= bint[k]
             elif k in gap_columns:
                 j = gap_columns[k]
                 vmap[:, j:j+3] += np.eye(3)
@@ -195,6 +237,18 @@ class WenProblem:
                 "internal_missing_ins_links": internal_gaps.tolist(),
                 "removed_zero_column_count": len(self.unconstrained_columns)}
 
+    def ins_terms(self, state):
+        if not self.paper_endpoint:
+            return self.dv, self.bint, np.zeros((self.n-1,3,3))
+        rotation, derivative = ned_to_ecef_and_derivative(state[1:,:3]+self.origin)
+        dt=np.diff(self.times)
+        local=np.einsum("nij,nj->ni",self.ned_from_body[1:],self.body_acceleration[1:]-state[1:,6:9])
+        dv=np.einsum("nij,nj->ni",rotation,local)*dt[:,None]
+        bint=(rotation @ self.ned_from_body[1:])*dt[:,None,None]
+        position_derivative=np.einsum("nijk,nj->nik",derivative,local)*dt[:,None,None]
+        # dv includes the current bias in this branch; do not subtract it twice.
+        return dv,bint,position_derivative
+
     def residual_jacobian(self, x, *, jacobian=True):
         x = _array(x, (self.size,), "optimization state")
         state = x[:9 * self.n].reshape(self.n, 9)
@@ -213,8 +267,11 @@ class WenProblem:
         motion_r = (state[1:, :3] - state[:-1, :3] - state[:-1, 3:6] * dt[:, None]) / self.config["motion_sigma_m"]
         bias_r = (state[1:, 6:9] - state[:-1, 6:9]) / self.config["bias_between_sigma_mps2"]
         ii = self.ins_index
-        ins_r = (state[ii + 1, 3:6] - state[ii, 3:6] - self.dv[ii] - self.lever_dv[ii]
-                 + np.einsum("nij,nj->ni", self.bint[ii], state[ii, 6:9])) / self.config["velocity_link_sigma_mps"]
+        dv,bint,position_derivative = self.ins_terms(state)
+        bias_index = ii+1 if self.bias_endpoint == "RIGHT_EQ3" else ii
+        bias_term = 0. if self.paper_endpoint else np.einsum("nij,nj->ni",bint[ii],state[bias_index,6:9])
+        ins_r = (state[ii + 1, 3:6] - state[ii, 3:6] - dv[ii] - self.lever_dv[ii]
+                 + bias_term) / self.config["velocity_link_sigma_mps"]
         residual = np.concatenate((code_r, motion_r.ravel(), bias_r.ravel(), ins_r.ravel()))
         if not jacobian:
             return residual
@@ -240,8 +297,11 @@ class WenProblem:
             add(row, (ii + 1) * 9 + 3 + axis, 1 / self.config["velocity_link_sigma_mps"])
             add(row, ii * 9 + 3 + axis, -1 / self.config["velocity_link_sigma_mps"])
             for body_axis in range(3):
-                add(row, ii * 9 + 6 + body_axis,
-                    self.bint[ii, axis, body_axis] / self.config["velocity_link_sigma_mps"])
+                add(row, bias_index * 9 + 6 + body_axis,
+                    bint[ii, axis, body_axis] / self.config["velocity_link_sigma_mps"])
+                if self.paper_endpoint:
+                    add(row,(ii+1)*9+body_axis,
+                        -position_derivative[ii,axis,body_axis]/self.config["velocity_link_sigma_mps"])
         matrix = sparse.coo_matrix((vals, (rows, cols)), shape=(self.row_count, self.size)).tocsr()
         return residual, matrix
 
@@ -366,6 +426,9 @@ def solve(data: dict, ahrs: dict, config: dict | None = None) -> dict[str, Any]:
         "ahrs_interval_valid": np.asarray(ahrs["interval_valid"], bool),
         "attitude_output": False, "doppler_factor_count": 0, "dual_yaw_factor_count": 0,
         "output_point": "GNSS1_ANTENNA", "solve_mode": "OFFLINE_FULL_BATCH_LM",
+        "ins_discretization": cfg.get("ins_discretization", "HIGH_RATE_INTEGRAL_LEGACY"),
+        "bias_endpoint": problem.bias_endpoint,
+        "R_GL_position_dependence": "CURRENT_RIGHT_NODE_ECEF_WITH_ANALYTIC_JACOBIAN" if problem.paper_endpoint else "FIXED_INITIAL_LOCAL_BASIS_LEGACY",
         "future_observations_used": True, "initialization_only_interpolated_wls_count":
             int(np.sum(~np.isfinite(np.asarray(data["initial_position_ecef_m"], float)).all(axis=1))),
     }

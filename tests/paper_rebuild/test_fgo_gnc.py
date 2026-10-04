@@ -9,7 +9,10 @@ import numpy as np
 import pytest
 
 from legsa_gins.paper_rebuild.fgo_comparison.gnc import (
+    EQ21_SQUARED_GM,
+    EQ22_PRINTED_DIAGNOSTIC,
     _prepare_graph,
+    eq22_printed_weight,
     gm_loss,
     gnc_weight,
     solve,
@@ -102,7 +105,8 @@ def test_noiseless_position_and_independent_clocks_without_attitude_state():
     np.testing.assert_allclose(result["clock_m"], clocks, atol=1e-5, rtol=0)
     assert "yaw" not in result and "roll" not in result and "pitch" not in result
     assert result["components"][0]["variable_count"] == len(truth) * 5
-    assert max(item["theta"] for item in result["iterations"]) == 1
+    assert max(item["theta"] for item in result["iterations"]) < 1
+    assert result["components"][0]["theta_final"] < 1
     assert result["iterations"][-1]["converged"]
     for key in data:
         np.testing.assert_array_equal(data[key], input_copy[key])
@@ -156,11 +160,17 @@ def test_outlier_is_downweighted_by_actual_gnc_continuation():
     history = result["weight_history"]
     np.testing.assert_array_equal(history[0]["weights"], 1)
     theta = [row["theta"] for row in result["iterations"]]
-    assert theta[0] > 100 and theta[-1] == 1
+    assert theta[0] > 100 and 1 <= theta[-1] < 1.4
     for previous, current in zip(theta[:-1], theta[1:]):
-        assert current == max(1.0, previous / 1.4)
+        assert current == previous / 1.4
     assert len(set(theta)) > 10
-    np.testing.assert_allclose(result["weights"], gnc_weight(result["residuals"], 1, 2), rtol=1e-13)
+    assert result["components"][0]["theta_final"] == theta[-1] / 1.4
+    assert result["components"][0]["final_alternations"] == 0
+    assert all(row["phase"] == "ALGORITHM1_STEP2_STEP3" for row in result["iterations"])
+    np.testing.assert_allclose(result["weights"], gnc_weight(result["residuals"], theta[-1], 2), rtol=1e-13)
+    np.testing.assert_array_equal(result["state_solve_weights"], history[-2]["weights"])
+    np.testing.assert_array_equal(result["weights"], history[-1]["weights"])
+    assert not np.array_equal(result["state_solve_weights"], result["weights"])
 
 
 def test_noisy_batch_converges_without_ecef_cancellation_line_search_failure():
@@ -172,7 +182,8 @@ def test_noisy_batch_converges_without_ecef_cancellation_line_search_failure():
     assert result["terminal_status"] == "COMPLETED", result["components"]
     assert result["valid_epoch_count"] == 250
     assert np.mean(np.linalg.norm(result["position_ecef_m"] - truth, axis=1)) < 1
-    assert result["components"][0]["theta_final"] == 1
+    assert result["components"][0]["theta_final"] < 1
+    assert 1 <= result["components"][0]["theta_last_solved"] < 1.4
     assert result["iterations"][-1]["converged"]
     assert result["components"][0]["final_weight_consistency_max_abs"] <= 1e-6
     predicted = np.linalg.norm(data["sat_pos_ecef_m"] - result["position_ecef_m"][data["epoch_index"]], axis=1) + result["clock_m"][data["epoch_index"], data["system"]]
@@ -227,11 +238,11 @@ def test_no_raw_wls_anchor_never_promotes_a_reference_or_zero_seed():
 
 def test_limit_is_a_failure_not_a_completed_low_iteration_run():
     data, _, _ = _synthetic(n=5, outlier=100)
-    result = solve(data, {"max_final_alternations": 1, "weight_tolerance": 1e-14})
+    result = solve(data, {"max_continuation_iterations": 1})
     assert result["terminal_status"] == "FAILED"
-    assert np.all(result["status"] == "MAX_FINAL_ALTERNATIONS")
+    assert np.all(result["status"] == "MAX_CONTINUATION_ITERATIONS")
     assert np.isnan(result["position_ecef_m"]).all()
-    assert len(result["iterations"]) > 10
+    assert len(result["iterations"]) == 1
 
 
 def test_bad_covariance_breaks_edge_and_nonmonotonic_time_is_rejected():
@@ -247,7 +258,7 @@ def test_bad_covariance_breaks_edge_and_nonmonotonic_time_is_rejected():
 
 
 def test_committed_configuration_uses_fixed_paper_parameters():
-    path = Path(__file__).resolve().parents[2] / "configs/paper_rebuild/fgo_comparison/GNC_2022.json"
+    path = Path(__file__).resolve().parents[2] / "configs/paper_rebuild/fgo_comparison/GNC_PAPER_CONTRACT_20261004.json"
     config = json.loads(path.read_text())
     data, truth, _ = _synthetic(n=3)
     result = solve(data, config)
@@ -255,3 +266,90 @@ def test_committed_configuration_uses_fixed_paper_parameters():
     np.testing.assert_allclose(result["position_ecef_m"], truth, atol=1e-5, rtol=0)
     assert config["c_gm"] == 2
     assert config["theta_divisor"] == 1.4
+    assert config["weight_equation_variant"] == EQ21_SQUARED_GM
+
+
+def test_printed_eq22_is_not_the_eq21_stationary_weight_or_same_gm_cost():
+    residual = np.array([0., .7, -4., 80.])
+    theta, c = 3., 2.
+    printed = eq22_printed_weight(residual, theta, c)
+    stationary = gnc_weight(residual, theta, c)
+    a = theta * c ** 2
+    derivative = residual ** 2 + a * (1 - 1 / np.sqrt(printed))
+    assert np.all((printed >= 0) & (printed <= 1))
+    assert np.max(np.abs(derivative)) > 1
+    printed_joint = printed * residual ** 2 + a * (np.sqrt(printed) - 1) ** 2
+    stationary_joint = stationary * residual ** 2 + a * (np.sqrt(stationary) - 1) ** 2
+    assert np.all(printed_joint[1:] > stationary_joint[1:])
+
+
+def test_eq22_diagnostic_is_explicit_and_does_not_claim_gm_auxiliary_optimality():
+    data, _, _ = _synthetic(n=5, outlier=30.)
+    result = solve(data, {"weight_equation_variant": EQ22_PRINTED_DIAGNOSTIC})
+    assert result["terminal_status"] == "COMPLETED", result["components"]
+    assert result["weight_equation"] == EQ22_PRINTED_DIAGNOSTIC
+    assert "NOT_GM_AUXILIARY_OPTIMUM" in result["solve_mode"]
+    assert all(row["surrogate_cost"] is None for row in result["iterations"])
+    last = result["iterations"][-1]
+    np.testing.assert_allclose(result["weights"], eq22_printed_weight(result["residuals"], last["theta"], 2), rtol=1e-13)
+    assert last["auxiliary_cost_eq19_after_update"] > last["gm_cost_eq18_diagnostic"]
+
+
+def test_eq23_initial_theta_is_not_floored_and_step_order_has_no_extra_solve():
+    data, _, _ = _synthetic(n=3, measurement_noise=True)
+    whitening = np.array([np.linalg.solve(np.linalg.cholesky(c), np.eye(3)) for c in data["doppler_covariance"][:-1]])
+    graph = _prepare_graph(data, np.arange(3), np.ones(len(data["epoch_index"]), dtype=bool), whitening)
+    initial, _ = graph.residual_jacobian(graph.initial_state)
+    theta = 3 * np.max(initial[:graph.n_observation] ** 2) / 4
+    result = solve(data)
+    component = result["components"][0]
+    assert component["theta_initial"] == theta
+    actual = result["iterations"]
+    expected=[]
+    while True:
+        expected.append(theta)
+        theta /= 1.4
+        if theta < 1:break
+    assert [row["theta"] for row in actual] == expected
+    assert len(result["weight_history"]) == len(expected)+1
+    for row in actual:
+        assert row["theta_after_reduction"] == row["theta"] / 1.4
+        assert not row["updated_weights_applied_to_this_state"]
+        np.testing.assert_allclose(row["auxiliary_cost_eq19_after_update"], row["surrogate_cost"], rtol=1e-13)
+    assert component["theta_final"] == theta
+    assert component["termination"] == "ALGORITHM1_THETA_LT_ONE_AFTER_REDUCTION"
+
+
+def test_zero_eq23_exact_optimum_has_no_invented_floor_or_iteration():
+    data, truth, clocks = _synthetic(n=1)
+    data["initial_position_ecef_m"] = truth.copy()
+    data["initial_clock_m"] = clocks.copy()
+    result = solve(data)
+    assert result["valid"].all()
+    component = result["components"][0]
+    assert component["theta_initial"] == 0
+    assert component["theta_final"] == 0
+    assert component["outer_iterations"] == 0
+    assert component["termination"] == "ZERO_INITIAL_OBJECTIVE_EXACT_SOLUTION"
+    np.testing.assert_array_equal(result["weights"], 1)
+    np.testing.assert_array_equal(result["position_ecef_m"], truth)
+
+
+def test_zero_eq23_with_nonzero_doppler_objective_is_undefined_not_fabricated_success():
+    data, truth, clocks = _synthetic(n=2)
+    data["initial_position_ecef_m"][:] = truth[0]
+    data["initial_clock_m"][:] = clocks[0]
+    data["sat_pos_ecef_m"][16:] = data["sat_pos_ecef_m"][:16]
+    data["pseudorange_m"][16:] = data["pseudorange_m"][:16]
+    result = solve(data)
+    assert result["terminal_status"] == "FAILED"
+    assert np.all(result["status"] == "UNDEFINED_EQ23_INITIAL_THETA")
+    assert np.isnan(result["position_ecef_m"]).all()
+
+
+def test_legacy_theta_one_extension_and_nonpaper_divisor_are_rejected():
+    data, _, _ = _synthetic(n=2)
+    with pytest.raises(ValueError, match="legacy theta-one"):
+        solve(data, {"max_final_alternations": 1})
+    with pytest.raises(ValueError, match="theta_divisor=1.4"):
+        solve(data, {"theta_divisor": 1.5})

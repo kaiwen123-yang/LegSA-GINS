@@ -117,6 +117,8 @@ def optimize(factors, initial, indices, config):
               "accepted_steps": max(0, int(summary.num_successful_steps) - 1),
               "initial_cost": summary.initial_cost, "final_cost": summary.final_cost,
               "termination": str(summary.termination_type), "brief_report": summary.BriefReport(),
+              "converged": summary.termination_type == pyceres.TerminationType.CONVERGENCE,
+              "solution_usable": bool(summary.IsSolutionUsable()),
               "givens_rotations": 0, "cost_evaluations": sum(c.evaluation_count for c in costs),
               "linear_solver": str(summary.linear_solver_type_used), "threads": summary.num_threads_used}
     return values, report

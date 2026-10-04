@@ -182,7 +182,7 @@ def bootstrap_code(provider, epoch, config):
         if 'PNTPOS_NO_SUPPORTED_RAW_MEASUREMENTS' in str(error): return None
         raise
     if coarse.accepted: return coarse.position_ecef_m
-    try: return raw.gps_l1_code_spp(epoch,provider,min_cno_dbhz=config['minimum_cno_dbhz'],max_iterations=50).position_ecef_m
+    try: return raw.gps_l1_code_spp(epoch,provider,min_cno_dbhz=config['minimum_cno_dbhz'],max_iterations=50,earth_rotation_delay=config.get('spp_earth_rotation_delay','legacy_raw_code')).position_ecef_m
     except raw.RawBackendError: return None
 
 

@@ -1394,6 +1394,28 @@ def earth_rotation_correct_satellite(satellite_ecef_m: Sequence[float],
     ])
 
 
+def earth_rotation_correct_satellite_geometric(
+    satellite_ecef_m: Sequence[float], receiver_ecef_m: Sequence[float],
+) -> np.ndarray:
+    """Rotate a transmit state once using iterated physical range/c.
+
+    RAWX code includes receiver and satellite clock terms and is still required
+    by the broadcast provider for transmit time. It is not a physical flight
+    time. Always rotate the original transmit coordinate, never its previous
+    rotated value, to avoid applying Earth rotation multiple times.
+    """
+    satellite = np.asarray(satellite_ecef_m, dtype=float)
+    receiver = np.asarray(receiver_ecef_m, dtype=float)
+    if (satellite.shape != (3,) or receiver.shape != (3,)
+            or not np.isfinite(satellite).all() or not np.isfinite(receiver).all()):
+        raise RawBackendError("invalid geometric Earth-rotation inputs")
+    corrected = satellite
+    for _ in range(4):
+        flight = float(np.linalg.norm(corrected - receiver)) / _SPEED_OF_LIGHT_MPS
+        corrected = earth_rotation_correct_satellite(satellite, flight)
+    return corrected
+
+
 def line_of_sight(receiver_ecef_m: Sequence[float], satellite_ecef_m: Sequence[float]) -> np.ndarray:
     delta = np.asarray(satellite_ecef_m, dtype=float) - np.asarray(receiver_ecef_m, dtype=float)
     norm = np.linalg.norm(delta)
@@ -1454,8 +1476,17 @@ class SppSolution:
 
 def gps_l1_code_spp(epoch: RawxEpoch, provider: SatelliteStateProvider,
                     initial_position_ecef_m: Sequence[float] | None = None,
-                    min_cno_dbhz: int = 20, max_iterations: int = 12) -> SppSolution:
-    """Unweighted GPS L1 raw-code SPP used only to seed real DD geometry."""
+                    min_cno_dbhz: int = 20, max_iterations: int = 12,
+                    *, earth_rotation_delay: str = "legacy_raw_code") -> SppSolution:
+    """Unweighted GPS L1 raw-code SPP used only to seed real DD geometry.
+
+    The default preserves the historical frozen code-delay instance. New V2
+    reproductions explicitly select iterated_geometric: the provider still
+    receives each original P for transmit time, but Earth rotation uses the
+    physical geometric flight time at the current SPP position iterate.
+    """
+    if earth_rotation_delay not in ("legacy_raw_code", "iterated_geometric"):
+        raise RawBackendError("unknown SPP Earth-rotation delay contract")
     by_satellite: dict[SignalIdentity, RawxMeasurement] = {}
     for measurement in epoch.measurements:
         if gps_l1_code_eligible(measurement, min_cno_dbhz):
@@ -1484,9 +1515,14 @@ def gps_l1_code_spp(epoch: RawxEpoch, provider: SatelliteStateProvider,
                 continue
             if state.health != 0:
                 continue
-            corrected = earth_rotation_correct_satellite(
-                state.position_ecef_m, measurement.pr_mes_m / _SPEED_OF_LIGHT_MPS
-            )
+            if earth_rotation_delay == "iterated_geometric":
+                corrected = earth_rotation_correct_satellite_geometric(
+                    state.position_ecef_m, position,
+                )
+            else:
+                corrected = earth_rotation_correct_satellite(
+                    state.position_ecef_m, measurement.pr_mes_m / _SPEED_OF_LIGHT_MPS
+                )
             delta = corrected - position
             geometric = float(np.linalg.norm(delta))
             if not math.isfinite(geometric) or geometric <= 0:

@@ -1,10 +1,12 @@
 """Independent OiSAM-FGO reproduction (Yang et al., 2025, DOI 00173-w).
 
-Paper mapping: Eq4 -> CombinedImuFactor with Earth-rate correction; Eq5 ->
+Paper mapping: Eq4 -> pinned OB_GINS PreintegrationEarth (paper contract),
+legacy CombinedImuFactor retained only under its historical configuration; Eq5 ->
 gnss_factor; Eq6 -> marginalize_oldest; Eqs13/14 -> normal_system;
 Algorithm1/Figs4-5 -> BandedMatrix/IncrementalQR; Algorithm2 -> OiSAMGraph.step.
 
-GTSAM 4.2 supplies preintegration and manifold factor derivatives ONLY. Its
+GTSAM 4.2 supplies state containers/manifold charts; only the historical
+profile uses its preintegration. The paper contract uses pinned OB_GINS. Its
 iSAM/iSAM2 solvers are not used. The normal matrix uses 4m scalars per row,
 structured Givens rotations, an incremental tail cache and A-JSWR. Nonlinear
 relinearization uses actual Ceres through pyceres, as in Algorithm2.
@@ -302,8 +304,13 @@ def marginalize_oldest(factors, values, indices):
 
 class OiSAMGraph:
     """One continuous IMU segment; no reference or other solution is accepted."""
-    def __init__(self, config, row, gravity, *, init_body_rate):
+    def __init__(self, config, row, gravity, *, init_body_rate, seed_piece=None):
         self.config = config
+        self.gravity = float(gravity)
+        self.last_piece = seed_piece
+        self.backend = config.get("preintegration_backend", "GTSAM_LEGACY")
+        if self.backend == "OB_GINS_EARTH_PINNED" and seed_piece is None:
+            raise ValueError("IMU_UPSTREAM_CONING_SEED_REQUIRED")
         self.origin_llh = row[1:4].copy()
         self.origin = llh_to_ecef(self.origin_llh)
         self.cne = ecef_to_ned_rotation(self.origin_llh)
@@ -353,7 +360,8 @@ class OiSAMGraph:
                        "imu_factors": 0, "gnss_factors": 1, "heading_factors": 0,
                        "initial_attitude_priors": 1,
                        "givens_rotations": 0, "nonlinear_max_iterations": 0,
-                       "attitude_triggers": 0, "window_triggers": 0}
+                       "attitude_triggers": 0, "window_triggers": 0,
+                       "nonlinear_converged_calls": 0, "nonlinear_usable_limit_calls": 0}
 
     def current(self):
         x, v, b = keys(self.indices[-1])
@@ -367,14 +375,26 @@ class OiSAMGraph:
         xp, vp, bp = keys(prev)
         x, v, b = keys(index)
         prior_bias = self.values.atConstantBias(bp)
-        pim = preintegrate(self.params, prior_bias, pieces)
-        predicted = pim.predict(gtsam.NavState(self.values.atPose3(xp), self.values.atVector(vp)), prior_bias)
+        if self.backend == "OB_GINS_EARTH_PINNED":
+            from .obgins_preintegration import EarthPreintegration
+            pim = EarthPreintegration(self.config, self.origin_llh, self.gravity,
+                self.values.atPose3(xp), self.values.atVector(vp), prior_bias,
+                self.last_time, pieces, self.last_piece)
+            predicted_pose, predicted_velocity, _ = pim.predict()
+            new_factors = [pim.factor(keys(prev), keys(index))]
+            self.last_piece = pim.last_piece
+        elif self.backend == "GTSAM_LEGACY":
+            pim = preintegrate(self.params, prior_bias, pieces)
+            predicted = pim.predict(gtsam.NavState(self.values.atPose3(xp), self.values.atVector(vp)), prior_bias)
+            predicted_pose, predicted_velocity = predicted.pose(), predicted.velocity()
+            new_factors = [gtsam.CombinedImuFactor(xp, vp, x, v, bp, b, pim)]
+        else:
+            raise ValueError("UNKNOWN_PREINTEGRATION_BACKEND")
         for values in (self.values, self.anchors):
-            values.insert(x, predicted.pose())
-            values.insert(v, predicted.velocity())
+            values.insert(x, predicted_pose)
+            values.insert(v, predicted_velocity)
             values.insert(b, prior_bias)
         self.indices.append(index)
-        new_factors = [gtsam.CombinedImuFactor(xp, vp, x, v, bp, b, pim)]
         self.counts["imu_factors"] += 1
         if position_valid(row):
             p = self.cne @ (llh_to_ecef(row[1:4]) - self.origin)
@@ -432,7 +452,11 @@ class OiSAMGraph:
         self.counts["nonlinear_max_iterations"] = max(self.counts["nonlinear_max_iterations"], result["iterations"])
         self.counts["givens_rotations"] += result["givens_rotations"]
         diagnostics["nonlinear_iterations"] = result["iterations"]
+        self.counts["nonlinear_converged_calls"] += int(result["converged"])
+        self.counts["nonlinear_usable_limit_calls"] += int(not result["converged"] and result["solution_usable"])
         diagnostics["nonlinear_status"] = result["termination"]
+        diagnostics["nonlinear_converged"] = result["converged"]
+        diagnostics["nonlinear_solution_usable"] = result["solution_usable"]
         diagnostics["nonlinear_backend"] = result["backend"]
         diagnostics["ceres_report"] = result["brief_report"]
         diagnostics["cost"] = result["final_cost"]
@@ -463,6 +487,7 @@ def run_inputs(inputs, config, write_state, write_event):
     finite_count = 0
     aggregate = {}
     fatal_reason = None
+    input_failure = None
     maximum_endpoint_wait_s = 0.0
 
     def close_segment():
@@ -475,12 +500,15 @@ def run_inputs(inputs, config, write_state, write_event):
                                   else aggregate.get(key, 0) + value)
             graph = None
 
+    initialization_source=config.get("initialization_source", "same_epoch_GNSS1_position_A1_yaw_and_completed_calibrated_IMU_rate")
+    uses_a1=config.get("initialization_yaw_role", "A1") == "A1"
     for timestamp, row, expected_second in inputs.nodes:
-        if fatal_reason is not None:
-            write_state([timestamp, *([float("nan")] * 9), 0, "AFTER_NUMERICAL_SOLVER_FAILURE"])
-            failures.append({"time_rel_s": timestamp, "reason": "AFTER_NUMERICAL_SOLVER_FAILURE"})
+        if fatal_reason is not None or input_failure is not None:
+            unavailable = "AFTER_NUMERICAL_SOLVER_FAILURE" if fatal_reason else "AFTER_INPUT_GAP_NO_REINITIALIZATION"
+            write_state([timestamp, *([float("nan")] * 9), 0, unavailable])
+            failures.append({"time_rel_s": timestamp, "reason": unavailable})
             write_event({"time_rel_s": timestamp, "expected_second": expected_second,
-                         "mode": "UNAVAILABLE", "reason": "AFTER_NUMERICAL_SOLVER_FAILURE"})
+                         "mode": "UNAVAILABLE", "reason": unavailable})
             last_node = timestamp
             continue
         try:
@@ -493,11 +521,14 @@ def run_inputs(inputs, config, write_state, write_event):
                     imu_pieces(inputs.imu, last_node, timestamp, config["maximum_imu_interval_s"], inputs.imu_intervals)
                 init_body_rate, rate_source = initialization_body_rate(
                     inputs.imu, timestamp, config["maximum_imu_interval_s"], inputs.imu_intervals)
+                seed_row = inputs.imu[rate_source["provider_row_index_zero_based"]]
+                seed_dt = rate_source["interval_end_rel_s"] - rate_source["interval_start_rel_s"]
+                seed_piece = (seed_dt, seed_row[1:4].copy(), seed_row[4:7].copy())
                 graph = OiSAMGraph(config, row, config["gravity_mps2"][inputs.sequence],
-                                   init_body_rate=init_body_rate)
+                                   init_body_rate=init_body_rate, seed_piece=seed_piece)
                 segments.append({"segment_id": len(segments) + 1, "start_s": timestamp,
-                                 "reason": pending_reason, "initialization_source": "same_epoch_GNSS1_position_A1_yaw_and_completed_calibrated_IMU_rate",
-                                 "A1_yaw_initialization_count": 1, "initial_yaw_deg": float(row[13]),
+                                 "reason": pending_reason, "initialization_source": initialization_source,
+                                 "A1_yaw_initialization_count": int(uses_a1), "initial_yaw_deg": float(row[13]),
                                  "initial_body_rate": rate_source, "initial_velocity": graph.initial_velocity,
                                  "initial_gyro_bias_radps": graph.current()[2].gyroscope().tolist()})
                 event = {"time_rel_s": timestamp, "mode": "SEGMENT_INITIALIZATION"}
@@ -507,6 +538,8 @@ def run_inputs(inputs, config, write_state, write_event):
                 pieces = imu_pieces(inputs.imu, graph.last_time, timestamp, config["maximum_imu_interval_s"], inputs.imu_intervals)
                 event = graph.step(timestamp, row, pieces)
                 status = "OK" if position_valid(row) else "IMU_ONLY_NO_GNSS_POSITION"
+                if event.get("nonlinear_converged") is False:
+                    status += "_USABLE_NONLINEAR_ITERATION_LIMIT"
                 endpoint_times = inputs.imu[:, 0] if inputs.imu_intervals is None else inputs.imu_intervals[:, 1]
                 endpoint = int(np.searchsorted(endpoint_times, timestamp, side="left"))
                 available_time = max(timestamp, float(endpoint_times[endpoint]))
@@ -527,6 +560,9 @@ def run_inputs(inputs, config, write_state, write_event):
                 # Unexpected implementation/shape errors must fail visibly and
                 # be repaired, not be mislabeled as paper-method performance.
                 raise
+            if (graph is not None and fatal_reason is None and
+                    config.get("gap_policy") == "strict_single_initialization_no_gap_bridge"):
+                input_failure = reason
             close_segment()
             pending_reason = reason
             failures.append({"time_rel_s": timestamp, "reason": reason})
@@ -536,8 +572,10 @@ def run_inputs(inputs, config, write_state, write_event):
     close_segment()
     return {"expected_nodes": len(inputs.nodes), "actual_rows": len(inputs.nodes),
             "finite_nodes": finite_count, "unavailable_nodes": len(inputs.nodes) - finite_count,
-            "segments": segments, "A1_yaw_initialization_count": len(segments),
+            "segments": segments, "initialization_count": len(segments),
+            "A1_yaw_initialization_count": len(segments)*int(uses_a1),
             "failures": failures, "core_counts": aggregate, "numerical_failure": fatal_reason,
+            "mandatory_input_failure": input_failure,
             "maximum_imu_endpoint_wait_s": maximum_endpoint_wait_s}
 
 
@@ -571,7 +609,9 @@ def run_sequence(roots_path, sequence, out_dir, config_path):
                 **flags, "old_runtime_input_count": 0, "code_commit": commit,
                 "config_hash": sha256(config_path), "config": config, "inputs": inputs.metadata,
                 **result, "terminal_status": ("PARTIAL_NUMERICAL_FAILURE" if result["numerical_failure"] else
-                    ("COMPLETED" if result["finite_nodes"] else "NO_FINITE_OUTPUT")),
+                    "INPUT_UNSUPPORTED_IMU_GAP" if result["mandatory_input_failure"] else
+                    ("COMPLETED_WITH_USABLE_NONCONVERGED_CALLS" if result["core_counts"].get("nonlinear_usable_limit_calls",0) else
+                     "COMPLETED") if result["finite_nodes"] else "NO_FINITE_OUTPUT"),
                 "solve_mode": "incremental_window_current_node_1Hz_no_historical_output_revision",
                 "future_observations_used_for_past_output": result["maximum_imu_endpoint_wait_s"] > 1e-9,
                 "future_gnss_factors_used": False,
@@ -585,8 +625,11 @@ def run_sequence(roots_path, sequence, out_dir, config_path):
                 "threads_env": {k: os.environ.get(k) for k in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS")},
                 "dependencies": {"numpy": np.__version__, "gtsam": importlib.metadata.version("gtsam"),
                                  "pyceres": importlib.metadata.version("pyceres")},
+                "preintegration_backend": config.get("preintegration_backend", "GTSAM_LEGACY"),
+                "upstream_build_receipt": (__import__("legsa_gins.paper_rebuild.fgo_comparison.obgins_preintegration",
+                    fromlist=["library"]).library().build_receipt if config.get("preintegration_backend") == "OB_GINS_EARTH_PINNED" else None),
                 "implementation_source_sha256": {name: sha256(Path(__file__).parent / name)
-                    for name in ("oisam.py", "oisam_inputs.py", "ceres_relinearize.py")},
+                    for name in ("oisam.py", "oisam_inputs.py", "ceres_relinearize.py", "obgins_preintegration.py", "obgins_bridge.cc")},
                 "states_sha256": sha256(out_dir / "STATES.csv")}
     (out_dir / "RUN_MANIFEST.json").write_text(json.dumps(manifest, indent=2, allow_nan=False) + "\n")
     return {key: manifest[key] for key in ("method_id", "sequence", "terminal_status", "wall_seconds",

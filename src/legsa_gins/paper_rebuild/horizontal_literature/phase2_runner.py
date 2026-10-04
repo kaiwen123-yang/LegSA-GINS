@@ -549,6 +549,7 @@ def _runtime_source_hashes() -> dict[str, str]:
         CLI_PATH,
         Path(__file__),
         Path(__file__).with_name("shared_raw_backend.py"),
+        Path(__file__).with_name("sequence_override.py"),
         Path(__file__).with_name("ext02_cwls.py"),
     )
     return {
@@ -1851,6 +1852,7 @@ def _invalid_record(
     candidate_rows: Sequence[Mapping[str, Any]] = (),
     refinement_rows: Sequence[Mapping[str, Any]] = (),
     candidate_counts: Mapping[str, int] | None = None,
+    *, receiver2: RawxEpoch | None = None,
 ) -> dict[str, Any]:
     counts = accounting.as_counts() if accounting is not None else {}
     rejected_counts = dict(candidate_counts or {})
@@ -1884,7 +1886,10 @@ def _invalid_record(
         "runtime_seconds": runtime_seconds, "pseudorange_valid": False,
         "carrier_valid": False, "lock_reset": False,
         "half_cycle_valid": False, "half_cycle_subtracted": False,
-        "receiver_clock_reset": bool(left.receiver_status & 0x02),
+        "receiver_clock_reset": bool(
+            left.receiver_status & 0x02
+            or (receiver2 is not None and receiver2.receiver_status & 0x02)
+        ),
         "cycle_slip": False, "arc_reset": False,
     }
     return {
@@ -2125,7 +2130,7 @@ def _solve_native_epoch(
         return _invalid_record(
             index, left, code, str(exc), elapsed, accounting,
             candidate_rows=candidates, refinement_rows=refinements,
-            candidate_counts=candidate_counts,
+            candidate_counts=candidate_counts, receiver2=right,
         )
 
 
@@ -2790,6 +2795,9 @@ def _tracking_rows(
         )
         if accepted:
             previous_pivot, previous_satellites = str(pivot), satellites
+        heading["receiver_clock_reset"] = bool(
+            left.receiver_status & 0x02 or right.receiver_status & 0x02
+        )
         heading["pivot_switched"] = pivot_switched
         heading["lock_reset"] = bool(
             summary1.actual_lock_reset_count or summary2.actual_lock_reset_count

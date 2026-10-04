@@ -1143,3 +1143,43 @@ def test_wrapped_csv_error_terminalizes_attempt_with_original_error_text(tmp_pat
     assert "csv.Error: field larger than field limit" in result["error"]
     terminal = json.loads((attempt / "ATTEMPT_TERMINAL.json").read_text(encoding="utf-8"))
     assert "csv.Error: field larger than field limit" in terminal["error"]
+
+@pytest.mark.parametrize("statuses", [(0, 2), (2, 0), (2, 2), (0, 0)])
+def test_failed_epoch_preserves_both_receiver_clock_resets(tmp_path, monkeypatch, statuses):
+    from dataclasses import replace
+    from legsa_gins.paper_rebuild.horizontal_literature.shared_raw_backend import RawBackendError
+
+    first = replace(_epoch(0), receiver_status=statuses[0])
+    second = replace(_epoch(0), receiver_status=statuses[1])
+
+    def unavailable(*args, **kwargs):
+        raise RawBackendError("SPP unavailable in the rejected epoch")
+
+    monkeypatch.setattr(phase2, "gps_l1_code_spp", unavailable)
+    record = phase2._solve_native_epoch(0, first, second, None)
+    cache = tmp_path / "failed-cache"
+    write_compact_cache(cache, [(first, second)], source_fingerprint="e" * 64)
+    tracking = phase2._tracking_rows(cache, [record])
+    expected = bool((statuses[0] | statuses[1]) & 2)
+    assert record["heading"]["receiver_clock_reset"] is expected
+    assert record["heading"]["arc_reset"] is expected
+    assert tracking[0]["receiver_clock_reset"] is expected
+    assert record["heading"]["cycle_slip"] is False
+    assert record["heading"]["method_native_accepted"] is False
+
+
+def test_runtime_identity_changes_when_sequence_selection_source_changes(tmp_path, monkeypatch):
+    source_dir = tmp_path / "src"
+    source_dir.mkdir()
+    for name in ("phase2_runner.py", "shared_raw_backend.py", "ext02_cwls.py", "sequence_override.py"):
+        (source_dir / name).write_text("# initial source\n", encoding="utf-8")
+    for key in ("CONTRACT_PATH", "HEADING_SCHEMA_PATH", "CLI_PATH"):
+        path = tmp_path / (key + ".txt")
+        path.write_text("initial contract\n", encoding="utf-8")
+        monkeypatch.setattr(phase2, key, path)
+    monkeypatch.setattr(phase2, "REPOSITORY_ROOT", tmp_path)
+    monkeypatch.setattr(phase2, "__file__", str(source_dir / "phase2_runner.py"))
+    before = phase2._fingerprint(phase2._runtime_source_hashes())
+    (source_dir / "sequence_override.py").write_text("# changed input selection\n", encoding="utf-8")
+    after = phase2._fingerprint(phase2._runtime_source_hashes())
+    assert after != before

@@ -19,6 +19,24 @@ from .raw_inputs import aliases, dump, portable, sha256
 METHODS = {'GNC':'GNC_2022.json', 'WEN_TC':'WEN_TC_2021.json', 'OISAM':'OISAM_2025.json'}
 
 
+def configured_method(roots_path, method):
+    local=json.loads(Path(roots_path).read_text())
+    name=local.get('method_configs',METHODS)[method]
+    if Path(name).name != name or not name.endswith('.json'):
+        raise ValueError('Method config must be a registered local filename')
+    return Path(local['aliases']['<CODE_ROOT>'])/'configs/paper_rebuild/fgo_comparison'/name
+
+
+def execution_sources(code):
+    # Include imported measurement adapters as well as the direct solver.
+    folder=code/'src/legsa_gins/paper_rebuild/fgo_comparison'
+    files=[p for p in folder.iterdir() if p.suffix in ('.py','.cc','.c')]
+    files += [code/'src/legsa_gins/paper_rebuild/horizontal_literature'/name for name in
+              ('shared_raw_backend.py','reproduction_backend.py','reproduction_prepare.py','phase2_runner.py')]
+    files += [code/'src/legsa_gins/datasets/by2/go2_body_state_parser.py']
+    return sorted(files)
+
+
 def json_safe(value):
     if isinstance(value, dict): return {str(k):json_safe(v) for k,v in value.items()}
     if isinstance(value, (tuple,list)): return [json_safe(v) for v in value]
@@ -81,16 +99,23 @@ def write_states(out, times, result):
 def _run_native(roots_path, sequence, method, attempt):
     roots=aliases(roots_path); code=Path(roots['<CODE_ROOT>'])
     denied=deny_reference_access(roots)
-    configpath=code/'configs/paper_rebuild/fgo_comparison'/METHODS[method]
+    configpath=configured_method(roots_path,method)
     config=json.loads(configpath.read_text())
-    names={'GNC':['gnc.py'],'WEN_TC':['wen_tc.py','wen_ahrs.py'],'OISAM':['oisam.py','oisam_inputs.py','ceres_relinearize.py','wen_ahrs.py','wen_tc.py']}[method]
-    sources=[code/'src/legsa_gins/paper_rebuild/fgo_comparison'/name for name in ['__init__.py','raw_inputs.py','runner.py',*names]]
-    sources=[p for p in sources if p.exists()]
+    sources=execution_sources(code)
     source_hashes={str(p.relative_to(code)):sha256(p) for p in sources}
+    expected=json.loads(Path(roots_path).read_text()).get('execution_source_hashes')
+    if expected is not None and expected != source_hashes:
+        raise ValueError('Execution source overlay differs from preregistered snapshot')
     code_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=code,text=True).strip()
     config_hash=sha256(configpath)
+    expected_config=json.loads(Path(roots_path).read_text()).get('method_config_hashes',{}).get(method)
+    if expected_config is not None and expected_config != config_hash:
+        raise ValueError('Method config differs from preregistered final contract')
     out=Path(roots['<FGO_ROOT>'])/'runs'/sequence/method/attempt
     out.mkdir(parents=True,exist_ok=False)
+    snapshot=out/'SOURCE_SNAPSHOT';snapshot.mkdir()
+    for path in sources+[configpath]:
+        target=snapshot/path.relative_to(code);target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(path.read_bytes())
     started=time.perf_counter()
     provenance={}
     if method=='OISAM':
@@ -143,7 +168,8 @@ def _run_native(roots_path, sequence, method, attempt):
          'receiver_imu_as_body_imu':False,'final_v23_output_solver_input':False,'LegSA_output_solver_input':False,
          'per_case_tuning':False,'output_only_correction':False,'epoch_deleted_for_metric':False,'old_runtime_input_count':0,
          'code_commit':code_commit,'config_hash':config_hash,'config_path':portable(configpath,roots),
-         'implementation_source_hashes':source_hashes,
+         'implementation_source_hashes':source_hashes,'source_snapshot_root':portable(snapshot,roots),
+         'source_identity':'uncommitted per-file overlay plus baseline HEAD; exact bytes sealed in SOURCE_SNAPSHOT',
          'solver_and_adapter_elapsed_s':elapsed,'hardware':hardware(),'mode':config.get('solve_mode',config.get('solver_mode')),
          'native_process_count':1,'evaluator_process_count':0,'reference_payload_reads':0,
          'reference_paths_denied':denied,'input_provenance':provenance,
@@ -163,7 +189,7 @@ def run_native(roots_path, sequence, method, attempt):
     except Exception as error:
         out.mkdir(parents=True,exist_ok=True)
         contract=yaml.safe_load((Path(roots['<CODE_ROOT>'])/'configs/paper_rebuild/clean5/CLEAN5_CALIBRATED_EXECUTION_CONTRACT.yaml').read_text())['sequences'][sequence]
-        cfg=Path(roots['<CODE_ROOT>'])/'configs/paper_rebuild/fgo_comparison'/METHODS[method]
+        cfg=configured_method(roots_path,method)
         failure={'sequence':sequence,'method':method,'attempt':attempt,'terminal_status':'FAILED_EXCEPTION',
                  'failure_type':type(error).__name__,'failure_message':str(error),
                  'window_seconds':contract['window_seconds'],'base_time':contract['base_time'],

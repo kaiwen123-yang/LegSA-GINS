@@ -178,3 +178,36 @@ def test_exact_signal_pairing_joint_cno_and_unmatched_component():
         new.pair_geometry(e1,e2,alternate,second,provider,ANCHOR)
     with pytest.raises(raw.RawBackendError,match='exact receiver-local'):
         new.build_dual_frequency_blocks(e1,replace(e2,gps_tow_seconds=T+.001),provider,ANCHOR,ANCHOR)
+
+@pytest.mark.parametrize("receiver_clock", [0.0, 0.00026, 0.00070, 0.005])
+def test_geometric_spp_uses_physical_flight_with_nonzero_receiver_and_satellite_clocks(receiver_clock):
+    provider = MovingSatellites()
+    first = epoch(provider, ANCHOR, receiver_clock, [12, -8, 27, 4, 51])
+    legacy = raw.gps_l1_code_spp(first, provider, ANCHOR)
+    corrected = raw.gps_l1_code_spp(first, provider, ANCHOR,
+                                  earth_rotation_delay="iterated_geometric")
+    np.testing.assert_allclose(corrected.position_ecef_m, ANCHOR, atol=2e-5, rtol=0)
+    assert abs(corrected.receiver_clock_bias_m - new.C * receiver_clock) < 2e-5
+    # Existing default is frozen compatibility; its clock-dependent offset is retained.
+    assert np.linalg.norm(legacy.position_ecef_m - ANCHOR) > 0.01
+
+
+def test_geometric_spp_is_invariant_to_joint_receiver_time_code_shift():
+    provider = MovingSatellites()
+    first = epoch(provider, ANCHOR, 0.00070, [12, -8, 27, 4, 51])
+    delta = 0.001
+    shifted = replace(first, gps_tow_seconds=first.gps_tow_seconds + delta,
+        measurements=tuple(replace(m, pr_mes_m=m.pr_mes_m + new.C * delta)
+                           for m in first.measurements))
+    before = raw.gps_l1_code_spp(first, provider, ANCHOR,
+                               earth_rotation_delay="iterated_geometric")
+    after = raw.gps_l1_code_spp(shifted, provider, ANCHOR,
+                              earth_rotation_delay="iterated_geometric")
+    np.testing.assert_allclose(after.position_ecef_m, before.position_ecef_m, atol=2e-5, rtol=0)
+    assert abs(after.receiver_clock_bias_m - before.receiver_clock_bias_m - new.C * delta) < 2e-5
+
+
+def test_spp_rejects_unknown_earth_rotation_delay_contract():
+    provider, first, _, _ = problem(np.zeros(3))
+    with pytest.raises(raw.RawBackendError, match="Earth-rotation delay"):
+        raw.gps_l1_code_spp(first, provider, ANCHOR, earth_rotation_delay="PVT clock correction")

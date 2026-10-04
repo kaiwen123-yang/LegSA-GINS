@@ -1,3 +1,5 @@
+> **2026-10-04历史身份说明：** 本页保留旧14次FGO结果。修正后的严格一次初始化主分支与新9身份见[新阶段](../FGO_REPRODUCTION_FIX_20261004/README.md)；BY2H 0/271、BY2O55/378。旧H/O2/7次初始化成绩不能与新协议混用，旧结果未覆盖。
+
 # FGO 实现与评价约定
 
 三篇身份和输入边界见 [FGO_SELECTION.md](FGO_SELECTION.md)。实现均独立编写，未声称作者代码逐字复现；真实参数在 `configs/paper_rebuild/fgo_comparison/` 首次主运行前固定。真实数据与合成计算测试分开；合成结果不进入性能表。
