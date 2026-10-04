@@ -1,5 +1,7 @@
 # 三类动基线文献方法：结果与执行入口
 
+2026-10-04 更新：显式V2物理SPP修复后的新九组合、三次offline与独立复算/三图目视验收已全部完成。最新论文数字见 [V2验收与数字入口](v2_fix/README.md)、[V2完整总表](v2_fix/COMPARISON_TABLE.csv) 与 [V2修复/暂停历史](V2_REPAIR_NOTES.md)。下列原总表、图及最终比较仍为完整保留的 **V1历史结果**。
+
 本轮已完成既有横向结果取得、三类核心实现/必要验证、九个完整方法×序列运行和三条序列离线评价。全部失败保留；真实性、可用性和精度分开。[最终比较](FINAL_COMPARISON.md)给出结论与边界，原V3及旧结果未改。
 
 1. [既有结果及存储](EXISTING_COMPARISON_RESULTS.md)、[身份索引](EXISTING_COMPARISON_INDEX.csv)：CLEAN4/CLEAN7与HX02/HX02E/HX03/R2/HX05/HX07/R，包含失败与旧版本。

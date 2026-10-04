@@ -435,3 +435,66 @@ def test_plot_display_wrap360_status_lanes_preserve_errors_and_large_baseline(tm
         assert result["plot_implementation"] == "WRAP360_STATUS_LANES_V2"
     finally:
         original_close(figure)
+
+@pytest.mark.parametrize("native_version,native_attempt", [("V1", 1), ("V2", 1), ("V2", 2)])
+def test_prepare_requires_explicit_matching_native_version_without_reference_open(tmp_path, monkeypatch, native_version, native_attempt):
+    repo = tmp_path / "repo"; repo.mkdir()
+    (repo / "module.py").write_text("# synthetic metadata fixture\n")
+    (repo / "protocol.md").write_text("Synthetic protocol fixture.\n")
+    monkeypatch.setattr(ev, "FROZEN_PINS", {})
+    monkeypatch.setattr(ev, "V2_FROZEN_PINS", {})
+    monkeypatch.setattr(ev, "SOURCE_RELATIVE", "module.py")
+    monkeypatch.setattr(ev, "PROTOCOL_RELATIVE", "protocol.md")
+    roots = {"<CODE_ROOT>": str(repo), "<EXT_REPRO_ROOT>": str(tmp_path / "results"),
+             "<CLEAN_ROOT>": str(tmp_path / "clean"), "<RAW_ROOT>": str(tmp_path / "raw")}
+    config = tmp_path / "roots.json"; config.write_text(json.dumps({"aliases": roots}))
+    info = {"sequence": "BY2", "pair_count": 2, "base_time": 0, "window_seconds": [0, 1]}
+    input_path = tmp_path / "results/inputs/BY2/INPUT.json"; input_path.parent.mkdir(parents=True)
+    payload = json.dumps(info).encode(); input_path.write_bytes(payload)
+    for method in ev.METHODS:
+        identity = ev.native_run_identity("BY2", method, native_version, native_attempt)
+        prefix = "<EXT_REPRO_ROOT>/runs/" + identity
+        run = {"run_id": identity, "attempt": native_attempt, "sequence": "BY2", "method": method, "status": "COMPLETED", "completed_epochs": 2,
+               "input_manifest_sha256": ev.digest(payload), "code_commit": "synthetic_fixture", "data_mode": "real_raw",
+               **{key: False for key in ("synthetic_data_used", "semisynthetic_data_used", "trace_used_online",
+                                        "per_case_tuning", "output_only_correction", "epoch_deleted_for_metric")},
+               "outputs": {"HEADING.csv": {"path": prefix + "/HEADING.csv", "sha256": "never_read_in_prepare"}}}
+        path = ev.expand(prefix + "/RUN.json", roots); path.parent.mkdir(parents=True); path.write_text(json.dumps(run))
+    for variant in ev.VARIANTS:
+        prefix = "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_" + variant
+        previous = {"sequence_id": "BY2", "method_id": "RTKLIB", "base_time": 0, "window": [0, 1],
+                    "trace": "<RAW_ROOT>/deliberately_nonexistent.csv", "trace_sha256": "never_read_in_prepare",
+                    "outdir": prefix + "/eval/OUTPUT", "variants": [{"label": "RTKLIB", "heading_table": prefix + "/HEADING.csv",
+                    "heading_table_sha256": "never_read_in_prepare"}]}
+        path = ev.expand(prefix + "/eval/SPEC.json", roots); path.parent.mkdir(parents=True); path.write_text(json.dumps(previous))
+    _, spec = ev.prepare_spec(config, "BY2", native_version=native_version, native_attempt=native_attempt, verify_committed=False)
+    assert spec["native_version"] == native_version and spec["native_attempt"] == native_attempt
+    assert all(item["run_id"] == ev.native_run_identity("BY2", item["method_id"], native_version, native_attempt) for item in spec["methods"])
+    assert not ev.expand(spec["trace"], roots).exists()
+    with pytest.raises((ev.EvaluationError, FileNotFoundError)):
+        ev.prepare_spec(config, "BY2", native_version="V2" if native_version == "V1" else "V1", verify_committed=False)
+    if native_version == "V2":
+        with pytest.raises(FileNotFoundError):
+            ev.prepare_spec(config, "BY2", native_version="V2", native_attempt=3, verify_committed=False)
+        path = ev.expand(spec["methods"][0]["run_path"], roots)
+        broken = json.loads(path.read_text()); broken["attempt"] = native_attempt + 1; path.write_text(json.dumps(broken))
+        with pytest.raises(ev.EvaluationError, match="identity gate"):
+            ev.prepare_spec(config, "BY2", native_version="V2", native_attempt=native_attempt, verify_committed=False)
+
+
+def test_evaluation_overlay_rejects_implicit_v1_before_sources_or_outputs():
+    with pytest.raises(ev.EvaluationError, match="explicit native V2"):
+        ev.run("deliberately_nonexistent", "BY2", allow_source_overlay=True)
+
+
+@pytest.mark.parametrize("attempt", [0, -1, True, 1.5])
+def test_native_identity_rejects_invalid_attempt(attempt):
+    with pytest.raises(ev.EvaluationError, match="positive integer"):
+        ev.native_run_identity("BY2", "EXT01", "V2", attempt)
+
+
+def test_retry_identity_requires_explicit_v2_and_preserves_original_defaults():
+    assert ev.native_run_identity("BY2", "EXT01", "V1", 1) == "BY2__EXT01__RAW_REPRO_V1"
+    assert ev.native_run_identity("BY2", "EXT01", "V2", 2) == "BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2"
+    with pytest.raises(ev.EvaluationError, match="explicit native V2"):
+        ev.native_run_identity("BY2", "EXT01", "V1", 2)

@@ -40,6 +40,19 @@ FROZEN_PINS = {
     "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py":
         "85112d34e27f1fa8c3043bdcdeb2f418232cd2fffacb40cab3f387f179db6c9b",
 }
+# V2 changes only non-metric Phase2 source: raw input identity and failure
+# tracking. Its wrap/statistics functions are unchanged from the V1 freeze.
+V2_FROZEN_PINS = {**FROZEN_PINS,
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py":
+        "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156"}
+
+
+def frozen_source_pins(native_version):
+    if native_version not in ("V1", "V2"):
+        raise EvaluationError("unknown native reproduction version")
+    return FROZEN_PINS if native_version == "V1" else V2_FROZEN_PINS
+
+
 MODULE = "legsa_gins.paper_rebuild.horizontal_literature.reproduction_evaluation"
 SOURCE_RELATIVE = "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_evaluation.py"
 PROTOCOL_RELATIVE = "docs/paper_rebuild/hext/EXT_REPRODUCTION/EVALUATION_PROTOCOL.md"
@@ -337,12 +350,24 @@ def common_support(series_by_method, fixed_definitions, source_paths):
     return output, key_sets
 
 
-def prepare_spec(roots_path, sequence, *, verify_committed=True):
+def native_run_identity(sequence, method, native_version, native_attempt):
+    """Bind a selected native attempt exactly; never glob or splice attempts."""
+    frozen_source_pins(native_version)
+    if type(native_attempt) is not int or native_attempt < 1:
+        raise EvaluationError("native attempt must be a positive integer")
+    if native_version == "V1" and native_attempt != 1:
+        raise EvaluationError("technical retry identity requires explicit native V2")
+    suffix = "" if native_attempt == 1 else f"__TECH_RETRY_{native_attempt}"
+    return f"{sequence}__{method}__RAW_REPRO_{native_version}" + suffix
+
+
+def prepare_spec(roots_path, sequence, *, verify_committed=True, native_version="V1", native_attempt=1):
     roots = json.loads(Path(roots_path).read_text())["aliases"]
     if sequence not in SEQUENCES:
         raise EvaluationError("unknown sequence")
     repo = Path(roots["<CODE_ROOT>"])
-    pins = dict(FROZEN_PINS)
+    native_run_identity(sequence, METHODS[0], native_version, native_attempt)
+    pins = dict(frozen_source_pins(native_version))
     for relative, expected in pins.items():
         if digest((repo / relative).read_bytes()) != expected:
             raise EvaluationError("frozen evaluator source mismatch: " + relative)
@@ -362,12 +387,13 @@ def prepare_spec(roots_path, sequence, *, verify_committed=True):
         raise EvaluationError("input sequence mismatch")
     methods = []
     for method in METHODS:
-        run_id = f"{sequence}__{method}__RAW_REPRO_V1"
+        run_id = native_run_identity(sequence, method, native_version, native_attempt)
         run_path = f"<EXT_REPRO_ROOT>/runs/{run_id}/RUN.json"
         run_payload = expand(run_path, roots).read_bytes()
         run = json.loads(run_payload)
         if (run["status"] != "COMPLETED" or run["sequence"] != sequence or run["method"] != method
-                or run["run_id"] != run_id or run["completed_epochs"] != info["pair_count"]
+                or run["run_id"] != run_id or run.get("attempt", 1) != native_attempt
+                or run["completed_epochs"] != info["pair_count"]
                 or run["input_manifest_sha256"] != digest(payload)):
             raise EvaluationError("native terminal/identity gate failed: " + method)
         if run.get("data_mode") != "real_raw" or any(run.get(x) is not False for x in
@@ -414,6 +440,7 @@ def prepare_spec(roots_path, sequence, *, verify_committed=True):
                             "metrics_path": portable(old["outdir"], roots) + "/HEADING_METRICS.json",
                             "error_path": error_path, "error_recorded_pin": recorded_error_pins.get(error_path)})
     return roots, {"schema": SCHEMA, "sequence_id": sequence, "preparation_commit": head,
+                   "native_version": native_version, "native_attempt": native_attempt, "source_overlay": not verify_committed,
                    "source_pins": pins, "input_manifest": input_path, "input_manifest_sha256": digest(payload),
                    "pair_count": info["pair_count"], "base_time": info["base_time"], "window": info["window_seconds"],
                    "trace": reference[0], "trace_sha256": reference[1], "methods": methods,
@@ -452,7 +479,7 @@ def evaluate_child(spec, roots):
             for relative, expected in spec["source_pins"].items():
                 if digest((Path(roots["<CODE_ROOT>"]) / relative).read_bytes()) != expected:
                     raise EvaluationError("child source pin mismatch: " + relative)
-            if any(spec["source_pins"].get(p) != v for p, v in FROZEN_PINS.items()):
+            if any(spec["source_pins"].get(p) != v for p, v in frozen_source_pins(spec.get("native_version", "V1")).items()):
                 raise EvaluationError("child frozen evaluator pins missing")
         tables, raw = {}, {}
         for declaration in spec["methods"]:
@@ -707,7 +734,9 @@ def plot_saved(out, sequence):
     return receipt
 
 
-def run(roots_path, sequence, *, plot_only=False):
+def run(roots_path, sequence, *, plot_only=False, native_version="V1", native_attempt=1, allow_source_overlay=False):
+    if allow_source_overlay and native_version != "V2":
+        raise EvaluationError("source overlay requires explicit native V2 evaluation")
     if plot_only:
         roots = json.loads(Path(roots_path).read_text())["aliases"]
         out = expand(f"<EXT_REPRO_ROOT>/evaluation/{sequence}", roots)
@@ -715,7 +744,12 @@ def run(roots_path, sequence, *, plot_only=False):
         if child["status"] != "NUMERICALLY_COMPLETED":
             raise EvaluationError("plot-only requires completed saved numerical output")
         return plot_saved(out, sequence)
-    roots, spec = prepare_spec(roots_path, sequence)
+    native_run_identity(sequence, METHODS[0], native_version, native_attempt)
+    if native_version == "V1" and not allow_source_overlay:
+        roots, spec = prepare_spec(roots_path, sequence)
+    else:
+        roots, spec = prepare_spec(roots_path, sequence, native_version=native_version, native_attempt=native_attempt,
+                                   verify_committed=not allow_source_overlay)
     strace = shutil.which("strace")
     if strace is None:
         raise EvaluationError("strace is required before the reference child is invoked")
@@ -723,6 +757,17 @@ def run(roots_path, sequence, *, plot_only=False):
     if not out.resolve().is_relative_to(Path(roots["<EXT_REPRO_ROOT>"]).resolve()):
         raise EvaluationError("output resolves outside the isolated result root")
     out.mkdir(parents=True, exist_ok=False)
+    if native_version == "V2":
+        spec["preparation_commit"] = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=roots["<CODE_ROOT>"], text=True).strip()
+        spec["code_commit_role"] = "BASE_HEAD_ONLY" if allow_source_overlay else "HEAD_PINNED_RUNTIME_SOURCE"
+        for relative, expected in spec["source_pins"].items():
+            payload = (Path(roots["<CODE_ROOT>"]) / relative).read_bytes()
+            if digest(payload) != expected:
+                raise EvaluationError("evaluation snapshot source drift")
+            snapshot = out / "SOURCE_SNAPSHOT" / relative
+            snapshot.parent.mkdir(parents=True, exist_ok=True)
+            snapshot.write_bytes(payload)
     write_json(out / "SPEC.json", spec, exclusive=True)
     receipt = {"schema": SCHEMA, "sequence_id": sequence, "evaluation_status": "STARTED",
                "plot_status": "NOT_STARTED", "evaluator_child_attempts": 1, "evaluator_child_invocations": 0,
@@ -770,6 +815,9 @@ def main(argv=None):
     parser.add_argument("--roots", required=True)
     parser.add_argument("--sequence", choices=SEQUENCES)
     parser.add_argument("--plot-only", action="store_true")
+    parser.add_argument("--native-version", choices=("V1", "V2"), default="V1")
+    parser.add_argument("--native-attempt", type=int, default=1, help="Exact V2 native technical-attempt identity; no attempt merging")
+    parser.add_argument("--allow-source-overlay", action="store_true")
     parser.add_argument("--child-spec", type=Path, help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
     if args.child_spec:
@@ -779,7 +827,9 @@ def main(argv=None):
     else:
         if not args.sequence:
             parser.error("--sequence is required")
-        result = run(args.roots, args.sequence, plot_only=args.plot_only)
+        result = run(args.roots, args.sequence, plot_only=args.plot_only,
+                     native_version=args.native_version, native_attempt=args.native_attempt,
+                     allow_source_overlay=args.allow_source_overlay)
     print(json.dumps(result, ensure_ascii=False, allow_nan=False))
     return 0 if result.get("evaluation_status", result.get("status")) in (
         "COMPLETED", "NUMERICALLY_COMPLETED", "COMPLETED_VISUAL_REVIEW_PENDING") else 1

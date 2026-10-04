@@ -1,6 +1,6 @@
 # 执行进度
 
-当前：九身份全部完成，三条序列评价/图、最终汇总和范围复核均已完成；最终提交本身的推送状态见Git/终端回执。下文按时间保留各小项当时状态；早期“未执行/0调用”不代表当前总计。
+V1 历史终态：九身份全部完成，三条序列评价/图、最终汇总和范围复核均已完成；历史提交推送状态见 Git/终端回执。2026-10-04 显式 V2 物理修复的全九组合技术重试已启动，尚待全部原生封存和独立离线评价，不能引用 V1 数值为新修复成绩。下文保留各小项当时状态，最新身份见末尾与 V2_REPAIR_NOTES.md。
 
 基线：`8fdcfd2f0742be00e84bbab2450cbe849b401f1b`；开始时当前授权审查分支与远端一致、工作树干净，无正在运行的科学队列。所有旧产物保留。
 
@@ -87,3 +87,13 @@ BY2O数值/图批次已推送且远端核对：`0116e5f0f693aa06b53b518b1e7d0494
 最终只读复核完成：63条比较、450条共同支持、9行native原字段零差异；10629个源单元格一致，63个文档相对链接可达。两处统计支持/分米量级文字已更正。保留科学限制，未新增运行、评价、图或下一阶段任务。本任务结束在文献核心实现及三序列真实比较交付。
 
 2026-10-03：最后一组FGO横向比较完成并转入写作，入口为[../FGO_COMPARISON/README.md](../FGO_COMPARISON/README.md)。OiSAM2025、Wen2021 TC、GNC2022的三序列九个最终全窗身份、离线评价、三张连续图与完整分母表已完成；真实错误修复及五个被替代尝试均在独立FGO根保留。本目录EXT01–03及V3/RTKLIB/LC01原科学结果未改、未重跑。实验扩展结束，不追加第四方法、数据集或故障矩阵。
+
+2026-10-04：底层 shared_raw_backend.py 与 phase2_runner.py 本轮完整补审，独立真位置/移动卫星/接收钟 oracle 证明 SPP 的 RAWX P/c Earth rotation delay 错用物理飞行时间；保留旧默认，V2 显式 iterated_geometric 四次固定点，从原发送坐标旋转一次，发送状态仍用各自原始 P。另修复双接收机钟跳失败记录漏 GNSS2 及 sequence_override 科学身份漏 pin；参数与 EXT02 整候选池拒绝策略不改。
+
+按用户先清理 G 空间要求，首个 V2 BY2O/EXT01 在 1250/2231、955 有效时整个进程组640停止。为避免长暂停进入算法 perf_counter 超时与耗时，空间验收后精确核组并 SIGKILL，不 SIGCONT；54 既有文件大小/hash前后完全相同，partial 证据保留，无评价，无拼接。新独立 stage EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z 于 E 宿主 WSL ext4，全部九组合统一 TECH_RETRY_2 身份从 epoch0 开始。它是全 batch generation2；其他八组合在该根为第一次实际调用，身份不伪装实际调用次数。
+
+22 输入文件逐字节 SHA 与 V1/被中断 V2 相同且只读；2 已冻结基础库相同。每 run 保存13科学源码和1配置，明确 reviewed worktree overlay 而非虚称只由 base HEAD0625决定。评价器只增加明确 V2/version/attempt 身份，六个冻结指标函数 AST 相同；44个合成评价/身份测试通过。控制器后台持久运行，离线 watcher 等全部九 native 退出0后才启动三个 child；没有重跑旧 V3、动基线、RTKLIB 或 LC01。当前成绩待实际完成，不预填。
+
+### 2026-10-04 / EXT V2 TECH_RETRY_2 FINAL
+
+9原生/3offline全部exit0，15669历元/9100有效逐项机器封存，341独立RMSE复算最大差2.8422e−14°，63own/450common及27V1/V2同法表和3图实际目视完成。在线成功reference打开0，offline共3次，零评价重试；旧1250/955暂停partial54文件hash保留、不拼接。所有原窗分母与GPS L1/双频、工程状态和projected-heading/Euler yaw差异明确。最新入口v2_fix/README.md；大误差和失败保留。派生publisher自然完成，未中止/重启动科学调用或为了性能另算成绩。未commit/push，13科学source+config snapshots/16global pins与source overlay实际身份封存。

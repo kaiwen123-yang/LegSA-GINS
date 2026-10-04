@@ -1,0 +1,34 @@
+{
+  "schema": "ext_heading_post_result_test_location.v1",
+  "captured_utc": "2026-10-04T08:37:12.853036+00:00",
+  "all_checks_passed": true,
+  "repair_receipt": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_REPAIR_RECEIPT.json",
+  "repair_receipt_sha256": "cc7c70dccfbd454ada1d51efec26b9630613c6a470da0cc093a30002cafe27d3",
+  "independent_peer_receipt": "/mnt/g/LegSA-GINS-project/修复_20261004/EXT_HEADING_POST_RESULT_INDEPENDENT_PEER_REVIEW.json",
+  "independent_peer_receipt_sha256": "4a945f84e699385ab0353de819e22089cb90ac3ca38b051348089e3efe5e51b6",
+  "reusable_repo_test_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/tests/paper_rebuild/test_ext_projected_heading_guard.py",
+  "retained_external_test_path": "/mnt/g/LegSA-GINS-project/修复_20261004/test_ext_projected_heading_guard.py",
+  "same_test_sha256": "f17003ace668400c4ab5cdcd8e8cd3407436b011d0fe06c1d39cb4b53299b1bd",
+  "test_text_lines": 85,
+  "test_location_status": "already present in repo; external copy preserved; no additional test execution in this helper",
+  "test_membership_scope": "post-result new test, outside original135 PREREGISTRATION928 inventory; intentional3 source delta only compares that old inventory",
+  "old_snapshots_or_receipts_modified": false,
+  "science_solver_or_evaluator_calls": 0,
+  "red_green_bounded_test_counts": {
+    "red_tests": 19,
+    "red_failures": 11,
+    "green_new_boundary_tests": 19,
+    "full_bounded_regression_tests": 75,
+    "green_failures": 0,
+    "green_skipped": 0,
+    "red_xml_sha256": "107a7dc3da8a3ebb20d3bb7e59acd867c9566867e5e9a6ca018d74d7b5ec5c61",
+    "green_xml_sha256": "79262e03cfc3ffaa27e4ab2b0d5f1bb99fd0e97024fa8ea4b54bd2ea399d8112",
+    "bounded_xml_sha256": "9a15d932a50deb40173cc836b32b4467eb7933023d0e03717ebb4acf9b80153a",
+    "test_source_sha256": "f17003ace668400c4ab5cdcd8e8cd3407436b011d0fe06c1d39cb4b53299b1bd"
+  },
+  "new_source_identity": {
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "d28604a587655623537bdf9125afc24a929388b218696829fe42c9ffd2192ede",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "4d4ef06794fe9d0f51417de2162b21bead31f171908619ae0cb8acbeb465d3a4",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": "1a2e6e5876b80ece568e18733809a7786cea32387c233c83b14df97988200095"
+  }
+}

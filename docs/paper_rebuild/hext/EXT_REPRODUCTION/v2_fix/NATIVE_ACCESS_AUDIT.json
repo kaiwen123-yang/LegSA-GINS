@@ -1,0 +1,361 @@
+{
+  "schema": "ext_v2.all_nine_independent_admission.v1",
+  "status": "ALL_NINE_NATIVE_SOURCE_INPUT_IO_VERIFIED_BEFORE_REFERENCE",
+  "captured_utc": "2026-10-04T06:18:38.394740+00:00",
+  "stage": "<EXT_REPRO_V2_RETRY_ROOT>",
+  "freeze_sha256": "b2fa160e9f884009b1318278d19382e89d1a42385d8347cea4829d821c1ec895",
+  "batch_receipt_sha256": "1f9ec0490e0a986b85ff84064137ff1e8aca9bc07526326dd2ada8bfb6d660ce",
+  "kind": "FULL_NATIVE_STRUCTURED_MACHINE_VALIDATION_NOT_ALL_WORD_SEMANTIC_READING",
+  "actual_new_native_calls": 9,
+  "actual_native_epoch_records": 15669,
+  "native_reference_or_forbidden_data_opens": 0,
+  "inputs22_libraries2_global_sources16_verified_after_matrix": true,
+  "reference_payload_opened_by_this_audit": false,
+  "runs": [
+    {
+      "run_id": "BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2",
+      "sequence": "BY2",
+      "method": "EXT01",
+      "full_history_epochs": 1509,
+      "valid_epochs": 1077,
+      "failure_counts": {
+        "INSUFFICIENT_DD_DIMENSION": 1,
+        "INSUFFICIENT_HALF_CYCLE_VALID": 374,
+        "INSUFFICIENT_SATELLITE_STATES": 46,
+        "INSUFFICIENT_CP_VALID": 11
+      },
+      "native_runtime_s": 366.2184316879993,
+      "RUN_sha256": "471358ebcecc1991e5786fb6f221240637b3ab287489641e1dfc3a68c29f48bf",
+      "openat_sha256": "d7ed272445bc838ee6bc1973f3416b6770fc331b743a897f4c6f0f8be4d5da81",
+      "event_count": 3722,
+      "gzip_evidence_row_count": 1509,
+      "byte_hashes_and_source_snapshots_match": true,
+      "successful_data_reads": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/cache/paired_epochs.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/cache/receiver1_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/cache/receiver2_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/gnss1.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/gnss2.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "successful_data_write_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "native_reference_or_forbidden_data_opens": 0,
+      "truncated_paths": [],
+      "actually_opened_library_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/liblegsa_rtklib_bridge.so",
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/librtklib_legsa.so"
+      ],
+      "scope": "all successful openat events; C-octal Unicode decoded; unfinished/resumed joined; truncated paths accepted only with unambiguous allowed inputs/own-run prefix"
+    },
+    {
+      "run_id": "BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2",
+      "sequence": "BY2",
+      "method": "EXT02",
+      "full_history_epochs": 1509,
+      "valid_epochs": 1057,
+      "failure_counts": {
+        "NUMERICAL_FAILURE": 20,
+        "INSUFFICIENT_DD_DIMENSION": 1,
+        "INSUFFICIENT_HALF_CYCLE_VALID": 374,
+        "INSUFFICIENT_SATELLITE_STATES": 46,
+        "INSUFFICIENT_CP_VALID": 11
+      },
+      "native_runtime_s": 8.58918980800081,
+      "RUN_sha256": "7045dd83a671bf34d48e3c8406ceb701666be43ad29cdcc23cfa4e9969a2dcc9",
+      "openat_sha256": "55922fa391ab738b248d18260a30d8b20ceb4ab58514add62a6aacb58bf0c3fa",
+      "event_count": 3730,
+      "gzip_evidence_row_count": 1509,
+      "byte_hashes_and_source_snapshots_match": true,
+      "successful_data_reads": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/cache/paired_epochs.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/cache/receiver1_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/cache/receiver2_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/gnss1.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/gnss2.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "successful_data_write_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "native_reference_or_forbidden_data_opens": 0,
+      "truncated_paths": [],
+      "actually_opened_library_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/liblegsa_rtklib_bridge.so",
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/librtklib_legsa.so"
+      ],
+      "scope": "all successful openat events; C-octal Unicode decoded; unfinished/resumed joined; truncated paths accepted only with unambiguous allowed inputs/own-run prefix"
+    },
+    {
+      "run_id": "BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2",
+      "sequence": "BY2",
+      "method": "EXT03",
+      "full_history_epochs": 1509,
+      "valid_epochs": 609,
+      "failure_counts": {
+        "GNSS2_PNTPOS_REJECTED": 149,
+        "GNSS1_PNTPOS_REJECTED": 699,
+        "INSUFFICIENT_GPS_DUAL_FREQUENCY_SATELLITE_STATES": 52
+      },
+      "native_runtime_s": 11.747712518001208,
+      "RUN_sha256": "646489ff32818b0a1552ee65dcbca9cde95cb50da6b023eef58cc18012820741",
+      "openat_sha256": "a6d905dc849aa503e953717dff97fd635a1a1cf378edc384bedfe0f241004206",
+      "event_count": 622,
+      "gzip_evidence_row_count": 1509,
+      "byte_hashes_and_source_snapshots_match": true,
+      "successful_data_reads": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/cache/paired_epochs.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/cache/receiver1_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/cache/receiver2_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/gnss1.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2/gnss2.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "successful_data_write_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "native_reference_or_forbidden_data_opens": 0,
+      "truncated_paths": [],
+      "actually_opened_library_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/liblegsa_rtklib_bridge.so",
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/librtklib_legsa.so"
+      ],
+      "scope": "all successful openat events; C-octal Unicode decoded; unfinished/resumed joined; truncated paths accepted only with unambiguous allowed inputs/own-run prefix"
+    },
+    {
+      "run_id": "BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2",
+      "sequence": "BY2H",
+      "method": "EXT01",
+      "full_history_epochs": 1483,
+      "valid_epochs": 1172,
+      "failure_counts": {
+        "INSUFFICIENT_HALF_CYCLE_VALID": 297,
+        "INSUFFICIENT_CP_VALID": 14
+      },
+      "native_runtime_s": 376.5638149159986,
+      "RUN_sha256": "e1b1f0d710def72fc6914b8ab9f108e8fb338001ca4ee627765240f5b8b96e46",
+      "openat_sha256": "69542a903cdd57fe616d8b0e4e13bc1ad46a939edcfb8d84d1b21845afef6033",
+      "event_count": 3721,
+      "gzip_evidence_row_count": 1483,
+      "byte_hashes_and_source_snapshots_match": true,
+      "successful_data_reads": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/cache/paired_epochs.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/cache/receiver1_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/cache/receiver2_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/gnss1.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/gnss2.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "successful_data_write_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "native_reference_or_forbidden_data_opens": 0,
+      "truncated_paths": [],
+      "actually_opened_library_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/liblegsa_rtklib_bridge.so",
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/librtklib_legsa.so"
+      ],
+      "scope": "all successful openat events; C-octal Unicode decoded; unfinished/resumed joined; truncated paths accepted only with unambiguous allowed inputs/own-run prefix"
+    },
+    {
+      "run_id": "BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2",
+      "sequence": "BY2H",
+      "method": "EXT02",
+      "full_history_epochs": 1483,
+      "valid_epochs": 1128,
+      "failure_counts": {
+        "NUMERICAL_FAILURE": 44,
+        "INSUFFICIENT_HALF_CYCLE_VALID": 297,
+        "INSUFFICIENT_CP_VALID": 14
+      },
+      "native_runtime_s": 8.206354805000956,
+      "RUN_sha256": "11284bc39c929781130643e0fb550135fc0faeec33aebec364d950aa009d65cb",
+      "openat_sha256": "bf16b92a143003106dba3c8bfeeede14fc854523d31ab58cdc2dafaff27e2bbd",
+      "event_count": 3729,
+      "gzip_evidence_row_count": 1483,
+      "byte_hashes_and_source_snapshots_match": true,
+      "successful_data_reads": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/cache/paired_epochs.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/cache/receiver1_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/cache/receiver2_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/gnss1.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/gnss2.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "successful_data_write_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "native_reference_or_forbidden_data_opens": 0,
+      "truncated_paths": [],
+      "actually_opened_library_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/liblegsa_rtklib_bridge.so",
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/librtklib_legsa.so"
+      ],
+      "scope": "all successful openat events; C-octal Unicode decoded; unfinished/resumed joined; truncated paths accepted only with unambiguous allowed inputs/own-run prefix"
+    },
+    {
+      "run_id": "BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2",
+      "sequence": "BY2H",
+      "method": "EXT03",
+      "full_history_epochs": 1483,
+      "valid_epochs": 526,
+      "failure_counts": {
+        "GNSS1_PNTPOS_REJECTED": 752,
+        "GNSS2_PNTPOS_REJECTED": 186,
+        "INSUFFICIENT_GPS_DUAL_FREQUENCY_SATELLITE_STATES": 19
+      },
+      "native_runtime_s": 11.45630623100078,
+      "RUN_sha256": "ae0d40ea235f70b930509e2380078eca08b1c1b7ae441bec68cbdebcc65e2bde",
+      "openat_sha256": "7f59b361527695714db286bc7d788ed8b4543d61aa42985a43c13d67a61d2837",
+      "event_count": 621,
+      "gzip_evidence_row_count": 1483,
+      "byte_hashes_and_source_snapshots_match": true,
+      "successful_data_reads": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/cache/paired_epochs.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/cache/receiver1_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/cache/receiver2_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/gnss1.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2H/gnss2.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "successful_data_write_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "native_reference_or_forbidden_data_opens": 0,
+      "truncated_paths": [],
+      "actually_opened_library_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/liblegsa_rtklib_bridge.so",
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/librtklib_legsa.so"
+      ],
+      "scope": "all successful openat events; C-octal Unicode decoded; unfinished/resumed joined; truncated paths accepted only with unambiguous allowed inputs/own-run prefix"
+    },
+    {
+      "run_id": "BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2",
+      "sequence": "BY2O",
+      "method": "EXT01",
+      "full_history_epochs": 2231,
+      "valid_epochs": 1511,
+      "failure_counts": {
+        "INSUFFICIENT_HALF_CYCLE_VALID": 572,
+        "INSUFFICIENT_CP_VALID": 93,
+        "SEARCH_TIMEOUT": 55
+      },
+      "native_runtime_s": 1317.8650231839993,
+      "RUN_sha256": "5c6eebe24545f7e6e6f9207218018d03ddf7d6343cb905baaea86d5c5f9c798c",
+      "openat_sha256": "4809b81c616606938183a405c673043b0446d0e3a304cf2c21643f6e1325a94c",
+      "event_count": 3751,
+      "gzip_evidence_row_count": 2231,
+      "byte_hashes_and_source_snapshots_match": true,
+      "successful_data_reads": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/cache/paired_epochs.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/cache/receiver1_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/cache/receiver2_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/gnss1.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/gnss2.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "successful_data_write_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "native_reference_or_forbidden_data_opens": 0,
+      "truncated_paths": [],
+      "actually_opened_library_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/liblegsa_rtklib_bridge.so",
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/librtklib_legsa.so"
+      ],
+      "scope": "all successful openat events; C-octal Unicode decoded; unfinished/resumed joined; truncated paths accepted only with unambiguous allowed inputs/own-run prefix"
+    },
+    {
+      "run_id": "BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2",
+      "sequence": "BY2O",
+      "method": "EXT02",
+      "full_history_epochs": 2231,
+      "valid_epochs": 1527,
+      "failure_counts": {
+        "INSUFFICIENT_HALF_CYCLE_VALID": 572,
+        "NUMERICAL_FAILURE": 39,
+        "INSUFFICIENT_CP_VALID": 93
+      },
+      "native_runtime_s": 14.6216235410011,
+      "RUN_sha256": "3b117453b07b095ed2dd85f08e20f1de8b13c20ecd4f567e1151ae22cc73c79e",
+      "openat_sha256": "5b07a1279cd8545e4c0b226d4372355d94ee108f522b7da79a37ade051534cc5",
+      "event_count": 3759,
+      "gzip_evidence_row_count": 2231,
+      "byte_hashes_and_source_snapshots_match": true,
+      "successful_data_reads": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/cache/paired_epochs.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/cache/receiver1_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/cache/receiver2_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/gnss1.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/gnss2.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "successful_data_write_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "native_reference_or_forbidden_data_opens": 0,
+      "truncated_paths": [],
+      "actually_opened_library_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/liblegsa_rtklib_bridge.so",
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/librtklib_legsa.so"
+      ],
+      "scope": "all successful openat events; C-octal Unicode decoded; unfinished/resumed joined; truncated paths accepted only with unambiguous allowed inputs/own-run prefix"
+    },
+    {
+      "run_id": "BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2",
+      "sequence": "BY2O",
+      "method": "EXT03",
+      "full_history_epochs": 2231,
+      "valid_epochs": 493,
+      "failure_counts": {
+        "INSUFFICIENT_GPS_DUAL_FREQUENCY_SATELLITE_STATES": 8,
+        "GNSS1_PNTPOS_REJECTED": 1049,
+        "GNSS2_PNTPOS_REJECTED": 675,
+        "INSUFFICIENT_BDS_DUAL_FREQUENCY_SATELLITE_STATES": 6
+      },
+      "native_runtime_s": 14.141277824001008,
+      "RUN_sha256": "89ef7075c1eac9d82b32e6cee6e237be8843fa71739b1714f08428e29fe36f56",
+      "openat_sha256": "89114bc8f28c04f630334e45bb99b0ff44abe1ad82547febfe8f6c63806cf2fa",
+      "event_count": 651,
+      "gzip_evidence_row_count": 2231,
+      "byte_hashes_and_source_snapshots_match": true,
+      "successful_data_reads": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/cache/paired_epochs.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/cache/receiver1_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/cache/receiver2_measurements.npy",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/gnss1.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/inputs/BY2O/gnss2.nav",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "successful_data_write_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz",
+        "<EXT_REPRO_V2_RETRY_ROOT>/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv"
+      ],
+      "native_reference_or_forbidden_data_opens": 0,
+      "truncated_paths": [],
+      "actually_opened_library_paths": [
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/liblegsa_rtklib_bridge.so",
+        "<EXT_REPRO_V2_RETRY_ROOT>/build/lib/librtklib_legsa.so"
+      ],
+      "scope": "all successful openat events; C-octal Unicode decoded; unfinished/resumed joined; truncated paths accepted only with unambiguous allowed inputs/own-run prefix"
+    }
+  ]
+}

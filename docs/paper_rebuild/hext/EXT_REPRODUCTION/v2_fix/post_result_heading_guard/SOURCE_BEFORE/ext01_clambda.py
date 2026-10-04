@@ -991,37 +991,12 @@ def wrap_degrees(angle: float) -> float:
     return (float(angle) + 180.0) % 360.0 - 180.0
 
 
-class BaselineHeadingUndefined(CLambdaError):
-    code = "BASELINE_HEADING_UNDEFINED"
-
-
-# Dimensionless rho^2=(b_N^2+b_E^2)/||b||^2; this is a numerical
-# projection-singularity gate, not a calibrated practical accuracy threshold.
-MIN_HORIZONTAL_PROJECTION_FRACTION_SQUARED = 1e-12
-
-
-def baseline_heading_degrees(baseline_ned_m: Sequence[float]) -> float:
-    """Projected baseline bearing, rejecting zero/near-vertical directions.
-
-    Scaling first prevents overflow/underflow and preserves unit/scale
-    invariance.  A defined projection is still not generally Euler yaw.
-    """
+def body_yaw_from_ned_baseline(baseline_ned_m: Sequence[float]) -> float:
     baseline = np.asarray(baseline_ned_m, dtype=float)
     if baseline.shape != (3,) or np.any(~np.isfinite(baseline)):
         raise CLambdaError("baseline must be a finite NED vector")
-    scale = float(np.max(np.abs(baseline)))
-    if scale == 0.0:
-        raise BaselineHeadingUndefined("zero baseline has undefined projected heading")
-    normalized = baseline / scale
-    fraction_squared = float((normalized[0]**2 + normalized[1]**2) /
-                             np.dot(normalized, normalized))
-    if fraction_squared <= MIN_HORIZONTAL_PROJECTION_FRACTION_SQUARED:
-        raise BaselineHeadingUndefined("vertical/near-vertical baseline has undefined projected heading")
-    return math.degrees(math.atan2(baseline[1], baseline[0]))
-
-
-def body_yaw_from_ned_baseline(baseline_ned_m: Sequence[float]) -> float:
-    return wrap_degrees(baseline_heading_degrees(baseline_ned_m) + 90.0)
+    beta = math.degrees(math.atan2(baseline[1], baseline[0]))
+    return wrap_degrees(beta + 90.0)
 
 
 def wrap_safe_residual_degrees(measured: float, predicted: float) -> float:

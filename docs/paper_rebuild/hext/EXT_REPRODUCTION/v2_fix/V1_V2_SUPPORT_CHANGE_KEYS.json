@@ -1,0 +1,43 @@
+{
+  "scope": "only retained ERROR_SERIES files; no reference reopening or native calls",
+  "checks": [
+    {
+      "sequence": "BY2",
+      "method": "EXT01",
+      "support": "native_valid",
+      "old_only_keys_us": [],
+      "new_only_keys_us": [],
+      "old_count": 980,
+      "new_count": 980,
+      "common_count": 980
+    },
+    {
+      "sequence": "BY2H",
+      "method": "EXT01",
+      "support": "native_valid",
+      "old_only_keys_us": [],
+      "new_only_keys_us": [],
+      "old_count": 1059,
+      "new_count": 1059,
+      "common_count": 1059
+    },
+    {
+      "sequence": "BY2O",
+      "method": "EXT01",
+      "support": "native_valid",
+      "old_only_keys_us": [
+        1772783737798000,
+        1772783752998000,
+        1772783954998000
+      ],
+      "new_only_keys_us": [
+        1772783753198000,
+        1772783753598000,
+        1772783753998000
+      ],
+      "old_count": 1173,
+      "new_count": 1173,
+      "common_count": 1170
+    }
+  ]
+}

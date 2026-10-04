@@ -1,0 +1,23 @@
+{
+  "schema": "ext_v2.publication_metadata_clarity.v1",
+  "status": "REUSED_RTKLIB_NATIVE_VERSION_FIELDS_NOT_RELABELLED_V2",
+  "reason": "V2 describes comparison generation; old RTKLIB records have no new native V2 attempt",
+  "scientific_metrics_or_support_changed": false,
+  "reference_or_solver_calls": 0,
+  "tables": {
+    "COMPARISON_TABLE.csv": {
+      "before_sha256": "3dda99ce78fdd2c36103a030ac404a2c9db1d225bf532f5b1dd6e533b01ce4eb",
+      "after_sha256": "3eb691decd6a7f76920fc9b2a6806396b265e727d2646247680e06f63b88722b",
+      "row_count": 63,
+      "only_provenance_fields_changed": true
+    },
+    "COMMON_SUPPORT_ALL.csv": {
+      "before_sha256": "0c88a17e827e7fed0cc523ba349e5c1fbe190b7c928d2ba082cfac1bd629cb95",
+      "after_sha256": "8ccfd00d1fc8e689d466c098de075ed28941e91db332eb9537e3ba112f33de47",
+      "row_count": 450,
+      "only_provenance_fields_changed": true
+    }
+  },
+  "current_publication_helper_sha256": "9db1772fb9c138337c6e283d41c05350fc6ed21d90a4f443f62b5ef942a0462e",
+  "captured_utc": "2026-10-04T06:26:13.010030+00:00"
+}

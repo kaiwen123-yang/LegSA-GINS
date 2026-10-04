@@ -74,3 +74,45 @@ def test_cwls_failure_preserves_candidate_evidence(monkeypatch):
     assert result['search_attempted'] and not result['valid']
     assert result['candidate_pool']['candidate_count']==2
     assert result['candidate_diagnostics'][0]['reason']=='ITERATION_LIMIT'
+
+@pytest.mark.parametrize("schema,delay,version", [
+    ("ext_reproduction.config.v1", None, "V1"),
+    ("ext_reproduction.config.v2", "iterated_geometric", "V2"),
+])
+def test_runner_versions_choose_explicit_spp_contract(schema, delay, version):
+    config = {"schema": schema}
+    if delay is not None:
+        config["gps_l1_spp_earth_rotation_delay"] = delay
+    observed_version, observed_delay = runner.reproduction_contract(config)
+    assert observed_version == version
+    assert observed_delay == ("legacy_raw_code" if version == "V1" else delay)
+    if version == "V2":
+        with pytest.raises(ValueError, match="physical SPP"):
+            runner.reproduction_contract({"schema": schema})
+    else:
+        with pytest.raises(ValueError, match="frozen SPP"):
+            runner.reproduction_contract({**config, "gps_l1_spp_earth_rotation_delay": "iterated_geometric"})
+
+
+def test_runner_spp_keeps_rejected_index_and_uses_v2_geometric_dispatch(monkeypatch):
+    from types import SimpleNamespace
+    from legsa_gins.paper_rebuild.horizontal_literature import shared_raw_backend as raw
+    observations, incoming_seeds, delays = [], [], []
+    class Reader:
+        def __len__(self): return 3
+        def pair(self, index): return index, None
+    def solve(epoch, provider, previous, *, earth_rotation_delay):
+        observations.append(epoch)
+        incoming_seeds.append(None if previous is None else previous.copy())
+        delays.append(earth_rotation_delay)
+        if epoch == 1:
+            raise raw.RawBackendError("current epoch has no code geometry")
+        return SimpleNamespace(position_ecef_m=np.array([6378137.0, epoch, 0.0]))
+    monkeypatch.setattr(raw, "gps_l1_code_spp", solve)
+    positions = runner.prepare_spp_positions(Reader(), None, "iterated_geometric")
+    assert observations == [0, 1, 2]
+    assert delays == ["iterated_geometric"] * 3
+    assert len(positions) == 3 and positions[1]["position"] is None
+    assert positions[1]["failure"] == "current epoch has no code geometry"
+    np.testing.assert_array_equal(incoming_seeds[2], incoming_seeds[1])
+    assert positions[2]["position"] == [6378137.0, 2.0, 0.0]

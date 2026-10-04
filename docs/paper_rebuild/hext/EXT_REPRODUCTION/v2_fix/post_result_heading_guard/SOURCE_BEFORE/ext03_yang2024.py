@@ -26,8 +26,7 @@ from typing import Iterable, Mapping, Sequence
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
-from .ext01_clambda import (BaselineHeadingUndefined, LambdaBridgeError,
-                            RTKLIBLambdaBridge, baseline_heading_degrees)
+from .ext01_clambda import LambdaBridgeError, RTKLIBLambdaBridge
 
 
 FloatArray = NDArray[np.float64]
@@ -955,10 +954,9 @@ def ned_attitude(baseline_ned_m: ArrayLike) -> AttitudeSolution:
     baseline = _finite_vector(baseline_ned_m, 3, name="NED baseline")
     north, east, down = map(float, baseline)
     horizontal = math.hypot(north, east)
-    try:
-        heading = baseline_heading_degrees(baseline) % 360.0
-    except BaselineHeadingUndefined as exc:
-        raise Yang2024Error(str(exc), code=exc.code) from exc
+    if horizontal == 0.0 and down == 0.0:
+        raise Yang2024Error("zero baseline has undefined attitude")
+    heading = math.degrees(math.atan2(east, north)) % 360.0
     pitch = -math.degrees(math.atan2(down, horizontal))
     return AttitudeSolution(float(np.linalg.norm(baseline)), heading, pitch, (heading + 90.0) % 360.0)
 

@@ -109,12 +109,9 @@ def solve_independent(index):
             baseline=solved.baseline_vector_m
         if result["valid"]:
             ned=_ecef_vector_to_ned(baseline,position)
-            result.update(baseline_ecef_m=baseline,baseline_ned_m=ned,baseline_length_m=np.linalg.norm(ned))
-            result["body_yaw_deg"]=cl.body_yaw_from_ned_baseline(ned)
+            result.update(baseline_ecef_m=baseline,baseline_ned_m=ned,baseline_length_m=np.linalg.norm(ned),
+                          body_yaw_deg=cl.body_yaw_from_ned_baseline(ned))
     except (raw.RawBackendError,ValueError,np.linalg.LinAlgError) as exc:
-        # Candidate/certificate and any computed 3D baseline remain evidence;
-        # a failed heading conversion never leaves a stale valid flag or yaw.
-        result.update(valid=False,solution_state="INVALID",body_yaw_deg=None)
         result["failure_code"]=getattr(exc,"code",type(exc).__name__)
         result["failure_detail"]=str(exc)
         for attribute in ("candidate_pool","candidate_diagnostics"):
