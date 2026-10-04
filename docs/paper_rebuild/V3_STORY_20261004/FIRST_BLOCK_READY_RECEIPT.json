@@ -1,0 +1,81 @@
+{
+  "schema": "v3_story_first_commit_block_ready.v1",
+  "captured_utc": "2026-10-04T09:55:22.322123+00:00",
+  "all_checks_passed": true,
+  "original_registry_validation_receipt_sha256": "3b66d71a339d145a84fa0dd37a4b742ad0378852419fc19b88b7653cedc0f71c",
+  "lossless_packing_receipt_sha256": "494c06f6d47f47cf215a50d86e61d239c3908a87e0d517f5e007da9a00fcd4af",
+  "fullcase_andseed_admission_added_without_changing_primary_census": true,
+  "all_original_source_results_unchanged": true,
+  "science_calls": 0,
+  "root_only_commit_push": true,
+  "tracked_files": {
+    "01_FULL_TASK_LEDGER.md": {
+      "bytes": 8714,
+      "sha256": "b38dd2f5a1d8f3d0c35506cc8d2a809f3eb31f04d2e99779ea4c2beb238123a7"
+    },
+    "METHOD_READER_NAME_MAP.csv": {
+      "bytes": 1453,
+      "sha256": "1c54effcd5c23a36a6db80ea210c2ad1aee65de16f5f97832ada93aee3b974a3"
+    },
+    "README.md": {
+      "bytes": 1429,
+      "sha256": "52a3458de295f65ad86d518c895281eb870be1fdf8d1371fd6c6af2d80c22464"
+    },
+    "READ_COVERAGE.csv": {
+      "bytes": 7882,
+      "sha256": "64145ac3ae91a5fb4be6a83707ba804dd1fbe12d23125aa80ad8a492fc1628a2"
+    },
+    "NATIVE_ACTION_LEDGER.csv.gz": {
+      "bytes": 244919,
+      "sha256": "ded858f2b45d7174cd6d21836674bbe14cfda3ef3f655e063d2bb6b132aa7562"
+    },
+    "SEQUENCE_C00_ALIAS_LEDGER.csv": {
+      "bytes": 2329,
+      "sha256": "0606a5cd0a97ec854733bc6be21eb9d9948be4c14c6cc53bb594bcd534c3379b"
+    },
+    "CONFIG_FIELD_DISTRIBUTIONS.csv": {
+      "bytes": 24267,
+      "sha256": "d3a71ab18f956995835c1c251244a7765cad8d359cd8ce7d7624426dd80ed5e4"
+    },
+    "build_story_ledger.py": {
+      "bytes": 18849,
+      "sha256": "1d73747625a07c088844c2829990f456836d2721b2c6c6c28fb5b676d3ef0218"
+    },
+    "TASK_LEDGER.csv.gz": {
+      "bytes": 1900218,
+      "sha256": "c2c15bfab666340b7b5bd71970fb18e8109b9cfe92c3a21f75494be2060f155d"
+    },
+    "CASE_LEDGER.csv": {
+      "bytes": 813065,
+      "sha256": "7d4ed9ea31494cd8d7622ec814b2266b9015bac3d2868641b112700a361e0f6e"
+    },
+    "read_ledger.py": {
+      "bytes": 2154,
+      "sha256": "a9ad87ab4abdfbadb32f6b68656052ad951c55ae5cab398b03b54b4a67af1e6b"
+    },
+    ".gitignore": {
+      "bytes": 59,
+      "sha256": "22ad2e6fe42f77a68ad9b510b1df16a72dc1b1eb8314c5ce9bcfdd257ab6cfa6"
+    },
+    "METRIC_LEDGER.csv.gz": {
+      "bytes": 11957003,
+      "sha256": "d67f9cbdc3e5ab21653542de6ea63e8d59a3042716fceca5f81072a84610dd95"
+    },
+    "CONFIG_MODEL_FACTORS.json": {
+      "bytes": 306424,
+      "sha256": "734a551ed6f7bc1a60458a35b2476fd2c690ee75c5f0e181ea83a3f033184a14"
+    },
+    "REGISTRY_VALIDATION_RECEIPT.json": {
+      "bytes": 5960,
+      "sha256": "3b66d71a339d145a84fa0dd37a4b742ad0378852419fc19b88b7653cedc0f71c"
+    },
+    "LOSSLESS_LEDGER_PACKING_RECEIPT.json": {
+      "bytes": 2952,
+      "sha256": "494c06f6d47f47cf215a50d86e61d239c3908a87e0d517f5e007da9a00fcd4af"
+    },
+    "AGGREGATE_SOURCE_INDEX.csv": {
+      "bytes": 164167,
+      "sha256": "a89744c451d6592c8cf5a5b35a972decf31e227186311e2fb91466a97e2636db"
+    }
+  }
+}

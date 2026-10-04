@@ -1,0 +1,12 @@
+internal_method_id,paper_reader_name,effective_profile,enable_dual_yaw,enable_receiver_velocity,enable_raw_doppler,enable_source_aware,enable_go2_roll_pitch_prior,enable_go2_horizontal_velocity_prior,common_initialization_dual_yaw_used,physical_native_run_count
+A03,LegSA-GINS without Raw Doppler,AB0111,True,True,False,True,True,True,True,588
+A04,LegSA-GINS without source-aware weighting,AB1011,True,True,True,False,True,True,True,588
+A05,LegSA-GINS without Go2 roll/pitch prior,AB1101,True,True,True,True,False,True,True,588
+A06,LegSA-GINS without Go2 horizontal-velocity prior,AB1110,True,True,True,True,True,False,True,588
+A07,"LegSA-GINS without Go2 roll/pitch prior, Go2 horizontal-velocity prior",AB1100,True,True,True,True,False,False,True,588
+A08,"LegSA-GINS without source-aware weighting, Go2 roll/pitch prior, Go2 horizontal-velocity prior",AB1000,True,True,True,False,False,False,True,588
+A09,"LegSA-GINS without Raw Doppler, Go2 roll/pitch prior, Go2 horizontal-velocity prior",AB0100,True,True,False,True,False,False,True,588
+F01,GNSS/INS EKF (no online dual-heading update),single_antenna_EKF,False,True,False,False,False,False,True,588
+F02,Position-and-dual-heading EKF (receiver-velocity update disabled),basic_dual_yaw_EKF,True,False,False,False,False,False,True,588
+F03,Position/velocity-and-dual-heading EKF,AB0000,True,True,False,False,False,False,True,588
+F04,LegSA-GINS,AB1111,True,True,True,True,True,True,True,588
