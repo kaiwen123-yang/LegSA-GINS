@@ -1,8 +1,8 @@
 # Supplementary material
 
-> Evidence version map: S1–S19 retain historical V3, comparator and uncertainty identities except where a software boundary is explicitly described. S20–S23 bind separately accepted corrected cohorts. Historical statistics are not relabelled as current results; the historical broad matrix has not been replayed in full.
+> Evidence version map: S1–S18 preserve the author-retained original V3 matrix and separately identified original comparators. S19 records model boundaries. S20–S23 describe later contract-diagnostic and external-reproduction cohorts, without adopting them as a replacement for original V3. S24 maps reproduction selectors to paper names; S25 distinguishes source, binary, document, evaluation and cohort identities. Original statistics and intervals are not transferred to later versions.
 
-## S1 Fixed configuration and calibration
+## S1 Fixed engineering configuration and effective sensor model
 
 Table S1 retains the historical parameter tokens for reproducibility. All internal rows share dual-yaw initialization; disabling online heading does not remove that initial information. The represented scale-factor blocks have zero initial and process uncertainty in this configuration and must not be described as independently estimated active states. Unlike result tables, calibration settings are not rounded to display precision. The accelerometer engineering model and effective residual settings were developed on the primary sequence and transferred unchanged. Earlier shared-reference-visible noise development and configuration selection prevent a blanket blind-calibration claim. These are retained engineering settings, not completed laboratory calibration. Its indexed covariance proxies are not an identification of independent noise on each physical body axis. The heading marker is a residual proxy and was not independently re-estimated on the denser grid. The velocity-prior standard deviation likewise includes contributions from its preparation observations and timing. Neither should be interpreted as a laboratory white-noise specification.
 
@@ -128,7 +128,7 @@ Table S1 retains the historical parameter tokens for reproducibility. All intern
 
 ## S3 Complete internal ablation
 
-**Table S3.** Every internal configuration on each sequence. RMSE columns retain their original units: degrees for yaw, roll and pitch; metres for horizontal and up position. Gated-heading backbone/Gated-heading backbone and LegSA-GINS/LegSA-GINS are aliases and are not additional rows. The matched-epoch count is the support for the corresponding whole-window evaluation, rather than the denominator of every possible paired comparison.
+**Table S3.** Every internal configuration on each sequence. RMSE columns retain their original units: degrees for yaw, roll and pitch; metres for horizontal and up position. Historical aliases map to the same backbone or full configuration and do not create additional method rows (Table S24). The matched-epoch count is the support for the corresponding whole-window evaluation, rather than the denominator of every possible paired comparison.
 
 | Sequence | Method | yaw_rmse_deg | horizontal_rmse_m | up_rmse_m | roll_rmse_deg | pitch_rmse_deg | matched_epoch_count | evaluation_status |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -705,7 +705,7 @@ An audit tool correction after results changed the observer-side coordinate proj
 
 ## S11 Detailed nominal and ladder evidence
 
-Historical expanded evidence retained from the earlier manuscript. These values preserve the original result identity and are not corrected-estimator results.
+Primary original V3 evidence retained with its comparator and evaluation identities. These values are not later contract-diagnostic results.
 
 ### Nominal navigation on the three sequences
 
@@ -717,7 +717,7 @@ On BY2H, LegSA-GINS is lower by 0.27° on this window, and the oriented paired i
 
 On BY2O, LegSA-GINS and Two-receiver IEKF are comparable over the full window: 2.434° and 2.454°, respectively. This whole-window result immediately requires the segment qualification: LegSA-GINS has lower heading disagreement within the receiver-float intervals, whereas Two-receiver IEKF has the lower error outside them (Table 4). The full-window pair is therefore a cancellation of different temporal behaviours, not evidence that both methods followed the same heading trajectory.
 
-Horizontal position is comparable across LegSA-GINS and Two-receiver IEKF on all sequences in the practical interpretation of the paired intervals. This conclusion does not imply identical sample paths. It states that the observed differences are small relative to the uncertainty and application scale discussed in Section S14. The single-receiver Single-receiver-update IEKF diagnostic has heading RMSE 12.049°, 20.108°, and 5.846°. Its position agreement alone would therefore hide weaker heading performance (Table 3).
+Horizontal position is comparable across LegSA-GINS and Two-receiver IEKF on all sequences in the practical interpretation of the paired intervals. This conclusion does not imply identical sample paths. It states that the observed differences are small relative to the uncertainty and application scale discussed in Section S14. The Single-receiver-update IEKF diagnostic has heading RMSE 12.049°, 20.108°, and 5.846°. Its position agreement alone would therefore hide weaker heading performance (Table 3).
 
 Two-receiver IEKF has lower roll RMSE than LegSA-GINS on all sequences and lower pitch RMSE on BY2 and BY2O, as retained in Table S5c. On BY2H its pitch RMSE is 1.825°, compared with 1.698° for LegSA-GINS. The proposed method is not uniformly preferable across attitude axes. This observation is consistent with a design whose principal added absolute information is scalar heading and whose robot attitude enters only as a weak tilt prior. Reporting the roll/pitch result prevents a yaw-focused comparison from becoming an unsupported claim about full-attitude accuracy.
 
@@ -783,7 +783,7 @@ The full ablation table retains every configuration rather than only the five-st
 
 ## S12 Fault exposure and interruption evidence
 
-Historical expanded evidence retained from the earlier manuscript. These values preserve the original result identity and are not corrected-estimator results.
+Primary original V3 evidence retained with its comparator and evaluation identities. These values are not later contract-diagnostic results.
 
 ### Core fault matrix, failures, and seed dispersion
 
@@ -813,7 +813,7 @@ The corresponding historical figure is retained in the main article.
 
 ## S13 External outputs and controlled-fault comparisons
 
-Historical expanded evidence retained from the earlier manuscript. These values preserve the original result identity and are not corrected-estimator results.
+Primary original V3 evidence retained with its comparator and evaluation identities. These values are not later contract-diagnostic results.
 
 ### External methods by output class
 
@@ -823,7 +823,7 @@ For contact-aided quadruped state estimation, the official library with literatu
 
 The loosely coupled Two-receiver IEKF navigation comparison has been described in Section 6.1. Its literature configuration is retained across the sequences, including the uncalibrated-for-this-IMU process noise. Nominal horizontal agreement is comparable to LegSA-GINS, while yaw differences on BY2 and BY2H remain directional observations with intervals including zero. Its interruption behaviour is more differentiated: the A2 horizontal median is 1.407 m, with P95 7.769 m over 18 finite outcomes out of 18 (Table S13b).
 
-The single-antenna group separates Single-receiver-update IEKF diagnostic's finite navigation errors from GINav's failure and coverage outcomes. Single-receiver-update IEKF diagnostic's yaw range in Table 3 is much larger than its nominal horizontal position range. GINav diverges on BY2 and BY2O under the recorded bound checks. On BY2H it produces only 2 of 271 window epochs; the finite horizontal value of 2.895 m must be read with that support. A matched/output ratio computed on those few outputs cannot replace window coverage. This row is consequently not a completed full-window competitor.
+The single-receiver-update group with retained dual-heading initialization separates Single-receiver-update IEKF diagnostic's finite navigation errors from GINav's failure and coverage outcomes. Single-receiver-update IEKF diagnostic's yaw range in Table 3 is much larger than its nominal horizontal position range. GINav diverges on BY2 and BY2O under the recorded bound checks. On BY2H it produces only 2 of 271 window epochs; the finite horizontal value of 2.895 m must be read with that support. A matched/output ratio computed on those few outputs cannot replace window coverage. This row is consequently not a completed full-window competitor.
 
 Robot-motion dead reckoning is shown separately as kinematic dead reckoning with the robot's onboard attitude, no filter. Its aligned horizontal RMSE is 6.209 m, 9.178 m, and 6.322 m across the sequences. It describes what that input and attitude combination produces under the stated integration and initial alignment. The onboard attitude is itself an input estimate, so the comparison cannot diagnose an error in the official contact filter solely from a smaller drift slope in Robot-motion dead reckoning.
 
@@ -882,7 +882,7 @@ Figure S4 displays the family medians and empirical upper percentiles, with fail
 
 ## S14 Heading sensitivity and uncertainty interpretation
 
-Historical expanded evidence retained from the earlier manuscript. These values preserve the original result identity and are not corrected-estimator results.
+Primary original V3 evidence retained with its comparator and evaluation identities. These values are not later contract-diagnostic results.
 
 ### Heading-input sensitivity
 
@@ -900,7 +900,7 @@ Three limitations concern the evaluation itself. Similar fast heading disagreeme
 
 ## S15 Extended velocity and weighting contracts
 
-Historical expanded evidence retained from the earlier manuscript. These values preserve the original result identity and are not corrected-estimator results.
+Primary original V3 evidence retained with its comparator and evaluation identities. These values are not later contract-diagnostic results.
 
 ### Velocity-aiding redundancy and robot priors
 
@@ -915,7 +915,7 @@ v_{H}^{n}=\Pi_H\left[k_{\rm HV}R_z(\psi)R_y(-\theta)R_x(\phi)
 \operatorname{diag}(1,-1,-1)v_{\rm FLU}\right],
 \]
 
-where Π_H retains only the horizontal navigation components. The sign on pitch and the forward-left-up to forward-right-down conversion belong to the physical model. The prior supplies neither a vertical velocity constraint nor a direct Go2 yaw observation. Its scale and standard-deviation proxy are given in Table S1, along with the warning that the latter is not an independently identified white-noise parameter.
+where Π_H retains only the horizontal navigation components. The sign on pitch and the forward-left-up to forward-right-down conversion belong to the frozen engineering preparation transform; they do not establish a physically calibrated true-attitude rotation. The prior supplies neither a vertical velocity constraint nor a direct Go2 yaw observation. Its scale and standard-deviation proxy are given in Table S1, along with the warning that the latter is not an independently identified white-noise parameter.
 
 The heading used in preparing this prior comes from the status stream outside the solver. It is not automatically replaced by each scalar raw-heading observation. The prior is scheduled at GNSS epochs. Linear interpolation of the preparation heading is invalid within an open interval whose gap exceeds 1.2 s, while the original endpoints remain eligible. A complete loss of this preparation heading makes the horizontal prior invalid. These dependencies are essential to interpreting the interruption tests: a channel may remain enabled in the configuration but have no eligible observation during an outage.
 
@@ -1005,7 +1005,7 @@ The corrected stage repairs tilted-baseline projection as well as interval/incre
 
 The paired records share case, sequence, provider/raw-source hashes, evaluator contract/hash and formal window. Both rows are completed, finite and admitted in the retained aggregate; its online-reference flag is false. The Robot-velocity ablation horizontal-velocity update count is zero. In A2 every retained paired horizontal difference favours LegSA-GINS. A1 has mixed signs and does not support continued protection under complete upstream loss. The enabled switch applies throughout the window, so this comparison does not isolate an instantaneous outage-period mechanism. Other state and weighting paths may react nonlinearly.
 
-The analysis reads only existing aggregate fields and performs arithmetic; it is not a new native payload audit, estimator replay or bootstrap. Within-type seeds are dependent experimental units. The machine receipt and all case-level differences retain full precision and source hashes. The corrected single-component replay in S21 supplies separate current evidence for the prescribed interruption subset; it does not adopt these historical scalar differences as corrected performance.
+The analysis reads only existing aggregate fields and performs arithmetic; it is not a new native payload audit, estimator replay or bootstrap. Within-type seeds are dependent experimental units. The machine receipt and all case-level differences retain full precision and source hashes. The later single-component replay in S21 supplies separate diagnostic evidence for the prescribed interruption subset; it does not adopt these historical scalar differences as corrected performance.
 
 ## S19. Retained dynamic-model and covariance-reset approximations
 
@@ -1013,9 +1013,9 @@ The scientific port retains two explicit model boundaries beyond the present cor
 
 The present corrections concern the measured increment-duration contract, tilted lateral-baseline projection, compensated angular-rate/velocity sensitivity, sequential conditional innovations, active-component metadata, and covariance recording. Fixed scale covariance blocks and positive-semidefinite checks on saved active-state matrices do not show calibrated state uncertainty. No new Earth-coupling or tangent-reset model is introduced in the completed velocity-ablation replay. A stronger probabilistic or TIM measurement-uncertainty claim needs quantitative assessment of these approximations under its stated regime and a complete uncertainty model, rather than merely increasing the number of replayed epochs.
 
-## S20 Corrected natural cohort and restart support
+## S20 Later contract-diagnostic natural cohort and restart support
 
-**Table S20.** All corrected natural configurations. Values are discrepancies against the shared-input commercial reference. The table is a direct transcription of [natural33.csv](evidence/natural33.csv), with identities in [RESULT_IDENTITY_MAP.json](evidence/RESULT_IDENTITY_MAP.json). H/V/3D use metres and yaw degrees. Historical intervals and literature-baseline comparisons are not transferred to these results.
+**Table S20.** All later contract-diagnostic natural configurations; these do not replace the original V3 rows. Values are discrepancies against the shared-input commercial reference. The table is a direct transcription of [natural33.csv](evidence/natural33.csv), with identities in [RESULT_IDENTITY_MAP.json](evidence/RESULT_IDENTITY_MAP.json). H/V/3D use metres and yaw degrees. Historical intervals and literature-baseline comparisons are not transferred to these results.
 
 | Sequence | Method | H RMSE (m) | V RMSE (m) | 3D RMSE (m) | Yaw RMSE (deg) | Matched | Expected | Restarts |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -1057,9 +1057,9 @@ The accepted cohort comprises 33 configurations and 110 native segments. Its sep
 
 The saved active-state covariance check covers 8052 recorded boundaries, not every propagation instant. Fifteen components are active and six scale components have fixed zero covariance. Positive-semidefinite saved matrices establish recorded numerical health only, not a calibrated uncertainty model, tangent-reset completeness or full dynamic coupling. No online reference was opened by native execution. This excludes online reference access without proving that historical calibration and configuration selection were blind to earlier shared-reference outcomes.
 
-## S21 Corrected single-component interruption cohort
+## S21 Later single-component interruption diagnostics
 
-The accepted study retains all 135 prescribed configurations: LegSA-GINS, Doppler-aid ablation (only Doppler disabled) and Robot-velocity ablation (only robot horizontal velocity disabled) for 45 controlled interruptions. D61 covers 10, 20 and 30 s full upstream losses; D62 covers 10 and 20 s position/receiver-velocity/Doppler losses with preparation heading retained. Nine fixed placements are reused across duration and family. They are dependent placement blocks rather than 45 independently sampled trials. Every run matches 56642 originally observed output epochs, with no restart in this subset. Native online reference reads are zero; evaluation follows completion of the entire native cohort.
+The accepted study retains all 135 prescribed configurations: LegSA-GINS, Doppler-aid ablation (only the separate Doppler-derived aid disabled, with receiver velocity retained) and Robot-velocity ablation (only robot horizontal velocity disabled) for 45 controlled interruptions. D61 covers 10, 20 and 30 s full upstream losses; D62 covers 10 and 20 s position/receiver-velocity/Doppler losses with preparation heading retained. Nine fixed placements are reused across duration and family. They are dependent placement blocks rather than 45 independently sampled trials. Every run matches 56642 originally observed output epochs, with no restart in this subset. Native online reference reads are zero; evaluation follows completion of the entire native cohort.
 
 **Table S21.** Fault-window placement-block summaries. Differences are LegSA-GINS minus the ablation; negative favours LegSA-GINS. The mean averages case RMSE differences, not underlying squared errors. All outcomes, including vertical and yaw counterexamples, remain in the [full135 records](evidence/claim135.csv), [2520 paired domain rows](evidence/claim_pairs2520.csv) and [280 placement summaries](evidence/claim_placement280.csv).
 
@@ -1092,7 +1092,7 @@ Actual accepted-event evidence is stricter than provider-clock availability. [Fa
 
 The controlled cohort uses binary 7ca1568ea75f11dad63aec5f16966c28f3ce6596207eb234c1b0f878b95fbe42 and a separately saved source/input identity. Its additional input guards do not change the natural cohort retrospectively. Independent saved-error arithmetic checked 540 whole-window metrics, 810 own-domain rows, 2520 paired metrics and 280 summaries; the largest whole-window recomputation difference is 3.907985046680551e-14. This is transcription/arithmetic acceptance under the shared reference, not independent measurement calibration or a single-repair causal experiment.
 
-## S22 Corrected factor-graph branches
+## S22 Separately identified factor-graph reproduction branches
 
 **Table S22.** Own-valid support of the three implemented branches. Empty metrics mean unavailable support or unestimated attitude; no borrowed robot attitude is reported as the method's estimate. Full precision and common-support rows remain in [fgo_metrics.csv](evidence/fgo_metrics.csv).
 
@@ -1114,7 +1114,7 @@ The OiSAM branch implements structured Givens, the stated joint sliding-window r
 
 These are selected paper-branch implementations and real-data executions. Complete author OiSAM/Wen/GNC programmes and the original papers' full experimental campaigns were not obtained or reproduced. A separately continuous author ADIS diagnostic has 601/601 nodes; it demonstrates branch execution on that input, not accuracy equivalence or robot full-window success. Regression checks are local verification, not experimental equivalence. Different input layers and physical points prevent same-input solver ranking or comparison of offline duration as worst-case online latency.
 
-## S23 Corrected external heading branches and measurand
+## S23 Separately identified external heading branches and measurand
 
 **Table S23.** Native-valid heading support in the formal paired windows. The reported quantity is lateral-baseline projected azimuth plus the fixed forward offset; the reference is commercial Euler yaw. The RMSE is therefore a diagnostic disagreement, not an unconditional identical-attitude or independent-accuracy ranking. Source support and causal-hold alternatives remain in [ext_comparison.csv](evidence/ext_comparison.csv).
 
@@ -1180,3 +1180,13 @@ Internal selectors below are retained only to locate archived code, configuratio
 | EXT05A | Two-receiver IEKF | Two-receiver IEKF | Alias of LC01; not an additional algorithm |
 | EXT05A_PAVLASEK_TWO_RECEIVER_IEKF | Two-receiver IEKF | Two-receiver IEKF | Alias of LC01; not an additional algorithm |
 | LC01_EXT05A | Two-receiver IEKF | Two-receiver IEKF | Alias of LC01; not an additional algorithm |
+
+## S25 Primary version, task census and later-cohort roles
+
+The paper's primary LegSA-GINS configuration is the original author-retained scalar-heading V3, with its full comparison matrix. Its scientific source revision is 7d43b9af26120ed5dde21f53e515386361072ba6 and native binary SHA256 is 96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c. The ca73cb1fb48a020fd2a450d79e520562c34eeb24 definition/documentation anchor has a different role and is not the original native binary identity. [Original matrix receipt](evidence/original_v3_registry_receipt.json) and [version-role map](evidence/RESULT_IDENTITY_MAP.json) locate the complete records. These identities preserve the author's choice without modifying original inputs or results.
+
+The task census is 541 core cases across 11 configurations, 45 additional controlled interruption cases across the same configurations, and 2 additional natural sequences. BY2 natural configurations reuse core clean-case records; they are not extra executions. The total is 6468 native tasks, including 6185 completed and the failure classes retained in S4. Each completed native trajectory has two evaluation-point contracts: the original IMU point and the declared antenna midpoint. These are evaluation transforms, not two estimators or independent experiments. The census contains 12936 evaluation slots, of which 12370 were executed; native failure leaves 566 unexecuted slots with no invented metrics. Aliases, seeds, dense timestamps and redundant metric fields do not increase the count of independent physical trials.
+
+The later natural cohort jointly changes six contracts and uses explicit missing-motion segmentation and GNSS-based reinitialization. The controlled subset uses a distinct guarded identity and only its prescribed single-component comparisons. Neither replaces the complete primary matrix or establishes an isolated correction benefit. The external-heading and factor-graph branches have their own inputs, output points, support and adaptation limits. Their implementation and testing do not imply complete author-program or full-paper experimental reproduction. Any later cohort awaiting acceptance is outside the numbers in this version. Post-result pure heading-domain repairs remain source-only checks with old execution pins unchanged, as S23 states.
+
+Complete matrix metadata and compressed task/action/metric ledgers are linked through the original registry receipt. Some original high-volume payloads were intentionally released or cold-archived; a retained result hash does not assert that every old payload is presently hot or was manually reread. Retained cold archives require the documented restore helper. Measurement geometry, covariance transport and shared-reference independence remain outside this software identity evidence.

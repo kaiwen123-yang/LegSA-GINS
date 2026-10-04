@@ -1,0 +1,59 @@
+{
+  "created_utc": "2026-10-04T10:36:37.319131+00:00",
+  "all_checks_passed": true,
+  "table_files_byte_exact": 31,
+  "pure_numeric_cells_exact": 3489,
+  "protected_figure_files_byte_exact": 36,
+  "existing_scientific_evidence_files_byte_exact": 13,
+  "first_name_photo_asset_files_unchanged": true,
+  "existing_prose_number_tokens_unchanged_except_three_explicit_primary_abstract_rebindings": true,
+  "abstract_rebinding": [
+    {
+      "sequence": "BY2",
+      "previous_cohort": "later natural33 diagnostic",
+      "current_cohort": "author-retained original V3"
+    },
+    {
+      "sequence": "BY2H",
+      "previous_cohort": "later natural33 diagnostic",
+      "current_cohort": "author-retained original V3"
+    },
+    {
+      "sequence": "BY2O",
+      "previous_cohort": "later natural33 diagnostic",
+      "current_cohort": "author-retained original V3"
+    }
+  ],
+  "new_direct_registry_number_tokens": 9,
+  "number_checks_passed": 204,
+  "number_checks_failed": 0,
+  "science_modules_invoked": 0,
+  "raw_reference_payload_reads": 0,
+  "original_scientific_inputs_or_results_modified": false,
+  "scope": "Publication-source/display-only role changes and inherited registry direct transcription; not new metric evaluation/calibration.",
+  "existing_ledger_entries_other_than_three_abstract_claims_unchanged": 192,
+  "explicit_ledger_rebindings": [
+    {
+      "claim_id": "N00002",
+      "old_value": "1.903",
+      "new_value": "1.886",
+      "old_source": "paper_package/gpss_v0/evidence/natural33.csv",
+      "new_source": "<V3>/07_AGGREGATE/MAIN_TABLE_V3.csv"
+    },
+    {
+      "claim_id": "N00003",
+      "old_value": "1.941",
+      "new_value": "1.934",
+      "old_source": "paper_package/gpss_v0/evidence/natural33.csv",
+      "new_source": "<V3>/07_AGGREGATE/MAIN_TABLE_V3.csv"
+    },
+    {
+      "claim_id": "N00004",
+      "old_value": "2.413",
+      "new_value": "2.434",
+      "old_source": "paper_package/gpss_v0/evidence/natural33.csv",
+      "new_source": "<V3>/07_AGGREGATE/MAIN_TABLE_V3.csv"
+    }
+  ],
+  "comparison_publication_commit": "7538df9563e9eceb50fcb0533a9794f72328c78c"
+}

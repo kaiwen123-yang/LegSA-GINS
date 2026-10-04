@@ -2171,48 +2171,6 @@
     "value": 0.35,
     "digits": 2
   },
-  "NAT|BY2|F04|yaw_RMSE_deg": {
-    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
-    "locator": {
-      "where": {
-        "sequence_id": "BY2",
-        "method_id": "F04"
-      },
-      "column": "yaw_RMSE_deg",
-      "display_digits": 3
-    },
-    "mode": "CSV",
-    "value": 1.90266201392062,
-    "digits": 3
-  },
-  "NAT|BY2H|F04|yaw_RMSE_deg": {
-    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
-    "locator": {
-      "where": {
-        "sequence_id": "BY2H",
-        "method_id": "F04"
-      },
-      "column": "yaw_RMSE_deg",
-      "display_digits": 3
-    },
-    "mode": "CSV",
-    "value": 1.9414758146710627,
-    "digits": 3
-  },
-  "NAT|BY2O|F04|yaw_RMSE_deg": {
-    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
-    "locator": {
-      "where": {
-        "sequence_id": "BY2O",
-        "method_id": "F04"
-      },
-      "column": "yaw_RMSE_deg",
-      "display_digits": 3
-    },
-    "mode": "CSV",
-    "value": 2.4125224716896723,
-    "digits": 3
-  },
   "D|contract|0.03": {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/configs/paper_rebuild/final_v23_parity_contract.yaml",
     "locator": {
@@ -2532,6 +2490,48 @@
     "mode": "DOC",
     "value": 90.0,
     "digits": 0
+  },
+  "NAT|BY2|F04|yaw_RMSE_deg": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "F04"
+      },
+      "column": "yaw_RMSE_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.90266201392062,
+    "digits": 3
+  },
+  "NAT|BY2H|F04|yaw_RMSE_deg": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "F04"
+      },
+      "column": "yaw_RMSE_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 1.9414758146710627,
+    "digits": 3
+  },
+  "NAT|BY2O|F04|yaw_RMSE_deg": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "F04"
+      },
+      "column": "yaw_RMSE_deg",
+      "display_digits": 3
+    },
+    "mode": "CSV",
+    "value": 2.4125224716896723,
+    "digits": 3
   },
   "NAT|BY2|F04|H_RMSE_m": {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",
@@ -4141,5 +4141,114 @@
     "mode": "DOC",
     "value": 0.3,
     "digits": 1
+  },
+  "VR|core_case_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "core_case_count"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 541,
+    "digits": 0
+  },
+  "VR|unique_physical_configurations": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "unique_physical_configurations"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 11,
+    "digits": 0
+  },
+  "VR|addendum_case_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "addendum_case_count"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 45,
+    "digits": 0
+  },
+  "VR|additional_natural_sequence_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "additional_natural_sequence_count"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 2,
+    "digits": 0
+  },
+  "VR|registered_tasks": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "registered_tasks"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 6468,
+    "digits": 0
+  },
+  "VR|native_terminal_counts|COMPLETED": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "native_terminal_counts",
+        "COMPLETED"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 6185,
+    "digits": 0
+  },
+  "VR|evaluator_terminal_slots": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "evaluator_terminal_slots"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 12936,
+    "digits": 0
+  },
+  "VR|actual_evaluator_completions": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "actual_evaluator_completions"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 12370,
+    "digits": 0
+  },
+  "VR|not_invoked_algorithm_failure_slots": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "locator": {
+      "key_path": [
+        "not_invoked_algorithm_failure_slots"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 566,
+    "digits": 0
   }
 }

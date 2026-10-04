@@ -1,15 +1,17 @@
-# GPS Solutions 压缩母稿及作者决定项（2026-10-04）
+# LegSA-GINS：保留原 V3 的 GPS Solutions 母稿与 TIM 后续条件
 
-当前源文件是 manuscript_source.md 与 supplement_source.md，assemble_manuscript.py 生成可读稿。正文聚焦短基线航向准入、补充速度的可用条件与失效边界；数字与误差图仍属历史V3科学冻结ca73，不能改名为当前纠错版本。当前正文、摘要、台账及图表检查的精确计数以FINAL_QA.json为准。MS01_REPORT.md的9871词是原2026-09-27稿，先前修订长稿为10256词；两者都不是当前压缩稿。
+当前真实源是 manuscript_source.md 与 supplement_source.md；assemble_manuscript.py 生成可读稿。论文正式名 LegSA-GINS（source-aware dual-antenna GNSS/INS for legged robots），正文/图例不用 F04 等配置号，准确代码映射只在 S24。SDK body velocity 不是独立关节编码器腿部运动学。当前投稿范围仅 GPS Solutions 与 TIM。
 
-主文保留6张图、4张表。S1–S10原证据保留；S11扩展自然窗及ladder，S12全部失败/离散与A1/A2，S13外部方法与控制故障，S14航向敏感性和不确定度解释，S15详细velocity/SA合同，S16故障族和heading-only分段支持，S17实际交付IMU时间间隔和参考输入血缘，S18既有F04/A06标量RMSE配对。Fig07/Fig08移作FigS3/S4，文件保持原历史图身份。主图2已将“leg velocity”改成真实高层机器人body-velocity来源，重新绘图并实际检视。
+作者保留的原 V3 是主科学版本：原源码7d43、二进制96ae，ca73是既有定义/文档锚点，三者不能混用。正文6.1–6.5、四主表与图3–6保留原全量矩阵/比较/区间；三自然窗航向为1.886272/1.933770/2.433815 deg。完整6468 native、283失败及两个评价点合同已在 S25 和原矩阵收据定位；原输入/结果没有修订或重跑。后来33自然/135受控、FGO和EXT是分别绑定的合同诊断/外部复现，不取代原方法选择，不把旧数改成新版本结果。
 
-正文保持F01共有dual-yaw初始化；F02→F03同时改receiver velocity与gate，F03不含RP；21维表示不等于全部状态活跃；RD/RV不等于完整紧耦合或独立卫星误差；HV来自Go2高层状态并依赖外部status heading；F04−F03是复合改变。新增只读既有F04/A06对照更窄地支持A2条件下的HV switch贡献，尚无新原生机制回放或共同历元区间，不能替代纠错版本的复核。
+当前台账、正文/摘要词数、图表检查的准确数量见 FINAL_QA.json。正文计数排除图注、表格、标题、公式、摘要、声明/书目；官方约5000–5500词未明确排除规则，因此并非全篇提交长度认证。MS01_REPORT.md中9871词是旧2026-09-27稿，10256词是先前修订长稿，都不是当前母稿。最终仍需要Word与editable equations/tables、正式书目、作者材料和投稿版图像/Online Resources检查。
 
-参考是Fixposition Vision-RTK 2融合输出，与导航GNSS同session、Go2 IMU另一路；实际状态文件证实三个正式窗camera used、wheel not used。教程不证明实际连接、物理输出点、外参、固件或时钟关系；不能写“independent truth”。原厂家指标、内部covariance、fast residual以及moving-block区间不构成完整可溯源仪器不确定度。共同加性项一般不会从RMSE差严格抵消，未做方差扣除。
+主文保留6图4表，S1–S18保留原配置、完整消融、全部失败/类型/离散、条件中断、外部适配、敏感性和既有不确定度诊断。S19明确保留模型近似；S20–S23独立后续队列；S24代码映射；S25版本/完整任务账本。Fig1加入作者授权原片，原JPEG字节未改；它仅记录可见装配，不证明器件身份、坐标/尺寸/接线/时钟或对应采集。图中RTK基线中位长度不是实测刚性phase-centre基线或其不确定度，不能替换EXT名义0.35m参数。
 
-已关闭的文案/已有记录分析：删主系统“low-cost”贡献标签；IMU中位输出间隔约4ms而非把配置500Hz当实测；窗口有效记录率及7长间隔由锁定文件只读统计，文件哈希前后不变。N01倾斜侧向baseline不等Euler yaw、N12条件创新、N16活跃维metadata、IMU增量/时长纠错各有版本边界；新阶段合并多项改变，旧/新差不能归为单独gap收益。
+共有dual-yaw初始化、基础方法复合开关、固定六维scale协方差、RD/RV不同角色但同源相关、HV依赖prepared heading和GNSS全局调度、原scalar heading倾斜近似、原条件创新与disabled-sentinel边界均保留。后续135说明heading-preserved条件HV横向改善和V负结果，D61故障内无来源更新，D62无P/RV/RD新更新，RD全窗yaw44/45更差；不宣称独立断星桥接或每模块普遍改善。后续自然窗采用显式GNSS重启，不是无缝延续或单独IMU gap因果收益。
 
-还不能自动补造：实际硬件接线/序列号/固件/安装照片；measured lever和mount transform及误差；reference POI/topic/时标及独立性；作者/基金/贡献/利益冲突/数据发布权；新FGO、EXT、IMU stage的已验收结果。参考占位需要primary书目核验与author–year列表。正文计数排除图注/表格等，官方5000–5500“manuscripts”未说明排除规则；完整Word成稿须重新计数，不因body check通过就宣称符合全部长度要求。
+参考为Fixposition Vision-RTK 2商业融合输出，三个正式窗camera-used、wheel-not-used，估计器Go2机体IMU另一路但GNSS同记录血缘。因此写agreement，不写已证独立truth/厘米绝对accuracy。online-reference0只证明执行访问边界，不证明此前参数/方法选择对共享参考盲。厂家指标、设备covariance、fast residual、moving-block区间不能代替实体校准或完整可溯源不确定度；共用误差不能从两个RMSE直接扣除。
 
-完整审查与P0/P1/P2、最小实验及接受标准见G:/LegSA-GINS-project/修复_20261004/GPSS_COMPRESSION_READINESS_REVIEW.md。可读稿不是可直接投稿文件：GPS Solutions要求Word、editable equations、图像最终格式与Data Availability；当前submission_ready=False有意保留。
+待作者提供实际安装/通道/固件与对应采集、测量坐标/杆臂/reference POI及误差、时标/延迟、SDK速度语义、作者/基金/利益/数据权限/AI声明。已核书目可以凭primary来源完成，不重复要求作者寻找可查事实。GPS/TIM差距、现有数据可补与必须实体测量的最小记录/接受标准见 docs/paper_rebuild/PAPER_IDENTITY_20261004/GPS_TIM_CLAIMS_AND_READINESS.md。两个官方预印本措辞冲突需实际投稿前向期刊确认，不能自行判拒稿或推断开源代码禁止。
+
+可审查母稿当前 submission_ready=false。本块只改论文/文档/出版生成与检查，不调用科学输入生成器、native/evaluator、raw/reference，不改变原V3或后续封存科学数据。

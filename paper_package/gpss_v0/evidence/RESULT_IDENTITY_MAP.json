@@ -80,13 +80,37 @@
       "sha256": "4a945f84e699385ab0353de819e22089cb90ac3ca38b051348089e3efe5e51b6",
       "bytes": 4107,
       "identity_scope": "Post-result heading-domain source repair; old accepted executions not rebound"
+    },
+    {
+      "copy": "original_v3_registry_receipt.json",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/REGISTRY_VALIDATION_RECEIPT.json",
+      "sha256": "3b66d71a339d145a84fa0dd37a4b742ad0378852419fc19b88b7653cedc0f71c",
+      "bytes": 5960,
+      "identity_scope": "Read-only audit of the complete original matrix; inherited machine census, not new scientific execution or manual reading of every metric"
     }
   ],
-  "historical_V3_scientific_freeze": "ca73cb1fb48a020fd2a450d79e520562c34eeb24",
   "natural33_binary": "c53784f418b7bafa3441a0a707bc579ede45c3751e2910efd2ab7615a224eb2f",
   "claim135_binary": "7ca1568ea75f11dad63aec5f16966c28f3ce6596207eb234c1b0f878b95fbe42",
   "FGO_source22_aggregate": "1ae538d65e116028f90d80f0a721619b23ff514f0c11159a908cf303b6e009bd",
   "EXT_execution": "EXT_REPRO_V2_TECH_RETRY_2",
   "no_science_invoked": true,
-  "EXT_post_result_repair_execution_scope": "No rerun of old nine EXT or 135 claim runs; pure saved-vector conversion and bounded regression evidence only"
+  "EXT_post_result_repair_execution_scope": "No rerun of old nine EXT or 135 claim runs; pure saved-vector conversion and bounded regression evidence only",
+  "author_retained_V3": {
+    "role": "Primary author-retained scientific method/full matrix; later diagnostics do not replace it",
+    "scientific_source_revision": "7d43b9af26120ed5dde21f53e515386361072ba6",
+    "native_binary_sha256": "96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c",
+    "definition_documentation_anchor": "ca73cb1fb48a020fd2a450d79e520562c34eeb24",
+    "definition_anchor_is_native_execution_identity": false,
+    "original_registry_receipt_copy": "original_v3_registry_receipt.json",
+    "registered_tasks": 6468,
+    "retained_matrix_root": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3",
+    "payload_availability_boundary": "Receipt/index distinguishes retained result/config metadata from intentionally released or cold-archived payloads; no universal hot-payload claim"
+  },
+  "cohort_roles": {
+    "natural33": "Later joint-contract diagnostic version; segmented GNSS restart policy; not primary V3 replacement",
+    "claim135": "Later controlled single-component diagnostic subset, distinct guarded source/binary; dependent placements; not full primary matrix replay",
+    "FGO9": "Accepted selected paper-branch reproduction cohort with strict support/failure limits; not a same-input primary V3 replacement",
+    "EXT9": "Accepted adapted carrier-heading cohort; nominal declared geometry and projected-versus-Euler measurand boundary; not universal carrier failure evidence",
+    "pending_cohorts": "Not bound to manuscript result cells until separately accepted"
+  }
 }

@@ -85,6 +85,10 @@ def emit(key,section,quoted=None):
         _,s,pair,metric,c,d=key.split('|');csvspec(key,U/'UNC_DISTINGUISHABILITY.csv',{'sequence':s,'segment':'full','pair_A_minus_B':pair,'metric':metric},c,int(d))
     if key.startswith('C|'):
         _,m,metric,c,d=key.split('|');csvspec(key,V/'07_AGGREGATE/CORE_541_SUMMARY_V3.csv',{'method_id':m,'metric':metric},c,int(d))
+    if key.startswith('VR|'):
+        p=P/'evidence/original_v3_registry_receipt.json';v=json.loads(record(p).read_text());parts=key.split('|')[1:]
+        for field in parts:v=v[field]
+        SPECS[key]={'path':str(p),'locator':{'key_path':parts,'display_digits':0},'mode':'YAML','value':v,'digits':0}
     if key.startswith('NAT|'):
         _,seq,method,column=key.split('|');csvspec(key,P/'evidence/natural33.csv',{'sequence_id':seq,'method_id':method},column,0 if column.endswith('epochs') or column=='gap_restart_count' else 3)
     if key.startswith('CLM|'):
@@ -104,6 +108,7 @@ def emit(key,section,quoted=None):
     if key in ['UA|f04_f03_yaw_pairs','UA|paired_fault_registered']:unit='cases'
     if key in ['UA|f04_yaw_median_ci_low','UA|f04_yaw_median_ci_high']:unit='deg'
     if key.startswith('G|') or key in ['D|contract|0.03','D|contract|-0.30']:unit='m'
+    if key.startswith('VR|'):unit='tasks or cases as explicitly named in the sentence'
     if key.startswith('NAT|'):unit='deg' if 'yaw_' in key else 'epochs' if key.endswith('epochs') else 'restarts' if 'gap_restart_count' in key else 'm'
     if key.startswith('CLM|'):unit='cases' if '|worsened|' in key or '|improved|' in key else 'deg' if '|yaw|' in key else 'm'
     if key.startswith('FGO|'):unit='epochs' if key.endswith('count') else 'deg' if 'yaw_' in key else 'm'

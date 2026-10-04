@@ -180,6 +180,11 @@
     "bytes": 8047
   },
   {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/original_v3_registry_receipt.json",
+    "sha256": "3b66d71a339d145a84fa0dd37a4b742ad0378852419fc19b88b7653cedc0f71c",
+    "bytes": 5960
+  },
+  {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/uncertainty_display_source.md",
     "sha256": "56c1da2ea5ed0465c3e65cc8c3a1b42a35f1cf10319c87d8e5f17e5ab5028b65",
     "bytes": 3313

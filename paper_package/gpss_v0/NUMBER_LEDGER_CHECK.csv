@@ -1,8 +1,8 @@
 claim_id,status,expected,actual,detail
 N00001,PASS,0.35,0.35,round to 2 decimal places
-N00002,PASS,1.903,1.90266201392062,round to 3 decimal places
-N00003,PASS,1.941,1.9414758146710627,round to 3 decimal places
-N00004,PASS,2.413,2.4125224716896723,round to 3 decimal places
+N00002,PASS,1.886,1.8862718548526467,round to 3 decimal places
+N00003,PASS,1.934,1.93377013508875,round to 3 decimal places
+N00004,PASS,2.434,2.433814932823714,round to 3 decimal places
 N00005,PASS,0.35,0.35,round to 2 decimal places
 N00006,PASS,0.03,0.03,round to 2 decimal places
 N00007,PASS,0.03,0.03,round to 2 decimal places
@@ -194,3 +194,12 @@ N00188,PASS,0.3,0.3,round to 1 decimal places
 N00189,PASS,1,1.0,round to 0 decimal places
 N00190,PASS,0.05,0.05,round to 2 decimal places
 N00191,PASS,1.2,1.2,round to 1 decimal places
+N00192,PASS,541,541.0,round to 0 decimal places
+N00193,PASS,11,11.0,round to 0 decimal places
+N00194,PASS,45,45.0,round to 0 decimal places
+N00195,PASS,2,2.0,round to 0 decimal places
+N00196,PASS,6468,6468.0,round to 0 decimal places
+N00197,PASS,6185,6185.0,round to 0 decimal places
+N00198,PASS,12936,12936.0,round to 0 decimal places
+N00199,PASS,12370,12370.0,round to 0 decimal places
+N00200,PASS,566,566.0,round to 0 decimal places
