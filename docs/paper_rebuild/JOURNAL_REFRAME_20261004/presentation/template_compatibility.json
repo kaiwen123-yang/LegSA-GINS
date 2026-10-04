@@ -1,0 +1,69 @@
+{
+  "source": "C:\\Users\\ykw\\Desktop\\泛源定位与组合导航\\组会模版.pptx",
+  "source_sha256": "dd521f62d3ef710a0506a7f4677ed7e14564ecac2dc58785ae5b44088aadfb63",
+  "compatible_copy": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\template_compatible.pptx",
+  "compatible_sha256": "981fbf2dd1beb8e74cb6afd5bb6143570f9e738b1ec88a60c696d45e3537642b",
+  "changes": [
+    {
+      "part": "ppt/charts/chart1.xml",
+      "from": -929066816,
+      "to": 3365900480
+    },
+    {
+      "part": "ppt/charts/chart1.xml",
+      "from": -929088032,
+      "to": 3365879264
+    },
+    {
+      "part": "ppt/charts/chart1.xml",
+      "from": -929066816,
+      "to": 3365900480
+    },
+    {
+      "part": "ppt/charts/chart1.xml",
+      "from": -929088032,
+      "to": 3365879264
+    },
+    {
+      "part": "ppt/charts/chart1.xml",
+      "from": -929088032,
+      "to": 3365879264
+    },
+    {
+      "part": "ppt/charts/chart1.xml",
+      "from": -929066816,
+      "to": 3365900480
+    },
+    {
+      "part": "ppt/charts/chart5.xml",
+      "from": -720880992,
+      "to": 3574086304
+    },
+    {
+      "part": "ppt/charts/chart5.xml",
+      "from": -720877184,
+      "to": 3574090112
+    },
+    {
+      "part": "ppt/charts/chart5.xml",
+      "from": -720880992,
+      "to": 3574086304
+    },
+    {
+      "part": "ppt/charts/chart5.xml",
+      "from": -720877184,
+      "to": 3574090112
+    },
+    {
+      "part": "ppt/charts/chart5.xml",
+      "from": -720877184,
+      "to": 3574090112
+    },
+    {
+      "part": "ppt/charts/chart5.xml",
+      "from": -720880992,
+      "to": 3574086304
+    }
+  ],
+  "policy": "Only signed chart axis IDs converted to unsigned32, consistently; original untouched."
+}
