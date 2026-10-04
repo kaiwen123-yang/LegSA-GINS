@@ -1,0 +1,7 @@
+source_id,title,url,access_date,provenance,actual_read_scope,claim_supported
+V01,GPS Solutions aims and scope,https://link.springer.com/journal/10291/aims-and-scope,2026-10-04,publisher official,"scope paragraph, web lines 61–63",GNSS methods/applications; no mandatory ambiguity-resolution novelty
+V02,GPS Solutions submission guidelines,https://link.springer.com/journal/10291/submission-guidelines,2026-10-04,publisher official,"specific remarks; title/abstract/text/references/SI, selected lines 95–398",Word; article length; abstract/keywords; editorial requirements; Internet-posting wording
+V03,Springer Nature preprints,https://support.springernature.com/en/support/solutions/articles/6000258807-preprints,2026-10-04,publisher official,complete 69-line page,general policy conflicts with journal-specific Internet-posting wording; clarification pending
+V04,TIM scope,https://ieee-ims.org/publication/ieee-tim,2026-10-04,society official,selected web lines 104–143,I&M central contribution
+V05,TIM information for authors,https://ieee-ims.org/publication/ieee-tim/information-authors,2026-10-04,society official,selected web lines 92–111 and 137–146,GUM/VIM terminology; RMSE versus uncertainty; measurement chain and validation
+V06,JCGM publications catalog,https://www.bipm.org/en/committees/jc/jcgm/publications,2026-10-04,JCGM/BIPM official,complete 38-line catalog,current GUM/VIM and 2026 nonlinearity amendment available; document clauses read separately
