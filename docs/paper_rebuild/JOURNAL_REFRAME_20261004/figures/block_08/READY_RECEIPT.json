@@ -1,0 +1,144 @@
+{
+  "status": "READY",
+  "time_utc": "2026-10-04T14:08:40.084383+00:00",
+  "actual_visual_review": "4 final PNGs individually opened; PDF/SVG not separately rendered",
+  "build_receipt_sha256": "0ccd995932ec5e9f90a4d3c1a54f0c1c3319811683670d1cabd2c0d9a0fb70f0",
+  "no_solver_or_evaluator": true,
+  "files": [
+    {
+      "path": "BUILD_RECEIPT.json",
+      "sha256": "0ccd995932ec5e9f90a4d3c1a54f0c1c3319811683670d1cabd2c0d9a0fb70f0",
+      "bytes": 19932
+    },
+    {
+      "path": "R17_BY2H_FGO_GNSS1_trajectory.pdf",
+      "sha256": "f427a9ca7e6d7b54a1566c85cdc5af0eec5734f039d515b8faaf5a8c8817aaa0",
+      "bytes": 49607
+    },
+    {
+      "path": "R17_BY2H_FGO_GNSS1_trajectory.png",
+      "sha256": "d69095a45f8cdd04f0814837ce5f54d280b373446ee5537861ca8bdb633c3cb4",
+      "bytes": 403265
+    },
+    {
+      "path": "R17_BY2H_FGO_GNSS1_trajectory.svg",
+      "sha256": "7731de853689007da95757cdeba8760d7ebc014b6ec380d2b584c273b64804eb",
+      "bytes": 126623
+    },
+    {
+      "path": "R17_BY2O_FGO_GNSS1_trajectory.pdf",
+      "sha256": "d2f87c2b9df3e261185c06765cc61e8b4174a77b69700a484c20f32b96307600",
+      "bytes": 60027
+    },
+    {
+      "path": "R17_BY2O_FGO_GNSS1_trajectory.png",
+      "sha256": "03a6b7843d74f19d73c314971ed99b2341834798f1013ee8c09994f577b965dd",
+      "bytes": 431351
+    },
+    {
+      "path": "R17_BY2O_FGO_GNSS1_trajectory.svg",
+      "sha256": "9895965babcf8871314effa7332316331ff9a57fdbf835819710a33c02db4d27",
+      "bytes": 172237
+    },
+    {
+      "path": "R17_BY2_FGO_GNSS1_trajectory.pdf",
+      "sha256": "60e879d130b5db21e3c5620e226561ad6fc1054b510e065c01a415e6e361c901",
+      "bytes": 49955
+    },
+    {
+      "path": "R17_BY2_FGO_GNSS1_trajectory.png",
+      "sha256": "abc4c6e453c9f24dab2a6af7c069e173c1afcd3c0db8f79c980dd854254716e2",
+      "bytes": 411679
+    },
+    {
+      "path": "R17_BY2_FGO_GNSS1_trajectory.svg",
+      "sha256": "ef724ce6cd871f8110084db328b791c1e7e3df9d5a6d283aec5817f288edb42c",
+      "bytes": 128219
+    },
+    {
+      "path": "R18_Oi_own_estimated_yaw.pdf",
+      "sha256": "af50c0638b67483613fabb34e129fe12ed6b48362212f1c0b77707bae97cfe67",
+      "bytes": 45638
+    },
+    {
+      "path": "R18_Oi_own_estimated_yaw.png",
+      "sha256": "4b3345caad351cdd9be36da1fae0bd51e56b2d56b6063675c7d7e75b658cf130",
+      "bytes": 551015
+    },
+    {
+      "path": "R18_Oi_own_estimated_yaw.svg",
+      "sha256": "17550c3b7271023cf644b095dd0074e0678c623b63ed952f381c9658a04b6463",
+      "bytes": 145559
+    },
+    {
+      "path": "README.md",
+      "sha256": "b3c13f744d38d4ef4798b94215748c0723f4016b21e2541cdf6825bd4d3f711b",
+      "bytes": 1544
+    },
+    {
+      "path": "build_fgo_trajectory_yaw_figures.py",
+      "sha256": "01c2de5d0fba7ed8aa95f39865fd97b423ed2b837f4dac558908abfa9ca91ef2",
+      "bytes": 6592
+    },
+    {
+      "path": "data/BY2H_GNC_saved_GNSS1_trajectory.csv.gz",
+      "sha256": "857160ae4c829cecc56d0752fff480e34e86561065b53c3a935937595a359b85",
+      "bytes": 13064
+    },
+    {
+      "path": "data/BY2H_OISAM_saved_GNSS1_trajectory.csv.gz",
+      "sha256": "76e2fbbd0dbe98c85a3258fe60f79f814e58ec311c2b917be778123499129395",
+      "bytes": 12496
+    },
+    {
+      "path": "data/BY2H_Oi_all_saved_yaw_and_status.csv.gz",
+      "sha256": "70fc5a478391118a03a70457a842633fb4b4bc666f6b2cb909edf07e0c4f012e",
+      "bytes": 24969
+    },
+    {
+      "path": "data/BY2H_WEN_TC_saved_GNSS1_trajectory.csv.gz",
+      "sha256": "35c84f8259031701920817931884eba6d9dce08ed9cc6d2e1bddf0747c81f12f",
+      "bytes": 13135
+    },
+    {
+      "path": "data/BY2O_GNC_saved_GNSS1_trajectory.csv.gz",
+      "sha256": "1c538ac09db8dcb83fe765fde067cdfc10f24af1295a001503bd9d1e314413ca",
+      "bytes": 17525
+    },
+    {
+      "path": "data/BY2O_OISAM_saved_GNSS1_trajectory.csv.gz",
+      "sha256": "268f59b3a67abe98bd188e2d007bca1b92c84686105691e9e9693627c646f5b2",
+      "bytes": 16637
+    },
+    {
+      "path": "data/BY2O_Oi_all_saved_yaw_and_status.csv.gz",
+      "sha256": "b30504156e61d92f44d96449a0d98fdb26dec78a5c6a163d3189a446f32ffbbc",
+      "bytes": 34362
+    },
+    {
+      "path": "data/BY2O_WEN_TC_saved_GNSS1_trajectory.csv.gz",
+      "sha256": "8a3e317840abd38698c5050e985fb133b7e28fde09995224135b2d33d18f940e",
+      "bytes": 17799
+    },
+    {
+      "path": "data/BY2_GNC_saved_GNSS1_trajectory.csv.gz",
+      "sha256": "cb588a94602dec613a151e14e8efb6badb24172878e37fa71ebbe566accd58a0",
+      "bytes": 13175
+    },
+    {
+      "path": "data/BY2_OISAM_saved_GNSS1_trajectory.csv.gz",
+      "sha256": "398578f519d098237e2d81dbb0200ac6eaf344c3338b8edd3cc770fa0d7749fd",
+      "bytes": 12758
+    },
+    {
+      "path": "data/BY2_Oi_all_saved_yaw_and_status.csv.gz",
+      "sha256": "b22e680b5dc91f8b571e11bab84d1c9794a58a0ec583da2c71041e7d229b95d3",
+      "bytes": 25400
+    },
+    {
+      "path": "data/BY2_WEN_TC_saved_GNSS1_trajectory.csv.gz",
+      "sha256": "4b28595d3c8022dfe74415e7f5fee2943b59d0654f1cc8696403a60c858169b4",
+      "bytes": 13235
+    }
+  ]
+}
