@@ -1,0 +1,15 @@
+{
+  "started_utc": "2026-10-04T10:36:27.717552+00:00",
+  "controller_sha256": "b51a35b6e2a71912968ac475b44cec34a4b8383bb51dd04591ec900af9f32237",
+  "protocol_sha256": "20a4ac31da1ef0cb0759e23bac60eb059373e1e7e9fa2dcff52fd065d0238b24",
+  "native_seal_sha256": "3af7f0c6d010d83c2ea6763f97189ae702cb761d374cb7410ce9fd51c14423ab",
+  "source_count": 872,
+  "registered_sequences": [
+    "BY2",
+    "BY2H",
+    "BY2O"
+  ],
+  "reference_rule": "one actual physical payload read per sequence, only after all natives sealed",
+  "new_native_calls": 0,
+  "planned_offline_calls": 3
+}

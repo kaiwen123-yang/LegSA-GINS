@@ -1,0 +1,9 @@
+{
+  "actual_reference_open_attempts": 1,
+  "actual_reference_payload_opens": 1,
+  "opened_reference_path": "/mnt/g/LegSA-GINS-project/data/raw/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv",
+  "native_calls": 0,
+  "all_new_native_sealed_before_open": true,
+  "strace_sha256": "189d8e43828e5ab278edd69789dd6bb029bb6f50b1d50cd3599835a62e607784",
+  "open_records_including_failed": 2967
+}

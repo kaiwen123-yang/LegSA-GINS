@@ -1,0 +1,326 @@
+{
+  "schema": "root.independent.fgo.segmented.review.v1",
+  "all_checks_passed": true,
+  "source_sha256": "430efaacf2f5f29bd9c7f688dad0640c3e96f419b2f0cf23de67f40894a24c58",
+  "stage_id": "FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z",
+  "native_seal_sha256": "3af7f0c6d010d83c2ea6763f97189ae702cb761d374cb7410ce9fd51c14423ab",
+  "preregistration_sha256": "20a4ac31da1ef0cb0759e23bac60eb059373e1e7e9fa2dcff52fd065d0238b24",
+  "evaluation_pins": {
+    "BY2": {
+      "evaluation_json_sha256": "c641033c685816a76ff573a7c359397afcbaa0e86bab3923eca14bbc7c402d9f",
+      "metrics_csv_sha256": "9f66289454f9fe03037d74409a4986969130d2256cbcdfe177734ddf8d1f292d"
+    },
+    "BY2H": {
+      "evaluation_json_sha256": "bbbc5603814b25084556d4268961efa9ac503e74c35c42f95e600acf2785c202",
+      "metrics_csv_sha256": "d0faa1ee6ab434458ec7acfe53751d7b2443ef6c8f98eebbd38808552440eb20"
+    },
+    "BY2O": {
+      "evaluation_json_sha256": "a0d7d7fa10884b89c0b3b352a14bd9272d969a5e8592f4eb48e7419813a7b35e",
+      "metrics_csv_sha256": "369befe2362008d84bcae1a618ae8494e5ca96e9e3dc575ffb7362e1fa62eec9"
+    }
+  },
+  "independent_statistic_fields_checked": 480,
+  "metric_max_difference": 3.552713678800501e-15,
+  "independent_frame_fields_checked": 27580,
+  "frame_max_difference_m": 7.105427357601002e-15,
+  "independent_native_point_fields_checked": 16548,
+  "native_point_max_difference_m": 9.313225746154785e-10,
+  "common_actual_time_max_spread_s": 0.002000093460083008,
+  "support_rows_checked": [
+    {
+      "sequence_id": "BY2",
+      "method_id": "OISAM",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 275,
+      "matched_epoch_count": 275
+    },
+    {
+      "sequence_id": "BY2",
+      "method_id": "WEN_TC",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 275,
+      "matched_epoch_count": 274
+    },
+    {
+      "sequence_id": "BY2",
+      "method_id": "GNC",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 275,
+      "matched_epoch_count": 274
+    },
+    {
+      "sequence_id": "BY2",
+      "method_id": "OISAM",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 275,
+      "matched_epoch_count": 274
+    },
+    {
+      "sequence_id": "BY2",
+      "method_id": "WEN_TC",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 275,
+      "matched_epoch_count": 274
+    },
+    {
+      "sequence_id": "BY2",
+      "method_id": "GNC",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 275,
+      "matched_epoch_count": 274
+    },
+    {
+      "sequence_id": "BY2",
+      "method_id": "OISAM",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 275,
+      "matched_epoch_count": 275
+    },
+    {
+      "sequence_id": "BY2",
+      "method_id": "WEN_TC",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 275,
+      "matched_epoch_count": 274
+    },
+    {
+      "sequence_id": "BY2",
+      "method_id": "GNC",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 275,
+      "matched_epoch_count": 274
+    },
+    {
+      "sequence_id": "BY2",
+      "method_id": "OISAM",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 275,
+      "matched_epoch_count": 274
+    },
+    {
+      "sequence_id": "BY2",
+      "method_id": "WEN_TC",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 275,
+      "matched_epoch_count": 274
+    },
+    {
+      "sequence_id": "BY2",
+      "method_id": "GNC",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 275,
+      "matched_epoch_count": 274
+    },
+    {
+      "sequence_id": "BY2H",
+      "method_id": "OISAM",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 271,
+      "matched_epoch_count": 267
+    },
+    {
+      "sequence_id": "BY2H",
+      "method_id": "WEN_TC",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 271,
+      "matched_epoch_count": 270
+    },
+    {
+      "sequence_id": "BY2H",
+      "method_id": "GNC",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 271,
+      "matched_epoch_count": 270
+    },
+    {
+      "sequence_id": "BY2H",
+      "method_id": "OISAM",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 271,
+      "matched_epoch_count": 267
+    },
+    {
+      "sequence_id": "BY2H",
+      "method_id": "WEN_TC",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 271,
+      "matched_epoch_count": 267
+    },
+    {
+      "sequence_id": "BY2H",
+      "method_id": "GNC",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 271,
+      "matched_epoch_count": 267
+    },
+    {
+      "sequence_id": "BY2H",
+      "method_id": "OISAM",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 271,
+      "matched_epoch_count": 269
+    },
+    {
+      "sequence_id": "BY2H",
+      "method_id": "WEN_TC",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 271,
+      "matched_epoch_count": 270
+    },
+    {
+      "sequence_id": "BY2H",
+      "method_id": "GNC",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 271,
+      "matched_epoch_count": 270
+    },
+    {
+      "sequence_id": "BY2H",
+      "method_id": "OISAM",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 271,
+      "matched_epoch_count": 269
+    },
+    {
+      "sequence_id": "BY2H",
+      "method_id": "WEN_TC",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 271,
+      "matched_epoch_count": 269
+    },
+    {
+      "sequence_id": "BY2H",
+      "method_id": "GNC",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 271,
+      "matched_epoch_count": 269
+    },
+    {
+      "sequence_id": "BY2O",
+      "method_id": "OISAM",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 378,
+      "matched_epoch_count": 370
+    },
+    {
+      "sequence_id": "BY2O",
+      "method_id": "WEN_TC",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 378,
+      "matched_epoch_count": 377
+    },
+    {
+      "sequence_id": "BY2O",
+      "method_id": "GNC",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 378,
+      "matched_epoch_count": 377
+    },
+    {
+      "sequence_id": "BY2O",
+      "method_id": "OISAM",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 378,
+      "matched_epoch_count": 369
+    },
+    {
+      "sequence_id": "BY2O",
+      "method_id": "WEN_TC",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 378,
+      "matched_epoch_count": 369
+    },
+    {
+      "sequence_id": "BY2O",
+      "method_id": "GNC",
+      "support_role": "PRIMARY_DYNAMIC_ONLY",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 378,
+      "matched_epoch_count": 369
+    },
+    {
+      "sequence_id": "BY2O",
+      "method_id": "OISAM",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 378,
+      "matched_epoch_count": 376
+    },
+    {
+      "sequence_id": "BY2O",
+      "method_id": "WEN_TC",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 378,
+      "matched_epoch_count": 377
+    },
+    {
+      "sequence_id": "BY2O",
+      "method_id": "GNC",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "OWN_VALID",
+      "expected_epoch_count": 378,
+      "matched_epoch_count": 377
+    },
+    {
+      "sequence_id": "BY2O",
+      "method_id": "OISAM",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 378,
+      "matched_epoch_count": 375
+    },
+    {
+      "sequence_id": "BY2O",
+      "method_id": "WEN_TC",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 378,
+      "matched_epoch_count": 375
+    },
+    {
+      "sequence_id": "BY2O",
+      "method_id": "GNC",
+      "support_role": "SECONDARY_ALL_VALID_POSITION",
+      "support": "COMMON_THREE_TIME_KEYS",
+      "expected_epoch_count": 378,
+      "matched_epoch_count": 375
+    }
+  ],
+  "reference_payload_reads": 0,
+  "pipeline_imports": 0,
+  "native_invocations": 0,
+  "evaluator_invocations": 0,
+  "comparison_rank_claim": false,
+  "reference_truth_or_interpolation_not_independently_rederived": true,
+  "yaw_checks": "saved error distributions/statistics only; no independent reference yaw reread"
+}

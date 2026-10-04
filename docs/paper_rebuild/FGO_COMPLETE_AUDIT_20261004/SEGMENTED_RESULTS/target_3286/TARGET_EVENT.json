@@ -1,0 +1,22 @@
+{
+  "time_rel_s": 3286.0,
+  "window_nodes_before": 30,
+  "mode": "OISAM_BUILD+AJSWR_RELINEARIZE",
+  "nonlinear_iterations": 20,
+  "attitude_increment_deg": [
+    3.256162960945346,
+    -1.2411016851752947,
+    -3.0043030174274463
+  ],
+  "nonlinear_status": "TerminationType.NO_CONVERGENCE",
+  "nonlinear_converged": false,
+  "nonlinear_solution_usable": true,
+  "nonlinear_backend": "Ceres",
+  "ceres_report": "Ceres Solver Report: Iterations: 21, Initial cost: 1.822842e+02, Final cost: 1.822721e+02, Termination: NO_CONVERGENCE",
+  "cost": 182.27212349850032,
+  "window_nodes_after": 29,
+  "new_history_not_identical_old_problem": true,
+  "initialization_source": "one_A1_yaw_initialization_per_sequence_only_no_restart",
+  "requested_time_rel_s": 3286.0,
+  "actual_time_rel_s": 3286.0
+}

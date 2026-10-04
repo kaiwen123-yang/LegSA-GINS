@@ -1,0 +1,40 @@
+{
+  "schema": "root.actual.FGO.segmented.visual.review.v1",
+  "all_checks_passed": true,
+  "recorded_utc": "2026-10-04T10:55:35.358092+00:00",
+  "actual_unique_source_png_views": 3,
+  "actual_unique_independent_pdf_render_views": 3,
+  "H_single_original_resolution_confirmation_not_added_to_count": true,
+  "files": [
+    {
+      "sequence": "BY2",
+      "source_png_sha256": "317fbd83046377bb87ca5633a64b6bc2ae2b39d0889206e5737f02e332e6fbcb",
+      "source_pdf_sha256": "481635fac3dd7c548968f42e7d6564df145faf04c86dc11a6806f260b1854345",
+      "actually_viewed_pdf_render_sha256": "cb2d7c555ff1ea6cbe9aa4b866f58319005d13eda44074a1bd8f9f9abd65974f",
+      "png_actual_view": true,
+      "independent_PDF_render_actual_view": true
+    },
+    {
+      "sequence": "BY2H",
+      "source_png_sha256": "0571a5b3c286b3b4a8e96aca6b2c65938fc43dfcff43bdf8525aa32089d8fd0b",
+      "source_pdf_sha256": "70aa1c4b20908097bf928bf39a4fe2a33514a24ba3de554c0f30afb15514eb9c",
+      "actually_viewed_pdf_render_sha256": "83570b64b9d862480ab13ddec2e8886fc5c5d7145718f6c85a86f225a350d625",
+      "png_actual_view": true,
+      "independent_PDF_render_actual_view": true
+    },
+    {
+      "sequence": "BY2O",
+      "source_png_sha256": "c23121a770e7eb490fcf5778543fa82ce045426993f5bd1ecc5e4e9a1d689959",
+      "source_pdf_sha256": "e847eba3cf51420ce75691c7b433b3495355d6ce7949601e95ba2ca8710fe61c",
+      "actually_viewed_pdf_render_sha256": "0a9cbbe74bb68c9bdc6adcbef759eb219d5e1447c0b28ad3819970dc1bd91fab",
+      "png_actual_view": true,
+      "independent_PDF_render_actual_view": true
+    }
+  ],
+  "seven_saved_result_CSVs_byte_identical_v1_v2": true,
+  "review_scope": "All6panels, axis titles/units/ranges, legends/cohortcounts, fullwindows, missing/prior/seed marks and O3286 usableNO_CONVERGENCE; no visible label clipping or data clipping",
+  "prior_clipping_suspicion_retracted": true,
+  "v2_scope": "export margins only; all data/support/calculation unchanged",
+  "native_evaluator_reference_reads": 0,
+  "formal_journal_graphics_submission_accepted": false
+}

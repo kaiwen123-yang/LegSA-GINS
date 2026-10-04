@@ -1,0 +1,56 @@
+{
+  "schema": "fgo.segmented.saved-payload.independent-review.v1",
+  "all_checks_passed": true,
+  "verified_utc": "2026-10-04T10:41:15.080162+00:00",
+  "script_sha256": "11e37665e027a144ee3dffafe316e02946fc9373fd102a547b1a201cb98b118b",
+  "stage": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z",
+  "registered_commit": "9d80ef33b3a40914cfa92f41835419d62152fa88",
+  "protocol_sha256": "20a4ac31da1ef0cb0759e23bac60eb059373e1e7e9fa2dcff52fd065d0238b24",
+  "native_seal_sha256": "3af7f0c6d010d83c2ea6763f97189ae702cb761d374cb7410ce9fd51c14423ab",
+  "offline_complete_sha256": "374cee2501ab7fcfa2432567e056eb9dd6842c7db8a1bda989b5027bce1c815d",
+  "source872_before_after_match": true,
+  "new_source_snapshot_members_checked": 2622,
+  "comparison_native_identities_checked": 9,
+  "metric_rows": 36,
+  "statistics_checked": 480,
+  "maximum_statistic_absolute_difference": 7.105427357601002e-15,
+  "block_rows": 11,
+  "formal_primary_unavailable_rows": 12,
+  "normal_npz_checks": [
+    {
+      "phase": "CERES_INITIAL",
+      "dimension": 450,
+      "rank": 450,
+      "condition": 958546.6114025802,
+      "condition_relative_recompute_difference": 3.999506281715526e-10,
+      "cost": 182.2841555356499
+    },
+    {
+      "phase": "CERES_FINAL",
+      "dimension": 450,
+      "rank": 450,
+      "condition": 958469.25675741,
+      "condition_relative_recompute_difference": 8.800955519916442e-10,
+      "cost": 182.27212349850032
+    },
+    {
+      "phase": "STEP_OUTPUT",
+      "dimension": 435,
+      "rank": 435,
+      "condition": 925592.2113666174,
+      "condition_relative_recompute_difference": 7.417924052788294e-10,
+      "cost": 180.41101398343346
+    }
+  ],
+  "target3286_usable_but_not_converged": true,
+  "raw_reference_payload_opens": 0,
+  "solver_calls": 0,
+  "evaluator_calls": 0,
+  "scope": "saved errors/statistics/support/source/snapshot/initialization/normal-matrix identities; independent physical-coordinate review by root is separate",
+  "output_csv_sha256": {
+    "FGO_SEGMENTED_INDEPENDENT_STATISTICS.csv": "cf4d24e502fae24d47676c81106916fac6d2e18a9d63514689e76531039a8289",
+    "FGO_SEGMENTED_INDEPENDENT_SUPPORT.csv": "e5cb409c8529bd687262a5dd81da909e2e998b3878e6f2e775d21a36590c0f19",
+    "FGO_SEGMENTED_INDEPENDENT_BLOCKS.csv": "217ba1cfb8d6310813924a6028053dfd1f2bd5dfb88c468e02fc400ecb502ecb",
+    "FGO_SEGMENTED_COMPLETE_UNAVAILABLE_TIMELINE.csv": "cf210621316c1ca63ca1e3b7da132b0fbbd8a016a4a0d697e2ce69652fc5996f"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "fgo.segmented.source-freeze-release.v1",
+  "released_utc": "2026-10-04T11:01:55.999224+00:00",
+  "registered_commit": "9d80ef33b3a40914cfa92f41835419d62152fa88",
+  "execution_source_count": 872,
+  "all872_final_match": true,
+  "native_seal_sha256": "3af7f0c6d010d83c2ea6763f97189ae702cb761d374cb7410ce9fd51c14423ab",
+  "offline_complete_sha256": "374cee2501ab7fcfa2432567e056eb9dd6842c7db8a1bda989b5027bce1c815d",
+  "self_independent_review_sha256": "55e2ea4782c8f441ae8b9ba9d09a0c419814e8a64fff2566247c0c5f5fb33280",
+  "root_independent_review_sha256": "93eaed3a7ac9c280d6be895668c01cc96e7fc3e39e528ab3e829c18c14ea06f8",
+  "root_actual_visual_review_sha256": "f9ec5bfacea8510002910bf84429b4e3a9bf7d75fc5a71e6dfee5c9f63d4dd63",
+  "final_publication_receipt_sha256": "6e9e862f1bd148f8580a5a5e41488137864fb6272bf92d78ac5bb1c5acde568c",
+  "scope": "Release future current-source editing only after 3new native/3offline/independent saved-payload and actual figure review; saved872 identity remains historical immutable",
+  "scientific_source_edits_by_assembler": 0,
+  "raw_reference_opens": 0,
+  "native_calls": 0,
+  "evaluator_calls": 0
+}
