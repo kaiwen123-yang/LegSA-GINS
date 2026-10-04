@@ -1,5 +1,7 @@
 # Current research review: 2026-10-04
 
+> **Current completed author scope, 2026-10-04:** read [the final four-workstream handoff](AUTHOR_HANDOFF_20261004/README.md) and [original V3 story](V3_STORY_20261004/CURRENT_STORY_INDEX.md). Original V3 remains the paper primary; the earlier33/135 diagnostics, strict FGO and new gap-segmented/nominal checks remain separate identities. Formal reader name is LegSA-GINS; actual photo included; GPS Solutions and TIM only. Completed checkpoints are committed and pushed. The notes below preserve earlier chronological states, including prior uncommitted/pending wording; they do not reopen full-V3 repair, replace original results or certify author-program equivalence/submission readiness.
+
 > **Latest author direction, 2026-10-04:** preserve the established V3 full-matrix results and prioritize its code/experiment narrative; do not initiate a V3 repair or full-matrix rerun for minor issues. The previous diagnostic repairs remain a separate version. Complete the FGO correspondence and correctly supported comparison executions. Formalize the paper-facing name LegSA-GINS, use the supplied actual installation photograph, and focus on GPS Solutions and TIM. Commit and push each completed small milestone. Read [the complete latest authorization](AUTHORIZED_SCOPE_20261004.md) before the chronological records below.
 
 

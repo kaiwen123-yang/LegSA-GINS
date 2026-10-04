@@ -1,0 +1,3 @@
+# Keep archived root review evidence byte-identical.
+* -text
+local_review_scripts/** whitespace=cr-at-eol,-blank-at-eof

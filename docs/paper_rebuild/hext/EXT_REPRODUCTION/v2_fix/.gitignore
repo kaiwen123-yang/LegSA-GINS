@@ -1,0 +1,5 @@
+# Full local execution/evaluation payloads are retained and indexed by the
+# tracked V2 summaries and source-bound receipts. Do not commit copied runtime
+# trees; this rule does not delete or change any saved scientific result.
+/native_results/
+/evaluation_results/
