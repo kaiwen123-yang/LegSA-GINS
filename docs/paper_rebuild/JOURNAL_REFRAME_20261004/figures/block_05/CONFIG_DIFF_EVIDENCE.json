@@ -1,0 +1,107 @@
+[
+  {
+    "sequence": "BY2",
+    "diffs": [
+      {
+        "line": 7,
+        "F02": "run_id: RUN_00002",
+        "F03": "run_id: RUN_00003"
+      },
+      {
+        "line": 8,
+        "F02": "run_label: RUN_00002",
+        "F03": "run_label: RUN_00003"
+      },
+      {
+        "line": 9,
+        "F02": "algorithm_id: basic_dual_yaw_EKF",
+        "F03": "algorithm_id: strong_dual_yaw_EKF"
+      },
+      {
+        "line": 12,
+        "F02": "outputpath: \"/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN6_SENSOR_MODEL_V21/BATCH_001/03_RUNS/RUN_00002\"",
+        "F03": "outputpath: \"/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN6_SENSOR_MODEL_V21/BATCH_001/03_RUNS/RUN_00003\""
+      },
+      {
+        "line": 50,
+        "F02": "enable_receiver_velocity: false",
+        "F03": "enable_receiver_velocity: true"
+      },
+      {
+        "line": 174,
+        "F02": "ablation_variant: STRUCTURAL_ONLY",
+        "F03": "ablation_variant: AB0000"
+      }
+    ]
+  },
+  {
+    "sequence": "BY2H",
+    "diffs": [
+      {
+        "line": 8,
+        "F02": "run_id: \"SEQUENCE_BY2H_F02\"",
+        "F03": "run_id: \"SEQUENCE_BY2H_F03\""
+      },
+      {
+        "line": 9,
+        "F02": "run_label: \"SEQUENCE_BY2H_F02\"",
+        "F03": "run_label: \"SEQUENCE_BY2H_F03\""
+      },
+      {
+        "line": 10,
+        "F02": "algorithm_id: \"basic_dual_yaw_EKF\"",
+        "F03": "algorithm_id: \"AB0000\""
+      },
+      {
+        "line": 13,
+        "F02": "outputpath: \"/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN6_SENSOR_MODEL_V21/BATCH_001/03_RUNS/SEQUENCE_BY2H_F02\"",
+        "F03": "outputpath: \"/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN6_SENSOR_MODEL_V21/BATCH_001/03_RUNS/SEQUENCE_BY2H_F03\""
+      },
+      {
+        "line": 51,
+        "F02": "enable_receiver_velocity: false",
+        "F03": "enable_receiver_velocity: true"
+      },
+      {
+        "line": 175,
+        "F02": "ablation_variant: \"STRUCTURAL_ONLY\"",
+        "F03": "ablation_variant: \"AB0000\""
+      }
+    ]
+  },
+  {
+    "sequence": "BY2O",
+    "diffs": [
+      {
+        "line": 8,
+        "F02": "run_id: \"SEQUENCE_BY2O_F02\"",
+        "F03": "run_id: \"SEQUENCE_BY2O_F03\""
+      },
+      {
+        "line": 9,
+        "F02": "run_label: \"SEQUENCE_BY2O_F02\"",
+        "F03": "run_label: \"SEQUENCE_BY2O_F03\""
+      },
+      {
+        "line": 10,
+        "F02": "algorithm_id: \"basic_dual_yaw_EKF\"",
+        "F03": "algorithm_id: \"AB0000\""
+      },
+      {
+        "line": 13,
+        "F02": "outputpath: \"/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN6_SENSOR_MODEL_V21/BATCH_001/03_RUNS/SEQUENCE_BY2O_F02\"",
+        "F03": "outputpath: \"/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN6_SENSOR_MODEL_V21/BATCH_001/03_RUNS/SEQUENCE_BY2O_F03\""
+      },
+      {
+        "line": 51,
+        "F02": "enable_receiver_velocity: false",
+        "F03": "enable_receiver_velocity: true"
+      },
+      {
+        "line": 175,
+        "F02": "ablation_variant: \"STRUCTURAL_ONLY\"",
+        "F03": "ablation_variant: \"AB0000\""
+      }
+    ]
+  }
+]
