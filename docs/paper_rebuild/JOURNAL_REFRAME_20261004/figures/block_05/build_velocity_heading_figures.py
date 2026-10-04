@@ -17,7 +17,7 @@ datasets={};config_diffs=[]
 for seq,(start,end) in windows.items():
  fig,axs=plt.subplots(2,1,figsize=(14,6.5),sharex=True)
  fig.subplots_adjust(left=.12,right=.98,top=.78,bottom=.18,hspace=.26)
- for method,color,label in [('F02','#D55E00','Receiver velocity OFF'),('F03','#0072B2','Receiver velocity ON')]:
+ for method,color,label in [('F02','#D55E00','F02: fixed yaw; RV off'),('F03','#0072B2','F03: gated yaw; RV on')]:
   run=f'RUN_0000{method[-1]}' if seq=='BY2' else f'SEQUENCE_{seq}_{method}'
   entry=next(x for x in ix if '/'+run+'/' in x['path'] and '/v3/' in x['path'] and 'error_series' in x['path'])
   erows=book.rows(entry['path'],entry['sha256'])
@@ -31,24 +31,34 @@ for seq,(start,end) in windows.items():
   raw=cp.read_bytes();assert cp.read_bytes()==raw
   book.inputs.append({'path':str(cp),'file_sha256':sha(raw),'bytes':len(raw),'unchanged_after_read':True})
   datasets[(seq,method,'config')]=raw.decode().splitlines()
+ effective=[]
+ for method in ['F02','F03']:
+  run=f'RUN_0000{method[-1]}' if seq=='BY2' else f'SEQUENCE_{seq}_{method}'
+  mp=V/'03_NATIVE'/('' if seq=='BY2' else 'V3R_CONTINUATION')/run/'RUN_MANIFEST.json'
+  manifest=book.json(mp)
+  assert manifest['enable_basic_dual_yaw_baseline']==(method=='F02')
+  assert manifest['yaw_scheme_C_enabled']==(method=='F03')
+  assert manifest['basic_dual_yaw_fixed_std_deg']==2.933193
+  assert (manifest['receiver_velocity_update_count']>0)==(method=='F03')
+  effective.append({'method':method,'path':str(mp),'sha256':sha(mp.read_bytes()),**{k:manifest[k] for k in ['algorithm_id','measurement_update_order','enable_basic_dual_yaw_baseline','yaw_scheme_C_enabled','basic_dual_yaw_fixed_std_deg','receiver_velocity_update_count','yaw_NORMAL','yaw_DOWNWEIGHT','yaw_REJECT']}})
  a=datasets[(seq,'F02','config')];b=datasets[(seq,'F03','config')]
  assert len(a)==len(b)
  diffs=[{'line':i+1,'F02':x,'F03':y} for i,(x,y) in enumerate(zip(a,b)) if x!=y]
  assert [x['F02'] for x in diffs if x['F02'].startswith('enable_receiver_velocity:')]==['enable_receiver_velocity: false']
  assert [x['F03'] for x in diffs if x['F03'].startswith('enable_receiver_velocity:')]==['enable_receiver_velocity: true']
  assert all(x['F02'].split(':')[0] in ['run_id','run_label','algorithm_id','outputpath','enable_receiver_velocity','ablation_variant'] for x in diffs)
- config_diffs.append({'sequence':seq,'diffs':diffs})
+ config_diffs.append({'sequence':seq,'diffs':diffs,'algorithm_id_is_active_branch':True,'comparison_type':'JOINT_RV_AND_YAW_HANDLING_STRUCTURAL_CHANGE','isolated_receiver_velocity_effect_identifiable':False,'effective_manifest_evidence':effective})
  for ax,ylabel in zip(axs,['Horizontal error (m)','Yaw error (°)']):
   frame(ax);ax.set_ylabel(ylabel);ax.set_xlim(0,end-start)
   metric='horizontal_rmse_m' if ax is axs[0] else 'yaw_rmse_deg';unit='m' if ax is axs[0] else '°'
-  ax.set_title(f"Saved RMSE: OFF {float(summary[(seq,'F02')][metric]):.3f} {unit}; ON {float(summary[(seq,'F03')][metric]):.3f} {unit}",loc='left',fontsize=11,color='#596579',pad=5)
+  ax.set_title(f"Saved RMSE: F02 {float(summary[(seq,'F02')][metric]):.3f} {unit}; F03 {float(summary[(seq,'F03')][metric]):.3f} {unit}",loc='left',fontsize=11,color='#596579',pad=5)
  axs[1].set_xlabel('Elapsed time from formal window start (s)')
- fig.suptitle(seq+' | Isolate the receiver-velocity update',fontsize=18,fontweight='bold',y=.985)
+ fig.suptitle(seq+' | Joint velocity and heading-handling contrast',fontsize=18,fontweight='bold',y=.985)
  fig.legend(*axs[0].get_legend_handles_labels(),loc='upper center',bbox_to_anchor=(.55,.927),ncol=2,fontsize=11.5,frameon=False)
- fig.text(.12,.855,'Same original configuration apart from the RV toggle and run metadata; all saved samples retained.',fontsize=12,color='#596579')
- fig.text(.12,.045,f'Original F02/F03 cohort, common dual-heading initialization; matched/output {len(d)}/{len(d)}. Changes are not uniformly beneficial.',fontsize=11,color='#596579')
- book.figure(fig,'R11_'+seq+'_receiver_velocity_toggle','The isolated velocity toggle has sequence-dependent effects.',
-  'Full saved F02/F03 H/yaw curves; no rescore, smoothing or interpolation. Config diff is recorded separately.',source_identity='ORIGINAL_V3',all_saved_samples=True)
+ fig.text(.12,.855,'RV and yaw weighting/gating both change; these curves do not isolate the RV effect.',fontsize=12,color='#596579')
+ fig.text(.12,.045,f'Original F02/F03 cohort, common dual-heading initialization; matched/output {len(d)}/{len(d)}. Joint changes are not uniformly beneficial.',fontsize=11,color='#596579')
+ book.figure(fig,'R11_'+seq+'_receiver_velocity_toggle','The joint velocity and heading-handling contrast has sequence-dependent outcomes.',
+  'Full saved F02/F03 H/yaw curves; F02 uses fixed 2.933193-degree yaw weighting without Scheme-C, while F03 enables RV and quality/residual yaw gating. This is not a single-factor RV contrast. No rescore, smoothing or interpolation.',source_identity='ORIGINAL_V3',all_saved_samples=True,comparison_type='JOINT_RV_AND_YAW_HANDLING_STRUCTURAL_CHANGE',isolated_receiver_velocity_effect_identifiable=False,legacy_filename_locator_only=True)
 mode_rows=book.rows(V/'03_NATIVE/RUN_00004/PORT_GNSS_UPDATE_TRACE.csv.gz')
 md=book.copy('BY2_all_1369_native_heading_update_modes',mode_rows)
 counts=dict(collections.Counter(md.yaw_mode));assert counts=={'NORMAL':1225,'DOWNWEIGHT':123,'REJECT':21};assert set(md.yaw_residual_deg)=={''}
@@ -71,4 +81,10 @@ fig.text(.13,.033,'The saved yaw innovation field is empty: no reconstructed thr
 book.figure(fig,'R12_BY2_native_heading_decisions','Normal/downweight/reject decisions occurred in the original native run.',
  '1369 saved categorical native decisions alongside all saved Proposed yaw errors; no inferred innovation or causal attribution.')
 (HERE/'CONFIG_DIFF_EVIDENCE.json').write_text(json.dumps(config_diffs,ensure_ascii=False,indent=2)+'\n')
-book.seal(__file__,heading_native_event_counts=counts,original_evaluation_identity_preserved=True)
+# SVG text whitespace normalization only; no coordinate/data changes.
+for record in book.figures:
+ for export in record['exports']:
+  if export['path'].endswith('.svg'):
+   sp=HERE/export['path'];sp.write_text('\n'.join(s.rstrip() for s in sp.read_text().splitlines())+'\n')
+   export.update(sha256=sha(sp.read_bytes()),bytes=sp.stat().st_size)
+book.seal(__file__,heading_native_event_counts=counts,original_evaluation_identity_preserved=True,editorial_rv_confounding_correction=True,no_isolated_RV_causal_claim=True)

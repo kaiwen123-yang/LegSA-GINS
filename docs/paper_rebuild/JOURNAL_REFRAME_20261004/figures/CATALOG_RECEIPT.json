@@ -1,11 +1,11 @@
 {
   "status": "CATALOG_READY",
-  "time_utc": "2026-10-04T14:11:54.716337+00:00",
+  "time_utc": "2026-10-04T14:32:32.362830+00:00",
   "new_figures": 32,
   "individual_final_PNGs_actually_opened": 32,
   "PNG_PDF_SVG_exports": 96,
   "block_files_integrity_checked": 187,
-  "unique_input_paths_across_build_receipts": 89,
+  "unique_input_paths_across_build_receipts": 95,
   "source_inputs_not_reread_by_this_indexer": true,
   "blocks": [
     {
@@ -34,8 +34,8 @@
     },
     {
       "block": "block_05",
-      "ready_sha256": "bdc8fb3f6ef7085839988c71e1b7afa69c7d0492c00eeca61b292671f3f14ee2",
-      "build_sha256": "980c3a87c2fcd1c2419184724255ac332dd3bc9df6f0a8b0de1d7f2e3479c750",
+      "ready_sha256": "4d1f20facc6bc670c4cc7a263d6c217e73d50b90307e6694d55f9f0902b63693",
+      "build_sha256": "ec3de040f9b66c690c3fe103810fa3b3474570f46037472458e5bf3a82ba1daa",
       "figures": 4
     },
     {
@@ -100,7 +100,7 @@
   "no_solver_calls": true,
   "no_evaluator_calls": true,
   "raw_reference_payload_opens": 0,
-  "script_sha256": "c1c9b5e7e616a65b6e4b9b8bee453ea2447ddd0c7e84f26370dd5087a20640eb",
-  "catalog_sha256": "9325717ece74634124f405aa0ad854cfea71140df7bf1cade54d03e3f8ceccfc",
+  "script_sha256": "de2777dc5500c0a34e8a1527a497b5eb4297226391626f532b97683ae0017b6c",
+  "catalog_sha256": "a5bed6bec51dd508252d9535e33bbfa513926ff1ab381325a5637c50496f5f95",
   "existing_inventory_sha256": "a426f71b24125f4ce5b3ba441a1a8c43a72fdf4980a02fa4a41c09bcd6d95c88"
 }

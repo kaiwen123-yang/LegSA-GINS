@@ -3,7 +3,7 @@
   "no_solver_calls": true,
   "no_evaluator_calls": true,
   "raw_reference_payload_opens": 0,
-  "script_sha256": "5e5f1609371713849a2fee89855eab0ae69a1e34fde3264d9b5a7137de2534bc",
+  "script_sha256": "cbfa62e34ed1ff677d8d5445ef92037adcf896f0216a933f2d3f0d5723b75461",
   "utilities_sha256": "e28173802e004aac9c5421b4e5439ae7e277f80e35ca16f2ed8b447673dd9371",
   "inputs": [
     {
@@ -83,6 +83,18 @@
       "unchanged_after_read": true
     },
     {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00002/RUN_MANIFEST.json",
+      "file_sha256": "65397db8aebc5d1c2f0bd35dabea75a7a979ec1e6ba482cbc34ef3b521541244",
+      "bytes": 20177,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00003/RUN_MANIFEST.json",
+      "file_sha256": "1a1e7a098cb9d8dbb513e7433dc68dd4b833d8fb58a83536b22f53400eccceef",
+      "bytes": 20194,
+      "unchanged_after_read": true
+    },
+    {
       "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F02/v3/FROZEN_EVALUATOR/error_series.csv.gz",
       "file_sha256": "13b20be5f3145e5b041701f0cfcf993928143d361e112baada69abaef83002f9",
       "decompressed_sha256": "b39d2619b41d77b4c6a66e4d10ce7e45f0e6fbed2bb27262b7d1fdf918093f58",
@@ -128,6 +140,18 @@
       "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F03/V3_RUNTIME_CONFIG.yaml",
       "file_sha256": "b58766c5b4200a6a16d50c9f4b49379a5c9ae8e33e86484a16f382f5aee6aed9",
       "bytes": 7941,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F02/RUN_MANIFEST.json",
+      "file_sha256": "2404f19b6ea1ec5f2b7c385a46b0329509c82701f5154a3ee0203bb5fe9cb7e7",
+      "bytes": 20157,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F03/RUN_MANIFEST.json",
+      "file_sha256": "0063b3fb0ed96592e803c01de4fa9d503a622ddf4ae4523d36e2c1cedd26bc40",
+      "bytes": 20163,
       "unchanged_after_read": true
     },
     {
@@ -179,6 +203,18 @@
       "unchanged_after_read": true
     },
     {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F02/RUN_MANIFEST.json",
+      "file_sha256": "a57103244fc248c7a5e0e16a4d535658c0d108bfb1d82b2d91a417e7c315697f",
+      "bytes": 20166,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F03/RUN_MANIFEST.json",
+      "file_sha256": "edfa7003e4f91d92e2c9a5110e4d23997c9c6bb9470aaaf6a63d521dfad9da3a",
+      "bytes": 20171,
+      "unchanged_after_read": true
+    },
+    {
       "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00004/PORT_GNSS_UPDATE_TRACE.csv.gz",
       "file_sha256": "316ccf3d2bb9cd327ebe6917a0d1147bba339b5edf48cb929e43a02ec9679fd7",
       "decompressed_sha256": "f79aef0a0dd0a2fa291a493dc5ac56408adccd57c28024f855529c47431b5781",
@@ -226,78 +262,87 @@
   "figures": [
     {
       "id": "R11_BY2_receiver_velocity_toggle",
-      "dominant_claim": "The isolated velocity toggle has sequence-dependent effects.",
-      "caption": "Full saved F02/F03 H/yaw curves; no rescore, smoothing or interpolation. Config diff is recorded separately.",
+      "dominant_claim": "The joint velocity and heading-handling contrast has sequence-dependent outcomes.",
+      "caption": "Full saved F02/F03 H/yaw curves; F02 uses fixed 2.933193-degree yaw weighting without Scheme-C, while F03 enables RV and quality/residual yaw gating. This is not a single-factor RV contrast. No rescore, smoothing or interpolation.",
       "panel_role": "claim-supporting evidence",
       "exports": [
         {
           "path": "R11_BY2_receiver_velocity_toggle.png",
-          "sha256": "04a7a484446ba58ee278f0138083d5579e915e0925250fec51cb717a14318d00",
-          "bytes": 980216
+          "sha256": "55ca44fa2a9bbbace620b0b71883eaab837760331beba8b09fed793aaea83f64",
+          "bytes": 990621
         },
         {
           "path": "R11_BY2_receiver_velocity_toggle.pdf",
-          "sha256": "6d341b183966591a4701df72a515cc17e2f68576190f13d34b6791b5f63ac495",
-          "bytes": 2126044
+          "sha256": "8602202f63a8bded05fe31f49bc4f2d77ddd4dc2903686d44ea6f473740d5100",
+          "bytes": 2126214
         },
         {
           "path": "R11_BY2_receiver_velocity_toggle.svg",
-          "sha256": "9a76dad5a916a92ae7a785e9a8f7ecda9baf0e9048814b321c700ee65aff61ec",
-          "bytes": 5621752
+          "sha256": "5d0e3a9e6d8513e9bee4570d577ba3dda337e95afc17467f6b857bf2557b357d",
+          "bytes": 5395123
         }
       ],
       "source_identity": "ORIGINAL_V3",
-      "all_saved_samples": true
+      "all_saved_samples": true,
+      "comparison_type": "JOINT_RV_AND_YAW_HANDLING_STRUCTURAL_CHANGE",
+      "isolated_receiver_velocity_effect_identifiable": false,
+      "legacy_filename_locator_only": true
     },
     {
       "id": "R11_BY2H_receiver_velocity_toggle",
-      "dominant_claim": "The isolated velocity toggle has sequence-dependent effects.",
-      "caption": "Full saved F02/F03 H/yaw curves; no rescore, smoothing or interpolation. Config diff is recorded separately.",
+      "dominant_claim": "The joint velocity and heading-handling contrast has sequence-dependent outcomes.",
+      "caption": "Full saved F02/F03 H/yaw curves; F02 uses fixed 2.933193-degree yaw weighting without Scheme-C, while F03 enables RV and quality/residual yaw gating. This is not a single-factor RV contrast. No rescore, smoothing or interpolation.",
       "panel_role": "claim-supporting evidence",
       "exports": [
         {
           "path": "R11_BY2H_receiver_velocity_toggle.png",
-          "sha256": "0212ab3936a653e90e6334e4af79e853e61ff9cbb743367850834e22b6e581ef",
-          "bytes": 1065675
+          "sha256": "a46245cda809d195cd5dd1d18883a3be9dfaef65e2a30b1a5a950c428abb0f12",
+          "bytes": 1076778
         },
         {
           "path": "R11_BY2H_receiver_velocity_toggle.pdf",
-          "sha256": "6ef58b09e9e49b83b4a4f536e7288e187dcda7fb354eefd55de936f04683048e",
-          "bytes": 2208786
+          "sha256": "b3bdba9910a5507406cdae7b1ff83c00dfabbc740d910b8570a1f52f5558e8bc",
+          "bytes": 2208970
         },
         {
           "path": "R11_BY2H_receiver_velocity_toggle.svg",
-          "sha256": "64dd9c7c76adbd18ee1b9e5065ff98820327e2aad755e17d9ae64838dd79628f",
-          "bytes": 5811973
+          "sha256": "28d67baa904160991c06f895b204b8bda06a862e4365d1a349c5db92db39e033",
+          "bytes": 5577592
         }
       ],
       "source_identity": "ORIGINAL_V3",
-      "all_saved_samples": true
+      "all_saved_samples": true,
+      "comparison_type": "JOINT_RV_AND_YAW_HANDLING_STRUCTURAL_CHANGE",
+      "isolated_receiver_velocity_effect_identifiable": false,
+      "legacy_filename_locator_only": true
     },
     {
       "id": "R11_BY2O_receiver_velocity_toggle",
-      "dominant_claim": "The isolated velocity toggle has sequence-dependent effects.",
-      "caption": "Full saved F02/F03 H/yaw curves; no rescore, smoothing or interpolation. Config diff is recorded separately.",
+      "dominant_claim": "The joint velocity and heading-handling contrast has sequence-dependent outcomes.",
+      "caption": "Full saved F02/F03 H/yaw curves; F02 uses fixed 2.933193-degree yaw weighting without Scheme-C, while F03 enables RV and quality/residual yaw gating. This is not a single-factor RV contrast. No rescore, smoothing or interpolation.",
       "panel_role": "claim-supporting evidence",
       "exports": [
         {
           "path": "R11_BY2O_receiver_velocity_toggle.png",
-          "sha256": "7e5cbaf64d5c35be3cfcaa8186117ea6b264b6d89424f6baf8a78a3a40e8fe3e",
-          "bytes": 746327
+          "sha256": "0753f9a66cead6e910b170ddb6ea141e495aea26c97502edf0f80201e4ae6567",
+          "bytes": 755575
         },
         {
           "path": "R11_BY2O_receiver_velocity_toggle.pdf",
-          "sha256": "6c45e29b5b28a2476c6ab3eb63d644068385eaac6423f14a7796d57463204e20",
-          "bytes": 2776009
+          "sha256": "07a3ce11c2d5d98d110e13f027af4d2b7eeccbc1a37ed6c39dbac13e25a93330",
+          "bytes": 2776177
         },
         {
           "path": "R11_BY2O_receiver_velocity_toggle.svg",
-          "sha256": "b3511e2d801653219cf5718d7be99cf13f05850493030525819f97c7262230f7",
-          "bytes": 7598058
+          "sha256": "55df5c7a4ad3b8784971279736aa3845c80f25b6dab2ccf8aea0bd204a91f4ba",
+          "bytes": 7291797
         }
       ],
       "source_identity": "ORIGINAL_V3",
-      "all_saved_samples": true
+      "all_saved_samples": true,
+      "comparison_type": "JOINT_RV_AND_YAW_HANDLING_STRUCTURAL_CHANGE",
+      "isolated_receiver_velocity_effect_identifiable": false,
+      "legacy_filename_locator_only": true
     },
     {
       "id": "R12_BY2_native_heading_decisions",
@@ -317,8 +362,8 @@
         },
         {
           "path": "R12_BY2_native_heading_decisions.svg",
-          "sha256": "925a4d69f021aa52e960e91f14c725163886379cdcfecb493293886ba6c3b80f",
-          "bytes": 1590840
+          "sha256": "2af91dc85d27eb469e6e077968563258e22ce751ffb0a7b582258b5fd99cb2ef",
+          "bytes": 1534134
         }
       ]
     }
@@ -328,5 +373,7 @@
     "DOWNWEIGHT": 123,
     "REJECT": 21
   },
-  "original_evaluation_identity_preserved": true
+  "original_evaluation_identity_preserved": true,
+  "editorial_rv_confounding_correction": true,
+  "no_isolated_RV_causal_claim": true
 }

@@ -6,7 +6,7 @@ def sha(b):return hashlib.sha256(b).hexdigest()
 def csvout(path,rows):
  with path.open('w',newline='') as f:
   w=csv.DictWriter(f,fieldnames=list(rows[0]),lineterminator='\n');w.writeheader();w.writerows(rows)
-chapters={'block_01':'Natural full-window errors and all 11 configurations','block_02':'Original trajectory and full attitude errors','block_03':'Full CORE failures, paired ablations, long tails and original ADD','block_04':'Moving-base heading accuracy and denominator','block_05':'Isolated receiver velocity and actual heading decisions','block_06':'Accepted raw-observation heading methods','block_07':'FGO position and strict/dynamic/prior support','block_08':'FGO trajectories and own estimated attitude'}
+chapters={'block_01':'Natural full-window errors and all 11 configurations','block_02':'Original trajectory and full attitude errors','block_03':'Full CORE failures, paired ablations, long tails and original ADD','block_04':'Moving-base heading accuracy and denominator','block_05':'Joint velocity and heading-handling contrast; actual heading decisions','block_06':'Accepted raw-observation heading methods','block_07':'FGO position and strict/dynamic/prior support','block_08':'FGO trajectories and own estimated attitude'}
 figures=[];block_receipts=[];sources=set();files_checked=0
 for block in sorted(HERE.glob('block_*')):
  ready=json.loads((block/'READY_RECEIPT.json').read_text());assert ready['status']=='READY'

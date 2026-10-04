@@ -1,7 +1,9 @@
-# READY 05：原接收机速度作用与真实航向接受状态
+# READY 05：速度与航向处理联合结构对比、真实航向接受状态
 
-三个R11分别画原F02/F03的全部水平误差和yaw误差曲线。对三个序列逐行比对封存runtime配置，除run身份/标签/输出路径及ablation记录外，唯一数值功能开关为 `enable_receiver_velocity: false/true`；逐行差异存CONFIG_DIFF_EVIDENCE。两配置均保留共同dual-heading初始化。图中RMSE只转录原汇总，不重算原评价。BY2/BY2H略有改善、BY2O航向变差也保留，不能称速度对所有场景普遍改善。各曲线matched/output分母明确，仅表示原观察到的输出历元。
+三个R11保留原F02/F03全部水平误差和yaw误差曲线，不能识别接收机速度RV的独立因果效应。F02为RV关闭、固定2.933193°航向标准差直接更新；F03同时启用RV以及依据观测精度与残差进行接受、降权、拒绝的Scheme-C航向处理。`algorithm_id`是实际路由分支，不能归为普通运行标签。六份封存native manifest均证实这些差异；CONFIG_DIFF_EVIDENCE保留逐行配置差异并补实际分支和计数。
 
-R12把原BY2 Proposed完整yaw误差和全部1369条真实native GNSS事件的航向状态同轴显示：NORMAL1225、DOWNWEIGHT123、REJECT21。它是算法接受状态，不能当参考精度好坏的标签，也不能把同图变化当因果修复收益。原trace的yaw residual字段全空，因此没有伪造创新曲线或重新推门限。
+两配置保留共同dual-heading初始化。图中RMSE只转录原汇总，不重算评价；各序列的不利变化照报，但不归因于单独RV。matched/output仅表示原观察输出历元，不代替物理全时域覆盖。历史文件名中的`receiver_velocity_toggle`仅作为既有PPT资源定位符，不再表示单变量实验。
 
-四图均白底宽图，300dpi PNG/PDF/SVG。完整saved样本均保留，时间间隔大于0.1s的线断开，不平滑/拟合/重跑。不读取rawreference或启动science。data/保存原decimal列副本，BUILD_RECEIPT绑定原源、每段配置、列副本、绘图代码与输出hash。最终4张PNG实际打开查看，坐标、图例、脚注与全部数据范围可读；PDF/SVG同Figure导出，没有独立渲染PDF。
+R12原图与数据内容保留：原BY2 Proposed完整yaw误差和全部1369条native事件为NORMAL1225、DOWNWEIGHT123、REJECT21。这是算法接受状态，不是真值质量标签；同轴观察不是因果收益。原trace的yaw residual字段全空，没有重建创新曲线或门限。
+
+只修解释、图内文字、图例和元数据，原9份data副本字节与所有原科学源hash保持；300dpi PNG/PDF/SVG重新导出。完整样本保留，>.1s断线，未平滑、求解、评价或读取rawreference。最终PNG重新实际打开；PDF/SVG由同Figure导出，本小块未另渲染。旧验收身份保存在上级RV_CONFOUNDING_CORRECTION_BEFORE.json，新纠正收据独立绑定。

@@ -32,6 +32,39 @@
         "F02": "ablation_variant: STRUCTURAL_ONLY",
         "F03": "ablation_variant: AB0000"
       }
+    ],
+    "algorithm_id_is_active_branch": true,
+    "comparison_type": "JOINT_RV_AND_YAW_HANDLING_STRUCTURAL_CHANGE",
+    "isolated_receiver_velocity_effect_identifiable": false,
+    "effective_manifest_evidence": [
+      {
+        "method": "F02",
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00002/RUN_MANIFEST.json",
+        "sha256": "65397db8aebc5d1c2f0bd35dabea75a7a979ec1e6ba482cbc34ef3b521541244",
+        "algorithm_id": "basic_dual_yaw_EKF",
+        "measurement_update_order": "position_then_basic_yaw_then_feedback",
+        "enable_basic_dual_yaw_baseline": true,
+        "yaw_scheme_C_enabled": false,
+        "basic_dual_yaw_fixed_std_deg": 2.933193,
+        "receiver_velocity_update_count": 0,
+        "yaw_NORMAL": 1369,
+        "yaw_DOWNWEIGHT": 0,
+        "yaw_REJECT": 0
+      },
+      {
+        "method": "F03",
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00003/RUN_MANIFEST.json",
+        "sha256": "1a1e7a098cb9d8dbb513e7433dc68dd4b833d8fb58a83536b22f53400eccceef",
+        "algorithm_id": "strong_dual_yaw_EKF",
+        "measurement_update_order": "position_then_yaw_then_receiver_velocity_then_feedback",
+        "enable_basic_dual_yaw_baseline": false,
+        "yaw_scheme_C_enabled": true,
+        "basic_dual_yaw_fixed_std_deg": 2.933193,
+        "receiver_velocity_update_count": 1369,
+        "yaw_NORMAL": 1285,
+        "yaw_DOWNWEIGHT": 63,
+        "yaw_REJECT": 21
+      }
     ]
   },
   {
@@ -67,6 +100,39 @@
         "F02": "ablation_variant: \"STRUCTURAL_ONLY\"",
         "F03": "ablation_variant: \"AB0000\""
       }
+    ],
+    "algorithm_id_is_active_branch": true,
+    "comparison_type": "JOINT_RV_AND_YAW_HANDLING_STRUCTURAL_CHANGE",
+    "isolated_receiver_velocity_effect_identifiable": false,
+    "effective_manifest_evidence": [
+      {
+        "method": "F02",
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F02/RUN_MANIFEST.json",
+        "sha256": "2404f19b6ea1ec5f2b7c385a46b0329509c82701f5154a3ee0203bb5fe9cb7e7",
+        "algorithm_id": "basic_dual_yaw_EKF",
+        "measurement_update_order": "position_then_basic_yaw_then_feedback",
+        "enable_basic_dual_yaw_baseline": true,
+        "yaw_scheme_C_enabled": false,
+        "basic_dual_yaw_fixed_std_deg": 2.933193,
+        "receiver_velocity_update_count": 0,
+        "yaw_NORMAL": 1349,
+        "yaw_DOWNWEIGHT": 0,
+        "yaw_REJECT": 0
+      },
+      {
+        "method": "F03",
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F03/RUN_MANIFEST.json",
+        "sha256": "0063b3fb0ed96592e803c01de4fa9d503a622ddf4ae4523d36e2c1cedd26bc40",
+        "algorithm_id": "AB0000",
+        "measurement_update_order": "position_then_yaw_then_receiver_velocity_then_feedback",
+        "enable_basic_dual_yaw_baseline": false,
+        "yaw_scheme_C_enabled": true,
+        "basic_dual_yaw_fixed_std_deg": 2.933193,
+        "receiver_velocity_update_count": 1349,
+        "yaw_NORMAL": 1287,
+        "yaw_DOWNWEIGHT": 47,
+        "yaw_REJECT": 15
+      }
     ]
   },
   {
@@ -101,6 +167,39 @@
         "line": 175,
         "F02": "ablation_variant: \"STRUCTURAL_ONLY\"",
         "F03": "ablation_variant: \"AB0000\""
+      }
+    ],
+    "algorithm_id_is_active_branch": true,
+    "comparison_type": "JOINT_RV_AND_YAW_HANDLING_STRUCTURAL_CHANGE",
+    "isolated_receiver_velocity_effect_identifiable": false,
+    "effective_manifest_evidence": [
+      {
+        "method": "F02",
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F02/RUN_MANIFEST.json",
+        "sha256": "a57103244fc248c7a5e0e16a4d535658c0d108bfb1d82b2d91a417e7c315697f",
+        "algorithm_id": "basic_dual_yaw_EKF",
+        "measurement_update_order": "position_then_basic_yaw_then_feedback",
+        "enable_basic_dual_yaw_baseline": true,
+        "yaw_scheme_C_enabled": false,
+        "basic_dual_yaw_fixed_std_deg": 2.933193,
+        "receiver_velocity_update_count": 0,
+        "yaw_NORMAL": 1591,
+        "yaw_DOWNWEIGHT": 0,
+        "yaw_REJECT": 0
+      },
+      {
+        "method": "F03",
+        "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F03/RUN_MANIFEST.json",
+        "sha256": "edfa7003e4f91d92e2c9a5110e4d23997c9c6bb9470aaaf6a63d521dfad9da3a",
+        "algorithm_id": "AB0000",
+        "measurement_update_order": "position_then_yaw_then_receiver_velocity_then_feedback",
+        "enable_basic_dual_yaw_baseline": false,
+        "yaw_scheme_C_enabled": true,
+        "basic_dual_yaw_fixed_std_deg": 2.933193,
+        "receiver_velocity_update_count": 1882,
+        "yaw_NORMAL": 1506,
+        "yaw_DOWNWEIGHT": 80,
+        "yaw_REJECT": 5
       }
     ]
   }
