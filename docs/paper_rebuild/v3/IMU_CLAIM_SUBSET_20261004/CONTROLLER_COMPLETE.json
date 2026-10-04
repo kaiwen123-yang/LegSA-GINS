@@ -1,0 +1,9 @@
+{
+  "status": "ALL_135_NATIVE_AND_OFFLINE_COMPLETED",
+  "captured_utc": "2026-10-04T07:54:04.737952+00:00",
+  "result_count": 135,
+  "accepted_count": 135,
+  "unavailable_count": 0,
+  "native_seal_sha256": "1f041d1180032b6552af8d43d1f0eb3b9256ad3f11c64a1e98fdf7cebaade60b",
+  "results_sha256": "a0f004962971f9ca22926e503f7c51f7eebf11857727c2dc60eacc9e665d9576"
+}

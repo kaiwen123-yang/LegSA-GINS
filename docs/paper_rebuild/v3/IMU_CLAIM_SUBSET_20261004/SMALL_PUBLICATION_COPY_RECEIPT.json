@@ -1,0 +1,285 @@
+{
+  "schema": "claim135_small_publication_copy.v1",
+  "captured_utc": "2026-10-04T08:12:16.905345+00:00",
+  "actual_heavy_stage": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z",
+  "windows_actual_heavy_stage": "G:/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z",
+  "base_head_role": "Base only; PREREGISTRATION per-file snapshot and binary identify repaired execution",
+  "files": [
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/ALL45_PAIRED_HEATMAP.pdf",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/ALL45_PAIRED_HEATMAP.pdf",
+      "bytes": 45171,
+      "sha256": "c3917f8ae0d894059a82f35fb008916db365bc20aa1c34f2207482dbb57f4abe"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/ALL45_PAIRED_HEATMAP.png",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/ALL45_PAIRED_HEATMAP.png",
+      "bytes": 930296,
+      "sha256": "b6fefaeeca5c948e914dbe7bfde71559d73c73b606ade7ef5aaab19657962ace"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/FIGURE_GENERATION_RECEIPT.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/FIGURE_GENERATION_RECEIPT.json",
+      "bytes": 948,
+      "sha256": "0e20f0d256bc885dd30cb3ee22b67af9042d0d8d65cf5d48967612ce2c064110"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/FULL_135_RESULTS.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/FULL_135_RESULTS.csv",
+      "bytes": 71584,
+      "sha256": "ce9b02c5fe7d2451eb60c23e61f9f4d752c428ff806933704f8e02bf649565ed"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/INDEPENDENT_RECOMPUTATION.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/INDEPENDENT_RECOMPUTATION.csv",
+      "bytes": 42359,
+      "sha256": "065079afc9e490bce15414ab3e97d14b6a0b2b23d0c9bbb59cc144320f29e112"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/NATIVE_RUN_SUMMARY.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/NATIVE_RUN_SUMMARY.csv",
+      "bytes": 35663,
+      "sha256": "a551679681a2f4e510f63be4c57268068b8e4d3d670d8891eefa1c24408fe0ef"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/OWN_SUPPORT_DOMAINS.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/OWN_SUPPORT_DOMAINS.csv",
+      "bytes": 136332,
+      "sha256": "ea0d859d809d8a5ffcf53f8287f2fa0c4a5800bd6f4e412c9efe1877667177c1"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/PAIRED_ALL_90_CASES_DOMAINS.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/PAIRED_ALL_90_CASES_DOMAINS.csv",
+      "bytes": 556341,
+      "sha256": "4a1aab0babf454e29be65cd8e10928798c1bc2c8b3ddb62f90c5ac70111faf20"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/PLACEMENT_BLOCK_DIFFERENCES.pdf",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/PLACEMENT_BLOCK_DIFFERENCES.pdf",
+      "bytes": 36141,
+      "sha256": "e8d254c2ff2b094659979ad1651dab75d8508bb845ce092037f61c5a7db174a7"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/PLACEMENT_BLOCK_DIFFERENCES.png",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/PLACEMENT_BLOCK_DIFFERENCES.png",
+      "bytes": 253271,
+      "sha256": "d1eb940016aedf771c25a47ffffa946976c52e4dd3273781553a8838b9c7a0eb"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/PLACEMENT_BLOCK_SUMMARY.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/PLACEMENT_BLOCK_SUMMARY.csv",
+      "bytes": 39229,
+      "sha256": "e2097761bd1e04fc38ca5ea3902975195c789f8766acda3afb926be01d18d2ad"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/REDUCTION_RECEIPT.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/REDUCTION_RECEIPT.json",
+      "bytes": 69336,
+      "sha256": "8fe4f7321202600c1befd68416ad64e9806f24a7a789f4a7439f4ed56001bc26"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/REFERENCE_ACCESS_AUDIT.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/REFERENCE_ACCESS_AUDIT.csv",
+      "bytes": 9040,
+      "sha256": "b27b040da93b03c89d2cf1e543aea33a2440a13f50ca9ae8ffadd22d285bd485"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PUBLICATION/VISUAL_REVIEW.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/VISUAL_REVIEW.json",
+      "bytes": 1059,
+      "sha256": "1ccd516a0729a993f1fdbc4069852bcbb2ba631bb729868a33d5e0ec11e3f582"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/BUILD_RECEIPT.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/BUILD_RECEIPT.json",
+      "bytes": 9369,
+      "sha256": "6938eec4e0bda7d48fa2bd547e7086fedd422e708fecc74647f95601a8b199d8"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PREREGISTRATION.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/PREREGISTRATION.json",
+      "bytes": 1585624,
+      "sha256": "50674d262162968a06640c2870b80e28b64af57def0f950d27abc35bb3e4505b"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/CASE_INVENTORY.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/CASE_INVENTORY.csv",
+      "bytes": 3450,
+      "sha256": "3e4915c826ca8eaae6ee7c871b622a53ebcf7b8ff1595c5c6295799f878836ff"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PAIR_SINGLE_VARIABLE_AUDIT.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/PAIR_SINGLE_VARIABLE_AUDIT.csv",
+      "bytes": 18227,
+      "sha256": "c5bd700f7d5bb350eb5cac37db80a179810a13257e07b0697029f85e48305e4c"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/OUTAGE_MASK_AUDIT.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/OUTAGE_MASK_AUDIT.csv",
+      "bytes": 3192,
+      "sha256": "19e9c9f12e2d4214bd2e506a595fd1c36ec2cc7050dce7beeab2661a28fb3404"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PREPARE_AUDIT.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/PREPARE_AUDIT.json",
+      "bytes": 559,
+      "sha256": "b00458e72eeb667a99de017bbd2dfdf529bb9f4055a84a3f362db329d77ed18f"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/ALL_135_NATIVE_LOADER_ADMISSION.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/ALL_135_NATIVE_LOADER_ADMISSION.json",
+      "bytes": 34314,
+      "sha256": "0b667efc5ecbe0b0509945f688a7263b7e2eec4daed6be9ad2218e50a66d06b1"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/CONTROLLER_LAUNCH.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/CONTROLLER_LAUNCH.json",
+      "bytes": 465,
+      "sha256": "92232e09e635b844011eff6d55bcd9d5a492122660d1061860668dacfe8909b1"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/CONTROLLER_COMPLETE.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/CONTROLLER_COMPLETE.json",
+      "bytes": 362,
+      "sha256": "4593644b9f443bb31b84ed39ee53ffd41e93f07b686bd6b958caf586fbe2dc48"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/ALL_135_NATIVE_VERIFIED_BEFORE_OFFLINE.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/ALL_135_NATIVE_VERIFIED_BEFORE_OFFLINE.json",
+      "bytes": 393,
+      "sha256": "ef08a379c3a7cfe621f7cfe48c0145efa64afa42d2cecb6bef60166e6658dbd5"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/PAIRED_ANALYSIS_DETAIL_PREREGISTRATION.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/PAIRED_ANALYSIS_DETAIL_PREREGISTRATION.json",
+      "bytes": 758,
+      "sha256": "2e7a2d4dfceb85aafc43403c9483ca951f58ece2bb53567456aba81ad95cac38"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/HV_AVAILABILITY_ALL_45_CASES.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/HV_AVAILABILITY_ALL_45_CASES.csv",
+      "bytes": 8844,
+      "sha256": "bcf4274dbfd562f4c84e441ea9f12ebe851b8d5ce211fc87876eefff44818a7d"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/HV_AVAILABILITY_PREREGISTRATION.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/HV_AVAILABILITY_PREREGISTRATION.json",
+      "bytes": 9751,
+      "sha256": "3a669012dabffb235b19f3aceace43a339ca90a8809089ffbff902afa488daeb"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_FINAL_DELIVERY_RECEIPT.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/IMU_CLAIM_135_FINAL_DELIVERY_RECEIPT.json",
+      "bytes": 8302,
+      "sha256": "9120b27ef47cf5a97fceba439287eca8c78774062024c21ea10957d10f8b5669"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_INDEPENDENT_FINAL_REVIEW.md",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/IMU_CLAIM_135_INDEPENDENT_FINAL_REVIEW.md",
+      "bytes": 6464,
+      "sha256": "9bd91d84d813dd489ed4a4b31d19b6979178aaa548e8957e230701e9e99d93c5"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_INDEPENDENT_FINAL_NUMERICAL_REVIEW.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/IMU_CLAIM_135_INDEPENDENT_FINAL_NUMERICAL_REVIEW.json",
+      "bytes": 38243,
+      "sha256": "748034cd9f663c8fc0cd680f3f3405b8483ac168c781c24f20b8d95f1778c5aa"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_FULL_RMSE_INDEPENDENT.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/IMU_CLAIM_135_FULL_RMSE_INDEPENDENT.csv",
+      "bytes": 50781,
+      "sha256": "e4e7ce60c90afbc6dbcdbc546a10f351505ef21c6be97e08e488c4a036208cfc"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_OWN_DOMAINS_INDEPENDENT.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/IMU_CLAIM_135_OWN_DOMAINS_INDEPENDENT.csv",
+      "bytes": 136305,
+      "sha256": "9a03472db7080863635bf190117ed7d31c863bfce1e1d740e953f475c2d7fbd0"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_90_PAIR_DOMAINS_INDEPENDENT.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/IMU_CLAIM_90_PAIR_DOMAINS_INDEPENDENT.csv",
+      "bytes": 392052,
+      "sha256": "63dad2454dc0bbd06f43d365aba7998919263feb9fcf8d689de36c4f28cc7f39"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_PLACEMENT_SUMMARY_INDEPENDENT.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/IMU_CLAIM_PLACEMENT_SUMMARY_INDEPENDENT.csv",
+      "bytes": 39241,
+      "sha256": "fdf91d42d0eb16c6aa3ccaa7081e1eaa53bfdd28a05dd422e68b675cb71e0842"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_ACCEPTED_FAULT_SOURCE_COUNTS.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/IMU_CLAIM_ACCEPTED_FAULT_SOURCE_COUNTS.json",
+      "bytes": 1192,
+      "sha256": "0b6f5f4f4d20b9b61dc5ca0e7f00540a140b393b188b8b99c319b9694b3670d8"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_ACCEPTED_FAULT_SOURCE_COUNTS.csv",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/IMU_CLAIM_ACCEPTED_FAULT_SOURCE_COUNTS.csv",
+      "bytes": 34935,
+      "sha256": "e37c71de3a49380c773cb395804232e120543bcc6832a9b9402d6a59f4014e2d"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/IMU_CLAIM_135_INDEPENDENT_ACTUAL_FIGURE_REVIEW.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/IMU_CLAIM_135_INDEPENDENT_ACTUAL_FIGURE_REVIEW.json",
+      "bytes": 1426,
+      "sha256": "161d8f21b4848f58ec365e40fbb1b95acf3205cdbe87bd35aabf441734a2fa9e"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/STEP2_V3_CLAIM_SUBSET_PROTOCOL.md",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/STEP2_V3_CLAIM_SUBSET_PROTOCOL.md",
+      "bytes": 5053,
+      "sha256": "55683efe5aaf324623680336ef90b5e8528cbe5f44274cde16ef010e68b14be5"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/CLAIM_REDUCER_BOUNDARY_TESTS_FINAL.json",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/CLAIM_REDUCER_BOUNDARY_TESTS_FINAL.json",
+      "bytes": 1777,
+      "sha256": "e94376b8143371d8dc28b023426314c22446076d40cb3eddd1aeae4a21d59328"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/AUDIT_HELPER_SOURCES/prepare_claim_subset.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/prepare_claim_subset.py",
+      "bytes": 17045,
+      "sha256": "9cae5cc94ea47c35992e51e7061462dc9f3ea598a785176dc0f0d57b2fd57ee9"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/AUDIT_HELPER_SOURCES/verify_claim_subset_admission.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/verify_claim_subset_admission.py",
+      "bytes": 4795,
+      "sha256": "bfd46f16f25b18afa9e9d63d464ee37f101dcb4d2bc851eb11e05dbe883f5268"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/AUDIT_HELPER_SOURCES/run_claim_subset.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/run_claim_subset.py",
+      "bytes": 4372,
+      "sha256": "f25c64e5c6f3b8ecd79a05b278d300462d9b43d017d2ac3aedb7280b1868958d"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/AUDIT_HELPER_SOURCES/publish_claim_subset.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/publish_claim_subset.py",
+      "bytes": 19596,
+      "sha256": "bbc9ddaa51370dc2deab2bcf389ddbc7d2982d0f18a392b4b482405a85527afd"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/AUDIT_HELPER_SOURCES/test_claim_subset_reducer.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/test_claim_subset_reducer.py",
+      "bytes": 3422,
+      "sha256": "cd4abed2ea9f37483d01051cafa678781467e5f0de734f06a14a0297d9f5ab88"
+    },
+    {
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/IMU_V3_CLAIM_SUBSET_20261004T064538Z/AUDIT_HELPER_SOURCES/plot_claim_subset.py",
+      "destination": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/plot_claim_subset.py",
+      "bytes": 4877,
+      "sha256": "1b158eadd64e8b4ca0283cf446c3164cb7990d28db8591d45312100ba1599356"
+    }
+  ],
+  "report_sha256": "d7ca53a7c9f341cf1e1595962f787364ca71d74c6a32fca15519095606bc594c",
+  "readme_sha256": "a50671a0373d3a4a4e7d815a65a94d634215ba5ccef994d6271f80c80aa6559e",
+  "independent_delivery_sha256": "9120b27ef47cf5a97fceba439287eca8c78774062024c21ea10957d10f8b5669",
+  "no_source_edit_in_this_helper": true,
+  "no_new_science_calls": true,
+  "no_commit_push": true
+}

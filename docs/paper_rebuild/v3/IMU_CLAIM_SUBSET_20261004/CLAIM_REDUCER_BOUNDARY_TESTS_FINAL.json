@@ -1,0 +1,66 @@
+{
+  "status": "PAIRED_REDUCER_FOURTEEN_BOUNDARY_AND_IDENTITY_REGRESSIONS_PASSED",
+  "checks": [
+    {
+      "name": "Fault half-open keepsstart excludesend; denominator preservesmissing lastfault epoch",
+      "passed": true
+    },
+    {
+      "name": "Pair RMSE usesexactcommon support independently",
+      "passed": true
+    },
+    {
+      "name": "Endpoint stayslast ORIGINAL observed fault epoch evenwhenonepairmissesit",
+      "passed": true
+    },
+    {
+      "name": "Recovery 0to5 isend-open and5closed",
+      "passed": true
+    },
+    {
+      "name": "Recovery5to10 is5open and10closed",
+      "passed": true
+    },
+    {
+      "name": "Recovery10to30 includes30second boundary excludes10",
+      "passed": true
+    },
+    {
+      "name": "No emptydomain score fabricated",
+      "passed": true
+    },
+    {
+      "name": "Microsecond keycollision rejected",
+      "passed": true
+    },
+    {
+      "name": "Nonfinite metric rejected ratherthan dropped",
+      "passed": true
+    },
+    {
+      "name": "True unavailable objectdtype errorframe admitted as empty without numericalmetrics",
+      "passed": true
+    },
+    {
+      "name": "Unavailable pair keepsoriginal denominator andfabricatesnozeroRMSE",
+      "passed": true
+    },
+    {
+      "name": "Exact135 uniqueIDs admitted beforedictconstruction",
+      "passed": true
+    },
+    {
+      "name": "Same135lengthduplicateID rejected",
+      "passed": true
+    },
+    {
+      "name": "134runcohort rejected",
+      "passed": true
+    }
+  ],
+  "solver_invocations": 0,
+  "evaluator_invocations": 0,
+  "reference_trace_reads": 0,
+  "reducer_sha256": "bbc9ddaa51370dc2deab2bcf389ddbc7d2982d0f18a392b4b482405a85527afd",
+  "test_helper_sha256": "cd4abed2ea9f37483d01051cafa678781467e5f0de734f06a14a0297d9f5ab88"
+}

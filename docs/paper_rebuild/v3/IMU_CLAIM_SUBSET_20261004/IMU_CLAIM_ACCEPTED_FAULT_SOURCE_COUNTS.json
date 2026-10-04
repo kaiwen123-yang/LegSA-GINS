@@ -1,0 +1,23 @@
+{
+  "schema": "readonly_claim135_saved_source_trace_fault_ledger.v1",
+  "created_utc": "2026-10-04T08:06:30.314914+00:00",
+  "run_count": 135,
+  "all_total_trace_accepts_equal_native_manifest": true,
+  "mismatches": [],
+  "D61_all_source_fault_evaluations_zero": true,
+  "D61_RP_and_HV_fault_accepted_zero": true,
+  "D62_P_RV_RD_fault_accepted_zero": true,
+  "D62_F04_HV_fault_accepted_minmax": [
+    50,
+    100
+  ],
+  "D62_RP_fault_accepted_minmax": [
+    50,
+    100
+  ],
+  "source_trace_before_after_pins": true,
+  "raw_reference_reads": 0,
+  "solver_evaluator_calls": 0,
+  "new_input_or_source_changes": 0,
+  "interpretation": "Saved source-aware accepted flags also agree total manifest module updates. D61 fault has no ongoing RP/HV update in this GNSS-scheduled chain; method differences inside that window can reflect carried state/covariance, not new aiding there. Not a causal repair-benefit estimate. Domain classification uses shared update_index GNSS event time, not source-specific provider timestamp. Original source-sample-time diagnostic preserved; six RP sampletime rows near the fault-end correspond actual post-outage GNSS update events, not RP updates inside outage."
+}

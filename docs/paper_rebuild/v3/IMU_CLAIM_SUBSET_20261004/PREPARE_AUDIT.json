@@ -1,0 +1,16 @@
+{
+  "status": "ALL_45_CASES_X_3_CONFIGS_PREPARED_WITH_EXACT_SINGLE_VARIABLE_PAIRS",
+  "native_estimator_invocations": 0,
+  "evaluator_invocations": 0,
+  "trace_reads": 0,
+  "case_count": 45,
+  "configuration_count": 135,
+  "pair_count": 90,
+  "provider_pin_count": 435,
+  "source_inventory_count": 928,
+  "old_transport_semisynthetic_false_explicitly_corrected": true,
+  "prepare_helper": {
+    "path": "/mnt/g/LegSA-GINS-project/修复_20261004/prepare_claim_subset.py",
+    "sha256": "9cae5cc94ea47c35992e51e7061462dc9f3ea598a785176dc0f0d57b2fd57ee9"
+  }
+}

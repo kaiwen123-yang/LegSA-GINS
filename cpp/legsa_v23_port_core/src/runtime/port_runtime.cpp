@@ -63,6 +63,29 @@ void writeAll(const std::string& output_dir,
     FileSaver::writeExactCompatible(output_dir, states, covariances);
   }
   FileSaver::writeRunManifest(output_dir, options);
+  if (options.stage_id == "IMU_V3_TIME_CONTRACT_FIX_20261004" && !states.empty()) {
+    // Preserve actual state/bias and full P near segment boundaries. This is
+    // diagnostic output from this invocation; it does not alter estimation.
+    std::ofstream audit(std::filesystem::path(output_dir) / "STATE_COVARIANCE_SUPPORT.csv");
+    audit << std::setprecision(17);
+    audit << "time,lat_rad,lon_rad,height,vn,ve,vd,roll_rad,pitch_rad,yaw_rad,bgx,bgy,bgz,bax,bay,baz";
+    for (std::size_t i = 0; i < 21 * 21; ++i) audit << ",P" << i;
+    audit << "\n";
+    double last_written = -std::numeric_limits<double>::infinity();
+    for (std::size_t i = 0; i < states.size(); ++i) {
+      const auto& state = states[i];
+      if (state.time > states.front().time + 2.0 && state.time < states.back().time - 2.0) continue;
+      if (state.time < last_written + .05 && i + 1 != states.size()) continue;
+      audit << state.time;
+      for (const auto& vector : {state.pos_blh_rad_m, state.vel_ned_mps, state.euler_rad,
+                                 state.imu_error.gyrbias, state.imu_error.accbias}) {
+        for (const double value : vector) audit << "," << value;
+      }
+      for (const double value : covariances[i]) audit << "," << value;
+      audit << "\n";
+      last_written = state.time;
+    }
+  }
 }
 
 void copyRawDopplerStatus(const GIEngine& engine, PortOptions& options) {
@@ -1358,7 +1381,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   options.gnss_rows_in_overlap = expected_updates;
   options.expected_update_count = expected_updates;
 
-  ImuFileLoader imu_loader(options.imu_path);
+  ImuFileLoader imu_loader(options.imu_path, options.imudatalen);
   GnssFileLoader gnss_loader = options.dual_antenna_measurement_model == "baseline3d"
       ? GnssFileLoader(options.gnss_path, options.baseline3d_path)
       : GnssFileLoader(options.gnss_path);

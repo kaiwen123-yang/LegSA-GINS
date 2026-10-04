@@ -18,8 +18,8 @@ namespace legsa_v23_port_core {
 class ImuFileLoader {
  public:
   ImuFileLoader() = default;
-  explicit ImuFileLoader(const std::string& path);
-  static std::vector<ImuData> loadSevenColumn(const std::string& path);
+  explicit ImuFileLoader(const std::string& path, std::size_t expected_columns = 0);
+  static std::vector<ImuData> loadSevenColumn(const std::string& path, std::size_t expected_columns = 0);
   bool next(ImuData& imu);
   bool isEof() const;
   bool isOpen() const;

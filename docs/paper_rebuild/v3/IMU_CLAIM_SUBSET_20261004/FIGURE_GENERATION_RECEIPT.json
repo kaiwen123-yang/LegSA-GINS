@@ -1,0 +1,16 @@
+{
+  "status": "ALL45_AND_ALL9_PLACEMENTS_PLOTTED_WITH_NO_CASE_EXCLUSION",
+  "reduction_receipt_sha256": "8fe4f7321202600c1befd68416ad64e9806f24a7a789f4a7439f4ed56001bc26",
+  "paired_table_sha256": "4a1aab0babf454e29be65cd8e10928798c1bc2c8b3ddb62f90c5ac70111faf20",
+  "plot_helper_sha256": "1b158eadd64e8b4ca0283cf446c3164cb7990d28db8591d45312100ba1599356",
+  "source_or_provider_changes": 0,
+  "reference_trace_reads": 0,
+  "solver_or_evaluator_calls": 0,
+  "outputs": {
+    "ALL45_PAIRED_HEATMAP.png": "b6fefaeeca5c948e914dbe7bfde71559d73c73b606ade7ef5aaab19657962ace",
+    "ALL45_PAIRED_HEATMAP.pdf": "c3917f8ae0d894059a82f35fb008916db365bc20aa1c34f2207482dbb57f4abe",
+    "PLACEMENT_BLOCK_DIFFERENCES.png": "d1eb940016aedf771c25a47ffffa946976c52e4dd3273781553a8838b9c7a0eb",
+    "PLACEMENT_BLOCK_DIFFERENCES.pdf": "e8d254c2ff2b094659979ad1651dab75d8508bb845ce092037f61c5a7db174a7"
+  },
+  "visual_inspection_status": "PENDING_ACTUAL_IMAGE_VIEW"
+}

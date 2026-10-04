@@ -110,6 +110,10 @@ class GIEngine {
   GnssData receiverVelocityStressView(const GnssData& gnss) const;
   double deterministicVelocityNoise(double time, int axis) const;
   void applyVelocityUpdate(GnssData& gnss);
+  Vec3 compensatedAngularRate() const;
+  Matrix antennaVelocityJacobian(const Vec3& omega_b) const;
+  double dualAntennaYawPrediction() const;
+  Matrix dualAntennaYawJacobian() const;
   void applyYawUpdate(GnssData& gnss);
   void applyBasicDualYawUpdate(GnssData& gnss);
   void applyBaseline3dUpdate(const GnssData& gnss, bool basic,

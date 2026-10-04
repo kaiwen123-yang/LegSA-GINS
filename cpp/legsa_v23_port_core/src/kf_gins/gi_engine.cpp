@@ -925,15 +925,31 @@ GnssData GIEngine::receiverVelocityStressView(const GnssData& gnss) const {
   return out;
 }
 
-// 中文说明：velocity update 使用 antenna velocity - GNSS velocity；若 lever velocity evidence 缺失则保持保守项。
-void GIEngine::applyVelocityUpdate(GnssData& gnss) {
-  const double dt = imucur_.dt > 0.0 ? imucur_.dt : 0.01;
-  const Vec3 omega_b = scale(imucur_.dtheta, 1.0 / dt);
-  const Vec3 antenna_vel = add(pvacur_.vel_ned_mps, multiply(pvacur_.cbn, cross(omega_b, options_.antlever_m)));
-  const Vec3 dz_vec = subtract(antenna_vel, gnss.vel_ned_mps);
+Vec3 GIEngine::compensatedAngularRate() const {
+  // res=1 and res=3 can update before the current buffer is compensated.
+  // A copy keeps propagation's exactly-once compensation flag unchanged.
+  const ImuData compensated = imuCompensate(imucur_);
+  if (compensated.dt <= 0.0) throw std::runtime_error("VELOCITY_UPDATE_NO_SUPPORTED_IMU_DURATION");
+  return scale(compensated.dtheta, 1.0 / compensated.dt);
+}
+
+Matrix GIEngine::antennaVelocityJacobian(const Vec3& omega_b) const {
   Matrix H(3, RANK, 0.0);
   setBlockIdentity(H, 0, V_ID);
-  setBlock(H, 0, PHI_ID, Rotation::skewSymmetric(multiply(pvacur_.cbn, cross(omega_b, options_.antlever_m))));
+  const Vec3 lever_velocity = multiply(pvacur_.cbn, cross(omega_b, options_.antlever_m));
+  setBlock(H, 0, PHI_ID, Rotation::skewSymmetric(lever_velocity));
+  const Matrix3 bias = scale(multiply(pvacur_.cbn, Rotation::skewSymmetric(options_.antlever_m)), -1.0);
+  setBlock(H, 0, BG_ID, bias);
+  setBlock(H, 0, SG_ID, multiply(bias, diag3(cwiseDivide(omega_b, add(makeVec3(1.,1.,1.), imuerror_.gyrscale)))));
+  return H;
+}
+
+// Velocity observation is evaluated at the GNSS1 antenna with compensated rate.
+void GIEngine::applyVelocityUpdate(GnssData& gnss) {
+  const Vec3 omega_b = compensatedAngularRate();
+  const Vec3 antenna_vel = add(pvacur_.vel_ned_mps, multiply(pvacur_.cbn, cross(omega_b, options_.antlever_m)));
+  const Vec3 dz_vec = subtract(antenna_vel, gnss.vel_ned_mps);
+  Matrix H = antennaVelocityJacobian(omega_b);
   Vec3 stdv = add(positiveStd(gnss.vel_std_mps, 1.0e-3), makeVec3(0.05, 0.05, 0.05));
   Matrix R = diagonalMatrix(cwiseProduct(stdv, stdv));
   const std::vector<double> dz{dz_vec[0], dz_vec[1], dz_vec[2]};
@@ -952,11 +968,35 @@ void GIEngine::applyVelocityUpdate(GnssData& gnss) {
   ++velocity_update_count_;
 }
 
+double GIEngine::dualAntennaYawPrediction() const {
+  if (options_.stage_id != "IMU_V3_TIME_CONTRACT_FIX_20261004") return pvacur_.euler_rad[2];
+  // The frozen provider's heading is azimuth of body -y plus pi/2.
+  // At nonzero roll/pitch this is not the ZYX Euler yaw.
+  const Vec3 baseline = multiply(pvacur_.cbn, makeVec3(0., -1., 0.));
+  const double horizontal_squared = baseline[0]*baseline[0] + baseline[1]*baseline[1];
+  if (!(horizontal_squared > 1.e-12)) throw std::runtime_error("DUAL_YAW_HORIZONTAL_PROJECTION_UNSUPPORTED");
+  return wrapYawResidual(std::atan2(baseline[1], baseline[0]) + 0.5 * M_PI);
+}
+
+Matrix GIEngine::dualAntennaYawJacobian() const {
+  Matrix H(1, RANK, 0.0);
+  H(0, PHI_ID + 2) = -1.0;
+  if (options_.stage_id == "IMU_V3_TIME_CONTRACT_FIX_20261004") {
+    const Vec3 baseline = multiply(pvacur_.cbn, makeVec3(0., -1., 0.));
+    const double horizontal_squared = baseline[0]*baseline[0] + baseline[1]*baseline[1];
+    if (!(horizontal_squared > 1.e-12)) throw std::runtime_error("DUAL_YAW_HORIZONTAL_PROJECTION_UNSUPPORTED");
+    // Error convention: C_true=Exp(phi) C_nominal; residual=predicted-observed.
+    H(0, PHI_ID) = baseline[0]*baseline[2]/horizontal_squared;
+    H(0, PHI_ID + 1) = baseline[1]*baseline[2]/horizontal_squared;
+  }
+  return H;
+}
+
 // 中文说明：scheme_C 只对 dual-antenna yaw 观测做鲁棒门控，不放宽 hard=15 deg。
 void GIEngine::applyYawUpdate(GnssData& gnss) {
   ++yaw_update_count_;
   const double yaw_obs = gnss.yaw_rad;
-  const double yaw_pred = pvacur_.euler_rad[2];
+  const double yaw_pred = dualAntennaYawPrediction();
   const double yaw_std = std::max(gnss.yaw_std_rad, options_.yaw_std_min_deg * D2R);
   const double residual = wrapYawResidual(yaw_pred - yaw_obs);
   const double abs_res = std::fabs(residual);
@@ -970,8 +1010,7 @@ void GIEngine::applyYawUpdate(GnssData& gnss) {
     scale_value = options_.yaw_downweight_scale;
     scheme_downweighted = true;
   }
-  Matrix H(1, RANK, 0.0);
-  H(0, PHI_ID + 2) = -1.0;
+  Matrix H = dualAntennaYawJacobian();
   Matrix R(1, 1, scale_value * yaw_std * yaw_std);
   const std::vector<double> dz{residual};
   source_aware::SourceMetadata metadata;
@@ -1003,14 +1042,14 @@ void GIEngine::applyYawUpdate(GnssData& gnss) {
 void GIEngine::applyBasicDualYawUpdate(GnssData& gnss) {
   ++yaw_update_count_;
   const double yaw_obs = gnss.yaw_rad;
-  const double yaw_pred = pvacur_.euler_rad[2];
+  const double yaw_pred = dualAntennaYawPrediction();
   // 中文说明：残差定义为 pred - obs；结合 H_phi_z=-1 后，EKFUpdate 内部的 dz-Hdx 与
   // stateFeedback 的 qpn 左乘反馈符号一致。该符号由 PAPER10E0 数值扰动测试验证。
   const double residual = wrapYawResidual(yaw_pred - yaw_obs);
   const double yaw_std = std::max(options_.basic_dual_yaw_fixed_std_deg * D2R, 1.0e-6);
-  Matrix H(1, RANK, 0.0);
-  // 中文说明：H_yaw 只作用于姿态误差状态块的 yaw 分量，列数等于 KF-GINS 21 维误差状态。
-  H(0, PHI_ID + 2) = -1.0;
+  // Frozen stages retain their scalar approximation; correction stage uses
+  // derivatives of the actual tilted lateral-baseline horizontal projection.
+  Matrix H = dualAntennaYawJacobian();
   // 中文说明：R_yaw 使用固定角度标准差，内部单位为 rad^2；不使用 dynamic yaw_std 或 source-aware 放大。
   Matrix R(1, 1, yaw_std * yaw_std);
   const std::vector<double> dz{residual};
@@ -1168,8 +1207,7 @@ void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
     ++raw_doppler_status_.reject_count;
     return;
   }
-  const double imu_dt = imucur_.dt > 0.0 ? imucur_.dt : 0.01;
-  const Vec3 omega_b = scale(imucur_.dtheta, 1.0 / imu_dt);
+  const Vec3 omega_b = compensatedAngularRate();
   const Vec3 lever_vel_n = multiply(pvacur_.cbn, cross(omega_b, options_.antlever_m));
   const Vec3 antenna_vel_n = add(pvacur_.vel_ned_mps, lever_vel_n);
   const Vec3 residual_vec = subtract(antenna_vel_n, best->velocity_ned_mps);
@@ -1180,9 +1218,7 @@ void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
     raw_doppler_residual_norms_.push_back(residual);
     return;
   }
-  Matrix H(3, RANK, 0.0);
-  setBlockIdentity(H, 0, V_ID);
-  setBlock(H, 0, PHI_ID, Rotation::skewSymmetric(lever_vel_n));
+  Matrix H = antennaVelocityJacobian(omega_b);
   const Vec3 stdv = RawDopplerFactor::positiveStd(*best);
   Matrix R = diagonalMatrix(scale(cwiseProduct(stdv, stdv), options_.raw_doppler_config.raw_doppler_R_scale));
   // 中文说明：dz = GNSS1 天线相位中心速度 - raw Doppler velocity；
@@ -1347,6 +1383,7 @@ void GIEngine::applyGo2VelocityDiagnosticPriorForTime(double update_time) {
     metadata.time = best->time;
     metadata.valid = best->source_status == "active";
     metadata.std_xyz = makeVec3(stdv[0], stdv[1], options_.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_vertical_disabled ? 999.0 : stdv[2]);
+    metadata.active_dimensions = horizontal_2d ? 2 : 3;
     metadata.residual_norm = horizontal_2d ? std::sqrt(residual_vec[0] * residual_vec[0] + residual_vec[1] * residual_vec[1])
                                            : norm(residual_vec);
     metadata.time_diff_sec = best->time - update_time;
@@ -1545,7 +1582,7 @@ quality_aware::QAObservation GIEngine::buildQAObservation(const GnssData& gnss) 
   } else {
     observation.a1_yaw_std_deg = std::fabs(gnss.yaw_std_rad) * R2D;
     observation.a1_yaw_std_available = observation.a1_available;
-    observation.a1_yaw_residual_deg = wrapYawResidual(pvacur_.euler_rad[2] - gnss.yaw_rad) * R2D;
+    observation.a1_yaw_residual_deg = wrapYawResidual(dualAntennaYawPrediction() - gnss.yaw_rad) * R2D;
     observation.a1_yaw_residual_available = observation.a1_available;
   }
   observation.gnss_pos_available = gnss.isvalid;
@@ -1623,8 +1660,13 @@ source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(
     Matrix& scaled_R) {
   scaled_R = R;
   source_aware::ObservationInnovation innovation;
-  innovation.residual = dz;
-  innovation.residual_norm = vectorNorm(dz);
+  // Sequential updates retain a nonzero dx until stateFeedback. Use the same
+  // conditional innovation as EKFUpdate, with the current conditional covariance.
+  const std::vector<double> hdx = multiply(H, dx_);
+  std::vector<double> conditional_residual = dz;
+  for (std::size_t i = 0; i < dz.size(); ++i) conditional_residual[i] -= hdx[i];
+  innovation.residual = conditional_residual;
+  innovation.residual_norm = vectorNorm(conditional_residual);
   innovation.base_R_trace = matrixTrace(R);
   const Matrix hph = multiply(multiply(H, Cov_), transpose(H));
   const Matrix innovation_covariance = add(hph, R);
@@ -1635,8 +1677,8 @@ source_aware::SourceWeightResult GIEngine::applySourceAwareWeighting(
   if (options_.source_aware_policy_config.source_aware_use_innovation_covariance && !dz.empty()) {
     try {
       const Matrix s_inv = inverse(innovation_covariance);
-      const std::vector<double> weighted_residual = multiply(s_inv, dz);
-      innovation.nis = std::max(0.0, dotVector(dz, weighted_residual));
+      const std::vector<double> weighted_residual = multiply(s_inv, conditional_residual);
+      innovation.nis = std::max(0.0, dotVector(conditional_residual, weighted_residual));
       innovation.normalized_innovation =
           std::sqrt(std::max(0.0, innovation.nis / static_cast<double>(std::max<std::size_t>(1, innovation.dof))));
       innovation.used_innovation_covariance = true;

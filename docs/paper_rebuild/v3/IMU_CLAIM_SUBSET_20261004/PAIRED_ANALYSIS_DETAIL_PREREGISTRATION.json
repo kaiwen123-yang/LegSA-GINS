@@ -1,0 +1,11 @@
+{
+  "status": "DETAILED_PAIRED_ANALYSIS_FIXED_BEFORE_ANY_NEW_OFFLINE_REFERENCE_READ",
+  "captured_utc": "2026-10-04T06:51:49.770600+00:00",
+  "preregistration_sha256": "50674d262162968a06640c2870b80e28b64af57def0f950d27abc35bb3e4505b",
+  "protocol_document_sha256": "55683efe5aaf324623680336ef90b5e8528cbe5f44274cde16ef010e68b14be5",
+  "native_completed_at_declaration": 8,
+  "offline_evaluations_at_declaration": 0,
+  "end_epoch_policy": "Last original measured IMU output epoch strictly inside outage; require both methods at exact epoch or UNAVAILABLE, no interpolation or fallback",
+  "recovery_policy": "(end,end+5],(end+5,end+10],(end+10,end+30],all t>end",
+  "scope": "Exploratory corrected replay, all45 prior-defined cases, no exclusion or tuning"
+}

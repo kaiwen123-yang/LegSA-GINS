@@ -262,6 +262,36 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   const bool canonical541_identity =
       options.stage_id == "CLEAN3R4_BY2_CANONICAL_541_REPAIRED_MATRIX" &&
       options.protocol_id == "CANONICAL541_BY2_CONTROLLED_DEGRADATION";
+  // Only the preregistered 45 controlled cases admit the disclosed
+  // semisynthetic flag. Historical and natural formal contracts remain strict.
+  bool imu_claim_case_matches = false;
+  for (const auto* prefix : {"D61_10s_seed_", "D61_20s_seed_", "D61_30s_seed_",
+                             "D62_10s_seed_", "D62_20s_seed_"}) {
+    const std::string stem(prefix);
+    if (options.case_id.size() == stem.size() + 2 &&
+        options.case_id.rfind(stem, 0) == 0 &&
+        options.case_id[stem.size()] == '0' &&
+        options.case_id.back() >= '0' && options.case_id.back() <= '8') {
+      imu_claim_case_matches = true;
+    }
+  }
+  const bool imu_claim_identity =
+      options.stage_id == "IMU_V3_TIME_CONTRACT_FIX_20261004" &&
+      options.protocol_id == "V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION" &&
+      options.run_id.rfind("IMUFIX_CLAIM_", 0) == 0 &&
+      options.run_label == options.run_id && imu_claim_case_matches &&
+      options.data_mode == "semisynthetic" && options.semisynthetic_data_used &&
+      (options.algorithm_id == "LegSA_Paper_V1" || options.algorithm_id == "AB1111" ||
+       options.algorithm_id == "AB0111" || options.algorithm_id == "AB1110");
+  const bool imu_natural_identity =
+      options.stage_id == "IMU_V3_TIME_CONTRACT_FIX_20261004" &&
+      options.protocol_id == "V3_NATURAL_SEQUENCE_EXPLICIT_IMU_DURATION" &&
+      options.run_id.rfind("IMUFIX_", 0) == 0 &&
+      (isCanonical541MatrixAlgorithmId(options.algorithm_id) ||
+       options.algorithm_id == "AB0000" || options.algorithm_id == "AB1111");
+  const bool imu_fix_identity = (imu_natural_identity || imu_claim_identity) &&
+      options.imudatalen == 8 &&
+      stringOrDefault(kv, "imu_gap_policy", "") == "STOP_AND_REINITIALIZE";
   const std::string canonical541_runtime_role =
       stringOrDefault(kv, "runtime_role", "");
   const bool canonical541_compact_readiness_identity =
@@ -294,14 +324,17 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
           : options.data_mode == "real_base_controlled_degradation";
   const bool data_mode_matches = canonical541_identity
                                      ? canonical541_data_mode_matches
-                                     : (clean2r2a_ablation_identity || clean3_s3_ab0000_identity)
+                                     : imu_claim_identity ? options.data_mode == "semisynthetic"
+                                     : (clean2r2a_ablation_identity || clean3_s3_ab0000_identity || imu_fix_identity)
                                            ? options.data_mode == "real_clean"
                                            : options.data_mode == "real_by2_raw";
   const bool case_id_matches = canonical541_identity
                                    ? isCanonical541CaseId(options.case_id)
+                                   : imu_claim_identity ? imu_claim_case_matches
+                                   : imu_fix_identity ? options.case_id == "IMU_V3_NATURAL_SEQUENCE"
                                    : options.case_id == "CLEAN1_BY2_CLEAN_NORMAL";
   if ((!clean1_v1_identity && !clean1r1c_v2_identity && !clean1r2r1_final_v23_identity &&
-       !clean2r2a_ablation_identity && !clean3_s3_ab0000_identity && !canonical541_identity) ||
+       !clean2r2a_ablation_identity && !clean3_s3_ab0000_identity && !canonical541_identity && !imu_fix_identity) ||
       !case_id_matches || !data_mode_matches ||
       options.run_id.empty()) {
     formalContractFailure("formal stage/protocol/case/data_mode/run identity mismatch");
@@ -312,10 +345,10 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   }
   // 保留 CLEAN1 的逐字合同，同时只为 CLEAN2R2A 要求同一 final_v23 parity mode。
   if ((options.clean_final_v23_parity_mode != clean1r2r1_final_v23_identity) &&
-      !clean2r2a_ablation_identity && !clean3_s3_ab0000_identity && !canonical541_identity) {
+      !clean2r2a_ablation_identity && !clean3_s3_ab0000_identity && !canonical541_identity && !imu_fix_identity) {
     formalContractFailure("clean final_v23 parity mode/profile identity mismatch");
   }
-  if ((clean2r2a_ablation_identity || clean3_s3_ab0000_identity || canonical541_identity) &&
+  if ((clean2r2a_ablation_identity || clean3_s3_ab0000_identity || canonical541_identity || imu_fix_identity) &&
       !options.clean_final_v23_parity_mode) {
     formalContractFailure("clean final_v23 parity mode/profile identity mismatch");
   }
@@ -334,7 +367,7 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
     formalContractFailure("solver/reference-point or propagation-IMU contract is not fail-closed");
   }
   if (options.trace_solver_input || options.receiver_imu_as_body_imu ||
-      options.synthetic_data_used || options.semisynthetic_data_used ||
+      options.synthetic_data_used || (options.semisynthetic_data_used && !imu_claim_identity) ||
       options.final_v23_output_solver_input || options.LegSA_output_solver_input ||
       options.per_case_tuning || options.output_only_correction ||
       options.bad_epoch_deletion_for_metric || options.old_runtime_input_count != 0 ||
@@ -383,7 +416,7 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
     expected_source_aware = true;
     expected_go2_roll_pitch = true;
     expected_go2_horizontal = true;
-  } else if (((clean2r2a_ablation_identity || clean3_s3_ab0000_identity) &&
+  } else if (((clean2r2a_ablation_identity || clean3_s3_ab0000_identity || imu_fix_identity) &&
               isClean2r2aAblationId(options.algorithm_id)) ||
              (canonical541_matrix_identity && isCanonical541AblationId(options.algorithm_id)) ||
              (canonical541_compact_readiness_identity &&
@@ -420,7 +453,11 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   options.enable_basic_dual_yaw_baseline = options.algorithm_id == "basic_dual_yaw_EKF";
   options.yaw_scheme_C_enabled = options.enable_dual_yaw_update && !options.enable_basic_dual_yaw_baseline;
   options.phase = options.stage_id;
-  options.port_role = canonical541_identity
+  options.port_role = imu_claim_identity
+                          ? "imu_v3_corrected_controlled_replay_solver"
+                      : imu_fix_identity
+                          ? "imu_v3_corrected_segment_solver"
+                      : canonical541_identity
                           ? "canonical541_formal_controlled_degradation_solver"
                       : clean3_s3_ab0000_identity
                           ? "clean3_s3_ab0000_parity_solver"

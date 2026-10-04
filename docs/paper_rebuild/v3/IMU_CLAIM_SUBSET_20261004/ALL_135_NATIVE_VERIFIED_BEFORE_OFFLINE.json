@@ -1,0 +1,9 @@
+{
+  "status": "ALL_135_NATIVE_SEALED_NO_ONLINE_TRACE_READS",
+  "native_seal_sha256": "1f041d1180032b6552af8d43d1f0eb3b9256ad3f11c64a1e98fdf7cebaade60b",
+  "preregistration_sha256": "50674d262162968a06640c2870b80e28b64af57def0f950d27abc35bb3e4505b",
+  "native_configurations": 135,
+  "native_children": 135,
+  "online_trace_open_count": 0,
+  "captured_utc": "2026-10-04T07:36:24.552870+00:00"
+}

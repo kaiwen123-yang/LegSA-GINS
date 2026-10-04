@@ -1,0 +1,10 @@
+{
+  "pid": 1241,
+  "pgid": 1241,
+  "controller": "/mnt/g/LegSA-GINS-project/\u4fee\u590d_20261004/run_claim_subset.py",
+  "controller_sha256": "f25c64e5c6f3b8ecd79a05b278d300462d9b43d017d2ac3aedb7280b1868958d",
+  "preregistration_sha256": "50674d262162968a06640c2870b80e28b64af57def0f950d27abc35bb3e4505b",
+  "captured_utc": "2026-10-04T06:48:48.927007+00:00",
+  "science_sources_frozen": true,
+  "all_native_seal_required_before_any_offline_reference_read": true
+}
