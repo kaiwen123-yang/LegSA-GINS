@@ -1,0 +1,12 @@
+import fs from 'node:fs/promises';
+import {Presentation,FileBlob} from '@oai/artifact-tool';
+const root='C:/Users/ykw/.codex/tmp/legsa_paper_deck_20261004';
+const p=Presentation.create({slideSize:{width:1280,height:660}}),s=p.slides.add();s.background.fill='#FFFFFF';
+const src='C:/Users/ykw/Desktop/3ea6720b5e477e28ce8bec9d475423f5.jpg',b=await fs.readFile(src);
+const tx=(t,x,y,w,h,size=27,bold=false)=>{let q=s.shapes.add({geometry:'textbox',position:{left:x,top:y,width:w,height:h},fill:'none',line:{fill:'none',width:0}});q.text=t;q.text.style={fontSize:size,typeface:'Arial',color:'#17212B',bold,wrap:'square',insets:{left:0,right:0,top:0,bottom:0}};};
+s.images.add({blob:b,contentType:'image/jpeg',alt:'Original platform photograph cropped without pixel editing',fit:'contain',crop:{left:.355,top:.28,right:.14,bottom:.12},position:{left:40,top:45,width:625,height:556.05}});
+s.images.add({blob:b,contentType:'image/jpeg',alt:'Magnification of original mounted assembly',fit:'contain',crop:{left:.51,top:.28,right:.28,bottom:.53},position:{left:732,top:88,width:500,height:339.15}});
+tx('(a) Experimental platform',40,4,620,35,27,true);tx('(b) Mounted sensing assembly',732,43,505,40,27,true);
+tx('Unitree Go2 quadruped',40,614,620,34,26);tx('Installation photograph and magnified detail',732,465,503,87,27);
+const im=await s.export({format:'png',scale:2});await fs.writeFile(root+'/.build/platform_figure.png',new Uint8Array(await im.arrayBuffer()));
+await fs.writeFile(root+'/.build/platform_figure.layout.json',await(await s.export({format:'layout'})).text());console.log('PLATFORM_FIGURE_RENDERED');
