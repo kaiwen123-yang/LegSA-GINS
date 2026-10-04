@@ -1,0 +1,35 @@
+{
+  "schema": "nominal_EXT_projected_quantity_result.v1",
+  "status": "ALL_FIXED_KEYS_AND_OLD_METRICS_REPRODUCED",
+  "preregistration_sha256": "b041cc31ba3966bb54d6c1a932ddb17fe0c259827f859e3635047858d3f945ed",
+  "source_sha256": "e2a3c4a30b363e62d0bb9bbee63c2031562d9bfe96bedea36ac904e8b811f51c",
+  "native_seal_review_sha256": "4f3f3e929ccad90266ad78db1fb5b59eb5b95c7bb87a699ea9a47d99a950bc36",
+  "reference_reads": [
+    {
+      "sequence": "BY2",
+      "trace_alias": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv",
+      "trace_observed_sha256": "ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c",
+      "trace_opens": 1
+    },
+    {
+      "sequence": "BY2H",
+      "trace_alias": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/trace_vrtk2_a87c6e_2026-03-06-08-06-39_minimal.csv",
+      "trace_observed_sha256": "8d11fe360753bfcdbc54f7bf793fcb25850c0997b7aaad4ec1c9f10859c0f84f",
+      "trace_opens": 1
+    },
+    {
+      "sequence": "BY2O",
+      "trace_alias": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv",
+      "trace_observed_sha256": "4f7b3007c6a0b43ce1b0fb4908f23c042891154b4adbc7af4c3d8a47ca363cd9",
+      "trace_opens": 1
+    }
+  ],
+  "new_native_invocations": 0,
+  "old_scored_keys": 7689,
+  "old_error_max_diff_deg": 0.0,
+  "old_rmse_max_diff_deg": 1.4210854715202004e-14,
+  "old_files_written": 0,
+  "summary_sha256": "7c5b570b2f06353bea91ff707b73ce8f3261adcb98218d9cbd9c41fba5fc356a",
+  "derived_errors_sha256": "ad6decccde8e410886f6a1930f36476b6bc0104a97ca01f65d017204495d1207",
+  "conclusion_scope": "Nominal -y geometry and frozen RP frame; actual antenna ordering/axis/mount not calibrated; no algorithm rank or universal unsuitability proof"
+}
