@@ -1,0 +1,224 @@
+{
+  "status": "VISUAL_REVIEW_PASS_WITH_NONBLOCKING_OVERVIEW_NOTE",
+  "time_utc": "2026-10-04T14:41:26.023638+00:00",
+  "reviewer": "fgo_reproduction_audit",
+  "scope": "Final imported/exported r2 PNG90–100 individually viewed; no builder or scientific source changes",
+  "ppt_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\output\\LegSA_GINS_完整研究汇报_20261004_r2.pptx",
+  "ppt_sha256": "a70b5536e4ee629b34f765a02fb51b3114aee336d29f972c46b37bd136c227ba",
+  "actual_ppt_slide_xml_count": 100,
+  "actual_exported_png_count": 100,
+  "ppt_last_write_utc": "2026-10-04T14:36:19.900531+00:00",
+  "slide100_last_write_utc": "2026-10-04T14:37:02.576330+00:00",
+  "final_render_identity_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\FINAL_RENDER_IDENTITY.json",
+  "final_render_identity_sha256": "cc87f1275d4d76729088f5a5b7c82e5998c4e8af7f2767f3ff9b13819c160f7d",
+  "final_render_identity_pages": 100,
+  "all_eleven_reviewed_png_hashes_match_final_identity": true,
+  "actual_individual_final_pages_opened": 11,
+  "actual_individual_original_figures_opened": 2,
+  "original_figures": [
+    {
+      "path": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\SFig02.png",
+      "sha256": "64e9730f4739ad3d87a29020bada3b5f6c0690cd18d4ac5f8b0ec94f1d1baa79",
+      "actual_original_image_opened": true,
+      "comparison_scope": "Original visible panels compared with final zoom views; visual checks only, no rescore"
+    },
+    {
+      "path": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\kaiwen\\research\\LegSA-GINS-WORKTREES\\audit-code-xbpg-20261001\\paper_package\\gpss_v0\\figures\\SFig01.png",
+      "sha256": "60d33668748ed53d047ed4db75d2d269397a1e66421481b34ea684846e623200",
+      "actual_original_image_opened": true,
+      "comparison_scope": "Original visible panels compared with final zoom views; visual checks only, no rescore"
+    }
+  ],
+  "pages": [
+    {
+      "page": 90,
+      "path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-090.png",
+      "sha256": "9eef1f688bb383d61e4fc2b29f3f7a916a1f0da756f80390c5f2e6b12af13d0d",
+      "pixels": [
+        1280,
+        720
+      ],
+      "last_write_utc": "2026-10-04T14:37:01.977827+00:00",
+      "actual_individual_view": true,
+      "view_detail_requested": "original",
+      "matches_final_render_identity": true,
+      "same_as_authoring_png": true,
+      "status": "VISUAL_PASS",
+      "note": "实际打开：原(a)–(c)三面板，D01–D60上下边界、五列方法、三个独立色标及单位完整；空白与原图相同，没有看到数据或刻度裁掉。"
+    },
+    {
+      "page": 91,
+      "path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-091.png",
+      "sha256": "471daf194236c38c6a76704046685771435bda82a4353158ed2d773c4ebea1e2",
+      "pixels": [
+        1280,
+        720
+      ],
+      "last_write_utc": "2026-10-04T14:37:02.069885+00:00",
+      "actual_individual_view": true,
+      "view_detail_requested": "original",
+      "matches_final_render_identity": true,
+      "same_as_authoring_png": true,
+      "status": "VISUAL_PASS",
+      "note": "实际打开：原(d)–(f)三面板，D01–D60、方法标签、roll/pitch/3D量纲和原空白完整；不同色标保留。"
+    },
+    {
+      "page": 92,
+      "path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-092.png",
+      "sha256": "7c5aaf8eb41b54e5be00f06a3cff8e81a279dacb6eb1d927af0b6dcd97c30b7c",
+      "pixels": [
+        1280,
+        720
+      ],
+      "last_write_utc": "2026-10-04T14:37:02.150647+00:00",
+      "actual_individual_view": true,
+      "view_detail_requested": "original",
+      "matches_final_render_identity": true,
+      "same_as_authoring_png": true,
+      "status": "VISUAL_PASS",
+      "note": "实际打开：原接触辅助六面板总览及图例完整。单面板字体偏小，作为刻意保留的总览可接受；93/94另作放大补足，不把本页当细读唯一来源。"
+    },
+    {
+      "page": 93,
+      "path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-093.png",
+      "sha256": "3905d7e7fbee023307f9202dbacbd43f7d7ab84a08eef27ae118e899ab6dcfdd",
+      "pixels": [
+        1280,
+        720
+      ],
+      "last_write_utc": "2026-10-04T14:37:02.230727+00:00",
+      "actual_individual_view": true,
+      "view_detail_requested": "original",
+      "matches_final_render_identity": true,
+      "same_as_authoring_png": true,
+      "status": "VISUAL_PASS",
+      "note": "实际打开：原(a)–(c)完整位置漂移面板，三序列、五方法、0/20/40刻度、每100m单位及BY2H两个Initialization stopped保留；没有截去数据。"
+    },
+    {
+      "page": 94,
+      "path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-094.png",
+      "sha256": "4be7fa0f3b7629c177b857c0c224c0c8854f27e8e4ea117e7be921b36a36eb72",
+      "pixels": [
+        1280,
+        720
+      ],
+      "last_write_utc": "2026-10-04T14:37:02.304819+00:00",
+      "actual_individual_view": true,
+      "view_detail_requested": "original",
+      "matches_final_render_identity": true,
+      "same_as_authoring_png": true,
+      "status": "VISUAL_PASS",
+      "note": "实际打开：原(d)–(f)完整航向漂移面板，五方法、0/250/500刻度、每分钟单位和BY2H初始化失败保留；BY2O高漂移标记近500仍完整可见，不裁去不利值。"
+    },
+    {
+      "page": 95,
+      "path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-095.png",
+      "sha256": "1cc9058265c120730335f08bd80eaf6056172fba533299f808a2327fc5513ca5",
+      "pixels": [
+        1280,
+        720
+      ],
+      "last_write_utc": "2026-10-04T14:37:02.346817+00:00",
+      "actual_individual_view": true,
+      "view_detail_requested": "original",
+      "matches_final_render_identity": true,
+      "same_as_authoring_png": true,
+      "status": "VISUAL_PASS",
+      "note": "实际打开：五路线边界表格全部文字可读，无文本溢出；SDK代理/相对规范/不同输入及失败边界明确，没有宣称完整传感器复现。"
+    },
+    {
+      "page": 96,
+      "path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-096.png",
+      "sha256": "6dd32fe018f1c42784e8af9d3505b2c590f4ebcc2647f670b7e13c8c715b44e7",
+      "pixels": [
+        1280,
+        720
+      ],
+      "last_write_utc": "2026-10-04T14:37:02.395754+00:00",
+      "actual_individual_view": true,
+      "view_detail_requested": "original",
+      "matches_final_render_identity": true,
+      "same_as_authoring_png": true,
+      "status": "VISUAL_PASS",
+      "note": "实际打开：五个结果层及原V3/EXT/IMU33+135/FGO严格/分段身份清楚，3新Oi+6复用Wen/GNC与prior-only排除明确；无文字裁切。"
+    },
+    {
+      "page": 97,
+      "path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-097.png",
+      "sha256": "f1e55c7ebc5c55812cf959eb16c903f4355d2f05fa46c3f2a79b861538e5d7dc",
+      "pixels": [
+        1280,
+        720
+      ],
+      "last_write_utc": "2026-10-04T14:37:02.441462+00:00",
+      "actual_individual_view": true,
+      "view_detail_requested": "original",
+      "matches_final_render_identity": true,
+      "same_as_authoring_png": true,
+      "status": "VISUAL_PASS",
+      "note": "实际打开：四条GNSS几何文献表作者、题名和DOI完整可读，换行在单元格内；本次只核显示，不另审论文或DOI准确性。"
+    },
+    {
+      "page": 98,
+      "path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-098.png",
+      "sha256": "586e66827515a0a4fc0a806c5176e79372b17508c95234bfe9e1e8471fe13e97",
+      "pixels": [
+        1280,
+        720
+      ],
+      "last_write_utc": "2026-10-04T14:37:02.485198+00:00",
+      "actual_individual_view": true,
+      "view_detail_requested": "original",
+      "matches_final_render_identity": true,
+      "same_as_authoring_png": true,
+      "status": "VISUAL_PASS",
+      "note": "实际打开：五条测量与状态估计文献/标准表均可读，无覆盖；本次只核显示，不扩张为标准内容或文献真实性审查。"
+    },
+    {
+      "page": 99,
+      "path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-099.png",
+      "sha256": "0ee6c0e841c465c38774f8da65babb8251b26555bc4ec7569bc00131b62eab84",
+      "pixels": [
+        1280,
+        720
+      ],
+      "last_write_utc": "2026-10-04T14:37:02.535355+00:00",
+      "actual_individual_view": true,
+      "view_detail_requested": "original",
+      "matches_final_render_identity": true,
+      "same_as_authoring_png": true,
+      "status": "VISUAL_PASS",
+      "note": "实际打开：三篇FGO DOI及记录位置完整；长FGO_COMPLETE_AUDIT_20261004分两行显示但未缺字，备注保留工程差异且不声称完整作者实验。"
+    },
+    {
+      "page": 100,
+      "path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-100.png",
+      "sha256": "97beb9c44579bf7217fc234cedb74ef9a9f05ed5019442b6c2f9beb9beac50b3",
+      "pixels": [
+        1280,
+        720
+      ],
+      "last_write_utc": "2026-10-04T14:37:02.576330+00:00",
+      "actual_individual_view": true,
+      "view_detail_requested": "original",
+      "matches_final_render_identity": true,
+      "same_as_authoring_png": true,
+      "status": "VISUAL_PASS",
+      "note": "实际打开：三项后续问题及底部讨论要求清楚、层次可读，无重叠或裁切；问题式表述没有当作已经闭合的新科学结论。"
+    }
+  ],
+  "blockers": [],
+  "nonblocking_notes": [
+    "P92 six-panel original overview remains dense by design; P93/P94 zoom panels provide the readable details.",
+    "P99 long audit-folder name wraps across lines; all characters remain visible."
+  ],
+  "not_claimed": [
+    "This receipt does not visually review other89pages.",
+    "Visual panel/axis preservation is not a fresh numerical or statistical validation.",
+    "DOI/standard authenticity not independently rechecked here."
+  ],
+  "builder_modified": false,
+  "no_solver_calls": true,
+  "no_evaluator_calls": true,
+  "raw_reference_payload_opens": 0
+}

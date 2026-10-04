@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-04T14:43:09.550698+00:00",
+  "reviewer": "venue_readiness_audit",
+  "status": "R2_NINE_TARGET_PAGES_MATERIAL_REVIEW_PASS",
+  "r2_pptx_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\output\\LegSA_GINS_完整研究汇报_20261004_r2.pptx",
+  "r2_pptx_sha256": "a70b5536e4ee629b34f765a02fb51b3114aee336d29f972c46b37bd136c227ba",
+  "pptx_binary_hash_independently_verified": true,
+  "r2_total_pages": 100,
+  "final_render_identity_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\FINAL_RENDER_IDENTITY.json",
+  "final_render_identity_sha256": "cc87f1275d4d76729088f5a5b7c82e5998c4e8af7f2767f3ff9b13819c160f7d",
+  "actual_individual_png_views": 9,
+  "unique_pages_reviewed": [
+    49,
+    51,
+    66,
+    68,
+    76,
+    78,
+    80,
+    85,
+    88
+  ],
+  "all_reviewed_png_identity_checks_passed": true,
+  "material_issues_remaining": 0,
+  "nonblocking_layout_notes": [
+    {
+      "slide": 66,
+      "issue": "An isolated fullstop on a separate line at firstitem end",
+      "closure_owner": "root will make only natural linebreak edits in a separate final file and re-view66; this r2 receipt stays unchanged"
+    }
+  ],
+  "slides": [
+    {
+      "slide": 49,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-049.png",
+      "png_sha256": "68eabdd4bca0f6b271cbc9ce14050248cf15fe1749c2a8bd045753b7912c476c",
+      "bytes": 115925,
+      "actual_individual_view": true,
+      "matches_r2_final_render_identity": true,
+      "material_content_review_passed": true,
+      "layout_readable": true,
+      "review_note": "Formal-window7689 and full-native9100 shown separately with explicit different-domain/no-coverage-fraction statement. Nominal tilt result bounds unchanged.",
+      "issue_closures": [
+        "FINAL-049-SUPPORT"
+      ],
+      "minor_note": false
+    },
+    {
+      "slide": 51,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-051.png",
+      "png_sha256": "316c058af5fa029b522611fe01c50f229de0ac976a02be16989208f0fb320e03",
+      "bytes": 85159,
+      "actual_individual_view": true,
+      "matches_r2_final_render_identity": true,
+      "material_content_review_passed": true,
+      "layout_readable": true,
+      "review_note": "Single-initialization table heading now explicit. StrictH0/O55 and1/3/7blocks, reset/prior-only/failure denominator all preserved.",
+      "issue_closures": [
+        "FINAL-051-LABEL"
+      ],
+      "minor_note": false
+    },
+    {
+      "slide": 66,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-066.png",
+      "png_sha256": "e6d0d17d24899f106daaefa8c676ace69ea70ebf806adae251fcced6088d4a64",
+      "bytes": 94524,
+      "actual_individual_view": true,
+      "matches_r2_final_render_identity": true,
+      "material_content_review_passed": true,
+      "layout_readable": true,
+      "review_note": "Conditional geometry/time/status and independent-new-installation validation boundary correct. Minor isolated final fullstop in firstitem remains; parent will correct and re-view only this page in a separate final version.",
+      "issue_closures": [
+        "FINAL-066-096-WRAP:scientific_only"
+      ],
+      "minor_note": true
+    },
+    {
+      "slide": 68,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-068.png",
+      "png_sha256": "bce5068014c41bdc643dec030b2d078085f1583694517ad2d2abf642d549c1e6",
+      "bytes": 117875,
+      "actual_individual_view": true,
+      "matches_r2_final_render_identity": true,
+      "material_content_review_passed": true,
+      "layout_readable": true,
+      "review_note": "RV/heading joint structural comparison replaces pureRV inference; RD/HV paired/availability scope correct.",
+      "issue_closures": [
+        "FINAL-068-088-RV"
+      ],
+      "minor_note": false
+    },
+    {
+      "slide": 76,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-076.png",
+      "png_sha256": "9c8e637911d2561cf5aa09cee50f7cf2575288c106f85b83c03b3799dfe736ba",
+      "bytes": 102672,
+      "actual_individual_view": true,
+      "matches_r2_final_render_identity": true,
+      "material_content_review_passed": true,
+      "layout_readable": true,
+      "review_note": "C explicitly error covariance and angle rad. Cross blocks retained; projection Jacobian signs/units correct.",
+      "issue_closures": [
+        "FINAL-076-DEFINITIONS"
+      ],
+      "minor_note": false
+    },
+    {
+      "slide": 78,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-078.png",
+      "png_sha256": "4ce4a7e7b3d15d4a731f09dcadb559f1fa8f7ce2a9ed61027d4b3679323f3379",
+      "bytes": 102338,
+      "actual_individual_view": true,
+      "matches_r2_final_render_identity": true,
+      "material_content_review_passed": true,
+      "layout_readable": true,
+      "review_note": "Common-translation firstorder domain and Δt=t2−t1 explicitly defined; generalrotation/pointvelocity boundary retained.",
+      "issue_closures": [
+        "FINAL-078-DOMAIN"
+      ],
+      "minor_note": false
+    },
+    {
+      "slide": 80,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-080.png",
+      "png_sha256": "60099c0b027357b4829d4567684e63af66f5806300f5bd5eef85c23ee6257111",
+      "bytes": 119241,
+      "actual_individual_view": true,
+      "matches_r2_final_render_identity": true,
+      "material_content_review_passed": true,
+      "layout_readable": true,
+      "review_note": "Body-right δα^b rad, C_b^n body→navigation and −C_b^n[v^b]×δα^b formula consistent. Jointcrosscovariance and separate discrete/model errors retained.",
+      "issue_closures": [
+        "FINAL-080-FRAME"
+      ],
+      "minor_note": false
+    },
+    {
+      "slide": 85,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-085.png",
+      "png_sha256": "7841d95135c5c5b39d4671c5178be9bec63b9e03d6f6120a066e293cc6f283c0",
+      "bytes": 114081,
+      "actual_individual_view": true,
+      "matches_r2_final_render_identity": true,
+      "material_content_review_passed": true,
+      "layout_readable": true,
+      "review_note": "Current completion is ten model equations and budget framework; calibration/reference/validation remain future evidence.",
+      "issue_closures": [
+        "FINAL-085-BUDGET"
+      ],
+      "minor_note": false
+    },
+    {
+      "slide": 88,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\final_exported\\slide-088.png",
+      "png_sha256": "1ee84387da57d9edcfb43447b663a7069e41a9482fe5550ad10b1d24ea173216",
+      "bytes": 100573,
+      "actual_individual_view": true,
+      "matches_r2_final_render_identity": true,
+      "material_content_review_passed": true,
+      "layout_readable": true,
+      "review_note": "F02 fixedSTD2.933193° directheading and RVoff versus F03RV+SchemeC explicitly shown. No pureRV effect; F01shareddualheadinginit remains.",
+      "issue_closures": [
+        "FINAL-068-088-RV"
+      ],
+      "minor_note": false
+    }
+  ],
+  "all_material_checks_passed": true,
+  "scope": "Targetedr2 PNGreview only. Previous52page candidate receipt remains historical; r2 appendix90–100 andother changedpages reviewed by other owners.",
+  "entire_deck_acceptance_assessed": false,
+  "submission_ready": false,
+  "scientific_runs": 0,
+  "raw_or_reference_payload_reads": 0,
+  "builder_changes": 0,
+  "scientific_source_or_result_changes": 0,
+  "next_export_rule": "To carry this targetedreview forward, all these PNGs except explicit66 change must remain byte-exact; changed66 needs root actual re-view. No claim that instrument uncertainty was calibrated."
+}

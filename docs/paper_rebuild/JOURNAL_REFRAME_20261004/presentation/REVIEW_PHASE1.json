@@ -1,0 +1,341 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-04T14:03:05.012249+00:00",
+  "reviewer": "venue_readiness_audit",
+  "scope": "Actual individual view of phase1 slide-01.png through slide-20.png only",
+  "status": "REVIEWED_WITH_REQUIRED_CORRECTIONS",
+  "actual_png_views": 20,
+  "png_identity_unchanged_count": 20,
+  "required_correction_count": 4,
+  "minor_note_count": 5,
+  "slides": [
+    {
+      "slide": 1,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-01.png",
+      "sha256_at_pre_view": "af59421510e59eab8df80e7a085cf27221c9a105e08f4624ed35b4e261e1f9f3",
+      "sha256_at_review_close": "af59421510e59eab8df80e7a085cf27221c9a105e08f4624ed35b4e261e1f9f3",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Title, subtitle and university-template layout readable; no algorithm-final-name or calibrated-performance claim.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_ISSUE_SEEN"
+    },
+    {
+      "slide": 2,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-02.png",
+      "sha256_at_pre_view": "8ac14065c871b91be88f39a835de54ac661a133e05ea6685d5846f092b07a54b",
+      "sha256_at_review_close": "8ac14065c871b91be88f39a835de54ac661a133e05ea6685d5846f092b07a54b",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Report structure readable; three parallel work areas and appendix placement clear.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_ISSUE_SEEN"
+    },
+    {
+      "slide": 3,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-03.png",
+      "sha256_at_pre_view": "4bd5e12a3ae98600e0baec646009f1706b21b306292de6b5d9cc409d0031390c",
+      "sha256_at_review_close": "4bd5e12a3ae98600e0baec646009f1706b21b306292de6b5d9cc409d0031390c",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Actual installation photo and enlargement readable; caption correctly defers geometric calibration to records.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_ISSUE_SEEN"
+    },
+    {
+      "slide": 4,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-04.png",
+      "sha256_at_pre_view": "fb7b86acc47a2f745a4ea4b42f42841f44a4c7870adf9609f41db21430ce7e01",
+      "sha256_at_review_close": "fb7b86acc47a2f745a4ea4b42f42841f44a4c7870adf9609f41db21430ce7e01",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Body yaw versus velocity course distinction correct; independent of continuous forward motion does not claim independent GNSS lineage.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_ISSUE_SEEN"
+    },
+    {
+      "slide": 5,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-05.png",
+      "sha256_at_pre_view": "c73376f7b2595229ff25055c18cc2f6a927d221edd70ec8d531e82eca3bd7975",
+      "sha256_at_review_close": "c73376f7b2595229ff25055c18cc2f6a927d221edd70ec8d531e82eca3bd7975",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Two research questions and natural/fault validation paths clear.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_ISSUE_SEEN"
+    },
+    {
+      "slide": 6,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-06.png",
+      "sha256_at_pre_view": "25f3f70d2cd8d66ea74e163800a8975ba5ed218535417a09d65a452bdf616172",
+      "sha256_at_review_close": "25f3f70d2cd8d66ea74e163800a8975ba5ed218535417a09d65a452bdf616172",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "b=p2-p1 arrow correctly points from GNSS1 to GNSS2; IMU→GNSS1 lever arrow correct. Nominal length and declared lever/point distinction explicit.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_ISSUE_SEEN"
+    },
+    {
+      "slide": 7,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-07.png",
+      "sha256_at_pre_view": "cfb1ccfc6c9fa18d728cc437b2388885742067ca507d3defd6925cb7688c2cb2",
+      "sha256_at_review_close": "cfb1ccfc6c9fa18d728cc437b2388885742067ca507d3defd6925cb7688c2cb2",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Table is readable; information-level fairness caveat appropriate. English word wrap and SDK role need refinement.",
+      "issue_ids": [
+        "PH1-07-WRAP",
+        "PH1-07-SDK"
+      ],
+      "status": "REVIEWED_MINOR_NOTES"
+    },
+    {
+      "slide": 8,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-08.png",
+      "sha256_at_pre_view": "8cfd39ea119f0f8cbf5ed8e579ee5da83b64a6795074479c043b920a0a5b06d3",
+      "sha256_at_review_close": "8cfd39ea119f0f8cbf5ed8e579ee5da83b64a6795074479c043b920a0a5b06d3",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Left sources→admission→EKF/output arrow directions correct. Shared dependency is simplified but described later. Dual-position-difference label ambiguous.",
+      "issue_ids": [
+        "PH1-08-DIFFERENCE"
+      ],
+      "status": "REVIEWED_MINOR_NOTES"
+    },
+    {
+      "slide": 9,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-09.png",
+      "sha256_at_pre_view": "3c1610c17b6dafa32823c909687a7999d1e9098c78142568f29988221c98a7a1",
+      "sha256_at_review_close": "3c1610c17b6dafa32823c909687a7999d1e9098c78142568f29988221c98a7a1",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Six sources and actual HV heading/scheduling dependency readable; carrier status is an admission condition, not a correctness proof.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_ISSUE_SEEN"
+    },
+    {
+      "slide": 10,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-10.png",
+      "sha256_at_pre_view": "27db49178090d4e467ee130147ce241630362a5731cba05505547f0d82a56f7d",
+      "sha256_at_review_close": "27db49178090d4e467ee130147ce241630362a5731cba05505547f0d82a56f7d",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Baseline-difference heading and projection amplification concept correct; angular-unit and notation clarification required.",
+      "issue_ids": [
+        "PH1-10-UNITS"
+      ],
+      "status": "REQUIRES_CORRECTION"
+    },
+    {
+      "slide": 11,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-11.png",
+      "sha256_at_pre_view": "4799d1461404cf48260f15d954f38fed41941a9244de9f28385918b978111fe9",
+      "sha256_at_review_close": "4799d1461404cf48260f15d954f38fed41941a9244de9f28385918b978111fe9",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Left-to-right software gate arrows correctly directed; fixed-status-not-probability caveat retained. Hardware clock distinction recommended.",
+      "issue_ids": [
+        "PH1-11-CLOCK"
+      ],
+      "status": "REVIEWED_MINOR_NOTES"
+    },
+    {
+      "slide": 12,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-12.png",
+      "sha256_at_pre_view": "6f1cb9d0151c67f650baa0e45ad973b0a0e37eabcf1a2eda68454ebf7e69686f",
+      "sha256_at_review_close": "6f1cb9d0151c67f650baa0e45ad973b0a0e37eabcf1a2eda68454ebf7e69686f",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Residual pred−obs equation and soft/hard gate table readable; residual includes observation/prediction common effects. Original covariance multiplier/source identity not numerically rechecked in this PNG-only pass.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_ISSUE_SEEN"
+    },
+    {
+      "slide": 13,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-13.png",
+      "sha256_at_pre_view": "70e4eeec6387453bb815cc8e8cbc06bcdb0e64231f2871a44606afa86e7442be",
+      "sha256_at_review_close": "70e4eeec6387453bb815cc8e8cbc06bcdb0e64231f2871a44606afa86e7442be",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "15-active-state presentation avoids all-21-active claim; frozen six scale slots and Joseph update named. Standard covariance/innovation equations readable.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_ISSUE_SEEN"
+    },
+    {
+      "slide": 14,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-14.png",
+      "sha256_at_pre_view": "c7bb0bc3c56202a07194444ef5be5d8663a1ac25f40d7c135f2013ef29b0f121",
+      "sha256_at_review_close": "c7bb0bc3c56202a07194444ef5be5d8663a1ac25f40d7c135f2013ef29b0f121",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "GNSS1 fork into RV/RD then estimator is semantically correct; RV remains when RD disabled; independence is not claimed.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_ISSUE_SEEN"
+    },
+    {
+      "slide": 15,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-15.png",
+      "sha256_at_pre_view": "cab67578d4861ebb7994cb5b4ca404fc18b69859d8ee419da37b9ef24a7226d9",
+      "sha256_at_review_close": "cab67578d4861ebb7994cb5b4ca404fc18b69859d8ee419da37b9ef24a7226d9",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "All inputs point into transform then HV, but the displayed transform is incomplete and must distinguish engineering Ĉ from true attitude.",
+      "issue_ids": [
+        "PH1-15-MODEL"
+      ],
+      "status": "REQUIRES_CORRECTION"
+    },
+    {
+      "slide": 16,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-16.png",
+      "sha256_at_pre_view": "234b7ef3d384c1592dc763782dca271992775425f956725408192eae0f08260d",
+      "sha256_at_review_close": "234b7ef3d384c1592dc763782dca271992775425f956725408192eae0f08260d",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Order arrows visually correct; source availability and scheduling limitations readable, with acceptance wording refinement advised.",
+      "issue_ids": [
+        "PH1-16-ADMISSION"
+      ],
+      "status": "REVIEWED_MINOR_NOTES"
+    },
+    {
+      "slide": 17,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-17.png",
+      "sha256_at_pre_view": "1667f678f15c531f9c0079262aa03c0583c237012ead15a48986cb32964d6a92",
+      "sha256_at_review_close": "1667f678f15c531f9c0079262aa03c0583c237012ead15a48986cb32964d6a92",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Inflation-cap bar chart and formula readable; engineering weight is explicitly separated from metrological uncertainty. No independent re-evaluation of cap values here.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_ISSUE_SEEN"
+    },
+    {
+      "slide": 18,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-18.png",
+      "sha256_at_pre_view": "6b793c5b2efa9ef68c7560259bd3fc2621ffe06bae20bc80c0291184cb9b4e4b",
+      "sha256_at_review_close": "6b793c5b2efa9ef68c7560259bd3fc2621ffe06bae20bc80c0291184cb9b4e4b",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Reference-agreement caveat is correct, but input bus falsely visually connects Go2 IMU/SDK to commercial reference.",
+      "issue_ids": [
+        "PH1-18-LINEAGE"
+      ],
+      "status": "REQUIRES_CORRECTION"
+    },
+    {
+      "slide": 19,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-19.png",
+      "sha256_at_pre_view": "9f6ea9c9c625ccea016efce8e48d7ffdc7f9d02ce7e7ca0d0f372b555af36a3d",
+      "sha256_at_review_close": "9f6ea9c9c625ccea016efce8e48d7ffdc7f9d02ce7e7ca0d0f372b555af36a3d",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Three windows, duration/matched epochs/path lengths table readable. Numbers are rendered, not independently recalculated; selection/nonblind and original-version scope need explicit labeling.",
+      "issue_ids": [
+        "PH1-19-SELECTION"
+      ],
+      "status": "REQUIRES_CORRECTION"
+    },
+    {
+      "slide": 20,
+      "png_path": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\phase1\\slide-20.png",
+      "sha256_at_pre_view": "c363dc8a55e2fa5ad9c0f0dfef1c551e85b7b2f6d679557df10fcf7ca7024165",
+      "sha256_at_review_close": "c363dc8a55e2fa5ad9c0f0dfef1c551e85b7b2f6d679557df10fcf7ca7024165",
+      "identity_unchanged_during_review": true,
+      "actual_individual_view": true,
+      "review_note": "Rendered matrix arithmetic 541×11=5951,45×11=495,2×11=22,total6468 and588cases is internally consistent; independence disclaimer is present.",
+      "issue_ids": [],
+      "status": "REVIEWED_NO_ISSUE_SEEN"
+    }
+  ],
+  "issues": [
+    {
+      "id": "PH1-15-MODEL",
+      "slide": 15,
+      "priority": "P1",
+      "type": "measurement_equation",
+      "observation": "Rendered HV equation omits declared gain k and FLU→FRD M; uses C rather than engineering proxy Ĉ and shows SDK pitch without the actual negative-pitch construction. Historical A1 label can imply a delayed online observation.",
+      "requested_change": "Use z_H=k Π_H Ĉ M v_SDK(FLU), M=diag(1,-1,-1); explicitly state Ĉ=Rz(pre-generated projection heading) Ry(-SDK pitch) Rx(SDK roll). Rename historical A1 to pre-generated dual-position-difference heading. Do not imply Ĉ is calibrated true attitude.",
+      "known_to_root": true
+    },
+    {
+      "id": "PH1-18-LINEAGE",
+      "slide": 18,
+      "priority": "P1",
+      "type": "arrow_semantics",
+      "observation": "The Go2 IMU/SDK line enters the same vertical branch bus used for shared GNSS; that bus also points into the commercial reference. This visually depicts Go2 IMU/SDK being consumed by the commercial reference, which is not evidenced.",
+      "requested_change": "Fork only shared GNSS into commercial reference and proposed estimator. Connect Go2 IMU/SDK separately to proposed estimator, with no merge into the upper reference branch. Keep camera/own IMU within reference.",
+      "known_to_root": false
+    },
+    {
+      "id": "PH1-10-UNITS",
+      "slide": 10,
+      "priority": "P1",
+      "type": "equation_units",
+      "observation": "δψ≈δb_perp/||b_H|| is a radian small-angle relation, while the nearby heading formula is rendered with +90 degrees. δb_perp and b_H are undefined on the page.",
+      "requested_change": "Mark δψ in rad; define δb_perp as signed transverse horizontal baseline error and b_H as horizontal baseline projection. If degrees are used, include 180/π.",
+      "known_to_root": false
+    },
+    {
+      "id": "PH1-19-SELECTION",
+      "slide": 19,
+      "priority": "P1",
+      "type": "inference_scope",
+      "observation": "Frozen-setting transfer check for H/O can be read as blind held-out evaluation. Historical configuration/selection had reference-visible development and previously viewed O results. This page does not disclose that boundary.",
+      "requested_change": "Add a concise boundary: same-installation sequence transfer, not an unseen-data/independent-installation blind test; historical selection saw reference/results. Bind these counts as original V3 rather than diagnostic rerun counts.",
+      "known_to_root": false
+    },
+    {
+      "id": "PH1-07-WRAP",
+      "slide": 7,
+      "priority": "P2",
+      "type": "layout",
+      "observation": "Doppler is split across table lines as Do / ppler in proposed-input cell.",
+      "requested_change": "Use an intentional line break before Doppler or widen/rephrase the cell so the English word stays intact.",
+      "known_to_root": false
+    },
+    {
+      "id": "PH1-07-SDK",
+      "slide": 7,
+      "priority": "P2",
+      "type": "terminology",
+      "observation": "SDK weak prior does not identify the actual SDK inclination and horizontal-velocity observation paths.",
+      "requested_change": "Prefer robot body IMU plus SDK inclination/horizontal-velocity aiding; clarify actual measurement updates rather than only initialization priors.",
+      "known_to_root": false
+    },
+    {
+      "id": "PH1-08-DIFFERENCE",
+      "slide": 8,
+      "priority": "P2",
+      "type": "terminology",
+      "observation": "双位置差 is ambiguous wording for a difference between two receiver position solutions.",
+      "requested_change": "Use 双接收机位置差.",
+      "known_to_root": false
+    },
+    {
+      "id": "PH1-11-CLOCK",
+      "slide": 11,
+      "priority": "P2",
+      "type": "timing_scope",
+      "observation": "时间精确配对 is tied to integer iTOW in the subtitle, but physical synchronization is not distinguished on the diagram.",
+      "requested_change": "Prefer 整数iTOW精确配键; add that software pairing does not establish synchronization of all hardware/IMU/reference clocks.",
+      "known_to_root": false
+    },
+    {
+      "id": "PH1-16-ADMISSION",
+      "slide": 16,
+      "priority": "P2",
+      "type": "admission_wording",
+      "observation": "GNSS event valid + provider valid -> enters update could be read as guaranteed accepted measurement. Enabled flags, range checks and gates still matter.",
+      "requested_change": "Say enters corresponding admission/update procedure; acceptance is determined by actual dispatch and gates.",
+      "known_to_root": false
+    }
+  ],
+  "limits": [
+    "No PPTX or builder editing",
+    "No inspection of slides beyond20",
+    "No claim of final deck acceptance or manuscript submission readiness",
+    "No new scientific computation or experiment",
+    "Displayed result/source parameter values were not independently recomputed in this PNG review"
+  ],
+  "next_review": "Re-render changed slides and inspect final pages separately; retain this historical phase1 receipt."
+}

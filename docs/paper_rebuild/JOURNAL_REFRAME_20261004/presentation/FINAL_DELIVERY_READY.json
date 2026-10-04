@@ -1,0 +1,96 @@
+{
+  "status": "READY",
+  "checks_passed": true,
+  "files": [
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/CANDIDATE_96_FINAL_RENDER_IDENTITY.json",
+      "bytes": 17684,
+      "sha256": "0e30dae15372e3d5aa363490371a65879d29ad29b4a9813c9b77f63f9ea93a9e"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/DECK_SOURCE_INDEX.json",
+      "bytes": 59453,
+      "sha256": "f87315d08fe819b0a2ef05304f9c6692baa73823c7030df0056ad4d97e0af175"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/FINAL_RENDER_IDENTITY.json",
+      "bytes": 18407,
+      "sha256": "5b83692dd127abd2af4a36ee60b8ff17a7aa27a3e4707a3a64de2a58afc755f2"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/FINAL_VALIDATION.json",
+      "bytes": 13231,
+      "sha256": "b73ac2aa85623b387d8e1c2377a4d16935d03416e4d1a665e6017e65faf6db37"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/FINAL_VISUAL_ACCEPTANCE.json",
+      "bytes": 23879,
+      "sha256": "f0b92a2b7f230f952e1ca68235da3c05c68a2b2212a720c0a6bfe98b3b875be5"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/LegSA_GINS_研究汇报_20261004.pdf",
+      "bytes": 13676799,
+      "sha256": "b87a0c3f4fdeb0d3f85cf424738546fad3cfea3e2cc128b678fba48cc04b1940"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/LegSA_GINS_研究汇报_20261004.pptx",
+      "bytes": 23972572,
+      "sha256": "5c210e9561ff1fac9d9595e0c2aea789d744d32fc4f46f515fc383a5132d699f"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/NATIVE_POWERPOINT_PDF_CHECK.json",
+      "bytes": 2442,
+      "sha256": "a5057f0c01822475f78a4dd4500131948ed74a8429a9c571b51fa163c7e4a06c"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/R2_FINAL_RENDER_IDENTITY.json",
+      "bytes": 18416,
+      "sha256": "cc87f1275d4d76729088f5a5b7c82e5998c4e8af7f2767f3ff9b13819c160f7d"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/R2_NATIVE_POWERPOINT_PDF_CHECK.json",
+      "bytes": 2245,
+      "sha256": "c7333ae626a1d31f3191f8e275c4797b9377bf9be5a7311f811fe79eb489dd71"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/REVIEW_FINAL_PAGES_001_020.json",
+      "bytes": 18477,
+      "sha256": "37128954269a82774219aa75bd8c76902a1c78b81cb3590838889bd249d93ec3"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/REVIEW_FINAL_PAGES_049_096.json",
+      "bytes": 46569,
+      "sha256": "5edcd766c6766f4c0c583d6faa21057bac07338bb1a6f43cb58925ab1503eafc"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/REVIEW_PHASE1.json",
+      "bytes": 18868,
+      "sha256": "f9073a15f6c95dd0827fc3a15ade8311aa445b874194ba8bd98d59d1c25813b1"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/REVIEW_R2_APPENDIX_090_100.json",
+      "bytes": 10706,
+      "sha256": "d3c35b659cb7d67efcaaa6a527817413113815aa99773520b8fe40766b48506a"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/REVIEW_R2_ROOT_CORRECTIONS.json",
+      "bytes": 1214,
+      "sha256": "0be8167d025d92f18df39cc26f316a15ee6be30eaf135920fae19932ce2814e6"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/REVIEW_R2_VENUE_CORRECTIONS.json",
+      "bytes": 8125,
+      "sha256": "ad68b2f5120cfd9488618a38fd9680152567bf871a3049c35eb6ec54d224a6cb"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/REVIEW_ROOT_PAGES_021_048_AND_053.json",
+      "bytes": 6533,
+      "sha256": "fe4ee0a20a930dce6c32617930aa5cbcd5e39f56334804f584128b3c5639d4a3"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/template_compatibility.json",
+      "bytes": 1780,
+      "sha256": "8b839e95b65a26ad4d535bdf81745462d041b5c11f05c954a228af646666cff3"
+    }
+  ]
+}
