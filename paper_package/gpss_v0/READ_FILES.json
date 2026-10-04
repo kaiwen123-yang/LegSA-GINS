@@ -170,9 +170,19 @@
     "bytes": 39229
   },
   {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/ext_nominal_root_review.json",
+    "sha256": "a9b08c9a99a25da5f0f7f2e6d8760fe7b9e626a0d31c1fca52c3e5c7b91b6844",
+    "bytes": 1393
+  },
+  {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_metrics.csv",
     "sha256": "ca94b8f945e7b2d5cde1725b480e7991a4286f98c7239b41ddc20d7dd8aa3357",
     "bytes": 23899
+  },
+  {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "sha256": "909423246d8944c1f39e7069e37c011bbcef1cba57dbac6173836b778c530a27",
+    "bytes": 6606
   },
   {
     "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/natural33.csv",

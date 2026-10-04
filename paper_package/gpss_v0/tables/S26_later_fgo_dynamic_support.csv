@@ -1,0 +1,10 @@
+Sequence,Method,Own dynamic support,H RMSE (m),V RMSE (m),3D RMSE (m),Yaw RMSE (deg)
+BY2,OiSAM (gap-segmented diagnostic),275/275,0.097867,0.044704,0.107594,4.652921
+BY2,Wen tightly coupled (reused batch),274/275,7.692119,11.281932,13.654694,NA
+BY2,GNC (reused batch),274/275,2.173504,4.543967,5.037039,NA
+BY2H,OiSAM (gap-segmented diagnostic),267/271,0.064957,0.041759,0.077222,2.534907
+BY2H,Wen tightly coupled (reused batch),270/271,7.672239,12.139729,14.360929,NA
+BY2H,GNC (reused batch),270/271,2.134280,4.212907,4.722683,NA
+BY2O,OiSAM (gap-segmented diagnostic),370/378,0.052046,0.038648,0.064826,3.971789
+BY2O,Wen tightly coupled (reused batch),377/378,9.583724,16.424586,19.016172,NA
+BY2O,GNC (reused batch),377/378,2.724164,2.945937,4.012433,NA

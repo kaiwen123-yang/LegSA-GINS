@@ -95,6 +95,12 @@ def emit(key,section,quoted=None):
         _,family,duration,ablation,domain,metric,column,digits=key.split('|');csvspec(key,P/'evidence/claim_placement280.csv',{'family':family,'duration_s':duration,'ablation_method':ablation,'domain':domain,'metric':metric},column,int(digits))
     if key.startswith('FGO|'):
         _,seq,method,column=key.split('|');csvspec(key,P/'evidence/fgo_metrics.csv',{'sequence_id':seq,'method_id':method,'support':'OWN_VALID'},column,0 if column.endswith('count') else 3)
+    if key.startswith('EXTQ|'):
+        p=P/'evidence/ext_nominal_root_review.json';v=json.loads(record(p).read_text());parts=[int(x) if x.isdigit() else x for x in key.split('|')[1:-1]];digits=int(key.split('|')[-1])
+        for field in parts:v=v[field]
+        SPECS[key]={'path':str(p),'locator':{'key_path':parts,'display_digits':digits},'mode':'YAML','value':v,'digits':digits}
+    if key.startswith('SEG|'):
+        _,seq,method,column=key.split('|');csvspec(key,P/'evidence/fgo_segmented_primary_own.csv',{'sequence_id':seq,'method_id':method,'support_role':'PRIMARY_DYNAMIC_ONLY','support':'OWN_VALID'},column,0 if column.endswith('count') else 6)
     if key.startswith('UA|'):ua_csvspec(key)
     sp=SPECS[key];value=Decimal(sp['source_value']) if 'source_value' in sp else sp['value'];display=f"{value:.{sp['digits']}f}"
     cid=claim_id(key)
@@ -112,6 +118,8 @@ def emit(key,section,quoted=None):
     if key.startswith('NAT|'):unit='deg' if 'yaw_' in key else 'epochs' if key.endswith('epochs') else 'restarts' if 'gap_restart_count' in key else 'm'
     if key.startswith('CLM|'):unit='cases' if '|worsened|' in key or '|improved|' in key else 'deg' if '|yaw|' in key else 'm'
     if key.startswith('FGO|'):unit='epochs' if key.endswith('count') else 'deg' if 'yaw_' in key else 'm'
+    if key.startswith('EXTQ|'):unit='epochs' if 'checks' in key or 'count' in key else 'deg'
+    if key.startswith('SEG|'):unit='epochs' if key.endswith('count') else 'deg' if 'yaw_' in key else 'm'
     if 'availability' in key:unit='fraction'
     if 'drift_pct' in key:unit='%'
     if key=='D|contract|90':unit='deg'

@@ -1,0 +1,8 @@
+{
+  "all_285_numeric_state_rows_exact_equal": true,
+  "all_original_status_and_event_fields_exact_equal": true,
+  "old_manifest_sha256": "9e90596cb12b2eac53d75e7747aa43f969392ddf3b54ec9d3b742ee3178689b5",
+  "new_manifest_sha256": "cca741b43cf405ccc35586facf2b01f44fc852ad121283c877d81009515d6ef3",
+  "reference_reads": 0,
+  "source_default_hook_equivalence_verified_on_real_complete_chain": true
+}

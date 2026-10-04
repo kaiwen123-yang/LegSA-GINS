@@ -1,12 +1,12 @@
 {
   "submission_ready": false,
-  "readiness_boundary": "Original author-retained V3 full matrix is the primary scientific version; later contract-diagnostic natural33/controlled135 and external FGO9/heading9 cohorts have separate roles and identities. Physical acquisition/calibration, author declarations and final submission materials remain pending; formatting/ledger checks do not imply submission readiness.",
+  "readiness_boundary": "Original author-retained V3 full matrix is the primary scientific version; later contract-diagnostic natural33/controlled135 and external FGO9/heading9 cohorts plus later segmented/nominal diagnostics have separate roles and identities. Physical acquisition/calibration, author declarations and final submission materials remain pending; formatting/ledger checks do not imply submission readiness.",
   "reader_names_verified": true,
   "internal_selectors_only_in_supplement_map": true,
   "author_photo_original_hash_verified": true,
-  "body_word_count": 5271,
+  "body_word_count": 5303,
   "word_count_method": "English alphabetic words including hyphenated compounds; excludes table rows, captions, headings, equations, abstract, declarations and reference list",
-  "main_prose_including_abstract_captions_declarations_words": 6095,
+  "main_prose_including_abstract_captions_declarations_words": 6127,
   "official_word_limit_interpretation": "GPS Solutions says manuscripts about 5000\u20135500 words without defining exclusions; this body-only count is not a full submission word-count certification.",
   "keywords_count": 6,
   "current_ledger_exactly_matches_checks": true,
@@ -17,13 +17,13 @@
     "3 Platform, sensors and data": 717,
     "4 Method": 1311,
     "5 Experimental design": 705,
-    "6 Results": 782,
+    "6 Results": 814,
     "7 Discussion": 358,
     "8 Limitations and future work": 397,
     "9 Conclusions": 148,
     "Declarations": 157
   },
-  "ledger_pass": 204,
+  "ledger_pass": 219,
   "ledger_fail": 0,
   "figure_status_counts": {
     "PUBLICATION_TEXT_RELABELLED": 4,
@@ -125,7 +125,7 @@
       "visual_review": "Final reader-name/photo publication raster actually viewed; scope limited to figure presentation"
     }
   ],
-  "package_bytes_at_check": 24114943,
+  "package_bytes_at_check": 24419302,
   "forbidden_terms": 0,
   "copied_original_hash_check_applicable": false,
   "copied_figure_hashes_match": true

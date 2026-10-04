@@ -4250,5 +4250,223 @@
     "mode": "YAML",
     "value": 566,
     "digits": 0
+  },
+  "EXTQ|same_original_scored_key_checks|0": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/ext_nominal_root_review.json",
+    "locator": {
+      "key_path": [
+        "same_original_scored_key_checks"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 7689,
+    "digits": 0
+  },
+  "EXTQ|nominal_projection_unsupported_count|0": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/ext_nominal_root_review.json",
+    "locator": {
+      "key_path": [
+        "nominal_projection_unsupported_count"
+      ],
+      "display_digits": 0
+    },
+    "mode": "YAML",
+    "value": 0,
+    "digits": 0
+  },
+  "EXTQ|nominal_quantity_RMSE_range_deg|0|6": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/ext_nominal_root_review.json",
+    "locator": {
+      "key_path": [
+        "nominal_quantity_RMSE_range_deg",
+        0
+      ],
+      "display_digits": 6
+    },
+    "mode": "YAML",
+    "value": 0.031091564448270263,
+    "digits": 6
+  },
+  "EXTQ|nominal_quantity_RMSE_range_deg|1|6": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/ext_nominal_root_review.json",
+    "locator": {
+      "key_path": [
+        "nominal_quantity_RMSE_range_deg",
+        1
+      ],
+      "display_digits": 6
+    },
+    "mode": "YAML",
+    "value": 0.043576512186021814,
+    "digits": 6
+  },
+  "EXTQ|nominal_quantity_max_abs_delta_deg|6": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/ext_nominal_root_review.json",
+    "locator": {
+      "key_path": [
+        "nominal_quantity_max_abs_delta_deg"
+      ],
+      "display_digits": 6
+    },
+    "mode": "YAML",
+    "value": 0.4544071833082033,
+    "digits": 6
+  },
+  "EXTQ|maximum_nominal_vs_Euler_RMSE_change_deg|6": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/ext_nominal_root_review.json",
+    "locator": {
+      "key_path": [
+        "maximum_nominal_vs_Euler_RMSE_change_deg"
+      ],
+      "display_digits": 6
+    },
+    "mode": "YAML",
+    "value": 0.004278311271292523,
+    "digits": 6
+  },
+  "SEG|BY2|OISAM|matched_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 275.0,
+    "digits": 0
+  },
+  "SEG|BY2|OISAM|expected_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "expected_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 275.0,
+    "digits": 0
+  },
+  "SEG|BY2H|OISAM|matched_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 267.0,
+    "digits": 0
+  },
+  "SEG|BY2H|OISAM|expected_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "expected_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 271.0,
+    "digits": 0
+  },
+  "SEG|BY2O|OISAM|matched_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "matched_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 370.0,
+    "digits": 0
+  },
+  "SEG|BY2O|OISAM|expected_epoch_count": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "expected_epoch_count",
+      "display_digits": 0
+    },
+    "mode": "CSV",
+    "value": 378.0,
+    "digits": 0
+  },
+  "SEG|BY2|OISAM|position_3d_rmse_m": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "position_3d_rmse_m",
+      "display_digits": 6
+    },
+    "mode": "CSV",
+    "value": 0.10759377795402363,
+    "digits": 6
+  },
+  "SEG|BY2H|OISAM|position_3d_rmse_m": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2H",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "position_3d_rmse_m",
+      "display_digits": 6
+    },
+    "mode": "CSV",
+    "value": 0.0772217225041729,
+    "digits": 6
+  },
+  "SEG|BY2O|OISAM|position_3d_rmse_m": {
+    "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/paper_package/gpss_v0/evidence/fgo_segmented_primary_own.csv",
+    "locator": {
+      "where": {
+        "sequence_id": "BY2O",
+        "method_id": "OISAM",
+        "support_role": "PRIMARY_DYNAMIC_ONLY",
+        "support": "OWN_VALID"
+      },
+      "column": "position_3d_rmse_m",
+      "display_digits": 6
+    },
+    "mode": "CSV",
+    "value": 0.0648258172976916,
+    "digits": 6
   }
 }

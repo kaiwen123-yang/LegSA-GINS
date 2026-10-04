@@ -87,6 +87,90 @@
       "sha256": "3b66d71a339d145a84fa0dd37a4b742ad0378852419fc19b88b7653cedc0f71c",
       "bytes": 5960,
       "identity_scope": "Read-only audit of the complete original matrix; inherited machine census, not new scientific execution or manual reading of every metric"
+    },
+    {
+      "copy": "ext_nominal_summary.csv",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/EXT_MEASURAND_20261004/SUMMARY.csv",
+      "sha256": "7c5b570b2f06353bea91ff707b73ce8f3261adcb98218d9cbd9c41fba5fc356a",
+      "bytes": 2219,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "ext_nominal_result_receipt.json",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/EXT_MEASURAND_20261004/RESULT_RECEIPT.json",
+      "sha256": "3c997227ea57c0059cc1083ebe5d8f0143b0488758a50ee5cfab0d7c5f5df0f0",
+      "bytes": 1947,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "ext_nominal_root_review.json",
+      "source": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/EXT_MEASURAND_20261004/ROOT_OFFLINE_RESULT_REVIEW.json",
+      "sha256": "a9b08c9a99a25da5f0f7f2e6d8760fe7b9e626a0d31c1fca52c3e5c7b91b6844",
+      "bytes": 1393,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_primary_own.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION/PRIMARY_DYNAMIC_ONLY_OWN_VALID.csv",
+      "sha256": "909423246d8944c1f39e7069e37c011bbcef1cba57dbac6173836b778c530a27",
+      "bytes": 6606,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_all36.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION/ALL_36_METRIC_ROWS.csv",
+      "sha256": "d2a1e2b016230beabbbc9fb56f39c0910581182b00866f43787e209e88f76e29",
+      "bytes": 24929,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_initializations.csv",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION/ALL_11_INITIALIZATION_RECORDS.csv",
+      "sha256": "bb935108dda9d2b8b85a2714b11693fa57fa1e923af0078e77c72cdf75c3a027",
+      "bytes": 3950,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_publication_receipt.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PUBLICATION/PUBLICATION_RECEIPT.json",
+      "sha256": "dc1a5ccbfe2d55a74f427b100b12aefa9e9a70dbbda3c3eb1860e596ebdcfeba",
+      "bytes": 2493,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_root_review.json",
+      "source": "/mnt/g/LegSA-GINS-project/修复_20261004/FGO_SEGMENTED_ROOT_INDEPENDENT_REVIEW.json",
+      "sha256": "93eaed3a7ac9c280d6be895668c01cc96e7fc3e39e528ab3e829c18c14ea06f8",
+      "bytes": 9866,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_preregistration.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PREREGISTRATION.json",
+      "sha256": "20a4ac31da1ef0cb0759e23bac60eb059373e1e7e9fa2dcff52fd065d0238b24",
+      "bytes": 167707,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_native_seal.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/ALL_NATIVE_SEALED.json",
+      "sha256": "3af7f0c6d010d83c2ea6763f97189ae702cb761d374cb7410ce9fd51c14423ab",
+      "bytes": 24861,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_offline_complete.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/ALL_OFFLINE_COMPLETE.json",
+      "sha256": "374cee2501ab7fcfa2432567e056eb9dd6842c7db8a1bda989b5027bce1c815d",
+      "bytes": 10249,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
+    },
+    {
+      "copy": "fgo_segmented_BY2_control.json",
+      "source": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/BY2_NO_RESTART_CONTROL.json",
+      "sha256": "8208b6ba3a2fca55d1efe83cd8b449f4258f9a1baceeb32a87f4a056d57524d6",
+      "bytes": 398,
+      "identity_scope": "Accepted later external diagnostic; does not replace original V3 or earlier strict FGO/EXT execution"
     }
   ],
   "natural33_binary": "c53784f418b7bafa3441a0a707bc579ede45c3751e2910efd2ab7615a224eb2f",
@@ -111,6 +195,10 @@
     "claim135": "Later controlled single-component diagnostic subset, distinct guarded source/binary; dependent placements; not full primary matrix replay",
     "FGO9": "Accepted selected paper-branch reproduction cohort with strict support/failure limits; not a same-input primary V3 replacement",
     "EXT9": "Accepted adapted carrier-heading cohort; nominal declared geometry and projected-versus-Euler measurand boundary; not universal carrier failure evidence",
-    "pending_cohorts": "Not bound to manuscript result cells until separately accepted"
-  }
+    "pending_cohorts": "Not bound to manuscript result cells until separately accepted",
+    "FGO_segmented_diagnostic": "Three new OiSAM sequence attempts across predeclared real gaps, plus six explicitly reused Wen/GNC batch identities; primary support excludes every prior-only row; original strict results retained",
+    "EXT_nominal_quantity": "Post-result offline nominal -y projection check on the same 7689 original scored keys; no new solver execution, sign/mount/time fitting or historical metric replacement"
+  },
+  "FGO_segmented_stage": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z",
+  "EXT_nominal_quantity_preregistration_sha256": "b041cc31ba3966bb54d6c1a932ddb17fe0c259827f859e3635047858d3f945ed"
 }

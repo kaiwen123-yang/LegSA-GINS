@@ -15,3 +15,6 @@
 待作者提供实际安装/通道/固件与对应采集、测量坐标/杆臂/reference POI及误差、时标/延迟、SDK速度语义、作者/基金/利益/数据权限/AI声明。已核书目可以凭primary来源完成，不重复要求作者寻找可查事实。GPS/TIM差距、现有数据可补与必须实体测量的最小记录/接受标准见 docs/paper_rebuild/PAPER_IDENTITY_20261004/GPS_TIM_CLAIMS_AND_READINESS.md。两个官方预印本措辞冲突需实际投稿前向期刊确认，不能自行判拒稿或推断开源代码禁止。
 
 可审查母稿当前 submission_ready=false。本块只改论文/文档/出版生成与检查，不调用科学输入生成器、native/evaluator、raw/reference，不改变原V3或后续封存科学数据。
+
+
+2026-10-04 accepted 外部增补：S26 单独绑定三次新 OiSAM 序列分段尝试与六个原 Wen/GNC batch 身份复用，主动态支持275/267/370，初始化-only排除；原 strict H0/O55仍保留，不用分段填原缺测。名义参考投影仅复核原7689正式评分键（不是9100完整native有效baseline），九格RMSE最大变化0.004278deg，不能解释旧大误差；实体安装/ordering仍待量测。完整证据副本和不变性见 ACCEPTED_EXTERNAL_ADDENDUM_FINAL_RECEIPT.json；原V3数值/31旧表/6主图未改。正文计数仍仅排除项定义下的body，不认证官方全篇长度；submission_ready=false。
