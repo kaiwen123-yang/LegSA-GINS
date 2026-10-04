@@ -1,0 +1,15 @@
+time_or_stage,actual_work,boundary,evidence
+ORIGINAL_CLEAN4_PHASES,EXT01-05 preparatory/module/core iterations; paper-specific branches and source gaps,No blanket author full-experiment claim,Originalregistry+historicalaudit
+CLEAN7_LC01_AND_EXT05C,Actual9-state mainIEKF and single-receiver-update diagnostics,HgeometryFAIL/startvariants/Spostresultselection retained,Original MAIN+historicalaudit
+ORIGINAL_CLEAN8_V3,Original6468LegSA matrix and52row external main table frozen,21historical placeholders notlatest status; no later row backfill,ORIGINAL_V3_MAIN_TABLE_V3
+CLEAN9_HX02_HX05,Five input-layer categories actual native/official routes; oldEXT backend,LatestEXTnumbers separate; GINavfail/Hartleyproxy disclosed,HX05_HISTORICAL_*
+CLEAN9_HX03R2,396logicalcases360finite36nativefail;observer reeval,Providerlayerfault exposure notidenticalRAWXfaults;no native reoptimization,Historical audit HX03R2
+CLEAN9_HX07R,Full-history RTKLIB control153/179/112;V0E/V1/V2,Old157window HARDSTOP retained;native/fixed/hold separated,RTKLIB_HX07R_*
+20261003_FGO14,Old exploratoryFGO14native rows preserve histories,Laterstrict results do notoverwrite; not9fullwindow authorreplay,FGO_COMPLETE_AUDIT evidence timeline
+20261004_EXT_V2_INTERRUPTED,BY2OEXT01paused1250epochs955valid retained then group terminated,Do notSIGCONTwall or stitchpartialinto completed metrics,V2 repair notes/pause receipts
+20261004_EXT_V2_TECH_RETRY_2,Fresh9identities epoch0;15669records9100valid;3offline after allsealed,Guardless executed snapshots;engineeringstrategy/notoriginalfullsuite,EXT_V2 sourceindex
+20261004_FGO_STRICT,"9identities,OiB275/H0/O55; W/GNC fullbatch",ExactlyoneA1/no gaprestart. noyaw forW/GNC. allsealedbefore3offline,FGO_STRICT_*
+20261004_EXT_POST_RESULT_GUARD,New3source guard/validfallback;19/75 tests+peer19;9100valid nontrigger,Not codeusedbyold9/135;no newsolver/eval,EXT_HEADING_POST_RESULT receipts
+20261004_FGO_SEGMENTED,3newOi+6frozen W/GNC reuse;1/3/7realgapblocks;3offline,ExtraA1priors newidentity;primary275/267/370 vssecondary275/269/376,FGO_SEGMENTED_*sealedJSON/36metrics
+20261004_EXT_NOMINAL_QUANTITY,3offline explanation onall7689oldvalidkeys,0.004278degmaxRMSEchangecannotexplain64-104;nominalmount conditional,EXT_NOMINAL_QUANTITY_SUMMARY
+THIS_STORY_BLOCK,Read/copy/index only; originalV3and allscience source/results unchanged,No newnative/evaluator/generator/rawreference opens;newpublicationfiguresnotreviewed here,FOURTH_BLOCK_DATA/READY receipts

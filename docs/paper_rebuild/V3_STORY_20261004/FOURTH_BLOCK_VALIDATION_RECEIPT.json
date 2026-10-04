@@ -1,0 +1,25 @@
+{
+  "all_checks_passed": true,
+  "prior56_unchanged": true,
+  "33_source_pins_and20_original_byte_copies": true,
+  "registry23_exact_members": true,
+  "reader_identities30_unique": true,
+  "analogues7_explicit_no_complete_author_algorithm": true,
+  "metric_rows126_exact_original_tokens": true,
+  "checked_numeric_and_identity_fields": 1008,
+  "original_main52_status_counts": {
+    "COMPLETED": 26,
+    "UNAVAILABLE": 21,
+    "AVAILABLE_GEOMETRIC_AUDIT_FAIL": 4,
+    "NOT_RUN_ALGORITHM_FAILURE": 1
+  },
+  "segmented_native3_reused6_roles_separate": true,
+  "fairness_contracts8": true,
+  "timeline14": true,
+  "local_doc_links_exist_except_pending_final_seal": true,
+  "scientific_package_imports": 0,
+  "native_evaluator_generator_calls": 0,
+  "raw_reference_trace_payload_reads": 0,
+  "checker_sha256": "d1338fabc73621f18f384e9831f70bc7dadfc49d9db63d8717933bfae4b650de",
+  "created_utc": "2026-10-04T11:06:42.354027+00:00"
+}
