@@ -1,0 +1,123 @@
+{
+  "status": "PASS_EDITABLE_RESEARCH_DRAFT",
+  "utc": "2026-10-04T14:39:49.682181+00:00",
+  "docx_sha256": "514ccb54b5d0ce687f7e1160a9ce3f4c1764a179118e4cfd2a792301f0b9c017",
+  "source_md_sha256": "0bab2de80236516ab582d31c02a30ea8c9513b66d19230c9f678ec031d329f03",
+  "preview_pdf_sha256": "21f071d2814b0ed8880677a8afe26b14ccd72f9c4a72d1ea156e01ef62c8aba6",
+  "render_engine": "LibreOffice via bundled documents render_docx.py",
+  "render_exit_code": 0,
+  "page_count": 11,
+  "all_pages_actually_viewed": true,
+  "requested_image_detail": "original",
+  "native_display_equations": 6,
+  "native_inline_math_objects": 11,
+  "empty_math_objects": 0,
+  "native_editable_table_rows": 4,
+  "native_editable_table_columns": 7,
+  "reference_count": 11,
+  "planned_figure_legends": 8,
+  "actual_main_figures_embedded": 0,
+  "scientific_executions": 0,
+  "submission_ready": false,
+  "r2_semantic_delta": "Sect3.2 and Fig5/reader label qualification only; F02/F03 joint structural contrast; actual basic sigma2.933193",
+  "results_discussion_conclusions_references_byte_exact": true,
+  "table1_byte_exact": true,
+  "old_story_files_preserved_count": 33,
+  "old_saved_native_files_preserved_count": 12,
+  "rendered_page_pins": [
+    {
+      "page": 1,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R2_QA\\page-1.png",
+      "sha256": "0e21639e15f16a80578bd90a84e17121408bb45028da94f8a64aa81ee142d6fc",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Title/abstract/introduction unchanged and legible"
+    },
+    {
+      "page": 2,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R2_QA\\page-2.png",
+      "sha256": "50a8908471531127bba32490effd669af043c1f392912ffc4f03d4a5db5b0233",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Active-state and lever-arm native equations readable"
+    },
+    {
+      "page": 3,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R2_QA\\page-3.png",
+      "sha256": "42cf234607b0b506747b6e4b795a26f78e10f98da8d1474f0b6634818f6fa4e1",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Heading/HV formulas and admission paragraph readable"
+    },
+    {
+      "page": 4,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R2_QA\\page-4.png",
+      "sha256": "7aa2f7d8204e1b474e76eaf65e78604b16c28d9b92072de4c53c24a9ce1b0ad1",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Native original Table1 canonical tokens all visible"
+    },
+    {
+      "page": 5,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R2_QA\\page-5.png",
+      "sha256": "dcdca5b0454b8679cb591d2d7c15739c8c4a1f585dc56fe52844366c1b1580c1",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Joint structural contrast plus fixed 2.933193-degree heading weight clearly present; same-branch ablations explicit"
+    },
+    {
+      "page": 6,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R2_QA\\page-6.png",
+      "sha256": "b5d3f65952481e915e9d855e59a65e7e06db18cc36a19da034e95cadb3876724",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Actual original results/support/failure counts retained and readable"
+    },
+    {
+      "page": 7,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R2_QA\\page-7.png",
+      "sha256": "6f6501bebabbdc08a20f074330a483297f6af5f956da3875c412ebd9966230eb",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Single-component and outage results unchanged and readable"
+    },
+    {
+      "page": 8,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R2_QA\\page-8.png",
+      "sha256": "8a8a5f03c333bdc322fb452e57d37409e852831e6f16128801a9206010082d41",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Discussion/conclusions readable, no clipping"
+    },
+    {
+      "page": 9,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R2_QA\\page-9.png",
+      "sha256": "d0384ebb161a469e77ed468b6ef751694e350c8fb871c1e10f2586fb0cbc8995",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "All11 reference items readable and unchanged"
+    },
+    {
+      "page": 10,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R2_QA\\page-10.png",
+      "sha256": "a52178f9c6429549c2b40dbaccfa4c28a03d9e644f118818bf24e4e826de3508",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Fig5 legend explicitly prohibits isolated receiver-velocity attribution; rest legends readable"
+    },
+    {
+      "page": 11,
+      "path": "G:\\LegSA-GINS-project\\修复_20261004\\JOURNAL_WORD_R2_QA\\page-11.png",
+      "sha256": "fc686a6f9b88b3166f547279d36a4ff3f6aac46f8519db0551bc23d0055ddee8",
+      "scope": "ACTUAL_VISUAL_REVIEW_ORIGINAL_IMAGE",
+      "status": "PASS",
+      "notes": "Remaining Fig6/7/8 legends legible; no clipping"
+    }
+  ],
+  "remaining_author_items": [
+    "Final method name/title",
+    "Actual main figures embedding",
+    "Authors/affiliations/funding",
+    "Final declarations and submission files"
+  ]
+}
