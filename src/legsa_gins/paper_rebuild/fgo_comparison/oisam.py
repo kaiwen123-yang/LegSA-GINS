@@ -478,7 +478,7 @@ STATE_COLUMNS = ["time_rel_s", "x_ecef_m", "y_ecef_m", "z_ecef_m", "vx_ecef_mps"
                  "vy_ecef_mps", "vz_ecef_mps", "roll_deg", "pitch_deg", "yaw_deg", "valid", "status"]
 
 
-def run_inputs(inputs, config, write_state, write_event):
+def run_inputs(inputs, config, write_state, write_event, *, graph_factory=None):
     """Execute supplied sensor arrays; shared by production and synthetic tests."""
     graph = None
     segments, failures = [], []
@@ -524,7 +524,8 @@ def run_inputs(inputs, config, write_state, write_event):
                 seed_row = inputs.imu[rate_source["provider_row_index_zero_based"]]
                 seed_dt = rate_source["interval_end_rel_s"] - rate_source["interval_start_rel_s"]
                 seed_piece = (seed_dt, seed_row[1:4].copy(), seed_row[4:7].copy())
-                graph = OiSAMGraph(config, row, config["gravity_mps2"][inputs.sequence],
+                factory = OiSAMGraph if graph_factory is None else graph_factory
+                graph = factory(config, row, config["gravity_mps2"][inputs.sequence],
                                    init_body_rate=init_body_rate, seed_piece=seed_piece)
                 segments.append({"segment_id": len(segments) + 1, "start_s": timestamp,
                                  "reason": pending_reason, "initialization_source": initialization_source,

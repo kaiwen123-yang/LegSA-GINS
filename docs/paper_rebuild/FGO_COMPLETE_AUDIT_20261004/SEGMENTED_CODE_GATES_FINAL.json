@@ -1,0 +1,37 @@
+{
+  "schema": "fgo.segmented.final-metadata-code-gates.v1",
+  "created_utc": "2026-10-04T10:27:47.536190+00:00",
+  "owned_repo_files": {
+    "src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": "361c007bc165776ff8b955943dd5a1d9436a71e1cf59c02b265b85dd585686c5",
+    "src/legsa_gins/paper_rebuild/fgo_comparison/segmented_diagnostic.py": "18bdbc4ed7ed18ce0604c1c546adaaabe733d074da360e0cdf3f1566c18010d6",
+    "src/legsa_gins/paper_rebuild/fgo_comparison/segmented_evaluation.py": "ece8a37a1f3f9cf7a2c58f03650354ff290ac971ed0dfb6b5026a76774153554",
+    "tests/paper_rebuild/test_fgo_segmented_diagnostic.py": "a2a5873c3bdc74eaccb4e73e0c1de263a8169d004db7f89c98505ad52e68edc3",
+    "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/SEGMENTED_PROTOCOL.md": "073cb3b76409a9008c7e52497928e62fb4b513e67cb791f179ed02fe0a2459e7"
+  },
+  "archived_local_instantiation_helpers": {
+    "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/local_instantiation_scripts/prepare_fgo_segmented.py": "98b7a2f0eabd6cbc305dbc07c9fba387fde607bab1f75909fa1a1a90f9684563",
+    "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/local_instantiation_scripts/run_fgo_segmented_native.py": "7f33e0959a01245b085d0ddc24ffc98d42fd8a5f1da8aeed1bd2d9a3561f9f95",
+    "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/local_instantiation_scripts/freeze_fgo_segmented.py": "910d3223ec30a162612774c7576c965cbe6086851778f0bba89f3807480aeaae"
+  },
+  "new_boundary_tests": {
+    "count": 14,
+    "failed": 0,
+    "skipped": 0,
+    "runtime_s": 0.64,
+    "xml_file": "FGO_SEGMENTED_BOUNDARY_FINAL_METADATA.xml",
+    "xml_sha256": "56d881295ff277d4df364e79d50d29738bea361f6ee40ca9783773e91b9572ac"
+  },
+  "prior_13_repeats_not_summed": true,
+  "prior_69_not_rerun_or_added": true,
+  "pyflakes_helpers_test_native_and_freeze": "PASS no warnings or undefined names",
+  "native_count": 0,
+  "evaluator_count": 0,
+  "stage_id": "FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z",
+  "final_change_scope": "anchor_llh/reference range/clean count metadata + corresponding test; no measurement/support/calculation change",
+  "source_snapshot": "lossless ZIP with per-memberSHA",
+  "prior_gate_receipts": [
+    "FGO_SEGMENTED_CODE_GATES.json",
+    "FGO_SEGMENTED_FINAL_CODE_GATES.json"
+  ],
+  "commit_and_root_go_pending": true
+}

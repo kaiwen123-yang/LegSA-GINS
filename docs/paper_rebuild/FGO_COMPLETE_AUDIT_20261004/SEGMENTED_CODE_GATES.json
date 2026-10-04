@@ -1,0 +1,32 @@
+{
+  "schema": "fgo.segmented.code-gates.v1",
+  "created_utc": "2026-10-04T10:16:24.910478+00:00",
+  "owned_repo_files": {
+    "src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": "361c007bc165776ff8b955943dd5a1d9436a71e1cf59c02b265b85dd585686c5",
+    "src/legsa_gins/paper_rebuild/fgo_comparison/segmented_diagnostic.py": "18bdbc4ed7ed18ce0604c1c546adaaabe733d074da360e0cdf3f1566c18010d6",
+    "src/legsa_gins/paper_rebuild/fgo_comparison/segmented_evaluation.py": "b5510858ac3fa095da9dad36a9097ec414bfc9475b0ff51cf009ee319110c7a7",
+    "tests/paper_rebuild/test_fgo_segmented_diagnostic.py": "2813706382625e0478f1ed8432b429067fdcdad053aa434f88fd31db57d7b72a",
+    "docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/SEGMENTED_PROTOCOL.md": "7b7e8bd66771121a3a16ca2f7bd2661c5b694ef24f81962496daec445e263a63"
+  },
+  "owned_external_helpers": {
+    "prepare_fgo_segmented.py": "98b7a2f0eabd6cbc305dbc07c9fba387fde607bab1f75909fa1a1a90f9684563",
+    "run_fgo_segmented_native.py": "7f33e0959a01245b085d0ddc24ffc98d42fd8a5f1da8aeed1bd2d9a3561f9f95"
+  },
+  "new_boundary_tests": {
+    "count": 13,
+    "failed": 0,
+    "skipped": 0,
+    "runtime_s": 0.63,
+    "xml_file": "FGO_SEGMENTED_BOUNDARY_TESTS_R2.xml",
+    "xml_sha256": "74cbb4e94944b38b816bf036cd196ea61a4ffd3df099e2273e49d2c9284e33eb"
+  },
+  "prior_69_not_rerun_or_added": true,
+  "pyflakes_new_source_and_test": "PASS; no warnings or undefined names",
+  "native_count": 0,
+  "evaluator_count": 0,
+  "stage_id": "FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z",
+  "root_review_then_commit_then_final_preregistration_required": true,
+  "hardware_import_present": true,
+  "coordinate_label": "local N/E/Up",
+  "source_snapshot": "lossless ZIP per-member hash, G allocation-aware"
+}
