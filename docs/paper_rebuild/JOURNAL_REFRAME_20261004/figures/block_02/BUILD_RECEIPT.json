@@ -1,0 +1,202 @@
+{
+  "scope": "Presentation-only existing CSV redraw",
+  "no_solver_calls": true,
+  "no_evaluator_calls": true,
+  "raw_reference_payload_opens": 0,
+  "script_sha256": "0f770abad91bbec26d7217df5a527acdb22f400b7d45463e1d5b02ee61934258",
+  "utilities_sha256": "e28173802e004aac9c5421b4e5439ae7e277f80e35ca16f2ed8b447673dd9371",
+  "inputs": [
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/MATCHED_TRAJECTORY_MANIFEST.json",
+      "file_sha256": "31f42791df488157f82c21bb60ae7092cfece2d8ab0e46573be39d4cf7d12d13",
+      "bytes": 598,
+      "unchanged_after_read": true
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/MATCHED_TRAJECTORY.csv.gz",
+      "file_sha256": "c4bb1a9c85bc7bc5d172e99ce7e49af1d74326e5738a7ba3943cf4cf21b02262",
+      "decompressed_sha256": "00bbe7a40f72dcae5eb9643bfb1670cfb0248a8f634668de11ba990c9d60955e",
+      "bytes": 3245362,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_original_matched_trajectory.csv.gz",
+        "sha256": "897c5f3fa9327f9f9e7491036020c6f302a93f173899dd6ac39b2f4fba00b162",
+        "plain_sha256": "00bbe7a40f72dcae5eb9643bfb1670cfb0248a8f634668de11ba990c9d60955e",
+        "rows": 56642,
+        "columns": [
+          "time",
+          "truth_latitude_deg",
+          "truth_longitude_deg",
+          "truth_height_m",
+          "truth_yaw_deg",
+          "estimate_latitude_deg",
+          "estimate_longitude_deg",
+          "estimate_height_m",
+          "estimate_yaw_deg"
+        ]
+      }
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/data/BY2_F04_errors.csv.gz",
+      "file_sha256": "67ead67d927a5aad81382628bda5fa6afbecff573dbc9451f409f8cc6a5cfb70",
+      "decompressed_sha256": "714792014cac8444e11ce781396b859ca9c81f6b0b30ec3534e50a19da14c17f",
+      "bytes": 2289029,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2_Proposed_attitude_errors.csv.gz",
+        "sha256": "8bcae0d944041d2c37252f1c21dec197ca9d270d19a206a8e56d08cddd2633a0",
+        "plain_sha256": "f96620bf8f819fc84e3dbd099d15d3766f74c6e369d231ac7186714785edc379",
+        "rows": 56642,
+        "columns": [
+          "time",
+          "roll_err_deg",
+          "pitch_err_deg",
+          "yaw_err_deg"
+        ]
+      }
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/data/BY2H_F04_errors.csv.gz",
+      "file_sha256": "d9f61f31ce6743b25aace4899b2d4140c53e0950a837ce8bf192eb11612f312a",
+      "decompressed_sha256": "0c1d7ae61910015c6f7cee08e9e592243d67565d736223358f77468d98a26185",
+      "bytes": 2369132,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2H_Proposed_attitude_errors.csv.gz",
+        "sha256": "f4ddb901f5b337b8bfc2b2e2c9e9ea3f7261fd3a397f6997a1f20a40df5d29cb",
+        "plain_sha256": "6ada0df4ab66f7f3bd39640c4f55969677a458a733ee4d6cf266a36b09be3626",
+        "rows": 58580,
+        "columns": [
+          "time",
+          "roll_err_deg",
+          "pitch_err_deg",
+          "yaw_err_deg"
+        ]
+      }
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/JOURNAL_REFRAME_20261004/figures/block_01/data/BY2O_F04_errors.csv.gz",
+      "file_sha256": "f2a4e1d6513a84b31becf20eae7c561b68871270d8931fe5669bfc11344c7e86",
+      "decompressed_sha256": "826a3237bbc216d5cc1ac2b8339c98b159b3479ae9445f3682fe1d7446d22afb",
+      "bytes": 3074763,
+      "unchanged_after_read": true,
+      "plot_copy": {
+        "path": "data/BY2O_Proposed_attitude_errors.csv.gz",
+        "sha256": "0923da8afd5388e2fbeaeec54373303fc42406789c5cdc1f83035bd6ad196354",
+        "plain_sha256": "ec74f00484857eea4cffa569e542246c975b2885131dac93552bc1d9dc848dc1",
+        "rows": 76548,
+        "columns": [
+          "time",
+          "roll_err_deg",
+          "pitch_err_deg",
+          "yaw_err_deg"
+        ]
+      }
+    }
+  ],
+  "figures": [
+    {
+      "id": "R03_BY2_original_trajectory",
+      "dominant_claim": "The original saved trajectory follows the route over the full formal window.",
+      "caption": "All 56642 saved matched trajectory rows; estimate and commercial fusion reference shown at the original declared midpoint. Fixed display anchor is the first saved reference LLH; WGS84 ECEF then East/North projection is a coordinate display, not alignment or new evaluation. Gaps >0.1s are not joined.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R03_BY2_original_trajectory.png",
+          "sha256": "1b1e8abe00a6cd53d59f62cd2f1e37051e36bb437b5c7c66ce6e6fb41fac3b38",
+          "bytes": 429967
+        },
+        {
+          "path": "R03_BY2_original_trajectory.pdf",
+          "sha256": "414a0d62be5316c9ed3789a34cecfc7cb367d8ae0dc7e02b50658144ad70af7e",
+          "bytes": 986455
+        },
+        {
+          "path": "R03_BY2_original_trajectory.svg",
+          "sha256": "5709fff93eaa70c6fdbf0d2094ca97d274c2ce32d336ac40aa9ff5b907aaee7c",
+          "bytes": 2779103
+        }
+      ],
+      "display_anchor_llh": [
+        39.98483239278251,
+        116.34312646000954,
+        41.76781478083378
+      ],
+      "all_rows_drawn": true
+    },
+    {
+      "id": "R04_BY2_attitude_errors",
+      "dominant_claim": "All three attitude components and adverse excursions remain visible.",
+      "caption": "Original F04 saved evaluator v3 roll/pitch/yaw errors. All formal-window rows, unchanged values; display splits at actual time gaps >0.1s. Matched/output count is not nominal-grid or physical-time coverage.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R04_BY2_attitude_errors.png",
+          "sha256": "9f10f4f5d1f1d79f1d7d0608b8b616d436d8794973be0c23e8e8b7d5daa3143d",
+          "bytes": 999084
+        },
+        {
+          "path": "R04_BY2_attitude_errors.pdf",
+          "sha256": "8f53e3ce8ac253e4f9b83e564e6eff4a4d951aa6ace6f60cad61f29d5012d3b8",
+          "bytes": 1595968
+        },
+        {
+          "path": "R04_BY2_attitude_errors.svg",
+          "sha256": "81a114e55d1987c3f1fd1d02ce72db3d5c18943407e449ffa4568b7ebeddbfc7",
+          "bytes": 4193674
+        }
+      ],
+      "all_rows_drawn": true
+    },
+    {
+      "id": "R04_BY2H_attitude_errors",
+      "dominant_claim": "All three attitude components and adverse excursions remain visible.",
+      "caption": "Original F04 saved evaluator v3 roll/pitch/yaw errors. All formal-window rows, unchanged values; display splits at actual time gaps >0.1s. Matched/output count is not nominal-grid or physical-time coverage.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R04_BY2H_attitude_errors.png",
+          "sha256": "736b6993bbdd3f06339b8f4a14cdf1a48b4a52dcc72664275e00e9c2a538f4bf",
+          "bytes": 1045300
+        },
+        {
+          "path": "R04_BY2H_attitude_errors.pdf",
+          "sha256": "c236b86f001a23d7fc1f4d34d2f3f2beba70af0599aac47f511c42990bda6f25",
+          "bytes": 1661223
+        },
+        {
+          "path": "R04_BY2H_attitude_errors.svg",
+          "sha256": "f8f8634a4a590ea689151bb3985fbd3e22db501348ab0fce3b47e1145b8ee486",
+          "bytes": 4328016
+        }
+      ],
+      "all_rows_drawn": true
+    },
+    {
+      "id": "R04_BY2O_attitude_errors",
+      "dominant_claim": "All three attitude components and adverse excursions remain visible.",
+      "caption": "Original F04 saved evaluator v3 roll/pitch/yaw errors. All formal-window rows, unchanged values; display splits at actual time gaps >0.1s. Matched/output count is not nominal-grid or physical-time coverage.",
+      "panel_role": "claim-supporting evidence",
+      "exports": [
+        {
+          "path": "R04_BY2O_attitude_errors.png",
+          "sha256": "fe1d1cf74cb87a5902df86e615d352d8e70536bdbfb5aeb62f9a08802d4eb47d",
+          "bytes": 791195
+        },
+        {
+          "path": "R04_BY2O_attitude_errors.pdf",
+          "sha256": "03a86b62a87514ff8c570cc96a0eacbc6bae87b8c01bde168d09025da5a0cfde",
+          "bytes": 2103227
+        },
+        {
+          "path": "R04_BY2O_attitude_errors.svg",
+          "sha256": "fa2167aba61add86dd11cf91b0ebef33b2f24b3c7fcbac462e0c4beb9c0e6068",
+          "bytes": 5658770
+        }
+      ],
+      "all_rows_drawn": true
+    }
+  ],
+  "original_V3_only": true,
+  "unavailable_original_H_O_matched_trajectory": "Not reconstructed; their original NAV/matched trajectory payloads were not retained."
+}
