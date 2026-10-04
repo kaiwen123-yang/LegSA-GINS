@@ -1,0 +1,13 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
+const ROOT=process.env.LEGSA_PPT_WORKDIR||'C:/Users/ykw/.codex/tmp/legsa_paper_deck_20261004';
+const st=path.join(ROOT,'.codex-finalizer');
+const candidate=path.join(st,'candidate.pptx');
+const {slides:metadata,tableOwners,chartOwners}=JSON.parse(await fs.readFile(path.join(st,'DECK_SOURCE_INDEX.json'),'utf8'));
+const SKILL='C:/Users/ykw/.codex/plugins/cache/openai-primary-runtime/presentations/26.930.11008/skills/presentations';
+const typography=JSON.parse(await fs.readFile(path.join(ROOT,'.build/TYPOGRAPHY_REFERENCE.json'),'utf8'));
+const {finalizePresentation}=await import(pathToFileURL(path.join(SKILL,'container_tools/artifact_tool_utils.mjs')).href);
+const final=path.join(ROOT,'output/LegSA_GINS_研究汇报_20261004.pptx');
+const result=await finalizePresentation({workspaceDir:ROOT,candidatePath:candidate,finalPath:final,pythonExecutable:'C:/Users/ykw/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe',integrityValidatorPath:path.join(SKILL,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(SKILL,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-bullet-geometry','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],requiredNativeTableOwnerSlides:tableOwners,requiredNativeChartOwnerSlides:chartOwners,materializeLiteralChartWorkbooks:true,fontPolicy:{basis:'reference',families:['微软雅黑','Calibri'],referencePath:path.join(ROOT,'.build/template_typography_reference.pptx'),referenceSha256:typography.reference_sha256},verifyArtifactToolImport:true,receiptPath:path.join(st,'FINAL_VALIDATION_RELEASE.json')});
+console.log('FINAL',JSON.stringify({slides:metadata.length,final,sha256:result.finalSha256||null},null,2));

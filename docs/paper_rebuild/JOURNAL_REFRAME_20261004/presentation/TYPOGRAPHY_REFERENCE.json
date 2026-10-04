@@ -1,0 +1,74 @@
+{
+  "original_source": "C:\\Users\\ykw\\Desktop\\泛源定位与组合导航\\组会模版.pptx",
+  "original_sha256": "dd521f62d3ef710a0506a7f4677ed7e14564ecac2dc58785ae5b44088aadfb63",
+  "chart_axis_compatibility_changes": [
+    {
+      "part": "ppt/charts/chart1.xml",
+      "from": -929066816,
+      "to": 3365900480
+    },
+    {
+      "part": "ppt/charts/chart1.xml",
+      "from": -929088032,
+      "to": 3365879264
+    },
+    {
+      "part": "ppt/charts/chart1.xml",
+      "from": -929066816,
+      "to": 3365900480
+    },
+    {
+      "part": "ppt/charts/chart1.xml",
+      "from": -929088032,
+      "to": 3365879264
+    },
+    {
+      "part": "ppt/charts/chart1.xml",
+      "from": -929088032,
+      "to": 3365879264
+    },
+    {
+      "part": "ppt/charts/chart1.xml",
+      "from": -929066816,
+      "to": 3365900480
+    },
+    {
+      "part": "ppt/charts/chart5.xml",
+      "from": -720880992,
+      "to": 3574086304
+    },
+    {
+      "part": "ppt/charts/chart5.xml",
+      "from": -720877184,
+      "to": 3574090112
+    },
+    {
+      "part": "ppt/charts/chart5.xml",
+      "from": -720880992,
+      "to": 3574086304
+    },
+    {
+      "part": "ppt/charts/chart5.xml",
+      "from": -720877184,
+      "to": 3574090112
+    },
+    {
+      "part": "ppt/charts/chart5.xml",
+      "from": -720877184,
+      "to": 3574090112
+    },
+    {
+      "part": "ppt/charts/chart5.xml",
+      "from": -720880992,
+      "to": 3574086304
+    }
+  ],
+  "reference_subset": "C:\\Users\\ykw\\.codex\\tmp\\legsa_paper_deck_20261004\\.build\\template_typography_reference.pptx",
+  "reference_sha256": "a07404c375b951fa5388e62154eb1da648878e6a4b0f31d56bafe09294c77077",
+  "selected_original_slides": [
+    1,
+    24
+  ],
+  "all_other_package_parts_byte_identical": true,
+  "reason": "Use actual original cover/content typography; unused source slide 32 has unresolved East Asian inheritance. No source font substitution."
+}

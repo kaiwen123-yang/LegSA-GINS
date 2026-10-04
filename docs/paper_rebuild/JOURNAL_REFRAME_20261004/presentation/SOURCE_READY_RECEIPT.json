@@ -1,0 +1,266 @@
+{
+  "status": "READY",
+  "scope": "Presentation source and regeneration assets; no solver/evaluator",
+  "files": [
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/README.md",
+      "bytes": 4069,
+      "sha256": "0328833a29adfc252caf17bf48bee15a7bbfcf6d0886f4e99e4864794afa129a"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/build_equations.py",
+      "bytes": 2639,
+      "sha256": "646a6eb4af8194685db8ae2c363055f9a17f199b5a755d0828bf58cd5a59fc73"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/build_final.mjs",
+      "bytes": 3091,
+      "sha256": "9eb0ec7bb52414c253d4788ac7e48e7c886f8fcf587cf3e9a3e4527f37faf185"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/deck_appendix.mjs",
+      "bytes": 8930,
+      "sha256": "a5746e482e46c77bed56e4987d5906191aab16d2c84b51319e14ff995df65d06"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/deck_engine.mjs",
+      "bytes": 9667,
+      "sha256": "9b34ee2fbec295ba81ec25df9927ae782f69e4ab090f08e8e449a4e6fb8d3a98"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/deck_main.mjs",
+      "bytes": 13887,
+      "sha256": "105309b93a87860899fd99d0ec0d79ffbaaed3c02fcf0a42f12a9c8b212b5a6b"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/deck_results.mjs",
+      "bytes": 10855,
+      "sha256": "32e9019d97e6a14882e9aecbbb5a816f0da1138e8934db9c9529e2d0f0032b41"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/deck_venues.mjs",
+      "bytes": 14497,
+      "sha256": "76f651c4a8caa1c54654940994a18842105ce4f0119b222bb32fa388ec5468ff"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/baseline.png",
+      "bytes": 7686,
+      "sha256": "5fc039ae819bd8ac46040a18d344e5bf1935920441f28c9be99b36c12e8a9319"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/baseline.svg",
+      "bytes": 5380,
+      "sha256": "342638a5885dbe761160698d6557cd12b556ba09896420e48eed896a1127d420"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/baseline_cov.png",
+      "bytes": 14368,
+      "sha256": "cbc7f6b6b2037bd6d27b9118df5f29a1ee6d3b9d3146bc4e03816ef95d91a935"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/baseline_cov.svg",
+      "bytes": 7110,
+      "sha256": "e7063cffaa28d8aea8d53a9b38b55a4050fe848d79a4d38ceb7bd2b57404d94a"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/correction.png",
+      "bytes": 8571,
+      "sha256": "9a9157a122aa2ee544ed06fe16885bf134a3f8492c9752979838bb4af644e326"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/correction.svg",
+      "bytes": 5982,
+      "sha256": "ba02f7e3a803ed4a0994ab54d1874bfc327b3954c283cbb8dc30f3ac75d5374c"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/covariance.png",
+      "bytes": 10101,
+      "sha256": "ebf4c1014f8ad8b4dea6dffa715935d503e01bcb4440c817a3174af4c0d044f0"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/covariance.svg",
+      "bytes": 5681,
+      "sha256": "44dffb4ef7e159eb58820f0767fbfdee012619834e71ff8744e4f8af73211643"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/coverage.png",
+      "bytes": 16341,
+      "sha256": "d805db27322064edcc00adc6639a8a424be26716982075850a81862980e66a2d"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/coverage.svg",
+      "bytes": 8184,
+      "sha256": "5b50d3b2348b9d820f8c95e0ede8ab6571ad86814baba5b5e63b5da198ff4450"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/difference.png",
+      "bytes": 7532,
+      "sha256": "33e6a39e3c4484ddde34ebd4adb319fa3b5613bb3a0aa8f6c7c9f6a32f3d4733"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/difference.svg",
+      "bytes": 5859,
+      "sha256": "3d3a26dca209e8b7f85c576652f94b45b51bd72d00ab358ef4fa518a7f9a4206"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/formulae.json",
+      "bytes": 1913,
+      "sha256": "b949bc36da55aea3287819339c05b46562aebaa3a9252866d388eb186fa0bf36"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/gain.png",
+      "bytes": 9218,
+      "sha256": "b6dee4ed9a10e72ef438ac59a239f6e1bb36dcf752979eaf5b7245cb47ae5cd1"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/gain.svg",
+      "bytes": 6213,
+      "sha256": "827cc03a551665ec79c079da2690fe2e93f48808e3d9dd83f4eb34763ee260f1"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/gum.png",
+      "bytes": 9639,
+      "sha256": "45a739d91c500ba6bb14ce4da6b84a896a1cd2863813c9d16a73b6faec528d9a"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/gum.svg",
+      "bytes": 5481,
+      "sha256": "4c59b0dbd1df2509932f57e7575aecc555e9ed609673395f52245d54c3a96b26"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/heading.png",
+      "bytes": 24783,
+      "sha256": "07cff3cb9f1d9b041680ab8b8dab5f17c31d4fbe54451800abe565e120887e60"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/heading.svg",
+      "bytes": 11295,
+      "sha256": "2259b78f8ec3e482cc48b7de8c7e9e8fce68bd8012712602f8c0e9e8bf697a40"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/heading_cov.png",
+      "bytes": 19111,
+      "sha256": "e2fb3d4fdd469604c14e6573bb180e2a696d1b5bd2bc8c63e6121e3d913a0949"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/heading_cov.svg",
+      "bytes": 8941,
+      "sha256": "750360d7ff841ef0fea39701294382a1b9c29259d4404a33eac5399b46fd6144"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/heading_jac.png",
+      "bytes": 20547,
+      "sha256": "fb94b998e72e43405340f312c669be29d1ada24e910ac09cf3b34ea64cc23a68"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/heading_jac.svg",
+      "bytes": 9243,
+      "sha256": "50ebe8e2b241078556855b39c06e2c0fb4cdffcd313746911327cd0b891996eb"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/hv.png",
+      "bytes": 22452,
+      "sha256": "864afaddeae033388bd8a4d9d25cd98e0e5a5dda4bbcc4978b7a5e719c8fdcf0"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/hv.svg",
+      "bytes": 12556,
+      "sha256": "f68911cda6367d5b31128fe61158ed81407cbd046ba2e2cba44fc33b3a956c41"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/innovation.png",
+      "bytes": 8928,
+      "sha256": "edcd362d0bb4c74e074a448e66d71d86c4cb28a137498233e71cd6b269697e4f"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/innovation.svg",
+      "bytes": 5991,
+      "sha256": "0050ddfd9577694cd37a070c1b0a414af71f88e82e7f84ef2139e3dd47966a86"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/ref_cov.png",
+      "bytes": 17947,
+      "sha256": "0a9cb790676b52c2c8e6225c79b5f17ac96f356aebadb75dd94f8f9d67d65202"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/ref_cov.svg",
+      "bytes": 9842,
+      "sha256": "a1e29103c789b7dc751bbbe2b50ec0c3ea172d0ef0ba89498c1f657d7627e369"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/residual.png",
+      "bytes": 23712,
+      "sha256": "7d4a2f0930911d44a2ab7dbc9dc98e40dae267ffced6f8e551d76cbdbee5f4f6"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/residual.svg",
+      "bytes": 11368,
+      "sha256": "0539dd3633fc82b98329d54f199a49767600318eeea5b0b5806393b5c94b38ec"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/rotation.png",
+      "bytes": 20113,
+      "sha256": "a854edb0a925799cbdef54a26a97c0e205b5f51e2814224cde5e7f65893a9f63"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/rotation.svg",
+      "bytes": 9151,
+      "sha256": "8c0a7702d11e58acd489d935e85e3ca2d75a964c7d3bb3ddf8fa0f74acc70df6"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/sensitivity.png",
+      "bytes": 13585,
+      "sha256": "812307133f9378baa0446a42c48b596a50e7e4220f532a49bc44564123bb1f9a"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/sensitivity.svg",
+      "bytes": 7028,
+      "sha256": "9976bc4266908e7927a278a3d44acca10b260457401f5ab5e121ad07aa177dcb"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/state.png",
+      "bytes": 19643,
+      "sha256": "9a3579174df8e495643a48b5fc0017fe291045c9707cd065ade3ccbd887a7c0a"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/state.svg",
+      "bytes": 10783,
+      "sha256": "75dc163a9d71d4a9d0f052ed03109e0d9b3a22643c5856a9f5bdbbfb701cb544"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/timing.png",
+      "bytes": 10702,
+      "sha256": "b76abd7451d5784aa44654de88a952f001820038a356063df7f044efd515e3a6"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/equations/timing.svg",
+      "bytes": 5091,
+      "sha256": "d9ffa7a9e5457d95f1cc4414db3de374eddbcf0fe5589a537a451751a87a7784"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/finalize_only.mjs",
+      "bytes": 1951,
+      "sha256": "61c2a66dea37103720720a79d160bf86841ed985b84536afa101ce6bcfd36f3d"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/prepare_template.py",
+      "bytes": 2541,
+      "sha256": "232c6e9defc142bd99cb0ce8b85363f729b237f5576320eb2e065e7614686a53"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/rebuild.ps1",
+      "bytes": 1773,
+      "sha256": "b803b8f5809bdc01e2ca1884e6a4dbc9f1bf9f70e5c547ec63d1b03c429e00bf"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/source/render_finalized.mjs",
+      "bytes": 1340,
+      "sha256": "5fc11a886e9fee1e23ac37909da9831da43b26611e19308ba7ce6d83d721f8e9"
+    },
+    {
+      "path": "docs/paper_rebuild/JOURNAL_REFRAME_20261004/presentation/TYPOGRAPHY_REFERENCE.json",
+      "bytes": 1985,
+      "sha256": "f6e7cc3625a3698c8128076d5b272b15db2467dcc788cc5164feb3188cab24b4"
+    }
+  ]
+}
