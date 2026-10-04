@@ -1,0 +1,123 @@
+{
+  "schema": "nominal_EXT_projected_quantity_post_result_preregistration.v1",
+  "registered_utc": "2026-10-04T10:03:18.982714+00:00",
+  "science_source_sha256": "e2a3c4a30b363e62d0bb9bbee63c2031562d9bfe96bedea36ac904e8b811f51c",
+  "protocol_sha256": "95efeffd0ced807766ea58b0b59077beffb8a279cbcbdce16717f14c9d33fae1",
+  "entries": [
+    {
+      "sequence": "BY2",
+      "spec_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2/SPEC.json",
+      "spec_sha256": "279a0033dce9373ade3774f33fa584d5eae466c938d7378e169c5e8872a97326",
+      "errors_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2/ERROR_SERIES.csv",
+      "errors_sha256": "f395e583eb537e1f4a632f790aa8a37caeb2fc6cd512009c9972cf47c4702671",
+      "metrics_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2/HEADING_METRICS.json",
+      "metrics_sha256": "c07ed12157f6fe5756567e48c5503d896da41a89084ff515389dedf653f40ffe",
+      "trace_alias": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv",
+      "trace_expected_sha256": "ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c",
+      "old_expected_count": {
+        "EXT01": 980,
+        "EXT02": 961,
+        "EXT03": 541
+      },
+      "original_denominator": {
+        "EXT01": 1370,
+        "EXT02": 1370,
+        "EXT03": 1370
+      }
+    },
+    {
+      "sequence": "BY2H",
+      "spec_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2H/SPEC.json",
+      "spec_sha256": "0545ec3edbca1966c671db9a714f124125a997c1cec2f92df0db74267b8bd716",
+      "errors_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2H/ERROR_SERIES.csv",
+      "errors_sha256": "25e6db05fb2e4020cb97d7b20feef07111cff0d553626d8458a00d24fab4229f",
+      "metrics_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2H/HEADING_METRICS.json",
+      "metrics_sha256": "47461f7f226b9914649f7bd07db64535803469c00ac85065020264989d946876",
+      "trace_alias": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/trace_vrtk2_a87c6e_2026-03-06-08-06-39_minimal.csv",
+      "trace_expected_sha256": "8d11fe360753bfcdbc54f7bf793fcb25850c0997b7aaad4ec1c9f10859c0f84f",
+      "old_expected_count": {
+        "EXT01": 1059,
+        "EXT02": 1029,
+        "EXT03": 467
+      },
+      "original_denominator": {
+        "EXT01": 1350,
+        "EXT02": 1350,
+        "EXT03": 1350
+      }
+    },
+    {
+      "sequence": "BY2O",
+      "spec_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2O/SPEC.json",
+      "spec_sha256": "82c8ba8bc3bb4dcdc552422e26182651001006b339726655dfc40fc59a4e98e0",
+      "errors_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2O/ERROR_SERIES.csv",
+      "errors_sha256": "9d9916bf1dfef567e407ac0ed69b209493d2cea2b81c3755d7e02909a2048e06",
+      "metrics_path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/evaluation_results/BY2O/HEADING_METRICS.json",
+      "metrics_sha256": "6e8af78135cb0d768fe3b67972b856e24517c25a0010842ee38dd0aabedf5de3",
+      "trace_alias": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv",
+      "trace_expected_sha256": "4f7b3007c6a0b43ce1b0fb4908f23c042891154b4adbc7af4c3d8a47ca363cd9",
+      "old_expected_count": {
+        "EXT01": 1173,
+        "EXT02": 1210,
+        "EXT03": 269
+      },
+      "original_denominator": {
+        "EXT01": 1885,
+        "EXT02": 1885,
+        "EXT03": 1885
+      }
+    }
+  ],
+  "geometry_checks": [
+    {
+      "roll": 0,
+      "pitch": 0,
+      "yaw": 0,
+      "absolute_formula_vector_error_deg": 0.0
+    },
+    {
+      "roll": 0,
+      "pitch": 25,
+      "yaw": 359,
+      "absolute_formula_vector_error_deg": 0.0
+    },
+    {
+      "roll": 30,
+      "pitch": 0,
+      "yaw": 90,
+      "absolute_formula_vector_error_deg": 0.0
+    },
+    {
+      "roll": 30,
+      "pitch": 20,
+      "yaw": 1,
+      "absolute_formula_vector_error_deg": 0.0
+    },
+    {
+      "roll": -45,
+      "pitch": 35,
+      "yaw": 275,
+      "absolute_formula_vector_error_deg": 0.0
+    },
+    {
+      "roll": 89.999,
+      "pitch": 50,
+      "yaw": 185,
+      "absolute_formula_vector_error_deg": 0.0
+    },
+    {
+      "roll": -70,
+      "pitch": -35,
+      "yaw": 359,
+      "absolute_formula_vector_error_deg": 5.684341886080802e-14
+    }
+  ],
+  "new_native_invocations": 0,
+  "reference_payload_opens_during_registration": 0,
+  "coordinate_contract": "Frozen evaluator RP axes and ENU-to-NED saved yaw; nominal body -y baseline; installation not verified",
+  "formula": "delta=atan2(-sin(pitch)*sin(roll),cos(roll)); projected_yaw=stored_reference_yaw_ned+delta",
+  "policy": "same original native-valid/reference-supported formal keys; no hold/no re-estimation/no fitting/no deletion; unsupported projection separate",
+  "gap_refusal_ratio_squared": 1e-12,
+  "Euler_recompute_tolerance_deg": 1e-09,
+  "reference_reopens_after_all_required_native_seal_review_only": true
+}
