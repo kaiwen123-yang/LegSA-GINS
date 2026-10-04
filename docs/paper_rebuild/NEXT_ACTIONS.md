@@ -1,5 +1,18 @@
 # Clean Rebuild Next Actions
 
+> **Latest author direction, 2026-10-04:** preserve the established V3 full-matrix results and prioritize its code/experiment narrative; do not initiate a V3 repair or full-matrix rerun for minor issues. The previous diagnostic repairs remain a separate version. Complete the FGO correspondence and correctly supported comparison executions. Formalize the paper-facing name LegSA-GINS, use the supplied actual installation photograph, and focus on GPS Solutions and TIM. Commit and push each completed small milestone. Read [the complete latest authorization](AUTHORIZED_SCOPE_20261004.md) before the chronological records below.
+
+
+## 2026-10-04: user-authorized reproduction and V3 contract repair
+
+The user reopened execution after the October 3 handoff. Read [the current execution and claim boundaries](CURRENT_REVIEW_20261004.md) before using the historical instructions below. The October 3 instruction that no V3 repair or further calibration review was required is superseded for this authorized work. Its original results and attempt history remain historical evidence.
+
+The repaired FGO cohort (nine registered native identities), repaired external horizontal cohort (nine complete fresh native identities), and corrected V3 natural cohort (33 configurations, 110 native segments, 33 offline evaluations) have completed under distinct saved source identities. A separately registered 135-configuration D61/D62 controlled replay has completed all-native sealing, 135 offline evaluations, and independent full/paired/domain numerical review. A separately identified post-result EXT heading guard and invalid-output fallback have passed bounded tests and existing-output non-trigger checks; the old execution pins were preserved. It does not revalidate the entire historical 6,468-member V3 matrix.
+
+The repaired results and restricted claims are now bound to GPS Solutions Section 6.6 and Supplement S20–S23. Next: close the physical measurement-chain records, complete citation cross-checks and author declarations, select the final main figures, and produce the formal Word package. Do not count historical 6,468-member results as the current corrected matrix. Preserve missing support, adverse results, shared-GNSS reference lineage, and the retained V3 engineering approximations. Physical calibration, independent reference evidence, full author-paper experiment equivalence, and formal submission completeness remain separate evidence requirements.
+
+## Historical handoffs
+
 ## 2026-10-03: FGO comparison closed; manuscript writing
 
 The user-authorized final external comparison is complete: OiSAM-FGO (2025), Wen TC-FGO (2021), and FGO-GNC (2022), each on the full BY2/BY2H/BY2O natural-sequence window. Read the [writing entry and results](hext/FGO_COMPARISON/README.md), [complete comparison table](hext/FGO_COMPARISON/COMPARISON_TABLE.csv), and three figures linked there. Nine final run identities are registered; five superseded bug/input-conflict attempts remain visible. No V3, moving-baseline, RTKLIB, or LC01 rerun was added.
