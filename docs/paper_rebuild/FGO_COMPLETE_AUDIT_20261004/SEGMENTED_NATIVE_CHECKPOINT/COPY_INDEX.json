@@ -1,0 +1,92 @@
+{
+  "schema": "fgo.segmented.native.checkpoint-copy.v1",
+  "stage": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z",
+  "native_sealed_utc": "2026-10-04T10:35:24.220316+00:00",
+  "copies": [
+    {
+      "relative_path": "LOCAL_ROOTS.json",
+      "sha256": "1d8fcfb914d03fc00d04a8f5c2ed37caebbebe8e43d06b10be1582011953557c",
+      "bytes": 4042,
+      "original_stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/LOCAL_ROOTS.json"
+    },
+    {
+      "relative_path": "PREREGISTRATION.json",
+      "sha256": "20a4ac31da1ef0cb0759e23bac60eb059373e1e7e9fa2dcff52fd065d0238b24",
+      "bytes": 167707,
+      "original_stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/PREREGISTRATION.json"
+    },
+    {
+      "relative_path": "ALL_NATIVE_SEALED.json",
+      "sha256": "3af7f0c6d010d83c2ea6763f97189ae702cb761d374cb7410ce9fd51c14423ab",
+      "bytes": 24861,
+      "original_stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/ALL_NATIVE_SEALED.json"
+    },
+    {
+      "relative_path": "NATIVE_JOURNAL.json",
+      "sha256": "2897017baf622096caa708a3e0adc3abf6d36862fd89db9ae7b7f2090f288dce",
+      "bytes": 5316,
+      "original_stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/NATIVE_JOURNAL.json"
+    },
+    {
+      "relative_path": "BY2_NO_RESTART_CONTROL.json",
+      "sha256": "8208b6ba3a2fca55d1efe83cd8b449f4258f9a1baceeb32a87f4a056d57524d6",
+      "bytes": 398,
+      "original_stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/BY2_NO_RESTART_CONTROL.json"
+    },
+    {
+      "relative_path": "runs/BY2/OISAM/SEGMENTED_DIAGNOSTIC/RUN.json",
+      "sha256": "cca741b43cf405ccc35586facf2b01f44fc852ad121283c877d81009515d6ef3",
+      "bytes": 119794,
+      "original_stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2/OISAM/SEGMENTED_DIAGNOSTIC/RUN.json"
+    },
+    {
+      "relative_path": "runs/BY2/OISAM/SEGMENTED_DIAGNOSTIC/ACCESS.json",
+      "sha256": "0a2051840c1a8b70104967cfd8fbc345a3aece76c881f089f3135d1bde69cbd9",
+      "bytes": 807,
+      "original_stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2/OISAM/SEGMENTED_DIAGNOSTIC/ACCESS.json"
+    },
+    {
+      "relative_path": "runs/BY2/OISAM/SEGMENTED_DIAGNOSTIC/BLOCKS.json",
+      "sha256": "90754ae2fd4b34b78ef1a63d7ac9a778fc55f0517ed88749c940ed24433f3ef3",
+      "bytes": 9858,
+      "original_stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2/OISAM/SEGMENTED_DIAGNOSTIC/BLOCKS.json"
+    },
+    {
+      "relative_path": "runs/BY2H/OISAM/SEGMENTED_DIAGNOSTIC/RUN.json",
+      "sha256": "f4c15e5d00b1196a746774a923f204562a615972d4b9549f9fb1e1fd1eae417f",
+      "bytes": 119953,
+      "original_stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2H/OISAM/SEGMENTED_DIAGNOSTIC/RUN.json"
+    },
+    {
+      "relative_path": "runs/BY2H/OISAM/SEGMENTED_DIAGNOSTIC/ACCESS.json",
+      "sha256": "69f0d11bd46b69087b41c3f977e56ff72e00621840979ea7f91a9f68bfe22791",
+      "bytes": 807,
+      "original_stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2H/OISAM/SEGMENTED_DIAGNOSTIC/ACCESS.json"
+    },
+    {
+      "relative_path": "runs/BY2H/OISAM/SEGMENTED_DIAGNOSTIC/BLOCKS.json",
+      "sha256": "5784e4c59f03d8323e7070511bb930684aad849bd8c121366e5aab66279051a5",
+      "bytes": 23234,
+      "original_stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2H/OISAM/SEGMENTED_DIAGNOSTIC/BLOCKS.json"
+    },
+    {
+      "relative_path": "runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/RUN.json",
+      "sha256": "2fbb2d7d28ceaf570dc1eab3a695ccc62609d464658de2755e28b218e22950fe",
+      "bytes": 121047,
+      "original_stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/RUN.json"
+    },
+    {
+      "relative_path": "runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/ACCESS.json",
+      "sha256": "3d9aa65b563040b6d353cc5b332dd7c41235ef5df8aecd84347482a8d09219ee",
+      "bytes": 807,
+      "original_stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/ACCESS.json"
+    },
+    {
+      "relative_path": "runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/BLOCKS.json",
+      "sha256": "081739d010caba4348e1bf26bd5824a1869c77953e49c1d353241ddb9f71eccf",
+      "bytes": 52309,
+      "original_stage_path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/BLOCKS.json"
+    }
+  ],
+  "scope": "byte-identical small native receipts; source ZIP/states/events/strace remain in sealed stage"
+}
