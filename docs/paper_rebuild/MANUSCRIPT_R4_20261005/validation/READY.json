@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/validation/REVIEW_AND_MINIMUM_VALIDATION.md",
+      "sha256": "72bbacd6861d3a1fe88f73105b524aaf29740a6619c8561cd7971389767b36c1"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/validation/MINIMUM_VALIDATION_PLAN.csv",
+      "sha256": "c951e92616d221e82a0fdfc38f73e68d86bfc77f89001a72f3795caae441ac31"
+    }
+  ],
+  "new_native_runs": 0,
+  "new_formal_evaluations": 0
+}
