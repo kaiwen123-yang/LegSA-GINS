@@ -1,0 +1,30 @@
+{
+  "scope": "Original V3 token selections and descriptive whole-window summaries only",
+  "scientific_commit": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "scientific_binary_sha256": "96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c",
+  "evaluator_sha256": "aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da",
+  "original_source_tokens_preserved": true,
+  "new_in_fault_or_endpoint_metrics": false,
+  "paired_delta_definition": "Full minus without-HV per identical case, then median; not difference of marginal medians",
+  "all_45_cases_retained": true,
+  "native_provider_evaluator_raw_trace_calls_or_reads": 0,
+  "source_hashes_before_after_equal": true,
+  "sources": [
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/NATURAL_METHOD_RESULTS.csv",
+      "sha256": "a8419158954c52ddeb948ce9460f751998862e09f5e24839461e2f040262aa8e"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/SINGLE_MODULE_PAIRED_DIRECTION.csv",
+      "sha256": "d3d1fdd85b113d86828d24d8ed1963761891e37c1d664888def8ce4bf2bc1baa"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/RESULT_SUMMARIES/FAILURE_COMPARISON.csv",
+      "sha256": "4d5a19abbc40228a3c98f8dfb7f32ce616f3af5cbd6ac65fec8eea66460b536f"
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/ADDENDUM_TABLE_V3.csv",
+      "sha256": "82aaef841c4e62d13ce4c4a2625b063ec3ac02ffc379db835cf1452486c978bb"
+    }
+  ]
+}

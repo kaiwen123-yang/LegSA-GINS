@@ -1,0 +1,49 @@
+{
+  "block": "ORIGINAL_V3_EFFECT_SIZE_EDITORIAL_HANDOFF",
+  "all_checks_passed": true,
+  "new_estimator_or_evaluator_calls": 0,
+  "original_science_writes": 0,
+  "data_selection": "all original v3 natural rows, all four single-component seven-metric rows, all original45 ADD full/no-HV case pairs",
+  "files": [
+    {
+      "path": "ORIGINAL_V3_NATURAL_EXACT_33.csv",
+      "bytes": 22166,
+      "sha256": "7057c637e4d12e6728571353cc673dab07ab6ce1924f4fa60c70a930b1b617b4"
+    },
+    {
+      "path": "ORIGINAL_V3_COMPONENT_EFFECTS_EXACT_28.csv",
+      "bytes": 8360,
+      "sha256": "5ec5f89ceaf23e6e3a197dd2487da77d490cbabe8e5bba9b236804f8156e089d"
+    },
+    {
+      "path": "ORIGINAL_V3_CORE_OUTCOMES.csv",
+      "bytes": 2059,
+      "sha256": "7e086b21706ae19b89fe149554bf9c05c3a96529309e7c968764b5288ef80bd5"
+    },
+    {
+      "path": "ORIGINAL_V3_ADD_HV_WHOLE_WINDOW_BY_DURATION.csv",
+      "bytes": 2185,
+      "sha256": "3b2b6c20a930354974e25bd2f1646fe99163c9c74f63fb474c4795ea77935f2c"
+    },
+    {
+      "path": "ORIGINAL_V3_ADD_HV_ALL_45_PAIRED_CASES.csv",
+      "bytes": 27966,
+      "sha256": "a0c82ce4c516f86bbfc6a0e17bd792c28a4f7629e6d02db2ec13bfd3f0b23a72"
+    },
+    {
+      "path": "EFFECT_SIZE_SOURCE_PINS.json",
+      "bytes": 1688,
+      "sha256": "0bf7ab16727de667214646c12eb6b1fbb9a4a3aaad5da404d7f7dab8cdddfdcc"
+    },
+    {
+      "path": "extract_original_v3_effects.py",
+      "bytes": 5325,
+      "sha256": "c568946de6ad99a8cff4961a65697805531f4f50d9444d19da1220f490579c17"
+    },
+    {
+      "path": "EFFECT_SIZE_HANDOFF.md",
+      "bytes": 4729,
+      "sha256": "0b18e10e51248d7ab140d55ee1654726164296574675ce8fae9d1652ab91406a"
+    }
+  ]
+}
