@@ -1,0 +1,3 @@
+sequence_id,methods,internal_gaps,original_observed_denominator,diagnostic_matched_per_method,missing_per_method,waiting_records_per_method,seed_records_per_method,coverage_fraction,max_restart_wait_s,physical_missing_duration_sum_s
+BY2H,11,1,58580,58556,24,23,1,0.999590303857972,0.11892104800000425,0.17571516886903282
+BY2O,11,6,76548,72810,3738,3732,6,0.9511678946543345,20.142952951999632,1.1519071609964158

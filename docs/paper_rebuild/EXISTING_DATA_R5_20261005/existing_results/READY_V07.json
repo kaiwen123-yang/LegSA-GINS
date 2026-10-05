@@ -1,0 +1,84 @@
+{
+  "block": "R5_V07_ALL22_MEMBERS7_GAPS_SAVED_ERROR_SENSITIVITY",
+  "all_checks_passed": true,
+  "members": 22,
+  "internal_gaps": 7,
+  "source_files_hashed_before_after": 171,
+  "whole_metric_rows": 88,
+  "fixed_domain_rows": 1804,
+  "restart_member_rows": 77,
+  "rank_rows": 792,
+  "raw_or_reference_opens": 0,
+  "new_estimator_calls": 0,
+  "new_evaluator_calls": 0,
+  "old_v3_writes": 0,
+  "new_output_interpolation": 0,
+  "files": [
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/V07_DOMAIN_SPECIFICATION_BEFORE_REDUCTION.json",
+      "bytes": 6217,
+      "sha256": "91b41332acfd82199983a32742d4fe993ec61e2828f3ed67add6e576a05d77a2"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/summarize_saved_gap_versions.py",
+      "bytes": 11321,
+      "sha256": "f8ff24a5a1988ebe515c0fe845a04d1a446c1881f3c41f661474c34f8edc5456"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/GAP22_WHOLE_AND_COMMON_SUPPORT_88.csv",
+      "bytes": 24817,
+      "sha256": "4ded4af557eda47f15f6149a57315df1547bf6c40c93d863a9b2dad515295d35"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/GAP22_FIXED_DOMAINS_1804.csv",
+      "bytes": 244748,
+      "sha256": "d651af4a94a29520a938b4f6b7ee643ed7f5d571f9816e02346e2e8558533a1c"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/GAP7_ALL22_RESTART_SUPPORT_77.csv",
+      "bytes": 14664,
+      "sha256": "e52d85944227048be7090ec537b647db160195fd21b1da2cd191c80a548e95a7"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/GAP_SUPPORT_SUMMARY_2.csv",
+      "bytes": 412,
+      "sha256": "c6a113924382ea0ba587ab1cd86c07658fa6cea9f9f5a25fd383183176ee833b"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/GAP22_DOMAIN_RANKINGS_792.csv",
+      "bytes": 47814,
+      "sha256": "6d5aa1bd6502d178c3c9f9bd913b19b5b707dbc2e187d2d82048c425592ba47b"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/GAP22_REDUCTION.json",
+      "bytes": 41333,
+      "sha256": "6e3cae93360e9d8327fdd178d55384bd8f3ce3945a078d798d69f3bfabd1344d"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/GAP7_RESTART_SUPPORT_COMPACT.csv",
+      "bytes": 1742,
+      "sha256": "7a7140d8b0963f025cef9ab9368e87feeb2dabc29ea0328861a30307eb9995c7"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/GAP22_RANK_SENSITIVITY_48.csv",
+      "bytes": 3503,
+      "sha256": "2ba373302efe01183d4e450c33131e5a7d9376355ea5fda8a21157ef3562a417"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/GAP_PROPOSED_COMMON_DOMAINS_24.csv",
+      "bytes": 4680,
+      "sha256": "4d888abb8e16d984a587580204c3c78b45a04cbd4d98e60a36b934e8b3fd73af"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/GAP22_PAPER_RESULTS.md",
+      "bytes": 6534,
+      "sha256": "f9198ab236b40fc98face2cf0d1dc4335528a3fc12b746976b96902d4e43bef4"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/existing_results/GAP22_H_YAW_WHOLE_COMMON_44.csv",
+      "bytes": 12515,
+      "sha256": "91e28911d79f7435d03aad0f136d46febd33195cf47151d54f3e4b93998b161f"
+    }
+  ],
+  "analysis_only_first_attempt": "output-row-count assertion stopped before CSV writes; expected count corrected from2112 to1804 for the five registered per-gap domains; second read-only reduction passed; scientific inputs/estimates unchanged"
+}
