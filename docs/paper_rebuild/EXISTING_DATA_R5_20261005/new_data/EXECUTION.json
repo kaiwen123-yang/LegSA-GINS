@@ -1,0 +1,52 @@
+{
+  "created_utc": "2026-10-05T05:45:07.732522+00:00",
+  "final_status": "COMPLETED_WITH_TRAJECTORY_FAILURE_AND_NO_INIT",
+  "final_method_sequence_combinations": 16,
+  "final_native_calls": 8,
+  "final_no_init": 8,
+  "actual_native_process_calls_all_attempts": 24,
+  "T01_rejected_before_estimation": 4,
+  "actual_offline_method_evaluations_all_rules": 24,
+  "body_offset_s": -1.1,
+  "reference_bracket_limit_s": 0.15,
+  "reference_rule_chosen_from_time_interval_distribution_before_score": true,
+  "original_V3_changed": false,
+  "binary_sha256": "c53784f418b7bafa3441a0a707bc579ede45c3751e2910efd2ab7615a224eb2f",
+  "stages": [
+    {
+      "identity": "T01",
+      "root": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB",
+      "plan_sha256": "b69d3abd5acc37bce445ee5d50730667a3d31dd9fa9be5c02fb9ed83431d2994",
+      "native_seal_sha256": "7a69fff7c4991453e1c734d41c65286d16bff60b653e3db586af7fc5655e55d0",
+      "actual_native_process_calls": 8,
+      "native_reference_open_count": 0
+    },
+    {
+      "identity": "T02",
+      "root": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_02",
+      "plan_sha256": "ba73f5476662af14e0dd8376450c7c1db1bf1b686145f1f17ef3ab10e2e9ec31",
+      "native_seal_sha256": "0420aaaa077b083268e0071595778b0dc7da035f3f7d7c0995a80e1f4bdd7f17",
+      "actual_native_process_calls": 8,
+      "native_reference_open_count": 0
+    },
+    {
+      "identity": "T03",
+      "root": "/mnt/g/LegSA-GINS-project/新数据实验_20261005/STAGE_R5_NMB_XB/ATTEMPT_03",
+      "plan_sha256": "05c2c842ec84d27384c36230e85e6cfedb8b473d0da268aac1942de901a64fc7",
+      "native_seal_sha256": "1d2befeb6bc0208d5c3d7907528ac92adaa216c94a218ba2fb37c1d725cf4c8f",
+      "actual_native_process_calls": 8,
+      "native_reference_open_count": 0
+    }
+  ],
+  "final_main_results_sha256": "4d900b593ec38d32fbc64d6bb2904135d8571c62a1cc5073cb6797700b74d60a",
+  "independent_check_sha256": "2c9dd9dab5c4734d33cef2eb5f3c3ba37ac54d2f5cc555937933bbf1d184ce56",
+  "time_alignment_evidence": "../existing_results/timing_nmb/IMU_CROSSCHECK.md",
+  "final_runtime_vector_checks": 168,
+  "source_scripts": {
+    "align_and_run_new_sequences.py": "8ba97a95d9ba484e276ea0f913b4d3ae52f1fc04aaa18908a0dfe945ad18c791",
+    "check_new_results_0p15.py": "e91a18c9ce1646e9c36e229da54a83e00fd20b6301108bfc04bca031c78b91df",
+    "evaluate_new_sequences.py": "4e37089b3b605aef2463266568472a1649c4b0c32249fef5381f3a5e65ce7dca",
+    "evaluate_new_sequences_0p15.py": "d0357b9474641ba1373d54ad5350787afcbcbc596b7a41019b2d3216bff1a279",
+    "run_new_sequences.py": "cda70fec6c3829f7e3daca7cbfabbc7f4fb57c3b3c236da698b0de10495e287f"
+  }
+}
