@@ -1,0 +1,22 @@
+{
+  "files": [
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/manuscript_gps_solutions_r5_zh.md",
+      "sha256": "5b4c8784b138f83ac693fde3e1bfb8a504b17cf0c277a792139a41ee31578cdc"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/manuscript_gps_solutions_r5_en.md",
+      "sha256": "71e5fdde072d1b4f1f17d8985baf0af0426e89f373b81ae9ef4aaa958eb0d8e3"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/build_manuscript_docx.py",
+      "sha256": "4944829a46ba5fe007dcfccc4a5e22a22481fad45d9e8f4eab1dfc9e1e40b69d"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/manuscript/TIM_measurement_analysis_zh.md",
+      "sha256": "cb7909e5ee1585e559c7894f135f7be545b7bebefe12f7d3ae96a5e11fd6cd2f"
+    }
+  ],
+  "new_native_runs": 0,
+  "new_formal_evaluations": 0
+}
