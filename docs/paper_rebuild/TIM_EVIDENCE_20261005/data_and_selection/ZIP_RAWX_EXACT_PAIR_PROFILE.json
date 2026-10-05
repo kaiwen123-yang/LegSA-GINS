@@ -1,0 +1,106 @@
+[
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-16-59_minimal/",
+    "RAWX_exact_week_tow_pairs": 0,
+    "common_prValid_signals": {
+      "n": 0
+    },
+    "common_cpValid_finite_std_signals": {
+      "n": 0
+    },
+    "epochs_at_least4_common_pr": 0,
+    "epochs_at_least4_common_cp": 0,
+    "pairing_rule": "exact binary week/rcvTow values; signal tuple gnss/sv/sig/freq; no interpolation"
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-25-11_minimal/",
+    "RAWX_exact_week_tow_pairs": 0,
+    "common_prValid_signals": {
+      "n": 0
+    },
+    "common_cpValid_finite_std_signals": {
+      "n": 0
+    },
+    "epochs_at_least4_common_pr": 0,
+    "epochs_at_least4_common_cp": 0,
+    "pairing_rule": "exact binary week/rcvTow values; signal tuple gnss/sv/sig/freq; no interpolation"
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-32-27_minimal/",
+    "RAWX_exact_week_tow_pairs": 0,
+    "common_prValid_signals": {
+      "n": 0
+    },
+    "common_cpValid_finite_std_signals": {
+      "n": 0
+    },
+    "epochs_at_least4_common_pr": 0,
+    "epochs_at_least4_common_cp": 0,
+    "pairing_rule": "exact binary week/rcvTow values; signal tuple gnss/sv/sig/freq; no interpolation"
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-39-50_minimal/",
+    "RAWX_exact_week_tow_pairs": 0,
+    "common_prValid_signals": {
+      "n": 0
+    },
+    "common_cpValid_finite_std_signals": {
+      "n": 0
+    },
+    "epochs_at_least4_common_pr": 0,
+    "epochs_at_least4_common_cp": 0,
+    "pairing_rule": "exact binary week/rcvTow values; signal tuple gnss/sv/sig/freq; no interpolation"
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-25-13_minimal/",
+    "RAWX_exact_week_tow_pairs": 0,
+    "common_prValid_signals": {
+      "n": 0
+    },
+    "common_cpValid_finite_std_signals": {
+      "n": 0
+    },
+    "epochs_at_least4_common_pr": 0,
+    "epochs_at_least4_common_cp": 0,
+    "pairing_rule": "exact binary week/rcvTow values; signal tuple gnss/sv/sig/freq; no interpolation"
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-33-29_minimal/",
+    "RAWX_exact_week_tow_pairs": 0,
+    "common_prValid_signals": {
+      "n": 0
+    },
+    "common_cpValid_finite_std_signals": {
+      "n": 0
+    },
+    "epochs_at_least4_common_pr": 0,
+    "epochs_at_least4_common_cp": 0,
+    "pairing_rule": "exact binary week/rcvTow values; signal tuple gnss/sv/sig/freq; no interpolation"
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-40-53_minimal/",
+    "RAWX_exact_week_tow_pairs": 0,
+    "common_prValid_signals": {
+      "n": 0
+    },
+    "common_cpValid_finite_std_signals": {
+      "n": 0
+    },
+    "epochs_at_least4_common_pr": 0,
+    "epochs_at_least4_common_cp": 0,
+    "pairing_rule": "exact binary week/rcvTow values; signal tuple gnss/sv/sig/freq; no interpolation"
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-49-30_minimal/",
+    "RAWX_exact_week_tow_pairs": 0,
+    "common_prValid_signals": {
+      "n": 0
+    },
+    "common_cpValid_finite_std_signals": {
+      "n": 0
+    },
+    "epochs_at_least4_common_pr": 0,
+    "epochs_at_least4_common_cp": 0,
+    "pairing_rule": "exact binary week/rcvTow values; signal tuple gnss/sv/sig/freq; no interpolation"
+  }
+]

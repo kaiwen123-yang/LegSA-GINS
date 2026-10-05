@@ -1,0 +1,54 @@
+{
+  "inputs": [
+    {
+      "path": "G:\\LegSA-GINS-project\\data\\raw\\XB_PG\\2026-01-05\\高层数据\\nmb1.txt",
+      "bytes": 136663040,
+      "sha256": "01d20699dff81fa0f8f13ee8b5d8956d30e1cd64ed59176a4bb65bfc768ec157"
+    },
+    {
+      "path": "G:\\LegSA-GINS-project\\data\\raw\\XB_PG\\2026-01-05\\高层数据\\nmb2.txt",
+      "bytes": 119517184,
+      "sha256": "9f3a0a2102000acac8cf0a02cb60d609095b0bc69d41c23bfb1ddda008e8f0fa"
+    },
+    {
+      "path": "G:\\LegSA-GINS-project\\data\\raw\\XB_PG\\2026-01-05\\高层数据\\nmb3.txt",
+      "bytes": 119693312,
+      "sha256": "56daf49c6cea2d9484d3a5d4a34329f71ec4bd8609530d40ce7e4cf6cd4ee636"
+    },
+    {
+      "path": "G:\\LegSA-GINS-project\\data\\raw\\XB_PG\\2026-01-05\\高层数据\\nmb4.txt",
+      "bytes": 114655232,
+      "sha256": "e4bf521973f91bbca2c17119e2710dfd9aa1e9ee3f845776e6da75e33899ecad"
+    },
+    {
+      "path": "G:\\LegSA-GINS-project\\data\\raw\\XB_PG\\2026-01-05\\高层数据\\xb1.txt",
+      "bytes": 134111232,
+      "sha256": "486ee147977177f58e1f5cc337d2aa833ad99d3254d8c7059d0741ace549e5cb"
+    },
+    {
+      "path": "G:\\LegSA-GINS-project\\data\\raw\\XB_PG\\2026-01-05\\高层数据\\xb2.txt",
+      "bytes": 123183104,
+      "sha256": "7fba7f5072552f0367fe7bcfecd8fecf09bca2f7b6b845ea2a46ea6d897fc9ca"
+    },
+    {
+      "path": "G:\\LegSA-GINS-project\\data\\raw\\XB_PG\\2026-01-05\\高层数据\\xb3.txt",
+      "bytes": 117280768,
+      "sha256": "ae3c9348cb65d16066e6b110a3f01f4d5dab38642e228c7e8ebeaa03541c0a0f"
+    },
+    {
+      "path": "G:\\LegSA-GINS-project\\data\\raw\\XB_PG\\2026-01-05\\高层数据\\xb4.txt",
+      "bytes": 116461568,
+      "sha256": "ae70e45ab78902d6993e0024bd297c47a0da6d30478eaee1830a2bfd974b7843"
+    },
+    {
+      "path": "G:\\LegSA-GINS-project\\data\\raw\\XB_PG\\2026-01-05\\fixpositon数据\\vrtk2_a87c6e_2026-01-05-11-16-59_minimal.zip",
+      "bytes": 198406698,
+      "sha256": "a12c5f05e1c89739f3c5cf3ab89e07a0b1d0a17858f1b119862d314ea46e3e39"
+    }
+  ],
+  "all_match_original_full_stream": true,
+  "individual8_body_and16_GNSS_raw_hashes_match_prior_catalog": true,
+  "ZIP_container_catalog_match": false,
+  "old_selection_source_pins_unchanged": true,
+  "scientific_executions": 0
+}

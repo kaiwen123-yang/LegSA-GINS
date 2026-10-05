@@ -1,0 +1,959 @@
+[
+  {
+    "file": "nmb1.txt",
+    "bytes": 136663040,
+    "sha256": "01d20699dff81fa0f8f13ee8b5d8956d30e1cd64ed59176a4bb65bfc768ec157",
+    "physical_lines": 6901708,
+    "frames": 93267,
+    "timestamp_rows": 93267,
+    "complete_expected_fields_rows": 93266,
+    "first_t": 1767611765.4258149,
+    "last_t": 1767612173.6718333,
+    "first_utc_interpretation": "2026-01-05T11:16:05.425815+00:00",
+    "last_utc_interpretation": "2026-01-05T11:22:53.671833+00:00",
+    "elapsed_s": 408.246018409729,
+    "positive_dt": {
+      "n": 93266,
+      "min": 9.5375e-05,
+      "p01": 0.0019656293,
+      "p50": 0.004001959,
+      "p95": 0.0062988965,
+      "p99": 0.009264822150000011,
+      "max": 0.02002921
+    },
+    "duplicate_timestamp_rows": 0,
+    "backward_clock_rows": 0,
+    "gaps_gt_0p1_n": 0,
+    "issues": {
+      "NONNUMERIC_SCALAR:ros": 1
+    },
+    "missing_or_bad_lengths": {
+      "rpy": 1,
+      "position": 1,
+      "velocity": 1,
+      "range_obstacle": 1,
+      "foot_force": 1,
+      "foot_position_body": 1,
+      "foot_speed_body": 1
+    },
+    "list_length_distributions": {
+      "quaternion": {
+        "4": 93267
+      },
+      "gyroscope": {
+        "3": 93267
+      },
+      "accelerometer": {
+        "3": 93267
+      },
+      "rpy": {
+        "3": 93266,
+        "-1": 1
+      },
+      "position": {
+        "3": 93266,
+        "-1": 1
+      },
+      "velocity": {
+        "3": 93266,
+        "-1": 1
+      },
+      "range_obstacle": {
+        "4": 93266,
+        "-1": 1
+      },
+      "foot_force": {
+        "4": 93266,
+        "-1": 1
+      },
+      "foot_position_body": {
+        "12": 93266,
+        "-1": 1
+      },
+      "foot_speed_body": {
+        "12": 93266,
+        "-1": 1
+      }
+    },
+    "repeated_consecutive_vectors": {
+      "range_obstacle": 93265,
+      "foot_force": 34302,
+      "accelerometer": 21499,
+      "quaternion": 2529,
+      "gyroscope": 2531,
+      "rpy": 2530,
+      "foot_position_body": 2122,
+      "foot_speed_body": 2122,
+      "position": 1285,
+      "velocity": 1285
+    },
+    "mode_counts": {
+      "error_code": {
+        "0.0": 93267
+      },
+      "mode": {
+        "1.0": 19318,
+        "3.0": 73939,
+        "0.0": 9
+      },
+      "gait_type": {
+        "1.0": 93266
+      }
+    },
+    "quaternion_norm": {
+      "n": 93267,
+      "min": 0.9998924773289147,
+      "p01": 0.9999999125117671,
+      "p50": 1.0000000125440847,
+      "p95": 1.0000000867350658,
+      "p99": 1.000000111477436,
+      "max": 1.0000072742211343
+    },
+    "quat_to_rpy_assumed_rad_rmse": {
+      "wxyz": [
+        3.365726927140416e-06,
+        3.3362628740019036e-06,
+        4.9608510831911185e-06
+      ],
+      "xyzw": [
+        1.6936676055133915,
+        0.032937113470923755,
+        2.1901279589478784
+      ]
+    },
+    "quat_to_rpy_compare_n": 93266,
+    "source_file_metadata_unchanged": true,
+    "audit_scope": "FULL_BYTE_STREAM_MACHINE_PROFILE_NOT_MANUAL_EVERY_LINE_READ"
+  },
+  {
+    "file": "nmb2.txt",
+    "bytes": 119517184,
+    "sha256": "9f3a0a2102000acac8cf0a02cb60d609095b0bc69d41c23bfb1ddda008e8f0fa",
+    "physical_lines": 6054021,
+    "frames": 81811,
+    "timestamp_rows": 81811,
+    "complete_expected_fields_rows": 81811,
+    "first_t": 1767612305.5380137,
+    "last_t": 1767612668.713801,
+    "first_utc_interpretation": "2026-01-05T11:25:05.538014+00:00",
+    "last_utc_interpretation": "2026-01-05T11:31:08.713801+00:00",
+    "elapsed_s": 363.1757872104645,
+    "positive_dt": {
+      "n": 81810,
+      "min": 0.000110833,
+      "p01": 0.00196834516,
+      "p50": 0.00400275,
+      "p95": 0.007300092450000003,
+      "p99": 0.009445323000000028,
+      "max": 0.019991711
+    },
+    "duplicate_timestamp_rows": 0,
+    "backward_clock_rows": 0,
+    "gaps_gt_0p1_n": 0,
+    "issues": {
+      "NONNUMERIC_SCALAR:ros": 1
+    },
+    "missing_or_bad_lengths": {},
+    "list_length_distributions": {
+      "quaternion": {
+        "4": 81811
+      },
+      "gyroscope": {
+        "3": 81811
+      },
+      "accelerometer": {
+        "3": 81811
+      },
+      "rpy": {
+        "3": 81811
+      },
+      "position": {
+        "3": 81811
+      },
+      "velocity": {
+        "3": 81811
+      },
+      "range_obstacle": {
+        "4": 81811
+      },
+      "foot_force": {
+        "4": 81811
+      },
+      "foot_position_body": {
+        "12": 81811
+      },
+      "foot_speed_body": {
+        "12": 81811
+      }
+    },
+    "repeated_consecutive_vectors": {
+      "accelerometer": 18672,
+      "range_obstacle": 81810,
+      "foot_force": 21342,
+      "quaternion": 2346,
+      "gyroscope": 2346,
+      "rpy": 2346,
+      "position": 1270,
+      "velocity": 1270,
+      "foot_position_body": 2113,
+      "foot_speed_body": 2113
+    },
+    "mode_counts": {
+      "error_code": {
+        "0.0": 81811
+      },
+      "mode": {
+        "1.0": 6703,
+        "3.0": 75104,
+        "0.0": 4
+      },
+      "gait_type": {
+        "1.0": 81811
+      }
+    },
+    "quaternion_norm": {
+      "n": 81811,
+      "min": 0.9999998444478629,
+      "p01": 0.9999999110985338,
+      "p50": 1.000000011817875,
+      "p95": 1.0000000862521128,
+      "p99": 1.000000111626986,
+      "max": 1.0000001871781432
+    },
+    "quat_to_rpy_assumed_rad_rmse": {
+      "wxyz": [
+        1.4642895329284449e-09,
+        1.4046963643748067e-09,
+        7.946868628075502e-08
+      ],
+      "xyzw": [
+        1.8248965766700302,
+        0.027120865154068342,
+        2.051134376058992
+      ]
+    },
+    "quat_to_rpy_compare_n": 81811,
+    "source_file_metadata_unchanged": true,
+    "audit_scope": "FULL_BYTE_STREAM_MACHINE_PROFILE_NOT_MANUAL_EVERY_LINE_READ"
+  },
+  {
+    "file": "nmb3.txt",
+    "bytes": 119693312,
+    "sha256": "56daf49c6cea2d9484d3a5d4a34329f71ec4bd8609530d40ce7e4cf6cd4ee636",
+    "physical_lines": 6064346,
+    "frames": 81951,
+    "timestamp_rows": 81951,
+    "complete_expected_fields_rows": 81950,
+    "first_t": 1767612765.7098157,
+    "last_t": 1767613130.8418121,
+    "first_utc_interpretation": "2026-01-05T11:32:45.709816+00:00",
+    "last_utc_interpretation": "2026-01-05T11:38:50.841812+00:00",
+    "elapsed_s": 365.13199639320374,
+    "positive_dt": {
+      "n": 81950,
+      "min": 9.3042e-05,
+      "p01": 0.00197141667,
+      "p50": 0.004003125,
+      "p95": 0.0074527907000000015,
+      "p99": 0.00949970974999999,
+      "max": 0.021980627
+    },
+    "duplicate_timestamp_rows": 0,
+    "backward_clock_rows": 0,
+    "gaps_gt_0p1_n": 0,
+    "issues": {
+      "NONNUMERIC_SCALAR:ros": 1
+    },
+    "missing_or_bad_lengths": {
+      "range_obstacle": 1,
+      "foot_force": 1,
+      "foot_position_body": 1,
+      "foot_speed_body": 1
+    },
+    "list_length_distributions": {
+      "quaternion": {
+        "4": 81951
+      },
+      "gyroscope": {
+        "3": 81951
+      },
+      "accelerometer": {
+        "3": 81951
+      },
+      "rpy": {
+        "3": 81951
+      },
+      "position": {
+        "3": 81951
+      },
+      "velocity": {
+        "3": 81951
+      },
+      "range_obstacle": {
+        "4": 81950,
+        "2": 1
+      },
+      "foot_force": {
+        "4": 81950,
+        "-1": 1
+      },
+      "foot_position_body": {
+        "12": 81950,
+        "-1": 1
+      },
+      "foot_speed_body": {
+        "12": 81950,
+        "-1": 1
+      }
+    },
+    "repeated_consecutive_vectors": {
+      "accelerometer": 18622,
+      "range_obstacle": 81949,
+      "foot_force": 21443,
+      "quaternion": 2317,
+      "gyroscope": 2317,
+      "rpy": 2317,
+      "foot_position_body": 2042,
+      "foot_speed_body": 2042,
+      "position": 1277,
+      "velocity": 1277
+    },
+    "mode_counts": {
+      "error_code": {
+        "0.0": 81951
+      },
+      "mode": {
+        "1.0": 7335,
+        "3.0": 74614,
+        "0.0": 2
+      },
+      "gait_type": {
+        "1.0": 81951
+      }
+    },
+    "quaternion_norm": {
+      "n": 81951,
+      "min": 0.9998711423509816,
+      "p01": 0.9999999123427278,
+      "p50": 1.0000000118503323,
+      "p95": 1.0000000868849614,
+      "p99": 1.0000001122981863,
+      "max": 1.0000001756364427
+    },
+    "quat_to_rpy_assumed_rad_rmse": {
+      "wxyz": [
+        1.5878885099297127e-06,
+        5.8940426858299525e-08,
+        1.2729480833784458e-06
+      ],
+      "xyzw": [
+        1.7165965746532184,
+        0.03470913843379063,
+        2.01730206232578
+      ]
+    },
+    "quat_to_rpy_compare_n": 81951,
+    "source_file_metadata_unchanged": true,
+    "audit_scope": "FULL_BYTE_STREAM_MACHINE_PROFILE_NOT_MANUAL_EVERY_LINE_READ"
+  },
+  {
+    "file": "nmb4.txt",
+    "bytes": 114655232,
+    "sha256": "e4bf521973f91bbca2c17119e2710dfd9aa1e9ee3f845776e6da75e33899ecad",
+    "physical_lines": 5817143,
+    "frames": 78610,
+    "timestamp_rows": 78610,
+    "complete_expected_fields_rows": 78609,
+    "first_t": 1767613191.9618082,
+    "last_t": 1767613539.701795,
+    "first_utc_interpretation": "2026-01-05T11:39:51.961808+00:00",
+    "last_utc_interpretation": "2026-01-05T11:45:39.701795+00:00",
+    "elapsed_s": 347.7399868965149,
+    "positive_dt": {
+      "n": 78609,
+      "min": 0.000112875,
+      "p01": 0.00196692272,
+      "p50": 0.004002667,
+      "p95": 0.0070651091999999775,
+      "p99": 0.009031390999999991,
+      "max": 0.021958044
+    },
+    "duplicate_timestamp_rows": 0,
+    "backward_clock_rows": 0,
+    "gaps_gt_0p1_n": 0,
+    "issues": {
+      "NONNUMERIC_SCALAR:ros": 1
+    },
+    "missing_or_bad_lengths": {
+      "foot_speed_body": 1
+    },
+    "list_length_distributions": {
+      "quaternion": {
+        "4": 78610
+      },
+      "gyroscope": {
+        "3": 78610
+      },
+      "accelerometer": {
+        "3": 78610
+      },
+      "rpy": {
+        "3": 78610
+      },
+      "position": {
+        "3": 78610
+      },
+      "velocity": {
+        "3": 78610
+      },
+      "range_obstacle": {
+        "4": 78610
+      },
+      "foot_force": {
+        "4": 78610
+      },
+      "foot_position_body": {
+        "12": 78610
+      },
+      "foot_speed_body": {
+        "12": 78609,
+        "10": 1
+      }
+    },
+    "repeated_consecutive_vectors": {
+      "accelerometer": 18124,
+      "range_obstacle": 78609,
+      "foot_force": 18443,
+      "quaternion": 2353,
+      "gyroscope": 2353,
+      "rpy": 2353,
+      "foot_position_body": 2043,
+      "foot_speed_body": 2043,
+      "position": 1256,
+      "velocity": 1256
+    },
+    "mode_counts": {
+      "error_code": {
+        "0.0": 78610
+      },
+      "mode": {
+        "1.0": 3308,
+        "3.0": 75301,
+        "0.0": 1
+      },
+      "gait_type": {
+        "1.0": 78610
+      }
+    },
+    "quaternion_norm": {
+      "n": 78610,
+      "min": 0.9998732210972405,
+      "p01": 0.9999999126697883,
+      "p50": 1.0000000124074062,
+      "p95": 1.0000000866778433,
+      "p99": 1.0000001121456432,
+      "max": 1.0001736727801347
+    },
+    "quat_to_rpy_assumed_rad_rmse": {
+      "wxyz": [
+        1.0573826614011143e-06,
+        2.5148595959743017e-06,
+        2.4132986551148743e-06
+      ],
+      "xyzw": [
+        1.79109623883,
+        0.03241746517922858,
+        1.81785305386034
+      ]
+    },
+    "quat_to_rpy_compare_n": 78610,
+    "source_file_metadata_unchanged": true,
+    "audit_scope": "FULL_BYTE_STREAM_MACHINE_PROFILE_NOT_MANUAL_EVERY_LINE_READ"
+  },
+  {
+    "file": "xb1.txt",
+    "bytes": 134111232,
+    "sha256": "486ee147977177f58e1f5cc337d2aa833ad99d3254d8c7059d0741ace549e5cb",
+    "physical_lines": 6789661,
+    "frames": 91753,
+    "timestamp_rows": 91753,
+    "complete_expected_fields_rows": 91752,
+    "first_t": 1767615915.8046212,
+    "last_t": 1767616311.4445968,
+    "first_utc_interpretation": "2026-01-05T12:25:15.804621+00:00",
+    "last_utc_interpretation": "2026-01-05T12:31:51.444597+00:00",
+    "elapsed_s": 395.6399755477905,
+    "positive_dt": {
+      "n": 91752,
+      "min": 9.0417e-05,
+      "p01": 0.00194045851,
+      "p50": 0.00400275,
+      "p95": 0.006117,
+      "p99": 0.008166425680000018,
+      "max": 0.197953645
+    },
+    "duplicate_timestamp_rows": 0,
+    "backward_clock_rows": 0,
+    "gaps_gt_0p1_n": 1,
+    "issues": {
+      "NONNUMERIC_SCALAR:ros": 1
+    },
+    "missing_or_bad_lengths": {
+      "quaternion": 1,
+      "gyroscope": 1,
+      "accelerometer": 1,
+      "rpy": 1,
+      "position": 1,
+      "velocity": 1,
+      "range_obstacle": 1,
+      "foot_force": 1,
+      "foot_position_body": 1,
+      "foot_speed_body": 1
+    },
+    "list_length_distributions": {
+      "quaternion": {
+        "4": 91752,
+        "1": 1
+      },
+      "gyroscope": {
+        "3": 91752,
+        "-1": 1
+      },
+      "accelerometer": {
+        "3": 91752,
+        "-1": 1
+      },
+      "rpy": {
+        "3": 91752,
+        "-1": 1
+      },
+      "position": {
+        "3": 91752,
+        "-1": 1
+      },
+      "velocity": {
+        "3": 91752,
+        "-1": 1
+      },
+      "range_obstacle": {
+        "4": 91752,
+        "-1": 1
+      },
+      "foot_force": {
+        "4": 91752,
+        "-1": 1
+      },
+      "foot_position_body": {
+        "12": 91752,
+        "-1": 1
+      },
+      "foot_speed_body": {
+        "12": 91752,
+        "-1": 1
+      }
+    },
+    "repeated_consecutive_vectors": {
+      "accelerometer": 22199,
+      "range_obstacle": 91751,
+      "foot_force": 24600,
+      "foot_position_body": 2116,
+      "foot_speed_body": 2115,
+      "quaternion": 2262,
+      "gyroscope": 2263,
+      "rpy": 2262,
+      "position": 1390,
+      "velocity": 1390
+    },
+    "mode_counts": {
+      "error_code": {
+        "0.0": 91753
+      },
+      "mode": {
+        "1.0": 4444,
+        "3.0": 87304,
+        "0.0": 4
+      },
+      "gait_type": {
+        "1.0": 91752
+      }
+    },
+    "quaternion_norm": {
+      "n": 91752,
+      "min": 0.9999998465745987,
+      "p01": 0.9999999104368723,
+      "p50": 1.000000012142004,
+      "p95": 1.0000000877389421,
+      "p99": 1.0000001145394553,
+      "max": 1.0000001812493617
+    },
+    "quat_to_rpy_assumed_rad_rmse": {
+      "wxyz": [
+        1.417564976598089e-09,
+        1.9078292462911957e-09,
+        7.21390660233826e-08
+      ],
+      "xyzw": [
+        2.037338050209913,
+        0.036507993286069,
+        1.9186963941313522
+      ]
+    },
+    "quat_to_rpy_compare_n": 91752,
+    "source_file_metadata_unchanged": true,
+    "audit_scope": "FULL_BYTE_STREAM_MACHINE_PROFILE_NOT_MANUAL_EVERY_LINE_READ"
+  },
+  {
+    "file": "xb2.txt",
+    "bytes": 123183104,
+    "sha256": "7fba7f5072552f0367fe7bcfecd8fecf09bca2f7b6b845ea2a46ea6d897fc9ca",
+    "physical_lines": 6248228,
+    "frames": 84436,
+    "timestamp_rows": 84436,
+    "complete_expected_fields_rows": 84435,
+    "first_t": 1767616419.5257761,
+    "last_t": 1767616778.1885898,
+    "first_utc_interpretation": "2026-01-05T12:33:39.525776+00:00",
+    "last_utc_interpretation": "2026-01-05T12:39:38.188590+00:00",
+    "elapsed_s": 358.66281366348267,
+    "positive_dt": {
+      "n": 84435,
+      "min": 8.925e-05,
+      "p01": 0.0019355,
+      "p50": 0.004001375,
+      "p95": 0.006058792,
+      "p99": 0.00803526128,
+      "max": 0.168002684
+    },
+    "duplicate_timestamp_rows": 0,
+    "backward_clock_rows": 0,
+    "gaps_gt_0p1_n": 1,
+    "issues": {
+      "NONNUMERIC_SCALAR:ros": 1
+    },
+    "missing_or_bad_lengths": {
+      "velocity": 1,
+      "range_obstacle": 1,
+      "foot_force": 1,
+      "foot_position_body": 1,
+      "foot_speed_body": 1
+    },
+    "list_length_distributions": {
+      "quaternion": {
+        "4": 84436
+      },
+      "gyroscope": {
+        "3": 84436
+      },
+      "accelerometer": {
+        "3": 84436
+      },
+      "rpy": {
+        "3": 84436
+      },
+      "position": {
+        "3": 84436
+      },
+      "velocity": {
+        "3": 84435,
+        "-1": 1
+      },
+      "range_obstacle": {
+        "4": 84435,
+        "-1": 1
+      },
+      "foot_force": {
+        "4": 84435,
+        "-1": 1
+      },
+      "foot_position_body": {
+        "12": 84435,
+        "-1": 1
+      },
+      "foot_speed_body": {
+        "12": 84435,
+        "-1": 1
+      }
+    },
+    "repeated_consecutive_vectors": {
+      "range_obstacle": 84434,
+      "foot_force": 20537,
+      "quaternion": 2104,
+      "gyroscope": 2104,
+      "accelerometer": 20899,
+      "rpy": 2104,
+      "position": 1293,
+      "velocity": 1293,
+      "foot_position_body": 2027,
+      "foot_speed_body": 2026
+    },
+    "mode_counts": {
+      "error_code": {
+        "0.0": 84436
+      },
+      "mode": {
+        "1.0": 2356,
+        "0.0": 8,
+        "3.0": 82072
+      },
+      "gait_type": {
+        "1.0": 84436
+      }
+    },
+    "quaternion_norm": {
+      "n": 84436,
+      "min": 0.999999839979919,
+      "p01": 0.9999999125225825,
+      "p50": 1.0000000120913288,
+      "p95": 1.000000085812182,
+      "p99": 1.000000110811244,
+      "max": 1.0000001829826206
+    },
+    "quat_to_rpy_assumed_rad_rmse": {
+      "wxyz": [
+        1.2472915383896609e-09,
+        2.064285111047177e-09,
+        8.742057404269928e-08
+      ],
+      "xyzw": [
+        1.8520241513048796,
+        0.039980224308216204,
+        1.8209346633555656
+      ]
+    },
+    "quat_to_rpy_compare_n": 84436,
+    "source_file_metadata_unchanged": true,
+    "audit_scope": "FULL_BYTE_STREAM_MACHINE_PROFILE_NOT_MANUAL_EVERY_LINE_READ"
+  },
+  {
+    "file": "xb3.txt",
+    "bytes": 117280768,
+    "sha256": "ae3c9348cb65d16066e6b110a3f01f4d5dab38642e228c7e8ebeaa03541c0a0f",
+    "physical_lines": 5942625,
+    "frames": 80306,
+    "timestamp_rows": 80306,
+    "complete_expected_fields_rows": 80305,
+    "first_t": 1767616855.6466038,
+    "last_t": 1767617202.0825975,
+    "first_utc_interpretation": "2026-01-05T12:40:55.646604+00:00",
+    "last_utc_interpretation": "2026-01-05T12:46:42.082597+00:00",
+    "elapsed_s": 346.43599367141724,
+    "positive_dt": {
+      "n": 80305,
+      "min": 0.000107042,
+      "p01": 0.00194512504,
+      "p50": 0.004001958,
+      "p95": 0.006072050600000001,
+      "p99": 0.008034737640000001,
+      "max": 0.221982564
+    },
+    "duplicate_timestamp_rows": 0,
+    "backward_clock_rows": 0,
+    "gaps_gt_0p1_n": 2,
+    "issues": {
+      "NONNUMERIC_SCALAR:ros": 1
+    },
+    "missing_or_bad_lengths": {
+      "foot_position_body": 1,
+      "foot_speed_body": 1
+    },
+    "list_length_distributions": {
+      "quaternion": {
+        "4": 80306
+      },
+      "gyroscope": {
+        "3": 80306
+      },
+      "accelerometer": {
+        "3": 80306
+      },
+      "rpy": {
+        "3": 80306
+      },
+      "position": {
+        "3": 80306
+      },
+      "velocity": {
+        "3": 80306
+      },
+      "range_obstacle": {
+        "4": 80306
+      },
+      "foot_force": {
+        "4": 80306
+      },
+      "foot_position_body": {
+        "12": 80305,
+        "-1": 1
+      },
+      "foot_speed_body": {
+        "12": 80305,
+        "-1": 1
+      }
+    },
+    "repeated_consecutive_vectors": {
+      "accelerometer": 19052,
+      "range_obstacle": 80305,
+      "foot_force": 19846,
+      "quaternion": 1737,
+      "gyroscope": 1737,
+      "rpy": 1737,
+      "foot_position_body": 1624,
+      "foot_speed_body": 1624,
+      "position": 910,
+      "velocity": 910
+    },
+    "mode_counts": {
+      "error_code": {
+        "0.0": 80306
+      },
+      "mode": {
+        "1.0": 3417,
+        "3.0": 76885,
+        "0.0": 4
+      },
+      "gait_type": {
+        "1.0": 80306
+      }
+    },
+    "quaternion_norm": {
+      "n": 80306,
+      "min": 0.9999998562968764,
+      "p01": 0.9999999130083689,
+      "p50": 1.0000000123601858,
+      "p95": 1.0000000864787388,
+      "p99": 1.0000001114913877,
+      "max": 1.0000001747703096
+    },
+    "quat_to_rpy_assumed_rad_rmse": {
+      "wxyz": [
+        1.176810380599032e-09,
+        1.7274138116135772e-09,
+        9.373659069576132e-08
+      ],
+      "xyzw": [
+        1.7957164193748567,
+        0.03359473549177916,
+        1.7457866374475621
+      ]
+    },
+    "quat_to_rpy_compare_n": 80306,
+    "source_file_metadata_unchanged": true,
+    "audit_scope": "FULL_BYTE_STREAM_MACHINE_PROFILE_NOT_MANUAL_EVERY_LINE_READ"
+  },
+  {
+    "file": "xb4.txt",
+    "bytes": 116461568,
+    "sha256": "ae70e45ab78902d6993e0024bd297c47a0da6d30478eaee1830a2bfd974b7843",
+    "physical_lines": 5900602,
+    "frames": 79738,
+    "timestamp_rows": 79738,
+    "complete_expected_fields_rows": 79737,
+    "first_t": 1767617368.804589,
+    "last_t": 1767617729.4965942,
+    "first_utc_interpretation": "2026-01-05T12:49:28.804589+00:00",
+    "last_utc_interpretation": "2026-01-05T12:55:29.496594+00:00",
+    "elapsed_s": 360.6920051574707,
+    "positive_dt": {
+      "n": 79737,
+      "min": 9.9459e-05,
+      "p01": 0.00196564676,
+      "p50": 0.004004876,
+      "p95": 0.006816758999999988,
+      "p99": 0.00810229012,
+      "max": 0.028093919
+    },
+    "duplicate_timestamp_rows": 0,
+    "backward_clock_rows": 0,
+    "gaps_gt_0p1_n": 0,
+    "issues": {
+      "NONNUMERIC_SCALAR:ros": 1
+    },
+    "missing_or_bad_lengths": {
+      "foot_position_body": 1,
+      "foot_speed_body": 1
+    },
+    "list_length_distributions": {
+      "quaternion": {
+        "4": 79738
+      },
+      "gyroscope": {
+        "3": 79738
+      },
+      "accelerometer": {
+        "3": 79738
+      },
+      "rpy": {
+        "3": 79738
+      },
+      "position": {
+        "3": 79738
+      },
+      "velocity": {
+        "3": 79738
+      },
+      "range_obstacle": {
+        "4": 79738
+      },
+      "foot_force": {
+        "4": 79738
+      },
+      "foot_position_body": {
+        "12": 79737,
+        "10": 1
+      },
+      "foot_speed_body": {
+        "12": 79737,
+        "-1": 1
+      }
+    },
+    "repeated_consecutive_vectors": {
+      "range_obstacle": 79737,
+      "foot_force": 19571,
+      "accelerometer": 16661,
+      "quaternion": 1358,
+      "gyroscope": 1358,
+      "rpy": 1358,
+      "position": 749,
+      "velocity": 749,
+      "foot_position_body": 1233,
+      "foot_speed_body": 1232
+    },
+    "mode_counts": {
+      "error_code": {
+        "0.0": 79738
+      },
+      "mode": {
+        "1.0": 6697,
+        "3.0": 73038,
+        "0.0": 3
+      },
+      "gait_type": {
+        "1.0": 79738
+      }
+    },
+    "quaternion_norm": {
+      "n": 79738,
+      "min": 0.9999998474447714,
+      "p01": 0.9999999111268758,
+      "p50": 1.000000012523825,
+      "p95": 1.0000000882205682,
+      "p99": 1.0000001142411534,
+      "max": 1.0000001745671854
+    },
+    "quat_to_rpy_assumed_rad_rmse": {
+      "wxyz": [
+        1.1994461877537555e-09,
+        2.0647196763580426e-09,
+        9.497653039404002e-08
+      ],
+      "xyzw": [
+        1.768702507455853,
+        0.039311169466003104,
+        1.7034097968293964
+      ]
+    },
+    "quat_to_rpy_compare_n": 79738,
+    "source_file_metadata_unchanged": true,
+    "audit_scope": "FULL_BYTE_STREAM_MACHINE_PROFILE_NOT_MANUAL_EVERY_LINE_READ"
+  }
+]

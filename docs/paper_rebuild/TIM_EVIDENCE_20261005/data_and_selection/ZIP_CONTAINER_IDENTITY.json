@@ -1,0 +1,11 @@
+{
+  "path": "G:\\LegSA-GINS-project\\data\\raw\\XB_PG\\2026-01-05\\fixpositon数据\\vrtk2_a87c6e_2026-01-05-11-16-59_minimal.zip",
+  "bytes": 198406698,
+  "sha256": "a12c5f05e1c89739f3c5cf3ab89e07a0b1d0a17858f1b119862d314ea46e3e39",
+  "members": 176,
+  "source_metadata_unchanged": true,
+  "no_members_extracted": true,
+  "reference_payload_used_for_alignment": false,
+  "scientific_executions": 0,
+  "profiler_sha256": "c334b4ea7442eb520f1ad76a5dcbec45c9ff43fbe3896cbba6f5cfd886296898"
+}

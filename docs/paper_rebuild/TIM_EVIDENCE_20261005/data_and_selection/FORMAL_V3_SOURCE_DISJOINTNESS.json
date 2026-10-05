@@ -1,0 +1,24 @@
+{
+  "candidate_GNSS_raw_hashes": [
+    "6a06882679158cd2d8e6f7fe8dca513676826409580ea41ad4981445d868cea2",
+    "db8006bf1f8b1ff31ff82d1d9c7a777cf305ab7cee2f1164b89fa0a83acd7852",
+    "fcc9914a4b6aee924a8fd48fe6dfd511746fabbe00c86fc3559bfa6414eb8ebd",
+    "4b43d13605f26f85b863d75eef47ba5a5118c05bcd427550271f2f2e155e9a24",
+    "ef92c0d0e32df282e5f0d457f545d42ef9fdf781379266908fa4da182c39f0c5",
+    "bf849a5abca61e6734ada1fb329ef57d6c4a1c5f5d3cee9e44575387b056e1c7",
+    "a2ee231afcd6ed8f23c3e4efdc129d0267a2b31dfabde195c75537c3a39f1c5e",
+    "dfb1b519fe6f6f96bc7a7d898caa66298a47dfa4810b9e8e724876267602c440",
+    "50b2e61e7dbbe45bf6c150e75252d8f6b6b410e5ed9779fc2defb9717eae0625",
+    "448a48b87c28fca6371610c8aad4367d8a18deb2b278adeb9f0a4cf982f1258e",
+    "364ba125edd0e1ccaae9125b04f49ad8fc7889df6bf65df06d3f5baa742ee39e",
+    "c5a673d9cb625776f0832917696c4a95976ef2dbc02aa26532ea5cfeaf7292be",
+    "bf5522028e0806440b8faef93791f674d3e311f5f2c8492cd989bdf4d53b693e",
+    "3784234f5a050d33a4de073f3590eb2ac556c9ac8c078f39728a0dbd39ef9cda",
+    "4fb836a7f4d6c18067bdb9076b87b19d5c9932a311ae28aac0a158a2470b1593",
+    "57817829d3b5d9c1bd7def3895bcaf0c3b8b22f2188ba16e5b65b42b8bc501a6"
+  ],
+  "actual_formal_config_hash_tokens_examined": 21,
+  "overlap_with_formal_config_hash_tokens": [],
+  "different_dates_are_not_independent_validation": true,
+  "qualification": "Exact candidate GNSS raw hashes not present in frozenMarch6 actual3 configs; does not prove research use absent"
+}

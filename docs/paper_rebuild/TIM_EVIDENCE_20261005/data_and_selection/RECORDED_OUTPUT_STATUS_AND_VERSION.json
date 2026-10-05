@@ -1,0 +1,738 @@
+[
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-16-59_minimal/",
+    "odom_status_rows": 3663,
+    "status_field_counts": {
+      "header.frame_id": {
+        "": 3663
+      },
+      "init_status": {
+        "2": 3663
+      },
+      "fusion_imu": {
+        "1": 3663
+      },
+      "fusion_gnss1": {
+        "1": 1644,
+        "0": 1661,
+        "2": 358
+      },
+      "fusion_gnss2": {
+        "1": 1635,
+        "0": 1670,
+        "2": 358
+      },
+      "fusion_corr": {
+        "1": 3304,
+        "0": 1,
+        "2": 358
+      },
+      "fusion_cam1": {
+        "1": 3663
+      },
+      "fusion_ws": {
+        "0": 3663
+      },
+      "fusion_markers": {
+        "-1": 3663
+      },
+      "imu_status": {
+        "3": 3663
+      },
+      "imu_noise": {
+        "1": 428,
+        "3": 3234,
+        "2": 1
+      },
+      "gnss1_status": {
+        "8": 1544,
+        "0": 1661,
+        "5": 458
+      },
+      "gnss2_status": {
+        "8": 1531,
+        "0": 1670,
+        "5": 462
+      },
+      "baseline_status": {
+        "3": 1493,
+        "1": 2111,
+        "2": 59
+      },
+      "corr_status": {
+        "5": 3304,
+        "1": 1,
+        "3": 358
+      },
+      "cam1_status": {
+        "5": 3663
+      },
+      "ws_status": {
+        "0": 3663
+      },
+      "markers_status": {
+        "-1": 3663
+      },
+      "imu_conv": {
+        "7": 3663
+      },
+      "ws_conv": {
+        "6": 3663
+      },
+      "markers_conv": {
+        "-1": 3663
+      }
+    },
+    "odom_status_source_sha256": "98aaddaa38a4301b45118ba8457eec6d592757da650dcd11ae38d097ff911009",
+    "actual_ODOMETRY_message_version": "2",
+    "actual_ODOMETRY_header_prefix": "$FP,ODOMETRY,2,2400,127039.500000",
+    "userio_source_sha256": "48f98bcdaac6ff32dfe30906fda5207e719b179a789a58d795e8536d1d5f1b3e",
+    "firmware_version": "NOT_ESTABLISHED_BY_AVAILABLE_VERSION_MESSAGES",
+    "receiver_MON_VER_messages": 0,
+    "FP_A_TEXT_messages": 0,
+    "interpretation": "ODOMETRY/TF schema version2 is not installed Fixposition firmware version; fusion enums retained literally"
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-25-11_minimal/",
+    "odom_status_rows": 3611,
+    "status_field_counts": {
+      "header.frame_id": {
+        "": 3611
+      },
+      "init_status": {
+        "2": 3611
+      },
+      "fusion_imu": {
+        "1": 3416,
+        "2": 195
+      },
+      "fusion_gnss1": {
+        "1": 1620,
+        "0": 1722,
+        "2": 269
+      },
+      "fusion_gnss2": {
+        "1": 1670,
+        "0": 1674,
+        "2": 267
+      },
+      "fusion_corr": {
+        "1": 3341,
+        "0": 1,
+        "2": 269
+      },
+      "fusion_cam1": {
+        "1": 3611
+      },
+      "fusion_ws": {
+        "0": 3611
+      },
+      "fusion_markers": {
+        "-1": 3611
+      },
+      "imu_status": {
+        "3": 3416,
+        "2": 195
+      },
+      "imu_noise": {
+        "1": 275,
+        "3": 3330,
+        "2": 6
+      },
+      "gnss1_status": {
+        "8": 1459,
+        "0": 1722,
+        "5": 430
+      },
+      "gnss2_status": {
+        "8": 1513,
+        "0": 1674,
+        "5": 424
+      },
+      "baseline_status": {
+        "3": 1385,
+        "2": 197,
+        "1": 2029
+      },
+      "corr_status": {
+        "5": 3341,
+        "1": 1,
+        "3": 269
+      },
+      "cam1_status": {
+        "5": 3611
+      },
+      "ws_status": {
+        "0": 3611
+      },
+      "markers_status": {
+        "-1": 3611
+      },
+      "imu_conv": {
+        "7": 3416,
+        "4": 195
+      },
+      "ws_conv": {
+        "6": 3611
+      },
+      "markers_conv": {
+        "-1": 3611
+      }
+    },
+    "odom_status_source_sha256": "1fd48d01cca98f3daeafc90009ed657944dd7610679a575f468a406a3b2f2f07",
+    "actual_ODOMETRY_message_version": "2",
+    "actual_ODOMETRY_header_prefix": "$FP,ODOMETRY,2,2400,127530.900000",
+    "userio_source_sha256": "475dd7407dfa62da622e6187b3c382300e485330a5cdcfab3e38ca6e79a536b5",
+    "firmware_version": "NOT_ESTABLISHED_BY_AVAILABLE_VERSION_MESSAGES",
+    "receiver_MON_VER_messages": 0,
+    "FP_A_TEXT_messages": 0,
+    "interpretation": "ODOMETRY/TF schema version2 is not installed Fixposition firmware version; fusion enums retained literally"
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-32-27_minimal/",
+    "odom_status_rows": 3833,
+    "status_field_counts": {
+      "header.frame_id": {
+        "": 3833
+      },
+      "init_status": {
+        "2": 3833
+      },
+      "fusion_imu": {
+        "1": 3833
+      },
+      "fusion_gnss1": {
+        "1": 1810,
+        "0": 1652,
+        "2": 371
+      },
+      "fusion_gnss2": {
+        "1": 1790,
+        "0": 1709,
+        "2": 334
+      },
+      "fusion_corr": {
+        "1": 3451,
+        "0": 2,
+        "2": 380
+      },
+      "fusion_cam1": {
+        "1": 3833
+      },
+      "fusion_ws": {
+        "0": 3833
+      },
+      "fusion_markers": {
+        "-1": 3833
+      },
+      "imu_status": {
+        "3": 3833
+      },
+      "imu_noise": {
+        "1": 498,
+        "3": 3326,
+        "2": 9
+      },
+      "gnss1_status": {
+        "8": 1799,
+        "0": 1652,
+        "5": 382
+      },
+      "gnss2_status": {
+        "8": 1783,
+        "0": 1709,
+        "5": 341
+      },
+      "baseline_status": {
+        "3": 1723,
+        "2": 118,
+        "1": 1992
+      },
+      "corr_status": {
+        "5": 3451,
+        "1": 2,
+        "3": 380
+      },
+      "cam1_status": {
+        "5": 3833
+      },
+      "ws_status": {
+        "0": 3833
+      },
+      "markers_status": {
+        "-1": 3833
+      },
+      "imu_conv": {
+        "7": 3833
+      },
+      "ws_conv": {
+        "6": 3833
+      },
+      "markers_conv": {
+        "-1": 3833
+      }
+    },
+    "odom_status_source_sha256": "481b76174906314bead35caa3b92400281aa11a375600f921f932befefaeeabc",
+    "actual_ODOMETRY_message_version": "2",
+    "actual_ODOMETRY_header_prefix": "$FP,ODOMETRY,2,2400,127966.900000",
+    "userio_source_sha256": "ab391de00223f162d50b29de1b19ddffc66404b9a36dbf86090ab7069826168f",
+    "firmware_version": "NOT_ESTABLISHED_BY_AVAILABLE_VERSION_MESSAGES",
+    "receiver_MON_VER_messages": 0,
+    "FP_A_TEXT_messages": 0,
+    "interpretation": "ODOMETRY/TF schema version2 is not installed Fixposition firmware version; fusion enums retained literally"
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-39-50_minimal/",
+    "odom_status_rows": 3559,
+    "status_field_counts": {
+      "header.frame_id": {
+        "": 3559
+      },
+      "init_status": {
+        "2": 3559
+      },
+      "fusion_imu": {
+        "2": 1041,
+        "1": 2518
+      },
+      "fusion_gnss1": {
+        "1": 1444,
+        "2": 372,
+        "0": 1743
+      },
+      "fusion_gnss2": {
+        "1": 1474,
+        "0": 1715,
+        "2": 370
+      },
+      "fusion_corr": {
+        "1": 3186,
+        "2": 372,
+        "0": 1
+      },
+      "fusion_cam1": {
+        "1": 3559
+      },
+      "fusion_ws": {
+        "0": 3559
+      },
+      "fusion_markers": {
+        "-1": 3559
+      },
+      "imu_status": {
+        "1": 948,
+        "2": 93,
+        "3": 2518
+      },
+      "imu_noise": {
+        "1": 240,
+        "3": 3314,
+        "2": 5
+      },
+      "gnss1_status": {
+        "8": 1351,
+        "5": 465,
+        "0": 1743
+      },
+      "gnss2_status": {
+        "8": 1360,
+        "0": 1715,
+        "5": 484
+      },
+      "baseline_status": {
+        "3": 1313,
+        "2": 127,
+        "1": 2119
+      },
+      "corr_status": {
+        "5": 3186,
+        "3": 372,
+        "1": 1
+      },
+      "cam1_status": {
+        "5": 3559
+      },
+      "ws_status": {
+        "0": 3559
+      },
+      "markers_status": {
+        "-1": 3559
+      },
+      "imu_conv": {
+        "3": 102,
+        "4": 939,
+        "7": 2518
+      },
+      "ws_conv": {
+        "6": 3559
+      },
+      "markers_conv": {
+        "-1": 3559
+      }
+    },
+    "odom_status_source_sha256": "12c026eea9ed1355c281d0c49a563a7b37d659e9b1581070c31371f96df00fbb",
+    "actual_ODOMETRY_message_version": "2",
+    "actual_ODOMETRY_header_prefix": "$FP,ODOMETRY,2,2400,128409.400000",
+    "userio_source_sha256": "efd2ae8ee9433839cf5df86e51bb3fb9845175fb376ae3fb3bfc32c3f9c9882a",
+    "firmware_version": "NOT_ESTABLISHED_BY_AVAILABLE_VERSION_MESSAGES",
+    "receiver_MON_VER_messages": 0,
+    "FP_A_TEXT_messages": 0,
+    "interpretation": "ODOMETRY/TF schema version2 is not installed Fixposition firmware version; fusion enums retained literally"
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-25-13_minimal/",
+    "odom_status_rows": 4054,
+    "status_field_counts": {
+      "header.frame_id": {
+        "": 4054
+      },
+      "init_status": {
+        "2": 4054
+      },
+      "fusion_imu": {
+        "1": 4054
+      },
+      "fusion_gnss1": {
+        "2": 2774,
+        "1": 614,
+        "0": 666
+      },
+      "fusion_gnss2": {
+        "2": 2790,
+        "1": 727,
+        "0": 537
+      },
+      "fusion_corr": {
+        "2": 2790,
+        "1": 1264
+      },
+      "fusion_cam1": {
+        "1": 4054
+      },
+      "fusion_ws": {
+        "0": 4054
+      },
+      "fusion_markers": {
+        "-1": 4054
+      },
+      "imu_status": {
+        "3": 4054
+      },
+      "imu_noise": {
+        "1": 314,
+        "3": 3724,
+        "2": 16
+      },
+      "gnss1_status": {
+        "5": 3326,
+        "0": 666,
+        "1": 62
+      },
+      "gnss2_status": {
+        "5": 3410,
+        "0": 537,
+        "1": 107
+      },
+      "baseline_status": {
+        "1": 4054
+      },
+      "corr_status": {
+        "3": 2790,
+        "5": 1264
+      },
+      "cam1_status": {
+        "5": 4054
+      },
+      "ws_status": {
+        "0": 4054
+      },
+      "markers_status": {
+        "-1": 4054
+      },
+      "imu_conv": {
+        "7": 4054
+      },
+      "ws_conv": {
+        "6": 4054
+      },
+      "markers_conv": {
+        "-1": 4054
+      }
+    },
+    "odom_status_source_sha256": "3ca4d2d89fb45fe51c459507de19cebad14ceca5e41a745ff6cd9aed1ad28b4f",
+    "actual_ODOMETRY_message_version": "2",
+    "actual_ODOMETRY_header_prefix": "$FP,ODOMETRY,2,2400,131133.100000",
+    "userio_source_sha256": "9faeb0f8f7faf22f19c946870c1ab03415cef89ae1c59abf3a646df02d129bc0",
+    "firmware_version": "NOT_ESTABLISHED_BY_AVAILABLE_VERSION_MESSAGES",
+    "receiver_MON_VER_messages": 0,
+    "FP_A_TEXT_messages": 0,
+    "interpretation": "ODOMETRY/TF schema version2 is not installed Fixposition firmware version; fusion enums retained literally"
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-33-29_minimal/",
+    "odom_status_rows": 3763,
+    "status_field_counts": {
+      "header.frame_id": {
+        "": 3763
+      },
+      "init_status": {
+        "2": 3763
+      },
+      "fusion_imu": {
+        "1": 3763
+      },
+      "fusion_gnss1": {
+        "2": 2374,
+        "1": 956,
+        "0": 433
+      },
+      "fusion_gnss2": {
+        "2": 2374,
+        "1": 1052,
+        "0": 337
+      },
+      "fusion_corr": {
+        "2": 2374,
+        "1": 1389
+      },
+      "fusion_cam1": {
+        "1": 3763
+      },
+      "fusion_ws": {
+        "0": 3763
+      },
+      "fusion_markers": {
+        "-1": 3763
+      },
+      "imu_status": {
+        "3": 3763
+      },
+      "imu_noise": {
+        "1": 274,
+        "3": 3473,
+        "2": 16
+      },
+      "gnss1_status": {
+        "5": 3074,
+        "1": 256,
+        "0": 433
+      },
+      "gnss2_status": {
+        "5": 3223,
+        "1": 203,
+        "0": 337
+      },
+      "baseline_status": {
+        "1": 3763
+      },
+      "corr_status": {
+        "3": 2374,
+        "5": 1389
+      },
+      "cam1_status": {
+        "5": 3763
+      },
+      "ws_status": {
+        "0": 3763
+      },
+      "markers_status": {
+        "-1": 3763
+      },
+      "imu_conv": {
+        "7": 3763
+      },
+      "ws_conv": {
+        "6": 3763
+      },
+      "markers_conv": {
+        "-1": 3763
+      }
+    },
+    "odom_status_source_sha256": "546d23717df8cc93ddaaccff92df3256817e060a9a5e1bf4a1868fcdfdca1cb7",
+    "actual_ODOMETRY_message_version": "2",
+    "actual_ODOMETRY_header_prefix": "$FP,ODOMETRY,2,2400,131628.700000",
+    "userio_source_sha256": "160cedf7a85c5876776b65d8be686652575c9352462e27117d9018442dd8f362",
+    "firmware_version": "NOT_ESTABLISHED_BY_AVAILABLE_VERSION_MESSAGES",
+    "receiver_MON_VER_messages": 0,
+    "FP_A_TEXT_messages": 0,
+    "interpretation": "ODOMETRY/TF schema version2 is not installed Fixposition firmware version; fusion enums retained literally"
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-40-53_minimal/",
+    "odom_status_rows": 3515,
+    "status_field_counts": {
+      "header.frame_id": {
+        "": 3515
+      },
+      "init_status": {
+        "2": 3515
+      },
+      "fusion_imu": {
+        "1": 3515
+      },
+      "fusion_gnss1": {
+        "2": 2255,
+        "1": 905,
+        "0": 355
+      },
+      "fusion_gnss2": {
+        "2": 2255,
+        "1": 869,
+        "0": 391
+      },
+      "fusion_corr": {
+        "2": 2255,
+        "1": 1260
+      },
+      "fusion_cam1": {
+        "1": 3515
+      },
+      "fusion_ws": {
+        "0": 3515
+      },
+      "fusion_markers": {
+        "-1": 3515
+      },
+      "imu_status": {
+        "3": 3515
+      },
+      "imu_noise": {
+        "1": 207,
+        "2": 8,
+        "3": 3300
+      },
+      "gnss1_status": {
+        "5": 2985,
+        "1": 175,
+        "0": 355
+      },
+      "gnss2_status": {
+        "5": 2993,
+        "1": 131,
+        "0": 391
+      },
+      "baseline_status": {
+        "1": 3515
+      },
+      "corr_status": {
+        "3": 2255,
+        "5": 1260
+      },
+      "cam1_status": {
+        "5": 3515
+      },
+      "ws_status": {
+        "0": 3515
+      },
+      "markers_status": {
+        "-1": 3515
+      },
+      "imu_conv": {
+        "7": 3515
+      },
+      "ws_conv": {
+        "6": 3515
+      },
+      "markers_conv": {
+        "-1": 3515
+      }
+    },
+    "odom_status_source_sha256": "c77c9470d399b0b8318fb9f3afe442170d4bd8baf64501b04d52578c4fc995b0",
+    "actual_ODOMETRY_message_version": "2",
+    "actual_ODOMETRY_header_prefix": "$FP,ODOMETRY,2,2400,132073.100000",
+    "userio_source_sha256": "e75e483af36827155cee0f349125d5192283347b0406d51ff3392a8196968682",
+    "firmware_version": "NOT_ESTABLISHED_BY_AVAILABLE_VERSION_MESSAGES",
+    "receiver_MON_VER_messages": 0,
+    "FP_A_TEXT_messages": 0,
+    "interpretation": "ODOMETRY/TF schema version2 is not installed Fixposition firmware version; fusion enums retained literally"
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-49-30_minimal/",
+    "odom_status_rows": 3562,
+    "status_field_counts": {
+      "header.frame_id": {
+        "": 3562
+      },
+      "init_status": {
+        "2": 3562
+      },
+      "fusion_imu": {
+        "1": 3562
+      },
+      "fusion_gnss1": {
+        "1": 1085,
+        "2": 2067,
+        "0": 410
+      },
+      "fusion_gnss2": {
+        "1": 1132,
+        "2": 2067,
+        "0": 363
+      },
+      "fusion_corr": {
+        "1": 1495,
+        "2": 2067
+      },
+      "fusion_cam1": {
+        "1": 3562
+      },
+      "fusion_ws": {
+        "0": 3562
+      },
+      "fusion_markers": {
+        "-1": 3562
+      },
+      "imu_status": {
+        "3": 3562
+      },
+      "imu_noise": {
+        "1": 255,
+        "2": 11,
+        "3": 3296
+      },
+      "gnss1_status": {
+        "5": 2930,
+        "1": 222,
+        "0": 410
+      },
+      "gnss2_status": {
+        "5": 3088,
+        "1": 111,
+        "0": 363
+      },
+      "baseline_status": {
+        "1": 3562
+      },
+      "corr_status": {
+        "5": 1495,
+        "3": 2067
+      },
+      "cam1_status": {
+        "5": 3562
+      },
+      "ws_status": {
+        "0": 3562
+      },
+      "markers_status": {
+        "-1": 3562
+      },
+      "imu_conv": {
+        "7": 3562
+      },
+      "ws_conv": {
+        "6": 3562
+      },
+      "markers_conv": {
+        "-1": 3562
+      }
+    },
+    "odom_status_source_sha256": "469412a8d93cb4c02ec1a780535734770bdbe801993abb7781fc29472a9178ae",
+    "actual_ODOMETRY_message_version": "2",
+    "actual_ODOMETRY_header_prefix": "$FP,ODOMETRY,2,2400,132590.600000",
+    "userio_source_sha256": "89e0c36b118b4f04c83e3447196c83ea8cc5551e00553becc6a0edfb87b87e2b",
+    "firmware_version": "NOT_ESTABLISHED_BY_AVAILABLE_VERSION_MESSAGES",
+    "receiver_MON_VER_messages": 0,
+    "FP_A_TEXT_messages": 0,
+    "interpretation": "ODOMETRY/TF schema version2 is not installed Fixposition firmware version; fusion enums retained literally"
+  }
+]

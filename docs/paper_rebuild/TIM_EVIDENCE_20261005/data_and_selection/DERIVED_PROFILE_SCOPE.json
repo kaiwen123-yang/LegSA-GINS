@@ -1,0 +1,12 @@
+{
+  "raw_lock_path": "G:\\LegSA-GINS-project\\clean_rebuild_202607\\01_RAW_HASH_LOCK\\RAW_FILE_HASH_LOCK.csv",
+  "raw_lock_sha256": "f6e5d7965d17857e5b4a846501883f4675f2331a1164fab3de9e5ba9470f1ad7",
+  "raw_lock_rows": 9980,
+  "source_identity_count": 25,
+  "hash_matched_identity_count": 24,
+  "pairing_rows64": 64,
+  "positive_overlap_pairs8": 8,
+  "scientific_executions": 0,
+  "offset_or_alignment_selected": false,
+  "reference_errors_calculated": false
+}

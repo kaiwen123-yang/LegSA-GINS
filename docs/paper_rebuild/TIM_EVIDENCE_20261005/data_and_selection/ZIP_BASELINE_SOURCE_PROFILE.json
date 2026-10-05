@@ -1,0 +1,170 @@
+[
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-16-59_minimal/",
+    "HP_exact_itow_pairs": 1830,
+    "HP_all_pair_length_m": {
+      "n": 1830,
+      "min": 0.2987969208108142,
+      "p01": 0.33650527203945496,
+      "p50": 3.1960759584173974,
+      "p95": 4.9093368857167405,
+      "p99": 59.50733137577073,
+      "max": 1009.2575390015464
+    },
+    "HP_PVT_exact_both_fixed_valid_pairs": 771,
+    "HP_both_fixed_length_m": {
+      "n": 771,
+      "min": 0.32844917420347103,
+      "p01": 0.3353265680860291,
+      "p50": 0.3507037209404955,
+      "p95": 0.37090589602391943,
+      "p99": 0.38145592014116103,
+      "max": 0.39248982155414774
+    },
+    "not_selected_by_reference": true
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-25-11_minimal/",
+    "HP_exact_itow_pairs": 1805,
+    "HP_all_pair_length_m": {
+      "n": 1805,
+      "min": 0.235842532339664,
+      "p01": 0.31402668487811686,
+      "p50": 1.382543579640589,
+      "p95": 10.218225885817391,
+      "p99": 52.96899812958745,
+      "max": 707.736296155785
+    },
+    "HP_PVT_exact_both_fixed_valid_pairs": 750,
+    "HP_both_fixed_length_m": {
+      "n": 750,
+      "min": 0.2640395995691578,
+      "p01": 0.331150579460687,
+      "p50": 0.3505496677551927,
+      "p95": 0.3640151878744475,
+      "p99": 0.37164340073228674,
+      "max": 0.4032394572092564
+    },
+    "not_selected_by_reference": true
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-32-27_minimal/",
+    "HP_exact_itow_pairs": 1916,
+    "HP_all_pair_length_m": {
+      "n": 1916,
+      "min": 0.10230219907113063,
+      "p01": 0.2885080646807748,
+      "p50": 0.4162251274147644,
+      "p95": 3.4918821019461763,
+      "p99": 32.20654990325181,
+      "max": 1752.288473931363
+    },
+    "HP_PVT_exact_both_fixed_valid_pairs": 904,
+    "HP_both_fixed_length_m": {
+      "n": 904,
+      "min": 0.3170105681768705,
+      "p01": 0.3378970190188645,
+      "p50": 0.35252712660422403,
+      "p95": 0.3673507374859927,
+      "p99": 0.38979209349345784,
+      "max": 0.4194764109402984
+    },
+    "not_selected_by_reference": true
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-11-39-50_minimal/",
+    "HP_exact_itow_pairs": 1780,
+    "HP_all_pair_length_m": {
+      "n": 1780,
+      "min": 0.07847916878430897,
+      "p01": 0.21444522532210497,
+      "p50": 3.8495055855175186,
+      "p95": 4.206395684088237,
+      "p99": 36.9781658746425,
+      "max": 872.1164311542788
+    },
+    "HP_PVT_exact_both_fixed_valid_pairs": 697,
+    "HP_both_fixed_length_m": {
+      "n": 697,
+      "min": 0.21480879861184426,
+      "p01": 0.25917688015491375,
+      "p50": 0.35082083744009074,
+      "p95": 0.3660937393469382,
+      "p99": 0.3816461968631483,
+      "max": 0.3908057831237368
+    },
+    "not_selected_by_reference": true
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-25-13_minimal/",
+    "HP_exact_itow_pairs": 2017,
+    "HP_all_pair_length_m": {
+      "n": 2017,
+      "min": 1.1665504113373328,
+      "p01": 1.3555945540173453,
+      "p50": 11.259585516853818,
+      "p95": 75.82080510878802,
+      "p99": 125.05673191330729,
+      "max": 135.74754090367384
+    },
+    "HP_PVT_exact_both_fixed_valid_pairs": 0,
+    "HP_both_fixed_length_m": {
+      "n": 0
+    },
+    "not_selected_by_reference": true
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-33-29_minimal/",
+    "HP_exact_itow_pairs": 1882,
+    "HP_all_pair_length_m": {
+      "n": 1882,
+      "min": 5.760353752279286,
+      "p01": 6.163266995943153,
+      "p50": 14.095002157193289,
+      "p95": 62.715653357506625,
+      "p99": 123.6867931229241,
+      "max": 143.211655504372
+    },
+    "HP_PVT_exact_both_fixed_valid_pairs": 0,
+    "HP_both_fixed_length_m": {
+      "n": 0
+    },
+    "not_selected_by_reference": true
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-40-53_minimal/",
+    "HP_exact_itow_pairs": 1747,
+    "HP_all_pair_length_m": {
+      "n": 1747,
+      "min": 3.2106482103580105,
+      "p01": 3.5405225999848144,
+      "p50": 14.9353749037824,
+      "p95": 108.29497842263363,
+      "p99": 130.83071054193994,
+      "max": 137.43150005817714
+    },
+    "HP_PVT_exact_both_fixed_valid_pairs": 0,
+    "HP_both_fixed_length_m": {
+      "n": 0
+    },
+    "not_selected_by_reference": true
+  },
+  {
+    "folder": "vrtk2_a87c6e_2026-01-05-12-49-30_minimal/",
+    "HP_exact_itow_pairs": 1781,
+    "HP_all_pair_length_m": {
+      "n": 1781,
+      "min": 12.021225744026971,
+      "p01": 12.265928413567448,
+      "p50": 35.17487113754881,
+      "p95": 64.29535401225651,
+      "p99": 95.18374784336461,
+      "max": 132.83649422411153
+    },
+    "HP_PVT_exact_both_fixed_valid_pairs": 0,
+    "HP_both_fixed_length_m": {
+      "n": 0
+    },
+    "not_selected_by_reference": true
+  }
+]
