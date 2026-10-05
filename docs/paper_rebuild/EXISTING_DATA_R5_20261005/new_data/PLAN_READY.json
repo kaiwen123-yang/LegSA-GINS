@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/new_data/README.md",
+      "sha256": "15b29a3cf423dd365fcbc28ae1bb0b0babfb2b636c602dd74bb0ca64d0f685fa"
+    },
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/new_data/EIGHT_SEQUENCE_PLAN.csv",
+      "sha256": "5b57ca3c4985604eccd6b95e6772bdfb5ac2b18873e29203978c03123e7845fb"
+    }
+  ],
+  "new_native_runs": 0,
+  "new_formal_evaluations": 0
+}
