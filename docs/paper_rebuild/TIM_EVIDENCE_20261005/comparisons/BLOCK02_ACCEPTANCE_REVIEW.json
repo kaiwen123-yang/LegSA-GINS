@@ -1,0 +1,2547 @@
+{
+  "schema": "comparison.existing.readonly.acceptance.v1",
+  "utc": "2026-10-05T03:19:37.441758+00:00",
+  "native_solver_calls": 0,
+  "evaluator_calls": 0,
+  "raw_reference_payload_opens": 0,
+  "saved_error_payloads_reduced_independently": true,
+  "pipeline_imports": 0,
+  "run_conditions_indexed": 67,
+  "run_conditions_by_group": {
+    "RTKLIB_HX07R": 12,
+    "EXT_RAW_V2": 9,
+    "FGO_STRICT": 9,
+    "FGO_SEGMENTED_PRIMARY_DYNAMIC_ONLY": 3,
+    "FGO_SEGMENTED_SECONDARY_ALL_VALID_POSITION": 3,
+    "LC01_ORIGINAL_V3_CONDITIONS": 16,
+    "GINAV_HX02": 3,
+    "HARTLEY_OFFICIAL": 6,
+    "SDK_INPUT_DIAGNOSTIC": 3,
+    "EXT04_OLD_FAR_PAR": 3
+  },
+  "identity_checks": 3316,
+  "identity_failures": [],
+  "numeric_checks": 313,
+  "numeric_failures": [],
+  "max_rmse_difference": 1.4210854715202004e-14,
+  "all_performed_checks_passed": true,
+  "scope_limits": [
+    {
+      "identity": "LC.BY2H.EXT05C-S.FILE_START",
+      "detail": "failed before evaluation",
+      "path": "UNAVAILABLE/error_series.csv"
+    }
+  ],
+  "artifact_pins_before": {
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/COMMAND.json": {
+      "sha256": "8b4c39a3c1cf01ced206767744f9b53acced41df209009af61404c0d45d260d7",
+      "bytes": 3647
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/eval/OUTPUT/HEADING_METRICS.json": {
+      "sha256": "d16dea154dec7dd788cd3375c004e3a90bedf3849203be0945ab1b555751ba48",
+      "bytes": 3537
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/ASSOCIATION_SUMMARY.json": {
+      "sha256": "34549a84ebbda187936743d30e9aacf0bfce23a9af184bfa9774467b6eef56b9",
+      "bytes": 426
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv": {
+      "sha256": "3ab6dfacda2cd984d3e34c4e8fdecf1a279dcfe07acf20161dca0959e6a24a77",
+      "bytes": 99439
+    },
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX07R/HX07R_AUDIT.json": {
+      "sha256": "cc7dfe67cc38ce4d9498b9ed19bdbceb0cff2adfb174ab98829a6960d675c67f",
+      "bytes": 7629
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07/CONFIGS/V0.conf": {
+      "sha256": "97f0fe4157ce31909538e696184a7faadad059c3099ab912cbe2e97b0fc9e14f",
+      "bytes": 1310
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0E/COMMAND.json": {
+      "sha256": "b287cfcf54c3b9d51c44b5070de3e318b379b02acf4708374d73658d0ca9fa6e",
+      "bytes": 3207
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0E/eval/OUTPUT/HEADING_METRICS.json": {
+      "sha256": "48072908cd8b0b1210634c9119fd795647c059c73f874310823a12ca377c9dcc",
+      "bytes": 3535
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0E/ASSOCIATION_SUMMARY.json": {
+      "sha256": "2771eb827f752a0624beef70e0ad55d1289918ec7d4fcc94d2ca3b31d1558f17",
+      "bytes": 426
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V0E/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv": {
+      "sha256": "4347ce1c18ad20d964c558ecb2051c45b49a153ed2029b366a686e6614b81544",
+      "bytes": 100189
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V1/COMMAND.json": {
+      "sha256": "108196868e034926e41366cb890cda68ded92da1231e2aa65c4ee77a2a874538",
+      "bytes": 3205
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V1/eval/OUTPUT/HEADING_METRICS.json": {
+      "sha256": "402b3bdd98345712f17ba72c5a2c55cfc3d0e9ba3005fe65681b491054674cd7",
+      "bytes": 3538
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V1/ASSOCIATION_SUMMARY.json": {
+      "sha256": "a256673109acf877bb1a218c7f7264ca2d9b50f5c5133a0cd1f6beb67101fb2c",
+      "bytes": 426
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V1/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv": {
+      "sha256": "82e0ddb79716faf28b63701f713822448dc9d9343b0a88e38867d12f901a3f5c",
+      "bytes": 99345
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07/CONFIGS/V1.conf": {
+      "sha256": "2f4fdf524f87b6f72906cac65a12c37cf4b26ff8f37a995a26eaf298f886100f",
+      "bytes": 1310
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V2/COMMAND.json": {
+      "sha256": "f81ae83aeb97df973ee9cd4ec73d83bd7f4a934d456bf04fe7199a29a124725a",
+      "bytes": 3205
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V2/eval/OUTPUT/HEADING_METRICS.json": {
+      "sha256": "e69bde1a77c43a24bd439f908eceda64850527751848fa169f0b1719284dbc19",
+      "bytes": 3508
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V2/ASSOCIATION_SUMMARY.json": {
+      "sha256": "2cbcb14754da2e3bc5a295e5817fc35a340c88c6fde3f1764a0fceadced82ff8",
+      "bytes": 422
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2_V2/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv": {
+      "sha256": "f3465e5a64284edac80d920611e73ff6c91a8d7169374f756e0b2b2c8971a1e8",
+      "bytes": 97982
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07/CONFIGS/V2.conf": {
+      "sha256": "3f55e8ff20318a674a3acfa6d52c7b756072c5e6b057d90db2cfb384a864ed78",
+      "bytes": 1312
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/COMMAND.json": {
+      "sha256": "bd099d685b5004c669a573163a92735381333d3094f6504dd51866ed74205d60",
+      "bytes": 3915
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/eval/OUTPUT/HEADING_METRICS.json": {
+      "sha256": "80103506b82da5c48a96913b81f0b9e5802f39aec08c004dac1d9728572b3dee",
+      "bytes": 3536
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/ASSOCIATION_SUMMARY.json": {
+      "sha256": "7f05a0901a97c75b08fd1b78ae4bab0f736d3fa9cbe56f86eb3be96c82914cd2",
+      "bytes": 426
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv": {
+      "sha256": "7032f57c55f1f27d90fe5a7ccebc994749996348ff57a05566fd5b9d50f8aece",
+      "bytes": 97488
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/COMMAND.json": {
+      "sha256": "01964a66228db9bc34df4857053a4bbb33eba2d8b093047ab952db844ff98a1a",
+      "bytes": 3427
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/eval/OUTPUT/HEADING_METRICS.json": {
+      "sha256": "4eb73883150d70856f2064950bb61a4e89c8b48589e290fd510751fdd751a7bf",
+      "bytes": 3537
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/ASSOCIATION_SUMMARY.json": {
+      "sha256": "280d0082748b0b2b559a580214a7f7ff3a58b22a01927da6a98acdbfd780ed87",
+      "bytes": 426
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V0E/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv": {
+      "sha256": "d28ccc144170b66faa0579aed501a88abcf518fe30bd035adc9081b8158464a1",
+      "bytes": 97492
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/COMMAND.json": {
+      "sha256": "8785644072b8147c876ad267b030a022ac23b969920c41cdba1a73913fc92950",
+      "bytes": 3425
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/eval/OUTPUT/HEADING_METRICS.json": {
+      "sha256": "135a1ed595c443c5e105d02ef3241c00b071ba2e8033d09de549704a735a8296",
+      "bytes": 3506
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/ASSOCIATION_SUMMARY.json": {
+      "sha256": "a462dd535b2bf6598cd922dee52ef29ceb323b1f9b28b82f086d5e45146093f9",
+      "bytes": 426
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V1/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv": {
+      "sha256": "873cd6613e6b33157d0dff2de4a3d187d6481b977bae1ded16bc2b4cedd87617",
+      "bytes": 97304
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/COMMAND.json": {
+      "sha256": "e1195d9316aa6f772784d70996472a47f2ba19c542ad95e9045ba07d53441e83",
+      "bytes": 3425
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/eval/OUTPUT/HEADING_METRICS.json": {
+      "sha256": "4b0a6b919bf5225c184480e0c7ad4b04e523e2554c25832b3d1fea0cd36bb49d",
+      "bytes": 3528
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/ASSOCIATION_SUMMARY.json": {
+      "sha256": "e94fe739cd5de85d5d47f49bbc30a53ae90200234771cf011d0f7e922e4e5223",
+      "bytes": 426
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2H_V2/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv": {
+      "sha256": "0ed8264512ff868038a037576db6e0df6ed7c3d004ca2e621fdbf29dfc2d2bb4",
+      "bytes": 96759
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/COMMAND.json": {
+      "sha256": "a7f374ccbbbe0abaf8f1ce5d7f817306cf573392582d4c415e6142b167c8962e",
+      "bytes": 3761
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/eval/OUTPUT/HEADING_METRICS.json": {
+      "sha256": "036f8d3ffe999673a322102d18bf0a6647a50150e2d6f65de4feaacf9f1da0cf",
+      "bytes": 3544
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/ASSOCIATION_SUMMARY.json": {
+      "sha256": "70afa715e631b159339cb65b38c0a87dbb06a7744bfcb8dd30a2e3b48e4d872b",
+      "bytes": 427
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv": {
+      "sha256": "86a716ed4142295420747ac2f2216abaff8e67ce7c526e9c44ae2fabdc6fa059",
+      "bytes": 135625
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/COMMAND.json": {
+      "sha256": "beff4dae391f3c9b0a090c68ce87146e4a43ffa957fc919ca102e762e08f0cef",
+      "bytes": 3289
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/eval/OUTPUT/HEADING_METRICS.json": {
+      "sha256": "3320ef8da7c63dcfc1541d947a56e962b773140124cbb16f5716f7c71b189d3e",
+      "bytes": 3533
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/ASSOCIATION_SUMMARY.json": {
+      "sha256": "87b6d8df94d997af82979b15c2769e47ef49cdabf62e849258c1151798afd541",
+      "bytes": 429
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V0E/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv": {
+      "sha256": "b1bad40ed926ff521c0131f71592c2d6266a91ace28880cad24b55b54b3bac8a",
+      "bytes": 137152
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/COMMAND.json": {
+      "sha256": "fd17f37d427586f9d366c076ee109d74de511f3d5c9f2e13d84184b0ef0d805b",
+      "bytes": 3287
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/eval/OUTPUT/HEADING_METRICS.json": {
+      "sha256": "8d60ed383c39ed27a9ef13607f3ca5889feeced03de3cd8a0fea24f475f6118e",
+      "bytes": 3535
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/ASSOCIATION_SUMMARY.json": {
+      "sha256": "57cbd478b7d815124e716eda7810ab95f014712a71ac0575da7eb48823ec77c0",
+      "bytes": 429
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V1/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv": {
+      "sha256": "ac85aeffb07ed5881400a14a15bd56536a8b8fc7dd63dfdb966c5065d910e4b3",
+      "bytes": 135896
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/COMMAND.json": {
+      "sha256": "ae70faa8177c82d8b1f28958446823ac7a4867d23f9568b439b9957b85e00757",
+      "bytes": 3287
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/eval/OUTPUT/HEADING_METRICS.json": {
+      "sha256": "3ec1d24d6c58a013b58fbf4783e0578aede1756cd10e1d93c27dc99c97272511",
+      "bytes": 3526
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/ASSOCIATION_SUMMARY.json": {
+      "sha256": "642839c81578c50f42bb4bdef52f0cba75397ab2437282461d7814a3e77b9165",
+      "bytes": 427
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX07R/RUNS/BY2O_V2/eval/OUTPUT/HEADING_ERROR_SERIES_RTKLIB.csv": {
+      "sha256": "f883f05ff1f3776990849fdb20c09892cf886c4b0cc29373bb0337ee3dcbfcae",
+      "bytes": 135417
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/ALL_NATIVE_VERIFIED_BEFORE_REFERENCE.json": {
+      "sha256": "c02a98dcb559bf3bdd1660e21343135072f53653b6b18c836e6234311320d07f",
+      "bytes": 25168
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/evaluation/BY2/HEADING_METRICS.json": {
+      "sha256": "c07ed12157f6fe5756567e48c5503d896da41a89084ff515389dedf653f40ffe",
+      "bytes": 11516
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/evaluation/BY2/ERROR_SERIES.csv": {
+      "sha256": "f395e583eb537e1f4a632f790aa8a37caeb2fc6cd512009c9972cf47c4702671",
+      "bytes": 1090739
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/RUN.json": {
+      "sha256": "471358ebcecc1991e5786fb6f221240637b3ab287489641e1dfc3a68c29f48bf",
+      "bytes": 10258
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": {
+      "sha256": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+      "bytes": 46862
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": {
+      "sha256": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+      "bytes": 47497
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": {
+      "sha256": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+      "bytes": 50420
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": {
+      "sha256": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+      "bytes": 143918
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": {
+      "sha256": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+      "bytes": 14548
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/sequence_override.py": {
+      "sha256": "45617c22d1eccda66935202da3a76fc8c07354c75ae182994cd419b0e9912f25",
+      "bytes": 5328
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext02.py": {
+      "sha256": "87db20cb95b1f36970c7cc4e74e73967ad2f12883534f6d7b9bf007744f457f1",
+      "bytes": 8967
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": {
+      "sha256": "e4aff2090078caa76e46999f40c096e3bb1c56a824183494a88ce5515d6fca9d",
+      "bytes": 20166
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": {
+      "sha256": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0",
+      "bytes": 20717
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/configs/paper_rebuild/horizontal_literature/EXT_REPRODUCTION_V2.json": {
+      "sha256": "b18b30a89466e1720b4f2312818adc2397dc18894dfbbeb4cbf7d980d2be6d66",
+      "bytes": 2194
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv": {
+      "sha256": "c0228ef1e6fd9c4dd620a2d29717064772a22001499e8960b4e923ed68f26851",
+      "bytes": 265023
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT01__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz": {
+      "sha256": "6487647abe310b1e8f4c5f1c3174b9f9a360be208e26bcb070f7996f9f2149cf",
+      "bytes": 1932510
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/RUN.json": {
+      "sha256": "7045dd83a671bf34d48e3c8406ceb701666be43ad29cdcc23cfa4e9969a2dcc9",
+      "bytes": 10288
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": {
+      "sha256": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+      "bytes": 46862
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": {
+      "sha256": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+      "bytes": 47497
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": {
+      "sha256": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+      "bytes": 50420
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": {
+      "sha256": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+      "bytes": 143918
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": {
+      "sha256": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+      "bytes": 14548
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/sequence_override.py": {
+      "sha256": "45617c22d1eccda66935202da3a76fc8c07354c75ae182994cd419b0e9912f25",
+      "bytes": 5328
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext02.py": {
+      "sha256": "87db20cb95b1f36970c7cc4e74e73967ad2f12883534f6d7b9bf007744f457f1",
+      "bytes": 8967
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": {
+      "sha256": "e4aff2090078caa76e46999f40c096e3bb1c56a824183494a88ce5515d6fca9d",
+      "bytes": 20166
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": {
+      "sha256": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0",
+      "bytes": 20717
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/configs/paper_rebuild/horizontal_literature/EXT_REPRODUCTION_V2.json": {
+      "sha256": "b18b30a89466e1720b4f2312818adc2397dc18894dfbbeb4cbf7d980d2be6d66",
+      "bytes": 2194
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv": {
+      "sha256": "a600804adf1f8d243d99396c237460e16672301af75e6fd57142bc7ec1269343",
+      "bytes": 245486
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT02__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz": {
+      "sha256": "d582be0ae52750532328e952d542fe95b1954509b76abba2356be61954920cbe",
+      "bytes": 10415198
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/RUN.json": {
+      "sha256": "646489ff32818b0a1552ee65dcbca9cde95cb50da6b023eef58cc18012820741",
+      "bytes": 10235
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": {
+      "sha256": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+      "bytes": 46862
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": {
+      "sha256": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+      "bytes": 47497
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": {
+      "sha256": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+      "bytes": 50420
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": {
+      "sha256": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+      "bytes": 143918
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": {
+      "sha256": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+      "bytes": 14548
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/sequence_override.py": {
+      "sha256": "45617c22d1eccda66935202da3a76fc8c07354c75ae182994cd419b0e9912f25",
+      "bytes": 5328
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext02.py": {
+      "sha256": "87db20cb95b1f36970c7cc4e74e73967ad2f12883534f6d7b9bf007744f457f1",
+      "bytes": 8967
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": {
+      "sha256": "e4aff2090078caa76e46999f40c096e3bb1c56a824183494a88ce5515d6fca9d",
+      "bytes": 20166
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": {
+      "sha256": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0",
+      "bytes": 20717
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/configs/paper_rebuild/horizontal_literature/EXT_REPRODUCTION_V2.json": {
+      "sha256": "b18b30a89466e1720b4f2312818adc2397dc18894dfbbeb4cbf7d980d2be6d66",
+      "bytes": 2194
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv": {
+      "sha256": "23267aef1f63085a1bb193ca073511e097b63d1868c9e7510450fa3971a03e07",
+      "bytes": 210178
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2__EXT03__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz": {
+      "sha256": "d6081def6ba5db1916eaa54698b921e96a52e35da352c56c02097a9fb2bb71ee",
+      "bytes": 5310179
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/evaluation/BY2H/HEADING_METRICS.json": {
+      "sha256": "47461f7f226b9914649f7bd07db64535803469c00ac85065020264989d946876",
+      "bytes": 11460
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/evaluation/BY2H/ERROR_SERIES.csv": {
+      "sha256": "25e6db05fb2e4020cb97d7b20feef07111cff0d553626d8458a00d24fab4229f",
+      "bytes": 1081412
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/RUN.json": {
+      "sha256": "e1b1f0d710def72fc6914b8ab9f108e8fb338001ca4ee627765240f5b8b96e46",
+      "bytes": 10186
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": {
+      "sha256": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+      "bytes": 46862
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": {
+      "sha256": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+      "bytes": 47497
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": {
+      "sha256": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+      "bytes": 50420
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": {
+      "sha256": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+      "bytes": 143918
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": {
+      "sha256": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+      "bytes": 14548
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/sequence_override.py": {
+      "sha256": "45617c22d1eccda66935202da3a76fc8c07354c75ae182994cd419b0e9912f25",
+      "bytes": 5328
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext02.py": {
+      "sha256": "87db20cb95b1f36970c7cc4e74e73967ad2f12883534f6d7b9bf007744f457f1",
+      "bytes": 8967
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": {
+      "sha256": "e4aff2090078caa76e46999f40c096e3bb1c56a824183494a88ce5515d6fca9d",
+      "bytes": 20166
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": {
+      "sha256": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0",
+      "bytes": 20717
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/configs/paper_rebuild/horizontal_literature/EXT_REPRODUCTION_V2.json": {
+      "sha256": "b18b30a89466e1720b4f2312818adc2397dc18894dfbbeb4cbf7d980d2be6d66",
+      "bytes": 2194
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv": {
+      "sha256": "dbca4d4e8a05ffe2a3be02d630c41f20fd84cbedfaffa5a2548f445943e7b089",
+      "bytes": 269232
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT01__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz": {
+      "sha256": "982ebc2c66ff3c3de63cc8cd12394c0cfa06c0bc6d2efd365ba398548957ec61",
+      "bytes": 2020480
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/RUN.json": {
+      "sha256": "11284bc39c929781130643e0fb550135fc0faeec33aebec364d950aa009d65cb",
+      "bytes": 10217
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": {
+      "sha256": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+      "bytes": 46862
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": {
+      "sha256": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+      "bytes": 47497
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": {
+      "sha256": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+      "bytes": 50420
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": {
+      "sha256": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+      "bytes": 143918
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": {
+      "sha256": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+      "bytes": 14548
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/sequence_override.py": {
+      "sha256": "45617c22d1eccda66935202da3a76fc8c07354c75ae182994cd419b0e9912f25",
+      "bytes": 5328
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext02.py": {
+      "sha256": "87db20cb95b1f36970c7cc4e74e73967ad2f12883534f6d7b9bf007744f457f1",
+      "bytes": 8967
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": {
+      "sha256": "e4aff2090078caa76e46999f40c096e3bb1c56a824183494a88ce5515d6fca9d",
+      "bytes": 20166
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": {
+      "sha256": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0",
+      "bytes": 20717
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/configs/paper_rebuild/horizontal_literature/EXT_REPRODUCTION_V2.json": {
+      "sha256": "b18b30a89466e1720b4f2312818adc2397dc18894dfbbeb4cbf7d980d2be6d66",
+      "bytes": 2194
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv": {
+      "sha256": "00b27c7699937b6e7e51d83951758eab0b09464e27240671c7734a21f13e58df",
+      "bytes": 246814
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT02__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz": {
+      "sha256": "31a537d5c5356eaec687c778bf72dedf4656e3a6ecae43bc3536aec05e262389",
+      "bytes": 10379792
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/RUN.json": {
+      "sha256": "ae0d40ea235f70b930509e2380078eca08b1c1b7ae441bec68cbdebcc65e2bde",
+      "bytes": 10241
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": {
+      "sha256": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+      "bytes": 46862
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": {
+      "sha256": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+      "bytes": 47497
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": {
+      "sha256": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+      "bytes": 50420
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": {
+      "sha256": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+      "bytes": 143918
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": {
+      "sha256": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+      "bytes": 14548
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/sequence_override.py": {
+      "sha256": "45617c22d1eccda66935202da3a76fc8c07354c75ae182994cd419b0e9912f25",
+      "bytes": 5328
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext02.py": {
+      "sha256": "87db20cb95b1f36970c7cc4e74e73967ad2f12883534f6d7b9bf007744f457f1",
+      "bytes": 8967
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": {
+      "sha256": "e4aff2090078caa76e46999f40c096e3bb1c56a824183494a88ce5515d6fca9d",
+      "bytes": 20166
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": {
+      "sha256": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0",
+      "bytes": 20717
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/configs/paper_rebuild/horizontal_literature/EXT_REPRODUCTION_V2.json": {
+      "sha256": "b18b30a89466e1720b4f2312818adc2397dc18894dfbbeb4cbf7d980d2be6d66",
+      "bytes": 2194
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv": {
+      "sha256": "89be6f51f4eb09af7dbb0864fb957c110d2d12d534d9a81c583f9d01f4e7f931",
+      "bytes": 199878
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2H__EXT03__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz": {
+      "sha256": "e4ccdcb705229b737cc1c9be1460ceca23925c78cd693a5479b10b4297a040ad",
+      "bytes": 4814221
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/evaluation/BY2O/HEADING_METRICS.json": {
+      "sha256": "6e8af78135cb0d768fe3b67972b856e24517c25a0010842ee38dd0aabedf5de3",
+      "bytes": 11497
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/evaluation/BY2O/ERROR_SERIES.csv": {
+      "sha256": "9d9916bf1dfef567e407ac0ed69b209493d2cea2b81c3755d7e02909a2048e06",
+      "bytes": 1436408
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/RUN.json": {
+      "sha256": "5c6eebe24545f7e6e6f9207218018d03ddf7d6343cb905baaea86d5c5f9c798c",
+      "bytes": 10212
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": {
+      "sha256": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+      "bytes": 46862
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": {
+      "sha256": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+      "bytes": 47497
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": {
+      "sha256": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+      "bytes": 50420
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": {
+      "sha256": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+      "bytes": 143918
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": {
+      "sha256": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+      "bytes": 14548
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/sequence_override.py": {
+      "sha256": "45617c22d1eccda66935202da3a76fc8c07354c75ae182994cd419b0e9912f25",
+      "bytes": 5328
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext02.py": {
+      "sha256": "87db20cb95b1f36970c7cc4e74e73967ad2f12883534f6d7b9bf007744f457f1",
+      "bytes": 8967
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": {
+      "sha256": "e4aff2090078caa76e46999f40c096e3bb1c56a824183494a88ce5515d6fca9d",
+      "bytes": 20166
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": {
+      "sha256": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0",
+      "bytes": 20717
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/configs/paper_rebuild/horizontal_literature/EXT_REPRODUCTION_V2.json": {
+      "sha256": "b18b30a89466e1720b4f2312818adc2397dc18894dfbbeb4cbf7d980d2be6d66",
+      "bytes": 2194
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv": {
+      "sha256": "bf22245396868133dfc7c2e3eaf21a004d517cf55e0fb3ba8b378d6f74e969be",
+      "bytes": 383810
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT01__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz": {
+      "sha256": "46a97d7882b5e392e07037e3ff7e5689ad896de59d1f26cae6c1e4db1381fdff",
+      "bytes": 2846487
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/RUN.json": {
+      "sha256": "3b117453b07b095ed2dd85f08e20f1de8b13c20ecd4f567e1151ae22cc73c79e",
+      "bytes": 10214
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": {
+      "sha256": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+      "bytes": 46862
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": {
+      "sha256": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+      "bytes": 47497
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": {
+      "sha256": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+      "bytes": 50420
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": {
+      "sha256": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+      "bytes": 143918
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": {
+      "sha256": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+      "bytes": 14548
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/sequence_override.py": {
+      "sha256": "45617c22d1eccda66935202da3a76fc8c07354c75ae182994cd419b0e9912f25",
+      "bytes": 5328
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext02.py": {
+      "sha256": "87db20cb95b1f36970c7cc4e74e73967ad2f12883534f6d7b9bf007744f457f1",
+      "bytes": 8967
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": {
+      "sha256": "e4aff2090078caa76e46999f40c096e3bb1c56a824183494a88ce5515d6fca9d",
+      "bytes": 20166
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": {
+      "sha256": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0",
+      "bytes": 20717
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/configs/paper_rebuild/horizontal_literature/EXT_REPRODUCTION_V2.json": {
+      "sha256": "b18b30a89466e1720b4f2312818adc2397dc18894dfbbeb4cbf7d980d2be6d66",
+      "bytes": 2194
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv": {
+      "sha256": "36347ab891fea1dff4dffac27c094b7de0869c9530615859ab4661c4fc110ed6",
+      "bytes": 361624
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT02__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz": {
+      "sha256": "d30c852b0e3a4fc0b23f4b339fcaa96b4004524e2541e8fd9cbdf5272fc59305",
+      "bytes": 16908926
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/RUN.json": {
+      "sha256": "89ef7075c1eac9d82b32e6cee6e237be8843fa71739b1714f08428e29fe36f56",
+      "bytes": 10300
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": {
+      "sha256": "a68f5d7988dbe6fbb838562c3d389f8473ef994028a84f76fcfd035f77a2c13d",
+      "bytes": 46862
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext02_cwls.py": {
+      "sha256": "ea65b90282fdeee943eca4764da18fb05fcb9a46b9a7cf44d477d3ff60976f2c",
+      "bytes": 47497
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": {
+      "sha256": "0cf9bc29b9d47f58d17098c6c8e25ff1b1f8d8af06cb265850d401b9c09b4af9",
+      "bytes": 50420
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_runner.py": {
+      "sha256": "2154774baaf3ad0426b1fe43726ff8b998bb6e7cc772765a6568ba5f2b2182e5",
+      "bytes": 143918
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase3_signal_inventory.py": {
+      "sha256": "0e64aa14d6b7572323ad4d4cafc554b65e3002ee4ed36b7d6c6c359855090194",
+      "bytes": 14548
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/sequence_override.py": {
+      "sha256": "45617c22d1eccda66935202da3a76fc8c07354c75ae182994cd419b0e9912f25",
+      "bytes": 5328
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext02.py": {
+      "sha256": "87db20cb95b1f36970c7cc4e74e73967ad2f12883534f6d7b9bf007744f457f1",
+      "bytes": 8967
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_ext03.py": {
+      "sha256": "e4aff2090078caa76e46999f40c096e3bb1c56a824183494a88ce5515d6fca9d",
+      "bytes": 20166
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_runner.py": {
+      "sha256": "ea23bc7aceaa2d458a93e2de3a93fa6a06c599dcd20603ba8c212a903e0d9cb0",
+      "bytes": 20717
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/SOURCE_SNAPSHOT/configs/paper_rebuild/horizontal_literature/EXT_REPRODUCTION_V2.json": {
+      "sha256": "b18b30a89466e1720b4f2312818adc2397dc18894dfbbeb4cbf7d980d2be6d66",
+      "bytes": 2194
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/HEADING.csv": {
+      "sha256": "b07d35b216287a0567a51ee6cfb6a92b2de59a4866e8bf87c5a3f77be7ee63a1",
+      "bytes": 278342
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/EXT_REPRODUCTION_V2_TECH_RETRY_2_20261004T054256Z/runs/BY2O__EXT03__RAW_REPRO_V2__TECH_RETRY_2/EPOCH_EVIDENCE.jsonl.gz": {
+      "sha256": "5bb1ea99d6ad7a8ad1418b1858e831e8a6b63ec2a0923c8e9b7ed8e95ea75c4f",
+      "bytes": 5005634
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/ALL_NINE_NATIVE_SEAL.json": {
+      "sha256": "67f66361b39c613a58d4f2e8b84ad9ed6e605dc9a072aac01b2ae5b08ca669b3",
+      "bytes": 12407
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2/METRICS.csv": {
+      "sha256": "f2514360b75ba7d3855213a1d13fead788f3a4b22279e22602e639cb401a85b8",
+      "bytes": 5089
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/RUN.json": {
+      "sha256": "9e90596cb12b2eac53d75e7747aa43f969392ddf3b54ec9d3b742ee3178689b5",
+      "bytes": 9242
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2/OISAM_ERRORS.csv": {
+      "sha256": "18d969091a6bb9e7fca02d3d8239b17b1bf5a8473036b821ea0812ddc3d7a8df",
+      "bytes": 47175
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/datasets/by2/go2_body_state_parser.py": {
+      "sha256": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+      "bytes": 10882
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": {
+      "sha256": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+      "bytes": 78
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": {
+      "sha256": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+      "bytes": 11820
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": {
+      "sha256": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+      "bytes": 6108
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": {
+      "sha256": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+      "bytes": 14172
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": {
+      "sha256": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+      "bytes": 30175
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": {
+      "sha256": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+      "bytes": 4329
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": {
+      "sha256": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+      "bytes": 8019
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": {
+      "sha256": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+      "bytes": 34075
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": {
+      "sha256": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+      "bytes": 15617
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": {
+      "sha256": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+      "bytes": 28911
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": {
+      "sha256": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+      "bytes": 21779
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/report.py": {
+      "sha256": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+      "bytes": 9313
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": {
+      "sha256": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+      "bytes": 12946
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": {
+      "sha256": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+      "bytes": 1562
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": {
+      "sha256": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+      "bytes": 15933
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": {
+      "sha256": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+      "bytes": 19859
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": {
+      "sha256": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+      "bytes": 25098
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/RUN_MANIFEST.json": {
+      "sha256": "324344e53a4eeb625917f41a0bb9977a368de9315e724fe8b26028fc1c293e8e",
+      "bytes": 16852
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/STATES.csv": {
+      "sha256": "446585d25b1ab9b015dfc263aaea19613f76f2c6d82bced423864773e367b1cc",
+      "bytes": 52337
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/OISAM/PAPER_CONTRACT/SOLVER_EVENTS.jsonl": {
+      "sha256": "8816094e02818ae3c6a56894633ae6bd3e5d2b0cfa6bbb40be2d0210bc230946",
+      "bytes": 121659
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2/EVALUATION.json": {
+      "sha256": "99d946cfb55a55e02662fda6a8b0e6b8d9d223f7c66734f19e34bdf0f6b3d75e",
+      "bytes": 12962
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/RUN.json": {
+      "sha256": "afdf86b9ccb1688dc96c6b413f741b370f4862fbe98cda132b1547b602b54684",
+      "bytes": 11141
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2/WEN_TC_ERRORS.csv": {
+      "sha256": "c4399005074ca140e48f22b7d29b9fd1b2198716ada5c62a217cf3167198d278",
+      "bytes": 34067
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/datasets/by2/go2_body_state_parser.py": {
+      "sha256": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+      "bytes": 10882
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": {
+      "sha256": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+      "bytes": 78
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": {
+      "sha256": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+      "bytes": 11820
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": {
+      "sha256": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+      "bytes": 6108
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": {
+      "sha256": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+      "bytes": 14172
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": {
+      "sha256": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+      "bytes": 30175
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": {
+      "sha256": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+      "bytes": 4329
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": {
+      "sha256": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+      "bytes": 8019
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": {
+      "sha256": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+      "bytes": 34075
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": {
+      "sha256": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+      "bytes": 15617
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": {
+      "sha256": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+      "bytes": 28911
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": {
+      "sha256": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+      "bytes": 21779
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/report.py": {
+      "sha256": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+      "bytes": 9313
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": {
+      "sha256": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+      "bytes": 12946
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": {
+      "sha256": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+      "bytes": 1562
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": {
+      "sha256": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+      "bytes": 15933
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": {
+      "sha256": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+      "bytes": 19859
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": {
+      "sha256": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+      "bytes": 25098
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/STATES.csv": {
+      "sha256": "d3340736b525d5d6cc71a80136f24ec1456c1e34f38f8c9b4af39de11e0b1687",
+      "bytes": 41220
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/AHRS_INTERVALS.npz": {
+      "sha256": "391661d405dc3549c9532629656e1b83d54fedcd09bd91b6e86a6cab4c45c6c2",
+      "bytes": 87854
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/SOLVER.json": {
+      "sha256": "66ea87eec9d7f08449a2743488e6417ea3feb3f2e4675089cb4573503777535f",
+      "bytes": 3710
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/STATE_ARRAYS.npz": {
+      "sha256": "35717fe55a92ce3d4a170c9fc6e58aa810478b645c0e3104385aaf6942f49dce",
+      "bytes": 24069
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/WEN_TC/PAPER_CONTRACT/AHRS_PROVENANCE.json": {
+      "sha256": "aa0441186e3e55bd5429b511143d1456fd354f8fbc5b26d043dbf72939d7c4a6",
+      "bytes": 4027
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/RUN.json": {
+      "sha256": "2d99b0b4e6df3d280218528a3d90b365420a9bb880c31d4881f5b394b83f7d8a",
+      "bytes": 6839
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2/GNC_ERRORS.csv": {
+      "sha256": "b9f088e5038423160dc2222c764f2ea56a620a1a9971e588342bb337379e1931",
+      "bytes": 33890
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/datasets/by2/go2_body_state_parser.py": {
+      "sha256": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+      "bytes": 10882
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": {
+      "sha256": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+      "bytes": 78
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": {
+      "sha256": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+      "bytes": 11820
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": {
+      "sha256": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+      "bytes": 6108
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": {
+      "sha256": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+      "bytes": 14172
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": {
+      "sha256": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+      "bytes": 30175
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": {
+      "sha256": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+      "bytes": 4329
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": {
+      "sha256": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+      "bytes": 8019
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": {
+      "sha256": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+      "bytes": 34075
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": {
+      "sha256": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+      "bytes": 15617
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": {
+      "sha256": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+      "bytes": 28911
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": {
+      "sha256": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+      "bytes": 21779
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/report.py": {
+      "sha256": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+      "bytes": 9313
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": {
+      "sha256": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+      "bytes": 12946
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": {
+      "sha256": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+      "bytes": 1562
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": {
+      "sha256": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+      "bytes": 15933
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": {
+      "sha256": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+      "bytes": 19859
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": {
+      "sha256": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+      "bytes": 25098
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/STATES.csv": {
+      "sha256": "677f014145bea705fd50f240767a7dbbae13062723035b504c3d066667fb0595",
+      "bytes": 41523
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/WEIGHTS.npz": {
+      "sha256": "5fb2e2e7c510aa41b5867cebc2139851bea3cfd2baa7a591eddf255689650242",
+      "bytes": 125785
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/SOLVER.json": {
+      "sha256": "55ad19a33c45c0d90594f0d518ebe6f75af530e262185a195b00d00e0848a529",
+      "bytes": 26949
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/WEIGHT_HISTORY_INDEX.json": {
+      "sha256": "23662533fd34e054d85edc91e19477164592bcfefdf88aceb9601df1890ad376",
+      "bytes": 3089
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/STATE_ARRAYS.npz": {
+      "sha256": "d8acfd8a0da527761c1ad961e8d8737ed54ec374eb8dcf7bd6b0ee3551aaf9dc",
+      "bytes": 191192
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2/GNC/PAPER_CONTRACT/WEIGHT_HISTORY.npz": {
+      "sha256": "aaa0d37a81b6cc688d5cf9dde74511cbc5a04094e206149c891f9dce11ca5c10",
+      "bytes": 1080969
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2H/METRICS.csv": {
+      "sha256": "835544ff01934d05f941eb61c0014bd136274ebabdd6710104df2aa05616ec79",
+      "bytes": 3799
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/RUN.json": {
+      "sha256": "daa7d18f170b52acf8824bdae0627e999942ba8f4e5d54658349c85053f9edc4",
+      "bytes": 9435
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2H/OISAM_ERRORS.csv": {
+      "sha256": "2d07cacfaa98136ac17fffe0394ddb70de2854bc154227e419064c1a269c690a",
+      "bytes": 14215
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/datasets/by2/go2_body_state_parser.py": {
+      "sha256": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+      "bytes": 10882
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": {
+      "sha256": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+      "bytes": 78
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": {
+      "sha256": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+      "bytes": 11820
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": {
+      "sha256": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+      "bytes": 6108
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": {
+      "sha256": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+      "bytes": 14172
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": {
+      "sha256": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+      "bytes": 30175
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": {
+      "sha256": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+      "bytes": 4329
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": {
+      "sha256": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+      "bytes": 8019
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": {
+      "sha256": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+      "bytes": 34075
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": {
+      "sha256": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+      "bytes": 15617
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": {
+      "sha256": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+      "bytes": 28911
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": {
+      "sha256": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+      "bytes": 21779
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/report.py": {
+      "sha256": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+      "bytes": 9313
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": {
+      "sha256": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+      "bytes": 12946
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": {
+      "sha256": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+      "bytes": 1562
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": {
+      "sha256": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+      "bytes": 15933
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": {
+      "sha256": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+      "bytes": 19859
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": {
+      "sha256": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+      "bytes": 25098
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/RUN_MANIFEST.json": {
+      "sha256": "fb58c93ef9851db22ed70dd54c5a116b6bb919b8e731ca9e0a7055ab13651b24",
+      "bytes": 42956
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/STATES.csv": {
+      "sha256": "109592620878e2d91a383cac36053daccc391a4b3ed5f781ac7f6ca2d1856e7c",
+      "bytes": 23344
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/OISAM/PAPER_CONTRACT/SOLVER_EVENTS.jsonl": {
+      "sha256": "b914067122df23bf785dc21270a4722f9a4905f8769d2d7a763aa0f9b9470a35",
+      "bytes": 35745
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2H/EVALUATION.json": {
+      "sha256": "bbdb4168d65540d71fcb31d2af72c53711af42dca0328ffa3b912786597f51c7",
+      "bytes": 11992
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/RUN.json": {
+      "sha256": "6144a499fb397931c8d81bca094b2b44a2fd6f7ac95ec7047792b09c20f95dca",
+      "bytes": 11172
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2H/WEN_TC_ERRORS.csv": {
+      "sha256": "b6f8f3c27c6821972bb9fabee374dcdf51b5950c6a25b458d3660503cde59b48",
+      "bytes": 33356
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/datasets/by2/go2_body_state_parser.py": {
+      "sha256": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+      "bytes": 10882
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": {
+      "sha256": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+      "bytes": 78
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": {
+      "sha256": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+      "bytes": 11820
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": {
+      "sha256": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+      "bytes": 6108
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": {
+      "sha256": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+      "bytes": 14172
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": {
+      "sha256": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+      "bytes": 30175
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": {
+      "sha256": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+      "bytes": 4329
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": {
+      "sha256": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+      "bytes": 8019
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": {
+      "sha256": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+      "bytes": 34075
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": {
+      "sha256": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+      "bytes": 15617
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": {
+      "sha256": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+      "bytes": 28911
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": {
+      "sha256": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+      "bytes": 21779
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/report.py": {
+      "sha256": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+      "bytes": 9313
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": {
+      "sha256": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+      "bytes": 12946
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": {
+      "sha256": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+      "bytes": 1562
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": {
+      "sha256": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+      "bytes": 15933
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": {
+      "sha256": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+      "bytes": 19859
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": {
+      "sha256": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+      "bytes": 25098
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/STATES.csv": {
+      "sha256": "3ff226872326029f207606069567150a3d562b2842ef3092416cb9580ab06114",
+      "bytes": 40615
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/AHRS_INTERVALS.npz": {
+      "sha256": "76eb0892cdf25430a462e5c2c841b68e204ba95fe5f0b76afe9c3e55080362c8",
+      "bytes": 85196
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/SOLVER.json": {
+      "sha256": "06f08b38be820823ba989a6b6679282ff2a70799d502321dd9209317fad1c744",
+      "bytes": 5757
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/STATE_ARRAYS.npz": {
+      "sha256": "682e3340af7eb7c99a1ef8ecbcffed69394dc08983260f38ae936828626a13be",
+      "bytes": 23843
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/WEN_TC/PAPER_CONTRACT/AHRS_PROVENANCE.json": {
+      "sha256": "e3f7a1f176c48927fe955b14378b8b903a28d2278c50519fce3c5226f8e044e7",
+      "bytes": 4037
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/RUN.json": {
+      "sha256": "4e25bac66710ce84773dbb37f92b8d78ed93d95fbc504e60621fc1ad78036dda",
+      "bytes": 6860
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2H/GNC_ERRORS.csv": {
+      "sha256": "166a681890ccca3d3521c38c5712ea4c27efd4e81e7b0b82ef7aa1977f1d1665",
+      "bytes": 33255
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/datasets/by2/go2_body_state_parser.py": {
+      "sha256": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+      "bytes": 10882
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": {
+      "sha256": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+      "bytes": 78
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": {
+      "sha256": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+      "bytes": 11820
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": {
+      "sha256": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+      "bytes": 6108
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": {
+      "sha256": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+      "bytes": 14172
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": {
+      "sha256": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+      "bytes": 30175
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": {
+      "sha256": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+      "bytes": 4329
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": {
+      "sha256": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+      "bytes": 8019
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": {
+      "sha256": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+      "bytes": 34075
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": {
+      "sha256": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+      "bytes": 15617
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": {
+      "sha256": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+      "bytes": 28911
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": {
+      "sha256": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+      "bytes": 21779
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/report.py": {
+      "sha256": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+      "bytes": 9313
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": {
+      "sha256": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+      "bytes": 12946
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": {
+      "sha256": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+      "bytes": 1562
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": {
+      "sha256": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+      "bytes": 15933
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": {
+      "sha256": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+      "bytes": 19859
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": {
+      "sha256": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+      "bytes": 25098
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/STATES.csv": {
+      "sha256": "c0705e51501663872502a21c948de99e8b59ca8c913f02422115c85560fd5d08",
+      "bytes": 40998
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/WEIGHTS.npz": {
+      "sha256": "3a31a2adf769d6c154c5f137ee63217345b278ed308b0351573e4f2bde48338b",
+      "bytes": 127349
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/SOLVER.json": {
+      "sha256": "c4796b6b7658655ec4c9c3e967ed287ba6123ff98873c90ff6535f7643f9e91f",
+      "bytes": 25854
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/WEIGHT_HISTORY_INDEX.json": {
+      "sha256": "8cf412b03d8905fdd19d496a35ede0049f722e0713794c805647eed0fd8fd224",
+      "bytes": 2966
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/STATE_ARRAYS.npz": {
+      "sha256": "fe683296b9fecdf7f28154d2786728bd100423752c1525f65c9f9e6696dc9306",
+      "bytes": 193251
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2H/GNC/PAPER_CONTRACT/WEIGHT_HISTORY.npz": {
+      "sha256": "44256a86427f2a66843dd5c31b438eb3c9ed810f13cab3fe8ef24e1d71ebfb6f",
+      "bytes": 1054835
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2O/METRICS.csv": {
+      "sha256": "ffa3e9832866742d6198782dd34e8da33c591debf3538e7dd3b03e6c2f2ed6ae",
+      "bytes": 5397
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/RUN.json": {
+      "sha256": "e6f63e9e9ab3da016def8a395824b198edc24763d606d08275cafc236dbecd7a",
+      "bytes": 9768
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2O/OISAM_ERRORS.csv": {
+      "sha256": "f7a2caee52cfd213421e7a444f6a86442d74155b1511e400abc1f08e4ddbfbe6",
+      "bytes": 26900
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/datasets/by2/go2_body_state_parser.py": {
+      "sha256": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+      "bytes": 10882
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": {
+      "sha256": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+      "bytes": 78
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": {
+      "sha256": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+      "bytes": 11820
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": {
+      "sha256": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+      "bytes": 6108
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": {
+      "sha256": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+      "bytes": 14172
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": {
+      "sha256": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+      "bytes": 30175
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": {
+      "sha256": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+      "bytes": 4329
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": {
+      "sha256": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+      "bytes": 8019
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": {
+      "sha256": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+      "bytes": 34075
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": {
+      "sha256": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+      "bytes": 15617
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": {
+      "sha256": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+      "bytes": 28911
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": {
+      "sha256": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+      "bytes": 21779
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/report.py": {
+      "sha256": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+      "bytes": 9313
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": {
+      "sha256": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+      "bytes": 12946
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": {
+      "sha256": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+      "bytes": 1562
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": {
+      "sha256": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+      "bytes": 15933
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": {
+      "sha256": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+      "bytes": 19859
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": {
+      "sha256": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+      "bytes": 25098
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/RUN_MANIFEST.json": {
+      "sha256": "f34d48f818ef27fd4e9c1ab886a1f5c11ee19098c65a658f9f9e688483febb60",
+      "bytes": 48008
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/STATES.csv": {
+      "sha256": "04e74b60521e90d1d202443f4c2dc28fe84ce373107f0df30bd2aa9f1ed9f241",
+      "bytes": 44410
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/OISAM/PAPER_CONTRACT/SOLVER_EVENTS.jsonl": {
+      "sha256": "c6e5a3c8724c54f60bde12fa7c38c40c621ea84aa610ad3f043b3ec52643897e",
+      "bytes": 83511
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2O/EVALUATION.json": {
+      "sha256": "b13c1b5bf9f3497950aa3fac5e65c87383dc5646eb303aa4fa6db7fe3a4e946a",
+      "bytes": 13272
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/RUN.json": {
+      "sha256": "f8af1ec7469a7a7e013a7173f8640c08e6794cfc988d663b31a7eee26281806b",
+      "bytes": 11176
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2O/WEN_TC_ERRORS.csv": {
+      "sha256": "1f0beb028bbacdb28210773b3d9a458ff17ea1d93a52d2f9a963d6f3664f49ff",
+      "bytes": 46131
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/datasets/by2/go2_body_state_parser.py": {
+      "sha256": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+      "bytes": 10882
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": {
+      "sha256": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+      "bytes": 78
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": {
+      "sha256": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+      "bytes": 11820
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": {
+      "sha256": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+      "bytes": 6108
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": {
+      "sha256": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+      "bytes": 14172
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": {
+      "sha256": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+      "bytes": 30175
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": {
+      "sha256": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+      "bytes": 4329
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": {
+      "sha256": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+      "bytes": 8019
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": {
+      "sha256": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+      "bytes": 34075
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": {
+      "sha256": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+      "bytes": 15617
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": {
+      "sha256": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+      "bytes": 28911
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": {
+      "sha256": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+      "bytes": 21779
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/report.py": {
+      "sha256": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+      "bytes": 9313
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": {
+      "sha256": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+      "bytes": 12946
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": {
+      "sha256": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+      "bytes": 1562
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": {
+      "sha256": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+      "bytes": 15933
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": {
+      "sha256": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+      "bytes": 19859
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": {
+      "sha256": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+      "bytes": 25098
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/STATES.csv": {
+      "sha256": "e70b895c4a2fab3530662f2829dd2f77ec8273ab6cc6c8b7fe5c7e03b30689af",
+      "bytes": 60218
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/AHRS_INTERVALS.npz": {
+      "sha256": "fdffc19c698b6677077578ab7b2df94bc527787b749f2e966ccf40a3a02cdbbc",
+      "bytes": 127577
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/SOLVER.json": {
+      "sha256": "cc7683218d9265ad8f063fc3e53a7b66cd0386a40ae71918a7f1e01dd3fe0b45",
+      "bytes": 5485
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/STATE_ARRAYS.npz": {
+      "sha256": "845ed2c2bbce67a77e86772dc8d9d55fd4cd62f73a645d479ccb83f8c4f449f0",
+      "bytes": 34590
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/WEN_TC/PAPER_CONTRACT/AHRS_PROVENANCE.json": {
+      "sha256": "166c9e51a126b03a32a4da34b5f5b03fb5e425520d257ca8249587b345ccd403",
+      "bytes": 4039
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/RUN.json": {
+      "sha256": "96e4375172f057a1dbba28fd1f3ebdcec8c1d18bcd964169c0671b946ee3f93e",
+      "bytes": 6862
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/evaluation/BY2O/GNC_ERRORS.csv": {
+      "sha256": "3e364644ea5df0014f23b735ed9898f75b5d050ab924803b3265dba7886b86bf",
+      "bytes": 46137
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/datasets/by2/go2_body_state_parser.py": {
+      "sha256": "3463570f49855e0138be56195ffd3e605cd32915df11e9f5f526dfe54b695fd6",
+      "bytes": 10882
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/__init__.py": {
+      "sha256": "d6f38207b797390b236ae145565bb4fd2bf5f1507a809a55effc7dadd552745c",
+      "bytes": 78
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/broadcast_identity.py": {
+      "sha256": "404b23476738e747d2abc4608bb5f99c72934f4e40a2ce4107b6967f1695b976",
+      "bytes": 11820
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/ceres_relinearize.py": {
+      "sha256": "49a8b3782931360abe9bdf527b9a0f1a21f289f6b7257807fe06a99b38deb4ce",
+      "bytes": 6108
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/evaluation.py": {
+      "sha256": "823fd2fc81ecac1f33ab503698a4856f87b324fbdfc842bc9855cd896109ea47",
+      "bytes": 14172
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/gnc.py": {
+      "sha256": "4d347d1e745ba330130745490934bfc5b9caab86446d006c5adb7477616ff750",
+      "bytes": 30175
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_bridge.cc": {
+      "sha256": "de71d58f3f822b9c018cfe8ce1e82ef193ae48255480a80292525f385278d994",
+      "bytes": 4329
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/obgins_preintegration.py": {
+      "sha256": "7d4a211541fe0cfddced87074d19c41adeaf3cc1fc116c88408914dbb03d1aa5",
+      "bytes": 8019
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam.py": {
+      "sha256": "6733fceead5a464dc398610f39e7d0b9aa2223e5b1b67d6d5ad2d9eb004b9862",
+      "bytes": 34075
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/oisam_inputs.py": {
+      "sha256": "9cca453bcef6e355b3e4b2e6ee00075034854c7189a98f7634eaa213279696b6",
+      "bytes": 15617
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/plotting.py": {
+      "sha256": "3f5f75c89c66d196f5dafb151d927173abb0f4b807218146867c6790b7e8c294",
+      "bytes": 28911
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/raw_inputs.py": {
+      "sha256": "ad6de0fd9a1077947d3c852ed10b54a861497d6953f6a66639681dda97bd5e42",
+      "bytes": 21779
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/report.py": {
+      "sha256": "77e24d7f27a6a29dfd166f89f443ac8933da44186839529cf6cdee0ed2a0eb94",
+      "bytes": 9313
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/retained_results.py": {
+      "sha256": "9b7e272e7c8451d0c80ca1d6d382bbb4fd022c6cc0aeb096bc70ec8a1c949739",
+      "bytes": 12946
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/rtklib_corrections.c": {
+      "sha256": "c63abcc4a6cec027a4fb290536211fe67d2aade34b57b00179d9cb371800649e",
+      "bytes": 1562
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/runner.py": {
+      "sha256": "32ef37454667a9da4890178d976fdbf82a615b74be002d0976ecc6a974005415",
+      "bytes": 15933
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_ahrs.py": {
+      "sha256": "29463290c27485ba0f00d88049d69afabfaeb3d797e3318a20c8da65f2735017",
+      "bytes": 19859
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/fgo_comparison/wen_tc.py": {
+      "sha256": "21799406825343811611cf99dde979d0cd1b28d0031879042bebbee1488b6498",
+      "bytes": 25098
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": {
+      "sha256": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+      "bytes": 219761
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": {
+      "sha256": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+      "bytes": 13006
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": {
+      "sha256": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+      "bytes": 6227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOURCE_SNAPSHOT/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": {
+      "sha256": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+      "bytes": 75684
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/STATES.csv": {
+      "sha256": "0eba3d15a8e8db77a98722100d2919624ea294307d2ead5cb48cbca54c2ad54d",
+      "bytes": 60858
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/WEIGHTS.npz": {
+      "sha256": "2f10f7bc7049b732f45b95a8bd49d19ba095de002dd611b2d111bce5b017d028",
+      "bytes": 172644
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/SOLVER.json": {
+      "sha256": "2eda2718ced747921987e74d993e34434fbb201306b091598a57dfbc284297a0",
+      "bytes": 20440
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/WEIGHT_HISTORY_INDEX.json": {
+      "sha256": "f8f0690d76cb8b1d81a181ab94529058fa6baf1ab66fbd6c3f66e17c221b5a10",
+      "bytes": 2312
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/STATE_ARRAYS.npz": {
+      "sha256": "12d5eb76baf40fa8a4fa98744330cb1536347f01f4fec543063776707d89f6de",
+      "bytes": 263424
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/FGO_REPRODUCTION_FIX_20261004/FGO_REPRODUCTION_FINAL_20261004T054410Z/runs/BY2O/GNC/PAPER_CONTRACT/WEIGHT_HISTORY.npz": {
+      "sha256": "8f166ecc38a3e0a3578148fd3368faeb0cd17a350a54d79476f7c1d04edb2b1f",
+      "bytes": 1114663
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/ALL_NATIVE_SEALED.json": {
+      "sha256": "3af7f0c6d010d83c2ea6763f97189ae702cb761d374cb7410ce9fd51c14423ab",
+      "bytes": 24861
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2/OISAM/SEGMENTED_DIAGNOSTIC/RUN.json": {
+      "sha256": "cca741b43cf405ccc35586facf2b01f44fc852ad121283c877d81009515d6ef3",
+      "bytes": 119794
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2/OISAM/SEGMENTED_DIAGNOSTIC/SOURCE_SNAPSHOT.zip": {
+      "sha256": "20f1131927f9d413550161423c003337b60b51f0f6a81758d213d32cf408dae7",
+      "bytes": 3494088
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2/OISAM/SEGMENTED_DIAGNOSTIC/PREREGISTRATION.json": {
+      "sha256": "20a4ac31da1ef0cb0759e23bac60eb059373e1e7e9fa2dcff52fd065d0238b24",
+      "bytes": 167707
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2/OISAM/SEGMENTED_DIAGNOSTIC/STATES.csv": {
+      "sha256": "d39fe14e4c61bc58d35506b1026373875ef4cbff629fca5570b83157b28ccc17",
+      "bytes": 54081
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2/OISAM/SEGMENTED_DIAGNOSTIC/SOLVER_EVENTS.jsonl": {
+      "sha256": "888063c7650bf2e6d1dc9c41fcb071ef244e606d79a910bde522d260e71ca030",
+      "bytes": 140184
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2/OISAM/SEGMENTED_DIAGNOSTIC/BLOCKS.json": {
+      "sha256": "90754ae2fd4b34b78ef1a63d7ac9a778fc55f0517ed88749c940ed24433f3ef3",
+      "bytes": 9858
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/METRICS.csv": {
+      "sha256": "9f66289454f9fe03037d74409a4986969130d2256cbcdfe177734ddf8d1f292d",
+      "bytes": 8754
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/EVALUATION.json": {
+      "sha256": "c641033c685816a76ff573a7c359397afcbaa0e86bab3923eca14bbc7c402d9f",
+      "bytes": 36353
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/ACCESS.json": {
+      "sha256": "75550bd2f33e37af937c84fde8f6527a1102ccfa22c78d9cd625d25c41da92b7",
+      "bytes": 479
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/OISAM_PRIMARY_DYNAMIC_ONLY_ERRORS.csv": {
+      "sha256": "244d164d16832a7dcfe9787a84abf102686ca061c07e8642d69b103025344ceb",
+      "bytes": 54626
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/WEN_TC_PRIMARY_DYNAMIC_ONLY_ERRORS.csv": {
+      "sha256": "0136ea55f0eb61788316f7413a063fb714698036d20984c8d3cb3287761c3326",
+      "bytes": 51310
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/GNC_PRIMARY_DYNAMIC_ONLY_ERRORS.csv": {
+      "sha256": "4ec12efde126d30e3974e6efdc804a01ac5372551c685f7ce31e0f522648236e",
+      "bytes": 51152
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/OISAM_SECONDARY_ALL_VALID_POSITION_ERRORS.csv": {
+      "sha256": "244d164d16832a7dcfe9787a84abf102686ca061c07e8642d69b103025344ceb",
+      "bytes": 54626
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/WEN_TC_SECONDARY_ALL_VALID_POSITION_ERRORS.csv": {
+      "sha256": "0136ea55f0eb61788316f7413a063fb714698036d20984c8d3cb3287761c3326",
+      "bytes": 51310
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2/GNC_SECONDARY_ALL_VALID_POSITION_ERRORS.csv": {
+      "sha256": "4ec12efde126d30e3974e6efdc804a01ac5372551c685f7ce31e0f522648236e",
+      "bytes": 51152
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2H/OISAM/SEGMENTED_DIAGNOSTIC/RUN.json": {
+      "sha256": "f4c15e5d00b1196a746774a923f204562a615972d4b9549f9fb1e1fd1eae417f",
+      "bytes": 119953
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2H/OISAM/SEGMENTED_DIAGNOSTIC/SOURCE_SNAPSHOT.zip": {
+      "sha256": "c3fca77011351248be6350c67305bedd1301a44ac0e192b301e7e92caddb68dc",
+      "bytes": 3494088
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2H/OISAM/SEGMENTED_DIAGNOSTIC/PREREGISTRATION.json": {
+      "sha256": "20a4ac31da1ef0cb0759e23bac60eb059373e1e7e9fa2dcff52fd065d0238b24",
+      "bytes": 167707
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2H/OISAM/SEGMENTED_DIAGNOSTIC/STATES.csv": {
+      "sha256": "cd3a49f46eb78841bb0a3f5bb25c75e8744418d8f98fab2c40d6ddcab5698c99",
+      "bytes": 52768
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2H/OISAM/SEGMENTED_DIAGNOSTIC/SOLVER_EVENTS.jsonl": {
+      "sha256": "9d8952d2cccb02809ae1520ac1b88b64c6bcf1ad57f655152d9074aa3e15f62a",
+      "bytes": 135448
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2H/OISAM/SEGMENTED_DIAGNOSTIC/BLOCKS.json": {
+      "sha256": "5784e4c59f03d8323e7070511bb930684aad849bd8c121366e5aab66279051a5",
+      "bytes": 23234
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/METRICS.csv": {
+      "sha256": "d0faa1ee6ab434458ec7acfe53751d7b2443ef6c8f98eebbd38808552440eb20",
+      "bytes": 8840
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/EVALUATION.json": {
+      "sha256": "bbbc5603814b25084556d4268961efa9ac503e74c35c42f95e600acf2785c202",
+      "bytes": 36376
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/ACCESS.json": {
+      "sha256": "fae1909767a89786c7a2408c69a6bfdff4b522f44bbe7722fe82640359c2c96a",
+      "bytes": 479
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/OISAM_PRIMARY_DYNAMIC_ONLY_ERRORS.csv": {
+      "sha256": "0304d4b54ff7739555f1a88cca9d360a4f4eb69f1970ba6f5320e6f50647e4e5",
+      "bytes": 53993
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/WEN_TC_PRIMARY_DYNAMIC_ONLY_ERRORS.csv": {
+      "sha256": "5cc737535dc9674c17d98e0b398052e850259430e38de719b34743496bcad087",
+      "bytes": 50143
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/GNC_PRIMARY_DYNAMIC_ONLY_ERRORS.csv": {
+      "sha256": "35797f3709bfe7ffacd5488a693c3f5c1702aaa0321de8a495394eb14be0a0d1",
+      "bytes": 50013
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/OISAM_SECONDARY_ALL_VALID_POSITION_ERRORS.csv": {
+      "sha256": "d8cfadba4a6a2efe7240d5e2ce4bab23f86eb95bffb3fe16a474d396699d24d5",
+      "bytes": 54226
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/WEN_TC_SECONDARY_ALL_VALID_POSITION_ERRORS.csv": {
+      "sha256": "5cc737535dc9674c17d98e0b398052e850259430e38de719b34743496bcad087",
+      "bytes": 50143
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2H/GNC_SECONDARY_ALL_VALID_POSITION_ERRORS.csv": {
+      "sha256": "35797f3709bfe7ffacd5488a693c3f5c1702aaa0321de8a495394eb14be0a0d1",
+      "bytes": 50013
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/RUN.json": {
+      "sha256": "2fbb2d7d28ceaf570dc1eab3a695ccc62609d464658de2755e28b218e22950fe",
+      "bytes": 121047
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/SOURCE_SNAPSHOT.zip": {
+      "sha256": "e8969859edd6a351106869fc0109401d4a2a52c57b594ff5ed38e91123835b25",
+      "bytes": 3494088
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/PREREGISTRATION.json": {
+      "sha256": "20a4ac31da1ef0cb0759e23bac60eb059373e1e7e9fa2dcff52fd065d0238b24",
+      "bytes": 167707
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/STATES.csv": {
+      "sha256": "991a4f7e4a95b390c93680510280b6edf990008933bf9767089c074c9b6a3f53",
+      "bytes": 80590
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/SOLVER_EVENTS.jsonl": {
+      "sha256": "1a2518e21e54b64bf7b2bff4a2617a4bcce45243d7697bb47b8b6d0fb494bc70",
+      "bytes": 234003
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/BLOCKS.json": {
+      "sha256": "081739d010caba4348e1bf26bd5824a1869c77953e49c1d353241ddb9f71eccf",
+      "bytes": 52309
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/TARGET_DIAGNOSTICS/3286_CERES_INITIAL.npz": {
+      "sha256": "0003891c77144476c2c5ee436ea308664e2de75d2024cf839ebfc32fd6ada39d",
+      "bytes": 149725
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/TARGET_DIAGNOSTICS/3286_CERES_INITIAL.json": {
+      "sha256": "77f24e5ea65c5780f5c6646b663d65452de4cdfb109dddc47f9ee390f3c25378",
+      "bytes": 1184
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/TARGET_DIAGNOSTICS/3286_CERES_FINAL.npz": {
+      "sha256": "46ea8c1d4233d63fc8d2e4869c0ec1484f099751e28056b30aac72c9569b6237",
+      "bytes": 149757
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/TARGET_DIAGNOSTICS/3286_CERES_FINAL.json": {
+      "sha256": "06b0ef20629a89d9e1ce3b56e1a74649d40def140a8861b4c1fba16a8b305f5e",
+      "bytes": 1181
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/TARGET_DIAGNOSTICS/3286_STEP_OUTPUT.npz": {
+      "sha256": "92a723f04d0593ff0c49ef7d0209e76231665dd4078b1bb5ef541560302929f4",
+      "bytes": 144521
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/TARGET_DIAGNOSTICS/3286_STEP_OUTPUT.json": {
+      "sha256": "d9878ebc4ac0ffbe59754cd2e39c471bab476ed350c814b6fdd427816b3426fe",
+      "bytes": 1174
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/runs/BY2O/OISAM/SEGMENTED_DIAGNOSTIC/TARGET_DIAGNOSTICS/TARGET_EVENT.json": {
+      "sha256": "1b5a2cd51bd3b21294d97f5005a829f398524ba66418dd25cc4034e3781381ae",
+      "bytes": 790
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/METRICS.csv": {
+      "sha256": "369befe2362008d84bcae1a618ae8494e5ca96e9e3dc575ffb7362e1fa62eec9",
+      "bytes": 8838
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/EVALUATION.json": {
+      "sha256": "a0d7d7fa10884b89c0b3b352a14bd9272d969a5e8592f4eb48e7419813a7b35e",
+      "bytes": 39408
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/ACCESS.json": {
+      "sha256": "95c8d40e101572ccd85362955903a1e58d4d1382452841b7bd2b8097417aaeeb",
+      "bytes": 479
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/OISAM_PRIMARY_DYNAMIC_ONLY_ERRORS.csv": {
+      "sha256": "2e15543cb2db95bc3a26d1df28b0ba104db121215ae94b73517e2ecbbed4066d",
+      "bytes": 76237
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/WEN_TC_PRIMARY_DYNAMIC_ONLY_ERRORS.csv": {
+      "sha256": "5e971d3ae42e33f3c1f6f5d20a5f4490374d002f8b3c0573abdd1f0862bf0dba",
+      "bytes": 70315
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/GNC_PRIMARY_DYNAMIC_ONLY_ERRORS.csv": {
+      "sha256": "87c78f2617e5a3ad1f53d458f603cb0c568af45d6495b5db170cf30dba574555",
+      "bytes": 70321
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/OISAM_SECONDARY_ALL_VALID_POSITION_ERRORS.csv": {
+      "sha256": "fa9ed133ab467f1cbf5b2b5cd025a26dccf776591c6b0a5d5df6e60fb00659b5",
+      "bytes": 76937
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/WEN_TC_SECONDARY_ALL_VALID_POSITION_ERRORS.csv": {
+      "sha256": "5e971d3ae42e33f3c1f6f5d20a5f4490374d002f8b3c0573abdd1f0862bf0dba",
+      "bytes": 70315
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/FGO_SEGMENTED_DIAGNOSTIC_20261004T100449Z/evaluation/BY2O/GNC_SECONDARY_ALL_VALID_POSITION_ERRORS.csv": {
+      "sha256": "87c78f2617e5a3ad1f53d458f603cb0c568af45d6495b5db170cf30dba574555",
+      "bytes": 70321
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/07_AGGREGATE/MAIN_TABLE_V3.csv": {
+      "sha256": "cd734338cf89518679d78179f410a79ecad3060535d3b80e43a62545cee9b21c",
+      "bytes": 51910
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN4_BY2_HORIZONTAL_LITERATURE_COMPARISON/06_EXT05_PAVLASEK_TWO_RECEIVER/C00/EXT05A_C00_NATIVE_SUMMARY.json": {
+      "sha256": "466b99cb075e5dd7e2e93bb3a27e4ca8df4ffbbffd5bd81ec561e053bc614dea",
+      "bytes": 16789
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_DEGSUBSET_BY2/09_HORIZONTAL_V3/LC01_EXT05A/FROZEN_EVALUATOR/error_series.csv": {
+      "sha256": "b7af06c18399d525f31e57e86357f196413f5f505999877a5cf9f9fe5a9179c1",
+      "bytes": 10492283
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_DEGSUBSET_BY2/09_HORIZONTAL_V3/LC01_EXT05A/EVALUATION_RESULT.json": {
+      "sha256": "8d310276ece955cf6f9f9d7a6fe6161e28badc5a2fe8406bdcadf915bd729d97",
+      "bytes": 11381
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_DEGSUBSET_BY2/09_HORIZONTAL_V3/EXT05C/FROZEN_EVALUATOR/error_series.csv": {
+      "sha256": "c89dca178f135f2ab08925b3ad649bd2cf999535949a7c8bf3291e801cc2126b",
+      "bytes": 10490810
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN5_DEGSUBSET_BY2/09_HORIZONTAL_V3/EXT05C/EVALUATION_RESULT.json": {
+      "sha256": "811b884983fe8a847d3ba82e1b35d55c50ec5e504620beca1e11797a437cac52",
+      "bytes": 11360
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/04_NATIVE_RUNS/BY2/LC01-S/FILE_START/NATIVE_SUMMARY.json": {
+      "sha256": "d4eaebccdaa3818a23cf381aa007ce0a6ce86d17217cd5fad25c1ff22fba8bf3",
+      "bytes": 25441
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2__LC01-S__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz": {
+      "sha256": "28764e2cc88d0e3164124500211375e72ab955c28a3a9c072a3a916cbd89c419",
+      "bytes": 4704600
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2__LC01-S__FILE_START/EVALUATION_RESULT.json": {
+      "sha256": "1baa2265cca3fddc02182278871ea600bc1058a8cbfd78f94a00975c84952baa",
+      "bytes": 14612
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/04_NATIVE_RUNS/BY2/EXT05C-S/FILE_START/NATIVE_SUMMARY.json": {
+      "sha256": "b961d3df8c37fa81214b59ba4dde1ba3a96b393581284117989fc7f4dc656106",
+      "bytes": 24441
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2__EXT05C-S__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz": {
+      "sha256": "96691277b7821861626023f147410e390b8f8fe561bb8711642bb766ff4b3f89",
+      "bytes": 4669527
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2__EXT05C-S__FILE_START/EVALUATION_RESULT.json": {
+      "sha256": "f8c7cfa4d90d848d2c442a6b531c23228f6b796280f3eabbc58e119c20ed3680",
+      "bytes": 14647
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/04_NATIVE_RUNS/BY2H/LC01/FILE_START/NATIVE_SUMMARY.json": {
+      "sha256": "b8ea43c99a67085b8240fe24682b34295b39a363f5884526786d37bc88355032",
+      "bytes": 29227
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__LC01__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz": {
+      "sha256": "2f22d00a231a85645581f1c678ff2cfc1ccfeabdcdf68e6b87fea4c04acd7816",
+      "bytes": 4866306
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__LC01__FILE_START/EVALUATION_RESULT.json": {
+      "sha256": "0c908613467f46b740d0736828a3b52c71102903fde1b5b2a44cb3962b0aec49",
+      "bytes": 14643
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/04_NATIVE_RUNS/BY2H/LC01/CONTRACT_START/NATIVE_SUMMARY.json": {
+      "sha256": "df3bf2a3a8265b898c3e0276f0476d8203a6a2209256ffee619600b113543795",
+      "bytes": 28367
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__LC01__CONTRACT_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz": {
+      "sha256": "b0dd1a681c0dc69181b0bb6f09f7ec0faa2a2ea4dc12179aed42ab864fdb7ee4",
+      "bytes": 4866561
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__LC01__CONTRACT_START/EVALUATION_RESULT.json": {
+      "sha256": "41beb7a87a2a7116b1cce5bc2e8766d315a2cd4e74d4c464e019e7160d00d715",
+      "bytes": 14699
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/04_NATIVE_RUNS/BY2H/EXT05C/FILE_START/NATIVE_SUMMARY.json": {
+      "sha256": "081cad9296b826785f61605d247abfc19464202a3be1e0195bc7ad7c094cf80e",
+      "bytes": 29152
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__EXT05C__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz": {
+      "sha256": "ac153b45ba0256b7d42c5928bf18c6b9b8f81301300ebd4ffac08c44d04816dd",
+      "bytes": 4797071
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__EXT05C__FILE_START/EVALUATION_RESULT.json": {
+      "sha256": "c59b06776597a06ac9ca08f476f0acb88e340d62e83c2bdcf436b2eca6c8ba36",
+      "bytes": 14649
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/04_NATIVE_RUNS/BY2H/EXT05C/CONTRACT_START/NATIVE_SUMMARY.json": {
+      "sha256": "b6e533a8ea085bde689eaa61376056c2b7ee1691b1c3e6672e6638981e255842",
+      "bytes": 28324
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__EXT05C__CONTRACT_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz": {
+      "sha256": "9feb39f9c7f0fa90c0570dec45e91c70a97750be7a806eaf06c3a58e38c6dad4",
+      "bytes": 4851200
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__EXT05C__CONTRACT_START/EVALUATION_RESULT.json": {
+      "sha256": "447cecb42ba2392ac1291e5282f56f0a705a8c7937679a2d985875dfaf604918",
+      "bytes": 14753
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/04_NATIVE_RUNS/BY2H/LC01-S/FILE_START/NATIVE_SUMMARY.json": {
+      "sha256": "89887efe905260fbc5432e327cbae16f4d3e824538dcb6ffc03123eaf25cee56",
+      "bytes": 29320
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__LC01-S__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz": {
+      "sha256": "8495aa735a7af30b8add0c47eb4cb96dd912b8d0060fe6b77aba559cd756a38b",
+      "bytes": 4847245
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__LC01-S__FILE_START/EVALUATION_RESULT.json": {
+      "sha256": "663c7b66c33ddb1281a431213a52dd6a202c5fd786409d2255d694eb2bff95ca",
+      "bytes": 14664
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/04_NATIVE_RUNS/BY2H/LC01-S/CONTRACT_START/NATIVE_SUMMARY.json": {
+      "sha256": "0686c62942e3f55d466d54c19ad0d2354cf76e6058c39565bfddff72e4199bff",
+      "bytes": 28472
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__LC01-S__CONTRACT_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz": {
+      "sha256": "f74fd7c2c058e85ac212b5ecec0f16d9bda9b0b21e4635dbb152e44d3bbd5f39",
+      "bytes": 4848347
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_02/07_OFFLINE_EVALUATION/v3/BY2H__LC01-S__CONTRACT_START/EVALUATION_RESULT.json": {
+      "sha256": "8fbfbc6fad6cd781e1050d06e5a4dc1f7caf1e8ea2d0deb096790b24cc305b12",
+      "bytes": 14728
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/04_NATIVE_RUNS/BY2H/EXT05C-S/FILE_START/NATIVE_SUMMARY.json": {
+      "sha256": "f40de222782d54c2f600392abbf4fd84ada82c8760161fe110e4f8eb25526557",
+      "bytes": 29268
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/04_NATIVE_RUNS/BY2H/EXT05C-S/CONTRACT_START/NATIVE_SUMMARY.json": {
+      "sha256": "f36fe0a5d767ba5385cd330006e9d4695cd41587b051bb0525b8b958b8b9b40c",
+      "bytes": 28431
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2H__EXT05C-S__CONTRACT_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz": {
+      "sha256": "3cc9c67393a675f419f2db8682d3848a8b12094a4081c94e3840bb8dd051205b",
+      "bytes": 4841167
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2H__EXT05C-S__CONTRACT_START/EVALUATION_RESULT.json": {
+      "sha256": "6f5fa0fb51d8e73ff41d4f5b5ef5e5142d291deeef651c7be9035cff42dff343",
+      "bytes": 14826
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/04_NATIVE_RUNS/BY2O/LC01/FILE_START/NATIVE_SUMMARY.json": {
+      "sha256": "774d9cc56e6dcd6518c83f9f4e728851b20f2d4a03b2694c996843cb465ba47a",
+      "bytes": 31976
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2O__LC01__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz": {
+      "sha256": "238020f003a658bca3ea810430b2fb5e187bf16f5cf566a02b0633816ea9af9f",
+      "bytes": 6320269
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2O__LC01__FILE_START/EVALUATION_RESULT.json": {
+      "sha256": "c53c8082ff767c5425c74c5c4e05513ebec256492d1ce901423c165c66065aa0",
+      "bytes": 14703
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/04_NATIVE_RUNS/BY2O/EXT05C/FILE_START/NATIVE_SUMMARY.json": {
+      "sha256": "514196667f38e27f4858d8e033a4b033b04a50f7b29feb1664b0f6cb2178dccb",
+      "bytes": 30983
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2O__EXT05C__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz": {
+      "sha256": "95b4437511db99b0dbf98db3019ca3e31b047c21f2261be9dd175303db1aa6b6",
+      "bytes": 6317521
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2O__EXT05C__FILE_START/EVALUATION_RESULT.json": {
+      "sha256": "3356600858c39cc1edb87cd6a995cee9ad5630dc4d0ea1ec58444bbaccf1b036",
+      "bytes": 14731
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/04_NATIVE_RUNS/BY2O/LC01-S/FILE_START/NATIVE_SUMMARY.json": {
+      "sha256": "4ef50a13438329508d093d2833b9ad6f817bc6712c8f8c9c02573cb9c2475a6c",
+      "bytes": 32085
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2O__LC01-S__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz": {
+      "sha256": "397c61bdce8788a83dbb19010911f28e93da84f6c47c2408683cf7e6646601c3",
+      "bytes": 6274467
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2O__LC01-S__FILE_START/EVALUATION_RESULT.json": {
+      "sha256": "43c5321b9134fff78b347c80963c2e3e3dea1cd2a5318b3fb5946f6435142a95",
+      "bytes": 14716
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN7_HEXT_EXTERNAL_SEQUENCES/04_NATIVE_RUNS/BY2O/EXT05C-S/FILE_START/NATIVE_SUMMARY.json": {
+      "sha256": "7e09ea52cbaa05d55b8ca6d83eaa6727e1877317fc33486a0fc8227485be1e18",
+      "bytes": 31074
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2O__EXT05C-S__FILE_START/EXACT_EVALUATOR_OUTPUT/error_series.csv.gz": {
+      "sha256": "5c54557dbcac3766731ddd34929ce1a9f4aa028d4a64916dc2034d7b3831a4d2",
+      "bytes": 6251443
+    },
+    "/home/kaiwen/research/LegSA-GINS-SCRATCH/CLEAN7_HEXT_EXTERNAL_SEQUENCES/H_EXT_03/07_OFFLINE_EVALUATION/v3/BY2O__EXT05C-S__FILE_START/EVALUATION_RESULT.json": {
+      "sha256": "c34de1880df09eb41f73f597cd3c3b3bd1b196832efd83e65756aad0752a0873",
+      "bytes": 14743
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__GINAV__NONE__C00__NA/native/GINAV_RUN.json": {
+      "sha256": "26c9e4233d24acf773ae1967c9dd0b58bc243cbc5401862dbc5b72d038968fab",
+      "bytes": 2110
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__GINAV__NONE__C00__NA/DONE.json": {
+      "sha256": "e173426777b453e901b4195245fcda91885392a95405c7c5500a727a8b3d88b1",
+      "bytes": 1091
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__GINAV__NONE__C00__NA/eval/GINAV_EVALUATION.json": {
+      "sha256": "ddfcef36cc801a58436286c60a10ea5a2ba38b9fbe739748131f7dc373d706e5",
+      "bytes": 2660
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__GINAV__NONE__C00__NA/native/GINAV_RUN/BY2_GNSS1_NORMALIZED_SPP_LC.pos": {
+      "sha256": "39453826453515689416d3d32a8d39290b0fbb35b71525283b692f8fccb788b2",
+      "bytes": 25640
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__GINAV__NONE__C00__NA/native/NATIVE_ACCESS_AUDIT.json": {
+      "sha256": "afc08e021ed345b03b5a879818597431cb08bcc98a4f39e09e3aca46fe575670",
+      "bytes": 473
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/native/GINAV_RUN.json": {
+      "sha256": "bc8dedddadb019f715dd6504d7251d80bb26ef79810271df4fdd253eefbbc832",
+      "bytes": 2141
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/DONE.json": {
+      "sha256": "19380c935a61f90f7c8f53b07696717e1d77c44fd3586ba2f5b5ec6a03c65d49",
+      "bytes": 1095
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/eval/GINAV_EVALUATION.json": {
+      "sha256": "5b488d60ded438e1270f864ae4e22c9cfd069c360fde6c551788a5d1af183991",
+      "bytes": 17381
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/native/GINAV_RUN/BY2_GNSS1_NORMALIZED_SPP_LC.pos": {
+      "sha256": "826629b4577ea464e51191f2163daf2b670bb1fc4dbaca2958d5d3b7122136fd",
+      "bytes": 2165
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/native/NATIVE_ACCESS_AUDIT.json": {
+      "sha256": "997b5a3d2833d6d2fc7e8f8b2c8b3463376b871702a84648a0a829149dfd7ecc",
+      "bytes": 473
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__GINAV__NONE__CONTRACT_START__NA/eval/v3/EXACT_EVALUATOR_OUTPUT/error_series.csv": {
+      "sha256": "a4db09a857a89d761b740de4fa4d0f262cab6470710d9b429ce09a5d53f0dda6",
+      "bytes": 430
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__GINAV__NONE__FILE_START__NA/native/GINAV_RUN.json": {
+      "sha256": "d9b6ee8ccd503096b2adc557fab3afa26cb0ecaa252b68ed9302e96683a23427",
+      "bytes": 2133
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__GINAV__NONE__FILE_START__NA/DONE.json": {
+      "sha256": "72d52d3e736d8bf2863eedf89edcecb01d9c2749c24f6a52338fd2c710f07f38",
+      "bytes": 1107
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__GINAV__NONE__FILE_START__NA/eval/GINAV_EVALUATION.json": {
+      "sha256": "82256629c74394754b5f5d15264ee237910679c7bc6c8857730bd7928828390b",
+      "bytes": 2672
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__GINAV__NONE__FILE_START__NA/native/GINAV_RUN/BY2_GNSS1_NORMALIZED_SPP_LC.pos": {
+      "sha256": "a2d94c782c0a7a9685214fa475ad488ff7aff3918d1d7cf9a9d6b07ef76a28e2",
+      "bytes": 3417
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__GINAV__NONE__FILE_START__NA/native/NATIVE_ACCESS_AUDIT.json": {
+      "sha256": "93a63df276fd83925858448b4c64625aa355ca8b20e5dbd6a8ad8ea2bdcf6406",
+      "bytes": 473
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/RESULT.json": {
+      "sha256": "c2c1099c3d562cfc2a1ca77e6582e715205d01b404e67acaa1c7cc1ef51f15df",
+      "bytes": 5156
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-DEF.csv": {
+      "sha256": "2c5674095e154f58c3b7bbde05c85d89aa018ac403ca9b24c4e3eae84f781130",
+      "bytes": 319962
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-DEF__CONTRACT_START/NAV.csv": {
+      "sha256": "94e88c1adbd18659a6d63f92db7efc19a2a85ad46c4a0f0e086a4816dd1d2e77",
+      "bytes": 31759396
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/RESULT.json": {
+      "sha256": "13211502da129efd0602579a9cd9e02654b7dd55c6954de45d788838b5daef0a",
+      "bytes": 5162
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-LIT.csv": {
+      "sha256": "b81a25422b0cf3aa5b5227b3cefaaea2b2bc2402a51373912e4f5c410ba4a46d",
+      "bytes": 322906
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2H__HARTLEY_OFFICIAL__OFF-LIT__CONTRACT_START/NAV.csv": {
+      "sha256": "346967d0460b456a07f4466d9362e194fb17cef24499027ac22ac5d472f1f649",
+      "bytes": 32019081
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/RESULT.json": {
+      "sha256": "f2f5a23f752e1dfaf6a213334c12708d3874c3996121a13843175205b27da6b8",
+      "bytes": 5152
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-DEF.csv": {
+      "sha256": "fdca8b4c8f465ee7e7fbe35ac3609952bdf66386410a11fd8ea021257993d793",
+      "bytes": 449419
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-DEF__FILE_START/NAV.csv": {
+      "sha256": "a6bb359821833ebf015fa9c957c026a1740bc626ab7e28f5f079370671a7ffdc",
+      "bytes": 50820895
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/RESULT.json": {
+      "sha256": "d2d534be0f10510aa285ec253ebd945e0ddb5bce1746870abf63138acb3a8af9",
+      "bytes": 5151
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-LIT.csv": {
+      "sha256": "029d1f5ac665cb54034d36029f2a0ad80c7c9a5bad770a3c2d3f4f1c5d88f363",
+      "bytes": 448734
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2O__HARTLEY_OFFICIAL__OFF-LIT__FILE_START/NAV.csv": {
+      "sha256": "d3aa5476aa623fc522031afc16a236c1b72491ca6194be57c675673be020a18a",
+      "bytes": 51081142
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/RESULT.json": {
+      "sha256": "b6814b1d88ef1e86328996128faf7c23cc7246118fd193f08d4141c354785633",
+      "bytes": 5106
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-DEF.csv": {
+      "sha256": "62aee114d0d75f82422c8b0dd80c4a89d9c0672f4a10f9b0aa69e845cb600bc9",
+      "bytes": 331672
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2__HARTLEY_OFFICIAL__OFF-DEF__C00/NAV.csv": {
+      "sha256": "8eca73a5d718c89f09b14fdc8333954b9d7ca386fe7c62dc7fbc52f048b7e0ae",
+      "bytes": 33348547
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/RESULT.json": {
+      "sha256": "1f08002877286381e8e19834408be6fa6f7ddd2433f2fa4ed80465cbd121bd2a",
+      "bytes": 5107
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_OFF-LIT.csv": {
+      "sha256": "a4a29b92de324d257efca8b98a95e38fdfe33144c393c43cdb93ff193c21b3fe",
+      "bytes": 333465
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02E_HARTLEY_OFFICIAL/RUNS/BY2__HARTLEY_OFFICIAL__OFF-LIT__C00/NAV.csv": {
+      "sha256": "432b1ec55e7a7ff960a93147e46ba76a061824453935d8432cda73826e39dbca",
+      "bytes": 33670321
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX05_CLOSEOUT/RUNS/BY2/RESULT.json": {
+      "sha256": "462ddd3b50e38f29a283336b8c48dd8a2aa62c8fbd4f0609d4ac76bfdb9a6483",
+      "bytes": 7579
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX05_CLOSEOUT/RUNS/BY2/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_LEG-DR.csv": {
+      "sha256": "e9dd4b822db5fe8d1f6e059e7cd035b0ea884b25444ec3f34b5ae674130209d4",
+      "bytes": 331644
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX05_CLOSEOUT/RUNS/BY2/NAV.csv": {
+      "sha256": "4e2b0e2e95cb56568d850e5c4de260d3aa52b0cac9c67a3170c9a5b32fd0d8ed",
+      "bytes": 26042833
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX05_CLOSEOUT/RUNS/BY2H/RESULT.json": {
+      "sha256": "6681648373a1bed627c49ce29356f736cc8143cfb11fdfddd60fb187054bc819",
+      "bytes": 6820
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX05_CLOSEOUT/RUNS/BY2H/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_LEG-DR.csv": {
+      "sha256": "02f025cebfc134cbabe886f43b39db159de3206bd00de53f18828f3272c7e8ed",
+      "bytes": 322783
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX05_CLOSEOUT/RUNS/BY2H/NAV.csv": {
+      "sha256": "392b0534c28ac959a8287e5c915da167c59994b28cfd7dd7f1585c0802504093",
+      "bytes": 24851910
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX05_CLOSEOUT/RUNS/BY2O/RESULT.json": {
+      "sha256": "105566ee09b8784609f3538e03a8fd5ca832fe76df960056c3deebdd524dd2d1",
+      "bytes": 6819
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX05_CLOSEOUT/RUNS/BY2O/eval/OUTPUT/RELATIVE_POSE_ERROR_SERIES_LEG-DR.csv": {
+      "sha256": "d3c9eff7889159015ec4e1d791fbcd88674e8f054ecd4c0aa4e34666faec9b8c",
+      "bytes": 448036
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX05_CLOSEOUT/RUNS/BY2O/NAV.csv": {
+      "sha256": "6023cfa17d00f49f10f8c53593ae906ac47ceb47ecac2370d8f58ba02491268b",
+      "bytes": 39602474
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__EXT04__LIT__C00__NA/DONE.json": {
+      "sha256": "4138a6ed8f8e35dd2f5fe796018ab320f93fc2b55eddb39defc763f4ac47dd8c",
+      "bytes": 2164
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__EXT04__LIT__CONTRACT_START__NA/DONE.json": {
+      "sha256": "09e70f1f89b1ead1ebd69e0e9e6d644770e50c4208b44a3363515bcae90fced2",
+      "bytes": 2208
+    },
+    "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__EXT04__LIT__FILE_START__NA/DONE.json": {
+      "sha256": "c6973c0cbd7ce27c0878188e2aa7546f46ec23eb0c1af4e62850bf58351c1c09",
+      "bytes": 2196
+    },
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/COMPARISON_SOURCE_ASSET_INDEX.csv": {
+      "sha256": "d6ef4d11d5e68c4af7fafda600e6fa6176d5103744caeea31344c083e6044505",
+      "bytes": 15306
+    },
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/FGO_COMPLETE_AUDIT_20261004/COMPLIANCE_MATRIX.csv": {
+      "sha256": "536aef059373ec8dfc2873619f4c6842047dc931c598cb67e13c60b192208f33",
+      "bytes": 13277
+    },
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/EXT_REPRODUCTION/v2_fix/FINAL_EXECUTION_RECEIPT.json": {
+      "sha256": "e61c93d2db61f470b26a75dccf8503113ca37204a49d2ef44b0722c1ac9a431f",
+      "bytes": 7613
+    },
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/hext/HX07R/HX07R_EXECUTION_COUNTS.json": {
+      "sha256": "22f062b5dda1a401a7ff4e2268ae5aa5640e18f68f8bd08aecd16f8854b01457",
+      "bytes": 315
+    },
+    "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/TIM_EVIDENCE_20261005/comparisons/verify_existing_comparisons.py": {
+      "sha256": "6784330051a0783697a01e845383dc67c9eb0ce838f21dec5b4e83a10b193310",
+      "bytes": 19079
+    }
+  },
+  "artifact_pins_after_match": true,
+  "review_script_sha256": "6784330051a0783697a01e845383dc67c9eb0ce838f21dec5b4e83a10b193310"
+}
