@@ -2,7 +2,7 @@
 
 ## Abstract
 
-Heading estimation is difficult for a quadruped robot moving slowly, turning in place or walking sideways. A compact dual-antenna installation supplies direction independently of forward motion, while robot attitude and velocity provide additional navigation constraints. This paper presents an error-state GNSS/INS method that combines heading from a 0.35 m lateral baseline with receiver velocity, Doppler-derived velocity, and robot roll, pitch and horizontal velocity. Receiver status and heading innovations determine measurement admission, and source-specific covariance inflation adjusts the influence of each observation. Three recorded sequences yielded horizontal position RMSEs of 0.055–0.098 m and heading RMSEs of 1.886–2.434 degrees against a commercial navigation reference. In 519 paired disturbance cases, robot tilt reduced roll and pitch RMSE by medians of 1.072 and 0.664 degrees. During 20 s interruptions of GNSS position and velocity with heading retained, robot velocity reduced median whole-window horizontal RMSE from 7.961 to 0.241 m across nine interruption placements. Covariance inflation increased completion from 513 to 519 of 541 cases. Complete GNSS loss interrupted the direction and event support for robot-velocity updates, producing much smaller differences between the configurations. These results show how short-baseline heading and available robot motion estimates complement inertial navigation during different GNSS measurement conditions.
+Heading estimation is difficult for a quadruped robot moving slowly, turning in place or walking sideways. This paper presents an error-state GNSS/INS method that combines heading from a 0.35 m lateral baseline with receiver velocity, Doppler-derived velocity, and robot roll, pitch and horizontal velocity. Receiver status and heading innovations determine measurement admission, and source-specific covariance inflation adjusts the influence of each observation. Three recorded sequences yielded horizontal position RMSEs of 0.055–0.098 m and heading RMSEs of 1.886–2.434 degrees against a commercial navigation reference. In 519 paired disturbance cases, robot tilt reduced roll and pitch RMSE by medians of 1.072 and 0.664 degrees. During 20 s interruptions of GNSS position and velocity with heading retained, robot velocity reduced median whole-window horizontal RMSE from 7.961 to 0.241 m across nine interruption placements. Covariance inflation increased completion from 513 to 519 of 541 cases. Complete GNSS loss interrupted the direction and event support for robot-velocity updates, producing much smaller differences between the configurations. Four additional recordings with 163–173 s intervals between valid GNSS positions showed large drift. The results demonstrate complementary aiding under available observations and the failure boundary during prolonged loss.
 
 **Keywords** GNSS/INS; dual-antenna heading; quadruped robot; velocity aiding; observation weighting; GNSS outage
 
@@ -66,7 +66,7 @@ Robot velocity is transformed into horizontal navigation components using
 
 $$v_H=\Pi_H\widehat C\,k_{\mathrm{HV}}v_{\mathrm{FLU}},\qquad \widehat C=R_z(\psi_A)R_y(-\theta_{\mathrm{SDK}})R_x(\phi_{\mathrm{SDK}})M. \tag{5}$$
 
-The matrix $M=\operatorname{diag}(1,-1,-1)$ converts the adopted forward–left–up convention to forward–right–down. The operator $\Pi_H$ selects the horizontal components. The rotation uses the prepared baseline heading $\psi_A$ and robot-reported roll and pitch. The fixed scale coefficient $k_{\mathrm{HV}}$ is selected during development and then retained in evaluation. The matching tolerance is 0.08 s. The filter observes the horizontal velocity components, with vertical-state changes arising through the state covariance.
+The matrix $M=\operatorname{diag}(1,-1,-1)$ converts the adopted forward–left–up convention to forward–right–down. The operator $\Pi_H$ selects the horizontal components. The rotation uses the prepared baseline heading $\psi_A$ and robot-reported roll and pitch. The fixed scale coefficient $k_{\mathrm{HV}}$ is 1/0.962142 (approximately 1.03935), selected on BY2 and retained in evaluation. Each horizontal component uses a working standard deviation of 0.132838 m/s. The matching tolerance is 0.08 s. The filter observes the horizontal velocity components, with vertical-state changes arising through the state covariance.
 
 This observation has two implementation requirements. Baseline heading supplies the direction used in velocity preparation, and the runtime update is dispatched by an event with valid enabled GNSS position, receiver velocity or heading. Retaining heading during a position-and-velocity interruption therefore preserves an update path for robot velocity. Complete GNSS loss suspends that path. The two interruption experiments in Section 4 examine these operating conditions directly.
 
@@ -100,6 +100,10 @@ The main evaluation uses BY2, BY2H and BY2O, recorded with the same robot instal
 The robot IMU and GNSS use their respective device time bases. The acquisition procedure uses a deliberate kick and the resulting changes in receiver position/velocity and body IMU to identify a common starting event. All internal configurations use the same event alignment and configured point transformation. Position is evaluated at the declared dual-antenna midpoint. The Fixposition fused trajectory supplies the reference position and orientation; it combines its own visual and inertial observations with GNSS sources shared by the tested system. Accordingly, the reported errors are measured against this commercial reference.
 
 The installation dimensions, coordinate conversion and event alignment are applied consistently throughout the comparisons. The SDK velocity is interpreted using the frame convention of Section 2.4. The evaluation also examines the effect of recorded IMU discontinuities through separate continuity analyses described with the supplementary results.
+
+The additional evaluation used eight recordings acquired on 5 January 2026 with the same installation, labelled NMB1–NMB4 and XB1–XB4. These recordings used the continuity-processing implementation with explicit IMU intervals and the numerical filter, scale and weighting parameters fixed on BY2. Input-only timing analysis gave receiver-to-robot speed-correlation peaks of 0.98–1.02 s. Comparing dual-antenna heading rates with body gyro measurements on NMB1 and NMB2 gave peaks of 1.14 s, changing to 1.16 s with another smoothing window. The body timestamps were therefore shifted by −1.1 s, rounding the direct-IMU estimate to 0.1 s, before reassociating baseline heading for robot-velocity preparation. Doppler velocities were reconstructed from each recording's RAWX/SFRBX observations.
+
+The checked-heading baseline and full method used the same initialization rule and common evaluation timestamps. All eight recordings entered the availability summary. The reference had a mean interval of approximately 0.05 s, with clustered arrival timestamps and maximum intervals of 0.108–0.115 s. This dataset used a uniform reference-interpolation limit of 0.15 s within the recorded range. Coverage uses the observed robot-message epochs as its denominator.
 
 ### 3.2 Navigation configurations
 
@@ -215,6 +219,27 @@ The OiSAM implementation with one continuous initialization produced 275/275, 0/
 
 The continuity analysis also compared the original results with explicit IMU-duration and segmented processing on BY2H and BY2O. The latter retained 58,556/58,580 and 72,810/76,548 recorded epochs, respectively. On common timestamps, horizontal RMSE changed from 0.068369 to 0.068056 m and from 0.055648 to 0.054444 m. This combined implementation-and-support comparison shows how the reported errors change when discontinuous records are processed in separate segments.
 
+### 4.6 Long interruptions and initialization availability in the additional recordings
+
+All four NMB recordings supplied dual-fixed heading, and both configurations completed numerical processing. The longest intervals between valid GNSS positions were 163.0–172.6 s, substantially longer than the controlled 10–30 s interruptions. Both aligned configurations produced large horizontal errors on these recordings (Table 6), with the effect of the additional observations varying by sequence. The full method gave heading RMSEs of 3.015, 2.384, 6.870 and 0.983 degrees on NMB1–NMB4. The native trajectories drifted during the long interruption and approached the receiver trajectory again after GNSS recovery.
+
+**Table 6 Navigation error and availability on the eight additional recordings**
+
+| Record | Heading epochs | Position gap (s) | Baseline H RMSE (m) | Proposed H RMSE (m) | Matched/recorded |
+|---|---:|---:|---:|---:|---:|
+| NMB1 | 771 | 163.0 | 1169.4 | 1647.7 | 80272/93265 |
+| NMB2 | 750 | 165.2 | 674.4 | 897.3 | 79907/81810 |
+| NMB3 | 904 | 165.4 | 11047.0 | 10265.4 | 80929/81950 |
+| NMB4 | 697 | 172.6 | 1130.0 | 955.3 | 77588/78609 |
+| XB1 | 0 | — | — | — | 0/91751 |
+| XB2 | 0 | — | — | — | 0/84434 |
+| XB3 | 0 | — | — | — | 0/80304 |
+| XB4 | 0 | — | — | — | 0/79736 |
+
+The baseline uses heading checks and receiver velocity. Heading counts refer to the full receiver record. Matched epochs are common to both configurations; the denominator is the observed robot-message record. XB1–XB4 contained no heading epochs with both receivers fixed, so neither configuration initialized under the specified rule. Their zero outputs remain in the availability table.
+
+These measurements extend the controlled interruption experiment to approximately three-minute gaps. Inertial errors accumulated while the robot-aid updates depended on valid GNSS events. Restored direction and position observations constrained the state again, but the drift accumulated during the interruption remained part of the recording-wide error.
+
 ## 5 Discussion
 
 The observations play complementary roles in quadruped navigation. Baseline heading supplies a body-related direction during low-speed and non-forward motion. Robot roll and pitch correct tilt directly, producing consistent attitude improvements in the paired experiments. Robot horizontal velocity contributes most strongly when translation-related GNSS observations are interrupted. The results therefore favour an observation design based on the information supplied by each source, rather than treating all auxiliary channels as equivalent additions.
@@ -225,7 +250,7 @@ Covariance inflation addresses a different part of the problem. Reducing the inf
 
 ## 6 Conclusions
 
-This paper presented a quadruped GNSS/INS method combining short-baseline heading, robot attitude and velocity, Doppler velocity and source-specific observation weighting. Three main recordings achieved horizontal RMSE below 0.10 m and heading RMSE of 1.886–2.434 degrees against the navigation reference. Paired experiments showed consistent roll and pitch improvements from robot attitude, increased completion with covariance inflation, and strong horizontal-velocity benefits during GNSS translation interruptions with heading retained. The complete-loss experiments identified the dependence of these velocity updates on direction and update availability. The method provides a practical way to combine the compact dual-antenna installation with the robot's available motion estimates.
+This paper presented a quadruped GNSS/INS method combining short-baseline heading, robot attitude and velocity, Doppler velocity and source-specific observation weighting. Three main recordings achieved horizontal RMSE below 0.10 m and heading RMSE of 1.886–2.434 degrees against the navigation reference. Paired experiments showed consistent roll and pitch improvements from robot attitude, increased completion with covariance inflation, and strong horizontal-velocity benefits during GNSS translation interruptions with heading retained. The complete-loss experiments identified the dependence of these velocity updates on direction and update availability. The additional recordings exposed long-interruption drift and loss of initialization when dual-fixed heading was unavailable. These results define the operating conditions for combining the compact dual-antenna installation with available robot motion estimates.
 
 ## References
 

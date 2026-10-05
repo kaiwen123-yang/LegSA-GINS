@@ -1,0 +1,18 @@
+page,sha256,visual_review,findings
+1,885cf763f158fd094cdf1b814fc5aeb091cbadb9e59562cc34458df0a3b499e0,PASS,"Text, symbols, tables and references legible within page bounds"
+2,b624fd4d574a2e52eb6862d7d2395003eb334ad6fb176bd6b8b0d4f0fb179441,PASS,"Text, symbols, tables and references legible within page bounds"
+3,4714b7d772a3dd2de070f073decf20825df4b773ea11d3d447d410ebb51ce663,PASS,"Text, symbols, tables and references legible within page bounds"
+4,d753ab3ee22eee26c7e006a50bb5453a82a31891892df3c0b570983f626a164e,PASS,"Text, symbols, tables and references legible within page bounds"
+5,9a7cb98a9449aa49da531990e5d9a0d1a55197e4ba545cda82df941590359e95,PASS,"Text, symbols, tables and references legible within page bounds"
+6,5525075ad2cd32aea13964e8906fbb3316643c8f951c85d56809441511d29f27,LAYOUT_FIX,Table 1 splits after first body row; keep whole table with caption
+7,b4cbaf7b93b2e83e7aeb0931b8287e9dd887c5d8d5bdfec9edace578463b4f7b,PASS,"Text, symbols, tables and references legible within page bounds"
+8,02e232d918d345c8c9e71c25634edf03e171551242a7e2862084f2b64d8ae57b,PASS,"Text, symbols, tables and references legible within page bounds"
+9,f090650ca12e8f2326393d645e6861b82b11a9b068e4a74d1defbea248075e65,PASS,"Text, symbols, tables and references legible within page bounds"
+10,9705da10ad7d564dcbadae9f20757a95315d70d20732091fd4e103b8ab0bc61b,PASS,"Text, symbols, tables and references legible within page bounds"
+11,4f53d6e8690a5dd93486bbf145b725517acd3b181577499cc9ae4ae027bcf569,LAYOUT_FIX,Table 4 header is stranded before page break; keep whole table with caption
+12,cd9a5037bfb92fa6398a3e84af7dda7997c487e2b02fc24cf94bb0297d9e52ed,PASS,"Text, symbols, tables and references legible within page bounds"
+13,0a8ba6f7b7e5f2035af539de7b9a1c3632e5bc56ebaec79f8f6442f4dbe07cd9,PASS,"Text, symbols, tables and references legible within page bounds"
+14,0db147698d2802573327aa0b15d69d1e0685cce0587861af11fa42b0b905dd67,PASS,"Text, symbols, tables and references legible within page bounds"
+15,cc98d6399d37df5beb5786541c494a0f4e1cb5df3d433ccfa85fd49fc399c25f,PASS,"Text, symbols, tables and references legible within page bounds"
+16,535463226d01e833aecc4680c71566ba7085c46e511d0fd48ea1d31aef104ec0,PASS,"Text, symbols, tables and references legible within page bounds"
+17,505fbcac423ab1c46760293b6072149ce11ad78cb9e3a80f5b4eee753adf2805,PASS,"Text, symbols, tables and references legible within page bounds"

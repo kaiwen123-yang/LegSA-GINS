@@ -90,7 +90,7 @@ while i<len(lines):
    if not all(re.fullmatch('[-:]+',x) for x in rr):rows.append(rr)
    i+=1
   tb=doc.add_table(rows=len(rows),cols=len(rows[0]));tb.alignment=WD_TABLE_ALIGNMENT.CENTER;tb.style='Table Grid';tb.autofit=False
-  widths={0:[8.0,4.3,4.3],1:[2.2,4.7,3.0,3.0,3.7],2:[8.2,2.8,2.8,2.8],3:[6.3,1.6,3.0,3.0,2.7],4:[3.8,2.2,3.5,3.5,3.6]}.get(table_count,[16.6/len(rows[0])]*len(rows[0]))
+  widths={0:[8.0,4.3,4.3],1:[2.2,4.7,3.0,3.0,3.7],2:[8.2,2.8,2.8,2.8],3:[6.3,1.6,3.0,3.0,2.7],4:[3.8,2.2,3.5,3.5,3.6],5:[1.6,2.2,2.8,3.2,3.2,3.6]}.get(table_count,[16.6/len(rows[0])]*len(rows[0]))
   for k,row in enumerate(rows):
    no_split=OxmlElement('w:cantSplit');tb.rows[k]._tr.get_or_add_trPr().append(no_split)
    for z,value in enumerate(row):

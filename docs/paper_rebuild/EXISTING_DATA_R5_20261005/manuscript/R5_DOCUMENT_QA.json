@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "documents": {
+    "zh": {
+      "docx": "论文初稿_中文_R5.docx",
+      "docx_sha256": "6d4e2ee15754646e747292f009a264090ec9579ed3fbc7583864ac313bdc3ae5",
+      "source_sha256": "8da19b82a98b8ea1356a241464d07f087e02bc3fcfc62cadfa486850c1757f60",
+      "word_stats": {
+        "Language": "zh",
+        "Words": 9427,
+        "Pages": 13,
+        "Pdf": "G:\\LegSA-GINS-project\\现有数据初稿_20261005\\.work\\qa_zh\\manuscript.pdf"
+      },
+      "visual_review_pages": 13,
+      "all_pages_actual_image_reviewed": true,
+      "qa_csv_sha256": "739673179e1419c0523661d2db46780d8eb55a3b88b51ecc1e4972a78fe9e5f7"
+    },
+    "en": {
+      "docx": "GPS_Solutions_Draft_R5.docx",
+      "docx_sha256": "77dbbab6c0361660bc4af19e976c046bf570b97256e163bf6be2c43080058f1b",
+      "source_sha256": "c44fe74160e17cb9cb0fa49e4c08ca3a8433235a1797203279192e4255dcf4ce",
+      "word_stats": {
+        "Language": "en",
+        "Words": 5050,
+        "Pages": 19,
+        "Pdf": "G:\\LegSA-GINS-project\\现有数据初稿_20261005\\.work\\qa_en\\manuscript.pdf"
+      },
+      "visual_review_pages": 19,
+      "all_pages_actual_image_reviewed": true,
+      "qa_csv_sha256": "b1e45edab5917c1d94d74dccee7ee8bb1450ed3e1e8e1ecfc92d65944863eadb"
+    }
+  },
+  "tables_bilingual_check": [
+    {
+      "table": 1,
+      "data_rows": 6,
+      "numerical_tokens_identical": true
+    },
+    {
+      "table": 2,
+      "data_rows": 9,
+      "numerical_tokens_identical": true
+    },
+    {
+      "table": 3,
+      "data_rows": 6,
+      "numerical_tokens_identical": true
+    },
+    {
+      "table": 4,
+      "data_rows": 6,
+      "numerical_tokens_identical": true
+    },
+    {
+      "table": 5,
+      "data_rows": 5,
+      "numerical_tokens_identical": true
+    },
+    {
+      "table": 6,
+      "data_rows": 8,
+      "numerical_tokens_identical": true
+    }
+  ],
+  "native_equations_each": 6,
+  "tables_each": 6,
+  "references_each": 13,
+  "english_abstract_words": 189,
+  "manuscript_new_scientific_runs": 0,
+  "source_for_new_data": "../new_data/RESULTS.csv",
+  "source_new_data_sha256": "4d900b593ec38d32fbc64d6bb2904135d8571c62a1cc5073cb6797700b74d60a"
+}
