@@ -1,0 +1,34 @@
+{
+  "status": "READY_DOCUMENTATION_ONLY",
+  "date": "2026-10-05",
+  "base_head": "6559d083b359181554df0cbd4638d376546a9a1c",
+  "no_scientific_run": true,
+  "no_raw_reference_read": true,
+  "no_new_plot": true,
+  "submission_ready": false,
+  "scope": "Official public interfaces and attributed author statements; not device calibration",
+  "sdk_jan5_public_commit": "f29ee9f234851e9e79f75102c0f9e83008d8fdd1",
+  "four_sdk_blob_identities_equal_at_jan5_and_current": true,
+  "files": [
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/OFFICIAL_INTERFACE_AND_AUTHOR_FACTS.md",
+      "bytes": 8561,
+      "sha256": "8a4733dbe84e26b770994e37ee9409dd21732802d1149df97ea1317c6044f3e9"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/OFFICIAL_SOURCE_PINS.csv",
+      "bytes": 2966,
+      "sha256": "a20ca43c3a72a37903ca0a25cc40ef702b72f27a2e253afa5ab0b58eaa9a143e"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/AUTHOR_FACTS_AND_OPEN_RECORDS.csv",
+      "bytes": 1508,
+      "sha256": "2aa8b0f26e2a0e4a4068de5caa0e8486f09e40f1a1ca05f9936042daa6d29a14"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/READ_COVERAGE_BLOCK01.csv",
+      "bytes": 4159,
+      "sha256": "ffa7bb27896fd06128c3dcf6f8a632b2162bf3402f749870371855aa0f3e1f7a"
+    }
+  ]
+}

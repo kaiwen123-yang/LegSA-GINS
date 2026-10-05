@@ -1,0 +1,9 @@
+id,tier,fact,source,still_required
+A01,AUTHOR_CONFIRMED,Fixposition camera side faces robot forward,User statement relayed by root 2026-10-05,Actual CAM/VRTK/POI-to-body transform and uncertainty
+A02,AUTHOR_CONFIRMED,Body IMU uses dog clock; GNSS uses GNSS clock,User statement 2026-10-05,Clock epochs; timestamp event; sync wiring/config/status
+A03,AUTHOR_CONFIRMED,Kick IMU change and receiver P/V startup changes select start; fusion trace not used for this stated alignment,User clarification relayed by root 2026-10-05,BY2/H/O event keys; interval; offset and uncertainty; per-session rule
+A04,AUTHOR_CONFIRMED,CAD same acquisition installation; later date means save/organization,User clarification relayed by root 2026-10-05,CAD frame/POI/phase-center definitions; actual dimension uncertainty
+F01,SOURCE_READ,sport stamp sec+nanosec parsed; no IMU-local stamp in public class,body parser198-210;SDK IMU class24-29,Firmware/logger sampling semantics
+F02,SOURCE_READ,velocity frame metadata remains evidence_missing; HV provider assumes FLU engineering rotation,body parser254-268;providers157-194,Physical frame and velocity POI verification
+M01,NOT_ESTIMATED,Time offset/drift/latency and mechanical response uncertainty,No numerical calibration supplied,Repeated common timing events or hardware timestamp measurement
+M02,NOT_ESTIMATED,SDK velocity-attitude and shared-reference cross covariance,Interfaces do not expose joint blocks,Identifiable error data/physical model; no zero default
