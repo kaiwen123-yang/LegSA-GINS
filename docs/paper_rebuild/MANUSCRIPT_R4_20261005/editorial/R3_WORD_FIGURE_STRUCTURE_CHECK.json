@@ -1,0 +1,19 @@
+{
+  "documents": [
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/manuscript/manuscript_gps_solutions_r3.docx",
+      "sha256": "cf7a978eeaccaa6982f28257a1377d5481eddea3e5a736f349a3d9d05df95c05",
+      "drawing_elements": 0,
+      "media_members": 0,
+      "scope": "ZIP_STRUCTURE_ONLY_NOT_PAGE_VISUAL_READ"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/manuscript/manuscript_tim_r3.docx",
+      "sha256": "2f38e89e583e9ade7926079cdf7eaa72abf085b9a815e4decc165fdfa2bf3c61",
+      "drawing_elements": 0,
+      "media_members": 0,
+      "scope": "ZIP_STRUCTURE_ONLY_NOT_PAGE_VISUAL_READ"
+    }
+  ],
+  "new_science_calls": 0
+}

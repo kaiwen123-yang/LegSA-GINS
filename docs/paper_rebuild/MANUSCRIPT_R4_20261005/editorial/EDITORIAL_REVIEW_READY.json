@@ -1,0 +1,38 @@
+{
+  "block": "MANUSCRIPT_R3_READER_FIRST_EDITORIAL_REVIEW",
+  "all_checks_passed": true,
+  "scope": "12 highest-impact issues, exact original passages, concrete rewrites, recommended GPS main story, TIM scope judgment,25-paragraph structure and6 scientific main figures",
+  "files": [
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/editorial/EDITORIAL_REVIEW.md",
+      "bytes": 27292,
+      "sha256": "89287b6e20c82c089b5e677d0ce7fd33296e139f53ec629dd3975132e5f05dcb"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/editorial/PARAGRAPH_STRUCTURE.md",
+      "bytes": 6642,
+      "sha256": "ffde1a78df278fe4ba8d89fd224f7bd3076ad2c3a016de8b6beb9db66c33d202"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/editorial/EDITORIAL_READ_COVERAGE.csv",
+      "bytes": 2923,
+      "sha256": "09a7ac35bcac73d32ca943ed5717d0a52d6ebf4b88b6a59d684fe6b33704de3d"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/editorial/R3_WORD_FIGURE_STRUCTURE_CHECK.json",
+      "bytes": 662,
+      "sha256": "af98bb6bb4ec62080baf25d3a2fee92a5acfa2d2208ef57d4b8700aa9d11f2c7"
+    }
+  ],
+  "previous_numeric_ready_sha256": "0191e8fa88a1ac5e069fb58ec9448cf2c889c3213bfd429cacec7e8d6721f795",
+  "previous_numeric_files_unchanged": true,
+  "new_estimator_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_provider_calls": 0,
+  "original_science_writes": 0,
+  "r3_manuscript_writes": 0,
+  "git_actions": 0,
+  "r4_quick_read": "complete252line candidate read; suggestions sent to root; root owns subsequent changes",
+  "whole_repository_every_word_read_claim": false,
+  "r3_to_r4_status_matrix_included": true
+}
