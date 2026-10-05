@@ -1,0 +1,104 @@
+{
+  "status": "READY_DOCUMENTATION_ONLY",
+  "date": "2026-10-05",
+  "base_head_at_first_block": "6559d083b359181554df0cbd4638d376546a9a1c",
+  "first_block_commit": "310343d",
+  "all_document_checks_passed": true,
+  "submission_ready": false,
+  "no_scientific_run": true,
+  "no_raw_reference_read_by_this_agent_in_block02": true,
+  "no_new_plot": true,
+  "budget_rows": 23,
+  "budget_estimated_standard_uncertainties": 0,
+  "source_scope": "Public official sources and actual peer-derived evidence summaries; no physical calibration",
+  "peer_algebra_comment": {
+    "agent": "fgo_reproduction_audit",
+    "scope": "C1/C2 identifiability and full covariance; delta-t sign only; not full document review or calibration"
+  },
+  "checks": [
+    {
+      "check": "utf8_lf_no_trailing_whitespace:TIM_MEASUREMENT_CHAIN_AND_CLOCK_MODEL.md",
+      "pass": true
+    },
+    {
+      "check": "utf8_lf_no_trailing_whitespace:INPUT_UNCERTAINTY_BUDGET.csv",
+      "pass": true
+    },
+    {
+      "check": "utf8_lf_no_trailing_whitespace:MINIMAL_VALIDATION_PROTOCOL.md",
+      "pass": true
+    },
+    {
+      "check": "utf8_lf_no_trailing_whitespace:METHODS_INSERT_EN_AND_ZH.md",
+      "pass": true
+    },
+    {
+      "check": "utf8_lf_no_trailing_whitespace:OFFICIAL_METROLOGY_SOURCE_MAP.csv",
+      "pass": true
+    },
+    {
+      "check": "utf8_lf_no_trailing_whitespace:READ_COVERAGE_BLOCK02.csv",
+      "pass": true
+    },
+    {
+      "check": "utf8_lf_no_trailing_whitespace:README.md",
+      "pass": true
+    },
+    {
+      "check": "budget23_unique_unknown_not_zero",
+      "pass": true
+    },
+    {
+      "check": "equation_labelsC1toR2_unique",
+      "pass": true
+    },
+    {
+      "check": "H2_standard_u_typography",
+      "pass": true
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/TIM_MEASUREMENT_CHAIN_AND_CLOCK_MODEL.md",
+      "bytes": 14915,
+      "lines": 158,
+      "sha256": "733b17564aaae7346e8dd76e15ecd81fb8098cd8867dd0779410108724ced0f0"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/INPUT_UNCERTAINTY_BUDGET.csv",
+      "bytes": 7278,
+      "lines": 24,
+      "sha256": "edbe5e3aa6db536ef5651721b5e6ee8dd62c8605ae8bcad41be8e08585e1d0bc"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/MINIMAL_VALIDATION_PROTOCOL.md",
+      "bytes": 8551,
+      "lines": 62,
+      "sha256": "9d46d6a38024544f2dd4c6fdc41f3bcace9dd4a99f776e29a251012f13474958"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/METHODS_INSERT_EN_AND_ZH.md",
+      "bytes": 8390,
+      "lines": 43,
+      "sha256": "7f5cb9237ff053c5f1a039c6250af49a3ae8764879cc510ce8b41238407dfdc9"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/OFFICIAL_METROLOGY_SOURCE_MAP.csv",
+      "bytes": 3468,
+      "lines": 15,
+      "sha256": "4583125a183b3faa9e997066e1f9890e985e9f9232dda17e97cae321122b2acf"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/READ_COVERAGE_BLOCK02.csv",
+      "bytes": 1227,
+      "lines": 7,
+      "sha256": "451e045e2b8c29ba3b036e4a056158248435467025f0cf51131cb49243ad507f"
+    },
+    {
+      "path": "docs/paper_rebuild/TIM_EVIDENCE_20261005/sdk_and_metrology/README.md",
+      "bytes": 1305,
+      "lines": 12,
+      "sha256": "b163cb6c8e8999cd6d6d628baf800050d80312fdfb6b1a8a26bf4d084456b8a8"
+    }
+  ]
+}
