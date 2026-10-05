@@ -1,0 +1,447 @@
+{
+  "date": "2026-10-05",
+  "mode": "full selected documents and selected page visual inspection",
+  "not_repository_full_semantic_audit": true,
+  "papers": [
+    {
+      "key": "GPS_FSTCKF",
+      "source_pdf": "G:/LegSA-GINS-project/论文/s10291-021-01148-5.pdf",
+      "source_sha256_before": "8c9b65fe3842f9580b69ffd02f728412861c932c166d1cb4fc9950fa0aaf1da7",
+      "source_sha256_after": "8c9b65fe3842f9580b69ffd02f728412861c932c166d1cb4fc9950fa0aaf1da7",
+      "pages": 15,
+      "text_pages_read": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "text_read_includes_references_and_bios": true,
+      "extracted_chars": 45936,
+      "extracted_lines": 1365,
+      "extraction_is_not_itself_semantic_proof": true,
+      "page_extraction_identities": [
+        {
+          "page": 1,
+          "chars": 4346,
+          "lines": 73,
+          "text_sha256": "05117546fcf53bcb1003867b66f2071f68fc2c4ee66eb0f9e00f203a8e59d5ca"
+        },
+        {
+          "page": 2,
+          "chars": 4851,
+          "lines": 131,
+          "text_sha256": "97dd336579c37a206cc18cd93149eb20c938bb5e70f8e435b7fe4b25771d20b0"
+        },
+        {
+          "page": 3,
+          "chars": 2230,
+          "lines": 104,
+          "text_sha256": "2c63806bd937a6b3b35febc5ce35fe909ba8aae0a8aea191b3a7d65da3a2fda9"
+        },
+        {
+          "page": 4,
+          "chars": 3258,
+          "lines": 71,
+          "text_sha256": "7298c0d47f02a5fcbb40c72df8505ad7df735106c4cfd122c509fa131c894a29"
+        },
+        {
+          "page": 5,
+          "chars": 3793,
+          "lines": 136,
+          "text_sha256": "b30065b43ec3d0b49ac69bb664ea0373f0e7c7ed413e6bba8dd5721232ae7891"
+        },
+        {
+          "page": 6,
+          "chars": 1898,
+          "lines": 44,
+          "text_sha256": "d3d57ac93cb604f774b9976a28d50657f28be8be46ee89402a04020fbd1217db"
+        },
+        {
+          "page": 7,
+          "chars": 2159,
+          "lines": 87,
+          "text_sha256": "0969450af6db41a83606dad7d65cd38d9e7b6e4e53e977c2156dc724ffbcd724"
+        },
+        {
+          "page": 8,
+          "chars": 2657,
+          "lines": 96,
+          "text_sha256": "8c4d0e65d27e083da55f2dd7fe609f55bfcb32220c267ae90bac68ecf0418be3"
+        },
+        {
+          "page": 9,
+          "chars": 2023,
+          "lines": 78,
+          "text_sha256": "e7b7b25ef278329436ad28455947df580530b6988a0bce5841ad849c06478452"
+        },
+        {
+          "page": 10,
+          "chars": 3338,
+          "lines": 107,
+          "text_sha256": "ac665ee0aaf02988d8cc0b16769af02c7de816c494e68d496e3564075d69efc4"
+        },
+        {
+          "page": 11,
+          "chars": 2010,
+          "lines": 77,
+          "text_sha256": "449c9d104201824301b16e17a29d0ecb3ddf838c05b63cf1fb6043fa9927ac5e"
+        },
+        {
+          "page": 12,
+          "chars": 3311,
+          "lines": 153,
+          "text_sha256": "1bfc0071a8d1d970ea9987af893995c38f480e78714581e079d8af132b202326"
+        },
+        {
+          "page": 13,
+          "chars": 1353,
+          "lines": 27,
+          "text_sha256": "c0a946de001096143ed0a6d53c4b364c9c38f667645088d7afe0db4cb1fe2c7b"
+        },
+        {
+          "page": 14,
+          "chars": 5097,
+          "lines": 93,
+          "text_sha256": "0521723df1d396ee29cf48aa4b9cf2b8b948c27df5ffa4e3d6938df5b75053fe"
+        },
+        {
+          "page": 15,
+          "chars": 3612,
+          "lines": 88,
+          "text_sha256": "4fba7343f13b021c46980211a09c955707b3a7e2848cbc4fb75d40239f51396b"
+        }
+      ],
+      "images_actually_viewed": [
+        {
+          "paper": "GPS_FSTCKF",
+          "page": 4,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/GPS_FSTCKF/page-04.png",
+          "sha256": "f2c5627efd8c451158ab89c0701e96b6bfd3a971bcfd27c21dafdeb00a932ef6"
+        },
+        {
+          "paper": "GPS_FSTCKF",
+          "page": 7,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/GPS_FSTCKF/page-07.png",
+          "sha256": "bccdb72ef17e60539d08a33208caba9a847a0d39ed73608b2a6607850b535908"
+        },
+        {
+          "paper": "GPS_FSTCKF",
+          "page": 9,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/GPS_FSTCKF/page-09.png",
+          "sha256": "30e2845d0605cb994d4d695cd5f77a726ef4e10ea9458f6253dea64b742590eb"
+        },
+        {
+          "paper": "GPS_FSTCKF",
+          "page": 12,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/GPS_FSTCKF/page-12.png",
+          "sha256": "5d8342e5f2b34f91cf7b2cfaf06d2abaa8715eed1feb662556a9d5a106804f31"
+        },
+        {
+          "paper": "GPS_FSTCKF",
+          "page": 14,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/GPS_FSTCKF/page-14.png",
+          "sha256": "78ce43821451446ffaac5a7b7492769b024e1879552b9b926c32aecd1643bdd4"
+        }
+      ]
+    },
+    {
+      "key": "GPS_ADAPTIVE_FADING",
+      "source_pdf": "G:/LegSA-GINS-project/论文/s10291-021-01165-4.pdf",
+      "source_sha256_before": "088c1b524c1c6343507442e52731e08e334b8eb566c71b9c36c8af7bae308dff",
+      "source_sha256_after": "088c1b524c1c6343507442e52731e08e334b8eb566c71b9c36c8af7bae308dff",
+      "pages": 11,
+      "text_pages_read": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "text_read_includes_references_and_bios": true,
+      "extracted_chars": 42251,
+      "extracted_lines": 1236,
+      "extraction_is_not_itself_semantic_proof": true,
+      "page_extraction_identities": [
+        {
+          "page": 1,
+          "chars": 4232,
+          "lines": 69,
+          "text_sha256": "40c74254bd1db1c9429478d3995edab08727b1ed6e691a10f558b51f9c41800f"
+        },
+        {
+          "page": 2,
+          "chars": 6251,
+          "lines": 109,
+          "text_sha256": "ab2c8c371deaf3f08775f800c7f49a70e959aacfe894bd0a5c61615a8ee7bc4e"
+        },
+        {
+          "page": 3,
+          "chars": 3701,
+          "lines": 133,
+          "text_sha256": "75aa6cbe03c1d64150c018ba7ce1073993a170a22f1c5a91fb148efb4c244da7"
+        },
+        {
+          "page": 4,
+          "chars": 4455,
+          "lines": 118,
+          "text_sha256": "b726e9875511137d56aaacde76a9125d0ef51df56adecc12f61e8d8bd0219fa1"
+        },
+        {
+          "page": 5,
+          "chars": 3366,
+          "lines": 168,
+          "text_sha256": "3c211b1f9fb3754d50579c706570233fd4818676a169eb27d329f21e3e5ff4cb"
+        },
+        {
+          "page": 6,
+          "chars": 3235,
+          "lines": 101,
+          "text_sha256": "d126eb1159a3ce5574716d3b54373ad177972464919ee884bc3f1bb44988ffce"
+        },
+        {
+          "page": 7,
+          "chars": 2489,
+          "lines": 124,
+          "text_sha256": "440f64de16b62dcaeae7907bb923bdb46905cb494b59f21d0a67ee5b934f8429"
+        },
+        {
+          "page": 8,
+          "chars": 3597,
+          "lines": 153,
+          "text_sha256": "a3460bb0c8b0d01abb653c76013e592e93d410b0a858c1816201952a719a38d7"
+        },
+        {
+          "page": 9,
+          "chars": 4716,
+          "lines": 114,
+          "text_sha256": "d97a1c3d86026b1bf476199bf20aeb6d027b71a26574cec94c9e9f95f87b2381"
+        },
+        {
+          "page": 10,
+          "chars": 5232,
+          "lines": 112,
+          "text_sha256": "3573ed728cf3d32ea34432b7de8d7695d1c38e2cb4b75d505c78656882c1e7c1"
+        },
+        {
+          "page": 11,
+          "chars": 977,
+          "lines": 35,
+          "text_sha256": "2669ced81a64e890880ee9cc0b37bef7a82d385592ce14e70e75db8f0a77ef15"
+        }
+      ],
+      "images_actually_viewed": [
+        {
+          "paper": "GPS_ADAPTIVE_FADING",
+          "page": 4,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/GPS_ADAPTIVE_FADING/page-04.png",
+          "sha256": "c8ad2a5d193e529c93802360fbc98b69ec7e524183489d643ad6fce30a0a76b5"
+        },
+        {
+          "paper": "GPS_ADAPTIVE_FADING",
+          "page": 6,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/GPS_ADAPTIVE_FADING/page-06.png",
+          "sha256": "3bb7756777f058467551ff2509a7573840f0e84b2cff26bc6f1f6ed45250b695"
+        },
+        {
+          "paper": "GPS_ADAPTIVE_FADING",
+          "page": 7,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/GPS_ADAPTIVE_FADING/page-07.png",
+          "sha256": "f82aed52e309345b4bd76af5a517154babf2e5cdf24352004750adb11ffa64e3"
+        },
+        {
+          "paper": "GPS_ADAPTIVE_FADING",
+          "page": 8,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/GPS_ADAPTIVE_FADING/page-08.png",
+          "sha256": "ff57a32117e0bcd6770c309b130086a08d942057f91c1e6478c0cf7b36eb986c"
+        },
+        {
+          "paper": "GPS_ADAPTIVE_FADING",
+          "page": 9,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/GPS_ADAPTIVE_FADING/page-09.png",
+          "sha256": "cee862412c5329c25f3105bfa7c321cda4774e0d0ccf12b5af61a112bf133f0d"
+        }
+      ]
+    },
+    {
+      "key": "TIM_MEMS_ROBUST",
+      "source_pdf": "G:/LegSA-GINS-project/论文/Constrained_MEMS-Based_GNSS_INS_Tightly_Coupled_System_With_Robust_Kalman_Filter_for_Accurate_Land_Vehicular_Navigation.pdf",
+      "source_sha256_before": "fc9e825cc4a4cc7a404fa066d45140a83403eb11348f9fe8ead8d6b61dc8b66f",
+      "source_sha256_after": "fc9e825cc4a4cc7a404fa066d45140a83403eb11348f9fe8ead8d6b61dc8b66f",
+      "pages": 11,
+      "text_pages_read": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "text_read_includes_references_and_bios": true,
+      "extracted_chars": 56513,
+      "extracted_lines": 1526,
+      "extraction_is_not_itself_semantic_proof": true,
+      "page_extraction_identities": [
+        {
+          "page": 1,
+          "chars": 6306,
+          "lines": 115,
+          "text_sha256": "9f5193d22116e1ca666d69cd111c12fac8d2d595ec84c09bafc4387abc94e0d0"
+        },
+        {
+          "page": 2,
+          "chars": 6829,
+          "lines": 128,
+          "text_sha256": "798b6c537e95deed23d7ebc1f55a6a86521a31d331c41fef2b78b65f9fa8ac9a"
+        },
+        {
+          "page": 3,
+          "chars": 4630,
+          "lines": 217,
+          "text_sha256": "62e1c0243ae40c0f3f8eb092ba0efcdcaa1564a32da6dcf6fff6d3e3514cc254"
+        },
+        {
+          "page": 4,
+          "chars": 4235,
+          "lines": 116,
+          "text_sha256": "f9e4fedb4c7c73d762d20141f6a512c0f2567a320c97a5b1b87f31bdd73ad0f5"
+        },
+        {
+          "page": 5,
+          "chars": 5121,
+          "lines": 193,
+          "text_sha256": "591253f5bd4c474a94cc56858ab60933e16644fd161d271f4324c05a9f0ea256"
+        },
+        {
+          "page": 6,
+          "chars": 5202,
+          "lines": 233,
+          "text_sha256": "19eb5c1ad6cfb814b0b0183ad4b951fe68bd43f4406e52fdd5a64507a4577bd8"
+        },
+        {
+          "page": 7,
+          "chars": 2665,
+          "lines": 55,
+          "text_sha256": "cf5b70dbe95b8318720b622b1810bbf5285b8ec82de5d5e13e49c4de102c2e32"
+        },
+        {
+          "page": 8,
+          "chars": 3994,
+          "lines": 71,
+          "text_sha256": "7427c2dc852bd3e3dd4090d0cacf00f1cb8a29d45f3ba6046a0bdd97e07b16d8"
+        },
+        {
+          "page": 9,
+          "chars": 4731,
+          "lines": 88,
+          "text_sha256": "1eaeddbef24be0876bacc5a2790e7a68a5468c363fcb99f1539c8fc3373d7d55"
+        },
+        {
+          "page": 10,
+          "chars": 6195,
+          "lines": 188,
+          "text_sha256": "4f5f47e050d46f0b723ac8ec3578a7ea352a396bd3589b0b3a59b4143940cbf4"
+        },
+        {
+          "page": 11,
+          "chars": 6605,
+          "lines": 122,
+          "text_sha256": "3240d4071637c14d7ea2c8506f9a0e1fa0755a2607c69c8f8f39748331736bd0"
+        }
+      ],
+      "images_actually_viewed": [
+        {
+          "paper": "TIM_MEMS_ROBUST",
+          "page": 3,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/TIM_MEMS_ROBUST/page-03.png",
+          "sha256": "c8eed2b954c65521ccc8887cf2511c3a1f4675ea904790c263d536492fd613a6"
+        },
+        {
+          "paper": "TIM_MEMS_ROBUST",
+          "page": 4,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/TIM_MEMS_ROBUST/page-04.png",
+          "sha256": "f7664ef273ff5886abd3b21000a79a30af7adf1637ff8b8b5569a164a60b7dc2"
+        },
+        {
+          "paper": "TIM_MEMS_ROBUST",
+          "page": 6,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/TIM_MEMS_ROBUST/page-06.png",
+          "sha256": "6a8e5e78ceef772276fba8c9230519b9be0cac1d61f10ac77c9c7a9bbf3f3f7f"
+        },
+        {
+          "paper": "TIM_MEMS_ROBUST",
+          "page": 7,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/TIM_MEMS_ROBUST/page-07.png",
+          "sha256": "cc6f8422d4ed6f7cad44e58912c14fba941dd66b02a03ed2bcc2dbc384e945a3"
+        },
+        {
+          "paper": "TIM_MEMS_ROBUST",
+          "page": 8,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/TIM_MEMS_ROBUST/page-08.png",
+          "sha256": "55ec3229c49c30598183dffbb54e0b56d219e2a58ff9fc0c6d27c1d69494eed0"
+        },
+        {
+          "paper": "TIM_MEMS_ROBUST",
+          "page": 9,
+          "image_path": "/mnt/g/LegSA-GINS-project/论文重写_20261005/.work/paper_models/TIM_MEMS_ROBUST/page-09.png",
+          "sha256": "bc0e73a97e9fb7033e490ada6ce240381a1e81c8ae81a748c0c854b377244f5e"
+        }
+      ]
+    }
+  ],
+  "r3_manuscripts": [
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/TIM_EVIDENCE_20261005/manuscript/manuscript_gps_solutions_r3.md",
+      "sha256": "97c8a797f0eac225452e6788b3105272fe9f496b372d8e7c5b8d6e14558997d3",
+      "lines": 201,
+      "read_scope": "full text in successive bounded chunks; final reference lines separately checked"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/TIM_EVIDENCE_20261005/manuscript/manuscript_tim_r3.md",
+      "sha256": "3415c6380110b44bd55db36642b7e4f82372853b98be943e64a65bede4007843",
+      "lines": 223,
+      "read_scope": "full text in successive bounded chunks; final reference lines separately checked"
+    }
+  ],
+  "official_web_reads": [
+    {
+      "url": "https://link.springer.com/article/10.1007/s10291-021-01148-5",
+      "scope": "metadata abstract selected publisher page"
+    },
+    {
+      "url": "https://link.springer.com/article/10.1007/s10291-021-01165-4",
+      "scope": "metadata abstract selected publisher page"
+    },
+    {
+      "url": "https://ieee-ims.org/publication/ieee-tim/information-authors",
+      "lines": "92-103,125-153"
+    },
+    {
+      "url": "https://link.springer.com/journal/10291/submission-guidelines",
+      "lines": "82-109,135-208,212-227"
+    }
+  ],
+  "copyright_private_root": "G:/LegSA-GINS-project/论文重写_20261005/.work/paper_models",
+  "scientific_runs": 0
+}
