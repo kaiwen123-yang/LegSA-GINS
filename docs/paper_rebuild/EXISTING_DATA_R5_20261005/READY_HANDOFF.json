@@ -1,0 +1,19 @@
+{
+  "status": "COMPLETE",
+  "files": [
+    {
+      "path": "docs/paper_rebuild/EXISTING_DATA_R5_20261005/README.md",
+      "sha256": "07098b7d8dfd52509bcc2530b7ca162a42cbcbb5af49e946afe2e780fd0c51b2"
+    },
+    {
+      "path": "docs/paper_rebuild/NEXT_ACTIONS.md",
+      "sha256": "4bd9c1bca6849e465ff13ad3e7b9e1294439a3f012eac95ff457de9385c2dbad"
+    }
+  ],
+  "delivery_directory": "/mnt/g/LegSA-GINS-project/现有数据初稿_20261005/输出",
+  "manuscript_pages": {
+    "zh": 13,
+    "en": 19
+  },
+  "original_V3_changed": false
+}
