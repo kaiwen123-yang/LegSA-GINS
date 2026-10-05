@@ -1,15 +1,20 @@
 {
-  "status": "ALL_25_PAGES_VISUALLY_INSPECTED_PASS",
+  "status": "ALL_34_CURRENT_PAGES_VISUALLY_INSPECTED_PASS",
   "tim_pages": 13,
-  "gps_pages": 12,
+  "gps_pages": 21,
+  "gps_line_spacing": 2.0,
+  "tim_working_line_spacing": 1.08,
+  "gps_word_native_statistics": 5464,
+  "gps_abstract_words": 218,
+  "gps_keywords": 6,
   "renderer": "Microsoft Word native COM ExportAsFixedFormat; PDF rasterized by PyMuPDF",
   "packaged_renderer_attempt": "render_docx.py failed because soffice.exe unavailable; no LibreOffice installed",
   "bundle_authoring_runtime": "26.930.11008 Python 3 python-docx 1.2.0",
   "docx_sha256": {
     "manuscript_tim_r3": "2f38e89e583e9ade7926079cdf7eaa72abf085b9a815e4decc165fdfa2bf3c61",
-    "manuscript_gps_solutions_r3": "b26eaf87336573a0294ab1627890f556bb6f82ca987280c3ccbec6634098c445"
+    "manuscript_gps_solutions_r3": "cf7a978eeaccaa6982f28257a1377d5481eddea3e5a736f349a3d9d05df95c05"
   },
   "published_preview_pdfs": false,
   "new_chart_or_photo_edits": 0,
-  "remarks": "Both full texts keep prior planned figure legends; figure production is deferred by the user. These are alternative routes for the same study."
+  "remarks": "Both full texts keep prior planned figure legends; figure production is deferred by the user. These are alternative routes for the same study. GPS has passed a new 21-page visual review after double-spacing; the unchanged TIM retains its 13-page review."
 }

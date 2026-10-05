@@ -2,11 +2,11 @@
   "files": [
     {
       "path": "GPS_DOCX_AUTHORING_RECEIPT.json",
-      "sha256": "18b71ef723ec2fa37ef09566b9be9678b8c9f7cdccb78deeb4afde73a9fdc46c"
+      "sha256": "e9f0a0ade54788676abd4f4a83a88ce5ec14decfb090c8681ce589fab2360b0a"
     },
     {
       "path": "GPS_R3_CHANGES.diff",
-      "sha256": "d4415448c7fe3aa47c49f55889aaa2d85a7f2f260270cf8385cbdac706f336ff"
+      "sha256": "a5c10ee9989f6a80d9b792a11566f80e496121e212d8827c33e913bae7eee299"
     },
     {
       "path": "MANUSCRIPT_R3_CHANGES.diff",
@@ -14,7 +14,7 @@
     },
     {
       "path": "MANUSCRIPT_R3_SOURCE_IDENTITY.json",
-      "sha256": "1cfd3f496be2733d25c8726d52b32d9f550128e9b9d1bd2fa41e96f7c7c900bc"
+      "sha256": "6be2618312f69cb15e798e873e4edc7de690f3415c775785fad9631cf40d6c62"
     },
     {
       "path": "R3_CLAIM_EVIDENCE_MAP.csv",
@@ -30,23 +30,23 @@
     },
     {
       "path": "WORD_R3_PAGE_VISUAL_REVIEW.csv",
-      "sha256": "6cc6f5ab9185dce0674fd6f8c514e82da69e59765367c223360bd4a3af393b28"
+      "sha256": "602c7b42669f04f6c155e7a0f9b1760fdde9eebcd9e7146a17ae92f46c1ade19"
     },
     {
       "path": "WORD_R3_QA_RECEIPT.json",
-      "sha256": "1d9269f51533374b397b8fe951d93fd5527a694644a842faa19bbe62a995d044"
+      "sha256": "27918ae949f7ce7b1d3dca83f61676a7e2f1baa4859a69f47eb2f77be803e573"
     },
     {
       "path": "build_manuscript_docx.py",
-      "sha256": "6decf4723abf3bf7433d406f076a459f20ed90fca3a1d8c61890bfe29c08f3a1"
+      "sha256": "893edb8e7dde3641addf811703f08bcd779aabd79a23ac54c870072cbc3d26ed"
     },
     {
       "path": "manuscript_gps_solutions_r3.docx",
-      "sha256": "b26eaf87336573a0294ab1627890f556bb6f82ca987280c3ccbec6634098c445"
+      "sha256": "cf7a978eeaccaa6982f28257a1377d5481eddea3e5a736f349a3d9d05df95c05"
     },
     {
       "path": "manuscript_gps_solutions_r3.md",
-      "sha256": "0750b099b125851072f8b438d3f01602f243cba2a3615e659a495d77639b78aa"
+      "sha256": "97c8a797f0eac225452e6788b3105272fe9f496b372d8e7c5b8d6e14558997d3"
     },
     {
       "path": "manuscript_tim_r3.docx",
@@ -57,7 +57,7 @@
       "sha256": "3415c6380110b44bd55db36642b7e4f82372853b98be943e64a65bede4007843"
     }
   ],
-  "source_unchanged": true,
+  "source_r2_unchanged": true,
   "science_calls": 0,
-  "visual_review_pages": 25
+  "visual_review_pages": 34
 }

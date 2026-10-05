@@ -7,14 +7,14 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT,WD_CELL_VERTICAL_ALIGNMENT
-ap=argparse.ArgumentParser();ap.add_argument('--overwrite',action='store_true');ap.add_argument('--source',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--figure-plan',type=Path,required=True);ap.add_argument('--receipt',type=Path,required=True);args=ap.parse_args()
+ap=argparse.ArgumentParser();ap.add_argument('--double-spaced',action='store_true');ap.add_argument('--overwrite',action='store_true');ap.add_argument('--source',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--figure-plan',type=Path,required=True);ap.add_argument('--receipt',type=Path,required=True);args=ap.parse_args()
 D=Path(__file__).resolve().parent
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 src=args.source;before=sha(src);t=src.read_text();doc=Document();sec=doc.sections[0]
 sec.page_width=Cm(21);sec.page_height=Cm(29.7);sec.top_margin=Cm(2);sec.bottom_margin=Cm(2);sec.left_margin=Cm(2.2);sec.right_margin=Cm(2.2)
 for n in ['Normal','Title','Subtitle','Heading 1','Heading 2','Heading 3','Caption']:
  s=doc.styles[n];s.font.name='Times New Roman';s.font.color.rgb=RGBColor(0,0,0);s.font.size=Pt(11.5)
- s.paragraph_format.space_after=Pt(5);s.paragraph_format.line_spacing=1.08
+ s.paragraph_format.space_after=Pt(5);s.paragraph_format.line_spacing=2.0 if args.double_spaced else 1.08
  for e in list(s.element.xpath('.//w:pBdr')):e.getparent().remove(e)
 doc.styles['Title'].font.size=Pt(19);doc.styles['Title'].font.bold=True;doc.styles['Title'].paragraph_format.space_after=Pt(12)
 doc.styles['Subtitle'].font.size=Pt(10);doc.styles['Subtitle'].paragraph_format.space_after=Pt(16)
@@ -117,6 +117,6 @@ with zipfile.ZipFile(out) as z:
  xml=z.read('word/document.xml');assert b'\\operatorname' not in xml and b'\\tag' not in xml and b'[REF' not in xml and b'[NEED' not in xml
  assert xml.count(b'<m:oMathPara>')==expected_equations
 assert sha(src)==before
-receipt=dict(status='DOCX_CREATED_RENDER_PENDING',source_md_sha256=before,docx_sha256=sha(out),native_display_equations=expected_equations,native_inline_math_objects=xml.count(b'<m:oMath>')-expected_equations,editable_tables=1,reference_items=15,planned_figure_legends=8,new_rendered_figures_in_docx=0,scientific_execution=0,builder_sha256=sha(Path(__file__)),source_md_unchanged=True)
+receipt=dict(status='DOCX_CREATED_RENDER_PENDING',line_spacing=2.0 if args.double_spaced else 1.08,source_md_sha256=before,docx_sha256=sha(out),native_display_equations=expected_equations,native_inline_math_objects=xml.count(b'<m:oMath>')-expected_equations,editable_tables=1,reference_items=15,planned_figure_legends=8,new_rendered_figures_in_docx=0,scientific_execution=0,builder_sha256=sha(Path(__file__)),source_md_unchanged=True)
 args.receipt.write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps(receipt,ensure_ascii=False))
