@@ -1,0 +1,15 @@
+{
+  "status": "DOCX_CREATED_RENDER_PENDING",
+  "line_spacing": 2.0,
+  "source_md_sha256": "d66efc36b40330a2e842b1584fb77e01df2b88524d49d203337b0821360c0fd7",
+  "docx_sha256": "1ff346a1d32bd220835eebfbb4894e209fd39b00c1716de55884ad33a87f2959",
+  "native_display_equations": 6,
+  "native_inline_math_objects": 7,
+  "editable_tables": 5,
+  "reference_items": 10,
+  "planned_figure_legends": 0,
+  "new_rendered_figures_in_docx": 0,
+  "scientific_execution": 0,
+  "builder_sha256": "8949e3eab887499ab8d959c7824b0fd3be736f7aca1378eaaa4a70dd9f1a6e3e",
+  "source_md_unchanged": true
+}

@@ -1,0 +1,171 @@
+{
+  "status": "READABLE_WORKING_DRAFT_VISUALLY_REVIEWED_NOT_SUBMISSION_READY",
+  "docx_sha256": "1ff346a1d32bd220835eebfbb4894e209fd39b00c1716de55884ad33a87f2959",
+  "markdown_sha256": "d66efc36b40330a2e842b1584fb77e01df2b88524d49d203337b0821360c0fd7",
+  "builder_sha256": "8949e3eab887499ab8d959c7824b0fd3be736f7aca1378eaaa4a70dd9f1a6e3e",
+  "word_count_native_word": 5386,
+  "pages_native_word": 19,
+  "abstract_words": 214,
+  "keywords": 6,
+  "editable_tables": 5,
+  "table_cells_exactly_match_markdown": true,
+  "display_equations": 6,
+  "inline_math": 7,
+  "figures": 0,
+  "render_engine": "Microsoft Word COM ExportAsFixedFormat PDF, rasterized using PyMuPDF",
+  "body_line_spacing": 2.0,
+  "table_cell_line_spacing": 1.0,
+  "page_review": [
+    {
+      "page": 1,
+      "png_sha256": "0aac7d99cd2f8f5eacfb34b867e54161c9afb099c56056a5902d60bff7584da1",
+      "reviewer": "fgo_reproduction_audit",
+      "status": "PASS",
+      "basis": "previous actual image review, identical image hash"
+    },
+    {
+      "page": 2,
+      "png_sha256": "f93b05c58aa97350f903d92cec50ce4b59afd3351fb3472065bc8746549abe8d",
+      "reviewer": "fgo_reproduction_audit",
+      "status": "PASS",
+      "basis": "previous actual image review, identical image hash"
+    },
+    {
+      "page": 3,
+      "png_sha256": "b034581a72b38d2374428496ddcffebba393a7574d24fce25b34c81440ac3d6f",
+      "reviewer": "fgo_reproduction_audit",
+      "status": "PASS",
+      "basis": "previous actual image review, identical image hash"
+    },
+    {
+      "page": 4,
+      "png_sha256": "85a2f602ccb0e1b2c31a34c743ffe93d54e493e8222f8797aebd7105d93a36e6",
+      "reviewer": "fgo_reproduction_audit",
+      "status": "PASS",
+      "basis": "previous actual image review, identical image hash"
+    },
+    {
+      "page": 5,
+      "png_sha256": "19241bb10f2f0f036e3f219480c167448762ef11bcb17a7d675449d637baddff",
+      "reviewer": "fgo_reproduction_audit",
+      "status": "PASS",
+      "basis": "previous actual image review, identical image hash"
+    },
+    {
+      "page": 6,
+      "png_sha256": "9ae16b2f85f382288f943a42c1f5751b9de7cf2977acf9020f42b7618562af29",
+      "reviewer": "fgo_reproduction_audit",
+      "status": "PASS",
+      "basis": "previous actual image review, identical image hash"
+    },
+    {
+      "page": 7,
+      "png_sha256": "b2fc70501aab55b998397a74027035289acca435262b29f2667fa55eb0392c5c",
+      "reviewer": "fgo_reproduction_audit",
+      "status": "PASS",
+      "basis": "actual final PNG image viewed"
+    },
+    {
+      "page": 8,
+      "png_sha256": "0c1be4a9330a19bd5918a0fefd549394496f71415fbb939ec5eaf8490878e662",
+      "reviewer": "fgo_reproduction_audit",
+      "status": "PASS",
+      "basis": "actual final PNG image viewed"
+    },
+    {
+      "page": 9,
+      "png_sha256": "a69f6608f674ffcb4173507bc60da69b662acd89573c613be1a0db443cfbe0d5",
+      "reviewer": "fgo_reproduction_audit",
+      "status": "PASS",
+      "basis": "actual final PNG image viewed"
+    },
+    {
+      "page": 10,
+      "png_sha256": "555087e1fb28432ab26f566f8fd34b15f99d9bb4ac66f75f6fc4365cf8af1354",
+      "reviewer": "fgo_reproduction_audit",
+      "status": "PASS",
+      "basis": "actual final PNG image viewed"
+    },
+    {
+      "page": 11,
+      "png_sha256": "5eb0e2fc703a16814512c99bfb4b24bec7a5bed1c33f961ef84cec3b6d7c02e0",
+      "reviewer": "root",
+      "status": "PASS",
+      "basis": "actual final PNG image viewed"
+    },
+    {
+      "page": 12,
+      "png_sha256": "b33020b2c623bab3bc41d392ef63fbc152b109bff6fcdd1cfa6c3479f14933a2",
+      "reviewer": "root",
+      "status": "PASS",
+      "basis": "actual final PNG image viewed"
+    },
+    {
+      "page": 13,
+      "png_sha256": "0f36a7147d829749d06af4e1c9e1315e3e344ed94e61efcca6da25d7db4ecd9a",
+      "reviewer": "root",
+      "status": "PASS",
+      "basis": "actual final PNG image viewed"
+    },
+    {
+      "page": 14,
+      "png_sha256": "8d01fa7888c6343831ce303a7817179022ab01172d194f6e18b5e796adbf110f",
+      "reviewer": "root",
+      "status": "PASS",
+      "basis": "actual final PNG image viewed"
+    },
+    {
+      "page": 15,
+      "png_sha256": "5321c1867e0f0fbdd910dcaedb7d8634a0b4373772d9ea4d9ddb7ab5577cab6e",
+      "reviewer": "root",
+      "status": "PASS",
+      "basis": "actual final PNG image viewed"
+    },
+    {
+      "page": 16,
+      "png_sha256": "f1babf09eeb7eae088919533c9c2f9dda435d0207cdd75a9f4a06f31f31c7fb9",
+      "reviewer": "root",
+      "status": "PASS",
+      "basis": "actual final PNG image viewed"
+    },
+    {
+      "page": 17,
+      "png_sha256": "fb2526c9e19c119a455f1ba1e39556c34d16e9b2a48f115ef1a8fdb86d1f8cf6",
+      "reviewer": "root",
+      "status": "PASS",
+      "basis": "actual final PNG image viewed"
+    },
+    {
+      "page": 18,
+      "png_sha256": "6b3e97650d1ad0317166de3d201343b872dea517816f35fc2c8ee58a515356ca",
+      "reviewer": "root",
+      "status": "PASS",
+      "basis": "actual final PNG image viewed"
+    },
+    {
+      "page": 19,
+      "png_sha256": "79c3dd118645fb98f22e0b56533381a096422e9c9e4f2749e102f9244f2bf153",
+      "reviewer": "root",
+      "status": "PASS",
+      "basis": "actual final PNG image viewed"
+    }
+  ],
+  "resolved_visual_issue": "Table 2 Sequence header wrapped inside word; widened first column. Set table-cell line spacing to single while retaining double-spaced prose.",
+  "semantic_peer_review": [
+    "horizontal_history_audit: original effect sizes and full r4 numeric read",
+    "fgo_reproduction_audit: methods 2.3-2.5 and discussion; seven IMU-gap limitation added"
+  ],
+  "source_numeric_identity": "Original V3 retained; later diagnostic versions explicitly separate. Source hashes in MANUSCRIPT_NUMERICAL_SOURCES.json and editorial/EFFECT_SIZE_SOURCE_PINS.json.",
+  "new_estimator_runs": 0,
+  "new_formal_evaluations": 0,
+  "original_result_edits": false,
+  "remaining": [
+    "Final academic figures and referenced figure captions",
+    "Submission SI assembly",
+    "Per-session timing/actual point/geometry evidence",
+    "Seven-gap existing-output support sensitivity",
+    "TIM measured budget and held-out validation",
+    "Final nearest-neighbor literature positioning and author metadata/declarations"
+  ],
+  "notes": "5386 includes visible article and references counted by Word; page count is review layout, not final journal print. PDF/PNG QA artifacts are private and are not deliverables. Native authoring receipt remains creation-time status; this receipt records completed render and review."
+}

@@ -1,0 +1,34 @@
+{
+  "files": [
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/manuscript/manuscript_gps_solutions_r4.md",
+      "sha256": "d66efc36b40330a2e842b1584fb77e01df2b88524d49d203337b0821360c0fd7"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/manuscript/manuscript_gps_solutions_r4.docx",
+      "sha256": "1ff346a1d32bd220835eebfbb4894e209fd39b00c1716de55884ad33a87f2959"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/manuscript/build_manuscript_docx_r4.py",
+      "sha256": "8949e3eab887499ab8d959c7824b0fd3be736f7aca1378eaaa4a70dd9f1a6e3e"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/manuscript/DOCX_AUTHORING_RECEIPT.json",
+      "sha256": "3acb93a4649257d28ee2811dff1edbc65f1d85a19b30a504f121fe60d7c28e92"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/manuscript/MANUSCRIPT_NUMERICAL_SOURCES.json",
+      "sha256": "d622061636f6dbe0d3f33b2566029442b3f2e1db6d7665ebc27e090dc0f24941"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/manuscript/TERMINOLOGY_AND_STRUCTURE.md",
+      "sha256": "4768fc4d94a853b4a3c869b8e0765da0e443c4d294627407a7f75132287b7b40"
+    },
+    {
+      "path": "docs/paper_rebuild/MANUSCRIPT_R4_20261005/manuscript/REVISION_AND_QA.json",
+      "sha256": "2208b2d92a1de475fc597ed0f440fe5d6ad4d3ccae3e03db1002f0053fa74974"
+    }
+  ],
+  "new_native_runs": 0,
+  "new_formal_evaluations": 0
+}
