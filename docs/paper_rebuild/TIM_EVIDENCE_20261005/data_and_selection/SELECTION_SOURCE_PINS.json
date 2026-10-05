@@ -1,0 +1,86 @@
+{
+  "repo_head_at_census": "310343d34967044986abd397fb80adf81f9878ad",
+  "source_files": [
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/CLEAN5_SENSOR_CALIBRATION_RECORD.md",
+      "bytes": 6148,
+      "sha256": "15f02e165b18ea7b5832499653589d631ad206793f98a1962b6b20f8b01a3f19"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/SENSOR_MODEL_CLOSEOUT_AUDIT.md",
+      "bytes": 18564,
+      "sha256": "71ed4cff7a7a3308c60fc82b2e94228fe8271ed8727db622ce8bb314668714d2"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/A04_F04_ROLE_DECISION_RULE.md",
+      "bytes": 4889,
+      "sha256": "a69803bdf8117601af61c20003f7dd64b6843d44d35b7ea1b93f43170202475a"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/PROTOCOL_V2_METHOD_STATEMENT.md",
+      "bytes": 13605,
+      "sha256": "b8da7b09e3755d64d076d42c705894a18f0e9701ceb0da45dd1bd884533c5b1d"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/PROTOCOL_V3_PREREG.md",
+      "bytes": 16481,
+      "sha256": "060daf89fbf6b2e36af9286d98fcd47e35f80271faed3ecb2f2b359976f10f59"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/V3_STORY_20261004/SELECTION_HISTORY_LEDGER.csv",
+      "bytes": 6837,
+      "sha256": "417b9b2b229af7ae4f8bc9f8d64f0b64d08b678d39c0ce415d69cea8a8da6931"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/audit_xbpg_20261001/SELECTION_AND_REFERENCE_REVIEW.md",
+      "bytes": 5606,
+      "sha256": "f9b65ac29f6ba28be13acc6cfd68a29f3320b8e9d7302eb7662f92c6cd7d9862"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/clean6_sensor_v21/providers.py",
+      "bytes": 29878,
+      "sha256": "86002aba39c524887264d7b65a707bc1824dc5c0d266ead3cfd45acb25c87a4d"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/clean5_calibrated/calibration.py",
+      "bytes": 11213,
+      "sha256": "c0f9812d0d22c22bced29823e5eedb5038f75fb5e00a4a936653572d9c0b501b"
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00004/V3_RUNTIME_CONFIG.yaml",
+      "bytes": 7846,
+      "sha256": "3ac059cbaf5cacbf68929ca6027074629ab4efc969b4e8a5ddbb2ca300f4c542"
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/RUN_00004/RUN_MANIFEST.json",
+      "bytes": 21675,
+      "sha256": "0e3f258c6ebd5be157f89214945e3fd1b908bfaf1ab9fe37a61a120df144b888"
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F04/V3_RUNTIME_CONFIG.yaml",
+      "bytes": 7937,
+      "sha256": "47b91241f40453d4de1b3e6cafa7913f2892589e77178e9af3edb6209ee1b0c0"
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F04/RUN_MANIFEST.json",
+      "bytes": 21699,
+      "sha256": "34657fed77cf249597c8ce01ac8003113a891004ce91e3ec47b3929bd94fc3f3"
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F04/V3_RUNTIME_CONFIG.yaml",
+      "bytes": 7944,
+      "sha256": "15ac163dc99443955cd939047806b2fd74fb5ee421acad8f49403124a1138bcb"
+    },
+    {
+      "path": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN8_PROTOCOL_V3/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F04/RUN_MANIFEST.json",
+      "bytes": 21647,
+      "sha256": "a51892dcb66631e4d60deda74718e5657791ef124301d770f840788ca4a03459"
+    }
+  ],
+  "field_count": 175,
+  "equal_fields": 153,
+  "different_fields": 22,
+  "scientific_executions": 0,
+  "source_and_original_result_writes": 0,
+  "machine_scope": "Every actual YAML field parsed and compared; semantic classification does not imply every source word manually read."
+}

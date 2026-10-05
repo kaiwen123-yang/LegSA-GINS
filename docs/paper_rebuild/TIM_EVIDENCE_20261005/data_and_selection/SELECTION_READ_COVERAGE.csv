@@ -1,0 +1,18 @@
+path,read_scope,coverage_kind,note
+AGENTS.md,1-1585,FULL_MANUAL_RULE_READ_THIS_TASK,Bounded reads combined; current human authorization prevails
+ACTIVE_CONTEXT.md,1-93,FULL_MANUAL_RULE_READ_THIS_TASK,Historical stage rules interpreted with current authorization
+DATA_ROLES.md,1-34,FULL_MANUAL_RULE_READ_THIS_TASK,Required order
+METHOD_SCOPE.md,1-37,FULL_MANUAL_RULE_READ_THIS_TASK,Required order
+EXPERIMENT_PROTOCOL.md,1-63,FULL_MANUAL_RULE_READ_THIS_TASK,Required order
+LEGACY_DENYLIST.md,1-40,FULL_MANUAL_RULE_READ_THIS_TASK,Required order
+CLAIM_BOUNDARY.md,1-42,FULL_MANUAL_RULE_READ_THIS_TASK,Required order
+NEXT_ACTIONS.md,1-63,FULL_MANUAL_RULE_READ_THIS_TASK,Current banners override historic freeze wording
+CLEAN5_SENSOR_CALIBRATION_RECORD.md,1-65,FULL_MANUAL_READ_THIS_TASK,No calibration rerun
+v3/PROTOCOL_V3_PREREG.md,1-95,SELECTED_MANUAL_READ_THIS_TASK,Parameter transfer and selection clauses
+PROTOCOL_V2_METHOD_STATEMENT.md,1-83;noise_reason paragraph,SELECTED_MANUAL_READ_THIS_TASK,Includes historical numerical transfer not every later appendix word
+A04_F04_ROLE_DECISION_RULE.md,selected1-88;88-end;originalb9f9a44commit,SELECTED_CURRENT_PLUS_FULL_ORIGINAL_GIT_READ,Current first section tool truncation not full current claim
+V3_STORY_20261004/SELECTION_HISTORY_LEDGER.csv,all12rows,FULL_MANUAL_TABLE_READ_THIS_TASK,Historical same identity inherited and checked
+SENSOR_MODEL_CLOSEOUT_AUDIT.md,selected diagnostic calibration sections,SELECTED_MANUAL_READ_THIS_TASK,Tool output truncation prevents full semantic-read claim
+clean6_sensor_v21/providers.py,1-34,SELECTED_MANUAL_SOURCE_READ_THIS_TASK,Actual shared K_HV sigma constants
+clean5_calibrated/calibration.py,126-187,SELECTED_MANUAL_SOURCE_READ_THIS_TASK,Residual fit interpretation
+actual3F04/V3_RUNTIME_CONFIG.yaml,all175keys_all3,MACHINE_COMPLETE_FIELD_COMPARISON,Not every configuration word manually read

@@ -1,0 +1,55 @@
+{
+  "block": "BY2_NUMERICAL_FIT_VS_SELECTION_BOUNDARY",
+  "all_checks_passed": true,
+  "repo_head_at_census": "310343d34967044986abd397fb80adf81f9878ad",
+  "actual_yaml_fields": 175,
+  "equal_fields": 153,
+  "different_fields": 22,
+  "different_model_or_policy_parameters": 0,
+  "scientific_executions": 0,
+  "original_source_or_result_writes": 0,
+  "source_pins_rechecked_before_delivery": true,
+  "scope": "machine full config fields; selected/full manual readings explicitly registered",
+  "files": [
+    {
+      "path": "01_PARAMETER_SELECTION_BOUNDARY.md",
+      "bytes": 5185,
+      "sha256": "6f99ba26ff09f06ed5079c572c127f4b06b45333996d24e67f4167779ad44247"
+    },
+    {
+      "path": "SELECTION_EVIDENCE.csv",
+      "bytes": 3062,
+      "sha256": "f11142159cade7a219de0c64c4eae55f68bc2c40f8f0740b391db98077b15c1c"
+    },
+    {
+      "path": "ACTUAL_F04_PARAMETER_TRANSFER.csv",
+      "bytes": 20290,
+      "sha256": "d6cb68d54dc01f56126065e39dfde21319ceb683935f8577658e60df113672c8"
+    },
+    {
+      "path": "ACTUAL_F04_CONFIG_DIFFERENCES.csv",
+      "bytes": 6970,
+      "sha256": "d6c6e9403e4c2b576559cd4b0beed72bf3e34fe871be701e1c64689494c82a67"
+    },
+    {
+      "path": "GIT_SELECTION_HISTORY.tsv",
+      "bytes": 1194,
+      "sha256": "05cfb65135e2a6cc0fefb6259c96733c13ba7f337d0fb82217e77cc1dc149fa2"
+    },
+    {
+      "path": "SELECTION_SOURCE_PINS.json",
+      "bytes": 4299,
+      "sha256": "f978bc99f7305dc24c66ad14d3b6e079842407320cd00accdfec0caa31c04be9"
+    },
+    {
+      "path": "SELECTION_READ_COVERAGE.csv",
+      "bytes": 1883,
+      "sha256": "1bc903b900fd1c75eba6cc0765e7d47545352d6c1ef95bbb24d3b3b8cb705add"
+    },
+    {
+      "path": "selection_census.py",
+      "bytes": 3504,
+      "sha256": "8d48c497c36cc979b220047cf6779b2c3ef9f2ee6515cf41655f5e86167d9b89"
+    }
+  ]
+}

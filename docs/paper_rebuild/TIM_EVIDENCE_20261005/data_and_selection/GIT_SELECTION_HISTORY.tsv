@@ -1,0 +1,9 @@
+commit	commit_time	subject
+1643b9047777ffb8c474321cf8f22e1f66284810	2026-09-19T23:19:15+08:00	freeze(v3-r): storage discipline, archive reconciliation
+7d43b9af26120ed5dde21f53e515386361072ba6	2026-09-19T16:45:10+08:00	prereg(v3): heading input 5 Hz raw stream — single change
+cff69bf5f1c461bae3036c11565440a73fd1aa91	2026-09-15T02:08:54+08:00	docs(p13): deliver sealed v2.1 figures and final factual report
+a01ceb931049f84af8c900b39e4cf01c52f627c6	2026-09-13T20:06:11+08:00	docs(paper-rebuild): trace-free sensor model closeout audit (P-12)
+1479002a50cfed6c60a15c5b9ba87a0e94f1db37	2026-09-13T18:18:34+08:00	docs(paper-rebuild): protocol v2 method statement (F04), reference wording correction
+73d71c18ec21332c901f21fe1c4a82564472e6e8	2026-09-09T20:20:15+08:00	feat(clean5): trace-free sensor noise calibration (frozen from BY2)
+d3800cc4cbb5f1a3f29722d29ff4f6249ce02dfa	2026-09-08T20:47:19+08:00	docs(paper-rebuild): append A04/F04 outcome (A04), sync handoff and AGENTS to BY2H/BY2O evidence
+b9f9a44f288966c95961f7a15564b2b57bf07b65	2026-09-05T14:47:05+08:00	docs(paper-rebuild): pre-register A04/F04 role decision rule, authorize Canonical-541 publication figures, add conversation handoff
