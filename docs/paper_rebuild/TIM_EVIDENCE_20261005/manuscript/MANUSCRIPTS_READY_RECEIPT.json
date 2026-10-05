@@ -18,11 +18,11 @@
     },
     {
       "path": "R3_CLAIM_EVIDENCE_MAP.csv",
-      "sha256": "57be1728629069f7c46768dc0fdb67ca6f4b3d415a9ac0165f61801b66a80fe8"
+      "sha256": "3354fc1c174b0313058f681426242eeead65dcd4c60e25c5bbb7b11ebb802372"
     },
     {
       "path": "R3_REVERSE_OUTLINE.csv",
-      "sha256": "930b7da3eead9b86e75451a1a657697047859ff0ca87312a82ffe11bd25ee0af"
+      "sha256": "8ea798bd3a2c7a6a8324c20d1a8f3368f76fd9327011e0bc901ba6ad59f24566"
     },
     {
       "path": "TIM_DOCX_AUTHORING_RECEIPT.json",
@@ -30,7 +30,7 @@
     },
     {
       "path": "WORD_R3_PAGE_VISUAL_REVIEW.csv",
-      "sha256": "602c7b42669f04f6c155e7a0f9b1760fdde9eebcd9e7146a17ae92f46c1ade19"
+      "sha256": "861ea15a58a4d2d02d5fbc1a862a16c8fc77d5e28d908defe590da46c1c474b3"
     },
     {
       "path": "WORD_R3_QA_RECEIPT.json",

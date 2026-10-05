@@ -9,4 +9,4 @@
 
 事件匹配只证明有归属的起点选择方法；一次事件不能分离clock offset/drift/latency。共享GNSS商业reference下的RMSE是agreement指标，不能直接作为标准不确定度。当前submission_ready=false。
 
-本轮不绘图、不执行新的native/provider/evaluator，不改科学数据或封存收据。GPS Solutions相关定位将在独立文档追加，TIM预算不等于AR新方法。
+本轮不绘图、不执行新的native/provider/evaluator，不改科学数据或封存收据。GPS Solutions路线已完成[定位与要求](GPS_SOLUTIONS_POSITIONING_AND_REQUIREMENTS_20261005.md)及[完整正文](../manuscript/manuscript_gps_solutions_r3.md)；TIM预算不等于AR新方法。
