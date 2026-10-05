@@ -1,0 +1,36 @@
+{
+  "status": "SAVED_FIXED_DOMAIN_NUMBERS_VERIFIED",
+  "source_files": [
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/PAIRED_ALL_90_CASES_DOMAINS.csv",
+      "sha256": "4a1aab0babf454e29be65cd8e10928798c1bc2c8b3ddb62f90c5ac70111faf20"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/PLACEMENT_BLOCK_SUMMARY.csv",
+      "sha256": "e2097761bd1e04fc38ca5ea3902975195c789f8766acda3afb926be01d18d2ad"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/IMU_CLAIM_ACCEPTED_FAULT_SOURCE_COUNTS.csv",
+      "sha256": "e37c71de3a49380c773cb395804232e120543bcc6832a9b9402d6a59f4014e2d"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/REDUCTION_RECEIPT.json",
+      "sha256": "8fe4f7321202600c1befd68416ad64e9806f24a7a789f4a7439f4ed56001bc26"
+    },
+    {
+      "path": "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/docs/paper_rebuild/v3/IMU_CLAIM_SUBSET_20261004/IMU_CLAIM_135_FINAL_DELIVERY_RECEIPT.json",
+      "sha256": "9120b27ef47cf5a97fceba439287eca8c78774062024c21ea10957d10f8b5669"
+    }
+  ],
+  "source_before_after_equal": true,
+  "pair_rows": 2520,
+  "groups": 280,
+  "accepted_event_members": 135,
+  "max_summary_recomputation_difference": 1.4210854715202004e-14,
+  "new_estimator_calls": 0,
+  "new_evaluator_calls": 0,
+  "new_provider_calls": 0,
+  "raw_or_reference_opens": 0,
+  "new_science_writes": 0,
+  "scientific_version": "IMU135_DIAGNOSTIC_20261004_NOT_ORIGINAL_V3"
+}
