@@ -1,0 +1,11 @@
+{
+  "source_r2_sha256": "0bab2de80236516ab582d31c02a30ea8c9513b66d19230c9f678ec031d329f03",
+  "tim_r3_sha256": "3415c6380110b44bd55db36642b7e4f82372853b98be943e64a65bede4007843",
+  "gps_r3_sha256": "0750b099b125851072f8b438d3f01602f243cba2a3615e659a495d77639b78aa",
+  "tim_results_section_text_unchanged": true,
+  "gps_results_numeric_sequence_unchanged": true,
+  "natural_table_unchanged": true,
+  "new_solver_calls": 0,
+  "new_figures": 0,
+  "status": "ALTERNATIVE_JOURNAL_WORKING_DRAFTS_NOT_SUBMISSION_READY"
+}

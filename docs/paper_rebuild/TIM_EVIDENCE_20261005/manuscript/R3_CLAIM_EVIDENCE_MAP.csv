@@ -1,0 +1,7 @@
+topic,claim,evidence,kind,boundary
+installation,Nominal geometry and forward camera orientation,../installation/INSTALLATION_EVIDENCE_REVIEW.md,Author statement and parsed model,No independent six-DOF survey
+time,Receiver P/V and body IMU event matching,../AUTHOR_CLARIFICATIONS_AND_SCOPE.md,Author statement,No claimed zero timing uncertainty or identified drift
+sdk,Project velocity frame assumption is explicit,../sdk_and_metrology/OFFICIAL_INTERFACE_AND_AUTHOR_FACTS.md,Official IDL and parser,SDK velocity physical frame and point not calibrated
+uncertainty,Joint covariance retains cross-source and timing terms,../../JOURNAL_REFRAME_20261004/venue/TIM_MEASUREMENT_MODEL_AND_VALIDATION_PLAN.md,Mathematical model and GUM,No numerical budget or physical coverage manufactured
+results,Original V3 natural and controlled results retained,../../JOURNAL_REFRAME_20261004/story/manuscript_restructured_r2.md,Frozen evaluation,No new estimator invocation
+selection,BY2 numerical tuning distinguished from subsequent selection,../data_and_selection/01_PARAMETER_SELECTION_BOUNDARY.md,Actual 175-key comparison and decision history,No claim of prospectively blinded external validation
