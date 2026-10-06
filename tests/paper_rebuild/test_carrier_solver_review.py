@@ -161,3 +161,59 @@ def test_oversize_integer_is_rejected_not_silently_wrapped():
     p = problem_fixture()
     with pytest.raises(TemporalModelError, match="integer|represent|range|exact"):
         solver.evaluate_integer(p, joint_float(p), [2**63, -1])
+
+
+def historical_arc_problem():
+    base = problem_fixture(43)
+    rows0, rows1 = base.row_slices
+    blocks = [
+        EpochBlock(0., base.y[rows0], base.A[rows0], base.B[rows0, :3], base.Q[rows0, rows0], ("OLD", "SHARED")),
+        EpochBlock(.2, base.y[rows1] + base.A[rows1, 0], base.A[rows1],
+                   base.B[rows1, 3:6], base.Q[rows1, rows1], ("NEW", "SHARED")),
+    ]
+    return assemble_epochs(blocks)
+
+
+def independent_active_class_pair(problem, active_indices):
+    estimate, covariance, float_cost = direct_float(problem)
+    feasible = [np.array([2, -1, 3]), np.array([2, -1, 4])]
+    upper = max(direct_fixed_integer(problem, n)[0] for n in feasible)
+    width = np.sqrt(np.maximum(0., upper-float_cost) * np.diag(covariance)[:3])
+    ranges = [range(int(np.ceil(c-w-1e-10)), int(np.floor(c+w+1e-10))+1)
+              for c,w in zip(estimate[:3],width)]
+    assert np.prod([len(r) for r in ranges]) < 10000
+    classes = {}
+    for values in itertools.product(*ranges):
+        n = np.array(values)
+        cost, b = direct_fixed_integer(problem, n)
+        key = tuple(values[i] for i in active_indices)
+        if key not in classes or cost < classes[key][0]:
+            classes[key] = (cost, values, b)
+    return sorted(classes.values(), key=lambda x:(x[0],x[1]))[:2]
+
+
+@pytest.mark.parametrize("transform", [np.eye(3, dtype=int), np.array([[1,2,0],[0,1,1],[0,0,1]])])
+def test_active_class_certificate_profiles_all_historical_integer_values(monkeypatch, transform):
+    problem = historical_arc_problem()
+    class Bridge:
+        def __init__(self, _): pass
+        def candidates(self, mean, covariance, count):
+            # Both seeds belong to the same active NEW/SHARED class.
+            return [SimpleNamespace(ambiguity=np.array([1,-1,3])),
+                    SimpleNamespace(ambiguity=np.array([3,-1,3]))]
+        def decorrelate(self, mean, covariance):
+            return SimpleNamespace(transformation=transform,
+                float_ambiguity=transform.T@mean, covariance=transform.T@covariance@transform)
+    monkeypatch.setattr(solver,"RTKLIBLambdaBridge",Bridge)
+    oracle = independent_active_class_pair(problem, (2,1))
+    answer = solver.solve_temporal(problem,"NO_NATIVE_LIBRARY",initial_candidates=2,
+        node_limit=10000, timeout_s=10., distinct_ambiguity_labels=("NEW","SHARED"))
+    assert answer.global_optimum_certified
+    assert answer.certificate.certificate_scope=="two_best_selected_integer_classes"
+    assert answer.certificate.distinct_ambiguity_labels==("NEW","SHARED")
+    assert answer.best.ambiguity.shape==(3,)  # OLD nuisance never removed
+    assert tuple(answer.best.ambiguity[[2,1]])!=tuple(answer.second.ambiguity[[2,1]])
+    for actual, expected in zip((answer.best,answer.second),oracle):
+        assert tuple(actual.ambiguity)==expected[1]
+        assert actual.full_residual_cost==pytest.approx(expected[0],abs=1e-8)
+        assert np.max(abs(actual.baselines-expected[2]))<1e-7
