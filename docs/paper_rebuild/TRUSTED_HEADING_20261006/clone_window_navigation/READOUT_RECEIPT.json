@@ -1,0 +1,448 @@
+{
+  "schema": "trusted_heading.clone_readout.v1",
+  "registration_commit": "f2e6053992bebe02c49bf5c392384588717082b3",
+  "status": "COMPLETE_NO_ADOPTION_GATE",
+  "stage": "<TRUSTED_HEADING_SCRATCH>/CLONE_WINDOW_NAVIGATION_ATTEMPT02",
+  "first_prepare_failure_retained": true,
+  "new_native_calls": 6,
+  "new_evaluator_calls": 6,
+  "native_retries": 0,
+  "evaluation_retries": 0,
+  "complete_navigation_comparison_scope_native_calls": 12,
+  "complete_navigation_comparison_scope_evaluator_calls": 12,
+  "these_counts_are_not_all_historical_research_calls": true,
+  "prepare_calls": {
+    "first_attempt_checker_compile": 1,
+    "first_attempt_loader": 1,
+    "first_attempt_native": 0,
+    "second_attempt_checker_compile": 1,
+    "second_attempt_loader": 6
+  },
+  "driver_results": {
+    "PREPARE": {
+      "returncode": 0,
+      "elapsed_s": 1.767787717000001,
+      "retry": 0,
+      "technical_continuation_of": "ATTEMPT01"
+    },
+    "NATIVE": {
+      "returncode": 0,
+      "elapsed_s": 63.378367159,
+      "retry": 0
+    },
+    "EVALUATE": {
+      "returncode": 0,
+      "elapsed_s": 37.81479184599999,
+      "retry": 0
+    },
+    "COMPARE": {
+      "returncode": 0,
+      "elapsed_s": 11.540898760999994,
+      "retry": 0
+    }
+  },
+  "gate": {
+    "all_sequence_nondegradation_vs_original_V3": true,
+    "A_original_V3_contract": false,
+    "A_sequences_at_least_5_percent_yaw_reduction": [],
+    "A_qualifying_sequences_with_positive_PAIR_vs_NULL_yaw_effect": [],
+    "PAIR_NULL_complete_common_error_support": true,
+    "recommend_for_human_review_under_this_contract": false,
+    "zero_tolerance_PAIR_NULL_nondegradation_is_reported_separately": true,
+    "reset_or_scheduler_only_gain_is_not_foot_gain": true,
+    "B": null,
+    "B_reason": "NO_REGISTERED_RAW_CARRIER_FAULT_RECOVERY_CASES_IN_THIS_TRIAL",
+    "integer_correctness": null,
+    "false_fix_probability": null,
+    "velocity_truth_metrics": null,
+    "reference_is_independent_truth": false,
+    "main_replacement_authorized": false
+  },
+  "paired_support": {
+    "BY2": {
+      "same_time_keys": true,
+      "nav_byte_equal": true,
+      "std_byte_equal": true,
+      "pair_updates": 0,
+      "zero_update_identity_required": true,
+      "zero_update_identity_passed": true
+    },
+    "BY2H": {
+      "same_time_keys": true,
+      "nav_byte_equal": true,
+      "std_byte_equal": true,
+      "pair_updates": 0,
+      "zero_update_identity_required": true,
+      "zero_update_identity_passed": true
+    },
+    "BY2O": {
+      "same_time_keys": true,
+      "nav_byte_equal": true,
+      "std_byte_equal": true,
+      "pair_updates": 0,
+      "zero_update_identity_required": true,
+      "zero_update_identity_passed": true
+    }
+  },
+  "native": [
+    {
+      "run_id": "BY2__NULL_CLONE",
+      "status": "COMPLETED",
+      "output_rows": 56642,
+      "first_time": 66.005054,
+      "last_time": 339.997056,
+      "time_keys_sha256": "b822e5136f043eaf6a97b78d01d3e62b67440c3147f84fc5cb72a0c0478639b5",
+      "foot_diagnostics": {
+        "rows": 2558,
+        "actions": {
+          "UNCONSUMED_INITIAL_POSE_SUPPORT": 1,
+          "END_NO_MATCHING_ACTIVE_CLONE": 1,
+          "CLONE_CREATED_DETERMINISTIC": 1278,
+          "NULL_CLONE_NO_PAIR_UPDATE": 687,
+          "SOURCE_RETIRED": 591
+        },
+        "pair_updates": 0,
+        "events": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2__NULL_CLONE/ATTITUDE_CLONE_EVENTS.csv",
+          "sha256": "ac54c48d0d3f78b90a85da94aad5bd14a5f96052b89abf235760fa4e712139bb",
+          "size_bytes": 362750
+        },
+        "fixed_weights": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2__NULL_CLONE/ATTITUDE_CLONE_FIXED_WEIGHTS.csv",
+          "sha256": "75f3792fad2f06d192c73080708ad46b0be639f0dbac3e80445a2c9fbe6b4a24",
+          "size_bytes": 325
+        },
+        "working_model_only": true,
+        "unconsumed_preserved": true
+      },
+      "heading_counts": {
+        "heading_pvt_attempt_count": 1369,
+        "heading_pvt_accept_count": 1348,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 1369
+      },
+      "clone_counts": {
+        "attitude_clone_max_joint_dimension": 24,
+        "attitude_clone_output_current_dimension": 21,
+        "attitude_clone_source_rows": 2558,
+        "attitude_clone_consumed_event_rows": 2557,
+        "attitude_clone_starts": 1278,
+        "attitude_clone_ends": 688,
+        "attitude_clone_retires": 591,
+        "attitude_clone_pair_updates": 0,
+        "attitude_clone_pair_skips": 0,
+        "attitude_clone_null_ends": 687,
+        "attitude_clone_innovation_rejects": 0,
+        "attitude_clone_rejected_events": 1,
+        "attitude_clone_ordinary_joint_updates": 0,
+        "attitude_clone_full_resets": 1369,
+        "attitude_clone_late_initial_events": 1,
+        "attitude_clone_unconsumed_terminal": 0,
+        "attitude_clone_unconsumed_outside_imu": 0
+      }
+    },
+    {
+      "run_id": "BY2__PAIR_YOUNG",
+      "status": "COMPLETED",
+      "output_rows": 56642,
+      "first_time": 66.005054,
+      "last_time": 339.997056,
+      "time_keys_sha256": "b822e5136f043eaf6a97b78d01d3e62b67440c3147f84fc5cb72a0c0478639b5",
+      "foot_diagnostics": {
+        "rows": 2558,
+        "actions": {
+          "UNCONSUMED_INITIAL_POSE_SUPPORT": 1,
+          "END_NO_MATCHING_ACTIVE_CLONE": 1,
+          "CLONE_CREATED_DETERMINISTIC": 1278,
+          "PAIR_YOUNG_EXACT_SKIP": 687,
+          "SOURCE_RETIRED": 591
+        },
+        "pair_updates": 0,
+        "events": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2__PAIR_YOUNG/ATTITUDE_CLONE_EVENTS.csv",
+          "sha256": "6de5e92e61c145eb6fd2543c609080ee93a198f1c88c6a795e9dabcbd77e88ac",
+          "size_bytes": 383208
+        },
+        "fixed_weights": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2__PAIR_YOUNG/ATTITUDE_CLONE_FIXED_WEIGHTS.csv",
+          "sha256": "75f3792fad2f06d192c73080708ad46b0be639f0dbac3e80445a2c9fbe6b4a24",
+          "size_bytes": 325
+        },
+        "working_model_only": true,
+        "unconsumed_preserved": true
+      },
+      "heading_counts": {
+        "heading_pvt_attempt_count": 1369,
+        "heading_pvt_accept_count": 1348,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 1369
+      },
+      "clone_counts": {
+        "attitude_clone_max_joint_dimension": 24,
+        "attitude_clone_output_current_dimension": 21,
+        "attitude_clone_source_rows": 2558,
+        "attitude_clone_consumed_event_rows": 2557,
+        "attitude_clone_starts": 1278,
+        "attitude_clone_ends": 688,
+        "attitude_clone_retires": 591,
+        "attitude_clone_pair_updates": 0,
+        "attitude_clone_pair_skips": 687,
+        "attitude_clone_null_ends": 0,
+        "attitude_clone_innovation_rejects": 0,
+        "attitude_clone_rejected_events": 1,
+        "attitude_clone_ordinary_joint_updates": 0,
+        "attitude_clone_full_resets": 1369,
+        "attitude_clone_late_initial_events": 1,
+        "attitude_clone_unconsumed_terminal": 0,
+        "attitude_clone_unconsumed_outside_imu": 0
+      }
+    },
+    {
+      "run_id": "BY2H__NULL_CLONE",
+      "status": "COMPLETED",
+      "output_rows": 58580,
+      "first_time": 413.047045,
+      "last_time": 682.99505,
+      "time_keys_sha256": "c338c7bcd53aa966119a06eda47fb3e4cbb40209cdcb9cdc1ec67648d708c694",
+      "foot_diagnostics": {
+        "rows": 2502,
+        "actions": {
+          "CLONE_CREATED_DETERMINISTIC": 1251,
+          "NULL_CLONE_NO_PAIR_UPDATE": 666,
+          "SOURCE_RETIRED": 585
+        },
+        "pair_updates": 0,
+        "events": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2H__NULL_CLONE/ATTITUDE_CLONE_EVENTS.csv",
+          "sha256": "7bba179a084d1fec055d32cc7096ffa010775b8a9cbd614e593166854f302014",
+          "size_bytes": 363668
+        },
+        "fixed_weights": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2H__NULL_CLONE/ATTITUDE_CLONE_FIXED_WEIGHTS.csv",
+          "sha256": "75f3792fad2f06d192c73080708ad46b0be639f0dbac3e80445a2c9fbe6b4a24",
+          "size_bytes": 325
+        },
+        "working_model_only": true,
+        "unconsumed_preserved": true
+      },
+      "heading_counts": {
+        "heading_pvt_attempt_count": 1349,
+        "heading_pvt_accept_count": 1334,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 1349
+      },
+      "clone_counts": {
+        "attitude_clone_max_joint_dimension": 24,
+        "attitude_clone_output_current_dimension": 21,
+        "attitude_clone_source_rows": 2502,
+        "attitude_clone_consumed_event_rows": 2502,
+        "attitude_clone_starts": 1251,
+        "attitude_clone_ends": 666,
+        "attitude_clone_retires": 585,
+        "attitude_clone_pair_updates": 0,
+        "attitude_clone_pair_skips": 0,
+        "attitude_clone_null_ends": 666,
+        "attitude_clone_innovation_rejects": 0,
+        "attitude_clone_rejected_events": 0,
+        "attitude_clone_ordinary_joint_updates": 0,
+        "attitude_clone_full_resets": 1349,
+        "attitude_clone_late_initial_events": 0,
+        "attitude_clone_unconsumed_terminal": 0,
+        "attitude_clone_unconsumed_outside_imu": 0
+      }
+    },
+    {
+      "run_id": "BY2H__PAIR_YOUNG",
+      "status": "COMPLETED",
+      "output_rows": 58580,
+      "first_time": 413.047045,
+      "last_time": 682.99505,
+      "time_keys_sha256": "c338c7bcd53aa966119a06eda47fb3e4cbb40209cdcb9cdc1ec67648d708c694",
+      "foot_diagnostics": {
+        "rows": 2502,
+        "actions": {
+          "CLONE_CREATED_DETERMINISTIC": 1251,
+          "PAIR_YOUNG_EXACT_SKIP": 666,
+          "SOURCE_RETIRED": 585
+        },
+        "pair_updates": 0,
+        "events": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2H__PAIR_YOUNG/ATTITUDE_CLONE_EVENTS.csv",
+          "sha256": "0259ba179036c9d4656a1d4f8a4763eda883f5f4ad1effc066e7f4fe78f4718a",
+          "size_bytes": 383488
+        },
+        "fixed_weights": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2H__PAIR_YOUNG/ATTITUDE_CLONE_FIXED_WEIGHTS.csv",
+          "sha256": "75f3792fad2f06d192c73080708ad46b0be639f0dbac3e80445a2c9fbe6b4a24",
+          "size_bytes": 325
+        },
+        "working_model_only": true,
+        "unconsumed_preserved": true
+      },
+      "heading_counts": {
+        "heading_pvt_attempt_count": 1349,
+        "heading_pvt_accept_count": 1334,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 0,
+        "heading_carrier_accept_count": 0,
+        "heading_carrier_bypass_count": 1349
+      },
+      "clone_counts": {
+        "attitude_clone_max_joint_dimension": 24,
+        "attitude_clone_output_current_dimension": 21,
+        "attitude_clone_source_rows": 2502,
+        "attitude_clone_consumed_event_rows": 2502,
+        "attitude_clone_starts": 1251,
+        "attitude_clone_ends": 666,
+        "attitude_clone_retires": 585,
+        "attitude_clone_pair_updates": 0,
+        "attitude_clone_pair_skips": 666,
+        "attitude_clone_null_ends": 0,
+        "attitude_clone_innovation_rejects": 0,
+        "attitude_clone_rejected_events": 0,
+        "attitude_clone_ordinary_joint_updates": 0,
+        "attitude_clone_full_resets": 1349,
+        "attitude_clone_late_initial_events": 0,
+        "attitude_clone_unconsumed_terminal": 0,
+        "attitude_clone_unconsumed_outside_imu": 0
+      }
+    },
+    {
+      "run_id": "BY2O__NULL_CLONE",
+      "status": "COMPLETED",
+      "output_rows": 76548,
+      "first_time": 3186.005234,
+      "last_time": 3562.997055,
+      "time_keys_sha256": "f5f8442de5367b1f328c139cba4bb3d4c1f13fce627ce5c9d8fb138dec8f5eb1",
+      "foot_diagnostics": {
+        "rows": 3558,
+        "actions": {
+          "UNCONSUMED_INITIAL_POSE_SUPPORT": 1,
+          "END_NO_MATCHING_ACTIVE_CLONE": 1,
+          "CLONE_CREATED_DETERMINISTIC": 1778,
+          "SOURCE_RETIRED": 621,
+          "NULL_CLONE_NO_PAIR_UPDATE": 1157
+        },
+        "pair_updates": 0,
+        "events": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2O__NULL_CLONE/ATTITUDE_CLONE_EVENTS.csv",
+          "sha256": "b878216502b9f7250fda722f16341efcac7d28869c9ffee257315dff7aedae69",
+          "size_bytes": 531681
+        },
+        "fixed_weights": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2O__NULL_CLONE/ATTITUDE_CLONE_FIXED_WEIGHTS.csv",
+          "sha256": "75f3792fad2f06d192c73080708ad46b0be639f0dbac3e80445a2c9fbe6b4a24",
+          "size_bytes": 325
+        },
+        "working_model_only": true,
+        "unconsumed_preserved": true
+      },
+      "heading_counts": {
+        "heading_pvt_attempt_count": 1593,
+        "heading_pvt_accept_count": 1588,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 12,
+        "heading_carrier_accept_count": 8,
+        "heading_carrier_bypass_count": 1872
+      },
+      "clone_counts": {
+        "attitude_clone_max_joint_dimension": 24,
+        "attitude_clone_output_current_dimension": 21,
+        "attitude_clone_source_rows": 3558,
+        "attitude_clone_consumed_event_rows": 3557,
+        "attitude_clone_starts": 1778,
+        "attitude_clone_ends": 1158,
+        "attitude_clone_retires": 621,
+        "attitude_clone_pair_updates": 0,
+        "attitude_clone_pair_skips": 0,
+        "attitude_clone_null_ends": 1157,
+        "attitude_clone_innovation_rejects": 0,
+        "attitude_clone_rejected_events": 1,
+        "attitude_clone_ordinary_joint_updates": 0,
+        "attitude_clone_full_resets": 1896,
+        "attitude_clone_late_initial_events": 1,
+        "attitude_clone_unconsumed_terminal": 0,
+        "attitude_clone_unconsumed_outside_imu": 0
+      }
+    },
+    {
+      "run_id": "BY2O__PAIR_YOUNG",
+      "status": "COMPLETED",
+      "output_rows": 76548,
+      "first_time": 3186.005234,
+      "last_time": 3562.997055,
+      "time_keys_sha256": "f5f8442de5367b1f328c139cba4bb3d4c1f13fce627ce5c9d8fb138dec8f5eb1",
+      "foot_diagnostics": {
+        "rows": 3558,
+        "actions": {
+          "UNCONSUMED_INITIAL_POSE_SUPPORT": 1,
+          "END_NO_MATCHING_ACTIVE_CLONE": 1,
+          "CLONE_CREATED_DETERMINISTIC": 1778,
+          "SOURCE_RETIRED": 621,
+          "PAIR_YOUNG_EXACT_SKIP": 1157
+        },
+        "pair_updates": 0,
+        "events": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2O__PAIR_YOUNG/ATTITUDE_CLONE_EVENTS.csv",
+          "sha256": "6a140c350a057b70d09746a3e1501549cbb73755354e201bd8dc03f3f57127ac",
+          "size_bytes": 566133
+        },
+        "fixed_weights": {
+          "path": "/home/kaiwen/research/LegSA-GINS-SCRATCH/TRUSTED_HEADING_20261006/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2O__PAIR_YOUNG/ATTITUDE_CLONE_FIXED_WEIGHTS.csv",
+          "sha256": "75f3792fad2f06d192c73080708ad46b0be639f0dbac3e80445a2c9fbe6b4a24",
+          "size_bytes": 325
+        },
+        "working_model_only": true,
+        "unconsumed_preserved": true
+      },
+      "heading_counts": {
+        "heading_pvt_attempt_count": 1593,
+        "heading_pvt_accept_count": 1588,
+        "heading_pvt_suppressed_count": 0,
+        "heading_carrier_attempt_count": 12,
+        "heading_carrier_accept_count": 8,
+        "heading_carrier_bypass_count": 1872
+      },
+      "clone_counts": {
+        "attitude_clone_max_joint_dimension": 24,
+        "attitude_clone_output_current_dimension": 21,
+        "attitude_clone_source_rows": 3558,
+        "attitude_clone_consumed_event_rows": 3557,
+        "attitude_clone_starts": 1778,
+        "attitude_clone_ends": 1158,
+        "attitude_clone_retires": 621,
+        "attitude_clone_pair_updates": 0,
+        "attitude_clone_pair_skips": 1157,
+        "attitude_clone_null_ends": 0,
+        "attitude_clone_innovation_rejects": 0,
+        "attitude_clone_rejected_events": 1,
+        "attitude_clone_ordinary_joint_updates": 0,
+        "attitude_clone_full_resets": 1896,
+        "attitude_clone_late_initial_events": 1,
+        "attitude_clone_unconsumed_terminal": 0,
+        "attitude_clone_unconsumed_outside_imu": 0
+      }
+    }
+  ],
+  "metadata_pins": {
+    "<TRUSTED_HEADING_SCRATCH>/CLONE_WINDOW_NAVIGATION_ATTEMPT02/PLAN.json": "eaed63524ed3e9e45a58d997ff36d4a7ab6a2e6a3e240bafe075be39ac6ee1fa",
+    "<TRUSTED_HEADING_SCRATCH>/CLONE_WINDOW_NAVIGATION_ATTEMPT02/PREPARED.json": "d2f5e3726c395d4a9a699e2cb41513a4ecba0d49f15c432254c4980132a70f96",
+    "<TRUSTED_HEADING_SCRATCH>/CLONE_WINDOW_NAVIGATION_ATTEMPT02/ALL_NATIVE_SEALED.json": "50f53f871627704c1ceae76d8597e484419a12a6052e21614ea58336f8693397",
+    "<TRUSTED_HEADING_SCRATCH>/CLONE_WINDOW_NAVIGATION_ATTEMPT02/EVALUATION_COMPLETE.json": "d5b1e37b9ca3de044d2c84b19107bac367b8e54b308a30b8cdd50e6f6777a313",
+    "<TRUSTED_HEADING_SCRATCH>/CLONE_WINDOW_NAVIGATION_COMPARISON_ATTEMPT01/COMPARISON.json": "8d77ade581a9fb5322ab521702fee68f8604912c23f5a22928fd11427f9f22ab"
+  },
+  "small_result_pins": {
+    "V3_COMPARISONS.csv": "a6ae2b8026235f38a098fe9bef532b349b1f33c60f9f78bf25cf8066b10d212a",
+    "ATTRIBUTION_DIFFERENCES.csv": "41beef174a45ab1b073e04968ec048362a48de207cd1e7d60f24eee387d853ba",
+    "COVERAGE.csv": "4bc0baab768100a6ee12cb9bd079ac0e6b1c21c28877d2bb525431099c3869de",
+    "ZERO_UPDATE_IDENTITY.csv": "d5a3d739274067dfec57d4b45f3aa6c0cbf27eb9a052dac06ebefd5d693cfaf2",
+    "COMPARISON.json": "8d77ade581a9fb5322ab521702fee68f8604912c23f5a22928fd11427f9f22ab"
+  },
+  "reference_parent_reads": 0
+}
