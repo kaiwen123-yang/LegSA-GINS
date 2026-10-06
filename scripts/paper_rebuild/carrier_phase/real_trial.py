@@ -129,7 +129,7 @@ def prepare(a):
    "baseline_length_m":a.length,"max_gap_s":a.max_gap,"tdcp_limit_cycles":a.tdcp_limit,
    "prefixes":[1,5,10],"families":FAMILIES,"cross_epoch_covariance":"assumed independent",
    "cross_signal_SD_covariance":"RAWX independent SD default; shared pivot DD propagated exactly",
-   "real_integer_truth_available":False,"reference_reads":0,"scope":"development, previously inspected window",
+   "real_integer_truth_available":False,"reference_reads":0,"scope":"development; inspection history is declared by the calling trial contract",
    "arc_left_censored":True,"accepted_integer_measurement":False}
  emit(out/"PLAN.json",plan)
  print("PREPARE_COMPLETE",json.dumps(pairing),flush=True)

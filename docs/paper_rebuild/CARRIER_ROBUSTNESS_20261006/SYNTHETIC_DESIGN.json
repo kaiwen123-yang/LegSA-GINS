@@ -1,0 +1,587 @@
+{
+  "stage": "CARRIER_ROBUSTNESS_20261006",
+  "status": "DESIGN_ONLY_NO_CILS_EXECUTED",
+  "maximum_CILS_calls": 72,
+  "cases": [
+    {
+      "case_id": "CALIBRATION_M3_00",
+      "split": "CALIBRATION",
+      "layer": "M3",
+      "index": 0,
+      "seed": 2026100800
+    },
+    {
+      "case_id": "CALIBRATION_M3_01",
+      "split": "CALIBRATION",
+      "layer": "M3",
+      "index": 1,
+      "seed": 2026100801
+    },
+    {
+      "case_id": "CALIBRATION_M3_02",
+      "split": "CALIBRATION",
+      "layer": "M3",
+      "index": 2,
+      "seed": 2026100802
+    },
+    {
+      "case_id": "CALIBRATION_M3_03",
+      "split": "CALIBRATION",
+      "layer": "M3",
+      "index": 3,
+      "seed": 2026100803
+    },
+    {
+      "case_id": "CALIBRATION_M3_04",
+      "split": "CALIBRATION",
+      "layer": "M3",
+      "index": 4,
+      "seed": 2026100804
+    },
+    {
+      "case_id": "CALIBRATION_M3_05",
+      "split": "CALIBRATION",
+      "layer": "M3",
+      "index": 5,
+      "seed": 2026100805
+    },
+    {
+      "case_id": "CALIBRATION_M3_06",
+      "split": "CALIBRATION",
+      "layer": "M3",
+      "index": 6,
+      "seed": 2026100806
+    },
+    {
+      "case_id": "CALIBRATION_M3_07",
+      "split": "CALIBRATION",
+      "layer": "M3",
+      "index": 7,
+      "seed": 2026100807
+    },
+    {
+      "case_id": "CALIBRATION_M4_00",
+      "split": "CALIBRATION",
+      "layer": "M4",
+      "index": 0,
+      "seed": 2026100824
+    },
+    {
+      "case_id": "CALIBRATION_M4_01",
+      "split": "CALIBRATION",
+      "layer": "M4",
+      "index": 1,
+      "seed": 2026100825
+    },
+    {
+      "case_id": "CALIBRATION_M4_02",
+      "split": "CALIBRATION",
+      "layer": "M4",
+      "index": 2,
+      "seed": 2026100826
+    },
+    {
+      "case_id": "CALIBRATION_M4_03",
+      "split": "CALIBRATION",
+      "layer": "M4",
+      "index": 3,
+      "seed": 2026100827
+    },
+    {
+      "case_id": "CALIBRATION_M4_04",
+      "split": "CALIBRATION",
+      "layer": "M4",
+      "index": 4,
+      "seed": 2026100828
+    },
+    {
+      "case_id": "CALIBRATION_M4_05",
+      "split": "CALIBRATION",
+      "layer": "M4",
+      "index": 5,
+      "seed": 2026100829
+    },
+    {
+      "case_id": "CALIBRATION_M4_06",
+      "split": "CALIBRATION",
+      "layer": "M4",
+      "index": 6,
+      "seed": 2026100830
+    },
+    {
+      "case_id": "CALIBRATION_M4_07",
+      "split": "CALIBRATION",
+      "layer": "M4",
+      "index": 7,
+      "seed": 2026100831
+    },
+    {
+      "case_id": "CALIBRATION_M9_MULTIFREQUENCY_00",
+      "split": "CALIBRATION",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 0,
+      "seed": 2026100848
+    },
+    {
+      "case_id": "CALIBRATION_M9_MULTIFREQUENCY_01",
+      "split": "CALIBRATION",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 1,
+      "seed": 2026100849
+    },
+    {
+      "case_id": "CALIBRATION_M9_MULTIFREQUENCY_02",
+      "split": "CALIBRATION",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 2,
+      "seed": 2026100850
+    },
+    {
+      "case_id": "CALIBRATION_M9_MULTIFREQUENCY_03",
+      "split": "CALIBRATION",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 3,
+      "seed": 2026100851
+    },
+    {
+      "case_id": "CALIBRATION_M9_MULTIFREQUENCY_04",
+      "split": "CALIBRATION",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 4,
+      "seed": 2026100852
+    },
+    {
+      "case_id": "CALIBRATION_M9_MULTIFREQUENCY_05",
+      "split": "CALIBRATION",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 5,
+      "seed": 2026100853
+    },
+    {
+      "case_id": "CALIBRATION_M9_MULTIFREQUENCY_06",
+      "split": "CALIBRATION",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 6,
+      "seed": 2026100854
+    },
+    {
+      "case_id": "CALIBRATION_M9_MULTIFREQUENCY_07",
+      "split": "CALIBRATION",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 7,
+      "seed": 2026100855
+    },
+    {
+      "case_id": "HELDOUT_M3_00",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 0,
+      "seed": 2026100808
+    },
+    {
+      "case_id": "HELDOUT_M3_01",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 1,
+      "seed": 2026100809
+    },
+    {
+      "case_id": "HELDOUT_M3_02",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 2,
+      "seed": 2026100810
+    },
+    {
+      "case_id": "HELDOUT_M3_03",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 3,
+      "seed": 2026100811
+    },
+    {
+      "case_id": "HELDOUT_M3_04",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 4,
+      "seed": 2026100812
+    },
+    {
+      "case_id": "HELDOUT_M3_05",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 5,
+      "seed": 2026100813
+    },
+    {
+      "case_id": "HELDOUT_M3_06",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 6,
+      "seed": 2026100814
+    },
+    {
+      "case_id": "HELDOUT_M3_07",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 7,
+      "seed": 2026100815
+    },
+    {
+      "case_id": "HELDOUT_M3_08",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 8,
+      "seed": 2026100816
+    },
+    {
+      "case_id": "HELDOUT_M3_09",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 9,
+      "seed": 2026100817
+    },
+    {
+      "case_id": "HELDOUT_M3_10",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 10,
+      "seed": 2026100818
+    },
+    {
+      "case_id": "HELDOUT_M3_11",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 11,
+      "seed": 2026100819
+    },
+    {
+      "case_id": "HELDOUT_M3_12",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 12,
+      "seed": 2026100820
+    },
+    {
+      "case_id": "HELDOUT_M3_13",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 13,
+      "seed": 2026100821
+    },
+    {
+      "case_id": "HELDOUT_M3_14",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 14,
+      "seed": 2026100822
+    },
+    {
+      "case_id": "HELDOUT_M3_15",
+      "split": "HELDOUT",
+      "layer": "M3",
+      "index": 15,
+      "seed": 2026100823
+    },
+    {
+      "case_id": "HELDOUT_M4_00",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 0,
+      "seed": 2026100832
+    },
+    {
+      "case_id": "HELDOUT_M4_01",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 1,
+      "seed": 2026100833
+    },
+    {
+      "case_id": "HELDOUT_M4_02",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 2,
+      "seed": 2026100834
+    },
+    {
+      "case_id": "HELDOUT_M4_03",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 3,
+      "seed": 2026100835
+    },
+    {
+      "case_id": "HELDOUT_M4_04",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 4,
+      "seed": 2026100836
+    },
+    {
+      "case_id": "HELDOUT_M4_05",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 5,
+      "seed": 2026100837
+    },
+    {
+      "case_id": "HELDOUT_M4_06",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 6,
+      "seed": 2026100838
+    },
+    {
+      "case_id": "HELDOUT_M4_07",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 7,
+      "seed": 2026100839
+    },
+    {
+      "case_id": "HELDOUT_M4_08",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 8,
+      "seed": 2026100840
+    },
+    {
+      "case_id": "HELDOUT_M4_09",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 9,
+      "seed": 2026100841
+    },
+    {
+      "case_id": "HELDOUT_M4_10",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 10,
+      "seed": 2026100842
+    },
+    {
+      "case_id": "HELDOUT_M4_11",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 11,
+      "seed": 2026100843
+    },
+    {
+      "case_id": "HELDOUT_M4_12",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 12,
+      "seed": 2026100844
+    },
+    {
+      "case_id": "HELDOUT_M4_13",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 13,
+      "seed": 2026100845
+    },
+    {
+      "case_id": "HELDOUT_M4_14",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 14,
+      "seed": 2026100846
+    },
+    {
+      "case_id": "HELDOUT_M4_15",
+      "split": "HELDOUT",
+      "layer": "M4",
+      "index": 15,
+      "seed": 2026100847
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_00",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 0,
+      "seed": 2026100856
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_01",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 1,
+      "seed": 2026100857
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_02",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 2,
+      "seed": 2026100858
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_03",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 3,
+      "seed": 2026100859
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_04",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 4,
+      "seed": 2026100860
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_05",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 5,
+      "seed": 2026100861
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_06",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 6,
+      "seed": 2026100862
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_07",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 7,
+      "seed": 2026100863
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_08",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 8,
+      "seed": 2026100864
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_09",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 9,
+      "seed": 2026100865
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_10",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 10,
+      "seed": 2026100866
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_11",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 11,
+      "seed": 2026100867
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_12",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 12,
+      "seed": 2026100868
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_13",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 13,
+      "seed": 2026100869
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_14",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 14,
+      "seed": 2026100870
+    },
+    {
+      "case_id": "HELDOUT_M9_MULTIFREQUENCY_15",
+      "split": "HELDOUT",
+      "layer": "M9_MULTIFREQUENCY",
+      "index": 15,
+      "seed": 2026100871
+    }
+  ],
+  "conditions": [
+    "CLEAN",
+    "TARGET_QUARTER",
+    "PIVOT_QUARTER",
+    "UNDETECTED_SLIP",
+    "TEMPORAL_RHO08",
+    "INSUFFICIENT_SUPPORT",
+    "TWO_SIGNAL_BIASES"
+  ],
+  "split": {
+    "calibration": 24,
+    "heldout": 48,
+    "independent_base_noise_units": 72,
+    "paired_future_conditions": 504,
+    "threshold_training": false,
+    "calibration_role": "Model/implementation diagnostic only; cannot change any threshold, parameter, case, or heldout seed."
+  },
+  "candidate_selection": "Exactly one clean 5-epoch CILS call per seed; best/second and active labels frozen before future validation.",
+  "future_validation": "Five strictly later epochs; frozen N; separate 3D b_k each epoch. Never choose a replacement candidate, extend the horizon, or re-search integers from future outcomes.",
+  "admission_policy": {
+    "nominal_total_type_I_alpha": 0.01,
+    "bonferroni_alpha_each": 0.005,
+    "residual_gate": "Sum free-baseline GLS residual cost versus chi-square(sum(n_k-3)).",
+    "length_gate": "Sum sphere projection penalties versus chi-square(3K); each penalty bounded by true-baseline Gaussian Mahalanobis distance.",
+    "conditions": "Known Gaussian working Q and correctly specified mean; alpha is not false-fix probability.",
+    "threshold_adjustment": "Forbidden on both calibration and heldout.",
+    "meaning": "SHADOW_ACCEPTED is experimental gate output, not production integer FIX or calibrated integrity."
+  },
+  "models": {
+    "layers": [
+      "M3",
+      "M4",
+      "M9_MULTIFREQUENCY"
+    ],
+    "length_m": 0.35,
+    "single_receiver_code_sigma_m": 0.5,
+    "single_receiver_phase_sigma_m": 0.004,
+    "phase_sigma_provenance": "Fixed engineering 4 mm, NOT receiver RAWX 0.004 cycles floor.",
+    "GPS_L1_L2_raw_SD_correlation": 0.35,
+    "working_Q": "Exact generated within-epoch DD covariance, including shared pivot and GPS cross-frequency terms; solver assumes independent epochs.",
+    "motion": "18..54 deg continuous yaw rotation and sinusoidal 7 deg tilt over 1.8 s; independent b_k in solver.",
+    "integers": "Fixed known per-group [2,-1,4] (+3 per later group); M4 [2,-1,4,0].",
+    "fault_timing": "All perturbations start at epoch index 5, after candidate selection. First five matrices/observations shared bitwise across conditions.",
+    "pivot_fault": "RX2 pivot +0.25 cycles => every phase DD of that signal group shifts -0.25 lambda.",
+    "slip": "Target RX2 +1 cycle from epoch index 5 without arc reset: no constant N can represent the entire selection+validation window.",
+    "temporal_rho08": "Only future segment follows AR(1), seeded by last selection-epoch latent noise; marginal Q unchanged, cross-epoch dependence unmodeled.",
+    "insufficient_support": "Only two target code/phase rows retained; known phase count=2, must remain unresolved.",
+    "two_faults": "Two different RX2 target signals have +0.25 and -0.40 cycles; retain single-fault-model mismatch."
+  },
+  "separation": {
+    "selection_inputs": "First five blocks only; no truth or future file is passed to CILS worker.",
+    "validation_inputs": "Frozen best/second and five future blocks; truth is separate and opened only for final outcome labeling.",
+    "real_data_reads": 0,
+    "reference_reads": 0,
+    "new_RP_or_navigation_integration": false
+  },
+  "reporting": {
+    "outcomes": [
+      "correct shadow acceptance",
+      "wrong shadow acceptance",
+      "rejected/unresolved",
+      "unrepresentable shared-integer truth",
+      "baseline angle error even when integer-correct"
+    ],
+    "accuracy_units": "Per-condition independent seed denominator: 48 heldout total, 16 per layer; never pool 336 paired heldout conditions as IID.",
+    "intervals": "Wilson interval per condition (and per layer) for observed shadow wrong-acceptance proportion; observed wrong acceptance is not a calibrated future integrity guarantee.",
+    "no_discard": "Retain timeout/no-certificate/unsupported/multiple-fault cases."
+  },
+  "budgets": {
+    "node_limit": 100000,
+    "initial_lambda_candidates": 8,
+    "solver_timeout_s": 20.0,
+    "process_group_timeout_s": 25.0,
+    "stage_walltime_s": 1950.0
+  },
+  "library_sha256": "28c25b1cc7fade9b956bfdf77005de8fcb0a382c8411ae6e608c83b82bff53f2"
+}
