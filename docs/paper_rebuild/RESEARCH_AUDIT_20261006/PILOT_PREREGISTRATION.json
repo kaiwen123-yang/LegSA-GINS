@@ -1,11 +1,11 @@
 {
-  "status": "TRANSPORT_METADATA_CORRECTED_READY_FOR_REFREEZE",
+  "status": "ALL_12_NATIVE_LOADER_CONFIGS_ADMITTED_READY_FOR_REFREEZE",
   "native_invocations": 0,
   "evaluation_invocations": 0,
   "base_commit": "d216bf5387e76de41e71e7deca0752cc00cfe0f1",
   "binary_sha256": "3805d2d2b0f52063da48d52b23fca2f88c4b5f9ef19adc9bfd48f5fe920701e7",
-  "plan_sha256": "697987be3b40c31018f91b7711b4b5abc4c9d50a3b2dc4d45f1b7115b3973a9e",
-  "helper_sha256": "29d1209a78a56e76057d59f69e778ce343813570888e5ab5543df94c1df7b046",
+  "plan_sha256": "f96251d9d53e6c0323f3f931a56432cef5686ef702a562cf61f74ea80495d3f8",
+  "helper_sha256": "7d8c7e398689b0c5cca2f6d9a24051604b3190e4b37ba45b6db3145f3bfd4250",
   "unit_tests": {
     "status": "PASS",
     "max_body_jacobian_error": 2.97396e-10,
@@ -155,119 +155,128 @@
   },
   "cases": [
     {
-      "run_id": "C00_M0",
+      "run_id": "IMUFIX_RESEARCH_AUDIT_C00_M0",
       "case": "C00",
       "mode": 0,
-      "config_sha256": "733a86be774c3cae5a20726af3f54a962632f5d30b89ee234bc352c230aca443",
+      "config_sha256": "f20651ef4efef28e335a36aa666ddc0bfd46e196a3e154a7e2991d912b3e2d1f",
       "outage": null
     },
     {
-      "run_id": "C00_M1",
+      "run_id": "IMUFIX_RESEARCH_AUDIT_C00_M1",
       "case": "C00",
       "mode": 1,
-      "config_sha256": "521701593b22799450f709bd73f02d37f9aa400dc36f32c8f5a01585aeee0685",
+      "config_sha256": "e9deae5be6a88de4bcf5ab65383ba4599c799c3947d6110b0da6d13b98ab95a6",
       "outage": null
     },
     {
-      "run_id": "C00_M2",
+      "run_id": "IMUFIX_RESEARCH_AUDIT_C00_M2",
       "case": "C00",
       "mode": 2,
-      "config_sha256": "ca31fc03cd4cdb18fc571ff786558abbcb4c1faa9fdecd8b0b8a57189d29cbd7",
+      "config_sha256": "4181312ce613ccc9daf514b32b6e2569d06eea9a59c8ee50f5a090f2c140e190",
       "outage": null
     },
     {
-      "run_id": "D61_20s_seed_00_M0",
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M0",
       "case": "D61_20s_seed_00",
       "mode": 0,
-      "config_sha256": "33471e1da221381d044880543700d890e7cd6c7e4d5dee9d0d860e0895f7bf75",
+      "config_sha256": "f174d33ce2226d44fa606dbc3f663297a008ad567449eb3e0540f053550bbbfc",
       "outage": [
         196.2,
         216.2
       ]
     },
     {
-      "run_id": "D61_20s_seed_00_M1",
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M1",
       "case": "D61_20s_seed_00",
       "mode": 1,
-      "config_sha256": "4f35a52d6dd8b1e1b2a8e48a87f21e7b4050a97052e2b33b7f44d54819765640",
+      "config_sha256": "8efdfbd208a723a4b96298f4ff6010682184283040241fed26480635fdd36bab",
       "outage": [
         196.2,
         216.2
       ]
     },
     {
-      "run_id": "D61_20s_seed_00_M2",
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M2",
       "case": "D61_20s_seed_00",
       "mode": 2,
-      "config_sha256": "49c2a249fc6b95b5f516c17c2be690e5de685d5f2fbef14272c0bc87832cfbde",
+      "config_sha256": "b46c0ccb1caa9b62fda3a7a073058c1ba493e30b49bbf6f909f6e28126f49b10",
       "outage": [
         196.2,
         216.2
       ]
     },
     {
-      "run_id": "D62_20s_seed_00_M0",
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M0",
       "case": "D62_20s_seed_00",
       "mode": 0,
-      "config_sha256": "7b518189cfebbe72c744901a28b8f73aa35ed54512e2f2ab32455603816c4658",
+      "config_sha256": "4a90fdf9b205bd5e369725b93a03d4847dfa1f83b24007e463a2233ba8fb483b",
       "outage": [
         196.2,
         216.2
       ]
     },
     {
-      "run_id": "D62_20s_seed_00_M1",
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M1",
       "case": "D62_20s_seed_00",
       "mode": 1,
-      "config_sha256": "5f1b0f607fa0a99c68d3e0e66d06674b2320474b5cdf89a1d3cf9f586d961d28",
+      "config_sha256": "f90625beb46f859e2671c612cd37c213b07ef82534931fde71f2a33b69cf00c9",
       "outage": [
         196.2,
         216.2
       ]
     },
     {
-      "run_id": "D62_20s_seed_00_M2",
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M2",
       "case": "D62_20s_seed_00",
       "mode": 2,
-      "config_sha256": "bf688d2fe8d1511f9edaa0ef12a3658eec9b06bb6008b9398ad15503d19cf6f1",
+      "config_sha256": "8deec4b4736c11e36bd299938ffa4e28f8b5634614b2835a44fe81c7e66f52b3",
       "outage": [
         196.2,
         216.2
       ]
     },
     {
-      "run_id": "D61_NO_RECORDS_M0",
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D61_NO_RECORDS_M0",
       "case": "D61_NO_RECORDS",
       "mode": 0,
-      "config_sha256": "c47237a915df3119e6dc0e8731f007bdfa016527f816bb5b27504d69033ccc1b",
+      "config_sha256": "538186966513f5f5b5f0bbdfa5ccbb80e5e2e0b9e6ffcfbc98c43778bed4b95b",
       "outage": [
         196.2,
         216.2
       ]
     },
     {
-      "run_id": "D61_NO_RECORDS_M1",
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D61_NO_RECORDS_M1",
       "case": "D61_NO_RECORDS",
       "mode": 1,
-      "config_sha256": "d26427868e11fd3a113d7b2edab6f250b02d3ac057aecc4b07b78aea1ba3c277",
+      "config_sha256": "4d71ca231359787fd811509a033475ee124f848ee86404b8eb6ae16b56b0d1c1",
       "outage": [
         196.2,
         216.2
       ]
     },
     {
-      "run_id": "D61_NO_RECORDS_M2",
+      "run_id": "IMUFIX_CLAIM_RESEARCH_AUDIT_D61_NO_RECORDS_M2",
       "case": "D61_NO_RECORDS",
       "mode": 2,
-      "config_sha256": "f4c095d3622034c2f260e542917d856274fd26a01a7dac931828f0eca51a3d7a",
+      "config_sha256": "e677a789671dc853851dc575cbe834d2813fec830aca6b376a28df68eba74cf1",
       "outage": [
         196.2,
         216.2
       ]
     }
   ],
-  "previous_binary_invocations": 1,
+  "previous_binary_invocations": 2,
   "previous_input_read": false,
   "native_state_runs": 0,
-  "active_attempt": "ATTEMPT_02"
+  "active_attempt": "ATTEMPT_03",
+  "config_loader_admission": {
+    "returncode": 0,
+    "configs": 12,
+    "checker_invocations": 1,
+    "native_solver_calls": 0,
+    "checker_sha256": "a791d6601d2f41f460399d7e2acbd3f9b363024bc7e52754aa24fcdacbe690b1",
+    "stdout": "IMUFIX_RESEARCH_AUDIT_C00_M0 V3_NATURAL_SEQUENCE_EXPLICIT_IMU_DURATION PASS\nIMUFIX_RESEARCH_AUDIT_C00_M1 V3_NATURAL_SEQUENCE_EXPLICIT_IMU_DURATION PASS\nIMUFIX_RESEARCH_AUDIT_C00_M2 V3_NATURAL_SEQUENCE_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M0 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M1 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D61_20s_seed_00_M2 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M0 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M1 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D62_20s_seed_00_M2 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D61_NO_RECORDS_M0 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D61_NO_RECORDS_M1 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\nIMUFIX_CLAIM_RESEARCH_AUDIT_D61_NO_RECORDS_M2 V3_CLAIM_SUBSET_EXPLICIT_IMU_DURATION PASS\n",
+    "stderr": ""
+  }
 }

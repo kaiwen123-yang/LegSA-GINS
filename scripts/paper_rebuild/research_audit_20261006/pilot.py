@@ -119,6 +119,7 @@ target_link_libraries(pilot_test PRIVATE core)
  tests=json.loads(subprocess.check_output([str(st/'BUILD/pilot_test')],text=True));emit(st/'UNIT_TESTS.json',tests)
  emit(st/'BUILD_IDENTITY.json',{'base_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=a.code,text=True).strip(),'production_source_sha256':before,'sandbox_source_sha256':{str(p.relative_to(dest)):sha(p) for p in dest.rglob('*') if p.is_file()},'binary_sha256':sha(st/'BUILD/SOLVER'),'unit_tests':tests})
  assert before=={str(p.relative_to(src)):sha(p) for p in src.rglob('*') if p.is_file()}
+ subprocess.run(['c++','-O2','-std=c++17','-I',str(dest/'core/include'),str(a.code/'scripts/paper_rebuild/research_audit_20261006/config_check.cpp'),str(st/'BUILD/libcore.a'),'-o',str(st/'BUILD/config_check')],check=True)
  print('BUILD_UNIT_TESTS_PASS',flush=True)
 
 def prepare(a):
@@ -164,7 +165,7 @@ def prepare(a):
  def add(case,source,gnss=None):
   payload=Path(source['children'][0]['config']['path']).read_bytes()
   for mode in (0,1,2):
-   rid=f'{case}_M{mode}';fields={'run_id':rid,'run_label':rid,'outputpath':str(st/'NATIVE'/rid)}
+   rid=('IMUFIX_RESEARCH_AUDIT_' if case=='C00' else 'IMUFIX_CLAIM_RESEARCH_AUDIT_')+f'{case}_M{mode}';fields={'run_id':rid,'run_label':rid,'outputpath':str(st/'NATIVE'/rid)}
    if mode==2:fields['go2_horizontal_velocity_prior_path']=str(target)
    if gnss:fields['gnsspath']=str(gnss)
    data,changes=clone_fields(payload,fields);cfg=st/'CONFIGS'/f'{rid}.yaml';cfg.parent.mkdir(exist_ok=True);cfg.write_bytes(data)
@@ -177,6 +178,9 @@ def prepare(a):
  for r in runs:
   cfg=yaml.safe_load(Path(r['config']).read_text())
   for k in ('imupath','gnsspath','raw_doppler_factor_path','go2_attitude_prior_path','go2_horizontal_velocity_prior_path'):pins[cfg[k]]=sha(cfg[k])
+ check=subprocess.run([str(st/'BUILD/config_check')]+[r['config'] for r in runs],capture_output=True,text=True)
+ emit(st/'CONFIG_LOADER_ADMISSION.json',{'returncode':check.returncode,'configs':12,'checker_invocations':1,'native_solver_calls':0,'checker_sha256':sha(st/'BUILD/config_check'),'stdout':check.stdout,'stderr':check.stderr})
+ assert check.returncode==0 and len(check.stdout.splitlines())==12
  emit(st/'PLAN.json',{'schema':'isolated_sdk_aid.v1','sequence':seq,'runs':runs,'inputs':pins,'raw_velocity':{'path':str(raw),'sha256':sha(raw),'rows':len(samples),'fields':['stamp.sec','stamp.nanosec','velocity'],'inherited_scale':1.0/0.962142,'raw_error_code_all_zero':True,'inherited_go2_source_valid_all_true':True,'frame':'CONDITIONAL_BODY_FLU','timestamp_check':'exact raw timestamps match inherited RP provider','gnss_or_reference_read':False},'native_budget':12,'body_std_mps':.132838,'body_point_offset_assumption_m':[0,0,0],'binary_sha256':sha(st/'BUILD/SOLVER'),'build_identity_sha256':sha(st/'BUILD_IDENTITY.json')})
  print('PREPARED_12_NO_REFERENCE',flush=True)
 def native(a):
