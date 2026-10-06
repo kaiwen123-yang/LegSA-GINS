@@ -23,6 +23,11 @@ class GnssFileLoader {
   static std::vector<GnssData> loadFifteenColumn(const std::string& path);
   static std::vector<GnssData> loadBaseline3d(const std::string& path,
                                           const std::string& baseline3d_path);
+  GnssFileLoader(const std::string& path, const std::string& sidecar_path,
+                 const std::string& source);
+  static std::vector<GnssData> loadExternalCarrier(const std::string& path,
+                                                const std::string& sidecar_path);
+  std::vector<double> times() const;
   bool next(GnssData& gnss);
   bool isEof() const;
   bool isOpen() const;

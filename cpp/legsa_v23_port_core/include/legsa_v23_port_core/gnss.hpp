@@ -29,6 +29,8 @@ struct GnssData {
   // 中文说明：legacy 15 列没有 validity 后缀；formal 18 列必须显式给出 position/velocity/yaw validity。
   bool validity_explicit = false;
   bool isvalid = false;
+  // A carrier-only event must not trigger a second RD/RP/HV/FGO update.
+  bool auxiliary_updates_allowed = true;
   Baseline3dMeasurement baseline3d;
 };
 

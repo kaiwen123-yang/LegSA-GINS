@@ -168,6 +168,125 @@ std::vector<GnssData> GnssFileLoader::loadFifteenColumn(const std::string& path)
   return rows;
 }
 
+GnssFileLoader::GnssFileLoader(const std::string& path, const std::string& sidecar_path,
+                               const std::string& source) {
+  if (source != "external_carrier") throw std::runtime_error("EXTERNAL_CARRIER_INVALID_SOURCE");
+  rows_ = loadExternalCarrier(path, sidecar_path);
+}
+
+std::vector<GnssData> GnssFileLoader::loadExternalCarrier(const std::string& path,
+                                                        const std::string& sidecar_path) {
+  std::ifstream gnss_input(path);
+  if (!gnss_input) throw std::runtime_error("failed to open GNSS file: " + path);
+  std::vector<GnssData> original;
+  std::string gnss_line;
+  while (std::getline(gnss_input, gnss_line)) {
+    if (gnss_line.empty() || gnss_line[0] == '#') continue;
+    std::istringstream values(gnss_line);
+    GnssData row;
+    std::string ignored_yaw, ignored_std, ignored_valid, trailing;
+    int pos_valid=-1, vel_valid=-1;
+    if (!(values >> row.time >> row.blh_rad_m[0] >> row.blh_rad_m[1] >> row.blh_rad_m[2]
+          >> row.std_ned_m[0] >> row.std_ned_m[1] >> row.std_ned_m[2]
+          >> row.vel_ned_mps[0] >> row.vel_ned_mps[1] >> row.vel_ned_mps[2]
+          >> row.vel_std_mps[0] >> row.vel_std_mps[1] >> row.vel_std_mps[2]
+          >> ignored_yaw >> ignored_std >> pos_valid >> vel_valid >> ignored_valid) ||
+        (values >> trailing) || (pos_valid != 0 && pos_valid != 1) || (vel_valid != 0 && vel_valid != 1))
+      throw std::runtime_error("EXTERNAL_CARRIER_REQUIRES_EXPLICIT_GNSS18");
+    for (const auto& v : {row.blh_rad_m, row.std_ned_m, row.vel_ned_mps, row.vel_std_mps})
+      for (double value : v) if (!std::isfinite(value))
+        throw std::runtime_error("EXTERNAL_CARRIER_NONFINITE_PV_INPUT");
+    if (std::fabs(row.blh_rad_m[0]) > kPi/2 || std::fabs(row.blh_rad_m[1]) > kPi) {
+      row.blh_rad_m[0] *= D2R; row.blh_rad_m[1] *= D2R;
+    }
+    row.has_position = pos_valid == 1;
+    row.has_velocity = vel_valid == 1;
+    row.validity_explicit = true;
+    original.push_back(row);
+  }
+  std::map<double, GnssData> events;
+  double previous = -INFINITY;
+  for (auto& row : original) {
+    if (!row.validity_explicit || !std::isfinite(row.time) || !(row.time > previous))
+      throw std::runtime_error("EXTERNAL_CARRIER_REQUIRES_ORDERED_EXPLICIT_GNSS18");
+    previous = row.time;
+    row.has_yaw = false; // Source replacement: never fuse commercial A1 and carrier B3 together.
+    row.baseline3d.source = "external_carrier";
+    events.emplace(row.time, row);
+  }
+  std::ifstream input(sidecar_path);
+  if (!input) throw std::runtime_error("failed to open external carrier file: " + sidecar_path);
+  std::string line;
+  if (!std::getline(input, line)) throw std::runtime_error("EXTERNAL_CARRIER_MISSING_HEADER");
+  if (!line.empty() && line.back() == '\r') line.pop_back();
+  if (line != "measurement_time,decision_available_time,b_ecef_x,b_ecef_y,b_ecef_z,cov_xx,cov_xy,cov_xz,cov_yx,cov_yy,cov_yz,cov_zx,cov_zy,cov_zz,valid")
+    throw std::runtime_error("EXTERNAL_CARRIER_INVALID_HEADER");
+  auto number = [](const std::string& token) {
+    std::size_t used = 0;
+    const double value = std::stod(token, &used);
+    if (used != token.size() || !std::isfinite(value))
+      throw std::runtime_error("EXTERNAL_CARRIER_NONFINITE_OR_MALFORMED_NUMBER");
+    return value;
+  };
+  previous = -INFINITY;
+  while (std::getline(input, line)) {
+    if (!line.empty() && line.back() == '\r') line.pop_back();
+    if (line.empty()) continue;
+    std::vector<std::string> tokens;
+    std::size_t begin = 0;
+    for (;;) {
+      const auto comma = line.find(',', begin);
+      tokens.push_back(line.substr(begin, comma == std::string::npos ? comma : comma - begin));
+      if (comma == std::string::npos) break;
+      begin = comma + 1;
+    }
+    if (tokens.size() != 15 || (tokens[14] != "0" && tokens[14] != "1"))
+      throw std::runtime_error("EXTERNAL_CARRIER_EXPECTED_15_COLUMNS_VALID_0_1");
+    Baseline3dMeasurement observation;
+    observation.source = "external_carrier";
+    observation.measurement_time = number(tokens[0]);
+    observation.decision_available_time = number(tokens[1]);
+    // Current-time causal interface only: delayed-state/OOSM updates are not implemented.
+    if (observation.measurement_time != observation.decision_available_time)
+      throw std::runtime_error("EXTERNAL_CARRIER_DELAYED_OR_FUTURE_MEASUREMENT_UNSUPPORTED");
+    const double time = observation.decision_available_time;
+    if (!(time > previous)) throw std::runtime_error("EXTERNAL_CARRIER_TIMES_NOT_STRICTLY_INCREASING");
+    previous = time;
+    observation.present = true;
+    observation.valid = tokens[14] == "1";
+    observation.reason = observation.valid ? "experimental_provider_valid" : "provider_invalid";
+    for (std::size_t i = 2; i < 14; ++i) {
+      if (tokens[i].empty() && !observation.valid) continue;
+      const double value = number(tokens[i]);
+      if (i < 5) observation.ecef_m[i - 2] = value;
+      else observation.covariance_ecef_m2[(i - 5) / 3][(i - 5) % 3] = value;
+    }
+    if (observation.valid) {
+      if (!(norm(observation.ecef_m) > 0.0)) throw std::runtime_error("EXTERNAL_CARRIER_ZERO_BASELINE");
+      validateExternalCarrierCovariance(observation.covariance_ecef_m2);
+    }
+    auto found = events.find(time);
+    if (found == events.end()) {
+      GnssData row;
+      row.time = time;
+      row.has_position = row.has_velocity = row.has_yaw = false;
+      row.validity_explicit = true;
+      row.auxiliary_updates_allowed = false;
+      found = events.emplace(time, row).first;
+    }
+    found->second.baseline3d = observation;
+  }
+  std::vector<GnssData> rows;
+  for (const auto& event : events) rows.push_back(event.second);
+  return rows;
+}
+
+std::vector<double> GnssFileLoader::times() const {
+  std::vector<double> result;
+  for (const auto& row : rows_) result.push_back(row.time);
+  return result;
+}
+
 bool GnssFileLoader::next(GnssData& gnss) {
   if (index_ >= rows_.size()) {
     return false;

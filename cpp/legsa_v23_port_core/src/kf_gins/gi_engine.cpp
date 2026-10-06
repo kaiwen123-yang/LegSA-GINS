@@ -104,7 +104,8 @@ GIEngine::GIEngine(PortOptions options)
       quality_state_manager_(options_.quality_state_manager_config) {
   if (options_.dual_antenna_measurement_model == "baseline3d") {
     if (!std::isfinite(options_.baseline3d_length_m) || options_.baseline3d_length_m <= 0.0 ||
-        !std::isfinite(options_.baseline3d_k_b) || options_.baseline3d_k_b <= 0.0) {
+        (options_.baseline3d_source == "dual_pvt" &&
+         (!std::isfinite(options_.baseline3d_k_b) || options_.baseline3d_k_b <= 0.0))) {
       throw std::runtime_error("BASELINE3D_REQUIRED_POSITIVE_CONFIG");
     }
     if (options_.quality_state_manager_config.enable_multi_state_qm ||
@@ -267,7 +268,8 @@ void GIEngine::addGnssData(const GnssData& gnss) {
   gnssdata_.isvalid = gnssdata_.has_position || gnssdata_.has_velocity || gnssdata_.has_yaw;
   if (options_.dual_antenna_measurement_model == "baseline3d") {
     // A valid baseline remains an A1 observation during position/RV outages.
-    gnssdata_.isvalid = gnssdata_.isvalid || gnssdata_.baseline3d.valid;
+    gnssdata_.isvalid = gnssdata_.isvalid || gnssdata_.baseline3d.valid ||
+        (options_.baseline3d_source == "external_carrier" && gnssdata_.baseline3d.present);
   }
 }
 
@@ -419,6 +421,11 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
     apply_receiver_velocity();
     apply_yaw();
   }
+  if (!policy_gnss.auxiliary_updates_allowed) {
+    gnss.isvalid = false;
+    ++update_count_;
+    return;
+  }
   // 中文说明：raw Doppler auxiliary velocity factor 与 GNSS epoch 对齐，并在 stateFeedback 前进入 EKF。
   if (!qa_active || qa_decision.raw_doppler_action == "ACCEPT") {
     applyRawDopplerUpdateForTime(policy_gnss.time);
@@ -542,6 +549,71 @@ void GIEngine::newImuProcess() {
   }
   pvapre_ = pvacur_;
   imupre_ = imucur_;
+}
+
+void GIEngine::newImuProcessWithEvents(const std::vector<GnssData>& events) {
+  if (options_.baseline3d_source != "external_carrier" && options_.runtime_contract != "research_experiment")
+    throw std::runtime_error("EXACT_EVENT_LOOP_REQUIRES_OPT_IN");
+  if (!initialized_) return;
+  const double end = imucur_.time;
+  if (!std::isfinite(end) || !(end > imupre_.time) ||
+      !std::isfinite(imucur_.dt) || !(imucur_.dt > 0.0))
+    throw std::runtime_error("EXACT_EVENT_INVALID_IMU_INTERVAL");
+  double previous_time = imupre_.time;
+  for (const auto& event : events) {
+    if (!std::isfinite(event.time) || event.time < previous_time || event.time > end)
+      throw std::runtime_error("EXTERNAL_CARRIER_EVENT_OUTSIDE_IMU_INTERVAL");
+    if (event.time == previous_time && &event != &events.front())
+      throw std::runtime_error("EXTERNAL_CARRIER_DUPLICATE_EVENT");
+    previous_time = event.time;
+  }
+  ImuData previous = imupre_;
+  ImuData remaining = imucur_;
+  for (const auto& event : events) {
+    if (!event.auxiliary_updates_allowed && !event.baseline3d.valid) {
+      // Invalid carrier availability is a diagnostic, not a propagation boundary.
+      // This must be numerically identical to an absent observation.
+      applyBaseline3dUpdate(event, options_.enable_basic_dual_yaw_baseline, "INACTIVE", 1.0);
+      continue;
+    }
+    if (event.time > previous.time) {
+      ImuData segment = remaining;
+      if (event.time != end) {
+        const double fraction = (event.time - previous.time) / (end - previous.time);
+        segment.time = event.time;
+        segment.dtheta = scale(remaining.dtheta, fraction);
+        segment.dvel = scale(remaining.dvel, fraction);
+        // Split measured dt, not rounded timestamp elapsed; conserve all three increments.
+        segment.dt = remaining.dt * fraction;
+        segment.compensated = false;
+        remaining.dtheta = subtract(remaining.dtheta, segment.dtheta);
+        remaining.dvel = subtract(remaining.dvel, segment.dvel);
+        remaining.dt -= segment.dt;
+        remaining.compensated = false;
+      }
+      insPropagation(previous, segment);
+      previous = segment;
+      pvapre_ = pvacur_;
+    }
+    // No TIME_ALIGN_ERR snapping: no event can be used before its availability.
+    timestamp_ = event.time;
+    addGnssData(event);
+    gnssUpdate();
+    stateFeedback();
+    pvapre_ = pvacur_;
+  }
+  if (previous.time < end) {
+    insPropagation(previous, remaining);
+    previous = remaining;
+  }
+  imucur_ = previous;
+  imupre_ = imucur_;
+  timestamp_ = end;
+  pvapre_ = pvacur_;
+  if (!checkCov()) {
+    ++cov_health_fail_count_;
+    if (cov_health_fail_count_ == 1) cov_health_first_failure_time_ = timestamp_;
+  }
 }
 
 bool GIEngine::checkCov() const {
@@ -969,7 +1041,9 @@ void GIEngine::applyVelocityUpdate(GnssData& gnss) {
 }
 
 double GIEngine::dualAntennaYawPrediction() const {
-  if (options_.stage_id != "IMU_V3_TIME_CONTRACT_FIX_20261004") return pvacur_.euler_rad[2];
+  const bool projected = options_.dual_yaw_prediction_model == "lateral_projection" ||
+      (options_.dual_yaw_prediction_model == "legacy" && options_.stage_id == "IMU_V3_TIME_CONTRACT_FIX_20261004");
+  if (!projected) return pvacur_.euler_rad[2];
   // The frozen provider's heading is azimuth of body -y plus pi/2.
   // At nonzero roll/pitch this is not the ZYX Euler yaw.
   const Vec3 baseline = multiply(pvacur_.cbn, makeVec3(0., -1., 0.));
@@ -981,7 +1055,8 @@ double GIEngine::dualAntennaYawPrediction() const {
 Matrix GIEngine::dualAntennaYawJacobian() const {
   Matrix H(1, RANK, 0.0);
   H(0, PHI_ID + 2) = -1.0;
-  if (options_.stage_id == "IMU_V3_TIME_CONTRACT_FIX_20261004") {
+  if (options_.dual_yaw_prediction_model == "lateral_projection" ||
+      (options_.dual_yaw_prediction_model == "legacy" && options_.stage_id == "IMU_V3_TIME_CONTRACT_FIX_20261004")) {
     const Vec3 baseline = multiply(pvacur_.cbn, makeVec3(0., -1., 0.));
     const double horizontal_squared = baseline[0]*baseline[0] + baseline[1]*baseline[1];
     if (!(horizontal_squared > 1.e-12)) throw std::runtime_error("DUAL_YAW_HORIZONTAL_PROJECTION_UNSUPPORTED");
@@ -1061,6 +1136,9 @@ void GIEngine::applyBaseline3dUpdate(const GnssData& gnss, bool basic,
                                     const std::string& qa_action, double qa_R_scale) {
   Baseline3dDiagnostics row;
   row.time = gnss.time;
+  row.source = options_.baseline3d_source;
+  row.measurement_time = gnss.baseline3d.measurement_time;
+  row.decision_available_time = gnss.baseline3d.decision_available_time;
   row.present = gnss.baseline3d.present;
   row.valid = gnss.baseline3d.valid;
   row.qa_action = qa_action;
@@ -1079,17 +1157,26 @@ void GIEngine::applyBaseline3dUpdate(const GnssData& gnss, bool basic,
   row.pacc2_m = gnss.baseline3d.pacc2_m;
   const double variance = options_.baseline3d_k_b * options_.baseline3d_k_b *
       (row.pacc1_m * row.pacc1_m + row.pacc2_m * row.pacc2_m);
-  if (!std::isfinite(variance) || variance <= 0.0) {
+  const bool external = options_.baseline3d_source == "external_carrier";
+  if (!external && (!std::isfinite(variance) || variance <= 0.0)) {
     ++baseline3d_counts_.rejected;
     ++yaw_reject_count_;
     row.reason = "REJECT_INVALID_COVARIANCE";
     baseline3d_diagnostics_.push_back(row);
     return;
   }
-  const auto model = buildBaseline3dModel(pvacur_.cbn, gnss.baseline3d,
-                                         options_.baseline3d_length_m, options_.baseline3d_k_b);
+  if (external && (gnss.baseline3d.measurement_time != gnss.time ||
+                   gnss.baseline3d.decision_available_time != gnss.time))
+    throw std::runtime_error("EXTERNAL_CARRIER_EVENT_TIME_MISMATCH");
+  const auto model = external
+      ? buildExternalCarrierBaseline3dModel(pvacur_.cbn, pvacur_.pos_blh_rad_m,
+                                            gnss.baseline3d, options_.baseline3d_body_vector_m)
+      : buildBaseline3dModel(pvacur_.cbn, gnss.baseline3d,
+                            options_.baseline3d_length_m, options_.baseline3d_k_b);
   row.model_available = true;
-  row.observed_m = gnss.baseline3d.ned_m;
+  row.observed_m = external ? subtract(model.predicted_m, model.residual_m) : gnss.baseline3d.ned_m;
+  for (std::size_t i = 0; i < 3; ++i) for (std::size_t j = 0; j < 3; ++j)
+    row.covariance_ned_m2[i][j] = model.R(i, j);
   row.predicted_m = model.predicted_m;
   row.residual_m = model.residual_m;
   row.pacc1_m = gnss.baseline3d.pacc1_m;
@@ -1128,11 +1215,12 @@ void GIEngine::applyBaseline3dUpdate(const GnssData& gnss, bool basic,
     metadata.source = source_aware::MeasurementSource::kDualAntennaYaw;
     metadata.time = gnss.time;
     metadata.valid = true;
-    metadata.baseline_length_m = norm(gnss.baseline3d.ned_m);
+    metadata.baseline_length_m = norm(row.observed_m);
     metadata.rel_acc_m = std::sqrt(model.R(0, 0));
     metadata.yaw_std_rad = metadata.rel_acc_m / options_.baseline3d_length_m;
-    metadata.std_xyz = makeVec3(metadata.rel_acc_m, metadata.rel_acc_m, metadata.rel_acc_m);
-    metadata.provider_status = "baseline3d";
+    metadata.std_xyz = external ? makeVec3(std::sqrt(model.R(0, 0)), std::sqrt(model.R(1, 1)), std::sqrt(model.R(2, 2)))
+                                : makeVec3(metadata.rel_acc_m, metadata.rel_acc_m, metadata.rel_acc_m);
+    metadata.provider_status = external ? "external_carrier_experimental" : "baseline3d";
     metadata.quality_flag = "nominal";
     // Preserve existing SA semantics: its helper uses dz, while the B3 hard NIS
     // above uses dz-Hdx at this sequential update slot. Neither changes scalar SA.
@@ -1163,7 +1251,10 @@ void GIEngine::writeBaseline3dDiagnostics(const std::string& output_dir) const {
   out << "time,model,present,valid,attempt,accepted,rejected,reason,"
          "z_n_m,z_e_m,z_d_m,h_n_m,h_e_m,h_d_m,dz_n_m,dz_e_m,dz_d_m,"
          "innovation_n_m,innovation_e_m,innovation_d_m,pAcc1_m,pAcc2_m,base_variance_m2,"
-         "along_axis_residual_m,length_mismatch_m,nis_actual_innovation,dof,qa_action,qa_R_scale,sa_R_scale\n";
+         "along_axis_residual_m,length_mismatch_m,nis_actual_innovation,dof,qa_action,qa_R_scale,sa_R_scale";
+  const bool external = options_.baseline3d_source == "external_carrier";
+  if (external) out << ",source,measurement_time,decision_available_time,R_nn,R_ne,R_nd,R_en,R_ee,R_ed,R_dn,R_de,R_dd";
+  out << '\n';
   for (const auto& row : baseline3d_diagnostics_) {
     out << row.time << ",baseline3d," << row.present << ',' << row.valid << ','
         << row.attempted << ',' << row.accepted << ','
@@ -1176,13 +1267,21 @@ void GIEngine::writeBaseline3dDiagnostics(const std::string& output_dir) const {
     for (const auto& vector : {row.predicted_m, row.residual_m, row.innovation_m}) {
       for (double value : vector) cell(value, row.model_available);
     }
-    cell(row.pacc1_m, row.valid);
-    cell(row.pacc2_m, row.valid);
+    cell(row.pacc1_m, row.valid && !external);
+    cell(row.pacc2_m, row.valid && !external);
     cell(row.base_variance_m2, row.model_available);
     cell(row.along_axis_residual_m, row.model_available);
     cell(row.length_mismatch_m, row.model_available);
     cell(row.nis, row.nis_available);
-    out << ",3," << row.qa_action << ',' << row.qa_R_scale << ',' << row.sa_R_scale << '\n';
+    out << ",3," << row.qa_action << ',' << row.qa_R_scale << ',' << row.sa_R_scale;
+    if (external) {
+      out << ',' << row.source;
+      cell(row.measurement_time, row.present);
+      cell(row.decision_available_time, row.present);
+      for (const auto& values : row.covariance_ned_m2)
+        for (double value : values) cell(value, row.model_available);
+    }
+    out << '\n';
   }
   if (!out) throw std::runtime_error("BASELINE3D_DIAGNOSTICS_WRITE_FAILED");
 }
@@ -1194,6 +1293,8 @@ void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
   const RawDopplerVelocityMeasurement* best = nullptr;
   double best_dt = options_.raw_doppler_config.raw_doppler_time_tolerance_sec;
   for (const auto& measurement : raw_doppler_measurements_) {
+    if (options_.runtime_contract == "research_experiment" &&
+        (measurement.time > update_time || measurement.time <= research_last_rd_attempt_time_)) continue;
     const double dt = std::fabs(measurement.time - update_time);
     if (dt <= best_dt) {
       best = &measurement;
@@ -1203,6 +1304,7 @@ void GIEngine::applyRawDopplerUpdateForTime(double update_time) {
   if (!best) {
     return;
   }
+  if (options_.runtime_contract == "research_experiment") research_last_rd_attempt_time_ = best->time;
   if (!RawDopplerFactor::isProviderBacked(*best) || best->sat_count < options_.raw_doppler_config.raw_doppler_min_sat) {
     ++raw_doppler_status_.reject_count;
     return;
@@ -1276,6 +1378,8 @@ void GIEngine::applyGo2AttitudeWeakPriorForTime(double update_time) {
   const Go2AttitudeWeakPriorMeasurement* best = nullptr;
   double best_dt = options_.go2_attitude_prior_config.go2_attitude_prior_time_tolerance_sec;
   for (const auto& measurement : go2_attitude_priors_) {
+    if (options_.runtime_contract == "research_experiment" &&
+        (measurement.time > update_time || measurement.time <= research_last_rp_attempt_time_)) continue;
     const double dt = std::fabs(measurement.time - update_time);
     if (dt <= best_dt) {
       best = &measurement;
@@ -1285,6 +1389,7 @@ void GIEngine::applyGo2AttitudeWeakPriorForTime(double update_time) {
   if (!best) {
     return;
   }
+  if (options_.runtime_contract == "research_experiment") research_last_rp_attempt_time_ = best->time;
   if (!Go2WeakPriorFactor::isActive(*best)) {
     ++go2_attitude_prior_status_.reject_count;
     return;
@@ -1627,6 +1732,7 @@ void GIEngine::enrichGo2ReadinessMetadata(source_aware::SourceMetadata& metadata
   const Go2ReadinessLsimMetadataMeasurement* best = nullptr;
   double best_dt = options_.go2_readiness_lsim_metadata_config.go2_readiness_lsim_time_tolerance_sec;
   for (const auto& measurement : go2_readiness_lsim_metadata_) {
+    if (options_.runtime_contract == "research_experiment" && measurement.time > update_time) continue;
     if (measurement.source_status != "active" || !measurement.source_valid) {
       continue;
     }

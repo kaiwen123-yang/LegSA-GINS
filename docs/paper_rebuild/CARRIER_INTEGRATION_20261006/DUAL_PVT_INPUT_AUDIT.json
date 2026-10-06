@@ -1,0 +1,61 @@
+{
+  "source": {
+    "path": "<CLEAN_ROOT>/stages/CLEAN7_T5BC_V3_CANDIDATE_PILOT/03_PROVIDER_TABLES/BY2/B3/baseline3d.csv",
+    "sha256": "115840838923ea4132b195a5e1308c1d5a5c8d0f1978114e2fe613d2bb5afe41"
+  },
+  "provider_manifest": {
+    "path": "<CLEAN_ROOT>/stages/CLEAN7_T5BC_V3_CANDIDATE_PILOT/03_PROVIDER_TABLES/BY2/PROVIDER_MANIFEST.json",
+    "sha256": "4f354c413dadb14bce9f6f3f9c0560bc786e47c6457bf2d2765796d368c09783"
+  },
+  "prepared_manifest": {
+    "path": "<CLEAN_ROOT>/stages/CLEAN7_T5BC_V3_CANDIDATE_PILOT/03_PROVIDER_TABLES/BY2/PREPARED_RAW_MANIFEST.json",
+    "sha256": "be139e0a3787bcca627025b0ff67fc007c3cf3f2ccc8eee2e845a7538787ab9f"
+  },
+  "observation_manifest": {
+    "path": "<CLEAN_ROOT>/stages/CLEAN7_T5BC_V3_CANDIDATE_PILOT/01_CALIBRATION/BY2/RAW_OBSERVATIONS/OBSERVATION_MANIFEST.json",
+    "sha256": "a0209d9746a215d966de26224d23267948a4d5a90ce84c52a5209ed5bf38d08d"
+  },
+  "raw_source_hashes_inherited_not_rehashed": {
+    "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+    "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-raw.csv": "39249696329530452a1049b5b39e2c1d8f7e89ae2190d2c95bce70f5b4f44583"
+  },
+  "origin_ecef_m": [
+    -2171613.3981999997,
+    4385611.7675,
+    4076721.9435
+  ],
+  "ecef_to_fixed_ned": [
+    [
+      0.28514433788619087,
+      -0.5758540469064211,
+      0.7662146065123943
+    ],
+    [
+      -0.8961526644772995,
+      -0.44374587541771776,
+      0.0
+    ],
+    [
+      0.34000457132468453,
+      -0.6866452611875077,
+      -0.6425847623209383
+    ]
+  ],
+  "gate": {
+    "passed": true,
+    "exact_time_tokens": true,
+    "row_count": 1510,
+    "invalid_count": 0,
+    "zero_covariance_rows_for_native_rejection": 0
+  },
+  "covariance_rule": "native k_b^2*(pAcc1^2+pAcc2^2) * I",
+  "k_b": 1.0,
+  "historical_calibrated_k_b_reused": false,
+  "fixed_NED_origin": "first simultaneous GNSS1 HP position before start",
+  "source_position_messages_not_carrier_AR": true,
+  "audit_scope": "Saved source-backed sidecar and small manifests only; no raw/reference read or solver",
+  "source_config": {
+    "path": "<SCRATCH>/IMU_V3_FIX_20261004/stage_07/CONFIGS/IMUFIX_BY2_F04_S00.yaml",
+    "sha256": "1c55efce0e49cd2408cff4d1f2384e13b056a2a1b4b3cf38e1367f564c7efa34"
+  }
+}

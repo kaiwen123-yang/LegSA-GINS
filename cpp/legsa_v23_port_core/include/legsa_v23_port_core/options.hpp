@@ -27,6 +27,9 @@ struct PortOptions {
   std::string run_label = "N4H4R2_synthetic_math";
   // 中文说明：CLEAN1 formal identity 与历史 phase 路由分离；非 formal 入口保持原 smoke/toy 语义。
   bool clean1_formal_mode = false;
+  std::string runtime_contract = "legacy";
+  // Explicit model choice for new experiments; legacy preserves historical routing.
+  std::string dual_yaw_prediction_model = "legacy";
   // CLEAN1R2R1 专用：使用 exact final_v23 的 15 列 implicit-all-valid GNSS
   // 和“首个 aligned IMU 只初始化、不写 NAV/STD”语义。旧 CLEAN1 运行保持原样。
   bool clean_final_v23_parity_mode = false;
@@ -41,6 +44,10 @@ struct PortOptions {
   // T5bc opt-in only. Zero denotes unset, never a scientific default.
   std::string dual_antenna_measurement_model = "scalar";
   std::string baseline3d_path;
+  // Explicit opt-in. The legacy dual-PVT path and scalar path retain their defaults.
+  std::string baseline3d_source = "dual_pvt";
+  std::string external_carrier_baseline_path;
+  Vec3 baseline3d_body_vector_m = makeVec3(0.0, 0.0, 0.0);
   double baseline3d_length_m = 0.0;
   double baseline3d_k_b = 0.0;
   Baseline3dCounts baseline3d_counts;

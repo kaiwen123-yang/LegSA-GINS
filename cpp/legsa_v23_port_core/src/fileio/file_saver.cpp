@@ -164,7 +164,7 @@ void writeActualSolverInputPaths(std::ostream& out, const PortOptions& options) 
   add("propagation_imu", options.imu_path);
   add("gnss_position_receiver_velocity_dual_yaw", options.gnss_path);
   if (options.dual_antenna_measurement_model == "baseline3d") {
-    add("dual_antenna_baseline3d", options.baseline3d_path);
+    add("dual_antenna_baseline3d", options.baseline3d_source == "external_carrier" ? options.external_carrier_baseline_path : options.baseline3d_path);
   }
   if (options.raw_doppler_config.enable_raw_doppler) {
     add("raw_doppler_velocity", options.raw_doppler_config.raw_doppler_factor_path);
@@ -190,7 +190,7 @@ void writeActualSolverInputRoles(std::ostream& out, const PortOptions& options) 
   out << "{\"propagation_imu\": \"source_backed_propagation\", "
       << "\"gnss_position_receiver_velocity_dual_yaw\": \"validity_gated_measurements\"";
   if (options.dual_antenna_measurement_model == "baseline3d") {
-    out << ", \"dual_antenna_baseline3d\": \"three_dimensional_gnss_baseline_measurement\"";
+    out << ", \"dual_antenna_baseline3d\": \"" << (options.baseline3d_source == "external_carrier" ? "experimental_external_carrier_baseline_full_covariance" : "three_dimensional_gnss_baseline_measurement") << "\"";
   }
   if (options.raw_doppler_config.enable_raw_doppler) {
     out << ", \"raw_doppler_velocity\": \"source_backed_auxiliary_velocity\"";
@@ -756,13 +756,31 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
         << "  \"baseline3d_missing_exact_time_count\": " << options.baseline3d_counts.missing << ",\n"
         << "  \"baseline3d_scalar_yaw_observation_used\": false,\n"
         << "  \"baseline3d_formal_a1_counter_alias\": \"yaw_and_dual_yaw_counters\",\n"
-        << "  \"baseline3d_frame_contract\": \"observation_NED_equals_Cbn_NED_no_additional_rotation\",\n"
+        << "  \"baseline3d_frame_contract\": \""
+        << (options.baseline3d_source == "external_carrier" ? "GNSS2_minus_GNSS1_ECEF_rotated_to_Cbn_NED_body_vector_FRD" : "observation_NED_equals_Cbn_NED_no_additional_rotation") << "\",\n"
         << "  \"baseline3d_nis_definition\": \"(dz-Hdx)^T(HPH^T+R_QA)^-1(dz-Hdx)\",\n"
         << "  \"baseline3d_source_aware_innovation_definition\": \"existing_policy_uses_dz_dof3\",\n"
         << "  \"baseline3d_nonbasic_nis_threshold\": 11.34,\n"
         << "  \"baseline3d_nis_gate_enabled\": "
         << (!options.enable_basic_dual_yaw_baseline && options.yaw_scheme_C_enabled ? "true" : "false")
         << ",\n";
+  }
+  if (options.runtime_contract == "research_experiment") {
+    out << "  \"research_event_schedule\": \"exact_measurement_time_with_IMU_increment_splitting\",\n"
+        << "  \"research_RD_RP_policy\": \"past_only_each_source_timestamp_attempted_at_most_once\",\n"
+        << "  \"runtime_contract\": \"research_experiment\",\n"
+        << "  \"dual_yaw_prediction_model\": \"" << escapeJson(options.dual_yaw_prediction_model) << "\",\n";
+  }
+  if (options.baseline3d_source == "external_carrier") {
+    out << "  \"baseline3d_source\": \"external_carrier\",\n"
+        << "  \"external_carrier_baseline_path\": \"" << escapeJson(options.external_carrier_baseline_path) << "\",\n"
+        << "  \"external_carrier_body_vector_frd_m\": [" << options.baseline3d_body_vector_m[0] << ','
+        << options.baseline3d_body_vector_m[1] << ',' << options.baseline3d_body_vector_m[2] << "],\n"
+        << "  \"external_carrier_covariance\": \"full_ECEF_m2_rotated_to_current_state_NED\",\n"
+        << "  \"external_carrier_time_contract\": \"measurement_time_equals_decision_available_time_no_backdating\",\n"
+        << "  \"external_carrier_valid_is_trusted_FIX\": false,\n"
+        << "  \"external_carrier_pacc_used\": false,\n"
+        << "  \"external_carrier_k_b_used\": false,\n";
   }
   out << "  \"actual_solver_input_paths\": ";
   writeActualSolverInputPaths(out, options);

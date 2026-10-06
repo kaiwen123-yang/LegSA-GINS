@@ -57,6 +57,8 @@ class GIEngine {
   void EKFUpdate(const std::vector<double>& dz, const Matrix& H, const Matrix& R);
   void stateFeedback();
   void newImuProcess();
+  // Exact-time event queue for the opt-in carrier source; consumes every event once.
+  void newImuProcessWithEvents(const std::vector<GnssData>& events);
   bool checkCov() const;
 
   const NavState& navState() const;
@@ -178,6 +180,8 @@ class GIEngine {
   std::vector<double> fgo_feedback_velocity_norms_;
   std::vector<double> fgo_feedback_attitude_norms_deg_;
   double last_fgo_feedback_time_ = -1.0e100;
+  double research_last_rp_attempt_time_ = -1.0e100;
+  double research_last_rd_attempt_time_ = -1.0e100;
   quality_aware::QAFallbackSupervisor qa_fallback_supervisor_;
   source_aware::SourceAwarePolicy source_aware_policy_;
   source_aware::QualityStateManager quality_state_manager_;
