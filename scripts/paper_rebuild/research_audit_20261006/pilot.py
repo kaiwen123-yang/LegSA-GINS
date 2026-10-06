@@ -164,7 +164,7 @@ def prepare(a):
  def add(case,source,gnss=None):
   payload=Path(source['children'][0]['config']['path']).read_bytes()
   for mode in (0,1,2):
-   rid=f'{case}_M{mode}';fields={'run_id':rid,'run_label':rid,'protocol_id':'RESEARCH_AUDIT_CAUSAL_AID_PILOT_20261006','outputpath':str(st/'NATIVE'/rid)}
+   rid=f'{case}_M{mode}';fields={'run_id':rid,'run_label':rid,'outputpath':str(st/'NATIVE'/rid)}
    if mode==2:fields['go2_horizontal_velocity_prior_path']=str(target)
    if gnss:fields['gnsspath']=str(gnss)
    data,changes=clone_fields(payload,fields);cfg=st/'CONFIGS'/f'{rid}.yaml';cfg.parent.mkdir(exist_ok=True);cfg.write_bytes(data)

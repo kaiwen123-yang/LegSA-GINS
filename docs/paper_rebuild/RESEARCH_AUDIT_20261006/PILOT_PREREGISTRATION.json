@@ -1,11 +1,11 @@
 {
-  "status": "READY_FOR_GIT_FREEZE_NATIVE_NOT_RUN",
+  "status": "TRANSPORT_METADATA_CORRECTED_READY_FOR_REFREEZE",
   "native_invocations": 0,
   "evaluation_invocations": 0,
   "base_commit": "d216bf5387e76de41e71e7deca0752cc00cfe0f1",
   "binary_sha256": "3805d2d2b0f52063da48d52b23fca2f88c4b5f9ef19adc9bfd48f5fe920701e7",
-  "plan_sha256": "1135284d32e0c552fd244eebbd97e9548d26c19257555588d6b26bd298b75a67",
-  "helper_sha256": "9af414359ad7c47bc42ed98eed130afcebef70c1109669c0051f72edea2de908",
+  "plan_sha256": "697987be3b40c31018f91b7711b4b5abc4c9d50a3b2dc4d45f1b7115b3973a9e",
+  "helper_sha256": "29d1209a78a56e76057d59f69e778ce343813570888e5ab5543df94c1df7b046",
   "unit_tests": {
     "status": "PASS",
     "max_body_jacobian_error": 2.97396e-10,
@@ -143,7 +143,8 @@
     "fields": [
       "stamp.sec",
       "stamp.nanosec",
-      "velocity"
+      "velocity",
+      "error_code"
     ],
     "inherited_scale": 1.0393476222844444,
     "raw_error_code_all_zero": true,
@@ -157,28 +158,28 @@
       "run_id": "C00_M0",
       "case": "C00",
       "mode": 0,
-      "config_sha256": "0004b221dc9fd22ad42ed3ae8762dacfbc1897bfa73048f6bd287cf27c3a5f5f",
+      "config_sha256": "733a86be774c3cae5a20726af3f54a962632f5d30b89ee234bc352c230aca443",
       "outage": null
     },
     {
       "run_id": "C00_M1",
       "case": "C00",
       "mode": 1,
-      "config_sha256": "72e49bd4f65852edaef355e1509f3c8921bbebac69e611af23cb352c401ff927",
+      "config_sha256": "521701593b22799450f709bd73f02d37f9aa400dc36f32c8f5a01585aeee0685",
       "outage": null
     },
     {
       "run_id": "C00_M2",
       "case": "C00",
       "mode": 2,
-      "config_sha256": "3c005a9bd45d81c7134c627864566d2dad9cb23caa503374ac387d4244c94807",
+      "config_sha256": "ca31fc03cd4cdb18fc571ff786558abbcb4c1faa9fdecd8b0b8a57189d29cbd7",
       "outage": null
     },
     {
       "run_id": "D61_20s_seed_00_M0",
       "case": "D61_20s_seed_00",
       "mode": 0,
-      "config_sha256": "7c5ee2e279730d07bd5bb6cd776c19a0cf34ba1352577b42c5b1fd7b0cf37da3",
+      "config_sha256": "33471e1da221381d044880543700d890e7cd6c7e4d5dee9d0d860e0895f7bf75",
       "outage": [
         196.2,
         216.2
@@ -188,7 +189,7 @@
       "run_id": "D61_20s_seed_00_M1",
       "case": "D61_20s_seed_00",
       "mode": 1,
-      "config_sha256": "5d2687d4752367de3e37955899a7f3b921d85c8469862361bced2fd3fd274dcd",
+      "config_sha256": "4f35a52d6dd8b1e1b2a8e48a87f21e7b4050a97052e2b33b7f44d54819765640",
       "outage": [
         196.2,
         216.2
@@ -198,7 +199,7 @@
       "run_id": "D61_20s_seed_00_M2",
       "case": "D61_20s_seed_00",
       "mode": 2,
-      "config_sha256": "e8687b4ec3e3be6e0b8a78d9f3c57d5d710d2c6f07f6e2c5b8df6bb6eeee0e0d",
+      "config_sha256": "49c2a249fc6b95b5f516c17c2be690e5de685d5f2fbef14272c0bc87832cfbde",
       "outage": [
         196.2,
         216.2
@@ -208,7 +209,7 @@
       "run_id": "D62_20s_seed_00_M0",
       "case": "D62_20s_seed_00",
       "mode": 0,
-      "config_sha256": "81ac39dbbb9cfb6960f7c45438d14a4e9d8cf21281044121b1a23354bc8be0bf",
+      "config_sha256": "7b518189cfebbe72c744901a28b8f73aa35ed54512e2f2ab32455603816c4658",
       "outage": [
         196.2,
         216.2
@@ -218,7 +219,7 @@
       "run_id": "D62_20s_seed_00_M1",
       "case": "D62_20s_seed_00",
       "mode": 1,
-      "config_sha256": "519bd987d28299ec87520c0be26f78a45a13fff28defd723b84382535fb3c54e",
+      "config_sha256": "5f1b0f607fa0a99c68d3e0e66d06674b2320474b5cdf89a1d3cf9f586d961d28",
       "outage": [
         196.2,
         216.2
@@ -228,7 +229,7 @@
       "run_id": "D62_20s_seed_00_M2",
       "case": "D62_20s_seed_00",
       "mode": 2,
-      "config_sha256": "2cec16f493fa12b1bc18c7cac50bf19c794e255360701bc93d5b94537aa6750c",
+      "config_sha256": "bf688d2fe8d1511f9edaa0ef12a3658eec9b06bb6008b9398ad15503d19cf6f1",
       "outage": [
         196.2,
         216.2
@@ -238,7 +239,7 @@
       "run_id": "D61_NO_RECORDS_M0",
       "case": "D61_NO_RECORDS",
       "mode": 0,
-      "config_sha256": "6a6ffcd7a1510e2852f803ef0d2a663271869e25c3c09a2d7fbed8c926388b1a",
+      "config_sha256": "c47237a915df3119e6dc0e8731f007bdfa016527f816bb5b27504d69033ccc1b",
       "outage": [
         196.2,
         216.2
@@ -248,7 +249,7 @@
       "run_id": "D61_NO_RECORDS_M1",
       "case": "D61_NO_RECORDS",
       "mode": 1,
-      "config_sha256": "d0439b688a96a22c10bac6cb574dee5c27396c159367e0b65a618518f6285095",
+      "config_sha256": "d26427868e11fd3a113d7b2edab6f250b02d3ac057aecc4b07b78aea1ba3c277",
       "outage": [
         196.2,
         216.2
@@ -258,11 +259,15 @@
       "run_id": "D61_NO_RECORDS_M2",
       "case": "D61_NO_RECORDS",
       "mode": 2,
-      "config_sha256": "f417ffa75470765625520d2387d7a9abb95ff95f8f94f32de343f5b4237779c0",
+      "config_sha256": "f4c095d3622034c2f260e542917d856274fd26a01a7dac931828f0eca51a3d7a",
       "outage": [
         196.2,
         216.2
       ]
     }
-  ]
+  ],
+  "previous_binary_invocations": 1,
+  "previous_input_read": false,
+  "native_state_runs": 0,
+  "active_attempt": "ATTEMPT_02"
 }
