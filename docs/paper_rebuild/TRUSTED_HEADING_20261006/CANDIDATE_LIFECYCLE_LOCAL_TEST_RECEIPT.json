@@ -1,0 +1,135 @@
+{
+  "status": "PASS_LOCAL_QUALIFICATION_ONLY_REAL_EXECUTION_NOT_STARTED",
+  "unique_test_functions": 16,
+  "pytest_test_instances": 19,
+  "sequence": [
+    "16 PASS in 0.41s first full new suite",
+    "1 PASS/15 deselected in 0.40s, changed source length and serialized identity binding test only",
+    "1 PASS/15 deselected in 0.39s, changed horizontal covariance guard test only",
+    "1 PASS/15 deselected in 0.39s, changed finite-overflow guard test only"
+  ],
+  "old_test_suites_rerun": 0,
+  "fixed_integer_GLS_api_calls_total": 17,
+  "single_fault_GLRT_api_calls_total": 16,
+  "integer_enumeration_calls": 0,
+  "native_decorrelation_calls": 0,
+  "CILS_calls": 0,
+  "real_model_reads": 0,
+  "raw_UBX_reads": 0,
+  "reference_reads": 0,
+  "navigation_calls": 0,
+  "real_lifecycle_slots": 0,
+  "runs": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "tests/paper_rebuild/test_carrier_candidate_lifecycle.py",
+        "-q",
+        "-s"
+      ],
+      "returncode": 0,
+      "wall_s": 0.6008065409999972,
+      "source_sha256": {
+        "src/legsa_gins/paper_rebuild/carrier_phase/candidate_lifecycle.py": "b03cec0fb6b1f2771c1e1fcf68cfd27873e7a14e4dd74fbdb96da24a49aafaec",
+        "tests/paper_rebuild/test_carrier_candidate_lifecycle.py": "b144543fe276c278b2dbe8c53d7d8aed59867171828ee33730433c73e2767c35"
+      },
+      "scope": "local synthetic only; old tests not rerun; real lifecycle 0",
+      "scratch_alias": "<TRUSTED_HEADING>/CANDIDATE_LIFECYCLE_LOCAL_UNITS_ATTEMPT01",
+      "persistent_logs": {
+        "stdout.txt": "bd1e93c4da7e3793bc903bdb207b40e9a9924c85c80c9cf04f52c5db39bfd73b",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "tests/paper_rebuild/test_carrier_candidate_lifecycle.py",
+        "-q",
+        "-s",
+        "-k",
+        "test_06"
+      ],
+      "returncode": 0,
+      "wall_s": 0.5889855810000313,
+      "reason": "new source length/serialized fingerprint binding; only changed test_06 rerun, other15 not repeated",
+      "GLS_calls": 0,
+      "GLRT_calls": 0,
+      "enumeration_calls": 0,
+      "real_model_reads": 0,
+      "source_sha256": {
+        "src/legsa_gins/paper_rebuild/carrier_phase/candidate_lifecycle.py": "c08745178ff239bd662697f537d4ad4bf80dfed4f1823da71a980718b999c271",
+        "tests/paper_rebuild/test_carrier_candidate_lifecycle.py": "975436e86a757f5b9e16b2cf0e8408d69b7ff317fdf5e0e01b20f735a7f090cc"
+      },
+      "scratch_alias": "<TRUSTED_HEADING>/CANDIDATE_LIFECYCLE_SOURCE_BINDING_UNITS",
+      "persistent_logs": {
+        "stdout.txt": "249fb277aef5022974c5e762afc99b7a951dbc26ceb1da2e45fd596872b7a5f1",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "tests/paper_rebuild/test_carrier_candidate_lifecycle.py",
+        "-q",
+        "-s",
+        "-k",
+        "test_11"
+      ],
+      "returncode": 0,
+      "wall_s": 0.5831719029999931,
+      "reason": "root-requested positive finite horizontal covariance eigenvalue guard; only modified test_11 rerun",
+      "GLS_calls": 2,
+      "GLRT_calls": 2,
+      "enumeration_calls": 0,
+      "real_model_reads": 0,
+      "source_sha256": {
+        "src/legsa_gins/paper_rebuild/carrier_phase/candidate_lifecycle.py": "cd8193cf3209a6568897a3326b81634c8d2ca7cb10c7315588b7a7d84096bc05",
+        "tests/paper_rebuild/test_carrier_candidate_lifecycle.py": "81a5c7dbd07e0bef816562e57a006408c88d84a46674b321d152fad0e653c663"
+      },
+      "scratch_alias": "<TRUSTED_HEADING>/CANDIDATE_LIFECYCLE_HORIZONTAL_GUARD_UNITS",
+      "persistent_logs": {
+        "stdout.txt": "e5c63a986d55699b35b453ebc9b2adf3ea8df8366b7181993b090466a496e3dc",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "tests/paper_rebuild/test_carrier_candidate_lifecycle.py",
+        "-q",
+        "-s",
+        "-k",
+        "test_15"
+      ],
+      "returncode": 0,
+      "wall_s": 0.6015282339999999,
+      "reason": "finite overflow must be UNQUALIFIED, not a false empty current class; only modified test_15 rerun",
+      "GLS_calls": 1,
+      "GLRT_calls": 0,
+      "enumeration_calls": 0,
+      "real_model_reads": 0,
+      "source_sha256": {
+        "src/legsa_gins/paper_rebuild/carrier_phase/candidate_lifecycle.py": "2eaa2299c997cf61919df371484b75a33c54e693dd092af7bdf842951b6a693a",
+        "tests/paper_rebuild/test_carrier_candidate_lifecycle.py": "d2d927a12e5bf114c7fb70a19fb5224a4e8946faea4b10c4d61df98399c7f32f"
+      },
+      "scratch_alias": "<TRUSTED_HEADING>/CANDIDATE_LIFECYCLE_FINITE_DOMAIN_UNITS",
+      "persistent_logs": {
+        "stdout.txt": "3561137387c2c3848dc7577ebee8d6c0d365e498ed916ae50a4cc45221603651",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "final_source_pins": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/candidate_lifecycle.py": "2eaa2299c997cf61919df371484b75a33c54e693dd092af7bdf842951b6a693a",
+    "tests/paper_rebuild/test_carrier_candidate_lifecycle.py": "d2d927a12e5bf114c7fb70a19fb5224a4e8946faea4b10c4d61df98399c7f32f",
+    "scripts/paper_rebuild/carrier_phase/candidate_lifecycle_pilot.py": "ab092f8941afbc49be0715999a1abc6b53e3fde1114d3636ab82993e836edf1f"
+  }
+}

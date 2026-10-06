@@ -1,0 +1,147 @@
+{
+  "status": "LOCAL_IMPLEMENTATION_AND_TARGETED_TESTS_AUTHORIZED_REAL_EXECUTION_NOT_AUTHORIZED",
+  "scope": "per-current-slot conditional domains of full saved source sets; no manuscript or navigation",
+  "source_registration_commit": "78114f5019e2ec1586df0be9fb680194434fe55a",
+  "source_alias": "<TRUSTED_HEADING>/CANDIDATE_ENVELOPE_PILOT_ATTEMPT01",
+  "source_details_sha256": "f676ea6f258e5b666724234a806090327896313168394db339a30a284f6d82d1",
+  "start_indices": [
+    0,
+    100,
+    200,
+    300,
+    400,
+    500,
+    600,
+    700,
+    800,
+    900,
+    1000,
+    1100
+  ],
+  "selection_offsets": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "future_offsets": [
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "source_candidates_per_window": [
+    6,
+    1,
+    2,
+    4,
+    2,
+    1,
+    4,
+    1,
+    2,
+    0,
+    0,
+    0
+  ],
+  "source_candidate_total": 23,
+  "slot_records": 60,
+  "permanent_retirement": "physical SD arc only; no token resurrection",
+  "temporary_rejection": "current residual/length/phase or insufficient publication geometry never deletes origin integer",
+  "current_raw_cost": {
+    "threshold": "chi2.ppf(0.99, len(current_transported_y))",
+    "dimension": "n not n-p",
+    "full_continuous_domain": true,
+    "physical_coverage_probability": null,
+    "working_coverage": 0.99
+  },
+  "length": {
+    "m": 0.35,
+    "filter": "full-domain radial necessary condition only",
+    "sphere_feasibility_proved": false
+  },
+  "phase_quality": {
+    "family_alpha": 0.01,
+    "family": "existing per-projected-class observable physical SD template family",
+    "multiple_testing": "Holm",
+    "significant_class_removed_from_union": false,
+    "lifecycle_false_fix_risk": null,
+    "pooled_across_classes": false,
+    "zero_effect": "strict U F column zero AND GLS baseline gain zero => NA_NO_CURRENT_EFFECT",
+    "dangerous_unobservable": "residual unobservable with nonzero baseline gain => UNQUALIFIED_CURRENT_QUALITY",
+    "aliases_alone_reject": false
+  },
+  "geometry": {
+    "minimum_phase_rows": 4,
+    "phase_B_rank": 3
+  },
+  "budgets": {
+    "fixed_integer_GLS_calls_max": 115,
+    "single_fault_GLRT_calls_max": 115,
+    "integer_enumeration_calls": 0,
+    "LAMBDA_calls": 0,
+    "CILS_calls": 0,
+    "sphere_optimization_calls": 0,
+    "raw_UBX_reads": 0,
+    "reference_reads": 0,
+    "navigation_calls": 0,
+    "evaluator_calls": 0,
+    "suggested_total_wall_limit_s": 120,
+    "retries": 0,
+    "replacement_windows": 0
+  },
+  "outputs": {
+    "accepted_integer_measurement": false,
+    "all_global_current_alternatives_covered": false,
+    "search_certificate_transferred": false,
+    "false_fix_probability": null
+  },
+  "execution_authorized_by_this_file": false,
+  "local_tests_max": 16,
+  "input_pins": {
+    "source_complete_sha256": "f8df53d9dd9900980351bf6ed5d2a59ffda6070fcd4994eb6a00893c74cf4652",
+    "source_output_seal_sha256": "3b11192e1893cdfc875b078eb032283e6df3a7b101417d17ae2ec211fe6ee899",
+    "prepared_plan_sha256": "4eeb5f4536d0ac20e1ed68247d123ef5798980b0bfc6bed723fc09b54563c82e",
+    "model_pin_audit_sha256": "90a1a974dcd32b10514c567ac168b44977fd3b4d5a485e0ff95d5456c9d1ef1c",
+    "arc_events_sha256": "145199f5c1b4eee6ff57e718d33a2c1e4654eaf4745c5c68ff8001f109ff79c9"
+  },
+  "runner": "scripts/paper_rebuild/carrier_phase/candidate_lifecycle_pilot.py",
+  "output_alias": "<TRUSTED_HEADING>/CANDIDATE_LIFECYCLE_PILOT_ATTEMPT01",
+  "launch_environment": {
+    "PYTHONPATH": "<REPO>/src",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "PYTHONUNBUFFERED": "1"
+  },
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/candidate_lifecycle_pilot.py": "ab092f8941afbc49be0715999a1abc6b53e3fde1114d3636ab82993e836edf1f",
+    "scripts/paper_rebuild/carrier_phase/trusted_heading_arc_support_audit.py": "ca497a89e20fcfb629f0b2c321e78586d38154e52d16f64bf6511ad9aff37144",
+    "scripts/paper_rebuild/carrier_phase/trusted_heading_projected_fixed_n.py": "f4bdd49aa557aa57b96590d7d837aa0cfb0960fcc158250e4a5aefad25930650",
+    "src/legsa_gins/__init__.py": "996a06df703fd19f79cb4b8bee3ba2cbf917e35d9f25d06c21a29c7a0831715a",
+    "src/legsa_gins/paper_rebuild/__init__.py": "268d06de2fa275e95ea3319111f359187f492c66e812b1be1ccd07812f6014e9",
+    "src/legsa_gins/paper_rebuild/carrier_phase/admission.py": "6a84ca69fa3d815967f147677dd75f0f22da1c0acb344b40eeca9eb3e4e532c2",
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_projection.py": "dbe9de05b5b2ac421483ca5baab1b32ec0b2a37decdb304af3da000b3b46bd31",
+    "src/legsa_gins/paper_rebuild/carrier_phase/arc_relations.py": "3d1a433f012b6def3798b6945ade03713890508d0f32ace77629c74281eaff4b",
+    "src/legsa_gins/paper_rebuild/carrier_phase/candidate_envelope.py": "082e7b2aaaa8e43a3f41c6cef4bef92e76e203c101de692c159e6cc9f17b9ae1",
+    "src/legsa_gins/paper_rebuild/carrier_phase/candidate_lifecycle.py": "2eaa2299c997cf61919df371484b75a33c54e693dd092af7bdf842951b6a693a",
+    "src/legsa_gins/paper_rebuild/carrier_phase/faults.py": "66ea331d87e3eacc8816ee199156fd0105accca9220bf65023b62aacd5031b96",
+    "src/legsa_gins/paper_rebuild/carrier_phase/multignss.py": "20704c075335edc7fa0e10092ca4efbd2e7a8c28a43497d514e88d31e6842555",
+    "src/legsa_gins/paper_rebuild/carrier_phase/native_sphere.py": "5e2e10aed572442f1eec8581258c66dd18049cd026a49091c392e806cebd0f33",
+    "src/legsa_gins/paper_rebuild/carrier_phase/partial.py": "5ffc01ab925970dbaa7a6c41691bc5766970e8b7f2f46a3acd79538ea38450c7",
+    "src/legsa_gins/paper_rebuild/carrier_phase/sensitivity.py": "7e159c3ed766037b0ae2f523454c90dd5359f3bad5a9085e4f8aeb7d76ac69c1",
+    "src/legsa_gins/paper_rebuild/carrier_phase/solver.py": "28fe539746aa19b616b3feadc7703fbcd328e73b1f9f42fffbc4a854a491d931",
+    "src/legsa_gins/paper_rebuild/carrier_phase/temporal.py": "1c48b863e7e132b0cfa281ca0f7bb45e1dd9b7c443906d775c4e25b3226a7177",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/__init__.py": "aedeaca104c42b628527de21ac068da2e4311fecb42c9ab4907c6552357373fa",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "7a6dd13f40235f1edcb6b3e9f27768e53f0c244f5d9bb0d39268333150f859d6",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "4d4ef06794fe9d0f51417de2162b21bead31f171908619ae0cb8acbeb465d3a4",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+    "src/legsa_gins/paper_rebuild/manifest.py": "05f29a41984518bea5f86b80e2a221dcbde978f9b9616ea61ad21cdad632bc91",
+    "src/legsa_gins/paper_rebuild/paths.py": "8535cca9952f8c7d55c4cf9689031ab287cc79d0d9f0cf9207997e111db4ac0b",
+    "tests/paper_rebuild/test_carrier_candidate_lifecycle.py": "d2d927a12e5bf114c7fb70a19fb5224a4e8946faea4b10c4d61df98399c7f32f"
+  }
+}
