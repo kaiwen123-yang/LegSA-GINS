@@ -1,0 +1,31 @@
+{
+  "role": "READOUT_ONLY_FROM_SEALED_OUTPUT_NO_ALGORITHM_REEXECUTION",
+  "fixed_windows": 12,
+  "raw_candidates": 903,
+  "length_necessary_candidates": 23,
+  "nonempty_source_windows": 9,
+  "singleton_source_windows": 3,
+  "multiple_source_windows": 6,
+  "empty_source_windows": 3,
+  "all_numerical_support_complete": true,
+  "api_wall_s": {
+    "sum": 0.08224041400035276,
+    "median": 0.005465837999963696,
+    "p95": 0.014363847049980902,
+    "maximum": 0.016440277999890895
+  },
+  "per_window_wall_s": {
+    "sum": 0.5487365910003064,
+    "median": 0.04195844899993517,
+    "maximum": 0.10728112300012072
+  },
+  "driver_wall_s": 1.4769375959999707,
+  "total_expanded_nodes": 1563,
+  "total_integer_leaves": 903,
+  "max_objective_identity_error": 6.381526418408612e-10,
+  "source_detail_bytes": 333343,
+  "source_details_sha256": "f676ea6f258e5b666724234a806090327896313168394db339a30a284f6d82d1",
+  "reference_reads": 0,
+  "new_algorithm_calls": 0,
+  "navigation_calls": 0
+}

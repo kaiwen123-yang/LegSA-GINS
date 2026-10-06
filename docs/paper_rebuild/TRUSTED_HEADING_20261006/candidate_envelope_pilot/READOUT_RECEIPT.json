@@ -1,0 +1,33 @@
+{
+  "registration_commit": "78114f5019e2ec1586df0be9fb680194434fe55a",
+  "source_alias": "<TRUSTED_HEADING>/CANDIDATE_ENVELOPE_PILOT_ATTEMPT01",
+  "driver_alias": "<TRUSTED_HEADING>/CANDIDATE_ENVELOPE_PILOT_DRIVER_ATTEMPT01",
+  "runner_pid": 935,
+  "supervisor_pid": 934,
+  "tool_chunk": "0aa28f",
+  "persistent_tool_session": null,
+  "reason_no_session": "execution completed before initial exec returned",
+  "sealed_source_files": {
+    "DETAILS.jsonl.gz": "f676ea6f258e5b666724234a806090327896313168394db339a30a284f6d82d1",
+    "EXECUTION_PLAN.json": "fc621c5ed9870add2ed7c9f633f8b671af2f505a9f35dbccac01cc2bd8c99ac0",
+    "INPUT_IDENTITY.json": "6eeb0f05ffe5eb0043ce357fa14bbee8711caccd77e2f3b4ccd0796787f90fde",
+    "PROGRESS.json": "e4cfc76dbdfc0fa04b041369e27821da18947a06d951859e0193e2d88341117f",
+    "RESULTS.csv": "489fc8ebca8466fbd480142eef27754b6923872483517186c893ae2871fbaf03",
+    "SUMMARY.json": "699c3ccaf27a5862a3862f2058692b1470368025ffecbeecf4033bbd9940fa87"
+  },
+  "source_seal_all_entries_verified": true,
+  "copied_files": {
+    "RESULTS.csv": "489fc8ebca8466fbd480142eef27754b6923872483517186c893ae2871fbaf03",
+    "SUMMARY.json": "699c3ccaf27a5862a3862f2058692b1470368025ffecbeecf4033bbd9940fa87",
+    "COMPLETE.json": "f8df53d9dd9900980351bf6ed5d2a59ffda6070fcd4994eb6a00893c74cf4652",
+    "OUTPUT_SEAL.json": "3b11192e1893cdfc875b078eb032283e6df3a7b101417d17ae2ec211fe6ee899",
+    "DETAILS.jsonl.gz": "f676ea6f258e5b666724234a806090327896313168394db339a30a284f6d82d1"
+  },
+  "not_copied": "INPUT_IDENTITY.json / EXECUTION_PLAN.json / PROGRESS.json remain at sealed scratch alias; output seal lists their hashes; docs is a selected compact result copy, not a full source directory mirror",
+  "driver_files": {
+    "HANDLE.json": "4a578654ab9ba395c1e3e821e14d1b72d78745a49c46dc4ee6b8377175ee8233",
+    "stdout.txt": "e97bc55c36af99cbbcf44dc9c9d0604f80ca7236cb172e2842b9844b78f413f8",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "DRIVER_COMPLETE.json": "a56ab4fe7c618e8ac24a2d62dfba53ae95ae5018ca853e68bd2bc8702e169ee4"
+  }
+}
