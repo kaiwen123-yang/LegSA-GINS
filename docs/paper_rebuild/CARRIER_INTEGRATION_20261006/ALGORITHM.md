@@ -42,6 +42,9 @@ decision under the working noise model, not known physical FIX truth.
 
 ## Executable entrypoints
 
+See REPRODUCE.md for the opt-in frontend/tracking/serial command sequence and
+native integration input contract.
+
 - carrier_phase/real_trial.py prepare: raw observation models and lineage.
 - carrier_phase/integration_frontend.py: full/partial integer selection,
   chronological future validation, failure records, 15-column ECEF output.
