@@ -7,3 +7,16 @@
 3. 已固定参考星不可用时，在当前合格同组卫星中重新选择。显式生成新的DD标签，禁止把旧N直接当新N或跨周跳延续。原固定pivot策略保持可选。
 4. 新准备仍覆盖BY2 100–340秒，所有失效/切换完整记录。先检查输入覆盖和可复用的10窗180–200秒小试验，再决定同参数完整前端及导航重放。
 5. 不以新的导航RMSE选择frame、sigma、阈值、卫星或时间窗；本轮已查看整体导航结果，所有实验均属于开发数据，不能称独立验证。
+
+## Full-span continuation
+
+The new preparation produces all 1200 model epochs in every family, with 1200
+current raw-code anchors, zero held anchors, 12 NAV snapshots and 13 distinct
+physical group pivot switches (23 family-level events). The registered
+180–200 s pilot completes all 20 searches, with zero qualified outputs; arc
+support and measurement consistency remain limiting. No input implementation
+defect was found. Extend to all 120 registered windows per method using exactly
+the same code/inputs/gates, resuming the 20 pilot cases and issuing 220 new
+search attempts. Do not reinterpret the newly recovered input epochs as
+admitted carrier measurements. Complete the raw full-span outputs before
+evaluating their navigation effect.

@@ -1,0 +1,31 @@
+{
+  "source_commit": "92390e573211c06d1a5e78c6b5ecc454494f2b9e",
+  "modes": {
+    "full": {
+      "cases": 10,
+      "valid_experimental_measurements": 0,
+      "search_calls": 10,
+      "statuses": {
+        "UNRESOLVED_ACTIVE_ARC_CHANGED": 8,
+        "REJECTED_RESIDUAL_AND_LENGTH": 2
+      },
+      "csv": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CARRIER_INTEGRATION_20261006/FRONTEND_V2_PILOT/CARRIER_FULL_0001.csv",
+      "decision_times_s": []
+    },
+    "partial": {
+      "cases": 10,
+      "valid_experimental_measurements": 0,
+      "search_calls": 10,
+      "statuses": {
+        "UNRESOLVED_ACTIVE_ARC_CHANGED": 3,
+        "REJECTED_RESIDUAL": 2,
+        "REJECTED_LENGTH": 2,
+        "REJECTED_PHASE_FAULT_DIAGNOSTIC": 3
+      },
+      "csv": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CARRIER_INTEGRATION_20261006/FRONTEND_V2_PILOT/CARRIER_PARTIAL_0001.csv",
+      "decision_times_s": []
+    }
+  },
+  "new_search_calls": 20,
+  "reference_reads": 0
+}
