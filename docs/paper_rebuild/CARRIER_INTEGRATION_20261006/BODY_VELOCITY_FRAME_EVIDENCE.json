@@ -1,0 +1,318 @@
+{
+  "basis": "reuse raw-source internal consistency only; no navigation reference",
+  "source_audit": "/mnt/g/LegSA-GINS-project/clean_rebuild_202607/stages/CLEAN6_HV_PRIOR_CALIBRATION/HV_FRAME_AUDIT.json",
+  "source_sha256": "f40a31edf608ebf3c149b7e55cc252e6462c018c929adb69d626f11e8ab6850c",
+  "vendor_example_url": "https://github.com/unitreerobotics/unitree_ros2/blob/master/example/src/src/read_motion_state.cpp",
+  "vendor_comment_conflicts_with_recordings": "Example calls velocity odometry frame; no universal body-frame assumption",
+  "scope": "BY2-family recordings only; source-local position difference and SDK rpy, not independent truth",
+  "input_files": {
+    "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by2.txt": {
+      "sha256": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278",
+      "bytes": 92352512,
+      "pinned_sha256_verified": true
+    },
+    "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by3.txt": {
+      "sha256": "b2e80763c613a5a0d6739aea90ea3ed4f8c9170cf5f2f6b73e5a000a666f0c49",
+      "bytes": 92274688,
+      "pinned_sha256_verified": true
+    },
+    "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by1.txt": {
+      "sha256": "0e5c62e0a5af0b6c32c51b535cc90701677276fc73c5623b72abda66cc148f2e",
+      "bytes": 140873728,
+      "pinned_sha256_verified": true
+    }
+  },
+  "internal_direction": {
+    "BY2": {
+      "n": 56624,
+      "velocity_vs_position_difference_horizontal_deg": {
+        "n": 56624,
+        "mean": 89.51495706311817,
+        "std": 45.047204556200086,
+        "p95_abs": 165.87620348573387,
+        "max_abs": 179.98169597153017,
+        "p95_signed": 165.87620348573387,
+        "max_signed": 179.98169597153017,
+        "min_signed": 0.0067210155251586825,
+        "rms_uncentered": 100.21049016470916,
+        "median": 99.12451808629564,
+        "p05": 13.313322241022805
+      },
+      "velocity_vs_rpy_forward_horizontal_deg": {
+        "n": 56624,
+        "mean": 89.67654626471226,
+        "std": 45.66317796670439,
+        "p95_abs": 167.19136988296407,
+        "max_abs": 179.98944107185056,
+        "p95_signed": 167.19136988296407,
+        "max_signed": 179.98944107185056,
+        "min_signed": 0.0006187491468772621,
+        "rms_uncentered": 100.63285719843994,
+        "median": 100.1479621900873,
+        "p05": 11.749127472796989
+      },
+      "velocity_vs_fixed_body_plus_x_horizontal_deg": {
+        "n": 56624,
+        "mean": 2.8793815020220968,
+        "std": 1.9576354510233671,
+        "p95_abs": 6.357721218257287,
+        "max_abs": 15.264947028158703,
+        "p95_signed": 6.357721218257287,
+        "max_signed": 15.264947028158703,
+        "min_signed": 0.00010269800413533865,
+        "rms_uncentered": 3.481825198493229,
+        "median": 2.5890467502604264,
+        "p05": 0.3324317386096936
+      },
+      "rpy_rotated_velocity_vs_position_difference_horizontal_deg": {
+        "n": 56624,
+        "mean": 2.0495649981380604,
+        "std": 2.6375372090363913,
+        "p95_abs": 7.9533964522336005,
+        "max_abs": 28.81255034818531,
+        "p95_signed": 7.9533964522336005,
+        "max_signed": 28.81255034818531,
+        "min_signed": 1.4787793334711022e-05,
+        "rms_uncentered": 3.3402389666858725,
+        "median": 1.1047005720048078,
+        "p05": 0.066534309248281
+      },
+      "rpy_rotated_velocity_vs_rpy_forward_horizontal_deg": {
+        "n": 56624,
+        "mean": 2.852103908406658,
+        "std": 1.9404671676636718,
+        "p95_abs": 6.280799200876768,
+        "max_abs": 14.810992654662964,
+        "p95_signed": 6.280799200876768,
+        "max_signed": 14.810992654662964,
+        "min_signed": 0.0004440320701458718,
+        "rms_uncentered": 3.44961491105863,
+        "median": 2.5622868618363115,
+        "p05": 0.33272660939888277
+      },
+      "velocity_vs_position_difference_3d_deg": {
+        "n": 56624,
+        "mean": 89.05238078847086,
+        "std": 44.40710489921866,
+        "p95_abs": 164.18048473614033,
+        "max_abs": 179.3916102138037,
+        "p95_signed": 164.18048473614033,
+        "max_signed": 179.3916102138037,
+        "min_signed": 0.06304960427651604,
+        "rms_uncentered": 99.5102138655248,
+        "median": 99.01431557711778,
+        "p05": 13.494278223501729
+      },
+      "velocity_vs_rpy_forward_3d_deg": {
+        "n": 56624,
+        "mean": 89.738220225196,
+        "std": 45.20399967818161,
+        "p95_abs": 166.44485313816412,
+        "max_abs": 179.5429380904424,
+        "p95_signed": 166.44485313816412,
+        "max_signed": 179.5429380904424,
+        "min_signed": 0.22127216416290998,
+        "rms_uncentered": 100.4804143546954,
+        "median": 100.1542765977616,
+        "p05": 12.65073192026232
+      }
+    },
+    "BY2H": {
+      "n": 58547,
+      "velocity_vs_position_difference_horizontal_deg": {
+        "n": 58547,
+        "mean": 85.86910661877165,
+        "std": 45.14090089839619,
+        "p95_abs": 164.57029884252756,
+        "max_abs": 179.97263305101308,
+        "p95_signed": 164.57029884252756,
+        "max_signed": 179.97263305101308,
+        "min_signed": 0.01786475598348449,
+        "rms_uncentered": 97.01118286513581,
+        "median": 76.80139503215571,
+        "p05": 14.608141158037906
+      },
+      "velocity_vs_rpy_forward_horizontal_deg": {
+        "n": 58547,
+        "mean": 85.39731532468431,
+        "std": 45.757656584663565,
+        "p95_abs": 165.43944952139432,
+        "max_abs": 179.99585567665943,
+        "p95_signed": 165.43944952139432,
+        "max_signed": 179.99585567665943,
+        "min_signed": 0.0063484060543997365,
+        "rms_uncentered": 96.88358394843094,
+        "median": 76.38425533113089,
+        "p05": 12.856145026818355
+      },
+      "velocity_vs_fixed_body_plus_x_horizontal_deg": {
+        "n": 58547,
+        "mean": 2.926279200377665,
+        "std": 1.9932891997256397,
+        "p95_abs": 6.6268398328835385,
+        "max_abs": 12.519783099501637,
+        "p95_signed": 6.6268398328835385,
+        "max_signed": 12.519783099501637,
+        "min_signed": 7.740200940168954e-05,
+        "rms_uncentered": 3.54065586139751,
+        "median": 2.6619236187368576,
+        "p05": 0.29262299079501863
+      },
+      "rpy_rotated_velocity_vs_position_difference_horizontal_deg": {
+        "n": 58547,
+        "mean": 2.0615535844419903,
+        "std": 2.6210302270402757,
+        "p95_abs": 7.9465381572173905,
+        "max_abs": 22.445008375621843,
+        "p95_signed": 7.9465381572173905,
+        "max_signed": 22.445008375621843,
+        "min_signed": 6.668185343934157e-06,
+        "rms_uncentered": 3.3346192128017984,
+        "median": 1.1257996670893458,
+        "p05": 0.06595365682509452
+      },
+      "rpy_rotated_velocity_vs_rpy_forward_horizontal_deg": {
+        "n": 58547,
+        "mean": 2.8991636328134462,
+        "std": 1.9772741422228781,
+        "p95_abs": 6.592414444130596,
+        "max_abs": 12.751844368653844,
+        "p95_signed": 6.592414444130596,
+        "max_signed": 12.751844368653844,
+        "min_signed": 2.4433444508882564e-05,
+        "rms_uncentered": 3.509230118699744,
+        "median": 2.6416006691664333,
+        "p05": 0.2897707700062259
+      },
+      "velocity_vs_position_difference_3d_deg": {
+        "n": 58547,
+        "mean": 85.47869626046695,
+        "std": 44.574243357750916,
+        "p95_abs": 163.13686160591945,
+        "max_abs": 179.20620680519912,
+        "p95_signed": 163.13686160591945,
+        "max_signed": 179.20620680519912,
+        "min_signed": 0.06341433200251934,
+        "rms_uncentered": 96.40247273331296,
+        "median": 76.77063944092865,
+        "p05": 14.792279539114164
+      },
+      "velocity_vs_rpy_forward_3d_deg": {
+        "n": 58547,
+        "mean": 85.50254739114345,
+        "std": 45.31249943656238,
+        "p95_abs": 164.83021690974672,
+        "max_abs": 179.8883692759632,
+        "p95_signed": 164.83021690974672,
+        "max_signed": 179.8883692759632,
+        "min_signed": 0.205221561195118,
+        "rms_uncentered": 96.76710776868606,
+        "median": 76.51624878351485,
+        "p05": 13.786046346103994
+      }
+    },
+    "BY2O": {
+      "n": 58606,
+      "velocity_vs_position_difference_horizontal_deg": {
+        "n": 58606,
+        "mean": 89.09546949286857,
+        "std": 47.50687093310612,
+        "p95_abs": 171.4427441283323,
+        "max_abs": 179.9988690640866,
+        "p95_signed": 171.4427441283323,
+        "max_signed": 179.9988690640866,
+        "min_signed": 0.0003374566662749093,
+        "rms_uncentered": 100.96963385222826,
+        "median": 92.51439503184575,
+        "p05": 9.909962186226284
+      },
+      "velocity_vs_rpy_forward_horizontal_deg": {
+        "n": 58606,
+        "mean": 88.82872088060691,
+        "std": 47.70702340963992,
+        "p95_abs": 171.55898324040794,
+        "max_abs": 179.99545701828,
+        "p95_signed": 171.55898324040794,
+        "max_signed": 179.99545701828,
+        "min_signed": 0.0025072375441542384,
+        "rms_uncentered": 100.82887930032607,
+        "median": 92.97794471860284,
+        "p05": 8.028127141601365
+      },
+      "velocity_vs_fixed_body_plus_x_horizontal_deg": {
+        "n": 58606,
+        "mean": 2.992148654151603,
+        "std": 2.18424712133846,
+        "p95_abs": 6.857294192380609,
+        "max_abs": 25.5896142937858,
+        "p95_signed": 6.857294192380609,
+        "max_signed": 25.5896142937858,
+        "min_signed": 0.0003817695423635283,
+        "rms_uncentered": 3.7045657840927086,
+        "median": 2.5626229871288246,
+        "p05": 0.356118158788736
+      },
+      "rpy_rotated_velocity_vs_position_difference_horizontal_deg": {
+        "n": 58606,
+        "mean": 2.0883521218084,
+        "std": 2.6737506347545943,
+        "p95_abs": 8.012015389400279,
+        "max_abs": 32.62635987915265,
+        "p95_signed": 8.012015389400279,
+        "max_signed": 32.62635987915265,
+        "min_signed": 1.2489631698061449e-05,
+        "rms_uncentered": 3.3926442575662006,
+        "median": 1.1307818363672961,
+        "p05": 0.06721676543767797
+      },
+      "rpy_rotated_velocity_vs_rpy_forward_horizontal_deg": {
+        "n": 58606,
+        "mean": 2.956467742686516,
+        "std": 2.1630202909172924,
+        "p95_abs": 6.769665155601208,
+        "max_abs": 25.19897499453015,
+        "p95_signed": 6.769665155601208,
+        "max_signed": 25.19897499453015,
+        "min_signed": 0.000315001982244806,
+        "rms_uncentered": 3.6632333341025967,
+        "median": 2.522699345967517,
+        "p05": 0.37041037328082266
+      },
+      "velocity_vs_position_difference_3d_deg": {
+        "n": 58606,
+        "mean": 88.5211079539848,
+        "std": 46.64335732177415,
+        "p95_abs": 168.2891535151315,
+        "max_abs": 179.86790180094224,
+        "p95_signed": 168.2891535151315,
+        "max_signed": 179.86790180094224,
+        "min_signed": 0.05460049334593743,
+        "rms_uncentered": 100.05774439353173,
+        "median": 92.38423380097663,
+        "p05": 10.146168783028928
+      },
+      "velocity_vs_rpy_forward_3d_deg": {
+        "n": 58606,
+        "mean": 88.9039614479014,
+        "std": 47.1093753935803,
+        "p95_abs": 170.2876511996605,
+        "max_abs": 179.86820176107372,
+        "p95_signed": 170.2876511996605,
+        "max_signed": 179.86820176107372,
+        "min_signed": 0.08028804581784948,
+        "rms_uncentered": 100.61396395670938,
+        "median": 92.99496090312375,
+        "p05": 9.331651536958821
+      }
+    }
+  },
+  "experimental_provider": {
+    "scale": 1.0,
+    "sigma_xy_mps": 0.2,
+    "basis_transform": "diag(1,-1,-1), retain body x/y",
+    "GNSS_yaw_rotation": false,
+    "new_reference_fit": false,
+    "covariance": "engineering fixed model, serial dependence not removed",
+    "physical_point_to_IMU": "assumed zero; uncalibrated offset"
+  }
+}
