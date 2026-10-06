@@ -103,6 +103,9 @@ class GIEngine {
   const std::vector<Baseline3dDiagnostics>& baseline3dDiagnostics() const { return baseline3d_diagnostics_; }
   void writeBaseline3dDiagnostics(const std::string& output_dir) const;
   void writeBodyVelocityDiagnostics(const std::string& output_dir) const;
+  const HeadingSourceCounts& headingSourceCounts() const { return heading_source_counts_; }
+  const std::vector<HeadingSourceDecision>& headingSourceEvents() const { return heading_source_events_; }
+  void writeHeadingSourceDiagnostics(const std::string& output_dir) const;
 
  private:
   void initializeCovariance();
@@ -140,6 +143,9 @@ class GIEngine {
   void setCovarianceMatrix(const Matrix& matrix);
 
   PortOptions options_;
+  HeadingSourcePolicy heading_source_policy_;
+  HeadingSourceCounts heading_source_counts_;
+  std::vector<HeadingSourceDecision> heading_source_events_;
   NavState pvapre_;
   NavState pvacur_;
   ImuError imuerror_;

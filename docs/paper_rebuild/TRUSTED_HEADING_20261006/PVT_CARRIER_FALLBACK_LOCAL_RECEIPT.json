@@ -1,0 +1,123 @@
+{
+  "status": "PASS_LOCAL_IMPLEMENTATION_ONLY",
+  "scope": "synthetic C++/interface checks only",
+  "unique_test_cases": 8,
+  "test_instances": 10,
+  "test_failures": 0,
+  "build_failures": 0,
+  "focused_extensions": "test08 repeated twice after two paired original-PVT auxiliary-trigger guards; first-run logs/binaries retained. No unsuccessful local test run.",
+  "suites": [
+    {
+      "file": "JUNIT.xml",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "8",
+      "time": "6.276",
+      "timestamp": "2026-10-07T00:11:37.938703",
+      "hostname": "LAPTOP-ATOM6ID4"
+    },
+    {
+      "file": "FOCUSED_JUNIT.xml",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "1",
+      "time": "3.745",
+      "timestamp": "2026-10-07T00:13:15.868920",
+      "hostname": "LAPTOP-ATOM6ID4"
+    },
+    {
+      "file": "FINAL_FOCUSED_JUNIT.xml",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "1",
+      "time": "3.833",
+      "timestamp": "2026-10-07T00:14:57.240333",
+      "hostname": "LAPTOP-ATOM6ID4"
+    }
+  ],
+  "harness_process_invocations": 17,
+  "expected_negative_contract_harness_exits": 4,
+  "real_input_reads": 0,
+  "reference_reads": 0,
+  "real_navigation_runs": 0,
+  "integer_searches": 0,
+  "evaluations": 0,
+  "code_root": "<CODE_ROOT>",
+  "scratch": "<SCRATCH>/TRUSTED_HEADING_20261006/PVT_CARRIER_FALLBACK_LOCAL_ATTEMPT01",
+  "build_binary": "<SCRATCH>/TRUSTED_HEADING_20261006/PVT_CARRIER_FALLBACK_LOCAL_ATTEMPT01/BUILD/legsa_v23_port_core_demo",
+  "source_pins": {
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/heading_source_policy.hpp": "78f1aa46f269c9ff7085217a662a81ab05291a2884fbb474b03e21973025784d",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/options.hpp": "460749c00e020213583facda4f7400bcc7c70fb48e3cceeb38ac5483c73b1cca",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/gnss.hpp": "96784c0e2af49ce9bad3878e0b8c438cb99daf38d9c886f2c5894b5376fb6cf2",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/fileio/gnss_file_loader.hpp": "965c1953420437a539e8367d4ce9604ff496e8d83135385deb76078df8b658cd",
+    "cpp/legsa_v23_port_core/include/legsa_v23_port_core/kf_gins/gi_engine.hpp": "852640bb935d1b455fe524c5eaa7c9907dd1b129c08ae2a7189650de7e55fd75",
+    "cpp/legsa_v23_port_core/src/config/port_config_loader.cpp": "f3b270ae8eff313114492f9e644568e0b0c8d2251f21058d41ff479df8c3984f",
+    "cpp/legsa_v23_port_core/src/fileio/gnss_file_loader.cpp": "b2ba9d908600ebd72a1671ea90d7bfb15f0c696bf4116e0d7d8d1c6bdbf31b3d",
+    "cpp/legsa_v23_port_core/src/fileio/file_saver.cpp": "b96cbb90004379bebd9aad6ab053b72c384763e242beeb6c5d016669e52b3429",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine.cpp": "232442a84a75895618451ceeeffc27447532706616e175d76b6bc24119876118",
+    "cpp/legsa_v23_port_core/src/runtime/port_runtime.cpp": "d80cf80e76740cd90fc832f288ff31fc3e97e93d11d8edba2ff304e2bd854c37",
+    "tests/paper_rebuild/test_pvt_carrier_fallback.py": "106f8d5332194f31a719d4a02c4a32f9b26c31b1c3d9c5c9d4171740e0c9fb02",
+    "tests/paper_rebuild/test_external_carrier_fusion.py": "3f17b8503e5156eade22dadedaad5bf0e7f4b6626d1ad8b5f38cb832c6e1180c",
+    "docs/paper_rebuild/TRUSTED_HEADING_20261006/PVT_CARRIER_FALLBACK_LOCAL_PLAN.md": "4afdf868ce133f419a8f067373b48978e1a7239f42eddc9e9840c1f15089e5dd"
+  },
+  "artifact_pins": {
+    "COMMAND.json": "0283c20ee2b14efb29f6843e8d81d31ddaa119d02abc48ebad2be9ed2bf2303b",
+    "PID.json": "e6cd6f99f4c27ba4d9ba0d31cf745728dd1b787984c6e7bb9ee6266ee4f00a34",
+    "PYTEST.log": "9bcc870ecd3742617f557143667e5ba1cdfc28a8280ddda15464aba3eaa1ece7",
+    "JUNIT.xml": "90bc09d5248d35d3de213ab5eed26c7841ca2f38ff5cd66841766e147e7d6145",
+    "FOCUSED_COMMAND.json": "a2cf4494b19aed94ac53067ef50fd2be2dbf4226a493dc17c7e41f297bd7cb82",
+    "FOCUSED.log": "951a71d8244f934a1185c7b805e585f738de5b903281839792490012052187c8",
+    "FOCUSED_JUNIT.xml": "c77b326815ff7f9d994e38ad07f3288700b3e7f7d4dffc556721aadaf217bd33",
+    "FINAL_FOCUSED_COMMAND.json": "4557edee6c698531f10937e156f286609c2ab959cadb75e737accfc86c599e6a",
+    "FINAL_FOCUSED.log": "6e4029194a42d75fc65a83fedabac86361872a93031e87b221e3dbc082352bf7",
+    "FINAL_FOCUSED_JUNIT.xml": "95d1275d9af53f22ca77a35447bd16ccad5b84afead7959ca0719bd395759838",
+    "BUILD/BUILD.log": "0c1bb71f53e58d5d87c0661ef50334ebdbd960f0d4e7ccaf1876d246be00d4d2",
+    "BUILD/INVOCATIONS.jsonl": "e071f985a4e58b224bb0dcc59e54a1a098d428e5db5841e4fe3e8ee153403d06",
+    "BUILD/test.cpp": "83409de3458841f42cc2bbf3ab8e66486361e9b4c4cf0e92928dc5b4ac9ca55f",
+    "BUILD/fallback_test": "40b7d5fcc423f59403331a816b21dabe2d2c2f94a6928b4803868e630b85752b",
+    "BUILD/legsa_v23_port_core_demo": "7f8a8f332fa36b957a88231228ad73c1cab206327e701dc9f98d0abb1da1b0a2",
+    "FIRST_PASS_BINARY/fallback_test": "3582490daaee22b7ddf4347baf184ed080c37ff674d3bb11609f833cfc8aa3eb",
+    "FIRST_PASS_BINARY/legsa_v23_port_core_demo": "49390a75f2e9974c80931d4ed8c831c4588c1cbcd61bd85360ba57b0b28f224b",
+    "FIRST_PASS_BINARY/INVOCATIONS.jsonl": "262b07762a04a3a52c476b259f5059f16d8cca164beea06cf257095422d7d294"
+  },
+  "policy": {
+    "default": "configured",
+    "new_values": [
+      "pvt_priority_control",
+      "pvt_priority_fallback"
+    ],
+    "pvt_freshness_s": 0.21,
+    "accepted_cross_source_exclusion_s": 0.01,
+    "requires_explicit_scalar_prediction_model": true,
+    "receiver_epoch_id_inferred": false
+  },
+  "future_scope": "three original V3 complete-window common exact-event controls plus three fallback arms; separate parent registration required",
+  "known_limits": [
+    "working covariance does not model shared GNSS/IMU dependence",
+    "carrier valid is not trusted integer FIX",
+    "no cross-epoch correlation or integrity guarantee",
+    "research exact event and RD/RP past-only once differ from legacy; common controls isolate this",
+    "original V3 nonheading providers including their historical timing assumptions remain unchanged"
+  ],
+  "independent_review": {
+    "status": "PASS_READ_ONLY_NO_BLOCKER",
+    "reviewer": "planner",
+    "executions": 0,
+    "edits": 0,
+    "scope": [
+      "scalar formula and source identity",
+      "source validity updated before arbitration",
+      "acceptance-only cross-source hold",
+      "unknown/stale fail closed",
+      "suppressed carrier bypasses propagation and auxiliaries",
+      "mixed P/V and original auxiliary eligibility preserved"
+    ],
+    "source_gi_engine_sha256": "232442a84a75895618451ceeeffc27447532706616e175d76b6bc24119876118"
+  }
+}

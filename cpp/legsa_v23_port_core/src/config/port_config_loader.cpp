@@ -546,7 +546,18 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       options.dual_antenna_measurement_model != "baseline3d") {
     throw std::runtime_error("BASELINE3D_UNKNOWN_MEASUREMENT_MODEL");
   }
+  options.heading_source_policy = stringOrDefault(kv, "heading_source_policy", "configured");
+  if (options.heading_source_policy != "configured" &&
+      options.heading_source_policy != "pvt_priority_control" &&
+      options.heading_source_policy != "pvt_priority_fallback")
+    throw std::runtime_error("UNKNOWN_HEADING_SOURCE_POLICY");
   options.baseline3d_source = stringOrDefault(kv, "baseline3d_source", "dual_pvt");
+  if (options.heading_source_policy != "configured" &&
+      (options.runtime_contract != "research_experiment" ||
+       options.baseline3d_source != "external_carrier" ||
+       options.dual_antenna_measurement_model != "baseline3d" ||
+       options.dual_yaw_prediction_model == "legacy"))
+    throw std::runtime_error("PVT_PRIORITY_REQUIRES_RESEARCH_EXTERNAL_AND_EXPLICIT_SCALAR_MODEL");
   if (options.baseline3d_source != "dual_pvt" && options.baseline3d_source != "external_carrier")
     throw std::runtime_error("BASELINE3D_UNKNOWN_SOURCE");
   if (options.baseline3d_source == "external_carrier" && options.dual_antenna_measurement_model != "baseline3d")
@@ -1328,6 +1339,9 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   if (options.clean1_formal_mode || options.runtime_contract == "research_experiment") {
     validateFormalMethodContract(kv, options);
   }
+  if (options.heading_source_policy != "configured" &&
+      (options.enable_basic_dual_yaw_baseline || !options.enable_dual_yaw_update || !options.yaw_scheme_C_enabled))
+    throw std::runtime_error("PVT_PRIORITY_REQUIRES_SCHEME_C_NONBASIC");
   if (!options.clean1_formal_mode && options.runtime_contract != "research_experiment" && options.enable_basic_dual_yaw_baseline) {
     // 中文说明：PAPER10E0 Basic 基线强制关闭 LegSA-GINS-Full 复杂模块；
     // 即使配置误写启用项，也不得让 source-aware/Go2/QM/Raw Doppler/FGO 进入 solver。

@@ -192,7 +192,7 @@ void writeActualSolverInputRoles(std::ostream& out, const PortOptions& options) 
   out << "{\"propagation_imu\": \"source_backed_propagation\", "
       << "\"gnss_position_receiver_velocity_dual_yaw\": \"validity_gated_measurements\"";
   if (options.dual_antenna_measurement_model == "baseline3d") {
-    out << ", \"dual_antenna_baseline3d\": \"" << (options.baseline3d_source == "external_carrier" ? "experimental_external_carrier_baseline_full_covariance" : "three_dimensional_gnss_baseline_measurement") << "\"";
+    out << ", \"dual_antenna_baseline3d\": \"" << (options.heading_source_policy == "pvt_priority_control" ? "diagnostic_only_carrier_no_heading_update" : options.baseline3d_source == "external_carrier" ? "experimental_external_carrier_baseline_full_covariance" : "three_dimensional_gnss_baseline_measurement") << "\"";
   }
   if (options.raw_doppler_config.enable_raw_doppler) {
     out << ", \"raw_doppler_velocity\": \"source_backed_auxiliary_velocity\"";
@@ -758,7 +758,8 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
         << "  \"baseline3d_reject_count\": " << options.baseline3d_counts.rejected << ",\n"
         << "  \"baseline3d_invalid_count\": " << options.baseline3d_counts.invalid << ",\n"
         << "  \"baseline3d_missing_exact_time_count\": " << options.baseline3d_counts.missing << ",\n"
-        << "  \"baseline3d_scalar_yaw_observation_used\": false,\n"
+        << "  \"baseline3d_scalar_yaw_observation_used\": "
+        << (options.heading_source_policy != "configured" ? "true" : "false") << ",\n"
         << "  \"baseline3d_formal_a1_counter_alias\": \"yaw_and_dual_yaw_counters\",\n"
         << "  \"baseline3d_frame_contract\": \""
         << (options.baseline3d_source == "external_carrier" ? "GNSS2_minus_GNSS1_ECEF_rotated_to_Cbn_NED_body_vector_FRD" : "observation_NED_equals_Cbn_NED_no_additional_rotation") << "\",\n"
@@ -774,6 +775,21 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
         << "  \"research_RD_RP_policy\": \"past_only_each_source_timestamp_attempted_at_most_once\",\n"
         << "  \"runtime_contract\": \"research_experiment\",\n"
         << "  \"dual_yaw_prediction_model\": \"" << escapeJson(options.dual_yaw_prediction_model) << "\",\n";
+  }
+  if (options.heading_source_policy != "configured") {
+    out << "  \"heading_source_policy\": \"" << escapeJson(options.heading_source_policy) << "\",\n"
+        << "  \"heading_pvt_freshness_s\": " << HeadingSourcePolicy::kPvtFreshnessS << ",\n"
+        << "  \"heading_accepted_cross_source_exclusion_s\": " << HeadingSourcePolicy::kNearTimeS << ",\n"
+        << "  \"heading_receiver_epoch_association_established\": false,\n"
+        << "  \"heading_covariance_accounts_for_shared_GNSS_IMU\": false,\n"
+        << "  \"heading_integer_integrity_claim\": false,\n"
+        << "  \"heading_suppressed_carrier_propagation_or_auxiliary_event\": false,\n"
+        << "  \"heading_pvt_attempt_count\": " << options.heading_source_counts.pvt_attempts << ",\n"
+        << "  \"heading_pvt_accept_count\": " << options.heading_source_counts.pvt_accepted << ",\n"
+        << "  \"heading_pvt_suppressed_count\": " << options.heading_source_counts.pvt_suppressed << ",\n"
+        << "  \"heading_carrier_attempt_count\": " << options.heading_source_counts.carrier_attempts << ",\n"
+        << "  \"heading_carrier_accept_count\": " << options.heading_source_counts.carrier_accepted << ",\n"
+        << "  \"heading_carrier_bypass_count\": " << options.heading_source_counts.carrier_bypassed << ",\n";
   }
   if (options.baseline3d_source == "external_carrier") {
     out << "  \"baseline3d_source\": \"external_carrier\",\n"

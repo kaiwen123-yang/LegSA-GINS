@@ -169,13 +169,13 @@ std::vector<GnssData> GnssFileLoader::loadFifteenColumn(const std::string& path)
 }
 
 GnssFileLoader::GnssFileLoader(const std::string& path, const std::string& sidecar_path,
-                               const std::string& source) {
+                               const std::string& source, bool preserve_pvt_heading) {
   if (source != "external_carrier") throw std::runtime_error("EXTERNAL_CARRIER_INVALID_SOURCE");
-  rows_ = loadExternalCarrier(path, sidecar_path);
+  rows_ = loadExternalCarrier(path, sidecar_path, preserve_pvt_heading);
 }
 
 std::vector<GnssData> GnssFileLoader::loadExternalCarrier(const std::string& path,
-                                                        const std::string& sidecar_path) {
+                                                        const std::string& sidecar_path, bool preserve_pvt_heading) {
   std::ifstream gnss_input(path);
   if (!gnss_input) throw std::runtime_error("failed to open GNSS file: " + path);
   std::vector<GnssData> original;
@@ -199,6 +199,23 @@ std::vector<GnssData> GnssFileLoader::loadExternalCarrier(const std::string& pat
     if (std::fabs(row.blh_rad_m[0]) > kPi/2 || std::fabs(row.blh_rad_m[1]) > kPi) {
       row.blh_rad_m[0] *= D2R; row.blh_rad_m[1] *= D2R;
     }
+    if (preserve_pvt_heading) {
+      if (ignored_valid != "0" && ignored_valid != "1")
+        throw std::runtime_error("PVT_PRIORITY_REQUIRES_EXPLICIT_YAW_VALIDITY");
+      auto finite_number = [](const std::string& token) {
+        std::size_t used=0;
+        const double value=std::stod(token, &used);
+        if (used != token.size() || !std::isfinite(value))
+          throw std::runtime_error("PVT_PRIORITY_INVALID_SCALAR_YAW");
+        return value;
+      };
+      row.yaw_deg=finite_number(ignored_yaw);
+      row.yaw_std_deg=finite_number(ignored_std);
+      row.yaw_rad=Earth::degToRad(row.yaw_deg);
+      row.yaw_std_rad=Earth::degToRad(std::max(row.yaw_std_deg, 0.001));
+      row.has_yaw=ignored_valid == "1";
+      row.pvt_heading_source_present=true;
+    }
     row.has_position = pos_valid == 1;
     row.has_velocity = vel_valid == 1;
     row.validity_explicit = true;
@@ -210,7 +227,7 @@ std::vector<GnssData> GnssFileLoader::loadExternalCarrier(const std::string& pat
     if (!row.validity_explicit || !std::isfinite(row.time) || !(row.time > previous))
       throw std::runtime_error("EXTERNAL_CARRIER_REQUIRES_ORDERED_EXPLICIT_GNSS18");
     previous = row.time;
-    row.has_yaw = false; // Source replacement: never fuse commercial A1 and carrier B3 together.
+    if (!preserve_pvt_heading) row.has_yaw = false; // Existing source replacement.
     row.baseline3d.source = "external_carrier";
     events.emplace(row.time, row);
   }

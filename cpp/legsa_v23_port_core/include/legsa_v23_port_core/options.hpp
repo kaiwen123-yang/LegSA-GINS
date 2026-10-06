@@ -15,6 +15,7 @@
 #include "legsa_v23_port_core/source_aware/quality_state_manager.hpp"
 #include "legsa_v23_port_core/types.hpp"
 #include "legsa_v23_port_core/baseline3d.hpp"
+#include "legsa_v23_port_core/heading_source_policy.hpp"
 
 #include <string>
 
@@ -46,6 +47,9 @@ struct PortOptions {
   std::string baseline3d_path;
   // Explicit opt-in. The legacy dual-PVT path and scalar path retain their defaults.
   std::string baseline3d_source = "dual_pvt";
+  // Default preserves scalar / replacement contracts; opt-in mixes exclusively.
+  std::string heading_source_policy = "configured";
+  HeadingSourceCounts heading_source_counts;
   std::string external_carrier_baseline_path;
   Vec3 baseline3d_body_vector_m = makeVec3(0.0, 0.0, 0.0);
   double baseline3d_length_m = 0.0;

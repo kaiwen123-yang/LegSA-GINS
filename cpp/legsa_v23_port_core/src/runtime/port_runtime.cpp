@@ -175,6 +175,7 @@ void copyRuntimeStatusForCovFailure(const GIEngine& engine, PortOptions& options
   options.yaw_normal_count = engine.yawNormalCount();
   options.yaw_downweight_count = engine.yawDownweightCount();
   options.yaw_reject_count = engine.yawRejectCount();
+  options.heading_source_counts = engine.headingSourceCounts();
   copyCovHealthStatus(engine, options);
   copyRawDopplerStatus(engine, options);
   copySourceAwareStatus(engine, options);
@@ -1393,7 +1394,8 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   const bool external_carrier = options.baseline3d_source == "external_carrier";
   const bool exact_events = external_carrier || options.runtime_contract == "research_experiment";
   GnssFileLoader gnss_loader = external_carrier
-      ? GnssFileLoader(options.gnss_path, options.external_carrier_baseline_path, "external_carrier")
+      ? GnssFileLoader(options.gnss_path, options.external_carrier_baseline_path, "external_carrier",
+                       options.heading_source_policy != "configured")
       : options.dual_antenna_measurement_model == "baseline3d"
           ? GnssFileLoader(options.gnss_path, options.baseline3d_path)
           : GnssFileLoader(options.gnss_path);
@@ -1649,6 +1651,7 @@ void PortRuntime::runFromConfig(const std::string& config_path,
   engine.writeFgoFeedbackTrace(output_dir);
   engine.writeQAFallbackTrace(output_dir);
   engine.writeBaseline3dDiagnostics(output_dir);
+  engine.writeHeadingSourceDiagnostics(output_dir);
   engine.writeBodyVelocityDiagnostics(output_dir);
 }
 

@@ -115,6 +115,17 @@ GIEngine::GIEngine(PortOptions options)
       throw std::runtime_error("BASELINE3D_SCOPE_REQUIRES_QA_QM_OFF");
     }
   }
+  if (options_.heading_source_policy != "configured") {
+    if ((options_.heading_source_policy != "pvt_priority_control" &&
+         options_.heading_source_policy != "pvt_priority_fallback") ||
+        options_.runtime_contract != "research_experiment" ||
+        options_.baseline3d_source != "external_carrier" ||
+        options_.dual_antenna_measurement_model != "baseline3d" ||
+        options_.dual_yaw_prediction_model == "legacy" ||
+        options_.enable_basic_dual_yaw_baseline ||
+        !options_.enable_dual_yaw_update || !options_.yaw_scheme_C_enabled)
+      throw std::runtime_error("PVT_PRIORITY_INVALID_ENGINE_CONTRACT");
+  }
   const auto& body_cfg = options_.go2_velocity_prior_diagnostic_config;
   if (body_cfg.enable_go2_horizontal_velocity_prior && body_cfg.go2_horizontal_velocity_frame == "body_frd") {
     if (options_.runtime_contract != "research_experiment" ||
@@ -143,6 +154,9 @@ void GIEngine::initialize(const NavState& initial_state) {
       options_.go2_velocity_prior_diagnostic_config.go2_body_velocity_update_period_s;
   research_last_body_hv_attempt_time_ = -1.0e100;
   body_velocity_events_.clear();
+  heading_source_policy_ = HeadingSourcePolicy{};
+  heading_source_counts_ = HeadingSourceCounts{};
+  heading_source_events_.clear();
   zeroVector(dx_);
   initialized_ = true;
 }
@@ -282,7 +296,12 @@ void GIEngine::addGnssData(const GnssData& gnss) {
     gnssdata_.has_yaw = true;
   }
   gnssdata_.isvalid = gnssdata_.has_position || gnssdata_.has_velocity || gnssdata_.has_yaw;
-  if (options_.dual_antenna_measurement_model == "baseline3d") {
+  // Suppressing only the scalar heading must not remove the original PVT
+  // auxiliary trigger, even for a source row with no P/RV measurements.
+  if (options_.heading_source_policy != "configured" &&
+      gnssdata_.pvt_heading_source_present && gnssdata_.auxiliary_updates_allowed)
+    gnssdata_.isvalid = true;
+  if (options_.dual_antenna_measurement_model == "baseline3d" && !gnssdata_.use_scalar_heading) {
     // A valid baseline remains an A1 observation during position/RV outages.
     gnssdata_.isvalid = gnssdata_.isvalid || gnssdata_.baseline3d.valid ||
         (options_.baseline3d_source == "external_carrier" && gnssdata_.baseline3d.present);
@@ -371,6 +390,8 @@ void GIEngine::gnssUpdate() {
 // position、dual-yaw、receiver-native velocity；N5D velocity stress
 // 只用于诊断 raw Doppler 独立约束能力，不代表真实传感器故障模型，也不作为论文性能结果。
 void GIEngine::gnssUpdate(GnssData& gnss) {
+  if (options_.heading_source_policy != "configured" && !gnss.heading_source_arbitrated)
+    throw std::runtime_error("PVT_PRIORITY_REQUIRES_EXACT_EVENT_ARBITRATION");
   if (!gnss.isvalid) {
     return;
   }
@@ -409,7 +430,7 @@ void GIEngine::gnssUpdate(GnssData& gnss) {
   }
   const bool qa_reject_yaw = qa_active && qa_decision.a1_measurement_action == "REJECT";
   auto apply_yaw = [&]() {
-    if (options_.dual_antenna_measurement_model == "baseline3d") {
+    if (options_.dual_antenna_measurement_model == "baseline3d" && !policy_gnss.use_scalar_heading) {
       if (options_.enable_dual_yaw_update && options_.yaw_scheme_C_enabled) {
         applyBaseline3dUpdate(policy_gnss, false,
                              qa_active ? qa_decision.a1_measurement_action : "INACTIVE",
@@ -586,8 +607,34 @@ void GIEngine::newImuProcessWithEvents(const std::vector<GnssData>& events) {
   }
   ImuData previous = imupre_;
   ImuData remaining = imucur_;
-  for (const auto& event : events) {
-    if (!event.auxiliary_updates_allowed && !event.baseline3d.valid) {
+  for (const auto& input_event : events) {
+    GnssData event = input_event;
+    const bool priority = options_.heading_source_policy != "configured";
+    HeadingSourceDecision decision;
+    if (priority) {
+      if (event.auxiliary_updates_allowed != event.pvt_heading_source_present || !event.validity_explicit)
+        throw std::runtime_error("PVT_PRIORITY_EVENT_SOURCE_IDENTITY_REQUIRED");
+      decision = heading_source_policy_.arrive(event.time, event.pvt_heading_source_present,
+          event.has_yaw, event.baseline3d.present, event.baseline3d.valid,
+          options_.heading_source_policy == "pvt_priority_control");
+      event.heading_source_arbitrated = true;
+      event.has_yaw = decision.use_pvt;
+      event.use_scalar_heading = !decision.use_carrier;
+      // A coincident carrier cannot activate aids on an otherwise wholly invalid
+      // PVT row. Suppressed *valid* PVT retains its original auxiliary schedule.
+      event.auxiliary_updates_allowed = event.auxiliary_updates_allowed &&
+          (input_event.has_position || input_event.has_velocity || input_event.has_yaw);
+      if (decision.pvt_present && decision.pvt_source_valid && !decision.use_pvt)
+        ++heading_source_counts_.pvt_suppressed;
+      if (decision.carrier_present && !decision.use_carrier)
+        ++heading_source_counts_.carrier_bypassed;
+      if (!event.pvt_heading_source_present && !decision.use_carrier) {
+        // Even valid but suppressed carrier events are diagnostics only.
+        heading_source_events_.push_back(decision);
+        continue;
+      }
+    }
+    if (!priority && !event.auxiliary_updates_allowed && !event.baseline3d.valid) {
       // Invalid carrier availability is a diagnostic, not a propagation boundary.
       // This must be numerically identical to an absent observation.
       applyBaseline3dUpdate(event, options_.enable_basic_dual_yaw_baseline, "INACTIVE", 1.0);
@@ -615,7 +662,19 @@ void GIEngine::newImuProcessWithEvents(const std::vector<GnssData>& events) {
     // No TIME_ALIGN_ERR snapping: no event can be used before its availability.
     timestamp_ = event.time;
     addGnssData(event);
+    const auto heading_accepted_before = yaw_normal_count_ + yaw_downweight_count_;
     gnssUpdate();
+    if (priority) {
+      if (decision.use_pvt) ++heading_source_counts_.pvt_attempts;
+      if (decision.use_carrier) ++heading_source_counts_.carrier_attempts;
+      decision.accepted = yaw_normal_count_ + yaw_downweight_count_ > heading_accepted_before;
+      if (decision.accepted) {
+        heading_source_policy_.accepted(decision);
+        if (decision.use_pvt) ++heading_source_counts_.pvt_accepted;
+        if (decision.use_carrier) ++heading_source_counts_.carrier_accepted;
+      }
+      heading_source_events_.push_back(decision);
+    }
     stateFeedback();
     pvapre_ = pvacur_;
   }
@@ -1269,6 +1328,24 @@ void GIEngine::applyBaseline3dUpdate(const GnssData& gnss, bool basic,
   baseline3d_diagnostics_.push_back(row);
 }
 
+void GIEngine::writeHeadingSourceDiagnostics(const std::string& output_dir) const {
+  if (options_.heading_source_policy == "configured") return;
+  std::filesystem::create_directories(output_dir);
+  std::ofstream out(std::filesystem::path(output_dir) / "HEADING_SOURCE_EVENTS.csv");
+  if (!out) throw std::runtime_error("HEADING_SOURCE_DIAGNOSTIC_WRITE_FAILED");
+  out << "time,pvt_present,pvt_known,pvt_source_time,pvt_age_s,pvt_source_valid,carrier_present,carrier_valid,pvt_attempted,carrier_attempted,accepted,pvt_reason,carrier_reason\n";
+  out << std::setprecision(17);
+  for (const auto& d : heading_source_events_) {
+    out << d.time << ',' << d.pvt_present << ',' << d.pvt_known << ',';
+    if (d.pvt_known) out << d.pvt_time;
+    out << ',';
+    if (d.pvt_known) out << d.pvt_age_s;
+    out << ',' << d.pvt_source_valid << ',' << d.carrier_present << ',' << d.carrier_valid
+        << ',' << d.use_pvt << ',' << d.use_carrier << ',' << d.accepted << ','
+        << d.pvt_reason << ',' << d.carrier_reason << '\n';
+  }
+}
+
 void GIEngine::writeBaseline3dDiagnostics(const std::string& output_dir) const {
   if (options_.dual_antenna_measurement_model != "baseline3d") return;
   std::filesystem::create_directories(output_dir);
@@ -1748,7 +1825,7 @@ quality_aware::QAObservation GIEngine::buildQAObservation(const GnssData& gnss) 
   observation.algorithm_id = options_.algorithm_id.empty() ? options_.run_label : options_.algorithm_id;
   observation.case_id = options_.ablation_variant;
   observation.dataset_id = options_.clean_input_provenance_label;
-  const bool baseline3d = options_.dual_antenna_measurement_model == "baseline3d";
+  const bool baseline3d = options_.dual_antenna_measurement_model == "baseline3d" && !gnss.use_scalar_heading;
   observation.a1_available = baseline3d ? gnss.baseline3d.valid :
       gnss.has_yaw && std::isfinite(gnss.yaw_rad) && std::isfinite(gnss.yaw_std_rad);
   const bool explicit_a1_quality =

@@ -31,6 +31,10 @@ struct GnssData {
   bool isvalid = false;
   // A carrier-only event must not trigger a second RD/RP/HV/FGO update.
   bool auxiliary_updates_allowed = true;
+  // Explicit source identity, set only by the PVT-priority loader.
+  bool pvt_heading_source_present = false;
+  bool heading_source_arbitrated = false;
+  bool use_scalar_heading = false;
   Baseline3dMeasurement baseline3d;
 };
 
