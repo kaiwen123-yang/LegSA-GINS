@@ -1,0 +1,108 @@
+{
+  "execution_commit": "8d4dc0166c7ea98cea78ad1b44bc98ead5bae3f1",
+  "window_s": [
+    80.0,
+    82.0
+  ],
+  "base_time": 1772784000.0,
+  "phase": "METADATA_ONLY",
+  "SPP_calls": 0,
+  "CILS_calls": 0,
+  "navigation_calls": 0,
+  "reference_reads": 0,
+  "source_pins": {
+    "scripts/paper_rebuild/tim_ar_development_20261006/raw_arc_audit.py": "436d926733bc6eb419a6dc031ac390dbb7b3fcc58626247c1ede40143b9c6e52",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49"
+  },
+  "input_pins": {
+    "<EXT_REPRO_ROOT>/inputs/BY2/INPUT.json": "8d016923133d6c2971a2d3bee286696a43c055a241a61e76a04a1b50c0e21501",
+    "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.ubx": "24177f2d6f25c0b614f769e66c4e4147eea727f3a7f55e22d5e04419eaa10f8b",
+    "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-raw.csv": "39249696329530452a1049b5b39e2c1d8f7e89ae2190d2c95bce70f5b4f44583",
+    "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.ubx": "0876d7e67441ddfce66b4ce8e39838b4245bddab3d6d3cce60d5eb9bad42c2c2"
+  },
+  "decoded_fullfile_RAWX_counts": {
+    "1": 1509,
+    "2": 1509
+  },
+  "pairing": {
+    "receiver1_window_epochs": 10,
+    "receiver2_window_epochs": 10,
+    "exact_unique_pairs": 10,
+    "unpaired_receiver1_keys": [],
+    "unpaired_receiver2_keys": [],
+    "duplicate_receiver1_keys": [],
+    "duplicate_receiver2_keys": []
+  },
+  "tracking_event_counts": {
+    "tracking_lock_reset_detected": 3,
+    "half_cycle_state_changed": 3,
+    "carrier_validity_changed": 17,
+    "receiver_clock_reset": 0,
+    "time_reversal_detected": 0,
+    "gap_reset": 0,
+    "first_observation": 19,
+    "cycle_slip_detected": 20
+  },
+  "metadata_feasible_intervals": [
+    {
+      "start_s": 80.19799995422363,
+      "end_s": 81.99799990653992,
+      "paired_epochs": 10,
+      "duration_s": 1.7999999523162842,
+      "common_continuous_signal_count": 4,
+      "signals": [
+        "0:11:0:0",
+        "0:17:0:0",
+        "0:19:0:0",
+        "0:6:0:0"
+      ],
+      "receiver_arc_tokens": [
+        [
+          "0:11:0:0",
+          1,
+          1
+        ],
+        [
+          "0:17:0:0",
+          1,
+          1
+        ],
+        [
+          "0:19:0:0",
+          1,
+          1
+        ],
+        [
+          "0:6:0:0",
+          1,
+          1
+        ]
+      ],
+      "candidate_metadata_pivot": "0:11:0:0",
+      "pivot_is_elevation_qualified": false
+    }
+  ],
+  "continuous_before_window": "UNKNOWN_LEFT_CENSORED",
+  "qualified_geometry": false,
+  "qualified_integer_fix": false,
+  "contains_at_least_10_epoch_metadata_interval": true,
+  "result_hashes": {
+    "ALL_SIGNAL_COUNTS.csv": "65d84bb970a566331fe034e9d617daedbb0b75cdb9d9cf93c87a5e5a4b8b234e",
+    "EPOCH_METADATA.csv": "a6a1a9592dccaa5a9488036f99df4162ed4e0684e0abae577685d79ee5b68fd7",
+    "GPS_L1_TRACKING.csv": "7c6d47873941450d4bff3839e81f5638bf4820fb0c3600a32ce862cfd7928148"
+  },
+  "IO_AUDIT": {
+    "passed": true,
+    "reference_opens": 0,
+    "raw_readonly_opens": 2,
+    "raw_paths": [
+      "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv",
+      "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-raw.csv"
+    ],
+    "trace_sha256": "a5b3b808334f2a4cc8b5334b845c2f537315860d1dbb615df01f3b0c9f00a730",
+    "scope": "single metadata child, source UBX and CSV hashes only; no estimator/reference"
+  },
+  "source_receipt_sha256": "1d190d2f284895be38f2c88b3c7998c12d124884a34fbe050d51e057f3797a7e",
+  "summary_script_sha256": "f6f98d29d44424f5644001042b67cd5ec2e9ef44ade23ce243dd729ffbb96fed"
+}
