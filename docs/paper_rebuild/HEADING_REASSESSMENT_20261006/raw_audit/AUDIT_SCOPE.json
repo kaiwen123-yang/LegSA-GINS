@@ -1,0 +1,28 @@
+{
+  "status": "COMPLETE_RAW_ONLY",
+  "script_sha256": "5194c0ae1a1695266c283647233f3e930a4ad1866f1ad5635e9b988687d83be2",
+  "environment": "Linux Ubuntu-22.04 WSL",
+  "body_full_byte_hashes": 8,
+  "body_profiles_reused_after_hash_match": 8,
+  "zip_container_hash_match": true,
+  "selected_raw_members": 16,
+  "members_extracted": 0,
+  "reference_members_decoded": 0,
+  "native_navigation_invocations": 0,
+  "evaluator_invocations": 0,
+  "raw_member_hashes_match_previous": true,
+  "profile_source_pins": {
+    "BODY_FILE_PROFILE_PUBLIC.json": "b99970e26d2418bb9b88082a08228f425c4e92d1af165230bfd12a19b42fed7e",
+    "ZIP_RAW_SELECTED_PROFILE.json": "0e1ab1d8385f60ca23b1cfb8fac6be7ae017df6e588ee9965c10109470817ed9",
+    "ZIP_CONTAINER_IDENTITY.json": "2064f4abfb6c0ad604863823386c000054f42d5ee82776999437480a289eac9b",
+    "CANDIDATE_PAIRING_SELECTED8.csv": "35a156ba31a4e2c2d8101bd178512949c98e29fc183022b334a880f7a3734744",
+    "BODY_GAPS.csv": "9baf0c6ef2a4c483a8e458defc2041dcaa198bee5062dce2427e9155363d7b3a"
+  },
+  "R5_plan_sha256": "05c2c842ec84d27384c36230e85e6cfedb8b473d0da268aac1942de901a64fc7",
+  "counts_scope": "GNSS full/session and two body supports are separate; near RAWX pairs are opportunities, not AR success",
+  "route_identity": "not established by filenames or timestamps; do not claim new route/day",
+  "source_formula_urls": [
+    "https://content.u-blox.com/sites/default/files/u-blox_ZED-F9H_InterfaceDescription_(UBX-19030118).pdf",
+    "https://content.u-blox.com/sites/default/files/ZED-F9P_IntegrationManual_UBX-18010802.pdf"
+  ]
+}
