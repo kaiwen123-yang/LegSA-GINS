@@ -1,0 +1,139 @@
+{
+  "status": "COMPLETE",
+  "converter_calls": 73,
+  "prepare_calls": 3,
+  "integer_search_calls": 0,
+  "navigation_solver_calls": 0,
+  "evaluator_calls": 0,
+  "reference_reads": 0,
+  "old_full_history_NAV_reads": 0,
+  "converter_build_calls": 0,
+  "prefixes_created": 37,
+  "prefixes_reused": 12,
+  "converter_outcomes_reused": 1,
+  "sequences_completed": [
+    "BY2",
+    "BY2H",
+    "BY2O"
+  ],
+  "total_wall_s": 134.46233244899997,
+  "sequences": [
+    {
+      "sequence": "BY2",
+      "window_s": [
+        66.0,
+        340.0
+      ],
+      "prepared_plan": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODELS/PLAN.json",
+      "prepared_plan_sha256": "16580a87ee787d4890edd22a8fc8bfb9b0771242e427201a952f323f233879ea",
+      "paired_epochs": 1370,
+      "model_output_seal": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_PREPARE_ATTEMPT02/BY2/MODEL_OUTPUT_SEAL.json",
+      "model_output_seal_sha256": "c79910edc923b82d5b3d73e2c8355c988b2d3692515a67ff1678b35fc3b50db5",
+      "model_npz_count": 3600,
+      "actual_first_s": 66.19799995422363,
+      "actual_last_s": 339.9979999065399,
+      "spp_attempts": 1370,
+      "spp_failures": 170,
+      "anchor_status": {
+        "UNAVAILABLE_NO_PRIOR_ANCHOR": 170,
+        "CURRENT_RAW_CODE_ANCHOR": 1200
+      },
+      "family_status": {
+        "GPS_L1": {
+          "NOT_ATTEMPTED_NO_ANCHOR": 170,
+          "BUILT": 1200
+        },
+        "GPS_L1_L2": {
+          "NOT_ATTEMPTED_NO_ANCHOR": 170,
+          "BUILT": 1200
+        },
+        "GPS_GAL_BDS_DUAL": {
+          "NOT_ATTEMPTED_NO_ANCHOR": 170,
+          "BUILT": 1200
+        }
+      },
+      "causal_navigation_schedule_sha256": "5ab096adf4a7f5338001ba72b19362ea5358bff1c09cc972d5baffd7dc32d57b",
+      "arc_events_sha256": "7f1e8595d3df9a5be10e36358c869113705126a2b7b72da3277f69beacdb9c0c",
+      "accepted_integer_measurement": false,
+      "model_failures_preserved": true
+    },
+    {
+      "sequence": "BY2H",
+      "window_s": [
+        413.0,
+        683.0
+      ],
+      "prepared_plan": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_PREPARE_ATTEMPT02/BY2H/MODELS/PLAN.json",
+      "prepared_plan_sha256": "6712ccd1723917379a94acad639b297779073b9b207015d06f898f8010cfc943",
+      "paired_epochs": 1350,
+      "model_output_seal": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_PREPARE_ATTEMPT02/BY2H/MODEL_OUTPUT_SEAL.json",
+      "model_output_seal_sha256": "b700a5287f3d6d465f8e53a66277850524996d863af7a854f0de54f14f813dbe",
+      "model_npz_count": 3642,
+      "actual_first_s": 413.19799995422363,
+      "actual_last_s": 682.9979999065399,
+      "spp_attempts": 1350,
+      "spp_failures": 135,
+      "anchor_status": {
+        "UNAVAILABLE_NO_PRIOR_ANCHOR": 135,
+        "CURRENT_RAW_CODE_ANCHOR": 1215
+      },
+      "family_status": {
+        "GPS_L1": {
+          "NOT_ATTEMPTED_NO_ANCHOR": 135,
+          "BUILT": 1212,
+          "UNAVAILABLE": 3
+        },
+        "GPS_L1_L2": {
+          "NOT_ATTEMPTED_NO_ANCHOR": 135,
+          "BUILT": 1215
+        },
+        "GPS_GAL_BDS_DUAL": {
+          "NOT_ATTEMPTED_NO_ANCHOR": 135,
+          "BUILT": 1215
+        }
+      },
+      "causal_navigation_schedule_sha256": "e64f0613f9bd5d130a95e785db1137ef1044dc13ed9b55e0dc429c83c4bfc407",
+      "arc_events_sha256": "85018680f3749c5d682c44f2c8b71598a9f614c1e3b440b891e6755a60e088e8",
+      "accepted_integer_measurement": false,
+      "model_failures_preserved": true
+    },
+    {
+      "sequence": "BY2O",
+      "window_s": [
+        3186.0,
+        3563.0
+      ],
+      "prepared_plan": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_PREPARE_ATTEMPT02/BY2O/MODELS/PLAN.json",
+      "prepared_plan_sha256": "fb592b5f86669cbe4e02c15e1a900776571bc51424bf5f04f56fb3e5d9da482a",
+      "paired_epochs": 1885,
+      "model_output_seal": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_PREPARE_ATTEMPT02/BY2O/MODEL_OUTPUT_SEAL.json",
+      "model_output_seal_sha256": "62154c1f25e42f2f31b88ffb63fb4d0e089fdd2b28a8520ba2d1bd18e939e42c",
+      "model_npz_count": 5444,
+      "actual_first_s": 3186.1979999542236,
+      "actual_last_s": 3562.99799990654,
+      "spp_attempts": 1885,
+      "spp_failures": 0,
+      "anchor_status": {
+        "CURRENT_RAW_CODE_ANCHOR": 1885
+      },
+      "family_status": {
+        "GPS_L1": {
+          "BUILT": 1753,
+          "UNAVAILABLE": 132
+        },
+        "GPS_L1_L2": {
+          "BUILT": 1806,
+          "UNAVAILABLE": 79
+        },
+        "GPS_GAL_BDS_DUAL": {
+          "BUILT": 1885
+        }
+      },
+      "causal_navigation_schedule_sha256": "f131af69945e2c0867d00fc3d135193488085c5442e16c836ff2302cfaf4fb11",
+      "arc_events_sha256": "8733f95384ab105bc39104e83ee3ca4e536c687bf1e7597fd77078b3c7c9940a",
+      "accepted_integer_measurement": false,
+      "model_failures_preserved": true
+    }
+  ],
+  "caveat": "input models only; no integer selection, FIX, navigation or independent truth qualification"
+}

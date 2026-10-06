@@ -1,0 +1,24 @@
+{
+  "registration_commit": "d60bfa0275a859a9c352f4f132767d593572bf81",
+  "attempt": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_PREPARE_ATTEMPT02",
+  "exact_source_summary_sha256": "d378e00b68f8bb5e34a25f7aaa5b6098a8f0f2e31dcd1c115f0c74e2e8de965f",
+  "exact_complete_sha256": "04bdca8f04e7302f609f29c8a42f02c14c6f61ed12eb5826cc704f7a7e3a4ef4",
+  "driver_terminal_sha256": "b0cfdf7792c7e3683b2e93954c301498383c04d2d14a20e8c0b882ef9ce3f881",
+  "driver_wall_s": 134.628546615,
+  "published_summary_transform": "path alias replacement only; source exact hashes retained",
+  "readout_calls": {
+    "new_converter": 0,
+    "new_prepare": 0,
+    "integer_search": 0,
+    "navigation": 0,
+    "evaluator": 0,
+    "reference": 0
+  },
+  "local_full_models_retained": true,
+  "preparation_full_model_seal_per_sequence": {
+    "BY2": "c79910edc923b82d5b3d73e2c8355c988b2d3692515a67ff1678b35fc3b50db5",
+    "BY2H": "b700a5287f3d6d465f8e53a66277850524996d863af7a854f0de54f14f813dbe",
+    "BY2O": "62154c1f25e42f2f31b88ffb63fb4d0e089fdd2b28a8520ba2d1bd18e939e42c"
+  },
+  "scope": "Model construction availability, not candidate acceptance, FIX or accuracy."
+}
