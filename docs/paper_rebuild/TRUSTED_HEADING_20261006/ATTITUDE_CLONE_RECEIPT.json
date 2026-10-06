@@ -1,0 +1,37 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "pytest",
+    "tests/paper_rebuild/test_attitude_clone.py",
+    "-q"
+  ],
+  "source_sha256": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/attitude_clone.py": "20835772ca369ea635c1a05260eea628cd3023c800fe90cf8b6b4e8ee604c691",
+    "src/legsa_gins/paper_rebuild/carrier_phase/foot_pair_direction.py": "2d6f764408cf0335e295d964b6c2e2eddae305029ae7beb3dc97779b96c7307c",
+    "src/legsa_gins/paper_rebuild/carrier_phase/contact_rotation.py": "6dc63f134e37a1f55e67aec3976a2a507e39bba92ef8985bfdca0f8bd738971d",
+    "tests/paper_rebuild/test_attitude_clone.py": "b5dd6dbfe6c52f14919b787b0e7114f0d61b6f4ee00a22efcf5f2ea35d9676a6",
+    "docs/paper_rebuild/TRUSTED_HEADING_20261006/ATTITUDE_CLONE_PLAN.md": "083ec10d81a144d2ff8a43876b1057ad4838f0aa31a8f122229d90a4b7d06fad"
+  },
+  "execution_head": "81fa30238aeb6a7007dfd26b5a689b90b46cfd16",
+  "returncode": 0,
+  "wall_s": 0.3967378119999694,
+  "real_data_reads": 0,
+  "native_calls": 0,
+  "CILS_calls": 0,
+  "navigation_runs": 0,
+  "evaluator_calls": 0,
+  "reference_reads": 0,
+  "scope": "ISOLATED_21_PLUS_3_GAUSSIAN_MATH_KERNEL",
+  "unique_tests": 14,
+  "test_executions": 14,
+  "passed": 14,
+  "failed": 0,
+  "retries": 0,
+  "scientific_source_unchanged_during_test": true,
+  "log_sha256": "11a0f69837185ee278d256b8cc0a6414fc89900bb1aa664a30ee3a8498b6f847",
+  "scratch_alias": "<SCRATCH>/TRUSTED_HEADING_20261006/ATTITUDE_CLONE",
+  "nominal_state_modified": false,
+  "physical_noise_qualification_proven": false,
+  "Gaussian_kernel_executed": true
+}
