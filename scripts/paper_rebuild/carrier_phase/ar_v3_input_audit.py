@@ -20,6 +20,65 @@ def digest(data):
 def dump(path, value):
     path.write_text(json.dumps(value, indent=2, ensure_ascii=False)+"\n")
 
+
+def ubx_checksum(data):
+    a=b=0
+    for value in data:
+        a=(a+value)&255; b=(b+a)&255
+    return a,b
+
+def scan_hx02_frames(data):
+    """Historical _scan_valid_ubx_frames acceptance, with rejected-range logging.
+
+    The resynchronization and accepted bytes match shared_raw_backend exactly.
+    Diagnostics never repair bytes or change the next sync candidate.
+    """
+    frames=[]; rejected=[]; discarded=checksum_failures=0; cursor=0
+    def discard(start,end,reason):
+        if end>start: rejected.append((start,end,reason))
+    while cursor<len(data):
+        sync=data.find(b"\xb5\x62",cursor)
+        if sync<0:
+            discarded+=len(data)-cursor
+            discard(cursor,len(data),"NON_UBX_BYTES")
+            break
+        discarded+=sync-cursor
+        discard(cursor,sync,"NON_UBX_BYTES")
+        if sync+8>len(data):
+            discarded+=len(data)-sync
+            discard(sync,len(data),"INCOMPLETE_UBX_HEADER")
+            break
+        length=int.from_bytes(data[sync+4:sync+6],"little")
+        end=sync+8+length
+        if end>len(data):
+            discarded+=1
+            discard(sync,sync+1,"DECLARED_FRAME_EXCEEDS_STREAM")
+            cursor=sync+1
+            continue
+        frame=data[sync:end]
+        if ubx_checksum(frame[2:-2])!=tuple(frame[-2:]):
+            checksum_failures+=1;discarded+=1
+            discard(sync,sync+1,"DECLARED_FRAME_CHECKSUM_MISMATCH")
+            cursor=sync+1
+            continue
+        frames.append(frame);cursor=end
+    return frames,discarded,checksum_failures,rejected
+
+def excluded_cell_rows(cells, rejected):
+    """Attribute rejected byte spans back to original CSV cells, without mutation."""
+    result=[]; cursor=0
+    for cell in cells:
+        start,end=cell["stream_start"],cell["stream_end"]
+        while cursor<len(rejected) and rejected[cursor][1]<=start: cursor+=1
+        index=cursor; excluded=0; reasons=set()
+        while index<len(rejected) and rejected[index][0]<end:
+            a,b,reason=rejected[index]
+            excluded+=max(0,min(end,b)-max(start,a));reasons.add(reason);index+=1
+        if excluded:
+            result.append({**cell,"discarded_bytes":excluded,
+                "entire_cell_excluded":excluded==end-start,"filter_reasons":sorted(reasons)})
+    return result
+
 def parse_obs(data):
     lines=data.decode("ascii").splitlines()
     types={}; expected={}; i=0; system=None
@@ -137,21 +196,44 @@ def main():
             summary["receivers"].append(record)
             raw_bytes=read_pinned(item["source"],item["source_sha256"],"source",
                                   sequence=seq,receiver=receiver)
-            all_frames=bytearray();clipped_frames=bytearray();counts=collections.Counter()
-            invalid=0
-            for row in csv.DictReader(io.StringIO(raw_bytes.decode("utf-8-sig"))):
+            source_cells=bytearray();cell_metadata=[];clipped_frames=bytearray()
+            counts=collections.Counter();malformed=[]
+            for line_number,row in enumerate(csv.DictReader(io.StringIO(raw_bytes.decode("utf-8-sig"))),start=2):
                 frame=ast.literal_eval(row["data"])
-                if not isinstance(frame,bytes) or not frame.startswith(b"\xb5\x62"):continue
+                assert isinstance(frame,bytes),("non-bytes data cell",stem,line_number)
+                offset=len(source_cells);source_cells.extend(frame)
+                cell={"csv_line":line_number,"time":row["Time"],"name":row["name"],
+                      "protocol":row.get("protocol"),"stream_start":offset,"stream_end":len(source_cells),
+                      "cell_sha256":digest(frame)}
+                cell_metadata.append(cell)
+                if not frame.startswith(b"\xb5\x62"):continue
                 counts[row["name"]]+=1
-                ck_a=ck_b=0
-                for value in frame[2:-2]:
-                    ck_a=(ck_a+value)&255;ck_b=(ck_b+ck_a)&255
-                invalid+=int(len(frame)!=int.from_bytes(frame[4:6],"little")+8 or frame[-2:]!=bytes((ck_a,ck_b)))
-                all_frames.extend(frame)
+                length_ok=len(frame)>=8 and len(frame)==int.from_bytes(frame[4:6],"little")+8
+                checksum_ok=len(frame)>=8 and ubx_checksum(frame[2:-2])==tuple(frame[-2:])
+                if not(length_ok and checksum_ok):
+                    malformed.append({**cell,"actual_bytes":len(frame),
+                        "declared_payload_bytes":int.from_bytes(frame[4:6],"little") if len(frame)>=6 else None,
+                        "length_ok":length_ok,"checksum_over_available_bytes_ok":checksum_ok,
+                        "filter_rule":"HX02_STREAM_DECLARED_LENGTH_AND_CHECKSUM_WITH_RESYNCHRONIZATION"})
                 elapsed=float(row["Time"])-item["base_time"]
                 if item["window"][0]<=elapsed<=item["window"][1]:
                     clipped_frames.extend(frame)
-            assert invalid==0,(stem,"invalid UBX frames",invalid)
+            frames,discarded,checksum_failures,rejected=scan_hx02_frames(bytes(source_cells))
+            all_frames=b"".join(frames)
+            exclusions=excluded_cell_rows(cell_metadata,rejected)
+            assert sum(row["discarded_bytes"] for row in exclusions)==discarded
+            excluded_by_line={row["csv_line"]:row for row in exclusions}
+            for row in malformed:
+                exclusion=excluded_by_line.get(row["csv_line"],{})
+                row["discarded_bytes"]=exclusion.get("discarded_bytes",0)
+                row["filter_reasons"]=exclusion.get("filter_reasons",[])
+            dump(folder/"FULL_STREAM_EXCLUDED_CELLS.json",exclusions)
+            record.update(malformed_prefixed_cell_count=len(malformed),
+                malformed_prefixed_cells=malformed,scanner_discarded_bytes=discarded,
+                scanner_checksum_failures=checksum_failures,scanner_accepted_frames=len(frames),
+                excluded_cell_count=len(exclusions),
+                excluded_cells_receipt=alias(folder/"FULL_STREAM_EXCLUDED_CELLS.json"))
+            dump(args.output/"STATE.json",summary)
             ubx=folder/(stem+".ubx");ubx.write_bytes(all_frames)
             old_obs_bytes=read_pinned(item["old_full_obs"],item["old_full_obs_sha256"],
                                      "old_full_obs",sequence=seq,receiver=receiver)
@@ -159,12 +241,17 @@ def main():
                                   "old_full_ubx",sequence=seq,receiver=receiver)
             prior_clip=read_pinned(item["old_clipped_ubx"],item["old_clipped_ubx_sha256"],
                                   "old_clipped_ubx",sequence=seq,receiver=receiver)
+            record.update(full_ubx_byte_identical=all_frames==prior_full,
+                          clipped_ubx_byte_identical=clipped_frames==prior_clip)
+            dump(args.output/"STATE.json",summary)
+            assert all_frames==prior_full,(stem,"historical full UBX extraction mismatch")
+            assert clipped_frames==prior_clip,(stem,"historical clipped UBX extraction mismatch")
             obs=folder/(stem+".obs");nav=folder/(stem+".nav")
             command=[str(convbin),*plan["options"],"-o",str(obs),"-n",str(nav),str(ubx)]
             summary["convbin_calls"]+=1
             record.update({"sequence":seq,"receiver":receiver,
               "source":item["source"],"source_sha256":item["source_sha256"],
-              "frame_counts":dict(counts),"invalid_frames":invalid,
+              "input_prefixed_cell_name_counts":dict(counts),
               "full_ubx_byte_identical":all_frames==prior_full,
               "clipped_ubx_byte_identical":clipped_frames==prior_clip,
               "full_ubx_sha256":digest(all_frames),"clipped_ubx_sha256":digest(clipped_frames),
@@ -229,7 +316,7 @@ def main():
             all_header_semantics_equal=all(r["header_semantics_equal"] for r in summary["receivers"]),
             all_epochs_equal=all(r["epochs_equal"] for r in summary["receivers"]))
     except BaseException as exc:
-        summary.update(status="FAILED",failure_type=type(exc).__name__,failure=str(exc))
+        summary.update(status="FAILED",failure_type=type(exc).__name__,failure=alias(str(exc)))
         raise
     finally:
         dump(args.output/"STATE.json",summary)

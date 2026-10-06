@@ -11,13 +11,7 @@
   "convbin_sha256": "85b6b981374c7df957492d9423a3c650a35cb5e7253598651070adf4d9f1df2a",
   "options": [
     "-r",
-    "ubx",
-    "-v",
-    "3.04",
-    "-f",
-    "5",
-    "-od",
-    "-os"
+    "ubx"
   ],
   "old_lli_table": "<CODE_ROOT>/docs/paper_rebuild/hext/DG01R/DG01R_LLI_DIFFERENCES.csv",
   "sequences": [
@@ -222,5 +216,443 @@
     "old_15_events": "Report both full-history equality and old_full_table_consistent; GPS declaration required for the registered +18 s inverse mapping.",
     "completion": "COMPLETE means all six comparisons executed; execution_complete is not a scientific PASS.",
     "failed_execution": "A pin mismatch or execution failure leaves status FAILED, actual input identity and completed results in STATE; no retry."
+  },
+  "revision": {
+    "id": "attempt02_same_hx02_extraction_and_options",
+    "supersedes_attempt01_plan_sha256": "670391844fdbcb1381b558f68cab1a263feb4e0851a1ffc8a893e71f23d321eb",
+    "attempt01_failure_receipt": "<CODE_ROOT>/docs/paper_rebuild/AR_V3_RESEARCH_20261006/input_history_attempt01_failure.json",
+    "attempt01_failure_receipt_sha256": "ad09b28fc4c99867481598cbd28eab0c7abc31862b559f94cd869d6af904e001",
+    "attempt01_convbin_calls": 0,
+    "remaining_convbin_calls": 6,
+    "additional_calls_authorized": 0,
+    "reason": "Attempt01 stopped before conversion because 28 legacy malformed UBX-prefixed CSV cells were treated as mandatory-valid frames. HX02 used a resynchronizing valid-frame scanner; DG01R clipped extraction retained such cells. Old actual HX02 execve also proves only -r ubx options, unlike the initial DG01R-option plan.",
+    "historical_argv_evidence": [
+      {
+        "sequence": "BY2",
+        "receiver": 1,
+        "prepared_manifest": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/RTKLIB_PREPARED.json",
+        "prepared_manifest_sha256": "225fcdbfe9469207969d153d09fca4319adff6ced0190fdac9c8595fa3850ff7",
+        "successful_execve_trace": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/NATIVE_OPENAT.strace",
+        "trace_sha256": "fe03c8174e8efd64dc0a4fdb3052e0b028cdbc7f5a27d87653548b7f3fdb008b",
+        "prepared_matches_successful_execve": true,
+        "argv_template": [
+          "<CONVBIN>",
+          "-r",
+          "ubx",
+          "-o",
+          "<OBS>",
+          "-n",
+          "<NAV>",
+          "<UBX>"
+        ],
+        "rinex_version": "3.04",
+        "declared_time_system": "GPS",
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "observable_type_counts": {
+          "G": 5,
+          "R": 4,
+          "E": 4,
+          "J": 4,
+          "S": 2,
+          "C": 4
+        },
+        "D_present": false,
+        "S_present": false
+      },
+      {
+        "sequence": "BY2",
+        "receiver": 2,
+        "prepared_manifest": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/RTKLIB_PREPARED.json",
+        "prepared_manifest_sha256": "225fcdbfe9469207969d153d09fca4319adff6ced0190fdac9c8595fa3850ff7",
+        "successful_execve_trace": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/NATIVE_OPENAT.strace",
+        "trace_sha256": "fe03c8174e8efd64dc0a4fdb3052e0b028cdbc7f5a27d87653548b7f3fdb008b",
+        "prepared_matches_successful_execve": true,
+        "argv_template": [
+          "<CONVBIN>",
+          "-r",
+          "ubx",
+          "-o",
+          "<OBS>",
+          "-n",
+          "<NAV>",
+          "<UBX>"
+        ],
+        "rinex_version": "3.04",
+        "declared_time_system": "GPS",
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "observable_type_counts": {
+          "G": 4,
+          "R": 4,
+          "E": 4,
+          "J": 5,
+          "S": 2,
+          "C": 4
+        },
+        "D_present": false,
+        "S_present": false
+      },
+      {
+        "sequence": "BY2H",
+        "receiver": 1,
+        "prepared_manifest": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/RTKLIB_PREPARED.json",
+        "prepared_manifest_sha256": "f6eb332b28fb2be90891b6c6d23357654ffa17ff1b97bfdd1251072b2a88e025",
+        "successful_execve_trace": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/NATIVE_OPENAT.strace",
+        "trace_sha256": "c2abf3f89745736d2c69f36cfec6cf12f03f59f242d44f7db6754350a45a1e3a",
+        "prepared_matches_successful_execve": true,
+        "argv_template": [
+          "<CONVBIN>",
+          "-r",
+          "ubx",
+          "-o",
+          "<OBS>",
+          "-n",
+          "<NAV>",
+          "<UBX>"
+        ],
+        "rinex_version": "3.04",
+        "declared_time_system": "GPS",
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "observable_type_counts": {
+          "G": 5,
+          "R": 4,
+          "E": 4,
+          "J": 4,
+          "S": 2,
+          "C": 4
+        },
+        "D_present": false,
+        "S_present": false
+      },
+      {
+        "sequence": "BY2H",
+        "receiver": 2,
+        "prepared_manifest": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/RTKLIB_PREPARED.json",
+        "prepared_manifest_sha256": "f6eb332b28fb2be90891b6c6d23357654ffa17ff1b97bfdd1251072b2a88e025",
+        "successful_execve_trace": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/NATIVE_OPENAT.strace",
+        "trace_sha256": "c2abf3f89745736d2c69f36cfec6cf12f03f59f242d44f7db6754350a45a1e3a",
+        "prepared_matches_successful_execve": true,
+        "argv_template": [
+          "<CONVBIN>",
+          "-r",
+          "ubx",
+          "-o",
+          "<OBS>",
+          "-n",
+          "<NAV>",
+          "<UBX>"
+        ],
+        "rinex_version": "3.04",
+        "declared_time_system": "GPS",
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "observable_type_counts": {
+          "G": 5,
+          "R": 4,
+          "E": 4,
+          "J": 5,
+          "S": 2,
+          "C": 4
+        },
+        "D_present": false,
+        "S_present": false
+      },
+      {
+        "sequence": "BY2O",
+        "receiver": 1,
+        "prepared_manifest": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/RTKLIB_PREPARED.json",
+        "prepared_manifest_sha256": "cec6d10013335f0164ece0aea4ceb502aacf33735c6e5529cfd700736cb0c303",
+        "successful_execve_trace": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/NATIVE_OPENAT.strace",
+        "trace_sha256": "94db82fa828700096d2da29eac636dd2781b49f5e54ef357db850f68d9f19c47",
+        "prepared_matches_successful_execve": true,
+        "argv_template": [
+          "<CONVBIN>",
+          "-r",
+          "ubx",
+          "-o",
+          "<OBS>",
+          "-n",
+          "<NAV>",
+          "<UBX>"
+        ],
+        "rinex_version": "3.04",
+        "declared_time_system": "GPS",
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "observable_type_counts": {
+          "G": 5,
+          "R": 4,
+          "E": 4,
+          "J": 4,
+          "S": 2,
+          "C": 4
+        },
+        "D_present": false,
+        "S_present": false
+      },
+      {
+        "sequence": "BY2O",
+        "receiver": 2,
+        "prepared_manifest": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/RTKLIB_PREPARED.json",
+        "prepared_manifest_sha256": "cec6d10013335f0164ece0aea4ceb502aacf33735c6e5529cfd700736cb0c303",
+        "successful_execve_trace": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/NATIVE_OPENAT.strace",
+        "trace_sha256": "94db82fa828700096d2da29eac636dd2781b49f5e54ef357db850f68d9f19c47",
+        "prepared_matches_successful_execve": true,
+        "argv_template": [
+          "<CONVBIN>",
+          "-r",
+          "ubx",
+          "-o",
+          "<OBS>",
+          "-n",
+          "<NAV>",
+          "<UBX>"
+        ],
+        "rinex_version": "3.04",
+        "declared_time_system": "GPS",
+        "observation_types": {
+          "G": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "R": [
+            "C1C",
+            "L1C",
+            "C2C",
+            "L2C"
+          ],
+          "E": [
+            "C1C",
+            "L1C",
+            "C7Q",
+            "L7Q"
+          ],
+          "J": [
+            "C1C",
+            "L1C",
+            "C2L",
+            "L2L",
+            "C2S"
+          ],
+          "S": [
+            "C1C",
+            "L1C"
+          ],
+          "C": [
+            "C2I",
+            "L2I",
+            "C7I",
+            "L7I"
+          ]
+        },
+        "observable_type_counts": {
+          "G": 5,
+          "R": 4,
+          "E": 4,
+          "J": 5,
+          "S": 2,
+          "C": 4
+        },
+        "D_present": false,
+        "S_present": false
+      }
+    ]
+  },
+  "extraction_contract": {
+    "full_stream": "Concatenate every CSV data bytes cell in original order, then reuse exact HX02 sync/declared-length/checksum acceptance rule. No original byte repair.",
+    "historical_scanner": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py::_scan_valid_ubx_frames",
+    "implementation": "Local control-flow-equivalent copy with rejected byte-range diagnostics; each reconstructed full stream must equal its hash-locked old HX02 UBX before conversion.",
+    "clipped_stream": "Unchanged DG01R inclusive registered window; append each original bytes cell starting b5 62, including malformed cells. Used only for old-clipped identity audit, not converted here.",
+    "excluded_records": "Each CSV cell intersecting rejected byte ranges is logged with row/time/name/protocol/SHA, excluded byte count and scanner reason; malformed UBX-prefixed cells also listed individually.",
+    "expected_malformed_prefixed_cells": [
+      2,
+      1,
+      0,
+      2,
+      22,
+      1
+    ],
+    "historical_filtered_UBX_and_clipped_UBX_are_distinct_products": true
   }
 }
