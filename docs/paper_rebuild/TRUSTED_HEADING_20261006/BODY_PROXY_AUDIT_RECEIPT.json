@@ -1,0 +1,88 @@
+{
+  "source_stage_alias": "<SCRATCH_ROOT>/TRUSTED_HEADING_20261006/BODY_PROXY_AUDIT_ATTEMPT01",
+  "complete_sha256": "9958178883ed7bf1ea755cd4baf4df6812ac95f6f481c1daeed11526f9f2a3cc",
+  "plan_sha256": "d76e73b0d871a07cb30e0909c74c7e30eed9547ae32c2df0155a6ca56c467534",
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/trusted_heading_body_proxy_audit.py": "88c0ebdd3da871040a664292cd59365ef708c2c8538476285f5b42b1f6bebdcf",
+    "src/legsa_gins/paper_rebuild/body_velocity.py": "1866bd8b2655cb5a58edba9ba26f3610a1e79bf83145dd1d09548c716fa89da9",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h5.py": "3b9e57d5470cf33360564b0736a81a31ee67c1274c9a87b7e335921f58a399c2",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h0_h2.py": "ba861d0406aeb47adc2e9af29adc1f5fffc7326ee06a9ea50dbcc262c8f9158d",
+    "src/legsa_gins/paper_rebuild/carrier_phase/support_arcs.py": "4ce14c6d08a03551e1247d759405dc13252e03d53923fc6e58df8e387d605985",
+    "src/legsa_gins/paper_rebuild/carrier_phase/contact_rotation.py": "6dc63f134e37a1f55e67aec3976a2a507e39bba92ef8985bfdca0f8bd738971d",
+    "docs/paper_rebuild/TRUSTED_HEADING_20261006/BODY_PROXY_AUDIT_PLAN.md": "ddbf7228bea5aa40fa2a2e49d9f81bd4a094aebf002e960155f27a2a6341dc83"
+  },
+  "grid_total": 9213,
+  "derivation_command": [
+    "publish",
+    "--output-alias",
+    "<SCRATCH_ROOT>/TRUSTED_HEADING_20261006/BODY_PROXY_AUDIT_ATTEMPT01"
+  ],
+  "files": {
+    "BODY_PROXY_AUDIT_SUMMARY.json": "286552295a65026c6dc56d7ce41b93e824e33333593ebf9d9b378a8276a7e072",
+    "BODY_PROXY_AUDIT_COUNTS.csv": "66dc763bac3ae60f24af050d40ddda4858c34d9c03707b08cc2583dbff35cacc",
+    "BODY_PROXY_AUDIT_REPORT.md": "e999587e0f7d80ec01e1060bfdc837bec8b63aa37b40dcc70b6f59dec102726a",
+    "BODY_PROXY_AUDIT_DERIVED.json": "22bd907eb1f7ecbc51abb80dc088ae349f94e92c6eab6c99b586fb69fdca05a5"
+  },
+  "raw_payload_reopened_for_publish": 0,
+  "pre_readout_publish_report_sha256": "6c653ad87280ff1eb7e0ac353832dc460ab8288b1d2c4da444c68997b90e332c",
+  "derived_readout_script": "scripts/paper_rebuild/carrier_phase/trusted_heading_body_proxy_readout.py",
+  "derived_readout_script_sha256": "611560dab9af9cb5c96535a81150a6ca31aeaa4ff4c1e101bf208a705d5a8722",
+  "derived_data_scope": "sealed GRID/SUPPORT_EVENTS/FAULTS/summary only; raw replay 0",
+  "compressed_complete_tables": {
+    "body_proxy_audit/BY2_GRID.csv.gz": {
+      "compressed_sha256": "fd39e1896bcdeb7ff3161b2bfa77161f38cce173dbd79c75978e527ffe0db280",
+      "uncompressed_sha256": "e464eb565acb61d611a11b223e88a4962c9b7ed1dc3a2ada355a56c1b292215c",
+      "source_filename": "BY2_GRID.csv",
+      "uncompressed_size": 1284132
+    },
+    "body_proxy_audit/BY2_FAULTS.csv.gz": {
+      "compressed_sha256": "a841ebac83429acc4fef6777c3471f5753245b96a80956e177bfe7409e5934df",
+      "uncompressed_sha256": "b4a11b1bc14d7e8e34029c1c564e2bcb8a6fe4faa8f7cacaabbc77aae8cff018",
+      "source_filename": "BY2_FAULTS.csv",
+      "uncompressed_size": 52
+    },
+    "body_proxy_audit/BY2_SUPPORT_EVENTS.csv.gz": {
+      "compressed_sha256": "b1be695e313c31b82b9732b047bd7f0d41925777ab78d8d20c5969b80c51473e",
+      "uncompressed_sha256": "7a721e9ed5d9316e65178368bc907b43de7c7ca91aad3e9ec87b892b2c230a64",
+      "source_filename": "BY2_SUPPORT_EVENTS.csv",
+      "uncompressed_size": 603427
+    },
+    "body_proxy_audit/BY2H_GRID.csv.gz": {
+      "compressed_sha256": "e199de948d88dfedd4207f0103b0c9b2ef507ff2887983387498d4a481f757ab",
+      "uncompressed_sha256": "b946b371a884dce246419111338022a1331001e89ca7f08469f03cdc2e7040a2",
+      "source_filename": "BY2H_GRID.csv",
+      "uncompressed_size": 1264190
+    },
+    "body_proxy_audit/BY2H_FAULTS.csv.gz": {
+      "compressed_sha256": "a841ebac83429acc4fef6777c3471f5753245b96a80956e177bfe7409e5934df",
+      "uncompressed_sha256": "b4a11b1bc14d7e8e34029c1c564e2bcb8a6fe4faa8f7cacaabbc77aae8cff018",
+      "source_filename": "BY2H_FAULTS.csv",
+      "uncompressed_size": 52
+    },
+    "body_proxy_audit/BY2H_SUPPORT_EVENTS.csv.gz": {
+      "compressed_sha256": "c10f6cc8e68c5e81a9bc33a518ab358e40c34ea43a9b4adb084a4281de4e4bd5",
+      "uncompressed_sha256": "17c9f5de86c116efc600c508f0d60cf2139eef879df3ecdcdd42599adf574555",
+      "source_filename": "BY2H_SUPPORT_EVENTS.csv",
+      "uncompressed_size": 603678
+    },
+    "body_proxy_audit/BY2O_GRID.csv.gz": {
+      "compressed_sha256": "5744ba59628176fcb2226302ad35beef695a93393705fb117410852648948528",
+      "uncompressed_sha256": "3572e673a4255070cdcce7db50ffc111cc4a1fb729f1b2514cab7fd22d7d45a5",
+      "source_filename": "BY2O_GRID.csv",
+      "uncompressed_size": 1947139
+    },
+    "body_proxy_audit/BY2O_FAULTS.csv.gz": {
+      "compressed_sha256": "a841ebac83429acc4fef6777c3471f5753245b96a80956e177bfe7409e5934df",
+      "uncompressed_sha256": "b4a11b1bc14d7e8e34029c1c564e2bcb8a6fe4faa8f7cacaabbc77aae8cff018",
+      "source_filename": "BY2O_FAULTS.csv",
+      "uncompressed_size": 52
+    },
+    "body_proxy_audit/BY2O_SUPPORT_EVENTS.csv.gz": {
+      "compressed_sha256": "85572ef9d2ef73d81f5909c4633fd444a3d2e424e7198692d7af34d9e0fe683c",
+      "uncompressed_sha256": "899a3fd06a57ecabc1c5a7472d80a0e51847fae39f3288d86d9846d28d29edb4",
+      "source_filename": "BY2O_SUPPORT_EVENTS.csv",
+      "uncompressed_size": 643254
+    }
+  },
+  "independent_static_review": "planner agent: causal grid/source ordering, full support history, gyro rotation order and complete denominator; no blocking issue, no execution."
+}

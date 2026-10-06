@@ -1,0 +1,236 @@
+{
+  "source_stage_alias": "<SCRATCH_ROOT>/TRUSTED_HEADING_20261006/BODY_PROXY_AUDIT_ATTEMPT01",
+  "scope": "read-only saved grid/event derivation; raw/body/GNSS/reference payload reads 0",
+  "complete_sha256": "9958178883ed7bf1ea755cd4baf4df6812ac95f6f481c1daeed11526f9f2a3cc",
+  "rows_verified": 9213,
+  "sequences": {
+    "BY2": {
+      "grid_rows": 2741,
+      "usable_foot_count_full_grid": {
+        "0": 1172,
+        "2": 1357,
+        "1": 212
+      },
+      "valid_geometry_foot_combinations": {
+        "FR|RL": 666,
+        "FL|RR": 691
+      },
+      "instant_stance_count_at_selected_grid_sample": {
+        "2": 2519,
+        "1": 169,
+        "3": 11,
+        "0": 40,
+        "4": 1
+      },
+      "source_fault_ledger_rows": 0,
+      "saved_support_transitions_by_foot": {
+        "RL": 1730,
+        "RR": 1792,
+        "FR": 1693,
+        "FL": 1796
+      },
+      "source_gap_with_recorded_support_transition_times_s": [
+        188.14705511300002
+      ],
+      "source_gap_count_limit": "Only times carrying SOURCE_GAP in saved support-transition events; not asserted to count every source-message gap.",
+      "observable_cayley_difference_rad_s_by_rank": {
+        "2": {
+          "n": 1357,
+          "min": 0.008008954331295719,
+          "median": 0.09534935970561195,
+          "p99": 0.2222194146209703,
+          "max": 0.3338950801297813
+        }
+      },
+      "rank2_body_frd_z_projector_diagonal": {
+        "n": 1357,
+        "min": 0.9882894535529009,
+        "median": 0.999974981062521,
+        "p99": 0.9999999947729127,
+        "max": 0.9999999999876883
+      },
+      "z_projection_limit": "Geometry alignment only. Values near one do not make global yaw or body-z rotation exactly identifiable; nonzero null-axis z component remains.",
+      "basis_orthogonality_max_abs": 8.881784197001252e-16,
+      "all_grid_timekeys_and_causality_checked": true,
+      "full_rank_unavailable_reason": "No >=3 feet retain a common eligible contact episode across selected full intervals."
+    },
+    "BY2H": {
+      "grid_rows": 2701,
+      "usable_foot_count_full_grid": {
+        "0": 1156,
+        "2": 1326,
+        "1": 219
+      },
+      "valid_geometry_foot_combinations": {
+        "FR|RL": 634,
+        "FL|RR": 692
+      },
+      "instant_stance_count_at_selected_grid_sample": {
+        "2": 2475,
+        "1": 177,
+        "0": 29,
+        "3": 18,
+        "4": 1
+      },
+      "source_fault_ledger_rows": 0,
+      "saved_support_transitions_by_foot": {
+        "FR": 1673,
+        "FL": 1757,
+        "RR": 1780,
+        "RL": 1725
+      },
+      "source_gap_with_recorded_support_transition_times_s": [
+        414.561052698,
+        415.080781896
+      ],
+      "source_gap_count_limit": "Only times carrying SOURCE_GAP in saved support-transition events; not asserted to count every source-message gap.",
+      "observable_cayley_difference_rad_s_by_rank": {
+        "2": {
+          "n": 1326,
+          "min": 0.0008381543763984927,
+          "median": 0.09802057018526363,
+          "p99": 0.20625194622453757,
+          "max": 0.3005609003403312
+        }
+      },
+      "rank2_body_frd_z_projector_diagonal": {
+        "n": 1326,
+        "min": 0.9930042260143855,
+        "median": 0.9999765288370781,
+        "p99": 0.9999999825384123,
+        "max": 0.999999999911988
+      },
+      "z_projection_limit": "Geometry alignment only. Values near one do not make global yaw or body-z rotation exactly identifiable; nonzero null-axis z component remains.",
+      "basis_orthogonality_max_abs": 8.881784197001252e-16,
+      "all_grid_timekeys_and_causality_checked": true,
+      "full_rank_unavailable_reason": "No >=3 feet retain a common eligible contact episode across selected full intervals."
+    },
+    "BY2O": {
+      "grid_rows": 3771,
+      "usable_foot_count_full_grid": {
+        "0": 1227,
+        "2": 1439,
+        "1": 207,
+        "3": 37,
+        "4": 861
+      },
+      "valid_geometry_foot_combinations": {
+        "FR|RL": 671,
+        "FL|RR": 768,
+        "FL|RR|RL": 37,
+        "FR|FL|RR|RL": 861
+      },
+      "instant_stance_count_at_selected_grid_sample": {
+        "2": 2638,
+        "3": 70,
+        "1": 150,
+        "0": 43,
+        "4": 869
+      },
+      "source_fault_ledger_rows": 0,
+      "saved_support_transitions_by_foot": {
+        "FL": 1846,
+        "RR": 1864,
+        "FR": 1778,
+        "RL": 1824
+      },
+      "source_gap_with_recorded_support_transition_times_s": [
+        3241.017059966,
+        3271.005075498,
+        3301.3990592650002,
+        3362.3590463920004,
+        3382.737054099,
+        3392.649062152,
+        3453.483064634,
+        3483.9170629560003,
+        3536.941049498,
+        3544.9870597820004
+      ],
+      "source_gap_count_limit": "Only times carrying SOURCE_GAP in saved support-transition events; not asserted to count every source-message gap.",
+      "observable_cayley_difference_rad_s_by_rank": {
+        "2": {
+          "n": 1439,
+          "min": 0.002714739772720485,
+          "median": 0.09343732805717328,
+          "p99": 0.19893895908124426,
+          "max": 0.29541221487590696
+        },
+        "3": {
+          "n": 898,
+          "min": 0.0008325989829676918,
+          "median": 0.009524792752210402,
+          "p99": 0.027382449803068105,
+          "max": 0.04447653755957608
+        }
+      },
+      "rank2_body_frd_z_projector_diagonal": {
+        "n": 1439,
+        "min": 0.9924864583996772,
+        "median": 0.999971643710824,
+        "p99": 0.9999999907593449,
+        "max": 0.9999999998903658
+      },
+      "z_projection_limit": "Geometry alignment only. Values near one do not make global yaw or body-z rotation exactly identifiable; nonzero null-axis z component remains.",
+      "basis_orthogonality_max_abs": 1.6653345369377348e-15,
+      "all_grid_timekeys_and_causality_checked": true,
+      "full_rank_unavailable_reason": "Rank-3 records consist of three/four common continuous SDK-support proxies, not independently certified no-slip contacts."
+    }
+  },
+  "raw_replay": false,
+  "copies": {
+    "body_proxy_audit/BY2_GRID.csv.gz": {
+      "compressed_sha256": "fd39e1896bcdeb7ff3161b2bfa77161f38cce173dbd79c75978e527ffe0db280",
+      "uncompressed_sha256": "e464eb565acb61d611a11b223e88a4962c9b7ed1dc3a2ada355a56c1b292215c",
+      "source_filename": "BY2_GRID.csv",
+      "uncompressed_size": 1284132
+    },
+    "body_proxy_audit/BY2_FAULTS.csv.gz": {
+      "compressed_sha256": "a841ebac83429acc4fef6777c3471f5753245b96a80956e177bfe7409e5934df",
+      "uncompressed_sha256": "b4a11b1bc14d7e8e34029c1c564e2bcb8a6fe4faa8f7cacaabbc77aae8cff018",
+      "source_filename": "BY2_FAULTS.csv",
+      "uncompressed_size": 52
+    },
+    "body_proxy_audit/BY2_SUPPORT_EVENTS.csv.gz": {
+      "compressed_sha256": "b1be695e313c31b82b9732b047bd7f0d41925777ab78d8d20c5969b80c51473e",
+      "uncompressed_sha256": "7a721e9ed5d9316e65178368bc907b43de7c7ca91aad3e9ec87b892b2c230a64",
+      "source_filename": "BY2_SUPPORT_EVENTS.csv",
+      "uncompressed_size": 603427
+    },
+    "body_proxy_audit/BY2H_GRID.csv.gz": {
+      "compressed_sha256": "e199de948d88dfedd4207f0103b0c9b2ef507ff2887983387498d4a481f757ab",
+      "uncompressed_sha256": "b946b371a884dce246419111338022a1331001e89ca7f08469f03cdc2e7040a2",
+      "source_filename": "BY2H_GRID.csv",
+      "uncompressed_size": 1264190
+    },
+    "body_proxy_audit/BY2H_FAULTS.csv.gz": {
+      "compressed_sha256": "a841ebac83429acc4fef6777c3471f5753245b96a80956e177bfe7409e5934df",
+      "uncompressed_sha256": "b4a11b1bc14d7e8e34029c1c564e2bcb8a6fe4faa8f7cacaabbc77aae8cff018",
+      "source_filename": "BY2H_FAULTS.csv",
+      "uncompressed_size": 52
+    },
+    "body_proxy_audit/BY2H_SUPPORT_EVENTS.csv.gz": {
+      "compressed_sha256": "c10f6cc8e68c5e81a9bc33a518ab358e40c34ea43a9b4adb084a4281de4e4bd5",
+      "uncompressed_sha256": "17c9f5de86c116efc600c508f0d60cf2139eef879df3ecdcdd42599adf574555",
+      "source_filename": "BY2H_SUPPORT_EVENTS.csv",
+      "uncompressed_size": 603678
+    },
+    "body_proxy_audit/BY2O_GRID.csv.gz": {
+      "compressed_sha256": "5744ba59628176fcb2226302ad35beef695a93393705fb117410852648948528",
+      "uncompressed_sha256": "3572e673a4255070cdcce7db50ffc111cc4a1fb729f1b2514cab7fd22d7d45a5",
+      "source_filename": "BY2O_GRID.csv",
+      "uncompressed_size": 1947139
+    },
+    "body_proxy_audit/BY2O_FAULTS.csv.gz": {
+      "compressed_sha256": "a841ebac83429acc4fef6777c3471f5753245b96a80956e177bfe7409e5934df",
+      "uncompressed_sha256": "b4a11b1bc14d7e8e34029c1c564e2bcb8a6fe4faa8f7cacaabbc77aae8cff018",
+      "source_filename": "BY2O_FAULTS.csv",
+      "uncompressed_size": 52
+    },
+    "body_proxy_audit/BY2O_SUPPORT_EVENTS.csv.gz": {
+      "compressed_sha256": "85572ef9d2ef73d81f5909c4633fd444a3d2e424e7198692d7af34d9e0fe683c",
+      "uncompressed_sha256": "899a3fd06a57ecabc1c5a7472d80a0e51847fae39f3288d86d9846d28d29edb4",
+      "source_filename": "BY2O_SUPPORT_EVENTS.csv",
+      "uncompressed_size": 643254
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "projected_fixed_n_saved_sensitivity_aggregation.v1",
+  "source_details_sha256": "fbd5bc7ff621a22f7ba71bf539bbd561fd4c3f24cd35eb52bb813495a77efe66",
+  "strata": {
+    "all_1191": {
+      "supplied_primary_joint_columns": 30138,
+      "unbounded_mdb_columns": 19307,
+      "exact_zero_information_and_zero_gain_columns": 19307
+    },
+    "original_failure_535": {
+      "supplied_primary_joint_columns": 13547,
+      "unbounded_mdb_columns": 8777,
+      "exact_zero_information_and_zero_gain_columns": 8777
+    },
+    "support_upper_bound_516": {
+      "supplied_primary_joint_columns": 13078,
+      "unbounded_mdb_columns": 8482,
+      "exact_zero_information_and_zero_gain_columns": 8482
+    }
+  },
+  "merge_examples": {
+    "partial_0244.00": {
+      "reason": "all_five_projected_primary_competitor_identical",
+      "primary_joint_flags": {
+        "residual_flag": false,
+        "length_flag": false,
+        "phase_fault_flag": true
+      },
+      "geometry_ready": true
+    }
+  },
+  "max_joint_vs_slot_sum_residual_identity_error": 9.094947017729282e-13,
+  "max_raw_sphere_objective_identity_error": 9.521272659185342e-12,
+  "new_gls_glrt_sphere_cils_calls": 0,
+  "interpretation": "Supplied fault columns repeated across overlapping windows. Zero information and zero free-baseline gain identifies a cancelled direction in this working linear model; not a benign physical signal certificate."
+}

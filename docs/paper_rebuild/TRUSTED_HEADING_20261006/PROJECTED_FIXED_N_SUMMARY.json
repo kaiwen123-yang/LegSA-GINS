@@ -1,0 +1,69 @@
+{
+  "schema": "projected_fixed_n_diagnostic.v1",
+  "status": "EXECUTION_COMPLETE",
+  "source_identity_unchanged": true,
+  "head_unchanged": true,
+  "fixed_windows": 1191,
+  "strata": {
+    "all_1191": {
+      "denominator": 1191,
+      "statuses": {
+        "DIAGNOSTIC_COMPLETE": 1172,
+        "INSUFFICIENT_SUPPORT": 19
+      },
+      "all_five_projection_merged": 1,
+      "joint_primary_flags": {
+        "residual_flag": 318,
+        "length_flag": 328,
+        "phase_fault_flag": 859
+      },
+      "joint_primary_supported": 1191
+    },
+    "original_failure_535": {
+      "denominator": 535,
+      "statuses": {
+        "DIAGNOSTIC_COMPLETE": 516,
+        "INSUFFICIENT_SUPPORT": 19
+      },
+      "all_five_projection_merged": 1,
+      "joint_primary_flags": {
+        "residual_flag": 138,
+        "length_flag": 171,
+        "phase_fault_flag": 367
+      },
+      "joint_primary_supported": 535
+    },
+    "support_upper_bound_516": {
+      "denominator": 516,
+      "statuses": {
+        "DIAGNOSTIC_COMPLETE": 516
+      },
+      "all_five_projection_merged": 1,
+      "joint_primary_flags": {
+        "residual_flag": 130,
+        "length_flag": 165,
+        "phase_fault_flag": 358
+      },
+      "joint_primary_supported": 516
+    }
+  },
+  "counters": {
+    "fixed_n_gls_attempts": 14292,
+    "fixed_n_gls_completed": 14292,
+    "sphere_calls": 11910,
+    "glrt_calls": 14292,
+    "sensitivity_calls": 14292,
+    "cils_calls": 0,
+    "admission_calls": 0,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "reference_reads": 0
+  },
+  "elapsed_s": 92.78668393100003,
+  "temporal_covariance": "INDEPENDENT_EPOCH_WORKING_ASSUMPTION_NOT_SELECTION_CALIBRATION",
+  "unknown_other_integer_alternatives": "NOT_ENUMERATED",
+  "accepted_integer_measurement": false,
+  "false_fix_probability": null,
+  "all_alternatives_covered": false,
+  "search_certificate_transferred": false
+}
