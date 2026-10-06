@@ -1,0 +1,4339 @@
+{
+  "planned_solver_calls": 72,
+  "actual_solver_calls": 72,
+  "paired_conditions": 504,
+  "heldout_independent_seeds": 48,
+  "calibration_independent_seeds": 24,
+  "threshold_changes": 0,
+  "groups": {
+    "CALIBRATION/CLEAN/M3": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "NOT_ACCEPTED": 5,
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 3
+      },
+      "statuses": {
+        "UNRESOLVED_COMPETITION": 4,
+        "REJECTED_LENGTH": 1,
+        "SHADOW_ACCEPTED": 3
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 14.508035540967175,
+      "GLRT_reject_any": 0,
+      "rejected_count": 1,
+      "unresolved_count": 4,
+      "selection_correct_count": 6,
+      "selection_wrong_count": 2,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 3,
+          "case_angle_rmse_deg": {
+            "count": 3,
+            "mean": 2.510867111023793,
+            "maximum": 2.810189817193731
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 3,
+            "mean": 3.996748941627944,
+            "maximum": 5.69757887190176
+          },
+          "case_ids": [
+            "CALIBRATION_M3_02",
+            "CALIBRATION_M3_04",
+            "CALIBRATION_M3_06"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/CLEAN/M4": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 8
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 8
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 2.0541510226814172,
+      "GLRT_reject_any": 0,
+      "rejected_count": 0,
+      "unresolved_count": 0,
+      "selection_correct_count": 8,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 8,
+          "case_angle_rmse_deg": {
+            "count": 8,
+            "mean": 2.0541510226814172,
+            "maximum": 2.612887387683321
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 8,
+            "mean": 3.3008028493121264,
+            "maximum": 4.12955700925745
+          },
+          "case_ids": [
+            "CALIBRATION_M4_00",
+            "CALIBRATION_M4_01",
+            "CALIBRATION_M4_02",
+            "CALIBRATION_M4_03",
+            "CALIBRATION_M4_04",
+            "CALIBRATION_M4_05",
+            "CALIBRATION_M4_06",
+            "CALIBRATION_M4_07"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/CLEAN/M9_MULTIFREQUENCY": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 8
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 8
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 1.3626277793986952,
+      "GLRT_reject_any": 0,
+      "rejected_count": 0,
+      "unresolved_count": 0,
+      "selection_correct_count": 8,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 8,
+          "case_angle_rmse_deg": {
+            "count": 8,
+            "mean": 1.3626277793986952,
+            "maximum": 1.9554156241208418
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 8,
+            "mean": 2.2929404348308435,
+            "maximum": 3.6849029660445805
+          },
+          "case_ids": [
+            "CALIBRATION_M9_MULTIFREQUENCY_00",
+            "CALIBRATION_M9_MULTIFREQUENCY_01",
+            "CALIBRATION_M9_MULTIFREQUENCY_02",
+            "CALIBRATION_M9_MULTIFREQUENCY_03",
+            "CALIBRATION_M9_MULTIFREQUENCY_04",
+            "CALIBRATION_M9_MULTIFREQUENCY_05",
+            "CALIBRATION_M9_MULTIFREQUENCY_06",
+            "CALIBRATION_M9_MULTIFREQUENCY_07"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/CLEAN/ALL_LAYERS": {
+      "independent_seed_count": 24,
+      "outcomes": {
+        "NOT_ACCEPTED": 5,
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 19
+      },
+      "statuses": {
+        "UNRESOLVED_COMPETITION": 4,
+        "REJECTED_LENGTH": 1,
+        "SHADOW_ACCEPTED": 19
+      },
+      "representable_seed_count": 24,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 1.3877787807814457e-17,
+        "upper": 0.13797620467498017,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 5.974938114349096,
+      "GLRT_reject_any": 0,
+      "rejected_count": 1,
+      "unresolved_count": 4,
+      "selection_correct_count": 22,
+      "selection_wrong_count": 2,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 19,
+          "case_angle_rmse_deg": {
+            "count": 19,
+            "mean": 1.8350964078795935,
+            "maximum": 2.810189817193731
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 19,
+            "mean": 2.986325952527768,
+            "maximum": 5.69757887190176
+          },
+          "case_ids": [
+            "CALIBRATION_M3_02",
+            "CALIBRATION_M3_04",
+            "CALIBRATION_M3_06",
+            "CALIBRATION_M4_00",
+            "CALIBRATION_M4_01",
+            "CALIBRATION_M4_02",
+            "CALIBRATION_M4_03",
+            "CALIBRATION_M4_04",
+            "CALIBRATION_M4_05",
+            "CALIBRATION_M4_06",
+            "CALIBRATION_M4_07",
+            "CALIBRATION_M9_MULTIFREQUENCY_00",
+            "CALIBRATION_M9_MULTIFREQUENCY_01",
+            "CALIBRATION_M9_MULTIFREQUENCY_02",
+            "CALIBRATION_M9_MULTIFREQUENCY_03",
+            "CALIBRATION_M9_MULTIFREQUENCY_04",
+            "CALIBRATION_M9_MULTIFREQUENCY_05",
+            "CALIBRATION_M9_MULTIFREQUENCY_06",
+            "CALIBRATION_M9_MULTIFREQUENCY_07"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/TARGET_QUARTER/M3": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "NOT_ACCEPTED": 4,
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 3,
+        "WRONG_INTEGER_SHADOW_ACCEPTED": 1
+      },
+      "statuses": {
+        "REJECTED_LENGTH": 4,
+        "SHADOW_ACCEPTED": 4
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 1,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.02241749145005667,
+        "upper": 0.4708881822128535,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 18.62821578006374,
+      "GLRT_reject_any": 0,
+      "rejected_count": 4,
+      "unresolved_count": 0,
+      "selection_correct_count": 6,
+      "selection_wrong_count": 2,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 3,
+          "case_angle_rmse_deg": {
+            "count": 3,
+            "mean": 7.947334008559044,
+            "maximum": 8.455124531299687
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 3,
+            "mean": 9.037144358981367,
+            "maximum": 9.765949116055234
+          },
+          "case_ids": [
+            "CALIBRATION_M3_02",
+            "CALIBRATION_M3_06",
+            "CALIBRATION_M3_07"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 1,
+          "case_angle_rmse_deg": {
+            "count": 1,
+            "mean": 52.02353723313682,
+            "maximum": 52.02353723313682
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 1,
+            "mean": 56.26634061106514,
+            "maximum": 56.26634061106514
+          },
+          "case_ids": [
+            "CALIBRATION_M3_05"
+          ]
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/TARGET_QUARTER/M4": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "NOT_ACCEPTED": 8
+      },
+      "statuses": {
+        "REJECTED_RESIDUAL": 3,
+        "REJECTED_RESIDUAL_AND_LENGTH": 5
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 7.486201534006385,
+      "GLRT_reject_any": 8,
+      "rejected_count": 8,
+      "unresolved_count": 0,
+      "selection_correct_count": 8,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/TARGET_QUARTER/M9_MULTIFREQUENCY": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "NOT_ACCEPTED": 8
+      },
+      "statuses": {
+        "REJECTED_RESIDUAL_AND_LENGTH": 2,
+        "REJECTED_RESIDUAL": 6
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 3.1382868610015593,
+      "GLRT_reject_any": 8,
+      "rejected_count": 8,
+      "unresolved_count": 0,
+      "selection_correct_count": 8,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/TARGET_QUARTER/ALL_LAYERS": {
+      "independent_seed_count": 24,
+      "outcomes": {
+        "NOT_ACCEPTED": 20,
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 3,
+        "WRONG_INTEGER_SHADOW_ACCEPTED": 1
+      },
+      "statuses": {
+        "REJECTED_LENGTH": 4,
+        "SHADOW_ACCEPTED": 4,
+        "REJECTED_RESIDUAL": 9,
+        "REJECTED_RESIDUAL_AND_LENGTH": 7
+      },
+      "representable_seed_count": 24,
+      "wrong_integer_shadow_accepted": 1,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0073934561655057685,
+        "upper": 0.20241806478655938,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 9.750901391690562,
+      "GLRT_reject_any": 16,
+      "rejected_count": 20,
+      "unresolved_count": 0,
+      "selection_correct_count": 22,
+      "selection_wrong_count": 2,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 3,
+          "case_angle_rmse_deg": {
+            "count": 3,
+            "mean": 7.947334008559044,
+            "maximum": 8.455124531299687
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 3,
+            "mean": 9.037144358981367,
+            "maximum": 9.765949116055234
+          },
+          "case_ids": [
+            "CALIBRATION_M3_02",
+            "CALIBRATION_M3_06",
+            "CALIBRATION_M3_07"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 1,
+          "case_angle_rmse_deg": {
+            "count": 1,
+            "mean": 52.02353723313682,
+            "maximum": 52.02353723313682
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 1,
+            "mean": 56.26634061106514,
+            "maximum": 56.26634061106514
+          },
+          "case_ids": [
+            "CALIBRATION_M3_05"
+          ]
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/PIVOT_QUARTER/M3": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 5,
+        "NOT_ACCEPTED": 3
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 5,
+        "UNRESOLVED_COMPETITION": 2,
+        "REJECTED_LENGTH": 1
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 24.15005130903254,
+      "GLRT_reject_any": 0,
+      "rejected_count": 1,
+      "unresolved_count": 2,
+      "selection_correct_count": 6,
+      "selection_wrong_count": 2,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 5,
+          "case_angle_rmse_deg": {
+            "count": 5,
+            "mean": 15.694006801432307,
+            "maximum": 16.6042262963642
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 5,
+            "mean": 17.935002517365277,
+            "maximum": 19.243140208965396
+          },
+          "case_ids": [
+            "CALIBRATION_M3_00",
+            "CALIBRATION_M3_02",
+            "CALIBRATION_M3_03",
+            "CALIBRATION_M3_04",
+            "CALIBRATION_M3_06"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/PIVOT_QUARTER/M4": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "NOT_ACCEPTED": 5,
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 3
+      },
+      "statuses": {
+        "REJECTED_LENGTH": 3,
+        "SHADOW_ACCEPTED": 3,
+        "REJECTED_RESIDUAL_AND_LENGTH": 1,
+        "REJECTED_RESIDUAL": 1
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 12.252548611375957,
+      "GLRT_reject_any": 6,
+      "rejected_count": 5,
+      "unresolved_count": 0,
+      "selection_correct_count": 8,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 3,
+          "case_angle_rmse_deg": {
+            "count": 3,
+            "mean": 12.745805582605417,
+            "maximum": 13.27675449502925
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 3,
+            "mean": 16.302416492775244,
+            "maximum": 16.933040152171735
+          },
+          "case_ids": [
+            "CALIBRATION_M4_03",
+            "CALIBRATION_M4_04",
+            "CALIBRATION_M4_06"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/PIVOT_QUARTER/M9_MULTIFREQUENCY": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "NOT_ACCEPTED": 8
+      },
+      "statuses": {
+        "REJECTED_RESIDUAL": 8
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 5.508567818033759,
+      "GLRT_reject_any": 8,
+      "rejected_count": 8,
+      "unresolved_count": 0,
+      "selection_correct_count": 8,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/PIVOT_QUARTER/ALL_LAYERS": {
+      "independent_seed_count": 24,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 8,
+        "NOT_ACCEPTED": 16
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 8,
+        "UNRESOLVED_COMPETITION": 2,
+        "REJECTED_LENGTH": 4,
+        "REJECTED_RESIDUAL_AND_LENGTH": 1,
+        "REJECTED_RESIDUAL": 9
+      },
+      "representable_seed_count": 24,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 1.3877787807814457e-17,
+        "upper": 0.13797620467498017,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 13.97038924614742,
+      "GLRT_reject_any": 14,
+      "rejected_count": 14,
+      "unresolved_count": 2,
+      "selection_correct_count": 22,
+      "selection_wrong_count": 2,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 8,
+          "case_angle_rmse_deg": {
+            "count": 8,
+            "mean": 14.588431344372223,
+            "maximum": 16.6042262963642
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 8,
+            "mean": 17.322782758144015,
+            "maximum": 19.243140208965396
+          },
+          "case_ids": [
+            "CALIBRATION_M3_00",
+            "CALIBRATION_M3_02",
+            "CALIBRATION_M3_03",
+            "CALIBRATION_M3_04",
+            "CALIBRATION_M3_06",
+            "CALIBRATION_M4_03",
+            "CALIBRATION_M4_04",
+            "CALIBRATION_M4_06"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/UNDETECTED_SLIP/M3": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "UNREPRESENTABLE_NOT_ACCEPTED": 7,
+        "UNREPRESENTABLE_SHADOW_ACCEPTED": 1
+      },
+      "statuses": {
+        "REJECTED_LENGTH": 7,
+        "SHADOW_ACCEPTED": 1
+      },
+      "representable_seed_count": 0,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": null,
+      "unrepresentable_shadow_accepted": 1,
+      "mean_baseline_angle_rmse_deg": 33.81468055400585,
+      "GLRT_reject_any": 0,
+      "rejected_count": 7,
+      "unresolved_count": 0,
+      "selection_correct_count": 6,
+      "selection_wrong_count": 2,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 1,
+          "case_angle_rmse_deg": {
+            "count": 1,
+            "mean": 70.4132119812926,
+            "maximum": 70.4132119812926
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 1,
+            "mean": 73.0487150160456,
+            "maximum": 73.0487150160456
+          },
+          "case_ids": [
+            "CALIBRATION_M3_05"
+          ]
+        }
+      }
+    },
+    "CALIBRATION/UNDETECTED_SLIP/M4": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "UNREPRESENTABLE_NOT_ACCEPTED": 8
+      },
+      "statuses": {
+        "REJECTED_RESIDUAL_AND_LENGTH": 8
+      },
+      "representable_seed_count": 0,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": null,
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 26.6148564782196,
+      "GLRT_reject_any": 8,
+      "rejected_count": 8,
+      "unresolved_count": 0,
+      "selection_correct_count": 8,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/UNDETECTED_SLIP/M9_MULTIFREQUENCY": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "UNREPRESENTABLE_NOT_ACCEPTED": 8
+      },
+      "statuses": {
+        "REJECTED_RESIDUAL_AND_LENGTH": 7,
+        "REJECTED_RESIDUAL": 1
+      },
+      "representable_seed_count": 0,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": null,
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 11.82831104214074,
+      "GLRT_reject_any": 8,
+      "rejected_count": 8,
+      "unresolved_count": 0,
+      "selection_correct_count": 8,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/UNDETECTED_SLIP/ALL_LAYERS": {
+      "independent_seed_count": 24,
+      "outcomes": {
+        "UNREPRESENTABLE_NOT_ACCEPTED": 23,
+        "UNREPRESENTABLE_SHADOW_ACCEPTED": 1
+      },
+      "statuses": {
+        "REJECTED_LENGTH": 7,
+        "SHADOW_ACCEPTED": 1,
+        "REJECTED_RESIDUAL_AND_LENGTH": 15,
+        "REJECTED_RESIDUAL": 1
+      },
+      "representable_seed_count": 0,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": null,
+      "unrepresentable_shadow_accepted": 1,
+      "mean_baseline_angle_rmse_deg": 24.085949358122065,
+      "GLRT_reject_any": 16,
+      "rejected_count": 23,
+      "unresolved_count": 0,
+      "selection_correct_count": 22,
+      "selection_wrong_count": 2,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 1,
+          "case_angle_rmse_deg": {
+            "count": 1,
+            "mean": 70.4132119812926,
+            "maximum": 70.4132119812926
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 1,
+            "mean": 73.0487150160456,
+            "maximum": 73.0487150160456
+          },
+          "case_ids": [
+            "CALIBRATION_M3_05"
+          ]
+        }
+      }
+    },
+    "CALIBRATION/TEMPORAL_RHO08/M3": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "NOT_ACCEPTED": 4,
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 4
+      },
+      "statuses": {
+        "UNRESOLVED_COMPETITION": 3,
+        "REJECTED_LENGTH": 1,
+        "SHADOW_ACCEPTED": 4
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 14.126076706262376,
+      "GLRT_reject_any": 3,
+      "rejected_count": 1,
+      "unresolved_count": 3,
+      "selection_correct_count": 6,
+      "selection_wrong_count": 2,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 4,
+          "case_angle_rmse_deg": {
+            "count": 4,
+            "mean": 1.8031584613383103,
+            "maximum": 2.8094704463475595
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 4,
+            "mean": 2.714498805252889,
+            "maximum": 3.439580649993607
+          },
+          "case_ids": [
+            "CALIBRATION_M3_02",
+            "CALIBRATION_M3_03",
+            "CALIBRATION_M3_04",
+            "CALIBRATION_M3_06"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/TEMPORAL_RHO08/M4": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 8
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 8
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 1.8252409260637186,
+      "GLRT_reject_any": 0,
+      "rejected_count": 0,
+      "unresolved_count": 0,
+      "selection_correct_count": 8,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 8,
+          "case_angle_rmse_deg": {
+            "count": 8,
+            "mean": 1.8252409260637186,
+            "maximum": 2.8974841320953852
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 8,
+            "mean": 2.806633231628393,
+            "maximum": 4.790177062053455
+          },
+          "case_ids": [
+            "CALIBRATION_M4_00",
+            "CALIBRATION_M4_01",
+            "CALIBRATION_M4_02",
+            "CALIBRATION_M4_03",
+            "CALIBRATION_M4_04",
+            "CALIBRATION_M4_05",
+            "CALIBRATION_M4_06",
+            "CALIBRATION_M4_07"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/TEMPORAL_RHO08/M9_MULTIFREQUENCY": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 8
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 8
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 1.7480142909632133,
+      "GLRT_reject_any": 4,
+      "rejected_count": 0,
+      "unresolved_count": 0,
+      "selection_correct_count": 8,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 8,
+          "case_angle_rmse_deg": {
+            "count": 8,
+            "mean": 1.7480142909632135,
+            "maximum": 3.0686395280101935
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 8,
+            "mean": 2.230121859032761,
+            "maximum": 3.6675981430437146
+          },
+          "case_ids": [
+            "CALIBRATION_M9_MULTIFREQUENCY_00",
+            "CALIBRATION_M9_MULTIFREQUENCY_01",
+            "CALIBRATION_M9_MULTIFREQUENCY_02",
+            "CALIBRATION_M9_MULTIFREQUENCY_03",
+            "CALIBRATION_M9_MULTIFREQUENCY_04",
+            "CALIBRATION_M9_MULTIFREQUENCY_05",
+            "CALIBRATION_M9_MULTIFREQUENCY_06",
+            "CALIBRATION_M9_MULTIFREQUENCY_07"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/TEMPORAL_RHO08/ALL_LAYERS": {
+      "independent_seed_count": 24,
+      "outcomes": {
+        "NOT_ACCEPTED": 4,
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 20
+      },
+      "statuses": {
+        "UNRESOLVED_COMPETITION": 3,
+        "REJECTED_LENGTH": 1,
+        "SHADOW_ACCEPTED": 20
+      },
+      "representable_seed_count": 24,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 1.3877787807814457e-17,
+        "upper": 0.13797620467498017,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 5.899777307763102,
+      "GLRT_reject_any": 7,
+      "rejected_count": 1,
+      "unresolved_count": 3,
+      "selection_correct_count": 22,
+      "selection_wrong_count": 2,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 20,
+          "case_angle_rmse_deg": {
+            "count": 20,
+            "mean": 1.7899337790784349,
+            "maximum": 3.0686395280101935
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 20,
+            "mean": 2.5576017973150393,
+            "maximum": 4.790177062053455
+          },
+          "case_ids": [
+            "CALIBRATION_M3_02",
+            "CALIBRATION_M3_03",
+            "CALIBRATION_M3_04",
+            "CALIBRATION_M3_06",
+            "CALIBRATION_M4_00",
+            "CALIBRATION_M4_01",
+            "CALIBRATION_M4_02",
+            "CALIBRATION_M4_03",
+            "CALIBRATION_M4_04",
+            "CALIBRATION_M4_05",
+            "CALIBRATION_M4_06",
+            "CALIBRATION_M4_07",
+            "CALIBRATION_M9_MULTIFREQUENCY_00",
+            "CALIBRATION_M9_MULTIFREQUENCY_01",
+            "CALIBRATION_M9_MULTIFREQUENCY_02",
+            "CALIBRATION_M9_MULTIFREQUENCY_03",
+            "CALIBRATION_M9_MULTIFREQUENCY_04",
+            "CALIBRATION_M9_MULTIFREQUENCY_05",
+            "CALIBRATION_M9_MULTIFREQUENCY_06",
+            "CALIBRATION_M9_MULTIFREQUENCY_07"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/INSUFFICIENT_SUPPORT/M3": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "NOT_ACCEPTED": 8
+      },
+      "statuses": {
+        "UNRESOLVED_ACTIVE_ARC_CHANGED": 8
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": null,
+      "GLRT_reject_any": 0,
+      "rejected_count": 0,
+      "unresolved_count": 8,
+      "selection_correct_count": 6,
+      "selection_wrong_count": 2,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/INSUFFICIENT_SUPPORT/M4": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "NOT_ACCEPTED": 8
+      },
+      "statuses": {
+        "UNRESOLVED_ACTIVE_ARC_CHANGED": 8
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": null,
+      "GLRT_reject_any": 0,
+      "rejected_count": 0,
+      "unresolved_count": 8,
+      "selection_correct_count": 8,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/INSUFFICIENT_SUPPORT/M9_MULTIFREQUENCY": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "NOT_ACCEPTED": 8
+      },
+      "statuses": {
+        "UNRESOLVED_ACTIVE_ARC_CHANGED": 8
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": null,
+      "GLRT_reject_any": 0,
+      "rejected_count": 0,
+      "unresolved_count": 8,
+      "selection_correct_count": 8,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/INSUFFICIENT_SUPPORT/ALL_LAYERS": {
+      "independent_seed_count": 24,
+      "outcomes": {
+        "NOT_ACCEPTED": 24
+      },
+      "statuses": {
+        "UNRESOLVED_ACTIVE_ARC_CHANGED": 24
+      },
+      "representable_seed_count": 24,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 1.3877787807814457e-17,
+        "upper": 0.13797620467498017,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": null,
+      "GLRT_reject_any": 0,
+      "rejected_count": 0,
+      "unresolved_count": 24,
+      "selection_correct_count": 22,
+      "selection_wrong_count": 2,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/TWO_SIGNAL_BIASES/M3": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "NOT_ACCEPTED": 7,
+        "WRONG_INTEGER_SHADOW_ACCEPTED": 1
+      },
+      "statuses": {
+        "REJECTED_LENGTH": 7,
+        "SHADOW_ACCEPTED": 1
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 1,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.02241749145005667,
+        "upper": 0.4708881822128535,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 24.664786588827784,
+      "GLRT_reject_any": 0,
+      "rejected_count": 7,
+      "unresolved_count": 0,
+      "selection_correct_count": 6,
+      "selection_wrong_count": 2,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 1,
+          "case_angle_rmse_deg": {
+            "count": 1,
+            "mean": 55.006660833997046,
+            "maximum": 55.006660833997046
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 1,
+            "mean": 57.6235703841473,
+            "maximum": 57.6235703841473
+          },
+          "case_ids": [
+            "CALIBRATION_M3_01"
+          ]
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/TWO_SIGNAL_BIASES/M4": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "NOT_ACCEPTED": 8
+      },
+      "statuses": {
+        "REJECTED_RESIDUAL_AND_LENGTH": 6,
+        "REJECTED_RESIDUAL": 2
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 9.428019524709857,
+      "GLRT_reject_any": 8,
+      "rejected_count": 8,
+      "unresolved_count": 0,
+      "selection_correct_count": 8,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/TWO_SIGNAL_BIASES/M9_MULTIFREQUENCY": {
+      "independent_seed_count": 8,
+      "outcomes": {
+        "NOT_ACCEPTED": 8
+      },
+      "statuses": {
+        "REJECTED_RESIDUAL": 2,
+        "REJECTED_RESIDUAL_AND_LENGTH": 6
+      },
+      "representable_seed_count": 8,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.32440756488388023,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 4.736250188821755,
+      "GLRT_reject_any": 8,
+      "rejected_count": 8,
+      "unresolved_count": 0,
+      "selection_correct_count": 8,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "CALIBRATION/TWO_SIGNAL_BIASES/ALL_LAYERS": {
+      "independent_seed_count": 24,
+      "outcomes": {
+        "NOT_ACCEPTED": 23,
+        "WRONG_INTEGER_SHADOW_ACCEPTED": 1
+      },
+      "statuses": {
+        "REJECTED_LENGTH": 7,
+        "SHADOW_ACCEPTED": 1,
+        "REJECTED_RESIDUAL_AND_LENGTH": 12,
+        "REJECTED_RESIDUAL": 4
+      },
+      "representable_seed_count": 24,
+      "wrong_integer_shadow_accepted": 1,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0073934561655057685,
+        "upper": 0.20241806478655938,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 12.943018767453133,
+      "GLRT_reject_any": 16,
+      "rejected_count": 23,
+      "unresolved_count": 0,
+      "selection_correct_count": 22,
+      "selection_wrong_count": 2,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 1,
+          "case_angle_rmse_deg": {
+            "count": 1,
+            "mean": 55.006660833997046,
+            "maximum": 55.006660833997046
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 1,
+            "mean": 57.6235703841473,
+            "maximum": 57.6235703841473
+          },
+          "case_ids": [
+            "CALIBRATION_M3_01"
+          ]
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/CLEAN/M3": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 10,
+        "NOT_ACCEPTED": 6
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 10,
+        "REJECTED_LENGTH": 3,
+        "REJECTED_RESIDUAL_AND_LENGTH": 1,
+        "UNRESOLVED_COMPETITION": 2
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 23.57934646673401,
+      "GLRT_reject_any": 2,
+      "rejected_count": 4,
+      "unresolved_count": 2,
+      "selection_correct_count": 12,
+      "selection_wrong_count": 4,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 10,
+          "case_angle_rmse_deg": {
+            "count": 10,
+            "mean": 2.148897926662184,
+            "maximum": 3.17390648632591
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 10,
+            "mean": 3.4823593897954956,
+            "maximum": 5.293111024812046
+          },
+          "case_ids": [
+            "HELDOUT_M3_00",
+            "HELDOUT_M3_01",
+            "HELDOUT_M3_02",
+            "HELDOUT_M3_03",
+            "HELDOUT_M3_04",
+            "HELDOUT_M3_05",
+            "HELDOUT_M3_07",
+            "HELDOUT_M3_10",
+            "HELDOUT_M3_12",
+            "HELDOUT_M3_15"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/CLEAN/M4": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "NOT_ACCEPTED": 1,
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 15
+      },
+      "statuses": {
+        "UNRESOLVED_COMPETITION": 1,
+        "SHADOW_ACCEPTED": 15
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 1.8818037334684745,
+      "GLRT_reject_any": 0,
+      "rejected_count": 0,
+      "unresolved_count": 1,
+      "selection_correct_count": 16,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 15,
+          "case_angle_rmse_deg": {
+            "count": 15,
+            "mean": 1.8465546333521863,
+            "maximum": 3.1263423025781334
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 15,
+            "mean": 2.9186137289142486,
+            "maximum": 5.471426728235181
+          },
+          "case_ids": [
+            "HELDOUT_M4_01",
+            "HELDOUT_M4_02",
+            "HELDOUT_M4_03",
+            "HELDOUT_M4_04",
+            "HELDOUT_M4_05",
+            "HELDOUT_M4_06",
+            "HELDOUT_M4_07",
+            "HELDOUT_M4_08",
+            "HELDOUT_M4_09",
+            "HELDOUT_M4_10",
+            "HELDOUT_M4_11",
+            "HELDOUT_M4_12",
+            "HELDOUT_M4_13",
+            "HELDOUT_M4_14",
+            "HELDOUT_M4_15"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/CLEAN/M9_MULTIFREQUENCY": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 16
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 16
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 1.431572675084273,
+      "GLRT_reject_any": 0,
+      "rejected_count": 0,
+      "unresolved_count": 0,
+      "selection_correct_count": 16,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 16,
+          "case_angle_rmse_deg": {
+            "count": 16,
+            "mean": 1.431572675084273,
+            "maximum": 2.102957397756422
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 16,
+            "mean": 2.3057916296283394,
+            "maximum": 3.476159409859963
+          },
+          "case_ids": [
+            "HELDOUT_M9_MULTIFREQUENCY_00",
+            "HELDOUT_M9_MULTIFREQUENCY_01",
+            "HELDOUT_M9_MULTIFREQUENCY_02",
+            "HELDOUT_M9_MULTIFREQUENCY_03",
+            "HELDOUT_M9_MULTIFREQUENCY_04",
+            "HELDOUT_M9_MULTIFREQUENCY_05",
+            "HELDOUT_M9_MULTIFREQUENCY_06",
+            "HELDOUT_M9_MULTIFREQUENCY_07",
+            "HELDOUT_M9_MULTIFREQUENCY_08",
+            "HELDOUT_M9_MULTIFREQUENCY_09",
+            "HELDOUT_M9_MULTIFREQUENCY_10",
+            "HELDOUT_M9_MULTIFREQUENCY_11",
+            "HELDOUT_M9_MULTIFREQUENCY_12",
+            "HELDOUT_M9_MULTIFREQUENCY_13",
+            "HELDOUT_M9_MULTIFREQUENCY_14",
+            "HELDOUT_M9_MULTIFREQUENCY_15"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/CLEAN/ALL_LAYERS": {
+      "independent_seed_count": 48,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 41,
+        "NOT_ACCEPTED": 7
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 41,
+        "REJECTED_LENGTH": 3,
+        "REJECTED_RESIDUAL_AND_LENGTH": 1,
+        "UNRESOLVED_COMPETITION": 3
+      },
+      "representable_seed_count": 48,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 6.938893903907228e-18,
+        "upper": 0.07410012966611748,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 8.964240958428919,
+      "GLRT_reject_any": 2,
+      "rejected_count": 4,
+      "unresolved_count": 3,
+      "selection_correct_count": 44,
+      "selection_wrong_count": 4,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 41,
+          "case_angle_rmse_deg": {
+            "count": 41,
+            "mean": 1.7583527211769026,
+            "maximum": 3.17390648632591
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 41,
+            "mean": 2.816962583066393,
+            "maximum": 5.471426728235181
+          },
+          "case_ids": [
+            "HELDOUT_M3_00",
+            "HELDOUT_M3_01",
+            "HELDOUT_M3_02",
+            "HELDOUT_M3_03",
+            "HELDOUT_M3_04",
+            "HELDOUT_M3_05",
+            "HELDOUT_M3_07",
+            "HELDOUT_M3_10",
+            "HELDOUT_M3_12",
+            "HELDOUT_M3_15",
+            "HELDOUT_M4_01",
+            "HELDOUT_M4_02",
+            "HELDOUT_M4_03",
+            "HELDOUT_M4_04",
+            "HELDOUT_M4_05",
+            "HELDOUT_M4_06",
+            "HELDOUT_M4_07",
+            "HELDOUT_M4_08",
+            "HELDOUT_M4_09",
+            "HELDOUT_M4_10",
+            "HELDOUT_M4_11",
+            "HELDOUT_M4_12",
+            "HELDOUT_M4_13",
+            "HELDOUT_M4_14",
+            "HELDOUT_M4_15",
+            "HELDOUT_M9_MULTIFREQUENCY_00",
+            "HELDOUT_M9_MULTIFREQUENCY_01",
+            "HELDOUT_M9_MULTIFREQUENCY_02",
+            "HELDOUT_M9_MULTIFREQUENCY_03",
+            "HELDOUT_M9_MULTIFREQUENCY_04",
+            "HELDOUT_M9_MULTIFREQUENCY_05",
+            "HELDOUT_M9_MULTIFREQUENCY_06",
+            "HELDOUT_M9_MULTIFREQUENCY_07",
+            "HELDOUT_M9_MULTIFREQUENCY_08",
+            "HELDOUT_M9_MULTIFREQUENCY_09",
+            "HELDOUT_M9_MULTIFREQUENCY_10",
+            "HELDOUT_M9_MULTIFREQUENCY_11",
+            "HELDOUT_M9_MULTIFREQUENCY_12",
+            "HELDOUT_M9_MULTIFREQUENCY_13",
+            "HELDOUT_M9_MULTIFREQUENCY_14",
+            "HELDOUT_M9_MULTIFREQUENCY_15"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/TARGET_QUARTER/M3": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "NOT_ACCEPTED": 16
+      },
+      "statuses": {
+        "REJECTED_LENGTH": 15,
+        "REJECTED_RESIDUAL_AND_LENGTH": 1
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 28.686537164834093,
+      "GLRT_reject_any": 2,
+      "rejected_count": 16,
+      "unresolved_count": 0,
+      "selection_correct_count": 12,
+      "selection_wrong_count": 4,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/TARGET_QUARTER/M4": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "NOT_ACCEPTED": 15,
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 1
+      },
+      "statuses": {
+        "REJECTED_RESIDUAL": 5,
+        "REJECTED_RESIDUAL_AND_LENGTH": 8,
+        "REJECTED_LENGTH": 2,
+        "SHADOW_ACCEPTED": 1
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 7.191433716492199,
+      "GLRT_reject_any": 16,
+      "rejected_count": 15,
+      "unresolved_count": 0,
+      "selection_correct_count": 16,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 1,
+          "case_angle_rmse_deg": {
+            "count": 1,
+            "mean": 7.6878108669527165,
+            "maximum": 7.6878108669527165
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 1,
+            "mean": 8.4246394385291,
+            "maximum": 8.4246394385291
+          },
+          "case_ids": [
+            "HELDOUT_M4_13"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/TARGET_QUARTER/M9_MULTIFREQUENCY": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "NOT_ACCEPTED": 16
+      },
+      "statuses": {
+        "REJECTED_RESIDUAL_AND_LENGTH": 8,
+        "REJECTED_RESIDUAL": 8
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 3.20260608975784,
+      "GLRT_reject_any": 16,
+      "rejected_count": 16,
+      "unresolved_count": 0,
+      "selection_correct_count": 16,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/TARGET_QUARTER/ALL_LAYERS": {
+      "independent_seed_count": 48,
+      "outcomes": {
+        "NOT_ACCEPTED": 47,
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 1
+      },
+      "statuses": {
+        "REJECTED_LENGTH": 17,
+        "REJECTED_RESIDUAL_AND_LENGTH": 17,
+        "REJECTED_RESIDUAL": 13,
+        "SHADOW_ACCEPTED": 1
+      },
+      "representable_seed_count": 48,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 6.938893903907228e-18,
+        "upper": 0.07410012966611748,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 13.026858990361378,
+      "GLRT_reject_any": 34,
+      "rejected_count": 47,
+      "unresolved_count": 0,
+      "selection_correct_count": 44,
+      "selection_wrong_count": 4,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 1,
+          "case_angle_rmse_deg": {
+            "count": 1,
+            "mean": 7.6878108669527165,
+            "maximum": 7.6878108669527165
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 1,
+            "mean": 8.4246394385291,
+            "maximum": 8.4246394385291
+          },
+          "case_ids": [
+            "HELDOUT_M4_13"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/PIVOT_QUARTER/M3": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 9,
+        "NOT_ACCEPTED": 7
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 9,
+        "UNRESOLVED_COMPETITION": 1,
+        "REJECTED_LENGTH": 5,
+        "REJECTED_RESIDUAL_AND_LENGTH": 1
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 31.91887898573183,
+      "GLRT_reject_any": 2,
+      "rejected_count": 6,
+      "unresolved_count": 1,
+      "selection_correct_count": 12,
+      "selection_wrong_count": 4,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 9,
+          "case_angle_rmse_deg": {
+            "count": 9,
+            "mean": 13.945442088685594,
+            "maximum": 15.35234093485591
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 9,
+            "mean": 16.402196161718102,
+            "maximum": 18.474504541538636
+          },
+          "case_ids": [
+            "HELDOUT_M3_00",
+            "HELDOUT_M3_01",
+            "HELDOUT_M3_02",
+            "HELDOUT_M3_03",
+            "HELDOUT_M3_04",
+            "HELDOUT_M3_07",
+            "HELDOUT_M3_12",
+            "HELDOUT_M3_14",
+            "HELDOUT_M3_15"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/PIVOT_QUARTER/M4": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 12,
+        "NOT_ACCEPTED": 4
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 12,
+        "REJECTED_LENGTH": 3,
+        "UNRESOLVED_COMPETITION": 1
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 13.099808530078409,
+      "GLRT_reject_any": 8,
+      "rejected_count": 3,
+      "unresolved_count": 1,
+      "selection_correct_count": 16,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 12,
+          "case_angle_rmse_deg": {
+            "count": 12,
+            "mean": 13.275187225826944,
+            "maximum": 15.191013356415356
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 12,
+            "mean": 15.598256431217486,
+            "maximum": 17.37195082477847
+          },
+          "case_ids": [
+            "HELDOUT_M4_00",
+            "HELDOUT_M4_01",
+            "HELDOUT_M4_04",
+            "HELDOUT_M4_05",
+            "HELDOUT_M4_06",
+            "HELDOUT_M4_07",
+            "HELDOUT_M4_08",
+            "HELDOUT_M4_09",
+            "HELDOUT_M4_10",
+            "HELDOUT_M4_11",
+            "HELDOUT_M4_12",
+            "HELDOUT_M4_15"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/PIVOT_QUARTER/M9_MULTIFREQUENCY": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "NOT_ACCEPTED": 16
+      },
+      "statuses": {
+        "REJECTED_RESIDUAL": 16
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 5.368443870025177,
+      "GLRT_reject_any": 16,
+      "rejected_count": 16,
+      "unresolved_count": 0,
+      "selection_correct_count": 16,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/PIVOT_QUARTER/ALL_LAYERS": {
+      "independent_seed_count": 48,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 21,
+        "NOT_ACCEPTED": 27
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 21,
+        "UNRESOLVED_COMPETITION": 2,
+        "REJECTED_LENGTH": 8,
+        "REJECTED_RESIDUAL_AND_LENGTH": 1,
+        "REJECTED_RESIDUAL": 16
+      },
+      "representable_seed_count": 48,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 6.938893903907228e-18,
+        "upper": 0.07410012966611748,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 16.795710461945138,
+      "GLRT_reject_any": 26,
+      "rejected_count": 25,
+      "unresolved_count": 2,
+      "selection_correct_count": 44,
+      "selection_wrong_count": 4,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 21,
+          "case_angle_rmse_deg": {
+            "count": 21,
+            "mean": 13.562439309909221,
+            "maximum": 15.35234093485591
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 21,
+            "mean": 15.942802030003465,
+            "maximum": 18.474504541538636
+          },
+          "case_ids": [
+            "HELDOUT_M3_00",
+            "HELDOUT_M3_01",
+            "HELDOUT_M3_02",
+            "HELDOUT_M3_03",
+            "HELDOUT_M3_04",
+            "HELDOUT_M3_07",
+            "HELDOUT_M3_12",
+            "HELDOUT_M3_14",
+            "HELDOUT_M3_15",
+            "HELDOUT_M4_00",
+            "HELDOUT_M4_01",
+            "HELDOUT_M4_04",
+            "HELDOUT_M4_05",
+            "HELDOUT_M4_06",
+            "HELDOUT_M4_07",
+            "HELDOUT_M4_08",
+            "HELDOUT_M4_09",
+            "HELDOUT_M4_10",
+            "HELDOUT_M4_11",
+            "HELDOUT_M4_12",
+            "HELDOUT_M4_15"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/UNDETECTED_SLIP/M3": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "UNREPRESENTABLE_NOT_ACCEPTED": 16
+      },
+      "statuses": {
+        "REJECTED_LENGTH": 15,
+        "REJECTED_RESIDUAL_AND_LENGTH": 1
+      },
+      "representable_seed_count": 0,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": null,
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 47.02761817814505,
+      "GLRT_reject_any": 2,
+      "rejected_count": 16,
+      "unresolved_count": 0,
+      "selection_correct_count": 12,
+      "selection_wrong_count": 4,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/UNDETECTED_SLIP/M4": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "UNREPRESENTABLE_NOT_ACCEPTED": 16
+      },
+      "statuses": {
+        "REJECTED_RESIDUAL_AND_LENGTH": 16
+      },
+      "representable_seed_count": 0,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": null,
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 23.368792890208784,
+      "GLRT_reject_any": 16,
+      "rejected_count": 16,
+      "unresolved_count": 0,
+      "selection_correct_count": 16,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/UNDETECTED_SLIP/M9_MULTIFREQUENCY": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "UNREPRESENTABLE_NOT_ACCEPTED": 16
+      },
+      "statuses": {
+        "REJECTED_RESIDUAL_AND_LENGTH": 14,
+        "REJECTED_RESIDUAL": 2
+      },
+      "representable_seed_count": 0,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": null,
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 11.680444476869384,
+      "GLRT_reject_any": 16,
+      "rejected_count": 16,
+      "unresolved_count": 0,
+      "selection_correct_count": 16,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/UNDETECTED_SLIP/ALL_LAYERS": {
+      "independent_seed_count": 48,
+      "outcomes": {
+        "UNREPRESENTABLE_NOT_ACCEPTED": 48
+      },
+      "statuses": {
+        "REJECTED_LENGTH": 15,
+        "REJECTED_RESIDUAL_AND_LENGTH": 31,
+        "REJECTED_RESIDUAL": 2
+      },
+      "representable_seed_count": 0,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": null,
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 27.35895184840774,
+      "GLRT_reject_any": 34,
+      "rejected_count": 48,
+      "unresolved_count": 0,
+      "selection_correct_count": 44,
+      "selection_wrong_count": 4,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/TEMPORAL_RHO08/M3": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 10,
+        "NOT_ACCEPTED": 6
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 10,
+        "REJECTED_LENGTH": 3,
+        "REJECTED_RESIDUAL_AND_LENGTH": 1,
+        "UNRESOLVED_COMPETITION": 2
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 23.212197910358846,
+      "GLRT_reject_any": 7,
+      "rejected_count": 4,
+      "unresolved_count": 2,
+      "selection_correct_count": 12,
+      "selection_wrong_count": 4,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 10,
+          "case_angle_rmse_deg": {
+            "count": 10,
+            "mean": 1.6754999440277392,
+            "maximum": 2.7953813252837154
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 10,
+            "mean": 2.531469481476858,
+            "maximum": 4.4527020334790075
+          },
+          "case_ids": [
+            "HELDOUT_M3_00",
+            "HELDOUT_M3_01",
+            "HELDOUT_M3_02",
+            "HELDOUT_M3_03",
+            "HELDOUT_M3_04",
+            "HELDOUT_M3_05",
+            "HELDOUT_M3_07",
+            "HELDOUT_M3_10",
+            "HELDOUT_M3_12",
+            "HELDOUT_M3_15"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/TEMPORAL_RHO08/M4": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 15,
+        "NOT_ACCEPTED": 1
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 15,
+        "UNRESOLVED_COMPETITION": 1
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 2.0940721116973497,
+      "GLRT_reject_any": 3,
+      "rejected_count": 0,
+      "unresolved_count": 1,
+      "selection_correct_count": 16,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 15,
+          "case_angle_rmse_deg": {
+            "count": 15,
+            "mean": 2.056725403764732,
+            "maximum": 4.355731873083762
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 15,
+            "mean": 2.894084085544144,
+            "maximum": 4.941372795743069
+          },
+          "case_ids": [
+            "HELDOUT_M4_00",
+            "HELDOUT_M4_01",
+            "HELDOUT_M4_02",
+            "HELDOUT_M4_03",
+            "HELDOUT_M4_05",
+            "HELDOUT_M4_06",
+            "HELDOUT_M4_07",
+            "HELDOUT_M4_08",
+            "HELDOUT_M4_09",
+            "HELDOUT_M4_10",
+            "HELDOUT_M4_11",
+            "HELDOUT_M4_12",
+            "HELDOUT_M4_13",
+            "HELDOUT_M4_14",
+            "HELDOUT_M4_15"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/TEMPORAL_RHO08/M9_MULTIFREQUENCY": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 15,
+        "NOT_ACCEPTED": 1
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 15,
+        "REJECTED_RESIDUAL": 1
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 1.2279678966303986,
+      "GLRT_reject_any": 9,
+      "rejected_count": 1,
+      "unresolved_count": 0,
+      "selection_correct_count": 16,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 15,
+          "case_angle_rmse_deg": {
+            "count": 15,
+            "mean": 1.2117385090002255,
+            "maximum": 1.850844941186906
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 15,
+            "mean": 1.7871769106281958,
+            "maximum": 2.8634677267843904
+          },
+          "case_ids": [
+            "HELDOUT_M9_MULTIFREQUENCY_00",
+            "HELDOUT_M9_MULTIFREQUENCY_01",
+            "HELDOUT_M9_MULTIFREQUENCY_02",
+            "HELDOUT_M9_MULTIFREQUENCY_03",
+            "HELDOUT_M9_MULTIFREQUENCY_04",
+            "HELDOUT_M9_MULTIFREQUENCY_05",
+            "HELDOUT_M9_MULTIFREQUENCY_06",
+            "HELDOUT_M9_MULTIFREQUENCY_07",
+            "HELDOUT_M9_MULTIFREQUENCY_08",
+            "HELDOUT_M9_MULTIFREQUENCY_09",
+            "HELDOUT_M9_MULTIFREQUENCY_10",
+            "HELDOUT_M9_MULTIFREQUENCY_11",
+            "HELDOUT_M9_MULTIFREQUENCY_12",
+            "HELDOUT_M9_MULTIFREQUENCY_14",
+            "HELDOUT_M9_MULTIFREQUENCY_15"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/TEMPORAL_RHO08/ALL_LAYERS": {
+      "independent_seed_count": 48,
+      "outcomes": {
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 40,
+        "NOT_ACCEPTED": 8
+      },
+      "statuses": {
+        "SHADOW_ACCEPTED": 40,
+        "REJECTED_LENGTH": 3,
+        "REJECTED_RESIDUAL_AND_LENGTH": 1,
+        "UNRESOLVED_COMPETITION": 3,
+        "REJECTED_RESIDUAL": 1
+      },
+      "representable_seed_count": 48,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 6.938893903907228e-18,
+        "upper": 0.07410012966611748,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 8.84474597289553,
+      "GLRT_reject_any": 19,
+      "rejected_count": 5,
+      "unresolved_count": 3,
+      "selection_correct_count": 44,
+      "selection_wrong_count": 4,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 40,
+          "case_angle_rmse_deg": {
+            "count": 40,
+            "mean": 1.6445489532937938,
+            "maximum": 4.355731873083762
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 40,
+            "mean": 2.388340243933842,
+            "maximum": 4.941372795743069
+          },
+          "case_ids": [
+            "HELDOUT_M3_00",
+            "HELDOUT_M3_01",
+            "HELDOUT_M3_02",
+            "HELDOUT_M3_03",
+            "HELDOUT_M3_04",
+            "HELDOUT_M3_05",
+            "HELDOUT_M3_07",
+            "HELDOUT_M3_10",
+            "HELDOUT_M3_12",
+            "HELDOUT_M3_15",
+            "HELDOUT_M4_00",
+            "HELDOUT_M4_01",
+            "HELDOUT_M4_02",
+            "HELDOUT_M4_03",
+            "HELDOUT_M4_05",
+            "HELDOUT_M4_06",
+            "HELDOUT_M4_07",
+            "HELDOUT_M4_08",
+            "HELDOUT_M4_09",
+            "HELDOUT_M4_10",
+            "HELDOUT_M4_11",
+            "HELDOUT_M4_12",
+            "HELDOUT_M4_13",
+            "HELDOUT_M4_14",
+            "HELDOUT_M4_15",
+            "HELDOUT_M9_MULTIFREQUENCY_00",
+            "HELDOUT_M9_MULTIFREQUENCY_01",
+            "HELDOUT_M9_MULTIFREQUENCY_02",
+            "HELDOUT_M9_MULTIFREQUENCY_03",
+            "HELDOUT_M9_MULTIFREQUENCY_04",
+            "HELDOUT_M9_MULTIFREQUENCY_05",
+            "HELDOUT_M9_MULTIFREQUENCY_06",
+            "HELDOUT_M9_MULTIFREQUENCY_07",
+            "HELDOUT_M9_MULTIFREQUENCY_08",
+            "HELDOUT_M9_MULTIFREQUENCY_09",
+            "HELDOUT_M9_MULTIFREQUENCY_10",
+            "HELDOUT_M9_MULTIFREQUENCY_11",
+            "HELDOUT_M9_MULTIFREQUENCY_12",
+            "HELDOUT_M9_MULTIFREQUENCY_14",
+            "HELDOUT_M9_MULTIFREQUENCY_15"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/INSUFFICIENT_SUPPORT/M3": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "NOT_ACCEPTED": 16
+      },
+      "statuses": {
+        "UNRESOLVED_ACTIVE_ARC_CHANGED": 16
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": null,
+      "GLRT_reject_any": 1,
+      "rejected_count": 0,
+      "unresolved_count": 16,
+      "selection_correct_count": 12,
+      "selection_wrong_count": 4,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/INSUFFICIENT_SUPPORT/M4": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "NOT_ACCEPTED": 16
+      },
+      "statuses": {
+        "UNRESOLVED_ACTIVE_ARC_CHANGED": 16
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": null,
+      "GLRT_reject_any": 0,
+      "rejected_count": 0,
+      "unresolved_count": 16,
+      "selection_correct_count": 16,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/INSUFFICIENT_SUPPORT/M9_MULTIFREQUENCY": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "NOT_ACCEPTED": 16
+      },
+      "statuses": {
+        "UNRESOLVED_ACTIVE_ARC_CHANGED": 16
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": null,
+      "GLRT_reject_any": 0,
+      "rejected_count": 0,
+      "unresolved_count": 16,
+      "selection_correct_count": 16,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/INSUFFICIENT_SUPPORT/ALL_LAYERS": {
+      "independent_seed_count": 48,
+      "outcomes": {
+        "NOT_ACCEPTED": 48
+      },
+      "statuses": {
+        "UNRESOLVED_ACTIVE_ARC_CHANGED": 48
+      },
+      "representable_seed_count": 48,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 6.938893903907228e-18,
+        "upper": 0.07410012966611748,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": null,
+      "GLRT_reject_any": 1,
+      "rejected_count": 0,
+      "unresolved_count": 48,
+      "selection_correct_count": 44,
+      "selection_wrong_count": 4,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/TWO_SIGNAL_BIASES/M3": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "NOT_ACCEPTED": 14,
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 2
+      },
+      "statuses": {
+        "REJECTED_LENGTH": 13,
+        "SHADOW_ACCEPTED": 2,
+        "REJECTED_RESIDUAL_AND_LENGTH": 1
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 36.07871708146284,
+      "GLRT_reject_any": 2,
+      "rejected_count": 14,
+      "unresolved_count": 0,
+      "selection_correct_count": 12,
+      "selection_wrong_count": 4,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 2,
+          "case_angle_rmse_deg": {
+            "count": 2,
+            "mean": 17.640436484190122,
+            "maximum": 18.243762445174532
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 2,
+            "mean": 19.916313969644136,
+            "maximum": 21.110922549640197
+          },
+          "case_ids": [
+            "HELDOUT_M3_02",
+            "HELDOUT_M3_15"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/TWO_SIGNAL_BIASES/M4": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "NOT_ACCEPTED": 16
+      },
+      "statuses": {
+        "REJECTED_RESIDUAL_AND_LENGTH": 15,
+        "REJECTED_RESIDUAL": 1
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 8.896882895014075,
+      "GLRT_reject_any": 16,
+      "rejected_count": 16,
+      "unresolved_count": 0,
+      "selection_correct_count": 16,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/TWO_SIGNAL_BIASES/M9_MULTIFREQUENCY": {
+      "independent_seed_count": 16,
+      "outcomes": {
+        "NOT_ACCEPTED": 16
+      },
+      "statuses": {
+        "REJECTED_RESIDUAL_AND_LENGTH": 13,
+        "REJECTED_RESIDUAL": 3
+      },
+      "representable_seed_count": 16,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 0.0,
+        "upper": 0.1936076805344365,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 4.5767696686885335,
+      "GLRT_reject_any": 16,
+      "rejected_count": 16,
+      "unresolved_count": 0,
+      "selection_correct_count": 16,
+      "selection_wrong_count": 0,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    },
+    "HELDOUT/TWO_SIGNAL_BIASES/ALL_LAYERS": {
+      "independent_seed_count": 48,
+      "outcomes": {
+        "NOT_ACCEPTED": 46,
+        "CORRECT_INTEGER_SHADOW_ACCEPTED": 2
+      },
+      "statuses": {
+        "REJECTED_LENGTH": 13,
+        "SHADOW_ACCEPTED": 2,
+        "REJECTED_RESIDUAL_AND_LENGTH": 29,
+        "REJECTED_RESIDUAL": 4
+      },
+      "representable_seed_count": 48,
+      "wrong_integer_shadow_accepted": 0,
+      "wrong_shadow_acceptance_wilson": {
+        "level": 0.95,
+        "lower": 6.938893903907228e-18,
+        "upper": 0.07410012966611748,
+        "method": "two-sided Wilson; fixed-design simulation proportion, not field integrity"
+      },
+      "unrepresentable_shadow_accepted": 0,
+      "mean_baseline_angle_rmse_deg": 16.51745654838848,
+      "GLRT_reject_any": 34,
+      "rejected_count": 46,
+      "unresolved_count": 0,
+      "selection_correct_count": 44,
+      "selection_wrong_count": 4,
+      "shadow_accepted_angle_subsets": {
+        "correct_integer": {
+          "case_count": 2,
+          "case_angle_rmse_deg": {
+            "count": 2,
+            "mean": 17.640436484190122,
+            "maximum": 18.243762445174532
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 2,
+            "mean": 19.916313969644136,
+            "maximum": 21.110922549640197
+          },
+          "case_ids": [
+            "HELDOUT_M3_02",
+            "HELDOUT_M3_15"
+          ]
+        },
+        "wrong_integer": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        },
+        "unrepresentable_shared_integer_model": {
+          "case_count": 0,
+          "case_angle_rmse_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_maximum_epoch_angle_deg": {
+            "count": 0,
+            "mean": null,
+            "maximum": null
+          },
+          "case_ids": []
+        }
+      }
+    }
+  },
+  "limits": [
+    "Per-condition denominators only; paired conditions are not independent.",
+    "Per-layer Wilson intervals are primary. ALL_LAYERS pools independent but nonidentical fixed geometries: its Wilson interval is a descriptive approximation, not calibrated coverage or field false-fix risk.",
+    "Integer-correct shadow acceptance may still have biased baseline angle.",
+    "Unmodeled slip makes one shared integer vector incompatible across selection and future; kept separate.",
+    "No GLRT phase correction or candidate replacement; no navigation integration."
+  ],
+  "raw_payload_reads": 0,
+  "reference_reads": 0,
+  "metric_definitions": {
+    "mean_baseline_angle_rmse_deg": "Original sealed SUMMARY field: arithmetic mean of each case future 3D baseline-angle RMSE over every scored primary, including rejected/unresolved and wrong-integer candidates. NOT fixed-solution accuracy.",
+    "shadow_accepted_angle_subsets": "Only SHADOW_ACCEPTED; split into correct integer, wrong integer, and unrepresentable selection+future shared-N model; reports arithmetic mean and maximum of per-case five-epoch RMSE, plus maximum individual epoch angle.",
+    "mean_observation_model_exact": "CSV flag is conditional on the generator per-epoch truth N. A missed slip may have this flag True but model_truth_representable=False: a single shared N cannot represent the full selection+future window.",
+    "correct_integer": "Equality to synthetic carrier integers does not rule out noninteger phase bias or biased baseline.",
+    "not_accepted": "Separate rejected_count from unresolved_count; no replacement, retry or longer horizon.",
+    "calibration": "Independent diagnostic split with all thresholds frozen beforehand, not parameter training.",
+    "Wilson": "Per-geometry n=16 heldout intervals are primary. ALL_LAYERS n=48 independent but heterogeneous geometries gives a descriptive approximate Wilson interval, not exact binomial coverage or field integrity.",
+    "GLRT_reject_any": "Conditional fault-free-null rejection only. Holm does not control physical mislocalization probability when a fault or wrong N is present."
+  },
+  "source_hashes": {
+    "PLAN.json": "b3b139cbd9ffd333011466d28281526b055e42e34c8118ec4cb64bb0ace5a976",
+    "EXECUTION_REGISTRATION.json": "7ed0dc8230fe7f7b5fad28998989db94df067d382c18766f58e757001399f1b9",
+    "SELECTION_SEAL.json": "7ec2ea30ff73785478f74a3c061ff4966138eb3535d25be414f9cdd510422280",
+    "ADMISSION_SEAL.json": "20d9eea957908adb3b599aae6ca3146ab80490893202a083998ead5bdb3a897a",
+    "FINAL_SEAL.json": "b6ce5697793c22928de6818aad992ed88e800670dfa6280149cdc2ed8b61e1b9",
+    "RESULTS.csv": "dd1a5296ee1d62d86c3f2aaafb4e90a0ec149b27638dc12a6cd1fba612ec3377",
+    "SUMMARY.json": "71ffaf97b2476d461ae856eb94469f798ee61addb44034aa29abc178c49741e7"
+  },
+  "scientific_counts": {
+    "solver_calls": 72,
+    "global_candidate_certificates": 72,
+    "paired_conditions": 504,
+    "independent_base_seeds": 72,
+    "heldout_base_seeds": 48,
+    "calibration_base_seeds": 24,
+    "additional_searches_in_derivation": 0,
+    "source_threshold_changes": 0
+  },
+  "dangerous_calibration_acceptances": [
+    {
+      "case_id": "CALIBRATION_M3_01",
+      "split": "CALIBRATION",
+      "layer": "M3",
+      "seed": "2026100801",
+      "condition": "TWO_SIGNAL_BIASES",
+      "status": "SHADOW_ACCEPTED",
+      "outcome": "WRONG_INTEGER_SHADOW_ACCEPTED",
+      "shadow_accepted": "True",
+      "selection_integer_correct": "False",
+      "future_integer_correct": "False",
+      "model_truth_representable": "True",
+      "mean_observation_model_exact": "False",
+      "temporal_covariance_model_exact": "True",
+      "baseline_angle_epoch_count": "5",
+      "baseline_angle_rmse_deg": "55.006660833997046",
+      "baseline_angle_max_deg": "57.6235703841473",
+      "GLRT_reject_any": "False",
+      "GLRT_best_hypotheses": "[\"SD:GPS1:L1\"]",
+      "accepted_integer_measurement": "False"
+    },
+    {
+      "case_id": "CALIBRATION_M3_05",
+      "split": "CALIBRATION",
+      "layer": "M3",
+      "seed": "2026100805",
+      "condition": "TARGET_QUARTER",
+      "status": "SHADOW_ACCEPTED",
+      "outcome": "WRONG_INTEGER_SHADOW_ACCEPTED",
+      "shadow_accepted": "True",
+      "selection_integer_correct": "False",
+      "future_integer_correct": "False",
+      "model_truth_representable": "True",
+      "mean_observation_model_exact": "False",
+      "temporal_covariance_model_exact": "True",
+      "baseline_angle_epoch_count": "5",
+      "baseline_angle_rmse_deg": "52.02353723313682",
+      "baseline_angle_max_deg": "56.26634061106514",
+      "GLRT_reject_any": "False",
+      "GLRT_best_hypotheses": "[\"SD:GPS1:L1\"]",
+      "accepted_integer_measurement": "False"
+    },
+    {
+      "case_id": "CALIBRATION_M3_05",
+      "split": "CALIBRATION",
+      "layer": "M3",
+      "seed": "2026100805",
+      "condition": "UNDETECTED_SLIP",
+      "status": "SHADOW_ACCEPTED",
+      "outcome": "UNREPRESENTABLE_SHADOW_ACCEPTED",
+      "shadow_accepted": "True",
+      "selection_integer_correct": "False",
+      "future_integer_correct": "False",
+      "model_truth_representable": "False",
+      "mean_observation_model_exact": "True",
+      "temporal_covariance_model_exact": "True",
+      "baseline_angle_epoch_count": "5",
+      "baseline_angle_rmse_deg": "70.4132119812926",
+      "baseline_angle_max_deg": "73.0487150160456",
+      "GLRT_reject_any": "False",
+      "GLRT_best_hypotheses": "[\"SD:GPS1:L1\"]",
+      "accepted_integer_measurement": "False"
+    }
+  ],
+  "public_derivation_script_sha256": "5e913b0351082ab865894a857289f29038a1a1e87f75658ccdcea3365afb3bdb"
+}
