@@ -1,0 +1,13 @@
+sequence,source,epochs,missing_pvt_join,both_fixed,not_both_fixed,gnss1_fixed,gnss1_float,gnss1_no_carrier,gnss1_reserved,gnss2_fixed,gnss2_float,gnss2_no_carrier,either_float
+BY2,all_provider_epochs,1370,0,1370,0,1370,0,0,0,1370,0,0,0
+BY2,position_valid,1370,0,1370,0,1370,0,0,0,1370,0,0,0
+BY2,receiver_velocity_valid,1370,0,1370,0,1370,0,0,0,1370,0,0,0
+BY2,yaw_valid,1370,0,1370,0,1370,0,0,0,1370,0,0,0
+BY2H,all_provider_epochs,1350,0,1350,0,1350,0,0,0,1350,0,0,0
+BY2H,position_valid,1350,0,1350,0,1350,0,0,0,1350,0,0,0
+BY2H,receiver_velocity_valid,1350,0,1350,0,1350,0,0,0,1350,0,0,0
+BY2H,yaw_valid,1350,0,1350,0,1350,0,0,0,1350,0,0,0
+BY2O,all_provider_epochs,1885,0,1594,291,1885,0,0,0,1594,291,0,291
+BY2O,position_valid,1885,0,1594,291,1885,0,0,0,1594,291,0,291
+BY2O,receiver_velocity_valid,1885,0,1594,291,1885,0,0,0,1594,291,0,291
+BY2O,yaw_valid,1594,0,1594,0,1594,0,0,0,1594,0,0,0
