@@ -1,0 +1,28 @@
+{
+  "schema": "projected_fixed_n_synthetic_unit_record.v1",
+  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONPATH=src python3 -m pytest -q tests/paper_rebuild/test_trusted_heading_projected_fixed_n.py",
+  "result": "7 passed in 0.46s",
+  "tests_passed": 7,
+  "tests_failed": 0,
+  "tests_skipped": 0,
+  "data": "synthetic physical SD observations and full covariance only",
+  "real_window_diagnostic_calls": 0,
+  "cils_calls": 0,
+  "admission_calls": 0,
+  "native_calls": 0,
+  "reference_reads": 0,
+  "source_files": {
+    "docs/paper_rebuild/TRUSTED_HEADING_20261006/PROJECTED_FIXED_N_PLAN.md": "70028cf3280755f8444cc74b2b6cf23f02e91a725fb422573f4512afd96c0125",
+    "scripts/paper_rebuild/carrier_phase/trusted_heading_projected_fixed_n.py": "f4bdd49aa557aa57b96590d7d837aa0cfb0960fcc158250e4a5aefad25930650",
+    "tests/paper_rebuild/test_trusted_heading_projected_fixed_n.py": "80dbabfebd432962e2d57c68674718e413e058dc553a3a910bb5222ea1656f39"
+  },
+  "coverage": [
+    "linear U transforms versus independent SD generation including fault columns",
+    "explicit full-Q GLS and cancelled pivot unbounded MDB",
+    "five changing baselines and block-diagonal joint residual identity",
+    "irreversible retirement and projected candidate merge without acceptance",
+    "persistent fault columns never merge different SD arcs",
+    "future time shifts rejected before fitting",
+    "frozen integer/source fingerprint identity"
+  ]
+}

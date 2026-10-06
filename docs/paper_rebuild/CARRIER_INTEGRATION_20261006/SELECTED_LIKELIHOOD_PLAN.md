@@ -1,0 +1,15 @@
+# Preselected-observation likelihood: separate algorithm trial
+
+This trial changes the likelihood explicitly. The earlier six-class method solves all original phase observations and all historical/unselected integer nuisance variables, often 23--30 integers. The new method selects support before searching, then solves only the retained observation likelihood with at most six shared integers. It is not an equivalent profiling or acceleration of the earlier full likelihood.
+
+Selection uses the same original five epochs and the existing geometry/covariance/arc-only greedy selector, minimum four and cap six. For every selection epoch, retain all code rows plus phase rows whose coefficients on every unselected integer are exactly zero. Use y[R], A[R,S], B[R] and the principal marginal covariance Q[R,R], preserving shared-pivot correlations. Do not condition on, fit, score or screen the removed phase observations. Retain selection provenance and original row/column identities. Complete-rank and epoch-separability checks remain required.
+
+Exactly certify the top two distinct selected integer vectors under this reduced likelihood and the original per-epoch fixed length. Candidate bindings must distinguish this likelihood from the full-nuisance problem. Future admission, persistent phase diagnostics, 0.35 m length, noise, angular floor and continuous-tracking release rules remain unchanged and use the same frozen selected labels.
+
+Before any real execution, validate the reduced matrices against independent construction, full-Q handling, row/column permutations, geometry-only selection, invariance to removed phase values, all-selected recovery, and tiny exhaustive integer problems. No source-level threshold tuning or result-driven selection is permitted.
+
+The real development trial covers all original 120 windows at 100,102,...,338 s, same 100000-node/30-second limits, Python sphere backend by default. Preserve every failure. Run ordinary 1200-epoch tracking and the tested single-worker replay with this trial's own recorded durations. Compare availability, integer dimensions, retained phase counts, certification, search cost and gate failures against full-likelihood PARTIAL6. Neither candidate agreement nor certification proves physical integer truth.
+
+After both streams are complete, evaluate each through the existing native body-HV integration on the full 66--340 second support, with the existing PVT/control arms and fixed evaluator. Numerical controls can be reused by their actual input/binary identity; report actual new-run counts and do not call reused outputs new executions. No reference affects selection/search/admission. This is development on the same sequence, not generalization or real-time qualification. Raw data, default V3 and earlier results remain unchanged.
+
+Output roots: SELECTED_LIKELIHOOD_FRONTEND, SELECTED_LIKELIHOOD_TRACKING, SELECTED_LIKELIHOOD_SERIAL and their separate navigation roots beneath the current WSL carrier scratch directory.

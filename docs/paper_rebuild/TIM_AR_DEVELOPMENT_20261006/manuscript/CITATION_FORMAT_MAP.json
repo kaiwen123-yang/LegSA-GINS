@@ -1,0 +1,62 @@
+[
+  {
+    "number": 1,
+    "original_record": "Teunissen PJG (2010) Integer least-squares theory for the GNSS compass. Journal of Geodesy 84:433–447. https://doi.org/10.1007/s00190-010-0380-8"
+  },
+  {
+    "number": 2,
+    "original_record": "Farkas M, Rózsa S, Vanek B (2024) Multi-sensor Attitude Estimation using Quaternion Constrained GNSS Ambiguity Resolution and Dynamics-Based Observation Synchronization. Acta Geodaetica et Geophysica 59:51–71. https://doi.org/10.1007/s40328-024-00441-2"
+  },
+  {
+    "number": 3,
+    "original_record": "Hartley R, Ghaffari M, Eustice RM, Grizzle JW (2020) Contact-aided invariant extended Kalman filtering for robot state estimation. International Journal of Robotics Research 39:402–430. https://doi.org/10.1177/0278364919894385"
+  },
+  {
+    "number": 4,
+    "original_record": "Verhagen S, Teunissen PJG (2013) The ratio test for future GNSS ambiguity resolution. GPS Solutions 17:535–548. https://doi.org/10.1007/s10291-012-0299-z"
+  },
+  {
+    "number": 5,
+    "original_record": "Zaminpardaz S, Teunissen PJG (2019) DIA-datasnooping and identifiability. Journal of Geodesy 93:85–101. https://doi.org/10.1007/s00190-018-1141-3"
+  },
+  {
+    "number": 6,
+    "original_record": "JCGM (2008) Evaluation of measurement data Guide to the expression of uncertainty in measurement. JCGM 100:2008. https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf"
+  },
+  {
+    "number": 7,
+    "original_record": "Fixposition (2024) Vision RTK 2 Quick Start Guide. Version 2024.05. Supplied Chinese copy, physical pages 3, 9 and 10. Official documentation https://docs.fixposition.com/fd/"
+  },
+  {
+    "number": 8,
+    "original_record": "Unitree Robotics (2026) Public Go2 interfaces and nominal model descriptions. unitree_sdk2 commit 63096d0ac0c5d2dec9d6e0c22cd5233410ca2f36 and unitree_ros commit 5994d4faef0a9cadd3287f8de0199a67eeb2a259. https://github.com/unitreerobotics/unitree_sdk2 https://github.com/unitreerobotics/unitree_ros"
+  },
+  {
+    "number": 9,
+    "original_record": "Solà J (2017) Quaternion kinematics for the error-state Kalman filter. arXiv:1711.02508. https://arxiv.org/abs/1711.02508"
+  },
+  {
+    "number": 10,
+    "original_record": "JCGM (2011) Evaluation of measurement data Supplement 2 to the Guide to the expression of uncertainty in measurement Extension to any number of output quantities. JCGM 102:2011. https://www.bipm.org/documents/20126/2071204/JCGM_102_2011_E.pdf"
+  },
+  {
+    "number": 11,
+    "original_record": "Yang Z, Ding X, Yang Y, Wang Q (2025) OiSAM-FGO: an efficient factor graph optimization algorithm for GNSS/INS integrated navigation system. Satellite Navigation 6:23. https://doi.org/10.1186/s43020-025-00173-w"
+  },
+  {
+    "number": 12,
+    "original_record": "Wen W, Pfeifer T, Bai X, Hsu L-T (2021) Factor graph optimization for GNSS/INS integration: A comparison with the extended Kalman filter. NAVIGATION 68(2):315–331. https://doi.org/10.1002/navi.421"
+  },
+  {
+    "number": 13,
+    "original_record": "Wen W, Zhang G, Hsu L-T (2022) GNSS Outlier Mitigation via Graduated Non-Convexity Factor Graph Optimization. IEEE Transactions on Vehicular Technology 71(1):297–310. https://doi.org/10.1109/TVT.2021.3130909"
+  },
+  {
+    "number": 14,
+    "original_record": "Cucci DA, Voirol L, Khaghani M, Guerrier S (2023) On Performance Evaluation of Inertial Navigation Systems: The Case of Stochastic Calibration. IEEE Transactions on Instrumentation and Measurement 72:8502417. https://doi.org/10.1109/TIM.2023.3267360"
+  },
+  {
+    "number": 15,
+    "original_record": "García Crespillo O, Langel S, Joerger M (2023) Tight Bounds for Uncertain Time-Correlated Errors With Gauss–Markov Structure in Kalman Filtering. IEEE Transactions on Aerospace and Electronic Systems 59:4347–4362. https://doi.org/10.1109/TAES.2023.3242943"
+  }
+]

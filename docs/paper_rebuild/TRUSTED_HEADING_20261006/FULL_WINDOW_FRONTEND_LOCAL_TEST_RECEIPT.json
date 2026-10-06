@@ -1,0 +1,80 @@
+{
+  "status": "SIX_SCHEDULER_SCENARIOS_PASS_AFTER_FIXTURE_REPAIR",
+  "unique_scenarios": 6,
+  "total_pytest_instances": 12,
+  "first_command": {
+    "failed": 6,
+    "reason": "Test fixture omitted mandatory window_s sequence metadata; every case failed during final runner summary before test assertions could complete. Runner unchanged."
+  },
+  "repaired_command": {
+    "passed": 6,
+    "failed": 0,
+    "pytest_s": 0.48,
+    "change": "Only add window_s to synthetic sequence specs; same six scenarios, no parameter or runner change."
+  },
+  "runner_sha256": "23ddc7495fc0115226d94e6f85f848e6a4b00edcad726efe96be823859dd0075",
+  "test_sha256": "7057c46636063826f980e680c64f1ab6ec8c258f79495830e0788cce32ecac9d",
+  "plan_sha256": "9c7840f1228168f1df181668e02b5eefc2d00402b19ce5ffbab12ceee41eeedb",
+  "plan_budget_note": "Initial plan allowed one pass of six distinct mock scenarios; a fixture-only repair required a second execution of the same six. Both original failure and repaired pass are retained; no real scientific computation occurred.",
+  "actual_aggregate": {
+    "scheduler_mock_runs": 12,
+    "mock_acquisition_calls": 26,
+    "mock_provider_advance_calls": 162,
+    "integer_search": 0,
+    "GLS": 0,
+    "GLRT": 0,
+    "sphere": 0,
+    "real_model_reads": 0,
+    "native_navigation": 0,
+    "reference_reads": 0
+  },
+  "execution_receipts": [
+    {
+      "alias": "<TRUSTED_HEADING>/FULL_WINDOW_FRONTEND_SCHEDULER_UNITS_ATTEMPT01",
+      "returncode": 1,
+      "wall_s": 0.7853794609999909,
+      "source_pins": {
+        "scripts/paper_rebuild/carrier_phase/full_window_frontend.py": "23ddc7495fc0115226d94e6f85f848e6a4b00edcad726efe96be823859dd0075",
+        "tests/paper_rebuild/test_full_window_frontend_schedule.py": "fb0aac3fec0d267ee545b796216141ff69ccfe54a41507b4e2286e763060afcb",
+        "docs/paper_rebuild/TRUSTED_HEADING_20261006/FULL_WINDOW_FRONTEND_LOCAL_PLAN.json": "9c7840f1228168f1df181668e02b5eefc2d00402b19ce5ffbab12ceee41eeedb"
+      },
+      "files": {
+        "PLAN.json": "c07a983f54c4947dc431ce54f4444b22de69b7d63a183c63a22ed26a61eb03ec",
+        "pytest.log": "7d21f6d3ed87aecb74df0650073765d68453d11d3d071a32fc82cde4b7c36fa6",
+        "RECEIPT.json": "2447c701215cba2b13ef20a997f91b0badd2193be173c6e9b4206de858047b58"
+      },
+      "scheduler_mock_runs": 6,
+      "mock_acquisition_calls": 13,
+      "mock_provider_advance_calls": 81
+    },
+    {
+      "alias": "<TRUSTED_HEADING>/FULL_WINDOW_FRONTEND_SCHEDULER_FIXTURE_REPAIR",
+      "returncode": 0,
+      "wall_s": 0.6987136059999841,
+      "source_pins": {
+        "scripts/paper_rebuild/carrier_phase/full_window_frontend.py": "23ddc7495fc0115226d94e6f85f848e6a4b00edcad726efe96be823859dd0075",
+        "tests/paper_rebuild/test_full_window_frontend_schedule.py": "7057c46636063826f980e680c64f1ab6ec8c258f79495830e0788cce32ecac9d",
+        "docs/paper_rebuild/TRUSTED_HEADING_20261006/FULL_WINDOW_FRONTEND_LOCAL_PLAN.json": "9c7840f1228168f1df181668e02b5eefc2d00402b19ce5ffbab12ceee41eeedb"
+      },
+      "files": {
+        "PLAN.json": "e82b88b04a42299176b4d0239297ec81532ff6c5a5ca2c849403be41f742f5fa",
+        "pytest.log": "a8a817e311e4b48db86f873909289d52c2de32ea6ed8cbeeb9013846b071f1cc",
+        "RECEIPT.json": "f5ff3061415c9577024877eaa83e47aa301b7e7f9547ca325ac75f6fba713891"
+      },
+      "scheduler_mock_runs": 6,
+      "mock_acquisition_calls": 13,
+      "mock_provider_advance_calls": 81
+    }
+  ],
+  "verified_contracts": [
+    "Healthy owner kept despite later source advertised narrower and already validated",
+    "Exactly one output row per epoch; promotion epoch invalid; never combine two points",
+    "0.65s acquisition blocks three intervening 5Hz slots; all catchup slots model=None; first export only after five subsequent current validations plus promotion slot",
+    "Missing current model gives invalid and resets mocked validation streak, no stale point reuse",
+    "Complete65 source saved as65 and no provider activation or truncation",
+    "Deadline retains every remaining epoch and scheduled opportunity, including next sequence",
+    "Time gap clears owner and pending; neither old source returns"
+  ],
+  "clock_scope": "Only frontend.time namespace replaced by a deterministic Clock object; global Python time module and actual scientific kernels are not patched or executed.",
+  "limitations": "These are orchestration tests with mocked provider semantics, not additional estimator accuracy, real data validation, timing benchmarks or risk calibration."
+}

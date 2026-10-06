@@ -1,0 +1,21 @@
+{
+  "schema": "ar_v3_motion_qualification.v1",
+  "status": "ALL_REGISTERED_SLOTS_TERMINAL",
+  "calls": 16,
+  "registration_commit": "a128409164362cf7ca4dbe328bfb8133be76712e",
+  "plan_sha256": "9d09a41dc8847a7c48fcbd704c8338b7c062797ea8cac1f57bbe20706e6deb74",
+  "reference_reads": 0,
+  "native_navigation_calls": 0,
+  "evaluator_calls": 0,
+  "real_observation_y_used": false,
+  "counts": {
+    "RETURNED_CANDIDATE": 14,
+    "TIMEOUT": 2
+  },
+  "ordering_evidence_cases": [],
+  "wrong_prior_safety_validated": false,
+  "navigation_expansion_allowed": false,
+  "navigation_policy": "not supported by this finite experiment",
+  "recommendation": "FINITE_MECHANISM_EVIDENCE_INSUFFICIENT_FOR_EXPANSION",
+  "interpretation": "conditional synthetic mechanism check, not real V3 performance or accepted integers"
+}

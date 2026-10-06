@@ -1,0 +1,36 @@
+{
+  "command": [
+    "python3",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/paper_rebuild/test_empty_navigation_prefix.py"
+  ],
+  "returncode": 0,
+  "wall_s": 0.32531847000001335,
+  "source_sha256": {
+    "scripts/paper_rebuild/carrier_phase/full_window_prepare.py": "3cb0e6196b81a57a0b2930cd4e3949f5ba88bd30ece24badb78350f4aba110e0",
+    "scripts/paper_rebuild/carrier_phase/real_trial.py": "a5d53ad4bc412a322237f45227631d9c29070736032a92aebbbd432d46862de9",
+    "tests/paper_rebuild/test_empty_navigation_prefix.py": "7b58e062244b8a4ed6bb2d62c38c33d8b4128c13a93eca54ee675eaf39efc26f"
+  },
+  "source_files_py_compiled": 3,
+  "local_unique_tests": 6,
+  "synthetic_spp_calls": 1,
+  "real_converter_calls": 0,
+  "real_prepare_calls": 0,
+  "integer_search_calls": 0,
+  "native_navigation_calls": 0,
+  "reference_reads": 0,
+  "final_runner_sha256": "bf6d728675e13369ec64e03ee66f3d92f92b1d13b8d342fb6d871745c7ae0773",
+  "final_runner_syntax_check": "PASS; after tests, added only guard rejecting output directory/non-file as absent NAV",
+  "real_trial_final_sha256": "a5d53ad4bc412a322237f45227631d9c29070736032a92aebbbd432d46862de9",
+  "test_log_alias": "<TRUSTED_HEADING_SCRATCH>/EMPTY_NAVIGATION_LOCAL_TESTS_ATTEMPT01/pytest.log",
+  "test_log_sha256": "90938eb99f6e9883d2cea26507b9cf7d10939651a834da1233047d54adfdb5a4",
+  "r2_plan_sha256": "ac6cefc036b21caa5ed7cae382f6b2493e30557af6246f19b25801d5b2040b92",
+  "registration_newline_normalization": {
+    "file": "tests/paper_rebuild/test_empty_navigation_prefix.py",
+    "executed_sha256": "7b58e062244b8a4ed6bb2d62c38c33d8b4128c13a93eca54ee675eaf39efc26f",
+    "registered_lf_sha256": "45b9c254cbda96f25b61a64543a4418fe24259d55322f940f00359e8190419d8",
+    "scope": "CRLF to LF only to match Git committed bytes; no semantic edits, no test rerun, no real execution"
+  }
+}

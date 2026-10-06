@@ -1,0 +1,37 @@
+{
+  "execution_commit": "aed8532fb4d0903b43d5abd16d1b042959dc10f0",
+  "new_search_calls": 20,
+  "reused_cases": 0,
+  "modes": {
+    "full": {
+      "cases": 10,
+      "valid_experimental_measurements": 0,
+      "search_calls": 10,
+      "statuses": {
+        "UNRESOLVED_ACTIVE_ARC_CHANGED": 5,
+        "REJECTED_RESIDUAL_AND_LENGTH": 2,
+        "REJECTED_RESIDUAL": 2,
+        "REJECTED_PHASE_FAULT_DIAGNOSTIC": 1
+      },
+      "csv": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CARRIER_INTEGRATION_20261006/FRONTEND/CARRIER_FULL_0001.csv",
+      "decision_times_s": []
+    },
+    "partial": {
+      "cases": 10,
+      "valid_experimental_measurements": 0,
+      "search_calls": 10,
+      "statuses": {
+        "UNRESOLVED_ACTIVE_ARC_CHANGED": 2,
+        "UNAVAILABLE:partial freeze requires the exact certified selected-class search": 2,
+        "REJECTED_LENGTH": 1,
+        "REJECTED_RESIDUAL": 2,
+        "REJECTED_PHASE_FAULT_DIAGNOSTIC": 3
+      },
+      "csv": "/home/kaiwen/research/LegSA-GINS-SCRATCH/CARRIER_INTEGRATION_20261006/FRONTEND/CARRIER_PARTIAL_0001.csv",
+      "decision_times_s": []
+    }
+  },
+  "reference_reads": 0,
+  "production_measurement_validated": false,
+  "scope": "BY2 180-200 seconds; five selection epochs then five unseen future epochs; all results retained"
+}

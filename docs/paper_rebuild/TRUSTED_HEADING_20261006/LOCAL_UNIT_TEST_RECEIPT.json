@@ -1,0 +1,64 @@
+{
+  "schema": "trusted_heading_stage_a_retrospective_unit_receipt.v1",
+  "receipt_date": "2026-10-06",
+  "environment": "WSL Ubuntu-22.04",
+  "record_basis": "Recorded exec_command terminal responses and unchanged test definitions; no rerun",
+  "contemporaneous_file_log_available": false,
+  "precise_execution_timestamps": null,
+  "source_hash_role": "CURRENT_SNAPSHOT_AT_RETROSPECTIVE_RECEIPT_NOT_CONTEMPORANEOUS_TEST_PIN",
+  "source_sha256": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/directed_motion.py": "187224e7d5e35628c5d5bd3ab9ff39de7d5d7de4c927ab59f5197791e035c870",
+    "tests/paper_rebuild/test_carrier_directed_motion.py": "78f01cc951e3dd57dad38ecf100602f1d8d0d35a7ac9a70ff93352dd8fd9808c",
+    "src/legsa_gins/paper_rebuild/carrier_phase/candidate_envelope.py": "024235b66a36dd5cf074d083d7e4747df106efb347865b6caca9b0b2df864697",
+    "tests/paper_rebuild/test_carrier_candidate_envelope.py": "9450777a1c9c184736af43ab5717cb9ea513195533afeab752d3fcb3b815ffdf"
+  },
+  "directed_motion_invocations": [
+    {
+      "tests_passed": 23,
+      "pytest_reported_elapsed_s": 0.18,
+      "role": "initial_local_suite"
+    },
+    {
+      "tests_passed": 25,
+      "pytest_reported_elapsed_s": 0.19,
+      "role": "final_suite_after_two_boundary_tests_and_arithmetic_guard"
+    }
+  ],
+  "candidate_envelope_invocations": [
+    {
+      "tests_passed": 18,
+      "pytest_reported_elapsed_s": 0.2,
+      "enumeration_api_calls": 18,
+      "returned_results": 17,
+      "rejected_before_result": 1,
+      "expanded_nodes": 50,
+      "integer_leaves": 25,
+      "status_counts": {
+        "COMPLETE_RELAXED_SUPPORT": 11,
+        "EMPTY_RELAXED_SUPPORT": 1,
+        "INCOMPLETE_RELAXED_SUPPORT": 3,
+        "UNQUALIFIED_NUMERICS": 2,
+        "RAISED_BEFORE_RESULT": 1
+      },
+      "per_call_nodes_and_timing": "UNAVAILABLE_NOT_RECONSTRUCTED"
+    }
+  ],
+  "calls_are_low_dimensional_synthetic_enumeration_not_real_performance": true,
+  "raw_reads": 0,
+  "reference_reads": 0,
+  "lambda_native_calls": 0,
+  "native_navigation_calls": 0,
+  "existing_CILS_calls": 0,
+  "transcript_root_alias": "<TRUSTED_HEADING_SCRATCH>/STAGE_A_RETROSPECTIVE_RECEIPTS",
+  "transcripts": {
+    "DIRECTED_FIRST23_TOOL_OUTPUT_TRANSCRIPT.txt": "d7d2914af119b888cc8c3cfda9f231cbec311f7acc4021ea378fbef54478dfa9",
+    "DIRECTED_FINAL25_TOOL_OUTPUT_TRANSCRIPT.txt": "e12978fef0f845c9eda6757cc713887290c3cfb0c1b59bad98f1eb139be0834b",
+    "CANDIDATE_FIRST18_TOOL_OUTPUT_TRANSCRIPT.txt": "9c81d7a5e13c3d9a03c44047ee1b3e99d1512f4707ae2664d1e5a47cd5f94c59"
+  },
+  "limitations": [
+    "Floating working guards are not rigorous interval certificates",
+    "No calibrated real coverage or integer correctness rate",
+    "No frontend, tracking or EKF integration",
+    "No scientific rerun when the receipt was written"
+  ]
+}

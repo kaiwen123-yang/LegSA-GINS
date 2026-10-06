@@ -1,0 +1,54 @@
+{
+  "data_mode": "synthetic",
+  "seed": 20261006,
+  "bit_generator": "PCG64",
+  "samples_per_Gaussian_case": 200000,
+  "L_m": [
+    0.35,
+    0.7
+  ],
+  "receiver_axis_std_m": 0.01,
+  "receiver_correlation_cases": [
+    0.0,
+    0.75,
+    -0.5
+  ],
+  "roll_cases_deg": [
+    0.0,
+    60.0,
+    89.0
+  ],
+  "pitch_cases_deg": [
+    0.0
+  ],
+  "linear_regime_MC_relative_std_tolerance": 0.03,
+  "FD_step": 1e-07,
+  "FD_max_error_tolerance": 2e-06,
+  "physical_baseline_band_m": [
+    0.2,
+    0.6
+  ],
+  "timing_example_velocity_mps": [
+    0.0,
+    0.5,
+    0.0
+  ],
+  "timing_example_offsets_s": [
+    0.007,
+    0.008,
+    0.02
+  ],
+  "wrong_fixed_sensitivity_probability": 0.01,
+  "wrong_fixed_bias_deg": 20.0,
+  "conditional_angular_std_deg": 1.0,
+  "targets_standard_uncertainty_deg": [
+    1.0,
+    0.5
+  ],
+  "parameters_chosen_without_reference": true,
+  "parameters_calibrated": false,
+  "raw_reads": 0,
+  "reference_reads": 0,
+  "native_navigation_calls": 0,
+  "evaluator_calls": 0
+}

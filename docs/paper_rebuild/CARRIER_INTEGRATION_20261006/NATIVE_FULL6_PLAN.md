@@ -1,0 +1,9 @@
+# Full-nuisance six-class search with native sphere kernel
+
+After the four-call native-kernel comparison, run one complete new 120-window six-class frontend on REAL_100_340_V2. Keep the original full observation likelihood and every historical/unselected integer nuisance variable, same cap=6, 100000-node/30-second limit, noise and future gates. Only the opt-in scalar sphere kernel differs from the Python cache implementation. Library SHA d123dd20dd38ca571e461b880e219fd6bb70a714c2120328f1450233c1b505e3, ABI 1, kernel delta_bisection_3d_v1; build flags/manifest are retained in NATIVE_SPHERE_PROTOTYPE/BUILD_OPT_IN_V1.
+
+Preserve every new outcome. Compare every jointly certified result with original PARTIAL6 integer classes/objectives. More completed searches are allowed under the same time limit; new certification alone does not establish a correct physical fix. Do not use the two timing samples to scale all prior durations.
+
+Run fixed-candidate tracking over all 1200 epochs and then single-worker availability replay using this trial's own measured CILS durations. Keep original ownership, catch-up, permanent-release and current-only output rules. All non-search costs remain explicitly idealized as zero. Compare both complete streams through the established native body-HV navigation/evaluator with unchanged controls and full time support; record actual execution versus reuse.
+
+Exactly 120 new searches in this stage; no retries or threshold tuning. The separate selected-observation trial remains Python and is a different likelihood, not an interchangeable source. Execute trials sequentially so their numerical worker runtimes are not deliberately contending. Outputs NATIVE_FULL6_FRONTEND, NATIVE_FULL6_TRACKING, NATIVE_FULL6_SERIAL and separate navigation stages under the current WSL scratch root. Default V3 remains unchanged.

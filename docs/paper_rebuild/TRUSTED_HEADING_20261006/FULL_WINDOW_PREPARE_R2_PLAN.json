@@ -1,0 +1,347 @@
+{
+  "schema": "trusted_heading.full_window_prepare.plan.v2",
+  "status": "PRE_EXECUTION_REGISTRATION",
+  "scope": "Input preparation only; original V3 three full windows; no integer search, navigation solve, evaluator or reference read.",
+  "v3_lock": {
+    "path": "docs/paper_rebuild/AR_V3_RESEARCH_20261006/V3_BASELINE_LOCK.json",
+    "sha256": "d961acfd483c420e24e5b48f0b313cbac5932ef7a036a21ffe5a00dd742a09ff"
+  },
+  "converter_sha256": "dd9e6d3bf3b68047f53f1efb5c8504ae4849b920b3ab8bf41f2a2a6619396f3c",
+  "native_dependencies": [
+    {
+      "path": "<EXT_REPRO_BUILD>/lib/liblegsa_rtklib_bridge.so",
+      "sha256": "6df66600892404dd1c892879fe6e10693e808995fe359e32a6afc983629f8a3b",
+      "role": "existing broadcast ephemeris state ABI; no rebuild"
+    }
+  ],
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/full_window_prepare.py": "bf6d728675e13369ec64e03ee66f3d92f92b1d13b8d342fb6d871745c7ae0773",
+    "scripts/paper_rebuild/carrier_phase/prepare_navigation.py": "c454dc96bfa3066f86211276382ec8ee8ebef321714b51e78ffc3eba1ac98b93",
+    "scripts/paper_rebuild/carrier_phase/real_trial.py": "a5d53ad4bc412a322237f45227631d9c29070736032a92aebbbd432d46862de9",
+    "src/legsa_gins/paper_rebuild/carrier_phase/observations.py": "637ada354ec2132c6d4aeb7f615d2e7eb1ef7f1c5ebcf7f688e2847b798ca44c",
+    "src/legsa_gins/paper_rebuild/carrier_phase/arcs.py": "5f4b030fcc55ffa5fa1bd4bb41e06641281b17248e34f32d877f8ebac7526953",
+    "src/legsa_gins/paper_rebuild/carrier_phase/multignss.py": "20704c075335edc7fa0e10092ca4efbd2e7a8c28a43497d514e88d31e6842555",
+    "src/legsa_gins/paper_rebuild/carrier_phase/ephemeris.py": "0e095ab821618553f47e699f009a8d5622d6c66b9109a96143cfb79810803d8d",
+    "src/legsa_gins/paper_rebuild/carrier_phase/causal_anchor.py": "36ac7303efd2106c0904483dc11f1a5d7d678286827938c8a4c66bb3278ab940",
+    "src/legsa_gins/paper_rebuild/carrier_phase/temporal.py": "1c48b863e7e132b0cfa281ca0f7bb45e1dd9b7c443906d775c4e25b3226a7177",
+    "src/legsa_gins/paper_rebuild/carrier_phase/solver.py": "28fe539746aa19b616b3feadc7703fbcd328e73b1f9f42fffbc4a854a491d931",
+    "src/legsa_gins/paper_rebuild/carrier_phase/native_sphere.py": "5e2e10aed572442f1eec8581258c66dd18049cd026a49091c392e806cebd0f33",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "7a6dd13f40235f1edcb6b3e9f27768e53f0c244f5d9bb0d39268333150f859d6",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "4d4ef06794fe9d0f51417de2162b21bead31f171908619ae0cb8acbeb465d3a4",
+    "tests/paper_rebuild/test_empty_navigation_prefix.py": "45b9c254cbda96f25b61a64543a4418fe24259d55322f940f00359e8190419d8"
+  },
+  "count_evidence": [
+    {
+      "path": "docs/paper_rebuild/hext/DG01/DG01_OVERVIEW.csv",
+      "sha256": "51bc85cddd801b259c1ddb332e7b9633eca66c37953f070452570927b8a336b2"
+    },
+    {
+      "path": "docs/paper_rebuild/hext/DG01/DG01_INTER_RECEIVER.csv",
+      "sha256": "ff6b0606c26c313b418617178d950b0a6d0e4bcffe121964d0c8fb5e1de219a3"
+    }
+  ],
+  "reuse": {
+    "schedule": "<OLD_CARRIER_ROOT>/CAUSAL_NAV_SCHEDULE_V2/NAVIGATION_SCHEDULE.json",
+    "schedule_sha256": "bab28f98dc05646a139c3779319dbeca656f28534d57e87d7ed2a32fc6ccdab2",
+    "cutoffs_s": [
+      100.0,
+      120.0,
+      140.0,
+      160.0,
+      180.0,
+      200.0,
+      220.0,
+      240.0,
+      260.0,
+      280.0,
+      300.0,
+      320.0
+    ],
+    "initial_input_pins_sha256": "bcc75d218c2f06aea3e6f4180ad61ad0a0870e6cdc804d64457623308dc93ff9",
+    "policy": "Reuse existing NAV bytes only, add new lineage wrapper for initial100; no old prepared models reused."
+  },
+  "sequences": [
+    {
+      "sequence": "BY2",
+      "registry": "<EXT_REPRO_ROOT>/inputs/BY2/INPUT.json",
+      "registry_sha256": "8d016923133d6c2971a2d3bee286696a43c055a241a61e76a04a1b50c0e21501",
+      "base_time": 1772784000.0,
+      "window_s": [
+        66.0,
+        340.0
+      ],
+      "cutoffs_s": [
+        66.0,
+        80.0,
+        100.0,
+        120.0,
+        140.0,
+        160.0,
+        180.0,
+        200.0,
+        220.0,
+        240.0,
+        260.0,
+        280.0,
+        300.0,
+        320.0
+      ],
+      "expected_paired_epochs": 1370,
+      "whole_record_registry_pair_count": 1509,
+      "reused_prefixes": 12,
+      "new_prefixes": 2,
+      "expected_count_source": "DG01_OVERVIEW receiver raw_epochs plus DG01_INTER_RECEIVER paired_epochs; not full-record INPUT.json pair_count",
+      "source_files": {
+        "gnss1.ubx": {
+          "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss1.ubx",
+          "bytes": 7512260,
+          "sha256": "24177f2d6f25c0b614f769e66c4e4147eea727f3a7f55e22d5e04419eaa10f8b",
+          "hash_status": "NEWLY_VERIFIED",
+          "recorded_pin": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/OUTPUT_HASHES.json#/files/native/SOURCE_BACKEND/gnss1.ubx"
+        },
+        "gnss2.ubx": {
+          "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/native/SOURCE_BACKEND/gnss2.ubx",
+          "bytes": 7195365,
+          "sha256": "0876d7e67441ddfce66b4ce8e39838b4245bddab3d6d3cce60d5eb9bad42c2c2",
+          "hash_status": "NEWLY_VERIFIED",
+          "recorded_pin": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2__RTKLIB__NONE__C00__NA/OUTPUT_HASHES.json#/files/native/SOURCE_BACKEND/gnss2.ubx"
+        }
+      }
+    },
+    {
+      "sequence": "BY2H",
+      "registry": "<EXT_REPRO_ROOT>/inputs/BY2H/INPUT.json",
+      "registry_sha256": "6b8c9e4d104ccbacc92fb5de368bf260cdf4fd9a7f6a21ee5dac7304b6e06706",
+      "base_time": 1772784000.0,
+      "window_s": [
+        413.0,
+        683.0
+      ],
+      "cutoffs_s": [
+        413.0,
+        420.0,
+        440.0,
+        460.0,
+        480.0,
+        500.0,
+        520.0,
+        540.0,
+        560.0,
+        580.0,
+        600.0,
+        620.0,
+        640.0,
+        660.0,
+        680.0
+      ],
+      "expected_paired_epochs": 1350,
+      "whole_record_registry_pair_count": 1483,
+      "reused_prefixes": 0,
+      "new_prefixes": 15,
+      "expected_count_source": "DG01_OVERVIEW receiver raw_epochs plus DG01_INTER_RECEIVER paired_epochs; not full-record INPUT.json pair_count",
+      "source_files": {
+        "gnss1.ubx": {
+          "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss1.ubx",
+          "bytes": 7360992,
+          "sha256": "7287a2745d893c0c3a05981aefc65973b0080a7dd81ae0c3f0b1e90a9aaa7b99",
+          "hash_status": "NEWLY_VERIFIED",
+          "recorded_pin": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/OUTPUT_HASHES.json#/files/native/SOURCE_BACKEND/gnss1.ubx"
+        },
+        "gnss2.ubx": {
+          "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/native/SOURCE_BACKEND/gnss2.ubx",
+          "bytes": 7224784,
+          "sha256": "62a615500cede304abf9eb9146432ea860bd6d56e94b20e40d22cefce17987fd",
+          "hash_status": "NEWLY_VERIFIED",
+          "recorded_pin": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2H__RTKLIB__NONE__CONTRACT_START__NA/OUTPUT_HASHES.json#/files/native/SOURCE_BACKEND/gnss2.ubx"
+        }
+      }
+    },
+    {
+      "sequence": "BY2O",
+      "registry": "<EXT_REPRO_ROOT>/inputs/BY2O/INPUT.json",
+      "registry_sha256": "17181865614a6e4b250e9ab20fd3eae81ad9f289ef767f1da0f25c83e9f96866",
+      "base_time": 1772780400.0,
+      "window_s": [
+        3186.0,
+        3563.0
+      ],
+      "cutoffs_s": [
+        3186.0,
+        3200.0,
+        3220.0,
+        3240.0,
+        3260.0,
+        3280.0,
+        3300.0,
+        3320.0,
+        3340.0,
+        3360.0,
+        3380.0,
+        3400.0,
+        3420.0,
+        3440.0,
+        3460.0,
+        3480.0,
+        3500.0,
+        3520.0,
+        3540.0,
+        3560.0
+      ],
+      "expected_paired_epochs": 1885,
+      "whole_record_registry_pair_count": 2231,
+      "reused_prefixes": 0,
+      "new_prefixes": 20,
+      "expected_count_source": "DG01_OVERVIEW receiver raw_epochs plus DG01_INTER_RECEIVER paired_epochs; not full-record INPUT.json pair_count",
+      "source_files": {
+        "gnss1.ubx": {
+          "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss1.ubx",
+          "bytes": 11010585,
+          "sha256": "649d47b553c2d3b5b7cec627b2aeb5ee179346dbb40364f50d5003d02507ac30",
+          "hash_status": "NEWLY_VERIFIED",
+          "recorded_pin": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/OUTPUT_HASHES.json#/files/native/SOURCE_BACKEND/gnss1.ubx"
+        },
+        "gnss2.ubx": {
+          "source": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/native/SOURCE_BACKEND/gnss2.ubx",
+          "bytes": 10386974,
+          "sha256": "d24ea622e999ab782d8ee17cc84faa21919f4e3a24f3563a98cad828a9f44c66",
+          "hash_status": "NEWLY_VERIFIED",
+          "recorded_pin": "<CLEAN_ROOT>/stages/CLEAN9_EXTERNAL_COMPARISON/HX02_FIVE_CATEGORY/RUNS/BY2O__RTKLIB__NONE__FILE_START__NA/OUTPUT_HASHES.json#/files/native/SOURCE_BACKEND/gnss2.ubx"
+        }
+      }
+    }
+  ],
+  "budgets": {
+    "converter_calls": 73,
+    "prepare_calls": 3,
+    "converter_timeout_s": 60,
+    "prepare_timeout_s": 1200,
+    "integer_search_calls": 0,
+    "navigation_solver_calls": 0,
+    "evaluator_calls": 0,
+    "reference_reads": 0,
+    "converter_build_calls": 0,
+    "new_prefixes": 37,
+    "reused_prefixes": 12,
+    "total_prefixes": 49,
+    "expected_spp_attempts": 4605,
+    "max_family_build_opportunities": 13815,
+    "converter_outcomes_reused": 1
+  },
+  "fixed_model_parameters": {
+    "baseline_length_m": 0.35,
+    "max_source_gap_s": 0.21,
+    "tdcp_limit_cycles": 0.5,
+    "max_anchor_hold_s": 20.0,
+    "pivot_policy": "reselect_when_missing",
+    "families": "all three unchanged family defaults in real_trial.py; actual eligible groups may differ by epoch",
+    "anchor": "causal GPS L1 raw-code SPP; no position/attitude/body/IMU/reference provider",
+    "anchor_other_defaults": "unmodified AnchorPolicy defaults, source pinned",
+    "stochastic_model": "RAWX default SD variances and exact shared-pivot DD propagation; across epochs assumed independent; uncalibrated working model",
+    "allow_empty_navigation": true
+  },
+  "time_contract": {
+    "prefix_payload": "scan() closes at last RAWX <= cutoff; future frames may be audited but are excluded from derived NAV payload",
+    "consumer": "NavigationReplay lazily loads latest cutoff <= current epoch; all entries require registry/base/raw lineage",
+    "original_csv_payload_read": false,
+    "original_nonheading_provider_read": false,
+    "old_full_history_NAV_read": false,
+    "offline_producer_not_hardware_realtime": true,
+    "arc_history": "left-censored at each full-window start; no splice from old100 model history",
+    "empty_snapshot": "Opt-in NO_NAV_OUTPUT_AT_PREFIX plus both RX successful conversion outcomes; no RINEX fabrication. Each epoch continues existing SPP/no-anchor handling until a scheduled causal snapshot supplies ephemeris."
+  },
+  "read_contract": {
+    "new_source_UBX_hash_passes": 6,
+    "source_payload_scans": 73,
+    "raw_hashes_for_output_seal": 0,
+    "note": "Prefix scan audits full UBX while closing converter payload causally. Only source-specific GNSS1/2 UBX is read; no Trace, body, IMU, PVT or full NAV payload.",
+    "prior_derived_payload_identity_hash": 1,
+    "real_trial_source_UBX_hash_passes": 6
+  },
+  "output_contract": {
+    "complete_denominators": true,
+    "retain_unavailable": true,
+    "retain_adapter_rejections": true,
+    "retain_arc_and_pivot_events": true,
+    "per_sequence_outputs": [
+      "NAVIGATION_SCHEDULE.json",
+      "MODEL_OUTPUT_SEAL.json",
+      "MODEL_COUNTS.json",
+      "MODELS/PLAN.json",
+      "MODELS/ARC_EVENTS.json",
+      "MODELS/ADAPTER_REJECTIONS.json",
+      "MODELS/PIVOT_EVENTS.json",
+      "MODELS/NAVIGATION_SWITCHES.json",
+      "MODELS/EPHEMERIS_QUALIFICATION.json",
+      "MODELS/PREPARE_LEDGER.jsonl",
+      "MODELS/*.npz"
+    ],
+    "seal": "All newly generated MODELS files SHA256+size, exact BUILT references vs NPZ inventory, registration+registry+schedule provenance. Failure partial outputs get separate incomplete seal; no raw hash for seal.",
+    "downstream_requirement": "Before loading PLAN or NPZ, verify registration receipt, MODEL_OUTPUT_SEAL identity and exact referenced file SHA256. This stage supplies no candidate/provider or integer acceptance.",
+    "empty_prefix_audit": "Each newly assembled prefix contains conversion_outcomes for RX1/RX2; availability is AVAILABLE if any actual NAV exists, otherwise NO_NAV_OUTPUT_AT_PREFIX. Existing file with zero NAV records or nonfile output still fails."
+  },
+  "failure_policy": "Any identity/count/process failure retains all files and FAILED.json and stops without retry; it is INPUT_MODEL_PREPARATION_NOT_NAVIGATION_ACCURACY. Model-level unavailable rows remain full denominator; they do not trigger scientific parameter changes.",
+  "proposed_output_alias": "<TRUSTED_HEADING_SCRATCH>/FULL_WINDOW_PREPARE_ATTEMPT02",
+  "launch": "R2 only after root registration. 73 new converter + 1 prior outcome reuse + 3 prepare; no true calls executed while writing R2.",
+  "supersedes_input_attempt": "ATTEMPT01 stopped after first successful converter produced no NAV; no prepare ran. Original record retained.",
+  "reuse_conversion_outcome": {
+    "registration_commit": "8e35b51dfc9dfa1d59454551406d97c744a73838",
+    "sequence": "BY2",
+    "cutoff_relative_s": 66.0,
+    "receiver": 1,
+    "scientific_converter_invocations_reused": 1,
+    "original_status": "converter COMPLETED exit0, no NAV; outer ATTEMPT01 failed before RX2 and before all prepare",
+    "invocation": "<PRIOR_ATTEMPT>/BY2/PREFIX_0066.000/CONVERT_RX1/INVOCATION.json",
+    "page_qualification": "<PRIOR_ATTEMPT>/BY2/PREFIX_0066.000/PAGE_QUALIFICATION.json",
+    "artifacts": [
+      {
+        "path": "<PRIOR_ATTEMPT>/FAILED.json",
+        "bytes": 1002,
+        "sha256": "352d5ffd4198c109c2123f089ad8922e12c838c6906ccb6d86302a41cd41dfee"
+      },
+      {
+        "path": "<PRIOR_ATTEMPT>/INPUT_IDENTITY.json",
+        "bytes": 992,
+        "sha256": "1d59cc5d51409d558be407ac4669d1e0c61967a82d3271b6662baceb671eff69"
+      },
+      {
+        "path": "<PRIOR_ATTEMPT>/REGISTERED_PLAN.json",
+        "bytes": 13376,
+        "sha256": "266ae7307eff13b49fd357340e1df50964d3b77f2fdc7d888fd8d374571d3f89"
+      },
+      {
+        "path": "<PRIOR_ATTEMPT>/BY2/PREFIX_0066.000/PAGE_QUALIFICATION.json",
+        "bytes": 19209,
+        "sha256": "132d7239790b657e2472b25175e648bc902478ebc358186aec6f9f2d716d6a41"
+      },
+      {
+        "path": "<PRIOR_ATTEMPT>/BY2/PREFIX_0066.000/gnss1_rawx_e1b.ubx",
+        "bytes": 112248,
+        "sha256": "29be55a8d36fb49da857f4e86a40d4bfd7e6445c4f14e444316c366cc5161de9"
+      },
+      {
+        "path": "<PRIOR_ATTEMPT>/BY2/PREFIX_0066.000/unused_rx1.obs",
+        "bytes": 142885,
+        "sha256": "a37faf96887849aa6f3203b460dee0a1eea0637e0095d4f9574f8ce973765f98"
+      },
+      {
+        "path": "<PRIOR_ATTEMPT>/BY2/PREFIX_0066.000/CONVERT_RX1/INVOCATION.json",
+        "bytes": 790,
+        "sha256": "7dc9513bf0cdbbc2505bfeed69837d391bac16867b17656867b5c60191dea8ec"
+      },
+      {
+        "path": "<PRIOR_ATTEMPT>/BY2/PREFIX_0066.000/CONVERT_RX1/stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "<PRIOR_ATTEMPT>/BY2/PREFIX_0066.000/CONVERT_RX1/stderr.log",
+        "bytes": 1867,
+        "sha256": "839a4fb1b91bb9f3939514bef5012425abefbe6c2014d222db9a561adb18eb09"
+      }
+    ],
+    "policy": "Verify prior pins and continued missing original NAV; reuse outcome without converter, scan, copy, or modifying prior files."
+  }
+}

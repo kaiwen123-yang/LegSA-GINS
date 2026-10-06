@@ -1,0 +1,4 @@
+sequence_id,zero_pair_updates,nav_byte_equal,std_byte_equal,required_identity_passed
+BY2,True,True,True,True
+BY2H,True,True,True,True
+BY2O,True,True,True,True

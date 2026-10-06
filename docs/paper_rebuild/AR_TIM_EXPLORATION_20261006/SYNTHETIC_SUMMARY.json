@@ -1,0 +1,135 @@
+{
+  "status": "PASS",
+  "data_mode": "synthetic_known_integer",
+  "oracle_source_sha256": "29ee2c2868425d79f2e2cc60827fc3f407a2b7c8e31e683d49c98c49f184ebb1",
+  "library_sha256": "28c25b1cc7fade9b956bfdf77005de8fcb0a382c8411ae6e608c83b82bff53f2",
+  "cases": 12,
+  "cils_calls": 16,
+  "sigma_d_m": 0.03,
+  "prior_faults_m": [
+    -0.15,
+    0.15
+  ],
+  "C_is_novel_method": false,
+  "source_payload_sha256": "681dd334a959c11d7380539e4c36fd1aa66445c4782a4e439993d78c1fc103ce",
+  "records": [
+    {
+      "geometry": 0,
+      "case": "nominal",
+      "integer_truth": [
+        4,
+        -30,
+        -29,
+        -33
+      ],
+      "A_correct": true,
+      "B_correct": true,
+      "C_retained": true,
+      "C_correct_retained": true,
+      "C_wrong_retained": false
+    },
+    {
+      "geometry": 0,
+      "case": "prior_plus_0p15m",
+      "integer_truth": [
+        4,
+        -30,
+        -29,
+        -33
+      ],
+      "A_correct": true,
+      "B_correct": true,
+      "C_retained": true,
+      "C_correct_retained": true,
+      "C_wrong_retained": false
+    },
+    {
+      "geometry": 0,
+      "case": "prior_minus_0p15m",
+      "integer_truth": [
+        4,
+        -30,
+        -29,
+        -33
+      ],
+      "A_correct": true,
+      "B_correct": true,
+      "C_retained": true,
+      "C_correct_retained": true,
+      "C_wrong_retained": false
+    },
+    {
+      "geometry": 0,
+      "case": "receiver_exchange",
+      "passed": true
+    },
+    {
+      "geometry": 0,
+      "case": "integer_pivot_transform",
+      "passed": true
+    },
+    {
+      "geometry": 1,
+      "case": "nominal",
+      "integer_truth": [
+        4,
+        -30,
+        -29,
+        -33
+      ],
+      "A_correct": true,
+      "B_correct": true,
+      "C_retained": true,
+      "C_correct_retained": true,
+      "C_wrong_retained": false
+    },
+    {
+      "geometry": 1,
+      "case": "prior_plus_0p15m",
+      "integer_truth": [
+        4,
+        -30,
+        -29,
+        -33
+      ],
+      "A_correct": true,
+      "B_correct": true,
+      "C_retained": true,
+      "C_correct_retained": true,
+      "C_wrong_retained": false
+    },
+    {
+      "geometry": 1,
+      "case": "prior_minus_0p15m",
+      "integer_truth": [
+        4,
+        -30,
+        -29,
+        -33
+      ],
+      "A_correct": true,
+      "B_correct": true,
+      "C_retained": true,
+      "C_correct_retained": true,
+      "C_wrong_retained": false
+    },
+    {
+      "geometry": 1,
+      "case": "receiver_exchange",
+      "passed": true
+    },
+    {
+      "geometry": 1,
+      "case": "integer_pivot_transform",
+      "passed": true
+    },
+    {
+      "case": "common_integer_offset_cancels",
+      "passed": true
+    },
+    {
+      "case": "unresolved_halfcycle_rejected",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,260 @@
+{
+  "status": "READ_ONLY_SEALED_RESULT_REVIEW_COMPLETE",
+  "source_registration_commit": "3615f53766e6880655015bfc8bad747a8946bcac",
+  "seals_checked": {
+    "SPHERE_CAP_ENVELOPE_PILOT_ATTEMPT01": 6,
+    "CANDIDATE_LIFECYCLE_PILOT_ATTEMPT01": 6
+  },
+  "slot_identity_quality_checks": 60,
+  "class_origin_integer_budget_quality_checks": 115,
+  "geometry_calls_in_registered_execution": 115,
+  "new_readout_geometry_calls": 0,
+  "new_readout_solver_calls": 0,
+  "new_readout_GLS_calls": 0,
+  "new_readout_GLRT_calls": 0,
+  "new_readout_reference_reads": 0,
+  "strata": {
+    "all_nonempty": {
+      "old_total_width_deg": {
+        "n": 42,
+        "min": 4.815637983968996,
+        "median": 17.849100792168855,
+        "max": 157.03204212437524
+      },
+      "old_hull_width_deg": {
+        "n": 42,
+        "min": 4.815637983970625,
+        "median": 49.0533039010386,
+        "max": 255.27232285050079
+      },
+      "new_total_width_deg": {
+        "n": 42,
+        "min": 4.22476077052798,
+        "median": 14.09303036020274,
+        "max": 109.92015020702969
+      },
+      "new_hull_width_deg": {
+        "n": 42,
+        "min": 4.224760770529609,
+        "median": 45.14943821221623,
+        "max": 239.64633410132413
+      },
+      "new_component_count": {
+        "n": 42,
+        "min": 1,
+        "median": 2.0,
+        "max": 6
+      },
+      "paired_total_reduction_deg": {
+        "n": 42,
+        "min": 0.45641339611425735,
+        "median": 4.1733251366815,
+        "max": 69.42050272540061
+      },
+      "paired_hull_reduction_deg": {
+        "n": 42,
+        "min": 0.19737361621383798,
+        "median": 3.903865688822375,
+        "max": 22.912979912460514
+      }
+    },
+    "ready_single": {
+      "old_total_width_deg": {
+        "n": 17,
+        "min": 8.339974345833454,
+        "median": 12.116643824270954,
+        "max": 19.155487056433493
+      },
+      "old_hull_width_deg": {
+        "n": 17,
+        "min": 8.339974345835033,
+        "median": 12.116643824272595,
+        "max": 19.155487056435124
+      },
+      "new_total_width_deg": {
+        "n": 17,
+        "min": 4.955675025638242,
+        "median": 7.972196547550701,
+        "max": 14.526872508613145
+      },
+      "new_hull_width_deg": {
+        "n": 17,
+        "min": 4.955675025639871,
+        "median": 7.9721965475522785,
+        "max": 14.526872508614773
+      },
+      "new_component_count": {
+        "n": 17,
+        "min": 1,
+        "median": 1,
+        "max": 1
+      },
+      "paired_total_reduction_deg": {
+        "n": 17,
+        "min": 0.8345792889523622,
+        "median": 4.060294131883207,
+        "max": 8.453583026155968
+      },
+      "paired_hull_reduction_deg": {
+        "n": 17,
+        "min": 0.8345792889523382,
+        "median": 4.060294131883196,
+        "max": 8.453583026155943
+      }
+    },
+    "ready_multi": {
+      "old_total_width_deg": {
+        "n": 10,
+        "min": 29.91136584659549,
+        "median": 59.256364412629594,
+        "max": 157.03204212437524
+      },
+      "old_hull_width_deg": {
+        "n": 10,
+        "min": 48.244666687462825,
+        "median": 222.89131837098716,
+        "max": 255.27232285050079
+      },
+      "new_total_width_deg": {
+        "n": 10,
+        "min": 25.38811998450372,
+        "median": 38.901842099051954,
+        "max": 109.92015020702969
+      },
+      "new_hull_width_deg": {
+        "n": 10,
+        "min": 44.38567434982985,
+        "median": 209.3611874945193,
+        "max": 239.08372497336455
+      },
+      "new_component_count": {
+        "n": 10,
+        "min": 2,
+        "median": 4.0,
+        "max": 6
+      },
+      "paired_total_reduction_deg": {
+        "n": 10,
+        "min": 4.2286745049948244,
+        "median": 19.492589547505393,
+        "max": 69.42050272540061
+      },
+      "paired_hull_reduction_deg": {
+        "n": 10,
+        "min": 2.187011612717697,
+        "median": 5.014855348332517,
+        "max": 22.912979912460514
+      }
+    },
+    "quality_rejected": {
+      "old_total_width_deg": {
+        "n": 15,
+        "min": 4.815637983968996,
+        "median": 18.90093691819052,
+        "max": 156.1880907807573
+      },
+      "old_hull_width_deg": {
+        "n": 15,
+        "min": 4.815637983970625,
+        "median": 141.60070936366475,
+        "max": 254.9116502820213
+      },
+      "new_total_width_deg": {
+        "n": 15,
+        "min": 4.22476077052798,
+        "median": 17.926251135409714,
+        "max": 107.74082760140384
+      },
+      "new_hull_width_deg": {
+        "n": 15,
+        "min": 4.224760770529609,
+        "median": 140.0888106862634,
+        "max": 239.64633410132413
+      },
+      "new_component_count": {
+        "n": 15,
+        "min": 1,
+        "median": 2,
+        "max": 6
+      },
+      "paired_total_reduction_deg": {
+        "n": 15,
+        "min": 0.45641339611425735,
+        "median": 3.0788753734207717,
+        "max": 57.77658334283912
+      },
+      "paired_hull_reduction_deg": {
+        "n": 15,
+        "min": 0.19737361621383798,
+        "median": 1.9061248877961532,
+        "max": 15.26531618069717
+      }
+    }
+  },
+  "compatible_class_count": 92,
+  "all_compatible_classes_tighter": true,
+  "per_class_width_statistics": {
+    "old_width_deg": {
+      "n": 92,
+      "min": 2.3993609454773113,
+      "median": 14.749613542738631,
+      "max": 48.692035876424704
+    },
+    "ellipse_width_deg": {
+      "n": 92,
+      "min": 2.258716473934247,
+      "median": 10.092668222649387,
+      "max": 37.407278998031074
+    },
+    "final_width_deg": {
+      "n": 92,
+      "min": 2.258716473934247,
+      "median": 10.092668222649385,
+      "max": 33.35817039593812
+    },
+    "ellipse_reduction_deg": {
+      "n": 92,
+      "min": 0.008439074331777263,
+      "median": 4.604951445094476,
+      "max": 28.38605719880612
+    },
+    "cap_additional_reduction_deg": {
+      "n": 92,
+      "min": -3.552713678800501e-15,
+      "median": 0.0,
+      "max": 7.290066646862236
+    }
+  },
+  "stored_ellipse_cover_inside_corresponding_old_arc": 92,
+  "additional_cap_reduction_threshold_deg": 1e-07,
+  "additional_cap_reduction_classes": [
+    {
+      "start_index": 0,
+      "slot": 0,
+      "class_index": 4,
+      "time_s": 101.19799995422363,
+      "old_width_deg": 48.692035876424704,
+      "ellipse_width_deg": 37.407278998031074,
+      "final_width_deg": 30.11721235116884,
+      "ellipse_reduction_deg": 11.28475687839363,
+      "cap_additional_reduction_deg": 7.290066646862236,
+      "significant_phase": false
+    }
+  ],
+  "combined_equal_ellipse_within_threshold_classes": 91,
+  "all_multi_slots_still_disconnected": true,
+  "multi_slots": 22,
+  "multi_components_min": 2,
+  "multi_components_max": 6,
+  "original_ready": 27,
+  "original_quality_rejected": 15,
+  "original_no_domain": 18,
+  "preserved_significant_phase_classes_all": 35,
+  "preserved_significant_phase_classes_compatible": 19,
+  "additional_geometry_empty": 0,
+  "accepted_integer_measurement": false,
+  "false_fix_probability": null,
+  "processing_wall_s": 0.03565873799999508,
+  "driver_wall_s": 0.18232341099999871,
+  "end_to_end_navigation_latency_s": null
+}

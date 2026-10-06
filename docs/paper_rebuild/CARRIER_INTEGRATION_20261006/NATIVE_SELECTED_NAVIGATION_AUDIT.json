@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "new_native_calls": 16,
+  "new_evaluator_calls": 16,
+  "prior_navigation_runs_reused": 20,
+  "new_CILS_by_navigation": 0,
+  "unique_upstream_CILS_calls": 240,
+  "failed_scientific_calls": 0,
+  "repeated_scientific_calls": 0,
+  "automatic_retries": 0,
+  "all_36_chains_same_56642_native_STD_and_matched_time_keys": true,
+  "C0_C1_C2_each_new_variant_byte_equal_to_PARTIAL6": {
+    "NATIVE_FULL6_TRACKING": {
+      "C0_SCALAR": true,
+      "C1_DUAL_PVT_VECTOR": true,
+      "C2_FULL_CARRIER_VECTOR": true
+    },
+    "NATIVE_FULL6_SERIAL": {
+      "C0_SCALAR": true,
+      "C1_DUAL_PVT_VECTOR": true,
+      "C2_FULL_CARRIER_VECTOR": true
+    },
+    "SELECTED_LIKELIHOOD_TRACKING": {
+      "C0_SCALAR": true,
+      "C1_DUAL_PVT_VECTOR": true,
+      "C2_FULL_CARRIER_VECTOR": true
+    },
+    "SELECTED_LIKELIHOOD_SERIAL": {
+      "C0_SCALAR": true,
+      "C1_DUAL_PVT_VECTOR": true,
+      "C2_FULL_CARRIER_VECTOR": true
+    }
+  },
+  "all_saved_native_and_evaluation_file_hashes_verified": true,
+  "native_all_four_sealed_before_own_four_evaluators": true,
+  "navigation_started_after_all_six_timed_upstream_phases": true,
+  "calls": [
+    {
+      "variant": "NATIVE_FULL6_TRACKING",
+      "native": 4,
+      "evaluator": 4,
+      "native_seal_sha256": "931b3ce5aa4a24ac5fc7cb8ff2e368671ad4c6ddc7776823e5a14ec4f20123fd",
+      "evaluation_seal_sha256": "c3b12b9536e86a3f0bcca6e43b9c6a00e9954870f59de5e66bf5d288a067d91d",
+      "frontend_ready_audit_sha256": "aa2cb9fa06089a25a71ad594b15498720e29058422a00504d0241a74ef4056f2"
+    },
+    {
+      "variant": "NATIVE_FULL6_SERIAL",
+      "native": 4,
+      "evaluator": 4,
+      "native_seal_sha256": "6e7bfea20bd675328e3c05df37735a10336ea303e67c7737c1737ff7cbc097f6",
+      "evaluation_seal_sha256": "0d791acd5834256e7d57fc6ba10ed8986a3144bf84afe3443bad911b1376b125",
+      "frontend_ready_audit_sha256": "35eac86415d73b5bf00d0f6774758908934b660627ea15760ca10a2f3e2f44b6"
+    },
+    {
+      "variant": "SELECTED_LIKELIHOOD_TRACKING",
+      "native": 4,
+      "evaluator": 4,
+      "native_seal_sha256": "f9544ad06f740308010d60353278c0b5e232c6cfbdfb5dfb309db1408275a40d",
+      "evaluation_seal_sha256": "3cb32c1970a43aa88ce4c2920bf46f545d08dcce163da490497ddfdbf57f8d7d",
+      "frontend_ready_audit_sha256": "1ea31c5792d810e6d4376dd65573cb46d3db6d722a99dc88a40d8698a9b28dec"
+    },
+    {
+      "variant": "SELECTED_LIKELIHOOD_SERIAL",
+      "native": 4,
+      "evaluator": 4,
+      "native_seal_sha256": "e55d4fcd9f408e21cb3c38d2cb42b931c1baa8b9f87f4233025630307db032b7",
+      "evaluation_seal_sha256": "032e6f84e269373d25812d54a9bbc225a13916e3859a6380ac7696fbe868de60",
+      "frontend_ready_audit_sha256": "a3354c10bb6d9896d3903fd7a63401a0177cd88f548ae9c710e5a3a31e55e137"
+    }
+  ],
+  "current_default_predeclared_not_selected_by_metrics": "SELECTED_LIKELIHOOD_SERIAL",
+  "selected_likelihood_tracking_vs_serial_provider_byte_equal": true,
+  "selected_likelihood_tracking_vs_serial_C3_byte_equal": {
+    "KF_GINS_Navresult.nav": true,
+    "KF_GINS_STD.txt": true
+  },
+  "selected_likelihood_is_a_changed_likelihood_not_equivalent_acceleration": true,
+  "serial_costs_each_own_trial_no_benchmark_extrapolation": true,
+  "real_time_hardware_qualification": false,
+  "independent_truth_available": false,
+  "real_integer_truth_available": false,
+  "reporting_correction_originals_preserved": true,
+  "original_generated_seal_sha256": "5692e00739bf3b5491dd329f37336c39f41dfdac69ffa7f8f56d766d73a5b78d",
+  "final_aggregation_script_sha256": "090f3d1ec44db4fa4be379128c54f491609ec87c578d65b83b32019db7d02dff",
+  "unix": 1791277912.9823542
+}

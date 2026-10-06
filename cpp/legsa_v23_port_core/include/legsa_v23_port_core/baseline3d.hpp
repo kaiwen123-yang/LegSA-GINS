@@ -8,6 +8,11 @@ namespace legsa_v23_port_core {
 // No calibration, coordinate fitting, or scalar-yaw observation is performed here.
 struct Baseline3dMeasurement {
   Vec3 ned_m = makeVec3(0.0, 0.0, 0.0);
+  std::string source = "dual_pvt";
+  Vec3 ecef_m = makeVec3(0.0, 0.0, 0.0);
+  Matrix3 covariance_ecef_m2{};
+  double measurement_time = 0.0;
+  double decision_available_time = 0.0;
   double pacc1_m = 0.0;
   double pacc2_m = 0.0;
   bool present = false;
@@ -28,8 +33,18 @@ Baseline3dModel buildBaseline3dModel(const Matrix3& cbn,
                                    const Baseline3dMeasurement& observation,
                                    double length_m, double k_b);
 
+// Full SPD covariance is required; no isotropic pAcc substitution or eigenvalue repair.
+void validateExternalCarrierCovariance(const Matrix3& covariance);
+Baseline3dModel buildExternalCarrierBaseline3dModel(
+    const Matrix3& cbn, const Vec3& blh_rad_m,
+    const Baseline3dMeasurement& observation, const Vec3& body_vector_m);
+
 struct Baseline3dDiagnostics {
   double time = 0.0;
+  std::string source = "dual_pvt";
+  double measurement_time = 0.0;
+  double decision_available_time = 0.0;
+  Matrix3 covariance_ned_m2{};
   bool present = false;
   bool valid = false;
   bool model_available = false;

@@ -1,0 +1,3 @@
+start_s,cap,python_certified,native_certified,python_solve_s,native_solve_s,measured_paired_speedup,certificate_comparator,integer_pair_agreement,max_objective_difference,native_backend,library_sha256
+168,6,True,True,5.774050486999997,1.1753028180000058,4.912819401578231,same paired Python run,True,0.0,native_scalar,d123dd20dd38ca571e461b880e219fd6bb70a714c2120328f1450233c1b505e3
+318,6,False,True,30.013837265999996,5.450653315000011,,"previous cache benchmark certified result, no runtime substitution",True,0.0,native_scalar,d123dd20dd38ca571e461b880e219fd6bb70a714c2120328f1450233c1b505e3

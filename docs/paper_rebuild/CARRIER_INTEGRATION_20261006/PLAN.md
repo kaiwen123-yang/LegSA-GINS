@@ -1,0 +1,53 @@
+# Moving short-baseline AR to LegSA-GINS integration
+
+The active author goal is to implement moving short-baseline integer ambiguity resolution, integrate it into LegSA-GINS, evaluate the complete navigation results and deliver a complete experimental algorithm. This goal remains active until the frontend, fusion, complete replay and result assessment are verified. Completing another shadow-only study does not complete this goal. The prior goal turn made progress: implementation and scientific evidence through d06f0bf are committed and pushed.
+
+All algorithm edits, builds, numerical tests, raw preparation, solving and evaluations run in the E-drive Ubuntu22.04 WSL. Root alone commits/pushes. Original V3, raw sources, prior trial directories and manuscripts stay preserved. User authorization now includes experimental EKF integration; the preceding stage's shadow-only scope does not forbid this new work.
+
+## Implemented endpoint to verify
+
+1. A causal raw-carrier frontend for a dynamic 0.350 m GNSS2-minus-GNSS1 baseline, grouped GPS/Galileo/BeiDou dual-frequency CDMA observations, valid continuous arcs and explicit unavailable states.
+2. Exact integer search with length constraints and a preselected partial integer class: the remaining integer coordinates are profiled as integers, not set to zero or fixed secretly. Selection-only stable support and geometric information choose at least 4 and at most 8 phase DD labels, with phase-baseline rank 3 at each of five selection epochs. Every candidate/absence/failure remains visible.
+3. Frozen candidates validated over five fixed later epochs. Only the preselected fixed subset's phase rows and all available code rows enter future validation with the full covariance principal submatrix. Active selected arcs must survive. Physical SD fault diagnostics may veto measurements. Working noise assumptions are explicit; no measured false-fix guarantee is invented.
+4. Experimental current-time carrier-baseline output with ECEF vector and complete 3x3 covariance, actual decision availability, and validity/rejection diagnostics. Use the last validation epoch only; do not backdate to the selection epoch. Covariance is conditional fixed-N GLS plus a preregistered isotropic floor (L times 1.5 degrees in radians)^2. This floor uses the existing V3 angular uncertainty scale, not reference error fitting. Length-sphere projection does not make integer-error uncertainty disappear.
+5. An opt-in native LegSA-GINS external-carrier source, body vector FRD=(0,-L,0), with correct ECEF/NED vector and covariance rotation. It keeps the original position/velocity providers; source selection prevents duplicate commercial yaw. Extra carrier events cannot replay RD/RP/HV updates. Missing, rejected or invalid carrier input means propagation/other valid updates continue, not automatic FIX.
+6. Native builds/tests and complete chronological real replays, comparing current V3 configuration, dual-PVT baseline-vector fusion and carrier-baseline fusion. Their covariance/model differences and availability must be visible. Evaluation occurs only after algorithm outputs exist; receiver-derived reference is evaluation-only and is not independent truth.
+7. A reproducible entrypoint, explicit configuration/input roles, results including yaw/H/V and unavailable fractions, failure analysis, labelled Git commits and updated draft PR. Scientific completion does not require a predetermined improvement, but requires an actual operating end-to-end algorithm and verified full-result assessment.
+
+## First real input and trial scope
+
+Prepare BY2 100..340 s once from the immutable paired RAWX sources. The supplied navigation manifest must declare received-message cutoff <=100 s; the existing Galileo-qualified prefix100 manifest is appropriate. No carrier measurement is available before 100 s. The navigation state estimator can still start at the established 66 s using its normal IMU and position/velocity sources. January XB/NMB asynchronous receiver data require a separate time model and are not silently forced into exact pairing.
+
+Before inspecting the new initial trial outcomes, select starts 180,182,..198 s. Each 2-second window has five selection and five validation samples at 5 Hz. Compare full-current-class and preselected-partial-class searches on the same multi-GNSS models: at most 20 calls, each at most 100000 nodes / 30 s. Alpha is unchanged from the earlier stage; do not change parameters on the receiver-reference errors. Extend the continuous frontend across 100..340 after the initial implementation check, reusing completed matching cases instead of repeating searches for better outcomes.
+
+All carrier statistics initially use the declared RAWX working covariance. Actual temporal independence and fixed-integer truth are not established in real data. The new measurement is an experimental algorithm input guarded again by filter innovation checks; it must not be labelled a physically validated receiver FIX or a calibrated integrity output. No reference trajectory enters integer selection, subset selection, covariance fitting, frame/offset choice or fusion.
+
+## First native comparison registered before its outcomes
+
+Run four native replays/evaluations, once the full 100..340 carrier frontend is ready: C0 scalar dual-PVT yaw, C1 dual-PVT baseline vector, C2 full-current-integer-class carrier vector, C3 preselected-partial-integer-class carrier vector. All four use the same explicit research runtime contract, AB1110 (RD/SA/RP enabled, HV disabled), exact-time chronological event handling and past-only non-repeated RP/RD source observations. They share normal provider inputs and the existing non-AR-cold-start initialization. Their navigation output times remain the original IMU times.
+
+This is a controlled intermediate integration test, not a reproduction of the archived all-module V3 numbers and not completion of the entire author goal. Prior provider inspection found that old NED HV interpolates commercial GNSS yaw and may access the next sample; the HV-off comparison avoids that hidden yaw dependency while the carrier path is verified. The later complete algorithm must explicitly resolve or replace that dependency when restoring the full leg-aiding path, rather than silently narrowing the final method to HV-off. C1 uses its source-backed current raw provider covariance and k_b=1; both carrier arms use the same registered measurement qualification and covariance floor.
+
+## Search optimization and full-span execution update
+
+The 20-call 180–200 s integration pilot is preserved with zero qualified observations.
+The conditional-integer feasible seed generator and depth-only bound cache change
+search efficiency, not the objective, covariance, gates, or certificate. Small
+exhaustive tests and three separately stored real-window performance checks pass.
+
+Run the same registered 100,102,...,338 s full domain under this improved solver
+in separate FULL_SPAN_FULL and FULL_SPAN_PARTIAL outputs. Each mode has 120
+attempts; the original pilot is retained as the earlier implementation result.
+The 10 overlapping pilot windows are explicit repeat performance/completeness
+checks under changed search code, not additional independent evidence.
+Two independent processes use one BLAS thread each. No measured-navigation
+reference is opened for candidate search or measurement selection.
+
+In addition to the registered HV-off comparison, evaluate a second, common
+body-HV group (AB1111) after the native body observation interface is complete.
+Use raw recording body-FLU support from the prior internal position/rpy/velocity
+audit; no GNSS yaw rotation. All four arms share scale 1, engineering std 0.20 m/s,
+xy-only observation, .20 s update schedule, past-only source selection, and the
+same shared initialization. This is not a calibrated body-velocity covariance or
+an independent holdout of the prior coordinate audit. No parameter is selected
+from new navigation errors. Default V3 remains unchanged.

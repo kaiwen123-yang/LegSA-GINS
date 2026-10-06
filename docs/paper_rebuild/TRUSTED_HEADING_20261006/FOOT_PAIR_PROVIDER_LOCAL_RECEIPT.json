@@ -1,0 +1,70 @@
+{
+  "schema": "trusted_heading.foot_pair_provider.local_receipt.v1",
+  "created_utc": "2026-10-06T17:15:01.276489+00:00",
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/foot_pair_provider.py": "0be6ac7baabe972bf1b45f99b7047317d2ba37e613f9213562e8e68ed25300ff",
+    "tests/paper_rebuild/test_foot_pair_provider.py": "8aa2bcf9923f23b54fefd2e47b89a551ecd78c1123093e2fccbb4f595d0852cb",
+    "docs/paper_rebuild/TRUSTED_HEADING_20261006/FOOT_PAIR_PROVIDER_LOCAL_PLAN.md": "b7208e4b360f4729070300d6306b30fa92700d7bc704fce184f676618e062fa0"
+  },
+  "test_summary": "6 passed in 0.12s",
+  "unique_tests": 6,
+  "pytest_invocations": 1,
+  "test_executions": 6,
+  "failures": 0,
+  "reruns": 0,
+  "wall_s": 0.24074003299998026,
+  "command": [
+    "python3",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/paper_rebuild/test_foot_pair_provider.py"
+  ],
+  "environment": {
+    "WSL": "Ubuntu-22.04",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "pre_execution_change": "Require exactly one complete timestamp block; duplicate identical stamp no longer passes first-search/last-parser assignment.",
+  "unchanged_science": {
+    "opportunity_period_s": 0.2,
+    "source_gap_and_opportunity_age_s": 0.05,
+    "target_interval_s": 0.1,
+    "max_interval_s": 0.15,
+    "point_sigma_working_m": 0.01,
+    "pair_selection": "canonical current qualified foot order",
+    "support": "existing hysteresis/dwell and permanent tokens"
+  },
+  "tests": [
+    "first actual source, START independent of divergent future",
+    "one END per clone, endpoint IDs unique, repeated/nonmonotonic tick rejected",
+    "causal gap timer and explicit window-end cleanup event",
+    "synthetic prefix, FLU to FRD, ignored unrelated fields, 50 columns, arbitrary-cross upper covariance",
+    "missing/nonmonotonic/duplicate timestamps retained, previous support retired, new token on return",
+    "complete opportunities including late/invalid/missing support, source error retirement"
+  ],
+  "real_body_reads": 0,
+  "reference_reads": 0,
+  "NAV_reads": 0,
+  "native_calls": 0,
+  "CILS_calls": 0,
+  "evaluator_calls": 0,
+  "synthetic_text_fixture_reads": true,
+  "terminal_cleanup_scope": "Provider emits causal structural RETIRE; no test simulates native propagation. Native agreement: never extend final IMU/NAV; record unconsumed terminal cleanup/outside-support START or END.",
+  "known_limits": [
+    "Source-time equals availability is offline replay assumption, not measured transport delay.",
+    "Support tokens are force-based proxy continuity, not proof of no physical slip.",
+    "Working covariance is not calibrated and does not establish SDK or IMU independence.",
+    "No real provider execution or native integration test occurred."
+  ],
+  "log": {
+    "path": "<SCRATCH_ROOT>/TRUSTED_HEADING_20261006/FOOT_PAIR_PROVIDER_LOCAL_ATTEMPT01/TEST_01.log",
+    "sha256": "27c1fbe5f9dd7a34e2bfb09388bea7d58aa15f7c3cb1453f83b8543502dc06c3"
+  }
+}

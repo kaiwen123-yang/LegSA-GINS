@@ -1,0 +1,553 @@
+{
+  "stage": "CARRIER_TEMPORAL_SYNTHETIC_V1",
+  "execution_commit": "a7dc538fbd83ae9c44a9a8b5e53714811cc2ebd4",
+  "source_pins": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/temporal.py": "3b9706b5cc82cc1e6f1ba3858433993fdb06baad73f8eb49cadd927b93c75286",
+    "src/legsa_gins/paper_rebuild/carrier_phase/solver.py": "a7a220a543724911353386f263779bd31cc7d9edb108cc35dc5f1349656592c4",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "d28604a587655623537bdf9125afc24a929388b218696829fe42c9ffd2192ede",
+    "scripts/paper_rebuild/carrier_phase/synthetic_trial.py": "de97524c246522984c579cfdc5066e2217118bdcdb2a3cd9eeff0db59a39ec6f"
+  },
+  "overlay_policy": "Tracked commit plus explicit source hashes; newly written runner may be uncommitted.",
+  "library_sha256": "28c25b1cc7fade9b956bfdf77005de8fcb0a382c8411ae6e608c83b82bff53f2",
+  "cases": [
+    {
+      "case_id": "S00_NOMINAL_K01",
+      "seed_index": 0,
+      "seed": 2026100700,
+      "variant": "NOMINAL",
+      "epochs": 1,
+      "model_file": "models/S00_NOMINAL_K01.json",
+      "model_sha256": "25a2aa6d7af3a45c0f2be114bd4bb07b68e60405e29be159c150fbda0546faa0",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S00_NOMINAL_K05",
+      "seed_index": 0,
+      "seed": 2026100700,
+      "variant": "NOMINAL",
+      "epochs": 5,
+      "model_file": "models/S00_NOMINAL_K05.json",
+      "model_sha256": "fd42ef4b7f44901bffd46106f3fecace6e9a56deb8d8966adae393ce9515aa97",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S00_NOMINAL_K10",
+      "seed_index": 0,
+      "seed": 2026100700,
+      "variant": "NOMINAL",
+      "epochs": 10,
+      "model_file": "models/S00_NOMINAL_K10.json",
+      "model_sha256": "6f9073e1ebe969117c8c7baa1b57c214b99a1885d6f49cdb23c6f42290de83dc",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S01_NOMINAL_K01",
+      "seed_index": 1,
+      "seed": 2026100701,
+      "variant": "NOMINAL",
+      "epochs": 1,
+      "model_file": "models/S01_NOMINAL_K01.json",
+      "model_sha256": "2dc0d9d55a0b5dbd95dbe00e860864f53b78db97f45df0f9d660ce6dace59035",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S01_NOMINAL_K05",
+      "seed_index": 1,
+      "seed": 2026100701,
+      "variant": "NOMINAL",
+      "epochs": 5,
+      "model_file": "models/S01_NOMINAL_K05.json",
+      "model_sha256": "ab02fa3cec589b1311aa67bc0743b198f3dd7f854308d0a440782103e5897460",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S01_NOMINAL_K10",
+      "seed_index": 1,
+      "seed": 2026100701,
+      "variant": "NOMINAL",
+      "epochs": 10,
+      "model_file": "models/S01_NOMINAL_K10.json",
+      "model_sha256": "79da4188d963d3003e3e9f7bfc2d94410da17f64358c712a2b357641885cb1f4",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S02_NOMINAL_K01",
+      "seed_index": 2,
+      "seed": 2026100702,
+      "variant": "NOMINAL",
+      "epochs": 1,
+      "model_file": "models/S02_NOMINAL_K01.json",
+      "model_sha256": "cc8f7f4af26048911741035217f4adf75478b1e3cca5c4f8ab0c3e79a9643e3c",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S02_NOMINAL_K05",
+      "seed_index": 2,
+      "seed": 2026100702,
+      "variant": "NOMINAL",
+      "epochs": 5,
+      "model_file": "models/S02_NOMINAL_K05.json",
+      "model_sha256": "65e3ccc6af2c10e1222818c374a1b93a7fda102e9b299691a58c28a8e12a5275",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S02_NOMINAL_K10",
+      "seed_index": 2,
+      "seed": 2026100702,
+      "variant": "NOMINAL",
+      "epochs": 10,
+      "model_file": "models/S02_NOMINAL_K10.json",
+      "model_sha256": "8aff536c337f0e29ce9778b7eb6b954198ccef44c9833975cdf29242d455e059",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S03_NOMINAL_K01",
+      "seed_index": 3,
+      "seed": 2026100703,
+      "variant": "NOMINAL",
+      "epochs": 1,
+      "model_file": "models/S03_NOMINAL_K01.json",
+      "model_sha256": "6c255a351f98ed7d68c5fd8405339cb71a9be076cf679f520f928f5ff5708cdb",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S03_NOMINAL_K05",
+      "seed_index": 3,
+      "seed": 2026100703,
+      "variant": "NOMINAL",
+      "epochs": 5,
+      "model_file": "models/S03_NOMINAL_K05.json",
+      "model_sha256": "ddb00032a45f8ef60a535354390789278ea7d93f2ea423e0deeb959fd740e277",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S03_NOMINAL_K10",
+      "seed_index": 3,
+      "seed": 2026100703,
+      "variant": "NOMINAL",
+      "epochs": 10,
+      "model_file": "models/S03_NOMINAL_K10.json",
+      "model_sha256": "1b8cb2df38010877f12596410adc524239f16c897f4f400f9de5c3799ba824db",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S04_NOMINAL_K01",
+      "seed_index": 4,
+      "seed": 2026100704,
+      "variant": "NOMINAL",
+      "epochs": 1,
+      "model_file": "models/S04_NOMINAL_K01.json",
+      "model_sha256": "96378c6682e64c308c2ea9b4b2d3499a24b766040e5d5c7a2c9eb11fd46dba8e",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S04_NOMINAL_K05",
+      "seed_index": 4,
+      "seed": 2026100704,
+      "variant": "NOMINAL",
+      "epochs": 5,
+      "model_file": "models/S04_NOMINAL_K05.json",
+      "model_sha256": "22c44b16a50577a4d151bd5289d100d25090c6fa51ce84c7419fbc300e6d97e3",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S04_NOMINAL_K10",
+      "seed_index": 4,
+      "seed": 2026100704,
+      "variant": "NOMINAL",
+      "epochs": 10,
+      "model_file": "models/S04_NOMINAL_K10.json",
+      "model_sha256": "c6ef52f38181386b3be2223a9b02576dc3a0e4b1d381ae2b225a9e7e2f6b6335",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S05_NOMINAL_K01",
+      "seed_index": 5,
+      "seed": 2026100705,
+      "variant": "NOMINAL",
+      "epochs": 1,
+      "model_file": "models/S05_NOMINAL_K01.json",
+      "model_sha256": "737942a7545d3263b54bd936e23928c1f15fde5fc4565e05d774cf007c2dcf97",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S05_NOMINAL_K05",
+      "seed_index": 5,
+      "seed": 2026100705,
+      "variant": "NOMINAL",
+      "epochs": 5,
+      "model_file": "models/S05_NOMINAL_K05.json",
+      "model_sha256": "679e1db9095e895f68d33496c2604429fb8de2458f23b049c1dc87573e236ec2",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S05_NOMINAL_K10",
+      "seed_index": 5,
+      "seed": 2026100705,
+      "variant": "NOMINAL",
+      "epochs": 10,
+      "model_file": "models/S05_NOMINAL_K10.json",
+      "model_sha256": "2bb47d05f9b83fc78dc8ccab5f3a765ce268736be81de0b4be2776fce9446592",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S06_NOMINAL_K01",
+      "seed_index": 6,
+      "seed": 2026100706,
+      "variant": "NOMINAL",
+      "epochs": 1,
+      "model_file": "models/S06_NOMINAL_K01.json",
+      "model_sha256": "6eb1a59e68b55f51546395d91da98b5c09ff1b6a2728f6e8c1a4fe81b7751b1d",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S06_NOMINAL_K05",
+      "seed_index": 6,
+      "seed": 2026100706,
+      "variant": "NOMINAL",
+      "epochs": 5,
+      "model_file": "models/S06_NOMINAL_K05.json",
+      "model_sha256": "ce34155da799abe290a29ae746e56efbae00d81c68830a358b598280241132c1",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S06_NOMINAL_K10",
+      "seed_index": 6,
+      "seed": 2026100706,
+      "variant": "NOMINAL",
+      "epochs": 10,
+      "model_file": "models/S06_NOMINAL_K10.json",
+      "model_sha256": "f30e50ea3df16f7509c9e7cc74d1afcb874405bec788f794aa2e9dacea4a956a",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S07_NOMINAL_K01",
+      "seed_index": 7,
+      "seed": 2026100707,
+      "variant": "NOMINAL",
+      "epochs": 1,
+      "model_file": "models/S07_NOMINAL_K01.json",
+      "model_sha256": "7a745bc4d0d3bfd79d2d69888c511449d13c7706e6f2ec3f3461920589d58c5c",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S07_NOMINAL_K05",
+      "seed_index": 7,
+      "seed": 2026100707,
+      "variant": "NOMINAL",
+      "epochs": 5,
+      "model_file": "models/S07_NOMINAL_K05.json",
+      "model_sha256": "6f27418f1dfdcb21569b422ddbdca346028c53b1e9f6b4b245360ce5365e6933",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S07_NOMINAL_K10",
+      "seed_index": 7,
+      "seed": 2026100707,
+      "variant": "NOMINAL",
+      "epochs": 10,
+      "model_file": "models/S07_NOMINAL_K10.json",
+      "model_sha256": "1014663e304afb1d21f984e62682baf64c7bd44b0550ebc8f08e13a8feef293a",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S08_NOMINAL_K01",
+      "seed_index": 8,
+      "seed": 2026100708,
+      "variant": "NOMINAL",
+      "epochs": 1,
+      "model_file": "models/S08_NOMINAL_K01.json",
+      "model_sha256": "80caea048cedb9cdd9e7fc3171e8ed2a547e1c55867e6cc1231ea7b267339ca0",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S08_NOMINAL_K05",
+      "seed_index": 8,
+      "seed": 2026100708,
+      "variant": "NOMINAL",
+      "epochs": 5,
+      "model_file": "models/S08_NOMINAL_K05.json",
+      "model_sha256": "d386293601ce320f6d66f452449dddbf685d14e3cd4ec431e98e88993aa9b4c8",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S08_NOMINAL_K10",
+      "seed_index": 8,
+      "seed": 2026100708,
+      "variant": "NOMINAL",
+      "epochs": 10,
+      "model_file": "models/S08_NOMINAL_K10.json",
+      "model_sha256": "69ad7076be060ceb3745b255f5e575cc0c37214f293fea8bb3347df99a9dbf4a",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S09_NOMINAL_K01",
+      "seed_index": 9,
+      "seed": 2026100709,
+      "variant": "NOMINAL",
+      "epochs": 1,
+      "model_file": "models/S09_NOMINAL_K01.json",
+      "model_sha256": "1d438f7db2756dc2886e12a11f8f1c70a2f9c0a3cbc0ea762cbb4f2d9a20fc69",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S09_NOMINAL_K05",
+      "seed_index": 9,
+      "seed": 2026100709,
+      "variant": "NOMINAL",
+      "epochs": 5,
+      "model_file": "models/S09_NOMINAL_K05.json",
+      "model_sha256": "6a2809e93b3209b1818368f36f70cb9249f1305f2fbe33d32f10f987d2c19a93",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S09_NOMINAL_K10",
+      "seed_index": 9,
+      "seed": 2026100709,
+      "variant": "NOMINAL",
+      "epochs": 10,
+      "model_file": "models/S09_NOMINAL_K10.json",
+      "model_sha256": "720e67ec4af7fdaea17d5a516cd2b70219378f6381d8c03d0e901c70a8d12857",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S00_SLIP_NEW_ARC_K10",
+      "seed_index": 0,
+      "seed": 2026100700,
+      "variant": "SLIP_NEW_ARC",
+      "epochs": 10,
+      "model_file": "models/S00_SLIP_NEW_ARC_K10.json",
+      "model_sha256": "04744e19db46f4948bfe6a60b8489202c2d748ee03f082d0811d5dbd1ad87153",
+      "global_integer_dimension": 5
+    },
+    {
+      "case_id": "S00_SLIP_UNMODELED_K10",
+      "seed_index": 0,
+      "seed": 2026100700,
+      "variant": "SLIP_UNMODELED",
+      "epochs": 10,
+      "model_file": "models/S00_SLIP_UNMODELED_K10.json",
+      "model_sha256": "e38edbdda3cd9e9005e777997d09319ea9ff634002d9d445a7913949be0b47d6",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S00_QUARTER_CYCLE_K10",
+      "seed_index": 0,
+      "seed": 2026100700,
+      "variant": "QUARTER_CYCLE",
+      "epochs": 10,
+      "model_file": "models/S00_QUARTER_CYCLE_K10.json",
+      "model_sha256": "df5795283f1af881b1495c7ac0c48bccfe1418409acd8b7a53d1c02735840e25",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S00_CORRELATED_RHO08_K10",
+      "seed_index": 0,
+      "seed": 2026100700,
+      "variant": "CORRELATED_RHO08",
+      "epochs": 10,
+      "model_file": "models/S00_CORRELATED_RHO08_K10.json",
+      "model_sha256": "4156d3b6f2b2c7f522e07fc3414f1f5b87502e95c01eb777f648e299b1627fe5",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S00_RP_NOMINAL_K10",
+      "seed_index": 0,
+      "seed": 2026100700,
+      "variant": "RP_NOMINAL",
+      "epochs": 10,
+      "model_file": "models/S00_RP_NOMINAL_K10.json",
+      "model_sha256": "a91b280261e373c1c428fb82e82a776435cff47fde89e22f00324aca4ed0cf58",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S00_RP_BIAS_K10",
+      "seed_index": 0,
+      "seed": 2026100700,
+      "variant": "RP_BIAS",
+      "epochs": 10,
+      "model_file": "models/S00_RP_BIAS_K10.json",
+      "model_sha256": "4ebd15d7069b08306431f8388701b5e08a1b2492ac3812a2924a80d2257d29fe",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S01_SLIP_NEW_ARC_K10",
+      "seed_index": 1,
+      "seed": 2026100701,
+      "variant": "SLIP_NEW_ARC",
+      "epochs": 10,
+      "model_file": "models/S01_SLIP_NEW_ARC_K10.json",
+      "model_sha256": "f40c107aae405654eb459b08144ec23c58ea23273262c592bb153dd056fade64",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S01_SLIP_UNMODELED_K10",
+      "seed_index": 1,
+      "seed": 2026100701,
+      "variant": "SLIP_UNMODELED",
+      "epochs": 10,
+      "model_file": "models/S01_SLIP_UNMODELED_K10.json",
+      "model_sha256": "1688436521e633c9145190374f6758c5ab33cb1c9383dfc5a2608ec54a9184b6",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S01_QUARTER_CYCLE_K10",
+      "seed_index": 1,
+      "seed": 2026100701,
+      "variant": "QUARTER_CYCLE",
+      "epochs": 10,
+      "model_file": "models/S01_QUARTER_CYCLE_K10.json",
+      "model_sha256": "459aa43d5252721bbf4b817a36c3a6b9dd2bf972941959b44c00fe3c5bd54e7d",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S01_CORRELATED_RHO08_K10",
+      "seed_index": 1,
+      "seed": 2026100701,
+      "variant": "CORRELATED_RHO08",
+      "epochs": 10,
+      "model_file": "models/S01_CORRELATED_RHO08_K10.json",
+      "model_sha256": "7149513c4dc9fb049d40d1c7cd36aeaf05113c465e131183b57b7e6e18ce7a54",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S01_RP_NOMINAL_K10",
+      "seed_index": 1,
+      "seed": 2026100701,
+      "variant": "RP_NOMINAL",
+      "epochs": 10,
+      "model_file": "models/S01_RP_NOMINAL_K10.json",
+      "model_sha256": "4384b3a7a4a590064ca40021d7765c8df1d507f7eafcf175cfac7e5503cde065",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S01_RP_BIAS_K10",
+      "seed_index": 1,
+      "seed": 2026100701,
+      "variant": "RP_BIAS",
+      "epochs": 10,
+      "model_file": "models/S01_RP_BIAS_K10.json",
+      "model_sha256": "39723e2816ce25f1a52409426e1582e931deccaacf88e150e2c91a3879decb53",
+      "global_integer_dimension": 3
+    },
+    {
+      "case_id": "S02_SLIP_NEW_ARC_K10",
+      "seed_index": 2,
+      "seed": 2026100702,
+      "variant": "SLIP_NEW_ARC",
+      "epochs": 10,
+      "model_file": "models/S02_SLIP_NEW_ARC_K10.json",
+      "model_sha256": "7f682ef2fae13753b1d09f734e773b381f64a74d4a053bfeabdd2eefed32a84a",
+      "global_integer_dimension": 5
+    },
+    {
+      "case_id": "S02_SLIP_UNMODELED_K10",
+      "seed_index": 2,
+      "seed": 2026100702,
+      "variant": "SLIP_UNMODELED",
+      "epochs": 10,
+      "model_file": "models/S02_SLIP_UNMODELED_K10.json",
+      "model_sha256": "e99304c97f6c71fb08ed2db891727a74b0106a80a29969cc2265b33b182a87c6",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S02_QUARTER_CYCLE_K10",
+      "seed_index": 2,
+      "seed": 2026100702,
+      "variant": "QUARTER_CYCLE",
+      "epochs": 10,
+      "model_file": "models/S02_QUARTER_CYCLE_K10.json",
+      "model_sha256": "a11c7ff6065e6f8ed69a7aa0d8150a15f5dafb08f49720e12b0518c24e9fea72",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S02_CORRELATED_RHO08_K10",
+      "seed_index": 2,
+      "seed": 2026100702,
+      "variant": "CORRELATED_RHO08",
+      "epochs": 10,
+      "model_file": "models/S02_CORRELATED_RHO08_K10.json",
+      "model_sha256": "1708eaf6f462678eb48e88cc43ed79f21b8228eac720ffd6591d99cc713a99e8",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S02_RP_NOMINAL_K10",
+      "seed_index": 2,
+      "seed": 2026100702,
+      "variant": "RP_NOMINAL",
+      "epochs": 10,
+      "model_file": "models/S02_RP_NOMINAL_K10.json",
+      "model_sha256": "d4400887f97d080514fc7921a91a1d8d1a6ba3d9e1121c068c3a14f7f4aba6fb",
+      "global_integer_dimension": 4
+    },
+    {
+      "case_id": "S02_RP_BIAS_K10",
+      "seed_index": 2,
+      "seed": 2026100702,
+      "variant": "RP_BIAS",
+      "epochs": 10,
+      "model_file": "models/S02_RP_BIAS_K10.json",
+      "model_sha256": "be213db3aa4b5da7bc3bdc54d4561fcdc715f2d821beb335b7a0f0076752b5e6",
+      "global_integer_dimension": 4
+    }
+  ],
+  "maximum_solver_calls": 48,
+  "budgets": {
+    "solver_timeout_s": 20.0,
+    "process_group_timeout_s": 25.0,
+    "stage_walltime_s": 1250.0,
+    "node_limit": 100000,
+    "initial_lambda_candidates": 8
+  },
+  "design": {
+    "length_m": 0.35,
+    "wavelength_m": 0.190293672798365,
+    "new_independent_noise_seeds": [
+      2026100700,
+      2026100701,
+      2026100702,
+      2026100703,
+      2026100704,
+      2026100705,
+      2026100706,
+      2026100707,
+      2026100708,
+      2026100709
+    ],
+    "base_noise_units": 10,
+    "prefixes": [
+      1,
+      5,
+      10
+    ],
+    "DD_dimension_by_seed": "4 for even index, 3 for odd index",
+    "COV": "DD code=2*(0.5m)^2*(I+11T), phase=2*(0.004m)^2*(I+11T), assumed epoch block diagonal.",
+    "noise_values": "Engineering floor values inherited from prior RAWX experiments; not calibrated stochastic truth.",
+    "motion": "Every 10-epoch trajectory has changing yaw and vertical tilt; separate free b_k in solver.",
+    "paired_variants": "First three base seeds, same raw standardized Gaussian draw; six variants each.",
+    "integer": "[2,-1,4,0][:m]; slip +1 on first DD from epoch index 5.",
+    "RP": "Reported roll=true(-asin(bD/L))+independent Gaussian(0,0.03/L rad); pitch=0. Added z=-L*sin(roll), model sigma=0.03m.",
+    "RP_fault": "Fixed signed asin(0.15/0.35) rad, + for even seed index and - for odd.",
+    "quarter_cycle": "Add +0.25 wavelength to first phase DD at epochs 5..9; true integers unchanged.",
+    "correlated_noise": "Generate AR(1) rho=.8 across epochs with same standardized draw; solver still assumes independent Q.",
+    "slip_without_arc": "Truth is not representable by shared N; report this explicitly and per-epoch equality.",
+    "class_mode": "Full integer vector (default), active-class solver feature is not used in this matrix."
+  },
+  "outputs": [
+    "PLAN.json",
+    "models/*.json",
+    "LEDGER.jsonl",
+    "results/*.json",
+    "RESULTS.csv",
+    "SUMMARY.json",
+    "SEAL.json"
+  ],
+  "support": "All 48 planned calls retained, including process timeout, no certificate and model failure. No replacement or parameter search.",
+  "meaning": "Global objective certificate is not an integer acceptance/FIX guarantee. Known-integer and baseline angle assessed separately.",
+  "no_reads": [
+    "raw GNSS data",
+    "real estimated results",
+    "fused reference",
+    "V3 output"
+  ]
+}

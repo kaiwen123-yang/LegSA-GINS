@@ -63,6 +63,9 @@ struct Go2AttitudeWeakPriorStatus {
 
 struct Go2VelocityDiagnosticPriorMeasurement {
   double time = 0.0;
+  std::string observation_frame = "ned";
+  Vec3 velocity_body_frd_mps = makeVec3(0.0, 0.0, 0.0);
+  Vec3 std_body_frd_mps = makeVec3(0.0, 0.0, 0.0);
   Vec3 velocity_ned_mps = makeVec3(0.0, 0.0, 0.0);
   Vec3 std_ned_mps = makeVec3(2.0, 2.0, 2.0);
   std::string source_status = "inactive";
@@ -81,6 +84,9 @@ struct Go2VelocityDiagnosticPriorConfig {
   bool enable_go2_horizontal_velocity_prior = false;
   std::string go2_velocity_prior_diagnostic_path;
   std::string go2_horizontal_velocity_prior_path;
+  std::string go2_horizontal_velocity_frame = "ned";
+  std::string go2_body_velocity_prior_path;
+  double go2_body_velocity_update_period_s = 0.2;
   double go2_velocity_prior_time_tolerance_sec = 0.08;
   double go2_velocity_prior_std_scale = 1.0;
   bool go2_diagnostic_prior_only = true;

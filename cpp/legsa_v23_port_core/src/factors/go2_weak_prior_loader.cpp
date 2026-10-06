@@ -11,6 +11,8 @@
 
 #include <algorithm>
 #include <cctype>
+#include <cmath>
+#include <stdexcept>
 #include <fstream>
 #include <sstream>
 #include <unordered_map>
@@ -275,6 +277,68 @@ Go2VelocityDiagnosticPriorLoadResult Go2WeakPriorLoader::loadVelocityDiagnosticC
   result.status.std_ve_p95 = percentile(std_ve_values, 0.95);
   result.status.std_ve_max = std_ve_values.empty() ? 0.0 : *std::max_element(std_ve_values.begin(), std_ve_values.end());
   result.status.max_std_le_5 = result.status.std_vn_max <= 5.0 && result.status.std_ve_max <= 5.0;
+  return result;
+}
+
+Go2VelocityDiagnosticPriorLoadResult Go2WeakPriorLoader::loadBodyVelocityCsv(
+    const std::string& path, const Go2VelocityDiagnosticPriorConfig& config) {
+  Go2VelocityDiagnosticPriorLoadResult result;
+  result.status.source_id = "body_frame_forward_right_velocity";
+  result.status.horizontal_only = true;  // Two observed axes, both in BODY coordinates.
+  result.status.vertical_disabled = true; // No body-z observation; nav-D may still change.
+  result.status.controlled_activation = config.enable_go2_horizontal_velocity_prior;
+  result.status.diagnostic_only = false;
+  if (!config.enable_go2_horizontal_velocity_prior) {
+    result.status.provider_status = "disabled_by_config";
+    return result;
+  }
+  std::ifstream input(path);
+  if (!input) throw std::runtime_error("BODY_HV_INPUT_OPEN_FAILED");
+  std::string line;
+  if (!std::getline(input,line)) throw std::runtime_error("BODY_HV_MISSING_HEADER");
+  const std::vector<std::string> expected{"time","v_forward_mps","v_right_mps",
+      "std_forward_mps","std_right_mps","valid","source_status"};
+  if (splitCsvLine(line) != expected) throw std::runtime_error("BODY_HV_INVALID_HEADER");
+  auto number = [](const std::string& token) {
+    std::size_t used=0;const double value=std::stod(token,&used);
+    if (used!=token.size() || !std::isfinite(value)) throw std::runtime_error("BODY_HV_INVALID_NUMBER");
+    return value;
+  };
+  double previous=-INFINITY;
+  while (std::getline(input,line)) {
+    if (trim(line).empty()) continue;
+    const auto cells=splitCsvLine(line);
+    if (cells.size()!=7 || (cells[5]!="0" && cells[5]!="1")) throw std::runtime_error("BODY_HV_INVALID_ROW");
+    Go2VelocityDiagnosticPriorMeasurement row;
+    row.time=number(cells[0]);
+    if (!(row.time>previous)) throw std::runtime_error("BODY_HV_UNORDERED_TIMESTAMPS");
+    previous=row.time;
+    row.observation_frame="body_frd";
+    row.update_flag=cells[5]=="1";
+    row.source_status=cells[6];
+    row.quality_flag="nominal"; // Availability label, not independent calibration or truth.
+    row.frame_candidate="provider_declared_body_frd";
+    row.prior_policy="body_forward_right_2d";
+    row.diagnostic_only=false;
+    if (row.update_flag && row.source_status!="active") throw std::runtime_error("BODY_HV_VALID_REQUIRES_ACTIVE_SOURCE");
+    for(std::size_t i=1;i<5;++i) {
+      if(cells[i].empty()&&!row.update_flag) continue;
+      const double value=number(cells[i]);
+      if(i<3) row.velocity_body_frd_mps[i-1]=value;
+      else {
+        if(!(value>0.0)) throw std::runtime_error("BODY_HV_NONPOSITIVE_STD");
+        row.std_body_frd_mps[i-3]=value;
+      }
+    }
+    if(row.update_flag)++result.status.valid_prior_count;else++result.status.skip_count;
+    result.measurements.push_back(row);
+  }
+  result.status.prior_count=result.measurements.size();
+  // An empty/all-invalid but structurally correct provider is a valid no-update outcome.
+  result.status.provider_status="available";
+  result.status.solver_enabled=true;
+  result.status.paper_performance_claim=false;
+  result.status.go2_velocity_truth_claim=false;
   return result;
 }
 

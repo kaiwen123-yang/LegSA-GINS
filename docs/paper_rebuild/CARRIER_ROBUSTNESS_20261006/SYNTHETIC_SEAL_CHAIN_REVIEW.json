@@ -1,0 +1,36 @@
+{
+  "status": "PASS_SCIENTIFIC_SEAL_CHAIN_WITH_EXPLICIT_LIVE_LOG_APPEND",
+  "scope": "Read-only hashes, candidate fingerprints and existing decisions; zero solver/evaluator/raw/reference reads.",
+  "registered_source_unchanged": true,
+  "all_216_model_input_hashes_match": true,
+  "all_72_selection_result_hashes_match": true,
+  "all_504_admission_result_hashes_match": true,
+  "all_primary_fingerprints_match_frozen_best": true,
+  "all_global_candidate_certificates": 72,
+  "calibration_and_heldout_thresholds_identical": true,
+  "cross_seal_links_match": true,
+  "all_final_scientific_artifact_hashes_match": true,
+  "final_manifest_exception": {
+    "path": "<SYNTHETIC_PREP01>/DRIVER.log",
+    "cause": "FINAL_SEAL was written immediately before the final SEALED status line was printed to the live stdout log.",
+    "original_manifest_log_sha256": "0e1ead29385d06d6e2aa81da285409f094f242352266f0d9a949e76f6b1a0092",
+    "post_run_log_sha256": "0fe1229dc32aea02729fdadf6ce078b7decfad0ae1ed04b5928ad456c8bbcccd",
+    "prefix_before_last_line_exactly_matches_original_hash": true,
+    "appended_status_line": "{\"solver_calls\": 72, \"conditions\": 504, \"status\": \"SEALED\"}",
+    "scientific_artifacts_affected": 0,
+    "original_manifest_preserved": true
+  },
+  "source_hashes": {
+    "PLAN.json": "b3b139cbd9ffd333011466d28281526b055e42e34c8118ec4cb64bb0ace5a976",
+    "EXECUTION_REGISTRATION.json": "7ed0dc8230fe7f7b5fad28998989db94df067d382c18766f58e757001399f1b9",
+    "SELECTION_SEAL.json": "7ec2ea30ff73785478f74a3c061ff4966138eb3535d25be414f9cdd510422280",
+    "ADMISSION_SEAL.json": "20d9eea957908adb3b599aae6ca3146ab80490893202a083998ead5bdb3a897a",
+    "FINAL_SEAL.json": "b6ce5697793c22928de6818aad992ed88e800670dfa6280149cdc2ed8b61e1b9",
+    "RESULTS.csv": "dd1a5296ee1d62d86c3f2aaafb4e90a0ec149b27638dc12a6cd1fba612ec3377",
+    "SUMMARY.json": "71ffaf97b2476d461ae856eb94469f798ee61addb44034aa29abc178c49741e7"
+  },
+  "derived_public_csv_sha256": "dd1a5296ee1d62d86c3f2aaafb4e90a0ec149b27638dc12a6cd1fba612ec3377",
+  "derived_public_summary_sha256": "c14480cb1e6bfbf516a444dde11261cfdc7a1e30886161cb69495eefed94ecf6",
+  "derivation_script": "<SYNTHETIC_PREP01>/DERIVE_PUBLIC.py",
+  "derivation_script_sha256": "5e913b0351082ab865894a857289f29038a1a1e87f75658ccdcea3365afb3bdb"
+}

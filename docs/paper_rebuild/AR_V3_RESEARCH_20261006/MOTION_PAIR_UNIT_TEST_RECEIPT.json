@@ -1,0 +1,17 @@
+{
+  "registration_commit": "a128409164362cf7ca4dbe328bfb8133be76712e",
+  "command": [
+    "python3",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/test_carrier_motion_pair.py"
+  ],
+  "returncode": 0,
+  "log_sha256": "cbee9c0722fd6a09c9cc31d458a52e1ef59156c120e1c47c8ca9ed985131253a",
+  "integer_search_calls": 0,
+  "reference_reads": 0,
+  "test_source_sha256": "ca90855da6c6ee49f47c95f8a762f445ff9fd66ac65a91450010632439da44ee",
+  "environment": "Ubuntu-22.04 WSL",
+  "utc": "2026-10-06T11:27:00.494338+00:00"
+}

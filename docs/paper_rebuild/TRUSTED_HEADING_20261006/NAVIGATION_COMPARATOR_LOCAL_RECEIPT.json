@@ -1,0 +1,34 @@
+{
+  "schema": "trusted_heading.navigation_comparator.final_pre_execution_receipt.v1",
+  "created_utc": "2026-10-06T16:36:05.204316+00:00",
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/compare_full_window_navigation.py": "194532eb7c77ecc4758663a3ea25227ab3020de3c9a228a9eebe09f48f1fda30",
+    "tests/paper_rebuild/test_compare_full_window_navigation.py": "83ac95efa94c7be97babf7d3dbe8d2faa1e6542a6bbd226939e8f09b14a67b21"
+  },
+  "first_test_receipt": {
+    "path": "<TRUSTED_HEADING_SCRATCH>/NAVIGATION_COMPARATOR_LOCAL_ATTEMPT01/TEST_01_RECEIPT.json",
+    "sha256": "c9f40d6166a29aa5e9a70e75aaeb3d362bf33e1819a62d1df14c8586a29a1ebe"
+  },
+  "first_test_log": {
+    "path": "<TRUSTED_HEADING_SCRATCH>/NAVIGATION_COMPARATOR_LOCAL_ATTEMPT01/TEST_01.log",
+    "sha256": "7256316818e0211d1c4dc30d19c5b69dd944b4f7c923e409b47993643d15fb98"
+  },
+  "unique_tests": 4,
+  "pytest_invocations": 1,
+  "first_test_result": "4 passed in 0.09s",
+  "post_test_edits": "Read/identity checks only: plan/native seal chain, per-row identity, evaluator contract and source NAV/STD, missing error payload forces NA, missing old matched keys reported and blocks adoption; metric/event/gate helper logic unchanged.",
+  "final_syntax_compile": "PASS; compile source only, no execution",
+  "real_NAV_reads": 0,
+  "reference_reads": 0,
+  "solver_calls": 0,
+  "evaluator_calls": 0,
+  "ready_for_root_review_and_freeze": true,
+  "not_executed_on_actual_navigation_results": true,
+  "outputs": {
+    "V3_COMPARISONS.csv": "12 rows: 6 full plus 6 actual exact common support",
+    "MATCHED_CONTROL_DIFFERENCES.csv": "6 rows: 3 full plus 3 control/fallback exact common support",
+    "COVERAGE.csv": "6 rows, missing/NA retained",
+    "COMPARISON.json": "A/B per-sequence gate and per-channel events, right censoring, missing key brackets"
+  },
+  "runner_command": "python3 scripts/paper_rebuild/carrier_phase/compare_full_window_navigation.py --stage <NATIVE_STAGE> --v3-root <V3_ROOT> --out <NEW_COMPARISON_DIR>"
+}

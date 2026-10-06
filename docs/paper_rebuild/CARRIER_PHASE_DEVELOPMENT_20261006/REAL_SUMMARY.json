@@ -1,0 +1,5216 @@
+{
+  "trials": [
+    {
+      "trial": "REAL_80_82_V1",
+      "window_s": [
+        80.0,
+        82.0
+      ],
+      "source_commit": "98bba0c5545de5490bf8e2e7bd6c57a82f7f5c60",
+      "source_pins": null,
+      "prepare_snapshot_status": "INITIAL_DEVELOPMENT_OVERLAY_NOT_CAPTURED_AT_IMPORT",
+      "pairing": {
+        "unique_pairs": 10,
+        "unpaired_rx1": 0,
+        "unpaired_rx2": 0,
+        "duplicate_rx1": 0,
+        "duplicate_rx2": 0
+      },
+      "actual_groups_by_epoch": [
+        {
+          "time_s": 80.19799995422363,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 8,
+              "ambiguities": 4,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 12,
+              "ambiguities": 6,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 26,
+              "ambiguities": 13,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 80.39800000190735,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 8,
+              "ambiguities": 4,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 14,
+              "ambiguities": 7,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 34,
+              "ambiguities": 17,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 80.59800004959106,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 12,
+              "ambiguities": 6,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 32,
+              "ambiguities": 16,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 80.79800009727478,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 12,
+              "ambiguities": 6,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 32,
+              "ambiguities": 16,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 80.99799990653992,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 10,
+              "ambiguities": 5,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 30,
+              "ambiguities": 15,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 81.19799995422363,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 10,
+              "ambiguities": 5,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 28,
+              "ambiguities": 14,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 81.39800000190735,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 10,
+              "ambiguities": 5,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 28,
+              "ambiguities": 14,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 81.59800004959106,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 10,
+              "ambiguities": 5,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 28,
+              "ambiguities": 14,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 81.79800009727478,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 12,
+              "ambiguities": 6,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 30,
+              "ambiguities": 15,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 81.99799990653992,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 12,
+              "ambiguities": 6,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 30,
+              "ambiguities": 15,
+              "reason": null
+            }
+          }
+        }
+      ],
+      "arc_event_reason_counts": {
+        "CARRIER_INVALID": 277,
+        "HALF_CYCLE_UNRESOLVED": 444,
+        "PHASE_STD_INVALID": 266,
+        "NO_CARRIER_LOCK": 269,
+        "FIRST_OBSERVATION": 130,
+        "CARRIER_VALIDITY_CHANGED": 48,
+        "REACQUIRED_AFTER_INVALID": 396,
+        "HALF_CYCLE_VALIDITY_CHANGED": 16,
+        "LOCKTIME_REGRESSION": 27,
+        "HALF_CYCLE_CORRECTION_CHANGED": 4,
+        "TDCP_DOPPLER_INCONSISTENT": 3,
+        "MISSING": 30
+      },
+      "arc_rules": {
+        "maximum_gap_s": 0.21,
+        "tdcp_bound_cycles": 0.5
+      },
+      "runs": [
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE",
+          "family_requested": "GPS_L1",
+          "prefix_epochs": 1,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 4,
+          "observations": 8,
+          "active_class_dimension": null,
+          "best_full_cost": 18.865455229126106,
+          "second_full_cost": 22.172529104678215,
+          "objective_gap": 3.30707387555211,
+          "objective_identity_error": -1.2789769243681803e-13,
+          "length_error_m": 8.326672684688674e-16,
+          "elapsed_s": 4.219083862000048,
+          "nodes": 20,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE",
+          "family_requested": "GPS_L1",
+          "prefix_epochs": 5,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 4,
+          "observations": 34,
+          "active_class_dimension": null,
+          "best_full_cost": 55.51901519742365,
+          "second_full_cost": 60.38567868214611,
+          "objective_gap": 4.866663484722459,
+          "objective_identity_error": 1.0160761121369433e-12,
+          "length_error_m": 8.326672684688674e-16,
+          "elapsed_s": 4.496325935999948,
+          "nodes": 25,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE",
+          "family_requested": "GPS_L1",
+          "prefix_epochs": 10,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 4,
+          "observations": 64,
+          "active_class_dimension": null,
+          "best_full_cost": 68.01444757732371,
+          "second_full_cost": 72.88111106204664,
+          "objective_gap": 4.866663484722935,
+          "objective_identity_error": -1.7777779248717707e-11,
+          "length_error_m": 5.551115123125783e-16,
+          "elapsed_s": 6.16165223500002,
+          "nodes": 26,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE",
+          "family_requested": "GPS_L1_L2",
+          "prefix_epochs": 1,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 6,
+          "observations": 12,
+          "active_class_dimension": null,
+          "best_full_cost": 36.79253045167485,
+          "second_full_cost": 44.29369884635913,
+          "objective_gap": 7.501168394684278,
+          "objective_identity_error": -5.347544629330514e-11,
+          "length_error_m": 2.220446049250313e-16,
+          "elapsed_s": 3.6954821759999277,
+          "nodes": 46,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE",
+          "family_requested": "GPS_L1_L2",
+          "prefix_epochs": 5,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 8,
+          "observations": 60,
+          "active_class_dimension": null,
+          "best_full_cost": 167.12631896238813,
+          "second_full_cost": 240.88913815955948,
+          "objective_gap": 73.76281919717135,
+          "objective_identity_error": -1.6476064956805203e-10,
+          "length_error_m": 8.326672684688674e-16,
+          "elapsed_s": 1.6721556260000625,
+          "nodes": 130,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE",
+          "family_requested": "GPS_L1_L2",
+          "prefix_epochs": 10,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 9,
+          "observations": 114,
+          "active_class_dimension": null,
+          "best_full_cost": 261.1727005144262,
+          "second_full_cost": 334.9355197115983,
+          "objective_gap": 73.76281919717212,
+          "objective_identity_error": 5.609877007373143e-10,
+          "length_error_m": 7.216449660063518e-16,
+          "elapsed_s": 2.5439419520000683,
+          "nodes": 197,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE",
+          "family_requested": "GPS_GAL_BDS_DUAL",
+          "prefix_epochs": 1,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 13,
+          "observations": 26,
+          "active_class_dimension": null,
+          "best_full_cost": 83.88685929149058,
+          "second_full_cost": 229.8423137735955,
+          "objective_gap": 145.95545448210493,
+          "objective_identity_error": -4.423839072842384e-11,
+          "length_error_m": 5.551115123125783e-17,
+          "elapsed_s": 2.0369598050000377,
+          "nodes": 470,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE",
+          "family_requested": "GPS_GAL_BDS_DUAL",
+          "prefix_epochs": 5,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 18,
+          "observations": 154,
+          "active_class_dimension": null,
+          "best_full_cost": 401.7545147313512,
+          "second_full_cost": 652.2414838898713,
+          "objective_gap": 250.48696915852014,
+          "objective_identity_error": 4.0756731323199347e-11,
+          "length_error_m": 3.885780586188048e-16,
+          "elapsed_s": 0.020002592000082586,
+          "nodes": 34,
+          "termination": "GLOBAL_ENUMERATION_EXHAUSTED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE",
+          "family_requested": "GPS_GAL_BDS_DUAL",
+          "prefix_epochs": 10,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 19,
+          "observations": 298,
+          "active_class_dimension": null,
+          "best_full_cost": 710.42085247899,
+          "second_full_cost": 960.9078216375092,
+          "objective_gap": 250.48696915851917,
+          "objective_identity_error": 4.904450179310516e-10,
+          "length_error_m": 5.551115123125783e-16,
+          "elapsed_s": 0.03394012000001112,
+          "nodes": 25,
+          "termination": "GLOBAL_ENUMERATION_EXHAUSTED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE_ACTIVE",
+          "family_requested": "GPS_L1",
+          "prefix_epochs": 5,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 4,
+          "observations": 34,
+          "active_class_dimension": 3,
+          "best_full_cost": 55.51901519742365,
+          "second_full_cost": 64.21088018264821,
+          "objective_gap": 8.691864985224562,
+          "objective_identity_error": 1.0160761121369433e-12,
+          "length_error_m": 8.326672684688674e-16,
+          "elapsed_s": 4.883768888999999,
+          "nodes": 25,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE_ACTIVE",
+          "family_requested": "GPS_L1",
+          "prefix_epochs": 10,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 4,
+          "observations": 64,
+          "active_class_dimension": 3,
+          "best_full_cost": 68.01444757732371,
+          "second_full_cost": 83.34720216712103,
+          "objective_gap": 15.332754589797318,
+          "objective_identity_error": -1.7777779248717707e-11,
+          "length_error_m": 5.551115123125783e-16,
+          "elapsed_s": 7.256232394999998,
+          "nodes": 30,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE_ACTIVE",
+          "family_requested": "GPS_L1_L2",
+          "prefix_epochs": 5,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 8,
+          "observations": 60,
+          "active_class_dimension": 5,
+          "best_full_cost": 167.12631896238813,
+          "second_full_cost": 259.3840198213222,
+          "objective_gap": 92.2577008589341,
+          "objective_identity_error": -1.6476064956805203e-10,
+          "length_error_m": 8.326672684688674e-16,
+          "elapsed_s": 3.407678480999998,
+          "nodes": 169,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE_ACTIVE",
+          "family_requested": "GPS_L1_L2",
+          "prefix_epochs": 10,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 9,
+          "observations": 114,
+          "active_class_dimension": 6,
+          "best_full_cost": 261.1727005144262,
+          "second_full_cost": 350.14370871321637,
+          "objective_gap": 88.97100819879017,
+          "objective_identity_error": 5.609877007373143e-10,
+          "length_error_m": 7.216449660063518e-16,
+          "elapsed_s": 2.9263356270000003,
+          "nodes": 226,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE_ACTIVE",
+          "family_requested": "GPS_GAL_BDS_DUAL",
+          "prefix_epochs": 5,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 18,
+          "observations": 154,
+          "active_class_dimension": 15,
+          "best_full_cost": 401.7545147313512,
+          "second_full_cost": 1679.857540531182,
+          "objective_gap": 1278.1030257998307,
+          "objective_identity_error": 4.0756731323199347e-11,
+          "length_error_m": 3.885780586188048e-16,
+          "elapsed_s": 50.690239491,
+          "nodes": 1319,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_80_82_V1",
+          "mode": "SOLVE_ACTIVE",
+          "family_requested": "GPS_GAL_BDS_DUAL",
+          "prefix_epochs": 10,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 19,
+          "observations": 298,
+          "active_class_dimension": 15,
+          "best_full_cost": 710.42085247899,
+          "second_full_cost": 1216.8460307126734,
+          "objective_gap": 506.42517823368337,
+          "objective_identity_error": 4.904450179310516e-10,
+          "length_error_m": 5.551115123125783e-16,
+          "elapsed_s": 0.044755194999993364,
+          "nodes": 51,
+          "termination": "GLOBAL_ENUMERATION_EXHAUSTED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        }
+      ]
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "window_s": [
+        100.0,
+        102.0
+      ],
+      "source_commit": "5a00724efd7607fc232e401f2d2e696aadbeb510",
+      "source_pins": {
+        "src/legsa_gins/paper_rebuild/carrier_phase/ephemeris.py": "0e095ab821618553f47e699f009a8d5622d6c66b9109a96143cfb79810803d8d",
+        "src/legsa_gins/paper_rebuild/carrier_phase/multignss.py": "20704c075335edc7fa0e10092ca4efbd2e7a8c28a43497d514e88d31e6842555",
+        "src/legsa_gins/paper_rebuild/carrier_phase/temporal.py": "3b9706b5cc82cc1e6f1ba3858433993fdb06baad73f8eb49cadd927b93c75286",
+        "src/legsa_gins/paper_rebuild/carrier_phase/solver.py": "a7a220a543724911353386f263779bd31cc7d9edb108cc35dc5f1349656592c4",
+        "src/legsa_gins/paper_rebuild/carrier_phase/arcs.py": "5f4b030fcc55ffa5fa1bd4bb41e06641281b17248e34f32d877f8ebac7526953",
+        "src/legsa_gins/paper_rebuild/carrier_phase/observations.py": "637ada354ec2132c6d4aeb7f615d2e7eb1ef7f1c5ebcf7f688e2847b798ca44c",
+        "src/legsa_gins/paper_rebuild/carrier_phase/validation.py": "6a5fc4c899efae7a4415d2b47a6bf28c8f13e10654fcf4634cb88885842871dd",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+        "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "d28604a587655623537bdf9125afc24a929388b218696829fe42c9ffd2192ede",
+        "scripts/paper_rebuild/carrier_phase/real_trial.py": "d2f81ff32cabf6e1af5c76629df565b2600d9f06aad564fa91262d148ecf052e"
+      },
+      "prepare_snapshot_status": "CAPTURED",
+      "pairing": {
+        "unique_pairs": 10,
+        "unpaired_rx1": 0,
+        "unpaired_rx2": 0,
+        "duplicate_rx1": 0,
+        "duplicate_rx2": 0
+      },
+      "actual_groups_by_epoch": [
+        {
+          "time_s": 100.19799995422363,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 10,
+              "ambiguities": 5,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  2,
+                  0,
+                  0
+                ],
+                [
+                  2,
+                  6,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 38,
+              "ambiguities": 19,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 100.39800000190735,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 10,
+              "ambiguities": 5,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  2,
+                  0,
+                  0
+                ],
+                [
+                  2,
+                  6,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 36,
+              "ambiguities": 18,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 100.59800004959106,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 10,
+              "ambiguities": 5,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  2,
+                  0,
+                  0
+                ],
+                [
+                  2,
+                  6,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 36,
+              "ambiguities": 18,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 100.79800009727478,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 10,
+              "ambiguities": 5,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  2,
+                  6,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 32,
+              "ambiguities": 16,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 100.99799990653992,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 10,
+              "ambiguities": 5,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  2,
+                  6,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 32,
+              "ambiguities": 16,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 101.19799995422363,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 10,
+              "ambiguities": 5,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  2,
+                  0,
+                  0
+                ],
+                [
+                  2,
+                  6,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 38,
+              "ambiguities": 19,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 101.39800000190735,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 10,
+              "ambiguities": 5,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  2,
+                  6,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 32,
+              "ambiguities": 16,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 101.59800004959106,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 10,
+              "ambiguities": 5,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  2,
+                  0,
+                  0
+                ],
+                [
+                  2,
+                  6,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 38,
+              "ambiguities": 19,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 101.79800009727478,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 10,
+              "ambiguities": 5,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  2,
+                  0,
+                  0
+                ],
+                [
+                  2,
+                  6,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 38,
+              "ambiguities": 19,
+              "reason": null
+            }
+          }
+        },
+        {
+          "time_s": 101.99799990653992,
+          "families": {
+            "GPS_L1": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "rows": 6,
+              "ambiguities": 3,
+              "reason": null
+            },
+            "GPS_L1_L2": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ]
+              ],
+              "rows": 10,
+              "ambiguities": 5,
+              "reason": null
+            },
+            "GPS_GAL_BDS_DUAL": {
+              "status": "BUILT",
+              "groups": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  3,
+                  0
+                ],
+                [
+                  2,
+                  0,
+                  0
+                ],
+                [
+                  2,
+                  6,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  2,
+                  0
+                ]
+              ],
+              "rows": 38,
+              "ambiguities": 19,
+              "reason": null
+            }
+          }
+        }
+      ],
+      "arc_event_reason_counts": {
+        "HALF_CYCLE_UNRESOLVED": 326,
+        "FIRST_OBSERVATION": 112,
+        "CARRIER_INVALID": 176,
+        "PHASE_STD_INVALID": 167,
+        "NO_CARRIER_LOCK": 174,
+        "REACQUIRED_AFTER_INVALID": 290,
+        "LOCKTIME_REGRESSION": 24,
+        "CARRIER_VALIDITY_CHANGED": 43,
+        "HALF_CYCLE_VALIDITY_CHANGED": 15,
+        "HALF_CYCLE_CORRECTION_CHANGED": 4,
+        "MISSING": 14,
+        "TDCP_DOPPLER_INCONSISTENT": 8
+      },
+      "arc_rules": {
+        "maximum_gap_s": 0.21,
+        "tdcp_bound_cycles": 0.5
+      },
+      "runs": [
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE",
+          "family_requested": "GPS_L1",
+          "prefix_epochs": 1,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 3,
+          "observations": 6,
+          "active_class_dimension": null,
+          "best_full_cost": 0.1422244044282005,
+          "second_full_cost": 1.8141263748881669,
+          "objective_gap": 1.6719019704599662,
+          "objective_identity_error": -1.696587315080933e-12,
+          "length_error_m": 8.881784197001252e-16,
+          "elapsed_s": 0.1172785609999778,
+          "nodes": 7,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE",
+          "family_requested": "GPS_L1",
+          "prefix_epochs": 5,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 3,
+          "observations": 30,
+          "active_class_dimension": null,
+          "best_full_cost": 12.997163024244397,
+          "second_full_cost": 13.160100339373288,
+          "objective_gap": 0.1629373151288913,
+          "objective_identity_error": -1.4383161328623828e-11,
+          "length_error_m": 4.440892098500626e-16,
+          "elapsed_s": 0.5400171599999908,
+          "nodes": 10,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE",
+          "family_requested": "GPS_L1",
+          "prefix_epochs": 10,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 3,
+          "observations": 60,
+          "active_class_dimension": null,
+          "best_full_cost": 23.31752435489336,
+          "second_full_cost": 23.947118182558537,
+          "objective_gap": 0.6295938276651754,
+          "objective_identity_error": -1.864464138634503e-11,
+          "length_error_m": 5.551115123125783e-16,
+          "elapsed_s": 0.3598767080000016,
+          "nodes": 11,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE",
+          "family_requested": "GPS_L1_L2",
+          "prefix_epochs": 1,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 5,
+          "observations": 10,
+          "active_class_dimension": null,
+          "best_full_cost": 29.331065917761187,
+          "second_full_cost": 44.0416932981086,
+          "objective_gap": 14.710627380347411,
+          "objective_identity_error": -4.226308192301076e-11,
+          "length_error_m": 5.551115123125783e-17,
+          "elapsed_s": 0.8888701049999668,
+          "nodes": 26,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE",
+          "family_requested": "GPS_L1_L2",
+          "prefix_epochs": 5,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 5,
+          "observations": 50,
+          "active_class_dimension": null,
+          "best_full_cost": 77.48230250113872,
+          "second_full_cost": 193.90616894894646,
+          "objective_gap": 116.42386644780774,
+          "objective_identity_error": 5.74544856135617e-11,
+          "length_error_m": 5.551115123125783e-16,
+          "elapsed_s": 1.2652853060000098,
+          "nodes": 33,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE",
+          "family_requested": "GPS_L1_L2",
+          "prefix_epochs": 10,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 7,
+          "observations": 100,
+          "active_class_dimension": null,
+          "best_full_cost": 150.74137977035065,
+          "second_full_cost": 349.34450963163175,
+          "objective_gap": 198.6031298612811,
+          "objective_identity_error": -3.007016857736744e-11,
+          "length_error_m": 5.551115123125783e-16,
+          "elapsed_s": 1.2223577820000173,
+          "nodes": 35,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE",
+          "family_requested": "GPS_GAL_BDS_DUAL",
+          "prefix_epochs": 1,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 19,
+          "observations": 38,
+          "active_class_dimension": null,
+          "best_full_cost": 78.3822975384868,
+          "second_full_cost": 337.0288663762064,
+          "objective_gap": 258.6465688377196,
+          "objective_identity_error": -4.432365585671505e-11,
+          "length_error_m": 4.440892098500626e-16,
+          "elapsed_s": 11.837125736000019,
+          "nodes": 704,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE",
+          "family_requested": "GPS_GAL_BDS_DUAL",
+          "prefix_epochs": 5,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 21,
+          "observations": 174,
+          "active_class_dimension": null,
+          "best_full_cost": 364.1058724587633,
+          "second_full_cost": 689.4215495758064,
+          "objective_gap": 325.31567711704304,
+          "objective_identity_error": 3.410605131648481e-13,
+          "length_error_m": 1.27675647831893e-15,
+          "elapsed_s": 0.022380243999975846,
+          "nodes": 38,
+          "termination": "GLOBAL_ENUMERATION_EXHAUSTED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE",
+          "family_requested": "GPS_GAL_BDS_DUAL",
+          "prefix_epochs": 10,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 30,
+          "observations": 358,
+          "active_class_dimension": null,
+          "best_full_cost": 733.7791006622989,
+          "second_full_cost": 1008.617077436401,
+          "objective_gap": 274.8379767741021,
+          "objective_identity_error": -6.872369340271689e-10,
+          "length_error_m": 1.2212453270876722e-15,
+          "elapsed_s": 0.043370396000000255,
+          "nodes": 38,
+          "termination": "GLOBAL_ENUMERATION_EXHAUSTED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE_ACTIVE",
+          "family_requested": "GPS_L1",
+          "prefix_epochs": 5,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 3,
+          "observations": 30,
+          "active_class_dimension": 3,
+          "best_full_cost": 12.997163024244397,
+          "second_full_cost": 13.160100339373288,
+          "objective_gap": 0.1629373151288913,
+          "objective_identity_error": -1.4383161328623828e-11,
+          "length_error_m": 4.440892098500626e-16,
+          "elapsed_s": 0.5667107790000045,
+          "nodes": 10,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE_ACTIVE",
+          "family_requested": "GPS_L1",
+          "prefix_epochs": 10,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 3,
+          "observations": 60,
+          "active_class_dimension": 3,
+          "best_full_cost": 23.31752435489336,
+          "second_full_cost": 23.947118182558537,
+          "objective_gap": 0.6295938276651754,
+          "objective_identity_error": -1.864464138634503e-11,
+          "length_error_m": 5.551115123125783e-16,
+          "elapsed_s": 0.3639533510000206,
+          "nodes": 11,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE_ACTIVE",
+          "family_requested": "GPS_L1_L2",
+          "prefix_epochs": 5,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 5,
+          "observations": 50,
+          "active_class_dimension": 5,
+          "best_full_cost": 77.48230250113872,
+          "second_full_cost": 193.90616894894646,
+          "objective_gap": 116.42386644780774,
+          "objective_identity_error": 5.74544856135617e-11,
+          "length_error_m": 5.551115123125783e-16,
+          "elapsed_s": 1.314835821000031,
+          "nodes": 33,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE_ACTIVE",
+          "family_requested": "GPS_L1_L2",
+          "prefix_epochs": 10,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 7,
+          "observations": 100,
+          "active_class_dimension": 5,
+          "best_full_cost": 150.74137977035065,
+          "second_full_cost": 349.34450963163175,
+          "objective_gap": 198.6031298612811,
+          "objective_identity_error": -3.007016857736744e-11,
+          "length_error_m": 5.551115123125783e-16,
+          "elapsed_s": 1.238089790999993,
+          "nodes": 35,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE_ACTIVE",
+          "family_requested": "GPS_GAL_BDS_DUAL",
+          "prefix_epochs": 5,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 21,
+          "observations": 174,
+          "active_class_dimension": 16,
+          "best_full_cost": 364.1058724587633,
+          "second_full_cost": 1321.7080501409323,
+          "objective_gap": 957.602177682169,
+          "objective_identity_error": 3.410605131648481e-13,
+          "length_error_m": 1.27675647831893e-15,
+          "elapsed_s": 0.27150689100000136,
+          "nodes": 734,
+          "termination": "GLOBAL_ENUMERATION_EXHAUSTED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        },
+        {
+          "trial": "REAL_100_102_V2",
+          "mode": "SOLVE_ACTIVE",
+          "family_requested": "GPS_GAL_BDS_DUAL",
+          "prefix_epochs": 10,
+          "actual_group_keys": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0
+              ],
+              [
+                2,
+                0,
+                0
+              ],
+              [
+                2,
+                6,
+                0
+              ],
+              [
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                2,
+                0
+              ]
+            ]
+          ],
+          "status": "CERTIFIED_CANDIDATE",
+          "failure": null,
+          "integer_dimension": 30,
+          "observations": 358,
+          "active_class_dimension": 19,
+          "best_full_cost": 733.7791006622989,
+          "second_full_cost": 1317.349429697363,
+          "objective_gap": 583.570329035064,
+          "objective_identity_error": -6.872369340271689e-10,
+          "length_error_m": 1.2212453270876722e-15,
+          "elapsed_s": 0.21138923699999168,
+          "nodes": 110,
+          "termination": "GLOBAL_BOUND_CERTIFIED",
+          "global_objective_certificate": true,
+          "accepted_integer_measurement": false
+        }
+      ]
+    }
+  ],
+  "real_integer_truth_available": false,
+  "reference_reads": 0,
+  "navigation_integration": false,
+  "cross_family_objective_comparison_valid": false,
+  "real_solver_calls": 30,
+  "global_objective_certificates": 30,
+  "future_comparisons": [
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "FUTURE_CHECK_CATEGORIZED",
+      "family_requested": "GPS_L1",
+      "decision_prefix": 1,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "best_scored_epochs": 9,
+      "second_scored_epochs": 9,
+      "best_cost": 49.14899234819587,
+      "second_cost": 151.49800835758253,
+      "future_gap": 102.34901600938667,
+      "common_support": null,
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "FUTURE_CHECK_CATEGORIZED",
+      "family_requested": "GPS_L1",
+      "decision_prefix": 5,
+      "status": "HISTORICAL_ONLY_DIFFERENCE",
+      "best_scored_epochs": 5,
+      "second_scored_epochs": 5,
+      "best_cost": 12.495432379900805,
+      "second_cost": 12.495432379900805,
+      "future_gap": 0.0,
+      "common_support": null,
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "FUTURE_CHECK_CATEGORIZED",
+      "family_requested": "GPS_L1_L2",
+      "decision_prefix": 1,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "best_scored_epochs": 9,
+      "second_scored_epochs": 9,
+      "best_cost": 112.03319537903386,
+      "second_cost": 420.7226573150591,
+      "future_gap": 308.6894619360253,
+      "common_support": null,
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "FUTURE_CHECK_CATEGORIZED",
+      "family_requested": "GPS_L1_L2",
+      "decision_prefix": 5,
+      "status": "HISTORICAL_ONLY_DIFFERENCE",
+      "best_scored_epochs": 5,
+      "second_scored_epochs": 5,
+      "best_cost": 90.21006028626519,
+      "second_cost": 90.21006028626519,
+      "future_gap": 0.0,
+      "common_support": null,
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "FUTURE_CHECK_CATEGORIZED",
+      "family_requested": "GPS_GAL_BDS_DUAL",
+      "decision_prefix": 1,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "best_scored_epochs": 9,
+      "second_scored_epochs": 9,
+      "best_cost": 383.1732542075575,
+      "second_cost": 656.6530663270909,
+      "future_gap": 273.4798121195334,
+      "common_support": null,
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "FUTURE_CHECK_CATEGORIZED",
+      "family_requested": "GPS_GAL_BDS_DUAL",
+      "decision_prefix": 5,
+      "status": "HISTORICAL_ONLY_DIFFERENCE",
+      "best_scored_epochs": 5,
+      "second_scored_epochs": 5,
+      "best_cost": 303.71694769939427,
+      "second_cost": 303.71694769939427,
+      "future_gap": 0.0,
+      "common_support": null,
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "FUTURE_ACTIVE",
+      "family_requested": "GPS_L1",
+      "decision_prefix": 5,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "best_scored_epochs": 5,
+      "second_scored_epochs": 5,
+      "best_cost": 12.495432379900805,
+      "second_cost": 19.136321984472254,
+      "future_gap": 6.6408896045714485,
+      "common_support": {
+        "status": "COMMON_SUPPORT_SCORED",
+        "common_times": [
+          81.19799995422363,
+          81.39800000190735,
+          81.59800004959106,
+          81.79800009727478,
+          81.99799990653992
+        ],
+        "first_cost": 12.495432379900805,
+        "second_cost": 19.136321984472254,
+        "second_minus_first": 6.6408896045714485,
+        "complete_matching_support": true
+      },
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "FUTURE_ACTIVE",
+      "family_requested": "GPS_L1_L2",
+      "decision_prefix": 5,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "best_scored_epochs": 5,
+      "second_scored_epochs": 5,
+      "best_cost": 90.21006028626519,
+      "second_cost": 285.40353641086546,
+      "future_gap": 195.19347612460027,
+      "common_support": {
+        "status": "COMMON_SUPPORT_SCORED",
+        "common_times": [
+          81.19799995422363,
+          81.39800000190735,
+          81.59800004959106,
+          81.79800009727478,
+          81.99799990653992
+        ],
+        "first_cost": 90.21006028626519,
+        "second_cost": 285.40353641086546,
+        "second_minus_first": 195.19347612460027,
+        "complete_matching_support": true
+      },
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "FUTURE_ACTIVE",
+      "family_requested": "GPS_GAL_BDS_DUAL",
+      "decision_prefix": 5,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "best_scored_epochs": 5,
+      "second_scored_epochs": 5,
+      "best_cost": 303.71694769939427,
+      "second_cost": 1704.620158099477,
+      "future_gap": 1400.9032104000828,
+      "common_support": {
+        "status": "COMMON_SUPPORT_SCORED",
+        "common_times": [
+          81.19799995422363,
+          81.39800000190735,
+          81.59800004959106,
+          81.79800009727478,
+          81.99799990653992
+        ],
+        "first_cost": 303.71694769939427,
+        "second_cost": 1704.620158099477,
+        "second_minus_first": 1400.9032104000828,
+        "complete_matching_support": true
+      },
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "FUTURE_ACTIVE",
+      "family_requested": "GPS_L1",
+      "decision_prefix": 5,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "best_scored_epochs": 5,
+      "second_scored_epochs": 5,
+      "best_cost": 10.32036133064814,
+      "second_cost": 10.78701784318576,
+      "future_gap": 0.46665651253761986,
+      "common_support": {
+        "status": "COMMON_SUPPORT_SCORED",
+        "common_times": [
+          101.19799995422363,
+          101.39800000190735,
+          101.59800004959106,
+          101.79800009727478,
+          101.99799990653992
+        ],
+        "first_cost": 10.32036133064814,
+        "second_cost": 10.78701784318576,
+        "second_minus_first": 0.46665651253761986,
+        "complete_matching_support": true
+      },
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "FUTURE_ACTIVE",
+      "family_requested": "GPS_L1_L2",
+      "decision_prefix": 5,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "best_scored_epochs": 5,
+      "second_scored_epochs": 5,
+      "best_cost": 29.216662130461785,
+      "second_cost": 92.84359533636548,
+      "future_gap": 63.6269332059037,
+      "common_support": {
+        "status": "COMMON_SUPPORT_SCORED",
+        "common_times": [
+          101.19799995422363,
+          101.39800000190735,
+          101.59800004959106,
+          101.79800009727478,
+          101.99799990653992
+        ],
+        "first_cost": 29.216662130461785,
+        "second_cost": 92.84359533636548,
+        "second_minus_first": 63.6269332059037,
+        "complete_matching_support": true
+      },
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "FUTURE_ACTIVE",
+      "family_requested": "GPS_GAL_BDS_DUAL",
+      "decision_prefix": 5,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "best_scored_epochs": 5,
+      "second_scored_epochs": 5,
+      "best_cost": 197.57439959040644,
+      "second_cost": 2574.693949261547,
+      "future_gap": 2377.1195496711407,
+      "common_support": {
+        "status": "COMMON_SUPPORT_SCORED",
+        "common_times": [
+          101.19799995422363,
+          101.39800000190735,
+          101.59800004959106,
+          101.79800009727478,
+          101.99799990653992
+        ],
+        "first_cost": 197.57439959040644,
+        "second_cost": 2574.693949261547,
+        "second_minus_first": 2377.1195496711407,
+        "complete_matching_support": true
+      },
+      "accepted_integer_measurement": false
+    }
+  ],
+  "input_result_sha256": {
+    "REAL_80_82_V1/PLAN.json": "e8c62ad623dc6e9bdb04eaa2a82f98b9c9c0919d94cf08f28bc308a3e4a1f88f",
+    "REAL_80_82_V1/SOLVE/RESULTS.json": "3bf57584666bf6675b95cc494f06b22624ffea5dfa642f75d4cbcee9d825d679",
+    "REAL_80_82_V1/SOLVE_ACTIVE/RESULTS.json": "db6eb29d0e98e6b57e24c54131805284a98f4b6d0cae30fc971b747168b6749a",
+    "REAL_80_82_V1/FUTURE_CHECK_CATEGORIZED/FUTURE_RESULTS.json": "c2e31c89044eb51eaa417d776749fd43df7b049455961d420c285a2abd6c0f07",
+    "REAL_80_82_V1/FUTURE_ACTIVE/FUTURE_RESULTS.json": "2cd77934649f4ea62ef5e43fb9d5a57a21d68e90f86cc7e5976c7fd235495d35",
+    "REAL_100_102_V2/PLAN.json": "5424ba5ad709b6801ba59a877d5e2d5c47763615532deb29d4c7ca7dfed59ddf",
+    "REAL_100_102_V2/SOLVE/RESULTS.json": "84a93bc91837707887e089be21d82de98040c574687b707ff4d4aeed9ca0e43f",
+    "REAL_100_102_V2/SOLVE_ACTIVE/RESULTS.json": "61dcc4bdf458d7c0522705aaf7cb609d3be76bd30f3f3f95212989b28e96e801",
+    "REAL_100_102_V2/FUTURE_ACTIVE/FUTURE_RESULTS.json": "c407bda758d887ed44ad58373b3688c87b691d4b25646457079290500d4fca02"
+  }
+}

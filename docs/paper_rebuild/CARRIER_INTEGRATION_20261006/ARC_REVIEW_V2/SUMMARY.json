@@ -1,0 +1,561 @@
+{
+  "scope": "SAVED_MODEL_AND_ARC_EVENT_READ_ONLY_DIAGNOSTIC",
+  "arc_event_file_read_count": 1,
+  "event_count": 174787,
+  "plan_records": 1200,
+  "reference_reads": 0,
+  "cils_calls": 0,
+  "native_calls": 0,
+  "threshold_unchanged_cycles": 0.5,
+  "important_denominator": "repeated invalid/missing events are counts of records, not independent slips; TDCP exists only on metadata-continuous endpoints",
+  "metre_conversion": "residual_m = residual_cycles*wavelength; tdcp_m is phase increment and is NOT residual",
+  "candidate_first_break_categories": [
+    {
+      "mode": "full",
+      "category": "METADATA_ONLY",
+      "cases": 76
+    },
+    {
+      "mode": "full",
+      "category": "MIXED_METADATA_AND_TDCP",
+      "cases": 5
+    },
+    {
+      "mode": "full",
+      "category": "MODEL_QUALIFICATION_OR_DD_COORDINATE_ONLY",
+      "cases": 1
+    },
+    {
+      "mode": "full",
+      "category": "TDCP_ONLY",
+      "cases": 22
+    },
+    {
+      "mode": "partial",
+      "category": "METADATA_ONLY",
+      "cases": 44
+    },
+    {
+      "mode": "partial",
+      "category": "MIXED_METADATA_AND_TDCP",
+      "cases": 2
+    },
+    {
+      "mode": "partial",
+      "category": "TDCP_ONLY",
+      "cases": 14
+    }
+  ],
+  "qualified_support_stops": [
+    {
+      "case_id": "partial_0148.00",
+      "export_time_s": 149.99799990653992,
+      "additional_supported_epochs": 6,
+      "additional_span_s": 1.2000000476837158,
+      "first_stop": {
+        "time_s": 151.39800000190735,
+        "missing_selected_labels": 1,
+        "category": "METADATA_ONLY",
+        "lost_target_pivot": [
+          "2:10:6:0-2:36:6:0"
+        ],
+        "changed_endpoint_causes": [
+          {
+            "rx": 1,
+            "signal": "2:10:6:0",
+            "reasons": [
+              "CARRIER_INVALID",
+              "HALF_CYCLE_UNRESOLVED",
+              "PHASE_STD_INVALID",
+              "NO_CARRIER_LOCK",
+              "LOCKTIME_REGRESSION",
+              "HALF_CYCLE_VALIDITY_CHANGED",
+              "CARRIER_VALIDITY_CHANGED"
+            ],
+            "old_arc": "1|2:10:6:0|arc=13",
+            "new_arc": null
+          }
+        ],
+        "model_rejections": [
+          {
+            "signal": "2:10:6:0",
+            "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "partial_0154.00",
+      "export_time_s": 155.99799990653992,
+      "additional_supported_epochs": 4,
+      "additional_span_s": 0.8000001907348633,
+      "first_stop": {
+        "time_s": 156.99799990653992,
+        "missing_selected_labels": 1,
+        "category": "METADATA_ONLY",
+        "lost_target_pivot": [
+          "2:10:6:0-2:36:6:0"
+        ],
+        "changed_endpoint_causes": [
+          {
+            "rx": 1,
+            "signal": "2:10:6:0",
+            "reasons": [
+              "CARRIER_INVALID",
+              "HALF_CYCLE_UNRESOLVED",
+              "PHASE_STD_INVALID",
+              "NO_CARRIER_LOCK",
+              "LOCKTIME_REGRESSION",
+              "HALF_CYCLE_VALIDITY_CHANGED",
+              "CARRIER_VALIDITY_CHANGED"
+            ],
+            "old_arc": "1|2:10:6:0|arc=15",
+            "new_arc": null
+          }
+        ],
+        "model_rejections": [
+          {
+            "signal": "2:10:6:0",
+            "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "partial_0156.00",
+      "export_time_s": 157.99799990653992,
+      "additional_supported_epochs": 0,
+      "additional_span_s": 0.0,
+      "first_stop": {
+        "time_s": 158.19799995422363,
+        "missing_selected_labels": 1,
+        "category": "MIXED_METADATA_AND_TDCP",
+        "lost_target_pivot": [
+          "2:10:0:0-2:36:0:0"
+        ],
+        "changed_endpoint_causes": [
+          {
+            "rx": 1,
+            "signal": "2:10:0:0",
+            "reasons": [
+              "TDCP_DOPPLER_INCONSISTENT"
+            ],
+            "old_arc": "1|2:10:0:0|arc=22",
+            "new_arc": "1|2:10:0:0|arc=23"
+          },
+          {
+            "rx": 2,
+            "signal": "2:10:0:0",
+            "reasons": [
+              "CARRIER_INVALID",
+              "HALF_CYCLE_UNRESOLVED",
+              "PHASE_STD_INVALID",
+              "NO_CARRIER_LOCK",
+              "LOCKTIME_REGRESSION",
+              "HALF_CYCLE_VALIDITY_CHANGED",
+              "CARRIER_VALIDITY_CHANGED"
+            ],
+            "old_arc": "2|2:10:0:0|arc=35",
+            "new_arc": null
+          }
+        ],
+        "model_rejections": [
+          {
+            "signal": "2:10:0:0",
+            "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "partial_0168.00",
+      "export_time_s": 169.99799990653992,
+      "additional_supported_epochs": 31,
+      "additional_span_s": 6.200000047683716,
+      "first_stop": {
+        "time_s": 176.39800000190735,
+        "missing_selected_labels": 1,
+        "category": "METADATA_ONLY",
+        "lost_target_pivot": [
+          "3:27:0:0-3:7:0:0"
+        ],
+        "changed_endpoint_causes": [
+          {
+            "rx": 1,
+            "signal": "3:27:0:0",
+            "reasons": [
+              "HALF_CYCLE_UNRESOLVED",
+              "HALF_CYCLE_VALIDITY_CHANGED"
+            ],
+            "old_arc": "1|3:27:0:0|arc=9",
+            "new_arc": null
+          }
+        ],
+        "model_rejections": [
+          {
+            "signal": "3:27:0:0",
+            "reason": "carrier half-cycle ambiguity is unresolved"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "partial_0332.00",
+      "export_time_s": 333.9979999065399,
+      "additional_supported_epochs": 0,
+      "additional_span_s": 0.0,
+      "first_stop": {
+        "time_s": 334.19799995422363,
+        "missing_selected_labels": 1,
+        "category": "TDCP_ONLY",
+        "lost_target_pivot": [
+          "2:11:0:0-2:25:0:0"
+        ],
+        "changed_endpoint_causes": [
+          {
+            "rx": 2,
+            "signal": "2:11:0:0",
+            "reasons": [
+              "TDCP_DOPPLER_INCONSISTENT"
+            ],
+            "old_arc": "2|2:11:0:0|arc=7",
+            "new_arc": "2|2:11:0:0|arc=8"
+          }
+        ],
+        "model_rejections": []
+      }
+    },
+    {
+      "case_id": "partial_0334.00",
+      "export_time_s": 335.9979999065399,
+      "additional_supported_epochs": 8,
+      "additional_span_s": 1.6000001430511475,
+      "first_stop": {
+        "time_s": 337.7980000972748,
+        "missing_selected_labels": 1,
+        "category": "METADATA_ONLY",
+        "lost_target_pivot": [
+          "0:4:3:0-0:17:3:0"
+        ],
+        "changed_endpoint_causes": [
+          {
+            "rx": 2,
+            "signal": "0:17:3:0",
+            "reasons": [
+              "CARRIER_INVALID",
+              "HALF_CYCLE_UNRESOLVED",
+              "PHASE_STD_INVALID",
+              "NO_CARRIER_LOCK",
+              "LOCKTIME_REGRESSION",
+              "HALF_CYCLE_VALIDITY_CHANGED",
+              "CARRIER_VALIDITY_CHANGED"
+            ],
+            "old_arc": "2|0:17:3:0|arc=5",
+            "new_arc": null
+          }
+        ],
+        "model_rejections": [
+          {
+            "signal": "0:17:3:0",
+            "reason": "RAW_CODE_LOCK_OR_CNO_INELIGIBLE"
+          }
+        ]
+      }
+    }
+  ],
+  "tdcp_summary": [
+    {
+      "rx": 1,
+      "scope": "ALL_RAW_SIGNALS",
+      "tdcp_checks": 48027,
+      "tdcp_breaks": 174,
+      "residual_cycles": {
+        "n": 48027,
+        "median": -0.0042240691536221675,
+        "p05": -0.28174161598700526,
+        "p95": 0.2598857571833768,
+        "min": -0.9134985572842425,
+        "max": 0.9870785520636218
+      },
+      "abs_residual_m": {
+        "n": 48027,
+        "median": 0.02502326755186238,
+        "p05": 0.002475928330798162,
+        "p95": 0.06700904301315531,
+        "min": 6.625070169032822e-08,
+        "max": 0.1878348030126786
+      },
+      "anomalous_receiver_epochs": null,
+      "break_count_per_anomalous_epoch": null
+    },
+    {
+      "rx": 1,
+      "scope": "AR_GEC_SIGNAL_FAMILIES",
+      "tdcp_checks": 34498,
+      "tdcp_breaks": 87,
+      "residual_cycles": {
+        "n": 34498,
+        "median": -0.004037169545824781,
+        "p05": -0.2724887444482363,
+        "p95": 0.2516165772622586,
+        "min": -0.7633037697240752,
+        "max": 0.9870785520636218
+      },
+      "abs_residual_m": {
+        "n": 34498,
+        "median": 0.02419740017816263,
+        "p05": 0.0024118149927934546,
+        "p95": 0.06427957983492276,
+        "min": 1.628208838618523e-06,
+        "max": 0.1878348030126786
+      },
+      "anomalous_receiver_epochs": 80,
+      "break_count_per_anomalous_epoch": {
+        "n": 80,
+        "median": 1.0,
+        "p05": 1.0,
+        "p95": 2.0,
+        "min": 1.0,
+        "max": 3.0
+      }
+    },
+    {
+      "rx": 2,
+      "scope": "ALL_RAW_SIGNALS",
+      "tdcp_checks": 46597,
+      "tdcp_breaks": 203,
+      "residual_cycles": {
+        "n": 46597,
+        "median": -0.005146798998907798,
+        "p05": -0.2792654388402525,
+        "p95": 0.25350005617194654,
+        "min": -0.8592408791889738,
+        "max": 5.127319992160551
+      },
+      "abs_residual_m": {
+        "n": 46597,
+        "median": 0.022351757518971477,
+        "p05": 0.002062317956038073,
+        "p95": 0.06673224798977247,
+        "min": 1.7709318938665257e-06,
+        "max": 1.2521439095815838
+      },
+      "anomalous_receiver_epochs": null,
+      "break_count_per_anomalous_epoch": null
+    },
+    {
+      "rx": 2,
+      "scope": "AR_GEC_SIGNAL_FAMILIES",
+      "tdcp_checks": 33036,
+      "tdcp_breaks": 98,
+      "residual_cycles": {
+        "n": 33036,
+        "median": -0.005748429002167654,
+        "p05": -0.26709196393555956,
+        "p95": 0.23830898367923226,
+        "min": -0.7074946405829223,
+        "max": 5.127319992160551
+      },
+      "abs_residual_m": {
+        "n": 33036,
+        "median": 0.02118247418230762,
+        "p05": 0.002025019592465792,
+        "p95": 0.06302511116063116,
+        "min": 1.9212138115106954e-06,
+        "max": 1.2521439095815838
+      },
+      "anomalous_receiver_epochs": 91,
+      "break_count_per_anomalous_epoch": {
+        "n": 91,
+        "median": 1.0,
+        "p05": 1.0,
+        "p95": 2.0,
+        "min": 1.0,
+        "max": 2.0
+      }
+    }
+  ],
+  "cooccurrence": {
+    "AR_receiver_epochs_with_any_break": 171,
+    "AR_receiver_epochs_with_ge4_breaks": 0,
+    "AR_frequency_epochs_with_any_break": 180,
+    "AR_frequency_epochs_with_ge3_breaks": 0,
+    "ge4_receiver_breaks_common_mean_energy_fraction": {
+      "n": 0
+    },
+    "ge4_receiver_breaks_mad_m": {
+      "n": 0
+    },
+    "ge3_same_frequency_breaks_common_mean_energy_fraction": {
+      "n": 0
+    },
+    "ge3_same_frequency_breaks_mad_m": {
+      "n": 0
+    },
+    "same_frequency_definition": "physical carrier frequency; cross-GNSS same frequency combined; unique SV counts retained",
+    "ge4_ge3_threshold_role": "descriptive reporting strata only, not an arc or correction rule"
+  },
+  "receiver_pair": {
+    "epochs_ge4_common_checked_signals": 1199,
+    "common_median_correlation": 0.6509290742233443,
+    "rx2_minus_rx1_median_m": {
+      "n": 1199,
+      "median": -0.0007379112795396249,
+      "p05": -0.027395917297372514,
+      "p95": 0.029149177651237774,
+      "min": -0.04800765165979659,
+      "max": 0.05173775949299034
+    },
+    "rx2_minus_rx1_mad_m": {
+      "n": 1199,
+      "median": 0.016408477760059062,
+      "p05": 0.010018740802711335,
+      "p95": 0.026312639903064816,
+      "min": 0.0061501917217171576,
+      "max": 0.03893693303555068
+    }
+  },
+  "examples_most_coincident": [
+    {
+      "time_s": 139.79800009727478,
+      "rx": 1,
+      "tested_signals": 30,
+      "tested_unique_sv": 20,
+      "tdcp_breaks": 3,
+      "outlier_fraction": 0.1,
+      "median_residual_m": -0.04790769540803884,
+      "mean_residual_m": -0.0526081920265768,
+      "mad_m": 0.009329057249017274,
+      "rms_m": 0.057877812459089024,
+      "common_mean_energy_fraction": 0.8261949518440374,
+      "same_sign_fraction": 1.0,
+      "min_residual_m": -0.10485004488907314,
+      "max_residual_m": -0.004481278821404084,
+      "anomalous_signals": "0:14:0:0;0:22:0:0;3:40:0:0"
+    },
+    {
+      "time_s": 110.99799990653992,
+      "rx": 1,
+      "tested_signals": 27,
+      "tested_unique_sv": 18,
+      "tdcp_breaks": 2,
+      "outlier_fraction": 0.07407407407407407,
+      "median_residual_m": 0.008172979786866454,
+      "mean_residual_m": 0.006109082363668257,
+      "mad_m": 0.020561876211652435,
+      "rms_m": 0.04350043990085431,
+      "common_mean_energy_fraction": 0.019722622544798986,
+      "same_sign_fraction": 0.5925925925925926,
+      "min_residual_m": -0.11663537457830848,
+      "max_residual_m": 0.09828836395260224,
+      "anomalous_signals": "0:11:0:0;3:42:0:0"
+    },
+    {
+      "time_s": 115.99799990653992,
+      "rx": 2,
+      "tested_signals": 28,
+      "tested_unique_sv": 17,
+      "tdcp_breaks": 2,
+      "outlier_fraction": 0.07142857142857142,
+      "median_residual_m": 0.016929162208168005,
+      "mean_residual_m": 0.02790343911110063,
+      "mad_m": 0.01314730528703412,
+      "rms_m": 0.05165216486350113,
+      "common_mean_energy_fraction": 0.29183569487684374,
+      "same_sign_fraction": 0.8571428571428571,
+      "min_residual_m": -0.036241712711359335,
+      "max_residual_m": 0.15413733015569223,
+      "anomalous_signals": "0:3:0:0;3:10:2:0"
+    },
+    {
+      "time_s": 129.99799990653992,
+      "rx": 1,
+      "tested_signals": 35,
+      "tested_unique_sv": 23,
+      "tdcp_breaks": 2,
+      "outlier_fraction": 0.05714285714285714,
+      "median_residual_m": 0.05033385851754035,
+      "mean_residual_m": 0.04714939672720059,
+      "mad_m": 0.020546995377219712,
+      "rms_m": 0.056385378791508775,
+      "common_mean_energy_fraction": 0.6992287488296857,
+      "same_sign_fraction": 0.9428571428571428,
+      "min_residual_m": -0.011880333239711414,
+      "max_residual_m": 0.1255931389499794,
+      "anomalous_signals": "2:25:0:0;3:8:0:0"
+    },
+    {
+      "time_s": 133.79800009727478,
+      "rx": 1,
+      "tested_signals": 34,
+      "tested_unique_sv": 21,
+      "tdcp_breaks": 2,
+      "outlier_fraction": 0.058823529411764705,
+      "median_residual_m": -0.0185131016169841,
+      "mean_residual_m": -0.018793219022547065,
+      "mad_m": 0.028113820381149453,
+      "rms_m": 0.04404869361705572,
+      "common_mean_energy_fraction": 0.18202719840574516,
+      "same_sign_fraction": 0.6764705882352942,
+      "min_residual_m": -0.12421293977274511,
+      "max_residual_m": 0.04438794380652126,
+      "anomalous_signals": "3:14:2:0;3:43:0:0"
+    },
+    {
+      "time_s": 134.39800000190735,
+      "rx": 2,
+      "tested_signals": 32,
+      "tested_unique_sv": 20,
+      "tdcp_breaks": 2,
+      "outlier_fraction": 0.0625,
+      "median_residual_m": -0.004520297881312281,
+      "mean_residual_m": -0.005509127719134124,
+      "mad_m": 0.02054037039464148,
+      "rms_m": 0.045655087075614297,
+      "common_mean_energy_fraction": 0.014560870211199808,
+      "same_sign_fraction": 0.59375,
+      "min_residual_m": -0.12872866542393419,
+      "max_residual_m": 0.08338708304232656,
+      "anomalous_signals": "0:22:0:0;3:37:0:0"
+    },
+    {
+      "time_s": 136.59800004959106,
+      "rx": 2,
+      "tested_signals": 33,
+      "tested_unique_sv": 21,
+      "tdcp_breaks": 2,
+      "outlier_fraction": 0.06060606060606061,
+      "median_residual_m": -0.01235830019155769,
+      "mean_residual_m": -0.0188677868426879,
+      "mad_m": 0.021708713430929213,
+      "rms_m": 0.04325136795030988,
+      "common_mean_energy_fraction": 0.190301506656455,
+      "same_sign_fraction": 0.7272727272727273,
+      "min_residual_m": -0.11355154158629345,
+      "max_residual_m": 0.062055045449873676,
+      "anomalous_signals": "0:11:0:0;2:2:0:0"
+    },
+    {
+      "time_s": 141.19799995422363,
+      "rx": 1,
+      "tested_signals": 31,
+      "tested_unique_sv": 22,
+      "tdcp_breaks": 2,
+      "outlier_fraction": 0.06451612903225806,
+      "median_residual_m": -0.005966557262932526,
+      "mean_residual_m": -0.013713623606528901,
+      "mad_m": 0.018332931665052416,
+      "rms_m": 0.042960239109061216,
+      "common_mean_energy_fraction": 0.10189926956195726,
+      "same_sign_fraction": 0.5483870967741935,
+      "min_residual_m": -0.14525187780163162,
+      "max_residual_m": 0.053701880264797594,
+      "anomalous_signals": "0:11:0:0;0:14:0:0"
+    }
+  ],
+  "limits": [
+    "No corrected phase, common-mode subtraction, threshold change, or alternative arc state was computed.",
+    "Coincidence and metre similarity are diagnostic evidence, not unique proof of clock/synchronization error or true cycle slips.",
+    "No downstream admission or navigation performance improvement is inferred."
+  ]
+}

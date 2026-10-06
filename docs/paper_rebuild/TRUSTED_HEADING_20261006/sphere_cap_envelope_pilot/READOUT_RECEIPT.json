@@ -1,0 +1,40 @@
+{
+  "kind": "READ_ONLY_POSTPROCESS_RECEIPT",
+  "registration_commit": "3615f53766e6880655015bfc8bad747a8946bcac",
+  "source_alias": "<TRUSTED_HEADING>/SPHERE_CAP_ENVELOPE_PILOT_ATTEMPT01",
+  "previous_source_alias": "<TRUSTED_HEADING>/CANDIDATE_LIFECYCLE_PILOT_ATTEMPT01",
+  "driver_alias": "<TRUSTED_HEADING>/SPHERE_CAP_ENVELOPE_PILOT_DRIVER_ATTEMPT01",
+  "driver_pid": 1016,
+  "driver_supervisor_pid": 1015,
+  "tool_chunk": "9f51c2",
+  "driver_exit_code": 0,
+  "driver_files": {
+    "TERMINAL.json": "c0b9b679977a22cce0f242cbf8f7e3fe60a7b26243688c9282885af2b6ac67fc",
+    "LAUNCH.json": "e9565631789fc6234728ce451960f84942f72586ac3abcad339f97fe5cf6fc7c",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout.log": "32e8d3ce7466e2695836f955765c6200f982bf9ed77408088cb853b3c99f9827"
+  },
+  "source_files": {
+    "COMPLETE.json": "9aec172db7a7bea60e58639de7a13c2d9e42355ea2f5f03757452989bc6cf0ae",
+    "SUMMARY.json": "7ec67103ebeac5caec4449d5ceacc81d0d6090b23839052ccb80a6524a1bd5f5",
+    "DETAILS.jsonl.gz": "a0d1e090b37b0f3a9f2688f612b7a19fe85d67c7e4fcf31c79edad1954e51f5a",
+    "INPUT_IDENTITY.json": "8548655cadf6c2bc2d9cb2150baf04fc7887d2a154c9fd02e58e6d263b2a4470",
+    "OUTPUT_SEAL.json": "a750ce3d918d6a263004a1430192856fdfd2ea01f7d4feb41be13c01181af409",
+    "CLASS_RESULTS.csv": "67ac048f9ab1fdcc9af589ca1d3f730a5b07f100d6246e7fd07e14bb15f90987",
+    "EXECUTION_PLAN.json": "8b6271d4b62cf76b83368238710cc06c97bc8fbb1dd9420480fb3dbfe7650f84",
+    "RESULTS.csv": "3ec2008c386de0886a3d173cfc4311c449ef5193c8f849545f8dfd67c433bf56"
+  },
+  "source_details_bytes": 28787,
+  "previous_source_details_sha256": "61c633b6d113be727569ca19d025ac61c2b8c6baeadff80ef73c85bd3aed6dad",
+  "readout_script_alias": "<TRUSTED_HEADING>/SPHERE_CAP_READOUT_ATTEMPT01/readout.py",
+  "readout_script_sha256": "b433082805a53920fc7c2c3e44ccb598b42ed04e9b9629ae5b16af2f1a5cf543",
+  "copied_files": {
+    "RESULTS.csv": "3ec2008c386de0886a3d173cfc4311c449ef5193c8f849545f8dfd67c433bf56",
+    "CLASS_RESULTS.csv": "67ac048f9ab1fdcc9af589ca1d3f730a5b07f100d6246e7fd07e14bb15f90987",
+    "SUMMARY.json": "7ec67103ebeac5caec4449d5ceacc81d0d6090b23839052ccb80a6524a1bd5f5",
+    "COMPLETE.json": "9aec172db7a7bea60e58639de7a13c2d9e42355ea2f5f03757452989bc6cf0ae",
+    "OUTPUT_SEAL.json": "a750ce3d918d6a263004a1430192856fdfd2ea01f7d4feb41be13c01181af409"
+  },
+  "gz_policy": "Full DETAILS.jsonl.gz remains only in sealed scratch; Git receives small tables and receipts, not force-added gzip.",
+  "interpretation": "same conditional source classes / same Q and tau / exact .35-m length / quality unchanged / no accepted fixed integer or calibrated physical probability"
+}

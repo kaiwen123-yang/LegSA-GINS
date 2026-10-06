@@ -1,0 +1,1159 @@
+{
+  "scope": "SEVEN_ENGINEERING_VALID_PARTIAL_CARRIER_VECTORS_OBSERVATION_CONSISTENCY_ONLY",
+  "parent_population": {
+    "all_windows": 120,
+    "engineering_valid_carrier_rows": 7,
+    "failed_or_unresolved_rows": 113
+  },
+  "reference_reads": 0,
+  "raw_payload_reads": 0,
+  "search_calls": 0,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "time_policy": "primary past-only nearest 198 ms; secondary +2 ms PVT offline-only, never fed to any provider/selection/gate/solver",
+  "physical_quantity": "GNSS2-minus-GNSS1 baseline vector; horizontal projection azimuth is not Euler body yaw",
+  "coordinate_policy": "sidecar fixed NED -> ECEF using archived orthogonal R transpose; both vectors then same fixed/current NED",
+  "fixed_NED_origin_ecef_m": [
+    -2171613.3981999997,
+    4385611.7675,
+    4076721.9435
+  ],
+  "ecef_to_fixed_NED": [
+    [
+      0.28514433788619087,
+      -0.5758540469064211,
+      0.7662146065123943
+    ],
+    [
+      -0.8961526644772995,
+      -0.44374587541771776,
+      0.0
+    ],
+    [
+      0.34000457132468453,
+      -0.6866452611875077,
+      -0.6425847623209383
+    ]
+  ],
+  "C1_existing_frame_approximation": "native C1 uses sidecar fixed NED directly as local NED; tiny site-dependent rotation difference quantified, not repaired or retuned here",
+  "neither_observation_is_truth": true,
+  "pvt_carrier_errors_are_not_assumed_independent": true,
+  "source_sha256": {
+    "FULL_SPAN_PARTIAL/CARRIER_PARTIAL_0001.csv": "026f8afab487386e91388c94b112f013526e6c83cb1ab1410e66d5effcffba29",
+    "NAVIGATION_BODY_HV_01/INPUTS/DUAL_PVT_BASELINE3D.csv": "115840838923ea4132b195a5e1308c1d5a5c8d0f1978114e2fe613d2bb5afe41",
+    "NAVIGATION_BODY_HV_01/PLAN.json": "e0824c41dadb6941d649c0158dde51c8ac39c95484b4ed9b0bbba34d2b1573e9",
+    "NAVIGATION_HV_OFF_01/NATIVE/C3_PARTIAL_CARRIER_VECTOR/BASELINE3D_DIAGNOSTICS.csv": "00ede560463c8212d9186284bfb66ad7d81d1b4d6e9515447b5b884bda7a8933",
+    "NAVIGATION_HV_OFF_01/NATIVE/C3_PARTIAL_CARRIER_VECTOR/KF_GINS_Navresult.nav": "67b6f5de1fa46c648a15fe52924ff019d50266de2fac2cfb41e4efd8b9421252",
+    "NAVIGATION_HV_OFF_01/NATIVE/C1_DUAL_PVT_VECTOR/BASELINE3D_DIAGNOSTICS.csv": "ef7b453b5f28c7d6b1bea8588332bc03da6ed38fa82ee8bdfd9a43750f4ed0d7",
+    "NAVIGATION_BODY_HV_01/NATIVE/C3_PARTIAL_CARRIER_VECTOR/BASELINE3D_DIAGNOSTICS.csv": "bf4453bcf8833e58a58f5518dd163c0aa2adf15a8c6ebfe6f1a5f45afbbc3c5e",
+    "NAVIGATION_BODY_HV_01/NATIVE/C3_PARTIAL_CARRIER_VECTOR/KF_GINS_Navresult.nav": "b031aff153d0bd562163eb50b1d993b179e2291ca8e9037fa5702053fd7e4db4",
+    "NAVIGATION_BODY_HV_01/NATIVE/C1_DUAL_PVT_VECTOR/BASELINE3D_DIAGNOSTICS.csv": "ab95a4eac530e96738303c4fb56ed78978c57b93b65a1105152f794d78d19b78",
+    "FULL_SPAN_PARTIAL/cases/partial_0134.00.json": "b3230bcfc8e57a9b414ba65163f092b2cd48e4af3c7ce53d7eaa609723441e13",
+    "FULL_SPAN_PARTIAL/cases/partial_0140.00.json": "ee0a54191efd98e58866ac660db79ff1a69ec604f8a7cc3c0790c98bf942540c",
+    "FULL_SPAN_PARTIAL/cases/partial_0154.00.json": "896e2eb02c605bf9b59ddb215b5b766e5f2de6e74e6b6b4075fc3db18f3ef9b7",
+    "FULL_SPAN_PARTIAL/cases/partial_0168.00.json": "f4de01f14aa3efb4dfd9b52fe61137a33ff2146c1bc3ceb4ebc1ea3686741379",
+    "FULL_SPAN_PARTIAL/cases/partial_0170.00.json": "3669f15802fc728fd2b36498c5406baf7aa581ff0d6f5669fa34f0a4b1a6c9de",
+    "FULL_SPAN_PARTIAL/cases/partial_0294.00.json": "47b06b9fce4f732980efb48c6c30386aa779de1cfdefd5a11fae4208db61cb53",
+    "FULL_SPAN_PARTIAL/cases/partial_0300.00.json": "20126e267c865b67a60a5547e306b6e4bd8e530a39f02546ff9e5eb562a76236"
+  },
+  "records": [
+    {
+      "measurement_time_s": 135.99799990653992,
+      "case_id": "partial_0134.00",
+      "raw_conditional_GLS_length_m": 0.3374643349709514,
+      "published_length_constrained_m": 0.35000000000000014,
+      "raw_conditional_std_principal_mm": [
+        4.433662545584147,
+        5.894777790026152,
+        13.636645261219268
+      ],
+      "working_std_with_floor_principal_mm": [
+        10.179270106290884,
+        10.89534678303069,
+        16.42918958162713
+      ],
+      "floor_variance_m2": 8.396017632871156e-05,
+      "raw_conditional_baseline_ecef_m": [
+        -0.15189640887983802,
+        0.17842403308777754,
+        -0.24284670630561828
+      ],
+      "published_baseline_ecef_m": [
+        -0.16272255843099004,
+        0.1921818615728357,
+        -0.24307920737914326
+      ],
+      "N_truth_known": false,
+      "comparisons": {
+        "past_only": {
+          "angle_3d_deg": 4.817277043917057,
+          "angle_3d_in_common_NED_deg": 4.817277043917061,
+          "horizontal_baseline_azimuth_difference_deg": -1.27866405837554,
+          "carrier_baseline_azimuth_deg": 169.99871315654738,
+          "pvt_baseline_azimuth_deg": 171.27737721492292,
+          "carrier_horizontal_projection_m": 0.34861658715974797,
+          "pvt_horizontal_projection_m": 0.35797117498850617,
+          "carrier_baseline_inclination_deg": 5.095920717902409,
+          "pvt_baseline_inclination_deg": 0.4509337216411853,
+          "vector_difference_m": 0.030804166758074864,
+          "pvt_time_s": 135.799999952,
+          "pvt_minus_carrier_time_s": -0.1979999545399096,
+          "pvt_available_at_carrier_time": true,
+          "pvt_length_m": 0.3579822618707097,
+          "pvt_working_isotropic_std_mm": 25.668073554515153,
+          "pvt_fixed_NED_m": [
+            -0.3538309110278206,
+            0.05428672511649779,
+            -0.0028173908883388776
+          ],
+          "pvt_ecef_m": [
+            -0.1504999999888356,
+            0.18159999977796573,
+            -0.26929999981075514
+          ]
+        },
+        "nearest_plus_2ms_OFFLINE_ONLY": {
+          "angle_3d_deg": 4.657835076752027,
+          "angle_3d_in_common_NED_deg": 4.65783507675203,
+          "horizontal_baseline_azimuth_difference_deg": 0.18443720412631137,
+          "carrier_baseline_azimuth_deg": 169.99871315654738,
+          "pvt_baseline_azimuth_deg": 169.81427595242107,
+          "carrier_horizontal_projection_m": 0.34861658715974797,
+          "pvt_horizontal_projection_m": 0.3529169968448162,
+          "carrier_baseline_inclination_deg": 5.095920717902409,
+          "pvt_baseline_inclination_deg": 0.4417281248402041,
+          "vector_difference_m": 0.02871360002093177,
+          "pvt_time_s": 136.0,
+          "pvt_minus_carrier_time_s": 0.002000093460083008,
+          "pvt_available_at_carrier_time": false,
+          "pvt_length_m": 0.3529274854605245,
+          "pvt_working_isotropic_std_mm": 25.880494585691363,
+          "pvt_fixed_NED_m": [
+            -0.3473549191956664,
+            0.062409668902631665,
+            -0.002720906379259702
+          ],
+          "pvt_ecef_m": [
+            -0.15590000012889385,
+            0.17420000024140272,
+            -0.2643999997526379
+          ]
+        }
+      },
+      "native": {
+        "off": {
+          "carrier_accepted": 1,
+          "carrier_rejected": 0,
+          "carrier_reason": "ACCEPT",
+          "carrier_NIS_3dof": 8.156941178852557,
+          "carrier_qa_R_scale": 1.0,
+          "carrier_sa_R_scale": 1.000665432115129,
+          "past_pvt_C1_accepted": 1,
+          "past_pvt_C1_reason": "ACCEPT",
+          "past_pvt_C1_NIS_3dof": 0.49305973365037464,
+          "carrier_native_observed_current_NED_m": [
+            -0.3433183789880455,
+            0.060548234852887725,
+            -0.031087005407732266
+          ],
+          "R_current_from_latest_NAV_time_s": 135.995047,
+          "R_current_anchor_age_s": 0.0029529065399174215,
+          "carrier_native_z_minus_Rcurrent_ecef_norm_m": 1.9144927874400557e-10,
+          "carrier_native_z_minus_Rfixed_ecef_norm_m": 4.104555868699665e-06,
+          "past_compare_in_current_NED": {
+            "angle_3d_deg": 4.817277043917057,
+            "angle_3d_in_common_NED_deg": 4.81727704391706,
+            "horizontal_baseline_azimuth_difference_deg": -1.2787189122945222,
+            "carrier_baseline_azimuth_deg": 169.99806721383607,
+            "pvt_baseline_azimuth_deg": 171.2767861261306,
+            "carrier_horizontal_projection_m": 0.3486166922175388,
+            "pvt_horizontal_projection_m": 0.3579711837647596,
+            "carrier_baseline_inclination_deg": 5.095727091855812,
+            "pvt_baseline_inclination_deg": 0.45075520831029814,
+            "vector_difference_m": 0.030804166758074864
+          },
+          "fixed_vs_current_azimuth_difference_of_differences_deg": -5.48539189821895e-05
+        },
+        "body": {
+          "carrier_accepted": 1,
+          "carrier_rejected": 0,
+          "carrier_reason": "ACCEPT",
+          "carrier_NIS_3dof": 9.584351241474359,
+          "carrier_qa_R_scale": 1.0,
+          "carrier_sa_R_scale": 1.0024778903820024,
+          "past_pvt_C1_accepted": 1,
+          "past_pvt_C1_reason": "ACCEPT",
+          "past_pvt_C1_NIS_3dof": 0.7300879364575158,
+          "carrier_native_observed_current_NED_m": [
+            -0.34331837896789696,
+            0.06054823489526431,
+            -0.031087005547711932
+          ],
+          "R_current_from_latest_NAV_time_s": 135.995047,
+          "R_current_anchor_age_s": 0.0029529065399174215,
+          "carrier_native_z_minus_Rcurrent_ecef_norm_m": 1.9144995333022613e-10,
+          "carrier_native_z_minus_Rfixed_ecef_norm_m": 4.104558685804304e-06,
+          "past_compare_in_current_NED": {
+            "angle_3d_deg": 4.817277043917057,
+            "angle_3d_in_common_NED_deg": 4.817277043917058,
+            "horizontal_baseline_azimuth_difference_deg": -1.278718913265152,
+            "carrier_baseline_azimuth_deg": 169.99806720635013,
+            "pvt_baseline_azimuth_deg": 171.27678611961528,
+            "carrier_horizontal_projection_m": 0.34861669220490277,
+            "pvt_horizontal_projection_m": 0.3579711837636021,
+            "carrier_baseline_inclination_deg": 5.095727115145093,
+            "pvt_baseline_inclination_deg": 0.45075523185906824,
+            "vector_difference_m": 0.030804166758074864
+          },
+          "fixed_vs_current_azimuth_difference_of_differences_deg": -5.4854889611988256e-05
+        }
+      }
+    },
+    {
+      "measurement_time_s": 141.99799990653992,
+      "case_id": "partial_0140.00",
+      "raw_conditional_GLS_length_m": 0.34824031455647214,
+      "published_length_constrained_m": 0.34999999999999987,
+      "raw_conditional_std_principal_mm": [
+        4.734760823131697,
+        5.267642780223665,
+        21.31557271223499
+      ],
+      "working_std_with_floor_principal_mm": [
+        10.313977718658027,
+        10.569211739233634,
+        23.20159081570245
+      ],
+      "floor_variance_m2": 8.396017632871156e-05,
+      "raw_conditional_baseline_ecef_m": [
+        -0.12841013063084458,
+        0.20648260761715342,
+        -0.2492931763714778
+      ],
+      "published_baseline_ecef_m": [
+        -0.13041221533602135,
+        0.2095723594377717,
+        -0.24813722060754312
+      ],
+      "N_truth_known": false,
+      "comparisons": {
+        "past_only": {
+          "angle_3d_deg": 6.098507342647199,
+          "angle_3d_in_common_NED_deg": 6.098507342647202,
+          "horizontal_baseline_azimuth_difference_deg": -2.0236125274615233,
+          "carrier_baseline_azimuth_deg": 176.07567822152077,
+          "pvt_baseline_azimuth_deg": 178.0992907489823,
+          "carrier_horizontal_projection_m": 0.3488136163753845,
+          "pvt_horizontal_projection_m": 0.36815050409217565,
+          "carrier_baseline_inclination_deg": 4.718879987500337,
+          "pvt_baseline_inclination_deg": -1.0347679695923246,
+          "vector_difference_m": 0.04231182857304827,
+          "pvt_time_s": 141.799999952,
+          "pvt_minus_carrier_time_s": -0.1979999545399096,
+          "pvt_available_at_carrier_time": true,
+          "pvt_length_m": 0.3682105516181688,
+          "pvt_working_isotropic_std_mm": 26.217932794177347,
+          "pvt_fixed_NED_m": [
+            -0.36794794968940536,
+            0.012210650379316235,
+            0.006649560860168435
+          ],
+          "pvt_ecef_m": [
+            -0.11360000027343298,
+            0.20190000068396236,
+            -0.2861999999731799
+          ]
+        },
+        "nearest_plus_2ms_OFFLINE_ONLY": {
+          "angle_3d_deg": 4.941568675943441,
+          "angle_3d_in_common_NED_deg": 4.941568675943442,
+          "horizontal_baseline_azimuth_difference_deg": -0.02583106163737625,
+          "carrier_baseline_azimuth_deg": 176.07567822152077,
+          "pvt_baseline_azimuth_deg": 176.10150928315815,
+          "carrier_horizontal_projection_m": 0.3488136163753845,
+          "pvt_horizontal_projection_m": 0.3542657404857097,
+          "carrier_baseline_inclination_deg": 4.718879987500337,
+          "pvt_baseline_inclination_deg": -0.22262132050083172,
+          "vector_difference_m": 0.030659006808572135,
+          "pvt_time_s": 142.0,
+          "pvt_minus_carrier_time_s": 0.002000093460083008,
+          "pvt_available_at_carrier_time": false,
+          "pvt_length_m": 0.35426841466262815,
+          "pvt_working_isotropic_std_mm": 26.44409196777231,
+          "pvt_fixed_NED_m": [
+            -0.3534459944123931,
+            0.02408617685982506,
+            0.0013764976148529229
+          ],
+          "pvt_ecef_m": [
+            -0.12190000014378434,
+            0.19189999904483712,
+            -0.2716999999247493
+          ]
+        }
+      },
+      "native": {
+        "off": {
+          "carrier_accepted": 1,
+          "carrier_rejected": 0,
+          "carrier_reason": "ACCEPT",
+          "carrier_NIS_3dof": 5.636668790114325,
+          "carrier_qa_R_scale": 1.0,
+          "carrier_sa_R_scale": 1.0,
+          "past_pvt_C1_accepted": 1,
+          "past_pvt_C1_reason": "ACCEPT",
+          "past_pvt_C1_NIS_3dof": 0.9356399813988103,
+          "carrier_native_observed_current_NED_m": [
+            -0.34799552677427903,
+            0.02387666784467847,
+            -0.02879267402876659
+          ],
+          "R_current_from_latest_NAV_time_s": 141.995039,
+          "R_current_anchor_age_s": 0.002960906539925645,
+          "carrier_native_z_minus_Rcurrent_ecef_norm_m": 1.6455817135551484e-10,
+          "carrier_native_z_minus_Rfixed_ecef_norm_m": 4.354341964011964e-06,
+          "past_compare_in_current_NED": {
+            "angle_3d_deg": 6.098507342647199,
+            "angle_3d_in_common_NED_deg": 6.0985073426472,
+            "horizontal_baseline_azimuth_difference_deg": -2.023688941537813,
+            "carrier_baseline_azimuth_deg": 176.07497365323405,
+            "pvt_baseline_azimuth_deg": 178.09866259477187,
+            "carrier_horizontal_projection_m": 0.3488136779471147,
+            "pvt_horizontal_projection_m": 0.3681504929907763,
+            "carrier_baseline_inclination_deg": 4.71875746485503,
+            "pvt_baseline_inclination_deg": -1.0348636201096375,
+            "vector_difference_m": 0.04231182857304827
+          },
+          "fixed_vs_current_azimuth_difference_of_differences_deg": -7.64140762896659e-05
+        },
+        "body": {
+          "carrier_accepted": 1,
+          "carrier_rejected": 0,
+          "carrier_reason": "ACCEPT",
+          "carrier_NIS_3dof": 6.329053343665069,
+          "carrier_qa_R_scale": 1.0,
+          "carrier_sa_R_scale": 1.0,
+          "past_pvt_C1_accepted": 1,
+          "past_pvt_C1_reason": "ACCEPT",
+          "past_pvt_C1_NIS_3dof": 0.7466681894015952,
+          "carrier_native_observed_current_NED_m": [
+            -0.34799552673961387,
+            0.02387666813369886,
+            -0.02879267420806572
+          ],
+          "R_current_from_latest_NAV_time_s": 141.995039,
+          "R_current_anchor_age_s": 0.002960906539925645,
+          "carrier_native_z_minus_Rcurrent_ecef_norm_m": 1.6692458226407283e-10,
+          "carrier_native_z_minus_Rfixed_ecef_norm_m": 4.3545974353711596e-06,
+          "past_compare_in_current_NED": {
+            "angle_3d_deg": 6.098507342647199,
+            "angle_3d_in_common_NED_deg": 6.098507342647204,
+            "horizontal_baseline_azimuth_difference_deg": -2.0236889468922072,
+            "carrier_baseline_azimuth_deg": 176.0749736057724,
+            "pvt_baseline_azimuth_deg": 178.09866255266462,
+            "carrier_horizontal_projection_m": 0.34881367793283746,
+            "pvt_horizontal_projection_m": 0.36815049299429076,
+            "carrier_baseline_inclination_deg": 4.718757493265953,
+            "pvt_baseline_inclination_deg": -1.0348635898305165,
+            "vector_difference_m": 0.04231182857304827
+          },
+          "fixed_vs_current_azimuth_difference_of_differences_deg": -7.64194306839272e-05
+        }
+      }
+    },
+    {
+      "measurement_time_s": 155.99799990653992,
+      "case_id": "partial_0154.00",
+      "raw_conditional_GLS_length_m": 0.3500166367467357,
+      "published_length_constrained_m": 0.35,
+      "raw_conditional_std_principal_mm": [
+        3.641951481495315,
+        6.259568961684872,
+        10.855592779192488
+      ],
+      "working_std_with_floor_principal_mm": [
+        9.860222458052226,
+        11.096953632182133,
+        14.205775970230127
+      ],
+      "floor_variance_m2": 8.396017632871156e-05,
+      "raw_conditional_baseline_ecef_m": [
+        -0.13463944005622044,
+        0.18672718837305102,
+        -0.2636604337080915
+      ],
+      "published_baseline_ecef_m": [
+        -0.13463206199093739,
+        0.1867146992231937,
+        -0.263650960510408
+      ],
+      "N_truth_known": false,
+      "comparisons": {
+        "past_only": {
+          "angle_3d_deg": 4.86975680807811,
+          "angle_3d_in_common_NED_deg": 4.869756808078112,
+          "horizontal_baseline_azimuth_difference_deg": -4.865002613735726,
+          "carrier_baseline_azimuth_deg": 173.79992703196868,
+          "pvt_baseline_azimuth_deg": 178.6649296457044,
+          "carrier_horizontal_projection_m": 0.349970238975156,
+          "pvt_horizontal_projection_m": 0.3507364091854245,
+          "carrier_baseline_inclination_deg": 0.7471892702038152,
+          "pvt_baseline_inclination_deg": 0.5253091948574121,
+          "vector_difference_m": 0.0297800679046964,
+          "pvt_time_s": 155.799999952,
+          "pvt_minus_carrier_time_s": -0.1979999545399096,
+          "pvt_available_at_carrier_time": true,
+          "pvt_length_m": 0.3507511509953544,
+          "pvt_working_isotropic_std_mm": 24.53670719554684,
+          "pvt_fixed_NED_m": [
+            -0.3506411966247498,
+            0.00817190050410943,
+            -0.0032157730455395495
+          ],
+          "pvt_ecef_m": [
+            -0.10839999979361316,
+            0.20050000026822398,
+            -0.2665999997407216
+          ]
+        },
+        "nearest_plus_2ms_OFFLINE_ONLY": {
+          "angle_3d_deg": 1.3208267699147538,
+          "angle_3d_in_common_NED_deg": 1.320826769914749,
+          "horizontal_baseline_azimuth_difference_deg": -0.4149875602570319,
+          "carrier_baseline_azimuth_deg": 173.79992703196868,
+          "pvt_baseline_azimuth_deg": 174.2149145922257,
+          "carrier_horizontal_projection_m": 0.349970238975156,
+          "pvt_horizontal_projection_m": 0.35060709046793626,
+          "carrier_baseline_inclination_deg": 0.7471892702038152,
+          "pvt_baseline_inclination_deg": 2.0011727660849794,
+          "vector_difference_m": 0.008119371064033487,
+          "pvt_time_s": 156.0,
+          "pvt_minus_carrier_time_s": 0.002000093460083008,
+          "pvt_available_at_carrier_time": false,
+          "pvt_length_m": 0.3508210518545229,
+          "pvt_working_isotropic_std_mm": 24.607315985291855,
+          "pvt_fixed_NED_m": [
+            -0.3488214418803075,
+            0.03534025425679488,
+            -0.012250654591579035
+          ],
+          "pvt_ecef_m": [
+            -0.13530000066385525,
+            0.1936000008135946,
+            -0.2593999998644001
+          ]
+        }
+      },
+      "native": {
+        "off": {
+          "carrier_accepted": 1,
+          "carrier_rejected": 0,
+          "carrier_reason": "ACCEPT",
+          "carrier_NIS_3dof": 1.4476222445991902,
+          "carrier_qa_R_scale": 1.0,
+          "carrier_sa_R_scale": 1.0,
+          "past_pvt_C1_accepted": 1,
+          "past_pvt_C1_reason": "ACCEPT",
+          "past_pvt_C1_NIS_3dof": 1.0370543150136062,
+          "carrier_native_observed_current_NED_m": [
+            -0.34792269655923636,
+            0.03780177910223269,
+            -0.004563191389318487
+          ],
+          "R_current_from_latest_NAV_time_s": 155.989059,
+          "R_current_anchor_age_s": 0.008940906539919524,
+          "carrier_native_z_minus_Rcurrent_ecef_norm_m": 4.887895919233983e-10,
+          "carrier_native_z_minus_Rfixed_ecef_norm_m": 4.905145957257947e-06,
+          "past_compare_in_current_NED": {
+            "angle_3d_deg": 4.86975680807811,
+            "angle_3d_in_common_NED_deg": 4.869756808078113,
+            "horizontal_baseline_azimuth_difference_deg": -4.865006043997312,
+            "carrier_baseline_azimuth_deg": 173.79914088604167,
+            "pvt_baseline_azimuth_deg": 178.66414693003898,
+            "carrier_horizontal_projection_m": 0.34997025199951115,
+            "pvt_horizontal_projection_m": 0.3507364139936659,
+            "carrier_baseline_inclination_deg": 0.7470257533003145,
+            "pvt_baseline_inclination_deg": 0.5252235189086059,
+            "vector_difference_m": 0.0297800679046964
+          },
+          "fixed_vs_current_azimuth_difference_of_differences_deg": -3.4302615858905483e-06
+        },
+        "body": {
+          "carrier_accepted": 0,
+          "carrier_rejected": 1,
+          "carrier_reason": "NIS_3DOF_REJECT",
+          "carrier_NIS_3dof": 15.277758793612032,
+          "carrier_qa_R_scale": 1.0,
+          "carrier_sa_R_scale": 1.0,
+          "past_pvt_C1_accepted": 1,
+          "past_pvt_C1_reason": "ACCEPT",
+          "past_pvt_C1_NIS_3dof": 0.9040297305261242,
+          "carrier_native_observed_current_NED_m": [
+            -0.34792269654222285,
+            0.037801779242959785,
+            -0.004563191520730009
+          ],
+          "R_current_from_latest_NAV_time_s": 155.989059,
+          "R_current_anchor_age_s": 0.008940906539919524,
+          "carrier_native_z_minus_Rcurrent_ecef_norm_m": 4.985768976628728e-10,
+          "carrier_native_z_minus_Rfixed_ecef_norm_m": 4.905257969682855e-06,
+          "past_compare_in_current_NED": {
+            "angle_3d_deg": 4.86975680807811,
+            "angle_3d_in_common_NED_deg": 4.869756808078111,
+            "horizontal_baseline_azimuth_difference_deg": -4.8650060441231915,
+            "carrier_baseline_azimuth_deg": 173.7991408644734,
+            "pvt_baseline_azimuth_deg": 178.6641469085966,
+            "carrier_horizontal_projection_m": 0.3499702519977492,
+            "pvt_horizontal_projection_m": 0.35073641399229644,
+            "carrier_baseline_inclination_deg": 0.7470257754229117,
+            "pvt_baseline_inclination_deg": 0.5252235433123535,
+            "vector_difference_m": 0.0297800679046964
+          },
+          "fixed_vs_current_azimuth_difference_of_differences_deg": -3.4303874656416156e-06
+        }
+      }
+    },
+    {
+      "measurement_time_s": 169.99799990653992,
+      "case_id": "partial_0168.00",
+      "raw_conditional_GLS_length_m": 0.35519596563238776,
+      "published_length_constrained_m": 0.3500000000000001,
+      "raw_conditional_std_principal_mm": [
+        3.261776836775421,
+        5.650285937153718,
+        10.938431157009067
+      ],
+      "working_std_with_floor_principal_mm": [
+        9.726220461291026,
+        10.765031699921215,
+        14.269178410312849
+      ],
+      "floor_variance_m2": 8.396017632871156e-05,
+      "raw_conditional_baseline_ecef_m": [
+        -0.3180810430708261,
+        -0.15720657482357475,
+        0.016574585145319724
+      ],
+      "published_baseline_ecef_m": [
+        -0.31295076056934085,
+        -0.15601600932008738,
+        0.014860225264294669
+      ],
+      "N_truth_known": false,
+      "comparisons": {
+        "past_only": {
+          "angle_3d_deg": 1.4307742498734901,
+          "angle_3d_in_common_NED_deg": 1.4307742498734926,
+          "horizontal_baseline_azimuth_difference_deg": -1.2310380035907542,
+          "carrier_baseline_azimuth_deg": 88.03580254213557,
+          "pvt_baseline_azimuth_deg": 89.26684054572632,
+          "carrier_horizontal_projection_m": 0.34988869930272204,
+          "pvt_horizontal_projection_m": 0.3595314966395524,
+          "carrier_baseline_inclination_deg": 1.4449874000762524,
+          "pvt_baseline_inclination_deg": 2.1751880580537066,
+          "vector_difference_m": 0.01320533544851415,
+          "pvt_time_s": 169.799999952,
+          "pvt_minus_carrier_time_s": -0.1979999545399096,
+          "pvt_available_at_carrier_time": true,
+          "pvt_length_m": 0.3597907450997452,
+          "pvt_working_isotropic_std_mm": 27.162105956644822,
+          "pvt_fixed_NED_m": [
+            0.004600456172234146,
+            0.35950206241255955,
+            -0.013655884576010635
+          ],
+          "pvt_ecef_m": [
+            -0.32550000026821935,
+            -0.15280000027269164,
+            0.012300000060343864
+          ]
+        },
+        "nearest_plus_2ms_OFFLINE_ONLY": {
+          "angle_3d_deg": 6.056927296874447,
+          "angle_3d_in_common_NED_deg": 6.056927296874447,
+          "horizontal_baseline_azimuth_difference_deg": 5.424862762171017,
+          "carrier_baseline_azimuth_deg": 88.03580254213557,
+          "pvt_baseline_azimuth_deg": 82.61093977996454,
+          "carrier_horizontal_projection_m": 0.34988869930272204,
+          "pvt_horizontal_projection_m": 0.35021635837930254,
+          "carrier_baseline_inclination_deg": 1.4449874000762524,
+          "pvt_baseline_inclination_deg": -1.2499605197149952,
+          "vector_difference_m": 0.036999482436100864,
+          "pvt_time_s": 170.0,
+          "pvt_minus_carrier_time_s": 0.002000093460083008,
+          "pvt_available_at_carrier_time": false,
+          "pvt_length_m": 0.3502997149598314,
+          "pvt_working_isotropic_std_mm": 26.375936002348812,
+          "pvt_fixed_NED_m": [
+            0.04504001230142407,
+            0.3473080692531454,
+            0.007641506689068933
+          ],
+          "pvt_ecef_m": [
+            -0.29579999996350564,
+            -0.1853000009432462,
+            0.029599999543279822
+          ]
+        }
+      },
+      "native": {
+        "off": {
+          "carrier_accepted": 1,
+          "carrier_rejected": 0,
+          "carrier_reason": "ACCEPT",
+          "carrier_NIS_3dof": 4.079009021608317,
+          "carrier_qa_R_scale": 1.0,
+          "carrier_sa_R_scale": 1.0,
+          "past_pvt_C1_accepted": 1,
+          "past_pvt_C1_reason": "ACCEPT",
+          "past_pvt_C1_NIS_3dof": 0.7644339788637693,
+          "carrier_native_observed_current_NED_m": [
+            0.011997643567780748,
+            0.3496830966154072,
+            -0.008819778357778068
+          ],
+          "R_current_from_latest_NAV_time_s": 169.997072,
+          "R_current_anchor_age_s": 0.0009279065399141473,
+          "carrier_native_z_minus_Rcurrent_ecef_norm_m": 7.880286493548424e-12,
+          "carrier_native_z_minus_Rfixed_ecef_norm_m": 8.106724387519476e-06,
+          "past_compare_in_current_NED": {
+            "angle_3d_deg": 1.4307742498734901,
+            "angle_3d_in_common_NED_deg": 1.4307742498734881,
+            "horizontal_baseline_azimuth_difference_deg": -1.231037358223432,
+            "carrier_baseline_azimuth_deg": 88.03494992863973,
+            "pvt_baseline_azimuth_deg": 89.26598728686318,
+            "carrier_horizontal_projection_m": 0.3498888559380124,
+            "pvt_horizontal_projection_m": 0.35953173903801117,
+            "carrier_baseline_inclination_deg": 1.4439702110425776,
+            "pvt_baseline_inclination_deg": 2.1741707929070286,
+            "vector_difference_m": 0.01320533544851415
+          },
+          "fixed_vs_current_azimuth_difference_of_differences_deg": 6.453673222495127e-07
+        },
+        "body": {
+          "carrier_accepted": 1,
+          "carrier_rejected": 0,
+          "carrier_reason": "ACCEPT",
+          "carrier_NIS_3dof": 2.5954571427897393,
+          "carrier_qa_R_scale": 1.0,
+          "carrier_sa_R_scale": 1.0,
+          "past_pvt_C1_accepted": 1,
+          "past_pvt_C1_reason": "ACCEPT",
+          "past_pvt_C1_NIS_3dof": 0.8828602044207885,
+          "carrier_native_observed_current_NED_m": [
+            0.011997643331452671,
+            0.3496830966164155,
+            -0.00881977863928263
+          ],
+          "R_current_from_latest_NAV_time_s": 169.997072,
+          "R_current_anchor_age_s": 0.0009279065399141473,
+          "carrier_native_z_minus_Rcurrent_ecef_norm_m": 9.504147176215043e-12,
+          "carrier_native_z_minus_Rfixed_ecef_norm_m": 8.106356832415964e-06,
+          "past_compare_in_current_NED": {
+            "angle_3d_deg": 1.4307742498734901,
+            "angle_3d_in_common_NED_deg": 1.4307742498734917,
+            "horizontal_baseline_azimuth_difference_deg": -1.2310373580878888,
+            "carrier_baseline_azimuth_deg": 88.03494996749468,
+            "pvt_baseline_azimuth_deg": 89.26598732558257,
+            "carrier_horizontal_projection_m": 0.34988885593088526,
+            "pvt_horizontal_projection_m": 0.35953173902691404,
+            "carrier_baseline_inclination_deg": 1.443970257342727,
+            "pvt_baseline_inclination_deg": 2.174170839488583,
+            "vector_difference_m": 0.01320533544851415
+          },
+          "fixed_vs_current_azimuth_difference_of_differences_deg": 6.455028653817863e-07
+        }
+      }
+    },
+    {
+      "measurement_time_s": 171.99799990653992,
+      "case_id": "partial_0170.00",
+      "raw_conditional_GLS_length_m": 0.35429296895271484,
+      "published_length_constrained_m": 0.3499999999999998,
+      "raw_conditional_std_principal_mm": [
+        3.6775888194908535,
+        5.426835553348317,
+        11.803580479487975
+      ],
+      "working_std_with_floor_principal_mm": [
+        9.87344093282356,
+        10.649446955208374,
+        14.942713557599275
+      ],
+      "floor_variance_m2": 8.396017632871156e-05,
+      "raw_conditional_baseline_ecef_m": [
+        -0.3021784600715255,
+        -0.18053761040699437,
+        0.04022259746290825
+      ],
+      "published_baseline_ecef_m": [
+        -0.298538231916324,
+        -0.17848303921451902,
+        0.038970871135034925
+      ],
+      "N_truth_known": false,
+      "comparisons": {
+        "past_only": {
+          "angle_3d_deg": 10.022040851159026,
+          "angle_3d_in_common_NED_deg": 10.022040851159026,
+          "horizontal_baseline_azimuth_difference_deg": 1.1461943709333582,
+          "carrier_baseline_azimuth_deg": 82.19729267899676,
+          "pvt_baseline_azimuth_deg": 81.0510983080634,
+          "carrier_horizontal_projection_m": 0.34997723438398187,
+          "pvt_horizontal_projection_m": 0.35914834980390015,
+          "carrier_baseline_inclination_deg": 0.6535001105080949,
+          "pvt_baseline_inclination_deg": -9.303324612328495,
+          "vector_difference_m": 0.06388685601244491,
+          "pvt_time_s": 171.799999952,
+          "pvt_minus_carrier_time_s": -0.1979999545399096,
+          "pvt_available_at_carrier_time": true,
+          "pvt_length_m": 0.3639354336281413,
+          "pvt_working_isotropic_std_mm": 25.814143410154053,
+          "pvt_fixed_NED_m": [
+            0.05586680049436765,
+            0.35477660262394295,
+            0.05883419654621491
+          ],
+          "pvt_ecef_m": [
+            -0.28200000012293613,
+            -0.2299999995157135,
+            0.005000000353905465
+          ]
+        },
+        "nearest_plus_2ms_OFFLINE_ONLY": {
+          "angle_3d_deg": 8.457869682547797,
+          "angle_3d_in_common_NED_deg": 8.457869682547795,
+          "horizontal_baseline_azimuth_difference_deg": 3.1362511057247957,
+          "carrier_baseline_azimuth_deg": 82.19729267899676,
+          "pvt_baseline_azimuth_deg": 79.06104157327196,
+          "carrier_horizontal_projection_m": 0.34997723438398187,
+          "pvt_horizontal_projection_m": 0.3615318279503624,
+          "carrier_baseline_inclination_deg": 0.6535001105080949,
+          "pvt_baseline_inclination_deg": -7.204434172333744,
+          "vector_difference_m": 0.054606409385334065,
+          "pvt_time_s": 172.0,
+          "pvt_minus_carrier_time_s": 0.002000093460083008,
+          "pvt_available_at_carrier_time": false,
+          "pvt_length_m": 0.36440883618915093,
+          "pvt_working_isotropic_std_mm": 26.108427758101406,
+          "pvt_fixed_NED_m": [
+            0.06860539493222362,
+            0.35496276200092325,
+            0.045700517191832546
+          ],
+          "pvt_ecef_m": [
+            -0.28300000028685396,
+            -0.22839999943971495,
+            0.02319999970496345
+          ]
+        }
+      },
+      "native": {
+        "off": {
+          "carrier_accepted": 1,
+          "carrier_rejected": 0,
+          "carrier_reason": "ACCEPT",
+          "carrier_NIS_3dof": 2.6771043056463424,
+          "carrier_qa_R_scale": 1.0,
+          "carrier_sa_R_scale": 1.0,
+          "past_pvt_C1_accepted": 1,
+          "past_pvt_C1_reason": "ACCEPT",
+          "past_pvt_C1_NIS_3dof": 6.038290641321301,
+          "carrier_native_observed_current_NED_m": [
+            0.04751890276201996,
+            0.3467363087146531,
+            -0.0039857369745569145
+          ],
+          "R_current_from_latest_NAV_time_s": 171.993051,
+          "R_current_anchor_age_s": 0.0049489065399086485,
+          "carrier_native_z_minus_Rcurrent_ecef_norm_m": 2.6995402367765588e-11,
+          "carrier_native_z_minus_Rfixed_ecef_norm_m": 8.07594771832362e-06,
+          "past_compare_in_current_NED": {
+            "angle_3d_deg": 10.022040851159026,
+            "angle_3d_in_common_NED_deg": 10.022040851159018,
+            "horizontal_baseline_azimuth_difference_deg": 1.1462146535570241,
+            "carrier_baseline_azimuth_deg": 82.19644191560104,
+            "pvt_baseline_azimuth_deg": 81.05022726204402,
+            "carrier_horizontal_projection_m": 0.3499773048364977,
+            "pvt_horizontal_projection_m": 0.35914731278859435,
+            "carrier_baseline_inclination_deg": 0.6524881260112897,
+            "pvt_baseline_inclination_deg": -9.30433445707232,
+            "vector_difference_m": 0.06388685601244491
+          },
+          "fixed_vs_current_azimuth_difference_of_differences_deg": 2.0282623665934807e-05
+        },
+        "body": {
+          "carrier_accepted": 1,
+          "carrier_rejected": 0,
+          "carrier_reason": "ACCEPT",
+          "carrier_NIS_3dof": 3.7745666561428077,
+          "carrier_qa_R_scale": 1.0,
+          "carrier_sa_R_scale": 1.0,
+          "past_pvt_C1_accepted": 1,
+          "past_pvt_C1_reason": "ACCEPT",
+          "past_pvt_C1_NIS_3dof": 6.215511688309127,
+          "carrier_native_observed_current_NED_m": [
+            0.04751890272740028,
+            0.34673630871903904,
+            -0.003985737005749831
+          ],
+          "R_current_from_latest_NAV_time_s": 171.993051,
+          "R_current_anchor_age_s": 0.0049489065399086485,
+          "carrier_native_z_minus_Rcurrent_ecef_norm_m": 2.7556266808670042e-11,
+          "carrier_native_z_minus_Rfixed_ecef_norm_m": 8.07590138583827e-06,
+          "past_compare_in_current_NED": {
+            "angle_3d_deg": 10.022040851159026,
+            "angle_3d_in_common_NED_deg": 10.022040851159023,
+            "horizontal_baseline_azimuth_difference_deg": 1.1462146509261686,
+            "carrier_baseline_azimuth_deg": 82.19644192185707,
+            "pvt_baseline_azimuth_deg": 81.0502272709309,
+            "carrier_horizontal_projection_m": 0.34997730483610184,
+            "pvt_horizontal_projection_m": 0.35914731279413065,
+            "carrier_baseline_inclination_deg": 0.6524881317016029,
+            "pvt_baseline_inclination_deg": -9.30433445168142,
+            "vector_difference_m": 0.06388685601244491
+          },
+          "fixed_vs_current_azimuth_difference_of_differences_deg": 2.027999281040138e-05
+        }
+      }
+    },
+    {
+      "measurement_time_s": 295.9979999065399,
+      "case_id": "partial_0294.00",
+      "raw_conditional_GLS_length_m": 0.33116137975478943,
+      "published_length_constrained_m": 0.35,
+      "raw_conditional_std_principal_mm": [
+        3.1335037988265575,
+        7.456538176618248,
+        14.191220040924314
+      ],
+      "working_std_with_floor_principal_mm": [
+        9.683956959113974,
+        11.81355737735577,
+        16.8923326565233
+      ],
+      "floor_variance_m2": 8.396017632871156e-05,
+      "raw_conditional_baseline_ecef_m": [
+        0.14517598185115493,
+        -0.18241383875215778,
+        0.23519563169062213
+      ],
+      "published_baseline_ecef_m": [
+        0.16801342261482632,
+        -0.19437832778660125,
+        0.23767321159132834
+      ],
+      "N_truth_known": false,
+      "comparisons": {
+        "past_only": {
+          "angle_3d_deg": 7.11225965750694,
+          "angle_3d_in_common_NED_deg": 7.112259657506942,
+          "horizontal_baseline_azimuth_difference_deg": -2.6323640704196407,
+          "carrier_baseline_azimuth_deg": -10.65128244402698,
+          "pvt_baseline_azimuth_deg": -8.01891837360733,
+          "carrier_horizontal_projection_m": 0.3479452986763799,
+          "pvt_horizontal_projection_m": 0.3693740596733451,
+          "carrier_baseline_inclination_deg": -6.211416489617432,
+          "pvt_baseline_inclination_deg": 0.3977018684122465,
+          "vector_difference_m": 0.0486339322183446,
+          "pvt_time_s": 295.799999952,
+          "pvt_minus_carrier_time_s": -0.1979999545399096,
+          "pvt_available_at_carrier_time": true,
+          "pvt_length_m": 0.3693829581386894,
+          "pvt_working_isotropic_std_mm": 24.89176570675532,
+          "pvt_fixed_NED_m": [
+            0.36576234282910036,
+            -0.05152770640864546,
+            -0.0025639430026522803
+          ],
+          "pvt_ecef_m": [
+            0.1496000001206997,
+            -0.18599999882281365,
+            0.2819000002928143
+          ]
+        },
+        "nearest_plus_2ms_OFFLINE_ONLY": {
+          "angle_3d_deg": 6.998061771594714,
+          "angle_3d_in_common_NED_deg": 6.998061771594715,
+          "horizontal_baseline_azimuth_difference_deg": -1.1115783118420381,
+          "carrier_baseline_azimuth_deg": -10.65128244402698,
+          "pvt_baseline_azimuth_deg": -9.53970413218494,
+          "carrier_horizontal_projection_m": 0.3479452986763799,
+          "pvt_horizontal_projection_m": 0.36256537698490193,
+          "carrier_baseline_inclination_deg": -6.211416489617432,
+          "pvt_baseline_inclination_deg": 0.6981149755575754,
+          "vector_difference_m": 0.04527046652688203,
+          "pvt_time_s": 296.0,
+          "pvt_minus_carrier_time_s": 0.002000093460083008,
+          "pvt_available_at_carrier_time": false,
+          "pvt_length_m": 0.3625922918273956,
+          "pvt_working_isotropic_std_mm": 24.820354550247668,
+          "pvt_fixed_NED_m": [
+            0.35755145750607653,
+            -0.06008833350563503,
+            -0.004417861976019566
+          ],
+          "pvt_ecef_m": [
+            0.15430000051855994,
+            -0.17619999963789928,
+            0.27680000010877875
+          ]
+        }
+      },
+      "native": {
+        "off": {
+          "carrier_accepted": 0,
+          "carrier_rejected": 1,
+          "carrier_reason": "NIS_3DOF_REJECT",
+          "carrier_NIS_3dof": 13.599158423354172,
+          "carrier_qa_R_scale": 1.0,
+          "carrier_sa_R_scale": 1.0,
+          "past_pvt_C1_accepted": 1,
+          "past_pvt_C1_reason": "ACCEPT",
+          "past_pvt_C1_NIS_3dof": 0.6876899276584647,
+          "carrier_native_observed_current_NED_m": [
+            0.3419499468471615,
+            -0.06431144464340492,
+            0.03787178288781318
+          ],
+          "R_current_from_latest_NAV_time_s": 295.99506,
+          "R_current_anchor_age_s": 0.0029399065398934,
+          "carrier_native_z_minus_Rcurrent_ecef_norm_m": 1.5333088999146508e-10,
+          "carrier_native_z_minus_Rfixed_ecef_norm_m": 2.72459265752062e-06,
+          "past_compare_in_current_NED": {
+            "angle_3d_deg": 7.11225965750694,
+            "angle_3d_in_common_NED_deg": 7.112259657506938,
+            "horizontal_baseline_azimuth_difference_deg": -2.6323808002968008,
+            "carrier_baseline_azimuth_deg": -10.651350059971293,
+            "pvt_baseline_azimuth_deg": -8.01896925967449,
+            "carrier_horizontal_projection_m": 0.34794500723518673,
+            "pvt_horizontal_projection_m": 0.3693740796722122,
+            "carrier_baseline_inclination_deg": -6.211857423194134,
+            "pvt_baseline_inclination_deg": 0.3972547074535414,
+            "vector_difference_m": 0.0486339322183446
+          },
+          "fixed_vs_current_azimuth_difference_of_differences_deg": -1.6729877160059914e-05
+        },
+        "body": {
+          "carrier_accepted": 0,
+          "carrier_rejected": 1,
+          "carrier_reason": "NIS_3DOF_REJECT",
+          "carrier_NIS_3dof": 16.740274483720523,
+          "carrier_qa_R_scale": 1.0,
+          "carrier_sa_R_scale": 1.0,
+          "past_pvt_C1_accepted": 1,
+          "past_pvt_C1_reason": "ACCEPT",
+          "past_pvt_C1_NIS_3dof": 0.6843433375446568,
+          "carrier_native_observed_current_NED_m": [
+            0.3419499469284334,
+            -0.06431144431993463,
+            0.03787178270329383
+          ],
+          "R_current_from_latest_NAV_time_s": 295.99506,
+          "R_current_anchor_age_s": 0.0029399065398934,
+          "carrier_native_z_minus_Rcurrent_ecef_norm_m": 1.5597113250463747e-10,
+          "carrier_native_z_minus_Rfixed_ecef_norm_m": 2.7243590286327994e-06,
+          "past_compare_in_current_NED": {
+            "angle_3d_deg": 7.11225965750694,
+            "angle_3d_in_common_NED_deg": 7.112259657506939,
+            "horizontal_baseline_azimuth_difference_deg": -2.6323807929778695,
+            "carrier_baseline_azimuth_deg": -10.651350005530484,
+            "pvt_baseline_azimuth_deg": -8.018969212552614,
+            "carrier_horizontal_projection_m": 0.3479450072548931,
+            "pvt_horizontal_projection_m": 0.36937407967075103,
+            "carrier_baseline_inclination_deg": -6.211857393380596,
+            "pvt_baseline_inclination_deg": 0.397254740142901,
+            "vector_difference_m": 0.0486339322183446
+          },
+          "fixed_vs_current_azimuth_difference_of_differences_deg": -1.672255822882107e-05
+        }
+      }
+    },
+    {
+      "measurement_time_s": 301.9979999065399,
+      "case_id": "partial_0300.00",
+      "raw_conditional_GLS_length_m": 0.32394214362076285,
+      "published_length_constrained_m": 0.3500000000000001,
+      "raw_conditional_std_principal_mm": [
+        3.2117362513527965,
+        7.859588769748018,
+        14.368209054530764
+      ],
+      "working_std_with_floor_principal_mm": [
+        9.70955334075493,
+        12.07200529979426,
+        17.041291258687274
+      ],
+      "floor_variance_m2": 8.396017632871156e-05,
+      "raw_conditional_baseline_ecef_m": [
+        0.3092956129510261,
+        -0.024620397600585167,
+        0.09310516765922876
+      ],
+      "published_baseline_ecef_m": [
+        0.3360491573772522,
+        -0.03897485711960245,
+        0.08973251550327457
+      ],
+      "N_truth_known": false,
+      "comparisons": {
+        "past_only": {
+          "angle_3d_deg": 16.4560852589609,
+          "angle_3d_in_common_NED_deg": 16.4560852589609,
+          "horizontal_baseline_azimuth_difference_deg": -14.597948863859699,
+          "carrier_baseline_azimuth_deg": -56.620841786671214,
+          "pvt_baseline_azimuth_deg": -42.02289292281152,
+          "carrier_horizontal_projection_m": 0.33992824220492196,
+          "pvt_horizontal_projection_m": 0.35293251785899377,
+          "carrier_baseline_inclination_deg": -13.778541149945994,
+          "pvt_baseline_inclination_deg": -5.763499064353606,
+          "vector_difference_m": 0.10096404243628013,
+          "pvt_time_s": 301.799999952,
+          "pvt_minus_carrier_time_s": -0.1979999545399096,
+          "pvt_available_at_carrier_time": true,
+          "pvt_length_m": 0.35472569668860704,
+          "pvt_working_isotropic_std_mm": 24.465894629054542,
+          "pvt_fixed_NED_m": [
+            0.26218559492299676,
+            -0.23626272659300973,
+            0.03562243294510736
+          ],
+          "pvt_ecef_m": [
+            0.2985999998636559,
+            -0.07060000021011098,
+            0.17799999983981657
+          ]
+        },
+        "nearest_plus_2ms_OFFLINE_ONLY": {
+          "angle_3d_deg": 4.856062098822167,
+          "angle_3d_in_common_NED_deg": 4.856062098822163,
+          "horizontal_baseline_azimuth_difference_deg": -2.78586487894853,
+          "carrier_baseline_azimuth_deg": -56.620841786671214,
+          "pvt_baseline_azimuth_deg": -53.83497690772269,
+          "carrier_horizontal_projection_m": 0.33992824220492196,
+          "pvt_horizontal_projection_m": 0.34307265786068125,
+          "carrier_baseline_inclination_deg": -13.778541149945994,
+          "pvt_baseline_inclination_deg": -9.760245266335062,
+          "vector_difference_m": 0.02963524162909955,
+          "pvt_time_s": 302.0,
+          "pvt_minus_carrier_time_s": 0.002000093460083008,
+          "pvt_available_at_carrier_time": false,
+          "pvt_length_m": 0.34811130396763174,
+          "pvt_working_isotropic_std_mm": 24.465894629054542,
+          "pvt_fixed_NED_m": [
+            0.20245161436332637,
+            -0.27696965973419374,
+            0.05901382362169727
+          ],
+          "pvt_ecef_m": [
+            0.3259999998845156,
+            -0.03419999964535622,
+            0.11720000021159699
+          ]
+        }
+      },
+      "native": {
+        "off": {
+          "carrier_accepted": 0,
+          "carrier_rejected": 1,
+          "carrier_reason": "NIS_3DOF_REJECT",
+          "carrier_NIS_3dof": 15.207791391980255,
+          "carrier_qa_R_scale": 1.0,
+          "carrier_sa_R_scale": 1.0,
+          "past_pvt_C1_accepted": 1,
+          "past_pvt_C1_reason": "ACCEPT",
+          "past_pvt_C1_NIS_3dof": 1.3140148433635819,
+          "carrier_native_observed_current_NED_m": [
+            0.1870200524838464,
+            -0.2838564106655832,
+            0.08336089066817341
+          ],
+          "R_current_from_latest_NAV_time_s": 301.995049,
+          "R_current_anchor_age_s": 0.002950906539922471,
+          "carrier_native_z_minus_Rcurrent_ecef_norm_m": 1.4416557354947618e-10,
+          "carrier_native_z_minus_Rfixed_ecef_norm_m": 1.6251325815653043e-06,
+          "past_compare_in_current_NED": {
+            "angle_3d_deg": 16.4560852589609,
+            "angle_3d_in_common_NED_deg": 16.4560852589609,
+            "horizontal_baseline_azimuth_difference_deg": -14.598011059795482,
+            "carrier_baseline_azimuth_deg": -56.62093357009821,
+            "pvt_baseline_azimuth_deg": -42.022922510302735,
+            "carrier_horizontal_projection_m": 0.3399278775201171,
+            "pvt_horizontal_projection_m": 0.3529323077629999,
+            "carrier_baseline_inclination_deg": -13.778791808095121,
+            "pvt_baseline_inclination_deg": -5.76383697676079,
+            "vector_difference_m": 0.10096404243628013
+          },
+          "fixed_vs_current_azimuth_difference_of_differences_deg": -6.219593578293825e-05
+        },
+        "body": {
+          "carrier_accepted": 1,
+          "carrier_rejected": 0,
+          "carrier_reason": "ACCEPT",
+          "carrier_NIS_3dof": 5.724546672961238,
+          "carrier_qa_R_scale": 1.0,
+          "carrier_sa_R_scale": 1.0,
+          "past_pvt_C1_accepted": 1,
+          "past_pvt_C1_reason": "ACCEPT",
+          "past_pvt_C1_NIS_3dof": 0.8756736555865308,
+          "carrier_native_observed_current_NED_m": [
+            0.18702005218595738,
+            -0.2838564111189547,
+            0.08336088979268894
+          ],
+          "R_current_from_latest_NAV_time_s": 301.995049,
+          "R_current_anchor_age_s": 0.002950906539922471,
+          "carrier_native_z_minus_Rcurrent_ecef_norm_m": 1.433905384991589e-10,
+          "carrier_native_z_minus_Rfixed_ecef_norm_m": 1.6244503100918358e-06,
+          "past_compare_in_current_NED": {
+            "angle_3d_deg": 16.4560852589609,
+            "angle_3d_in_common_NED_deg": 16.456085258960893,
+            "horizontal_baseline_azimuth_difference_deg": -14.598011052138162,
+            "carrier_baseline_azimuth_deg": -56.62093365418583,
+            "pvt_baseline_azimuth_deg": -42.022922602047664,
+            "carrier_horizontal_projection_m": 0.3399278777338222,
+            "pvt_horizontal_projection_m": 0.35293230785554297,
+            "carrier_baseline_inclination_deg": -13.778791661210873,
+            "pvt_baseline_inclination_deg": -5.7638368279215,
+            "vector_difference_m": 0.10096404243628013
+          },
+          "fixed_vs_current_azimuth_difference_of_differences_deg": -6.218827846282693e-05
+        }
+      }
+    }
+  ],
+  "coordinate_numerical_checks": {
+    "max_native_carrier_z_minus_current_NED_from_last_NAV_m": 4.985768976628728e-10,
+    "max_native_current_NED_minus_fixed_NED_m": 8.106724387519476e-06,
+    "max_comparison_azimuth_change_fixed_vs_current_deg": 7.64194306839272e-05
+  },
+  "sparsity": {
+    "off": {
+      "accepted_times_s": [
+        135.99799990653992,
+        141.99799990653992,
+        155.99799990653992,
+        169.99799990653992,
+        171.99799990653992
+      ],
+      "first_update_delay_after_66_s": 69.99799990653992,
+      "last_update_to_end340_s": 168.00200009346008,
+      "max_gap_between_accepted_updates_s": 14.0,
+      "max_interval_without_accepted_carrier_in_full_window_s": 168.00200009346008
+    },
+    "body": {
+      "accepted_times_s": [
+        135.99799990653992,
+        141.99799990653992,
+        169.99799990653992,
+        171.99799990653992,
+        301.9979999065399
+      ],
+      "first_update_delay_after_66_s": 69.99799990653992,
+      "last_update_to_end340_s": 38.00200009346008,
+      "max_gap_between_accepted_updates_s": 130.0,
+      "max_interval_without_accepted_carrier_in_full_window_s": 130.0
+    }
+  },
+  "interpretation": "Large availability deficit is directly observed; a sparse-only causal attribution is not established. No 90/180 degree reversal is found, but degree-scale vector/inclination discrepancies persist even in the +2ms offline comparison."
+}

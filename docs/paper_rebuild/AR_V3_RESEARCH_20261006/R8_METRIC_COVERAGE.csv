@@ -1,0 +1,316 @@
+sequence,method,metric,value,unit,status,source,meaning
+BY2,ORIGINAL_V3_F04,yaw_rmse_deg,1.8862718548526467,deg,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,horizontal_rmse_m,0.09790607774950152,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,up_rmse_m,0.04899590433188947,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,yaw_p95_absolute_deg,3.518066976630167,deg,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,yaw_p99_absolute_deg,5.221692511562299,deg,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,yaw_max_absolute_deg,8.770338719238396,deg,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,horizontal_p95_m,0.2651433111192599,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,horizontal_p99_m,0.3764794854791641,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,horizontal_max_m,0.5413779544115519,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,up_p95_absolute_m,0.09923790735213835,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,up_p99_absolute_m,0.13776076692806755,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,up_max_absolute_m,0.3415064349426196,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,coverage_ratio,1.0,matched/output fraction,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,carrier_measurement_coverage,NA,fraction,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,carrier_longest_gap_s,NA,s,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,integer_reacquisition_s,NA,s,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,accepted_integer_count,NA,count,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,native_carrier_update_count,NA,count,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,physical_correct_integer_fix_rate,NA,fraction,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2,ORIGINAL_V3_F04,end_to_end_online_latency_s,NA,s,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2,EXISTING_CARRIER_ON_V3,yaw_rmse_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,horizontal_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,up_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,yaw_p95_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,yaw_p99_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,yaw_max_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,horizontal_p95_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,horizontal_p99_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,horizontal_max_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,up_p95_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,up_p99_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,up_max_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,coverage_ratio,NA,matched/output fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,carrier_measurement_coverage,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,carrier_longest_gap_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,integer_reacquisition_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,accepted_integer_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,native_carrier_update_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,physical_correct_integer_fix_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,EXISTING_CARRIER_ON_V3,end_to_end_online_latency_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,yaw_rmse_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,horizontal_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,up_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,yaw_p95_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,yaw_p99_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,yaw_max_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,horizontal_p95_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,horizontal_p99_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,horizontal_max_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,up_p95_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,up_p99_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,up_max_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,coverage_ratio,NA,matched/output fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,carrier_measurement_coverage,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,carrier_longest_gap_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,integer_reacquisition_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,accepted_integer_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,native_carrier_update_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,physical_correct_integer_fix_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_ON_V3,end_to_end_online_latency_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,yaw_rmse_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,horizontal_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,up_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,yaw_p95_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,yaw_p99_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,yaw_max_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,horizontal_p95_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,horizontal_p99_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,horizontal_max_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,up_p95_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,up_p99_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,up_max_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,coverage_ratio,NA,matched/output fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,carrier_measurement_coverage,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,carrier_longest_gap_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,integer_reacquisition_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,accepted_integer_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,native_carrier_update_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,physical_correct_integer_fix_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,INDEPENDENT_VELOCITY_ON_V3,end_to_end_online_latency_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,yaw_rmse_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,horizontal_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,up_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,yaw_p95_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,yaw_p99_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,yaw_max_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,horizontal_p95_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,horizontal_p99_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,horizontal_max_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,up_p95_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,up_p99_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,up_max_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,coverage_ratio,NA,matched/output fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,carrier_measurement_coverage,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,carrier_longest_gap_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,integer_reacquisition_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,accepted_integer_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,native_carrier_update_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,physical_correct_integer_fix_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,end_to_end_online_latency_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,ORIGINAL_V3_F04,yaw_rmse_deg,1.93377013508875,deg,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,horizontal_rmse_m,0.06836245149191253,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,up_rmse_m,0.04535210822197352,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,yaw_p95_absolute_deg,3.6481369134119714,deg,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,yaw_p99_absolute_deg,5.166551563657648,deg,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,yaw_max_absolute_deg,7.92404087961421,deg,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,horizontal_p95_m,0.1446270289793796,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,horizontal_p99_m,0.25969649861203814,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,horizontal_max_m,0.3415174128139812,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,up_p95_absolute_m,0.08947386313355736,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,up_p99_absolute_m,0.16984097166550055,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,up_max_absolute_m,0.294653816848621,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,coverage_ratio,1.0,matched/output fraction,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,carrier_measurement_coverage,NA,fraction,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,carrier_longest_gap_s,NA,s,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,integer_reacquisition_s,NA,s,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,accepted_integer_count,NA,count,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,native_carrier_update_count,NA,count,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,physical_correct_integer_fix_rate,NA,fraction,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2H,ORIGINAL_V3_F04,end_to_end_online_latency_s,NA,s,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2H,EXISTING_CARRIER_ON_V3,yaw_rmse_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,horizontal_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,up_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,yaw_p95_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,yaw_p99_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,yaw_max_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,horizontal_p95_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,horizontal_p99_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,horizontal_max_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,up_p95_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,up_p99_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,up_max_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,coverage_ratio,NA,matched/output fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,carrier_measurement_coverage,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,carrier_longest_gap_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,integer_reacquisition_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,accepted_integer_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,native_carrier_update_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,physical_correct_integer_fix_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,EXISTING_CARRIER_ON_V3,end_to_end_online_latency_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,yaw_rmse_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,horizontal_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,up_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,yaw_p95_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,yaw_p99_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,yaw_max_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,horizontal_p95_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,horizontal_p99_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,horizontal_max_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,up_p95_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,up_p99_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,up_max_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,coverage_ratio,NA,matched/output fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,carrier_measurement_coverage,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,carrier_longest_gap_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,integer_reacquisition_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,accepted_integer_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,native_carrier_update_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,physical_correct_integer_fix_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_ON_V3,end_to_end_online_latency_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,yaw_rmse_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,horizontal_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,up_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,yaw_p95_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,yaw_p99_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,yaw_max_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,horizontal_p95_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,horizontal_p99_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,horizontal_max_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,up_p95_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,up_p99_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,up_max_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,coverage_ratio,NA,matched/output fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,carrier_measurement_coverage,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,carrier_longest_gap_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,integer_reacquisition_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,accepted_integer_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,native_carrier_update_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,physical_correct_integer_fix_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,INDEPENDENT_VELOCITY_ON_V3,end_to_end_online_latency_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,yaw_rmse_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,horizontal_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,up_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,yaw_p95_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,yaw_p99_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,yaw_max_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,horizontal_p95_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,horizontal_p99_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,horizontal_max_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,up_p95_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,up_p99_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,up_max_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,coverage_ratio,NA,matched/output fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,carrier_measurement_coverage,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,carrier_longest_gap_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,integer_reacquisition_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,accepted_integer_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,native_carrier_update_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,physical_correct_integer_fix_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2H,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,end_to_end_online_latency_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,ORIGINAL_V3_F04,yaw_rmse_deg,2.433814932823714,deg,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,horizontal_rmse_m,0.054543210912875166,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,up_rmse_m,0.04585890723786377,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,yaw_p95_absolute_deg,3.709243297643519,deg,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,yaw_p99_absolute_deg,12.501914397330193,deg,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,yaw_max_absolute_deg,13.626087646725525,deg,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,horizontal_p95_m,0.0742037488803522,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,horizontal_p99_m,0.20022943216738434,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,horizontal_max_m,0.5299847518923086,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,up_p95_absolute_m,0.08174271545455218,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,up_p99_absolute_m,0.1386078495923754,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,up_max_absolute_m,0.7456734835583303,m,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,coverage_ratio,1.0,matched/output fraction,REUSED_ORIGINAL_V3_RESULT,V3_BASELINE_METRICS.csv,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,carrier_measurement_coverage,NA,fraction,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,carrier_longest_gap_s,NA,s,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,integer_reacquisition_s,NA,s,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,accepted_integer_count,NA,count,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,native_carrier_update_count,NA,count,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,physical_correct_integer_fix_rate,NA,fraction,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2O,ORIGINAL_V3_F04,end_to_end_online_latency_s,NA,s,NOT_SUPPORTED_BY_BASELINE_EVIDENCE,GOAL_CONTRACT.md,original frozen baseline; no new solve or new carrier claim
+BY2O,EXISTING_CARRIER_ON_V3,yaw_rmse_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,horizontal_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,up_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,yaw_p95_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,yaw_p99_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,yaw_max_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,horizontal_p95_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,horizontal_p99_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,horizontal_max_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,up_p95_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,up_p99_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,up_max_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,coverage_ratio,NA,matched/output fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,carrier_measurement_coverage,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,carrier_longest_gap_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,integer_reacquisition_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,accepted_integer_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,native_carrier_update_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,physical_correct_integer_fix_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,EXISTING_CARRIER_ON_V3,end_to_end_online_latency_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,yaw_rmse_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,horizontal_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,up_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,yaw_p95_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,yaw_p99_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,yaw_max_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,horizontal_p95_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,horizontal_p99_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,horizontal_max_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,up_p95_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,up_p99_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,up_max_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,coverage_ratio,NA,matched/output fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,carrier_measurement_coverage,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,carrier_longest_gap_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,integer_reacquisition_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,accepted_integer_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,native_carrier_update_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,physical_correct_integer_fix_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_ON_V3,end_to_end_online_latency_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,yaw_rmse_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,horizontal_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,up_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,yaw_p95_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,yaw_p99_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,yaw_max_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,horizontal_p95_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,horizontal_p99_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,horizontal_max_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,up_p95_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,up_p99_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,up_max_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,coverage_ratio,NA,matched/output fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,carrier_measurement_coverage,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,carrier_longest_gap_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,integer_reacquisition_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,accepted_integer_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,native_carrier_update_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,physical_correct_integer_fix_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,INDEPENDENT_VELOCITY_ON_V3,end_to_end_online_latency_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,yaw_rmse_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,horizontal_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,up_rmse_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,yaw_p95_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,yaw_p99_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,yaw_max_absolute_deg,NA,deg,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,horizontal_p95_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,horizontal_p99_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,horizontal_max_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,up_p95_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,up_p99_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,up_max_absolute_m,NA,m,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,coverage_ratio,NA,matched/output fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,carrier_measurement_coverage,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,carrier_longest_gap_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,integer_reacquisition_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,accepted_integer_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,native_carrier_update_count,NA,count,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,physical_wrong_integer_acceptance_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,physical_correct_integer_fix_rate,NA,fraction,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run
+BY2O,NEW_MOTION_AR_PLUS_VELOCITY_ON_V3,end_to_end_online_latency_s,NA,s,NOT_EXECUTED_CONDITION_NOT_MET,motion_pair_qualification/COMPLETE.json,registered R6 positive evidence gate not met; no new V3 navigation run

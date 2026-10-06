@@ -1,0 +1,148 @@
+{
+  "schema": "candidate_envelope_fixed12_pilot.v1",
+  "execution_status": "NOT_EXECUTED_WAITING_ROOT_REGISTRATION_HEAD",
+  "scope": "BY2 saved developmental inputs; selection Gaussian relaxed support and optional whole-domain length necessity only",
+  "input": {
+    "prepared_alias": "<CARRIER_INTEGRATION>/REAL_100_340_V2",
+    "prepared_plan_sha256": "4eeb5f4536d0ac20e1ed68247d123ef5798980b0bfc6bed723fc09b54563c82e",
+    "sequence": "BY2",
+    "window_s": [
+      100.0,
+      340.0
+    ],
+    "records": 1200,
+    "family": "GPS_GAL_BDS_DUAL",
+    "start_indices": [
+      0,
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      1000,
+      1100
+    ],
+    "selection_epochs": 5,
+    "future_epochs_executed": 0,
+    "baseline_length_m": 0.35,
+    "model_pins_source": "<TRUSTED_HEADING>/ARC_SUPPORT_AUDIT_ATTEMPT01/INPUT_IDENTITY.json",
+    "lambda_library_sha256": "28c25b1cc7fade9b956bfdf77005de8fcb0a382c8411ae6e608c83b82bff53f2",
+    "model_pins_manifest_sha256": "90a1a974dcd32b10514c567ac168b44977fd3b4d5a485e0ff95d5456c9d1ef1c"
+  },
+  "selection": {
+    "method": "prepare_selected_likelihood with existing selection-only preselect_partial_labels",
+    "selection_epochs": 5,
+    "min_ambiguities": 4,
+    "max_ambiguities": 6,
+    "epoch_interval_s": 0.2,
+    "time_tolerance_s": 0.01,
+    "uses_existing_outcome_or_reference": false,
+    "likelihood": "SELECTED_OBSERVATION_MARGINAL_Q_V1",
+    "unselected_domain": "observations depending on unselected N are withheld; Q principal marginal; not integer profile or real nuisance"
+  },
+  "threshold": {
+    "distribution": "chi-square",
+    "nominal_working_coverage": 0.99,
+    "degrees_of_freedom": "number of retained selection-window scalar observations len(problem.y), not n-p",
+    "scope": "fixed raw residual cost with float constant; engineering Q and data-dependent selection do not establish real confidence coverage",
+    "absolute_cost_guard": 1e-09,
+    "relative_numerical_guard": 1e-10,
+    "max_condition_number": 1000000000000.0
+  },
+  "budget": {
+    "integer_enumeration_api_calls_max": 12,
+    "calls_per_fixed_window_max": 1,
+    "node_limit_per_call": 100000,
+    "candidate_limit_per_call": 10000,
+    "timeout_s_per_call": 30.0,
+    "timeout_scope": "cooperative enumeration timer; setup/BLAS/decorrelation cannot be hard-preempted by it; total API wall and overruns recorded",
+    "native_decorrelation_api_calls_max": 12,
+    "existing_CILS_calls": 0,
+    "sphere_optimization_calls": 0,
+    "raw_UBX_reads": 0,
+    "reference_reads": 0,
+    "navigation_calls": 0,
+    "evaluator_calls": 0,
+    "retries": 0,
+    "replacement_windows": 0
+  },
+  "length_filter": {
+    "enabled": true,
+    "scope": "all epochs of each complete-or-observed partial Gaussian continuous domain",
+    "necessary_only": true,
+    "rule": "exclude only if abs(norm(c_k)-L_k)>sqrt(rho*lambda_max(Cb_kk)) plus recorded outward/comparison guards for at least one k",
+    "keep_raw_support_separately": true,
+    "incomplete_cannot_become_complete": true,
+    "directed_prior": false
+  },
+  "azimuth": {
+    "axes": "local north/east from final selection epoch saved raw-code anchor, WGS84 ecef_to_geodetic",
+    "role": "baseline azimuth, not calibrated robot yaw",
+    "near_vertical": "horizontal disk containing origin returns full circle",
+    "angle_threshold_for_acceptance": null
+  },
+  "outputs": [
+    "fixed12 CSV including all failures",
+    "summary JSON",
+    "per-window complete/partial integer list and outer domains in scratch gzip JSONL",
+    "input/source pins, timing, stdout/stderr, terminal state"
+  ],
+  "stop_rules": [
+    "input/source/registration mismatch stops before enumeration",
+    "per-window missing model/selection unavailable retained, no replacement",
+    "timeout/node/candidate/numerical failure retained incomplete or unqualified; no union output",
+    "continue remaining fixed windows after ordinary modeled failures; never retune or retry",
+    "no future projection, no admission, no native navigation in this pilot"
+  ],
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/candidate_envelope_pilot.py": "2883eb9b3907a30fe710ba78bdc996934a4340f1f9d87e66ea6f3a29b29715c1",
+    "scripts/paper_rebuild/carrier_phase/real_trial.py": "bec8b96832d599120348579140070a6b1dda0004c7e22fc14acc18b8c941f8c1",
+    "scripts/paper_rebuild/carrier_phase/shadow_replay.py": "e00254d5f38a292690d3e392c09fc5dcfdadc67e67d545a4568ae92bcda34e81",
+    "src/legsa_gins/__init__.py": "996a06df703fd19f79cb4b8bee3ba2cbf917e35d9f25d06c21a29c7a0831715a",
+    "src/legsa_gins/paper_rebuild/__init__.py": "268d06de2fa275e95ea3319111f359187f492c66e812b1be1ccd07812f6014e9",
+    "src/legsa_gins/paper_rebuild/carrier_phase/admission.py": "6a84ca69fa3d815967f147677dd75f0f22da1c0acb344b40eeca9eb3e4e532c2",
+    "src/legsa_gins/paper_rebuild/carrier_phase/arcs.py": "5f4b030fcc55ffa5fa1bd4bb41e06641281b17248e34f32d877f8ebac7526953",
+    "src/legsa_gins/paper_rebuild/carrier_phase/candidate_envelope.py": "082e7b2aaaa8e43a3f41c6cef4bef92e76e203c101de692c159e6cc9f17b9ae1",
+    "src/legsa_gins/paper_rebuild/carrier_phase/causal_anchor.py": "36ac7303efd2106c0904483dc11f1a5d7d678286827938c8a4c66bb3278ab940",
+    "src/legsa_gins/paper_rebuild/carrier_phase/ephemeris.py": "0e095ab821618553f47e699f009a8d5622d6c66b9109a96143cfb79810803d8d",
+    "src/legsa_gins/paper_rebuild/carrier_phase/faults.py": "66ea331d87e3eacc8816ee199156fd0105accca9220bf65023b62aacd5031b96",
+    "src/legsa_gins/paper_rebuild/carrier_phase/multignss.py": "20704c075335edc7fa0e10092ca4efbd2e7a8c28a43497d514e88d31e6842555",
+    "src/legsa_gins/paper_rebuild/carrier_phase/native_sphere.py": "5e2e10aed572442f1eec8581258c66dd18049cd026a49091c392e806cebd0f33",
+    "src/legsa_gins/paper_rebuild/carrier_phase/observations.py": "637ada354ec2132c6d4aeb7f615d2e7eb1ef7f1c5ebcf7f688e2847b798ca44c",
+    "src/legsa_gins/paper_rebuild/carrier_phase/partial.py": "5ffc01ab925970dbaa7a6c41691bc5766970e8b7f2f46a3acd79538ea38450c7",
+    "src/legsa_gins/paper_rebuild/carrier_phase/selected_likelihood.py": "d128540e9a42e922d9e6251c13490254b7a83643cdd0eaf6b36733ba144a6f90",
+    "src/legsa_gins/paper_rebuild/carrier_phase/solver.py": "28fe539746aa19b616b3feadc7703fbcd328e73b1f9f42fffbc4a854a491d931",
+    "src/legsa_gins/paper_rebuild/carrier_phase/temporal.py": "1c48b863e7e132b0cfa281ca0f7bb45e1dd9b7c443906d775c4e25b3226a7177",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/__init__.py": "aedeaca104c42b628527de21ac068da2e4311fecb42c9ab4907c6552357373fa",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "7a6dd13f40235f1edcb6b3e9f27768e53f0c244f5d9bb0d39268333150f859d6",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext03_yang2024.py": "4d4ef06794fe9d0f51417de2162b21bead31f171908619ae0cb8acbeb465d3a4",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/phase2_runner.py": "b4cece4a634b1d884f0f84284067dc12a96d56fcede804a8a2963ffe35a1f156",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_backend.py": "3c75dd47f4a68e7262eda9bf925b48d20056445f997f33aaa251692a8db4e476",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/reproduction_prepare.py": "09d0191223b1293e0bfe038f7506ec09a34bc6edf91515fe94f653be019101a1",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/sequence_override.py": "45617c22d1eccda66935202da3a76fc8c07354c75ae182994cd419b0e9912f25",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/shared_raw_backend.py": "02bab4f6835a75cad4828659c9d222e6fd8d34e01485038f4cd357e690c4ec49",
+    "src/legsa_gins/paper_rebuild/manifest.py": "05f29a41984518bea5f86b80e2a221dcbde978f9b9616ea61ad21cdad632bc91",
+    "src/legsa_gins/paper_rebuild/paths.py": "8535cca9952f8c7d55c4cf9689031ab287cc79d0d9f0cf9207997e111db4ac0b",
+    "tests/paper_rebuild/test_carrier_candidate_envelope.py": "fa883896d40bf44181aefc82c724f4016c8c6189d388dccd2fc9eeb30fac68c2",
+    "tests/paper_rebuild/test_carrier_candidate_envelope_pilot.py": "5fbd1c9c833d042d223531ae852cd208ab2469b30fe2527ea6fe957d3a0776b8"
+  },
+  "accounting": {
+    "decorrelation_api_entries": "count bridge.decorrelate invocations before native reduction; parameter/result-preserving instrumentation, not a CILS call",
+    "enumeration_api_calls": "one fixed Gaussian support enumeration per prepared window",
+    "length_filter_calls": "one recomputed conditional GLS radial filter per returned support; no sphere solver",
+    "timing": "API wall includes setup and native decorrelation; no stage real-time claim"
+  },
+  "launch_environment": {
+    "PYTHONPATH": "<REPO>/src",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "PYTHONUNBUFFERED": "1"
+  },
+  "output_alias": "<TRUSTED_HEADING>/CANDIDATE_ENVELOPE_PILOT_ATTEMPT01"
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "trusted_heading.clone_comparator.local_receipt.v1",
+  "status": "PASS",
+  "plan_sha256": "ea795c84174c292e6993cce4dd4e66505cd9267a13d03e4e513f7910e6685d1c",
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/compare_clone_window_navigation.py": "911e3d37e4af37100a5c99ed56e67424a08c365a14c4d55d45f386154c10aaad",
+    "scripts/paper_rebuild/carrier_phase/compare_full_window_navigation.py": "194532eb7c77ecc4758663a3ea25227ab3020de3c9a228a9eebe09f48f1fda30",
+    "tests/paper_rebuild/test_compare_clone_window_navigation.py": "87e02ae3639ce80344d30a6b1b2b295a67451a39907dd5131c2c1b2ef0ad077c"
+  },
+  "checks": {
+    "unique_cases": 1,
+    "pytest_invocations": 1,
+    "passed": 1,
+    "failed": 0,
+    "retries": 0,
+    "pytest_reported_s": 0.09
+  },
+  "result": {
+    "returncode": 0,
+    "wall_s": 0.19748288599998887,
+    "test_log_sha256": "59907462a8d5fd93406cdf4c7d1eb2f7b7a96664ae85c4ec202693d419cd019e",
+    "unique_cases": 1,
+    "pytest_invocations": 1
+  },
+  "log_alias": "<SCRATCH_ROOT>/TRUSTED_HEADING_20261006/CLONE_COMPARATOR_LOCAL_ATTEMPT01",
+  "files": {
+    "TEST_01.log": "59907462a8d5fd93406cdf4c7d1eb2f7b7a96664ae85c4ec202693d419cd019e",
+    "RESULT_01.json": "2cec9d9d9f751e29486b6c43ce550c7a28a415bfdf80ab2d425972ddd4262ecb",
+    "INVOCATION_01.json": "413a3d295233cb5ea2d149b8c8b400d88dc66931535b677b7cc152f782a6d065"
+  },
+  "real_prepare_calls": 0,
+  "real_compare_calls": 0,
+  "native_calls": 0,
+  "evaluator_calls": 0,
+  "reference_reads": 0,
+  "scope": "pure synthetic metrics, exact support, and three-arm attribution; not a real output validation"
+}

@@ -1,0 +1,107 @@
+{
+  "execution_commit": "dc92fd6bf31136e143d54deaeb2ff8e3ab68fa4f",
+  "payload_stage": "<AR_SCRATCH>/SYNTHETIC2_PREP02",
+  "plan_sha256": "c79f3cc5f60adce3899aa4fb638359b23ab4fa1508e31b71faddc0e21f65087b",
+  "calls": 16,
+  "A_unique": {
+    "total": 4,
+    "available": 4,
+    "correct_candidates": 3,
+    "wrong_candidates": 1,
+    "unresolved": 0
+  },
+  "by_prior_condition": {
+    "RP_NOMINAL": {
+      "B": {
+        "total": 4,
+        "available": 4,
+        "correct_candidates": 4,
+        "wrong_candidates": 0,
+        "unresolved": 0
+      },
+      "C_correct_retained": 3,
+      "C_wrong_retained": 0,
+      "C_rejected": 1
+    },
+    "RP_ROLL_POS": {
+      "B": {
+        "total": 4,
+        "available": 4,
+        "correct_candidates": 1,
+        "wrong_candidates": 3,
+        "unresolved": 0
+      },
+      "C_correct_retained": 1,
+      "C_wrong_retained": 0,
+      "C_rejected": 3
+    },
+    "RP_ROLL_NEG": {
+      "B": {
+        "total": 4,
+        "available": 4,
+        "correct_candidates": 2,
+        "wrong_candidates": 2,
+        "unresolved": 0
+      },
+      "C_correct_retained": 2,
+      "C_wrong_retained": 0,
+      "C_rejected": 2
+    }
+  },
+  "four_shared_noise_instances": true,
+  "risk_rate_estimation": false,
+  "formal_integer_acceptance_defined": false,
+  "angles_by_condition": {
+    "RP_NOMINAL": {
+      "A": {
+        "available": 4,
+        "rmse_deg": 70.18198465673237,
+        "max_absolute_deg": 140.34377906662394
+      },
+      "B": {
+        "available": 4,
+        "rmse_deg": 1.4386640069322196,
+        "max_absolute_deg": 1.7662705084854906
+      }
+    },
+    "RP_ROLL_POS": {
+      "A": {
+        "available": 4,
+        "rmse_deg": 70.18198465673237,
+        "max_absolute_deg": 140.34377906662394
+      },
+      "B": {
+        "available": 4,
+        "rmse_deg": 113.74408003149357,
+        "max_absolute_deg": 166.849964274598
+      }
+    },
+    "RP_ROLL_NEG": {
+      "A": {
+        "available": 4,
+        "rmse_deg": 70.18198465673237,
+        "max_absolute_deg": 140.34377906662394
+      },
+      "B": {
+        "available": 4,
+        "rmse_deg": 88.79016675795322,
+        "max_absolute_deg": 143.75422400426848
+      }
+    }
+  },
+  "io": {
+    "passed": true,
+    "exit_code": 0,
+    "elapsed_s": 6.881998053999951,
+    "forbidden_raw_or_reference_opens": [],
+    "strace_sha256": "bb8229a560a2ce26331537021a77ea8152763412eb87a0bbd0c0482642345290"
+  },
+  "pins": {
+    "SYNTHETIC2_PLAN.json": "c79f3cc5f60adce3899aa4fb638359b23ab4fa1508e31b71faddc0e21f65087b",
+    "SYNTHETIC2_SEAL.json": "d68b41e71e732a3d68fdeaddda6a0319272e8681a529ee6ef4322f544ee8ee6a",
+    "IO_AUDIT.json": "995b95e22cd84333b0b433dd69903c8572a45c0de8fce30f684450c55d1c18aa",
+    "CALL_LEDGER.jsonl": "5d25713e0c484413c8449ad447d1a4051ade030bfeda98f61ca70b9c307d37dc"
+  },
+  "summary_script_sha256": "ef949d80eade0d1caa5748d927aca4e9429ee6abb268aea23730efb124152ee2",
+  "csv_sha256": "13615e74f0cde20da84f4c6ff06c3d9de55fef7a323521b26d29565c735c812e"
+}

@@ -1,0 +1,16 @@
+{
+  "renderer": "Microsoft Word native PDF export",
+  "word_version": "16.0",
+  "pages": 15,
+  "words_word_reported": 6947,
+  "source_docx_before_field_refresh_sha256": "fe35b3341b7b3c9ffc91bb60a8af6f79c02601dd157ac4213dbface7d32a94d9",
+  "fields_refreshed": true,
+  "scientific_execution": 0,
+  "visual_review": "PASS_ALL_15_PAGES",
+  "source_docx_after_field_refresh_sha256": "2ae7a39ea8539fb38442dd39981470c00b6fc7e7ac4f3ef34a18b2fa0e162ff5",
+  "pdf_sha256": "9ccb00b48fd3d35fd2de34a7344f9fd727c38fe56cf2e850014a0768a7c11455",
+  "review_files": [
+    "VISUAL_REVIEW_PAGES_01_07.md",
+    "VISUAL_REVIEW_PAGES_08_15.md"
+  ]
+}

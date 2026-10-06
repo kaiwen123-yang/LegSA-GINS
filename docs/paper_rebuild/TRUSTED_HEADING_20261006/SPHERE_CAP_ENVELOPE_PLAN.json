@@ -1,0 +1,116 @@
+{
+  "stage": "SPHERE_CAP_ENVELOPE_PILOT",
+  "version": 1,
+  "status": "AWAITING_REGISTRATION_AND_EXPLICIT_EXECUTION",
+  "scope": "geometry-only postprocess of all sealed source-class/current-slot conditional baseline domains; no integer acceptance or fault reclassification",
+  "input_alias": "<TRUSTED_HEADING>/CANDIDATE_LIFECYCLE_PILOT_ATTEMPT01",
+  "output_alias": "<TRUSTED_HEADING>/SPHERE_CAP_ENVELOPE_PILOT_ATTEMPT01",
+  "input_pins": {
+    "COMPLETE.json": "48a4f3dfbf28a61797dc0901329567f37e0d8138d84b5fedfa04194fd4fefb85",
+    "OUTPUT_SEAL.json": "cf4b279bc415834daee9f71fa0a0549db66be095adc10688db77066a5c16d35d",
+    "DETAILS.jsonl.gz": "61c633b6d113be727569ca19d025ac61c2b8c6baeadff80ef73c85bd3aed6dad",
+    "SUMMARY.json": "d13105ff6a3793ce4fe244440ee2e0359d9ffe466b9b0ebcbc87212cbe525284",
+    "EXECUTION_PLAN.json": "e8ad5da7bed9de81cff8aa3a7cff4fe83ee72fae115b1ee54ded97299d903842"
+  },
+  "source_pins": {
+    "src/legsa_gins/paper_rebuild/carrier_phase/sphere_cap_envelope.py": "3cbceed6e637ad369456ed39ba77ab30cc8dc170efecadf2ca98a92deb46db2b",
+    "src/legsa_gins/paper_rebuild/carrier_phase/candidate_envelope.py": "082e7b2aaaa8e43a3f41c6cef4bef92e76e203c101de692c159e6cc9f17b9ae1",
+    "tests/paper_rebuild/test_carrier_sphere_cap_envelope.py": "63b8554732e2f680454e9763fcd7372c62cf010cf47ada2a05619eb10dd299e1"
+  },
+  "runner_sha256": "91bb6a4766e9947866a2739f16cc7d6e25e6842edc4971453987080f781bb9af",
+  "selection": {
+    "start_indices": [
+      0,
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      1000,
+      1100
+    ],
+    "slots": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "old_source_windows": 12,
+    "nonempty_sources": 9,
+    "empty_sources": 3,
+    "source_integer_hypotheses": 23,
+    "source_choice_unchanged": true
+  },
+  "length_interval_m": [
+    0.35,
+    0.35
+  ],
+  "length_shell_enabled": false,
+  "numerics": {
+    "relative_guard": 1e-10,
+    "angular_guard_rad": 1e-10,
+    "max_condition_number": 1000000000000.0
+  },
+  "domain": {
+    "raw_budget": "the existing saved expanded_raw_threshold minus fixed-integer GLS residual cost",
+    "covariance": "saved full 3x3 conditional baseline covariance",
+    "cost_threshold_unchanged": true,
+    "Q_unchanged": true,
+    "integer_source_unchanged": true,
+    "phase_quality_unchanged": true,
+    "component_covers": "exact horizontal projection ellipse necessary cover intersect 3D outer-ball / exact-length sphere-cap cover intersect original class cover",
+    "exception_rule": "retain original compatible cover and mark new geometry unqualified; never delete on exception",
+    "empty_rule": "separately report numerical necessary-domain empty; do not relabel physical fault or accept another integer",
+    "quality_rule": "original row and per-class quality retained even if geometry eliminates a class; bad phase is never a geometry input or pruning reason"
+  },
+  "budgets": {
+    "slots": 60,
+    "geometry_calls": 115,
+    "max_attempts": 1,
+    "GLS_calls": 0,
+    "GLRT_calls": 0,
+    "integer_enumeration_calls": 0,
+    "LAMBDA_calls": 0,
+    "CILS_calls": 0,
+    "sphere_optimization_calls": 0,
+    "navigation_calls": 0,
+    "evaluator_calls": 0,
+    "raw_UBX_reads": 0,
+    "reference_reads": 0,
+    "retries": 0
+  },
+  "outputs": [
+    "RESULTS.csv",
+    "CLASS_RESULTS.csv",
+    "DETAILS.jsonl.gz",
+    "SUMMARY.json",
+    "OUTPUT_SEAL.json",
+    "COMPLETE.json"
+  ],
+  "metrics": [
+    "all 60 slot identities and all 115 class rows",
+    "original/new classwise component union width and enclosing hull width",
+    "number and identities of additional geometry-empty classes",
+    "retained class count and disconnected components",
+    "width summaries stratified by unchanged original quality/single-vs-multi",
+    "phase-veto identities preserved",
+    "exception count and fallback identities"
+  ],
+  "stop_rules": [
+    "Input, registration, source-pin or ordered slot/class-count mismatch stops before mathematical processing.",
+    "One pass only; no replacement windows, threshold changes or retries.",
+    "Numerical kernel exception retains old cover and is reported unqualified; all remaining registered classes still processed once.",
+    "No downstream measurement, integer acceptance, fault release or navigation is authorized by this plan."
+  ],
+  "limits": [
+    "Necessary outer covers can remain broad or nonempty even when exact ellipsoid/sphere intersection is empty.",
+    "Guarded floating-point calculations are not interval-arithmetic certificates.",
+    "Source-set completeness remains conditional on original selected-observation likelihood and physical arc lineage.",
+    "No physical coverage probability, false-fix probability or end-to-end latency is established."
+  ]
+}

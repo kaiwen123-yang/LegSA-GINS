@@ -1,0 +1,26 @@
+{
+  "status": "PASS_PAIRED_BENCHMARK_NO_CERTIFIED_RESULT_DISAGREEMENT",
+  "cases": 9,
+  "search_calls": 18,
+  "both_certified_pairs": 6,
+  "median_speedup_on_both_certified_sample": 1.2475856776513878,
+  "baseline_certified": 6,
+  "optimized_certified": 7,
+  "reference_reads": 0,
+  "native_navigation_runs": 0,
+  "representative_population_benchmark": false,
+  "real_time_qualified": false,
+  "runtime_interpretation": "one paired observation per selected development problem; timeouts censored",
+  "execution": {
+    "candidate_commit": "6c19d5662c193a1ebe1e4402f0d3cd90439cabd7",
+    "pins": {
+      "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/scripts/paper_rebuild/carrier_phase/benchmark_exact_search.py": "08a32021d92dfcec6a52355150d15aa37a359a98fb178792e8a8bf1db099886c",
+      "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/carrier_phase/solver.py": "116a9ef9be3a42a8d120eb9c4fe7b613de97da078c0c76b550628eed4f21c074",
+      "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/carrier_phase/partial.py": "ef793762ec5964b187b9de49662b9646d8103f1f6224e1ea092af81a74465db0",
+      "/home/kaiwen/research/LegSA-GINS-WORKTREES/audit-code-xbpg-20261001/src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py": "7a6dd13f40235f1edcb6b3e9f27768e53f0c244f5d9bb0d39268333150f859d6"
+    },
+    "planned_search_calls": 18,
+    "reference_reads": 0,
+    "native_runs": 0
+  }
+}

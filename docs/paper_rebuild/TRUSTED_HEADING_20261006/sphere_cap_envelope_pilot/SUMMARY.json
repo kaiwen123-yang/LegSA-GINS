@@ -1,0 +1,41 @@
+{
+  "status": "COMPLETE_GEOMETRY_ONLY_POSTPROCESS",
+  "registration_commit": "3615f53766e6880655015bfc8bad747a8946bcac",
+  "slots": 60,
+  "classes": 115,
+  "geometry_calls": 115,
+  "geometry_exceptions": 0,
+  "original_quality_counts": {
+    "NUMERICAL_DIRECTION_DOMAIN_READY": 27,
+    "UNQUALIFIED_CURRENT_QUALITY": 15,
+    "NO_CURRENT_DIRECTION_DOMAIN": 18
+  },
+  "original_compatible_classes": 92,
+  "retained_geometry_classes": 92,
+  "new_geometry_empty_classes": 0,
+  "geometry_class_status_counts": {
+    "NUMERICAL_OUTER_COVER": 92,
+    "EMPTY_NECESSARY_GEOMETRY": 11,
+    "EMPTY_RAW_DOMAIN": 12
+  },
+  "geometry_empty_slots": 18,
+  "disconnected_cover_slots": 22,
+  "original_ready_slots": 27,
+  "phase_quality_reclassified": false,
+  "accepted_integer_measurement": false,
+  "false_fix_probability": null,
+  "all_global_current_alternatives_covered": false,
+  "GLS_calls": 0,
+  "GLRT_calls": 0,
+  "integer_enumeration_calls": 0,
+  "LAMBDA_calls": 0,
+  "CILS_calls": 0,
+  "sphere_optimization_calls": 0,
+  "navigation_calls": 0,
+  "evaluator_calls": 0,
+  "raw_UBX_reads": 0,
+  "reference_reads": 0,
+  "retries": 0,
+  "total_processing_wall_s": 0.03565873799999508,
+  "scope": "same sealed conditional source sets / same raw Q and tau / exact registered length; numerical outer covers only"
+}

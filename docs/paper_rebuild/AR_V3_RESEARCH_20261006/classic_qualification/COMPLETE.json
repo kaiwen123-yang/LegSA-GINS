@@ -1,0 +1,15 @@
+{
+  "schema": "ar_v3_classic_qualification.v1",
+  "status": "ALL_REGISTERED_CALLS_TERMINAL",
+  "calls": 12,
+  "plan_sha256": "bc93f155b77e1b5835174139d41eded68d3ddc2052da98b422c77a17f63e5c88",
+  "data_mode": "SYNTHETIC_OBSERVATIONS_CONDITIONED_ON_SAVED_REAL_GEOMETRY",
+  "reference_reads": 0,
+  "real_observation_y_used": false,
+  "native_navigation_calls": 0,
+  "evaluator_calls": 0,
+  "counts": {
+    "CANDIDATE_RETURNED": 12
+  },
+  "interpretation": "synthetic kernel/adapter diagnostic only; not real performance or general CWLS certificate"
+}

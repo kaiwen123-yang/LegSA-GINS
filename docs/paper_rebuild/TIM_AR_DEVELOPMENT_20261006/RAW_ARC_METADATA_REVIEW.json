@@ -1,0 +1,309 @@
+{
+  "status": "PASS_METADATA_ROWS_ONLY",
+  "checks": {
+    "tracking_file_hash_matches_seal": true,
+    "ten_unique_keys_each": true,
+    "exact_receiver_week_tow_sets": true,
+    "exact_receiver_reported_time_sets": true,
+    "four_signals_ten_per_receiver": true,
+    "four_signals_valid_fields": true,
+    "four_signals_single_arc_positive_lock": true,
+    "four_signals_no_reset_events": true,
+    "summarized_event_counts_match_all177_tracking_rows": true,
+    "interval_signals_match": true,
+    "interval_endpoints_match": true
+  },
+  "tracking_rows": 177,
+  "stable_signal_receiver_rows": 80,
+  "exact_paired_epochs": 10,
+  "time_range_s": [
+    80.19799995422363,
+    81.99799990653992
+  ],
+  "duration_between_first_last_s": 1.7999999523162842,
+  "details": [
+    {
+      "receiver": 1,
+      "signal": "0:6:0:0",
+      "rows": 10,
+      "unique_keys": 10,
+      "arc_ids": [
+        1
+      ],
+      "all_pr_cp_half_valid": true,
+      "half_subtracted_states": [
+        "True"
+      ],
+      "min_locktime_ms": 64500,
+      "cno_range_dbhz": [
+        41,
+        45
+      ],
+      "cp_std_code_range": [
+        5,
+        5
+      ],
+      "events": {
+        "gap_reset": 0,
+        "receiver_clock_reset": 0,
+        "tracking_lock_reset_detected": 0,
+        "cycle_slip_detected": 0,
+        "half_cycle_state_changed": 0,
+        "carrier_validity_changed": 0,
+        "time_reversal_detected": 0,
+        "arc_reset_due_to_tracking": 0
+      },
+      "first_observation_count": 1
+    },
+    {
+      "receiver": 1,
+      "signal": "0:11:0:0",
+      "rows": 10,
+      "unique_keys": 10,
+      "arc_ids": [
+        1
+      ],
+      "all_pr_cp_half_valid": true,
+      "half_subtracted_states": [
+        "False"
+      ],
+      "min_locktime_ms": 64500,
+      "cno_range_dbhz": [
+        38,
+        41
+      ],
+      "cp_std_code_range": [
+        5,
+        7
+      ],
+      "events": {
+        "gap_reset": 0,
+        "receiver_clock_reset": 0,
+        "tracking_lock_reset_detected": 0,
+        "cycle_slip_detected": 0,
+        "half_cycle_state_changed": 0,
+        "carrier_validity_changed": 0,
+        "time_reversal_detected": 0,
+        "arc_reset_due_to_tracking": 0
+      },
+      "first_observation_count": 1
+    },
+    {
+      "receiver": 1,
+      "signal": "0:17:0:0",
+      "rows": 10,
+      "unique_keys": 10,
+      "arc_ids": [
+        1
+      ],
+      "all_pr_cp_half_valid": true,
+      "half_subtracted_states": [
+        "True"
+      ],
+      "min_locktime_ms": 64500,
+      "cno_range_dbhz": [
+        42,
+        44
+      ],
+      "cp_std_code_range": [
+        4,
+        5
+      ],
+      "events": {
+        "gap_reset": 0,
+        "receiver_clock_reset": 0,
+        "tracking_lock_reset_detected": 0,
+        "cycle_slip_detected": 0,
+        "half_cycle_state_changed": 0,
+        "carrier_validity_changed": 0,
+        "time_reversal_detected": 0,
+        "arc_reset_due_to_tracking": 0
+      },
+      "first_observation_count": 1
+    },
+    {
+      "receiver": 1,
+      "signal": "0:19:0:0",
+      "rows": 10,
+      "unique_keys": 10,
+      "arc_ids": [
+        1
+      ],
+      "all_pr_cp_half_valid": true,
+      "half_subtracted_states": [
+        "True"
+      ],
+      "min_locktime_ms": 64500,
+      "cno_range_dbhz": [
+        42,
+        44
+      ],
+      "cp_std_code_range": [
+        3,
+        4
+      ],
+      "events": {
+        "gap_reset": 0,
+        "receiver_clock_reset": 0,
+        "tracking_lock_reset_detected": 0,
+        "cycle_slip_detected": 0,
+        "half_cycle_state_changed": 0,
+        "carrier_validity_changed": 0,
+        "time_reversal_detected": 0,
+        "arc_reset_due_to_tracking": 0
+      },
+      "first_observation_count": 1
+    },
+    {
+      "receiver": 2,
+      "signal": "0:6:0:0",
+      "rows": 10,
+      "unique_keys": 10,
+      "arc_ids": [
+        1
+      ],
+      "all_pr_cp_half_valid": true,
+      "half_subtracted_states": [
+        "False"
+      ],
+      "min_locktime_ms": 64500,
+      "cno_range_dbhz": [
+        38,
+        44
+      ],
+      "cp_std_code_range": [
+        3,
+        6
+      ],
+      "events": {
+        "gap_reset": 0,
+        "receiver_clock_reset": 0,
+        "tracking_lock_reset_detected": 0,
+        "cycle_slip_detected": 0,
+        "half_cycle_state_changed": 0,
+        "carrier_validity_changed": 0,
+        "time_reversal_detected": 0,
+        "arc_reset_due_to_tracking": 0
+      },
+      "first_observation_count": 1
+    },
+    {
+      "receiver": 2,
+      "signal": "0:11:0:0",
+      "rows": 10,
+      "unique_keys": 10,
+      "arc_ids": [
+        1
+      ],
+      "all_pr_cp_half_valid": true,
+      "half_subtracted_states": [
+        "False"
+      ],
+      "min_locktime_ms": 12280,
+      "cno_range_dbhz": [
+        39,
+        41
+      ],
+      "cp_std_code_range": [
+        5,
+        7
+      ],
+      "events": {
+        "gap_reset": 0,
+        "receiver_clock_reset": 0,
+        "tracking_lock_reset_detected": 0,
+        "cycle_slip_detected": 0,
+        "half_cycle_state_changed": 0,
+        "carrier_validity_changed": 0,
+        "time_reversal_detected": 0,
+        "arc_reset_due_to_tracking": 0
+      },
+      "first_observation_count": 1
+    },
+    {
+      "receiver": 2,
+      "signal": "0:17:0:0",
+      "rows": 10,
+      "unique_keys": 10,
+      "arc_ids": [
+        1
+      ],
+      "all_pr_cp_half_valid": true,
+      "half_subtracted_states": [
+        "False"
+      ],
+      "min_locktime_ms": 64500,
+      "cno_range_dbhz": [
+        40,
+        43
+      ],
+      "cp_std_code_range": [
+        3,
+        4
+      ],
+      "events": {
+        "gap_reset": 0,
+        "receiver_clock_reset": 0,
+        "tracking_lock_reset_detected": 0,
+        "cycle_slip_detected": 0,
+        "half_cycle_state_changed": 0,
+        "carrier_validity_changed": 0,
+        "time_reversal_detected": 0,
+        "arc_reset_due_to_tracking": 0
+      },
+      "first_observation_count": 1
+    },
+    {
+      "receiver": 2,
+      "signal": "0:19:0:0",
+      "rows": 10,
+      "unique_keys": 10,
+      "arc_ids": [
+        1
+      ],
+      "all_pr_cp_half_valid": true,
+      "half_subtracted_states": [
+        "False"
+      ],
+      "min_locktime_ms": 64500,
+      "cno_range_dbhz": [
+        40,
+        42
+      ],
+      "cp_std_code_range": [
+        3,
+        5
+      ],
+      "events": {
+        "gap_reset": 0,
+        "receiver_clock_reset": 0,
+        "tracking_lock_reset_detected": 0,
+        "cycle_slip_detected": 0,
+        "half_cycle_state_changed": 0,
+        "carrier_validity_changed": 0,
+        "time_reversal_detected": 0,
+        "arc_reset_due_to_tracking": 0
+      },
+      "first_observation_count": 1
+    }
+  ],
+  "event_counts_all_rows": {
+    "tracking_lock_reset_detected": 3,
+    "half_cycle_state_changed": 3,
+    "carrier_validity_changed": 17,
+    "receiver_clock_reset": 0,
+    "time_reversal_detected": 0,
+    "gap_reset": 0,
+    "first_observation": 19,
+    "cycle_slip_detected": 20
+  },
+  "raw_reads_by_review": 0,
+  "reference_reads_by_review": 0,
+  "solver_calls_by_review": 0,
+  "input_sha256": {
+    "RAW_ARC_SUMMARY.json": "32899f84a12cc2232b0c29356739f93b9500dc03cc17559e4ae1c8a6ab6fdbd8",
+    "RAW_ARC_GPS_L1_TRACKING.csv": "7c6d47873941450d4bff3839e81f5638bf4820fb0c3600a32ce862cfd7928148"
+  },
+  "review_script_sha256": "da9aaccf6e6b4e567cdebc4562df6ced097bc564e919ffb0dc41a8b2bf0cfced",
+  "scope": "Independent recomputation from sealed decoded metadata only; no new raw decode, geometry, elevations, ambiguity solving or physical slip test. Saturated locktime and stable flags do not prove continuity before the window. Four signals yield candidate DD support, not proven geometric rank or correct integers."
+}

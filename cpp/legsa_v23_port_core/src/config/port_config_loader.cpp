@@ -219,6 +219,10 @@ bool isCanonical541CaseId(const std::string& case_id) {
 
 void validateFormalMethodContract(const std::unordered_map<std::string, std::string>& kv,
                                   PortOptions& options) {
+  const bool research = options.runtime_contract == "research_experiment";
+  if (research && (options.stage_id.empty() || options.protocol_id.empty() || options.case_id.empty() ||
+                   options.run_id.empty() || options.run_label != options.run_id || options.data_mode.empty()))
+    formalContractFailure("research experiment requires explicit stage/protocol/case/run/data identity");
   const bool clean3_s3_ab0000_parity_mode =
       boolOrDefault(kv, "clean3_s3_ab0000_parity_mode", false);
   const std::array<const char*, 6> feature_keys{{
@@ -333,10 +337,10 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
                                    : imu_claim_identity ? imu_claim_case_matches
                                    : imu_fix_identity ? options.case_id == "IMU_V3_NATURAL_SEQUENCE"
                                    : options.case_id == "CLEAN1_BY2_CLEAN_NORMAL";
-  if ((!clean1_v1_identity && !clean1r1c_v2_identity && !clean1r2r1_final_v23_identity &&
+  if (!research && ((!clean1_v1_identity && !clean1r1c_v2_identity && !clean1r2r1_final_v23_identity &&
        !clean2r2a_ablation_identity && !clean3_s3_ab0000_identity && !canonical541_identity && !imu_fix_identity) ||
       !case_id_matches || !data_mode_matches ||
-      options.run_id.empty()) {
+      options.run_id.empty())) {
     formalContractFailure("formal stage/protocol/case/data_mode/run identity mismatch");
   }
   if (canonical541_identity &&
@@ -344,7 +348,7 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
     formalContractFailure("canonical541 runtime identity is outside readiness/matrix contract");
   }
   // 保留 CLEAN1 的逐字合同，同时只为 CLEAN2R2A 要求同一 final_v23 parity mode。
-  if ((options.clean_final_v23_parity_mode != clean1r2r1_final_v23_identity) &&
+  if (!research && (options.clean_final_v23_parity_mode != clean1r2r1_final_v23_identity) &&
       !clean2r2a_ablation_identity && !clean3_s3_ab0000_identity && !canonical541_identity && !imu_fix_identity) {
     formalContractFailure("clean final_v23 parity mode/profile identity mismatch");
   }
@@ -416,7 +420,7 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
     expected_source_aware = true;
     expected_go2_roll_pitch = true;
     expected_go2_horizontal = true;
-  } else if (((clean2r2a_ablation_identity || clean3_s3_ab0000_identity || imu_fix_identity) &&
+  } else if (((research || clean2r2a_ablation_identity || clean3_s3_ab0000_identity || imu_fix_identity) &&
               isClean2r2aAblationId(options.algorithm_id)) ||
              (canonical541_matrix_identity && isCanonical541AblationId(options.algorithm_id)) ||
              (canonical541_compact_readiness_identity &&
@@ -439,6 +443,9 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   if (expected_source_aware && options.source_aware_policy_config.source_aware_mode == "off") {
     formalContractFailure("source-aware feature is enabled but policy mode is off");
   }
+  if (go2_horizontal && options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame == "body_frd" &&
+      options.go2_velocity_prior_diagnostic_config.go2_body_velocity_prior_path.empty())
+    formalContractFailure("body_frd velocity requires its explicit body provider path");
   if (go2_horizontal &&
       (!options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_vertical_disabled ||
        options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_mode != "horizontal_2d")) {
@@ -453,7 +460,7 @@ void validateFormalMethodContract(const std::unordered_map<std::string, std::str
   options.enable_basic_dual_yaw_baseline = options.algorithm_id == "basic_dual_yaw_EKF";
   options.yaw_scheme_C_enabled = options.enable_dual_yaw_update && !options.enable_basic_dual_yaw_baseline;
   options.phase = options.stage_id;
-  options.port_role = imu_claim_identity
+  options.port_role = research ? "experimental_navigation_solver" : imu_claim_identity
                           ? "imu_v3_corrected_controlled_replay_solver"
                       : imu_fix_identity
                           ? "imu_v3_corrected_segment_solver"
@@ -514,6 +521,13 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
   const auto kv = readKeyValues(path);
   PortOptions options;
   options.clean1_formal_mode = boolOrDefault(kv, "clean1_formal_mode", options.clean1_formal_mode);
+  options.runtime_contract = stringOrDefault(kv, "runtime_contract", "legacy");
+  if (options.runtime_contract != "legacy" && options.runtime_contract != "research_experiment")
+    throw std::runtime_error("UNKNOWN_RUNTIME_CONTRACT");
+  options.dual_yaw_prediction_model = stringOrDefault(kv, "dual_yaw_prediction_model", "legacy");
+  if (options.dual_yaw_prediction_model != "legacy" && options.dual_yaw_prediction_model != "euler_yaw" &&
+      options.dual_yaw_prediction_model != "lateral_projection")
+    throw std::runtime_error("UNKNOWN_DUAL_YAW_PREDICTION_MODEL");
   options.clean_final_v23_parity_mode =
       boolOrDefault(kv, "clean_final_v23_parity_mode", options.clean_final_v23_parity_mode);
   options.stage_id = stringOrDefault(kv, "stage_id", options.stage_id);
@@ -532,6 +546,45 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       options.dual_antenna_measurement_model != "baseline3d") {
     throw std::runtime_error("BASELINE3D_UNKNOWN_MEASUREMENT_MODEL");
   }
+  auto& clone_config = options.attitude_clone_config;
+  clone_config.mode = stringOrDefault(kv, "attitude_clone_mode", "off");
+  clone_config.events_path = stringOrDefault(kv, "foot_pair_events_path", "");
+  clone_config.position_source_id = stringOrDefault(kv, "foot_pair_position_source_id", "");
+  clone_config.position_gnss_input_status = stringOrDefault(kv, "foot_pair_position_gnss_input_status", "");
+  clone_config.covariance_source_id = stringOrDefault(kv, "foot_pair_covariance_source_id", "");
+  clone_config.covariance_assumption = stringOrDefault(kv, "foot_pair_covariance_assumption", "");
+  clone_config.frame_source_id = stringOrDefault(kv, "foot_pair_frame_source_id", "");
+  clone_config.availability_policy = stringOrDefault(kv, "foot_pair_availability_policy", "");
+  if (clone_config.mode != "off") {
+    const auto frame = kv.find("foot_pair_body_frd_to_engine_body");
+    if (frame == kv.end()) throw std::runtime_error("FOOT_PAIR_EXPLICIT_FRAME_REQUIRED");
+    std::istringstream frame_stream(normalizeLine(frame->second));
+    for (std::size_t i=0;i<9;++i) {
+      double value=0.0;
+      if (!(frame_stream>>value) || !std::isfinite(value))
+        throw std::runtime_error("FOOT_PAIR_FRAME_REQUIRES_NINE_FINITE_VALUES");
+      clone_config.foot_frd_to_engine_body[i/3][i%3]=value;
+    }
+    std::string trailing_frame;
+    if (frame_stream>>trailing_frame) throw std::runtime_error("FOOT_PAIR_FRAME_TRAILING_VALUE");
+  }
+  validateAttitudeCloneConfig(clone_config, options.runtime_contract);
+  options.heading_source_policy = stringOrDefault(kv, "heading_source_policy", "configured");
+  if (options.heading_source_policy != "configured" &&
+      options.heading_source_policy != "pvt_priority_control" &&
+      options.heading_source_policy != "pvt_priority_fallback")
+    throw std::runtime_error("UNKNOWN_HEADING_SOURCE_POLICY");
+  options.baseline3d_source = stringOrDefault(kv, "baseline3d_source", "dual_pvt");
+  if (options.heading_source_policy != "configured" &&
+      (options.runtime_contract != "research_experiment" ||
+       options.baseline3d_source != "external_carrier" ||
+       options.dual_antenna_measurement_model != "baseline3d" ||
+       options.dual_yaw_prediction_model == "legacy"))
+    throw std::runtime_error("PVT_PRIORITY_REQUIRES_RESEARCH_EXTERNAL_AND_EXPLICIT_SCALAR_MODEL");
+  if (options.baseline3d_source != "dual_pvt" && options.baseline3d_source != "external_carrier")
+    throw std::runtime_error("BASELINE3D_UNKNOWN_SOURCE");
+  if (options.baseline3d_source == "external_carrier" && options.dual_antenna_measurement_model != "baseline3d")
+    throw std::runtime_error("EXTERNAL_CARRIER_REQUIRES_BASELINE3D_MODEL");
   if (options.dual_antenna_measurement_model == "baseline3d") {
     options.baseline3d_path = stringOrDefault(kv, "baseline3d_path", "");
     auto required_positive = [&](const std::string& key) {
@@ -545,9 +598,25 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       }
       return value;
     };
-    if (options.baseline3d_path.empty()) throw std::runtime_error("BASELINE3D_REQUIRED_CONFIG: baseline3d_path");
-    options.baseline3d_length_m = required_positive("baseline3d_length_m");
-    options.baseline3d_k_b = required_positive("baseline3d_k_b");
+    if (options.baseline3d_source == "external_carrier") {
+      options.external_carrier_baseline_path = stringOrDefault(kv, "external_carrier_baseline_path", "");
+      const auto body = kv.find("baseline3d_body_vector_m");
+      if (options.external_carrier_baseline_path.empty() || body == kv.end())
+        throw std::runtime_error("EXTERNAL_CARRIER_REQUIRED_PATH_AND_BODY_VECTOR");
+      std::istringstream values(body->second);
+      std::string trailing;
+      for (double& value : options.baseline3d_body_vector_m)
+        if (!(values >> value) || !std::isfinite(value))
+          throw std::runtime_error("EXTERNAL_CARRIER_INVALID_BODY_VECTOR");
+      if ((values >> trailing) || !(norm(options.baseline3d_body_vector_m) > 0.0))
+        throw std::runtime_error("EXTERNAL_CARRIER_INVALID_BODY_VECTOR");
+      options.baseline3d_length_m = norm(options.baseline3d_body_vector_m);
+      // No pAcc or k_b scaling is applied to the full external covariance.
+    } else {
+      if (options.baseline3d_path.empty()) throw std::runtime_error("BASELINE3D_REQUIRED_CONFIG: baseline3d_path");
+      options.baseline3d_length_m = required_positive("baseline3d_length_m");
+      options.baseline3d_k_b = required_positive("baseline3d_k_b");
+    }
   }
   options.clean_input_provenance_label =
       stringOrDefault(kv, "clean_input_provenance_label", options.clean_input_provenance_label);
@@ -922,6 +991,20 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
       stringOrDefault(kv,
                       "go2_velocity_prior_diagnostic_path",
                       options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path);
+  options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame =
+      stringOrDefault(kv,"go2_horizontal_velocity_frame","ned");
+  options.go2_velocity_prior_diagnostic_config.go2_body_velocity_prior_path =
+      stringOrDefault(kv,"go2_body_velocity_prior_path","");
+  options.go2_velocity_prior_diagnostic_config.go2_body_velocity_update_period_s =
+      scalarOrDefault(kv,"go2_body_velocity_update_period_s",0.2);
+  if (options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame != "ned" &&
+      options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame != "body_frd")
+    throw std::runtime_error("BODY_HV_UNKNOWN_FRAME");
+  if (options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame == "body_frd") {
+    if(options.runtime_contract != "research_experiment") throw std::runtime_error("BODY_HV_REQUIRES_RESEARCH_CONTRACT");
+    const double period=options.go2_velocity_prior_diagnostic_config.go2_body_velocity_update_period_s;
+    if(!std::isfinite(period)||!(period>0.0)) throw std::runtime_error("BODY_HV_INVALID_PERIOD");
+  }
   options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_prior_path =
       stringOrDefault(kv,
                       "go2_horizontal_velocity_prior_path",
@@ -1276,10 +1359,18 @@ PortOptions PortConfigLoader::loadYamlLike(const std::string& path) {
        options.algorithm_id == quality_aware::kLegsaQaFallbackEkf)) {
     throw std::runtime_error("BASELINE3D_SCOPE_REQUIRES_QA_QM_OFF");
   }
-  if (options.clean1_formal_mode) {
+  if (options.clean1_formal_mode || options.runtime_contract == "research_experiment") {
     validateFormalMethodContract(kv, options);
   }
-  if (!options.clean1_formal_mode && options.enable_basic_dual_yaw_baseline) {
+  if (options.attitude_clone_config.mode != "off" &&
+      (options.qa_fallback_config.enable_qa_fallback || options.qa_fallback_config.qa_active_mode ||
+       options.algorithm_id == quality_aware::kLegsaQaFallbackEkf ||
+       options.quality_state_manager_config.enable_multi_state_qm))
+    throw std::runtime_error("ATTITUDE_CLONE_REQUIRES_FULL_UNCLIPPED_FEEDBACK_QA_QM_OFF");
+  if (options.heading_source_policy != "configured" &&
+      (options.enable_basic_dual_yaw_baseline || !options.enable_dual_yaw_update || !options.yaw_scheme_C_enabled))
+    throw std::runtime_error("PVT_PRIORITY_REQUIRES_SCHEME_C_NONBASIC");
+  if (!options.clean1_formal_mode && options.runtime_contract != "research_experiment" && options.enable_basic_dual_yaw_baseline) {
     // 中文说明：PAPER10E0 Basic 基线强制关闭 LegSA-GINS-Full 复杂模块；
     // 即使配置误写启用项，也不得让 source-aware/Go2/QM/Raw Doppler/FGO 进入 solver。
     options.phase = "PAPER10E0";

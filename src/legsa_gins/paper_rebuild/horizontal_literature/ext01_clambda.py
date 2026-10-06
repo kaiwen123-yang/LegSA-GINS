@@ -398,6 +398,120 @@ def conditional_float_baseline(solution: FloatSolution, ambiguity: Sequence[int]
         solution.covariance_aa, solution.ambiguity - candidate)
 
 
+@dataclass(frozen=True)
+class BaselineSphereMetric:
+    """Reusable covariance-only factors for the same exact sphere subproblem.
+
+    Construct with ``from_covariance``. Factors own their storage and are read
+    only; changing a caller's covariance cannot silently alter a cached metric.
+    Centers and radii are never cached. The public one-shot solver below keeps
+    its original input-validation order and uses this same numerical kernel.
+    """
+    weight: np.ndarray
+    eigenvalues: np.ndarray
+    vectors: np.ndarray
+    minimum: float
+    minimum_mask: np.ndarray
+
+    @classmethod
+    def from_covariance(cls, covariance: np.ndarray) -> BaselineSphereMetric:
+        return cls._from_validated_covariance(
+            _positive_definite(covariance, "baseline covariance"))
+
+    @classmethod
+    def _from_validated_covariance(cls, covariance: np.ndarray) -> BaselineSphereMetric:
+        weight = np.linalg.inv(covariance)
+        eigenvalues, vectors = np.linalg.eigh(weight)
+        minimum = eigenvalues[0]
+        minimum_mask = eigenvalues == minimum
+        for value in (weight, eigenvalues, vectors, minimum_mask):
+            value.setflags(write=False)
+        return cls(weight, eigenvalues, vectors, minimum, minimum_mask)
+
+    def solve(self, center: Sequence[float], length_m: float,
+              tolerance: float = 1e-13) -> ConditionalBaseline:
+        """Global equality-constrained minimum, with no root approximation."""
+        start = np.asarray(center, dtype=float)
+        if start.shape != (3,) or np.any(~np.isfinite(start)) or not math.isfinite(length_m) or length_m <= 0:
+            raise CLambdaError("invalid constrained-baseline inputs")
+        weight, eigenvalues, vectors = self.weight, self.eigenvalues, self.vectors
+        coordinates = vectors.T @ start
+        minimum = self.minimum
+        # Work with the eigensystem actually returned by the numerical kernel.  A
+        # merely close eigenvalue is not part of the exact minimum eigenspace and
+        # must not enter the trust-region hard case.
+        min_mask = self.minimum_mask
+
+        def b_at(lam: float) -> np.ndarray:
+            return eigenvalues * coordinates / (eigenvalues + lam)
+
+        # The global trust-region equality solution has lambda >= -lambda_min.
+        lower = -minimum
+        # Only an exactly zero projection onto the minimum-eigenvalue eigenspace is
+        # the trust-region hard case.  Treating a merely tiny projection as zero can
+        # choose the opposite orientation and is not globally minimizing.
+        hard_case = bool(np.all(coordinates[min_mask] == 0.0))
+        if hard_case:
+            lam = lower
+            denom = eigenvalues[~min_mask] + lam
+            fixed = np.zeros(3)
+            if np.any(~min_mask):
+                fixed[~min_mask] = eigenvalues[~min_mask] * coordinates[~min_mask] / denom
+            remaining = length_m * length_m - float(fixed @ fixed)
+            if remaining >= -tolerance:
+                fixed[min_mask] = 0.0
+                first = int(np.flatnonzero(min_mask)[0])
+                fixed[first] = math.sqrt(max(0.0, remaining))
+                baseline = vectors @ fixed
+                delta = baseline - start
+                objective = float(delta @ weight @ delta)
+                return ConditionalBaseline(baseline, objective, lam,
+                                           abs(float(np.linalg.norm(baseline)) - length_m), True)
+
+        # Solve in delta=lambda+lambda_min, avoiding cancellation when a tiny but
+        # nonzero minimum-eigenspace projection places the root close to the pole.
+        def b_at_delta(delta: float) -> np.ndarray:
+            return eigenvalues * coordinates / (eigenvalues - minimum + delta)
+
+        def secular_delta(delta: float) -> float:
+            value = b_at_delta(delta)
+            return float(value @ value - length_m * length_m)
+
+        minimum_numerator_scale = float(np.max(np.abs(
+            eigenvalues[min_mask] * coordinates[min_mask]
+        )))
+        lo_delta = minimum_numerator_scale / (2.0 * length_m)
+        if lo_delta == 0.0:
+            # Exact hard-case projection can still require the regular root when
+            # the fixed nonminimum-eigenspace component already exceeds the sphere.
+            lo_delta = np.finfo(float).tiny
+        hi_delta = max(1.0, minimum)
+        while secular_delta(hi_delta) > 0:
+            hi_delta *= 2.0
+            if not math.isfinite(hi_delta):
+                raise CLambdaError("failed to bracket sphere multiplier")
+        if secular_delta(lo_delta) < 0:
+            raise CLambdaError("unresolved constrained-baseline degeneracy")
+        for _ in range(300):
+            mid_delta = (lo_delta + hi_delta) * 0.5
+            if secular_delta(mid_delta) > 0:
+                lo_delta = mid_delta
+            else:
+                hi_delta = mid_delta
+            if hi_delta - lo_delta <= 1e-14 * max(np.finfo(float).tiny, mid_delta):
+                break
+        delta = (lo_delta + hi_delta) * 0.5
+        lam = lower + delta
+        baseline = vectors @ b_at_delta(delta)
+        # Remove only scalar root-solver drift, not an unconstrained solution gate.
+        norm = float(np.linalg.norm(baseline))
+        if abs(norm - length_m) > 1e-9:
+            raise CLambdaError("sphere root failed constraint tolerance")
+        delta = baseline - start
+        return ConditionalBaseline(baseline, float(delta @ weight @ delta), lam,
+                                   abs(norm - length_m), False)
+
+
 def constrained_baseline(center: Sequence[float], covariance: np.ndarray,
                          length_m: float, tolerance: float = 1e-13) -> ConditionalBaseline:
     """Globally minimize (b-center)'Q^-1(b-center) on ||b||=length_m."""
@@ -405,83 +519,7 @@ def constrained_baseline(center: Sequence[float], covariance: np.ndarray,
     q = _positive_definite(covariance, "baseline covariance")
     if start.shape != (3,) or np.any(~np.isfinite(start)) or not math.isfinite(length_m) or length_m <= 0:
         raise CLambdaError("invalid constrained-baseline inputs")
-    weight = np.linalg.inv(q)
-    eigenvalues, vectors = np.linalg.eigh(weight)
-    coordinates = vectors.T @ start
-    minimum = eigenvalues[0]
-    # Work with the eigensystem actually returned by the numerical kernel.  A
-    # merely close eigenvalue is not part of the exact minimum eigenspace and
-    # must not enter the trust-region hard case.
-    min_mask = eigenvalues == minimum
-
-    def b_at(lam: float) -> np.ndarray:
-        return eigenvalues * coordinates / (eigenvalues + lam)
-
-    # The global trust-region equality solution has lambda >= -lambda_min.
-    lower = -minimum
-    # Only an exactly zero projection onto the minimum-eigenvalue eigenspace is
-    # the trust-region hard case.  Treating a merely tiny projection as zero can
-    # choose the opposite orientation and is not globally minimizing.
-    hard_case = bool(np.all(coordinates[min_mask] == 0.0))
-    if hard_case:
-        lam = lower
-        denom = eigenvalues[~min_mask] + lam
-        fixed = np.zeros(3)
-        if np.any(~min_mask):
-            fixed[~min_mask] = eigenvalues[~min_mask] * coordinates[~min_mask] / denom
-        remaining = length_m * length_m - float(fixed @ fixed)
-        if remaining >= -tolerance:
-            fixed[min_mask] = 0.0
-            first = int(np.flatnonzero(min_mask)[0])
-            fixed[first] = math.sqrt(max(0.0, remaining))
-            baseline = vectors @ fixed
-            delta = baseline - start
-            objective = float(delta @ weight @ delta)
-            return ConditionalBaseline(baseline, objective, lam,
-                                       abs(float(np.linalg.norm(baseline)) - length_m), True)
-
-    # Solve in delta=lambda+lambda_min, avoiding cancellation when a tiny but
-    # nonzero minimum-eigenspace projection places the root close to the pole.
-    def b_at_delta(delta: float) -> np.ndarray:
-        return eigenvalues * coordinates / (eigenvalues - minimum + delta)
-
-    def secular_delta(delta: float) -> float:
-        value = b_at_delta(delta)
-        return float(value @ value - length_m * length_m)
-
-    minimum_numerator_scale = float(np.max(np.abs(
-        eigenvalues[min_mask] * coordinates[min_mask]
-    )))
-    lo_delta = minimum_numerator_scale / (2.0 * length_m)
-    if lo_delta == 0.0:
-        # Exact hard-case projection can still require the regular root when
-        # the fixed nonminimum-eigenspace component already exceeds the sphere.
-        lo_delta = np.finfo(float).tiny
-    hi_delta = max(1.0, minimum)
-    while secular_delta(hi_delta) > 0:
-        hi_delta *= 2.0
-        if not math.isfinite(hi_delta):
-            raise CLambdaError("failed to bracket sphere multiplier")
-    if secular_delta(lo_delta) < 0:
-        raise CLambdaError("unresolved constrained-baseline degeneracy")
-    for _ in range(300):
-        mid_delta = (lo_delta + hi_delta) * 0.5
-        if secular_delta(mid_delta) > 0:
-            lo_delta = mid_delta
-        else:
-            hi_delta = mid_delta
-        if hi_delta - lo_delta <= 1e-14 * max(np.finfo(float).tiny, mid_delta):
-            break
-    delta = (lo_delta + hi_delta) * 0.5
-    lam = lower + delta
-    baseline = vectors @ b_at_delta(delta)
-    # Remove only scalar root-solver drift, not an unconstrained solution gate.
-    norm = float(np.linalg.norm(baseline))
-    if abs(norm - length_m) > 1e-9:
-        raise CLambdaError("sphere root failed constraint tolerance")
-    delta = baseline - start
-    return ConditionalBaseline(baseline, float(delta @ weight @ delta), lam,
-                               abs(norm - length_m), False)
+    return BaselineSphereMetric._from_validated_covariance(q).solve(start, length_m, tolerance)
 
 
 def evaluate_candidate(solution: FloatSolution, ambiguity: Sequence[int], length_m: float) -> Candidate:

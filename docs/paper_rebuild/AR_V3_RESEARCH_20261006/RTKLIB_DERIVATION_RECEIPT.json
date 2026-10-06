@@ -1,0 +1,29 @@
+{
+  "command": [
+    "python3",
+    "<CODE_ROOT>/scripts/paper_rebuild/carrier_phase/ar_v3_rtklib_readout.py",
+    "--code-root",
+    "<CODE_ROOT>",
+    "--stage",
+    "<RTKLIB_DIAGNOSTIC_STAGE>"
+  ],
+  "script_sha256": "06027f0a8d7768dcc1e811e67bb38d73062db00fcd9e57a6449d7b6d2bd196e4",
+  "native_execution_receipt_sha256": "1f4f428896a0f49853776661d2c889d2ca63db2f03e18131556f320f6dd58cdc",
+  "native_plan_sha256": "b58e709bab44bf930a8e7d00ee53efd3bd9086fcb3e2c09993a148f130064644",
+  "native_calls_added_by_derivation": 0,
+  "evaluator_calls_added_by_derivation": 0,
+  "protected_output_hashes_rechecked": {
+    "solution.pos.stat": "cf40c88259f979b21f1a2f3f93076f39d5d12489ef70e07866a94e715765d9e0",
+    "solution.pos.trace": "5cc8eac7ac81e6e99ad567f999af3dbced1d877783ca3d7073b97a65c84af8c3",
+    "OPENAT.strace": "c22b5d04d80e005a33af75ba9f5547242d2471aeff0415cdfe6d07f1a8478887",
+    "INVOCATION.json": "18f71d9b97788e5edb2fd58706c7de6e49afc83c0d5ddcf4eded9b48bb6ca047",
+    "solution.pos": "ecea49618f532fbf5a0cfb61c47377c1647bfc986297cdaec6cff24d96563199",
+    "stderr.log": "1fd3c6e8bf5870832a86847746cc8cda758239a22d14c753e16bc38730b96205",
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "derived_files_sha256": {
+    "RTKLIB_EPOCH_DIAGNOSTICS.csv": "2af1dd292cc769fd994088becae1478c69a4e665601f52a7b0f3ee43115010c4",
+    "RTKLIB_Q1_LARGE_LENGTH_DIAGNOSTICS.csv": "659a34619366c6dd18a31281bee55d803d9058f6a4b537bfc58a5b8196b935be",
+    "RTKLIB_DIAGNOSTIC_SUMMARY.json": "293995acc9b31e38f5c8a326e5cb8b7342d383f9f51b9ef2db69babd1cd37bbe"
+  }
+}

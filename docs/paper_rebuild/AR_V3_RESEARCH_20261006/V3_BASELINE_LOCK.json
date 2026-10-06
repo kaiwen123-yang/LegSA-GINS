@@ -1,0 +1,1860 @@
+{
+  "schema_version": "legsa.v3_baseline_lock.v1",
+  "created_utc": "2026-10-06T10:47:57.550176+00:00",
+  "purpose": "Bind the original paper V3 baseline and its complete formal sequence windows for later reviewed AR comparisons.",
+  "repository": {
+    "remote": "git@github.com:kaiwen123-yang/LegSA-GINS.git",
+    "authoritative_main_commit": "077fb725612730d743ff1dd3ba698c43499b4fcb",
+    "remote_main_verified_utc": "2026-10-06T10:47:57.550176+00:00",
+    "observed_local_main_commit": "9f9727b74f5195141523ab570380cc35006f3d18",
+    "local_main_is_authoritative": false,
+    "inspection_working_commit": "d529d75a0453b27868e23a447565103f5e3901b0",
+    "main_not_modified": true,
+    "warning": "main includes later diagnostics; original V3 execution is the separate scientific freeze below. Research PVT/scalar/body-HV controls are not the original paper V3."
+  },
+  "scientific_freeze": "7d43b9af26120ed5dde21f53e515386361072ba6",
+  "binary": {
+    "path": "<FROZEN_CODE_ROOT>/build/p13_v21_cpp/legsa_v23_port_core_demo",
+    "sha256": "96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c",
+    "size_bytes": 759456,
+    "role": "original_v3_binary",
+    "expected_hash_authority": "PROTOCOL_V3_CONTRACT.yaml"
+  },
+  "evaluator": {
+    "path": "<CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py",
+    "sha256": "aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da",
+    "size_bytes": 18195,
+    "role": "original_frozen_evaluator",
+    "expected_hash_authority": "PROTOCOL_V3_CONTRACT.yaml"
+  },
+  "registry": {
+    "path": "<V3_SCRATCH>/00_PREREGISTRATION/REGISTRY.json",
+    "sha256": "c89813daff415f6afbc723e954555bd8256b9d7f5221e49d56a02948552c1222",
+    "size_bytes": 55327878,
+    "role": "original_registration",
+    "expected_hash_authority": "REGISTRY_FILE_SEAL.json"
+  },
+  "task_ledger": {
+    "path": "<CODE_ROOT>/docs/paper_rebuild/V3_STORY_20261004/TASK_LEDGER.csv.gz",
+    "sha256": "c2c15bfab666340b7b5bd71970fb18e8109b9cfe92c3a21f75494be2060f155d",
+    "size_bytes": 1900218,
+    "role": "main_task_ledger",
+    "expected_hash_authority": "git main 077fb725612730d743ff1dd3ba698c43499b4fcb"
+  },
+  "registry_native_count": 6468,
+  "aliases": {
+    "<CODE_ROOT>": "Resolved only by the untracked LOCAL_PATHS.json; machine paths intentionally excluded.",
+    "<V3_ROOT>": "Resolved only by the untracked LOCAL_PATHS.json; machine paths intentionally excluded.",
+    "<V3_SCRATCH>": "Resolved only by the untracked LOCAL_PATHS.json; machine paths intentionally excluded.",
+    "<RAW_ROOT>": "Resolved only by the untracked LOCAL_PATHS.json; machine paths intentionally excluded.",
+    "<CLEAN_ROOT>": "Resolved only by the untracked LOCAL_PATHS.json; machine paths intentionally excluded.",
+    "<FROZEN_CODE_ROOT>": "Resolved only by the untracked LOCAL_PATHS.json; machine paths intentionally excluded.",
+    "<SCRATCH_ROOT>": "Resolved only by the untracked LOCAL_PATHS.json; machine paths intentionally excluded."
+  },
+  "sequences": [
+    {
+      "sequence_id": "BY2",
+      "record_directory_alias": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal",
+      "raw_files": {
+        "body": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by2.txt",
+          "registered_sha256": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278",
+          "current_size_bytes": 92352512,
+          "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+          "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+        },
+        "status": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-status.csv",
+          "registered_sha256": "9761d2d7055356857bd7b26a251fdd60fdf6c2b18a882dac74bc35d164e42e08",
+          "current_size_bytes": 180182,
+          "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+          "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+        },
+        "gnss1": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv",
+          "registered_sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+          "current_size_bytes": 27874623,
+          "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+          "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+        },
+        "gnss2": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss2-raw.csv",
+          "registered_sha256": "39249696329530452a1049b5b39e2c1d8f7e89ae2190d2c95bce70f5b4f44583",
+          "current_size_bytes": 26827144,
+          "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+          "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+        }
+      },
+      "run_id": "RUN_00004",
+      "case_id": "C00_clean_normal",
+      "data_mode": "real_clean",
+      "full_window_s": [
+        66.0,
+        340.0
+      ],
+      "base_time_unix_s": 1772784000.0,
+      "configuration": {
+        "path": "<V3_ROOT>/03_NATIVE/RUN_00004/V3_RUNTIME_CONFIG.yaml",
+        "sha256": "3ac059cbaf5cacbf68929ca6027074629ab4efc969b4e8a5ddbb2ca300f4c542",
+        "size_bytes": 7846,
+        "role": "BY2:runtime_config",
+        "expected_hash_authority": "main task ledger"
+      },
+      "initialization": {
+        "initpos": [
+          39.98482973,
+          116.34312609,
+          41.80208107
+        ],
+        "initvel": [
+          0,
+          0,
+          0
+        ],
+        "initatt": [
+          0,
+          0,
+          0.688505
+        ],
+        "initgyrbias": [
+          0,
+          0,
+          0
+        ],
+        "initaccbias": [
+          0,
+          0,
+          0
+        ],
+        "initgyrscale": [
+          0,
+          0,
+          0
+        ],
+        "initaccscale": [
+          0,
+          0,
+          0
+        ],
+        "initposstd": [
+          10,
+          10,
+          10
+        ],
+        "initvelstd": [
+          1,
+          1,
+          1
+        ],
+        "initattstd": [
+          2,
+          2,
+          2
+        ],
+        "initbgstd": [
+          9.38,
+          9.38,
+          9.38
+        ],
+        "initbastd": [
+          77.8,
+          77.8,
+          77.8
+        ],
+        "initsgstd": [
+          0,
+          0,
+          0
+        ],
+        "initsastd": [
+          0,
+          0,
+          0
+        ]
+      },
+      "runtime_antenna_lever_frd_m": [
+        0.03,
+        0.03,
+        -0.3
+      ],
+      "runtime_provider_pins": {
+        "gnsspath": {
+          "path": "<V3_SCRATCH>/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+          "sha256": "fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760",
+          "size_bytes": 253682,
+          "role": "BY2:provider:gnsspath",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        },
+        "go2_attitude_prior_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv",
+          "sha256": "e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e",
+          "size_bytes": 9320956,
+          "role": "BY2:provider:go2_attitude_prior_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        },
+        "go2_horizontal_velocity_prior_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+          "sha256": "3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e",
+          "size_bytes": 18814268,
+          "role": "BY2:provider:go2_horizontal_velocity_prior_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        },
+        "imupath": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+          "sha256": "74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647",
+          "size_bytes": 5091513,
+          "role": "BY2:provider:imupath",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        },
+        "raw_doppler_factor_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv",
+          "sha256": "847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4",
+          "size_bytes": 530592,
+          "role": "BY2:provider:raw_doppler_factor_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        }
+      },
+      "config_identity_warning": "Historical transport case_id/stage_id/outputpath can name an ancestor. Scientific run/case identity comes from the sealed registry and task ledger.",
+      "heading_contract": {
+        "source": "exact-epoch paired receiver HPPOSECEF positions, GNSS2 minus GNSS1; not raw carrier integer AR",
+        "nominal_input_hz": 5,
+        "required_receiver_carrier_status": "BOTH_FIXED",
+        "fixed_std_marker_deg": 2.933193,
+        "original_hv": "Frozen old status-A1 heading rotated provider; not the new causal body-HV provider"
+      },
+      "evaluation": {
+        "contract": "evaluator_contract_v3",
+        "baseline_median_m": 0.356191491865984,
+        "position_transform": {
+          "evaluator_contract": "evaluator_contract_v3",
+          "input_sha256": "2fda678fbc9d760e7bd4b93b6e7f99861b41ea91aef86252566ea059abbeb0f4",
+          "STD": "SAME_V3_NATIVE_STD_UNMODIFIED",
+          "std_sha256": "06fb77697eb2a2b5b53a9fb5702560907920f389de08fd45af2d6d9cb7fa1da9",
+          "std_transformed": false,
+          "fit_used": false,
+          "further_correction_used": false,
+          "changed_columns_zero_based": [
+            2,
+            3,
+            4
+          ],
+          "baseline_median_m": 0.356191491865984,
+          "lever_frd_m": [
+            0.03,
+            -0.148095745932992,
+            -0.3
+          ],
+          "uncertainty_status": "UNTRANSPORTED_STD_DIAGNOSTIC_ONLY",
+          "output_sha256": "375663491799b93d5c69251f7cad0edc21bc8ac8732a59600fede2a67b0fb8db"
+        },
+        "matched_time_start_s": 66.005054,
+        "matched_time_end_s": 339.997056,
+        "reference": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/trace_vrtk2_a87c6e_2026-03-06-08-00-54_minimal.csv",
+          "sha256": "ee3ee42dea3ada196dfdbcc78fd07524f91b4ce4fb94d9d6482a3e7d4b34aa4c",
+          "role": "EVALUATOR_CHILD_ONLY",
+          "parent_may_hash": false
+        },
+        "reference_claim": "Commercial fused reference with shared GNSS lineage; not independent truth.",
+        "archive_receipt": {
+          "path": "<V3_ROOT>/04_EVALUATION/RUN_00004/v3/ARCHIVE_RECEIPT.json",
+          "sha256": "fa63a311a15e53481db7c61204b2b4e0cda2cb8066f6d9f0d483af0c5b662aa4",
+          "size_bytes": 7098,
+          "role": "BY2:evaluation_archive_receipt",
+          "expected_hash_authority": "CURRENT_BYTES_PINNED_NO_INDEPENDENT_HISTORICAL_HASH"
+        },
+        "result": {
+          "path": "<V3_ROOT>/04_EVALUATION/RUN_00004/v3/EVALUATION_RESULT.json",
+          "sha256": "d00efef45c3f210425c0aa26dc8bdbaf8757e9fe16904120e2f9fbf3ed9fc8e1",
+          "size_bytes": 20150,
+          "role": "BY2:evaluation_result",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+        },
+        "capture": {
+          "path": "<V3_ROOT>/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/CAPTURE_CONFIG.json",
+          "sha256": "36f7bb7c7ef3131519e105653a731c56d92a46bf6bfdbdcb0da92dc2d53f4e02",
+          "size_bytes": 793,
+          "role": "BY2:evaluation_capture",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+        },
+        "retained_error_series": {
+          "path": "<V3_ROOT>/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+          "sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548",
+          "size_bytes": 5786321,
+          "role": "BY2:retained_error_series_compressed",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+        },
+        "uncompressed_error_series_sha256_from_receipt": "cce51f6da0474d6e28802cd9f19e107869b994b352ce7e6548e959e4b76c7da0",
+        "uncompressed_error_series_hash_rechecked": false,
+        "historical_trace_open_count": 1
+      },
+      "native_output": {
+        "archive_root": "<V3_ROOT>/03_NATIVE/RUN_00004",
+        "nav_sha256_from_ledger": "2fda678fbc9d760e7bd4b93b6e7f99861b41ea91aef86252566ea059abbeb0f4",
+        "std_sha256_from_ledger": "06fb77697eb2a2b5b53a9fb5702560907920f389de08fd45af2d6d9cb7fa1da9",
+        "full_nav_payload_retained": false,
+        "full_std_payload_retained": false,
+        "hashes_are_historical_receipts_not_current_payload_validation": true
+      }
+    },
+    {
+      "sequence_id": "BY2H",
+      "record_directory_alias": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal",
+      "raw_files": {
+        "body": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by3.txt",
+          "registered_sha256": "b2e80763c613a5a0d6739aea90ea3ed4f8c9170cf5f2f6b73e5a000a666f0c49",
+          "current_size_bytes": 92274688,
+          "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+          "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+        },
+        "status": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-status.csv",
+          "registered_sha256": "6e169474adea70ef9899ef02409015f7cd225aadf1efbe63e51af2a39e297ef2",
+          "current_size_bytes": 177572,
+          "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+          "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+        },
+        "gnss1": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss1-raw.csv",
+          "registered_sha256": "b6e0e3108b0902350eb7655fe1a2db23a8f320136ddc6c54bcd7e5dbe2d17508",
+          "current_size_bytes": 27331317,
+          "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+          "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+        },
+        "gnss2": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/gnss2-raw.csv",
+          "registered_sha256": "87e4056c85b58595792578a62aeceb1b594475d654e4e49eb7fccaf5bfff56aa",
+          "current_size_bytes": 26928657,
+          "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+          "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+        }
+      },
+      "run_id": "SEQUENCE_BY2H_F04",
+      "case_id": "CLEAN5_BY2H_NATURAL",
+      "data_mode": "real_clean",
+      "full_window_s": [
+        413.0,
+        683.0
+      ],
+      "base_time_unix_s": 1772784000.0,
+      "configuration": {
+        "path": "<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F04/V3_RUNTIME_CONFIG.yaml",
+        "sha256": "47b91241f40453d4de1b3e6cafa7913f2892589e77178e9af3edb6209ee1b0c0",
+        "size_bytes": 7937,
+        "role": "BY2H:runtime_config",
+        "expected_hash_authority": "main task ledger"
+      },
+      "initialization": {
+        "initpos": [
+          39.9848666,
+          116.3431276,
+          41.691001892089844
+        ],
+        "initvel": [
+          0,
+          0,
+          0
+        ],
+        "initatt": [
+          0,
+          0,
+          353.25599329459806
+        ],
+        "initgyrbias": [
+          0,
+          0,
+          0
+        ],
+        "initaccbias": [
+          0,
+          0,
+          0
+        ],
+        "initgyrscale": [
+          0,
+          0,
+          0
+        ],
+        "initaccscale": [
+          0,
+          0,
+          0
+        ],
+        "initposstd": [
+          10,
+          10,
+          10
+        ],
+        "initvelstd": [
+          1,
+          1,
+          1
+        ],
+        "initattstd": [
+          2,
+          2,
+          2
+        ],
+        "initbgstd": [
+          9.38,
+          9.38,
+          9.38
+        ],
+        "initbastd": [
+          77.8,
+          77.8,
+          77.8
+        ],
+        "initsgstd": [
+          0,
+          0,
+          0
+        ],
+        "initsastd": [
+          0,
+          0,
+          0
+        ]
+      },
+      "runtime_antenna_lever_frd_m": [
+        0.03,
+        0.03,
+        -0.3
+      ],
+      "runtime_provider_pins": {
+        "gnsspath": {
+          "path": "<V3_SCRATCH>/02_PROVIDERS/CASES/BY2H__C00_clean_normal__4cd2369e62e4fba4f0b84b00a75c312c53a8e7eac606802837cbc88892278ff5/GNSS18.gnss",
+          "sha256": "4ff6ed07f1d189ab19934bc67c350e9f48f79527170c6fcafc85eba7cf1155bd",
+          "size_bytes": 249472,
+          "role": "BY2H:provider:gnsspath",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        },
+        "go2_attitude_prior_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_ATTITUDE_PRIOR.csv",
+          "sha256": "7366cdb1c24fd647b65328fd2d3938331f288903677b0006a291ae646adbfd55",
+          "size_bytes": 9323295,
+          "role": "BY2H:provider:go2_attitude_prior_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        },
+        "go2_horizontal_velocity_prior_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+          "sha256": "379d0676cbea5fda88437b6dc0508fcfe3d37b2fc6d5ccb40f39e732a6be54bf",
+          "size_bytes": 18811477,
+          "role": "BY2H:provider:go2_horizontal_velocity_prior_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        },
+        "imupath": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_IMU.imu",
+          "sha256": "d32e4891080e300e6edde4526146636f15ec54df945a0470c57fbbdc3aa5115c",
+          "size_bytes": 5098435,
+          "role": "BY2H:provider:imupath",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        },
+        "raw_doppler_factor_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/RAW_DOPPLER.csv",
+          "sha256": "d5c4a42790f2034423d1a3e060d37488ba01341b423933074c11471fcdbac21c",
+          "size_bytes": 405344,
+          "role": "BY2H:provider:raw_doppler_factor_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        }
+      },
+      "config_identity_warning": "Historical transport case_id/stage_id/outputpath can name an ancestor. Scientific run/case identity comes from the sealed registry and task ledger.",
+      "heading_contract": {
+        "source": "exact-epoch paired receiver HPPOSECEF positions, GNSS2 minus GNSS1; not raw carrier integer AR",
+        "nominal_input_hz": 5,
+        "required_receiver_carrier_status": "BOTH_FIXED",
+        "fixed_std_marker_deg": 2.933193,
+        "original_hv": "Frozen old status-A1 heading rotated provider; not the new causal body-HV provider"
+      },
+      "evaluation": {
+        "contract": "evaluator_contract_v3",
+        "baseline_median_m": 0.35418777593777223,
+        "position_transform": {
+          "evaluator_contract": "evaluator_contract_v3",
+          "input_sha256": "7f1cc3dd5276940575e1d8b5d92393921c03f8de6f8f25a6611afb0800e3edab",
+          "STD": "SAME_V3_NATIVE_STD_UNMODIFIED",
+          "std_sha256": "8ebb16646d1a55a95896cf4fb0a6b97c6612186ad477d4e59dd00913b192dc83",
+          "std_transformed": false,
+          "fit_used": false,
+          "further_correction_used": false,
+          "changed_columns_zero_based": [
+            2,
+            3,
+            4
+          ],
+          "baseline_median_m": 0.35418777593777223,
+          "lever_frd_m": [
+            0.03,
+            -0.14709388796888612,
+            -0.3
+          ],
+          "uncertainty_status": "UNTRANSPORTED_STD_DIAGNOSTIC_ONLY",
+          "output_sha256": "1195defe0320d7037fba7a06feb086681aac1ed2b91dbbe9b059e1b069cde01c"
+        },
+        "matched_time_start_s": 413.047045,
+        "matched_time_end_s": 682.99505,
+        "reference": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by3/vrtk2_a87c6e_2026-03-06-08-06-39_minimal/trace_vrtk2_a87c6e_2026-03-06-08-06-39_minimal.csv",
+          "sha256": "8d11fe360753bfcdbc54f7bf793fcb25850c0997b7aaad4ec1c9f10859c0f84f",
+          "role": "EVALUATOR_CHILD_ONLY",
+          "parent_may_hash": false
+        },
+        "reference_claim": "Commercial fused reference with shared GNSS lineage; not independent truth.",
+        "archive_receipt": {
+          "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/ARCHIVE_RECEIPT.json",
+          "sha256": "ad100864dd588d5cde28362e389dd47b4075621cff80c1c6c95ffdc92c3be393",
+          "size_bytes": 6018,
+          "role": "BY2H:evaluation_archive_receipt",
+          "expected_hash_authority": "CURRENT_BYTES_PINNED_NO_INDEPENDENT_HISTORICAL_HASH"
+        },
+        "result": {
+          "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/EVALUATION_RESULT.json",
+          "sha256": "4597ab15b20e0b21ed60c525238625459455be09dee3870eeb75bf119d54c6ba",
+          "size_bytes": 19756,
+          "role": "BY2H:evaluation_result",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+        },
+        "capture": {
+          "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/FROZEN_EVALUATOR/CAPTURE_CONFIG.json",
+          "sha256": "55c427356f0ce00cb470e7e1b354dfdd9b5bf482965946794b5676e6219e2ac5",
+          "size_bytes": 820,
+          "role": "BY2H:evaluation_capture",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+        },
+        "retained_error_series": {
+          "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+          "sha256": "eef9485bb7420ba23a32bfe6a4eb9d2882f31001892c0435297a44b9b8b67dfb",
+          "size_bytes": 5985885,
+          "role": "BY2H:retained_error_series_compressed",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+        },
+        "uncompressed_error_series_sha256_from_receipt": "328a6f0cd3086cf8c67e125cae38460755e02205d0075c2c05c4922832df3de1",
+        "uncompressed_error_series_hash_rechecked": false,
+        "historical_trace_open_count": 1
+      },
+      "native_output": {
+        "archive_root": "<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F04",
+        "nav_sha256_from_ledger": "7f1cc3dd5276940575e1d8b5d92393921c03f8de6f8f25a6611afb0800e3edab",
+        "std_sha256_from_ledger": "8ebb16646d1a55a95896cf4fb0a6b97c6612186ad477d4e59dd00913b192dc83",
+        "full_nav_payload_retained": false,
+        "full_std_payload_retained": false,
+        "hashes_are_historical_receipts_not_current_payload_validation": true
+      }
+    },
+    {
+      "sequence_id": "BY2O",
+      "record_directory_alias": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal",
+      "raw_files": {
+        "body": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/高层数据/by1.txt",
+          "registered_sha256": "0e5c62e0a5af0b6c32c51b535cc90701677276fc73c5623b72abda66cc148f2e",
+          "current_size_bytes": 140873728,
+          "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+          "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+        },
+        "status": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss1-status.csv",
+          "registered_sha256": "c3958ba9442c1a84b25c3be6ab649cc3aad2e5976c3f525127a2136d9b72255f",
+          "current_size_bytes": 265951,
+          "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+          "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+        },
+        "gnss1": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss1-raw.csv",
+          "registered_sha256": "6035d50419eaa0ff29d9a4b053dbed5d715fd2bec38f44ad4b4be02ca54a4ba9",
+          "current_size_bytes": 40997421,
+          "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+          "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+        },
+        "gnss2": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/gnss2-raw.csv",
+          "registered_sha256": "4f18ec7d618c675238d5c40a868ba01802a9d2da9325877d715f75f2f939119f",
+          "current_size_bytes": 38866433,
+          "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+          "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+        }
+      },
+      "run_id": "SEQUENCE_BY2O_F04",
+      "case_id": "CLEAN5_BY2O_NATURAL",
+      "data_mode": "real_clean",
+      "full_window_s": [
+        3186.0,
+        3563.0
+      ],
+      "base_time_unix_s": 1772780400.0,
+      "configuration": {
+        "path": "<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F04/V3_RUNTIME_CONFIG.yaml",
+        "sha256": "15ac163dc99443955cd939047806b2fd74fb5ee421acad8f49403124a1138bcb",
+        "size_bytes": 7944,
+        "role": "BY2O:runtime_config",
+        "expected_hash_authority": "main task ledger"
+      },
+      "initialization": {
+        "initpos": [
+          39.984822099999995,
+          116.343128,
+          41.74599838256836
+        ],
+        "initvel": [
+          0,
+          0,
+          0
+        ],
+        "initatt": [
+          0,
+          0,
+          8.145278694592946
+        ],
+        "initgyrbias": [
+          0,
+          0,
+          0
+        ],
+        "initaccbias": [
+          0,
+          0,
+          0
+        ],
+        "initgyrscale": [
+          0,
+          0,
+          0
+        ],
+        "initaccscale": [
+          0,
+          0,
+          0
+        ],
+        "initposstd": [
+          10,
+          10,
+          10
+        ],
+        "initvelstd": [
+          1,
+          1,
+          1
+        ],
+        "initattstd": [
+          2,
+          2,
+          2
+        ],
+        "initbgstd": [
+          9.38,
+          9.38,
+          9.38
+        ],
+        "initbastd": [
+          77.8,
+          77.8,
+          77.8
+        ],
+        "initsgstd": [
+          0,
+          0,
+          0
+        ],
+        "initsastd": [
+          0,
+          0,
+          0
+        ]
+      },
+      "runtime_antenna_lever_frd_m": [
+        0.03,
+        0.03,
+        -0.3
+      ],
+      "runtime_provider_pins": {
+        "gnsspath": {
+          "path": "<V3_SCRATCH>/02_PROVIDERS/CASES/BY2O__C00_clean_normal__c5212cf72d07afd6d3ae0407fee87f841f2e0d909dfb8c1416bd7f38b0248bb4/GNSS18.gnss",
+          "sha256": "2a0b0ebbcd66b59dd153b84b132c638e9ea31021653e58e3ac125ed21304fa13",
+          "size_bytes": 376806,
+          "role": "BY2O:provider:gnsspath",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        },
+        "go2_attitude_prior_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_ATTITUDE_PRIOR.csv",
+          "sha256": "60d0ea7aeb84ea5df757f8b34fc04d1e1e39b78925c592118094b690b8424537",
+          "size_bytes": 14205133,
+          "role": "BY2O:provider:go2_attitude_prior_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        },
+        "go2_horizontal_velocity_prior_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+          "sha256": "92bbe9165ed4ad6aa3f92c478f4a195ffccc7ec7b652506ba73533bd4190cdd2",
+          "size_bytes": 28692252,
+          "role": "BY2O:provider:go2_horizontal_velocity_prior_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        },
+        "imupath": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_IMU.imu",
+          "sha256": "48943f3e704ceebbf517bfb073856c1c215b5216e3a5d8b6cd91e7ea7586e49b",
+          "size_bytes": 7820907,
+          "role": "BY2O:provider:imupath",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        },
+        "raw_doppler_factor_path": {
+          "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/RAW_DOPPLER.csv",
+          "sha256": "dd9b178b37149eb3d97bd586bf078b1e11cf5e43f8771cbc38c9c21bcd6101f5",
+          "size_bytes": 807097,
+          "role": "BY2O:provider:raw_doppler_factor_path",
+          "expected_hash_authority": "main task ledger provider_hashes_json"
+        }
+      },
+      "config_identity_warning": "Historical transport case_id/stage_id/outputpath can name an ancestor. Scientific run/case identity comes from the sealed registry and task ledger.",
+      "heading_contract": {
+        "source": "exact-epoch paired receiver HPPOSECEF positions, GNSS2 minus GNSS1; not raw carrier integer AR",
+        "nominal_input_hz": 5,
+        "required_receiver_carrier_status": "BOTH_FIXED",
+        "fixed_std_marker_deg": 2.933193,
+        "original_hv": "Frozen old status-A1 heading rotated provider; not the new causal body-HV provider"
+      },
+      "evaluation": {
+        "contract": "evaluator_contract_v3",
+        "baseline_median_m": 0.35013463864843675,
+        "position_transform": {
+          "evaluator_contract": "evaluator_contract_v3",
+          "input_sha256": "04cab3cbd1b86514cb442fe23e53c80705c919aaa2273e2ce07ddb0f42eb3842",
+          "STD": "SAME_V3_NATIVE_STD_UNMODIFIED",
+          "std_sha256": "d29d72b1c453dd30aa8563aa61470ff81851339c831c8920969162510e605982",
+          "std_transformed": false,
+          "fit_used": false,
+          "further_correction_used": false,
+          "changed_columns_zero_based": [
+            2,
+            3,
+            4
+          ],
+          "baseline_median_m": 0.35013463864843675,
+          "lever_frd_m": [
+            0.03,
+            -0.14506731932421837,
+            -0.3
+          ],
+          "uncertainty_status": "UNTRANSPORTED_STD_DIAGNOSTIC_ONLY",
+          "output_sha256": "549db2477e9d87c5c138c410823fb1a1e1bbcb4de3bf6355de532ab397f2ef59"
+        },
+        "matched_time_start_s": 3186.005234,
+        "matched_time_end_s": 3562.997055,
+        "reference": {
+          "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by1/vrtk2_a87c6e_2026-03-06-07-52-22_minimal/trace_vrtk2_a87c6e_2026-03-06-07-52-22_minimal.csv",
+          "sha256": "4f7b3007c6a0b43ce1b0fb4908f23c042891154b4adbc7af4c3d8a47ca363cd9",
+          "role": "EVALUATOR_CHILD_ONLY",
+          "parent_may_hash": false
+        },
+        "reference_claim": "Commercial fused reference with shared GNSS lineage; not independent truth.",
+        "archive_receipt": {
+          "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/ARCHIVE_RECEIPT.json",
+          "sha256": "377655b8a4dfb2bb796ead5166ebfea1981e068519da9d9ed6f8592feac6f5bd",
+          "size_bytes": 6019,
+          "role": "BY2O:evaluation_archive_receipt",
+          "expected_hash_authority": "CURRENT_BYTES_PINNED_NO_INDEPENDENT_HISTORICAL_HASH"
+        },
+        "result": {
+          "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/EVALUATION_RESULT.json",
+          "sha256": "d6dcd2785426fe59698557105efa69eff3bcf24ccd3b7331cf2a07a7e59a72b3",
+          "size_bytes": 19787,
+          "role": "BY2O:evaluation_result",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+        },
+        "capture": {
+          "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/FROZEN_EVALUATOR/CAPTURE_CONFIG.json",
+          "sha256": "3325eb7f325766a57996a815da9bffd7b3dc2928d53707f6214fe37743f4b6dd",
+          "size_bytes": 822,
+          "role": "BY2O:evaluation_capture",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+        },
+        "retained_error_series": {
+          "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+          "sha256": "7c89c024b6088b3d2ba7f1b647a5b742e18e411695f4c39bd821e0eb1cc8a67b",
+          "size_bytes": 7788877,
+          "role": "BY2O:retained_error_series_compressed",
+          "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+        },
+        "uncompressed_error_series_sha256_from_receipt": "b68a673506d818e261ae6c0567fe39b1357d4fe5e4ea8ba99ebd3c691c34086a",
+        "uncompressed_error_series_hash_rechecked": false,
+        "historical_trace_open_count": 1
+      },
+      "native_output": {
+        "archive_root": "<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F04",
+        "nav_sha256_from_ledger": "04cab3cbd1b86514cb442fe23e53c80705c919aaa2273e2ce07ddb0f42eb3842",
+        "std_sha256_from_ledger": "d29d72b1c453dd30aa8563aa61470ff81851339c831c8920969162510e605982",
+        "full_nav_payload_retained": false,
+        "full_std_payload_retained": false,
+        "hashes_are_historical_receipts_not_current_payload_validation": true
+      }
+    }
+  ],
+  "file_pins": [
+    {
+      "path": "<V3_SCRATCH>/00_PREREGISTRATION/REGISTRY.json",
+      "sha256": "c89813daff415f6afbc723e954555bd8256b9d7f5221e49d56a02948552c1222",
+      "size_bytes": 55327878,
+      "role": "original_registration",
+      "expected_hash_authority": "REGISTRY_FILE_SEAL.json"
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/V3_STORY_20261004/TASK_LEDGER.csv.gz",
+      "sha256": "c2c15bfab666340b7b5bd71970fb18e8109b9cfe92c3a21f75494be2060f155d",
+      "size_bytes": 1900218,
+      "role": "main_task_ledger",
+      "expected_hash_authority": "git main 077fb725612730d743ff1dd3ba698c43499b4fcb"
+    },
+    {
+      "path": "<CODE_ROOT>/configs/paper_rebuild/v3/PROTOCOL_V3_CONTRACT.yaml",
+      "sha256": "ec24079cba346f88eb047fb5d5ad48467b8060f4b8e3c7c31c48de9bac6dff31",
+      "size_bytes": 10278,
+      "role": "main_source:configs/paper_rebuild/v3/PROTOCOL_V3_CONTRACT.yaml",
+      "expected_hash_authority": "git main 077fb725612730d743ff1dd3ba698c43499b4fcb"
+    },
+    {
+      "path": "<CODE_ROOT>/docs/paper_rebuild/v3/HEADING_FAULT_WINDOWS.md",
+      "sha256": "53b34574069fee5166deedce04ac27a85b913575b36ad500af649c78db64f1fb",
+      "size_bytes": 19375,
+      "role": "main_source:docs/paper_rebuild/v3/HEADING_FAULT_WINDOWS.md",
+      "expected_hash_authority": "git main 077fb725612730d743ff1dd3ba698c43499b4fcb"
+    },
+    {
+      "path": "<CODE_ROOT>/configs/paper_rebuild/v3/V3_PROVIDER_SOURCE_INDEX.json",
+      "sha256": "130f93315d504bd7daddefc7eeabdbbeb10b763011531ade2766a0448a689a0e",
+      "size_bytes": 261904,
+      "role": "main_source:configs/paper_rebuild/v3/V3_PROVIDER_SOURCE_INDEX.json",
+      "expected_hash_authority": "git main 077fb725612730d743ff1dd3ba698c43499b4fcb"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/protocol_v3/providers.py",
+      "sha256": "e352c6106a4623d39615c71d669d94b9593efe26609dea7822b641986dd77df4",
+      "size_bytes": 16202,
+      "role": "main_source:src/legsa_gins/paper_rebuild/protocol_v3/providers.py",
+      "expected_hash_authority": "git main 077fb725612730d743ff1dd3ba698c43499b4fcb"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/protocol_v3/runtime.py",
+      "sha256": "cf7d17c72ff28f08edb8356709cf0f91e764698735511bada6a2b44da0990b35",
+      "size_bytes": 22811,
+      "role": "main_source:src/legsa_gins/paper_rebuild/protocol_v3/runtime.py",
+      "expected_hash_authority": "git main 077fb725612730d743ff1dd3ba698c43499b4fcb"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/protocol_v3/evaluation_process.py",
+      "sha256": "179c354a8d2500791d0b2cfb1c89b815fdf25575d66cac4b44eb87967b6a4489",
+      "size_bytes": 9397,
+      "role": "main_source:src/legsa_gins/paper_rebuild/protocol_v3/evaluation_process.py",
+      "expected_hash_authority": "git main 077fb725612730d743ff1dd3ba698c43499b4fcb"
+    },
+    {
+      "path": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/clean6_addendum/providers.py",
+      "sha256": "530eb45b56e53a9e10eb7089473f8d8e972ac4bc4a215f55e21843fa62803160",
+      "size_bytes": 8160,
+      "role": "main_source:src/legsa_gins/paper_rebuild/clean6_addendum/providers.py",
+      "expected_hash_authority": "git main 077fb725612730d743ff1dd3ba698c43499b4fcb"
+    },
+    {
+      "path": "<FROZEN_CODE_ROOT>/build/p13_v21_cpp/legsa_v23_port_core_demo",
+      "sha256": "96ae436d82ba8922c68382bd73fc42c8bf4bcb22d72a43a8bd05f506043a9c1c",
+      "size_bytes": 759456,
+      "role": "original_v3_binary",
+      "expected_hash_authority": "PROTOCOL_V3_CONTRACT.yaml"
+    },
+    {
+      "path": "<CLEAN_ROOT>/16_FINAL_V23_ARCHIVE_RECOVERY/ARCHIVE_45953164c53e/selected/MAIN/KF-GINS/bin/evaluate_nav_trace_kfgins_v2.py",
+      "sha256": "aa0492482b6467cdd701bc8882aca11c4170bbe2e7c6bb5f932679dc204978da",
+      "size_bytes": 18195,
+      "role": "original_frozen_evaluator",
+      "expected_hash_authority": "PROTOCOL_V3_CONTRACT.yaml"
+    },
+    {
+      "path": "<V3_SCRATCH>/00_PREREGISTRATION/EXECUTION_FREEZE.json",
+      "sha256": "7e7305058bb96fe29c9b3861d66b6525227e681776474b4ca26bac06c19aa00b",
+      "size_bytes": 78213,
+      "role": "EXECUTION_FREEZE.json",
+      "expected_hash_authority": "CURRENT_BYTES_PINNED_NO_INDEPENDENT_HISTORICAL_HASH"
+    },
+    {
+      "path": "<V3_SCRATCH>/00_PREREGISTRATION/REGISTRY_FILE_SEAL.json",
+      "sha256": "abd135b45ddcbd90b746ae182dcaac0663c0febb1fb6b407b6aae0db08b40527",
+      "size_bytes": 126,
+      "role": "REGISTRY_FILE_SEAL.json",
+      "expected_hash_authority": "CURRENT_BYTES_PINNED_NO_INDEPENDENT_HISTORICAL_HASH"
+    },
+    {
+      "path": "<V3_ROOT>/03_NATIVE/RUN_00004/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "3ac059cbaf5cacbf68929ca6027074629ab4efc969b4e8a5ddbb2ca300f4c542",
+      "size_bytes": 7846,
+      "role": "BY2:runtime_config",
+      "expected_hash_authority": "main task ledger"
+    },
+    {
+      "path": "<V3_SCRATCH>/02_PROVIDERS/CASES/BY2__C00_clean_normal__b98b48979d509bce1429b360c6e0d675c028ff42e3158d4c97dd63df61d62663/GNSS18.gnss",
+      "sha256": "fc6dd49c0a35c41208fc7d94da1c78ad63fe6938bd8f599021750c3bf5e20760",
+      "size_bytes": 253682,
+      "role": "BY2:provider:gnsspath",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_ATTITUDE_PRIOR.csv",
+      "sha256": "e9d49502c34e3653a2f61fd78d5b7a9f96a7320710299007709ca30a5f87924e",
+      "size_bytes": 9320956,
+      "role": "BY2:provider:go2_attitude_prior_path",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+      "sha256": "3d37106f68c3f695f6acd84792c77a95a4ff6c6571ef5394dc0cfc9f5fdbeb0e",
+      "size_bytes": 18814268,
+      "role": "BY2:provider:go2_horizontal_velocity_prior_path",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/CALIBRATED_IMU.imu",
+      "sha256": "74e31747c5b10d46846472a5adb41bd8e75ad3e27a612f45946c4895b976f647",
+      "size_bytes": 5091513,
+      "role": "BY2:provider:imupath",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2/RAW_DOPPLER.csv",
+      "sha256": "847d6c0ed6c28c59c661b07d59707faf76c3a5adb2b45fac9802a190b8b00fc4",
+      "size_bytes": 530592,
+      "role": "BY2:provider:raw_doppler_factor_path",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<V3_ROOT>/04_EVALUATION/RUN_00004/v3/ARCHIVE_RECEIPT.json",
+      "sha256": "fa63a311a15e53481db7c61204b2b4e0cda2cb8066f6d9f0d483af0c5b662aa4",
+      "size_bytes": 7098,
+      "role": "BY2:evaluation_archive_receipt",
+      "expected_hash_authority": "CURRENT_BYTES_PINNED_NO_INDEPENDENT_HISTORICAL_HASH"
+    },
+    {
+      "path": "<V3_ROOT>/04_EVALUATION/RUN_00004/v3/EVALUATION_RESULT.json",
+      "sha256": "d00efef45c3f210425c0aa26dc8bdbaf8757e9fe16904120e2f9fbf3ed9fc8e1",
+      "size_bytes": 20150,
+      "role": "BY2:evaluation_result",
+      "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+    },
+    {
+      "path": "<V3_ROOT>/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "a98f1a5f7591c2365b0fd73b6a1146e0d6df3de2a06414fd067fc9b66b928548",
+      "size_bytes": 5786321,
+      "role": "BY2:retained_error_series_compressed",
+      "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+    },
+    {
+      "path": "<V3_ROOT>/04_EVALUATION/RUN_00004/v3/FROZEN_EVALUATOR/CAPTURE_CONFIG.json",
+      "sha256": "36f7bb7c7ef3131519e105653a731c56d92a46bf6bfdbdcb0da92dc2d53f4e02",
+      "size_bytes": 793,
+      "role": "BY2:evaluation_capture",
+      "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+    },
+    {
+      "path": "<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2H_F04/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "47b91241f40453d4de1b3e6cafa7913f2892589e77178e9af3edb6209ee1b0c0",
+      "size_bytes": 7937,
+      "role": "BY2H:runtime_config",
+      "expected_hash_authority": "main task ledger"
+    },
+    {
+      "path": "<V3_SCRATCH>/02_PROVIDERS/CASES/BY2H__C00_clean_normal__4cd2369e62e4fba4f0b84b00a75c312c53a8e7eac606802837cbc88892278ff5/GNSS18.gnss",
+      "sha256": "4ff6ed07f1d189ab19934bc67c350e9f48f79527170c6fcafc85eba7cf1155bd",
+      "size_bytes": 249472,
+      "role": "BY2H:provider:gnsspath",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_ATTITUDE_PRIOR.csv",
+      "sha256": "7366cdb1c24fd647b65328fd2d3938331f288903677b0006a291ae646adbfd55",
+      "size_bytes": 9323295,
+      "role": "BY2H:provider:go2_attitude_prior_path",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2H/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+      "sha256": "379d0676cbea5fda88437b6dc0508fcfe3d37b2fc6d5ccb40f39e732a6be54bf",
+      "size_bytes": 18811477,
+      "role": "BY2H:provider:go2_horizontal_velocity_prior_path",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/CALIBRATED_IMU.imu",
+      "sha256": "d32e4891080e300e6edde4526146636f15ec54df945a0470c57fbbdc3aa5115c",
+      "size_bytes": 5098435,
+      "role": "BY2H:provider:imupath",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2H/RAW_DOPPLER.csv",
+      "sha256": "d5c4a42790f2034423d1a3e060d37488ba01341b423933074c11471fcdbac21c",
+      "size_bytes": 405344,
+      "role": "BY2H:provider:raw_doppler_factor_path",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/ARCHIVE_RECEIPT.json",
+      "sha256": "ad100864dd588d5cde28362e389dd47b4075621cff80c1c6c95ffdc92c3be393",
+      "size_bytes": 6018,
+      "role": "BY2H:evaluation_archive_receipt",
+      "expected_hash_authority": "CURRENT_BYTES_PINNED_NO_INDEPENDENT_HISTORICAL_HASH"
+    },
+    {
+      "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/EVALUATION_RESULT.json",
+      "sha256": "4597ab15b20e0b21ed60c525238625459455be09dee3870eeb75bf119d54c6ba",
+      "size_bytes": 19756,
+      "role": "BY2H:evaluation_result",
+      "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+    },
+    {
+      "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "eef9485bb7420ba23a32bfe6a4eb9d2882f31001892c0435297a44b9b8b67dfb",
+      "size_bytes": 5985885,
+      "role": "BY2H:retained_error_series_compressed",
+      "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+    },
+    {
+      "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2H_F04/v3/FROZEN_EVALUATOR/CAPTURE_CONFIG.json",
+      "sha256": "55c427356f0ce00cb470e7e1b354dfdd9b5bf482965946794b5676e6219e2ac5",
+      "size_bytes": 820,
+      "role": "BY2H:evaluation_capture",
+      "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+    },
+    {
+      "path": "<V3_ROOT>/03_NATIVE/V3R_CONTINUATION/SEQUENCE_BY2O_F04/V3_RUNTIME_CONFIG.yaml",
+      "sha256": "15ac163dc99443955cd939047806b2fd74fb5ee421acad8f49403124a1138bcb",
+      "size_bytes": 7944,
+      "role": "BY2O:runtime_config",
+      "expected_hash_authority": "main task ledger"
+    },
+    {
+      "path": "<V3_SCRATCH>/02_PROVIDERS/CASES/BY2O__C00_clean_normal__c5212cf72d07afd6d3ae0407fee87f841f2e0d909dfb8c1416bd7f38b0248bb4/GNSS18.gnss",
+      "sha256": "2a0b0ebbcd66b59dd153b84b132c638e9ea31021653e58e3ac125ed21304fa13",
+      "size_bytes": 376806,
+      "role": "BY2O:provider:gnsspath",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_ATTITUDE_PRIOR.csv",
+      "sha256": "60d0ea7aeb84ea5df757f8b34fc04d1e1e39b78925c592118094b690b8424537",
+      "size_bytes": 14205133,
+      "role": "BY2O:provider:go2_attitude_prior_path",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN6_SENSOR_MODEL_V21/02_BASE_PROVIDERS/BY2O/GO2_HORIZONTAL_VELOCITY_PRIOR.csv",
+      "sha256": "92bbe9165ed4ad6aa3f92c478f4a195ffccc7ec7b652506ba73533bd4190cdd2",
+      "size_bytes": 28692252,
+      "role": "BY2O:provider:go2_horizontal_velocity_prior_path",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/CALIBRATED_IMU.imu",
+      "sha256": "48943f3e704ceebbf517bfb073856c1c215b5216e3a5d8b6cd91e7ea7586e49b",
+      "size_bytes": 7820907,
+      "role": "BY2O:provider:imupath",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<CLEAN_ROOT>/stages/CLEAN5_CALIBRATED_SENSOR_MODEL/02_CALIBRATED_PROVIDERS/BY2O/RAW_DOPPLER.csv",
+      "sha256": "dd9b178b37149eb3d97bd586bf078b1e11cf5e43f8771cbc38c9c21bcd6101f5",
+      "size_bytes": 807097,
+      "role": "BY2O:provider:raw_doppler_factor_path",
+      "expected_hash_authority": "main task ledger provider_hashes_json"
+    },
+    {
+      "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/ARCHIVE_RECEIPT.json",
+      "sha256": "377655b8a4dfb2bb796ead5166ebfea1981e068519da9d9ed6f8592feac6f5bd",
+      "size_bytes": 6019,
+      "role": "BY2O:evaluation_archive_receipt",
+      "expected_hash_authority": "CURRENT_BYTES_PINNED_NO_INDEPENDENT_HISTORICAL_HASH"
+    },
+    {
+      "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/EVALUATION_RESULT.json",
+      "sha256": "d6dcd2785426fe59698557105efa69eff3bcf24ccd3b7331cf2a07a7e59a72b3",
+      "size_bytes": 19787,
+      "role": "BY2O:evaluation_result",
+      "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+    },
+    {
+      "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/FROZEN_EVALUATOR/error_series.csv.gz",
+      "sha256": "7c89c024b6088b3d2ba7f1b647a5b742e18e411695f4c39bd821e0eb1cc8a67b",
+      "size_bytes": 7788877,
+      "role": "BY2O:retained_error_series_compressed",
+      "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+    },
+    {
+      "path": "<V3_ROOT>/04_EVALUATION/V3R_CONTINUATION/SEQUENCE_BY2O_F04/v3/FROZEN_EVALUATOR/CAPTURE_CONFIG.json",
+      "sha256": "3325eb7f325766a57996a815da9bffd7b3dc2928d53707f6214fe37743f4b6dd",
+      "size_bytes": 822,
+      "role": "BY2O:evaluation_capture",
+      "expected_hash_authority": "evaluation ARCHIVE_RECEIPT"
+    }
+  ],
+  "degradation_contract": {
+    "scope": "Reuse original V3 case IDs, seeds, realized disturbances, source masks and registered half-open windows only in their original measurement/provider layer.",
+    "heading_source": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/protocol_v3/providers.py::lift_heading",
+    "outage_source": "<CODE_ROOT>/src/legsa_gins/paper_rebuild/clean6_addendum/providers.py::apply_outage",
+    "window_ledger": "<CODE_ROOT>/docs/paper_rebuild/v3/HEADING_FAULT_WINDOWS.md",
+    "source_index": "<CODE_ROOT>/configs/paper_rebuild/v3/V3_PROVIDER_SOURCE_INDEX.json",
+    "gnss18_changed_fields": [
+      "yaw (column 14)",
+      "yaw_valid (column 18)"
+    ],
+    "fault_time_semantics": "Frozen one-second signed angular disturbance cells carried to 5 Hz; no new independent 5 Hz draws. Existing non-heading fault bytes retained.",
+    "raw_carrier_observations_mutated_by_v3_faults": false,
+    "D61_D62": "Validity/status outages in frozen GNSS/RD/HV provider roles; not RAWX phase slips or receiver raw-message erasure.",
+    "D40": "Baseline quality metadata has no active scalar measurement path.",
+    "D41": "Inherited scalar angular perturbation; not a new raw carrier or full 3D fault experiment.",
+    "raw_fault_comparison_rule": "A later raw phase/slip/missing-message test may use these raw records/windows but must register a new physical observation fault contract and new comparison identity; old V3 degraded scores cannot be relabeled as that baseline."
+  },
+  "reuse_plan": {
+    "reuse_without_solver": [
+      "Frozen V3 registered configurations and providers after identity checks",
+      "Saved original V3 metrics, error series, output receipts and failure records",
+      "Original full sequence windows, initialization, evaluation time base and physical-point contract"
+    ],
+    "new_method_required": [
+      "Execute only the newly registered method on each full V3 sequence window, with explicit new-source/configuration identity.",
+      "Seal outputs before the unchanged offline reference evaluator and v3 physical-point transform.",
+      "Report no-output, cold-start and unavailable-carrier portions; no cropping to successful carrier epochs."
+    ],
+    "not_equivalent": [
+      "Current BY2 100–340 s carrier development window is not the full 66–340 s V3 window.",
+      "Current research scalar/PVT/carrier controls and causal body-HV providers are not original V3 reproductions.",
+      "Original PVT/provider-layer degradation is not raw-carrier-layer degradation.",
+      "Sharing a frozen evaluator executable alone does not preserve its input physical-point/window/base-time contract."
+    ],
+    "merge_gate": "Research branch only; merge into main requires review. This lock does not authorize replacing original results or changing main."
+  },
+  "verification": {
+    "checks": [
+      {
+        "check": "remote_main_identity",
+        "passed": true
+      },
+      {
+        "check": "science_is_ancestor_of_main",
+        "passed": true
+      },
+      {
+        "check": "exists:original_registration",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:original_registration",
+        "passed": true
+      },
+      {
+        "check": "hash:original_registration",
+        "passed": true
+      },
+      {
+        "check": "6468_registered_native_identities",
+        "passed": true
+      },
+      {
+        "check": "exists:main_task_ledger",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:main_task_ledger",
+        "passed": true
+      },
+      {
+        "check": "hash:main_task_ledger",
+        "passed": true
+      },
+      {
+        "check": "exists:main_source:configs/paper_rebuild/v3/PROTOCOL_V3_CONTRACT.yaml",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:main_source:configs/paper_rebuild/v3/PROTOCOL_V3_CONTRACT.yaml",
+        "passed": true
+      },
+      {
+        "check": "hash:main_source:configs/paper_rebuild/v3/PROTOCOL_V3_CONTRACT.yaml",
+        "passed": true
+      },
+      {
+        "check": "exists:main_source:docs/paper_rebuild/v3/HEADING_FAULT_WINDOWS.md",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:main_source:docs/paper_rebuild/v3/HEADING_FAULT_WINDOWS.md",
+        "passed": true
+      },
+      {
+        "check": "hash:main_source:docs/paper_rebuild/v3/HEADING_FAULT_WINDOWS.md",
+        "passed": true
+      },
+      {
+        "check": "exists:main_source:configs/paper_rebuild/v3/V3_PROVIDER_SOURCE_INDEX.json",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:main_source:configs/paper_rebuild/v3/V3_PROVIDER_SOURCE_INDEX.json",
+        "passed": true
+      },
+      {
+        "check": "hash:main_source:configs/paper_rebuild/v3/V3_PROVIDER_SOURCE_INDEX.json",
+        "passed": true
+      },
+      {
+        "check": "exists:main_source:src/legsa_gins/paper_rebuild/protocol_v3/providers.py",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:main_source:src/legsa_gins/paper_rebuild/protocol_v3/providers.py",
+        "passed": true
+      },
+      {
+        "check": "hash:main_source:src/legsa_gins/paper_rebuild/protocol_v3/providers.py",
+        "passed": true
+      },
+      {
+        "check": "exists:main_source:src/legsa_gins/paper_rebuild/protocol_v3/runtime.py",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:main_source:src/legsa_gins/paper_rebuild/protocol_v3/runtime.py",
+        "passed": true
+      },
+      {
+        "check": "hash:main_source:src/legsa_gins/paper_rebuild/protocol_v3/runtime.py",
+        "passed": true
+      },
+      {
+        "check": "exists:main_source:src/legsa_gins/paper_rebuild/protocol_v3/evaluation_process.py",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:main_source:src/legsa_gins/paper_rebuild/protocol_v3/evaluation_process.py",
+        "passed": true
+      },
+      {
+        "check": "hash:main_source:src/legsa_gins/paper_rebuild/protocol_v3/evaluation_process.py",
+        "passed": true
+      },
+      {
+        "check": "exists:main_source:src/legsa_gins/paper_rebuild/clean6_addendum/providers.py",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:main_source:src/legsa_gins/paper_rebuild/clean6_addendum/providers.py",
+        "passed": true
+      },
+      {
+        "check": "hash:main_source:src/legsa_gins/paper_rebuild/clean6_addendum/providers.py",
+        "passed": true
+      },
+      {
+        "check": "exists:original_v3_binary",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:original_v3_binary",
+        "passed": true
+      },
+      {
+        "check": "hash:original_v3_binary",
+        "passed": true
+      },
+      {
+        "check": "exists:original_frozen_evaluator",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:original_frozen_evaluator",
+        "passed": true
+      },
+      {
+        "check": "hash:original_frozen_evaluator",
+        "passed": true
+      },
+      {
+        "check": "exists:EXECUTION_FREEZE.json",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:EXECUTION_FREEZE.json",
+        "passed": true
+      },
+      {
+        "check": "exists:REGISTRY_FILE_SEAL.json",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:REGISTRY_FILE_SEAL.json",
+        "passed": true
+      },
+      {
+        "check": "BY2:registered_sequence",
+        "passed": true
+      },
+      {
+        "check": "BY2:science_freeze",
+        "passed": true
+      },
+      {
+        "check": "BY2:registered_full_window",
+        "passed": true
+      },
+      {
+        "check": "BY2:registered_base_time",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2:runtime_config",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2:runtime_config",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2:runtime_config",
+        "passed": true
+      },
+      {
+        "check": "BY2:runtime_full_window",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2:provider:gnsspath",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2:provider:gnsspath",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2:provider:gnsspath",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2:provider:go2_attitude_prior_path",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2:provider:go2_attitude_prior_path",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2:provider:go2_attitude_prior_path",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2:provider:go2_horizontal_velocity_prior_path",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2:provider:go2_horizontal_velocity_prior_path",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2:provider:go2_horizontal_velocity_prior_path",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2:provider:imupath",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2:provider:imupath",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2:provider:imupath",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2:provider:raw_doppler_factor_path",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2:provider:raw_doppler_factor_path",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2:provider:raw_doppler_factor_path",
+        "passed": true
+      },
+      {
+        "check": "BY2:raw_exists:body",
+        "passed": true
+      },
+      {
+        "check": "BY2:raw_exists:status",
+        "passed": true
+      },
+      {
+        "check": "BY2:raw_exists:gnss1",
+        "passed": true
+      },
+      {
+        "check": "BY2:raw_exists:gnss2",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2:evaluation_archive_receipt",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2:evaluation_archive_receipt",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2:evaluation_result",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2:evaluation_result",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2:evaluation_result",
+        "passed": true
+      },
+      {
+        "check": "BY2:completed_v3_evaluation",
+        "passed": true
+      },
+      {
+        "check": "BY2:evaluation_source_identity",
+        "passed": true
+      },
+      {
+        "check": "BY2:evaluation_time_and_reference",
+        "passed": true
+      },
+      {
+        "check": "BY2:declared_physical_transform",
+        "passed": true
+      },
+      {
+        "check": "BY2:no_fit_or_covariance_transport",
+        "passed": true
+      },
+      {
+        "check": "BY2:historical_evaluator_audit",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2:retained_error_series_compressed",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2:retained_error_series_compressed",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2:retained_error_series_compressed",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2:evaluation_capture",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2:evaluation_capture",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2:evaluation_capture",
+        "passed": true
+      },
+      {
+        "check": "BY2:full_nav_payload_not_retained",
+        "passed": true
+      },
+      {
+        "check": "BY2H:registered_sequence",
+        "passed": true
+      },
+      {
+        "check": "BY2H:science_freeze",
+        "passed": true
+      },
+      {
+        "check": "BY2H:registered_full_window",
+        "passed": true
+      },
+      {
+        "check": "BY2H:registered_base_time",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2H:runtime_config",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2H:runtime_config",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2H:runtime_config",
+        "passed": true
+      },
+      {
+        "check": "BY2H:runtime_full_window",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2H:provider:gnsspath",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2H:provider:gnsspath",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2H:provider:gnsspath",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2H:provider:go2_attitude_prior_path",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2H:provider:go2_attitude_prior_path",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2H:provider:go2_attitude_prior_path",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2H:provider:go2_horizontal_velocity_prior_path",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2H:provider:go2_horizontal_velocity_prior_path",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2H:provider:go2_horizontal_velocity_prior_path",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2H:provider:imupath",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2H:provider:imupath",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2H:provider:imupath",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2H:provider:raw_doppler_factor_path",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2H:provider:raw_doppler_factor_path",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2H:provider:raw_doppler_factor_path",
+        "passed": true
+      },
+      {
+        "check": "BY2H:raw_exists:body",
+        "passed": true
+      },
+      {
+        "check": "BY2H:raw_exists:status",
+        "passed": true
+      },
+      {
+        "check": "BY2H:raw_exists:gnss1",
+        "passed": true
+      },
+      {
+        "check": "BY2H:raw_exists:gnss2",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2H:evaluation_archive_receipt",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2H:evaluation_archive_receipt",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2H:evaluation_result",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2H:evaluation_result",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2H:evaluation_result",
+        "passed": true
+      },
+      {
+        "check": "BY2H:completed_v3_evaluation",
+        "passed": true
+      },
+      {
+        "check": "BY2H:evaluation_source_identity",
+        "passed": true
+      },
+      {
+        "check": "BY2H:evaluation_time_and_reference",
+        "passed": true
+      },
+      {
+        "check": "BY2H:declared_physical_transform",
+        "passed": true
+      },
+      {
+        "check": "BY2H:no_fit_or_covariance_transport",
+        "passed": true
+      },
+      {
+        "check": "BY2H:historical_evaluator_audit",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2H:retained_error_series_compressed",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2H:retained_error_series_compressed",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2H:retained_error_series_compressed",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2H:evaluation_capture",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2H:evaluation_capture",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2H:evaluation_capture",
+        "passed": true
+      },
+      {
+        "check": "BY2H:full_nav_payload_not_retained",
+        "passed": true
+      },
+      {
+        "check": "BY2O:registered_sequence",
+        "passed": true
+      },
+      {
+        "check": "BY2O:science_freeze",
+        "passed": true
+      },
+      {
+        "check": "BY2O:registered_full_window",
+        "passed": true
+      },
+      {
+        "check": "BY2O:registered_base_time",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2O:runtime_config",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2O:runtime_config",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2O:runtime_config",
+        "passed": true
+      },
+      {
+        "check": "BY2O:runtime_full_window",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2O:provider:gnsspath",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2O:provider:gnsspath",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2O:provider:gnsspath",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2O:provider:go2_attitude_prior_path",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2O:provider:go2_attitude_prior_path",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2O:provider:go2_attitude_prior_path",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2O:provider:go2_horizontal_velocity_prior_path",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2O:provider:go2_horizontal_velocity_prior_path",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2O:provider:go2_horizontal_velocity_prior_path",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2O:provider:imupath",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2O:provider:imupath",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2O:provider:imupath",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2O:provider:raw_doppler_factor_path",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2O:provider:raw_doppler_factor_path",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2O:provider:raw_doppler_factor_path",
+        "passed": true
+      },
+      {
+        "check": "BY2O:raw_exists:body",
+        "passed": true
+      },
+      {
+        "check": "BY2O:raw_exists:status",
+        "passed": true
+      },
+      {
+        "check": "BY2O:raw_exists:gnss1",
+        "passed": true
+      },
+      {
+        "check": "BY2O:raw_exists:gnss2",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2O:evaluation_archive_receipt",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2O:evaluation_archive_receipt",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2O:evaluation_result",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2O:evaluation_result",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2O:evaluation_result",
+        "passed": true
+      },
+      {
+        "check": "BY2O:completed_v3_evaluation",
+        "passed": true
+      },
+      {
+        "check": "BY2O:evaluation_source_identity",
+        "passed": true
+      },
+      {
+        "check": "BY2O:evaluation_time_and_reference",
+        "passed": true
+      },
+      {
+        "check": "BY2O:declared_physical_transform",
+        "passed": true
+      },
+      {
+        "check": "BY2O:no_fit_or_covariance_transport",
+        "passed": true
+      },
+      {
+        "check": "BY2O:historical_evaluator_audit",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2O:retained_error_series_compressed",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2O:retained_error_series_compressed",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2O:retained_error_series_compressed",
+        "passed": true
+      },
+      {
+        "check": "exists:BY2O:evaluation_capture",
+        "passed": true
+      },
+      {
+        "check": "not_raw_hash:BY2O:evaluation_capture",
+        "passed": true
+      },
+      {
+        "check": "hash:BY2O:evaluation_capture",
+        "passed": true
+      },
+      {
+        "check": "BY2O:full_nav_payload_not_retained",
+        "passed": true
+      },
+      {
+        "check": "tracked_payload_has_no_machine_absolute_paths",
+        "passed": true
+      }
+    ],
+    "check_count": 176,
+    "passed_count": 176,
+    "hashed_nonraw_files": 43,
+    "raw_files_rehashed": 0,
+    "reference_payload_reads": 0,
+    "solver_calls": 0,
+    "evaluator_calls": 0,
+    "scope": "Current byte identity of listed metadata/config/provider/binary/evaluator/compressed-result files; raw hashes inherited from sealed registry with existence/size checks only.",
+    "independent_recheck": {
+      "status": "PASS",
+      "validation_checks_passed": 248,
+      "hashed_nonraw_files": 43,
+      "raw_stat_only_files": 12,
+      "raw_files_rehashed": 0,
+      "reference_payload_reads": 0,
+      "solver_calls": 0,
+      "evaluator_calls": 0,
+      "checked_utc": "2026-10-06T10:52:26.527026+00:00",
+      "script": "<CODE_ROOT>/scripts/paper_rebuild/ar_v3_research_20261006/v3_lock_validate.py",
+      "script_sha256": "6ae00a1e1817738948540d3bdc542d2449040dd4b46f34881976bdf4db96af78",
+      "note": "Read-only structural/identity recheck, not an independent scientific experiment or independent reviewer."
+    }
+  }
+}

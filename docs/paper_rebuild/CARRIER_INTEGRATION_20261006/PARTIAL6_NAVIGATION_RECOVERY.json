@@ -1,0 +1,193 @@
+{
+  "status": "PASS_CONTROLLER_ONLY_RECOVERY_AND_COMPLETE_NAVIGATION",
+  "scientific_configuration_changed": false,
+  "cause": "Initial controller confused the nominal 340 s window bound with the inherited final IMU sample at 339.997056 s.",
+  "correction": "Require the nominal [66,340] window, same actual start/end as TRACKING_V2, and end equal to both registered IMU segment.last values.",
+  "original_controller_attempt": {
+    "prepare_calls": 1,
+    "config_checker_calls": 4,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "terminal": "FAILED_BEFORE_NATIVE",
+    "failure_receipt_sha256": "36fc8e4855c84be04d2f3331efe2dae9652fb8691426124b361673fb69f80458",
+    "driver_sha256": "c4cb3e304b5ec125d07bb4c1fa349f00b364c9ff97e90e06ba869fec42594b97",
+    "all_12_original_files_unchanged": true
+  },
+  "explicit_recovery": {
+    "prepare_calls": 0,
+    "config_checker_calls": 0,
+    "native_calls": 4,
+    "evaluator_calls": 4,
+    "scientific_repeats": 0,
+    "automatic_retries": 0,
+    "driver_sha256": "291d79f2fa631a9f6948d1a3d4c87a817bb64ca454bcc8a5571c3ce583c8b6ad",
+    "registration_sha256": "fe2b6856d12fc76b8f277b14948968e64330446a55da504eae0a649afca173d3",
+    "all_10_prepared_files_unchanged": true,
+    "phases": {
+      "native": {
+        "invocation_sha256": "839a240292a325d869ce483badeba40d0ff01d927a95234590a02bb0055851e3",
+        "result_sha256": "da6bedf52c8da638aaa30d2c60f1d4e9c5bb9047f94e9f8650c7156e5f0d46d8",
+        "started_unix": 1791275076.553799,
+        "completed_unix": 1791275105.260595,
+        "returncode": 0
+      },
+      "evaluate": {
+        "invocation_sha256": "859e5f004634750c80c4789f529971df517f1acbb28e271334f397393fbc3fab",
+        "result_sha256": "f118d2ca8527391d364ccc6270e204b628ae093025443e3cb1440decd3011ac3",
+        "started_unix": 1791275105.3584216,
+        "completed_unix": 1791275124.4416425,
+        "returncode": 0
+      },
+      "summarize": {
+        "invocation_sha256": "594736e4f0683ac375c45cf635014601d510441e6614ff568c78fc53e38b724f",
+        "result_sha256": "75431bc704e4b4f152256b28441050d9ed7f91705aa534cfdd129a20c87b75b8",
+        "started_unix": 1791275124.4561331,
+        "completed_unix": 1791275127.8680618,
+        "returncode": 0
+      }
+    },
+    "controller_path": "<CARRIER_SCRATCH>/NAVIGATION_DRIVER_PARTIAL6_RECOVERY_01"
+  },
+  "upstream_reused_without_rerun": {
+    "acquisition_searches": 120,
+    "tracked_solver_calls": 0,
+    "qualified_acquisitions": 16,
+    "tracking_valid_epochs": 70,
+    "tracking_events": {
+      "INACTIVE": 1115,
+      "suppressed_valid_origins": 1,
+      "TRACK_STARTED": 15,
+      "TRACK_RELEASED": 15,
+      "TRACK_UPDATED": 55
+    },
+    "tracking_summary_sha256": "e4a4b239a64ad19315c7e1024249190c86b52a0f91f9aed0af93a371457aa53b"
+  },
+  "native_seal_sha256": "4f9fa1ec23740880028c0a4a934aa342899432a4d62ebd7fb0633d316f308878",
+  "evaluation_seal_sha256": "c101212ee83ad9867d56147adbfda699da3eeace4eccef36f79169008b8e503b",
+  "all_native_sealed_before_any_evaluation": true,
+  "new_scientific_runtime_seconds": {
+    "C0_SCALAR": 6.996342272000007,
+    "C1_DUAL_PVT_VECTOR": 7.1475211030000025,
+    "C2_FULL_CARRIER_VECTOR": 6.797112511000009,
+    "C3_PARTIAL_CARRIER_VECTOR": 6.85111564799999
+  },
+  "all_16_chains_same_time_keys": true,
+  "matched_epochs_per_chain": 56642,
+  "nominal_window_s": [
+    66.0,
+    340.0
+  ],
+  "actual_output_first_last_s": [
+    66.005054,
+    339.997056
+  ],
+  "control_NAV_STD_byte_equal_to_TRACKING_V2": {
+    "C0_SCALAR": true,
+    "C1_DUAL_PVT_VECTOR": true,
+    "C2_FULL_CARRIER_VECTOR": true
+  },
+  "run_counts": [
+    {
+      "trial": "PARTIAL6",
+      "case": "C0_SCALAR",
+      "output_epochs": 56642,
+      "matched_epochs": 56642,
+      "carrier_provider_rows": null,
+      "carrier_provider_valid_epochs": null,
+      "native_vector_accepts": null,
+      "yaw_dispatch_not_vector_accepts": 1369,
+      "body_updates": 1369,
+      "RP_updates": 1369,
+      "RD_updates": 666,
+      "native_reference_reads": 0,
+      "offline_reference_reads": 1,
+      "native_time_sha256": "b822e5136f043eaf6a97b78d01d3e62b67440c3147f84fc5cb72a0c0478639b5",
+      "matched_time_sha256": "b822e5136f043eaf6a97b78d01d3e62b67440c3147f84fc5cb72a0c0478639b5"
+    },
+    {
+      "trial": "PARTIAL6",
+      "case": "C1_DUAL_PVT_VECTOR",
+      "output_epochs": 56642,
+      "matched_epochs": 56642,
+      "carrier_provider_rows": null,
+      "carrier_provider_valid_epochs": null,
+      "native_vector_accepts": 1302,
+      "yaw_dispatch_not_vector_accepts": 1369,
+      "body_updates": 1369,
+      "RP_updates": 1369,
+      "RD_updates": 666,
+      "native_reference_reads": 0,
+      "offline_reference_reads": 1,
+      "native_time_sha256": "b822e5136f043eaf6a97b78d01d3e62b67440c3147f84fc5cb72a0c0478639b5",
+      "matched_time_sha256": "b822e5136f043eaf6a97b78d01d3e62b67440c3147f84fc5cb72a0c0478639b5"
+    },
+    {
+      "trial": "PARTIAL6",
+      "case": "C2_FULL_CARRIER_VECTOR",
+      "output_epochs": 56642,
+      "matched_epochs": 56642,
+      "carrier_provider_rows": 1200,
+      "carrier_provider_valid_epochs": 0,
+      "native_vector_accepts": 0,
+      "yaw_dispatch_not_vector_accepts": 0,
+      "body_updates": 1369,
+      "RP_updates": 1369,
+      "RD_updates": 666,
+      "native_reference_reads": 0,
+      "offline_reference_reads": 1,
+      "native_time_sha256": "b822e5136f043eaf6a97b78d01d3e62b67440c3147f84fc5cb72a0c0478639b5",
+      "matched_time_sha256": "b822e5136f043eaf6a97b78d01d3e62b67440c3147f84fc5cb72a0c0478639b5"
+    },
+    {
+      "trial": "PARTIAL6",
+      "case": "C3_PARTIAL_CARRIER_VECTOR",
+      "output_epochs": 56642,
+      "matched_epochs": 56642,
+      "carrier_provider_rows": 1200,
+      "carrier_provider_valid_epochs": 70,
+      "native_vector_accepts": 68,
+      "yaw_dispatch_not_vector_accepts": 70,
+      "body_updates": 1369,
+      "RP_updates": 1369,
+      "RD_updates": 666,
+      "native_reference_reads": 0,
+      "offline_reference_reads": 1,
+      "native_time_sha256": "b822e5136f043eaf6a97b78d01d3e62b67440c3147f84fc5cb72a0c0478639b5",
+      "matched_time_sha256": "b822e5136f043eaf6a97b78d01d3e62b67440c3147f84fc5cb72a0c0478639b5"
+    }
+  ],
+  "new_partial_full_span_metrics": {
+    "trial": "PARTIAL6",
+    "case": "C3_PARTIAL_CARRIER_VECTOR",
+    "domain": "full_66_340",
+    "epochs": 56642,
+    "first_time": 66.005054,
+    "last_time": 339.997056,
+    "H_RMSE_m": 0.0999929773116786,
+    "H_max_abs_m": 0.5442814528872433,
+    "V_RMSE_m": 0.0487816230345081,
+    "V_max_abs_m": 0.3418850443871305,
+    "D3_RMSE_m": 0.1112575492159284,
+    "D3_max_abs_m": 0.5757578371078886,
+    "yaw_RMSE_deg": 1.9949337724779128,
+    "yaw_max_abs_deg": 7.258837203238414
+  },
+  "versus_tracking_full_span_delta": {
+    "H_RMSE_m": -0.0010751052396829053,
+    "V_RMSE_m": -3.3275539174995594e-06,
+    "D3_RMSE_m": -0.0009686897592949967,
+    "yaw_RMSE_deg": -0.2545354001612221,
+    "yaw_max_abs_deg": 0.7379836920000002
+  },
+  "adverse_change_visible": "Full-span maximum absolute yaw difference increased from 6.520853511238414 to 7.258837203238414 deg despite lower RMSE.",
+  "integer_truth_available": false,
+  "reference_is_independent_truth": false,
+  "review_reads_reference_payload": false,
+  "public_numeric_report_pins": {
+    "PARTIAL6_NAVIGATION_DIFFERENCES.csv": "02b5eae9295ad82297af4cf927ba37970e8b4b7c0754c9d58f6478b12e4dbe97",
+    "PARTIAL6_NAVIGATION_RESULTS.csv": "32d4e068f61762624b8c34b36c65ed02d209947b2da69c4b89f9182f22bd5bbe",
+    "PARTIAL6_NAVIGATION_RUN_COUNTS.csv": "aabe996bccbe438c7ad58a2e59faba389b3f6621e94f53aca7c1e734b5e2206c",
+    "PARTIAL6_NAVIGATION_SUMMARY.json": "96bb24ff685eb341796f99cc6a80684dff2cd317d96003490e692bd69cc75636"
+  },
+  "review_unix": 1791275335.6458824
+}

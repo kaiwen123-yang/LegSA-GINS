@@ -1,0 +1,59 @@
+{
+  "schema": "ar_v3.input_audit.result.v1",
+  "status": "FAILED",
+  "plan_sha256": "670391844fdbcb1381b558f68cab1a263feb4e0851a1ffc8a893e71f23d321eb",
+  "script_sha256": "50c5c05fc52c1b9b14696ced1b729a31283361e268ffeffc87fbc2b8bce15485",
+  "code_commit": "b72238f2bdd1b76b3b7ebb4a9ecabe5e32655e51",
+  "data_mode": "recorded_raw_gnss_diagnostic",
+  "reference_opens": 0,
+  "navigation_calls": 0,
+  "integer_search_calls": 0,
+  "convbin_calls": 0,
+  "retries": 0,
+  "synthetic_data_used": false,
+  "semisynthetic_data_used": false,
+  "receivers": [
+    {
+      "sequence": "BY2",
+      "receiver": 1,
+      "source": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv",
+      "source_sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+      "status": "INPUT_CHECK_STARTED"
+    }
+  ],
+  "input_identity": [
+    {
+      "role": "convbin",
+      "path": "<RTKLIB_ROOT>/app/consapp/convbin/gcc/convbin",
+      "sequence": null,
+      "receiver": null,
+      "expected_sha256": "85b6b981374c7df957492d9423a3c650a35cb5e7253598651070adf4d9f1df2a",
+      "actual_sha256": "85b6b981374c7df957492d9423a3c650a35cb5e7253598651070adf4d9f1df2a",
+      "identity_equal": true
+    },
+    {
+      "role": "old_lli_table",
+      "path": "<CODE_ROOT>/docs/paper_rebuild/hext/DG01R/DG01R_LLI_DIFFERENCES.csv",
+      "sequence": null,
+      "receiver": null,
+      "expected_sha256": "3efef3c8a05b656d4ff6b5662f3d4d36780b305c861df6428e97c24e0b8f0b56",
+      "actual_sha256": "3efef3c8a05b656d4ff6b5662f3d4d36780b305c861df6428e97c24e0b8f0b56",
+      "identity_equal": true
+    },
+    {
+      "role": "source",
+      "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/fixption数据/2026.3.6/by2/vrtk2_a87c6e_2026-03-06-08-00-54_minimal/gnss1-raw.csv",
+      "sequence": "BY2",
+      "receiver": 1,
+      "expected_sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+      "actual_sha256": "5d2ac46d28c14470cd8b2c910d8cba12492bed0e72517e98496188851f5bc027",
+      "identity_equal": true
+    }
+  ],
+  "execution_complete": false,
+  "status_semantics": "COMPLETE denotes execution completion, not scientific equality",
+  "all_science_records_equal": null,
+  "all_old_lli_table_consistent": null,
+  "failure_type": "AssertionError",
+  "failure": "('BY2_R1', 'invalid UBX frames', 2)"
+}

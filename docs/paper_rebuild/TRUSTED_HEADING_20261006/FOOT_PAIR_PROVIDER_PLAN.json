@@ -1,0 +1,72 @@
+{
+  "schema": "trusted_heading.foot_pair_provider.registration.v1",
+  "status": "REGISTERED_READY",
+  "v3_lock_sha256": "d961acfd483c420e24e5b48f0b313cbac5932ef7a036a21ffe5a00dd742a09ff",
+  "budgets": {
+    "full_body_passes": 3,
+    "native": 0,
+    "integer_search": 0,
+    "evaluator": 0,
+    "reference": 0,
+    "retries": 0,
+    "wall_timeout_s": 180
+  },
+  "sequence_windows_s": {
+    "BY2": [
+      66,
+      340
+    ],
+    "BY2H": [
+      413,
+      683
+    ],
+    "BY2O": [
+      3186,
+      3563
+    ]
+  },
+  "expected_opportunities": {
+    "BY2": 1370,
+    "BY2H": 1350,
+    "BY2O": 1885
+  },
+  "policy": {
+    "opportunity_period_s": 0.2,
+    "max_first_source_age_s": 0.05,
+    "target_interval_s": 0.1,
+    "max_interval_s": 0.15,
+    "support_dwell_s": 0.0120356083,
+    "support_max_source_gap_s": 0.05,
+    "selection": "canonical native foot order, first eligible pair; no future END preselection",
+    "sample_reuse": false,
+    "point_working_sigma_m": 0.01,
+    "sigma6_diagonal_m2": 0.0008,
+    "working_covariance": "upper envelope for arbitrary four-point correlations IF each point marginal is zero-mean bounded by sigma^2 I; physical premise uncalibrated",
+    "frame": "SDK FLU to body FRD diag(1,-1,-1), followed by explicit identity body-FRD to engine-body-FRD working mapping, no second IMU installation rotation",
+    "availability": "offline source-time replay assumption, timer deadlines explicit; no measured hardware arrival latency"
+  },
+  "forbidden_inputs": [
+    "SDK attitude",
+    "SDK velocity",
+    "foot_speed_body",
+    "GNSS",
+    "reference",
+    "NAV",
+    "error_series"
+  ],
+  "source_pins": {
+    "scripts/paper_rebuild/carrier_phase/foot_pair_provider.py": "0be6ac7baabe972bf1b45f99b7047317d2ba37e613f9213562e8e68ed25300ff",
+    "src/legsa_gins/paper_rebuild/body_velocity.py": "1866bd8b2655cb5a58edba9ba26f3610a1e79bf83145dd1d09548c716fa89da9",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h5.py": "3b9e57d5470cf33360564b0736a81a31ee67c1274c9a87b7e335921f58a399c2",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/hartley_h0_h2.py": "ba861d0406aeb47adc2e9af29adc1f5fffc7326ee06a9ea50dbcc262c8f9158d",
+    "src/legsa_gins/paper_rebuild/carrier_phase/support_arcs.py": "4ce14c6d08a03551e1247d759405dc13252e03d53923fc6e58df8e387d605985",
+    "tests/paper_rebuild/test_foot_pair_provider.py": "8aa2bcf9923f23b54fefd2e47b89a551ecd78c1123093e2fccbb4f595d0852cb"
+  },
+  "local_verification": {
+    "unique_synthetic_tests": 6,
+    "pytest_calls": 1,
+    "pass": 6,
+    "real_data_calls": 0,
+    "receipt": "docs/paper_rebuild/TRUSTED_HEADING_20261006/FOOT_PAIR_PROVIDER_LOCAL_RECEIPT.json"
+  }
+}

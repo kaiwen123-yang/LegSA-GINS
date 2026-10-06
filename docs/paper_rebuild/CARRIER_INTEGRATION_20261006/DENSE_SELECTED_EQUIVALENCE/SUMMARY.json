@@ -1,0 +1,136 @@
+{
+  "scope": "saved common120 acquisition equivalence only; dense tracking ownership intentionally differs",
+  "scientific_contract_matches": {
+    "model_plan_sha256": true,
+    "family": true,
+    "length_m": true,
+    "partial_policy": true,
+    "nodes": true,
+    "timeout_s": true,
+    "alpha": true,
+    "angular_floor_deg": true,
+    "data_mode": true,
+    "trace_used_online": true,
+    "likelihood": true
+  },
+  "common_start_count": 120,
+  "both_certified_count": 120,
+  "original": {
+    "opportunities": 120,
+    "actual_searches": 120,
+    "presearch_unavailable": 0,
+    "certified": 120,
+    "valid_acquisition_measurements": 15,
+    "statuses": {
+      "UNRESOLVED_ACTIVE_ARC_CHANGED": 53,
+      "EXPERIMENTAL_FIXED_CANDIDATE": 15,
+      "REJECTED_RESIDUAL": 12,
+      "UNRESOLVED_COMPETITION": 6,
+      "REJECTED_PHASE_FAULT_DIAGNOSTIC": 16,
+      "REJECTED_LENGTH": 13,
+      "REJECTED_RESIDUAL_AND_LENGTH": 5
+    },
+    "solver_times_recorded": 120,
+    "solver_runtime_quantiles_s": {
+      "0": 0.009452882999994472,
+      "50": 0.1359035699999822,
+      "90": 0.38714540160002575,
+      "95": 0.49886841470001564,
+      "99": 0.7760438681800116,
+      "100": 1.87063195799999
+    },
+    "execution_commits": [
+      "fc125a9a41527d8ac81a7a57802b5820404c0896"
+    ]
+  },
+  "dense_total": {
+    "opportunities": 1191,
+    "actual_searches": 1191,
+    "presearch_unavailable": 0,
+    "certified": 1191,
+    "valid_acquisition_measurements": 116,
+    "statuses": {
+      "UNRESOLVED_ACTIVE_ARC_CHANGED": 535,
+      "REJECTED_PHASE_FAULT_DIAGNOSTIC": 215,
+      "EXPERIMENTAL_FIXED_CANDIDATE": 116,
+      "REJECTED_LENGTH": 95,
+      "REJECTED_RESIDUAL": 118,
+      "REJECTED_RESIDUAL_AND_LENGTH": 62,
+      "UNRESOLVED_COMPETITION": 50
+    },
+    "solver_times_recorded": 1191,
+    "solver_runtime_quantiles_s": {
+      "0": 0.004229640999994899,
+      "50": 0.034646455999961745,
+      "90": 0.11690153500001088,
+      "95": 0.15447876199999655,
+      "99": 0.2985311958999938,
+      "100": 0.7271423810000215
+    },
+    "execution_commits": [
+      "371bf0ae41c76f604772350dbbb40744824d8104"
+    ]
+  },
+  "dense_common120": {
+    "opportunities": 120,
+    "actual_searches": 120,
+    "presearch_unavailable": 0,
+    "certified": 120,
+    "valid_acquisition_measurements": 15,
+    "statuses": {
+      "UNRESOLVED_ACTIVE_ARC_CHANGED": 53,
+      "EXPERIMENTAL_FIXED_CANDIDATE": 15,
+      "REJECTED_RESIDUAL": 12,
+      "UNRESOLVED_COMPETITION": 6,
+      "REJECTED_PHASE_FAULT_DIAGNOSTIC": 16,
+      "REJECTED_LENGTH": 13,
+      "REJECTED_RESIDUAL_AND_LENGTH": 5
+    },
+    "solver_times_recorded": 120,
+    "solver_runtime_quantiles_s": {
+      "0": 0.004522842000028504,
+      "50": 0.03944120500000281,
+      "90": 0.10861857069999134,
+      "95": 0.13393693564997305,
+      "99": 0.19488479487000918,
+      "100": 0.4929502989999719
+    },
+    "execution_commits": [
+      "371bf0ae41c76f604772350dbbb40744824d8104"
+    ]
+  },
+  "match_counts": {
+    "selection_equal": 120,
+    "support_equal": 120,
+    "reduced_plan_fingerprint_equal": 120,
+    "search_labels_equal": 120,
+    "status_equal": 120,
+    "valid_equal": 120,
+    "frozen_candidates_equal": 120,
+    "admission_status_equal": 120,
+    "measurement_equal": 120
+  },
+  "common_certified_match_counts": {
+    "both_N_equal": 120,
+    "both_objectives_close": 120,
+    "both_baselines_close": 120
+  },
+  "maximum_objective_abs_diff": 5.826450433232822e-13,
+  "maximum_baseline_component_diff_m": 1.0824674490095276e-15,
+  "differences": [],
+  "solver_calls": 0,
+  "evaluator_calls": 0,
+  "raw_or_reference_reads": 0,
+  "tolerances": {
+    "objective_atol": 1e-10,
+    "objective_rtol": 1e-10,
+    "baseline_atol_m": 1e-10
+  },
+  "receipts": {
+    "completion_sha256": "42e73a12627db59ee70f9a5bad749e02be60350787c2568eddb43d97ad77446e",
+    "original_contract_sha256": "ee80e8ee0a28b4fc3f66225ca4334b9803b55e1411331c8d747e166485b2933a",
+    "dense_contract_sha256": "90fe236dd4a8aeb0477c925dc2140d7050197fcf3c7577e5850183120b5008f6",
+    "script_sha256": "779ca50ef2794a5dd258e0b6761a4a51ffcf0f535d87564e1cc8c9a11318c932"
+  },
+  "timing_boundary": "Original is selected-support Python; dense uses native sphere and different opportunity cadence. Acquisitions are independently solved; timings are recorded actual durations, not an isolated randomized speed comparison."
+}

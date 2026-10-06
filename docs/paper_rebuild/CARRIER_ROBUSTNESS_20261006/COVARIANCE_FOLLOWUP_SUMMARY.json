@@ -1,0 +1,1246 @@
+{
+  "scope": "Post-result developmental mechanism replay; no new AR cohort or calibrated field risk.",
+  "counts": {
+    "joint_validations": 216,
+    "new_same_future_IID_validations": 72,
+    "reused_IID_decisions": 144,
+    "new_independent_future_realizations": 72,
+    "new_CILS_calls": 0,
+    "sensitivity_models": 3,
+    "all_signal_columns": 21,
+    "producer_truth_file_reads": 72,
+    "checker_truth_file_reads": 0,
+    "post_seal_evaluator_truth_file_reads": 72
+  },
+  "groups": {
+    "CALIBRATION/M3/CLEAN_REUSED": {
+      "cases": 8,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 3,
+          "REJECTED_LENGTH": 1,
+          "JOINT_SHADOW_ACCEPTED": 4
+        },
+        "correct_shadow_accepted": 4,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 3,
+        "accepted_correct_angle_rmse_mean_deg": 2.3697099043305103,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 4,
+          "REJECTED_LENGTH": 1,
+          "SHADOW_ACCEPTED": 3
+        },
+        "correct_shadow_accepted": 3,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 4,
+        "accepted_correct_angle_rmse_mean_deg": 2.5108671110238348,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 3,
+        "REJECTED_LENGTH -> REJECTED_LENGTH": 1,
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 3,
+        "UNRESOLVED_COMPETITION -> JOINT_SHADOW_ACCEPTED": 1
+      }
+    },
+    "CALIBRATION/M3/RHO08_REUSED_SELECTION_DEPENDENT": {
+      "cases": 8,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_SELECTION_DEPENDENCE": 8
+        },
+        "correct_shadow_accepted": 0,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 8,
+        "accepted_correct_angle_rmse_mean_deg": null,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 3,
+          "REJECTED_LENGTH": 1,
+          "SHADOW_ACCEPTED": 4
+        },
+        "correct_shadow_accepted": 4,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 3,
+        "accepted_correct_angle_rmse_mean_deg": 1.8031584613383063,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_SELECTION_DEPENDENCE": 3,
+        "REJECTED_LENGTH -> UNRESOLVED_SELECTION_DEPENDENCE": 1,
+        "SHADOW_ACCEPTED -> UNRESOLVED_SELECTION_DEPENDENCE": 4
+      }
+    },
+    "CALIBRATION/M3/RHO08_NEW_INDEPENDENT_FUTURE": {
+      "cases": 8,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 3,
+          "REJECTED_LENGTH": 1,
+          "JOINT_SHADOW_ACCEPTED": 4
+        },
+        "correct_shadow_accepted": 4,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 3,
+        "accepted_correct_angle_rmse_mean_deg": 2.4864196629951083,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 3,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1,
+          "SHADOW_ACCEPTED": 4
+        },
+        "correct_shadow_accepted": 4,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 3,
+        "accepted_correct_angle_rmse_mean_deg": 2.486419662994546,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 3,
+        "REJECTED_RESIDUAL_AND_LENGTH -> REJECTED_LENGTH": 1,
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 4
+      }
+    },
+    "CALIBRATION/M4/CLEAN_REUSED": {
+      "cases": 8,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "JOINT_SHADOW_ACCEPTED": 8
+        },
+        "correct_shadow_accepted": 8,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 2.0541510226811197,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 8
+        },
+        "correct_shadow_accepted": 8,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 2.0541510226814097,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 8
+      }
+    },
+    "CALIBRATION/M4/RHO08_REUSED_SELECTION_DEPENDENT": {
+      "cases": 8,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_SELECTION_DEPENDENCE": 8
+        },
+        "correct_shadow_accepted": 0,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 8,
+        "accepted_correct_angle_rmse_mean_deg": null,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 8
+        },
+        "correct_shadow_accepted": 8,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.8252409260637004,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> UNRESOLVED_SELECTION_DEPENDENCE": 8
+      }
+    },
+    "CALIBRATION/M4/RHO08_NEW_INDEPENDENT_FUTURE": {
+      "cases": 8,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "JOINT_SHADOW_ACCEPTED": 8
+        },
+        "correct_shadow_accepted": 8,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.8864653502292392,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 8
+        },
+        "correct_shadow_accepted": 8,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.8864653502297979,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 8
+      }
+    },
+    "CALIBRATION/M9_MULTIFREQUENCY/CLEAN_REUSED": {
+      "cases": 8,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "JOINT_SHADOW_ACCEPTED": 8
+        },
+        "correct_shadow_accepted": 8,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.3626277793982193,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 8
+        },
+        "correct_shadow_accepted": 8,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.3626277793987054,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 8
+      }
+    },
+    "CALIBRATION/M9_MULTIFREQUENCY/RHO08_REUSED_SELECTION_DEPENDENT": {
+      "cases": 8,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_SELECTION_DEPENDENCE": 8
+        },
+        "correct_shadow_accepted": 0,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 8,
+        "accepted_correct_angle_rmse_mean_deg": null,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 8
+        },
+        "correct_shadow_accepted": 8,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.7480142909632175,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> UNRESOLVED_SELECTION_DEPENDENCE": 8
+      }
+    },
+    "CALIBRATION/M9_MULTIFREQUENCY/RHO08_NEW_INDEPENDENT_FUTURE": {
+      "cases": 8,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "JOINT_SHADOW_ACCEPTED": 8
+        },
+        "correct_shadow_accepted": 8,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.4305843495302848,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 7,
+          "REJECTED_RESIDUAL": 1
+        },
+        "correct_shadow_accepted": 7,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.3228645012088787,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 7,
+        "REJECTED_RESIDUAL -> JOINT_SHADOW_ACCEPTED": 1
+      }
+    },
+    "CALIBRATION/ALL_LAYERS/CLEAN_REUSED": {
+      "cases": 24,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 3,
+          "REJECTED_LENGTH": 1,
+          "JOINT_SHADOW_ACCEPTED": 20
+        },
+        "correct_shadow_accepted": 20,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 3,
+        "accepted_correct_angle_rmse_mean_deg": 1.8406535016978378,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 4,
+          "REJECTED_LENGTH": 1,
+          "SHADOW_ACCEPTED": 19
+        },
+        "correct_shadow_accepted": 19,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 4,
+        "accepted_correct_angle_rmse_mean_deg": 1.8350964078796013,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 3,
+        "REJECTED_LENGTH -> REJECTED_LENGTH": 1,
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 19,
+        "UNRESOLVED_COMPETITION -> JOINT_SHADOW_ACCEPTED": 1
+      }
+    },
+    "CALIBRATION/ALL_LAYERS/RHO08_REUSED_SELECTION_DEPENDENT": {
+      "cases": 24,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_SELECTION_DEPENDENCE": 24
+        },
+        "correct_shadow_accepted": 0,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 24,
+        "accepted_correct_angle_rmse_mean_deg": null,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 3,
+          "REJECTED_LENGTH": 1,
+          "SHADOW_ACCEPTED": 20
+        },
+        "correct_shadow_accepted": 20,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 3,
+        "accepted_correct_angle_rmse_mean_deg": 1.7899337790784284,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_SELECTION_DEPENDENCE": 3,
+        "REJECTED_LENGTH -> UNRESOLVED_SELECTION_DEPENDENCE": 1,
+        "SHADOW_ACCEPTED -> UNRESOLVED_SELECTION_DEPENDENCE": 20
+      }
+    },
+    "CALIBRATION/ALL_LAYERS/RHO08_NEW_INDEPENDENT_FUTURE": {
+      "cases": 24,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 3,
+          "REJECTED_LENGTH": 1,
+          "JOINT_SHADOW_ACCEPTED": 20
+        },
+        "correct_shadow_accepted": 20,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 3,
+        "accepted_correct_angle_rmse_mean_deg": 1.8241038125028315,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 3,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1,
+          "SHADOW_ACCEPTED": 19,
+          "REJECTED_RESIDUAL": 1
+        },
+        "correct_shadow_accepted": 19,
+        "wrong_shadow_accepted": 0,
+        "rejected": 2,
+        "unresolved": 3,
+        "accepted_correct_angle_rmse_mean_deg": 1.8051291032778274,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 3,
+        "REJECTED_RESIDUAL_AND_LENGTH -> REJECTED_LENGTH": 1,
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 19,
+        "REJECTED_RESIDUAL -> JOINT_SHADOW_ACCEPTED": 1
+      }
+    },
+    "HELDOUT/M3/CLEAN_REUSED": {
+      "cases": 16,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "JOINT_SHADOW_ACCEPTED": 10,
+          "REJECTED_LENGTH": 3,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1,
+          "UNRESOLVED_COMPETITION": 2
+        },
+        "correct_shadow_accepted": 10,
+        "wrong_shadow_accepted": 0,
+        "rejected": 4,
+        "unresolved": 2,
+        "accepted_correct_angle_rmse_mean_deg": 2.148897926662171,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 10,
+          "REJECTED_LENGTH": 3,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1,
+          "UNRESOLVED_COMPETITION": 2
+        },
+        "correct_shadow_accepted": 10,
+        "wrong_shadow_accepted": 0,
+        "rejected": 4,
+        "unresolved": 2,
+        "accepted_correct_angle_rmse_mean_deg": 2.14889792666217,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 10,
+        "REJECTED_LENGTH -> REJECTED_LENGTH": 3,
+        "REJECTED_RESIDUAL_AND_LENGTH -> REJECTED_RESIDUAL_AND_LENGTH": 1,
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 2
+      }
+    },
+    "HELDOUT/M3/RHO08_REUSED_SELECTION_DEPENDENT": {
+      "cases": 16,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_SELECTION_DEPENDENCE": 16
+        },
+        "correct_shadow_accepted": 0,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 16,
+        "accepted_correct_angle_rmse_mean_deg": null,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 10,
+          "REJECTED_LENGTH": 3,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1,
+          "UNRESOLVED_COMPETITION": 2
+        },
+        "correct_shadow_accepted": 10,
+        "wrong_shadow_accepted": 0,
+        "rejected": 4,
+        "unresolved": 2,
+        "accepted_correct_angle_rmse_mean_deg": 1.6754999440277207,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> UNRESOLVED_SELECTION_DEPENDENCE": 10,
+        "REJECTED_LENGTH -> UNRESOLVED_SELECTION_DEPENDENCE": 3,
+        "REJECTED_RESIDUAL_AND_LENGTH -> UNRESOLVED_SELECTION_DEPENDENCE": 1,
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_SELECTION_DEPENDENCE": 2
+      }
+    },
+    "HELDOUT/M3/RHO08_NEW_INDEPENDENT_FUTURE": {
+      "cases": 16,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "JOINT_SHADOW_ACCEPTED": 10,
+          "REJECTED_LENGTH": 3,
+          "UNRESOLVED_COMPETITION": 3
+        },
+        "correct_shadow_accepted": 10,
+        "wrong_shadow_accepted": 0,
+        "rejected": 3,
+        "unresolved": 3,
+        "accepted_correct_angle_rmse_mean_deg": 2.532994010546116,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 10,
+          "REJECTED_LENGTH": 4,
+          "UNRESOLVED_COMPETITION": 2
+        },
+        "correct_shadow_accepted": 10,
+        "wrong_shadow_accepted": 0,
+        "rejected": 4,
+        "unresolved": 2,
+        "accepted_correct_angle_rmse_mean_deg": 2.5329940105455897,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 10,
+        "REJECTED_LENGTH -> REJECTED_LENGTH": 3,
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 2,
+        "REJECTED_LENGTH -> UNRESOLVED_COMPETITION": 1
+      }
+    },
+    "HELDOUT/M4/CLEAN_REUSED": {
+      "cases": 16,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 2,
+          "JOINT_SHADOW_ACCEPTED": 14
+        },
+        "correct_shadow_accepted": 14,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 2,
+        "accepted_correct_angle_rmse_mean_deg": 1.8831038125686774,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 1,
+          "SHADOW_ACCEPTED": 15
+        },
+        "correct_shadow_accepted": 15,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 1,
+        "accepted_correct_angle_rmse_mean_deg": 1.846554633352193,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 1,
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 14,
+        "SHADOW_ACCEPTED -> UNRESOLVED_COMPETITION": 1
+      }
+    },
+    "HELDOUT/M4/RHO08_REUSED_SELECTION_DEPENDENT": {
+      "cases": 16,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_SELECTION_DEPENDENCE": 16
+        },
+        "correct_shadow_accepted": 0,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 16,
+        "accepted_correct_angle_rmse_mean_deg": null,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 15,
+          "UNRESOLVED_COMPETITION": 1
+        },
+        "correct_shadow_accepted": 15,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 1,
+        "accepted_correct_angle_rmse_mean_deg": 2.056725403764708,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> UNRESOLVED_SELECTION_DEPENDENCE": 15,
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_SELECTION_DEPENDENCE": 1
+      }
+    },
+    "HELDOUT/M4/RHO08_NEW_INDEPENDENT_FUTURE": {
+      "cases": 16,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 2,
+          "JOINT_SHADOW_ACCEPTED": 14
+        },
+        "correct_shadow_accepted": 14,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 2,
+        "accepted_correct_angle_rmse_mean_deg": 1.7989050790092218,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 2,
+          "SHADOW_ACCEPTED": 13,
+          "REJECTED_RESIDUAL": 1
+        },
+        "correct_shadow_accepted": 13,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 2,
+        "accepted_correct_angle_rmse_mean_deg": 1.7934881736451287,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 2,
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 13,
+        "REJECTED_RESIDUAL -> JOINT_SHADOW_ACCEPTED": 1
+      }
+    },
+    "HELDOUT/M9_MULTIFREQUENCY/CLEAN_REUSED": {
+      "cases": 16,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "JOINT_SHADOW_ACCEPTED": 16
+        },
+        "correct_shadow_accepted": 16,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.4315726750839806,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 16
+        },
+        "correct_shadow_accepted": 16,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.4315726750842988,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 16
+      }
+    },
+    "HELDOUT/M9_MULTIFREQUENCY/RHO08_REUSED_SELECTION_DEPENDENT": {
+      "cases": 16,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_SELECTION_DEPENDENCE": 16
+        },
+        "correct_shadow_accepted": 0,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 16,
+        "accepted_correct_angle_rmse_mean_deg": null,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 15,
+          "REJECTED_RESIDUAL": 1
+        },
+        "correct_shadow_accepted": 15,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.2117385090002366,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> UNRESOLVED_SELECTION_DEPENDENCE": 15,
+        "REJECTED_RESIDUAL -> UNRESOLVED_SELECTION_DEPENDENCE": 1
+      }
+    },
+    "HELDOUT/M9_MULTIFREQUENCY/RHO08_NEW_INDEPENDENT_FUTURE": {
+      "cases": 16,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "JOINT_SHADOW_ACCEPTED": 16
+        },
+        "correct_shadow_accepted": 16,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.3271112471923903,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 16
+        },
+        "correct_shadow_accepted": 16,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.3271112471933044,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 16
+      }
+    },
+    "HELDOUT/ALL_LAYERS/CLEAN_REUSED": {
+      "cases": 48,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "JOINT_SHADOW_ACCEPTED": 40,
+          "REJECTED_LENGTH": 3,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1,
+          "UNRESOLVED_COMPETITION": 4
+        },
+        "correct_shadow_accepted": 40,
+        "wrong_shadow_accepted": 0,
+        "rejected": 4,
+        "unresolved": 4,
+        "accepted_correct_angle_rmse_mean_deg": 1.7689398860981718,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 41,
+          "REJECTED_LENGTH": 3,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1,
+          "UNRESOLVED_COMPETITION": 3
+        },
+        "correct_shadow_accepted": 41,
+        "wrong_shadow_accepted": 0,
+        "rejected": 4,
+        "unresolved": 3,
+        "accepted_correct_angle_rmse_mean_deg": 1.7583527211769114,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 40,
+        "REJECTED_LENGTH -> REJECTED_LENGTH": 3,
+        "REJECTED_RESIDUAL_AND_LENGTH -> REJECTED_RESIDUAL_AND_LENGTH": 1,
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 3,
+        "SHADOW_ACCEPTED -> UNRESOLVED_COMPETITION": 1
+      }
+    },
+    "HELDOUT/ALL_LAYERS/RHO08_REUSED_SELECTION_DEPENDENT": {
+      "cases": 48,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_SELECTION_DEPENDENCE": 48
+        },
+        "correct_shadow_accepted": 0,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 48,
+        "accepted_correct_angle_rmse_mean_deg": null,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 40,
+          "REJECTED_LENGTH": 3,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1,
+          "UNRESOLVED_COMPETITION": 3,
+          "REJECTED_RESIDUAL": 1
+        },
+        "correct_shadow_accepted": 40,
+        "wrong_shadow_accepted": 0,
+        "rejected": 5,
+        "unresolved": 3,
+        "accepted_correct_angle_rmse_mean_deg": 1.6445489532937843,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> UNRESOLVED_SELECTION_DEPENDENCE": 40,
+        "REJECTED_LENGTH -> UNRESOLVED_SELECTION_DEPENDENCE": 3,
+        "REJECTED_RESIDUAL_AND_LENGTH -> UNRESOLVED_SELECTION_DEPENDENCE": 1,
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_SELECTION_DEPENDENCE": 3,
+        "REJECTED_RESIDUAL -> UNRESOLVED_SELECTION_DEPENDENCE": 1
+      }
+    },
+    "HELDOUT/ALL_LAYERS/RHO08_NEW_INDEPENDENT_FUTURE": {
+      "cases": 48,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "JOINT_SHADOW_ACCEPTED": 40,
+          "REJECTED_LENGTH": 3,
+          "UNRESOLVED_COMPETITION": 5
+        },
+        "correct_shadow_accepted": 40,
+        "wrong_shadow_accepted": 0,
+        "rejected": 3,
+        "unresolved": 5,
+        "accepted_correct_angle_rmse_mean_deg": 1.7937097791667127,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 39,
+          "REJECTED_LENGTH": 4,
+          "UNRESOLVED_COMPETITION": 4,
+          "REJECTED_RESIDUAL": 1
+        },
+        "correct_shadow_accepted": 39,
+        "wrong_shadow_accepted": 0,
+        "rejected": 5,
+        "unresolved": 4,
+        "accepted_correct_angle_rmse_mean_deg": 1.791770931229114,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 39,
+        "REJECTED_LENGTH -> REJECTED_LENGTH": 3,
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 4,
+        "REJECTED_LENGTH -> UNRESOLVED_COMPETITION": 1,
+        "REJECTED_RESIDUAL -> JOINT_SHADOW_ACCEPTED": 1
+      }
+    },
+    "ALL_REUSED/M3/CLEAN_REUSED": {
+      "cases": 24,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 5,
+          "REJECTED_LENGTH": 4,
+          "JOINT_SHADOW_ACCEPTED": 14,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1
+        },
+        "correct_shadow_accepted": 14,
+        "wrong_shadow_accepted": 0,
+        "rejected": 5,
+        "unresolved": 5,
+        "accepted_correct_angle_rmse_mean_deg": 2.211987063138839,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 6,
+          "REJECTED_LENGTH": 4,
+          "SHADOW_ACCEPTED": 13,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1
+        },
+        "correct_shadow_accepted": 13,
+        "wrong_shadow_accepted": 0,
+        "rejected": 5,
+        "unresolved": 6,
+        "accepted_correct_angle_rmse_mean_deg": 2.232429276899477,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 5,
+        "REJECTED_LENGTH -> REJECTED_LENGTH": 4,
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 13,
+        "UNRESOLVED_COMPETITION -> JOINT_SHADOW_ACCEPTED": 1,
+        "REJECTED_RESIDUAL_AND_LENGTH -> REJECTED_RESIDUAL_AND_LENGTH": 1
+      }
+    },
+    "ALL_REUSED/M3/RHO08_REUSED_SELECTION_DEPENDENT": {
+      "cases": 24,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_SELECTION_DEPENDENCE": 24
+        },
+        "correct_shadow_accepted": 0,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 24,
+        "accepted_correct_angle_rmse_mean_deg": null,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 5,
+          "REJECTED_LENGTH": 4,
+          "SHADOW_ACCEPTED": 14,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1
+        },
+        "correct_shadow_accepted": 14,
+        "wrong_shadow_accepted": 0,
+        "rejected": 5,
+        "unresolved": 5,
+        "accepted_correct_angle_rmse_mean_deg": 1.7119738061164593,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_SELECTION_DEPENDENCE": 5,
+        "REJECTED_LENGTH -> UNRESOLVED_SELECTION_DEPENDENCE": 4,
+        "SHADOW_ACCEPTED -> UNRESOLVED_SELECTION_DEPENDENCE": 14,
+        "REJECTED_RESIDUAL_AND_LENGTH -> UNRESOLVED_SELECTION_DEPENDENCE": 1
+      }
+    },
+    "ALL_REUSED/M3/RHO08_NEW_INDEPENDENT_FUTURE": {
+      "cases": 24,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 6,
+          "REJECTED_LENGTH": 4,
+          "JOINT_SHADOW_ACCEPTED": 14
+        },
+        "correct_shadow_accepted": 14,
+        "wrong_shadow_accepted": 0,
+        "rejected": 4,
+        "unresolved": 6,
+        "accepted_correct_angle_rmse_mean_deg": 2.519687054102971,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 5,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1,
+          "SHADOW_ACCEPTED": 14,
+          "REJECTED_LENGTH": 4
+        },
+        "correct_shadow_accepted": 14,
+        "wrong_shadow_accepted": 0,
+        "rejected": 5,
+        "unresolved": 5,
+        "accepted_correct_angle_rmse_mean_deg": 2.5196870541024343,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 5,
+        "REJECTED_RESIDUAL_AND_LENGTH -> REJECTED_LENGTH": 1,
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 14,
+        "REJECTED_LENGTH -> REJECTED_LENGTH": 3,
+        "REJECTED_LENGTH -> UNRESOLVED_COMPETITION": 1
+      }
+    },
+    "ALL_REUSED/M4/CLEAN_REUSED": {
+      "cases": 24,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "JOINT_SHADOW_ACCEPTED": 22,
+          "UNRESOLVED_COMPETITION": 2
+        },
+        "correct_shadow_accepted": 22,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 2,
+        "accepted_correct_angle_rmse_mean_deg": 1.9453027980641104,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 23,
+          "UNRESOLVED_COMPETITION": 1
+        },
+        "correct_shadow_accepted": 23,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 1,
+        "accepted_correct_angle_rmse_mean_deg": 1.9187620731188766,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 22,
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 1,
+        "SHADOW_ACCEPTED -> UNRESOLVED_COMPETITION": 1
+      }
+    },
+    "ALL_REUSED/M4/RHO08_REUSED_SELECTION_DEPENDENT": {
+      "cases": 24,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_SELECTION_DEPENDENCE": 24
+        },
+        "correct_shadow_accepted": 0,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 24,
+        "accepted_correct_angle_rmse_mean_deg": null,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 23,
+          "UNRESOLVED_COMPETITION": 1
+        },
+        "correct_shadow_accepted": 23,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 1,
+        "accepted_correct_angle_rmse_mean_deg": 1.9762090636947922,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> UNRESOLVED_SELECTION_DEPENDENCE": 23,
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_SELECTION_DEPENDENCE": 1
+      }
+    },
+    "ALL_REUSED/M4/RHO08_NEW_INDEPENDENT_FUTURE": {
+      "cases": 24,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "JOINT_SHADOW_ACCEPTED": 22,
+          "UNRESOLVED_COMPETITION": 2
+        },
+        "correct_shadow_accepted": 22,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 2,
+        "accepted_correct_angle_rmse_mean_deg": 1.8307451776346826,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 21,
+          "UNRESOLVED_COMPETITION": 2,
+          "REJECTED_RESIDUAL": 1
+        },
+        "correct_shadow_accepted": 21,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 2,
+        "accepted_correct_angle_rmse_mean_deg": 1.828908050439289,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 21,
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 2,
+        "REJECTED_RESIDUAL -> JOINT_SHADOW_ACCEPTED": 1
+      }
+    },
+    "ALL_REUSED/M9_MULTIFREQUENCY/CLEAN_REUSED": {
+      "cases": 24,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "JOINT_SHADOW_ACCEPTED": 24
+        },
+        "correct_shadow_accepted": 24,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.4085910431887267,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 24
+        },
+        "correct_shadow_accepted": 24,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.4085910431891009,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 24
+      }
+    },
+    "ALL_REUSED/M9_MULTIFREQUENCY/RHO08_REUSED_SELECTION_DEPENDENT": {
+      "cases": 24,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_SELECTION_DEPENDENCE": 24
+        },
+        "correct_shadow_accepted": 0,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 24,
+        "accepted_correct_angle_rmse_mean_deg": null,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 23,
+          "REJECTED_RESIDUAL": 1
+        },
+        "correct_shadow_accepted": 23,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.3982692157699692,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> UNRESOLVED_SELECTION_DEPENDENCE": 23,
+        "REJECTED_RESIDUAL -> UNRESOLVED_SELECTION_DEPENDENCE": 1
+      }
+    },
+    "ALL_REUSED/M9_MULTIFREQUENCY/RHO08_NEW_INDEPENDENT_FUTURE": {
+      "cases": 24,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "JOINT_SHADOW_ACCEPTED": 24
+        },
+        "correct_shadow_accepted": 24,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.3616022813050217,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "SHADOW_ACCEPTED": 23,
+          "REJECTED_RESIDUAL": 1
+        },
+        "correct_shadow_accepted": 23,
+        "wrong_shadow_accepted": 0,
+        "rejected": 1,
+        "unresolved": 0,
+        "accepted_correct_angle_rmse_mean_deg": 1.3258187592850008,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 23,
+        "REJECTED_RESIDUAL -> JOINT_SHADOW_ACCEPTED": 1
+      }
+    },
+    "ALL_REUSED/ALL_LAYERS/CLEAN_REUSED": {
+      "cases": 72,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 7,
+          "REJECTED_LENGTH": 4,
+          "JOINT_SHADOW_ACCEPTED": 60,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1
+        },
+        "correct_shadow_accepted": 60,
+        "wrong_shadow_accepted": 0,
+        "rejected": 5,
+        "unresolved": 7,
+        "accepted_correct_angle_rmse_mean_deg": 1.792844424631394,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 7,
+          "REJECTED_LENGTH": 4,
+          "SHADOW_ACCEPTED": 60,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1
+        },
+        "correct_shadow_accepted": 60,
+        "wrong_shadow_accepted": 0,
+        "rejected": 5,
+        "unresolved": 7,
+        "accepted_correct_angle_rmse_mean_deg": 1.7826548886327631,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 6,
+        "REJECTED_LENGTH -> REJECTED_LENGTH": 4,
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 59,
+        "UNRESOLVED_COMPETITION -> JOINT_SHADOW_ACCEPTED": 1,
+        "REJECTED_RESIDUAL_AND_LENGTH -> REJECTED_RESIDUAL_AND_LENGTH": 1,
+        "SHADOW_ACCEPTED -> UNRESOLVED_COMPETITION": 1
+      }
+    },
+    "ALL_REUSED/ALL_LAYERS/RHO08_REUSED_SELECTION_DEPENDENT": {
+      "cases": 72,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_SELECTION_DEPENDENCE": 72
+        },
+        "correct_shadow_accepted": 0,
+        "wrong_shadow_accepted": 0,
+        "rejected": 0,
+        "unresolved": 72,
+        "accepted_correct_angle_rmse_mean_deg": null,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 6,
+          "REJECTED_LENGTH": 4,
+          "SHADOW_ACCEPTED": 60,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1,
+          "REJECTED_RESIDUAL": 1
+        },
+        "correct_shadow_accepted": 60,
+        "wrong_shadow_accepted": 0,
+        "rejected": 6,
+        "unresolved": 6,
+        "accepted_correct_angle_rmse_mean_deg": 1.693010561888666,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_SELECTION_DEPENDENCE": 6,
+        "REJECTED_LENGTH -> UNRESOLVED_SELECTION_DEPENDENCE": 4,
+        "SHADOW_ACCEPTED -> UNRESOLVED_SELECTION_DEPENDENCE": 60,
+        "REJECTED_RESIDUAL_AND_LENGTH -> UNRESOLVED_SELECTION_DEPENDENCE": 1,
+        "REJECTED_RESIDUAL -> UNRESOLVED_SELECTION_DEPENDENCE": 1
+      }
+    },
+    "ALL_REUSED/ALL_LAYERS/RHO08_NEW_INDEPENDENT_FUTURE": {
+      "cases": 72,
+      "all_are_reused_development_cases": true,
+      "joint": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 8,
+          "REJECTED_LENGTH": 4,
+          "JOINT_SHADOW_ACCEPTED": 60
+        },
+        "correct_shadow_accepted": 60,
+        "wrong_shadow_accepted": 0,
+        "rejected": 4,
+        "unresolved": 8,
+        "accepted_correct_angle_rmse_mean_deg": 1.8038411236120857,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "iid": {
+        "statuses": {
+          "UNRESOLVED_COMPETITION": 7,
+          "REJECTED_RESIDUAL_AND_LENGTH": 1,
+          "SHADOW_ACCEPTED": 58,
+          "REJECTED_RESIDUAL": 2,
+          "REJECTED_LENGTH": 4
+        },
+        "correct_shadow_accepted": 58,
+        "wrong_shadow_accepted": 0,
+        "rejected": 7,
+        "unresolved": 7,
+        "accepted_correct_angle_rmse_mean_deg": 1.7961468841416233,
+        "accepted_wrong_angle_rmse_mean_deg": null
+      },
+      "decision_changes": {
+        "UNRESOLVED_COMPETITION -> UNRESOLVED_COMPETITION": 7,
+        "REJECTED_RESIDUAL_AND_LENGTH -> REJECTED_LENGTH": 1,
+        "SHADOW_ACCEPTED -> JOINT_SHADOW_ACCEPTED": 58,
+        "REJECTED_RESIDUAL -> JOINT_SHADOW_ACCEPTED": 2,
+        "REJECTED_LENGTH -> REJECTED_LENGTH": 3,
+        "REJECTED_LENGTH -> UNRESOLVED_COMPETITION": 1
+      }
+    }
+  },
+  "limitations": [
+    "Old rho08 future marginal Q is correct but selection dependence remains; all its joint decisions are UNRESOLVED_SELECTION_DEPENDENCE.",
+    "New future AR1 begins independently of selection; oracle Q is analytically generated, not a fitted or physically validated model.",
+    "Joint path uses K Bonferroni marginal length tests, IID path uses a summed length penalty; differences cannot be assigned solely to Q.",
+    "Marginal sphere projections are angle diagnostics, not a global joint product-of-spheres optimum.",
+    "Same frozen candidate/geometry across paired methods; original split labels persist only for provenance.",
+    "Sensitivity MDB and baseline bias are model-derived, not protection levels or observed physical fault attribution."
+  ],
+  "source_hashes": {
+    "PRODUCER_SEAL.json": "abc3ab9f31738ff073f16ac1f4af0f066a8b4b90f84c56017c39e66e84115b39",
+    "FOLLOWUP_PLAN.json": "d86f99f9a5cb7a7f5b6740b85cbc7113b7e6057f9c490fa4e8ceda7a4e64a73f",
+    "CHECKER_SEAL.json": "ebab558a4ace2dcd00a8bfc25e32cdb6a1e2bdd61a0597dc886e622fa268ac71",
+    "FOLLOWUP_RESULTS.csv": "33ff5d7b94f075d0a8c57818f6209c517d3ff8770736c25392e339a9ba88767c",
+    "SYNTHETIC_SENSITIVITY.csv": "57fbae90fceeaeaf3bc8de777e58866ff147371c2b2253c294c5db72534b2ed2"
+  }
+}

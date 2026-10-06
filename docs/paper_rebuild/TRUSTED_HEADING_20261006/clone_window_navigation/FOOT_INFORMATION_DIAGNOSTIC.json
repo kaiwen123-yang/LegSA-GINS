@@ -1,0 +1,629 @@
+{
+  "scope": "SEALED_NATIVE_FOOT_EVENT_DIAGNOSTIC_ONLY_NO_REFERENCE_OR_FILTER_RECOMPUTATION",
+  "stage": "<TRUSTED_HEADING_SCRATCH>/CLONE_WINDOW_NAVIGATION_ATTEMPT02",
+  "native_seal_sha256": "50f53f871627704c1ceae76d8597e484419a12a6052e21614ea58336f8693397",
+  "native_records": 6,
+  "reads": {
+    "event_csv_files": 6,
+    "reference": 0,
+    "evaluation": 0,
+    "NAV_or_STD": 0
+  },
+  "registered_safe_innovation_threshold": 16.26623619623813,
+  "runs": [
+    {
+      "run_id": "BY2__NULL_CLONE",
+      "sequence_id": "BY2",
+      "arm": "NULL_CLONE",
+      "source_event_csv": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2__NULL_CLONE/ATTITUDE_CLONE_EVENTS.csv",
+        "sha256": "ac54c48d0d3f78b90a85da94aad5bd14a5f96052b89abf235760fa4e712139bb",
+        "rows": 2558,
+        "columns": [
+          "event_time_s",
+          "state_time_s",
+          "source_time_s",
+          "event_type",
+          "clone_id",
+          "endpoint_id",
+          "action",
+          "updated",
+          "epsilon",
+          "prior_weighted_trace",
+          "bound_weighted_trace",
+          "safe_innovation",
+          "safe_threshold"
+        ]
+      },
+      "event_types": {
+        "START": 1279,
+        "END": 688,
+        "RETIRE": 591
+      },
+      "actions": {
+        "UNCONSUMED_INITIAL_POSE_SUPPORT": 1,
+        "END_NO_MATCHING_ACTIVE_CLONE": 1,
+        "CLONE_CREATED_DETERMINISTIC": 1278,
+        "NULL_CLONE_NO_PAIR_UPDATE": 687,
+        "SOURCE_RETIRED": 591
+      },
+      "quality_evaluated_count": 687,
+      "quality_pass_count": 687,
+      "quality_reject_count": 0,
+      "quality_statistic": {
+        "count": 687,
+        "min": 7.186871333119148e-05,
+        "median": 0.006500845988391007,
+        "mean": 0.010257817048024153,
+        "p95": 0.03189488933352255,
+        "max": 0.09771305999415819
+      },
+      "quality_statistic_over_threshold": {
+        "count": 687,
+        "min": 4.418275528779821e-06,
+        "median": 0.0003996527475664253,
+        "mean": 0.0006306201953711003,
+        "p95": 0.0019608032828700005,
+        "max": 0.00600710937769096
+      },
+      "pair_updates": 0,
+      "exact_skip_count": 0,
+      "null_no_pair_update_count": 687,
+      "skip_prior_weighted_trace": {
+        "count": 0
+      },
+      "skip_returned_bound_weighted_trace": {
+        "count": 0
+      },
+      "skip_returned_bound_minus_prior": {
+        "count": 0
+      },
+      "skip_epsilon_values": [],
+      "noncomputed_zero_score_is_placeholder": true,
+      "unconsumed_or_rejected_events": [
+        {
+          "event_time_s": "66.001034907000005",
+          "state_time_s": "66",
+          "source_time_s": "66.001034907000005",
+          "event_type": "START",
+          "clone_id": "BY2_PAIR_00001",
+          "endpoint_id": "BY2|66001034907",
+          "action": "UNCONSUMED_INITIAL_POSE_SUPPORT"
+        },
+        {
+          "event_time_s": "66.101074690000004",
+          "state_time_s": "66.101074690000004",
+          "source_time_s": "66.101074690000004",
+          "event_type": "END",
+          "clone_id": "BY2_PAIR_00001",
+          "endpoint_id": "BY2|66101074690",
+          "action": "END_NO_MATCHING_ACTIVE_CLONE"
+        }
+      ],
+      "per_epsilon_candidate_scores_logged": false,
+      "P_H_R_matrices_logged": false
+    },
+    {
+      "run_id": "BY2__PAIR_YOUNG",
+      "sequence_id": "BY2",
+      "arm": "PAIR_YOUNG",
+      "source_event_csv": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2__PAIR_YOUNG/ATTITUDE_CLONE_EVENTS.csv",
+        "sha256": "6de5e92e61c145eb6fd2543c609080ee93a198f1c88c6a795e9dabcbd77e88ac",
+        "rows": 2558,
+        "columns": [
+          "event_time_s",
+          "state_time_s",
+          "source_time_s",
+          "event_type",
+          "clone_id",
+          "endpoint_id",
+          "action",
+          "updated",
+          "epsilon",
+          "prior_weighted_trace",
+          "bound_weighted_trace",
+          "safe_innovation",
+          "safe_threshold"
+        ]
+      },
+      "event_types": {
+        "START": 1279,
+        "END": 688,
+        "RETIRE": 591
+      },
+      "actions": {
+        "UNCONSUMED_INITIAL_POSE_SUPPORT": 1,
+        "END_NO_MATCHING_ACTIVE_CLONE": 1,
+        "CLONE_CREATED_DETERMINISTIC": 1278,
+        "PAIR_YOUNG_EXACT_SKIP": 687,
+        "SOURCE_RETIRED": 591
+      },
+      "quality_evaluated_count": 687,
+      "quality_pass_count": 687,
+      "quality_reject_count": 0,
+      "quality_statistic": {
+        "count": 687,
+        "min": 7.186871333119148e-05,
+        "median": 0.006500845988391007,
+        "mean": 0.010257817048024153,
+        "p95": 0.03189488933352255,
+        "max": 0.09771305999415819
+      },
+      "quality_statistic_over_threshold": {
+        "count": 687,
+        "min": 4.418275528779821e-06,
+        "median": 0.0003996527475664253,
+        "mean": 0.0006306201953711003,
+        "p95": 0.0019608032828700005,
+        "max": 0.00600710937769096
+      },
+      "pair_updates": 0,
+      "exact_skip_count": 687,
+      "null_no_pair_update_count": 0,
+      "skip_prior_weighted_trace": {
+        "count": 687,
+        "min": 1.2884840105712903,
+        "median": 1.9783339986519188,
+        "mean": 2.4009295849067223,
+        "p95": 4.478834675539101,
+        "max": 7.6906111741669445
+      },
+      "skip_returned_bound_weighted_trace": {
+        "count": 687,
+        "min": 1.2884840105712903,
+        "median": 1.9783339986519188,
+        "mean": 2.4009295849067223,
+        "p95": 4.478834675539101,
+        "max": 7.6906111741669445
+      },
+      "skip_returned_bound_minus_prior": {
+        "count": 687,
+        "min": 0.0,
+        "median": 0.0,
+        "mean": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      },
+      "skip_epsilon_values": [
+        0.0
+      ],
+      "noncomputed_zero_score_is_placeholder": true,
+      "unconsumed_or_rejected_events": [
+        {
+          "event_time_s": "66.001034907000005",
+          "state_time_s": "66",
+          "source_time_s": "66.001034907000005",
+          "event_type": "START",
+          "clone_id": "BY2_PAIR_00001",
+          "endpoint_id": "BY2|66001034907",
+          "action": "UNCONSUMED_INITIAL_POSE_SUPPORT"
+        },
+        {
+          "event_time_s": "66.101074690000004",
+          "state_time_s": "66.101074690000004",
+          "source_time_s": "66.101074690000004",
+          "event_type": "END",
+          "clone_id": "BY2_PAIR_00001",
+          "endpoint_id": "BY2|66101074690",
+          "action": "END_NO_MATCHING_ACTIVE_CLONE"
+        }
+      ],
+      "per_epsilon_candidate_scores_logged": false,
+      "P_H_R_matrices_logged": false
+    },
+    {
+      "run_id": "BY2H__NULL_CLONE",
+      "sequence_id": "BY2H",
+      "arm": "NULL_CLONE",
+      "source_event_csv": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2H__NULL_CLONE/ATTITUDE_CLONE_EVENTS.csv",
+        "sha256": "7bba179a084d1fec055d32cc7096ffa010775b8a9cbd614e593166854f302014",
+        "rows": 2502,
+        "columns": [
+          "event_time_s",
+          "state_time_s",
+          "source_time_s",
+          "event_type",
+          "clone_id",
+          "endpoint_id",
+          "action",
+          "updated",
+          "epsilon",
+          "prior_weighted_trace",
+          "bound_weighted_trace",
+          "safe_innovation",
+          "safe_threshold"
+        ]
+      },
+      "event_types": {
+        "START": 1251,
+        "END": 666,
+        "RETIRE": 585
+      },
+      "actions": {
+        "CLONE_CREATED_DETERMINISTIC": 1251,
+        "NULL_CLONE_NO_PAIR_UPDATE": 666,
+        "SOURCE_RETIRED": 585
+      },
+      "quality_evaluated_count": 666,
+      "quality_pass_count": 666,
+      "quality_reject_count": 0,
+      "quality_statistic": {
+        "count": 666,
+        "min": 0.00017552525860771141,
+        "median": 0.007429390035718089,
+        "mean": 0.010899294041771482,
+        "p95": 0.03263891418347795,
+        "max": 0.07166926680308007
+      },
+      "quality_statistic_over_threshold": {
+        "count": 666,
+        "min": 1.079077276944404e-05,
+        "median": 0.0004567368840639529,
+        "mean": 0.000670056300073409,
+        "p95": 0.0020065437258943966,
+        "max": 0.00440601414724661
+      },
+      "pair_updates": 0,
+      "exact_skip_count": 0,
+      "null_no_pair_update_count": 666,
+      "skip_prior_weighted_trace": {
+        "count": 0
+      },
+      "skip_returned_bound_weighted_trace": {
+        "count": 0
+      },
+      "skip_returned_bound_minus_prior": {
+        "count": 0
+      },
+      "skip_epsilon_values": [],
+      "noncomputed_zero_score_is_placeholder": true,
+      "unconsumed_or_rejected_events": [],
+      "per_epsilon_candidate_scores_logged": false,
+      "P_H_R_matrices_logged": false
+    },
+    {
+      "run_id": "BY2H__PAIR_YOUNG",
+      "sequence_id": "BY2H",
+      "arm": "PAIR_YOUNG",
+      "source_event_csv": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2H__PAIR_YOUNG/ATTITUDE_CLONE_EVENTS.csv",
+        "sha256": "0259ba179036c9d4656a1d4f8a4763eda883f5f4ad1effc066e7f4fe78f4718a",
+        "rows": 2502,
+        "columns": [
+          "event_time_s",
+          "state_time_s",
+          "source_time_s",
+          "event_type",
+          "clone_id",
+          "endpoint_id",
+          "action",
+          "updated",
+          "epsilon",
+          "prior_weighted_trace",
+          "bound_weighted_trace",
+          "safe_innovation",
+          "safe_threshold"
+        ]
+      },
+      "event_types": {
+        "START": 1251,
+        "END": 666,
+        "RETIRE": 585
+      },
+      "actions": {
+        "CLONE_CREATED_DETERMINISTIC": 1251,
+        "PAIR_YOUNG_EXACT_SKIP": 666,
+        "SOURCE_RETIRED": 585
+      },
+      "quality_evaluated_count": 666,
+      "quality_pass_count": 666,
+      "quality_reject_count": 0,
+      "quality_statistic": {
+        "count": 666,
+        "min": 0.00017552525860771141,
+        "median": 0.007429390035718089,
+        "mean": 0.010899294041771482,
+        "p95": 0.03263891418347795,
+        "max": 0.07166926680308007
+      },
+      "quality_statistic_over_threshold": {
+        "count": 666,
+        "min": 1.079077276944404e-05,
+        "median": 0.0004567368840639529,
+        "mean": 0.000670056300073409,
+        "p95": 0.0020065437258943966,
+        "max": 0.00440601414724661
+      },
+      "pair_updates": 0,
+      "exact_skip_count": 666,
+      "null_no_pair_update_count": 0,
+      "skip_prior_weighted_trace": {
+        "count": 666,
+        "min": 1.2970970608692514,
+        "median": 2.0143294016035447,
+        "mean": 2.423502276069677,
+        "p95": 4.544018853545396,
+        "max": 7.689114294543254
+      },
+      "skip_returned_bound_weighted_trace": {
+        "count": 666,
+        "min": 1.2970970608692514,
+        "median": 2.0143294016035447,
+        "mean": 2.423502276069677,
+        "p95": 4.544018853545396,
+        "max": 7.689114294543254
+      },
+      "skip_returned_bound_minus_prior": {
+        "count": 666,
+        "min": 0.0,
+        "median": 0.0,
+        "mean": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      },
+      "skip_epsilon_values": [
+        0.0
+      ],
+      "noncomputed_zero_score_is_placeholder": true,
+      "unconsumed_or_rejected_events": [],
+      "per_epsilon_candidate_scores_logged": false,
+      "P_H_R_matrices_logged": false
+    },
+    {
+      "run_id": "BY2O__NULL_CLONE",
+      "sequence_id": "BY2O",
+      "arm": "NULL_CLONE",
+      "source_event_csv": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2O__NULL_CLONE/ATTITUDE_CLONE_EVENTS.csv",
+        "sha256": "b878216502b9f7250fda722f16341efcac7d28869c9ffee257315dff7aedae69",
+        "rows": 3558,
+        "columns": [
+          "event_time_s",
+          "state_time_s",
+          "source_time_s",
+          "event_type",
+          "clone_id",
+          "endpoint_id",
+          "action",
+          "updated",
+          "epsilon",
+          "prior_weighted_trace",
+          "bound_weighted_trace",
+          "safe_innovation",
+          "safe_threshold"
+        ]
+      },
+      "event_types": {
+        "START": 1779,
+        "END": 1158,
+        "RETIRE": 621
+      },
+      "actions": {
+        "UNCONSUMED_INITIAL_POSE_SUPPORT": 1,
+        "END_NO_MATCHING_ACTIVE_CLONE": 1,
+        "CLONE_CREATED_DETERMINISTIC": 1778,
+        "SOURCE_RETIRED": 621,
+        "NULL_CLONE_NO_PAIR_UPDATE": 1157
+      },
+      "quality_evaluated_count": 1157,
+      "quality_pass_count": 1157,
+      "quality_reject_count": 0,
+      "quality_statistic": {
+        "count": 1157,
+        "min": 5.536173322370519e-08,
+        "median": 0.0031030023806602374,
+        "mean": 0.005924282330621755,
+        "p95": 0.021597841347758304,
+        "max": 0.06323650997426948
+      },
+      "quality_statistic_over_threshold": {
+        "count": 1157,
+        "min": 3.4034753065068993e-09,
+        "median": 0.00019076339131100683,
+        "mean": 0.00036420732240392866,
+        "p95": 0.0013277712856987292,
+        "max": 0.0038875932459959055
+      },
+      "pair_updates": 0,
+      "exact_skip_count": 0,
+      "null_no_pair_update_count": 1157,
+      "skip_prior_weighted_trace": {
+        "count": 0
+      },
+      "skip_returned_bound_weighted_trace": {
+        "count": 0
+      },
+      "skip_returned_bound_minus_prior": {
+        "count": 0
+      },
+      "skip_epsilon_values": [],
+      "noncomputed_zero_score_is_placeholder": true,
+      "unconsumed_or_rejected_events": [
+        {
+          "event_time_s": "3186.0010595990002",
+          "state_time_s": "3186",
+          "source_time_s": "3186.0010595990002",
+          "event_type": "START",
+          "clone_id": "BY2O_PAIR_00001",
+          "endpoint_id": "BY2O|3186001059599",
+          "action": "UNCONSUMED_INITIAL_POSE_SUPPORT"
+        },
+        {
+          "event_time_s": "3186.1030929540002",
+          "state_time_s": "3186.1030929540002",
+          "source_time_s": "3186.1030929540002",
+          "event_type": "END",
+          "clone_id": "BY2O_PAIR_00001",
+          "endpoint_id": "BY2O|3186103092954",
+          "action": "END_NO_MATCHING_ACTIVE_CLONE"
+        }
+      ],
+      "per_epsilon_candidate_scores_logged": false,
+      "P_H_R_matrices_logged": false
+    },
+    {
+      "run_id": "BY2O__PAIR_YOUNG",
+      "sequence_id": "BY2O",
+      "arm": "PAIR_YOUNG",
+      "source_event_csv": {
+        "path": "<TRUSTED_HEADING_SCRATCH>/CLONE_WINDOW_NAVIGATION_ATTEMPT02/NATIVE/BY2O__PAIR_YOUNG/ATTITUDE_CLONE_EVENTS.csv",
+        "sha256": "6a140c350a057b70d09746a3e1501549cbb73755354e201bd8dc03f3f57127ac",
+        "rows": 3558,
+        "columns": [
+          "event_time_s",
+          "state_time_s",
+          "source_time_s",
+          "event_type",
+          "clone_id",
+          "endpoint_id",
+          "action",
+          "updated",
+          "epsilon",
+          "prior_weighted_trace",
+          "bound_weighted_trace",
+          "safe_innovation",
+          "safe_threshold"
+        ]
+      },
+      "event_types": {
+        "START": 1779,
+        "END": 1158,
+        "RETIRE": 621
+      },
+      "actions": {
+        "UNCONSUMED_INITIAL_POSE_SUPPORT": 1,
+        "END_NO_MATCHING_ACTIVE_CLONE": 1,
+        "CLONE_CREATED_DETERMINISTIC": 1778,
+        "SOURCE_RETIRED": 621,
+        "PAIR_YOUNG_EXACT_SKIP": 1157
+      },
+      "quality_evaluated_count": 1157,
+      "quality_pass_count": 1157,
+      "quality_reject_count": 0,
+      "quality_statistic": {
+        "count": 1157,
+        "min": 5.536173322370519e-08,
+        "median": 0.0031030023806602374,
+        "mean": 0.005924282330621755,
+        "p95": 0.021597841347758304,
+        "max": 0.06323650997426948
+      },
+      "quality_statistic_over_threshold": {
+        "count": 1157,
+        "min": 3.4034753065068993e-09,
+        "median": 0.00019076339131100683,
+        "mean": 0.00036420732240392866,
+        "p95": 0.0013277712856987292,
+        "max": 0.0038875932459959055
+      },
+      "pair_updates": 0,
+      "exact_skip_count": 1157,
+      "null_no_pair_update_count": 0,
+      "skip_prior_weighted_trace": {
+        "count": 1157,
+        "min": 1.008047280001807,
+        "median": 1.6936846190175778,
+        "mean": 1.9922142399489497,
+        "p95": 4.091165227530851,
+        "max": 6.797400993827987
+      },
+      "skip_returned_bound_weighted_trace": {
+        "count": 1157,
+        "min": 1.008047280001807,
+        "median": 1.6936846190175778,
+        "mean": 1.9922142399489497,
+        "p95": 4.091165227530851,
+        "max": 6.797400993827987
+      },
+      "skip_returned_bound_minus_prior": {
+        "count": 1157,
+        "min": 0.0,
+        "median": 0.0,
+        "mean": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      },
+      "skip_epsilon_values": [
+        0.0
+      ],
+      "noncomputed_zero_score_is_placeholder": true,
+      "unconsumed_or_rejected_events": [
+        {
+          "event_time_s": "3186.0010595990002",
+          "state_time_s": "3186",
+          "source_time_s": "3186.0010595990002",
+          "event_type": "START",
+          "clone_id": "BY2O_PAIR_00001",
+          "endpoint_id": "BY2O|3186001059599",
+          "action": "UNCONSUMED_INITIAL_POSE_SUPPORT"
+        },
+        {
+          "event_time_s": "3186.1030929540002",
+          "state_time_s": "3186.1030929540002",
+          "source_time_s": "3186.1030929540002",
+          "event_type": "END",
+          "clone_id": "BY2O_PAIR_00001",
+          "endpoint_id": "BY2O|3186103092954",
+          "action": "END_NO_MATCHING_ACTIVE_CLONE"
+        }
+      ],
+      "per_epsilon_candidate_scores_logged": false,
+      "P_H_R_matrices_logged": false
+    }
+  ],
+  "paired_support_from_seal": {
+    "BY2": {
+      "same_time_keys": true,
+      "nav_byte_equal": true,
+      "std_byte_equal": true,
+      "pair_updates": 0,
+      "zero_update_identity_required": true,
+      "zero_update_identity_passed": true
+    },
+    "BY2H": {
+      "same_time_keys": true,
+      "nav_byte_equal": true,
+      "std_byte_equal": true,
+      "pair_updates": 0,
+      "zero_update_identity_required": true,
+      "zero_update_identity_passed": true
+    },
+    "BY2O": {
+      "same_time_keys": true,
+      "nav_byte_equal": true,
+      "std_byte_equal": true,
+      "pair_updates": 0,
+      "zero_update_identity_required": true,
+      "zero_update_identity_passed": true
+    }
+  },
+  "pair_totals": {
+    "quality_evaluated_count": 2510,
+    "quality_pass_count": 2510,
+    "quality_reject_count": 0,
+    "pair_updates": 0,
+    "exact_skip_count": 2510
+  },
+  "interpretation_source_sha256": {
+    "cpp/legsa_v23_port_core/src/factors/attitude_clone.cpp": "51124cc5ed99b77e59182f1adea342f398cb451c8457aabc6f53a66a46cbe02e",
+    "cpp/legsa_v23_port_core/src/kf_gins/gi_engine_attitude_clone.cpp": "30d340b262fe8d3e7c9f62d11dcbeb01c0bb1dc2f05cdd41d017a8818ed85bf4"
+  },
+  "interpretation": {
+    "identified_path": "All 2510 valid END models pass the fixed working innovation gate; all then take exact Young SKIP.",
+    "logged_score_semantics": "For SKIP, returned bound_score is initialized to prior_score and remains that score. Zero difference does not mean any of five candidate bounds equalled the prior.",
+    "available_selection_conclusion": "Under the fixed P/H/R, fixed initial weights, epsilon set and numeric tie rule, no tested candidate was selected as sufficiently lower current21 weighted trace than exact SKIP.",
+    "not_identified": [
+      "each epsilon score or margin",
+      "eigenvalues/rank/information of each actual P/H/R",
+      "whether covariance conservatism or weak relative information individually caused all SKIP",
+      "physical slip or SDK accuracy",
+      "a physically calibrated contact covariance",
+      "benefit achievable under a different covariance or estimator"
+    ],
+    "no_posthoc_retuning": true,
+    "full_filter_recomputations": 0,
+    "data_support": "Native paired byte equality is quoted from ALL_NATIVE_SEALED; NAV/STD were not read again."
+  }
+}

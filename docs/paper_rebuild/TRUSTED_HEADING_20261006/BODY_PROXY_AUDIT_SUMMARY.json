@@ -1,0 +1,449 @@
+{
+  "status": "COMPLETE_INPUT_ONLY",
+  "plan_sha256": "d76e73b0d871a07cb30e0909c74c7e30eed9547ae32c2df0155a6ca56c467534",
+  "sequence_summaries": [
+    {
+      "sequence": "BY2",
+      "full_window_s": [
+        66.0,
+        340.0
+      ],
+      "registered_grid_denominator": 2741,
+      "counts": {
+        "messages_framed": 61180,
+        "source_records_prefix": 4536,
+        "grid_rows": 2741,
+        "source_records_window": 56643,
+        "source_good_window": 56643,
+        "support_state_SWING": 109970,
+        "support_eligible_foot_samples": 109049,
+        "new_stance_episodes_window": 2371,
+        "retired_stance_episodes_window": 2371,
+        "state_transitions_window": 7011,
+        "support_state_STANCE": 109049,
+        "support_state_UNKNOWN": 7553,
+        "following_timestamp_only": 1
+      },
+      "grid_rank_counts": {
+        "0": 1384,
+        "1": 0,
+        "2": 1357,
+        "3": 0
+      },
+      "grid_status_counts": {
+        "NO_WINDOW_SOURCE_SAMPLE": 1,
+        "NO_PAST_WINDOW_ENDPOINT": 1,
+        "UNAVAILABLE_NO_COMMON_STANCE": 1170,
+        "AVAILABLE_PARTIAL_ROTATION_PROXY": 1357,
+        "UNAVAILABLE_SINGLE_STANCE": 212
+      },
+      "rank_positive_fraction_full_grid": 0.4950747902225465,
+      "gyro_consistency_count": 1357,
+      "max_consecutive_rank0_grid_slots": 6,
+      "max_rank0_grid_coverage_s": 0.6000000000000001,
+      "max_consecutive_no_consistency_grid_slots": 6,
+      "max_no_consistency_grid_coverage_s": 0.6000000000000001,
+      "gap_duration_convention": "count * 0.1s nominal grid-bin coverage; not continuous physical outage truth",
+      "source_prefix_first_time_s": 44.887078145000004,
+      "source_decoded_last_time_s": 339.997055685,
+      "source_window_first_time_s": 66.001034907,
+      "source_window_last_time_s": 339.997055685,
+      "first_following_timestamp_only_s": 340.007061467,
+      "source_step_s": {
+        "count": 56642,
+        "min": 9.3331e-05,
+        "p50": 0.004013229,
+        "p90": 0.007124811200000004,
+        "p99": 0.01000735575,
+        "max": 0.091676082,
+        "mean": 0.004837329557183715
+      },
+      "endpoint_dt_s": {
+        "count": 2739,
+        "min": 0.100000116,
+        "p50": 0.10201381400000001,
+        "p90": 0.10598889480000001,
+        "p99": 0.10801935804,
+        "max": 0.141662204,
+        "mean": 0.102759974799927
+      },
+      "current_age_s": {
+        "count": 2740,
+        "min": 7.4811e-05,
+        "p50": 0.002927483,
+        "p90": 0.0049483192,
+        "p99": 0.00892930668,
+        "max": 0.044620969,
+        "mean": 0.0027067333430656933
+      },
+      "observed_geometry_condition": {
+        "count": 1357,
+        "min": 1.0,
+        "p50": 1.0000000000000002,
+        "p90": 1.0000000000000004,
+        "p99": 1.0000000000000007,
+        "max": 1.000000000000001,
+        "mean": 1.0
+      },
+      "observable_cayley_difference_norm_rad_s": {
+        "count": 1357,
+        "min": 0.008008954331295719,
+        "p50": 0.09534935970561195,
+        "p90": 0.14689030787561028,
+        "p99": 0.2222194146209703,
+        "max": 0.3338950801297813,
+        "mean": 0.09878592580995024
+      },
+      "observable_cayley_increment_difference_norm": {
+        "count": 1357,
+        "min": 0.0008009177220494759,
+        "p50": 0.009728243705299568,
+        "p90": 0.015036325226586014,
+        "p99": 0.02287550456340762,
+        "max": 0.033401803365408836,
+        "mean": 0.01013879791916843
+      },
+      "source_error_code_counts_window": {
+        "0": 56643
+      },
+      "fault_reason_counts": {},
+      "exact_adjacent_field_repeats_window": {
+        "force": {
+          "repeated": 8799,
+          "valid_adjacent_pairs": 56642,
+          "fraction": 0.15534409095724022
+        },
+        "feet": {
+          "repeated": 1209,
+          "valid_adjacent_pairs": 56642,
+          "fraction": 0.02134458529006744
+        },
+        "gyro": {
+          "repeated": 1217,
+          "valid_adjacent_pairs": 56642,
+          "fraction": 0.021485823240704777
+        }
+      },
+      "semantic_read_counts_prefix_and_window": {
+        "timestamp_values": 122358,
+        "gyro_values": 183537,
+        "accel_values": 183537,
+        "foot_force_values": 244716,
+        "foot_position_values": 734148,
+        "forbidden_or_audit_values_decoded": 0,
+        "lexically_skipped_lines": 2630703
+      },
+      "source_identity": {
+        "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/\u9ad8\u5c42\u6570\u636e/by2.txt",
+        "registered_sha256": "95859de46925416f0a094f8986ef4f8cb452cab71b264702705a9f9aff95a278",
+        "current_size_bytes": 92352512,
+        "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+        "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+      },
+      "raw_hash_recomputed": false,
+      "raw_size_verified_before_and_after": true,
+      "measurement_uncertainty_exported": false
+    },
+    {
+      "sequence": "BY2H",
+      "full_window_s": [
+        413.0,
+        683.0
+      ],
+      "registered_grid_denominator": 2701,
+      "counts": {
+        "messages_framed": 61264,
+        "source_records_prefix": 2680,
+        "grid_rows": 2701,
+        "source_records_window": 58583,
+        "source_good_window": 58583,
+        "support_state_UNKNOWN": 7868,
+        "support_eligible_foot_samples": 112667,
+        "new_stance_episodes_window": 2345,
+        "retired_stance_episodes_window": 2343,
+        "state_transitions_window": 6935,
+        "support_state_SWING": 113797,
+        "support_state_STANCE": 112667,
+        "following_timestamp_only": 1
+      },
+      "grid_rank_counts": {
+        "0": 1375,
+        "1": 0,
+        "2": 1326,
+        "3": 0
+      },
+      "grid_status_counts": {
+        "NO_WINDOW_SOURCE_SAMPLE": 1,
+        "NO_PAST_WINDOW_ENDPOINT": 1,
+        "UNAVAILABLE_NO_COMMON_STANCE": 1152,
+        "AVAILABLE_PARTIAL_ROTATION_PROXY": 1326,
+        "UNAVAILABLE_SINGLE_STANCE": 219,
+        "STALE_CURRENT_SOURCE": 1,
+        "ENDPOINT_INTERVAL_TOO_LONG": 1
+      },
+      "rank_positive_fraction_full_grid": 0.4909292854498334,
+      "gyro_consistency_count": 1326,
+      "max_consecutive_rank0_grid_slots": 6,
+      "max_rank0_grid_coverage_s": 0.6000000000000001,
+      "max_consecutive_no_consistency_grid_slots": 6,
+      "max_no_consistency_grid_coverage_s": 0.6000000000000001,
+      "gap_duration_convention": "count * 0.1s nominal grid-bin coverage; not continuous physical outage truth",
+      "source_prefix_first_time_s": 394.943073919,
+      "source_decoded_last_time_s": 682.995050403,
+      "source_window_first_time_s": 413.037092065,
+      "source_window_last_time_s": 682.995050403,
+      "first_following_timestamp_only_s": 683.003048196,
+      "source_step_s": {
+        "count": 58582,
+        "min": 0.00010791400000000001,
+        "p50": 0.004005937,
+        "p90": 0.006026339800000001,
+        "p99": 0.009757316080000007,
+        "max": 0.17571461300000002,
+        "mean": 0.004608206587996313
+      },
+      "endpoint_dt_s": {
+        "count": 2698,
+        "min": 0.100000116,
+        "p50": 0.10201064800000001,
+        "p90": 0.1059692539,
+        "p99": 0.10799665925,
+        "max": 0.191983067,
+        "mean": 0.10260155698146776
+      },
+      "current_age_s": {
+        "count": 2700,
+        "min": 8.6297e-05,
+        "p50": 0.0029283910000000002,
+        "p90": 0.0049423862,
+        "p99": 0.0069509079,
+        "max": 0.094932717,
+        "mean": 0.0026038815114814815
+      },
+      "observed_geometry_condition": {
+        "count": 1326,
+        "min": 1.0,
+        "p50": 1.0000000000000002,
+        "p90": 1.0000000000000002,
+        "p99": 1.0000000000000007,
+        "max": 1.0000000000000007,
+        "mean": 1.0
+      },
+      "observable_cayley_difference_norm_rad_s": {
+        "count": 1326,
+        "min": 0.0008381543763984927,
+        "p50": 0.09802057018526363,
+        "p90": 0.14738473094377558,
+        "p99": 0.20625194622453757,
+        "max": 0.3005609003403312,
+        "mean": 0.09932566058470638
+      },
+      "observable_cayley_increment_difference_norm": {
+        "count": 1326,
+        "min": 8.715161726181332e-05,
+        "p50": 0.010111903976131518,
+        "p90": 0.015110784576696613,
+        "p99": 0.021132410171038576,
+        "max": 0.030063038100366292,
+        "mean": 0.01018687474727646
+      },
+      "source_error_code_counts_window": {
+        "0": 58583
+      },
+      "fault_reason_counts": {},
+      "exact_adjacent_field_repeats_window": {
+        "force": {
+          "repeated": 9441,
+          "valid_adjacent_pairs": 58582,
+          "fraction": 0.16115871769485507
+        },
+        "feet": {
+          "repeated": 1421,
+          "valid_adjacent_pairs": 58582,
+          "fraction": 0.024256597589703322
+        },
+        "gyro": {
+          "repeated": 1311,
+          "valid_adjacent_pairs": 58582,
+          "fraction": 0.02237888771294937
+        }
+      },
+      "semantic_read_counts_prefix_and_window": {
+        "timestamp_values": 122526,
+        "gyro_values": 183789,
+        "accel_values": 183789,
+        "foot_force_values": 245052,
+        "foot_position_values": 735156,
+        "forbidden_or_audit_values_decoded": 0,
+        "lexically_skipped_lines": 2634316
+      },
+      "source_identity": {
+        "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/\u9ad8\u5c42\u6570\u636e/by3.txt",
+        "registered_sha256": "b2e80763c613a5a0d6739aea90ea3ed4f8c9170cf5f2f6b73e5a000a666f0c49",
+        "current_size_bytes": 92274688,
+        "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+        "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+      },
+      "raw_hash_recomputed": false,
+      "raw_size_verified_before_and_after": true,
+      "measurement_uncertainty_exported": false
+    },
+    {
+      "sequence": "BY2O",
+      "full_window_s": [
+        3186.0,
+        3563.0
+      ],
+      "registered_grid_denominator": 3771,
+      "counts": {
+        "messages_framed": 93700,
+        "source_records_prefix": 17144,
+        "grid_rows": 3771,
+        "source_records_window": 76555,
+        "source_good_window": 76555,
+        "support_state_STANCE": 183357,
+        "support_eligible_foot_samples": 183357,
+        "new_stance_episodes_window": 2465,
+        "retired_stance_episodes_window": 2465,
+        "state_transitions_window": 7312,
+        "support_state_SWING": 114931,
+        "support_state_UNKNOWN": 7932,
+        "following_timestamp_only": 1
+      },
+      "grid_rank_counts": {
+        "0": 1434,
+        "1": 0,
+        "2": 1439,
+        "3": 898
+      },
+      "grid_status_counts": {
+        "NO_WINDOW_SOURCE_SAMPLE": 1,
+        "NO_PAST_WINDOW_ENDPOINT": 3,
+        "AVAILABLE_PARTIAL_ROTATION_PROXY": 1439,
+        "UNAVAILABLE_NO_COMMON_STANCE": 1210,
+        "UNAVAILABLE_SINGLE_STANCE": 207,
+        "STALE_CURRENT_SOURCE": 10,
+        "AVAILABLE_FULL_ROTATION_PROXY": 898,
+        "ENDPOINT_INTERVAL_TOO_LONG": 3
+      },
+      "rank_positive_fraction_full_grid": 0.6197295147175815,
+      "gyro_consistency_count": 2337,
+      "max_consecutive_rank0_grid_slots": 6,
+      "max_rank0_grid_coverage_s": 0.6000000000000001,
+      "max_consecutive_no_consistency_grid_slots": 6,
+      "max_no_consistency_grid_coverage_s": 0.6000000000000001,
+      "gap_duration_convention": "count * 0.1s nominal grid-bin coverage; not continuous physical outage truth",
+      "source_prefix_first_time_s": 3101.5570684570002,
+      "source_decoded_last_time_s": 3562.9970547310004,
+      "source_window_first_time_s": 3186.001059599,
+      "source_window_last_time_s": 3562.9970547310004,
+      "first_following_timestamp_only_s": 3563.001061836,
+      "source_step_s": {
+        "count": 76554,
+        "min": 0.00010149800000000001,
+        "p50": 0.004017021,
+        "p90": 0.006362076399999999,
+        "p99": 0.010224397760000004,
+        "max": 0.345998617,
+        "mean": 0.0049245760526164545
+      },
+      "endpoint_dt_s": {
+        "count": 3757,
+        "min": 0.100000033,
+        "p50": 0.102011898,
+        "p90": 0.1059886448,
+        "p99": 0.10998461496,
+        "max": 0.182005242,
+        "mean": 0.10287004211711473
+      },
+      "current_age_s": {
+        "count": 3770,
+        "min": 3.6810000000000004e-06,
+        "p50": 0.002936848,
+        "p90": 0.0049490157,
+        "p99": 0.00895176171,
+        "max": 0.286952225,
+        "mean": 0.0032187489448275864
+      },
+      "observed_geometry_condition": {
+        "count": 2337,
+        "min": 1.0,
+        "p50": 1.0000000000000002,
+        "p90": 1.8163511488817803,
+        "p99": 2.2389038667279584,
+        "max": 2.2493015222784516,
+        "mean": 1.3193739620080074
+      },
+      "observable_cayley_difference_norm_rad_s": {
+        "count": 2337,
+        "min": 0.0008325989829676918,
+        "p50": 0.05843544770829971,
+        "p90": 0.13234284219067205,
+        "p99": 0.18456514513180203,
+        "max": 0.29541221487590696,
+        "mean": 0.06203707664065159
+      },
+      "observable_cayley_increment_difference_norm": {
+        "count": 2337,
+        "min": 8.659724309975179e-05,
+        "p50": 0.005966701535713414,
+        "p90": 0.013484347966735677,
+        "p99": 0.019105855286704422,
+        "max": 0.030722418661817782,
+        "mean": 0.006377158860608228
+      },
+      "source_error_code_counts_window": {
+        "0": 76555
+      },
+      "fault_reason_counts": {},
+      "exact_adjacent_field_repeats_window": {
+        "force": {
+          "repeated": 21431,
+          "valid_adjacent_pairs": 76554,
+          "fraction": 0.2799461817801813
+        },
+        "feet": {
+          "repeated": 1480,
+          "valid_adjacent_pairs": 76554,
+          "fraction": 0.01933275857564595
+        },
+        "gyro": {
+          "repeated": 1448,
+          "valid_adjacent_pairs": 76554,
+          "fraction": 0.018914752984821172
+        }
+      },
+      "semantic_read_counts_prefix_and_window": {
+        "timestamp_values": 187398,
+        "gyro_values": 281097,
+        "accel_values": 281097,
+        "foot_force_values": 374796,
+        "foot_position_values": 1124388,
+        "forbidden_or_audit_values_decoded": 0,
+        "lexically_skipped_lines": 4029063
+      },
+      "source_identity": {
+        "path": "<RAW_ROOT>/BY2_BY3/2026-03-06/\u9ad8\u5c42\u6570\u636e/by1.txt",
+        "registered_sha256": "0e5c62e0a5af0b6c32c51b535cc90701677276fc73c5623b72abda66cc148f2e",
+        "current_size_bytes": 140873728,
+        "checked_this_lock": "EXISTS_AND_SIZE_ONLY_NO_RAW_BYTES_READ",
+        "hash_authority": "original registration raw_source_hashes; not rehashed in this task"
+      },
+      "raw_hash_recomputed": false,
+      "raw_size_verified_before_and_after": true,
+      "measurement_uncertainty_exported": false
+    }
+  ],
+  "grid_total": 9213,
+  "raw_body_payload_stream_opens": 3,
+  "raw_full_hash_reads": 0,
+  "GNSS_payload_reads": 0,
+  "reference_payload_reads": 0,
+  "navigation_solver_calls": 0,
+  "integer_search_calls": 0,
+  "evaluator_calls": 0,
+  "elapsed_s": 24.132846355438232,
+  "interpretation": "SDK-derived geometric/gyro internal consistency; no calibrated covariance, physical contact/slip truth or independent error metric",
+  "no_threshold_fitted": true,
+  "failures_not_filtered": true
+}

@@ -1,0 +1,314 @@
+{
+  "schema": "saved_native_full6_comparison.v1",
+  "no_new_solver_or_evaluator_calls": true,
+  "reference_reads": 0,
+  "population": 120,
+  "same_input_and_scientific_contract": {
+    "model_plan_sha256": true,
+    "family": true,
+    "length_m": true,
+    "partial_policy": true,
+    "nodes": true,
+    "timeout_s": true,
+    "alpha": true,
+    "angular_floor_deg": true,
+    "data_mode": true,
+    "trace_used_online": true,
+    "original_likelihood": true
+  },
+  "original": {
+    "cases": 120,
+    "search_called": 120,
+    "certified": 112,
+    "certified_fraction": 0.9333333333333333,
+    "experimental_measurements_valid": 16,
+    "statuses": {
+      "UNRESOLVED_ACTIVE_ARC_CHANGED": 50,
+      "EXPERIMENTAL_FIXED_CANDIDATE": 16,
+      "REJECTED_RESIDUAL": 13,
+      "UNAVAILABLE:partial freeze requires the exact certified selected-class search": 8,
+      "REJECTED_PHASE_FAULT_DIAGNOSTIC": 18,
+      "REJECTED_LENGTH": 11,
+      "UNRESOLVED_COMPETITION": 1,
+      "REJECTED_RESIDUAL_AND_LENGTH": 3
+    },
+    "termination_reasons": {
+      "GLOBAL_BOUND_CERTIFIED": 75,
+      "GLOBAL_ENUMERATION_EXHAUSTED": 37,
+      "SEARCH_TIMEOUT": 1,
+      "SEARCH_TIMEOUT_CHILD_GENERATION": 7
+    },
+    "backend_labels": {
+      "legacy_field_absent": 120
+    },
+    "solver_time_recorded": 120,
+    "solver_time_unavailable": 0,
+    "solver_runtime_s": {
+      "n": 120,
+      "sum_s": 799.9991271389998,
+      "mean_s": 6.666659392824998,
+      "min_s": 0.06283198599999196,
+      "max_s": 30.00161398199998,
+      "p25_s": 0.7054918905000065,
+      "p50_s": 3.1205529450000427,
+      "p75_s": 7.415680446000096,
+      "p90_s": 21.534079312099998,
+      "p95_s": 30.00022988995001,
+      "p99_s": 30.00062748222003,
+      "above_0.2s": 111,
+      "above_1.0s": 82,
+      "above_2.0s": 70,
+      "above_5.0s": 44,
+      "above_10.0s": 25,
+      "above_30.0s": 8
+    },
+    "whole_frontend_case_runtime_s": {
+      "n": 120,
+      "sum_s": 805.2558083859998,
+      "mean_s": 6.710465069883331,
+      "min_s": 0.09036185100001148,
+      "max_s": 30.063397966999986,
+      "p25_s": 0.7434108299999949,
+      "p50_s": 3.154725237500031,
+      "p75_s": 7.457582445249955,
+      "p90_s": 21.600903883199972,
+      "p95_s": 30.040632085849985,
+      "p99_s": 30.06172229711999,
+      "above_0.2s": 114,
+      "above_1.0s": 83,
+      "above_2.0s": 71,
+      "above_5.0s": 44,
+      "above_10.0s": 25,
+      "above_30.0s": 8
+    },
+    "execution_commits": [
+      "c25a48ed4ddf2ac8748f0a393dcbaa87cba85c3b",
+      "dbf340afb34fffb35763b63d9a948f7346cbf1cf"
+    ]
+  },
+  "native": {
+    "cases": 120,
+    "search_called": 120,
+    "certified": 120,
+    "certified_fraction": 1.0,
+    "experimental_measurements_valid": 17,
+    "statuses": {
+      "UNRESOLVED_ACTIVE_ARC_CHANGED": 53,
+      "EXPERIMENTAL_FIXED_CANDIDATE": 17,
+      "REJECTED_RESIDUAL": 14,
+      "REJECTED_PHASE_FAULT_DIAGNOSTIC": 19,
+      "REJECTED_LENGTH": 13,
+      "UNRESOLVED_COMPETITION": 1,
+      "REJECTED_RESIDUAL_AND_LENGTH": 3
+    },
+    "termination_reasons": {
+      "GLOBAL_BOUND_CERTIFIED": 83,
+      "GLOBAL_ENUMERATION_EXHAUSTED": 37
+    },
+    "backend_labels": {
+      "native_scalar": 120
+    },
+    "solver_time_recorded": 120,
+    "solver_time_unavailable": 0,
+    "solver_runtime_s": {
+      "n": 120,
+      "sum_s": 155.8784221970002,
+      "mean_s": 1.2989868516416683,
+      "min_s": 0.016733383000001822,
+      "max_s": 17.336169659000007,
+      "p25_s": 0.1203904927500048,
+      "p50_s": 0.4628932440000142,
+      "p75_s": 1.1043204395000075,
+      "p90_s": 3.401315598000007,
+      "p95_s": 5.240184028450017,
+      "p99_s": 15.082194562290006,
+      "above_0.2s": 80,
+      "above_1.0s": 34,
+      "above_2.0s": 20,
+      "above_5.0s": 7,
+      "above_10.0s": 2,
+      "above_30.0s": 0
+    },
+    "whole_frontend_case_runtime_s": {
+      "n": 120,
+      "sum_s": 161.56448132200012,
+      "mean_s": 1.3463706776833344,
+      "min_s": 0.045943243000010625,
+      "max_s": 17.456737754000017,
+      "p25_s": 0.16023933950001634,
+      "p50_s": 0.4995367009999967,
+      "p75_s": 1.1544024149999998,
+      "p90_s": 3.4706400444000005,
+      "p95_s": 5.318849151899988,
+      "p99_s": 15.221165597060029,
+      "above_0.2s": 82,
+      "above_1.0s": 35,
+      "above_2.0s": 20,
+      "above_5.0s": 7,
+      "above_10.0s": 2,
+      "above_30.0s": 0
+    },
+    "execution_commits": [
+      "fc125a9a41527d8ac81a7a57802b5820404c0896"
+    ]
+  },
+  "common_certified_cases": 112,
+  "common_certified_match_counts": {
+    "pair_full_N_equal": 112,
+    "pair_selected_class_equal": 112,
+    "pair_objective_close": 112,
+    "pair_objective_bit_equal": 105,
+    "pair_baseline_close": 112,
+    "pair_baseline_bit_equal": 105,
+    "frozen_candidates_equal": 112,
+    "status_equal": 112,
+    "admission_status_equal": 112,
+    "measurement_payload_equal": 112
+  },
+  "newly_certified_cases": [
+    {
+      "case_id": "partial_0116.00",
+      "window_start_s": 116.0,
+      "original_termination": "SEARCH_TIMEOUT",
+      "native_termination": "GLOBAL_BOUND_CERTIFIED",
+      "was_timeout": true,
+      "native_status": "REJECTED_RESIDUAL",
+      "native_valid": false
+    },
+    {
+      "case_id": "partial_0162.00",
+      "window_start_s": 162.0,
+      "original_termination": "SEARCH_TIMEOUT_CHILD_GENERATION",
+      "native_termination": "GLOBAL_BOUND_CERTIFIED",
+      "was_timeout": true,
+      "native_status": "REJECTED_PHASE_FAULT_DIAGNOSTIC",
+      "native_valid": false
+    },
+    {
+      "case_id": "partial_0178.00",
+      "window_start_s": 178.0,
+      "original_termination": "SEARCH_TIMEOUT_CHILD_GENERATION",
+      "native_termination": "GLOBAL_BOUND_CERTIFIED",
+      "was_timeout": true,
+      "native_status": "EXPERIMENTAL_FIXED_CANDIDATE",
+      "native_valid": true
+    },
+    {
+      "case_id": "partial_0266.00",
+      "window_start_s": 266.0,
+      "original_termination": "SEARCH_TIMEOUT_CHILD_GENERATION",
+      "native_termination": "GLOBAL_BOUND_CERTIFIED",
+      "was_timeout": true,
+      "native_status": "REJECTED_LENGTH",
+      "native_valid": false
+    },
+    {
+      "case_id": "partial_0318.00",
+      "window_start_s": 318.0,
+      "original_termination": "SEARCH_TIMEOUT_CHILD_GENERATION",
+      "native_termination": "GLOBAL_BOUND_CERTIFIED",
+      "was_timeout": true,
+      "native_status": "UNRESOLVED_ACTIVE_ARC_CHANGED",
+      "native_valid": false
+    },
+    {
+      "case_id": "partial_0330.00",
+      "window_start_s": 330.0,
+      "original_termination": "SEARCH_TIMEOUT_CHILD_GENERATION",
+      "native_termination": "GLOBAL_BOUND_CERTIFIED",
+      "was_timeout": true,
+      "native_status": "UNRESOLVED_ACTIVE_ARC_CHANGED",
+      "native_valid": false
+    },
+    {
+      "case_id": "partial_0334.00",
+      "window_start_s": 334.0,
+      "original_termination": "SEARCH_TIMEOUT_CHILD_GENERATION",
+      "native_termination": "GLOBAL_BOUND_CERTIFIED",
+      "was_timeout": true,
+      "native_status": "REJECTED_LENGTH",
+      "native_valid": false
+    },
+    {
+      "case_id": "partial_0336.00",
+      "window_start_s": 336.0,
+      "original_termination": "SEARCH_TIMEOUT_CHILD_GENERATION",
+      "native_termination": "GLOBAL_BOUND_CERTIFIED",
+      "was_timeout": true,
+      "native_status": "UNRESOLVED_ACTIVE_ARC_CHANGED",
+      "native_valid": false
+    }
+  ],
+  "lost_certification_cases": [],
+  "common_certified_original_solver_runtime_s": {
+    "n": 112,
+    "sum_s": 559.9953481319999,
+    "mean_s": 4.999958465464284,
+    "min_s": 0.06283198599999196,
+    "max_s": 28.498693163999974,
+    "p25_s": 0.6081220832500094,
+    "p50_s": 2.949305486500009,
+    "p75_s": 6.127092261249999,
+    "p90_s": 13.802238959800016,
+    "p95_s": 20.85705655540001,
+    "p99_s": 26.230729404949972,
+    "above_0.2s": 103,
+    "above_1.0s": 74,
+    "above_2.0s": 62,
+    "above_5.0s": 36,
+    "above_10.0s": 17,
+    "above_30.0s": 0
+  },
+  "common_certified_native_solver_runtime_s": {
+    "n": 112,
+    "sum_s": 85.69862659800017,
+    "mean_s": 0.7651663089107158,
+    "min_s": 0.016733383000001822,
+    "max_s": 4.333976153999998,
+    "p25_s": 0.10859268549999612,
+    "p50_s": 0.431329726499996,
+    "p75_s": 0.9207904174999797,
+    "p90_s": 2.070478997199991,
+    "p95_s": 3.2092801231499943,
+    "p99_s": 3.9367357179900013,
+    "above_0.2s": 72,
+    "above_1.0s": 26,
+    "above_2.0s": 12,
+    "above_5.0s": 0,
+    "above_10.0s": 0,
+    "above_30.0s": 0
+  },
+  "common_certified_paired_speedup": {
+    "n": 112,
+    "median": 6.386480527755952,
+    "min": 3.6475973021849013,
+    "max": 7.382124831213366,
+    "p10": 4.77891816344623,
+    "p90": 7.019171120208997
+  },
+  "max_common_pair_baseline_difference_m": 1.942890293094024e-15,
+  "max_common_pair_objective_abs_difference": 2.7284841053187847e-12,
+  "max_common_pair_objective_scaled_difference": 2.2527318729516578e-14,
+  "mismatches": [],
+  "tolerances": {
+    "objective_rtol": 1e-10,
+    "objective_atol": 1e-10,
+    "baseline_atol_m": 1e-10
+  },
+  "source_hash_differences": [
+    "scripts/paper_rebuild/carrier_phase/integration_frontend.py",
+    "src/legsa_gins/paper_rebuild/carrier_phase/native_sphere.py",
+    "src/legsa_gins/paper_rebuild/carrier_phase/partial.py",
+    "src/legsa_gins/paper_rebuild/carrier_phase/selected_likelihood.py",
+    "src/legsa_gins/paper_rebuild/carrier_phase/solver.py",
+    "src/legsa_gins/paper_rebuild/horizontal_literature/ext01_clambda.py"
+  ],
+  "receipt": {
+    "completion_sha256": "c9954ba4ea08211852e5cbafcd3b0480c4aba791aa8d31e5a9af1dc098a3c5b1",
+    "original_contract_sha256": "20f35a5744c72e5725fc0249025c96f37d0f39a8bbab4aa98c71d1776187faec",
+    "native_contract_sha256": "3c8b0e6a0ed68a83ebcf060a937dfa1e563aebdb6d1e783bd144e095b599572b",
+    "script_sha256": "9464ce930269c5f67599b0f54435382aa1f3069725053b559dbe75420675850e"
+  },
+  "qualification": "global certificate proves registered objective optimum, not correct integers or calibrated FIX",
+  "timing_scope": "recorded current complete-run elapsed_s; original includes earlier Python implementation; native includes cache and scalar C++; not a scaled estimate or isolated kernel benchmark"
+}

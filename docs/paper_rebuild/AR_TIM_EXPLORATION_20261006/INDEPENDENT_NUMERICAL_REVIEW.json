@@ -1,0 +1,261 @@
+{
+  "status": "PASS_SEALED_OUTPUT_CONSISTENCY_NOT_INTEGER_TRUTH",
+  "execution_commit": "529487e10eac459e950c084945d7562239de7cef",
+  "plan_sha256": "18906fccddc3d419ea40df0cd31f55c32db446de774384becbfacdd59a67e9a4",
+  "review_script_sha256": "b962c61d76e40d17910a6a39b0ef9fcb3fa9f03ebb2cca9fe7aaac04b06d05e6",
+  "input_pins": {
+    "PLAN.json": "18906fccddc3d419ea40df0cd31f55c32db446de774384becbfacdd59a67e9a4",
+    "REAL_SEAL.json": "ccfeae1370beb0415c99082ec56304f019c39afdd403811f29014c90f46f0b8b",
+    "EVALUATION_SEAL.json": "6baab528cf2688e1293555c0823ecbbca8d411a6b80e31430f69962cf7219e12",
+    "REAL_IO_AUDIT.json": "47e0550bf5bcb61fa3dac4db8e472da186d80e09b41a23e63e585c80af2092fd",
+    "EVALUATE_IO_AUDIT.json": "096315628c6bb05fa315c68cf4bb9611ff1e4b274919dc4b40acf29230b104ad",
+    "REAL_EVALUATION.csv": "71eed56f8e33cab4fba2cbcdf7e724c4ef63ad30e378137cac0aa461e0315fb6",
+    "CALL_LEDGER.jsonl": "8be0a5b069a9168c35edfd31b8fc749806cca902f93b93ab819b9c4bd5a8d264"
+  },
+  "source_pins_verified": 15,
+  "sealed_epoch_record_pins_verified": 12,
+  "scheduled": 12,
+  "raw_reference_solver_evaluator_reads_or_calls": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "reparsed_io": {
+    "REAL": {
+      "reference_open_count_reparsed": 0,
+      "receipt_and_trace_hash_passed": true
+    },
+    "EVALUATE": {
+      "reference_open_count_reparsed": 1,
+      "receipt_and_trace_hash_passed": true
+    }
+  },
+  "ledger_counts": {
+    "SPP_START": 12,
+    "CILS_START": 18,
+    "CILS_END": 18,
+    "EPOCH_END": 12
+  },
+  "candidate_counts": {
+    "A": 9,
+    "B": 9,
+    "C": 5
+  },
+  "max_numerical_discrepancies": {
+    "baseline_length_m": 5.551115123125783e-16,
+    "ECEF_to_NED_m": 5.551115123125783e-17,
+    "raw_whitened_cost": 0.0,
+    "prior_standardized_residual": 1.8318679906315083e-15,
+    "projected_heading_deg": 0.0,
+    "objective_identity": 1.8390089451258973e-10
+  },
+  "max_statistic_difference": 0,
+  "max_saved_error_arithmetic_difference": 0.0,
+  "independent_statistics": {
+    "A": {
+      "count": 9,
+      "rmse_deg": 60.18183964367512,
+      "mae_deg": 32.26560022654088,
+      "max_absolute_deg": 140.21134394077342
+    },
+    "B": {
+      "count": 9,
+      "rmse_deg": 2.443953148465886,
+      "mae_deg": 1.8914822473997472,
+      "max_absolute_deg": 4.981738598432685
+    },
+    "C": {
+      "count": 5,
+      "rmse_deg": 2.840567238302987,
+      "mae_deg": 2.4277997905652113,
+      "max_absolute_deg": 4.981738598432685
+    }
+  },
+  "C_rejected_integer_change_targets_s": [
+    100,
+    200,
+    240,
+    300
+  ],
+  "B_statistics_on_C_rejected_four": {
+    "count": 4,
+    "rmse_deg": 1.831123408625532,
+    "mae_deg": 1.221085318442917,
+    "max_absolute_deg": 3.5766025677571633
+  },
+  "integer_correctness": "NA",
+  "candidate_details": [
+    {
+      "target_s": 80,
+      "method": "A",
+      "C_retained": true,
+      "horizontal_projection_m": 0.34801142316671696,
+      "baseline_down_m": 0.0372565342655032,
+      "raw_cost": 18.865455229129232,
+      "prior_residual_sigma": 1.4597974028782692
+    },
+    {
+      "target_s": 80,
+      "method": "B",
+      "C_retained": true,
+      "horizontal_projection_m": 0.3485538723223228,
+      "baseline_down_m": 0.03178361353141257,
+      "raw_cost": 19.09766692915906,
+      "prior_residual_sigma": 1.277366711741915
+    },
+    {
+      "target_s": 100,
+      "method": "A",
+      "C_retained": false,
+      "horizontal_projection_m": 0.22180842067865705,
+      "baseline_down_m": 0.27074161947517317,
+      "raw_cost": 0.14212642289672156,
+      "prior_residual_sigma": 8.982412298596474
+    },
+    {
+      "target_s": 100,
+      "method": "B",
+      "C_retained": false,
+      "horizontal_projection_m": 0.34888228628235385,
+      "baseline_down_m": 0.027949066503159065,
+      "raw_cost": 12.374677615083332,
+      "prior_residual_sigma": 0.8893271995293375
+    },
+    {
+      "target_s": 120,
+      "method": "A",
+      "C_retained": true,
+      "horizontal_projection_m": 0.3494158066377562,
+      "baseline_down_m": -0.020213709993121082,
+      "raw_cost": 0.6116439961469465,
+      "prior_residual_sigma": -0.5490633672255105
+    },
+    {
+      "target_s": 120,
+      "method": "B",
+      "C_retained": true,
+      "horizontal_projection_m": 0.34965586050887687,
+      "baseline_down_m": -0.015517061957618372,
+      "raw_cost": 0.6735755860058689,
+      "prior_residual_sigma": -0.39250843270875346
+    },
+    {
+      "target_s": 140,
+      "method": "A",
+      "C_retained": true,
+      "horizontal_projection_m": 0.3497277987600932,
+      "baseline_down_m": -0.013800970053573725,
+      "raw_cost": 13.625369203705244,
+      "prior_residual_sigma": -0.3410763000193547
+    },
+    {
+      "target_s": 140,
+      "method": "B",
+      "C_retained": true,
+      "horizontal_projection_m": 0.3497704871183832,
+      "baseline_down_m": -0.012673055707635605,
+      "raw_cost": 13.636813619824194,
+      "prior_residual_sigma": -0.3034791551547507
+    },
+    {
+      "target_s": 160,
+      "method": "A",
+      "C_retained": true,
+      "horizontal_projection_m": 0.3499093245784793,
+      "baseline_down_m": -0.00796646552948356,
+      "raw_cost": 10.226896150157291,
+      "prior_residual_sigma": -0.17368180279493886
+    },
+    {
+      "target_s": 160,
+      "method": "B",
+      "C_retained": true,
+      "horizontal_projection_m": 0.34993925784798013,
+      "baseline_down_m": -0.006520415385905601,
+      "raw_cost": 10.23297748441291,
+      "prior_residual_sigma": -0.1254801313423402
+    },
+    {
+      "target_s": 180,
+      "method": "A",
+      "C_retained": true,
+      "horizontal_projection_m": 0.3498885083843528,
+      "baseline_down_m": -0.008833555375524743,
+      "raw_cost": 4.963395153541654,
+      "prior_residual_sigma": -0.22135498542015172
+    },
+    {
+      "target_s": 180,
+      "method": "B",
+      "C_retained": true,
+      "horizontal_projection_m": 0.3498971470309497,
+      "baseline_down_m": -0.008484485818367651,
+      "raw_cost": 4.965837502032717,
+      "prior_residual_sigma": -0.20971933351491534
+    },
+    {
+      "target_s": 200,
+      "method": "A",
+      "C_retained": false,
+      "horizontal_projection_m": 0.24367385073769102,
+      "baseline_down_m": -0.25124301874214466,
+      "raw_cost": 1.383343508177874,
+      "prior_residual_sigma": -8.396666933452087
+    },
+    {
+      "target_s": 200,
+      "method": "B",
+      "C_retained": false,
+      "horizontal_projection_m": 0.3497763727477914,
+      "baseline_down_m": 0.012509559040907642,
+      "raw_cost": 1.96872881511915,
+      "prior_residual_sigma": 0.3950856593163235
+    },
+    {
+      "target_s": 240,
+      "method": "A",
+      "C_retained": false,
+      "horizontal_projection_m": 0.26897669568996646,
+      "baseline_down_m": 0.22394538882439058,
+      "raw_cost": 4.006829328825067,
+      "prior_residual_sigma": 7.593905240602792
+    },
+    {
+      "target_s": 240,
+      "method": "B",
+      "C_retained": false,
+      "horizontal_projection_m": 0.3495554454520034,
+      "baseline_down_m": -0.017634924293891158,
+      "raw_cost": 5.580065142477589,
+      "prior_residual_sigma": -0.45877186333993253
+    },
+    {
+      "target_s": 300,
+      "method": "A",
+      "C_retained": false,
+      "horizontal_projection_m": 0.184361684931654,
+      "baseline_down_m": 0.297507595078111,
+      "raw_cost": 12.643534381202251,
+      "prior_residual_sigma": 8.689218979615298
+    },
+    {
+      "target_s": 300,
+      "method": "B",
+      "C_retained": false,
+      "horizontal_projection_m": 0.34981541612793243,
+      "baseline_down_m": -0.011365502155275847,
+      "raw_cost": 26.38077625138063,
+      "prior_residual_sigma": -1.6065509281642647
+    }
+  ],
+  "null_frontier_certificate_records": [
+    {
+      "target_s": 160,
+      "method": "B",
+      "serialized_bound": null,
+      "certificate_label": "GLOBAL_BOUND_CERTIFIED"
+    }
+  ],
+  "review_execution_note": "One initial read-only check stopped on null frontier (serialized +infinity). Checker now records the null without inventing a numeric bound; second read-only check completes. No solver/evaluator or simulation rerun."
+}

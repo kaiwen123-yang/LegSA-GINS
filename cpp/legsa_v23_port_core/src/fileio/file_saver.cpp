@@ -6,6 +6,7 @@
 // 中文说明：该文件为受控移植的组合导航骨架代码，后续创新因子将在该骨架通过 parity 后再接入。
 
 #include "legsa_v23_port_core/fileio/file_saver.hpp"
+#include "legsa_v23_port_core/factors/attitude_clone.hpp"
 
 #include "legsa_v23_port_core/common/earth.hpp"
 #include "legsa_v23_port_core/source_aware/source_aware_policy.hpp"
@@ -163,8 +164,11 @@ void writeActualSolverInputPaths(std::ostream& out, const PortOptions& options) 
   };
   add("propagation_imu", options.imu_path);
   add("gnss_position_receiver_velocity_dual_yaw", options.gnss_path);
+  if (options.attitude_clone_config.mode != "off") {
+    add("sdk_foot_pair_direction_events", options.attitude_clone_config.events_path);
+  }
   if (options.dual_antenna_measurement_model == "baseline3d") {
-    add("dual_antenna_baseline3d", options.baseline3d_path);
+    add("dual_antenna_baseline3d", options.baseline3d_source == "external_carrier" ? options.external_carrier_baseline_path : options.baseline3d_path);
   }
   if (options.raw_doppler_config.enable_raw_doppler) {
     add("raw_doppler_velocity", options.raw_doppler_config.raw_doppler_factor_path);
@@ -174,7 +178,9 @@ void writeActualSolverInputPaths(std::ostream& out, const PortOptions& options) 
   }
   if (options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior) {
     add("go2_horizontal_velocity_weak_prior",
-        options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path);
+        options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame == "body_frd"
+            ? options.go2_velocity_prior_diagnostic_config.go2_body_velocity_prior_path
+            : options.go2_velocity_prior_diagnostic_config.go2_velocity_prior_diagnostic_path);
   }
   if (options.go2_readiness_lsim_metadata_config.enable_go2_readiness_lsim_metadata) {
     add("go2_source_quality_metadata",
@@ -190,7 +196,7 @@ void writeActualSolverInputRoles(std::ostream& out, const PortOptions& options) 
   out << "{\"propagation_imu\": \"source_backed_propagation\", "
       << "\"gnss_position_receiver_velocity_dual_yaw\": \"validity_gated_measurements\"";
   if (options.dual_antenna_measurement_model == "baseline3d") {
-    out << ", \"dual_antenna_baseline3d\": \"three_dimensional_gnss_baseline_measurement\"";
+    out << ", \"dual_antenna_baseline3d\": \"" << (options.heading_source_policy == "pvt_priority_control" ? "diagnostic_only_carrier_no_heading_update" : options.baseline3d_source == "external_carrier" ? "experimental_external_carrier_baseline_full_covariance" : "three_dimensional_gnss_baseline_measurement") << "\"";
   }
   if (options.raw_doppler_config.enable_raw_doppler) {
     out << ", \"raw_doppler_velocity\": \"source_backed_auxiliary_velocity\"";
@@ -199,13 +205,18 @@ void writeActualSolverInputRoles(std::ostream& out, const PortOptions& options) 
     out << ", \"go2_roll_pitch_weak_prior\": \"weak_prior_not_truth\"";
   }
   if (options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior) {
-    out << ", \"go2_horizontal_velocity_weak_prior\": \"horizontal_weak_prior_not_truth\"";
+    out << ", \"go2_horizontal_velocity_weak_prior\": \""
+        << (options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame == "body_frd"
+            ? "body_forward_right_velocity_at_imu_point_not_truth" : "horizontal_weak_prior_not_truth") << "\"";
   }
   if (options.go2_readiness_lsim_metadata_config.enable_go2_readiness_lsim_metadata) {
     out << ", \"go2_source_quality_metadata\": \"solver_visible_quality_metadata_not_truth\"";
   }
   if (options.fgo_feedback_config.enable_fgo_feedback) {
     out << ", \"selected_fgo_feedback\": \"out_of_scope_for_clean1\"";
+  }
+  if (options.attitude_clone_config.mode != "off") {
+    out << ", \"sdk_foot_pair_direction_events\": \"conditional_relative_rotation_working_bound_not_contact_truth\"";
   }
   out << "}";
 }
@@ -754,15 +765,109 @@ void FileSaver::writeRunManifest(const std::string& output_dir, const PortOption
         << "  \"baseline3d_reject_count\": " << options.baseline3d_counts.rejected << ",\n"
         << "  \"baseline3d_invalid_count\": " << options.baseline3d_counts.invalid << ",\n"
         << "  \"baseline3d_missing_exact_time_count\": " << options.baseline3d_counts.missing << ",\n"
-        << "  \"baseline3d_scalar_yaw_observation_used\": false,\n"
+        << "  \"baseline3d_scalar_yaw_observation_used\": "
+        << (options.heading_source_policy != "configured" ? "true" : "false") << ",\n"
         << "  \"baseline3d_formal_a1_counter_alias\": \"yaw_and_dual_yaw_counters\",\n"
-        << "  \"baseline3d_frame_contract\": \"observation_NED_equals_Cbn_NED_no_additional_rotation\",\n"
+        << "  \"baseline3d_frame_contract\": \""
+        << (options.baseline3d_source == "external_carrier" ? "GNSS2_minus_GNSS1_ECEF_rotated_to_Cbn_NED_body_vector_FRD" : "observation_NED_equals_Cbn_NED_no_additional_rotation") << "\",\n"
         << "  \"baseline3d_nis_definition\": \"(dz-Hdx)^T(HPH^T+R_QA)^-1(dz-Hdx)\",\n"
         << "  \"baseline3d_source_aware_innovation_definition\": \"existing_policy_uses_dz_dof3\",\n"
         << "  \"baseline3d_nonbasic_nis_threshold\": 11.34,\n"
         << "  \"baseline3d_nis_gate_enabled\": "
         << (!options.enable_basic_dual_yaw_baseline && options.yaw_scheme_C_enabled ? "true" : "false")
         << ",\n";
+  }
+  if (options.runtime_contract == "research_experiment") {
+    out << "  \"research_event_schedule\": \"exact_measurement_time_with_IMU_increment_splitting\",\n"
+        << "  \"research_RD_RP_policy\": \"past_only_each_source_timestamp_attempted_at_most_once\",\n"
+        << "  \"runtime_contract\": \"research_experiment\",\n"
+        << "  \"dual_yaw_prediction_model\": \"" << escapeJson(options.dual_yaw_prediction_model) << "\",\n";
+  }
+  if (options.heading_source_policy != "configured") {
+    out << "  \"heading_source_policy\": \"" << escapeJson(options.heading_source_policy) << "\",\n"
+        << "  \"heading_pvt_freshness_s\": " << HeadingSourcePolicy::kPvtFreshnessS << ",\n"
+        << "  \"heading_accepted_cross_source_exclusion_s\": " << HeadingSourcePolicy::kNearTimeS << ",\n"
+        << "  \"heading_receiver_epoch_association_established\": false,\n"
+        << "  \"heading_covariance_accounts_for_shared_GNSS_IMU\": false,\n"
+        << "  \"heading_integer_integrity_claim\": false,\n"
+        << "  \"heading_suppressed_carrier_propagation_or_auxiliary_event\": false,\n"
+        << "  \"heading_pvt_attempt_count\": " << options.heading_source_counts.pvt_attempts << ",\n"
+        << "  \"heading_pvt_accept_count\": " << options.heading_source_counts.pvt_accepted << ",\n"
+        << "  \"heading_pvt_suppressed_count\": " << options.heading_source_counts.pvt_suppressed << ",\n"
+        << "  \"heading_carrier_attempt_count\": " << options.heading_source_counts.carrier_attempts << ",\n"
+        << "  \"heading_carrier_accept_count\": " << options.heading_source_counts.carrier_accepted << ",\n"
+        << "  \"heading_carrier_bypass_count\": " << options.heading_source_counts.carrier_bypassed << ",\n";
+  }
+  if (options.baseline3d_source == "external_carrier") {
+    out << "  \"baseline3d_source\": \"external_carrier\",\n"
+        << "  \"external_carrier_baseline_path\": \"" << escapeJson(options.external_carrier_baseline_path) << "\",\n"
+        << "  \"external_carrier_body_vector_frd_m\": [" << options.baseline3d_body_vector_m[0] << ','
+        << options.baseline3d_body_vector_m[1] << ',' << options.baseline3d_body_vector_m[2] << "],\n"
+        << "  \"external_carrier_covariance\": \"full_ECEF_m2_rotated_to_current_state_NED\",\n"
+        << "  \"external_carrier_time_contract\": \"measurement_time_equals_decision_available_time_no_backdating\",\n"
+        << "  \"external_carrier_valid_is_trusted_FIX\": false,\n"
+        << "  \"external_carrier_pacc_used\": false,\n"
+        << "  \"external_carrier_k_b_used\": false,\n";
+  }
+  if (options.go2_velocity_prior_diagnostic_config.enable_go2_horizontal_velocity_prior &&
+      options.go2_velocity_prior_diagnostic_config.go2_horizontal_velocity_frame == "body_frd") {
+    out << "  \"go2_horizontal_velocity_frame\": \"body_frd\",\n"
+        << "  \"body_velocity_measurement_axes\": \"forward_right\",\n"
+        << "  \"body_velocity_z_observed\": false,\n"
+        << "  \"body_velocity_nav_down_state_frozen\": false,\n"
+        << "  \"body_velocity_reference_point_assumption\": \"navigation_IMU_point_no_lever_arm_applied\",\n"
+        << "  \"body_velocity_input_frame_verified_by_native\": false,\n"
+        << "  \"body_velocity_native_uses_GNSS_heading_to_construct_measurement\": false,\n"
+        << "  \"body_velocity_update_period_s\": " << options.go2_velocity_prior_diagnostic_config.go2_body_velocity_update_period_s << ",\n"
+        << "  \"body_velocity_time_policy\": \"independent_IMU_boundary_timer_past_latest_unique_attempt_no_interpolation\",\n";
+  }
+  if (options.attitude_clone_config.mode != "off") {
+    const auto& ac = options.attitude_clone_config;
+    const auto& counts = options.attitude_clone_counts;
+    out << "  \"attitude_clone_mode\": \"" << escapeJson(ac.mode) << "\",\n"
+        << "  \"attitude_clone_max_joint_dimension\": 24,\n"
+        << "  \"attitude_clone_output_current_dimension\": 21,\n"
+        << "  \"foot_pair_position_source_id\": \"" << escapeJson(ac.position_source_id) << "\",\n"
+        << "  \"foot_pair_position_gnss_input_status\": \"" << escapeJson(ac.position_gnss_input_status) << "\",\n"
+        << "  \"foot_pair_covariance_source_id\": \"" << escapeJson(ac.covariance_source_id) << "\",\n"
+        << "  \"foot_pair_covariance_assumption\": \"" << escapeJson(ac.covariance_assumption) << "\",\n"
+        << "  \"foot_pair_frame_source_id\": \"" << escapeJson(ac.frame_source_id) << "\",\n"
+        << "  \"foot_pair_availability_policy\": \"" << escapeJson(ac.availability_policy) << "\",\n"
+        << "  \"foot_pair_body_frd_to_engine_body\": [";
+    for (std::size_t i = 0; i < 9; ++i) {
+      if (i) out << ',';
+      out << ac.foot_frd_to_engine_body[i / 3][i % 3];
+    }
+    out << "],\n"
+        << "  \"foot_pair_physical_frame_independently_calibrated\": false,\n"
+        << "  \"foot_pair_IMU_statistical_independence_proven\": false,\n"
+        << "  \"foot_pair_absolute_heading_or_instant_velocity\": false,\n"
+        << "  \"foot_pair_true_slip_or_integrity_claim\": false,\n"
+        << "  \"attitude_clone_reset\": \"full_joint_G_P_Gt_positive_left_both_research_modes\",\n"
+        << "  \"attitude_clone_retirement\": \"current_marginal_not_Schur_conditioning\",\n"
+        << "  \"attitude_clone_original_measurement_cross_model\": \"inherited_working_model_zero_clone_H_full_joint_gain\",\n"
+        << "  \"attitude_clone_process_noise_cross_model\": \"inherited_current_process_working_model\",\n"
+        << "  \"foot_pair_Young_epsilon_candidates\": [0.015625,0.0625,0.25,1,4],\n"
+        << "  \"foot_pair_Young_selection\": \"fixed_initial_current21_weighted_trace_with_exact_SKIP\",\n"
+        << "  \"foot_pair_Young_bound_scope\": \"local_given_working_marginal_second_moment_bounds_arbitrary_state_measurement_cross\",\n"
+        << "  \"foot_pair_safe_innovation_covariance\": \"2*(H_P_Ht+R)\",\n"
+        << "  \"foot_pair_safe_innovation_threshold\": " << attitude_clone::kSafeInnovationThreshold << ",\n"
+        << "  \"foot_pair_safe_innovation_scope\": \"working_Gaussian_diagnostic_not_physical_slip_truth\",\n"
+        << "  \"attitude_clone_source_rows\": " << counts.source_rows << ",\n"
+        << "  \"attitude_clone_consumed_event_rows\": " << counts.event_rows << ",\n"
+        << "  \"attitude_clone_starts\": " << counts.starts << ",\n"
+        << "  \"attitude_clone_ends\": " << counts.ends << ",\n"
+        << "  \"attitude_clone_retires\": " << counts.retires << ",\n"
+        << "  \"attitude_clone_pair_updates\": " << counts.pair_updates << ",\n"
+        << "  \"attitude_clone_pair_skips\": " << counts.pair_skips << ",\n"
+        << "  \"attitude_clone_null_ends\": " << counts.null_ends << ",\n"
+        << "  \"attitude_clone_innovation_rejects\": " << counts.innovation_rejects << ",\n"
+        << "  \"attitude_clone_rejected_events\": " << counts.rejected_events << ",\n"
+        << "  \"attitude_clone_ordinary_joint_updates\": " << counts.ordinary_joint_updates << ",\n"
+        << "  \"attitude_clone_full_resets\": " << counts.full_resets << ",\n"
+        << "  \"attitude_clone_late_initial_events\": " << counts.late_initial_events << ",\n"
+        << "  \"attitude_clone_unconsumed_terminal\": " << counts.unconsumed_terminal << ",\n"
+        << "  \"attitude_clone_unconsumed_outside_imu\": " << counts.unconsumed_outside_imu << ",\n";
   }
   out << "  \"actual_solver_input_paths\": ";
   writeActualSolverInputPaths(out, options);

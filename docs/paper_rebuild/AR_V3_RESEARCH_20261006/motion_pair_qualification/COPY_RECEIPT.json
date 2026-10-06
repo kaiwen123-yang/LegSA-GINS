@@ -1,0 +1,53 @@
+{
+  "schema": "ar_v3_motion_qualification.copy_receipt.v1",
+  "source_alias": "<AR_V3_SCRATCH>/MOTION_PAIR_ATTEMPT01",
+  "additional_searches": 0,
+  "additional_bound_checks": 0,
+  "additional_oracle_enumerations": 0,
+  "log_alias": "<AR_V3_SCRATCH>/MOTION_PAIR_ATTEMPT01.log",
+  "log_sha256": "78d99b88cb9c3fd81d84d76895b689d61145fb83b6a02aa4e114f5a3a86cdf0c",
+  "registration_commit": "a128409164362cf7ca4dbe328bfb8133be76712e",
+  "files": {
+    "RESULTS.csv": {
+      "sha256": "0e7205f03f0067399a5d2c2c5544b7f30ed1c669ec41ecc02dc7d9b0fbc0c33a",
+      "bytes": 3180,
+      "byte_identical_copy": true
+    },
+    "COMPLETE.json": {
+      "sha256": "c4793d6a286879919916c4133aa574f8660e333068ec9104b59713b76be4dd07",
+      "bytes": 808,
+      "byte_identical_copy": true
+    },
+    "CALLS.jsonl": {
+      "sha256": "306fb9bb1b67d8f8bf7fb0239d9b75537d9edfa129560a8b75f808aa3acf743f",
+      "bytes": 10855,
+      "byte_identical_copy": true
+    },
+    "FINITE_DOMAIN_ORACLE.json": {
+      "sha256": "a95f8adf138d9ee5eaf5f6f1aa521635e3b7c64be76b8ad18fc89b3b8be4031b",
+      "bytes": 1382,
+      "byte_identical_copy": true
+    },
+    "BOUND_CHECKS.json.gz": {
+      "sha256": "2bd6e8737757cf781fb6b1e660f7c548e6702fd79c9105c7c7de5e6517564ef7",
+      "bytes": 8393,
+      "decompressed_sha256": "1b7916fbd406eb2543968d63cc9ffc08c51cbed7904d165bfc55267daeef7a4c",
+      "lossless_source_copy": true
+    },
+    "DETAILS_COMPACT.json.gz": {
+      "sha256": "cf86478a4754f3a0babe447beeac1e22979ff117f844dd9e81e46d30bfd2a415",
+      "bytes": 1491743,
+      "compact_decompressed_sha256": "2b38048ff7acb46c1087273e84b67147c3cc9e7c1831931ad6231bd3f3a3b353",
+      "full_source_sha256": "5b611ad2eb282ab0de8971278999876dd9735487e4a7cd5dd7fa3be743f44b98",
+      "full_source_bytes": 35247182,
+      "source_alias": "<AR_V3_SCRATCH>/MOTION_PAIR_ATTEMPT01/DETAILS.json",
+      "full_source_untouched": true,
+      "scope": "all integer intervals; full best/second; full result certificate; not a lossless copy of every original candidate field"
+    },
+    "READOUT.json": {
+      "sha256": "293d12a971520f271337c59f6d09ce2e0fc272b03f055316da818736d1dfa53a",
+      "bytes": 16985,
+      "derived_from_registered_completed_outputs": true
+    }
+  }
+}

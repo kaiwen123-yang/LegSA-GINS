@@ -1,0 +1,105 @@
+{
+  "status": "READ_ONLY_SEALED_OUTPUT_REVIEW_PASS",
+  "registration_commit": "eaa39dc36197842fbe17f034af23ec85ec4f3c06",
+  "source_alias": "<TRUSTED_HEADING>/FULL_WINDOW_FRONTEND_ATTEMPT01",
+  "driver_alias": "<TRUSTED_HEADING>/FULL_WINDOW_FRONTEND_DRIVER_ATTEMPT01",
+  "driver_pid": 639,
+  "driver_supervisor_pid": 550,
+  "tool_session": 72913,
+  "driver_returncode": 0,
+  "source_read_scope": "only sealed frontend outputs and driver; each large source/slot gzip streamed once while hashing compressed bytes",
+  "input_hashes": {
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/SUMMARY.json": "05bdc0f59f3d06c514315250c6e83d1a0b28974f12349fc0f10b8d299760e858",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/COMPLETE.json": "61eaa28606008b83b995f697ca7acac36844c5afb9f2a5714c690ffb9149b5fe",
+    "FULL_WINDOW_FRONTEND_DRIVER_ATTEMPT01/TERMINAL.json": "f7f348adc6dc82ea05339976b020ebd4bedc08c5fef0b51a618c5a0b74ac3da5",
+    "FULL_WINDOW_FRONTEND_DRIVER_ATTEMPT01/LAUNCH.json": "77078fa883205ee027db46c62cf6168737debfcc11f892efdec30bab2ea00027",
+    "FULL_WINDOW_FRONTEND_DRIVER_ATTEMPT01/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "FULL_WINDOW_FRONTEND_DRIVER_ATTEMPT01/stdout.log": "738295397298834798fd7c68bfb666a7b1fc4266479a5f71a565ad542ca365aa",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/REGISTERED_PLAN.json": "bbbd6c1aa0a390e6dce0d7330340508e6788f4a7ce5a11e82c70cca261a49b2e",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2/OUTPUT_SEAL.json": "4546567c49e8b2fa75d1028549c677156bfaa73ca0fd3eac04af73785eb291c5",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2/EPOCHS.csv": "19a9743b5ace5f54cfe447f49a5d1424e45b62aafd40965c5eeedb40d9d879cf",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2/ACQUISITIONS.csv": "4c53c85bcbf0fb7e35b92da1272195bb32019fbfd0879cef195108962509e3d9",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2/CARRIER.csv": "0856069e1068643bb2c89b9bce2a6a2d7c21f0cba7872354c5739f2541dd132a",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2/SUMMARY.json": "b01181e392f6e58f78c32cec81954882deae701a0dd1e4e226228e6ba93828e6",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2/SOURCE_DETAILS.jsonl.gz": "21fa9497cfdc4ee7f91fae5bbf570302b8fc70ec15522cd18905e27ee70c889b",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2/SLOT_DETAILS.jsonl.gz": "51efa909f55bd4d50b0502e16eb8af2529c5415bc25276a5579d5b0636b7aad7",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2H/OUTPUT_SEAL.json": "7b1be4aadece94fbec649666083f2598b47237e5b0275bb30a63565460b581a4",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2H/EPOCHS.csv": "93b8c250f7928a6b5847f491ee9da42862b26fb3e91e43af83a93b686365a0ad",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2H/ACQUISITIONS.csv": "1087a45d925ceb6ee2930e08cb2ab78aef68234d79b5ac709ccc794871a7c0f7",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2H/CARRIER.csv": "2e4b938cf805f3e3390d41d96905b28700d94f1e5d48ed54725a6df537e51a95",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2H/SUMMARY.json": "0942e142c70f6727993c4e8bda355f5042d14ac8f0629b806823b74386e84f11",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2H/SOURCE_DETAILS.jsonl.gz": "e3e42b1e99bba75278be2b14a00d95394ceac64e25948066434a3b26b6d9b9a9",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2H/SLOT_DETAILS.jsonl.gz": "be4fbcc94835c7e684b5950af7da9e41ffdd75dd8b65b250a0d878bed222a2ed",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2O/OUTPUT_SEAL.json": "02f9e0f268b52bd4d77cd81aeda8791b30c910edc0c6b65e9350717de56bc1a4",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2O/EPOCHS.csv": "0be709c565f5c783a9bb15d0abe5ca8dc9bed5aa0318daca9ec64bf93ce5e394",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2O/ACQUISITIONS.csv": "3681e15a6ca154b908bc8d6f1aecfaf01cb6ce4ed2e578dccfaa3ebd5f3463af",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2O/CARRIER.csv": "3237d1783dca269ab43a7a50b65e0a7ebdd64456b56fb3d9e679167ca2426094",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2O/SUMMARY.json": "2e69417cacdeedfa4da0deefb8d4a530860e2fc2d08a6bd02b8a69223b9573b9",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2O/SOURCE_DETAILS.jsonl.gz": "aebb0be12db3c2db99d7101d18987491ebd586a7cf4154566688ad86cbbbc20e",
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2O/SLOT_DETAILS.jsonl.gz": "ab5649b3573ac392567a7d776876a2ced05b591820353f7043bb86a35bf057ca"
+  },
+  "streamed_large_payloads": {
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2/SOURCE_DETAILS.jsonl.gz": {
+      "compressed_bytes": 2678017,
+      "decoded_records": 132,
+      "full_payload_passes": 1,
+      "sha256": "21fa9497cfdc4ee7f91fae5bbf570302b8fc70ec15522cd18905e27ee70c889b"
+    },
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2/SLOT_DETAILS.jsonl.gz": {
+      "compressed_bytes": 4766892,
+      "decoded_records": 1370,
+      "full_payload_passes": 1,
+      "sha256": "51efa909f55bd4d50b0502e16eb8af2529c5415bc25276a5579d5b0636b7aad7"
+    },
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2H/SOURCE_DETAILS.jsonl.gz": {
+      "compressed_bytes": 2952418,
+      "decoded_records": 120,
+      "full_payload_passes": 1,
+      "sha256": "e3e42b1e99bba75278be2b14a00d95394ceac64e25948066434a3b26b6d9b9a9"
+    },
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2H/SLOT_DETAILS.jsonl.gz": {
+      "compressed_bytes": 5288844,
+      "decoded_records": 1350,
+      "full_payload_passes": 1,
+      "sha256": "be4fbcc94835c7e684b5950af7da9e41ffdd75dd8b65b250a0d878bed222a2ed"
+    },
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2O/SOURCE_DETAILS.jsonl.gz": {
+      "compressed_bytes": 3417751,
+      "decoded_records": 199,
+      "full_payload_passes": 1,
+      "sha256": "aebb0be12db3c2db99d7101d18987491ebd586a7cf4154566688ad86cbbbc20e"
+    },
+    "FULL_WINDOW_FRONTEND_ATTEMPT01/BY2O/SLOT_DETAILS.jsonl.gz": {
+      "compressed_bytes": 5510699,
+      "decoded_records": 1885,
+      "full_payload_passes": 1,
+      "sha256": "ab5649b3573ac392567a7d776876a2ced05b591820353f7043bb86a35bf057ca"
+    }
+  },
+  "readout_script_alias": "<TRUSTED_HEADING>/FULL_WINDOW_FRONTEND_READOUT_ATTEMPT01/readout.py",
+  "readout_script_sha256": "b06c46723fd883ab9e680792cf0ff1e238c829021ee3ade529cb8b12d5442a75",
+  "aggregate_sha256": "4eeb69e92550a7f9de83b9774b0041b1f0af4fdb8aa28e68e2e0749b2ac3a016",
+  "readout_stdout_sha256": "4bf70dc18d7beafea0360d31f856806ec5591cc556d4abd950db5e9aa8dc895f",
+  "binding_checks": {
+    "unique_CSV_epochs": 4605,
+    "exported_point_receipts": 653,
+    "owner_and_pending_valid_receipts": 831,
+    "enumeration_records": 387,
+    "source_detail_records": 451,
+    "slot_detail_records": 4605,
+    "class_diagnostic_records": 5631,
+    "source_and_sequence_seals_verified": true
+  },
+  "new_algorithm_calls": 0,
+  "new_reference_PVT_raw_reads": 0,
+  "new_cpp_navigation_calls": 0,
+  "large_payload_policy": "SOURCE_DETAILS and SLOT_DETAILS gzip stay in original sealed scratch; read once per payload with compressed-byte SHA computed during the same stream. No force-add or duplicate whole-payload hash scan.",
+  "derived_files": {
+    "COUNTS.csv": "122b8700323027be80bed6f26dca6e1deb2abae7d4da5b3fb3cd7f35fe8f6862",
+    "DIAGNOSTIC_REASONS.csv": "e628ce378eb8bb2cb58cb502fd70a77df09349de18d86c0d81b5cfd54f312e07",
+    "LONGEST_RUNS.csv": "9b6f99c1e13cf66f43f3b1044576b69d8fde7b5451b3548ec5822da00b937331",
+    "SEARCHES.csv": "4741c48244df95dd49b2042d2c8d04b1a45f175645888f45362be0853a9ae01d",
+    "SUMMARY.json": "75f01062c80d07562ae0f97a22477c704d336396706134c2a74b827db65be7f4",
+    "TIMING.csv": "1c4c617269a176b6d407ca7a331a88637cabd6eef2362f2cd0b2656b6bcfa3be"
+  }
+}

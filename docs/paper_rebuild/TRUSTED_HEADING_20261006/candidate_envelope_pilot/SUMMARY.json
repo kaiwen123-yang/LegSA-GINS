@@ -1,0 +1,40 @@
+{
+  "status": "COMPLETE_FIXED12_DIAGNOSTIC",
+  "registration_commit": "78114f5019e2ec1586df0be9fb680194434fe55a",
+  "expected_windows": 12,
+  "terminal_windows": 12,
+  "calls": {
+    "enumeration_api_calls": 12,
+    "decorrelation_api_entries": 12,
+    "length_filter_calls": 12,
+    "existing_CILS_calls": 0,
+    "sphere_optimization_calls": 0,
+    "raw_UBX_reads": 0,
+    "reference_reads": 0,
+    "navigation_calls": 0,
+    "evaluator_calls": 0,
+    "retries": 0,
+    "replacement_windows": 0,
+    "future_epochs_processed": 0
+  },
+  "raw_status_counts": {
+    "COMPLETE_RELAXED_SUPPORT": 11,
+    "EMPTY_RELAXED_SUPPORT": 1
+  },
+  "length_status_counts": {
+    "COMPLETE_NECESSARY_SUPPORT": 9,
+    "EMPTY_NECESSARY_SUPPORT": 3
+  },
+  "raw_complete_windows": 12,
+  "length_complete_windows": 12,
+  "api_over_30s_windows": 0,
+  "total_execution_wall_s": 0.7450671349999993,
+  "acceptance_defined": false,
+  "navigation_qualification_defined": false,
+  "integer_truth_available": false,
+  "physical_coverage_probability": null,
+  "baseline_azimuth_not_robot_yaw": true,
+  "sphere_survivor_feasibility_proved": false,
+  "scope": "fixed developmental saved inputs; no future, reference, navigation or prior",
+  "timing_limit": "cooperative enumeration timer; preprocessing/BLAS/decorrelation are not hard-preempted"
+}

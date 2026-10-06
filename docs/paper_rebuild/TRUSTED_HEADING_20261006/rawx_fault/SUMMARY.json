@@ -1,0 +1,1400 @@
+{
+  "schema": "trusted_heading.rawx_fault.readout.v1",
+  "registration_commit": "8f4bc5d716b46b019757e369966d0b4cdb74a6cd",
+  "data_mode": "RAWX_OBSERVATION_LEVEL_SEMISYNTHETIC",
+  "counts": [
+    {
+      "sequence": "BY2",
+      "rows": 1370,
+      "clean_points_reused": 168,
+      "fault_points": 206,
+      "point_count_delta": 38,
+      "coverage": 0.15036496350364964,
+      "sources_attempted": 134,
+      "complete_enumerations": 99,
+      "incomplete": 0,
+      "activation_overcap": 0,
+      "raw_candidates": 8156,
+      "length_necessary_candidates": 102,
+      "longest_unavailable_slots_s": 68.60000000000001,
+      "receipts_checked": 261,
+      "receipt_violations": 0,
+      "prefirst_rows": 342,
+      "prefirst_semantic_mismatches": 0,
+      "prefirst_numeric_difference": 0.0,
+      "max_slot_wall_s": 0.40283540999996603
+    },
+    {
+      "sequence": "BY2H",
+      "rows": 1350,
+      "clean_points_reused": 319,
+      "fault_points": 310,
+      "point_count_delta": -9,
+      "coverage": 0.22962962962962963,
+      "sources_attempted": 121,
+      "complete_enumerations": 93,
+      "incomplete": 0,
+      "activation_overcap": 0,
+      "raw_candidates": 8632,
+      "length_necessary_candidates": 88,
+      "longest_unavailable_slots_s": 46.6,
+      "receipts_checked": 394,
+      "receipt_violations": 0,
+      "prefirst_rows": 337,
+      "prefirst_semantic_mismatches": 0,
+      "prefirst_numeric_difference": 0.0,
+      "max_slot_wall_s": 0.17883364900001197
+    },
+    {
+      "sequence": "BY2O",
+      "rows": 1885,
+      "clean_points_reused": 166,
+      "fault_points": 169,
+      "point_count_delta": 3,
+      "coverage": 0.0896551724137931,
+      "sources_attempted": 202,
+      "complete_enumerations": 197,
+      "incomplete": 0,
+      "activation_overcap": 0,
+      "raw_candidates": 9348,
+      "length_necessary_candidates": 117,
+      "longest_unavailable_slots_s": 104.0,
+      "receipts_checked": 201,
+      "receipt_violations": 0,
+      "prefirst_rows": 471,
+      "prefirst_semantic_mismatches": 0,
+      "prefirst_numeric_difference": 0.0,
+      "max_slot_wall_s": 0.19180400600009762
+    }
+  ],
+  "events": [
+    {
+      "event": {
+        "sequence": "BY2",
+        "event": "F1",
+        "signal": "0:6:3:0",
+        "start_s": 134.59800004959106,
+        "end_s": 135.59800004959106,
+        "modified_measurements": 5,
+        "modified_epochs": 5,
+        "prior_export_valid": 0,
+        "prior_owner_index": "",
+        "prior_pending_index": "334",
+        "exposure": "NOT_EXERCISED_TARGET_OUTSIDE_IN_PLACE_SOURCE",
+        "fault_interval_points": 1,
+        "clean_interval_points_reused": 1,
+        "model_available_epochs": 5,
+        "target_in_current_model_epochs": 0,
+        "owner_nonzero_effect_epochs": 0,
+        "pending_nonzero_effect_epochs": 0,
+        "owner_target_significant_epochs": 0,
+        "pending_target_significant_epochs": 0,
+        "owner_zero_effect_epochs": 0,
+        "pre5_semantic_mismatch_epochs": 0
+      },
+      "recovery": {
+        "sequence": "BY2",
+        "event": "F1",
+        "exposure": "NOT_EXERCISED_TARGET_OUTSIDE_IN_PLACE_SOURCE",
+        "qualification_status": "POST_EVENT_1S_QUALIFICATION_OBSERVED",
+        "first_point_delay_s": 0.39999985694885254,
+        "first_1s_run_start_s": 147.19799995422363,
+        "confirmation_time_s": 148.19799995422363,
+        "confirmation_delay_from_fault_end_s": 12.599999904632568,
+        "right_censored": false,
+        "censor_duration_s": "",
+        "post20_points": 10,
+        "samples_in_confirmation_run": 6,
+        "interpretation": "descriptive conditional qualification, not correctness/recovery benefit; NOT_EXERCISED stays excluded from mechanism success"
+      },
+      "physical_provenance": {
+        "sequence": "BY2",
+        "event": "F1",
+        "pre_eligible_rx2_signals": 1,
+        "post_eligible_rx2_signals": 1,
+        "matched_pre_post_signals": 1,
+        "same_rx2_arc_token_count": 0,
+        "new_rx2_arc_token_count": 1,
+        "during_rx2_eligible": 0,
+        "during_rx2_record_count": 5,
+        "source_physical_end_events": 0,
+        "old_pre_event_source_exports_after_start": 4,
+        "old_source_export_semantics": "F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero",
+        "first_post_point_source_index": 334,
+        "first_post_point_new_source": false,
+        "first_post_point_selection_all_after_end": false
+      },
+      "first_post_point_proof": {
+        "time_s": 135.99799990653992,
+        "delay_s": 0.39999985694885254,
+        "source_index": 334,
+        "source_selected_at_s": 132.99799990653992,
+        "selection_start_s": 132.19799995422363,
+        "source_available_at_s": 133.0272249835399,
+        "validation_times": [
+          135.19799995422363,
+          135.39800000190735,
+          135.59800004959106,
+          135.79800009727478,
+          135.99799990653992
+        ],
+        "new_source_relative_to_pre_event": false,
+        "selection_entirely_after_fault_end": false,
+        "source_common_origin_count": 1,
+        "same_continuous_source_allowed_for_quality_pulse": false
+      },
+      "physical_termination_events": [],
+      "recorded_role_effects": {
+        "owner": [
+          {
+            "time_s": 134.79800009727478,
+            "status": "RESEARCH_CONDITIONAL_SOURCE_SET_POINT",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 134.99799990653992,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 135.19799995422363,
+            "status": "VALIDATING_CONDITIONAL_SOURCE_SET",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 135.39800000190735,
+            "status": "VALIDATING_CONDITIONAL_SOURCE_SET",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          }
+        ],
+        "pending": [
+          {
+            "time_s": 134.59800004959106,
+            "status": "RESEARCH_CONDITIONAL_SOURCE_SET_POINT",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 135.19799995422363,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 6,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 135.39800000190735,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 6,
+            "phase_rank": 3
+          }
+        ]
+      },
+      "new_source_required_after_physical_end": true,
+      "integer_truth_available": false
+    },
+    {
+      "event": {
+        "sequence": "BY2",
+        "event": "F2",
+        "signal": "ALL_RX2",
+        "start_s": 203.19799995422363,
+        "end_s": 204.19799995422363,
+        "modified_measurements": 286,
+        "modified_epochs": 5,
+        "prior_export_valid": 0,
+        "prior_owner_index": "",
+        "prior_pending_index": "669",
+        "exposure": "NOT_EXERCISED_OWNER_ABSENT_PENDING_TTL_PRECEDES_LOSS",
+        "fault_interval_points": 0,
+        "clean_interval_points_reused": 0,
+        "model_available_epochs": 0,
+        "target_in_current_model_epochs": null,
+        "owner_nonzero_effect_epochs": 0,
+        "pending_nonzero_effect_epochs": 0,
+        "owner_target_significant_epochs": 0,
+        "pending_target_significant_epochs": 0,
+        "owner_zero_effect_epochs": 0,
+        "pre5_semantic_mismatch_epochs": 0
+      },
+      "recovery": {
+        "sequence": "BY2",
+        "event": "F2",
+        "exposure": "NOT_EXERCISED_OWNER_ABSENT_PENDING_TTL_PRECEDES_LOSS",
+        "qualification_status": "POST_EVENT_1S_QUALIFICATION_OBSERVED",
+        "first_point_delay_s": 2.799999952316284,
+        "first_1s_run_start_s": 206.99799990653992,
+        "confirmation_time_s": 207.99799990653992,
+        "confirmation_delay_from_fault_end_s": 3.799999952316284,
+        "right_censored": false,
+        "censor_duration_s": "",
+        "post20_points": 29,
+        "samples_in_confirmation_run": 6,
+        "interpretation": "descriptive conditional qualification, not correctness/recovery benefit; NOT_EXERCISED stays excluded from mechanism success"
+      },
+      "physical_provenance": {
+        "sequence": "BY2",
+        "event": "F2",
+        "pre_eligible_rx2_signals": 41,
+        "post_eligible_rx2_signals": 44,
+        "matched_pre_post_signals": 40,
+        "same_rx2_arc_token_count": 0,
+        "new_rx2_arc_token_count": 40,
+        "during_rx2_eligible": 0,
+        "during_rx2_record_count": 370,
+        "source_physical_end_events": 0,
+        "old_pre_event_source_exports_after_start": 0,
+        "old_source_export_semantics": "F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero",
+        "first_post_point_source_index": 694,
+        "first_post_point_new_source": true,
+        "first_post_point_selection_all_after_end": true
+      },
+      "first_post_point_proof": {
+        "time_s": 206.99799990653992,
+        "delay_s": 2.799999952316284,
+        "source_index": 694,
+        "source_selected_at_s": 204.99799990653992,
+        "selection_start_s": 204.19799995422363,
+        "source_available_at_s": 205.0468246985398,
+        "validation_times": [
+          206.19799995422363,
+          206.39800000190735,
+          206.59800004959106,
+          206.79800009727478,
+          206.99799990653992
+        ],
+        "new_source_relative_to_pre_event": true,
+        "selection_entirely_after_fault_end": true,
+        "source_common_origin_count": 1,
+        "same_continuous_source_allowed_for_quality_pulse": false
+      },
+      "physical_termination_events": [],
+      "recorded_role_effects": {
+        "owner": [],
+        "pending": []
+      },
+      "new_source_required_after_physical_end": true,
+      "integer_truth_available": false
+    },
+    {
+      "event": {
+        "sequence": "BY2",
+        "event": "F3",
+        "signal": "0:14:3:0",
+        "start_s": 271.59800004959106,
+        "end_s": 272.59800004959106,
+        "modified_measurements": 4,
+        "modified_epochs": 4,
+        "prior_export_valid": 0,
+        "prior_owner_index": "",
+        "prior_pending_index": "1024",
+        "exposure": "PENDING_ONLY_EXPOSED_NO_OWNER",
+        "fault_interval_points": 0,
+        "clean_interval_points_reused": 0,
+        "model_available_epochs": 5,
+        "target_in_current_model_epochs": 4,
+        "owner_nonzero_effect_epochs": 0,
+        "pending_nonzero_effect_epochs": 3,
+        "owner_target_significant_epochs": 0,
+        "pending_target_significant_epochs": 2,
+        "owner_zero_effect_epochs": 0,
+        "pre5_semantic_mismatch_epochs": 0
+      },
+      "recovery": {
+        "sequence": "BY2",
+        "event": "F3",
+        "exposure": "PENDING_ONLY_EXPOSED_NO_OWNER",
+        "qualification_status": "POST_EVENT_1S_QUALIFICATION_OBSERVED",
+        "first_point_delay_s": 12.799999952316284,
+        "first_1s_run_start_s": 286.59800004959106,
+        "confirmation_time_s": 287.59800004959106,
+        "confirmation_delay_from_fault_end_s": 15.0,
+        "right_censored": false,
+        "censor_duration_s": "",
+        "post20_points": 12,
+        "samples_in_confirmation_run": 6,
+        "interpretation": "descriptive conditional qualification, not correctness/recovery benefit; NOT_EXERCISED stays excluded from mechanism success"
+      },
+      "physical_provenance": {
+        "sequence": "BY2",
+        "event": "F3",
+        "pre_eligible_rx2_signals": 1,
+        "post_eligible_rx2_signals": 1,
+        "matched_pre_post_signals": 1,
+        "same_rx2_arc_token_count": 0,
+        "new_rx2_arc_token_count": 1,
+        "during_rx2_eligible": 4,
+        "during_rx2_record_count": 5,
+        "source_physical_end_events": 0,
+        "old_pre_event_source_exports_after_start": 0,
+        "old_source_export_semantics": "F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero",
+        "first_post_point_source_index": 1084,
+        "first_post_point_new_source": true,
+        "first_post_point_selection_all_after_end": true
+      },
+      "first_post_point_proof": {
+        "time_s": 285.39800000190735,
+        "delay_s": 12.799999952316284,
+        "source_index": 1084,
+        "source_selected_at_s": 282.9979999065399,
+        "selection_start_s": 282.19799995422363,
+        "source_available_at_s": 283.02094776853994,
+        "validation_times": [
+          284.59800004959106,
+          284.7980000972748,
+          284.9979999065399,
+          285.19799995422363,
+          285.39800000190735
+        ],
+        "new_source_relative_to_pre_event": true,
+        "selection_entirely_after_fault_end": true,
+        "source_common_origin_count": 1,
+        "same_continuous_source_allowed_for_quality_pulse": true
+      },
+      "physical_termination_events": [],
+      "recorded_role_effects": {
+        "owner": [],
+        "pending": [
+          {
+            "time_s": 271.59800004959106,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": true,
+            "significant": true,
+            "na": false,
+            "retired": [],
+            "phase_rows": 6,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 271.7980000972748,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": true,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 6,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 271.9979999065399,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": true,
+            "significant": true,
+            "na": false,
+            "retired": [],
+            "phase_rows": 6,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 272.19799995422363,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [
+              {
+                "signal": "0:14:3:0",
+                "arc": "[\"1|0:14:3:0|arc=21\",\"2|0:14:3:0|arc=19\"]"
+              }
+            ],
+            "phase_rows": 5,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 272.39800000190735,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": false,
+            "significant": false,
+            "na": true,
+            "retired": [
+              {
+                "signal": "3:27:0:0",
+                "arc": "[\"1|3:27:0:0|arc=15\",\"2|3:27:0:0|arc=17\"]"
+              }
+            ],
+            "phase_rows": 4,
+            "phase_rank": 3
+          }
+        ]
+      },
+      "new_source_required_after_physical_end": true,
+      "integer_truth_available": false
+    },
+    {
+      "event": {
+        "sequence": "BY2H",
+        "event": "F1",
+        "signal": "0:6:3:0",
+        "start_s": 480.59800004959106,
+        "end_s": 481.59800004959106,
+        "modified_measurements": 5,
+        "modified_epochs": 5,
+        "prior_export_valid": 0,
+        "prior_owner_index": "324",
+        "prior_pending_index": "334",
+        "exposure": "PENDING_PARTIAL_RETIREMENT_EXERCISED_OWNER_UNAFFECTED",
+        "fault_interval_points": 0,
+        "clean_interval_points_reused": 0,
+        "model_available_epochs": 5,
+        "target_in_current_model_epochs": 0,
+        "owner_nonzero_effect_epochs": 0,
+        "pending_nonzero_effect_epochs": 0,
+        "owner_target_significant_epochs": 0,
+        "pending_target_significant_epochs": 0,
+        "owner_zero_effect_epochs": 0,
+        "pre5_semantic_mismatch_epochs": 0
+      },
+      "recovery": {
+        "sequence": "BY2H",
+        "event": "F1",
+        "exposure": "PENDING_PARTIAL_RETIREMENT_EXERCISED_OWNER_UNAFFECTED",
+        "qualification_status": "RIGHT_CENSORED_NO_1S_RUN_WITHIN_20S",
+        "first_point_delay_s": 2.799999952316284,
+        "first_1s_run_start_s": "",
+        "confirmation_time_s": "",
+        "confirmation_delay_from_fault_end_s": "",
+        "right_censored": true,
+        "censor_duration_s": 20.0,
+        "post20_points": 7,
+        "samples_in_confirmation_run": 0,
+        "interpretation": "descriptive conditional qualification, not correctness/recovery benefit; NOT_EXERCISED stays excluded from mechanism success"
+      },
+      "physical_provenance": {
+        "sequence": "BY2H",
+        "event": "F1",
+        "pre_eligible_rx2_signals": 1,
+        "post_eligible_rx2_signals": 1,
+        "matched_pre_post_signals": 1,
+        "same_rx2_arc_token_count": 0,
+        "new_rx2_arc_token_count": 1,
+        "during_rx2_eligible": 0,
+        "during_rx2_record_count": 5,
+        "source_physical_end_events": 0,
+        "old_pre_event_source_exports_after_start": 0,
+        "old_source_export_semantics": "F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero",
+        "first_post_point_source_index": 349,
+        "first_post_point_new_source": true,
+        "first_post_point_selection_all_after_end": true
+      },
+      "first_post_point_proof": {
+        "time_s": 484.39800000190735,
+        "delay_s": 2.799999952316284,
+        "source_index": 349,
+        "source_selected_at_s": 482.9979999065399,
+        "selection_start_s": 482.19799995422363,
+        "source_available_at_s": 483.03390921153994,
+        "validation_times": [
+          483.59800004959106,
+          483.7980000972748,
+          483.9979999065399,
+          484.19799995422363,
+          484.39800000190735
+        ],
+        "new_source_relative_to_pre_event": true,
+        "selection_entirely_after_fault_end": true,
+        "source_common_origin_count": 1,
+        "same_continuous_source_allowed_for_quality_pulse": false
+      },
+      "physical_termination_events": [],
+      "recorded_role_effects": {
+        "owner": [
+          {
+            "time_s": 480.59800004959106,
+            "status": "VALIDATING_CONDITIONAL_SOURCE_SET",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 480.7980000972748,
+            "status": "VALIDATING_CONDITIONAL_SOURCE_SET",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 480.9979999065399,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [
+              {
+                "signal": "3:40:0:0",
+                "arc": "[\"1|3:40:0:0|arc=1\",\"2|3:40:0:0|arc=1\"]"
+              }
+            ],
+            "phase_rows": 3,
+            "phase_rank": 3
+          }
+        ],
+        "pending": [
+          {
+            "time_s": 480.59800004959106,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [
+              {
+                "signal": "0:6:3:0",
+                "arc": "[\"1|0:6:3:0|arc=6\",\"2|0:6:3:0|arc=2\"]"
+              }
+            ],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 480.7980000972748,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 480.9979999065399,
+            "status": "VALIDATING_CONDITIONAL_SOURCE_SET",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 481.19799995422363,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [
+              {
+                "signal": "0:11:3:0",
+                "arc": "[\"1|0:11:3:0|arc=9\",\"2|0:11:3:0|arc=3\"]"
+              }
+            ],
+            "phase_rows": 3,
+            "phase_rank": 3
+          }
+        ]
+      },
+      "new_source_required_after_physical_end": true,
+      "integer_truth_available": false
+    },
+    {
+      "event": {
+        "sequence": "BY2H",
+        "event": "F2",
+        "signal": "ALL_RX2",
+        "start_s": 548.1979999542236,
+        "end_s": 549.1979999542236,
+        "modified_measurements": 303,
+        "modified_epochs": 5,
+        "prior_export_valid": 0,
+        "prior_owner_index": "654",
+        "prior_pending_index": "664",
+        "exposure": "OWNER_AND_PENDING_PHYSICAL_TERMINATION_EXERCISED",
+        "fault_interval_points": 0,
+        "clean_interval_points_reused": 0,
+        "model_available_epochs": 0,
+        "target_in_current_model_epochs": null,
+        "owner_nonzero_effect_epochs": 0,
+        "pending_nonzero_effect_epochs": 0,
+        "owner_target_significant_epochs": 0,
+        "pending_target_significant_epochs": 0,
+        "owner_zero_effect_epochs": 0,
+        "pre5_semantic_mismatch_epochs": 5
+      },
+      "recovery": {
+        "sequence": "BY2H",
+        "event": "F2",
+        "exposure": "OWNER_AND_PENDING_PHYSICAL_TERMINATION_EXERCISED",
+        "qualification_status": "POST_EVENT_1S_QUALIFICATION_OBSERVED",
+        "first_point_delay_s": 2.0,
+        "first_1s_run_start_s": 551.1979999542236,
+        "confirmation_time_s": 552.1979999542236,
+        "confirmation_delay_from_fault_end_s": 3.0,
+        "right_censored": false,
+        "censor_duration_s": "",
+        "post20_points": 15,
+        "samples_in_confirmation_run": 6,
+        "interpretation": "descriptive conditional qualification, not correctness/recovery benefit; NOT_EXERCISED stays excluded from mechanism success"
+      },
+      "physical_provenance": {
+        "sequence": "BY2H",
+        "event": "F2",
+        "pre_eligible_rx2_signals": 45,
+        "post_eligible_rx2_signals": 49,
+        "matched_pre_post_signals": 45,
+        "same_rx2_arc_token_count": 0,
+        "new_rx2_arc_token_count": 45,
+        "during_rx2_eligible": 0,
+        "during_rx2_record_count": 390,
+        "source_physical_end_events": 2,
+        "old_pre_event_source_exports_after_start": 0,
+        "old_source_export_semantics": "F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero",
+        "first_post_point_source_index": 684,
+        "first_post_point_new_source": true,
+        "first_post_point_selection_all_after_end": true
+      },
+      "first_post_point_proof": {
+        "time_s": 551.1979999542236,
+        "delay_s": 2.0,
+        "source_index": 684,
+        "source_selected_at_s": 549.9979999065399,
+        "selection_start_s": 549.1979999542236,
+        "source_available_at_s": 550.06004207854,
+        "validation_times": [
+          550.3980000019073,
+          550.5980000495911,
+          550.7980000972748,
+          550.9979999065399,
+          551.1979999542236
+        ],
+        "new_source_relative_to_pre_event": true,
+        "selection_entirely_after_fault_end": true,
+        "source_common_origin_count": 1,
+        "same_continuous_source_allowed_for_quality_pulse": false
+      },
+      "physical_termination_events": [
+        {
+          "time_s": 548.1979999542236,
+          "role": "owner",
+          "source_index": 654,
+          "retired_count": 7
+        },
+        {
+          "time_s": 548.1979999542236,
+          "role": "pending",
+          "source_index": 664,
+          "retired_count": 10
+        }
+      ],
+      "recorded_role_effects": {
+        "owner": [
+          {
+            "time_s": 548.1979999542236,
+            "status": "PHYSICAL_SOURCE_ENDED",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [
+              {
+                "signal": "0:19:0:0",
+                "arc": "[\"1|0:19:0:0|arc=1\",\"2|0:19:0:0|arc=2\"]"
+              },
+              {
+                "signal": "0:3:0:0",
+                "arc": "[\"1|0:3:0:0|arc=17\",\"2|0:3:0:0|arc=7\"]"
+              },
+              {
+                "signal": "2:11:0:0",
+                "arc": "[\"1|2:11:0:0|arc=12\",\"2|2:11:0:0|arc=10\"]"
+              },
+              {
+                "signal": "2:36:0:0",
+                "arc": "[\"1|2:36:0:0|arc=1\",\"2|2:36:0:0|arc=1\"]"
+              },
+              {
+                "signal": "3:28:0:0",
+                "arc": "[\"1|3:28:0:0|arc=9\",\"2|3:28:0:0|arc=2\"]"
+              },
+              {
+                "signal": "3:33:0:0",
+                "arc": "[\"1|3:33:0:0|arc=2\",\"2|3:33:0:0|arc=4\"]"
+              },
+              {
+                "signal": "3:7:0:0",
+                "arc": "[\"1|3:7:0:0|arc=1\",\"2|3:7:0:0|arc=1\"]"
+              }
+            ],
+            "phase_rows": 0,
+            "phase_rank": 0
+          }
+        ],
+        "pending": [
+          {
+            "time_s": 548.1979999542236,
+            "status": "PHYSICAL_SOURCE_ENDED",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [
+              {
+                "signal": "0:19:0:0",
+                "arc": "[\"1|0:19:0:0|arc=1\",\"2|0:19:0:0|arc=2\"]"
+              },
+              {
+                "signal": "0:3:0:0",
+                "arc": "[\"1|0:3:0:0|arc=17\",\"2|0:3:0:0|arc=7\"]"
+              },
+              {
+                "signal": "2:10:6:0",
+                "arc": "[\"1|2:10:6:0|arc=30\",\"2|2:10:6:0|arc=10\"]"
+              },
+              {
+                "signal": "2:11:0:0",
+                "arc": "[\"1|2:11:0:0|arc=12\",\"2|2:11:0:0|arc=10\"]"
+              },
+              {
+                "signal": "2:2:0:0",
+                "arc": "[\"1|2:2:0:0|arc=5\",\"2|2:2:0:0|arc=4\"]"
+              },
+              {
+                "signal": "2:36:0:0",
+                "arc": "[\"1|2:36:0:0|arc=1\",\"2|2:36:0:0|arc=1\"]"
+              },
+              {
+                "signal": "2:36:6:0",
+                "arc": "[\"1|2:36:6:0|arc=1\",\"2|2:36:6:0|arc=1\"]"
+              },
+              {
+                "signal": "3:28:0:0",
+                "arc": "[\"1|3:28:0:0|arc=9\",\"2|3:28:0:0|arc=2\"]"
+              },
+              {
+                "signal": "3:33:0:0",
+                "arc": "[\"1|3:33:0:0|arc=2\",\"2|3:33:0:0|arc=4\"]"
+              },
+              {
+                "signal": "3:7:0:0",
+                "arc": "[\"1|3:7:0:0|arc=1\",\"2|3:7:0:0|arc=1\"]"
+              }
+            ],
+            "phase_rows": 0,
+            "phase_rank": 0
+          }
+        ]
+      },
+      "new_source_required_after_physical_end": true,
+      "integer_truth_available": false
+    },
+    {
+      "event": {
+        "sequence": "BY2H",
+        "event": "F3",
+        "signal": "0:11:0:0",
+        "start_s": 615.5980000495911,
+        "end_s": 616.5980000495911,
+        "modified_measurements": 5,
+        "modified_epochs": 5,
+        "prior_export_valid": 1,
+        "prior_owner_index": "984",
+        "prior_pending_index": "1009",
+        "exposure": "PENDING_EXPOSED_OWNER_ZERO_EFFECT",
+        "fault_interval_points": 5,
+        "clean_interval_points_reused": 5,
+        "model_available_epochs": 5,
+        "target_in_current_model_epochs": 5,
+        "owner_nonzero_effect_epochs": 0,
+        "pending_nonzero_effect_epochs": 5,
+        "owner_target_significant_epochs": 0,
+        "pending_target_significant_epochs": 1,
+        "owner_zero_effect_epochs": 5,
+        "pre5_semantic_mismatch_epochs": 0
+      },
+      "recovery": {
+        "sequence": "BY2H",
+        "event": "F3",
+        "exposure": "PENDING_EXPOSED_OWNER_ZERO_EFFECT",
+        "qualification_status": "UNAFFECTED_OWNER_CONTINUED_NOT_A_RECOVERY",
+        "first_point_delay_s": 0.0,
+        "first_1s_run_start_s": 616.5980000495911,
+        "confirmation_time_s": 617.5980000495911,
+        "confirmation_delay_from_fault_end_s": 1.0,
+        "right_censored": false,
+        "censor_duration_s": "",
+        "post20_points": 46,
+        "samples_in_confirmation_run": 6,
+        "interpretation": "descriptive conditional qualification, not correctness/recovery benefit; NOT_EXERCISED stays excluded from mechanism success"
+      },
+      "physical_provenance": {
+        "sequence": "BY2H",
+        "event": "F3",
+        "pre_eligible_rx2_signals": 1,
+        "post_eligible_rx2_signals": 1,
+        "matched_pre_post_signals": 1,
+        "same_rx2_arc_token_count": 1,
+        "new_rx2_arc_token_count": 0,
+        "during_rx2_eligible": 5,
+        "during_rx2_record_count": 5,
+        "source_physical_end_events": 0,
+        "old_pre_event_source_exports_after_start": 23,
+        "old_source_export_semantics": "F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero",
+        "first_post_point_source_index": 984,
+        "first_post_point_new_source": false,
+        "first_post_point_selection_all_after_end": false
+      },
+      "first_post_point_proof": {
+        "time_s": 616.5980000495911,
+        "delay_s": 0.0,
+        "source_index": 984,
+        "source_selected_at_s": 609.9979999065399,
+        "selection_start_s": 609.1979999542236,
+        "source_available_at_s": 610.0335938655398,
+        "validation_times": [
+          615.7980000972748,
+          615.9979999065399,
+          616.1979999542236,
+          616.3980000019073,
+          616.5980000495911
+        ],
+        "new_source_relative_to_pre_event": false,
+        "selection_entirely_after_fault_end": false,
+        "source_common_origin_count": 1,
+        "same_continuous_source_allowed_for_quality_pulse": true
+      },
+      "physical_termination_events": [],
+      "recorded_role_effects": {
+        "owner": [
+          {
+            "time_s": 615.5980000495911,
+            "status": "RESEARCH_CONDITIONAL_SOURCE_SET_POINT",
+            "nonzero": false,
+            "significant": false,
+            "na": true,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 615.7980000972748,
+            "status": "RESEARCH_CONDITIONAL_SOURCE_SET_POINT",
+            "nonzero": false,
+            "significant": false,
+            "na": true,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 615.9979999065399,
+            "status": "RESEARCH_CONDITIONAL_SOURCE_SET_POINT",
+            "nonzero": false,
+            "significant": false,
+            "na": true,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 616.1979999542236,
+            "status": "RESEARCH_CONDITIONAL_SOURCE_SET_POINT",
+            "nonzero": false,
+            "significant": false,
+            "na": true,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 616.3980000019073,
+            "status": "RESEARCH_CONDITIONAL_SOURCE_SET_POINT",
+            "nonzero": false,
+            "significant": false,
+            "na": true,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          }
+        ],
+        "pending": [
+          {
+            "time_s": 615.5980000495911,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": true,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 6,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 615.7980000972748,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": true,
+            "significant": true,
+            "na": false,
+            "retired": [],
+            "phase_rows": 6,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 615.9979999065399,
+            "status": "VALIDATING_CONDITIONAL_SOURCE_SET",
+            "nonzero": true,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 6,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 616.1979999542236,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": true,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 6,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 616.3980000019073,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": true,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 6,
+            "phase_rank": 3
+          }
+        ]
+      },
+      "new_source_required_after_physical_end": true,
+      "integer_truth_available": false
+    },
+    {
+      "event": {
+        "sequence": "BY2O",
+        "event": "F1",
+        "signal": "0:17:3:0",
+        "start_s": 3280.3980000019073,
+        "end_s": 3281.3980000019073,
+        "modified_measurements": 5,
+        "modified_epochs": 5,
+        "prior_export_valid": 0,
+        "prior_owner_index": "",
+        "prior_pending_index": "464",
+        "exposure": "NOT_EXERCISED_TARGET_OUTSIDE_IN_PLACE_SOURCE",
+        "fault_interval_points": 0,
+        "clean_interval_points_reused": 0,
+        "model_available_epochs": 5,
+        "target_in_current_model_epochs": 0,
+        "owner_nonzero_effect_epochs": 0,
+        "pending_nonzero_effect_epochs": 0,
+        "owner_target_significant_epochs": 0,
+        "pending_target_significant_epochs": 0,
+        "owner_zero_effect_epochs": 0,
+        "pre5_semantic_mismatch_epochs": 0
+      },
+      "recovery": {
+        "sequence": "BY2O",
+        "event": "F1",
+        "exposure": "NOT_EXERCISED_TARGET_OUTSIDE_IN_PLACE_SOURCE",
+        "qualification_status": "RIGHT_CENSORED_NO_1S_RUN_WITHIN_20S",
+        "first_point_delay_s": "",
+        "first_1s_run_start_s": "",
+        "confirmation_time_s": "",
+        "confirmation_delay_from_fault_end_s": "",
+        "right_censored": true,
+        "censor_duration_s": 20.0,
+        "post20_points": 0,
+        "samples_in_confirmation_run": 0,
+        "interpretation": "descriptive conditional qualification, not correctness/recovery benefit; NOT_EXERCISED stays excluded from mechanism success"
+      },
+      "physical_provenance": {
+        "sequence": "BY2O",
+        "event": "F1",
+        "pre_eligible_rx2_signals": 1,
+        "post_eligible_rx2_signals": 1,
+        "matched_pre_post_signals": 1,
+        "same_rx2_arc_token_count": 0,
+        "new_rx2_arc_token_count": 1,
+        "during_rx2_eligible": 0,
+        "during_rx2_record_count": 5,
+        "source_physical_end_events": 0,
+        "old_pre_event_source_exports_after_start": 0,
+        "old_source_export_semantics": "F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero",
+        "first_post_point_source_index": "",
+        "first_post_point_new_source": "",
+        "first_post_point_selection_all_after_end": ""
+      },
+      "first_post_point_proof": null,
+      "physical_termination_events": [],
+      "recorded_role_effects": {
+        "owner": [],
+        "pending": [
+          {
+            "time_s": 3280.3980000019073,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 3280.598000049591,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 3280.798000097275,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 3280.99799990654,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 3281.1979999542236,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": false,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          }
+        ]
+      },
+      "new_source_required_after_physical_end": true,
+      "integer_truth_available": false
+    },
+    {
+      "event": {
+        "sequence": "BY2O",
+        "event": "F2",
+        "signal": "ALL_RX2",
+        "start_s": 3374.598000049591,
+        "end_s": 3375.598000049591,
+        "modified_measurements": 234,
+        "modified_epochs": 5,
+        "prior_export_valid": 0,
+        "prior_owner_index": "",
+        "prior_pending_index": "",
+        "exposure": "NOT_EXERCISED_NO_IN_PLACE_SOURCE",
+        "fault_interval_points": 0,
+        "clean_interval_points_reused": 0,
+        "model_available_epochs": 0,
+        "target_in_current_model_epochs": null,
+        "owner_nonzero_effect_epochs": 0,
+        "pending_nonzero_effect_epochs": 0,
+        "owner_target_significant_epochs": 0,
+        "pending_target_significant_epochs": 0,
+        "owner_zero_effect_epochs": 0,
+        "pre5_semantic_mismatch_epochs": 0
+      },
+      "recovery": {
+        "sequence": "BY2O",
+        "event": "F2",
+        "exposure": "NOT_EXERCISED_NO_IN_PLACE_SOURCE",
+        "qualification_status": "RIGHT_CENSORED_NO_1S_RUN_WITHIN_20S",
+        "first_point_delay_s": "",
+        "first_1s_run_start_s": "",
+        "confirmation_time_s": "",
+        "confirmation_delay_from_fault_end_s": "",
+        "right_censored": true,
+        "censor_duration_s": 20.0,
+        "post20_points": 0,
+        "samples_in_confirmation_run": 0,
+        "interpretation": "descriptive conditional qualification, not correctness/recovery benefit; NOT_EXERCISED stays excluded from mechanism success"
+      },
+      "physical_provenance": {
+        "sequence": "BY2O",
+        "event": "F2",
+        "pre_eligible_rx2_signals": 21,
+        "post_eligible_rx2_signals": 21,
+        "matched_pre_post_signals": 21,
+        "same_rx2_arc_token_count": 0,
+        "new_rx2_arc_token_count": 21,
+        "during_rx2_eligible": 0,
+        "during_rx2_record_count": 410,
+        "source_physical_end_events": 0,
+        "old_pre_event_source_exports_after_start": 0,
+        "old_source_export_semantics": "F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero",
+        "first_post_point_source_index": "",
+        "first_post_point_new_source": "",
+        "first_post_point_selection_all_after_end": ""
+      },
+      "first_post_point_proof": null,
+      "physical_termination_events": [],
+      "recorded_role_effects": {
+        "owner": [],
+        "pending": []
+      },
+      "new_source_required_after_physical_end": true,
+      "integer_truth_available": false
+    },
+    {
+      "event": {
+        "sequence": "BY2O",
+        "event": "F3",
+        "signal": "0:6:0:0",
+        "start_s": 3468.798000097275,
+        "end_s": 3469.798000097275,
+        "modified_measurements": 5,
+        "modified_epochs": 5,
+        "prior_export_valid": 1,
+        "prior_owner_index": "1384",
+        "prior_pending_index": "",
+        "exposure": "EXPORTED_OWNER_NONZERO_EFFECT_EXERCISED",
+        "fault_interval_points": 0,
+        "clean_interval_points_reused": 5,
+        "model_available_epochs": 5,
+        "target_in_current_model_epochs": 5,
+        "owner_nonzero_effect_epochs": 5,
+        "pending_nonzero_effect_epochs": 0,
+        "owner_target_significant_epochs": 1,
+        "pending_target_significant_epochs": 0,
+        "owner_zero_effect_epochs": 0,
+        "pre5_semantic_mismatch_epochs": 0
+      },
+      "recovery": {
+        "sequence": "BY2O",
+        "event": "F3",
+        "exposure": "EXPORTED_OWNER_NONZERO_EFFECT_EXERCISED",
+        "qualification_status": "POST_EVENT_1S_QUALIFICATION_OBSERVED",
+        "first_point_delay_s": 0.39999985694885254,
+        "first_1s_run_start_s": 3481.798000097275,
+        "confirmation_time_s": 3482.798000097275,
+        "confirmation_delay_from_fault_end_s": 13.0,
+        "right_censored": false,
+        "censor_duration_s": "",
+        "post20_points": 22,
+        "samples_in_confirmation_run": 6,
+        "interpretation": "descriptive conditional qualification, not correctness/recovery benefit; NOT_EXERCISED stays excluded from mechanism success"
+      },
+      "physical_provenance": {
+        "sequence": "BY2O",
+        "event": "F3",
+        "pre_eligible_rx2_signals": 1,
+        "post_eligible_rx2_signals": 1,
+        "matched_pre_post_signals": 1,
+        "same_rx2_arc_token_count": 1,
+        "new_rx2_arc_token_count": 0,
+        "during_rx2_eligible": 5,
+        "during_rx2_record_count": 5,
+        "source_physical_end_events": 0,
+        "old_pre_event_source_exports_after_start": 7,
+        "old_source_export_semantics": "F3 continuation allowed if physical arcs continuous; F1 can use unaffected source; F2 must be zero",
+        "first_post_point_source_index": 1384,
+        "first_post_point_new_source": false,
+        "first_post_point_selection_all_after_end": false
+      },
+      "first_post_point_proof": {
+        "time_s": 3470.1979999542236,
+        "delay_s": 0.39999985694885254,
+        "source_index": 1384,
+        "source_selected_at_s": 3462.99799990654,
+        "selection_start_s": 3462.1979999542236,
+        "source_available_at_s": 3463.03441572354,
+        "validation_times": [
+          3469.3980000019073,
+          3469.598000049591,
+          3469.798000097275,
+          3469.99799990654,
+          3470.1979999542236
+        ],
+        "new_source_relative_to_pre_event": false,
+        "selection_entirely_after_fault_end": false,
+        "source_common_origin_count": 1,
+        "same_continuous_source_allowed_for_quality_pulse": true
+      },
+      "physical_termination_events": [],
+      "recorded_role_effects": {
+        "owner": [
+          {
+            "time_s": 3468.798000097275,
+            "status": "CURRENT_SPHERE_POINT_OUTSIDE_ORIGINAL_COST_DOMAIN",
+            "nonzero": true,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 3468.99799990654,
+            "status": "CURRENT_SPHERE_POINT_OUTSIDE_ORIGINAL_COST_DOMAIN",
+            "nonzero": true,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 3469.1979999542236,
+            "status": "UNRESOLVED_SOURCE_SET_OR_CURRENT_QUALITY",
+            "nonzero": true,
+            "significant": true,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 3469.3980000019073,
+            "status": "VALIDATING_CONDITIONAL_SOURCE_SET",
+            "nonzero": true,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          },
+          {
+            "time_s": 3469.598000049591,
+            "status": "VALIDATING_CONDITIONAL_SOURCE_SET",
+            "nonzero": true,
+            "significant": false,
+            "na": false,
+            "retired": [],
+            "phase_rows": 4,
+            "phase_rank": 3
+          }
+        ],
+        "pending": []
+      },
+      "new_source_required_after_physical_end": true,
+      "integer_truth_available": false
+    }
+  ],
+  "registered_execution_counts": {
+    "enumeration_calls": 389,
+    "enumeration_nodes": 49017,
+    "enumeration_leaves": 26136,
+    "length_filter_calls": 389,
+    "acquisition_opportunities": 921,
+    "acquisition_skipped_pending": 464,
+    "acquisition_skipped_busy": 0,
+    "actual_model_npz_reads": 4285,
+    "pending_providers_constructed": 208,
+    "source_promotions": 56,
+    "source_exception_count": 0,
+    "slot_exception_count": 0
+  },
+  "registered_kernel_calls": {
+    "lifecycle": {
+      "gls_limit": 400000,
+      "glrt_limit": 400000,
+      "fixed_integer_gls_calls": 5707,
+      "single_fault_glrt_calls": 5707,
+      "deadline_monotonic": 1746.873057883
+    },
+    "geometry_limit": 400000,
+    "sphere_limit": 9210,
+    "geometry_calls": 5707,
+    "python_sphere_calls": 2440
+  },
+  "prepare": {
+    "status": "COMPLETE",
+    "data_mode": "RAWX_OBSERVATION_LEVEL_SEMISYNTHETIC",
+    "sequences": [
+      {
+        "sequence": "BY2",
+        "window_s": [
+          66.0,
+          340.0
+        ],
+        "paired_epochs": 1370,
+        "seal_sha256": "40f109ba78f7ea4b1de343b4ab6f337d52ab871fcfe5ab49dbb31b24089f04f2",
+        "reused_anchor_slots": 1370,
+        "overlay_sha256": "034b5279b4046ddb438c251f8510884dda238573ca950fdea53f7f4b936eec8f",
+        "built_models": 1195
+      },
+      {
+        "sequence": "BY2H",
+        "window_s": [
+          413.0,
+          683.0
+        ],
+        "paired_epochs": 1350,
+        "seal_sha256": "02b91be89bbe86d5d4a7196998b5129a76d8f3945003bfd5b4f6877d777aa832",
+        "reused_anchor_slots": 1350,
+        "overlay_sha256": "8e2723eb760afb34c3c60dac7c29e02595f6ff6642d442dcb0b129cd1081af88",
+        "built_models": 1210
+      },
+      {
+        "sequence": "BY2O",
+        "window_s": [
+          3186.0,
+          3563.0
+        ],
+        "paired_epochs": 1885,
+        "seal_sha256": "d37a867d2b07bdc91b87cb7842b9319507f28d401c85dc401fc923f1513e803f",
+        "reused_anchor_slots": 1885,
+        "overlay_sha256": "72019925908d77717b07b1a3b3be938c20c2aabdf5427bce608d9d90b1e5e2b6",
+        "built_models": 1880
+      }
+    ],
+    "prepare_calls": 3,
+    "rawx_source_payload_reads": 6,
+    "spp_calls": 0,
+    "converter_calls": 0,
+    "search_calls": 0,
+    "navigation_calls": 0,
+    "evaluator_calls": 0,
+    "reference_reads": 0,
+    "wall_s": 59.049211506000006
+  },
+  "violations": [],
+  "source_enum_complete": 389,
+  "source_enum_incomplete": 0,
+  "receipts_checked": 856,
+  "exported_points": 685,
+  "internal_pending_valid_receipts": 171,
+  "integer_truth_available": false,
+  "correct_integer_rate": null,
+  "navigation_executed": false,
+  "reference_reads": 0
+}

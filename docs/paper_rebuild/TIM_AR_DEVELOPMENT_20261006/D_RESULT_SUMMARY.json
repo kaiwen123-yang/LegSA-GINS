@@ -1,0 +1,235 @@
+{
+  "execution_commit": "0f9f472a077c2481c7b5bf09e34549dbfe8055de",
+  "payload_stage": "<TIM_AR_SCRATCH>/D_PREP02",
+  "plan_sha256": "fc23c02e599264d9ff299f915f2048d6d79dc371901af3346be6f6e56e13e37f",
+  "calls": 20,
+  "new_noise_draws": 4,
+  "unique_observation_instances": 8,
+  "logical_rows": 12,
+  "summaries": {
+    "NOMINAL": {
+      "A": {
+        "scheduled": 4,
+        "available": 4,
+        "correct": 1,
+        "wrong": 3,
+        "unresolved": 0,
+        "own_angle_support": {
+          "count": 4,
+          "rmse_deg": 110.93537052278239,
+          "max_absolute_deg": 168.05856973900597
+        }
+      },
+      "B": {
+        "scheduled": 4,
+        "available": 4,
+        "correct": 4,
+        "wrong": 0,
+        "unresolved": 0,
+        "own_angle_support": {
+          "count": 4,
+          "rmse_deg": 1.77314102782672,
+          "max_absolute_deg": 3.5063152551493886
+        }
+      },
+      "C": {
+        "scheduled": 4,
+        "available": 1,
+        "correct": 1,
+        "wrong": 0,
+        "unresolved": 3,
+        "own_angle_support": {
+          "count": 1,
+          "rmse_deg": 3.5063152551493886,
+          "max_absolute_deg": 3.5063152551493886
+        }
+      },
+      "D": {
+        "scheduled": 4,
+        "available": 4,
+        "correct": 4,
+        "wrong": 0,
+        "unresolved": 0,
+        "own_angle_support": {
+          "count": 4,
+          "rmse_deg": 1.77314102782672,
+          "max_absolute_deg": 3.5063152551493886
+        }
+      },
+      "mechanisms": {
+        "available_B_corrections_to_wrong_A": [
+          "G121_B0_NEW",
+          "G1221_B0_NEW",
+          "G1221_B90_NEW"
+        ],
+        "D_kept_B_corrections": [
+          "G121_B0_NEW",
+          "G1221_B0_NEW",
+          "G1221_B90_NEW"
+        ],
+        "D_missed_B_corrections": [],
+        "D_fallback_A": [],
+        "D_fallback_A_still_wrong": [],
+        "D_selected_B_wrong": [],
+        "D_wrong_after_correct_A": [],
+        "C_wrong_retained": []
+      }
+    },
+    "RP_BIAS": {
+      "A": {
+        "scheduled": 4,
+        "available": 4,
+        "correct": 1,
+        "wrong": 3,
+        "unresolved": 0,
+        "own_angle_support": {
+          "count": 4,
+          "rmse_deg": 110.93537052278239,
+          "max_absolute_deg": 168.05856973900597
+        }
+      },
+      "B": {
+        "scheduled": 4,
+        "available": 4,
+        "correct": 1,
+        "wrong": 3,
+        "unresolved": 0,
+        "own_angle_support": {
+          "count": 4,
+          "rmse_deg": 103.80594739007833,
+          "max_absolute_deg": 167.95549272076744
+        }
+      },
+      "C": {
+        "scheduled": 4,
+        "available": 2,
+        "correct": 1,
+        "wrong": 1,
+        "unresolved": 2,
+        "own_angle_support": {
+          "count": 2,
+          "rmse_deg": 118.78632672593335,
+          "max_absolute_deg": 167.95549272076744
+        }
+      },
+      "D": {
+        "scheduled": 4,
+        "available": 4,
+        "correct": 1,
+        "wrong": 3,
+        "unresolved": 0,
+        "own_angle_support": {
+          "count": 4,
+          "rmse_deg": 103.80679095068216,
+          "max_absolute_deg": 167.95549272076744
+        }
+      },
+      "mechanisms": {
+        "available_B_corrections_to_wrong_A": [],
+        "D_kept_B_corrections": [],
+        "D_missed_B_corrections": [],
+        "D_fallback_A": [
+          "G121_B90_NEW"
+        ],
+        "D_fallback_A_still_wrong": [],
+        "D_selected_B_wrong": [
+          "G121_B0_NEW",
+          "G1221_B0_NEW",
+          "G1221_B90_NEW"
+        ],
+        "D_wrong_after_correct_A": [],
+        "C_wrong_retained": [
+          "G121_B0_NEW"
+        ]
+      }
+    },
+    "PHASE_BIAS": {
+      "A": {
+        "scheduled": 4,
+        "available": 4,
+        "correct": 1,
+        "wrong": 3,
+        "unresolved": 0,
+        "own_angle_support": {
+          "count": 4,
+          "rmse_deg": 131.22666149361723,
+          "max_absolute_deg": 179.55696427293253
+        }
+      },
+      "B": {
+        "scheduled": 4,
+        "available": 4,
+        "correct": 2,
+        "wrong": 2,
+        "unresolved": 0,
+        "own_angle_support": {
+          "count": 4,
+          "rmse_deg": 89.1553460293878,
+          "max_absolute_deg": 140.56155559439466
+        }
+      },
+      "C": {
+        "scheduled": 4,
+        "available": 2,
+        "correct": 1,
+        "wrong": 1,
+        "unresolved": 2,
+        "own_angle_support": {
+          "count": 2,
+          "rmse_deg": 99.40367725300445,
+          "max_absolute_deg": 140.56155559439466
+        }
+      },
+      "D": {
+        "scheduled": 4,
+        "available": 4,
+        "correct": 2,
+        "wrong": 2,
+        "unresolved": 0,
+        "own_angle_support": {
+          "count": 4,
+          "rmse_deg": 89.1553460293878,
+          "max_absolute_deg": 140.56155559439466
+        }
+      },
+      "mechanisms": {
+        "available_B_corrections_to_wrong_A": [
+          "G121_B90_PHASE"
+        ],
+        "D_kept_B_corrections": [
+          "G121_B90_PHASE"
+        ],
+        "D_missed_B_corrections": [],
+        "D_fallback_A": [],
+        "D_fallback_A_still_wrong": [],
+        "D_selected_B_wrong": [
+          "G1221_B0_PHASE",
+          "G1221_B90_PHASE"
+        ],
+        "D_wrong_after_correct_A": [],
+        "C_wrong_retained": [
+          "G1221_B0_PHASE"
+        ]
+      }
+    }
+  },
+  "io": {
+    "passed": true,
+    "exit_code": 0,
+    "elapsed_s": 21.67657102100003,
+    "raw_or_reference_open_paths": [],
+    "trace_sha256": "0beb13f6afabac5daac02507e061e34552a8a7013b966147bf0388693dd79431"
+  },
+  "source_receipts": {
+    "PLAN.json": "fc23c02e599264d9ff299f915f2048d6d79dc371901af3346be6f6e56e13e37f",
+    "SEAL.json": "78089edeee9fe944b9da1d79f4f204a3767db30d5425073d227fb67d2bf1a08f",
+    "IO_AUDIT.json": "d0f755f4d8fe045f739296ae03d4d934dc44d28358f5fb84238485e084afb4ef",
+    "CALL_LEDGER.jsonl": "22cf197da3e96fe03342c0f57a6bbc8053b351202e151fcc61bb86b4a5a0162f"
+  },
+  "csv_sha256": "9d8c2fe58d47ddf11698c54ddf44bab89626da0ab0f914358366c0fda0e2b02c",
+  "summary_script_sha256": "46720e66366f4ebc2ecff2efe4513301b3793a8f907c26f4255284407e592070",
+  "original_raw_reference_reads": 0,
+  "formal_integer_acceptance_defined": false,
+  "EKF_integration_qualified": false,
+  "parameter_retuned": false
+}

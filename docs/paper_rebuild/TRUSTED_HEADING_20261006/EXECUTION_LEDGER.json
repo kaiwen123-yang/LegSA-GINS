@@ -1,0 +1,284 @@
+{
+  "schema": "trusted_heading.round_execution_index.v1",
+  "scope": "bounded new-goal phases indexed below, not all repository or historical research calls",
+  "no_single_misleading_solver_total": true,
+  "stages": {
+    "full_window_raw_prepare_R2": {
+      "native_navigation": 0,
+      "evaluator": 0,
+      "SPP_opportunities": 4605,
+      "no_anchor": 305,
+      "new_converter_calls": 73,
+      "reused_converter_outcomes": 1,
+      "prepare_calls": 3,
+      "models_built": 12686,
+      "prior_failed_attempt_retained": true,
+      "models_are_not_integer_fixes": true
+    },
+    "clean_complete_frontend": {
+      "fixed_source_opportunity_budget": 921,
+      "actual": {
+        "enumeration_calls": 387,
+        "enumeration_nodes": 47345,
+        "enumeration_leaves": 24982,
+        "length_filter_calls": 387,
+        "acquisition_opportunities": 921,
+        "acquisition_skipped_pending": 470,
+        "acquisition_skipped_busy": 0,
+        "actual_model_npz_reads": 4300,
+        "pending_providers_constructed": 207,
+        "source_promotions": 54,
+        "source_exception_count": 0,
+        "slot_exception_count": 0
+      },
+      "scientific_subcalls": {
+        "lifecycle": {
+          "gls_limit": 400000,
+          "glrt_limit": 400000,
+          "fixed_integer_gls_calls": 5631,
+          "single_fault_glrt_calls": 5631,
+          "deadline_monotonic": 1613.836756083
+        },
+        "geometry_limit": 400000,
+        "sphere_limit": 9210,
+        "geometry_calls": 5631,
+        "python_sphere_calls": 2408
+      },
+      "research_points": 653,
+      "native_navigation": 0,
+      "evaluator": 0,
+      "reference_reads": 0
+    },
+    "rawx_fault_prepare": {
+      "status": "COMPLETE",
+      "data_mode": "RAWX_OBSERVATION_LEVEL_SEMISYNTHETIC",
+      "sequences": [
+        {
+          "sequence": "BY2",
+          "window_s": [
+            66.0,
+            340.0
+          ],
+          "paired_epochs": 1370,
+          "seal_sha256": "40f109ba78f7ea4b1de343b4ab6f337d52ab871fcfe5ab49dbb31b24089f04f2",
+          "reused_anchor_slots": 1370,
+          "overlay_sha256": "034b5279b4046ddb438c251f8510884dda238573ca950fdea53f7f4b936eec8f",
+          "built_models": 1195
+        },
+        {
+          "sequence": "BY2H",
+          "window_s": [
+            413.0,
+            683.0
+          ],
+          "paired_epochs": 1350,
+          "seal_sha256": "02b91be89bbe86d5d4a7196998b5129a76d8f3945003bfd5b4f6877d777aa832",
+          "reused_anchor_slots": 1350,
+          "overlay_sha256": "8e2723eb760afb34c3c60dac7c29e02595f6ff6642d442dcb0b129cd1081af88",
+          "built_models": 1210
+        },
+        {
+          "sequence": "BY2O",
+          "window_s": [
+            3186.0,
+            3563.0
+          ],
+          "paired_epochs": 1885,
+          "seal_sha256": "d37a867d2b07bdc91b87cb7842b9319507f28d401c85dc401fc923f1513e803f",
+          "reused_anchor_slots": 1885,
+          "overlay_sha256": "72019925908d77717b07b1a3b3be938c20c2aabdf5427bce608d9d90b1e5e2b6",
+          "built_models": 1880
+        }
+      ],
+      "prepare_calls": 3,
+      "rawx_source_payload_reads": 6,
+      "spp_calls": 0,
+      "converter_calls": 0,
+      "search_calls": 0,
+      "navigation_calls": 0,
+      "evaluator_calls": 0,
+      "reference_reads": 0,
+      "wall_s": 59.049211506000006
+    },
+    "rawx_fault_frontend": {
+      "fixed_source_opportunity_budget": 921,
+      "actual": {
+        "enumeration_calls": 389,
+        "enumeration_nodes": 49017,
+        "enumeration_leaves": 26136,
+        "length_filter_calls": 389,
+        "acquisition_opportunities": 921,
+        "acquisition_skipped_pending": 464,
+        "acquisition_skipped_busy": 0,
+        "actual_model_npz_reads": 4285,
+        "pending_providers_constructed": 208,
+        "source_promotions": 56,
+        "source_exception_count": 0,
+        "slot_exception_count": 0
+      },
+      "scientific_subcalls": {
+        "lifecycle": {
+          "gls_limit": 400000,
+          "glrt_limit": 400000,
+          "fixed_integer_gls_calls": 5707,
+          "single_fault_glrt_calls": 5707,
+          "deadline_monotonic": 1746.873057883
+        },
+        "geometry_limit": 400000,
+        "sphere_limit": 9210,
+        "geometry_calls": 5707,
+        "python_sphere_calls": 2440
+      },
+      "exported_points": 685,
+      "native_navigation": 0,
+      "evaluator": 0,
+      "reference_reads": 0
+    },
+    "native_local_qualification": {
+      "build_calls": {
+        "configure": 1,
+        "core_demo": 1,
+        "harness_compile": 1,
+        "technical_rebuilds": 0
+      },
+      "test_unique_cases": 16,
+      "test_instances": 16,
+      "pytest_calls": 1,
+      "passed": 16,
+      "harness_process_calls": 28,
+      "harness_expected_domain_rejections": 6,
+      "forbidden_real_calls": {
+        "raw_reads": 0,
+        "real_foot_provider_reads": 0,
+        "navigation": 0,
+        "evaluator": 0,
+        "integer_search": 0,
+        "reference_reads": 0
+      }
+    },
+    "clone_prepare": {
+      "first_attempt_checker_compile": 1,
+      "first_attempt_loader": 1,
+      "first_attempt_native": 0,
+      "second_attempt_checker_compile": 1,
+      "second_attempt_loader": 6
+    },
+    "formal_navigation_comparison_scope": {
+      "prior_PVT_carrier_native": 6,
+      "prior_PVT_carrier_evaluator": 6,
+      "new_NULL_PAIR_native": 6,
+      "new_NULL_PAIR_evaluator": 6,
+      "native_budget": 12,
+      "native_actual": 12,
+      "evaluator_budget": 12,
+      "evaluator_actual": 12,
+      "original_V3_reused_without_rerun": true,
+      "native_retries": 0,
+      "evaluator_retries": 0,
+      "reference_only_postseal_evaluator_children": true
+    }
+  },
+  "source_record_pins": {
+    "full_window_prepare/SUMMARY.json": "2e895131ac73101db5117f1c1d898b3859a46ca33b62d2bcd76b57180f7775d4",
+    "full_window_prepare/READOUT_RECEIPT.json": "777fef4ddd20bd93b55cf2adfcd6318b2f595f2a3b2c428a4e4f810a526a5f90",
+    "full_window_frontend/SUMMARY.json": "75f01062c80d07562ae0f97a22477c704d336396706134c2a74b827db65be7f4",
+    "rawx_fault/SUMMARY.json": "41d15579710eb9aaf03b1fee782d643de25ae2a9b4ba51ac1b50ebd81cff307c",
+    "full_window_navigation/READOUT_RECEIPT.json": "713545457c8e5311026abd09a017ee301be2d399fc99678284b7301511c7e179",
+    "clone_window_navigation/READOUT_RECEIPT.json": "ad5e90affdded01510ef6a4771d3e1b85fe379b7b1ae800be256b900a903eb4a",
+    "NATIVE_ATTITUDE_CLONE_LOCAL_RESULTS.json": "f15e318b9baa51122ea2b235bedb0c044c503f44e6f45fcac9fc98595d1d6fb9",
+    "CLONE_WINDOW_NAVIGATION_PREPARE_FAILURE.md": "0ba5b1dddde3d05dd360c549f348762ddf2a6863efec1b2da3393f8e7f11e196",
+    "FOOT_PAIR_PROVIDER_RESULTS.json": "f0dd47078d75f335cff2d0dee7d54e68f3e27af03080de1de4732e2436a61b02"
+  },
+  "earlier_mechanism_receipt_index": [
+    {
+      "path": "ATTITUDE_CLONE_RECEIPT.json",
+      "sha256": "4a87361ac84e07a870f023849a946e1894854fde6b409b3e5b7db3bb4e74c10b",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "BODY_PROXY_AUDIT_RECEIPT.json",
+      "sha256": "a6cb76d0cdb0a545adabb7e251d571bf4f5d0e696cd9ff31bec17c3be96da9b9",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "CANDIDATE_ENVELOPE_LENGTH_UNIT_RECEIPT.json",
+      "sha256": "29722b1cd5a980e4ae7a62f803e6532a83e11b7a9d9eac6666468dbb5a843a55",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "CANDIDATE_ENVELOPE_PILOT_ENTRY_UNIT_RECEIPT.json",
+      "sha256": "d7d73713dda457b067980a7f147a73201f7564787b3b06291ad227f0efe24d0d",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "CANDIDATE_LIFECYCLE_LOCAL_TEST_RECEIPT.json",
+      "sha256": "530ae6d3bf2c7ef832cf373348b13c02f952a6680924f7fc78b2c24423e6333b",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "CLONE_COMPARATOR_LOCAL_RECEIPT.json",
+      "sha256": "e9372e606190c34cf2ad37682ff1421cc75ef3b0d9e02f45291a2ba6e427e3b0",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "FOOT_PAIR_DIRECTION_RECEIPT.json",
+      "sha256": "a343b28d7507d47bb87415ce671c923abb3a9ebd19ebc1751a7644800452389b",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "FOOT_PAIR_PROVIDER_LOCAL_RECEIPT.json",
+      "sha256": "cf3bf4d0c55f2b07000b4b11d792209dd0d9f52b76b86c2ecac61f22cdd82326",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "FOOT_TRANSLATION_RECEIPT.json",
+      "sha256": "1885bd1e63f098cd7447f313159e5c6bd6be57364a526772e01bf67d8fb367c7",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "FULL_WINDOW_FRONTEND_LOCAL_TEST_RECEIPT.json",
+      "sha256": "e3155375faa085641621820a091bd0ad23ed5aad16f9082b840524e82d206f94",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "FULL_WINDOW_PREPARE_R2_LOCAL_TEST_RECEIPT.json",
+      "sha256": "50664762e24531c79fadfb94a6fd3f20a867eeca12975d313e40062aa395a3bd",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "LOCAL_UNIT_TEST_RECEIPT.json",
+      "sha256": "d18902d677c1b5523b2edccf0dd1a38fc650a68993217602db46da26cfe45087",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "NAVIGATION_COMPARATOR_LOCAL_RECEIPT.json",
+      "sha256": "dc5d1b75f4e2c7fb22ffdaa894ff1d63bcfdc50c3b8ca42f24b71b66901336c6",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "PROJECTED_FIXED_N_RECEIPT.json",
+      "sha256": "790a0f8a5c8c058634aa58d7aeb3785f9d3de08b342dabe072909c6bb794a32d",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "PVT_CARRIER_FALLBACK_LOCAL_RECEIPT.json",
+      "sha256": "20e44dd04b0ce52a9c40685cf969f2eaf68462516909c10c0d7863651ece7d48",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "RAWX_FAULT_LOCAL_TEST_RECEIPT.json",
+      "sha256": "5a9c6d141d9581b45322edf866237b3123bcfb050e4667999ae0a607968e81be",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "SET_PROVIDER_LOCAL_TEST_RECEIPT.json",
+      "sha256": "bb45cb209a02fd8591ce707b766898e8eeda05d2292f171f54fcd70a258db78f",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    },
+    {
+      "path": "SPHERE_CAP_LOCAL_TEST_RECEIPT.json",
+      "sha256": "2be67ddbaa43bc28b6e5e5996cf7f47d4d20cba2ed134b8a12290f549b8e8d59",
+      "role": "local_or_development_record; inspect original unique/repeated scope, not a new call"
+    }
+  ]
+}

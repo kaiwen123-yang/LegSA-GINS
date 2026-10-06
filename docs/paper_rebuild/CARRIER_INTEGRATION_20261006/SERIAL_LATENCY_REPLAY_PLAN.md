@@ -1,0 +1,13 @@
+# Single-worker recorded-search-latency replay
+
+This registered diagnostic uses all 120 saved PARTIAL6 searches and all 1200 REAL_100_340_V2 epochs. It adds no integer search and changes no existing integer, selection time, original validation decision, noise model or gate. It tests how acquisition scheduling and delayed availability affect the executable navigation inputs.
+
+The worker receives opportunities at the fifth selection epoch of each original two-second window. An idle worker starts; a busy worker drops that opportunity without a queue. Launch/drop does not inspect eventual candidate validity, residual or reference. Service time is the saved CILS certificate elapsed_s. The worker becomes idle at selection_time + service_time, independently of whether future validation has completed.
+
+A candidate is considered only at the first raw epoch not earlier than both its search completion and original fifth validation epoch. An incumbent present on entry owns the entire epoch, including its failure epoch, and suppresses arriving acquisitions without queuing. Without an incumbent, arrivals use completion-time then selection-time order. A late valid origin restores its original five-model receipt, catches up through every intervening model, and is discarded permanently at the first release. A surviving track emits only the current epoch; no historical measurement is injected into navigation. An origin that dies during catch-up never becomes incumbent. No subsequent resurrection is allowed.
+
+The original recorded cost excludes model preparation, validation, tracking, IO, resource contention and scheduling overhead. Those costs are idealized as zero in this simulation. This is a recorded-service-time development replay, not hardware real-time qualification or a guaranteed bound on usable updates. It does not retroactively relabel earlier offline results.
+
+After focused scheduling/catch-up tests and independent review, create one new full 1200-row partial input stream. Full carrier reuses the all-invalid control. Run one four-arm body-HV navigation comparison with the same binary, auxiliary/PVT inputs and full 66--340 second support; seal four native runs before four reference evaluations. Controls must remain byte-identical. Preserve all dropped, suppressed, failed-catch-up and valid outcomes. No retries or threshold changes inside this experiment; any infrastructure repair is separately recorded.
+
+Outputs reside under SERIAL_LATENCY_PARTIAL6 and NAVIGATION_SERIAL_LATENCY_PARTIAL6 in the current carrier WSL scratch root. Default V3 and every earlier result remain unchanged.

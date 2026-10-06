@@ -19,6 +19,8 @@
 #include "legsa_v23_port_core/source_aware/quality_state_trace.hpp"
 #include "legsa_v23_port_core/source_aware/source_aware_trace.hpp"
 
+#include "legsa_v23_port_core/factors/attitude_clone.hpp"
+#include <set>
 #include <cstddef>
 #include <string>
 #include <vector>
@@ -57,6 +59,8 @@ class GIEngine {
   void EKFUpdate(const std::vector<double>& dz, const Matrix& H, const Matrix& R);
   void stateFeedback();
   void newImuProcess();
+  // Exact-time event queue for the opt-in carrier source; consumes every event once.
+  void newImuProcessWithEvents(const std::vector<GnssData>& events);
   bool checkCov() const;
 
   const NavState& navState() const;
@@ -100,8 +104,35 @@ class GIEngine {
   const Baseline3dCounts& baseline3dCounts() const { return baseline3d_counts_; }
   const std::vector<Baseline3dDiagnostics>& baseline3dDiagnostics() const { return baseline3d_diagnostics_; }
   void writeBaseline3dDiagnostics(const std::string& output_dir) const;
+  void writeBodyVelocityDiagnostics(const std::string& output_dir) const;
+  const HeadingSourceCounts& headingSourceCounts() const { return heading_source_counts_; }
+  const std::vector<HeadingSourceDecision>& headingSourceEvents() const { return heading_source_events_; }
+  void writeHeadingSourceDiagnostics(const std::string& output_dir) const;
+  void setFootPairEvents(const std::vector<FootPairEvent>& events);
+  void finalizeFootPairStream();
+  void writeAttitudeCloneDiagnostics(const std::string& output_dir) const;
+  const AttitudeCloneCounts& attitudeCloneCounts() const { return attitude_clone_counts_; }
+  Matrix jointAttitudeCovariance() const;
+  bool attitudeCloneActive() const { return attitude_clone_active_; }
+
 
  private:
+  struct JointTimedEvent {
+    double time=0.0;
+    bool has_gnss=false;
+    GnssData gnss;
+    std::vector<FootPairEvent> feet;
+  };
+  void processExactJointEvents(const std::vector<JointTimedEvent>& events);
+  attitude_clone::Gaussian attitudeJointState() const;
+  void setAttitudeJointState(const attitude_clone::Gaussian& state);
+  void processFootPairEvent(const FootPairEvent& event);
+  void retireAttitudeClone();
+  void requireFrozenCloneBlocks() const;
+  void recordFootEvent(const FootPairEvent& event, const std::string& action,
+                       bool applied=false, double epsilon=0.0,
+                       double prior_score=0.0, double bound_score=0.0,
+                       double safe_innovation=-1.0);
   void initializeCovariance();
   void initializeQc();
   void buildErrorStateMatrices(const ImuData& imu, Matrix& F, Matrix& G, Matrix& Phi, Matrix& Qd) const;
@@ -121,6 +152,7 @@ class GIEngine {
   void applyRawDopplerUpdateForTime(double update_time);
   void applyGo2AttitudeWeakPriorForTime(double update_time);
   void applyGo2VelocityDiagnosticPriorForTime(double update_time);
+  void applyBodyVelocityPriorForTime(double update_time);
   void applyFgoFeedbackForTime(double update_time);
   quality_aware::QAObservation buildQAObservation(const GnssData& gnss) const;
   void enrichGo2ReadinessMetadata(source_aware::SourceMetadata& metadata, double update_time);
@@ -136,6 +168,29 @@ class GIEngine {
   void setCovarianceMatrix(const Matrix& matrix);
 
   PortOptions options_;
+  bool attitude_clone_active_=false;
+  Matrix attitude_clone_cross_{RANK,3,0.0};
+  Matrix attitude_clone_cov_{3,3,0.0};
+  Vec3 attitude_clone_error_{};
+  Matrix3 attitude_clone_cbe_{};
+  FootPairEvent attitude_clone_start_;
+  std::set<std::string> attitude_clone_used_ids_, foot_used_endpoint_ids_;
+  std::vector<double> attitude_clone_weights_;
+  std::vector<FootPairEvent> foot_events_;
+  std::size_t next_foot_event_=0;
+  bool foot_stream_started_=false;
+  AttitudeCloneCounts attitude_clone_counts_;
+  struct FootEventDiagnostic {
+    double event_time=0, state_time=0, source_time=0;
+    std::string type, clone_id, endpoint_id, action;
+    bool applied=false;
+    double epsilon=0, prior_score=0, bound_score=0, safe_innovation=-1;
+  };
+  std::vector<FootEventDiagnostic> foot_event_diagnostics_;
+
+  HeadingSourcePolicy heading_source_policy_;
+  HeadingSourceCounts heading_source_counts_;
+  std::vector<HeadingSourceDecision> heading_source_events_;
   NavState pvapre_;
   NavState pvacur_;
   ImuError imuerror_;
@@ -178,6 +233,16 @@ class GIEngine {
   std::vector<double> fgo_feedback_velocity_norms_;
   std::vector<double> fgo_feedback_attitude_norms_deg_;
   double last_fgo_feedback_time_ = -1.0e100;
+  double research_last_rp_attempt_time_ = -1.0e100;
+  double research_last_rd_attempt_time_ = -1.0e100;
+  double research_last_body_hv_attempt_time_ = -1.0e100;
+  double research_next_body_hv_tick_ = 0.0;
+  struct BodyVelocityEvent {
+    double time=0.0, source_time=0.0;
+    bool source_present=false, valid=false, accepted=false;
+    std::string reason;
+  };
+  std::vector<BodyVelocityEvent> body_velocity_events_;
   quality_aware::QAFallbackSupervisor qa_fallback_supervisor_;
   source_aware::SourceAwarePolicy source_aware_policy_;
   source_aware::QualityStateManager quality_state_manager_;

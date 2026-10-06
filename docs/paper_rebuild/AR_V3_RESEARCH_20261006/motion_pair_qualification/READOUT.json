@@ -1,0 +1,555 @@
+{
+  "schema": "ar_v3_motion_qualification.readout.v1",
+  "registration_commit": "a128409164362cf7ca4dbe328bfb8133be76712e",
+  "counts": {
+    "RETURNED_CANDIDATE": 14,
+    "TIMEOUT": 2
+  },
+  "slots": 16,
+  "fixed_N_bound_pairs": 256,
+  "finite_domain_integer_points": 81,
+  "total_recorded_candidate_slot_wall_s": 224.85926508199975,
+  "whole_trial_wall_s": null,
+  "whole_trial_wall_reason": "registered runner/log did not instrument one total trial wall timer; slot sum excludes prechecks and IO",
+  "online_navigation_delay_s": null,
+  "online_navigation_delay_reason": "no online navigation or acquisition scheduling experiment",
+  "positive_ordering_evidence_cases": [],
+  "decision": "FINITE_MECHANISM_EVIDENCE_INSUFFICIENT_FOR_EXPANSION",
+  "rows": [
+    {
+      "case_id": "REFLECTION_60_CORRECT",
+      "method": "INDEPENDENT_SPHERES",
+      "status": "RETURNED_CANDIDATE",
+      "failure": "",
+      "elapsed_s": 0.005328219000034551,
+      "termination_reason": "GLOBAL_ENUMERATION_EXHAUSTED",
+      "true_pair_in_prior_interval": true,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false,
+      "integer": [
+        3,
+        0,
+        2,
+        0
+      ],
+      "matches_generated_N": false,
+      "matches_explicit_reflection_alias": true,
+      "baseline_errors_m": [
+        0.29999774708488947,
+        0.29999577625685475
+      ],
+      "direction_errors_deg": [
+        50.75345885585664,
+        50.75310177192411
+      ],
+      "baseline_angle_error_deg": 0.0003268603967864924,
+      "best_raw_residual_cost": 0.08690505598584934,
+      "old_global_optimum_certified": true,
+      "nodes": 6,
+      "leaves": 2,
+      "candidate_count": 8
+    },
+    {
+      "case_id": "REFLECTION_60_CORRECT",
+      "method": "PAIR_MOTION_INTERVAL",
+      "status": "RETURNED_CANDIDATE",
+      "failure": "",
+      "elapsed_s": 0.005175013999973999,
+      "termination_reason": "GLOBAL_INTEGER_ENUMERATION_EXHAUSTED",
+      "true_pair_in_prior_interval": true,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false,
+      "integer": [
+        3,
+        0,
+        2,
+        0
+      ],
+      "matches_generated_N": false,
+      "matches_explicit_reflection_alias": true,
+      "baseline_errors_m": [
+        0.29999774708488947,
+        0.29999577625685503
+      ],
+      "direction_errors_deg": [
+        50.75345885585664,
+        50.75310177192411
+      ],
+      "baseline_angle_error_deg": 0.0003268603967801313,
+      "best_raw_residual_cost": 0.08690505598584933,
+      "integer_winner_separated": true,
+      "integer_top_two_separated": true,
+      "continuous_profile_numerically_closed": true,
+      "best_reduced_lower": 0.0869050558277065,
+      "best_reduced_upper": 0.08690505598587657,
+      "best_profile_interval_width": 1.5817007426033314e-10,
+      "best_extra_motion_lower_bound": 0.0,
+      "nodes": 6,
+      "leaves": 2,
+      "candidate_count": 8
+    },
+    {
+      "case_id": "REFLECTION_60_WRONG_PRIOR",
+      "method": "INDEPENDENT_SPHERES",
+      "status": "RETURNED_CANDIDATE",
+      "failure": "",
+      "elapsed_s": 0.005226476999951046,
+      "termination_reason": "GLOBAL_ENUMERATION_EXHAUSTED",
+      "true_pair_in_prior_interval": false,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false,
+      "integer": [
+        3,
+        0,
+        2,
+        0
+      ],
+      "matches_generated_N": false,
+      "matches_explicit_reflection_alias": true,
+      "baseline_errors_m": [
+        0.29999774708488947,
+        0.29999577625685475
+      ],
+      "direction_errors_deg": [
+        50.75345885585664,
+        50.75310177192411
+      ],
+      "baseline_angle_error_deg": 0.0003268603967864924,
+      "best_raw_residual_cost": 0.08690505598584934,
+      "old_global_optimum_certified": true,
+      "nodes": 6,
+      "leaves": 2,
+      "candidate_count": 8
+    },
+    {
+      "case_id": "REFLECTION_60_WRONG_PRIOR",
+      "method": "PAIR_MOTION_INTERVAL",
+      "status": "TIMEOUT",
+      "failure": "CallTimeout: registered 60-second candidate slot expired",
+      "elapsed_s": 60.01319959999995,
+      "termination_reason": "",
+      "true_pair_in_prior_interval": false,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false
+    },
+    {
+      "case_id": "STATIC_CORRECT",
+      "method": "INDEPENDENT_SPHERES",
+      "status": "RETURNED_CANDIDATE",
+      "failure": "",
+      "elapsed_s": 0.004708743999970011,
+      "termination_reason": "GLOBAL_ENUMERATION_EXHAUSTED",
+      "true_pair_in_prior_interval": true,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false,
+      "integer": [
+        3,
+        0,
+        2,
+        0
+      ],
+      "matches_generated_N": false,
+      "matches_explicit_reflection_alias": true,
+      "baseline_errors_m": [
+        0.29999774708488935,
+        0.2999977470848898
+      ],
+      "direction_errors_deg": [
+        50.75345885585663,
+        50.7534588558567
+      ],
+      "baseline_angle_error_deg": 2.1336994199486216e-13,
+      "best_raw_residual_cost": 0.08690517482958901,
+      "old_global_optimum_certified": true,
+      "nodes": 6,
+      "leaves": 2,
+      "candidate_count": 8
+    },
+    {
+      "case_id": "STATIC_CORRECT",
+      "method": "PAIR_MOTION_INTERVAL",
+      "status": "RETURNED_CANDIDATE",
+      "failure": "",
+      "elapsed_s": 0.004430517000002965,
+      "termination_reason": "GLOBAL_INTEGER_ENUMERATION_EXHAUSTED",
+      "true_pair_in_prior_interval": true,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false,
+      "integer": [
+        3,
+        0,
+        2,
+        0
+      ],
+      "matches_generated_N": false,
+      "matches_explicit_reflection_alias": true,
+      "baseline_errors_m": [
+        0.2999977470848894,
+        0.2999977470848894
+      ],
+      "direction_errors_deg": [
+        50.753458855856636,
+        50.753458855856636
+      ],
+      "baseline_angle_error_deg": 2.1395744262412143e-13,
+      "best_raw_residual_cost": 0.08690517482958901,
+      "integer_winner_separated": true,
+      "integer_top_two_separated": true,
+      "continuous_profile_numerically_closed": true,
+      "best_reduced_lower": 0.08690517468299447,
+      "best_reduced_upper": 0.08690517482960215,
+      "best_profile_interval_width": 1.4660768432595006e-10,
+      "best_extra_motion_lower_bound": 0.0,
+      "nodes": 6,
+      "leaves": 2,
+      "candidate_count": 8
+    },
+    {
+      "case_id": "AXIAL_ROTATION_90_CORRECT",
+      "method": "INDEPENDENT_SPHERES",
+      "status": "RETURNED_CANDIDATE",
+      "failure": "",
+      "elapsed_s": 0.004555487000004632,
+      "termination_reason": "GLOBAL_ENUMERATION_EXHAUSTED",
+      "true_pair_in_prior_interval": true,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false,
+      "integer": [
+        3,
+        0,
+        2,
+        0
+      ],
+      "matches_generated_N": false,
+      "matches_explicit_reflection_alias": true,
+      "baseline_errors_m": [
+        0.29999774708488935,
+        0.2999977470848898
+      ],
+      "direction_errors_deg": [
+        50.75345885585663,
+        50.7534588558567
+      ],
+      "baseline_angle_error_deg": 2.1336994199486216e-13,
+      "best_raw_residual_cost": 0.08690517482958901,
+      "old_global_optimum_certified": true,
+      "nodes": 6,
+      "leaves": 2,
+      "candidate_count": 8
+    },
+    {
+      "case_id": "AXIAL_ROTATION_90_CORRECT",
+      "method": "PAIR_MOTION_INTERVAL",
+      "status": "RETURNED_CANDIDATE",
+      "failure": "",
+      "elapsed_s": 0.00442063500003087,
+      "termination_reason": "GLOBAL_INTEGER_ENUMERATION_EXHAUSTED",
+      "true_pair_in_prior_interval": true,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false,
+      "integer": [
+        3,
+        0,
+        2,
+        0
+      ],
+      "matches_generated_N": false,
+      "matches_explicit_reflection_alias": true,
+      "baseline_errors_m": [
+        0.2999977470848894,
+        0.2999977470848894
+      ],
+      "direction_errors_deg": [
+        50.753458855856636,
+        50.753458855856636
+      ],
+      "baseline_angle_error_deg": 2.1395744262412143e-13,
+      "best_raw_residual_cost": 0.08690517482958901,
+      "integer_winner_separated": true,
+      "integer_top_two_separated": true,
+      "continuous_profile_numerically_closed": true,
+      "best_reduced_lower": 0.08690517468299447,
+      "best_reduced_upper": 0.08690517482960215,
+      "best_profile_interval_width": 1.4660768432595006e-10,
+      "best_extra_motion_lower_bound": 0.0,
+      "nodes": 6,
+      "leaves": 2,
+      "candidate_count": 8
+    },
+    {
+      "case_id": "NEAR_ZERO_CORRECT",
+      "method": "INDEPENDENT_SPHERES",
+      "status": "RETURNED_CANDIDATE",
+      "failure": "",
+      "elapsed_s": 0.0045688579999705325,
+      "termination_reason": "GLOBAL_ENUMERATION_EXHAUSTED",
+      "true_pair_in_prior_interval": true,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false,
+      "integer": [
+        3,
+        0,
+        2,
+        0
+      ],
+      "matches_generated_N": false,
+      "matches_explicit_reflection_alias": true,
+      "baseline_errors_m": [
+        0.2999977470848897,
+        0.2999977468037774
+      ],
+      "direction_errors_deg": [
+        50.75345885585667,
+        50.753458804923405
+      ],
+      "baseline_angle_error_deg": 1.3206887667464276e-09,
+      "best_raw_residual_cost": 0.08690517477911061,
+      "old_global_optimum_certified": true,
+      "nodes": 6,
+      "leaves": 2,
+      "candidate_count": 8
+    },
+    {
+      "case_id": "NEAR_ZERO_CORRECT",
+      "method": "PAIR_MOTION_INTERVAL",
+      "status": "RETURNED_CANDIDATE",
+      "failure": "",
+      "elapsed_s": 0.0045775589999834665,
+      "termination_reason": "GLOBAL_INTEGER_ENUMERATION_EXHAUSTED",
+      "true_pair_in_prior_interval": true,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false,
+      "integer": [
+        3,
+        0,
+        2,
+        0
+      ],
+      "matches_generated_N": false,
+      "matches_explicit_reflection_alias": true,
+      "baseline_errors_m": [
+        0.29999774708488963,
+        0.2999977468037774
+      ],
+      "direction_errors_deg": [
+        50.75345885585668,
+        50.7534588049234
+      ],
+      "baseline_angle_error_deg": 1.3206887675229303e-09,
+      "best_raw_residual_cost": 0.0869051747791106,
+      "integer_winner_separated": true,
+      "integer_top_two_separated": true,
+      "continuous_profile_numerically_closed": true,
+      "best_reduced_lower": 0.08690517463505183,
+      "best_reduced_upper": 0.0869051747791095,
+      "best_profile_interval_width": 1.4405766857183977e-10,
+      "best_extra_motion_lower_bound": 0.0,
+      "nodes": 6,
+      "leaves": 2,
+      "candidate_count": 8
+    },
+    {
+      "case_id": "SAVED_BY2_SAME_H_NOISE",
+      "method": "INDEPENDENT_SPHERES",
+      "status": "RETURNED_CANDIDATE",
+      "failure": "",
+      "elapsed_s": 0.3699502260000145,
+      "termination_reason": "GLOBAL_BOUND_CERTIFIED",
+      "true_pair_in_prior_interval": true,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false,
+      "integer": [
+        -2,
+        5,
+        -3,
+        -1,
+        -2,
+        -3,
+        -1
+      ],
+      "matches_generated_N": true,
+      "matches_explicit_reflection_alias": false,
+      "baseline_errors_m": [
+        0.0006238529363198352,
+        0.00873372875894983
+      ],
+      "direction_errors_deg": [
+        0.10212612862778256,
+        1.4297679462566641
+      ],
+      "baseline_angle_error_deg": 1.1492582564372944,
+      "best_raw_residual_cost": 29.444310781942434,
+      "old_global_optimum_certified": true,
+      "nodes": 91,
+      "leaves": 2,
+      "candidate_count": 9
+    },
+    {
+      "case_id": "SAVED_BY2_SAME_H_NOISE",
+      "method": "PAIR_MOTION_INTERVAL",
+      "status": "RETURNED_CANDIDATE",
+      "failure": "",
+      "elapsed_s": 51.897282792,
+      "termination_reason": "GLOBAL_INTEGER_BRANCH_BOUND_CLOSED",
+      "true_pair_in_prior_interval": true,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false,
+      "integer": [
+        -2,
+        5,
+        -3,
+        -1,
+        -2,
+        -3,
+        -1
+      ],
+      "matches_generated_N": true,
+      "matches_explicit_reflection_alias": false,
+      "baseline_errors_m": [
+        0.0033829131194299056,
+        0.006573151066213932
+      ],
+      "direction_errors_deg": [
+        0.5537925676882254,
+        1.0760552832623262
+      ],
+      "baseline_angle_error_deg": 0.24999999999999717,
+      "best_raw_residual_cost": 30.366897537584336,
+      "integer_winner_separated": true,
+      "integer_top_two_separated": true,
+      "continuous_profile_numerically_closed": false,
+      "best_reduced_lower": 20.85880047919477,
+      "best_reduced_upper": 21.295727766045193,
+      "best_profile_interval_width": 0.43692728685042326,
+      "best_extra_motion_lower_bound": 0.4856594732185091,
+      "nodes": 16949,
+      "leaves": 11952,
+      "candidate_count": 11952
+    },
+    {
+      "case_id": "SAVED_BY2_CHANGED_H_NOISE",
+      "method": "INDEPENDENT_SPHERES",
+      "status": "RETURNED_CANDIDATE",
+      "failure": "",
+      "elapsed_s": 0.3786360439999612,
+      "termination_reason": "GLOBAL_BOUND_CERTIFIED",
+      "true_pair_in_prior_interval": true,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false,
+      "integer": [
+        -2,
+        5,
+        -3,
+        -1,
+        -2,
+        -3,
+        -1
+      ],
+      "matches_generated_N": true,
+      "matches_explicit_reflection_alias": false,
+      "baseline_errors_m": [
+        0.0006238529363179643,
+        0.008733636030140348
+      ],
+      "direction_errors_deg": [
+        0.1021261286274753,
+        1.4297527651623778
+      ],
+      "baseline_angle_error_deg": 1.1491832015674965,
+      "best_raw_residual_cost": 29.44427798474838,
+      "old_global_optimum_certified": true,
+      "nodes": 91,
+      "leaves": 2,
+      "candidate_count": 9
+    },
+    {
+      "case_id": "SAVED_BY2_CHANGED_H_NOISE",
+      "method": "PAIR_MOTION_INTERVAL",
+      "status": "RETURNED_CANDIDATE",
+      "failure": "",
+      "elapsed_s": 51.76162117900003,
+      "termination_reason": "GLOBAL_INTEGER_BRANCH_BOUND_CLOSED",
+      "true_pair_in_prior_interval": true,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false,
+      "integer": [
+        -2,
+        5,
+        -3,
+        -1,
+        -2,
+        -3,
+        -1
+      ],
+      "matches_generated_N": true,
+      "matches_explicit_reflection_alias": false,
+      "baseline_errors_m": [
+        0.00338268015269414,
+        0.006573371457749008
+      ],
+      "direction_errors_deg": [
+        0.5537544300693882,
+        1.0760913634382627
+      ],
+      "baseline_angle_error_deg": 0.24999999999999717,
+      "best_raw_residual_cost": 30.3667376495409,
+      "integer_winner_separated": true,
+      "integer_top_two_separated": true,
+      "continuous_profile_numerically_closed": false,
+      "best_reduced_lower": 20.858687045372722,
+      "best_reduced_upper": 21.295567877968814,
+      "best_profile_interval_width": 0.436880832596092,
+      "best_extra_motion_lower_bound": 0.4855788366275389,
+      "nodes": 16947,
+      "leaves": 11951,
+      "candidate_count": 11951
+    },
+    {
+      "case_id": "SAVED_BY2_CHANGED_H_WRONG_PRIOR",
+      "method": "INDEPENDENT_SPHERES",
+      "status": "RETURNED_CANDIDATE",
+      "failure": "",
+      "elapsed_s": 0.380656475999956,
+      "termination_reason": "GLOBAL_BOUND_CERTIFIED",
+      "true_pair_in_prior_interval": false,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false,
+      "integer": [
+        -2,
+        5,
+        -3,
+        -1,
+        -2,
+        -3,
+        -1
+      ],
+      "matches_generated_N": true,
+      "matches_explicit_reflection_alias": false,
+      "baseline_errors_m": [
+        0.0006238529363179643,
+        0.008733636030140348
+      ],
+      "direction_errors_deg": [
+        0.1021261286274753,
+        1.4297527651623778
+      ],
+      "baseline_angle_error_deg": 1.1491832015674965,
+      "best_raw_residual_cost": 29.44427798474838,
+      "old_global_optimum_certified": true,
+      "nodes": 91,
+      "leaves": 2,
+      "candidate_count": 9
+    },
+    {
+      "case_id": "SAVED_BY2_CHANGED_H_WRONG_PRIOR",
+      "method": "PAIR_MOTION_INTERVAL",
+      "status": "TIMEOUT",
+      "failure": "CallTimeout: registered 60-second candidate slot expired",
+      "elapsed_s": 60.01492725499992,
+      "termination_reason": "",
+      "true_pair_in_prior_interval": false,
+      "integer_acceptance_defined": false,
+      "continuous_global_optimum_certified": false
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+assumed_physical_offset_s,perpendicular_velocity_mps,projection_m,linear_heading_error_deg,exact_heading_error_deg,inferred_from_RAWX_clock_label
+0.007,0.5,0.35,0.5729577951308232,0.5729386976835021,False
+0.008,0.5,0.35,0.6548089087209409,0.6547804022676814,False
+0.02,0.5,0.35,1.6370222718023522,1.6365770416166945,False

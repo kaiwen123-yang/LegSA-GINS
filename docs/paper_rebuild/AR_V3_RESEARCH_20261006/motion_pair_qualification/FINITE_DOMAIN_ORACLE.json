@@ -1,0 +1,68 @@
+{
+  "model_scope": "ZERO_PHASE_RESIDUAL_SUBMODEL_ONLY",
+  "domain_lower": [
+    1,
+    -2,
+    0,
+    -1
+  ],
+  "domain_upper": [
+    3,
+    0,
+    2,
+    1
+  ],
+  "enumerated_integer_points": 81,
+  "feasible_zero_phase_points": [
+    {
+      "integer": [
+        2,
+        -1,
+        1,
+        0
+      ],
+      "baselines": [
+        [
+          0.15000000000000027,
+          0.31622776601683783,
+          -5.551115123125783e-16
+        ],
+        [
+          0.15000000000000013,
+          0.158113883008419,
+          0.273861278752583
+        ]
+      ],
+      "raw_cost": 0.08690803657701887,
+      "phase_error_m": 1.1102230246251565e-16,
+      "length_error_m": 5.551115123125783e-17
+    },
+    {
+      "integer": [
+        3,
+        0,
+        2,
+        0
+      ],
+      "baselines": [
+        [
+          -0.14999999999999974,
+          0.3162277660168377,
+          -6.661338147750939e-16
+        ],
+        [
+          -0.15,
+          0.158113883008419,
+          0.2738612787525829
+        ]
+      ],
+      "raw_cost": 0.08690803657701883,
+      "phase_error_m": 1.5265566588595902e-16,
+      "length_error_m": 2.7755575615628914e-16
+    }
+  ],
+  "full_finite_weight_CILS_global_optimum_certified": false,
+  "outside_box_full_CILS_lower_bound": 0.3347194011553368,
+  "known_feasible_raw_upper": 0.08690803657701877,
+  "outside_box_excluded_below_witness": true
+}
