@@ -1,0 +1,68 @@
+{
+  "status": "PASS_SEALED_SYNTHETIC_MECHANISM_ARITHMETIC_NOT_RISK_VALIDATION",
+  "execution_commit": "dc92fd6bf31136e143d54deaeb2ff8e3ab68fa4f",
+  "source_pins_verified": 16,
+  "input_pins_verified": 5,
+  "result_pins_verified": 16,
+  "unique_noise_instances": 4,
+  "A_unique_calls": 4,
+  "B_condition_calls": 12,
+  "C_calls": 0,
+  "total_solver_calls": 16,
+  "reviewer_solver_reference_raw_calls_or_reads": [
+    0,
+    0,
+    0
+  ],
+  "IO_raw_reference_payload_opens_reparsed": 0,
+  "max_arithmetic_discrepancies": {
+    "length_m": 1.1657341758564144e-15,
+    "NED_m": 0.0,
+    "raw_cost": 0.0,
+    "prior_residual_sigma": 0.0,
+    "objective_identity": 2.3987645203504826e-11,
+    "projected_angle_deg": 0.0,
+    "three_dim_angle_deg": 0.0
+  },
+  "max_synthetic_y_construction_discrepancy": 2.1315414711065017e-16,
+  "A_unique_correct": 3,
+  "A_unique_wrong": 1,
+  "by_prior_condition": {
+    "RP_NOMINAL": {
+      "B_correct": 4,
+      "B_wrong": 0,
+      "C_correct_retained": 3,
+      "C_wrong_retained": 0,
+      "C_rejected": 1,
+      "rejected_correct_B": 1,
+      "rejected_wrong_B": 0
+    },
+    "RP_ROLL_POS": {
+      "B_correct": 1,
+      "B_wrong": 3,
+      "C_correct_retained": 1,
+      "C_wrong_retained": 0,
+      "C_rejected": 3,
+      "rejected_correct_B": 0,
+      "rejected_wrong_B": 3
+    },
+    "RP_ROLL_NEG": {
+      "B_correct": 2,
+      "B_wrong": 2,
+      "C_correct_retained": 2,
+      "C_wrong_retained": 0,
+      "C_rejected": 2,
+      "rejected_correct_B": 0,
+      "rejected_wrong_B": 2
+    }
+  },
+  "risk_estimate": "NA: only four shared-noise instances; designed after stage1 real results",
+  "pins": {
+    "SYNTHETIC2_PLAN.json": "c79f3cc5f60adce3899aa4fb638359b23ab4fa1508e31b71faddc0e21f65087b",
+    "SYNTHETIC2_SEAL.json": "d68b41e71e732a3d68fdeaddda6a0319272e8681a529ee6ef4322f544ee8ee6a",
+    "CALL_LEDGER.jsonl": "5d25713e0c484413c8449ad447d1a4051ade030bfeda98f61ca70b9c307d37dc",
+    "IO_AUDIT.json": "995b95e22cd84333b0b433dd69903c8572a45c0de8fce30f684450c55d1c18aa"
+  },
+  "review_script_sha256": "6db623a3c72991af2110c0ca059c67c4a7528bd370556603eda64fcc30a0a416",
+  "rotation_helper_sha256": "b962c61d76e40d17910a6a39b0ef9fcb3fa9f03ebb2cca9fe7aaac04b06d05e6"
+}
