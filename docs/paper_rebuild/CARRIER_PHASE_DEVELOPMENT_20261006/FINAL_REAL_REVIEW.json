@@ -1,0 +1,2390 @@
+{
+  "audit_status": "PASS_SAVED_MATRIX_NUMERICAL_AND_SUPPORT_REVIEW",
+  "scope": {
+    "solver_records": 30,
+    "best_second_candidates_recomputed": 60,
+    "unique_saved_epoch_npz": 60,
+    "active_future_comparisons": 6,
+    "saved_future_candidate_epoch_residuals_recomputed": 60,
+    "integer_search_calls": 0,
+    "native_calls": 0,
+    "evaluator_calls": 0,
+    "raw_or_reference_payload_reads": 0,
+    "read_inputs": "Saved PLAN/NPZ/result/ledger/public aggregate files only; metadata paths are not opened.",
+    "global_certificate_statement": "30/30 saved solver records claim a global optimum for their stated model/objective and selection scope; this audit verifies numerical consistency and scope, not a second integer-tree search.",
+    "limitations": [
+      "No known real integer truth, acceptance threshold or failure-risk calibration.",
+      "Baseline length feasibility and lower candidate cost do not establish correct ambiguity or heading.",
+      "Two short windows of one sequence; overlapping prefixes and repeated full/active variants are not independent trials.",
+      "Working Q is block diagonal across epochs and uses the archived cross-signal model; SPD is a mathematical check, not physical calibration.",
+      "V1 legacy full-vector results omit an explicit certificate_scope field; their legacy full-vector interpretation is recorded separately.",
+      "No reconstruction or verification of satellite ephemeris, raw decoding or physical time synchronization in this audit."
+    ]
+  },
+  "numerical_tolerances": {
+    "objective_absolute": 2e-06,
+    "objective_relative": 2e-08,
+    "length_absolute_m": 1e-10
+  },
+  "maxima": {
+    "float_cost_absolute_error": 5.684341886080802e-14,
+    "full_residual_cost_absolute_error": 1.5234036254696548e-11,
+    "ambiguity_cost_absolute_error": 7.576090865768492e-10,
+    "length_constraint_cost_absolute_error": 2.0881429918517824e-10,
+    "reduced_cost_absolute_error": 7.203198038041592e-10,
+    "float_residual_cost_absolute_error": 5.684341886080802e-14,
+    "maximum_length_error_m": 1.4432899320127035e-15,
+    "future_residual_cost_absolute_error": 1.7053025658242404e-13
+  },
+  "windows": [
+    {
+      "trial": "REAL_80_82_V1",
+      "recorded_source_commit": "98bba0c5545de5490bf8e2e7bd6c57a82f7f5c60",
+      "prepare_snapshot_status": "not present in PLAN",
+      "epoch_count": 10,
+      "actual_groups_by_epoch": {
+        "GPS_L1": [
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        ],
+        "GPS_L1_L2": [
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ]
+        ],
+        "GPS_GAL_BDS_DUAL": [
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ]
+        ]
+      },
+      "raw_pairing": {
+        "unique_pairs": 10,
+        "unpaired_rx1": 0,
+        "unpaired_rx2": 0,
+        "duplicate_rx1": 0,
+        "duplicate_rx2": 0
+      },
+      "real_integer_truth_available": false
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "recorded_source_commit": "5a00724efd7607fc232e401f2d2e696aadbeb510",
+      "prepare_snapshot_status": "not present in PLAN",
+      "epoch_count": 10,
+      "actual_groups_by_epoch": {
+        "GPS_L1": [
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        ],
+        "GPS_L1_L2": [
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ]
+          ]
+        ],
+        "GPS_GAL_BDS_DUAL": [
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              2,
+              0,
+              0
+            ],
+            [
+              2,
+              6,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              2,
+              0,
+              0
+            ],
+            [
+              2,
+              6,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              2,
+              0,
+              0
+            ],
+            [
+              2,
+              6,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              2,
+              6,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              2,
+              6,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              2,
+              0,
+              0
+            ],
+            [
+              2,
+              6,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              2,
+              6,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              2,
+              0,
+              0
+            ],
+            [
+              2,
+              6,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              2,
+              0,
+              0
+            ],
+            [
+              2,
+              6,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              2,
+              0,
+              0
+            ],
+            [
+              2,
+              6,
+              0
+            ],
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              3,
+              2,
+              0
+            ]
+          ]
+        ]
+      },
+      "raw_pairing": {
+        "unique_pairs": 10,
+        "unpaired_rx1": 0,
+        "unpaired_rx2": 0,
+        "duplicate_rx1": 0,
+        "duplicate_rx2": 0
+      },
+      "real_integer_truth_available": false
+    }
+  ],
+  "records": [
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE",
+      "family": "GPS_L1",
+      "prefix_epochs": 1,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": null,
+      "scope_interpretation": "full integer vectors (legacy missing scope field)",
+      "observation_count": 8,
+      "integer_dimension": 4,
+      "active_integer_dimension": 4,
+      "joint_columns": 7,
+      "joint_rank": 7,
+      "joint_condition_number": 2051.4104379595356,
+      "minimum_epoch_Q_eigenvalue": 2.080358294653179e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 2,
+      "active_difference_count": 2,
+      "active_differing_labels": [
+        "[\"0:4:0:0\",\"[\\\"1|0:4:0:0|arc=1\\\",\\\"2|0:4:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:17:0:0\",\"[\\\"1|0:17:0:0|arc=1\\\",\\\"2|0:17:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 18.865455229128997,
+          "ambiguity_cost": 6.595030228450199,
+          "sphere_increment_cost": 12.266063619397183,
+          "decomposition_error": 3.296918293926865e-12,
+          "maximum_length_error_m": 8.326672684688674e-16
+        },
+        "second": {
+          "direct_residual_cost": 22.172529104676226,
+          "ambiguity_cost": 18.116112458398533,
+          "sphere_increment_cost": 4.052055265011878,
+          "decomposition_error": -1.2503775792538363e-11,
+          "maximum_length_error_m": 4.996003610813204e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE",
+      "family": "GPS_L1",
+      "prefix_epochs": 5,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": null,
+      "scope_interpretation": "full integer vectors (legacy missing scope field)",
+      "observation_count": 34,
+      "integer_dimension": 4,
+      "active_integer_dimension": 3,
+      "joint_columns": 19,
+      "joint_rank": 19,
+      "joint_condition_number": 1890.1692918444287,
+      "minimum_epoch_Q_eigenvalue": 1.6807254898365927e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 1,
+      "active_difference_count": 0,
+      "active_differing_labels": [],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 55.51901519742438,
+          "ambiguity_cost": 16.167815997892653,
+          "sphere_increment_cost": 35.88067777256513,
+          "decomposition_error": 2.7426949600339867e-12,
+          "maximum_length_error_m": 8.326672684688674e-16
+        },
+        "second": {
+          "direct_residual_cost": 60.385678682147706,
+          "ambiguity_cost": 38.39088329124564,
+          "sphere_increment_cost": 18.52427396393978,
+          "decomposition_error": -1.580957587066223e-12,
+          "maximum_length_error_m": 2.7755575615628914e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE",
+      "family": "GPS_L1",
+      "prefix_epochs": 10,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": null,
+      "scope_interpretation": "full integer vectors (legacy missing scope field)",
+      "observation_count": 64,
+      "integer_dimension": 4,
+      "active_integer_dimension": 3,
+      "joint_columns": 34,
+      "joint_rank": 34,
+      "joint_condition_number": 2146.632830034994,
+      "minimum_epoch_Q_eigenvalue": 1.6807254898365927e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 1,
+      "active_difference_count": 0,
+      "active_differing_labels": [],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 68.01444757732457,
+          "ambiguity_cost": 27.28127235853423,
+          "sphere_increment_cost": 37.14591241938148,
+          "decomposition_error": 1.1084466677857563e-12,
+          "maximum_length_error_m": 5.551115123125783e-16
+        },
+        "second": {
+          "direct_residual_cost": 72.88111106204838,
+          "ambiguity_cost": 49.50433965184956,
+          "sphere_increment_cost": 19.789508610756577,
+          "decomposition_error": 3.448263896643766e-11,
+          "maximum_length_error_m": 5.551115123125783e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE",
+      "family": "GPS_L1_L2",
+      "prefix_epochs": 1,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": null,
+      "scope_interpretation": "full integer vectors (legacy missing scope field)",
+      "observation_count": 12,
+      "integer_dimension": 6,
+      "active_integer_dimension": 6,
+      "joint_columns": 9,
+      "joint_rank": 9,
+      "joint_condition_number": 2733.377226671598,
+      "minimum_epoch_Q_eigenvalue": 2.080358294653179e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 3,
+      "active_difference_count": 3,
+      "active_differing_labels": [
+        "[\"0:4:0:0\",\"[\\\"1|0:4:0:0|arc=1\\\",\\\"2|0:4:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:11:3:0\",\"[\\\"1|0:11:3:0|arc=1\\\",\\\"2|0:11:3:0|arc=1\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 36.79253045167765,
+          "ambiguity_cost": 33.84706956660767,
+          "sphere_increment_cost": 0.0578989745987179,
+          "decomposition_error": -4.463979186297706e-11,
+          "maximum_length_error_m": 1.6653345369377348e-16
+        },
+        "second": {
+          "direct_residual_cost": 44.29369884635955,
+          "ambiguity_cost": 41.32251922694849,
+          "sphere_increment_cost": 0.08361770890718091,
+          "decomposition_error": -1.2019399364682215e-11,
+          "maximum_length_error_m": 9.992007221626409e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE",
+      "family": "GPS_L1_L2",
+      "prefix_epochs": 5,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": null,
+      "scope_interpretation": "full integer vectors (legacy missing scope field)",
+      "observation_count": 60,
+      "integer_dimension": 8,
+      "active_integer_dimension": 5,
+      "joint_columns": 23,
+      "joint_rank": 23,
+      "joint_condition_number": 2492.543447118638,
+      "minimum_epoch_Q_eigenvalue": 1.6807254898365927e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 3,
+      "active_difference_count": 0,
+      "active_differing_labels": [],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 167.12631896238724,
+          "ambiguity_cost": 92.80642408828885,
+          "sphere_increment_cost": 32.90940951100075,
+          "decomposition_error": -1.7134738072854816e-10,
+          "maximum_length_error_m": 8.326672684688674e-16
+        },
+        "second": {
+          "direct_residual_cost": 240.88913815956155,
+          "ambiguity_cost": 95.52088072225672,
+          "sphere_increment_cost": 103.9577720741174,
+          "decomposition_error": -8.15418843558291e-11,
+          "maximum_length_error_m": 3.885780586188048e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE",
+      "family": "GPS_L1_L2",
+      "prefix_epochs": 10,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": null,
+      "scope_interpretation": "full integer vectors (legacy missing scope field)",
+      "observation_count": 114,
+      "integer_dimension": 9,
+      "active_integer_dimension": 6,
+      "joint_columns": 39,
+      "joint_rank": 39,
+      "joint_condition_number": 2656.0468319422075,
+      "minimum_epoch_Q_eigenvalue": 1.6807254898365927e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 3,
+      "active_difference_count": 0,
+      "active_differing_labels": [],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 261.17270051442347,
+          "ambiguity_cost": 162.41633567843064,
+          "sphere_increment_cost": 37.38541499281516,
+          "decomposition_error": 3.6772007661056705e-10,
+          "maximum_length_error_m": 7.216449660063518e-16
+        },
+        "second": {
+          "direct_residual_cost": 334.9355197115986,
+          "ambiguity_cost": 165.13079231250651,
+          "sphere_increment_cost": 108.4337775559326,
+          "decomposition_error": 3.495159717203933e-10,
+          "maximum_length_error_m": 5.551115123125783e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE",
+      "family": "GPS_GAL_BDS_DUAL",
+      "prefix_epochs": 1,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": null,
+      "scope_interpretation": "full integer vectors (legacy missing scope field)",
+      "observation_count": 26,
+      "integer_dimension": 13,
+      "active_integer_dimension": 13,
+      "joint_columns": 16,
+      "joint_rank": 16,
+      "joint_condition_number": 2542.496096193149,
+      "minimum_epoch_Q_eigenvalue": 1.766811954472101e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 1,
+      "active_difference_count": 1,
+      "active_differing_labels": [
+        "[\"0:4:0:0\",\"[\\\"1|0:4:0:0|arc=1\\\",\\\"2|0:4:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 83.88685929148991,
+          "ambiguity_cost": 72.95156334281245,
+          "sphere_increment_cost": 0.11165527626002406,
+          "decomposition_error": -7.511904986934326e-11,
+          "maximum_length_error_m": 0.0
+        },
+        "second": {
+          "direct_residual_cost": 229.8423137736014,
+          "ambiguity_cost": 219.0146643569563,
+          "sphere_increment_cost": 0.004008744025872908,
+          "decomposition_error": 1.2667002342869882e-10,
+          "maximum_length_error_m": 1.1102230246251565e-15
+        }
+      }
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE",
+      "family": "GPS_GAL_BDS_DUAL",
+      "prefix_epochs": 5,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": null,
+      "scope_interpretation": "full integer vectors (legacy missing scope field)",
+      "observation_count": 154,
+      "integer_dimension": 18,
+      "active_integer_dimension": 15,
+      "joint_columns": 33,
+      "joint_rank": 33,
+      "joint_condition_number": 1626.5207661623247,
+      "minimum_epoch_Q_eigenvalue": 1.6807254898365927e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 1,
+      "active_difference_count": 0,
+      "active_differing_labels": [],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 401.7545147313477,
+          "ambiguity_cost": 182.1888787534255,
+          "sphere_increment_cost": 4.369547490540376,
+          "decomposition_error": -5.348166354224304e-11,
+          "maximum_length_error_m": 3.885780586188048e-16
+        },
+        "second": {
+          "direct_residual_cost": 652.2414838898624,
+          "ambiguity_cost": 341.92737377477226,
+          "sphere_increment_cost": 95.11802162756841,
+          "decomposition_error": 8.638778581371298e-11,
+          "maximum_length_error_m": 7.216449660063518e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE",
+      "family": "GPS_GAL_BDS_DUAL",
+      "prefix_epochs": 10,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": null,
+      "scope_interpretation": "full integer vectors (legacy missing scope field)",
+      "observation_count": 298,
+      "integer_dimension": 19,
+      "active_integer_dimension": 15,
+      "joint_columns": 49,
+      "joint_rank": 49,
+      "joint_condition_number": 1328.4805361513575,
+      "minimum_epoch_Q_eigenvalue": 1.6277728121285904e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 1,
+      "active_difference_count": 0,
+      "active_differing_labels": [],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 710.4208524789826,
+          "ambiguity_cost": 277.24333714351513,
+          "sphere_increment_cost": 26.690580294999336,
+          "decomposition_error": 4.953903953719418e-10,
+          "maximum_length_error_m": 5.551115123125783e-16
+        },
+        "second": {
+          "direct_residual_cost": 960.9078216374962,
+          "ambiguity_cost": 436.9818321650555,
+          "sphere_increment_cost": 117.43905443202632,
+          "decomposition_error": 4.4164494283904787e-10,
+          "maximum_length_error_m": 4.440892098500626e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE_ACTIVE",
+      "family": "GPS_L1",
+      "prefix_epochs": 5,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_selected_integer_classes",
+      "scope_interpretation": "two_best_selected_integer_classes",
+      "observation_count": 34,
+      "integer_dimension": 4,
+      "active_integer_dimension": 3,
+      "joint_columns": 19,
+      "joint_rank": 19,
+      "joint_condition_number": 1890.1692918444287,
+      "minimum_epoch_Q_eigenvalue": 1.6807254898365927e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 3,
+      "active_difference_count": 2,
+      "active_differing_labels": [
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:17:0:0\",\"[\\\"1|0:17:0:0|arc=1\\\",\\\"2|0:17:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 55.51901519742438,
+          "ambiguity_cost": 16.167815997892653,
+          "sphere_increment_cost": 35.88067777256513,
+          "decomposition_error": 2.7426949600339867e-12,
+          "maximum_length_error_m": 8.326672684688674e-16
+        },
+        "second": {
+          "direct_residual_cost": 64.21088018264619,
+          "ambiguity_cost": 40.24118091518014,
+          "sphere_increment_cost": 20.499177840506142,
+          "decomposition_error": -3.943512183468556e-12,
+          "maximum_length_error_m": 8.326672684688674e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE_ACTIVE",
+      "family": "GPS_L1",
+      "prefix_epochs": 10,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_selected_integer_classes",
+      "scope_interpretation": "two_best_selected_integer_classes",
+      "observation_count": 64,
+      "integer_dimension": 4,
+      "active_integer_dimension": 3,
+      "joint_columns": 34,
+      "joint_rank": 34,
+      "joint_condition_number": 2146.632830034994,
+      "minimum_epoch_Q_eigenvalue": 1.6807254898365927e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 3,
+      "active_difference_count": 2,
+      "active_differing_labels": [
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:17:0:0\",\"[\\\"1|0:17:0:0|arc=1\\\",\\\"2|0:17:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 68.01444757732457,
+          "ambiguity_cost": 27.28127235853423,
+          "sphere_increment_cost": 37.14591241938148,
+          "decomposition_error": 1.1084466677857563e-12,
+          "maximum_length_error_m": 5.551115123125783e-16
+        },
+        "second": {
+          "direct_residual_cost": 83.34720216711833,
+          "ambiguity_cost": 53.33740657955201,
+          "sphere_increment_cost": 26.42253278812598,
+          "decomposition_error": 3.2581937148279394e-11,
+          "maximum_length_error_m": 6.661338147750939e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE_ACTIVE",
+      "family": "GPS_L1_L2",
+      "prefix_epochs": 5,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_selected_integer_classes",
+      "scope_interpretation": "two_best_selected_integer_classes",
+      "observation_count": 60,
+      "integer_dimension": 8,
+      "active_integer_dimension": 5,
+      "joint_columns": 23,
+      "joint_rank": 23,
+      "joint_condition_number": 2492.543447118638,
+      "minimum_epoch_Q_eigenvalue": 1.6807254898365927e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 3,
+      "active_difference_count": 2,
+      "active_differing_labels": [
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:11:3:0\",\"[\\\"1|0:11:3:0|arc=1\\\",\\\"2|0:11:3:0|arc=1\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 167.12631896238724,
+          "ambiguity_cost": 92.80642408828885,
+          "sphere_increment_cost": 32.90940951100075,
+          "decomposition_error": -1.7134738072854816e-10,
+          "maximum_length_error_m": 8.326672684688674e-16
+        },
+        "second": {
+          "direct_residual_cost": 259.384019821326,
+          "ambiguity_cost": 139.69325205185316,
+          "sphere_increment_cost": 78.28028240625801,
+          "decomposition_error": -5.420019988378044e-11,
+          "maximum_length_error_m": 1.2212453270876722e-15
+        }
+      }
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE_ACTIVE",
+      "family": "GPS_L1_L2",
+      "prefix_epochs": 10,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_selected_integer_classes",
+      "scope_interpretation": "two_best_selected_integer_classes",
+      "observation_count": 114,
+      "integer_dimension": 9,
+      "active_integer_dimension": 6,
+      "joint_columns": 39,
+      "joint_rank": 39,
+      "joint_condition_number": 2656.0468319422075,
+      "minimum_epoch_Q_eigenvalue": 1.6807254898365927e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 1,
+      "active_difference_count": 1,
+      "active_differing_labels": [
+        "[\"0:3:3:0\",\"[\\\"1|0:3:3:0|arc=1\\\",\\\"2|0:3:3:0|arc=3\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 261.17270051442347,
+          "ambiguity_cost": 162.41633567843064,
+          "sphere_increment_cost": 37.38541499281516,
+          "decomposition_error": 3.6772007661056705e-10,
+          "maximum_length_error_m": 7.216449660063518e-16
+        },
+        "second": {
+          "direct_residual_cost": 350.14370871321324,
+          "ambiguity_cost": 182.26541311740357,
+          "sphere_increment_cost": 106.50734575263697,
+          "decomposition_error": 3.6273206660553114e-10,
+          "maximum_length_error_m": 7.216449660063518e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE_ACTIVE",
+      "family": "GPS_GAL_BDS_DUAL",
+      "prefix_epochs": 5,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_selected_integer_classes",
+      "scope_interpretation": "two_best_selected_integer_classes",
+      "observation_count": 154,
+      "integer_dimension": 18,
+      "active_integer_dimension": 15,
+      "joint_columns": 33,
+      "joint_rank": 33,
+      "joint_condition_number": 1626.5207661623247,
+      "minimum_epoch_Q_eigenvalue": 1.6807254898365927e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 5,
+      "active_difference_count": 4,
+      "active_differing_labels": [
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:11:3:0\",\"[\\\"1|0:11:3:0|arc=1\\\",\\\"2|0:11:3:0|arc=1\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]",
+        "[\"3:27:0:0\",\"[\\\"1|3:27:0:0|arc=1\\\",\\\"2|3:27:0:0|arc=1\\\"]\",\"3:7:0:0\",\"[\\\"1|3:7:0:0|arc=1\\\",\\\"2|3:7:0:0|arc=1\\\"]\"]",
+        "[\"3:41:0:0\",\"[\\\"1|3:41:0:0|arc=1\\\",\\\"2|3:41:0:0|arc=1\\\"]\",\"3:7:0:0\",\"[\\\"1|3:7:0:0|arc=1\\\",\\\"2|3:7:0:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 401.7545147313477,
+          "ambiguity_cost": 182.1888787534255,
+          "sphere_increment_cost": 4.369547490540376,
+          "decomposition_error": -5.348166354224304e-11,
+          "maximum_length_error_m": 3.885780586188048e-16
+        },
+        "second": {
+          "direct_residual_cost": 1679.8575405311833,
+          "ambiguity_cost": 1438.5353086943683,
+          "sphere_increment_cost": 26.12614334976867,
+          "decomposition_error": -3.888267485763208e-10,
+          "maximum_length_error_m": 7.771561172376096e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "mode": "SOLVE_ACTIVE",
+      "family": "GPS_GAL_BDS_DUAL",
+      "prefix_epochs": 10,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_selected_integer_classes",
+      "scope_interpretation": "two_best_selected_integer_classes",
+      "observation_count": 298,
+      "integer_dimension": 19,
+      "active_integer_dimension": 15,
+      "joint_columns": 49,
+      "joint_rank": 49,
+      "joint_condition_number": 1328.4805361513575,
+      "minimum_epoch_Q_eigenvalue": 1.6277728121285904e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 1,
+      "active_difference_count": 1,
+      "active_differing_labels": [
+        "[\"0:3:3:0\",\"[\\\"1|0:3:3:0|arc=1\\\",\\\"2|0:3:3:0|arc=3\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 710.4208524789826,
+          "ambiguity_cost": 277.24333714351513,
+          "sphere_increment_cost": 26.690580294999336,
+          "decomposition_error": 4.953903953719418e-10,
+          "maximum_length_error_m": 5.551115123125783e-16
+        },
+        "second": {
+          "direct_residual_cost": 1216.8460307126627,
+          "ambiguity_cost": 696.7342692862605,
+          "sphere_increment_cost": 113.62482638584011,
+          "decomposition_error": 5.892815124752815e-10,
+          "maximum_length_error_m": 5.551115123125783e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE",
+      "family": "GPS_L1",
+      "prefix_epochs": 1,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_full_integer_vectors",
+      "scope_interpretation": "two_best_full_integer_vectors",
+      "observation_count": 6,
+      "integer_dimension": 3,
+      "active_integer_dimension": 3,
+      "joint_columns": 6,
+      "joint_rank": 6,
+      "joint_condition_number": 3489.0938068643172,
+      "minimum_epoch_Q_eigenvalue": 1.9296880709106842e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 1,
+      "active_difference_count": 1,
+      "active_differing_labels": [
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 0.1422244044282241,
+          "ambiguity_cost": 0.10738228924336615,
+          "sphere_increment_cost": 0.03484211518628364,
+          "decomposition_error": -1.4256998359662987e-12,
+          "maximum_length_error_m": 8.881784197001252e-16
+        },
+        "second": {
+          "direct_residual_cost": 1.814126374888337,
+          "ambiguity_cost": 0.080107594719927,
+          "sphere_increment_cost": 1.7340187801686038,
+          "decomposition_error": -1.9384494009955233e-13,
+          "maximum_length_error_m": 4.996003610813204e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE",
+      "family": "GPS_L1",
+      "prefix_epochs": 5,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_full_integer_vectors",
+      "scope_interpretation": "two_best_full_integer_vectors",
+      "observation_count": 30,
+      "integer_dimension": 3,
+      "active_integer_dimension": 3,
+      "joint_columns": 18,
+      "joint_rank": 18,
+      "joint_condition_number": 3509.983939807513,
+      "minimum_epoch_Q_eigenvalue": 1.9296880709106842e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 2,
+      "active_difference_count": 2,
+      "active_differing_labels": [
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:17:0:0\",\"[\\\"1|0:17:0:0|arc=1\\\",\\\"2|0:17:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 12.997163024243832,
+          "ambiguity_cost": 0.9880629918286732,
+          "sphere_increment_cost": 11.92058314674227,
+          "decomposition_error": -2.0321522242738865e-12,
+          "maximum_length_error_m": 4.440892098500626e-16
+        },
+        "second": {
+          "direct_residual_cost": 13.160100339373447,
+          "ambiguity_cost": 0.7291164206681396,
+          "sphere_increment_cost": 12.34246703303115,
+          "decomposition_error": -7.638334409421077e-13,
+          "maximum_length_error_m": 7.216449660063518e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE",
+      "family": "GPS_L1",
+      "prefix_epochs": 10,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_full_integer_vectors",
+      "scope_interpretation": "two_best_full_integer_vectors",
+      "observation_count": 60,
+      "integer_dimension": 3,
+      "active_integer_dimension": 3,
+      "joint_columns": 33,
+      "joint_rank": 33,
+      "joint_condition_number": 3566.7988704540553,
+      "minimum_epoch_Q_eigenvalue": 1.928280454723729e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 2,
+      "active_difference_count": 2,
+      "active_differing_labels": [
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:17:0:0\",\"[\\\"1|0:17:0:0|arc=1\\\",\\\"2|0:17:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 23.31752435489195,
+          "ambiguity_cost": 2.093850292462093,
+          "sphere_increment_cost": 21.06307300237835,
+          "decomposition_error": 2.0961010704922955e-13,
+          "maximum_length_error_m": 5.551115123125783e-16
+        },
+        "second": {
+          "direct_residual_cost": 23.947118182559162,
+          "ambiguity_cost": 1.6236117871973992,
+          "sphere_increment_cost": 22.162905335309024,
+          "decomposition_error": 1.4388490399142029e-12,
+          "maximum_length_error_m": 4.440892098500626e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE",
+      "family": "GPS_L1_L2",
+      "prefix_epochs": 1,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_full_integer_vectors",
+      "scope_interpretation": "two_best_full_integer_vectors",
+      "observation_count": 10,
+      "integer_dimension": 5,
+      "active_integer_dimension": 5,
+      "joint_columns": 8,
+      "joint_rank": 8,
+      "joint_condition_number": 3809.6563492794144,
+      "minimum_epoch_Q_eigenvalue": 1.9296880709106842e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 4,
+      "active_difference_count": 4,
+      "active_differing_labels": [
+        "[\"0:6:0:0\",\"[\\\"1|0:6:0:0|arc=1\\\",\\\"2|0:6:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:11:3:0\",\"[\\\"1|0:11:3:0|arc=1\\\",\\\"2|0:11:3:0|arc=1\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]",
+        "[\"0:17:3:0\",\"[\\\"1|0:17:3:0|arc=1\\\",\\\"2|0:17:3:0|arc=1\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 29.33106591776031,
+          "ambiguity_cost": 4.378448328661934,
+          "sphere_increment_cost": 24.897286557162293,
+          "decomposition_error": 9.993783578465809e-12,
+          "maximum_length_error_m": 5.551115123125783e-17
+        },
+        "second": {
+          "direct_residual_cost": 44.041693298105265,
+          "ambiguity_cost": 31.35864842033922,
+          "sphere_increment_cost": 12.627713845845435,
+          "decomposition_error": -5.4782844927103724e-12,
+          "maximum_length_error_m": 4.996003610813204e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE",
+      "family": "GPS_L1_L2",
+      "prefix_epochs": 5,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_full_integer_vectors",
+      "scope_interpretation": "two_best_full_integer_vectors",
+      "observation_count": 50,
+      "integer_dimension": 5,
+      "active_integer_dimension": 5,
+      "joint_columns": 20,
+      "joint_rank": 20,
+      "joint_condition_number": 3720.1052248592637,
+      "minimum_epoch_Q_eigenvalue": 1.9296880709106842e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 4,
+      "active_difference_count": 4,
+      "active_differing_labels": [
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:17:0:0\",\"[\\\"1|0:17:0:0|arc=1\\\",\\\"2|0:17:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:11:3:0\",\"[\\\"1|0:11:3:0|arc=1\\\",\\\"2|0:11:3:0|arc=1\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]",
+        "[\"0:17:3:0\",\"[\\\"1|0:17:3:0|arc=1\\\",\\\"2|0:17:3:0|arc=1\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 77.48230250113266,
+          "ambiguity_cost": 49.36343858697268,
+          "sphere_increment_cost": 14.643175337714416,
+          "decomposition_error": 5.950973047674779e-11,
+          "maximum_length_error_m": 5.551115123125783e-16
+        },
+        "second": {
+          "direct_residual_cost": 193.90616894894197,
+          "ambiguity_cost": 166.57799347702718,
+          "sphere_increment_cost": 13.852486895495696,
+          "decomposition_error": 3.303135542864766e-11,
+          "maximum_length_error_m": 6.106226635438361e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE",
+      "family": "GPS_L1_L2",
+      "prefix_epochs": 10,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_full_integer_vectors",
+      "scope_interpretation": "two_best_full_integer_vectors",
+      "observation_count": 100,
+      "integer_dimension": 7,
+      "active_integer_dimension": 5,
+      "joint_columns": 37,
+      "joint_rank": 37,
+      "joint_condition_number": 3714.3679927465164,
+      "minimum_epoch_Q_eigenvalue": 1.928280454723729e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 6,
+      "active_difference_count": 4,
+      "active_differing_labels": [
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:17:0:0\",\"[\\\"1|0:17:0:0|arc=1\\\",\\\"2|0:17:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:11:3:0\",\"[\\\"1|0:11:3:0|arc=1\\\",\\\"2|0:11:3:0|arc=2\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]",
+        "[\"0:17:3:0\",\"[\\\"1|0:17:3:0|arc=2\\\",\\\"2|0:17:3:0|arc=1\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 150.74137977034408,
+          "ambiguity_cost": 93.87141175154375,
+          "sphere_increment_cost": 20.732489498457216,
+          "decomposition_error": -3.872457909892546e-13,
+          "maximum_length_error_m": 5.551115123125783e-16
+        },
+        "second": {
+          "direct_residual_cost": 349.3445096316297,
+          "ambiguity_cost": 291.9492121022098,
+          "sphere_increment_cost": 21.25781900882674,
+          "decomposition_error": 2.496598483503476e-10,
+          "maximum_length_error_m": 4.440892098500626e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE",
+      "family": "GPS_GAL_BDS_DUAL",
+      "prefix_epochs": 1,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_full_integer_vectors",
+      "scope_interpretation": "two_best_full_integer_vectors",
+      "observation_count": 38,
+      "integer_dimension": 19,
+      "active_integer_dimension": 19,
+      "joint_columns": 22,
+      "joint_rank": 22,
+      "joint_condition_number": 2263.8268463827644,
+      "minimum_epoch_Q_eigenvalue": 1.117634881728715e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 1,
+      "active_difference_count": 1,
+      "active_differing_labels": [
+        "[\"0:11:3:0\",\"[\\\"1|0:11:3:0|arc=1\\\",\\\"2|0:11:3:0|arc=1\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 78.3822975384838,
+          "ambiguity_cost": 67.0349561648568,
+          "sphere_increment_cost": 3.973032595382678,
+          "decomposition_error": -7.107203714440402e-12,
+          "maximum_length_error_m": 3.885780586188048e-16
+        },
+        "second": {
+          "direct_residual_cost": 337.0288663762073,
+          "ambiguity_cost": 329.65391795962586,
+          "sphere_increment_cost": 0.0006396384643404008,
+          "decomposition_error": -1.3431195381146538e-10,
+          "maximum_length_error_m": 6.661338147750939e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE",
+      "family": "GPS_GAL_BDS_DUAL",
+      "prefix_epochs": 5,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_full_integer_vectors",
+      "scope_interpretation": "two_best_full_integer_vectors",
+      "observation_count": 174,
+      "integer_dimension": 21,
+      "active_integer_dimension": 16,
+      "joint_columns": 36,
+      "joint_rank": 36,
+      "joint_condition_number": 1350.1751569997912,
+      "minimum_epoch_Q_eigenvalue": 1.117634881728715e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 1,
+      "active_difference_count": 0,
+      "active_differing_labels": [],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 364.1058724587614,
+          "ambiguity_cost": 152.83312905075115,
+          "sphere_increment_cost": 10.01648336683508,
+          "decomposition_error": -5.32107691242345e-11,
+          "maximum_length_error_m": 1.27675647831893e-15
+        },
+        "second": {
+          "direct_residual_cost": 689.4215495758059,
+          "ambiguity_cost": 479.2072317007277,
+          "sphere_increment_cost": 8.958057833689182,
+          "decomposition_error": 1.6068213426478906e-10,
+          "maximum_length_error_m": 1.27675647831893e-15
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE",
+      "family": "GPS_GAL_BDS_DUAL",
+      "prefix_epochs": 10,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_full_integer_vectors",
+      "scope_interpretation": "two_best_full_integer_vectors",
+      "observation_count": 358,
+      "integer_dimension": 30,
+      "active_integer_dimension": 19,
+      "joint_columns": 60,
+      "joint_rank": 60,
+      "joint_condition_number": 1138.1253073118085,
+      "minimum_epoch_Q_eigenvalue": 1.117634881728715e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 3,
+      "active_difference_count": 0,
+      "active_differing_labels": [],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 733.7791006622932,
+          "ambiguity_cost": 287.1422191116517,
+          "sphere_increment_cost": 22.87103496924128,
+          "decomposition_error": -7.34516447664646e-10,
+          "maximum_length_error_m": 1.2212453270876722e-15
+        },
+        "second": {
+          "direct_residual_cost": 1008.6170774363965,
+          "ambiguity_cost": 545.8234169948828,
+          "sphere_increment_cost": 39.02781385987792,
+          "decomposition_error": -4.989502144781e-10,
+          "maximum_length_error_m": 1.2212453270876722e-15
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE_ACTIVE",
+      "family": "GPS_L1",
+      "prefix_epochs": 5,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_selected_integer_classes",
+      "scope_interpretation": "two_best_selected_integer_classes",
+      "observation_count": 30,
+      "integer_dimension": 3,
+      "active_integer_dimension": 3,
+      "joint_columns": 18,
+      "joint_rank": 18,
+      "joint_condition_number": 3509.983939807513,
+      "minimum_epoch_Q_eigenvalue": 1.9296880709106842e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 2,
+      "active_difference_count": 2,
+      "active_differing_labels": [
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:17:0:0\",\"[\\\"1|0:17:0:0|arc=1\\\",\\\"2|0:17:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 12.997163024243832,
+          "ambiguity_cost": 0.9880629918286732,
+          "sphere_increment_cost": 11.92058314674227,
+          "decomposition_error": -2.0321522242738865e-12,
+          "maximum_length_error_m": 4.440892098500626e-16
+        },
+        "second": {
+          "direct_residual_cost": 13.160100339373447,
+          "ambiguity_cost": 0.7291164206681396,
+          "sphere_increment_cost": 12.34246703303115,
+          "decomposition_error": -7.638334409421077e-13,
+          "maximum_length_error_m": 7.216449660063518e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE_ACTIVE",
+      "family": "GPS_L1",
+      "prefix_epochs": 10,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_selected_integer_classes",
+      "scope_interpretation": "two_best_selected_integer_classes",
+      "observation_count": 60,
+      "integer_dimension": 3,
+      "active_integer_dimension": 3,
+      "joint_columns": 33,
+      "joint_rank": 33,
+      "joint_condition_number": 3566.7988704540553,
+      "minimum_epoch_Q_eigenvalue": 1.928280454723729e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 2,
+      "active_difference_count": 2,
+      "active_differing_labels": [
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:17:0:0\",\"[\\\"1|0:17:0:0|arc=1\\\",\\\"2|0:17:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 23.31752435489195,
+          "ambiguity_cost": 2.093850292462093,
+          "sphere_increment_cost": 21.06307300237835,
+          "decomposition_error": 2.0961010704922955e-13,
+          "maximum_length_error_m": 5.551115123125783e-16
+        },
+        "second": {
+          "direct_residual_cost": 23.947118182559162,
+          "ambiguity_cost": 1.6236117871973992,
+          "sphere_increment_cost": 22.162905335309024,
+          "decomposition_error": 1.4388490399142029e-12,
+          "maximum_length_error_m": 4.440892098500626e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE_ACTIVE",
+      "family": "GPS_L1_L2",
+      "prefix_epochs": 5,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_selected_integer_classes",
+      "scope_interpretation": "two_best_selected_integer_classes",
+      "observation_count": 50,
+      "integer_dimension": 5,
+      "active_integer_dimension": 5,
+      "joint_columns": 20,
+      "joint_rank": 20,
+      "joint_condition_number": 3720.1052248592637,
+      "minimum_epoch_Q_eigenvalue": 1.9296880709106842e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 4,
+      "active_difference_count": 4,
+      "active_differing_labels": [
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:17:0:0\",\"[\\\"1|0:17:0:0|arc=1\\\",\\\"2|0:17:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:11:3:0\",\"[\\\"1|0:11:3:0|arc=1\\\",\\\"2|0:11:3:0|arc=1\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]",
+        "[\"0:17:3:0\",\"[\\\"1|0:17:3:0|arc=1\\\",\\\"2|0:17:3:0|arc=1\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 77.48230250113266,
+          "ambiguity_cost": 49.36343858697268,
+          "sphere_increment_cost": 14.643175337714416,
+          "decomposition_error": 5.950973047674779e-11,
+          "maximum_length_error_m": 5.551115123125783e-16
+        },
+        "second": {
+          "direct_residual_cost": 193.90616894894197,
+          "ambiguity_cost": 166.57799347702718,
+          "sphere_increment_cost": 13.852486895495696,
+          "decomposition_error": 3.303135542864766e-11,
+          "maximum_length_error_m": 6.106226635438361e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE_ACTIVE",
+      "family": "GPS_L1_L2",
+      "prefix_epochs": 10,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_selected_integer_classes",
+      "scope_interpretation": "two_best_selected_integer_classes",
+      "observation_count": 100,
+      "integer_dimension": 7,
+      "active_integer_dimension": 5,
+      "joint_columns": 37,
+      "joint_rank": 37,
+      "joint_condition_number": 3714.3679927465164,
+      "minimum_epoch_Q_eigenvalue": 1.928280454723729e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 6,
+      "active_difference_count": 4,
+      "active_differing_labels": [
+        "[\"0:11:0:0\",\"[\\\"1|0:11:0:0|arc=1\\\",\\\"2|0:11:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:17:0:0\",\"[\\\"1|0:17:0:0|arc=1\\\",\\\"2|0:17:0:0|arc=1\\\"]\",\"0:19:0:0\",\"[\\\"1|0:19:0:0|arc=1\\\",\\\"2|0:19:0:0|arc=1\\\"]\"]",
+        "[\"0:11:3:0\",\"[\\\"1|0:11:3:0|arc=1\\\",\\\"2|0:11:3:0|arc=2\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]",
+        "[\"0:17:3:0\",\"[\\\"1|0:17:3:0|arc=2\\\",\\\"2|0:17:3:0|arc=1\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 150.74137977034408,
+          "ambiguity_cost": 93.87141175154375,
+          "sphere_increment_cost": 20.732489498457216,
+          "decomposition_error": -3.872457909892546e-13,
+          "maximum_length_error_m": 5.551115123125783e-16
+        },
+        "second": {
+          "direct_residual_cost": 349.3445096316297,
+          "ambiguity_cost": 291.9492121022098,
+          "sphere_increment_cost": 21.25781900882674,
+          "decomposition_error": 2.496598483503476e-10,
+          "maximum_length_error_m": 4.440892098500626e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE_ACTIVE",
+      "family": "GPS_GAL_BDS_DUAL",
+      "prefix_epochs": 5,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_selected_integer_classes",
+      "scope_interpretation": "two_best_selected_integer_classes",
+      "observation_count": 174,
+      "integer_dimension": 21,
+      "active_integer_dimension": 16,
+      "joint_columns": 36,
+      "joint_rank": 36,
+      "joint_condition_number": 1350.1751569997912,
+      "minimum_epoch_Q_eigenvalue": 1.117634881728715e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 1,
+      "active_difference_count": 1,
+      "active_differing_labels": [
+        "[\"2:10:6:0\",\"[\\\"1|2:10:6:0|arc=2\\\",\\\"2|2:10:6:0|arc=1\\\"]\",\"2:11:6:0\",\"[\\\"1|2:11:6:0|arc=1\\\",\\\"2|2:11:6:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 364.1058724587614,
+          "ambiguity_cost": 152.83312905075115,
+          "sphere_increment_cost": 10.01648336683508,
+          "decomposition_error": -5.32107691242345e-11,
+          "maximum_length_error_m": 1.27675647831893e-15
+        },
+        "second": {
+          "direct_residual_cost": 1321.708050140927,
+          "ambiguity_cost": 905.9237487843542,
+          "sphere_increment_cost": 214.5280413155198,
+          "decomposition_error": -1.7533352547616232e-10,
+          "maximum_length_error_m": 9.992007221626409e-16
+        }
+      }
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "mode": "SOLVE_ACTIVE",
+      "family": "GPS_GAL_BDS_DUAL",
+      "prefix_epochs": 10,
+      "status": "PASS",
+      "recorded_global_certificate": true,
+      "recorded_certificate_scope": "two_best_selected_integer_classes",
+      "scope_interpretation": "two_best_selected_integer_classes",
+      "observation_count": 358,
+      "integer_dimension": 30,
+      "active_integer_dimension": 19,
+      "joint_columns": 60,
+      "joint_rank": 60,
+      "joint_condition_number": 1138.1253073118085,
+      "minimum_epoch_Q_eigenvalue": 1.117634881728715e-05,
+      "maximum_Q_asymmetry": 0.0,
+      "full_difference_count": 1,
+      "active_difference_count": 1,
+      "active_differing_labels": [
+        "[\"0:11:3:0\",\"[\\\"1|0:11:3:0|arc=1\\\",\\\"2|0:11:3:0|arc=2\\\"]\",\"0:6:3:0\",\"[\\\"1|0:6:3:0|arc=1\\\",\\\"2|0:6:3:0|arc=1\\\"]\"]"
+      ],
+      "candidates": {
+        "best": {
+          "direct_residual_cost": 733.7791006622932,
+          "ambiguity_cost": 287.1422191116517,
+          "sphere_increment_cost": 22.87103496924128,
+          "decomposition_error": -7.34516447664646e-10,
+          "maximum_length_error_m": 1.2212453270876722e-15
+        },
+        "second": {
+          "direct_residual_cost": 1317.3494296973477,
+          "ambiguity_cost": 839.5991030100663,
+          "sphere_increment_cost": 53.984480105055226,
+          "decomposition_error": 9.130474154517287e-11,
+          "maximum_length_error_m": 1.4432899320127035e-15
+        }
+      }
+    }
+  ],
+  "future_common_support": [
+    {
+      "trial": "REAL_80_82_V1",
+      "family": "GPS_L1",
+      "common_scored_epochs": 5,
+      "rows_identical_between_candidates": true,
+      "first_cost": 12.495432379900802,
+      "second_cost": 19.13632198447226,
+      "second_minus_first": 6.640889604571459,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "family": "GPS_L1_L2",
+      "common_scored_epochs": 5,
+      "rows_identical_between_candidates": true,
+      "first_cost": 90.21006028626516,
+      "second_cost": 285.4035364108654,
+      "second_minus_first": 195.19347612460024,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_80_82_V1",
+      "family": "GPS_GAL_BDS_DUAL",
+      "common_scored_epochs": 5,
+      "rows_identical_between_candidates": true,
+      "first_cost": 303.7169476993944,
+      "second_cost": 1704.6201580994773,
+      "second_minus_first": 1400.903210400083,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "family": "GPS_L1",
+      "common_scored_epochs": 5,
+      "rows_identical_between_candidates": true,
+      "first_cost": 10.320361330648133,
+      "second_cost": 10.787017843185753,
+      "second_minus_first": 0.46665651253761986,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "family": "GPS_L1_L2",
+      "common_scored_epochs": 5,
+      "rows_identical_between_candidates": true,
+      "first_cost": 29.21666213046181,
+      "second_cost": 92.84359533636547,
+      "second_minus_first": 63.626933205903654,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "accepted_integer_measurement": false
+    },
+    {
+      "trial": "REAL_100_102_V2",
+      "family": "GPS_GAL_BDS_DUAL",
+      "common_scored_epochs": 5,
+      "rows_identical_between_candidates": true,
+      "first_cost": 197.57439959040636,
+      "second_cost": 2574.693949261547,
+      "second_minus_first": 2377.1195496711407,
+      "status": "FUTURE_SUPPORTS_ORIGINAL_BEST",
+      "accepted_integer_measurement": false
+    }
+  ],
+  "aggregate_checks": {
+    "REAL_METRICS_rows": 30,
+    "public_solve_jsons_equal_scratch": true,
+    "individual_results_equal_aggregate": true,
+    "ledger_start_end_identities_match": true,
+    "REAL_SUMMARY_counts_support_costs_pins_verified": true,
+    "FUTURE_METRICS_rows": 12,
+    "FUTURE_ACTIVE_aggregates_verified": 6,
+    "legacy_future_comparisons": "Six V1 categorized comparisons retain the prior INDEPENDENT_REVIEW audit; this final residual reconstruction covers the six ACTIVE comparisons."
+  },
+  "input_sha256": {
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/PLAN.json": "e8c62ad623dc6e9bdb04eaa2a82f98b9c9c0919d94cf08f28bc308a3e4a1f88f",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_000.npz": "7d1edc131001f8fca57018f553eedaaee0cb0feaf5812609f55e837b936a72e5",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_001.npz": "77b296bdf195fac183189e57b7efe878cdbead3724310347e71f1ca9f3d59ee5",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_002.npz": "24c8c39cd5cc7172bbf887936c144cbda65271e24c92eb195fe2a010ebb4b3e3",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_003.npz": "1c75d171327618274eba6aea61798812a54547b23c1b00beae0363f18ae695b9",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_004.npz": "255a8a6416df52bbdc1762396c513e32dd0ed67050dbb4c12b3b441917a11766",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_005.npz": "9fad950a5394d05032b13e97ab938866e1ee1673d2e556cf8ba5091200272938",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_006.npz": "a1641f4b26ea7fb7ce0c9ae62036bb530783aefb0e9f83e0fdc843d50518ad83",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_007.npz": "09aa1e2263dc7b68f33b80af6eb95d7f5b9fdf476cd001c9fc1dcd057902a67d",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_008.npz": "92b14c32d55c7b61407f170bb6cdfe80f497db168a512aba10512104d566eeec",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_009.npz": "194806f86e9c7b2ce07c1949277ca7714ce9107334c344c040fbaa0b1069b7dc",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_L2_000.npz": "2e7db99cb321f924a38487bd4b30c28e483990412494f65f3bb1ce65ad358acd",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_L2_001.npz": "9139f9c6f2182fa06dd24d3f8bad468d8e04e920b678e8bd60a737fb08c7db65",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_L2_002.npz": "c8e02c892eadfba30a4526a37a8ebf6367c4623100870768bb54c185cff7848b",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_L2_003.npz": "dfbbfdf6033e0806f3dc7089bec1e72378a63aca0033fea5be2ce51827c04c77",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_L2_004.npz": "f344a44ca09a26ba4142a9c2ed13ce6ae0001bc966a31afe9d1543d065d27886",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_L2_005.npz": "d3fee80497813c6c6ad23f75059ac20920e5864ae3ebdcd96ae88661db5afdfe",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_L2_006.npz": "d27b6574d1c8ffefce109b1c4ac129328af018e05915889ec9f20651fd72414b",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_L2_007.npz": "ac2039a882c54951f318b07d566eb0bbe156ff1d16d994fdaedc32f68c0bf4d3",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_L2_008.npz": "c55ee84c78cc35f83449952a95f7523ffeb3251b33bd5519e4f2021fff3ab71d",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_L1_L2_009.npz": "136cc553fa9434378cd651203b5bfc8cf9868e41d55186800bcdcd5d6c11c8c8",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_GAL_BDS_DUAL_000.npz": "1799c9935bfa77e822c86403e0d8e552b6f889f95398e6aba4427aa5701fb154",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_GAL_BDS_DUAL_001.npz": "752cb96d9c8971b63662078ddfbc190717caec1cd2a92be34e812e8bc4b06c15",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_GAL_BDS_DUAL_002.npz": "4a8a4e8501f82892df48a524e756c0967c3233c858f0a52241e4dc4f60e1ebf9",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_GAL_BDS_DUAL_003.npz": "e4285633760d5dc09309d5bee7090ab25f5f54828458cf1b97e1228ad4ecffae",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_GAL_BDS_DUAL_004.npz": "90bf8b0fb59ea0114b142cf978a751fe1dd11f6d25369eaa2e40476e638e569d",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_GAL_BDS_DUAL_005.npz": "334a94ce349a39ea02c86a3a597058372bfb923b2d782748cf4f3d8a4684a27a",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_GAL_BDS_DUAL_006.npz": "b3d6a99b38685cf98b4fa1b1a8aa19f37b4ee675dab4517b6320bb6e87354185",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_GAL_BDS_DUAL_007.npz": "4cc1ab51e94f49becf72387867fe2c075d693c539bb1e7ef46794034d94544c3",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_GAL_BDS_DUAL_008.npz": "a927007bc91de3362827842825500763ac8dd01662551e5478324551f99c22a4",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/GPS_GAL_BDS_DUAL_009.npz": "dddd3b3fbdeed671c3588a5ec0e8f7b95b54105618cf732883afddc207b27975",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE/RESULTS.json": "3bf57584666bf6675b95cc494f06b22624ffea5dfa642f75d4cbcee9d825d679",
+    "docs/paper_rebuild/CARRIER_PHASE_DEVELOPMENT_20261006/REAL_80_82_V1_SOLVE.json": "77dfc9f41724701f11f5d10a74f84ec3c89cbc847b66417c3f575392d0c50de3",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE/LEDGER.jsonl": "28361f7d49d2f0ee71f9d487324a5436611766dd8e499b45cf9cfea4fa2635cf",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE/GPS_L1_01.json": "22ec16e6a63f08a070f9ea123b1e936c6debeea693510f693be9ceb080a09862",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE/GPS_L1_05.json": "98b61a6a2d0bfb319e707a32f4a964a94398fdb01ec6202975f3580795596509",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE/GPS_L1_10.json": "dc72ea7626a06431f4594df84c300228d316d65e149cb79b6b8ba3e5b262f850",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE/GPS_L1_L2_01.json": "d3eaff88d033e4e470d5ed707888f2194cf8ec636d4f410e28753b762399878a",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE/GPS_L1_L2_05.json": "0b36f816ea30ca33fab79e48239d68723138f1c8bc6d472ea4f4fdb67aa14638",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE/GPS_L1_L2_10.json": "17cca44c54256d6251b166509a99cbd33b144af06436af9f2d81cae23339710e",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE/GPS_GAL_BDS_DUAL_01.json": "e2780fbfdfd8695fb7c9efa81efe8ebf680069c61a341bb5c087febb9b7b6e22",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE/GPS_GAL_BDS_DUAL_05.json": "80765d1cef57c14c209e7e3bd99043c57cbfda35f4586f064c17d5b4d03b31e6",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE/GPS_GAL_BDS_DUAL_10.json": "dbb786d8787f38ad64979a0229dcead60fb5ec33c744a77bd163625362f72cc8",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE_ACTIVE/RESULTS.json": "db6eb29d0e98e6b57e24c54131805284a98f4b6d0cae30fc971b747168b6749a",
+    "docs/paper_rebuild/CARRIER_PHASE_DEVELOPMENT_20261006/REAL_80_82_V1_SOLVE_ACTIVE.json": "9c55147aad272235391e0812e5f5f22bd17a20ee35e228bbc98e89c4d6de5bf0",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE_ACTIVE/LEDGER.jsonl": "ba7310c4e3d0d198f8a0923c8319017373321ad1c130dc18bbaa82cb0acae831",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE_ACTIVE/GPS_L1_05.json": "e5271bcd986f3dd1ff0dd5159275e715b043b790bf60107b33e281ea458cd612",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE_ACTIVE/GPS_L1_10.json": "b4d36b7c7509cb4be4e771c5a8c55139e7691e5afb0110f14425d4c2eb9f6af8",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE_ACTIVE/GPS_L1_L2_05.json": "f4278d70abb1ce09c83c4f4edb9fac6d75c450efcd92eaf203e5d44e94f02ed1",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE_ACTIVE/GPS_L1_L2_10.json": "d58e69e99e69a71cb1731eab5b5a9732e2919a283d8f73105727e6469d918495",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE_ACTIVE/GPS_GAL_BDS_DUAL_05.json": "d3c51e3c67092cdf67d97363aec96003f58182c2090e1b97f7c28be406d6ebba",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/SOLVE_ACTIVE/GPS_GAL_BDS_DUAL_10.json": "040e6e181a248dda03baf2c18f03171193c71e244c69e322ee901ea9f56c0fca",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/FUTURE_ACTIVE/FUTURE_RESULTS.json": "2cd77934649f4ea62ef5e43fb9d5a57a21d68e90f86cc7e5976c7fd235495d35",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/PLAN.json": "5424ba5ad709b6801ba59a877d5e2d5c47763615532deb29d4c7ca7dfed59ddf",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_000.npz": "62a8ca7391bde1943353212d814ed931908c8b3c948ebcd006c35feb3253930f",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_001.npz": "375f5b4b8eb55b4049df7a995a219a07a0b87b2e2998ba21b42c84e66d81b9d9",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_002.npz": "b059a949c67a0bd3e11c5bc8c026f2c5f09d059f2a12b017ee02720df864a01b",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_003.npz": "fd9d8fa1bf5ff53b70413bdab1773794f5d5729ba222769dd19fa2b5ac213769",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_004.npz": "a28678de4758ffca4047f9553783f84689271f21c5d9186af96baa9e249f7728",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_005.npz": "2ef13767a692cf90efa3915932592b6e53ac6a680d3e756fc25bd9d1cca254b5",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_006.npz": "2592e06d1323122352137be3cf648f3e49632e93a39efb118742dcffb0bb9c0a",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_007.npz": "0323d8436a168f5a578465ca3a30537afa7de883144fa5bec127d75ea9f43c27",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_008.npz": "63ab8130a0ecf7ff434a89bb2eced728f2a6e45e49cbf45be5d886dc06c955f7",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_009.npz": "bd093b66a334f18637eb85f42326830f8a0b992ddd699b022417f961141c4622",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_L2_000.npz": "76651c0d8cf34b6f0c176ece2b0ff6b87806a69f6d20ef324db90507e18b6dee",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_L2_001.npz": "a99a65c9ec828b57c3db93831691b8afa5f169fc0f14314d88dc2c7ac43eb580",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_L2_002.npz": "3a542783019cd965fa9f7f1a21f14c06f3341f6c8adff9242898971b8eaa9620",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_L2_003.npz": "5c102dca5476ce7772795f1b229070d0e70ae791e7ba180d6c7f1dbb039bff5e",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_L2_004.npz": "d81adb5a0fb860fb4d834d348cb0f052c5d3878da813b34a80a1ebf8844b1691",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_L2_005.npz": "f7d1bc35356ab88cbd4088e637c2fcd972842785893ded8a90dc6722bd54bb74",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_L2_006.npz": "1f0becf49b2ee4862c613f4adb23b61a4b8ee5b0717e441a3d1a0d4183d637f7",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_L2_007.npz": "4f7b210d22fc783084c84b996355bfad833fb3dec40a828f0a57b645cc17ac76",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_L2_008.npz": "30d7e7a09c7489daa278e375e7186cc2e6bff355d53b99949ad4b00b146ebf12",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_L1_L2_009.npz": "43bb18b069ca29496ec1daee214f22a732eb3d1ba615d7e706af4575a5ff3fdf",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_GAL_BDS_DUAL_000.npz": "83a90cc1a7c49395b22e94a2f03a3827c5fa6b7b94fdd84e171e2204a668dd20",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_GAL_BDS_DUAL_001.npz": "2e22c775bf921983704c37472c628a1e5f807104f449d034e7d242ea8bb1e7ce",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_GAL_BDS_DUAL_002.npz": "b2b4cb9c77d0b8af4f106880f91b1d23d6727543d8808ed77c3380a76ad43f8d",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_GAL_BDS_DUAL_003.npz": "0262cbd9ed8fa45ccccfa9b90a27e84d1ed26d040f75724be41e524962a2a48f",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_GAL_BDS_DUAL_004.npz": "1ab5cb7fd01e93b0b8d077014745c22c47046a2e671f1f86c99dc9d4e6ece242",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_GAL_BDS_DUAL_005.npz": "cd95e02e2c6e68278722f6b1a1a9d80e4483ba88111fde1e815600ea7a89b833",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_GAL_BDS_DUAL_006.npz": "6dcce3a4dfaa3df6e62acd8e5fe3e28e312e7aaeea45255c9d5727c2c18f80d6",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_GAL_BDS_DUAL_007.npz": "b6308198c11bf037da019c2a33952a0618ece1eb62dd27fe03abccf5ab0770af",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_GAL_BDS_DUAL_008.npz": "a5edd1317bc6c03c88fa0f0730f61a2d6e1c124409195b0e17213b19bd20e4da",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/GPS_GAL_BDS_DUAL_009.npz": "21d6b051b52bbda93b3fe6bb4a4223d371a070a3ee4534f96c95911c840a1890",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE/RESULTS.json": "84a93bc91837707887e089be21d82de98040c574687b707ff4d4aeed9ca0e43f",
+    "docs/paper_rebuild/CARRIER_PHASE_DEVELOPMENT_20261006/REAL_100_102_V2_SOLVE.json": "999860f911a5d8381ef3380e503dd8f3dc9da8b002c5e0809bdee6f3f185f683",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE/LEDGER.jsonl": "d21796f784614264864966f84e4479321eeb7854fbb5efb96f37d103f110c16b",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE/GPS_L1_01.json": "dc5bc986ebd1d090083393fb6c960eca27861594ba46d3727854af95e057041c",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE/GPS_L1_05.json": "70dc9248303ecb7efeb7639db76878943dd1cf79eceb87c3cf423eeffb63a83a",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE/GPS_L1_10.json": "dd2d4b74881b23791cfb190ecdebd38dbe96782a90ccb5a0a2dacbbf4aebc6be",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE/GPS_L1_L2_01.json": "c5216a5be5a8105d22735f7ae5039514e5f2ebbd196b23856bea0508743de443",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE/GPS_L1_L2_05.json": "bb4022cbfbd72a6648d6d58186ac02f405753bd4be790edb40dff951920aff33",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE/GPS_L1_L2_10.json": "9c34c0e54961be8623af57e44fa830a0074c85f945a090d97f67e575726f3559",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE/GPS_GAL_BDS_DUAL_01.json": "3bbf38881d10b5d188c290b3c38e14d93b448d335a5046d3582a2204d44ae4e5",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE/GPS_GAL_BDS_DUAL_05.json": "6b2fac956a9252a61bfff0e321645bfda2ba6b0df9826750aa620b561f793fb6",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE/GPS_GAL_BDS_DUAL_10.json": "8e304f7834ca6b6dd19a36b6b4c4f160f3be8f07d905adc4d3007b7914631eb6",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE_ACTIVE/RESULTS.json": "61dcc4bdf458d7c0522705aaf7cb609d3be76bd30f3f3f95212989b28e96e801",
+    "docs/paper_rebuild/CARRIER_PHASE_DEVELOPMENT_20261006/REAL_100_102_V2_SOLVE_ACTIVE.json": "2677bc77988ff333e850c0c5de4f9c1bb1bbf52c0ecd09b295aafda092f7db26",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE_ACTIVE/LEDGER.jsonl": "5cc20cd3e4e8cefe7f1641b8039994f12be63613fea05dfc937ed1ea3d12fea1",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE_ACTIVE/GPS_L1_05.json": "f57082841231fd6609299b276cbaecd9daf083310cbe67719be9b16dc88713af",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE_ACTIVE/GPS_L1_10.json": "321aa8879d83c239977048f322a58e4722f10d6fd51ef218801b52e5c81408db",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE_ACTIVE/GPS_L1_L2_05.json": "6432632da3aa11f881853977e24247d9ba2ad78ecae54ad19d0ce98dc313fe9d",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE_ACTIVE/GPS_L1_L2_10.json": "bb4d96b43d148a415f170f8545e9967baf69c5387dbbb6f56b72f2488582061b",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE_ACTIVE/GPS_GAL_BDS_DUAL_05.json": "846bb28d87f22b187e0cb3d3cade0faf63456dd7d6328ceeb1742ae76d89815e",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/SOLVE_ACTIVE/GPS_GAL_BDS_DUAL_10.json": "c92214d838185befe1a44c7a639d2bd29beeb388f8f5398d8d2403f82b3690a5",
+    "<CARRIER_SCRATCH>/REAL_100_102_V2/FUTURE_ACTIVE/FUTURE_RESULTS.json": "c407bda758d887ed44ad58373b3688c87b691d4b25646457079290500d4fca02",
+    "docs/paper_rebuild/CARRIER_PHASE_DEVELOPMENT_20261006/REAL_METRICS.csv": "416f398c8d3f278c0875ada010046b47c10725c85a634c152697390cdad88f1c",
+    "docs/paper_rebuild/CARRIER_PHASE_DEVELOPMENT_20261006/REAL_SUMMARY.json": "a889f2b5145d79768708b5cb63c529ba8c14222b4238869599ded4d85128e83b",
+    "<CARRIER_SCRATCH>/REAL_80_82_V1/FUTURE_CHECK_CATEGORIZED/FUTURE_RESULTS.json": "c2e31c89044eb51eaa417d776749fd43df7b049455961d420c285a2abd6c0f07",
+    "docs/paper_rebuild/CARRIER_PHASE_DEVELOPMENT_20261006/FUTURE_METRICS.csv": "35d6ee26c70cab29078510aed21de20a406b23ea6ca62d6b6cbf0971f745c1c8"
+  },
+  "review_script_sha256": "d5e28f64ef21246aad3a6d849e51b927b6985538e02f8dc61373c9cf79d2dc21",
+  "serialization": {
+    "public_paths": "<CODE_ROOT>/<CARRIER_SCRATCH> aliases; artifact hash values unchanged.",
+    "raw_receipt": "<CARRIER_SCRATCH>/FINAL_REAL_REVIEW_RAW.json",
+    "raw_receipt_sha256": "4147ece00ff0ba8efa10cf08ab13b7f4bc72b9a364c28254b065d5003bec9266",
+    "public_receipt_differs_from_raw": true,
+    "csv_line_ending_amendment": {
+      "operation": "CRLF_TO_LF_ONLY_AFTER_INDEPENDENT_NUMERICAL_REVIEW",
+      "files": [
+        {
+          "path": "docs/paper_rebuild/CARRIER_PHASE_DEVELOPMENT_20261006/REAL_METRICS.csv",
+          "before_sha256": "0f4023fc5fbedb73cda1bae58c255813d82ad519a1dd779bea1774680c51b0f1",
+          "after_sha256": "416f398c8d3f278c0875ada010046b47c10725c85a634c152697390cdad88f1c",
+          "parsed_cells_identical": true
+        },
+        {
+          "path": "docs/paper_rebuild/CARRIER_PHASE_DEVELOPMENT_20261006/FUTURE_METRICS.csv",
+          "before_sha256": "6debface87f5d720812a1f833a0e1bb110d7f2fbd8d5511690d99041286df024",
+          "after_sha256": "35d6ee26c70cab29078510aed21de20a406b23ea6ca62d6b6cbf0971f745c1c8",
+          "parsed_cells_identical": true
+        }
+      ],
+      "numerical_recomputation": false,
+      "raw_receipt_unchanged": true
+    }
+  }
+}
