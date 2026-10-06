@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from pathlib import Path
 import heapq,math,time
 import numpy as np
-from ..horizontal_literature.ext01_clambda import RTKLIBLambdaBridge,constrained_baseline,LambdaBridgeError
+from ..horizontal_literature.ext01_clambda import RTKLIBLambdaBridge,constrained_baseline,BaselineSphereMetric,LambdaBridgeError
 from .temporal import TemporalProblem,TemporalFloat,TemporalModelError,joint_float,conditional_baselines,has_cross_epoch_covariance,positive_definite
 
 @dataclass(frozen=True)
@@ -45,6 +45,11 @@ class TemporalCertificate:
     conditional_seed_candidates_evaluated: int=0
     conditional_seed_failures: int=0
     bound_cache_depths: int=0
+    bound_evaluations: int=0
+    cheap_bound_prunes: int=0
+    bound_sphere_evaluations: int=0
+    candidate_sphere_evaluations: int=0
+    sphere_metric_factorizations: int=0
 
 @dataclass(frozen=True)
 class TemporalResult:
@@ -86,27 +91,41 @@ def checked_integer_vector(value, *, name="integer vector"):
         raise TemporalModelError(f"{name}: requires exact integers with absolute value <= 2**53-1")
     return n.astype(np.int64)
 
+class _IntegerEvaluator:
+    """Per-solve leaf factors; each candidate retains the full residual check."""
+    def __init__(self, problem, floating):
+        _require_separable(problem,floating)
+        self.problem,self.floating=problem,floating
+        self.metrics=tuple(BaselineSphereMetric.from_covariance(
+            floating.conditional_covariance_b[bb,bb]) for bb in problem.baseline_slices)
+        self.sphere_evaluations=0
+
+    def __call__(self, integer):
+        problem,floating=self.problem,self.floating
+        n=checked_integer_vector(integer,name="candidate")
+        if n.shape!=floating.ambiguity.shape:
+            raise TemporalModelError("candidate must have the registered integer vector shape")
+        delta=n-floating.ambiguity
+        ambiguity_cost=float(delta@np.linalg.solve(floating.covariance_aa,delta))
+        centers=conditional_baselines(floating,n)
+        baselines=[];sphere_cost=0.;length_error=0.
+        for k,bb in enumerate(problem.baseline_slices):
+            sphere=self.metrics[k].solve(centers[k],float(problem.lengths[k]))
+            self.sphere_evaluations+=1
+            baselines.append(sphere.baseline);sphere_cost+=sphere.objective
+            length_error=max(length_error,abs(float(np.linalg.norm(sphere.baseline))-problem.lengths[k]))
+        baselines=np.asarray(baselines)
+        residual=floating.whitened_y-floating.whitened_A@n-floating.whitened_B@baselines.reshape(-1)
+        full=float(residual@residual);reduced=ambiguity_cost+sphere_cost
+        error=full-(floating.residual_objective+reduced)
+        if abs(error)>2e-6+2e-8*max(abs(full),abs(reduced)):
+            raise TemporalModelError(f"temporal residual/objective identity failed: {error}")
+        if length_error>1e-8:raise TemporalModelError("sphere subproblem violated baseline length")
+        return TemporalCandidate(n,baselines,reduced,ambiguity_cost,sphere_cost,full,floating.residual_objective,error,length_error)
+
+
 def evaluate_integer(problem:TemporalProblem,floating:TemporalFloat,integer)->TemporalCandidate:
-    _require_separable(problem,floating)
-    n=checked_integer_vector(integer,name="candidate")
-    if n.shape!=floating.ambiguity.shape:
-        raise TemporalModelError("candidate must have the registered integer vector shape")
-    delta=n-floating.ambiguity
-    ambiguity_cost=float(delta@np.linalg.solve(floating.covariance_aa,delta))
-    centers=conditional_baselines(floating,n)
-    baselines=[];sphere_cost=0.;length_error=0.
-    for k,bb in enumerate(problem.baseline_slices):
-        sphere=constrained_baseline(centers[k],floating.conditional_covariance_b[bb,bb],float(problem.lengths[k]))
-        baselines.append(sphere.baseline);sphere_cost+=sphere.objective
-        length_error=max(length_error,abs(float(np.linalg.norm(sphere.baseline))-problem.lengths[k]))
-    baselines=np.asarray(baselines)
-    residual=floating.whitened_y-floating.whitened_A@n-floating.whitened_B@baselines.reshape(-1)
-    full=float(residual@residual);reduced=ambiguity_cost+sphere_cost
-    error=full-(floating.residual_objective+reduced)
-    if abs(error)>2e-6+2e-8*max(abs(full),abs(reduced)):
-        raise TemporalModelError(f"temporal residual/objective identity failed: {error}")
-    if length_error>1e-8:raise TemporalModelError("sphere subproblem violated baseline length")
-    return TemporalCandidate(n,baselines,reduced,ambiguity_cost,sphere_cost,full,floating.residual_objective,error,length_error)
+    return _IntegerEvaluator(problem,floating)(integer)
 
 def _condition_integer_coordinate(floating, index, value):
     """Gaussian conditioning for FEASIBLE seed generation, never a certificate.
@@ -135,6 +154,8 @@ class _BaselineBoundCache:
         self.qbb = floating.covariance[self.m:, self.m:]
         self.qbz = floating.covariance_ba @ reduced.transformation
         self.depths = {}
+        self.sphere_metrics = {}
+        self.evaluations = self.cheap_prunes = self.sphere_evaluations = 0
 
     def parameters(self, depth):
         if depth not in self.depths:
@@ -156,16 +177,29 @@ class _BaselineBoundCache:
             self.depths[depth] = (indices, gain, cov, np.asarray(maximum_eigenvalues))
         return self.depths[depth]
 
-    def __call__(self, suffix, ambiguity_bound):
+    def __call__(self, suffix, ambiguity_bound, *, cutoff=math.inf):
+        self.evaluations += 1
         indices, gain, cov, maximum_eigenvalues = self.parameters(len(suffix))
         delta = np.asarray(suffix, float)-self.reduced.float_ambiguity[indices]
         center = self.floating.baseline + gain @ delta
         cheap = np.asarray([(float(np.linalg.norm(center[ss]))-self.problem.lengths[k])**2
                             for k,ss in enumerate(self.problem.baseline_slices)]) / maximum_eigenvalues
+        maximum_cheap = float(np.max(cheap))
+        cheap_bound = float(ambiguity_bound+maximum_cheap)
+        # The original bound already contains maximum_cheap. A node rejected
+        # here would also be rejected after the exact sphere calculation. Use
+        # the caller's SAME incumbent+tolerance; equality is not pruned early.
+        if cheap_bound > cutoff:
+            self.cheap_prunes += 1
+            return cheap_bound
         k = int(np.argmax(cheap))
         ss = self.problem.baseline_slices[k]
-        exact = constrained_baseline(center[ss], cov[ss,ss], float(self.problem.lengths[k])).objective
-        return float(ambiguity_bound+max(float(np.max(cheap)), exact))
+        key = (len(suffix), k)
+        if key not in self.sphere_metrics:
+            self.sphere_metrics[key] = BaselineSphereMetric.from_covariance(cov[ss,ss])
+        exact = self.sphere_metrics[key].solve(center[ss], float(self.problem.lengths[k])).objective
+        self.sphere_evaluations += 1
+        return float(ambiguity_bound+max(maximum_cheap, exact))
 
 
 def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_candidates:int=8,
@@ -187,6 +221,7 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
     evaluated={};nodes=leaves=returned=0;frontier_bound=None
     conditional_calls=conditional_evaluated=conditional_failures=0
     bound_cache=None
+    integer_evaluator=_IntegerEvaluator(problem,floating)
     def ordered_classes():
         classes={}
         for candidate in evaluated.values():
@@ -205,7 +240,13 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
             conditional_seed_ils_calls=conditional_calls,
             conditional_seed_candidates_evaluated=conditional_evaluated,
             conditional_seed_failures=conditional_failures,
-            bound_cache_depths=0 if bound_cache is None else len(bound_cache.depths))
+            bound_cache_depths=0 if bound_cache is None else len(bound_cache.depths),
+            bound_evaluations=0 if bound_cache is None else bound_cache.evaluations,
+            cheap_bound_prunes=0 if bound_cache is None else bound_cache.cheap_prunes,
+            bound_sphere_evaluations=0 if bound_cache is None else bound_cache.sphere_evaluations,
+            candidate_sphere_evaluations=integer_evaluator.sphere_evaluations,
+            sphere_metric_factorizations=len(integer_evaluator.metrics)+(
+                0 if bound_cache is None else len(bound_cache.sphere_metrics)))
         return TemporalResult(best,second,certificate,floating)
     bridge=RTKLIBLambdaBridge(lambda_library)
     seeds=bridge.candidates(floating.ambiguity,floating.covariance_aa,initial_candidates);returned=len(seeds)
@@ -214,7 +255,7 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
     for seed in seeds:
         seed_integer=checked_integer_vector(seed.ambiguity,name="LAMBDA seed")
         key=tuple(int(x) for x in seed_integer)
-        evaluated[key]=evaluate_integer(problem,floating,seed_integer)
+        evaluated[key]=integer_evaluator(seed_integer)
         if time.monotonic()-started>=timeout_s:return finish("TIMEOUT_DURING_SEED_EVALUATION",False)
     if len(distinct_indices) < problem.ambiguity_count:
         # Coarse classes can make the first LAMBDA seeds all equivalent. A
@@ -245,7 +286,7 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
                     extra=base.copy();extra[index]=value;extra[free]=integer
                     key=tuple(int(x) for x in extra)
                     if key not in evaluated:
-                        evaluated[key]=evaluate_integer(problem,floating,extra)
+                        evaluated[key]=integer_evaluator(extra)
                         conditional_evaluated+=1
                     if time.monotonic()-started>=timeout_s:
                         return finish("TIMEOUT_DURING_CONDITIONAL_SEED_EVALUATION",False)
@@ -259,7 +300,7 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
             if abs(value)>MAX_EXACT_INTEGER:continue
             extra[distinct_indices[0]]=value
             key=tuple(int(x) for x in extra)
-            if key not in evaluated:evaluated[key]=evaluate_integer(problem,floating,extra)
+            if key not in evaluated:evaluated[key]=integer_evaluator(extra)
             if time.monotonic()-started>=timeout_s:return finish("TIMEOUT_DURING_CLASS_SEED_EVALUATION",False)
             if len(ordered_classes())>=2:break
     if len(ordered_classes())<2:return finish("INSUFFICIENT_DISTINCT_CLASSES",False)
@@ -289,7 +330,7 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
             rounded=checked_integer_vector(rounded,name="LAMBDA back-transformed candidate")
             key=tuple(int(v) for v in rounded)
             if key not in evaluated:
-                candidate=evaluate_integer(problem,floating,rounded)
+                candidate=integer_evaluator(rounded)
                 if not math.isclose(candidate.ambiguity_cost,ambiguity_bound,rel_tol=2e-7,abs_tol=2e-7):
                     raise TemporalModelError("tree integer metric mismatch")
                 evaluated[key]=candidate
@@ -311,7 +352,7 @@ def solve_temporal(problem:TemporalProblem,lambda_library:str|Path,*,initial_can
             else:z=right;right+=1
             child_metric=float(ambiguity_bound+(diagonal*(center-z))**2)
             if child_metric>incumbent+tolerance:continue
-            child_suffix=(z,)+suffix;bound=node_bound(child_suffix,child_metric)
+            child_suffix=(z,)+suffix;bound=node_bound(child_suffix,child_metric,cutoff=incumbent+tolerance)
             if bound<=incumbent+tolerance:
                 serial+=1;heapq.heappush(frontier,(bound,serial,index-1,child_suffix,child_metric))
     frontier_bound=None
